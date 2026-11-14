@@ -152,12 +152,7 @@ private theorem unit_model_flat (S : ScalarData.{c, v, r} φ)
   simpa only [Category.assoc] using ht
 
 /-- The model-unit equation holds on arbitrary complexes, without flatness.
-Source: Stacks 06YY, 07A6, and the representative equation in ScalarData.
-(blueprint: lem-sfb-scalar-model-unit).
-Proof: the two composites are natural transformations on complexes. They agree
-on K-flat complexes by the representative transpose at the identity. Every complex
-has a K-flat resolution, whose image under Q is invertible. Naturality and
-cancellation of that image give equality on the original complex. -/
+Source: Stacks 06YY, 07A6, and the representative equation in ScalarData. -/
 theorem ScalarData.unit_model (S : ScalarData.{c, v, r} φ)
     (P₀ : CochainComplex (Mod.{c, v, r} J R) ℤ) :
     S.adjunction.unit.app (DerivedCategory.Q.obj P₀) ≫
@@ -226,12 +221,7 @@ private theorem derived_unit_eq (S : ScalarData.{c, v, r} φ) :
       simpa only [Functor.id_map] using
         ((SheafOfModules.sheafScalarDerivedAdjunction φ S.model).unit.naturality e'.hom).symm
 /-- The specified scalar adjunction is the normalized canonical adjunction.
-Source: Stacks 06YY and 07A6 (blueprint: lem-sfb-scalar-adjunction-unique).
-Proof: the section equation identifies the ordinary units. At a K-flat complex,
-transpose_model at the identity identifies the derived units, since the counit
-comparison is invertible there. A K-flat resolution and naturality extend this
-equality to every complex, then essential surjectivity to every derived object.
-An adjunction is determined by its unit. -/
+Source: Stacks 06YY and 07A6. -/
 theorem ScalarData.adjunction_eq (S : ScalarData.{c, v, r} φ) :
     S.adjunction = SheafOfModules.sheafScalarDerivedAdjunction φ S.model :=
   Adjunction.ext (derived_unit_eq S)

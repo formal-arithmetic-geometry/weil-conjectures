@@ -14,9 +14,7 @@ import WeilConjectures.CategoryTheory.Normalized.NormalizedAdjunctionComposition
 
 /-! # Successive internal scalar mates and normalized units
 
-Source: blueprint main-20261015, integral proper-base-change proof, paragraph (3);
-Stacks Project, Tags 0D6D, 0G7E and 07A6
-(blueprint: lem-sfb-internal-scalar-mate-transitivity).
+Source: Stacks Project, Tags 0D6D, 0G7E and 07A6.
 
 All functors are the specified ordinary unbounded internal-module functors.
 The scalar associator is normalized by its universal computation counits.
@@ -49,7 +47,7 @@ variable {Λ₀ Λ₁ Λ₂ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
 
 /-- The canonical comparison for successive exact scalar restrictions. It comes from
 ordinary restriction, whose underlying module maps are identities, and localization.
-Source: Stacks 07A6 (blueprint: lem-sfb-internal-scalar-mate-transitivity). -/
+Source: Stacks 07A6. -/
 def scalarRestrictionComp (a : Λ₀ ⟶ Λ₁) [IsMonHom a]
     (b : Λ₁ ⟶ Λ₂) [IsMonHom b] (T : Scheme.{u}) :
     V b T ⋙ V a T ≅ V (a ≫ b) T :=
@@ -1123,26 +1121,7 @@ both representative formulas by the ordinary balanced scalar-composition isomorp
 The three balancing isomorphisms are arbitrary normalized ones, so these identities
 hold for the specified comparisons independently of representative choices.
 
-Source: blueprint integral proper-base-change proof (3); Stacks 0D6D, 0G7E, 07A6
-(blueprint: lem-sfb-internal-scalar-mate-transitivity).
-
-Proof:
-1. Construct the scalar compositor by uniqueness of left adjoints after the canonical
-   exact-restriction compositor. The adjunction uniqueness unit equation gives the
-   scalar unit identities, and its Hom-equivalence equation gives the transposes.
-2. The derived-adjunction unit factorization identifies the transpose of a computation
-   counit with the ordinary scalar unit. Normalized adjunction composition and uniqueness
-   then give SuccessiveNormalized for the fixed ordinary balanced comparison.
-3. Conjugate the ordinary geometric rectangle to exact restriction functors. All its
-   underlying module maps are identities, so module-map extensionality proves it.
-   Applying additive functors degreewise and passing to homotopy classes preserves it.
-4. Compose the derived rectangle with its computation counits. Their naturality and
-   the three PullNormalized hypotheses reduce the equation to step 3. Absolute left
-   derivability of scalar extension and exactness of geometric pullback give uniqueness.
-5. Transpose the direct-image equation under the specified final geometric adjunction.
-   The mate-counit equation, pullback pasting and naturality of beta at the first
-   geometric counit identify the transposes. Injectivity of the Hom equivalence finishes.
-No coefficient flatness, boundedness or invertibility of a direct-image mate is used. -/
+Source: Stacks 0D6D, 0G7E, 07A6. -/
 theorem internal_scalar_mate_transitivity
     (a : Λ₀ ⟶ Λ₁) [IsMonHom a] (b : Λ₁ ⟶ Λ₂) [IsMonHom b]
     {X Y : Scheme.{u}} (f : X ⟶ Y)

@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.OrdinarySource.SemilinearOrdinarySource
 /-! # Reassembly of the ordinary direct image
 
 Source: Zheng Construction 4.1; Stacks 03D2 and 03DA.
-(blueprint: lem-coef-ordinary-direct-system-core-components).
 -/
 
 @[expose] public noncomputable section
@@ -42,7 +41,6 @@ variable (V : ∀ n, Mod.{c, v, max c v r} J' (F n) ⥤ Mod.{c, v, max c v r} J 
 
 /-- The componentwise data of a direct-system core, before the mate condition.
 Source: Zheng Construction 4.1; Stacks 03D7.
-(blueprint: lem-coef-ordinary-direct-system-core-components).
 
 This records only the functor and its levelwise component identifications.  The
 transition mate law is stated separately, since it is a local assertion about
@@ -63,8 +61,7 @@ structure OrdinaryDirectSystemCoreData
     HEq ((((component n).hom.app M).val.app U) x) x
 
 /-- The horizontal maps of a component datum are the supplied set-sheaf direct images.
-Source: Zheng Construction 4.1; Stacks 03D7.
-(blueprint: lem-coef-ordinary-direct-system-core-components). -/
+Source: Zheng Construction 4.1; Stacks 03D7. -/
 def OrdinaryDirectSystemCoreNormalized
     (D : OrdinaryDirectSystemCoreData.{c, v, r} (J := J) (B := B) (τ := τ)
       (J' := J') (F := F) (σ := σ) (V := V))
@@ -334,22 +331,7 @@ end NormalizationProof
 attribute [local irreducible] transition directStrictTransition
 
 /-- Reassemble the componentwise direct-image datum.
-Source: Zheng Construction 4.1; Stacks 03D7.
-(blueprint: lem-coef-ordinary-direct-system-core-components).
-
-Proof: iterate the coefficient square by naturality of the ring sequence. For each
-restriction comparison for inverse image, compose its forward map with the restricted
-counit at the lower level and transpose at the upper level. The normalization `ha`
-identifies its underlying map with `eV` at the lower level followed by the inverse
-of `eV` at the upper level. It is therefore invertible, since underlying sheaves
-reflect isomorphisms. Its inverse gives the direct-image restriction comparison.
-Apply each `V n` to the old horizontal maps and compose with these comparisons.
-Their underlying maps are precisely `uPush` of the old maps conjugated by `eV`.
-This formula proves identity and composition by the functor laws of `uPush`.
-The comparison is natural, so the componentwise action of `V n` on morphisms
-commutes with the new transitions. Reassemble this strict system using the proved
-sequence-site equivalence. Its evaluation isomorphisms are identity on sections;
-the section formula for its horizontal maps proves the asserted normalization. -/
+Source: Zheng Construction 4.1; Stacks 03D7. -/
 theorem ordinaryDirectSystem_core_data_exists [PreservesFiniteLimits uInv]
     (hI : ∀ n,
       uInv.map ((sheafCompose J (CategoryTheory.forget CommRingCat.{max c v r})).map (τ n)) ≫

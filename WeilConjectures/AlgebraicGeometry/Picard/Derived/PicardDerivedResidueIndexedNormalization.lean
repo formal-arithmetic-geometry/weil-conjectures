@@ -46,22 +46,7 @@ private theorem baseChange_transport
   simp
 
 /-- The explicit normalization maps respect coefficient arrows.
-Source: Stacks Project, Tags 08HY, 0D5S and 01F7.
-(blueprint: lem-picard-residue-normalization-map-naturality)
-
-Proof: Use the supplied first-projection square hr and coefficient-square
-identity as the hypotheses of derivedBaseChange_source_transport. Its source
-coefficient arrow is the canonical single-pullback map followed by the explicit
-ordinary coefficient comparison. The equation for the second projection of jW
-identifies its direct-image structure morphism with pi. Transport the base-change
-map along this equality by eliminating the equality proof. Likewise, naturality
-of equality transport for direct image moves the final coefficient map through
-hj. Expanding picardDerivedCoefficientMap and the normalization maps now gives
-the stated identity by associativity and functoriality. This pastes the relative
-adjunction unit with base change without requiring any additional invertibility.
-The coefficient-square hypothesis is proved separately before applying this
-lemma; it is not a hypothesis of the final normalization theorem. The argument
-covers empty index sets, empty schemes and zero coefficient maps. -/
+Source: Stacks Project, Tags 08HY, 0D5S and 01F7 -/
 theorem picardResidueNormalizationMap_naturality_of_coefficientSquare
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

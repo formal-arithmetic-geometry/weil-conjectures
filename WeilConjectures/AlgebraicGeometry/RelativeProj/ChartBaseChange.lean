@@ -15,7 +15,7 @@ public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocali
 # Coefficientwise base change of graded algebras and homogeneous localization
 
 Let `R → S` be a ring map, `𝒜` a graded `R`-algebra on `A` and `ℬ` a graded `S`-algebra on `B`.
-A graded ring homomorphism `φ : 𝒜 →+*ᵍ ℬ` which is `R`-linear is a *coefficientwise base change*
+A graded ring homomorphism `φ: 𝒜 →+*ᵍ ℬ` which is `R`-linear is a *coefficientwise base change*
 (`GradedRingHom.IsGradedBaseChange`) if for every `n` the induced map `𝒜 n → ℬ n` exhibits
 `ℬ n` as `S ⊗[R] 𝒜 n`. The typical examples are the localization `A → A[1/f]` for `f ∈ R`
 (with `S = R[1/f]`) and `A → S ⊗[R] A`.
@@ -32,8 +32,7 @@ that tensor products commute with this colimit; we carry this out by hand.
 - `GradedRingHom.IsGradedBaseChange` — coefficientwise base change.
 - `GradedRingHom.IsGradedBaseChange.irrelevant_le` — the irrelevant ideal condition needed for
   `Proj.map`.
-- `GradedRingHom.IsGradedBaseChange.isBaseChange_awayMap` — the chart rings form a base change
-  (blueprint: `definition-admissible-blow-up--1`, item 4, chart identification).
+- `GradedRingHom.IsGradedBaseChange.isBaseChange_awayMap` — the chart rings form a base change.
 -/
 
 @[expose] public section
@@ -266,8 +265,7 @@ private lemma chartMap_bijective : Function.Bijective (chartMap (s := s) h) := b
 include hs in
 /-- **Chart rings commute with coefficientwise base change**: for `s ∈ 𝒜 d`, the square
 `R → S`, `R → Away 𝒜 s → Away ℬ (φ s)` is a pushout, i.e.
-`S ⊗[R] (A_{(s)})₀ ≅ (B_{(φ s)})₀`, `c ⊗ (a / s ^ m) ↦ c • φ a / φ s ^ m`.
-(blueprint: `definition-admissible-blow-up--1`, item 4, chart identification) -/
+`S ⊗[R] (A_{(s)})₀ ≅ (B_{(φ s)})₀`, `c ⊗ (a / s ^ m) ↦ c • φ a / φ s ^ m`. -/
 theorem isPushout_away :
     haveI := awayMapAlgebra_isScalarTower s h.map_algebraMap
     Algebra.IsPushout R S (Away 𝒜 s) (Away ℬ (φ s)) := by

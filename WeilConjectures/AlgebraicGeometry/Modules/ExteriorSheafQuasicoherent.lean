@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 /-! # Quasi-coherence of exterior sheaves on affine schemes
 
 Source: Stacks Project, Section 26.7, Lemmas 26.7.1 and 26.7.2(2), Tag 01I6.
-(blueprint: new-q1-exterior-sheaf-quasicoherent).
 -/
 
 @[expose] public section
@@ -27,19 +26,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- Exterior powers of a quasi-coherent module on an affine scheme are quasi-coherent.
 
 Source: Stacks Project, Section 26.7, Lemmas 26.7.1, 26.7.2(2), and 26.7.4, Tag 01I6.
-(blueprint: new-q1-exterior-sheaf-quasicoherent).
-
-Proof: On an affine open W and its principal open D(f), quasi-coherence of M
-makes restriction of M a localization. The algebraic exterior-power localization
-lemma applies to the restriction maps of `PresheafOfModules.exteriorPower`, whose
-value on every pure wedge is the wedge of the restrictions. The exterior
-sheafification unit is bijective on both affine opens. Its naturality identifies
-restriction in the exterior sheaf with the exterior-power localization map.
-Surjectivity up to a power of f transports across these bijections, as does the
-assertion that a section vanishing after restriction is killed by a power of f.
-The principal-open criterion for quasi-coherence now applies. No finiteness or
-freeness is needed;
-the localization theorem also includes degree zero and the zero ring.
 -/
 theorem isQuasicoherent_exteriorSheaf_of_isAffine {X : Scheme.{u}} [IsAffine X]
     (M : X.Modules) [M.IsQuasicoherent] (n : ℕ) :

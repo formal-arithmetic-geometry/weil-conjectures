@@ -94,8 +94,7 @@ public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 
 /-! # The arbitrary-ring-sheaf closed support adjoint
 
-Source: Stacks Project, proetale.tex, Tags 09AA, 09BM, 09BN and 09AH; derived.tex,
-Tags 070I, 070K and 08BJ (blueprint: lem-sf-ringed-closed-kernel-adjoint).
+Source: Stacks Project, Tags 09AA, 09BM, 09BN and 09AH; Tags 070I, 070K and 08BJ.
 -/
 
 @[expose] public section
@@ -110,7 +109,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The natural kernel of the open adjunction unit, formed in the functor category.
 Evaluation identifies it with `ker(N → j_*j^*N)`, including the kernel inclusion.
-Source: Stacks, Tag 09AH (blueprint: lem-sf-ringed-closed-kernel-adjoint). -/
+Source: Stacks, Tag 09AH. -/
 noncomputable def ringedSupportKernel {X U : Scheme.{u}} (j : U ⟶ X)
     (B : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
     (aj : proEtaleModuleInverseImage j B ⊣ proEtaleRingedDirectImage j B) :
@@ -118,7 +117,7 @@ noncomputable def ringedSupportKernel {X U : Scheme.{u}} (j : U ⟶ X)
   kernel aj.unit
 
 /-- The closed inverse image of the support kernel: the actual underived `i!_0`.
-Source: Stacks, Tags 09AA and 09AH (blueprint: lem-sf-ringed-closed-kernel-adjoint). -/
+Source: Stacks, Tags 09AA and 09AH. -/
 noncomputable def ringedClosedKernelShriek {X Z U : Scheme.{u}} (i : Z ⟶ X) (j : U ⟶ X)
     (B : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
     (aj : proEtaleModuleInverseImage j B ⊣ proEtaleRingedDirectImage j B) :=
@@ -126,7 +125,7 @@ noncomputable def ringedClosedKernelShriek {X Z U : Scheme.{u}} (i : Z ⟶ X) (j
 
 /-- The specified computation on any K-injective resolution, obtained by localizing
 its quasi-isomorphism and using the canonical K-injective derived comparison.
-Source: Stacks, Tags 070I and 070K (blueprint: lem-sf-ringed-closed-kernel-adjoint). -/
+Source: Stacks, Tags 070I and 070K. -/
 noncomputable def ringedClosedKernelResolutionIso {X Z U : Scheme.{u}}
     (i : Z ⟶ X) (j : U ⟶ X)
     (B : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
@@ -413,39 +412,7 @@ adjunctions. The comparison with the kernel and the K-injective counit formula f
 ordinary and derived counits. All module categories use the original small pro-etale
 sites, with object universe `u+1`, morphism universe `u`, and module universe `u+1`.
 
-Source: Stacks, Tags 09AA, 09BM, 09BN, 09AH, 070I, 070K, 08BJ and 079P
-(blueprint: lem-sf-ringed-closed-kernel-adjoint).
-
-Proof plan:
-1. The ringed-topos module adjunction (lem-weil-pbc-ringed-topoi-module-adjunction),
-   with the identity coefficient map, gives i* ⊣ i_* and j* ⊣ j_*. The ringed open-closed
-   theorem gives exact i_* and j_!, the invertible closed counit and j*i_*=0.
-   The immersion limit-preservation theorem makes both inverse images exact.
-2. The open comparison (lem-weil-pbc-proetale-ringed-open-comparison) evaluates the open
-   counit as the identity on an object already over U. Thus j* of the open unit is invertible.
-3. Exact j* kills the kernel H of that unit. Apply the open-closed short exact sequence
-   to H. Its left term vanishes, so the closed unit H → i_*i*H is an isomorphism.
-   Kernel functoriality and the closed unit make this identification natural.
-4. A module map i_*P → N factors uniquely through H_N since its composite with the open
-   unit is zero. Closed inverse image and the inverse closed counit give P → i*H_N.
-   Conversely use i_*, the inverse supported unit and the kernel inclusion. Naturality
-   and the closed triangle identities show these operations are inverse. The adjunct
-   of the identity is the inverse supported unit followed by the kernel inclusion.
-5. Small-site K-injective resolutions exist by prop-pur-kinjective-resolutions-exist.
-   The exact-functor factorization theorem descends the four exact functors termwise
-   to the unbounded derived categories.
-6. The support functor is additive and right adjoint to exact i_*, hence preserves
-   K-injectives by lem-weil-pbc-right-adjoint-preserves-kinjective. Apply
-   lem-weil-pbc-kinjective-total-derived to its termwise homotopy functor.
-7. Compute Hom into a K-injective resolution using lem-weil-pbc-kinjective-hom-derived,
-   the termwise homotopy adjunction, and K-injective preservation. This gives the
-   derived support adjunction. Its counit on a K-injective is the termwise sheaf counit;
-   for any resolution compose with the inverse of the localized resolution map.
-8. Repeat the same Hom calculation for (j_!,j*), (i*,i_*) and (j*,j_*). The exact-functor
-   derived theorem identifies the derived exact right adjoints with termwise descent.
-9. The closed counit is invertible degreewise. The open derived counit is represented
-   on a K-injective by the invertible ordinary open counit. Finally j*i_*=0 degreewise
-   descends to the zero derived composite. No supported triangle is used. -/
+Source: Stacks, Tags 09AA, 09BM, 09BN, 09AH, 070I, 070K, 08BJ and 079P. -/
 theorem proEtale_ringed_closed_kernel_adjoint {X Z : Scheme.{u}}
     (i : Z ⟶ X) [IsClosedImmersion i]
     (U : X.ProEt) [IsOpenImmersion U.hom] [QuasiCompact U.hom]

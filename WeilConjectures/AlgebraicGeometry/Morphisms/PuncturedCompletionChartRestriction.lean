@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionMat
 /-! # Restriction to a punctured principal chart
 
 Source: Stacks Project, Tag 05ER, the natural comparison map on sections.
-(blueprint: lem-sbc-punctured-completion-chart-restriction)
 -/
 
 @[expose] public section
@@ -24,20 +23,7 @@ namespace AlgebraicGeometry.Scheme.CompletionGluingData
 original principal chart, and the induced map on matching sections is restriction
 of their first projection.
 
-Source: Stacks Project, Tag 05ER, the natural comparison Psi; Tag 0BLH, affine charts.
-
-Proof: puncturedMap_over gives p followed by the restricted model map equal to q.
-Compose with U's inclusion and pull back D(f); inverse-image functoriality gives
-p inverse image of W = (q followed by U's inclusion) inverse image of D(f).
-The top-section isomorphism of an open subscheme and this equality identify the
-two section rings. The composite is a ring isomorphism. The definition of
-fromPunctured, the Spec-Gamma adjunction, and appTop functoriality identify pullback
-of a matching section with restriction of its first projection. Apply the same
-calculation to baseMap(a): the first projection of baseMap is the structural map
-on Y, so this ring isomorphism preserves the displayed A-actions. It is therefore
-A-linear. This uses neither finiteness nor generators nor formal glueing data;
-empty charts and zero section rings obey the same functorial identities.
-(blueprint: lem-sbc-punctured-completion-chart-restriction) -/
+Source: Stacks Project, Tag 05ER, the natural comparison Psi; Tag 0BLH, affine charts. -/
 theorem exists_matching_chart_restriction
     {A : Type u} [CommRing A] [IsLocalRing A]
     {U : (Spec (.of A)).Opens}

@@ -20,7 +20,6 @@ import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 /-! # Picard affine structure projective homology
 
 Source: Stacks Project, Tags 0BF2, 0B91, 08EB and 06Z0.
-(blueprint: lem-sc-picard-affine-structure-projective-homology).
 -/
 
 @[expose] public section
@@ -30,23 +29,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- A representing bounded projective model has the required universal low homology.
-Source: Stacks Project, Tags 0B91(2), 06Z0 and the structure-image argument in 0BF2.
-(blueprint: lem-sc-picard-affine-structure-projective-homology).
-
-Proof: Exact restriction and the trivialization identify the image represented
-by P with R(f_U)_*O. For a ring map R -> B, form Spec B -> Spec R -> U -> S.
-Proper relatively flat base change (0B91(2)) identifies the derived pullback of
-that image with R(f_B)_*O. The bounds and projective terms make P K-flat, so its
-ordinary termwise scalar extension PB computes this derived pullback. A right
-derived direct image of a sheaf in degree zero has no negative cohomology and
-has zeroth cohomology equal to the ordinary direct image. Apply hO to the map
-Spec B -> S: the ordinary tensor-pullback adjunction unit identifies this
-ordinary image of O with O on Spec B. The exact affine tilde/Gamma equivalence
-(06Z0) identifies these homology sheaves with the tilde of the homology modules
-of PB, reflects zero objects, and carries O to the free B-module B. Hence the
-negative homology is zero and H0 is isomorphic to B. If B is the zero ring all
-modules vanish. The representing isomorphism hrep is essential: the other
-conditions on P alone cannot identify its higher cohomology with the image. -/
+Source: Stacks Project, Tags 0B91(2), 06Z0 and the structure-image argument in 0BF2. -/
 theorem picard_affine_structure_projective_homology
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

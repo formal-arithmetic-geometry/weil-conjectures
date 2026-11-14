@@ -17,7 +17,7 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.GenericFibreActionExtension
 /-!
 # Spreading a finite étale Galois cover out from the generic fibre
 
-Let `S` be a qcqs integral normal scheme with generic point `η`, let `c : C ⟶ S` be a qcqs
+Let `S` be a qcqs integral normal scheme with generic point `η`, let `c: C ⟶ S` be a qcqs
 smooth morphism with geometrically connected fibres, and fix a section `σ` of `c`. An
 `M`-torsor on the generic fibre `C_η`, for `M` a finite abelian group of order invertible on
 `S`, carrying a `κ(η)`-rational point above `σ(η)`, extends to an `M`-torsor on `C`. This is
@@ -36,11 +36,11 @@ them, so that it is a statement and not a construction:
 - the generic fibre `C_η` is a scheme `Cη` together with a cartesian square over
   `Spec S.functionField ⟶ S`, the latter being `AlgebraicGeometry.Scheme.fromSpecStalk` at
   the generic point;
-- the generic point of the section is a morphism `sη : Spec S.functionField ⟶ Cη` which is a
+- the generic point of the section is a morphism `sη: Spec S.functionField ⟶ Cη` which is a
   section of the generic fibre and lies over `σ`;
 - the restriction of the produced torsor to the generic fibre is expressed by asking for a
   morphism `ψ` from the given torsor to the produced one which makes a cartesian square over
-  `j : Cη ⟶ C` and commutes with the `M`-actions.
+  `j: Cη ⟶ C` and commutes with the `M`-actions.
 
 Normality of `S` is spelled out as integral closedness of all the stalks, there being no
 `IsNormal` predicate on schemes; qcqs-ness of `S` is `CompactSpace` together with
@@ -63,11 +63,9 @@ class in `H^1`, which need not be connected.
 ## Main statements
 
 - `AlgebraicGeometry.Scheme.GaloisCover.exists_isPullback_of_genericFibre`: spreading a finite
-  étale Galois cover with group `G` (blueprint
-  `proposition-base-change-larger-algebraically-closed`).
+  étale Galois cover with group `G`.
 - `AlgebraicGeometry.Scheme.EtaleTorsor.exists_isPullback_of_genericFibre`: the spreading
-  statement for torsors under a finite abelian group (blueprint
-  `proposition-base-change-larger-algebraically-closed`).
+  statement for torsors under a finite abelian group.
 
 ## References
 
@@ -82,23 +80,22 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Blueprint `proposition-base-change-larger-algebraically-closed`: Spreading a finite étale Galois
+/-- Spreading a finite étale Galois
 cover
 
 Let `S` be a qcqs integral normal scheme with generic point `η` and function field
-`κ(η) = S.functionField`, let `c : C ⟶ S` be a qcqs smooth morphism with geometrically
+`κ(η) = S.functionField`, let `c: C ⟶ S` be a qcqs smooth morphism with geometrically
 connected fibres, and let `σ` be a section of `c`. Let `G` be a finite group whose order is
 invertible on `S`, let `Cη` be the generic fibre of `c`, given by the cartesian square
 `hCη`, and let `Z` be a finite étale Galois cover of `Cη` with group `G` carrying a
 `κ(η)`-rational point above the generic point `sη` of the section. Then there is a finite
-étale Galois cover `T` of `C` with group `G` and a `G`-equivariant morphism `ψ : Z.P ⟶ T.P`
-making `Z` the restriction of `T` to `Cη`, that is, making the square over `j : Cη ⟶ C`
+étale Galois cover `T` of `C` with group `G` and a `G`-equivariant morphism `ψ: Z.P ⟶ T.P`
+making `Z` the restriction of `T` to `Cη`, that is, making the square over `j: Cη ⟶ C`
 cartesian.
 
 This is [Stacks 0EZJ], recorded as a classical input. Galois covers are taken in the sense
 of `AlgebraicGeometry.Scheme.GaloisCover`, following the blueprint definition
-`def-sbc-normal-dominant-galois`: their total space need not be connected. 
-(blueprint: proposition-base-change-larger-algebraically-closed)
+`def-sbc-normal-dominant-galois`: their total space need not be connected.
 -/
 @[stacks 0EZJ]
 theorem GaloisCover.exists_isPullback_of_genericFibre {S C : Scheme.{u}} [CompactSpace S]
@@ -138,11 +135,11 @@ end AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry.Scheme.EtaleTorsor
 
-/-- Blueprint `proposition-base-change-larger-algebraically-closed`: Spreading a finite étale Galois
+/-- Spreading a finite étale Galois
 cover
 
 Let `S` be a qcqs integral normal scheme with generic point `η` and function field
-`κ(η) = S.functionField`, let `c : C ⟶ S` be a qcqs smooth morphism with geometrically
+`κ(η) = S.functionField`, let `c: C ⟶ S` be a qcqs smooth morphism with geometrically
 connected fibres, and let `σ` be a section of `c`. Let `M` be a finite abelian group whose
 order is invertible on `S`, let `Cη` be the generic fibre of `c`, that is, the left column of
 the cartesian square
@@ -158,7 +155,7 @@ Spec κ(η) -> S
 and let `Z` be an `M`-torsor on `Cη` — a finite étale Galois cover of `Cη` with group `M` —
 carrying a `κ(η)`-rational point above the generic point `sη` of the section. Then `Z`
 extends to an `M`-torsor on `C`: there is an `M`-torsor `T` on `C` and an `M`-equivariant
-morphism `ψ : Z.P ⟶ T.P` making the square
+morphism `ψ: Z.P ⟶ T.P` making the square
 
 ```
 Z.P --ψ--> T.P

@@ -381,8 +381,7 @@ of abelian categories; global sections correspond to invariants
 (`AlgebraicGeometry.Scheme.sheafHZeroAddEquivInvariants`) and cohomology to continuous
 cohomology (`AlgebraicGeometry.Scheme.sheafHAddEquivGaloisH`). We use `ℤ`-coefficients: an
 étale sheaf of modules over a finite ring `A` is in particular an abelian étale sheaf, and the
-statements needed about such sheaves concern their underlying abelian groups.
-(blueprint: `lem-exc-field-discrete-modules`) -/
+statements needed about such sheaves concern their underlying abelian groups. -/
 noncomputable def etaleSheafEquivDiscreteModule :
     Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1} ≌
       DiscreteModule.{u + 1} Gal(Ω/K) :=
@@ -396,8 +395,7 @@ lemma etaleSheafEquivDiscreteModule_functor_obj_obj
 
 
 /-- **Étale cohomology of a field is Galois cohomology**:
-`Hⁿ(Spec K_ét, F) ≃ Hⁿ(Gal(Ω/K), F_Ω)` for every abelian étale sheaf `F` on `Spec K`.
-(blueprint: `lem-exc-field-discrete-modules`) -/
+`Hⁿ(Spec K_ét, F) ≃ Hⁿ(Gal(Ω/K), F_Ω)` for every abelian étale sheaf `F` on `Spec K`. -/
 noncomputable def sheafHAddEquivGaloisH
     (F : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1}) (n : ℕ) :
     (Sheaf.H F n : Type (u + 1)) ≃+
@@ -405,7 +403,7 @@ noncomputable def sheafHAddEquivGaloisH
   (isGaloisPoint_galoisPoint K Ω).sheafHAddEquiv F n
 
 /-- Global sections of an abelian étale sheaf on `Spec K` are the Galois invariants of its
-geometric fibre. (blueprint: `lem-exc-field-discrete-modules`) -/
+geometric fibre. -/
 noncomputable def sheafHZeroAddEquivInvariants
     (F : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1}) :
     (Sheaf.H F 0 : Type (u + 1)) ≃+

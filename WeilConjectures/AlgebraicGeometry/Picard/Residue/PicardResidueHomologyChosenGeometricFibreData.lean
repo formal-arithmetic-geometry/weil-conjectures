@@ -20,9 +20,6 @@ import WeilConjectures.AlgebraicGeometry.Picard.Derived.PicardDerivedFibreNatura
 /-! # Affine residue data for the chosen geometric maps
 
 Source: Stacks Project, Tags 0B91, 0BF2, 01IB and 08CR.
-(blueprint: lem-sc-picard-residue-homology-chosen-geometric-maps)
-
-(blueprint: new-picard-residue-homology-chosen-geometric-fibre-data)
 
 This intermediate statement packages affine residue data with the geometric fibre comparisons.
 The enclosing theorem only composes additive equivalences. -/
@@ -49,10 +46,7 @@ private theorem exists_compatible_family
 
 /-- For fixed strictly perfect affine models, the coefficient arrows have chain
 representatives intertwining the canonical affine residue comparisons, and geometric fibre
-comparisons `e`, `ei` intertwine the derived coefficient arrows with structure-sheaf pullback.
-
-Proof: Apply the affine residue data theorem to choose the chain maps, and
-`picard_derived_fibre_naturality` to choose `e` and `ei`. -/
+comparisons `e`, `ei` intertwine the derived coefficient arrows with structure-sheaf pullback. -/
 theorem picard_residue_homology_chosen_geometric_fibre_data
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

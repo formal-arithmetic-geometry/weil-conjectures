@@ -20,8 +20,7 @@ import WeilConjectures.AlgebraicGeometry.ProperBaseChange.QuasiCoherentSymmetric
 
 /-! # Relative projective space with its relative-Proj charts
 
-Source: blueprint, Nagata compactification, Conrad sketch, order 203
-(blueprint: def-nagata-relative-projective-space).
+Source: Nagata compactification, Conrad sketch.
 
 The algebra is the constructed symmetric algebra of the free module. Its grading is fixed
 by the monomial inclusions. Only uniquely specified algebra data and the universal relative
@@ -50,25 +49,21 @@ namespace AlgebraicGeometry.RelativeProjectiveSpace
 
 variable (X : Scheme.{u}) (r : ℕ)
 
-/-- The free module with ordered basis indexed by `0, ..., r`.
-Source: blueprint, order 203 (blueprint: def-nagata-relative-projective-space). -/
+/-- The free module with ordered basis indexed by `0, ..., r`. -/
 def freeModule : X.Modules :=
   SheafOfModules.free (R := X.ringCatSheaf) (ULift.{u} (Fin (r + 1)))
 
-/-- The degree-one generator `j_F(e_i)` on an arbitrary open.
-Source: blueprint, order 203 (blueprint: def-nagata-relative-projective-space). -/
+/-- The degree-one generator `j_F(e_i)` on an arbitrary open. -/
 def generator (U : X.Opens) (i : Fin (r + 1)) :
     (SymmetricAlgebraSheaf.algebra (freeModule X r)).right.obj.obj (op U) :=
   (SymmetricAlgebraSheaf.inclusion (freeModule X r)).val.app (op U)
     ((SheafOfModules.ιFree (R := X.ringCatSheaf) (ULift.up i)).val.app (op U)
       (1 : X.ringCatSheaf.obj.obj (op U)))
 
-/-- The indexing set of monomials of symmetric degree `n`.
-Source: blueprint, order 203 (blueprint: def-nagata-relative-projective-space). -/
+/-- The indexing set of monomials of symmetric degree `n`. -/
 def monomials (n : ℕ) := ULift.{u} {a : Fin (r + 1) → ℕ // ∑ i, a i = n}
 
-/-- The degree-`n` monomial evaluated in the constructed symmetric algebra.
-Source: blueprint, order 203 (blueprint: def-nagata-relative-projective-space). -/
+/-- The degree-`n` monomial evaluated in the constructed symmetric algebra. -/
 def monomial (n : ℕ) (a : monomials.{u} r n) (U : X.Opens) :
     (SymmetricAlgebraSheaf.algebra (freeModule X r)).right.obj.obj (op U) :=
   ∏ i : Fin (r + 1), generator X r U i ^ a.down.val i
@@ -92,11 +87,7 @@ private theorem generator_restriction {U V : X.Opensᵒᵖ} (f : U ⟶ V)
   exact h.symm
 
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The linear maps sending 1 to a fixed monomial commute with restriction.
-Source: blueprint, order 203 (blueprint: def-nagata-relative-projective-space).
-Proof: the free-basis inclusions and the symmetric-algebra inclusion are sheaf morphisms.
-Their naturality gives restriction of each generator; restriction is a ring homomorphism,
-so it preserves the finite product and powers. Module restriction preserves scalars. -/
+/-- The linear maps sending 1 to a fixed monomial commute with restriction. -/
 theorem monomial_naturality (n : ℕ) (a : monomials.{u} r n)
     {U V : X.Opensᵒᵖ} (f : U ⟶ V) :
     (SheafOfModules.unit X.ringCatSheaf).val.map f ≫
@@ -125,8 +116,7 @@ theorem monomial_naturality (n : ℕ) (a : monomials.{u} r n)
     (CategoryTheory.congr_fun
       ((SymmetricAlgebraSheaf.algebra (freeModule X r)).hom.hom.naturality f) x)
 
-/-- The monomial map from a copy of the structure module into the symmetric algebra.
-Source: blueprint, order 203 (blueprint: def-nagata-relative-projective-space). -/
+/-- The monomial map from a copy of the structure module into the symmetric algebra. -/
 def monomialUnit (n : ℕ) (a : monomials.{u} r n) :
     SheafOfModules.unit X.ringCatSheaf ⟶
       (SymmetricAlgebraSheaf.algebra (freeModule X r)).toModule where
@@ -138,8 +128,7 @@ def monomialUnit (n : ℕ) (a : monomials.{u} r n) :
         (monomial X r n a U.unop))
       naturality f := monomial_naturality X r n a f }
 
-/-- The homogeneous monomial inclusion, extended from the free monomial basis.
-Source: blueprint, order 203 (blueprint: def-nagata-relative-projective-space). -/
+/-- The homogeneous monomial inclusion, extended from the free monomial basis. -/
 def monomialMap (n : ℕ) :
     SheafOfModules.free (R := X.ringCatSheaf) (monomials.{u} r n) ⟶
       (SymmetricAlgebraSheaf.algebra (freeModule X r)).toModule :=
@@ -147,8 +136,7 @@ def monomialMap (n : ℕ) :
 
 /-- The exact characterization of the symmetric-degree relative-Proj input. The pieces
 are the free monomial sheaves and their inclusions are evaluation of those monomials.
-`HEq` compares maps whose endpoints are identified by the preceding equalities.
-Source: blueprint, order 203 (blueprint: def-nagata-relative-projective-space). -/
+`HEq` compares maps whose endpoints are identified by the preceding equalities. -/
 def IsSymmetricInput (A : RelativeProjAlgebra X) : Prop :=
   A.algebra.obj = SymmetricAlgebraSheaf.algebra (freeModule X r) ∧
     A.piece = (fun n ↦ SheafOfModules.free (R := X.ringCatSheaf) (monomials.{u} r n)) ∧
@@ -739,21 +727,7 @@ private theorem symmetricInput_unique (A B : RelativeProjAlgebra X)
 
 set_option backward.isDefEq.respectTransparency.types false in
 /-- There is exactly one relative-Proj algebra structure with these fixed pieces,
-algebra sheaf and monomial inclusions; thus selecting it does not select unknown data.
-Source: blueprint, order 203 (blueprint: def-nagata-relative-projective-space).
-Proof: the free module is quasi-coherent. The constructed symmetric algebra has the
-universal property by lem-weil-pbc-quasi-coherent-symmetric-algebra-core. Uniqueness of
-universal pairs identifies it with the quasi-coherent pair of
-lem-weil-pbc-quasi-coherent-symmetric-algebra, giving quasi-coherence and the canonical
-affine-section identification. On an affine open, use the standard free basis and
-SymmetricAlgebra.equivMvPolynomial. Monomials are a basis; grouping them by total degree
-agrees with lem-weil-pbc-symmetric-algebra-graded. These identifications commute with
-restriction, so they give the homogeneous free sheaves, their multiplication and unit,
-and the decomposition isomorphism. Multiplication and unit satisfy the algebra laws
-on every affine open, hence globally. For uniqueness the fixed monomial inclusions fix
-the decomposition by the coproduct property. They are monomorphisms, so `mul_eq` and
-`unit_eq` uniquely determine every homogeneous multiplication and the unit. All remaining
-fields are propositions. This proves uniqueness as equality of the entire input datum. -/
+algebra sheaf and monomial inclusions; thus selecting it does not select unknown data. -/
 theorem existsUnique_symmetricInput : ∃! A : RelativeProjAlgebra X, IsSymmetricInput X r A := by
   have : (freeModule X r).IsQuasicoherent :=
     SheafOfModules.isQuasicoherent_free.{u, u, u} (R := X.ringCatSheaf) _
@@ -775,44 +749,31 @@ theorem existsUnique_symmetricInput : ∃! A : RelativeProjAlgebra X, IsSymmetri
     ⟨rfl, rfl, fun n ↦ heq_of_eq (monomialDecomposition_ι X r n)⟩
   exact ⟨A, hA, fun B hB ↦ symmetricInput_unique X r B A hB hA⟩
 
-/-- The uniquely specified symmetric algebra input, with its symmetric-degree grading.
-Source: blueprint, order 203 (blueprint: def-nagata-relative-projective-space). -/
+/-- The uniquely specified symmetric algebra input, with its symmetric-degree grading. -/
 def algebra : RelativeProjAlgebra X := (existsUnique_symmetricInput X r).exists.choose
 
 /-- Relative Proj with all its compatible affine restriction isomorphisms. The existence
-theorem determines this realization up to the unique chart-preserving isomorphism.
-Source: blueprint, order 203 (blueprint: def-nagata-relative-projective-space). -/
+theorem determines this realization up to the unique chart-preserving isomorphism. -/
 def construction : RelativeProjData (algebra X r) := (algebra X r).realization
 
-/-- Relative projective `r`-space over `X`, using symmetric-algebra relative Proj.
-Source: blueprint, order 203 (blueprint: def-nagata-relative-projective-space). -/
+/-- Relative projective `r`-space over `X`, using symmetric-algebra relative Proj. -/
 def scheme : Scheme.{u} := (construction X r).proj
 
-/-- The structural morphism of relative projective space.
-Source: blueprint, order 203 (blueprint: def-nagata-relative-projective-space). -/
+/-- The structural morphism of relative projective space. -/
 def π : scheme X r ⟶ X := (construction X r).π
 
-/-- The specified equality with the constructed symmetric algebra sheaf.
-Source: blueprint, order 203 (blueprint: def-nagata-relative-projective-space).
-Proof: take the first clause of the specification of existsUnique_symmetricInput. -/
+/-- The specified equality with the constructed symmetric algebra sheaf. -/
 theorem algebra_eq : (algebra X r).algebra.obj =
     SymmetricAlgebraSheaf.algebra (freeModule X r) := by
   exact (existsUnique_symmetricInput X r).exists.choose_spec.1
 
-/-- The coordinate section in the actual graded section ring used for local Proj.
-Source: blueprint, order 203 (blueprint: def-nagata-relative-projective-space). -/
+/-- The coordinate section in the actual graded section ring used for local Proj. -/
 def coordinate (V : X.affineOpens) (i : Fin (r + 1)) : (algebra X r).sections V :=
   (eqToHom (algebra_eq X r).symm).right.hom.app (op V.1) (generator X r V.1 i)
 
 set_option backward.isDefEq.respectTransparency.types false in
 /-- On an affine base the polynomial identification is uniquely determined by its
-coefficients and its ordered degree-one generators.
-Source: blueprint, order 203 (blueprint: def-nagata-relative-projective-space).
-Proof: identify the sections of the finite free module with the free module on its
-standard basis. The universal-property comparison with the quasi-coherent symmetric
-algebra gives its canonical affine-section isomorphism. Compose its inverse with
-SymmetricAlgebra.equivMvPolynomial for that basis and invert. This gives the displayed
-coefficient and generator equations. Polynomial extensionality proves uniqueness. -/
+coefficients and its ordered degree-one generators. -/
 theorem existsUnique_affinePolynomialEquiv (V : X.affineOpens) :
     ∃! e : MvPolynomial (Fin (r + 1)) (X.presheaf.obj (op V.1)) ≃+*
         (algebra X r).sections V,
@@ -828,8 +789,7 @@ theorem existsUnique_affinePolynomialEquiv (V : X.affineOpens) :
     (fun a ↦ (he'.1 a).trans (he.1 a).symm)
     (fun i ↦ (he'.2 i).trans (he.2 i).symm)
 
-/-- The canonical polynomial identification, preserving coefficients and coordinates.
-Source: blueprint, order 203 (blueprint: def-nagata-relative-projective-space). -/
+/-- The canonical polynomial identification, preserving coefficients and coordinates. -/
 def affinePolynomialEquiv (V : X.affineOpens) :
     MvPolynomial (Fin (r + 1)) (X.presheaf.obj (op V.1)) ≃+* (algebra X r).sections V :=
   (existsUnique_affinePolynomialEquiv X r V).exists.choose
@@ -905,11 +865,7 @@ private theorem polynomial_monomial_span (V : X.affineOpens) (n : ℕ) :
       simp [d]
 
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Symmetric degree is polynomial total degree in the standard coordinates.
-Source: blueprint, order 203 (blueprint: def-nagata-relative-projective-space).
-Proof: the fixed degree-n monomial inclusions identify the nth piece with the span of
-monomials of total degree n. The polynomial equivalence sends each such monomial to
-that same monomial in the coordinates. The monomial basis proves both inclusions. -/
+/-- Symmetric degree is polynomial total degree in the standard coordinates. -/
 theorem affinePolynomial_homogeneous (V : X.affineOpens) (n : ℕ)
     (p : MvPolynomial (Fin (r + 1)) (X.presheaf.obj (op V.1))) :
     affinePolynomialEquiv X r V p ∈ (algebra X r).sectionGrade V n ↔
@@ -958,15 +914,13 @@ theorem affinePolynomial_homogeneous (V : X.affineOpens) (n : ℕ)
   · intro hp
     exact ⟨p, hp, rfl⟩
 
-/-- The standard open on an affine local model, using the actual coordinate section.
-Source: blueprint, order 203 (blueprint: def-nagata-relative-projective-space). -/
+/-- The standard open on an affine local model, using the actual coordinate section. -/
 def localStandardOpen (V : X.affineOpens) (i : Fin (r + 1)) :
     ((algebra X r).localProj V).Opens :=
   Proj.basicOpen ((algebra X r).sectionGrade V) (coordinate X r V i)
 
 /-- The global standard open is the union of the specified opens over all affine bases.
-There is no independent choice of opens or charts.
-Source: blueprint, order 203 (blueprint: def-nagata-relative-projective-space). -/
+There is no independent choice of opens or charts. -/
 def standardOpen (i : Fin (r + 1)) : (scheme X r).Opens :=
   ⨆ V : X.affineOpens,
     ((π X r ⁻¹ᵁ V.1).ι.opensFunctor.obj
@@ -1003,12 +957,7 @@ private theorem localStandardOpen_compat {V W : X.affineOpens} (h : W ≤ V)
   rfl
 
 /-- The global standard open restricts to the specified local standard open on every
-affine base. The chart map is therefore the inherited relative-Proj chart map.
-Source: blueprint, order 203 (blueprint: def-nagata-relative-projective-space).
-Proof: restriction of a coordinate is the same coordinate. The restriction transition
-maps of relative Proj are the canonical graded section-restriction maps, which pull
-back D_+(T_i) to D_+(T_i). Use restriction_compatibility, and cover overlaps by affine
-refinements. Taking the union defining standardOpen gives the asserted equality. -/
+affine base. The chart map is therefore the inherited relative-Proj chart map. -/
 theorem standardOpen_restrict (V : X.affineOpens) (i : Fin (r + 1)) :
     (TopologicalSpace.Opens.map (π X r ⁻¹ᵁ V.1).ι.base).obj (standardOpen X r i) =
       (TopologicalSpace.Opens.map ((construction X r).restrictionIso V).hom.base).obj

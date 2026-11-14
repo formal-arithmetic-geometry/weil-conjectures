@@ -236,8 +236,7 @@ over every étale `K`-scheme. If a global section `q` of `Q` lifts to a section 
 
 The obstruction to descending `e` is the class of the Čech `1`-cocycle
 `p₁^* e - p₂^* e` of `𝔾ₘ` on `Spec (L ⊗_K L)`; it vanishes by Hilbert 90 for the Amitsur
-complex (`Algebra.TensorProduct.exists_eq_of_cocycle`).
-(blueprint: `lemma-cohomology-multiplicative-group--3`, descent step for `X = Spec K`) -/
+complex (`Algebra.TensorProduct.exists_eq_of_cocycle`). -/
 theorem exists_app_eq_of_app_etaleSpec_eq (hιπ : ι ≫ π = 0)
     (hι : ∀ U, Function.Injective (ι.hom.app U))
     (hexact : ∀ U (x : E.obj.obj U), π.hom.app U x = 0 → ∃ g, ι.hom.app U g = x)
@@ -328,8 +327,7 @@ every global section of `Q` lifts to `E`.
 
 The fibre of `E → Q` over a global section is a `𝔾ₘ`-torsor. It is trivialized over `Spec L`
 for a finite separable extension `L` of `K`, and descends to a trivial torsor by
-`AlgebraicGeometry.Scheme.exists_app_eq_of_app_etaleSpec_eq`.
-(blueprint: `lemma-cohomology-multiplicative-group--3`, for `X = Spec K`) -/
+`AlgebraicGeometry.Scheme.exists_app_eq_of_app_etaleSpec_eq`. -/
 theorem surjective_app_of_shortExact_gmSheaf (w : ι ≫ π = 0)
     (hS : (ShortComplex.mk ι π w).ShortExact) : Function.Surjective (π.hom.app (op 𝟙ₑ)) := by
   have := hS.mono_f
@@ -361,8 +359,7 @@ triviality of invertible modules over a field. Here the two steps are done at on
 the direction needed: a class in `H¹ = Ext¹(ℤ, 𝔾ₘ)` vanishes when the global sections of every
 quotient `E/𝔾ₘ` lift (`CategoryTheory.Sheaf.subsingleton_H_one_of_surjective`), and they lift
 because every `𝔾ₘ`-torsor on `Spec K` is trivial
-(`AlgebraicGeometry.Scheme.surjective_app_of_shortExact_gmSheaf`).
-(blueprint: `lemma-cohomology-multiplicative-group`) -/
+(`AlgebraicGeometry.Scheme.surjective_app_of_shortExact_gmSheaf`). -/
 instance subsingleton_cohomologicalPicardGroup_of_field (K : Type u) [Field K] :
     Subsingleton (Spec (.of K)).CohomologicalPicardGroup :=
   Sheaf.subsingleton_H_one_of_surjective _

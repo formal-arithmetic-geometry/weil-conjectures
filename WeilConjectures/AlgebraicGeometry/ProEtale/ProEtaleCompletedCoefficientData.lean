@@ -19,10 +19,6 @@ public import Mathlib.RingTheory.Ideal.Quotient.Operations
 /-!
 # Data for the completed coefficient comparison
 
-Source: literature/blueprint/latest/blueprint/sec-proetale-coefficients/
-sk-prop-sfb-qlbar-colimit-x/_section.md and its two proof files
-(blueprint: def-pe-completed-coefficient-comparison-data).
-
 The integral comparison is stated as a limit universal property, with its reductions
 normalized on constant sections. Rationalization is stated as the sequential module
 colimit together with the ring-localization universal property. These formulations
@@ -39,24 +35,19 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- Constant rings, as ring objects in abelian sheaves, with the standard integer tensor.
-Source: the constant finite quotients in the first display of the comparison proposition
-(blueprint: lemma-comparison-completed-coefficients). -/
+/-- Constant rings, as ring objects in abelian sheaves, with the standard integer tensor. -/
 noncomputable def sfbConstantRing (X : Scheme.{u}) :
     RingCat.{u + 1} ⥤ Mon (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) :=
   RingCat.toMonAb ⋙ (constantSheaf (Scheme.ProEt.topology X) Ab.{u + 1}).mapMon
 
 /-- The same constant-ring construction on the pro-étale point.
-Source: the finite quotients in the comparison proposition
-(blueprint: lemma-comparison-completed-coefficients). -/
+Source: the finite quotients in the comparison proposition. -/
 noncomputable def sfbPointConstantRing :
     RingCat.{u + 1} ⥤ Mon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) :=
   RingCat.toMonAb ⋙ (constantSheaf (coherentTopology Profinite.{u}) Ab.{u + 1}).mapMon
 
 /-- The quotient tower, including the harmless terminal zero quotient at exponent zero.
-Its maps are the quotient reductions, not arbitrary ring homomorphisms.
-Source: first display of the comparison proposition
-(blueprint: lemma-comparison-completed-coefficients). -/
+Its maps are the quotient reductions, not arbitrary ring homomorphisms. -/
 noncomputable def sfbCoefficientQuotientTower (R : Type) [CommRing R] (I : Ideal R) :
     ℕᵒᵖ ⥤ RingCat.{u + 1} :=
   Functor.ofOpSequence (X := fun n : ℕ ↦ RingCat.of (ULift.{u + 1} (R ⧸ I ^ n)))
@@ -67,8 +58,7 @@ noncomputable def sfbCoefficientQuotientTower (R : Type) [CommRing R] (I : Ideal
 
 /-- Constant sections of a topological ring, mapped into its condensed abelian sheaf.
 This is the adjoint of the map sending a scalar to its constant continuous function.
-Source: normalization of the reduction maps in the comparison proposition
-(blueprint: lemma-comparison-completed-coefficients). -/
+Source: normalization of the reduction maps in the comparison proposition. -/
 noncomputable def sfbConstantToContinuous (R : Type) [CommRing R] [TopologicalSpace R]
     [IsTopologicalRing R] :
     (constantSheaf (coherentTopology Profinite.{u}) Ab.{u + 1}).obj
@@ -81,9 +71,7 @@ noncomputable def sfbConstantToContinuous (R : Type) [CommRing R] [TopologicalSp
       naturality := fun _ _ _ ↦ rfl }
 
 /-- The pulled-back inclusion of integers into their coefficient field. The underlying
-map is precisely `p_X^*` applied to postcomposition with the given continuous inclusion.
-Source: second display of the comparison proposition
-(blueprint: lemma-comparison-completed-coefficients). -/
+map is precisely `p_X^*` applied to postcomposition with the given continuous inclusion. -/
 noncomputable def sfbCoefficientInclusion (R K : Type) [CommRing R] [TopologicalSpace R]
     [IsTopologicalRing R] [CommRing K] [TopologicalSpace K] [IsTopologicalRing K]
     (φ : R →+* K) (hφ : Continuous φ) (X : Scheme.{u}) :
@@ -95,8 +83,7 @@ noncomputable def sfbCoefficientInclusion (R K : Type) [CommRing R] [Topological
         (Profinite.continuousMapRingSheafMap φ hφ)))
 
 /-- The coefficient field as a module over the pulled-back integers, using their actual
-inclusion. Source: the sequential module colimit in the comparison proposition
-(blueprint: lemma-comparison-completed-coefficients). -/
+inclusion. Source: the sequential module colimit in the comparison proposition. -/
 noncomputable def sfbRationalCoefficientModule (R K : Type) [CommRing R]
     [TopologicalSpace R] [IsTopologicalRing R] [CommRing K] [TopologicalSpace K]
     [IsTopologicalRing K]
@@ -108,9 +95,7 @@ noncomputable def sfbRationalCoefficientModule (R K : Type) [CommRing R]
     (Mod.regular (condensedRingObj (Profinite.continuousMapRingObj K) X))
 
 /-- The sequential diagram of integer modules with transition multiplication by `ℓ`.
-Multiplication by `ℓ` is used only as a module map.
-Source: second display of the comparison proposition
-(blueprint: lemma-comparison-completed-coefficients). -/
+Multiplication by `ℓ` is used only as a module map. -/
 noncomputable def sfbRationalizationSequence (ℓ : ℕ) (R : Type) [CommRing R]
     [TopologicalSpace R] [IsTopologicalRing R] (X : Scheme.{u}) :
     ℕ ⥤ Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -125,10 +110,7 @@ limits and colimits. The last clause is the universal property of localization a
 thus the ring structure on the sequential module colimit is the localization structure.
 The pullback equations use the underlying bundled ring comparison. Its underlying map
 is identity followed by `condensedPullbackHom`, so this is precisely the same canonical
-naturality condition; retaining the bundle avoids expensive instance conversion.
-
-Source: first two displays and inverse-image paragraph of the comparison proposition
-(blueprint: lemma-comparison-completed-coefficients). -/
+naturality condition; retaining the bundle avoids expensive instance conversion. -/
 def SfbCompletedCoefficientComparison (ℓ : ℕ) (R K : Type) [CommRing R]
     [TopologicalSpace R] [IsTopologicalRing R] [CommRing K] [TopologicalSpace K]
     [IsTopologicalRing K] (I : Ideal R)
@@ -170,9 +152,7 @@ def SfbCompletedCoefficientComparison (ℓ : ℕ) (R K : Type) [CommRing R]
           ∃! b : coefficientRing X (Mon.mk (Profinite.continuousMapRingObj K)) ⟶ B,
             i X ≫ b = a)
 
-/-- The finite-subextension diagram, in ring objects rather than only abelian sheaves.
-Source: third display of the comparison proposition
-(blueprint: lemma-comparison-completed-coefficients). -/
+/-- The finite-subextension diagram, in ring objects rather than only abelian sheaves. -/
 noncomputable def sfbFiniteSubfieldRingDiagram (ℓ : ℕ) [Fact ℓ.Prime] :
     PadicAlgCl.FiniteIntermediateField ℓ ⥤
       Mon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) where
@@ -186,9 +166,7 @@ noncomputable def sfbFiniteSubfieldRingDiagram (ℓ : ℕ) [Fact ℓ.Prime] :
     exact Profinite.padicSubfieldRingObjMap_comp ℓ (leOfHom f) (leOfHom g)
 
 /-- The canonical finite-field cocone as a cocone of rings; its legs are the inclusions
-into the finite-subextension-valued algebraic-closure coefficients.
-Source: third display of the comparison proposition
-(blueprint: lemma-comparison-completed-coefficients). -/
+into the finite-subextension-valued algebraic-closure coefficients. -/
 noncomputable def sfbFiniteSubfieldRingCocone (ℓ : ℕ) [Fact ℓ.Prime] :
     Cocone (sfbFiniteSubfieldRingDiagram.{u} ℓ) where
   pt := Mon.mk (Profinite.padicAlgClRingObj ℓ)
@@ -199,9 +177,7 @@ noncomputable def sfbFiniteSubfieldRingCocone (ℓ : ℕ) [Fact ℓ.Prime] :
         exact (Profinite.padicSubfieldRingObjMap_comp_toPadicAlgCl ℓ (leOfHom f)).trans
           (Category.comp_id _).symm }
 
-/-- The standard finite constant coefficient rings `ZMod (ℓ^n)`, with reduction maps.
-Source: final paragraph of the comparison proposition
-(blueprint: lemma-comparison-completed-coefficients). -/
+/-- The standard finite constant coefficient rings `ZMod (ℓ^n)`, with reduction maps. -/
 noncomputable def sfbZModCoefficientTower (ℓ : ℕ) : ℕᵒᵖ ⥤ RingCat.{u + 1} :=
   Functor.ofOpSequence (X := fun n : ℕ ↦ RingCat.of (ULift.{u + 1} (ZMod (ℓ ^ n))))
     (fun n : ℕ ↦ RingCat.ofHom (ULift.ringEquiv.symm.toRingHom.comp

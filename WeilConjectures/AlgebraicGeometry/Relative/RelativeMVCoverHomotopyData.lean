@@ -18,30 +18,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- A relative comparison on a covering pair, before identifying any coefficients
-with modules in degree zero. Source: Stacks Project, Tags 08BV, 08HZ, 08FE and 08HY.
-(blueprint: lem-pc-relative-mv-cover-homotopy-data).
-
-Proof: Resolve K and K' by injective-term K-injective complexes. Restrict them
-to U, V and their intersection, and to the inverse-image cover. Exact extension
-by zero implies that these restrictions are K-injective. Sheaf gluing and
-flasqueness of injectives give the short exact restriction-pair/difference rows.
-Transpose phi under derived pullback/direct image for g' and represent its
-transpose by a chain map into the target K-injective resolution. Restrict that
-map to obtain the comparison of the finite cover diagrams. Compute the relative
-direct images by these resolutions and resolve the whole source diagram K-flatly
-before tensor pullback along g. The comparison adjoint to the transposed map
-commutes with the first maps up to a specified homotopy H: use naturality of
-the restriction units and the underived open counit square. Form its cone map
-using this H. The short exact rows identify the cones with the overlap terms.
-Direct-image composition and exact open restriction identify the other vertices
-with the displayed relative objects; combine the middle comparisons using the
-additive biproduct comparison. Expand the relative arrows as base-change mates.
-The composite-adjunction counit identity identifies alpha with the global arrow,
-beta with the sum of the two local arrows, and mapOfHomotopy H with the overlap
-arrow. The last identification uses the map of resolved rows, not an arbitrary
-completion of a square of triangles. This needs no affine, compactness, flatness
-or quasi-coherence hypothesis. Empty opens give zero restriction terms, repeated
-opens give split rows, and zero coefficients give zero rows. -/
+with modules in degree zero. Source: Stacks Project, Tags 08BV, 08HZ, 08FE and 08HY. -/
 theorem relativeMV_cover_homotopy_data
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

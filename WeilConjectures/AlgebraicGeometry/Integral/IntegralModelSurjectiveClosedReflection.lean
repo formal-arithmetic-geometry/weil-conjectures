@@ -33,9 +33,7 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.D
 /-!
 # Reflection of integral finite constant models across surjective closed immersions
 
-Source: Stacks Project, Tags 09AB and 09BK; blueprint main-20261015,
-`lemma-sections-support-closed-subscheme--3`, proof (1)
-(blueprint: lem-sfb-integral-model-surjective-closed-reflection).
+Source: Stacks Project, Tags 09AB and 09BK.
 -/
 
 @[expose] public section
@@ -51,18 +49,14 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- The condensed valuation ring of the finite p-adic extension, with continuous-function
 sections and the topology of the unique extending spectral absolute value. This merely
-specializes the existing continuous coefficient construction.
-Source: blueprint lemma-sections-support-closed-subscheme--3, proof (1)
-(blueprint: lem-sfb-integral-model-surjective-closed-reflection). -/
+specializes the existing continuous coefficient construction. -/
 noncomputable def integralModelCondensedCoefficients (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] :
     Mon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) :=
   letI := spectralNorm.normedField (Padic l) E
   Mon.mk (Profinite.continuousCoefficientRingObj (Padic.coefficientExtensionIntegers l E))
 
-/-- The integral condensed coefficient ring is commutative, by its pointwise operations.
-Source: blueprint lemma-sections-support-closed-subscheme--3, proof (1)
-(blueprint: lem-sfb-integral-model-surjective-closed-reflection). -/
+/-- The integral condensed coefficient ring is commutative, by its pointwise operations. -/
 noncomputable instance integralModelCondensedCoefficients_isCommMonObj
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] :

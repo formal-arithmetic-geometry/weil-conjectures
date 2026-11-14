@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveBundlePicardClassification.Pr
 # Local normal forms of lines on projective bundles
 
 Source: EGA II, Remark 4.2.7; Stacks, Tags 0BXJ, 07VK and 0B8W.
-(blueprint: lem-sfb-projective-bundle-local-normal-form)
 -/
 
 @[expose] public section
@@ -57,33 +56,7 @@ private theorem nonempty_iso_of_top_restriction {X : Scheme.{u}} (M N : X.Module
 /-- Local integer normal forms and their field normalization. This is the local
 part of projective-bundle Picard classification; it makes no global descent assertion.
 
-Source: EGA II, Remark 4.2.7; Stacks, divisors.tex, Tag 0BXJ;
-coherent.tex, Tag 07VK; limits.tex, Tag 0B8W.
-(blueprint: lem-sfb-projective-bundle-local-normal-form)
-
-Proof: Trivialize E near each base point using finite local freeness and identify
-its bundle with projective space by quotient geometry. Over a field trivialize L
-on the polynomial charts. A unit on a double overlap is c times a power of the
-coordinate ratio: polynomial degrees eliminate the other variables and the largest
-and smallest Laurent exponents coincide. For two coordinates apply the projective
-line classification. For at least three, compare exponents in the triple-overlap
-cocycle; all exponents agree and the scalar cocycle is a boundary. Rescaling bases
-identifies L with the integer power of the tautological line. Chart units are
-constants, so an isomorphism between two such powers forces equal exponents.
-This also proves invariance under field extension and the displayed field clause.
-On a Noetherian affine base twist to make the chosen fibre trivial. Polynomial
-charts give flatness, and projective-space cohomology gives H^1(O)=0. Lift the
-fibre generator by proper flat fibre-section lifting. In a local line basis its
-coefficient is a unit at every point of the fibre. The generation locus is open;
-remove the proper closed image of its complement to trivialize the twisted line
-on the inverse image of a base neighbourhood. For an arbitrary affine base write
-its ring as a filtered union of finite-type integer subalgebras. Projective spaces
-form a qcqs inverse system with affine transitions and the expected limit.
-Descend L to a finite stage by invertible affine-limit descent, apply the
-Noetherian result, and pull the resulting neighbourhood and isomorphism back.
-Localizing E first proves the result for every S, including non-quasi-compact
-and nonreduced bases. For the empty base the neighbourhood assertion is vacuous;
-the field clause has no empty field spectrum. -/
+Source: EGA II, Remark 4.2.7; Stacks, Tag 0BXJ; Tag 07VK; Tag 0B8W. -/
 theorem projective_bundle_local_normal_form (S : Scheme.{u}) (E : S.Modules)
     [E.IsQuasicoherent] (r : ℕ)
     [SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u} E r] (hr : 2 ≤ r)

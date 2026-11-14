@@ -37,7 +37,6 @@ import Mathlib.RingTheory.AdicCompletion.Completeness
 /-! # Algebraic derived presentations of lisse towers
 
 Source: Stacks Project, Pro-etale Cohomology, Tag 09BV; More on Algebra, Tag 09AV.
-(blueprint: lem-weil-pbc-lisse-tower-algebraic-derived-presentation).
 -/
 
 @[expose] public noncomputable section
@@ -271,29 +270,7 @@ private noncomputable def completionQuotientEquiv {A : Type u} [CommRing A]
 pseudo-coherent complex over the completion. This provides a derived algebraic
 object, without constructing a bounded complex of adic-lisse sheaves.
 
-Source: Stacks, proetale.tex, Tag 09BV (lemma-weird); more-algebra.tex,
-Tag 09AV (lemma-Rlim-pseudo-coherent-gives-complete-pseudo-coherent), and the
-bounded-derived adaptation in amplification (c).
-(blueprint: lem-weil-pbc-lisse-tower-algebraic-derived-presentation).
-
-Proof: the local algebraic reduction-diagram lemma supplies a covering sieve and,
-on each member, a normalized tower K over the power quotients of the completion.
-It supplies finite cohomology, transfer of zero cohomology from M, and descent of
-any effective algebraic cone to the required geometric reductions. It requires
-only separate bounds for the finite levels.
-
-The completion is Noetherian and complete for the extended ideal. Completion
-evaluation identifies each power quotient with the corresponding finite quotient
-of A, so all homology modules of K are finite sets. Form the product of the
-scalar-restricted K_n and complete one minus the transition shift to a
-distinguished triangle. Normalized algebraic effectivity makes its first object E
-pseudo-coherent and identifies its actual projections with compatible reductions.
-For q outside [a,b], homology of the product in degree q is zero. The preceding
-homology Roos map is surjective by finite-group Mittag--Leffler, so the long exact
-sequence embeds H^q(E) into that zero product. Thus E has exactly the required
-vanishing, including the lower endpoint. Feed its compatible reductions to the
-local diagram's descent clause. This produces all realization isomorphisms and
-forward semilinear equations. No bounded termwise model or Tor bound is used. -/
+Source: Stacks, Tag 09BV (lemma-weird). -/
 theorem lisse_tower_algebraic_derived_presentation
     (X Y : Scheme.{u}) [IsNoetherian X] (g : Y ⟶ X) [IsImmersion g]
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (M : AdicTower X d)

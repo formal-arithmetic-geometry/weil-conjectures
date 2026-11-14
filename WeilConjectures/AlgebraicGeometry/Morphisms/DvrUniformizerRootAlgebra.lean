@@ -16,7 +16,6 @@ import WeilConjectures.Mathlib.RingTheory.DiscreteValuationRing.TFAE
 /-! # The DVR obtained by adjoining a root of a uniformizer
 
 Source: Stacks Project, Tags 09EV and 00PD.
-(blueprint: lem-sbc-dvr-uniformizer-root-algebra)
 -/
 
 @[expose] public section
@@ -26,17 +25,7 @@ namespace AlgebraicGeometry.Scheme
 /-- Adjoining a positive-order root of a DVR uniformizer gives a DVR with that root
 as uniformizer.
 
-Source: Stacks Project, Tag 09EV (and evaluation for n = 1).
-(blueprint: lem-sbc-dvr-uniformizer-root-algebra)
-
-Proof: The polynomial X^n - pi is monic and Eisenstein at the maximal ideal (pi),
-so its quotient A is a domain, finite free of rank n over B. Every maximal ideal
-of A contracts to (pi) by integrality. Modulo pi the root is nilpotent, so every
-maximal ideal contains the root t. The quotient A/(t) is B/(pi), a field, hence
-(t) is the unique maximal ideal. The relation t^n = pi and injectivity of B -> A
-show t is nonzero. A is Noetherian because it is finite over B. A Noetherian local
-domain with nonzero principal maximal ideal is a DVR (00PD). The argument also
-works when n = 1; alternatively evaluation at pi identifies A with B. -/
+Source: Stacks Project, Tag 09EV (and evaluation for n = 1). -/
 theorem dvr_uniformizer_root_algebra
     (B : Type u) [CommRing B] [IsDomain B] [IsDiscreteValuationRing B]
     (pi : B) (hpi : Irreducible pi) (n : ℕ) (hn : 0 < n) :

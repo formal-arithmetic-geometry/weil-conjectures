@@ -23,8 +23,7 @@ import Mathlib.RingTheory.Polynomial.UniqueFactorization
 /-!
 # Degrees of invertible modules on projective-bundle fibres
 
-Source: Stacks Project, divisors.tex, Tag 0BXJ; EGA II, Remark 4.2.7.
-(blueprint: lem-sfb-projective-bundle-fiber-degree)
+Source: Stacks Project, Tag 0BXJ; EGA II, Remark 4.2.7
 -/
 
 @[expose] public section
@@ -208,31 +207,7 @@ private theorem line_power_to_twist {X : Scheme.{u}} (k : Type u) [Field k]
 /-- A line has a unique integer degree on each residue-field fibre. This assertion
 only concerns modules on the fibre, and asserts no extension to a neighbourhood.
 
-Source: Stacks Project, divisors.tex, Tag 0BXJ, proof of
-lemma-Pic-projective-space-UFD; EGA II, Remark 4.2.7, field calculation.
-(blueprint: lem-sfb-projective-bundle-fiber-degree)
-
-Proof: Pull the universal quotient to Spec kappa(s). The quotient classification
-identifies this fibre with the projective bundle of the residue-field vector space
-E_s and identifies the pulled-back normalized line with its tautological line.
-Choose a basis of the rank-r vector space E_s. The free comparison in quotient
-geometry identifies the fibre, with its line, with P^(r-1) over kappa(s), with O(1).
-Every standard chart is affine space, whose invertible modules are trivial. Choose
-a generator on every chart. An overlap has coordinate ring k[t,t^-1,z_1,...,z_a].
-A unit and its inverse have zero degree in every z_i, since their degrees add in
-a domain. The difference of the largest and smallest Laurent exponents also adds,
-so it is zero for a unit. Thus the transition is c times a power of t. If r=2,
-apply the projective-line invertible classification. If r>=3, the cocycle on each
-triple intersection identifies the three exponents and makes the scalar cocycle
-a boundary. Rescale generators to remove that boundary. The remaining transitions
-are precisely those of O(m), so module-sheaf gluing gives existence. Chart units
-are constants; a change of chart basis cannot change the overlap exponent, proving
-uniqueness. The normalized chart equation for D identifies positive tensor powers
-with these twists; dual evaluation gives the same identification for negative
-powers. Pullback commutes with tensor products and dual evaluation, so the result
-is the displayed statement about pullbacks of integerLinePower. The rank bound
-ensures a positive-dimensional projective fibre and at least two charts. There
-are no points s on an empty base, and no reducedness hypothesis on S is used. -/
+Source: Stacks Project, Tag 0BXJ; EGA II, Remark 4.2.7, field calculation. -/
 theorem projective_bundle_fiber_degree (S : Scheme.{u}) (E : S.Modules)
     [E.IsQuasicoherent] (r : ℕ)
     [SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u} E r] (hr : 2 ≤ r)

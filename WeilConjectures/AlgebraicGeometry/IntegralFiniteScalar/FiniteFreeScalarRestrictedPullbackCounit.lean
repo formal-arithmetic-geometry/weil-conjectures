@@ -10,10 +10,6 @@ import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 import WeilConjectures.AlgebraicGeometry.IntegralFiniteScalar.FiniteFreeScalarPullbackCounit
 
 /-! # Restricted scalar counits and exact pullback
-
-Source: blueprint scalar-six direct-image proof, formal properties and finite free
-coefficient extensions.
-(blueprint: new-sfb-finite-free-scalar-restricted-pullback-counit)
 -/
 
 @[expose] public noncomputable section
@@ -77,8 +73,6 @@ private theorem restrictedCounit_paste
 -- Compute the scalar mate before using any K-flat invertibility.
 /-- Restricted scalar counits commute with exact geometric pullback and the normalized
 scalar mate.
-Source: blueprint scalar-six formal properties, pullback of scalar extension.
-(blueprint: new-sfb-finite-free-scalar-restricted-pullback-counit)
 
 Proof. The normalized scalar-mate counit equation gives the square before restriction.
 Map it through exact restriction. The inverse derived comap comparison is natural for

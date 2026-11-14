@@ -59,8 +59,6 @@ import all Mathlib.Algebra.BigOperators.Ring.Finset
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 
 /-! # The projective-line adjunction with its canonical diagonal data supplied
-
-Source: the affine-line proof, step 9, and the rational projective-line triangle theorem.
 -/
 
 @[expose] public noncomputable section
@@ -167,19 +165,7 @@ private theorem triangleAdjunction
       Y hY D hcompletion hsystem δ hlimit family reference).2.2.2.2.1).nonempty
 
 /-- Supply the normalized strict cycle system, its unique completed limit, and its
-coefficient realization to the projective-line triangle identities.
-Source: blueprint affine-line proof step 9; projective-line triangle proof and diagonal
-limit and coefficient theorems (blueprint: proposition-projective-line-rational-coefficients--1).
-Proof plan: the characteristic assumptions make ell a unit in the field and in global
-sections. Construct the strict cycle system with `exists_diagonalTowerSystem`. Apply
-`diagonalTower_limit` and package its unique arrow and normalization as
-`DiagonalTrace.IsDiagonalLimit`. Apply `diagonalTower_coefficients` to obtain its
-Family and Reference. The derived sequence and completed coefficient categories are
-Grothendieck abelian in the coefficient universe: sequence categories use the standard
-coproduct of evaluation-left-adjoint separators, while completed modules use
-`SheafOfModules.isGrothendieckAbelian_coefficientUniverse`. The resulting localization
-instances discharge the hypotheses of `rationalP1_triangle`; its adjunction clause is
-then the required result. -/
+coefficient realization to the projective-line triangle identities. -/
 theorem rationalP1_adjunction_assembly
     (ℓ : ℕ) [Fact ℓ.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField ℓ))
     (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]

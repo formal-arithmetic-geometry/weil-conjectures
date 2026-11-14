@@ -30,13 +30,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- Lift a marked-fibre generator, then reflect its generation along the fibre inclusion.
-Source: Stacks Project, Tag 0BF2, fibre triviality and degree-zero differential argument.
-(blueprint: lem-sc-picard-h1-local-section-base-descent-generator)
-
-Proof: Fibre descent gives τ generating at all points of the marked fibre. Local section
-lifting gives V and a lift σ of τ. Every point above w is the image of a fibre point y.
-Since the pulled-back σ corresponds to τ, reflection of generation along tensor pullback
-proves that σ generates at that image. -/
+Source: Stacks Project, Tag 0BF2, fibre triviality and degree-zero differential argument. -/
 theorem picard_h1_local_section_of_base_descent_generator {X S : Scheme.{v}} (f : X ⟶ S) {n : ℕ}
     (Xi : Fin n → Scheme.{v}) (fi : ∀ i, Xi i ⟶ S)
     [Flat f] [IsProper f] [LocallyOfFinitePresentation f]

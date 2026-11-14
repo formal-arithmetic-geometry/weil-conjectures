@@ -12,7 +12,6 @@ import WeilConjectures.Algebra.Homology.RingedSitePullback.PullbackLocalizationO
 /-! # The ordinary pullback mate on localized pro-étale module sites
 
 Source: Stacks Project, Modules on Sites, Tag 04J0.
-(blueprint: lem-weil-pbc-ringed-projection-ordinary-slice-mate).
 -/
 
 @[expose] public section
@@ -70,17 +69,7 @@ private theorem localizedInverseMate_isIso
 
 /-- The inverse mate of the identity-on-sections direct-image square is invertible.
 Source: Stacks Project, Modules on Sites, Tag 04J0, localization of a morphism
-of ringed sites.
-(blueprint: lem-weil-pbc-ringed-projection-ordinary-slice-mate).
-
-Proof: the coefficient map on the slice equals the sectionwise restriction
-of the global map. The existing universe-polymorphic localization comparison
-is invertible: product comparison identifies the composite right adjoints and
-uniqueness of left adjoints gives its inverse. Its adjunct is the restricted
-global unit. The inverse mate of the given ordinary square has the same adjunct
-by the unit mate equation and the section identity. Injectivity of the slice
-adjunction identifies the two maps. This includes the zero module and zero
-coefficient ring; no derived data or choice of resolutions is used. -/
+of ringed sites. -/
 theorem localOrdinaryInverseMate_isIso
     {X Y : Scheme.{u}} {f : X ⟶ Y}
     {R_Y : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}}

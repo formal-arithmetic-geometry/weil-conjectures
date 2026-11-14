@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.RelativeProj.RelativeProjTwistChartDesc
 /-! # Descent of degree-one twists, before constructing a map from a base module
 
 Source: Stacks Project, Constructions, Tag 01NR.
-(blueprint: lem-trf-relative-proj-twist-chart-descent).
 -/
 
 @[expose] public section
@@ -31,23 +30,7 @@ variable {S : Scheme.{u}} (A : S.GradedAlgebraData)
 /-- The affine twists descend with their restriction maps. This is object descent only:
 there is no morphism from a module on the base in the conclusion.
 
-Source: Stacks, Tag 01NR, proof of lemma-glue-relative-proj-twists, using the
-restriction and transitivity formulas in Tags 01N2 and 01MY.
-(blueprint: lem-trf-relative-proj-twist-chart-descent).
-
-Proof: use O(1) on Proj(A(U)) for every affine base open U. For U contained in V,
-coefficientwise base change identifies the pulled-back twist with O(1) on Proj(A(U));
-on homogeneous fractions the map sends a/f^k to res(a)/res(f)^k. The comparison
-isomorphisms compose because those formulas compose, including identity restrictions.
-Refine an intersection of two affine opens by affine opens inside the intersection.
-The comparison maps agree on further refinements, so define overlap isomorphisms;
-their triple cocycle follows by checking on the same refinements. Apply module-sheaf
-object descent to the relative Proj chart cover. This gives L and the displayed chart
-isomorphisms. Restrict sections through the comparison maps to obtain t. The descent
-compatibility gives the first equation. The fraction formula applied to a/1 gives the
-second equation. The tensor unit is the usual restriction unit under the uniquely
-unit-compatible comparison for an open immersion, so the first equation uses exactly
-twistChartRead. Zero rings, empty charts, and the empty base cause no exceptions. -/
+Source: Stacks, Tag 01NR, using the restriction and transitivity formulas in Tags 01N2 and 01MY. -/
 theorem exists_twist_chart_descent :
     ∃ (L : A.relProj.Modules)
       (chart : ∀ U : S.affineOpens,

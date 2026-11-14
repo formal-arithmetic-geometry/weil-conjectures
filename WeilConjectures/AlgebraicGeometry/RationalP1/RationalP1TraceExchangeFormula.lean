@@ -41,12 +41,7 @@ attribute [local reducible] derivedScalars moduleObjectDerivedPullback
 
 /-- The second trace exchange is the native exchange followed by the direct
 image of its line comparison.
-Source: the defining exchange in the second rational P1 triangle.
-(blueprint: lem-sfb-rational-p1-trace-exchange-formula).
-
-Proof: unfold the two exchange wrappers and normalize functor composition and
-identity maps. The remaining presentations of the sheaf module category agree
-definitionally. -/
+Source: the defining exchange in the second rational P1 triangle. -/
 theorem secondTraceExchange_eq_native
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

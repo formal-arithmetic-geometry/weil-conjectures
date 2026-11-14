@@ -55,7 +55,7 @@ noncomputable abbrev sectionsFunctor (X : Scheme.{u}) : Sheaf X.smallEtaleTopolo
   sheafToPresheaf _ A ⋙
     (evaluation _ A).obj (op (MorphismProperty.Over.mk ⊤ (𝟙 X) (MorphismProperty.id_mem _ X)))
 
-/-- Blueprint `corollary-cohomology-pro-etale-affine`: Etale cohomology continuity.
+/-- Etale cohomology continuity.
 
 Let `(Dᵢ)` be a cofiltered system of quasi-compact quasi-separated schemes over `S` with affine
 transition maps, with limit `X = c.pt`, and let `F` be an étale sheaf on `S`. Then
@@ -108,7 +108,7 @@ theorem isZero_rightDerived_sectionsFunctor_upperStar_of_isLimit {S : Scheme.{u}
     exact (hstage j).eq_of_src _ _
   exact hlimit.of_iso e.symm
 
-/-- Blueprint `corollary-cohomology-pro-etale-affine`: Etale cohomology continuity, in the
+/-- Etale cohomology continuity, in the
 form of an elementwise colimit statement for the pullback maps.
 
 Let `(Dᵢ)` be a cofiltered system of quasi-compact quasi-separated schemes over `S` with affine
@@ -116,13 +116,7 @@ transition maps, with limit `X = c.pt`, and let `F` be an abelian étale sheaf o
 `Hᵠ(X, F|_X) = colimᵢ Hᵠ(Dᵢ, F|_{Dᵢ})` along the pullback maps
 `AlgebraicGeometry.Etale.cohomologyMap`: every class on `X` comes from some `Dᵢ` (up to the
 canonical identification `F|_X ≅ (F|_{Dᵢ})|_X` of `AlgebraicGeometry.Etale.upperStarComp`), and a
-class on `Dᵢ` which vanishes on `X` already vanishes on some `Dⱼ`, `j ⟶ i`.
-
-Proof: specialise `nonempty_isColimit_cofiltered_fixed_base_cohomology` to the underlying
-schemes `Dᵢ.left` over `S` with the structure maps, using the canonical cohomology diagram whose
-transition maps are `cohomologyTriangleMap`. The colimit is filtered, so the forgetful functor
-of `AddCommGrpCat` preserves it and both claims follow from the elementwise description of
-filtered colimits, after composing with the comparison isomorphisms `upperStarComp`. -/
+class on `Dᵢ` which vanishes on `X` already vanishes on some `Dⱼ`, `j ⟶ i`. -/
 theorem cohomologyMap_isColimit_of_isLimit {S : Scheme.{u}}
     (F : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}) {I : Type u} [SmallCategory I]
     [IsCofiltered I] (D : I ⥤ Over S) [∀ i, CompactSpace (D.obj i).left]
@@ -220,7 +214,7 @@ theorem cohomologyMap_isColimit_of_isLimit {S : Scheme.{u}}
     change Sheaf.H.map _ q (H.map f y) = 0
     rw [hfg, map_zero]
 
-/-- Blueprint `corollary-cohomology-pro-etale-affine`: Etale cohomology continuity, vanishing
+/-- Etale cohomology continuity, vanishing
 form for abelian sheaves.
 
 Let `(Dᵢ)` be a cofiltered system of quasi-compact quasi-separated schemes over `S` with affine

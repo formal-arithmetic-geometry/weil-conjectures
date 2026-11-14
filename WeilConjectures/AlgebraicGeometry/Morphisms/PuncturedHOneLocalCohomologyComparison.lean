@@ -24,21 +24,7 @@ namespace AlgebraicGeometry.Scheme
 /-- Comparison from punctured-spectrum cohomology to local cohomology.
 
 Source: Stacks Project, Tag 0BK0, Lemma 51.8.2(2), Tag 0A6T, Lemma 51.2.1,
-and Tag 0AVY, Lemma 47.11.1 (the Ext-colimit description).
-(blueprint: lem-sbc-depth-three-puncture-h-one-comparison)
-
-Proof: Put X = Spec R and m = the maximal ideal. Any prime containing m is
-m, so V(m) consists precisely of the closed point. The hypothesis hW thus
-identifies W with X minus V(m). Apply the affine comparison of 0BK0 to the
-finite R-module R and its associated structure sheaf. The localization long
-exact sequence, together with positive-degree acyclicity of that sheaf on
-X, identifies H^1(W, O_W) with H^2_{V(m)}(X, O_X). For the finitely generated
-ideal m, the latter is the ideal local cohomology H^2_m(R), computed as the
-filtered colimit of Ext^2_R(R/m^n, R), as in Mathlib's localCohomology. The
-underlying additive sheaf of the unit structure module is O_W, so the
-left group is precisely Modules.H in the conclusion. Transport hzero along
-this additive equivalence. If W is empty its positive cohomology is zero,
-and the same comparison still applies. No depth hypothesis is used here. -/
+and Tag 0AVY, Lemma 47.11.1 (the Ext-colimit description). -/
 theorem punctured_h_one_subsingleton_of_local_cohomology_vanishing
     (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R]
     (W : (Spec (.of R)).Opens)

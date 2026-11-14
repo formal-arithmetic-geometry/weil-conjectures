@@ -18,8 +18,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Equivariant functions, realized as an intersection of algebra equalizers.
 Source: Stacks Project, Tag 03SF, finite group actions on split covers.
-The condition is `ρ a (f i) = f (α a i)`; thus no choice of orbit data enters this algebra.
-(blueprint: def-sbc-affine-torsor-equivariant-algebra) -/
+The condition is `ρ a (f i) = f (α a i)`; thus no choice of orbit data enters this algebra. -/
 def affineTorsorEquivariantAlgebra
     (H C : Type u) [CommRing H] [CommRing C] [Algebra H C]
     (G : Type u) [Group G] (ρ : G → C →ₐ[H] C)

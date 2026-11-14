@@ -15,8 +15,7 @@ import WeilConjectures.CategoryTheory.Monoidal.Dualizable
 /-!
 # Dualizability of a lisse flat sheaf in degree zero
 
-Source: Bhatt--Scholze, *Pro-étale topology*, Section 6.4, printed pp. 48--49
-(blueprint: lem-pur-etale-lisse-dualizable).
+Source: Bhatt--Scholze, *Pro-étale topology*, Section 6.4, printed pp. 48--49.
 -/
 
 set_option autoImplicit false
@@ -35,21 +34,7 @@ namespace AlgebraicGeometry.Etale
 /-- A finite locally constant module sheaf with flat geometric stalks is dualizable
 when placed in degree zero in the ordinary unbounded étale derived category.
 
-Proof: the canonical ulift stalk isomorphisms and the stalkwise flatness criterion
-make L flat as a sheaf. On a trivializing étale cover its value is a finite flat
-module over the finite ring C. It is finitely presented, hence projective, and a
-retract of a finite free module. The existing lisse-duality theorem therefore
-pairs the internal dual of L with L; the braiding supplies the right dual.
-Form the complex concentrated in degree zero at L. Its term at zero is
-isomorphic to L and its other terms are zero, so all terms are dualizable.
-The bounded-complex duality theorem carries this pairing to the derived
-category. Finally use the canonical single-functor/localization isomorphism.
-The zero sheaf and the empty scheme cause no exception: zero objects are
-explicitly dualizable. No quasi-compactness or finite-type assumption is used.
-
-Source: Bhatt--Scholze, Pro-étale topology, Example 6.4.1 and Lemma 6.4.6;
-steps 5 and 6 of lem-pur-etale-lisse-stratum-compact.
-(blueprint: lem-pur-etale-lisse-dualizable). -/
+Source: Bhatt--Scholze, Pro-étale topology, Example 6.4.1 and Lemma 6.4.6. -/
 theorem isDualizable_singleFunctor_lisseFlat
     {C : Type (u + 1)} [CommRing C] [Finite C]
     {V : Scheme.{u}} (L : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} C))

@@ -15,8 +15,6 @@ import WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicRealizationFlat
 import WeilConjectures.SixFunctors.ProEtale.Comparison.Flat
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-! The Tor-amplitude component of finite-coefficient comparison.
-Source: blueprint `lem-sf-comparison-tor-amplitude`, flat-model and tensor clauses
-(blueprint: lem-sf-intrinsic-comparison-tor-amplitude).
 
 Proof plan: choose the bounded étale flat model, apply exact comparison termwise,
 use preservation of flatness, and compare the resulting K-flat tensor complexes.
@@ -26,16 +24,7 @@ set_option autoImplicit false
 universe u
 open CategoryTheory AlgebraicGeometry
 namespace AlgebraicGeometry
-/-- Exact comparison preserves the specified Tor interval.
-Source: blueprint `lem-sf-comparison-tor-amplitude`, steps 3 and 4
-(blueprint: lem-sf-intrinsic-comparison-tor-amplitude).
-
-Proof: choose an étale flat model in the given interval using the flat-model
-characterization. Comparison preserves the flatness of each term; intrinsic
-realization converts it to site flatness. An additive functor preserves zero objects,
-so support is unchanged. The exact derived functor factorization gives the required
-isomorphism of the comparison image with the localized termwise model. Apply the
-pro-étale flat-model characterization, using preserved bounded constructibility. -/
+/-- Exact comparison preserves the specified Tor interval. -/
 theorem intrinsicComparison_torAmplitude
     (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hlp : l ≠ D.p)
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

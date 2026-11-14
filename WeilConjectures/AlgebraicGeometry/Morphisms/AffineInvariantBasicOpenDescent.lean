@@ -13,7 +13,6 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.AffineTorsorSplitActio
 /-! # Invariant morphisms on an affine basic open
 
 Source: Stacks Project, Tag 03SF, affine stabilizer quotient calculation.
-(blueprint: lem-sbc-affine-invariant-basic-open-descent)
 -/
 
 @[expose] public section
@@ -24,22 +23,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- An invariant morphism to an affine scheme factors uniquely through the fixed subring.
 
-Source: Stacks Project, Tag 03SF, affine calculation for the stabilizer quotient.
-Proof: write V=D(h_C), U=D(h_F), and identify their coordinate rings with C[1/h_C]
-and F[1/h_F]. The inclusion F -> C induces an injective map of these localizations:
-C is a domain and h_C is nonzero. Its image is precisely the common equalizer of
-the localized endomorphisms rho(zeta), zeta in K. Indeed write an invariant fraction
-as a/h_C^n. Since each rho(zeta) fixes h_C, invariance says
-rho(zeta)(a)/h_C^n = a/h_C^n. Multiplying by the invertible denominator and using
-injectivity of C -> C[1/h_C] gives rho(zeta)(a)=a for every zeta in K. Thus a lies
-in the intersection F, and the fraction comes from F[1/h_F]. Conversely each such
-fraction is fixed. For an affine target Z, the ring map Gamma(Z) -> C[1/h_C]
-of an invariant morphism has image in this equalizer. Corestrict it to F[1/h_F]
-and take Spec, conjugating by the canonical affine isomorphisms. The ring-map
-factorization gives the required equation. Injectivity of F[1/h_F] -> C[1/h_C]
-and the affine Hom correspondence give uniqueness. No finite, flat, etale or
-Galois-cover hypothesis is needed in this calculation; K need not be finite.
-(blueprint: lem-sbc-affine-invariant-basic-open-descent) -/
+Source: Stacks Project, Tag 03SF, affine calculation for the stabilizer quotient. -/
 theorem affine_invariant_basic_open_descent
     (H : CommRingCat.{u}) (C : Type u) [CommRing C] [Algebra H C] [IsDomain C]
     (h : H) (hne : algebraMap H C h ≠ 0)

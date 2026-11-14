@@ -25,8 +25,7 @@ namespace AlgebraicGeometry.Scheme
 
 This is an intersection of inverse-image ideals, with no chosen local bases. The
 construction makes sense before its restriction and local-value properties are proved.
-Source: Stacks Project, Tag 0BVH, construction before Lemma 49.3.1.
-(blueprint: def-sbc-trace-discriminant-section-ideal) -/
+Source: Stacks Project, Tag 0BVH, construction before Lemma 49.3.1 -/
 noncomputable def traceDiscriminantSectionIdeal {X Y : Scheme.{u}} (f : X ⟶ Y)
     (U : Y.affineOpens) : Ideal Γ(Y, U.1) :=
   ⨅ (V : Y.affineOpens) (h : V.1 ≤ U.1),

@@ -17,9 +17,7 @@ import WeilConjectures.AlgebraicGeometry.Affine.Limit.AffineLimitFibreDimensionB
 /-!
 # Quasi-finiteness descends for a finitely presented affine model
 
-Source: Stacks Project, Limits, Tag 094M (lemma-descend-quasi-finite), in Situation
-081D, specialized to affine schemes
-(blueprint: lem-weil-pbc-descend-quasifinite-affine).
+Source: Stacks Project, Limits, in Situation 081D, specialized to affine schemes.
 
 The tensor products are expressed as pushouts in `CommRingCat`. The canonical map
 from the left factor is `pushout.inl`; `CommRingCat.pushoutCoconeIsColimit` identifies
@@ -89,31 +87,7 @@ private theorem isQuasiFinite_of_fibre_dimension_le_zero
   exact isOpen_discrete _
 
 /-- Quasi-finiteness of the limit affine base change descends to a stage at least `i₀`.
-Source: Stacks Project, Limits, Tag 094M in Situation 081D
-(blueprint: lem-weil-pbc-descend-quasifinite-affine).
-
-Proof:
-1. Restrict to the directed tail above `i₀`; the inclusion is final, so the
-   restricted cocone remains a colimit. Construct the diagram of pushouts and
-   its cocone to the limit pushout. Its colimit property follows directly by
-   taking a compatible cocone, descending its left legs using the base colimit,
-   and descending its right legs using the initial point of the tail.
-2. Finite presentation implies finite type, which is preserved by pushout.
-   Cancellation of pushout squares shows that each transition comparison is an
-   isomorphism and therefore surjective.
-3. The given quasi-finite morphism has discrete fibres: transport the open
-   singletons through `fiberHomeo`. Mathlib's locally-quasi-finite criterion
-   then applies. Its base change to any residue field has locally Artinian,
-   hence discrete, source, and thus dimension at most zero. Identify the two
-   chosen ring colimits with the given pushout cocone, compatibly with the map.
-   Apply `exists_stage_fibre_dimension_le` with `d = 0`.
-4. At the resulting stage the residue-field pullbacks are locally Noetherian
-   because they are of finite type over fields. Their dimension bound makes
-   them locally Artinian and discrete. Transport the bound through the residue
-   field comparison isomorphism to the scheme-theoretic fibre. Its singletons
-   are open. Together with finite type and affine quasi-compactness this is
-   exactly `Scheme.Hom.IsQuasiFinite`. Empty fibres and zero rings require no
-   separate case.
+Source: Stacks Project, Limits, Tag 094M in Situation 081D.
 -/
 theorem descend_isQuasiFinite_affine
     {I : Type u} [PartialOrder I] [IsDirected I (· ≤ ·)] [Nonempty I]

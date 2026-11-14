@@ -71,11 +71,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible
 /-!
 # Bounded-below filtered-colimit continuity of pro-etale hypercohomology
 
-Source: Weil conjectures blueprint, snapshot main-20261015,
-sec-proetale-coefficients/sk-cor-pe-bounded-continuity,
-det-pe-bounded-continuity-sections.md and its proof
-(blueprint: det-pe-bounded-continuity-sections).
-
 ## Main definitions
 
 - `ringHypercohomology`: integer-degree derived sections with arbitrary ring-sheaf coefficients.
@@ -97,10 +92,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme.ProEt
 
 /-- The published sectionwise transport preserves zero maps, as needed to apply it
-termwise to complexes. Source: the blueprint's small-site size convention and
-Stacks Project, Tag 03D1 (blueprint: det-pe-bounded-continuity-sections).
-Proof: transport precomposes every component with `AsSmall.down`; a zero module-sheaf
-map has a zero component at every object, which remains zero after precomposition. -/
+termwise to complexes. Source: Tag 03D1. -/
 theorem ringHypercohomology_transport_preservesZeroMorphisms (X : Scheme.{u})
     (R : Sheaf (topology X) RingCat.{u + 1}) :
     (proEtaleModuleToModel R).PreservesZeroMorphisms := by
@@ -119,8 +111,7 @@ canonically the evaluation of a bounded-below injective resolution: both compute
 derived evaluation functor, and comparison with a K-injective resolution is unique up to
 homotopy. This construction retains all original site objects and the original coefficients.
 
-Source: the blueprint, det-pe-bounded-continuity-sections.md, convention for `H^q(U,-)`;
-Stacks Project, Tags 079P and 09A2 (blueprint: det-pe-bounded-continuity-sections). -/
+Source: Stacks Project, Tags 079P and 09A2. -/
 noncomputable def ringHypercohomology (X : Scheme.{u})
     (R : Sheaf (topology X) RingCat.{u + 1}) (U : X.ProEt) (q : ℤ) :
     CochainComplex (ringedSiteModules.{u + 1} R) ℤ ⥤ AddCommGrpCat.{u + 1} :=

@@ -34,22 +34,7 @@ namespace AlgebraicGeometry.Scheme
 /-- The explicit small-site coefficient transport identifies constant local models
 on each slice, keeping the same coefficient module. No finiteness assumption is needed.
 
-Source: Stacks Project, Modules on Sites, Tags 03CY and 093U; Sites, Tag 03A0.
-(blueprint: lem-weil-pbc-relative-finite-constant-slice-comparison)
-
-Proof: the canonical inverse-image constant-section isomorphism identifies the
-inverse image of the sheafification of the constant M-valued presheaf with the
-constant M-module on Y. Indeed, both sheafifications represent maps from the same
-constant presheaf, and their units agree after coefficient restriction. The same
-argument applies after restriction to any slice. Precomposition with AsSmall.down
-induces an equivalence on the slices over V and AsSmall.down(V); the inverse is
-precomposition with AsSmall.up and the unit and counit give the identifications.
-Under these equivalences sheafification commutes with precomposition, since its
-universal bijections on maps do. Hence relativeFiniteModelModules sends the
-inverse-image constant module on this slice to constantCoefficientModule with the
-same M, including its scalar action. The slice functor is fully faithful, so mapping
-a local isomorphism forward, and lifting one back, are inverse operations on their
-existence. This also handles the empty slice and the zero coefficient ring. -/
+Source: Stacks Project, Modules on Sites, Tags 03CY and 093U; Sites, Tag 03A0 -/
 theorem relativeFiniteConstantSliceComparison {X Y : Scheme.{u}} (g : Y ⟶ X)
     (B : Type (u + 1)) [CommRing B]
     (F : pbcModules Y ((adicTowerInverseImage g).obj (adicLisseConstantRing X B)))

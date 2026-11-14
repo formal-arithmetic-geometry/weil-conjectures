@@ -342,8 +342,7 @@ end Representable
 
 /-- **Torsors with a representable underlying sheaf.** A torsor `P` under the constant sheaf `M`
 on the small étale site of `Y` whose underlying sheaf of sets is represented by a finite étale
-`Y`-scheme `Q` is the sheaf torsor of an `M`-torsor, with total space `Q`.
-(blueprint: `thm-galois-lc-etale`, simply transitive actions) -/
+`Y`-scheme `Q` is the sheaf torsor of an `M`-torsor, with total space `Q`. -/
 theorem exists_toSheafTorsor_equiv_of_iso
     (P : Sheaf.Torsor ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
       (AddCommGrpCat.of M))) {Q : Scheme.{u}} (π : Q ⟶ Y) [IsFinite π] [Etale π]
@@ -480,8 +479,7 @@ end FiniteLocallyConstant
 constant sheaf `M` on the small étale site of `Y` is the sheaf torsor of an `M`-torsor: `P` is a
 finite locally constant sheaf of sets, hence represented by a finite étale `Y`-scheme `Q`
 (`AlgebraicGeometry.Scheme.isFiniteLocallyConstant_yoneda_and_exists_iso`, blueprint
-`lemma-weil-pbc-finite-locally-constant-etale-equivalence`), on which the action of `M` lifts.
-(blueprint: `thm-galois-lc-etale`, `sbc-prop-torsors-h1`) -/
+`lemma-weil-pbc-finite-locally-constant-etale-equivalence`), on which the action of `M` lifts. -/
 theorem exists_toSheafTorsor_equiv
     (P : Sheaf.Torsor ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
       (AddCommGrpCat.of M))) :
@@ -497,16 +495,14 @@ lemma surjective_quotientToSheafTorsor : Function.Surjective (quotientToSheafTor
   exact ⟨⟦t⟧, Quotient.sound ht⟩
 
 /-- **The class map is bijective.** The canonical map from isomorphism classes of `M`-torsors over
-`Y` to `H¹(Y_ét, M)` is a bijection.
-(blueprint: `sk-prop-input-torsors`) -/
+`Y` to `H¹(Y_ét, M)` is a bijection. -/
 theorem bijective_classH1 : Function.Bijective (classH1 M Y) :=
   (Sheaf.Torsor.classH1 _ terminalIsTerminal).bijective.comp
     ⟨injective_quotientToSheafTorsor, surjective_quotientToSheafTorsor⟩
 
 variable (M Y) in
 /-- The canonical bijection `AlgebraicGeometry.Scheme.EtaleTorsor.classH1` between isomorphism
-classes of `M`-torsors over `Y` and `H¹(Y_ét, M)`.
-(blueprint: `sk-prop-input-torsors`) -/
+classes of `M`-torsors over `Y` and `H¹(Y_ét, M)`. -/
 noncomputable def classH1Equiv :
     Quotient (EtaleTorsor.setoid M Y) ≃ Sheaf.H
       ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of M)) 1 :=
@@ -537,7 +533,7 @@ theorem exists_sheafTorsor :
     fun t ↦ (t.nonempty_toSheafTorsor_sheaf_obj_iff terminalIsTerminal).symm⟩
 
 variable (M Y) in
-/-- Blueprint `sk-prop-input-torsors`: Torsors and étale H^1
+/-- Torsors and étale H^1
 
 For a scheme `Y` and a finite abelian group `M` the isomorphism classes of `M`-torsors on
 the small étale site of `Y` are in canonical bijection with the first sheaf cohomology

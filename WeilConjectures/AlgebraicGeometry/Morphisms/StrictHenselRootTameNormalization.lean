@@ -106,30 +106,8 @@ private theorem normalization_restrict_iso_hom_comp
   rfl
 
 /-- The pulled-back cover has a finite normalization etale near the divisor generic point.
-Source: Stacks Project, Tag 0EYG, root-extension paragraph, Tag 0EYH
-(pione-lemma-extend-tame-covering-normal), Tag 09EB and Tag 0BRM (lemma-abhyankar).
-(blueprint: lem-sbc-strict-hensel-root-tame-normalization)
-
-Proof: Identify the original open with D(f) using beta and its projection identity.
-After passing to H, connected generic components of the finite G-torsor have
-Galois groups which are stabilizer subgroups of G. The Galois degree formula gives
-ramification and residue degrees dividing their orders, hence dividing |G|.
-Invertibility of |G| excludes inseparable residue degrees and wild ramification.
-The nonunit equation cuts out a regular local divisor in H. Its height-one local
-ring is a DVR with uniformizer g. The root extension has ramification index |G|:
-the root is regular and its quotient is the regular domain H/(g). Abhyankar's
-lemma therefore kills each component's ramification index, with separable residue
-extensions. The pulled-back cover is still tame, by flat base change of tameness.
-Normalize N in this cover, component by component. Tag 0EYH makes this morphism
-finite locally free without excellence, and normality identifies its restriction
-with the cover on V. This identification gives zeta over V, including the stated
-projection equation. The normalization is etale above the divisor generic point
-by the DVR computation. The supplied regular integral Cartier divisor has the
-same support as the root divisor; both are reduced, so their generic points agree.
-Since N is Noetherian, the finite normalization is finitely presented. Its nonetale
-locus is closed; its image is closed under the finite morphism and omits j(eta).
-The complement of this image is the required target open O. No purity or global
-etaleness is used, and no arbitrary normalization data are defined from this theorem. -/
+Source: Stacks Project, Tag 0EYG, root-extension paragraph, Tag 09EB and Tag 0BRM (lemma-abhyankar).
+-/
 theorem GaloisCover.strict_hensel_root_tame_normalization
     {L U : Scheme.{u}} (i : U ⟶ L)
     (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)

@@ -50,20 +50,7 @@ private theorem fractionRing_away_uniformizer
 /-- An affine smooth trait neighborhood identifies its generic fibre with the principal
 open of the image of a specified uniformizer.
 
-Source: Stacks Project, Tag 0EYJ, first paragraph of the proof.
-(blueprint: lem-sbc-smooth-trait-affine-generic-open)
-
-Proof: Choose an affine open neighborhood of x in L, write it as Spec R using its
-ring of sections, and let phi be its open immersion into L. The composite to Spec A
-induces the A-algebra structure on R. Smoothness is local on the source, so R is a
-smooth A-algebra. The point x lifts through the affine isomorphism. The complement
-of the closed point of a DVR is Spec K, and it equals D(pi) for every uniformizer pi.
-Pull back this equality along Spec R to Spec A. Its inverse image is D(pi_R), since
-inverse images of basic opens are basic opens of the image of the element. The
-universal property of this open subscheme gives the displayed isomorphism of the
-pullback with D(pi_R), over Spec R. An open immersion is etale. This construction
-also works when x lies over the generic point: pi_R is then a unit after shrinking,
-and the principal open is all of Spec R. No torsor or group is used. -/
+Source: Stacks Project, Tag 0EYJ, first paragraph of the proof. -/
 theorem smooth_trait_affine_generic_open
     (A K : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A]
     [Field K] [Algebra A K] [IsFractionRing A K]

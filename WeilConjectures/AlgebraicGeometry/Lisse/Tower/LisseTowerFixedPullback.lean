@@ -239,19 +239,7 @@ private def finiteSheafPullback
 canonical composite coefficient identification. No derived object, tower, etale
 comparison, or chosen marking occurs here.
 
-Source: Stacks Project, Modules on Sites, Tags 03CY, 03D8 and 03DA.
-(blueprint: lem-weil-pbc-lisse-tower-fixed-pullback).
-
-Proof: the two functors are left adjoints. Restriction of a module sheaf to the
-constant scalar sections is right adjoint to its associated-module-sheaf realization.
-On the right adjoints, direct image evaluates the same sections at base changed
-objects. The constant scalar maps are compatible with the inverse-image compositor:
-transpose through the ring inverse-image adjunction, use its unit composition law,
-and the naturality of the constant-section map. Thus the identity on sections is
-linear for the original finite quotient ring. Restriction along the bijective map
-from that quotient to the completion quotient identifies the same right adjoints
-for the displayed fixed coefficients. Uniqueness of left adjoints gives the stated
-natural isomorphism. This includes empty schemes and zero coefficient rings. -/
+Source: Stacks Project, Modules on Sites, Tags 03CY, 03D8 and 03DA. -/
 theorem lisseTower_fixed_sheaf_pullback
     {X T Z : Scheme.{u}} (a : Z ⟶ T) (b : T ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) :

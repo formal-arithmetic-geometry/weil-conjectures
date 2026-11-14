@@ -103,8 +103,7 @@ private theorem intrinsicTransportAux
     exact (e.isZero_iff).2 ((hzero _).2 (h N i hi))
 
 /-- The intrinsic coefficient realization transports the standard pro-etale Tor predicate.
-Source: Stacks Project, Tags 00YV, 06YS, 06YU and 08FZ
-(blueprint: lem-exc-intrinsic-tor-amplitude-transport). -/
+Source: Stacks Project, Tags 00YV, 06YS, 06YU and 08FZ. -/
 theorem intrinsic_hasProEtaleTorAmplitude_iff_torAmplitudeIn
     (A : Type u) [CommRing A] [Finite A]
     (T : Scheme.{u}) (a b : ℤ) (hab : a ≤ b)

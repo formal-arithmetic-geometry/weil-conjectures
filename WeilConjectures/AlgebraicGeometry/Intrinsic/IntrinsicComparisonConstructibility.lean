@@ -15,8 +15,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantModul
 import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-! The bounded constructibility component of finite-coefficient comparison.
-Source: blueprint `lem-sf-comparison-tor-amplitude`, constructibility clause
-(blueprint: lem-sf-intrinsic-comparison-constructibility).
 
 Proof plan: use exactness of intrinsic comparison to identify homology with the
 comparison pullback of each étale homology sheaf; transport constructibility across
@@ -28,15 +26,7 @@ set_option autoImplicit false
 universe u
 open CategoryTheory AlgebraicGeometry
 namespace AlgebraicGeometry
-/-- Exact comparison preserves bounded constructibility.
-Source: blueprint `lem-sf-comparison-tor-amplitude`, step 4, constructibility clause
-(blueprint: lem-sf-intrinsic-comparison-constructibility).
-
-Proof: exactness commutes comparison with every homology functor. A finite interval
-containing the nonzero étale homology also contains the nonzero comparison homology.
-Restrict intrinsic homology to constant scalars. The sheafification unit identifies
-this restriction with fixed-coefficient inverse image. Constructibility is preserved
-by that inverse image and is invariant under the two isomorphisms. -/
+/-- Exact comparison preserves bounded constructibility. -/
 theorem intrinsicComparison_boundedConstructible
     (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hlp : l ≠ D.p)
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

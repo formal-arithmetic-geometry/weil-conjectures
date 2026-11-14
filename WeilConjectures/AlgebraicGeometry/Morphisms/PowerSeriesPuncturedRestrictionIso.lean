@@ -15,8 +15,7 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 /-! Categorical form of the finite thickening restriction comparison.
 
-Source: Stacks Project, Tag 0EY9.
-(blueprint: lem-sbc-power-series-punctured-thickening-restriction-iso)
+Source: Stacks Project, Tag 0EY9
 -/
 
 @[expose] public section
@@ -135,11 +134,6 @@ private theorem isIso_inclusion_c_of_depth_two
 
 /-- The canonical map from a finite power-series thickening to its punctured
 restriction is an isomorphism.
-
-Proof: The finite monomial basis identifies the quotient thickening sections
-with the quotient ring by depth-two Hartogs; this identification is canonical.
-(source: Stacks Project, Tag 0EY9;
-(blueprint: lem-sbc-power-series-punctured-thickening-restriction-iso)
 -/
 theorem isIso_powerSeries_punctured_thickening_restriction
     (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]

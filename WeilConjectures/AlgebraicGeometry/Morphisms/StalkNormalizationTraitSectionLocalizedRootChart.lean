@@ -43,37 +43,7 @@ It does not identify that localization with the whole root algebra or assert tha
 canonical map into the whole root algebra is local.
 
 Source: Stacks Project, Tags 0EYH and 0EYI, proof before parts (1) and (2),
-and Tag 0EYJ, the trait reduction.
-(blueprint: lem-sbc-stalk-normalization-trait-section-localized-root-chart)
-
-Proof: The points of the local trait map to generalizations of s. Minimality of s
-outside U makes the inverse image of U its generic point. Smoothness gives a regular
-effective Cartier closed fibre. For each connected torsor component the ramification
-indices and inseparable residue degrees divide its stabilizer order, hence the
-invertible order of G. Thus the generic cover is tame. Apply 0EYH to an affine etale
-neighborhood of the image of x, with a common equation f for that closed fibre and
-positive root exponents. Normalization commutes with localization and etale base
-change, so the chart describes the concrete pullback of the normalization in the
-statement. Choose a point above x and its root factor. Localize the base chart at
-its image to obtain the local ring R, with f in its maximal ideal. The root point
-lies over this closed base point; since the root algebra is finite integral over R,
-its prime P is maximal. Its local ring is E = D_P. The etale chart induces a local
-flat stalk map beta from B to E. The etale map on base stalks extends the original
-base maximal ideal to the maximal ideal of R, giving the displayed ideal equality
-in E. No identification of E with D is made here.
-
-Pull the same affine neighborhood back to the trait section and localize at a
-point above its closed point with the chosen image in the chart. This local ring
-A is an unramified DVR extension. Because the section pulls the closed fibre back
-to the reduced closed point, f maps to a generator varpi of its maximal ideal.
-Take its fraction field K and the unit pi given by the nonzero image of varpi.
-The generic section fibre of the root chart is a finite disjoint union of
-Spec K[T]/(T^e_i-pi). The chosen factor is open. Compatibility of normalization
-with the generic restriction identifies this inclusion with g into the pullback
-of Z, and preserves the projection to Spec K. This construction precedes, and
-uses neither, the rational-point and splitting hypotheses in 0EYI(1) and (2).
-Empty covers have no x, and exponents are positive; no degenerate root polynomial
-is used. All witnesses occur only in this theorem's existential conclusion. -/
+and Tag 0EYJ, the trait reduction. -/
 theorem GaloisCover.stalk_normalization_trait_section_localized_root_chart {S C : Scheme.{u}}
     [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]

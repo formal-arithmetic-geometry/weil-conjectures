@@ -176,24 +176,7 @@ private noncomputable def scalarComplete_model (W : Scheme.{u}) :
     (pbcScalarCoefficientMap l E F i W) hinv).symm
 
 /-- Scalar tensor carries the output of the source completion reflector to a complete object.
-Source: Stacks Project, Tags 099B and 0A0E; the finite-free scalar argument of
-lem-weil-pbc-finite-free-completion-transport, steps 2--3.
-(blueprint: lem-pbc-scalar-completed-object-complete).
-
-Proof: transport the completed coefficient map through pbcCompletedComparison, which
-is fixed on every finite quotient. The target integer ring is finite free over the
-source integer ring; the same finite basis, applied to continuous sections and then
-to the quotient limit, makes the target coefficient sheaf finite free. Restricting
-its derived scalar extension gives a finite direct sum of the original complex.
-The source completion output is intrinsically complete by the reflector property.
-The complete subcategory is closed under finite sums, including the empty sum.
-Exact scalar restriction identifies the source-parameter Koszul tower with the
-Koszul tower for its image in the target ring. This image is a unit times a positive
-power of the target uniformizer. The two principal ideals therefore have cofinal
-powers, giving the same local derived completeness predicate by the unit-power
-criterion. Transport back through the normalized coefficient presentation. This
-proves precisely target completeness of scalar tensor of the completion output;
-no scalar/completion comparison is used. -/
+Source: Stacks Project, Tags 099B and 0A0E. -/
 theorem pbcScalarCompletedObjectComplete (W : Scheme.{u})
     (K : PbcCompletedDerived W (pbcIntegralDatum l E)) :
     PbcIsIntrinsicallyComplete W (pbcIntegralDatum l F)

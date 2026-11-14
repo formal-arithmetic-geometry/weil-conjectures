@@ -53,20 +53,7 @@ private theorem coefficientNaturality {X Y : Scheme.{u}} (g : Y ⟶ X)
 /-- Ordinary restriction of scalars commutes with the constructed small-site
 transport. This comparison involves no derived functor or local model predicate.
 
-Source: Stacks Project, Modules on Sites, Tags 03CY and 03D8; Sites, Tag 03A0.
-(blueprint: lem-weil-pbc-relative-finite-scalar-restriction)
-
-Proof: the canonical constant-sheaf comparison for the equivalence AsSmall is
-natural in the coefficient ring. The inverse-image constant-section comparison is
-natural as well: apply the sheafification adjunction to its defining map and use
-naturality of the constant-presheaf sheafification unit and inverse-image counit.
-Their inverses and composites therefore give a commutative square between the
-transported native inverse-image coefficient map and the actual constant map on
-the small site. For a module sheaf F, the two functors have identical additive
-sections and restriction maps. The identity map on each section is scalar-linear
-by this coefficient square, and these identity maps define a natural isomorphism.
-Its inverse is the identity on the same sections. The construction includes the
-zero ring and empty slices because it only uses the adjunction and naturality. -/
+Source: Stacks Project, Modules on Sites, Tags 03CY and 03D8; Sites, Tag 03A0 -/
 theorem relativeFiniteScalarRestriction {X Y : Scheme.{u}} (g : Y ⟶ X)
     {B R : Type (u + 1)} [CommRing B] [CommRing R] (f : B →+* R) :
     Nonempty ((pbcRestrict ((adicTowerInverseImage g).map

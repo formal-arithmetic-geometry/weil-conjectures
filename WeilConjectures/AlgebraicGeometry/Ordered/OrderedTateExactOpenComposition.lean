@@ -169,9 +169,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # Composition of exact ordinary restriction of the ordered Tate coefficient
 
-Source: diagonal-dualizing proof, combining paragraph; the normalized finite-line
-transport of def-asd-ordinary-finite-p1-arrows, and Stacks 06XS.
-(blueprint: lem-pur-ordered-tate-exact-open-composition).
+Source: and Stacks 06XS.
 -/
 
 @[expose] public noncomputable section
@@ -743,9 +741,7 @@ private lemma coefficient_comp (A : Type (u + 1)) [CommRing A] (N : ℕ)
 
 /-- The specified ordered Tate transport in exact ordinary restriction coordinates.
 This only inserts the canonical exact-to-left-derived comparison before the existing
-transport; it makes no new choice.
-Source: def-amb-vector-integration-charts and Stacks 06XS.
-(blueprint: lem-pur-ordered-tate-exact-open-composition). -/
+transport; it makes no new choice. -/
 def orderedTateExactPullback (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     {T S : Scheme.{u}} (j : T ⟶ S) (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ) :=
@@ -833,30 +829,7 @@ private lemma open_comp_eq (A : Type (u + 1)) [CommRing A] (X : Scheme.{u})
 
 /-- Exact ordinary Tate transport respects a pair of nested opens. This concerns
 only the coefficient object, without a dualizing object, a site comparison or an
-arbitrary local arrow.
-Source: latest blueprint sec-smooth-purity/sk-prop-sp-orientation/
-thm-pur-diagonal-dualizing-object.proof.md, combining/canonicity paragraph;
-def-amb-vector-integration-charts and def-asd-ordinary-finite-p1-arrows.
-(blueprint: lem-pur-ordered-tate-exact-open-composition).
-
-Proof: induct on d in the defining ordered tensor power. For d=0 the transport
-is the constant-sheaf pullback comparison in degree zero. Its adjoint is the
-identity on each constant coefficient, so its composition equation is the
-constant-sheaf unit equation. At a successor, expand the recursive coefficient
-transport once. The derived tensor pullback composition equation separates the
-previous coefficient and the shifted finite Tate line. Apply the induction
-hypothesis to the former. For the latter, first compose the roots comparisons.
-After their monomorphic inclusions into the multiplicative-group sheaf, both
-maps are the same canonical pullback-to-units map. Cancel the inclusion. The
-line-normalization equation now identifies both adjoint line maps on every pure
-coefficient/root generator. Those generators determine a map from the tensor
-presentation of the line, so the line maps agree. Apply degree-zero realization
-and the shift comparison to this equation. Naturality of the exact-to-derived
-comparison converts the left-derived compositor into openComp. Finally use
-homOfLE_ι to identify the composite open inclusion with the smaller inclusion.
-Reassemble the two ordered tensor factors. There are no permutations or signs.
-The same unit equations include d=0, empty opens and the zero coefficient ring;
-no nonemptiness, finiteness or noetherian hypothesis enters this calculation. -/
+arbitrary local arrow. -/
 theorem orderedTateExactOpenComposition (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     (X : Scheme.{u}) (hX : IsUnit (N : Γ(X, ⊤))) (d : ℕ)

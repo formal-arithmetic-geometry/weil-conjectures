@@ -126,9 +126,7 @@ import WeilConjectures.AlgebraicGeometry.IntegralResidueDerivedMonoidal
 
 /-! # Normalized quotient tensors under the section equivalence
 
-Source: blueprint main-20261015, integral proper-base-change proof, paragraph (3);
-Stacks Project, Tags 03EK, 03EL, 06YY, 07A4 and 07A6
-(blueprint: def-sfb-quotient-section-tensor-data).
+Source: Stacks Project, Tags 03EK, 03EL, 06YY, 07A4 and 07A6.
 
 The helpers record the representative normalization, the scalar realization data,
 and the tensor, pullback and adjunction comparison equations.
@@ -172,12 +170,12 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   (a : Λ ⟶ Λ') [IsMonHom a]
 
 /-- The actual section-ring quotient map, with the site's Hom universe retained.
-Source: Stacks 03EL (blueprint: def-sfb-quotient-section-tensor-data). -/
+Source: Stacks 03EL. -/
 abbrev sectionQuotient (T : Scheme.{u}) :=
   CondensedRing.sectionRingMap T (coefficientMap a T)
 
 /-- A universal sectionwise scalar-extension model from the recorded change-of-rings API.
-Source: Stacks 06YY (blueprint: def-sfb-quotient-section-tensor-data). -/
+Source: Stacks 06YY. -/
 abbrev SectionModel (T : Scheme.{u})
     [HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules Λ T)]
     [HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules Λ' T)] :=
@@ -185,8 +183,7 @@ abbrev SectionModel (T : Scheme.{u})
     (sectionQuotient a T)
 
 /-- The ordinary scalar-unit normalized tensorator, totalized with the signed differential.
-Source: Stacks 03EL and 07A4
-(blueprint: def-sfb-quotient-section-tensor-data). -/
+Source: Stacks 03EL and 07A4. -/
 def totalScalar (T : Scheme.{u})
     (P Q : CochainComplex (Modules Λ T) ℤ) :
     ((extension a T).mapHomologicalComplex (.up ℤ)).obj (P ⊗ Q) ⟶
@@ -199,7 +196,7 @@ def totalScalar (T : Scheme.{u})
 /-- Normalization on every flat-term K-flat pair by the actual localization counits.
 The ordinary tensorator is the balancing map (u tensor v) tensor s to
 (u tensor 1) tensor (v tensor s), rather than a freely chosen isomorphism.
-Source: Stacks 07A4 (blueprint: def-sfb-quotient-section-tensor-data). -/
+Source: Stacks 07A4. -/
 def TensorNormalized (T : Scheme.{u})
     (b : Functor.uncurry.obj (CondensedRing.derivedTensor Λ T) ⋙
         D a T ≅
@@ -223,8 +220,7 @@ def TensorNormalized (T : Scheme.{u})
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The regular scalar unit localized in degree zero, using multiplication in the quotient.
-Source: Stacks 03EL and 07A4
-(blueprint: def-sfb-quotient-section-tensor-data). -/
+Source: Stacks 03EL and 07A4. -/
 def scalarRegularUnit (T : Scheme.{u}) :
     (D a T).obj
         (DerivedCategory.Q.obj ((CochainComplex.singleFunctor _ 0).obj (𝟙_ (Modules Λ T)))) ⟶
@@ -245,8 +241,7 @@ variable [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ T)]
 /-- The ordinary and derived scalar comparisons, normalized on section generators and
 by the universal localization counits. The target is an actual sectionwise extension
 model, so c is a map of quotient-module sheaves, retaining the quotient action.
-Source: Stacks 03EK, 03EL, 06YY
-(blueprint: def-sfb-quotient-section-tensor-data). -/
+Source: Stacks 03EK, 03EL, 06YY. -/
 structure ScalarSectionData (T : Scheme.{u}) where
   model : SectionModel a T
   ordinary : QuotientChange.extension a T ⋙
@@ -257,8 +252,7 @@ structure ScalarSectionData (T : Scheme.{u}) where
 
 /-- The scalar section comparisons are fixed on scalar-unit generators and by the
 localization counits. In particular the quotient action is retained.
-Source: Stacks 03EL, 06YY
-(blueprint: def-sfb-quotient-section-tensor-data). -/
+Source: Stacks 03EL, 06YY. -/
 def ScalarSectionNormalized (T : Scheme.{u}) (c : ScalarSectionData a T) : Prop :=
   (∀ (M : Modules Λ T) (W : T.ProEtᵒᵖ) (m : M.X.obj.obj W),
     (((c.ordinary.hom.app M) ≫ eqToHom (c.model.obj_eq _)).val.app W)
@@ -285,7 +279,7 @@ def ScalarSectionNormalized (T : Scheme.{u}) (c : ScalarSectionData a T) : Prop 
             (Iso.refl ((equivalence Λ T).functor ⋙ c.model.E)) (.up ℤ)).inv.app P)
 
 /-- The derived tensor bifunctor before scalar extension.
-Source: Stacks 07A4 (blueprint: def-sfb-quotient-section-tensor-data). -/
+Source: Stacks 07A4. -/
 abbrev TensorIso (T : Scheme.{u}) :=
   Functor.uncurry.obj (CondensedRing.derivedTensor Λ T) ⋙ D a T ≅
     ((D a T).prod (D a T)) ⋙ Functor.uncurry.obj (CondensedRing.derivedTensor Λ' T)
@@ -293,8 +287,7 @@ abbrev TensorIso (T : Scheme.{u}) :=
 set_option backward.isDefEq.respectTransparency false in
 /-- The scalar regular unit in the derived monoidal category, using its actual
 homotopy-localization unit and the ordinary multiplication unit.
-Source: Stacks 03EL, 07A4
-(blueprint: def-sfb-quotient-section-tensor-data). -/
+Source: Stacks 03EL, 07A4. -/
 def derivedScalarUnit (T : Scheme.{u}) :
     (D a T).obj (𝟙_ (DerivedCategory (Modules Λ T))) ⟶
       𝟙_ (DerivedCategory (Modules Λ' T)) :=
@@ -313,8 +306,7 @@ def derivedScalarUnit (T : Scheme.{u}) :
     inv (Functor.LaxMonoidal.ε (DerivedCategory.Qh (C := Modules Λ' T)))
 
 /-- The tensor comparison has the regular scalar unit and the tensor constraints.
-Source: Stacks 03EL, 07A4
-(blueprint: def-sfb-quotient-section-tensor-data). -/
+Source: Stacks 03EL, 07A4. -/
 def UnitCondition (T : Scheme.{u}) (b : TensorIso a T) : Prop :=
   IsIso (scalarRegularUnit a T) ∧ IsIso (derivedScalarUnit a T) ∧
     TensorConstraintCondition (D a T)
@@ -327,7 +319,7 @@ def UnitCondition (T : Scheme.{u}) (b : TensorIso a T) : Prop :=
 
 /-- The actual sheafified scalar generator in the chosen ordinary section model.
 The left-scalar convention s tensor m denotes m tensor s in the statement.
-Source: Stacks 03EL (blueprint: def-sfb-quotient-section-tensor-data). -/
+Source: Stacks 03EL. -/
 def sectionScalarElement (T : Scheme.{u}) (c : ScalarSectionData a T)
     (M : modules Λ T) (W : T.ProEtᵒᵖ) (m : M.val.obj W)
     (s : (ring Λ' T).obj.obj W) : (c.model.E.obj M).val.obj W :=
@@ -344,8 +336,7 @@ set_option backward.isDefEq.respectTransparency false in
 The ordinary map is fixed on every sheafified pure scalar tensor. On every flat-term
 K-flat pair its signed total, specified on each (i,j) summand, computes barB through
 the model's own universal counit and the fixed section tensor localization maps.
-Source: Stacks 03EK, 03EL and 07A4
-(blueprint: def-sfb-quotient-section-tensor-data). -/
+Source: Stacks 03EK, 03EL and 07A4. -/
 def SectionTensorNormalized (T : Scheme.{u}) (c : ScalarSectionData a T)
     (barB : tensor Λ T ⋙ c.model.T ≅
       (c.model.T.prod c.model.T) ⋙ tensor Λ' T) : Prop :=
@@ -389,8 +380,7 @@ def SectionTensorNormalized (T : Scheme.{u}) (c : ScalarSectionData a T)
 /-- The section image of the scalar tensorator, using the fixed tensor comparisons.
 SectionTensorNormalized separately fixes its signed-total balancing normalization
 on all section flat-term K-flat pairs.
-Source: Stacks 03EL, 06YY and 07A4
-(blueprint: def-sfb-quotient-section-tensor-data). -/
+Source: Stacks 03EL, 06YY and 07A4. -/
 def TensorSectionCondition (T : Scheme.{u}) (c : ScalarSectionData a T)
     (b : TensorIso a T)
     (barB : tensor Λ T ⋙ c.model.T ≅
@@ -405,8 +395,7 @@ def TensorSectionCondition (T : Scheme.{u}) (c : ScalarSectionData a T)
 
 /-- The actual pullback tensor transformation and both adjunction structure maps
 become the specified ringed operations under the fixed geometric comparisons.
-Source: Stacks 07A4, 07A6
-(blueprint: def-sfb-quotient-section-tensor-data). -/
+Source: Stacks 07A4, 07A6. -/
 def GeometricCondition
     (B : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj B] [IsCommMonObj B]
     [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules B T)]
@@ -439,8 +428,7 @@ attribute [local semireducible] QuotientChange.L
 and the actual section pullback localization maps and scalar-model counits.
 The ordinary comparison is fixed through the ordinary section equivalences, independently
 of lam or barLam: it carries f inverse (x tensor s) to f inverse x tensor f inverse s.
-Source: Stacks 03EL, 0D6D and 0G7E
-(blueprint: def-sfb-quotient-section-tensor-data). -/
+Source: Stacks 03EL, 0D6D and 0G7E. -/
 def SectionPullNormalized {X Y : Scheme.{u}} (f : X ⟶ Y)
     (cX : ScalarSectionData a X) (cY : ScalarSectionData a Y)
     (barLam : cY.model.T ⋙ derivedPullback Λ' f ≅
@@ -468,8 +456,7 @@ def SectionPullNormalized {X Y : Scheme.{u}} (f : X ⟶ Y)
 /-- Conjugation of the specified scalar/pullback comparison by the same scalar and
 geometric realization maps. SectionPullNormalized separately fixes the ringed
 comparison through the section pullback and scalar-model computation counits.
-Source: Stacks 0D6D, 0G7E, 07A6
-(blueprint: def-sfb-quotient-section-tensor-data). -/
+Source: Stacks 0D6D, 0G7E, 07A6. -/
 def PullSectionCondition {X Y : Scheme.{u}} (f : X ⟶ Y)
     (cX : ScalarSectionData a X) (cY : ScalarSectionData a Y)
     (lam : D a Y ⋙ L Λ' f ≅ L Λ f ⋙ D a X)

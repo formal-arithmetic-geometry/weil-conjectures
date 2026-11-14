@@ -34,8 +34,7 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
 /-- Flat-term computation equations extend to every complex in the derived
 category. The extension is the resolving-class/localization step and is strictly
 weaker than constructing the comparison itself.
-Source: Stacks 06YS and 06YU; localization descent in parent proof step 8.
-(blueprint: lem-sfb-quotient-section-pull-transport-extension).
+Source: Stacks 06YS and 06YU.
 -/
 theorem section_pull_transport_extend_kflat {X Y : Scheme.{u}} (f : X ⟶ Y)
     (cX : ScalarSectionData a X) (cY : ScalarSectionData a Y)

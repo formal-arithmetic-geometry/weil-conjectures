@@ -19,7 +19,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDer
 /-! # Transport of a localized affine structure-image model
 
 Source: Stacks Project, Tags 08FE and 06Z0.
-(blueprint: lem-sc-picard-affine-structure-model-transport).
 -/
 
 @[expose] public section
@@ -87,24 +86,7 @@ private theorem open_single_image
       (DerivedCategory.singleFunctor _ 0).mapIso (coeff.app N))⟩
 
 /-- Transport the localized representation to the spectrum of the affine coordinate ring.
-Source: Stacks Project, Tags 08FE and 06Z0; step 1 of
-lem-sc-picard-affine-projective-base-change.
-(blueprint: lem-sc-picard-affine-structure-model-transport).
-
-Proof: Apply the derived functor of Modules.overEquiv U to the representing
-isomorphism. This cancels the inverse over equivalence in affinePerfectSheafification.
-The exact restriction comparison for derived direct image identifies the other side
-with the direct image from the inverse-image open in X times_S W. The pullback
-universal property identifies that open with X times_S U, preserving both projections.
-Tensor-pullback composition carries the restricted coefficient to the pullback of M
-along the first projection to X. Apply the given trivialization, then the degree-zero
-embedding and direct image, to replace that coefficient by the structure module.
-Finally transport both schemes and their direct-image functors along U iso Spec R;
-the tensor-unit comparison preserves the structure module. The definition of
-affinePerfectSheafification identifies its transported complex with tilde P.
-Compose these isomorphisms. No flatness or K-flatness is used: restriction and
-transport along isomorphisms are exact. The construction also applies to the empty
-open, whose sheaf category is zero, and does not require boundedness of P. -/
+Source: Stacks Project, Tags 08FE and 06Z0. -/
 theorem picard_affine_structure_model_transport
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

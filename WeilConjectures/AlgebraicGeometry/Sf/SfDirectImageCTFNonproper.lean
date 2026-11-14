@@ -13,10 +13,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImage
 
 /-!
 # Direct image and finite Tor amplitude without properness
-
-Source: literature/blueprint/master/blueprint/sec-six-functors/
-`sk-thm-sf-direct-image-tor-amplitude/cor-sf-direct-image-ctf-nonproper.md`
-(blueprint: proposition-six-operations-dctf--2).
 -/
 
 @[expose] public section
@@ -55,18 +51,6 @@ private theorem hasTorAmplitudeIn_iff_torAmplitudeIn
 /-- For finite coefficients over the fixed algebraic closure of a finite field, a separated
 finite-type direct image preserves bounded constructibility and increases a Tor interval by at
 most twice the source dimension.  No properness or compactification is assumed.
-
-Source: literature/blueprint/master/blueprint/sec-six-functors/
-`sk-thm-sf-direct-image-tor-amplitude/cor-sf-direct-image-ctf-nonproper.md`, node order 2191
-(blueprint: proposition-six-operations-dctf--2).
-
-Proof plan: specialize the global finite-field étale direct-image vanishing statement to the
-coefficient ring `A = O_E / ϖ_E^n O_E`, obtaining the uniform bound `2 * d` for all module
-sheaves.  Apply the finite-Tor direct-image theorem with this bound.  Its hypotheses are exactly
-the finite-field datum, the prime inequality, the finite extension and positive coefficient level,
-finite type of `X` and `Y`, separated finite type of `f`, the dimension bound, and the bounded
-constructible input with Tor amplitude `[a,b]`.  The theorem yields bounded constructibility of
-`Rf_* K` and Tor amplitude `[a,b+2d]`; neither step assumes properness or a compactification.
 -/
 theorem directImageCTFNonproper
     (D : WeilConjectures.FiniteFieldDatum.{u})

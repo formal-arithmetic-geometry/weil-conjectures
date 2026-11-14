@@ -21,7 +21,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteEtaleOpenIntegralClosur
 # Finiteness of the normalization over a stalk
 
 Source: Stacks Project, Tag 0EYJ, proof of the local claim.
-(blueprint: lem-sbc-stalk-normalization-finite)
 -/
 
 @[expose] public section
@@ -35,23 +34,8 @@ namespace AlgebraicGeometry.Scheme
 set_option backward.isDefEq.respectTransparency false in
 /-- Finiteness of the concrete normalization at a generic boundary point.
 
-Source: Stacks Project, Tag 0EYJ (pione-lemma-extend-covering), local claim;
-Tags 0EYG, 0EYH (tame normalization) and 0EY6 (depth-two extension).
-(blueprint: lem-sbc-stalk-normalization-finite)
-
-Proof: If C is empty, its local pullback is empty and any map into it is an
-isomorphism, hence finite. Otherwise smooth connected generic geometry gives
-integrality of C and integral closedness of its stalks. The quasi-compact smooth
-morphism over the Noetherian S makes C Noetherian. For every affine open V of C,
-finiteEtale_open_integralClosure_finite makes the concrete normalization algebra
-finite over Gamma(C,V). The normalization's affine chart isomorphism identifies
-its structure map with this finite algebra map followed by an isomorphism.
-Thus the global relative normalization is finite, and finiteness is preserved
-by pullback to the local family at s. The affine algebra lemma uses the trace
-bound of Stacks 032L; its only remaining geometric input is the injection of
-sections of the open cover into its finite etale generic algebra. No action,
-invertible group order, or minimal boundary condition enters this finiteness
-argument. -/
+Source: Stacks Project, local claim; Tags 0EYG, 0EYH (tame normalization) and 0EY6 (depth-two
+extension). -/
 theorem stalk_normalization_finite {S C : Scheme.{u}} [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]
     (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))

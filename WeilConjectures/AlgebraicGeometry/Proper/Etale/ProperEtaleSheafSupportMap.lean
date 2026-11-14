@@ -116,16 +116,7 @@ attribute [local irreducible] lowerStar etaleLowerShriek openImmersionLowerShrie
 
 /-- Proper support constructs a sheaf map from proper pushforward followed by etale sum
 extension to any compactification, normalized by the inclusion in ordinary direct image.
-Source: Stacks Project, Tags 0F7B and 0F4L.
-(blueprint: lem-pur-proper-etale-sheaf-support-map).
-
-Proof in words: identify every compactification candidate with the functor of sections
-with proper support, using the open and proper comparison isomorphisms and its compositor.
-For the proper first map, the support inclusion is invertible. Map the etale sum extension
-into the chosen etale candidate by its graph map, then into proper support. Compose the two
-support functors and return through the isomorphism for the final compactification. The
-support-compositor normalization, its naturality, and the graph-map normalization give the
-displayed equation. The construction works also for zero sheaves and empty schemes. -/
+Source: Stacks Project, Tags 0F7B and 0F4L. -/
 theorem properEtaleSheafSupportMap_exists
     (A : Type (u + 1)) [CommRing A]
     {W V Y : Scheme.{u}}

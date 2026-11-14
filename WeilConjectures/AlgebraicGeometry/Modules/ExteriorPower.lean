@@ -12,7 +12,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.ExteriorPower
 /-!
 # Exterior powers of sheaves of modules on a scheme
 
-For a sheaf of `𝒪_X`-modules `M` and `r : ℕ`, the exterior power `⋀ʳ M` is the sheafification
+For a sheaf of `𝒪_X`-modules `M` and `r: ℕ`, the exterior power `⋀ʳ M` is the sheafification
 of the presheaf of modules `U ↦ ⋀ʳ_{𝒪(U)} M(U)` (`PresheafOfModules.exteriorPower`).
 
 ## Main declarations
@@ -23,8 +23,6 @@ of the presheaf of modules `U ↦ ⋀ʳ_{𝒪(U)} M(U)` (`PresheafOfModules.exte
 - `AlgebraicGeometry.Scheme.Modules.isFreeGenerator_wedge`: if `M` is locally free on `U` with
   basis `m₁, …, m_r` (on a basis of the topology of `U`), then `m₁ ∧ ⋯ ∧ m_r` is a free generator
   of `⋀ʳ M` on `U`.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`)
 -/
 
 @[expose] public section

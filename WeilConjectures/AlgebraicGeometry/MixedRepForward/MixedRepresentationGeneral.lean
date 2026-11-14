@@ -13,7 +13,7 @@ import WeilConjectures.CategoryTheory.FiniteOpenMixedTensorRepresentativeInverse
 /-!
 # The mixed representative equation for general coefficients
 
-Source: Stacks Project, sites-cohomology.tex, Tag 07A4 (lemma-pullback-tensor-product).
+Source: Stacks Project.
 This is the coefficient-generic form of clause (3) of
 `AlgebraicGeometry.ProEtale.finiteOpenMixedTensorRepresentative`, normalized as in
 `SheafOfModules.OpenTensorNormalization.mixed_representation_normalized`. Stating it for an
@@ -44,8 +44,7 @@ private theorem cochain_tensor_obj_general
 /-- The mixed inverse representative square for general coefficients: clause (3) of
 `finiteOpenMixedTensorRepresentative`.
 
-Proof. Feed `forward_transport_general` to `mixedTensor_inverse_transport`.
-(blueprint: lem-sf-finite-open-mixed-tensor-representative) -/
+Proof. Feed `forward_transport_general` to `mixedTensor_inverse_transport`. -/
 theorem mixed_inverse_transport_general
     (P Q : CochainComplex (Sheaf (ProEt.topology X) A) ℤ) :
     (((j)^*[A].leftDerivedFunctorIsoMapDerivedCategory.inv.app
@@ -99,8 +98,7 @@ theorem mixed_inverse_transport_general
 
 Proof. Expand `mapDerivedCategoryUpperStarDerivedTensorIso` into the derived-tensor map of
 `κ⁻¹`, the inverse tensor comparison and `κ`, identify the derived tensor map with tensoring
-by the identity, and apply `mixed_inverse_transport_general`.
-(blueprint: lem-sf-mixed-representation-normalized) -/
+by the identity, and apply `mixed_inverse_transport_general`. -/
 theorem mixed_representation_general
     (P Q : CochainComplex (Sheaf (ProEt.topology X) A) ℤ) :
     let F := (j)^*[A]

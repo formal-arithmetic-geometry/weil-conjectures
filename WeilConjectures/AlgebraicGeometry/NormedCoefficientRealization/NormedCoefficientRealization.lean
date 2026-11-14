@@ -112,9 +112,7 @@ import WeilConjectures.ConstructibleSheaf.Pullback
 /-!
 # Realization of finite normed coefficient fields
 
-Source: Bhatt--Scholze, The pro-etale topology for schemes, Definition 6.8.1 and
-Remark 6.8.15; the node's algebraic embedding and scalar transport expansion
-(blueprint: lem-sfb-normed-coefficient-realization).
+Source: Bhatt--Scholze, The pro-etale topology for schemes, Definition 6.8.1 and Remark 6.8.15.
 -/
 
 @[expose] public noncomputable section
@@ -129,8 +127,7 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.NormedCoefficientRealization
 
 /-- Postcomposition by a continuous ring map, in the existing universe-sized continuous
-coefficient construction. Source: Bhatt--Scholze, Definition 6.8.1, and the continuous-map
-formula of sk-def-sfb-condensed-ring (blueprint: lem-sfb-normed-coefficient-realization). -/
+coefficient construction. Source: Bhatt--Scholze, Definition 6.8.1. -/
 def condenseMap {T T' : Type u} [TopologicalSpace T] [CommRing T] [IsTopologicalRing T]
     [TopologicalSpace T'] [CommRing T'] [IsTopologicalRing T']
     (φ : T →+* T') (hφ : Continuous φ) :
@@ -144,8 +141,7 @@ def condenseMap {T T' : Type u} [TopologicalSpace T] [CommRing T] [IsTopological
          naturality := fun _ _ _ ↦ rfl }⟩)
 
 /-- The actual termwise inverse scalar restriction for the point-induced coefficient
-isomorphism. Source: the node's proof step 4; Stacks 03CZ
-(blueprint: lem-sfb-normed-coefficient-realization). -/
+isomorphism. Source: Stacks 03CZ. -/
 abbrev transport {Λ Λ' : Profinite.CondensedRing.{u}}
     [IsCommMonObj Λ.X] [IsCommMonObj Λ'.X] (a : Λ ≅ Λ') (Z : Scheme.{u}) :
     DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
@@ -158,8 +154,7 @@ abbrev transport {Λ Λ' : Profinite.CondensedRing.{u}}
         (condensedRingObj Λ'.X Z)).mapDerivedCategory
 
 /-- The canonical inverse-image comparison from the coefficient square induced from the
-point. Source: the node's proof steps 7 and 9; Stacks 03CZ
-(blueprint: lem-sfb-normed-coefficient-realization). -/
+point. Source: Stacks 03CZ. -/
 def pullComparison {Λ Λ' : Profinite.CondensedRing.{u}}
     [IsCommMonObj Λ.X] [IsCommMonObj Λ'.X] (a : Λ ≅ Λ')
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -174,8 +169,7 @@ def pullComparison {Λ Λ' : Profinite.CondensedRing.{u}}
 /-- All the categorical conclusions for one of the two coefficient isomorphisms. The
 comparison is constrained by the actual derived module-adjunction counits and the
 point-induced inverse-image comparison, rather than by a freely chosen adjunction.
-Source: Bhatt--Scholze, Remark 6.8.15; the node's proof steps 4--10; Stacks 03CZ, 010N,
-015F, 09T5 (blueprint: lem-sfb-normed-coefficient-realization). -/
+Source: Bhatt--Scholze, Remark 6.8.15; Stacks 03CZ, 010N, 015F, 09T5. -/
 def IsCoefficientTransport {Λ Λ' : Profinite.CondensedRing.{u}}
     [IsCommMonObj Λ.X] [IsCommMonObj Λ'.X] (a : Λ ≅ Λ') : Prop :=
   (∀ Z : Scheme.{u},
@@ -376,38 +370,7 @@ private theorem transport_property {Λ Λ' : Profinite.CondensedRing.{u}}
 its unit ball and both condensed coefficient presentations induce the specified exact
 unbounded derived equivalences, preserving bounds and stratified local finite presentation.
 
-Source: Bhatt--Scholze, Definition 6.8.1 and Remark 6.8.15; agent expansion recorded in
-the DAG (blueprint: lem-sfb-normed-coefficient-realization).
-
-Proof:
-1. Finite dimension makes E algebraic. Apply the algebraic-closure embedding theorem
-(lem-weil-pbc-algebraic-extension-embeds-algebraically-closed, Stacks 09GU), take E' to be
-the field range of the embedding and transport finite dimension along the algebra
-isomorphism onto it.
-2. Pull back the closure absolute value. Its restriction is the normalized p-adic norm,
-so spectral-norm uniqueness (lem-weil-l-adic-extension-absolute-value) identifies it with
-the supplied norm. This makes the algebra isomorphism and its inverse isometric. The
-membership clause of lem-weil-l-adic-extension-integers-dvr identifies the chosen integer
-subrings with the closed unit balls, so the isometry restricts to the integer rings.
-3. Postcomposition gives the condensed ring isomorphisms. The integer-ring square
-commutes sectionwise because its map is the restriction of the field map.
-4. For the pulled-back invertible coefficient map c, scalar restriction along c is an
-equivalence and Ext_c is isomorphic to Res_(c^-1) (sk-def-sfb-change-of-scalars, Stacks
-03CZ). The exact-functor comparison L(Ext_c) = D(Ext_c)
-(lem-weil-pbc-exact-functor-derived-functor) identifies the derived extension with the
-transport; it is a triangulated equivalence (situation-conventions).
-5. Exact scalar restriction commutes with cohomology and is faithful
-(lem-weil-pbc-exact-functor-complex-cohomology, Stacks 010N), so it preserves and
-reflects every bound.
-6. The scalar-restriction transport of constructible modules
-(lem-weil-pbc-module-constructible-pullback), applied along c and its inverse with the
-scalar-equivalence unit, and the cohomology comparison of step 5 give
-sk-def-sfb-bounded-constructible in both directions.
-7. For f : X → Y let θ be the inverse of the point-induced pullback comparison and β its
-mate under the published derived pullback/pushforward adjunctions. The vertical
-transports are equivalences, so β is invertible (lem-weil-mate-iso-along-equivalences).
-The mate counit identity, precomposed with Lf'^*(β_K^-1), is the displayed counit
-equation for γ = β.
+Source: Bhatt--Scholze, Definition 6.8.1 and Remark 6.8.15; agent expansion recorded in the DAG.
 -/
 theorem normed_coefficient_realization (ℓ : ℕ) [Fact ℓ.Prime]
     (E Ω : Type u) [NormedField E] [NormedField Ω]

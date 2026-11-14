@@ -10,8 +10,6 @@ import all WeilConjectures.CategoryTheory.ScalarLocalization.PbcRationalTranspor
 import WeilConjectures.AlgebraicGeometry.Pbc.PbcExchangeStageSquare
 
 /-! # Scalar compatibility of the actual finite-stage exchange
-
-Source: blueprint main-20261015, proper base change, order 1312, final paragraph.
 -/
 
 @[expose] public noncomputable section
@@ -190,23 +188,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The canonical exchange is a compatible transformation of the composite
 stage families once their comparisons have the canonical normalization. This
-asserts finite-stage compatibility only; it does not construct descended functors.
-Source: blueprint main-20261015, order 1312, final paragraph, using the scalar
-exchange equation of order 1307
-(blueprint: lem-weil-pbc-exchange-compatible-family).
-
-Proof: on each integral full subcategory lift pbcActualCompletedExchange by
-fullness. Rationalize its components; naturality extends from integral maps to
-all localized maps by additivity and the scalar Hom formula. Identify the stage
-functors using hRf, hRf', hLg and hLg'. For E ≤ F, write the Morphism.Hom
-compatibility equation and conjugate both sides by the integral/scalar comparison
-isomorphisms. The four BetaSpec equations replace the four operation comparisons
-by their localized ambient scalar mates. After cancelling consecutive inverse
-normalizations, the equation is exactly pbcScalarCompletedExchange, localized.
-It holds on every integral object, which is every object of the raw rational
-category, and therefore gives the required compatible transformation. The component
-formula is the defining localization formula, transported along the stage-functor
-equalities; proof irrelevance makes it independent of the preservation witnesses. -/
+asserts finite-stage compatibility only; it does not construct descended functors. -/
 theorem pbcExchangeCompatibleFamily
     (f : X ⟶ Y) (f' : X' ⟶ Y') (g : Y' ⟶ Y) (g' : X' ⟶ X)
     (sq : ChosenCartesianSquare g' f' f g)

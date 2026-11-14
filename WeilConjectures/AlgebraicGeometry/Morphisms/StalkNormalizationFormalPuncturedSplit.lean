@@ -33,24 +33,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- Source: Stacks Project, Tag 0EYJ; Tags 0EY6, 0EY9, 0337 and 031S.
-(blueprint: lem-sbc-stalk-normalization-formal-punctured-split)
-
-Proof: Minimality makes the inverse image of U the punctured spectrum of A.
-Relative normalization agrees with PA over this open because PA is finite,
-hence integral, over C_U; smooth base change along the open inclusion gives
-the comparison. Extend the generic G-action to PA by generic
-fibre full faithfulness. The rational section point and its G-translates split
-the generic section cover. Normal generic full faithfulness extends that
-isomorphism and its inverse to the punctured local base, with uniqueness
-checking the inverse identities. The base equation identifies V with the
-punctured-base open of T, and the entire-section equation identifies its zero
-slice with this split punctured section cover. For d positive, power-series
-punctured-section full faithfulness lifts both directions of the splitting
-from the slice; injectivity proves their composites are identities. For d = 0
-the zero slice is all of V. Restriction of the split coproduct commutes with
-this open restriction. This yields the displayed isomorphism over V in the
-chosen orientation. No assertion about the boundary of V is made. -/
+/-- Source: Stacks Project, Tag 0EYJ; Tags 0EY6, 0EY9, 0337 and 031S. -/
 theorem GaloisCover.exists_stalk_normalization_formal_punctured_split {S C : Scheme.{u}}
     [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]

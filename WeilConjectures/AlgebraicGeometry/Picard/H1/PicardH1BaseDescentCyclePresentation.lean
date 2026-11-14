@@ -35,29 +35,7 @@ outgoing differential vector `d`, and a joint degree-one map `b` with injective 
 annihilating `d`. Degree-zero cycles on every smaller open give sections compatibly
 with restriction to the marked fibre. The assertion stops before localizing `b`,
 proving `d = 0`, or lifting scalars.
-Source: Stacks Project, Tag 0BF2, from the perfect models through the joint degree-one map.
-(blueprint: lem-sc-picard-h1-base-descent-cycle-presentation)
-
-Proof: Base change to W and identify the marked residue fields using the immersion.
-The structure-pushforward hypotheses imply faithful flatness of the source and targets;
-therefore the descended finite locally free modules have rank one. Trivialize them on a
-common affine neighbourhood of w, and trivialize the source bundle on the residue fibre.
-Apply perfect direct-image base change and the finite-free residue model to the source
-and target direct images. Shrink so that the models vanish in negative degrees and their
-degree-zero terms have rank one. Use the affine strictly perfect map representative
-theorem to represent the derived pullback maps by chain maps.
-The target degree-zero differentials vanish: their trivializing sections span the
-rank-one terms near w. The joint degree-one residue map is injective by hH, including
-when its source has rank zero or the family is empty. Write d for the source differential
-of 1 and b for the joint
-degree-one map. The chain identities give b d = 0.
-The chosen residue generator and universal structure pushforward identify fibre sections
-additively with κ(w), giving c. On any smaller open V, a scalar annihilated by the restricted
-d is a degree-zero cycle. The complex-to-direct-image comparison realizes this cycle as
-σ. Derived base change identifies its residue with evaluation of the scalar. The canonical
-map from the residue fibre to X_V hits every point above w; pullback composition supplies
-e, and the adjunction unit computes the displayed restriction. These comparisons are
-natural under open restriction, so the same U, d and c work for every V contained in U. -/
+Source: Stacks Project, Tag 0BF2, from the perfect models through the joint degree-one map. -/
 theorem picard_h1_base_descent_cycle_presentation {X S : Scheme.{v}} (f : X ⟶ S) {n : ℕ}
     (Xi : Fin n → Scheme.{v}) (fi : ∀ i, Xi i ⟶ S)
     [Flat f] [IsProper f] [LocallyOfFinitePresentation f]

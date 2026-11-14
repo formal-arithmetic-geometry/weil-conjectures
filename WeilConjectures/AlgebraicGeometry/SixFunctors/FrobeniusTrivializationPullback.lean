@@ -47,9 +47,7 @@ import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
 /-!
 # Pullback naturality of the canonical absolute-Frobenius trivialization
 
-Source: Stacks Project, Tag 0F6W, `lemma-relative-frobenius-weakly-etale`, and the
-DAG proof extending main-20261015 `lem-trf-absolute-frobenius-site.proof.md`
-(blueprint: lem-pur-frobenius-trivialization-pullback).
+Source: Stacks Project, Tag 0F6W.
 -/
 
 @[expose] public section

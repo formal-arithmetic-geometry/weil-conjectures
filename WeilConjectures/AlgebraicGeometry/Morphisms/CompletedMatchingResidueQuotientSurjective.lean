@@ -18,7 +18,6 @@ namespace AlgebraicGeometry.Scheme.CompletionGluingData
 
 /-- The completed comparison is onto after passage to the residue quotient.
 Source: Stacks Project, Tags 0BLH and 05ER.
-(blueprint: lem-sbc-completed-matching-ring-map-residue-quotient-surjective)
 
 The formal gluing comparison identifies the scalar extension of matching sections
 with the completed finite algebra. Reducing this comparison modulo the image of the

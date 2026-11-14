@@ -36,8 +36,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
 
 /-! # Augmented strict reduction tower of ordinary pullback
 
-Source: Stacks Project, Tag 099N, proof of (5), and current blueprint completed-pullback
-reduction, paragraph 2 (blueprint: def-weil-pbc-pulled-reduction-comparison-data).
+Source: Stacks Project, Tag 099N, proof of (5), paragraph 2.
 
 ## Main definitions
 
@@ -63,39 +62,37 @@ variable {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 variable {X Y : Scheme.{t}} (g : X ⟶ Y)
 
 /-- Constant scalar restriction, on the original small site.
-Source: Stacks 099L (blueprint: def-weil-pbc-pulled-reduction-comparison-data). -/
+Source: Stacks 099L. -/
 abbrev res (T : Scheme.{t}) := proEtaleRingRestrictScalars (exchangeScalar d T)
 
 /-- Exact inverse image of constant-coefficient modules.
-Source: Stacks 099N(5) (blueprint: def-weil-pbc-pulled-reduction-comparison-data). -/
+Source: Stacks 099N(5). -/
 abbrev pull := proEtaleRingModulePullback g (exchangeConstantRing Y A)
   (exchangeConstantRing X A) (exchangeConstantIso g A)
 
 /-- Ordinary constant-coefficient pullback after restriction; its exact derived functor
-is N in the statement. Source: Stacks 099N(5)
-(blueprint: def-weil-pbc-pulled-reduction-comparison-data). -/
+is N in the statement. Source: Stacks 099N(5). -/
 abbrev ordinarySource := res d Y ⋙ pull (A := A) g
 
 /-- N, on all ambient objects, without a completeness or boundedness hypothesis.
-Source: Stacks 099N(5) (blueprint: def-weil-pbc-pulled-reduction-comparison-data). -/
+Source: Stacks 099N(5). -/
 def source := (ordinarySource d g).mapDerivedCategory
 
 /-- The pulled-back completed-coefficient strict reduction tower H.
-Source: Stacks 099N(5) (blueprint: def-weil-pbc-pulled-reduction-comparison-data). -/
+Source: Stacks 099N(5). -/
 def tower := completedReductionTower Y d ⋙ completedTowerPullback g d
 
 /-- Ordinary restriction on strict towers, retaining all transitions.
-Source: Stacks 03D7 (blueprint: def-weil-pbc-pulled-reduction-comparison-data). -/
+Source: Stacks 03D7. -/
 abbrev tres (T : Scheme.{t}) := exchangeTowerModuleRes d T
 
 /-- The ordinary strict pulled quotient diagram, before localization.
-Source: Stacks 099N(5) (blueprint: def-weil-pbc-pulled-reduction-comparison-data). -/
+Source: Stacks 099N(5). -/
 abbrev ordinaryReductionTarget := completedReductionModuleTowerFunctor Y d ⋙
   completedTowerModulePullback g d ⋙ tres d X
 
 /-- Zero maps for the entire ordinary strict comparison.
-Source: Stacks 03EL
-(blueprint: def-weil-pbc-pulled-reduction-comparison-data). -/
+Source: Stacks 03EL. -/
 local instance ordinaryReductionTarget_preservesZeroMorphisms :
     (ordinaryReductionTarget d g).PreservesZeroMorphisms where
   map_zero M N := by
@@ -115,8 +112,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 model-site pullback adjunction unit at the transported object, then insert 1.
 The up/down module transports preserve section carriers definitionally, so this
 is the unit of the constructed inverse image, with no choice of an adjunction.
-Source: Stacks 03EK, 099N(5)
-(blueprint: def-weil-pbc-pulled-reduction-comparison-data). -/
+Source: Stacks 03EK, 099N(5). -/
 def insertion (M : reductionModules Y (d.completedRing Y))
     (U : Y.ProEtᵒᵖ) (x : M.val.obj U) :
     ((completedModulePullback g d).obj M).val.obj ((proEtaleBaseChange g).op.obj U) := by
@@ -136,8 +132,7 @@ def insertion (M : reductionModules Y (d.completedRing Y))
 /-- Degreewise scalar insertion as a map of the actual pulled complexes.
 The target is written as the successive two complex functors, retaining their
 already fixed zero-map instances.
-Source: Stacks 06YY
-(blueprint: def-weil-pbc-pulled-reduction-comparison-data). -/
+Source: Stacks 06YY. -/
 def ordinaryComplexComparison
     (s : ordinarySource d g ⟶ completedModulePullback g d ⋙ res d X)
     (P : CochainComplex (reductionModules Y (d.completedRing Y)) ℤ) :
@@ -149,8 +144,7 @@ def ordinaryComplexComparison
 
 /-- The comparison from H on a K-flat completed model to its ordinary pulled quotient
 complex. Its invertibility is asserted only on the specified resolving class below.
-Source: Stacks 06YY, 099N(5)
-(blueprint: def-weil-pbc-pulled-reduction-comparison-data). -/
+Source: Stacks 06YY, 099N(5). -/
 def targetCounit (P : CochainComplex (reductionModules Y (d.completedRing Y)) ℤ) :
     ((tower d g) ⋙ (tres d X).mapDerivedCategory).obj (DerivedCategory.Q.obj P) ⟶
       DerivedCategory.Q.obj
@@ -164,7 +158,7 @@ def targetCounit (P : CochainComplex (reductionModules Y (d.completedRing Y)) �
         ((completedReductionComplexTowerFunctor Y d).obj P))
 
 /-- Exact evaluation commutes with restriction of the entire strict diagram.
-Source: Stacks 03D7 (blueprint: def-weil-pbc-pulled-reduction-comparison-data). -/
+Source: Stacks 03D7. -/
 def evaluationRes (T : Scheme.{t}) (n : ℕ) :
     (tres d T).mapDerivedCategory ⋙
         reductionTowerDerivedEvaluation T (reductionModuleRing T (exchangeConstantRing T A)) n ≅
@@ -176,8 +170,7 @@ def evaluationRes (T : Scheme.{t}) (n : ℕ) :
 
 /-- Rho is Rlim(tau) inverse after the specified restriction/limit comparison. This
 uses the normalized K-injective limit comparison already recorded in the library.
-Source: Stacks 0940, 099N(5)
-(blueprint: def-weil-pbc-pulled-reduction-comparison-data). -/
+Source: Stacks 0940, 099N(5). -/
 def limitComparison
     (τ : source d g ⋙ OrderedExchange.reduction d X ≅
       tower d g ⋙ (tres d X).mapDerivedCategory)

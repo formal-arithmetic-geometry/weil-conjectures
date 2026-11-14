@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.Torsion.TorsionAbelianDirectImageVanish
 /-!
 # Higher direct image bounds from affine etale objects
 
-Source: main-20261015, lemma-uniform-bounds-pro-etale-affines, step 10; Stacks 072W.
-(blueprint: lem-sfb-higher-direct-image-affine-etale-bound)
+Source: Stacks 072W.
 -/
 
 @[expose] public section
@@ -66,21 +65,7 @@ private theorem module_vanishing {X Y : Scheme.{u}} (g : X ⟶ Y) (c : ℕ)
 
 /-- A bound on the absolute torsion cohomology of inverse images of affine etale objects
 bounds higher direct images. No finiteness assumption on the morphism is needed.
-Source: main-20261015, lemma-uniform-bounds-pro-etale-affines, step 10; Stacks 072W.
-(blueprint: lem-sfb-higher-direct-image-affine-etale-bound)
-
-Proof: Compute the higher direct image by the sheafification of the cohomology presheaf
-of derived section evaluation on the base-changed object. Localization of cohomology at
-an object, the equivalence of the etale slice with the small site of that scheme, and
-identification of inverse image with localization restriction identify this cohomology
-with ordinary derived global sections on the fibre product. The pulled-back sheaf is
-torsion. The assumed bound kills it on every affine etale target object. Cover an arbitrary
-etale object by its affine open subschemes, which are themselves etale over the target.
-Every section of the presheaf is therefore locally zero. Every map from that presheaf to
-a sheaf is zero by separatedness; the universal property of sheafification forces its
-identity to vanish. Hence its sheafification, and the higher direct image, are zero.
-The integer degree is positive by c < q, so it is a natural degree. Empty schemes are
-included: the empty covering forces all sections of abelian sheaves there to be zero. -/
+Source: Stacks 072W. -/
 theorem isZero_higherDirectImage_of_affineEtale_cd {X Y : Scheme.{u}} (g : X ⟶ Y)
     (c : ℕ)
     (hc : ∀ {W : Scheme.{u}} (w : W ⟶ Y) [Etale w] [IsAffine W],

@@ -18,7 +18,6 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 /-- Injectivity of the normalization stalk map in the punctured DVR situation.
-(blueprint: lem-sbc-punctured-dvr-normalization-stalk-torsion-free-injective)
 -/
 theorem punctured_dvr_normalization_stalkMap_injective
     {X : Scheme.{u}} [IsLocallyNoetherian X] (U : X.Opens)

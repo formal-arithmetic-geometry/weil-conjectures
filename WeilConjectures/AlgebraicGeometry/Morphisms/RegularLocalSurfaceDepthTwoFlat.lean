@@ -19,8 +19,7 @@ import WeilConjectures.RingTheory.DepthLeSupportDimension
 /-!
 # Flatness of a depth-two finite model over a regular local surface
 
-Source: Stacks Project, Tag 0BMA, dimension-two paragraph, and Tag 00R4.
-(blueprint: lem-sbc-regular-local-surface-depth-two-flat)
+Source: Stacks Project, Tag 0BMA, dimension-two paragraph, and Tag 00R4
 -/
 
 @[expose] public section
@@ -77,25 +76,7 @@ private theorem fibre_dimension_zero {R S : Type u}
 
 /-- A supplied finite extension with boundary depth two is flat over a regular local surface.
 
-Source: Stacks Project, Tag 0BMA, dimension-two paragraph, using miracle flatness (00R4).
-(blueprint: lem-sbc-regular-local-surface-depth-two-flat)
-
-Proof: Over the punctured open the morphism is etale and therefore flat. At a point
-above the closed point, finiteness makes the source stalk Noetherian and its dimension
-at most two. The assumed depth at least two and the depth-dimension inequality force
-its dimension to equal two and make it Cohen-Macaulay. Quasi-finite incomparability
-makes contraction of primes strictly monotone,
-which bounds the source dimension by the target dimension. In the closed-fibre
-quotient every prime contracts to the target maximal ideal; incomparability and
-locality then make every prime the quotient maximal ideal. The quotient is nonzero
-because the map is local, so its Krull dimension equals zero.
-The target closed-point stalk is the given two-dimensional regular local ring.
-Apply miracle flatness to this local homomorphism: the source dimension is the sum
-of the target dimension and the closed-fibre dimension. Thus every boundary stalk
-map is flat as well. Flatness is detected by stalk maps, so the given map is flat.
-If the source is empty there are no stalk maps, and the same criterion is vacuous.
-This argument constructs no extension and does not use purity or assert etaleness
-at the boundary. -/
+Source: Stacks Project, Tag 0BMA, dimension-two paragraph, using miracle flatness (00R4). -/
 theorem flat_of_regular_local_surface_depth_two
     (A : Type u) [CommRing A] [IsRegularLocalRing A]
     (hdim : ringKrullDim A = 2) (U : (Spec (.of A)).Opens)

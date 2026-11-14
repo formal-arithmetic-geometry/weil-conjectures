@@ -37,28 +37,7 @@ namespace AlgebraicGeometry.Scheme
 and the split generic section supplies a root of its uniformizer in an unramified
 trait fraction field.
 
-Source: Stacks Project, Tags 0EYH and 0EYI(2), trait paragraph of 0EYJ.
-(blueprint: lem-sbc-stalk-normalization-trait-section-cyclic-data)
-
-Proof: The inverse image of U in the local trait is its punctured spectrum, by
-minimality of s. The smooth closed fibre is a regular effective Cartier divisor.
-The invertible group order makes the generic cover tame at its codimension-one
-points. Use the tame normal form of 0EYH, and compatibility of integral closure
-with localization and etale base change, to identify the concrete normalization
-with the local chart B[T]/(T^e-f). Choose the chart factor containing x and localize.
-Let D be its local ring and beta the induced local etale map from the normalization
-stalk. It is flat. Modulo the base maximal ideal, the chosen factor is generated
-by the image t of T, with t^e=0; hence its maximal ideal is the sum of the extended
-base maximal ideal and (t). This also gives t^e in that extended ideal.
-Pull the chart back to the section. Transversality makes f a uniformizer pi in an
-unramified extension A' of the trait DVR. Its fraction field K has the normalized
-integer valuation, viewed on K-units as a homomorphism to Multiplicative Z.
-The rational point and its G-translates split the whole generic section fibre;
-this remains split after the unramified base change. Thus the chosen chart factor
-has a nonzero root z in K with z^e=pi. The valuation of pi is one. These are the
-data asserted; no inference that e=1 or descent of ideal equality is made here.
-At an empty fibre there is no x. For an unramified factor one may use e=1 and the
-uniformizer as its coordinate. -/
+Source: Stacks Project, Tags 0EYH and 0EYI(2), trait paragraph of 0EYJ. -/
 theorem GaloisCover.stalk_normalization_trait_section_cyclic_data {S C : Scheme.{u}}
     [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]

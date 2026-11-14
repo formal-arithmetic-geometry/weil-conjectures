@@ -25,19 +25,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- Taking the actual finite double dual preserves a finite locally free restriction.
-Source: Stacks Project, Tag 0583 (localization of Hom) and Tag 0EY6 proof of (1).
-(blueprint: new-affine-double-dual-restriction)
-
-Proof: Noetherianity makes M and its first dual finitely presented. On each
-basic affine open inside W, Hom therefore commutes with localization twice.
-The resulting canonical comparison identifies the restriction of tilde(M**)
-with the sheaf double dual of the restriction of tilde M. Transport the given
-isomorphism to P through the two contravariant dual functors. Evaluation into
-the double dual is an isomorphism for a finite locally free sheaf, as verified
-on finite free trivializations. These canonical local comparisons agree on
-overlaps, so they glue to the stated restriction isomorphism. There is no
-boundary hypothesis and no depth assertion here. The empty open and rank-zero
-locally free modules are included. -/
+Source: Stacks Project, Tag 0583 (localization of Hom) and Tag 0EY6 proof of (1). -/
 theorem affine_double_dual_restriction
     (A : CommRingCat.{u}) [IsNoetherianRing A] (W : (Spec A).Opens)
     (M : ModuleCat.{u} A) [Module.Finite A M]

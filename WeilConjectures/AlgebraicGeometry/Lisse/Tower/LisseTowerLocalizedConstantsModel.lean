@@ -405,8 +405,7 @@ Cohomology on Sites, Tag 06YY.  The proof constructs the ordinary constant-sheaf
 comparison by the constant-sheaf and inverse-image adjunctions, transports scalars
 through the finite coefficient comparison, applies the resulting exact comparison
 termwise to complexes, and localizes.  The construction is natural in every
-algebraic complex and includes zero objects and empty schemes.
-(blueprint: lem-weil-pbc-lisse-tower-localized-constants-model). -/
+algebraic complex and includes zero objects and empty schemes. -/
 theorem lisseTower_localized_constants_model
     {X Z T S : Scheme.{u}} (g : Z ⟶ X) (a : T ⟶ S) (b : Z ⟶ T)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) :

@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.FlatPowerSeriesChartGenericIm
 
 Source: Stacks Project, Tag 0EYB, completion and the image of the extended maximal ideal;
 Tags 05D5 and 00MB.
-(blueprint: lem-sbc-smooth-section-power-series-chart)
 -/
 
 @[expose] public section
@@ -30,24 +29,7 @@ namespace AlgebraicGeometry.Scheme
 extended maximal ideal maps to a point generic on a nonempty open of the original fibre.
 The number of variables is allowed to be zero.
 
-Source: Stacks Project, Tag 0EYB, the completion paragraph; Tags 05D5 and 00MB.
-(blueprint: lem-sbc-smooth-section-power-series-chart)
-
-Proof: Base change q along Spec φ; the morphism s gives a section of that smooth scheme.
-Choose an affine chart containing its value at the closed point of B. Its inverse image
-under the section is an open neighbourhood of the closed point of the local spectrum,
-so is all of Spec B. Thus the affine chart algebra has an augmentation to B. Its
-conormal module is finite projective, hence free over the local ring B. Tag 05D5
-identifies completion along the augmentation ideal with B[[X_1,...,X_n]]. The chart
-algebra is Noetherian, so completion is flat by 00MB. Compose with the affine chart
-inclusion and the flat base-change projection to get t. The augmentation gives the
-stated origin equality and the B-algebra structure gives the commuting square.
-The ideal m_B B[[X]] is prime, since the quotient is the power-series domain over κ(B).
-Its point is generic in the completed closed fibre. Flatness of fibre completion and
-field base change maps it to a generic point η of an irreducible component of the
-original smooth fibre. That fibre is locally Noetherian, so this component has a
-nonempty open W avoiding the other components. Every point of W specializes from η.
-This argument includes n = 0 and assumes neither a dense open nor a depth bound. -/
+Source: Stacks Project, Tag 0EYB, the completion paragraph; Tags 05D5 and 00MB. -/
 theorem exists_smooth_section_power_series_chart
     (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]
     {L : Scheme.{u}} (q : L ⟶ Spec (.of A)) [Smooth q]

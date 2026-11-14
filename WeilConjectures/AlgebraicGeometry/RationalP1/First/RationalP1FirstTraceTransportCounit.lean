@@ -13,10 +13,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Coefficient
 import WeilConjectures.AlgebraicGeometry.RationalP1.First.RationalP1FirstTraceTransportCounitExpanded
 
 /-! # Normalized counit equality for the terminal first projective-line trace
-
-Source: the Kunneth and trace base-change calculation in the first rational projective-line
-triangle identity, before the diagonal class is inserted.
-(blueprint: lem-sfb-rational-p1-first-trace-transport).
 -/
 
 @[expose] public noncomputable section
@@ -57,10 +53,6 @@ private theorem rationalP1_counitComponent_factor
 /-- Transport the terminal trace functional after normalizing the ambient counit.
 This core equation has source Rq_*Rp₂*(p₁*M tensor T_W), rather than Rq_*M, and contains
 neither a diagonal class insertion nor a unit component.
-
-Source: current blueprint, sec-six-functors-basics/sk-prop-p1-adjunction-rational/
-sk-prop-p1-adjunction-rational-triangle.proof.md, First identity, trace and path change
-(blueprint: lem-sfb-rational-p1-first-trace-transport).
 
 Proof obligation split from the parent theorem. Open hε and replace the counit by
 its normalized formula.

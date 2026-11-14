@@ -12,9 +12,7 @@ import Mathlib.Algebra.Module.Equiv.Basic
 
 /-! # The constant-coefficient realization of Chern arrows is injective
 
-Source: Stacks Project, Tags 03FD and 03PL; blueprint vector integration,
-uniqueness of the normalized projective-line datum.
-(blueprint: lem-amb-ordinary-finite-class-injectivity).
+Source: Stacks Project, Tags 03FD and 03PL.
 -/
 
 @[expose] public noncomputable section
@@ -105,17 +103,7 @@ set_option backward.isDefEq.respectTransparency.types true
 
 /-- A module-derived class from the free constant coefficient sheaf is determined by
 its realization in abelian sheaf cohomology on a quasi-compact quasi-separated scheme.
-Source: Stacks Project, Tag 03FD; the universal Ext-to-cohomology comparison.
-(blueprint: lem-amb-ordinary-finite-class-injectivity).
-
-Proof: adjunction for the constant sheaf identifies a module map from A with the
-image of 1. The analogous abelian adjunction identifies a map from the integral
-constant sheaf with the image of 1 as well. The displayed integral generator sends
-1 to 1, so precomposition with it after forgetting scalars is bijective in degree
-zero. The existing universal delta-functor comparison is therefore bijective in all
-degrees on a quasi-compact quasi-separated scheme. Compose it with the derived Ext
-Hom equivalence. Its formula is exactly ordinaryFiniteClass, which is thus injective.
-This also covers a zero ring and an empty scheme. -/
+Source: Stacks Project, Tag 03FD; the universal Ext-to-cohomology comparison. -/
 theorem ordinaryFiniteClass_injective (A : Type (u + 1)) [CommRing A]
     (T : Scheme.{u}) [CompactSpace T] [QuasiSeparatedSpace T]
     (P : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) (n : ℕ) :

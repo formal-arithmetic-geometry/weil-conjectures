@@ -20,10 +20,7 @@ import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
 /-!
 # Lifting a fibre isomorphism as a morphism near the base point
 
-Source: Stacks Project, more-morphisms.tex,
-lemma-H1-O-multiple-picard-flat-proper (empty comparison family), and
-coherent.tex, lemma-cohomology-projective-space-over-ring.
-(blueprint: lem-sfb-projective-bundle-fiber-hom-lift)
+Source: Stacks Project.
 -/
 
 @[expose] public section
@@ -105,29 +102,8 @@ private noncomputable def cancelLine {X : Scheme.{u}} (M N : X.Modules)
 /-- A fibre isomorphism of lines lifts as a sheaf morphism above some base open,
 whose pullback to the fibre is invertible.
 
-Source: Stacks Project, more-morphisms.tex,
-lemma-H1-O-multiple-picard-flat-proper (empty comparison family), and
-coherent.tex, lemma-cohomology-projective-space-over-ring.
+Source: Stacks Project.
 EGA II, Remark 4.2.7 announces the projective-bundle classification.
-(blueprint: lem-sfb-projective-bundle-fiber-hom-lift)
-
-Proof: The canonical projective bundle is proper. Its polynomial charts show
-flatness and local finite presentation; its fibres are geometrically reduced
-and connected projective spaces with H1(O)=0. Proper flat global sections gives
-the universal structure-pushforward isomorphism. Set L=M dual tensor N. Pull back
-dual evaluation and use the given fibre isomorphism to trivialize L on the fibre.
-Apply the Picard H1 local generator theorem with the empty comparison family:
-all test-family conditions are vacuous, and H1(O)=0 gives joint injectivity.
-The fibre line descends from the unit on Spec kappa(s). This produces a section
-of L over a base-open pullback that generates at every point of the marked fibre.
-Its generating locus D is open. Properness makes the image of its closed
-complement closed, so deleting that image gives a smaller base neighbourhood.
-There the section is a free generator and trivializes L. Identify the pullback
-scheme with the inverse-image open, tensor this trivialization with M, and
-cancel M tensor M dual by evaluation. This gives an isomorphism between the
-restricted M and N. Its hom is the required morphism, and its fibre pullback
-is invertible because functors preserve isomorphisms. The argument works for
-arbitrary bases; an empty base has no marked point.
 -/
 theorem projective_bundle_fiber_hom_lift (S : Scheme.{u}) (E : S.Modules)
     [E.IsQuasicoherent] (r : ℕ)

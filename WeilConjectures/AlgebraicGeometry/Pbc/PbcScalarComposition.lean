@@ -10,9 +10,8 @@ import all WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarTensor
 
 /-! # Units and composition of finite coefficient extension
 
-Source: blueprint proper base change, order 1307; Milne, Section 19.
+Source: Milne, Section 19.
 Existing declarations extracted from `PbcScalarExtension` to bound compilation cost.
-(blueprint: lem-pbc-scalar-tensor-composition)
 -/
 
 @[expose] public noncomputable section
@@ -40,11 +39,7 @@ variable (i : E →ₐ[Padic l] F) (j : F →ₐ[Padic l] G) (T : Scheme.{u})
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Completed coefficient maps compose as the actual field embeddings do.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-tensor-composition).
-Proof: compose with every target finite projection. Both maps send the residue of
-an integer x to the residue of j(i(x)). Quotient induction, sheafification and
-joint monicity of limit projections give equality. -/
+/-- Completed coefficient maps compose as the actual field embeddings do. -/
 theorem pbcScalarCoefficientMap_comp :
     pbcScalarCoefficientMap l E F i T ≫ pbcScalarCoefficientMap l F G j T =
       pbcScalarCoefficientMap l E G (j.comp i) T := by
@@ -65,12 +60,7 @@ theorem pbcScalarCoefficientMap_comp :
   induction x using Quotient.inductionOn' with
   | h x => rfl
 
-/-- The canonical balancing components are natural on derived objects.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-tensor-composition).
-Proof: the scalar adjunctions defining pbcReductionNormalization have the ordinary
-tensor units. Their Hom equivalences are natural, so their balanced adjuncts are
-natural. On K-flat representatives the formula is (p tensor s) tensor t to
-p tensor st, with its specified inverse. -/
+/-- The canonical balancing components are natural on derived objects. -/
 theorem pbcAmbientScalarComp_naturality
     (K L : PbcCompletedDerived T (pbcIntegralDatum l E)) (f : K ⟶ L) :
     (pbcEmbeddingAmbientTensor l F G j T).map
@@ -98,8 +88,7 @@ theorem pbcAmbientScalarComp_naturality
   rw [he, he]
   exact e.hom.naturality f
 
-/-- The ambient associator is the adjunction-normalized balanced tensor comparison.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-tensor-composition). -/
+/-- The ambient associator is the adjunction-normalized balanced tensor comparison. -/
 @[irreducible] def pbcAmbientScalarComp :
     pbcEmbeddingAmbientTensor l E F i T ⋙ pbcEmbeddingAmbientTensor l F G j T ≅
       pbcEmbeddingAmbientTensor l E G (j.comp i) T :=
@@ -112,8 +101,7 @@ Source: blueprint order 1307 (blueprint: lem-pbc-scalar-tensor-composition). -/
 variable [IsNoetherian T] (hDim : ∃ n : ℕ, topologicalKrullDim T ≤ n)
 variable (hInv : ∀ t : T, IsUnit (l : T.presheaf.stalk t))
 
-/-- Rational balancing is the image of the specified ambient balanced comparison.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-tensor-composition). -/
+/-- Rational balancing is the image of the specified ambient balanced comparison. -/
 @[irreducible]
 def pbcRationalScalarCompComponent (K : PbcRationalDerivedCategory l E T hDim hInv) :
     (pbcRationalScalarExtension l F G j T hDim hInv).obj
@@ -128,11 +116,7 @@ attribute [-instance] ULift.module
 attribute [local irreducible] pbcRationalScalarHom
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The actual localized balancing components are natural on all rational morphisms.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-tensor-composition).
-Proof: ambient balancing is natural on integral maps. The scalar Hom formula
-intertwines both sides on every pure tensor; the coefficient inclusions compose.
-The two additive sides therefore agree on every localized morphism. -/
+/-- The actual localized balancing components are natural on all rational morphisms. -/
 theorem pbcRationalScalarComp_naturality
     (K L : PbcRationalDerivedCategory l E T hDim hInv) (f : K ⟶ L) :
     (pbcRationalScalarExtension l F G j T hDim hInv).map
@@ -172,8 +156,7 @@ theorem pbcRationalScalarComp_naturality
     simp only [_root_.map_add, Preadditive.add_comp, Preadditive.comp_add, hf, hg]
 end
 
-/-- The specified natural rational associator before literal-unit normalization.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-tensor-composition). -/
+/-- The specified natural rational associator before literal-unit normalization. -/
 @[irreducible] def pbcRationalScalarComp :
     pbcRationalScalarExtension l E F i T hDim hInv ⋙
         pbcRationalScalarExtension l F G j T hDim hInv ≅
@@ -189,9 +172,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 variable [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{u})
 
 /-- Identity scalar restriction is fixed by identity functions on sections.
-Source: Stacks 03DA (blueprint: lem-pbc-scalar-tensor-composition).
-Proof: restriction along the identity changes no module action. The identity
-functions are linear and natural. Their components determine the isomorphism. -/
+Source: Stacks 03DA. -/
 theorem pbcScalarRestrictId_exists :
     ∃! e : pbcRestrict (𝟙 (pbcAdicCompletion T (pbcIntegralDatum l E))) ≅ 𝟭 _,
       ∀ (M : pbcModules T (pbcAdicCompletion T (pbcIntegralDatum l E)))
@@ -213,15 +194,12 @@ theorem pbcScalarRestrictId_exists :
     exact he' M U x
 
 /-- The ordinary identity-on-sections restriction comparison.
-Source: Stacks 03DA (blueprint: lem-pbc-scalar-tensor-composition). -/
+Source: Stacks 03DA. -/
 @[irreducible] def pbcScalarRestrictId := (pbcScalarRestrictId_exists l E T).exists.choose
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The identity completed coefficient map fixes all finite projections.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-tensor-composition).
-Proof: the identity field embedding induces the identity on each quotient, hence
-on each quotient coefficient sheaf. Limit projections are jointly monic. -/
+/-- The identity completed coefficient map fixes all finite projections. -/
 theorem pbcScalarCoefficientMap_id :
     pbcScalarCoefficientMap l E E (AlgHom.id (Padic l) E) T =
       𝟙 (pbcAdicCompletion T (pbcIntegralDatum l E)) := by
@@ -242,8 +220,7 @@ theorem pbcScalarCoefficientMap_id :
   exact Category.comp_id _
 
 /-- The canonical tensor unit is conjugate to identity restriction under the
-ordinary-unit-normalized derived adjunction.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-tensor-composition). -/
+ordinary-unit-normalized derived adjunction. -/
 @[irreducible] def pbcEmbeddingAmbientUnit :
     pbcEmbeddingAmbientTensor l E E (AlgHom.id (Padic l) E) T ≅ 𝟭 _ :=
   eqToIso (congrArg (fun φ ↦ pbcDerivedExtend φ) (pbcScalarCoefficientMap_id l E T)) ≪≫
@@ -257,8 +234,7 @@ variable [IsNoetherian T]
 variable (hDim : ∃ n : ℕ, topologicalKrullDim T ≤ n)
 variable (hInv : ∀ t : T, IsUnit (l : T.presheaf.stalk t))
 
-/-- Rational tensor unit components are localizations of the ambient tensor units.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-tensor-composition). -/
+/-- Rational tensor unit components are localizations of the ambient tensor units. -/
 @[irreducible]
 def pbcRationalScalarUnitComponent (K : PbcRationalDerivedCategory l E T hDim hInv) :
     (pbcRationalScalarExtension l E E (AlgHom.id (Padic l) E) T hDim hInv).obj K ≅ K :=
@@ -272,10 +248,7 @@ attribute [local irreducible] pbcRationalScalarHom
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The specified unit components are natural on every localized Hom module.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-tensor-composition).
-Proof: on a pure tensor this is naturality of the ambient unit and the rational
-Hom formula. Additivity extends it to sums of pure tensors. -/
+/-- The specified unit components are natural on every localized Hom module. -/
 theorem pbcRationalScalarUnit_naturality
     (K L : PbcRationalDerivedCategory l E T hDim hInv) (f : K ⟶ L) :
     (pbcRationalScalarExtension l E E (AlgHom.id (Padic l) E) T hDim hInv).map f ≫
@@ -309,8 +282,7 @@ theorem pbcRationalScalarUnit_naturality
 
 end
 
-/-- The natural rational tensor unit, before choosing literal identity transitions.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-tensor-composition). -/
+/-- The natural rational tensor unit, before choosing literal identity transitions. -/
 @[irreducible] def pbcRationalScalarUnit :
     pbcRationalScalarExtension l E E (AlgHom.id (Padic l) E) T hDim hInv ≅ 𝟭 _ :=
   NatIso.ofComponents (pbcRationalScalarUnitComponent l E T hDim hInv)

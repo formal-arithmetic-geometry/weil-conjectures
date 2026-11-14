@@ -123,8 +123,7 @@ import WeilConjectures.CategoryTheory.ClosedScalarHom.ClosedScalarHomComparison
 
 /-! # Internal-module and ringed-site derived Hom
 
-Source: Stacks Project, Tags 08J9, 08JA and 08JB; blueprint module objects and
-derived tensor--Hom (blueprint: lem-sfb-module-object-ringed-site-derived-comparison).
+Source: Stacks Project, Tags 08J9, 08JA and 08JB.
 
 ## Main statements
 
@@ -419,11 +418,7 @@ private theorem globalNativeMonoidal_eq_localization
   rfl
 
 /-- The native derived tensor uses the K-flat localization monoidal structure.
-Source: blueprint derived tensor--Hom, Stacks 06YS
-(blueprint: lem-sfb-module-object-ringed-site-derived-comparison).
-Proof: unfold the module-derived tensor and the native derived monoidal instance.
-Both are induced from the same K-flat left derivability structure and total tensor;
-the localization construction therefore gives the same monoidal data. -/
+Source: Stacks 06YS. -/
 theorem internalMonoidal_eq_localization :
     (inferInstance : MonoidalCategory (DerivedCategory (Internal Λ X))) =
       DerivedMonoidal.instMonoidalCategory DerivedCategory.Qh
@@ -431,7 +426,7 @@ theorem internalMonoidal_eq_localization :
   exact globalNativeMonoidal_eq_localization (Internal Λ X)
 
 /-- The actual derived Koszul braiding, transported along the preceding equality.
-Source: Stacks 06YL (blueprint: lem-sfb-module-object-ringed-site-derived-comparison). -/
+Source: Stacks 06YL. -/
 instance internalBraiding : BraidedCategory (DerivedCategory (Internal Λ X)) :=
   Eq.mp (congrArg (fun m ↦ @BraidedCategory (DerivedCategory (Internal Λ X)) _ m)
     (internalMonoidal_eq_localization Λ X).symm)
@@ -541,41 +536,7 @@ private theorem sliceHom
 /-- Comparison of the module-object right adjoint with the K-injective sheaf-Hom
 model, including its evaluation and all localized-site comparisons.
 
-Source: Stacks Project, Tags 08J9, 08JA, 08JB, and the module-object definitions
-in the blueprint (blueprint: lem-sfb-module-object-ringed-site-derived-comparison).
-
-Proof, following the five steps of the DAG:
-1. Apply def-weil-pbc-internal-abelian-sheaf-module-equivalence and
-   lem-pe-internal-section-tensor-comparison. The equivalence is exact, fixes
-   underlying sheaves and maps, and preserves and reflects K-flatness. Local pure
-   tensors determine the total-complex comparison. Localize its K-flat restriction
-   to obtain TensorComparison, with the displayed normalization square.
-2. Transport the parametrized adjunction sk-def-sfb-derived-tensor-hom through
-   this derived equivalence and tensor comparison. Its counit is precisely the
-   transported module-object evaluation.
-3. For the ringed-site K-injective model, lem-pur-rhom-global-sections and the
-   currying of lem-weil-pbc-ringed-internal-hom-exact-restriction identify
-   Hom(A,H(K,N)) with Hom(A tensor K,N). Ordinary evaluation on K-flat and
-   K-injective representatives supplies S and T with their representative model.
-4. The two right adjoints are uniquely isomorphic by Yoneda. Their Hom bijections
-   make the isomorphism natural in the contravariant and covariant variables and
-   identify the counits. Use the Koszul exchange to write evaluation with the
-   tensor order of CoefficientClosedStructure.
-5. Repeat on every slice, restricting the actual coefficient monoid and its
-   module objects. The section equivalence for B restricted to U is exact and
-   leaves sections unchanged. Apply the ordinary pure-tensor comparison and
-   its sum-total characterization to B restricted to U. Localize on K-flat
-   representatives to obtain tU for the native local derived tensor. The native
-   MonoidalClosed.internalHom is already given by the framework. Uniqueness of
-   parametrized right adjoints identifies it with the ringed K-injective Hom;
-   the identification respects the native counit, using its Koszul exchange.
-   Restriction preserves K-injectives, and its normalized Hom comparison rho_U
-   is the identity on local families of maps (08JB). Full faithfulness uniquely
-   lifts (theta_U)^(-1) rho_U theta|_U to the module-object restriction isomorphism.
-   The compatibility field states precisely that square, including the canonical
-   section/restriction counits. For V to U the occurrences of theta_U cancel;
-   the cocycle for rho gives the cocycle for the module-side restriction. This
-   includes the identity slice, with no completion, boundedness or perfectness. -/
+Source: Stacks Project, Tags 08J9, 08JA, 08JB. -/
 theorem moduleObject_ringedSite_derived_comparison :
     ∃ (S : CoefficientClosedStructure (hom Λ X))
       (T : CoefficientTensorModels.{u, u + 1, u, u + 1}

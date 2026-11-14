@@ -160,8 +160,7 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 /-!
 # The selected canonical composition comparison
 
-Source: Stacks Project, Tag 0D6D
-(blueprint: lem-weil-pbc-proetale-derived-pullback-composition).
+Source: Stacks Project, Tag 0D6D.
 -/
 
 @[expose] public noncomputable section
@@ -224,16 +223,7 @@ private theorem derivedTransformation_ext
 -- The original-site coefficient transports require the same budget as the source theorem.
 /-- The unique derived comparison with exactly the original theorem's ordinary,
 termwise and K-flat normalization, with the derived comparison returned first.
-Source: Stacks Project, Tag 0D6D
-(blueprint: lem-weil-pbc-proetale-derived-pullback-composition).
-Proof: use proEtaleRingDerivedPullbackComposition for existence. The displayed
-sectionwise direct-image equation fixes d; the module unit normalization fixes each
-adjunction, hence conjugation fixes a. Its degree maps fix b. Flat K-flat resolutions
-exist for every input, and localization of b with the factorization isomorphisms
-fixes the component of comparison on each resolution. Naturality across resolution
-quasi-isomorphisms therefore fixes its component on every derived object. Thus the
-natural isomorphism is unique. This is the same characterization with the unique
-comparison exposed first, rather than repeatedly extracting nested witnesses. -/
+Source: Stacks Project, Tag 0D6D. -/
 theorem proEtaleCanonicalPullbackComposition_existsUnique
     {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V)
     (R_V : Sheaf (ProEt.topology V) CommRingCat.{u + 1})
@@ -342,8 +332,7 @@ theorem proEtaleCanonicalPullbackComposition_existsUnique
 /-- Select the comparison characterized by the normalized ordinary adjunctions,
 fibre-product pasting, and the termwise K-flat comparison. Each witness in the existing
 theorem is determined by those requirements, up to the equality used here.
-Source: Stacks Project, Tag 0D6D
-(blueprint: lem-weil-pbc-proetale-derived-pullback-composition). -/
+Source: Stacks Project, Tag 0D6D. -/
 def proEtaleCanonicalPullbackComposition
     {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V)
     (RV : Sheaf (ProEt.topology V) CommRingCat.{u + 1})

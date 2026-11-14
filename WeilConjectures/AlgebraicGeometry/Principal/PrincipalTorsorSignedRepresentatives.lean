@@ -17,8 +17,7 @@ uniqueness and additivity of represented classes, existence of a class for every
 cocycle, the representatives of boundaries, and the behaviour under maps of relative
 complexes.
 
-Source: Stacks Project, Tag 03AJ, relative refinement; Tag 0G71.
-(auxiliary; not a blueprint node)
+Source: Stacks Project, Tag 03AJ, relative refinement; Tag 0G71
 -/
 
 @[expose] public noncomputable section

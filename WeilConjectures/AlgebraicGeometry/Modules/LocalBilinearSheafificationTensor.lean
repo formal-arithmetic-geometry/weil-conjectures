@@ -14,7 +14,6 @@ import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationBilinea
 # Extending a local bilinear presheaf pairing to sheaf tensors
 
 Source: Stacks Project, Tag 0GMW, and the open restriction adjunction.
-(blueprint: lem-sc-local-bilinear-sheafification-tensor).
 -/
 
 @[expose] public section
@@ -140,24 +139,7 @@ private theorem restrictPushforward_bilinear_pairing {X : Scheme.{v}}
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Local bilinear presheaf pairings into a sheaf extend through sheafification and tensor.
-Source: Stacks Project, Tag 0GMW; blueprint Riemann--Roch determinant paragraph,
-linear construction before independence of lifts.
-(blueprint: lem-sc-local-bilinear-sheafification-tensor).
-
-Proof: Put V(W)=U ∩ W and H'=j_*(H|U), where j:U→X is the inclusion.
-Restrict both presheaf inputs from W to V(W), apply b there, and identify H(V(W)) with H'(W) using
-the definition of restriction and pushforward. This is bilinear over O_X(W): the scalar
-action on H'
-is ordinary restriction, by Scheme.Hom.app_appIso_inv. Naturality follows from hb and
-the presheaf composition laws. Apply the bilinear sheafification extension theorem
-(Tag 0GMW) with the identity ring map and then the sheaf tensor universal property.
-This produces a morphism F^# tensor G^# → H'. For W contained in U the unit H(W)→H'(W)
-is bijective, since V(W)=W and its underlying map is restriction along this equality.
-Compose the constructed morphism's component with the inverse linear equivalence.
-Apply the injective unit component to verify both the pure-tensor equation and
-naturality; these reduce to the extension equations and naturality of the morphism
-and of the unit. This works also for degree-zero input modules, the empty open,
-and the zero ring; no local freeness or exactness is used. -/
+Source: Stacks Project, Tag 0GMW. -/
 theorem local_bilinear_sheafification_tensor_extension {X : Scheme.{v}}
     (F G : _root_.PresheafOfModules.{v} X.ringCatSheaf.obj) (H : X.Modules)
     (U : X.Opens)

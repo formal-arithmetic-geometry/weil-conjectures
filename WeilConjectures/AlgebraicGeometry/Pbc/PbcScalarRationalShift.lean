@@ -14,9 +14,8 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
 
 /-! # Exactness and shift descent for rational scalar extension
 
-Source: blueprint proper base change, order 1307; Milne, Section 19.
+Source: Milne, Section 19.
 Existing declarations extracted from `PbcScalarExtension` to bound compilation cost.
-(blueprint: lem-pbc-scalar-rational-exactness)
 -/
 
 @[expose] public noncomputable section
@@ -44,19 +43,14 @@ variable [IsNoetherian T]
 variable [dim : Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]
 variable [inv : Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]
 
-/-- The integral restriction retains the actual ambient functor through its inclusion.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-rational-exactness). -/
+/-- The integral restriction retains the actual ambient functor through its inclusion. -/
 @[irreducible] def pbcIntegralScalarInclusionIso :
     pbcEmbeddingIntegralTensor l E F i T dim.out inv.out ⋙
         ObjectProperty.ι (PbcIsBoundedConstructibleComplete T (pbcIntegralDatum l F)) ≅
       ObjectProperty.ι (PbcIsBoundedConstructibleComplete T (pbcIntegralDatum l E)) ⋙
         pbcEmbeddingAmbientTensor l E F i T := Iso.refl _
 
-/-- The actual tensor Hom formula agrees with tensoring integral arrows by one.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-rational-exactness).
-Proof: put the scalar equal to one in pbcRationalScalarHom_exists. The normalized
-coefficient isomorphisms and the algebra inclusion send one to one, yielding the
-displayed naturality equation of identity components. -/
+/-- The actual tensor Hom formula agrees with tensoring integral arrows by one. -/
 theorem pbcScalarLocalization_naturality
     {K L : PbcIntegralCategory l E T dim.out inv.out} (f : K ⟶ L) :
     (pbcRationalization T (pbcIntegralDatum l F) (pbcUniformizer l F)).map

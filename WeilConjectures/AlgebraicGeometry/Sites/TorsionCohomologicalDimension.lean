@@ -33,7 +33,7 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Blueprint `definition-cohomological-dimension`: Etale torsion cohomological dimension bound.
+/-- Etale torsion cohomological dimension bound.
 
 `cd_tor(X) ≤ c`: the étale cohomology `Hᵠ(X_ét, F)` vanishes for every torsion abelian étale
 sheaf `F` on `X` and every `q > c`. -/
@@ -46,7 +46,7 @@ lemma HasTorsionCohomologicalDimensionLE.mono {X : Scheme.{u}} {c d : ℕ}
     X.HasTorsionCohomologicalDimensionLE d :=
   fun F hF q hq ↦ h F hF q (lt_of_le_of_lt hcd hq)
 
-/-- Blueprint `definition-cohomological-dimension`: Cohomological dimension.
+/-- Cohomological dimension.
 
 The torsion étale cohomological dimension `cd(X) ∈ ℕ∞` of a scheme `X`: the least `d` with
 `Hᵠ(X_ét, F) = 0` for every torsion abelian étale sheaf `F` and every `q > d`, and `⊤` if no such

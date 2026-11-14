@@ -13,9 +13,7 @@ public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 /-!
 # Open adjunction in the intrinsic finite constant-coefficient presentation
 
-Source: Weil conjectures blueprint,
-`proposition-composition-open-restriction-compactifications-f--4`; Stacks Project, Tags 03DI, 03DJ
-and 09AE (blueprint: proposition-composition-open-restriction-compactifications-f--4).
+Source: Stacks Project, Tags 03DI, 03DJ and 09AE.
 
 The existing exact site adjunction is transported by the canonical module equivalences,
 then localized termwise on cochain complexes. This gives the full ordinary unbounded
@@ -33,9 +31,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- The open adjunction is the canonical site adjunction transported through the
-constant-module equivalences and then descended termwise.
-Source: blueprint `proposition-composition-open-restriction-compactifications-f--4`
-(blueprint: proposition-composition-open-restriction-compactifications-f--4). -/
+constant-module equivalences and then descended termwise. -/
 noncomputable def exceptionalOpenAdjunction
     {U V : Scheme.{u}} (j : U ⟶ V) [IsOpenImmersion j] (A : Type u)
     [CommRing A] [Finite A] :

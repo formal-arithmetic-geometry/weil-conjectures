@@ -166,11 +166,9 @@ attribute [local irreducible] moduleObjectDerivedPullback moduleObjectDerivedPus
 attribute [local irreducible] firstProjection secondProjection square condensedAmbientExchange
 
 /-- Fixed tail cancellation with the unused local bindings eliminated.
-Source: the second identity of the rational projective-line triangle calculation.
 The projection/strength action reduces the tail to its inside tensor maps.
 Even Tate self-braiding and tensor-shift naturality cancel these maps, and the
-canonical square comparison identifies the remaining inverse pull comparison.
-(blueprint: lem-sfb-rational-p1-second-projection-interchange-tail-expanded). -/
+canonical square comparison identifies the remaining inverse pull comparison. -/
 theorem second_projection_tail_cancellation_expanded
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.Picard.Direct.PicardDirectImageDerivedT
 /-! # Successive base change before fibre-unit normalization
 
 Source: Stacks Project, Tags 08HY and 0D5S.
-(blueprint: lem-sc-picard-direct-image-derived-transpose-pasting)
 -/
 
 @[expose] public section
@@ -67,28 +66,7 @@ variable [∀ Y : Scheme.{v},
 -- Keep categorical comparison choices folded during naturality rewriting.
 /-- The derived adjoint of a test morphism respects successive base change.
 The source is a twice-derived pullback of O_T[0], not a module on the fibre.
-Source: Stacks Project, Tags 08HY and 0D5S.
-(blueprint: lem-sc-picard-direct-image-derived-transpose-pasting)
-
-Proof: The projection equations identify j as the unique map between the two
-fibre products. Their comparison maps a and a' to X_W satisfy j followed by a
- equal to a', by pullback.hom_ext. Expand both base-change maps as the pinned
- derived-adjunction transposes of the pulled-back counit. Transpose the entire
- equality under the adjunction for the new fibre projection. Naturality moves
- the adjunction unit through the coefficient maps; its composite with the
- counit cancels by the triangle identity. The remaining derived composition
- comparisons agree by the associativity clause of exists_derivedPullbackComposition,
- transported along i followed by t equal to t'. Their coefficient counits agree
- with the composite tensor comparison by their left-derived factorization;
- canonicalSinglePullbackSquare expresses this on N[0]. Thus the coefficient
- comparison is the ordinary-to-tensor left-adjoint comparison followed by the
- inverse conjugate of pushforward composition. On the source, expand the
- conjugation defining picardDerivedModelRestriction. Composition coherence and
- canonicalSinglePullbackSquare for O_W identify its normalization with the
- single-pullback comparison for i followed by pullbackObjUnitToUnit i. This
- gives the displayed equality, before applying any fibre-unit identification
- or taking H^0. Only structure-sheaf comparisons are inverted, so the assertion
- includes zero modules, identities and empty schemes without extra conditions. -/
+Source: Stacks Project, Tags 08HY and 0D5S. -/
 theorem picardDirectImageDerivedTranspose_pasting
     {X S : Scheme.{v}} (f : X ⟶ S)
     (L : X.Modules) (W : Scheme.{v}) (k : W ⟶ S)

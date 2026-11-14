@@ -15,7 +15,6 @@ import WeilConjectures.RingTheory.Smooth.AugmentationCompletionPowerSeries
 # Flat completion chart for a smooth section over a local base
 
 Source: Stacks Project, Tags 0EYB, 05D5 and 00MB.
-(blueprint: lem-sbc-smooth-section-completion-chart)
 -/
 
 @[expose] public section
@@ -27,24 +26,7 @@ namespace AlgebraicGeometry.Scheme
 /-- A smooth section over a Noetherian local ring has a flat power-series chart,
 compatible with both its structure map and the entire section.
 
-Source: Stacks Project, Tag 0EYB, the completion paragraph; Tags 05D5 and 00MB.
-(blueprint: lem-sbc-smooth-section-completion-chart)
-
-Proof: Choose an affine neighbourhood of the section's closed-point value. Its
-inverse image under the section is an open containing the closed point of the
-local spectrum, hence the whole spectrum. Factor the section through this affine
-neighbourhood. Its algebra C is smooth over B and its augmentation C to B splits
-the structure map. Put I equal to the augmentation kernel. By 05D5, I/I^2 is a
-finite projective B-module, hence free over the local ring B. Choose a basis and
-lifts in I. The resulting map from B[[X_1,...,X_n]] to the I-adic completion is an
-isomorphism: modulo I^2 it is an isomorphism, formal smoothness lifts its inverse
-successively modulo I^k, and passage to the inverse limit gives an inverse.
-The chosen lifts lie in I, so evaluation at zero corresponds to the augmentation.
-Since C is a finite type algebra over the Noetherian ring B it is Noetherian, and
-its completion map is flat by 00MB. Compose its spectrum map with the affine open
-immersion. The B-algebra structure proves the first equality, and compatibility
-of the augmentation proves the second. For n = 0 the same argument has no basis
-vectors and identifies the completion with B. -/
+Source: Stacks Project, Tag 0EYB, the completion paragraph; Tags 05D5 and 00MB. -/
 theorem exists_smooth_section_completion_chart
     (B : Type u) [CommRing B] [IsLocalRing B] [IsNoetherianRing B]
     {X : Scheme.{u}} (p : X ⟶ Spec (.of B)) [Smooth p]

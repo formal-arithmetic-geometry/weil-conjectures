@@ -14,7 +14,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingCl
 /-! # A universal computation map for simultaneous integral reduction
 
 Source: Bhatt--Scholze, Definition 3.5.2, p. 24; Stacks Tags 06YY, 06XN, 0941.
-(blueprint: def-sf-integral-strict-reduction-model).
 
 The existing canonical augmented tower remains publicly imported. This interface
 retains its coefficient-linear strict system before evaluation, with one universal
@@ -40,8 +39,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 adjunction, quotient maps and pure-tensor unit fix the ordinary construction;
 the universal counit fixes the derived construction up to its unique compatible
 isomorphism. No family of evaluated derived maps is lifted by choice.
-Source: Bhatt--Scholze, Definition 3.5.2; Stacks 06YY, 06XN, 0941
-(blueprint: def-sf-integral-strict-reduction-model). -/
+Source: Bhatt--Scholze, Definition 3.5.2; Stacks 06YY, 06XN, 0941. -/
 structure IntegralStrictReductionModel (W : Scheme.{t}) where
   ordinary : scalarReductionSource.{t, u} l E W ⥤ coefficientSequenceModules.{t, u} l E W
   [additive : ordinary.Additive]

@@ -47,9 +47,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The affine closed-site counit is invertible at a weakly contractible object
 whose points specialize into the closed fibre.
 
-Source: Stacks Project, Tag 09AC, lemma-compute-i-star, with the fully faithful
-adjunction of Tag 09BK
-(blueprint: new-lem-weil-pbc-specialization-closed-site-counit).
+Source: Stacks Project, Tag 09AC, with the fully faithful adjunction of Tag 09BK.
 
 Proof. Full faithfulness makes the base change of the counit invertible. Hence
 its image contains the closed fibre. Its underlying morphism is weakly etale,

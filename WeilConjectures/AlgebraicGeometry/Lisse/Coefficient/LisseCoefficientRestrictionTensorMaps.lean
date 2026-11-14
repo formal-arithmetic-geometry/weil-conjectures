@@ -677,33 +677,7 @@ private theorem restrictionAverageLevel_comp
 end AveragedRestriction
 
 /-- A central integral tensor induces opposite maps with scalar composite.
-Source: Deligne, Weil II (1.1.1) b)-d), pp. 146-147, restriction and extension
-of coefficients; the finite separable diagonal construction applied to modules.
-(blueprint: lem-pod-lisse-coefficient-restriction-tensor-maps).
-
-Proof: let e be the ramification index. At level m the scalar extension of the
-restricted lattice is the sheafified tensor of S/(pi_L^(m+1)) with F_N restricted
-to R, where N=e(floor(m/e)+1)-1 and N>=m. Multiplication and F_N -> F_m give
-an S-linear sheaf morphism from this level to F_m, by the scalar extension
-adjunction. Write t as a finite sum x_j tensor y_j. On F_N the opposite map
-is v -> sum x_j tensor y_j*v. Tensor balancing makes it well defined in t;
-the centrality hypothesis makes it S-linear. The first tensor factor is
-annihilated by pi_L^(m+1). S-linearity therefore makes this map vanish on
-pi_L^(m+1)*F_N, which is the stalkwise kernel of F_N -> F_m. The latter map
-is an epimorphism of sheaves, since geometric stalks are conservative. The abelian
-cokernel property gives a unique S-linear sheaf map from
-F_m to the extended level. This argument includes N=m, when the transition
-is the identity and F_m itself is annihilated by the required ideal.
-
-Both maps commute with transitions: check multiplication on the scalar tensor
-generators; for the opposite map precompose with a common higher F_N, use the
-same finite tensor t, and cancel the surjective transition. Thus they form
-natural transformations of integral systems. Their composite, precomposed
-with F_N -> F_m, sends v to sum x_j*y_j*v. Cancel this epimorphism to obtain
-multiplication(t) times the identity at every level. Finally conjugate by
-`lisseScalarLevelIso` to pass from the explicit quotient tensors to the
-prescribed `lisseIntegralScalarExtension`; its generator-transition formula
-ensures the conjugated level maps remain natural. Zero t is allowed. -/
+Source: Deligne, Weil II (1.1.1) b)-d), pp. 146-147, restriction and extension of coefficients. -/
 theorem lisseIntegralRestriction_tensor_maps
     (F : LisseIntegralSheaf l L Y)
     (hF : IsLisseIntegralDiagram l E Y

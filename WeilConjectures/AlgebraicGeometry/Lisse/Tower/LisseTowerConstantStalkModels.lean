@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.Lisse.Tower.LisseTowerCompatibleStalkMa
 /-! # Compatible constant stalk models before algebraic effectivity
 
 Source: Stacks Tag 09BV, finite derived local constancy and compatible trivializations.
-(blueprint: lem-weil-pbc-lisse-tower-constant-stalk-models).
 -/
 
 @[expose] public noncomputable section
@@ -27,19 +26,7 @@ namespace AlgebraicGeometry.Scheme
 comparison is stated after restriction to the common constant completion ring.
 It constructs no effective cone E and asserts no descent of such a cone.
 
-Source: Stacks proetale.tex, Tag 09BV (lemma-weird), with the finite-ring derived
-local-constancy and compatible finite derived trivialization lemmas of the blueprint.
-(blueprint: lem-weil-pbc-lisse-tower-constant-stalk-models).
-
-Proof: lisse_tower_stalk_level_models constructs algebraic stalk towers with
-separate level markings on a covering sieve. Each level inherits a bound from M
-by its vanishing-transfer implication. Apply lisse_tower_compatible_stalk_markings
-to each supplied tower to obtain a further covering sieve with compatible
-markings. Bind the two covering sieves. Membership gives a factorization through
-one first-cover member, so retain its algebraic tower and its finite and vanishing
-cohomology witnesses; on the final refinement use the second cover's compatible
-markings and the first cover's relative finite lissity. No uniform level bound is
-introduced. -/
+Source: Tag 09BV (lemma-weird). -/
 theorem lisse_tower_constant_stalk_models
     (X Y : Scheme.{u}) [IsNoetherian X] (g : Y ⟶ X) [IsImmersion g]
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (M : AdicTower X d)

@@ -9,9 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Bounded.BoundedConstructibleComp
 
 import WeilConjectures.AlgebraicGeometry.Pbc.PbcCompletedPullbackActualSupplement
 
-/-! # Exact completion from the actual reflector
-Source: the completion argument of the uniform triangulation node.
-(blueprint: lem-weil-pbc-exact-completion-data). -/
+/-! # Exact completion from the actual reflector. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -80,18 +78,7 @@ private theorem reflectiveUnitLocus
   infer_instance
 
 /-- The actual completion reflector gives an exact pointed functor, and its
-unit detects intrinsic completeness in the actual coefficient presentation.
-Source: blueprint cor-weil-pbc-constructible-complete, triangulation supplement,
-steps 1, 3 and 4 (blueprint: lem-weil-pbc-exact-completion-data).
-Proof: reuse the published reflection onto intrinsically complete objects. Its
-fully faithful inclusion identifies invertibility of the unit with membership. Directly
-transport the cochain representative to establish isomorphism closure, and use the
-unit-normalized completion shift to establish shift closure. The reflective locus equals
-its double orthogonal: in the triangle of a reflection unit, the universal Hom bijections
-and their shifted versions make the cone left orthogonal; right orthogonality of the
-shifted source forces its connecting arrow to vanish and then its identity to be zero.
-Mathlib makes orthogonals triangulated. The triangulated adjunction theorem gives an
-exact additive left adjoint with shift-compatible unit; compose it with the inclusion. -/
+unit detects intrinsic completeness in the actual coefficient presentation. -/
 theorem pbcExactCompletionData (T : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) :
     ∃ (F : PbcCompletedDerived T d ⥤ PbcCompletedDerived T d)

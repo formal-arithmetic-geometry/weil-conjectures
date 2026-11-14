@@ -16,9 +16,7 @@ import WeilConjectures.CategoryTheory.Monoidal.Mod.Curry
 
 /-! # Sectionwise calculus for native and translated internal-Hom evaluation
 
-Source: prose-10-20, internal-Hom/evaluation paragraph;
-native ringed-model proof, steps 2 and 3; Stacks 03D6 and 03EO.
-(blueprint: lem-sf-native-frobenius-evaluation-calculus)
+Source: Stacks 03D6 and 03EO.
 -/
 
 @[expose] public section
@@ -52,13 +50,7 @@ private theorem sectionPair_map {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
 
 /-- Native morphisms into internal Hom are determined by sectionwise evaluation.
 
-Source: prose-10-20, internal-Hom/evaluation paragraph;
-Stacks 03D6 and 03EO.
-(blueprint: lem-sf-native-frobenius-evaluation-calculus)
-
-Proof: Uncurry by the native tensor-Hom adjunction, forget the module action,
-and use tensor sheaf extensionality. Pure tensors generate the presheaf tensor;
-naturality of the sheaf tensor comparison reduces to the given evaluations. -/
+Source: Stacks 03D6 and 03EO. -/
 theorem evaluation_ext {Y : Scheme.{u}} {l : ℕ} [Fact l.Prime]
     {M N Q : AdicSheaf l Y} {f g : Q ⟶ (AdicSheaf.ihom M).obj N}
     (h : ∀ (V : Y.ProEtᵒᵖ) (z : Q.X.obj.obj V) (x : M.X.obj.obj V),
@@ -81,12 +73,7 @@ theorem evaluation_ext {Y : Scheme.{u}} {l : ℕ} [Fact l.Prime]
 
 /-- Native internal-Hom evaluation commutes with precomposition.
 
-Source: prose-10-20, internal-Hom/evaluation paragraph;
-Stacks 03D6 and 03EO.
-(blueprint: lem-sf-native-frobenius-evaluation-calculus)
-
-Proof: Evaluate the native evaluation/ihomMap identity on a pure tensor of
-sections. Naturality of the sheaf tensor comparison gives the displayed formula. -/
+Source: Stacks 03D6 and 03EO. -/
 theorem evaluation_map_source {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
     {M M' : AdicSheaf l X} (f : M' ⟶ M) (N : AdicSheaf l X)
     (V : X.ProEtᵒᵖ) (z : ((AdicSheaf.ihom M).obj N).X.obj.obj V)
@@ -108,12 +95,7 @@ theorem evaluation_map_source {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
 
 /-- Native internal-Hom evaluation commutes with postcomposition.
 
-Source: prose-10-20, internal-Hom/evaluation paragraph;
-Stacks 03D6 and 03EO.
-(blueprint: lem-sf-native-frobenius-evaluation-calculus)
-
-Proof: Evaluate naturality of the native evaluation morphism on pure tensors
-of sections and use naturality of the sheaf tensor comparison. -/
+Source: Stacks 03D6 and 03EO. -/
 theorem evaluation_map_target {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
     (M : AdicSheaf l X) {N N' : AdicSheaf l X} (g : N ⟶ N')
     (V : X.ProEtᵒᵖ) (z : ((AdicSheaf.ihom M).obj N).X.obj.obj V)
@@ -134,12 +116,7 @@ theorem evaluation_map_target {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
 
 /-- Native evaluation commutes with restriction of sections.
 
-Source: prose-10-20, internal-Hom/evaluation paragraph;
-Stacks 03D6 and 03EO.
-(blueprint: lem-sf-native-frobenius-evaluation-calculus)
-
-Proof: Apply naturality of the composite of the sheaf tensor comparison and
-native evaluation to the pure tensor of the two sections. -/
+Source: Stacks 03D6 and 03EO. -/
 theorem evaluation_restriction {Y : Scheme.{u}} {l : ℕ} [Fact l.Prime]
     (M N : AdicSheaf l Y) {V W : Y.ProEtᵒᵖ} (f : V ⟶ W)
     (z : ((AdicSheaf.ihom M).obj N).X.obj.obj V) (x : M.X.obj.obj V) :
@@ -191,14 +168,7 @@ private theorem sectionPair_pushforward (Y : Scheme.{u}) (l : ℕ) [Fact l.Prime
 
 /-- Native inverse-pushforward Hom transport preserves sectionwise evaluation.
 
-Source: prose-10-20, internal-Hom/evaluation paragraph;
-Stacks 03D6 and 03EO.
-(blueprint: lem-sf-native-frobenius-evaluation-calculus)
-
-Proof: Use the defining evaluation identity for mapModComap internal Hom.
-Evaluate it on a pure tensor, and move its precomposition through the tensor
-comparison. Compatibility of the sheaf-pushforward lax tensor comparison with
-sheaf-to-presheaf identifies its other side with evaluation on the pullback object. -/
+Source: Stacks 03D6 and 03EO. -/
 theorem pushforward_evaluation (Y : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (g : Y ≅ Y) (M N : AdicSheaf l Y) (V : Y.ProEtᵒᵖ)
     (z : ((adicLowerStar l g.inv).obj ((AdicSheaf.ihom M).obj N)).X.obj.obj V)
@@ -274,14 +244,7 @@ private theorem ordinary_pure_map
 
 /-- Every twisted presentation has the specified translated evaluation on local maps.
 
-Source: prose-10-20, internal-Hom/evaluation paragraph;
-Stacks 03D6 and 03EO.
-(blueprint: lem-sf-native-frobenius-evaluation-calculus)
-
-Proof: Evaluate sigmaHom_evaluation on a pure tensor of a module section and
-a local map. The sigmaTensor_pure axiom fixes its image. Naturality of pure
-tensors and the tensor-Hom adjunction identify ordinary evaluation with applying
-the local map on the identity slice. The resulting equality is the claimed one. -/
+Source: Stacks 03D6 and 03EO. -/
 theorem translated_evaluation (Y : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (g : Y ≅ Y) :
     let _ := (translation_continuous Y g).1

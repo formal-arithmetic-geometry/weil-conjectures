@@ -15,11 +15,6 @@ import WeilConjectures.CategoryTheory.Limits.TowerTransitionEndomorphism
 import Mathlib.Algebra.Ring.GeomSum
 
 /-! # Koszul completion at nilpotent generators
-
-Source: literature/blueprint/main-20261015/blueprint/sec-proper-base-change/
-sk-thm-properbasechange/lemma-weil-pbc-adic-completion-reduction.proof.md,
-proof sentences four through seven (order 1328).
-(blueprint: lem-weil-pbc-nilpotent-koszul-completion-unit).
 -/
 
 @[expose] public section

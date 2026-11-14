@@ -265,8 +265,7 @@ private lemma evaluation_shift_localization
   exact localize_evaluation_shift Q P U I s₁ s₂ ev h₁ h₂
 
 /-- The signed source reindexing commutes with ordinary tensor evaluation.
-Source: Stacks Project, Tag 08JC, signed Hom-complex evaluation calculation.
-(blueprint: lem-sf-native-hom-evaluation-shift-one). -/
+Source: Stacks Project, Tag 08JC, signed Hom-complex evaluation calculation. -/
 private lemma nativeHom_evaluation_shift_one_model
     {C : Type d} [Category.{u + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C]
@@ -350,24 +349,7 @@ private lemma nativeHom_evaluation_shift_one_model
 
 -- Comparing the fixed evaluation maps unfolds their localization and internal Hom data.
 /-- The evaluation comparison respects the specified signed source shift in degree one.
-Source: Stacks Project, Tag 08JC, `lemma-RHom-triangulated`, Hom-complex signs and evaluation.
-(blueprint: lem-sf-native-hom-evaluation-shift-one).
-
-Proof: Use the shifted tensor-Hom adjunction: compose with the inverse source-shift
-comparison, then transpose for `Q(P[-1])`. The evaluation comparison is by definition the
-transpose of the lax monoidal comparison
-followed by localization of the ordinary evaluation. The source-shift mate is by definition
-transpose to the composite of the two tensor shift isomorphisms, moving the shift from the
-parameter to the argument. Thus it suffices to check the corresponding evaluation square
-on the summands of the total tensor complex. On the summand indexed by source degree p,
-the map σ reindexes to p-1 with coefficient (-1)^p. Moving the argument shift past that
-source degree contributes (-1)^(p-1), and the prescribed normalization at opposite degree
-one contributes -1. Their product is 1. Hence both transposes restrict to the same ordinary
-evaluation on every tensor summand. The coproduct universal property proves their equality.
-Apply the quotient functor and its tensor/shift comparison, then the derived tensor
-comparison; these respect the same square by their defining localization equations.
-Currying gives the displayed equality. This is an equality of the fixed evaluation maps,
-without any cone or distinguished-triangle assertion. No boundedness is used. -/
+Source: Stacks Project, Tag 08JC, Hom-complex signs and evaluation. -/
 theorem nativeHom_evaluation_shift_one
     {C : Type d} [Category.{u + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C]

@@ -9,7 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.InternalPerfectMatrix.InternalPe
 import Mathlib.LinearAlgebra.Matrix.ToLin
 
 /-! # Signed Hom differential in the fixed integral matrix coordinates
-Source: blueprint Compatible isomorphisms, signed matrix Hom complexes.
 -/
 
 @[expose] public noncomputable section
@@ -21,9 +20,7 @@ namespace AlgebraicGeometry.ProEtale.InternalPerfectMatrix
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- One matrix entry of a map between two integral terms in the chosen bases.
-Source: blueprint Compatible isomorphisms, integral matrix entries.
-(blueprint: lem-pe-internal-perfect-differential-entries). -/
+/-- One matrix entry of a map between two integral terms in the chosen bases. -/
 def mapEntry (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ)
     (hfree : ∀ i, Module.Finite (A l E) (P.X i) ∧ Module.Free (A l E) (P.X i))
     (i j : ℤ) (f : P.X i ⟶ P.X j)
@@ -31,11 +28,7 @@ def mapEntry (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ)
     (t : Fin (Module.finrank (A l E) (P.X j))) : A l E :=
   (basis l E P hfree j).repr (f ((basis l E P hfree i) s)) t
 
-/-- Composition in these coordinates is finite matrix multiplication.
-Source: blueprint Compatible isomorphisms, matrix Hom differential.
-(blueprint: lem-pe-internal-perfect-differential-entries).
-Proof: apply the standard change-of-basis matrix formula for composition to the three
-chosen finite bases, and take its t,s entry. Commutativity reorders the scalar factors. -/
+/-- Composition in these coordinates is finite matrix multiplication. -/
 theorem mapEntry_comp (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ)
     (hfree : ∀ i, Module.Finite (A l E) (P.X i) ∧ Module.Free (A l E) (P.X i))
     (i j k : ℤ) (f : P.X i ⟶ P.X j) (g : P.X j ⟶ P.X k)
@@ -49,12 +42,7 @@ theorem mapEntry_comp (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ)
     (basis l E P hfree i) (basis l E P hfree j) (basis l E P hfree k) g.hom f.hom)
   simpa [mapEntry, LinearMap.toMatrix_apply, Matrix.mul_apply, mul_comm] using h
 
-/-- The signed Hom differential is the signed sum of the two finite matrix products.
-Source: blueprint Compatible isomorphisms, d f minus the signed f d.
-(blueprint: lem-pe-internal-perfect-differential-entries).
-Proof: expand the signed Hom differential at i,j. Reading a basis coordinate commutes
-with addition and integer-unit multiplication. Apply mapEntry_comp to each of its two
-compositions. All intermediate bases are finite; zero ranks give empty sums. -/
+/-- The signed Hom differential is the signed sum of the two finite matrix products. -/
 theorem integralEntry_differential
     (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ)
     (hfree : ∀ i, Module.Finite (A l E) (P.X i) ∧ Module.Free (A l E) (P.X i))
@@ -86,13 +74,7 @@ theorem integralEntry_differential
   rw [mapEntry_comp, mapEntry_comp]
   rfl
 
-/-- The actual categorical scalar quotient has the same signed entry differential.
-Source: blueprint Compatible isomorphisms, the quotient of the signed scalar Hom complex.
-(blueprint: lem-pe-internal-perfect-differential-entries).
-Proof: lift a quotient cochain through the degreewise surjective cokernel projection.
-The projection is a chain map, and quotientEntry_projection computes each entry on
-the lift. Reduce the preceding integral differential formula. The quotient ring map
-preserves finite sums, products, and the integer sign, giving the displayed formula. -/
+/-- The actual categorical scalar quotient has the same signed entry differential. -/
 theorem quotientEntry_differential
     (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ)
     (hfree : ∀ i, Module.Finite (A l E) (P.X i) ∧ Module.Free (A l E) (P.X i))
@@ -134,12 +116,7 @@ theorem quotientEntry_differential
     (integralEntry_differential l E P hfree q i j hij s t x)
   simpa only [map_add, map_sum, map_mul, Units.smul_def, map_zsmul] using h
 
-/-- The quotient differential entry formula holds for locally constant families.
-Source: blueprint Compatible isomorphisms, sections of the constant quotient complex.
-(blueprint: lem-pe-internal-perfect-differential-entries).
-Proof: evaluate at an arbitrary point using the locally constant evaluation ring
-homomorphism. It preserves finite sums, products and the integer sign. The resulting
-identity is exactly quotientEntry_differential at that point. -/
+/-- The quotient differential entry formula holds for locally constant families. -/
 theorem locallyConstant_quotientEntry_differential (T : Type v) [TopologicalSpace T]
     (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ)
     (hfree : ∀ i, Module.Finite (A l E) (P.X i) ∧ Module.Free (A l E) (P.X i))

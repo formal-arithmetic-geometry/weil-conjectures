@@ -22,8 +22,7 @@ import WeilConjectures.AlgebraicGeometry.Rational.RationalCompletedPullbackIdent
 
 /-! # Composition and identity of normalized rational pullback
 
-Source: Bhatt--Scholze, Remark 6.8.15, p. 62; Stacks Tags 03CB, 0D6D, 07A4 and 099N
-(blueprint: lem-per-rational-pullback-composition-coherence).
+Source: Bhatt--Scholze, Remark 6.8.15, p. 62; Stacks Tags 03CB, 0D6D, 07A4 and 099N.
 The ordinary maps are fixed on sheafified tensor generators and derived computation
 counits. Completed maps retain the published strict quotient-tower units; their raw
 rationalizations retain all fraction arrows.
@@ -44,8 +43,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- The tensor-unit section of ordinary rational pullback on a pulled-back chart.
-Source: BS Remark 6.8.15; Stacks 03D2
-(blueprint: lem-per-rational-pullback-composition-coherence). -/
+Source: BS Remark 6.8.15; Stacks 03D2. -/
 def rationalCoherenceUnit {S T : Scheme.{u}} (g : S ⟶ T)
     (c : (proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj
       (rationalCoefficientSheaf l T E) ⟶ rationalCoefficientSheaf l S E)
@@ -63,8 +61,7 @@ def rationalCoherenceUnit {S T : Scheme.{u}} (g : S ⟶ T)
         (rationalCoefficientSheaf l T E)) (Iso.refl _) M V m)
 
 /-- Pull a rational coefficient section through the ring adjunction unit and structure map.
-Source: BS Remark 6.8.15; Stacks 03D2
-(blueprint: lem-per-rational-pullback-composition-coherence). -/
+Source: BS Remark 6.8.15; Stacks 03D2. -/
 def rationalCoherenceScalar {S T : Scheme.{u}} (g : S ⟶ T)
     (c : (proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj
       (rationalCoefficientSheaf l T E) ⟶ rationalCoefficientSheaf l S E)
@@ -74,9 +71,7 @@ def rationalCoherenceScalar {S T : Scheme.{u}} (g : S ⟶ T)
     (((proEtaleSheafAdjunction g CommRingCat.{u + 1}).unit.app
       (rationalCoefficientSheaf l T E)).hom.app (op V) e)
 
-/-- Scalar multiplication on the rational module at a chart, with explicit section types.
-Source: BS Remark 6.8.15, balanced tensor formulas
-(blueprint: lem-per-rational-pullback-composition-coherence). -/
+/-- Scalar multiplication on the rational module at a chart, with explicit section types. -/
 def rationalCoherenceSmul (T : Scheme.{u})
     (M : pbcModules T (rationalCoefficientSheaf l T E)) (V : T.ProEtᵒᵖ)
     (e : (rationalCoefficientSheaf l T E).obj.obj V) (m : M.val.obj V) : M.val.obj V :=
@@ -97,8 +92,7 @@ set_option maxHeartbeats 700000 in
 /-- The composition equation with all specified ordinary, completed and raw maps.
 The module formula uses generators on base-changed charts; sheafification and balancing
 extend it to local tensors. Derived normalization fixes the ambient comparison itself.
-Source: BS Remark 6.8.15; Stacks 03CB, 0D6D, 07A4, 099N
-(blueprint: lem-per-rational-pullback-composition-coherence). -/
+Source: BS Remark 6.8.15; Stacks 03CB, 0D6D, 07A4, 099N. -/
 def HasRationalPullbackCompositionCoherence (g : Y ⟶ X) (h : Z ⟶ Y)
     (sX : RationalModuleRealization l E X) (sY : RationalModuleRealization l E Y)
     (sZ : RationalModuleRealization l E Z)
@@ -194,8 +188,7 @@ def HasRationalPullbackCompositionCoherence (g : Y ⟶ X) (h : Z ⟶ Y)
     whiskerLeft sX.J ambientComp.hom)
 
 /-- Identity normalization, including the ordinary tensor formula and the raw natural equation.
-Source: BS Remark 6.8.15; Stacks 0D6D, 099N
-(blueprint: lem-per-rational-pullback-composition-coherence). -/
+Source: BS Remark 6.8.15; Stacks 0D6D, 099N. -/
 def HasRationalPullbackIdentityCoherence (sX : RationalModuleRealization l E X)
     (a : RationalRealizationPullbackComparison l E (𝟙 X) sX sX) : Prop :=
   (∀ n : ℕ,
@@ -244,36 +237,7 @@ attribute [irreducible] HasRationalPullbackCompositionCoherence
   HasRationalPullbackIdentityCoherence
 
 /-- The specified realization comparisons commute with composition of scheme morphisms.
-Source: BS Remark 6.8.15, p. 62; Stacks 03CB, 0D6D, 07A4 and 099N
-(blueprint: lem-per-rational-pullback-composition-coherence).
-
-Proof (the eight steps of the node):
-1. Compute finite constant pullback on a section a. Both composite maps return a.
-They commute with quotient transitions. Test the two completed coefficient maps
-against every finite projection; limit projections are jointly monic.
-2. Use lem-sfb-ringed-derived-monoidal-comparisons and localization inverse-image
-coherence. On flat-term K-flat representatives balanced tensor flattening sends
-e'' tensor e' tensor k to e'' d_h(e') tensor k. Its inverse inserts one. Both
-ordinary realization routes send e'' tensor b' tensor k to e'' iota(c_h(b')) tensor k.
-These maps commute with restrictions and differentials and therefore descend.
-3. Use lem-weil-pbc-ringed-koszul-completion-reflector and the constant/completed
-equivalence, retaining the quotient-tower unit. Ringed pushforward preserves complete
-objects since it carries the ideal generator to the same constant scalar. Reflection
-and ordinary adjunction give completed pullback adjunctions on full complete categories.
-4. Apply lem-sbc-reflected-compositor-unit-normalization to the canonical right
-composition comparison. Transport through the unit-compatible strict-tower comparison.
-This gives completion_units and fixes the completed compositor, before inverting units.
-5. The realization pullback comparison makes each specified gamma invertible on
-integral objects. Cancel those units: the completed compositor is precisely the
-conjugate of the ordinary compositor by gamma, including their naturality.
-6. Expand alpha as F(gamma inverse) followed by ordinary flattening. Naturality of
-the h flattening at gamma_g inverse, the ordinary tensor equation of step 2, and
-the unit equation of step 4 show that both displayed natural transformations agree.
-7. The identity case removes one in the tensor formula. The reflector identity
-satisfies completed_identity gamma_id = ordinary_identity, giving the same calculation.
-8. Every map preserves constant uniformizer scalars. Multiply integral naturality
-by varpi^(-n) to descend every fraction f/varpi^n. Objects of raw rationalization
-are integral objects, so the equations hold on that entire category. -/
+Source: BS Remark 6.8.15, p. 62; Stacks 03CB, 0D6D, 07A4 and 099N. -/
 theorem rationalPullbackCompositionCoherence (g : Y ⟶ X) (h : Z ⟶ Y)
     (sX : RationalModuleRealization l E X) (sY : RationalModuleRealization l E Y)
     (sZ : RationalModuleRealization l E Z)

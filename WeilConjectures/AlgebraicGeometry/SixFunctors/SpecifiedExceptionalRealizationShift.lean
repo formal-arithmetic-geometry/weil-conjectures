@@ -13,9 +13,7 @@ import all WeilConjectures.CategoryTheory.SmoothPurity.CanonicalRightDerivedAdju
 
 /-! # Right realization shifts determined by the specified relative Hom chain
 
-Source: Zheng, Proposition 2.23; the shift-compatibility part of the blueprint
-exceptional construction, steps 4--5
-(blueprint: lem-sf-specified-exceptional-realization-shift).
+Source: Zheng, Proposition 2.23.
 -/
 
 @[expose] public noncomputable section
@@ -382,22 +380,7 @@ private theorem relativeRealization_shift
 Only compatibility of the right realization is asserted: the restricted adjunction,
 left shifts, left comparison, boundedness and origins are inputs.
 
-Source: Zheng, Proposition 2.23; blueprint exceptional construction, steps 4--5
-(blueprint: lem-sf-specified-exceptional-realization-shift).
-
-Proof: the defining unit factorization compares the bounded-below and unbounded
-derived shifts: on injective complexes its first factor is invertible, and every
-bounded-below object has an injective representative. Thus the fixed compact-support
-comparison commutes with the prescribed shifts. The comparison adjunction is the
-canonical exact-left/right-derived adjunction, so it also commutes with these shifts.
-For a shift-compatible adjunction, the unit equation gives the corresponding shifted
-Hom formula. Apply it to the composite etale and comparison adjunction, and shift the
-retained origin isomorphism at both ends. Its two occurrences cancel. For each L, use
-an origin for RX(G L) and apply this formula to the normalized counit. The transpose
-of the counit is the identity; its shifted transpose is the inverse right-adjoint shift.
-The left comparison's shift equation identifies the inputs. Normalization and
-cancellation of invertible shift maps give precisely the desired rG shift square.
-No extra argument is needed for zero objects, zero shifts or empty schemes. -/
+Source: Zheng, Proposition 2.23. -/
 theorem specifiedExceptionalRealization_shift
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Y : Scheme.{u}} {f : X ⟶ Y} [QuasiCompact f] [CompactSpace Y]

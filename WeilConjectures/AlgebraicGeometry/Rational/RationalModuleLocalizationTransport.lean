@@ -303,22 +303,7 @@ private theorem completedFractionDescent (X : Scheme.{u}) [IsNoetherian X]
               (pbcRationalCoefficientEquiv l E).toRingHom H hH K L f)))
 
 /-- Exact derived localization and fraction descent in the completed presentation.
-Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2)
-(blueprint: lem-per-rational-module-localization-transport).
-
-Proof: use the scalar-normalized isomorphism i to identify the completed constant
-section action with continuous integral constants. Compare sheafified sectionwise
-localization with continuous rational functions, retaining the actual coefficient
-inclusion. Exactness of localized module extension and uniqueness of left adjoints
-transport finite exactness to the specified extension. Compare its universal derived
-pair with the exact induced derived functor to obtain shifts, triangulation and the
-cohomology isomorphisms. The scalar square makes derived extension semilinear for the
-actual integral inclusion into E. On localized Hom groups extend by the balanced map
-b tensor f to e(b) times F(f). Tensor induction verifies functoriality and E-linearity.
-The identity factorization on integral objects descends its shift through the fixed
-rationalization. Its distinguished-image criterion then proves triangulation. The
-object function is unchanged and the tensor formula gives the displayed fractions.
-No constructibility or finite-module model assertion is used in this argument. -/
+Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2). -/
 theorem rationalModuleLocalizationTransport (X : Scheme.{u}) [IsNoetherian X]
     [Fact (∃ n : ℕ, topologicalKrullDim X ≤ n)]
     [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))]

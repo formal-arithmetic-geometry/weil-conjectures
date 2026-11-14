@@ -86,25 +86,7 @@ set_option maxHeartbeats 2400000 in
 -- The dependent normalization stalks and the root presentation need this elaboration budget.
 /-- The tame local chart, before using splitting of the generic section fibre.
 
-Source: Stacks Project, Tag 0EYH, and the transverse section construction in 0EYI(2).
-(blueprint: lem-sbc-stalk-normalization-trait-section-chart-generic-factor)
-
-Proof: Minimality of s makes the inverse image of U in the local trait its punctured
-spectrum. Smoothness makes the closed fibre a regular effective Cartier divisor.
-Since the group order is invertible, the generic torsor is tame at its codimension-one
-points. The tame normal form of 0EYH gives, after an etale base change, factors
-R[T]/(T^e-f) with e positive and f the divisor equation. Compatibility of integral
-closure with localization and etale base change identifies these charts with the
-concrete normalization in the statement. Select a factor and point above x, localize,
-and call the resulting ring D. Its map beta from the normalization stalk is local
-and etale, hence flat. Modulo the maximal ideal of the base the factor is a localization
-of a residue field[T]/(T^e), so its maximal ideal is JD+(t) and t^e belongs to JD.
-Pull the chart back to the section and localize over the closed point. The section
-ring is an unramified trait extension. Its fraction field K has normalized integer
-valuation, and transversality makes the image pi of f a uniformizer. Its generic
-section factor is Spec K[T]/(T^e-pi), an open factor of the base changed section fibre
-of Z. This gives b, g and the displayed structural-map identity. No rational point
-of the generic section fibre is used in this construction. -/
+Source: Stacks Project, Tag 0EYH, and the transverse section construction in 0EYI(2). -/
 theorem GaloisCover.stalk_normalization_trait_section_chart_generic_factor {S C : Scheme.{u}}
     [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]

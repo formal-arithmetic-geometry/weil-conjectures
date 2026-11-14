@@ -24,9 +24,8 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-!
 # Open extension preserves finite constructibility and cohomological intervals
 
-Source: Bhatt--Scholze, The pro-etale topology for schemes, Lemma 6.7.7, open factor;
-Stacks Project, Tags 09AH and 09BN
-(blueprint: lem-sf-open-finite-constructibility-interval).
+Source: Bhatt--Scholze, The pro-etale topology for schemes, Lemma 6.7.7, open factor; Stacks
+Project, Tags 09AH and 09BN.
 -/
 
 @[expose] public section
@@ -191,37 +190,8 @@ An arbitrary collection of empty strata may be omitted. The immediately applied 
 lambda supplies the proved finite-ring witness and the existing small-site sheafification
 transport at its fixed coefficient size; it introduces no additional hypothesis or definition.
 
-Source: Bhatt--Scholze, Lemma 6.7.7, preservation by the open factor;
-Stacks Project, Tags 09AH and 09BN
-(blueprint: lem-sf-open-finite-constructibility-interval).
-
-Proof, following the six steps of the node:
-1. Noetherian opens are quasi-compact (lem-weil-pbc-noetherian-open-subscheme-noetherian),
-so j is quasi-compact by the affine criterion (def-weil-finite-type-morphism). Choose the
-reduced closed complement (lem-weil-pbc-reduced-induced-closed-subscheme). Identify
-inverse-image constant coefficients (lem-pur-proetale-constant-coefficient-comparison)
-and apply lem-weil-pbc-proetale-ringed-open-closed.
-2. Exactness and situation-conventions give termwise derived extension.
-The exact-functor cohomology comparison (lem-weil-pbc-exact-functor-complex-cohomology)
-is natural in representatives and descends through quasi-isomorphisms.
-3. Keep every original stratum immersion, composed with j, and add the reduced complement.
-Locally closed subsets of an open remain locally closed in the ambient scheme
-(def-weil-locally-closed-subset, def-weil-closed-immersion). The Noetherian topology
-(lem-weil-pbc-noetherian-scheme-closed-subsets-minimal) makes all these subsets constructible
-(def-weil-constructible-subset). Omitting any chosen empty strata preserves disjointness
-and coverage, giving the stratification
-(definition-constructible-sheaves--2).
-4. Constant-coefficient pullback composition (lem-pur-proetale-module-pullback-composition)
-and the open unit identify restrictions on the original strata with the original sheaves.
-The complementary restriction is zero by lem-weil-pbc-proetale-ringed-open-closed.
-5. Transport each local constant model and its finite stalks through these isomorphisms.
-The complement has the constant zero module with singleton stalks
-(def-weil-proetale-locally-constant-sheaf, def-weil-proetale-constructible-sheaf).
-The cohomology comparison transports these witnesses to the output cohomology.
-6. Outside [a,b], input cohomology is zero and additive extension preserves zero.
-The output therefore has the same interval (def-weil-cohomological-support), finite
-cohomological support, and constructible cohomology (definition-constructible-sheaves).
-This includes the empty open, the identity open, zero complexes, and empty strata. -/
+Source: Bhatt--Scholze, Lemma 6.7.7, preservation by the open factor; Stacks Project, Tags 09AH and
+09BN. -/
 theorem open_finite_constructibility_interval
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n)

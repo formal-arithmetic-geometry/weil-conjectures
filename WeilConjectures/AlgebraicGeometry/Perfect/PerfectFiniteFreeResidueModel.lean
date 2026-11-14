@@ -12,12 +12,11 @@ import WeilConjectures.AlgebraicGeometry.Perfect.PerfectFiniteFreeResidueModelEx
 
 /-! # Finite free local models with prescribed residue cohomology ranks
 
-Source: Stacks Project, More on Algebra, Lemma lift-perfect-from-residue-field, Tag 0BCD
-(blueprint: lem-sc-perfect-finite-free-residue-model).
+Source: Stacks Project, More on Algebra, Lemma lift-perfect-from-residue-field, Tag 0BCD.
 
 The derived fibre is `derivedPullback (X.fromSpecResidueField x)`; its degree-`i`
 cohomology vector space over `κ(x)` is `derivedFiberCohomology X E i x` and its dimension
-`d_i` is `derivedFiberBetti X E i x` (def-sc-derived-fiber-betti).
+`d_i` is `derivedFiberBetti X E i x`.
 -/
 
 @[expose] public section
@@ -30,29 +29,7 @@ noncomputable section
 
 /-- Every perfect complex has an affine local bounded finite free model whose degreewise
 ranks equal its derived fibre cohomology dimensions at the prescribed point.
-Source: Stacks Project, More on Algebra, Lemma lift-perfect-from-residue-field, Tag 0BCD
-(blueprint: lem-sc-perfect-finite-free-residue-model).
-
-Proof:
-1. By `lemma-coherent-base-change-invertible-sheaves--1` and its affine characterization (Tag 08EB),
-choose an affine
-   neighbourhood `Spec A` of `x` with a bounded finite projective representative `P`.
-   Pull it to the residue field. By `lem-sc-perfect-pullback-perfect-residue` this fibre
-   is perfect. Its cohomology is finite dimensional and has finite support.
-2. Localize `P` at the prime corresponding to `x`. Finite projective modules over this
-   local ring are finite free (Tag 00NZ), so this complex is pseudo-coherent
-   (`def-pur-pseudo-coherent-complex`). Apply
-   `lem-sc-perfect-local-pseudocoherent-free-model` (Tag 0BCC) to obtain a bounded above
-   free model with term ranks `d i`. Finite support of `d` makes this model bounded.
-3. The local ring is the filtered colimit of principal localizations away from the prime
-   (Tag 00CM). By `lem-pc-affine-perfect-colimit-descent`, descend the bounded projective
-   complex to a principal localization. By `lem-pc-affine-perfect-hom-colimit`, descend
-   its derived isomorphism with `P`, its inverse, and the two identity relations after
-   further localization. Apply `lem-weil-pbc-finite-projective-standard-free-cover` to
-   the finitely many nonzero terms, choosing free neighbourhoods containing the prime.
-   Intersect these principal opens. Each free term has rank `d i`, because its
-   localization is the prescribed free term over a nonzero local ring. Sheafify this
-   complex on the resulting affine open to obtain the asserted model. -/
+Source: Stacks Project, More on Algebra, Lemma lift-perfect-from-residue-field, Tag 0BCD. -/
 theorem exists_finiteFreeResidueModel
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

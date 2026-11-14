@@ -16,8 +16,7 @@ import all WeilConjectures.CategoryTheory.Scalar.ScalarLocalizationDerivedHom
 /-!
 # Transport of the scalar-localization Hom comparison to normalized rational coefficients
 
-Source: Bhatt--Scholze, Lemma 6.8.12 and Proposition 6.8.14(2), pp. 61--62
-(blueprint: lem-per-rational-realization-hom-transport).
+Source: Bhatt--Scholze, Lemma 6.8.12 and Proposition 6.8.14(2), pp. 61--62.
 -/
 
 @[expose] public noncomputable section
@@ -41,8 +40,7 @@ variable (X : Scheme.{u}) [IsNoetherian X]
 /-- Restrict the realization's normalized constant field action along the canonical
 identification of the localized valuation ring with E. This constructs only the scalar
 structure required to apply the existing localized-Hom comparison predicate.
-Source: Bhatt--Scholze, Proposition 6.8.14(2)
-(blueprint: lem-per-constructible-rational-hom-comparison). -/
+Source: Bhatt--Scholze, Proposition 6.8.14(2). -/
 @[instance_reducible]
 def rationalRealizationLocalizedLinear (R : RationalModuleRealization l E X) :
     Linear (Localization.Away (pbcUniformizer l E))
@@ -115,33 +113,7 @@ private theorem transportHomComparison
 coefficient presentation and for the universal derived tensor functor. No constructibility
 hypothesis or conclusion about the raw rationalization functor occurs here.
 
-Source: Bhatt--Scholze, Lemma 6.8.12 and Proposition 6.8.14(2), pp. 61--62
-(blueprint: lem-per-rational-realization-hom-transport).
-
-Proof:
-1. Apply the scalar-localization derived-Hom theorem on the pro-etale site to the
-completed coefficient ring, its constant-section map, and the uniformizer. Use the
-full subcategory of bounded-below Hom-continuous objects in the embedding theorem,
-or directly use the source and target predicates of scalarLocalization_derivedHom.
-2. The quotient-normalized integral isomorphism identifies constant completed sections
-with constant integral functions. Its localization, followed by R.localizationIso,
-identifies the standard sheaf localization with the rational coefficient sheaf. The
-normalizations of R.inclusion and R.localizationIso identify the resulting coefficient
-map with R.integralIso.hom followed by R.inclusion. This is a sheaf localization;
-no uniform global denominator condition is imposed on sections.
-3. Restriction along the inverse ring isomorphism is an exact module equivalence.
-Transport the termwise exact derived localization through it. Since the localized
-module is flat, its ordinary tensor functor is exact, and its value on a K-flat
-resolution agrees with the specified universal left derived tensor functor. Uniqueness
-of the left derived functor, respecting its counit, gives the comparison isomorphism.
-Transfer the termwise shift structure along this isomorphism.
-4. Constants identify the localized scalar action with restriction of the normalized
-E-action along pbcRationalCoefficientEquiv. Conjugate each Hom equivalence by the
-functor comparison and shift comparison. Naturality cancels the conjugating maps in
-precomposition, postcomposition, identities and composition; coherence of the
-transported shift comparison gives simultaneous shifts. The normalization on constant
-uniformizers gives precisely the fraction formula for every numerator and power.
-This also covers zero objects, torsion objects and the empty scheme. -/
+Source: Bhatt--Scholze, Lemma 6.8.12 and Proposition 6.8.14(2), pp. 61--62. -/
 theorem rationalRealizationHomTransport (R : RationalModuleRealization l E X) :
     (fun [_localizedLinear : Linear (Localization.Away (pbcUniformizer l E))
         (DerivedCategory (pbcModules X (rationalCoefficientSheaf l X E)))] ↦

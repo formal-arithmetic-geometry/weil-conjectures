@@ -29,24 +29,7 @@ limit as the supplied Noetherian approximation. No normality of the stages or of
 is needed for this comparison, and no affine-transition hypothesis on X is needed.
 
 Source: Stacks Project, Tag 0EZJ, the claim that the normal replacement diagram still
-has limit S; Tag 01ZM for finite-presentation morphism descent.
-(blueprint: lem-sbc-dominant-finite-refinement-limit)
-
-Proof: Finite morphisms to the Noetherian original stages are locally of finite
-presentation. For each i, descend alpha_i:S -> X_i over N_i to some later original
-stage: there are f:j -> i and a:N_j -> X_i with pi_j followed by a equal to alpha_i,
-and a followed by p_i equal to N(f). The two maps p_j followed by a and X(f)
-from X_j to X_i agree after p_i, by naturality of p. They agree after alpha_j,
-by the cone compatibility and pi_j followed by a equal to alpha_i. Since X_j is
-reduced, alpha_j is dominant, and p_i is separated, these maps are equal.
-Now take any cone c:T -> X. Compose it with p and use the original limit to
-obtain its unique lift l:T -> S over N. At the descended stage j, the equation
-l followed by alpha_i = l followed by pi_j followed by a = c_j followed by p_j
-followed by a = c_j followed by X(f) = c_i proves every required factorization.
-If m:T -> S is another lift over X, composing with every p_i shows that m is a
-lift of c followed by p over N. The uniqueness of the original limit forces m=l.
-Thus the original limit lifts define the lift, factorization, and uniqueness fields
-of an IsLimit structure for the refinement cone. -/
+has limit S; Tag 01ZM for finite-presentation morphism descent. -/
 theorem isLimit_of_dominant_finite_refinement {S : Scheme.{u}}
     (N : S.NoetherianApproximation)
     (X : N.I ⥤ Scheme.{u}) (α : (Functor.const N.I).obj S ⟶ X) (p : X ⟶ N.D)

@@ -85,7 +85,7 @@ namespace ProjectiveSpace
 variable (S : Scheme.{u})
 
 /-- **The twisting sheaf `𝒪(m)` on `ℙ(n; S)`**: the pullback along the projection
-`toProjInt : ℙ(n; S) ⟶ Proj ℤ[Tᵢ]` of the twisting sheaf `𝒪(m)` of the integral model, i.e.
+`toProjInt: ℙ(n; S) ⟶ Proj ℤ[Tᵢ]` of the twisting sheaf `𝒪(m)` of the integral model, i.e.
 along the top arrow of the defining base-change square of `ℙ(n; S)`:
 
 ```
@@ -97,18 +97,16 @@ along the top arrow of the defining base-change square of `ℙ(n; S)`:
      S ─────────────────▶ Spec ℤ
 ```
 
-Since `toProjInt` commutes with `map n f` for any `f : S ⟶ T`, `𝒪(m)` commutes with base
+Since `toProjInt` commutes with `map n f` for any `f: S ⟶ T`, `𝒪(m)` commutes with base
 change (`pullbackMapTwistIso`). On the standard opens `Uᵢ = D₊(xᵢ)` it is free of rank one,
 and it is glued along the transition units `ProjectiveSpace.transitionUnit`.
 
 The cocycle rule for these units on triple intersections is
-`ProjectiveSpace.transitionUnit_mul_transitionUnit` (blueprint `lem-pc-twist-cocycle`), the section
+`ProjectiveSpace.transitionUnit_mul_transitionUnit`, the section
 `xᵢ` of `𝒪(1)` is `ProjectiveSpace.coordinateSection`, and the identifications
-`𝒪(d) ⊗ 𝒪(e) ≅ 𝒪(d + e)`, `𝒪(0) ≅ 𝒪` are `ProjectiveSpace.nonempty_tensorObj_twist_iso`
-(blueprint `theorem-riemann-roch-coherent-serre-duality`); for a module `ℱ`, `ℱ(d)` stands for
-`ℱ ⊗ 𝒪(d)`.
-
-(blueprint: `def-pc-projective-space-twist`, `lemma-coherent-base-change-invertible-sheaves--1`) -/
+`𝒪(d) ⊗ 𝒪(e) ≅ 𝒪(d + e)`, `𝒪(0) ≅ 𝒪` are `ProjectiveSpace.nonempty_tensorObj_twist_iso`; for a
+module `ℱ`, `ℱ(d)` stands for
+`ℱ ⊗ 𝒪(d)`. -/
 def twist (m : ℤ) : (ℙ(n; S)).Modules :=
   (Scheme.Modules.pullback (toProjInt n S)).obj
     (Proj.twist (MvPolynomial.homogeneousSubmodule n (ULift.{u} ℤ)) m)
@@ -176,9 +174,7 @@ instance isInvertible_twist (m : ℤ) : (twist n S m).IsInvertible :=
 open MonoidalCategory in
 /-- **Twists and tensor products** on `ℙ(n; S)`: `𝒪(a) ⊗ 𝒪(b) ≅ 𝒪(a + b)`, by pulling back the
 corresponding isomorphism `Proj.nonempty_tensorObj_twist_iso` of the integral model, the pullback
-of a tensor product being the tensor product of the pullbacks.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality`) -/
+of a tensor product being the tensor product of the pullbacks. -/
 theorem nonempty_tensorObj_twist_iso (a b : ℤ) :
     Nonempty (twist n S a ⊗ twist n S b ≅ twist n S (a + b)) := by
   obtain ⟨e₁⟩ := Scheme.Modules.nonempty_pullback_tensorObj_iso (toProjInt n S)

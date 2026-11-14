@@ -146,8 +146,7 @@ lemma isPullback {R : CommRingCat.{u}} (t : Spec R ⟶ X) [IsOpenImmersion t] (�
   · rw [← cancel_mono t, h₂, IsOpenImmersion.lift_fac]
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The `#k`-power Frobenius of a scheme over `Spec k` is a universal homeomorphism
-(blueprint `lemma-comparison-via-relative-frobenius--1`, Step 2). -/
+/-- The `#k`-power Frobenius of a scheme over `Spec k` is a universal homeomorphism. -/
 theorem isUniversalHomeomorphism : IsUniversalHomeomorphism F := by
   have key (P : MorphismProperty Scheme.{u}) [IsZariskiLocalAtTarget P]
       (H : ∀ {R : CommRingCat.{u}} (φ : R ⟶ R), (∀ r, φ.hom r = r ^ Nat.card k) →
@@ -167,8 +166,7 @@ theorem isUniversalHomeomorphism : IsUniversalHomeomorphism F := by
       (isUniversalHomeomorphism_specMap_of_pow ψ hφ).toUniversallyInjective⟩,
     key @Surjective fun φ hφ ψ ↦ (isUniversalHomeomorphism_specMap_of_pow ψ hφ).toSurjective⟩
 
-/-- The `#k`-power Frobenius of a scheme locally of finite type over `Spec k` is finite
-(blueprint `lemma-comparison-via-relative-frobenius--1`, Step 1 for `Y₀ = Spec k`). -/
+/-- The `#k`-power Frobenius of a scheme locally of finite type over `Spec k` is finite. -/
 theorem isFinite [LocallyOfFiniteType f₀] : IsFinite F := by
   have := hF.isUniversalHomeomorphism f₀
   have : LocallyOfFiniteType (F ≫ f₀) := by rw [hF.comp_eq f₀]; infer_instance
@@ -177,9 +175,9 @@ theorem isFinite [LocallyOfFiniteType f₀] : IsFinite F := by
   exact ⟨inferInstance, inferInstance⟩
 
 /-- The `#k`-power Frobenius is natural: if `X` is a scheme over `Spec k` and `F_X`, `F_Y` are
-the `#k`-power Frobenii of `X` and of a scheme `Y`, then every morphism `f : X ⟶ Y` satisfies
+the `#k`-power Frobenii of `X` and of a scheme `Y`, then every morphism `f: X ⟶ Y` satisfies
 `f ≫ F_Y = F_X ≫ f`. On an affine chart `Spec R` of `X` both sides are `r ↦ r ^ #k` followed
-by the chart (blueprint `lemma-comparison-via-relative-frobenius--text-1`). -/
+by the chart. -/
 lemma comp_eq_comp {Y : Scheme.{u}} {F' : Y ⟶ Y} (hF' : F'.IsFrobenius (Nat.card k))
     (f : X ⟶ Y) : f ≫ F' = F ≫ f := by
   refine X.affineOpenCover.openCover.hom_ext _ _ fun j ↦ ?_
@@ -205,7 +203,7 @@ lemma isPullback_of_isOpenImmersion {U : Scheme.{u}} {FU : U ⟶ U} (t : U ⟶ X
 
 
 /-- The `m`-th iterate of the `#k`-power Frobenius of a scheme over `Spec k` is its
-`#k ^ m`-power Frobenius (blueprint `lemma-comparison-via-relative-frobenius--text-1`). -/
+`#k ^ m`-power Frobenius. -/
 lemma pow (m : ℕ) : (End.asHom (End.of F ^ m)).IsFrobenius (Nat.card k ^ m) := by
   induction m with
   | zero =>

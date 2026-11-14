@@ -225,9 +225,6 @@ set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 -- Elaborating the condensed-module derived comparisons needs a larger budget.
 /-- Single-complex derived section compatibility.
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md.
-(blueprint: lem-sfb-projective-supported-source-arrow-derived-core)
 -/
 theorem projective_section_single (Y : Scheme.{u})
     (f : diagonalSurface Y ⟶ ProjectiveLine Y)

@@ -20,23 +20,7 @@ noncomputable section
 /-- Spread a minimal finite free model from the local ring of a strictly perfect
 neighbourhood, using the already known finite residue cohomology and its bounded support.
 Source: Stacks Project, More on Algebra, Tags 0BCD, 0BCC, 0BC7; Derived Categories of
-Schemes, Tags 08EB and 09RE.
-(blueprint: lem-sc-perfect-finite-free-residue-model-existence).
-
-Proof:
-1. Choose a complex G representing E using essential surjectivity of the derived
-   localization. Take its stalk complex C. The exact stalk/fibre comparison
-   strictPerfect_stalk_fiberData makes Q(C) pseudo-coherent and identifies the
-   finite residue cohomology and its dimensions with the given fibre data.
-2. Apply exists_unique_minimalFreeModel over O_X,x, with d i = derivedFiberBetti X E i x.
-   The upper bound in hbound gives the required bounded-above rank support.
-3. The resulting model F has terms isomorphic to O_X,x^(d i). For every i outside
-   the two bounds in hbound, d i = 0. Its displayed free module is therefore a zero
-   object, and transporting along the termwise isomorphism makes F.X i zero.
-   Hence F is bounded, using precisely the bounds from hbound.
-4. Apply spread_boundedFree_stalkModel to this given bounded stalk model, its ranks
-   and its derived isomorphism with C. This supplies the affine neighbourhood and
-   the bounded free sheaf complex with the required ranks and derived comparison. -/
+Schemes, Tags 08EB and 09RE. -/
 theorem finiteFreeModel_of_fiberData
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

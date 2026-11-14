@@ -21,17 +21,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- A product root chart has open generic factors after any extension of its coefficient ring.
 
-Source: Stacks Project, Tag 0EYI, preliminary root-chart base change calculation.
-(blueprint: lem-sbc-root-product-chart-base-change-factor)
-
-Proof: Base change alpha along Spec theta. The pullback associativity isomorphism
-identifies its source with pullback n (Spec theta followed by phi). On affine rings,
-tensor product commutes with finite products and polynomial quotients. The mapped
-polynomial is X^(e k)-C(theta f). Each product projection is the coordinate ring
-map of an open and closed factor inclusion. Compose that inclusion with the
-inverse of the base-changed chart isomorphism. All maps are over Spec K, which gives
-the displayed projection identity. The statement has no factors to check when m=0;
-no positivity hypothesis is needed for this affine base change. -/
+Source: Stacks Project, Tag 0EYI, preliminary root-chart base change calculation. -/
 theorem rootProductChart_baseChange_factor {L N : Scheme.{u}} (n : N ⟶ L)
     (R : CommRingCat.{u}) (φ : Spec R ⟶ L) (f : R)
     (m : ℕ) (e : Fin m → ℕ)

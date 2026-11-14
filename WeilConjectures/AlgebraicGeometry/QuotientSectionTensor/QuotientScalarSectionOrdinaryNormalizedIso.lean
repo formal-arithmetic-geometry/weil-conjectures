@@ -126,12 +126,7 @@ variable [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ T)]
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ' T)]
 
 /-- A normalized scalar-extension transformation is objectwise invertible.
-Source: Stacks 03EK and 06YY; scalar-extension generators detect isomorphisms.
-(blueprint: lem-sfb-quotient-scalar-section-ordinary-normalized-iso).
-
-Proof: the sheafified pure tensors `1 tensor m` generate the change-of-rings sheaf.
-The generator equation identifies the transformation with the canonical extension map;
-its inverse is induced by the universal restriction-of-scalars counit. -/
+Source: Stacks 03EK and 06YY; scalar-extension generators detect isomorphisms. -/
 theorem scalar_section_ordinary_normalized_isIso (T : Scheme.{u})
     (model : SectionModel a T)
     (ordinary : QuotientChange.extension a T ⋙

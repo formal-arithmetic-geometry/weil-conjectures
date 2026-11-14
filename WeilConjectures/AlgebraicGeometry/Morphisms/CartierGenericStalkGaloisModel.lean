@@ -30,28 +30,7 @@ namespace AlgebraicGeometry.Scheme
 /-- A finite normalization of a pulled-back torsor over the complement of an integral
 Cartier centre has a Galois integral-closure model at a DVR generic stalk.
 
-Source: Stacks Project, Tags 0307 and 09EB.
-(blueprint: lem-sbc-cartier-generic-stalk-galois-model)
-
-Proof: The pullback square identifies p with the pullback of W along κ. Localize N
-at j(eta). The Cartier ideal becomes the maximal ideal, since
-the integral centre has a field stalk at its generic point. The complement V after
-this localization is therefore the generic point of the DVR, namely its fraction
-field K. The cover there is a finite etale G-torsor. Its finite etale algebra is a
-product of finite separable fields. Choose the factor containing the generization
-of x, and let T be its stabilizer. Simple transitivity of the torsor action implies
-that this field is Galois over K with group T. Let S be its integral closure over
-the displayed DVR. Normalization commutes with this localization by Tag 0307, so
-the localized normalization is the product of these integral closures. Its assumed
-finiteness makes S module finite. S is a domain and torsion free over the DVR and
-hence flat. The T-action preserves integral elements and is faithful. An invariant
-element is in K and integral over the DVR, so belongs to that integrally closed
-DVR; this gives IsGaloisGroup T R0 S. The point x gives a prime q0 in the selected
-factor. The localization and factor comparisons commute with the base ring maps.
-Their induced residue field isomorphisms identify the two extensions, so their
-finranks agree. This proves the comparison without any arithmetic degree formula.
-The existence of eta excludes an empty centre; empty normalization fibres are
-vacuous, and a trivial group gives the single factor K. -/
+Source: Stacks Project, Tags 0307 and 09EB. -/
 theorem cartier_generic_stalk_galois_model
     {N U P : Scheme.{u}} [IsLocallyNoetherian N]
     (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)

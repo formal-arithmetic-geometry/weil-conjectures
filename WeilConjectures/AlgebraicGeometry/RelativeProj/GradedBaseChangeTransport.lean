@@ -10,7 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.RelativeProj.Affine
 /-! # Transport of coefficientwise graded base change
 
 Source: Stacks Project, Constructions, Tag 01O3.
-(blueprint: lem-pur-graded-base-change-transport).
 -/
 
 @[expose] public section
@@ -38,9 +37,7 @@ private theorem degree_bijective
 
 /-- A coefficientwise graded base change is preserved by graded algebra isomorphisms
 on source and target.
-Source: Stacks Project, Tag 01O3.
-Proof: in each degree the new map is obtained from the old one by bijective linear maps.
-Transport the base-change isomorphism along their degreewise linear equivalences. -/
+Source: Stacks Project, Tag 01O3. -/
 theorem isGradedBaseChangeAlong_transport
     {R S A₀ A₁ B₀ B₁ : Type u}
     [CommRing R] [CommRing S] [CommRing A₀] [CommRing A₁]

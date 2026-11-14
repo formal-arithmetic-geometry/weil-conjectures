@@ -12,8 +12,7 @@ public import WeilConjectures.Compactification.CategoryBaseChange
 /-!
 # Abstract proper/open interchange data
 
-Source: Stacks Project, Tags 0F7C, 0F7D, 0F7J and 0F7K, the formal pasting
-calculus (blueprint: def-sp-proper-open-calculus).
+Source: Stacks Project, Tags 0F7C, 0F7D, 0F7J and 0F7K, the formal pasting calculus.
 
 `A` specifies the schemes in the ambient category. All arrows below are actual
 scheme morphisms, and no category or functor outside `A` is required.
@@ -32,8 +31,7 @@ namespace AlgebraicGeometry
 set_option linter.checkUnivs false in
 /-- Categories, proper and quasi-compact open functors, and coherent invertible interchanges on the
 specified schemes. Opens are quasi-compact because the ambient arrows are finite type.
-Source: Stacks 0F7C, 0F7D and the abstract hypotheses of 0F7J/0F7K
-(blueprint: def-sp-proper-open-calculus). The equations are at every object and hence
+Source: Stacks 0F7C. The equations are at every object and hence
 are equations of natural transformations, not merely objectwise isomorphism assertions. -/
 structure ProperOpenCalculus (A : Scheme.{u} → Prop) where
   obj : {X : Scheme.{u} // A X} → Type w
@@ -141,7 +139,7 @@ attribute [instance] category
 variable {A : Scheme.{u} → Prop} (F : ProperOpenCalculus.{u, v, w} A)
 
 /-- The specified open/proper composite, not an independently chosen shriek functor.
-Source: Stacks 0F7J (blueprint: def-sp-proper-open-calculus). -/
+Source: Stacks 0F7J. -/
 def H (X Y : {X : Scheme.{u} // A X}) {f : X.1 ⟶ Y.1}
     (c : Compactification f) (hc : A c.Z) [QuasiCompact f] : F.obj X ⥤ F.obj Y :=
   letI : QuasiCompact c.i := c.quasiCompact_openImmersion inferInstance
@@ -149,7 +147,7 @@ def H (X Y : {X : Scheme.{u} // A X}) {f : X.1 ⟶ Y.1}
 
 /-- Refinement comparison: insert the proper identity, apply the specified gamma,
 then compose the proper functors. No cartesian hypothesis is imposed on the refinement.
-Source: Stacks 0F7J (blueprint: def-sp-proper-open-calculus). -/
+Source: Stacks 0F7J. -/
 def rho (X Y : {X : Scheme.{u} // A X}) {f : X.1 ⟶ Y.1}
     {c d : Compactification f} (hc : A c.Z) (hd : A d.Z) (r : d.Refinement c) [QuasiCompact f] :
     F.H X Y c hc ≅ F.H X Y d hd :=
@@ -165,7 +163,7 @@ def rho (X Y : {X : Scheme.{u} // A X}) {f : X.1 ⟶ Y.1}
       (F.pComp ⟨d.Z, hd⟩ ⟨c.Z, hc⟩ Y r.hom c.g d.g r.hom_g)
 
 /-- Comparison from `c₂` to `c₁` computed on a supplied common refinement.
-Source: Stacks 0F7J (blueprint: def-sp-proper-open-calculus). -/
+Source: Stacks 0F7J. -/
 def compare (X Y : {X : Scheme.{u} // A X}) {f : X.1 ⟶ Y.1}
     {c₁ c₂ d : Compactification f} (h₁ : A c₁.Z) (h₂ : A c₂.Z) (hd : A d.Z)
     (r₁ : d.Refinement c₁) (r₂ : d.Refinement c₂) [QuasiCompact f] :
@@ -173,14 +171,14 @@ def compare (X Y : {X : Scheme.{u} // A X}) {f : X.1 ⟶ Y.1}
   F.rho X Y h₂ hd r₂ ≪≫ (F.rho X Y h₁ hd r₁).symm
 
 /-- The ambient membership certificates of a compatible binary tower.
-Source: Stacks 0F7J (blueprint: def-sp-proper-open-calculus). -/
+Source: Stacks 0F7J. -/
 def TriangleObjects {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
     (T : Compactification.Triangle f g) : Prop :=
   A T.cf.Z ∧ A T.cg.Z ∧ A T.cfg.Z
 
 /-- A refining tower has arbitrary proper refinements, with the two ambient compatibility
 squares; no additional cartesianness over X or Y is required.
-Source: Stacks 0F7J, six-square diagram (blueprint: def-sp-proper-open-calculus). -/
+Source: Stacks 0F7J, six-square diagram. -/
 structure TowerRefinement {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
     (T' T : Compactification.Triangle f g) where
   rf : T'.cf.Refinement T.cf
@@ -191,7 +189,7 @@ structure TowerRefinement {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
 
 /-- The tower transformation is gamma whiskered by the outside proper/open functors,
 followed by the open and proper compositors.
-Source: Stacks 0F7J (blueprint: def-sp-proper-open-calculus). -/
+Source: Stacks 0F7J. -/
 def towerIso (X Y Z : {X : Scheme.{u} // A X})
     {f : X.1 ⟶ Y.1} {g : Y.1 ⟶ Z.1} (T : Compactification.Triangle f g)
     (hT : TriangleObjects (A := A) T) [QuasiCompact f] [QuasiCompact g] :
@@ -217,13 +215,13 @@ def towerIso (X Y Z : {X : Scheme.{u} // A X})
       (F.pComp ⟨T.cfg.Z, hT.2.2⟩ ⟨T.cg.Z, hT.2.1⟩ Z T.p T.cg.g T.cfg.g T.p_g)
 
 /-- The six ambient schemes of a three-map staircase belong to the specified category.
-Source: Stacks 0F7K (blueprint: def-sp-proper-open-calculus). -/
+Source: Stacks 0F7K. -/
 def TowerObjects {X Y Z W : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z} {h : Z ⟶ W}
     (T : Compactification.Tower f g h) : Prop :=
   A T.cf.Z ∧ A T.cg.Z ∧ A T.ch.Z ∧ A T.cfg.Z ∧ A T.cgh.Z ∧ A T.cfgh.Z
 
 /-- The identification of the trivial identity compactification with the identity functor.
-Source: Stacks 0F7K, identity towers (blueprint: def-sp-proper-open-calculus). -/
+Source: Stacks 0F7K, identity towers. -/
 def identityIso (X : {X : Scheme.{u} // A X}) :
     F.H X X (Compactification.ofIsProper (𝟙 X.1)) X.2 ≅ 𝟭 (F.obj X) :=
   Functor.isoWhiskerRight (F.jId X) (F.P X X (𝟙 X.1)) ≪≫
@@ -231,9 +229,7 @@ def identityIso (X : {X : Scheme.{u} // A X}) :
 
 /-- Precisely the assumed geometric existence: cofiltered compactifications inside A,
 common refining binary towers, and compatible three-map staircases. These are hypotheses,
-not consequences of the proper/open axioms.
-Source: Stacks 0F7J/0F7K, with the supplied-compactification formulation of
-lem-cbc-compactifiable-compatible-tower (blueprint: def-sp-proper-open-calculus). -/
+not consequences of the proper/open axioms. -/
 structure Geometry (A : Scheme.{u} → Prop) : Prop where
   nonempty (X Y : {X : Scheme.{u} // A X}) (f : X.1 ⟶ Y.1)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] :

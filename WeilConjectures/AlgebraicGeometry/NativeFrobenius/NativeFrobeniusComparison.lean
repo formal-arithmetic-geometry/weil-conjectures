@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.NativeFrobenius.NativeFrobeniusEvaluati
 
 /-! # Native pullback versus translation on the fixed ordinary model
 
-Source: prose-10-20, internal-Hom/evaluation paragraph;
-native ringed-model proof, steps 2 and 3; Stacks 03D6 and 03EO.
+Source: Stacks 03D6 and 03EO.
 -/
 
 @[expose] public section
@@ -54,38 +53,7 @@ Hom comparison, native pushforward by an inverse scheme isomorphism is translati
 compatibly with internal Hom. No site, ring, module equivalence, or Hom isomorphism
 is chosen by this statement: all of those have already been constructed.
 
-Source: prose-10-20, internal-Hom/evaluation paragraph;
-ordinary native ringed-model proof steps 2--3; Stacks 03D6 and 03EO.
-(blueprint: lem-sf-native-frobenius-comparison)
-
-Proof: for each bounded pro-etale object V, identify its postcomposition by g
-with V base-changed along g.inv. The map into the pullback has first projection
-identity and second projection V.hom followed by g.hom; its inverse is the first
-projection. The pullback identities and g.hom_inv_id prove they are inverse.
-Restriction along this site isomorphism identifies the underlying vector-space
-sections of the two functors. The native scalar action on a section is its
-internal action on the pure tensor of the coefficient section and module section.
-The native coefficient map is precomposition along the first pullback projection.
-Consequently the site identification transports that scalar action to the
-sectionwise scalar action with the identity coefficient map ringIso. This proves
-linearity, and the inverse site map proves invertibility. Naturality follows from
-the pullback identities and naturality of restrictions. Compose with the counit
-of adicSectionModuleEquivalence to obtain c for the fixed inverse equivalence E.
-
-To check the displayed equation apply the fully faithful native section-module
-functor. Unlift the small-site slices. The ordinary Hom comparison is the
-normalized native Hom comparison conjugated by the equivalence unit and counit.
-Its evaluation field identifies its value on a local map with evaluation of that
-map on a module section. On a further slice W, both sides thus send a local map f
-to c_N composed with its translated map composed with c_M inverse. For the native
-Hom comparison this is the mate of the tensor comparison, by its definition in
-adicLowerStarCompIhomIso. For P.sigmaHom it follows from P.sigmaHom_evaluation:
-P.sigmaTensor_pure fixes the translated pure tensors, so evaluation determines
-the map by the tensor-Hom bijection. The counit and unit factors cancel by the
-triangle identities. Equality on every W and every module section gives equality
-of slice maps, then equality of sheaf morphisms, and full faithfulness gives the
-native equality. This argument works for every P, for zero modules and empty Y;
-it uses no fixed pairs, constructibility, or characteristic assumption. -/
+Source: Stacks 03D6 and 03EO. -/
 theorem nativeFrobeniusComparison (Y : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (g : Y ≅ Y) (H : AdicModuleHomComparisonCore l Y) :
     let _ := (translation_continuous Y g).1

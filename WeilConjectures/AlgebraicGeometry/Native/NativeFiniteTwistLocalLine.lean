@@ -10,7 +10,6 @@ import WeilConjectures.AlgebraicGeometry.PoincareDuality.CompatiblePrimitiveRoot
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.MonoidalModule
 
 /-! # Local bases for the native finite root line
-Source: coefficient twist construction (blueprint: lem-twist-native-finite-local-line).
 -/
 
 -- After pruning, this module only keeps private declarations.

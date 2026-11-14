@@ -12,8 +12,7 @@ import WeilConjectures.AlgebraicGeometry.Picard.Residue.PicardResidueCoefficient
 
 /-! # Normalize derived direct images over an identified change of base
 
-Source: Stacks Project, Tags 0A1D, 08HY, 0D5S and 01F7.
-(blueprint: new-picard-derived-residue-normalization)
+Source: Stacks Project, Tags 0A1D, 08HY, 0D5S and 01F7
 -/
 
 @[expose] public section
@@ -26,24 +25,7 @@ namespace AlgebraicGeometry.Scheme
 coefficient arrows in the derived category, before homology or sections is applied.
 Source: Stacks Project, Tag 0A1D, relatively flat derived base change;
 Tags 08HY and 0D5S, the base-change mate and pullback composition;
-Tag 01F7, functoriality under the residue-point and fibre isomorphisms.
-(blueprint: new-picard-derived-residue-normalization)
-
-Proof: The supplied projection-preserving isomorphisms identify the iterated
-pullbacks over g with the pullbacks over t, regarded over T using r inverse.
-Apply the canonical proper-flat derived base-change isomorphism to the invertible source and target
-coefficients. The canonical single-pullback comparisons are isomorphisms because the
-coefficients are invertible. Transport the source comparison along the supplied fibre isomorphism
-and tau; use the pullback of this same tau on every target. These composites give a and
-ai. Expand the coefficient arrow as the direct-image adjunction unit followed by the
-canonical coefficient comparison. Horizontal pasting of base-change mates moves this
-unit through base change; naturality moves the coefficient comparisons through the
-direct images. Pullback composition and its unit comparison identify the resulting
-coefficient map with canonicalSinglePullbackMap followed by pullbackObjUnitIso. The
-projection equation gives hj. Thus the two morphisms in the displayed equation agree
-in the derived category itself. Fix the source composite before choosing any target,
-so it works for every index. The argument covers empty fibres and zero cohomology and
-uses no chain representative or comparison on homology. -/
+Tag 01F7, functoriality under the residue-point and fibre isomorphisms. -/
 theorem picard_derived_residue_normalization
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

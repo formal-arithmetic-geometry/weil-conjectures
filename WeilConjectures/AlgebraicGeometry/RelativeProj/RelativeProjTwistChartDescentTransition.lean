@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.RelativeProj.RelativeProjTwistChartDesc
 /-! # Transition part of relative Proj twist descent
 
 Source: Stacks Project, Constructions, Tag 01NR.
-(blueprint: lem-trf-relative-proj-twist-chart-descent-transition).
 -/
 
 @[expose] public section
@@ -26,13 +25,11 @@ variable {S : Scheme.{u}} (A : S.GradedAlgebraData)
 /-- A compatible descended chart family has additive transitions compatible with readings
 and fractions.
 
-Source: Stacks Project, Constructions, Tag 01NR, compatibility portion of
-`lemma-glue-relative-proj-twists`.
+Source: Stacks Project, Constructions, Tag 01NR.
 
 The two compatibility conjuncts are supplied by the named read and fraction lemmas.  The
 transition itself is the section-normalized pullback unit followed by the given scalar
 comparison, transported along the equality of chart opens.
-(blueprint: lem-trf-relative-proj-twist-chart-descent-transition).
 -/
 theorem exists_twist_chart_descent_transition
     (L : A.relProj.Modules)

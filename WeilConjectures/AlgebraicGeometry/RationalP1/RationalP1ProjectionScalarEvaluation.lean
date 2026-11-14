@@ -10,9 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.RationalP1.Second.RationalP1Seco
 import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapMonoidal
 
 /-! # Scalar evaluation of the normalized projective-line projection mate
-
-Source: the First identity in the current rational projective-line triangle proof.
-(blueprint: lem-sfb-rational-p1-projection-scalar-evaluation).
 -/
 
 @[expose] public noncomputable section
@@ -152,28 +149,7 @@ private theorem scalar_paste_aux
     rw [← whiskerLeft_comp_assoc, ← whiskerLeft_comp_assoc, Category.assoc, ht]
   rw [← Functor.map_comp, hs, he]
 
-/-- Evaluating a scalar after the fixed right projection mate.
-
-Source: the counit projection formula and
-CategoryTheory.Adjunction.rightAdjointProjectionMap_rightUnitality in the adopted
-projection-map library; blueprint First identity, evaluation of the q trace.
-(blueprint: lem-sfb-rational-p1-projection-scalar-evaluation).
-
-Proof: the normalization in projectionMate_existsUnique identifies projectionMateMap
-with the native counit projection mate. Apply its naturality square to t : K → 1.
-Postcompose by the direct image of M tensor the pullback's oplax unit comparison
-and the right unitor. Projection right-unitality identifies the projection at 1
-followed by these factors with the right unitor of Rq_* M. The original derived
-pullback oplax unit is leftDerivedUpperStarUnitIso.hom. The strong structure was
-constructed from this unit isomorphism, so its inverse unit comparison, cached as
-secondTraceUnitIso, is the same map. Transfer the calculation through the fixed
-native tensor bundle and the representative-normalized projection family.
-Before applying this calculation, tensor the given scalar square with M and
-postcompose by its right unitor. Combine tensor whiskerings and use functoriality
-to replace the compatible scalar functional by the pullback of t and the unit map.
-Only functoriality, naturality and right-unitality enter: no trace, diagram,
-line object, reference, base-field, or invertibility hypothesis is used. Finally
-precompose the equality by the two arbitrary prescribed prefix arrows A and B. -/
+/-- Evaluating a scalar after the fixed right projection mate. -/
 theorem projectionMate_scalar_evaluation
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (Y : Scheme.{u})

@@ -26,12 +26,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCo
 
 /-!
 # Finite constant-module Tor tests for an open direct image
-
-Source: literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
-`sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md`,
-the closed-support paragraph, with the detailed steps 1--3 of
-`lem-sf-open-tor-bound-arbitrary-field`
-(blueprint: lem-sf-open-tor-bound-finite-constant-tests).
 -/
 
 @[expose] public section
@@ -144,30 +138,7 @@ private theorem lower_bound_rightDerived
       (F.rightDerivedFunctor.mapIso iJ.symm ≪≫ F.rightDerivedFunctorObjQIso J)) ≪≫
       (_root_.DerivedCategory.homologyFunctorFactors D q).app _)
 
-/-- The finite constant-module tensor tests of `Rj_*L` vanish outside `[a,b+e]`.
-
-Source: blueprint main-20261015, chap-Construction-of-f,
-`sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md`,
-the closed-support paragraph; the detailed argument is steps 1--3 of
-`lem-sf-open-tor-bound-arbitrary-field`
-(blueprint: lem-sf-open-tor-bound-finite-constant-tests).
-
-Proof:
-1. For a finite module M, the Tor hypothesis bounds the cohomology of
-   E = L tensor^L M_V in [a,b].
-2. Represent E by an injective complex zero below a. It is K-injective, so the
-   existing unbounded right derived functor is computed by its termwise image.
-   Additivity preserves its zero terms, giving the lower bound a.
-3. Identify the classical derived-functor vanishing with the given vanishing of
-   H^q(Rj_*(F[0])). Apply finiteCDDerivedUpperBound. Its derived functor is
-   canonically isomorphic to the existing unbounded derived functor: factor
-   termwise pushforward and localization through the homotopy quotient, use full
-   precomposition for its Kan property, and compose the two Kan extensions.
-   Uniqueness transfers the upper bound b+e to the existing Rj_*.
-4. Pullback of a constant module sheaf is constant. The derived pullback of its
-   degree-zero complex is the degree-zero pullback. Tensor these comparisons with
-   L and apply Rj_*. Compose with the assumed projection isomorphism and transport
-   the two cohomological bounds to the tensor test on T. -/
+/-- The finite constant-module tensor tests of `Rj_*L` vanish outside `[a,b+e]`. -/
 theorem open_tor_bound_finite_constant_tests
     (p : ℕ) [Fact p.Prime]
     (k : Type u) [Field k] [CharP k p]

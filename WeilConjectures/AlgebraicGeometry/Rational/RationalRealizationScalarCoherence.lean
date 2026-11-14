@@ -46,9 +46,8 @@ import WeilConjectures.AlgebraicGeometry.Rational.RationalPullbackFlatComputatio
 /-!
 # Finite coefficient extension and mixed rational-realization coherence
 
-Source: Bhatt--Scholze, Lemma 6.8.2, Proposition 6.8.14 and Remark 6.8.15;
-Stacks Tags 0G7E, 0D6D, 0A0E and 0A0G
-(blueprint: lem-per-rational-realization-scalar-coherence).
+Source: Bhatt--Scholze, Lemma 6.8.2, Proposition 6.8.14 and Remark 6.8.15; Stacks Tags 0G7E, 0D6D,
+0A0E and 0A0G.
 
 The comparisons use the actual raw rationalizations, coefficient inclusions and
 strict quotient-tower units. The scalar, tower and mixed records retain the
@@ -83,8 +82,7 @@ variable (X : Scheme.{u}) [IsNoetherian X]
 The component equation is the identification through `F_X ⊗^L_{B_E,X} K`.
 The existing `pbcReductionNormalization` is the adjunction-normalized flattening
 on K-flat representatives, with inverse inserting one.
-Source: BS 6.8.2, 6.8.14(2), 6.8.15; Stacks 0D6D
-(blueprint: lem-per-rational-realization-scalar-coherence). -/
+Source: BS 6.8.2, 6.8.14(2), 6.8.15; Stacks 0D6D. -/
 structure RationalRealizationScalarComparison
     (sE : RationalModuleRealization l E X) (sF : RationalModuleRealization l F X) where
   /-- Postcomposition of continuous functions by the field inclusion. -/
@@ -196,8 +194,7 @@ variable (G : Type u) [Field G] [Algebra ℚ_[l] G] [FiniteDimensional ℚ_[l] G
 variable (j : F →ₐ[ℚ_[l]] G)
 
 /-- The successive-extension diagram with exactly the published raw tensor associators.
-Source: BS 6.8.14--6.8.15; Stacks 0D6D
-(blueprint: lem-per-rational-realization-scalar-coherence). -/
+Source: BS 6.8.14--6.8.15; Stacks 0D6D. -/
 structure RationalRealizationScalarTower
     (sE : RationalModuleRealization l E X) (sF : RationalModuleRealization l F X)
     (sG : RationalModuleRealization l G X)
@@ -217,16 +214,7 @@ structure RationalRealizationScalarTower
           coefficient (sE.J.obj K)).hom
 
 /-- The successive-extension comparison is coherent, including repeated fields.
-Source: BS 6.8.14--6.8.15; Stacks 0D6D
-(blueprint: lem-per-rational-realization-scalar-coherence).
-
-Proof (node steps 4 and 9): substitute integral_normalization for the three theta
-components. The intermediate inverse balancing maps cancel. On a common flat-term
-K-flat representative the two remaining maps multiply m tensor l tensor p to ml tensor p.
-The ringed derived monoidal composition comparison identifies the derived maps;
-prop-weil-pbc-scalar-extension supplies precisely the displayed raw associator.
-Its fraction formula and invertibility of all denominators descend the equation
-to every raw object and arrow. -/
+Source: BS 6.8.14--6.8.15; Stacks 0D6D. -/
 theorem rationalRealizationScalarTower
     (sE : RationalModuleRealization l E X) (sF : RationalModuleRealization l F X)
     (sG : RationalModuleRealization l G X)
@@ -245,8 +233,7 @@ theorem rationalRealizationScalarTower
 
 /-- Tensor multiplication is the identity-field comparison, on ordinary modules,
 complexes, derived objects and raw rationalizations.
-Source: BS 6.8.14--6.8.15; Stacks 0D6D
-(blueprint: lem-per-rational-realization-scalar-coherence). -/
+Source: BS 6.8.14--6.8.15; Stacks 0D6D. -/
 structure RationalRealizationScalarUnit (s : RationalModuleRealization l E X)
     (b : RationalRealizationScalarComparison l E E (AlgHom.id ℚ_[l] E) X s s) where
   /-- Identity field inclusion induces the identity continuous coefficient map. -/
@@ -270,14 +257,7 @@ structure RationalRealizationScalarUnit (s : RationalModuleRealization l E X)
       s.J.map ((pbcRationalScalarUnit l E X Fact.out Fact.out).hom.app K)
 
 /-- Identity coefficients give the multiplication unitors.
-Source: BS 6.8.14--6.8.15; Stacks 0D6D
-(blueprint: lem-per-rational-realization-scalar-coherence).
-
-Proof (node step 4): the normalized continuous map is the identity. The tensor unit
-and derived comparison are multiplication, characterized by a tensor m ↦ a m.
-Substitute integral_normalization. Both sides then remove the same unit tensor
-factor, since 1a = a = a1. The raw tensor unit of prop-weil-pbc-scalar-extension is
-its specified localization; naturality extends the equality to fraction morphisms. -/
+Source: BS 6.8.14--6.8.15; Stacks 0D6D. -/
 theorem rationalRealizationScalarUnit (s : RationalModuleRealization l E X)
     (b : RationalRealizationScalarComparison l E E (AlgHom.id ℚ_[l] E) X s s) :
     Nonempty (RationalRealizationScalarUnit l E s b) := by

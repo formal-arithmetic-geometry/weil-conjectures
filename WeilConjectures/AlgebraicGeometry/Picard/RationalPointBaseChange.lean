@@ -35,17 +35,13 @@ lemma Hom.fieldPoints_comp_eq_id (f : X.Hom (Spec (.of k))) (p : f.fieldPoints k
   rw [p.2, Algebra.algebraMap_self, CommRingCat.ofHom_id, Spec.map_id]
 
 /-- **The section `σ_T` induced by a rational point.** For a `k`-rational point
-`σ : Spec k ⟶ X` of a `k`-scheme `X` and a `k`-scheme `T`, the induced section
-`σ_T : T ⟶ X_T = X ×_k T` of the projection `X_T ⟶ T`, i.e. `σ_T = (σ ∘ (T ⟶ Spec k), id_T)`.
-
-(blueprint: `def-pc-rational-point`) -/
+`σ: Spec k ⟶ X` of a `k`-scheme `X` and a `k`-scheme `T`, the induced section
+`σ_T: T ⟶ X_T = X ×_k T` of the projection `X_T ⟶ T`, i.e. `σ_T = (σ ∘ (T ⟶ Spec k), id_T)`. -/
 noncomputable def Hom.fieldPointBaseChange (f : X.Hom (Spec (.of k))) (p : f.fieldPoints k)
     (T : Over (Spec (.of k))) : T.left ⟶ pullback f T.hom :=
   sectionBaseChange f p.1 (f.fieldPoints_comp_eq_id p) T
 
-/-- **`σ_T` is a section of the projection `X_T ⟶ T`.**
-
-(blueprint: `def-pc-rational-point`) -/
+/-- **`σ_T` is a section of the projection `X_T ⟶ T`.** -/
 @[reassoc (attr := simp)]
 lemma Hom.fieldPointBaseChange_snd (f : X.Hom (Spec (.of k))) (p : f.fieldPoints k)
     (T : Over (Spec (.of k))) : f.fieldPointBaseChange p T ≫ pullback.snd f T.hom = 𝟙 T.left :=

@@ -54,9 +54,6 @@ import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapDualizable
 
 /-! # Integral quotient comparison for unbounded direct image
 
-Source: blueprint main-20261015, integral proper base change proof, paragraphs (1), (3)
-(blueprint: lem-sfb-integral-quotient-direct-image-comparison).
-
 The mate is formed with the actual derived adjunctions. Quotient levels are indexed by
 n + 1 and every tensor product is the ordinary, uncompleted derived tensor product.
 -/
@@ -530,28 +527,7 @@ attribute [-instance] cachedProofInstance1 cachedProofInstance2 cachedProofInsta
 normalization, the actual augmented two-term resolution, and compatibility at all
 positive quotient levels. No condition is imposed on the scheme morphism or complex.
 
-Source: blueprint main-20261015 integral proper-base-change proof, paragraphs (1), (3);
-Stacks Tags 093M, 06YY, 0D6D, 0D6E, 0G7E, 07A6 and 0944
-(blueprint: lem-sfb-integral-quotient-direct-image-comparison).
-
-Proof:
-1. The resolution normalization supplies the actual augmented flat-term K-flat cone.
-Its terms are dualizable and it is supported in degrees -1 and 0, so its image in the
-derived category is dualizable. The quasi-isomorphic coefficient B is dualizable too.
-2. The internal scalar pullback normalization supplies normalized tensor and balancing
-comparisons. Choose tensor comparisons on each scheme and balancing comparisons for
-each morphism, using their universal computation-counit normalizations.
-3. The categorical projection theorem for a dualizable coefficient gives invertibility
-of the integral projection map. The internal scalar mate projection theorem then gives
-invertibility of every component of rho, hence of rho itself.
-4. Compatibility of exact localization with the single-degree embeddings identifies
-the coefficient pullback in the scalar projection theorem with coefficientPull.
-Normalized scalar restriction/direct-image coherence identifies its geometric mate with
-restrictPush. Substitute both identities in the scalar mate projection equation.
-5. Apply scalar mate transitivity to the three coefficient levels. The successive
-normalization uniquely determines beta by the universal property of the left derived
-functor. Thus its local witnesses agree with a single choice on every scheme, and the
-transitivity equation is the required tower equation. -/
+Source: Stacks Tags 093M, 06YY, 0D6D, 0D6E, 0G7E, 07A6 and 0944. -/
 theorem integral_quotient_direct_image_comparison :
     ∃ t : ∀ (T : Scheme.{u}) (n : ℕ), TensorNormalization (reduction l E n) T,
       (∀ (T : Scheme.{u}) (n : ℕ), TensorNormalized (reduction l E n) T (t T n)) ∧

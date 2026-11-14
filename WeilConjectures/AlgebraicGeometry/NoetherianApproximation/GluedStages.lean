@@ -259,7 +259,7 @@ noncomputable def glueData : Scheme.OpensGlueData.{u} where
   t_mem := l.trans_mem
   cocycle a b c := l.cocycle a b c _
 
-/-- Blueprint `theorem-nagata-s-compactification-theorem--1`: Finite-type Noetherian stage.
+/-- Finite-type Noetherian stage.
 
 For a valid stage `l` of the finite affine gluing presentation `G` (with coefficient subrings
 `Aₐ ⊆ Γ(S, Uₐ)`), the scheme `S_l` obtained by gluing the charts `Spec Aₐ` along the overlaps
@@ -416,7 +416,7 @@ lemma stageDiagram_obj (l : (G.Stage)ᵒᵖ) : G.stageDiagram.obj l = l.unop.sch
 lemma stageDiagram_map {l l' : (G.Stage)ᵒᵖ} (f : l ⟶ l') :
     G.stageDiagram.map f = Stage.transition (leOfHom f.unop) := rfl
 
-/-- Blueprint `theorem-nagata-s-compactification-theorem--1`: Properties of the finite-type stages.
+/-- Properties of the finite-type stages.
 
 Every glued stage `S_l` is of finite type over `ℤ` (it is quasi-compact and locally of finite type
 over `ℤ`, being covered by the finitely many spectra `Spec Aₐ` of finitely generated rings), and

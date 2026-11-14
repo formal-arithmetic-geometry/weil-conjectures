@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.FullyF
 # Unique finite étale morphism lifts to quotient-power thickenings
 
 Source: Stacks Project, Tags 0EL8 and 0BQB.
-(blueprint: lem-sbc-finite-etale-adic-unique-lift)
 -/
 
 @[expose] public section
@@ -138,20 +137,7 @@ private theorem etaleUniversalHomeomorphismLift
 /-- A map of finite étale covers on a quotient section lifts uniquely to each
 quotient-power thickening.
 
-Source: Stacks Project, Tag 0BQB (invariance under a thickening), as used in
-Tag 0EL8. (blueprint: lem-sbc-finite-etale-adic-unique-lift)
-
-Proof: Put I = ker(f). Surjectivity identifies S with R/I. The immersion
-Spec(S) into Spec(R/I^(n+1)) has nilpotent ideal I/I^(n+1), whose (n+1)st
-power is zero. Restrict to V and base change by P. This is still a nilpotent
-closed immersion, from the restricted cover into Adic.cover f V P n.
-The structure morphism of Q is étale. On affine opens, its formal étaleness
-lifts the given algebra homomorphism uniquely through the nilpotent quotient;
-for general nilpotent ideals one iterates square-zero lifting. Uniqueness
-makes these affine lifts agree on overlaps, so they glue to a unique map
-from Adic.cover f V P n to Q over V. The equality after Adic.zeroMap is
-precisely that its restriction is the given morphism. Empty covers and
-nonconstant ranks cause no change to this local argument. -/
+Source: Stacks Project, Tag 0BQB (invariance under a thickening), as used in Tag 0EL8 -/
 theorem finiteEtale_adic_unique_lift
     {R S : Type u} [CommRing R] [CommRing S] (f : R →+* S)
     (hf : Function.Surjective f) (V : (Spec (.of R)).Opens)

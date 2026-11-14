@@ -120,7 +120,6 @@ import Mathlib.CategoryTheory.Localization.CalculusOfFractions
 /-! # Representative-normalized tensor comparison for pro-etale pullback
 
 Source: Stacks Project, Cohomology on Sites, Tag 07A4.
-(blueprint: lem-weil-pbc-ringed-projection-tensor-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -291,23 +290,7 @@ private theorem preserves_resolving {X Y : Scheme.{u}} (f : X ⟶ Y)
     exact (exactFunctor _ _).prop_of_iso (SheafOfModules.siteSheafTensorRightIso S _).symm hf'
 
 /-- The canonical ordinary tensor comparison descends with the signed shift squares.
-Source: Stacks Project, Tag 07A4, using the total-complex construction of Tag 06YN.
-(blueprint: lem-weil-pbc-ringed-projection-tensor-comparison).
-
-Proof: transpose the ordinary tensor naturality square under the module adjunction.
-Its unit is natural, and both paths agree on every sheafified pure tensor by pure_unit.
-Pure-tensor extensionality and the adjunction hom-bijection prove naturality. Identify
-the specified module left adjoint with the explicit pro-etale inverse image by adjoint
-uniqueness. The canonical preservation theorem and invariance under complex and tensor
-isomorphisms show that the specified left adjoint preserves resolving complexes.
-Totalize the natural ordinary tensor comparison; its degree maps commute with the
-signed differentials, are natural in both complexes, and form an isomorphism because
-module pullback is a left adjoint. Cochain tensor model rigidity makes restriction to
-resolving pairs fully faithful even with target Der S. Tensor comparison descent now
-constructs the derived comparison. Postcompose its square by the inverse target
-representative and the total map; cancel the inverse factors to get Representative.
-Finally apply tensorComparison_shifts to this constructed comparison and the supplied
-normalized shifts. Only that separate signed-shift argument remains unproved. -/
+Source: Stacks Project, Tag 07A4, using the total-complex construction of Tag 06YN. -/
 theorem globalTensorComparison_exists {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
     (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})

@@ -22,9 +22,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
 /-!
 # Pullback preserves bounded constructibility and cohomological intervals
 
-Source: Weil conjectures blueprint, proper base change, node order 1303;
-Stacks, Tags 09AK, 09AL and 09B5
-(blueprint: lemma-inverse-image-tensor-product--1).
+Source: Stacks, Tags 09AK, 09AL and 09B5.
 
 The coefficient categories and the essential-image predicate are the recorded
 `FiniteCoefficientDerivedCategory` and `isBoundedConstructibleFiniteCoefficient`.

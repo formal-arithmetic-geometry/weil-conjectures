@@ -24,8 +24,7 @@ import WeilConjectures.AlgebraicGeometry.ProperBaseChange.NormalityPerfectClosur
 /-!
 # Geometrically normal normalization after purely inseparable extension
 
-Source: Stacks Project, Varieties, Tag 0BXT, lemma-finite-extension-geometrically-normal
-(blueprint: lem-weil-pbc-normalization-geonormal-insep).
+Source: Stacks Project, Varieties, Tag 0BXT.
 -/
 
 @[expose] public section
@@ -252,32 +251,12 @@ private theorem finite_component_normalization_presentation (T : Scheme.{u})
     simp [Scheme.fromReducedNormalization, C, a]
 
 /-- The componentwise normalization becomes geometrically normal after a finite purely
-inseparable extension. Source: Stacks Project, Varieties, Tag 0BXT
-(blueprint: lem-weil-pbc-normalization-geonormal-insep).
+inseparable extension. Source: Stacks Project, Varieties, Tag 0BXT.
 
 The integral closed subschemes `C i` enumerate the reduced irreducible components of
 `X` after extension, without repetitions. Their normalization coproduct has its structure
 map given by `Sigma.desc` followed by the field-base-change projection. Thus no integrality
 or reducedness assumption is imposed on `X`.
-
-Proof: Choose the perfect closure K of k in an algebraic closure. The finite-model
-lemma descends the normalization over K to a finite normal cover Y of X_E for a
-finite intermediate field E, together with a dense open U where the cover is a
-closed immersion. Its K-base change is normal, so the perfect-closure criterion
-makes Y geometrically normal over E.
-
-Let N be the componentwise normalization of X_E. Integral component normalizations
-have normal domain stalks by the source normalization construction. Their finite
-coproduct is finite over X_E, and the inverse image of U is dense: intersect U
-with the open obtained by deleting all components other than one fixed component,
-then lift a point by surjectivity of that component's normalization. This gives a
-nonempty, hence dense, open on each integral normalization.
-
-Over U the normal cover and N are isomorphic, since both are the reduction of U.
-The finite normal dense-open comparison extends this isomorphism to N ≅ Y over
-X_E. Enumerate the finitely many reduced components by Fin n, reindex the coproduct,
-and base change the resulting isomorphism to each field extension L/E. Stalk
-isomorphisms transfer the normal domain assertions from Y_L to N_L.
 -/
 theorem exists_finite_purelyInseparable_geometricallyNormal_normalization
     (k : Type u) [Field k] (X : Scheme.{u})

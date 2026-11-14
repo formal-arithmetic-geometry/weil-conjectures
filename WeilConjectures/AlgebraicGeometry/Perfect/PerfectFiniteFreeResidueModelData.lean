@@ -20,20 +20,7 @@ noncomputable section
 /-- A strictly perfect neighbourhood of a point gives finite-dimensional derived fibre
 cohomology, supported in a bounded interval.
 Source: Stacks Project, More on Algebra, Tag 0BCD, first paragraph of the proof;
-Cohomology of Sheaves, Tag 08C4 (strictly perfect complexes).
-(blueprint: lem-sc-perfect-finite-free-residue-model-data).
-
-Proof: Unpack the given neighbourhood and its strictly perfect representative P. Its terms
-are direct summands of finite free sheaves, hence flat. Since P is bounded, it is K-flat,
-so termwise pullback to Spec kappa(x) computes the derived fibre of E. Pullback preserves
-zero terms and the splitting maps exhibiting each term as a direct summand of a finite
-free sheaf. On the one-point spectrum of a field, evaluation on the whole space identifies
-these sheaves with finite-dimensional vector spaces; it is exact. Transport scalars through
-GammaSpecIso, as in derivedFiberCohomology. Thus that vector space is the degree-i homology
-of a bounded complex of finite-dimensional kappa(x)-vector spaces. Cycles are subspaces of
-finite-dimensional terms, and homology is a quotient of cycles, so each homology is finite.
-Outside the bounds of P the term is zero, so its homology is zero and its finrank is zero.
-The same bounds therefore establish the support assertion for derivedFiberBetti. -/
+Cohomology of Sheaves, Tag 08C4 (strictly perfect complexes). -/
 theorem finiteFiberData
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

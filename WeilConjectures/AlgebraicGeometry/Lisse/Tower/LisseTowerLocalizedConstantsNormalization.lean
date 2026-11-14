@@ -28,8 +28,7 @@ attribute [local irreducible] HasDerivedCategory.standard pbcDerivedRestrict
   localProEtaleNormalization normalizationConstantArrow lisseTowerAlgebraArrow
 
 /-- Constants, comparison, and the two inverse images, before finite restriction.
-Source: Stacks Tags 03CY and 0H7J
-(blueprint: lem-weil-pbc-lisse-tower-localized-constants-normalization). -/
+Source: Stacks Tags 03CY and 0H7J. -/
 def lisseTowerConstantInput {X Z T S : Scheme.{u}}
     (g : Z ⟶ X) (a : T ⟶ S) (b : Z ⟶ T)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) :=
@@ -40,8 +39,7 @@ def lisseTowerConstantInput {X Z T S : Scheme.{u}}
 
 /-- Paste the constant, site-comparison, and final scalar squares with explicit
 associators. Keeping this construction abstract avoids unfolding coefficient sheaves.
-Source: functor associativity, Stacks Categories, Section 4.2
-(blueprint: lem-weil-pbc-lisse-tower-localized-constants-normalization). -/
+Source: functor associativity, Stacks Categories, Section 4.2. -/
 def lisseTowerPasteConstantScalar
     {A₀ A₁ B₀ B₁ C₀ C₁ D₀ D₁ E : Type*}
     [Category A₀] [Category A₁] [Category B₀] [Category B₁]
@@ -66,8 +64,7 @@ def lisseTowerPasteConstantScalar
     (Functor.associator F₀ (G₀ ⋙ L₀) H₀).symm
 
 /-- The constant coefficient square, with its specified scalar comparisons.
-Source: Stacks Tags 03DA and 06YY
-(blueprint: lem-weil-pbc-lisse-tower-localized-constants-normalization). -/
+Source: Stacks Tags 03DA and 06YY. -/
 def lisseTowerConstantScalarIso {X Z T S : Scheme.{u}}
     (g : Z ⟶ X) (a : T ⟶ S) (b : Z ⟶ T)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) :
@@ -97,8 +94,7 @@ def lisseTowerConstantScalarIso {X Z T S : Scheme.{u}}
     (lisseTowerPulledScalarIso g b d n)
 
 /-- Consecutive algebraic restrictions compose to the fixed restriction.
-Source: Stacks Tag 06YY
-(blueprint: lem-weil-pbc-lisse-tower-localized-constants-normalization). -/
+Source: Stacks Tag 06YY. -/
 def lisseTowerAlgebraRestrictIso {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (n : ℕ) :
     normalizationModuleRestrict (lisseTowerEtaleQuotient d n) ⋙
@@ -117,8 +113,7 @@ def lisseTowerAlgebraRestrictIso {A : Type (u + 1)} [CommRing A]
       (Ideal.Quotient.factor_comp_mk _).symm)).symm
 
 /-- A natural constant model, transported to completion coefficients.
-Source: Stacks Tags 03DA and 06YY
-(blueprint: lem-weil-pbc-lisse-tower-localized-constants-normalization). -/
+Source: Stacks Tags 03DA and 06YY. -/
 def lisseTowerConstantModelIso {X Z T S : Scheme.{u}}
     (g : Z ⟶ X) (a : T ⟶ S) (b : Z ⟶ T)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ)
@@ -131,16 +126,7 @@ def lisseTowerConstantModelIso {X Z T S : Scheme.{u}}
 
 /-- Compatibility on represented complexes suffices for every derived semilinear arrow.
 
-Source: Mathlib `Localization.natTrans_ext`; Stacks Categories, Section 4.27;
-Tags 03DA and 06YY (coefficient restriction).
-(blueprint: lem-weil-pbc-lisse-tower-localized-constants-normalization).
-
-Proof: the two coefficient paths are natural transformations. Localization detects
-their equality on images of cochain complexes. For an arbitrary arrow k, naturality
-of the model comparison at its source level moves k through that equality. Expand
-the specified coefficient comparisons; this gives precisely the normalized square.
-Unlike the former statement, the models are natural and coherence is checked on
-identity coefficient arrows. Arbitrary objectwise isomorphisms do not suffice. -/
+Source: Stacks Categories, Section 4.27; Tags 03DA and 06YY (coefficient restriction). -/
 theorem lisseTower_localized_constants_normalization
     {X Z T S : Scheme.{u}} (g : Z ⟶ X) (a : T ⟶ S) (b : Z ⟶ T)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)

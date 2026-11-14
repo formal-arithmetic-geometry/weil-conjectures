@@ -35,8 +35,7 @@ import WeilConjectures.CategoryTheory.Sites.FlatLocalRelations
 /-!
 # Flatness in the intrinsic finite-coefficient presentation
 
-Source: Stacks Project, Modules on Sites, Tags 03EL, 03ER and 08FC; comparison
-Tor-amplitude proof, steps 1 and 3.
+Source: Stacks Project, Modules on Sites, Tags 03EL, 03ER and 08FC
 -/
 
 @[expose] public section
@@ -92,21 +91,7 @@ private def relationSieve
       simp only [op_comp, Functor.map_comp_apply, ← map_mul, ← map_sum, ha, map_zero]
 
 /-- The associated-module-sheaf realization preserves flat fixed-coefficient sheaves.
-Source: Stacks Project, Modules on Sites, Tags 03EL, 03ER and 08FC; comparison Tor-amplitude
-proof, steps 1 and 3 (blueprint: lem-sf-intrinsic-realization-flat).
-
-Proof: restricting the realized sheaf to constant scalars recovers the original sheaf
-by the sheafification unit. Hence this restriction is flat. The coefficient ring is
-finite, so the fixed-coefficient local relation criterion applies. Given a finite
-relation with coefficients in the constant ring sheaf, intersect the covering sieves
-on which its finitely many coefficients lift to constants. Restrict the relation to
-each such object and apply local triviality of relations in the flat fixed-coefficient
-sheaf. Map the resulting factorization matrix to the ring sheaf by the scalar unit.
-Linearity gives the required factorization of sections; naturality of the scalar unit
-and its preservation of finite sums and products give the zero coefficient relation.
-Covering-sieve transitivity then establishes the intrinsic local equational criterion,
-which is equivalent to IsFlatOnSite. Empty relations, zero rings and empty sites are
-included; no equality between section rings and the constant coefficient ring is used. -/
+Source: Stacks Project, Modules on Sites, Tags 03EL, 03ER and 08FC. -/
 theorem intrinsicRealization_flat
     (T : Scheme.{u}) (B : Type u) [CommRing B] [Finite B]
     (M : Sheaf (Scheme.ProEt.topology T)

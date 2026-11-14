@@ -102,10 +102,9 @@ instance sheafOfModules_isInvertible_twist (m : ℤ) :
   Scheme.Modules.IsInvertible.sheafOfModules_isInvertible _
 
 /-- **The coordinate section `Tᵢ` of `𝒪(1)`** on `ℙ(n; S)`: the pullback along
-`toProjInt : ℙ(n; S) ⟶ Proj ℤ[Tᵢ]` of the global section `Tᵢ` of `𝒪(1)` on the integral model,
+`toProjInt: ℙ(n; S) ⟶ Proj ℤ[Tᵢ]` of the global section `Tᵢ` of `𝒪(1)` on the integral model,
 i.e. of multiplication by `Tᵢ` from `𝒪 ≅ 𝒪(0)` to `𝒪(1)`. This is the section `xᵢ` of
-`𝒪_P(1)` of the blueprint (`def-pc-projective-space-twist`,
-`lem-pc-projective-space-twist-quotient`). -/
+`𝒪_P(1)` of the blueprint. -/
 def coordinateSection (i : n) : 𝟙_ (ℙ(n; S)).Modules ⟶ twist n S 1 :=
   (Scheme.Modules.pullbackObjUnitIso (toProjInt n S)).inv ≫
     (Scheme.Modules.pullback (toProjInt n S)).map
@@ -114,7 +113,7 @@ def coordinateSection (i : n) : 𝟙_ (ℙ(n; S)).Modules ⟶ twist n S 1 :=
         Scheme.Modules.unit _ ⟶ Proj.twist (MvPolynomial.homogeneousSubmodule n (ULift.{u} ℤ)) 1)
 
 /-- **The non-vanishing locus of `Tᵢ` is the standard open `D₊(Tᵢ)`**: the complement of the
-zero scheme (`def-pc-zero-scheme`) of the coordinate section `Tᵢ` of `𝒪(1)` is the standard
+zero scheme of the coordinate section `Tᵢ` of `𝒪(1)` is the standard
 open `standardOpen n S i`. -/
 theorem compl_support_zeroLocus_coordinateSection (i : n) :
     (Scheme.Modules.Hom.zeroLocus (coordinateSection n S i)).support.compl =

@@ -18,8 +18,7 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.ReducedArtinianAffineNormaliz
 
 /-! # Integral-closure charts for reduced Artinian tensor algebras
 
-Source: Stacks Project, Tags 035H and 0307; reduced Artinian ring decomposition.
-(blueprint: lem-sbc-reduced-artinian-tensor-normalization-charts) -/
+Source: Stacks Project, Tags 035H and 0307; reduced Artinian ring decomposition. -/
 
 @[expose] public section
 
@@ -31,25 +30,7 @@ namespace AlgebraicGeometry.Scheme
 /-- A finite affine coproduct with reduced Artinian base changes has normalization
 charts given by integral closures in its residue fields.
 
-Source: Stacks Project, Tags 035H and 0307; reduced Artinian ring decomposition.
-(blueprint: lem-sbc-reduced-artinian-tensor-normalization-charts)
-
-Proof: Base change commutes with the finite coproduct. Its i-th component
-is Spec D_i, where D_i = E_i tensor_B A, with the right structural A-map.
-The universal property of relative normalization identifies the normalization
-of this finite coproduct with the coproduct of the component normalizations.
-A reduced Artinian ring is the finite product of its residue fields D_i/P
-at maximal ideals P, with quotient maps as projections. Applying the same
-normalization coproduct result reduces each component to these residue
-fields. The affine relative-normalization construction of Tag 035H
-identifies their normalizations with Spec S_iP, where
-S_iP = integralClosure A (D_i/P), as schemes over Spec A.
-The summand inclusions give open immersions c with precisely the displayed
-structural equation, and their images cover the normalization. Choose a
-summand containing x. The empty coproduct has empty normalization and
-therefore contributes no point. Tag 0307 ensures the affine descriptions
-agree on localizations. No DVR, selected base prime, or stalk assertion
-is used in this chart construction. -/
+Source: Stacks Project, Tags 035H and 0307; reduced Artinian ring decomposition. -/
 theorem reduced_artinian_tensor_normalization_charts
     (B A : CommRingCat.{u}) [Algebra B A]
     (r : ℕ) (E : Fin r → Type u) [∀ i, CommRing (E i)] [∀ i, Algebra B (E i)]

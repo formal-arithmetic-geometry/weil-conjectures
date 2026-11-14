@@ -12,7 +12,6 @@ import all WeilConjectures.CategoryTheory.ModuleObjects.KFlatScalarTower.Interna
 import WeilConjectures.AlgebraicGeometry.IntegralFiniteScalar.FiniteFreeScalarDerivedComparisonAugmentation
 
 /-! Existence of the normalized finite-free beta comparison.
-(blueprint: new-sfb-finite-free-scalar-derived-comparison-beta-construction)
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -247,12 +246,9 @@ private def betaRestrictedCounit {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ')
       (Mod.comap (betaMap a Z)).mapDerivedCategoryFactors.hom
 
 /--
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md, formal-properties
-paragraphs. Choose flat-term K-flat representatives, apply the restricted tensor
+Choose flat-term K-flat representatives, apply the restricted tensor
 identification, and descend the augmentation comparison. This is the existence and
 ordinary normalization part of the beta construction.
-(blueprint: new-sfb-finite-free-scalar-derived-comparison-beta-construction)
 -/
 theorem finiteFreeScalarDerivedComparison_beta_construction
     (D : ScalarSixPullbackData.{u}) {Λ Λ' : ScalarSixRing.{u}}

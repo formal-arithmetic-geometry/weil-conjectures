@@ -23,22 +23,7 @@ open CategoryTheory
 open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.RationalP1
 
-/-- The positive Tate line, in degree zero, has finite constant local models.
-Source: blueprint latest, rational projective-line unit/counit proof,
-Well-definedness (2)--(3), and definition-tate-twists, local-generator paragraph.
-(blueprint: lem-sfb-rational-p1-positive-line-constructible).
-
-Proof: invertibility of ell gives the common pro-etale cover with compatible roots
-of unity in `spTwists_commonCover`. The root basis identifies the positive rational
-line on every member with the regular coefficient module, both for a finite
-extension and for the finite-subextension-valued algebraic closure. The latter
-identification is the sheafified filtered colimit of these compatible bases.
-The regular scalar module has its rank-one finite presentation. Thus these bases
-are finite constant local models, and the one-stratum stratification gives
-constant-model constructibility on a qcqs scheme. This also works on the empty
-scheme, with the empty covering. The degree-zero single complex is bounded; its
-zeroth cohomology is the line, and all other cohomology objects are zero, so it is
-bounded constructible. -/
+/-- The positive Tate line, in degree zero, has finite constant local models. -/
 theorem positiveLine_boundedConstructible
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (Z : Scheme.{u}) [CompactSpace Z] [QuasiSeparatedSpace Z]

@@ -37,11 +37,7 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ' T)]
 
 /-- Conjugate an internal tensor comparison through the specified section equivalences.
-Source: Stacks 07A4, functoriality of the canonical derived tensor comparison.
-(blueprint: lem-sfb-quotient-section-tensor-conjugate).
-Proof: precomposition by the product of the section equivalences is fully faithful.
-Conjugate b by the two tensor comparisons and c.derived, and take its unique preimage.
-The image-preimage equation and cancellation of these isomorphisms give the square. -/
+Source: Stacks 07A4, functoriality of the canonical derived tensor comparison. -/
 theorem section_tensor_conjugate_exists (T : Scheme.{u})
     (c : ScalarSectionData a T) (b : TensorIso a T) :
     ∃ barB : tensor Λ T ⋙ c.model.T ≅

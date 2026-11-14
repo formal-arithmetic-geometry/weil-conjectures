@@ -15,9 +15,7 @@ import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapMate
 
 /-! # Reduction of the actual integral projection morphism
 
-Source: blueprint main-20261015, integral proper-base-change proof, paragraph (3);
-Stacks Project, Tags 0B56, 07A4, 07A6 and 0D6D
-(blueprint: lem-sfb-integral-quotient-projection-comparison).
+Source: Stacks Project, Tags 0B56, 07A4, 07A6 and 0D6D.
 
 The scalar tensor comparison is specified by its computation counits and the signed
 ordinary balancing map. Unlike the exact-scalar interface, this applies to reduction
@@ -54,8 +52,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 /-- The signed total of the canonical ordinary scalar tensor balancing map. Its
 scalar-unit normalization sends (u tensor v) tensor s to
 (u tensor 1) tensor (v tensor s), equivalently moving s to the first factor.
-Source: Stacks 07A4, change-of-rings specialization
-(blueprint: lem-sfb-integral-quotient-projection-comparison). -/
+Source: Stacks 07A4, change-of-rings specialization. -/
 def scalarTensorTotal (n : ℕ) (T : Scheme.{u})
     (P Q : CochainComplex (Modules (integral l E) T) ℤ) :
     ((extension (reduction l E n) T).mapHomologicalComplex (.up ℤ)).obj (P ⊗ Q) ⟶
@@ -66,8 +63,7 @@ def scalarTensorTotal (n : ℕ) (T : Scheme.{u})
     (extension (reduction l E n) T)).app P).app Q
 
 /-- The type of the scalar tensor balancing isomorphism, natural in both inputs.
-Source: Stacks 07A4, identity-topos scalar extension
-(blueprint: lem-sfb-integral-quotient-projection-comparison). -/
+Source: Stacks 07A4, identity-topos scalar extension. -/
 abbrev ScalarTensorIso (n : ℕ) (T : Scheme.{u}) :=
   (Functor.postcompose₂.obj (D (reduction l E n) T)).obj
       (CondensedRing.derivedTensor (integral l E) T) ≅
@@ -78,8 +74,7 @@ abbrev ScalarTensorIso (n : ℕ) (T : Scheme.{u}) :=
 On flat-term K-flat representatives all computation maps are invertible, and this
 is exactly the specified pure-tensor balancing formula. It also fixes the comparison
 on every derived object by the K-flat localization property.
-Source: Stacks 07A4 and 0D6D
-(blueprint: lem-sfb-integral-quotient-projection-comparison). -/
+Source: Stacks 07A4 and 0D6D. -/
 def ScalarTensorNormalized (n : ℕ) (T : Scheme.{u})
     (b : ScalarTensorIso l E n T) : Prop :=
   ∀ P Q : CochainComplex (Modules (integral l E) T) ℤ,
@@ -342,19 +337,7 @@ private theorem scalarTensor_unique (n : ℕ) (T : Scheme.{u})
   exact congrArg (fun e ↦ e.hom.app (U, V)) he
 
 /-- The canonical scalar tensor isomorphism exists and is uniquely determined by
-its balancing normalization, without flatness of the quotient ring over the integers.
-Source: Stacks 07A4 and the coefficient square in blueprint paragraph (3)
-(blueprint: lem-sfb-integral-quotient-projection-comparison).
-
-Proof: use the internal/section exact tensor equivalence, which preserves flat and
-K-flat complexes and the local pure tensors. Apply the canonical ringed derived
-pullback tensor comparison to the identity topos and the actual quotient ring map.
-Transport it back. On flat-term K-flat pairs its comparison is the signed total of
-scalarTensorTotal, and its universal computation counits give the displayed equation
-on all complexes. K-flat localization in both inputs gives uniqueness. The inverse
-multiplies the two quotient scalar factors; this uses balancing, not flatness of the
-quotient. The pure-tensor formula agrees with the one in the statement because a
-quotient scalar may move between the two factors of the tensor over S. -/
+its balancing normalization, without flatness of the quotient ring over the integers. -/
 theorem scalarTensorIso_existsUnique (n : ℕ) (T : Scheme.{u}) :
     ∃! b : ScalarTensorIso l E n T, ScalarTensorNormalized l E n T b := by
   refine ⟨canonicalScalarTensorIso l E n T, canonicalScalarTensorIso_normalized l E n T, ?_⟩
@@ -363,14 +346,13 @@ theorem scalarTensorIso_existsUnique (n : ℕ) (T : Scheme.{u}) :
 
 /-- The uniquely normalized scalar tensor balancing isomorphism. The existence
 statement determines the whole natural isomorphism, rather than an arbitrary map.
-Source: Stacks 07A4, blueprint paragraph (3)
-(blueprint: lem-sfb-integral-quotient-projection-comparison). -/
+Source: Stacks 07A4. -/
 @[irreducible] def scalarTensorIso (n : ℕ) (T : Scheme.{u}) :
     ScalarTensorIso l E n T :=
   (scalarTensorIso_existsUnique l E n T).exists.choose
 
 /-- The existing pullback tensor comparison with its named pullback functor.
-Source: Stacks 07A4 (blueprint: lem-sfb-integral-quotient-projection-comparison). -/
+Source: Stacks 07A4. -/
 @[irreducible] def actualTensorPull
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -383,7 +365,7 @@ Source: Stacks 07A4 (blueprint: lem-sfb-integral-quotient-projection-comparison)
 /-- The actual projection bifunctor transformation, using the existing adjunction
 and its actual tensor comparison. This is the recorded moduleObjectProjectionMap
 before evaluating its two components, with only its functor names made explicit.
-Source: Stacks 0B56 (blueprint: lem-sfb-integral-quotient-projection-comparison). -/
+Source: Stacks 0B56. -/
 @[irreducible] def actualProjection
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -396,8 +378,7 @@ Source: Stacks 0B56 (blueprint: lem-sfb-integral-quotient-projection-comparison)
 /-- The displayed projection comparison equation, with the coefficient parameters
 shared explicitly. This is an equality of actual arrows in the quotient module
 category; it neither forgets the scalar action nor asserts only cohomological equality.
-Source: blueprint integral proper-base-change proof (3), Stacks 0B56 and 07A6
-(blueprint: lem-sfb-integral-quotient-projection-comparison). -/
+Source: Stacks 0B56 and 07A6. -/
 @[irreducible] def ProjectionComparisonEquation
     {R S : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj R] [IsCommMonObj R] [MonObj S] [IsCommMonObj S]
@@ -549,34 +530,7 @@ comparisons. The pullback comparison is fixed by exactly the normalization in th
 direct-image dependency; that dependency supplies its existence. Both sides are
 natural in K and M and are arrows in the quotient-coefficient derived category.
 
-Source: blueprint main-20261015 integral proper-base-change proof, paragraph (3);
-Stacks 0B56, 07A4, 07A6, 0D6D
-(blueprint: lem-sfb-integral-quotient-projection-comparison).
-
-Proof:
-1. Use internal/section tensor comparison and section-derived pushpull and tensor
-normalization to carry the specified tensors, adjunctions and counits to ringed modules.
-2. The geometric coefficient maps are natural in the condensed ring. Consequently
-both structural ring maps in the quotient square agree. Ringed derived monoidal
-comparison identifies lambda with the composition comparison for this square.
-3. Its monoidality says b_X D_X(t_R) lambda =
-(lambda tensor lambda) t_S L_S(b_Y); the normalized scalar maps on both sides agree
-on pure tensors. No interchange of homogeneous factors occurs.
-4. Put C=F_R K, W=C tensor M, H=K tensor L_R M, and
-q=b_X followed by identity tensor lambda_M inverse. The defining adjunction mate
-rho satisfies epsilon_S L_S(rho_J)=D_X(epsilon_R,J) lambda_(F_R J).
-5. Transpose the left side. Expand the actual quotient projection as the adjunct
-of t_S followed by counit tensor identity. Naturality of t_S and the mate identity
-rewrite this as (D_X(epsilon_R,K) tensor identity) (lambda_C tensor identity)
-t_S L_S(b_Y).
-6. Substitute step 3 and cancel lambda_M. Naturality of b_X gives exactly
-q D_X((epsilon_R,K tensor identity) t_R) lambda_W.
-7. Transpose the right side. Counit naturality, the mate identity at H and lambda
-naturality give q D_X(epsilon_R,H L_R(pi_R)) lambda_W. The defining adjunct of
-the actual integral projection identifies this with the expression in step 6.
-8. Injectivity of the adjunction Hom bijection proves the displayed equality.
-All constructions are natural in both inputs. No inverse of a projection morphism,
-boundedness, properness, completeness or constructibility is used. -/
+Source: Stacks 0B56, 07A4, 07A6, 0D6D. -/
 theorem integral_quotient_projection_comparison
     {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (c : D (reduction l E n) Y ⋙ L (finite l E n) f ≅

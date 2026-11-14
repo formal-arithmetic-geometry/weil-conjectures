@@ -26,19 +26,7 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 namespace AlgebraicGeometry.Scheme
 open ProjectionRestriction
 /-- Canonical localization comparisons for the projection mate on ringed pro-etale sites.
-Source: Stacks 04J0, 08FI, 0FN5, 07A4, 0B56 and 0944
-(blueprint: lem-weil-pbc-ringed-projection-restriction).
-
-Proof: construct the normalized global package using globalModel_exists. For every
-object V choose the compatible localized package from localModel_exists. These
-choices provide the two existential witnesses and the projection equation.
-For local detection apply ringedRestrictionLocalIso to the underlying ring sheaf.
-The restriction model is exactly overFunctor.mapDerivedCategory: its additivity
-and exactness proofs agree with those in the generic construction by proof
-irrelevance. The assumed covering sieves therefore give the generic hypotheses.
-Exact restriction commutes with all integer cohomology functors, sheaf gluing
-makes their global maps invertible, and the unbounded cohomology criterion
-concludes. No boundedness or quasi-compactness hypothesis occurs. -/
+Source: Stacks 04J0, 08FI, 0FN5, 07A4, 0B56 and 0944. -/
 theorem ringedProjectionRestriction
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R_Y : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})

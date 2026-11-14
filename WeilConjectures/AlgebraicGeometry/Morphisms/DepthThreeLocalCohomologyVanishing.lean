@@ -45,18 +45,7 @@ private theorem old_ext_two_isZero {R : Type u} [CommRing R]
 
 /-- Algebraic vanishing of second local cohomology under depth at least three.
 
-Source: Stacks Project, Tag 0AVY, Lemma 47.11.1.
-(blueprint: lem-sbc-depth-three-puncture-h-one-local-vanishing)
-
-Proof: Write m for the maximal ideal. Since m is proper, mR is not R, and R
-is a finite module over itself. The regular-sequence definition of m-depth
-therefore agrees with the depth in Lemma 47.11.1. That lemma identifies depth
-with the first degree of nonzero local cohomology. More explicitly, depth is
-unchanged on replacing m by a positive power; the Ext groups from R/m^n to R
-vanish below depth, and their filtered colimit is local cohomology. Mathlib's
-localCohomology uses exactly this colimit of Ext modules. Since 2 < 3 and
-3 is at most depth R, every module in the degree-two diagram is zero and
-so is its colimit. Its underlying additive group is thus subsingleton. -/
+Source: Stacks Project, Tag 0AVY, Lemma 47.11.1 -/
 theorem depth_three_local_cohomology_vanishing
     (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R]
     (hdepth : (3 : ℕ∞) ≤ IsLocalRing.depth (R := R) R) :

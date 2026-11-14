@@ -11,10 +11,6 @@ import WeilConjectures.AlgebraicGeometry.RationalP1.NormalizedScalarChernModel
 import WeilConjectures.AlgebraicGeometry.RationalP1.FlatCoefficientExchange
 
 /-! # Coefficient naturality of the projective-line exchange
-
-Source: diagonal coefficient changes, paragraphs (2)-(3), finite-subextension
-scalar extension and commutation with pullback, and the canonical exchange mate
-in the second rational P1 triangle.
 -/
 
 @[expose] public noncomputable section
@@ -48,13 +44,7 @@ attribute [local irreducible] derivedPullIso derivedPushHom derivedComapLowerSta
   DerivedCategory.monoidalClosed Mod.monoidalClosed CondensedRing.upperStar
 
 /-- Scalar transport through the first native normalized model.
-Source: diagonal coefficient changes (2)--(3), normalization of the scalar push mate.
-(blueprint: lem-sfb-rational-p1-native-q-model-equation).
-
-Proof: apply extendScalarChern_canonical to the q models and their full universal
-unit normalizations. Identify its two displayed arrows with the fixed native
-presentation by structural heterogeneous congruence. This caches the instance
-conversion separately from the projective-line exchange calculation. -/
+Source: diagonal coefficient changes (2)--(3), normalization of the scalar push mate. -/
 theorem native_q_model_equation
     (l : ℕ) [Fact l.Prime] (E : PadicAlgCl.FiniteIntermediateField l)
     (Y : Scheme.{u})

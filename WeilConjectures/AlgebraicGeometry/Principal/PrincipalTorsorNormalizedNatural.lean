@@ -14,14 +14,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Abelian Opposite Homolo
 namespace AlgebraicGeometry.Etale
 /-- Cocycle-normalized supported-Hom comparisons are natural in coefficient lifts and
 etale restriction.
-Source: Stacks 03AJ, 0G78; representative naturality in the principal-torsor sign node.
-Proof: express each Ext class as extMk of a closed resolution cocycle. A coefficient lift
-sends it to extMk of the composite cocycle. The normalization and coefficient-representative
-transport theorem give identical signed coordinates for the two classes. For etale restriction,
-the stipulated evaluated-cocycle equation and restriction-representative transport likewise
-give identical coordinates. Signed coordinates determine a cycle, hence its homology class,
-by the degreewise cone decomposition and the monomorphism of cycles into the complex.
-(blueprint: lem-pur-principal-torsor-normalized-natural). -/
+Source: Stacks 03AJ, 0G78. -/
 theorem principalTorsorNormalizedNatural
     (C : PrincipalTorsorComparisons.{u}) (hC : C.Normalized) : C.Natural := by
   refine ⟨?_, ?_⟩

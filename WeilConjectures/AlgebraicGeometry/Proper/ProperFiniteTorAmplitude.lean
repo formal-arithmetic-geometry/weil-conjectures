@@ -18,10 +18,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 /-!
 # Proper direct image preserves finite Tor amplitude
 
-Source: literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
-`sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-tor.md`
-(blueprint: proposition-proper-direct-image-finite-coefficients--1); Stacks Project, Tags 0F0G and
-0F12.
+Source: Stacks Project, Tags 0F0G and 0F12.
 
 Membership in `Dctf` with a specified Tor interval is expressed by bounded
 constructibility together with `hasTorAmplitudeIn` for that interval. This already
@@ -37,31 +34,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 /-- Proper direct image preserves bounded constructible complexes of finite Tor amplitude,
-with upper Tor bound increased by a bound for the geometric fibres' ℓ-cohomological dimensions.
-Source: blueprint `sec-six-functors-basics/sk-prop-ctf-finite-proper/`
-`sk-prop-ctf-finite-proper-tor.md` (blueprint:
-proposition-proper-direct-image-finite-coefficients--1). Proof:
-1. The prime ℓ is nonzero in the characteristic-p field k. Thus ℓ^r is a unit
-   on both schemes, and the coefficient convention for ℓ^r holds. Apply
-   `isBoundedConstructible_rightDerivedLowerStar_of_proper` to C.
-2. Every A-module sheaf on a geometric fibre is killed sectionwise by ℓ^r.
-   The assumed fibre cohomology bound and the module/abelian cohomology comparison
-   give vanishing of module-valued cohomology above d. On the algebraically closed
-   point, global sections are an exact equivalence. The Leray isomorphism therefore
-   identifies this with vanishing of the fibre direct image's homology sheaves.
-3. Proper base change for the finite, hence additively torsion, ring A identifies
-   the geometric pullbacks of R^q f_*F with these fibre cohomology sheaves.
-   Exact pullback commutes with homology; the total, bounded-below and classical
-   derived functors agree on sheaves in degree zero. Geometric pullbacks detect
-   zero sheaves, so every R^q f_*F vanishes for q>d.
-4. For an arbitrary module sheaf M on Y, put B=C ⊗ᴸ (f⁻¹M)[0]. The input Tor
-   interval puts B in [a,b]. Left t-exactness gives the lower bound a for Rf_*B.
-   `Functor.isLE_rightDerivedFunctor_obj_of_dimension`, proved by dimension
-   shifting on cycles (Stacks 07K7(4)(c)), gives its upper bound b+d.
-5. Exact inverse image identifies Lf^*(M[0]) with (f⁻¹M)[0]. The full relative
-   proper projection formula (Stacks 0F0G) identifies Rf_*B with Rf_*C ⊗ᴸ M[0].
-   Transporting the bounds through this isomorphism for every M proves the output
-   Tor interval. This argument permits nonflat and infinitely generated M. -/
+with upper Tor bound increased by a bound for the geometric fibres' ℓ-cohomological dimensions. -/
 theorem isBoundedConstructible_hasTorAmplitudeIn_rightDerivedLowerStar_of_proper
     (ℓ p : ℕ) (hℓ : ℓ.Prime) (hp : 0 < p) (hpℓ : p ≠ ℓ)
     (k : Type u) [Field k] [CharP k p]

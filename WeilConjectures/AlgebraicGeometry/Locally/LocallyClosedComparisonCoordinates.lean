@@ -26,10 +26,6 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Locally closed exceptional comparison with its adjunction normalization
-
-Source: Weil blueprint, main-20261015, sec-smooth-purity/sk-lem-sp-tower,
-lem-weil-finite-duality-site-comparison.proof.md, second paragraph
-(blueprint: lem-weil-finite-duality-locally-closed-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -40,9 +36,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.ProEtale
 
 /-- Coordinates for the two ambient closed right adjoints. Each functor is determined
-up to the unique counit-compatible adjoint isomorphism, rather than freely chosen data.
-Source: blueprint locally closed exceptional comparison, closed factor
-(blueprint: def-sf-locally-closed-comparison-coordinates). -/
+up to the unique counit-compatible adjoint isomorphism, rather than freely chosen data. -/
 structure LocallyClosedComparisonAdjoints (A : Type (u + 1)) [CommRing A]
     {S V : Scheme.{u}} (c : S ⟶ V) where
   etale : DerivedCategory (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} A)) ⥤
@@ -52,17 +46,13 @@ structure LocallyClosedComparisonAdjoints (A : Type (u + 1)) [CommRing A]
   etaleAdjunction : (Etale.lowerStar (ModuleCat.{u + 1} A) c).rightDerivedFunctor ⊣ etale
   proetaleAdjunction : (lowerStar (ModuleCat.{u + 1} A) c).rightDerivedFunctor ⊣ proetale
 
-/-- The etale closed-then-open extension on ordinary derived categories.
-Source: blueprint locally closed exceptional comparison, F_et
-(blueprint: lem-weil-finite-duality-locally-closed-comparison). -/
+/-- The etale closed-then-open extension on ordinary derived categories. -/
 abbrev locallyClosedEtaleExtension (A : Type (u + 1)) [CommRing A]
     {S V T : Scheme.{u}} (c : S ⟶ V) (v : V ⟶ T) [IsOpenImmersion v] :=
   (Etale.lowerStar (ModuleCat.{u + 1} A) c).rightDerivedFunctor ⋙
     (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} A) v).mapDerivedCategory
 
-/-- The pro-etale closed-then-open extension on ordinary derived categories.
-Source: blueprint locally closed exceptional comparison, F_proet
-(blueprint: lem-weil-finite-duality-locally-closed-comparison). -/
+/-- The pro-etale closed-then-open extension on ordinary derived categories. -/
 abbrev locallyClosedProEtaleExtension (A : Type (u + 1)) [CommRing A]
     {S V T : Scheme.{u}} (c : S ⟶ V) (v : V ⟶ T) [IsOpenImmersion v] :=
   (lowerStar (ModuleCat.{u + 1} A) c).rightDerivedFunctor ⋙
@@ -72,32 +62,24 @@ namespace LocallyClosedComparisonAdjoints
 
 variable {A : Type (u + 1)} [CommRing A] {S V T : Scheme.{u}} {c : S ⟶ V}
 
-/-- Open restriction followed by the ambient closed etale right adjoint.
-Source: blueprint locally closed exceptional comparison, J_et
-(blueprint: lem-weil-finite-duality-locally-closed-comparison). -/
+/-- Open restriction followed by the ambient closed etale right adjoint. -/
 abbrev etaleRight (a : LocallyClosedComparisonAdjoints A c) (v : V ⟶ T)
     [IsOpenImmersion v] :=
   (Etale.upperStar (ModuleCat.{u + 1} A) v).mapDerivedCategory ⋙ a.etale
 
-/-- Open restriction followed by the ambient closed pro-etale right adjoint.
-Source: blueprint locally closed exceptional comparison, J_proet
-(blueprint: lem-weil-finite-duality-locally-closed-comparison). -/
+/-- Open restriction followed by the ambient closed pro-etale right adjoint. -/
 abbrev proetaleRight (a : LocallyClosedComparisonAdjoints A c) (v : V ⟶ T)
     [IsOpenImmersion v] :=
   (upperStar (ModuleCat.{u + 1} A) v).mapDerivedCategory ⋙ a.proetale
 
-/-- The literal pasted etale adjunction, fixing its unit and counit.
-Source: blueprint locally closed exceptional comparison, pasted adjunction
-(blueprint: lem-weil-finite-duality-locally-closed-comparison). -/
+/-- The literal pasted etale adjunction, fixing its unit and counit. -/
 def etalePasted (a : LocallyClosedComparisonAdjoints A c) (v : V ⟶ T)
     [IsOpenImmersion v] : locallyClosedEtaleExtension A c v ⊣ a.etaleRight v :=
   a.etaleAdjunction.comp
     (Etale.openImmersionLowerShriekUpperStarAdjunction
       (ModuleCat.{u + 1} A) v).mapDerivedCategoryAdjunction
 
-/-- The literal pasted pro-etale adjunction, fixing its unit and counit.
-Source: blueprint locally closed exceptional comparison, pasted adjunction
-(blueprint: lem-weil-finite-duality-locally-closed-comparison). -/
+/-- The literal pasted pro-etale adjunction, fixing its unit and counit. -/
 def proetalePasted (a : LocallyClosedComparisonAdjoints A c) (v : V ⟶ T)
     [IsOpenImmersion v] : locallyClosedProEtaleExtension A c v ⊣ a.proetaleRight v :=
   a.proetaleAdjunction.comp
@@ -106,9 +88,7 @@ def proetalePasted (a : LocallyClosedComparisonAdjoints A c) (v : V ⟶ T)
 
 end LocallyClosedComparisonAdjoints
 
-/-- Delta is the specified closed counit mate followed by open extension comparison.
-Source: blueprint locally closed exceptional comparison, Delta
-(blueprint: lem-weil-finite-duality-locally-closed-comparison). -/
+/-- Delta is the specified closed counit mate followed by open extension comparison. -/
 def locallyClosedExtensionComparison (A : Type (u + 1)) [CommRing A] [Finite A]
     {S V T : Scheme.{u}} (c : S ⟶ V) (v : V ⟶ T)
     [IsClosedImmersion c] [IsOpenImmersion v] :
@@ -130,9 +110,7 @@ def locallyClosedExtensionComparison (A : Type (u + 1)) [CommRing A] [Finite A]
       (openImmersionLowerShriek (ModuleCat.{u + 1} A) v).mapDerivedCategory
 
 /-- The scheme-theoretic closure compactification of an immersion. No density or
-nonemptiness assumption is imposed.
-Source: blueprint locally closed exceptional comparison, closure factorization
-(blueprint: lem-weil-finite-duality-locally-closed-comparison). -/
+nonemptiness assumption is imposed. -/
 def locallyClosedImageCompactification {S T : Scheme.{u}} (s : S ⟶ T)
     [IsImmersion s] [QuasiCompact s] : Compactification s where
   Z := s.image
@@ -145,8 +123,7 @@ def locallyClosedImageCompactification {S T : Scheme.{u}} (s : S ⟶ T)
 /-- The unique identity-on-the-source sheaf comparison, oriented from closed/open
 extension to closure extension. The existing theorem specifies uniqueness by the open
 unit and closed counit, so this choice cannot introduce a scalar twist.
-Source: Stacks 0GJ1; blueprint locally closed exceptional comparison, Step 7
-(blueprint: lem-weil-finite-duality-locally-closed-comparison). -/
+Source: Stacks 0GJ1. -/
 def locallyClosedEtaleSheafIso (A : Type (u + 1)) [CommRing A] [Finite A]
     {S V T : Scheme.{u}} (c : S ⟶ V) (v : V ⟶ T)
     [IsClosedImmersion c] [IsOpenImmersion v] [IsNoetherian T] [QuasiCompact (c ≫ v)] :
@@ -160,8 +137,7 @@ def locallyClosedEtaleSheafIso (A : Type (u + 1)) [CommRing A] [Finite A]
 /-- The normalized identification with etale compact support at the closure
 compactification. Both closed direct images are exact; the comparison is the
 localization of the preceding uniquely normalized sheaf map.
-Source: Stacks 0GJ1; blueprint locally closed exceptional comparison, Step 7
-(blueprint: lem-weil-finite-duality-locally-closed-comparison). -/
+Source: Stacks 0GJ1. -/
 def locallyClosedEtaleSupportIso (A : Type (u + 1)) [CommRing A] [Finite A]
     {S V T : Scheme.{u}} (c : S ⟶ V) (v : V ⟶ T)
     [IsClosedImmersion c] [IsOpenImmersion v] [IsNoetherian T] [QuasiCompact (c ≫ v)] :
@@ -180,9 +156,7 @@ def locallyClosedEtaleSupportIso (A : Type (u + 1)) [CommRing A] [Finite A]
 
 /-- The existing Brown-adjoint theorem at the closure compactification. The
 Noetherian and compact hypotheses it needs follow from the immersion into T; they
-are constructed here rather than imposed on the statement as additional assumptions.
-Source: blueprint locally closed exceptional comparison, Step 7
-(blueprint: lem-weil-finite-duality-locally-closed-comparison). -/
+are constructed here rather than imposed on the statement as additional assumptions. -/
 instance locallyClosedImage_isLeftAdjoint (A : Type (u + 1)) [CommRing A] [Finite A]
     {S T : Scheme.{u}} (s : S ⟶ T) [IsImmersion s] [QuasiCompact s] [IsNoetherian T] :
     (Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A)
@@ -194,18 +168,14 @@ instance locallyClosedImage_isLeftAdjoint (A : Type (u + 1)) [CommRing A] [Finit
   Etale.isLeftAdjoint_rightDerivedLowerShriekOfCompactification A
     (locallyClosedImageCompactification s)
 
-/-- The ordinary etale exceptional right adjoint in closure coordinates.
-Source: blueprint locally closed exceptional comparison, s-times
-(blueprint: lem-weil-finite-duality-locally-closed-comparison). -/
+/-- The ordinary etale exceptional right adjoint in closure coordinates. -/
 abbrev locallyClosedEtaleExceptional (A : Type (u + 1)) [CommRing A] [Finite A]
     {S T : Scheme.{u}} (s : S ⟶ T) [IsImmersion s] [QuasiCompact s] [IsNoetherian T] :=
   (Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A)
     (locallyClosedImageCompactification s)).rightAdjoint
 
 /-- The counit-compatible etale adjoint identification induced by the normalized
-left-adjoint comparison, with no independently chosen right-adjoint isomorphism.
-Source: blueprint locally closed exceptional comparison, Step 7
-(blueprint: lem-weil-finite-duality-locally-closed-comparison). -/
+left-adjoint comparison, with no independently chosen right-adjoint isomorphism. -/
 def locallyClosedEtaleRightIso {A : Type (u + 1)} [CommRing A] [Finite A]
     {S V T : Scheme.{u}} {c : S ⟶ V} (v : V ⟶ T)
     [IsClosedImmersion c] [IsOpenImmersion v] [IsNoetherian T] [QuasiCompact (c ≫ v)]

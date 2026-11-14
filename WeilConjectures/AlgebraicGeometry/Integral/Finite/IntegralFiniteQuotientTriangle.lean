@@ -13,8 +13,6 @@ import Mathlib.CategoryTheory.Monoidal.Mod
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 
 /-! # Derived scalar triangles over a quotient coefficient ring
-
-Source: blueprint latest, lemma-bounds-finite-reductions, coefficient filtration paragraph.
 -/
 
 @[expose] public noncomputable section
@@ -49,20 +47,7 @@ private theorem quotientRestrictionFull
   exact ⟨g, rfl⟩
 
 /-- A short exact coefficient sequence yields a distinguished scalar-extension triangle
-linear over its middle quotient ring.
-
-Source: blueprint latest, lemma-bounds-finite-reductions, first paragraph
-(blueprint: lem-pe-integral-finite-quotient-triangle).
-
-Proof: restriction along q is full, since the maps q tensor Z are epic, so cancelling
-one of them turns R-linearity into S-linearity. Resolve K by a K-flat complex with flat
-terms. Tensor the coefficient short exact sequence with each flat term, obtaining a
-short exact sequence of cochain complexes over R. The ordinary tensor/scalar-extension
-comparison and composition of restrictions identify its terms with restrictions of
-cochain complexes over S. Fullness lifts the arrows, and exact faithfulness reflects
-their short exactness. Pass to the distinguished triangle of the lifted sequence.
-K-flat computation of the three derived extensions and exact restriction identify all
-three terms with the stated canonical functor values. No boundedness is required. -/
+linear over its middle quotient ring. -/
 theorem quotientScalarTriangle
     {C : Type u} [Category.{v} C] [Abelian C] [MonoidalCategory C]
     [MonoidalPreadditive C] [SymmetricCategory C] [MonoidalClosed C]

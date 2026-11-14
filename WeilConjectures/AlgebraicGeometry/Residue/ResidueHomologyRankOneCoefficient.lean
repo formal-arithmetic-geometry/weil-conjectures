@@ -15,7 +15,6 @@ import Mathlib.LinearAlgebra.TensorProduct.Tower
 /-! # Nonzero residue coefficient detected by derived homology
 
 Source: Stacks Project, Tag 0E62, residue-field argument, with Tag 0BCD.
-(blueprint: lem-sc-residue-homology-rank-one-coefficient).
 -/
 
 @[expose] public section
@@ -81,27 +80,7 @@ private theorem residue_coefficient_ne_zero_of_mono
 
 /-- In linear coordinates on the source and target stalks, the degree-zero
 coefficient of a connective perfect chain representative has nonzero residue.
-Source: Stacks Project, Tag 0E62, residue-field argument, with Tag 0BCD.
-(blueprint: lem-sc-residue-homology-rank-one-coefficient).
-
-Proof: identify the localized module site with the open subscheme. Every term
-of the strictly perfect complex is a summand of a finite free module, hence flat;
-finite support makes the complex bounded above. Termwise flat pullback computes
-its derived residue pullback. The same comparison applies to the single source.
-The restriction and pullback comparison along the residue point identifies the
-representing equality with the original derived residue arrow, conjugated by
-the images of c and e. Naturality of these comparisons therefore makes its
-residue H^0 map invertible. The single source has zero differentials into and
-out of degree zero, so its cycle inclusion and homology quotient are isomorphisms.
-Naturality of these maps makes the degree-zero residue component injective.
-Conjugate the stalk map by σ and τ to an endomorphism g of the local ring R.
-Then g(r) = g(1)r. If the residue of g(1) were zero, tensor balancing would
-make the residue scalar extension of g the zero map. Its injectivity would
-force κ(s) ⊗_R R to be zero, contradicting its tensor right unitor with κ(s).
-Thus the residue of τ(α^0(σ⁻¹(1))) is nonzero. This works for any linear
-frames: changing either frame multiplies the coefficient by a local unit.
-No invertibility of the original stalk component is asserted. The point rules
-out empty opens and ensures the local ring and its residue field are nonzero. -/
+Source: Stacks Project, Tag 0E62, residue-field argument, with Tag 0BCD. -/
 theorem residue_ne_zero_rankOne_stalk_coefficient (S : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
     [∀ U : S.Opens,

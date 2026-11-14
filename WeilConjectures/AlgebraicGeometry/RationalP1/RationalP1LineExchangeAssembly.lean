@@ -526,36 +526,7 @@ attribute [local reducible] coefficient
 -- Transport the concrete coefficient categories without unfolding their derived models.
 /-- The native coefficient exchange transports to the two shifted root-line maps.
 This is the line-only substep of the rational P1 closure naturality proof; it has
-no Chern adjunct, unit endpoint, or right-derived model comparison.
-Source: blueprint coefficient changes, paragraphs (2)--(3), native exchange and
-Cartesian root-line comparison.
-(blueprint: lem-sfb-rational-p1-line-exchange-assembly).
-
-Proof: apply flat_coefficient_exchange at the shifted finite root line. Move the
-closure root endpoint through exchange by naturality. Apply coefficient_exchange_line
-once the first-pullback endpoint square is identified as follows.
-
-First remove the shift using the canonical commuting-shift comparisons.
-Transpose through the derived scalar/restriction adjunction. Endpoint.normalization
-identifies each scalar arrow with the degree-zero image of its prescribed semilinear
-closureLineMap. The canonical scalar/pullback comparison is the conjugate of the
-restriction/direct-image comparison; its normalization gives the ordinary
-restriction/pullback map on degree-zero complexes. Transpose the two linePullIso
-maps through the geometric module adjunction. Their defining uniqueness equations
-identify the underlying adjoints with the rational and closure CartesianAdicComparison
-maps. The remaining square is exactly qbar_coprojection for E: the rational root
-comparison followed by the finite-field colimit leg equals pullback of that leg
-followed by the closure root comparison. Faithfulness of the module forgetful
-functor proves the ordinary module square; injectivity of the scalar adjunction
-proves its derived version. Reinsert the shift by two using naturality of the
-canonical shift maps. There are no permuted shifted factors and no signs. The
-argument uses no choice of a root basis and holds for empty schemes.
-
-Now use secondTraceExchange_eq_native for both coefficient fields. Naturality of
-scalar/direct-image comparison on the finite first-line map and functoriality of
-direct image finish the equation. All maps point forward; exchange is not inverted.
-The concrete module-category instances must be identified with those fixed by
-LineExchangeSquare without expanding derived resolutions. -/
+no Chern adjunct, unit endpoint, or right-derived model comparison. -/
 theorem rational_p1_line_exchange_assembly
     (l : ℕ) [Fact l.Prime] (E : PadicAlgCl.FiniteIntermediateField l)
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

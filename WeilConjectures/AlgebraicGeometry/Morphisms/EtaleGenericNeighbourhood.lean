@@ -22,8 +22,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- An étale point above a component generic point has an irreducible open neighbourhood.
 Source: Stacks Project, Tag 09BH, Proposition 59.74.1, reduction to an irreducible étale
-neighbourhood; component isolation uses Tag 0BA8.
-(blueprint: `lem-weil-pbc-etale-generic-irreducible-neighbourhood`). -/
+neighbourhood; component isolation uses Tag 0BA8. -/
 theorem Etale.exists_isGenericPoint_open_of_isGenericPoint
     {X Y : Scheme.{u}} [IsNoetherian X] (f : Y ⟶ X) [Etale f]
     (η : X) (hη : η ∈ genericPoints X) (y : Y) (hy : f y = η) :

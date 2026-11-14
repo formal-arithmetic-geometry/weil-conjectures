@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.RootSplitAwayTransportChart
 
 Source: Stacks Project, Tag 0EYG, first paragraph of the proof (the point off the divisor),
 and Tags 02LA, 02VN and 04HN.
-(blueprint: lem-sbc-root-split-cover-away-divisor-charts)
 -/
 
 @[expose] public section
@@ -30,27 +29,6 @@ namespace AlgebraicGeometry.Scheme
 /-- A root-split cover has only degree-one charts near a point off the divisor.
 
 Source: Stacks Project, Tag 0EYG, first proof paragraph; Tags 02LA, 02VN and 04HN.
-(blueprint: lem-sbc-root-split-cover-away-divisor-charts)
-
-Proof: Set A=R[T]/(T^n-g), h=algebraMap R A g and S=A[1/h], with φ the composite
-R→A→S. The standard affine basic-open isomorphism identifies Spec S with V=D(h).
-Over U=D(g), the monic root polynomial gives a finite free cover of positive rank n.
-Its root is invertible, and n*T^(n-1) is invertible, so V→U is finite etale.
-Positive finite free rank makes this map surjective. Since g∉y.asIdeal, the point y
-belongs to U; choose a point z of Spec S mapping to y. The composite Spec S→U→Spec R
-is etale, and φ(g) is a unit by construction. Transport the supplied δ along
-Spec S≅V to identify Y×_{Spec R}Spec S with d disjoint copies of Spec S, over Spec S.
-Thus no descent of Y and no further local splitting is needed.
-
-Evaluation at φ(g) identifies S[T]/(T-φ(g)) with S as an S-algebra, with inverse
-the algebra map. The finite product of these isomorphisms and the fact that Spec
-sends finite products to disjoint unions identify the displayed root-product
-spectrum with d copies of Spec S. The image of φ(g) remains a unit in the product,
-so its basic open is the whole spectrum. Compose with the transported δ. All maps
-commute with the structure map to Spec S, proving the projection identity.
-If d=0 the product is the zero ring and both sides are empty. Neither regularity
-nor a nonzerodivisor assumption is used. This is a root-split specialization of
-Stacks 0EYG's off-divisor branch; its given splitting permits the shorter route.
 -/
 theorem root_split_cover_away_divisor_charts
     (R : CommRingCat.{u}) (g : R) (n : ℕ) (hn : 0 < n ∧ IsUnit (n : R))

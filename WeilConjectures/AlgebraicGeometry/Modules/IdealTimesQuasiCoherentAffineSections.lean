@@ -22,14 +22,13 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.Restriction
 /-!
 # Products of quasi-coherent ideals and modules
 
-Source: Stacks Project, Schemes, Tags 01I8 and 01IC; Modules, Tags 01CE and 01AH;
-Cohomology of Schemes, Tag 087X
-(blueprint: lem-weil-pbc-ideal-times-quasi-coherent-affine-sections).
+Source: Stacks Project, Schemes, Tags 01I8 and 01IC; Modules, Tags 01CE and 01AH; Cohomology of
+Schemes, Tag 087X.
 
 A quasi-coherent ideal is a `Scheme.IdealSheafData`, with module realization and inclusion
 `toModules` and `toModulesι`. The product `𝒥𝓕`, its inclusion and the powers `𝒥ⁿ`
 (`𝒥ⁿ⁺¹ = 𝒥 · 𝒥ⁿ`) are the landed `Scheme.idealModuleProduct`, `Scheme.idealModuleProductι`
-and `Scheme.idealSheafPower` (lem-weil-pbc-ideal-module-product-stalk). Restriction to an
+and `Scheme.idealSheafPower`. Restriction to an
 open `V` is `Scheme.Modules.restrictFunctor V.ι` on modules and `IdealSheafData.comap V.ι`
 on ideals. Subsheaves of `𝓕|_V` are compared as the subobjects `Subobject.mk (image.ι _)`
 of their inclusions, as in lem-weil-pbc-affine-pushforward-ideal-product.
@@ -243,31 +242,7 @@ restriction to arbitrary opens. Let `𝒥` be a quasi-coherent ideal and `𝓕` 
 module on `X`. Then `𝒥𝓕`, `𝓕/𝒥𝓕` and every `𝒥ⁿ` (`n ≥ 1`) are quasi-coherent; on every
 affine open `U`, `(𝒥𝓕)(U) = 𝒥(U)𝓕(U)`, `𝓕(U) → (𝓕/𝒥𝓕)(U)` is surjective with kernel
 `𝒥(U)𝓕(U)`, and `𝒥ⁿ(U) = 𝒥(U)ⁿ`; for every open `V`, `(𝒥𝓕)|_V = (𝒥|_V)(𝓕|_V)` as
-subobjects of `𝓕|_V`. Source: Stacks, Tags 01I8, 01IC, 01CE, 01AH and 087X
-(blueprint: lem-weil-pbc-ideal-times-quasi-coherent-affine-sections).
-
-Proof:
-1. The ideal module is the kernel of the structure sheaf's map to the closed-subscheme
-pushforward; closed-immersion pushforward and kernels preserve quasi-coherence.
-2. The tensor comparison identifies affine tensor sections with the tensor product of
-sections. The multiplication sends a pure tensor to its scalar multiple. Tensor induction
-and the generation of an ideal-module product compute its range. The canonical abelian
-image/image isomorphism and the affine image calculation identify the product inclusion's
-range with this multiplication range, and show quasi-coherence of the product.
-3. Apply the affine cokernel/image calculation to the product inclusion. Its cokernel is
-quasi-coherent, the projection is surjective, and its kernel is precisely the range just
-computed.
-4. Induct on positive powers, using the recursive product construction. Quasi-coherence
-follows at each step; mapping the product range through the preceding power inclusion
-gives `I • I^n = I^(n+1)`.
-5. An open immersion identifies sections of a restriction with sections on its image open,
-and sends affine opens to affine opens. The affine ideal-extension formula identifies the
-restricted ideal with the image of the original ideal under the structure-ring isomorphism.
-Induction on sums of scalar multiples, using the restriction scalar-action formulas, gives
-equal affine section ranges for the two product inclusions. The restricted inclusion is
-mono since restriction preserves limits. Equal ranges on an affine basis imply equal
-subobjects: the cokernel projection vanishes locally, hence globally by sheaf separatedness,
-and the kernel universal property factors each inclusion through the other. -/
+subobjects of `𝓕|_V`. Source: Stacks, Tags 01I8, 01IC, 01CE, 01AH and 087X. -/
 theorem ideal_times_quasiCoherent_affine_sections {X : Scheme.{u}}
     (J : X.IdealSheafData) (F : X.Modules) [F.IsQuasicoherent] :
     (idealModuleProduct J.toModulesι F).IsQuasicoherent ∧

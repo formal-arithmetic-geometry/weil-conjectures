@@ -118,7 +118,7 @@ theorem exists_pointed_disjoint_cover (c₀ : Nbhd y) [IsAffine c₀.1.left]
     (isIntegral_algHom_iff B₂.val Subtype.val_injective).mp (Algebra.IsIntegral.isIntegral _)⟩
   have : Module.Finite A B₂ := Algebra.IsIntegral.finite
   have : Algebra.IsIntegral B₂ B := Algebra.IsIntegral.tower_top A
-  -- the finite morphism `Spec B₂ ⟶ U₀` and the projection `ρ : U₀ ×_Y X ⟶ Spec B₂`
+  -- the finite morphism `Spec B₂ ⟶ U₀` and the projection `ρ: U₀ ×_Y X ⟶ Spec B₂`
   let gU : Spec (.of B₂) ⟶ c₀.1.left :=
     Spec.map (CommRingCat.ofHom (algebraMap A B₂)) ≫ c₀.1.left.isoSpec.inv
   have : IsFinite gU := by

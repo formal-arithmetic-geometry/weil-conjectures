@@ -24,10 +24,6 @@ import Mathlib.AlgebraicGeometry.Noetherian
 /-!
 # Bounded-below proper direct image of ind-constructible complexes
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-proper-unbounded-window,
-`sk-lem-proper-unbounded-window-bounded-below.md` and its proof
-(blueprint: lemma-proper-direct-image-unbounded-complexes--1).
-
 IndCons is the replete small filtered-colimit closure `ObjectProperty.ind` of the
 finite constant-model constructibility predicate in the actual module-object category.
 The condition on every cohomology object is precisely membership in Dic. The two
@@ -267,35 +263,6 @@ private theorem derived_from_heart.{u₁, u₂, v₁, v₂}
 
 /-- Proper direct image with coefficients in a finite subextension of ℚ_ℓ preserves
 ind-constructible cohomology of bounded-below complexes and has the stated amplitude.
-Source: blueprint lemma-uniform-bound-proper-direct-image--1, both paragraphs of its proof;
-standing setting: lemma-uniform-bound-proper-direct-image--1 and
-lemma-uniform-bound-proper-direct-image (blueprint:
-lemma-proper-direct-image-unbounded-complexes--1).
-
-Proof (the five steps of the node):
-1. Use the existing Grothendieck instances for pro-etale abelian sheaves and their
-internal module objects. The module pushforward is additive and left exact, and its
-total right derived functor is computed on K-injective resolutions. Choose a lower
-bound a₀ and canonically truncate a representative below a₀. Apply
-lemma-uniform-bound-proper-direct-image--1 to this bounded-below representative: its E₂ terms are
-Rʳp_* Hˢ(K), and its abutment has a finite filtration with stable-page graded pieces.
-2. Apply lemma-uniform-bound-proper-direct-image to each ind-constructible Hˢ(K). The nonnegative
-E₂ columns are ind-constructible and vanish for r > c = 2d+1; negative columns vanish
-by the spectral-sequence theorem. Zero objects satisfy IndCons, since the kernel of
-the identity of an ind-constructible heart direct image is zero.
-3. By lemma-uniform-bound-proper-direct-image--1, each next page term is the cokernel of the
-incoming map lifted to the outgoing kernel. Apply proposition-ind-constructible-sheaves twice to
-propagate IndCons by induction on the page. The same recursion preserves zero terms.
-Use the positionwise stable-page comparisons in lemma-uniform-bound-proper-direct-image--1 to obtain
-ind-constructible stable terms; no uniform stabilization index is needed.
-4. Start at the zero end of the finite abutment filtration and descend. Its successive
-quotients are stable-page terms. Apply proposition-ind-constructible-sheaves--7 to each short exact
-sequence, then identify the top filtration term with the abutment.
-5. The bounded-below right-derived comparison gives preservation of each lower bound.
-For n > b+c, an E₂ term in total degree n either has r > c and vanishes by the heart
-bound, or has s = n-r > b and vanishes because Hˢ(K) is zero. Propagate these zeros
-through the pages and the finite filtration to obtain the upper bound. This argument
-also applies when c is negative.
 -/
 theorem proper_indConstructible_boundedBelow
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
@@ -377,35 +344,6 @@ theorem proper_indConstructible_boundedBelow
 
 /-- Proper direct image with coefficients in the condensed algebraic closure preserves
 ind-constructible cohomology of bounded-below complexes and has the stated amplitude.
-Source: blueprint lemma-uniform-bound-proper-direct-image--1, both paragraphs of its proof;
-standing setting: lemma-uniform-bound-proper-direct-image--1 and
-lemma-uniform-bound-proper-direct-image (blueprint:
-lemma-proper-direct-image-unbounded-complexes--1).
-
-Proof (the five steps of the node):
-1. Use the existing Grothendieck instances for pro-etale abelian sheaves and their
-internal module objects. The module pushforward is additive and left exact, and its
-total right derived functor is computed on K-injective resolutions. Choose a lower
-bound a₀ and canonically truncate a representative below a₀. Apply
-lemma-uniform-bound-proper-direct-image--1 to this bounded-below representative: its E₂ terms are
-Rʳp_* Hˢ(K), and its abutment has a finite filtration with stable-page graded pieces.
-2. Apply lemma-uniform-bound-proper-direct-image to each ind-constructible Hˢ(K). The nonnegative
-E₂ columns are ind-constructible and vanish for r > c = 2d+1; negative columns vanish
-by the spectral-sequence theorem. Zero objects satisfy IndCons, since the kernel of
-the identity of an ind-constructible heart direct image is zero.
-3. By lemma-uniform-bound-proper-direct-image--1, each next page term is the cokernel of the
-incoming map lifted to the outgoing kernel. Apply proposition-ind-constructible-sheaves twice to
-propagate IndCons by induction on the page. The same recursion preserves zero terms.
-Use the positionwise stable-page comparisons in lemma-uniform-bound-proper-direct-image--1 to obtain
-ind-constructible stable terms; no uniform stabilization index is needed.
-4. Start at the zero end of the finite abutment filtration and descend. Its successive
-quotients are stable-page terms. Apply proposition-ind-constructible-sheaves--7 to each short exact
-sequence, then identify the top filtration term with the abutment.
-5. The bounded-below right-derived comparison gives preservation of each lower bound.
-For n > b+c, an E₂ term in total degree n either has r > c and vanishes by the heart
-bound, or has s = n-r > b and vanishes because Hˢ(K) is zero. Propagate these zeros
-through the pages and the finite filtration to obtain the upper bound. This argument
-also applies when c is negative.
 -/
 theorem proper_indConstructible_boundedBelow_padicAlgCl
     (ℓ : ℕ) [Fact ℓ.Prime]

@@ -208,7 +208,7 @@ noncomputable def validStage : Over (M.openStage hc).left :=
   (M.exists_isValid hc (M.openDatum hc) (M.isCompatible_openDatum hc)
     (M.isOpenValid_openDatum hc) (M.isCompact_openDatum_V hc)).choose
 
-/-- Blueprint `theorem-nagata-s-compactification-theorem--1`: Cocycle-valid stage for the relative
+/-- Cocycle-valid stage for the relative
 datum.
 
 The stage `λ_rel`, lying past `λ_raw` (via `relStageToRawStage`),
@@ -226,7 +226,7 @@ the stage `λ_rel`, the datum `R_{X,λ_rel}`. -/
 noncomputable def validDatum : RelativeGluingDatum M.p (D.map (M.relStage hc).hom) :=
   M.stageTransport (M.validStage hc).hom (M.openDatum hc)
 
-/-- Blueprint `theorem-nagata-s-compactification-theorem--1`: The relative gluing axioms hold
+/-- The relative gluing axioms hold
 at the selected stage. In `R_{X,λ_rel}` the overlap opens match, the overlap maps are inverse
 (`AlgebraicGeometry.RelativeGluingDatum.toOpensGlueData`) and all triple-overlap cocycle
 identities hold. -/

@@ -9,8 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Proj.ProjScalarExtensionTwistDat
 import WeilConjectures.AlgebraicGeometry.Proj.ProjScalarExtensionTwistUniqueness
 import WeilConjectures.AlgebraicGeometry.Proj.ProjScalarExtensionTwistCanonicalIdentity
 
-/-! Identity part of the normalized scalar-extension twist laws.
-(blueprint: lem-sfb-proj-scalar-extension-twist-fraction-laws-identity). -/
+/-! Identity part of the normalized scalar-extension twist laws. -/
 
 @[expose] public section
 

@@ -179,17 +179,7 @@ private instance qcqs_finiteHypercovers (X : Scheme.{u}) :
 
 /-- Sections on a qcqs pro-etale object commute with coproducts with coefficients in
 any Grothendieck abelian category. Source: Stacks Project, Tag 0738 and the qcqs
-subsite in the proof of Tag 09A1.
-
-Proof: The qcqs full subsite is cover dense, since affine open covers factor through
-it. Every covering sieve on this subsite contains a finite affine refinement; pairwise
-pullbacks stay qcqs. Consequently finite one-hypercovers generate its topology.
-Restriction along the dense inclusion is an equivalence of sheaf categories. The
-coproduct functor in a Grothendieck abelian category is exact and therefore preserves
-finite limits. The finite-hypercover pointwise-colimit theorem shows that the sheaf
-inclusion on the subsite preserves coproducts. Compose restriction, this inclusion,
-and evaluation at the given qcqs object. This composite is precisely the original
-section functor. All three factors preserve coproducts, including the empty one. -/
+subsite in the proof of Tag 09A1. -/
 private theorem qcqs_evaluation_preservesCoproducts
     (A : Type u') [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A]

@@ -12,7 +12,7 @@ import WeilConjectures.AlgebraicGeometry.Section.SectionCohomologyCycleFormula
 
 /-! # The cocycle Leray edge on a restricted resolution
 
-Source: Stacks Project, cohomology.tex, Tags 01E4, 01F4 and 01FB.
+Source: Stacks Project, Tags 01E4, 01F4 and 01FB.
 -/
 
 @[expose] public section
@@ -131,17 +131,7 @@ private theorem sectionClass_top_cycle {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 -- The edge formula and the resolution comparison use definitionally equal section functors.
 /-- The whole-open resolution section class is the cocycle-defined Leray edge.
-Source: Stacks Project, cohomology.tex, Tags 01E4 and 01F4.
-(blueprint: lem-weil-pbc-leray-edge-whole-open-class).
-
-Proof: The sheafification adjunction sends a cocycle to its quotient in the cohomology
-sheaf. This follows from the counit naturality square on cycle inclusions and exactness
-of sheafification. Evaluation preserves the cycle kernel, so the cycle lift is uniquely
-determined by its inclusion in the degree term. This lift is therefore the z in the
-cocycle characterization of the chosen Leray edge. The homology comparison for forgetting
-scalars respects the cycle quotient. Since this quotient is surjective and the resolution
-comparison is invertible, the maps agree on every cohomology class. The argument also
-applies in degree zero, to zero modules, and to empty schemes.
+Source: Stacks Project, Tags 01E4 and 01F4.
 -/
 theorem whole_open_leray_edge {X Y : Scheme.{u}} (f : X ⟶ Y)
     (F : X.Modules) (I : InjectiveResolution F) (n : ℕ) :

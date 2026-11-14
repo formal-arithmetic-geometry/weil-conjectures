@@ -16,9 +16,7 @@ import WeilConjectures.CategoryTheory.InjectiveSheafMonoRestriction
 /-!
 # Relative section cones and supported cohomology
 
-Source: Stacks Project, Cohomology on Sites, cohomology with support; blueprint
-main-20261015, sec-smooth-purity/sk-prop-an/lem-pur-divisor-class.proof.md
-(blueprint: lem-pur-divisor-relative-cone).
+Source: Stacks Project, Cohomology on Sites, cohomology with support.
 
 The structures below package equations, rather than choosing comparison maps from an
 existence theorem. Their kernel and right-derived normalizations fix the identifications.
@@ -38,27 +36,25 @@ namespace RelativeCone
 
 variable {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
 
-/-- Evaluation on the given site. Source: Stacks, cohomology with support
-(blueprint: lem-pur-divisor-relative-cone). -/
+/-- Evaluation on the given site. Source: Stacks, cohomology with support. -/
 noncomputable abbrev evaluationFunctor (V : C) : Sheaf J AddCommGrpCat.{u + 1} ⥤
     AddCommGrpCat.{u + 1} :=
   sheafToPresheaf J _ ⋙ (evaluation _ _).obj (op V)
 
-/-- Restriction on sections. Source: Stacks, cohomology with support
-(blueprint: lem-pur-divisor-relative-cone). -/
+/-- Restriction on sections. Source: Stacks, cohomology with support. -/
 noncomputable def restriction {V W : C} (f : W ⟶ V) :
     evaluationFunctor J V ⟶ evaluationFunctor J W :=
   Functor.whiskerLeft (sheafToPresheaf J _) ((evaluation _ _).map f.op)
 
 /-- A section complex, extended by zero. This specializes to `relativeSections`.
-Source: Stacks, cohomology with support (blueprint: lem-pur-divisor-relative-cone). -/
+Source: Stacks, cohomology with support. -/
 noncomputable abbrev sections (V : C)
     (I : CochainComplex (Sheaf J AddCommGrpCat.{u + 1}) ℕ) :=
   (((evaluationFunctor J V).mapHomologicalComplex (.up ℕ)).obj I).extend
     ComplexShape.embeddingUpNat
 
 /-- Restriction between the extended section complexes.
-Source: Stacks, cohomology with support (blueprint: lem-pur-divisor-relative-cone). -/
+Source: Stacks, cohomology with support. -/
 noncomputable def restrictionComplex {V W : C} (f : W ⟶ V)
     (I : CochainComplex (Sheaf J AddCommGrpCat.{u + 1}) ℕ) :
     sections J V I ⟶ sections J W I :=
@@ -66,13 +62,13 @@ noncomputable def restrictionComplex {V W : C} (f : W ⟶ V)
     ComplexShape.embeddingUpNat
 
 /-- The signed relative cone, on either site and over any object of that site.
-Source: Stacks, cohomology with support (blueprint: lem-pur-divisor-relative-cone). -/
+Source: Stacks, cohomology with support. -/
 noncomputable abbrev fiber {V W : C} (f : W ⟶ V)
     (I : CochainComplex (Sheaf J AddCommGrpCat.{u + 1}) ℕ) :=
   (CochainComplex.mappingCone (restrictionComplex J f I))⟦(-1 : ℤ)⟧
 
 /-- The supported-section complex, using the dependency's single support functor.
-Source: Stacks, cohomology with support (blueprint: lem-pur-divisor-relative-cone). -/
+Source: Stacks, cohomology with support. -/
 noncomputable abbrev supported {V W : C} (f : W ⟶ V)
     (I : CochainComplex (Sheaf J AddCommGrpCat.{u + 1}) ℕ) :=
   (((Sheaf.supportedSectionsFunctor J AddCommGrpCat.{u + 1} f).mapHomologicalComplex
@@ -81,7 +77,7 @@ noncomputable abbrev supported {V W : C} (f : W ⟶ V)
 variable [EnoughInjectives (Sheaf J AddCommGrpCat.{u + 1})]
 
 /-- The canonical computation isomorphism, including the extension-by-zero transport.
-Source: Stacks Tag 09XP (blueprint: lem-pur-divisor-relative-cone). -/
+Source: Stacks Tag 09XP. -/
 noncomputable def computation (G : Sheaf J AddCommGrpCat.{u + 1} ⥤ AddCommGrpCat.{u + 1})
     [G.Additive] {F : Sheaf J AddCommGrpCat.{u + 1}} (I : InjectiveResolution F) (q : ℕ) :
     (G.rightDerived q).obj F ≅
@@ -92,14 +88,14 @@ noncomputable def computation (G : Sheaf J AddCommGrpCat.{u + 1} ⥤ AddCommGrpC
       ComplexShape.embeddingUpNat (by rfl)).symm
 
 /-- Forgetting support before deriving it.
-Source: Stacks, cohomology with support (blueprint: lem-pur-divisor-relative-cone). -/
+Source: Stacks, cohomology with support. -/
 noncomputable def forgetSupport {V W : C} (f : W ⟶ V) :
     Sheaf.supportedSectionsFunctor J AddCommGrpCat.{u + 1} f ⟶ evaluationFunctor J V where
   app F := kernel.ι (F.obj.map f.op)
   naturality α := by simp [Sheaf.supportedSectionsFunctor, evaluationFunctor]
 
 /-- The map of supported-section functors belonging to an actual object square.
-Source: Stacks, support restriction (blueprint: lem-pur-divisor-relative-cone). -/
+Source: Stacks, support restriction. -/
 noncomputable def supportRestriction {V W V' W' : C} (f : W ⟶ V) (f' : W' ⟶ V')
     (v : V' ⟶ V) (w : W' ⟶ W) (h : f' ≫ v = w ≫ f) :
     Sheaf.supportedSectionsFunctor J AddCommGrpCat.{u + 1} f ⟶
@@ -114,7 +110,7 @@ noncomputable def supportRestriction {V W V' W' : C} (f : W ⟶ V) (f' : W' ⟶ 
     rw [← α.hom.naturality]
 
 /-- A coefficient-resolution map evaluated on an object.
-Source: Stacks Tag 09XP (blueprint: lem-pur-divisor-relative-cone). -/
+Source: Stacks Tag 09XP. -/
 noncomputable def coefficientMap (V : C)
     {I I' : CochainComplex (Sheaf J AddCommGrpCat.{u + 1}) ℕ} (φ : I ⟶ I') :
     sections J V I ⟶ sections J V I' :=
@@ -126,7 +122,7 @@ end RelativeCone
 namespace RelativeCone
 
 /-- The first cone projection; the etale specialization is `relativeForgetComplex`.
-Source: Stacks Tag 0G71 (blueprint: lem-pur-divisor-relative-cone). -/
+Source: Stacks Tag 0G71. -/
 noncomputable def projection {A B : CochainComplex AddCommGrpCat.{u + 1} ℤ} (r : A ⟶ B) :
     (CochainComplex.mappingCone r)⟦(-1 : ℤ)⟧ ⟶ A :=
   (CategoryTheory.shiftFunctor _ (-1 : ℤ)).map
@@ -135,13 +131,13 @@ noncomputable def projection {A B : CochainComplex AddCommGrpCat.{u + 1} ℤ} (r
     (shiftFunctorZero _ ℤ).hom.app _
 
 /-- The shifted cone inclusion, corresponding to `(0,-b)` in the signed model.
-Source: Stacks Tag 0G71 (blueprint: lem-pur-divisor-relative-cone). -/
+Source: Stacks Tag 0G71. -/
 noncomputable def boundary {A B : CochainComplex AddCommGrpCat.{u + 1} ℤ} (r : A ⟶ B) :
     B⟦(-1 : ℤ)⟧ ⟶ (CochainComplex.mappingCone r)⟦(-1 : ℤ)⟧ :=
   (CategoryTheory.shiftFunctor _ (-1 : ℤ)).map (CochainComplex.mappingCone.inr r)
 
 /-- Commutation with the two arrows of the relative triangle.
-Source: Stacks Tag 0G78 (blueprint: lem-pur-divisor-relative-cone). -/
+Source: Stacks Tag 0G78. -/
 def TriangleSquare {A B A' B' : CochainComplex AddCommGrpCat.{u + 1} ℤ}
     (r : A ⟶ B) (r' : A' ⟶ B') (a : A ⟶ A') (b : B ⟶ B')
     (h : a ≫ r' = r ≫ b) : Prop :=
@@ -155,8 +151,7 @@ variable [EnoughInjectives (Sheaf J AddCommGrpCat.{u + 1})]
 /-- Canonically normalized realization for a support pair and a supplied resolution.
 The boundary field compares with the connecting map of the kernel short exact sequence;
 the forget field compares with `R^q` of the actual kernel inclusion, rather than an
-unconstrained map. Source: Stacks, cohomology with support
-(blueprint: lem-pur-divisor-relative-cone). -/
+unconstrained map. Source: Stacks, cohomology with support. -/
 structure Realization {V W : C} (f : W ⟶ V)
     {F : Sheaf J AddCommGrpCat.{u + 1}} (I : InjectiveResolution F) where
   kernelIso : supported J f I.cocomplex ≅ kernel (restrictionComplex J f I.cocomplex)
@@ -202,7 +197,7 @@ structure Realization {V W : C} (f : W ⟶ V)
 square of an etale neighbourhood and the square `W' ⊆ W` with identity on the ambient
 object. Coefficient lifts are arbitrary lifts of the given coefficient morphism, so the
 identity-coefficient case states independence of the resolution and of its comparison map.
-Source: Stacks, cohomology with support (blueprint: lem-pur-divisor-relative-cone). -/
+Source: Stacks, cohomology with support. -/
 structure System (P : ∀ {V W : C}, (W ⟶ V) → Prop) where
   realization : ∀ {V W : C} (f : W ⟶ V), P f →
     ∀ {F : Sheaf J AddCommGrpCat.{u + 1}} (I : InjectiveResolution F), Realization J f I
@@ -234,8 +229,7 @@ end RelativeCone
 
 namespace RelativeCone
 
-/-- The termwise pullback of the chosen etale resolution.
-Source: blueprint comparison proof, Step 4 (blueprint: lem-pur-divisor-relative-cone). -/
+/-- The termwise pullback of the chosen etale resolution. -/
 noncomputable abbrev pulledResolution (T : Scheme.{u})
     (I : CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) ℕ) :=
   ((AlgebraicGeometry.ProEtale.comparisonUpperStar AddCommGrpCat.{u + 1} T).mapHomologicalComplex

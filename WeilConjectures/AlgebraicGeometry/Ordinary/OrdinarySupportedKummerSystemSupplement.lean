@@ -164,9 +164,7 @@ public import WeilConjectures.AlgebraicGeometry.OrdinarySupportedKummerSystem
 /-!
 # Normalized systems of ordinary supported Cartier Kummer maps
 
-Source: Stacks Project, Tags 03PL and 0A45; blueprint
-sec-smooth-purity/sk-prop-sf-cbc/lem-amb-cartier-kummer-map.md
-(blueprint: def-asd-ordinary-supported-kummer-system).
+Source: Stacks Project, Tags 03PL and 0A45.
 
 ## Main definitions
 

@@ -171,9 +171,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunctio
 /-!
 # Compatible changes of ring sheaves and derived adjunctions
 
-Source: Stacks Project, Cohomology on Sites, Tags 0D6D, 0D6E and 07A6;
-Modules on Sites, lemma-adjoint-push-pull-modules
-(blueprint: lem-weil-pbc-ring-sheaf-change-adjunction).
+Source: Stacks Project, Cohomology on Sites, Tags 0D6D, 0D6E and 07A6.
 -/
 
 @[expose] public section
@@ -768,7 +766,7 @@ private theorem restrictionPullback_mate :
   exact congrArg (fun h ↦ _ ≫ _ ≫ h) (Category.comp_id _).symm
 
 /-- The termwise descended identified-coefficient inverse-image comparison `b`.
-Source: Stacks, Tag 0D6D (blueprint: lem-weil-pbc-ring-sheaf-change-adjunction). -/
+Source: Stacks, Tag 0D6D. -/
 noncomputable def proEtaleRingRestrictionDerivedPullback :
     proEtaleRingDerivedPullback f SV SU cS ⋙ (proEtaleRingRestrictScalars aU).mapDerivedCategory ≅
       (proEtaleRingRestrictScalars aV).mapDerivedCategory ⋙
@@ -781,7 +779,7 @@ noncomputable def proEtaleRingRestrictionDerivedPullback :
       (proEtaleRingModulePullback f RV RU cR)).symm
 
 /-- The right-derived unit on complexes, including the canonical quotient identifications.
-Source: Stacks, Tag 07A5 (blueprint: lem-weil-pbc-ring-sheaf-change-adjunction). -/
+Source: Stacks, Tag 07A5. -/
 noncomputable def proEtaleRingDirectImageDerivedUnit
     (K : CochainComplex (proEtaleRingModules U RU) ℤ) :
     DerivedCategory.Q.obj
@@ -1101,16 +1099,7 @@ private theorem derivedDirectImageComparison_unique
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Existence of the normalized derived direct-image comparison.
-Source: Stacks, Tag 0D6E (blueprint: lem-weil-pbc-ring-sheaf-change-adjunction).
-Proof: form the mate of the termwise descended inverse-image comparison. The proved
-mate-factorization identity gives its displayed unit normalization on every complex.
-Present scalar restriction and direct image as ringed-topos morphisms on the AsSmall
-sites. The resolution clause of the general composition theorem says that direct image
-sends a K-injective resolution of the restriction of a K-injective complex to a
-quasi-isomorphism. Naturality of the derived unit then makes the unit on the restricted
-complex invertible. In the normalization all other arrows are invertible on K-injective
-complexes, so the mate is invertible there. Every derived object has a K-injective
-representative, and naturality gives invertibility everywhere. -/
+Source: Stacks, Tag 0D6E. -/
 theorem proEtaleRingRestrictionDerivedDirectImage_exists :
     ∃ d : proEtaleRingDerivedDirectImage f SV SU cS ⋙
         (proEtaleRingRestrictScalars aV).mapDerivedCategory ≅
@@ -1185,14 +1174,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The direct-image comparison is the unique comparison compatible with the derived
 units and the identity-on-sections underived comparison.
-Source: Stacks, Tag 0D6E (blueprint: lem-weil-pbc-ring-sheaf-change-adjunction).
-Proof: regard both sides as the derived direct image of the same composite ringed-topos
-morphism. The exact vertical direct images are termwise restriction. The composition
-comparison supplies an invertible map compatible with the derived units. On a K-injective
-complex I over SU and a K-injective resolution j of its RU-restriction, that map is
-represented by directImage(j), which is a quasi-isomorphism by the composition theorem.
-This does not assume that restriction preserves K-injectivity. The unit normalization
-uniquely determines the comparison on K-injectives and hence everywhere by localization. -/
+Source: Stacks, Tag 0D6E. -/
 theorem proEtaleRingRestrictionDerivedDirectImage_existsUnique :
     ∃! d : proEtaleRingDerivedDirectImage f SV SU cS ⋙
         (proEtaleRingRestrictScalars aV).mapDerivedCategory ≅
@@ -1220,7 +1202,7 @@ theorem proEtaleRingRestrictionDerivedDirectImage_existsUnique :
     (d := d) (d' := d') hd hd').symm
 
 /-- The canonical derived direct-image comparison `d`, determined by its unit normalization.
-Source: Stacks, Tag 0D6E (blueprint: lem-weil-pbc-ring-sheaf-change-adjunction). -/
+Source: Stacks, Tag 0D6E. -/
 noncomputable def proEtaleRingRestrictionDerivedDirectImage :
     proEtaleRingDerivedDirectImage f SV SU cS ⋙
         (proEtaleRingRestrictScalars aV).mapDerivedCategory ≅
@@ -1234,23 +1216,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option linter.style.haveILetI false in
 /-- Exact restriction reflects derived isomorphisms, and the canonical coefficient
 comparisons intertwine the canonical derived adjunctions.
-Source: Stacks, Tags 05RT, 0D6D, 0D6E and 07A6
-(blueprint: lem-weil-pbc-ring-sheaf-change-adjunction).
-Proof: (1) restriction leaves underlying abelian kernels and sheafified cokernels
-unchanged, so is exact and conservative. It commutes with cohomology; the unbounded
-cohomology criterion therefore implies conservativity after localization.
-(2) the inverse-image comparison is identity on the inverse-image abelian sheaf, with
-the two scalar actions identified by the coefficient square. Descend it termwise.
-(3) the two ringed-topos composites have identical structural maps; exact vertical
-restriction identifies their derived direct images with termwise restriction.
-(4) the derived direct-image composition theorem gives d, represented on K-injective
-I and a K-injective resolution j of its restriction by directImage(j).
-(5) represent t by a chain map into I. Its transpose is the ordinary module transpose
-followed by the derived unit. After restriction and passage to j its transpose is
-directImage(j) composed with that restricted transpose, by naturality of the ordinary
-adjunction. The canonical pre-derived adjunction fraction formula then identifies this
-with both sides of the displayed equation. Homotopies and canonical resolution
-identifications make the equality valid for every derived M, N and t. -/
+Source: Stacks, Tags 05RT, 0D6D, 0D6E and 07A6. -/
 theorem proEtaleRingSheafChangeAdjunction :
     (proEtaleRingRestrictScalars aU).mapDerivedCategory.ReflectsIsomorphisms ∧
     (proEtaleRingRestrictScalars aV).mapDerivedCategory.ReflectsIsomorphisms ∧

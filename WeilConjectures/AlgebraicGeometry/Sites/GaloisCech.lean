@@ -139,7 +139,7 @@ theorem iUnion_range_nerveSection {k : ℕ} (y : Fin (k + 1) → Fin 1) :
   let := (isField_of_etale_of_subsingleton W).toField
   let incl : Over.mk (isTerminal.from W) ⟶ cechNerveObj (family K M) y :=
     Over.homMk (Etale.ofOpensι N O) (isTerminal.hom_ext _ _)
-  -- the embeddings `ιₗ : M → Γ(W, 𝒪)`
+  -- the embeddings `ιₗ: M → Γ(W, 𝒪)`
   let ι (l : Fin (k + 1)) : M →+* Γ(W.left, ⊤) :=
     toRing (incl ≫ Pi.π (fun l ↦ family K M (y l)) l).left.left
   let κ : K →+* Γ(W.left, ⊤) := toRing W.hom

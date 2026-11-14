@@ -10,8 +10,7 @@ import WeilConjectures.AlgebraicGeometry.Strict.StrictBaseClosedPointLocalizatio
 
 /-! # Comparing the strict-local fibre above a closed geometric point
 
-Source: Stacks Project, Tag 0GJU, proof of lemma-beta-is-isomorphism.
-(blueprint: lem-weil-pbc-local-acyclicity-strict-fibre-comparison).
+Source: Stacks Project, Tag 0GJU.
 -/
 
 @[expose] public section
@@ -59,16 +58,7 @@ private theorem strict_congr_point
 of vanishing cycles for the original morphism, compatibly with its map to the original
 scheme. The canonical map on the strict localization of the source is invertible.
 The fibre comparison commutes with its first projection.
-Source: Stacks Project, Tag 0GJU, first two paragraphs of the proof.
-(blueprint: lem-weil-pbc-local-acyclicity-strict-fibre-comparison).
-
-Proof: take the pointed strict-local maps for the structural base map, for `p`, and for
-`f`. The pullback equation identifies the two image points on the old base, so transport
-its strict-local map along this equality. Apply the strict-base closed-point localization
-lemma to these three canonical maps. Its base isomorphism transports `t`; its last clause
-provides the fibre isomorphism. Composing its first projection equation with the structural
-map and using the structural equation for the strict-local map induced by `p` gives the
-claimed equality over `X`. -/
+Source: Stacks Project, Tag 0GJU, first two paragraphs of the proof. -/
 theorem localAcyclicity_strict_fibre_comparison
     {X S X' : Scheme.{u}} (f : X ⟶ S)
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)

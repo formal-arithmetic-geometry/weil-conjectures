@@ -145,12 +145,7 @@ private theorem selected_projection_isIso
     (isIso_properProjectionMap_boundedConstructible_rational l
       (f.asOver (Spec (.of k))) (coefficient l c) hc A B hA hB)
 
-/-- The fixed left-factor projection is invertible on rational localizing objects.
-Source: rational projective-line unit/counit proof step 11 and the rational localizing
-projection formula (blueprint: lem-sfb-rational-p1-localizing-projection).
-Proof: apply the published right-factor projection formula, then conjugate by the
-source braiding and the pushforward of the target braiding. The normalization of the
-left projection identifies this composite with the fixed map used by the counit. -/
+/-- The fixed left-factor projection is invertible on rational localizing objects. -/
 theorem projectionMap_isIso_localizing
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.FractionZeroTensorPower
 /-!
 # A power of a section kills a positive cohomology class
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 01XR
-(blueprint: lem-sc-section-affine-open-kills-cohomology).
+Source: Stacks Project, Cohomology of Schemes, Lemma 01XR.
 -/
 
 @[expose] public section
@@ -32,18 +31,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 cohomology class of a quasi-coherent module is killed by some tensor power of that section.
 The map is induced by `F ≅ F ⊗ 𝒪_X ⟶ F ⊗ L^{⊗ e}`, with second factor `s^{⊗ e}`.
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 01XR
-(blueprint: lem-sc-section-affine-open-kills-cohomology).
-
-Proof:
-1. Apply lem-sc-invert-s-cohomology (Stacks 09MR) to identify cohomology on the
-nonvanishing open with the degree-zero localization of graded twisted cohomology.
-The restriction of `F` is quasi-coherent. Since this open is affine, its positive
-cohomology vanishes by pqf-lem-affine-vanishing (Stacks 01XB). Thus the image of the
-class in the localization is zero.
-2. By the definition of module localization, a homogeneous class whose fraction with
-unit denominator vanishes is annihilated by a power of the section. In degree `e`
-this is exactly the cohomology map induced by `f ↦ f ⊗ s^e` displayed below. -/
+Source: Stacks Project, Cohomology of Schemes, Lemma 01XR. -/
 theorem exists_tensorPowSection_cohomology_eq_zero
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
     (L : X.Modules) [L.IsInvertible] (s : Γ(L, ⊤))

@@ -10,9 +10,7 @@ import WeilConjectures.AlgebraicGeometry.IsomorphismScalarTensor.IsomorphismScal
 
 /-! # Completed pure-tensor comparison
 
-Source: Stacks Project, sites-modules.tex, Tag 03EL; sites-cohomology.tex, Tag 0G7E;
-Bhatt--Scholze, Section 6.5, Lemma 6.5.9(4).
-(blueprint: lem-weil-isomorphism-scalar-completed-formula).
+Source: Stacks Project, Tag 03EL; Tag 0G7E; Bhatt--Scholze, Section 6.5, Lemma 6.5.9(4).
 
 The proof applies the normalized comparison of completed-coefficient module
 sheaves degreewise, then restricts the resulting natural isomorphism of complexes
@@ -38,16 +36,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 /-- Existence of the completed chain isomorphism with its normalized pure-tensor
 formula. This is the comparison component of the completed model statement.
 
-Source: Stacks Project, sites-modules.tex, Tag 03EL; sites-cohomology.tex, Tag 0G7E;
-Bhatt--Scholze, Section 6.5, Lemma 6.5.9(4).
-(blueprint: lem-weil-isomorphism-scalar-completed-formula).
-
-Proof: The completed module comparison has the normalized pure-tensor rule
-on every module sheaf. Apply NatIso.mapHomologicalComplex to obtain a natural
-isomorphism on unbounded complexes and whisker by the inclusion of good complexes.
-In degree i its component is the module comparison on P.X i, whose pure-tensor
-rule is exactly the displayed CompletedFormula. No completeness of P is needed;
-this construction also applies to the zero complex and an empty site.
+Source: Stacks Project, Tag 03EL; Tag 0G7E; Bhatt--Scholze, Section 6.5, Lemma 6.5.9(4).
 -/
 theorem scalar_completed_formula
     (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x))

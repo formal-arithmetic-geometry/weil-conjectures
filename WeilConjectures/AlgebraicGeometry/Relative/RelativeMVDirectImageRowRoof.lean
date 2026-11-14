@@ -43,22 +43,7 @@ private lemma mv_row_degreewise_split
 
 /-- A common resolved image row compares the source Mayer--Vietoris row with
 its target direct-image row before strictification. Source: Stacks Project,
-Cohomology of Sheaves, Tags 08BV, 08HZ, 08FE and 08HY.
-(blueprint: lem-pc-relative-mv-direct-image-row-roof).
-Proof: Choose injective-term K-injective representatives I of K, J of K', and
-L of Rg'_* K'. Lift the transpose of φ to a map I → L and lift the canonical
-comparison g'_* J → L. Restriction units and their difference maps turn these
-maps into morphisms of the Mayer--Vietoris rows on U,V and their inverse images.
-Apply f_* and identify f_* g'_* with g_* f'_* by hpull. This gives A → R ← B.
-Every row is degreewise split exact, hence all four displayed rows are short
-exact. K-injective acyclicity for successive direct image makes each vertex
-of B → R a quasi-isomorphism. The resolution isomorphisms, the exact-open
-pullback comparison, and preservation of finite biproducts give the six
-vertex comparisons. Under these comparisons, the global arrow is the
-transpose of φ by the composition adjunction; the two open arrows are its
-restrictions. Naturality of the underived open counit square and the
-composition adjunction identifies their transposes with the displayed roof
-maps, giving the three equations. -/
+Cohomology of Sheaves, Tags 08BV, 08HZ, 08FE and 08HY. -/
 theorem relativeMV_direct_image_row_roof
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

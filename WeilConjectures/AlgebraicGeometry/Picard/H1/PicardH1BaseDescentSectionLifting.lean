@@ -30,28 +30,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Every marked-fibre section lifts after shrinking the base around the marked point.
 This asserts surjectivity of restriction, not existence of a generating section.
-Source: Stacks Project, Tag 0BF2, the perfect-complex argument through d = 0.
-(blueprint: lem-sc-picard-h1-base-descent-section-lifting)
-
-Proof: Base change to W. The immersion identifies the marked residue fields, transporting
-hLs and hH. Universal structure pushforward is preserved by this base change. Faithfully
-flat descent makes the finite locally free modules in hLi invertible; trivialize them
-on a common affine neighbourhood. Perfect direct-image base change and finite-free residue
-models give bounded complexes with degree-zero term of rank one and all residue
-differentials zero. The pullback maps can be represented by chain maps between these
-finite projective complexes. Their degree-zero residue maps are isomorphisms. Shrink to
-invert these maps. The joint degree-one map has injective residue map by hH; invert a
-nonzero maximal minor to make it split injective. In rank zero it is already injective,
-including the empty-family case. The target degree-zero differentials vanish since the
-trivial descended bundles have H0 equal to O and its generator spans the degree-zero term
-after shrinking. The chain-map equation forces the source differential to vanish.
-Thus every fibre section lifts after further shrinking: write its scalar coefficient
-in κ(w) as a fraction and invert its denominator, which is nonzero at w.
-The residue fibre of V is canonically
-isomorphic to the residue fibre of W; its inclusion j hits every point over w. Pullback
-composition supplies e; the adjunction unit is the canonical section restriction map.
-This proves the displayed restriction equation for every τ, without asserting that τ or
-its lift generates. -/
+Source: Stacks Project, Tag 0BF2, the perfect-complex argument through d = 0 -/
 theorem picard_h1_base_descent_section_lifting {X S : Scheme.{v}} (f : X ⟶ S) {n : ℕ}
     (Xi : Fin n → Scheme.{v}) (fi : ∀ i, Xi i ⟶ S)
     [Flat f] [IsProper f] [LocallyOfFinitePresentation f]

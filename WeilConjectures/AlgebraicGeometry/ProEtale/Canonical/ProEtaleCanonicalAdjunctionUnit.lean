@@ -146,13 +146,7 @@ attribute [local irreducible] proEtaleRingModulePullback
   proEtaleRingDirectImageMap proEtaleRingModuleUnitSection
 
 /-- The constructed Hom adjunction has the prescribed sectionwise tensor unit.
-Source: Stacks 03D2 and 03D7
-(blueprint: lem-pod-canonical-module-adjunction-unit).
-Proof: apply the defining transpose formula to the identity of the pullback of M.
-The resulting transpose is the adjunction unit. On the model site this transpose
-is the model pullback unit followed by g. The defining formula for g sends its
-input to the sheafification of 1 tensor that input. This is the stated unit
-section, since the model equivalence preserves section carriers. -/
+Source: Stacks 03D2 and 03D7. -/
 theorem proEtaleRingModuleAdjunction_normalized
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})

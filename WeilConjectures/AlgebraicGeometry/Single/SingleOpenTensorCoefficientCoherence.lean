@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.PerfectHomCochainCounit
 /-! # Single-module coefficients in an open square
 
 Source: Stacks Project, Tags 06YJ, 0D5S and 01JR.
-(blueprint: lem-pc-single-open-tensor-coefficient-coherence).
 -/
 
 @[expose] public section
@@ -277,23 +276,7 @@ end
 
 /-- Normalized single-module coefficient comparisons commute with an open square.
 This is an equality of coefficient maps, before any direct image or base-change mate.
-Source: Stacks Project, Tags 06YJ and 0D5S; coefficient calculation in
-lem-pc-standard-single-open-relative-arrow.
-(blueprint: lem-pc-single-open-tensor-coefficient-coherence).
-
-Proof: Postcompose the desired equality with the invertible single comparison
-for r. Substitute the normalization equation for beta on the right. Naturality
-moves its tensor-composition factors through the comparison for e'. Apply the
-single-map composition identity to (k,i) and (r,q) on the left and to (k,e)
-and (e',t) on the right. Substitute the normalization equation for alpha.
-The tensor-composition associativity identity for (k,e,z), together with
-hi and ht, identifies the coefficient factors on the two sides; the path
-(e',t,z) is the same triple composite by ht, and hsq identifies it with (r,q).
-Equality induction on hi, ht and hsq identifies the transports. Reassociate,
-cancel the derived composition isomorphisms, and cancel the final comparison
-for r. No single comparison for q or t is inverted. This is valid for zero
-modules, empty schemes, and identity morphisms. The statement does not require
-open immersions: the invertibility needed for cancellation is explicit. -/
+Source: Stacks Project, Tags 06YJ and 0D5S. -/
 theorem single_open_tensor_coefficient_coherence
     {W Z X' P J J' : Scheme.{u}}
     (z : Z ⟶ W) (q : X' ⟶ W) (t : P ⟶ Z)

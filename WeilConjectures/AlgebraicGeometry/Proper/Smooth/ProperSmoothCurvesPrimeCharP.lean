@@ -38,12 +38,7 @@ namespace AlgebraicGeometry.Etale
 over a Noetherian base on which the prime `p` vanishes, the higher direct images of the
 constant sheaf `ℤ/p` are constructible.
 
-Source: Stacks Project, more-etale.tex, Tag 0GKV, lemma-proper-smooth-family-curves, case (b).
-
-Proof: the Artin--Schreier sequence `0 → ℤ/p → 𝔾ₐ → 𝔾ₐ → 0` and the long exact sequence of
-higher direct images identify `Rᵠf_* ℤ/p` with the kernel of `F - 1` on `Rᵠf_* 𝔾ₐ`, since
-`F - 1` is étale locally surjective on `Rᵠ⁻¹f_* 𝔾ₐ`. The latter is the étale sheaf of a finite
-locally free module with a Frobenius-linear endomorphism, and Tag 0GKU applies. -/
+Source: Stacks Project, Tag 0GKV, case (b). -/
 theorem properSmoothCurves_charP_higherDirectImage_constructible
     {C S : Scheme.{u}} [IsNoetherian S]
     (f : C ⟶ S) [IsProper f] [Smooth f] [GeometricallyConnected f]

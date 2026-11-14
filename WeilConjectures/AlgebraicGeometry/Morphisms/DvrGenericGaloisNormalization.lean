@@ -22,8 +22,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
 
 /-! # Finite normal models of generic Galois covers over a DVR
 
-Source: Stacks Project, Tags 032L, 033C, 035L and 0307.
-(blueprint: lem-sbc-dvr-generic-galois-normalization)
+Source: Stacks Project, Tags 032L, 033C, 035L and 0307
 -/
 
 @[expose] public section
@@ -95,25 +94,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- A finite Galois generic cover pulled back to a DVR has finite relative normalization
 and normal local rings.
 
-Source: Stacks Project, Tags 032L, 033C, 035L and 0307.
-(blueprint: lem-sbc-dvr-generic-galois-normalization)
-
-Proof: Each finite Galois K-algebra E_i is finite etale over K. The finite
-coproduct of its spectra is finite etale over Spec K, so the given over-base
-isomorphism makes p finite etale. A fraction field of a DVR is its localization
-away from any uniformizer: every nonzero element is a unit times a power of that
-uniformizer. Thus j is an open immersion. Pasting pullbacks factors a through the
-open immersion g = pullback.snd j q by a finite etale morphism. Identify the source
-of g with its open image V in Spec A. On every affine open of Spec A, apply the
-finite integral-closure theorem for finite etale covers of normal Noetherian opens
-(032L) to the resulting finite etale cover of V. The affine description of relative
-normalization identifies these finite algebras with its structure sheaf, giving
-finiteness of fromNormalization. All stalks of Spec A are normal domains by
-localization. Since a is etale, smooth ascent of normality (033C), checked on
-standard smooth affine charts, makes its source normal and locally Noetherian.
-Relative normalization of such a source has normal domain stalks (035L), using
-localization of integral closures (0307). Empty families and empty open images
-are included in these theorems. No condition on q beyond being a morphism is used. -/
+Source: Stacks Project, Tags 032L, 033C, 035L and 0307 -/
 theorem dvr_generic_galois_normalization
     (B A : CommRingCat.{u}) [IsDomain B] [IsDiscreteValuationRing B]
     [IsDomain A] [IsDiscreteValuationRing A]

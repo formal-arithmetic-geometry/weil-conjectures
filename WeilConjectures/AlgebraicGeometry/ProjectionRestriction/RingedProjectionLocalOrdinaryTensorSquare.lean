@@ -48,7 +48,6 @@ import all Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 /-! # Ordinary tensor coherence for the localized adjunction mate
 
 Source: Stacks Project, Tags 04J0 and 07A4.
-(blueprint: lem-weil-pbc-ringed-projection-local-ordinary-tensor-square).
 -/
 
 @[expose] public noncomputable section
@@ -86,19 +85,7 @@ attribute [local irreducible] SheafOfModules.monoidalCategory
 /-- The ordinary inverse mate commutes with the two pullback and two restriction
 comparisons on module sheaves, without derived categories or resolving complexes.
 
-Source: Stacks Project, Modules on Sites, Tag 04J0; Cohomology on Sites, Tag 07A4.
-(blueprint: lem-weil-pbc-ringed-projection-local-ordinary-tensor-square).
-
-Proof: transpose under the local module adjunction, and use the inverse-mate
-unit identity to replace the transpose of the square by restriction of the
-global unit followed by the sectionwise identity direct-image comparison.
-Precompose with the inverse restriction tensor isomorphism. On a pure tensor
-of local sections, its inverse restores the same global pure tensor on the
-underlying slice object, by pure_sections. The global and local pure_unit
-identities and the mate unit identity on the two factors now give the same
-pure tensor. Tensor and sheafification extensionality prove equality of the
-transposes; adjunction injectivity proves the original equation. This argument
-also covers zero rings and zero modules. -/
+Source: Stacks Project, Modules on Sites, Tag 04J0; Cohomology on Sites, Tag 07A4. -/
 theorem localOrdinaryTensorSquare
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R_Y : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})

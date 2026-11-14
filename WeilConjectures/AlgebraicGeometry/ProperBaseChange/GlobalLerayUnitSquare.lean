@@ -17,7 +17,7 @@ public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 
 /-! # The global cocycle square for an ordinary coefficient map
 
-Source: Stacks Project, cohomology.tex, Tags 01E4 and 01FB.
+Source: Stacks Project, Tags 01E4 and 01FB.
 -/
 
 @[expose] public section
@@ -71,8 +71,7 @@ open Scheme.Modules
 attribute [local instance] Scheme.Modules.enoughInjectives
 
 /-- The native abelian structure, cached once for the shared Leray constructions.
-Source: Mathlib sheaves of modules; Stacks Project, Tag 0096.
-(blueprint: lem-weil-pbc-global-leray-unit-square). -/
+Source: Stacks Project, Tag 0096. -/
 @[reducible] local instance (priority := 3000) globalLerayModuleAbelian (S : Scheme.{u}) :
     Abelian (SheafOfModules.{u} (moduleRings S.toRingedSpace)) := inferInstance
 
@@ -216,16 +215,14 @@ variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
 /-- The common derived image of a module, kept as a shared object in the global square.
-Source: Stacks Project, Tag 01F2; derived direct image of a degree-zero module.
-(blueprint: lem-weil-pbc-global-leray-unit-square). -/
+Source: Stacks Project, Tag 01F2; derived direct image of a degree-zero module. -/
 def globalLerayImage {X S : Scheme.{u}} (f : X ⟶ S) (F : X.Modules) :
     schemeDerivedCategory.{u, w} S :=
   (schemeDerivedDirectImage f).obj ((DerivedCategory.singleFunctor
     (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj F)
 
 /-- The ordinary coefficient unit map with its shared image objects fixed in the type.
-Source: Stacks Project, Tags 01FB and 08HY; the derived square unit construction.
-(blueprint: lem-weil-pbc-global-leray-unit-square). -/
+Source: Stacks Project, Tags 01FB and 08HY. -/
 def globalLerayUnitMap {X S Y T : Scheme.{u}}
     (f : X ⟶ S) (q : Y ⟶ T) (g : T ⟶ S) (p : Y ⟶ X)
     (hs : p ≫ f = q ≫ g) (F : X.Modules) (M : Y.Modules)
@@ -240,8 +237,7 @@ attribute [local reducible] globalLerayImage globalLerayUnitMap
 
 /-- The canonical total/classical comparison with native module categories and the
 supplied derived-category family fixed in its type.
-Source: Stacks Project, Tag 01F2; total/classical right-derived compatibility.
-(blueprint: lem-weil-pbc-global-leray-unit-square). -/
+Source: Stacks Project, Tag 01F2. -/
 def globalLerayComparison {X S : Scheme.{u}} (f : X ⟶ S) (F : X.Modules) (n : ℕ) :
     (DerivedCategory.homologyFunctor.{w, u, u + 1}
       (SheafOfModules.{u} (moduleRings S.toRingedSpace)) (n : ℤ)).obj
@@ -254,27 +250,7 @@ attribute [local irreducible] globalLerayComparison
 /-- Specialization of the local cocycle square to the whole open, expressed using
 classical Leray edges and their canonical total-derived comparisons. The coefficient
 is an arbitrary ordinary h-map. There is no derived pullback or cohomological bound.
-Source: Stacks Project, cohomology.tex, Tag 01E4, lemma-describe-higher-direct-images,
-and Tag 01FB, remark-explain-arrow.
-(blueprint: lem-weil-pbc-global-leray-unit-square).
-
-Proof: Choose injective resolutions I of F and J of M. Choose augmentation-preserving
-restricted resolutions of I on f inverse top and of J on p inverse f inverse top.
-Apply derivedSquareUnit_localClasses with V equal to top and the given e and its local
-class equation. Precompose by the cohomology restriction from X to f inverse top.
-The restriction-unit square for restrictedDirectImageMap and functoriality of
-moduleCohomologyFMap identify its other side with the original h-map followed by
-restriction from Y. The two resolutionSectionClass maps, precomposed with these
-restrictions, equal the chosen classical Leray edges evaluated on the inverse-image
-opens. To see this, represent an arbitrary class by a cycle of the global-sections
-complex. The augmentation-preserving resolution comparisons give the same class on
-the restricted resolutions. The theta map in resolutionSectionClass sends that cycle
-to its image in the cohomology sheaf, exactly the cocycle equation specifying the
-chosen Leray edge. Equality follows for every class since homology projection is
-surjective. Transport the two cohomology sheaves by schemeSingleCohomologyComparison.
-Finally restrict the target section from g inverse top to top, using Opens.map_top;
-naturality of all the displayed sheaf maps cancels the comparison and its inverse.
-This argument applies to degree zero, empty schemes and zero coefficient maps as well.
+Source: Stacks Project, Tag 01E4, and Tag 01FB.
 -/
 theorem globalLeray_unitSquare
     {X S Y T : Scheme.{u}} (f : X ⟶ S) (q : Y ⟶ T) (g : T ⟶ S) (p : Y ⟶ X)

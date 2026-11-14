@@ -19,7 +19,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-! # Pullback from a supplied local K-flat model
 
 Source: Stacks Project, Tags 08DW and 06YJ.
-(blueprint: lem-sc-local-kflat-pullback-model).
 -/
 
 @[expose] public section
@@ -37,20 +36,7 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 
 -- The restriction comparison uses independent localization universes.
 /-- A K-flat model on an open computes pullback along a morphism factoring through it.
-Source: Stacks Project, Tag 08DW, compatibility with open restriction, and Tag 06YJ.
-(blueprint: lem-sc-local-kflat-pullback-model).
-
-Proof: transport K by the canonical over-site equivalence to U.toScheme. Restriction
-is exact, so its derived comparison with Q transports the supplied model isomorphism.
-Derived pullback commutes with restriction to opens (08DW). Since f factors through U,
-its inverse-image open is all of T; the whole-open restriction is the identity under
-its canonical equivalence. Apply the K-flat counit of derivedPullback to the transported
-complex, which is K-flat by hypothesis. It identifies this derived pullback with Q of
-termwise tensor pullback. Tensor pullback and Modules.pullback are left adjoints to
-the same pushforward, hence naturally isomorphic. Compose with the termwise functor
-composition comparison to obtain the displayed object. The comparison is unchanged
-under equivalences between localization universes. There is no boundedness assumption;
-empty U forces T empty, and the zero complex is included. -/
+Source: Stacks Project, Tag 08DW, compatibility with open restriction, and Tag 06YJ. -/
 theorem derivedPullback_local_kFlat_model {T X : Scheme.{u}} (f : T ⟶ X)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings T.toRingedSpace))]

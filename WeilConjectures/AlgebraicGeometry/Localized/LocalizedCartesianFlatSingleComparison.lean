@@ -17,8 +17,7 @@ import WeilConjectures.AlgebraicGeometry.DerivedPullbackComposition
 import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 
 /-! # Flat single base change on a cartesian source
-Source: Stacks Project, Tag 0A1D (lemma-base-change-tensor).
-(blueprint: lem-pc-localized-cartesian-flat-single-comparison).
+Source: Stacks Project.
 -/
 
 @[expose] public section
@@ -169,22 +168,7 @@ private theorem standardCartesianFlatSingle
   exact ⟨transported.symm ≪≫ bc⟩
 
 /-- Flat single base change on a cartesian source.
-Source: Stacks Project, Tag 0A1D (lemma-base-change-tensor).
-Proof: in the standard localization apply standard_flat_single_baseChange.
-Its geometric input is Tag 0A1D specialized to the tensor unit and M[0].
-Relative flatness makes the stalk complex K-flat over the base stalk;
-no flatness of M over O_Y or of the base-change morphism is required.
-Ordinary pullback of the single complex is the single complex of q^*M. Identify Z
-with the canonical pullback of p and g by the unique projection-preserving
-isomorphism supplied by sq, and transport its direct image through that exact scheme
-isomorphism. This gives Rr_*(q^*M)[0] isomorphic to Lg^*Rp_*M[0]. Compare the supplied
-localizations on Y and W with standard ones using localization uniqueness. A common
-K-injective resolution of M[0] identifies the direct images under that equivalence;
-the universal derived pullback comparison is compatible with it. Apply the exact
-inverse overEquiv V. The resulting composite is precisely
-localizedMixedDerivedPullback. No ambient f, coefficient F, or restriction from S
-is used, and empty schemes and the zero module obey the same comparisons.
-(blueprint: lem-pc-localized-cartesian-flat-single-comparison). -/
+Source: Stacks Project. -/
 theorem localized_cartesian_flat_single_comparison
     {S T Y Z : Scheme.{u}} (U : S.Opens) (V : U.toScheme.Opens) (W : T.Opens)
     [HasDerivedCategory.{wS}

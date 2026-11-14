@@ -34,8 +34,7 @@ import WeilConjectures.AlgebraicGeometry.TorsionSheafCharacterizations
 /-!
 # Proper direct-image bound for torsion étale sheaves
 
-Source: Stacks Project, Etale Cohomology, Tag 095U,
-lemma-cohomological-dimension-proper (blueprint: lem-kun-proper-torsion-cd-bound).
+Source: Stacks Project, Etale Cohomology, Tag 095U.
 -/
 
 @[expose] public section
@@ -162,33 +161,8 @@ private theorem torsionHomology_single {X : Scheme.{u}}
     refine ⟨1, Nat.one_pos, ?_⟩
     simpa using hs.elim x 0
 
-/-- Source: Stacks Project, Tag 095U, lemma-cohomological-dimension-proper
-(blueprint: lem-kun-proper-torsion-cd-bound). For a proper morphism with fibre dimensions
-at most `d`, every torsion abelian étale sheaf has zero higher direct image above `2 * d`.
-
-Proof plan:
-1. At a geometric point of `Y`, proper base change and preservation of fibre dimension
-   identify the geometric fibre as a finite-type scheme of dimension at most `d` over
-   an algebraically closed field (lem-pc-proper-base-change,
-   lem-sc-fibre-dimension-after-base-change,
-   lem-weil-pbc-dimension-supremum-local-dimensions).
-2. Inverse-image stalks identify the pulled-back sheaf as torsion
-   (lem-weil-pbc-inverse-image-stalk-germ, definition-torsion-sheaves--3).
-3. For an empty geometric fibre the empty-cover sheaf axiom makes sections zero;
-   applying sections to an injective resolution gives zero cohomology in every degree.
-4. Otherwise its dimension is a finite integer `e ≤ d`. An algebraically closed field
-   is separably closed, hence has torsion cohomological dimension zero
-   (lemma-cohomological-dimension-base-field--1). The finite-type torsion cohomological dimension
-   theorem lemma-uniform-bounds-pro-etale-affines gives vanishing above `2 * e`, hence above
-   `2 * d`.
-5. Bounded-below proper base change (theorem-proper-base-change-classical-pro), exact inverse image
-   (prop-weil-pbc-inverse-image-exact), and exact sections over the geometric point
-   identify the stalk of the higher direct image with this fibre cohomology
-   (lem-weil-pbc-geometric-point-pullback-stalk, def-weil-pbc-direct-image,
-   def-weil-pbc-etale-cohomology).
-6. Every geometric stalk is zero, so geometric-stalk conservativity
-   (lemma-weil-pbc-geometric-stalk-conservative) makes the higher direct image zero.
-   This also applies when `Y` is empty. -/
+/-- Source: Stacks Project, Tag 095U. For a proper morphism with fibre dimensions
+at most `d`, every torsion abelian étale sheaf has zero higher direct image above `2 * d`. -/
 theorem isZero_higherDirectImage_of_isProper_of_fiber_dimension_le
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] (d : ℕ)
     (hd : ∀ y : Y, topologicalKrullDim (f.fiber y) ≤ (d : WithBot ℕ∞))

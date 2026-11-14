@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.Pbc.PbcUniformReductionCriterion
 
 /-! # Completed pullback on the actual common-stage Qbar category
 
-Source: Stacks Tag 099N (2),(5); Bhatt--Scholze, Section 6.8, Remark 6.8.15
-(blueprint: def-weil-pbc-completed-pullback).
+Source: Stacks Tag 099N (2), (5); Bhatt--Scholze, Section 6.8, Remark 6.8.15.
 The published strict-tower pullback is retained. Its integral restriction and the
 normalized completed scalar comparisons descend it to the existing pair category.
 -/
@@ -39,14 +38,7 @@ variable (l : ℕ) [Fact l.Prime] (Ω : Type w) [Field Ω]
 
 set_option linter.unusedSectionVars false in
 /-- Restriction of the actual completed pullback to the integral constructible objects.
-Source: BS 6.8.2 and Remark 6.8.15; Stacks 099N
-(blueprint: def-weil-pbc-completed-pullback).
-Proof: take finite reductions of a K-flat integral representative. The strict-tower
-comparison identifies the reductions of completed pullback with exact finite-level
-inverse image. Pull back the finite constructible stratification and its etale-origin
-witnesses. Boundedness is unchanged by exact finite inverse image, and the tower
-construction gives intrinsic completeness. These verify each defining integral
-constructibility condition. No nonemptiness or base-field invertibility is used. -/
+Source: BS 6.8.2 and Remark 6.8.15; Stacks 099N. -/
 theorem pbcQbarIntegralPull_mem (E : Padic.FiniteCoefficientFields l Ω)
     (K : pbcIntegralStage l Ω Y E) :
     PbcIsBoundedConstructibleComplete X (pbcStageDatum.{u} l Ω E)
@@ -89,14 +81,7 @@ theorem pbcQbarIntegralPull_mem (E : Padic.FiniteCoefficientFields l Ω)
 
 /-- The coherent pullback family is fixed by the actual integral pullback and the
 normalized scalar comparison; in particular no arbitrary natural isomorphism is chosen.
-Source: BS Remark 6.8.15; Stacks 099N
-(blueprint: def-weil-pbc-completed-pullback).
-Proof: restrict completed pullback by pbcQbarIntegralPull_mem and rationalize its
-coefficient-linear maps. The inverse of the localized completed scalar comparison
-is the beta map of this family. Its tensor-unit and associator equations give the
-coherent-family equations, including repeated fields. PbcPullbackBetaSpec fixes
-these components on every integral representative and rationalization fixes all
-fraction arrows, so the specified finite-stage functors and beta maps are unique. -/
+Source: BS Remark 6.8.15; Stacks 099N. -/
 theorem pbcQbarPullFamily_existsUnique :
     ∃! F : StageSystem.Morphism
         (pbcScalarSystem l Ω Y dY.out iY.out) (pbcScalarSystem l Ω X dX.out iX.out),
@@ -162,14 +147,14 @@ theorem pbcQbarPullFamily_existsUnique :
   exact hunique h hG ⟨hLg, hβLg⟩
 
 /-- The unique normalized common-stage family of actual completed pullbacks.
-Source: BS Remark 6.8.15 (blueprint: def-weil-pbc-completed-pullback). -/
+Source: BS Remark 6.8.15. -/
 def pbcQbarPullFamily : StageSystem.Morphism
     (pbcScalarSystem l Ω Y dY.out iY.out) (pbcScalarSystem l Ω X dX.out iX.out) :=
   (pbcQbarPullFamily_existsUnique l Ω f).exists.choose
 
 /-- The pair-category pullback: (E,K) goes to (E,Lf*K), and a common-stage arrow
 is mapped by the normalized beta, actual pullback, inverse beta formula.
-Source: BS Remark 6.8.15 (blueprint: def-weil-pbc-completed-pullback). -/
+Source: BS Remark 6.8.15. -/
 def pbcQbarCompletedPull : pbcQbarCategory l Ω Y ⥤ pbcQbarCategory l Ω X :=
   (pbcQbarPullFamily l Ω f).functor
 

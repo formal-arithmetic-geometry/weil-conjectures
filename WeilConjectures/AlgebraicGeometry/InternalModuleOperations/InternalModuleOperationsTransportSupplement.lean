@@ -83,9 +83,8 @@ public import WeilConjectures.AlgebraicGeometry.InternalModuleOperationsTranspor
 /-!
 # Transport of internal module operations to sectionwise modules
 
-Source: blueprint main-20261015, Nagata density normalization, sheaves proof, Steps 1--2;
-Stacks Project, Modules on Sites, Tags 03D6 and 03D7; Categories, Tag 0B65.
-(blueprint: lem-sfb-internal-module-operations-transport).
+Source: Nagata density normalization, sheaves proof, Steps 1--2; Stacks Project, Modules on Sites,
+Tags 03D6 and 03D7; Categories, Tag 0B65.
 
 The sectionwise pushforward uses the actual section-ring homomorphism induced by eta_f.
 Pullback is its canonical left adjoint, hence the sheafified tensor-formula pullback.

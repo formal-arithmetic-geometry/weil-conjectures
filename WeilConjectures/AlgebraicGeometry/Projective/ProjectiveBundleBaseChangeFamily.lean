@@ -12,8 +12,7 @@ import WeilConjectures.AlgebraicGeometry.Projective.ProjectiveBundleBaseChangeTh
 set_option linter.privateModule false
 
 /-! # Per-morphism normalized projective-bundle base-change data
-Source: Stacks Project, Constructions, Tag 01O3.
-(blueprint: lem-pur-projective-bundle-base-change-family). -/
+Source: Stacks Project, Constructions, Tag 01O3. -/
 
 @[expose] public section
 set_option autoImplicit false

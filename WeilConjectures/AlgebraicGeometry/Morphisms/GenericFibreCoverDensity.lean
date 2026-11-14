@@ -48,20 +48,7 @@ private theorem smooth_source_reduced_of_integral {X S : Scheme.{u}} (f : X ⟶ 
 base is dominant, and the cover is reduced.
 
 Source: Stacks Project, Tag 033B (smooth algebras over reduced rings),
-and Tag 01UA (flat morphisms locally of finite presentation are open).
-(blueprint: lem-sbc-finite-etale-generic-fibre-cover-density)
-
-Proof: The composite X → C → S is smooth, hence flat with geometrically reduced
-fibres. On affine charts its ring maps are smooth over reduced rings, so the
-source rings are reduced by 033B; localizing gives reduced stalks and hence X.
-For density take any nonempty open subset of X. The smooth composite maps it
-to a nonempty open of S by 01UA, which contains the generic point since S is
-integral. A point over that generic point lifts to the generic fibre: the
-spectrum of S's generic stalk is the one-point spectrum of its function field,
-and the cartesian pullback has a point over every compatible pair of points.
-Pasting the two given squares identifies this fibre with Xη. Hence every
-nonempty open of X meets the image of ψX. This proves dominance, including
-when X is empty, where the empty image is dense. -/
+and Tag 01UA (flat morphisms locally of finite presentation are open). -/
 theorem genericFibre_cover_reduced_and_dominant {S C : Scheme.{u}} [IsIntegral S]
     (c : C ⟶ S) [Smooth c]
     {Cη : Scheme.{u}} (q : Cη ⟶ Spec S.functionField) (j : Cη ⟶ C)

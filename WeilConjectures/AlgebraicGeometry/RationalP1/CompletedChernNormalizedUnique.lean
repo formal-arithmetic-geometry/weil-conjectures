@@ -101,8 +101,7 @@ source comparison is an isomorphism.
 The normalization equation is an equality after postcomposition with
 `p.sourceMap`.  That map is the canonical shifted derived comparison and is
 invertible by its construction, so cancellation identifies any two normalized
-adjuncts.
-(blueprint: lem-sfb-rational-p1-completed-chern-normalized-unique) -/
+adjuncts. -/
 theorem completedChernNormalized_unique
     (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}
     [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]

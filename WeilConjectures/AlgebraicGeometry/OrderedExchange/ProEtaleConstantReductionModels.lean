@@ -142,9 +142,7 @@ import WeilConjectures.Algebra.Homology.BoundedFlatIndependentCoefficients
 import Mathlib.CategoryTheory.Monoidal.Preadditive
 /-! # Models for constant-coefficient strict reduction on the original pro-etale site
 
-Source: Stacks Tags 099M, 099N and 0E48; smooth-purity blueprint,
-proposition-composition-base-change-rf-shriek, Step 4 (blueprint:
-lem-sp-completion-mate-comparison).
+Source: Stacks Tags 099M, 099N and 0E48.
 
 This is the original-site specialization of the existing strict quotient-tower construction.
 The site retains object universe t+1 and morphism universe t.
@@ -162,9 +160,7 @@ attribute [local irreducible] completedAdicChangeData
 variable {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 
 /-- The quotient maps commute with canonical inverse image of the coefficients.
-Source: Stacks 099M (blueprint: lem-sp-completion-mate-comparison).
-Proof: combine exchangeScalar_comm with the projection compatibility for the profinite
-coefficient inverse image. Both composites send a constant to its same finite residue. -/
+Source: Stacks 099M. -/
 theorem quotient_comm {U V : Scheme.{t}} (f : U ⟶ V) (n : ℕ) :
     (exchangeConstantIso.{t} f A).hom ≫
         (exchangeScalar.{t} d U ≫ AdicCoefficientDatum.projection.{t} d U n) =
@@ -175,20 +171,20 @@ theorem quotient_comm {U V : Scheme.{t}} (f : U ⟶ V) (n : ℕ) :
   rw [← Category.assoc, ← Functor.map_comp]
 
 /-- The existing ambient constant-coefficient derived category.
-Source: Stacks 099M (blueprint: lem-sp-completion-mate-comparison). -/
+Source: Stacks 099M. -/
 abbrev D (T : Scheme.{t}) := reductionDerivedCategory T (exchangeConstantRing T A)
 
 /-- The existing derived category of strict constant-coefficient towers.
-Source: Stacks 0941 (blueprint: lem-sp-completion-mate-comparison). -/
+Source: Stacks 0941. -/
 abbrev TD (T : Scheme.{t}) := DerivedCategory (exchangeTowers T (exchangeConstantRing T A))
 
 /-- The quotient map from constant coefficients to the given finite coefficient sheaf.
-Source: Stacks 099M (blueprint: lem-sp-completion-mate-comparison). -/
+Source: Stacks 099M. -/
 def quotient (T : Scheme.{t}) (n : ℕ) :
     exchangeConstantRing T A ⟶ d.finiteRing T n := exchangeScalar d T ≫ d.projection T n
 
 /-- Ordinary tensor with the quotient, retaining the original constant scalar action.
-Source: Stacks 099M (blueprint: lem-sp-completion-mate-comparison). -/
+Source: Stacks 099M. -/
 def level (T : Scheme.{t}) (n : ℕ) :
     reductionModules T (exchangeConstantRing T A) ⥤
       reductionModules T (exchangeConstantRing T A) :=
@@ -244,10 +240,7 @@ private theorem quotientStep_comp (T : Scheme.{t}) (n : ℕ) :
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The strict quotient transition is determined on sheafified pure tensors.
-Source: Stacks 099M, 06YY (blueprint: lem-sp-completion-mate-comparison).
-Proof: the quotient coefficient maps commute with the constant scalar maps. Thus
-s tensor x maps to q(s) tensor x by a balanced linear map. Sheafification extends
-this map uniquely; its formula proves naturality on modules and site restrictions. -/
+Source: Stacks 099M, 06YY. -/
 theorem step_existsUnique (T : Scheme.{t}) (n : ℕ) :
     ∃! τ : level d T (n + 1) ⟶ level d T n,
       ∀ (M : reductionModules T (exchangeConstantRing T A)) (U : T.ProEtᵒᵖ)
@@ -287,20 +280,18 @@ theorem step_existsUnique (T : Scheme.{t}) (n : ℕ) :
     exact (hτ' M U s x).trans (hb M U s x).symm
 
 /-- The actual quotient transition, with its tensor formula retained.
-Source: Stacks 099M (blueprint: lem-sp-completion-mate-comparison). -/
+Source: Stacks 099M. -/
 def step (T : Scheme.{t}) (n : ℕ) : level d T (n + 1) ⟶ level d T n :=
   (step_existsUnique d T n).exists.choose
 
 /-- The single strict quotient diagram, functorial on ordinary modules.
-Source: Stacks 099M (blueprint: lem-sp-completion-mate-comparison). -/
+Source: Stacks 099M. -/
 def reductionModule (T : Scheme.{t}) :
     reductionModules T (exchangeConstantRing T A) ⥤
       exchangeTowers T (exchangeConstantRing T A) := (Functor.ofOpSequence (step d T)).flip
 
 /-- Tensor and restriction are additive at every level of this strict diagram.
-Source: Stacks 06YY (blueprint: lem-sp-completion-mate-comparison).
-Proof: evaluate at each index. Both scalar extension and scalar restriction preserve
-addition. Joint faithfulness of ordinary diagram evaluations proves the assertion. -/
+Source: Stacks 06YY. -/
 @[instance]
 theorem reductionModule_additive (T : Scheme.{t}) : (reductionModule d T).Additive := by
   constructor
@@ -313,7 +304,7 @@ theorem reductionModule_additive (T : Scheme.{t}) : (reductionModule d T).Additi
   exact (level d T n.unop).map_add
 
 /-- The homotopy functor of the actual strict quotient construction.
-Source: Stacks 06YY (blueprint: lem-sp-completion-mate-comparison). -/
+Source: Stacks 06YY. -/
 def reductionHomotopy (T : Scheme.{t}) :=
   (reductionModule d T).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh
 
@@ -374,13 +365,7 @@ private theorem leftDerivedModels
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The reduction functor is specified by its universal derived counit and K-flat models.
-Source: Stacks 099M, 06YY (blueprint: lem-sp-completion-mate-comparison).
-Proof: flat-term K-flat resolutions exist on the small site. The tower construction
-preserves shifts and cones. It sends quasi-isomorphisms between resolving models to
-levelwise quasi-isomorphisms, hence to strict tower quasi-isomorphisms. Apply the
-left-derived resolving-class theorem. Its universal property determines the pair
-up to the unique counit-compatible isomorphism and makes the counit invertible on
-K-flat models. This is precisely the same construction as Site.reduction. -/
+Source: Stacks 099M, 06YY. -/
 theorem reductionData_exists (T : Scheme.{t}) :
     Nonempty (DerivedReductionModelData (reductionModule d T)
       (CochainComplex.IsKFlatIndependentCoefficients
@@ -401,7 +386,7 @@ theorem reductionData_exists (T : Scheme.{t}) :
     infer_instance
 
 /-- The chosen universal reduction pair and its computation law.
-Source: Stacks 06YY (blueprint: lem-sp-completion-mate-comparison). -/
+Source: Stacks 06YY. -/
 def reductionData (T : Scheme.{t}) :
     DerivedReductionModelData (reductionModule d T)
       (CochainComplex.IsKFlatIndependentCoefficients
@@ -409,8 +394,7 @@ def reductionData (T : Scheme.{t}) :
   Classical.choice (reductionData_exists d T)
 
 /-- The original existential interface, recovered from the universal model data.
-Source: Stacks 06YY (blueprint: lem-sp-completion-mate-comparison).
-Proof: take the functor, counit, universal property and computation law of reductionData. -/
+Source: Stacks 06YY. -/
 theorem reduction_exists (T : Scheme.{t}) :
     ∃ (R : D (A := A) T ⥤ TD (A := A) T)
       (ε : DerivedCategory.Qh ⋙ R ⟶ reductionHomotopy d T),
@@ -427,18 +411,18 @@ theorem reduction_exists (T : Scheme.{t}) :
 end CompactReduction
 
 /-- The canonical total left derived strict reduction, chosen with its universal counit.
-Source: Stacks 099M (blueprint: lem-sp-completion-mate-comparison). -/
+Source: Stacks 099M. -/
 def reduction (T : Scheme.{t}) : D (A := A) T ⥤ TD (A := A) T :=
   (reductionData d T).reduction
 
 /-- The universal counit retained in the construction of reduction.
-Source: Stacks 06YY (blueprint: lem-sp-completion-mate-comparison). -/
+Source: Stacks 06YY. -/
 def reductionCounit (T : Scheme.{t}) :
     DerivedCategory.Qh ⋙ reduction d T ⟶ reductionHomotopy d T :=
   (reductionData d T).counit
 
 /-- The reduction counit at an actual cochain complex.
-Source: Stacks 06YY (blueprint: lem-sp-completion-mate-comparison). -/
+Source: Stacks 06YY. -/
 def reductionComplexCounit (T : Scheme.{t})
     (P : CochainComplex (reductionModules T (exchangeConstantRing T A)) ℤ) :
     (reduction d T).obj (DerivedCategory.Q.obj P) ⟶
@@ -446,31 +430,28 @@ def reductionComplexCounit (T : Scheme.{t})
   (reductionData d T).complexCounit P
 
 /-- The existing total right derived inverse limit on strict constant towers.
-Source: Stacks 0941 (blueprint: lem-sp-completion-mate-comparison). -/
+Source: Stacks 0941. -/
 abbrev rlim (T : Scheme.{t}) := completedRlim T (exchangeConstantRing T A)
 
 /-- Constant-coefficient quotient-tower completion.
-Source: Stacks 099M (blueprint: lem-sp-completion-mate-comparison). -/
+Source: Stacks 099M. -/
 def completion (T : Scheme.{t}) : D (A := A) T ⥤ D (A := A) T := reduction d T ⋙ rlim (A := A) T
 
 /-- The exact constant-diagram functor on the ambient derived category.
-Source: Stacks 0941 (blueprint: lem-sp-completion-mate-comparison). -/
+Source: Stacks 0941. -/
 abbrev diagonal (T : Scheme.{t}) :=
   (Functor.const ℕᵒᵖ : reductionModules T (exchangeConstantRing T A) ⥤
     exchangeTowers T (exchangeConstantRing T A)).mapDerivedCategory
 
 /-- The constant diagram/derived limit adjunction, with its ordinary unit.
-Source: Stacks 0941 (blueprint: lem-sp-completion-mate-comparison). -/
+Source: Stacks 0941. -/
 def diagonalAdjunction (T : Scheme.{t}) : diagonal (A := A) T ⊣ rlim (A := A) T :=
   (constLimAdj : (Functor.const ℕᵒᵖ) ⊣
     completedTowerLimit T (exchangeConstantRing T A)).mapDerivedCategoryRightDerivedAdjunction
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The ordinary quotient augmentation is fixed on every section by x maps to 1 tensor x.
-Source: Stacks 099M (blueprint: lem-sp-completion-mate-comparison).
-Proof: the tensor-unit insertions commute with the quotient transitions, which preserve
-1. They are linear in the original constant coefficients and natural in modules.
-Their section formulas determine all components and hence the augmentation uniquely. -/
+Source: Stacks 099M. -/
 theorem ordinaryAugmentation_existsUnique (T : Scheme.{t}) :
     ∃! η : (Functor.const ℕᵒᵖ : reductionModules T (exchangeConstantRing T A) ⥤
         exchangeTowers T (exchangeConstantRing T A)) ⟶ reductionModule d T,
@@ -514,7 +495,7 @@ theorem ordinaryAugmentation_existsUnique (T : Scheme.{t}) :
     exact (hη' M n.unop U x).trans (levelUnitMap_apply d T n.unop M U x).symm
 
 /-- The ordinary augmentation with its sectionwise normalization.
-Source: Stacks 099M (blueprint: lem-sp-completion-mate-comparison). -/
+Source: Stacks 099M. -/
 def ordinaryAugmentation (T : Scheme.{t}) :
     (Functor.const ℕᵒᵖ : reductionModules T (exchangeConstantRing T A) ⥤
       exchangeTowers T (exchangeConstantRing T A)) ⟶ reductionModule d T :=
@@ -557,7 +538,7 @@ private theorem lift_complex_fac
     Category.comp_id, Category.comp_id, Category.id_comp]
 
 /-- The universal derived lift of a transformation from an exact functor.
-Source: Stacks Tag 06YY (blueprint: lem-sp-completion-mate-comparison). -/
+Source: Stacks Tag 06YY. -/
 def canonicalModelAugmentation
     {B : Type*} [Category B] [Abelian B] [HasDerivedCategory B]
     {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
@@ -611,10 +592,7 @@ private theorem modelAugmentation_existsUnique
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The derived quotient augmentation is uniquely fixed by the ordinary quotient unit.
-Source: Stacks 099M (blueprint: lem-sp-completion-mate-comparison).
-Proof: on a K-flat model invert the reduction counit and apply the ordinary quotient
-augmentation. Naturality for chain maps and invariance under resolving quasi-isomorphisms
-descend the map. Every object has a resolving representative, which proves uniqueness. -/
+Source: Stacks 099M. -/
 theorem augmentation_existsUnique (T : Scheme.{t}) :
     ∃! η : diagonal (A := A) T ⟶ reduction d T,
       ∀ P : CochainComplex (reductionModules T (exchangeConstantRing T A)) ℤ,
@@ -640,39 +618,39 @@ theorem augmentation_existsUnique (T : Scheme.{t}) :
     (ordinaryAugmentation d T) hrep
 
 /-- The specified derived quotient augmentation.
-Source: Stacks 099M (blueprint: lem-sp-completion-mate-comparison). -/
+Source: Stacks 099M. -/
 def augmentation (T : Scheme.{t}) : diagonal (A := A) T ⟶ reduction d T :=
   canonicalModelAugmentation (Functor.const ℕᵒᵖ) (reductionModule d T)
     (reductionData d T) (ordinaryAugmentation d T)
 
 /-- The canonical quotient completion unit, from the diagonal/limit adjunction.
-Source: Stacks 099M (blueprint: lem-sp-completion-mate-comparison). -/
+Source: Stacks 099M. -/
 def unit (T : Scheme.{t}) : 𝟭 (D (A := A) T) ⟶ completion d T :=
   (diagonalAdjunction (A := A) T).unit ≫
     Functor.whiskerRight (augmentation d T) (rlim (A := A) T)
 
 /-- Completeness means invertibility of this specific quotient completion unit.
-Source: Stacks 099M (blueprint: lem-sp-completion-mate-comparison). -/
+Source: Stacks 099M. -/
 def IsComplete (T : Scheme.{t}) (K : D (A := A) T) : Prop := IsIso ((unit d T).app K)
 
 /-- The full derived-complete category, with all ambient morphisms.
-Source: Stacks 099M (blueprint: lem-sp-completion-mate-comparison). -/
+Source: Stacks 099M. -/
 abbrev Complete (T : Scheme.{t}) := ObjectProperty.FullSubcategory (IsComplete d T)
 
 /-- Ordinary constant-coefficient derived pullback, in the recorded ringed presentation.
-Source: Stacks 099N (blueprint: lem-sp-completion-mate-comparison). -/
+Source: Stacks 099N. -/
 abbrev pull {U V : Scheme.{t}} (f : U ⟶ V) :=
   proEtaleRingDerivedPullback f (exchangeConstantRing V A) (exchangeConstantRing U A)
     (exchangeConstantIso f A)
 
 /-- Ordinary constant-coefficient derived direct image, with its canonical derived unit.
-Source: Stacks 099N (blueprint: lem-sp-completion-mate-comparison). -/
+Source: Stacks 099N. -/
 abbrev push {U V : Scheme.{t}} (f : U ⟶ V) :=
   proEtaleRingDerivedDirectImage f (exchangeConstantRing V A) (exchangeConstantRing U A)
     (exchangeConstantIso f A)
 
 /-- Completed pullback on ambient objects is ordinary pullback followed by completion.
-Source: Stacks 099N (blueprint: lem-sp-completion-mate-comparison). -/
+Source: Stacks 099N. -/
 def completePull {U V : Scheme.{t}} (f : U ⟶ V) := pull (A := A) f ⋙ completion d U
 
 end CompactQuotient
@@ -680,8 +658,7 @@ end CompactQuotient
 variable {U V : Scheme.{t}} (f : U ⟶ V)
 
 /-- The ordinary scalar/pullback mate, in the inverse direction of chi.
-Source: blueprint four corners and tower compatibility; Stacks 06YY and 0D6D
-(blueprint: lem-sp-completion-mate-comparison). -/
+Source: Stacks 06YY and 0D6D. -/
 def ordinaryReductionPullInv (n : ℕ) :
     proEtaleRingModulePullback f (exchangeConstantRing V A) (exchangeConstantRing U A)
         (exchangeConstantIso f A) ⋙ proEtaleRingExtension (quotient d U n) ⟶
@@ -740,12 +717,7 @@ private theorem scalarPull_isIso {X Y : Scheme.{t}} (f : X ⟶ Y)
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The normalized ordinary mate is the invertible tensor balancing map.
-Source: blueprint tower compatibility; Stacks 03EL and 06YY
-(blueprint: lem-sp-completion-mate-comparison).
-Proof: the tensor-unit normalized adjunctions compute this mate on pure tensors.
-It sends the inverse image of m tensored with p to the inverse image of m tensor p.
-The coefficient projection square makes the map quotient-linear. The reverse tensor
-reassociation is inverse, as checked on pure tensors and then on sheafifications. -/
+Source: Stacks 03EL and 06YY. -/
 theorem ordinaryReductionPullInv_isIso (n : ℕ) :
     IsIso (ordinaryReductionPullInv d f n) := by
   exact scalarPull_isIso f _ _ _ _ (quotient d V n) (quotient d U n)
@@ -755,8 +727,7 @@ end ScalarPullComparison
 
 attribute [instance] ordinaryReductionPullInv_isIso
 
-/-- The ordinary reduction-level comparison after restriction to completed coefficients.
-Source: blueprint tower compatibility (blueprint: lem-sp-completion-mate-comparison). -/
+/-- The ordinary reduction-level comparison after restriction to completed coefficients. -/
 def levelPullIso (n : ℕ) :
     level d V n ⋙
         proEtaleRingModulePullback f (exchangeConstantRing V A) (exchangeConstantRing U A)
@@ -1068,11 +1039,7 @@ private theorem levelPullIso_step (n : ℕ)
   exact congrArg (fun z ↦ reductionTensorSection U (quotient d U n) (P.obj M) B z
     ((adj.unit.app M).val.app W x)) hq
 
-/-- The level tensor comparisons commute with every quotient transition, including identities.
-Source: blueprint tower compatibility, step 1 (blueprint: lem-sp-completion-mate-comparison).
-Proof: both composites send a local pure tensor to its pullback with the quotient image
-of its coefficient. Equality on pure tensors descends through sheafification. Arbitrary
-quotient transitions are composites of consecutive ones, with identities included. -/
+/-- The level tensor comparisons commute with every quotient transition, including identities. -/
 theorem levelPullIso_transition
     (M : reductionModules V (exchangeConstantRing V A)) {n m : ℕᵒᵖ} (a : n ⟶ m) :
     ((reductionModule d V ⋙ exchangeTowerModulePull f (exchangeConstantRing V A)
@@ -1099,8 +1066,7 @@ theorem levelPullIso_transition
 
 end TowerPullTransition
 
-/-- The actual strict tower isomorphism of ordinary tensor/pullback computations.
-Source: blueprint tower compatibility (blueprint: lem-sp-completion-mate-comparison). -/
+/-- The actual strict tower isomorphism of ordinary tensor/pullback computations. -/
 def ordinaryReductionPullIso :
     reductionModule d V ⋙ exchangeTowerModulePull f (exchangeConstantRing V A)
           (exchangeConstantRing U A) (exchangeConstantIso f A) ≅
@@ -1129,7 +1095,7 @@ variable {B C T U : Type*} [Category B] [Abelian B] [Category C] [Abelian C]
 
 set_option linter.defProp false in
 /-- Counit normalization for an exact square of derived models.
-Source: Stacks Tag 06YY (blueprint: lem-sp-completion-mate-comparison). -/
+Source: Stacks Tag 06YY. -/
 def ModelPullNormalized
     (η : DF.reduction ⋙ H.mapDerivedCategory ≅ P.mapDerivedCategory ⋙ DG.reduction) : Prop :=
       ∀ K : CochainComplex B ℤ, M K →
@@ -1144,8 +1110,7 @@ end ModelPullNormalization
 
 set_option linter.defProp false in
 /-- The strict ordinary comparison and universal counits fix the derived comparison.
-Source: blueprint tower compatibility, steps 1--3; Stacks 06YY and 0D6D
-(blueprint: lem-sp-completion-mate-comparison). -/
+Source: Stacks 06YY and 0D6D. -/
 def ReductionPullNormalized
     (τ : reduction d V ⋙ exchangeConstantPull (A := A) f ≅
         pull (A := A) f ⋙ reduction d U) : Prop :=
@@ -1510,15 +1475,7 @@ private theorem pullback_kFlat {U V : Scheme.{t}} (f : U ⟶ V)
 
 /-- The canonical derived comparison is uniquely fixed on K-flat representatives by the
 strict ordinary comparison and the two universal derived counits.
-Source: blueprint tower compatibility, steps 1--3; Stacks 06YY and 0D6D
-(blueprint: lem-sp-completion-mate-comparison).
-Proof: choose a K-flat flat-term representative P. Its pullback remains K-flat with flat
-terms. The two reduction-tower counits are invertible there, so the displayed equation
-uniquely defines the component by the ordinary strict tower isomorphism above. Naturality
-for chain maps, compatible homotopies, and inverse quasi-isomorphisms descends this to
-all derived objects. Every object has a K-flat representative; hence the natural
-isomorphism is unique. Its evaluation is chi, since both have the same ordinary tensor
-normalization, and the transition compatibility is retained from the strict comparison. -/
+Source: Stacks 06YY and 0D6D. -/
 theorem reductionPullIso_existsUnique :
     ∃! τ : reduction d V ⋙ exchangeConstantPull (A := A) f ≅
         pull (A := A) f ⋙ reduction d U,
@@ -1543,15 +1500,14 @@ theorem reductionPullIso_existsUnique :
 end DerivedPullComparison
 
 /-- The normalized reduction-tower/pullback isomorphism, rather than an arbitrary lift
-of levelwise maps. Source: blueprint tower compatibility
-(blueprint: lem-sp-completion-mate-comparison). -/
+of levelwise maps. -/
 def reductionPullIso :
     reduction d V ⋙ exchangeConstantPull (A := A) f ≅
       pull (A := A) f ⋙ reduction d U :=
   (reductionPullIso_existsUnique d f).choose
 
 /-- The strict projection is the adjunct of reduction of the ambient counit.
-Source: Stacks 0B56, 099M (blueprint: lem-sp-completion-mate-comparison). -/
+Source: Stacks 0B56, 099M. -/
 def projection (K : D (A := A) U) :
     (reduction d V).obj ((push (A := A) f).obj K) ⟶
       (exchangeConstantPush (A := A) f).obj ((reduction d U).obj K) :=

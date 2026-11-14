@@ -14,8 +14,7 @@ import all WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalDerivedReductionEx
 
 /-! # The prime-invertible cone of the strict quotient augmentation
 
-Source: Stacks Project, proetale.tex, Tag 099M, lemma-naive-completion;
-algebraization.tex, derived-completion Koszul argument.
+Source: Stacks Project, Tag 099M.
 -/
 
 @[expose] public noncomputable section
@@ -73,28 +72,7 @@ private theorem integral_prime_regular (ℓ : ℕ) [Fact ℓ.Prime] :
 /-- The strict limit admits a natural augmentation with prime-invertible cone.
 No completeness assertion about the target is included.
 
-Source: Stacks Project, proetale.tex, Tag 099M, lemma-naive-completion, using its
-Koszul-tower proof; the principal pro-isomorphism argument in
-DerivedCategory.rightOrthogonal_and_exists_smulInvertible_cone_of_isHomotopyLimit
-(blueprint: lem-sfb-integral-strict-limit-augmentation-triangle).
-
-Proof: construct the actual natural augmentation from the strict quotient projections
-using the universal left-derived lift and localization of the constant/limit unit.
-Its factorization equation identifies its value on every complex, after the derived
-counit, with the ordinary strict augmentation. The resolving class of complexes with
-monic positive prime-power multiplication admits flat-term resolutions and is preserved
-by quasi-isomorphisms under ordinary reduction. The existing resolving-class construction
-therefore computes a universal left-derived reduction on this class. Uniqueness of
-left-derived functors transfers this computation to the arbitrary input I.
-For a regular complex, the ordinary augmentation becomes invertible modulo ell by
-integral_ordinary_augmentation_reduction. Cancel the invertible derived counit in the
-factorization equation. Resolve any derived input by a flat-term complex and apply
-naturality to conjugate the reduced augmentation by isomorphisms. Complete the natural
-augmentation to a distinguished triangle. Its reduced first arrow is invertible, so
-the reduced third vertex is zero. The principal coefficient triangle, implemented by
-DerivedCategory.isIso_smul_id_of_isZero_reductionModIdeal, makes ell invertible on the
-third vertex. Cone choices are objectwise; the augmentation itself is already natural.
-This argument includes zero complexes and the empty scheme. -/
+Source: Stacks Project, Tag 099M, using its Koszul-tower proof. -/
 theorem integral_strict_limit_augmentation_triangle (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     [HasDerivedCategory.{u + 1} (DiagonalAb W)]
     [HasDerivedCategory.{u + 1} (ℕᵒᵖ ⥤ DiagonalAb W)]

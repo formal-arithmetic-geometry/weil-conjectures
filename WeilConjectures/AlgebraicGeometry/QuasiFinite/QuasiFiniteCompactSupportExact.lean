@@ -126,8 +126,7 @@ import WeilConjectures.SixFunctors.Finite.Exact
 /-!
 # Quasi-finite compact support is exact
 
-Source: Stacks Project, More on Étale Cohomology, Tag 0GKM, with Tags 0F4Y, 0F50,
-0F7J and 0F5F (blueprint: lem-sfb-quasifinite-compact-support-exact).
+Source: Stacks Project, More on Étale Cohomology, Tag 0GKM, with Tags 0F4Y, 0F50, 0F7J and 0F5F.
 -/
 
 @[expose] public section
@@ -142,7 +141,6 @@ agrees on all unbounded complexes with every compactification construction. The 
 family is compatible with canonical compactification changes, composition, étale sum extension,
 and identity normalization.
 Source: Stacks Project, More on Étale Cohomology, Tags 0GKM, 0F4Y, 0F50, 0F7J and 0F5F.
-(blueprint: lem-sfb-quasifinite-compact-support-exact)
 
 Identity comparisons are shared with the three comparison families whenever their
 compactifications coincide. Coincidence means equality of the compactification together
@@ -150,35 +148,6 @@ with its target scheme
 and
 morphism, packaged in a dependent sum. This includes the index equalities needed to
 transport the comparison; at an identity the conclusion is ordinary equality.
-
-Proof:
-1. Obtain the section-preserving support functor, its proper/open specializations, and
-   its composition isomorphisms from properSupportSheafComposition. For every
-   compactification, combine the open specialization, inverse proper inclusion, and
-   composition to construct its sheaf factorization. Its normalization is proved by
-   cancelling the proper inclusion.
-2. Apply the existing Zariski-main factorization to every separated quasi-compact
-   locally quasi-finite map. The resulting proper part is finite. Transfer additivity,
-   finite-limit preservation and finite-colimit preservation across the sheaf
-   factorization, using exact finite direct image and exact open extension.
-3. Construct the actual normalized derived unit by descent through the homotopy
-   localization. The finite-compactification unit is invertible. Apply
-   exactCompactificationUnit_refinement to transfer invertibility from that
-   compactification to every other one. Invert these units. Cancel them to prove
-   the four compactification-independence equations.
-4. Construct the etale sheaf comparison using the graph map in a finite
-   compactification. Its invertibility follows from the existing derived graph
-   comparison by cancellation and the fully faithful degree-zero embedding.
-   The graph normalization and the sheaf factorization give the required
-   normalization inside direct image.
-5. All comparison families are restrictions of one family on all the maps in question.
-   Eliminate equality in the dependent sum of scheme, morphism and compactification
-   to prove the three identity-consistency clauses.
-6. Apply exactCompactificationUnit_composition to the constructed factorizations and
-   inverses; etaleSupportNestedSummands to their graph normalizations and the
-   section-preserving composition; and exactCompactificationUnit_identity to the
-   proper identity compactification. These are the three separate normalization
-   results still needed in addition to the refinement result of step 3.
 -/
 theorem quasifiniteCompactSupportExact
     (A : Type (u + 1)) [CommRing A] [Finite A]

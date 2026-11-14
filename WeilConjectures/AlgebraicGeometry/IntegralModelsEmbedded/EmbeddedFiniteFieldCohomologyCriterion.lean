@@ -13,8 +13,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeMapDerivedCate
 
 /-! # Constructible finite Tor complexes over an embedded constant finite field
 
-Source: integral-models proof, first paragraph; Stacks Tags 03ET, 00YV and 06YQ.
-(blueprint: lem-sfb-embedded-finite-field-cohomology-criterion).
+Source: Stacks Tags 03ET, 00YV and 06YQ.
 -/
 
 @[expose] public noncomputable section
@@ -36,21 +35,7 @@ attribute [-instance] integralModel_coefficientMonObj in
 and finite Tor amplitude mean exactly intrinsically constructible bounded homology
 under the specified scalar realization. No integral reduction or etale origin occurs.
 
-Source: integral-models proof, first paragraph; Stacks Tags 03ET, 00YV and 06YQ
-(blueprint: lem-sfb-embedded-finite-field-cohomology-criterion).
-
-Proof: constant functions identify the constant condensed field with continuous
-functions into the discrete finite field: use the finite covering by fibres. Pullback
-to X and extension along this very map are exact equivalences. Section-module
-reconstruction and restriction to constant scalars followed by intrinsic realization
-are exact equivalences as well. On each stratum they preserve and reflect the finite
-constant local models, hence the constructibility conditions. The same equivalences
-commute with homology and relative tensor, with their prescribed unit. Transport to
-the coefficient-sized small site and apply constant_field_finite_tor_amplitude_iff.
-It gives a common ordered interval for the vanishing of every homology object.
-Transport that interval back through the exact equivalences. The zero complex admits
-[0,0]; testing the tensor unit detects boundedness for every unbounded input as well.
-Thus both implications hold without a boundedness hypothesis on B. -/
+Source: Stacks Tags 03ET, 00YV and 06YQ. -/
 theorem finiteFieldCohomologyCriterion
     (X : Scheme.{u}) [IsNoetherian X] (A : Type) [Field A]
     [TopologicalSpace A] [IsTopologicalRing A] [Finite A] [DiscreteTopology A]

@@ -75,28 +75,7 @@ private theorem morphismProperty_pullback_restrict
 No section, group action, or generic rational point is assumed.
 
 Source: Stacks Project, Tag 0EY6, assertions (2) and (3); Tag 0EYJ,
-proof of the local claim, paragraph starting with depth(A) at least two.
-(blueprint: lem-sbc-stalk-normalization-flat-etale)
-
-Proof: Write A = O(S,s), L = C times_S Spec A, and n for the finite
-pullback normalization. Let T be the inverse image of C_U in L and W its
-inverse image in the source open V. Over C_U, normalization recovers the
-original finite etale map: normalization commutes with the smooth open
-immersion, and a finite map is its own relative normalization. Pulling back
-and restricting gives etaleness of W to L.
-Every point of Spec A maps to a generalization of s. Minimality and s not
-in U therefore identify L minus T with the closed fibre over s. The
-composite r:V to L to Spec A is flat, since V to L is flat by hypothesis
-and L to Spec A is smooth. At x outside W, injectivity of fromSpecStalk
-and the pullback equation show that r(x) is the closed point of Spec A.
-Apply the flat local depth formula across the canonical base stalk isomorphism
-to obtain the base stalk depth bound from depth(A) >= 2.
-The flat local depth formula then gives depth(O(V,x)) >= depth(A) >= 2.
-The map V to L is locally of finite type and locally quasi-finite, being
-an open immersion followed by a finite map. Apply flat quasi-finite
-purity (Tag 0BJH, as in 0EY6(3)) to W and this boundary depth bound.
-Normality and generic density are not needed for this flat-source argument.
-Empty V is included. -/
+proof of the local claim, paragraph starting with depth(A) at least two. -/
 theorem finiteEtale_stalk_normalization_etale_of_flat {S C : Scheme.{u}}
     [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]

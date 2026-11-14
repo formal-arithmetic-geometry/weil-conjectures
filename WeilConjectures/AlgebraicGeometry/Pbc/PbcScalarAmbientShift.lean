@@ -16,9 +16,8 @@ import WeilConjectures.Mathlib.CategoryTheory.Shift.Adjunction
 
 /-! # Counit-normalized ambient scalar shift
 
-Source: blueprint proper base change, order 1307; Milne, Section 19.
+Source: Milne, Section 19.
 Existing declarations extracted from `PbcScalarExtension` to bound compilation cost.
-(blueprint: lem-pbc-scalar-ambient-shift-normalization)
 -/
 
 @[expose] public noncomputable section
@@ -106,12 +105,7 @@ private theorem pbcRightKanShift_unique
   exact pbcKanCommShift_ext s t he
 
 set_option linter.unusedVariables false in
-/-- Universal tensor counits uniquely fix the termwise derived shift comparison.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-ambient-shift-normalization).
-Proof: ordinary tensor commutes with cochain shifts, with the identity map on
-shifted tensor terms. Its homotopy functor therefore has that comparison.
-On flat-term K-flat representatives the universal counit is invertible, so this
-comparison descends uniquely and satisfies zero and addition coherence. -/
+/-- Universal tensor counits uniquely fix the termwise derived shift comparison. -/
 theorem pbcAmbientScalarShift_exists :
     ∃! q : (pbcEmbeddingAmbientTensor l E F i T).CommShift ℤ,
       (fun [qInst : (pbcEmbeddingAmbientTensor l E F i T).CommShift ℤ] ↦
@@ -128,8 +122,7 @@ theorem pbcAmbientScalarShift_exists :
     DerivedCategory.Qh (pbcDerivedExtend φ) (pbcExtensionCounit φ) hkan
   exact ⟨q, hq, fun q' hq' ↦ pbcRightKanShift_unique _ _ _ _ q' q hq' hq⟩
 
-/-- The tensor shift comparison normalized by its actual derived counit.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-ambient-shift-normalization). -/
+/-- The tensor shift comparison normalized by its actual derived counit. -/
 instance pbcAmbientScalarShift : (pbcEmbeddingAmbientTensor l E F i T).CommShift ℤ :=
   (pbcAmbientScalarShift_exists l E F i T).exists.choose
 

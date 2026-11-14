@@ -106,8 +106,7 @@ public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 public import WeilConjectures.AlgebraicGeometry.IntrinsicCompletionCompleted
 /-! # Intrinsic completion over the completed coefficient sheaf
 
-Source: blueprint, proper base change, order 1247; Stacks Tags 099M and 091Z
-(blueprint: def-weil-pbc-intrinsic-completion).
+Source: Stacks Tags 099M and 091Z.
 
 The ring and tensor product are those of Mod(A_T), with site object universe t+1
 and morphism universe t. The mapping cocone of minus (1-shift) has differential
@@ -229,21 +228,18 @@ end TensorUnits
 attribute [instance] completedKoszulConstant_additive
 
 /-- The cohomologically reindexed Koszul complex of the positive power m+1.
-The module carrier has the same universe as the original coefficient ring.
-Source: blueprint order 1247 (blueprint: def-weil-pbc-intrinsic-completion). -/
+The module carrier has the same universe as the original coefficient ring. -/
 def completedKoszulPower (r : ℕ) (f : Fin r → A) (m : ℕ) :
     CochainComplex (ModuleCat.{t + 1} (A)) ℤ :=
   (ExteriorAlgebra.koszulComplex (A) r
     (fun j ↦ f j ^ (m + 1))).extend ComplexShape.embeddingDownNat
 
-/-- The constant Koszul sheaf complex.
-Source: blueprint order 1247 (blueprint: def-weil-pbc-intrinsic-completion). -/
+/-- The constant Koszul sheaf complex. -/
 def completedKoszulPowerSheaf (r : ℕ) (f : Fin r → A) (m : ℕ) :=
   ((completedKoszulConstant X d).mapHomologicalComplex (ComplexShape.up ℤ)).obj
     (completedKoszulPower (A := A) r f m)
 
-/-- Exterior map on the free generators, e_j ↦ f_j e_j.
-Source: blueprint order 1247 (blueprint: def-weil-pbc-intrinsic-completion). -/
+/-- Exterior map on the free generators, e_j ↦ f_j e_j. -/
 def completedKoszulGenerator (r : ℕ) (f : Fin r → A) :
     (Fin r →₀ A) →ₗ[A] (Fin r →₀ A) :=
   Finsupp.linearCombination (A) (fun j ↦ Finsupp.single j (f j))
@@ -278,11 +274,7 @@ private theorem completedKoszulContract_natural (R : Type*) [CommRing R] (r : �
     simp only [map_mul, ExteriorAlgebra.map_apply_ι, CliffordAlgebra.contractLeft_ι_mul,
       hv, hx, map_sub, map_smul]
 
-/-- The power transition commutes with Koszul contraction.
-Source: blueprint order 1247 (blueprint: def-weil-pbc-intrinsic-completion).
-Proof: on each exterior generator, contraction on the target multiplies the removed
-factor by f_j^(m+1), while the exterior map supplies f_j. This is f_j^(m+2),
-which is the source contraction. Multilinearity extends the equality. -/
+/-- The power transition commutes with Koszul contraction. -/
 theorem completedKoszulTransition_comm (r : ℕ) (f : Fin r → A) (m i j : ℕ) :
     ModuleCat.ofHom (exteriorPower.map i (completedKoszulGenerator (A := A) r f)) ≫
       (ExteriorAlgebra.koszulComplex (A) r
@@ -319,8 +311,7 @@ theorem completedKoszulTransition_comm (r : ℕ) (f : Fin r → A) (m i j : ℕ)
     rw [HomologicalComplex.shape _ i j hn, HomologicalComplex.shape _ i j hn,
       zero_comp, comp_zero]
 
-/-- The specified exterior-algebra transition, followed by cohomological reindexing.
-Source: blueprint order 1247 (blueprint: def-weil-pbc-intrinsic-completion). -/
+/-- The specified exterior-algebra transition, followed by cohomological reindexing. -/
 def completedKoszulTransition (r : ℕ) (f : Fin r → A) (m : ℕ) :
     completedKoszulPower (A := A) r f (m + 1) ⟶ completedKoszulPower (A := A) r f m :=
   HomologicalComplex.extendMap
@@ -328,8 +319,7 @@ def completedKoszulTransition (r : ℕ) (f : Fin r → A) (m : ℕ) :
       comm' := fun i j _ ↦ completedKoszulTransition_comm (A := A) r f m i j }
     ComplexShape.embeddingDownNat
 
-/-- Degree zero of the Koszul complex contains the identity coefficient unit.
-Source: blueprint order 1247 (blueprint: def-weil-pbc-intrinsic-completion). -/
+/-- Degree zero of the Koszul complex contains the identity coefficient unit. -/
 def completedKoszulSheafUnitZero (r : ℕ) (f : Fin r → A) (m : ℕ) :
     SheafOfModules.unit ((adicLisseForget X).obj (adicDatumRing X d)) ⟶
       (completedKoszulPowerSheaf X d r f m).X 0 :=
@@ -341,10 +331,7 @@ def completedKoszulSheafUnitZero (r : ℕ) (f : Fin r → A) (m : ℕ) :
         (fun k ↦ f k ^ (m + 1))).extendXIso
           ComplexShape.embeddingDownNat (i := 0) rfl).inv
 
-/-- The degree-zero unit is closed.
-Source: blueprint order 1247 (blueprint: def-weil-pbc-intrinsic-completion).
-Proof: the Koszul cochain complex has no positive terms, so the differential out of
-zero is zero. -/
+/-- The degree-zero unit is closed. -/
 theorem completedKoszulSheafUnitZero_closed (r : ℕ) (f : Fin r → A) (m : ℕ)
     (j : ℤ) (hj : (ComplexShape.up ℤ).Rel 0 j) :
     completedKoszulSheafUnitZero X d r f m ≫ (completedKoszulPowerSheaf X d r f m).d 0 j = 0 := by
@@ -357,16 +344,14 @@ theorem completedKoszulSheafUnitZero_closed (r : ℕ) (f : Fin r → A) (m : ℕ
     ((completedKoszulPower (A := A) r f m).d 0 j) = 0
   rw [hd, Functor.map_zero, comp_zero]
 
-/-- Total tensor complex of the fixed representative and the constant Koszul complex.
-Source: blueprint order 1247 (blueprint: def-weil-pbc-intrinsic-completion). -/
+/-- Total tensor complex of the fixed representative and the constant Koszul complex. -/
 def completedKoszulTensor (r : ℕ) (f : Fin r → A)
     (C : CochainComplex (adicDatumModules X d) ℤ) (m : ℕ) :=
   letI := SheafOfModules.isMonoidal_W_independentCoefficients (adicDatumRing X d)
   letI := SheafOfModules.monoidalCategory (adicDatumRing X d)
   CochainComplex.mapBifunctor C (completedKoszulPowerSheaf X d r f m) (curriedTensor _)
 
-/-- The transition 1_C tensor t_m.
-Source: blueprint order 1247 (blueprint: def-weil-pbc-intrinsic-completion). -/
+/-- The transition 1_C tensor t_m. -/
 def completedKoszulTensorTransition (r : ℕ) (f : Fin r → A)
     (C : CochainComplex (adicDatumModules X d) ℤ) (m : ℕ) :
     completedKoszulTensor X d r f C (m + 1) ⟶ completedKoszulTensor X d r f C m :=
@@ -376,8 +361,7 @@ def completedKoszulTensorTransition (r : ℕ) (f : Fin r → A)
     (((completedKoszulConstant X d).mapHomologicalComplex (ComplexShape.up ℤ)).map
       (completedKoszulTransition (A := A) r f m)) (curriedTensor _) (ComplexShape.up ℤ)
 
-/-- The component c ↦ c tensor 1, included in the total tensor summand (p,0).
-Source: blueprint order 1247 (blueprint: def-weil-pbc-intrinsic-completion). -/
+/-- The component c ↦ c tensor 1, included in the total tensor summand (p,0). -/
 def completedKoszulTensorUnitComponent (r : ℕ) (f : Fin r → A)
     (C : CochainComplex (adicDatumModules X d) ℤ) (m : ℕ) (p : ℤ) :
     C.X p ⟶ (completedKoszulTensor X d r f C m).X p :=
@@ -387,10 +371,7 @@ def completedKoszulTensorUnitComponent (r : ℕ) (f : Fin r → A)
     HomologicalComplex.ιMapBifunctor C (completedKoszulPowerSheaf X d r f m) (curriedTensor _)
       (ComplexShape.up ℤ) p 0 p (add_zero p)
 
-/-- Tensoring with the closed degree-zero unit commutes with the total differential.
-Source: blueprint order 1247 (blueprint: def-weil-pbc-intrinsic-completion).
-Proof: on the summand (p,0), the first differential is d_C tensor 1. The second is
-(-1)^p times c tensor d(1), which is zero. Naturality of the right unitor gives the claim. -/
+/-- Tensoring with the closed degree-zero unit commutes with the total differential. -/
 theorem completedKoszulTensorUnitComponent_comm (r : ℕ) (f : Fin r → A)
     (C : CochainComplex (adicDatumModules X d) ℤ) (m : ℕ)
     (p q : ℤ) (hpq : (ComplexShape.up ℤ).Rel p q) :
@@ -403,36 +384,31 @@ theorem completedKoszulTensorUnitComponent_comm (r : ℕ) (f : Fin r → A)
     (completedKoszulSheafUnitZero X d r f m)
     (completedKoszulSheafUnitZero_closed X d r f m 1 rfl) p q hpq
 
-/-- The tensor unit gives c ↦ c tensor 1 in each level.
-Source: blueprint order 1247 (blueprint: def-weil-pbc-intrinsic-completion). -/
+/-- The tensor unit gives c ↦ c tensor 1 in each level. -/
 def completedKoszulTensorUnit (r : ℕ) (f : Fin r → A)
     (C : CochainComplex (adicDatumModules X d) ℤ) (m : ℕ) :
     C ⟶ completedKoszulTensor X d r f C m where
   f := completedKoszulTensorUnitComponent X d r f C m
   comm' := completedKoszulTensorUnitComponent_comm X d r f C m
 
-/-- The termwise product of the positive-power tensor tower (index n means m=n+1).
-Source: blueprint order 1247 (blueprint: def-weil-pbc-intrinsic-completion). -/
+/-- The termwise product of the positive-power tensor tower (index n means m=n+1). -/
 def completedKoszulProduct (r : ℕ) (f : Fin r → A)
     (C : CochainComplex (adicDatumModules X d) ℤ) :=
   ∏ᶜ (completedKoszulTensor X d r f C)
 
-/-- One minus the transition shift, specified by its actual product components.
-Source: blueprint order 1247 (blueprint: def-weil-pbc-intrinsic-completion). -/
+/-- One minus the transition shift, specified by its actual product components. -/
 def completedKoszulOneSubShift (r : ℕ) (f : Fin r → A)
     (C : CochainComplex (adicDatumModules X d) ℤ) :
     completedKoszulProduct X d r f C ⟶ completedKoszulProduct X d r f C :=
   𝟙 _ - Pi.lift (fun n ↦ Pi.π (completedKoszulTensor X d r f C) (n + 1) ≫
     completedKoszulTensorTransition X d r f C n)
 
-/-- Explicit mapping fiber with differential (dx,(1-s)x-dy), in the node's order.
-Source: order 1247 (blueprint: def-weil-pbc-intrinsic-completion). -/
+/-- Explicit mapping fiber with differential (dx,(1-s)x-dy), in the node's order. -/
 def completedKoszulFiber (r : ℕ) (f : Fin r → A)
     (C : CochainComplex (adicDatumModules X d) ℤ) :=
   CochainComplex.mappingCocone (- completedKoszulOneSubShift X d r f C)
 
-/-- The compatible units C to C tensor Q_m give the actual product augmentation.
-Source: order 1247 (blueprint: def-weil-pbc-intrinsic-completion). -/
+/-- The compatible units C to C tensor Q_m give the actual product augmentation. -/
 def completedKoszulProductUnit (r : ℕ) (f : Fin r → A)
     (C : CochainComplex (adicDatumModules X d) ℤ) :=
   Pi.lift (completedKoszulTensorUnit X d r f C)
@@ -488,11 +464,7 @@ private theorem completedKoszulTensorUnit_transition (r : ℕ) (f : Fin r → A)
     (completedKoszulSheafUnitZero X d r f m) _
     (completedKoszulSheafUnitZero_transition X d r f m) p
 
-/-- The unit has zero homotopy component in the mapping fiber.
-Source: order 1247 (blueprint: def-weil-pbc-intrinsic-completion).
-Proof: every transition sends the Koszul degree-zero unit to itself. Consequently
-(1-shift) composed with the product of units is zero. The zero cochain has zero
-differential, giving precisely the relation required by the mapping-fiber lift. -/
+/-- The unit has zero homotopy component in the mapping fiber. -/
 theorem completedKoszulLift_relation (r : ℕ) (f : Fin r → A)
     (C : CochainComplex (adicDatumModules X d) ℤ) :
     CochainComplex.HomComplex.δ (-1) 0
@@ -511,22 +483,19 @@ theorem completedKoszulLift_relation (r : ℕ) (f : Fin r → A)
   simp only [CochainComplex.HomComplex.δ_zero, zero_add, Preadditive.comp_neg,
     hu, neg_zero, CochainComplex.HomComplex.Cochain.ofHom_zero]
 
-/-- The completion chain map c maps to (u(c),0) in the specified fiber coordinates.
-Source: order 1247 (blueprint: def-weil-pbc-intrinsic-completion). -/
+/-- The completion chain map c maps to (u(c),0) in the specified fiber coordinates. -/
 def completedKoszulUnitComplex (r : ℕ) (f : Fin r → A)
     (C : CochainComplex (adicDatumModules X d) ℤ) :
     C ⟶ completedKoszulFiber X d r f C :=
   CochainComplex.mappingCocone.lift _ (completedKoszulProductUnit X d r f C) 0
     (completedKoszulLift_relation X d r f C)
 
-/-- The intrinsic completion of any representative, localized in D(Mod(A_T)).
-Source: order 1247 (blueprint: def-weil-pbc-intrinsic-completion). -/
+/-- The intrinsic completion of any representative, localized in D(Mod(A_T)). -/
 def completedIntrinsicCompletion (r : ℕ) (f : Fin r → A)
     (C : CochainComplex (adicDatumModules X d) ℤ) : adicDatumDerived X d :=
   (completedConstantQ _).obj (completedKoszulFiber X d r f C)
 
-/-- The intrinsic completion map, transported through a specified realization of C.
-Source: order 1247 (blueprint: def-weil-pbc-intrinsic-completion). -/
+/-- The intrinsic completion map, transported through a specified realization of C. -/
 def completedIntrinsicCompletionMap (r : ℕ) (f : Fin r → A)
     (C : CochainComplex (adicDatumModules X d) ℤ) {K : adicDatumDerived X d}
     (e : (completedConstantQ _).obj C ≅ K) :
@@ -534,8 +503,7 @@ def completedIntrinsicCompletionMap (r : ℕ) (f : Fin r → A)
   e.inv ≫ (completedConstantQ _).map (completedKoszulUnitComplex X d r f C)
 
 /-- Derived I-completeness is invertibility of the specified Koszul completion map.
-The finite generator tuple is explicitly required to generate I; it may be empty.
-Source: order 1247 (blueprint: def-weil-pbc-intrinsic-completion). -/
+The finite generator tuple is explicitly required to generate I; it may be empty. -/
 def IsCompletedIntrinsicallyDerivedComplete (r : ℕ) (f : Fin r → A)
     (_hf : Ideal.span (Set.range f) = d.ideal)
     (C : CochainComplex (adicDatumModules X d) ℤ) {K : adicDatumDerived X d}
@@ -876,12 +844,7 @@ private theorem completedLocalization (M : Type*) [Category* M] [Abelian M]
 
 /-- The explicit Koszul fiber and its unit descend through quasi-isomorphisms.
 No arbitrary representative is chosen to define the data of the fiber complex.
-Source: order 1247; Tags 07KC and 05RU (blueprint: def-weil-pbc-intrinsic-completion).
-Proof: tensor with a bounded finite-free Koszul complex preserves quasi-isomorphisms.
-Exact countable products preserve them, and the mapping-fiber triangle then preserves
-them. Apply the localization universal property to the fiber functor and its
-natural zero-homotopy unit. The displayed identification is the localization
-comparison and carries the descended unit to the stated chain map. -/
+Source: Tags 07KC and 05RU. -/
 theorem completedIntrinsicCompletion_descends (r : ℕ) (f : Fin r → A) :
     ∃ (F : adicDatumDerived X d ⥤ adicDatumDerived X d) (η : 𝟭 _ ⟶ F),
       ∀ C : CochainComplex (adicDatumModules X d) ℤ,

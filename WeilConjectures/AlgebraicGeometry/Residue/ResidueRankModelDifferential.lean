@@ -12,7 +12,6 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 /-! # Residue vanishing of the differential in a Betti-rank model
 
 Source: Stacks Project, Tag 0BCD, minimal free model; Tag 0BF2, first source complex.
-(blueprint: lem-sc-residue-rank-model-differential)
 -/
 
 @[expose] public section
@@ -62,24 +61,7 @@ private theorem differential_zero_of_equal_dimensions
   exact C.iCycles_d i j
 
 /-- Every degree-zero differential coordinate of a bounded Betti-rank model has zero residue.
-Source: Stacks Project, Tag 0BCD and Tag 0BF2, first displayed source complex.
-(blueprint: lem-sc-residue-rank-model-differential)
-
-Proof: Restrict E to U using the given derived comparison with Q(K). The bounded
-finite free complex K is K-flat. Pull it termwise to Spec kappa(w) and evaluate
-its sections, using the canonical factorization of the residue point through U.
-Exact open restriction, pullback composition and GammaSpecIso identify this
-complex's cohomology with derivedFiberCohomology W E j w. Its term in degree j
-has dimension derivedFiberBetti W E j w by the given free isomorphism. All terms
-and all cohomology vector spaces are finite dimensional. In each degree, the
-term dimension equals the cohomology dimension plus the ranks of the incoming
-and outgoing differentials. Equality with the Betti number forces both ranks
-zero. In particular the outgoing differential in degree zero is the zero map.
-The linear frame e1 becomes an invertible frame over kappa(w) by base change.
-For any section t, the coordinates of d(t) reduce to the coordinates of the
-zero residue vector. The coefficient map is exactly W.evaluation U w hwU.
-This also covers rank-zero degree-one terms, and uses no negative vanishing,
-rank-one degree-zero hypothesis, geometry of a direct image, or choice of e0. -/
+Source: Stacks Project, Tag 0BCD and Tag 0BF2, first displayed source complex. -/
 theorem residueRankModel_differential_eval_eq_zero
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

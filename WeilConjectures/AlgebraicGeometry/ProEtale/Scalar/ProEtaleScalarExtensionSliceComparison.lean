@@ -10,9 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleObjectInverseIm
 
 /-! # Scalar extension and restriction to a pro-etale slice
 
-Source: Stacks Project, Modules on Sites, Tag 03EL; Cohomology on Sites,
-Tags 06YS, 0G7E and 06YY
-(blueprint: lem-per-proetale-scalar-slice-comparison).
+Source: Stacks Project, Modules on Sites, Tag 03EL; Cohomology on Sites, Tags 06YS, 0G7E and 06YY.
 -/
 
 @[expose] public noncomputable section
@@ -23,8 +21,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 /-- Literal restriction of module sheaves to a pro-etale site object.
-Source: Stacks 00XZ and 03EL
-(blueprint: lem-per-proetale-scalar-slice-comparison). -/
+Source: Stacks 00XZ and 03EL. -/
 abbrev proEtaleSliceModules {X : Scheme.{u}} (U : X.ProEt)
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :
     pbcModules X R ⥤ pbcModules U.left
@@ -62,13 +59,7 @@ private theorem exact_moduleRestriction
   rfl
 
 /-- Exactness of literal restriction, including nonnoetherian U.
-Source: Stacks 00XZ, 03EL and 03CZ
-(blueprint: lem-per-proetale-scalar-slice-comparison).
-Proof: the forgetful functor from module sheaves to module presheaves reflects
-finite limits, and presheaf restriction preserves them. Composition with U is
-cocontinuous and is left adjoint to base change, so module restriction is itself
-a left adjoint and preserves colimits. Additivity follows on sections. No
-coefficient flatness, boundedness or noetherian hypothesis on U is used. -/
+Source: Stacks 00XZ, 03EL and 03CZ. -/
 theorem proEtaleSliceModules_exact {X : Scheme.{u}} (U : X.ProEt)
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :
     (proEtaleSliceModules U R).Additive ∧ PreservesFiniteLimits (proEtaleSliceModules U R) ∧

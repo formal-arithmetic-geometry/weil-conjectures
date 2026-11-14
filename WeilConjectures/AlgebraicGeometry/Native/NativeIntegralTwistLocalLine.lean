@@ -12,7 +12,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.InternalHom
 
 /-! # Compatible local bases of the native integral root tower
-Source: coefficient twists, integral limit (blueprint: lem-twist-native-integral-local-line).
+Source: coefficient twists, integral limit.
 -/
 
 -- After pruning, this module only keeps private declarations.

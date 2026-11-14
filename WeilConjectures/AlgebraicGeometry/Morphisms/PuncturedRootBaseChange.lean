@@ -10,8 +10,7 @@ public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.RingTheory.AdjoinRoot
 
 /-! # Base change of a punctured root chart
-Source: Stacks Project, Tags 05N9 and 01YW; polynomial quotient and localization
-universal properties in lem-sbc-punctured-root-colimit-continuity, step 1. -/
+Source: Stacks Project, Tags 05N9 and 01YW -/
 
 @[expose] public section
 
@@ -60,23 +59,7 @@ private theorem root_pushout (R S : CommRingCat.{u}) (b : R ⟶ S)
 
 /-- A punctured root chart over S is the base change of the chart over R.
 
-Source: Stacks Project, Tags 05N9 and 01YW; the polynomial quotient and localization
-calculation in step 1 of lem-sbc-punctured-root-colimit-continuity.
-(blueprint: lem-sbc-punctured-root-base-change)
-
-Proof: For any polynomial p over R and q=p.map(b), the canonical square of
-R, S, AdjoinRoot p and AdjoinRoot q is a pushout. Given a cocone to C, use
-AdjoinRoot.lift on its map S to C and the image in C of the root of p. The cocone
-equation identifies the two maps R to C, and AdjoinRoot.eval₂_root proves that
-this element annihilates q. The resulting map agrees with the two cocone maps
-on coefficients and on the root, and those generators also prove uniqueness.
-Specialize to p=T^n-f and q=T^n-b(f), and apply Spec to this pushout. Under the
-resulting root-chart map the inverse image of D(f) is D(b(f)), by the formula on
-coefficients. The restriction square is a pullback; paste it with the root-chart
-pullback square. Its canonical comparison with the chosen pullback is an
-isomorphism, and the first-projection formula gives the claimed structural equality.
-For n=0 the relation is 1-f, and for f=0 the basic opens are empty. All universal
-properties and restriction identities used above remain valid, including zero rings. -/
+Source: Stacks Project, Tags 05N9 and 01YW. -/
 theorem punctured_root_base_change
     (R S : CommRingCat.{u}) (f : R) (n : ℕ) (b : R ⟶ S) :
     let A₀ := AdjoinRoot ((Polynomial.X : Polynomial R) ^ n - Polynomial.C f)

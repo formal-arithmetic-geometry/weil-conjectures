@@ -36,8 +36,7 @@ import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor
 
 /-! # Scalar extension of arbitrary Proj twists
 
-Source: Stacks Project, constructions.tex, Tags 01N2, 01MY and 01MZ
-(blueprint: lem-sfb-proj-scalar-extension-twist-comparison).
+Source: Stacks Project, Tags 01N2, 01MY and 01MZ.
 
 The fraction normalization is stated using the existing pointwise realization of twists.
 Multiplying by the denominator avoids choosing a representative in a localization.
@@ -179,35 +178,7 @@ private theorem scalarExtension_eq_map
     (Proj.awayι_comp_map ψ hψ i.1.2 i.2 i.2.2).symm
 
 /-- Scalar extension preserves every twist, with its fraction, algebra, section and
-composition normalizations. Source: Stacks 01N2(3), 01MY, 01MZ
-(blueprint: lem-sfb-proj-scalar-extension-twist-comparison).
-
-Proof: (1) The scalar-extension Proj theorem gives the covering by inverse images of
-standard opens. The graded-module sheaf theorem makes both twists quasi-coherent, and
-pullback preserves this. The affine pullback-sections theorem identifies the source on
-D_+(ψ(f)) with (A_f)_j tensor_(A_f)_0 (B_ψ(f))_0 for every integer j.
-(2) The homogeneous localization scalar-extension theorem identifies the second ring
-with S tensor_R (A_f)_0. Rebracket u tensor (s tensor h) as s tensor hu, with inverse
-s tensor u mapped to u tensor (s tensor 1). The graded-module localization comparison,
-followed by β on fractions, gives the isomorphism sending (a/f^m) tensor c to
-c ψ(a)/ψ(f)^m. These formulas respect balancing and are inverse on pure tensors.
-(3) The affine tilde--sections adjunction turns this into an isomorphism of the two
-quasi-coherent sheaves on each chart.
-(4) On the fg chart, both restrictions send a/f^m to ψ(a)ψ(g)^m/ψ(fg)^m.
-For a general inclusion with g^e=hf, both send it to ψ(h)^mψ(a)/ψ(g)^(em).
-Affine adjunction and module-sheaf gluing give the global isomorphism and its uniqueness.
-(5) Products give ce ψ(ab)/ψ(f)^(m+n) in both orders. The affine tensor-sections theorem
-and the section-normalized pullback--tensor comparison identify this with the sheaf
-multiplication square. The unit 1/1 stays 1/1, the degree-zero formula is the structural
-pullback identification, and a/1 maps to ψ(a)/1 for every nonnegative degree.
-(6) The coefficient associator sends t tensor a to t tensor (1 tensor a), with inverse
-t tensor (s tensor a) mapped to ts tensor a. After γ and β this gives the composite
-graded algebra isomorphism. Chart uniqueness gives r_(χψ)=r_χ followed by r_ψ.
-The normalized pullback-composition map sends ((u tensor b) tensor c) to
-u tensor χ(b)c; both twist maps send this to cχ(b)χψ(u). Thus they agree on generators,
-and gluing gives composition. For the identity extension the chart formula is u tensor c
-mapped to cu, hence the normalized identity-pullback comparison. No flatness, finiteness,
-degree-one generation, nonzero denominator, or equality A_0=R is used. -/
+composition normalizations. Source: Stacks 01N2(3), 01MY, 01MZ. -/
 theorem scalarExtension_twist_comparison
     {R S A B : Type u} [CommRing R] [CommRing S] [CommRing A] [CommRing B]
     [Algebra R S] [Algebra R A] [Algebra S B]

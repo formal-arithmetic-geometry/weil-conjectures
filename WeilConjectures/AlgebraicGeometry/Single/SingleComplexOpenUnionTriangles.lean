@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.Single.SingleComplexOpenUnionSESPresent
 /-! # Relative comparison triangles on a source-open union
 
 Source: Stacks Project, Tags 0DJ9 and 08HZ, applied on the union.
-(blueprint: lem-pc-single-complex-open-union-triangles).
 -/
 
 @[expose] public section
@@ -30,23 +29,7 @@ are the components of a morphism of distinguished relative Mayer--Vietoris
 triangles. No comparison is assumed or asserted to be invertible.
 
 Source: Stacks Project, Tag 0DJ9, induction diagram, and Tag 08HZ, functorial
-relative Mayer--Vietoris; Tag 08HY, the canonical base-change map.
-(blueprint: lem-pc-single-complex-open-union-triangles).
-
-Proof: Use singleComplexOpenComparison_union_ses_presentation to construct the
-short exact complex diagram and its six comparisons with the ambient vertices.
-Conjugate the localized first and second differentials by these comparisons.
-Conjugate the Mathlib short-exact-sequence boundaries by the overlap comparisons
-and the shifts of the union comparisons. Triangle.isoMk identifies the resulting
-triangles with the short-exact-sequence triangles, so isomorphic_distinguished
-proves both distinguishedness assertions. Conjugate triangleOfSES.map by these
-two triangle isomorphisms. Its three components reduce, using the presentation's
-three component equations and inverse-hom cancellation, to the exact comparisons
-in the statement. The connecting square is part of triangleOfSES.map and is
-preserved by composition; it is not inferred from the first two squares.
-Empty opens yield zero terms; repeated or contained opens yield the corresponding
-split restriction sequences. Zero coefficients and arbitrary coefficient maps
-are included; no invertibility or global cover of X is used. -/
+relative Mayer--Vietoris; Tag 08HY, the canonical base-change map. -/
 theorem singleComplexOpenComparison_union_triangles
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

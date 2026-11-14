@@ -44,16 +44,7 @@ private def transportColimit
   rw [Category.assoc, α.naturality]
   simp
 
-/-- Window transport of the bounded coproduct comparison.
-Source: blueprint main-20261015, sk-lem-proper-unbounded-window-ii, general proof,
-paragraphs 1--3 (blueprint: lem-sfb-proper-coproduct-window-transport).
-Proof: take ambient coproducts and their double truncations. The bounded comparison
-makes the image of the window cofan colimiting. Apply degree-q cohomology and transport
-this colimit backwards along the second window isomorphism and forwards along the
-first. Both transformations are pointwise invertible on the family and its sum.
-Thus cohomology of the image cofan is colimiting in every degree. The canonical
-comparison is a cohomology isomorphism, hence an isomorphism. Sum closure puts both
-chosen coproducts in Dic. This also covers the empty family. -/
+/-- Window transport of the bounded coproduct comparison. -/
 theorem properUnbounded_coproductComparison
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     {X Y : Scheme.{u}} (p : X ⟶ Y) (d : ℤ)

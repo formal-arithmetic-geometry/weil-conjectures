@@ -19,7 +19,6 @@ public import Mathlib.RingTheory.Nakayama
 /-! # Uniqueness of restriction across a depth-positive boundary
 
 Source: Stacks Project, Tags 0B3M and 05AR.
-(blueprint: lem-sbc-depth-one-restriction-injective)
 -/
 
 @[expose] public section
@@ -59,21 +58,7 @@ set_option backward.isDefEq.respectTransparency false in
 
 Source: Stacks Project, Tags 0B3M (restriction avoiding weakly associated points),
 05AR (associated and weakly associated points on a locally Noetherian scheme),
-and 00LL (depth zero and associated primes).
-(blueprint: lem-sbc-depth-one-restriction-injective)
-
-Proof: Work on a Noetherian affine open V. Quasi-coherence identifies the restricted
-module with the sheaf of N(V), a finite module by hypothesis. A point of V outside U
-cannot be associated to this module: its finite local stalk has positive depth,
-whereas an associated maximal ideal forces depth zero. On a Noetherian scheme
-associated and weakly associated points coincide. Thus all weakly associated
-points of N restricted to V lie in V intersect U. A section vanishing there
-has cyclic image subsheaf supported outside U. Its weakly associated points
-are both weakly associated to N and in that support, so there are none; the image
-is zero. This proves injectivity on affine opens. For arbitrary V, cover V by
-affine opens and apply the sheaf separatedness axiom to the two sections.
-The unit component is the restriction map by restrictAdjunction_unit_app_app.
-This includes the zero sheaf and empty opens. -/
+and 00LL (depth zero and associated primes). -/
 theorem injective_restrictAdjunction_unit_app_of_depth_one
     {L : Scheme.{u}} [IsLocallyNoetherian L] (U : L.Opens)
     (N : L.Modules)

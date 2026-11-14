@@ -12,8 +12,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.DiagonalFlatScalar
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Closure.DiagonalClosureLineEndpoint
 
 /-! # A one-sided q Chern splitting existence statement
-
-Source: diagonal-tower unit/Chern splitting and the first rational P1 triangle.
 -/
 
 @[expose] public noncomputable section
@@ -30,17 +28,8 @@ attribute [local irreducible] derivedScalars Functor.mapDerivedCategory Restrict
 
 /-- The q Chern arrow admits a complementary shifted line component.
 
-Source: the normalized completed q splitting, followed by realization, scalar
-extension, and the canonical q pushforward comparison (blueprint:
-lem-sfb-rational-p1-scalar-q-splitting-existence).
-
-Proof: transport the complementary component of `completed_chern_splitting` for
-`r.tq` through `realize_splitting` and the finite, rational, and closure scalar
-compatibilities. The endpoint normalizations identify the second component with
-`scalarQChern`; composing its target with the canonical q comparison preserves
-invertibility. This is exactly the geometric splitting step used by the
-homological criterion, with the homology concentration and componentwise
-isomorphism conclusions postponed to the parent theorem. -/
+Source: the normalized completed q splitting, followed by realization, scalar extension, and the
+canonical q pushforward comparison. -/
 theorem scalar_q_chern_splitting_exists
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (Y : Scheme.{u}) [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)]

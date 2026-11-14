@@ -20,7 +20,7 @@ scalar action, so it commutes with restriction of scalars along the completed is
 induced by a datum isomorphism. With the pullback and slice compatibilities of restriction
 of scalars, stratified perfect models of a transported object descend.
 
-Source: Bhatt--Scholze, Proposition 6.6.11 (auxiliary; not a blueprint node).
+Source: Bhatt--Scholze, Proposition 6.6.11.
 -/
 
 @[expose] public noncomputable section
@@ -55,8 +55,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The level constant comparison is the sheafified constants map.
-(auxiliary; not a blueprint node). -/
+/-- The level constant comparison is the sheafified constants map. -/
 theorem pbcLevelConstantComparison_hom_eq (T : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) :
     (pbcLevelConstantComparison T d n).hom =
@@ -69,8 +68,7 @@ theorem pbcLevelConstantComparison_hom_eq (T : Scheme.{u})
   ext U b
   exact (pbcLevelConstantComparison_exists T d n).exists.choose_spec U b
 
-/-- Level constant comparisons are natural in the quotient ring.
-(auxiliary; not a blueprint node). -/
+/-- Level constant comparisons are natural in the quotient ring. -/
 theorem pbcLevelConstantComparison_naturality (T : Scheme.{u})
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (dA : AdicCoefficientDatum A) (dB : AdicCoefficientDatum B) (n : ℕ)
@@ -86,8 +84,7 @@ theorem pbcLevelConstantComparison_naturality (T : Scheme.{u})
   rw [← Functor.map_comp, ← Functor.map_comp]
   congr 1
 
-/-- The completed scalar map followed by a level projection is the constant quotient map.
-(auxiliary; not a blueprint node). -/
+/-- The completed scalar map followed by a level projection is the constant quotient map. -/
 theorem pbcCompletedScalar_projection (T : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) :
     pbcCompletedScalar T d ≫ pbcAdicProjection T d n =
@@ -110,8 +107,7 @@ variable {A A' : Type (u + 1)} [CommRing A] [CommRing A']
   (d : AdicCoefficientDatum A) (d' : AdicCoefficientDatum A')
   (φ : A ≃+* A') (hφ : d.ideal.map φ = d'.ideal)
 
-/-- The completed isomorphism is compatible with the constant scalars.
-(auxiliary; not a blueprint node). -/
+/-- The completed isomorphism is compatible with the constant scalars. -/
 theorem AdicCoefficientDatum.completionIso_scalar (T : Scheme.{u}) :
     pbcCompletedScalar T d ≫ (d.completionIso d' φ hφ T).hom =
       (constantSheaf (ProEt.topology T) CommRingCat.{u + 1}).map
@@ -133,8 +129,7 @@ theorem AdicCoefficientDatum.completionIso_scalar (T : Scheme.{u}) :
 end RingEquiv
 section Adjunctions
 
-/-- Restriction along the identity, normalized on underlying sections.
-(auxiliary; not a blueprint node). -/
+/-- Restriction along the identity, normalized on underlying sections. -/
 def pbcRestrictIdIso {T : Scheme.{u}}
     (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1}) :
     pbcRestrict (𝟙 R) ≅ 𝟭 (pbcModules T R) :=
@@ -145,8 +140,7 @@ def pbcRestrictIdIso {T : Scheme.{u}}
         (fun {U V} f ↦ by ext x; rfl)))
       (fun f ↦ by ext U x; rfl)
 
-/-- Restriction along a ring sheaf isomorphism is an equivalence.
-(auxiliary; not a blueprint node). -/
+/-- Restriction along a ring sheaf isomorphism is an equivalence. -/
 def pbcRestrictEquivalence {T : Scheme.{u}}
     {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (e : R ≅ S) :
     pbcModules T S ≌ pbcModules T R :=
@@ -154,16 +148,14 @@ def pbcRestrictEquivalence {T : Scheme.{u}}
     (pbcRestrictComp e.inv e.hom (𝟙 S) e.inv_hom_id ≪≫ pbcRestrictIdIso S).symm
     (pbcRestrictComp e.hom e.inv (𝟙 R) e.hom_inv_id ≪≫ pbcRestrictIdIso R)
 
-/-- The constant presheaf of modules, before sheafification.
-(auxiliary; not a blueprint node). -/
+/-- The constant presheaf of modules, before sheafification. -/
 def adicLisseConstantPresheaf (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A] :=
   siteConstantModulePresheaf (C := Discrete (ULift.{u + 1} Unit)) A ⋙
     PresheafOfModules.pushforward₀
       ((Functor.const X.ProEt).obj (Discrete.mk (ULift.up ())))
       ((Functor.const (Discrete (ULift.{u + 1} Unit))ᵒᵖ).obj (RingCat.of A))
 
-/-- Maps out of a constant presheaf are maps into sections over a terminal object.
-(auxiliary; not a blueprint node). -/
+/-- Maps out of a constant presheaf are maps into sections over a terminal object. -/
 def adicLisseConstantPresheafHomEquiv (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A]
     (T : X.ProEt) (hT : IsTerminal T) (M : ModuleCat.{u + 1} A)
     (F : _root_.PresheafOfModules.{u + 1} ((Functor.const X.ProEtᵒᵖ).obj (RingCat.of A))) :
@@ -194,8 +186,7 @@ def adicLisseConstantPresheafHomEquiv (X : Scheme.{u}) (A : Type (u + 1)) [CommR
     simp
     rfl
 
-/-- The constant presheaf is left adjoint to evaluation at a terminal object.
-(auxiliary; not a blueprint node). -/
+/-- The constant presheaf is left adjoint to evaluation at a terminal object. -/
 def adicLisseConstantPresheafAdjunction (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A]
     (T : X.ProEt) (hT : IsTerminal T) :
     adicLisseConstantPresheaf X A ⊣ PresheafOfModules.evaluation _ (op T) :=
@@ -208,16 +199,14 @@ def adicLisseConstantPresheafAdjunction (X : Scheme.{u}) (A : Type (u + 1)) [Com
         rfl
       homEquiv_naturality_right := by intros; rfl }
 
-/-- Global sections over a terminal object, with the constant scalar action.
-(auxiliary; not a blueprint node). -/
+/-- Global sections over a terminal object, with the constant scalar action. -/
 def adicLisseConstantGlobalSections (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A]
     (T : X.ProEt) :=
   SheafOfModules.forget (adicLisseRing X A) ⋙
     PresheafOfModules.restrictScalars (adicLisseConstantUnit X A) ⋙
       PresheafOfModules.evaluation _ (op T)
 
-/-- Constant module sheaves are left adjoint to global sections.
-(auxiliary; not a blueprint node). -/
+/-- Constant module sheaves are left adjoint to global sections. -/
 def adicLisseConstantModulesAdjunction (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A]
     (T : X.ProEt) (hT : IsTerminal T) :
     adicLisseConstantModules X A ⊣ adicLisseConstantGlobalSections X A T :=
@@ -305,10 +294,7 @@ private def constantModuleTransportIso (T : Scheme.{u}) (Tm : T.ProEt) (hT : IsT
   (conjugateIsoEquiv (adj₁.comp (adjG.comp adj₃)) adjG').symm
     (globalSectionsIso d d' φ hφ T Tm).symm
 
-/-- The completed constant realization commutes with the transport of coefficient data.
-(auxiliary; not a blueprint node).
-Proof: both sides are left adjoints; their right adjoints are global sections over a
-terminal object, with constant scalar actions identified by the completed isomorphism. -/
+/-- The completed constant realization commutes with the transport of coefficient data. -/
 theorem integralConstantDerived_transport (T : Scheme.{u})
     (P : completedConstantDerived (ModuleCat.{u + 1} A')) :
     letI := HasDerivedCategory.standard (ModuleCat.{u + 1} A)
@@ -332,8 +318,7 @@ section PerfectTransport
 
 variable {A A' : Type (u + 1)} [CommRing A] [CommRing A'] (φ : A ≃+* A')
 
-/-- Restriction along a ring isomorphism preserves perfect complexes.
-(auxiliary; not a blueprint node). -/
+/-- Restriction along a ring isomorphism preserves perfect complexes. -/
 theorem isPerfectRingComplex_restrictScalars
     (P : completedConstantDerived (ModuleCat.{u + 1} A'))
     (hP : @DerivedCategory.IsPerfectRingComplex A' _
@@ -390,11 +375,7 @@ private def pullbackTransportIso {T S : Scheme.{u}} (g : S ⟶ T) (K : PbcComple
     (Iso.refl _) (Iso.refl _) (by simp)).app K).symm
 
 /-- Stratified perfect models descend along the transport of coefficient data.
-Source: Bhatt--Scholze, Proposition 6.6.11 (auxiliary; not a blueprint node).
-Proof: restriction of scalars along the completed isomorphism commutes with inverse image
-along each stratum map and with slice restriction. The completed constant realization of an
-`A'`-complex is the transported realization of its restriction along `φ`, which is still
-perfect. Reflect the local isomorphisms along the restriction equivalence on each slice. -/
+Source: Bhatt--Scholze, Proposition 6.6.11. -/
 theorem AdicCoefficientDatum.isIntegralStratifiedPerfect_of_transport (T : Scheme.{u})
     (K : PbcCompletedDerived T d)
     (hK : IsIntegralStratifiedPerfect T d' ((d.transportDerived d' φ hφ T).obj K)) :

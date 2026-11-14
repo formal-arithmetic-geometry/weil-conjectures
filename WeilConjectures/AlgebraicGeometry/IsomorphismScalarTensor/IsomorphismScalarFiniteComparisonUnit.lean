@@ -16,8 +16,7 @@ This isolates the unit middle coefficient case from the general pure-tensor
 formula.  It is the normalized reassociation step in the finite coefficient
 calculation.
 
-Source: Stacks Project, sites-modules.tex, Tags 03EK and 03EL, Step 4.
-(blueprint: lem-weil-isomorphism-scalar-finite-comparison-formula-unit).
+Source: Stacks Project, Tags 03EK and 03EL, Step 4.
 -/
 
 @[expose] public noncomputable section
@@ -36,7 +35,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (ι : E →ₐ[ℚ_[l]] L) {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]
 
 /-- The finite formula with the middle finite coefficient specialized to `1`.
-Source: Stacks Project, sites-modules.tex, Tags 03EK and 03EL, Step 4.
+Source: Stacks Project, Tags 03EK and 03EL, Step 4.
 The normalized balanced reassociation sends the outer coefficient through the
 finite inverse-image map and inserts the unit in the middle coefficient. -/
 def FiniteFormulaUnit
@@ -347,8 +346,7 @@ its adjunction mate is invertible because inverse image is an equivalence.
 Compose this mate with scalar-extension reassociation, lift termwise to complexes,
 and restrict to good complexes. The normalized extension units give the double
 pure-tensor rule, whose middle coefficient is then specialized to `1`.
-Source: Stacks Project, sites-modules.tex, Tags 03EK and 03EL, Step 4.
-(blueprint: lem-weil-isomorphism-scalar-finite-comparison-formula-unit).
+Source: Stacks Project, Tags 03EK and 03EL, Step 4.
 -/
 theorem finite_formula_unit_exists
     (b : (integralOperationsGoodComplex l E Y).ι ⋙ leftComplex l E L ι g ≅

@@ -26,27 +26,8 @@ namespace AlgebraicGeometry.Scheme
 set_option backward.isDefEq.respectTransparency false in
 /-- On the complement of the closed point, the complex of sections of associated
 injective modules is the categorical quotient by maximal-ideal-power torsion.
-Source: Stacks Project, Tag 0BK0, Lemma 51.8.2; Tag 0A6T, Lemma 51.2.1;
-and Tag 09T2, Lemma 36.8.1.
-(blueprint: lem-sbc-punctured-sections-torsion-quotient).
-
-Proof: A prime containing the maximal ideal equals it, so hW identifies W with
-Spec R minus V(m). Choose finite generators f_i of m, using Noetherianity.
-For each injective module E, the associated sheaf is flasque by 09T2, and the
-restriction map tilde.toOpen E W is surjective since its sections on the whole
-spectrum identify with E by tilde.isoTop. Its kernel is Gamma_m(E): a section
-vanishes on W if and only if it vanishes on each D(f_i); localization gives
-exponents e_i with f_i^e_i killing it. Increase each exponent to be positive.
-Every monomial of degree sum e_i is divisible by some f_i^e_i, so the ideal power
-m^(sum e_i) annihilates it. Conversely, m^N annihilating a section makes its
-localization at each f_i zero. The first isomorphism theorem now identifies the
-quotient by Ideal.primaryComponent E m with sections on W. The maps tilde.toOpen
-are natural in E, so these isomorphisms commute with the resolution differentials
-and give an isomorphism of complexes. Cokernels in complexes are degreewise,
-identifying the source with the categorical cokernel of the explicit inclusion.
-If m=0 or W is empty, the restriction target is zero and Gamma_m(E)=E, so this
-construction still applies. This is a chain-level assertion, with no cohomology
-comparison or derived torsion in its proof. -/
+Source: Stacks Project, Tag 0BK0, Lemma 51.8.2; Tag 0A6T, Lemma 51.2.1; and Tag 09T2, Lemma 36.8.1.
+-/
 theorem nonempty_injective_quotient_iso_punctured_sections
     (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R]
     (W : (Spec (.of R)).Opens)

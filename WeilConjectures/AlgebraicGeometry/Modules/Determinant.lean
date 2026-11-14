@@ -41,9 +41,6 @@ transition matrices of the adapted frames of `E` are block triangular
 - `AlgebraicGeometry.Scheme.Modules.isInvertible_exteriorPower`: `⋀ʳ E` is invertible.
 - `AlgebraicGeometry.Scheme.Modules.nonempty_exteriorPower_iso_tensorObj`:
   `⋀^{r+1} E ≅ L ⊗ ⋀ʳ E'` for a short exact sequence `0 → L → E → E' → 0`.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--1`,
-`theorem-riemann-roch-coherent-serre-duality`)
 -/
 
 @[expose] public section
@@ -151,9 +148,7 @@ lemma isInvertible_of_forall_exists_isFreeGenerator
 
 /-- **The determinant of a finite locally free module is invertible.** For a finite locally free
 `𝒪_X`-module `M` of rank `r`, the top exterior power `⋀ʳ M` is invertible: the wedge product of a
-local frame is a free generator (`AlgebraicGeometry.Scheme.Modules.isFreeGenerator_wedge`).
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--1`) -/
+local frame is a free generator (`AlgebraicGeometry.Scheme.Modules.isFreeGenerator_wedge`). -/
 instance isInvertible_exteriorPower (M : X.Modules) {r : ℕ} [M.IsFiniteLocallyFreeOfRank r] :
     (M.exteriorPower r).IsInvertible := by
   refine isInvertible_of_forall_exists_isFreeGenerator fun x ↦ ?_
@@ -297,9 +292,7 @@ lemma exists_transition_adapted (hS : S.ShortExact) {r : ℕ} {U U' W : X.Opens}
 Both sides are invertible, with free generators `l ∧ t₁ ∧ ⋯ ∧ t_r` and `l ⊗ (t̄₁ ∧ ⋯ ∧ t̄_r)` on
 the opens of adapted frames (`AlgebraicGeometry.Scheme.Modules.exists_adapted_frame`), and these
 have the same transition functions
-(`AlgebraicGeometry.Scheme.Modules.exists_transition_adapted`).
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--1`) -/
+(`AlgebraicGeometry.Scheme.Modules.exists_transition_adapted`). -/
 theorem nonempty_exteriorPower_iso_tensorObj (hS : S.ShortExact) {r : ℕ}
     [S.X₁.IsFiniteLocallyFreeOfRank 1] [S.X₃.IsFiniteLocallyFreeOfRank r] :
     Nonempty (S.X₂.exteriorPower (r + 1) ≅ S.X₁ ⊗ S.X₃.exteriorPower r) := by

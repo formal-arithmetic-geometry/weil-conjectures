@@ -134,10 +134,6 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 /-!
 # Ambient ringed pro-etale exchange
 
-Source: literature/blueprint/master/blueprint/sec-proper-base-change/
-sk-thm-properbasechange/def-weil-pbc-ambient-ringed-exchange.md
-(blueprint: definition-pro-etale-base-change-map--1).
-
 ## Main definitions
 
 - `proEtaleCanonicalDerivedPullbackComparison`: composition comparison with its
@@ -156,7 +152,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- Canonical derived pullback comparison extracted from the composition interface.
-Source: Stacks Project, Lemma 0D6D (blueprint: definition-pro-etale-base-change-map--1).
+Source: Stacks Project, Lemma 0D6D.
 The recorded composition theorem supplies this comparison together with its K-flat
 normalization; this definition retains that characterization when selecting the comparison.
 The adjunctions are fixed by their tensor units, the ordinary direct-image comparison
@@ -232,7 +228,7 @@ noncomputable def proEtaleCanonicalDerivedPullbackComparison
   exact hex.choose
 
 /-- The canonical pullback comparison around the coefficient-compatible square.
-Source: Stacks Tags 07A7 and 0D6D (blueprint: definition-pro-etale-base-change-map--1).
+Source: Stacks Tags 07A7 and 0D6D.
 This exposes the exact comparison whose mate defines ambient exchange. -/
 noncomputable def proEtaleAmbientRingedPullbackComparison
     {X' X Y' Y : Scheme.{u}}
@@ -289,8 +285,8 @@ then transported across the square commutativity and coefficient compatibility.
 The resulting exchange is the mate of that comparison under the two derived
 pullback/direct image adjunctions.  Explicitly, its transpose is the comparison
 followed by `Lg'^*` of the counit of `Lf^* ⊣ Rf_*`; the mate construction inserts
-the unit of `Lf'^* ⊣ Rf'_*`.  This is the construction in Stacks, Remark 07A7
-(blueprint: definition-pro-etale-base-change-map--1), before completeness or
+the unit of `Lf'^* ⊣ Rf'_*`.  This is the construction in Stacks, Remark 07A7, before completeness
+or
 constructibility conditions.
 -/
 noncomputable def proEtaleAmbientRingedExchange

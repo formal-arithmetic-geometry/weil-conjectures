@@ -76,27 +76,7 @@ private theorem appTop_isIso_of_tensor_unit {A B : Scheme.{v}} (a : A ⟶ B)
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The degree-zero residue cohomology of a descended line bundle is the residue field.
-Source: Stacks Project, Tag 0BF2, the displayed fibre comparison; Tags 0BF0 and 0B91(2).
-(blueprint: lem-sc-picard-direct-image-fibre-cohomology-zero)
-
-Proof: The existing descended-fibre generator theorem gives a section generating
-L on the fibre over Spec kappa(w). Its generating locus is the whole fibre;
-the free-generator over-isomorphism and the top-open scheme isomorphism
-trivialize this module. Pullback composition and the associativity isomorphism
-of fibre products transport its trivialization to the iterated fibre of f_W.
-The invertible module L_W is finitely presented and relatively flat along f_W:
-its sections on affine opens are projective, hence flat over the flat base.
-Proper relatively flat derived base change therefore identifies Li_w^* E
-with the right-derived image of this ordinary fibre module in degree zero.
-The unbounded/bounded-below comparison computes its degree-zero cohomology
-as ordinary pushforward. For the combined fibre, the assumed adjunction unit
-and the tensor structure-module comparison make the canonical map on global
-sections an isomorphism. The fibre-product associativity isomorphism transfers
-this to the iterated fibre. Restricting scalars through this ring isomorphism
-and GammaSpecIso identifies the sections of its structure module with
-kappa(w). Composing with the trivialization gives the claimed module
-isomorphism. Positive cohomology is unrestricted. The hypothesis hO excludes
-an empty fibre, since the residue field has nonzero global sections. -/
+Source: Stacks Project, Tag 0BF2, the displayed fibre comparison; Tags 0BF0 and 0B91(2). -/
 theorem picard_directImage_fibre_cohomology_zero
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

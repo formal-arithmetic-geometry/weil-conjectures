@@ -33,9 +33,8 @@ import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
 /-!
 # Constructibility for lisse coefficients on an open relative affine line
 
-Source: Stacks Project, Tag 0GKY, `lemma-loc-constant-shriek-rel-dim-1`, specialized to
-finite coefficient rings and affine finite-type integer bases
-(blueprint: lem-weil-pbc-etale-lisse-open-relative-line-constructibility).
+Source: Stacks Project, Tag 0GKY, specialized to finite coefficient rings and affine finite-type
+integer bases.
 -/
 
 @[expose] public section
@@ -899,26 +898,7 @@ end StableInstances
 /-- Lisse sheaves with finite module values on an open relative affine line over a
 finite-type integer base, on which the additive orders of the coefficients are invertible,
 have constructible compactly supported cohomology sheaves.
-Source: Stacks Project, Tag 0GKY, `lemma-loc-constant-shriek-rel-dim-1`
-(blueprint: lem-weil-pbc-etale-lisse-open-relative-line-constructibility).
-
-Proof:
-1. A finite affine cover of the Noetherian open has affine intersections, and each
-   restricted projection is smooth of relative dimension one.
-2. On an affine smooth relative curve, first suppose the sheaf is killed by a prime.
-   The finite étale filtration cover has degree prime to that prime. The finite
-   pushforward trace therefore retracts the adjunction unit on this sheaf.
-3. Constant-coefficient constructibility applies to every filtration quotient on
-   each affine clopen component of the cover. Short-exact-sequence triangles give
-   the result for each component, and the disjoint-open biproduct and shriek
-   composition give it on the finite cover. Exactness of finite pushforward and
-   the trace retraction descend constructibility to the original sheaf.
-4. Induct on a positive annihilator of the finite coefficient ring, using the
-   kernel--image short exact sequence for multiplication by a prime. Its kernel
-   and image remain finite locally constant. The base case is the zero sheaf.
-5. Induct on the finite affine cover with the open-cover short exact sequence and the weak
-   Serre closure of constructible sheaves. The initial cover may consist only of
-   the empty open, so this also covers the empty-source and zero-ring cases. -/
+Source: Stacks Project, Tag 0GKY. -/
 theorem isConstructibleEtaleModuleSheaf_lisse_openRelativeLine_shriek
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     (R : Type u) [CommRing R] [Algebra.FiniteType ℤ R]

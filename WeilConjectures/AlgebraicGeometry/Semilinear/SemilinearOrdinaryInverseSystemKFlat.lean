@@ -91,7 +91,7 @@ import all WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearSystemsExisten
 
 /-! # K-flatness for ordinary inverse systems
 
-Source: Zheng Construction 4.1; Stacks, lemma-pullback-K-flat.
+Source: Zheng Construction 4.1; Stacks.
 -/
 
 @[expose] public noncomputable section
@@ -141,17 +141,7 @@ private theorem finite_kflat (n : ℕ) [(I n).modules.Additive]
 
 include uPush adj in
 /-- An ordinary inverse system carries flat-term K-flat complexes to K-flat complexes.
-Source: Zheng Construction 4.1; Stacks sites-cohomology, lemma-pullback-K-flat.
-(blueprint: lem-coef-ordinary-inverse-system-kflat).
-
-Proof: evaluate the source complex at each level. Vertical evaluation is a ringed-topos
-inverse image, so preserves both flatness and K-flatness for complexes with flat terms.
-Apply the same pullback theorem to the algebraic inverse image I at that level.
-The component isomorphism of P identifies this with evaluation of the whole inverse
-image. To detect K-flatness of that image, tensor with any acyclic system complex.
-Evaluation is exact and commutes with total tensor, so each evaluated tensor is acyclic.
-Exactness on the vertical sequence site is detected at every level, giving acyclicity
-of the original tensor and hence K-flatness. -/
+Source: Zheng Construction 4.1; Stacks sites-cohomology. -/
 theorem ordinaryInverseSystem_kflat [∀ n, (I n).modules.Additive]
     (P : OrdinaryInverseSystem.{c, v, r} J B τ J' uInv F σ I) [P.pull.Additive]
     (K : CochainComplex (Systems.{c, v, max c v r} J B τ) ℤ)

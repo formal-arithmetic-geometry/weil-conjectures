@@ -88,7 +88,7 @@ variable {S : Scheme.{u}} (G : S.FiniteAffineGluingPresentation)
 noncomputable def gluedIso : G.openCover.gluedCover.glued ≅ S :=
   asIso G.openCover.fromGlued
 
-/-- Blueprint `theorem-nagata-s-compactification-theorem--1`: Properties of the selected
+/-- Properties of the selected
 finite affine presentation.
 
 Every overlap `Uₐ ⊓ U_b` of a finite affine gluing presentation is quasi-compact and is the union

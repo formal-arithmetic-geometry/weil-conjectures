@@ -64,9 +64,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleHypercoverComputesBounde
 /-!
 # Bounded-below derived evaluation by weakly contractible hypercovers
 
-Source: Stacks Project, proetale.tex, Tag 09A2, lemma-compute-cohomology;
-sites-cohomology.tex, Tag 0946, lemma-w-contractible
-(blueprint: lem-weil-pbc-proetale-hypercover-computes-bounded-complex).
+Source: Stacks Project, Tag 09A2; Tag 0946.
 -/
 
 @[expose] public section
@@ -81,8 +79,7 @@ namespace AlgebraicGeometry.Scheme.ProEt
 -- Explicit derived comparisons expand the section and evaluation functor compositions.
 set_option backward.isDefEq.respectTransparency false in
 /-- A weakly contractible hypercover computes bounded-below derived evaluation.
-Source: Stacks Project, Tags 09A2 and 0946, with ringed-module coefficients
-(blueprint: proposition-weakly-contractible-hypercovers--2).
+Source: Stacks Project, Tags 09A2 and 0946, with ringed-module coefficients.
 
 The first conjunct gives a comparison for every bounded-below complex and every
 bounded-below termwise-injective chain resolution. Its target is precisely the
@@ -91,32 +88,7 @@ natural under coefficient chain maps and resolution maps commuting up to homotop
 Taking an identity coefficient map gives independence of the resolution. The
 second conjunct is invariance of total sections under bounded-below quasi-isomorphisms.
 `CochainComplex.Plus` imposes strict boundedness of terms, not just of cohomology.
-No affineness or qcqs hypothesis is imposed on the given hypercover or its base.
-
-Proof: evaluation at each weakly contractible U_p preserves homology of module
-complexes. Restriction of scalars to R(W) is exact, so the section columns carry
-coefficient quasi-isomorphisms to quasi-isomorphisms. Truncation at an outer degree
-larger than the degree under consideration reduces total comparison to finitely
-many columns. The source library proves that finite comparison, giving T(i) and
-the last conjunct directly, without reindexing the coefficient degree.
-
-For each injective I, matching-map local lifting makes the existing ringed
-hypercover augmentation theorem applicable. Transport the pro-etale site along
-ULiftHom so its object and morphism universes agree; pull back its precoverage and
-transport I along the module-sheaf equivalence. The exact alternating section
-sequence is the row augmentation quasi-isomorphism, including the zero extension
-in negative degrees. Apply the same total comparison to flipped bicomplexes and
-the single-column source to prove that the explicitly constructed natural
-augmentation alpha:J(W)→T(J) is a quasi-isomorphism.
-
-Define the comparison by Q(T(i)) followed by the inverse of Q(alpha_J). For
-naturality, the augmentation commutes strictly with every coefficient chain map.
-Any functor inverting bounded-below quasi-isomorphisms identifies homotopic maps:
-the cylinder stays bounded below, its projection is a homotopy equivalence, and
-its two inclusions become equal after inverting that projection. Apply this to
-T followed by Q, then cancel Q(alpha_L). Resolutions, comparison maps and their
-homotopy are inputs to this declaration, so neither resolution existence nor
-K-injective comparison is used. -/
+No affineness or qcqs hypothesis is imposed on the given hypercover or its base. -/
 theorem hypercover_computes_boundedBelow_complex (X : Scheme.{u})
     (R : Sheaf (topology X) CommRingCat.{u + 1}) (W : X.ProEt)
     (U : SimplicialObject (Over W))

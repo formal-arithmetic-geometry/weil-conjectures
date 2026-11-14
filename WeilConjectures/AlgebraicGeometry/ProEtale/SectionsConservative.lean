@@ -14,10 +14,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
 /-!
 # Evaluation on affine weakly contractible objects is conservative
-
-Source: literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/
-`sk-cor-pe-sections/det-pe-sections-conservative.md` (blueprint:
-corollary-evaluation-weakly-contractible-objects).
 -/
 
 @[expose] public section
@@ -33,16 +29,14 @@ namespace AlgebraicGeometry.Scheme.ProEt
 variable {X : Scheme.{t}}
 
 /-- The module-sheaf category is abelian in the common site/coefficient universe.
-Source: Stacks Project, Tag 03DA; `situation-conventions`
-(blueprint: corollary-evaluation-weakly-contractible-objects). -/
+Source: Stacks Project, Tag 03DA; `situation-conventions`. -/
 noncomputable instance sections_module_abelian (R : Sheaf (topology X) RingCat.{u}) :
     Abelian (ringedSiteModules.{max u (t + 1)} R) := by
   letI := SheafOfModules.isGrothendieckAbelianOfUniverses (topology X) R
   infer_instance
 
 /-- Evaluation of module sheaves on a site object is additive.
-Source: Stacks Project, Tag 03DA; `situation-conventions`
-(blueprint: corollary-evaluation-weakly-contractible-objects). -/
+Source: Stacks Project, Tag 03DA; `situation-conventions`. -/
 noncomputable instance sections_evaluation_additive
     (R : Sheaf (topology X) RingCat.{u}) (W : X.ProEt) :
     (SheafOfModules.evaluation.{max u (t + 1)} R (op W)).Additive :=
@@ -50,8 +44,7 @@ noncomputable instance sections_evaluation_additive
     PresheafOfModules.evaluation R.obj (op W)).Additive)
 
 /-- Exactness is detected on affine weakly contractible objects by local lifting.
-Source: Stacks Project, Tag 0947(1)
-(blueprint: corollary-evaluation-weakly-contractible-objects). -/
+Source: Stacks Project, Tag 0947(1). -/
 private theorem exact_sections_iff
     (R : Sheaf (topology X) RingCat.{u})
     (S : ShortComplex (ringedSiteModules.{max u (t + 1)} R)) :
@@ -101,52 +94,10 @@ private theorem exact_sections_iff
 /-- Evaluation on affine weakly contractible objects detects exact sequences, acyclic
 complexes, isomorphisms, and quasi-isomorphisms of modules on the small pro-etale site.
 
-Source: literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/
-`sk-cor-pe-sections/det-pe-sections-conservative.md`, clauses 1--3;
-Stacks Project, Tags 0946, 0947, 05RT, and 0115
-(blueprint: corollary-evaluation-weakly-contractible-objects).
+Source: Stacks Project, Tags 0946, 0947, 05RT, and 0115.
 
 Clause 1 is Proposition 0947(1); clauses 2--3 are its degreewise and cone
 consequences, as expanded in the blueprint proof.
-
-Proof:
-1. Put `Z = ker g` and let `u : A ⟶ Z` be induced by `f`; its existence follows from
-`f ≫ g = 0`.
-The sequence is exact at `B` precisely when `coker u = Z / im f` is zero. The underlying
-abelian sheaf of this cokernel is the abelian cokernel of `u`, by
-`situation-conventions`; faithfulness reflects the zero object.
-Thus exactness is equivalent to the underlying abelian map `u` being epic. By
-`corollary-evaluation-weakly-contractible-objects`, this is equivalent to local lifting
-of each section of `Z`. The equality `Z(V) = ker (g(V))` is the sectionwise kernel statement
-from `situation-conventions`, yielding the local lifting formulation.
-2. By `theorem-enough-affine-weakly-contractible-objects--1`, every site object has a covering by
-affine objects `Spec D` with `D` w-contractible. The closed source theorem
-`isWeaklyContractible_of_iso`, recorded in `corollary-evaluation-weakly-contractible-objects`, makes
-each such object weakly contractible in the module universe. Thus every object has a covering by the
-class used here.
-3. If the sequence is exact, the underlying abelian map `u` is locally surjective. Forgetting
-abelian groups to sets preserves local surjectivity. Apply the defining lifting property
-`IsWeaklyContractible` directly to this set-sheaf morphism to obtain surjectivity over `W`.
-The sectionwise kernel equality gives exactness after evaluation; the reverse inclusion
-follows from `f ≫ g = 0`. No set-sheaf epimorphism conversion is needed.
-4. Conversely, exactness on every affine weakly contractible member of a covering gives,
-for a section in `ker (g(V))`, local lifts through `f`; these lifts need not agree on
-overlaps, which is exactly local surjectivity and hence exactness of the sheaf sequence.
-5. For every cochain complex `K`, its degree-`q` cohomology is `ker d^q / im d^(q-1)` by
-`corollary-evaluation-weakly-contractible-objects`. It vanishes exactly when the adjacent maps are
-exact. Apply clause 1 degreewise and exchange the quantifiers over `q` and `W`; no boundedness is
-used.
-6. An isomorphism of module sheaves has bijective components by evaluating its inverse.
-Conversely, apply clause 1 to `A --0--> A --f--> B` and `A --f--> B --0--> B`.
-Bijectivity of each evaluated map gives exactness of these evaluated short complexes.
-Thus the original short complexes are exact, making `f` both mono and epi. The abelian
-category criterion `isIso_of_mono_of_epi` proves that `f` is an isomorphism.
-7. For a morphism `v : K ⟶ L`, use the cone with degree `q` equal to
-`L^q ⊞ K^(q+1)` and differential `(l,k) ↦ (d_L l + v k, -d_K k)`. The cone criterion
-`corollary-evaluation-weakly-contractible-objects` identifies quasi-isomorphisms with acyclic cones.
-Finite biproducts and sectionwise limits from `situation-conventions`,
-together with additivity, identify the evaluated cone with the cone of `v(W)`. Clause 2
-therefore gives the quasi-isomorphism equivalence.
 -/
 theorem sections_conservative
     (X : Scheme.{t})

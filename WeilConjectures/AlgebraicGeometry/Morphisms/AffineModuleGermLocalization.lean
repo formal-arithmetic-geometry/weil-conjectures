@@ -17,7 +17,6 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 /-! # The module germ map on an affine open is a localization
 
 Source: Stacks Project, Tags 01IB and 01HV.
-(blueprint: lem-sbc-affine-module-germ-localization)
 -/
 
 @[expose] public section
@@ -33,21 +32,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The affine section-to-stalk map of a quasi-coherent module is a localization.
 
 Source: Stacks Project, Tag 01IB (quasi-coherent modules on an affine scheme) and
-Tag 01HV (stalk of the associated sheaf).
-(blueprint: lem-sbc-affine-module-germ-localization)
-
-Proof: Use the germ as a linear map over O(V). Elements outside the prime have
-unit germs in the stalk ring, hence act bijectively on the module stalk. Represent
-any stalk element by a section on a neighbourhood, shrink to a basic open D(g)
-inside that neighbourhood and V, and apply the proved affine basic-open extension
-lemma: multiplying by a power of g extends the section to V. Since y lies in
-D(g), this power is an allowed denominator, giving surjectivity after localization.
-For two sections with equal germs, shrink their equality to a basic open D(g).
-The proved affine basic-open torsion lemma kills their difference by a power of g.
-These are the three axioms of IsLocalizedModule. This is the denominator argument
-already used in the private quasicoherent_affine_stalk_germ_localization proof of
-Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportClosed. No finiteness or Noetherian
-assumption is used. For zero modules the same proof applies; an empty V has no y. -/
+Tag 01HV (stalk of the associated sheaf). -/
 theorem isLocalizedModule_affine_germ
     {L : Scheme.{u}} (N : L.Modules) (hqc : N.IsQuasicoherent)
     (V : L.Opens) (hV : IsAffineOpen V) (y : V) :

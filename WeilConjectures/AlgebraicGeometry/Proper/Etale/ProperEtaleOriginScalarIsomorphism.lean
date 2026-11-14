@@ -15,9 +15,8 @@ import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ProperProjectionFormula
 
 /-! # Proper scalar comparison on bounded etale origins
 
-Source: Stacks Project, Tag 0F0G, lemma-projection-formula-proper-mod-n;
-Tags 09A6, 0E48 and 0B56 for the canonical comparison and scalar mate.
-(blueprint: lem-fix-proper-etale-origin-scalar-isomorphism).
+Source: Stacks Project, Tag 0F0G; Tags 09A6, 0E48 and 0B56 for the canonical comparison and scalar
+mate.
 
 ## Main definitions and statement
 
@@ -79,38 +78,7 @@ q = properOriginTensorIso is the constant-B tensor comparison expressed through
 US = tensor B. No flatness, finite Tor dimension, Noetherian hypothesis or bound
 on the tensor of Rp_* E_e is imposed.
 
-Source: Stacks Project, etale-cohomology.tex, Tag 0F0G,
-lemma-projection-formula-proper-mod-n; proetale.tex, Tag 09A6;
-sites-cohomology.tex, Tags 0E48 and 0B56.
-(blueprint: lem-fix-proper-etale-origin-scalar-isomorphism).
-
-Proof:
-1. Properness implies quasi-compactness and quasi-separatedness by
-pqf-lem-proper-basic. Geometric inverse image preserves the constant module B
-by lem-sfb-geometric-inverse-image-constant-module. Thus the two boundedness
-hypotheses here are exactly those on K and L in
-lem-sfb-projection-comparison-etale-proetale.
-2. The additive group of finite A has positive exponent, so A is a torsion ring.
-Apply proposition-proper-direct-image-constructible-complexes--9 to E_e and the degree-zero constant
-module B_Y. It makes properOriginEtaleProjection invertible; its last factor is just p*B_Y = B_Z.
-No flatness or Tor bound is required by that theorem.
-3. Specialize lem-sfb-projection-comparison-etale-proetale to these inputs.
-The tensor comparisons are those of lem-weil-pbc-ringed-topoi-derived-tensor-pullback;
-the two direct-image comparisons are the actual counit mates from
-lem-weil-pbc-comparison-direct-image-canonical-mate. Its equation is
-R_p(h) b_H F_Y(pi_e) = pi_p (b_E tensor 1) t_Y.
-4. Compose with t_Y inverse and b_E inverse tensor 1. This gives the displayed
-conjugation formula. Its factors are invertible: the tensor comparisons by
-construction, b_E and b_H by the two D+ hypotheses, and pi_e by step 2.
-The helpers merely implement coefficient realization and the canonical
-US = tensor B identifications; their section and representative normalizations
-identify their q factors with these tensor comparisons.
-5. lem-fix-proetale-scalar-mate-normalization identifies the restriction of the
-actual directImageScalarComparison with this same pi_p, using the canonical
-restriction/direct-image comparison scalarMateRestrictionPush. Hence its
-restriction equals the displayed composite. Exact coefficient restriction
-reflects isomorphisms by lem-weil-pbc-ring-sheaf-change-adjunction, so the
-specified B-linear mate itself is invertible. -/
+Source: Stacks Project, Tag 0F0G; Tag 09A6; Tags 0E48 and 0B56. -/
 theorem properEtaleOriginScalarIsomorphism
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {Z Y : Scheme.{u}} (p : Z ⟶ Y) [IsProper p]

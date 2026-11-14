@@ -30,31 +30,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 sections of the zeroth cohomology of the quotient algebraic Hom complex, naturally in
 all quotient arrows.
 
-Source: Stacks Project, Tags 09C5, 08JH and 06YQ; current blueprint,
-`proposition-local-structure-integral-constructible-complexes`, Compatible isomorphisms.
-(blueprint: lem-pe-internal-perfect-endomorphism-hom-comparison).
-
-Proof: localize the small pro-etale site at W. The DVR quotients are finite, so the
-normalized finite-discrete ordinary-coefficient equivalence applies to each level.
-Choose bases of the finitely many nonzero terms of P. The scalar model has terms
-finite sums of the internal regular module, hence is K-flat by bounded-flat
-K-flatness. Derived reduction is therefore the ordinary constant complex P/pi^j.
-The canonical derived-to-ordinary comparison agrees with scalar balancing, because
-both are mates of the same restriction-of-scalars adjunction. Transfer weak
-contractibility to the final object of the underlying scheme site. Its abelian
-tensor unit is projective, hence so is the regular finite coefficient module.
-The reduced terms are finite sums of this module and are therefore projective;
-the bounded-above complex is K-projective. The localization bijection computes its
-derived endomorphisms as chain maps modulo chain homotopy. This is H^0 of the signed
-Hom complex of its sections. Finite freeness and boundedness identify the latter
-with sections of the constant quotient of moduleHomComplex P P: on each finite
-matrix entry this is ordinary scalar reduction. Exact constant sheafification and
-exact sections commute with kernels, images and cohomology. Sections of a constant
-sheaf are locally constant functions on connected components. Finally reduction of
-a chain map, and of a homotopy, reduces its matrix entries; scalar balancing has
-this same formula. Thus the bijections commute with every successor arrow, and
-induction gives the equation for all n<=m. Empty W and zero P yield singleton sets;
-no connectedness, finite number of components or completeness is used. -/
+Source: Stacks Project, Tags 09C5, 08JH and 06YQ. -/
 theorem internalPerfectEndomorphism_homComparison
     (X : Scheme.{u}) (W : X.ProEt) (_hAffine : IsAffine W.left)
     (_hweak : (Scheme.ProEt.topology X).IsWeaklyContractible.{u + 1} W)

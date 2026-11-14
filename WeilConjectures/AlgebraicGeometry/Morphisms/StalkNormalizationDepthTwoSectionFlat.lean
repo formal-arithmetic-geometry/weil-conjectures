@@ -40,44 +40,8 @@ namespace AlgebraicGeometry.Scheme
 /-- The formal section calculation gives flatness on a target neighbourhood.
 The depth-two calculation does not require invertibility of the group order.
 
-Source: Stacks Project, Tag 0EYJ, proof of the local claim, last three paragraphs;
-Tags 0EY6 and 0EY9.
-(blueprint: lem-sbc-stalk-normalization-depth-two-section-flat)
-
-Proof: Put A = O(S,s). The inverse image of U in Spec A is its punctured
-spectrum: a point maps to a generalization of s, and minimality excludes
-all missing points other than s. The local normalization is normal, since
-normalization in the normal punctured finite etale algebra is normal and
-localization preserves normality. Its finite algebra is the depth-two
-extension of the punctured finite etale algebra: smoothness and the flat
-local depth formula give depth at least two on the missing fibre, and
-normality gives the corresponding depth condition on the normalization.
-The uniqueness assertion of Tag 0EY6 identifies these two extensions.
-
-Extend the action to the punctured cover using generic-fibre full
-faithfulness. A rational point and its G-translates trivialize the generic
-section fibre. Normal generic full faithfulness extends this trivialization
-over the punctured section (extend the inverse as well). Choose a smooth
-affine chart Spec B containing the closed section point. The section factors
-through this chart, since any open of a local scheme containing its closed
-point is the entire scheme. Complete B in the section ideal. Smoothness
-identifies the completion with A[[x_1,...,x_d]], and Noetherian completion is
-flat over B. For d > 0, Tag 0EY9 extends the section trivialization to the
-punctured completion; for d = 0 it is already the same trivialization.
-Flat base change and uniqueness in Tag 0EY6 then identify the completed
-finite algebra with the product of copies of the completed chart.
-
-The completion map is faithfully flat after localization at the closed
-section point, since the section ideal lies in its maximal ideal. Freeness
-of the split algebra therefore implies flatness at every source point
-above that point, by faithfully flat descent of flatness. The finite
-normalization is of finite presentation over the Noetherian local total
-space. Its flat locus is open. The complement is closed, and its image in the
-local total space is closed because n is finite. Remove this image to
-obtain a target open W containing the closed section point. The entire
-restriction of n over W is flat.
-This conclusion asserts only flatness, not purity or etaleness. The empty
-source is vacuous, and d = 0 is included explicitly above. -/
+Source: Stacks Project, Tag 0EYJ, proof of the local claim, last three paragraphs; Tags 0EY6 and
+0EY9 -/
 theorem GaloisCover.stalk_normalization_depth_two_section_flat {S C : Scheme.{u}}
     [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]

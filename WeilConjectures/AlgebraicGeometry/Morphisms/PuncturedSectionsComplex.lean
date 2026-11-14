@@ -18,17 +18,13 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- Associate a sheaf to an R-module and take sections on W.
-Source: Stacks Project, Tag 09T2.
-(blueprint: def-sbc-punctured-sections-complex). -/
+Source: Stacks Project, Tag 09T2. -/
 def puncturedSectionsFunctor (R : Type u) [CommRing R] (W : (Spec (.of R)).Opens) :
     ModuleCat.{u} R ⥤ ModuleCat.{u} R :=
   tilde.functor (.of R) ⋙ modulesSpecToSheaf ⋙ TopCat.Sheaf.forget _ _ ⋙
     (evaluation _ _).obj (.op W)
 
-/-- Taking sections of the associated sheaf sends a zero module map to zero.
-Source: Mathlib tilde.map_zero and the explicit section functors.
-(blueprint: def-sbc-punctured-sections-complex).
-Proof: the associated-sheaf map of zero is zero and evaluation preserves zero. -/
+/-- Taking sections of the associated sheaf sends a zero module map to zero. -/
 instance puncturedSectionsFunctor_preservesZeroMorphisms
     (R : Type u) [CommRing R] (W : (Spec (.of R)).Opens) :
     (puncturedSectionsFunctor R W).PreservesZeroMorphisms where
@@ -39,16 +35,14 @@ instance puncturedSectionsFunctor_preservesZeroMorphisms
     rfl
 
 /-- Apply the associated-sheaf sections functor degreewise to a cochain complex.
-Source: Stacks Project, Tags 0A6T and 09T2.
-(blueprint: def-sbc-punctured-sections-complex). -/
+Source: Stacks Project, Tags 0A6T and 09T2. -/
 def puncturedSectionsComplex (R : Type u) [CommRing R] (W : (Spec (.of R)).Opens)
     (K : CochainComplex (ModuleCat.{u} R) ℕ) : CochainComplex (ModuleCat.{u} R) ℕ :=
   ((puncturedSectionsFunctor R W).mapHomologicalComplex (ComplexShape.up ℕ)).obj K
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Restrict a complex of modules to sections of its associated sheaves on W.
-Source: Stacks Project, Tag 0A6T.
-(blueprint: def-sbc-punctured-sections-complex). -/
+Source: Stacks Project, Tag 0A6T. -/
 def puncturedSectionsRestriction (R : Type u) [CommRing R] (W : (Spec (.of R)).Opens)
     (K : CochainComplex (ModuleCat.{u} R) ℕ) :
     K ⟶ puncturedSectionsComplex R W K where

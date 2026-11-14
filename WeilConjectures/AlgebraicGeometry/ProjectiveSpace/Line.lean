@@ -102,8 +102,8 @@ instance : IsIso (AffineSpace.reindex (fun _ : {j : ULift.{u} (Fin 2) // j ≠ �
 
 variable (S) in
 /-- **The chart at infinity of the projective line**: the open immersion `𝔸¹_S ↪ ℙ¹_S`,
-`z ↦ [1 : z]`, onto the standard open `D₊(T₀)`. Its coordinate is `z = T₁ / T₀`, the inverse
-of the coordinate `t = T₀ / T₁` of `affineChart` (blueprint: `d-lines`). -/
+`z ↦ [1: z]`, onto the standard open `D₊(T₀)`. Its coordinate is `z = T₁ / T₀`, the inverse
+of the coordinate `t = T₀ / T₁` of `affineChart`. -/
 def infinityChart : 𝔸(PUnit.{u + 1}; S) ⟶ ProjectiveLine S :=
   AffineSpace.reindex (fun _ : {j : ULift.{u} (Fin 2) // j ≠ ⟨0⟩} ↦ PUnit.unit) S ≫
     (standardOpenIso (ULift.{u} (Fin 2)) S ⟨0⟩).inv ≫ (standardOpen (ULift.{u} (Fin 2)) S ⟨0⟩).ι
@@ -225,8 +225,7 @@ variable (S) in
   𝔸¹_S ── affineChart ──▶ ℙ¹_S
 ```
 is cartesian, where `D(t) ⊆ 𝔸¹_S` is the locus where the coordinate `t` is invertible. Over
-`S = Spec F` this is the gluing of `Spec F[t]` and `Spec F[z]` along `F[t, t⁻¹] = F[z, z⁻¹]`
-(blueprint: `d-lines`). -/
+`S = Spec F` this is the gluing of `Spec F[t]` and `Spec F[z]` along `F[t, t⁻¹] = F[z, z⁻¹]`. -/
 theorem isPullback_affineChart_infinityChart :
     IsPullback
       (AffineSpace.homOfVector
@@ -243,7 +242,7 @@ theorem isPullback_affineChart_infinityChart :
   · rw [affineChart_preimage_opensRange_infinityChart, Scheme.Opens.opensRange_ι]
 
 variable (S) in
-/-- The two charts cover `ℙ¹_S` (blueprint: `d-lines`). -/
+/-- The two charts cover `ℙ¹_S`. -/
 theorem opensRange_affineChart_sup_opensRange_infinityChart :
     (affineChart S).opensRange ⊔ (infinityChart S).opensRange = ⊤ := by
   rw [opensRange_affineChart, opensRange_infinityChart, eq_top_iff]
@@ -258,8 +257,8 @@ theorem opensRange_affineChart_sup_opensRange_infinityChart :
   · exact Or.inl hi
 
 variable (S) in
-/-- **The point at infinity** `∞ = [1 : 0]` of `ℙ¹_S`, the section `z = 0` of the chart at
-infinity (blueprint: `d-lines`). -/
+/-- **The point at infinity** `∞ = [1: 0]` of `ℙ¹_S`, the section `z = 0` of the chart at
+infinity. -/
 def infinity : S ⟶ ProjectiveLine S :=
   AffineSpace.zeroSection PUnit.{u + 1} S ≫ infinityChart S
 
@@ -270,8 +269,7 @@ lemma infinity_over : infinity S ≫ ProjectiveLine S ↘ S = 𝟙 S := by
 
 variable (S) in
 /-- **The complement of the affine chart is the point at infinity**: a point of `ℙ¹_S` lies
-outside the image of `affineChart` if and only if it lies on the section `∞` (blueprint:
-`d-lines`). -/
+outside the image of `affineChart` if and only if it lies on the section `∞`. -/
 theorem range_infinity :
     Set.range (infinity S) = ((affineChart S).opensRange : Set (ProjectiveLine S))ᶜ := by
   have hz := AffineSpace.range_zeroSection PUnit.{u + 1} S
@@ -295,8 +293,7 @@ theorem range_infinity :
     obtain ⟨s, rfl⟩ := hy
     exact ⟨s, rfl⟩
 
-/-- Over a field `K`, the complement of the affine chart of `ℙ¹_K` is the single point `∞`
-(blueprint: `d-lines`). -/
+/-- Over a field `K`, the complement of the affine chart of `ℙ¹_K` is the single point `∞`. -/
 theorem compl_opensRange_affineChart_eq_singleton (K : Type u) [Field K] :
     ((affineChart (Spec (.of K))).opensRange : Set (ProjectiveLine (Spec (.of K))))ᶜ =
       {infinity (Spec (.of K)) (IsLocalRing.closedPoint K)} := by
@@ -315,7 +312,7 @@ variable (F : Type u) [Field F] [Finite F]
   {Φ : ProjectiveLine (Spec (.of F)) ⟶ ProjectiveLine (Spec (.of F))}
 
 /-- **Frobenius on the affine chart**: the `q`-power Frobenius `Φ` of `ℙ¹_F`, `q = |F|`, acts
-on the affine chart `Spec F[t]` by `t ↦ t ^ q` (blueprint: `d-lines`). -/
+on the affine chart `Spec F[t]` by `t ↦ t ^ q`. -/
 theorem affineChart_comp_eq_of_isFrobenius (hΦ : Φ.IsFrobenius (Nat.card F)) :
     (AffineSpace.SpecIso PUnit.{u + 1} (.of F)).inv ≫ affineChart _ ≫ Φ =
       Spec.map (CommRingCat.ofHom (MvPolynomial.expand (Nat.card F)).toRingHom) ≫
@@ -324,7 +321,7 @@ theorem affineChart_comp_eq_of_isFrobenius (hΦ : Φ.IsFrobenius (Nat.card F)) :
   exact hΦ _ _ MvPolynomial.expand_natCard
 
 /-- **Frobenius on the chart at infinity**: the `q`-power Frobenius `Φ` of `ℙ¹_F`, `q = |F|`,
-acts on the chart at infinity `Spec F[z]` by `z ↦ z ^ q` (blueprint: `d-lines`). -/
+acts on the chart at infinity `Spec F[z]` by `z ↦ z ^ q`. -/
 theorem infinityChart_comp_eq_of_isFrobenius (hΦ : Φ.IsFrobenius (Nat.card F)) :
     (AffineSpace.SpecIso PUnit.{u + 1} (.of F)).inv ≫ infinityChart _ ≫ Φ =
       Spec.map (CommRingCat.ofHom (MvPolynomial.expand (Nat.card F)).toRingHom) ≫

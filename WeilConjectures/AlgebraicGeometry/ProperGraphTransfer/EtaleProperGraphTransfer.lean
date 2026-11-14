@@ -19,7 +19,6 @@ The graph in the pullback of a compactification is open, because the horizontal
 projection is étale, and proper, because its composite with the vertical projection
 is proper. Its extension by zero therefore equals its direct image. This gives a
 concrete transfer without using compact-support composition.
-(blueprint: def-pur-proper-clopen-graph-transfer).
 -/
 
 @[expose] public section

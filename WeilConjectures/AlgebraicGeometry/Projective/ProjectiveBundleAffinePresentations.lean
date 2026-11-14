@@ -20,8 +20,8 @@ import WeilConjectures.AlgebraicGeometry.RelativeProj.Functoriality
 /-!
 # Affine presentations of a finite-type projective bundle
 
-Source: Stacks Project, Morphisms, Tags 01WB and 087S, proofs; Sheaves of Modules,
-Tags 01B5 and 01AM (blueprint: lem-trf-projective-bundle-affine-presentations).
+Source: Stacks Project, Morphisms, Tags 01WB and 087S, proofs; Sheaves of Modules, Tags 01B5 and
+01AM.
 
 The local projective dimensions depend on the affine open. Neither the covering nor
 these dimensions have a finite uniform bound.
@@ -303,29 +303,8 @@ private theorem projectiveBundle_embedding_of_generators (X : Scheme.{u}) (E : X
 /-- A finite-type quasi-coherent module admits an affine open covering with finite
 nonempty generating families and closed embeddings of its restricted projective bundles
 into projective spaces of the corresponding dimensions, over the affine base.
-Source: Stacks Project, Morphisms, Tags 01WB and 087S, proofs; Sheaves of Modules,
-Tags 01B5 and 01AM (blueprint: lem-trf-projective-bundle-affine-presentations).
-
-Proof:
-1. Choose local finite generators and refine their domains to affine neighborhoods.
-   Restriction preserves their epimorphic evaluation. Append a zero generator and
-   reindex by a nonempty finite ordinal. The same generators witness finite type;
-   restriction along the open immersion preserves quasi-coherence.
-2. On any affine open, an epimorphism between quasi-coherent modules is surjective
-   on sections: its cokernel map is zero and the affine cokernel-image theorem
-   identifies its kernel with the evaluation range. The finite free biproduct
-   decomposition then shows that the restricted generators span the section module.
-3. Evaluate the polynomial variables at the symmetric images of these sections.
-   Degree-one spans and their powers prove that this map is graded. Span induction
-   and symmetric-algebra induction prove surjectivity. Polynomial extensionality
-   proves compatibility with restriction on affine opens.
-4. The affine polynomial equivalences for relative projective space turn these maps
-   into a surjective morphism of affine-basis graded algebras. Relative Proj
-   functoriality gives a closed immersion commuting with the structural maps.
-5. Compose with lem-trf-free-projective-bundle-base-change-space to obtain the
-   specified finite projective-space embedding. Its factorization is H-projectivity.
-   The point-indexed affine neighborhoods cover the base, including the empty base;
-   there is no uniform rank or covering cardinality bound. -/
+Source: Stacks Project, Morphisms, Tags 01WB and 087S, proofs; Sheaves of Modules, Tags 01B5 and
+01AM. -/
 theorem exists_affine_projectiveBundle_presentations (S : Scheme.{u}) (E : S.Modules)
     (hE : E.IsQuasiCoherentFiniteType) :
     ∃ (I : Type u) (U : I → S.Opens) (n : I → ℕ),

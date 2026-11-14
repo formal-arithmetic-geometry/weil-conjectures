@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.RationalP1.Scalar.RationalP1Scal
 import WeilConjectures.AlgebraicGeometry.RationalP1.Scalar.ScalarP1UnitMateComponent
 
 /-! # Component equations for scalar Chern base change
-
-Source: latest blueprint, sk-prop-diagonal-tower-coefficients.proof.md (3a)--(3c),
-and sk-prop-p1-adjunction-rational-triangle.proof.md, second identity.
 -/
 
 @[expose] public noncomputable section
@@ -35,8 +32,7 @@ attribute [local irreducible] firstProjection secondProjection square condensedA
 
 This is a strict component of scalar_chern_base_change. The proof follows
 the geometric exchange mate, the root-normalized Tate comparison, and the
-whole-system normalized Chern construction.
-(blueprint: lem-sfb-rational-p1-scalar-chern-base-change). -/
+whole-system normalized Chern construction. -/
 theorem scalar_chern_base_change_unit
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

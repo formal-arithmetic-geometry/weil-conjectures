@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
 /-! # The canonical section map through a factorization of scheme maps
 
 Source: Stacks Project, Tag 01CA, associativity and functoriality of tensor pullback.
-(blueprint: def-sbc-pullback-section-factorization)
 -/
 
 @[expose] public section
@@ -25,7 +24,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- Pull a section along v and identify the iterated pullback with h* M.
 
 Source: Stacks Project, Tag 01CA, tensor associativity; the pullback adjunction unit.
-(blueprint: def-sbc-pullback-section-factorization)
 
 This is the adjunction unit on sections followed by the canonical composition
 comparison. It is an explicit construction. Keeping this section map irreducible

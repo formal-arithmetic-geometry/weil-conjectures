@@ -10,10 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Kummer.KummerStrictAdjunctData
 import WeilConjectures.AlgebraicGeometry.Strict.StrictKummerUnitNormalization
 import WeilConjectures.AlgebraicGeometry.Kummer.KummerAdjunctFromUnit
 
-/-! # Strict Kummer comparison and adjunct compatibility
-
-Source: diagonal tower system proof, the target paragraph of step (3) and naturality in step (4).
-(blueprint: lem-sfb-kummer-strict-adjunct-compatibility). -/
+/-! # Strict Kummer comparison and adjunct compatibility -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -76,31 +73,7 @@ private theorem compatibility_from_normalized_target
   · simpa only [q, Functor.map_comp, Category.assoc] using
       hσ n S Q (ad.unit.app S ≫ U.map ((D.ordinary.π n).app S ≫ s.hom)) g hg
 
-/-- A strict Kummer comparison computes the adjunct of every residue lift.
-
-Source: diagonal tower system proof, target paragraph of step (3), and
-naturality in step (4)
-(blueprint: lem-sfb-kummer-strict-adjunct-compatibility).
-
-Proof: compute simultaneous reduction on a flat-term K-flat resolution of
-comparison units, comparing at each exponent with the two-term coefficient
-resolution. Exact comparison and Kummer exactness give only the roots kernel
-in degree minus one. The coefficient transition is multiplication by the prime
-in degree minus one and identity in degree zero; hence its action on the kernel
-is the actual power-prime roots transition. Good truncation in the category of
-strict systems gives H and its underlying roots isomorphism. Take b to be the
-negative normalized Kummer isomorphism, and use the roots-to-line comparison
-for t. This proves the displayed roots equation at every level.
-For the last assertion, compare evaluation of the same resolution with derived
-residue extension, then forget to abelian sheaves. The source counit and the
-quotient adjunction give the prescribed map g. The negative normalization of b
-gives minus the positive Kummer unit, preceded by the units comparison.
-Naturality of the derived adjunction unit for f therefore computes the adjunct
-of the evaluated arrow as minus f followed by this unit. If a residue class e
-restricts to that evaluated arrow, functoriality of exact scalar restriction
-and the equation for g identify its scalar adjunct with this computation.
-This assertion does not produce e, or claim that restriction is full on Ext.
-The residue lift is an independent input to this compatibility calculation. -/
+/-- A strict Kummer comparison computes the adjunct of every residue lift. -/
 theorem kummer_strict_adjunct_compatibility (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     (hW : IsUnit (ℓ : Γ(W, ⊤)))
     [HasDerivedCategory.{u + 1} (DiagonalAb W)]

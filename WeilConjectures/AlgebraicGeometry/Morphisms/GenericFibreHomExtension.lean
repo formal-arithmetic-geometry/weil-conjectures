@@ -32,19 +32,7 @@ namespace AlgebraicGeometry.Scheme
 /-- Restriction to the generic fibre is fully faithful on finite étale covers of a
 smooth family with geometrically connected fibres over an integral normal base.
 
-Source: Stacks Project, Tag 0BQM, proof (full faithfulness over the generic point).
-(blueprint: lem-sbc-finite-etale-generic-fibre-hom-extension)
-
-Proof: Smoothness preserves normality, and the smooth geometrically connected fibres
-are geometrically integral. If C is empty there is only one morphism between its covers.
-Otherwise flatness and openness, together with integrality of the base and its generic
-fibre, make C integral. Its generic point belongs to Cη, which is also normal integral.
-Restrict fη to the generic point of C. Full faithfulness in 0BQM extends this uniquely
-between the finite étale C-schemes X and Y. Restrict that extension back to Cη. Its
-restriction to the generic point agrees with fη; faithfulness of 0BQM for Cη makes them
-equal. The pullback comparison maps identify this equality with the displayed equation.
-The same faithfulness on C proves uniqueness of f. Finite étale covers need not be
-connected: the finite étale category in 0BQM includes all their components. -/
+Source: Stacks Project, Tag 0BQM, proof (full faithfulness over the generic point). -/
 theorem finiteEtale_genericFibre_hom_extension {S C : Scheme.{u}}
     [IsIntegral S] (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))
     (c : C ⟶ S) [Smooth c] [GeometricallyConnected c]

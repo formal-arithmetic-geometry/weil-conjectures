@@ -24,8 +24,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 variable (X : Scheme.{u}) (B B' : Type (u + 1)) [CommRing B] [CommRing B']
 /-- Restrict the comparison image of a normalization arrow to a slice and use the
-canonical coefficient comparison. Source: Stacks Tags 03DA and 098K.
-(blueprint: def-weil-pbc-slice-comparison-normalization-arrow). -/
+canonical coefficient comparison. Source: Stacks Tags 03DA and 098K. -/
 noncomputable def sliceComparisonNormalizationArrow (φ : B →+* B')
     {A : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B))}
     {A' : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B'))}
@@ -344,13 +343,7 @@ end TransportHelpers
 namespace AlgebraicGeometry.Scheme
 
 /-- A coefficient-normalization square on the pro-etale slice transports to the
-source scheme. Source: Stacks Tags 03DA and 098K, pasting coefficient and localization mates.
-(blueprint: lem-weil-pbc-proetale-normalization-square-transport).
-
-Proof: Paste the coefficient mate with the slice-to-source localization comparisons.
-The resulting identities at the two endpoints express the source normalization arrows
-as conjugates of their slice counterparts. Apply functoriality to the given square,
-use naturality of the coefficient comparison, and cancel the endpoint isomorphisms. -/
+source scheme. Source: Stacks Tags 03DA and 098K, pasting coefficient and localization mates. -/
 theorem sourceSliceNormalization_transport
     (X : Scheme.{u}) {R S : Type (u + 1)} [CommRing R] [CommRing S] (q : R →+* S)
     (A D : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)))

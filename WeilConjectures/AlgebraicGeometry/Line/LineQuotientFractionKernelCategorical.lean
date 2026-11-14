@@ -21,7 +21,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- A composite of module-sheaf morphisms is zero exactly when it vanishes on every section.
 Source: elementary extensionality for sheaves of modules.
-(blueprint: lem-trf-line-quotient-fraction-kernel-categorical).
 -/
 theorem comp_zero_iff_forall_section_zero {X : Scheme.{u}} {M N P : X.Modules}
     (f : M ⟶ N) (g : N ⟶ P) :

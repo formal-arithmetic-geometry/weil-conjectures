@@ -263,18 +263,7 @@ attribute [local instance] HasDerivedCategory.standard
 
 /-- A perfect scalar complex has an invertible intrinsic completion unit after
 completed constant realization.
-Source: Bhatt--Scholze, Proposition 6.6.11, reverse implication and Lemma 6.5.8.
-(blueprint: lem-weil-pbc-cech-perfect-model-completeness).
-
-Proof: realize finite projectives as retracts of finite sums of the coefficient
-unit. The inverse-limit coefficient unit is complete on every slice, by the
-multiplication-difference criterion and exact countable products on the pro-etale
-site. This criterion holds termwise for finite projective retracts and hence for
-the realized complex. Compare constant sheafification and scalar extension on the
-AsSmall site by their universal properties. The finite-projection coefficient
-comparison fixes each scalar and therefore identifies the Koszul units. The
-constant-completion reflector criterion makes the transported unit invertible;
-the exact derived equivalence reflects this property. -/
+Source: Bhatt--Scholze, Proposition 6.6.11, reverse implication and Lemma 6.5.8. -/
 theorem cechPerfectModel_intrinsicComplete (T : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A]
     (d : AdicCoefficientDatum A)

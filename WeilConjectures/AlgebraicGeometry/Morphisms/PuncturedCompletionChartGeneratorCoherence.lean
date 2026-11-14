@@ -14,7 +14,6 @@ import Mathlib.AlgebraicGeometry.Morphisms.Flat
 # Coherence on original elements of the affine section modules
 
 Source: Stacks Project, Tag 0BLH, first two proof paragraphs; Tag 05EL, item (1).
-(blueprint: lem-sbc-punctured-completion-affine-chart-generator-coherence)
 -/
 
 @[expose] public section
@@ -26,16 +25,14 @@ namespace AlgebraicGeometry.Scheme.CompletionGluingData
 
 
 /-- Sections with the structural action of the affine base.
-Source: Stacks Project, Tag 0BLH.
-(blueprint: lem-sbc-punctured-completion-affine-chart-generator-coherence) -/
+Source: Stacks Project, Tag 0BLH. -/
 private noncomputable def chartSections {R : Type u} [CommRing R]
     {Z : Scheme.{u}} (h : Z ⟶ Spec (.of R)) (W : Z.Opens) : ModuleCat R :=
   letI := Module.compHom Γ(Z, W) (chartScalarMap h W)
   ModuleCat.of R Γ(Z, W)
 
 /-- Restriction of sections is linear for the structural actions.
-Source: Stacks Project, Tag 0BLH.
-(blueprint: lem-sbc-punctured-completion-affine-chart-generator-coherence) -/
+Source: Stacks Project, Tag 0BLH. -/
 private noncomputable def chartRestriction {R : Type u} [CommRing R]
     {Z : Scheme.{u}} (h : Z ⟶ Spec (.of R)) {W V : Z.Opens} (hVW : V ≤ W) :
     chartSections h W →ₗ[R] chartSections h V where
@@ -101,18 +98,6 @@ no transition or cocycle equality is assumed or asserted.
 
 Source: Stacks Project, Tag 0BLH, second proof paragraph; Tag 01I6, sections of a
 principal open in an affine scheme.
-(blueprint: lem-sbc-punctured-completion-affine-chart-generator-coherence)
-
-Proof: Write V_l for the inverse image of D(f_l). The double intersection V_i intersect
-V_j is the principal open cut out by the structural image of f_i in the affine V_j,
-so it is affine. The triple intersection is its principal open cut out by f_k.
-The scalar formula b_scalar turns b_ij into an A-linear equivalence with its section
-ring, with the structural A-action. The affine principal-open localization theorem
-identifies localization of this section ring at f_k with the triple section ring.
-Compose the localization of b_ij with this equivalence. Both maps send x/1 to the
-restriction of b_ij(x), giving the asserted formula. Replacing the displayed triple
-intersection by an equal open W just transports the section equivalence. These maps
-are isomorphisms also for empty principal opens, whose sections are the zero ring.
 -/
 private theorem exists_chart_section_localization
     {A : Type u} [CommRing A] [IsLocalRing A]
@@ -243,23 +228,6 @@ map, completed-model comparison, square equation, or d_i map occurs in the concl
 
 Source: Stacks Project, Tag 0BLH, first two proof paragraphs; Tag 01I6, affine section
 modules and base change.
-(blueprint: lem-sbc-punctured-completion-affine-chart-generator-coherence)
-
-Proof: Put V_l=q inverse-image D(f_l), O=Y times_U (Spec C restricted to U), and p:O to Y.
-The double intersection V_i intersect V_j is the principal open cut out by f_i in the
-affine V_j, hence affine. It maps into U. Pasting the defining pullback with the
-restriction pullback identifies
-its inverse image in O with its affine base change along Spec C to Spec A.
-The affine fibre-product section theorem identifies the sections of this inverse
-image with C tensor_A Gamma(Y,V_i intersect V_j). On pure tensors its map is z tensor a
-sent to the structural image of z multiplied by p's pullback of a. By b_scalar, the
-supplied additive equivalence b_ij is A-linear for the structural scalar action on
-its section ring. Tensoring this equivalence with C and composing with the affine
-fibre-product section equivalence gives Q, including the asserted pure-tensor formula.
-The construction uses actual tensor and section maps. Empty intersections have zero
-section modules and localization at zero gives zero modules, so the same construction
-works there. No flatness of the completion map is required, since an affine fibre
-product is the spectrum of the tensor product for every ring homomorphism.
 -/
 private theorem exists_chart_tensor_restriction
     {A : Type u} [CommRing A] [IsLocalRing A]
@@ -454,42 +422,6 @@ This checks maps already supplied; it constructs no section module or equivalenc
 
 Source: Stacks Project, Tag 0BLH, second proof paragraph (the object check);
 Tag 05EL, item (1), its square and cocycle clauses.
-(blueprint: lem-sbc-punctured-completion-affine-chart-generator-coherence)
-
-Proof: every V_i is affine by hypothesis.
-First, b_right on the diagonal i=j and b_scalar show that c_i intertwines
-A-scalars with the structural action on Gamma(Y,V_i). The two b formulas
-identify alpha_ij on chart generators with restriction from V_i to V_i intersect V_j.
-Use b_scalar and the affine basic-open localization property to extend these
-identifications to fractions: b_ij(m/f_i^a) is the restriction of c_j(m) divided
-by the image of f_i^a. Localizing b_ij further at f_k identifies the iterated
-module with sections on V_i intersect V_j intersect V_k. The target section
-map is an equivalence, since this is a principal open in the affine double
-intersection. Under that equivalence the two cocycle routes take m to its
-restriction to the triple intersection. On a fraction (m/f_j^a)/f_k^b both
-routes divide that restriction by f_j^a f_k^b. The canonical swap exchanges
-these denominators. In particular, setting both denominators equal to one gives
-the asserted equality for each original chart element; the source restriction
-maps coincide by functoriality of the structure presheaf.
-
-For square, localize d_j at f_i. Structural C-linearity d_scalar and d_chart
-identify the base change of alpha_ij on every pure tensor with restriction
-between the completed principal opens: z tensor (m/f_j^a) maps to z times the
-pullback restriction of c_i(m), divided by the image of f_j^a. This follows
-first at denominator one from naturality of p.app and b_left and b_right,
-then for all denominators because their structural actions are invertible
-on the appropriate open. Additivity extends it to every tensor. The comparison
-map sends (z tensor m)/1 to z tensor (m/1), and its fraction formula follows
-by the same uniqueness property. Now d_prime says both square routes on an
-original m' are restriction of D.toCompleted.appTop(e(m')) to the completed
-double intersection. On (m'/f_i^a)/f_j^b both divide that same section by
-f_i^a f_j^b. D.over ensures that the structural images of these denominators
-agree on the two sides. The localized d_j is an equivalence to sections there,
-so their images determine equality. Setting both denominators equal to one
-proves the asserted square equation on each original completed section. There is no flatness
-or covering assumption. Zero principal
-opens give zero modules and all identities hold there; with t=0 the clauses
-are vacuous.
 -/
 theorem affine_chart_transition_generator_coherence
     {A : Type u} [CommRing A] [IsLocalRing A]

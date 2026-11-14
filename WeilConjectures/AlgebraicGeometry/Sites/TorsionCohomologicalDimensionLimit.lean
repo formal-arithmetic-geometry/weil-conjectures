@@ -576,7 +576,7 @@ end
 
 
 
-/-- Blueprint `lemma-uniform-bounds-pro-etale-affines`: Passing a uniform torsion bound to an affine
+/-- Passing a uniform torsion bound to an affine
 limit.
 
 Let `X = lim Xᵢ` be the limit of a cofiltered system `D` of quasi-compact quasi-separated

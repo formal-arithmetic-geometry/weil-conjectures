@@ -523,9 +523,8 @@ import WeilConjectures.AlgebraicGeometry.Integral.IntegralContinuousEncodingCons
 /-!
 # A lisse finite-extension sheaf has a constructible integral lattice
 
-Source: Bhatt--Scholze, The pro-etale topology for schemes, Lemma 6.8.13,
-Definitions 6.8.1, 6.8.3 and 6.8.10; Lemma 6.8.2(1)
-(blueprint: lem-weil-pbc-lisse-e-constructible-integral-lattice).
+Source: Bhatt--Scholze, The pro-etale topology for schemes, Lemma 6.8.13, Definitions 6.8.1, 6.8.3
+and 6.8.10; Lemma 6.8.2(1).
 -/
 
 @[expose] public section
@@ -581,23 +580,7 @@ private theorem internal_lisse_model
 /-- A lisse rational sheaf has a constructible integral model, with no global freeness
 requirement on that model. `WithAbs` equips the field with its canonical absolute-value
 topology and transports its valuation ring; `ULift` changes only the coefficient size.
-Source: Bhatt--Scholze, Lemma 6.8.13
-(blueprint: lem-weil-pbc-lisse-e-constructible-integral-lattice).
-
-Proof:
-1. Replace E by an algebra-isomorphic small finite extension K. The spectral
-absolute value is invariant under this equivalence, giving isomorphisms of the
-integral and rational continuous coefficient sheaves and their scalar map.
-2. The section-action equivalence transports L to a locally finite free internal
-continuous K-module. The stratified lattice theorem gives integral models on a
-finite stratification, using etale-local lattice existence and finite-etale descent.
-3. Transport those models to the actual inverse-image coefficient rings. The finite
-stratification gluing theorem constructs an internal constructible integral model
-whose actual scalar extension is the internal rational module.
-4. Encode the integral model sectionwise and transport its coefficients back to E.
-Integral constructibility is invariant under this encoding. The scalar-extension
-comparison and the rational equivalence's counit give the required isomorphism.
-The construction includes empty schemes and rank zero. -/
+Source: Bhatt--Scholze, Lemma 6.8.13. -/
 theorem exists_constructible_integral_lattice
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

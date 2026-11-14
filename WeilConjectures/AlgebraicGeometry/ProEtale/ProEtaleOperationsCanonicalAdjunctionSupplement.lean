@@ -12,8 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleOperationsCanonicalAdjun
 /-!
 # Canonically normalized pro-etale module adjunctions
 
-Source: Stacks Project, Modules on Sites, lemma-adjoint-push-pull-modules;
-Cohomology on Sites, Tag 07A6 (blueprint: prose-03-02).
+Source: Stacks Project, Modules on Sites; Cohomology on Sites, Tag 07A6.
 -/
 
 @[expose] public section
@@ -317,8 +316,7 @@ private theorem canonicalHomEquiv_naturality_right
 
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The canonical derived adjunction is induced from the normalized module adjunction.
-Source: Stacks, Tag 07A6 and Derived Categories, Tag 0DVC
-(blueprint: prose-03-02). -/
+Source: Stacks, Tag 07A6 and Derived Categories, Tag 0DVC. -/
 noncomputable def proEtaleRingDerivedAdjunction :
     proEtaleRingDerivedPullback f R S c ⊣ proEtaleRingDerivedDirectImage f R S c :=
   (proEtaleRingModuleAdjunction f R S c).mapDerivedCategoryRightDerivedAdjunction

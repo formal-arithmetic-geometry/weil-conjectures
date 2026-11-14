@@ -29,7 +29,6 @@ a prime localization of `R/(f)`, without using regularity. The localization is r
 local by the assumed regularity of `R/(f)`. Apply the strict-henselization regularity
 equivalence to deduce regular locality of the quotient, hence its Noetherianity. Finally
 apply regular-local localization at every prime of the quotient.
-(blueprint: lem-sbc-strict-hensel-regular-divisor-quotient-regular-part-aux)
 -/
 theorem strictHenselizationRing_divisor_quotient_noetherian_and_local_regular
     (R : CommRingCat.{u}) [IsRegularRing R] (f : R)

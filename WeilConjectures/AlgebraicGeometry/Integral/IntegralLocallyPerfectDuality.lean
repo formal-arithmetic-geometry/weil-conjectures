@@ -16,8 +16,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Integral local models are perfect on the ringed site
 
-Source: Bhatt--Scholze, Proposition 6.6.11 and Lemma 6.3.14(1)
-(blueprint: lem-weil-pbc-integral-locally-perfect-duality).
+Source: Bhatt--Scholze, Proposition 6.6.11 and Lemma 6.3.14(1).
 -/
 
 @[expose] public noncomputable section
@@ -96,21 +95,7 @@ private theorem identityLocalModel (X : Scheme.{u}) (R : Rings X) (U : X.ProEt)
 
 /-- The completed constant local-model condition gives actual perfectness on the
 ringed site with its independent coefficient universe.
-Source: Bhatt--Scholze, Proposition 6.6.11 and Lemma 6.3.14(1)
-(blueprint: lem-weil-pbc-integral-locally-perfect-duality).
-
-Proof: pull the specified covering sieve back to each object of the site. On a
-member of that sieve the given model is a completed constant perfect complex.
-Normalize the identity inverse image: its coefficient ring is canonically
-isomorphic to the original one, and scalar restriction along this isomorphism is
-an equivalence. Thus its model isomorphism is an isomorphism after ordinary slice
-restriction. Choose the bounded strict finite-free-retract model of the constant
-perfect complex, and restrict this model to the slice. Restriction is additive,
-exact, and preserves the regular module and finite products, so it preserves the
-bounded model and its displayed splittings. These local models imply ringed-site
-perfectness by the local-model characterization, whose proof transports them to a
-global K-injective representative. The same argument includes empty covers and
-zero perfect models. -/
+Source: Bhatt--Scholze, Proposition 6.6.11 and Lemma 6.3.14(1). -/
 theorem integralLocallyPerfect_sitePerfect
     (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (L : DerivedCategory (pbcModules X (pbcAdicCompletion X d)))

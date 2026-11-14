@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.NativeFrobenius.NativeFrobeniusH
 
 /-! # Naturality of the native small-model Hom comparison
 
-Source: Stacks 03D6 and 03EO (blueprint: lem-sf-native-frobenius-hom-naturality).
+Source: Stacks 03D6 and 03EO.
 -/
 
 @[expose] public noncomputable section
@@ -23,7 +23,7 @@ attribute [local irreducible] comparisonRing nativeHom adicSectionModuleEquivale
   inverseNativeHomComparison SheafOfModules.homObjMap
 
 /-- The pointwise Hom comparisons commute with both variable maps.
-Source: Stacks 03EO (blueprint: lem-sf-native-frobenius-hom-naturality).
+Source: Stacks 03EO.
 Compose the small-site naturality square and the inverse-native naturality square,
 after normalizing the curried ordinary Hom map with its composition equation. -/
 theorem homComparison_naturality (H : AdicModuleHomComparisonCore l Y)

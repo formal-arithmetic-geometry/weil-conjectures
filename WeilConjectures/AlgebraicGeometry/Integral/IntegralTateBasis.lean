@@ -13,9 +13,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal
 /-!
 # Local bases of the integral Tate module
 
-Source: Bhatt–Scholze, The pro-étale topology for schemes, Section 6.8, and the
-Tate-twist unit of the current blueprint.
-(blueprint: lem-poincare-integral-tate-local-basis)
+Source: Bhatt–Scholze, The pro-étale topology for schemes, Section 6.8.
 -/
 
 @[expose] public section
@@ -47,16 +45,7 @@ private theorem weaklyEtale_preservesLimits {X Y : Scheme.{u}} (f : Y ⟶ X) [We
 
 /-- The integral Tate module has a pro-étale local basis.
 
-Source: the current blueprint, `definition-tate-twists`, integral limit and coefficient
-extension; Bhatt–Scholze, Section 6.8.
-
-Proof: a single cover identifies the two finite-level diagrams. Weakly étale inverse
-image is restriction along the localized site and preserves the countable limits;
-the module forgetful functors lift this preservation to module objects. Apply the
-natural isomorphism to the limits, then the proved residue coefficient limit cone.
-The inverse image of the regular module is the regular module by the unit comparison.
-The empty scheme is included, since the finite-level cover may be empty.
-(blueprint: lem-poincare-integral-tate-local-basis) -/
+Source: Bhatt–Scholze, Section 6.8. -/
 theorem tateModule_locally_trivial
     (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : IsUnit (ℓ : Γ(X, ⊤)))
     : ∃ 𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ i : 𝒰.I₀,

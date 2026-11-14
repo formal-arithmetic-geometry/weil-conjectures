@@ -24,7 +24,6 @@ import Mathlib.FieldTheory.SeparableDegree
 # Local algebra of tame trait normalization
 
 Source: Stacks Project, Tag 0EYH.
-(blueprint: lem-sbc-stalk-normalization-trait-section-residue-separable)
 -/
 
 @[expose] public section
@@ -134,20 +133,7 @@ set_option maxHeartbeats 500000 in
 -- Comparing the dependent normalization types needs this elaboration budget.
 /-- Residue extensions at points above the closed trait section are separable.
 
-Source: Stacks Project, Tag 0EYH, the tame charts used in the trait paragraph of 0EYJ.
-Proof: Apply the jointly surjective affine etale trait charts already constructed
-in GaloisCover.stalk_normalization_trait_charts. Each chart is a finite product
-of standard root algebras with positive invertible exponents. The root-product
-residue calculation gives separability on this affine model. Transport it through
-the chart isomorphism over its base. Lift the original source point and a base
-chart point to the pullback. The etale base chart has separable residue extensions,
-so transitivity gives separability from the original base residue field to the
-pullback residue field. Pullback commutativity identifies that map with the one
-factoring through the original source residue field. Its embedding into the
-pullback residue field descends separability. Finally the residue-field-map algebra
-and the canonical local stalk-map quotient algebra agree. This proof works at
-all points, hence also at the closed section, without a rational-point assumption.
-(blueprint: lem-sbc-stalk-normalization-trait-section-residue-separable) -/
+Source: Stacks Project, Tag 0EYH, the tame charts used in the trait paragraph of 0EYJ. -/
 theorem GaloisCover.stalk_normalization_trait_section_residue_separable {S C : Scheme.{u}}
     [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]

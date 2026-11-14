@@ -14,8 +14,7 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Iso
 /-!
 # An extra left adjoint for affine closed pro-etale inverse image
 
-Source: Stacks Project, Tag 09BL, clause (3), using Tag 09BK
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tag 09BL, clause (3), using Tag 09BK.
 -/
 
 @[expose] public section
@@ -299,26 +298,7 @@ private theorem quotientInverseImage_isRightAdjoint
 immersion of affine schemes has a left adjoint. The adjunction provides the bijections
 `Hom(L G, F) ≃ Hom(G, i⁻¹ F)`, natural in both `G` and `F`.
 
-Source: Stacks Project, Tag 09BL, clause (3), and Tag 09BK
-(auxiliary; not a blueprint node).
-
-Proof plan:
-1. Restrict to the full affine ind-etale bases. Cover-density and the induced topology
-   give restriction equivalences R_X and R_Z, with quasi-inverses E_X and E_Z
-   (proposition-pro-etale-affines-form-basis and lem-pc-fppf-dense-sheaf-equivalence).
-2. Put T = R_Z i⁻¹ E_X for the ordinary base-change inverse image. The canonical
-   closed-site lift v and its evaluation formula identify T(F)(V) naturally with F(v(V))
-   for weakly contractible V (lem-weil-pbc-affine-closed-site-functor-properties and
-   lem-weil-pbc-affine-closed-inverse-image-evaluation). Transport the ordinary
-   inverse-image/direct-image adjunction through the equivalences; T preserves finite limits.
-3. Sheafify the representable presheaf of v(V). Sheafification's universal property
-   and Yoneda identify maps from this sheaf to F naturally with F(v(V)), hence T(F)(V)
-   (def-weil-pbc-sheafification and lem-galois-yoneda-hom-bijection).
-4. The basis has covers by weakly contractible objects
-   (lem-weil-pbc-ind-etale-basis-wcontractible-cover). Apply
-   lem-weil-pbc-topos-lower-shriek-existence-on-covering-generators to obtain L ⊣ T.
-5. Transport L back as E_X L R_Z. Full faithfulness of both restriction equivalences,
-   L ⊣ T, and E_X R_X ≅ id give the required Hom bijections, naturally in both variables.
+Source: Stacks Project, Tag 09BL, clause (3), and Tag 09BK.
 -/
 theorem exists_affineClosedInverseImageLeftAdjoint {Z X : Scheme.{u}}
     [IsAffine Z] [IsAffine X] (i : Z ⟶ X) [IsClosedImmersion i] :

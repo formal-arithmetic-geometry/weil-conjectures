@@ -20,28 +20,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Tag 0GLZ, the adjunction construction and final paragraph.
-(blueprint: lem-cbc-comparison-section-adjunction).
-Proof: restrict a pro-etale sheaf G to Y_et; etale covers are pro-etale covers, so
-this restriction is a sheaf. Concretely use restriction along the composite of
-`Scheme.toProEt Y.left` with `MorphismProperty.Over.map` for Y.hom; both functors
-are continuous by the existing site instances. For alpha : F -> nu_* G use restriction to Y
-times_X U
-to obtain F -> f_* (G|Y_et). Transpose under f inverse image and evaluate at the
-identity of Y to obtain beta_Y. Two successive inverse-image adjunction transposes
-show naturality under arbitrary X-maps Z -> Y: both restrict alpha_U(s) to Z times_X U.
-These maps are natural in F and G. Conversely send beta to nu_*(beta) composed with
-the etale diagonal-unit map, decoded by e inverse. The etale inverse-image/restriction
-isomorphism identifies the first composite with alpha. For the other composite, fix Y and let V
-range over etale Y-schemes.
-Etale inverse image is restriction, so composition identifies (f inverse image F)(V)
-with A(F)(V viewed over X). The components beta_V consequently define a morphism
-f inverse image F -> G_Y. Naturality of beta at Y times_X U -> U and the diagonal
-unit formula show that its transpose is the defining map b_Y. Uniqueness of
-adjunction transpose therefore identifies it with t_Y. Evaluate at V = Y to recover
-the original beta_Y. These mutually inverse natural Hom
-bijections define adj. Their unit is precisely the diagonal-unit map decoded by e,
-which proves the displayed formula. -/
+/-- Source: Stacks Project, Tag 0GLZ, the adjunction construction and final paragraph. -/
 theorem proEtaleComparisonSectionAdjunction (X : Scheme.{u})
     (A : Sheaf X.smallEtaleTopology (Type (u + 1)) ⥤
       Sheaf (Scheme.ProEt.topology X) (Type (u + 1)))

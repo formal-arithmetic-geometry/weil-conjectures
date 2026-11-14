@@ -13,9 +13,7 @@ import Mathlib.LinearAlgebra.ExteriorPower.Basis
 
 /-! # Exterior sheafification on a finite-free open
 
-Source: the coordinate expansion of determinant inversion in Stacks Project, Tag 0BRT,
-recorded in `lem-sc-exterior-dual-local-frames`, step 2.
-(blueprint: lem-sc-exterior-sheaf-local-free-comparison).
+Source: the coordinate expansion of determinant inversion in Stacks Project, Tag 0BRT, step 2.
 -/
 
 @[expose] public section
@@ -207,26 +205,7 @@ private theorem local_unit_isIso (X : Scheme.{u})
 set_option linter.unusedVariables false in
 /-- On a finite-free open, exterior sheafification preserves sectionwise exterior powers
 and gives the free sheaf indexed by increasing subsets.
-Source: step 2 of `lem-sc-exterior-dual-local-frames`, expanding determinant inversion in
-Stacks Project, Tag 0BRT (lemma-smooth-proper); Mathlib `Module.Basis.exteriorPower`.
-(blueprint: lem-sc-exterior-sheaf-local-free-comparison).
-
-Proof: evaluation of sheaves of modules preserves finite products and is additive,
-so it preserves finite coproducts. Comparing the evaluated free-sheaf cofan with the
-Finsupp cofan gives a sectionwise basis whose vectors are the canonical free sections.
-Pull this basis back through the frame and take its increasing exterior basis. The
-basis equivalence with the free sheaf indexed by n-element subsets is natural: original
-basis vectors commute with restriction, and exterior restrictions take pure wedges to
-the wedges of their restrictions. Check the required equality on the exterior basis,
-then assemble the sectionwise equivalences into a presheaf isomorphism.
-This shows that the restricted exterior presheaf is a sheaf. The sheafification unit
-is locally bijective; restriction along the cocontinuous over-category forgetful functor
-preserves local bijectivity. As a map between sheaves on that over site, the restricted
-unit is therefore an isomorphism. Compose its inverse with the coordinate isomorphism
-and lift through the fully faithful forgetful functor to obtain the free sheaf
-isomorphism. Evaluation at the over object V → U gives bijectivity of the original unit
-on V. For n=0 the index is a singleton; for n>r it is empty. No hypothesis that the ring
-is nonzero is used, so empty opens and zero rings are also covered. -/
+Source: expanding determinant inversion in Stacks Project. -/
 theorem exteriorSheaf_local_free_comparison (X : Scheme.{u}) (M : X.Modules)
     (n : ℕ) (U : X.Opens) (r : ℕ)
     (e : M.over U ≅ SheafOfModules.free (ULift.{u} (Fin r))) :

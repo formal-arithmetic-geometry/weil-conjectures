@@ -37,8 +37,7 @@ private theorem signedSource_coefficient_naturality
     congrArg (fun z ↦ (n * (n + 1) / 2).negOnePow • z) h
 
 /-- Naturality transports the K-injective cone boundary to any coefficient.
-Source: Stacks Project, Tag 08JC, the evaluation-characterized transport in
-lemma-RHom-triangulated (blueprint: lem-sf-native-hom-localized-cone-boundary-transport).
+Source: Stacks Project, Tag 08JC.
 
 For an isomorphism from the localization of a K-injective complex to a derived
 object, naturality of the evaluation comparison and of the signed source mate

@@ -201,18 +201,7 @@ private noncomputable def finiteRingTowerModelIso
 
 /-- A finite constant ring tower has a representing diagram and a limit cone which
 remains limiting after scheme base change.
-Source: Stacks Project, Tags 0H7J, 03YW, 098T and 097D.
-(blueprint: lem-weil-pbc-proetale-finite-tower-representation)
-
-Proof: Shrink the finite carriers to the scheme universe and regard them as a diagram
-of finite discrete profinite spaces. Apply the profinite test-object functor to its
-limit cone. The locally constant integer algebra functor is a right adjoint; Spec and
-slice base change preserve limits. Thus the image cone and its base change are limits
-in the ambient slice categories, hence in their full pro-etale subcategories. Finite
-test objects are finite disjoint unions of the base. The canonical finite-constant
-representation identifies their Yoneda sheaves with the underlying constant ring
-sheaves, naturally in every ring transition. Forgetting commutes with sheafification.
-The empty finite carrier is covered by the same construction. -/
+Source: Stacks Project, Tags 0H7J, 03YW, 098T and 097D. -/
 theorem proEtaleFiniteTower_representableLimit
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (Q : ℕᵒᵖ ⥤ CommRingCat.{u + 1}) [∀ n : ℕᵒᵖ, Finite (Q.obj n)] :

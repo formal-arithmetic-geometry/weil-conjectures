@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.Proj.ProjScalarExtensionTwistUnit
 
 /-! # ProjScalarExtensionTwistFractionLaws
 
-Source: Stacks Project, Constructions, Tags 01N2, 01MY and 01MZ.
-(blueprint: lem-sfb-proj-scalar-extension-twist-fraction-laws). -/
+Source: Stacks Project, Constructions, Tags 01N2, 01MY and 01MZ. -/
 
 @[expose] public section
 
@@ -30,24 +29,7 @@ namespace AlgebraicGeometry.Proj
 
 /-- A normalized comparison has the uniqueness, product, unit and identity laws.
 The homogeneous-section law is proved directly in the importing item, using denominator one.
-Source: Stacks Project, Constructions, Tags 01MY, 01N2 and 01MZ.
-
-Proof: Restrict to standard affine opens. Pullbacks of homogeneous fractions, with
-coefficients on the inverse-image open, generate the pullback section modules by the
-quasi-coherent affine pullback theorem. The displayed normalization determines their images:
-psi(b) is invertible on that open, so the denominator-multiplied equation determines the
-image of a/b. Hence two normalized comparisons agree on generators. Affine adjunction and
-gluing show that they agree as sheaf maps, and isomorphism extensionality gives uniqueness.
-For products, choose a common standard-open refinement and homogeneous fraction
-representatives for both factors. The two expressions both give
-ce psi(ab)/psi(f)^(m+n). The affine tensor-sections and pullback--tensor comparisons carry
-this calculation to the multiplication square. In degree zero the same formula
-h tensor c mapped to c psi(h) is the structural pullback map, proving the unit clause.
-For the identity scheme map, the normalized adjunction gives the identity-pullback
-isomorphism u tensor c mapped to cu. Its fraction formula is the identity normalization.
-The uniqueness argument just proved identifies every normalized identity comparison with
-this isomorphism. The argument includes empty opens and noninvertible twists.
-(blueprint: lem-sfb-proj-scalar-extension-twist-fraction-laws). -/
+Source: Stacks Project, Constructions, Tags 01MY, 01N2 and 01MZ. -/
 theorem scalarExtension_twist_fraction_laws
     {R S A B : Type u} [CommRing R] [CommRing S] [CommRing A] [CommRing B]
     [Algebra R A] [Algebra S B]

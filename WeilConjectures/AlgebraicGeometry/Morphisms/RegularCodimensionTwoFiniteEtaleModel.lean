@@ -21,8 +21,7 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.FlatDepthTwoFiniteFormallyUnr
 /-!
 # Finite etale model across a regular codimension-two boundary
 
-Source: Stacks Project, Tags 0BMA and 0EY7.
-(blueprint: lem-sbc-regular-codimension-two-finite-etale-model)
+Source: Stacks Project, Tags 0BMA and 0EY7
 -/
 
 @[expose] public section
@@ -64,30 +63,7 @@ private theorem depth_two_of_regular_local (R : Type u) [CommRing R]
 
 /-- A finite etale restriction extends across a regular codimension-two boundary.
 
-Source: Stacks Project, Tags 0BMA, 0EY7, and 0EY6(2).
-(blueprint: lem-sbc-regular-codimension-two-finite-etale-model)
-
-Proof: At every boundary point, a regular system of parameters is a regular
-sequence of length the Krull dimension. Its length is one of the lengths
-in the supremum defining depth, so the target stalk has depth at least two.
-Apply the global depth-two finite extension theorem to the etale restriction
-of p over V. This gives a finite r with source depth at least two over the
-boundary and the prescribed isomorphism over V.
-
-Tag 0BMA gives punctured local purity at each boundary stalk. Apply the
-local-purity flatness theorem to r: its finite flat target locus contains V;
-if its closed complement were nonempty, an irreducible-component generic
-point s would have all proper generalizations in that locus. Over Spec O(L,s),
-the punctured restriction is etale by flat depth-two purity. Local purity
-extends it to a finite etale model. Depth-two uniqueness identifies the
-model with the base change of r, and flat descent puts s in the flat locus,
-a contradiction. Hence r is flat everywhere.
-
-The flat depth-two extension criterion makes r formally unramified. Its
-finiteness gives local finite presentation, so r is etale. Retain the source
-boundary depth bound and invert the restriction isomorphism to obtain the
-required comparison with p. No global quasi-compactness or quasi-separatedness
-is needed. Empty covers and V = L are included in the same argument. -/
+Source: Stacks Project, Tags 0BMA, 0EY7, and 0EY6(2). -/
 theorem exists_finite_etale_depth_two_model
     {L E : Scheme.{u}} [IsLocallyNoetherian L] (V : L.Opens)
     (hboundary : ∀ y : L, y ∉ V → IsRegularLocalRing (L.presheaf.stalk y) ∧

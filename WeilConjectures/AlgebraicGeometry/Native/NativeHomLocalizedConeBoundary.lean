@@ -27,35 +27,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- On a localized ordinary cone triangle the specified signed boundary makes
 contravariant native Hom into a distinguished triangle.
-Source: Stacks Project, Tag 08JC, the cone calculation in lemma-RHom-triangulated
-(blueprint: lem-sf-native-hom-localized-cone-boundary).
-
-Proof: represent M by a K-injective complex I. Use the native Hom model U,
-whose differential at product index p is (-1)^p times postcomposition by d_I
-minus precomposition by the source differential. For Cone(f)^p=G^p ⊕ E^(p+1),
-write its two restrictions as x_p and a_p. The signed bifunctor cone
-isomorphism sends these to (y,x) in Cone(U(f))[-1], with
- y_j=(-1)^(j-1)*a_(j-1); its inverse has a_p=(-1)^p*y_(p+1).
-In these coordinates the differential is (-d*y-U(f)*x,d*x), and restriction
-to G is projection to x. Thus the first two triangle squares agree with the
-inverse rotation of the cone triangle of U(f).
-For the third square, transpose the displayed parameter-shift mate under
-total-tensor evaluation. The raw mate at -1 reindexes the source product factor p to p-1 with
-coefficient (-1)^(p-1): the argument tensor shift crosses the source degree
-p-1. Multiplication by (-1)^q(1)=-1 changes this to (-1)^p, exactly the inverse
-of the ordinary signed Hom shift at -1. Equivalently, for a split sequence
-with connecting cochain h_p, the reversed Hom connecting map at the factor
-C^p -> I^(p+n+1) is (-1)^(p+1) times precomposition by h_p. Expanding the
-opposite third arrow followed by the corrected mate gives the same coefficient.
-Composing with the cone comparison therefore leaves the inclusion of y.
-This identifies the actual third arrow written
-below, rather than an unspecified completion. Apply Q and the natural,
-evaluation-characterized qhInternalHomToIhom isomorphisms for I. Hom into a
-K-injective complex inverts quasi-isomorphisms. Transport along Q(I) ≅ M,
-using naturality of the mate in its coefficient. The mapping cocone triangle
-is distinguished, so the displayed triangle is distinguished as well. This
-uses only ordinary cones; no assertion about arbitrary distinguished input
-triangles is assumed. -/
+Source: Stacks Project, Tag 08JC. -/
 theorem nativeHom_localized_cone_boundary
     {C : Type d} [Category.{u + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C]

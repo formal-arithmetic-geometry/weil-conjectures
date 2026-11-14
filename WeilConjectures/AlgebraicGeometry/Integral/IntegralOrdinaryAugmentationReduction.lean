@@ -13,9 +13,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.SixFunctors.PrincipalMilno
 
 /-! # Reduction of the ordinary strict quotient augmentation
 
-Source: Stacks Project, proetale.tex, Tag 099M, lemma-naive-completion;
-algebraization.tex, principal Koszul argument.
-(blueprint: lem-sfb-integral-ordinary-augmentation-reduction).
+Source: Stacks Project, Tag 099M.
 -/
 
 @[expose] public section
@@ -41,31 +39,7 @@ strict quotient augmentation is invertible after derived reduction modulo the pr
 There is no left-derived reduction functor in this statement, and no natural
 transformation on the derived category has to be constructed.
 
-Source: Stacks Project, proetale.tex, Tag 099M, lemma-naive-completion, and
-algebraization.tex, the principal Koszul proof of derived completion
-(blueprint: lem-sfb-integral-ordinary-augmentation-reduction).
-
-Proof: the cokernel property and the monomorphism hypothesis identify the level n
-quotient complex with the cone of multiplication by ell^(n+1) on P. The comparison
-sends the degree-zero inclusion to the specified quotient projection. Uniqueness of
-cokernel maps identifies the quotient transitions with the cone maps (ell,1).
-An additive equivalence preserves integer multiplication on every term. Use the source
-successor lifts at index n+1 to match this positive-exponent convention.
-Apply the additive coefficient equivalence; it commutes with products and with the
-total right-derived limit, by its exact inverse and the universal derived comparison.
-The finite free resolution [Z --ell--> Z] computes reduction modulo ell, so that
-reduction commutes with products, the Roos cone, and the specified augmentation.
-In the twice-reduced Koszul tower, the transition on the extra negative summand is
-zero: the homotopy killing ell in the first reduction identifies the tower, in the
-pro-derived category, with the constant first reduction. The standard pro-isomorphism
-argument for Milnor triangles therefore makes the induced map on limits an isomorphism.
-Use the zero shifted-product coordinate of the strict quotient augmentation throughout:
-it is the product of the quotient maps in the unshifted coordinate. The ordinary
-constant/limit unit and the given derived comparison give precisely this lift, by
-naturality of that comparison. Thus the isomorphism is the displayed map, rather than
-an unspecified map with the same level projections. This argument uses no boundedness
-or K-flatness of P: the degreewise monomorphisms already make the quotient sequences
-short exact. It applies to the zero complex and the empty scheme as well. -/
+Source: Stacks Project, Tag 099M, the principal Koszul proof of derived completion. -/
 theorem integral_ordinary_augmentation_reduction (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     [HasDerivedCategory.{u + 1} (DiagonalAb W)]
     [HasDerivedCategory.{u + 1} (ℕᵒᵖ ⥤ DiagonalAb W)]

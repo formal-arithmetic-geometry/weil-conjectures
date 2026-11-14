@@ -13,8 +13,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 /-!
 # Componentwise normalization
 
-Source: Stacks Project, Morphisms, Tag 0CDV
-(blueprint: def-weil-pbc-reduced-normalization).
+Source: Stacks Project, Morphisms, Tag 0CDV.
 -/
 
 @[expose] public section
@@ -26,19 +25,14 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- The reduced induced scheme on an irreducible component, defined by its vanishing ideal.
-Source: Stacks Project, Morphisms, Tag 0CDV
-(blueprint: def-weil-pbc-reduced-normalization). -/
+Source: Stacks Project, Morphisms, Tag 0CDV. -/
 noncomputable def reducedNormalizationComponent (X : Scheme.{u})
     (Z : irreducibleComponents X) : Scheme.{u} :=
   (IdealSheafData.vanishingIdeal
     ⟨Z.1, isClosed_of_mem_irreducibleComponents _ Z.2⟩).subscheme
 
 /-- The reduced induced structure on an irreducible component is integral.
-Source: Stacks Project, Morphisms, Tag 0CDV
-(blueprint: def-weil-pbc-reduced-normalization).
-Proof: the vanishing ideal is radical on every affine chart, so its quotient is reduced.
-The underlying space is the irreducible component, which is nonempty and irreducible.
-A reduced irreducible scheme is integral. -/
+Source: Stacks Project, Morphisms, Tag 0CDV. -/
 theorem isIntegral_reducedNormalizationComponent (X : Scheme.{u})
     (Z : irreducibleComponents X) : IsIntegral (X.reducedNormalizationComponent Z) := by
   let : IrreducibleSpace (X.reducedNormalizationComponent Z) := by
@@ -52,14 +46,12 @@ theorem isIntegral_reducedNormalizationComponent (X : Scheme.{u})
 attribute [instance] isIntegral_reducedNormalizationComponent
 
 /-- The disjoint union of the function-field normalizations of the reduced components.
-Source: Stacks Project, Morphisms, Tag 0CDV
-(blueprint: def-weil-pbc-reduced-normalization). -/
+Source: Stacks Project, Morphisms, Tag 0CDV. -/
 noncomputable def reducedNormalization (X : Scheme.{u}) : Scheme.{u} :=
   ∐ (fun Z : irreducibleComponents X ↦ (X.reducedNormalizationComponent Z).normalization)
 
 /-- The canonical map from the componentwise normalization.
-Source: Stacks Project, Morphisms, Tag 0CDV
-(blueprint: def-weil-pbc-reduced-normalization). -/
+Source: Stacks Project, Morphisms, Tag 0CDV. -/
 noncomputable def fromReducedNormalization (X : Scheme.{u}) : X.reducedNormalization ⟶ X :=
   Sigma.desc (fun Z : irreducibleComponents X ↦
     (X.reducedNormalizationComponent Z).fromNormalization ≫

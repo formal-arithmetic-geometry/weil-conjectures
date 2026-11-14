@@ -20,7 +20,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- The transpose of an epimorphism onto a finite locally free module is locally split.
 
 Source: Stacks Project, Tag 0EKP, proof of (2) to (3), local splitting of the quotient.
-(blueprint: lem-sbc-dual-map-local-retraction)
 -/
 theorem exists_local_retraction_dualMap_of_epi
     {X : Scheme.{u}} {P Q : X.Modules} (f : P ⟶ Q) [Epi f] [Q.IsFiniteLocallyFree] :

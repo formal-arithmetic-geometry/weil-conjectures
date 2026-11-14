@@ -173,9 +173,7 @@ import all Mathlib.Algebra.Homology.Localization
 
 /-! # Descent of a supplied scalar chain comparison along a scheme isomorphism
 
-Source: Stacks Project, sites-cohomology.tex, Tags 0G7D, 0G7E, 06YT and 06YU;
-categories.tex, Tag 04VG.
-(blueprint: lem-weil-isomorphism-scalar-kflat-descent).
+Source: Stacks Project, Tags 0G7D, 0G7E, 06YT and 06YU; Tag 04VG.
 
 The geometric functors are the existing ringed inverse images. Scalar extension is
 presented by its existing universal cochain model, retaining its canonical counit.
@@ -193,7 +191,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.IsomorphismScalarKFlatDescent
 
 /-- The full-subcategory predicate in the statement: K-flat, with every term flat.
-Source: Stacks 0G7D (blueprint: lem-weil-isomorphism-scalar-kflat-descent). -/
+Source: Stacks 0G7D. -/
 def good {W : Scheme.{u}} (R : Sheaf (ProEt.topology W) CommRingCat.{u + 1}) :
     ObjectProperty (CochainComplex (proEtaleRingModules W R) ℤ) :=
   fun P ↦ CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1} (R := R) P ∧
@@ -372,11 +370,11 @@ variable {X Y : Scheme.{u}} (g : X ⟶ Y)
 /-- `G_R`: the actual module inverse image with coefficients identified by `cR`.
 Extension along a ring isomorphism is canonical action transport, by multiplication
 and the inverse `m ↦ m ⊗ 1`.
-Source: Stacks 03D3, 0G7E (blueprint: lem-weil-isomorphism-scalar-kflat-descent). -/
+Source: Stacks 03D3, 0G7E. -/
 abbrev inverseR := proEtaleRingModulePullback g RY RX cR
 
 /-- `G_S`, with the same geometric inverse image and the specified coefficient transport.
-Source: Stacks 03D3, 0G7E (blueprint: lem-weil-isomorphism-scalar-kflat-descent). -/
+Source: Stacks 03D3, 0G7E. -/
 abbrev inverseS := proEtaleRingModulePullback g SY SX cS
 
 variable (CY : SheafOfModules.DerivedChangeOfRingsCochainModel.{u + 1, u, u + 1, u + 2, u + 2}
@@ -385,28 +383,27 @@ variable (CY : SheafOfModules.DerivedChangeOfRingsCochainModel.{u + 1, u, u + 1,
     (J := ProEt.topology X) jX)
 
 /-- `U(P) = G_R(P) ⊗ S_X`, with the ordinary termwise scalar extension.
-Source: Stacks 06YT (blueprint: lem-weil-isomorphism-scalar-kflat-descent). -/
+Source: Stacks 06YT. -/
 abbrev U := (inverseR g RY RX cR).mapHomologicalComplex (.up ℤ) ⋙
   CX.E.mapHomologicalComplex (.up ℤ)
 
 /-- `V(P) = G_S(P ⊗ S_Y)`, with ordinary termwise scalar extension.
-Source: Stacks 06YT (blueprint: lem-weil-isomorphism-scalar-kflat-descent). -/
+Source: Stacks 06YT. -/
 abbrev V := CY.E.mapHomologicalComplex (.up ℤ) ⋙
   (inverseS g SY SX cS).mapHomologicalComplex (.up ℤ)
 
 /-- The source derived composite `C_X G_R`.
-Source: Stacks 06YU (blueprint: lem-weil-isomorphism-scalar-kflat-descent). -/
+Source: Stacks 06YU. -/
 abbrev A := (inverseR g RY RX cR).mapDerivedCategory ⋙ CX.T
 
 /-- The target derived composite `G_S C_Y`.
-Source: Stacks 06YU (blueprint: lem-weil-isomorphism-scalar-kflat-descent). -/
+Source: Stacks 06YU. -/
 abbrev B := CY.T ⋙ (inverseS g SY SX cS).mapDerivedCategory
 
 /-- The canonical source representative identification for a good resolution `s`.
 Its first factor inverts the localized resolution; its second is exact inverse image;
 its last is the K-flat counit of ordinary derived change of rings.
-Source: Stacks 06YU, derived.tex 015F
-(blueprint: lem-weil-isomorphism-scalar-kflat-descent). -/
+Source: Stacks 06YU. -/
 def sourceIso (P K : CochainComplex (proEtaleRingModules Y RY) ℤ)
     (s : P ⟶ K) [QuasiIso s]
     (hP : good RX (((inverseR g RY RX cR).mapHomologicalComplex (.up ℤ)).obj P)) :
@@ -420,8 +417,7 @@ def sourceIso (P K : CochainComplex (proEtaleRingModules Y RY) ℤ)
 
 /-- The canonical target representative identification for a good resolution `s`.
 It uses the scalar counit on `P` and then the exact `G_S` representative comparison.
-Source: Stacks 06YU, derived.tex 015F
-(blueprint: lem-weil-isomorphism-scalar-kflat-descent). -/
+Source: Stacks 06YU. -/
 def targetIso (P K : CochainComplex (proEtaleRingModules Y RY) ℤ)
     (s : P ⟶ K) [QuasiIso s] (hP : good RY P) :
     (B g RY SY SX jY cS CY).obj (DerivedCategory.Q.obj K) ≅
@@ -435,7 +431,7 @@ def targetIso (P K : CochainComplex (proEtaleRingModules Y RY) ℤ)
 /-- The component normalization on every flat-term K-flat resolution. Both sides are
 isomorphisms with exactly the same source and target; the source identification
 includes the localized quasi-isomorphism `G_R P → G_R K` through exact descent.
-Source: Stacks 06YU (blueprint: lem-weil-isomorphism-scalar-kflat-descent). -/
+Source: Stacks 06YU. -/
 def Normalized
     (hGR : ∀ P : CochainComplex (proEtaleRingModules Y RY) ℤ,
       good RY P → good RX (((inverseR g RY RX cR).mapHomologicalComplex (.up ℤ)).obj P))

@@ -15,8 +15,7 @@ import all WeilConjectures.SixFunctors.Integral.IntegralScalarExtensionWellDefin
 This is the adjacent-transition component of the finite scalar model.  It is
 split from the finite comparison and quotient-map constructions.
 
-Source: Stacks Project, sites-modules.tex, Tags 03EK and 03EL.
-(blueprint: lem-weil-isomorphism-scalar-finite-transition-formulas).
+Source: Stacks Project, Tags 03EK and 03EL.
 -/
 
 @[expose] public noncomputable section
@@ -118,15 +117,6 @@ private theorem inverseFiniteTransition_apply (n : ℕ) (U : X.ProEt)
 /--
 The adjacent transition maps on the two finite scalar models exist and satisfy
 their local formulas.
-
-Proof source: Stacks Project, sites-modules.tex, Tags 03EK and 03EL, Step 6.
-Transport the existing scalar transition through inverse image, using the
-canonical identity on underlying sections to commute scalar restriction with
-inverse image. Conjugate by the finite comparison to obtain the left transition.
-Its pure-tensor formula follows from the finite comparison formula, compatibility
-of both coefficient maps with reduction, and cancellation of the comparison.
-No completed-to-finite quotient map is used.
-(blueprint: lem-weil-isomorphism-scalar-finite-transition-formulas).
 -/
 theorem transition_formulas_exists
     (b : (integralOperationsGoodComplex l E Y).ι ⋙ leftComplex l E L ι g ≅

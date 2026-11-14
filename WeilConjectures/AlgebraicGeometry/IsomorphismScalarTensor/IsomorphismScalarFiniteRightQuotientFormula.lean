@@ -15,8 +15,7 @@ This is the right half of the finite quotient construction.  It is separated
 from the left map because its unit insertion is formed before inverse image and
 therefore has an independent pure-tensor calculation.
 
-Source: Stacks Project, sites-modules.tex, Tags 03EK and 03EL.
-(blueprint: lem-weil-isomorphism-scalar-finite-right-quotient-formula)
+Source: Stacks Project, Tags 03EK and 03EL.
 -/
 
 @[expose] public noncomputable section
@@ -72,8 +71,7 @@ The coefficient projection square proves that comparison linear. Naturality
 makes the degreewise maps chain maps, and their tensor formula is unchanged.
 The construction is independent of the completed comparison b and its formula.
 
-Source: Stacks Project, sites-modules.tex, Tags 03EK and 03EL.
-(blueprint: lem-weil-isomorphism-scalar-finite-right-quotient-formula).
+Source: Stacks Project, Tags 03EK and 03EL.
 -/
 theorem right_quotient_formula_exists
     (b : (integralOperationsGoodComplex l E Y).ι ⋙ leftComplex l E L ι g ≅

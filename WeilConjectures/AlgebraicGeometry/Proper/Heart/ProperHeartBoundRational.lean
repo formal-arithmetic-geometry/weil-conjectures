@@ -539,9 +539,6 @@ import WeilConjectures.CategoryTheory.DerivedModuleDirectSums
 /-!
 # Proper direct-image bound for rational constructible module sheaves
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-proper-heart-bound/
-sk-lem-proper-heart-bound-rational.md (blueprint: lemma-uniform-bound-proper-direct-image--1).
-
 The two statements are the finite rational and algebraic-closure coefficient cases.
 The integer dimension bound uses bottom for negative integers, since every nonempty
 space has nonnegative Krull dimension. Thus negative bounds retain the empty-fibre case.
@@ -681,9 +678,8 @@ private theorem qbar_scalar_preserves_vanishing
     (ep ≪≫ F.mapIso es))
 
 /-- The rational proper direct-image bound over a Noetherian source, with no base field.
-Source: blueprint lemma-uniform-bound-proper-direct-image--1, finite-field case; the base field of
-`isZero_higherDirectImage_rational_of_isProper` only makes the source Noetherian
-(blueprint: lemma-uniform-bound-proper-direct-image--1). -/
+Source: the base field of `isZero_higherDirectImage_rational_of_isProper` only makes the source
+Noetherian. -/
 theorem isZero_higherDirectImage_rational_of_isProper_of_isNoetherian
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     {X Y : Scheme.{u}} [IsNoetherian X] (p : X ⟶ Y) [IsProper p] (d : ℤ)
@@ -742,56 +738,7 @@ theorem isZero_higherDirectImage_rational_of_isProper_of_isNoetherian
       e)).symm
 
 set_option linter.unusedVariables false in
-/-- The proper direct-image bound for a finite subextension of Qbar_ell.
-Source: blueprint main-20261015, sk-lem-proper-heart-bound-rational, finite rational case
-(blueprint: lemma-uniform-bound-proper-direct-image--1).
-
-Proof plan, following the node:
-1. If d < 0, all geometric fibres are empty. Surjectivity of field-extension spectra
-   (lem-pc-field-extension-surjective) and its stability under base change
-   (lem-weil-pbc-surjective-base-change) make every ordinary fibre empty, hence X empty.
-   The empty-cover sheaf axiom makes all module sheaves and direct images zero.
-   Otherwise put c = 2d+1. By lemma-uniform-bound-proper-direct-image--1 it suffices to treat
-   locally closed extensions by zero of lisse finite free integral lattices over every
-   finite coefficient extension, their localizations, and their Qbar scalar extensions.
-2. The internal-abelian-sheaf-module equivalence identifies the module-object and
-   ring-sheaf-module categories, preserving underlying sheaves and injective resolutions
-   (def-weil-pbc-internal-abelian-sheaf-module-equivalence). Grothendieck abelianness
-   and enough injectives (lem-pur-ringed-site-grothendieck-abelian,
-   lem-sp-grothendieck-enough-injectives) give nonnegative injective resolutions, which
-   are K-injective (lem-sp-kinjective-computes). On an affine weakly contractible V over
-   Y, exact evaluation and exact module forgetting identify sections of R^q p_* N with
-   H^q of the section complex (corollary-evaluation-weakly-contractible-objects--1,
-   situation-conventions). Injective module sheaves are
-   abelian-acyclic (lem-sc-injective-module-abelian-acyclic-zariski); the acyclic
-   resolution criterion (lemma-weil-pbc-leray-acyclicity) and localization
-   (lem-weil-pbc-cohomology-over-object-localization,
-   lem-weil-proetale-weakly-etale-localization, clause 1) identify this with
-   H^q(X_V,N restricted to X_V). This calculation is unchanged under scalar restriction.
-3. Apply lemma-uniform-bound-proper-direct-image--1 to each locally closed integral lattice.
-   Its bound makes the groups of step 2 zero above c. Detection on weakly contractible
-   sections (corollary-evaluation-weakly-contractible-objects, clause 3) gives zero higher direct
-   images.
-4. Properness implies qcqs: finite type is quasi-compact and the closed-immersion
-   diagonal is quasi-compact (def-weil-proper-morphism, def-weil-finite-type-morphism,
-   def-weil-closed-immersion, def-weil-quasi-separated-morphism). Apply
-   det-proper-heart-continuity-direct-image through the module equivalence of step 2.
-   Restriction along the coefficient unit is exact and colimit-preserving
-   (sk-def-sfb-change-of-scalars), so continuity also holds for module-object images.
-5. By lemma-comparison-completed-coefficients and the balanced-tensor universal property
-   (sk-def-sfb-change-of-scalars), inverting ell in a lattice is the filtered colimit
-   of its multiplication-by-ell sequence. Continuity and step 3 give zero higher
-   images above c. Step 2 identifies this with vanishing in rational coefficients.
-6. For a finite extension F/K, lemma-inverse-image-coefficient-sheaves
-   identifies F_X tensor N with a finite sum of copies of N as K_X-modules.
-   Finite-sum continuity gives vanishing; step 2 detects it as F-module vanishing.
-7. Finite extensions containing K are cofinal by finite composita. Hence Qbar_X is
-   their filtered colimit (lemma-comparison-completed-coefficients). Module forgetting creates this
-   colimit (situation-conventions); the balanced-tensor
-   universal property commutes tensor with it. Continuity and step 6 give vanishing
-   for Qbar scalar extension, with step 2 detecting it in Qbar-modules. All conditions
-   of lemma-uniform-bound-proper-direct-image--1 now hold, giving the assertion for every M.
-   In the Qbar case the auxiliary initial field is Q_ell. -/
+/-- The proper direct-image bound for a finite subextension of Qbar_ell. -/
 theorem isZero_higherDirectImage_rational_of_isProper
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) (k : Type u) [Field k]
     (hchar : ringChar k ≠ 0) (hell : ringChar k ≠ ℓ)
@@ -821,8 +768,7 @@ theorem isZero_higherDirectImage_rational_of_isProper
   exact isZero_higherDirectImage_rational_of_isProper_of_isNoetherian ℓ E p d hd M hM q hq
 
 /-- The algebraic-closure proper direct-image bound over a Noetherian source, with no base
-field. Source: blueprint lemma-uniform-bound-proper-direct-image--1, Qbar case; the base field only
-made the source Noetherian (blueprint: lemma-uniform-bound-proper-direct-image--1). -/
+field. Source: the base field only made the source Noetherian. -/
 theorem isZero_higherDirectImage_padicAlgCl_of_isProper_of_isNoetherian
     (ℓ : ℕ) [Fact ℓ.Prime]
     {X Y : Scheme.{u}} [IsNoetherian X] (p : X ⟶ Y) [IsProper p] (d : ℤ)
@@ -869,56 +815,7 @@ theorem isZero_higherDirectImage_padicAlgCl_of_isProper_of_isNoetherian
       ((DerivedCategory.singleFunctor _ 0).mapIso eN))).symm
 
 set_option linter.unusedVariables false in
-/-- The proper direct-image bound for the finite-subextension-valued condensed ring Qbar_ell.
-Source: blueprint main-20261015, sk-lem-proper-heart-bound-rational, Qbar case
-(blueprint: lemma-uniform-bound-proper-direct-image--1).
-
-Proof plan, following the node:
-1. If d < 0, all geometric fibres are empty. Surjectivity of field-extension spectra
-   (lem-pc-field-extension-surjective) and its stability under base change
-   (lem-weil-pbc-surjective-base-change) make every ordinary fibre empty, hence X empty.
-   The empty-cover sheaf axiom makes all module sheaves and direct images zero.
-   Otherwise put c = 2d+1. By lemma-uniform-bound-proper-direct-image--1 it suffices to treat
-   locally closed extensions by zero of lisse finite free integral lattices over every
-   finite coefficient extension, their localizations, and their Qbar scalar extensions.
-2. The internal-abelian-sheaf-module equivalence identifies the module-object and
-   ring-sheaf-module categories, preserving underlying sheaves and injective resolutions
-   (def-weil-pbc-internal-abelian-sheaf-module-equivalence). Grothendieck abelianness
-   and enough injectives (lem-pur-ringed-site-grothendieck-abelian,
-   lem-sp-grothendieck-enough-injectives) give nonnegative injective resolutions, which
-   are K-injective (lem-sp-kinjective-computes). On an affine weakly contractible V over
-   Y, exact evaluation and exact module forgetting identify sections of R^q p_* N with
-   H^q of the section complex (corollary-evaluation-weakly-contractible-objects--1,
-   situation-conventions). Injective module sheaves are
-   abelian-acyclic (lem-sc-injective-module-abelian-acyclic-zariski); the acyclic
-   resolution criterion (lemma-weil-pbc-leray-acyclicity) and localization
-   (lem-weil-pbc-cohomology-over-object-localization,
-   lem-weil-proetale-weakly-etale-localization, clause 1) identify this with
-   H^q(X_V,N restricted to X_V). This calculation is unchanged under scalar restriction.
-3. Apply lemma-uniform-bound-proper-direct-image--1 to each locally closed integral lattice.
-   Its bound makes the groups of step 2 zero above c. Detection on weakly contractible
-   sections (corollary-evaluation-weakly-contractible-objects, clause 3) gives zero higher direct
-   images.
-4. Properness implies qcqs: finite type is quasi-compact and the closed-immersion
-   diagonal is quasi-compact (def-weil-proper-morphism, def-weil-finite-type-morphism,
-   def-weil-closed-immersion, def-weil-quasi-separated-morphism). Apply
-   det-proper-heart-continuity-direct-image through the module equivalence of step 2.
-   Restriction along the coefficient unit is exact and colimit-preserving
-   (sk-def-sfb-change-of-scalars), so continuity also holds for module-object images.
-5. By lemma-comparison-completed-coefficients and the balanced-tensor universal property
-   (sk-def-sfb-change-of-scalars), inverting ell in a lattice is the filtered colimit
-   of its multiplication-by-ell sequence. Continuity and step 3 give zero higher
-   images above c. Step 2 identifies this with vanishing in rational coefficients.
-6. For a finite extension F/K, lemma-inverse-image-coefficient-sheaves
-   identifies F_X tensor N with a finite sum of copies of N as K_X-modules.
-   Finite-sum continuity gives vanishing; step 2 detects it as F-module vanishing.
-7. Finite extensions containing K are cofinal by finite composita. Hence Qbar_X is
-   their filtered colimit (lemma-comparison-completed-coefficients). Module forgetting creates this
-   colimit (situation-conventions); the balanced-tensor
-   universal property commutes tensor with it. Continuity and step 6 give vanishing
-   for Qbar scalar extension, with step 2 detecting it in Qbar-modules. All conditions
-   of lemma-uniform-bound-proper-direct-image--1 now hold, giving the assertion for every M.
-   In the Qbar case the auxiliary initial field is Q_ell. -/
+/-- The proper direct-image bound for the finite-subextension-valued condensed ring Qbar_ell. -/
 theorem isZero_higherDirectImage_padicAlgCl_of_isProper
     (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
     (hchar : ringChar k ≠ 0) (hell : ringChar k ≠ ℓ)

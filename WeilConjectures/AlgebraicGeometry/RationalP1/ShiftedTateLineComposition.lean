@@ -104,8 +104,7 @@ after the canonical derived compositor. Lift the prescribed underived compositio
 law by the degree-zero single functor and its exact comparison, then apply naturality
 of the canonical shift comparison at shift 2.
 Source: Cartesian coefficients and twists; canonical-map compatibilities in the
-second rational projective-line triangle.
-(blueprint: lem-f8-shifted-tate-line-composition) -/
+second rational projective-line triangle. -/
 theorem shifted_line_comparison_comp
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)

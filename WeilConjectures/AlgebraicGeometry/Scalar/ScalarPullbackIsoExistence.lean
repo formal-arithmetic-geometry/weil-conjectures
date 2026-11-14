@@ -13,7 +13,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.KFlatAcyclic
 
 /-! Existence of the normalized derived scalar/pullback comparison.
 
-Source: Stacks 07A4, 0G7E and 07A7 (blueprint: lem-pur-etale-scalar-pullback-existence).
+Source: Stacks 07A4, 0G7E and 07A7.
 -/
 
 @[expose] public noncomputable section
@@ -349,24 +349,7 @@ attribute [local irreducible] ProEtale.pbcFixedScalarExtension
 
 /-- The normalized comparison exists.  It is separated from uniqueness so the
 representative descent argument can be proved independently.
-Source: Stacks 07A4, 0G7E and 07A7
-(blueprint: lem-pur-etale-scalar-pullback-existence).
-Proof: exact faithful restriction identifies ordinary scalar extension with
-ordinary tensoring by the coefficient sheaf. It therefore preserves
-quasi-isomorphisms between K-flat complexes. Uniqueness of left adjoints identifies
-the specified scalar representative with the derived counit, which is invertible
-on K-flat inputs. The geometric representative is invertible because inverse
-image is exact. Choose the reduced functorial flat resolution R. Both R(P) and
-its inverse image are K-flat: inverse image preserves flat objects and the
-colimits presenting that resolution. The two sides of the normalization,
-without c, are natural transformations s and t from the derived composites
-precomposed with Q to the same ordinary cochain composite followed by Q.
-Their restrictions to R are invertible. Conjugate t_R followed by inverse s_R
-by the two images of the resolution quasi-isomorphism to obtain a natural
-isomorphism on all cochain complexes. Full faithfulness of precomposition by Q
-descends it to derived categories. Naturality of s and t along the resolution
-map, followed by cancellation of its invertible image, gives c followed by s = t
-on every complex, hence on the stated K-flat inputs.
+Source: Stacks 07A4, 0G7E and 07A7.
 -/
 theorem scalarPullbackIso_exists
     {A B : Type (u + 1)} [CommRing A] [CommRing B]

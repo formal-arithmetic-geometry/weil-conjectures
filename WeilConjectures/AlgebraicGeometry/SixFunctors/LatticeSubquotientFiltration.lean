@@ -27,10 +27,6 @@ import WeilConjectures.AlgebraicGeometry.Condensed.CondensedLocallyClosedScalarE
 /-!
 # Integral lattice subquotients of a lisse extension by zero
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-integral-models,
-sk-lem-integral-models-generators.proof.md, proof (1)
-(blueprint: lem-sfb-lattice-subquotient-filtration).
-
 The assertion uses the actual condensed continuous coefficient rings, pulled back from
 Profinite, and their internal module objects. Its lattices rationalize along their own
 inclusions. Filtration terms are subobjects of the specified locally closed extension.
@@ -51,9 +47,7 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
 /-- The subobject and lattice clauses over specified pulled-back coefficient rings.
-This predicate records exactly the conclusion, without introducing any new sheaf notion.
-Source: blueprint main-20261015, integral-models-generators, proof (1)
-(blueprint: lem-sfb-lattice-subquotient-filtration). -/
+This predicate records exactly the conclusion, without introducing any new sheaf notion. -/
 def LatticeSubquotientFiltrationData
     (A B : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj A] [IsCommMonObj A] [MonObj B] [IsCommMonObj B]
@@ -88,10 +82,7 @@ def LatticeSubquotientFiltrationData
 canonical spectral norm topology. The lets install only the recorded coefficient
 constructions and their structures, not extra hypotheses. The Noetherian structure is
 constructed from finite type over the field. Locally closed extension is the existing
-`i_* u_!` through the scheme-theoretic closure, for both integral and field coefficients.
-
-Source: blueprint main-20261015, integral-models-generators, proof (1)
-(blueprint: lem-sfb-lattice-subquotient-filtration). -/
+`i_* u_!` through the scheme-theoretic closure, for both integral and field coefficients. -/
 def LatticeSubquotientFiltration (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
     (k : Type u) [Field k] {S X : Scheme.{u}}
@@ -200,9 +191,6 @@ private theorem lattice_filtration_from_lattices
 /-- A lisse field-coefficient sheaf has stratified integral lattices whose rationalized
 extensions are the successive quotients of its extension by zero. Ranks may vary and
 filtration inclusions need not be strict, including for empty strata or zero sheaves.
-
-Source: blueprint main-20261015, integral-models-generators, proof (1)
-(blueprint: lem-sfb-lattice-subquotient-filtration).
 
 Proof. Choose ordered integral lattice inclusions by `exists_orderedSpectralLattices`.
 The general ordered filtration theorem constructs actual subobjects of a_! L by pushing

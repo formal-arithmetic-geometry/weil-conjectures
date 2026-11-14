@@ -9,8 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.PicardTermwiseModels
 public import WeilConjectures.AlgebraicGeometry.Picard.Termwise.PicardTermwiseSingleMapComposition
 
 /-! # Coherence of the termwise source single
-Source: Stacks Project, Tags 06YJ and 0D5S.
-(blueprint: lem-sc-picard-termwise-source-coherence) -/
+Source: Stacks Project, Tags 06YJ and 0D5S. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -50,23 +49,7 @@ theorem picardTermwiseSourceIso_hom {W T : Scheme.{v}} (t : T ⟶ W) :
 /-- The canonical counit comparison `picardTermwiseSourceIso` for the source singles
 commutes with successive pullback. This assertion concerns only the source, with no local
 perfect model.
-Source: Stacks Project, Tags 06YJ and 0D5S.
-(blueprint: lem-sc-picard-termwise-source-coherence)
-
-Proof:
-1. The degree-zero single of the structure sheaf is bounded above and termwise
-   flat: tensor with the structure sheaf is the identity, and its other terms are
-   zero. Its counit is invertible by the bounded-flat computation.
-2. Compose singleFunctorIsoCompQ, the derived counit at this single,
-   and the termwise single comparison. These give a_t, retaining the tensor-pulled
-   structure sheaf, not replacing it with an unrelated isomorphic object.
-3. Evaluate the defining leftDerivedLift counit equation of the pinned derived
-   composition comparison at this single. Expand the complex quotient comparison
-   and the singleMapHomologicalComplex comparison. The remaining underived map is
-   precisely tensorPullbackCompositionIso. Naturality of the quotient comparison
-   identifies the two sides of the displayed equation. Transport along ht; proof
-   irrelevance identifies all proofs of the equality of the composite maps.
-   This calculation also applies to empty schemes and the zero structure sheaf. -/
+Source: Stacks Project, Tags 06YJ and 0D5S. -/
 theorem picard_termwise_source_coherence {W T T' : Scheme.{v}} (i : T' ⟶ T) (t : T ⟶ W)
     (t' : T' ⟶ W) (ht : i ≫ t = t') :
     let c := (Classical.choose (Classical.choose_spec (Classical.choose_spec

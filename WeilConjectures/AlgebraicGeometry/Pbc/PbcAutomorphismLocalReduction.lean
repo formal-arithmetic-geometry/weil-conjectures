@@ -23,19 +23,7 @@ variable {X Y U : Scheme.{u}} (f : X ⟶ Y) [IsIso f]
 
 /-- The relabeled local complex computes the reductions of ordinary pullback, and
 these identifications intertwine every comparable pair of levels.
-Source: blueprint order 2106, preservation clause; Stacks Tags 06YY and 09BT.
-Proof: restrict the source level comparison along g, then compose its local-model
-identification with the derived scalar-change comparison for the square of completed
-and finite coefficient isomorphisms. In the other direction the composition comparison
-for inverse images and g followed by the inverse of f identifies restriction of the
-ordinary pullback with restriction along g. These give the stated identification at
-each level. For compatibility take the adjuncts under scalar extension and restriction.
-The projection square identifies their units, while naturality moves the source level
-comparison through the units. The source comparison equation and the local model's
-compatibility equation then identify both composites. The mate construction uses the
-same normalized scalar adjunctions as adicTowerLocalTransition, so it works for arbitrary
-comparable indices, including equal indices, without choosing new transition maps.
-(blueprint: lem-wf-pbc-automorphism-local-reduction-comparison). -/
+Source: Stacks Tags 06YY and 09BT. -/
 theorem pbcIsoLocalComplex_reduction_comparison
     (K : PbcCompletedDerived Y d) (M : AdicTower Y d)
     (eK : ∀ n, M.level n ≅ (pbcCompletedReduction Y d n).obj K)
@@ -68,15 +56,12 @@ variable {Λ Λ' Λ'' : ScalarSixRing.{u}} {X Y U : Scheme.{u}}
 /-- The normalized scalar comparison data. Its `thetaNormalization` fixes every hom
 component to `scalarSixPullHom`, hence fixes its inverse and the entire data uniquely.
 This choice therefore selects no arbitrary comparison.
-Source: scalar-six pullback clauses (1),(3)
-(blueprint: lem-wf-pbc-automorphism-local-reduction-comparison). -/
+Source: scalar-six pullback clauses (1),(3). -/
 def pbcLocalScalarData : ScalarSixPullbackData.{u} :=
   Classical.choice scalarSixPullbackData_exists
 
 /-- The specified local coefficient comparison: inverse geometric compositor, inverse
-scalar comparison, and scalar extension of the given local identification.
-Source: prose-03-02, local monoidal inverse-image comparison
-(blueprint: lem-wf-pbc-automorphism-local-reduction-comparison). -/
+scalar comparison, and scalar extension of the given local identification. -/
 def pbcLocalReductionComparison (a : Λ ⟶ Λ') (f : X ⟶ Y) (h : U ⟶ X)
     (K : DerivedCategory (ModuleRingedComparison.internalModules Λ.X Y))
     {N : DerivedCategory (ModuleRingedComparison.internalModules Λ.X U)}
@@ -87,9 +72,7 @@ def pbcLocalReductionComparison (a : Λ ⟶ Λ') (f : X ⟶ Y) (h : U ⟶ X)
     ((pbcLocalScalarData.theta a (h ≫ f)).app K).symm ≪≫
       (scalarSixChange a U).mapIso e
 
-/-- The comparison between a composite scalar change and successive local changes.
-Source: scalar-six clause (3), with the geometric comparison of clause (1)
-(blueprint: lem-wf-pbc-automorphism-local-reduction-comparison). -/
+/-- The comparison between a composite scalar change and successive local changes. -/
 def pbcLocalReductionTower (a : Λ ⟶ Λ') (b : Λ' ⟶ Λ'') (f : X ⟶ Y) (h : U ⟶ X)
     (K : DerivedCategory (ModuleRingedComparison.internalModules Λ.X Y)) :
     (scalarSixPull Λ'' h).obj
@@ -114,10 +97,7 @@ private theorem local_composition (a : Λ ⟶ Λ') (f : X ⟶ Y) (h : U ⟶ X)
   simpa only [IsIso.inv_comp, ← Functor.map_inv, NatIso.inv_hom_app,
     Category.assoc] using q
 
-/-- The specified local comparison equals the iterated inverse-image/scalar comparison.
-Source: scalar-six clause (1), geometric composition.
-Proof: invert its composition equation and postcompose with scalar extension of `e`.
-(blueprint: lem-wf-pbc-automorphism-local-reduction-comparison). -/
+/-- The specified local comparison equals the iterated inverse-image/scalar comparison. -/
 theorem pbcLocalReductionComparison_iterated (a : Λ ⟶ Λ') (f : X ⟶ Y) (h : U ⟶ X)
     (K : DerivedCategory (ModuleRingedComparison.internalModules Λ.X Y))
     {N : DerivedCategory (ModuleRingedComparison.internalModules Λ.X U)}
@@ -131,11 +111,7 @@ theorem pbcLocalReductionComparison_iterated (a : Λ ⟶ Λ') (f : X ⟶ Y) (h :
   rw [← Category.assoc, local_composition]
   simp only [Functor.map_comp, Category.assoc]
 
-/-- Naturality in the specified local identification.
-Source: scalar-six clause (1), naturality.
-Proof: naturality of the inverse compositor and inverse scalar comparison transports
-`u` across the first two factors; use the local square and functoriality for the last.
-(blueprint: lem-wf-pbc-automorphism-local-reduction-comparison). -/
+/-- Naturality in the specified local identification. -/
 theorem pbcLocalReductionComparison_naturality (a : Λ ⟶ Λ') (f : X ⟶ Y) (h : U ⟶ X)
     {K K' : DerivedCategory (ModuleRingedComparison.internalModules Λ.X Y)}
     {N N' : DerivedCategory (ModuleRingedComparison.internalModules Λ.X U)}
@@ -159,12 +135,7 @@ theorem pbcLocalReductionComparison_naturality (a : Λ ⟶ Λ') (f : X ⟶ Y) (h
       (scalarSixChange a U).map e'.hom) r.symm
 
 /-- Scalar-tower compatibility of the local comparison, for arbitrary coefficient maps.
-Source: scalar-six clauses (1) and (3).
-Proof: move the inverse scalar associator through the inverse geometric compositor by
-naturality. Geometric composition combines the two comparisons for `b`. Invert the
-scalar-tower equation at the composite scheme map. Naturality of scalar associativity
-at `e` cancels the remaining associator and proves the displayed equation.
-(blueprint: lem-wf-pbc-automorphism-local-reduction-comparison). -/
+Source: scalar-six clauses (1) and (3). -/
 theorem pbcLocalReductionComparison_tower (a : Λ ⟶ Λ') (b : Λ' ⟶ Λ'')
     (f : X ⟶ Y) (h : U ⟶ X)
     (K : DerivedCategory (ModuleRingedComparison.internalModules Λ.X Y))
@@ -190,14 +161,10 @@ theorem pbcLocalReductionComparison_tower (a : Λ ⟶ Λ') (b : Λ' ⟶ Λ'')
   simp only [Iso.inv_hom_id_app_assoc]
 
 /-- Natural local coefficient change under isomorphism transport, with its iterated
-formula and scalar-tower coherence. The local map is parametrized as `h : U ⟶ X`;
-for a map `g : U ⟶ Y`, take `h = g ≫ f.inv`, since `h ≫ f.hom = g`.
+formula and scalar-tower coherence. The local map is parametrized as `h: U ⟶ X`;
+for a map `g: U ⟶ Y`, take `h = g ≫ f.inv`, since `h ≫ f.hom = g`.
 
-Source: prose-03-02, monoidal inverse-image comparison; scalar-six (1),(3).
-Proof: the composite defining `pbcLocalReductionComparison` is an isomorphism.
-Invert geometric composition to obtain the iterated formula, use naturality for
-morphisms of local models, and use scalar-tower coherence for successive changes.
-(blueprint: lem-wf-pbc-automorphism-local-reduction-comparison). -/
+Source: scalar-six (1),(3). -/
 theorem pbcIsoLocalComplex_reduction_comparison (a : Λ ⟶ Λ') (f : X ≅ Y) (h : U ⟶ X)
     (K : DerivedCategory (ModuleRingedComparison.internalModules Λ.X Y))
     {N : DerivedCategory (ModuleRingedComparison.internalModules Λ.X U)}

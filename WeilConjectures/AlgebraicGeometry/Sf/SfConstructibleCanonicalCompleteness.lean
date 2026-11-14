@@ -13,10 +13,7 @@ import WeilConjectures.AlgebraicGeometry.Completed.Koszul.CompletedKoszulQuotien
 
 /-! # Presentation witnesses imply canonical actual completeness
 
-Source: blueprint `sec-six-functors/sk-rem-sf-pf-done/def-wf-tensor-product`,
-first sentence and the base proof Step 10 (`wfConstructible_complete`);
-Stacks Tags 0A0E and 099M.
-(blueprint: lem-sf-constructible-canonical-completeness).
+Source: Stacks Tags 0A0E and 099M.
 
 The hypothesis is the published existential presentation witness. The conclusions
 use the actual completed ring, every generating tuple and representative, the
@@ -31,19 +28,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- An intrinsic presentation witness makes every actual Koszul unit and the canonical
 strict quotient-tower unit invertible.
-Source: blueprint `prose-03-02`, first sentence, base proof Step 10;
-Stacks Tags 0A0E and 099M
-(blueprint: lem-sf-constructible-canonical-completeness).
-
-Proof: apply `pbcIntrinsicComplete_towerComplete` to the existential presentation
-witness to obtain invertibility of `d.completionUnit X M`. For any generating tuple,
-actual complex and realization, `completedKoszulQuotientComparison` gives an
-isomorphism from its Koszul completion to the derived quotient limit. Its unit
-equation identifies the Koszul unit followed by this isomorphism with the same
-canonical tower unit. The quotient tower indexed by n >= 0 uses I^(n+1), which
-reindexes the positive-exponent tower without changing its augmentation. Cancel
-the comparison isomorphism to obtain invertibility of the specified Koszul unit.
-No relation with the witnessing tuple or representative is required. -/
+Source: Stacks Tags 0A0E and 099M. -/
 theorem sfConstructibleCanonicalCompleteness
     (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (M : PbcCompletedDerived X d) (hM : PbcIsIntrinsicallyComplete X d M) :

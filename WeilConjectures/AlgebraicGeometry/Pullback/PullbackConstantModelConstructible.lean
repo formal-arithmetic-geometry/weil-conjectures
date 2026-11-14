@@ -18,11 +18,8 @@ import all WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedLocalizingPullba
 /-!
 # Pullback of constructible modules with finite constant scalar models
 
-Source: blueprint main-20261015, chap-Construction-of-f,
-`sk-prop-proper-base-change-unbounded-pullback.proof.md`, paragraph
-"Constructible complexes"; Stacks Project, Tag 054I; Bhatt--Scholze,
-The pro-etale topology for schemes, proof of Lemma 6.3.8
-(blueprint: lem-sfb-pullback-constant-model-constructible).
+Source: Stacks Project, Tag 054I; Bhatt--Scholze
+The pro-etale topology for schemes, proof of Lemma 6.3.8.
 
 The assertion retains each given scalar module and the whole given covering family.
 The pulled-back stratification and covers are the existing canonical constructions.
@@ -45,8 +42,7 @@ constructibility is supplied separately. The output includes constructibility, l
 closedness, disjointness and the covering property, and has the same finite index set.
 Its domains are `pullback (S.immersion a) g`, its immersions are `pullback.snd`, and its
 stratum subsets are `g ⁻¹' S.stratum a`.
-Source: blueprint pullback proof, "Constructible complexes", and Stacks 054I
-(blueprint: lem-sfb-pullback-constant-model-constructible). -/
+Source: "Constructible complexes", and Stacks 054I. -/
 def constantModelPullbackStratification {Y Y' : Scheme.{u}}
     (S : Y.FiniteLocallyClosedStratification)
     (hS : ∀ a : Fin S.n, Topology.IsConstructible (S.stratum a)) (g : Y' ⟶ Y) :
@@ -64,9 +60,7 @@ def constantModelPullbackStratification {Y Y' : Scheme.{u}}
       range_immersion := S.range_immersion } g
 
 /-- The given scalar module is a constant model of the twice restricted module.
-This predicate names the repeated expression without changing its isomorphism data.
-Source: blueprint pullback proof, "Constructible complexes"
-(blueprint: lem-sfb-pullback-constant-model-constructible). -/
+This predicate names the repeated expression without changing its isomorphism data. -/
 def HasScalarModelOnRestriction
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {V X Y : Scheme.{u}}
@@ -80,9 +74,7 @@ def HasScalarModelOnRestriction
 on the base changes of any specified witnessing stratification and covers. The scalar
 modules are quantified before pullback and occur unchanged on the right of each output
 isomorphism. `pullback₂` retains the cover's index type and has members
-`U_i ×_{Y_a} (Y_a ×_Y Y')`, with the second projection as covering map.
-Source: blueprint pullback proof, "Constructible complexes", expanded local-model argument
-(blueprint: lem-sfb-pullback-constant-model-constructible). -/
+`U_i ×_{Y_a} (Y_a ×_Y Y')`, with the second projection as covering map. -/
 def ConstantModelPullbackStatement
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] : Prop :=
@@ -219,31 +211,7 @@ every commutative condensed coefficient ring (in particular for all the admissib
 coefficients of the node: finite discrete rings, the ℓ-adic integers and numbers, their
 finite extensions, and the condensed algebraic closure).
 
-Source: blueprint main-20261015, proper-base-change-unbounded pullback proof,
-"Constructible complexes"; Stacks 054I; Bhatt--Scholze, proof of Lemma 6.3.8
-(blueprint: lem-sfb-pullback-constant-model-constructible).
-
-Proof plan:
-1. Pull back each locally closed immersion using
-lemma-constructible-pullback-stratification. Apply lem-pur-scheme-constructible-preimage
-separately to its constructible image. This is the canonical stratification above.
-2. Apply clause 1 of det-pe-topos-functoriality-inverse-image to each map from a new
-stratum to the old one. The whole specified family base changes to a cover; the map
-between strata need not itself be weakly etale.
-3. Choose a finite scalar presentation of each given P. The exact constant-sheaf
-functor and right-exact scalar extension turn this particular presentation into a
-cokernel of the same scalar matrix on U, as in definition-constructible-sheaves--1.
-By lemma-inverse-image-coefficient-sheaves, inverse image is exact along the coefficient
-comparison. It preserves the regular coefficient module, finite sums and this cokernel;
-finite-sum preservation also follows from the adjunction of
-sk-def-sfb-module-pushforward-pullback.
-4. Naturality of the point-pullback comparison of sk-def-sfb-coefficient-morphisms on
-each scalar section, and sk-def-sfb-pulled-back-coefficients, identify every matrix entry
-with that same scalar after pullback. The cokernel on the new cover member is therefore
-extension of the original P. The composition isomorphism of
-sk-def-sfb-module-pushforward-pullback identifies the two composite restrictions.
-5. The pulled-back finite constructible locally closed stratification, its covers and
-these models witness definition-constructible-sheaves on the qcqs target scheme. -/
+Source: Stacks 054I; Bhatt--Scholze, proof of Lemma 6.3.8. -/
 theorem pullback_constantModelConstructible
     (L : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})
     [IsCommMonObj ((sheafCompose (coherentTopology Profinite.{u})

@@ -120,32 +120,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The explicit relative normalization of the punctured root cover is finite.
 Source: Stacks Project, Tag 0EYG, root-algebra paragraph, Tag 0EYH, local
-regularity verification, and Tag 032L (finite separable integral closure).
-(blueprint: lem-sbc-strict-hensel-root-normalization-finite)
-
-Proof: StrictHenselizationLocalStructure gives the local-ring structure of H.
-The regular-divisor quotient theorem supplies Noetherianness of H and regularity
-of H/(g), while flatness of the structural map makes g regular. The monic root
-algebra A is finite free over H. Its root t satisfies t^|G|=g, and the explicitly
-constructed quotient equivalence identifies A/(t) with the local ring H/(g).
-Every maximal ideal M of A contracts to the maximal ideal of H by integrality.
-Thus g belongs to M, hence t belongs to M. The maximal ideals of A therefore
-correspond to those of A/(t); the latter ring is local, so A is local. Apply
-RootAlgebraRegularAtRoot at its maximal ideal and identify that localization
-with A (all denominators are units). A is regular local. RegularLocalLocalization
-makes A regular, and RegularRingNormal gives integrally closed domain stalks
-of N=Spec A. In particular N is integral and Noetherian.
-
-Package the supplied finite etale punctured projection as a finite etale object.
-FiniteEtaleOpenIntegralClosure applies on each affine open B of N: its generic
-algebra is a finite product of separable function-field extensions, whose integral
-closures are finite by the trace-dual-lattice argument of 032L; the closure in
-sections injects into that finite module. Mathlib fromNormalization_app and
-normalizationObjIso identify the section map of the explicit normalization with
-this finite algebra map followed by a ring isomorphism. These finite affine
-section maps prove finiteness. Neither the unit group order nor an identification
-of the punctured chart is needed; ramification is only needed for the separate
-generic-etaleness statement. No normalization witness is chosen. -/
+regularity verification, and Tag 032L (finite separable integral closure). -/
 theorem GaloisCover.strict_hensel_root_normalization_finite
     {L U : Scheme.{u}} (i : U ⟶ L)
     (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)

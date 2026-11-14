@@ -10,7 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.Picard.Direct.PicardDirectImageU
 /-! # The derived transpose before structure-sheaf normalization
 
 Source: Stacks Project, Tags 08HY and 0D5S.
-(blueprint: def-sc-picard-direct-image-derived-transpose)
 -/
 
 @[expose] public section
@@ -30,8 +29,7 @@ variable [∀ Y : Scheme.{v},
 its coefficient comparison, then transpose under the pinned derived adjunction.
 The source remains the derived pullback of the structure sheaf on T; no fibre
 structure-sheaf comparison is applied.
-Source: Stacks Project, Tags 08HY and 0D5S.
-(blueprint: def-sc-picard-direct-image-derived-transpose) -/
+Source: Stacks Project, Tags 08HY and 0D5S. -/
 @[irreducible]
 def picardDirectImageDerivedTranspose {X S : Scheme.{v}} (f : X ⟶ S)
     (L : X.Modules) (W : Scheme.{v}) (k : W ⟶ S)

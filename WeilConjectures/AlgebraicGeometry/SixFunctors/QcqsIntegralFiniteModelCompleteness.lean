@@ -97,9 +97,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 /-!
 # Completeness and classical reductions of qcqs integral finite-model inputs
 
-Source: Bhatt--Scholze, The pro-etale topology for schemes, Sections 6.5--6.6;
-blueprint main-20261015, localizing-closure-ctf-equals-bc, finite scalar models
-(blueprint: lem-sfb-qcqs-integral-finite-model-completeness).
+Source: Bhatt--Scholze, The pro-etale topology for schemes, Sections 6.5--6.6.
 
 The scheme is arbitrary qcqs. The integral ring carries its spectral norm topology.
 The completion predicate uses the specified strict-tower augmentation. Finite reductions

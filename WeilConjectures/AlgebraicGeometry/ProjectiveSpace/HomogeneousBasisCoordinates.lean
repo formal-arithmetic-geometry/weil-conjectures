@@ -14,9 +14,7 @@ import Mathlib.Algebra.DirectSum.Decomposition
 /-!
 # Coordinates of a homogeneous basis
 
-Source: Stacks Project, Constructions, Tags 01M6 and 01MN; the coordinate step of
-lem-sc-p1-homogeneous-basis-proj-coproduct.
-(blueprint: lem-sc-p1-homogeneous-basis-coordinates)
+Source: Stacks Project, Constructions, Tags 01M6 and 01MN.
 -/
 
 @[expose] public section
@@ -28,18 +26,7 @@ open MvPolynomial
 namespace AlgebraicGeometry.Proj
 
 /-- Coordinates of a homogeneous vector have the degrees prescribed by its basis.
-Source: Stacks Project, Constructions, Tags 01M6 and 01MN; step 1 of
-lem-sc-p1-homogeneous-basis-proj-coproduct.
-(blueprint: lem-sc-p1-homogeneous-basis-coordinates)
-
-Proof: Expand each coordinate polynomial into its finitely many homogeneous components.
-The component of degree n in coordinate a, multiplied by b a, lies in M_(n-d a).
-Regroup the resulting finite sum by the integer n-d a. Apply uniqueness of the internal
-additive decomposition of M to a vector in M_j: every grouped sum of degree other than
-j is zero. Linear independence of b implies each coefficient in each such grouped sum
-is zero. For each a at most one nonnegative n satisfies n-d a=j. Thus its coordinate
-is homogeneous of degree d a+j when that integer is nonnegative, and otherwise zero.
-The argument includes a zero vector and an empty basis. -/
+Source: Stacks Project, Constructions, Tags 01M6 and 01MN. -/
 theorem homogeneous_basis_coordinates (k : Type u) [Field k]
     (M : ModuleCat.{u} (MvPolynomial (Fin 2) k))
     (𝓜 : ℤ → AddSubgroup M) (h𝓜 : DirectSum.IsInternal 𝓜)

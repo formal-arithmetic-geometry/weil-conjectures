@@ -27,8 +27,7 @@ attribute [local irreducible] firstProjection secondProjection square
 attribute [local irreducible] projectionMap singleUnitIso
 
 /-- Change the second direct-image path to the first by conjugating the canonical
-pullback comparison. Source: blueprint First identity, `Rq_*Rp₂* = Rq_*Rp₁*`
-(blueprint: def-sfb-projective-first-section-comparison). -/
+pullback comparison. -/
 @[irreducible]
 def firstPathComparison
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -46,9 +45,7 @@ def firstPathComparison
     (condensedAmbientPullbackComparison Λ (square Y))).symm
 
 /-- The canonical section comparison for the first projection, obtained by conjugating
-its pullback section comparison. Source: the first identity in the rational projective-line
-triangle, composition along the diagonal
-(blueprint: def-sfb-projective-first-section-comparison). -/
+its pullback section comparison. -/
 @[irreducible]
 def firstPushSectionIso
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -63,9 +60,7 @@ def firstPushSectionIso
     (derivedSection Λ Y (firstProjection Y)
       (by unfold firstProjection; exact pullback.diagonal_fst _))
 
-/-- Realize the diagram's canonical first direct image in the fixed native interface.
-Source: the full-unit-normalized direct-image model in the First identity
-(blueprint: def-sfb-projective-first-section-comparison). -/
+/-- Realize the diagram's canonical first direct image in the fixed native interface. -/
 @[irreducible]
 def firstDiagramPushIso
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

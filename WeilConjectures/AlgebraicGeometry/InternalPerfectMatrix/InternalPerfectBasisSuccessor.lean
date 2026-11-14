@@ -115,16 +115,7 @@ private theorem square_transfer
   cases eq_of_heq heL
   exact h
 
-/-- Fixed quotient bases commute with the specified ordinary successor balancing map.
-Source: blueprint Compatible isomorphisms, the same integral bases at adjacent levels.
-(blueprint: lem-pe-internal-perfect-basis-successor).
-Proof: first prove the free comparison composition identity for an arbitrary
-integral module and a chosen finite basis. Lift that square to an arbitrary
-complex using the abstract formula for a mapped natural isomorphism. The
-integral complex and its explicit coefficient-category presentation are equal,
-as are their basis maps and the specified balancing maps. Transport the square
-along these equalities before taking the concrete degree component. This proves
-the square for exactly the published ordinary reduction and its fixed bases. -/
+/-- Fixed quotient bases commute with the specified ordinary successor balancing map. -/
 theorem quotientIso_successor (W : Scheme.{u})
     (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ)
     (hfree : ∀ i, Module.Finite (A l E) (P.X i) ∧ Module.Free (A l E) (P.X i))

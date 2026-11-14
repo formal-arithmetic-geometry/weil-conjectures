@@ -21,7 +21,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 /-! # A coherent depth-two module extending a finite etale algebra
 
 Source: Stacks Project, Tags 0EY6, 0EBJ, 0EBI and 0E9I.
-(blueprint: lem-sbc-depth-two-coherent-module-extension)
 -/
 
 @[expose] public section
@@ -118,26 +117,7 @@ private theorem restrict_stalk_smul
 
 /-- The underlying finite etale module admits a coherent extension of depth two.
 
-Source: Stacks Project, Tag 0EY6 proof of (1), Tags 0EBJ and 0EBI.
-(blueprint: lem-sbc-depth-two-coherent-module-extension)
-
-Proof: On each affine Noetherian open V, U intersect V is quasi-compact.
-The finite etale direct image on this intersection is finite locally free.
-Extend it to a finite module M on V and sheafify its double dual N. Localization
-commutes with duals of finite presentations, so the double dual restricts to
-that locally free module. Present the dual of M by finite free modules;
-dualizing gives an injection of N into a finite free module with image the
-kernel of a map to another finite free module. At a boundary stalk choose a
-regular pair x,y of the base ring. Multiplication by x is injective on N.
-If y n = x n' in N, compute in the free source to write n = x m. The equation
-x d(m) = 0 in the free target forces d(m) = 0, so m belongs to N. Thus y is
-injective on N/xN. Nakayama gives properness for a nonzero finite stalk;
-the zero stalk has infinite depth. The modules N are coherent and have finite
-sections on affine opens and finite stalks. On overlaps, Hartogs (Tag 0E9I)
-identifies each with the direct image of its common restriction. These canonical
-identifications satisfy the cocycle condition and glue the modules and their
-restriction isomorphisms. Coherence and boundary depth are local, so no global
-quasi-compactness is required. For an empty cover take the zero module. -/
+Source: Stacks Project, Tag 0EY6 proof of (1), Tags 0EBJ and 0EBI. -/
 theorem exists_depth_two_coherent_module_extension
     {L : Scheme.{u}} [IsLocallyNoetherian L] (U : L.Opens)
     (hboundary : ∀ y : L, y ∉ U →

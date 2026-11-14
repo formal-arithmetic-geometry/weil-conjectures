@@ -190,9 +190,8 @@ import all WeilConjectures.CategoryTheory.ConstantScalarTowerComparison
 
 /-! # Rational finite free models on the original strata
 
-Source: Bhatt--Scholze, Lemma 6.8.2, the paragraph before Definition 6.8.6,
-Definition 6.8.10 and Proposition 6.8.14(2); Stacks, Tags 03EI, 03EK, 03EL and 03EP
-(blueprint: lem-per-rational-stratum-finite-free-model).
+Source: Bhatt--Scholze, Lemma 6.8.2, the paragraph before Definition 6.8.6, Definition 6.8.10 and
+Proposition 6.8.14(2); Stacks, Tags 03EI, 03EK, 03EL and 03EP.
 -/
 
 @[expose] public noncomputable section
@@ -228,22 +227,18 @@ section Coefficients
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Integral scalars in the module universe. Source: Bhatt--Scholze, Definition 6.8.1
-(blueprint: lem-per-rational-stratum-finite-free-model). -/
+/-- Integral scalars in the module universe. Source: Bhatt--Scholze, Definition 6.8.1. -/
 abbrev A := ULift.{u + 1, u} (Padic.coefficientExtensionIntegers l E)
 
-/-- Rational scalars in the module universe. Source: Bhatt--Scholze, Definition 6.8.1
-(blueprint: lem-per-rational-stratum-finite-free-model). -/
+/-- Rational scalars in the module universe. Source: Bhatt--Scholze, Definition 6.8.1. -/
 abbrev K := ULift.{u + 1, u} E
 
-/-- The ordinary inclusion of coefficient rings. Source: Bhatt--Scholze, Lemma 6.8.2
-(blueprint: lem-per-rational-stratum-finite-free-model). -/
+/-- The ordinary inclusion of coefficient rings. Source: Bhatt--Scholze, Lemma 6.8.2. -/
 abbrev inclusion : A l E →+* K E :=
   RingHom.ulift (Padic.coefficientExtensionIntegers l E).subtype
 
 /-- Integral constant sections, using the existing constant-sheaf comparison.
-Source: Bhatt--Scholze, Definition 6.8.10
-(blueprint: lem-per-rational-stratum-finite-free-model). -/
+Source: Bhatt--Scholze, Definition 6.8.10. -/
 def integralConstants (S : Scheme.{u}) :
     (constantSheaf (ProEt.topology S) CommRingCat.{u + 1}).obj (CommRingCat.of (A l E)) ⟶
       integralCoefficientSheaf l S E := by
@@ -251,37 +246,32 @@ def integralConstants (S : Scheme.{u}) :
   exact continuousCoefficientConstantComparison S (A l E)
 
 /-- Rational constant sections, using the existing constant-sheaf comparison.
-Source: Bhatt--Scholze, Definition 6.8.6
-(blueprint: lem-per-rational-stratum-finite-free-model). -/
+Source: Bhatt--Scholze, Definition 6.8.6. -/
 def rationalConstants (S : Scheme.{u}) :
     (constantSheaf (ProEt.topology S) CommRingCat.{u + 1}).obj (CommRingCat.of (K E)) ⟶
       rationalCoefficientSheaf l S E := by
   letI := coefficientExtensionNormedField l E
   exact continuousCoefficientConstantComparison S (K E)
 
-/-- Ordinary rationalization `E tensor_A N`. Source: Bhatt--Scholze, Proposition 6.8.14(2)
-(blueprint: lem-per-rational-stratum-finite-free-model). -/
+/-- Ordinary rationalization `E tensor_A N`. Source: Bhatt--Scholze, Proposition 6.8.14(2). -/
 abbrev vectorSpace (N : ModuleCat.{u + 1} (A l E)) : ModuleCat.{u + 1} (K E) :=
   (ModuleCat.extendScalars (inclusion l E)).obj N
 
 /-- The specified integral local model, with the recorded constant module functor.
-Source: Bhatt--Scholze, Definition 6.8.10
-(blueprint: lem-per-rational-stratum-finite-free-model). -/
+Source: Bhatt--Scholze, Definition 6.8.10. -/
 abbrev integralModel (S : Scheme.{u}) (N : ModuleCat.{u + 1} (A l E)) :
     Modules (integralCoefficientSheaf l S E) :=
   ConstantFiniteFreePresentationExtension.extension (ProEt.topology S) (A l E)
     (integralCoefficientSheaf l S E) (integralConstants l E S) N
 
 /-- Scalar extension from the completed integral coefficient sheaf.
-Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2)
-(blueprint: lem-per-rational-stratum-finite-free-model). -/
+Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2). -/
 abbrev rationalize (S : Scheme.{u}) (M : Modules (integralCoefficientSheaf l S E)) :
     Modules (rationalCoefficientSheaf l S E) :=
   changeOfRingsOfUniverses.{u, u + 1, u + 1, u + 1} (integralRationalCoefficientMap l E S) M
 
 /-- The middle scalar model `E_S tensor_A N_S`.
-Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.14(2)
-(blueprint: lem-per-rational-stratum-finite-free-model). -/
+Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.14(2). -/
 abbrev directModel (S : Scheme.{u}) (N : ModuleCat.{u + 1} (A l E)) :
     Modules (rationalCoefficientSheaf l S E) :=
   ConstantFiniteFreePresentationExtension.extension (ProEt.topology S) (A l E)
@@ -289,16 +279,14 @@ abbrev directModel (S : Scheme.{u}) (N : ModuleCat.{u + 1} (A l E)) :
     (integralConstants l E S ≫ integralRationalCoefficientMap l E S) N
 
 /-- The rational constant-module model `E_S tensor_E V_S`.
-Source: Bhatt--Scholze, Definition 6.8.6 and Proposition 6.8.14(2)
-(blueprint: lem-per-rational-stratum-finite-free-model). -/
+Source: Bhatt--Scholze, Definition 6.8.6 and Proposition 6.8.14(2). -/
 abbrev rationalModel (S : Scheme.{u}) (V : ModuleCat.{u + 1} (K E)) :
     Modules (rationalCoefficientSheaf l S E) :=
   ConstantFiniteFreePresentationExtension.extension (ProEt.topology S) (K E)
     (rationalCoefficientSheaf l S E) (rationalConstants l E S) V
 
 /-- The normalized first comparison is the existing balanced scalar-tower isomorphism.
-Source: Stacks, Section 03EK; Bhatt--Scholze, Proposition 6.8.14(2)
-(blueprint: lem-per-rational-stratum-finite-free-model). -/
+Source: Stacks, Section 03EK; Bhatt--Scholze, Proposition 6.8.14(2). -/
 abbrev reassociation (S : Scheme.{u}) (N : ModuleCat.{u + 1} (A l E)) :
     rationalize l E S (integralModel l E S N) ≅ directModel l E S N :=
   scalarExtensionTowerIso.{u + 1, u, u + 1, u + 1}
@@ -306,8 +294,7 @@ abbrev reassociation (S : Scheme.{u}) (N : ModuleCat.{u + 1} (A l E)) :
     ((constantModuleHomFunctor (ProEt.topology S) (A l E)).obj N)
 
 /-- Integral restriction with the canonical continuous pullback of coefficient rings.
-Source: Bhatt--Scholze, paragraph before Definition 6.8.6
-(blueprint: lem-per-rational-stratum-finite-free-model). -/
+Source: Bhatt--Scholze, paragraph before Definition 6.8.6. -/
 def integralPullback {S X : Scheme.{u}} (h : S ⟶ X) :
     (proEtaleSheafInverseImage h CommRingCat.{u + 1}).obj
       (integralCoefficientSheaf l X E) ⟶ integralCoefficientSheaf l S E := by
@@ -315,8 +302,7 @@ def integralPullback {S X : Scheme.{u}} (h : S ⟶ X) :
   exact continuousCoefficientPullback (A l E) h
 
 /-- Rational restriction with the canonical continuous pullback of coefficient rings.
-Source: Bhatt--Scholze, paragraph before Definition 6.8.6
-(blueprint: lem-per-rational-stratum-finite-free-model). -/
+Source: Bhatt--Scholze, paragraph before Definition 6.8.6. -/
 def rationalPullback {S X : Scheme.{u}} (h : S ⟶ X) :
     (proEtaleSheafInverseImage h CommRingCat.{u + 1}).obj
       (rationalCoefficientSheaf l X E) ⟶ rationalCoefficientSheaf l S E := by
@@ -324,37 +310,32 @@ def rationalPullback {S X : Scheme.{u}} (h : S ⟶ X) :
   exact continuousCoefficientPullback (K E) h
 
 /-- The specified ordinary map from N to its rationalization, n mapped to 1 tensor n.
-Source: Bhatt--Scholze, Proposition 6.8.14(2)
-(blueprint: lem-per-rational-stratum-finite-free-model). -/
+Source: Bhatt--Scholze, Proposition 6.8.14(2). -/
 abbrev vectorUnit (N : ModuleCat.{u + 1} (A l E)) (x : N) : vectorSpace l E N :=
   (ModuleCat.ExtendRestrictScalarsAdj.Unit.map.{u + 1, u + 1, u + 1} (inclusion l E)) x
 
 /-- The finite power of the rational coefficient sheaf, including rank zero.
-Source: Stacks 03EK; Bhatt--Scholze, Definition 6.8.6
-(blueprint: lem-per-rational-stratum-finite-free-model). -/
+Source: Stacks 03EK; Bhatt--Scholze, Definition 6.8.6. -/
 abbrev freeModel (S : Scheme.{u}) (n : ℕ) : Modules (rationalCoefficientSheaf l S E) :=
   ConstantFiniteFreePresentationExtension.power.{u + 1, u} (ProEt.topology S)
     ((sheafCompose (ProEt.topology S) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
       (rationalCoefficientSheaf l S E)) n
 
-/-- Coordinates in the recorded finite power. Source: Stacks 03EK
-(blueprint: lem-per-rational-stratum-finite-free-model). -/
+/-- Coordinates in the recorded finite power. Source: Stacks 03EK. -/
 abbrev coord (S : Scheme.{u}) (n : ℕ) (U : S.ProEtᵒᵖ)
     (x : (freeModel l E S n).val.obj U) (i : Fin n) :=
   ConstantFiniteFreePresentationExtension.commCoordinate.{u + 1, u} (ProEt.topology S)
     (rationalCoefficientSheaf l S E) n U x i
 
 /-- Direct scalar-model maps, using the constant-module functor recorded by the dependency.
-Source: Stacks 03EI and 03EK
-(blueprint: lem-per-rational-stratum-finite-free-model). -/
+Source: Stacks 03EI and 03EK. -/
 abbrev directMap (S : Scheme.{u}) {N N' : ModuleCat.{u + 1} (A l E)} (f : N ⟶ N') :
     directModel l E S N ⟶ directModel l E S N' :=
   ConstantFiniteFreePresentationExtension.extensionMap (ProEt.topology S) (A l E)
     (rationalCoefficientSheaf l S E)
     (integralConstants l E S ≫ integralRationalCoefficientMap l E S) f
 
-/-- Rational scalar-model maps. Source: Stacks 03EI and 03EK
-(blueprint: lem-per-rational-stratum-finite-free-model). -/
+/-- Rational scalar-model maps. Source: Stacks 03EI and 03EK. -/
 abbrev rationalMap (S : Scheme.{u}) {V V' : ModuleCat.{u + 1} (K E)} (f : V ⟶ V') :
     rationalModel l E S V ⟶ rationalModel l E S V' :=
   ConstantFiniteFreePresentationExtension.extensionMap (ProEt.topology S) (K E)
@@ -404,18 +385,7 @@ The first is the existing scalar-tower isomorphism, not an arbitrary isomorphism
 The second is normalized on all local constant-module sections by n mapped to 1 tensor n.
 Its naturality equation and the restriction of both isomorphisms to every slice retain
 any chosen covering object.
-Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2); Stacks 03EK and 0GMW
-(blueprint: lem-per-rational-stratum-finite-free-model).
-
-Proof: The first comparison is the scalar-tower isomorphism, whose pure-tensor
-formula gives the first normalization. For the second comparison use the universal
-property of scalar constant generators. The forward map sends a tensor n to
-a tensor (1 tensor n). For the inverse, the ordinary extension/restriction adjunction
-extends n mapped to 1 tensor n to a linear map from K tensor_A N on each object.
-Compatibility of the constant coefficient units makes these maps balanced and
-natural. The same universal properties prove the two inverse identities and
-naturality in N. Applying overFunctor gives the comparisons on each specified slice.
-No flatness of N is used. -/
+Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2); Stacks 03EK and 0GMW. -/
 theorem scalarModels (S : Scheme.{u}) :
     ∃ e : ∀ (N : ModuleCat.{u + 1} (A l E)) (_hN : Module.FinitePresentation (A l E) N),
         directModel l E S N ≅ rationalModel l E S (vectorSpace l E N),
@@ -498,16 +468,14 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- The lattice presentation of rational continuous coefficients with their prescribed norm.
-Source: Bhatt--Scholze, Definition 6.8.1
-(blueprint: lem-per-rational-stratum-finite-free-model). -/
+Source: Bhatt--Scholze, Definition 6.8.1. -/
 def rationalLatticeRing (X : Scheme.{u}) : Rings X := by
   letI := coefficientExtensionNormedField l E
   exact latticeCoefficientSheaf X E
 
 /-- Commute continuous functions with the universe lift, by the pointwise maps.
 This transports to the coefficient presentation used by the recorded constructibility notion.
-Source: Bhatt--Scholze, Definition 6.8.1
-(blueprint: lem-per-rational-stratum-finite-free-model). -/
+Source: Bhatt--Scholze, Definition 6.8.1. -/
 def rationalLatticeRingIso (X : Scheme.{u}) :
     rationalCoefficientSheaf l X E ≅ rationalLatticeRing l E X := by
   letI := coefficientExtensionNormedField l E

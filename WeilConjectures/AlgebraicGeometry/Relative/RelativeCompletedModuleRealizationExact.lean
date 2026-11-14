@@ -52,7 +52,6 @@ import Mathlib.RingTheory.AdicCompletion.Completeness
 /-! # Exact relative realization of completion modules
 
 Source: Stacks Project, Modules on Sites, Tags 093J--093M; Pro-etale Cohomology, Tags 09BT and 09BV.
-(blueprint: lem-weil-pbc-relative-completed-module-realization-exact).
 -/
 
 @[expose] public noncomputable section
@@ -317,23 +316,7 @@ set_option linter.unusedVariables false in
 /-- The specified completion scalar maps give an exact relative module realization.
 Finite completion modules become relatively adic-lisse modules.
 
-Source: Stacks, sites-modules.tex, Tags 093J--093M; proetale.tex, Tags 09BT and 09BV.
-(blueprint: lem-weil-pbc-relative-completed-module-realization-exact).
-
-Proof: form φ from the cone of evaluations C → A/I^(n+1). The evaluation maps
-commute with every quotient map, so the limit universal property fixes φ uniquely.
-For β use the profinite coefficient inverse-image comparison on the finite quotient
-rings; its finite projection equations are the displayed equations. This comparison
-is invertible. The constant module functor is exact. The completed sheaf is flat
-over constant C: reduce at each power of IC, where it is the constant quotient
-ring, and apply the complete flatness criterion (093M). Thus extension along φ is
-exact on all modules. Both subsequent scalar restrictions are exact, proving the
-finite-limit and finite-colimit assertions. For a finite C-module N, Noetherian
-adic completeness identifies its realization with the limit of its constant finite
-quotients, naturally and linearly at every projection. Restricted to A, N is complete
-and N/IN is finite. These identifications on each site object witness relative
-adic lissity, using the projection equations for β and the completed coefficient
-comparison. The argument permits N=0, the zero ring, I=0 and I=top. -/
+Source: Stacks, Tags 093J--093M; Tags 09BT and 09BV. -/
 theorem relative_completed_module_realization_exact
     (X Y : Scheme.{u}) (h : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) :

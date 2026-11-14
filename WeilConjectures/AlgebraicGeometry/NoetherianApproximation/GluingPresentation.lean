@@ -71,7 +71,7 @@ noncomputable def localizationSubring {U : S.Opens} (A : Subring Γ(S, U)) (s : 
     ((S.resLE (hW.trans (S.basicOpen_le s))).hom '' A))
 
 variable (S) in
-/-- Blueprint `theorem-nagata-s-compactification-theorem--1`: Selected finite affine gluing
+/-- Selected finite affine gluing
 presentation.
 
 A finite affine open cover `S = ⋃ₐ Uₐ` together with, for every pair `(a, b)` of charts, finitely

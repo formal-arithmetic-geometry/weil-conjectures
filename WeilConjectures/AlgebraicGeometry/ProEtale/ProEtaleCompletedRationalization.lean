@@ -47,8 +47,7 @@ import WeilConjectures.CategoryTheory.SitePullbackAbelianUnderlying
 /-!
 # Rational coefficient comparison from fraction maps
 
-Source: the scalar sequence and ring structure in the completed coefficient comparison
-(blueprint: lem-pe-rational-comparison-from-fraction-maps).
+Source: the scalar sequence and ring structure in the completed coefficient comparison.
 -/
 
 @[expose] public section
@@ -139,18 +138,6 @@ private theorem sfb_rational_comparison_of_fraction_maps
     (hj X).1 B hB a
 
 /-- Assemble a rational coefficient comparison from the existing fraction maps.
-
-Source: literature/blueprint/latest/blueprint/sec-proetale-coefficients/
-sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-invert-ell.proof.md,
-scalar sequence and ring structure paragraphs
-(blueprint: lem-pe-rational-comparison-from-fraction-maps).
-
-Proof: The fraction recurrence is exactly successor naturality for the scalar sequence.
-Form its natural transformation to the constant rational module. For any cocone the
-successor equation gives the same recurrence, so the given explicit universal property
-constructs its unique descent map and proves IsColimit. The supplied fraction-leg
-pullback equations are precisely the bundled comparison equations. Finally apply the
-scalar-telescope ring universal property to the colimit and its ring zeroth leg.
 -/
 theorem sfb_rational_comparison_from_completed
     (ℓ : ℕ) (R K : Type) [CommRing R] [TopologicalSpace R] [IsTopologicalRing R]

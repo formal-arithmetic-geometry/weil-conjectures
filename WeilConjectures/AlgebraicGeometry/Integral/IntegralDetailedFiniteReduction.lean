@@ -15,9 +15,8 @@ import WeilConjectures.ProperBaseChange.IntegralCoefficientCompletenessTransport
 
 /-! # Finite reduction comparison for integral coefficient presentations
 
-Source: Bhatt--Scholze, Section 6.5, convention before Definition 6.5.1;
-Lemma 4.2.12 and Lemma 6.8.2(1)
-(blueprint: lem-weil-pbc-integral-detailed-finite-reduction).
+Source: Bhatt--Scholze, Section 6.5, convention before Definition 6.5.1; Lemma 4.2.12 and Lemma
+6.8.2(1).
 -/
 
 @[expose] public noncomputable section
@@ -183,21 +182,8 @@ private def detailedFiniteComparison (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
 
 /-- At one finite level, the normalized coefficient transport preserves exactly
 constructibility and any specified cohomological interval.
-Source: Bhatt--Scholze, Section 6.5, convention before Definition 6.5.1;
-Lemma 4.2.12 and Lemma 6.8.2(1)
-(blueprint: lem-weil-pbc-integral-detailed-finite-reduction).
-Proof: use the projection-normalized coefficient comparison to identify the two
-derived quotient functors after exact restriction along the finite coefficient
-isomorphism. The uniqueness of the left adjoint identifies the chosen detailed
-scalar extension with the quotient extension in that comparison. Exact coefficient
-restriction commutes with each cohomology functor and preserves and reflects zero
-objects. Thus the support condition is precisely IsGE a and IsLE b on the other
-side. Restriction along the finite coefficient isomorphism preserves and reflects
-finite local constancy on every stratum: restrict each constant finite module
-model and use the inverse coefficient isomorphism for reflection. The intrinsic
-and fixed-coefficient constructibility comparisons give exactly the displayed
-cohomology predicate. The finite support clause follows from support in the
-finite integer interval, including when the interval is empty. -/
+Source: Bhatt--Scholze, Section 6.5, convention before Definition 6.5.1; Lemma 4.2.12 and Lemma
+6.8.2(1). -/
 theorem integralDetailedFiniteReduction
     (T : Scheme.{u}) [IsNoetherian T] (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

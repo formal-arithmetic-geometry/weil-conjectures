@@ -29,9 +29,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.RegularImmersion
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineSmooth
 
 /-! # The canonical diagonal tensor comparison
-
-Source: blueprint main-20261015, rational projective-line unit/counit, clause 1
-(blueprint: def-sfb-internal-diagonal-tensor-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -51,8 +48,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
 -- Keep fixed site and derived comparisons folded during elaboration.
-/-- The actual canonical self-square. Source: blueprint clause 2
-(blueprint: def-sfb-internal-diagonal-tensor-comparison). -/
+/-- The actual canonical self-square. -/
 def square (Y : Scheme.{u}) :
     ChosenCartesianSquare (firstProjection Y) (secondProjection Y)
       (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y) where
@@ -62,8 +58,6 @@ def square (Y : Scheme.{u}) :
   hom_snd := Category.id_comp _
 
 /-- The projection mate followed by a specified section and unit comparison.
-Source: blueprint rational projective-line unit/counit, clause 1
-(blueprint: def-sfb-section-tensor-comparison).
 Keeping this construction over arbitrary schemes prevents specialization from
 unfolding the concrete projective-line site when checking its naturality. -/
 @[irreducible]
@@ -79,9 +73,7 @@ def sectionTensorMap {X S : Scheme.{u}} (g : X ⟶ S) (p : S ⟶ X)
     (tensorHom (s.hom.app M) e.hom ≫ (ρ_ M).hom)
 
 -- Keep fixed site and derived comparisons folded during elaboration.
-/-- The closed projection mate, followed by the section comparison and coefficient unitor.
-Source: blueprint unit/counit clause 1
-(blueprint: def-sfb-internal-diagonal-tensor-comparison). -/
+/-- The closed projection mate, followed by the section comparison and coefficient unitor. -/
 @[irreducible]
 def diagonalTensorMap (Y : Scheme.{u}) (M : DerivedCategory (Modules Λ (ProjectiveLine Y))) :
     (moduleObjectDerivedPullback Λ (firstProjection Y)).obj M ⊗
@@ -187,13 +179,7 @@ private theorem sectionTensorMap_isIso {Z U X : Scheme.{u}}
   infer_instance
 
 -- Keep fixed site and derived comparisons folded during elaboration.
-/-- The diagonal tensor map is invertible on every unbounded internal module.
-Source: blueprint unit/counit clause 1
-(blueprint: def-sfb-internal-diagonal-tensor-comparison).
-Proof: restrict to the closed support of the diagonal, where the section comparison
-identifies the canonical projection mate with the coefficient unitor. Away from the
-support both sides vanish. The exact conservative closed/open pair therefore detects
-its invertibility; no boundedness is used. -/
+/-- The diagonal tensor map is invertible on every unbounded internal module. -/
 theorem diagonalTensorMap_isIso (Y : Scheme.{u})
     (M : DerivedCategory (Modules Λ (ProjectiveLine Y))) :
     IsIso (diagonalTensorMap Λ Y M) := by
@@ -211,9 +197,7 @@ theorem diagonalTensorMap_isIso (Y : Scheme.{u})
     (unit Λ (ProjectiveLine Y)) (singleUnitIso Λ (ProjectiveLine Y)) M
 
 -- Keep fixed site and derived comparisons folded during elaboration.
-/-- The inverse canonical diagonal comparison in the source's orientation.
-Source: blueprint unit/counit clause 1
-(blueprint: def-sfb-internal-diagonal-tensor-comparison). -/
+/-- The inverse canonical diagonal comparison in the source's orientation. -/
 @[irreducible]
 def diagonalTensorIso (Y : Scheme.{u}) (M : DerivedCategory (Modules Λ (ProjectiveLine Y))) :
     (moduleObjectDerivedPushforward Λ (diagonalImmersion Y)).obj M ≅
@@ -378,12 +362,7 @@ private lemma diagonalTensorIso_hom_eq_inv (Y : Scheme.{u})
     (diagonalTensorIso Λ Y M).hom = inv (diagonalTensorMap Λ Y M) := by
   simp only [diagonalTensorIso, Iso.symm_hom, asIso_inv]
 
-/-- Naturality of the inverse canonical diagonal tensor comparison.
-Source: blueprint unit/counit clause 1
-(blueprint: def-sfb-internal-diagonal-tensor-comparison).
-Proof: the projection mate is natural in M, and the section and coefficient-unit
-comparisons are natural. Compose their naturality squares and invert the resulting
-isomorphisms to obtain the displayed square. -/
+/-- Naturality of the inverse canonical diagonal tensor comparison. -/
 theorem diagonalTensorIso_naturality (Y : Scheme.{u})
     {M N : DerivedCategory (Modules Λ (ProjectiveLine Y))} (f : M ⟶ N) :
     (moduleObjectDerivedPushforward Λ (diagonalImmersion Y)).map f ≫

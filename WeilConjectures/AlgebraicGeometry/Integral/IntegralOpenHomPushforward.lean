@@ -14,8 +14,7 @@ import all WeilConjectures.AlgebraicGeometry.Completed.CompletedExtensionZeroCom
 
 /-! # Internal Hom from integral open extension by zero
 
-Source: Bhatt--Scholze, Lemma 6.3.14(3); Stacks Tags 0E8I and 06YN
-(blueprint: lem-weil-pbc-integral-open-hom-pushforward).
+Source: Bhatt--Scholze, Lemma 6.3.14(3); Stacks Tags 0E8I and 06YN.
 -/
 
 @[expose] public noncomputable section
@@ -27,22 +26,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Internal Hom out of open extension by zero is open direct image of internal
 Hom into the open restriction. All coefficients are the identified completed rings.
-Source: Bhatt--Scholze, Lemma 6.3.14(3); Stacks Tags 0E8I and 06YN
-(blueprint: lem-weil-pbc-integral-open-hom-pushforward).
-
-Proof: use the equivalence of the open pro-etale site with the ambient ringed
-slice. Its module equivalence uses the specified completed-coefficient comparison.
-The sheafified summand projection formula gives extension(P tensor restriction Q)
-iso extension P tensor Q. Totalization preserves this formula with its cochain
-signs; restriction and extension preserve K-flatness, so product localization gives
-the same formula for the actual native derived tensors. Tensor-Hom transposition,
-the exact extension/restriction adjunction and the restriction/direct-image
-adjunction show that both displayed functors are right adjoints to tensor with
-the extension of P. Uniqueness of right adjoints gives the natural isomorphism.
-Transport the slice-site tensor and Hom comparisons through the coefficient and
-site equivalences; exact localization fixes the open extension, while adjoint
-uniqueness fixes the direct image. This argument includes the empty open and
-arbitrary unbounded P. -/
+Source: Bhatt--Scholze, Lemma 6.3.14(3); Stacks Tags 0E8I and 06YN. -/
 theorem integralOpen_homPushforward
     {U T : Scheme.{u}} {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (j : U ⟶ T) [IsOpenImmersion j]

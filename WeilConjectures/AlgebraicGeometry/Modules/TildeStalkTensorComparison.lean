@@ -17,7 +17,6 @@ import Mathlib.RingTheory.Localization.BaseChange
 # Tensor comparison for affine tilde stalk modules
 
 Source: Stacks Project, Schemes, Tag 01HV, and More on Algebra, Tag 06Y1.
-(blueprint: lem-pc-affine-tilde-stalk-tensor-comparison).
 -/
 
 @[expose] public section
@@ -100,22 +99,11 @@ private theorem stalk_map_toStalk (A : Type u) [CommRing A]
     TopCat.Presheaf.germ (moduleStructurePresheaf A M').presheaf ⊤ x _ _
   congr 1
 
-/-- (blueprint: lem-pc-affine-tilde-stalk-tensor-comparison) The tensor comparison
+/-- The tensor comparison
 for individual associated-sheaf stalks is natural in both modules. No acyclicity
 or K-flatness assumption is needed.
-Source: Stacks Project, Schemes, Tag 01HV, item (7), and More on Algebra,
-`lemma-base-change-K-flat`, Tag 06Y1, as used in Perfect Complexes, Tag 08DV.
-
-Proof: Put `B = O_{Spec A,x}`. The germ map `A → B` makes `B` the localization
-of `A` at the complement of the prime corresponding to `x`. Tag 01HV identifies
-`(tilde M)_x` with `B ⊗_A M` as a `B`-module, naturally in `M`. The balanced
-tensor isomorphism `N ⊗_B (B ⊗_A M) ≅ N ⊗_A M` sends
-`n ⊗ (b ⊗ m)` to `(b • n) ⊗ m`, and its inverse sends `n ⊗ m` to
-`n ⊗ (1 ⊗ m)`. Balancing makes these maps well defined and linear over `A`.
-The formulas on pure tensors show that the two composites are identities.
-For a morphism in either variable, both composites in the naturality square
-have the same value on pure tensors. Combine these squares with naturality
-of the stalk identification to obtain an isomorphism of bifunctors. -/
+Source: Stacks Project, Schemes, Tag 01HV, item (7), and More on Algebra, Tag 06Y1, as used in
+Perfect Complexes, Tag 08DV. -/
 theorem nonempty_restrictScalars_tensor_tildeStalkNatIso
     (A : Type u) [CommRing A] (x : Spec (.of A)) :
     let S := tilde.functor (.of A) ⋙

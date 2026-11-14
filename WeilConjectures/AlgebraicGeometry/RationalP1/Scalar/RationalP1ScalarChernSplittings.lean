@@ -10,8 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.RationalP1.Scalar.RationalP1Scal
 public import WeilConjectures.AlgebraicGeometry.RationalP1.Scalar.RationalP1ScalarChernP2Splitting
 
 /-! # The two scalar unit/Chern splittings
-
-Source: diagonal-tower unit/Chern splitting and the second rational P1 triangle.
 -/
 
 @[expose] public noncomputable section
@@ -34,33 +32,7 @@ attribute [local irreducible] firstProjection secondProjection square condensedA
 projective direct image.
 This asserts no compatibility between q and p2 and contains no exchange map.
 The Chern-degree-one equations are proved separately in ScalarChernDegree;
-the trace-zero unit values follow from negative Ext vanishing.
-
-Source: latest blueprint, sk-prop-diagonal-tower-trace.proof.md (1), and
-sk-prop-diagonal-tower-coefficients.proof.md (1)
-(blueprint: lem-sfb-rational-p1-scalar-chern-splittings).
-
-Proof: Positively twist and shift the invertible unit/Chern splitting of each
-of r.tq and r.t2. Its components are the twisted unit and positive Chern adjunct
-by diagonalTrace_twistedSplitting_components.
-Restrict the entire splitting to strict constant coefficient systems and apply
-the recorded derived limit. The unit and line comparisons are invertible, and
-the direct-image/limit comparison is fixed by its universal unit. Fullness and
-faithfulness on complete objects lift this splitting and its equations; the
-normalizations ha and hb identify its Chern components with a and b. Realize
-through r.eY, r.eP, r.eW and the full-unit squares of Reference. The resulting
-unit adjuncts are the actual derived adjunction units, not unspecified arrows.
-Now apply each actual derived scalar extension used in scalarQChern and
-scalarP2Chern. Additivity preserves the biproduct; the unit and root endpoint
-comparisons and the scalar/direct-image mates on the shifted lines are
-invertible by Family.
-For the closure stage the chosen bottom finite-field leg suffices, since
-Family.toClosure supplies its invertible line and direct-image comparisons.
-The root normalization identifies the first components with scalarTwistedUnit
-using the displayed scalarQLineIso and secondLineComparison. The canonical
-right-derived identifications give precisely the two native pushforward targets.
-Empty schemes and zero units cause no
-exception: every step is a functorial biproduct and inverse-isomorphism identity. -/
+the trace-zero unit values follow from negative Ext vanishing. -/
 theorem scalar_chern_splittings
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

@@ -19,7 +19,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 /-! # Bijectivity of the fixed section comparison
 
 Source: Stacks Project, Tag 0B91, clause (2), and Tag 079W.
-(blueprint: lem-sc-picard-direct-image-section-map-bijective)
 -/
 
 @[expose] public section
@@ -29,24 +28,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- The fixed degree-zero comparison is bijective after arbitrary base change.
-Source: Stacks Project, Tag 0B91, clause (2), and Tag 079W.
-(blueprint: lem-sc-picard-direct-image-section-map-bijective)
-
-Proof: Put q = pr_W, p = pr_T and M = pr_X^*L. The square of the two
-chosen pullbacks is cartesian by cancellation of the right pullback square.
-Compare tensor and ordinary pullback by uniqueness of left adjoints; transport
-invertibility of L to M. Flatness, quasi-compactness and separatedness persist
-under base change. Apply isIso_derivedBaseChange_of_flat_invertible to M, then
-compose with the invertible single-pullback comparison and coefficient isomorphism.
-The pulled-back structure sheaf is also canonically isomorphic to the structure
-sheaf in degree zero. Conjugating morphisms by these two isomorphisms is bijective.
-The target Rp_*(N[0]) is nonnegative. The source structure sheaf in degree zero is
-nonpositive, so the degree-zero homology functor is bijective on these morphisms.
-Transport by singleFunctorCompHomologyFunctorIso and canonicalDirectImageH0Iso,
-then evaluate at one using unitHomAddEquiv. Restriction from inverse-image top to
-top is invertible, since these opens are equal. Functor.map_comp and associativity
-identify the composite with exactly the defining formula of the fixed section map.
-All constructions apply also to empty schemes. -/
+Source: Stacks Project, Tag 0B91, clause (2), and Tag 079W. -/
 theorem picardDirectImageSectionMap_bijective
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

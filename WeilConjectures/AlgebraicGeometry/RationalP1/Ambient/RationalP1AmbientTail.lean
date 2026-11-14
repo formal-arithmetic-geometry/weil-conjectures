@@ -8,8 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.RationalP1.Ambient.RationalP1AmbientComposites
 
 /-! # The class-free tail of the specified ambient projective-line unit
-
-Source: the second identity of the rational projective-line triangle calculation.
 -/
 
 @[expose] public noncomputable section
@@ -30,9 +28,7 @@ attribute [local irreducible] unitComponent twistProjectionMap condensedAmbientE
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
-/-- The native exchange inverse, through the fixed module-object functor names.
-Source: rational projective-line triangle calculation, Second identity
-(blueprint: def-sfb-rational-p1-ambient-tail). -/
+/-- The native exchange inverse, through the fixed module-object functor names. -/
 @[irreducible]
 def ambientExchangeInverse {X' X Y' Y : Scheme.{u}}
     {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
@@ -59,9 +55,7 @@ variable (Y : Scheme.{u}) (L : ∀ X : Scheme.{u}, Modules Λ X)
     (L (ProjectiveLine Y)) (L (diagonalSurface Y)) e
     ((moduleObjectDerivedPullback Λ (firstProjection Y)).obj M)))
 
-/-- The two class-free arrows at the end of the fixed ambient unit formula.
-Source: rational projective-line triangle calculation, Second identity
-(blueprint: def-sfb-rational-p1-ambient-tail). -/
+/-- The two class-free arrows at the end of the fixed ambient unit formula. -/
 @[irreducible]
 def unitTail :
     (moduleObjectDerivedPushforward Λ (secondProjection Y)).obj
@@ -77,10 +71,7 @@ def unitTail :
     (twist Λ (ProjectiveLine Y) (L (ProjectiveLine Y))).map
       (ambientExchangeInverse Λ (square Y) M hb)
 
-/-- Separate the literal unit into its insertion and its class-free tail.
-Source: rational projective-line triangle calculation, Second identity
-(blueprint: def-sfb-rational-p1-ambient-tail).
-Proof: unfold the two fixed formulas; their two last factors agree literally. -/
+/-- Separate the literal unit into its insertion and its class-free tail. -/
 theorem unitComponent_factor (d : Diagram Λ Y L) :
     unitComponent Λ Y L d e M hb hp =
       (pushSectionIso Λ Y).hom.app M ≫

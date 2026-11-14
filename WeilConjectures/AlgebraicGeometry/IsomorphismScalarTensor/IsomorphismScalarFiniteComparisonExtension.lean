@@ -13,8 +13,7 @@ import all WeilConjectures.AlgebraicGeometry.SixFunctors.InverseImagePullbackCom
 This is the scalar-linearity step extending the normalized unit calculation to
 all middle finite coefficients.
 
-Source: Stacks Project, sites-modules.tex, Tags 03EK and 03EL, Step 4.
-(blueprint: lem-weil-isomorphism-scalar-finite-comparison-formula-extension).
+Source: Stacks Project, Tags 03EK and 03EL, Step 4.
 -/
 
 @[expose] public noncomputable section
@@ -130,8 +129,7 @@ private theorem finiteScalar_transport (n : ℕ) (U : X.ProEt)
 
 /-- Scalar linearity extends the unit calculation to every pure middle tensor.
 The proof applies the balancing relation in the sheafified tensor and the
-normalization of the finite scalar extension map.
-(blueprint: lem-weil-isomorphism-scalar-finite-comparison-formula-extension). -/
+normalization of the finite scalar extension map. -/
 theorem finite_formula_of_unit
     (bfin : ∀ n : ℕ,
       (integralOperationsGoodComplex l E Y).ι ⋙ finiteLeft l E L ι g n ≅

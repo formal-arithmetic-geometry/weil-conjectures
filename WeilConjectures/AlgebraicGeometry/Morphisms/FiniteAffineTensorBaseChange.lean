@@ -10,8 +10,7 @@ public import Mathlib.AlgebraicGeometry.Limits
 
 /-! # FiniteAffineTensorBaseChange
 
-Source: Stacks Project and Mathlib.
-(blueprint: lem-sbc-finite-affine-tensor-base-change) -/
+Source: Stacks Project and Mathlib. -/
 
 @[expose] public section
 
@@ -23,17 +22,7 @@ namespace AlgebraicGeometry.Scheme
 set_option backward.isDefEq.respectTransparency false in
 /-- Finite affine coproducts commute with tensor base change.
 
-Source: Mathlib pullbackSpecIso and scheme coproducts; Stacks Project, Tag 01JO.
-Proof: Pull back the summand open immersions of the given coproduct along the
-projection to X. They remain disjoint open immersions and their ranges cover
-by pullback of the coproduct open cover. The pulled-back summand is the
-pullback of Spec E_i and Spec A over Spec B; pullbackSpecIso identifies it
-with Spec (E_i tensor_B A). Its second projection is Spec of includeRight
-by pullbackSpecIso_inv_snd. The disjoint open cover gives an isomorphism
-with its coproduct. Composing the summand inclusions with the second
-projection proves the displayed equation by Sigma.hom_ext. The same cover
-argument applies to an empty family, when both sources are empty.
-(blueprint: lem-sbc-finite-affine-tensor-base-change) -/
+Source: Stacks Project, Tag 01JO. -/
 theorem finite_affine_tensor_base_change
     (B A : CommRingCat.{u}) [Algebra B A]
     (r : ℕ) (E : Fin r → Type u) [∀ i, CommRing (E i)] [∀ i, Algebra B (E i)]

@@ -20,8 +20,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 
 /-! # Closed costalks and uniformly bounded-below coproducts
 
-Source: Stacks Project, Tag 09BM; Bhatt--Scholze, Lemma 6.3.14(4)
-(blueprint: lem-weil-pbc-proetale-closed-costalk-coproducts).
+Source: Stacks Project, Tag 09BM; Bhatt--Scholze, Lemma 6.3.14(4).
 -/
 
 @[expose] public noncomputable section
@@ -34,19 +33,7 @@ namespace AlgebraicGeometry.Scheme
 set_option synthInstance.maxSize 4096 in
 /-- Every right adjoint to exact closed direct image preserves uniformly
 bounded-below coproducts for arbitrary ring-sheaf coefficients.
-Source: Stacks Project, Tag 09BM; Bhatt--Scholze, Lemma 6.3.14(4)
-(blueprint: lem-weil-pbc-proetale-closed-costalk-coproducts).
-
-Proof: choose the complementary open, which is quasi-compact since the ambient
-space is Noetherian. The ringed closed-kernel adjunction gives the derived closed
-and open adjunctions, their invertible counits, and vanishing of open restriction
-on the closed image. Exact open and closed restrictions jointly detect
-isomorphisms on cohomology and hence on the derived category. Open restriction
-preserves coproducts and lower bounds; qcqs open direct image preserves the
-resulting uniformly bounded-below coproduct. Apply the supported-right-adjoint
-coproduct theorem to these data. Its proof compares supported localization
-triangles and uses full faithfulness of closed direct image. No coefficient
-field, finite cohomological dimension, or rational action is needed. -/
+Source: Stacks Project, Tag 09BM; Bhatt--Scholze, Lemma 6.3.14(4). -/
 theorem proEtaleClosedCostalk_preservesCoproduct
     {T Z : Scheme.{u}} [TopologicalSpace.NoetherianSpace T]
     (i : Z ⟶ T) [IsClosedImmersion i]

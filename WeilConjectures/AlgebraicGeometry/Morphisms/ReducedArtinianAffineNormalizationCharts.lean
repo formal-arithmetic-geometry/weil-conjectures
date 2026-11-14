@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteAffineNormalizationCopr
 
 /-! # ReducedArtinianAffineNormalizationCharts
 
-Source: Stacks Project and Mathlib.
-(blueprint: lem-sbc-reduced-artinian-affine-normalization-charts) -/
+Source: Stacks Project and Mathlib. -/
 
 @[expose] public section
 
@@ -78,30 +77,7 @@ private theorem affine_normalization_iso (A : CommRingCat.{u}) (D : Type u)
 set_option backward.isDefEq.respectTransparency false in
 /-- Residue-field integral-closure charts for one reduced Artinian affine algebra.
 
-Source: Stacks Project, Tags 035H and 035I; Mathlib IsArtinianRing.equivPi.
-Proof: First identify the normalization of any affine A-algebra D with
-Spec (integralClosure A D). The normalization open-cover chart over the
-whole of Spec A is an isomorphism, since its open range is the preimage
-of the whole base. Transport its integral-closure ring across the global
-section isomorphisms Gamma(Spec A) = A and Gamma(Spec D) = D. Integrality
-is preserved in both directions by these commuting ring isomorphisms,
-and naturality of GammaSpecIso proves the structural equation.
-Now IsArtinianRing.equivPi identifies the reduced Artinian ring D with
-the finite product of its quotients D/P by maximal ideals. Apply Spec,
-use sigmaSpec to identify the product spectrum with the coproduct, and
-reindex the finite maximal spectrum by Fin r. Quotient maps are precisely
-the coordinates of equivPi, so this identification is over Spec A with
-the quotient-induced algebra structures. Apply
-finite_affine_normalization_coproduct to this presentation. Its coproduct
-open cover selects the component containing the inverse image of x.
-The affine normalization isomorphism for that quotient, followed by the
-summand inclusion and the normalization isomorphism, is the requested
-open immersion. The two structural equations give its structural map;
-the inverse affine isomorphism gives a preimage of x. Zero rings have
-empty maximal spectrum, so the same cover argument handles them without
-an extra nontriviality assumption. No product-of-integral-closures lemma
-or additional localization argument is needed.
-(blueprint: lem-sbc-reduced-artinian-affine-normalization-charts) -/
+Source: Stacks Project, Tags 035H and 035I. -/
 theorem reduced_artinian_affine_normalization_charts
     (A : CommRingCat.{u}) (D : Type u) [CommRing D] [Algebra A D]
     [IsArtinianRing D] [_root_.IsReduced D]

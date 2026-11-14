@@ -22,9 +22,6 @@ import all WeilConjectures.AlgebraicGeometry.Cartesian.CartesianCoefficientTwist
 import WeilConjectures.CategoryTheory.ProEtaleCoefficients.EquivalenceAdjunctionComparisonSupplement
 
 /-! # The normalized rational Tate pullback comparison
-
-Source: blueprint main-20261015, rational projective-line unit/counit, proof steps 4 and 10
-(blueprint: def-sfb-rational-tate-pullback-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -42,8 +39,7 @@ namespace AlgebraicGeometry.ProEtale.RationalP1
 open DiagonalCoefficients CondensedRing
 
 -- Keep fixed site and derived comparisons folded during elaboration.
-/-- The given rational coefficient, with the finite-subextension convention for the closure.
-Source: blueprint coefficient setting (blueprint: def-sfb-rational-tate-pullback-comparison). -/
+/-- The given rational coefficient, with the finite-subextension convention for the closure. -/
 def coefficient (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l)) :
     Profinite.CondensedRing.{u} :=
   match c with
@@ -51,24 +47,18 @@ def coefficient (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermedi
   | none => Mon.mk (Profinite.padicAlgClRingObj l)
 
 -- Keep fixed site and derived comparisons folded during elaboration.
-/-- The chosen coefficient ring is commutative. Source: blueprint coefficient convention
-(blueprint: def-sfb-rational-tate-pullback-comparison).
-Proof: split the coefficient index; each branch is the existing commutative coefficient
-ring, for continuous functions in the finite case and finite-subextension functions in
-the closure case. -/
+/-- The chosen coefficient ring is commutative. -/
 theorem coefficient_isCommMonObj (l : ℕ) [Fact l.Prime]
     (c : Option (PadicAlgCl.FiniteIntermediateField l)) :
     IsCommMonObj (coefficient.{u} l c).X := by
   cases c <;> dsimp only [coefficient] <;> infer_instance
 
-/-- Commutativity of the actual selected coefficient ring. Source: blueprint coefficients
-(blueprint: def-sfb-rational-tate-pullback-comparison). -/
+/-- Commutativity of the actual selected coefficient ring. -/
 instance coefficient_comm (l : ℕ) [Fact l.Prime]
     (c : Option (PadicAlgCl.FiniteIntermediateField l)) :
     IsCommMonObj (coefficient.{u} l c).X := coefficient_isCommMonObj l c
 
-/-- The existing positive Tate module. Source: blueprint twist convention
-(blueprint: def-sfb-rational-tate-pullback-comparison). -/
+/-- The existing positive Tate module. -/
 def line (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (X : Scheme.{u}) : Modules (coefficient l c).X X :=
   match c with
@@ -76,9 +66,7 @@ def line (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateFiel
   | none => spQbarTwist X l
 
 -- Keep fixed site and derived comparisons folded during elaboration.
-/-- Select the preceding coefficient diagram, retaining its fixed class and traces.
-Source: blueprint preceding coefficient theorem
-(blueprint: def-sfb-rational-tate-pullback-comparison). -/
+/-- Select the preceding coefficient diagram, retaining its fixed class and traces. -/
 def diagram (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (Y : Scheme.{u}) (family : Family l Y) :
     Diagram (coefficient l c).X Y (line l c) :=
@@ -87,12 +75,7 @@ def diagram (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateF
   | none => family.closure
 
 -- Keep fixed site and derived comparisons folded during elaboration.
-/-- The unique linear lift of the prescribed abelian adjunct. Source: blueprint
-Cartesian Tate comparison (blueprint: def-sfb-rational-tate-pullback-comparison).
-Proof: the Cartesian comparison is semilinear for the actual coefficient pullback.
-The extension-of-scalars adjunction gives its linear lift; Cartesian invertibility
-makes this lift an isomorphism. Faithfulness of forgetting module actions and the
-adjunction bijection show uniqueness. -/
+/-- The unique linear lift of the prescribed abelian adjunct. -/
 theorem linePull_existsUnique
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X S : Scheme.{u}} (f : X ⟶ S)
@@ -147,9 +130,7 @@ theorem linePull_existsUnique
   exact (eq_of_heq he').trans hn.symm
 
 -- Keep fixed site and derived comparisons folded during elaboration.
-/-- The determined linear lift; its data are fixed by the displayed adjunct equation.
-Source: blueprint Cartesian Tate comparison
-(blueprint: def-sfb-rational-tate-pullback-comparison). -/
+/-- The determined linear lift; its data are fixed by the displayed adjunct equation. -/
 def linePullIso
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X S : Scheme.{u}} (f : X ⟶ S)
@@ -160,17 +141,14 @@ def linePullIso
 
 -- Keep fixed site and derived comparisons folded during elaboration.
 /-- The existing normalized adic comparison. Its root, scalar and coprojection
-normalizations determine the maps used here. Source: blueprint Cartesian coefficients
-(blueprint: def-sfb-rational-tate-pullback-comparison). -/
+normalizations determine the maps used here. -/
 def adicComparison (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}} (f : X ⟶ S)
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ x : S, Invertible (l : S.residueField x)] : CartesianAdicComparison l f :=
   Classical.choice (((cartesianCoefficients l f).2.1 inferInstance inferInstance).2.2)
 
 -- Keep fixed site and derived comparisons folded during elaboration.
-/-- The linear rational or closure comparison with its prescribed abelian adjunct.
-Source: blueprint Cartesian coefficients
-(blueprint: def-sfb-rational-tate-pullback-comparison). -/
+/-- The linear rational or closure comparison with its prescribed abelian adjunct. -/
 def lineComparison (l : ℕ) [Fact l.Prime]
     (c : Option (PadicAlgCl.FiniteIntermediateField l)) {X S : Scheme.{u}} (f : X ⟶ S)
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -183,9 +161,7 @@ def lineComparison (l : ℕ) [Fact l.Prime]
       (adicComparison l f).qbar_cartesian
 
 -- Keep fixed site and derived comparisons folded during elaboration.
-/-- The canonical shifted derived comparison, with no new line isomorphism.
-Source: blueprint unit/counit proof step 10
-(blueprint: def-sfb-rational-tate-pullback-comparison). -/
+/-- The canonical shifted derived comparison, with no new line isomorphism. -/
 def shiftedLineComparison (l : ℕ) [Fact l.Prime]
     (c : Option (PadicAlgCl.FiniteIntermediateField l)) {X S : Scheme.{u}} (f : X ⟶ S)
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -208,11 +184,7 @@ open CategoryTheory CategoryTheory.Limits DiagonalCoefficients
 open scoped CategoryTheory.Obj
 
 -- Keep fixed site and derived comparisons folded during elaboration.
-/-- The coefficient prime remains a unit in every residue field over the given field.
-Source: blueprint unit/counit, positive characteristic convention
-(blueprint: def-sfb-rational-tate-pullback-comparison).
-Proof: the image of ell in k is nonzero since p and ell are distinct primes. It is
-therefore a unit, and the structural map k to each residue field preserves units. -/
+/-- The coefficient prime remains a unit in every residue field over the given field. -/
 theorem residueIsUnit (l : ℕ) [Fact l.Prime] (k : Type u) [Field k]
     (p : ℕ) [Fact p.Prime] [CharP k p] (_hpl : p ≠ l)
     (X : Scheme.{u}) (a : X ⟶ Spec (.of k)) (x : X) :
@@ -223,9 +195,7 @@ theorem residueIsUnit (l : ℕ) [Fact l.Prime] (k : Type u) [Field k]
   simpa only [map_natCast] using hl.map (a.residueFieldAlgebraMap x)
 
 -- Keep fixed site and derived comparisons folded during elaboration.
-/-- The specified shifted Tate comparison for the second projective projection.
-Source: blueprint unit/counit proof step 10
-(blueprint: def-sfb-rational-tate-pullback-comparison). -/
+/-- The specified shifted Tate comparison for the second projective projection. -/
 def secondLineComparison (l : ℕ) [Fact l.Prime]
     (c : Option (PadicAlgCl.FiniteIntermediateField l)) (k : Type u) [Field k]
     (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

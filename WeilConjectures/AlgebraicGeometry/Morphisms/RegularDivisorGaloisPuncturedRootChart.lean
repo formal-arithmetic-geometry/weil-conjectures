@@ -24,26 +24,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The regular-divisor Kummer theorem, applied after an affine base change.
 
-Source: Stacks Project, Tags 09EB and 0EYG, including its case off the divisor.
-(blueprint: lem-sbc-regular-divisor-galois-punctured-root-chart)
-
-Proof: First apply regular_divisor_root_splitting. This gives an affine pointed
-etale neighborhood Spec S with equation g equal to the image of f, and a single
-positive invertible exponent n whose punctured root cover splits the pulled-back
-torsor. Construct its factorization through D(g): the pullback universal property
-gives a map to U times_L Spec R, and beta sends this map into D(f). Taking the
-inverse image under Spec S to Spec R gives D(g); the universal property of its
-open immersion gives the required factorization. Apply root_split_cover_cyclic_charts
-to this factorization and the root splitting. It gives a further pointed affine
-etale neighborhood, a finite list of positive unit exponents, and the required
-punctured product chart. Compose the two etale maps and their point identities.
-Finally use pullback.congrHom for associativity of composition and
-pullbackLeftPullbackSndIso for pasting the two base changes. Compose these with
-the chart isomorphism; their second-projection identities give the required
-compatibility over the final affine base. Both remaining lemmas are strictly parts
-of the argument: the first kills ramification without classifying the cover, and
-the second classifies a cover already split by one root extension without any
-Galois or invertible-group-order hypothesis. -/
+Source: Stacks Project, Tags 09EB and 0EYG, including its case off the divisor. -/
 theorem GaloisCover.regular_divisor_punctured_root_chart
     {L U : Scheme.{u}} (i : U ⟶ L)
     (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)

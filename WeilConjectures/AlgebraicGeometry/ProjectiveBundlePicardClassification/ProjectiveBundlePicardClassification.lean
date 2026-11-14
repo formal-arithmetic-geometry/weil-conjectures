@@ -16,9 +16,8 @@ import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
 /-!
 # Picard classification on projective bundles over arbitrary schemes
 
-Source: EGA II, Remark 4.2.7, printed p.75; arbitrary-base extension by Stacks,
-Tag 0B8W, with the field normalization of Tag 0BXJ
-(blueprint: lem-sfb-projective-bundle-picard-classification).
+Source: EGA II, Remark 4.2.7, printed p.75; arbitrary-base extension by Stacks, Tag 0B8W, with the
+field normalization of Tag 0BXJ.
 -/
 
 @[expose] public section
@@ -35,8 +34,7 @@ namespace AlgebraicGeometry.ProjectiveBundlePicardClassification
 open Scheme.Modules ProjectiveBundleQuotientGeometry
 
 /-- The decomposition with degree d and coefficient line N, using the concrete glued twist.
-Source: EGA II, Remark 4.2.7; Stacks, Tag 0B8W
-(blueprint: lem-sfb-projective-bundle-picard-classification). -/
+Source: EGA II, Remark 4.2.7; Stacks, Tag 0B8W. -/
 def Decomposes {S P : Scheme.{u}} (p : P ⟶ S) (A : P.Modules)
     (hA : A.IsInvertible) (L : P.Modules) (d : LocallyConstant S ℤ)
     (N : S.Modules) : Prop :=
@@ -45,8 +43,7 @@ def Decomposes {S P : Scheme.{u}} (p : P ⟶ S) (A : P.Modules)
 
 /-- The equivalent local formulation: a neighbourhood of each base point supports
 an integer twist, with no coefficient line left after shrinking.
-Source: EGA II, Remark 4.2.7; Stacks, Tags 0B8W and 0BXJ
-(blueprint: lem-sfb-projective-bundle-picard-classification). -/
+Source: EGA II, Remark 4.2.7; Stacks, Tags 0B8W and 0BXJ. -/
 def IsLocallyTwist {S P : Scheme.{u}} (p : P ⟶ S) (A : P.Modules)
     (hA : A.IsInvertible) (L : P.Modules) : Prop :=
   ∀ s : S, ∃ U : S.Opens, s ∈ U ∧ ∃ m : ℤ,
@@ -56,8 +53,7 @@ def IsLocallyTwist {S P : Scheme.{u}} (p : P ⟶ S) (A : P.Modules)
 /-- All clauses of the classification, for a fixed projection and tautological line.
 Base change is expressed on any pullback square, hence includes the canonical
 projective bundle of the pulled-back E by quotient geometry.
-Source: EGA II, Remarks 4.2.7 and 4.2.10; Stacks, Tags 0B8W and 0BXJ
-(blueprint: lem-sfb-projective-bundle-picard-classification). -/
+Source: EGA II, Remarks 4.2.7 and 4.2.10; Stacks, Tags 0B8W and 0BXJ. -/
 structure HasPicardClassification {S P : Scheme.{u}} (p : P ⟶ S)
     (A : P.Modules) (hA : A.IsInvertible) : Prop where
   /-- The glued twist has the specified restriction on each disjoint open stratum. -/
@@ -94,8 +90,7 @@ structure HasPicardClassification {S P : Scheme.{u}} (p : P ⟶ S)
     ∃! m : ℤ, Nonempty (L ≅ integerLinePower A hA m)
 
 /-- The explicit tensor pullback preserves local triviality, by uniqueness of left
-adjoints and the ordinary module pullback. Source: Stacks, Tag 0096
-(blueprint: lem-sfb-projective-bundle-picard-classification). -/
+adjoints and the ordinary module pullback. Source: Stacks, Tag 0096. -/
 private theorem invertible_tensorPullback {X Y : Scheme.{u}} (f : X ⟶ Y)
     (M : Y.Modules) (hM : M.IsInvertible) : ((tensorPullback f).obj M).IsInvertible := by
   have : M.IsInvertible := hM
@@ -108,44 +103,7 @@ unique degree/coefficient decomposition, its local form, tensor law and arbitrar
 base-change compatibility. The existential quasi-coherence proof is a consequence
 of finite local freeness, so it adds no hypothesis.
 
-Source: EGA II, Remark 4.2.7, printed p.75; Stacks, Tags 0B8W, 0BXJ and 07VK
-(blueprint: lem-sfb-projective-bundle-picard-classification).
-
-Proof:
-1. Over a field trivialize L on the polynomial affine charts using
-lem-sfb-affine-space-invertible-trivial. Units on a double overlap are exactly
-c times an integer power of the coordinate ratio, by polynomial and Laurent degrees.
-2. For dimension one use lem-sfb-projective-line-invertible-classification. In higher
-dimension the triple-overlap cocycle forces all exponents equal; rescale chart bases
-to remove the scalar cocycle. The remaining transitions define O(m). Chart units
-are constants, proving uniqueness and invariance under field extension.
-3. Over a Noetherian affine base trivialize the fibre after twisting by -m. Properness,
-flatness of polynomial charts, H^1(P^n,O)=0 and
-lem-sfb-proper-flat-fibre-section-lifting lift its generator. Its generation locus
-contains the fibre; properness lets us remove the closed image of its complement.
-This gives the asserted local twist near the base point.
-4. For an arbitrary base trivialize E on affine opens. Write each coordinate ring
-as a limit of finite-type integer algebras. The projective-space models are qcqs
-with affine transitions and have the required limit by lem-weil-pbc-limit-fibre-products.
-Descend L by lem-trf-invertible-affine-limit-descent and pull back step 3.
-5. Field uniqueness identifies the local exponents on overlaps, giving the locally
-constant d. Glue its powers on the disjoint open strata; the direct-image product
-used here has precisely those sections, including on the empty scheme.
-6. The degree-zero projective-space cohomology calculation identifies O_S with
-p_*O_P as sheaves of rings on every open, compatibly with restriction and base change.
-7. The transition units of L tensor O(-d) therefore descend uniquely to units on
-the base. Glue them to N using lem-weil-pbc-glue-sheaves-of-modules. The compatible
-local maps glue to p^*N isomorphic to L tensor O(-d). Conversely trivialize N locally
-and make d constant to recover the local formulation.
-8. Restrict any decomposition to each residue-field fibre to recover d. To recover
-N up to isomorphism, trivialize both candidate lines locally; an isomorphism of
-their pullbacks is multiplication by a unit, which descends uniquely by step 6.
-The descended local maps glue; no section of p is needed.
-9. Multiplication of transitions gives the tensor law. Quotient geometry identifies
-the base change with P(h^*E) and its tautological line, by representable uniqueness.
-Pullback preserves tensor, duals and composition, so on each degree stratum it
-pulls the decomposition back to (d composed with h,h^*N). Field coefficient lines
-are trivial, yielding the final assertion. -/
+Source: EGA II, Remark 4.2.7, printed p.75; Stacks, Tags 0B8W, 0BXJ and 07VK. -/
 theorem projective_bundle_picard_classification (S : Scheme.{u}) (E : S.Modules)
     (r : ℕ) [SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u} E r] (hr : 2 ≤ r) :
     ∃ hE : E.IsQuasicoherent,

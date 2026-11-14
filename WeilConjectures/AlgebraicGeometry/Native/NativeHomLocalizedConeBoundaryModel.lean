@@ -85,8 +85,7 @@ private noncomputable def modelComparison (I : CochainComplex C ℤ) [I.IsKInjec
 end Model
 
 /-- The signed native-Hom cone calculation on a K-injective model.
-Source: Stacks Project, Tag 08JC, the cone calculation in lemma-RHom-triangulated
-(blueprint: lem-sf-native-hom-localized-cone-boundary-model).
+Source: Stacks Project, Tag 08JC.
 
 The Hom complex into a K-injective complex identifies the Hom of an ordinary
 mapping cone with the inverse rotation of the Hom cone.  The two summand

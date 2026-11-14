@@ -33,10 +33,6 @@ public import Mathlib.Order.CompletePartialOrder
 
 /-!
 # Thick and essentially small constructible finite-Tor complexes
-
-Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-brown-hypotheses,
-node lemma-hypotheses-brown-representability--5 (blueprint:
-lemma-hypotheses-brown-representability--5).
 -/
 
 @[expose] public section
@@ -268,29 +264,6 @@ private theorem finite_bounded_thick (A : Type u) [CommRing A]
 the bounded constructible finite-Tor complexes form a thick essentially small subcategory.
 The alternatives in `_hΛ` are finite discrete `A` killed by an `l`-power, `ℤ_[l]`,
 `𝒪_E`, `ℚ_[l]`, `E`, and the finite-subextension-valued condensed `ℚ̄_l`.
-
-Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-brown-hypotheses,
-node lemma-hypotheses-brown-representability--5 (blueprint:
-lemma-hypotheses-brown-representability--5).
-
-Proof: finite discrete coefficients are transported through the normalized ordinary
-encoding. The ordinary constructible heart is a weak Serre class, so its bounded
-homology subcategory is thick. Integral coefficients use the constant-model heart
-closure theorem and the same weak-Serre bounded-thickness lemma. Rational field
-coefficients use the existing coefficient-heart triangulation theorem. Restriction
-of scalars along a coefficient isomorphism preserves and reflects boundedness and
-constructibility and induces a triangulated functor; hence these cases cover the
-six alternatives, using the normalized bottom-field identifications for the base
-p-adic rings.
-
-For smallness, the proved finite-stratification counting argument in
-`CoefficientHeartSmall` applies uniformly to the condensed coefficient object:
-finite scalar presentations and cover descent give small families on each stratum,
-and the joint-adjunction embedding and well-poweredness count their realizations.
-The general bounded-homology smallness theorem then counts ambient Postnikov
-extensions of these heart representatives. Intersect with finite Tor amplitude:
-its well-definedness theorem supplies triangulation, repleteness and retract
-stability, while essential smallness passes to a smaller object property.
 -/
 theorem det_brown_hypotheses_small
     (l : ℕ) [Fact l.Prime]

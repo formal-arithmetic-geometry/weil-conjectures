@@ -128,17 +128,7 @@ private theorem normalized_push
   exact pushHom_transport _ _ e e' s.iso (derivedComapLowerStarIso a f)
     (normalized_restriction_square a f R R' e e' he he' s) K
 
-/-- The explicit scalar Chern construction agrees with the canonical scalar push map.
-Source: blueprint coefficient changes (2)--(3), normalized derived restriction squares.
-(blueprint: lem-sfb-scalar-chern-canonical-model).
-
-Proof: Compare the supplied and canonical restriction squares on K-injective
-complexes. Cancel the source model's invertible computation unit and the target's
-exact-functor comparison. Naturality moves the canonical model identification
-through that comparison; the supplied square normalization and both model unit
-normalizations identify the remaining paths. Localization gives equality on all
-derived objects. Transport it through the scalar adjunction mate and use the target
-model identification's naturality on the shifted endpoint map. -/
+/-- The explicit scalar Chern construction agrees with the canonical scalar push map. -/
 theorem extendScalarChern_canonical
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']

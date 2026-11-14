@@ -10,9 +10,7 @@ public import Mathlib.AlgebraicGeometry.Normalization
 
 /-! # Relative normalization under affine localization
 
-Source: Stacks Project, Tag 0307; the affine calculation of
-Sheaf.AlgebraicGeometry.Morphisms.NormalizationStalkBaseChange.
-(blueprint: lem-sbc-normalization-affine-localization)
+Source: Stacks Project, Tag 0307.
 -/
 
 @[expose] public section
@@ -109,17 +107,7 @@ private theorem normalizationPullback_affine_localization {X C Y : Scheme.{u}}
 /-- Relative normalization commutes with a flat morphism of affine schemes whose
 map on global sections is a localization.
 
-Source: Stacks Project, Tag 0307 (lemma-integral-closure-localize), together with
-flat base change of sections, Tag 02KH.
-(blueprint: lem-sbc-normalization-affine-localization)
-
-Proof: The sections of the relative normalization over an affine base are the
-integral closure of the base ring in the sections of the source. Flat base change
-of qcqs sections identifies the base-changed sections with their tensor product.
-Integral closure commutes with localization, so the induced integral-closure map
-is bijective. The affine normalization comparison is its Spec, hence is an
-isomorphism. Restricting to the top open does not change whether a map is an
-isomorphism. No finiteness, reducedness or normality hypothesis is needed. -/
+Source: Stacks Project, together with flat base change of sections, Tag 02KH. -/
 theorem Hom.isIso_normalizationPullback_affine_localization
     {X C Y : Scheme.{u}} [IsAffine C] [IsAffine Y]
     (f : X ⟶ C) (g : Y ⟶ C) [QuasiCompact f] [QuasiSeparated f] [Flat g]

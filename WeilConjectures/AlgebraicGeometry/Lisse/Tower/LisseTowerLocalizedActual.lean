@@ -30,35 +30,7 @@ pro-etale localization, using the constructed scalar comparison.
 
 Source: Stacks Project, Modules on Sites, Tags 03CY and 03DA; Cohomology on Sites,
 Tag 06YY. These are the actual-level parts of steps 1 and 2 of
-lem-weil-pbc-lisse-tower-localized-realization.
-(blueprint: lem-weil-pbc-lisse-tower-localized-actual).
-
-Proof: let a = f.left followed by V.hom, from W.left to U.left. On ordinary module
-sheaves, associated-module-sheafification and inverse image have canonically isomorphic
-composites: the map is induced by identity on pulled presheaf sections, and its inverse
-is determined by the same sheafification adjunction. Apply this to the locally
-bijective finite scalar presentations lisseTowerFiniteScalarMap. The resulting
-comparison identifies fixed realization after inverse image along a with module
-inverse image after fixed realization on U.left. Localize this exact comparison and
-paste the inverse-image compositors for f.left, V.hom and U.hom followed by g.
-The equation f.w gives a followed by U.hom = W.hom, so applying this comparison,
-inverse image of the specified e_n, and the actual module inverse-image compositor
-gives actual_n. This construction works for every n without boundedness assumptions.
-
-For consecutive levels, the ordinary coefficient-interchange cube commutes: after
-forgetting to abelian sheaves all of its maps are induced by the same identity on
-pulled sections. The supplied hc_n and
-lisseTowerNormalizedScalarSquare_sections at W fix the two ordinary scalar faces,
-so faithfulness of forgetting modules proves the cube before localization. Localize
-it, retaining mapDerivedCategoryCompIso and the two restriction compositors rather
-than replacing them by arbitrary isomorphisms. Apply inverse image to hdelta_n.
-Naturality of the level comparisons moves e_n and e_(n+1) through the cube. Composition
-coherence for inverse image identifies the transported actual transition with
-adicTowerRestrictedTransition at W.hom followed by g. Its further restriction to
-completion coefficients is exactly constantAdicRestrictedStep, by that definition
-and constantAdicFiniteProjection_comp. Cancelling the common invertible comparison
-factors gives the displayed equation. The construction uses no constant algebraic
-models and no choices of local markings, and works on zero objects and empty bases. -/
+lem-weil-pbc-lisse-tower-localized-realization. -/
 theorem lisseTower_localized_actual
     (X Y : Scheme.{u}) (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (M : AdicTower X d)

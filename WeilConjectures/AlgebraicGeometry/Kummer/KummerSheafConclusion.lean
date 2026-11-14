@@ -7,9 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Kummer.KummerSheafPredicates
 
-/-! # Concrete propositions for sheaf Kummer assembly
-Source: the normalized source, target and finite evaluation in the diagonal tower
-proof, steps (3)--(4) (blueprint: def-sfb-kummer-sheaf-conclusion). -/
+/-! # Concrete propositions for sheaf Kummer assembly -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -31,8 +29,6 @@ set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
 /-- The actual normalized-boundary proposition over a fixed scheme.
-Source: diagonal tower proof, steps (3)--(4)
-(blueprint: def-sfb-kummer-sheaf-conclusion).
 Its body is precisely normalizedBoundaryTarget with the actual coefficient
 functors and roots normalization. No data is chosen and no proof is postponed. -/
 def sheafKummerConclusion (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})

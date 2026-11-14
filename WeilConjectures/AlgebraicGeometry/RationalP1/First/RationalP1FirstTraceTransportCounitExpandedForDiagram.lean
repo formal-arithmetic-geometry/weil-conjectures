@@ -12,10 +12,6 @@ import WeilConjectures.AlgebraicGeometry.RationalP1.First.RationalP1FirstTracePr
 import WeilConjectures.AlgebraicGeometry.RationalP1.RationalP1ProjectionScalarEvaluation
 
 /-! # Expanded counit equality for the terminal first projective-line trace
-
-Source: the Kunneth and trace base-change calculation in the first rational projective-line
-triangle identity, before the diagonal class is inserted.
-(blueprint: lem-sfb-rational-p1-first-trace-transport-counit-expanded-for-diagram).
 -/
 
 @[expose] public noncomputable section
@@ -44,9 +40,6 @@ attribute [local irreducible] CategoryTheory.Sheaf.monoidalCategory
 
 -- STATEMENT-DISPUTED (old version): Diagram leaves traceq unrelated to trace₁.
 /-- Expanded counit transport for a diagram satisfying scalar trace base change.
-
-Source: the First identity of the rational projective-line triangle proof.
-(blueprint: lem-sfb-rational-p1-first-trace-transport-counit-expanded-for-diagram).
 
 The scalar trace square is necessary: Diagram does not relate its q trace to its
 first-projection trace. The trace-free Kunneth comparison first transports the

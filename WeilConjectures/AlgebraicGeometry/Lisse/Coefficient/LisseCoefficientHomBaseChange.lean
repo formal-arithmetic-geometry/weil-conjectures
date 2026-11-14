@@ -1021,25 +1021,7 @@ end CofinalLevels
 -- Preserve the existing target signature, including its algebraic-closure hypothesis.
 set_option linter.unusedSectionVars false in
 /-- Finite coefficient extension spans the rational morphisms between extended sheaves.
-Source: Deligne, Weil II (1.1.1) d), pp. 146-147, the displayed Hom base-change formula.
-(blueprint: lem-pod-lisse-coefficient-hom-base-change).
-
-Proof: put B equal to the least coefficient field and E equal to the given field.
-The coefficient-integer extension is finite free. Choose a finite integral basis
-and base it to the quotient rings at the cofinal target levels e * (n + 1) - 1.
-Its coordinate maps on tensor products induce coordinate maps on sheafifications.
-The generator transition formulas make these coordinates compatible with the
-adic systems, and the integral basis identity reconstructs every local section.
-
-For an integral morphism u between E-extensions of F and G, precompose its
-restriction with the unit of F and postcompose with each coordinate projection.
-These compatible maps define original-coefficient morphisms g_i. Reconstruction
-on scalar generators gives u = sum b_i extension(g_i) at every cofinal level.
-The transition maps are epimorphisms, so the identity holds for whole systems.
-Tensor induction and induction on the integral span give the rational spanning
-statement. Unfolding the explicit coefficient diagram identifies this scalar
-extension with T and its recorded object identification with Q. The same formulas
-include equal coefficient fields and zero sheaves. -/
+Source: Deligne, Weil II (1.1.1) d), pp. 146-147, the displayed Hom base-change formula. -/
 theorem lisseCoefficientHomBaseChange_span
     (E₀ : Padic.FiniteCoefficientFields l K) :
     let P := (lisseCoefficientDiagramData l Y K).diagram

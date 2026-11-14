@@ -171,11 +171,7 @@ private theorem evaluationExtensionPresheafObjIso_pure
     (evaluationExtensionPresheafObjIso_pure.{c, v, r} J B D τ σ α φ hφ M n) f
 
 /-- The evaluated tensor-presheaf comparison sends pure tensors to themselves.
-Source: Stacks Project, Section 03EK, naturality of the tensor presheaf.
-
-Proof: use the sectionwise tensor comparisons. Restriction sends a pure tensor to
-the tensor of the restrictions of its two factors, so these comparisons are natural.
-Their generator formula is the sectionwise comparison's pure-tensor equation. -/
+Source: Stacks Project, Section 03EK, naturality of the tensor presheaf. -/
 private theorem evaluationExtensionPresheafIso_pure
     (M : Systems.{c, v, max c v r} J B τ) (n : ℕ) (U : Cᵒᵖ)
     (a : (D n).obj.obj U) (x : M.val.obj (op (n, U.unop))) :
@@ -187,12 +183,7 @@ private theorem evaluationExtensionPresheafIso_pure
   exact evaluationExtensionPresheafObjIso_pure.{c, v, r} J B D τ σ α φ hφ M n U a x
 
 /-- Evaluation commutes with the tensor presheaf, preserving its generators.
-Source: Stacks Project, Section 03EK, restriction in the tensor presheaf.
-(blueprint: lem-sp-scalar-extension-evaluation-presheaf).
-
-Proof: take the sectionwise tensor isomorphisms. Both restriction operations
-send a pure tensor to the tensor of its restricted factors. Testing on the
-generators 1 tensor x proves naturality. The pure-tensor formula is unchanged. -/
+Source: Stacks Project, Section 03EK, restriction in the tensor presheaf. -/
 theorem scalarExtension_evaluation_presheaf
     (M : Systems.{c, v, max c v r} J B τ) (n : ℕ) :
     ∃ e :

@@ -15,9 +15,6 @@ import Mathlib.Algebra.Category.Grp.EpiMono
 
 /-!
 # Extensionality on tensors of wedges of locally lifted sections
-
-Source: blueprint, Riemann--Roch, proof of (*), determinant paragraph
-(blueprint: lem-sc-exterior-tensor-lift-hom-ext).
 -/
 
 @[expose] public section
@@ -136,23 +133,7 @@ private theorem finite_local_lifts {X : Scheme.{v}} {B C : X.Modules}
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Morphisms out of a tensor of exterior powers are determined on wedges in the first
-factor and on wedges of images of sections under an epimorphism in the second factor.
-
-Source: blueprint, Riemann--Roch, proof of (*), determinant paragraph: pure wedges
-and their tensors generate locally (blueprint: lem-sc-exterior-tensor-lift-hom-ext).
-
-Proof: An epimorphism of sheaves of modules is locally surjective. Given a finite
-family of sections of `C`, lift each section under `g` on a covering and take a common
-refinement of the finitely many coverings. The displayed hypothesis and naturality
-then imply equality on the tensor of any two pure wedges, by separatedness of `D`.
-The case `s = 0` requires no lifts. Pure wedges span sectionwise exterior powers.
-The sheafification maps are locally surjective, so sections of `exteriorPower A r`
-and `exteriorPower C s` are locally finite linear combinations of pure wedges.
-The tensor sheafification map is also locally surjective, so every section of their
-tensor product is locally a finite sum of elementary tensors. Bilinearity and
-linearity extend the equality to these sums, and separatedness glues it. Finally
-extensionality of sheaf morphisms gives `φ = ψ`. This uses neither finite local
-freeness, nor a rank relation, nor injectivity of any map. -/
+factor and on wedges of images of sections under an epimorphism in the second factor. -/
 theorem exteriorTensor_lift_hom_ext {X : Scheme.{v}} {A B C D : X.Modules}
     (g : B ⟶ C) [Epi g] (r s : ℕ)
     (φ ψ : exteriorPower A r ⊗ exteriorPower C s ⟶ D)

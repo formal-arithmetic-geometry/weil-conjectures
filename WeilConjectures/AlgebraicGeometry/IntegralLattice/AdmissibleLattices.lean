@@ -11,9 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Fixed.ProEtaleFixedModu
 /-!
 # Admissible integral lattices for smooth base change
 
-Source: blueprint, sec-smooth-base-change/sk-rem-rest,
-`sbc-def-admissible-lattices`
-(blueprint: sbc-def-admissible-lattices).
 The integral object and its rationalization isomorphism are data. Both admissibility
 conditions are properties, and the output condition uses one interval for every level
 and all four ambient operations, with intrinsic constructibility at each cohomology sheaf.
@@ -33,9 +30,7 @@ variable (hdim : ∃ m : ℕ, topologicalKrullDim T ≤ m)
 variable (hl : ∀ t : T, IsUnit (l : T.presheaf.stalk t))
 
 /-- An integral object with a chosen isomorphism in the raw rational category.
-There are no retained finite-level origins. Source: blueprint,
-`sbc-def-admissible-lattices`, integral lattice clause
-(blueprint: sbc-def-admissible-lattices). -/
+There are no retained finite-level origins. -/
 structure IntegralLattice (K : PbcRationalDerivedCategory l E T hdim hl) where
   /-- The integral constructible derived-complete object. -/
   integral : PbcIntegralCategory l E T hdim hl
@@ -44,9 +39,7 @@ structure IntegralLattice (K : PbcRationalDerivedCategory l E T hdim hl) where
     (pbcUniformizer l E)).obj integral ≅ K
 
 /-- The derived reduction along the actual completed-ring projection, transported
-through the canonical associated-module-sheaf equivalence. The index is n+1.
-Source: blueprint, `sbc-def-admissible-lattices`, finite-level reduction clause
-(blueprint: sbc-def-admissible-lattices). -/
+through the canonical associated-module-sheaf equivalence. The index is n+1. -/
 def IntegralLattice.reduction {K : PbcRationalDerivedCategory l E T hdim hl}
     (L : IntegralLattice l E T hdim hl K) (n : ℕ) :
     PbcWitnessAmbient T (pbcIntegralDatum l E) n :=

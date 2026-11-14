@@ -76,9 +76,7 @@ import WeilConjectures.AlgebraicGeometry.Derived.DerivedReductionAugmentationCom
 
 /-! # The balancing comparisons `rho` and `lambda` of the ordered completed exchange
 
-Source: main-20261015 blueprint, proper base change, completed-exchange-coherence,
-second proof paragraph; strict coefficient supplement, Stacks Tags 099M, 099N,
-0A07 and 0E48 (blueprint: def-weil-pbc-ordered-coefficient-comparison-data).
+Source: strict coefficient supplement, Stacks Tags 099M, 099N, 0A07 and 0E48.
 
 This file constructs the strict and derived balancing comparisons `ordinaryRho`, `rho`,
 `ordinaryLambda` and `lambda` with their universal normalizations. Their compatibility with
@@ -446,7 +444,7 @@ theorem ordinaryRhoLevel_hom_apply (T : Scheme.{t}) (n : ℕ)
   (ordinaryRhoLevel_exists d T n M).choose_spec U s x
 
 /-- Existence of the normalized ordinary strict balancing comparison.
-Source: Stacks 099M (blueprint: lem-weil-pbc-ordered-rho-existence).
+Source: Stacks 099M.
 The finite quotient tensor comparisons are assembled into a morphism of strict
 towers; the section formula is preserved by the quotient transition maps and
 the completed coefficient projections. -/
@@ -527,7 +525,7 @@ theorem ordinaryRho_exists (T : Scheme.{t}) :
     exact hr M n U s x
 
 /-- Uniqueness of the normalized ordinary strict balancing comparison.
-Source: Stacks 099M (blueprint: lem-weil-pbc-ordered-rho-uniqueness).
+Source: Stacks 099M.
 The quotient tensor sections generate each finite reduction, so two tower
 isomorphisms satisfying the displayed section formula agree at every level and
 therefore agree as natural transformations. -/
@@ -558,16 +556,11 @@ theorem ordinaryRho_unique (T : Scheme.{t})
   exact (h₁ M n.unop U s x).trans (h₂ M n.unop U s x).symm
 
 /-- Derived restriction along the existing compatible-residue coefficient map.
-Source: Stacks 099M (blueprint: def-weil-pbc-ordered-coefficient-comparison-data). -/
+Source: Stacks 099M. -/
 abbrev res (T : Scheme.{t}) := reductionDerivedRestrict T (exchangeScalar d T)
 
 /-- The canonical balancing isomorphism on the single ordinary strict quotient diagram.
-Source: Stacks 099M (blueprint: def-weil-pbc-ordered-coefficient-comparison-data).
-Proof: flatness of the completed ring over the constant ring identifies its finite
-quotients with the specified finite constant sheaves. On pure tensors the comparison
-sends s tensor x to s tensor x. Balancing and sheafification make this an isomorphism,
-natural in modules and quotient coefficients. The section formulas specify it uniquely
-and ensure compatibility with all quotient transitions, including identity transitions. -/
+Source: Stacks 099M. -/
 theorem ordinaryRho_existsUnique (T : Scheme.{t}) :
     ∃! e : reductionRestrict T (exchangeScalar d T) ⋙ reductionModule d T ≅
         completedReductionModuleTowerFunctor T d ⋙ exchangeTowerModuleRes d T,
@@ -583,7 +576,7 @@ theorem ordinaryRho_existsUnique (T : Scheme.{t}) :
   exact (ordinaryRho_unique d T he he').symm
 
 /-- Ordinary strict balancing, with its prescribed tensor normalization.
-Source: Stacks 099M (blueprint: def-weil-pbc-ordered-coefficient-comparison-data). -/
+Source: Stacks 099M. -/
 def ordinaryRho (T : Scheme.{t}) :
     reductionRestrict T (exchangeScalar d T) ⋙ reductionModule d T ≅
       completedReductionModuleTowerFunctor T d ⋙ exchangeTowerModuleRes d T :=
@@ -596,8 +589,7 @@ attribute [local irreducible] ordinaryRho reductionModule completedReductionModu
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The complex-level normalization of the specified rho comparison.
-Source: Stacks 099M, 06YY
-(blueprint: def-weil-pbc-ordered-coefficient-comparison-data). -/
+Source: Stacks 099M, 06YY. -/
 def RhoNormalization (T : Scheme.{t})
     (e : completedReductionTower T d ⋙ exchangeTowerRes d T ≅
         res d T ⋙ reduction d T) : Prop :=
@@ -773,13 +765,7 @@ attribute [local semireducible] reduction in
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The derived strict-tower comparison is fixed on K-flat representatives before evaluation.
-Source: Stacks 099M, 06YY
-(blueprint: def-weil-pbc-ordered-coefficient-comparison-data).
-Proof: flatness makes restriction preserve flat-term K-flat representatives. Apply
-ordinaryRho to one such representative and conjugate by the two universal reduction
-counits and exact-restriction factorization maps. The formula descends through resolving
-quasi-isomorphisms, giving the isomorphism. Every derived object has a representative
-of this kind, so the formula determines the natural isomorphism uniquely. -/
+Source: Stacks 099M, 06YY. -/
 theorem rho_exists (T : Scheme.{t}) :
     ∃ e : completedReductionTower T d ⋙ exchangeTowerRes d T ≅
         res d T ⋙ reduction d T, RhoNormalization d T e := by
@@ -913,16 +899,13 @@ theorem rho_existsUnique (T : Scheme.{t}) :
   exact (rho_unique d T he he').symm
 
 /-- The specified comparison rho, natural on all ambient inputs.
-Source: Stacks 099M (blueprint: def-weil-pbc-ordered-coefficient-comparison-data). -/
+Source: Stacks 099M. -/
 def rho (T : Scheme.{t}) :
     completedReductionTower T d ⋙ exchangeTowerRes d T ≅ res d T ⋙ reduction d T :=
   (rho_existsUnique d T).exists.choose
 
 /-- The actual ordinary limit/scalar comparison, fixed by all its projections.
-Source: Stacks 0A07 (blueprint: def-weil-pbc-ordered-coefficient-comparison-data).
-Proof: restriction leaves the underlying additive sheaf unchanged. Its right-adjoint
-limit comparison is the identity on compatible families. Every projection commutes
-with it, giving its inverse and uniqueness by the limit universal property. -/
+Source: Stacks 0A07. -/
 theorem ordinaryLambda_existsUnique (T : Scheme.{t}) :
     ∃! e : completedTowerLimit T (d.completedRing T) ⋙
           reductionRestrict T (exchangeScalar d T) ≅
@@ -936,7 +919,7 @@ theorem ordinaryLambda_existsUnique (T : Scheme.{t}) :
   exact uniqueLimitComparison (reductionRestrict T (exchangeScalar d T))
 
 /-- The identity on compatible families, with its projection equations retained.
-Source: Stacks 0A07 (blueprint: def-weil-pbc-ordered-coefficient-comparison-data). -/
+Source: Stacks 0A07. -/
 def ordinaryLambda (T : Scheme.{t}) :
     completedTowerLimit T (d.completedRing T) ⋙ reductionRestrict T (exchangeScalar d T) ≅
       exchangeTowerModuleRes d T ⋙ completedTowerLimit T (exchangeConstantRing T A) :=
@@ -946,7 +929,7 @@ attribute [local irreducible] ordinaryLambda Functor.rightDerivedFunctor
   Functor.rightDerivedFunctorUnit
 
 /-- The universal right-derived limit unit at a cochain complex.
-Source: Stacks 0A07 (blueprint: def-weil-pbc-ordered-coefficient-comparison-data). -/
+Source: Stacks 0A07. -/
 def limitComplexUnit (T : Scheme.{t})
     (R : Sheaf (ProEt.topology T) CommRingCat.{t + 1})
     (P : CochainComplex (exchangeTowers T R) ℤ) :
@@ -966,8 +949,7 @@ attribute [local irreducible] limitComplexUnit
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The complex-level normalization of the specified lambda comparison.
-Source: Stacks 0A07
-(blueprint: def-weil-pbc-ordered-coefficient-comparison-data). -/
+Source: Stacks 0A07. -/
 def LambdaNormalization (T : Scheme.{t})
     (e : completedRlim T (d.completedRing T) ⋙ res d T ≅
         exchangeTowerRes d T ⋙ rlim (A := A) T) : Prop :=
@@ -1093,12 +1075,7 @@ set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- Restriction commutes with derived strict limit on arbitrary towers, with the
 K-injective comparison fixed by its ordinary compatible-family map and universal units.
-Source: Stacks 0A07 (blueprint: def-weil-pbc-ordered-coefficient-comparison-data).
-Proof: flat scalar extension is an exact left adjoint to restriction. Termwise
-restriction therefore preserves K-injectives on the small diagram site. On a
-K-injective tower, apply ordinaryLambda and the invertible derived units. This
-defines a natural isomorphism. Universality extends its equation to every complex;
-K-injective resolutions prove uniqueness. No finite-reduction condition is used. -/
+Source: Stacks 0A07. -/
 theorem lambda_existsUnique (T : Scheme.{t}) :
     ∃! e : completedRlim T (d.completedRing T) ⋙ res d T ≅
         exchangeTowerRes d T ⋙ rlim (A := A) T,
@@ -1114,13 +1091,13 @@ theorem lambda_existsUnique (T : Scheme.{t}) :
     Functor.whiskerLeft_app, Functor.whiskerRight_app, limitComplexUnit] using h
 
 /-- The canonical restriction/derived-limit comparison on actual strict towers.
-Source: Stacks 0A07 (blueprint: def-weil-pbc-ordered-coefficient-comparison-data). -/
+Source: Stacks 0A07. -/
 def lambda (T : Scheme.{t}) :
     completedRlim T (d.completedRing T) ⋙ res d T ≅ exchangeTowerRes d T ⋙ rlim (A := A) T :=
   (lambda_existsUnique d T).exists.choose
 
 /-- Ordinary scalar restriction commutes with constant diagrams by identity components.
-Source: Stacks 0E48 (blueprint: def-weil-pbc-ordered-coefficient-comparison-data). -/
+Source: Stacks 0E48. -/
 def ordinaryScalarDiagonal (T : Scheme.{t}) :
     d.constantTower T ⋙ exchangeTowerModuleRes d T ≅
       reductionRestrict T (exchangeScalar d T) ⋙ (Functor.const ℕᵒᵖ) :=
@@ -1129,7 +1106,7 @@ def ordinaryScalarDiagonal (T : Scheme.{t}) :
     (fun _ ↦ by ext n; simp)
 
 /-- Exact descent of the identity scalar/diagonal comparison.
-Source: Stacks 0E48 (blueprint: def-weil-pbc-ordered-coefficient-comparison-data). -/
+Source: Stacks 0E48. -/
 def scalarDiagonal (T : Scheme.{t}) :
     d.derivedConstantTower T ⋙ exchangeTowerRes d T ≅ res d T ⋙ diagonal (A := A) T :=
   Functor.mapDerivedCategoryCompIso _ _ ≪≫

@@ -43,9 +43,7 @@ variable (n : Type u) (S : Scheme.{u})
 
 /-- **The transition rule for the generators of `𝒪(d)`**: on the overlap `Uᵢ ∩ Uⱼ` of the
 standard opens of `ℙ(n; S)`, the free generators `e_i^{(d)} = xᵢᵈ` and `e_j^{(d)} = xⱼᵈ` satisfy
-`e_i^{(d)} = (xᵢ / xⱼ)ᵈ • e_j^{(d)}`, where `(xᵢ / xⱼ)ᵈ = transitionUnit n S d i j`.
-
-(blueprint: `def-pc-projective-space-twist`) -/
+`e_i^{(d)} = (xᵢ / xⱼ)ᵈ • e_j^{(d)}`, where `(xᵢ / xⱼ)ᵈ = transitionUnit n S d i j`. -/
 theorem map_twistGenerator_eq_transitionUnit_smul (d : ℤ) (i j : n) :
     (twist n S d).presheaf.map (homOfLE inf_le_left).op (twistGenerator n S d i) =
       (transitionUnit n S d i j).1 •
@@ -90,9 +88,7 @@ variable (S : Scheme.{u})
 /-- **The twisting sheaf `𝒪(d)` on `ℙ¹_S` as a twisted structure sheaf**: the generators are
 `g₀ = x₀ᵈ` over `U₀` and `g₁ = x₁ᵈ` over `U₁` (`ProjectiveSpace.twistGenerator`), which satisfy
 the glueing relation `g₀ = t^{-d} g₁ = (x₀ / x₁)ᵈ g₁` over `U₀ ∩ U₁`
-(`ProjectiveSpace.map_twistGenerator_eq_transitionUnit_smul`).
-
-(blueprint: `def-sc-p1-standard`) -/
+(`ProjectiveSpace.map_twistGenerator_eq_transitionUnit_smul`). -/
 def twistData (d : ℤ) : TwistData S d (twist (ULift.{u} (Fin 2)) S d) where
   g₀ := twistGenerator (ULift.{u} (Fin 2)) S d ⟨0⟩
   g₁ := twistGenerator (ULift.{u} (Fin 2)) S d ⟨1⟩

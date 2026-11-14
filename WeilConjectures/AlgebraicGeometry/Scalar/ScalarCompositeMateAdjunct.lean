@@ -136,9 +136,7 @@ import WeilConjectures.AlgebraicGeometry.Scalar.ScalarPullbackComposition
 
 /-! # The adjunct of the transported scalar composite mate
 
-Source: Stacks Project, sites-cohomology.tex, Tag 0E46, remark-compose-base-change,
-with the normalized comparisons of Tags 07A7, 0D6D and 0D6E
-(blueprint: lem-pur-scalar-composite-mate-adjunct).
+Source: Stacks Project, Tag 0E46, with the normalized comparisons of Tags 07A7, 0D6D and 0D6E.
 
 The direct-image compositors are the universal right-derived comparisons computed
 on K-injective resolutions. The scalar/pullback comparisons are transported from
@@ -227,27 +225,7 @@ private theorem composite_mate_calculation
   rw [← T.map_comp, ha, T.map_comp, ← reassoc_of% hl]
 
 /-- The transported composite scalar mate has the prescribed two-counit adjunct.
-Source: Stacks Project, Tag 0E46, remark-compose-base-change
-(blueprint: lem-pur-scalar-composite-mate-adjunct).
-
-Proof:
-1. Write c_R for exact inverse-image composition and kappa_R for the displayed
-   K-injective direct-image comparison. By lem-sfb-ringed-derived-monoidal-comparisons,
-   their adjunction compatibility expresses epsilon_sr as the composite counit
-   after c_R and pullback of kappa_R. These are the normalized comparisons.
-2. Expand F_M. The B-counit identity in step 1 and naturality of c_B inverse
-   replace its adjunct by the sr-counit after pullback of chi_sr. The defining
-   mate equation of def-pur-etale-scalar-mate replaces this by lambda_sr followed
-   by scalar extension of epsilon_sr. Move scalar extension of kappa_A inverse
-   through lambda_sr by naturality.
-3. Apply lem-sf-scalar-pullback-composition at r,s,r followed by s and V.
-   It identifies lambda_sr under c_A,c_B with the pasted pair lambda_s,lambda_r.
-   Cancel the two composition comparisons in the expression from step 2.
-4. Naturality of c_A moves kappa_A inverse across it. Substitute the A-counit
-   identity of step 1 and cancel kappa_A with its inverse. Functoriality of scalar
-   extension expands the remaining composite counit into the two maps below.
-Only the specified isomorphisms are inverted; no scalar mate is inverted, and
-no boundedness, properness or coefficient flatness is used. -/
+Source: Stacks Project, Tag 0E46. -/
 theorem scalarMate_comp_homEquiv_symm
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {X Y Z : Scheme.{u}} (r : X ⟶ Y) (s : Y ⟶ Z)

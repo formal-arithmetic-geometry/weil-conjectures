@@ -357,27 +357,7 @@ private def constantTensorIso (X : Scheme.{u})
 
 /-- Finite reduction of a perfect completed model on a chart is computed termwise.
 Source: Bhatt--Scholze, Lemma 6.5.8(1), Proposition 6.6.11, local calculation;
-Stacks Tags 06YS, 06YT, 06YU and 093J.
-(blueprint: lem-weil-pbc-perfect-chart-tensor-comparison).
-
-Proof: finite-projective terms split off finite free modules. Constants, extension
-and exact restriction preserve their splitting maps. The constant and completed
-complexes are bounded above and flat, hence K-flat. The universal extension
-counits therefore identify derived scalar extension with the displayed termwise
-completed complex. Inverse image to the stratum and slice restriction are exact,
-commute with tensor and preserve K-flat complexes. The quotient coefficient
-identifications consequently identify restriction of derived reduction with
-derived reduction of the restricted model. Apply the given local-model isomorphism.
-Associativity of tensor identifies the latter reduction, term by term, with the
-constant complex of A/I^(n+1) tensor_A C. Its balanced map sends
-(b tensor x) tensor c to c pi_n(b) tensor x. For a finite free term it is the
-canonical identification with a finite power of the quotient coefficient sheaf;
-apply the splitting maps for each finite-projective term to obtain its inverse.
-Naturality in the term makes these isomorphisms commute with every differential.
-Exact restriction and the derived universal counits give the asserted isomorphisms
-for every finite reduction on the original chart. The construction works for the zero
-complex, zero quotient,
-empty chart and either sign of the term bounds. -/
+Stacks Tags 06YS, 06YT, 06YU and 093J. -/
 theorem perfect_chart_tensor_comparison
     {X Y : Scheme.{u}} (g : Y ⟶ X) [IsImmersion g]
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)

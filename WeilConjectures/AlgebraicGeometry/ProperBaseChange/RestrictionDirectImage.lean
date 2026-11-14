@@ -21,9 +21,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCo
 
 /-! # Restriction of derived direct image to bounded constructibles
 
-Source: Weil conjectures blueprint, sec-proper-base-change/sk-thm-properbasechange,
-order 1302; Stacks Project, Tags 05TC, 08J5, 09AK and 09AL
-(blueprint: proposition-proper-direct-image-finite-coefficients--1).
+Source: Stacks Project, Tags 05TC, 08J5, 09AK and 09AL.
 -/
 
 @[expose] public section

@@ -14,7 +14,6 @@ import WeilConjectures.Algebra.Homology.RingedSpaceModuleExactnessLocalLifting
 # Exactness of module sheaves from sections on a basis
 
 Source: Stacks Project, Modules, Section 01AF and Lemma 01AG.
-(blueprint: lem-sc-p1-module-basis-exactness)
 -/
 
 @[expose] public section
@@ -29,22 +28,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 exactness of the corresponding module sheaves.
 
 Source: Stacks Project, Modules, Section 01AF and Lemma 01AG.
-(blueprint: lem-sc-p1-module-basis-exactness)
-
-Proof: The composite is zero on each basis open because the range of the first
-map is the kernel of the second. Restrict arbitrary sections to basis opens
-covering their domains and apply sheaf separation to obtain zero composite
-on every open. The same separation argument, using injectivity on each basis
-open, shows that the first map is injective on every open, hence monic.
-For a section of the third sheaf on W, cover W by basis opens contained in W;
-surjectivity on each such open lifts the restriction of the section. The local
-lifting criterion makes the second map epic. If a section of the middle sheaf
-is annihilated by the second map, its restrictions to this cover also lie in
-the kernels. Sectionwise exactness gives lifts from the first sheaf on all
-members of the cover. The exactness clause of the local lifting criterion
-therefore gives exactness of the complex. These arguments include the empty
-open, whose sections form the zero group, and do not assert global
-surjectivity of the second map.
 -/
 theorem exactness_of_basis_sections
     (X : Scheme.{u}) (B : Set X.Opens) (hB : Opens.IsBasis B)

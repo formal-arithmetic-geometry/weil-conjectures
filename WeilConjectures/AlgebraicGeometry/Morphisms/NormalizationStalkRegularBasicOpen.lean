@@ -20,18 +20,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- A function inverted on the source is a nonzerodivisor on its relative normalization.
 
-Source: Mathlib relative normalization affine description; Stacks Project, Tag 0307.
-(blueprint: lem-sbc-normalization-stalk-regular-basic-open)
-
-Proof: On the affine base Spec A the relative normalization is the spectrum of
-its integral closure in the source's global sections. The pullback of r is a
-unit there, because the source map factors through D(r). Multiplication by r
-is thus injective on these sections and on the integral closure subring.
-It remains injective after localization. The normalization stalk is precisely
-a localization of this integral closure, and its structural map is the same
-algebra map by the affine normalization comparison. Thus the displayed germ
-is regular. This needs neither normality nor reducedness of A or of the source.
-For an empty source the normalization has no point x, so the assertion is vacuous. -/
+Source: Stacks Project, Tag 0307 -/
 theorem normalization_stalk_regular_basicOpen
     (A : CommRingCat.{u}) (r : A) {P : Scheme.{u}}
     (p : P ⟶ Scheme.Opens.toScheme (X := Spec A) (PrimeSpectrum.basicOpen r))

@@ -14,8 +14,7 @@ public import Mathlib.CategoryTheory.Sites.Sheafification
 /-!
 # Finite-coefficient comparison in the intrinsic constant-ring presentation
 
-Source: blueprint `definition-small-pro-etale-site--1`, and Stacks Project, Tags 099R and 00YV
-(blueprint: definition-small-pro-etale-site--1).
+Source: and Stacks Project, Tags 099R and 00YV.
 
 The existing finite-coefficient comparison uses modules over sheafified continuous
 functions. Intrinsic constructibility uses modules over the constant commutative ring
@@ -33,7 +32,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale
 
 /-- The constant-scalar unit into the underlying ring of the commutative constant sheaf.
-Source: Stacks, Tag 00YV (blueprint: definition-small-pro-etale-site--1). -/
+Source: Stacks, Tag 00YV. -/
 noncomputable def finiteCoefficientIntrinsicScalarMap (T : Scheme.{u})
     (B : Type u) [CommRing B] :
     (Functor.const T.ProEtᵒᵖ).obj (RingCat.of (ULift.{u + 1, u} B)) ⟶
@@ -105,14 +104,14 @@ private theorem intrinsicRealization_isEquivalence
 variable (T : Scheme.{u}) (B : Type u) [CommRing B] [Finite B]
 
 /-- Local injectivity for the canonical associated-module-sheaf construction.
-Source: Stacks, Tag 00YV (blueprint: definition-small-pro-etale-site--1). -/
+Source: Stacks, Tag 00YV. -/
 noncomputable instance finiteCoefficientIntrinsicScalarMap_isLocallyInjective :
     Presheaf.IsLocallyInjective (Scheme.ProEt.topology T)
       (finiteCoefficientIntrinsicScalarMap T B) :=
   (Scheme.proEtaleConstantRingUnit_locallyBijective T B).1
 
 /-- Local surjectivity for the canonical associated-module-sheaf construction.
-Source: Stacks, Tag 00YV (blueprint: definition-small-pro-etale-site--1). -/
+Source: Stacks, Tag 00YV. -/
 noncomputable instance finiteCoefficientIntrinsicScalarMap_isLocallySurjective :
     Presheaf.IsLocallySurjective (Scheme.ProEt.topology T)
       (finiteCoefficientIntrinsicScalarMap T B) :=
@@ -120,7 +119,7 @@ noncomputable instance finiteCoefficientIntrinsicScalarMap_isLocallySurjective :
 
 /-- Canonical realization over the constant commutative coefficient sheaf: keep the
 fixed-scalar module presheaf and sheafify it along the constant-scalar unit.
-Source: Stacks, Tag 00YV (blueprint: definition-small-pro-etale-site--1). -/
+Source: Stacks, Tag 00YV. -/
 noncomputable def finiteCoefficientIntrinsicRealization :
     Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) ⥤
       Scheme.proEtaleRingModules T (Scheme.proEtaleConstantRing T B) :=
@@ -129,13 +128,7 @@ noncomputable def finiteCoefficientIntrinsicRealization :
 
 set_option linter.unusedSectionVars false in
 /-- This is an additive exact equivalence of the two presentations of module sheaves.
-Source: Stacks, Tag 00YV (blueprint: definition-small-pro-etale-site--1).
-Proof: fixed scalar actions extend uniquely to locally constant scalar sections of the
-constant ring sheaf. The local-bijection property of the scalar unit gives the inverse
-by restriction of scalars, with the ordinary module sheafification unit and counit.
-These maps preserve addition sectionwise. The equivalence preserves finite limits and
-colimits. This is the same argument as `finiteCoefficientRealization_exact`, applied to
-the canonical commutative constant-ring presentation rather than continuous functions. -/
+Source: Stacks, Tag 00YV. -/
 theorem finiteCoefficientIntrinsicRealization_exact :
     (finiteCoefficientIntrinsicRealization T B).IsEquivalence ∧
     (finiteCoefficientIntrinsicRealization T B).Additive ∧
@@ -149,25 +142,25 @@ theorem finiteCoefficientIntrinsicRealization_exact :
   exact ⟨this, Functor.additive_of_preserves_binary_products _, inferInstance, inferInstance⟩
 
 /-- Additivity of the canonical coefficient realization.
-Source: Stacks, Tag 00YV (blueprint: definition-small-pro-etale-site--1). -/
+Source: Stacks, Tag 00YV. -/
 noncomputable instance finiteCoefficientIntrinsicRealization_additive :
     (finiteCoefficientIntrinsicRealization T B).Additive :=
   (finiteCoefficientIntrinsicRealization_exact T B).2.1
 
 /-- Left exactness of the canonical coefficient realization.
-Source: Stacks, Tag 00YV (blueprint: definition-small-pro-etale-site--1). -/
+Source: Stacks, Tag 00YV. -/
 noncomputable instance finiteCoefficientIntrinsicRealization_preservesFiniteLimits :
     PreservesFiniteLimits (finiteCoefficientIntrinsicRealization T B) :=
   (finiteCoefficientIntrinsicRealization_exact T B).2.2.1
 
 /-- Right exactness of the canonical coefficient realization.
-Source: Stacks, Tag 00YV (blueprint: definition-small-pro-etale-site--1). -/
+Source: Stacks, Tag 00YV. -/
 noncomputable instance finiteCoefficientIntrinsicRealization_preservesFiniteColimits :
     PreservesFiniteColimits (finiteCoefficientIntrinsicRealization T B) :=
   (finiteCoefficientIntrinsicRealization_exact T B).2.2.2
 
 /-- The specified comparison inverse image, expressed over the intrinsic constant ring.
-Source: Stacks, Tags 099R and 00YV (blueprint: definition-small-pro-etale-site--1). -/
+Source: Stacks, Tags 099R and 00YV. -/
 noncomputable def finiteCoefficientIntrinsicComparison :
     Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) ⥤
       Scheme.proEtaleRingModules T (Scheme.proEtaleConstantRing T B) :=
@@ -175,14 +168,14 @@ noncomputable def finiteCoefficientIntrinsicComparison :
     finiteCoefficientIntrinsicRealization T B
 
 /-- The intrinsic comparison is additive.
-Source: Stacks, Tag 00YV (blueprint: definition-small-pro-etale-site--1). -/
+Source: Stacks, Tag 00YV. -/
 noncomputable instance finiteCoefficientIntrinsicComparison_additive :
     (finiteCoefficientIntrinsicComparison T B).Additive :=
   inferInstanceAs (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) T ⋙
     finiteCoefficientIntrinsicRealization T B).Additive
 
 /-- The intrinsic comparison is left exact.
-Source: Stacks, Tag 00YV (blueprint: definition-small-pro-etale-site--1). -/
+Source: Stacks, Tag 00YV. -/
 noncomputable instance finiteCoefficientIntrinsicComparison_preservesFiniteLimits :
     PreservesFiniteLimits (finiteCoefficientIntrinsicComparison T B) :=
   inferInstanceAs (PreservesFiniteLimits
@@ -190,7 +183,7 @@ noncomputable instance finiteCoefficientIntrinsicComparison_preservesFiniteLimit
       finiteCoefficientIntrinsicRealization T B))
 
 /-- The intrinsic comparison is right exact.
-Source: Stacks, Tag 00YV (blueprint: definition-small-pro-etale-site--1). -/
+Source: Stacks, Tag 00YV. -/
 noncomputable instance finiteCoefficientIntrinsicComparison_preservesFiniteColimits :
     PreservesFiniteColimits (finiteCoefficientIntrinsicComparison T B) :=
   inferInstanceAs (PreservesFiniteColimits
@@ -199,7 +192,7 @@ noncomputable instance finiteCoefficientIntrinsicComparison_preservesFiniteColim
 
 /-- The exact inverse image on derived categories, in the coefficient presentation of
 intrinsic constructibility, obtained by applying the specified comparison termwise.
-Source: Stacks, Tags 099R and 00YV (blueprint: definition-small-pro-etale-site--1). -/
+Source: Stacks, Tags 099R and 00YV. -/
 noncomputable def finiteCoefficientIntrinsicDerivedComparison :
     FiniteCoefficientEtaleDerivedCategory T (ULift.{u + 1, u} B) ⥤
       Scheme.proEtaleDerivedCategory T B :=

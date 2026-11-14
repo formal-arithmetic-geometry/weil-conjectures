@@ -95,9 +95,8 @@ lemma eq_strictLocalizationLiftOf (x : AffinePointedEtaleNeighborhood s)
       spec_map_strictHenselizationEval_comp_strictLocalizationLiftOf g s t ι h x⟩
 
 /-- The local homomorphism `𝒪^{sh}_{S,s} ⟶ 𝒪^{sh}_{T,t}` of strict henselizations induced by
-`g : T ⟶ S` and the morphism `ι : Spec Ω' ⟶ Spec Ω` of the fields of the geometric points with
-`ι ≫ s = t ≫ g`.
-(blueprint: `proposition-proper-base-change-projective-line--1`) -/
+`g: T ⟶ S` and the morphism `ι: Spec Ω' ⟶ Spec Ω` of the fields of the geometric points with
+`ι ≫ s = t ≫ g`. -/
 noncomputable def strictHenselizationHom :
     strictHenselization s ⟶ strictHenselization t :=
   colimit.desc (strictHenselizationDiagram s)
@@ -136,8 +135,7 @@ lemma spec_map_strictHenselizationHom_comp_strictLocalizationCone_π_app
   rw [hy, Category.assoc, IsIso.hom_inv_id, Category.comp_id]
 
 /-- `Spec` of `strictHenselizationHom` is compatible with the structure morphisms:
-`j_S ∘ Spec φ = g ∘ j_T`.
-(blueprint: `proposition-proper-base-change-projective-line--1`) -/
+`j_S ∘ Spec φ = g ∘ j_T`. -/
 @[reassoc]
 lemma spec_map_strictHenselizationHom_comp_strictLocalizationToBase :
     Spec.map (strictHenselizationHom g s t ι h) ≫ strictLocalizationToBase s =
@@ -149,8 +147,7 @@ lemma spec_map_strictHenselizationHom_comp_strictLocalizationToBase :
 
 /-- `strictHenselizationHom` is compatible with the geometric points: the closed geometric point
 `Spec Ω' ⟶ T_(t)` followed by `Spec φ` is `ι` followed by the closed geometric point
-`Spec Ω ⟶ S_(s)`.
-(blueprint: `proposition-proper-base-change-projective-line--1`) -/
+`Spec Ω ⟶ S_(s)`. -/
 @[reassoc]
 lemma spec_map_strictHenselizationEval_comp_spec_map_strictHenselizationHom :
     Spec.map (strictHenselizationEval t) ≫ Spec.map (strictHenselizationHom g s t ι h) =
@@ -175,8 +172,7 @@ lemma strictHenselizationEval_strictHenselizationHom (a : ↑(strictHenselizatio
   rw [← CommRingCat.comp_apply, strictHenselizationHom_comp_strictHenselizationEval,
     CommRingCat.comp_apply]
 
-/-- `strictHenselizationHom` is a local homomorphism.
-(blueprint: `proposition-proper-base-change-projective-line--1`) -/
+/-- `strictHenselizationHom` is a local homomorphism. -/
 instance isLocalHom_strictHenselizationHom :
     IsLocalHom (strictHenselizationHom g s t ι h).hom := by
   refine ⟨fun a ha ↦ ?_⟩
@@ -186,8 +182,7 @@ instance isLocalHom_strictHenselizationHom :
   exact fun h0 ↦ ha (by rw [h0, map_zero])
 
 /-- **The residue square**: the residue field map of `strictHenselizationHom` commutes with the
-embeddings of the residue fields of the strict henselizations into `Ω` and `Ω'`.
-(blueprint: `proposition-proper-base-change-projective-line--1`) -/
+embeddings of the residue fields of the strict henselizations into `Ω` and `Ω'`. -/
 lemma residueFieldMap_strictHenselizationHom_comp :
     (strictHenselizationResidueFieldEmb t).comp
         (ResidueField.map (strictHenselizationHom g s t ι h).hom) =

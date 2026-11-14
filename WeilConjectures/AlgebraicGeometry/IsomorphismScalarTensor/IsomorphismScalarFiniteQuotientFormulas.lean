@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.IsomorphismScalarTensor.IsomorphismScal
 This is the quotient-map component of the finite scalar model.  It is split
 from the finite comparison and transition constructions.
 
-Source: Stacks Project, sites-modules.tex, Tags 03EK and 03EL.
-(blueprint: lem-weil-isomorphism-scalar-finite-quotient-formulas).
+Source: Stacks Project, Tags 03EK and 03EL.
 -/
 
 @[expose] public noncomputable section
@@ -36,15 +35,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 /--
 The two canonical maps from the completed scalar complexes to their finite
 restrictions exist and satisfy their local quotient formulas.
-
-Proof source: Stacks Project, sites-modules.tex, Tags 03EK and 03EL, Step 5.
-Insert the tensor unit in the middle coefficient and apply the completed-to-
-finite projection on the outer coefficient.  The sheafified tensor universal
-property gives natural transformations, while the normalized completed
-formula identifies their values on pure tensors.  The left and right formulas
-are proved independently; no finite comparison square or transition formula
-is required.
-(blueprint: lem-weil-isomorphism-scalar-finite-quotient-formulas).
 -/
 theorem quotient_formulas_exists
     (b : (integralOperationsGoodComplex l E Y).ι ⋙ leftComplex l E L ι g ≅

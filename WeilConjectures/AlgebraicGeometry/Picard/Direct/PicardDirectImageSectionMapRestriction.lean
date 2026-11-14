@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.Picard.Direct.PicardDirectImageUnitMorp
 /-! # Compatibility of the fixed section map with restriction
 
 Source: Stacks Project, Tags 08HY and 0D5S.
-(blueprint: lem-sc-picard-direct-image-section-map-restriction)
 -/
 
 @[expose] public section
@@ -25,23 +24,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The actual canonical section map commutes with successive base change.
 It asserts an equality of maps and does not assert their bijectivity.
-Source: Stacks Project, Tags 08HY and 0D5S.
-(blueprint: lem-sc-picard-direct-image-section-map-restriction)
-
-Proof: The two projection equations identify j with the cartesian comparison by
-pullback hom-extensionality. Use the associativity law of
-exists_derivedPullbackComposition on i, t and the fibre-product projections.
-The definition of the base-change map is the transpose of the pulled-back counit
-under the pinned derived adjunction. The unit and counit naturality laws therefore
-identify the composite base-change mate with the mate for t'. The canonical
-single pullback square transports the source structure-sheaf map through this
-composition comparison. Apply H^0. canonicalDegreeZeroMateSquare identifies the
-result with the ordinary pullback mate. The inverse mate of pushforward composition
-has exactly the coefficient comparison c, by uniqueness of conjugate isomorphisms.
-Evaluation of the ordinary adjunction at 1 gives its unit on the given section.
-Naturality of the module morphisms lets restriction from j inverse-top to top pass
-through the coefficient comparison, yielding the displayed formula. This calculation
-uses no flatness, properness, invertibility, nonempty scheme or nonempty fibre. -/
+Source: Stacks Project, Tags 08HY and 0D5S. -/
 theorem picardDirectImageSectionMap_restriction
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

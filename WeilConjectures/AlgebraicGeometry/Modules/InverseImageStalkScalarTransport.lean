@@ -14,7 +14,6 @@ import WeilConjectures.Topology.InverseImageStalk
 # Scalar transport for inverse-image module stalks
 
 Source: Stacks Project, Sheaves, Tags 008H and 0098.
-(blueprint: lem-pc-inverse-image-stalk-scalar-transport).
 
 This identifies two tensors of stalks before applying the stalk-of-change-of-rings
 isomorphism. No tensor sheaf or pullback-module stalk occurs in the conclusion.
@@ -138,21 +137,7 @@ private theorem scalarTransport {A R S : Type u} [CommRing A] [CommRing R]
     rw [hd, hb, c.apply_symm_apply]
 
 /-- Scalar transport through the inverse-image stalk isomorphisms.
-Source: Stacks Project, Sheaves, Tag 0098, proof using Tag 008H.
-(blueprint: lem-pc-inverse-image-stalk-scalar-transport).
-Proof: identify inverse-image ring and abelian stalks by Tag 008H. On germs the
-inverse-image unit is semilinear, so the abelian identification is semilinear over
-the ring identification. The adjunction identity on ring sections proves that the
-stalk map of the adjoint ring morphism composed with the ring identification is
-f.stalkMap x. The balanced map b tensor m maps to b tensor c(m), where c is the
-abelian identification. For a in the original ring stalk, c(a m) = c_R(a)c(m), so
-b tensor c(a m) = (ψ_x(c_R(a)) b) tensor c(m) = (f.stalkMap x(a) b) tensor c(m).
-This proves balancing. Its inverse uses
-c inverse and the inverse ring identification: for r in the inverse-image ring stalk,
-c inverse(r n) = c_R inverse(r) c inverse(n), and
-f.stalkMap x(c_R inverse(r)) = ψ_x(r), proving its balancing. Both composites are identities on
-pure tensors and hence on the tensor products. The map and inverse are linear over
-the target stalk ring. The inverse-image stalk germ formula gives the stated formula. -/
+Source: Stacks Project, Sheaves, Tag 0098, proof using Tag 008H. -/
 theorem exists_inverseImage_stalk_scalar_transport {X Y : Scheme.{u}}
     (f : X ⟶ Y) (x : X) :
     ∃ β : ∀ G : Y.Modules,

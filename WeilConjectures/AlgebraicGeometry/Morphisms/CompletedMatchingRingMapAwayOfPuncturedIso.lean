@@ -14,7 +14,6 @@ import Mathlib.AlgebraicGeometry.Morphisms.IsIso
 /-! # Principal-open base change of the punctured matching comparison
 
 Source: Stacks Project, Tags 0BLH and 05ER, localized comparison paragraph.
-(blueprint: lem-sbc-completed-matching-ring-map-away-of-punctured-iso)
 -/
 
 @[expose] public section
@@ -140,27 +139,7 @@ set_option backward.isDefEq.respectTransparency false in
 comparison after localization at any principal open contained in the puncture.
 
 Source: Stacks Project, Tag 05ER, second paragraph, applied to the overlap
-identification of Tag 0BLH.
-Proof: write B = D.matchingRing, C = the completion, and P = B pushout_A C.
-The affine scheme Spec P is the base change of Spec B to Spec C. Restricting
-this base change to D(f) commutes with restricting Spec B to D(f). Since
-D(f) is contained in U, the isomorphism D.puncturedMap identifies the latter
-restriction with the inverse image of D(f) in Y. Base change along Spec C
-then identifies its completed inverse image with the inverse image of D(f)
-in the overlap. The given D.overlapIso identifies that overlap with the
-inverse image of D(f) in E. These identifications respect both projections:
-the first is the matching projection and the second is the structural map
-from C, using D.over. Consequently their affine section map is the
-localization of D.completedRingMap, by the pushout universal property.
-Finite s makes E affine; Spec P is affine by construction. Their section
-rings on these principal opens are the localizations of P at the image of f
-and of Gamma(E) at its comparison image. The isomorphism of these restricted
-affine schemes therefore makes the displayed awayMap bijective.
-No Noetherianity or choice of generators is needed in this base-change step.
-If f is nilpotent, both principal opens are empty and both localizations are
-the zero ring; the same assertion applies. The same holds when U is empty,
-since the containment hypothesis then forces D(f) to be empty.
-(blueprint: lem-sbc-completed-matching-ring-map-away-of-punctured-iso) -/
+identification of Tag 0BLH. -/
 theorem completedRingMap_away_bijective_of_puncturedMap_isIso
     {A : Type u} [CommRing A] [IsLocalRing A]
     {U : (Spec (.of A)).Opens}

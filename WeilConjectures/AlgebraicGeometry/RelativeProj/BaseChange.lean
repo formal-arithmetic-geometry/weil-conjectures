@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.RelativeProj.Universal
 /-!
 # Base change of the relative `Proj`
 
-Let `g : X' ⟶ X` be a morphism of schemes, `A` a quasi-coherent graded algebra on `X` and `A'`
+Let `g: X' ⟶ X` be a morphism of schemes, `A` a quasi-coherent graded algebra on `X` and `A'`
 one on `X'`. A `PullbackData g A A'` identifies `A'` with the coefficientwise pullback `g^* A`:
 for affine opens `U' ⊆ X'` and `U ⊆ X` with `g(U') ⊆ U` it provides graded maps
 `A(U) → A'(U')`, compatible with restrictions on both sides, which exhibit each `A'(U')ₙ` as the
@@ -27,8 +27,7 @@ flatness of `g` is not needed.
   morphism.
 - `AlgebraicGeometry.Scheme.GradedAlgebraData.PullbackData.isPullback` and
   `AlgebraicGeometry.Scheme.GradedAlgebraData.PullbackData.relProjIsoPullback` — the base change
-  isomorphism `Proj_{X'}(g^* 𝒜) ≅ X' ×_X Proj_X(𝒜)` over `X'`
-  (blueprint: `definition-admissible-blow-up--1`, item 4).
+  isomorphism `Proj_{X'}(g^* 𝒜) ≅ X' ×_X Proj_X(𝒜)` over `X'`.
 -/
 
 @[expose] public section
@@ -153,8 +152,7 @@ lemma isPullback_local {U' : X'.affineOpens} {U : X.affineOpens} (h : U'.1 ≤ g
 /-- **Base change of the relative `Proj`**: if `A'` is identified with the coefficientwise
 pullback `g^* A`, then the comparison morphism exhibits `Proj_{X'}(A')` as the fibre product
 `X' ×_X Proj_X(A)`. No flatness of `g` is needed: this is the base change of the relative `Proj`
-along an arbitrary morphism (blueprint: `lemma-products-composites-u-admissible-blow`).
-(blueprint: `definition-admissible-blow-up--1`, item 4) -/
+along an arbitrary morphism. -/
 theorem isPullback :
     IsPullback D.relProjComparison A'.relProjHom A.relProjHom g := by
   refine IsPullback.flip <| Scheme.isPullback_of_openCover _ _ _ _
@@ -174,8 +172,7 @@ theorem isPullback :
   · simp
 
 /-- The base change isomorphism `Proj_{X'}(g^* 𝒜) ≅ X' ×_X Proj_X(𝒜)` for an arbitrary morphism
-`g : X' ⟶ X` (blueprint: `lemma-products-composites-u-admissible-blow`).
-(blueprint: `definition-admissible-blow-up--1`, item 4) -/
+`g: X' ⟶ X`. -/
 noncomputable def relProjIsoPullback : A'.relProj ≅ pullback A.relProjHom g :=
   D.isPullback.isoPullback
 

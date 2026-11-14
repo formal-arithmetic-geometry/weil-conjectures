@@ -16,7 +16,6 @@ import Mathlib.CategoryTheory.Abelian.Injective.Resolution
 # Coordinates on relative degree-one cocycles
 
 Source: Stacks Project, Tag 03AJ, relative injective-resolution refinement, step 2.
-(blueprint: lem-amb-relative-cocycle-coordinates).
 -/
 
 @[expose] public section
@@ -33,8 +32,7 @@ variable (T : Scheme.{u}) (U : T.Etale)
   (I : CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) ℕ)
 
 /-- Coordinate isomorphism, before changing the sign of the open summand.
-Source: Stacks Project, Tag 03AJ, relative refinement, step 2.
-(blueprint: lem-amb-relative-cocycle-coordinates). -/
+Source: Stacks Project, Tag 03AJ, relative refinement, step 2. -/
 noncomputable def relativeDegreeIso (n : ℕ) :
     (relativeSectionComplex T U I).X (n + 1) ≅
       AddCommGrpCat.of ((I.X (n + 1)).obj.obj (op (Scheme.Etale.mk (𝟙 T))) ×
@@ -49,16 +47,14 @@ noncomputable def relativeDegreeIso (n : ℕ) :
     AddCommGrpCat.biprodIsoProd _ _
 
 /-- The first coordinate of a relative cochain.
-Source: Stacks Project, Tag 03AJ, relative refinement, step 2.
-(blueprint: lem-amb-relative-cocycle-coordinates). -/
+Source: Stacks Project, Tag 03AJ, relative refinement, step 2. -/
 noncomputable def relativeFst (n : ℕ) :
     (relativeSectionComplex T U I).X (n + 1) ⟶
       (I.X (n + 1)).obj.obj (op (Scheme.Etale.mk (𝟙 T))) :=
   (relativeDegreeIso T U I n).hom ≫ AddCommGrpCat.ofHom (AddMonoidHom.fst _ _)
 
 /-- The unsigned second coordinate of a relative cochain.
-Source: Stacks Project, Tag 03AJ, relative refinement, step 2.
-(blueprint: lem-amb-relative-cocycle-coordinates). -/
+Source: Stacks Project, Tag 03AJ, relative refinement, step 2. -/
 noncomputable def relativeSnd (n : ℕ) :
     (relativeSectionComplex T U I).X (n + 1) ⟶ (I.X n).obj.obj (op U) :=
   (relativeDegreeIso T U I n).hom ≫ AddCommGrpCat.ofHom (AddMonoidHom.snd _ _)
@@ -95,9 +91,7 @@ private lemma relativeSnd_eq (n : ℕ) :
   rw [← Category.assoc, cofiber_snd]
 
 /-- The first coordinate of the relative differential is the ordinary differential.
-Source: Stacks Project, Tag 03AJ, relative refinement, step 2.
-(blueprint: lem-amb-relative-cocycle-coordinates).
-Proof: shifting the cone cancels the minus sign on its first diagonal differential. -/
+Source: Stacks Project, Tag 03AJ, relative refinement, step 2. -/
 theorem relative_d_fst :
     (relativeSectionComplex T U I).d 1 2 ≫ relativeFst T U I 1 =
       relativeFst T U I 0 ≫ (I.d 1 2).hom.app (op (Scheme.Etale.mk (𝟙 T))) := by
@@ -131,10 +125,7 @@ private lemma restriction_f (n : ℕ) :
   rfl
 
 /-- The open coordinate has differential minus restriction minus the open differential.
-Source: Stacks Project, Tag 03AJ, relative refinement, step 2.
-(blueprint: lem-amb-relative-cocycle-coordinates).
-Proof: the cone differential on its second coordinate is restriction plus the original
-open differential; shifting by minus one negates both terms. -/
+Source: Stacks Project, Tag 03AJ, relative refinement, step 2. -/
 theorem relative_d_snd :
     (relativeSectionComplex T U I).d 1 2 ≫ relativeSnd T U I 1 =
       -(relativeFst T U I 0 ≫
@@ -176,8 +167,7 @@ private lemma relative_coordinates_inv (n : ℕ)
   exact ⟨congrArg Prod.fst hh, congrArg Prod.snd hh⟩
 
 /-- In degree zero the negative open term is zero, leaving the global sections of I0.
-Source: Stacks Project, Tag 03AJ, relative refinement, step 2.
-(blueprint: lem-amb-relative-cocycle-coordinates). -/
+Source: Stacks Project, Tag 03AJ, relative refinement, step 2. -/
 noncomputable def relativeDegreeZeroIso :
     (relativeSectionComplex T U I).X 0 ≅
       (I.X 0).obj.obj (op (Scheme.Etale.mk (𝟙 T))) :=
@@ -197,10 +187,7 @@ noncomputable def relativeDegreeZeroIso :
       ComplexShape.embeddingUpNat.f 0 = (0 : ℤ))
 
 /-- A relative boundary has global coordinate d(x).
-Source: Stacks Project, Tag 03AJ, relative refinement, step 2.
-(blueprint: lem-amb-relative-cocycle-coordinates).
-Proof: compute the cone differential followed by its first projection, cancel the two
-minus signs, and use the degree-zero identification. -/
+Source: Stacks Project, Tag 03AJ, relative refinement, step 2. -/
 theorem relativeBoundary_fst :
     (relativeDegreeZeroIso T U I).inv ≫ (relativeSectionComplex T U I).d 0 1 ≫
         relativeFst T U I 0 = (I.d 0 1).hom.app (op (Scheme.Etale.mk (𝟙 T))) := by
@@ -222,10 +209,7 @@ theorem relativeBoundary_fst :
   simp
 
 /-- The unsigned open coordinate of a relative boundary is minus restriction of x.
-Source: Stacks Project, Tag 03AJ, relative refinement, step 2.
-(blueprint: lem-amb-relative-cocycle-coordinates).
-Proof: project the cone differential to the open summand; the negative-degree open
-summand is zero, and the shift leaves minus restriction on the remaining term. -/
+Source: Stacks Project, Tag 03AJ, relative refinement, step 2. -/
 theorem relativeBoundary_snd :
     (relativeDegreeZeroIso T U I).inv ≫ (relativeSectionComplex T U I).d 0 1 ≫
         relativeSnd T U I 0 =
@@ -249,8 +233,7 @@ theorem relativeBoundary_snd :
   simp
 
 /-- The first differential with its codomain restricted to cycles.
-Source: Stacks Project, Tag 03AJ, relative refinement, steps 3 and 5.
-(blueprint: lem-amb-relative-cocycle-coordinates). -/
+Source: Stacks Project, Tag 03AJ, relative refinement, steps 3 and 5. -/
 noncomputable def resolutionLiftSequence
     {G : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}} (R : InjectiveResolution G) :
     ShortComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) :=
@@ -260,11 +243,7 @@ noncomputable def resolutionLiftSequence
       R.ι_f_zero_comp_complex_d])
 
 /-- Exactness identifies the cycles in degree one with the quotient of I0 by G.
-Source: Stacks Project, Tag 03AJ, relative refinement, steps 3 and 5.
-(blueprint: lem-amb-relative-cocycle-coordinates).
-Proof: inclusion of cycles is monic and composes with the restricted differential to
-its original differential, so exactness at I0 is unchanged. Exactness at I1 makes the
-restricted differential epimorphic. -/
+Source: Stacks Project, Tag 03AJ, relative refinement, steps 3 and 5. -/
 theorem resolutionLiftSequence_shortExact
     {G : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}} (R : InjectiveResolution G) :
     (resolutionLiftSequence T R).ShortExact := by
@@ -287,17 +266,14 @@ theorem resolutionLiftSequence_shortExact
     exact (epi_comp_iff_of_isIso _ _).1 this
 
 /-- A degree-one cocycle with its specified open lift, in a sheaf resolution.
-Source: Stacks Project, Tag 03AJ, relative refinement, steps 2 and 3.
-(blueprint: lem-amb-relative-cocycle-coordinates). -/
+Source: Stacks Project, Tag 03AJ, relative refinement, steps 2 and 3. -/
 noncomputable abbrev ResolutionFramedLift
     {G : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}} (R : InjectiveResolution G) :=
   Sheaf.Torsor.FramedLift (MorphismProperty.Over.mkIdTerminal @Etale T)
     (resolutionLiftSequence_shortExact T R) U
 
 /-- The relative-to-absolute map is the positive first coordinate.
-Source: Stacks Project, Tag 0G71, first arrow of the relative triangle.
-(blueprint: lem-amb-relative-cocycle-coordinates).
-Proof: expand the shifted first projection and the two cancelling shift isomorphisms. -/
+Source: Stacks Project, Tag 0G71, first arrow of the relative triangle. -/
 theorem relativeForget_fst :
     (relativeForgetComplex T U I).f 1 ≫
       (HomologicalComplex.extendXIso
@@ -319,8 +295,7 @@ variable {G : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}}
   (R : InjectiveResolution G)
 
 /-- The signed cochain associated to a framed lift: coordinates (a,-b).
-Source: Stacks Project, Tag 03AJ, relative refinement, step 2.
-(blueprint: lem-amb-relative-cocycle-coordinates). -/
+Source: Stacks Project, Tag 03AJ, relative refinement, step 2. -/
 noncomputable def relativeFrameElement (z : ResolutionFramedLift T U R) :
     (relativeSectionComplex T U R.cocomplex).X 1 :=
   (relativeDegreeIso T U R.cocomplex 0).inv
@@ -356,10 +331,7 @@ private lemma frame_restriction (z : ResolutionFramedLift T U R) :
         ((MorphismProperty.Over.mkIdTerminal @Etale T).from U).op)
 
 /-- The signed cochain of a framed lift is closed.
-Source: Stacks Project, Tag 03AJ, relative refinement, step 2.
-(blueprint: lem-amb-relative-cocycle-coordinates).
-Proof: its first differential vanishes because a is a cycle. Its second differential is
-minus restriction of a plus d(b), which vanishes by the chosen-lift equation. -/
+Source: Stacks Project, Tag 03AJ, relative refinement, step 2. -/
 theorem relativeFrameElement_closed (z : ResolutionFramedLift T U R) :
     (relativeSectionComplex T U R.cocomplex).d 1 2 (relativeFrameElement T U R z) = 0 := by
   apply relative_coordinates_ext T U R.cocomplex 1
@@ -376,8 +348,7 @@ theorem relativeFrameElement_closed (z : ResolutionFramedLift T U R) :
     exact neg_eq_zero.mpr (add_neg_cancel _)
 
 /-- A framed lift, regarded as a cycle of the actual relative complex.
-Source: Stacks Project, Tag 03AJ, relative refinement, step 2.
-(blueprint: lem-amb-relative-cocycle-coordinates). -/
+Source: Stacks Project, Tag 03AJ, relative refinement, step 2. -/
 noncomputable def relativeFrameCycle (z : ResolutionFramedLift T U R) :
     (relativeSectionComplex T U R.cocomplex).cycles 1 :=
   ((relativeSectionComplex T U R.cocomplex).cyclesIsoSc' 0 1 2 (by simp) (by simp)).inv
@@ -392,15 +363,13 @@ private lemma relativeFrameCycle_i (z : ResolutionFramedLift T U R) :
   exact ShortComplex.abCyclesIso_inv_apply_iCycles _ _
 
 /-- The homology class of a framed lift in the actual shifted restriction cone.
-Source: Stacks Project, Tag 03AJ, relative refinement, steps 2 and 3.
-(blueprint: lem-amb-relative-cocycle-coordinates). -/
+Source: Stacks Project, Tag 03AJ, relative refinement, steps 2 and 3. -/
 noncomputable def relativeFrameClass (z : ResolutionFramedLift T U R) :
     relativeCohomology T U R 1 :=
   (relativeSectionComplex T U R.cocomplex).homologyπ 1 (relativeFrameCycle T U R z)
 
 /-- The absolute section cycle obtained by forgetting the open lift.
-Source: Stacks Project, Tag 03AJ, relative refinement, step 6.
-(blueprint: lem-amb-relative-cocycle-coordinates). -/
+Source: Stacks Project, Tag 03AJ, relative refinement, step 6. -/
 noncomputable def relativeFrameAbsoluteCycle (z : ResolutionFramedLift T U R) :
     ((((etaleSectionFunctor (Scheme.Etale.mk (𝟙 T))).mapHomologicalComplex (.up ℕ)).obj
       R.cocomplex).cycles 1) :=
@@ -410,10 +379,7 @@ noncomputable def relativeFrameAbsoluteCycle (z : ResolutionFramedLift T U R) :
         (relativeFrameCycle T U R z))
 
 /-- Forgetting a framed relative cycle leaves exactly its global cocycle coordinate.
-Source: Stacks Project, Tag 03AJ, relative refinement, step 6.
-(blueprint: lem-amb-relative-cocycle-coordinates).
-Proof: commute the cycles inclusion past extension by zero and the complex map;
-the resulting map is the first-coordinate projection already computed above. -/
+Source: Stacks Project, Tag 03AJ, relative refinement, step 6. -/
 theorem relativeFrameAbsoluteCycle_i (z : ResolutionFramedLift T U R) :
     ((((etaleSectionFunctor (Scheme.Etale.mk (𝟙 T))).mapHomologicalComplex (.up ℕ)).obj
       R.cocomplex).iCycles 1) (relativeFrameAbsoluteCycle T U R z) =
@@ -427,10 +393,7 @@ theorem relativeFrameAbsoluteCycle_i (z : ResolutionFramedLift T U R) :
   exact (relativeFrameElement_coordinates T U R z).1
 
 /-- The absolute homology image is represented by the displayed absolute cycle.
-Source: Stacks Project, Tag 03AJ, relative refinement, step 6.
-(blueprint: lem-amb-relative-cocycle-coordinates).
-Proof: naturality of the homology projection for the forgetful complex map and the
-extension-by-zero homology isomorphism. -/
+Source: Stacks Project, Tag 03AJ, relative refinement, step 6. -/
 theorem relativeFrameAbsoluteCycle_class (z : ResolutionFramedLift T U R) :
     (((((etaleSectionFunctor (Scheme.Etale.mk (𝟙 T))).mapHomologicalComplex (.up ℕ)).obj
       R.cocomplex).extendHomologyIso ComplexShape.embeddingUpNat (rfl : (1 : ℤ) = 1)).hom
@@ -494,11 +457,7 @@ private lemma relativeFrameElement_surjective
   · exact (relativeFrameElement_coordinates T U R z).2.trans (neg_neg _)
 
 /-- Every relative degree-one cohomology class has a framed lifting representative.
-Source: Stacks Project, Tag 03AJ, relative refinement, step 2.
-(blueprint: lem-amb-relative-cocycle-coordinates).
-Proof: lift the class along the epimorphic cycle projection. Its first coordinate is
-closed, hence lifts uniquely to the sheaf of degree-one cycles. Negate its second
-coordinate. The relative cycle equation says that this is the required open lift. -/
+Source: Stacks Project, Tag 03AJ, relative refinement, step 2. -/
 theorem relativeFrameClass_surjective : Function.Surjective (relativeFrameClass T U R) := by
   intro t
   let C := relativeSectionComplex T U R.cocomplex
@@ -550,11 +509,7 @@ private lemma complex_homology_eq_iff (C : CochainComplex AddCommGrpCat.{u + 1} 
 
 /-- Two framed lifts give the same relative class exactly when their pointed torsors
 are isomorphic.
-Source: Stacks Project, Tag 03AJ, relative refinement, steps 2 through 4.
-(blueprint: lem-amb-relative-cocycle-coordinates).
-Proof: equality in homology is difference by a boundary. The degree-zero term is I0(T),
-and its boundary has coordinates (d(x),-r(x)). These are exactly the two translation
-conditions in the pointed lifting-torsor isomorphism criterion. -/
+Source: Stacks Project, Tag 03AJ, relative refinement, steps 2 through 4. -/
 theorem relativeFrameClass_eq_iff (z z' : ResolutionFramedLift T U R) :
     relativeFrameClass T U R z = relativeFrameClass T U R z' ↔
       Sheaf.Torsor.WithSection.IsIsomorphic z.toPair z'.toPair := by
@@ -611,10 +566,7 @@ theorem relativeFrameClass_eq_iff (z z' : ResolutionFramedLift T U R) :
       abel
 
 /-- The quotient of framed lifts is the actual first homology of the relative cone.
-Source: Stacks Project, Tag 03AJ, relative refinement, steps 2 through 5.
-(blueprint: lem-amb-relative-cocycle-coordinates).
-Proof: the framed-cycle map is onto, and the equality criterion identifies precisely
-its fibres with section-preserving torsor isomorphism. Descend this map to the quotient. -/
+Source: Stacks Project, Tag 03AJ, relative refinement, steps 2 through 5. -/
 noncomputable def relativeFramedLiftEquiv :
     Sheaf.Torsor.FramedLift.Classes
       (MorphismProperty.Over.mkIdTerminal @Etale T)
@@ -631,8 +583,7 @@ noncomputable def relativeFramedLiftEquiv :
       exact ⟨Quotient.mk _ z, hz⟩)
 
 /-- The relative first-cohomology classification, constructed from lifting torsors.
-Source: Stacks Project, Tag 03AJ, relative refinement, steps 2 through 5.
-(blueprint: lem-amb-relative-cocycle-coordinates). -/
+Source: Stacks Project, Tag 03AJ, relative refinement, steps 2 through 5. -/
 noncomputable def relativeTorsorEquiv :
     Sheaf.Torsor.WithSection.Classes G U ≃ relativeCohomology T U R 1 := by
   letI : Injective (R.cocomplex.X 0) := R.injective 0
@@ -641,10 +592,7 @@ noncomputable def relativeTorsorEquiv :
     (resolutionLiftSequence_shortExact T R) U).symm.trans (relativeFramedLiftEquiv T U R)
 
 /-- On a framed lifting torsor the equivalence takes its displayed cocycle.
-Source: Stacks Project, Tag 03AJ, relative refinement, steps 2 through 5.
-(blueprint: lem-amb-relative-cocycle-coordinates).
-Proof: the two quotient maps are inverse, and the homology map is induced by the
-explicit framed-cycle map. -/
+Source: Stacks Project, Tag 03AJ, relative refinement, steps 2 through 5. -/
 theorem relativeTorsorEquiv_frame (z : ResolutionFramedLift T U R) :
     relativeTorsorEquiv T U R (Quotient.mk _ z.toPair) = relativeFrameClass T U R z := by
   let : Injective (R.cocomplex.X 0) := R.injective 0
@@ -659,10 +607,7 @@ theorem relativeTorsorEquiv_frame (z : ResolutionFramedLift T U R) :
   rfl
 
 /-- A chosen equivariant lifting presentation computes the relative class.
-Source: Stacks Project, Tag 03AJ, relative refinement, step 5.
-(blueprint: lem-amb-relative-cocycle-coordinates).
-Proof: the presentation is an isomorphism of pointed torsors after transporting the
-chosen section, so use the formula on framed lifts. -/
+Source: Stacks Project, Tag 03AJ, relative refinement, step 5. -/
 theorem relativeTorsorEquiv_presentation
     (P : Sheaf.Torsor.WithSection G U)
     (s : (R.cocomplex.cycles 1).obj.obj (op (Scheme.Etale.mk (𝟙 T))))
@@ -676,8 +621,7 @@ theorem relativeTorsorEquiv_presentation
   exact Quotient.sound ⟨e, rfl⟩
 
 /-- The ambient-resolution map supplied by a lifting presentation.
-Source: Stacks Project, Tag 03AJ, relative refinement, step 5.
-(blueprint: lem-amb-relative-cocycle-coordinates). -/
+Source: Stacks Project, Tag 03AJ, relative refinement, step 5. -/
 noncomputable def resolutionPresentationMap (P : Sheaf.Torsor G)
     (s : (R.cocomplex.cycles 1).obj.obj (op (Scheme.Etale.mk (𝟙 T))))
     (e : P.Iso (Sheaf.Torsor.lifts
@@ -689,9 +633,7 @@ noncomputable def resolutionPresentationMap (P : Sheaf.Torsor G)
     (resolutionLiftSequence_shortExact T R) s
 
 /-- A lifting presentation is equivariant for the augmentation.
-Source: Stacks Project, Tag 03AJ, relative refinement, step 5.
-(blueprint: lem-amb-relative-cocycle-coordinates).
-Proof: equivariance of the torsor isomorphism followed by the definition of the lifting action. -/
+Source: Stacks Project, Tag 03AJ, relative refinement, step 5. -/
 theorem resolutionPresentationMap_vadd (P : Sheaf.Torsor G)
     (s : (R.cocomplex.cycles 1).obj.obj (op (Scheme.Etale.mk (𝟙 T))))
     (e : P.Iso (Sheaf.Torsor.lifts
@@ -704,10 +646,7 @@ theorem resolutionPresentationMap_vadd (P : Sheaf.Torsor G)
   exact congrArg Subtype.val (e.map_vadd A g t)
 
 /-- The differential of a lifting presentation is its globally specified cocycle.
-Source: Stacks Project, Tag 03AJ, relative refinement, step 5.
-(blueprint: lem-amb-relative-cocycle-coordinates).
-Proof: the defining lifting equation followed by the cycles inclusion is precisely
-this equation; use naturality of that inclusion to commute it with restriction. -/
+Source: Stacks Project, Tag 03AJ, relative refinement, step 5. -/
 theorem resolutionPresentationMap_d (P : Sheaf.Torsor G)
     (s : (R.cocomplex.cycles 1).obj.obj (op (Scheme.Etale.mk (𝟙 T))))
     (e : P.Iso (Sheaf.Torsor.lifts
@@ -730,10 +669,7 @@ theorem resolutionPresentationMap_d (P : Sheaf.Torsor G)
       ((MorphismProperty.Over.mkIdTerminal @Etale T).from A.unop).op))
 
 /-- The trivial torsor with zero section represents zero.
-Source: Stacks Project, Tag 03AJ, relative refinement, step 6.
-(blueprint: lem-amb-relative-cocycle-coordinates).
-Proof: the zero framed lift identifies with the trivial pointed torsor, and its
-explicit cone cocycle is zero. -/
+Source: Stacks Project, Tag 03AJ, relative refinement, step 6. -/
 theorem relativeTorsorEquiv_zero :
     relativeTorsorEquiv T U R
       (Quotient.mk _ ⟨Sheaf.Torsor.trivial G, @id (G.obj.obj (op U)) 0⟩) = 0 := by
@@ -775,11 +711,7 @@ variable {T' : Scheme.{u}} (U' : T'.Etale)
       HomologicalComplex.extendMap β ComplexShape.embeddingUpNat)
 
 /-- A map of restriction cones is diagonal in the canonical biproduct coordinates.
-Source: Stacks Project, Tag 03AJ, relative refinement, steps 2 and 9.
-(blueprint: lem-amb-relative-cocycle-coordinates).
-Proof: precompose with the two biproduct inclusions. The defining cone-map homotopy
-has the given global map on the first summand and the given open map on the second.
-This is the shared form of the former private helper in RelativeTorsorCohomology. -/
+Source: Stacks Project, Tag 03AJ, relative refinement, steps 2 and 9. -/
 lemma coneMap_XIso
     {A B A' B' : CochainComplex AddCommGrpCat.{u + 1} ℤ}
     (r : A ⟶ B) (r' : A' ⟶ B') (a : A ⟶ A') (b : B ⟶ B')
@@ -835,11 +767,7 @@ private lemma relativeMap_snd :
 end Maps
 
 /-- An explicit global difference of lifting maps proves naturality of their classes.
-Source: Stacks Project, Tag 03AJ, relative refinement, steps 7 and 8.
-(blueprint: lem-amb-relative-cocycle-coordinates).
-Proof: homology maps send cycles to their images. In cone coordinates the map acts by
-alpha and beta. The two given equalities say exactly that the difference of the image
-cycle and the target cycle is the boundary of x. -/
+Source: Stacks Project, Tag 03AJ, relative refinement, steps 7 and 8. -/
 theorem relativeFrameClass_map_eq
     {T' : Scheme.{u}} (U' : T'.Etale)
     {G' : Sheaf T'.smallEtaleTopology AddCommGrpCat.{u + 1}} (R' : InjectiveResolution G')

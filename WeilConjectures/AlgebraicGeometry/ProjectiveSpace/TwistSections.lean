@@ -626,9 +626,7 @@ lemma bijective_monomialCechToCech (p : ℕ) :
 variable (n k m) in
 /-- **The Čech complex of `𝒪(m)` on the standard covering of `ℙ(n; Spec k)` is the monomial Čech
 complex**, as complexes of `k`-modules: the section `∑ cₑ xᵉ` over `U_σ` corresponds to the
-family of coefficients `(cₑ)`.
-
-(blueprint: `lem-pc-projective-space-twist-cohomology`) -/
+family of coefficients `(cₑ)`. -/
 noncomputable def cechComplexTwistIso :
     ((ModuleCat.restrictScalars
         ((Scheme.ΓSpecIso (.of k)).inv ≫

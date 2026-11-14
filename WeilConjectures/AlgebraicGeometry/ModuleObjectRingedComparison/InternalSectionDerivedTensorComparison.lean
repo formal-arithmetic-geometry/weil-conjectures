@@ -120,14 +120,12 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunc
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 /-! # Normalized internal-to-sectionwise derived tensor comparison
 
-Source: Stacks Project, Tags 08J9, 08JA and 08JB; blueprint module objects and
-derived tensor--Hom (blueprint: def-sfb-internal-section-derived-tensor-comparison).
+Source: Stacks Project, Tags 08J9, 08JA and 08JB.
 
 ## Main definitions
 
 * `TensorComparison`: the canonical tensor comparison, normalized on K-flat models.
 * `totalComparison`: the fixed comparison of the concrete sum-total complexes.
-
 -/
 
 @[expose] public noncomputable section
@@ -153,8 +151,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})
 
 /-- The fixed comparison on the concrete native total complexes. The preceding
 unique characterization determines its data, including every summand map.
-Source: Stacks 03EK, 06YL
-(blueprint: def-sfb-internal-section-derived-tensor-comparison). -/
+Source: Stacks 03EK, 06YL. -/
 def totalComparison (P Q : CochainComplex (Internal Λ X) ℤ) :
     (complexForward Λ X).obj (internalTotalTensor Λ X P Q) ≅
     (coefficientTotalTensor.{u, u + 1, u} (Scheme.ProEt.topology X) (ring Λ X)).obj
@@ -162,8 +159,7 @@ def totalComparison (P Q : CochainComplex (Internal Λ X) ℤ) :
   complexTensorIso Λ X P Q
 
 /-- The fixed global total map is the canonical summand-normalized site map.
-Source: Stacks 06YL (blueprint: def-sfb-internal-section-derived-tensor-comparison).
-Proof: unfold the two named specializations; both are the same normalized map. -/
+Source: Stacks 06YL. -/
 theorem totalComparison_heq (P Q : CochainComplex (Internal Λ X) ℤ) :
     HEq (totalComparison Λ X P Q)
       (ordinaryComplexTensorIsoForSite (Scheme.ProEt.topology X)
@@ -172,17 +168,17 @@ theorem totalComparison_heq (P Q : CochainComplex (Internal Λ X) ℤ) :
   rfl
 
 /-- Closed structures for the fixed global ringed-site Hom.
-Source: Stacks 08J9 (blueprint: def-sfb-internal-section-derived-tensor-comparison). -/
+Source: Stacks 08J9. -/
 def GlobalClosedStructureType := CoefficientClosedStructure (hom Λ X)
 
 /-- Tensor models for that fixed global closed structure.
-Source: Stacks 06YS (blueprint: def-sfb-internal-section-derived-tensor-comparison). -/
+Source: Stacks 06YS. -/
 def GlobalTensorModelsType (S : GlobalClosedStructureType Λ X) :=
   CoefficientTensorModels.{u, u + 1, u, u + 1}
     (Scheme.ProEt.topology X) (ring Λ X) S
 
 /-- Natural comparisons of the fixed global native tensor.
-Source: Stacks 06YS (blueprint: def-sfb-internal-section-derived-tensor-comparison). -/
+Source: Stacks 06YS. -/
 def GlobalTensorComparisonIsoType (S : GlobalClosedStructureType Λ X) :=
   Functor.uncurry.obj (CondensedRing.derivedTensor Λ X) ⋙ forward Λ X ≅
     ((forward Λ X).prod (forward Λ X)) ⋙ S.tensor
@@ -190,8 +186,7 @@ def GlobalTensorComparisonIsoType (S : GlobalClosedStructureType Λ X) :=
 /-- The representative-normalization predicate for a derived tensor comparison.
 Separating this predicate keeps structure projections from expanding the concrete
 localization and total-complex implementations.
-Source: Stacks 06YS, 08J9
-(blueprint: def-sfb-internal-section-derived-tensor-comparison). -/
+Source: Stacks 06YS, 08J9. -/
 def tensorComparisonNormalized
     (S : GlobalClosedStructureType Λ X)
     (T : GlobalTensorModelsType Λ X S)
@@ -212,13 +207,13 @@ The complex comparison is the dependency's canonical comparison, not extra data.
 K-flatness is tested on the images under the exact equivalence; preservation and
 reflection in lem-pe-internal-section-tensor-comparison identify this with the
 internal K-flat test, so it restricts only representatives and not derived inputs.
-Source: Stacks 06YS, 08J9 (blueprint: def-sfb-internal-section-derived-tensor-comparison). -/
+Source: Stacks 06YS, 08J9. -/
 structure NormalizedGlobalTensorComparisonData {I : Type u₀} (condition : I → Prop) where
   iso : I
   normalization : condition iso
 
 /-- The fixed global comparison record, with abstract endpoints.
-Source: Stacks 06YS (blueprint: def-sfb-internal-section-derived-tensor-comparison). -/
+Source: Stacks 06YS. -/
 abbrev TensorComparison
     (S : GlobalClosedStructureType Λ X)
     (T : GlobalTensorModelsType Λ X S) :=

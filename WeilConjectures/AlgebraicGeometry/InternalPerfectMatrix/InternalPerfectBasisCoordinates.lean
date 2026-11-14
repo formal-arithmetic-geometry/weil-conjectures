@@ -10,7 +10,6 @@ import WeilConjectures.CategoryTheory.FunctorFiniteMatrixCoordinates
 import WeilConjectures.AlgebraicGeometry.InternalPerfectMatrix.InternalPerfectRankOneCoordinates
 
 /-! # Chosen finite bases and ordinary matrix coordinates
-Source: blueprint Compatible isomorphisms, finite matrices in one fixed integral basis.
 -/
 
 @[expose] public noncomputable section
@@ -26,9 +25,7 @@ attribute [local instance] AdicCompletion.ringMonoidalObject AdicCompletion.ring
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The lifted integral basis, with its target written as a categorical biproduct.
-Source: blueprint Compatible isomorphisms, choose finite bases.
-(blueprint: lem-pe-internal-perfect-basis-coordinates). -/
+/-- The lifted integral basis, with its target written as a categorical biproduct. -/
 def liftedBasisIso (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ)
     (hfree : ∀ i, Module.Finite (A l E) (P.X i) ∧ Module.Free (A l E) (P.X i))
     (i : ℤ) :
@@ -60,12 +57,7 @@ private theorem biproductIsoPi_ι (r : ℕ) (s : Fin r) :
   simp only []
   split_ifs <;> simp_all
 
-/-- Conjugating an arbitrary linear map by the lifted bases gives its ordinary matrix.
-Source: blueprint Compatible isomorphisms, integral finite free matrices.
-(blueprint: lem-pe-internal-perfect-basis-coordinates).
-Proof: test an inclusion at s and a projection at t. The inclusion supplies the vector
-x times the s-th basis vector, and the projection reads its t-th target coordinate.
-Linearity makes this multiplication by the stated coordinate. This includes rank zero. -/
+/-- Conjugating an arbitrary linear map by the lifted bases gives its ordinary matrix. -/
 theorem liftedBasisIso_matrix
     (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ)
     (hfree : ∀ i, Module.Finite (A l E) (P.X i) ∧ Module.Free (A l E) (P.X i))
@@ -109,13 +101,7 @@ theorem liftedBasisIso_matrix
 
 -- The composite realization functor needs additional instance and type reduction.
 /-- The already fixed quotient bases are the biproduct comparison of the composite
-realization functor, with the normalized rank-one quotient comparison.
-Source: blueprint Compatible isomorphisms, the same integral basis at every level.
-(blueprint: lem-pe-internal-perfect-basis-coordinates).
-Proof: expand the two successive functor comparisons. Composition of biproduct
-comparisons identifies their middle terms. Naturality in the integral regular
-comparison moves it across the second biproduct comparison, and biproduct.map
-respects composition. Thus both constructions are literally the same morphism. -/
+realization functor, with the normalized rank-one quotient comparison. -/
 theorem quotientIso_factor (W : Scheme.{u})
     (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ)
     (hfree : ∀ i, Module.Finite (A l E) (P.X i) ∧ Module.Free (A l E) (P.X i))
@@ -155,13 +141,7 @@ theorem quotientIso_factor (W : Scheme.{u})
 
 -- The composite realization functor needs additional instance and type reduction.
 /-- Every realized integral linear map has the matrix of its constant residue entries
-in the fixed quotient bases.
-Source: blueprint Compatible isomorphisms, finite constant free matrix computation.
-(blueprint: lem-pe-internal-perfect-basis-coordinates).
-Proof: conjugation by the lifted integral bases is the ordinary integral matrix.
-Apply the composite realization functor to this square, and then the normalized
-finite scalar matrix square. The factorization of quotientIso gives precisely the
-fixed quotient bases used by evaluation. -/
+in the fixed quotient bases. -/
 theorem quotientIso_map (W : Scheme.{u})
     (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ)
     (hfree : ∀ i, Module.Finite (A l E) (P.X i) ∧ Module.Free (A l E) (P.X i))

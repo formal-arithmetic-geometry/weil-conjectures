@@ -60,7 +60,6 @@ private theorem etale_neighbourhood_of_fibre_flat_stalks
 Source: Stacks Project, Tags 09EB, 0BRM and 0EYG.
 The proof analyzes the DVR extension at the fixed normalization point; the universal
 statement is obtained by applying this lemma separately to each point.
-(blueprint: lem-sbc-root-normalization-generic-source-etale-point)
 -/
 theorem root_normalization_generic_source_etale_point
     {L U : Scheme.{u}} (i : U ⟶ L)

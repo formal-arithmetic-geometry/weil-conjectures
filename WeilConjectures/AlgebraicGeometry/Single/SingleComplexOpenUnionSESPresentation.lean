@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.Single.SingleComplexOpenUnionSESCompati
 
 /-! # Chain-level comparison on a compact source-open union
 
-Source: Stacks Project, Cohomology, Tags 08HZ and 08HY; perfect.tex, Tag 0DJ9.
-(blueprint: lem-pc-single-complex-open-union-ses-presentation).
+Source: Stacks Project, Cohomology, Tags 08HZ and 08HY; Tag 0DJ9.
 -/
 
 @[expose] public section
@@ -30,39 +29,7 @@ This is a construction before forming connecting maps or distinguished triangles
 
 Source: Stacks Project, Tags 08HZ (relative Mayer--Vietoris), 08HY (the counit
 base-change construction), 0DJ9 (the source-open induction diagram), and
-013N--013O (the cylinder replacement and its homotopy equivalence).
-(blueprint: lem-pc-single-complex-open-union-ses-presentation).
-
-Proof: Put W = U union V and restrict the cartesian square to W and its inverse
-image. The compactness assumptions and quasi-separatedness over the affine base
-make W -> S qcqs. The inverse images of U and V cover W. The morphism between
-affine bases and its base change are affine, so the inverse-image cover is also
-compact. Restrict the two coefficients and their arrow using the fixed pullback
-composition comparisons. Derived pullback preserves quasi-coherent cohomology.
-Resolve the restricted coefficients by K-injective complexes with injective terms.
-For each cover the pair of restriction maps followed by their difference is a
-short exact row: sheaf gluing proves the kernel assertion, and flasqueness of
-injective module sheaves proves the degreewise surjectivity. Open restriction
-preserves K-injectivity, hence these rows compute the relative derived images.
-Transpose the coefficient arrow under the pullback/direct-image adjunction, lift
-it to the K-injective resolution, and restrict it to the cover. This gives a
-morphism of the two rows. Apply the derived image functors using resolutions of
-the finite diagram, including a K-flat diagram resolution for the base pullback.
-The resulting strict first-map square has functorial cones computing the overlap
-terms. Replace each first map t:A->B by the short exact mapping-cylinder row
-A -> B direct-sum Cone(id A) -> Cone(t). The contractible summand gives the
-middle comparison with B; the same construction on the square gives m.
-Compare exact open restriction with the pinned derived pullbacks by uniqueness
-of adjoints. Compose with the direct-image composition comparisons. For nested
-opens, the pullback-pasting isomorphism and associativity of the pullback
-composition comparisons identify the twice-restricted coefficient arrow with the
-ambient one. Expand the base-change map as the mate of the pulled-back counit;
-the composite-counit formula and triangle identities identify the three localized
-components with b_W, b_U direct-sum b_V and b_(U intersection V). These are the
-three displayed conjugacy equations. No boundary naturality is used here.
-Empty opens give zero restriction complexes; repeated or contained opens give
-split restriction rows. The cylinder replacement and all comparisons apply also
-to zero coefficients and arbitrary coefficient arrows, without invertibility. -/
+013N--013O (the cylinder replacement and its homotopy equivalence). -/
 theorem singleComplexOpenComparison_union_ses_presentation
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

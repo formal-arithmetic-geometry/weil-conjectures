@@ -16,7 +16,6 @@ public import Mathlib.RingTheory.Localization.Away.Basic
 # Geometric realization of a localized polynomial map
 
 Source: Stacks Project, Tag 00QE, as used at the start of the proof of Tag 00RH.
-(blueprint: lem-sbc-localized-polynomial-map-chart)
 -/
 
 @[expose] public section
@@ -45,24 +44,7 @@ private theorem quasiFinite_of_primewise
 
 /-- A supplied quasi-finite polynomial map to a localization gives a chart on that basic open.
 
-Source: Stacks Project, Tag 00QE, the first reduction in the proof of Tag 00RH, and Tag 00E4.
-(blueprint: lem-sbc-localized-polynomial-map-chart)
-
-Proof: D(g) is affine, and its ring of sections is canonically the localization of
-Γ(X, ⊤) away from g. Compose the supplied polynomial map with this localization
-isomorphism and rename ULift (Fin n) to Fin n. Apply Spec and the canonical affine
-isomorphisms to obtain e. The polynomial map is an algebra map over Γ(T, ⊤), so its
-composite with the constants inclusion is the structure map; applying Spec and the
-naturality of the affine isomorphisms gives the asserted composite identity.
-The structure map to the localization is finitely presented, by finite presentation
-of f and of a principal localization. The constants inclusion is finite type, so
-`RingHom.FinitePresentation.of_comp_finiteType` gives finite presentation of the
-supplied polynomial map. The affine finite-presentation criterion gives local finite
-presentation of e. The supplied isolated-point conditions imply quasi-finiteness
-at every prime, hence quasi-finiteness of the ring map. The affine quasi-finiteness
-criterion and invariance under isomorphisms give local quasi-finiteness of e.
-No point or fibre dimension is used. For g = 0 the basic open is empty; for n = 0
-the constants inclusion is an isomorphism, and the same construction applies. -/
+Source: Stacks Project, Tag 00QE, the first reduction in the proof of Tag 00RH, and Tag 00E4 -/
 theorem exists_chart_of_localized_polynomial_map
     {X T : Scheme.{u}} [IsAffine X] [IsAffine T]
     (f : X ⟶ T) [LocallyOfFinitePresentation f]

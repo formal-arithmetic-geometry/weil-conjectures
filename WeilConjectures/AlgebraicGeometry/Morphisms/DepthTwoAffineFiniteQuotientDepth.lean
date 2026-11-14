@@ -24,7 +24,6 @@ import Mathlib.RingTheory.Localization.Finiteness
 /-! # Positive depth of finite quotients of restriction sections
 
 Source: Stacks Project, Tags 0AV8, 0AVN, 05AM, 00LL and 00LX.
-(blueprint: lem-sbc-depth-two-affine-finite-quotient-depth)
 -/
 
 @[expose] public section
@@ -109,27 +108,7 @@ private theorem depth_one_of_short_exact {R : Type u} [CommRing R]
 /-- Every finite intermediate extension has a quotient of positive local depth.
 
 Source: Stacks Project, surjectivity argument of Tag 0AV8, as used in 0E9I;
-Tags 0AVN, 05AM, 00LL and 00LX.
-(blueprint: lem-sbc-depth-two-affine-finite-quotient-depth)
-
-Proof: On the Noetherian affine V, quasi-coherence identifies N with the sheaf
-of M = N(V). The open immersion U intersect V into V is quasi-compact and
-quasi-separated, hence its direct image is quasi-coherent with section module P.
-The injective unit embeds M in P and is an isomorphism over U intersect V.
-For each prime p of R, the affine stalk comparison identifies R_p with the
-local ring at the corresponding point and M_p with the stalk of N. These
-comparisons transport the assumed depth bound and the unit map.
-Tag 0AVN excludes weakly associated points of P on the complement, hence also
-associated points by 05AM. Associated primes of a submodule S of P are among
-those of P. Since S contains M, its restriction over U intersect V equals M.
-Thus Q = S/M vanishes there. At a boundary prime, if S localized is nonzero,
-its maximal ideal is not associated, so 00LL gives depth at least one. If M
-localized is nonzero, 00LX and depth(M) at least two give depth(Q) at least one
-when Q is nonzero. If M localized is zero, Q equals S localized and has the
-same positive depth. If S localized is zero, Q is zero. The zero quotient has
-infinite depth by the definition. Finiteness of S and its quotient gives finite
-localizations. These cases cover every prime, including the empty open U and
-zero source module. No vanishing or surjectivity conclusion is assumed here. -/
+Tags 0AVN, 05AM, 00LL and 00LX. -/
 theorem depth_one_affine_finite_quotient_of_depth_two
     {L : Scheme.{u}} [IsLocallyNoetherian L] (U : L.Opens)
     (N : L.Modules)

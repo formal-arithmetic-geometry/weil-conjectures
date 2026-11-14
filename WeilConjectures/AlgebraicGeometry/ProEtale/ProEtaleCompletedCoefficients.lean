@@ -62,10 +62,6 @@ import WeilConjectures.NumberTheory.Padics.IntegersAlgebra
 /-!
 # Comparison of pulled-back condensed coefficients with completed coefficients
 
-Source: literature/blueprint/latest/blueprint/sec-proetale-coefficients/
-sk-prop-sfb-qlbar-colimit-x/_section.md and its two proof files
-(blueprint: lemma-comparison-completed-coefficients).
-
 The integral comparison is stated as a limit universal property, with its reductions
 normalized on constant sections. Rationalization is stated as the sequential module
 colimit together with the ring-localization universal property. These formulations
@@ -269,33 +265,6 @@ private theorem sfb_padic_completed (ℓ : ℕ) [Fact ℓ.Prime] :
 
 /-- The three completed-coefficient comparisons, their inverse-image compatibility, and
 specialization to `ℤ_ℓ` and `ℚ_ℓ`.
-
-Source: literature/blueprint/latest/blueprint/sec-proetale-coefficients/
-sk-prop-sfb-qlbar-colimit-x/_section.md, all displayed formulas
-(blueprint: lemma-comparison-completed-coefficients).
-
-Proof: (1) lemma-comparison-completed-coefficients--1 identifies both the pulled-back
-integers and the inverse limit of constant reductions with the sheaf represented by
-`X[𝒪_E]`; their ring operations agree by representability. This supplies the normalized
-limit cone. (2) lemma-comparison-completed-coefficients--2 identifies the sequential module
-colimit with `E_X` by the maps `ℓ^(-m) φ`. The ring structure is the localization one;
-its universal property gives the final clause of SfbCompletedCoefficientComparison.
-(3) On the point, each section of the algebraic-closure coefficients lies in a finite
-subextension. Compatible maps therefore glue uniquely, using a common finite compositum
-to check addition and multiplication. (4) The left adjoint `p_X^*` preserves this colimit
-of abelian sheaves. The unit and multiplication are preserved, since tensor preserves
-colimits separately and every pair of finite subextensions lies in a common finite
-subextension. Thus this is also a colimit of ring objects. (5) Adjunction and Yoneda
-identify the inverse image of a representable with its base change. In particular,
-`Y[𝒪_E] ×_Y X = X[𝒪_E]`, including all reduction projections. Hence the pulled-back
-integral cone is still limiting; this does not assert preservation of arbitrary limits.
-(6) For the two colimits, inverse image preserves colimits and the monoidal comparison
-`upperStarFromPointComp` respects every inclusion and every multiplication by `ℓ`.
-Uniqueness of the induced colimit maps gives precisely the displayed naturality of
-all the rationalization legs and the finite-field legs. (7) At `E = ℚ_ℓ`, the integers
-are `ℤ_ℓ`, with uniformizer `ℓ` and quotients `ZMod (ℓ^n)` by
-lemma-comparison-completed-coefficients--4; these identifications commute with reductions, giving
-the last two formulas.
 -/
 theorem sfb_completed_coefficients (ℓ : ℕ) [Fact ℓ.Prime] :
     (∀ (E : PadicAlgCl.FiniteIntermediateField ℓ)

@@ -29,9 +29,6 @@ import WeilConjectures.AlgebraicGeometry.Constructible.ConstructibleSingleSuppor
 import WeilConjectures.AlgebraicGeometry.Finite.FiniteLocallyFreeLineModels
 
 /-! # Local freeness and derived completeness of the Tate line
-
-Source: coefficient-twist blueprint, order 1505
-(blueprint: lem-pur-twist-sheaf-locally-free).
 -/
 
 @[expose] public section
@@ -60,56 +57,7 @@ private theorem rank_one_of_cover
     (SheafOfModules.isInvertible_of_forall_over_unit (M := M) U hU ht)
 
 /-- All four properties of the concrete Tate lines, including the empty-scheme case.
-Source: Stacks Project, Tag 03PK and Lemma 03RV; coefficient-twist blueprint, order 1505
-(blueprint: lem-pur-twist-sheaf-locally-free).
-Proof:
-1. On affine opens the finite root scheme is etale, by
-   lem-sbc-root-split-away-cover-etale. Use lem-asd-finite-etale-twist-line and the
-   representable calculation for proposition-comparison-morphism-inverse-image to transfer its
-   trivializations to the pro-etale root sheaf. The comparison of constant finite
-   coefficients in lem-sf-comparison-pullback-exact respects the scalar action.
-2. Apply lemma-cycle-class-cartier-divisor on each test scheme to lift roots through the power
-   transitions locally. The sheaf local-surjectivity criterion makes them epimorphisms.
-3. Refine the level-one etale cover by
-   lem-weil-pbc-proetale-affine-wcontractible-covering-family. On each weakly contractible
-   member lift primitive roots recursively. Every lift stays primitive: its coefficient
-   modulo l is a unit, hence its coefficient modulo every l-power is a unit. Constant
-   sections and their equality can be checked locally by
-   lem-weil-pbc-site-sheafification-sections-local and the constant-sheaf stalk theorem.
-4. Take the compatible root trivializations to the inverse limit. Slice restriction
-   commutes with sectionwise limits, by lem-weil-proetale-weakly-etale-localization.
-   The coordinate action gives a completed coefficient line. The quotient clause of
-   lem-weil-pbc-constant-completion-equivalence and the tensor-quotient formula identify
-   its finite reductions with the roots sheaves.
-5. The valuation-ring DVR theorem writes l as a unit times a positive uniformizer power.
-   Lift a finite residue basis and use successive l-adic digit expansions and completeness
-   to obtain finite generation over Z_l. Torsion freeness and
-   lem-sc-dvr-fg-torsionfree-free give a finite basis.
-6. Reduce that basis modulo l-powers and take limits. Uniformizer powers and l-powers are
-   cofinal, so the canonical ring-sheaf tensor comparison is an isomorphism, including its
-   multiplicative and unit structure. Its pure-tensor formula gives the completed action
-   on the prescribed integral tensor sheaf, which is locally a line.
-7. Both ordinary reductions are quotient by the same uniformizer power, hence coincide.
-   Choose a finite l-power annihilating each coefficient quotient; its finite root
-   trivialization is an etale trivialization of the finite Tate line. The geometric-point
-   lifting and constant-stalk lemmas make its stalks finite.
-8. The integral line placed in degree zero is K-flat: on its trivializing cover its tensor
-   with any acyclic complex is that complex, and slice restriction is exact by
-   lem-pur-site-restriction-module-adjunction-exact. Compute derived reduction on this
-   representative using def-weil-integral-derived-reduction, obtaining the ordinary
-   finite line in degree zero with the same quotient transition and augmentation maps.
-9. The single stratum S witnesses constructibility of each finite reduction. Its support
-   is contained in {0}; on a nonempty S a geometric stalk is the nonzero coefficient ring,
-   so the support equals {0}. On the empty scheme every sheaf is zero and support is empty.
-10. A rank-one locally free line in degree zero is locally strictly perfect: take
-    the regular module in degree zero and zero elsewhere on each trivializing chart.
-    Perfect duality identifies it with its double dual into the regular coefficient
-    object. The existing constant-coefficient theorem makes that object complete,
-    and ambient internal Hom into a complete object is complete. Transport the
-    augmented reduction triangle through the bidual isomorphism and the proved
-    intrinsic/legacy completeness comparison.
-11. All reductions are constructible with uniform amplitude [0,0], so the integral line
-    belongs to def-weil-derived-complete-integral-detailed. -/
+Source: Stacks Project, Tag 03PK and Lemma 03RV. -/
 theorem pur_twist_sheaf_locally_free
     (S : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

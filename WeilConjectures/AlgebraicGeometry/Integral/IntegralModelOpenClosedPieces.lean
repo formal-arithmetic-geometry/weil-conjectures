@@ -69,9 +69,8 @@ set_option linter.privateModule false
 /-!
 # Integral models of the open and closed pieces
 
-Source: Bhatt--Scholze, The pro-etale topology for schemes, Definition 6.8.10 and
-Lemma 6.8.13; Stacks Project, Tags 09AA, 09AH, 09BN and 03DI
-(blueprint: lem-weil-pbc-integral-model-open-closed-pieces).
+Source: Bhatt--Scholze, The pro-etale topology for schemes, Definition 6.8.10 and Lemma 6.8.13;
+Stacks Project, Tags 09AA, 09AH, 09BN and 03DI.
 
 The continuous coefficients use the published lattice encoding. `WithAbs` equips the
 finite extension with its canonical topology, and `latticeCoefficientIntegers` is its

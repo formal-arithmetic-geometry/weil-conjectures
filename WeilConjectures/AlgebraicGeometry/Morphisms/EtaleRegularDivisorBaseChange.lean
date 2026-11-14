@@ -17,7 +17,6 @@ import Mathlib.RingTheory.Smooth.Flat
 # Regular divisors under etale base change
 
 Source: Stacks Project, Tag 07NF and flat base change.
-(blueprint: lem-sbc-etale-regular-divisor-base-change)
 -/
 
 @[expose] public section
@@ -28,14 +27,7 @@ namespace AlgebraicGeometry.Scheme
 /-- Etale change of base preserves a regular ring and its regular divisor.
 
 Source: Stacks Project, Tags 07NF (regularity under smooth maps), 00TA (smooth flatness),
-02GO (etale base change), and 039P (etale morphisms are smooth).
-(blueprint: lem-sbc-etale-regular-divisor-base-change)
-
-Proof: An etale ring map is flat, so tensoring the injective multiplication map by g
-preserves injectivity; this gives regular multiplication by its image. Regularity
-ascends under etale ring maps. The quotient S/(φ(g)) is the base change of S along
-R to R/(g); it is etale over that regular quotient, so it too is regular. This applies
-also when g is a unit, in which case both quotients are the zero ring. -/
+02GO (etale base change), and 039P (etale morphisms are smooth). -/
 theorem etale_regular_divisor_base_change
     (R S : CommRingCat.{u}) (φ : R →+* S)
     [IsRegularRing R] (g : R) (hg : IsSMulRegular R g)

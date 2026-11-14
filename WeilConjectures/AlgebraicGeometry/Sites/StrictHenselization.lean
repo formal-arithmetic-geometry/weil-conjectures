@@ -67,13 +67,11 @@ namespace AlgebraicGeometry.Scheme
 
 variable {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ S)
 
-/-- The category of pointed étale neighbourhoods of a geometric point `s : Spec Ω ⟶ S`: its
-objects are pairs `(V, v)` of an étale `S`-scheme `V` and a morphism `v : Spec Ω ⟶ V` over `S`,
+/-- The category of pointed étale neighbourhoods of a geometric point `s: Spec Ω ⟶ S`: its
+objects are pairs `(V, v)` of an étale `S`-scheme `V` and a morphism `v: Spec Ω ⟶ V` over `S`,
 and its morphisms `(V, v) ⟶ (W, w)` are the `S`-morphisms `V ⟶ W` carrying `v` to `w`. This is
 the category of elements of the fibre functor of the point `pointSmallEtale s` of the small
-étale site, the same category as `AlgebraicGeometry.Scheme.Hom.Nbhd s`.
-
-(blueprint: `def-weil-pbc-pointed-etale-neighbourhoods`) -/
+étale site, the same category as `AlgebraicGeometry.Scheme.Hom.Nbhd s`. -/
 abbrev PointedEtaleNeighborhood : Type (u + 1) :=
   (pointSmallEtale s).fiber.Elements
 
@@ -148,9 +146,7 @@ lemma exists_hom (d : PointedEtaleNeighborhood s) :
 
 /-- **Affine pointed étale neighbourhoods are cofinal**: the inclusion of the full subcategory
 of affine pointed étale neighbourhoods is initial, hence cofinal for the opposite-indexed stalk
-colimits.
-
-(blueprint: `lemma-weil-pbc-affine-neighbourhood-cofinal`) -/
+colimits. -/
 instance initial_ι : (ι s).Initial :=
   Functor.initial_of_exists_of_isCofiltered_of_fullyFaithful _ (exists_hom s)
 
@@ -189,15 +185,12 @@ instance : HasColimitsOfShape (AffinePointedEtaleNeighborhood s)ᵒᵖ CommRingC
   hasColimitsOfShape_of_finallySmall _ _
 
 /-- The **strict henselization** `𝒪^{sh}_{S,s} = colim Γ(V, 𝒪_V)` of `S` at the geometric
-point `s`, the colimit over the affine pointed étale neighbourhoods `(V, v)` of `s`.
-
-(blueprint: `def-weil-pbc-strict-henselization-limit`) -/
+point `s`, the colimit over the affine pointed étale neighbourhoods `(V, v)` of `s`. -/
 noncomputable def strictHenselization : CommRingCat.{u} :=
   colimit (strictHenselizationDiagram s)
 
 /-- The **strict localization** `S_(s) = Spec 𝒪^{sh}_{S,s}` of `S` at the geometric point `s`.
-
-(blueprint: `def-weil-pbc-strict-henselization-limit`) -/
+ -/
 noncomputable abbrev strictLocalization : Scheme.{u} :=
   Spec (strictHenselization s)
 
@@ -225,9 +218,7 @@ lemma strictLocalizationCone_π_app (x : AffinePointedEtaleNeighborhood s) :
 
 /-- **The strict localization is the limit of the affine pointed étale neighbourhoods**: the
 anti-equivalence between affine schemes and rings carries the colimit cocone defining the strict
-henselization to a limit cone `S_(s) ≅ lim V`.
-
-(blueprint: `def-weil-pbc-strict-henselization-limit`) -/
+henselization to a limit cone `S_(s) ≅ lim V`. -/
 noncomputable def isLimitStrictLocalizationCone : IsLimit (strictLocalizationCone s) :=
   (IsLimit.postcomposeInvEquiv (affineNeighborhoodDiagramIso s) _).symm
     (isLimitOfPreserves Scheme.Spec
@@ -272,24 +263,20 @@ noncomputable def strictLocalizationConeOver : Cone (affineNeighborhoodDiagramOv
         exact ((strictLocalizationCone s).w f).symm }
 
 /-- **The strict localization is the limit of the affine pointed étale neighbourhoods over
-`S`.**
-
-(blueprint: `def-weil-pbc-strict-henselization-limit`) -/
+`S`.** -/
 noncomputable def isLimitStrictLocalizationConeOver : IsLimit (strictLocalizationConeOver s) :=
   have := IsCofiltered.isConnected (AffinePointedEtaleNeighborhood s)
   isLimitOfReflects (CategoryTheory.Over.forget S)
     ((isLimitStrictLocalizationCone s).ofIsoLimit (Cone.ext (Iso.refl _)))
 
-/-- **Base change commutes with the neighbourhood limit**: for any morphism `f : X ⟶ S`, the
+/-- **Base change commutes with the neighbourhood limit**: for any morphism `f: X ⟶ S`, the
 fibre product `S_(s) ×_S X` is the limit of the fibre products `V ×_S X` over the affine pointed
 étale neighbourhoods `(V, v)` of `s`. The cone is the image of `strictLocalizationConeOver s`
 under base change along `f`, whose point is `pullback (strictLocalizationToBase s) f`.
 
 The blueprint assumes `f` quasi-compact and quasi-separated; this is not needed, since base
 change `Over S ⥤ Over X` is a right adjoint and the forgetful functor `Over X ⥤ Scheme` creates
-connected limits.
-
-(blueprint: `lemma-weil-pbc-fibre-product-limit`) -/
+connected limits. -/
 noncomputable def isLimitStrictLocalizationConePullback {X : Scheme.{u}} (f : X ⟶ S) :
     IsLimit ((CategoryTheory.Over.forget X).mapCone
       ((CategoryTheory.Over.pullback f).mapCone (strictLocalizationConeOver s))) :=
@@ -310,14 +297,12 @@ section Stalk
 
 variable (A : Type*) [Category A] [HasColimitsOfSize.{u, u} A]
 
-/-- Blueprint `def-weil-pbc-geometric-stalks`: Geometric stalks
+/-- Geometric stalks
 
 The **geometric stalk** functor `F ↦ F_s = colim F(U)` at a geometric point `s` of `S`, the
 colimit running over the opposite of the category of pointed étale neighbourhoods `(U, u)`
 of `s`. This is the fibre functor on sheaves of Mathlib's point `pointSmallEtale s` of the
-small étale site.
-
-(blueprint: `def-weil-pbc-geometric-stalks`) -/
+small étale site. -/
 noncomputable abbrev geometricStalkFunctor : Sheaf S.smallEtaleTopology A ⥤ A :=
   (pointSmallEtale s).sheafFiber
 
@@ -327,24 +312,18 @@ noncomputable def isColimitGeometricStalk (F : Sheaf S.smallEtaleTopology A) :
     IsColimit ((pointSmallEtale s).presheafFiberCocone F.obj) :=
   (pointSmallEtale s).isColimitPresheafFiberCocone F.obj
 
-/-- **Geometric stalks are left exact.**
-
-(blueprint: `prop-weil-pbc-geometric-stalks-exact`) -/
+/-- **Geometric stalks are left exact.** -/
 instance preservesFiniteLimits_geometricStalkFunctor :
     PreservesFiniteLimits (geometricStalkFunctor s AddCommGrpCat.{u}) :=
   inferInstance
 
-/-- **Geometric stalks are right exact.**
-
-(blueprint: `prop-weil-pbc-geometric-stalks-exact`) -/
+/-- **Geometric stalks are right exact.** -/
 instance preservesFiniteColimits_geometricStalkFunctor :
     PreservesFiniteColimits (geometricStalkFunctor s AddCommGrpCat.{u}) :=
   inferInstance
 
 /-- **Exactness of geometric stalks**: the stalk functor `Ab(S_ét) ⥤ Ab` at a geometric point
-carries short exact sequences of abelian étale sheaves to short exact sequences.
-
-(blueprint: `prop-weil-pbc-geometric-stalks-exact`) -/
+carries short exact sequences of abelian étale sheaves to short exact sequences. -/
 theorem shortExact_map_geometricStalkFunctor
     {T : ShortComplex (Sheaf S.smallEtaleTopology AddCommGrpCat.{u})} (hT : T.ShortExact) :
     (T.map (geometricStalkFunctor s AddCommGrpCat.{u})).ShortExact :=

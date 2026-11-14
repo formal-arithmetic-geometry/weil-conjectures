@@ -63,26 +63,7 @@ private theorem stalk_dvr {S : Scheme.{u}} [IsNoetherian S] [IsIntegral S]
 has a source open neighbourhood on which the normalization map is etale,
 when the local base has dimension less than two.
 
-Source: Stacks Project, Tag 0EYJ, trait paragraph, and Tag 0EYI(2).
-(blueprint: lem-sbc-stalk-normalization-trait-section-source)
-
-Proof: Minimality of s makes the inverse image of U the punctured local
-spectrum. Its normal Noetherian local domain A has positive dimension:
-a zero-dimensional local domain is a field, in which case s is the generic
-point, contradicting hs and hηU. The dimension bound therefore makes A a
-DVR. Smoothness makes the total space regular, and its closed fibre a
-regular Cartier divisor. Extend the G-action to the punctured cover by
-normal generic full faithfulness. A rational point and its G-translates
-split the entire generic section fibre. Stabilizer ramification indices
-divide |G| and are invertible, so tame normalization has the standard
-forms of Tags 0EYG and 0EYH. Pulling these forms back along the section
-sends the divisor equation to a uniformizer. The split generic section
-fibre forces every ramification exponent to be one, by Tag 0EYI(2).
-Thus the finite normalization is etale at every point above the closed
-section point. Integral closure commutes with localization, identifying
-this normalization with n. For each such point restrict to a source open
-where n is etale. Disconnected covers use their stabilizers componentwise;
-an empty fibre makes the conclusion vacuous. -/
+Source: Stacks Project, Tag 0EYJ, trait paragraph, and Tag 0EYI(2). -/
 theorem GaloisCover.stalk_normalization_trait_section_source {S C : Scheme.{u}}
     [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]

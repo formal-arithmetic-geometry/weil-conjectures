@@ -12,7 +12,6 @@ public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 Source: Stacks Project, Tag 008C (direct image on opens), and Tag 0094
 (restriction to an open subspace).
-(blueprint: lem-sbc-open-restriction-pushforward-comparison)
 -/
 
 @[expose] public section
@@ -24,21 +23,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 set_option backward.isDefEq.respectTransparency false in
 /-- The open-base-change comparison for an arbitrary module, without coherence hypotheses.
 
-Source: Stacks Project, Tags 008C and 0094; the formula for direct image on opens.
-(blueprint: lem-sbc-open-restriction-pushforward-comparison)
-
-Proof: Put W = j inverse-image U and t = j restricted to U. On an open
-T of Y, the left side has sections P(U inverse-image of j image T).
-The right side has sections P(t image (W inverse-image T)). These opens
-of U are equal: a point belongs to either exactly when its image in L
-belongs to j image T. Because j is an open immersion its injectivity
-identifies the witnessing point in Y. Use the presheaf's map along this
-equality for the component isomorphism. The restriction maps agree by
-functoriality. The scalar actions agree by t followed by U inclusion =
-W inclusion followed by j, and the naturality of the inverse structure
-sheaf maps of the open immersions. This constructs an isomorphism of
-presheaves of modules and hence of sheaves of modules. For empty opens
-both formulas still agree; no finiteness or separation is used. -/
+Source: Stacks Project, Tags 008C and 0094. -/
 theorem nonempty_restrict_pushforward_open_iso
     {Y L : Scheme.{u}} (j : Y ⟶ L) [IsOpenImmersion j]
     (U : L.Opens) (P : U.toScheme.Modules) :

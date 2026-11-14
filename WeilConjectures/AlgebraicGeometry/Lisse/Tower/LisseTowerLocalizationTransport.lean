@@ -22,16 +22,14 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace LisseTowerLocalizationTransport
 
 /-- Transport a functor through the unit of an equivalence.
-Source: Stacks Tag 03CY
-(blueprint: def-weil-pbc-lisse-tower-localization-transport). -/
+Source: Stacks Tag 03CY. -/
 def realizationLevel
     {C D E : Type*} [Category C] [Category D] [Category E]
     (F : C ⥤ D) [F.IsEquivalence] (K : C ⥤ E) :
     K ≅ F ⋙ (F.inv ⋙ K) := (F.asEquivalence.funInvIdAssoc K).symm
 
 /-- Extend the scalar face uniquely along the fully faithful equivalence.
-Source: Stacks Tags 03CY and 03DA
-(blueprint: def-weil-pbc-lisse-tower-localization-transport). -/
+Source: Stacks Tags 03CY and 03DA. -/
 def realizationScalar
     {C₀ C₁ D₀ D₁ E₀ E₁ B : Type*}
     [Category C₀] [Category C₁] [Category D₀] [Category D₁]
@@ -51,8 +49,7 @@ def realizationScalar
     Functor.isoWhiskerRight b₀ H₀ ≪≫ Functor.associator _ _ _
 
 /-- Naturality and the defining preimage equation give the transported scalar square.
-Source: Stacks Tags 03CY and 03DA
-(blueprint: def-weil-pbc-lisse-tower-localization-transport). -/
+Source: Stacks Tags 03CY and 03DA. -/
 theorem realizationScalar_comm
     {C₀ C₁ D₀ D₁ E₀ E₁ B : Type*}
     [Category C₀] [Category C₁] [Category D₀] [Category D₁]
@@ -113,8 +110,7 @@ attribute [local irreducible] HasDerivedCategory.standard pbcDerivedRestrict
   lisseTowerFixedScalarIso lisseTowerEtaleScalarIso localProEtaleNormalization
 
 /-- Fixed-coefficient inverse image along two successive maps, followed by realization.
-Source: Stacks Tags 03CY and 03D2
-(blueprint: def-weil-pbc-lisse-tower-localization-transport). -/
+Source: Stacks Tags 03CY and 03D2. -/
 def lisseTowerLocalizationFixed {X Z S T : Scheme.{u}} (s : T ⟶ X)
     (a : T ⟶ S) (b : S ⟶ Z) {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (n : ℕ) :=
@@ -123,16 +119,14 @@ def lisseTowerLocalizationFixed {X Z S T : Scheme.{u}} (s : T ⟶ X)
       lisseTowerFixedRealization s d n
 
 /-- Transport fixed-coefficient inverse image through the explicit realization equivalence.
-Source: Stacks Tags 03CY and 03D2
-(blueprint: def-weil-pbc-lisse-tower-localization-transport). -/
+Source: Stacks Tags 03CY and 03D2. -/
 def lisseTowerLocalizationPull {X Z S T : Scheme.{u}} (t : Z ⟶ X) (s : T ⟶ X)
     (a : T ⟶ S) (b : S ⟶ Z) {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (n : ℕ) :=
   (lisseTowerFixedRealization t d n).inv ⋙ lisseTowerLocalizationFixed s a b d n
 
 /-- The fixed-site level comparison before etale comparison.
-Source: Stacks Tag 03CY
-(blueprint: def-weil-pbc-lisse-tower-localization-transport). -/
+Source: Stacks Tag 03CY. -/
 def lisseTowerLocalizationFixedLevel {X Z S T : Scheme.{u}} (t : Z ⟶ X) (s : T ⟶ X)
     (a : T ⟶ S) (b : S ⟶ Z) {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (n : ℕ) :
@@ -141,8 +135,7 @@ def lisseTowerLocalizationFixedLevel {X Z S T : Scheme.{u}} (t : Z ⟶ X) (s : T
   realizationLevel _ _
 
 /-- The unit of realization gives the natural level comparison.
-Source: Stacks Tags 03CY and 03D2
-(blueprint: def-weil-pbc-lisse-tower-localization-transport). -/
+Source: Stacks Tags 03CY and 03D2. -/
 def lisseTowerLocalizationLevel {X Z S T : Scheme.{u}} (t : Z ⟶ X) (s : T ⟶ X)
     (a : T ⟶ S) (b : S ⟶ Z) {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (n : ℕ) :
@@ -155,8 +148,7 @@ def lisseTowerLocalizationLevel {X Z S T : Scheme.{u}} (t : Z ⟶ X) (s : T ⟶ 
     (Functor.associator _ _ _).symm
 
 /-- Paste the coefficient mate for the first map with the pulled scalar square.
-Source: Stacks Tags 03D2 and 03DA
-(blueprint: def-weil-pbc-lisse-tower-localization-transport). -/
+Source: Stacks Tags 03D2 and 03DA. -/
 def lisseTowerLocalizationFixedScalar {X Z S T : Scheme.{u}} (s : T ⟶ X)
     (a : T ⟶ S) (b : S ⟶ Z) {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (n : ℕ) :
@@ -174,8 +166,7 @@ def lisseTowerLocalizationFixedScalar {X Z S T : Scheme.{u}} (s : T ⟶ X)
     (Functor.associator _ _ _).symm
 
 /-- The scalar face is transported through the fully faithful realization equivalence.
-Source: Stacks Tags 03CY, 03DA and 03D3
-(blueprint: def-weil-pbc-lisse-tower-localization-transport). -/
+Source: Stacks Tags 03CY, 03DA and 03D3. -/
 def lisseTowerLocalizationScalar {X Z S T : Scheme.{u}} (t : Z ⟶ X) (s : T ⟶ X)
     (a : T ⟶ S) (b : S ⟶ Z) {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (n : ℕ) :
@@ -190,8 +181,7 @@ def lisseTowerLocalizationScalar {X Z S T : Scheme.{u}} (t : Z ⟶ X) (s : T ⟶
     (lisseTowerLocalizationFixedScalar s a b d n)
 
 /-- The specified inverse-image coefficient mate, in the direction of semilinear arrows.
-Source: Stacks Tag 03D3
-(blueprint: def-weil-pbc-lisse-tower-localization-transport). -/
+Source: Stacks Tag 03D3. -/
 def lisseTowerInverseImageScalar {X Z : Scheme.{u}} (t : Z ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) :
     pbcDerivedRestrict (pbcAdicQuotient X d (n + 1) n (Nat.le_succ n)) ⋙

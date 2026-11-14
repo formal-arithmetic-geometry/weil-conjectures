@@ -36,9 +36,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek
 /-!
 # Local factorization of the exceptional inverse image
 
-Source: literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
-sk-thm-restriction/sk-thm-restriction-local.md (blueprint: theorem-f-shriek-ell-adic-coefficients).
-
 The right adjoints below are the localizing exceptional right adjoints supplied by
 `theorem-existence-exceptional-inverse-image`; the pullbacks are the canonical derived pullback
 lifts.  Thus the statement does not introduce a second exceptional inverse image or a second
@@ -574,36 +571,12 @@ set_option linter.unusedVariables false in
 -- Composite adjunctions and full-subcategory comparisons require explicit elaboration.
 /-- Local factorization of `f^!` on affine charts, together with bounded constructibility.
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-thm-restriction/
-sk-thm-restriction-local (blueprint: theorem-f-shriek-ell-adic-coefficients).
-
 The exceptional inverse images are the right adjoints of
 `theorem-existence-exceptional-inverse-image`: for `f`, the projection `p` and the closed immersion
 `i`, an arbitrary boundary compactification, its localizing-closure preservation proof and an
 arbitrary right adjoint (`Ff`, `Fp`, `Fi`) of the corresponding `localizingLowerShriek` are taken as
 arguments, so the factorization holds for every choice.  The pullbacks are the canonical
-derived pullback lifts `huStar`, `hvStar`.
-
-Proof (the steps of the blueprint proof):
-1. `k` is Noetherian; `X`, `Y` are Noetherian, quasi-compact and quasi-separated, and
-   affine opens of them are of finite type over `k`.
-2. `A^d_V` is separated of finite type over `k`; `U`, `V`, `A^d_V` stay in the standing
-   setting.
-3. `Dctf = Dbc` and their localizing closures agree (det-def-localizing-closure-ctf-equals-bc);
-   the closed immersion `i` is proper, so `u, v, i, p` satisfy the adjunction hypotheses.
-4. Finitely many affine `V_β` cover `Y`, and finite affine covers `U_{βα}` of `f⁻¹(V_β)`
-   by finitely generated algebras cover `X`.
-5. Generators `b_1, …, b_d` give a surjection `A[t_1, …, t_d] → B`, hence the closed
-   immersion `i` with `f u = v p i` (also for `d = 0`): the finite-cover clause.
-6. `Rb_! Ra_! ≅ R(ba)_!` on the localizing closures
-   (lem-sfb-localizing-lower-shriek-composition).
-7. Composite adjunctions and uniqueness of right adjoints give `(ba)^! ≅ a^! b^!`.
-8. `u^! ≅ u^*`, `v^! ≅ v^*` (proposition-composition-open-restriction-compactifications-f), whence
-   `u^* f^! ≅ (f u)^! = (v p i)^! ≅ i^! p^! v^*`.
-9. For `K ∈ Dbc(Y)`, `v^* K ∈ Dbc(V)` and `H = p^! v^* K ≅ p^* v^* K (d)[2d] ∈ Dbc(A^d_V)`.
-10. `i^! H ≅ RΓ_U H` (closed-immersion normalization, theorem-f-shriek-ell-adic-coefficients),
-    and `RΓ_U H ∈ Dbc(U)` (lem-sfb-rational-closed-support-constructible).
-11. Evaluating step 8 at `K` gives `u^* f^! K ∈ Dbc(U)`. -/
+derived pullback lifts `huStar`, `hvStar`. -/
 theorem restrictionLocal
     (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
     [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]

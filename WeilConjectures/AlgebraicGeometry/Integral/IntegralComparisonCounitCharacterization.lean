@@ -14,10 +14,7 @@ import WeilConjectures.CategoryTheory.SignedCoconeShift.SignedMappingCoconeShift
 /-!
 # Whole-tower characterization of the specified integral comparison
 
-Source: Stacks Project, Derived Categories, Tags 0FND and 0DVC, and Cohomology on
-Sites, Tag 0941; blueprint Global powers, Step 1 of
-`sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md`
-(blueprint: lem-trf-integral-comparison-counit-characterization).
+Source: Stacks Project, Derived Categories, Tags 0FND and 0DVC, and Cohomology on Sites, Tag 0941.
 
 The first statement includes arbitrary unbounded derived variables, normalization on
 every simultaneous K-injective resolution, and hence independence of the resolution.

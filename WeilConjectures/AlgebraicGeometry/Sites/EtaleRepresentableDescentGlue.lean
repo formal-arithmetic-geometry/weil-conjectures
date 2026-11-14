@@ -15,7 +15,6 @@ public import Mathlib.CategoryTheory.Sites.SubcanonicalOver
 # Gluing a representation after effective descent
 
 Source: Stacks Project, Tags 03RV and 02W5, gluing the represented sheaf.
-(blueprint: `lem-weil-pbc-etale-representable-descent-glue`)
 -/
 
 @[expose] public section
@@ -90,24 +89,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 of any effective realization of the datum. Finiteness is not needed in this gluing step.
 
 Source: Stacks Project, Tag 03RV, final identification of the descended representation;
-Tag 02W5, descent from a representable sheaf.
-(blueprint: `lem-weil-pbc-etale-representable-descent-glue`)
-
-Proof: For an etale W over T, pull back the etale surjection U to W. A section of E(W)
- restricts to this cover. Apply e to these restrictions to obtain morphisms to V,
- then compose with q. On the double overlap the two morphisms to V differ by the
- specified transport; hcompat and ht therefore make their composites with q equal.
- The representable presheaf of P is a sheaf on the small etale site, so these maps
- glue uniquely to a morphism W to P over T. This construction is natural in W by
- uniqueness of gluing. Conversely a morphism W to P lifts uniquely on the same
- cover to V, using the pullback square hp. Apply the inverse of e. On the double
- overlap, hp and ht identify the two lifts by transport; hcompat and the
- injectivity of e give equality of the two sections of E. Glue by the sheaf
- condition on E. The two composites restrict to the identity on the cover,
- hence are the identity by separatedness. These inverse natural transformations
- form the asserted presheaf isomorphism. Empty W is covered by the empty family,
- and the sheaf axioms give singleton section sets, so the construction includes
- empty bases and empty local representatives. -/
+Tag 02W5, descent from a representable sheaf. -/
 theorem etaleRepresentable_descentGlue
     (T : Scheme.{u}) (E : Sheaf T.smallEtaleTopology (Type (u + 1)))
     (U : T.Etale) [Surjective U.hom]

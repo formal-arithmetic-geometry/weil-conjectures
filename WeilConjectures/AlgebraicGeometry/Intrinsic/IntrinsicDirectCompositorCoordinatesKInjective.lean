@@ -12,9 +12,7 @@ import WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicDirectCompositorCoor
 
 /-! # Coefficient realization of an ordinary direct-image compositor
 
-Source: Stacks 00YV, 03D3, 07A5 and 07A6; the coefficient-presentation step in
-prop-sf-pf-coherence.proof.md.
-(blueprint: lem-sf-intrinsic-direct-compositor-coordinates).
+Source: Stacks 00YV, 03D3, 07A5 and 07A6.
 -/
 
 @[expose] public noncomputable section
@@ -31,31 +29,8 @@ attribute [local irreducible] HasDerivedCategory.standard Functor.mapDerivedCate
 compositor. This is solely a comparison between the two presentations of one finite
 coefficient category: it involves no coefficient sequence, evaluation, or system operation.
 
-Source: Stacks 00YV and 03D3 (transport of the module adjunction), 07A5 and 07A6
-(K-injective direct image and its adjunction); the coefficient-normalization part of
-lem-sf-system-finite-compositor-coordinates, step 2.
-(blueprint: lem-sf-intrinsic-direct-compositor-coordinates).
-
-Proof: before deriving, transport the fixed-scalar inverse-image adjunction through
-sfIntrinsicModuleEquivalence. Its right comparison is sfIntrinsicDirectImageComparison:
-this is exactly the definition of sfIntrinsicConstantModuleAdjunction. For two maps,
-sfIntrinsicPullbackComp inserts the middle equivalence unit. Naturality of that unit
-and the two triangle identities show that conjugating this pullback comparison gives
-the pasted direct comparisons followed by the fixed-scalar conjugate compositor.
-All scalar maps agree, since each direct comparison is the unique map sending a
-scalar-unit section to the same section. Pass to complexes. Resolve the input by a
-K-injective complex; direct image preserves K-injectives because its left adjoint
-is exact, and the coefficient equivalences preserve them. Thus the composite image
-can use the identity resolution of the first image. The normalization equation in
-sfIntrinsicDerivedDirectImageComparison_existsUnique identifies every derived right
-comparison with the class of its ordinary comparison on this representative. Exact
-localization identifies the left comparison with sfIntrinsicDerivedPullbackComp;
-leftDerivedUpperStarIsoMapDerivedCategory identifies the fixed left-derived model
-with this same exact localization. The derived Hom bijections therefore preserve
-the ordinary conjugacy calculation. Cancel the middle equivalence unit and counit.
-This gives the displayed equality on K-injective representatives. Every derived
-object has such a representative, and naturality transports the equality to it.
-Zero coefficients, empty schemes and identity maps obey the same triangle identities.
+Source: Stacks 00YV and 03D3 (transport of the module adjunction), 07A5 and 07A6 (K-injective direct
+image and its adjunction).
 -/
 theorem sfIntrinsicDirectCompositorCoordinates_kInjective
     (A : Type u) [CommRing A] [Finite A]

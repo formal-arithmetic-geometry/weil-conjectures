@@ -16,7 +16,7 @@ universe u
 open CategoryTheory Opposite TopCat.Presheaf
 namespace AlgebraicGeometry.Scheme
 /-- Finite locally free data extends across an affine open with finite affine sections.
-Source: Stacks Project, Tags 0G41(2), 0EY6. (blueprint: new-affine-locally-free-model-core)
+Source: Stacks Project, Tags 0G41(2), 0EY6
 The extension theorem is obtained by finite-presentation extension and affine
 identification; the restriction isomorphism is transported across the
 finite locally free module on the open. -/

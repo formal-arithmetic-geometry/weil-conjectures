@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.Picard.Affine.PicardAffineStructureProj
 /-! # The unnormalized affine structure-image model
 
 Source: Stacks Project, Tags 0BF2, 0B91, 08EB and 06Z0.
-(blueprint: lem-sc-picard-affine-structure-projective-model).
 -/
 
 @[expose] public section
@@ -31,24 +30,7 @@ namespace AlgebraicGeometry.Scheme
 base changes have no negative homology and have free rank-one zeroth homology.
 No cancellation of terms or vanishing of a differential is asserted here.
 
-Source: Stacks Project, Tag 0BF2, perfect base-change paragraph; Tags 0B91, 08EB, 06Z0.
-(blueprint: lem-sc-picard-affine-structure-projective-model).
-
-Proof: Put R = Gamma(W,U). Exact restriction and open base change identify the
-restricted image with the direct image on U of the pullback of M. Apply the given
-trivialization to identify this with R(f_U)_*O. The structure sheaf is finitely
-presented and flat over the base because f_U is flat. Proper finite-presentation
-perfect base change therefore makes this image perfect and identifies every
-further derived base change with R(f_B)_*O. Transport across isoSpec and overEquiv
-and apply the affine bounded-projective characterization, obtaining P and the
-stated representing isomorphism on the original U. Its bounded projective terms
-compute derived scalar extension by ordinary termwise extension of scalars.
-For every R -> B, the corresponding map Spec B -> U -> S is covered by hO.
-Thus the zeroth direct image of O on that base change is O_Spec B; negative
-cohomology vanishes since this is the right derived image of a sheaf in degree
-zero. The affine tilde/Gamma equivalence identifies these assertions with the
-homology of B tensor P. For the zero ring all modules and complexes are zero;
-no nonempty-open hypothesis and no shrinking of U is needed. -/
+Source: Stacks Project, Tag 0BF2, perfect base-change paragraph; Tags 0B91, 08EB, 06Z0. -/
 theorem picard_affine_structure_projective_model
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

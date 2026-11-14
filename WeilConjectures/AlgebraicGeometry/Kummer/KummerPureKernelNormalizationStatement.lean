@@ -9,9 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalEvaluationUnit
 public import WeilConjectures.AlgebraicGeometry.Kummer.KummerStrictAdjunctData
 public import WeilConjectures.AlgebraicGeometry.Kummer.KummerPureKernelNormalizationData
 
-/-! # The concrete Kummer normalization proposition
-Source: diagonal tower system proof, steps (3) and (4).
-(blueprint: def-sfb-kummer-pure-kernel-normalization-statement). -/
+/-! # The concrete Kummer normalization proposition. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -29,9 +27,7 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext DerivedCategory.singleF
   diagonalScalarExtension diagonalScalarAdjunction
 
 /-- The actual coefficient data of the concrete Kummer normalization theorem.
-All fields are the original explicit constructions.
-Source: diagonal tower proof, steps (3) and (4)
-(blueprint: def-sfb-kummer-pure-kernel-normalization-statement). -/
+All fields are the original explicit constructions. -/
 def strictKummerNormalizationCoefficients (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     (hW : IsUnit (ℓ : Γ(W, ⊤))) :
     KummerNormalizationCoefficients (hA := kummerAbHasExt W) (diagonalForget ℓ W)
@@ -53,9 +49,7 @@ def strictKummerNormalizationCoefficients (ℓ : ℕ) [Fact ℓ.Prime] (W : Sche
 
 /-- The exact concrete specialization of KummerPureKernelNormalization, using
 shared coefficients. Expanding the two real definitions gives the old concrete
-conclusion. No hypothesis or conclusion changes and no data is chosen.
-Source: diagonal tower proof, steps (3) and (4)
-(blueprint: def-sfb-kummer-pure-kernel-normalization-statement). -/
+conclusion. No hypothesis or conclusion changes and no data is chosen. -/
 def strictKummerPureKernelNormalizationStatement (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     (hW : IsUnit (ℓ : Γ(W, ⊤)))
     [HasDerivedCategory.{u + 1} (DiagonalAb W)]

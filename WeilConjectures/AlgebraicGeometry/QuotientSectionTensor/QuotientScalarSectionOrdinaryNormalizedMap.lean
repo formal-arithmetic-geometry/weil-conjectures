@@ -31,12 +31,7 @@ variable [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ T)]
 
 -- The explicit generator calculation needs the larger elaboration budget.
 /-- The sectionwise scalar extension admits a natural transformation normalized on generators.
-Source: Stacks 03EK and 06YY; this is the map part of the fixed-model comparison.
-(blueprint: lem-sfb-quotient-scalar-section-ordinary-normalized-map).
-
-Proof: construct the sheafified change-of-rings map on each module and use its universal
-scalar-extension property. The displayed equation is the image of `1 tensor m` under that
-map, and naturality follows from functoriality of tensoring and sheafification. -/
+Source: Stacks 03EK and 06YY; this is the map part of the fixed-model comparison. -/
 theorem scalar_section_ordinary_normalized_map (T : Scheme.{u})
     (model : SectionModel a T) :
     ∃ ordinary : QuotientChange.extension a T ⋙

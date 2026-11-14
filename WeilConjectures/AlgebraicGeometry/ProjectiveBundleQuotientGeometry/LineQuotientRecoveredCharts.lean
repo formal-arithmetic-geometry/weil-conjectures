@@ -287,24 +287,7 @@ private theorem exists_generator_chart {S T : Scheme.{u}} (h : T ⟶ S)
   exact (IsOpenImmersion.lift_fac j (W.ι ≫ a) hrange).symm
 
 /-- The pulled tautological quotient has the original morphism's fraction charts.
-Source: Stacks Project, Constructions, Tags 01OA and 01O4, second inverse calculation.
-(blueprint: lem-trf-line-quotient-recovered-charts).
-
-Proof: refine the source by affine opens mapping into a degree-one Proj chart
-D_+(e) above an affine base U. The normalized tautological quotient sends a
-section v to (iota(v)/e)e. The tensor-pullback section formula gives coefficient
-a^*(iota(v)/e) in the frame a^*e, including coefficient one for m itself.
-For every homogeneous c of degree d, express c as a sum of scalar multiples
-of products of d degree-one generators. The unit, multiplication and additivity
-laws of psi give its coefficient a^*(c/e^d), also when d=0. This is the displayed
-RecoveredFractionCoefficients equation for every chart factorization k, since
-Spec's adjunction identifies k's ring map with its action on sections. Changing
-frames rescales the numerator and denominator by the same power, so the same
-formula holds in any frame. The generator-cover property follows from the
-surjective quotient. Localization gives the fraction charts, their overlap
-units and restriction identities; their scheme equations are those of a.
-The calculation applies on affine refinements and requires no affine-intersection
-assumption; zero rings and the empty source satisfy the same identities. -/
+Source: Stacks Project, Constructions, Tags 01OA and 01O4, second inverse calculation. -/
 theorem lineQuotient_recovered_charts {S T : Scheme.{u}} (h : T ⟶ S)
     (E : S.Modules) [E.IsQuasicoherent] (D : TautologicalQuotient E)
     (a : T ⟶ (SymmetricAlgebraSheaf.gradedAlgebraData E).relProj)

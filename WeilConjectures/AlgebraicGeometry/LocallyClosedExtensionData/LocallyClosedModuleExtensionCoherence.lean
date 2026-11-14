@@ -36,8 +36,7 @@ namespace LocallyClosedExtensionData
 /-- Normalized comparison laws on module sheaves. The two factorization orders follow
 by composing `gamma` with `closedComparison` and the open adjunction; normalization
 and the Hom bijection make the comparison between any two factorizations unique.
-Source: Stacks, Tags 02V0 and 09AH, composite consequence described in the node proof
-(blueprint: lem-sfb-locally-closed-extension-coherence). -/
+Source: Stacks, Tags 02V0 and 09AH. -/
 structure Coherent (E : LocallyClosedExtensionData.{u}) : Prop where
   full : ∀ {S X : LocallyClosedCoefficients.{u}} (a : LocallyClosedCoefficientImmersion S X),
     (E.extension a).Full

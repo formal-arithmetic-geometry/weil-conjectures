@@ -32,28 +32,7 @@ set_option linter.unusedVariables false in
 /-- The normalization residue degree at the root divisor divides the torsor group order.
 
 Source: Stacks Project, Tag 09EB (Galois DVR degree formula) and Tag 0307
-(localization of integral closure).
-
-Proof: Put n=|G|>0 and t=root(X^n-g). The monic quotient A is free over H, so g
-remains a nonzerodivisor and t^n=g makes t a nonzerodivisor. Evaluation at t=0
-identifies A/(t) with the domain H/(g), hence (t) is prime. The principal ideal
-theorem makes its localization one dimensional: t is regular, so this prime is
-not minimal. The assumed regularity therefore makes A_(t) a DVR. The integral
-Cartier centre has precisely the irreducible support V(t), so j(eta) is this prime.
-Localization of relative normalization identifies its stalks over this point with
-localizations of the integral closure of A_(t) in the generic fibre of p. The
-compatible beta identifies p with the base change of the original G-torsor to V;
-the fraction field of A_(t) lies in V. A finite etale G-torsor over a field is a
-product of finite Galois field extensions: each factor has a stabilizer subgroup
-of G as its Galois group, so its degree divides n. The integral closure is finite
-by the assumed finiteness of the relative normalization. For each factor, Tag
-09EB gives [L:K]=r*e*f, where f is its residue degree at any prime above the DVR
-maximal ideal. Thus f divides [L:K] and hence n. The localized integral-closure
-comparison respects the base map; passing to residue fields identifies this f
-with the finrank for the displayed canonical residueFieldMap. This argument
-uses neither invertibility of n nor Abhyankar's lemma. Empty fibres are vacuous;
-for n=1 every such residue degree is one. No perfectness assumption is made.
-(blueprint: lem-sbc-root-normalization-generic-stalk-residue-degree-dvd) -/
+(localization of integral closure). -/
 theorem root_normalization_generic_stalk_residue_degree_dvd
     {L U : Scheme.{u}} (i : U ⟶ L)
     (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)

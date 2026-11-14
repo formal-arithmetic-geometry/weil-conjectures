@@ -12,10 +12,6 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 /-!
 # Sheaves of pulled-back condensed-ring modules
 
-Source: literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/
-  sk-def-sfb-module-objects/det-def-sfb-module-objects-sheaves.md
-  (blueprint: prose-03-02).
-
 The coefficient ring on a scheme's small pro-etale site is the canonical ring object
 provided by `AlgebraicGeometry.ProEtale.coefficientRing`.  The module category is
 Mathlib's category of module objects for that ring object in the sheaf category.
@@ -37,10 +33,6 @@ ring `Λ_X := p_X^* Λ`.  Its objects are abelian sheaves equipped with an actio
 with the actions.  The category, its faithful forgetful functor, and its regular
 module are inherited from `CategoryTheory.Mod`; the declaration is an `abbrev` so that these
 instances and declarations apply to it directly.
-
-Source: literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/
-  sk-def-sfb-module-objects/det-def-sfb-module-objects-sheaves.md
-  (blueprint: prose-03-02).
 -/
 noncomputable abbrev condensedModuleCategory (X : Scheme.{u})
     (Λ : Mon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})) : Type _ :=

@@ -55,9 +55,7 @@ variable {X : Scheme.{u}}
 /-- An `𝒪_X`-module is *invertible* if every point has an open neighbourhood on which it
 restricts to the structure sheaf, that is, if it is locally free of rank one for the Zariski
 topology. An invertible module `M` has the tensor inverse `Mᵛ = ℋom(M, 𝒪_X)`
-(`AlgebraicGeometry.Scheme.Modules.exists_tensorObj_iso_unit`).
-
-(blueprint: `def-sc-invertible-module`) -/
+(`AlgebraicGeometry.Scheme.Modules.exists_tensorObj_iso_unit`). -/
 class IsInvertible (M : X.Modules) : Prop where
   /-- Every point has an open neighbourhood on which `M` restricts to the structure sheaf. -/
   exists_isoUnit : ∀ x : X, ∃ U : X.Opens, x ∈ U ∧

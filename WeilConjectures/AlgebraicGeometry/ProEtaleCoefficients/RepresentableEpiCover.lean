@@ -11,8 +11,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleRepresentableEpiLocalLifting
 import Mathlib.AlgebraicGeometry.Sites.Proetale
 import WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible
 
-/-! Representable epimorphisms are singleton covers under the qcqs hypotheses.
-(blueprint: det-pe-hypercover-representable-epi-cover) -/
+/-! Representable epimorphisms are singleton covers under the qcqs hypotheses. -/
 @[expose] public section
 set_option autoImplicit false
 universe u
@@ -23,14 +22,6 @@ namespace AlgebraicGeometry.Scheme.ProEt
 set_option backward.isDefEq.respectTransparency false in
 /-- A represented epimorphism with quasi-compact source and quasi-separated target covers.
 Source: Stacks Project, Tag 00WN and pro-etale covering definition Tag 098K.
-(blueprint: det-pe-hypercover-representable-epi-cover)
-
-Proof: local lifting of the identity gives a covering sieve whose arrows factor through
-mu. Refine it by a covering presieve. Its underlying arrows are jointly surjective, so mu
-is surjective on points. The source is quasi-compact and the target quasi-separated,
-hence mu is quasi-compact. Maps between objects are weakly etale by cancellation of the
-target structure map. These facts give a singleton pro-etale cover. Empty schemes are
-included: joint surjectivity is then vacuous.
 -/
 theorem singleton_cover_of_representable_epi (X : Scheme.{u}) {A B : X.ProEt}
     (μ : A ⟶ B) [CompactSpace A.left] [QuasiSeparatedSpace B.left]

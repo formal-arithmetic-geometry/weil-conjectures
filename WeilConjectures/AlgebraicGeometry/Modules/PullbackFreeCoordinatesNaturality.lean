@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.HomSection
 /-! # Free coordinates under a factorization of scheme maps
 
 Source: Stacks Project, Tag 01CA, functoriality and associativity of tensor products.
-(blueprint: new-sbc-pullback-free-coordinates-naturality)
 -/
 
 @[expose] public section
@@ -67,19 +66,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Pulling a section through a factorization commutes with any map into finite free.
 
-Source: Stacks Project, Tag 01CA, tensor associativity and functoriality.
-(blueprint: new-sbc-pullback-free-coordinates-naturality)
-
-Proof: Unfold the constructed section transport. Naturality of the composition
-comparison moves the pulled-back alpha past
-pullbackCompOfEq. Naturality of the adjunction unit then moves alpha past pullbackΓ.
-The free pullback comparison commutes with the same composition comparison: locally,
-both send a pure tensor s tensor (t tensor e_i) to st e_i. Compose this equality with
-the i-th free projection. The unit comparison on the structure sheaf is restriction
-of scalars along the scheme map, hence is appTop on global sections. Applying the
-resulting equality to x gives the formula. This is independent of any quasi-coherence,
-affineness, or inverse construction. Rank zero has no coordinate to check, and the
-same tensor identities hold over the zero ring and on the empty scheme. -/
+Source: Stacks Project, Tag 01CA, tensor associativity and functoriality. -/
 theorem pullback_free_coordinates_naturality
     {X Y Z : Scheme.{u}} (g : Y ⟶ X) (h : Z ⟶ X) (v : Z ⟶ Y)
     (hv : v ≫ g = h) (M : X.Modules) (r : ℕ)

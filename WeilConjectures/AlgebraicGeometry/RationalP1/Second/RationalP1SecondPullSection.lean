@@ -37,15 +37,7 @@ attribute [local irreducible] projectionMap singleUnitIso secondLineComparison
 /-- The ambient pullback comparison restricts to the identity on the diagonal for the
 untwisted base object. This is the composition-coherence part of the second pull-section
 argument; the Tate-line and tensor transport are handled by `second_pull_section`.
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md,
-Second identity, first factor before the Tate twist.
-(blueprint: lem-sfb-rational-p1-second-pull-section-core).
-Proof: expand the ambient square comparison into the normalized inverse-image
-compositors. Both composites with the diagonal are the identity because
-`diagonalImmersion Y ≫ firstProjection Y` and `diagonalImmersion Y ≫ secondProjection Y`
-are the identity; the pullback-composition coherence and identity compositor then give
-the displayed equality. -/
+Source: Second identity, first factor before the Tate twist. -/
 theorem second_pull_section_core
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)
@@ -64,30 +56,7 @@ theorem second_pull_section_core
   exact ⟨second_pull_section_core_comm l c k p hpl Y K⟩
 
 -- The statement compares the fixed derived pullback and tensor interfaces.
-/-- The two canonical pullback identifications agree after restriction to the diagonal.
-
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md,
-Second identity, cancellation on the diagonal.
-(blueprint: lem-sfb-rational-p1-second-pull-section).
-
-Proof: expand into the two pullTwistIso maps and the square
-comparison on q*K. Pullback composition coherence, applied to Delta p1 = id and
-Delta p2 = id, identifies the restriction of the square comparison with identity
-on q*K. On each finite root sheaf the Cartesian comparison commutes with restriction
-to Delta. The same equation passes to the inverse limit, extension to the finite
-coefficient ring, and inversion of l; in the closure case it is checked on every
-finite-subextension coprojection. Hence both restrictions give the same identity
-pullback comparison on the Tate line. For the tensor factor use the unrestricted
-delta_comparison and composition_comparison clauses of ModuleRingedComparison,
-not its theorem restricted to finite-type schemes over fields. On K-flat terms,
-the pullback tensor comparison sends a pure tensor to the tensor of its pullbacks;
-this commutes with the preceding composition comparison, and descends to the
-unbounded derived category. Shift coherence gives the same equation on
-M=q*K(1)[2]. Compose with the inverse comparison
-to give the displayed equation. This uses no tensor projection, diagonal class,
-supported-source normalization, or trace. The same coherence equations hold for
-K=0 and for empty schemes. -/
+/-- The two canonical pullback identifications agree after restriction to the diagonal. -/
 theorem second_pull_section
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

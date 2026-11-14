@@ -26,9 +26,8 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 /-!
 # Constructibility for proper smooth families of curves with finite coefficients
 
-Source: Stacks Project, more-etale.tex, Tag 0GKW; Tag 0GK3 for dimension zero,
-and morphisms.tex, Tag 02G1 for the fibre-dimension decomposition
-(blueprint: lem-weil-pbc-etale-proper-smooth-curves-finite-module).
+Source: Stacks Project, Tag 0GKW; Tag 0GK3 for dimension zero, Tag 02G1 for the fibre-dimension
+decomposition.
 -/
 
 @[expose] public section
@@ -174,52 +173,6 @@ includes nonempty fibres; dimension is measured on the residue-field fibres.
 
 Source: Stacks Project, Tag 0GKW (dimension one), Tag 0GK3 (dimension zero),
 and Tag 02G1 (locally constant smooth fibre dimension).
-(blueprint: lem-weil-pbc-etale-proper-smooth-curves-finite-module)
-
-Proof plan:
-1. For finite coefficient rings, constructibility of the underlying abelian sheaf is
-   equivalent to module constructibility. On constant finite abelian charts, trivialize
-   each of the finitely many scalar endomorphisms using
-   `lemma-constructible-hom-constant-locally` and refine the covers simultaneously.
-   Read the module identities on a geometric stalk, using
-   `definition-torsion-sheaves--3`; the constant values become modules.
-   Forgetting scalars gives the converse; restrictions commute with forgetting by
-   `lem-weil-pbc-exchange-forget-coefficients`.
-2. By `lem-weil-pbc-proper-smooth-connected-fibre-dimension-loci`, split the base into
-   open and closed dimension-zero and dimension-one loci, either of which may be empty.
-   Exact restriction preserves injectives by `lemma-acyclicity-pulled-back-injectives`
-   and `lem-weil-pbc-site-pullback-abelian-exact`, so higher direct images restrict to
-   the corresponding higher direct images. Constant inputs restrict to constants by
-   `lemma-constructible-pullback-constant`. Finite stratifications concatenate.
-3. On the dimension-zero locus the morphism is quasi-finite, proper and finitely
-   presented. The base is Noetherian and quasi-compact; source and base are qcqs by
-   `lem-weil-pbc-locally-noetherian-quasi-separated` and
-   `lem-weil-pbc-qcqs-morphism-permanence`. Use the identity compactification and
-   `lem-weil-pbc-etale-quasifinite-shriek-constructible` on the constant sheaf in
-   degree zero. Identity extension by zero identifies proper shriek and direct image.
-4. On the dimension-one locus, a finite abelian group killed by a prime is a finite
-   dimensional vector space over the prime field. By `lem-weil-pbc-vector-space-free`
-   choose a finite basis, including the empty basis for zero. Constant sheafification
-   and additive derived functors preserve finite sums, by
-   `situation-conventions` and
-   `lem-weil-pbc-right-derived-universal-delta-functor`. Apply
-   `lem-weil-pbc-proper-smooth-curves-prime-coefficients`, and combine the summands
-   using `thm-constructible-serre` and the coefficient comparison from step 1.
-5. Induct on a positive integer n killing the finite abelian group B. For n = 1,
-   B is zero. For n = l n' with l prime, use the exact sequence from B[l] to B
-   onto l B. The kernel is killed by l and the quotient by n' < n. Constant
-   sheafification is exact; the derived delta functor gives a five-term exact
-   segment. The outer terms are constructible by step 4 and induction; the middle
-   term is an extension of a cokernel by a kernel, so apply `thm-constructible-serre`.
-   This uses `lem-weil-pbc-module-direct-image-left-exact` and
-   `lem-weil-pbc-module-sheaves-enough-injectives`. In degree zero the preceding
-   negative term is zero. Every prime met here divides the characteristic of the
-   coefficient ring, so it is invertible on the base, as step 4 needs.
-6. The product of the additive orders kills the finite underlying group of M.
-   Apply step 5, and upgrade to the given module structure using step 1 and
-   `lem-weil-pbc-exchange-forget-coefficients`. Negative-degree cohomology is zero
-   because the injective resolution starts in degree zero. Glue the two loci from
-   step 2. This includes M = 0 and the zero coefficient ring.
 -/
 theorem properSmoothCurves_finiteModule_higherDirectImage_constructible
     {C S : Scheme.{u}} [IsLocallyNoetherian S] [CompactSpace S]

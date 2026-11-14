@@ -33,9 +33,8 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalizationHo
 
 /-! # Canonical rational triangulation adapters
 
-Source: blueprint proper base change, order 1307; Milne, Section 19.
+Source: Milne, Section 19.
 Existing declarations extracted from `PbcScalarExtension` to bound compilation cost.
-(blueprint: lem-pbc-scalar-triangulation-adapters)
 -/
 
 @[expose] public noncomputable section
@@ -130,10 +129,7 @@ variable (l : ℕ) [Fact l.Prime]
 /-- Expose the existing rational-transport triangulation through Fact hypotheses.
 This is the same selected witness as pbcRationalTriangulationData;
 its shift and image-triangle normalizations are retained. These data adapters allow
-instance synthesis when the raw category abbreviation erases the geometric proofs.
-Source: blueprint order 1305 (blueprint: lem-pbc-scalar-triangulation-adapters).
-Proof: Project existence of a zero object from pbcRationalTriangulationData. The raw
-category is unchanged, so this is exactly the required HasZeroObject proposition. -/
+instance synthesis when the raw category abbreviation erases the geometric proofs. -/
 @[instance] theorem pbcScalarRationalZero
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
@@ -146,8 +142,7 @@ category is unchanged, so this is exactly the required HasZeroObject proposition
 /-- Expose the existing rational-transport triangulation through Fact hypotheses.
 This is the same selected witness as pbcRationalTriangulationData;
 its shift and image-triangle normalizations are retained. These data adapters allow
-instance synthesis when the raw category abbreviation erases the geometric proofs.
-Source: blueprint order 1305 (blueprint: lem-pbc-scalar-triangulation-adapters). -/
+instance synthesis when the raw category abbreviation erases the geometric proofs. -/
 instance pbcScalarRationalHasShift : HasShift (PbcRationalCategory T (pbcIntegralDatum l E)
   (pbcUniformizer l E)) ℤ :=
   (pbcRationalTriangulationData l E T Fact.out Fact.out).choose_spec.choose
@@ -155,11 +150,7 @@ instance pbcScalarRationalHasShift : HasShift (PbcRationalCategory T (pbcIntegra
 /-- Expose the existing rational-transport triangulation through Fact hypotheses.
 This is the same selected witness as pbcRationalTriangulationData;
 its shift and image-triangle normalizations are retained. These data adapters allow
-instance synthesis when the raw category abbreviation erases the geometric proofs.
-Source: blueprint order 1305 (blueprint: lem-pbc-scalar-triangulation-adapters).
-Proof: Project additive shifts from pbcRationalTriangulationData. The preceding
-HasShift adapter is its identical chosen shift, and all other class arguments
-are propositions, so proof irrelevance identifies their proofs. -/
+instance synthesis when the raw category abbreviation erases the geometric proofs. -/
 @[instance] theorem pbcScalarRationalShiftAdditive
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
@@ -173,8 +164,7 @@ are propositions, so proof irrelevance identifies their proofs. -/
 /-- Expose the existing rational-transport triangulation through Fact hypotheses.
 This is the same selected witness as pbcRationalTriangulationData;
 its shift and image-triangle normalizations are retained. These data adapters allow
-instance synthesis when the raw category abbreviation erases the geometric proofs.
-Source: blueprint order 1305 (blueprint: lem-pbc-scalar-triangulation-adapters). -/
+instance synthesis when the raw category abbreviation erases the geometric proofs. -/
 instance pbcScalarRationalLocalizationShift : (ScalarLocalization.localization
   (PbcIntegralRing l E) (PbcBoundedConstructibleComplete T (pbcIntegralDatum l E))
     (pbcUniformizer l E)).CommShift ℤ :=
@@ -184,22 +174,19 @@ instance pbcScalarRationalLocalizationShift : (ScalarLocalization.localization
 /-- Expose the existing rational-transport triangulation through Fact hypotheses.
 This is the same selected witness as pbcRationalTriangulationData;
 its shift and image-triangle normalizations are retained. These data adapters allow
-instance synthesis when the raw category abbreviation erases the geometric proofs.
-Source: blueprint order 1305 (blueprint: lem-pbc-scalar-triangulation-adapters). -/
+instance synthesis when the raw category abbreviation erases the geometric proofs. -/
 instance pbcScalarRationalPretriangulated : Pretriangulated (PbcRationalCategory T
   (pbcIntegralDatum l E) (pbcUniformizer l E)) :=
   ((pbcRationalTriangulationData l E T Fact.out Fact.out).choose_spec.choose_spec.2
     ).choose_spec.choose_spec.2.choose
 
-/-- Expose the existing isomorphism closure of the published integral predicate.
-Source: blueprint order 1305 (blueprint: lem-pbc-scalar-triangulation-adapters). -/
+/-- Expose the existing isomorphism closure of the published integral predicate. -/
 instance pbcScalarIntegralIsoClosure :
     ObjectProperty.IsClosedUnderIsomorphisms
       (PbcIsBoundedConstructibleComplete T (pbcIntegralDatum l E)) :=
   (pbcIntegralUniformComplete_isTriangulated l E T Fact.out Fact.out).1
 
-/-- Expose the existing canonical field action through the geometric Fact hypotheses.
-Source: blueprint order 1306 (blueprint: lem-pbc-scalar-triangulation-adapters). -/
+/-- Expose the existing canonical field action through the geometric Fact hypotheses. -/
 instance pbcScalarRationalLinear :
     Linear E (PbcRationalCategory T (pbcIntegralDatum l E) (pbcUniformizer l E)) :=
   pbcRationalLinear l E T Fact.out Fact.out

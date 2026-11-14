@@ -32,25 +32,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Noetherian case of extension of a generically split finite torsor.
 
-Source: Stacks Project, Tag 0EYJ, proof of Lemma 58.31.8.
-(blueprint: lem-sbc-noetherian-finite-etale-extension)
-
-Proof:
-The trait case follows by tame normalization: the ramification index divides the group
-order, the section fibre splits by the torsor action, the trait test gives étaleness near
-the section, and purity extends across the special divisor. For a normal Noetherian base,
-choose a maximal open admitting an extension. At a minimal point of its complement,
-dimension one is the trait case. In higher dimension, normality and flatness give depth
-two along the missing fibre. Extend the finite algebra by the depth-two extension theorem.
-Complete along the section; smoothness identifies this with a power series ring. The
-section restriction is split because it is finite étale over a normal integral punctured
-base and split generically. Full faithfulness over the punctured completion implies the
-completed cover is split. Compatibility of depth-two extension with flat base change and
-flat descent give étaleness at the generic point of the missing fibre; the fibre criterion
-gives étaleness throughout. Spread to a larger open, contradicting maximality. If the
-original torsor is disconnected, apply the argument to each connected component with its
-stabilizer (whose order divides the group order); the split section meets each component,
-and inducing and taking the disjoint union recovers the original cover. -/
+Source: Stacks Project, Tag 0EYJ, proof of Lemma 58.31.8 -/
 theorem GaloisCover.exists_finiteEtale_extension_noetherian {S C : Scheme.{u}} [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]
     (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))

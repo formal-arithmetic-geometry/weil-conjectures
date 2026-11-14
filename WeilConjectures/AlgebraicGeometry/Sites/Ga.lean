@@ -325,8 +325,7 @@ end Cech
 family of affine étale schemes, whose Čech nerve consists of affine schemes, and on such
 families the Čech complex of `𝔾ₐ` is exact in positive degrees
 (`AlgebraicGeometry.Scheme.exactAt_cechComplex_gaPresheaf`); the Čech criterion
-`CategoryTheory.Sheaf.subsingleton_H_succ_of_exactAt_cechComplex` concludes.
-(blueprint: `lemma-p-torsion-affine-curve-characteristic--4`, for `𝓕 = 𝒪_X`) -/
+`CategoryTheory.Sheaf.subsingleton_H_succ_of_exactAt_cechComplex` concludes. -/
 theorem subsingleton_sheafH_gaSheaf_of_isAffine (X : Scheme.{u}) [IsAffine X] (q : ℕ) :
     Subsingleton (Sheaf.H X.gaSheaf (q + 1)) := by
   let T : X.Etale := Etale.mk (𝟙 X)

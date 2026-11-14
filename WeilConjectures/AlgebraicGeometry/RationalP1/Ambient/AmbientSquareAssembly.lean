@@ -7,10 +7,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.QuotientChange.ScalarPullbackSquareCoherence
 
 /-! Categorical assembly for the canonical ambient pullback comparison.
-
-Source: the canonical-map compatibilities in the second rational P1 triangle,
-`sk-prop-p1-adjunction-rational-triangle.proof.md`.
-(blueprint: lem-sfb-ambient-square-assembly)
 -/
 
 @[expose] public noncomputable section
@@ -46,8 +42,7 @@ private theorem assemble_from_leg_equations
 
 /-- Ambient square assembly: expand the pullback comparison and cancel the
 published compositor. The two leg equations and commutativity of the square
-reduce the result to associativity.
-(blueprint: lem-sfb-ambient-square-assembly) -/
+reduce the result to associativity. -/
 theorem ambient_square_assembly
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]

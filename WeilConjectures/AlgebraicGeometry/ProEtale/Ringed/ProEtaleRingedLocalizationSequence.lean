@@ -453,28 +453,7 @@ set_option backward.isDefEq.respectTransparency.types false
 arbitrary module coefficients. This is the local geometric step, without the
 formal exactness consequences or the filtered-colimit assertion.
 
-Source: Stacks Project, Tag 09AH, with Tags 0983/0984, 098H, 09AC and 09AG
-(blueprint: lem-weil-pbc-proetale-ringed-localization-sequence).
-
-Proof: Refine affine pro-etale objects by bounded w-contractible affine covers.
-Write a refined object as `Spec R`, its closed fibre as `Spec (R/I)`. The
-quasi-compactness of the complementary open selects finitely many elements of `I`
-whose distinguished opens cover that complement. The closed-localization covering
-then consists of those distinguished opens and the localization of `R` at elements
-invertible modulo `I`. On the open pieces, restriction identifies the counit with
-an isomorphism and the closed term with zero. On the localization piece every point
-specializes into the closed fibre. The shriek-specialization-zero theorem makes
-the shriek source zero, and specialization-restriction identifies the closed unit
-with an isomorphism. These identifications concern the actual adjunction maps.
-All refinements stay in the same universe: the bounded extension is small, and
-localizations are quotients of subsets of the square of its underlying set.
-The covering transitivity axiom combines these refinements. Locally the sequence
-is therefore a two-term identity sequence with a zero term. Its composite vanishes,
-its first map is monic, its last map is epic, and its kernel equals its image.
-These assertions descend by the sheaf condition and local lifting of sections.
-The unit and counit are linear by the action naturality, so the same exactness holds
-for module sheaves. Changing either adjunction changes the end maps only by
-isomorphisms of their source or target, preserving all these assertions. -/
+Source: Stacks Project, Tag 09AH, 098H, 09AC and 09AG. -/
 theorem proEtale_ringed_localization_sequence {X Z : Scheme.{u}} (i : Z ⟶ X)
     [IsClosedImmersion i] (U : X.ProEt) [IsOpenImmersion U.hom] [QuasiCompact U.hom]
     (hU : Set.range U.hom = (Set.range i)ᶜ)

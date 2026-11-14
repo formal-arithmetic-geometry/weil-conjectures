@@ -13,8 +13,6 @@ import WeilConjectures.AlgebraicGeometry.Finite.Comparison.FiniteComparisonClass
 /-!
 # The relative interpretation of the exceptional adjoint
 
-Source: Weil blueprint, theorem-existence-exceptional-inverse-image,
-cor-sf-ambient-adjoint-discharge (blueprint: cor-sf-ambient-adjoint-discharge).
 The statement below spells out exactly the class-restricted vanishing and natural
 relative Hom bijections. It imposes no ambient exceptional datum.
 -/

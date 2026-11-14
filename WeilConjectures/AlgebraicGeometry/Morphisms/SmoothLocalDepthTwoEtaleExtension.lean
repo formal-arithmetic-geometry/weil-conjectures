@@ -20,8 +20,7 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.SmoothLocalDepthTwoFinitePuri
 /-!
 # Extending a finite etale cover across a depth-two local fibre
 
-Source: Stacks Project, Tags 0EYB and 0EY6.
-(blueprint: lem-sbc-smooth-local-depth-two-etale-extension)
+Source: Stacks Project, Tags 0EYB and 0EY6
 -/
 
 @[expose] public section
@@ -56,23 +55,7 @@ private theorem depth_le_of_ringEquiv {A B : Type*}
 
 /-- A fibrewise dense open containing every nonclosed fibre admits finite etale extension.
 
-Source: Stacks Project, Tag 0EYB, Lemma 58.26.3, and Tag 0EY6, Lemma 58.21.5.
-(blueprint: lem-sbc-smooth-local-depth-two-etale-extension)
-
-Proof: Outside U, haway puts q(y) at the closed point. Localization of A at
-its maximal ideal is A, because all denominators are units. Transport a regular
-sequence across this ring isomorphism to identify the closed-point stalk's depth.
-Apply the flat local depth formula (0337) to q's stalk map. Its fibre depth is
-nonnegative, so the total-space depth at y is at least two. Smoothness over the
-Noetherian affine base also makes L locally Noetherian.
-Apply exists_finite_extension_of_depth_two to construct a finite p : E -> L with
-depth at least two above the complement and an isomorphism e over U. The equation
-e.hom followed by f = p restricted to U transfers etaleness of f to that
-restriction, since e is an isomorphism. Finally use
-etale_of_smooth_local_depth_two_finite_extension: the fibre density and depth
-hypotheses make this supplied extension etale. Return p and the same e and equation.
-The construction and the purity step are separate named statements, from 0EY6 and
-the proof of 0EYB respectively. Empty covers and U = L are included. -/
+Source: Stacks Project, Tag 0EYB, Lemma 58.26.3, and Tag 0EY6, Lemma 58.21.5 -/
 theorem exists_finite_etale_extension_of_local_depth_two
     (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]
     {L : Scheme.{u}} (q : L ⟶ Spec (.of A)) [Smooth q]

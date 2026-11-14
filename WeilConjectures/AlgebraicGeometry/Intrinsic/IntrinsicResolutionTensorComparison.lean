@@ -197,25 +197,7 @@ private theorem intrinsicResolutionHomologyAux
 
 /-- Intrinsic K-flat tensor cohomology agrees with fixed-scalar derived tensor cohomology.
 
-Source: Stacks Project, Tags 00YV, 06YS and 06YU
-(blueprint: lem-exc-intrinsic-resolution-tensor-homology).
-
-Proof: the canonical scalar-unit sheafification is an exact equivalence, by
-`finiteCoefficientIntrinsicRealization_exact`. Locally constant scalar sections act by
-restriction and gluing, so the universal property of the sheaf tensor gives the tensor
-comparison with this equivalence, on arbitrary module sheaves. This comparison commutes
-with direct sums and the Koszul differentials, hence with total tensor complexes.
-Apply the inverse equivalence on complexes to the supplied K-flat complex P. Its
-inverse image is K-flat: compare its tensor with an arbitrary acyclic complex by the
-ordinary total tensor isomorphism, apply the K-flatness of P, and reflect acyclicity
-using exactness and faithfulness. The quasi-isomorphism P -> L and eL identify the
-localization of this inverse image with K, by full faithfulness of the derived
-equivalence. The proved source K-flat single-tensor representative theorem therefore
-computes K tensor-derived N[0] from this complex. Use eM to identify the second factor.
-Finally exactness commutes with kernels and
-cokernels, and therefore homology, giving the asserted isomorphism in degree i.
-This calculation involves a single test sheaf and degree; it makes no interval or
-comparison-inverse-image assertion.
+Source: Stacks Project, Tags 00YV, 06YS and 06YU.
 -/
 theorem intrinsic_resolution_tensor_homology_iso
     (A : Type u) [CommRing A] [Finite A] (T : Scheme.{u})

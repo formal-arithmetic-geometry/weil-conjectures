@@ -14,16 +14,7 @@ set_option autoImplicit false
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Abelian Opposite HomologicalComplex
 namespace AlgebraicGeometry.Etale
-/-- Normalized supported-Hom comparison commutes with the coefficient Yoneda boundary.
-Source: Stacks Tag 06XU and the coefficient-boundary step of the principal-torsor node.
-Proof: construct the comparison by the closed-cone lift on Hom(Q,I). Applying Hom(Q,-)
-to the supplied degreewise split resolution sequence gives a short exact complex sequence.
-The closed-cone lifts commute with coefficient maps, hence form a morphism to the relative
-short exact sequence. Homology-boundary naturality intertwines their connecting maps.
-The injective-resolution derived connecting theorem identifies the source boundary with
-postcomposition by the extension class. Every normalized comparison agrees with this one
-on all extMk cocycles, and extMk is surjective, so the identity holds for the given C.
-(blueprint: lem-pur-principal-torsor-connecting-comparison). -/
+/-- Normalized supported-Hom comparison commutes with the coefficient Yoneda boundary. -/
 theorem principalTorsorConnectingComparison
     (C : PrincipalTorsorComparisons.{u}) (hC : C.Normalized)
     (T Z : Scheme.{u}) (i : Z ⟶ T) [IsClosedImmersion i] (W : T.Opens)

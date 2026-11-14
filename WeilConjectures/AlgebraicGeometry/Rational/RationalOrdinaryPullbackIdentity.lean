@@ -134,7 +134,6 @@ import all Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 /-! # Ordinary rational coefficient identity and the normalized module and derived identity.
 
 Source: Bhatt--Scholze, Remark 6.8.15, p. 62; Stacks Tags 03CB, 0D6D, 07A4, 099N.
-(blueprint: lem-per-rational-ordinary-pullback-identity).
 -/
 
 @[expose] public noncomputable section

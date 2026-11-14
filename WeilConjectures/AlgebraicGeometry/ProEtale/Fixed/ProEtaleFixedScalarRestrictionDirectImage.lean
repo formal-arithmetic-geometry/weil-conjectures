@@ -17,8 +17,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantExact
 /-!
 # Direct image and finite coefficient restriction in the fixed scalar presentation
 
-Source: Stacks, Tags 0D6E and 07A6; blueprint
-(blueprint: lem-weil-proetale-direct-image-restriction-of-scalars).
+Source: Stacks, Tags 0D6E and 07A6.
 The comparison is the actual adjunction mate of the canonical inverse-image comparison.
 -/
 
@@ -143,7 +142,7 @@ private theorem restriction_underived_mate
       (M.obj.obj (Opposite.op ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).obj U)))).symm
 
 /-- The sectionwise coefficient square, cached with its two explicit composite functor types.
-Source: Stacks Tag 03D6 (blueprint: lem-weil-proetale-direct-image-restriction-of-scalars). -/
+Source: Stacks Tag 03D6. -/
 @[no_expose] noncomputable def fixedScalarRestrictionDirectImageUnderived
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -154,16 +153,14 @@ Source: Stacks Tag 03D6 (blueprint: lem-weil-proetale-direct-image-restriction-o
 attribute [local irreducible] upperStar
 
 /-- The canonical inverse-image/restriction square, with its published normalization.
-Source: Stacks Tag 07A6
-(blueprint: lem-weil-proetale-direct-image-restriction-of-scalars). -/
+Source: Stacks Tag 07A6. -/
 noncomputable abbrev fixedScalarRestrictionPullback
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   leftDerivedUpperStarRestrictScalarsIso φ f
 
 /-- The inverse-direction direct-image comparison is the mate of the canonical square.
-Source: Stacks Tags 0D6E and 07A6
-(blueprint: lem-weil-proetale-direct-image-restriction-of-scalars). -/
+Source: Stacks Tags 0D6E and 07A6. -/
 @[no_expose] noncomputable def fixedScalarRestrictionDirectImageMap
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -289,10 +286,7 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The coefficient mate intertwines the canonical chain-level right-derived units.
-Source: Stacks Tags 0D6E and 07A6
-(blueprint: lem-weil-proetale-direct-image-restriction-of-scalars).
-Proof: apply the generic derived-mate factorization, replace the derived mate by the
-published comparison, and replace its ordinary mate by the sectionwise identity. -/
+Source: Stacks Tags 0D6E and 07A6. -/
 theorem fixedScalarRestrictionDirectImageMap_factors
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -666,14 +660,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Restriction of finite coefficients commutes with the unbounded derived direct image.
 The map is fixed by its adjunction-mate definition, rather than an arbitrary isomorphism.
-Source: Stacks Tags 0D6E and 07A6
-(blueprint: lem-weil-proetale-direct-image-restriction-of-scalars).
-Proof: restriction is exact. The two composites are the direct image of the same
-morphism of ringed topoi. Resolve a K-injective B-complex after restriction by a
-K-injective A-complex. The right-derived comparison is inverse to the image of this
-resolution. The canonical derived adjunction formula identifies that comparison with
-the mate above. In particular this argument does not suppose that restriction itself
-preserves K-injectives. This gives invertibility for every unbounded object. -/
+Source: Stacks Tags 0D6E and 07A6. -/
 theorem fixedScalarRestrictionDirectImageMap_isIso
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -690,8 +677,7 @@ theorem fixedScalarRestrictionDirectImageMap_isIso
   exact fixedRestriction_resolution_quasiIso φ f I J j
 
 /-- The forward-direction canonical comparison, with the K-injective normalization
-inherited from the named mate theorem. Source: Stacks Tag 0D6E
-(blueprint: lem-weil-proetale-direct-image-restriction-of-scalars). -/
+inherited from the named mate theorem. Source: Stacks Tag 0D6E. -/
 @[no_expose] noncomputable def fixedScalarRestrictionDirectImage
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -703,8 +689,7 @@ inherited from the named mate theorem. Source: Stacks Tag 0D6E
   (asIso (fixedScalarRestrictionDirectImageMap φ f)).symm
 
 /-- The inverse of the forward coefficient comparison is the published derived mate.
-Source: Stacks Tag 0D6E (blueprint: lem-weil-proetale-direct-image-restriction-of-scalars).
-Proof: the forward comparison is the symmetric isomorphism associated to this mate. -/
+Source: Stacks Tag 0D6E. -/
 theorem fixedScalarRestrictionDirectImage_inv
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y) :

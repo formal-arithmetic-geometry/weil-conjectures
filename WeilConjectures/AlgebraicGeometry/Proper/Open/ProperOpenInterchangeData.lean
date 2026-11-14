@@ -9,8 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Proper.Open.ProperOpenInterchang
 
 /-! # Bundled proper/open comparison families
 
-Source: Stacks Tags 0F7B, 0F7C, 0F7D, 0F7F
-(blueprint: def-cbc-proper-open-interchange-data).
+Source: Stacks Tags 0F7B, 0F7C, 0F7D, 0F7F.
 -/
 
 @[expose] public noncomputable section
@@ -23,7 +22,7 @@ attribute [local instance 2000] Abelian.toPreadditive
 namespace AlgebraicGeometry.Etale
 
 /-- The two comparison families together with their normalizations.
-Source: Stacks Tags 0F7B--0F7F (blueprint: def-cbc-proper-open-interchange-data). -/
+Source: Stacks Tags 0F7B--0F7F. -/
 structure ProperOpenInterchangeData (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] where
   /-- The support-preserving ordinary comparison. -/
   underived : ProperOpenUnderivedFamily Λ
@@ -37,7 +36,7 @@ coherence theorem. Bundling retains the relation between the selected families a
 its proof without repeatedly expanding dependent existential selection terms.
 The support inclusion determines the ordinary comparison, and the derived-unit
 normalization determines the derived comparison, so no arbitrary data is selected.
-Source: Stacks Tags 0F7B--0F7F (blueprint: def-cbc-proper-open-interchange-data). -/
+Source: Stacks Tags 0F7B--0F7F. -/
 @[no_expose, irreducible]
 def properOpenInterchangeData (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] :
     ProperOpenInterchangeData Λ where
@@ -47,7 +46,7 @@ def properOpenInterchangeData (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] :
 
 /-- The stored derived family is the original second coherence witness.
 Unfold the explicit bundle constructor and project its second field.
-Source: Stacks Tag 0F7B (blueprint: def-cbc-proper-open-interchange-data). -/
+Source: Stacks Tag 0F7B. -/
 theorem properOpenInterchangeData_derived (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] :
     ((properOpenInterchangeData Λ).derived : ProperOpenDerivedFamily Λ) =
       ((properOpenInterchangeCoherence Λ).choose_spec.choose : ProperOpenDerivedFamily Λ) := by
@@ -56,7 +55,7 @@ theorem properOpenInterchangeData_derived (Λ : Type (u + 1)) [CommRing Λ] [Fin
 
 /-- The section-preserving inclusion normalization of the stored ordinary family.
 Extract the first conjunct of the coherence condition.
-Source: Stacks Tag 0F7B (blueprint: def-cbc-proper-open-interchange-data). -/
+Source: Stacks Tag 0F7B. -/
 theorem ProperOpenInterchangeData.inclusionNormalization
     {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
     (d : ProperOpenInterchangeData Λ) :
@@ -73,7 +72,7 @@ theorem ProperOpenInterchangeData.inclusionNormalization
 
 /-- The derived-unit normalization of the stored families.
 Extract the second conjunct of the coherence condition.
-Source: Stacks Tag 0F7B (blueprint: def-cbc-proper-open-interchange-data). -/
+Source: Stacks Tag 0F7B. -/
 theorem ProperOpenInterchangeData.unitNormalization
     {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
     (d : ProperOpenInterchangeData Λ) :

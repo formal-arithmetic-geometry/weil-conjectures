@@ -15,7 +15,6 @@ import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 # Etale descent from a flat base change near a closed fibre
 
 Source: Stacks Project, Tag 0EYA, final omitted detail; Tag 02VN.
-(blueprint: lem-sbc-finite-etale-descent-near-closed-point)
 -/
 
 @[expose] public section
@@ -27,18 +26,7 @@ namespace AlgebraicGeometry.Scheme
 /-- Etaleness descends from a flat Noetherian base change when it holds over
 an open containing a point above the closed point of the local base.
 
-Source: Stacks Project, Tag 0EYA, final omitted detail; Tag 02VN.
-(blueprint: lem-sbc-finite-etale-descent-near-closed-point)
-
-Proof: The composite V -> T -> Spec B is flat. For any point b of Spec B,
-b specializes to the closed point. Generalizing maps lift this specialization
-through the supplied point v in V, giving a point of V mapping to b. Thus
-V -> Spec B is surjective. Since T is Noetherian, every open is quasi-compact
-and every map from V is quasi-compact. Restrict the supplied cartesian square
-to V, and apply fpqc descent of etaleness. The implementation first restricts
-the base and Y to their top opens; compose with the top-open isomorphisms to
-recover the original g. No finiteness assumption on g is needed. Empty Y and
-V = T are included; hv ensures V is nonempty. -/
+Source: Stacks Project, Tag 0EYA, final omitted detail; Tag 02VN. -/
 theorem etale_of_flat_base_change_near_closed_point
     (B : Type u) [CommRing B] [IsLocalRing B]
     {Y T E : Scheme.{u}} [IsNoetherian T] (g : Y ⟶ Spec (.of B))

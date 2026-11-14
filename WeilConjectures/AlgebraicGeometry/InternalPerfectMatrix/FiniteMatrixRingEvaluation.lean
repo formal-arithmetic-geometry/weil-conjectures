@@ -14,23 +14,14 @@ set_option autoImplicit false
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.ProEtale.InternalPerfectMatrix
 
-/-- A ring map from a commutative ring into endomorphisms carries products to composition.
-Source: blueprint Compatible isomorphisms, multiplication of finite matrix entries.
-(blueprint: lem-pe-finite-matrix-ring-evaluation).
-Proof: commute the two source scalars and apply preservation of multiplication;
-endomorphism multiplication is reverse categorical composition. -/
+/-- A ring map from a commutative ring into endomorphisms carries products to composition. -/
 theorem ringEntry_comp {C : Type*} [Category* C] [Preadditive C]
     {R : Type*} [CommRing R] (M : C) (e : R →+* End M) (a b : R) :
     (e a).asHom ≫ (e b).asHom = (e (a * b)).asHom := by
   rw [mul_comm a b, map_mul]
   rfl
 
-/-- Entrywise ring evaluation respects finite matrix composition.
-Source: blueprint Compatible isomorphisms, signed finite Hom matrices.
-(blueprint: lem-pe-finite-matrix-ring-evaluation).
-Proof: test each source inclusion and target projection. The biproduct lift-desc
-formula is the finite sum of entry compositions, hence the image of the matrix
-product by ringEntry_comp and preservation of finite sums. -/
+/-- Entrywise ring evaluation respects finite matrix composition. -/
 theorem ringMatrix_comp {C : Type*} [Category* C] [Preadditive C]
     [HasFiniteBiproducts C] {R : Type*} [CommRing R]
     (M : C) (e : R →+* End M) {I J K : Type} [Finite I] [Fintype J] [Finite K]
@@ -49,10 +40,7 @@ theorem ringMatrix_comp {C : Type*} [Category* C] [Preadditive C]
   funext j
   exact ringEntry_comp M e _ _
 
-/-- Entrywise ring evaluation respects addition of finite matrices.
-Source: blueprint Compatible isomorphisms, additive Hom matrices.
-(blueprint: lem-pe-finite-matrix-ring-evaluation).
-Proof: test all inclusions and projections and use additivity of composition. -/
+/-- Entrywise ring evaluation respects addition of finite matrices. -/
 theorem ringMatrix_add {C : Type*} [Category* C] [Preadditive C]
     [HasFiniteBiproducts C] {R : Type*} [CommRing R]
     (M : C) (e : R →+* End M) {I J : Type} [Finite I] [Finite J]
@@ -63,10 +51,7 @@ theorem ringMatrix_add {C : Type*} [Category* C] [Preadditive C]
   ext i j
   simp [biproduct.matrix, map_add, Preadditive.comp_add, Preadditive.add_comp]
 
-/-- Entrywise ring evaluation respects the integral unit sign of a Hom differential.
-Source: blueprint Compatible isomorphisms, signed Hom matrices.
-(blueprint: lem-pe-finite-matrix-ring-evaluation).
-Proof: test all inclusions and projections and use integer linearity of composition. -/
+/-- Entrywise ring evaluation respects the integral unit sign of a Hom differential. -/
 theorem ringMatrix_units_smul {C : Type*} [Category* C] [Preadditive C]
     [HasFiniteBiproducts C] {R : Type*} [CommRing R]
     (M : C) (e : R →+* End M) {I J : Type} [Finite I] [Finite J]

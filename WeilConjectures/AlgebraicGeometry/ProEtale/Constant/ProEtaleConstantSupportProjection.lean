@@ -31,7 +31,6 @@ set_option linter.privateModule false
 
 Source: Stacks Project, Cohomology on Sites, projection formula and generation by
 free coefficient complexes.
-(blueprint: lem-exc-proetale-constant-support-projection)
 
 Proof: compare the two exact coproduct-preserving coefficient functors, check the
 projection on the tensor unit, and extend across the localizing generators of the derived

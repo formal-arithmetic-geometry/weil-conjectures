@@ -13,7 +13,7 @@ import WeilConjectures.AlgebraicGeometry.NormalBundle
 
 The cone map factors through the closed immersion, independently of its
 comparison with the relative spectrum of the conormal graded algebra.
-Source: Stacks Tags 062Z and 0630 (blueprint: prose-09-11).
+Source: Stacks Tags 062Z and 0630.
 -/
 
 @[expose] public section
@@ -24,9 +24,7 @@ open AlgebraicGeometry.Scheme.AffineZariskiSite
 namespace AlgebraicGeometry.Scheme.Hom
 
 /-- The actual cone-to-X map factors through the closed immersion.
-Source: Stacks Tags 062Z and 0630 (blueprint: prose-09-11).
-Proof: on Spec R its ring map kills J, because degree zero in gr_J R is R/J.
-The affine restrictions cover X, so the kernel inclusion glues. -/
+Source: Stacks Tags 062Z and 0630. -/
 theorem purityNormalCone_kernel {Z X : Scheme.{u}} (i : Z ⟶ X) :
     i.ker ≤ (relativeGluingData i.ker.coequifibered_toNormalConePresheaf).toBase.ker := by
   have h := i.ker.normalConeToQuotientSpec.le_ker_comp
@@ -36,7 +34,7 @@ theorem purityNormalCone_kernel {Z X : Scheme.{u}} (i : Z ⟶ X) :
 
 /-- The projection of the actual normal cone to Z, using the unique closed-immersion
 factorization; its source is the extended-Rees quotient by t.
-Source: Stacks Tag 0630 (blueprint: prose-09-11). -/
+Source: Stacks Tag 0630. -/
 noncomputable def purityNormalProjection {Z X : Scheme.{u}} (i : Z ⟶ X)
     [IsClosedImmersion i] : i.ker.normalCone ⟶ Z :=
   IsClosedImmersion.lift i
@@ -45,12 +43,7 @@ noncomputable def purityNormalProjection {Z X : Scheme.{u}} (i : Z ⟶ X)
 
 /-- For a section, the canonical factorization to Z is precisely the published
 normal-cone projection formed using its retraction. Thus the normal object in the
-DNC statement uses this same associated-graded cone over Z.
-Source: blueprint normal bundle and prose-09-12 (1)
-(blueprint: prose-09-11).
-Proof: the normal-cone map to X factors through i. Compose this factorization
-with g, and use i followed by g equals the identity. This gives the displayed
-identity with the published toBase followed by g definition. -/
+DNC statement uses this same associated-graded cone over Z. -/
 theorem purityNormalProjection_eq {Z X : Scheme.{u}} (i : Z ⟶ X)
     [IsClosedImmersion i] (g : X ⟶ Z) (hs : i ≫ g = 𝟙 Z) :
     purityNormalProjection i = normalConeProj g i := by

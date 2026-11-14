@@ -41,9 +41,7 @@ meta import Mathlib.Util.TermReduce
 /-!
 # Perfect projection formula for completed coefficient reductions
 
-Source: Weil conjectures blueprint, proper base change, order 1275; Stacks Project,
-Cohomology on Sites, Tags 0B56 and 0944, and More on Algebra, Tag 0657
-(blueprint: lemma-change-coefficients-direct-image--2).
+Source: Stacks Project, Cohomology on Sites, Tags 0B56 and 0944, and More on Algebra, Tag 0657.
 
 The completed ring is presented as the limit of constant finite quotient sheaves.
 The recorded finite-coefficient comparisons identify this presentation with the
@@ -76,18 +74,12 @@ open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 namespace AlgebraicGeometry.Scheme.PerfectProjection
 
 set_option linter.flexible false in
-/-- Cached existing site infrastructure for the completed-coefficient proofs.
-Source: Mathlib sheafification, sheaf limits and homological totalization instances
-(blueprint: lemma-change-coefficients-direct-image--2).
-Proof: apply the existing instance without changing its mathematical structure. -/
+/-- Cached existing site infrastructure for the completed-coefficient proofs. -/
 theorem completedCommRingWeakSheafify (T : Scheme.{u}) :
     HasWeakSheafify (ProEt.topology T) CommRingCat.{u + 1} := inferInstance
 
 set_option linter.flexible false in
-/-- Cached existing site infrastructure for the completed-coefficient proofs.
-Source: Mathlib sheafification, sheaf limits and homological totalization instances
-(blueprint: lemma-change-coefficients-direct-image--2).
-Proof: apply the existing instance without changing its mathematical structure. -/
+/-- Cached existing site infrastructure for the completed-coefficient proofs. -/
 theorem completedCommRingLimits (T : Scheme.{u}) :
     HasLimitsOfSize.{u + 1, u + 1} (Sheaf (ProEt.topology T) CommRingCat.{u + 1}) :=
   inferInstance
@@ -97,24 +89,19 @@ attribute [local instance 3000] completedCommRingWeakSheafify completedCommRingL
 variable {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 
 set_option linter.flexible false in
-/-- The recorded completed ring, in its constant finite-quotient presentation.
-Source: blueprint order 1275 (blueprint: lemma-change-coefficients-direct-image--2). -/
+/-- The recorded completed ring, in its constant finite-quotient presentation. -/
 def ring (T : Scheme.{u}) := adicLisseCompletedRing T d.ideal
 
 set_option linter.flexible false in
-/-- The existing module category over this completed ring, at the mandated coefficient size.
-Source: blueprint order 1275 (blueprint: lemma-change-coefficients-direct-image--2). -/
+/-- The existing module category over this completed ring, at the mandated coefficient size. -/
 abbrev modules (T : Scheme.{u}) := proEtaleRingModules T (ring d T)
 
 set_option linter.flexible false in
-/-- The ordinary localization of module complexes, with no completion condition.
-Source: blueprint order 1275 (blueprint: lemma-change-coefficients-direct-image--2). -/
+/-- The ordinary localization of module complexes, with no completion condition. -/
 abbrev derived (T : Scheme.{u}) := DerivedCategory (modules d T)
 
 set_option linter.flexible false in
-/-- The residue as an object of the ordinary derived category over the completed ring.
-Source: blueprint order 1275, displayed formula
-(blueprint: lemma-change-coefficients-direct-image--2). -/
+/-- The residue as an object of the ordinary derived category over the completed ring. -/
 abbrev quotient (T : Scheme.{u}) (n : ℕ) : derived d T :=
   (DerivedCategory.singleFunctor (modules d T) 0).obj
     (CompletedConstantReduction.residue T d.ideal n)
@@ -123,11 +110,7 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 set_option linter.flexible false in
 /-- The projectionwise constant-ring comparison is a cone, including all tower arrows.
-Source: Stacks 098T and blueprint order 1275, proof step 1
-(blueprint: lemma-change-coefficients-direct-image--2).
-Proof: commute the quotient projection past the inverse-image functor, use the
-constant-comparison naturality of the profinite inverse-image lemma, and then use
-the limit cone equation for the quotient system on Y. -/
+Source: Stacks 098T. -/
 theorem coefficientCone_naturality {n m : ℕᵒᵖ} (a : n ⟶ m) :
     𝟙 ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj (ring d Y)) ≫
       (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map
@@ -153,9 +136,7 @@ theorem coefficientCone_naturality {n m : ℕᵒᵖ} (a : n ⟶ m) :
   rw [Functor.comp_map, ← Category.assoc, ← Functor.map_comp, limit.w]
 
 set_option linter.flexible false in
-/-- The actual inverse-limit comparison, characterized by its quotient projections.
-Source: blueprint order 1275, coefficient identification
-(blueprint: lemma-change-coefficients-direct-image--2). -/
+/-- The actual inverse-limit comparison, characterized by its quotient projections. -/
 def coefficientMap :
     (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj (ring d Y) ⟶
       ring d X :=
@@ -169,12 +150,7 @@ def coefficientMap :
 
 set_option linter.flexible false in
 /-- The specified comparison is invertible for the finite quotient tower.
-Source: blueprint order 1275, proof step 1; Stacks 098T
-(blueprint: lemma-change-coefficients-direct-image--2).
-Proof: apply profinite-coefficient inverse image to the quotient ring system.
-The cone projection equations identify its canonical map with coefficientMap.
-The function-sheaf and constant-sheaf presentations agree by the recorded finite
-coefficient comparisons, naturally in every quotient transition. -/
+Source: Stacks 098T. -/
 theorem coefficientMap_isIso : IsIso (coefficientMap d f) := by
   let Q : ℕᵒᵖ ⥤ CommRingCat.{u + 1} :=
     Functor.ofOpSequence (X := fun n ↦ CommRingCat.of (A ⧸ d.ideal ^ (n + 1)))
@@ -211,22 +187,19 @@ theorem coefficientMap_isIso : IsIso (coefficientMap d f) := by
     (coefficientMap d f)
 
 set_option linter.flexible false in
-/-- The canonical coefficient identification; only its invertibility is postponed.
-Source: blueprint order 1275 (blueprint: lemma-change-coefficients-direct-image--2). -/
+/-- The canonical coefficient identification; only its invertibility is postponed. -/
 def coefficients :
     (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj (ring d Y) ≅
       ring d X :=
   @asIso _ _ _ _ (coefficientMap d f) (coefficientMap_isIso d f)
 
 set_option linter.flexible false in
-/-- The ordinary derived pullback with this specific completed coefficient identification.
-Source: blueprint order 1275 (blueprint: lemma-change-coefficients-direct-image--2). -/
+/-- The ordinary derived pullback with this specific completed coefficient identification. -/
 abbrev pullback :=
   proEtaleRingDerivedPullback f (ring d Y) (ring d X) (coefficients d f)
 
 set_option linter.flexible false in
-/-- The ordinary derived direct image with the same coefficient action.
-Source: blueprint order 1275 (blueprint: lemma-change-coefficients-direct-image--2). -/
+/-- The ordinary derived direct image with the same coefficient action. -/
 abbrev directImage :=
   proEtaleRingDerivedDirectImage f (ring d Y) (ring d X) (coefficients d f)
 
@@ -236,16 +209,13 @@ variable (aY : ProEtaleTensorModel Y (ring d Y))
 
 set_option linter.flexible false in
 /-- The existing canonical projection mate, with the completed coefficients specialized.
-Source: Stacks 0B56 and blueprint order 1275
-(blueprint: lemma-change-coefficients-direct-image--2). -/
+Source: Stacks 0B56. -/
 abbrev projection (P : derived d Y) :=
   proEtaleProjectionFormulaMate f (ring d Y) (ring d X)
     (coefficients d f) aY aX K P
 
 set_option linter.flexible false in
-/-- The full isomorphism locus of the specified projection morphism.
-Source: blueprint order 1275, Detailed form
-(blueprint: lemma-change-coefficients-direct-image--2). -/
+/-- The full isomorphism locus of the specified projection morphism. -/
 def locus : ObjectProperty (derived d Y) :=
   fun P ↦ IsIso (projection d f aY aX K P)
 
@@ -283,19 +253,7 @@ set_option linter.flexible false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Thick closure, the finite-free base case (including rank zero), and site-perfectness.
-Source: Stacks 0944 and blueprint order 1275, Detailed form
-(blueprint: lemma-change-coefficients-direct-image--2).
-Proof: (1) The profinite coefficient comparison gives the ordinary ringed-topos
-operations. (2) The unit normalization of ringed-projection-mate-exact gives the
-identity on the coefficient ring; additivity gives finite free sheaves, also rank zero.
-(3) Its two functors are exact and its natural transformation respects shifts.
-The triangle morphism isomorphism lemma gives two-out-of-three; naturality gives
-inverse F(r) pi_P^{-1} G(i) on any retract. Thus the locus is thick triangulated.
-(4) Restrict using ringed-projection-restriction. On each covering object use its
-own bounded finite-projective representative. The terms are finite-free retracts;
-stupid truncations give degreewise-split distinguished triangles, so finite induction
-proves invertibility there. Local detection proves it globally. No uniform bound
-or global thick-generation claim about all site-perfect objects is used. -/
+Source: Stacks 0944. -/
 theorem perfect_projection_formula :
     (locus d f aY aX K).IsTriangulated ∧
     (locus d f aY aX K).IsStableUnderRetracts ∧
@@ -507,13 +465,7 @@ private theorem restrictedUnit_existsUnique
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option linter.flexible false in
-/-- The canonical module pullback comparison is fixed by the constant-section adjunct.
-Source: blueprint order 1275, proof step 5
-(blueprint: lemma-change-coefficients-direct-image--2).
-Proof: the level comparison of profinite-coefficient inverse image commutes with the
-completed-ring projection, so its adjunct is linear for the completed coefficient
-action. Restrict the module adjunction to this linear map. The inverse coefficient
-comparison gives its inverse. Uniqueness of adjuncts and sheaf maps gives uniqueness. -/
+/-- The canonical module pullback comparison is fixed by the constant-section adjunct. -/
 theorem quotientPullback_existsUnique (n : ℕ) :
     ∃! e : (proEtaleRingModulePullback f (ring d Y) (ring d X)
         (coefficients d f)).obj (CompletedConstantReduction.residue Y d.ideal n) ≅
@@ -547,14 +499,12 @@ theorem quotientPullback_existsUnique (n : ℕ) :
     (coefficients d f) c hc
 
 set_option linter.flexible false in
-/-- Pull back the quotient module by its uniquely normalized module comparison.
-Source: blueprint order 1275 (blueprint: lemma-change-coefficients-direct-image--2). -/
+/-- Pull back the quotient module by its uniquely normalized module comparison. -/
 def quotientPullback (n : ℕ) :=
   (quotientPullback_existsUnique d f n).exists.choose
 
 set_option linter.flexible false in
-/-- The derived comparison is the exact termwise pullback comparison in degree zero.
-Source: blueprint order 1275 (blueprint: lemma-change-coefficients-direct-image--2). -/
+/-- The derived comparison is the exact termwise pullback comparison in degree zero. -/
 def quotientDerivedPullback (n : ℕ) :
     (pullback d f).obj (quotient d Y n) ≅ quotient d X n :=
   ((proEtaleRingModulePullback f (ring d Y) (ring d X)
@@ -563,14 +513,11 @@ def quotientDerivedPullback (n : ℕ) :
     (DerivedCategory.singleFunctor (modules d X) 0).mapIso (quotientPullback d f n)
 
 set_option linter.flexible false in
-/-- K_n as an A_X-object: derived tensor with the restricted quotient sheaf.
-Source: blueprint order 1275 (blueprint: lemma-change-coefficients-direct-image--2). -/
+/-- K_n as an A_X-object: derived tensor with the restricted quotient sheaf. -/
 abbrev reduction (n : ℕ) := aX.tensor.obj (K, quotient d X n)
 
 set_option linter.flexible false in
-/-- The reduction projection map uses the canonical quotient pullback identification.
-Source: blueprint order 1275, displayed pi_n
-(blueprint: lemma-change-coefficients-direct-image--2). -/
+/-- The reduction projection map uses the canonical quotient pullback identification. -/
 def reductionMap (n : ℕ) :
     aY.tensor.obj ((directImage d f).obj K, quotient d Y n) ⟶
       (directImage d f).obj (reduction d aX K n) :=
@@ -579,9 +526,7 @@ def reductionMap (n : ℕ) :
       (aX.tensor.map (Prod.mkHom (𝟙 K) (quotientDerivedPullback d f n).hom))
 
 /-- Chosen representatives for evaluating the signed-totalization inverse at a quotient.
-The maps represent the fixed K and the fixed quotient, rather than new derived objects.
-Source: blueprint order 1275, proof steps 5--6
-(blueprint: lemma-change-coefficients-direct-image--2). -/
+The maps represent the fixed K and the fixed quotient, rather than new derived objects. -/
 structure Resolution (n : ℕ) where
   injective : CochainComplex (modules d X) ℤ
   isKInjective : injective.IsKInjective
@@ -594,14 +539,7 @@ structure Resolution (n : ℕ) where
 
 set_option linter.flexible false in
 set_option cleanup.letToHave true in
-/-- Every quotient admits the representatives used in the totalization comparison.
-Source: blueprint order 1275, proof steps 5--6
-(blueprint: lemma-change-coefficients-direct-image--2).
-Proof: take a K-injective representative of K in all module sheaves. Perfectness of
-the quotient over A gives a bounded finite-projective A-resolution. Termwise constant
-sheafification followed by completed scalar extension gives the coefficient complex;
-completed-constant-sheaf-reduction supplies its augmentation quasi-isomorphism and
-finite-free retracts. Localize the augmentation to obtain representsQuotient. -/
+/-- Every quotient admits the representatives used in the totalization comparison. -/
 theorem resolution_exists (n : ℕ) : Nonempty (Resolution d (X := X) (Y := Y) K n) := by
   classical
   have : IsNoetherianRing A := d.noetherian
@@ -651,13 +589,7 @@ theorem resolution_exists (n : ℕ) : Nonempty (Resolution d (X := X) (Y := Y) K
 
 set_option linter.flexible false in
 /-- Every positive quotient is site-perfect and its canonical projection map is invertible.
-Source: Stacks 0944 and 093M; blueprint order 1275, proof step 5
-(blueprint: lemma-change-coefficients-direct-image--2).
-Proof: choose a bounded finite-projective A-resolution of A/I^(n+1), using the datum's
-perfectness hypothesis. Completed-constant-sheaf-reduction realizes it as a bounded
-complex of finite-free retracts representing the quotient. Thus the quotient is
-site-perfect. Apply perfect_projection_formula and compose with the direct image
-of the canonical quotient pullback isomorphism. This is exactly the displayed map. -/
+Source: Stacks 0944 and 093M. -/
 theorem reductionMap_isIso (n : ℕ) :
     SheafOfModules.IsPerfectOnSmallRingedSite (ring d Y) (quotient d Y n) ∧
       IsIso (reductionMap d f aY aX K n) := by
@@ -698,8 +630,7 @@ theorem reductionMap_isIso (n : ℕ) :
   infer_instance
 
 set_option linter.flexible false in
-/-- The specified pi_n as an isomorphism, with the original projection map as its hom.
-Source: blueprint order 1275 (blueprint: lemma-change-coefficients-direct-image--2). -/
+/-- The specified pi_n as an isomorphism, with the original projection map as its hom. -/
 def reductionIso (n : ℕ) :
     aY.tensor.obj ((directImage d f).obj K, quotient d Y n) ≅
       (directImage d f).obj (reduction d aX K n) :=
@@ -707,17 +638,11 @@ def reductionIso (n : ℕ) :
     (reductionMap_isIso d f aY aX K n).2
 
 set_option linter.flexible false in
-/-- rho_n is the unique inverse of the canonical, resolution-independent projection map.
-Source: blueprint order 1275 (blueprint: lemma-change-coefficients-direct-image--2). -/
+/-- rho_n is the unique inverse of the canonical, resolution-independent projection map. -/
 abbrev inverse (n : ℕ) := (reductionIso d f aY aX K n).inv
 
 set_option linter.flexible false in
-/-- The actual quotient homomorphism is linear for the completed coefficient action.
-Source: blueprint order 1275, tower clause
-(blueprint: lemma-change-coefficients-direct-image--2).
-Proof: define the map by the quotient ring map on sections. The limit cone equation
-makes it linear. Ring-map naturality makes it commute with restrictions. The underlying
-section functions determine a module-sheaf morphism uniquely. -/
+/-- The actual quotient homomorphism is linear for the completed coefficient action. -/
 theorem quotientModuleMap_existsUnique (T : Scheme.{u}) (n m : ℕ) (h : n ≤ m) :
     ∃! q : CompletedConstantReduction.residue T d.ideal m ⟶
       CompletedConstantReduction.residue T d.ideal n,
@@ -758,14 +683,12 @@ theorem quotientModuleMap_existsUnique (T : Scheme.{u}) (n m : ℕ) (h : n ≤ m
   exact hqm' U x
 
 set_option linter.flexible false in
-/-- The quotient tower map retains its uniquely specified sectionwise quotient formula.
-Source: blueprint order 1275 (blueprint: lemma-change-coefficients-direct-image--2). -/
+/-- The quotient tower map retains its uniquely specified sectionwise quotient formula. -/
 def quotientModuleMap (T : Scheme.{u}) (n m : ℕ) (h : n ≤ m) :=
   (quotientModuleMap_existsUnique d T n m h).exists.choose
 
 set_option linter.flexible false in
-/-- The positive quotient tower map in the ordinary completed-coefficient derived category.
-Source: blueprint order 1275 (blueprint: lemma-change-coefficients-direct-image--2). -/
+/-- The positive quotient tower map in the ordinary completed-coefficient derived category. -/
 def quotientMap (T : Scheme.{u}) (n m : ℕ) (h : n ≤ m) :
     quotient d T m ⟶ quotient d T n :=
   (DerivedCategory.singleFunctor (modules d T) 0).map (quotientModuleMap d T n m h)
@@ -773,12 +696,7 @@ def quotientMap (T : Scheme.{u}) (n m : ℕ) (h : n ≤ m) :
 set_option linter.flexible false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Quotient pullback comparisons commute with every quotient tower map.
-Source: blueprint order 1275, proof steps 5 and 6
-(blueprint: lemma-change-coefficients-direct-image--2).
-Proof: the two adjuncts are the same map on each constant quotient section, by
-profinite-coefficient inverse-image naturality. The unique module comparisons and
-exact termwise pullback preserve this equality in the derived category. -/
+/-- Quotient pullback comparisons commute with every quotient tower map. -/
 theorem quotientDerivedPullback_naturality (n m : ℕ) (h : n ≤ m) :
     (pullback d f).map (quotientMap d Y n m h) ≫ (quotientDerivedPullback d f n).hom =
       (quotientDerivedPullback d f m).hom ≫ quotientMap d X n m h := by
@@ -855,13 +773,7 @@ private theorem projection_naturality {P Q : derived d Y} (q : P ⟶ Q) :
         (Functor.curryObjProdComp (pullback d f) (pullback d f) aX.tensor).hom)).app K).naturality q
 
 set_option linter.flexible false in
-/-- Both the forward maps and their unique inverses commute with the whole quotient tower.
-Source: blueprint order 1275, proof step 6
-(blueprint: lemma-change-coefficients-direct-image--2).
-Proof: naturality of the canonical projection mate in its coefficient variable gives
-the first equation, after quotientDerivedPullback_naturality identifies the target
-maps. Multiply this square by the two inverse maps to get the second equation.
-The argument applies to every n≤m, including equality, rather than only adjacent levels. -/
+/-- Both the forward maps and their unique inverses commute with the whole quotient tower. -/
 theorem tower_compatibility (n m : ℕ) (h : n ≤ m) :
     reductionMap d f aY aX K m ≫
       (directImage d f).map (aX.tensor.map (Prod.mkHom (𝟙 K) (quotientMap d X n m h))) =
@@ -893,15 +805,13 @@ variable {n : ℕ} (r : Resolution d (X := X) (Y := Y) K n)
 attribute [local irreducible] proEtaleOrdinaryTensorPullback
 
 set_option linter.flexible false in
-/-- The signed total chain mate, with differential d_I tensor 1 + (-1)^a 1 tensor d_F.
-Source: blueprint order 1275 (blueprint: lemma-change-coefficients-direct-image--2). -/
+/-- The signed total chain mate, with differential d_I tensor 1 + (-1)^a 1 tensor d_F. -/
 def Resolution.total :=
   SignedProjectionResolution.totalMate f (ring d Y) (ring d X) (coefficients d f)
     r.injective r.coefficient
 
 set_option linter.flexible false in
-/-- The normalized source comparison, specified by the mixed representative squares.
-Source: blueprint order 1275 (blueprint: lemma-change-coefficients-direct-image--2). -/
+/-- The normalized source comparison, specified by the mixed representative squares. -/
 def Resolution.sourceModel :=
   SignedProjectionResolution.sourceModel f (ring d Y) (ring d X) (coefficients d f)
     aY K (quotient d Y n) r.injective r.isKInjective r.representsK
@@ -909,8 +819,7 @@ def Resolution.sourceModel :=
 
 set_option linter.flexible false in
 /-- The normalized target comparison, using exact pullback, mixed tensor and the
-K-injective right-derived unit. Source: blueprint order 1275
-(blueprint: lemma-change-coefficients-direct-image--2). -/
+K-injective right-derived unit. -/
 def Resolution.targetModel :=
   ((directImage d f).mapIso
     (aX.tensor.mapIso (Iso.prod (Iso.refl K) (quotientDerivedPullback d f n)))).symm ≪≫
@@ -988,13 +897,7 @@ variable {X' Y' : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {g : Y' ⟶ Y}
   (aX' : ProEtaleTensorModel X' (ring d X'))
 
 set_option linter.flexible false in
-/-- The canonical completed coefficient identifications agree around the square.
-Source: blueprint order 1275, proof step 6
-(blueprint: lemma-change-coefficients-direct-image--2).
-Proof: use identity/composition coherence of profinite coefficient inverse image.
-At every quotient the two composites preserve the same constant sections and agree
-by square commutativity. The completed projections determine the comparison uniquely,
-so the resulting composite coefficient isomorphisms agree, with the required transport. -/
+/-- The canonical completed coefficient identifications agree around the square. -/
 theorem coefficients_square (sq : ChosenCartesianSquare g' f' f g) : HEq
     (proEtaleRingCompositeCoefficients g' f (ring d Y) (ring d X) (ring d X')
       (coefficients d f) (coefficients d g'))
@@ -1008,8 +911,7 @@ theorem coefficients_square (sq : ChosenCartesianSquare g' f' f g) : HEq
   rfl
 
 set_option linter.flexible false in
-/-- The actual base-change morphism, with the canonical completed coefficient coherence.
-Source: blueprint order 1275 (blueprint: lemma-change-coefficients-direct-image--2). -/
+/-- The actual base-change morphism, with the canonical completed coefficient coherence. -/
 def exchange :=
   proEtaleAmbientRingedExchange sq (ring d X) (ring d Y) (ring d X') (ring d Y')
     (coefficients d f) (coefficients d g) (coefficients d g') (coefficients d f')

@@ -12,7 +12,6 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors
 /-! # Composition of the tensor-to-ordinary comparison on homotopy single complexes
 
 Source: Stacks Project, Tag 0D5S, and uniqueness of adjoints.
-(blueprint: lem-pc-homotopy-single-pullback-composition).
 -/
 
 @[expose] public section
@@ -122,19 +121,7 @@ private theorem homotopy_single_compat
     Functor.whiskerRight_app, HomotopyCategory.quotient_obj_as, Category.assoc] using hq
 
 /-- The termwise tensor-to-ordinary single-complex comparison respects composition.
-Source: Stacks Project, Tag 0D5S, and the adjunction mate formula for pullback composition.
-(blueprint: lem-pc-homotopy-single-pullback-composition).
-
-Proof: Let t_b be the unique adjunction-preserving comparison from tensor pullback
-along b to ordinary pullback. Conjugate the two maps from T_f T_g to pullback_(f≫g)
-under their adjunctions. The conjugate of t_b is the identity of pushforward,
-by the counit equation for leftAdjointUniq. Whiskering and composition of conjugates,
-and conjugateEquiv_pullbackComp_inv, show that both conjugates are the inverse
-pushforward composition map. Injectivity of conjugateEquiv gives the underived
-composition identity. For single complexes, check this equation degreewise: in
-degree zero use naturality of the single degree-zero identification; elsewhere
-both sides factor through a zero object. Passing to the homotopy quotient gives
-the displayed equality. This uses neither flatness nor a nonempty scheme. -/
+Source: Stacks Project, Tag 0D5S, and the adjunction mate formula for pullback composition. -/
 theorem homotopySinglePullbackComposition
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (N : Z.Modules)
     [(tensorPullback f).Additive] [(tensorPullback g).Additive]

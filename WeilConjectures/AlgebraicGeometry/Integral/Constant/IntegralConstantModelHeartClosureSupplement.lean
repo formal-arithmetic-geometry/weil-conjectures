@@ -198,8 +198,7 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Biproducts
 /-!
 # Integral constant-model constructible heart closure
 
-Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(1), printed pp. 60--61
-(blueprint: lem-sfb-integral-constant-model-heart-closure).
+Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(1), printed pp. 60--61.
 
 The theorem states closure under ambient kernels, cokernels, and short exact extensions
 for finite constant scalar models over the pulled-back condensed ring of integers.
@@ -412,16 +411,7 @@ private theorem integralCoefficientIso (ℓ : ℕ) [Fact ℓ.Prime]
 
 /-- Integral scalar-constant constructible module sheaves form a weak Serre subcategory.
 
-Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(1), printed pp. 60--61
-(blueprint: lem-sfb-integral-constant-model-heart-closure).
-
-Proof: identify the finite constant scalar-model convention with the completed adic model
-over the valuation ring of the finite coefficient field.  The adic stratified-perfect
-criterion gives closure under cones, so the cone of a map between degree-zero objects has
-constructible cohomology equal to its kernel and cokernel.  The same criterion applied to
-the degree-zero triangle associated to a short exact sequence gives extension closure.
-The coefficient comparison preserves scalar matrices and restrictions to strata, and the
-Noetherian hypothesis is exactly quasi-compactness together with local Noetherianity.
+Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(1), printed pp. 60--61.
 -/
 theorem isConstantModelConstructible_serre_padicIntegers
     (X : Scheme.{u}) [IsNoetherian X] (ℓ : ℕ) [Fact ℓ.Prime]

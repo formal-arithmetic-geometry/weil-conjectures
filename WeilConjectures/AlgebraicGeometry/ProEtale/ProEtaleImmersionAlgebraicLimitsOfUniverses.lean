@@ -80,7 +80,6 @@ import Mathlib.CategoryTheory.Functor.ReflectsIso.Limits
 
 Source: Stacks Tags 09AA and 09BL, including Zariski localization and the
 finite-operation descriptions of rings and abelian groups (Tag 00YV).
-(blueprint: lem-fix-proetale-immersion-algebraic-limits-universes).
 -/
 
 @[expose] public section
@@ -541,24 +540,7 @@ private theorem abelianLimits
 /-- Ring and abelian inverse image along an immersion preserve small limits,
 regardless of the independent coefficient universe or the choice of left adjoint.
 
-Source: Stacks proetale.tex, Tag 09AA, lemma-closed-immersion (1), and Tag 09BL,
-lemma-closed-immersion-affines-apply (3)--(4); sites.tex Tag 00YV.
-(blueprint: lem-fix-proetale-immersion-algebraic-limits-universes)
-
-Proof: for affine closed immersions, use the affine pro-etale presentation with
-its fully faithful cocontinuous functor in Tag 09BL. On weakly contractible
-objects inverse image is evaluation along that functor, hence preserves limits.
-These objects form a basis, so the limit comparison is an isomorphism. The same
-calculation applies to rings and abelian groups, since limits are computed on
-underlying sets with their componentwise operations. Cover the target by affine
-opens; open restriction commutes with limits, and the restrictions jointly detect
-isomorphisms. This proves the closed-immersion case. Factor an immersion into a
-closed immersion followed by an open immersion. Open inverse image is slice
-restriction, so also preserves limits; compose. Work in coefficientProEtaleSiteModel
-of size max u (t+1) throughout and transport back by the site equivalence.
-Finally identify the supplied adjoints with these inverse images by uniqueness
-of left adjoints. Empty schemes require no exception: the empty-cover axiom
-makes all algebraic sheaves terminal there. -/
+Source: Tag 09AA, and Tag 09BL. -/
 theorem proEtale_immersion_algebraicInverse_limits
     {X Y : Scheme.{t}} (i : X ⟶ Y) [IsImmersion i]
     (L : Sheaf (ProEt.topology Y) RingCat.{max u (t + 1)} ⥤

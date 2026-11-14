@@ -26,9 +26,7 @@ import Mathlib.CategoryTheory.Sites.EpiMono
 /-!
 # Exact sections at an algebraically closed pro-etale point
 
-Source: Stacks Project, `proetale.tex`, Tags 0982 and 098H;
-`sites-cohomology.tex`, Tag 0946; `derived.tex`, Tags 015F and 014X
-(blueprint: lem-weil-point-proetale-sections-exact).
+Source: Stacks Project, Tags 0982 and 098H; Tag 0946; Tags 015F and 014X.
 -/
 
 @[expose] public section
@@ -44,8 +42,7 @@ namespace AlgebraicGeometry.ProEtale
 section-ring action. This is exactly Mathlib evaluation, after forgetting commutativity
 of the coefficient sheaf; it introduces no different module category or section functor.
 
-Source: Stacks Project, `sites-modules.tex`, Tag 03CW
-(blueprint: lem-weil-point-proetale-sections-exact). -/
+Source: Stacks Project, Tag 03CW. -/
 noncomputable abbrev pointModuleSections (k : Type u) [Field k]
     (A : Sheaf (Scheme.ProEt.topology (Spec (.of k))) CommRingCat.{u + 1}) :
     ringedSiteModules.{u + 1}
@@ -61,39 +58,7 @@ noncomputable abbrev pointModuleSections (k : Type u) [Field k]
 /-- Sections at an algebraically closed pro-etale point are exact, and their termwise
 extension induces the specified unbounded derived functor with natural cohomology comparison.
 
-Source: Stacks Project, `proetale.tex`, Tags 0982 and 098H; `sites-cohomology.tex`,
-Tag 0946; `homology.tex`, Tag 010N; `derived.tex`, Tags 015F and 014X
-(blueprint: lem-weil-point-proetale-sections-exact).
-
-Proof (the seven steps of the node):
-1. Spec k and its component space are singletons, hence w-local and extremally
-   disconnected. The sole maximal localization is k. Idempotent lifting modulo its zero
-   maximal ideal is the identity, so k is henselian. Algebraic closedness implies that
-   every irreducible polynomial has degree one; the residue field k is separably closed,
-   so the localization is strictly henselian.
-2. Apply `lem-weil-pbc-wcontractible-geometric-criterion`: every faithfully flat weakly
-   etale k-algebra has a ring retraction, without any finite-presentation condition.
-3. Apply `lem-weil-pbc-wcontractible-affine-weakly-contractible` to X = T = Spec k and
-   its identity structural map. This gives surjectivity on sections of epimorphisms of
-   set sheaves on the full small site, without assuming big-site restriction of sheaves.
-4. Apply `lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits` to every
-   commutative ring sheaf A and W = Spec k. Use its exactness clause for module evaluation,
-   with the ordinary sectionwise action, including nonconstant and zero coefficient rings.
-5. An epimorphism of abelian sheaves is locally surjective. Forgetting the group
-   operations preserves these local lifts, so the underlying set-sheaf map is epic.
-   Step 3 then makes its map on sections surjective, without introducing integer actions.
-6. Apply `lem-sp-exact-functor-preserves-homology` to three consecutive complex terms.
-   Evaluation preserves cycles, boundaries and their quotient, naturally in complex maps.
-   Thus it preserves quasi-isomorphisms in every integer degree, without boundedness.
-7. Apply `situation-conventions` to this exact additive functor.
-   `mapDerivedCategory` is its termwise descent, with the standard shift and triangle
-   structures. Its localization comparison identifies every representative with the
-   section complex; step 6 descends naturally, giving the stated cohomology isomorphism.
-
-The localization instances are arbitrary chosen presentations of the derived categories,
-not restrictions on A. The final clause quantifies exactness proof instances only to
-make the canonical `mapDerivedCategory` construction available; exactness is asserted
-before that clause. Its shift structure is the one supplied by this construction. -/
+Source: Stacks Project, Tags 0982 and 098H; Tag 0946; Tag 010N; Tags 015F and 014X. -/
 theorem point_proEtale_sections_exact (k : Type u) [Field k] [IsAlgClosed k] :
     (∀ (F G : Sheaf (Scheme.ProEt.topology (Spec (.of k))) AddCommGrpCat.{u + 1})
       (f : F ⟶ G), Epi f →

@@ -41,7 +41,6 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 
 These are the existing transparent operations, factored out for use by the localization
 and base-change arguments. Source: Stacks Tags 03D3, 03DI, 03CB and 03CC.
-(blueprint: def-sf-proetale-ring-sheaf-operations)
 -/
 
 @[expose] public noncomputable section
@@ -56,23 +55,20 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
 /-- Module inverse image, with inverse-image coefficients and the transported action.
-Source: Stacks, Tags 03D2 and 09A5
-(blueprint: proposition-extension-zero-restriction-closed-subscheme). -/
+Source: Stacks, Tags 03D2 and 09A5. -/
 abbrev ringSheafInverseImage {T X : Scheme.{u}} (f : T ⟶ X)
     (B : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj B] :=
   (upperStar Ab.{u + 1} f).mapMod B
 
 /-- Module direct image, with scalars restricted through the canonical ring unit.
-Source: Stacks, Tag 03D3 and Pro-etale Cohomology, section 09A5
-(blueprint: proposition-extension-zero-restriction-closed-subscheme). -/
+Source: Stacks, Tag 03D3 and Pro-etale Cohomology, section 09A5. -/
 abbrev ringSheafDirectImage {T X : Scheme.{u}} (f : T ⟶ X)
     (B : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj B] :=
   (lowerStar Ab.{u + 1} f).mapMod ((upperStar Ab.{u + 1} f).obj B) ⋙
     Mod.comap ((upperStarLowerStarAdjunction Ab.{u + 1} f).unitAlgHom B)
 
 /-- The actual inverse-image/direct-image module adjunction.
-Source: Stacks, Tag 03D3
-(blueprint: proposition-extension-zero-restriction-closed-subscheme). -/
+Source: Stacks, Tag 03D3. -/
 abbrev ringSheafAdjunction {T X : Scheme.{u}} (f : T ⟶ X)
     (B : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj B] :
     ringSheafInverseImage f B ⊣ ringSheafDirectImage f B :=
@@ -81,23 +77,20 @@ abbrev ringSheafAdjunction {T X : Scheme.{u}} (f : T ⟶ X)
 /-- Extension by zero with its coefficient action supplied by the existing projection
 formula linearization. Its carrier is the sheafification of extension by zero of the
 underlying abelian presheaf, and its action is the sheafified original action.
-Source: Stacks, Tags 03DI, 03DJ and 09AE
-(blueprint: proposition-extension-zero-restriction-closed-subscheme). -/
+Source: Stacks, Tags 03DI, 03DJ and 09AE. -/
 abbrev ringSheafOpenExtension {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (B : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj B] :=
   (openImmersionLowerShriekUpperStarAdjunction Ab.{u + 1} j).mapModLeft B
 
 /-- The extension-by-zero adjunction with its specified underlying abelian unit and counit.
-Source: Stacks, Tag 03DI
-(blueprint: proposition-extension-zero-restriction-closed-subscheme). -/
+Source: Stacks, Tag 03DI. -/
 abbrev ringSheafOpenAdjunction {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (B : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj B] :
     ringSheafOpenExtension j B ⊣ ringSheafInverseImage j B :=
   (openImmersionLowerShriekUpperStarAdjunction Ab.{u + 1} j).mapModLeftAdjunction
 
 /-- The fixed inverse-image composition comparison on a pullback square.
-Source: Stacks, Tags 03CB and 03CC; blueprint clause (4)
-(blueprint: proposition-extension-zero-restriction-closed-subscheme). -/
+Source: Stacks, Tags 03CB and 03CC. -/
 def ringSheafSquareComparison {X' T X : Scheme.{u}} (g : X' ⟶ X) (f : T ⟶ X) :
     upperStar Ab.{u + 1} g ⋙ upperStar Ab.{u + 1} (pullback.fst g f) ≅
       upperStar Ab.{u + 1} f ⋙ upperStar Ab.{u + 1} (pullback.snd g f) :=
@@ -112,8 +105,7 @@ def ringSheafSquareComparison {X' T X : Scheme.{u}} (g : X' ⟶ X) (f : T ⟶ X)
 The equality in the choice predicate uniquely determines the comparison. Keeping that
 predicate behind a definition boundary prevents kernel conversion from expanding the
 chosen sheafification left adjoints in every component equation.
-Source: Stacks, Tags 03CB and 03CC; blueprint clause (4).
-(blueprint: def-sf-proetale-ring-sheaf-operations). -/
+Source: Stacks, Tags 03CB and 03CC. -/
 theorem ringSheafSquareComparison_eq {X' T X : Scheme.{u}}
     (g : X' ⟶ X) (f : T ⟶ X) :
     ringSheafSquareComparison g f =
@@ -127,8 +119,7 @@ theorem ringSheafSquareComparison_eq {X' T X : Scheme.{u}}
 
 /-- The canonical coefficient identification, with the two successive inverse-image
 ring structures made explicit, rather than the structure on a composite functor.
-Source: Stacks, Tags 03CB and 03CC; blueprint clause (4)
-(blueprint: proposition-extension-zero-restriction-closed-subscheme). -/
+Source: Stacks, Tags 03CB and 03CC. -/
 def ringSheafSquareCoefficient {X' T X : Scheme.{u}} (g : X' ⟶ X) (f : T ⟶ X)
     (B : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) :
     (upperStar Ab.{u + 1} (pullback.fst g f)).obj ((upperStar Ab.{u + 1} g).obj B) ⟶
@@ -137,8 +128,7 @@ def ringSheafSquareCoefficient {X' T X : Scheme.{u}} (g : X' ⟶ X) (f : T ⟶ X
 
 /-- Pullback along the fibre projection, with scalars identified by the fixed canonical
 composition comparison. Multiplicativity of this comparison is concluded in the theorem.
-Source: Stacks, Tags 03CB and 03CC; blueprint clause (4)
-(blueprint: proposition-extension-zero-restriction-closed-subscheme). -/
+Source: Stacks, Tags 03CB and 03CC. -/
 abbrev ringSheafSquarePullback {X' T X : Scheme.{u}} (g : X' ⟶ X) (f : T ⟶ X)
     (B : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj B]
     [IsMonHom (ringSheafSquareCoefficient g f B)] :

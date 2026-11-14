@@ -42,10 +42,6 @@ public import WeilConjectures.AlgebraicGeometry.EffectiveCartier
 
 /-! # Coefficient reduction of supported pro-etale Tate arrows
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-geo-cartier/
-lem-amb-cartier-kummer-map.proof.md, coefficient-extension clause in the final paragraph
-(blueprint: def-amb-proetale-supported-coefficient-reduction).
-
 ## Main definitions
 
 * `CartierKummerFamily`: degree-two supported arrows into the original finite Tate line.
@@ -72,13 +68,13 @@ namespace AlgebraicGeometry.Etale
 open Scheme
 
 /-- Name the existing abelian structure to share its elaboration across Ext expressions.
-Source: Stacks 03D0 (blueprint: def-amb-proetale-supported-coefficient-reduction). -/
+Source: Stacks 03D0. -/
 instance cartierAbelianPro (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) :
     Abelian (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} A)) :=
   inferInstance
 
 /-- Cache the existing small Ext instance without changing its universe or category.
-Source: Stacks 07A6 (blueprint: def-amb-proetale-supported-coefficient-reduction). -/
+Source: Stacks 07A6. -/
 instance cartierHasExtPro (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) :
     HasExt.{u + 1} (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} A)) :=
   inferInstance
@@ -87,7 +83,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- The actual closed-support source, in fixed constant scalars.
-Source: Stacks 0A45 and 09A5 (blueprint: def-amb-proetale-supported-coefficient-reduction). -/
+Source: Stacks 0A45 and 09A5. -/
 @[irreducible]
 def cartierSupported (n : ℕ) {D T : Scheme.{u}} (i : D ⟶ T) :
     Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (finiteTateCoefficient l E n)) :=
@@ -97,8 +93,7 @@ def cartierSupported (n : ℕ) {D T : Scheme.{u}} (i : D ⟶ T) :
         (ModuleCat.of (finiteTateCoefficient l E n) (finiteTateCoefficient l E n)))
 
 /-- The constant generator on the base change of a pro-etale object to the divisor.
-Source: the canonical supported constant sheaf, Stacks 09A5
-(blueprint: def-amb-proetale-supported-coefficient-reduction). -/
+Source: the canonical supported constant sheaf, Stacks 09A5. -/
 def cartierSupportedGenerator (n : ℕ) {D T : Scheme.{u}} (i : D ⟶ T)
     (U : T.ProEtᵒᵖ) (a : finiteTateCoefficient l E n) :
     (cartierSupported l E n i).obj.obj U := by
@@ -109,7 +104,7 @@ def cartierSupportedGenerator (n : ℕ) {D T : Scheme.{u}} (i : D ⟶ T)
         ((Scheme.proEtaleBaseChange i).op.obj U) a
 
 /-- The supported restriction A_T to i_* A_D is the constant-section map.
-Source: Stacks 0A45 and 09A5 (blueprint: def-amb-proetale-supported-coefficient-reduction). -/
+Source: Stacks 0A45 and 09A5. -/
 @[irreducible]
 def cartierSupportedUnit (n : ℕ) {D T : Scheme.{u}} (i : D ⟶ T) :
     (constantSheaf (Scheme.ProEt.topology T)
@@ -120,16 +115,13 @@ def cartierSupportedUnit (n : ℕ) {D T : Scheme.{u}} (i : D ⟶ T) :
   exact Scheme.proEtaleConstantDirectImageMap i (ModuleCat.{u + 1} (finiteTateCoefficient l E n))
     (ModuleCat.of (finiteTateCoefficient l E n) (finiteTateCoefficient l E n))
 
-/-- A simultaneous family of the asserted supported degree-two arrows.
-Source: blueprint, statement (blueprint: def-amb-proetale-supported-coefficient-reduction). -/
+/-- A simultaneous family of the asserted supported degree-two arrows. -/
 def CartierKummerFamily : Type (u + 1) :=
   ∀ (n : ℕ) {D T : Scheme.{u}} (i : D ⟶ T) [IsClosedImmersion i]
     (_hI : i.ker.IsInvertible) (_hT : IsUnit (l : Γ(T, ⊤))),
     Ext (cartierSupported l E n i) (finiteTateProSheaf l E n T 1) 2
 
-/-- The canonical quotient A_{E,b+1} to A_{E,a+1}, for every a ≤ b.
-Source: proof, coefficient reduction
-(blueprint: def-amb-proetale-supported-coefficient-reduction). -/
+/-- The canonical quotient A_{E,b+1} to A_{E,a+1}, for every a ≤ b. -/
 def cartierCoefficientReduction (a b : ℕ) (h : a ≤ b) :
     finiteTateCoefficient l E b →+* finiteTateCoefficient l E a :=
   ULift.ringEquiv.symm.toRingHom.comp
@@ -138,8 +130,7 @@ def cartierCoefficientReduction (a b : ℕ) (h : a ≤ b) :
 
 /-- A derived coefficient unit on the pro-etale site, characterized on all unbounded
 objects. This spells out tensor extension without assuming quotient flatness.
-Source: Stacks 07A6; proof, scalar extension
-(blueprint: def-amb-proetale-supported-coefficient-reduction). -/
+Source: Stacks 07A6. -/
 @[irreducible]
 def IsCartierDerivedScalarUnit {R S : Type (u + 1)} [CommRing R] [CommRing S]
     (φ : R →+* S) (T : Scheme.{u})
@@ -154,9 +145,7 @@ def IsCartierDerivedScalarUnit {R S : Type (u + 1)} [CommRing R] [CommRing S]
             (Sheaf.restrictScalars (Scheme.ProEt.topology T) φ).mapDerivedCategory.map f)
 
 /-- The pro-etale reduction equation; the coefficient maps preserve constants and
-send x tensor b to x tensor bar(b) in the published finite twists.
-Source: proof, coefficient reductions
-(blueprint: def-amb-proetale-supported-coefficient-reduction). -/
+send x tensor b to x tensor bar(b) in the published finite twists. -/
 @[irreducible]
 def CartierKummerReduction (c : CartierKummerFamily l E) : Prop :=
   ∀ (a b : ℕ) (hab : a ≤ b) {D T : Scheme.{u}} (i : D ⟶ T)

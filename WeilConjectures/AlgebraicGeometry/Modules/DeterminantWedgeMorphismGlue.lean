@@ -21,12 +21,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 set_option linter.unusedVariables false in
 /-- A chosen family of local wedge maps glues to a global morphism.
-Source: blueprint, Riemann--Roch, proof of (*), determinant paragraph.
-Proof: Form the epimorphism from tensors of wedges of lifts to tensors of quotient
-wedges. The concatenated wedge map kills its kernel, so `Abelian.epiDesc` gives a
-morphism on the quotient. Evaluate its factorization on pure wedges to obtain the
-displayed formula. This construction does not need the supplied family.
-(blueprint: new-wedge-glue-family)
 -/
 theorem determinant_wedgeMorphism_glue_family {X : Scheme.{v}} (S : ShortComplex X.Modules)
     (hS : S.ShortExact) (r₁ r₂ r₃ : ℕ) (hr : r₂ = r₁ + r₃)

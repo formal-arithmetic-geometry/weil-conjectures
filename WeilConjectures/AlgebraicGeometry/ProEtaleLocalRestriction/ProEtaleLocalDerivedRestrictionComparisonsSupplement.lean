@@ -82,9 +82,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleLocalDerivedRestrictionC
 /-!
 # Exact inverse image and local derived restriction
 
-Source: Stacks Project, derived.tex, Tag 015F; sites-modules.tex, Tags 03D2, 03DA,
-04IX; Bhatt--Scholze, Proposition 6.8.11(3).
-(blueprint: lem-weil-pbc-local-derived-restriction-comparisons).
+Source: Stacks Project, Tag 015F; Tags 03D2, 03DA, 04IX; Bhatt--Scholze, Proposition 6.8.11(3).
 
 ## Main declarations
 
@@ -111,7 +109,7 @@ variable {S T : Scheme.{u}} (g : S ⟶ T)
 
 /-- The specified representative-normalized comparison: first apply derived restriction
 of the inverse representative isomorphism, then the exact localization factor.
-Source: Stacks, Tag 015F (blueprint: lem-weil-pbc-local-derived-restriction-comparisons). -/
+Source: Stacks, Tag 015F. -/
 def comparison (K : DerivedCategory (SheafOfModules.{u + 1} (ring R))) :
     (restriction g R U).mapDerivedCategory.obj
         ((proEtaleModuleInverseImage g R).mapDerivedCategory.obj K) ≅
@@ -125,36 +123,7 @@ def comparison (K : DerivedCategory (SheafOfModules.{u + 1} (ring R))) :
         ((proEtaleModuleInverseImage g R).mapDerivedCategory.obj K))
 
 /-- Functorial local restriction with normalized cohomology and shifted-single comparisons.
-Source: Stacks, Tag 015F; Bhatt--Scholze, Proposition 6.8.11(3)
-(blueprint: lem-weil-pbc-local-derived-restriction-comparisons).
-Proof:
-1. Actual-ring module inverse image is exact by the abelian comparison and faithful
-   exact forgetful functors (inverseImage_exact). Slice restriction preserves finite
-   limits and colimits; its universe-independent interface applies to this small site.
-2. Apply exact-functor localization separately to F and G. It gives DF, DG and their
-   factorization isomorphisms, commuting with every integer shift, without boundedness.
-3. For X = DF(K), use the chosen representative C and epsilon : Q(C) ≅ X. The comparison
-   is DG(epsilon.symm) followed by the localization factor at C, exactly comparison.
-4. Define L on objects by the recorded representative restriction, and on maps by
-   alpha.inv followed by DG(DF(a)) followed by alpha.hom. Cancellation proves the functor
-   laws and naturality, and transports inverses. For any other representative B, replace
-   epsilon by Q(B) ≅ X; naturality of the localization factor identifies the comparisons
-   on chain maps and inverted quasi-isomorphisms, hence on all derived morphisms.
-5. Exact functors commute with complex cohomology by the kernel/image comparison. Descend
-   that comparison through localization. Compose G(h_F), h_G and H(alpha); their naturality
-   gives the displayed natural cohomology isomorphism and its compatibility with alpha.
-6. On degree-zero complexes use the exact-functor single comparison twice. On a shift r,
-   use the two derived shift comparisons and shift the single comparison. Compose with
-   alpha.inv to obtain the specified natural shifted-single comparison.
-7. On the representative M[0][r] these comparisons use the same kernels and images:
-   identity on GFM in degree -r and zero in the other degrees. The termwise shifts have
-   differential (-1)^r GF(d), for either sign of r. Transport by step 4 identifies these
-   comparisons with the chosen representative convention.
-DAG inputs: def-weil-proetale-inverse-image, def-pur-localized-ringed-site,
-lem-weil-pbc-finite-type-restriction-exact,
-situation-conventions,
-def-weil-pbc-ringed-site-derived-restriction, def-weil-abstract-derived-category, and
-lem-weil-pbc-exact-functor-complex-cohomology. -/
+Source: Stacks, Tag 015F; Bhatt--Scholze, Proposition 6.8.11(3). -/
 theorem comparisons :
     ∃ (L : DerivedCategory (SheafOfModules.{u + 1} (ring R)) ⥤
         DerivedCategory (SheafOfModules.{u + 1} ((inverseRing g R).over U)))

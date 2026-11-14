@@ -46,26 +46,7 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ' T)]
 
 /-- Evaluate the derived tensor side on internal resolving complexes.
-Source: Stacks Project, sites-cohomology.tex, Tags 06YY and 07A4,
-lemma-pullback-tensor-product and the K-flat tensor localization construction.
-(blueprint: lem-sfb-quotient-section-tensor-transport-internal-left).
-
-Proof: transfer the independent K-flat test and flat terms through the exact
-section equivalence to P and Q. Precompose the tensor-section conjugation square
-hbarB by the section localization isomorphisms. Naturality of barB moves these
-isomorphisms into its output. Replace each scalar localization counit using hc.2.
-Normalize the output qTensor on the two extended internal complexes by its
-TensorRepresentativeNormalization equation; naturality moves the ordinary
-scalar section comparisons to the final total map. All section tensor and
-scalar comparison isomorphisms cancel in pairs. What remains is the section
-image of b followed by the two internal scalar counits and the internal tensor
-localization. TensorNormalized hb replaces precisely this internal path by
-D.map of the internal tensor localization, compute on P tensor Q, and the
-localization of totalScalar. These are the first three factors of
-scalarTensorSectionPath; the remaining factors are the localized total section
-comparison and the two ordinary scalar comparisons. This proves the displayed
-evaluation. No assertion about the section ordinary tensor map e occurs here.
-The zero pair gives zero maps on both sides; no coefficient flatness is used. -/
+Source: Stacks Project, Tags 06YY and 07A4. -/
 private theorem kflat_from_acyclic_test_local
     {C : Type u₁} [Category.{v₁} C] [Abelian C] [IsGrothendieckAbelian.{v₁} C]
     [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [SymmetricCategory C]

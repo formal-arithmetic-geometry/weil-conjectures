@@ -165,8 +165,7 @@ private theorem fixedModels_constantRing {C : Type u} [SmallCategory C]
     | exact ⟨M, hM, (hi W M).mp he⟩
 
 /-- Intrinsic module constants agree with constants after restriction to fixed scalars.
-Source: Stacks Project, Tags 03CY and 093U
-(blueprint: lem-sfb-proetale-fp-local-models-comparison). -/
+Source: Stacks Project, Tags 03CY and 093U. -/
 theorem intrinsic_fixedModels (X : Scheme.{u}) (R : Type u)
     [CommRing R] [IsNoetherianRing R]
     (F : proEtaleRingModules X (proEtaleConstantRing X R)) :
@@ -276,8 +275,7 @@ attribute [local instance] ProFiniteModels.asSmallDownEquivalence
 /-- The coefficient encoding on the equivalent small site. Each equivalence is an
 actual scalar-restriction or site-transport equivalence, retaining the underlying sheaf.
 The inverse of scalar restriction is fixed up to its natural isomorphism.
-Source: Stacks Project, Tags 03CY and 03A0
-(blueprint: lem-sfb-proetale-fp-local-models-comparison). -/
+Source: Stacks Project, Tags 03CY and 03A0. -/
 noncomputable def proEtaleFPModelEncoding (X : Scheme.{u}) (R : Type u) [CommRing R] :
     proEtaleRingModules X (proEtaleConstantRing X R) ≌
       ringedSiteModules.{u + 1}
@@ -296,21 +294,7 @@ noncomputable def proEtaleFPModelEncoding (X : Scheme.{u}) (R : Type u) [CommRin
 
 /-- The intrinsic finitely presented models agree with finite-type constant models on
 the equivalent small site under the specified scalar and site encoding.
-Source: Stacks Project, Tags 03CY, 03A0, 093U, and 00IK
-(blueprint: lem-sfb-proetale-fp-local-models-comparison).
-
-Proof: restriction to constant scalars is fully faithful on each localized site because
-the ring unit is locally surjective. The intrinsic constant module, after restriction,
-is the sheafification of the constant module-valued presheaf: the two sheafification
-adjunctions identify them, with the identity on the underlying additive sheaf. This also
-holds on every slice. AsSmall.up and AsSmall.down give mutually inverse site transports;
-they preserve covering sieves and identify slice restrictions and constant sheaves.
-The inverse constant-ring scalar encoding has the identical constant models by the same
-sheafification comparison. Transport each local isomorphism through these equivalences.
-Finite presentation implies finite generation; over the Noetherian ring the converse is
-Module.finitePresentation_of_finite. Applying this in both directions gives the claimed
-iff. This includes the empty site and the zero ring, since no point or faithful constant
-sheaf functor is required. -/
+Source: Stacks Project, Tags 03CY, 03A0, 093U, and 00IK. -/
 theorem proEtale_fp_localModels_comparison (X : Scheme.{u}) (R : Type u)
     [CommRing R] [IsNoetherianRing R]
     (F : proEtaleRingModules X (proEtaleConstantRing X R)) :

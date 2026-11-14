@@ -109,23 +109,7 @@ set_option backward.isDefEq.respectTransparency false in
 naturally for maps over the ambient open.
 
 Source: Stacks Project, Tags 01IH and 01QP (quotient structure sheaves), and
-Tag 01DZ, Section 20.2 (degree-zero cohomology).
-(blueprint: new-principal-thickening-cokernel-sections)
-
-Proof: The kernel of R -> R/(g) is (g), with (n+1)st power (g^(n+1)).
-On an affine open Spec B of W, the pullback thickening is Spec B/(g^(n+1)B).
-The image of multiplication by the restricted g^(n+1) is the corresponding
-ideal sheaf. Thus the cokernel of its image inclusion is canonically the
-pushforward of the structure sheaf of the thickening. The identifications are
-induced by restriction and agree after localization, so they glue. Taking
-global sections and composing with the canonical H^0-to-sections equivalence
-gives e. The quotient projection gives the first equation. For the second,
-kappa and the identity on O_W give the displayed map of cokernels. The over-W
-identity for h says that its structure-sheaf pullback agrees with this map
-after precomposition with the quotient projection. That projection is epi
-as a sheaf map; hence the maps agree, giving the equation on global sections.
-No surjectivity on global sections is claimed. Empty W gives zero groups;
-g=0 gives the identity quotient; a unit g gives the zero quotient. -/
+Tag 01DZ, Section 20.2 (degree-zero cohomology). -/
 theorem principal_thickening_cokernel_sections
     (R : Type u) [CommRing R] (g : R) (W : (Spec (.of R)).Opens) :
     let p := fun n : ℕ ↦ Modules.smulHom (SheafOfModules.unit W.toScheme.ringCatSheaf)

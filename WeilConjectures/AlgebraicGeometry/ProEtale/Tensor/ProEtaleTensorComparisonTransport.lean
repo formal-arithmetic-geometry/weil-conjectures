@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Tensor.ProEtaleTensorPullbackD
 /-! # Transport of representative-normalized tensor comparisons
 
 Source: Stacks Project, Cohomology on Sites, Tag 07A4.
-(blueprint: lem-weil-pbc-proetale-tensor-comparison-transport).
 -/
 
 @[expose] public noncomputable section
@@ -70,17 +69,7 @@ attribute [local irreducible] CategoryTheory.Functor.leftAdjoint
 
 /-- Normalized total comparisons determine the derived tensor transport square.
 Source: Stacks Project, Cohomology on Sites, Tag 07A4, passage from flat K-flat
-representatives to derived tensor by localization.
-(blueprint: lem-weil-pbc-proetale-tensor-comparison-transport).
-
-Proof: resolving restriction is fully faithful with target the source derived category.
-On a resolving pair, prepend the mapped native source representative and postcompose
-the target representative and pullback factors; these maps are invertible. Naturality
-moves the tensor-model isomorphisms across the factors. The native and supplied
-representative equations then identify both sides with their respective inverse total
-comparisons. The total transport square identifies these inverses. Cancel the chosen
-isomorphisms and reflect equality through resolving restriction. No right adjoint,
-slice data, shift compatibility or boundedness is used. -/
+representatives to derived tensor by localization. -/
 theorem proEtaleTensorComparisonTransport
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})

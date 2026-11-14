@@ -11,8 +11,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunc
 /-!
 # The finite coefficient realization interface for refinement comparisons
 
-Source: blueprint finite coefficient modules, order 1233; module sheafification along
-locally bijective constant scalars (blueprint: definition-small-pro-etale-site--1).
+Source: module sheafification along locally bijective constant scalars.
 
 The recorded finite-module definitions are reexported. This exposes coefficient realization
 without importing the second copy of the fixed-coefficient six-functor declarations.
@@ -31,17 +30,7 @@ namespace AlgebraicGeometry.ProEtale
 /-- The canonical associated-module-sheaf realization is fully faithful and every module
 sheaf is in its essential image. This identifies fixed scalar module sheaves with the
 modules over the specified continuous-function coefficient sheaf, not a new coefficient
-category. Source: blueprint finite coefficient modules, order 1233
-(blueprint: definition-small-pro-etale-site--1).
-
-Proof: restrict a module's action along the constant scalar sections to obtain a
-fixed-ring module sheaf. Conversely extend a fixed scalar action to local scalar
-sections, using local bijectivity of finiteCoefficientScalarMap. Sheaf gluing makes
-this extension unique. The realization unit and counit are the associated-module-sheaf
-unit and counit and are isomorphisms. Restriction and realization preserve morphisms
-sectionwise, giving full faithfulness and essential surjectivity. This uses the exact
-same realization already recorded by the node, including on the empty scheme and for
-the zero coefficient ring. -/
+category. -/
 theorem finiteCoefficientRealization_full_faithful_essSurj (T : Scheme.{u})
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     [TopologicalSpace Λ] [DiscreteTopology Λ] :
@@ -51,9 +40,7 @@ theorem finiteCoefficientRealization_full_faithful_essSurj (T : Scheme.{u})
   let := finiteCoefficientRealizationIsEquivalenceRing T Λ
   exact ⟨inferInstance, inferInstance, inferInstance⟩
 
-/-- Realization gives the coefficient equivalence used for canonical transport.
-Source: blueprint finite coefficient modules, order 1233
-(blueprint: definition-small-pro-etale-site--1). -/
+/-- Realization gives the coefficient equivalence used for canonical transport. -/
 instance refinementRealizationIsEquivalence (T : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] :
     (finiteCoefficientRealization T Λ).IsEquivalence where

@@ -27,14 +27,13 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 /-!
 # The étale direct image of `𝔾ₐ` in a family of curves
 
-For a proper smooth morphism `f : C ⟶ S` with geometrically connected fibres, the étale direct
+For a proper smooth morphism `f: C ⟶ S` with geometrically connected fibres, the étale direct
 image `f_* 𝔾ₐ` is `𝔾ₐ` on `S`, i.e. the universe lift of the étale sheaf of `𝒪_S`, and the
-Artin--Schreier map `℘ = Frob - 1` of `C` induces `F - 1` for the Frobenius `F : x ↦ xᵖ`.
+Artin--Schreier map `℘ = Frob - 1` of `C` induces `F - 1` for the Frobenius `F: x ↦ xᵖ`.
 
 This is the degree `0` case of `properSmoothCurves_higherDirectImage_ga_frobeniusLinear`.
 
-Source: Stacks Project, Tag 0GKV, proof of lemma-proper-smooth-family-curves, case (b), and
-Tag 0E0L (`f_* 𝒪_C = 𝒪_S` universally).
+Source: Stacks Project, Tag 0GKV, case (b), and Tag 0E0L (`f_* 𝒪_C = 𝒪_S` universally).
 -/
 
 @[expose] public section
@@ -230,15 +229,15 @@ namespace Etale
 open Scheme
 
 /-- **The étale direct image of `𝔾ₐ` in a family of curves** (degree `0` case of
-`properSmoothCurves_higherDirectImage_ga_frobeniusLinear`). For `f : C ⟶ S` proper and smooth
+`properSmoothCurves_higherDirectImage_ga_frobeniusLinear`). For `f: C ⟶ S` proper and smooth
 with geometrically connected fibres, on a base where the prime `p` vanishes, `H⁰(Rf_* 𝔾ₐ)` is
 the universe lift of the étale sheaf of `𝒪_S`, with the map induced by `℘ = Frob - 1`
-corresponding to `F - 1` for the Frobenius `F : x ↦ xᵖ`.
+corresponding to `F - 1` for the Frobenius `F: x ↦ xᵖ`.
 
 `H⁰(Rf_* 𝔾ₐ) = f_* 𝔾ₐ` as `f_*` is left exact, and `f_* 𝔾ₐ = 𝔾ₐ` since `𝒪_S → f_* 𝒪_C` is an
 isomorphism universally (Stacks, Tag 0E0L).
 
-Source: Stacks Project, Tag 0GKV, proof of lemma-proper-smooth-family-curves, case (b). -/
+Source: Stacks Project, Tag 0GKV, case (b). -/
 theorem properSmoothCurves_higherDirectImage_ga_frobeniusLinear_zero_aux
     {C S : Scheme.{u}} (f : C ⟶ S) [IsProper f] [Smooth f] [GeometricallyConnected f]
     (p : ℕ) [Fact p.Prime] (hpS : (p : Γ(S, ⊤)) = 0) (hpC : (p : Γ(C, ⊤)) = 0) :

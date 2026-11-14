@@ -12,8 +12,7 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSuppleme
 
 /-! # Identity inverse image with its actual inverse-image coefficient sheaf
 
-Source: Stacks Project, Tags 09A5 and 03D2
-(blueprint: lem-weil-pbc-identity-inverse-image-modules).
+Source: Stacks Project, Tags 09A5 and 03D2.
 -/
 
 @[expose] public noncomputable section
@@ -49,17 +48,7 @@ private def inverseIdentityIso (X : Scheme.{u}) (R : Rings X) :
 /-- The raw identity pullback differs from the identity only by restriction of scalars
 along the canonical identity ring isomorphism. This retains exactly the coefficient
 sheaf appearing in integral local models.
-Source: Stacks Project, Tags 09A5 and 03D2
-(blueprint: lem-weil-pbc-identity-inverse-image-modules).
-
-Proof: the normalized identity inverse-image comparison on modules sends the
-inverse-image unit section to its restriction through the canonical base-change
-identity isomorphism. Naturality follows by testing module maps on those unit
-sections, using the inverse-image adjunction. The scalar extension along the
-identity of the inverse-image ring is naturally the identity: its restriction
-right adjoint is naturally the identity, so uniqueness of left adjoints supplies
-the comparison. Compose these two natural isomorphisms. All maps are canonical
-adjunction comparisons, and the argument includes the zero ring and empty scheme. -/
+Source: Stacks Project, Tags 09A5 and 03D2. -/
 theorem proEtaleRawIdentityPullback_comparison (X : Scheme.{u}) (R : Rings X) :
     Nonempty (proEtaleRingModulePullback (𝟙 X) R (inverseRing (𝟙 X) R) (Iso.refl _) ≅
       AlgebraicGeometry.ProEtaleTensorComparison.restrict (ringId R).hom) := by

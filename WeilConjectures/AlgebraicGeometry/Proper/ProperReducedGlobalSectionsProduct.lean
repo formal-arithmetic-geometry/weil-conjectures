@@ -17,8 +17,7 @@ import WeilConjectures.Mathlib.Topology.NoetherianSpace
 /-!
 # Global functions on a proper reduced scheme over an algebraically closed field
 
-Source: Stacks Project, Varieties, Tag 0BUG, clauses (1)--(3)
-(blueprint: lem-weil-pbc-proper-reduced-algclosed-global-sections-product).
+Source: Stacks Project, Varieties, Tag 0BUG, clauses (1)--(3).
 -/
 
 @[expose] public section
@@ -30,24 +29,9 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- Global functions are the product of the scalars indexed by connected components.
-Source: Stacks Project, Varieties, Tag 0BUG, clauses (1)--(3)
-(blueprint: lem-weil-pbc-proper-reduced-algclosed-global-sections-product).
+Source: Stacks Project, Varieties, Tag 0BUG, clauses (1)--(3).
 The ring equivalence commutes with the actual scalar structure map, making it a
-`k`-algebra equivalence. Its germ formula specifies the canonical constant-on-components map.
-
-Proof:
-1. Properness gives finite type over the Noetherian scheme `Spec k`, so `X` is Noetherian.
-   The proved Noetherian-space results give finitely many clopen connected components.
-2. Each component, as an open subscheme with closed image, is proper, reduced and connected.
-   `GlobalSectionsBijective.of_isAlgClosed` identifies its scalar map with a bijection;
-   `Opens.topIso` transfers this to sections of `X` on that component.
-3. Restriction to all components is injective by equality of germs, and surjective by sheaf
-   gluing: distinct components have empty intersection. Compose its inverse with the
-   coordinate scalar equivalences. Restricting proves scalar compatibility, and taking
-   germs proves the displayed formula.
-4. If `X` is empty, its component set is empty, the function ring is subsingleton, and
-   the empty-cover sheaf axiom makes the ring of global sections subsingleton as well.
-   The same gluing construction includes the empty case. -/
+`k`-algebra equivalence. Its germ formula specifies the canonical constant-on-components map. -/
 theorem proper_reduced_globalSections_product
     (k : Type u) [Field k] [IsAlgClosed k] (X : Scheme.{u})
     [X.Over (Spec (CommRingCat.of k))]

@@ -11,9 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.KummerLine.KummerRootLineComputa
 /-!
 # Kummer computations with arbitrary finite ring coefficients
 
-Source: blueprint thm-pur-kummer-affine-line, with the arbitrary-ring correction
-of expert message 1385, answers 5–6 (2026-11-01).
-
 The coefficient sheaf and insertions are the published Kummer module coefficient
 functor. Multiplication on the coefficient ring gives its canonical ring action
 on cohomology. Scalar extension uses `ModuleCat.extendScalars`, so no algebra
@@ -32,24 +29,18 @@ open scoped TensorProduct ChangeOfRings
 
 namespace AlgebraicGeometry.KummerLine
 
-/-- The canonical homomorphism from the lifted residue ring to an annihilated ring.
-Source: the coefficient convention in thm-pur-kummer-affine-line
-(blueprint: thm-pur-kummer-affine-line). -/
+/-- The canonical homomorphism from the lifted residue ring to an annihilated ring. -/
 def ringCoefficientScalar (m : ℕ) (A : Type (u + 1)) [CommRing A]
     (hA : (m : A) = 0) : ULift.{u + 1} (ZMod m) →+* A :=
   (Scheme.finiteEtaleTwistScalar m A hA).comp ULift.ringEquiv.toRingHom
 
-/-- A coefficient ring regarded as its canonical residue module, with no freeness assumption.
-Source: def-pur-kummer-module-coefficients and the arbitrary-ring convention
-(blueprint: thm-pur-kummer-affine-line). -/
+/-- A coefficient ring regarded as its canonical residue module, with no freeness assumption. -/
 def ringCoefficientModule (m : ℕ) (A : Type (u + 1)) [CommRing A]
     (hA : (m : A) = 0) : ModuleCat.{u + 1} (ULift.{u + 1} (ZMod m)) :=
   (ModuleCat.restrictScalars (ringCoefficientScalar m A hA)).obj (ModuleCat.of A A)
 
 /-- The existing abelian cohomology equipped with its canonical coefficient-ring action.
-The action is induced by multiplication endomorphisms of the coefficient module.
-Source: functoriality of cohomology in thm-pur-kummer-affine-line
-(blueprint: thm-pur-kummer-affine-line). -/
+The action is induced by multiplication endomorphisms of the coefficient module. -/
 def coefficientScalarAction (k : Type u) [Field k] (b : Bool)
     (m : ℕ) (A : Type (u + 1)) [CommRing A] (hA : (m : A) = 0) (q : ℕ)
     (a : A) : CategoryTheory.End
@@ -63,15 +54,7 @@ def coefficientScalarAction (k : Type u) [Field k] (b : Bool)
 
 /-- The scalar action laws for the canonical multiplication endomorphisms.
 The maps are the actual multiplication maps; the laws are the coefficient-functor
-naturality needed to package them as a ring homomorphism.
-Source: the `A`-module structure of `H^q(C, A(1))` in thm-pur-kummer-affine-line and the
-coefficient functoriality of def-pur-kummer-module-coefficients
-(blueprint: thm-pur-kummer-affine-line).
-
-Proof: `a ↦ H^q(1 ⊗ (a·))` sends `1` to the identity and products to composites because
-the composite coefficient functor preserves identities and composition; it is additive
-because restriction of scalars, the sheafified tensor `μ_m ⊗ -`, the forgetful functor and
-`H^q` are additive functors. -/
+naturality needed to package them as a ring homomorphism. -/
 theorem coefficientScalarRingHom_exists (k : Type u) [Field k] (b : Bool)
     (m : ℕ) (A : Type (u + 1)) [CommRing A] (hA : (m : A) = 0) (q : ℕ) :
     ∃ h : A →+* CategoryTheory.End
@@ -121,9 +104,7 @@ theorem coefficientScalarRingHom_exists (k : Type u) [Field k] (b : Bool)
     ext
     simp [LinearMap.lsmul_apply]
 
-/-- The existing abelian cohomology equipped with its canonical coefficient-ring action.
-Source: functoriality of cohomology in thm-pur-kummer-affine-line
-(blueprint: thm-pur-kummer-affine-line). -/
+/-- The existing abelian cohomology equipped with its canonical coefficient-ring action. -/
 noncomputable def ringCoefficientCohomology (k : Type u) [Field k] (b : Bool)
     (m : ℕ) (A : Type (u + 1)) [CommRing A] (hA : (m : A) = 0) (q : ℕ) :
     ModuleCat.{u + 1} A :=
@@ -131,9 +112,7 @@ noncomputable def ringCoefficientCohomology (k : Type u) [Field k] (b : Bool)
     (coefficientScalarRingHom_exists k b m A hA q))
 
 /-- The ordinary residue-cohomology tensor coefficient ring, viewed as an `A`-module.
-The tensor factors appear in the order `A ⊗_R H`; symmetry gives the paper's `H ⊗_R A`.
-Source: the coefficient comparison in thm-pur-kummer-affine-line
-(blueprint: thm-pur-kummer-affine-line). -/
+The tensor factors appear in the order `A ⊗_R H`; symmetry gives the paper's `H ⊗_R A`. -/
 def ringCoefficientTensor (k : Type u) [Field k] (b : Bool)
     (m : ℕ) (A : Type (u + 1)) [CommRing A] (hA : (m : A) = 0) (q : ℕ) :
     ModuleCat.{u + 1} A :=

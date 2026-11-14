@@ -17,8 +17,6 @@ import Mathlib.GroupTheory.OrderOfElement
 /-!
 # Finite-extension specialization and scalars for the published complete category
 
-Source: Weil blueprint, proper base change, order 1300
-(blueprint: def-weil-pbc-bounded-constructible-complete).
 The category is the published PbcIsBoundedConstructibleComplete, specialized to the
 actual unlifted valuation ring in Type (u+1). Its completion, uniform reductions and
 compatible origins are reused without redefining them. The published finite-extension
@@ -38,13 +36,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 /-- The finite-extension valuation ring has the coefficient properties required by
-this definition. Source: blueprint order 1300; Serre, Local Fields, Chapter II, §2
-(blueprint: def-weil-pbc-bounded-constructible-complete).
-Proof: the recorded valuation ring is a DVR with finite residue field. Its uniformizer
-is nonzero and generates the maximal ideal. The ideal is principal and the ring is
-Noetherian. The positive quotients are finite and have the length-one finite free
-resolution given by multiplication by the corresponding uniformizer power; hence they
-are perfect. The first quotient is a finite field of characteristic l, so it is torsion. -/
+this definition. Source: Serre, Local Fields, Chapter II, §2. -/
 theorem pbcPadicCoefficientFacts (l : ℕ) [Fact l.Prime]
     (E : Type (u + 1)) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :
     IsNoetherianRing (Padic.coefficientExtensionIntegers l E) ∧
@@ -86,8 +78,7 @@ theorem pbcPadicCoefficientFacts (l : ℕ) [Fact l.Prime]
       exact ⟨inferInstance, (hfree i).2⟩
     · exact ⟨(asIso (DerivedCategory.Q.map ε)).symm⟩
 
-/-- The actual p-adic coefficient datum, with its principal ideal and positive quotients.
-Source: blueprint order 1300 (blueprint: def-weil-pbc-bounded-constructible-complete). -/
+/-- The actual p-adic coefficient datum, with its principal ideal and positive quotients. -/
 def pbcPadicCoefficientDatum (l : ℕ) [Fact l.Prime]
     (E : Type (u + 1)) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :
     AdicCoefficientDatum (Padic.coefficientExtensionIntegers l E) where

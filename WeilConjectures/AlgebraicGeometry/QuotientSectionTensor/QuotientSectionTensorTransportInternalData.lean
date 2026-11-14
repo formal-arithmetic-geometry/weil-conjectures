@@ -30,8 +30,7 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ' T)]
 
 /-- The invertible input identification from internal derived tensors to section tensors.
-Source: Stacks 06YY and 07A4.
-(blueprint: def-sfb-quotient-section-tensor-transport-internal-data). -/
+Source: Stacks 06YY and 07A4. -/
 def scalarTensorSectionInput (T : Scheme.{u}) (c : ScalarSectionData a T)
     (P Q : CochainComplex (Modules Λ T) ℤ) :
     (derivedFunctor Λ' T).obj
@@ -48,8 +47,7 @@ def scalarTensorSectionInput (T : Scheme.{u}) (c : ScalarSectionData a T)
       (sectionLocalizationComparison Λ T P).hom (sectionLocalizationComparison Λ T Q).hom))
 
 /-- The concrete internal scalar-total path, followed by the ordinary section comparisons.
-Source: Stacks 03EL, 06YY and 07A4.
-(blueprint: def-sfb-quotient-section-tensor-transport-internal-data). -/
+Source: Stacks 03EL, 06YY and 07A4. -/
 def scalarTensorSectionPath (T : Scheme.{u}) (c : ScalarSectionData a T)
     (P Q : CochainComplex (Modules Λ T) ℤ) :
     (derivedFunctor Λ' T).obj

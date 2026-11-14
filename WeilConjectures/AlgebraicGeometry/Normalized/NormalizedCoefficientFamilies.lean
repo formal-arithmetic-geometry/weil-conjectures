@@ -30,9 +30,7 @@ public import WeilConjectures.AlgebraicGeometry.Complete.CompleteCompactSupportP
 
 /-! # Normalized coefficient-family data
 
-Source: blueprint main-20261015, `sk-thm-sf-pf-field/thm-cbc-qbar.proof.md`,
-opening scalar-extension paragraph; Stacks Tag 0E8I for the open tensor factor
-(blueprint: def-cbc-normalized-coefficient-families).
+Source: Stacks Tag 0E8I for the open tensor factor.
 
 ## Main definitions
 

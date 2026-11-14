@@ -131,7 +131,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleTateTwistLevels
 
 /-! # Finite levels and integral and rational Tate twist objects
 
-Source: blueprint `definition-tate-twists`. The index n denotes exponent n+1.
+The index n denotes exponent n+1.
 The integral levels use the finite quotient tensor with the roots, restricted
 along O_X -> B_X. The integral object is their limit in O_X-modules, and the
 rational object is its specified extension of scalars. These are the original
@@ -159,22 +159,14 @@ variable (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
 
 /-- The finite twist uses the unique unital quotient homomorphism to A.
 The positive index r represents the annihilating exponent r+1; its vanishing
-on 1 is equivalent to annihilation of every A-module scalar.
-Source: blueprint finite twist formula (blueprint: definition-tate-twists). -/
+on 1 is equivalent to annihilation of every A-module scalar. -/
 def spFiniteTwist (A : Type (u + 1)) [CommRing A] [Finite A] (r : ℕ)
     (hA : (ℓ ^ (r + 1) : A) = 0) :=
   Scheme.tateFiniteLine X ℓ A r
     (ZMod.castHom (ringChar.dvd (by simpa only [Nat.cast_pow] using hA)) A)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The two recorded integer-ring models agree as subrings of the fixed finite field.
-Source: blueprint coefficient convention and def-weil-l-adic-coefficient-extension
-(blueprint: definition-tate-twists).
-Proof: the coefficient-extension absolute value and the norm restricted from the
-fixed algebraic closure both extend the p-adic absolute value. Uniqueness in
-lem-weil-l-adic-extension-absolute-value makes them equal. The DVR witness
-characterizes coefficientExtensionIntegers by value at most one, precisely the
-membership predicate of PadicAlgCl.integers. Extensionality gives equality. -/
+/-- The two recorded integer-ring models agree as subrings of the fixed finite field. -/
 theorem spIntegers_eq (E : PadicAlgCl.FiniteIntermediateField ℓ) :
     Padic.coefficientExtensionIntegers ℓ E.1 = (PadicAlgCl.integers ℓ E.1).toSubring := by
   let := PadicAlgCl.normedFieldOfAlgebra ℓ E.1
@@ -237,18 +229,7 @@ private theorem spFreeTensor_linear
   exact Mod.hom_ext _ _ hg
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The finite-level twist is the displayed constant-ring scalar extension.
-Source: blueprint finite-level formula (blueprint: definition-tate-twists).
-Proof: a finite discrete B has continuous-function condensed sheaf equal to its
-constant sheaf: a section is a finite clopen partition labelled by B. Pullback
-from the point preserves this description, including the ring operations.
-For an N-torsion abelian sheaf M, B tensor_Z M is B tensor_(Z/N) M whenever N*B=0:
-the integer balancing relations already imply the Z/N balancing relations.
-Apply this with N=ell^(n+1) and M=mu_N, using the recorded root module action.
-The inclusion of the ideal generator gives N=0 in the quotient. These comparisons
-commute with reduction of B and the root power maps, since each map applies to
-its indicated tensor factor. Thus the actual integral system has exactly the
-finite levels and transitions in the blueprint, with no replacement of the roots. -/
+/-- The finite-level twist is the displayed constant-ring scalar extension. -/
 theorem spIntegralTwistLevel_comparison (E : PadicAlgCl.FiniteIntermediateField ℓ) (n : ℕ) :
     ∃ a : ZMod (ℓ ^ (n + 1)) →+* ULift.{u + 1} (spEllQuotient ℓ E n),
       Nonempty ((spIntegralTwistLevel X ℓ E n).X ≅

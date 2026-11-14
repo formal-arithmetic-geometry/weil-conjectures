@@ -16,10 +16,7 @@ import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 /-!
 # Finite scalar restriction preserves pro-etale constructibility
 
-Source: current Weil blueprint, chap-The-pro-etale-site,
-`sk-prop-integral-criterion-reductions.proof.md`, second paragraph, last sentence;
-Stacks Tags 03DA, 03D2, 093I, 093Q, 09AJ, 010N and 015F
-(blueprint: lem-pe-finite-scalar-restriction-constructible).
+Source: Stacks Tags 03DA, 03D2, 093I, 093Q, 09AJ, 010N and 015F.
 
 The coefficient map is arbitrary; no surjectivity or flatness is imposed.
 The intrinsic constant-ring module category and its existing exact restriction functor
@@ -237,16 +234,7 @@ private noncomputable abbrev localizedRestriction (X : Scheme.{u})
 
 /-- Every chosen stratum cover and its constant module models still trivialize the
 scalar-restricted sheaf. This records the unchanged witnesses in constructibility.
-Source: current Weil blueprint, integral-criterion reductions, second proof paragraph;
-Stacks Tags 03D2, 093I and 093Q
-(blueprint: lem-pe-finite-scalar-restriction-constructible).
-Proof: use the commuting coefficient square of step 2 of the node's proof to identify
-pullback after restriction with restriction after pullback. Localizing over each U j
-commutes with restriction sectionwise. Restrict the given trivialization, then identify
-restriction of the constant module sheaf with the constant sheaf of the restricted
-module: their abelian sheafifications coincide and their scalar actions on constant
-sections are both (b,m) ↦ a(b)m (step 3, lem-cbc-sieve-module-sheafification).
-The displayed covers and indices are literally the input covers and indices. -/
+Source: Stacks Tags 03D2, 093I and 093Q. -/
 theorem proEtaleFiniteScalarRestriction_sameTrivializations
     (X : Scheme.{u}) [IsNoetherian X]
     (A B : Type u) [CommRing A] [CommRing B] [Finite A] [Finite B] (a : A →+* B)
@@ -280,13 +268,7 @@ theorem proEtaleFiniteScalarRestriction_sameTrivializations
   exact ⟨ep ≪≫ eo ≪≫ E.mapIso e ≪≫ ec⟩
 
 /-- The locally constant and finite-stalk conditions hold on the very same strata.
-Source: current Weil blueprint, integral-criterion reductions, second proof paragraph;
-Stacks Tag 09AJ (blueprint: lem-pe-finite-scalar-restriction-constructible).
-Proof: apply the unchanged-cover comparison of steps 2--3 to each stratum's chosen
-local constancy witness. The geometric-stalk neighbourhood diagrams and equivalence
-relations are unchanged by restriction of scalars, so the stalk sets are unchanged.
-A finite B-module stalk is finite as a set and hence is generated over A by all of its
-elements (step 4). This gives both clauses for each original stratum, with no refinement. -/
+Source: Stacks Tag 09AJ. -/
 theorem proEtaleFiniteScalarRestriction_sameStratification
     (X : Scheme.{u}) [IsNoetherian X]
     (A B : Type u) [CommRing A] [CommRing B] [Finite A] [Finite B] (a : A →+* B)
@@ -360,32 +342,7 @@ private theorem constructibleOfIso (X : Scheme.{u}) (A : Type u)
 /-- Finite scalar restriction is exact, preserves constructible sheaves and bounded
 constructibility, commutes naturally with every cohomology functor, and preserves and
 reflects cohomology vanishing in every degree.
-Source: current Weil blueprint, integral-criterion reductions, second proof paragraph,
-last sentence; Stacks Tags 03DA, 03D2, 093I, 093Q, 09AJ, 010N and 015F
-(blueprint: lem-pe-finite-scalar-restriction-constructible).
-Proof:
-1. Restriction leaves the underlying abelian sheaf and maps unchanged. The kernel and
-sheafified cokernel constructions of situation-conventions
-therefore commute with it. It is additive, exact and reflects zero objects.
-2. On every stratum, the canonical inverse-image identifications of the two constant
-rings commute with the coefficient map, since both composites agree on constant sections
-(prop-weil-pbc-proetale-constant-ring-map). Inverse image of the restricted action is
-thus the restricted inverse-image action. Extension along the coefficient identifications
-only transports this action. Restriction to a covering object also commutes sectionwise.
-3. The constant module presheaf has the same underlying abelian presheaf after scalar
-restriction. Its abelian sheafification is unchanged (lem-cbc-sieve-module-sheafification),
-and the restricted scalar actions agree on constant sections. Thus the same strata and
-covers trivialize the restricted sheaf, with the scalar-restricted constant modules.
-4. Geometric stalks retain their underlying sets. A finitely generated module over finite
-B is a quotient of a finite power of B, hence finite. Its restriction is generated over A
-by the finite list of all its elements. This proves constructibility without surjectivity.
-5. Exact descent (situation-conventions) gives the existing
-termwise mapDerivedCategory on unbounded complexes. The exact-functor homology comparison
-(lem-weil-pbc-exact-functor-complex-cohomology) descends naturally through localization,
-giving the displayed natural isomorphisms in every degree, without a resolution bound.
-6. Combine that comparison with reflection of zero objects. Each vanishing degree is
-preserved and reflected; thus the same lower and upper bounds work. Constructibility of
-all cohomology sheaves follows from steps 2--4. This proves bounded constructibility. -/
+Source: Stacks Tags 03DA, 03D2, 093I, 093Q, 09AJ, 010N and 015F. -/
 theorem proEtaleFiniteScalarRestriction_constructible
     (X : Scheme.{u}) [IsNoetherian X]
     (A B : Type u) [CommRing A] [CommRing B] [Finite A] [Finite B] (a : A →+* B) :

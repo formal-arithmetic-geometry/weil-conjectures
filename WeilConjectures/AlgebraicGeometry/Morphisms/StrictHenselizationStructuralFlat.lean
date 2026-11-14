@@ -26,17 +26,7 @@ namespace AlgebraicGeometry.Scheme
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The ring map inducing the canonical strict henselization structural map is flat.
-Source: Stacks Project, Tags 04HX and 07QM; Tag 0EYG, first reduction paragraph.
-(blueprint: lem-sbc-affine-strict-henselization-structural-flat)
-
-Proof: For an affine base Spec R, the pointed affine etale neighbourhood coordinate
-rings are etale R-algebras. The canonical structural map restricts to their
-structure maps, by its defining common-composite identity. Thus the canonical
-colimit ring is the filtered colimit of flat R-modules (etale algebras are flat).
-Filtered colimits of flat modules are flat. Spec is faithful on ring maps,
-so the displayed structural-map equality identifies b with this canonical
-colimit algebra map. This works at any geometric point, whether or not it lies
-on a specified divisor; no regularity or Noetherian hypothesis is needed. -/
+Source: Stacks Project, Tags 04HX and 07QM; Tag 0EYG, first reduction paragraph. -/
 theorem strictHenselization_structural_ringHom_flat
     (R : CommRingCat.{u})
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (barY : Spec (.of Ω) ⟶ Spec R)

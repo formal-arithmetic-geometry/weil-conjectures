@@ -26,9 +26,7 @@ import WeilConjectures.SixFunctors.ProEtale.Comparison.Flat
 /-!
 # Compatibility of normalized towers with retained étale origins
 
-Source: blueprint, def-weil-pbc-witness-compatibility, order 1352;
-Stacks Tags 09C9, 09C2, 06YY and 07A4
-(blueprint: def-weil-pbc-witness-compatibility).
+Source: Stacks Tags 09C9, 09C2, 06YY and 07A4.
 
 All finite coefficient categories use their canonical fixed-ring presentation. The
 coefficient realization in definition-small-pro-etale-site--1 identifies them with modules
@@ -688,38 +686,33 @@ private theorem derived_mate_isIso_of_flat
 set_option Elab.async false
 
 /-- The positive quotient at exponent n+1, as a discrete coefficient type.
-Source: Stacks 099L (blueprint: def-weil-pbc-witness-compatibility). -/
+Source: Stacks 099L. -/
 def PbcQuotient {A : Type (u + 1)} [CommRing A]
     (d : Scheme.AdicCoefficientDatum A) (n : ℕ) :=
   A ⧸ d.ideal ^ (n + 1)
 
-/-- The actual quotient ring structure. Source: Stacks 099L
-(blueprint: def-weil-pbc-witness-compatibility). -/
+/-- The actual quotient ring structure. Source: Stacks 099L. -/
 instance {A : Type (u + 1)} [CommRing A]
     (d : Scheme.AdicCoefficientDatum A) (n : ℕ) :
     CommRing (PbcQuotient d n) := inferInstanceAs (CommRing (A ⧸ d.ideal ^ (n + 1)))
 
-/-- Finiteness of the quotient coefficient set. Source: Stacks 099L
-(blueprint: def-weil-pbc-witness-compatibility). -/
+/-- Finiteness of the quotient coefficient set. Source: Stacks 099L. -/
 instance {A : Type (u + 1)} [CommRing A]
     (d : Scheme.AdicCoefficientDatum A) (n : ℕ) :
     Finite (PbcQuotient d n) := d.quotientFinite n
 
-/-- Each quotient coefficient ring has the discrete topology. Source: Stacks 099L
-(blueprint: def-weil-pbc-witness-compatibility). -/
+/-- Each quotient coefficient ring has the discrete topology. Source: Stacks 099L. -/
 instance {A : Type (u + 1)} [CommRing A]
     (d : Scheme.AdicCoefficientDatum A) (n : ℕ) :
     TopologicalSpace (PbcQuotient d n) := ⊥
 
-/-- Discreteness of the quotient topology. Source: Stacks 099L
-(blueprint: def-weil-pbc-witness-compatibility). -/
+/-- Discreteness of the quotient topology. Source: Stacks 099L. -/
 instance {A : Type (u + 1)} [CommRing A]
     (d : Scheme.AdicCoefficientDatum A) (n : ℕ) :
     DiscreteTopology (PbcQuotient d n) := ⟨rfl⟩
 
 /-- The published canonical quotient homomorphism at positive coefficient levels.
-Source: Stacks 099L, blueprint order 1352
-(blueprint: def-weil-pbc-witness-compatibility). -/
+Source: Stacks 099L. -/
 noncomputable def pbcWitnessQuotientMap {A : Type (u + 1)} [CommRing A]
     (d : Scheme.AdicCoefficientDatum A) (b a : ℕ) (h : a ≤ b) :
     PbcQuotient d b →+* PbcQuotient d a :=
@@ -840,19 +833,14 @@ private noncomputable def scalarDerivedAdjunction {R S : Type (u + 1)}
 attribute [local irreducible] scalarDerivedAdjunction scalarExtension scalarAdjunction
 
 /-- Derived restriction of scalars has a left adjoint for an arbitrary coefficient map.
-Source: Stacks 06YY and 06XN (blueprint: def-weil-pbc-witness-compatibility).
-Proof: sheafify sectionwise scalar extension. Its composite with restriction is tensoring
-by the constant coefficient module sheaf, so it preserves quasi-isomorphisms between
-K-flat complexes. The ordinary adjunction therefore descends to the derived categories.
-Exactness identifies derived restriction with the actual induced functor. Neither
-flatness of the coefficient map nor boundedness is required. -/
+Source: Stacks 06YY and 06XN. -/
 @[instance] theorem pbcRestriction_isRightAdjoint {R S : Type (u + 1)}
     [CommRing R] [CommRing S] (φ : R →+* S) :
     (Sheaf.derivedRestrictScalars J φ).IsRightAdjoint := by
   exact (scalarDerivedAdjunction J φ).isRightAdjoint
 
 /-- Derived scalar extension, fixed by the adjunction to actual restriction of scalars.
-Source: Stacks 06YY (blueprint: def-weil-pbc-witness-compatibility). -/
+Source: Stacks 06YY. -/
 noncomputable def pbcFixedScalarExtension {R S : Type (u + 1)} [CommRing R] [CommRing S]
     (φ : R →+* S) :
     DerivedCategory (Sheaf J (ModuleCat.{u + 1} R)) ⥤
@@ -861,7 +849,7 @@ noncomputable def pbcFixedScalarExtension {R S : Type (u + 1)} [CommRing R] [Com
 
 /-- The canonical composition comparison of derived scalar extensions, obtained by
 conjugating the actual composition identification for restrictions of scalars.
-Source: Stacks 06YY (blueprint: def-weil-pbc-witness-compatibility). -/
+Source: Stacks 06YY. -/
 noncomputable def pbcFixedScalarExtensionComp {R S V : Type (u + 1)}
     [CommRing R] [CommRing S] [CommRing V]
     (φ : R →+* S) (ψ : S →+* V) (χ : R →+* V) (h : χ = ψ.comp φ) :
@@ -882,7 +870,7 @@ private instance comparison_integerColimits (R : Type (u + 1)) [CommRing R] :
 
 /-- Restriction commutes with comparison inverse image. This is the conjugate of the
 sectionwise commutation of comparison restriction with coextension of scalars.
-Source: Stacks 03D2 (blueprint: def-weil-pbc-witness-compatibility). -/
+Source: Stacks 03D2. -/
 noncomputable def pbcComparisonRestrict (φ : R →+* S) :
     comparisonUpperStar (ModuleCat.{u + 1} S) T ⋙
         Sheaf.restrictScalars (Scheme.ProEt.topology T) φ ≅
@@ -895,7 +883,7 @@ noncomputable def pbcComparisonRestrict (φ : R →+* S) :
       (comparisonAdjunction (ModuleCat.{u + 1} R) T))).symm (Iso.refl _)).symm
 
 /-- Exact descent of the preceding canonical restriction comparison.
-Source: Stacks 03D2 and 06YY (blueprint: def-weil-pbc-witness-compatibility). -/
+Source: Stacks 03D2 and 06YY. -/
 noncomputable def pbcDerivedComparisonRestrict (φ : R →+* S) :
     (comparisonUpperStar (ModuleCat.{u + 1} S) T).mapDerivedCategory ⋙
         Sheaf.derivedRestrictScalars (Scheme.ProEt.topology T) φ ≅
@@ -914,7 +902,7 @@ noncomputable def pbcDerivedComparisonRestrict (φ : R →+* S) :
         (comparisonUpperStar (ModuleCat.{u + 1} R) T)).symm
 
 /-- The canonical scalar-extension comparison is the mate of the restriction comparison.
-Source: Stacks 07A4 (blueprint: def-weil-pbc-witness-compatibility). -/
+Source: Stacks 07A4. -/
 noncomputable def pbcComparisonReductionMap (φ : R →+* S) :
     (comparisonUpperStar (ModuleCat.{u + 1} R) T).mapDerivedCategory ⋙
         pbcFixedScalarExtension (Scheme.ProEt.topology T) φ ⟶
@@ -1011,13 +999,7 @@ private theorem computed_comparison_mate_isIso (φ : R →+* S) :
     (pbcComparisonRestrict T φ)
 
 /-- The canonical mate is invertible, with no flatness condition on the ring map.
-Source: Stacks 07A4 and 0G7E (blueprint: def-weil-pbc-witness-compatibility).
-Proof: iterated mates and the sectionwise restriction/coextension triangle identify
-the ordinary scalar-extension mate with an isomorphism. The local relation criterion
-shows that comparison inverse image preserves flat resolutions. Derived unit and
-localization identities compute the derived mate on K-flat representatives from the
-ordinary mate. Naturality extends invertibility to every derived object, and uniqueness
-of left adjoints identifies these adjunctions with the fixed choices in the definition. -/
+Source: Stacks 07A4 and 0G7E. -/
 theorem pbcComparisonReductionMap_isIso (φ : R →+* S) :
     IsIso (pbcComparisonReductionMap T φ) := by
   have := computed_comparison_mate_isIso T φ
@@ -1032,7 +1014,7 @@ theorem pbcComparisonReductionMap_isIso (φ : R →+* S) :
     (pbcDerivedComparisonRestrict T φ).inv
 
 /-- The source identification in the witness compatibility equation.
-Source: Stacks 07A4 (blueprint: def-weil-pbc-witness-compatibility). -/
+Source: Stacks 07A4. -/
 noncomputable def pbcComparisonReduction (φ : R →+* S) :
     (comparisonUpperStar (ModuleCat.{u + 1} R) T).mapDerivedCategory ⋙
         pbcFixedScalarExtension (Scheme.ProEt.topology T) φ ≅
@@ -1048,41 +1030,35 @@ namespace AlgebraicGeometry.ProEtale
 variable {A : Type (u + 1)} [CommRing A]
 
 /-- Ambient finite-level pro-étale derived objects, in the canonical fixed-ring
-presentation. Source: blueprint order 1352 (blueprint: def-weil-pbc-witness-compatibility). -/
+presentation. -/
 abbrev PbcWitnessAmbient (T : Scheme.{u}) (d : Scheme.AdicCoefficientDatum A) (n : ℕ) :=
   DerivedCategory (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (PbcQuotient d n)))
 
-/-- Ambient finite-level étale derived objects.
-Source: blueprint order 1352 (blueprint: def-weil-pbc-witness-compatibility). -/
+/-- Ambient finite-level étale derived objects. -/
 abbrev PbcWitnessEtale (T : Scheme.{u}) (d : Scheme.AdicCoefficientDatum A) (n : ℕ) :=
   DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} (PbcQuotient d n)))
 
-/-- Coefficient reduction between consecutive ambient pro-étale levels.
-Source: blueprint order 1352 (blueprint: def-weil-pbc-witness-compatibility). -/
+/-- Coefficient reduction between consecutive ambient pro-étale levels. -/
 noncomputable def pbcWitnessReduction (T : Scheme.{u}) (d : Scheme.AdicCoefficientDatum A) (n : ℕ) :
     PbcWitnessAmbient T d (n + 1) ⥤ PbcWitnessAmbient T d n :=
   pbcFixedScalarExtension (Scheme.ProEt.topology T)
     (pbcWitnessQuotientMap d (n + 1) n (Nat.le_succ n))
 
-/-- Coefficient reduction between consecutive ambient étale levels.
-Source: blueprint order 1352 (blueprint: def-weil-pbc-witness-compatibility). -/
+/-- Coefficient reduction between consecutive ambient étale levels. -/
 noncomputable def pbcWitnessEtaleReduction
     (T : Scheme.{u}) (d : Scheme.AdicCoefficientDatum A) (n : ℕ) :
     PbcWitnessEtale T d (n + 1) ⥤ PbcWitnessEtale T d n :=
   pbcFixedScalarExtension T.smallEtaleTopology (pbcWitnessQuotientMap d (n + 1) n (Nat.le_succ n))
 
 /-- The bounded constructible input property, transported by the recorded canonical
-coefficient realization. Source: blueprint order 1352
-(blueprint: def-weil-pbc-witness-compatibility). -/
+coefficient realization. -/
 def pbcWitnessBoundedConstructible (T : Scheme.{u}) (d : Scheme.AdicCoefficientDatum A) (n : ℕ) :
     ObjectProperty (PbcWitnessAmbient T d n) :=
   fun K ↦ isBoundedConstructibleFiniteCoefficient T (PbcQuotient d n)
     ((finiteCoefficientRealization T (PbcQuotient d n)).mapDerivedCategory.obj K)
 
 /-- Reflect the retained origin isomorphism through the canonical realization. This
-uses the published retained-pair definition without defining another notion of origin.
-Source: blueprint order 1352, displayed witness equation
-(blueprint: def-weil-pbc-witness-compatibility). -/
+uses the published retained-pair definition without defining another notion of origin. -/
 noncomputable def pbcFixedOriginAlpha (T : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ]
     (K : DerivedCategory (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} Λ)))
@@ -1099,8 +1075,7 @@ noncomputable def pbcFixedOriginAlpha (T : Scheme.{u}) (Λ : Type (u + 1))
 /-- A normalized tower with compatible retained origins. Only adjacent normalization
 maps are independent data: longer reductions and their maps are the composites of
 these, read through the canonical scalar-extension composition comparisons. Thus the
-identity and quotient cocycles are built into the encoding.
-Source: blueprint order 1352 (blueprint: def-weil-pbc-witness-compatibility). -/
+identity and quotient cocycles are built into the encoding. -/
 structure PbcWitnessedTower (T : Scheme.{u}) (d : Scheme.AdicCoefficientDatum A) where
   /-- The ambient pro-étale levels. -/
   K : ∀ n : ℕ, PbcWitnessAmbient T d n
@@ -1126,16 +1101,14 @@ structure PbcWitnessedTower (T : Scheme.{u}) (d : Scheme.AdicCoefficientDatum A)
         (pbcWitnessReduction T d n).map (pbcFixedOriginAlpha T (PbcQuotient d (n + 1)) (K (n + 1))
           (boundedBelow (n + 1)) (origin (n + 1))).hom ≫ (theta n).hom
 
-/-- The comparison isomorphism of a retained origin, in the fixed-ring presentation.
-Source: blueprint order 1352 (blueprint: def-weil-pbc-witness-compatibility). -/
+/-- The comparison isomorphism of a retained origin, in the fixed-ring presentation. -/
 noncomputable def PbcWitnessedTower.alpha {T : Scheme.{u}} {d : Scheme.AdicCoefficientDatum A}
     (P : PbcWitnessedTower T d) (n : ℕ) :
     (comparisonUpperStar (ModuleCat.{u + 1} (PbcQuotient d n)) T).mapDerivedCategory.obj
       (P.origin n).L.obj ≅ P.K n :=
   pbcFixedOriginAlpha T (PbcQuotient d n) (P.K n) (P.boundedBelow n) (P.origin n)
 
-/-- A morphism retains both levelwise maps and both normalization compatibilities.
-Source: blueprint order 1352 (blueprint: def-weil-pbc-witness-compatibility). -/
+/-- A morphism retains both levelwise maps and both normalization compatibilities. -/
 @[ext] structure PbcWitnessedTowerHom {T : Scheme.{u}} {d : Scheme.AdicCoefficientDatum A}
     (P Q : PbcWitnessedTower T d) where
   /-- The underlying ambient maps. -/
@@ -1156,10 +1129,7 @@ Source: blueprint order 1352 (blueprint: def-weil-pbc-witness-compatibility). -/
       (comparisonUpperStar (ModuleCat.{u + 1} (PbcQuotient d n)) T).mapDerivedCategory.map
         (v n) ≫ (Q.alpha n).hom
 
-/-- Identity pairs satisfy the normalization and origin squares.
-Source: blueprint order 1352, morphisms of witnessed towers
-(blueprint: def-weil-pbc-witness-compatibility).
-Proof: functors preserve identities; each square reduces to the identity laws. -/
+/-- Identity pairs satisfy the normalization and origin squares. -/
 theorem pbcWitnessedTower_id_laws {T : Scheme.{u}} {d : Scheme.AdicCoefficientDatum A}
     (P : PbcWitnessedTower T d) :
     (∀ n : ℕ, (pbcWitnessReduction T d n).map (𝟙 (P.K (n + 1))) ≫ (P.theta n).hom =
@@ -1178,8 +1148,7 @@ theorem pbcWitnessedTower_id_laws {T : Scheme.{u}} {d : Scheme.AdicCoefficientDa
   · intro n
     simp only [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
 
-/-- The identity has the actual identity map at both kinds of levels.
-Source: blueprint order 1352 (blueprint: def-weil-pbc-witness-compatibility). -/
+/-- The identity has the actual identity map at both kinds of levels. -/
 noncomputable def pbcWitnessedTowerId {T : Scheme.{u}} {d : Scheme.AdicCoefficientDatum A}
     (P : PbcWitnessedTower T d) : PbcWitnessedTowerHom P P where
   u := fun _ ↦ 𝟙 _
@@ -1188,11 +1157,7 @@ noncomputable def pbcWitnessedTowerId {T : Scheme.{u}} {d : Scheme.AdicCoefficie
   beta_naturality := (pbcWitnessedTower_id_laws P).2.1
   origin_naturality := (pbcWitnessedTower_id_laws P).2.2
 
-/-- Composite pairs satisfy the normalization and origin squares.
-Source: blueprint order 1352, morphisms of witnessed towers
-(blueprint: def-weil-pbc-witness-compatibility).
-Proof: expand functoriality on composites and paste the two normalization squares.
-Paste the origin squares using associativity. -/
+/-- Composite pairs satisfy the normalization and origin squares. -/
 theorem pbcWitnessedTower_comp_laws {T : Scheme.{u}} {d : Scheme.AdicCoefficientDatum A}
     {P Q V : PbcWitnessedTower T d} (f : PbcWitnessedTowerHom P Q)
     (g : PbcWitnessedTowerHom Q V) :
@@ -1215,8 +1180,7 @@ theorem pbcWitnessedTower_comp_laws {T : Scheme.{u}} {d : Scheme.AdicCoefficient
     rw [← Category.assoc, f.origin_naturality, Category.assoc,
       g.origin_naturality, ← Category.assoc, ← Functor.map_comp]
 
-/-- Composition has the actual levelwise composites of both maps.
-Source: blueprint order 1352 (blueprint: def-weil-pbc-witness-compatibility). -/
+/-- Composition has the actual levelwise composites of both maps. -/
 noncomputable def pbcWitnessedTowerComp {T : Scheme.{u}} {d : Scheme.AdicCoefficientDatum A}
     {P Q V : PbcWitnessedTower T d} (f : PbcWitnessedTowerHom P Q)
     (g : PbcWitnessedTowerHom Q V) : PbcWitnessedTowerHom P V where
@@ -1226,11 +1190,7 @@ noncomputable def pbcWitnessedTowerComp {T : Scheme.{u}} {d : Scheme.AdicCoeffic
   beta_naturality := (pbcWitnessedTower_comp_laws f g).2.1
   origin_naturality := (pbcWitnessedTower_comp_laws f g).2.2
 
-/-- The specified identity and composition satisfy the category axioms.
-Source: blueprint order 1352, functorial transport of witnessed towers
-(blueprint: def-weil-pbc-witness-compatibility).
-Proof: compare the u and v components, using the left identity, right identity and
-associativity laws in the derived categories. The proof fields agree by proof irrelevance. -/
+/-- The specified identity and composition satisfy the category axioms. -/
 theorem pbcWitnessedTower_category_laws (T : Scheme.{u}) (d : Scheme.AdicCoefficientDatum A) :
     (∀ (P Q : PbcWitnessedTower T d) (f : PbcWitnessedTowerHom P Q),
       pbcWitnessedTowerComp (pbcWitnessedTowerId P) f = f) ∧
@@ -1249,8 +1209,7 @@ theorem pbcWitnessedTower_category_laws (T : Scheme.{u}) (d : Scheme.AdicCoeffic
   · intro P Q V W f g h
     ext n <;> simp [pbcWitnessedTowerComp, Category.assoc]
 
-/-- The category of witnessed normalized towers, with levelwise composition of pairs.
-Source: blueprint order 1352 (blueprint: def-weil-pbc-witness-compatibility). -/
+/-- The category of witnessed normalized towers, with levelwise composition of pairs. -/
 noncomputable instance (T : Scheme.{u}) (d : Scheme.AdicCoefficientDatum A) :
     Category (PbcWitnessedTower T d) where
   Hom := PbcWitnessedTowerHom

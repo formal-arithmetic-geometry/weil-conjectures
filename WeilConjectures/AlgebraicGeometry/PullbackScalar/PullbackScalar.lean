@@ -62,7 +62,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal
 
 The finite scalar calculation from `StrictIntegralScalarPullback`, independent
 of the legacy completion-presentation interface.
-(blueprint: lem-pbc-pullback-scalar-action).
 -/
 
 @[expose] public noncomputable section
@@ -230,13 +229,7 @@ private theorem regular_scalar_eq (X : Scheme.{u})
   rfl
 
 /-- Exact geometric module pullback preserves the action of every point scalar.
-Source: coefficient naturality and the monoidal pullback unit comparison;
-blueprint scalar compatibility (blueprint: lem-pbc-pullback-scalar-action).
-Proof: the coefficient comparison is natural in an endomorphism of the point
-ring. The extension-of-scalars unit identifies the monoidal unit comparison
-with this coefficient comparison. The extension adjunction then gives the
-scalar square on the unit object; monoidal unitor identities give it on every
-module. No uniformizer or integrality assumption is used. -/
+Source: coefficient naturality and the monoidal pullback unit comparison. -/
 theorem scalarOnModules {X Y : Scheme.{u}} (f : X ⟶ Y)
     (d : End (Mod.regular (DerivedNakayama.integerRing l E)))
     (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})

@@ -34,8 +34,7 @@ attribute [local irreducible] HasDerivedCategory.standard pbcDerivedRestrict
   lisseTowerFixedRealization
 
 /-- The ordinary functor whose exact localization is the fixed realization.
-Source: Stacks Tags 03CY and 06YY
-(blueprint: lem-weil-pbc-lisse-tower-scalar-restriction). -/
+Source: Stacks Tags 03CY and 06YY. -/
 def lisseTowerFixedSheafRealization {X Z : Scheme.{u}} (f : Z ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) :=
   sheafCompose (ProEt.topology Z)
@@ -61,8 +60,7 @@ instance lisseTowerFixedSheafRealization_colimits {X Z : Scheme.{u}} (f : Z ⟶ 
   infer_instance
 
 /-- The exact composition comparison; it does not change the fixed realization.
-Source: Stacks Tag 05RU
-(blueprint: lem-weil-pbc-lisse-tower-scalar-restriction). -/
+Source: Stacks Tag 05RU. -/
 def lisseTowerFixedRealizationIso {X Z : Scheme.{u}} (f : Z ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) :
     (lisseTowerFixedSheafRealization f d n).mapDerivedCategory ≅
@@ -71,8 +69,7 @@ def lisseTowerFixedRealizationIso {X Z : Scheme.{u}} (f : Z ⟶ X)
   exact (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- Forget the scalar action after associated-module-sheaf realization.
-Source: Stacks Tag 03CY
-(blueprint: lem-weil-pbc-lisse-tower-scalar-restriction). -/
+Source: Stacks Tag 03CY. -/
 def lisseTowerCoefficientRealizationForgetIso
     {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
     (B R : Type (u + 1)) [CommRing B] [CommRing R] (q : R →+* B)
@@ -93,8 +90,7 @@ def lisseTowerCoefficientRealizationForgetIso
 
 /-- Forgetting the scalar action identifies realization with the original abelian sheaf.
 The identification is the counit of ordinary abelian sheafification.
-Source: Stacks Tag 03CY
-(blueprint: lem-weil-pbc-lisse-tower-scalar-restriction). -/
+Source: Stacks Tag 03CY. -/
 def lisseTowerFixedForgetIso {X Z : Scheme.{u}} (f : Z ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) :
     lisseTowerFixedSheafRealization f d n ⋙ SheafOfModules.toSheaf _ ≅
@@ -104,15 +100,13 @@ def lisseTowerFixedForgetIso {X Z : Scheme.{u}} (f : Z ⟶ X)
     (constantAdicQuotientMap d.ideal n) _ (lisseTowerFiniteScalarMap f d n)
 
 /-- Scalar restriction does not change the underlying abelian sheaf.
-Source: Stacks Tag 03CZ
-(blueprint: lem-weil-pbc-lisse-tower-scalar-restriction). -/
+Source: Stacks Tag 03CZ. -/
 def lisseTowerRestrictForgetIso {Z : Scheme.{u}}
     {R S : Sheaf (ProEt.topology Z) CommRingCat.{u + 1}} (a : R ⟶ S) :
     pbcRestrict a ⋙ SheafOfModules.toSheaf _ ≅ SheafOfModules.toSheaf _ := Iso.refl _
 
 /-- The etale comparison followed by the prescribed fixed realization.
-Source: Stacks Tags 099Z and 03CY
-(blueprint: lem-weil-pbc-lisse-tower-scalar-restriction). -/
+Source: Stacks Tags 099Z and 03CY. -/
 abbrev lisseTowerEtaleRealization {X Z : Scheme.{u}} (f : Z ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) :=
   (ProEtale.comparisonUpperStar
@@ -120,8 +114,7 @@ abbrev lisseTowerEtaleRealization {X Z : Scheme.{u}} (f : Z ⟶ X)
       lisseTowerFixedRealization f d n
 
 /-- The type of the ordinary consecutive scalar square.
-Source: Stacks Tags 03DA and 06YY
-(blueprint: lem-weil-pbc-lisse-tower-scalar-restriction). -/
+Source: Stacks Tags 03DA and 06YY. -/
 abbrev LisseTowerScalarSquare {X Z : Scheme.{u}} (f : Z ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) :=
   sheafCompose (ProEt.topology Z)
@@ -132,8 +125,7 @@ abbrev LisseTowerScalarSquare {X Z : Scheme.{u}} (f : Z ⟶ X)
         (pbcAdicQuotient X d (n + 1) n (Nat.le_succ n)))
 
 /-- Fixed-ring restriction preserves the underlying abelian sheaf.
-Source: Stacks Tag 03DA
-(blueprint: lem-weil-pbc-lisse-tower-scalar-restriction). -/
+Source: Stacks Tag 03DA. -/
 def lisseTowerFixedRestrictForgetIso
     {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
     {R S : Type (u + 1)} [CommRing R] [CommRing S] (q : R →+* S) :
@@ -143,8 +135,7 @@ def lisseTowerFixedRestrictForgetIso
 
 /-- Normalize a scalar square against specified comparisons of underlying objects.
 Keeping this generic prevents reduction of the concrete adic coefficient constructions.
-Source: Stacks Tag 03DA
-(blueprint: lem-weil-pbc-lisse-tower-scalar-restriction). -/
+Source: Stacks Tag 03DA. -/
 @[irreducible] def lisseTowerScalarSquareNormalized
     {C C' D D' E : Type*} [Category C] [Category C'] [Category D] [Category D'] [Category E]
     {Q : C ⥤ C'} {R : D ⥤ D'} {F : C ⥤ D} {F' : C' ⥤ D'}
@@ -156,8 +147,7 @@ Source: Stacks Tag 03DA
       (Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft Q a' ≪≫ q).hom
 
 /-- The square is normalized by the identity on the original fixed sections.
-Source: Stacks Tags 03CY and 03DA
-(blueprint: lem-weil-pbc-lisse-tower-scalar-restriction). -/
+Source: Stacks Tags 03CY and 03DA. -/
 @[irreducible] def LisseTowerScalarSquareSections {X Z : Scheme.{u}} (f : Z ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ)
     (c : LisseTowerScalarSquare f d n) : Prop :=
@@ -168,8 +158,7 @@ Source: Stacks Tags 03CY and 03DA
     (lisseTowerFixedRestrictForgetIso (ProEt.topology Z) (lisseTowerEtaleQuotient d n))
 
 /-- Localize the ordinary square and paste the comparison coefficient mate.
-Source: Stacks Tags 05RU and 03DA
-(blueprint: lem-weil-pbc-lisse-tower-scalar-restriction). -/
+Source: Stacks Tags 05RU and 03DA. -/
 def lisseTowerEtaleScalarIso {X Z : Scheme.{u}} (f : Z ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ)
     (c : LisseTowerScalarSquare f d n) :
@@ -194,8 +183,7 @@ def lisseTowerEtaleScalarIso {X Z : Scheme.{u}} (f : Z ⟶ X)
 
 /-- Reflection of one actual normalized transition on every etale source through
 its section-normalized coefficient square.
-Source: Stacks Tags 06YY, 099Z and 09B1
-(blueprint: lem-weil-pbc-lisse-tower-scalar-restriction). -/
+Source: Stacks Tags 06YY, 099Z and 09B1. -/
 @[irreducible] def LisseTowerScalarSquareReflects {X Z : Scheme.{u}} (f : Z ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ)
     (c : LisseTowerScalarSquare f d n) : Prop :=
@@ -224,8 +212,7 @@ Source: Stacks Tags 06YY, 099Z and 09B1
         (lisseTowerEtaleQuotient d n) δ V)))
 
 /-- Local universality of constant algebraic normalization arrows at this quotient.
-Source: Stacks Tags 06YY and 03ED
-(blueprint: lem-weil-pbc-lisse-tower-scalar-restriction). -/
+Source: Stacks Tags 06YY and 03ED. -/
 @[irreducible] def LisseTowerConstantLocalUniversal (Z : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) : Prop :=
   ∀ (E : DerivedCategory (ModuleCat.{u + 1} (lisseTowerEtaleRing d (n + 1))))
@@ -543,32 +530,7 @@ reflects the universality of an actual normalized transition. This is a single
 coefficient-change statement; it constructs neither a descended arrow nor any
 realization or marking on further pro-etale objects.
 
-Source: Stacks Project, Tags 03CY, 03DA, 06YY, 099Z and 09B1.
-(blueprint: lem-weil-pbc-lisse-tower-scalar-restriction).
-
-Proof: the completion quotient maps commute with consecutive quotient homomorphisms.
-The constant-ring comparisons are natural in that diagram, as are inverse images.
-Consequently the two associated module sheaves in the square are sheafifications of
-the same additive presheaf with the same restricted scalar action. The identity on
-that presheaf extends uniquely to an isomorphism of module sheaves. Its action on the
-sheafification unit is the section equation; local generation proves uniqueness and
-naturality. Restriction of scalars and realization are exact, so exact localization
-produces the displayed derived square. For reflection, the inverse scalar mate of
-this square is invertible: compute extension on flat resolutions, where its component
-is the tensor identity, and use exact sheafification. The same computation applies
-to comparison inverse image and to inverse image along f. The supplied descent equation
-therefore identifies the image of the scalar adjunct of delta with the pulled
-normalization isomorphism of M. Comparison is exact and conservative (its unit is
-invertible on sheaves), and fixed realization is an equivalence, so this adjunct is
-invertible. It is thus a universal scalar arrow. Restriction to each etale source
-has the same invertible scalar mate: on a flat resolution both orders give the same
-sheafified tensor product. The mate unit identity identifies the resulting unit arrow
-with etaleIsomorphismNormalizationArrow, so that arrow is universal as well.
-For a universal algebraic k, exact constant realization is universal by the existing
-normalizationConstantArrow_isUniversal theorem. The same inverse-image tensor
-calculation proves its universality on every etale source. This is the final conjunct.
-No restriction-coherence assertion is included here; that equation is proved separately.
-Empty bases and zero objects are included, with no finite Tor-amplitude assumption. -/
+Source: Stacks Project, Tags 03CY, 03DA, 06YY, 099Z and 09B1. -/
 theorem lisseTower_scalar_restriction {X Z : Scheme.{u}} (f : Z ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) :
     ∃! c : LisseTowerScalarSquare f d n,

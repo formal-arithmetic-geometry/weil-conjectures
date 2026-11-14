@@ -188,7 +188,7 @@ public import WeilConjectures.CategoryTheory.Sites.RGammaDerivedLimit
 
 The canonical constant and continuous coefficients, scalar maps, completeness predicates
 and first-residue etale-origin predicate used by the integral-model theorem.
-Source: the integral-models unit (blueprint: def-sfb-embedded-integral-model-coefficients).
+Source: the integral-models unit.
 -/
 
 @[expose] public noncomputable section
@@ -204,8 +204,7 @@ namespace AlgebraicGeometry.ProEtale.IntegralModelsEmbedded
 attribute [local irreducible] upperStarFromPoint upperStarFromPointComp
   monoidal_upperStarFromPoint monoidal_pointUpperStar oplaxMonoidal_pointUpperStar
 
-/-- The discrete scalar ring on the pro-etale point. Source: Stacks Tag 09C1
-(blueprint: def-sfb-embedded-integral-model-coefficients). -/
+/-- The discrete scalar ring on the pro-etale point. Source: Stacks Tag 09C1. -/
 abbrev discreteSheaf (A : Type) [CommRing A] :
     Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1} :=
   (sheafCompose (coherentTopology Profinite.{u})
@@ -213,24 +212,20 @@ abbrev discreteSheaf (A : Type) [CommRing A] :
     ((constantSheaf (coherentTopology Profinite.{u}) CommRingCat.{u + 1}).obj
       (CommRingCat.of (ULift.{u + 1} A)))
 
-/-- Its underlying condensed abelian ring object. Source: Stacks Tag 09C1
-(blueprint: def-sfb-embedded-integral-model-coefficients). -/
+/-- Its underlying condensed abelian ring object. Source: Stacks Tag 09C1. -/
 abbrev discreteObj (A : Type) [CommRing A] :
     Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1} :=
   (sheafCompose _ (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj (discreteSheaf A)
 
 /-- The commutative ring structure comes from the actual constant commutative ring sheaf.
-Source: Stacks Tag 09C1
-(blueprint: def-sfb-embedded-integral-model-coefficients). -/
+Source: Stacks Tag 09C1. -/
 instance discreteObj_comm (A : Type) [CommRing A] : IsCommMonObj (discreteObj.{u} A) :=
   Sheaf.isCommMonObj_sheafCompose_obj (coherentTopology Profinite.{u})
     (discreteSheaf A) (fun U a b ↦
       @mul_comm (((constantSheaf (coherentTopology Profinite.{u}) CommRingCat.{u + 1}).obj
         (CommRingCat.of (ULift.{u + 1} A))).obj.obj U) _ a b)
 
-/-- The scalar map on the point sends an element to its constant continuous function.
-Source: blueprint integral-models-stacks, the map from the constant sheaf
-(blueprint: def-sfb-embedded-integral-model-coefficients). -/
+/-- The scalar map on the point sends an element to its constant continuous function. -/
 def constantToContinuous (A : Type) [CommRing A] [TopologicalSpace A]
     [IsTopologicalRing A] : discreteSheaf.{u} A ⟶ Profinite.continuousMapRingSheaf.{u} A :=
   ((constantCommuteCompose (coherentTopology Profinite.{u})
@@ -244,8 +239,7 @@ def constantToContinuous (A : Type) [CommRing A] [TopologicalSpace A]
         naturality := fun _ _ _ ↦ RingCat.hom_ext (by ext x; rfl) }
 
 /-- A scalar homomorphism induces the actual map between discrete condensed rings.
-Source: Stacks Tag 09C1
-(blueprint: def-sfb-embedded-integral-model-coefficients). -/
+Source: Stacks Tag 09C1. -/
 def discreteMap {A B : Type} [CommRing A] [CommRing B] (f : A →+* B) :
     discreteObj.{u} A ⟶ discreteObj.{u} B :=
   (sheafCompose _ (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
@@ -255,15 +249,13 @@ def discreteMap {A B : Type} [CommRing A] [CommRing B] (f : A →+* B) :
           (f.comp ULift.ringEquiv.toRingHom)))))
 
 /-- The source and target ring structures are the sheafified scalar structures.
-Source: Stacks Tag 09C1
-(blueprint: def-sfb-embedded-integral-model-coefficients). -/
+Source: Stacks Tag 09C1. -/
 instance discreteMap_mon {A B : Type} [CommRing A] [CommRing B] (f : A →+* B) :
     IsMonHom (discreteMap.{u} f) := inferInstanceAs (IsMonHom
       ((sheafCompose _ (forget₂ RingCat.{u + 1} Ab.{u + 1})).map _))
 
 /-- The actual constant-to-continuous scalar map at the point.
-Source: blueprint integral-models-stacks, Stacks Tag 09C1
-(blueprint: def-sfb-embedded-integral-model-coefficients). -/
+Source: Stacks Tag 09C1. -/
 def scalarPointMap (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ) :
     discreteObj (PadicAlgCl.integers ℓ E.1) ⟶ Profinite.padicIntegersRingObj.{u} ℓ E.1 :=
@@ -272,8 +264,7 @@ def scalarPointMap (ℓ : ℕ) [Fact ℓ.Prime]
     (constantToContinuous (PadicAlgCl.integers ℓ E.1))
 
 /-- The specified scalar map preserves the ring operations.
-Source: Stacks Tag 09C1
-(blueprint: def-sfb-embedded-integral-model-coefficients). -/
+Source: Stacks Tag 09C1. -/
 instance scalarPointMap_mon (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ) : IsMonHom (scalarPointMap.{u} ℓ E) :=
   letI := PadicAlgCl.normedFieldOfAlgebra ℓ E.1
@@ -281,38 +272,32 @@ instance scalarPointMap_mon (ℓ : ℕ) [Fact ℓ.Prime]
     (constantToContinuous (PadicAlgCl.integers ℓ E.1))
 
 /-- Pullback of the canonical constant-to-continuous scalar map.
-Source: blueprint integral-models-stacks
-(blueprint: def-sfb-embedded-integral-model-coefficients).
 -/
 def scalarMap (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (X : Scheme.{u}) := (upperStarFromPoint X).map (scalarPointMap ℓ E)
 
 /-- The pulled-back scalar map is a ring-object map.
-Source: Stacks Tag 09C1
-(blueprint: def-sfb-embedded-integral-model-coefficients). -/
+Source: Stacks Tag 09C1. -/
 instance scalarMap_mon (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (X : Scheme.{u}) : IsMonHom (scalarMap ℓ E X) := inferInstanceAs
   (IsMonHom ((upperStarFromPoint X).map (scalarPointMap ℓ E)))
 
 /-- The actual residue map between constant ring sheaves, at exponent one.
-Source: Stacks Tag 09C1
-(blueprint: def-sfb-embedded-integral-model-coefficients). -/
+Source: Stacks Tag 09C1. -/
 def residueMap (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (π : PadicAlgCl.integers ℓ E.1) (X : Scheme.{u}) :=
   (upperStarFromPoint X).map
     (discreteMap (Ideal.Quotient.mk ((Ideal.span {π}) ^ (0 + 1))))
 
 /-- The residue map retains its ring-object structure.
-Source: Stacks Tag 09C1
-(blueprint: def-sfb-embedded-integral-model-coefficients). -/
+Source: Stacks Tag 09C1. -/
 instance residueMap_mon (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (π : PadicAlgCl.integers ℓ E.1) (X : Scheme.{u}) : IsMonHom (residueMap ℓ E π X) :=
   inferInstanceAs (IsMonHom ((upperStarFromPoint X).map
     (discreteMap (Ideal.Quotient.mk ((Ideal.span {π}) ^ (0 + 1))))))
 
 /-- Exact derived restriction along the canonical scalar map.
-Source: Stacks Tag 09C1
-(blueprint: def-sfb-embedded-integral-model-coefficients). -/
+Source: Stacks Tag 09C1. -/
 abbrev restriction (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (X : Scheme.{u}) :=
   (Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -321,7 +306,7 @@ abbrev restriction (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermedia
 /-- The existing completeness predicate on the equivalent small ringed site.
 Its kernel is the uniformizer ideal, so it is equivalent to the canonical derived
 quotient-tower completion condition; no completeness hypothesis is built into D.
-Source: Stacks Tags 099I and 09C1 (blueprint: def-sfb-embedded-integral-model-coefficients). -/
+Source: Stacks Tags 099I and 09C1. -/
 abbrev complete (X : Scheme.{u})
     {R S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}}
     [MonObj R] [MonObj S] [IsCommMonObj R] [IsCommMonObj S]
@@ -331,20 +316,19 @@ abbrev complete (X : Scheme.{u})
     (IntegralModelsStacks.smallDerivedObject X R K)
 
 /-- Complete completed-coefficient complexes, using their actual first reduction.
-Source: Stacks Tags 099I and 09C1 (blueprint: def-sfb-embedded-integral-model-coefficients). -/
+Source: Stacks Tags 099I and 09C1. -/
 abbrev completedComplete (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (π : PadicAlgCl.integers ℓ E.1) (X : Scheme.{u}) :=
   complete X (completedCoefficientMap X (completedReduction ℓ E π 0)).hom
 
 /-- Complete constant-coefficient complexes, using the constant first residue map.
-Source: Stacks Tags 099I and 09C1 (blueprint: def-sfb-embedded-integral-model-coefficients). -/
+Source: Stacks Tags 099I and 09C1. -/
 abbrev constantComplete (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (π : PadicAlgCl.integers ℓ E.1) (X : Scheme.{u}) :=
   complete X (residueMap ℓ E π X)
 
 /-- Constructible cohomology and finite Tor amplitude of the first constant reduction.
-Source: Stacks Tag 09C1
-(blueprint: def-sfb-embedded-integral-model-coefficients). -/
+Source: Stacks Tag 09C1. -/
 def residueConstructible (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (π : PadicAlgCl.integers ℓ E.1) (X : Scheme.{u}) :
     ObjectProperty (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -358,7 +342,7 @@ def residueConstructible (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteInte
 
 /-- The Stacks constant-coefficient adic constructible category: completeness,
 constructible residue cohomology and finite relative Tor amplitude.
-Source: Stacks Tag 09C1 (blueprint: def-sfb-embedded-integral-model-coefficients). -/
+Source: Stacks Tag 09C1. -/
 def stacksConstructible (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (π : PadicAlgCl.integers ℓ E.1) (X : Scheme.{u}) :
     ObjectProperty (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -381,9 +365,7 @@ attribute [local irreducible] upperStarFromPoint upperStarFromPointComp
 /-- The first completed-coefficient reduction is a bounded constructible complex pulled
 back from the etale site. The scalar action is transported by the specified continuous
 chart, restriction to constant functions, and intrinsic realization. Finiteness and
-discreteness of the actual residue ring are conclusions, not extra hypotheses.
-Source: blueprint integral models, clause (2)
-(blueprint: def-sfb-embedded-integral-model-coefficients). -/
+discreteness of the actual residue ring are conclusions, not extra hypotheses. -/
 def integralModelResidueEtaleOrigin (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ) (π : PadicAlgCl.integers ℓ E.1)
     (K : DerivedCategory.{u + 1} (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})

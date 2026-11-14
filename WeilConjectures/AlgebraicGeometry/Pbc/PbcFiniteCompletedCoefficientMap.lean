@@ -18,9 +18,7 @@ public import Mathlib.Algebra.Field.Shrink
 /-!
 # Finite extension maps of the actual completed PBC coefficient sheaves
 
-Source: blueprint proper-base-change order 1307, the coefficient tensor extension;
-its canonical completed ring map is made explicit by finite quotient projections
-(blueprint: def-weil-pbc-finite-completed-coefficient-map).
+Source: its canonical completed ring map is made explicit by finite quotient projections.
 
 ## Main definitions
 
@@ -39,61 +37,44 @@ attribute [local instance 3000] WeilConjectures.sfAbBijective
 
 variable (l : ℕ) [Fact l.Prime] (Ω : Type c) [Field Ω] [Algebra (Padic l) Ω]
   [IsAlgClosure (Padic l) Ω]
-/-- Finite-dimensional coefficient fields admit canonical models in the scheme universe.
-Source: blueprint order 1308
-(blueprint: def-weil-pbc-finite-completed-coefficient-map). -/
+/-- Finite-dimensional coefficient fields admit canonical models in the scheme universe. -/
 instance pbcFiniteFieldSmall (E : Padic.FiniteCoefficientFields l Ω) : Small.{u} E.val :=
   Module.Finite.small.{u} (Padic l) E.val
 
-/-- The coefficient field transported through the canonical shrink equivalence.
-Source: blueprint order 1308
-(blueprint: def-weil-pbc-finite-completed-coefficient-map). -/
+/-- The coefficient field transported through the canonical shrink equivalence. -/
 def pbcFiniteField (E : Padic.FiniteCoefficientFields l Ω) : Type u := Shrink.{u} E.val
 
-/-- The single field structure transported to the canonical small coefficient model.
-Source: blueprint order 1308
-(blueprint: def-weil-pbc-finite-completed-coefficient-map). -/
+/-- The single field structure transported to the canonical small coefficient model. -/
 instance pbcFiniteFieldField (E : Padic.FiniteCoefficientFields l Ω) :
     Field (pbcFiniteField.{u} l Ω E) := inferInstanceAs (Field (Shrink.{u} E.val))
 
-/-- The base-field algebra on the canonical small coefficient model.
-Source: blueprint order 1308
-(blueprint: def-weil-pbc-finite-completed-coefficient-map). -/
+/-- The base-field algebra on the canonical small coefficient model. -/
 instance pbcFiniteFieldAlgebra (E : Padic.FiniteCoefficientFields l Ω) :
     Algebra (Padic l) (pbcFiniteField.{u} l Ω E) :=
   inferInstanceAs (Algebra (Padic l) (Shrink.{u} E.val))
 
-/-- Finiteness is unchanged by the canonical coefficient transport.
-Source: blueprint order 1308
-(blueprint: def-weil-pbc-finite-completed-coefficient-map). -/
+/-- Finiteness is unchanged by the canonical coefficient transport. -/
 instance pbcFiniteFieldFinite (E : Padic.FiniteCoefficientFields l Ω) :
     FiniteDimensional (Padic l) (pbcFiniteField.{u} l Ω E) :=
   Module.Finite.equiv (Shrink.algEquiv (Padic l) E.val).symm.toLinearEquiv
 
-/-- The existing adic datum on the canonically transported finite coefficient field.
-Source: blueprint order 1308
-(blueprint: def-weil-pbc-finite-completed-coefficient-map). -/
+/-- The existing adic datum on the canonically transported finite coefficient field. -/
 abbrev pbcStageDatum (E : Padic.FiniteCoefficientFields l Ω) :=
   pbcIntegralDatum l (pbcFiniteField.{u} l Ω E)
 
-/-- The existing uniformizer on the canonically transported coefficient field.
-Source: blueprint order 1308
-(blueprint: def-weil-pbc-finite-completed-coefficient-map). -/
+/-- The existing uniformizer on the canonically transported coefficient field. -/
 abbrev pbcStageUniformizer (E : Padic.FiniteCoefficientFields l Ω) :=
   pbcUniformizer l (pbcFiniteField.{u} l Ω E)
 
 variable {E F : Padic.FiniteCoefficientFields l Ω}
 
-/-- The actual intermediate-field inclusion conjugated by the coefficient equivalences.
-Source: blueprint order 1308
-(blueprint: def-weil-pbc-finite-completed-coefficient-map). -/
+/-- The actual intermediate-field inclusion conjugated by the coefficient equivalences. -/
 def pbcFiniteFieldInclusion (h : E ≤ F) :
     pbcFiniteField.{u} l Ω E →ₐ[Padic l] pbcFiniteField.{u} l Ω F :=
   (Shrink.algEquiv (Padic l) F.val).symm.toAlgHom.comp
     ((IntermediateField.inclusion h).comp (Shrink.algEquiv (Padic l) E.val).toAlgHom)
 
-/-- The actual inclusion of integer rings, with the coefficient-size lift.
-Source: blueprint order 1307 (blueprint: def-weil-pbc-finite-completed-coefficient-map). -/
+/-- The actual inclusion of integer rings, with the coefficient-size lift. -/
 def pbcIntegerInclusion (h : E ≤ F) :
     PbcIntegralRing l (pbcFiniteField.{u} l Ω E) →+*
       PbcIntegralRing l (pbcFiniteField.{u} l Ω F) :=
@@ -104,11 +85,7 @@ def pbcIntegerInclusion (h : E ≤ F) :
 
 -- Keep the existing algebraic-closure parameter in the public signature.
 set_option linter.unusedSectionVars false in
-/-- Integer inclusion preserves every power of the maximal ideal.
-Source: blueprint order 1307 (blueprint: def-weil-pbc-finite-completed-coefficient-map).
-Proof: valuation preservation sends the source maximal ideal into the target one.
-The chosen uniformizers generate these ideals. Products of n such elements map
-to products of n target-ideal elements, giving the asserted inclusion. -/
+/-- Integer inclusion preserves every power of the maximal ideal. -/
 theorem pbcIntegerInclusion_ideal (h : E ≤ F) (n : ℕ) :
     (pbcStageDatum.{u} l Ω E).ideal ^ (n + 1) ≤
       Ideal.comap (pbcIntegerInclusion l Ω h) ((pbcStageDatum.{u} l Ω F).ideal ^ (n + 1)) := by
@@ -138,8 +115,7 @@ theorem pbcIntegerInclusion_ideal (h : E ≤ F) (n : ℕ) :
   rw [map_pow] at hy'
   exact hy'
 
-/-- The quotient-ring map induced by integer inclusion at positive level n+1.
-Source: blueprint order 1307 (blueprint: def-weil-pbc-finite-completed-coefficient-map). -/
+/-- The quotient-ring map induced by integer inclusion at positive level n+1. -/
 def pbcQuotientInclusion (h : E ≤ F) (n : ℕ) :=
   Ideal.Quotient.lift ((pbcStageDatum.{u} l Ω E).ideal ^ (n + 1))
     ((Ideal.Quotient.mk ((pbcStageDatum.{u} l Ω F).ideal ^ (n + 1))).comp
@@ -150,8 +126,7 @@ def pbcQuotientInclusion (h : E ≤ F) (n : ℕ) :=
 variable (T : Scheme.{u})
 
 /-- The coefficient map on the actual finite coefficient sheaves, through their
-constant-section-normalized identifications.
-Source: blueprint order 1307 (blueprint: def-weil-pbc-finite-completed-coefficient-map). -/
+constant-section-normalized identifications. -/
 def pbcFiniteScalarMap (h : E ≤ F) (n : ℕ) :
     (pbcAdicRings T (pbcStageDatum.{u} l Ω E)).obj (op n) ⟶
       (pbcAdicRings T (pbcStageDatum.{u} l Ω F)).obj (op n) :=
@@ -160,11 +135,7 @@ def pbcFiniteScalarMap (h : E ≤ F) (n : ℕ) :
       (CommRingCat.ofHom (pbcQuotientInclusion l Ω h n)) ≫
     (pbcLevelConstantComparison T (pbcStageDatum.{u} l Ω F) n).hom
 
-/-- The finite projections determine a unique map of completed coefficient sheaves.
-Source: blueprint order 1307 (blueprint: def-weil-pbc-finite-completed-coefficient-map).
-Proof: inclusion commutes with every quotient map, so the finite components form
-a cone. The inverse limit supplies its unique lift. This specifies the map on
-all sections, including nonconstant continuous coefficient sections. -/
+/-- The finite projections determine a unique map of completed coefficient sheaves. -/
 theorem pbcCompletedScalarMap_exists (h : E ≤ F) :
     ∃! c : pbcAdicCompletion T (pbcStageDatum.{u} l Ω E) ⟶
         pbcAdicCompletion T (pbcStageDatum.{u} l Ω F),
@@ -192,15 +163,13 @@ theorem pbcCompletedScalarMap_exists (h : E ≤ F) :
     intro n
     exact (hc n.unop).trans (limMap_π s n).symm
 
-/-- The unique map into the completed coefficient ring fixed at every finite level.
-Source: blueprint order 1307 (blueprint: def-weil-pbc-finite-completed-coefficient-map). -/
+/-- The unique map into the completed coefficient ring fixed at every finite level. -/
 def pbcCompletedScalarMap (h : E ≤ F) :
     pbcAdicCompletion T (pbcStageDatum.{u} l Ω E) ⟶
       pbcAdicCompletion T (pbcStageDatum.{u} l Ω F) :=
   (pbcCompletedScalarMap_exists l Ω T h).exists.choose
 
-/-- The actual ambient K-flat derived tensor extension.
-Source: blueprint order 1307 (blueprint: def-weil-pbc-finite-completed-coefficient-map). -/
+/-- The actual ambient K-flat derived tensor extension. -/
 abbrev pbcAmbientScalarExtension (h : E ≤ F) :
     PbcCompletedDerived T (pbcStageDatum.{u} l Ω E) ⥤
       PbcCompletedDerived T (pbcStageDatum.{u} l Ω F) :=

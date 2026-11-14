@@ -51,9 +51,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 import all WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionDualLocalIso
 
 /-! # Compatible local bases of the root tower
-
-Source: coefficient-twist blueprint, proof steps 1--4.
-(blueprint: lem-pur-twist-root-local-models)
 -/
 
 @[expose] public section
@@ -737,29 +734,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- Finite roots have étale local bases, and compatible lifts on weakly contractible
 covers trivialize the entire inverse limit and identify its finite quotients.
 
-Source: Stacks Project, Tags 03PK and 03RV; Bhatt--Scholze, Sections 6.5 and 6.8;
-coefficient-twist blueprint, proof steps 1--4.
-(blueprint: lem-pur-twist-root-local-models)
-
-Proof: invertibility in every residue field makes l a unit in global sections.
-Pull back the universal primitive-root scheme along the global-section morphism;
-its universal root gives an additive cyclic basis. The concrete kernel sheaf and
-the source root presheaf agree by their canonical sections descriptions. Dense
-slice localization transports this basis to the stated slice site. Local scalar
-lifts are integer classes, so additive maps between these finite modules are linear.
-The geometric-point fiber functor carries each such finite local model to a finite group.
-For the completed line, use the proved compatible primitive-root diagram basis on
-one pro-etale cover. Compare its positive-index root and residue diagrams with the
-actual root and coefficient towers, including the specified transitions. Take their
-sectionwise limits. The resulting additive isomorphism respects every projection;
-its finite components are linear, so the coordinatewise action specification and
-joint injectivity of projections make the limit isomorphism linear. Extend the
-actual root projection by the scalar-extension universal property. In each local
-basis its pure-tensor formula identifies it with the scalar extension of the unit
-basis followed by the inverse finite basis. Thus it is locally, and hence globally,
-an isomorphism. No separate completion-quotient calculation is needed.
-All assertions allow the empty base: the cover and its section calculations remain
-valid, and there are no geometric points there. -/
+Source: Stacks Project, Tags 03PK and 03RV; Bhatt--Scholze, Sections 6.5 and 6.8 -/
 theorem purTwistRootLocalModels (S : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     [∀ x : S, Invertible (l : S.residueField x)] :
     (∀ n : ℕ,

@@ -36,27 +36,7 @@ namespace AlgebraicGeometry.Scheme
 has a source open neighbourhood on which the normalization map is etale,
 when the local base has dimension at least two.
 
-Source: Stacks Project, Tag 0EYJ, final local computation; Tags 0EY6 and 0EY9.
-(blueprint: lem-sbc-stalk-normalization-depth-two-section-source)
-
-Proof: Localize at s; minimality identifies the inverse image of U with the
-punctured spectrum of the normal Noetherian local domain A. Normality and
-the dimension bound give depth(A) at least two. Smoothness gives flatness,
-and the flat local depth formula gives depth at least two along the closed
-fibre. The normal finite algebra n is therefore the unique depth-two
-extension of the punctured finite etale algebra (Tag 0EY6). Extend the
-G-action by normal generic full faithfulness. The rational generic section
-point and its translates split the generic section fibre; the same full
-faithfulness splits the fibre on the punctured section. Take a smooth affine
-chart B around the closed section point. Its section-ideal completion is
-A[[x₁,...,x_d]], flat over B. If d is positive, Tag 0EY9 extends the splitting
-from the punctured section to the punctured completion. If d is zero the
-section is the completed chart itself. Uniqueness and flat base change of
-the depth-two extension make the completed finite algebra split. Completion
-is faithfully flat at the section point, so etaleness descends to every
-point of n above it. Openness of the etale locus gives the required source
-opens. Componentwise the stabilizers have order dividing |G|; an empty
-fibre gives a vacuous assertion. -/
+Source: Stacks Project, Tag 0EYJ, final local computation; Tags 0EY6 and 0EY9 -/
 theorem GaloisCover.stalk_normalization_depth_two_section_source {S C : Scheme.{u}}
     [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]

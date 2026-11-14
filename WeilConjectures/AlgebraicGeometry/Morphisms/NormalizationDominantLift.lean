@@ -65,25 +65,7 @@ private theorem normalization_generic_iso (Z : Scheme.{u}) [IsIntegral Z] :
 
 /-- A dominant map from a normal integral scheme has a unique dominant lift to normalization.
 
-Source: Stacks Project, Tag 035Q, part (4).
-(blueprint: lem-sbc-normalization-dominant-lift)
-
-Proof: Dominance sends the generic point of Y to that of Z. Stalk-map naturality
-therefore gives m:Spec K(Y) -> Spec K(Z) over g. Let a be m followed by the canonical
-map Spec K(Z) -> Z.normalization. The absolute normalization of Y is Y, because its
-stalks are integrally closed: apply the normalization-over-normal-locus theorem at
-the top open. Lift (a,jY) to the pullback of Z.fromNormalization along g, whose
-projection to Y is integral. The universal property of relative normalization applied
-to jY gives a map Y.normalization to this pullback. Precompose with the inverse of
-Y.fromNormalization and take its first projection. The normalization equations give
-f;Z.fromNormalization=g and jY;f=a. Maps of field spectra are dominant, so a and f
-are dominant. For another dominant lift, its generic restriction factors through the
-generic point of Z.normalization. The existing generic-field isomorphism identifies
-this point with Spec K(Z). Postcomposition into Z agrees for both lifts, and the
-generic-point inclusion Spec K(Z) -> Z is a monomorphism, so the generic restrictions
-agree. The integral morphism Z.fromNormalization is separated. The dominant jY is
-scheme-theoretically dominant since Y is reduced, so separated-target rigidity proves
-the lifts equal. No compactness, Noetherian, or finite-type hypothesis is used. -/
+Source: Stacks Project, Tag 035Q, part (4). -/
 theorem existsUnique_lift_normalization_of_dominant {Y Z : Scheme.{u}}
     [IsIntegral Y] [IsIntegral Z]
     (hY : ∀ y : Y, IsIntegrallyClosed (Y.presheaf.stalk y))

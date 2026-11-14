@@ -165,12 +165,7 @@ private theorem evaluatedTensorRestriction_right
     (he U 1 x)).trans hg
 
 /-- The right composite in tensor evaluation naturality has its generator value.
-Source: Stacks Project, Section 03EK, restriction of pure tensors.
-(blueprint: lem-sp-scalar-extension-evaluation-restriction-right).
-
-Proof: restriction sends 1 tensor x to 1 tensor the restricted section x.
-Apply the given pure-tensor formula for the sectionwise comparison before
-or after restriction, respectively. Evaluation uses the same raw restriction. -/
+Source: Stacks Project, Section 03EK, restriction of pure tensors. -/
 theorem scalarExtension_evaluation_restriction_right
     {U V : Cᵒᵖ} (f : U ⟶ V)
     (x : ((evaluation.{c, v, max c v r} J B τ n).obj M).val.obj U) :

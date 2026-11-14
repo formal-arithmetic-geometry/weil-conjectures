@@ -17,9 +17,7 @@ import WeilConjectures.Compactification.CompactificationCategory
 
 /-! # Comparison of native Weil compactification models
 
-Source: Stacks Project, Tags 0F7I and 0F7J, compactification calculations, adapted to the
-native coefficient categories of `def-sf-native-weil-derived-framework`.
-(blueprint: lem-sf-native-weil-compactification-model-comparison)
+Source: Stacks Project, Tags 0F7I and 0F7J, compactification calculations.
 
 The auxiliary predicate spells out the refinement chain, using the canonical base structures
 of the compactifications. It introduces no new operations or chosen comparison maps.
@@ -39,8 +37,7 @@ namespace AlgebraicGeometry
 The local base structures are exactly `Compactification.over`, induced by the proper legs.
 All functors and all isomorphisms are in the actual native equivariant derived categories.
 
-Source: Stacks Project, Tag 0F7I, displayed calculation along a refinement; native adaptation
-(blueprint: lem-sf-native-weil-compactification-model-comparison).
+Source: Stacks Project, Tag 0F7I, displayed calculation along a refinement; native adaptation.
 -/
 noncomputable def nativeWeilCompactificationRefinementComparisons
     (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
@@ -84,26 +81,7 @@ noncomputable def nativeWeilCompactificationRefinementComparisons
 isomorphic, and every model compares with the framework's chosen model. Only existence is
 asserted, without a cocycle or independence assertion.
 
-Source: Stacks Project, Tags 0F7I and 0F7J, compactification calculations; native adaptation
-(blueprint: lem-sf-native-weil-compactification-model-comparison).
-
-Proof:
-1. Proper legs are finite type, so composing with the structure map of Y makes the ambient
-schemes finite type (`lem-sfb-finite-type-composition-base-change`). The native framework
-and `lem-sf-native-weil-basic-comparisons` therefore apply, without absolute separatedness.
-2. Apply `lem-sf-native-weil-open-proper-interchange` to the square (j1, id, v, j2).
-The identity is proper; the square need not be Cartesian. Compose with the identity
-comparison of `lem-sf-native-weil-basic-comparisons` to obtain J2 isomorphic to Rv_* J1.
-3. Whisker by Rr2_* and use the inverse composite-direct-image comparison of the same
-basic-comparisons node. The equation v r2 = r1 identifies the last functor with F_c1.
-Each arrow and its inverse is native and natural.
-4. `remark-base-change-compactification--1` supplies a common proper refinement d of any
-two models. Composing F_c2 -> F_d with the inverse F_c1 -> F_d gives the comparison.
-The chosen model is admissible too: its proper leg is separated and h is quasi-compact,
-so its open leg is quasi-compact by `lemma-nagata-open-immersion-qc-over-separated-target`.
-Use `def-weil-quasi-separated-morphism` for the proper leg's quasi-separatedness.
-The framework defines its chosen compact-support functor by precisely that compactification.
-Composing and inverting native isomorphisms retains equivariance and asserts no coherence.
+Source: Stacks Project, Tags 0F7I and 0F7J, compactification calculations; native adaptation.
 -/
 theorem nativeWeilCompactificationModelComparison
     (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]

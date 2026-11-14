@@ -37,9 +37,7 @@ import all WeilConjectures.Algebra.Homology.CanonicalTensorPullbackOfUniverses.R
 
 /-! # Computing the projection mate on mixed tensor representatives
 
-Source: Stacks Project, Cohomology on Sites, Tags 07A4, 07A6 and 0B56;
-blueprint order 1267, proof step 5.
-(blueprint: lem-weil-pbc-proetale-mixed-projection-mate).
+Source: Stacks Project, Cohomology on Sites, Tags 07A4, 07A6 and 0B56.
 -/
 
 @[expose] public noncomputable section
@@ -501,8 +499,7 @@ attribute [local irreducible] proEtaleRingModulePullback proEtaleRingModuleAdjun
   proEtaleRingDerivedAdjunction
 
 /-- The ordinary signed-total projection mate, with its explicit complex type.
-Source: Stacks 07A6 and 0B56
-(blueprint: lem-weil-pbc-proetale-mixed-projection-mate). -/
+Source: Stacks 07A6 and 0B56. -/
 def proEtaleProjectionTotal
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
@@ -539,22 +536,7 @@ set_option maxHeartbeats 200000 in
 representatives. Only the coefficient complex is required to be flat and K-flat;
 no finite-projective splitting or inverse projection map is involved.
 
-Source: literature/stacks-project/sites-cohomology.tex, Tags 07A4, 07A6 and 0B56;
-blueprint order 1267, proof step 5
-(blueprint: lem-weil-pbc-proetale-mixed-projection-mate).
-
-Proof: choose a flat K-flat resolution P of the ordinary direct image of I. The
-mixed tensor characterization computes the source comparison after tensoring this
-resolution with F. The canonical tensor-pullback representative square computes
-its pullback on P and F. Naturality of the mixed comparison identifies the ensuing
-map with tensor of the ordinary counit and the identity of the pulled-back F.
-The representative normalization of the derived adjunction identifies the derived
-counit with this ordinary counit. Transpose the resulting equality under the
-derived adjunction. The transpose of the ordinary total counit is the signed total
-mate. Naturality of the right-derived unit gives the right side of the equation.
-Cancel the localization of the tensor-resolution quasi-isomorphism, which is an
-isomorphism because F is K-flat. This proves the formula for every resolution and
-hence for the uniquely normalized mixed tensor comparisons. -/
+Source: Tags 07A4, 07A6 and 0B56. -/
 theorem proEtaleMixedProjectionMate
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})

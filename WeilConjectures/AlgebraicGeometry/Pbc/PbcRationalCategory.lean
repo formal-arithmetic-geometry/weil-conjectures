@@ -25,8 +25,6 @@ public import Mathlib.Topology.KrullDimension
 /-!
 # Raw rationalization of the integral constructible category
 
-Source: blueprint, proper base change, order 1305
-(blueprint: def-weil-pbc-rational-category).
 The constant sections act on completed-coefficient modules. Scalar localization
 retains the integral objects and tensors their Hom modules; no Karoubi envelope occurs.
 -/
@@ -41,25 +39,20 @@ variable (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
 variable (d : AdicCoefficientDatum A)
 
 /-- The completed coefficient map from constant scalars, through its canonical limit
-comparison. Source: blueprint order 1305 (blueprint: def-weil-pbc-rational-category). -/
+comparison. -/
 def pbcCompletedScalar :=
   adicDatumScalar T
     { toCompleteCoefficientDatum := d.toCompleteCoefficientDatum,
       quotientFinite := d.quotientFinite } ≫ (pbcCompletedComparison T d).hom
 
-/-- Constant scalar sections of the completed ring. Source: blueprint order 1305
-(blueprint: def-weil-pbc-rational-category). -/
+/-- Constant scalar sections of the completed ring. -/
 def pbcCompletedSection (U : T.ProEtᵒᵖ) :
     A →+* (pbcAdicCompletion T d).obj.obj U :=
   ((pbcCompletedScalar T d).hom.app U).hom.comp
     (((toSheafify (ProEt.topology T)
       ((Functor.const T.ProEtᵒᵖ).obj (CommRingCat.of A))).app U).hom)
 
-/-- Constant completed sections commute with every restriction.
-Source: blueprint order 1305 (blueprint: def-weil-pbc-rational-category).
-Proof: compose the naturality of the constant-presheaf sheafification unit with
-naturality of the constant-to-completion map and the normalized limit comparison.
-Evaluating their composite on a gives the displayed equation. -/
+/-- Constant completed sections commute with every restriction. -/
 theorem pbcCompletedSection_naturality (U V : T.ProEtᵒᵖ) (f : U ⟶ V) (a : A) :
     (pbcAdicCompletion T d).obj.map f (pbcCompletedSection T d U a) =
       pbcCompletedSection T d V a := by
@@ -69,7 +62,7 @@ theorem pbcCompletedSection_naturality (U V : T.ProEtᵒᵖ) (f : U ⟶ V) (a : 
   exact (ConcreteCategory.congr_hom (s.naturality f) a).symm
 
 /-- The scalar action factors through the compatible global sections of the completed
-ring. Source: blueprint order 1305 (blueprint: def-weil-pbc-rational-category). -/
+ring. -/
 def pbcCompletedScalarSections :
     A →+* RingCat.sectionsSubring
       ((pbcAdicCompletion T d).obj ⋙ forget₂ CommRingCat RingCat) where
@@ -80,8 +73,7 @@ def pbcCompletedScalarSections :
   map_zero' := by ext U; exact (pbcCompletedSection T d U).map_zero
   map_add' a b := by ext U; exact (pbcCompletedSection T d U).map_add a b
 
-/-- Completed modules are A-linear by their actual constant-section action.
-Source: blueprint order 1305 (blueprint: def-weil-pbc-rational-category). -/
+/-- Completed modules are A-linear by their actual constant-section action. -/
 instance pbcCompletedModulesLinear : Linear A (pbcModules T (pbcAdicCompletion T d)) :=
   letI : Linear (RingCat.sectionsSubring
       ((pbcAdicCompletion T d).obj ⋙ forget₂ CommRingCat RingCat))
@@ -94,23 +86,19 @@ instance pbcCompletedModulesLinear : Linear A (pbcModules T (pbcAdicCompletion T
     comp_smul := fun M N P f a g ↦
       Linear.comp_smul M N P f (pbcCompletedScalarSections T d a) g }
 
-/-- The inherited A-linearity on the ambient derived category. Source: blueprint order
-1305 (blueprint: def-weil-pbc-rational-category). -/
+/-- The inherited A-linearity on the ambient derived category. -/
 instance pbcCompletedDerivedLinear : Linear A (PbcCompletedDerived T d) := inferInstance
 
-/-- The full integral subcategory inherits precisely the ambient scalar action.
-Source: blueprint order 1305 (blueprint: def-weil-pbc-rational-category). -/
+/-- The full integral subcategory inherits precisely the ambient scalar action. -/
 instance pbcIntegralLinear : Linear A (PbcBoundedConstructibleComplete T d) := inferInstance
 
 /-- Raw scalar localization at a uniformizer; the generic definition's Hom modules are
 Localization.Away p tensor the integral Hom modules. For the finite p-adic integer
-ring this localization is canonically E by integers_localization_uniformizer.
-Source: blueprint order 1305 (blueprint: def-weil-pbc-rational-category). -/
+ring this localization is canonically E by integers_localization_uniformizer. -/
 abbrev PbcRationalCategory (p : A) :=
   ScalarLocalization A (PbcBoundedConstructibleComplete T d) p
 
-/-- Identity on integral objects and tensor with one on their morphisms.
-Source: blueprint order 1305 (blueprint: def-weil-pbc-rational-category). -/
+/-- Identity on integral objects and tensor with one on their morphisms. -/
 abbrev pbcRationalization (p : A) :
     PbcBoundedConstructibleComplete T d ⥤ PbcRationalCategory T d p :=
   ScalarLocalization.localization A (PbcBoundedConstructibleComplete T d) p
@@ -119,8 +107,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 variable [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- The finite-extension rational category on the stipulated base. The hypotheses
-restrict the scope of this notation; the category itself is the raw localization.
-Source: blueprint order 1305 (blueprint: def-weil-pbc-rational-category). -/
+restrict the scope of this notation; the category itself is the raw localization. -/
 abbrev PbcRationalDerivedCategory (T : Scheme.{u}) [IsNoetherian T]
     (_hdim : ∃ m : ℕ, topologicalKrullDim T ≤ m)
     (_hl : ∀ t : T, IsUnit (l : T.presheaf.stalk t)) :=

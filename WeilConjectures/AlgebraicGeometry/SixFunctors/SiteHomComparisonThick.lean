@@ -32,9 +32,7 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMapProjection
 
 /-! # Exactness and thick locus of the specified site Hom comparison
 
-Source: blueprint, proposition-six-operations-dctf--15, proof paragraphs 1--2;
-Stacks Project, Tags 08J9, 08JB and 08JC
-(blueprint: lem-sf-site-hom-comparison-thick).
+Source: Stacks Project, Tags 08J9, 08JB and 08JC.
 
 The map is the recorded evaluation transpose. The shift structures below are normalized
 by the adjunction mate of total-tensor shifts and the signed opposite-category convention.
@@ -65,7 +63,7 @@ attribute [local irreducible] Functor.mapDerivedCategory
 
 /-- Derive the ordinary tensor comparison and transport it to the exact termwise
 functor. This packages the existing construction without selecting new tensor data.
-Source: Stacks 07A4 (blueprint: lem-sf-site-hom-comparison-thick). -/
+Source: Stacks 07A4. -/
 @[irreducible] def siteHomExactDerivedMonoidal
     {C : Type d} [Category.{u + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C]
@@ -82,8 +80,7 @@ Source: Stacks 07A4 (blueprint: lem-sf-site-hom-comparison-thick). -/
 
 /-- The complete exactness and thick-locus assertion for a specified closed-category
 comparison. This is a transparent proposition, not an extra hypothesis or chosen map.
-It uses the canonical signed source shifts on both rows. Source: Stacks 08JC
-(blueprint: lem-sf-site-hom-comparison-thick). -/
+It uses the canonical signed source shifts on both rows. Source: Stacks 08JC. -/
 @[irreducible] def siteHomExactThickAssertion
     {C : Type d} [Category.{v} C] [Preadditive C] [HasZeroObject C] [HasShift C ℤ]
     [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
@@ -211,8 +208,7 @@ private theorem exactThickAssertion_of_exactFunctor
 
 /-- Specialize the transparent assertion to the actual site evaluation comparison.
 Abstracting the coefficient category keeps the canonical structures compact in kernel
-checking. Source: blueprint comparison proof, paragraph 2
-(blueprint: lem-sf-site-hom-comparison-thick). -/
+checking. -/
 @[irreducible] def siteHomSiteExactThick
     (B : Type (u + 2)) [Category.{u + 1} B] [Abelian B]
     [IsGrothendieckAbelian.{u + 1} B] [MonoidalCategory B]
@@ -272,38 +268,19 @@ private theorem siteHomExactThick_generic (V : Type (u + 2)) [Category.{u + 1} V
 
 variable (A : Type (u + 1)) [CommRing A] [Finite A] (X : Scheme.{u})
 
-/-- The first contravariant functor F RHom(-,M), using the recorded Hom and pullback.
-Source: blueprint comparison proof, paragraph 2
-(blueprint: lem-sf-site-hom-comparison-thick). -/
+/-- The first contravariant functor F RHom(-,M), using the recorded Hom and pullback. -/
 abbrev siteHomComparisonSource (M : Etale.DerivedCategoryModule A X) :=
   (Etale.derivedHom (ModuleCat.{u + 1} A) X).flip.obj M ⋙
     (comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory
 
-/-- The isomorphism locus of the specified evaluation transpose, not of chosen isomorphisms.
-Source: blueprint comparison proof, paragraph 2
-(blueprint: lem-sf-site-hom-comparison-thick). -/
+/-- The isomorphism locus of the specified evaluation transpose, not of chosen isomorphisms. -/
 def siteHomComparisonLocus (M : Etale.DerivedCategoryModule A X) :
     ObjectProperty (Etale.DerivedCategoryModule A X) :=
   fun K ↦ IsIso (siteComparisonEvaluationHom (ModuleCat.{u + 1} A) X K M)
 
 /-- Exactness, signed shift compatibility, the full reversed triangle morphism and thick
 closure for the specified evaluation comparison, for each arbitrary fixed target M.
-Source: blueprint comparison proof, paragraph 2; Stacks 08J9, 08JC
-(blueprint: lem-sf-site-hom-comparison-thick).
-
-Proof (node steps 1--6): comparison pullback is exact, and Hom into a K-injective target
-is exact contravariantly. Represent M by I and resolve FI → J by a K-injective J.
-On each source complex E the map is F Hom(E,I) → Hom(FE,FI) → Hom(FE,J).
-Naturality descends through inverted quasi-isomorphisms. On K-flat E and a K-flat
-resolution of Hom(E,I), uncurrying on every total-tensor summand identifies this map
-with the existing evaluation transpose; replace arbitrary E by a K-flat resolution.
-Signed reindexing commutes with both arrows. The correction n(n+1)/2 is the same
-on both rows (lem-coef-signed-derived-internal-hom-exact), so the resulting exact
-structures have precisely the displayed normalizations. Naturality at the boundary
-and this shift equation give all three triangle squares. Triangle two-of-three gives
-cone closure. Zero, isomorphisms, shifts and finite sums follow by exactness and
-additivity. For a retract i:L → K, p:K → L and a=beta_K invertible, the inverse of
-beta_L is B(i) a⁻¹ C(p); naturality and pi=1 prove both inverse identities. -/
+Source: Stacks 08J9, 08JC. -/
 theorem siteHomComparison_exact_thick (M : Etale.DerivedCategoryModule A X) :
     siteHomSiteExactThick (ModuleCat.{u + 1} A) X M := by
   exact siteHomExactThick_generic (ModuleCat.{u + 1} A) X M

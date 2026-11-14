@@ -11,14 +11,13 @@ public import WeilConjectures.AlgebraicGeometry.Relative.RelativeCocycleCoordina
 /-!
 # Coordinates on the shifted mapping cone in every degree
 
-For a morphism `r : A ⟶ B` of integer cochain complexes of abelian groups, an element of
+For a morphism `r: A ⟶ B` of integer cochain complexes of abelian groups, an element of
 degree `n` of `(mappingCone r)⟦-1⟧` is a pair consisting of an element of `A.X n` and an
 element of `B.X m`, where `m + 1 = n`. This file records the two coordinates, the
 construction of an element from its coordinates, and the formulas for the differential and
 for the functoriality of `relativeFiberMap` in these coordinates.
 
 Source: Stacks Project, Tag 0G71 (mapping fibre of a morphism of complexes).
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public noncomputable section

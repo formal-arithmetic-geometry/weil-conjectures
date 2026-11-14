@@ -11,8 +11,7 @@ public import WeilConjectures.Algebra.Homology.CanonicalTensorPullbackOfUniverse
 
 /-! # Open scalar, tensor and coefficient normalization
 
-Source: Stacks Project, sites-cohomology.tex, Tag 0GL1, and sites-modules.tex, Tag 0E8I
-(blueprint: def-sp-open-scalar-tensor-data).
+Source: Stacks Project, Tag 0GL1, Tag 0E8I.
 -/
 
 @[expose] public noncomputable section
@@ -27,56 +26,55 @@ open AlgebraicGeometry AlgebraicGeometry.Scheme SheafOfModules WeilConjectures
 namespace AlgebraicGeometry.ProEtale.OpenScalarTensor
 
 /-- Presentations of the existing unbounded tensors and normalized scalar adjunctions.
-Source: Stacks 06YY, 07A6, 07A4
-(blueprint: def-sp-open-scalar-tensor-data). -/
+Source: Stacks 06YY, 07A6, 07A4. -/
 abbrev Models := ∀ T : Scheme.{u},
   ScalarHomModels.{u + 1, u, u + 1, u + 2} (Scheme.ProEt.topology T)
 
 variable (m : Models.{u})
 
 /-- The existing scalar derived pair at the constant ring map.
-Source: Stacks 06YY, 07A6 (blueprint: def-sp-open-scalar-tensor-data). -/
+Source: Stacks 06YY, 07A6. -/
 abbrev scalarPair {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B) (T : Scheme.{u}) :=
   (m T).scalar (proEtaleConstantRingMap (T := T) φ)
 
 /-- The scalar functor of this normalized universal presentation.
-Source: Stacks 06YY (blueprint: def-sp-open-scalar-tensor-data). -/
+Source: Stacks 06YY. -/
 abbrev scalar {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B) (T : Scheme.{u}) := (scalarPair m φ T).derived
 
 /-- Identification with the published scalar functor by its normalized adjunction.
-Source: Stacks 07A6 (blueprint: def-sp-open-scalar-tensor-data). -/
+Source: Stacks 07A6. -/
 def scalarIso {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B) (T : Scheme.{u}) : scalar m φ T ≅ scalarExtension φ T :=
   (scalarPair m φ T).adjunction.leftAdjointUniq
     (proEtaleRingDerivedExtensionAdjunction (proEtaleConstantRingMap (T := T) φ))
 
 /-- The existing derived tensor in the selected representative presentation.
-Source: Stacks 07A4 (blueprint: def-sp-open-scalar-tensor-data). -/
+Source: Stacks 07A4. -/
 abbrev tensor (A : Type u) [CommRing A] (T : Scheme.{u}) :=
   ((m T).closed (proEtaleConstantRing T A)).tensor
 
 /-- Its derived tensor unit, canonically the constant coefficient module.
-Source: Stacks 07A4 (blueprint: def-sp-open-scalar-tensor-data). -/
+Source: Stacks 07A4. -/
 abbrev unit (A : Type u) [CommRing A] (T : Scheme.{u}) :=
   ((m T).closed (proEtaleConstantRing T A)).monoidal.tensorUnit
 
 /-- Restriction of the B tensor unit is the constant A-module B.
-Source: Stacks 03DA (blueprint: def-sp-open-scalar-tensor-data). -/
+Source: Stacks 03DA. -/
 abbrev coefficient {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B) (T : Scheme.{u}) :=
   (scalarRestriction φ T).obj (unit m B T)
 
 /-- The exact open adjunction already used by the published operations.
-Source: Stacks 08FJ (blueprint: def-sp-open-scalar-tensor-data). -/
+Source: Stacks 08FJ. -/
 abbrev openAdj (A : Type u) [CommRing A] {U X : Scheme.{u}}
     (j : U ⟶ X) [IsOpenImmersion j] :=
   proEtaleRingDerivedOpenAdjunction j (proEtaleConstantRing X A)
     (proEtaleConstantRing U A) (proEtaleConstantRingComparison j A)
 
 /-- The identity-on-actions inverse-image/restriction comparison.
-Source: Stacks 03DA, 07A6 (blueprint: def-sp-open-scalar-tensor-data). -/
+Source: Stacks 03DA, 07A6. -/
 def rightSquare {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) :
     constantPullback (A := B) j ⋙ scalarRestriction φ U ≅
@@ -91,7 +89,7 @@ def rightSquare {A B : Type u} [CommRing A] [CommRing B]
         (a := CommRingCat.ofHom (RingHom.ulift φ))).symm)
 
 /-- The specified balanced inverse-image/scalar comparison, transported by scalar units.
-Source: Stacks 07A4, 07A6 (blueprint: def-sp-open-scalar-tensor-data). -/
+Source: Stacks 07A4, 07A6. -/
 def lambda {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) :
     scalar m φ X ⋙ constantPullback (A := B) j ≅
@@ -101,7 +99,7 @@ def lambda {A B : Type u} [CommRing A] [CommRing B]
 
 /-- The published common-right-adjoint open scalar comparison, transported by `scalarIso`.
 Its components retain the published B-linear action.
-Source: Stacks 08FJ, 07A6 (blueprint: def-sp-open-scalar-tensor-data). -/
+Source: Stacks 08FJ, 07A6. -/
 def beta {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     openExtension (A := A) j ⋙ scalar m φ X ≅
@@ -111,7 +109,7 @@ def beta {A B : Type u} [CommRing A] [CommRing B]
       Functor.isoWhiskerRight (scalarIso m φ U).symm (openExtension (A := B) j)
 
 /-- The open mate of identity on restricted actions, before asserting invertibility.
-Source: Stacks 03CY, 08FJ (blueprint: def-sp-open-scalar-tensor-data). -/
+Source: Stacks 03CY, 08FJ. -/
 def restrictionOpen {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     scalarRestriction φ U ⋙ openExtension (A := A) j ⟶
@@ -121,7 +119,7 @@ def restrictionOpen {A B : Type u} [CommRing A] [CommRing B]
 
 set_option backward.isDefEq.respectTransparency.types true in
 /-- Restricting the existing K-flat tensor model to flat-term representatives.
-Source: Stacks 07A4 (blueprint: def-sp-open-scalar-tensor-data). -/
+Source: Stacks 07A4. -/
 def tensorModel (A : Type u) [CommRing A] (T : Scheme.{u}) :
     ProEtaleTensorModel T (proEtaleConstantRing T A) :=
   let i : (proEtaleFlatRepresentatives T (proEtaleConstantRing T A)).FullSubcategory ⥤
@@ -137,7 +135,7 @@ def tensorModel (A : Type u) [CommRing A] (T : Scheme.{u}) :
     representative := e }
 
 /-- The canonical restriction tensorator, fixed on signed K-flat total tensors.
-Source: Stacks 07A4 (blueprint: def-sp-open-scalar-tensor-data). -/
+Source: Stacks 07A4. -/
 def restrictionTensor (A : Type u) [CommRing A] {U X : Scheme.{u}}
     (j : U ⟶ X) :
     tensor m A X ⋙ constantPullback (A := A) j ≅
@@ -147,14 +145,14 @@ def restrictionTensor (A : Type u) [CommRing A] {U X : Scheme.{u}}
     (tensorModel m A X) (tensorModel m A U)
 
 /-- Type of strong monoidal structures on the exact open inverse image.
-Source: Stacks 07A4 (blueprint: def-sp-open-scalar-tensor-data). -/
+Source: Stacks 07A4. -/
 def OpenMonoidal (A : Type u) [CommRing A] {U X : Scheme.{u}} (j : U ⟶ X) :=
   letI := ((m X).closed (proEtaleConstantRing X A)).monoidal
   letI := ((m U).closed (proEtaleConstantRing U A)).monoidal
   (constantPullback (A := A) j).Monoidal
 
 /-- The tensorator of a chosen strong monoidal structure, with explicit model instances.
-Source: Stacks 07A4 (blueprint: def-sp-open-scalar-tensor-data). -/
+Source: Stacks 07A4. -/
 def openDelta (A : Type u) [CommRing A] {U X : Scheme.{u}} (j : U ⟶ X)
     (h : OpenMonoidal m A j)
     (F G : proEtaleDerivedCategory X A) :
@@ -167,7 +165,7 @@ def openDelta (A : Type u) [CommRing A] {U X : Scheme.{u}} (j : U ⟶ X)
   Functor.OplaxMonoidal.δ (constantPullback (A := A) j) F G
 
 /-- The canonical tensor-unit comparison of open inverse image.
-Source: Stacks 07A4 (blueprint: def-sp-open-scalar-tensor-data). -/
+Source: Stacks 07A4. -/
 def openUnit (A : Type u) [CommRing A] {U X : Scheme.{u}} (j : U ⟶ X)
     (h : OpenMonoidal m A j) :
     (constantPullback (A := A) j).obj (unit m A X) ≅ unit m A U :=
@@ -178,7 +176,7 @@ def openUnit (A : Type u) [CommRing A] {U X : Scheme.{u}} (j : U ⟶ X)
 
 /-- Canonical tensor comparison presentations, including unit coherence for restriction.
 All tensorators are fixed by their existing K-flat representative characterizations.
-Source: Stacks 07A4, 0D6D (blueprint: def-sp-open-scalar-tensor-data). -/
+Source: Stacks 07A4, 0D6D. -/
 structure Choices where
   scalarTensor : ∀ {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B) (T : Scheme.{u}),
@@ -196,8 +194,7 @@ variable (c : Choices m)
 `K tensor Res(B) ⟶ Res(S(K))`. Its scalar adjunct applies the normalized scalar
 monoidal comparison, then the scalar counit at the tensor unit and the right unitor.
 Thus this is a specified map, with no choice of an isomorphism of endpoints.
-Source: Stacks 07A6, 07A4, 05V4
-(blueprint: def-sp-open-scalar-tensor-data). -/
+Source: Stacks 07A6, 07A4, 05V4. -/
 def scalarProjection {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B) (T : Scheme.{u}) (K : proEtaleDerivedCategory T A) :
     (tensor m A T).obj (K, coefficient m φ T) ⟶
@@ -211,7 +208,7 @@ def scalarProjection {A B : Type u} [CommRing A] [CommRing B]
 
 /-- The constant coefficient identification under restriction to the open, obtained
 from the identity-on-actions square and the normalized inverse-image tensor unit.
-Source: Stacks 03DA, 07A4 (blueprint: def-sp-open-scalar-tensor-data). -/
+Source: Stacks 03DA, 07A4. -/
 def coefficientPullback {A B : Type u} [CommRing A] [CommRing B] [Finite B]
     (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (constantPullback (A := A) j).obj (coefficient m φ X) ≅ coefficient m φ U :=
@@ -222,8 +219,7 @@ def coefficientPullback {A B : Type u} [CommRing A] [CommRing B] [Finite B]
 This is the normalization of `derivedOpenImmersionLowerShriekProjectionIso`, transported
 to these presentations of derived tensor, with its direction reversed. Its published
 `derivedOpenImmersionLowerShriekProjectionMap` is precisely the adjunct prescribed below.
-Source: Stacks 0GL1, 0E8I
-(blueprint: def-sp-open-scalar-tensor-data). -/
+Source: Stacks 0GL1, 0E8I. -/
 structure Projection (A : Type u) [CommRing A] {U X : Scheme.{u}}
     (j : U ⟶ X) [IsOpenImmersion j] where
   iso : ((openExtension (A := A) j).prod (𝟭 _)) ⋙ tensor m A X ≅
@@ -234,7 +230,7 @@ structure Projection (A : Type u) [CommRing A] {U X : Scheme.{u}}
         (restrictionTensor m A j).inv.app ((openExtension (A := A) j).obj K, Q)
 
 /-- Balanced coefficient associativity, including the constant-sheaf composition transport.
-Source: Stacks 0D6D, 07A6 (blueprint: def-sp-open-scalar-tensor-data). -/
+Source: Stacks 0D6D, 07A6. -/
 def scalarComp {A B C : Type u} [CommRing A] [CommRing B] [CommRing C]
     (φ : A →+* B) (ψ : B →+* C) (T : Scheme.{u}) :
     scalar m φ T ⋙ scalar m ψ T ≅ scalar m (ψ.comp φ) T :=
@@ -247,8 +243,7 @@ def scalarComp {A B C : Type u} [CommRing A] [CommRing B] [CommRing C]
 
 /-- The canonical scalar identity is uniquely fixed to its original restriction-adjunction
 construction. This equality specification shields the derived localization from reduction.
-Source: Stacks 07A6 (blueprint: def-sp-open-scalar-tensor-data).
-Proof: the displayed isomorphism is a witness, and equality to it implies uniqueness. -/
+Source: Stacks 07A6. -/
 theorem scalarId_existsUnique (A : Type u) [CommRing A] (T : Scheme.{u}) :
     ∃! e : scalar m (RingHom.id A) T ≅ 𝟭 (proEtaleDerivedCategory T A),
       e = eqToIso (congrArg (fun a ↦ ((m T).scalar a).derived)
@@ -258,7 +253,7 @@ theorem scalarId_existsUnique (A : Type u) [CommRing A] (T : Scheme.{u}) :
   exact ⟨_, rfl, fun _ h ↦ h⟩
 
 /-- The unit-normalized identity scalar isomorphism, with its original canonical value.
-Source: Stacks 07A6 (blueprint: def-sp-open-scalar-tensor-data). -/
+Source: Stacks 07A6. -/
 def scalarId (A : Type u) [CommRing A] (T : Scheme.{u}) :
     scalar m (RingHom.id A) T ≅ 𝟭 (proEtaleDerivedCategory T A) :=
   (scalarId_existsUnique m A T).exists.choose
@@ -266,8 +261,7 @@ def scalarId (A : Type u) [CommRing A] (T : Scheme.{u}) :
 /-- All clauses of the open scalar normalization, on ordinary unbounded module
 categories. The projection maps and scalar tensor identifications are prescribed
 adjunction transposes, rather than freely chosen isomorphisms.
-Source: Stacks 0GL1, 0E8I, 07A6, 0D6D
-(blueprint: def-sp-open-scalar-tensor-data). -/
+Source: Stacks 0GL1, 0E8I, 07A6, 0D6D. -/
 structure Normalization where
   projection : ∀ (A : Type u) [CommRing A] [Finite A]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j], Projection m A j

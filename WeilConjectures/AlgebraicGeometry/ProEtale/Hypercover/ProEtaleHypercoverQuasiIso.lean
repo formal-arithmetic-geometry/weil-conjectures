@@ -122,15 +122,7 @@ set_option maxHeartbeats 600000 in
 set_option backward.isDefEq.respectTransparency false in
 /-- Weakly contractible terms suffice for bounded-below quasi-isomorphism invariance;
 no covering or matching-map hypotheses are needed for this comparison.
-Source: Stacks Project, Tags 09A2 and 0946 (1).
-(blueprint: lem-weil-pbc-proetale-hypercover-total-quasi-iso).
-
-Proof: choose a common lower bound N. In each nonnegative simplicial degree p,
-evaluation at U_p preserves homology by weak contractibility; restriction of scalars
-from R(U_p) to R(W) is exact too. Thus the vertical complex map is a quasi-isomorphism.
-The extension-by-zero column isomorphisms identify these vertical maps with the
-columns of the section bicomplex map. Negative columns are zero. Both bicomplexes
-vanish for p<0 or q<N, so bounded-below total-column comparison applies. -/
+Source: Stacks Project, Tags 09A2 and 0946 (1). -/
 theorem hypercoverTotal_map_quasiIso_of_weaklyContractible
     (hweak : ∀ (p : ℕ) (F G : Sheaf (topology X) (Type (u + 1))) (f : F ⟶ G),
       Epi f → Function.Surjective (f.hom.app (op (U _⦋p⦌).left)))

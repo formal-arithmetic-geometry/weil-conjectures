@@ -34,10 +34,6 @@ public import Mathlib.CategoryTheory.Adjunction.Unique
 public import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Canonical data for ordered integration and adjoint transposition
-
-Source: blueprint sec-smooth-purity/sk-prop-an,
-cor-pur-vector-bundle-purity.proof.md, paragraph 2.
-(blueprint: def-pur-integration-transpose-data).
 -/
 
 @[expose] public noncomputable section
@@ -52,8 +48,7 @@ open CategoryTheory CategoryTheory.MonoidalCategory
 namespace AlgebraicGeometry.Etale.IntegrationComposition
 
 /-- Unit identification for an arbitrary coefficient category, packaged before specialization.
-Source: cor-pur-vector-bundle-purity.proof.md paragraph 2.
-(blueprint: def-pur-integration-transpose-data). -/
+-/
 @[irreducible]
 def integrationUnitObjectIso
     (B : Type*) [Category.{u + 1} B] [Abelian B] [IsGrothendieckAbelian.{u + 1} B]
@@ -68,17 +63,13 @@ def integrationUnitObjectIso
 
 variable {A : Type (u + 1)} [CommRing A] {X Y Z : Scheme.{u}}
 
-/-- The tensor-twisted exact inverse image appearing in integration.
-Source: cor-pur-vector-bundle-purity.proof.md, paragraph 2
-(blueprint: lem-pur-integration-transpose-composition). -/
+/-- The tensor-twisted exact inverse image appearing in integration. -/
 def object (f : X ⟶ Y) (W : DerivedCategoryModule A X)
     (K : DerivedCategoryModule A Y) : DerivedCategoryModule A X :=
   ((derivedTensor (ModuleCat.{u + 1} A) X).obj
     ((upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategory.obj K)).obj W
 
-/-- Integration: inverse canonical projection, tensor the trace, then the unit constraint.
-Source: cor-pur-vector-bundle-purity.proof.md, paragraph 2
-(blueprint: lem-pur-integration-transpose-composition). -/
+/-- Integration: inverse canonical projection, tensor the trace, then the unit constraint. -/
 def integration (f : X ⟶ Y) [HasCompactification f]
     (W : DerivedCategoryModule A X)
     (t : (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).obj W ⟶
@@ -90,9 +81,7 @@ def integration (f : X ⟶ Y) [HasCompactification f]
     ((derivedTensor (ModuleCat.{u + 1} A) Y).obj K).map t ≫
     (derivedTensorRightUnitor (ModuleCat.{u + 1} A) Y K).hom
 
-/-- The transpose under the specified actual right adjoint, with no constructibility bound.
-Source: cor-pur-vector-bundle-purity.proof.md, paragraph 2
-(blueprint: lem-pur-integration-transpose-composition). -/
+/-- The transpose under the specified actual right adjoint, with no constructibility bound. -/
 def gamma (f : X ⟶ Y) [HasCompactification f]
     (R : DerivedCategoryModule A Y ⥤ DerivedCategoryModule A X)
     (adj : rightDerivedLowerShriek (ModuleCat.{u + 1} A) f ⊣ R)
@@ -103,16 +92,12 @@ def gamma (f : X ⟶ Y) [HasCompactification f]
     (K : DerivedCategoryModule A Y) : object f W K ⟶ R.obj K :=
   adj.homEquiv _ _ (integration f W t hP K)
 
-/-- The exact inverse-image unit constraint, transported through the canonical comparison.
-Source: cor-pur-vector-bundle-purity.proof.md, paragraph 2, orientation at the unit
-(blueprint: lem-pur-integration-transpose-composition). -/
+/-- The exact inverse-image unit constraint, transported through the canonical comparison. -/
 def unitObjectIso (f : X ⟶ Y) (W : DerivedCategoryModule A X) :
     object f W (𝟙_ (DerivedCategoryModule A Y)) ≅ W :=
   integrationUnitObjectIso (ModuleCat.{u + 1} A) f W
 
-/-- Orientation at the unit, whose domain is W after the canonical unit identification.
-Source: cor-pur-vector-bundle-purity.proof.md, paragraph 2
-(blueprint: lem-pur-integration-transpose-composition). -/
+/-- Orientation at the unit, whose domain is W after the canonical unit identification. -/
 def orientation (f : X ⟶ Y) [HasCompactification f]
     (R : DerivedCategoryModule A Y ⥤ DerivedCategoryModule A X)
     (adj : rightDerivedLowerShriek (ModuleCat.{u + 1} A) f ⊣ R)
@@ -123,9 +108,7 @@ def orientation (f : X ⟶ Y) [HasCompactification f]
     W ⟶ R.obj (𝟙_ (DerivedCategoryModule A Y)) :=
   (unitObjectIso f W).inv ≫ gamma f R adj W t hP _
 
-/-- The dualizing tensor map, defined wherever its canonical projection is invertible.
-Source: cor-pur-vector-bundle-purity.proof.md, paragraph 2
-(blueprint: lem-pur-integration-transpose-composition). -/
+/-- The dualizing tensor map, defined wherever its canonical projection is invertible. -/
 def theta (f : X ⟶ Y) [HasCompactification f]
     (R : DerivedCategoryModule A Y ⥤ DerivedCategoryModule A X)
     (adj : rightDerivedLowerShriek (ModuleCat.{u + 1} A) f ⊣ R)
@@ -137,9 +120,7 @@ def theta (f : X ⟶ Y) [HasCompactification f]
       ((derivedTensor (ModuleCat.{u + 1} A) Y).obj L).map (adj.counit.app (𝟙_ _)) ≫
       (derivedTensorRightUnitor (ModuleCat.{u + 1} A) Y L).hom)
 
-/-- Exact pullback of tensor, using the published K-flat tensor comparison and exact descent.
-Source: cor-pur-vector-bundle-purity.proof.md, paragraph 2, ordered tensor reassociation
-(blueprint: lem-pur-integration-transpose-composition). -/
+/-- Exact pullback of tensor, using the published K-flat tensor comparison and exact descent. -/
 def pullTensorIso (f : X ⟶ Y) (K M : DerivedCategoryModule A Y) :
     (upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategory.obj
       (((derivedTensor (ModuleCat.{u + 1} A) Y).obj K).obj M) ≅
@@ -153,9 +134,7 @@ def pullTensorIso (f : X ⟶ Y) (K M : DerivedCategoryModule A Y) :
     ((derivedTensor (ModuleCat.{u + 1} A) X).obj _).mapIso
       ((leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) f).app M)
 
-/-- Ordered reassociation a_K, with exact pullback composition and no block interchange.
-Source: cor-pur-vector-bundle-purity.proof.md, paragraph 2
-(blueprint: lem-pur-integration-transpose-composition). -/
+/-- Ordered reassociation a_K, with exact pullback composition and no block interchange. -/
 def reassociation (f : X ⟶ Y) (g : Y ⟶ Z)
     (Wf : DerivedCategoryModule A X) (Wg : DerivedCategoryModule A Y)
     (K : DerivedCategoryModule A Z) :

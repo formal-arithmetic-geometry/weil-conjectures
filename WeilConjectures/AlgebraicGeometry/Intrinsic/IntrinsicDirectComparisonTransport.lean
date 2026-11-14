@@ -182,9 +182,7 @@ The direct-image comparison transport identity.  It is the comparison component 
 mate-pasting calculation, before the fixed-scalar conjugate is specialized.  The parameter
 `k` makes this strictly more general than the paper's single compositor instance.
 
-Source: Stacks Tags 03D1 and 0D6E; the proof is the naturality and unit-counit cancellation
-in the transported comparison square.
-(blueprint: lem-sf-intrinsic-direct-comparison-transport).
+Source: Stacks Tags 03D1 and 0D6E.
 -/
 theorem sfIntrinsicDirectComparisonTransport
     (A : Type u) [CommRing A] [Finite A]

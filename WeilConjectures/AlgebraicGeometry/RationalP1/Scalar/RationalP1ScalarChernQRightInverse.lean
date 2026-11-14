@@ -120,16 +120,7 @@ private theorem isIso_biprod_desc_of_homology
 /-- The explicit scalar Q biproduct map has a right inverse.
 
 This is the corresponding one-sided inverse component of the scalar transport
-argument; the two sides are kept as separate intermediate obligations.
-(blueprint: lem-sfb-rational-p1-scalar-q-right-inverse)
-
-Proof: Transport the invertible finite-level diagonal unit/Chern splitting through
-completion, realization, coefficient extension, and the prescribed scalar mates.
-The resulting inverse component is the displayed morphism `v`; composing it with
-the explicit scalar biproduct map reduces by the component formulas and the
-biproduct identities to the identity. This one-sided equation is kept separate
-from the opposite inverse equation so that the final assembly is purely
-categorical. -/
+argument; the two sides are kept as separate intermediate obligations. -/
 theorem scalar_q_chern_right_inverse
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

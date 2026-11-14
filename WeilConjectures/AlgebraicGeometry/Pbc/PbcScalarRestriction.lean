@@ -11,9 +11,8 @@ import WeilConjectures.Mathlib.CategoryTheory.Linear.LinearFunctor
 
 /-! # Constructible restriction and rationalization of scalar comparisons
 
-Source: blueprint proper base change, order 1307; Milne, Section 19.
+Source: Milne, Section 19.
 Existing declarations extracted from `PbcScalarExtension` to bound compilation cost.
-(blueprint: lem-pbc-scalar-constructible-operation-restriction)
 -/
 
 @[expose] public noncomputable section
@@ -40,17 +39,13 @@ variable (d : AdicCoefficientDatum A) (H : PbcCompletedDerived X d ⥤ PbcComple
 variable (h : ∀ K : PbcBoundedConstructibleComplete X d,
   PbcIsBoundedConstructibleComplete Y d (H.obj K.obj))
 
-/-- Conditional restriction keeps exactly the actual ambient object and arrow maps.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-constructible-operation-restriction). -/
+/-- Conditional restriction keeps exactly the actual ambient object and arrow maps. -/
 def pbcConditionalIntegral : PbcBoundedConstructibleComplete X d ⥤
     PbcBoundedConstructibleComplete Y d :=
   ObjectProperty.lift (PbcIsBoundedConstructibleComplete Y d)
     (ObjectProperty.ι (PbcIsBoundedConstructibleComplete X d) ⋙ H) h
 
-/-- The actual restriction inherits addition and its constant-section linearity.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-constructible-operation-restriction).
-Proof: the full-subcategory inclusion changes no morphism or scalar action, so
-both equations are precisely the ambient additive and linear equations. -/
+/-- The actual restriction inherits addition and its constant-section linearity. -/
 theorem pbcConditionalIntegral_linear [H.Additive] [H.Linear A] :
     (pbcConditionalIntegral d H h).Additive ∧ (pbcConditionalIntegral d H h).Linear A := by
   constructor
@@ -61,18 +56,15 @@ theorem pbcConditionalIntegral_linear [H.Additive] [H.Linear A] :
     apply ObjectProperty.hom_ext
     exact H.map_smul r f.hom
 
-/-- Addition on the actual conditional restriction.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-constructible-operation-restriction). -/
+/-- Addition on the actual conditional restriction. -/
 instance pbcConditionalIntegral_additive [H.Additive] [H.Linear A] :
     (pbcConditionalIntegral d H h).Additive := (pbcConditionalIntegral_linear d H h).1
 
-/-- Linearity on the actual conditional restriction.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-constructible-operation-restriction). -/
+/-- Linearity on the actual conditional restriction. -/
 instance pbcConditionalIntegral_linearInstance [H.Additive] [H.Linear A] :
     (pbcConditionalIntegral d H h).Linear A := (pbcConditionalIntegral_linear d H h).2
 
-/-- Rationalizing a preserving actual operation uses the tensor base-change Hom map.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-constructible-operation-restriction). -/
+/-- Rationalizing a preserving actual operation uses the tensor base-change Hom map. -/
 def pbcConditionalRational (p : A) [H.Additive] [H.Linear A] :
     PbcRationalCategory X d p ⥤ PbcRationalCategory Y d p :=
   ScalarLocalization.transport A p (pbcConditionalIntegral d H h)
@@ -232,12 +224,7 @@ private theorem pbcActualOperations_linear_aux
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Actual direct image and completed pullback retain constant coefficient scalars.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-constructible-operation-restriction).
-Proof: ordinary direct image uses the unchanged additive section maps. Its module
-action commutes with constant coefficients by the finite quotient formulas.
-Derived localization preserves this identity. Ordinary pullback is tensor linear,
-and the completion unit identifies the two scalar actions on its reflection. -/
+/-- Actual direct image and completed pullback retain constant coefficient scalars. -/
 theorem pbcActualOperations_linear :
     (pbcActualDerivedPush g (pbcIntegralDatum l E)).Additive ∧
     (pbcActualDerivedPush g (pbcIntegralDatum l E)).Linear (PbcIntegralRing l E) ∧
@@ -245,25 +232,21 @@ theorem pbcActualOperations_linear :
     (pbcActualCompletedPull g (pbcIntegralDatum l E)).Linear (PbcIntegralRing l E) := by
   exact pbcActualOperations_linear_aux g (pbcIntegralDatum l E)
 
-/-- Additivity of actual derived direct image.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-constructible-operation-restriction). -/
+/-- Additivity of actual derived direct image. -/
 instance pbcActualPush_additive : (pbcActualDerivedPush g (pbcIntegralDatum l E)).Additive :=
   (pbcActualOperations_linear l E g).1
 
-/-- Constant scalar linearity of actual derived direct image.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-constructible-operation-restriction). -/
+/-- Constant scalar linearity of actual derived direct image. -/
 instance pbcActualPush_linear :
     (pbcActualDerivedPush g (pbcIntegralDatum l E)).Linear (PbcIntegralRing l E) :=
   (pbcActualOperations_linear l E g).2.1
 
-/-- Additivity of actual completed pullback.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-constructible-operation-restriction). -/
+/-- Additivity of actual completed pullback. -/
 instance pbcActualCompletedPull_additive :
     (pbcActualCompletedPull g (pbcIntegralDatum l E)).Additive :=
   (pbcActualOperations_linear l E g).2.2.1
 
-/-- Constant scalar linearity of actual completed pullback.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-constructible-operation-restriction). -/
+/-- Constant scalar linearity of actual completed pullback. -/
 instance pbcActualCompletedPull_linear :
     (pbcActualCompletedPull g (pbcIntegralDatum l E)).Linear (PbcIntegralRing l E) :=
   (pbcActualOperations_linear l E g).2.2.2
@@ -281,14 +264,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- If the actual direct images preserve constructibility, their rational comparisons
 are precisely the localized ambient mate components. No preservation is assumed
-without being supplied. Source: blueprint order 1307
-(blueprint: lem-pbc-scalar-constructible-operation-restriction).
-Proof: restrict the ambient mate along the full inclusions, which changes no arrow.
-Every rational object is integral. Localize each component. Naturality on pure
-tensors follows from ambient naturality and semilinearity; bilinearity extends
-it to all maps. All components are invertible, and their prescribed values give
-uniqueness. Unit, composition, coefficient and shift equations persist under the
-same functorial localization, as does the exchange equation. -/
+without being supplied. -/
 theorem pbcScalarDirectImage_rational
     (hE : ∀ K : PbcIntegralCategory l E X dX hX,
       PbcIsBoundedConstructibleComplete Y (pbcIntegralDatum l E)
@@ -373,12 +349,7 @@ theorem pbcScalarDirectImage_rational
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Under the two actual preservation hypotheses, the completed-pullback comparison
-also descends with its specified localized components.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-constructible-operation-restriction).
-Proof: restrict the unit-normalized ambient comparison to the full integral
-subcategories. Its naturality descends on pure tensors and then by addition.
-The localized inverse gives an inverse, and component specification proves
-uniqueness. This uses no constructibility assertion for an arbitrary morphism. -/
+also descends with its specified localized components. -/
 theorem pbcScalarCompletedPull_rational
     (hE : ∀ K : PbcIntegralCategory l E Y dY hY,
       PbcIsBoundedConstructibleComplete X (pbcIntegralDatum l E)

@@ -15,7 +15,6 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 /-! # Invertibility of the canonical structure-sheaf base-change comparison
 
 Source: Stacks Project, Tags 02KG, 0096 and 01CA.
-(blueprint: new-sbc-canonical-structure-base-change-isIso)
 -/
 
 @[expose] public section
@@ -30,15 +29,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The adjoint of restriction along a cartesian square with affine vertical map is invertible.
 
-Source: Stacks Project, Tag 02KG, and Tags 0096 and 01CA for the structure-sheaf pullback.
-(blueprint: new-sbc-canonical-structure-base-change-isIso)
-
-Proof: Compare the tensor pullback adjunction with the standard pullback adjunction by
-uniqueness of left adjoints. The canonical comparison is the composition of this
-isomorphism, the affine base-change map, and the pushed-forward pullback-of-unit map.
-To check the equality, apply the injective adjunction homEquiv. Its naturality and the
-unit characterization of the structure-sheaf comparison identify both adjoints with
-restriction along k. Each factor is invertible, so the canonical comparison is too. -/
+Source: Stacks Project, Tag 02KG, and Tags 0096 and 01CA for the structure-sheaf pullback. -/
 theorem canonical_structure_baseChange_isIso {X Y X' Y' : Scheme.{u}}
     (p : X ⟶ Y) (q : X' ⟶ Y') (g : Y' ⟶ Y) (k : X' ⟶ X)
     (sq : IsPullback k q p g) [IsAffineHom p] :

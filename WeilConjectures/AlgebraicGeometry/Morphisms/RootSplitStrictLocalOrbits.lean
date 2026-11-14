@@ -20,7 +20,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.StrictLocalRootOrbitDescent
 
 Source: Stacks Project, Tag 0EYG, local and intermediate-field paragraphs; Tag 09EV, intermediate
 subextensions.
-(blueprint: lem-sbc-root-split-strict-local-orbits)
 -/
 
 @[expose] public section
@@ -70,25 +69,7 @@ private theorem root_fixed_puncture_iso
 covers of a regular principal puncture decompose into intermediate root covers.
 
 Source: Stacks Project, Tag 0EYG, local and intermediate-field paragraphs,
-and Tag 09EV for intermediate subextensions.
-(blueprint: lem-sbc-root-split-strict-local-orbits)
-
-Proof: Apply strict_local_root_orbit_descent to obtain subgroups K(k) of the
-root rotations and an isomorphism theta to the puncture of the product of their
-fixed subalgebras. Transport invertibility of n along iota. For each subgroup,
-strict_local_root_invariants gives e(k)=K(k).index, positive and dividing n,
-and an H-algebra equivalence from its fixed subalgebra to H[s]/(s^e(k)-h).
-Take the product of these algebra equivalences. Spec turns its inverse into
-an isomorphism of the product spectra. Its preimage of D(h) is exactly D(h),
-because the algebra equivalence fixes every element of H. Restrict this
-isomorphism using Hom.preimageIso and isoOfEq. Contravariant functoriality of
-Spec and the H-algebra compatibility prove its projection equation. Compose
-it with theta; associativity and theta's projection equation give the desired
-isomorphism over H. This leaves the geometric descent and the invariant-ring
-calculation as independent statements, with their arguments in their docstrings.
-Edge cases: d=0 has no orbits and m=0, so both schemes are empty. For n=1
-all nonempty orbits have length one. The regular local hypotheses make
-H and H/(h) nonzero domains, so the puncture is nonempty. -/
+and Tag 09EV for intermediate subextensions. -/
 theorem root_split_strict_local_orbits
     (R H : CommRingCat.{u}) (g : R) (ι : R →+* H)
     [IsStrictlyHenselianLocalRing H] [IsRegularLocalRing H]

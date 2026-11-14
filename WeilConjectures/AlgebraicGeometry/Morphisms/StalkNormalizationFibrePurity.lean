@@ -23,7 +23,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteNormalDepthTwoPurity
 # Propagating etaleness across the local special fibre
 
 Source: Stacks Project, Tags 0EYE and 0EYB, as used in Tag 0EYJ.
-(blueprint: lem-sbc-stalk-normalization-fibre-purity)
 -/
 
 @[expose] public section
@@ -50,32 +49,7 @@ private theorem etale_pullback_restrict {X Y T : Scheme.{u}}
 its missing fibre is etale everywhere on the local total space.
 
 Source: Stacks Project, Tag 0EYE (purity across a regular Cartier divisor),
-Tag 0EYB (fibrewise dense etale open), and Tag 0EY6 (depth-two extension).
-(blueprint: lem-sbc-stalk-normalization-fibre-purity)
-
-Proof: Localizing at s makes the base a normal Noetherian local domain A,
-and hmin identifies U with its punctured spectrum. Integral closure commutes
-with localization, so the indicated finite model is the local normalization.
-The special fibre is geometrically integral: it is smooth and geometrically
-connected. Thus the open W, which contains a point of that fibre, contains
-its generic point. Away from the special fibre the normalization is etale by
-hU and stability of etaleness under base change. In dimension one, A is a DVR;
-the special fibre is a regular effective Cartier divisor, and etaleness at
-its generic point gives absence of ramification in codimension one. Purity
-extends the punctured cover to a finite etale cover. Both this extension and
-the normalization have the same normal finite algebra, namely the integral
-closure in the punctured algebra, so they agree. In dimension at least two,
-normality gives depth at least two on A and flatness gives the same lower
-bound along the special fibre of the smooth total space. The normalization
-is the unique depth-two extension of the punctured cover: a finite normal
-algebra satisfies the depth condition, and Hartogs extension identifies its
-sections with the pushforward. The union of the punctured open and W meets
-every fibre densely and contains every fibre over a base point of depth at
-most one. The fibrewise purity theorem 0EYB extends the cover on this union
-etale to the whole local total space. Uniqueness for the depth-two extension
-identifies that extension with the normalization. Dimension zero cannot
-occur since the generic point belongs to U but s does not. No section,
-torsor action, group order or connectedness of the finite cover is used. -/
+Tag 0EYB (fibrewise dense etale open), and Tag 0EY6 (depth-two extension). -/
 theorem stalk_normalization_etale_of_fibre_neighbourhood {S C : Scheme.{u}}
     [IsNoetherian S] [QuasiSeparatedSpace S] [IsIntegral S]
     (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))

@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.Lisse.Finite.LisseFiniteLevelEtaleStalk
 /-! # Geometric Isom stalks for a supplied finite-level model
 
 Source: Stacks Tags 099Y and 09BV.
-(blueprint: new-lem-weil-pbc-lisse-finite-level-etale-stalks).
 -/
 
 @[expose] public noncomputable section
@@ -37,15 +36,7 @@ has inhabited geometric stalks of its local derived Isom sheaf whenever the
 pro-etale local markings exist. This is the stalk-and-Isom part of
 `lisse_finite_level_etale_descent`; the etale model is supplied as input.
 
-Source: Stacks Project, proetale.tex, Tags 099Y and 09BV.
-(blueprint: new-lem-weil-pbc-lisse-finite-level-etale-stalks).
-
-Proof: compare the four derived Hom sheaves for the constant source and the
-supplied model. Bounded finite-lisse hypotheses make each comparison invertible;
-the inverse-pair equalizer then makes the Isom comparison invertible. Pulling a
-local marking through this comparison gives a local section, and geometric
-stalks of the etale Isom sheaf are therefore inhabited. Empty bases have no
-geometric points.
+Source: Stacks Project, Tags 099Y and 09BV.
 -/
 theorem lisse_finite_level_etale_stalks
     (X Y : Scheme.{u}) (g : Y ⟶ X)

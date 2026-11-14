@@ -24,14 +24,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 -- Expanding the concrete scalar-extension square needs additional type reduction.
-/-- Coefficient and basis successor squares imply the successor square for evaluation.
-Source: blueprint Compatible isomorphisms, successor entrywise reduction.
-(blueprint: lem-pe-internal-perfect-successor-compatibility).
-Proof: map the finite matrix through scalar extension. Its biproduct comparison is
-entrywise functorial; the coefficient square replaces every entry by its residue.
-The basis square cancels the two balancing maps around this matrix. Finally the
-actual quotient transition reduces each quotient coordinate, which gives precisely
-the matrix of the lower-level evaluation. Cochain extensionality concludes. -/
+/-- Coefficient and basis successor squares imply the successor square for evaluation. -/
 theorem evaluation_successor_of_squares (W : Scheme.{u})
     (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ)
     (hfree : ∀ i, Module.Finite (A l E) (P.X i) ∧ Module.Free (A l E) (P.X i))

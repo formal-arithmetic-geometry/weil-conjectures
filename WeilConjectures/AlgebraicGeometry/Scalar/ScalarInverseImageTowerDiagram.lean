@@ -37,9 +37,7 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # Inverse image and balanced scalar towers
 
-Source: blueprint main-20261015, det-prop-scalar-six-pullback.proof.md (3);
-Stacks Project, Modules on Sites, Tags 03EK and 03EL
-(blueprint: lem-sfb-scalar-inverse-image-tower-diagram).
+Source: Stacks Project, Modules on Sites, Tags 03EK and 03EL.
 
 The normalization predicates specify the actual balanced quotient maps, including
 first-factor coefficient actions. They impose equations on every generalized section,
@@ -56,8 +54,7 @@ set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 
 /-- The sheafification image of the balanced scalar tensor, with the first-factor action.
-Source: Stacks 03EK, and blueprint det-prop-scalar-six-pullback.proof.md (3)
-(blueprint: lem-sfb-scalar-inverse-image-tower-diagram). -/
+Source: Stacks 03EK. -/
 noncomputable def scalarPure
     {S : Type u} [SmallCategory S] {J : GrothendieckTopology S}
     {A B : Sheaf J CommRingCat.{u}} (a : A ⟶ B)
@@ -67,8 +64,7 @@ noncomputable def scalarPure
     (changeOfRingsPresheaf.{u, u, u} a M)).app W (b ⊗ₜ[A.obj.obj W, (a.hom.app W).hom] m)
 
 /-- The balanced inverse-image comparison, normalized on every generalized pure tensor.
-Source: Stacks 03EL and blueprint det-prop-scalar-six-pullback.proof.md (3)
-(blueprint: lem-sfb-scalar-inverse-image-tower-diagram). -/
+Source: Stacks 03EL. -/
 def IsScalarInverseImageComparison
     {SY SX : Type u} [SmallCategory SY] [SmallCategory SX]
     {JY : GrothendieckTopology SY} {JX : GrothendieckTopology SX}
@@ -150,8 +146,7 @@ private theorem towerLeftComparison
   simpa only [Adjunction.homEquiv_id, Functor.comp_obj] using h
 
 /- Elementary operation graphs, used directly without the general tensor or
-K-flat pullback constructions. Source: the operation-transport calculations in
-RingedToposKFlatPullback and RingedTopoiInverseImageTensorPairingIsIso. -/
+K-flat pullback constructions. -/
 
 private theorem binary_of_graph
     {C D : Type u} [SmallCategory C] [SmallCategory D]

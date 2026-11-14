@@ -27,12 +27,7 @@ attribute [local implicit_reducible] moduleObjectDerivedPushforward moduleObject
 attribute [local irreducible] firstProjection secondProjection square
 attribute [local irreducible] projectionMap singleUnitIso
 
-/-- Forward section evaluation after inserting a coefficient arrow.
-Source: the rational projective-line triangle, First identity, projection naturality
-(blueprint: lem-sfb-projective-first-kernel-evaluation).
-Proof: factor the coefficient arrow after the supported-unit comparison. Apply the
-forward supported-unit identity and the right-coefficient naturality square of the
-projection map. Combine the two tensor whiskerings by functoriality. -/
+/-- Forward section evaluation after inserting a coefficient arrow. -/
 theorem first_supported_kernel_forward
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (Y : Scheme.{u})

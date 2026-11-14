@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.Lisse.Tower.LisseTowerConstantStalkMode
 
 Source: Stacks Tag 09BV, finite-ring derived local constancy and compatible
 trivializations in amplification (c).
-(blueprint: lem-weil-pbc-lisse-tower-constant-algebraic-reduction-diagram).
 -/
 
 @[expose] public noncomputable section
@@ -90,36 +89,8 @@ set_option linter.unusedVariables false in
 This assertion has no completed ring sheaf, completed realization or scalar maps
 phi and beta. Inverse image retains exactly the constant algebraic coefficient ring.
 
-Source: Stacks proetale.tex, Tag 09BV (lemma-weird), the derived local-constancy
-and simultaneous-trivialization argument in amplification (c); Tags 06YY and 093J.
-(blueprint: lem-weil-pbc-lisse-tower-constant-algebraic-reduction-diagram).
-
-Proof: first transport the inverse-image finite rings to constant finite rings.
-Exact inverse image preserves each separately given bound; relative finite lissity
-makes each restricted cohomology sheaf constructible on the whole stratum.
-Take bounded constructible etale origins using the finite-coefficient origin
-presentation. Full faithfulness of the bounded-below comparison lifts the
-normalization maps and their cocycles. On each nonempty connected component
-choose a geometric point and take its exact derived stalks. The stalk tower has
-finite cohomology; scalar pullback identifies its normalization with the universal
-scalar-extension arrows. Every vanishing cohomology sheaf has vanishing stalk,
-independently of the bound chosen at that level. Completion evaluation identifies
-the finite coefficient rings with the power quotients of C and respects every
-quotient map. Transport the stalks and their universal arrows across those ring
-isomorphisms to obtain K and t. Finite-ring derived local constancy and compatible
-finite derived trivializations give a common pro-etale cover with compatible
-constant identifications at every level. Generate a sieve and restrict the
-identifications to all its members; an empty component contributes no member.
-For a given E and its reduction adjunctions, constant sheafification and exact
-inverse image commute with algebraic scalar extension, computed on K-flat
-resolutions. The isomorphisms e0 identify its finite reductions with K. Apply
-the adjunction Hom bijections to the unit compatibility: the resulting
-quotient-linear arrows are the given constant normalizations. Composing the
-constant identifications gives e, and cancellation in those Hom bijections gives
-the displayed all-pairs square, including equal indices. Exact homology
-comparison identifies each reduction's cohomology with the same finite constant
-stalk model, which is relatively finite lisse. All constructions restrict along
-refinements. No completed module sheaf or algebraic inverse limit is used. -/
+Source: Tag 09BV (lemma-weird), the derived local-constancy and simultaneous-trivialization argument
+in amplification (c); Tags 06YY and 093J. -/
 theorem lisse_tower_constant_algebraic_reduction_diagram
     (X Y : Scheme.{u}) [IsNoetherian X] (g : Y ⟶ X) [IsImmersion g]
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (M : AdicTower X d)

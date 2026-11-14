@@ -18,7 +18,6 @@ import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor
 # Chart data for a graded polynomial module
 
 Source: Stacks Project, Tag 01M6 and Lemma 01M7.
-(blueprint: lem-sc-p1-graded-module-chart-data).
 -/
 
 @[expose] public section
@@ -53,7 +52,6 @@ private theorem range_chart_inclusion {R N B : Type u} [Semiring R]
 set_option backward.isDefEq.respectTransparency false in
 /-- Push charts forward along the identity graded ring map between the two polynomial
 presentations. Source: Stacks Project, construction before Definition 01M6 and Lemma 01M7.
-(blueprint: lem-sc-p1-graded-module-chart-data).
 
 The identity ring map preserves homogeneous elements and sends the irrelevant ideal
 onto the irrelevant ideal, so Mathlib's Proj.map supplies the required scheme morphism.
@@ -151,22 +149,7 @@ private theorem graded_module_chart_regrading
     exact hrestrict f g j s
 
 /-- An integer-graded polynomial module has an associated sheaf with explicit chart data.
-Source: Stacks Project, construction before Definition 01M6 and Lemma 01M7.
-(blueprint: lem-sc-p1-graded-module-chart-data).
-
-Proof:
-Apply gradedModuleSheaf_exists to the additive-subgroup form of the homogeneous
-polynomial grading. Changing from homogeneous submodules to their underlying additive
-subgroups preserves all homogeneous ideals and all degree-zero localizations. These
-identifications commute with basic opens and structure-sheaf restrictions, hence induce
-an isomorphism of their Proj schemes. Transport the constructed sheaf across this
-isomorphism. On each chart compose its additive equivalence to the degree-zero
-submodule with the submodule inclusion into the ordinary localization. Injectivity
-comes from the equivalence and inclusion, and surjectivity onto degree-zero fractions
-comes from the equivalence and the specified carrier of the submodule. Apply the
-submodule inclusion to the scalar equation. For a relation g^e = a*f, apply it to the
-restriction equation and then the formula for rho supplied by gradedModuleSheaf_exists.
-These give precisely the three chart properties below. -/
+Source: Stacks Project, construction before Definition 01M6 and Lemma 01M7. -/
 theorem graded_module_chart_data_exists (k : Type u) [Field k]
     (A : ModuleCat.{u} (MvPolynomial (Fin 2) k))
     (𝒢 : ℤ → AddSubgroup A) (h𝒢 : DirectSum.IsInternal 𝒢)

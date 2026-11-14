@@ -52,9 +52,8 @@ import all WeilConjectures.AlgebraicGeometry.Adic.AdicCoefficientDatumSupplement
 
 /-! # Filtration quotients with completed integral models
 
-Source: Bhatt--Scholze, Definitions 6.8.6 and 6.8.10, Proposition 6.8.11(3),
-Lemma 6.8.13 and Proposition 6.8.14(2), pp. 60--62
-(blueprint: lem-per-rational-stratum-integral-models).
+Source: Bhatt--Scholze, Definitions 6.8.6 and 6.8.10, Proposition 6.8.11(3), Lemma 6.8.13 and
+Proposition 6.8.14(2), pp. 60--62.
 -/
 
 @[expose] public noncomputable section
@@ -68,43 +67,8 @@ namespace AlgebraicGeometry.ProEtale.RationalStratum
 integral models for the open/closed stratum quotients. IsCompletedModel retains
 completeness, uniform constructible reductions and compatible etale-origin witnesses.
 The integral sheaves are constructible; they need not be lisse or torsion-free.
-Source: Bhatt--Scholze, Definitions 6.8.6 and 6.8.10, Proposition 6.8.11(3),
-Lemma 6.8.13 and Proposition 6.8.14(2), pp. 60--62
-(blueprint: lem-per-rational-stratum-integral-models).
-
-Proof following the seven node steps:
-1. Identify completed and continuous coefficients by
-lem-weil-pbc-continuous-coefficients-immersion-restriction. The continuous realization
-isomorphism (lem-weil-pbc-continuous-coefficient-realizations) and the internal/sectionwise
-module equivalence identify finite free models with finite constant models solely to
-apply the filtration lemma.
-2. Noetherian closed subsets satisfy the descending-chain condition by
-lem-weil-pbc-noetherian-scheme-closed-subsets-minimal. Apply
-lem-sfb-finite-model-stratum-filtration. Over E its finitely presented stratum models
-are finite free, hence lisse. Its monic maps give the filtration below.
-3. Immersions are locally of finite type (lem-weil-pbc-immersion-base-change-lft).
-pqf-lem-locnoeth-lft makes their sources locally noetherian; compactness of every subset
-(lem-sfb-noetherian-space-compact-subsets) makes them noetherian. Closures in X embed
-strict irreducible chains, bounding dimensions. Units restrict along local-ring maps.
-4. Apply lem-weil-pbc-lisse-e-constructible-integral-lattice on every stratum to get N
-and its specified rationalization isomorphism, with finitely presented scalar models.
-5. Apply lem-weil-pbc-integral-model-open-closed-pieces to the closed part and zero on
-its complement, then to the resulting open part and zero on its complement. This
-makes the actual piece v_! t_* N constructible and gives both scalar comparisons.
-6. Its degree-zero complex has bounded constructible cohomology. Condition (iii)
-implies (i) of lem-weil-pbc-integral-stratified-perfect-characterization puts it in
-the completed category with the full witnesses. Normalize the coefficient comparison
-by its finite residue maps, as in IsCompletedModel.
-7. lem-weil-pbc-scalar-localization-module-colimit identifies scalar extension with
-the repeated-uniformizer colimit with nth leg h mapped to varpi^(-n) tensor h. The
-actual closed functor preserves this filtered colimit on qcqs schemes by
-lem-weil-pbc-proetale-ringed-open-closed; the open functor preserves it by adjunction.
-Their linearity preserves its transition maps. On every open-extension generator
-the induced comparison is the formula IsNormalizedComparison. The colimit universal
-property makes it equal to the separate open/closed comparisons. Compose with the
-lattice isomorphism for the claimed comparison with v_! t_* L.
-Empty schemes, the empty filtration, zero sheaves, torsion lattices and nonreduced X
-are all included. -/
+Source: Bhatt--Scholze, Definitions 6.8.6 and 6.8.10, Proposition 6.8.11(3), Lemma 6.8.13 and
+Proposition 6.8.14(2), pp. 60--62. -/
 theorem exists_filtration_integral_models
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

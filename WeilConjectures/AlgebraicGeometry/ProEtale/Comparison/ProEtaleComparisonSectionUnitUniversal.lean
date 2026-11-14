@@ -45,7 +45,6 @@ local notation:max "δ[" X "," F "," U "]" s:max =>
 set_option backward.isDefEq.respectTransparency false in
 /-- The comparison unit is constructed section by section, by pulling back
 along the diagonal and decoding with e. Source: Stacks Project, Tag 0GLZ.
-(blueprint: def-cbc-comparison-section-diagonal-unit).
 Naturality in site objects follows from diagonal-section naturality and hres;
 naturality in coefficients follows from hfun and naturality of the inverse-image unit. -/
 noncomputable def proEtaleComparisonSectionUnit (X : Scheme.{u})
@@ -741,29 +740,7 @@ This is a unique-extension statement about an already constructed map, without
 asserting an adjunction or any natural hom-set equivalence.
 
 Source: Stacks Project, Tag 0GLZ, the sectionwise transpose and verification of
-its two inverse composites.
-(blueprint: lem-cbc-comparison-section-unit-universal).
-Proof: fix F, G and a morphism alpha from F to the restriction of G. For each
-pro-étale Y over X, restrict G to the étale site of Y by viewing an étale
-Y-scheme as a pro-étale X-scheme. This is a sheaf since étale covering families
-are pro-étale covering families. For each étale U over X, restrict alpha_U along
-Y times_X U to obtain F -> (Y.hom)_* G_Y. Transpose using the étale
-inverse-image adjunction, evaluate at the identity of Y, and precompose with
-e_F,Y to obtain beta_Y. For Z -> Y the composition-unit identity identifies
-the two successive transposes: both send a section to alpha_U of that section
-restricted to Z times_X U. The law hres therefore makes the beta_Y a sheaf
-morphism beta:A(F)->G. On an étale U, naturality of the transpose along the
-diagonal and the adjunction-unit equation show that beta sends the specified
-diagonal section to alpha_U. Thus beta extends alpha, proving surjectivity.
-For uniqueness, sheafification is locally surjective and every section of
-the presheaf left Kan extension is represented by a section t of F on an
-étale W over X and an arrow into the base change of W. The composition-unit
-equation and hres identify these local representatives with restrictions of
-the diagonal section of t. Two extensions agreeing on diagonal sections
-therefore agree after a covering sieve on the étale site of Y. Separatedness
-of G restricted to that site gives equality at Y. This proves injectivity.
-The arguments use covering sieves and remain valid for empty schemes and
-empty section sets. -/
+its two inverse composites. -/
 theorem proEtaleComparisonSectionUnit_bijective (X : Scheme.{u})
     (A : Sheaf X.smallEtaleTopology (Type (u + 1)) ⥤
       Sheaf (Scheme.ProEt.topology X) (Type (u + 1)))

@@ -13,7 +13,6 @@ import WeilConjectures.CategoryTheory.Pseudofunctor.LisseFiberCoherenceNormaliza
 # Coherent scalar comparisons for geometric fibres
 
 Source: Deligne, Weil II (1.1.1) b)-d), pp. 146-147.
-(blueprint: lem-pod-lisse-coefficient-fiber-comparisons).
 -/
 
 @[expose] public section
@@ -29,8 +28,7 @@ variable (l : ℕ) [Fact l.Prime] (Y : Scheme.{d})
   (K : Type (d + 1)) [Field K] [Algebra ℚ_[l] K] [IsAlgClosure ℚ_[l] K]
 
 /-- Transport a rational coefficient comparison to the recorded pseudofunctor categories.
-Source: Weil II (1.1.1) d)
-(blueprint: lem-pod-lisse-coefficient-fiber-comparisons). -/
+Source: Weil II (1.1.1) d). -/
 noncomputable def lisseCoefficientFiberRawComparison
     (S : ∀ E₀ : Padic.FiniteCoefficientFields l K,
       LisseRationalSheaf l E₀.val Y ⥤ ModuleCat.{d + 1} E₀.val)

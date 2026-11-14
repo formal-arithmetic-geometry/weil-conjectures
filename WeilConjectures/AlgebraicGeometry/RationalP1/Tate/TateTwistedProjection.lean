@@ -16,9 +16,6 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Coefficient.DiagonalCoefficientCategory
 
 /-! # The specified Tate-twisted projection comparison
-
-Source: blueprint main-20261015, rational projective-line unit/counit, clause 2
-(blueprint: def-sfb-tate-twisted-projection-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -38,18 +35,12 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
 -- Keep fixed site and derived comparisons folded during elaboration.
-/-- Tensor with the given degree-zero Tate module, followed by the positive shift two.
-Source: blueprint unit/counit clause 2
-(blueprint: def-sfb-tate-twisted-projection-comparison). -/
+/-- Tensor with the given degree-zero Tate module, followed by the positive shift two. -/
 def twist (X : Scheme.{u}) (L : Modules Λ X) :
     DerivedCategory (Modules Λ X) ⥤ DerivedCategory (Modules Λ X) :=
   rationalTwistFunctor Λ X L ⋙ shiftFunctor _ (2 : ℤ)
 
-/-- The native tensor-shift comparison in the shared interface is uniquely determined.
-Source: blueprint clause 2 (blueprint: def-sfb-tate-twisted-projection-comparison).
-Proof: unfold the shared bundle fields and the recorded rational twist. The displayed
-endpoints are the native tensor-shift endpoints. Equality to the native isomorphism gives
-existence and uniqueness, retaining its sign convention. -/
+/-- The native tensor-shift comparison in the shared interface is uniquely determined. -/
 theorem tensorShift_existsUnique (X : Scheme.{u}) (L : Modules Λ X)
     (A : DerivedCategory (Modules Λ X)) :
     ∃! e : A ⊗ (((DerivedCategory.singleFunctor (Modules Λ X) 0).obj L) ⟦(2 : ℤ)⟧) ≅
@@ -62,31 +53,25 @@ theorem tensorShift_existsUnique (X : Scheme.{u}) (L : Modules Λ X)
   intro e he
   exact eq_of_heq he
 
-/-- The fixed native tensor-shift comparison, with the Tate factor on the right.
-Source: blueprint clause 2 (blueprint: def-sfb-tate-twisted-projection-comparison). -/
+/-- The fixed native tensor-shift comparison, with the Tate factor on the right. -/
 def tensorShiftIso (X : Scheme.{u}) (L : Modules Λ X)
     (A : DerivedCategory (Modules Λ X)) :
     A ⊗ (((DerivedCategory.singleFunctor (Modules Λ X) 0).obj L) ⟦(2 : ℤ)⟧) ≅
       (twist Λ X L).obj A :=
   (tensorShift_existsUnique Λ X L A).exists.choose
 
-/-- The family of canonical right-factor projection arrows in the shared tensor interface.
-Source: blueprint clause 2 (blueprint: def-sfb-tate-twisted-projection-comparison). -/
+/-- The family of canonical right-factor projection arrows in the shared tensor interface. -/
 def ProjectionMateFamily := ∀ {X S : Scheme.{u}} (f : X ⟶ S)
   (A : DerivedCategory (Modules Λ X)) (B : DerivedCategory (Modules Λ S)),
   (moduleObjectDerivedPushforward Λ f).obj A ⊗ B ⟶
     (moduleObjectDerivedPushforward Λ f).obj (A ⊗ (moduleObjectDerivedPullback Λ f).obj B)
 
-/-- Retain the representative-normalized published projection mate, pointwise.
-Source: blueprint clause 2 (blueprint: def-sfb-tate-twisted-projection-comparison). -/
+/-- Retain the representative-normalized published projection mate, pointwise. -/
 def ProjectionMateNormalized (a : ProjectionMateFamily Λ) : Prop :=
   ∀ {X S : Scheme.{u}} (f : X ⟶ S) (A : DerivedCategory (Modules Λ X))
     (B : DerivedCategory (Modules Λ S)), HEq (a f A B) (moduleObjectProjectionMate Λ f A B)
 
-/-- The published mate uniquely determines the family in the shared interface.
-Source: blueprint clause 2 (blueprint: def-sfb-tate-twisted-projection-comparison).
-Proof: reduce the fixed tensor bundle fields to the published native tensor. Reuse the
-published mate. Pointwise heterogeneous equality fixes every map, giving uniqueness. -/
+/-- The published mate uniquely determines the family in the shared interface. -/
 theorem projectionMate_existsUnique :
     ∃! a : ProjectionMateFamily Λ, ProjectionMateNormalized Λ a := by
   unfold ProjectionMateFamily ProjectionMateNormalized
@@ -98,14 +83,11 @@ theorem projectionMate_existsUnique :
     funext X S f A B
     exact eq_of_heq (ha f A B)
 
-/-- The same published projection mate in the fixed shared interface.
-Source: blueprint clause 2 (blueprint: def-sfb-tate-twisted-projection-comparison). -/
+/-- The same published projection mate in the fixed shared interface. -/
 def projectionMateMap : ProjectionMateFamily Λ := (projectionMate_existsUnique Λ).exists.choose
 
 -- Keep fixed site and derived comparisons folded during elaboration.
-/-- The right projection mate with precisely the specified shifted-line comparison.
-Source: blueprint unit/counit clause 2
-(blueprint: def-sfb-tate-twisted-projection-comparison). -/
+/-- The right projection mate with precisely the specified shifted-line comparison. -/
 def twistProjectionMap {X S : Scheme.{u}} (f : X ⟶ S)
     (LS : Modules Λ S) (LX : Modules Λ X)
     (e : (moduleObjectDerivedPullback Λ f).obj

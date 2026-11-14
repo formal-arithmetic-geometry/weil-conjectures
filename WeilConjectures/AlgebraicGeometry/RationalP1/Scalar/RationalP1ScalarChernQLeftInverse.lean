@@ -21,7 +21,6 @@ import Mathlib.CategoryTheory.Preadditive.Biproducts
 We descend the second-projection splitting through proper base change. Pullback
 by the projective-line projection reflects isomorphisms because of its section
 at infinity.
-Source: the second rational projective-line triangle calculation.
 -/
 
 @[expose] public noncomputable section
@@ -139,19 +138,7 @@ private theorem second_exchange_iso
 
 set_option linter.unusedVariables false in
 -- Preserve the common displayed P2 setup in the fixed statement.
-/-- The explicit scalar Q biproduct map has a left inverse.
-
-Source: the second rational projective-line triangle calculation.
-(blueprint: lem-sfb-rational-p1-scalar-q-left-inverse)
-
-Proof: proper base change is invertible on the shifted positive line, which
-belongs to the rational localizing category. The two base-change component
-identities and the canonical biproduct comparison identify the pulled-back
-Q map, followed by this exchange, with the invertible P2 splitting. Cancelling
-these isomorphisms proves that the pulled-back Q map is invertible. The section
-at infinity, together with the derived pullback compositor and identity
-comparison, shows that Q pullback reflects isomorphisms. Its reflected inverse
-satisfies the required inverse-hom equation. -/
+/-- The explicit scalar Q biproduct map has a left inverse. -/
 theorem scalar_q_chern_left_inverse
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

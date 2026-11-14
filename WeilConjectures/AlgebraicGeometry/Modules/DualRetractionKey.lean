@@ -18,7 +18,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 set_option backward.isDefEq.respectTransparency false in
 /-- Categorical cancellation for the local transpose retraction.
 Source: Stacks Project, Tag 0EKP, transpose compatibility.
-(blueprint: new-sbc-dual-retraction-key)
 
 The naturality hypothesis rewrites the restricted transpose as local precomposition.
 Contravariant functoriality of `homObjMap` combines this with precomposition by `s`.

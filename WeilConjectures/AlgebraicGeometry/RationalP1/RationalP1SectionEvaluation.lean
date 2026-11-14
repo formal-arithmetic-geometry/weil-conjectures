@@ -13,10 +13,6 @@ import WeilConjectures.AlgebraicGeometry.RationalP1.FinishTensorEvaluation
 import WeilConjectures.AlgebraicGeometry.RationalP1.SectionEvaluationCongruence
 
 /-! # Evaluating an arbitrary kernel on the projective diagonal
-
-Source: the first identity in the rational projective-line triangle proof, the section
-and projection calculation after the trace has been transported to the first projection.
-(blueprint: lem-sfb-rational-p1-section-evaluation).
 -/
 
 @[expose] public noncomputable section
@@ -44,21 +40,8 @@ attribute [local irreducible] coefficient line diagram secondLineComparison
 
 -- Compare the fixed native functor and tensor instances by structural congruence.
 /-- The kernel-insertion prefix before the terminal first-projection functional.
-Source: the pre-unitor section calculation in the rational projective-line triangle
-(blueprint: lem-sfb-rational-p1-section-evaluation-prefix).
 This is the strict prefix of `first_section_tensor_evaluation_core`, before any
-terminal functional. Proof: expand the kernel insertion and use naturality of the
-path comparison to move its second-direct-image map to the first path. Compatibility
-of the canonical pullback composition comparisons with the two diagonal sections
-identifies the transported section with the first-projection section. The section
-case of projection/composition coherence identifies the inverse diagonal tensor map
-with the right-unitor inverse, the supported coefficient insertion, and the first
-projection map. Projection naturality then replaces the supported coefficient arrow
-by its composite with α. The normalization of d.support₁ and the full derived unit
-d.p₁_unit identify this coefficient insertion with d.support₁.hom transported by
-d.p₁_canonical. Apply the outer direct image and cancel the first projection map
-against its specified inverse hp. The final eqToHom changes only the presentation
-of its target object, using hobj. -/
+terminal functional. -/
 theorem first_section_tensor_evaluation_prefix
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (Y : Scheme.{u})
@@ -86,14 +69,7 @@ theorem first_section_tensor_evaluation_prefix
   delta firstKernelInsertion
   section_evaluation_exact native_section_tensor_prefix (coefficient l c).X Y L d M N α hobj hp
 
-/-- Cancellation of the first-projection transport before the terminal unitors.
-Source: the first identity in the rational projective-line triangle proof
-(blueprint: lem-sfb-rational-p1-section-evaluation-postprefix).
-Proof: the object-equality loop gives the identity morphism by proof irrelevance.
-The forward and inverse components of eqToIso d.p₁_canonical then cancel. Combine
-the two direct-image maps and the two left whiskerings by functoriality, reassociate,
-and apply this morphism cancellation. This uses no property of the kernel arrow or
-of the functional, and no section/projection or trace identity. -/
+/-- Cancellation of the first-projection transport before the terminal unitors. -/
 theorem first_section_tensor_evaluation_postprefix
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (Y : Scheme.{u})
@@ -130,13 +106,7 @@ theorem first_section_tensor_evaluation_postprefix
   rw [hcancel]
 
 -- Elaborate the native projection and the two canonical direct-image paths.
-/-- The section/projection paste before the terminal unitors.
-Source: the first identity in the rational projective-line triangle proof, with the
-terminal unitors omitted (blueprint: lem-sfb-rational-p1-section-evaluation-core).
-Proof: path-comparison naturality moves the kernel insertion across the path change;
-projectionMap naturality cancels the specified inverse first projection. The diagonal
-section identity leaves the normalized supported arrow followed by the native
-functional. -/
+/-- The section/projection paste before the terminal unitors. -/
 theorem first_section_tensor_evaluation_core
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (Y : Scheme.{u})
@@ -174,20 +144,7 @@ theorem first_section_tensor_evaluation_core
 
 /-- The section calculation with an arbitrary kernel arrow and an arbitrary functional.
 It uses neither a Tate pullback comparison nor a trace base-change equation. In particular,
-no integration equation for `d` is used.
-
-Source: current blueprint, sec-six-functors-basics/sk-prop-p1-adjunction-rational/
-sk-prop-p1-adjunction-rational-triangle.proof.md, First identity, final three sentences
-(blueprint: lem-sfb-rational-p1-section-evaluation).
-
-Proof: apply the existing pre-unitor evaluation to the arbitrary kernel and functional.
-Postcompose it by the direct image of identity_M tensor singleUnitIso.hom, and then by
-the right unitor. Functoriality, tensor functoriality and associativity combine the
-resulting word into the displayed right-hand side. These elementary rewrites take
-place in the proved private categorical helper. Explicit congruence proofs identify
-the native instance expressions with that helper's expressions, avoiding expensive
-kernel conversion. The argument works for zero kernels and zero functionals and uses
-invertibility only of the specified projection at N. -/
+no integration equation for `d` is used. -/
 theorem first_section_tensor_evaluation
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (Y : Scheme.{u})

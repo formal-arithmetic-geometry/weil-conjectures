@@ -94,10 +94,7 @@ attribute [local irreducible] upperStar Functor.mapDerivedCategory
 variable {T S R : Scheme.{u}} (f : T ⟶ S) (g : S ⟶ R)
 
 /-- The derived pullback compositor preserves the canonical tensor comparison.
-Source: Stacks 03EL and 07A4 (blueprint: lem-sf-proetale-derived-pullback-tensor-composition).
-Proof: the ordinary compositor is the monoidal adjunction mate of direct-image
-composition. Deriving its tensor naturality and composing with the generic tensor
-composition law for exact functors gives the equation. -/
+Source: Stacks 03EL and 07A4. -/
 theorem leftDerivedUpperStarTensorComparison_comp
     [NatTrans.IsMonoidal (upperStarComp A f g).inv]
     (K M : DerivedCategory (Sheaf (Scheme.ProEt.topology R) A)) :

@@ -17,7 +17,6 @@ import Mathlib.CategoryTheory.Triangulated.Adjunction
 # The actual projection mate on a pro-etale slice
 
 Source: Stacks, Modules on Sites, Tag 04IF; Cohomology on Sites, Tags 08FI and 0B56.
-(blueprint: lem-weil-pbc-proetale-projection-mate-slice-presentation).
 -/
 
 @[expose] public noncomputable section
@@ -36,8 +35,7 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 /-- A slice presentation of the actual mate, without a perfectness hypothesis.
 The two functors and their comparisons are ordinary derived functors on the slice.
-Source: Stacks Project, Tags 04IF, 08FI and 0B56.
-(blueprint: lem-weil-pbc-proetale-projection-mate-slice-presentation). -/
+Source: Stacks Project, Tags 04IF, 08FI and 0B56. -/
 structure ProEtaleProjectionMateSlicePresentation (U : Y.ProEt) where
   source : DerivedCategory (SheafOfModules.{u + 1}
       (((sheafCompose (ProEt.topology Y)
@@ -201,21 +199,7 @@ private theorem operationMate_commShift
   infer_instance
 
 /-- The projection mate has an exact presentation on every ordinary slice.
-Source: Stacks Project, Tags 04IF, 08FI, 07A4 and 0B56.
-(blueprint: lem-weil-pbc-proetale-projection-mate-slice-presentation).
-
-Proof: apply the canonical restriction package to the given morphism and ring
-identification. Tensor restriction and direct-image restriction identify the source
-with tensor by the restricted direct image. The pullback restriction mate and the
-same direct-image comparison identify the target with the local derived pushforward
-of tensor by the restricted E after local pullback. Normalize all tensor comparisons
-on flat K-flat pairs. Their signed total shift equations make both local functors
-exact and their counit mate shift-compatible. Equality with restriction of the global
-mate follows by adjunction from the restriction counit equation and tensor comparison
-naturality; these equations may be checked on resolving representatives. Transport
-from the canonical global tensor and pullback models to the supplied models using
-uniqueness of their normalized representative comparisons. The resulting natural
-isomorphisms give the displayed equation for every coefficient object. -/
+Source: Stacks Project, Tags 04IF, 08FI, 07A4 and 0B56. -/
 theorem proEtaleProjectionMateSlicePresentation (U : Y.ProEt) :
     Nonempty (ProEtaleProjectionMateSlicePresentation f R S c a b E U) := by
   classical

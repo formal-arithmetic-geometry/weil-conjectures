@@ -19,10 +19,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 /-!
 # Spreading an isomorphism of lines on a projective-bundle fibre
 
-Source: EGA II, Remark 4.2.7 (classification announcement); Stacks Project,
-coherent.tex, lemma-perfect-direct-image and remark-explain-perfect-direct-image;
-limits.tex, lemma-descend-invertible-modules.
-(blueprint: lem-sfb-projective-bundle-fiber-iso-spread)
+Source: EGA II, Remark 4.2.7 (classification announcement); Stacks Project.
 -/
 
 @[expose] public section
@@ -42,36 +39,7 @@ open Scheme.Modules
 above a neighbourhood of that base point. No degree or tautological quotient is used.
 The isomorphism on the neighbourhood need not extend a prescribed fibre isomorphism.
 
-Source: EGA II, Remark 4.2.7 (classification announcement); Stacks Project,
-coherent.tex, lemma-perfect-direct-image and remark-explain-perfect-direct-image;
-limits.tex, lemma-descend-invertible-modules.
-(blueprint: lem-sfb-projective-bundle-fiber-iso-spread)
-
-Proof: Work on an affine base neighbourhood trivializing E. First assume its ring
-A is Noetherian. Set F=M dual tensor N. The given fibre isomorphism trivializes
-F_s, and gives a generating section of F_s. The projective-space projection is
-proper and flat (its standard charts are polynomial projections). Since F is a
-line, it is also flat over A. The trivial fibre has H^1=0 by the projective-space
-structure-sheaf cohomology calculation, so proper flat fibre-section lifting
-extends its generator to a section over the inverse image of a base neighbourhood.
-In a local line basis this section has coefficient a unit modulo the base maximal
-ideal. That ideal maps into the local maximal ideal, hence this coefficient is
-a unit at every point of the fibre. The non-generation locus is closed: in each
-line basis its complement is the principal open of that coefficient. Its image
-on the base is closed by properness. Remove that image; the section trivializes
-F there. Tensor this trivialization with M and use dual evaluation to identify
-M with N. For arbitrary A, write A as the filtered union of its finite-type
-integer subalgebras. Descend M and N as invertible modules on projective spaces
-at a common Noetherian stage using invertible affine-limit descent. The prescribed
-fibre isomorphism also descends after increasing that stage: it and its inverse
-are maps between finitely presented modules, whose inverse identities descend
-at a later stage. For the fibre this uses the directed union of the residue
-fields at the image points. Apply the Noetherian argument at the image of s and
-pull its open neighbourhood and isomorphism back. Pullback composition identifies
-the resulting modules with the restrictions of M and N on the original bundle.
-Restricting first to an affine frame neighbourhood and then taking the smaller
-open gives an open of the original S. Nilpotents cause no change in the unit
-argument; if S is empty there is no s to check. -/
+Source: EGA II, Remark 4.2.7 (classification announcement); Stacks Project. -/
 theorem projective_bundle_fiber_iso_spread (S : Scheme.{u}) (E : S.Modules)
     [E.IsQuasicoherent] (r : ℕ)
     [SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u} E r] (hr : 2 ≤ r)

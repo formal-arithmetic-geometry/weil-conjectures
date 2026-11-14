@@ -15,10 +15,6 @@ import WeilConjectures.CategoryTheory.Derived.DerivedExactCube
 import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.Transition
 
 /-! # Open-chart compatibility of the native derived exchange
-
-Source: blueprint thm-weil-pbc-qbar.proof.md, Constructibility and the isomorphism,
-restriction to an open subscheme and compatibility with inverse images, units and counits.
-(blueprint: lem-sf-native-derived-exchange-open-chart).
 -/
 
 @[expose] public noncomputable section
@@ -265,31 +261,14 @@ private theorem pull_cube (l : ℕ) [Fact l.Prime]
     NatTrans.congr_app hc M
 
 /-- The pullback square over a further base map h, with all projections specified.
-Source: Stacks 09A5, pullback pasting.
-(blueprint: lem-sf-native-derived-exchange-open-chart). -/
+Source: Stacks 09A5, pullback pasting. -/
 theorem adicChartSquare {X Y A B : Scheme.{u}} (p : X ⟶ Y) (i : A ⟶ Y) (h : B ⟶ A) :
     CommSq (pullback.fst (pullback.snd p i) h) (pullback.snd (pullback.snd p i) h)
       (pullback.snd p i) h :=
   ⟨pullback.condition⟩
 
 /-- Restriction of the specified global mate is isomorphic as an arrow to its chart mate.
-Source: blueprint thm-weil-pbc-qbar.proof.md, Constructibility and the isomorphism,
-first paragraph; Stacks 0D6G and 09T5.
-(blueprint: lem-sf-native-derived-exchange-open-chart).
-
-Proof: first restrict p along i. The native open base-change isomorphism compares
-its derived direct image with restriction of Rp_*. Next restrict p' along j.
-Pullback pasting and the Cartesian hypothesis identify this second source with
-(X times_Y A) times_A B, respecting both projections. The pullback compositors
-identify the restricted inverse images. On a K-injective representative open
-restriction preserves K-injectivity, since it has exact extension by zero as left
-adjoint. Thus the two direct-image comparisons are computed by the ordinary open
-base-change maps. Their adjunct equations identify the restricted unit and counit
-with the local ones; pasting the inverse-image compositors gives the local square.
-The resulting commutative square has the two open base-change isomorphisms as its
-vertical sides, hence is the claimed isomorphism of arrows after localization.
-This is a compatibility of maps, with no properness or constructibility assumption.
-The empty chart uses the same restriction and projection identities. -/
+Source: Stacks 0D6G and 09T5. -/
 theorem adicDerivedBaseChange_openChart (l : ℕ) [Fact l.Prime]
     {X' X Y' Y A B : Scheme.{u}} {v : X' ⟶ X} {p' : X' ⟶ Y'}
     {p : X ⟶ Y} {g : Y' ⟶ Y} (sq : IsPullback v p' p g)

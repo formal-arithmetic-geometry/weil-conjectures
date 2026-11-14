@@ -121,10 +121,7 @@ private theorem local_dimension_le_of_goingDown
   exact ⟨⟨q, hq⟩, PrimeSpectrum.ext_iff.mpr hlo.over.symm⟩
 
 /-- Finite normalizations transfer the boundary dimension estimate to source stalks.
-Source: Stacks Project, Tags 0337, 00LK, 033C and 00H8.
-(blueprint: new-stalk-normalization-boundary-dimension-two-transfer)
-Proof: on normal affine components, going down for the finite integral normalization
-lifts a strict prime chain of length two from the target stalk to the source stalk. -/
+Source: Stacks Project, Tags 0337, 00LK, 033C and 00H8 -/
 theorem stalk_normalization_boundary_dimension_two_transfer {S C : Scheme.{u}}
     [IsNoetherian S] [QuasiSeparatedSpace S] [IsIntegral S]
     (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))

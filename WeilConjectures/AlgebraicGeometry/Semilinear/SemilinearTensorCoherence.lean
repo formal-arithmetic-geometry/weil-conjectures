@@ -11,8 +11,7 @@ import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearTensorReduction
 
 /-! # Tensor coherence for derived systems
 
-Source: Zheng, Construction 4.1 and Proposition 4.17; Stacks Tags 06YY,
-07A4, 07A6 and 08J9 (blueprint: lem-coef-semilinear-tensor-coherence).
+Source: Zheng, Construction 4.1 and Proposition 4.17; Stacks Tags 06YY, 07A4, 07A6 and 08J9.
 -/
 
 @[expose] public noncomputable section
@@ -33,8 +32,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
 variable (S : SystemScalarCoherence.{c, v, r} J B τ)
 
 /-- Tensor constructions and comparison models, including reduction compatibility.
-Source: Zheng Construction 4.1; Stacks 07A4 and 07A6
-(blueprint: lem-coef-semilinear-tensor-coherence). -/
+Source: Zheng Construction 4.1; Stacks 07A4 and 07A6. -/
 structure SystemTensorCoherence where
   /-- System tensor is covariant in both variables and closed against the recorded Hom. -/
   closed : Closed.{c, v, r} (coefficientSequenceTopology J) (systemRing.{c, v, max c v r} J B τ)
@@ -94,25 +92,7 @@ structure SystemTensorCoherence where
         (tensorEvaluation n).hom.app (M, N)
 
 /-- Representative-normalized tensor structures on the sequence site and its levels.
-Source: Zheng Construction 4.1; Stacks 07A4, 07A6 and 08J9
-(blueprint: lem-coef-semilinear-tensor-coherence).
-Proof: apply K-flat tensor descent on the ringed sequence site and on each
-coefficient site. The K-injective Hom construction and the natural
-Hom/tensor/Hom-complex adjunction identify its right adjoint with the recorded
-internal Hom, giving the closed structures and their total-complex models.
-Evaluation is exact restriction to a vertical slice and is an inverse image
-on underlying sheaves; its structural ring identification is evaluation_ring.
-K-flat pullback preserves the resolving representatives. The sectionwise
-identity on pure tensors therefore gives the tensor evaluation comparison,
-its chain comparison, summand formula and derived normalization. Derived
-extension of coefficients is likewise represented by tensoring K-flat
-complexes. Tensor reassociation gives scalarTensor with its counit and pure
-tensor normalizations. Finally, on these same strict representatives, both
-sides of reduction_tensor send a pure tensor x tensor y to the tensor of
-its two system restrictions. Balancing and sheafification extend the equation,
-and resolving-class descent makes it an equality of derived morphisms for
-all inputs. This proves compatibility of maps, not merely objectwise isomorphism.
-No coefficient map is required to be flat; resolutions are taken first. -/
+Source: Zheng Construction 4.1; Stacks 07A4, 07A6 and 08J9. -/
 theorem systemTensorCoherence_nonempty :
     Nonempty (SystemTensorCoherence.{c, v, r} J B τ S) := by
   obtain ⟨A⟩ := systemTensorBase_nonempty.{c, v, r} J B τ

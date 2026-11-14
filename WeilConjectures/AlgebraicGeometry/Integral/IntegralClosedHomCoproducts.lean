@@ -79,8 +79,7 @@ import all WeilConjectures.SecSmoothPurity.CochainCoefficientArrowsSupplement
 
 /-! # Closed support preserves bounded internal-Hom coproduct continuity
 
-Source: Bhatt--Scholze, Lemma 6.3.14(4); Stacks Tag 09BM
-(blueprint: lem-weil-pbc-integral-closed-hom-coproducts).
+Source: Bhatt--Scholze, Lemma 6.3.14(4); Stacks Tag 09BM.
 -/
 
 @[expose] public noncomputable section
@@ -93,25 +92,7 @@ namespace AlgebraicGeometry.Scheme
 set_option synthInstance.maxSize 4096 in
 /-- Closed direct image carries a source whose internal Hom preserves colimits to a
 source whose internal Hom preserves uniformly bounded-below sums.
-Source: Bhatt--Scholze, Lemma 6.3.14(4); Stacks Tag 09BM
-(blueprint: lem-weil-pbc-integral-closed-hom-coproducts).
-
-Proof: let j be the quasi-compact complementary open. The closed exceptional
-inverse image is the derived supported-section kernel, followed by closed
-restriction. The injective localization sequence gives the natural distinguished
-triangle i_*i!N -> N -> Rj_*j*N. Closed restriction and closed direct image are
-exact and preserve sums. Restriction preserves lower bounds, and qcqs open direct
-image preserves uniformly bounded-below sums. The morphism from the sum of these
-localization triangles to the localization triangle of the sum has its middle
-and third components invertible. The triangulated five lemma makes its first
-component invertible; full faithfulness of closed direct image proves bounded
-sum preservation by i!. The closed tensor projection formula, tensor-Hom
-transposition and the two adjunctions identify RHom(i_*P,N) with
- i_*RHom(P,i!N), naturally in N. Apply sum preservation by i!, by RHom(P,-),
-and by exact closed direct image in succession. Scalar restriction along the
-specified inverse-image coefficient isomorphism transports this argument to the
-actual completed rings in the statement. Empty closed schemes and empty sums
-are included. -/
+Source: Bhatt--Scholze, Lemma 6.3.14(4); Stacks Tag 09BM. -/
 theorem integralClosed_homPreservesCoproduct
     {T Z : Scheme.{u}} [TopologicalSpace.NoetherianSpace T]
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)

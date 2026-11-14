@@ -27,9 +27,7 @@ import WeilConjectures.Algebra.Homology.SiteDerivedTensorDescentIndependentCoeff
 
 /-! # Canonical finite open product operations
 
-Source: Stacks 0GL1, and the open-product part of blueprint main-20261015,
-sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md.
-(blueprint: lem-pur-finite-open-product-swap).
+Source: Stacks 0GL1.
 
 We use the fixed-scalar presentation `FiniteD` of the ordinary constant-coefficient
 module derived category, with its canonical intrinsic realization from the open
@@ -59,32 +57,28 @@ open SheafOfModules.OpenTensorNormalization
 
 namespace WeilConjectures.FiniteOpenProduct
 
-/-- The chosen fibre-product object, kept named while deriving its operations.
-Source: Mathlib pullback (blueprint: lem-pur-finite-open-product-swap). -/
+/-- The chosen fibre-product object, kept named while deriving its operations. -/
 @[irreducible]
 def product {T U B : Scheme.{u}} (a : T ⟶ B) (b : U ⟶ B) : Scheme.{u} :=
   pullback a b
 
-/-- First projection of the chosen product.
-Source: Mathlib pullback (blueprint: lem-pur-finite-open-product-swap). -/
+/-- First projection of the chosen product. -/
 def first {T U B : Scheme.{u}} (a : T ⟶ B) (b : U ⟶ B) : product a b ⟶ T := by
   unfold product
   exact pullback.fst a b
 
-/-- Second projection of the chosen product.
-Source: Mathlib pullback (blueprint: lem-pur-finite-open-product-swap). -/
+/-- Second projection of the chosen product. -/
 def second {T U B : Scheme.{u}} (a : T ⟶ B) (b : U ⟶ B) : product a b ⟶ U := by
   unfold product
   exact pullback.snd a b
 
-/-- The actual swap of the two chosen fibre products.
-Source: Mathlib pullbackSymmetry (blueprint: lem-pur-finite-open-product-swap). -/
+/-- The actual swap of the two chosen fibre products. -/
 def swap {T U B : Scheme.{u}} (a : T ⟶ B) (b : U ⟶ B) : product a b ≅ product b a := by
   unfold product
   exact pullbackSymmetry a b
 
 /-- Evaluate the canonical K-flat Koszul braiding on a pro-etale coefficient category.
-Source: signed tensor conventions (blueprint: lem-pur-finite-open-product-swap). -/
+Source: signed tensor conventions. -/
 def proetSigma (V : Type v) [Category.{u + 1} V] [Abelian V]
     [IsGrothendieckAbelian.{u + 1} V] [MonoidalCategory V] [MonoidalClosed V]
     [MonoidalPreadditive V] [SymmetricCategory V] [Abelian.HasFunctorialFlatResolution V]
@@ -96,31 +90,31 @@ def proetSigma (V : Type v) [Category.{u + 1} V] [Abelian V]
 variable (A : Type (u + 1)) [CommRing A] [Finite A]
 
 /-- The published derived tensor, with its coefficient specialization named.
-Source: Stacks 06YS (blueprint: lem-pur-finite-open-product-swap). -/
+Source: Stacks 06YS. -/
 abbrev tensor (Y : Scheme.{u}) (M N : FiniteD A Y) : FiniteD A Y :=
   ((ProEtale.derivedTensor (ModuleCat.{u + 1} A) Y).obj M).obj N
 
 /-- Map both arguments of the published derived tensor bifunctor.
-Source: Stacks 06YS (blueprint: lem-pur-finite-open-product-swap). -/
+Source: Stacks 06YS. -/
 def tensorMap (Y : Scheme.{u}) {M M' N N' : FiniteD A Y}
     (f : M ⟶ M') (g : N ⟶ N') : tensor A Y M N ⟶ tensor A Y M' N' :=
   ((ProEtale.derivedTensor (ModuleCat.{u + 1} A) Y).map f).app N ≫
     ((ProEtale.derivedTensor (ModuleCat.{u + 1} A) Y).obj M').map g
 
 /-- Map two isomorphisms under the same published derived tensor bifunctor.
-Source: Stacks 06YS (blueprint: lem-pur-finite-open-product-swap). -/
+Source: Stacks 06YS. -/
 def tensorIsoMap (Y : Scheme.{u}) {M M' N N' : FiniteD A Y}
     (f : M ≅ M') (g : N ≅ N') : tensor A Y M N ≅ tensor A Y M' N' :=
   ((ProEtale.derivedTensor (ModuleCat.{u + 1} A) Y).mapIso f).app N ≪≫
     ((ProEtale.derivedTensor (ModuleCat.{u + 1} A) Y).obj M').mapIso g
 
 /-- Exact inverse image on complexes, with its canonical K-flat derived identification.
-Source: Stacks 07A4 (blueprint: lem-pur-finite-open-product-swap). -/
+Source: Stacks 07A4. -/
 def pull {X Y : Scheme.{u}} (f : X ⟶ Y) : FiniteD A Y ⥤ FiniteD A X :=
   (ProEtale.upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategory
 
 /-- Tensor comparison for exact inverse image, with its canonical derived identification.
-Source: Stacks 07A4 (blueprint: lem-pur-finite-open-product-swap). -/
+Source: Stacks 07A4. -/
 def tensorPullIso {T U : Scheme.{u}} (f : T ⟶ U) (M N : FiniteD A U) :=
   (ProEtale.leftDerivedUpperStarIsoMapDerivedCategory
       (ModuleCat.{u + 1} A) f).symm.app (tensor A U M N) ≪≫
@@ -132,26 +126,25 @@ def tensorPullIso {T U : Scheme.{u}} (f : T ⟶ U) (M N : FiniteD A U) :=
           (ModuleCat.{u + 1} A) f).app N)
 
 /-- The open adjunction, using the canonical exact/left-derived identification.
-Source: Stacks 03DI (blueprint: lem-pur-finite-open-product-swap). -/
+Source: Stacks 03DI. -/
 def adj {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     finiteShriek A j ⊣ pull A j :=
   ProEtale.derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) j
 
 /-- Composition for exact pullback, induced termwise before localization.
-Source: Stacks 07A4 (blueprint: lem-pur-finite-open-product-swap). -/
+Source: Stacks 07A4. -/
 def pullComp {T U X : Scheme.{u}} (i : T ⟶ U) (j : U ⟶ X) :
     pull A (i ≫ j) ≅ pull A j ⋙ pull A i :=
   Functor.mapDerivedCategoryNatIso (ProEtale.upperStarComp (ModuleCat.{u + 1} A) i j) ≪≫
     (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- Geometric equality induces equality of the exact pullback functors.
-Source: Stacks 07A4 (blueprint: lem-pur-finite-open-product-swap). -/
+Source: Stacks 07A4. -/
 def pullCongr {T X : Scheme.{u}} {f g : T ⟶ X} (w : f = g) : pull A f ≅ pull A g :=
   w ▸ Iso.refl _
 
 /-- Unit-compatible composition of exact open extensions, descended termwise.
-Source: Stacks 03DI; the canonical open compositor
-(blueprint: lem-pur-finite-open-product-swap). -/
+Source: Stacks 03DI; the canonical open compositor. -/
 def comp {V U X : Scheme.{u}} (i : V ⟶ U) (j : U ⟶ X)
     [IsOpenImmersion i] [IsOpenImmersion j] :
     finiteShriek A i ⋙ finiteShriek A j ≅ finiteShriek A (i ≫ j) :=
@@ -160,7 +153,7 @@ def comp {V U X : Scheme.{u}} (i : V ⟶ U) (j : U ⟶ X)
       (adj A (i ≫ j))
 
 /-- Canonical pullback composition along an equality of geometric composites.
-Source: Stacks 07A4 (blueprint: lem-pur-finite-open-product-swap). -/
+Source: Stacks 07A4. -/
 def square {T X Y Z : Scheme.{u}} (f : T ⟶ X) (g : X ⟶ Z)
     (h : T ⟶ Y) (i : Y ⟶ Z) (w : f ≫ g = h ≫ i) :
     pull A g ⋙ pull A f ≅ pull A i ⋙ pull A h :=
@@ -169,7 +162,7 @@ def square {T X Y Z : Scheme.{u}} (f : T ⟶ X) (g : X ⟶ Z)
       pullComp A h i
 
 /-- Compose the canonical pullback comparison with a geometric projection equality.
-Source: Stacks 07A4 (blueprint: lem-pur-finite-open-product-swap). -/
+Source: Stacks 07A4. -/
 def composeEq {T X Y : Scheme.{u}} (f : T ⟶ X) (g : X ⟶ Y)
     (h : T ⟶ Y) (w : f ≫ g = h) : pull A g ⋙ pull A f ≅ pull A h :=
   (pullComp A f g).symm ≪≫
@@ -177,7 +170,7 @@ def composeEq {T X Y : Scheme.{u}} (f : T ⟶ X) (g : X ⟶ Y)
 
 /-- Open base change with the exact/left-derived comparisons made explicit.
 Its inverse is the normalized open-unit mate, as in the normalization dependency.
-Source: Stacks 03S6 (blueprint: lem-pur-finite-open-product-swap). -/
+Source: Stacks 03S6. -/
 def beta {U' U X' X : Scheme.{u}} (gU : U' ⟶ U) (j' : U' ⟶ X')
     (j : U ⟶ X) (g : X' ⟶ X) [IsOpenImmersion j] [IsOpenImmersion j']
     (s : IsPullback gU j' j g) :
@@ -185,7 +178,7 @@ def beta {U' U X' X : Scheme.{u}} (gU : U' ⟶ U) (j' : U' ⟶ X')
   ProEtale.ordinaryOpenExtensionBaseChangeIso A gU j' j g s
 
 /-- The actual normalized open tensor comparison, in extension-first order.
-Source: Stacks 0GL1 (blueprint: lem-pur-finite-open-product-swap). -/
+Source: Stacks 0GL1. -/
 def gamma {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (M : FiniteD A U) (N : FiniteD A X) :=
   finiteGamma A j M N ≫
@@ -195,15 +188,14 @@ def gamma {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
           (ModuleCat.{u + 1} A) j).hom.app N))
 
 /-- The canonical Koszul braiding descended from the homotopy category.
-Source: signed tensor conventions (blueprint: lem-pur-finite-open-product-swap). -/
+Source: signed tensor conventions. -/
 def sigma (Y : Scheme.{u}) (M N : FiniteD A Y) :
     ((ProEtale.derivedTensor (ModuleCat.{u + 1} A) Y).obj M).obj N ⟶
       ((ProEtale.derivedTensor (ModuleCat.{u + 1} A) Y).obj N).obj M :=
   proetSigma (ModuleCat.{u + 1} A) Y M N
 
 /-- Right-extension order uses both signed symmetries, rather than an unsigned flip.
-Source: node proof Step 3; Stacks 0GL1
-(blueprint: lem-pur-finite-open-product-swap). -/
+Source: Stacks 0GL1. -/
 def rho {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (M : FiniteD A X) (N : FiniteD A U) :=
   sigma A _ M ((finiteShriek A j).obj N) ≫ gamma A j N M ≫
@@ -211,37 +203,32 @@ def rho {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 
 variable {Xb Zb B X Z : Scheme.{u}}
 
-/-- The first open on a product, formed by the chosen fibre-product functor.
-Source: node proof Step 1 (blueprint: lem-pur-finite-open-product-swap). -/
+/-- The first open on a product, formed by the chosen fibre-product functor. -/
 def leftOpen (a : Xb ⟶ B) (b : Zb ⟶ B) (j : X ⟶ Xb) :
     product (j ≫ a) b ⟶ product a b := by
   unfold product
   exact pullback.map (j ≫ a) b a b j (𝟙 Zb) (𝟙 B) (by simp) (by simp)
 
-/-- The second open on a product, formed by the same fibre-product functor.
-Source: node proof Step 1 (blueprint: lem-pur-finite-open-product-swap). -/
+/-- The second open on a product, formed by the same fibre-product functor. -/
 def rightOpen (a : Xb ⟶ B) (b : Zb ⟶ B) (k : Z ⟶ Zb) :
     product a (k ≫ b) ⟶ product a b := by
   unfold product
   exact pullback.map a (k ≫ b) a b (𝟙 Xb) k (𝟙 B) (by simp) (by simp)
 
-/-- The first open on a product is an open immersion, as a base change of `j`.
-Source: node proof Step 1 (blueprint: lem-pur-finite-open-product-swap). -/
+/-- The first open on a product is an open immersion, as a base change of `j`. -/
 instance leftOpen_isOpenImmersion (a : Xb ⟶ B) (b : Zb ⟶ B) (j : X ⟶ Xb)
     [IsOpenImmersion j] : IsOpenImmersion (leftOpen a b j) := by
   unfold leftOpen product
   exact Scheme.pullback_map_isOpenImmersion (j ≫ a) b a b j (𝟙 Zb) (𝟙 B) (by simp) (by simp)
 
-/-- The second open on a product is an open immersion, as a base change of `k`.
-Source: node proof Step 1 (blueprint: lem-pur-finite-open-product-swap). -/
+/-- The second open on a product is an open immersion, as a base change of `k`. -/
 instance rightOpen_isOpenImmersion (a : Xb ⟶ B) (b : Zb ⟶ B) (k : Z ⟶ Zb)
     [IsOpenImmersion k] : IsOpenImmersion (rightOpen a b k) := by
   unfold rightOpen product
   exact Scheme.pullback_map_isOpenImmersion a (k ≫ b) a b (𝟙 Xb) k (𝟙 B) (by simp) (by simp)
 
 set_option linter.defProp false in
-/-- Product base change for the first open, with its two projection equations.
-Source: node proof Step 1 (blueprint: lem-pur-finite-open-product-swap). -/
+/-- Product base change for the first open, with its two projection equations. -/
 def leftSquare (a : Xb ⟶ B) (b : Zb ⟶ B) (j : X ⟶ Xb) :
     IsPullback (first (j ≫ a) b) (leftOpen a b j) j (first a b) := by
   unfold first leftOpen product
@@ -252,15 +239,13 @@ def leftSquare (a : Xb ⟶ B) (b : Zb ⟶ B) (j : X ⟶ Xb) :
     simpa using (IsPullback.of_hasPullback (j ≫ a) b).flip
   exact (h.of_right (by simp) (IsPullback.of_hasPullback a b).flip).flip
 
-/-- The first base-change step, tensored with the untouched second pullback.
-Source: node proof Step 4 (blueprint: lem-pur-finite-open-product-swap). -/
+/-- The first base-change step, tensored with the untouched second pullback. -/
 def leftBeta (a : Xb ⟶ B) (b : Zb ⟶ B) (j : X ⟶ Xb)
     [IsOpenImmersion j] (M : FiniteD A X) (N : FiniteD A Zb) :=
   tensorMap A (product a b) ((beta A _ _ _ _ (leftSquare a b j)).hom.app M)
     (𝟙 ((pull A (second a b)).obj N))
 
-/-- Tensor the projection-composition comparison at an abstract geometric corner.
-Source: node proof Step 4 (blueprint: lem-pur-finite-open-product-swap). -/
+/-- Tensor the projection-composition comparison at an abstract geometric corner. -/
 def projectionTensor {V C T U : Scheme.{u}} (v : V ⟶ C) (t : C ⟶ T)
     (p : V ⟶ U) (q : V ⟶ T) (h : v ≫ t = q)
     (M : FiniteD A U) (N : FiniteD A T) :
@@ -269,8 +254,7 @@ def projectionTensor {V C T U : Scheme.{u}} (v : V ⟶ C) (t : C ⟶ T)
   ((ProEtale.derivedTensor (ModuleCat.{u + 1} A) V).obj ((pull A p).obj M)).map
     ((composeEq A v t q h).hom.app N)
 
-/-- Extend the projection-tensor comparison at the same abstract corner.
-Source: node proof Step 4 (blueprint: lem-pur-finite-open-product-swap). -/
+/-- Extend the projection-tensor comparison at the same abstract corner. -/
 def extendedProjectionTensor {V C T U : Scheme.{u}} (v : V ⟶ C) [IsOpenImmersion v]
     (t : C ⟶ T) (p : V ⟶ U) (q : V ⟶ T) (h : v ≫ t = q)
     (M : FiniteD A U) (N : FiniteD A T) :
@@ -279,8 +263,7 @@ def extendedProjectionTensor {V C T U : Scheme.{u}} (v : V ⟶ C) [IsOpenImmersi
     (finiteShriek A v).obj (tensor A V ((pull A p).obj M) ((pull A q).obj N)) :=
   (finiteShriek A v).map (projectionTensor A v t p q h M N)
 
-/-- The specified first-factor comparison, beta followed by gamma and projections.
-Source: node proof Step 4 (blueprint: lem-pur-finite-open-product-swap). -/
+/-- The specified first-factor comparison, beta followed by gamma and projections. -/
 def leftComparison (a : Xb ⟶ B) (b : Zb ⟶ B) (j : X ⟶ Xb)
     [IsOpenImmersion j] (M : FiniteD A X) (N : FiniteD A Zb) :=
   leftBeta A a b j M N ≫
@@ -292,8 +275,7 @@ def leftComparison (a : Xb ⟶ B) (b : Zb ⟶ B) (j : X ⟶ Xb)
           simp) M N
 
 set_option linter.defProp false in
-/-- Product base change for the second open.
-Source: node proof Step 1 (blueprint: lem-pur-finite-open-product-swap). -/
+/-- Product base change for the second open. -/
 def rightSquare (a : Xb ⟶ B) (b : Zb ⟶ B) (k : Z ⟶ Zb) :
     IsPullback (second a (k ≫ b)) (rightOpen a b k) k (second a b) := by
   unfold second rightOpen product
@@ -305,8 +287,7 @@ def rightSquare (a : Xb ⟶ B) (b : Zb ⟶ B) (k : Z ⟶ Zb) :
   exact (h.of_right (by simp) (IsPullback.of_hasPullback a b)).flip
 
 /-- The one-factor comparison with the extension in the right factor.
-The rho composite includes its two Koszul symmetries explicitly.
-Source: node proof Steps 3 and 6 (blueprint: lem-pur-finite-open-product-swap). -/
+The rho composite includes its two Koszul symmetries explicitly. -/
 def rightComparison (a : Xb ⟶ B) (b : Zb ⟶ B) (k : Z ⟶ Zb)
     [IsOpenImmersion k] (M : FiniteD A Xb) (N : FiniteD A Z) :=
   tensorMap A (product a b) (𝟙 ((pull A (first a b)).obj M))
@@ -321,22 +302,19 @@ def rightComparison (a : Xb ⟶ B) (b : Zb ⟶ B) (k : Z ⟶ Zb)
             simp)).hom.app M)
           (𝟙 ((pull A (second a (k ≫ b))).obj N)))
 
-/-- The actual product open immersion u=j times k, on the chosen fibre products.
-Source: node statement and proof Step 1 (blueprint: lem-pur-finite-open-product-swap). -/
+/-- The actual product open immersion u=j times k, on the chosen fibre products. -/
 def productOpen (a : Xb ⟶ B) (b : Zb ⟶ B) (j : X ⟶ Xb) (k : Z ⟶ Zb) :
     product (j ≫ a) (k ≫ b) ⟶ product a b := by
   unfold product
   exact pullback.map (j ≫ a) (k ≫ b) a b j k (𝟙 B) (by simp) (by simp)
 
-/-- The product open is an open immersion when both factors are.
-Source: node statement and proof Step 1 (blueprint: lem-pur-finite-open-product-swap). -/
+/-- The product open is an open immersion when both factors are. -/
 instance productOpen_isOpenImmersion (a : Xb ⟶ B) (b : Zb ⟶ B) (j : X ⟶ Xb) (k : Z ⟶ Zb)
     [IsOpenImmersion j] [IsOpenImmersion k] : IsOpenImmersion (productOpen a b j k) := by
   unfold productOpen product
   exact Scheme.pullback_map_isOpenImmersion (j ≫ a) (k ≫ b) a b j k (𝟙 B) (by simp) (by simp)
 
-/-- The canonical compositor, followed only by a geometric equality of open maps.
-Source: node proof Step 2 (blueprint: lem-pur-finite-open-product-swap). -/
+/-- The canonical compositor, followed only by a geometric equality of open maps. -/
 def compTo {T U Y : Scheme.{u}} (i : T ⟶ U) (j : U ⟶ Y) (h : T ⟶ Y)
     [IsOpenImmersion i] [IsOpenImmersion j] [IsOpenImmersion h] (w : i ≫ j = h) :
     finiteShriek A i ⋙ finiteShriek A j ≅ finiteShriek A h :=
@@ -345,8 +323,7 @@ def compTo {T U Y : Scheme.{u}} (i : T ⟶ U) (j : U ⟶ Y) (h : T ⟶ Y)
     exact Iso.refl _)
 
 /-- The specified first-factor-then-second-factor external product map e.
-Every factor is the actual normalized beta, gamma, signed rho or open compositor.
-Source: node proof Step 4 (blueprint: lem-pur-finite-open-product-swap). -/
+Every factor is the actual normalized beta, gamma, signed rho or open compositor. -/
 def comparison (a : Xb ⟶ B) (b : Zb ⟶ B) (j : X ⟶ Xb) (k : Z ⟶ Zb)
     [IsOpenImmersion j] [IsOpenImmersion k] (M : FiniteD A X) (N : FiniteD A Z) :=
   leftComparison A a b j M ((finiteShriek A k).obj N) ≫

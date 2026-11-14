@@ -16,9 +16,7 @@ import WeilConjectures.AlgebraicGeometry.QuotientChange.NormalizedScalarSectionF
 
 /-! # Reduction of the actual unbounded integral exchange
 
-Source: blueprint main-20261015, integral proper-base-change proof, paragraph (3);
-Stacks Project, Tags 07A7, 0E47 and 0E48
-(blueprint: lem-sfb-integral-quotient-exchange-comparison).
+Source: Stacks Project, Tags 07A7, 0E47 and 0E48.
 
 The equality is an equality of natural transformations. Its section-module realization
 uses the independently specified ringed adjunctions and geometric compositors. Scalar
@@ -85,8 +83,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   {f : X ⟶ Y} {g : Y' ⟶ Y}
 
 /-- The recorded actual ambient exchange, with the direct-image comparison's typed
-interfaces. Source: Stacks 07A7
-(blueprint: lem-sfb-integral-quotient-exchange-comparison). -/
+interfaces. Source: Stacks 07A7. -/
 def ambient (sq : ChosenCartesianSquare h f' f g) :
     F Λ f ⋙ L Λ g ⟶ L Λ h ⋙ F Λ f' :=
   (mateEquiv (adj Λ f) (adj Λ f')
@@ -96,8 +93,7 @@ variable [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison
 
 /-- The independently specified section-module geometric square: compose the actual
 ringed derived pullbacks along the two equal scheme composites.
-Source: Stacks 0D6D and 07A7
-(blueprint: lem-sfb-integral-quotient-exchange-comparison). -/
+Source: Stacks 0D6D and 07A7. -/
 def sectionSquare (sq : ChosenCartesianSquare h f' f g) :
     ModuleRingedComparison.derivedPullback Λ g ⋙
         ModuleRingedComparison.derivedPullback Λ f' ≅
@@ -111,7 +107,7 @@ def sectionSquare (sq : ChosenCartesianSquare h f' f g) :
 
 /-- The actual ringed exchange, formed with the independently derived section-module
 adjunctions and the geometric square, before any completeness condition.
-Source: Stacks 07A7 (blueprint: lem-sfb-integral-quotient-exchange-comparison). -/
+Source: Stacks 07A7. -/
 def sectionExchange (sq : ChosenCartesianSquare h f' f g) :
     ModuleRingedComparison.derivedPushforward Λ f ⋙
         ModuleRingedComparison.derivedPullback Λ g ⟶
@@ -122,14 +118,14 @@ def sectionExchange (sq : ChosenCartesianSquare h f' f g) :
     (TwoSquare.mk _ _ _ _ (sectionSquare Λ sq).hom))
 
 /-- The existing normalized pullback comparison, with its internal endpoint made explicit.
-Source: Stacks 07A6 (blueprint: lem-sfb-integral-quotient-exchange-comparison). -/
+Source: Stacks 07A6. -/
 def pullSection {U V : Scheme.{u}} (u : U ⟶ V) :
     L Λ u ⋙ ModuleRingedComparison.derivedFunctor Λ U ≅
       ModuleRingedComparison.derivedFunctor Λ V ⋙ ModuleRingedComparison.derivedPullback Λ u :=
   scalarSectionPullComparison Λ u
 
 /-- The existing normalized pushforward comparison, with its internal endpoint explicit.
-Source: Stacks 07A6 (blueprint: lem-sfb-integral-quotient-exchange-comparison). -/
+Source: Stacks 07A6. -/
 def pushSection {U V : Scheme.{u}} (u : U ⟶ V) :
     F Λ u ⋙ ModuleRingedComparison.derivedFunctor Λ V ≅
       ModuleRingedComparison.derivedFunctor Λ U ⋙
@@ -153,8 +149,7 @@ attribute [local semireducible] ModuleRingedComparison.derivedFunctor
 
 /-- Ordinary balanced generators and K-flat computation characterize the scalar
 realization, before specializing the coefficient map.
-Source: Stacks 03EK, 06YY and 09T5
-(blueprint: lem-sfb-integral-quotient-exchange-comparison). -/
+Source: Stacks 03EK, 06YY and 09T5. -/
 def ScalarComparisonRealized
     {R S : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj R] [IsCommMonObj R] [MonObj S] [IsCommMonObj S]
@@ -239,8 +234,7 @@ private theorem internal_rectangle
     (fun K ↦ (scalar_geometric_exchange_rectangle a sq b hb K).1)
 
 /-- The actual section scalar/geometric mate for a general coefficient map.
-Source: Stacks 07A7 and 0E48
-(blueprint: lem-sfb-integral-quotient-exchange-comparison). -/
+Source: Stacks 07A7 and 0E48. -/
 def sectionScalarProjection
     (q : ∀ T : Scheme.{u}, SheafOfModules.ScalarDerivedPair
       (J := Scheme.ProEt.topology T)
@@ -268,8 +262,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- The actual finite projection reconstructed as a section-ring map.
-Source: blueprint integral proof (3); Stacks 03EK
-(blueprint: lem-sfb-integral-quotient-exchange-comparison). -/
+Source: Stacks 03EK. -/
 abbrev sectionReduction (T : Scheme.{u}) (n : ℕ) :
     ModuleRingedComparison.ring (integral l E) T ⟶
       ModuleRingedComparison.ring (finite l E n) T :=
@@ -284,8 +277,7 @@ variable (n : ℕ)
 
 /-- The specified finite projection in section coordinates: it is the counit-adjunct
 mate of the normalized scalar/pullback comparison under the actual ringed adjunctions.
-Source: Stacks 07A7 and 0E48
-(blueprint: lem-sfb-integral-quotient-exchange-comparison). -/
+Source: Stacks 07A7 and 0E48. -/
 def sectionProjection
     (q : ∀ T : Scheme.{u}, SheafOfModules.ScalarDerivedPair
       (J := Scheme.ProEt.topology T)

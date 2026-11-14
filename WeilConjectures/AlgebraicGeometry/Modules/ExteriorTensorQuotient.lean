@@ -12,8 +12,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.ExteriorTensorLiftHomExt
 
 /-!
 # Exterior tensor quotients
-
-Source: blueprint, Riemann--Roch, proof of (*), determinant paragraph.
 -/
 
 @[expose] public section
@@ -24,20 +22,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 -- Naturality compares exterior restrictions across the ring-sheaf module interfaces.
 set_option backward.isDefEq.respectTransparency false in
-/-- An epimorphism induces an epimorphism on a tensor of exterior sheaves.
-
-Source: blueprint, Riemann--Roch, proof of (*), determinant paragraph
-(blueprint: new-exterior-tensor-quotient).
-
-Proof: Apply the sectionwise exterior-power functor to `g`, and then sheafify. The
-sectionwise map takes a pure wedge to the wedge of its images, and commutes with
-restrictions by naturality of `g`. Tensor it with the identity of the first exterior
-sheaf. This gives the displayed formula. To check epimorphy, suppose two morphisms
-have equal composites with this map. Evaluate that equality on tensors of pure wedges
-and apply `exteriorTensor_lift_hom_ext g r s`: it proves equality of the morphisms
-from their values on these lifted generators. This is the cancellation property
-defining an epimorphism. The extensionality theorem handles simultaneous local lifts
-and local generation, including degree zero; the empty wedge is preserved. -/
+/-- An epimorphism induces an epimorphism on a tensor of exterior sheaves. -/
 theorem exteriorTensor_quotient_exists {X : Scheme.{v}} (A B C : X.Modules)
     (g : B ⟶ C) [Epi g] (r s : ℕ) :
     ∃ q : exteriorPower A r ⊗ exteriorPower B s ⟶

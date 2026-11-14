@@ -13,8 +13,7 @@ public import WeilConjectures.SmoothPurity.PurityFiniteSetting.PurityFrameKummer
 
 Finite coefficient twists, their pullbacks, and the closed-open support boundary.
 Part of the construction in
-`WeilConjectures.AlgebraicGeometry.Picard.PurityFiniteSetting.FrameClass`
-(blueprint: proposition-purity-vector-bundles).
+`WeilConjectures.AlgebraicGeometry.Picard.PurityFiniteSetting.FrameClass`.
 -/
 
 @[expose] public noncomputable section
@@ -27,10 +26,7 @@ namespace WeilConjectures.PurityFiniteSetting
 
 
 /-- The finite clause of the coefficient twists, in fixed-scalar coordinates.
-This reuses the published finite Tate sheaves and exact comparison inverse image.
-Source: definition-tate-twists, finite twists and nonnegative powers;
-def-pur-affine-line-datum, coefficient-identification paragraph
-(blueprint: proposition-purity-vector-bundles). -/
+This reuses the published finite Tate sheaves and exact comparison inverse image. -/
 def frameCoefficientTwist (P : PurityFiniteSetting.{u})
     (h : P.ramificationIndex ∣ P.level) (X : Scheme.{u}) (d : ℕ) :
     Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} P.Coefficient) :=
@@ -39,9 +35,7 @@ def frameCoefficientTwist (P : PurityFiniteSetting.{u})
       (P.exponent_coefficient_eq_zero h) d)
 
 /-- Multiplication of nonnegative finite twists, obtained from the published tensor
-powers through the strong monoidal comparison. Degree zero uses its unit constraint.
-Source: definition-tate-twists, nonnegative powers
-(blueprint: proposition-purity-vector-bundles). -/
+powers through the strong monoidal comparison. Degree zero uses its unit constraint. -/
 def frameCoefficientTensorNext (P : PurityFiniteSetting.{u})
     (h : P.ramificationIndex ∣ P.level) (X : Scheme.{u}) :
     (d : ℕ) → P.frameCoefficientTwist h X d ⊗ P.frameCoefficientTwist h X 1 ≅
@@ -63,10 +57,7 @@ def frameCoefficientTensorNext (P : PurityFiniteSetting.{u})
 
 /-- The finite degree-one cartesian twist comparison. The map is the exact inverse image
 of the canonical scalar-extension map on roots, including the site-comparison square.
-Its inverse is the inverse of this specified isomorphism, with no existence choice.
-Source: lemma-inverse-image-coefficient-sheaves--2, finite coefficients paragraph;
-def-pur-affine-line-datum, canonical root pullback
-(blueprint: proposition-purity-vector-bundles). -/
+Its inverse is the inverse of this specified isomorphism, with no existence choice. -/
 def frameCoefficientPullback (P : PurityFiniteSetting.{u})
     (h : P.ramificationIndex ∣ P.level) {X Y : Scheme.{u}} (f : X ⟶ Y)
     (a : Y ⟶ Spec (.of P.field.k)) :
@@ -79,11 +70,7 @@ def frameCoefficientPullback (P : PurityFiniteSetting.{u})
       (asIso (P.twistEtalePullback h f))
 
 /-- The finite coefficient support connecting morphism in degree one. Its construction
-is the Yoneda splice with the canonical localization sequence; it has degree two.
-Source: thm-pur-with-support-exactness, finite-torsion pro-etale clause;
-literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/
-sec-the-trace-map-of-affine-space/sk-prop-an/def-pur-frame-class.md, step 2
-(blueprint: proposition-purity-vector-bundles). -/
+is the Yoneda splice with the canonical localization sequence; it has degree two. -/
 def frameSupportBoundary (P : PurityFiniteSetting.{u}) (X : Scheme.{u}) (f : Γ(X, ⊤))
     (L : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} P.Coefficient))
     (κ : Abelian.Ext

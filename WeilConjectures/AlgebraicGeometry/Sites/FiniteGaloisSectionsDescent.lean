@@ -14,9 +14,7 @@ import WeilConjectures.AlgebraicGeometry.FiniteGaloisTensorDecomposition
 /-!
 # Finite Galois descent for sections of an etale sheaf
 
-Source: Stacks Project, Etale Cohomology, Tag 04JM, Lemma
-`lemma-global-sections-point`, finite Galois descent argument
-(blueprint: lem-exc-finite-galois-sections-descent).
+Source: Stacks Project, Etale Cohomology, Tag 04JM, finite Galois descent argument.
 -/
 
 @[expose] public section
@@ -29,7 +27,7 @@ namespace AlgebraicGeometry.Scheme
 
 attribute [local instance] Algebra.Etale.of_finite_of_isSeparable
 
-/-- (blueprint: lem-exc-finite-galois-sections-descent) Stacks Project, Tag 04JM.
+/-- Stacks Project, Tag 04JM.
 For a finite Galois extension `E/L`, pullback from `Spec L` to `Spec E` identifies
 the sections of any sheaf of sets on the small etale site of `Spec L` with the
 sections fixed by every `L`-automorphism of `E`.

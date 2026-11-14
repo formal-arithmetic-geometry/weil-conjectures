@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.Scalar.ScalarCoefficientEquivalence
 
 /-! # Constants under the normalized finite coefficient comparison
 
-Source: Bhatt--Scholze, Lemma 6.5.8(1),(2) and Proposition 6.6.11.
-(blueprint: lem-weil-pbc-integral-residue-finite-constants).
+Source: Bhatt--Scholze, Lemma 6.5.8(1), (2) and Proposition 6.6.11.
 -/
 
 @[expose] public noncomputable section
@@ -362,25 +361,7 @@ attribute [local irreducible] ordinaryConstants
 
 /-- Normalized coefficient transport identifies the two constant complex realizations.
 This is global on S; there is no morphism, chart, or perfectness hypothesis.
-Source: Bhatt--Scholze, Lemma 6.5.8(1),(2) and Proposition 6.6.11.
-(blueprint: lem-weil-pbc-integral-residue-finite-constants).
-
-Proof: integralResidueQuotientEquiv descends ULift.down on valuation-ring elements.
-The finite coefficient isomorphism defining integralResidueFiniteModel takes a
-constant large residue to its image under this equivalence: use the normalization
-of finiteRingComparison, integralCoefficientULift, and c.finite_constants, and
-surjectivity of the quotient projection. The unique constant-section normalization
-of residueLisseConstantComparison gives the same map. For any module B, maps from
-either ordinary constant realization into a sheaf are exactly linear maps from B
-into its global sections, with this same scalar action. The sheafification
-adjunction and scalar restriction adjunction therefore identify the two ordinary
-realizations naturally in B, by uniqueness of left adjoints. This comparison is
-exact: universe lift and constant sheafification are exact, and changing scalars
-along a ring-sheaf isomorphism is an equivalence. In particular its left derived
-functor is its exact termwise functor. Localize the natural comparison and use the
-factorization isomorphisms on B, including the canonical representative isomorphism
-in integralResidueFiniteModel. This gives the asserted derived isomorphism for all
-complexes, including unbounded complexes, the zero complex and the empty scheme. -/
+Source: Bhatt--Scholze, Lemma 6.5.8(1), (2) and Proposition 6.6.11. -/
 theorem integralResidueFiniteConstants
     (S : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

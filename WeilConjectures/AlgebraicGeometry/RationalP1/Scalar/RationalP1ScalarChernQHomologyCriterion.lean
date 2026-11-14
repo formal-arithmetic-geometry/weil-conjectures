@@ -12,8 +12,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Local.DiagonalLoca
 import WeilConjectures.AlgebraicGeometry.ProEtale.Tate.ProEtaleTateTwists
 
 /-! # Homological criterion for the scalar q splitting
-
-Source: diagonal-tower unit/Chern splitting and the first rational P1 triangle.
 -/
 
 @[expose] public noncomputable section
@@ -182,17 +180,8 @@ private theorem map_desc_left_iso
 
 /-- The componentwise homological data needed by the abstract q biproduct criterion.
 
-Source: the positive twist and shift of the diagonal tower splitting, followed by
-restriction, completion, realization and scalar extension in the first rational
-P1 triangle (blueprint: lem-sfb-rational-p1-scalar-q-homology-criterion).
-
-Proof: evaluate the normalized completed splitting on strict constant systems,
-transport its two components through the prescribed realization and scalar mates,
-and use projective-line cohomological concentration in degrees `0` and `-2`.
-The normalized Chern equation identifies the degree-zero component with the actual
-scalarQChern arrow, while the unit component identifies the degree-minus-two map
-with scalarTwistedUnit. The same concentration gives vanishing of the pushforward
-in all other degrees, and the endpoint comparisons preserve invertibility. -/
+Source: the positive twist and shift of the diagonal tower splitting, followed by restriction,
+completion, realization and scalar extension in the first rational P1 triangle. -/
 theorem scalar_q_chern_homology_criterion
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

@@ -15,7 +15,7 @@ import WeilConjectures.NumberTheory.Padics.IntegersAlgebra
 
 /-! # The embedded coefficient diagram in the constant completion presentation
 
-Source: integral-models proof, paragraph (1); Stacks Tags 099L and 093M.
+Source: Stacks Tags 099L and 093M.
 -/
 
 @[expose] public noncomputable section
@@ -993,9 +993,7 @@ private def residueTowerIso (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
 attribute [-instance] integralModel_coefficientMonObj in
 /-- The embedded discrete coefficient ring is the constant sheaf on the integer ring:
 constant inverse image, the monoidal constant-sheaf comparison, section-ring
-reconstruction and precomposition with `AsSmall`.
-Source: integral-models proof paragraph (1)
-(blueprint: lem-sfb-embedded-integral-completion-diagram). -/
+reconstruction and precomposition with `AsSmall`. -/
 @[no_expose] def integralModelsEmbeddedConstantIso
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) (X : Scheme.{u}) :
     (Arrow.mk (IntegralModelsStacks.smallMap X
@@ -1007,9 +1005,7 @@ Source: integral-models proof paragraph (1)
 attribute [-instance] integralModel_coefficientMonObj in
 /-- The embedded completed coefficient ring is the constant completion: the comparison of
 the embedded integral limit cone with the limit of the constant finite system, through the
-finite constant comparisons `residueSmallIso`.
-Source: integral-models proof paragraph (1), the integral coefficient limit comparison
-(blueprint: lem-sfb-embedded-integral-completion-diagram). -/
+finite constant comparisons `residueSmallIso`. -/
 @[no_expose] def integralModelsEmbeddedCompletedIso
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (π : PadicAlgCl.integers ℓ E.1)
@@ -1027,8 +1023,7 @@ Source: integral-models proof paragraph (1), the integral coefficient limit comp
 attribute [-instance] integralModel_coefficientMonObj in
 /-- The embedded first residue ring is the constant sheaf on the first quotient: the
 discrete comparison followed by the quotient-lift ring isomorphism.
-Source: integral-models proof paragraph (1); Stacks Tag 099L
-(blueprint: lem-sfb-embedded-integral-completion-diagram). -/
+Source: Stacks Tag 099L. -/
 @[no_expose] def integralModelsEmbeddedResidueIso
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (π : PadicAlgCl.integers ℓ E.1) (X : Scheme.{u}) :
@@ -1043,8 +1038,7 @@ Source: integral-models proof paragraph (1); Stacks Tag 099L
 attribute [-instance] integralModel_coefficientMonObj in
 /-- The completed first residue ring is the constant sheaf on the first quotient: the
 finite constant comparison `residueSmallIso` at level zero.
-Source: integral-models proof paragraph (1); Stacks Tag 093M
-(blueprint: lem-sfb-embedded-integral-completion-diagram). -/
+Source: Stacks Tag 093M. -/
 @[no_expose] def integralModelsEmbeddedReductionIso
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (π : PadicAlgCl.integers ℓ E.1)
@@ -1078,28 +1072,8 @@ and residue maps identify with the canonical constant
 completion diagram. This assertion identifies coefficient rings and maps only; it contains
 no assertion about kernels, generators, surjectivity, flatness, or module categories.
 
-Source: integral-models proof paragraph (1), the integral coefficient limit comparison,
-and Stacks Tags 099L and 093M
-(blueprint: lem-sfb-embedded-integral-completion-diagram).
-
-Proof: constant inverse image, the monoidal constant-sheaf comparison, section-ring
-reconstruction and precomposition with AsSmall identify the discrete coefficient ring
-with the constant ULift integer ring. Naturality identifies its quotient map. For every
-positive exponent the residue ring is finite discrete: the ideal is a power of the
-maximal ideal of a finite extension of Q_l, and is open in its compact integer ring.
-The actual constant-function maps are thus isomorphisms. Pull these isomorphisms to X
-and reconstruct them on the small site. The projection-normalized embedded integral
-limit comparison gives a limit cone with the prescribed completed reductions as its
-legs. Transport this cone through the finite constant comparisons and the quotient
-ULift ring equivalences. The uniqueness of limits gives b; its projection equations
-at all levels give the third displayed equation at level zero. Naturality of the
-constant-function map with respect to each quotient identifies the image of the
-scalar map on every projection with the corresponding constant quotient. Limit
-extensionality then gives the first equation. The two finite residue comparisons give
-c and d, and the constant-sheaf quotient naturality gives the second equation.
-All these identifications preserve the unit and multiplication and include empty
-schemes and empty site objects. No ring isomorphism is chosen without its displayed
-map compatibility. -/
+Source: integral-models proof paragraph (1), the integral coefficient limit comparison, and Stacks
+Tags 099L and 093M. -/
 theorem integralModelsEmbedded_scalar_square
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (π : PadicAlgCl.integers ℓ E.1)
@@ -1134,8 +1108,7 @@ theorem integralModelsEmbedded_scalar_square
 
 attribute [-instance] integralModel_coefficientMonObj in
 /-- The residue square of the embedded completion diagram.
-Source: integral-models proof paragraph (1); Stacks Tag 099L
-(blueprint: lem-sfb-embedded-integral-completion-diagram). -/
+Source: Stacks Tag 099L. -/
 theorem integralModelsEmbedded_residue_square
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (π : PadicAlgCl.integers ℓ E.1) (X : Scheme.{u}) :
@@ -1149,8 +1122,7 @@ theorem integralModelsEmbedded_residue_square
 attribute [-instance] integralModel_coefficientMonObj in
 /-- The reduction square of the embedded completion diagram: level zero of the projection
 equations of `integralModelsEmbeddedCompletedIso`.
-Source: integral-models proof paragraph (1); Stacks Tag 093M
-(blueprint: lem-sfb-embedded-integral-completion-diagram). -/
+Source: Stacks Tag 093M. -/
 theorem integralModelsEmbedded_reduction_square
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (π : PadicAlgCl.integers ℓ E.1)

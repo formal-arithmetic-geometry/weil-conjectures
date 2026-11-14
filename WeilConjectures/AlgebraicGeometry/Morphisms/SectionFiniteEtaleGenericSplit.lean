@@ -68,19 +68,7 @@ private theorem constant_cover_generic {B K : Scheme.{u}}
   exact ⟨H.isoPullback, H.isoPullback_hom_snd⟩
 
 /-- The section cover has split generic fibre, without asserting any extension over U.
-Source: Stacks Project, Tag 0EYJ, section fibre calculation.
-
-Proof: The nonempty open U has the same generic point and function field as S.
-The stalk isomorphism of the open immersion identifies Spec k(U) with Spec k(S).
-The section equation and the monomorphism C_U → C identify the pullback along
-U's generic point with the fibre of Z along sη, using the cartesian square for ψ.
-A point z of this fibre and its translates by G trivialize it: base change the
-canonical torsor isomorphism ∐_G Z.P → Z.P ×_Cη Z.P along z on the second factor.
-Finite coproducts of schemes are universal, so the source becomes ∐_G Spec k(U).
-The constant G-indexed cover of U has precisely this generic fibre. Composing
-these canonical pullback identifications gives the stated isomorphism over k(U).
-This applies to disconnected torsors and the trivial group; hηU excludes empty U.
-No normality or extension of morphisms is used in this calculation. -/
+Source: Stacks Project, Tag 0EYJ, section fibre calculation. -/
 private theorem section_cover_generic_fibre_split {S C : Scheme.{u}}
     [IsIntegral S]
     (c : C ⟶ S)
@@ -189,19 +177,7 @@ private theorem generic_iso_extends {B : Scheme.{u}} [IsIntegral B]
   exact ⟨⟨f, g, hfg, hgf⟩, hf.1⟩
 
 /-- A finite étale model of a generic torsor splits after pullback to the section on U.
-Source: Stacks Project, Tag 0EYJ, the section fibre calculation; Tag 0BQM, full faithfulness.
-(blueprint: lem-sbc-section-finite-etale-generic-split)
-
-Proof: The nonempty open U of the normal integral S is normal integral with function field
-k(S). The section b identifies the generic fibre of its PA pullback with the pullback of Z
-along sη. Choose the rational point in hZ. Its G-translates give the canonical map from
-G copies of Spec k(S) to this fibre. The torsor isomorphism, pulled back along that point,
-shows this map is an isomorphism, including for disconnected torsors. Both the section
-pullback and the constant G-indexed cover are finite étale over U. Extend the generic
-isomorphism and its inverse by finiteEtale_normalIntegral_generic_hom_full. Its uniqueness
-shows that both composites equal the identities. The extensions respect U, giving the
-claimed equation for the isomorphism. No group-order assumption is used. U may equal S;
-the trivial group gives a single copy. The generic point hypothesis excludes empty U. -/
+Source: Stacks Project, Tag 0EYJ, the section fibre calculation; Tag 0BQM, full faithfulness. -/
 theorem GaloisCover.section_finiteEtale_generic_split {S C : Scheme.{u}}
     [IsIntegral S] (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))
     (c : C ⟶ S)

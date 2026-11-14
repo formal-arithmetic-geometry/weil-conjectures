@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteEtaleAdicSectionsKernel
 # Transfer of adic section comparison to finite étale covers
 
 Source: Stacks Project, Tag 0EKP, implication (1) to (3).
-(blueprint: lem-sbc-finite-etale-adic-sections-transfer)
 -/
 
 @[expose] public section
@@ -52,26 +51,7 @@ namespace AlgebraicGeometry.Scheme
 section comparison for every finite étale cover of that open.
 
 Source: Stacks Project, Tag 0EKP, implication (1) to (3), and finite affine
-base change for the direct image of the structure sheaf.
-(blueprint: lem-sbc-finite-etale-adic-sections-transfer)
-
-Proof: The open V is Noetherian and quasi-affine. For the finite étale map
-P -> V, its direct image E of O_P is finite locally free. On a Noetherian
-quasi-affine scheme the dual E dual has finitely many global generators.
-Their surjection O^r -> E dual dualizes to a universally injective map
-E -> O^r with locally free cokernel C. Apply the same construction to C
-and compose to obtain a universally exact sequence 0 -> E -> O^r -> O^s.
-It remains exact after restriction to every quotient-power thickening.
-Sections identify E with the kernel between the two finite powers of
-structure-sheaf sections. Compatible families also preserve this kernel:
-a compatible vector lies in it if and only if each component does.
-The scalar comparison hypothesis gives bijections on the two finite powers,
-and commutes with their map, so gives a bijection on their kernels.
-Finite affine base change identifies the restrictions of E with the direct
-images of O_(P_n), and identifies their restriction maps with coverMap and
-coverTransition. The resulting kernel bijection is exactly existence and
-uniqueness in the conclusion. Empty opens, rank-zero covers and variable
-ranks are included; none of the argument requires a positive constant rank. -/
+base change for the direct image of the structure sheaf. -/
 theorem finiteEtale_adic_sections_comparison_of_structureSheaf
     {R S : Type u} [CommRing R] [CommRing S] [IsNoetherianRing R]
     (f : R →+* S) (V : (Spec (.of R)).Opens)

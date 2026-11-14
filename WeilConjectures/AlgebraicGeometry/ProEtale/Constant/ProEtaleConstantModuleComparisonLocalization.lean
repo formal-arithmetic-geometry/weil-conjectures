@@ -14,8 +14,7 @@ import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
 
 /-! The ordinary canonical module comparison realizes the canonical derived comparison.
 
-Source: Stacks 03D8 and 0D6D
-(blueprint: lem-pod-constant-comparison-module-localization). -/
+Source: Stacks 03D8 and 0D6D. -/
 
 @[expose] public section
 
@@ -343,14 +342,7 @@ private theorem directComp_hom_apply
 
 /-- The published finite-coefficient comparison is localization of the published
 ordinary module comparison, with its tensor-unit normalization.
-Source: Stacks 03D8 and 0D6D
-(blueprint: lem-pod-constant-comparison-module-localization).
-Proof: the constructed module adjunction has the sectionwise tensor unit, so it
-equals the normalized adjunction used in the canonical derived comparison.
-The two direct-image compositors have the same fibre-product restriction formula,
-hence coincide on every section. Conjugation then identifies the ordinary
-compositors. The canonical derived comparison is already proved to be the
-localization of that ordinary compositor. -/
+Source: Stacks 03D8 and 0D6D. -/
 theorem proEtaleConstantRingPullbackComposition_eq_mapModuleComparison
     {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V)
     (A : Type u) [CommRing A] [Finite A] :

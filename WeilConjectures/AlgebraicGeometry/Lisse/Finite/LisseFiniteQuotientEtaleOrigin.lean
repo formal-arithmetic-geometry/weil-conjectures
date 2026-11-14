@@ -26,8 +26,7 @@ attribute [local instance] HasDerivedCategory.ofIsGrothendieckAbelian
 /-- One finite quotient descended to an etale chart. No point, normalization arrow,
 or choice of a constant model is included. Transport accepts any supplied model.
 
-Source: Stacks Project, proetale.tex, Tags 09AL, 09B1 and 09C6.
-(blueprint: lem-weil-pbc-lisse-finite-quotient-etale-origin). -/
+Source: Stacks Project, Tags 09AL, 09B1 and 09C6. -/
 structure LisseFiniteQuotientEtaleOrigin
     (X Y : Scheme.{u}) (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ)
@@ -60,29 +59,8 @@ structure LisseFiniteQuotientEtaleOrigin
 /-- Descend a single bounded relatively finite lisse quotient complex, retaining
 vanishing and transport on all further charts. This has no tower or normalization input.
 
-Source: Stacks Project, proetale.tex, Tag 09AL (compare-constructible-derived),
-Tag 09B1 (compare-derived), and Tag 09C6, construction of an individual etale origin.
-(blueprint: lem-weil-pbc-lisse-finite-quotient-etale-origin).
-
-Proof: exact inverse image along g, followed by the constant coefficient equivalence,
-gives a bounded fixed-coefficient complex on Y with finite locally constant cohomology.
-The immersion into a Noetherian scheme makes Y Noetherian. A single stratum therefore
-makes this cohomology intrinsically constructible. Finite coefficient derived origin
-and bounded-below full faithfulness descend the complex to Y_et. The single-sheaf
-comparison reflects finite local constancy, and exact faithful comparison reflects
-zero cohomology, degree by degree. Restrict this origin to V. The canonical map from
-A/I^(n+1) to the completion modulo (I completion)^(n+1) is bijective because I is
-finitely generated: completion evaluation provides its inverse. Transfer the origin
-along this ring equivalence. Exactness retains each zero cohomology of K. For transport,
-restrict its origin comparison to Z, compose with the supplied constant E isomorphism,
-then use comparison-pullback coherence and constant-coefficient inverse-image coherence
-to restrict to W. These identify the constant side with precisely the specified
-constantAdicQuotientRealization and the other side with the actual inverse image of K.
-Finally pull back the original finite constant local module models to every W;
-inverse image pulls a covering sieve to a covering sieve, and its composition and
-coefficient-restriction comparisons identify the resulting finite constant models with
-the displayed relative ones. The empty chart uses the zero category, and no point,
-simultaneous trivialization, or relation between different coefficient rings is chosen. -/
+Source: Stacks Project, Tag 09AL (compare-constructible-derived), Tag 09B1 (compare-derived), and
+Tag 09C6, construction of an individual etale origin. -/
 theorem lisse_finite_quotient_etale_origin
     (X Y : Scheme.{u}) [IsNoetherian X] (g : Y ⟶ X) [IsImmersion g]
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ)

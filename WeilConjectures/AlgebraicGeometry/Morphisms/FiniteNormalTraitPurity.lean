@@ -20,7 +20,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteNormalDenseOpenIso
 # FiniteNormalTraitPurity
 
 Source: Stacks Project, Tags 0EYE and 0EYJ (trait case).
-(blueprint: lem-sbc-finite-normal-trait-purity)
 -/
 
 @[expose] public section
@@ -31,19 +30,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Purity for finite normal covers in the indicated local-base case.
 
-Source: Stacks Project, Tags 0EYE and 0EYJ (trait case).
-(blueprint: lem-sbc-finite-normal-trait-purity)
-
-Proof: If A has dimension zero it is a field. Then its punctured spectrum is empty,
-so density forces N to be empty, and the morphism is etale. Otherwise A is a DVR
-because it is a normal Noetherian local domain of dimension at most one. The closed
-fibre of q is a regular effective Cartier divisor. Smoothness and geometric
-connectedness make this fibre integral, so the nonempty open W meets its generic
-point. The cover on the complement is therefore unramified at every codimension-one
-point of the divisor. Tag 0EYE extends it to a finite etale cover E of L. Both E and
-N are normal. Density excludes components of N supported on the closed fibre;
-componentwise, a finite normal algebra is the integral closure of the base in its
-generic algebra. Thus N and E are isomorphic over L, and n is etale. -/
+Source: Stacks Project, Tags 0EYE and 0EYJ (trait case). -/
 theorem finite_normal_etale_of_trait_neighbourhood
     (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]
     [IsDomain A] [IsIntegrallyClosed A]

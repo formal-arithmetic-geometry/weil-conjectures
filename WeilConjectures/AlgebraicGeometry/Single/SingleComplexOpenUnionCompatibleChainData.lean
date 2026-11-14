@@ -19,7 +19,6 @@ import Mathlib.Algebra.Homology.HomotopyCategory.ShortExact
 /-! # Compatible strict chain models for a source-open union
 
 Source: Stacks Project, Tags 08HZ, 08HY, 0DJ9 and 013N--013O.
-(blueprint: new-single-complex-open-union-compatible-chain-data).
 -/
 
 @[expose] public section
@@ -230,30 +229,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- Compatible chain models before the short exact cylinder construction.
 
 Source: Stacks Project, Tags 08HZ, 08HY and 0DJ9; Tags 013N--013O for
-strictification of the resolved diagram.
-(blueprint: new-single-complex-open-union-compatible-chain-data).
-
-Proof: Put W = U union V and restrict the square, the two objects and the given
-coefficient morphism to W, using the fixed pullback composition comparisons.
-The inverse-image opens A and B cover W. Apply relativeMV_cover_rows to obtain
-a morphism m between short exact rows P and P', with all three localized
-components identified. The global component is definitionally the original
-comparison on W. For U, V and their intersection, pullback pasting identifies
-the twice-restricted source with the original restricted source. The nested
-coefficient coherence theorem verifies the coefficient equation, and
-exists_derivedBaseChange_source_iso gives isomorphisms of these arrows.
-Take t = P.f, t' = P'.f, alpha = m.τ₁ and beta = m.τ₂. The first square
-commutes strictly. The canonical descShortComplex maps from their cones to
-the quotient terms are quasi-isomorphisms because the rows are short exact.
-Their naturality identifies the induced cone map with m.τ₃. Compose the six
-vertex isomorphisms with the nested arrow isomorphisms. Biproduct projection
-extensionality combines the two middle component equations; naturality of
-the two biproduct maps transports them to U and V. The cone naturality and
-the overlap arrow equation give the third required equality.
-The cover-row theorem accepts arbitrary objects and coefficient morphisms;
-empty, repeated and contained opens require no additional hypotheses. No new
-coefficient objects are chosen by a definition: all witnesses are existential
-proof data. -/
+strictification of the resolved diagram. -/
 theorem singleComplexOpenComparison_union_compatible_chain_data
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

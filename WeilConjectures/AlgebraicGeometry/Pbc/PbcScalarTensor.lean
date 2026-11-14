@@ -14,9 +14,8 @@ import Mathlib.RingTheory.TensorProduct.Finite
 
 /-! # Construction of finite coefficient extension
 
-Source: blueprint proper base change, order 1307; Milne, Section 19.
+Source: Milne, Section 19.
 Existing declarations extracted from `PbcScalarExtension` to bound compilation cost.
-(blueprint: lem-pbc-scalar-tensor-construction)
 -/
 
 @[expose] public noncomputable section
@@ -41,17 +40,11 @@ variable [Algebra (Padic l) E] [Algebra (Padic l) F]
 variable [FiniteDimensional (Padic l) E] [FiniteDimensional (Padic l) F]
 variable (i : E →ₐ[Padic l] F)
 
-/-- The given field embedding restricted to the actual lifted valuation rings.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-tensor-construction). -/
+/-- The given field embedding restricted to the actual lifted valuation rings. -/
 def pbcEmbeddingIntegerMap : PbcIntegralRing l E →+* PbcIntegralRing l F :=
   RingHom.ulift (WeilConjectures.integralScalarIntegerInclusion l E F i)
 
-/-- The same-index positive target quotient kills the source uniformizer ideal power.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-tensor-construction).
-Proof: the field embedding preserves the extended p-adic absolute value, so it sends
-source integers to target integers and the source maximal ideal into the target
-maximal ideal. Their uniformizers generate these ideals. Taking the (n+1)-st power
-and reducing gives zero, including for ramified extensions. -/
+/-- The same-index positive target quotient kills the source uniformizer ideal power. -/
 theorem pbcEmbeddingIntegerMap_quotient_kernel (n : ℕ) (a : PbcIntegralRing l E)
     (ha : a ∈ (pbcIntegralDatum l E).ideal ^ (n + 1)) :
     Ideal.Quotient.mk ((pbcIntegralDatum l F).ideal ^ (n + 1))
@@ -72,8 +65,7 @@ theorem pbcEmbeddingIntegerMap_quotient_kernel (n : ℕ) (a : PbcIntegralRing l 
   rw [Ideal.span_singleton_pow, Ideal.mem_span_singleton]
   exact map_dvd (ULift.ringEquiv.symm.toRingHom) ht
 
-/-- The finite coefficient map induced by the specified field embedding.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-tensor-construction). -/
+/-- The finite coefficient map induced by the specified field embedding. -/
 def pbcScalarQuotientMap (n : ℕ) :
     PbcQuotient (pbcIntegralDatum l E) n →+* PbcQuotient (pbcIntegralDatum l F) n :=
   Ideal.Quotient.lift ((pbcIntegralDatum l E).ideal ^ (n + 1))
@@ -108,12 +100,7 @@ private theorem pbcFiniteCoefficientMap_id
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The residue-normalized completed coefficient map exists uniquely.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-tensor-construction).
-Proof: postcomposition by the quotient inclusion commutes with each quotient
-transition on continuous component functions. Sheafify and compose with the source
-limit projections. These maps form a cone over the target coefficient system;
-its universal property supplies the unique map with the displayed components. -/
+/-- The residue-normalized completed coefficient map exists uniquely. -/
 theorem pbcScalarCoefficientMap_exists :
     ∃! a : pbcAdicCompletion T (pbcIntegralDatum l E) ⟶
         pbcAdicCompletion T (pbcIntegralDatum l F),
@@ -141,15 +128,13 @@ theorem pbcScalarCoefficientMap_exists :
     intro n
     exact (hc n.unop).trans (limMap_π t n).symm
 
-/-- The actual completed coefficient inclusion, fixed by all residue projections.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-tensor-construction). -/
+/-- The actual completed coefficient inclusion, fixed by all residue projections. -/
 def pbcScalarCoefficientMap :
     pbcAdicCompletion T (pbcIntegralDatum l E) ⟶
       pbcAdicCompletion T (pbcIntegralDatum l F) :=
   (pbcScalarCoefficientMap_exists l E F i T).exists.choose
 
-/-- Ordinary ambient derived tensor along the actual completed coefficient inclusion.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-tensor-construction). -/
+/-- Ordinary ambient derived tensor along the actual completed coefficient inclusion. -/
 abbrev pbcEmbeddingAmbientTensor :
     PbcCompletedDerived T (pbcIntegralDatum l E) ⥤
       PbcCompletedDerived T (pbcIntegralDatum l F) :=
@@ -324,17 +309,7 @@ private def scalarPerfectModel (X : Scheme.{u})
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Ambient tensor preserves the three defining integral membership conditions.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-tensor-construction).
-Proof: apply the completed local-perfect criterion over the lifted source integer
-ring. Tensor each bounded finite-projective coefficient complex with the lifted
-target integer ring; projectivity, finiteness and the original term bounds survive.
-The completed constant-section square identifies the two composites of coefficient
-extension. On bounded projective complexes, the K-flat counit and ordinary constant
-realization compute this square termwise. Derived scalar extension preserves the
-given chart isomorphisms. Thus the same strata and covers give target perfect
-models, and the reverse criterion supplies all three membership conditions,
-including the uniform reduction tower and compatible etale origins. -/
+/-- Ambient tensor preserves the three defining integral membership conditions. -/
 theorem pbcEmbeddingAmbientTensor_preserves
     (K : PbcIntegralCategory l E T hDim hInv) :
     PbcIsBoundedConstructibleComplete T (pbcIntegralDatum l F)
@@ -393,8 +368,7 @@ theorem pbcEmbeddingAmbientTensor_preserves
     ⟨D, a, b, inferInstance, inferInstance, hd, ⟨Iso.refl _⟩⟩,
     ⟨et ≪≫ integralMapLocalIso (s.immersion k) _ U em⟩⟩
 
-/-- Restriction of the actual ambient tensor, retaining its object and morphism maps.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-tensor-construction). -/
+/-- Restriction of the actual ambient tensor, retaining its object and morphism maps. -/
 def pbcEmbeddingIntegralTensor :
     PbcIntegralCategory l E T hDim hInv ⥤ PbcIntegralCategory l F T hDim hInv :=
   ObjectProperty.lift (PbcIsBoundedConstructibleComplete T (pbcIntegralDatum l F))
@@ -459,14 +433,7 @@ attribute [-instance] ULift.module
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The additive Hom map of rational extension is uniquely fixed on pure tensors.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-tensor-construction).
-Proof: integral derived tensor is additive and semilinear for pbcEmbeddingIntegerMap,
-by its tensor-section formula and K-flat descent. The displayed formula is balanced
-over the source integer ring, so extends uniquely by the tensor universal property.
-For ramification t = u v^e, localization at t and v agrees: v inverse is
-u v^(e-1) t inverse, and t inverse is u inverse v^(-e). Hence these really are
-the source and target raw rational Hom modules. -/
+/-- The additive Hom map of rational extension is uniquely fixed on pure tensors. -/
 theorem pbcRationalScalarHom_exists (K L : PbcIntegralCategory l E T hDim hInv) :
     ∃! m :
       (ScalarLocalization.mk (R := PbcIntegralRing l E) (p := pbcUniformizer l E) K ⟶
@@ -546,8 +513,7 @@ theorem pbcRationalScalarHom_exists (K L : PbcIntegralCategory l E T hDim hInv) 
 
 end
 
-/-- The unique additive extension of the integral coefficient-change Hom formula.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-tensor-construction). -/
+/-- The unique additive extension of the integral coefficient-change Hom formula. -/
 def pbcRationalScalarHom (K L : PbcIntegralCategory l E T hDim hInv) :=
   (pbcRationalScalarHom_exists l E F i T hDim hInv K L).exists.choose
 
@@ -573,11 +539,7 @@ attribute [local irreducible] pbcRationalScalarHom
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The specified rational Hom maps preserve identities and composition.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-tensor-construction).
-Proof: on pure tensors use multiplication of scalar images, bilinear composition
-in ScalarLocalization and functoriality of the actual integral tensor. Additivity
-extends the equation to arbitrary sums of pure tensors. -/
+/-- The specified rational Hom maps preserve identities and composition. -/
 theorem pbcRationalScalarHom_laws :
     (∀ K : PbcRationalDerivedCategory l E T hDim hInv,
       pbcRationalScalarHom l E F i T hDim hInv K.obj K.obj (𝟙 K) =
@@ -613,8 +575,7 @@ theorem pbcRationalScalarHom_laws :
 
 end
 
-/-- Derived scalar extension followed by raw scalar localization, on the actual Dbc.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-tensor-construction). -/
+/-- Derived scalar extension followed by raw scalar localization, on the actual Dbc. -/
 def pbcRationalScalarExtension :
     PbcRationalDerivedCategory l E T hDim hInv ⥤
       PbcRationalDerivedCategory l F T hDim hInv where

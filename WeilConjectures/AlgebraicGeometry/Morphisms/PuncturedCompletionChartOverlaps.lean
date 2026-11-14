@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionChartLocal
 # Localization of actual chart sections on double intersections
 
 Source: Stacks Project, Tags 0BLH and 05EL.
-(blueprint: lem-sbc-punctured-completion-chart-overlap-localizations)
 -/
 
 @[expose] public section
@@ -24,25 +23,6 @@ namespace AlgebraicGeometry.Scheme.CompletionGluingData
 
 /-- Localization identifies actual chart sections with sections on double intersections.
 Source: Stacks Project, Tag 0BLH, first two proof paragraphs; Tag 05EL, item (1).
-(blueprint: lem-sbc-punctured-completion-chart-overlap-localizations)
-
-Proof: put V_i=h^{-1}D(f_i). The ring map defining chartSectionModule sends
-an element of A to its structural section on V_i, because the canonical localization
-isomorphism commutes with algebraMap. On V_j the section representing f_i has
-basic open V_i intersect V_j, by functoriality of basic opens and restriction.
-Since V_j is affine, IsAffineOpen.isLocalization_basicOpen identifies the section
-ring on that intersection with the localization of Gamma(Y,V_j) at that section.
-Restrict scalars to A and apply IsLocalizedModule.restrictScalars_powers and
-IsLocalizedModule.linearEquiv to obtain b_ij. On m/1 its value is restriction
-of m. More generally b_ij(m/f_i^n) is the restriction of m divided by the
-structural section f_i^n on the intersection. Multiplication by a structural
-A-section commutes with this division, giving the displayed scalar formula. Identify both
-localizations
-with the same intersection section ring, swapping the order of the two opens by
-inf_comm. Compose the first identification with the inverse of the second to
-obtain alpha_overlap. The generator formula follows by cancellation of these
-identifications. If either open is empty its sections and the relevant localized
-modules are zero, so the same localization universal property applies.
 -/
 theorem exists_chart_overlap_localizations
     {A : Type u} [CommRing A] {Y : Scheme.{u}} (h : Y ⟶ Spec (.of A))

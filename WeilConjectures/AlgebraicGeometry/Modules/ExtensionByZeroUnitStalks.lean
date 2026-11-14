@@ -27,21 +27,7 @@ noncomputable section
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- The unit of any extension-by-zero adjunction gives the stalk identifications.
-Source: Stacks Project, Sheaves, Lemma 00A7 (3), after Lemma 00A3.
-(blueprint: lem-weil-pbc-module-extension-by-zero-unit-stalks).
-
-Proof: Outside U each neighbourhood section of the extension presheaf is zero,
-so its stalk is zero; sheafification is an isomorphism on stalks. Inside U, the
-neighbourhoods contained in U are cofinal, and the presheaf is the input there.
-Its canonical unit therefore induces a stalk isomorphism. The map is semilinear
-for the restriction ring map on germs, so has the displayed scalar compatibility.
-For another adjunction on the same two functors, uniqueness of adjoints compares
-its unit with the canonical unit by a natural automorphism of the left functor;
-this automorphism is a module morphism and induces a linear stalk isomorphism.
-Thus the same isomorphism and scalar assertions hold for every adjunction.
-Naturality of the unit, the equivalence over U, and the restriction stalk
-isomorphism gives the final equation by functoriality of stalks. Empty U has no
-inside points, and for U = X the cofinal-neighbourhood argument is the identity. -/
+Source: Stacks Project, Sheaves, Lemma 00A7 (3), after Lemma 00A3. -/
 theorem module_extensionByZero_unit_stalks (X : Scheme.{u}) (U : X.Opens) :
     let R := X.ringCatSheaf
     let P := SheafOfModules.extensionByZeroPresheaf.{u} R U

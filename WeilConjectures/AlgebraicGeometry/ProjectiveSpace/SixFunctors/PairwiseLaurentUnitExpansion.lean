@@ -13,8 +13,7 @@ import Mathlib.Algebra.MvPolynomial.Division
 
 /-! # Pairwise Laurent expansions on projective-space overlaps
 
-Source: Stacks Project, divisors.tex, Tag 0BXJ, lemma-Pic-projective-space-UFD.
-(blueprint: new-sfb-projective-pairwise-laurent-unit-expansion)
+Source: Stacks Project, Tag 0BXJ.
 -/
 
 @[expose] public section
@@ -121,15 +120,7 @@ set_option linter.unusedVariables false in
 coefficient.  This is the pairwise Laurent-polynomial calculation used by the
 normalization theorem.
 
-Source: Stacks Project, divisors.tex, Tag 0BXJ, the double-overlap calculation.
-(blueprint: new-sfb-projective-pairwise-laurent-unit-expansion)
-
-Proof: identify the double-overlap section ring with a polynomial ring in the
-remaining affine coordinates and one invertible ratio.  Degree comparison in the
-remaining variables forces a unit to have degree zero there.  The extremal
-Laurent exponents add under multiplication, so a unit has exactly one exponent;
-the coefficient is a nonzero scalar.  The full calculation is intentionally
-split from the cocycle comparison, which is the next intermediate theorem.
+Source: Stacks Project, Tag 0BXJ, the double-overlap calculation.
 -/
 theorem exists_pairwise_laurent_unit_expansion (k : Type u) [Field k]
     (r : ℕ) (hr : 3 ≤ r)

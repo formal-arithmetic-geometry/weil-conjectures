@@ -18,8 +18,7 @@ import Mathlib.RingTheory.MvPowerSeries.Inverse
 /-!
 # Injectivity of restriction on the punctured power-series section
 
-Source: Stacks Project, Tags 0EY9, 0BK0, 0EKP and 0EL8.
-(blueprint: lem-sbc-power-series-punctured-section-injective)
+Source: Stacks Project, Tags 0EY9, 0BK0, 0EKP and 0EL8
 -/
 
 @[expose] public section
@@ -31,24 +30,7 @@ namespace AlgebraicGeometry.Scheme
 /-- Injectivity of restriction on morphisms of finite étale covers in the
 power-series punctured-section situation. This is the uniqueness part of
 Stacks Project, Tag 0EY9, proved here using connectedness and a faithful
-geometric-fibre functor.
-(blueprint: lem-sbc-power-series-punctured-section-injective)
-
-Proof: The structure-sheaf comparison of Tag 0EY9 identifies Gamma(V,O_V)
-with the local power-series ring B. The punctured spectrum of A is nonempty:
-otherwise its prime spectrum would be a singleton and its Krull dimension
-would be at most zero, contradicting depth at least two and the depth bound
-by support dimension. A point of the punctured zero section gives a point
-of V, so its global section ring is nontrivial. Surjectivity of the comparison
-makes that ring local, and its idempotents are therefore zero and one.
-The connectedness-idempotent criterion shows that V is connected.
-Construct a geometric point s over the chosen point of the punctured section
-and compose it with the map to V to obtain t. The geometric-fibre functor
-at t is faithful. For a point y of the fibre of P, the pullback universal
-property lifts (y,s) to the restriction of P. Equality of the restricted
-morphisms, precomposed with this lift and followed by the target projection,
-gives equality of their values on y. Fibre extensionality and faithfulness
-then give equality of the original morphisms. Empty covers cause no exception. -/
+geometric-fibre functor. -/
 theorem finiteEtale_powerSeries_punctured_section_restriction_injective
     (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]
     (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth (R := A) A)

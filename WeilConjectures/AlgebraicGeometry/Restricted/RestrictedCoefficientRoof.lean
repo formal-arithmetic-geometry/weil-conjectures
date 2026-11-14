@@ -13,7 +13,6 @@ import WeilConjectures.CategoryTheory.MapExtendHomology
 /-! # Restricted coefficient maps on the cohomology of an injective roof
 
 Source: Stacks Project, Cohomology, Tags 01E4 and 01FB.
-(blueprint: lem-weil-pbc-restricted-coefficient-roof).
 -/
 
 @[expose] public section
@@ -253,24 +252,8 @@ private theorem squareResolutionCohomologyIso_hom {X : Scheme.{u}} {F : X.Module
 -- The proof transports the natural-indexed section equation through fixed integer models.
 /-- Restriction of an augmented roof computes the classical h-map on an arbitrary open.
 There is one scheme morphism, no direct-image square, and no total derived functor.
-Source: Stacks Project, Tag 01FB (Remark explain-arrow), Tag 01E4 (restriction of an
-injective resolution)
-(blueprint: lem-weil-pbc-restricted-coefficient-roof).
-
-Proof: Restrict I, J and L to U and v inverse U. Open restriction is exact and preserves
-injectives. Use R.comparison and R'.comparison to identify the restricted I and J with
-the given restricted resolutions. The natural restriction/direct-image comparison sends
-restricted ell to a quasi-isomorphism from the direct image of the restricted J into
-restricted L. Restrict beta and use both augmentation equations; the adjunction formula
-for restrictedDirectImageMap gives precisely its required coefficient augmentation.
-These data define ModuleCohomologyFMapData for v restricted to U. Its canonical sections
-comparison is the identity identification of sections over v inverse U. The components
-condition on R.sections and R'.sections identifies its horizontal and vertical arrows
-with sections of beta and ell. The independence theorem identifies its map with
-moduleCohomologyFMap. Postcompose its roof formula with the target resolution comparison
-and the homology map of sections of ell; the inverse vertical map cancels. Transport from
-natural indices to integer indices by mapExtendIso and extendHomologyIso, which are natural
-for both arrows. This is the displayed equality, including U empty and q zero. -/
+Source: Stacks Project, Tag 01FB (Remark explain-arrow), Tag 01E4 (restriction of an injective
+resolution). -/
 theorem restrictedCoefficient_roof {X Z : Scheme.{u}} (v : Z ⟶ X)
     (F : X.Modules) (G : Z.Modules) (φ : F ⟶ (pushforward v).obj G)
     (I : InjectiveResolution F) (J : InjectiveResolution G)

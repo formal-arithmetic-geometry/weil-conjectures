@@ -13,7 +13,6 @@ public import Mathlib.Algebra.Category.Ring.Limits
 /-! # The explicit ring of matching punctured and completed sections
 
 Source: Stacks Project, Tags 0BLH and 05ER (the functor H⁰).
-(blueprint: def-sbc-punctured-completion-matching-sections)
 -/
 
 @[expose] public section
@@ -23,15 +22,13 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- The completion map used by the matching-sections construction.
-Source: Stacks Project, Tag 0BLH.
-(blueprint: def-sbc-punctured-completion-matching-sections) -/
+Source: Stacks Project, Tag 0BLH. -/
 noncomputable abbrev completionSpecMap (A : Type u) [CommRing A] [IsLocalRing A] :=
   Spec.map (CommRingCat.ofHom
     (algebraMap A (AdicCompletion (IsLocalRing.maximalIdeal A) A)))
 
 /-- The given overlap identification, retained as data rather than chosen from a theorem.
-Source: Stacks Project, Tag 0BLH.
-(blueprint: def-sbc-punctured-completion-matching-sections) -/
+Source: Stacks Project, Tag 0BLH. -/
 structure CompletionGluingData (A : Type u) [CommRing A] [IsLocalRing A]
     (U : (Spec (.of A)).Opens) {Y : Scheme.{u}} (q : Y ⟶ U.toScheme)
     (E : Scheme.{u}) (s : E ⟶ Spec
@@ -49,14 +46,12 @@ variable {E : Scheme.{u}} {s : E ⟶ Spec
 variable (D : CompletionGluingData A U q E s)
 
 /-- Map from the overlap to the completed model.
-Source: Stacks Project, Tag 0BLH.
-(blueprint: def-sbc-punctured-completion-matching-sections) -/
+Source: Stacks Project, Tag 0BLH. -/
 noncomputable def toCompleted : pullback q (completionSpecMap A ∣_ U) ⟶ E :=
   D.overlapIso.hom ≫ (s ⁻¹ᵁ (completionSpecMap A ⁻¹ᵁ U)).ι
 
 /-- The two overlap maps agree over the original affine base.
-Source: Stacks Project, Tag 0BLH.
-(blueprint: def-sbc-punctured-completion-matching-sections) -/
+Source: Stacks Project, Tag 0BLH. -/
 theorem overlap_base :
     pullback.fst q (completionSpecMap A ∣_ U) ≫ (q ≫ U.ι) =
       D.toCompleted ≫ (s ≫ completionSpecMap A) := by
@@ -66,39 +61,33 @@ theorem overlap_base :
     ← pullback.condition_assoc]
 
 /-- The actual ring of pairs of sections agreeing on the overlap.
-Source: Stacks Project, Tag 05ER, the construction H⁰.
-(blueprint: def-sbc-punctured-completion-matching-sections) -/
+Source: Stacks Project, Tag 05ER, the construction H⁰. -/
 noncomputable def matchingRing : CommRingCat.{u} :=
   pullback (pullback.fst q (completionSpecMap A ∣_ U)).appTop D.toCompleted.appTop
 
 /-- The base-ring map into the ring of matching sections.
-Source: Stacks Project, Tag 05ER, the construction H⁰.
-(blueprint: def-sbc-punctured-completion-matching-sections) -/
+Source: Stacks Project, Tag 05ER, the construction H⁰. -/
 noncomputable def baseMap : CommRingCat.of A ⟶ D.matchingRing :=
   (ΓSpecIso (.of A)).inv ≫ pullback.lift (q ≫ U.ι).appTop
     (s ≫ completionSpecMap A).appTop (by
       simpa only [Hom.comp_appTop] using congrArg Hom.appTop D.overlap_base)
 
 /-- The explicit affine candidate, without any finiteness assertion.
-Source: Stacks Project, Tag 0BLH, set Y = Spec B.
-(blueprint: def-sbc-punctured-completion-matching-sections) -/
+Source: Stacks Project, Tag 0BLH, set Y = Spec B. -/
 noncomputable def model : Scheme.{u} := Spec D.matchingRing
 
 /-- Its structural map to the original base.
-Source: Stacks Project, Tag 0BLH.
-(blueprint: def-sbc-punctured-completion-matching-sections) -/
+Source: Stacks Project, Tag 0BLH. -/
 noncomputable def modelMap : D.model ⟶ Spec (.of A) := Spec.map D.baseMap
 
 /-- The map from the punctured model induced by the first projection of matching sections.
-Source: Stacks Project, Tag 05ER, the natural comparison Ψ.
-(blueprint: def-sbc-punctured-completion-matching-sections) -/
+Source: Stacks Project, Tag 05ER, the natural comparison Ψ. -/
 noncomputable def fromPunctured : Y ⟶ D.model :=
   Y.toSpecΓ ≫ Spec.map (pullback.fst
     (pullback.fst q (completionSpecMap A ∣_ U)).appTop D.toCompleted.appTop)
 
 /-- The first comparison is a morphism over Spec A.
-Source: Stacks Project, Tag 05ER.
-(blueprint: def-sbc-punctured-completion-matching-sections) -/
+Source: Stacks Project, Tag 05ER. -/
 theorem fromPunctured_modelMap : D.fromPunctured ≫ D.modelMap = q ≫ U.ι := by
   simp only [fromPunctured, modelMap, baseMap, Category.assoc, ← Spec.map_comp,
     pullback.lift_fst]
@@ -106,15 +95,13 @@ theorem fromPunctured_modelMap : D.fromPunctured ≫ D.modelMap = q ≫ U.ι := 
     toSpecΓ_SpecMap_ΓSpecIso_inv, Category.comp_id]
 
 /-- The map from the completed model induced by the second projection of matching sections.
-Source: Stacks Project, Tag 05ER, the natural comparison Ψ.
-(blueprint: def-sbc-punctured-completion-matching-sections) -/
+Source: Stacks Project, Tag 05ER, the natural comparison Ψ. -/
 noncomputable def fromCompleted : E ⟶ D.model :=
   E.toSpecΓ ≫ Spec.map (pullback.snd
     (pullback.fst q (completionSpecMap A ∣_ U)).appTop D.toCompleted.appTop)
 
 /-- The second comparison is a morphism over Spec A.
-Source: Stacks Project, Tag 05ER.
-(blueprint: def-sbc-punctured-completion-matching-sections) -/
+Source: Stacks Project, Tag 05ER. -/
 theorem fromCompleted_modelMap : D.fromCompleted ≫ D.modelMap =
     s ≫ completionSpecMap A := by
   simp only [fromCompleted, modelMap, baseMap, Category.assoc, ← Spec.map_comp,
@@ -123,27 +110,23 @@ theorem fromCompleted_modelMap : D.fromCompleted ≫ D.modelMap =
     toSpecΓ_SpecMap_ΓSpecIso_inv, Category.comp_id]
 
 /-- The canonical comparison with the punctured restriction of the explicit candidate.
-Source: Stacks Project, Tag 0BLH.
-(blueprint: def-sbc-punctured-completion-matching-sections) -/
+Source: Stacks Project, Tag 0BLH. -/
 noncomputable def puncturedMap : Y ⟶ (D.modelMap ⁻¹ᵁ U).toScheme :=
   pullback.lift D.fromPunctured q D.fromPunctured_modelMap ≫
     (pullbackRestrictIsoRestrict D.modelMap U).hom
 
 /-- Compatibility of the punctured comparison with its base map.
-Source: Stacks Project, Tag 0BLH.
-(blueprint: def-sbc-punctured-completion-matching-sections) -/
+Source: Stacks Project, Tag 0BLH. -/
 theorem puncturedMap_over : D.puncturedMap ≫ D.modelMap ∣_ U = q := by
   simp [puncturedMap]
 
 /-- The canonical comparison with the completed base change of the explicit candidate.
-Source: Stacks Project, Tag 0BLH.
-(blueprint: def-sbc-punctured-completion-matching-sections) -/
+Source: Stacks Project, Tag 0BLH. -/
 noncomputable def completedMap : E ⟶ pullback D.modelMap (completionSpecMap A) :=
   pullback.lift D.fromCompleted s D.fromCompleted_modelMap
 
 /-- Compatibility of the completed comparison with its base map.
-Source: Stacks Project, Tag 0BLH.
-(blueprint: def-sbc-punctured-completion-matching-sections) -/
+Source: Stacks Project, Tag 0BLH. -/
 theorem completedMap_over : D.completedMap ≫
     pullback.snd D.modelMap (completionSpecMap A) = s := by
   simp [completedMap]

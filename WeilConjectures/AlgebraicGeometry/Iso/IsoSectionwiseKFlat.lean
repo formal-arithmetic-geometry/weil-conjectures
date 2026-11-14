@@ -226,8 +226,7 @@ import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
 
 /-! # K-flatness under sectionwise reindexing
 
-Source: Stacks Project, Tag 06YN; the K-flatness part of
-`lem-pod-sectionwise-flat-kflat`.
+Source: Stacks Project, Tag 06YN.
 -/
 
 @[expose] public section
@@ -318,14 +317,7 @@ private noncomputable def sectionwiseAlgebraicLift
 /-- Sectionwise inverse image with an invertible coefficient identification preserves
 K-flat complexes for the independent-coefficient tensor predicate.
 
-Source: Stacks Project, Tag 06YN and the K-flatness part of the tensor argument in
-`lem-pod-sectionwise-flat-kflat` (blueprint: lem-pod-sectionwise-flat-kflat-kflat).
-
-Proof: the inverse reindexing functor is an exact equivalence and preserves the
-colimits forming total tensor complexes. The sectionwise tensor comparison is
-natural in both variables and respects the signed differential. For an acyclic
-complex on the target site, transport it by the inverse, apply K-flatness, and
-transport the resulting acyclic total tensor complex back. -/
+Source: Stacks Project. -/
 theorem isoSectionwiseModuleInverseImage_preservesKFlat
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [EssentiallySmall.{u + 1} X.ProEt] [EssentiallySmall.{u + 1} Y.ProEt]

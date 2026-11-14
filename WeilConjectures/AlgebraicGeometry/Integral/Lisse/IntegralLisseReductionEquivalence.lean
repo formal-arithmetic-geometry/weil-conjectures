@@ -19,8 +19,7 @@ import WeilConjectures.AlgebraicGeometry.Integral.Lisse.IntegralLisseTowerEffect
 /-!
 # Integral lisse modules and their normalized reduction towers
 
-Source: Bhatt--Scholze, Lemma 6.8.2, Definition 6.8.3 and Proposition 6.8.4(1),
-pp. 58--59 (blueprint: lem-sfb-integral-lisse-reduction-equivalence).
+Source: Bhatt--Scholze, Lemma 6.8.2, Definition 6.8.3 and Proposition 6.8.4(1), pp. 58--59.
 
 The finite coefficient sheaves are first presented as continuous functions into the quotient
 rings, with their quotient topology. The statement identifies these with constant sheaves.

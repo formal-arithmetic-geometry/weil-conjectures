@@ -197,9 +197,6 @@ import Mathlib.CategoryTheory.Adjunction.Whiskering
 import WeilConjectures.AlgebraicGeometry.Tensor.TensorProjectionAdjunct
 
 /-! # Cancelling the positive twist in the projective-line splitting
-
-Source: the final tensor-projection sentence of thm-amb-p1-decomposition.proof.md
-(blueprint: lem-asd-ordinary-finite-p1-untwist).
 -/
 
 @[expose] public noncomputable section
@@ -296,23 +293,7 @@ private theorem evaluation_isIso
 /-- Tensoring the normalized positive-twist splitting with the inverse line gives
 exactly the unit and Chern-evaluation splitting. No Noetherian hypothesis is needed:
 the source library's finite-coefficient proper projection formula is unbounded and
-holds over every base.
-Source: main-20261015, thm-amb-p1-decomposition.proof.md, final sentence
-(blueprint: lem-asd-ordinary-finite-p1-untwist).
-
-Proof: put K=A(-1)[-2] and L=A(1)[2]. The normalized product identifies K tensor L
-with A, and identifies its pullback tensor L_P with A_P. Tensor the given splitting
-with K, use preservation of binary biproducts, then apply the canonical proper
-projection formula for q and the direct image of evaluation. Every map is an
-isomorphism. Normalized positive transports agree by their roots and pure-tensor
-equations. Apply tensorProjectionAdjunct to each of the two components. For the
-first component the adjunction triangle gives the identity after twist pullback;
-compatibility of evaluation with inverse image identifies its adjoint with the
-constant comparison. For the second, counit naturality gives tensoring with c
-followed by evaluation, with the canonical right-unit comparison. These are precisely
-the two adjuncts defining p1DecompositionMap. The shifts are even, so the signed
-symmetry introduces no extra sign. The argument uses invertibility of N to make the
-finite root line invertible, and permits A=0, N=1, or the empty base. -/
+holds over every base. -/
 theorem isIso_p1DecompositionMap_of_twisted
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)

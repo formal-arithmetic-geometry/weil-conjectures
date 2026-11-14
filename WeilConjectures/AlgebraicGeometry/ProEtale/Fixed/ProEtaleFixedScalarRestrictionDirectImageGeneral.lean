@@ -13,11 +13,10 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantExact
 /-!
 # Direct image and restriction of scalars for arbitrary coefficient rings
 
-Source: Stacks, Tags 0D6E and 07A6; blueprint
-(blueprint: lem-weil-proetale-direct-image-restriction-of-scalars).
+Source: Stacks, Tags 0D6E and 07A6.
 
 The derived direct image commutes with restriction of scalars along an arbitrary morphism of
-commutative rings `φ : A →+* B`: the canonical comparison
+commutative rings `φ: A →+* B`: the canonical comparison
 `AlgebraicGeometry.ProEtale.fixedScalarRestrictionDirectImageMap` is invertible without any
 finiteness assumption on `A` and `B`
 (`AlgebraicGeometry.ProEtale.isIso_fixedScalarRestrictionDirectImageMap`). The only input of
@@ -40,8 +39,7 @@ namespace AlgebraicGeometry.ProEtale
 attribute [local irreducible] upperStar
 
 /-- The direct-image comparison is the mate of the canonical inverse-image comparison.
-Source: Stacks Tags 0D6E and 07A6
-(blueprint: lem-weil-proetale-direct-image-restriction-of-scalars). -/
+Source: Stacks Tags 0D6E and 07A6. -/
 theorem fixedScalarRestrictionDirectImageMap_eq
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -54,7 +52,7 @@ theorem fixedScalarRestrictionDirectImageMap_eq
 /-- The inverse image of a constant sheaf of commutative rings is the constant sheaf, for an
 arbitrary ring: both are left adjoint to the global sections, as the base change of the
 terminal object is terminal.
-Source: Stacks Tags 0H7J and 09A5 (blueprint: prop-weil-pbc-proetale-constant-exact). -/
+Source: Stacks Tags 0H7J and 09A5. -/
 theorem isIso_proEtaleConstantInverseImageMap_commRing {U V : Scheme.{u}} (f : U ⟶ V)
     (Λ : Type (u + 1)) [CommRing Λ] :
     IsIso (Scheme.proEtaleConstantInverseImageMap f CommRingCat.{u + 1}
@@ -96,7 +94,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- The inverse image of the constant ring sheaf is the constant ring sheaf.
-Source: Stacks Tag 03D2 (blueprint: lem-weil-proetale-direct-image-restriction-of-scalars). -/
+Source: Stacks Tag 03D2. -/
 private noncomputable def scalarPullbackIso' {X Y : Scheme.{u}} (f : X ⟶ Y)
     (A : Type (u + 1)) [CommRing A] :
     (Scheme.proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj
@@ -193,11 +191,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Restriction of scalars along an arbitrary morphism of commutative rings commutes with the
 unbounded derived direct image: the canonical mate comparison is invertible.
-Source: Stacks Tags 0D6E and 07A6
-(blueprint: lem-weil-proetale-direct-image-restriction-of-scalars).
-Proof: the argument of `fixedScalarRestrictionDirectImageMap_isIso`, whose only use of
-finiteness, the identification of the inverse image of the constant ring sheaf, holds for every
-ring (`isIso_proEtaleConstantInverseImageMap_commRing`). -/
+Source: Stacks Tags 0D6E and 07A6. -/
 theorem isIso_fixedScalarRestrictionDirectImageMap
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y) :

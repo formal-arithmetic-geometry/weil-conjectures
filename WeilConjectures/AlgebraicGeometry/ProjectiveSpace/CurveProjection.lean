@@ -41,7 +41,7 @@ and `i` is the closed immersion `Proj S ⟶ ℙ(n; Spec k)` given by linear form
 (`AlgebraicGeometry.Proj.linearProjection`) which generate `S`. Thus
 `k[x_j]_{j ∈ n} ⟶ S`, `x_j ↦ l_j`, is a surjection of graded `k`-algebras, `S ≅ k[x_j] / I` for
 its kernel `I`, a homogeneous prime ideal since `S` is a domain, and `i` identifies `X` with
-`Proj (k[x_j] / I)` (blueprint: `theorem-riemann-roch-coherent-serre-duality`). -/
+`Proj (k[x_j] / I)`. -/
 theorem exists_isStandard_iso_proj {k : Type u} [Field k] {n : Type u} [Finite n]
     (X : Scheme.{u}) [X.Over (Spec (.of k))] [IsIntegral X] (i : X ⟶ ℙ(n; Spec (.of k)))
     [IsClosedImmersion i] [i.IsOver (Spec (.of k))] :
@@ -79,7 +79,7 @@ theorem exists_isStandard_iso_proj {k : Type u} [Field k] {n : Type u} [Finite n
     rw [Algebra.adjoin_range_eq_range_aeval, AlgHom.range_eq_top]
     exact fun r ↦ surjective_of_isClosedImmersion_SpecMap
       (CommRingCat.ofHom (MvPolynomial.aeval (R := k) v).toRingHom) r
-  -- The projective closure `p : Proj S ⟶ ℙ(n; Spec k)` of the chart.
+  -- The projective closure `p: Proj S ⟶ ℙ(n; Spec k)` of the chart.
   obtain ⟨S, _, _, 𝒜, _, hstd, _, l, hl, hcov, hadj, p, hpl, hp, hpover, ⟨x₀, hx₀, hsp⟩, ψ,
     hψ⟩ := Proj.exists_isClosedImmersion_chart j₀ v hv
   have : IsReduced (Proj 𝒜) := Proj.isReduced_of_isDomain 𝒜
@@ -118,8 +118,7 @@ theorem exists_isStandard_iso_proj {k : Type u} [Field k] {n : Type u} [Finite n
 infinite field and `X` is an integral closed subscheme of `ℙ(n; Spec k)` of dimension one,
 then there is a finite morphism `X ⟶ ℙ¹_k` over `k`. Writing `X ≅ Proj S` with `S` a
 standard graded domain, it is the linear projection `π_{l₀,l₁}` for linear forms
-`l₀, l₁ ∈ S₁` without common zero
-(blueprint: `theorem-riemann-roch-coherent-serre-duality`). -/
+`l₀, l₁ ∈ S₁` without common zero. -/
 theorem exists_isFinite_toProjectiveLine {k : Type u} [Field k] [Infinite k] {n : Type u}
     [Finite n] (X : Scheme.{u}) [X.Over (Spec (.of k))] [IsIntegral X]
     (i : X ⟶ ℙ(n; Spec (.of k))) [IsClosedImmersion i] [i.IsOver (Spec (.of k))]

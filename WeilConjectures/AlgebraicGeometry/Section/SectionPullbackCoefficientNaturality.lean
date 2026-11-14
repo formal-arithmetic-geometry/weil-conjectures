@@ -158,9 +158,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 
 /-! # Restricting a coefficient comparison along compatible sections
-
-Source: orientation-charts Step 4, pullback-compositor coherence.
-(blueprint: lem-trf-section-pullback-coefficient-naturality).
 -/
 
 @[expose] public noncomputable section

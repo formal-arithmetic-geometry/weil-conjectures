@@ -19,8 +19,6 @@ import WeilConjectures.AlgebraicGeometry.Proper.Unbounded.ProperUnboundedWindowI
 /-!
 # Proper direct image of unbounded ind-constructible complexes
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-proper-unbounded-window,
-statement and three proof paragraphs (blueprint: lemma-proper-direct-image-unbounded-complexes).
 The schemes have the standing setting of sk-def-sfb-dc-setting, inherited through
 lemma-uniform-bound-proper-direct-image. All filtered diagrams are small in the coefficient
 universe. The window assertion records the actual two cohomology arrows of the truncation zigzag.
@@ -66,9 +64,7 @@ closure of constructible sheaves. The two window maps are the images of truncLE�
 truncGEπ, not an arbitrary isomorphism between the endpoint sheaves. The first endpoint
 is ind-constructible by the first clause; the last endpoint is included explicitly.
 Invertibility of the two arrows puts the middle sheaf in IndCons too, and fullness makes
-their inverses and their composite morphisms of IndCons.
-Source: blueprint lemma-proper-direct-image-unbounded-complexes, displayed assertions and final
-paragraph (blueprint: lemma-proper-direct-image-unbounded-complexes). -/
+their inverses and their composite morphisms of IndCons. -/
 def ProperUnboundedWindowAssertions
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     {X Y : Scheme.{u}} (p : X ⟶ Y) (d : ℤ) : Prop :=
@@ -98,29 +94,7 @@ def ProperUnboundedWindowAssertions
             ((DerivedCategory.TStructure.t.truncLE q).obj K)))))
 
 /-- Proper pushforward of unbounded complexes with ind-constructible finite-extension
-cohomology preserves that property, has amplitude [0,2d+1], and has the stated finite window.
-Source: blueprint main-20261015, lemma-proper-direct-image-unbounded-complexes, all three paragraphs
-(blueprint: lemma-proper-direct-image-unbounded-complexes).
-
-Proof for stage 3, following the five steps of the DAG:
-1. corollary-ambient-ind-derived(2) and proposition-open-direct-image-preserves-finite keep both
-canonical
-   truncations in Dic. Their cohomology agrees with that of the input in the retained
-   range and vanishes outside it. In particular tau_ge(-n) K is bounded below.
-2. lemma-proper-direct-image-unbounded-complexes--1 applies the bounded-below spectral sequence,
-   with lemma-uniform-bound-proper-direct-image, to give IndCons membership and both amplitude
-   bounds.
-3. For arbitrary K and each degree q, lemma-proper-direct-image-unbounded-complexes--1 identifies
-   H^q(Rp_*K) with H^q(Rp_*tau_ge(-n) K) for sufficiently large n. Step 2 gives
-   ind-constructibility of the latter, hence of the former by repleteness. If K is at most
-   b, its truncations are too; step 2 and the same identification give the upper bound.
-4. If K is at least a, it is already bounded below. Apply step 2 directly for the lower
-   bound, with no bounded-above restriction.
-5. Set A = tau_le(q) K and B = tau_ge(q-2d-1) A. Step 1 keeps A and B in Dic.
-   lemma-proper-direct-image-unbounded-complexes--2 makes the two canonical cohomology arrows alpha
-   and beta invertible. Step 3 puts their objects in IndCons. The required isomorphism is
-   alpha inverse followed by beta; its inverse is beta inverse followed by alpha.
-   Fullness of IndCons makes all these maps morphisms of that subcategory. -/
+cohomology preserves that property, has amplitude [0,2d+1], and has the stated finite window. -/
 theorem properUnboundedWindow
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (k : Type u) [Field k] (p₀ : ℕ) [CharP k p₀] (hp₀ : 0 < p₀) (hpℓ : p₀ ≠ ℓ)
@@ -149,21 +123,7 @@ theorem properUnboundedWindow
 
 /-- The same unbounded proper-window theorem for the condensed algebraic closure.
 Its sections take values in a finite subextension, as in
-lemma-proper-direct-image-unbounded-complexes. Source: blueprint main-20261015,
-lemma-proper-direct-image-unbounded-complexes, all three paragraphs (blueprint:
-lemma-proper-direct-image-unbounded-complexes).
-
-Proof for stage 3: corollary-ambient-ind-derived(2) and
-proposition-open-direct-image-preserves-finite give stability of Dic under the two good truncations.
-Apply lemma-proper-direct-image-unbounded-complexes--1 first to bounded-below inputs. For arbitrary
-inputs, in each degree use the eventual cohomology isomorphism of
-lemma-proper-direct-image-unbounded-complexes--1, then the bounded-below case and closure of IndCons
-under isomorphism. This also gives the upper bound b+2d+1. The lower-bound case is already bounded
-below, so the bounded-below node applies directly. Finally apply
-lemma-proper-direct-image-unbounded-complexes--2 to A = tau_le(q) K and its truncation B =
-tau_ge(q-2d-1) A. Both cohomology arrows are invertible and all three sheaves are ind-constructible.
-Their composite alpha inverse followed by beta is the window isomorphism, with inverse beta inverse
-followed by alpha, in the full category IndCons. -/
+lemma-proper-direct-image-unbounded-complexes. -/
 theorem properUnboundedWindow_padicAlgCl
     (ℓ : ℕ) [Fact ℓ.Prime]
     (k : Type u) [Field k] (p₀ : ℕ) [CharP k p₀] (hp₀ : 0 < p₀) (hpℓ : p₀ ≠ ℓ)

@@ -36,12 +36,7 @@ variable (T : Scheme.{u}) (R : Type (u + 1)) [CommRing R]
 /-- The forgetful functor from sheaves of `R`-modules to abelian sheaves commutes with the
 constant-sheaf functors on the small étale site: the underlying abelian sheaf of the constant
 sheaf of `R`-modules with value `M` is the constant abelian sheaf with value `M`, naturally
-in `M`. Source: Stacks Project, Tag 03CY.
-(blueprint: `lem-weil-pbc-constant-module-sheaf-underlying`)
-
-Proof: the forgetful functor preserves limits and filtered colimits, hence preserves
-sheafification (`GrothendieckTopology.instPreservesSheafification`); then apply
-`constantCommuteCompose`. -/
+in `M`. Source: Stacks Project, Tag 03CY. -/
 noncomputable def constantModuleSheafForgetIso :
     constantSheaf T.smallEtaleTopology (ModuleCat.{u + 1} R) ⋙
         sheafCompose T.smallEtaleTopology (forget₂ (ModuleCat.{u + 1} R) AddCommGrpCat.{u + 1}) ≅
@@ -54,8 +49,7 @@ noncomputable def constantModuleSheafForgetIso :
 
 /-- The comparison `constantModuleSheafForgetIso` is compatible with the canonical maps from
 the constant presheaf `U ↦ M`: the underlying abelian map of the module sheafification unit,
-followed by the comparison, is the abelian sheafification unit of the constant presheaf.
-(blueprint: `lem-weil-pbc-constant-module-sheaf-underlying`) -/
+followed by the comparison, is the abelian sheafification unit of the constant presheaf. -/
 theorem whiskerRight_toSheafify_constantModuleSheafForgetIso_hom (M : ModuleCat.{u + 1} R) :
     Functor.whiskerRight (toSheafify T.smallEtaleTopology ((Functor.const _).obj M))
         (forget₂ (ModuleCat.{u + 1} R) AddCommGrpCat.{u + 1}) ≫

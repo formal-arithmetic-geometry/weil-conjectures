@@ -94,7 +94,7 @@ theorem exists_pullback_pushforward_unit_iso_free [IsIntegral Y] (g : X ⟶ Y) [
     ∃ U : Y.Opens, (U : Set Y).Nonempty ∧
       Nonempty ((Modules.pullback U.ι).obj ((pushforward g).obj (𝟙_ X.Modules)) ≅
         SheafOfModules.free (ULift.{u} (Fin (g.finrank (genericPoint Y))))) := by
-  -- The affine chart `C : Spec R ⟶ Y` at the generic point used to define `g.finrank`.
+  -- The affine chart `C: Spec R ⟶ Y` at the generic point used to define `g.finrank`.
   set η := genericPoint Y
   let k := Y.affineOpenCover.idx η
   let R := Y.affineOpenCover.X k
@@ -243,16 +243,14 @@ theorem isFiniteLocallyFree_pushforward (g : X ⟶ Y) [IsFinite g] [Flat g]
     .trans Γ(Y, V) Γ(X, g ⁻¹ᵁ V) Γ((pushforward g).obj ℱ, V)⟩
 
 /-- **The pushforward of the structure sheaf along a finite locally free morphism.** If
-`g : X ⟶ Y` is finite locally free of degree `d`, then `g_* 𝒪_X` is a finite locally free
+`g: X ⟶ Y` is finite locally free of degree `d`, then `g_* 𝒪_X` is a finite locally free
 `𝒪_Y`-module of rank `d`. Over an affine open `Spec A` of `Y` it is the `𝒪`-module associated with
 the finite, flat and finitely presented, hence projective, `A`-module `B = Γ(X, g ⁻¹ᵁ Spec A)`, and
 its rank at a point `y` is the dimension `d` of the fibre `B ⊗_A κ(y) = Γ(X_y, 𝒪_{X_y})`.
 
 This is the first half of `lem-pc-flf-properties` (the second half, on the fibres, is
 `AlgebraicGeometry.Scheme.Hom.exists_ringEquiv_tensorProduct_fiber`), and the pointer remark to
-the properties of finite locally free morphisms.
-
-(blueprint: `lem-pc-flf-properties`, `rem-ptr-pc-finite-locally-free-11`) -/
+the properties of finite locally free morphisms. -/
 theorem isFiniteLocallyFreeOfRank_pushforward_unit (g : X ⟶ Y) (d : ℕ)
     [g.IsFiniteLocallyFreeOfDegree d] :
     ((pushforward g).obj (𝟙_ X.Modules)).IsFiniteLocallyFreeOfRank d := by

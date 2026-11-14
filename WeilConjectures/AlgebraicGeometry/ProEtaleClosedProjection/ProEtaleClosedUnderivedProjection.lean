@@ -70,9 +70,8 @@ import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 /-!
 # Underived projection for a closed pro-etale immersion
 
-Source: Stacks Project, proetale.tex, Tags 09AA and 09AH, and sites-modules.tex,
-Section 03EK and Tag 03EL. The projection consequence is agent-formulated.
-(blueprint: lem-weil-pbc-proetale-closed-underived-projection).
+Source: Stacks Project, Tags 09AA and 09AH, Section 03EK and Tag 03EL. The projection consequence is
+agent-formulated.
 -/
 
 @[expose] public section
@@ -93,17 +92,7 @@ namespace AlgebraicGeometry.ProEtaleClosedProjection
 /-- The actual module adjunction is uniquely characterized by its constructed unit
 on every section. This fixes adjunction data, rather than choosing an arbitrary
 adjunction between the functors.
-Source: Stacks, Tags 03D2, 03D3 and 09AA; the canonical adjunct in the statement
-(blueprint: lem-weil-pbc-proetale-closed-underived-projection).
-Proof: transport the existing pullbackPushforwardAdjunction on the AsSmall model
-back along the explicit module equivalences. The right-adjoint comparison is the
-sectionwise identity. Evaluation of the transported unit gives inverseSection,
-since the model equivalences are inverse on sections and their comparison units
-are identities. For uniqueness, two units satisfying this equation agree by
-sectionwise extensionality of module morphisms and natural transformations.
-An adjunction is determined by its unit: the Hom equivalence sends f to the unit
-followed by the right-adjoint image of f, so equal units give equal Hom equivalences,
-and their inverses and counits agree. -/
+Source: Stacks, Tags 03D2, 03D3 and 09AA. -/
 theorem adjunction_exists {X Z : Scheme.{u}} (i : Z ⟶ X) (R : Rings X) :
     ∃! ai : inverse i R ⊣ proEtaleRingedDirectImage i R,
       ∀ (F : Modules R) (V : X.ProEt) (s : F.val.obj (op V)),
@@ -119,16 +108,14 @@ theorem adjunction_exists {X Z : Scheme.{u}} (i : Z ⟶ X) (R : Rings X) :
 
 /-- The canonical module adjunction, selected from the unique unit-normalized
 characterization. Its data are determined by the actual inverse-image section map.
-Source: Stacks, Tags 03D2, 03D3 and 09AA; the canonical adjunct in the statement
-(blueprint: lem-weil-pbc-proetale-closed-underived-projection). -/
+Source: Stacks, Tags 03D2, 03D3 and 09AA. -/
 noncomputable def adjunction {X Z : Scheme.{u}} (i : Z ⟶ X) (R : Rings X) :
     inverse i R ⊣ proEtaleRingedDirectImage i R :=
   Classical.choose (adjunction_exists i R)
 
 /-- The projection map is the specified adjunct of the normalized tensor comparison
 followed by the counit on the first factor. No isomorphism or arbitrary map is chosen.
-Source: Stacks, Tags 03EL and 09AA; the adjunct formula in the statement
-(blueprint: lem-weil-pbc-proetale-closed-underived-projection). -/
+Source: Stacks, Tags 03EL and 09AA. -/
 noncomputable def projection {X Z : Scheme.{u}} (i : Z ⟶ X) (R : Rings X)
     (M : Modules (inverseRing i R)) (F : Modules R) :
     tensor ((proEtaleRingedDirectImage i R).obj M) F ⟶
@@ -138,8 +125,7 @@ noncomputable def projection {X Z : Scheme.{u}} (i : Z ⟶ X) (R : Rings X)
       tensorMap ((adjunction i R).counit.app M) (𝟙 ((inverse i R).obj F)))
 
 /-- The ring sheaf B regarded as an R-module through the given ring morphism.
-Source: Stacks, Section 03EK; the coefficient clause
-(blueprint: lem-weil-pbc-proetale-closed-underived-projection). -/
+Source: Stacks, Section 03EK. -/
 noncomputable abbrev coefficientModule {X : Scheme.{u}} {R B : Rings X} (a : R ⟶ B) :
     Modules R :=
   (restrict a).obj (SheafOfModules.unit (proEtaleModuleCoefficients B))

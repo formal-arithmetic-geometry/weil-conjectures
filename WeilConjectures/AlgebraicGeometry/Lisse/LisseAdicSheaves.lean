@@ -41,8 +41,7 @@ import WeilConjectures.AlgebraicGeometry.Etale.EtaleStalkTensorScalar
 
 /-! # Lisse adic sheaves
 
-Source: Deligne, Weil II, (0.1), (1.1.1) b)-d), pp. 144, 146-147
-(blueprint: def-pod-lisse-l-adic-sheaves).
+Source: Deligne, Weil II, (0.1), (1.1.1) b)-d), pp. 144, 146-147.
 
 ## Main definitions
 
@@ -68,34 +67,34 @@ namespace AlgebraicGeometry.Scheme
 attribute [-instance] CategoryTheory.catToReflQuiver
 
 /-- Share the existing algebra module on a finite coefficient field.
-Source: Weil II coefficient convention (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II coefficient convention. -/
 local instance (priority := 100000) lisseCoefficientFieldModule
     (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E] [Algebra ℚ_[l] E] :
     Module ℚ_[l] E := Algebra.toModule
 
 /-- Share the subring's existing coefficient-integer ring structure.
-Source: Weil II coefficient convention (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II coefficient convention. -/
 local instance (priority := 100000) lisseCoefficientIntegersCommRing
     (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :
     CommRing (Padic.coefficientExtensionIntegers l E) := inferInstance
 
 /-- Share the existing subring algebra in its coefficient field.
-Source: Weil II coefficient convention (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II coefficient convention. -/
 local instance (priority := 100000) lisseCoefficientIntegersAlgebra
     (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :
     Algebra (Padic.coefficientExtensionIntegers l E) E := inferInstance
 
 /-- Share the existing coefficient-integer module in its field.
-Source: Weil II coefficient convention (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II coefficient convention. -/
 local instance (priority := 100000) lisseCoefficientIntegersModule
     (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :
     Module (Padic.coefficientExtensionIntegers l E) E := Algebra.toModule
 
 /-- Share the quotient ring structure without unfolding coefficient data.
-Source: Weil II coefficient convention (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II coefficient convention. -/
 local instance (priority := 100000) lisseCoefficientQuotientCommRing
     (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (n : ℕ) :
@@ -104,7 +103,7 @@ local instance (priority := 100000) lisseCoefficientQuotientCommRing
     (Padic.coefficientExtensionIntegers l E ⧸ Padic.coefficientExtensionIdeal l E n))
 
 /-- Share the quotient algebra structure without unfolding coefficient data.
-Source: Weil II coefficient convention (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II coefficient convention. -/
 local instance (priority := 100000) lisseCoefficientQuotientAlgebra
     (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (n : ℕ) :
@@ -274,8 +273,7 @@ private theorem quotientFactor_kernel {R : Type*} [CommRing R]
     exact Ideal.Quotient.eq_zero_iff_mem.mpr (I.mul_mem_right r ha)
 
 /-- Sheafification for module coefficients on the small étale site.
-Source: Weil II (1.1.1), coefficient sheaves
-(blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1), coefficient sheaves. -/
 local instance (priority := 100000) lisseModuleSheafify
     (Y : Scheme.{u}) (R : Type (u + 1)) [Ring R] :
     HasWeakSheafify Y.smallEtaleTopology (ModuleCat.{u + 1} R) :=
@@ -286,7 +284,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (Y : Scheme.{u})
 
 /-- The inverse diagrams of sheaves of `𝒪_E`-modules, indexed by `n + 1`.
-Source: Weil II (1.1.1) b) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) b). -/
 abbrev AdicIntegralDiagram :=
   ℕᵒᵖ ⥤ Sheaf Y.smallEtaleTopology
     (ModuleCat.{u + 1} (Padic.coefficientExtensionIntegers l E))
@@ -296,7 +294,7 @@ abbrev AdicIntegralDiagram :=
 kernel `I^(n+1)` times the source, in the adic-limit form of lem-pod-adic-limit-finite-modules.
 The last condition is tested on all geometric stalks, which form a conservative
 family of exact functors. It is the reduction-isomorphism clause of Weil II (1.1.1) b).
-Source: Weil II (1.1.1) b) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) b). -/
 def IsLisseIntegralDiagram (F : AdicIntegralDiagram l E Y) : Prop :=
   let R := Padic.coefficientExtensionIntegers l E
   let I := Ideal.span ({Padic.coefficientExtensionUniformizer l E} : Set R)
@@ -311,7 +309,7 @@ def IsLisseIntegralDiagram (F : AdicIntegralDiagram l E Y) : Prop :=
 
 /-- The category of lisse `𝒪_E`-sheaves. Morphisms are natural transformations,
 hence exactly the compatible families of coefficient-linear maps.
-Source: Weil II (1.1.1) b) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) b). -/
 def LisseIntegralSheaf [IsNoetherian Y] [Y.IsSeparated]
     [∀ x : Y, Invertible (l : Y.residueField x)] :=
   ObjectProperty.FullSubcategory (IsLisseIntegralDiagram l E Y)
@@ -319,7 +317,7 @@ def LisseIntegralSheaf [IsNoetherian Y] [Y.IsSeparated]
 variable [IsNoetherian Y] [Y.IsSeparated] [∀ x : Y, Invertible (l : Y.residueField x)]
 
 /-- The integral category is the original full-subcategory category, cached by name.
-Source: Weil II (1.1.1) b) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) b). -/
 instance lisseIntegralCategory : Category (LisseIntegralSheaf l E Y) :=
   inferInstanceAs (Category (ObjectProperty.FullSubcategory (IsLisseIntegralDiagram l E Y)))
 
@@ -333,44 +331,43 @@ instance (priority := 10000) lisseIntegralLinear :
     (ObjectProperty.FullSubcategory (IsLisseIntegralDiagram l E Y)))
 
 /-- Cache the additive integral Hom structure inherited from module sheaves.
-Source: Weil II (1.1.1) c) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c). -/
 instance (priority := 10000) lisseIntegralHomAddCommGroup
     (F G : LisseIntegralSheaf l E Y) : AddCommGroup (F ⟶ G) := inferInstance
 
 /-- Cache the integral Hom module structure inherited from module sheaves.
-Source: Weil II (1.1.1) c) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c). -/
 instance (priority := 10000) lisseIntegralHomModule
     (F G : LisseIntegralSheaf l E Y) :
     Module (Padic.coefficientExtensionIntegers l E) (F ⟶ G) := inferInstance
 
 /-- The integral fibre is the inverse limit of the geometric stalks.
-Source: Weil II (1.1.1) b), SGA 5 VI (1.2.5)
-(blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) b), SGA 5 VI (1.2.5). -/
 def lisseIntegralFiber {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (y : Spec (.of Ω) ⟶ Y) (F : LisseIntegralSheaf l E Y) :
     ModuleCat.{u + 1} (Padic.coefficientExtensionIntegers l E) :=
   limit (F.obj ⋙ (pointSmallEtale y).ulift.{u + 1}.sheafFiber)
 
 /-- An `E`-sheaf is an integral lattice considered up to rational morphisms.
-Source: Weil II (1.1.1) c) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c). -/
 structure LisseRationalSheaf where
   /-- Its chosen integral model; different models may be isomorphic. -/
   integral : LisseIntegralSheaf l E Y
 
 /-- Rational Hom, `E ⊗_{𝒪_E} Hom(F,G)`.
-Source: Weil II (1.1.1) c) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c). -/
 def lisseRationalHom (F G : LisseRationalSheaf l E Y) :=
   TensorProduct (Padic.coefficientExtensionIntegers l E) E (F.integral ⟶ G.integral)
 
 /-- The rational Hom inherits exactly the additive tensor structure.
-Source: Weil II (1.1.1) c) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c). -/
 instance lisseRationalHomGroup (F G : LisseRationalSheaf l E Y) :
     AddCommGroup (lisseRationalHom l E Y F G) :=
   inferInstanceAs (AddCommGroup
     (TensorProduct (Padic.coefficientExtensionIntegers l E) E (F.integral ⟶ G.integral)))
 
 /-- The rational Hom inherits exactly the scalar tensor structure.
-Source: Weil II (1.1.1) c) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c). -/
 instance lisseRationalHomScalarModule (F G : LisseRationalSheaf l E Y) :
     Module E (lisseRationalHom l E Y F G) :=
   inferInstanceAs (Module E
@@ -381,7 +378,7 @@ set_option genInjectivity false in
 set_option genSizeOf false in
 /-- The bilinear composition and its laws. All data are prescribed on pure tensors;
 only verification of the laws is postponed in `lisseRationalComposition_exists`.
-Source: Weil II (1.1.1) c) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c). -/
 structure LisseRationalComposition where
   /-- The extension of integral composition by `E`-bilinearity. -/
   comp (F G H : LisseRationalSheaf l E Y) :
@@ -405,12 +402,7 @@ structure LisseRationalComposition where
     comp F H K (comp F G H f g) h = comp F G K f (comp G H K g h)
 
 /-- Rational composition exists and satisfies the category laws.
-Source: Weil II (1.1.1) c) (blueprint: def-pod-lisse-l-adic-sheaves).
-Proof: integral composition is `𝒪_E`-bilinear. Extend it using the balanced tensor
-universal property twice, prescribing `(a ⊗ f, b ⊗ g) ↦ ab ⊗ (f ≫ g)`.
-The balancing identities follow from scalar-linear integral composition; the category
-laws follow on pure tensors from the integral laws and associativity of field multiplication,
-and hence hold everywhere by tensor induction and bilinearity. -/
+Source: Weil II (1.1.1) c). -/
 theorem lisseRationalComposition_exists : Nonempty (LisseRationalComposition l E Y) := by
   obtain ⟨c, ht, hi, hc, ha⟩ := tensorComposition_exists
     (R := Padic.coefficientExtensionIntegers l E) (A := E) (LisseIntegralSheaf l E Y)
@@ -421,13 +413,13 @@ theorem lisseRationalComposition_exists : Nonempty (LisseRationalComposition l E
            assoc F G H K := ha F.integral G.integral H.integral K.integral }⟩
 
 /-- The unique bilinear composition with the prescribed pure-tensor formula.
-Source: Weil II (1.1.1) c) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c). -/
 @[irreducible]
 def lisseRationalComposition : LisseRationalComposition l E Y :=
   Classical.choice (lisseRationalComposition_exists l E Y)
 
 /-- The category with the stated rational Hom and induced composition.
-Source: Weil II (1.1.1) c) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c). -/
 instance lisseRationalCategory : Category (LisseRationalSheaf l E Y) where
   Hom := lisseRationalHom l E Y
   id F := TensorProduct.tmul _ 1 (𝟙 F.integral)
@@ -437,13 +429,12 @@ instance lisseRationalCategory : Category (LisseRationalSheaf l E Y) where
   assoc := (lisseRationalComposition l E Y).assoc _ _ _ _
 
 /-- Rational Hom has its tensor-product additive group.
-Source: Weil II (1.1.1) c) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c). -/
 instance lisseRationalHomAddCommGroup (F G : LisseRationalSheaf l E Y) :
     AddCommGroup (F ⟶ G) := inferInstanceAs (AddCommGroup (lisseRationalHom l E Y F G))
 
 /-- The rational fibre is `E ⊗_{𝒪_E} F_y`.
-Source: Weil II (1.1.1) c), SGA 5 VI (1.2.5)
-(blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c), SGA 5 VI (1.2.5). -/
 def lisseRationalFiber {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (y : Spec (.of Ω) ⟶ Y) (F : LisseRationalSheaf l E Y) : ModuleCat.{u + 1} E :=
   ModuleCat.of E (TensorProduct (Padic.coefficientExtensionIntegers l E) E
@@ -539,13 +530,7 @@ private theorem tensorDiagram_isLisse {R : Type (u + 1)} [CommRing R] (I : Ideal
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Tensor of integral systems is lisse.
-Source: Weil II (1.1.1) b), SGA 5 VI
-(blueprint: def-pod-lisse-l-adic-sheaves).
-Proof: tensor levelwise. At level n both factors are killed by `ϖ_E^(n+1)`, so tensor
- over `𝒪_E` agrees with tensor over the quotient `A_{E,n+1}`. On common local
-trivializations the tensor is the constant tensor of finite modules. Right exactness of
-scalar extension gives the reduction comparison at the next level. Thus the stalk
-quotient condition and the annihilation condition are preserved. -/
+Source: Weil II (1.1.1) b), SGA 5 VI. -/
 theorem lisseIntegralTensor_isLisse (F G : LisseIntegralSheaf l E Y) :
     IsLisseIntegralDiagram l E Y (F.obj ⊗ G.obj) := by
   exact tensorDiagram_isLisse Y (R := Padic.coefficientExtensionIntegers l E)
@@ -554,21 +539,19 @@ theorem lisseIntegralTensor_isLisse (F G : LisseIntegralSheaf l E Y) :
     ⟨F.obj, F.property⟩ ⟨G.obj, G.property⟩
 
 /-- Levelwise tensor, with the tensor of transition maps.
-Source: Weil II (1.1.1) b), SGA 5 VI
-(blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) b), SGA 5 VI. -/
 def lisseIntegralTensor (F G : LisseIntegralSheaf l E Y) : LisseIntegralSheaf l E Y :=
   ⟨F.obj ⊗ G.obj, lisseIntegralTensor_isLisse l E Y F G⟩
 
 /-- Tensor of rational objects uses the tensor of their integral models.
-Source: Weil II (1.1.1) c), SGA 5 VI
-(blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c), SGA 5 VI. -/
 def lisseRationalTensor (F G : LisseRationalSheaf l E Y) : LisseRationalSheaf l E Y :=
   ⟨lisseIntegralTensor l E Y F.integral G.integral⟩
 
 end TensorConstruction
 
 /-- The quotient transition viewed as an `𝒪_E`-linear map, for any two levels.
-Source: Weil II (1.1.1) b) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) b). -/
 def lisseUnitModuleMap (i j : ℕᵒᵖ) (f : i ⟶ j) :
     ModuleCat.of (Padic.coefficientExtensionIntegers l E)
       (Padic.coefficientExtensionRing l E (i.unop + 1)) ⟶
@@ -578,18 +561,14 @@ def lisseUnitModuleMap (i j : ℕᵒᵖ) (f : i ⟶ j) :
     (Ideal.pow_le_pow_right (Nat.add_le_add_right (leOfHom f.unop) 1))).toLinearMap
 
 /-- The quotient maps preserve identities.
-Source: Weil II (1.1.1) b) (blueprint: def-pod-lisse-l-adic-sheaves).
-Proof: each factor map sends the class of a scalar to the same class; quotient classes
-exhaust the quotient, so the map for the identity index map is the identity. -/
+Source: Weil II (1.1.1) b). -/
 theorem lisseUnitModuleMap_id (i : ℕᵒᵖ) :
     lisseUnitModuleMap l E i i (𝟙 i) = 𝟙 _ := by
   apply ModuleCat.hom_ext
   exact quotientFactor_id _
 
 /-- The quotient maps preserve composition.
-Source: Weil II (1.1.1) b) (blueprint: def-pod-lisse-l-adic-sheaves).
-Proof: both sides send the class of a scalar to its class in the final quotient.
-Quotient classes exhaust the source quotient, so the maps agree. -/
+Source: Weil II (1.1.1) b). -/
 theorem lisseUnitModuleMap_comp (i j k : ℕᵒᵖ) (f : i ⟶ j) (g : j ⟶ k) :
     lisseUnitModuleMap l E i k (f ≫ g) =
       lisseUnitModuleMap l E i j f ≫ lisseUnitModuleMap l E j k g := by
@@ -599,8 +578,7 @@ theorem lisseUnitModuleMap_comp (i j k : ℕᵒᵖ) (f : i ⟶ j) (g : j ⟶ k) 
     (Ideal.pow_le_pow_right (Nat.add_le_add_right (leOfHom g.unop) 1))
 
 /-- The inverse diagram of constant coefficient sheaves.
-Source: Weil II (1.1.1) b), SGA 5 VI
-(blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) b), SGA 5 VI. -/
 def lisseIntegralUnitDiagram : AdicIntegralDiagram l E Y :=
   (show ℕᵒᵖ ⥤ ModuleCat.{u + 1} (Padic.coefficientExtensionIntegers l E) from
     { obj i := ModuleCat.of _ (Padic.coefficientExtensionRing l E (i.unop + 1))
@@ -612,11 +590,7 @@ def lisseIntegralUnitDiagram : AdicIntegralDiagram l E Y :=
 -- Keep the existing standing hypotheses of this public interface.
 set_option linter.unusedSectionVars false in
 /-- The constant coefficient system is lisse.
-Source: Weil II (1.1.1) b), SGA 5 VI
-(blueprint: def-pod-lisse-l-adic-sheaves).
-Proof: each coefficient quotient is finite and is a constant module sheaf. It is killed
-by the prescribed power of the uniformizer. The quotient map is surjective with kernel
-generated by the indicated power; constant-sheaf stalks are the given modules. -/
+Source: Weil II (1.1.1) b), SGA 5 VI. -/
 theorem lisseIntegralUnit_isLisse :
     IsLisseIntegralDiagram l E Y (lisseIntegralUnitDiagram l E Y) := by
   let R := Padic.coefficientExtensionIntegers l E
@@ -676,14 +650,12 @@ theorem lisseIntegralUnit_isLisse :
       rw [← e₂.injective.eq_iff, map_zero, hn]
 
 /-- The tensor unit, the constant coefficient system.
-Source: Weil II (1.1.1) b), SGA 5 VI
-(blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) b), SGA 5 VI. -/
 def lisseIntegralUnit : LisseIntegralSheaf l E Y :=
   ⟨lisseIntegralUnitDiagram l E Y, lisseIntegralUnit_isLisse l E Y⟩
 
 /-- The rational tensor unit is the rationalization of the constant coefficient system.
-Source: Weil II (1.1.1) c), SGA 5 VI
-(blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c), SGA 5 VI. -/
 def lisseRationalUnit : LisseRationalSheaf l E Y := ⟨lisseIntegralUnit l E Y⟩
 
 section ScalarExtension
@@ -694,12 +666,7 @@ variable (L : Type (u + 1)) [Field L] [Algebra ℚ_[l] L]
   [FiniteDimensional ℚ_[l] L] (ι : E →ₐ[ℚ_[l]] L)
 
 /-- A field inclusion induces the inclusion of rings of integers.
-Source: Weil II (1.1.1) d), SGA 5 VI
-(blueprint: def-pod-lisse-l-adic-sheaves).
-Proof: uniqueness of the extended absolute value shows that `ι` preserves absolute
-values. It therefore maps elements of absolute value at most one into the ring of
-integers. Restrict the field homomorphism to these subrings; the displayed equality
-characterizes that restriction uniquely. -/
+Source: Weil II (1.1.1) d), SGA 5 VI. -/
 theorem lisseIntegerInclusion_exists :
     ∃ f : Padic.coefficientExtensionIntegers l E →+*
       Padic.coefficientExtensionIntegers l L, ∀ x, (f x : L) = ι (x : E) := by
@@ -722,17 +689,13 @@ theorem lisseIntegerInclusion_exists :
   exact ⟨f, fun _ ↦ rfl⟩
 
 /-- Restriction of the given field inclusion to the rings of integers.
-Source: Weil II (1.1.1) d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) d). -/
 def lisseIntegerInclusion : Padic.coefficientExtensionIntegers l E →+*
     Padic.coefficientExtensionIntegers l L :=
   (lisseIntegerInclusion_exists l E L ι).choose
 
 /-- The positive ramification index is characterized by the image of the maximal ideal.
-Source: Weil II (1.1.1) d), local-field scalar extension, SGA 5 VI
-(blueprint: def-pod-lisse-l-adic-sheaves).
-Proof: both rings of integers are discrete valuation rings. The inclusion maps the
-nonzero maximal ideal to a nonzero proper ideal of the larger ring. Every such ideal
-is a unique positive power of its maximal ideal; its exponent is the ramification index. -/
+Source: Weil II (1.1.1) d), local-field scalar extension, SGA 5 VI. -/
 theorem lisseRamificationIndex_exists :
     ∃ e : ℕ, 0 < e ∧
       Ideal.map (lisseIntegerInclusion l E L ι) (Padic.coefficientExtensionMaximalIdeal l E) =
@@ -783,20 +746,16 @@ theorem lisseRamificationIndex_exists :
     exact he
 
 /-- The ramification index of the coefficient inclusion.
-Source: Weil II (1.1.1) d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) d). -/
 def lisseRamificationIndex : ℕ := (lisseRamificationIndex_exists l E L ι).choose
 
 /-- The source index, zero-based, corresponding to `ceil((m+1)/e)`.
-Source: Weil II (1.1.1) d), scalar extension on cofinal systems
-(blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) d), scalar extension on cofinal systems. -/
 def lisseScalarSourceIndex (m : ℕ) : ℕ :=
   (m + 1 + lisseRamificationIndex l E L ι - 1) / lisseRamificationIndex l E L ι - 1
 
 /-- The ceiling source index is nondecreasing.
-Source: the ceiling formula in coefficient scalar extension, SGA 5 VI
-(blueprint: def-pod-lisse-l-adic-sheaves).
-Proof: the ramification index is positive; addition, division by a fixed positive
-integer and truncated subtraction by one preserve order. Apply them to `m ≤ m+1`. -/
+Source: the ceiling formula in coefficient scalar extension, SGA 5 VI. -/
 theorem lisseScalarSourceIndex_le (m : ℕ) :
     lisseScalarSourceIndex l E L ι m ≤ lisseScalarSourceIndex l E L ι (m + 1) := by
   unfold lisseScalarSourceIndex
@@ -805,7 +764,7 @@ theorem lisseScalarSourceIndex_le (m : ℕ) :
   omega
 
 /-- The scalar map to the target finite quotient.
-Source: Weil II (1.1.1) d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) d). -/
 def lisseScalarCoefficientMap (m : ℕ) : Padic.coefficientExtensionIntegers l E →+*
     Padic.coefficientExtensionRing l L (m + 1) :=
   (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l L (m + 1))).comp
@@ -814,8 +773,7 @@ def lisseScalarCoefficientMap (m : ℕ) : Padic.coefficientExtensionIntegers l E
 /-- The level `F_n ⊗_{A_E,n} A_L,m`, as a sheaf of `𝒪_L`-modules.
 Here `n = ceil(m/e)`; extending directly from `𝒪_E` gives the same balanced tensor
 because `F_n` is killed by `ϖ_E^n` and `ϖ_E^n` maps to zero in `A_L,m`.
-Source: Weil II (1.1.1) d), SGA 5 VI
-(blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) d), SGA 5 VI. -/
 def lisseIntegralScalarLevel (F : LisseIntegralSheaf l E Y) (m : ℕ) :
     Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} (Padic.coefficientExtensionIntegers l L)) :=
   (sheafCompose Y.smallEtaleTopology
@@ -826,8 +784,7 @@ def lisseIntegralScalarLevel (F : LisseIntegralSheaf l E Y) (m : ℕ) :
         (F.obj.obj (op (lisseScalarSourceIndex l E L ι m))))
 
 /-- The local pure tensor generator in the scalar-extended finite level.
-Source: Weil II (1.1.1) d), SGA 5 VI
-(blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) d), SGA 5 VI. -/
 def lisseIntegralScalarGenerator (F : LisseIntegralSheaf l E Y) (m : ℕ) (U : Y.Etale)
     (a : Padic.coefficientExtensionRing l L (m + 1))
     (s : (F.obj.obj (op (lisseScalarSourceIndex l E L ι m))).obj.obj (op U)) :
@@ -848,8 +805,7 @@ set_option genSizeOf false in
 /-- Scalar extension with its prescribed levels, transitions and action on morphisms.
 The level identifications are module-sheaf isomorphisms, and all transition and morphism
 maps are fixed by their action on the sheafification of pure tensors.
-Source: Weil II (1.1.1) d), SGA 5 VI
-(blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) d), SGA 5 VI. -/
 structure LisseIntegralScalarExtensionData where
   /-- The functor on integral systems. -/
   functor : LisseIntegralSheaf l E Y ⥤ LisseIntegralSheaf l L Y
@@ -882,7 +838,7 @@ attribute [local semireducible] lisseIntegralScalarLevel lisseIntegralScalarGene
 
 set_option maxRecDepth 100 in
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 def lisseCoherence_quotientRestrictedHom {S A : Type (u + 1)} [Ring S] [Ring A]
     (q : S →+* A) (hq : Function.Surjective q) (M N : ModuleCat.{u + 1} A)
     (f : (ModuleCat.restrictScalars.{u + 1} q).obj M ⟶
@@ -898,7 +854,7 @@ def lisseCoherence_quotientRestrictedHom {S A : Type (u + 1)} [Ring S] [Ring A]
 
 set_option maxRecDepth 100 in
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 def lisseCoherence_quotientRestrictedSheafHom {S A : Type (u + 1)} [Ring S] [Ring A]
     (q : S →+* A) (hq : Function.Surjective q)
     (M N : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A))
@@ -1074,7 +1030,7 @@ private theorem scalarLisse (f : R →+* S)
 end ScalarLissity
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 def lisseCoherence_scalarSheafAdj {R A : Type (u + 1)} [Ring R] [Ring A]
     (f : R →+* A) :
     Sheaf.ringExtendScalars.{u + 1, u + 1} Y.smallEtaleTopology f ⊣
@@ -1082,14 +1038,14 @@ def lisseCoherence_scalarSheafAdj {R A : Type (u + 1)} [Ring R] [Ring A]
   Sheaf.adjunction _ (ModuleCat.ringExtendScalarsAdj.{u + 1, u + 1} f)
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 def lisseCoherence_scalarSheafUnit {R A : Type (u + 1)} [Ring R] [Ring A]
     (f : R →+* A) (M : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R)) :=
   (lisseCoherence_scalarSheafAdj Y f).unit.app M
 
 omit [IsNoetherian Y] [Y.IsSeparated] in
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 theorem lisseCoherence_scalarSheafUnit_apply {R A : Type (u + 1)} [Ring R] [Ring A]
     (f : R →+* A) (M : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R))
     (U : Y.Etale) (x : M.obj.obj (op U)) :
@@ -1181,7 +1137,7 @@ private theorem scalarChangeMap_tmul {R A B : Type (u + 1)}
   exact congrArg (fun z : T ↦ q a • z) h
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 def lisseCoherence_quotientScalarLevel {R S : Type (u + 1)} [CommRing R] [CommRing S]
     (f : R →+* S) (I : Ideal S)
     (M : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R)) :=
@@ -1191,7 +1147,7 @@ def lisseCoherence_quotientScalarLevel {R S : Type (u + 1)} [CommRing R] [CommRi
       ((Ideal.Quotient.mk I).comp f)).obj M)
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 def lisseCoherence_quotientScalarGenerator {R S : Type (u + 1)} [CommRing R] [CommRing S]
     (f : R →+* S) (I : Ideal S)
     (M : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R))
@@ -1399,7 +1355,7 @@ private theorem integralScalarRaw_annihilated (F : LisseIntegralSheaf l E Y)
   rw [Ideal.Quotient.eq_zero_iff_mem.mpr ha, zero_smul]
 
 /-- The coefficient index and ideal identities used by tensor comparison.
-Source: Weil II (1.1.1) d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) d). -/
 lemma lisseCoherence_uniformizerIdeal_eq (B : Type (u + 1)) [Field B]
     [Algebra ℚ_[l] B] [FiniteDimensional ℚ_[l] B] :
     Ideal.span ({Padic.coefficientExtensionUniformizer l B} :
@@ -1409,7 +1365,7 @@ lemma lisseCoherence_uniformizerIdeal_eq (B : Type (u + 1)) [Field B]
       |>.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
 
 /-- The coefficient index and ideal identities used by tensor comparison.
-Source: Weil II (1.1.1) d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) d). -/
 lemma lisseCoherence_scalarIndex_eq (n : ℕ) :
     lisseScalarSourceIndex l E L ι n = n / lisseRamificationIndex l E L ι := by
   have he : 0 < lisseRamificationIndex l E L ι :=
@@ -1421,7 +1377,7 @@ lemma lisseCoherence_scalarIndex_eq (n : ℕ) :
   exact Nat.add_sub_cancel _ 1
 
 /-- The coefficient index and ideal identities used by tensor comparison.
-Source: Weil II (1.1.1) d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) d). -/
 lemma lisseCoherence_scalarIndex_ideal (n : ℕ) :
     Ideal.map (lisseIntegerInclusion l E L ι)
         (Padic.coefficientExtensionIdeal l E (lisseScalarSourceIndex l E L ι n + 1)) ≤
@@ -1714,16 +1670,7 @@ private theorem integralScalarRaw_isLisse (F : LisseIntegralSheaf l E Y) :
     I, J, K, M, N, v, Padic.coefficientExtensionIdeal] using! ht
 
 /-- The prescribed scalar extension exists.
-Source: Weil II (1.1.1) d), SGA 5 VI
-(blueprint: def-pod-lisse-l-adic-sheaves).
-Proof: set each finite level equal to the displayed balanced tensor followed by
-sheafification. Since `e ceil(m/e) ≥ m`, the coefficient map kills the source
-annihilator. The source transition and coefficient quotient maps induce the displayed
-maps on pure tensors. Balancing and naturality give module-sheaf maps, which extend
-uniquely through sheafification. Successive scalar extensions and reduction commute by
-tensor associativity, giving the reduction isomorphism. Common trivializations show
-lissity. The same formula on morphisms commutes with transitions and preserves
-identities and composition on pure tensors; uniqueness proves the functor laws. -/
+Source: Weil II (1.1.1) d), SGA 5 VI. -/
 theorem lisseIntegralScalarExtension_exists :
     Nonempty (LisseIntegralScalarExtensionData l E Y L ι) := by
   let H := integralScalarRawFunctor l E Y L ι
@@ -1759,13 +1706,13 @@ theorem lisseIntegralScalarExtension_exists :
       lisseScalarCoefficientMap] using! h
 
 /-- The integral coefficient extension functor, with precisely the finite-level formula.
-Source: Weil II (1.1.1) d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) d). -/
 @[irreducible]
 def lisseIntegralScalarExtensionData : LisseIntegralScalarExtensionData l E Y L ι :=
   Classical.choice (lisseIntegralScalarExtension_exists l E Y L ι)
 
 /-- Scalar extension `F ↦ F ⊗_{𝒪_E} 𝒪_L`.
-Source: Weil II (1.1.1) d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) d). -/
 @[irreducible]
 def lisseIntegralScalarExtension : LisseIntegralSheaf l E Y ⥤ LisseIntegralSheaf l L Y :=
   (lisseIntegralScalarExtensionData l E Y L ι).functor
@@ -1777,7 +1724,7 @@ attribute [local irreducible] lisseIntegralPreadditive lisseIntegralLinear
 set_option genInjectivity false in
 set_option genSizeOf false in
 /-- The rational scalar-extension maps are additive and prescribed on pure tensors.
-Source: Weil II (1.1.1) c), d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c), d). -/
 structure LisseRationalScalarExtensionData where
   /-- Extend every morphism's scalar coefficient and integral map. -/
   map (F G : LisseRationalSheaf l E Y) : lisseRationalHom l E Y F G →
@@ -1978,12 +1925,7 @@ private theorem tensor_bilinear_map_naturality
 
 set_option maxRecDepth 200 in
 /-- Scalar extension of rational morphisms exists with the stated formula.
-Source: Weil II (1.1.1) c), d) (blueprint: def-pod-lisse-l-adic-sheaves).
-Proof: the integral scalar functor respects the rings-of-integers scalar actions by
-its pure-tensor construction. Thus `(a,f) ↦ ι(a) ⊗ S(f)` is balanced and additive in
-both arguments. The tensor universal property gives the additive map. Identity and
-composition follow on pure tensors from the corresponding integral functor laws and
-the rational composition formula, and then on all tensors by additivity. -/
+Source: Weil II (1.1.1) c), d). -/
 theorem lisseRationalScalarExtension_exists :
     Nonempty (LisseRationalScalarExtensionData l E Y L ι) := by
   refine ⟨{ map := fun F G ↦ rationalScalarMap l E Y L ι F G
@@ -2017,13 +1959,13 @@ theorem lisseRationalScalarExtension_exists :
       (fun f g ↦ (lisseIntegralScalarExtension l E Y L ι).map_comp f g) f g
 
 /-- The prescribed additive scalar-extension maps.
-Source: Weil II (1.1.1) d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) d). -/
 @[irreducible]
 def lisseRationalScalarExtensionData : LisseRationalScalarExtensionData l E Y L ι :=
   Classical.choice (lisseRationalScalarExtension_exists l E Y L ι)
 
 /-- Scalar extension `F ⊗ E ↦ (F ⊗_{𝒪_E} 𝒪_L) ⊗ L`.
-Source: Weil II (1.1.1) d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) d). -/
 def lisseRationalScalarExtension : LisseRationalSheaf l E Y ⥤ LisseRationalSheaf l L Y where
   obj F := ⟨(lisseIntegralScalarExtension l E Y L ι).obj F.integral⟩
   map {F G} f := (lisseRationalScalarExtensionData l E Y L ι).map F G f
@@ -2036,7 +1978,7 @@ attribute [local instance] lisseCoefficientIntegersCommRing lisseCoefficientInte
   lisseCoefficientIntegersModule lisseCoefficientQuotientCommRing lisseCoefficientQuotientAlgebra
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 theorem lisseCoherence_integralLevel_annihilated (F : LisseIntegralSheaf l E Y)
     (m : ℕ) (U : Y.Etale) :
     Padic.coefficientExtensionIdeal l E (m + 1) •
@@ -2053,17 +1995,17 @@ section SheafScalarAssociativity
 -- An equality fixes the witness completely, while the choice prevents kernel
 -- reduction from repeatedly expanding a large comparison construction.
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 theorem lisseCoherence_canonicalIso_exists {C : Type*} [Category* C] {X Z : C} (e : X ≅ Z) :
     ∃ e' : X ≅ Z, e' = e := ⟨e, rfl⟩
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 def lisseCoherence_canonicalIso {C : Type*} [Category* C] {X Z : C} (e : X ≅ Z) : X ≅ Z :=
   (lisseCoherence_canonicalIso_exists e).choose
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 theorem lisseCoherence_canonicalIso_eq {C : Type*} [Category* C] {X Z : C} (e : X ≅ Z) :
     lisseCoherence_canonicalIso e = e := (lisseCoherence_canonicalIso_exists e).choose_spec
 
@@ -2072,7 +2014,7 @@ section GenericRings
 variable {R S T : Type (u + 1)} [Ring R] [Ring S] [Ring T]
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 def lisseCoherence_sheafRestrictionComp (f : R →+* S) (g : S →+* T) :
     sheafCompose Y.smallEtaleTopology (ModuleCat.restrictScalars.{u + 1} (g.comp f)) ≅
       sheafCompose Y.smallEtaleTopology (ModuleCat.restrictScalars.{u + 1} g) ⋙
@@ -2082,7 +2024,7 @@ def lisseCoherence_sheafRestrictionComp (f : R →+* S) (g : S →+* T) :
     (fun v ↦ by ext x; rfl))) (fun v ↦ by ext U x; rfl)
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 def lisseCoherence_sheafScalarComp (f : R →+* S) (g : S →+* T) :
     Sheaf.ringExtendScalars.{u + 1, u + 1} Y.smallEtaleTopology (g.comp f) ≅
       Sheaf.ringExtendScalars.{u + 1, u + 1} Y.smallEtaleTopology f ⋙
@@ -2094,7 +2036,7 @@ def lisseCoherence_sheafScalarComp (f : R →+* S) (g : S →+* T) :
 
 omit [IsNoetherian Y] [Y.IsSeparated] in
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 theorem lisseCoherence_sheafScalarComp_unit (f : R →+* S) (g : S →+* T)
     (M : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R))
     (U : Y.Etale) (x : M.obj.obj (op U)) :
@@ -2120,13 +2062,13 @@ theorem lisseCoherence_sheafScalarComp_unit (f : R →+* S) (g : S →+* T)
   exact hx
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 theorem lisseCoherence_quotientRestrictionFull (q : R →+* S) (hq : Function.Surjective q) :
     (ModuleCat.restrictScalars.{u + 1} q).Full where
   map_surjective v := ⟨lisseCoherence_quotientRestrictedHom q hq _ _ v, by ext x; rfl⟩
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 def lisseCoherence_sheafScalarCancel (q : R →+* S) (hq : Function.Surjective q) (g : S →+* T) :
     sheafCompose Y.smallEtaleTopology (ModuleCat.restrictScalars.{u + 1} q) ⋙
         Sheaf.ringExtendScalars.{u + 1, u + 1} Y.smallEtaleTopology (g.comp q) ≅
@@ -2143,7 +2085,7 @@ def lisseCoherence_sheafScalarCancel (q : R →+* S) (hq : Function.Surjective q
 set_option backward.isDefEq.respectTransparency false in
 omit [IsNoetherian Y] [Y.IsSeparated] in
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 theorem lisseCoherence_sheafScalarCancel_unit (q : R →+* S) (hq : Function.Surjective q)
     (g : S →+* T) (N : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} S))
     (U : Y.Etale) (x : N.obj.obj (op U)) :
@@ -2170,7 +2112,7 @@ theorem lisseCoherence_sheafScalarCancel_unit (q : R →+* S) (hq : Function.Sur
 
 omit [IsNoetherian Y] [Y.IsSeparated] in
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 theorem lisseCoherence_sheafScalarCancel_inv_unit (q : R →+* S) (hq : Function.Surjective q)
     (g : S →+* T) (N : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} S))
     (U : Y.Etale) (x : N.obj.obj (op U)) :
@@ -2194,7 +2136,7 @@ theorem lisseCoherence_sheafScalarCancel_inv_unit (q : R →+* S) (hq : Function
   exact h.symm.trans h₀
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 def lisseCoherence_sheafScalarThroughQuotient {B : Type (u + 1)} [Ring B]
     (f : R →+* S) (q : S →+* B) (hq : Function.Surjective q) (g : B →+* T) :
     Sheaf.ringExtendScalars.{u + 1, u + 1} Y.smallEtaleTopology (g.comp (q.comp f)) ≅
@@ -2207,7 +2149,7 @@ def lisseCoherence_sheafScalarThroughQuotient {B : Type (u + 1)} [Ring B]
 
 omit [IsNoetherian Y] [Y.IsSeparated] in
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 theorem lisseCoherence_sheafScalarThroughQuotient_unit {B : Type (u + 1)} [Ring B]
     (f : R →+* S) (q : S →+* B) (hq : Function.Surjective q) (g : B →+* T)
     (M : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R))
@@ -2229,7 +2171,7 @@ theorem lisseCoherence_sheafScalarThroughQuotient_unit {B : Type (u + 1)} [Ring 
 
 omit [IsNoetherian Y] [Y.IsSeparated] in
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 theorem lisseCoherence_sheaf_comp_apply
     (M N P : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R))
     (v : M ⟶ N) (w : N ⟶ P) (U : Y.Etale) (x : M.obj.obj (op U)) :
@@ -2237,7 +2179,7 @@ theorem lisseCoherence_sheaf_comp_apply
 
 omit [IsNoetherian Y] [Y.IsSeparated] in
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 theorem lisseCoherence_sheafRestriction_apply (q : R →+* S)
     (M N : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} S))
     (v : M ⟶ N) (U : Y.Etale) (x : M.obj.obj (op U)) :
@@ -2246,7 +2188,7 @@ theorem lisseCoherence_sheafRestriction_apply (q : R →+* S)
 
 omit [IsNoetherian Y] [Y.IsSeparated] in
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 theorem lisseCoherence_scalarSheafMap_unit (f : R →+* S)
     (M N : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R)) (v : M ⟶ N)
     (U : Y.Etale) (x : M.obj.obj (op U)) :
@@ -2264,7 +2206,7 @@ variable {R S : Type (u + 1)} [CommRing R] [CommRing S]
 
 omit [IsNoetherian Y] [Y.IsSeparated] in
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 theorem lisseCoherence_quotientSectionTorsion (I : Ideal R)
     (M : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R))
     (hM : ∀ U : Y.Etale, I • (⊤ : Submodule R (M.obj.obj (op U))) = ⊥)
@@ -2277,7 +2219,7 @@ theorem lisseCoherence_quotientSectionTorsion (I : Ideal R)
 
 omit [IsNoetherian Y] [Y.IsSeparated] in
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 def lisseCoherence_quotientSheafLift (I : Ideal R)
     (M : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R))
     (hM : ∀ U : Y.Etale, I • (⊤ : Submodule R (M.obj.obj (op U))) = ⊥) :
@@ -2306,7 +2248,7 @@ def lisseCoherence_quotientSheafLift (I : Ideal R)
 
 omit [IsNoetherian Y] [Y.IsSeparated] in
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 def lisseCoherence_quotientSheafLiftIso (I : Ideal R)
     (M : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R))
     (hM : ∀ U : Y.Etale, I • (⊤ : Submodule R (M.obj.obj (op U))) = ⊥) :
@@ -2317,7 +2259,7 @@ def lisseCoherence_quotientSheafLiftIso (I : Ideal R)
 
 omit [IsNoetherian Y] [Y.IsSeparated] in
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 theorem lisseCoherence_quotientSheafUnit_isIso (I : Ideal R)
     (M : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R))
     (hM : ∀ U : Y.Etale, I • (⊤ : Submodule R (M.obj.obj (op U))) = ⊥) :
@@ -2328,7 +2270,7 @@ theorem lisseCoherence_quotientSheafUnit_isIso (I : Ideal R)
 
 omit [IsNoetherian Y] [Y.IsSeparated] in
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 theorem lisseCoherence_quotientScalar_hom_ext_ann (f : R →+* S) (I : Ideal S)
     (M : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R))
     (N : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} S))
@@ -2378,7 +2320,7 @@ attribute [local irreducible] Sheaf.ringExtendScalars lisseCoherence_scalarSheaf
     lisseCoherence_sheafScalarComp
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 def lisseCoherence_scalarTransportIso {B V : Type (u + 1)} [Ring B] [Ring V]
     (t : V →+* T) (f : R →+* S) (q : S →+* B) (hq : Function.Surjective q)
     (g : B →+* T) (k : R →+* T) (j : S →+* T)
@@ -2405,7 +2347,7 @@ def lisseCoherence_scalarTransportIso {B V : Type (u + 1)} [Ring B] [Ring V]
 
 omit [IsNoetherian Y] [Y.IsSeparated] in
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 theorem lisseCoherence_scalarTransportIso_unit {B V : Type (u + 1)} [Ring B] [Ring V]
     (t : V →+* T) (f : R →+* S) (q : S →+* B) (hq : Function.Surjective q)
     (g : B →+* T) (k : R →+* T) (j : S →+* T)
@@ -2436,7 +2378,7 @@ theorem lisseCoherence_scalarTransportIso_unit {B V : Type (u + 1)} [Ring B] [Ri
 attribute [local irreducible] lisseCoherence_scalarTransportIso
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 def lisseCoherence_scalarIdentityTransportIso (q k : R →+* S) (h : k = q)
     (M₀ M₁ : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R)) (e : M₀ ≅ M₁)
     [IsIso (lisseCoherence_scalarSheafUnit Y q M₁)] :
@@ -2451,7 +2393,7 @@ def lisseCoherence_scalarIdentityTransportIso (q k : R →+* S) (h : k = q)
 
 omit [IsNoetherian Y] [Y.IsSeparated] in
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 theorem lisseCoherence_scalarIdentityTransportIso_unit (q k : R →+* S) (h : k = q)
     (M₀ M₁ : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R)) (e : M₀ ≅ M₁)
     [IsIso (lisseCoherence_scalarSheafUnit Y q M₁)] (U : Y.Etale) (x : M₀.obj.obj (op U)) :
@@ -2471,7 +2413,7 @@ attribute [local irreducible] lisseCoherence_scalarIdentityTransportIso
 
 omit [IsNoetherian Y] [Y.IsSeparated] in
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 theorem lisseCoherence_sheafIso_conjugate_apply_eq {A : Type (u + 1)} [Ring A]
     {M₀ M₁ N₀ N₁ : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A)}
     (e : M₀ ≅ M₁) (e₀ : M₀ ≅ N₀) (c : N₀ ≅ N₁) (e₁ : M₁ ≅ N₁)
@@ -2489,7 +2431,7 @@ theorem lisseCoherence_sheafIso_conjugate_apply_eq {A : Type (u + 1)} [Ring A]
 
 omit [IsNoetherian Y] [Y.IsSeparated] in
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 theorem lisseCoherence_sheafIso_conjugateWithFormula_exists {A : Type (u + 1)} [Ring A]
     {M₀ M₁ N₀ N₁ : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A)}
     (e₀ : M₀ ≅ N₀) (c : N₀ ≅ N₁) (e₁ : M₁ ≅ N₁) :
@@ -2502,7 +2444,7 @@ theorem lisseCoherence_sheafIso_conjugateWithFormula_exists {A : Type (u + 1)} [
 
 omit [IsNoetherian Y] [Y.IsSeparated] in
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 def lisseCoherence_sheafIso_conjugateWithFormula {A : Type (u + 1)} [Ring A]
     {M₀ M₁ N₀ N₁ : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A)}
     (e₀ : M₀ ≅ N₀) (c : N₀ ≅ N₁) (e₁ : M₁ ≅ N₁) :
@@ -2527,14 +2469,14 @@ attribute [local irreducible] lisseCoherence_scalarSheafAdj lisseCoherence_scala
 attribute [local irreducible] Sheaf.ringExtendScalars
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 theorem lisseCoherence_integerInclusion_id :
     lisseIntegerInclusion l E E (AlgHom.id ℚ_[l] E) = RingHom.id _ := by
   ext x
   exact (lisseIntegerInclusion_exists l E E (AlgHom.id ℚ_[l] E)).choose_spec x
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 theorem lisseCoherence_integerInclusion_comp
     (M : Type (u + 1)) [Field M] [Algebra ℚ_[l] M] [FiniteDimensional ℚ_[l] M]
     (κ : L →ₐ[ℚ_[l]] M) :
@@ -2588,13 +2530,13 @@ private theorem ramification_comp
   exact (pow_mul _ _ _).symm
 
 /-- Extending coefficients along the identity leaves the level index unchanged.
-Source: Weil II (1.1.1) d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) d). -/
 theorem lisseScalarSourceIndex_id (m : ℕ) :
     lisseScalarSourceIndex l E E (AlgHom.id ℚ_[l] E) m = m := by
   rw [lisseCoherence_scalarIndex_eq, ramification_id, Nat.div_one]
 
 /-- Successive scalar extensions have the same index as their composite.
-Source: Weil II (1.1.1) d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) d). -/
 theorem lisseScalarSourceIndex_comp
     (M : Type (u + 1)) [Field M] [Algebra ℚ_[l] M] [FiniteDimensional ℚ_[l] M]
     (κ : L →ₐ[ℚ_[l]] M) (m : ℕ) :
@@ -2603,7 +2545,7 @@ theorem lisseScalarSourceIndex_comp
   simp only [lisseCoherence_scalarIndex_eq, ramification_comp, Nat.div_div_eq_div_mul]
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 theorem lisseCoherence_scalarIndex_mono {m n : ℕ} (h : m ≤ n) :
     lisseScalarSourceIndex l E L ι m ≤ lisseScalarSourceIndex l E L ι n := by
   simp only [lisseCoherence_scalarIndex_eq]
@@ -2613,7 +2555,7 @@ attribute [local irreducible] lisseScalarSourceIndex lisseRamificationIndex
   lisseIntegerInclusion Padic.coefficientExtensionIntegers
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 theorem lisseCoherence_integralLevel_annihilated_le (F : LisseIntegralSheaf l E Y)
     (m n : ℕ) (h : m ≤ n) (U : Y.Etale) :
     Padic.coefficientExtensionIdeal l E (n + 1) •
@@ -2625,7 +2567,7 @@ theorem lisseCoherence_integralLevel_annihilated_le (F : LisseIntegralSheaf l E 
       (le_of_eq (lisseCoherence_integralLevel_annihilated l E Y F m U))
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 theorem lisseCoherence_sequenceCast_naturality {C : Type*} [Category C] (F : ℕᵒᵖ ⥤ C)
     {a b c d : ℕ} (ha : a = c) (hb : b = d) (hab : a ≤ b) (hcd : c ≤ d) :
     F.map (homOfLE hab).op ≫ eqToHom (congrArg (fun n ↦ F.obj (op n)) ha) =
@@ -2635,7 +2577,7 @@ theorem lisseCoherence_sequenceCast_naturality {C : Type*} [Category C] (F : ℕ
   simp only [eqToHom_refl, Category.comp_id, Category.id_comp]
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 theorem lisseCoherence_natTrans_index_cast {C : Type*} [Category C] {F G : ℕᵒᵖ ⥤ C}
     (v : F ⟶ G) {a b : ℕ} (h : a = b) :
     v.app (op a) ≫ eqToHom (congrArg (fun n ↦ G.obj (op n)) h) =
@@ -2644,7 +2586,7 @@ theorem lisseCoherence_natTrans_index_cast {C : Type*} [Category C] {F G : ℕ�
   simp only [eqToHom_refl, Category.comp_id, Category.id_comp]
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 def lisseCoherence_scalarCoefficientFactor (m : ℕ) :
     Padic.coefficientExtensionRing l E (lisseScalarSourceIndex l E L ι m + 1) →+*
       Padic.coefficientExtensionRing l L (m + 1) :=
@@ -2654,7 +2596,7 @@ def lisseCoherence_scalarCoefficientFactor (m : ℕ) :
       (lisseCoherence_scalarIndex_ideal l E L ι m (Ideal.mem_map_of_mem _ ha)))
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 theorem lisseCoherence_scalarCoefficientFactor_comp (m : ℕ) :
     (lisseCoherence_scalarCoefficientFactor l E L ι m).comp
         (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E
@@ -2664,7 +2606,7 @@ theorem lisseCoherence_scalarCoefficientFactor_comp (m : ℕ) :
   rfl
 
 /-- The level identification recorded by the chosen scalar functor.
-Source: Weil II (1.1.1) d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) d). -/
 def lisseScalarLevelIso (F : LisseIntegralSheaf l E Y) (m : ℕ) :
     ((lisseIntegralScalarExtension l E Y L ι).obj F).obj.obj (op m) ≅
       lisseIntegralScalarLevel l E Y L ι F m := by
@@ -2672,7 +2614,7 @@ def lisseScalarLevelIso (F : LisseIntegralSheaf l E Y) (m : ℕ) :
   exact (lisseIntegralScalarExtensionData l E Y L ι).levelIso F m
 
 /-- A local tensor generator transported into the chosen scalar functor.
-Source: Weil II (1.1.1) d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) d). -/
 def lisseScalarGenerator (F : LisseIntegralSheaf l E Y) (m : ℕ) (U : Y.Etale)
     (a : Padic.coefficientExtensionRing l L (m + 1))
     (x : (F.obj.obj (op (lisseScalarSourceIndex l E L ι m))).obj.obj (op U)) :
@@ -2681,7 +2623,7 @@ def lisseScalarGenerator (F : LisseIntegralSheaf l E Y) (m : ℕ) (U : Y.Etale)
     (lisseIntegralScalarGenerator l E Y L ι F m U a x)
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 theorem lisseCoherence_chosenScalarLevel_ext (F : LisseIntegralSheaf l E Y) (m : ℕ)
     (N : Sheaf Y.smallEtaleTopology
       (ModuleCat.{u + 1} (Padic.coefficientExtensionIntegers l L)))
@@ -2699,7 +2641,7 @@ theorem lisseCoherence_chosenScalarLevel_ext (F : LisseIntegralSheaf l E Y) (m :
   exact h
 
 /-- Local unit tensor generators detect morphisms from a scalar extension.
-Source: Weil II (1.1.1) d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) d). -/
 theorem lisseScalarHom_ext (F : LisseIntegralSheaf l E Y)
     (H : LisseIntegralSheaf l L Y)
     (v w : (lisseIntegralScalarExtension l E Y L ι).obj F ⟶ H)
@@ -2715,7 +2657,7 @@ theorem lisseScalarHom_ext (F : LisseIntegralSheaf l E Y)
     (lisseCoherence_integralLevel_annihilated l L Y H m.unop) _ _ (h m.unop)
 
 /-- Transport between equal levels commutes with local unit tensor generators.
-Source: Weil II (1.1.1) d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) d). -/
 theorem lisseScalarGenerator_cast (F : LisseIntegralSheaf l E Y)
     (m n : ℕ) (h : m = n) (U : Y.Etale)
     (x : (F.obj.obj (op (lisseScalarSourceIndex l E L ι m))).obj.obj (op U)) :
@@ -2728,7 +2670,7 @@ theorem lisseScalarGenerator_cast (F : LisseIntegralSheaf l E Y)
   rfl
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 theorem lisseCoherence_rawGenerator_one (F : LisseIntegralSheaf l E Y) (m : ℕ)
     (U : Y.Etale)
     (x : (F.obj.obj (op (lisseScalarSourceIndex l E L ι m))).obj.obj (op U)) :
@@ -2741,7 +2683,7 @@ theorem lisseCoherence_rawGenerator_one (F : LisseIntegralSheaf l E Y) (m : ℕ)
 attribute [local irreducible] lisseIntegralScalarGenerator
 
 /-- Scalar extension maps a unit tensor generator by the underlying section map.
-Source: Weil II (1.1.1) d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) d). -/
 theorem lisseScalarGenerator_map (F G : LisseIntegralSheaf l E Y) (v : F ⟶ G)
     (m : ℕ) (U : Y.Etale) (a : Padic.coefficientExtensionRing l L (m + 1))
     (x : (F.obj.obj (op (lisseScalarSourceIndex l E L ι m))).obj.obj (op U)) :
@@ -2760,7 +2702,7 @@ theorem lisseScalarGenerator_map (F G : LisseIntegralSheaf l E Y) (v : F ⟶ G)
   exact he.symm.trans hh
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 theorem lisseCoherence_extendedGenerator_transition (F : LisseIntegralSheaf l E Y)
     (m : ℕ) (U : Y.Etale) (a : Padic.coefficientExtensionRing l L (m + 2))
     (x : (F.obj.obj (op (lisseScalarSourceIndex l E L ι (m + 1)))).obj.obj (op U)) :
@@ -2781,7 +2723,7 @@ theorem lisseCoherence_extendedGenerator_transition (F : LisseIntegralSheaf l E 
   exact he.symm.trans hh
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 theorem lisseCoherence_sequenceGenerator_naturality
     {A : ℕᵒᵖ ⥤ Type v} {B : ℕᵒᵖ ⥤ Type w}
     (gen : ∀ n, A.obj (op n) → B.obj (op n))
@@ -2804,7 +2746,7 @@ theorem lisseCoherence_sequenceGenerator_naturality
     rfl
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 theorem lisseCoherence_extendedGenerator_transition_le (F : LisseIntegralSheaf l E Y)
     (m n : ℕ) (h : m ≤ n) (U : Y.Etale)
     (x : (F.obj.obj (op (lisseScalarSourceIndex l E L ι n))).obj.obj (op U)) :
@@ -2846,7 +2788,7 @@ variable (M : Type (u + 1)) [Field M] [Algebra ℚ_[l] M] [FiniteDimensional ℚ
     (κ : L →ₐ[ℚ_[l]] M)
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 def lisseCoherence_scalarCompositeIndexIso (F : LisseIntegralSheaf l E Y) (m : ℕ) :
     F.obj.obj (op (lisseScalarSourceIndex l E M (κ.comp ι) m)) ≅
       F.obj.obj (op (lisseScalarSourceIndex l E L ι
@@ -2854,7 +2796,7 @@ def lisseCoherence_scalarCompositeIndexIso (F : LisseIntegralSheaf l E Y) (m : �
   eqToIso (congrArg (fun n ↦ F.obj.obj (op n)) (lisseScalarSourceIndex_comp l E L ι M κ m).symm)
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 theorem lisseCoherence_scalarCompositeCoefficient (m : ℕ) :
     (lisseCoherence_scalarCoefficientFactor l L M κ m).comp
       ((Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l L
@@ -2867,7 +2809,7 @@ theorem lisseCoherence_scalarCompositeCoefficient (m : ℕ) :
   rfl
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 def lisseCoherence_scalarCompositeRawIso (F : LisseIntegralSheaf l E Y) (m : ℕ) :
     lisseIntegralScalarLevel l E Y M (κ.comp ι) F m ≅
       lisseIntegralScalarLevel l L Y M κ
@@ -2886,7 +2828,7 @@ def lisseCoherence_scalarCompositeRawIso (F : LisseIntegralSheaf l E Y) (m : ℕ
     (lisseScalarLevelIso l E Y L ι F (lisseScalarSourceIndex l L M κ m))
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 theorem lisseCoherence_scalarCompositeRawIso_generator (F : LisseIntegralSheaf l E Y) (m : ℕ)
     (U : Y.Etale)
     (x : (F.obj.obj (op (lisseScalarSourceIndex l E M (κ.comp ι) m))).obj.obj (op U)) :
@@ -2918,7 +2860,7 @@ theorem lisseCoherence_scalarCompositeRawIso_generator (F : LisseIntegralSheaf l
 attribute [local irreducible] lisseCoherence_scalarCompositeRawIso
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 def lisseCoherence_scalarCompositeLevelIso (F : LisseIntegralSheaf l E Y) (m : ℕ) :
     ((lisseIntegralScalarExtension l E Y M (κ.comp ι)).obj F).obj.obj (op m) ≅
       ((lisseIntegralScalarExtension l L Y M κ).obj
@@ -2930,7 +2872,7 @@ def lisseCoherence_scalarCompositeLevelIso (F : LisseIntegralSheaf l E Y) (m : �
       ((lisseIntegralScalarExtension l E Y L ι).obj F) m)).val
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 theorem lisseCoherence_scalarCompositeLevelIso_generator (F : LisseIntegralSheaf l E Y)
     (m : ℕ) (U : Y.Etale)
     (x : (F.obj.obj (op (lisseScalarSourceIndex l E M (κ.comp ι) m))).obj.obj (op U)) :
@@ -2952,7 +2894,7 @@ theorem lisseCoherence_scalarCompositeLevelIso_generator (F : LisseIntegralSheaf
 attribute [local irreducible] lisseCoherence_scalarCompositeLevelIso
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 theorem lisseCoherence_scalarCompositeLevel_naturality (F : LisseIntegralSheaf l E Y) (m : ℕ) :
     ((lisseIntegralScalarExtension l E Y M (κ.comp ι)).obj F).obj.map
         (homOfLE (Nat.le_succ m)).op ≫ (lisseCoherence_scalarCompositeLevelIso l E Y L ι M κ F
@@ -2988,7 +2930,7 @@ theorem lisseCoherence_scalarCompositeLevel_naturality (F : LisseIntegralSheaf l
       (lisseCoherence_scalarIndex_mono l E L ι (lisseScalarSourceIndex_le l L M κ m)))
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 def lisseCoherence_scalarCompositeObjectIso (F : LisseIntegralSheaf l E Y) :
     (lisseIntegralScalarExtension l E Y M (κ.comp ι)).obj F ≅
       (lisseIntegralScalarExtension l L Y M κ).obj
@@ -3001,7 +2943,7 @@ def lisseCoherence_scalarCompositeObjectIso (F : LisseIntegralSheaf l E Y) :
       f))
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 theorem lisseCoherence_scalarCompositeObjectIso_naturality {F G : LisseIntegralSheaf l E Y}
     (v : F ⟶ G) :
     (lisseIntegralScalarExtension l E Y M (κ.comp ι)).map v ≫
@@ -3035,7 +2977,7 @@ theorem lisseCoherence_scalarCompositeObjectIso_naturality {F G : LisseIntegralS
     (lisseCoherence_natTrans_index_cast v.hom (lisseScalarSourceIndex_comp l E L ι M κ m.unop).symm)
 
 /-- The canonical integral comparison for two successive coefficient extensions.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 @[irreducible]
 def lisseIntegralScalarCompositeIso :
     lisseIntegralScalarExtension l E Y M (κ.comp ι) ≅
@@ -3064,14 +3006,14 @@ attribute [local irreducible] lisseCoherence_scalarCompositeRawIso
   lisseCoherence_scalarCompositeLevelIso
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 def lisseCoherence_scalarIdentityIndexIso (F : LisseIntegralSheaf l E Y) (m : ℕ) :
     F.obj.obj (op (lisseScalarSourceIndex l E E (AlgHom.id ℚ_[l] E) m)) ≅
       F.obj.obj (op m) :=
   eqToIso (congrArg (fun n ↦ F.obj.obj (op n)) (lisseScalarSourceIndex_id l E m))
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 def lisseCoherence_scalarIdentityRawIso (F : LisseIntegralSheaf l E Y) (m : ℕ) :
     lisseIntegralScalarLevel l E Y E (AlgHom.id ℚ_[l] E) F m ≅ F.obj.obj (op m) := by
   let I := Padic.coefficientExtensionIdeal l E (m + 1)
@@ -3084,7 +3026,7 @@ def lisseCoherence_scalarIdentityRawIso (F : LisseIntegralSheaf l E Y) (m : ℕ)
     (lisseCoherence_scalarIdentityIndexIso l E Y F m)
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 def lisseCoherence_scalarIdentityLevelIso (F : LisseIntegralSheaf l E Y) (m : ℕ) :
     ((lisseIntegralScalarExtension l E Y E (AlgHom.id ℚ_[l] E)).obj F).obj.obj (op m) ≅
       F.obj.obj (op m) :=
@@ -3093,7 +3035,7 @@ def lisseCoherence_scalarIdentityLevelIso (F : LisseIntegralSheaf l E Y) (m : �
     (lisseCoherence_scalarIdentityRawIso l E Y F m) (Iso.refl _)).val
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 theorem lisseCoherence_scalarIdentityRawIso_generator (F : LisseIntegralSheaf l E Y)
     (m : ℕ) (U : Y.Etale)
     (x : (F.obj.obj (op (lisseScalarSourceIndex l E E (AlgHom.id ℚ_[l] E) m))).obj.obj (op U)) :
@@ -3113,7 +3055,7 @@ theorem lisseCoherence_scalarIdentityRawIso_generator (F : LisseIntegralSheaf l 
 attribute [local irreducible] lisseCoherence_scalarIdentityRawIso
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 theorem lisseCoherence_scalarIdentityLevelIso_generator (F : LisseIntegralSheaf l E Y)
     (m : ℕ) (U : Y.Etale)
     (x : (F.obj.obj (op (lisseScalarSourceIndex l E E (AlgHom.id ℚ_[l] E) m))).obj.obj (op U)) :
@@ -3130,7 +3072,7 @@ theorem lisseCoherence_scalarIdentityLevelIso_generator (F : LisseIntegralSheaf 
 attribute [local irreducible] lisseCoherence_scalarIdentityLevelIso
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 theorem lisseCoherence_scalarIdentityLevel_naturality (F : LisseIntegralSheaf l E Y) (m : ℕ) :
     ((lisseIntegralScalarExtension l E Y E (AlgHom.id ℚ_[l] E)).obj F).obj.map
         (homOfLE (Nat.le_succ m)).op ≫ (lisseCoherence_scalarIdentityLevelIso l E Y F m).hom =
@@ -3156,7 +3098,7 @@ theorem lisseCoherence_scalarIdentityLevel_naturality (F : LisseIntegralSheaf l 
       (lisseScalarSourceIndex_le l E E (AlgHom.id ℚ_[l] E) m) (Nat.le_succ m))
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 def lisseCoherence_scalarIdentityObjectIso (F : LisseIntegralSheaf l E Y) :
     (lisseIntegralScalarExtension l E Y E (AlgHom.id ℚ_[l] E)).obj F ≅ F := by
   let v := NatTrans.ofOpSequence (fun m ↦ (lisseCoherence_scalarIdentityLevelIso l E Y F m).hom)
@@ -3165,7 +3107,7 @@ def lisseCoherence_scalarIdentityObjectIso (F : LisseIntegralSheaf l E Y) :
     (fun m ↦ lisseCoherence_scalarIdentityLevelIso l E Y F m.unop) (fun f ↦ v.naturality f))
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 theorem lisseCoherence_scalarIdentityObjectIso_naturality {F G : LisseIntegralSheaf l E Y}
     (v : F ⟶ G) :
     (lisseIntegralScalarExtension l E Y E (AlgHom.id ℚ_[l] E)).map v ≫
@@ -3189,7 +3131,7 @@ theorem lisseCoherence_scalarIdentityObjectIso_naturality {F G : LisseIntegralSh
     (lisseCoherence_natTrans_index_cast v.hom (lisseScalarSourceIndex_id l E m.unop))
 
 /-- The canonical integral comparison for identity coefficient extension.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 @[irreducible]
 def lisseIntegralScalarIdentityIso :
     lisseIntegralScalarExtension l E Y E (AlgHom.id ℚ_[l] E) ≅ 𝟭 _ :=
@@ -3317,7 +3259,7 @@ private def rationalPreadditive : Preadditive (LisseRationalSheaf l E Y) where
 attribute [local instance] rationalPreadditive
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 theorem lisseCoherence_rational_tmul_comp (F G H : LisseRationalSheaf l E Y)
     (a b : E) (f : F.integral ⟶ G.integral) (g : G.integral ⟶ H.integral) :
     ((TensorProduct.tmul (Padic.coefficientExtensionIntegers l E) a f : F ⟶ G) ≫
@@ -3327,7 +3269,7 @@ theorem lisseCoherence_rational_tmul_comp (F G H : LisseRationalSheaf l E Y)
   (lisseRationalComposition l E Y).comp_tmul F G H a b f g
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 def lisseCoherence_rationalizeIsoRaw (F G : LisseRationalSheaf l E Y) (e : F.integral ≅
   G.integral) :
     F ≅ G where
@@ -3345,7 +3287,7 @@ def lisseCoherence_rationalizeIsoRaw (F G : LisseRationalSheaf l E Y) (e : F.int
     rfl
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 theorem lisseCoherence_rationalScalar_map_tmul (F G : LisseRationalSheaf l E Y)
     (a : E) (f : F.integral ⟶ G.integral) :
     (lisseRationalScalarExtension l E Y L ι).map (TensorProduct.tmul _ a f) =
@@ -3353,7 +3295,7 @@ theorem lisseCoherence_rationalScalar_map_tmul (F G : LisseRationalSheaf l E Y)
   (lisseRationalScalarExtensionData l E Y L ι).map_tmul F G a f
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 theorem lisseCoherence_rationalScalar_map_add (F G : LisseRationalSheaf l E Y)
     (f g : F ⟶ G) :
     (lisseRationalScalarExtension l E Y L ι).map (f + g) =
@@ -3362,7 +3304,7 @@ theorem lisseCoherence_rationalScalar_map_add (F G : LisseRationalSheaf l E Y)
   (lisseRationalScalarExtensionData l E Y L ι).map_add F G f g
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 theorem lisseCoherence_rationalScalar_map_zero (F G : LisseRationalSheaf l E Y) :
     (lisseRationalScalarExtension l E Y L ι).map (0 : F ⟶ G) = 0 := by
   have h := lisseCoherence_rationalScalar_map_add l E Y L ι F G 0 0
@@ -3389,7 +3331,7 @@ private theorem rationalComparison_square
   exact congrArg (fun f ↦ TensorProduct.tmul (Padic.coefficientExtensionIntegers l L) (1 : L) f) h
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 theorem lisseCoherence_tensor_intertwining_map
     {R A S B M P Q U W V : Type*}
     [CommRing R] [Field A] [Algebra R A]
@@ -3423,7 +3365,7 @@ theorem lisseCoherence_tensor_intertwining_map
     exact congrArg (fun v ↦ TensorProduct.tmul S (ψ a) v) (hp x)
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 def lisseCoherence_rationalScalarAddHom (F G : LisseRationalSheaf l E Y) :
     (F ⟶ G) →+ ((lisseRationalScalarExtension l E Y L ι).obj F ⟶
       (lisseRationalScalarExtension l E Y L ι).obj G) where
@@ -3432,7 +3374,7 @@ def lisseCoherence_rationalScalarAddHom (F G : LisseRationalSheaf l E Y) :
   map_add' := lisseCoherence_rationalScalar_map_add l E Y L ι F G
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 def lisseCoherence_rationalScalarIdentityIsoRaw
     (e : lisseIntegralScalarExtension l E Y E (AlgHom.id ℚ_[l] E) ≅ 𝟭 _) :
     lisseRationalScalarExtension l E Y E (AlgHom.id ℚ_[l] E) ≅ 𝟭 _ := by
@@ -3454,7 +3396,7 @@ def lisseCoherence_rationalScalarIdentityIsoRaw
     (fun f ↦ e.hom.naturality f) v
 
 /-- The rationalization of the canonical integral identity comparison.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 @[irreducible]
 def lisseRationalScalarIdentityIso :
     lisseRationalScalarExtension l E Y E (AlgHom.id ℚ_[l] E) ≅ 𝟭 _ :=
@@ -3463,13 +3405,13 @@ def lisseRationalScalarIdentityIso :
 attribute [local semireducible] lisseRationalScalarIdentityIso
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 theorem lisseCoherence_apply_after_eq {A B : Sort*} (g : A → B) {x y : A} {z : B}
     (h : x = y) (k : g y = z) : g x = z :=
   (congrArg g h).trans k
 
 /-- Canonical tensor comparison construction or its compatibility law.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 def lisseCoherence_rationalScalarCompositeIsoRaw
     (M : Type (u + 1)) [Field M] [Algebra ℚ_[l] M] [FiniteDimensional ℚ_[l] M]
     (κ : L →ₐ[ℚ_[l]] M)
@@ -3518,7 +3460,7 @@ def lisseCoherence_rationalScalarCompositeIsoRaw
     (e.hom.app G.integral) (e.hom.app F.integral) (fun f ↦ e.hom.naturality f) v
 
 /-- The rationalization of the canonical integral composite comparison.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 @[irreducible]
 def lisseRationalScalarCompositeIso
     (M : Type (u + 1)) [Field M] [Algebra ℚ_[l] M] [FiniteDimensional ℚ_[l] M]
@@ -3587,7 +3529,7 @@ private theorem rationalScalarComposite_right_unit (F : LisseRationalSheaf l E Y
   rfl
 
 /-- Canonical scalar comparison formula or tensor coherence.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 theorem lisseRationalScalarComposite_assoc
     (M : Type (u + 1)) [Field M] [Algebra ℚ_[l] M] [FiniteDimensional ℚ_[l] M]
     (κ : L →ₐ[ℚ_[l]] M)
@@ -3602,7 +3544,7 @@ theorem lisseRationalScalarComposite_assoc
   exact rationalScalarComposite_assoc l E Y L ι M κ N μ F
 
 /-- Canonical scalar comparison formula or tensor coherence.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 theorem lisseRationalScalarComposite_left_unit (F : LisseRationalSheaf l E Y) :
     (lisseRationalScalarCompositeIso l E Y E (AlgHom.id ℚ_[l] E) L ι).hom.app F ≫
         (lisseRationalScalarExtension l E Y L ι).map
@@ -3611,7 +3553,7 @@ theorem lisseRationalScalarComposite_left_unit (F : LisseRationalSheaf l E Y) :
   exact rationalScalarComposite_left_unit l E Y L ι F
 
 /-- Canonical scalar comparison formula or tensor coherence.
-Source: Weil II (1.1.1) c)-d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) c)-d). -/
 theorem lisseRationalScalarComposite_right_unit (F : LisseRationalSheaf l E Y) :
     (lisseRationalScalarCompositeIso l E Y L ι L (AlgHom.id ℚ_[l] L)).hom.app F ≫
         (lisseRationalScalarIdentityIso l L Y).hom.app
@@ -3622,7 +3564,7 @@ theorem lisseRationalScalarComposite_right_unit (F : LisseRationalSheaf l E Y) :
 end ScalarExtension
 
 /-- Assemble a category-valued diagram from componentwise coherence laws.
-Source: tensor coherence (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: tensor coherence. -/
 def lisseCoherentCategoryDiagram {B : Type u} [Preorder B]
     (C : B → Type w) [∀ b, Category.{v} (C b)]
     (map : ∀ {b c : B}, (b ⟶ c) → (C b ⥤ C c))
@@ -3687,7 +3629,7 @@ set_option genInjectivity false in
 set_option genSizeOf false in
 /-- The scalar-extension diagram, with objects and arrows specified by the integral
 and rational constructions above. Its pseudofunctor coherence is tensor associativity.
-Source: Weil II (1.1.1) d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) d). -/
 structure LisseCoefficientDiagramData where
   /-- Coherent diagram over the directed set of finite coefficient fields. -/
   diagram : Pseudofunctor (LocallyDiscrete (Padic.FiniteCoefficientFields l K))
@@ -3704,7 +3646,7 @@ structure LisseCoefficientDiagramData where
 /-- The coefficient diagram with canonical tensor unit and composition constraints.
 The diagram is constructed explicitly; its coherence is not chosen from unspecified
 pseudofunctors with the same objects and arrows.
-Source: Weil II (1.1.1) d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) d). -/
 @[irreducible]
 def lisseCoefficientDiagramData : LisseCoefficientDiagramData l Y K := by
   refine
@@ -3736,37 +3678,36 @@ def lisseCoefficientDiagramData : LisseCoefficientDiagramData l Y K := by
 -- Preserve the standing hypotheses of this public interface.
 set_option linter.unusedSectionVars false in
 /-- The category of pairs `(E,F)`, before identifying scalar extensions.
-Source: Weil II (1.1.1) d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) d). -/
 abbrev LisseCoefficientPairs :=
   Pseudofunctor.Grothendieck (lisseCoefficientDiagramData l Y K).diagram
 
 /-- Cocartesian arrows: a scalar extension followed by an isomorphism.
 Inverting these gives the 2-colimit, without identifying objects as raw sets.
-Source: Weil II (1.1.1) d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) d). -/
 def lisseCoefficientCocartesian : MorphismProperty (LisseCoefficientPairs l Y K) :=
   fun _ _ f => IsIso f.fiber
 
 /-- Lisse algebraic-coefficient sheaves are the 2-colimit of the lisse E-categories.
 The Grothendieck construction has pairs `(E,F)` as objects; localization preserves its
 objects and inverts the coefficient-extension arrows.
-Source: Weil II (1.1.1) d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) d). -/
 abbrev LisseAlgebraicSheaf := (lisseCoefficientCocartesian l Y K).Localization
 
 /-- The coefficient pair underlying an algebraic-coefficient sheaf.
 Localization uses type synonyms on objects, so no representative is chosen here.
-Source: Weil II (1.1.1) d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) d). -/
 def lisseAlgebraicPair (F : LisseAlgebraicSheaf l Y K) : LisseCoefficientPairs l Y K :=
   F.as.obj
 
 /-- The rational model of a coefficient pair, transported along its specified category value.
-Source: Weil II (1.1.1) d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) d). -/
 def lisseCoefficientPairModel (F : LisseCoefficientPairs l Y K) :
     LisseRationalSheaf l F.base.val Y :=
   (eqToHom ((lisseCoefficientDiagramData l Y K).obj_eq F.base)).toFunctor.obj F.fiber
 
 /-- The algebraic-coefficient fibre is `K ⊗_E F_y`, for the pair `(E,F)`.
-Source: Weil II (1.1.1) d), SGA 5 VI
-(blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) d), SGA 5 VI. -/
 def lisseAlgebraicFiber {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (y : Spec (.of Ω) ⟶ Y) (F : LisseAlgebraicSheaf l Y K) : ModuleCat.{u + 1} K :=
   let P := lisseAlgebraicPair l Y K F
@@ -3774,7 +3715,7 @@ def lisseAlgebraicFiber {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (lisseRationalFiber l P.base.val Y y (lisseCoefficientPairModel l Y K P)))
 
 /-- Embed a rational model as the corresponding pair in the 2-colimit.
-Source: Weil II (1.1.1) d) (blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) d). -/
 def lisseAlgebraicOfModel (E₀ : Padic.FiniteCoefficientFields l K)
     (F : LisseRationalSheaf l E₀.val Y) : LisseAlgebraicSheaf l Y K :=
   (lisseCoefficientCocartesian l Y K).Q.obj
@@ -3782,8 +3723,7 @@ def lisseAlgebraicOfModel (E₀ : Padic.FiniteCoefficientFields l K)
       fiber := (eqToHom ((lisseCoefficientDiagramData l Y K).obj_eq E₀).symm).toFunctor.obj F }
 
 /-- Tensor at algebraic coefficients, formed over the compositum of the coefficient fields.
-Source: Weil II (1.1.1) d), SGA 5 VI
-(blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) d), SGA 5 VI. -/
 def lisseAlgebraicTensor (F G : LisseAlgebraicSheaf l Y K) : LisseAlgebraicSheaf l Y K :=
   let P := lisseAlgebraicPair l Y K F
   let Q := lisseAlgebraicPair l Y K G
@@ -3797,8 +3737,7 @@ def lisseAlgebraicTensor (F G : LisseAlgebraicSheaf l Y K) : LisseAlgebraicSheaf
   lisseAlgebraicOfModel l Y K L₀ (lisseRationalTensor l L₀.val Y f g)
 
 /-- The algebraic-coefficient unit is the constant system over the base coefficient field.
-Source: Weil II (1.1.1) d), SGA 5 VI
-(blueprint: def-pod-lisse-l-adic-sheaves). -/
+Source: Weil II (1.1.1) d), SGA 5 VI. -/
 def lisseAlgebraicUnit : LisseAlgebraicSheaf l Y K :=
   lisseAlgebraicOfModel l Y K (Padic.finiteCoefficientBase l K)
     (lisseRationalUnit l (Padic.finiteCoefficientBase l K).val Y)

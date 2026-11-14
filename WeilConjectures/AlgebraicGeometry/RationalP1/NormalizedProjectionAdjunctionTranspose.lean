@@ -12,8 +12,7 @@ import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Trace.Trace
 import WeilConjectures.CategoryTheory.Adjunction.SmoothPurity.LeftCoefficientProjectionAction
 /-! # The adjunction transpose of the normalized projection
 
-This isolates the native braiding normalization from the exchange calculation.
-(blueprint: lem-sfb-normalized-projection-adjunction-transpose). -/
+This isolates the native braiding normalization from the exchange calculation. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -108,14 +107,7 @@ attribute [local irreducible] DerivedCategory.Qh
   CondensedRing.upperStar CondensedRing.lowerStar CategoryTheory.Functor.rightDerivedFunctor
 
 attribute [local instance 30000] internalMonoidal in
-/-- Every normalized projection family is the adjunction transpose of tensor comparison.
-Source: the projection normalization in the rational projective-line calculation
-(blueprint: lem-sfb-normalized-projection-adjunction-transpose).
-
-Proof: replace the family component by its defining native projection. The ordinary
-pullback preserves braiding, hence its canonical derived monoidal structure does too.
-The two native symmetries therefore turn the right-coefficient projection mate into
-the left-coefficient transpose of the tensor comparison followed by the counit. -/
+/-- Every normalized projection family is the adjunction transpose of tensor comparison. -/
 theorem normalized_projection_transpose
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]

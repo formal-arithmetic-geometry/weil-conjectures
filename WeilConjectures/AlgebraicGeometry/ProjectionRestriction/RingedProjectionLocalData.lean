@@ -11,7 +11,6 @@ import WeilConjectures.AlgebraicGeometry.ProjectionRestriction.RingedProjectionL
 /-! # Normalized operations on a localized pro-etale site
 
 Source: Stacks Project, Tags 04J0, 08FI, 0FN5 and 07A4.
-(blueprint: lem-weil-pbc-ringed-projection-local-data).
 -/
 
 @[expose] public noncomputable section
@@ -23,26 +22,8 @@ open CategoryTheory AlgebraicGeometry
 namespace AlgebraicGeometry.Scheme.ProjectionRestriction
 
 /-- The localized operation and tensor comparisons exist before considering projection maps.
-Source: Stacks Project, Modules on Sites, Tag 04J0; Cohomology on Sites,
-Tags 08FI, 0FN5 and 07A4.
-(blueprint: lem-weil-pbc-ringed-projection-local-data).
-
-Proof: restrict the coefficient map of g to underlying objects of the slice.
-The localized continuous functor gives the module adjunction, with exact pullback
-because the original inverse image identifies the coefficient rings. Restriction
-is exact and has exact extension by zero as left adjoint. It therefore preserves
-K-injectives. On a K-injective representative the two ordinary direct images
-have identical sections and scalar actions. Derive this identity square to obtain
-the direct-image comparison with its stated representative equation. Its inverse
-adjunction mate is the pullback comparison; the mate correspondence gives
-mate_counit. Normalize the localized derived counit by the ordinary counit on
-K-injectives. On each slice take the localization of the signed total tensor of
-flat-term K-flat complexes. Restriction and pullback preserve these complexes.
-The ordinary tensor comparisons send sheafified pure tensors to the displayed
-pure tensors. Totalize and descend them to obtain the three tensor comparisons
-and their representative equations. Shifting the same representatives yields
-all the unary and binary shift equations, with the signed second-variable shift.
-These data fill Local; no projection compatibility equation is asserted here. -/
+Source: Stacks Project, Modules on Sites, Tag 04J0; Cohomology on Sites, Tags 08FI, 0FN5 and 07A4.
+-/
 theorem localData_exists
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R_Y : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})

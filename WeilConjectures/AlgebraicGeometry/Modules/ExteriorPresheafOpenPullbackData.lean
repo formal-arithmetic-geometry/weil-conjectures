@@ -360,9 +360,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Component isomorphisms and their naturality for the exterior presheaf pullback.
 
-Source: blueprint, Riemann--Roch, proof of (*), determinant paragraph.
-(blueprint: lem-sc-exterior-presheaf-open-pullback-data).
-
 The component map sends a pure wedge to the wedge of the corresponding restricted
 sections, using the canonical ring isomorphism on sections.  Its inverse uses the
 inverse ring isomorphism.  The exterior-power universal property proves that these

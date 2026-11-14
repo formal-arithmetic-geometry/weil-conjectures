@@ -27,8 +27,7 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 
 /-! # Exact constant-coefficient pullback in independent universes
 
-Source: Stacks Project, Tags 00YV, 03D2, and 04JC.
-(blueprint: lem-pur-coefficient-pullback-exact). -/
+Source: Stacks Project, Tags 00YV, 03D2, and 04JC. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -221,18 +220,7 @@ private theorem modelPullback_exact {X Y : Scheme.{t}} (f : X ⟶ Y)
 
 /-- Constant-coefficient module pullback is exact, with no relation imposed between
 site and coefficient universes.
-Source: Stacks Project, Tags 00YV, 03D2, and 04JC.
-(blueprint: lem-pur-coefficient-pullback-exact).
-
-Proof: transport the sites to coefficient-sized models. The canonical constant-section
-map presents the target coefficient sheaf as the ring inverse image: compose the
-constant-sheaf adjunction with inverse image and compare it with the target
-constant-sheaf adjunction. The two left adjoints agree by uniqueness, with the
-specified constant-section unit. Forgetting ring structure identifies module
-pullback with the exact inverse image of abelian sheaves. The forgetful functor
-reflects finite limits and colimits, so the module pullback is exact. Transport
-back through the module equivalences; uniqueness of left adjoints compares the
-result to the specified coefficientProEtaleModulePullback. -/
+Source: Stacks Project, Tags 00YV, 03D2, and 04JC. -/
 theorem coefficientProEtaleModulePullback_exact {X Y : Scheme.{t}} (f : X ⟶ Y)
     (A : CommRingCat.{max r (t + 1)}) :
     PreservesFiniteLimits (coefficientProEtaleModulePullback.{t,r} f A) ∧

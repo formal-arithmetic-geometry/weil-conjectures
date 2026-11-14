@@ -38,8 +38,7 @@ variable (l : ℕ) [Fact l.Prime]
     (W : Scheme.{u})
 
 /-- The completed scalar inclusion in the published coefficient presentation.
-Source: Bhatt--Scholze, Lemma 6.8.2(1)
-(blueprint: lem-pbc-scalar-restriction-complete). -/
+Source: Bhatt--Scholze, Lemma 6.8.2(1). -/
 private theorem pbcScalarModelCoefficientSquare :
     WeilConjectures.completedCoefficientMap l E F i W ≫
         (WeilConjectures.purCoefficientIso l F W).inv =
@@ -87,7 +86,7 @@ private def pbcScalarModelRestrictionIso :
     (scalarRestrictionCompose _ _).symm
 
 /-- Derived restriction in the published model commutes with the scalar restriction.
-Source: Stacks Tag 03DA (blueprint: lem-pbc-scalar-restriction-complete). -/
+Source: Stacks Tag 03DA. -/
 private def pbcScalarModelDerivedRestrictionIso (K : PbcCompletedDerived W (pbcIntegralDatum l F)) :
     (pbcDerivedRestrict (WeilConjectures.purCoefficientIso l E W).inv).obj
         ((pbcDerivedRestrict (pbcScalarCoefficientMap l E F i W)).obj K) ≅
@@ -172,10 +171,7 @@ attribute [local instance] WeilConjectures.IntegralOnSlice.siteCategory
   WeilConjectures.IntegralOnSlice.hasDerived
 
 /-- The scalar inclusion sends the source uniformizer to a multiple of the target one.
-Source: Bhatt--Scholze, Lemma 6.8.2(1) (blueprint: lem-pbc-scalar-restriction-complete).
-Proof: the source uniformizer maps to a unit times a positive power of the target
-uniformizer in the valuation ring; constant sections and the completed coefficient
-map are compatible with this ring map on every finite quotient. -/
+Source: Bhatt--Scholze, Lemma 6.8.2(1). -/
 private theorem scalarUniformizer_dvd (V : W.ProEtᵒᵖ) :
     ∃ c : (WeilConjectures.completedIntegralCoefficientSheafUnrestricted l F W).obj.obj V,
       (WeilConjectures.completedCoefficientMap l E F i W).hom.app V
@@ -196,18 +192,7 @@ end LocalCriterion
 
 /-- Restriction along the completed scalar inclusion preserves derived completeness in
 the published coefficient model.
-Source: Stacks Tags 0999, 099B and 0A0E (blueprint: lem-pbc-scalar-restriction-complete).
-Proof: the source uniformizer maps to a unit times a positive power of the target
-uniformizer, so their powers are cofinal and completeness for the target uniformizer is
-completeness for the image of the source uniformizer. Restriction is exact, preserves
-products, and detects acyclicity; it carries the local Koszul completion criterion for
-that image to the source ring.
-Formally: rewrite completeness by the principal local criterion (`scalarSfLocalIff`).
-Completeness for the target uniformizer gives local completeness for the image of the
-source uniformizer (`scalarUniformizer_dvd`). By `IntegralPrincipalCone.localCriterion`
-this is invertibility of the principal-cone completion unit for multiplication by that
-image on a representative. Restriction carries this unit to the unit for multiplication
-by the source uniformizer (`scalarPrincipalMap`), and exactness preserves invertibility. -/
+Source: Stacks Tags 0999, 099B and 0A0E. -/
 private theorem pbcScalarModelRestrictionComplete
     (M : DerivedCategory (WeilConjectures.scalarReductionSource.{u, u} l F W))
     (hM : WeilConjectures.IsSfDerivedComplete l F W M) :
@@ -303,23 +288,7 @@ private theorem pbcScalarModelRestrictionComplete
   infer_instance
 
 /-- Exact coefficient restriction preserves intrinsic completeness.
-Source: Stacks Project, Tags 099B and 0A0E; the restriction and unit-power argument
-of lem-weil-pbc-finite-free-completion-transport, step 2.
-(blueprint: lem-pbc-scalar-restriction-complete).
-
-Proof: identify the actual completed coefficient rings with their published
-presentations by pbcCompletedComparison, retaining each finite quotient map.
-The source uniformizer maps to a unit times a positive power of the target
-uniformizer. Their powers are cofinal, so target-uniformizer completeness implies
-completeness for the image of the source uniformizer, by the unit-power Cech/Koszul
-criterion. Exact restriction carries this augmented Koszul computation to the
-source ring: scalar restriction preserves the products and cones in the local
-completion complex, and its scalar action on each differential is multiplication
-by that image. It also detects the acyclicity of the corresponding Cech Hom
-complexes. Consequently the restricted object is complete for the source
-uniformizer. The comparison of intrinsic completeness with this local criterion
-and transport back along pbcCompletedComparison give the stated predicate. This
-argument uses no scalar/completion isomorphism and no constructibility assumption. -/
+Source: Stacks Project, Tags 099B and 0A0E. -/
 theorem pbcScalarRestrictionComplete (K : PbcCompletedDerived W (pbcIntegralDatum l F))
     (hK : PbcIsIntrinsicallyComplete W (pbcIntegralDatum l F) K) :
     PbcIsIntrinsicallyComplete W (pbcIntegralDatum l E)

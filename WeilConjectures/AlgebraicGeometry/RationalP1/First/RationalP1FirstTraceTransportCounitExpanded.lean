@@ -15,10 +15,6 @@ import WeilConjectures.AlgebraicGeometry.RationalP1.First.RationalP1FirstTraceTr
 import WeilConjectures.AlgebraicGeometry.RationalP1.First.RationalP1FirstScalarTrace
 
 /-! # Expanded counit equality for the terminal first projective-line trace
-
-Source: the Kunneth and trace base-change calculation in the first rational projective-line
-triangle identity, before the diagonal class is inserted.
-(blueprint: lem-sfb-rational-p1-first-trace-transport-counit-expanded).
 -/
 
 @[expose] public noncomputable section
@@ -45,32 +41,7 @@ attribute [local irreducible] condensedAmbientExchange
 /-- Expand the normalized counit into its projection and trace factors.
 This is the counit-expansion step of the terminal first-trace transport proof.
 This core equation has source Rq_*Rp₂*(p₁*M tensor T_W), rather than Rq_*M, and contains
-neither a diagonal class insertion nor a unit component.
-
-Source: current blueprint, sec-six-functors-basics/sk-prop-p1-adjunction-rational/
-sk-prop-p1-adjunction-rational-triangle.proof.md, First identity, trace and path change
-(blueprint: lem-sfb-rational-p1-first-trace-transport-counit-expanded).
-
-Proof: this obligation is split from the parent theorem. Expand `counitComponent` using its
-projection part, trace, and right-unitor factors; the remaining Kunneth and scalar
-transport calculation is the parent obligation.
-Expand the twisted projection and counit and cancel the native tensor-shift
-comparisons. Apply the two Kunneth factorizations to M and the shifted Tate coefficient.
-They identify the inverse exchange/projection composite followed by the q trace with
-the first direct-image path followed by the inverse first projection and its trace.
-For this step the trace square is obtained by pulling back the normalized unit/Chern
-splitting defining the completed trace: the canonical base-change mate preserves the
-unit summand by the adjunction triangle, and the positive Chern summand by Cartier/Kummer
-pullback. Projection to that summand gives the completed trace square. The full-unit
-squares in reference identify its traces with the Z_l member of family. The fixed scalar
-squares of family transport the square to the selected rational or closure coefficient.
-The exchange/tensor coherence and module/ringed-topos comparison identify these maps
-with the literal native maps here. Properness and the localizing projection formula
-supply invertibility of the first projection on M and the shifted Tate object; this
-proof is the existential witness h₁. Uniqueness of conjugate right adjoints identifies
-the path change with firstPathComparison. This argument never inserts delta and never
-uses either integration identity. It remains valid for M = 0 and for a zero diagonal
-class whenever a reference exists. -/
+neither a diagonal class insertion nor a unit component. -/
 theorem rationalP1_first_trace_transport_counit_expanded
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

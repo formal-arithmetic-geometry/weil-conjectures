@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Open.ProEtaleOpenCounitSection
 # Open counit diagrams after localization
 
 Source: Stacks Project, Tag 09AE; adjunction naturality.
-(blueprint: lem-exc-proetale-open-counit-localization-diagram)
 -/
 
 @[expose] public section
@@ -39,8 +38,7 @@ private theorem adjunction_counit_factor
 whenever the smaller open maps into the larger one. On the smaller open the larger
 counit is invertible. Transpose the restriction of the map followed by this inverse
 under the smaller-open adjunction. Counit naturality proves the commuting square.
-Source: Stacks Project, Tag 09AE.
-(blueprint: lem-exc-proetale-open-counit-localization-diagram). -/
+Source: Stacks Project, Tag 09AE. -/
 theorem openCounit_localization_diagram (R : Type (u + 1)) [Ring R]
     {W T : Scheme.{u}} (i : W ⟶ T) [IsOpenImmersion i]
     (F : Sheaf (ProEt.topology T) (ModuleCat.{u + 1} R)) (Q : T.ProEt)

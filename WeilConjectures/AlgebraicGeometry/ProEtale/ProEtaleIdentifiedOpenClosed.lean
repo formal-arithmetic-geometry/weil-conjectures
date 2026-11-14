@@ -14,9 +14,8 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.Closed.ProEtaleClosedEssen
 /-!
 # Open and closed extensions with identified inverse-image coefficient rings
 
-Source: Stacks Project, Modules on Sites, Tags 03DI and 03DJ; Pro-etale Cohomology,
-Tags 09BN and 09AH
-(blueprint: lem-sfb-proetale-identified-open-closed).
+Source: Stacks Project, Modules on Sites, Tags 03DI and 03DJ; Pro-etale Cohomology, Tags 09BN and
+09AH.
 -/
 
 @[expose] public noncomputable section
@@ -35,23 +34,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 The extension is constructed by scalar transport to the inverse-image ring, the open
 slice equivalence, and the sheafified extension presheaf. Its adjunction unit is invertible.
 
-Source: Stacks Project, Tags 03DI, 03DJ, 09BN and 09AH
-(blueprint: lem-sfb-proetale-identified-open-closed).
-
-Proof: obtain the exact slice extension and its invertible unit from ringed open/closed
-localization. Restriction of scalars along the coefficient isomorphism is an equivalence;
-its inverse is the actual sheafified tensor extension, by uniqueness of left adjoints.
-Compose this scalar equivalence, the slice equivalence and extension by zero. Transport
-the composite right adjoint using the published inverse-image/slice comparison. This is
-an adjunction to the specified actual tensor pullback. Equivalences preserve finite limits
-and colimits, so the composite extension is exact and additive. The slice extension has
-invertible unit and hence is fully faithful. Its composite with the two equivalences is
-fully faithful, so the unit of the transported adjunction is invertible as well.
-Closed restriction of its image vanishes by ringed cross-vanishing and scalar transport.
-For a sheaf with zero closed restriction, the localization sequence makes the ringed
-open counit both monic and epic. The scalar and slice equivalences identify its source
-with a value of the transported extension; essential-image membership makes the counit
-of the transported adjunction invertible too. -/
+Source: Stacks Project, Tags 03DI, 03DJ, 09BN and 09AH. -/
 private theorem identifiedOpenExtension
     {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
     (U : X.ProEt) [IsOpenImmersion U.hom] [QuasiCompact U.hom]
@@ -146,24 +129,7 @@ private theorem identifiedClosedImage
 adjunction isomorphisms with any identified inverse-image coefficient rings. The closed
 comparison is the counit of the specified actual tensor-pullback/direct-image adjunction.
 
-Source: Stacks Project, Tags 03DI, 03DJ, 09AA, 09BM, 09BN and 09AH
-(blueprint: lem-sfb-proetale-identified-open-closed).
-
-Proof: transport the ringed open/closed theorem along scalar restriction equivalences.
-For the open factor compose scalar transport, the slice equivalence and the sheafified
-extension presheaf. Uniqueness of scalar extension as a left adjoint identifies its right
-adjoint with the specified tensor pullback. Its left adjoint is fully faithful, since
-slice extension has invertible unit. For the closed factor scalar transport followed by
-ringed direct image agrees sectionwise with actual identified-coefficient direct image:
-both retain the original sections and their linear maps, and their scalar actions agree
-by the coefficient adjunction unit. Equivalences and ringed direct image are exact, so
-this direct image is exact. The ringed counit makes ringed direct image fully faithful;
-scalar equivalence and the sectionwise comparison make actual direct image fully faithful.
-Therefore the counit of its specified adjunction is invertible. Ringed cross-vanishing
-and scalar transport make the closed restriction of every open extension zero. If a
-module sheaf has zero closed restriction, the localization sequence gives an invertible
-ringed open counit. The scalar and slice equivalences then exhibit the sheaf in the
-actual open extension's essential image, making its specified counit invertible. -/
+Source: Stacks Project, Tags 03DI, 03DJ, 09AA, 09BM, 09BN and 09AH. -/
 theorem proEtaleIdentifiedOpenClosed
     {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
     (U : X.ProEt) [IsOpenImmersion U.hom] [QuasiCompact U.hom]

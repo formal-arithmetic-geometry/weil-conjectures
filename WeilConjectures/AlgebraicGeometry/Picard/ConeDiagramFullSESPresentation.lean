@@ -176,27 +176,7 @@ private def cylRowMap (t : A ⟶ B) (t' : A' ⟶ B') (α : A ⟶ A') (β : B ⟶
 /-- A strict square of chain maps has functorial short exact mapping-cylinder
 presentations, with all three prescribed components after localization.
 Source: Stacks Project, Derived Categories, Tags 013N, 014G and 013O (the cylinder
-factorization and its homotopy equivalence), applied functorially to a square.
-(blueprint: lem-pc-cone-diagram-full-ses-presentation).
-
-Proof: For t : A → B put T = B ⊕ Cone(id A), let i : A → T be the column
-(t, 0, id), and let p : T → B be projection onto B. The cone differential makes
-i a chain map and i ≫ p = t. The complementary summand Cone(id A) is
-contractible, so p is a homotopy equivalence, hence Q(p) is an isomorphism.
-In each degree i is a split monomorphism and its quotient is Cone(t), with
-quotient map q(b,a⁺,a) = (-a⁺, b - t(a)), with Mathlib's A[1] ⊕ B cone order. The quotient
-has the standard cone differential. Thus A → T → Cone(t) is short exact.
-The composite B → T → Cone(t), where B → T is the section of p, is the standard
-cone inclusion. Its equality with q in the homotopy category, after identifying
-T with B by p, proves the second localized differential equation; the first is
-i ≫ p = t. For the square (α,β) use β on B and the map induced by α on
-Cone(id A). The equation t ≫ β = α ≫ t' makes this a morphism of the two rows;
-on the first term it is α and on the quotient it is the functorial cone map.
-Taking identity comparisons for the first and third vertices and Q(p) for the
-middle vertices gives all six isomorphisms and all three component equations.
-The middle component follows by composing
-with the cylinder projection: cylMap followed by fst is fst followed by beta.
-The construction uses finite biproducts and works for zero complexes as well. -/
+factorization and its homotopy equivalence), applied functorially to a square. -/
 theorem cone_diagram_full_ses_presentation
     {C : Type u} [Category C] [Abelian C] [HasDerivedCategory.{w} C]
     (A B A' B' : CochainComplex C ℤ)

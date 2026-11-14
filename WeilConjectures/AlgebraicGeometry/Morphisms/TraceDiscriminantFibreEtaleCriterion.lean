@@ -17,8 +17,7 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.FlatFibreEtaleNeighbourhoods
 /-!
 # Local trace discriminants detect non-etale fibres
 
-Source: Stacks Project, Tag 0BVH, Lemma 49.3.1.
-(blueprint: lem-sbc-trace-discriminant-fibre-etale-criterion)
+Source: Stacks Project, Tag 0BVH, Lemma 49.3.1
 -/
 
 @[expose] public section
@@ -29,23 +28,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- On a free affine chart, the trace determinant vanishes precisely over a non-etale point.
 
-Source: Stacks Project, Tag 0BVH, Lemma 49.3.1, and its finite flat fibre criterion.
-(blueprint: lem-sbc-trace-discriminant-fibre-etale-criterion)
-
-Proof: The preimage of the affine target chart is affine because f is finite. The chosen
-basis makes its section algebra finite free. Tensor its multiplication matrices with the
-residue field at y; taking traces and determinants commutes with this operation. Thus the
-trace determinant vanishes at y exactly when the trace pairing of the finite fibre algebra
-is degenerate. Over a field a finite algebra has nondegenerate trace pairing precisely
-when it is a product of finite separable field extensions: nilpotents are in the radical
-of the trace form; after reduction the algebra is a product of fields, and the trace form
-on each field is nondegenerate precisely for a separable extension. Hence nonvanishing is
-equivalent to an etale fibre. For a flat morphism of finite presentation the fibre is
-etale precisely when f is etale at each of its points. The etale locus is open, so this
-means each x above y has a source open neighbourhood V with etale V.ι followed by f.
-Negating this universal statement gives the existential on the right. In rank zero the
-fibre is empty and the determinant is one, so both sides are false. A zero determinant
-is permitted, and makes both sides true at every point of the chart. -/
+Source: Stacks Project, Tag 0BVH, Lemma 49.3.1, and its finite flat fibre criterion. -/
 theorem trace_discriminant_zeroLocus_iff_nonEtale_fibre
     {X Y : Scheme.{u}} [IsLocallyNoetherian Y]
     (f : X ⟶ Y) [IsFinite f] [Flat f] (U : Y.affineOpens) (y : Y) (hy : y ∈ U.1) :

@@ -10,7 +10,7 @@ import all WeilConjectures.AlgebraicGeometry.ProEtaleOpenRestriction.ProEtaleOpe
 
 /-! # Ordinary ringed exchange along an open immersion
 
-Source: Stacks Project, proetale.tex Tag 09A5 and sites.tex Tag 00XZ.
+Source: Stacks Project.
 -/
 
 @[expose] public noncomputable section
@@ -628,38 +628,7 @@ private theorem ordinary_app_isIso (r : StrictTowerRingedSquare sq)
     exact ⟨_, ha⟩
 
 /-- The ordinary counit mate is invertible when the base change is open.
-Source: Stacks Project, proetale.tex Tag 09A5, section-morphism;
-sites.tex Tag 00XZ, section-localize; sites-modules.tex Tag 03D3.
-(blueprint: lem-sf-ringed-ordinary-open-exchange).
-
-Proof: for a weakly etale arrow with any specified coefficient isomorphism,
-the site adjunction between object composition and base change induces an
-adjunction on ring sheaves. Compare its inverse-image ring with the specified
-ring using the inverse of that coefficient isomorphism. The sheaf unit and
-triangle identity give the two ring equations for pushforwardPushforwardAdj.
-Uniqueness of module left adjoints identifies its comparison on sections with
-the coprojection defined using the specified module unit. Thus every such
-coprojection is bijective, without assumptions on the coefficient ring.
-
-The right-adjoint conjugate of exchangeModuleComposition is restriction along
-the fibre-product compositor. The conjugate unit identity therefore computes
-the compositor on iterated unit sections. Equality induction transports units
-across equality of coefficient-decorated morphisms. Applying this to r.coherent
-and the two compositors gives the unit equation for r.exchangeModuleSquare.
-The mate formula, this unit equation, naturality and the right triangle identity
-then compute ordinary r on unit sections.
-
-The chosen Cartesian identification makes g' open by stability under base change.
-For an object E over Y', the canonical arrow from E times_Y' X' to E times_Y X
-has inverse given by the two pullback lifts and sq.isoPullback.inv. Its inverse
-identities follow by the two projection equations. Naturality of ordinary r
-along the site adjunction unit now computes it on all object coprojections:
-it sends the base coprojection of a section to the upper coprojection of its
-restriction along that Cartesian arrow. Both coprojections and that restriction
-are bijective. Hence every section map of every component of ordinary r is
-bijective. The module-sheaf forgetful functor reflects isomorphisms, and the
-component isomorphisms give invertibility of the natural transformation.
-The argument applies unchanged to empty opens and zero coefficient rings. -/
+Source: Stacks Project, section-morphism. -/
 theorem ordinary_open_isIso
     {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
     {f : X ⟶ Y} {g : Y' ⟶ Y} {sq : ChosenCartesianSquare g' f' f g}

@@ -579,9 +579,7 @@ lemma shortExact_of_isos {X : Scheme.{u}} {S : ShortComplex X.Modules} (hS : S.S
 resolution `0 → 𝒪(-N - 1)^{J₁} → 𝒪(-N)^{J₀} → 𝒢 → 0`. Choose `N` with `H¹(𝒢(N - 1)) = 0` (Serre
 vanishing), let `F = 𝒢(N)` and `K` the kernel of the evaluation `H⁰(F) ⊗ 𝒪 ⟶ F`, an
 epimorphism by `epi_of_surjective_H_zero`. Then `H⁰(K) = H¹(K) = 0`, so `K(1)` is trivial by
-`exists_iso_sigma_twist_zero`; twist back by `𝒪(-N)`.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality`) -/
+`exists_iso_sigma_twist_zero`; twist back by `𝒪(-N)`. -/
 theorem exists_shortExact_sigma_twist (G : (ProjectiveLine (Spec (.of k))).Modules)
     [G.IsQuasicoherent] [G.IsFinitePresentation] :
     ∃ (J₁ J₀ : Type u) (_ : Finite J₁) (_ : Finite J₀) (d₁ d₀ : ℤ)

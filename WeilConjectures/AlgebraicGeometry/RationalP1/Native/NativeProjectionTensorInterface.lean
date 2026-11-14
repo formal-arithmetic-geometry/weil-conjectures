@@ -12,8 +12,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunct
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Trace.TraceBaseChangeFirst
 /-! # The native pullback tensor interface
 
-The bundled tensorator and the canonical module derived comparison have the same map.
-(blueprint: lem-sfb-native-projection-tensor-interface). -/
+The bundled tensorator and the canonical module derived comparison have the same map. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -28,8 +27,7 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.RationalP1
 open DiagonalCoefficients CondensedRing
 /-- The canonical pullback tensor isomorphism in the internal module tensor structure.
-Source: canonical derived inverse-image tensor comparison
-(blueprint: lem-sfb-native-projection-tensor-interface). -/
+Source: canonical derived inverse-image tensor comparison. -/
 def nativeProjectionTensorIso
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -67,12 +65,7 @@ attribute [local instance 20000]
   traceTensorLeft traceTensorRight traceGradedTensor traceGradedTensorLeft
   traceGradedTensorRight traceGradedTensorFour in
 /-- The bundled tensorator is the canonical derived comparison on internal modules.
-Source: the canonical pullback tensor comparison
-(blueprint: lem-sfb-native-projection-tensor-interface).
-
-Proof: forget the tensorator's isomorphism structure, identify its underlying native
-comparison with the generic derived tensor comparison, and use the equality of the
-ordinary pullback monoidal structures. -/
+Source: the canonical pullback tensor comparison. -/
 theorem native_projection_tensor_hom
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)

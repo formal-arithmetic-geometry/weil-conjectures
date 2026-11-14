@@ -17,8 +17,7 @@ finite comparison, quotient maps, and transition maps together with their local
 formulas. The two categorical commutative squares are isolated in
 `IsomorphismScalarFiniteSquares`.
 
-Source: Stacks Project, sites-modules.tex, Tags 03EK and 03EL.
-(blueprint: lem-weil-isomorphism-scalar-finite-model-core).
+Source: Stacks Project, Tags 03EK and 03EL.
 -/
 
 @[expose] public noncomputable section
@@ -41,12 +40,6 @@ Finite comparisons and local quotient/transition formulas can be constructed fro
 a normalized completed comparison. This is Steps 1--6 of the finite coefficient
 calculation in Stacks 03EK and 03EL; the categorical square equalities are the
 separate conclusion of `scalar_finite_squares`.
-
-Proof source: Stacks Project, sites-modules.tex, Tags 03EK and 03EL, Steps 4--6
-of the normalized finite model argument. The proof builds the finite balanced
-reassociation, inserts the tensor unit for quotient maps, and reduces both
-finite scalars for transitions. No flatness or surjectivity hypothesis is used.
-(blueprint: lem-weil-isomorphism-scalar-finite-model-core).
 -/
 theorem scalar_finite_core
     (b : (integralOperationsGoodComplex l E Y).ι ⋙ leftComplex l E L ι g ≅

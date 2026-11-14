@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.ProperOpenCalculus.ProperOpenCal
 /-!
 # Naturality on a single refining tower
 
-Source: Stacks Project, Tag 0F7J (blueprint: lem-sp-proper-open-tower-refinement).
+Source: Stacks Project, Tag 0F7J.
 -/
 
 @[expose] public section
@@ -25,22 +25,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.ProperOpenCalculus
 
 /-- A single refining binary tower commutes with its three refinement isomorphisms.
-Source: Stacks Project, Tag 0F7J, lemma-shriek-composition, six-square calculation
-(blueprint: lem-sp-proper-open-tower-refinement).
-
-Proof: Write A for the refinement square on the intermediate compactification of f,
-D for that on g, and E for that on gf. Write B for the square of the old tower,
-C for the square of the new tower, and F for the square between their top open maps.
-The equations of TowerRefinement give all six commutative boundaries; their vertical
-maps are proper and their horizontal maps are quasi-compact open immersions.
-Horizontal pasting expresses gamma_E as gamma_F followed by gamma_A, with the open
-compositors. Vertical pasting identifies the composites F+B and C+D, with the proper
-compositors. At each object M, naturality of gamma_B at gamma_A(M) moves gamma_A
-through gamma_B. Whisker that equality by the outer proper functor, substitute the
-two pasting identities, and use naturality and associativity of pComp and jComp.
-The identity insertions cancel by pLeft and pRight. The two resulting component
-maps are exactly the displayed composites. No cartesianness is needed for the
-refinement squares. -/
+Source: Stacks Project, Tag 0F7J, six-square calculation. -/
 theorem properOpen_tower_refinement {A : Scheme.{u} → Prop}
     (F : ProperOpenCalculus.{u, v, w} A)
     (X Y Z : {X : Scheme.{u} // A X})

@@ -11,8 +11,7 @@ import WeilConjectures.ConstructibleSheaf.InternalHom
 
 /-! # Etale representatives of pro-etale derived Isom sections
 
-Source: Stacks Project, proetale.tex, Tag 09B1; etale geometric-point lifting.
-(blueprint: new-lem-weil-pbc-lisse-finite-level-etale-local-representative).
+Source: Stacks Project, Tag 09B1; etale geometric-point lifting.
 -/
 
 @[expose] public noncomputable section
@@ -25,14 +24,7 @@ namespace AlgebraicGeometry.Scheme
 /-- Pro-etale local sections of the derived Isom presheaf with bounded-below target admit
 etale representatives at every geometric point.
 
-Source: Stacks Project, proetale.tex, Tag 09B1; etale geometric-point lifting.
-(blueprint: new-lem-weil-pbc-lisse-finite-level-etale-local-representative).
-
-Proof: the bounded-below comparison lifts each supplied pro-etale Isom section to an
-actual isomorphism on an etale cover, by
-exists_etale_iso_cover_of_proetale_local_iso_section. Lift the given geometric point
-through that cover using joint surjectivity. The isomorphism on that cover member is
-the required pointed representative. This includes empty schemes and zero objects.
+Source: Stacks Project, Tag 09B1; etale geometric-point lifting.
 -/
 theorem exists_etale_local_representative_of_proetale_local_iso_sections
     (X : Scheme.{u}) (U : X.ProEt)

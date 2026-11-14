@@ -822,34 +822,7 @@ end NormalizedTowerCoefficients
 /-- A stratification for the first quotient controls lissity at every normalized level.
 No common completed complex or normalization-compatible trivialization is asserted here.
 
-Source: Stacks Project, sites-cohomology.tex, Tag 094I; the finite refinement in
-steps 2--3 of the local-effectivity argument
-(blueprint: lem-weil-pbc-normalized-tower-common-lisse-strata).
-
-Proof: the proved native_common_strata first restricts to fixed scalars, uses
-finite fibre-product intersections to refine the constructible stratifications of
-the finitely many cohomology sheaves at level zero in [a,b], then lifts the finite
-local models to native coefficient modules on covering sieves. Outside this interval the zero
-sheaf is finite lisse. Refine the resulting finite locally closed partition by
-connected components, which are finite and open and closed on a Noetherian scheme.
-On a stratum, restrict the normalization from level n to level zero. Exact inverse
-image commutes with cohomology. The proved pullbackScalarExtensionIso derives
-commutation with scalar extension by comparing the two composite right adjoints,
-using the canonical coefficient direct-image comparison. The ideal I/I^(n+1)
-in A/I^(n+1) is nilpotent and its quotient is A/I. The proved helpers
-quotient_ideal_nilpotent, quotient_factor_kernel and quotient_factor_equiv
-give these identifications; nilpotent_quotient_lissity specializes the declared
-nilpotent theorem on an equal-universe site. Apply nilpotent-reduction-lissity
-to propagate finite-type lissity from level zero to level n. The coefficient ring
-is finite, so each finite-type constant module is a finite set. The proved helper
-relative_lisse_iff_native transports relative finite
-lissity to native constant coefficients and back. Its comparison uses the
-canonical constant-section map, constant module restriction, and uniqueness of
-left adjoints. Local models are preserved on every slice; the proved helper
-nativeSieveFiniteLisse_all_objects supplies the covers required by the
-sitewise nilpotent theorem. These comparisons give precisely the relative
-coefficient presentation below. For the
-empty scheme, choose an empty stratification; no stratum condition remains. -/
+Source: Stacks Project, Tag 094I. -/
 theorem normalizedTower_common_lisse_strata
     (X : Scheme.{u}) [IsNoetherian X] {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (M : AdicTower X d)

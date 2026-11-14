@@ -38,7 +38,7 @@ variable {A B : Type u} [CommRing A] [CommRing B] [Algebra A B]
 `A`-algebra map `E₁ →ₐ[A] E₂`. -/
 theorem existsUnique_algHom (ψ : B ⊗[A] E₁ →ₐ[B] B ⊗[A] E₂) :
     ∃! φ : E₁ →ₐ[A] E₂, Algebra.TensorProduct.map (AlgHom.id B B) φ = ψ := by
-  -- The universal homeomorphism `f : Spec B ⟶ Spec A` and the étale `v₁ : Spec E₁ ⟶ Spec A`.
+  -- The universal homeomorphism `f: Spec B ⟶ Spec A` and the étale `v₁: Spec E₁ ⟶ Spec A`.
   let f : Spec (.of B) ⟶ Spec (.of A) := Spec.map (CommRingCat.ofHom (algebraMap A B))
   let v₁ : Spec (.of E₁) ⟶ Spec (.of A) := Spec.map (CommRingCat.ofHom (algebraMap A E₁))
   let v₂ : Spec (.of E₂) ⟶ Spec (.of A) := Spec.map (CommRingCat.ofHom (algebraMap A E₂))

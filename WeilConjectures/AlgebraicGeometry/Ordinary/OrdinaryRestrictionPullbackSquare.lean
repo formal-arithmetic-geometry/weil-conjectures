@@ -12,8 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.Stratum.StratumScalarExtension
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChangeAdjunctionSupplement
 
 /-! Restriction of scalars and ordinary inverse-image composition.
-Source: Stacks, Modules on Sites, Tags 03D8 and 03D7.
-(blueprint: lem-fix-ordinary-restriction-pullback-square) -/
+Source: Stacks, Modules on Sites, Tags 03D8 and 03D7 -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -27,13 +26,13 @@ set_option backward.isDefEq.respectTransparency.types false
 open CategoryTheory.Functor
 
 /-- Ordinary scalar restriction in constant-ring coordinates.
-Source: Stacks Tag 03D7 (blueprint: lem-fix-ordinary-restriction-pullback-square). -/
+Source: Stacks Tag 03D7. -/
 abbrev ordinaryScalarRestriction {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B) (T : Scheme.{u}) :=
   Scheme.proEtaleRingRestrictScalars (Scheme.proEtaleConstantRingMap (T := T) φ)
 
 /-- The recorded ordinary constant-ring inverse image.
-Source: Stacks Tag 03D8 (blueprint: lem-fix-ordinary-restriction-pullback-square). -/
+Source: Stacks Tag 03D8. -/
 abbrev ordinaryConstantPullback (A : Type u) [CommRing A] {V W : Scheme.{u}} (f : V ⟶ W) :=
   StrictTower.modulePullback (ULift.{u + 1, u} A) f
 
@@ -45,8 +44,7 @@ private abbrev padj (A : Type u) [CommRing A] {V W : Scheme.{u}} (f : V ⟶ W) :
     (Scheme.proEtaleConstantRing V A) (Scheme.proEtaleConstantRingComparison f A)
 
 /-- Constant coefficient maps commute with inverse-image identification.
-Source: Stacks Tag 03D7 (blueprint: lem-fix-ordinary-restriction-pullback-square).
-Proof: apply naturality of the canonical constant inverse-image map. -/
+Source: Stacks Tag 03D7. -/
 theorem coeffSquare {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B) {V W : Scheme.{u}} (f : V ⟶ W) :
     (Scheme.proEtaleConstantRingComparison f A).hom ≫
@@ -59,7 +57,7 @@ theorem coeffSquare {A B : Type u} [CommRing A] [CommRing B]
       (a := CommRingCat.ofHom (RingHom.ulift φ))).symm
 
 /-- The specified ordinary restriction/pullback mate.
-Source: Stacks Tag 03D7 (blueprint: lem-fix-ordinary-restriction-pullback-square). -/
+Source: Stacks Tag 03D7. -/
 def ordinaryRestrictionComparison {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B) {V W : Scheme.{u}} (f : V ⟶ W) :
     ordinaryScalarRestriction φ W ⋙ ordinaryConstantPullback A f ⟶
@@ -237,24 +235,7 @@ private lemma pasteTransport
 
 /-- Restriction of scalars respects the specified ordinary pullback-square compositor.
 No derived tensor functor, localization, or extension by zero occurs here.
-Source: Stacks, Modules on Sites, Tags 03D8 and 03D7; the ordinary composition
-calculation underlying parent `lem-fix-tensor-pullback-square`.
-(blueprint: lem-fix-ordinary-restriction-pullback-square)
-Proof: first use the fibre-product direct-image compositor moduleRComp. Its forward
-map is restriction along Over.pullbackComp.hom, by moduleRComp_existsUnique.
-Restriction of scalars leaves sections and their restriction maps unchanged.
-The canonical restriction/direct-image comparison is the identity on every section,
-by proEtaleRingRestrictionDirectImage_existsUnique. Thus the two pastings involving
-the direct-image compositor and these comparisons agree sectionwise. Conjugate this
-identity by the two composite module adjunctions. The conjugate of moduleRComp is
-moduleGComp.inv by leftAdjointCompIso, and the inverse mate of the sectionwise
-identity is proEtaleRingRestrictionPullbackInv by its defining unit-counit formula.
-The mate pasting laws give compatibility of these inverse-image comparisons with
-moduleGComp. Apply it to both composable paths in the square. Eliminate their common
-composite using sq.toCommSq.w; equality transport is natural in the coefficient map.
-Composing one path with the inverse of the other gives precisely moduleSquareG.inv
-on each coefficient ring and the displayed equation. The computation is valid for
-empty schemes, the zero ring, and arbitrary coefficient homomorphisms. -/
+Source: Stacks, Modules on Sites, Tags 03D8 and 03D7. -/
 theorem ordinaryRestrictionPullbackSquare {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B)
     {U' U X' X : Scheme.{u}}

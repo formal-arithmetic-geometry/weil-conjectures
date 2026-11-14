@@ -6,10 +6,7 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.PurityTransport.Coefficient.TransportCoefficients
 
-/-! # Purity transport statement interfaces
-
-Source: current blueprint theorem-smooth-purity-all-admissible-coefficients, canonical comparison
-clauses. (blueprint: def-pur-transport-root-coordinates). -/
+/-! # Purity transport statement interfaces -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -22,10 +19,7 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.PurityTransport
 
 /-- The section-normalized identification of the two existing presentations of roots.
-Source: Stacks 03PK (blueprint: def-pur-transport-root-coordinates).
-Proof: the roots presheaf is the kernel of the power map on units. Its
-sheafification is the kernel sheaf; the inclusion into units fixes the map.
-The section equations on the sheafification generators imply uniqueness. -/
+Source: Stacks 03PK. -/
 theorem rootComparison_existsUnique (X : Scheme.{u}) (N : ℕ) :
     ∃! e : rootsOfUnitySheaf X N ≅ proEtaleRootsOfUnitySheaf X N,
       ∀ (U : X.ProEtᵒᵖ) (z : (rootsOfUnityPresheaf X N).obj U),
@@ -79,18 +73,18 @@ theorem rootComparison_existsUnique (X : Scheme.{u}) (N : ℕ) :
   exact (he'' U z).trans (he' U z).symm
 
 /-- The unique generator-preserving comparison, not an arbitrary root frame.
-Source: Stacks 03PK (blueprint: def-pur-transport-root-coordinates). -/
+Source: Stacks 03PK. -/
 def rootComparison (X : Scheme.{u}) (N : ℕ) :=
   (rootComparison_existsUnique X N).exists.choose
 
 /-- Pullback on roots through the two existing presentations.
-Source: Stacks 03PK (blueprint: def-pur-transport-root-coordinates). -/
+Source: Stacks 03PK. -/
 def rootPull {X Y : Scheme.{u}} (f : X ⟶ Y) (N : ℕ) :=
   (ProEtale.upperStar Ab.{u + 1} f).map (rootComparison Y N).hom ≫
     proEtaleRootsOfUnityInverseImageMap f N ≫ (rootComparison X N).inv
 
 /-- The underlying free-module comparison: coefficient pullback tensor root pullback.
-Source: Cartesian coefficients (blueprint: def-pur-transport-root-coordinates). -/
+Source: Cartesian coefficients. -/
 def rootTensorPull (ell : ℕ) [Fact ell.Prime] {X Y : Scheme.{u}}
     (f : X ⟶ Y) (n : ℕ) :=
   Functor.OplaxMonoidal.δ (ProEtale.upperStar Ab.{u + 1} f)
@@ -100,7 +94,7 @@ def rootTensorPull (ell : ℕ) [Fact ell.Prime] {X Y : Scheme.{u}}
       rootPull f (ell ^ n))
 
 /-- Normalization of a module pullback comparison by its underlying abelian map.
-Source: Cartesian coefficients (blueprint: def-pur-transport-root-coordinates). -/
+Source: Cartesian coefficients. -/
 def PullNormalized
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj R] [IsCommMonObj R] {X Y : Scheme.{u}} (f : X ⟶ Y)

@@ -15,7 +15,6 @@ public import Mathlib.CategoryTheory.Functor.ReflectsIso.Balanced
 # Restricting a constant ring sheaf to its constant scalars
 
 Source: Stacks Project, Tags 093I and 03CY.
-(blueprint: lem-weil-pbc-proetale-constant-module-encoding).
 -/
 
 @[expose] public section
@@ -129,15 +128,7 @@ private noncomputable instance restriction_essSurj :
       (asIso (adj.unit.app P)).symm
 
 /-- Restricting to constant scalars is an equivalence of the two coefficient encodings.
-Source: Stacks Project, Tags 093I and 03CY
-(blueprint: lem-weil-pbc-proetale-constant-module-encoding).
-
-Proof: constant-ring module presheaves are exactly module-valued presheaves. The
-constant-section map is locally bijective. Module sheafification along this map is
-left adjoint to restriction, with invertible counit; hence restriction is fully
-faithful. For a module-valued sheaf its sheafification unit is invertible as well,
-since its additive presheaf already is a sheaf. This supplies essential surjectivity.
-No nonzero-ring, nonempty-scheme or finiteness assumption is required. -/
+Source: Stacks Project, Tags 093I and 03CY. -/
 theorem proEtaleModuleRestriction_isEquivalence :
     (proEtaleModuleRestriction T B).IsEquivalence := by
   exact {}

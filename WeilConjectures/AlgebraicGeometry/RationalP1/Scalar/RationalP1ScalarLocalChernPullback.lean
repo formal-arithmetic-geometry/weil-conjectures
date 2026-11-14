@@ -27,31 +27,7 @@ This is an equation of local classes on the product; it has no direct images,
 exchange mate, completed Chern adjuncts, traces, or splitting maps.
 
 Source: geometric tower classes (2), Chern pullback; diagonal coefficient changes
-(1), whole-system unit and root comparisons; rational P1 second triangle.
-(blueprint: lem-sfb-rational-p1-scalar-local-chern-pullback).
-
-Proof: q_model identifies the q model bundle with O(1). The factor-swapped product
-model p2_model identifies its bundle with p1*O(1), by the base-change identification
-of the tautological invertible module. Apply tower_firstChern_pullback to that
-bundle, using the coefficient-one and root-normalized comparisons. Its proof uses
-the pullback square for the integral line-bundle extension and the positive
-Kummer boundary, so it is an equality of entire systems. Apply constant-scalar
-restriction and the inverse-image/derived-limit comparison. The unit and root
-limit comparisons make that comparison invertible on these endpoints; naturality
-and the two CompletedLocalChernNormalized equations give the local completed
-square. Transport it through eP and eW. Their underlying-sheaf normalizations
-identify the ordinary inverse-image comparisons; their unit projections and root
-projections identify the two endpoints. Apply scalar extension Z_l -> O_E -> E
-to this local square. Scalar/inverse-image composition is fixed on the units by
-one and on the Tate lines by the balanced tensor root map, so the endpoint
-normalizations identify the result with scalarQLocalChern and scalarP2LocalChern.
-The coefficient-unit composition law around the self-square identifies the source
-comparison with the displayed ambientPullbackComparison followed by the q unit
-comparison; its other side is the p2 pullback of the q unit comparison followed by
-the p2 unit comparison. The target comparison is firstLineComparisonForTrace by
-its root normalization, with the canonical degree-two shift. This gives the
-displayed equation. This uses no faithfulness of finite-level evaluation, and
-works on the empty scheme and for arbitrary base changes. -/
+(1), whole-system unit and root comparisons; rational P1 second triangle. -/
 theorem scalar_local_chern_pullback
     (l : ℕ) [Fact l.Prime] (E : PadicAlgCl.FiniteIntermediateField l)
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

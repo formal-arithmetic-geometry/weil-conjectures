@@ -25,7 +25,6 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 /-! # A Noetherian comparison before choosing a finite-free resolution
 
 Source: Stacks Project, Tag 0A1H, Noetherian approximation paragraph, and Tag 081F.
-(blueprint: lem-pc-proper-flat-single-open-noetherian-comparison).
 -/
 
 @[expose] public section
@@ -62,34 +61,7 @@ private theorem isFinitePresentation_of_isZero (X : Scheme.{u})
   infer_instance
 
 /-- Local approximation and transport data, without any finite-free resolution of the image.
-Source: Stacks Project, Tag 0A1H, approximation paragraph; Tags 081F, 08E5 and 08E7.
-
-Proof: Choose an affine neighbourhood V of x in U. Its ring is the filtered colimit of
-its finitely generated Z-subalgebras. Restrict f and F to this neighbourhood. Apply
-Noetherian approximation to the tensor data O_X and F[0], enlarging the stage to descend
-relative flatness, properness of the morphism and proper term supports. Take T to be
-that stage's affine spectrum and W its total open; replacing the stage by W.toScheme
-only changes the data by the
-canonical total-open isomorphism. Use standard localizations in universe u+1 at all
-auxiliary stages. Denote the source by Y, its map by p, and the descended tensor by A.
-The descended source is Noetherian: its morphism is finitely presented over a Noetherian
-base. Its finitely presented terms are coherent. The perfect-tensor bounded-coherent
-lemma gives the boundedness and coherence hypotheses on A. This supplies the
-two source cohomology hypotheses below; it does not assert coherence or pseudo-coherence of Rp_*A.
-
-Let g be the comparison from V to W and let L be tensor pullback along g followed by
-W.ι, transported to the localized site of V. Tensor pullback is a left adjoint, hence
-additive; it preserves finite free modules with their ranks, as does the localized-site
-equivalence. For any bounded-above finite-free P representing Rp_*A after restriction
-to W, P is K-flat. Termwise tensor pullback therefore computes derived pullback.
-Relatively flat derived base change identifies this pullback with the original single
-image on V. Compose with open base change and the exact localized-site equivalence.
-To compare independent localizations, use their localization universal properties on
-Q and compute both direct images by the same K-injective resolution. This proves the
-comparison for every such P, without choosing P here. Empty U has no x; F=0 descends
-to zero A, and the same comparison applies. No arbitrary existence witness defines
-an object: all data below are used only in a theorem proof.
-(blueprint: lem-pc-proper-flat-single-open-noetherian-comparison). -/
+Source: Stacks Project, Tag 0A1H, approximation paragraph; Tags 081F, 08E5 and 08E7. -/
 theorem properFlat_single_open_noetherian_comparison
     {X S : Scheme.{u}} (f : X ⟶ S)
     [IsProper f] [LocallyOfFinitePresentation f] [QuasiCompact f]

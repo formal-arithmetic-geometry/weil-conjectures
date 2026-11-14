@@ -65,9 +65,6 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 set_option linter.privateModule false
 
 /-! # The two coefficient units present the same positive cyclic quotient
-
-Source: finite-reduction comparison in `det-lem-int-tensor-pullback.proof.md`.
-(blueprint: lem-sfb-integral-constant-cyclic-quotient).
 -/
 
 @[expose] public noncomputable section

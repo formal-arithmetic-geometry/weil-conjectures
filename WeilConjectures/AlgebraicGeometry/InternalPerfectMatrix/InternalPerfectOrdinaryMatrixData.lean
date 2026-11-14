@@ -25,8 +25,7 @@ import Mathlib.Algebra.Homology.HomologicalComplexLimits
 
 /-! # Explicit finite-matrix evaluation for ordinary perfect reductions
 
-Source: blueprint `proposition-local-structure-integral-constructible-complexes`, Compatible
-isomorphisms. All choices here are taken from proved finite-basis and finite-coefficient
+All choices here are taken from proved finite-basis and finite-coefficient
 equivalences.
 -/
 
@@ -44,13 +43,10 @@ attribute [local instance] AdicCompletion.ringMonoidalObject AdicCompletion.ring
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- Integral scalar ring. Source: blueprint Compatible isomorphisms.
-(blueprint: def-pe-internal-perfect-matrix-data). -/
+/-- Integral scalar ring. -/
 abbrev A := Padic.coefficientExtensionIntegers l E
 
-/-- Locally constant scalar modules in the universe of internal morphisms.
-Source: blueprint Compatible isomorphisms, constant quotient cochains and sections.
-(blueprint: def-pe-internal-perfect-matrix-data). -/
+/-- Locally constant scalar modules in the universe of internal morphisms. -/
 def sections (W : Scheme.{u}) : ModuleCat.{u} (A l E) ⥤ AddCommGrpCat.{u + 1} :=
   locallyConstantModuleFunctor (ConnectedComponents W) (A l E) ⋙
     ModuleCat.uliftFunctor.{u + 1, u} (A l E) ⋙
@@ -83,9 +79,7 @@ instance sections_preservesHomology (W : Scheme.{u}) :
   rw [dite_eq_left hx]
   exact (hex (y.down x) hx).choose_spec
 
-/-- The locally constant quotient Hom complex, before taking cohomology.
-Source: blueprint Compatible isomorphisms, finite matrix Hom cochains.
-(blueprint: def-pe-internal-perfect-matrix-data). -/
+/-- The locally constant quotient Hom complex, before taking cohomology. -/
 def quotientCochains (W : Scheme.{u})
     (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ) (n : ℕ) :
     CochainComplex AddCommGrpCat.{u + 1} ℤ :=
@@ -93,9 +87,7 @@ def quotientCochains (W : Scheme.{u})
     (Padic.scalarQuotient (Padic.coefficientExtensionUniformizer l E)
       (CochainComplex.moduleHomComplex P P) (n + 1))
 
-/-- The transition of locally constant quotient Hom cochains.
-Source: blueprint Compatible isomorphisms, reduction of each matrix entry.
-(blueprint: def-pe-internal-perfect-matrix-data). -/
+/-- The transition of locally constant quotient Hom cochains. -/
 def quotientStep (W : Scheme.{u})
     (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ) (n : ℕ) :
     quotientCochains l E W P (n + 1) ⟶ quotientCochains l E W P n :=
@@ -104,9 +96,7 @@ def quotientStep (W : Scheme.{u})
       (CochainComplex.moduleHomComplex P P) (n + 2) (n + 1)
       (Nat.succ_le_succ (Nat.le_succ n)))
 
-/-- Fixed integral bases, shared by every positive quotient level.
-Source: blueprint Compatible isomorphisms, choose bases in the perfect complex.
-(blueprint: def-pe-internal-perfect-matrix-data). -/
+/-- Fixed integral bases, shared by every positive quotient level. -/
 def basis (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ)
     (hfree : ∀ i, Module.Finite (A l E) (P.X i) ∧ Module.Free (A l E) (P.X i))
     (i : ℤ) : Module.Basis (Fin (Module.finrank (A l E) (P.X i))) (A l E) (P.X i) := by
@@ -114,18 +104,14 @@ def basis (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ)
   let := (hfree i).2
   exact Module.finBasis (A l E) (P.X i)
 
-/-- Monoidal inverse image of a regular module, with identity underlying map.
-Source: blueprint Compatible isomorphisms, realization of rank one.
-(blueprint: def-pe-internal-perfect-matrix-data). -/
+/-- Monoidal inverse image of a regular module, with identity underlying map. -/
 def mapRegular {C D : Type*} [Category* C] [Category* D]
     [MonoidalCategory C] [MonoidalCategory D] (F : C ⥤ D) [F.LaxMonoidal]
     (S : C) [MonObj S] :
     (F.mapMod S).obj (Mod.regular S) ≅ Mod.regular (F.obj S) :=
   Mod.isoMk (Iso.refl _) (by simp)
 
-/-- The scalar internal module of the scalar ring is its regular module.
-Source: blueprint Compatible isomorphisms, realization of rank one.
-(blueprint: def-pe-internal-perfect-matrix-data). -/
+/-- The scalar internal module of the scalar ring is its regular module. -/
 def scalarRegular :
     (FiniteConstantModel.scalarModules (A l E)).obj
         (ModuleCat.of (A l E) (ULift.{u + 1} (A l E))) ≅
@@ -136,9 +122,7 @@ def scalarRegular :
     intro a b
     rfl)
 
-/-- The normalized integral rank-one realization.
-Source: blueprint Compatible isomorphisms, realization of the coefficient ring.
-(blueprint: def-pe-internal-perfect-matrix-data). -/
+/-- The normalized integral rank-one realization. -/
 def integralRegular (W : Scheme.{u}) :
     letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
     (FiniteConstantModel.modelFunctor (A l E) W).obj
@@ -154,8 +138,7 @@ def integralRegular (W : Scheme.{u}) :
     mapRegular (upperStarFromPoint W) _
 
 /-- Realize those same bases in the integral coefficient module category.
-Source: blueprint Compatible isomorphisms; finite constant free realization.
-(blueprint: def-pe-internal-perfect-matrix-data). -/
+Source: finite constant free realization. -/
 def integralIso (W : Scheme.{u})
     (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ)
     (hfree : ∀ i, Module.Finite (A l E) (P.X i) ∧ Module.Free (A l E) (P.X i))
@@ -178,8 +161,7 @@ def integralIso (W : Scheme.{u})
     F.mapBiproduct _ ≪≫ biproduct.mapIso (fun _ ↦ integralRegular l E W)
 
 /-- The quotient basis is the extension of the fixed integral basis.
-Source: blueprint Compatible isomorphisms; ordinary quotient extension of finite sums.
-(blueprint: def-pe-internal-perfect-matrix-data). -/
+Source: ordinary quotient extension of finite sums. -/
 def quotientIso (W : Scheme.{u})
     (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ)
     (hfree : ∀ i, Module.Finite (A l E) (P.X i) ∧ Module.Free (A l E) (P.X i))
@@ -190,20 +172,14 @@ def quotientIso (W : Scheme.{u})
   exact Mod.regularFreeExtensionIso (AdicCompletion.quotient l E W n)
     (integralIso l E W P hfree i)
 
-/-- The positive integral quotient has discrete topology.
-Source: the uniformizer coset basis, blueprint finite quotient coefficients.
-(blueprint: def-pe-internal-perfect-matrix-data).
-Proof: the uniformizer ideal is open, and an additive quotient by an open subgroup
-is discrete. The existing finite-topology lemma performs the spectral-norm comparison. -/
+/-- The positive integral quotient has discrete topology. -/
 theorem finiteQuotient_discrete (n : ℕ) :
     letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
     DiscreteTopology (Padic.coefficientExtensionRing l E (n + 1)) :=
   FiniteModelQuotient.finiteTopology_discrete l E n
 
 /-- Locally constant functions on connected components are continuous discrete-valued
-functions on the original space, with the necessary coefficient universe lift.
-Source: blueprint Compatible isomorphisms, factorization through connected components.
-(blueprint: def-pe-internal-perfect-matrix-data). -/
+functions on the original space, with the necessary coefficient universe lift. -/
 def componentsContinuousEquiv (T : Type u) [TopologicalSpace T]
     (B : Type u) [CommRing B] [TopologicalSpace B] [DiscreteTopology B] :
     LocallyConstant (ConnectedComponents T) B ≃+* C(T, ULift.{u + 1} B) := by
@@ -232,9 +208,7 @@ def componentsContinuousEquiv (T : Type u) [TopologicalSpace T]
     rfl
 
 /-- The coefficient section comparison, bundled as a ring equivalence. It uses the
-normalized finite-discrete coefficient encoding and inverse terminal evaluation.
-Source: blueprint Compatible isomorphisms, finite constant sections.
-(blueprint: def-pe-internal-perfect-matrix-data). -/
+normalized finite-discrete coefficient encoding and inverse terminal evaluation. -/
 def coefficientRingEquiv (W : Scheme.{u}) (n : ℕ) :
     letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
     LocallyConstant (ConnectedComponents W) (Padic.coefficientExtensionRing l E (n + 1)) ≃+*
@@ -258,9 +232,7 @@ def coefficientRingEquiv (W : Scheme.{u}) (n : ℕ) :
       (InternalAbelianSheafModule.sectionGlobalEquiv (Scheme.ProEt.topology W)
         (AdicCompletion.finiteRing l E W n) U (Scheme.ProEt.isTerminalMkId W)).symm)))
 
-/-- A locally constant quotient scalar as a global section of the actual coefficient.
-Source: blueprint Compatible isomorphisms, finite constant sections.
-(blueprint: def-pe-internal-perfect-matrix-data). -/
+/-- A locally constant quotient scalar as a global section of the actual coefficient. -/
 def coefficientSection (W : Scheme.{u}) (n : ℕ)
     (z : LocallyConstant (ConnectedComponents W) (Padic.coefficientExtensionRing l E (n + 1))) :
     𝟙_ (Sheaf (Scheme.ProEt.topology W) Ab.{u + 1}) ⟶
@@ -268,12 +240,7 @@ def coefficientSection (W : Scheme.{u}) (n : ℕ)
   let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   exact (coefficientRingEquiv l E W n z).hom
 
-/-- Constant coefficient functions give the canonical constant scalar section.
-Source: blueprint Compatible isomorphisms, normalization of finite constant coefficients.
-(blueprint: def-pe-internal-perfect-matrix-data).
-Proof: the finite constant section comparison sends the constant-sheaf unit to a constant
-function. The constant-sheaf/forgetful comparison identifies the two units. Finally the
-normalization of the finite-discrete encoding sends that unit to the canonical scalar. -/
+/-- Constant coefficient functions give the canonical constant scalar section. -/
 theorem coefficientSection_const_eval (W : Scheme.{u}) (n : ℕ)
     (b : Padic.coefficientExtensionRing l E (n + 1)) :
     letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
@@ -328,9 +295,7 @@ theorem coefficientSection_const_eval (W : Scheme.{u}) (n : ℕ)
   rw [hu]
   exact e.normalization (op U) (ULift.up b)
 
-/-- Global multiplication identifies locally constant coefficients and regular endomorphisms.
-Source: blueprint Compatible isomorphisms, the rank-one matrix entry.
-(blueprint: def-pe-internal-perfect-matrix-data). -/
+/-- Global multiplication identifies locally constant coefficients and regular endomorphisms. -/
 def coefficientEndEquiv (W : Scheme.{u}) (n : ℕ) :
     letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
     LocallyConstant (ConnectedComponents W) (Padic.coefficientExtensionRing l E (n + 1)) ≃+*
@@ -339,9 +304,7 @@ def coefficientEndEquiv (W : Scheme.{u}) (n : ℕ) :
   exact (coefficientRingEquiv l E W n).trans
     (RingEquiv.ofBijective _ Mod.regularEndRingHom_bijective)
 
-/-- An integral matrix entry as a linear functional on Hom cochains.
-Source: blueprint Compatible isomorphisms, fixed bases in the perfect complex.
-(blueprint: def-pe-internal-perfect-matrix-data). -/
+/-- An integral matrix entry as a linear functional on Hom cochains. -/
 def integralEntry (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ)
     (hfree : ∀ i, Module.Finite (A l E) (P.X i) ∧ Module.Free (A l E) (P.X i))
     (q i j : ℤ) (hij : i + q = j)
@@ -361,10 +324,7 @@ def integralEntry (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ)
       (a • (f.v i j hij) ((basis l E P hfree i) s)) t = _
     simp
 
-/-- The uniformizer power vanishes in its specified coefficient quotient.
-Source: blueprint positive scalar quotient tower.
-(blueprint: def-pe-internal-perfect-matrix-data).
-Proof: its principal ideal is the specified power of the principal uniformizer ideal. -/
+/-- The uniformizer power vanishes in its specified coefficient quotient. -/
 theorem uniformizerPower_zero (n : ℕ) :
     Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1))
       ((Padic.coefficientExtensionUniformizer l E) ^ (n + 1)) = 0 := by
@@ -372,9 +332,7 @@ theorem uniformizerPower_zero (n : ℕ) :
   rw [Padic.coefficientExtensionIdeal, Ideal.span_singleton_pow]
   exact Ideal.subset_span (Set.mem_singleton _)
 
-/-- Reduction of an integral matrix entry to the positive scalar quotient.
-Source: blueprint Compatible isomorphisms, finite matrix coefficients.
-(blueprint: def-pe-internal-perfect-matrix-data). -/
+/-- Reduction of an integral matrix entry to the positive scalar quotient. -/
 def reducedEntry (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ)
     (hfree : ∀ i, Module.Finite (A l E) (P.X i) ∧ Module.Free (A l E) (P.X i))
     (n : ℕ) (q i j : ℤ) (hij : i + q = j)
@@ -386,10 +344,7 @@ def reducedEntry (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ)
     ((Ideal.Quotient.mkₐ (A l E) (Padic.coefficientExtensionIdeal l E (n + 1))).toLinearMap.comp
       (integralEntry l E P hfree q i j hij s t))
 
-/-- Reduced entries annihilate the uniformizer power acting on the Hom complex.
-Source: blueprint Compatible isomorphisms, entrywise quotient descent.
-(blueprint: def-pe-internal-perfect-matrix-data).
-Proof: linearity extracts the uniformizer power; its residue is zero. -/
+/-- Reduced entries annihilate the uniformizer power acting on the Hom complex. -/
 theorem reducedEntry_kills (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ)
     (hfree : ∀ i, Module.Finite (A l E) (P.X i) ∧ Module.Free (A l E) (P.X i))
     (n : ℕ) (q i j : ℤ) (hij : i + q = j)
@@ -404,9 +359,7 @@ theorem reducedEntry_kills (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ)
   rw [map_smul]
   rw [Algebra.smul_def, Ideal.Quotient.algebraMap_eq, uniformizerPower_zero, zero_mul]
 
-/-- A matrix entry on the actual quotient Hom complex, defined by cokernel descent.
-Source: blueprint Compatible isomorphisms, termwise scalar quotient.
-(blueprint: def-pe-internal-perfect-matrix-data). -/
+/-- A matrix entry on the actual quotient Hom complex, defined by cokernel descent. -/
 def quotientEntry (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ)
     (hfree : ∀ i, Module.Finite (A l E) (P.X i) ∧ Module.Free (A l E) (P.X i))
     (n : ℕ) (q i j : ℤ) (hij : i + q = j)
@@ -421,11 +374,7 @@ def quotientEntry (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ)
     cokernel.desc _ (reducedEntry l E P hfree n q i j hij s t)
       (reducedEntry_kills l E P hfree n q i j hij s t)
 
-/-- Quotient coordinates agree with reduced integral entries on the quotient projection.
-Source: blueprint Compatible isomorphisms, finite matrix quotient computation.
-(blueprint: def-pe-internal-perfect-matrix-data).
-Proof: the evaluation/cokernel comparison carries the quotient projection to the termwise
-cokernel projection; the cokernel descent equation then gives the specified entry. -/
+/-- Quotient coordinates agree with reduced integral entries on the quotient projection. -/
 theorem quotientEntry_projection (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ)
     (hfree : ∀ i, Module.Finite (A l E) (P.X i) ∧ Module.Free (A l E) (P.X i))
     (n : ℕ) (q i j : ℤ) (hij : i + q = j)
@@ -442,9 +391,7 @@ theorem quotientEntry_projection (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ
       𝟙 (CochainComplex.moduleHomComplex P P))) ≫ _) ≫ _ = _
   rw [PreservesCokernel.π_iso_hom, cokernel.π_desc]
 
-/-- The actual scalar quotient transition, viewed as an integral linear map.
-Source: blueprint Compatible isomorphisms, residue of each matrix entry.
-(blueprint: def-pe-internal-perfect-matrix-data). -/
+/-- The actual scalar quotient transition, viewed as an integral linear map. -/
 def scalarStep (n : ℕ) :
     ModuleCat.of (A l E) (Padic.coefficientExtensionRing l E (n + 2)) ⟶
       ModuleCat.of (A l E) (Padic.coefficientExtensionRing l E (n + 1)) :=
@@ -453,12 +400,7 @@ def scalarStep (n : ℕ) :
       Padic.coefficientExtensionIdeal l E (n + 1) from
         Ideal.pow_le_pow_right (Nat.le_succ (n + 1)))).toLinearMap
 
-/-- Quotient coordinates commute with the actual scalar quotient transition.
-Source: blueprint Compatible isomorphisms, entrywise successor reduction.
-(blueprint: def-pe-internal-perfect-matrix-data).
-Proof: precompose by the epimorphic higher quotient projection. The scalar quotient
-transition takes this projection to the lower one. Both coordinate descents become the
-same reduced integral entry, since the ring factor map takes a residue to its residue. -/
+/-- Quotient coordinates commute with the actual scalar quotient transition. -/
 theorem quotientEntry_step (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ)
     (hfree : ∀ i, Module.Finite (A l E) (P.X i) ∧ Module.Free (A l E) (P.X i))
     (n : ℕ) (q i j : ℤ) (hij : i + q = j)
@@ -489,9 +431,7 @@ theorem quotientEntry_step (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ)
 /-- The explicit finite matrix attached to a locally constant quotient Hom cochain.
 Each entry descends its integral basis coordinate through the actual cokernel,
 then forms its actual coefficient section. No chain-map or
-bijectivity property is assumed in this construction.
-Source: blueprint Compatible isomorphisms, finite matrix evaluation.
-(blueprint: def-pe-internal-perfect-matrix-data). -/
+bijectivity property is assumed in this construction. -/
 def evaluate (W : Scheme.{u})
     (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ)
     (hfree : ∀ i, Module.Finite (A l E) (P.X i) ∧ Module.Free (A l E) (P.X i))
@@ -526,10 +466,7 @@ private theorem matrix_add {C : Type*} [Category* C] [Preadditive C]
   ext i j
   simp [biproduct.matrix, Preadditive.comp_add, Preadditive.add_comp]
 
-/-- Matrix evaluation takes the zero quotient cochain to zero.
-Source: blueprint Compatible isomorphisms, linear matrix evaluation.
-(blueprint: def-pe-internal-perfect-matrix-data).
-Proof: each quotient coordinate, coefficient ring equivalence and biproduct matrix is additive. -/
+/-- Matrix evaluation takes the zero quotient cochain to zero. -/
 theorem evaluate_zero (W : Scheme.{u})
     (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ)
     (hfree : ∀ i, Module.Finite (A l E) (P.X i) ∧ Module.Free (A l E) (P.X i))
@@ -551,11 +488,7 @@ theorem evaluate_zero (W : Scheme.{u})
   rw [matrix_zero]
   simp only [Limits.comp_zero, Limits.zero_comp]
 
-/-- Matrix evaluation is additive on quotient cochains.
-Source: blueprint Compatible isomorphisms, linear matrix evaluation.
-(blueprint: def-pe-internal-perfect-matrix-data).
-Proof: linear quotient coordinates commute with addition pointwise. The coefficient
-ring equivalence and biproduct matrix operation preserve these sums, as does conjugation. -/
+/-- Matrix evaluation is additive on quotient cochains. -/
 theorem evaluate_add (W : Scheme.{u})
     (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ)
     (hfree : ∀ i, Module.Finite (A l E) (P.X i) ∧ Module.Free (A l E) (P.X i))
@@ -580,9 +513,7 @@ theorem evaluate_add (W : Scheme.{u})
   simp_rw [ha, map_add, End.add_asHom]
   rw [matrix_add, Preadditive.add_comp, Preadditive.comp_add]
 
-/-- The explicit degreewise matrix evaluation as a homomorphism of abelian groups.
-Source: blueprint Compatible isomorphisms, Hom cochain comparison before its differential.
-(blueprint: def-pe-internal-perfect-matrix-data). -/
+/-- The explicit degreewise matrix evaluation as a homomorphism of abelian groups. -/
 def evaluationHom (W : Scheme.{u})
     (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ)
     (hfree : ∀ i, Module.Finite (A l E) (P.X i) ∧ Module.Free (A l E) (P.X i))
@@ -596,8 +527,7 @@ def evaluationHom (W : Scheme.{u})
       map_add' := fun z w ↦ evaluate_add l E W P hfree n q z.down w.down }
 
 /-- Successor scalar extension on the full signed Hom complex, with the specified
-ordinary balancing maps. Source: blueprint Compatible isomorphisms, successor reductions.
-(blueprint: def-pe-internal-perfect-matrix-data). -/
+ordinary balancing maps. -/
 def successorMap (W : Scheme.{u})
     (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ) (n : ℕ) :
     CochainComplex.HomComplex (internalPerfectOrdinaryReduction l E W P (n + 1))

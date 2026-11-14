@@ -143,8 +143,7 @@ principal chart, compatible with the matching numerator.
 Source: Stacks Project, Tags 0BLH and 05ER, localized affine chart comparison.
 The proof identifies the matching ring with the formal-gluing `H⁰` module,
 applies the localization comparison, and transports its inverse through the
-affine section identifications.
-(blueprint: new-lem-sbc-punctured-matching-chart-restriction-ring-equiv) -/
+affine section identifications. -/
 theorem puncturedMatching_chart_restriction_ringEquiv
     {A : Type u} [CommRing A] [IsNoetherianRing A] [IsLocalRing A]
     {U : (Spec (.of A)).Opens}

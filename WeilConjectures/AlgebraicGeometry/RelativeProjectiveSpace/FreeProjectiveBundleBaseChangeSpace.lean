@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.RelativeProj.Universal
 
 /-! # Free projective bundles and base-change projective space
 
-Source: Stacks Project, Constructions, Tags 01NF and 01O3; Morphisms, Tag 087S
-(blueprint: lem-trf-free-projective-bundle-base-change-space).
+Source: Stacks Project, Constructions, Tags 01NF and 01O3; Morphisms, Tag 087S.
 
 The local normalization uses the recorded polynomial equivalence for the symmetric
 algebra, followed by coefficient extension from the integral polynomial ring. Equality
@@ -46,8 +45,7 @@ namespace AlgebraicGeometry.RelativeProjectiveSpace
 /-- The integral polynomial map on an affine base: extend coefficients, fix the ordered
 variables, and apply the inverse of the symmetric-algebra polynomial identification.
 Thus `T_i` maps to `j_F(e_i)` and integers map by the structural unit.
-Source: Stacks Project, Tags 01NF and 01O3
-(blueprint: lem-trf-free-projective-bundle-base-change-space). -/
+Source: Stacks Project, Tags 01NF and 01O3. -/
 def integralPolynomialMap (S : Scheme.{u}) (r : ℕ) (V : S.affineOpens) :
     MvPolynomial (ULift.{u} (Fin (r + 1))) (ULift.{u} ℤ) →+* (algebra S r).sections V :=
   (affinePolynomialEquiv S r V).toRingHom.comp
@@ -60,8 +58,7 @@ def integralPolynomialMap (S : Scheme.{u}) (r : ℕ) (V : S.affineOpens) :
 ordered symmetric generators. The irrelevant-ideal condition is an existential witness
 for the prescribed map, not an extra hypothesis on the base. `Proj.map` carries exactly
 the standard degree-zero homogeneous-localization formulas.
-Source: Stacks Project, Tags 01NF, 01O3 and 01N2
-(blueprint: lem-trf-free-projective-bundle-base-change-space). -/
+Source: Stacks Project, Tags 01NF, 01O3 and 01N2. -/
 def IsIntegralProjComparison (S : Scheme.{u}) (r : ℕ) (V : S.affineOpens)
     (f : (algebra S r).localProj V ⟶
       Proj.projectiveSpaceOverAffine (ULift.{u} (Fin (r + 1))) (ULift.{u} ℤ)) : Prop :=
@@ -78,8 +75,7 @@ def IsIntegralProjComparison (S : Scheme.{u}) (r : ℕ) (V : S.affineOpens)
 /-- Restrict a global comparison to the affine relative-Proj model and project to the
 integral Proj. Together with the structural map to `V`, this determines its map to the
 base-change projective space over `V` by the fibre-product universal property.
-Source: Stacks Project, Tags 01NF and 01O3
-(blueprint: lem-trf-free-projective-bundle-base-change-space). -/
+Source: Stacks Project, Tags 01NF and 01O3. -/
 def affineToIntegral (S : Scheme.{u}) (r : ℕ)
     (θ : scheme S r ≅ ProjectiveSpace (ULift.{u} (Fin (r + 1))) S)
     (V : S.affineOpens) :
@@ -431,34 +427,7 @@ private theorem local_comparison_eq (S : Scheme.{u}) (r : ℕ)
 /-- The symmetric-algebra relative projective space is canonically the base change of
 integral projective space. On every affine open it is the Proj map of the standard
 symmetric-algebra polynomial equivalence, compatibly with base restriction.
-Source: Stacks Project, Constructions, Tags 01NF and 01O3; Morphisms, Tag 087S
-(blueprint: lem-trf-free-projective-bundle-base-change-space).
-
-Proof:
-1. On an affine open V, the quasi-coherent symmetric-algebra comparison and
-SymmetricAlgebra.equivMvPolynomial give the recorded affinePolynomialEquiv, sending
-T_i to j_F(e_i). Symmetric degree is total degree, by the symmetric-algebra grading.
-On a smaller affine open W the restriction sends each generator to the same generator
-and restricts only coefficients. Polynomial extensionality gives the last equation.
-2. Identify R tensor_Z Z[T] with R[T] by c tensor p mapping to c*p. Its inverse sends
-coefficients to c tensor 1 and variables to 1 tensor T_i. Both composites fix these
-algebra generators; this is a graded isomorphism commuting with restriction.
-3. Apply lem-nagata-affine-proj-scalar-extension to this graded isomorphism and the
-recorded affinePolynomialEquiv. The resulting map is the Proj map of
-integralPolynomialMap, with its irrelevant-ideal witness. Its square over Spec Z is
-cartesian, hence it identifies the affine relative-Proj model with V times_Z Proj Z[T].
-The relative-Proj restrictionIso identifies that model with the inverse image of V.
-4. On nested affine opens the localization formula a/T_i^m maps to
-psi(a)/j_F(e_i)^m and commutes with restriction. These charts cover, since the
-coordinates generate the irrelevant ideal. Scheme morphism gluing gives equality
-of the local comparisons. Refine arbitrary intersections by affine opens, using
-lem-weil-pbc-affine-opens-basis, and glue the maps to the integral Proj. Their pair
-with π gives θ into the fibre product, with the required structure equation.
-5. The local inverses agree on overlaps and glue to an inverse. The composites are
-identities locally, hence globally by scheme morphism gluing. The prescribed local
-Proj formulas determine the integral projection uniquely; π determines the other
-projection. Fibre-product uniqueness therefore gives uniqueness of θ. No affine
-intersection or finiteness hypothesis on S is used. -/
+Source: Stacks Project, Constructions, Tags 01NF and 01O3; Morphisms, Tag 087S. -/
 theorem existsUnique_freeProjectiveBundleBaseChangeSpace (S : Scheme.{u}) (r : ℕ) :
     ∃! θ : scheme S r ≅ ProjectiveSpace (ULift.{u} (Fin (r + 1))) S,
       (θ.hom ≫ ProjectiveSpace (ULift.{u} (Fin (r + 1))) S ↘ S = π S r) ∧

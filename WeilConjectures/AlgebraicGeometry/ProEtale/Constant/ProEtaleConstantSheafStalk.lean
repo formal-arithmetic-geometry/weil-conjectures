@@ -23,9 +23,8 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleSheafificationGeometri
 /-!
 # Stalks of constant module sheaves on the pro-etale site
 
-Source: Bhatt--Scholze, The pro-etale topology for schemes, Sections 6.5 and 6.8;
-Stacks Project, Tags 0F6B, 0F6C, 00Y8(3), and 03CY
-(blueprint: lem-weil-proetale-constant-sheaf-stalk).
+Source: Bhatt--Scholze, The pro-etale topology for schemes, Sections 6.5 and 6.8; Stacks Project,
+Tags 0F6B, 0F6C, 00Y8(3), and 03CY.
 
 The additive germ map is specified by the actual sheafification unit and the
 coprojection at `(Y,y)`. Scalar compatibility uses the constant-ring germ map;
@@ -42,15 +41,13 @@ namespace AlgebraicGeometry.Scheme
 
 variable {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
 
-/-- The pointed neighbourhood `(Y,y)`. Source: Stacks Project, before Tag 0F6B
-(blueprint: lem-weil-proetale-constant-sheaf-stalk). -/
+/-- The pointed neighbourhood `(Y,y)`. Source: Stacks Project, before Tag 0F6B. -/
 noncomputable def proEtaleConstantGermNeighbourhood (y : Spec (.of Ω) ⟶ Y) :
     ProEtaleGeometricNeighbourhood y :=
   StructuredArrow.mk (Y := ProEt.mk (𝟙 Y)) (Over.homMk y (Category.comp_id y))
 
 /-- The coefficient homomorphism sending a scalar to its constant germ at `(Y,y)`.
-Source: Stacks Project, Tags 00Y8(3), 03CY
-(blueprint: lem-weil-proetale-constant-sheaf-stalk). -/
+Source: Stacks Project, Tags 00Y8(3), 03CY. -/
 noncomputable def proEtaleConstantRingGerm (y : Spec (.of Ω) ⟶ Y)
     (A : Type u) [CommRing A] :
     ULift.{u + 1, u} A →+* proEtaleGeometricStalkRing y
@@ -66,8 +63,7 @@ noncomputable def proEtaleConstantRingGerm (y : Spec (.of Ω) ⟶ Y)
 
 /-- The canonical additive germ map: sheafify a constant section, then take its
 class in the pointed-neighbourhood colimit at `(Y,y)`.
-Source: Stacks Project, Tags 00Y8(3), 03CY
-(blueprint: lem-weil-proetale-constant-sheaf-stalk). -/
+Source: Stacks Project, Tags 00Y8(3), 03CY. -/
 noncomputable def proEtaleConstantModuleGerm (y : Spec (.of Ω) ⟶ Y)
     (A : Type u) [CommRing A] (M : ModuleCat.{u + 1} (ULift.{u + 1, u} A)) :
     M →+ proEtaleGeometricModuleStalk y
@@ -84,27 +80,7 @@ noncomputable def proEtaleConstantModuleGerm (y : Spec (.of Ω) ⟶ Y)
 /-- The canonical constant-section map is an isomorphism of coefficient modules:
 it is an additive bijection and respects scalars via the constant-ring germ map.
 Consequently its stalk is finite whenever the constant module is finite.
-Source: Bhatt--Scholze, Sections 6.5, 6.8; Stacks Project, Tags 0F6B, 0F6C,
-00Y8(3), 03CY (blueprint: lem-weil-proetale-constant-sheaf-stalk).
-
-Proof: (1) The module-sheafification interface identifies the underlying abelian
-sheaf and its unit with abelian sheafification, with the sheafified scalar action
-(`lem-pc-sites-module-sheafification-interface`).
-(2) The opposite pointed-neighbourhood category is nonempty and filtered, hence
-connected (`def-weil-proetale-geometric-stalk`). Its constant diagram has colimit M;
-the coprojection at `(Y,y)` is an isomorphism
-(`definition-torsion-sheaves--3`).
-(3) Sheafification preserves this geometric stalk, by lifting geometric points to
-covers (0F6C) and compatibility with fibre products, then 00Y8(3)
-(`lem-cbc-proetale-sheafification-geometric-stalk`). Composing the constant-diagram
-coprojection with the map induced by the actual unit gives exactly the germ map
-above, so that map is bijective.
-(4) Represent a scalar and module section together at `(Y,y)`. The module unit
-sends `a • m` to the product of the ring-unit image of `a` with the module-unit
-image of `m`. The common-refinement stalk action preserves this equality. Thus
-the additive bijection is coefficient-linear. Its inverse respects addition and
-scalar multiplication by injectivity, so it is a module isomorphism. Transporting
-a finite underlying set across this bijection proves the last assertion. -/
+Source: Bhatt--Scholze, Sections 6.5, 6.8; Stacks Project, Tags 0F6B, 0F6C, 00Y8(3), 03CY. -/
 theorem proEtaleConstantModuleGerm_bijective (y : Spec (.of Ω) ⟶ Y)
     (A : Type u) [CommRing A] (M : ModuleCat.{u + 1} (ULift.{u + 1, u} A)) :
     Function.Bijective (proEtaleConstantModuleGerm y A M) ∧

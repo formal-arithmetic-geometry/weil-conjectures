@@ -16,7 +16,7 @@ import WeilConjectures.CategoryTheory.FiniteOpenMixedTensorRepresentativeCounitT
 /-!
 # The forward cochain tensor counit square for general coefficients
 
-Source: Stacks Project, sites-cohomology.tex, Tag 07A4, tensor pullback comparison.
+Source: Stacks Project, Tag 07A4, tensor pullback comparison.
 This is the coefficient-generic form of
 `AlgebraicGeometry.ProEtale.MixedRepForward.forward_transport`; stating it for an
 abstract coefficient category keeps elaboration and kernel checking cheap.
@@ -85,8 +85,7 @@ quotients of `P` and `Q`. Expand the two counits and combine their whiskered com
 into a tensor of morphisms. The cochain tensorators equal the homotopy tensorators by
 `cochainLocalization_tensorator_eq`; the homotopy oplax comparison is the quotient of
 the signed-total cochain comparison. Finally `leftDerivedFactors_eq_counit` identifies
-each pullback counit with its exact-derived factors. No tensorator is inverted.
-(blueprint: lem-sf-finite-open-mixed-tensor-representative-forward-transport) -/
+each pullback counit with its exact-derived factors. No tensorator is inverted. -/
 theorem forward_transport_general
     (P Q : CochainComplex ShX ℤ) :
     ((AlgebraicGeometry.ProEtale.leftDerivedUpperStarTensorNatIso

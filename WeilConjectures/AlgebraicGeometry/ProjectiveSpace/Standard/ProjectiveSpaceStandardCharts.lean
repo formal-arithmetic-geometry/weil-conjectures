@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Standard.ProjectiveSpac
 /-!
 # Standard charts and coordinate sections of projective space
 
-Source: Stacks Project, Tags 01NG, 01MV, 01MS, 01ND, 01JR and 01I4
-(blueprint: lem-weil-pbc-projective-space-standard-charts).
+Source: Stacks Project, Tags 01NG, 01MV, 01MS, 01ND, 01JR and 01I4.
 -/
 
 @[expose] public section

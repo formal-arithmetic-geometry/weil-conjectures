@@ -13,8 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.TensorO
 
 When the basic opens `D₊(f)` of the homogeneous elements of degree `1` cover `Proj 𝒜`, the
 local isomorphisms `fᵃ ⊗ fᵇ ↦ fᵃ⁺ᵇ` glue to an isomorphism
-`AlgebraicGeometry.Proj.twistTensorIso : 𝒪(a) ⊗ 𝒪(b) ≅ 𝒪(a + b)` (blueprint
-`theorem-riemann-roch-coherent-serre-duality`), refining
+`AlgebraicGeometry.Proj.twistTensorIso: 𝒪(a) ⊗ 𝒪(b) ≅ 𝒪(a + b)`, refining
 `AlgebraicGeometry.Proj.nonempty_tensorObj_twist_iso`.
 -/
 
@@ -73,9 +72,7 @@ the homogeneous elements `f` of degree `1` cover `Proj 𝒜`: the isomorphism wh
 each `D₊(f)` sends the free generator `fᵃ ⊗ fᵇ` to the free generator `fᵃ⁺ᵇ`
 (`twistTensorIso_hom_app_tmulSection`). It is glued from these local isomorphisms, which agree
 on overlaps because the transition functions of both sides are the same
-(`twistTensor_transition`).
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality`) -/
+(`twistTensor_transition`). -/
 noncomputable def twistTensorIso (h : ∀ x : Proj 𝒜, ∃ f ∈ 𝒜 1, x ∈ Proj.basicOpen 𝒜 f)
     (a b : ℤ) : twist 𝒜 a ⊗ twist 𝒜 b ≅ twist 𝒜 (a + b) :=
   (isoOfIsFreeGenerator (iSup_basicOpen_degOne_eq_top h)
@@ -86,9 +83,7 @@ noncomputable def twistTensorIso (h : ∀ x : Proj 𝒜, ∃ f ∈ 𝒜 1, x ∈
 
 /-- **Local basis property of `twistTensorIso`**: on `D₊(f)`, for `f` homogeneous of degree
 `1`, the canonical isomorphism `𝒪(a) ⊗ 𝒪(b) ≅ 𝒪(a + b)` sends `fᵃ ⊗ fᵇ` to `fᵃ⁺ᵇ`, i.e.
-`e^{(a)} ⊗ e^{(b)} ↦ e^{(a+b)}`.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality`) -/
+`e^{(a)} ⊗ e^{(b)} ↦ e^{(a+b)}`. -/
 lemma twistTensorIso_hom_app_tmulSection
     (h : ∀ x : Proj 𝒜, ∃ f ∈ 𝒜 1, x ∈ Proj.basicOpen 𝒜 f) (a b : ℤ) {f : A} (hf : f ∈ 𝒜 1) :
     (twistTensorIso 𝒜 h a b).hom.app (Proj.basicOpen 𝒜 f)
@@ -101,9 +96,7 @@ lemma twistTensorIso_hom_app_tmulSection
     (twistTensor_transition a b) ⟨f, hf⟩
 
 /-- **Local description of `twistTensorIso`**: on an open `W ⊆ D₊(f)`, for `f` homogeneous of
-degree `1`, the canonical isomorphism sends `r • (fᵃ ⊗ fᵇ)|_W` to `r • fᵃ⁺ᵇ|_W`.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality`) -/
+degree `1`, the canonical isomorphism sends `r • (fᵃ ⊗ fᵇ)|_W` to `r • fᵃ⁺ᵇ|_W`. -/
 lemma twistTensorIso_hom_app_smul
     (h : ∀ x : Proj 𝒜, ∃ f ∈ 𝒜 1, x ∈ Proj.basicOpen 𝒜 f) (a b : ℤ) {f : A} (hf : f ∈ 𝒜 1)
     {W : (Proj 𝒜).Opens} (hW : W ≤ Proj.basicOpen 𝒜 f) (r : Γ(Proj 𝒜, W)) :

@@ -20,7 +20,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- A local section induces a local retraction of the transpose.
 
 Source: Stacks Project, Tag 0EKP, proof of (2) to (3), transpose compatibility.
-(blueprint: new-sbc-dual-retraction-of-local-section)
 
 Transport the given section through `overFunctorEquiv` to the over category.
 `SheafOfModules.overHomObjIso` identifies the restricted duals with the internal Homs

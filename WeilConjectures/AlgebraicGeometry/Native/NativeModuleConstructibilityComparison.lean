@@ -163,9 +163,7 @@ import WeilConjectures.SixFunctors.ProEtale.Adic.ExtensionByZero
 
 /-! # Native modules, scalar local models, and bounded constructibility
 
-Source: blueprint, prose-10-20, internal-Hom paragraph, and
-definition-constructible-sheaves, clauses 1--2; Stacks 03CW, 03CY, 03EK and 05RU.
-(blueprint: lem-sf-weil-verdier-module-constructibility-comparison).
+Source: Stacks 03CW, 03CY, 03EK and 05RU.
 
 The ordinary category is the existing sectionwise module category of the reconstructed
 ring sheaf of R_T. Its existing internal-module equivalence fixes that reconstruction.
@@ -188,29 +186,24 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- The normalized coefficient realization, chosen from its already recorded theorem.
 Its finite-field normalization uniquely determines the underlying ring isomorphism.
-Source: coefficient-ring realization preceding the module comparison
-(blueprint: lem-sf-weil-verdier-module-constructibility-comparison). -/
+Source: coefficient-ring realization preceding the module comparison. -/
 abbrev nativeModuleCoefficientIso (ℓ : ℕ) [Fact ℓ.Prime] (T : Scheme.{u}) :=
   (locallyFiniteCoefficientRing_realization ℓ).choose T
 
-/-- The chosen realization is a ring morphism, by the existing realization theorem.
-Source: the ring-transport clause of the module comparison
-(blueprint: lem-sf-weil-verdier-module-constructibility-comparison). -/
+/-- The chosen realization is a ring morphism, by the existing realization theorem. -/
 instance nativeModuleCoefficientIso_isMonHom (ℓ : ℕ) [Fact ℓ.Prime] (T : Scheme.{u}) :
     IsMonHom (nativeModuleCoefficientIso ℓ T).hom :=
   (locallyFiniteCoefficientRing_realization ℓ).choose_spec.1 T
 
 /-- The existing equivalence with sectionwise R_T-modules; no new module category is made.
-Source: Stacks 03CW, internal/sectionwise presentation in the module comparison
-(blueprint: lem-sf-weil-verdier-module-constructibility-comparison). -/
+Source: Stacks 03CW. -/
 abbrev nativeOrdinaryPresentation (ℓ : ℕ) [Fact ℓ.Prime] (T : Scheme.{u}) :=
   InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u}
     (Scheme.ProEt.topology T)
     (condensedRingObj (Profinite.padicAlgClRingObj ℓ) T)
 
 /-- Ordinary, sectionwise module sheaves over R_T, using its reconstructed ring sheaf.
-Source: Stacks 03CW, ordinary presentation in the module comparison
-(blueprint: lem-sf-weil-verdier-module-constructibility-comparison). -/
+Source: Stacks 03CW, ordinary presentation in the module comparison. -/
 abbrev NativeOrdinaryModules (ℓ : ℕ) [Fact ℓ.Prime] (T : Scheme.{u}) :=
   ringedSiteModules.{u + 1, u + 1, u, u + 1} ((sheafCompose (Scheme.ProEt.topology T)
     (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
@@ -219,24 +212,20 @@ abbrev NativeOrdinaryModules (ℓ : ℕ) [Fact ℓ.Prime] (T : Scheme.{u}) :=
         (condensedRingObj (Profinite.padicAlgClRingObj ℓ) T)))
 
 /-- The ordinary derived localization in the larger chosen universe.
-Source: Stacks 05RU and the size convention in the module comparison
-(blueprint: lem-sf-weil-verdier-module-constructibility-comparison). -/
+Source: Stacks 05RU and the size convention in the module comparison. -/
 instance nativeOrdinaryModules_hasDerivedCategory (ℓ : ℕ) [Fact ℓ.Prime]
     (T : Scheme.{u}) : HasDerivedCategory.{u + 2} (NativeOrdinaryModules ℓ T) :=
   HasDerivedCategory.standard _
 
 /-- Forget scalar linearity, transport the action along theta, and read it on sections.
 Thus r acts by theta(r), with the original abelian sheaf and restriction maps.
-Source: module comparison, transport and restriction-of-scalars clauses
-(blueprint: lem-sf-weil-verdier-module-constructibility-comparison). -/
+Source: module comparison, transport and restriction-of-scalars clauses. -/
 abbrev nativeToOrdinaryModules (ℓ : ℕ) [Fact ℓ.Prime] (T : Scheme.{u}) :
     AdicSheaf ℓ T ⥤ NativeOrdinaryModules ℓ T :=
   AdicSheaf.forgetAb ℓ T ⋙ Mod.comap (nativeModuleCoefficientIso ℓ T).hom ⋙
     (nativeOrdinaryPresentation ℓ T).functor
 
-/-- Restriction in the ordinary presentation is the existing coefficient-module pullback.
-Source: blueprint definition-constructible-sheaves, opening restriction convention
-(blueprint: lem-sf-weil-verdier-module-constructibility-comparison). -/
+/-- Restriction in the ordinary presentation is the existing coefficient-module pullback. -/
 abbrev ordinaryModuleRestriction (ℓ : ℕ) [Fact ℓ.Prime]
     {S T : Scheme.{u}} (h : S ⟶ T) :
     NativeOrdinaryModules ℓ T ⥤ NativeOrdinaryModules ℓ S :=
@@ -244,9 +233,7 @@ abbrev ordinaryModuleRestriction (ℓ : ℕ) [Fact ℓ.Prime]
     CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) h ⋙
       (nativeOrdinaryPresentation ℓ S).functor
 
-/-- The finite scalar model, expressed in the ordinary sectionwise presentation.
-Source: blueprint local-model clause, R_V tensor P over the scalar constant sheaf
-(blueprint: lem-sf-weil-verdier-module-constructibility-comparison). -/
+/-- The finite scalar model, expressed in the ordinary sectionwise presentation. -/
 abbrev ordinaryScalarModel (ℓ : ℕ) [Fact ℓ.Prime] (T : Scheme.{u})
     (P : Mod Ab.{u + 1} (scalarRingObj (Profinite.padicAlgClRingObj ℓ))) :
     NativeOrdinaryModules ℓ T :=
@@ -672,42 +659,7 @@ private theorem nativeConstructibility (ℓ : ℕ) [Fact ℓ.Prime]
 
 /-- The native/ordinary comparison, including its normalization, exactness, restrictions,
 finite scalar models on the same covers, constructibility, and derived support intervals.
-Source: blueprint prose-10-20, internal-Hom realization paragraph;
-definition-constructible-sheaves clauses 1--2; native Adic/Module.lean and Constructible.lean;
-Stacks 03CW, 03CY, 03EK and 05RU.
-(blueprint: lem-sf-weil-verdier-module-constructibility-comparison).
-
-Proof:
-1. Use the normalized coefficient isomorphism from locallyFiniteCoefficientRing_realization.
-   The point scalar ring is the lifted algebraic closure: its elements are constant functions,
-   and each scalar belongs to its finite simple extension. The existing regular-extension
-   comparison identifies scalar extension along this map with the native coefficient algebra.
-2. The scalar-forgetting equivalence recovers ambient scalars by restricting the abelian ring
-   action to the algebra unit. Its action is scalar bilinear, so factors through the scalar
-   tensor product; monoidal sheafification constructs the native internal action. The unit
-   and associativity identities and full faithfulness are checked on elementary tensors.
-   Compose this equivalence with coefficient transport and sectionModuleEquivalence.
-3. These functors are additive and leave abelian sheaves and maps unchanged. Equivalences
-   preserve finite limits and finite colimits, including kernels and sheafified cokernels,
-   in both directions. No sectionwise cokernel claim is used.
-4. Forgetting ambient scalars commutes with native direct image. Naturality of the normalized
-   coefficient isomorphism and the module-composition comparisons identify the transported
-   direct images. Conjugate this isomorphism under the two inverse-image adjunctions and
-   comparison equivalences, and cancel their units and counits. This gives a natural
-   restriction isomorphism for every scheme morphism, hence for strata and cover members.
-5. A finitely presented point-scalar module is a finite-dimensional vector space. A finite
-   basis identifies it with a finite free module, and scalar extension identifies its local
-   model with the corresponding native finite free module. Conversely choose the finite
-   free scalar module of the prescribed rank. This includes rank zero and empty sums.
-6. T is qcqs. The native qcqs-stratification lemma identifies native constructibility with
-   finite global stratifications. Apply the restriction and finite-model comparisons on
-   each prescribed stratum and cover member. Shrink native lisse covers using smallness of
-   the pro-etale precoverage. The same stratification and cover work in both directions,
-   with rank allowed to vary by member; the empty scheme admits the empty stratification.
-7. The exact equivalence induces the ordinary derived equivalence, the localization-functor
-   comparison, and the cohomology comparisons. An equivalence preserves and reflects zero,
-   so every cohomological support interval is preserved in both directions. Combine the
-   derived boundedness comparisons with step 6 in each cohomological degree. -/
+Source: Stacks 03CW, 03CY, 03EK and 05RU. -/
 theorem nativeModuleConstructibilityComparison
     (k₀ k : Type u) [Field k₀] [Finite k₀] [Field k] [Algebra k₀ k]
     [IsAlgClosure k₀ k] (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : ℓ ≠ ringChar k₀)

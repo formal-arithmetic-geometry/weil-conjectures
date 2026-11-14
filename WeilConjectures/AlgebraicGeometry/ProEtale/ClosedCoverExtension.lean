@@ -48,7 +48,7 @@ noncomputable def closedLiftCoverHom :
 
 variable [∀ a, Algebra (B ⧸ J) (C a)] [∀ a, IsScalarTower B (B ⧸ J) (C a)]
 
-/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme`: let `W = Spec B` be affine
+/-- let `W = Spec B` be affine
 and `Z_W = V(J)` closed with quasi-compact complement. A finite covering of `Z_W` by affine
 ind-étale `Spec C̄_a` extends to a finite pro-étale covering of `W` whose members over the closed
 fibre are the lifts `v_W(Spec C̄_a) = Spec H_B(C̄_a)` (`Algebra.ClosedLift`), and whose other

@@ -24,10 +24,7 @@ import Mathlib.CategoryTheory.Monad.Adjunction
 /-!
 # Normalized locally closed extensions with arbitrary pro-etale coefficients
 
-Source: Stacks Project, proetale.tex, Tags 09AA, 09BM, 09BN and 09AH;
-sites-modules.tex, Tags 03DI and 03DJ; schemes.tex, Tag 02V0;
-blueprint main-20261015, proposition-six-operations-change-coefficients, proof (2)
-(blueprint: lem-sfb-locally-closed-extension-coherence).
+Source: Stacks Project, Tags 09AA, 09BM, 09BN and 09AH; Tags 03DI and 03DJ; Tag 02V0.
 
 The structures below package the witnesses in this single coherence assertion.
 They do not choose a functor from a mere existence theorem. The only categories and

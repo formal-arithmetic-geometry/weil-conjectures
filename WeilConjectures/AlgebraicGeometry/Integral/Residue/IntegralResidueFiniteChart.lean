@@ -18,7 +18,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-! # Finite perfect charts under normalized residue coefficients
 
 Source: Bhatt--Scholze, Lemma 6.5.8(1) and Proposition 6.6.11.
-(blueprint: lem-weil-pbc-integral-residue-finite-chart).
 -/
 
 @[expose] public noncomputable section
@@ -235,26 +234,7 @@ private def residueSliceIso
 
 /-- A single constant finite perfect chart stays constant after coefficient transport.
 No completed object, covering, or propagation to smaller slices is involved.
-Source: Bhatt--Scholze, Lemma 6.5.8(1), Proposition 6.6.11
-(blueprint: lem-weil-pbc-integral-residue-finite-chart).
-
-Proof: ULift.down and the ideal identification supplied by c give a ring equivalence
-between the large finite quotient and the small quotient, using hd. Represent P by a bounded
-finite-projective complex and transport each term along this equivalence, shrinking
-its module universe. Finite projective modules are retracts of finite free modules,
-so their lifted underlying types are small; the retract descriptions transport
-finite generation and projectivity. Transport the differentials and their square-zero
-equations, obtaining P' and its perfectness. Constant presheaves commute with this
-scalar equivalence termwise. The same is true after sheafification by its universal
-property, and c.finite_constants fixes the comparison with the function sheaf to be
-exactly residueLisseConstantComparison. The canonical equivalence between the small
-pro-etale site of Y.left and the slice over (toProEt S).obj Y identifies the finite
-inverse image along Y.hom with restriction to this slice. The composite inverse image
-comparison identifies the pullback along Y.hom followed by g with that along their
-composite. Scalar restriction and the slice functor are exact. Localize the termwise
-comparisons and compose with eP and the representative isomorphisms to obtain the
-asserted slice isomorphism. Zero perfect complexes, empty charts, and complexes with
-nonzero differentials are included. -/
+Source: Bhatt--Scholze, Lemma 6.5.8(1), Proposition 6.6.11. -/
 theorem integralResidueFiniteChart
     (T S : Scheme.{u}) (g : S ⟶ T) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

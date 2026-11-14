@@ -26,18 +26,7 @@ open Scheme.Modules
 
 /-- A fraction-chart morphism identifies the kernels of the original quotient and the
 pulled tautological quotient.
-Source: Stacks Project, Constructions, Tag 01OA, inverse quotient construction.
-(blueprint: lem-trf-line-quotient-fraction-kernel).
-
-Proof: on an affine base U and a line-trivializing affine W, cover W by D(b_m).
-The chart formula sends iota(v)/iota(m) to b_v/b_m. The normalized tautological
-quotient therefore sends v tensor 1 to (b_v/b_m)e, while q sends it to b_v l.
-Multiplication by the unit b_m identifies these two linear maps on pure tensors;
-pure tensors generate the affine pullback module. Thus their kernels agree on
-these opens. For any r, the equality r;q=0 is local on its source sections, and
-the same local isomorphism gives r;q_F=0 in both directions. The D(b_m) cover
-by the fraction-chart hypothesis, so sheaf separatedness proves the global
-biconditional. This needs no finite generation and works for empty charts. -/
+Source: Stacks Project, Constructions, Tag 01OA, inverse quotient construction. -/
 theorem lineQuotient_fraction_kernel {S T : Scheme.{u}} (h : T ⟶ S)
     (E : S.Modules) [E.IsQuasicoherent] (D : TautologicalQuotient E)
     (L : T.Modules) [L.IsInvertible] (q : (tensorPullback h).obj E ⟶ L) [Epi q]

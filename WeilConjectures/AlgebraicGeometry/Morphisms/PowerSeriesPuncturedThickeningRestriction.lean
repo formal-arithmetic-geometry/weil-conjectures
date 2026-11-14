@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedRestricti
 # Restriction to a punctured power-series thickening
 
 Source: Stacks Project, Tag 0EY9, first displayed calculation at a fixed index.
-(blueprint: lem-sbc-power-series-punctured-thickening-restriction)
 -/
 
 @[expose] public section
@@ -27,22 +26,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Sections of each individual thickening are its quotient ring.
 
-Source: Stacks Project, Tag 0EY9, first displayed calculation, and Tag 0BK0.
-(blueprint: lem-sbc-power-series-punctured-thickening-restriction)
-
-Proof: Put B = A[[x_1,...,x_d]], I = ker(constantCoeff), and let U be the
-punctured spectrum of A. The quotient B/I^(n+1) is finite free over A on the
-monomials of total degree at most n. Its spectrum has the same underlying
-space as Spec A, since its variable ideal is nilpotent. Thus its inverse
-image of V is the thickening of U. Push its structure sheaf along the affine
-constants projection to U: it is the direct sum of copies of O_U on those
-monomials. Depth-two Hartogs identifies Gamma(U,O_U) with A. Taking the
-finite direct sum of this identification identifies sections of the
-thickening with B/I^(n+1). The identification takes a quotient polynomial
-to its restriction as a section, so its inverse is precisely the canonical
-map in the conclusion, rather than an unspecified ring isomorphism.
-This is a single finite-index calculation; it does not assert comparison
-for compatible families, for sections on V, or for finite étale covers. -/
+Source: Stacks Project, Tag 0EY9, first displayed calculation, and Tag 0BK0 -/
 theorem bijective_powerSeries_punctured_thickening_restriction
     (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]
     (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth (R := A) A)

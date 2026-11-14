@@ -11,8 +11,6 @@ import WeilConjectures.AlgebraicGeometry.RationalP1.Second.RationalP1SecondExcha
 import WeilConjectures.AlgebraicGeometry.RationalP1.Second.RationalP1SecondProjectionInterchange
 
 /-! # The second projective-line calculation before applying a trace
-
-Source: the second identity of the rational projective-line triangle calculation.
 -/
 
 @[expose] public noncomputable section
@@ -127,27 +125,7 @@ private theorem generic_record_assembly
 -- Apply the abstract record assembly without unfolding the native derived choices.
 /-- Exchange/projection reordering before applying any scalar trace.
 The only inverses are the specified exchange and projection arrows. In particular,
-this statement has no completed reference, diagonal class, counit, or trace map.
-
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md,
-Second identity, extraction of q*K
-(blueprint: lem-sfb-rational-p1-second-pretrace).
-
-Proof: Write A=q*K and T=Lambda_P(1)[2]. Exchange/tensor coherence for the
-self-square at inside T and outside K gives exchange_(A tensor T) after pullback
-of projection_q(K,T) as projection_p2(A,p1*T) after identity tensor exchange_T,
-with the native tensor and pullback composition comparisons. Invert this square
-using hq, hb and hx. The two-factor projection law separates the final T factor
-from the inverse twisted projection in unitTail. Both p1*T and p2*T are identified
-with T_W by the root-normalized comparisons. Their degree-zero rank-one line has
-identity self-symmetry, checked on a common root frame; the degree-two shifts
-contribute (-1)^4=1. Thus the two-factor law has no remaining line transposition.
-The p1/p2 comparison on A is ambientPullbackComparison and on the line it is the
-specified root comparison, so the comparison on M is secondPullComparison. Cancel
-the projection_q and its inverse in counitProjectionPart, and the tensorShiftIso
-and its inverse. The remaining comparison is precisely secondTraceStrength and
-identity tensor the inverse scalar exchange. No property of a trace is used. -/
+this statement has no completed reference, diagonal class, counit, or trace map. -/
 theorem second_pretrace
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

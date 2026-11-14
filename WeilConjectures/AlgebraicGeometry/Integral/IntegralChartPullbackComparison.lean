@@ -105,16 +105,7 @@ private theorem datumChartEquivalence {A : Type (u + 1)} [CommRing A]
         (pbcAdicCompletion U.left d) (d.integralRingIso U.hom)) q.functor ≪≫ hq
 
 /-- An isomorphism on the integral pro-etale chart gives an ordinary pullback isomorphism.
-Source: Bhatt--Scholze, Proposition 6.6.11, slice comparison; Stacks Tag 03D8.
-(blueprint: lem-weil-pbc-integral-chart-pullback-comparison).
-
-Proof: scalar restriction along the inverse-image coefficient isomorphism is an
-exact equivalence. Normalize raw pullback by uniqueness of its left adjoint.
-Restriction to the slice commutes with this scalar restriction. The slice/site
-equivalence then identifies the normalized local restriction with datum pullback
-along the chart morphism. Reflect the local isomorphism through these two
-fully faithful derived equivalences, and compose with the ordinary pullback
-compositor. The construction works for arbitrary complexes and every scheme. -/
+Source: Bhatt--Scholze, Proposition 6.6.11, slice comparison; Stacks Tag 03D8. -/
 theorem integralLocalDerived_pullbackIso {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) {T S : Scheme.{u}} (g : S ⟶ T) (U : S.ProEt)
     (K L : d.derived T)

@@ -18,8 +18,7 @@ import WeilConjectures.RingTheory.PrincipalCotangentSpan
 
 /-! # The first-order tame root calculation for Galois field components
 
-Source: Stacks Project, Tags 09EV, 09EB, 0BRM, 09E7 and 0307.
-(blueprint: lem-sbc-dvr-galois-components-root-cotangent) -/
+Source: Stacks Project, Tags 09EV, 09EB, 0BRM, 09E7 and 0307 -/
 
 @[expose] public section
 universe u
@@ -28,29 +27,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- A root extension spanning all component degrees spans the normalized cotangent ideal.
 
-Source: Stacks Project, Tags 09EV, 09EB, 0BRM, 09E7 and 0307.
-(blueprint: lem-sbc-dvr-galois-components-root-cotangent)
-
-Proof: Put K=Frac(B) and t=root(X^n-pi). For n>1, 09EV makes the root
-ring A a DVR with uniformizer t and ramification index n over B. For n=1,
-A is B and this index is one. Consider each Galois component E_i separately.
-The Galois DVR degree formula 09EB says its degree is the product of the
-number of primes, the ramification index e and the residue degree f. Thus
-e and f divide n. In positive residue characteristic p, n being a unit
-excludes p from e and from f. The inseparable residue degree, a p-power
-dividing f, is one. In characteristic zero separability is automatic.
-Apply 0BRM to these tame local extensions and the index-n root extension.
-Every normalized tensor-product factor is adically formally smooth. By
-09E7 its ramification index over A is one, so the image of t is a uniformizer.
-Relative normalization of an affine generic field factor is the integral
-closure in its generic field algebra. Integral closure commutes with
-localization by 0307. Normalization and these local identifications respect
-finite disjoint unions and the given structural maps, identifying the local
-factors with the actual stalk at x. Their root uniformizer spans the maximal
-ideal, and hence its image spans modulo its square. Retain only this
-first-order inclusion; the caller must separately supply finite generation
-and Nakayama to recover ideal generation. Empty coproducts have no points x.
-The condition on degrees excludes wild factors, and pi is a genuine uniformizer. -/
+Source: Stacks Project, Tags 09EV, 09EB, 0BRM, 09E7 and 0307 -/
 theorem dvr_galois_components_root_cotangent
     (B : CommRingCat.{u}) [IsDomain B] [IsDiscreteValuationRing B]
     (pi : B) (hpi : Irreducible pi) (n : ℕ) (hnpos : 0 < n)

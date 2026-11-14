@@ -10,10 +10,6 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionFram
 
 /-! # The finite class of an étale frame
 
-Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/
-sec-smooth-purity/sec-the-trace-map-of-affine-space/sk-prop-an/def-pur-frame-class.md
-(blueprint: proposition-purity-vector-bundles).
-
 Step 1 uses `coordinateKummer` over Spec k, retaining its standing hypothesis e | n,
 and pulls it back along the actual unit-defined map to G_m with the cartesian twist map.
 Step 2 applies the individual closed-open support boundary. Step 3 forms the ordered
@@ -33,7 +29,7 @@ namespace WeilConjectures.PurityFiniteSetting
 
 /-- Direct image along an isomorphism of schemes is an equivalence, with inverse the direct
 image along the inverse isomorphism.
-Source: functoriality of direct image (blueprint: proposition-purity-vector-bundles). -/
+Source: functoriality of direct image. -/
 def frameLowerStarEquivalence (A : Type*) [Category.{u + 1} A] {D D' : Scheme.{u}}
     (e : D ≅ D') : Sheaf (Scheme.ProEt.topology D) A ≌ Sheaf (Scheme.ProEt.topology D') A :=
   CategoryTheory.Equivalence.mk (lowerStar A e.hom) (lowerStar A e.inv)
@@ -43,9 +39,7 @@ def frameLowerStarEquivalence (A : Type*) [Category.{u + 1} A] {D D' : Scheme.{u
 
 /-- Transport the closed constant coefficient along an isomorphism of closed subschemes
 over the ambient scheme: direct image along an isomorphism is the inverse image along its
-inverse, which preserves the constant coefficient.
-Source: proposition-purity-vector-bundles, identification of supports (blueprint:
-proposition-purity-vector-bundles). -/
+inverse, which preserves the constant coefficient. -/
 def finiteFrameClosedCoefficientIso (P : PurityFiniteSetting.{u}) {D D' X : Scheme.{u}}
     (c : D ⟶ X) (g : D' ⟶ X) (e : D ≅ D') (w : e.hom ≫ g = c) :
     (lowerStar (ModuleCat.{u + 1} P.Coefficient) c).obj (P.constant D) ≅
@@ -61,7 +55,7 @@ def finiteFrameClosedCoefficientIso (P : PurityFiniteSetting.{u}) {D D' X : Sche
 the inverse is the universal lift of the identity through the empty zero locus.
 Pushforward composition, the identity comparison, and the constant-unit comparison
 then give precisely 1 in H^0(X,A_X), including for an empty scheme.
-Source: c=0, empty supported product (blueprint: proposition-purity-vector-bundles). -/
+Source: c=0, empty supported product. -/
 def finiteFrameEmptyClass (P : PurityFiniteSetting.{u})
     (h : P.ramificationIndex ∣ P.level) (X : Scheme.{u})
     (f : Fin 0 → Γ(X, ⊤)) :
@@ -86,9 +80,7 @@ def finiteFrameEmptyClass (P : PurityFiniteSetting.{u})
     (shiftFunctorZero (CupDerivedCategory P X) ℤ).inv.app _
 
 /-- The zero locus of a family of global sections is the intersection of the zero locus
-of its prefix with the zero locus of its last member.
-Source: proposition-purity-vector-bundles, Step 4, common zero support (blueprint:
-proposition-purity-vector-bundles). -/
+of its prefix with the zero locus of its last member. -/
 def finiteFrameZeroLocusIso {X : Scheme.{u}} (n : ℕ) (f : Fin (n + 1) → Γ(X, ⊤)) :
     X.zeroLocusSubscheme (Set.range f) ≅
       pullback (X.zeroLocusSubschemeι (Set.range fun k : Fin n ↦ f k.castSucc))
@@ -127,9 +119,7 @@ def finiteFrameZeroLocusIso {X : Scheme.{u}} (n : ℕ) (f : Fin (n + 1) → Γ(X
 
 /-- Append the boundary of the last section to the supported product of the prefix: the
 supported cup product, followed by the identification of the common zero support and the
-multiplication of the nonnegative finite twists.
-Source: proposition-purity-vector-bundles, Steps 3 and 4 (blueprint:
-proposition-purity-vector-bundles). -/
+multiplication of the nonnegative finite twists. -/
 def finiteFrameCupNext (P : PurityFiniteSetting.{u})
     (h : P.ramificationIndex ∣ P.level) (X : Scheme.{u})
     (a : X ⟶ Spec (.of P.field.k)) (n : ℕ) (f : Fin (n + 1) → Γ(X, ⊤))
@@ -161,8 +151,7 @@ def finiteFrameCupNext (P : PurityFiniteSetting.{u})
 
 /-- Ordered supported product with explicit edge cases. For c=0 it is the unit;
 for c=1 it is precisely the single principal boundary, after the tautological support
-identification. For c>=2 append the last factor to the product of the prefix.
-Source: latest blueprint displayed frame class (blueprint: proposition-purity-vector-bundles). -/
+identification. For c>=2 append the last factor to the product of the prefix. -/
 def finiteFrameBoundaryProduct (P : PurityFiniteSetting.{u})
     (h : P.ramificationIndex ∣ P.level) (X : Scheme.{u})
     (a : X ⟶ Spec (.of P.field.k)) :
@@ -189,10 +178,7 @@ The frame's pullback square identifies its common zero support with Z times_V U;
 e is any étale morphism, with no open-immersion requirement. The pointwise stalk
 Krull-dimension condition expresses pure codimension c. Each factor is the
 individual support boundary of the affine-line coordinate Kummer class;
-the result has degree 2c and the recorded coefficient twist of order c on the pro-étale site.
-Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/
-sec-smooth-purity/sec-the-trace-map-of-affine-space/sk-prop-an/def-pur-frame-class.md
-(blueprint: proposition-purity-vector-bundles). -/
+the result has degree 2c and the recorded coefficient twist of order c on the pro-étale site. -/
 def finiteFrameClass (P : PurityFiniteSetting.{u})
     (h : P.ramificationIndex ∣ P.level) {B V Z : Scheme.{u}}
     (b : B ⟶ Spec (.of P.field.k)) (v : V ⟶ B)

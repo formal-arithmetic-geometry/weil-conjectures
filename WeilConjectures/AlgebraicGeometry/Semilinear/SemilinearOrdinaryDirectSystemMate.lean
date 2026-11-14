@@ -10,7 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearOrdinaryDir
 /-! # Transposition of horizontal compatibility squares
 
 Source: Zheng Construction 4.1; Stacks 03D2 and 03DA.
-(blueprint: lem-coef-ordinary-direct-system-core-transition-mate).
 -/
 
 @[expose] public noncomputable section
@@ -40,7 +39,6 @@ variable (P : OrdinaryInverseSystem.{c, v, r} J B τ J' uInv F σ I)
 
 /-- The local mate assertion for a componentwise direct-image datum.
 Source: Zheng Construction 4.1; Stacks 03D7.
-(blueprint: lem-coef-ordinary-direct-system-core-transition-mate).
 
 The assertion is exactly the horizontal compatibility square at two indices,
 after transposition by the supplied level adjunctions. -/
@@ -112,18 +110,7 @@ private theorem normalized_square_iff
   exact eq_comm
 
 /-- The local mate law for the reassembled componentwise direct image.
-Source: Zheng Construction 4.1; Stacks 03D7.
-(blueprint: lem-coef-ordinary-direct-system-core-transition-mate).
-
-Proof: combine each pull component isomorphism with `I.moduleUnderlying` and each
-push component isomorphism with `eV`. The transition equation of `P` and its
-restriction normalization identify the first horizontal map with `uInv` of the
-old one. The hypothesis `hD` identifies the second with `uPush` of the other one.
-By `ha`, the two component transposes become the set-sheaf adjunction transposes
-under these isomorphisms. Naturality and injectivity of that Hom equivalence
-identify the two squares. Faithfulness of underlying sheaves reflects equality
-back to the module maps. The normalization hypothesis is essential: arbitrary
-component identifications alone do not determine the horizontal maps. -/
+Source: Zheng Construction 4.1; Stacks 03D7. -/
 theorem ordinaryDirectSystem_core_transition_mate_exists [PreservesFiniteLimits uInv]
     (_hI : ∀ n,
       uInv.map ((sheafCompose J (CategoryTheory.forget CommRingCat.{max c v r})).map (τ n)) ≫

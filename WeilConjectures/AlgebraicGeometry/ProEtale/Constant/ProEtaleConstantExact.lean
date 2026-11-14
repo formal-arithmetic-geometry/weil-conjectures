@@ -56,8 +56,7 @@ import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
 /-!
 # Exact pullback of finite constant pro-etale left modules
 
-Source: Weil conjectures blueprint, order 1236; Stacks Project, Tags 00WJ, 03D2, and 04JC
-(blueprint: prop-weil-pbc-proetale-constant-exact).
+Source: Stacks Project, Tags 00WJ, 03D2, and 04JC.
 
 The coefficient categories are the recorded continuous-function ringed module categories.
 The small-model module Kan extension gives inverse image over the inverse-image ring;
@@ -89,19 +88,18 @@ namespace AlgebraicGeometry.ProEtale
 variable {U V : Scheme.{u}} (f : U ⟶ V) (Λ : Type (u + 1))
   [Ring Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ]
 
-/-- Register the recorded coefficient isomorphism, without choosing any new map.
-Source: blueprint order 1235 (blueprint: prop-weil-pbc-proetale-constant-exact). -/
+/-- Register the recorded coefficient isomorphism, without choosing any new map. -/
 noncomputable instance finiteCoefficientInverseImageMap_invertible :
     IsIso (finiteCoefficientInverseImageMap f Λ) :=
   finiteCoefficientInverseImageMap_isIso.{u} f Λ
 
 /-- The inverse-image coefficient ring on the original small site.
-Source: Stacks Tag 03D2 (blueprint: prop-weil-pbc-proetale-constant-exact). -/
+Source: Stacks Tag 03D2. -/
 noncomputable abbrev finiteCoefficientInverseRing :=
   (Scheme.proEtaleSheafInverseImage f RingCat.{u + 1}).obj (finiteCoefficientRingSheaf V Λ)
 
 /-- The ring adjunction unit on the small site models. Only the Hom universe is enlarged.
-Source: Stacks Tags 00YV and 03D2 (blueprint: prop-weil-pbc-proetale-constant-exact). -/
+Source: Stacks Tags 00YV and 03D2. -/
 noncomputable def finiteCoefficientModelRingUnit :
     ((AsSmall.down : Scheme.proEtaleSiteModel V ⥤ V.ProEt).sheafPushforwardContinuous
       RingCat.{u + 1} (Scheme.proEtaleModelTopology V) (Scheme.ProEt.topology V)).obj
@@ -119,7 +117,7 @@ noncomputable def finiteCoefficientModelRingUnit :
 is the module Kan extension followed by sheafification, along the actual ring unit.
 Its action is the inverse image of the original action under the product comparison.
 Transport to and from the equivalent small model retains every original site object.
-Source: Stacks Tag 03D2 (blueprint: prop-weil-pbc-proetale-constant-exact). -/
+Source: Stacks Tag 03D2. -/
 noncomputable def finiteCoefficientModuleInverseImage :
     FiniteCoefficientModules V Λ ⥤ SheafOfModules.{u + 1} (finiteCoefficientInverseRing f Λ) :=
   Scheme.proEtaleModuleToModel (finiteCoefficientRingSheaf V Λ) ⋙
@@ -129,8 +127,7 @@ noncomputable def finiteCoefficientModuleInverseImage :
 /-- The specified pullback: transport the inverse-image action by c_f inverse.
 Thus r acts as c_f inverse(r), and on underlying abelian maps the functor is inverse image.
 No tensor product or multiplicative commutativity is required here.
-Source: blueprint order 1236; Stacks Tag 03D2
-(blueprint: prop-weil-pbc-proetale-constant-exact). -/
+Source: Stacks Tag 03D2. -/
 noncomputable def finiteCoefficientModulePullback :
     FiniteCoefficientModules V Λ ⥤ FiniteCoefficientModules U Λ :=
   finiteCoefficientModuleInverseImage f Λ ⋙
@@ -155,13 +152,7 @@ variable {U V : Scheme.{u}} (f : U ⟶ V) (Λ : Type (u + 1))
 
 /-- Compatibility of the commutative presentation with ring sheafification.
 This supplies the construction obligation of the canonical coefficient comparison below.
-Source: Stacks Tags 00W1 and 00YV; blueprint order 1236
-(blueprint: prop-weil-pbc-proetale-constant-exact).
-Proof: sheafification is the double-plus construction, formed from matching-family
-limits and filtered colimits of covers. Forgetting commutativity preserves these
-limits and filtered colimits and reflects isomorphisms. It therefore carries each
-plus construction, its unit, and the resulting sheafification equivalences to their
-ring-valued counterparts. This changes no ring data or constant sections. -/
+Source: Stacks Tags 00W1 and 00YV. -/
 theorem finiteCoefficientCommRing_preservesSheafification (T : Scheme.{u}) :
     (Scheme.ProEt.topology T).PreservesSheafification
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}) :=
@@ -171,14 +162,7 @@ attribute [instance] finiteCoefficientCommRing_preservesSheafification
 
 set_option linter.unusedSectionVars false in
 /-- The canonical commutative coefficient map is invertible too.
-Source: blueprint order 1236; Stacks Tags 0H7J and 09A5
-(blueprint: prop-weil-pbc-proetale-constant-exact).
-Proof: inverse image of the constant sheaf is constant, by the ring-sheaf adjunction
-and the constant-preserving identifications of prop-weil-pbc-proetale-constant-ring-map.
-Forgetting commutativity commutes with the inverse-image construction, since that
-construction lifts the finite-product-preserving set inverse image. The resulting ring
-map is the canonical invertible map of that proposition. The forgetful functor reflects
-isomorphisms, so the commutative map is invertible. -/
+Source: Stacks Tags 0H7J and 09A5. -/
 theorem finiteCoefficientCommRingMap_isIso :
     IsIso (Scheme.proEtaleConstantInverseImageMap f CommRingCat.{u + 1}
       (CommRingCat.of Λ)) := by

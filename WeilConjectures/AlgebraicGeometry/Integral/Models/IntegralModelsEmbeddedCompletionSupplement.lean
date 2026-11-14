@@ -15,8 +15,7 @@ import Mathlib.CategoryTheory.ObjectProperty.Equivalence
 
 /-! # Completion for embedded integral coefficients
 
-Source: Stacks Project, Tags 099I, 099L, 099M and 0A07 (blueprint:
-lem-sfb-embedded-integral-completion).
+Source: Stacks Project, Tags 099I, 099L, 099M and 0A07.
 -/
 
 @[expose] public noncomputable section
@@ -157,20 +156,7 @@ attribute [-instance] integralModel_coefficientMonObj in
 /-- Restriction along constant continuous functions identifies the complete categories
 and preserves and reflects local derived completeness for every complex.
 
-Source: Stacks Project, Tags 099I, 099L, 099M and 0A07
-(blueprint: lem-sfb-embedded-integral-completion).
-
-Proof: the embedded coefficient-kernel comparison supplies a finite-type constant
-residue ideal, flatness, the common quotient, and equality of its extension with the
-completed residue kernel. The general flat ringed-ideal complete equivalence applies
-on the coefficient-sized small site. Section-module equivalence and precomposition
-with AsSmall are exact equivalences. Their natural scalar-restriction square transports
-the equivalence and its inclusion isomorphism to the displayed internal module
-categories. Isomorphism invariance compares the chosen representatives used by
-smallDerivedObject with the exact derived functor. For every complex, the general
-local scalar-restriction completeness iff and the equality of kernel ideals give
-preservation and reflection of completeness, including unbounded complexes.
-All comparisons use the prescribed scalar and quotient maps.
+Source: Stacks Project, Tags 099I, 099L, 099M and 0A07.
 -/
 theorem integralModelsEmbeddedCompletion
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)

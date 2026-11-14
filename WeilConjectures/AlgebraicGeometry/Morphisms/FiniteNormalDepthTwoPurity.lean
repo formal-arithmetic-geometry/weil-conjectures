@@ -22,7 +22,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteNormalDenseOpenComparis
 # FiniteNormalDepthTwoPurity
 
 Source: Stacks Project, Tags 0EYB, 0EY6 and 0EYJ (depth-two case).
-(blueprint: lem-sbc-finite-normal-depth-two-purity)
 -/
 
 @[expose] public section
@@ -61,21 +60,7 @@ private theorem etale_restrict_sup {L N : Scheme.{u}} (n : N ⟶ L)
 
 /-- Purity for finite normal covers in the indicated local-base case.
 
-Source: Stacks Project, Tags 0EYB, 0EY6 and 0EYJ (depth-two case).
-(blueprint: lem-sbc-finite-normal-depth-two-purity)
-
-Proof: Let T be the union of q inverse V and W. The restrictions of n to both
-opens are etale, hence n restricted to T is a finite etale cover. Every fibre away
-from the closed point is contained in T. The closed fibre is integral because q is
-smooth and geometrically connected; W meets it, so T is dense in it. The local base
-has depth at least two, while every other base point has its whole fibre in T.
-Tag 0EYB therefore extends this cover to a finite etale cover E of L. The scheme L
-is normal by smoothness over a normal base, and E is normal by etaleness. Density
-excludes vertical components of N. On each component the finite normal algebras of
-N and E are the integral closure of the base algebra in the same generic algebra,
-so they agree. This gives an isomorphism over L and proves etaleness of n. The depth
-test in 0EYB uses the flat local depth formula of Tag 0337; the extension and its
-uniqueness are the depth-two construction of Tag 0EY6. -/
+Source: Stacks Project, Tags 0EYB, 0EY6 and 0EYJ (depth-two case). -/
 theorem finite_normal_etale_of_depth_two_neighbourhood
     (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]
     [IsDomain A] [IsIntegrallyClosed A]

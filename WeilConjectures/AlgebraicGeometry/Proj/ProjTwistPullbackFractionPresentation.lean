@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.ProjBasicOpenLocalizationDetection
 
 /-! # A fraction presentation of pullback sections on a Proj chart
 
-Source: Stacks Project, constructions.tex, Tags 01MY, 01N2 and 01M7.
-(blueprint: lem-sfb-proj-twist-pullback-fraction-presentation).
+Source: Stacks Project, Tags 01MY, 01N2 and 01M7.
 -/
 
 @[expose] public section
@@ -286,22 +285,8 @@ private theorem chart_coefficients_span
 The assertion is a surjective presentation, with no assertion about its kernel and no
 morphism from the pullback to the target twist.
 
-Source: Stacks Project, constructions.tex, Tags 01MY and 01N2, the standard-open
-calculation, and Tag 01M7 for the associated graded-module sheaf.
-(blueprint: lem-sfb-proj-twist-pullback-fraction-presentation).
-
-Proof: Realize each homogeneous fraction as an actual twist section with the prescribed
-prime-localization values. These values determine sections uniquely, giving an additive
-map compatible with R-coefficients. Fraction descent proves it surjective, including
-negative shifts and the empty chart. The existing twist quasi-coherence theorem allows
-the affine tensor-pullback section comparison on U,V. The target chart ring is spanned
-over the source chart ring by S-coefficient sections: expand each homogeneous numerator
-using hgraded and use the standard-open ring and map formulas. Consequently the balanced
-map s tensor z to e(z) tensor s is surjective onto the affine comparison's source;
-tensor induction and span induction prove this by moving source-ring scalars between
-the tensor factors. Compose with the affine comparison. Its pure-tensor rule and the
-normalized adjunction unit give exactly the displayed pullback-section formula.
-No flatness, cancellation, or generation in degree one is used. -/
+Source: Stacks Project, Tags 01MY and 01N2, the standard-open calculation, and Tag 01M7 for the
+associated graded-module sheaf. -/
 theorem exists_twistPullback_fraction_presentation
     {R S A B : Type u} [CommRing R] [CommRing S] [CommRing A] [CommRing B]
     [Algebra R S] [Algebra R A] [Algebra S B]

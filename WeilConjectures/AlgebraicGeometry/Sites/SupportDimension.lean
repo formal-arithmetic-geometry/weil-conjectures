@@ -291,14 +291,14 @@ lemma exists_supportedIn_of_forall_residueFieldTrdeg_le {K : Type u} [Field K]
     Scheme.topologicalKrullDim_closure_singleton_le_of_residueFieldTrdeg_le b _ a
       (hs ξ (hGS hξG))⟩
 
-/-- Blueprint `lemma-uniform-bounds-pro-etale-affines`: A sheaf supported in low dimension is a
+/-- A sheaf supported in low dimension is a
 filtered union.
 
 Let `B` be a scheme of finite type over a field `K` (structure morphism `b`), `a ≥ 0`, and `N` a
 torsion abelian étale sheaf on `B` with zero geometric stalk at every point `y` with
 `trdeg_K κ(y) > a`: for every separably closed field `Ω` and every geometric point
-`s : Spec Ω ⟶ B` lying over such a `y`, `s^* N = 0`. For a closed `Z ⊆ B` with complement
-`j_Z : B ∖ Z ⟶ B` let `N_Z = ker(N ⟶ j_Z* j_Z^* N)`. Then `N` is the union of the subsheaves
+`s: Spec Ω ⟶ B` lying over such a `y`, `s^* N = 0`. For a closed `Z ⊆ B` with complement
+`j_Z: B ∖ Z ⟶ B` let `N_Z = ker(N ⟶ j_Z* j_Z^* N)`. Then `N` is the union of the subsheaves
 `N_Z` over the closed `Z` of dimension at most `a`: every section of `N` lies, locally on an
 étale covering, in some `N_Z`. Since the `N_Z ⟶ N` are monomorphisms and the closed sets of
 dimension at most `a` form a directed system under finite unions, this says that the canonical

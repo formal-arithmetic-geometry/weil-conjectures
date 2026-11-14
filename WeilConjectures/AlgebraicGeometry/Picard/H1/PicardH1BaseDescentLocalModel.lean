@@ -28,7 +28,6 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 /-! # Local scalar models and degree-one comparison for Picard descent
 
 Source: Stacks Project, Tag 0BF2, the finite-free complexes and the representing chain maps.
-(blueprint: lem-sc-picard-h1-base-descent-local-model)
 -/
 
 @[expose] public section
@@ -41,22 +40,7 @@ namespace AlgebraicGeometry.Scheme
 /-- Construct the local finite-free model and its degree-one comparison square, without
 assuming injectivity on H¹ and without realizing degree-zero cycles as sections.
 Source: Stacks Project, Tag 0BF2, through the displayed chain maps, using Tags 0B91,
-0BCD and 08CR. (blueprint: lem-sc-picard-h1-base-descent-local-model)
-
-Proof: Apply picard_h1_common_minimal_model to choose a common affine U, target
-trivializations, and a bounded finite-free source complex with its term-rank
-isomorphisms, section bases, derived comparison, and vanishing residue differential.
-Each term-rank isomorphism exhibits the term as a finite-free retract, proving strict
-perfectness. For a negative degree the Betti number is zero, so the term is isomorphic
-to the free module on the empty type; its identity is zero by freeHomEquiv.
-Apply picard_h1_fixed_model_comparison to this fixed source complex and the supplied
-target trivializations. It constructs q, b, alpha, beta and the cohomology square, and
-asserts that b kills the image of the outgoing source differential. Define d to be
-the coordinates of the differential on e0 inverse(1). Linearity of e0 inverse, the
-module differential and e1 gives the formula for every scalar a. The residue equation
-is the one supplied by the minimal-model theorem, and b(d)=0 is the annihilation
-identity evaluated at 1. Assemble these witnesses. Empty free terms and the empty
-target family are covered by the two intermediate statements without case exclusions. -/
+0BCD and 08CR. -/
 theorem picard_h1_base_descent_local_model
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

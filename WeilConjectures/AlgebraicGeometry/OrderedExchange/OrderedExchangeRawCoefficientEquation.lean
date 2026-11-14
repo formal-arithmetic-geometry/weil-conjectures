@@ -24,16 +24,7 @@ variable {X' X Y' Y : Scheme.{t}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
   {f : X ⟶ Y} {g : Y' ⟶ Y}
 
 /-- The final cancellation of the ordered comparison maps, at one complete input.
-Source: blueprint completed-exchange-coherence, second proof paragraph, final equation;
-Stacks 0E48 (blueprint: lem-weil-pbc-ordered-raw-coefficient-equation).
-Proof: expand completedExchange as sourceA, derived limit of towerV', and targetA
-inverse. Apply restriction functoriality. Naturality of lambda commutes restriction
-past derived limit of towerV'. Insert the scalar strict-mate equation, then apply
-derived limit functoriality. The source and target reconstruction equations replace
-the two outside composites by iotaS followed by S and iotaT followed by T.
-Cancel the specified target isomorphism and reassociate. This is exactly
-constantComponent. Every cancellation is by a specified isomorphism, so no new
-choice or finite evaluation argument is involved. -/
+Source: Stacks 0E48. -/
 theorem rawCoefficientEquation (sq : ChosenCartesianSquare g' f' f g)
     (K : AComplete d X) : rawComponent d sq K = constantComponent d sq K := by
   obtain ⟨-, -, hV⟩ := strictCoefficientEquations d sq K.obj K.property

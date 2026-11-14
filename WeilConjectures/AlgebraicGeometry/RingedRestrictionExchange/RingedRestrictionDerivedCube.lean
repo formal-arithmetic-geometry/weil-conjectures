@@ -374,16 +374,7 @@ private theorem cube_data_exchange_comm (r : StrictTowerRingedSquare sq)
     (cube_data_source_mate r C) (cube_data_target_mate r C) K
 
 /-- The six-face inverse-image cube yields the equation of derived exchange mates.
-Source: Stacks Project, Tags 03CB, 09A5, 05S7 and 0E47; step 7 of
-lem-sf-ringed-restriction-exchange-open-descent.
-(blueprint: lem-sf-ringed-restriction-derived-cube).
-Proof: localize restriction_pullback_cube by mapDerivedCategory_exactCube.
-The ambientSquare_localization equations identify all six localized faces with
-canonical derived comparisons. Give the comparisons and four adjunctions their
-shared-vertex types in TypedDerivedCube. Apply exchangeMate_cube with the four
-side comparisons inverted, first with this data abstract. Substitute cube_data;
-the defining equations of the four exchange mates then give the displayed
-identity. There is no openness, boundedness or nonemptiness assumption. -/
+Source: Stacks Project, Tags 03CB, 09A5, 05S7 and 0E47. -/
 theorem restriction_exchange_cube (r : StrictTowerRingedSquare sq)
     (C : OpenCube r j)
     (K : DerivedCategory (proEtaleRingModules X r.RX)) :

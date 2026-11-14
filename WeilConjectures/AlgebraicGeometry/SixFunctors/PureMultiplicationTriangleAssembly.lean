@@ -8,9 +8,7 @@ module
 public import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 
-/-! # Pure boundaries of compatible multiplication sequences
-Source: diagonal tower system proof, step (3), and naturality of short-exact triangles.
-(blueprint: lem-sfb-pure-multiplication-triangle-assembly). -/
+/-! # Pure boundaries of compatible multiplication sequences. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -30,15 +28,7 @@ private theorem scalar_square
     Preadditive.comp_nsmul, Category.id_comp, Category.comp_id]
 
 /-- A compatible family of multiplication short exact sequences, whose quotients
-are pure in degree minus two, has ordinary sheaf boundaries with multiplier ell.
-Source: diagonal tower system proof, step (3).
-(blueprint: lem-sfb-pure-multiplication-triangle-assembly).
-Proof: take the connecting morphisms of the given short exact sequences and transport
-them by e and b. Full faithfulness of single followed by shift two uniquely writes
-each connecting morphism as the shifted image of an ordinary morphism, followed by
-shift addition. The morphism of short exact sequences with components (ell,1,t)
-gives the boundary equality in the derived category. Cancel the common shift-addition
-isomorphism and use faithfulness of shifted singles to obtain the ordinary equality. -/
+are pure in degree minus two, has ordinary sheaf boundaries with multiplier ell. -/
 theorem pure_multiplication_triangle_assembly
     {A : Type*} [Category A] [Abelian A] [HasDerivedCategory.{w} A]
     (ℓ : ℕ) (P : CochainComplex A ℤ) (M : A) (H : ℕᵒᵖ ⥤ A)

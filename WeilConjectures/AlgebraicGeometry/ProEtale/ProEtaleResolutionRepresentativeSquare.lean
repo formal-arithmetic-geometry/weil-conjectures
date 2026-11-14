@@ -8,8 +8,6 @@ module
 public import WeilConjectures.Algebra.Homology.CanonicalTensorPullbackOfUniverses.RingedTopoiCanonicalTensorPullbackOfUniverses
 
 /-! # The specified canonical comparison on two flat representatives.
-
-(blueprint: lem-sp-resolution-representative-square)
 -/
 
 @[expose] public noncomputable section

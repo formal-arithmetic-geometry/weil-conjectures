@@ -19,7 +19,6 @@ import WeilConjectures.RingTheory.FiniteFreeLocalFieldFactorization
 # Finite flat rationalization of a smooth closed-fibre point
 
 Source: Stacks Project, Tag 0EYB, the residue extension base change; Tag 07NE.
-(blueprint: lem-sbc-smooth-closed-point-finite-flat-lift)
 -/
 
 @[expose] public section
@@ -40,21 +39,7 @@ private theorem residueFieldMap_surjective_of_surjectiveOnStalks
 
 /-- A finite flat local base change makes the prescribed closed-fibre point separable.
 
-Source: Stacks Project, Tag 0EYB, the first base change; Tag 07NE.
-(blueprint: lem-sbc-smooth-closed-point-finite-flat-lift)
-
-Proof: The smooth fibre is locally of finite type over the residue field of A.
-Closedness of x and the Nullstellensatz make its residue extension finite. Apply
-07NE to this extension and the maximal ideal of A. Its finite free algebra A' has
-prime extended maximal ideal and quotient the prescribed residue field. Integrality
-puts every maximal ideal above the maximal ideal of A, so A' is local. The finite
-module over the Noetherian ring A is Noetherian, and freeness gives flatness. The
-identity on the chosen residue field gives a rational point y of the base-changed
-fibre above x. Its residue field equals the base residue field, so the residue map
-of the base-changed smooth morphism at y is an isomorphism and hence etale. The
-finite free construction uses successive monic polynomial quotients, so stays in
-Type u. Empty fibres have no x; no separability of the original extension is used.
-This statement constructs no section and makes no etale-slice assertion. -/
+Source: Stacks Project, Tag 0EYB, the first base change; Tag 07NE. -/
 theorem exists_smooth_closed_point_finite_flat_lift
     (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]
     {L : Scheme.{u}} (q : L ⟶ Spec (.of A)) [Smooth q]

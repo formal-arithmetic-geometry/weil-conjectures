@@ -24,17 +24,6 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
 /-- The supported diagram arrow is the canonical section-source arrow.
-
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md,
-Second identity, before precomposition by `singleUnitIso.inv` and tensoring.
-(blueprint: lem-sfb-projective-supported-source-arrow).
-
-Proof plan: evaluate the diagram's canonical right-derived unit on the supported
-module; use the support normalization to identify its ordinary section inverse;
-compare the ordinary section with the conjugate derived section by the two
-adjunction counit squares; cancel the diagonal single comparison. This statement
-is strictly the untensored arrow identity used by the parent normalization theorem.
 -/
 theorem supported_source_arrow
     (Y : Scheme.{u}) (L : ∀ X : Scheme.{u}, Modules Λ X)

@@ -15,9 +15,6 @@ import Mathlib.Algebra.Category.Ring.Constructions
 import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 
 /-! # The coefficient pushout comparison
-
-Source: coefficient-twist blueprint, proof step 6.
-(blueprint: lem-pur-twist-coefficient-comparison)
 -/
 
 @[expose] public section
@@ -30,13 +27,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The normalized scalar square is a pushout of ring sheaves.
 
-Source: coefficient-twist blueprint, proof step 6; Stacks Project, Tag 03EK.
-(blueprint: lem-pur-twist-coefficient-comparison)
-
-Proof: the sectionwise balanced tensor map is bijective. It identifies the usual
-commutative-ring tensor pushout with the square of sections. These sectionwise
-pushouts imply a pushout among sheaves. The canonical map between its vertex and
-the chosen categorical pushout is consequently an isomorphism. -/
+Source: Stacks Project, Tag 03EK. -/
 theorem purTwistCoefficientComparison_isIso (S : Scheme.{t}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :
     IsIso (purTwistCoefficientComparison S l E) := by

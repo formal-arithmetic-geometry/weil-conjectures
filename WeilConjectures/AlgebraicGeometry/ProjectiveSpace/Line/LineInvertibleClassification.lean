@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineTwist
 
 Source: Stacks Project, Tag 0BXJ, `divisors-lemma-Pic-projective-space-UFD`,
 specialized to dimension one over a field.
-(blueprint: lem-sfb-projective-line-invertible-classification)
 
 The family `O` denotes any choice of twists with the standard generators and relation
 `g₀ = t^{-d} g₁`, encoded by `ProjectiveLine.TwistData`. Uniqueness is asserted only
@@ -81,23 +80,7 @@ unique integer twist. The chosen twists `O d` have the standard transition conve
 specified by `TwistData`; neither their generators nor the isomorphism is claimed unique.
 
 Source: Stacks Project, Tag 0BXJ, `divisors-lemma-Pic-projective-space-UFD`, for `n = 1`
-and `R = k`. (blueprint: lem-sfb-projective-line-invertible-classification)
-
-Proof: The standard charts are Spec k[t] and Spec k[s], with s = t⁻¹ on their overlap.
-Their Picard groups vanish by `affine_punctured_line_algebra`, so choose free generators
-of L on both charts, using `Scheme.Pic` and `Scheme.Modules.IsFreeGenerator`. On the overlap
-write e₀ = u e₁. The inverse change of generator makes u a unit, hence u = a tⁿ for
-some a in kˣ and n in ℤ by the Laurent-unit computation in that same lemma. Rescale e₀
-by a⁻¹ and put d = -n. The resulting generators satisfy f₀ = t^{-d} f₁, just as those
-of O d do by `TwistData`. Sending its generators to f₀ and f₁ defines chartwise module
-isomorphisms whose maps and inverses agree on the overlap. The morphism-gluing and
-uniqueness clauses of `glue_sheaves_of_modules` give a global isomorphism; invert it
-for the stated direction. For uniqueness, an isomorphism O d ≅ O e multiplies each
-chart generator by a chart unit bᵢ. These units are nonzero constants by the affine-line
-unit computation. The transition relations imply b₀ t^{-e} = b₁ t^{-d}, so
-t^{e-d} = b₀ / b₁. Uniqueness of Laurent coefficients forces e-d = 0: otherwise the
-coefficient at e-d is 1 on the left and 0 on the right. Comparing two isomorphisms from
-L to twists by composition therefore proves uniqueness of the integer. -/
+and `R = k`. -/
 theorem existsUnique_degree_of_isInvertible (k : Type u) [Field k]
     (O : ℤ → (ProjectiveLine (Spec (CommRingCat.of k))).Modules)
     (hO : ∀ d : ℤ, Nonempty (TwistData (Spec (CommRingCat.of k)) d (O d)))

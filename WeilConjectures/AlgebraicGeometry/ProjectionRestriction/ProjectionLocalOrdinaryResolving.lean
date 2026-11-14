@@ -100,9 +100,7 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionIn
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 
 /-! Ordinary localized pullback and preservation of resolving complexes.
-Source: Stacks Project, Modules on Sites, Tag 04J0;
-Cohomology on Sites, Tags 0G7E and 07A4.
-(blueprint: lem-weil-pbc-projection-local-ordinary-resolving).
+Source: Stacks Project, Modules on Sites, Tag 04J0; Cohomology on Sites, Tags 0G7E and 07A4.
 -/
 
 @[expose] public noncomputable section
@@ -339,29 +337,7 @@ end FromPresentation
 
 set_option linter.unusedVariables false in
 /-- Localization of the ordinary exact module pullback preserves resolving complexes.
-Source: Stacks Project, Modules on Sites, Tag 04J0;
-Cohomology on Sites, Tags 0G7E and 07A4.
-(blueprint: lem-weil-pbc-projection-local-ordinary-resolving).
-
-Proof: restrict the adjunct of the coefficient isomorphism to the slice functor
-Over.post. The localization square of ringed topoi identifies its inverse-image
-ring with the restriction of the global inverse-image ring, so its coefficient
-map is again invertible. Use g.coefficient_eq to identify this restricted map
-with the specified coefficient on every section. Module pullback is inverse image
-followed by extension of scalars along that isomorphism, hence exact. Module Kan extension and
-sheafification give the actual pullback left adjoint of the restricted direct
-image. Both are additive; the left adjoint preserves finite colimits. The slice
-module category has K-injective resolutions. These facts supply Operation.
-The usual inverse-image tensor comparison followed by extension of scalars is
-invertible and its adjunct sends x tensor y to the tensor of the two unit images.
-This proves the pure-unit normalization of OrdinaryTensor. Finally flat terms
-remain flat under inverse image and scalar extension (0G7E). A flat-term K-flat
-resolution can be built from flat generators by sums, cones and sequential
-homotopy colimits; inverse image and scalar extension preserve these operations
-and their tensor contractions. Equivalently apply the K-flat ringed-topos
-pullback theorem to the localized ringed topos. This proves preservation of the
-specified resolving class, including zero and unbounded complexes. No derived
-tensor model, shift structure, or derived comparison is chosen in this lemma. -/
+Source: Stacks Project, Modules on Sites, Tag 04J0; Cohomology on Sites, Tags 0G7E and 07A4. -/
 theorem localOrdinaryResolving_exists {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R_Y : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
     (R_X : Sheaf (ProEt.topology X) CommRingCat.{u + 1})

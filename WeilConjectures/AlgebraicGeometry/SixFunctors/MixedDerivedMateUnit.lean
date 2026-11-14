@@ -11,7 +11,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 /-! # Unit normalization of a mixed derived mate
 
 Source: Stacks Project, Tags 0F7B and 0D6E.
-(blueprint: lem-sfb-mixed-derived-mate-unit).
 -/
 
 @[expose] public section
@@ -65,8 +64,7 @@ private lemma square_factors
 ordinary homotopy mate followed by the target unit. Expand the derived mate as unit,
 square and counit; use their factorization identities and naturality. On complex
 representatives the remaining equality is the ordinary mate formula degree by degree.
-Source: Stacks Project, Tags 0F7B and 0D6E.
-(blueprint: lem-sfb-mixed-derived-mate-unit). -/
+Source: Stacks Project, Tags 0F7B and 0D6E. -/
 theorem mixedDerivedMateUnit
     {C D E V : Type*} [Category C] [Category D] [Category E] [Category V]
     [Abelian C] [Abelian D] [Abelian E] [Abelian V]

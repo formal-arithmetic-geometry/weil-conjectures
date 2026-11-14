@@ -12,9 +12,8 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleObjectInverseImage
 /-!
 # Inverse image along an object of the small pro-etale site is slice restriction
 
-Source: Stacks Project, Sites and Sheaves, Tags 03CE, 00VC, 00XZ, 00WH and 0H7J;
-Modules on Sites, Tags 03D2 and 03EK; pro-etale functoriality, Tag 09A5
-(blueprint: lem-sfb-proetale-object-inverse-image-restriction).
+Source: Stacks Project, Sites and Sheaves, Tags 03CE, 00VC, 00XZ, 00WH and 0H7J; Modules on Sites,
+Tags 03D2 and 03EK; pro-etale functoriality, Tag 09A5.
 
 The private comparison data live in
 `WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleObjectInverseImageRestrictionSupplement`.
@@ -31,11 +30,10 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 /-- Restriction of constant-coefficient modules through the constant-ring localization
-isomorphism `e : A_W ≅ A_X|_W`. This is the existing sectionwise pushforward of
+isomorphism `e: A_W ≅ A_X|_W`. This is the existing sectionwise pushforward of
 module sheaves along composition; its scalar action uses `e.hom` and its underlying
 abelian presheaf is exactly `U ↦ M(U → W → X)`.
-Source: Stacks, Tags 00XZ, 0H7J and 03D2
-(blueprint: lem-sfb-proetale-object-inverse-image-restriction). -/
+Source: Stacks, Tags 00XZ, 0H7J and 03D2. -/
 noncomputable abbrev proEtaleObjectModuleRestriction {X : Scheme.{u}} (W : X.ProEt)
     (A : Type u) [CommRing A]
     (e : proEtaleConstantRing W.left A ≅
@@ -239,32 +237,8 @@ presheaf comparison, the sheafification unit, the particular coefficient map, an
 module pullback. The commutative-ring comparison retains the ring structure needed
 for coefficients; `RingCat` also includes noncommutative ring sheaves.
 
-Source: Stacks Project, Sites and Sheaves, Tags 03CE, 00VC, 00XZ, 00WH and 0H7J;
-Modules on Sites, Tags 03D2 and 03EK; proetale.tex, Tag 09A5
-(blueprint: lem-sfb-proetale-object-inverse-image-restriction).
-
-Proof:
-1. Composition is left adjoint to base change. Its unit is the distinguished
-   index point, and its Hom equivalence proves that this point is initial.
-2. On presheaves, restriction and left Kan extension are left adjoints to the
-   same precomposition functor. Uniqueness of left adjoints gives their natural
-   isomorphism. The Hom-equivalence formula identifies its components with the
-   distinguished coprojections. Restriction is a sheaf, so the sheafification
-   unit is invertible and gives the normalized sheaf comparison.
-3. Continuous cocontinuous restriction commutes with sheafification, giving
-   the constant-ring isomorphism e and its constant-section equation. The
-   specified coefficient map is adjoint to the constant-section map. Using
-   naturality at the distinguished index point and the Kan-unit formula shows
-   that e followed by the inverse comparison and this map fixes constant
-   sections. Sheafification uniqueness and cancellation give the coefficient
-   equation, and hence invertibility of that particular coefficient map.
-4. Sheafification uniqueness on constant sections proves the coefficient unit
-   and counit equations for the site adjunction. Mathlib's
-   SheafOfModules.pushforwardPushforwardAdj then makes sectionwise module
-   restriction left adjoint to the specified module direct image. The existing
-   proEtaleRingModuleAdjunction makes the tensor-sheafification pullback left
-   adjoint to the same direct image. Uniqueness of left adjoints gives the
-   module isomorphism and its naturality. -/
+Source: Stacks Project, Sites and Sheaves, Tags 03CE, 00VC, 00XZ, 00WH and 0H7J; Modules on Sites,
+Tags 03D2 and 03EK; Tag 09A5. -/
 theorem proEtaleObjectInverseImageRestriction (X : Scheme.{u}) (W : X.ProEt)
     (A : Type u) [CommRing A] :
     (∀ U : W.left.ProEt,

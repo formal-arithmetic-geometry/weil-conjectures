@@ -25,8 +25,7 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import Mathlib.CategoryTheory.Sites.CoverLifting
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 /-! # Constructible finite-coefficient module pullback
-Source: preservation proof, step 5; Stacks Tags 09AI and 09AL
-(blueprint: lem-weil-pbc-finite-pullback-constructibility).
+Source: Stacks Tags 09AI and 09AL.
 -/
 
 @[expose] public noncomputable section
@@ -422,18 +421,7 @@ private theorem fixedConstructible_pullback {X Y : Scheme.{u}} (g : Y ⟶ X)
 
 /-- Exact finite-coefficient module inverse image preserves intrinsic constructibility.
 No completed complex, derived category, completeness, or support interval is involved.
-Source: preservation proof, step 5; Stacks Tags 09AI and 09AL
-(blueprint: lem-weil-pbc-finite-pullback-constructibility).
-
-Proof: pull back the finite locally closed stratification and its constructible strata.
-On each pulled-back stratum, pull back the covering sieve that trivializes the input.
-Base change preserves pro-etale covers. The inverse-image composition comparison
-identifies the pulled-back trivializations with inverse images of the same finite
-constant modules. The constant coefficient comparison is normalized on constant
-sections, and the quotient-linear tensor comparison is identity on pure tensors.
-Thus restriction along pbcLevelConstantComparison gives the required finite constant
-models with their original quotient action. The number of strata remains positive;
-empty strata and empty schemes obey the same covering and constant-module formulas. -/
+Source: Stacks Tags 09AI and 09AL. -/
 theorem pbc_finite_pullback_constructibility
     {S T : Scheme.{u}} [IsNoetherian S] [IsNoetherian T] (g : S ⟶ T)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ)

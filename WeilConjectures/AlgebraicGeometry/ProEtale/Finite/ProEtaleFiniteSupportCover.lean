@@ -13,7 +13,6 @@ import Mathlib.Topology.Spectral.Prespectral
 # Finite supports from local representatives
 
 Source: Stacks Project, Tags 00WK and 09AE.
-(blueprint: lem-exc-proetale-finite-support-cover)
 -/
 
 @[expose] public section
@@ -31,8 +30,7 @@ open has a finite affine covering whose nonzero restrictions lie over one compac
 open contained in that open. Refine the given covering by finitely many affine opens,
 take the union of the images of the nonzero members, and enclose this compact set in
 a compact open using the compact-open basis of a scheme. Empty supports are allowed.
-Source: Stacks Project, Tags 00WK and 09AE.
-(blueprint: lem-exc-proetale-finite-support-cover). -/
+Source: Stacks Project, Tags 00WK and 09AE. -/
 theorem finiteSupportCover (R : Type (u + 1)) [Ring R]
     {X T : Scheme.{u}} (Q : X.ProEt) [CompactSpace Q.left] [QuasiSeparatedSpace Q.left]
     (q : Q.left ⟶ T) (U : T.Opens)

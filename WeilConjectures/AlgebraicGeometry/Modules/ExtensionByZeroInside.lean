@@ -21,7 +21,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 set_option backward.isDefEq.respectTransparency false in
 /-- The unit identifies inside-U stalks, linearly and naturally.
 Source: Stacks Project, Sheaves, Lemma 00A7 (3).
-(blueprint: new-extension-by-zero-inside-stalk)
 
 Neighbourhoods contained in the open are cofinal at a point of the open, so the
 stalk of the extension is the input stalk.  The unit and restriction stalk

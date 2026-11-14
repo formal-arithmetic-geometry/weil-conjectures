@@ -20,8 +20,7 @@ import WeilConjectures.Mathlib.Topology.KrullDimension
 /-!
 # Dense projective completion of a scheme of dimension at most one
 
-Source: Stacks Project, Varieties, Tag 0BXV, `lemma-dim-1-projective-completion`
-(blueprint: lem-weil-pbc-curve-projective-dense-completion).
+Source: Stacks Project, Varieties, Tag 0BXV.
 -/
 
 @[expose] public section
@@ -36,24 +35,7 @@ namespace AlgebraicGeometry
 H-projective completion with dense, scheme-theoretically dense open image and finite
 boundary of closed points. The completion is reduced when the source is reduced and
 empty when the source is empty.
-Source: Stacks Project, Varieties, Tag 0BXV, `lemma-dim-1-projective-completion`.
-(blueprint: lem-weil-pbc-curve-projective-dense-completion)
-
-Proof:
-1. Use the dimension-one quasi-projectivity theorem to immerse X into a finite projective
-   space. Since X is Noetherian, this immersion is quasi-compact.
-2. Take its scheme-theoretic image C. The induced map a is an open immersion, dominant
-   and scheme-theoretically dominant. The closed inclusion of C in projective space
-   makes its structure map H-projective, hence proper and of finite type.
-3. Apply `topologicalKrullDim_le_of_dense` to the dense open image of a, and identify
-   that open with X using the open embedding. This gives dim C ≤ dim X ≤ 1.
-4. Every point of C specializes from a maximal point, and every maximal point lies
-   in the dense open image of a. Thus each chain in the closed boundary extends by
-   a point outside it. The specialization-chain dimension bound makes the boundary
-   zero-dimensional. The Noetherian T0 finiteness theorem makes it finite with all
-   its points closed in C. This also covers reducible and mixed-dimensional C.
-5. Scheme-theoretic dominance gives injectivity on all rings of sections, and makes
-   C reduced if X is reduced. If X is empty, the empty image is dense, so C is empty. -/
+Source: Stacks Project, Varieties, Tag 0BXV. -/
 theorem exists_projective_dense_completion_of_dim_le_one
     {k : Type u} [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))]
     [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]

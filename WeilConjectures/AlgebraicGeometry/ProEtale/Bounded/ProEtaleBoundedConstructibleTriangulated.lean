@@ -26,9 +26,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 /-!
 # Bounded constructible pro-etale complexes form a triangulated subcategory
 
-Source: Stacks Project, Tags 09AL, 09B5 and 06UQ; Weil blueprint,
-`definition-constructible-sheaves`
-(blueprint: lem-weil-proetale-dbc-triangulated).
+Source: Stacks Project, Tags 09AL, 09B5 and 06UQ.
 -/
 
 @[expose] public section
@@ -40,8 +38,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- The canonical constant-coefficient inverse-image comparison is invertible.
-Source: Stacks Project, Tag 0H7J, uniqueness of the constant-sheaf adjunction
-(blueprint: lem-pur-proetale-constant-coefficient-comparison). -/
+Source: Stacks Project, Tag 0H7J, uniqueness of the constant-sheaf adjunction. -/
 theorem constantComparison_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     (A : Type u) [CommRing A] : IsIso (proEtaleCoefficientInverseImageMap f A) :=
   proEtaleConstantRingComparison_isIso.{u} f A
@@ -178,31 +175,7 @@ private theorem finite_homology_support_iff_bounded
       ⟨b, fun i hi ↦ le_of_not_gt fun h ↦ hi ((DerivedCategory.isLE_iff K b).1 hb i h)⟩⟩
 
 /-- Bounded globally constructible cohomology is invariant under isomorphisms and
-cuts out a full triangulated subcategory. Source: Stacks Project, Tags 09AL,
-09B5 and 06UQ; Weil blueprint, `definition-constructible-sheaves`
-(blueprint: lem-weil-proetale-dbc-triangulated).
-
-Proof:
-1. A zero sheaf is constructible using the single stratum equal to the whole scheme.
-The canonical constant-ring comparison is invertible by uniqueness of the
-constant-sheaf left adjoint, with its normalization checked on constant sections.
-The specified pullback is therefore the existing exact operations functor and preserves zero
-objects.
-Localization and geometric stalks preserve zero objects as well. The identity covering
-therefore trivializes its restriction with the zero module, and its geometric stalks have
-singleton underlying
-sets. An isomorphism transports the same stratification, local trivializations and stalk
-finiteness, because module pullback, localization and geometric stalks are functorial.
-2. `constructibleProEtale_exactClosure` gives kernels, cokernels and extensions in the
-constructible class. The universal-property isomorphisms identify arbitrary limiting
-kernels and colimiting cokernels with the selected ones, yielding the ObjectProperty
-closure classes required by `cohomology_in_weak_serre_subcategory`.
-3. Its bounded clause supplies the triangulation of `homologyProperty P` intersected
-with the bounded standard derived class. A set of integers is finite exactly when it is
-bounded above and below. `DerivedCategory.isGE_iff` and `isLE_iff` turn those bounds for
-nonzero homology into the standard derived bounds. Thus the displayed predicate equals
-that intersection, up to commutation of its two conjuncts. Substitute this equality to
-obtain both isomorphism closure and triangulation. -/
+cuts out a full triangulated subcategory. Source: Stacks Project, Tags 09AL, 09B5 and 06UQ. -/
 theorem proEtale_bounded_constructible_isTriangulated
     (Y : Scheme.{u}) (A : Type u) [CommRing A] [Finite A] :
     ObjectProperty.IsClosedUnderIsomorphisms (fun K : proEtaleDerivedCategory Y A ↦

@@ -34,29 +34,25 @@ namespace AlgebraicGeometry.Scheme
 
 variable (X : Scheme.{u})
 
-/-- Abelian sheaves on the small étale site form a Grothendieck abelian category.
-(blueprint: `lem-weil-pbc-abelian-etale-sheaves-grothendieck`) -/
+/-- Abelian sheaves on the small étale site form a Grothendieck abelian category. -/
 theorem isGrothendieckAbelian_sheaf_smallEtaleTopology_addCommGrpCat :
     IsGrothendieckAbelian.{u + 1} (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :=
   inferInstance
 
-/-- Sheaves of `Λ`-modules on the small étale site form a Grothendieck abelian category.
-(blueprint: `lem-weil-pbc-module-sheaves-grothendieck-abelian`) -/
+/-- Sheaves of `Λ`-modules on the small étale site form a Grothendieck abelian category. -/
 @[stacks 03DA]
 theorem isGrothendieckAbelian_sheaf_smallEtaleTopology_moduleCat (Λ : Type (u + 1)) [Ring Λ] :
     IsGrothendieckAbelian.{u + 1} (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
   inferInstance
 
 /-- Sheaves of `Λ`-modules on the small étale site have enough injectives, since they form a
-Grothendieck abelian category. The case `Λ = ℤ` gives abelian sheaves.
-(blueprint: `lem-weil-pbc-module-sheaves-enough-injectives`) -/
+Grothendieck abelian category. The case `Λ = ℤ` gives abelian sheaves. -/
 @[stacks 079H]
 theorem enoughInjectives_sheaf_smallEtaleTopology_moduleCat (Λ : Type (u + 1)) [Ring Λ] :
     EnoughInjectives (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
   IsGrothendieckAbelian.enoughInjectives.{u + 1}
 
-/-- Abelian sheaves on the small étale site have enough injectives.
-(blueprint: `lem-weil-pbc-module-sheaves-enough-injectives`, the case `Λ = ℤ`) -/
+/-- Abelian sheaves on the small étale site have enough injectives. -/
 theorem enoughInjectives_sheaf_smallEtaleTopology_addCommGrpCat :
     EnoughInjectives (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :=
   IsGrothendieckAbelian.enoughInjectives.{u + 1}

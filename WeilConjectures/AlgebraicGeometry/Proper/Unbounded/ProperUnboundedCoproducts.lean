@@ -17,10 +17,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.HomologyCoproducts
 /-!
 # Proper direct image preserves arbitrary small direct sums
 
-Source: blueprint main-20261015, chap-Construction-of-f,
-sk-lem-proper-unbounded-window-ii, statement and its bounded/general proof details
-(blueprint: sk-lem-proper-unbounded-window-ii).
-
 The standing setting of sk-def-sfb-dc-setting is inherited through the proper window
 and heart-bound lemmas: separated finite-type schemes over k, with positive characteristic
 different from ell, and morphisms over k.
@@ -50,9 +46,7 @@ canonical coproduct comparison is invertible in Dic. IndCons is the small filter
 closure of the recorded finite constant-model constructible modules. The cofans specify
 ambient coproducts; their cohomology conditions put them in the full subcategories Dic.
 The last arrow has component `Rp_*(c.inj i)` on the i-th summand, by `IsColimit.fac`.
-Any other coproducts yield the same assertion by their unique compatible isomorphisms.
-Source: blueprint sk-lem-proper-unbounded-window-ii, statement and proof steps 1 and 6
-(blueprint: sk-lem-proper-unbounded-window-ii). -/
+Any other coproducts yield the same assertion by their unique compatible isomorphisms. -/
 def ProperUnboundedCoproductAssertions
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     {X Y : Scheme.{u}} (p : X ⟶ Y) : Prop :=
@@ -81,30 +75,7 @@ def ProperUnboundedCoproductAssertions
 
 /-- Proper direct image preserves arbitrary small sums of unbounded ind-constructible
 complexes in the standing scheme setting, with finite-extension condensed coefficients
-and a uniform geometric-fibre bound.
-Source: blueprint main-20261015, lemma-proper-direct-image-unbounded-complexes--3, statement and
-proof (blueprint: lemma-proper-direct-image-unbounded-complexes--3).
-
-Proof plan, the six steps of the DAG:
-1. corollary-ambient-ind-derived puts S = sum K_i in Dic. The proper window lemma puts
-   Rp_*K_i and Rp_*S in Dic. Define the comparison by its coprojection equations.
-2. For q in Z put r = q-2d-1, A_i = tau_le(q) K_i, W_i = tau_ge(r) A_i, and similarly
-   A_S and W_S. corollary-ambient-ind-derived and proposition-open-direct-image-preserves-finite
-   keep these in Dic. The maps sum A_i -> A_S and sum W_i -> W_S come from truncated coprojections.
-   Their cohomologies are the cohomology-of-sums isomorphisms in the retained ranges,
-   and zero-to-zero elsewhere. lemma-proper-direct-image-unbounded-complexes--3 makes both
-   maps invertible. Naturality makes them compatible with K <- A -> W.
-3. lemma-proper-direct-image-unbounded-complexes--3 applies to W_i in the common interval [r,q].
-   Its comparison is invertible, and step 2 identifies its target with Rp_*W_S.
-4. Apply H^q Rp_* to the canonical zigzags. The squares comparing sums commute on
-   each coprojection by functoriality. lemma-proper-direct-image-unbounded-complexes makes the two
-   cohomology arrows invertible for each K_i and for S, with the same bound d.
-5. Conjugating the bounded-family comparison along these invertible arrows gives
-   invertibility of H^q of the original comparison. The cohomology-of-sums formula
-   identifies its source. The cohomological isomorphism criterion gives an ambient iso.
-6. corollary-ambient-ind-derived gives closure of Dic under ambient sums. The ambient
-   universal property restricts to the full subcategory, and the ambient inverse is
-   a morphism there. This gives exactly the canonical comparison in Dic. -/
+and a uniform geometric-fibre bound. -/
 theorem properUnbounded_preservesCoproducts
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (k : Type u) [Field k] (p₀ : ℕ) [CharP k p₀] (hp₀ : 0 < p₀) (hpℓ : p₀ ≠ ℓ)
@@ -152,23 +123,7 @@ theorem properUnbounded_preservesCoproducts
       exact ⟨(Cofan.isColimitMapCoconeEquiv _ M c).2 hc'.ofPointIso⟩
 
 /-- The arbitrary-sum theorem for the condensed algebraic closure, whose sections have
-values in a finite subextension, in the standing scheme setting with the same fibre bound.
-Source: blueprint main-20261015, lemma-proper-direct-image-unbounded-complexes--3, both coefficient
-cases (blueprint: lemma-proper-direct-image-unbounded-complexes--3).
-
-Proof plan: as in the six DAG steps, form the ambient sum using corollary-ambient-ind-derived
-and use lemma-proper-direct-image-unbounded-complexes for its image and the images of all summands.
-Fix q and r=q-2d-1. By proposition-open-direct-image-preserves-finite and the cohomology-of-sums
-formula, the sums of tau_le(q) K_i and tau_ge(r) tau_le(q) K_i are their corresponding truncations
-of S: the canonical maps induce cohomology isomorphisms and hence are invertible by
-lemma-proper-direct-image-unbounded-complexes--3. They commute with both truncation arrows.
-Apply lemma-proper-direct-image-unbounded-complexes--3 to the window family in [r,q]. Its comparison
-is invertible. Functoriality on each coprojection makes the cohomology comparison squares
-for K <- A -> W commute. The proper window lemma makes every vertical arrow invertible,
-both for the family and for S. Conjugate to obtain invertibility of H^q of the original
-comparison, and use the cohomological isomorphism criterion in every degree. Finally
-ambient-sum closure from corollary-ambient-ind-derived and fullness put both coproducts,
-the comparison and its inverse in Dic. -/
+values in a finite subextension, in the standing scheme setting with the same fibre bound. -/
 theorem properUnbounded_preservesCoproducts_padicAlgCl
     (ℓ : ℕ) [Fact ℓ.Prime]
     (k : Type u) [Field k] (p₀ : ℕ) [CharP k p₀] (hp₀ : 0 < p₀) (hpℓ : p₀ ≠ ℓ)

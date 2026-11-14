@@ -14,9 +14,7 @@ set_option linter.privateModule false
 
 /-! # Inverse-limit coefficient transport and scalar chain comparison
 
-Source: Stacks Project, sites-modules.tex, Tag 03EL, and the inverse-limit and
-termwise chain calculation in the node's proof
-(blueprint: lem-weil-isomorphism-limit-scalar-chain-comparison).
+Source: Stacks Project, Tag 03EL.
 
 The sectionwise inverse image is the recorded canonical model for an isomorphism.
 The index `op n` represents level `m = n + 1` of each inverse system.

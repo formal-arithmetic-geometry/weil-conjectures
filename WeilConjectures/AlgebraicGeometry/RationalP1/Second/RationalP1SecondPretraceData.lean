@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.RationalP1.Second.RationalP1Seco
 public import WeilConjectures.AlgebraicGeometry.RationalP1.Ambient.RationalP1AmbientTail
 
 /-! # Maps for the trace-free second projective-line calculation
-
-Source: the second identity of the rational projective-line triangle calculation.
-(blueprint: def-sfb-rational-p1-second-pretrace-data).
 -/
 
 @[expose] public noncomputable section
@@ -31,9 +28,7 @@ attribute [local irreducible] secondLineComparison twistProjectionMap
 attribute [local irreducible] moduleObjectDerivedPullback moduleObjectDerivedPushforward
 attribute [local irreducible] firstProjection secondProjection square condensedAmbientExchange
 
-/-- The specified shifted Tate comparison on the first projection.
-Source: rational projective-line triangle calculation, Second identity
-(blueprint: lem-sfb-rational-p1-second-pretrace). -/
+/-- The specified shifted Tate comparison on the first projection. -/
 @[irreducible]
 def firstLineComparisonForTrace
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
@@ -55,18 +50,14 @@ def firstLineComparisonForTrace
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ] (Y : Scheme.{u})
 
-/-- Cache the actual canonical monoidal structure through the fixed functor names.
-Source: extraction of q*K in the Second identity
-(blueprint: lem-sfb-rational-p1-second-pretrace). -/
+/-- Cache the actual canonical monoidal structure through the fixed functor names. -/
 @[irreducible]
 def secondTracePullMonoidal :
     (moduleObjectDerivedPullback Λ (ProjectiveLine Y ↘ Y)).Monoidal := by
   unfold internalMonoidal internalTensorBundle nativeTensorBundle moduleObjectDerivedPullback
   exact monoidal_leftDerivedUpperStar Λ (ProjectiveLine Y ↘ Y)
 
-/-- Cache the native derived Koszul braiding through the fixed tensor interface.
-Source: extraction of q*K in the Second identity
-(blueprint: lem-sfb-rational-p1-second-pretrace). -/
+/-- Cache the native derived Koszul braiding through the fixed tensor interface. -/
 @[irreducible]
 def secondTraceBraided : BraidedCategory (DerivedCategory (Modules Λ (ProjectiveLine Y))) := by
   unfold internalMonoidal internalTensorBundle nativeTensorBundle
@@ -75,9 +66,7 @@ def secondTraceBraided : BraidedCategory (DerivedCategory (Modules Λ (Projectiv
       toBraidedCategory := sheafBraidedCategory Ab.{u + 1} (ProjectiveLine Y) }
   exact DerivedCategory.braidedCategory' (Modules Λ (ProjectiveLine Y))
 
-/-- The inverse unitator of the canonical monoidal derived pullback.
-Source: the coefficient-unit comparison in the Second identity
-(blueprint: lem-sfb-rational-p1-second-pretrace). -/
+/-- The inverse unitator of the canonical monoidal derived pullback. -/
 @[irreducible]
 def secondTraceUnitIso :
     (moduleObjectDerivedPullback Λ (ProjectiveLine Y ↘ Y)).obj
@@ -87,9 +76,7 @@ def secondTraceUnitIso :
   exact (Functor.Monoidal.εIso
     (moduleObjectDerivedPullback Λ (ProjectiveLine Y ↘ Y))).symm
 
-/-- The tensorator of the canonical monoidal derived pullback, in the fixed interface.
-Source: extraction of q*K in the Second identity
-(blueprint: lem-sfb-rational-p1-second-pretrace). -/
+/-- The tensorator of the canonical monoidal derived pullback, in the fixed interface. -/
 @[irreducible]
 def secondTraceTensorIso (K V : DerivedCategory (Modules Λ Y)) :
     (moduleObjectDerivedPullback Λ (ProjectiveLine Y ↘ Y)).obj K ⊗
@@ -99,9 +86,7 @@ def secondTraceTensorIso (K V : DerivedCategory (Modules Λ Y)) :
   exact Functor.Monoidal.μIso
     (moduleObjectDerivedPullback Λ (ProjectiveLine Y ↘ Y)) K V
 
-/-- The native Koszul symmetry in the fixed tensor interface.
-Source: extraction of q*K in the Second identity
-(blueprint: lem-sfb-rational-p1-second-pretrace). -/
+/-- The native Koszul symmetry in the fixed tensor interface. -/
 @[irreducible]
 def secondTraceSwap (A B : DerivedCategory (Modules Λ (ProjectiveLine Y))) :
     A ⊗ B ≅ B ⊗ A := by
@@ -109,9 +94,7 @@ def secondTraceSwap (A B : DerivedCategory (Modules Λ (ProjectiveLine Y))) :
   exact β_ A B
 
 /-- Extract a further pulled factor from a twisted pulled object, before evaluation.
-This is the tensorator, associators and native symmetry, conjugated by tensorShiftIso.
-Source: extraction of q*K in the Second identity
-(blueprint: lem-sfb-rational-p1-second-pretrace). -/
+This is the tensorator, associators and native symmetry, conjugated by tensorShiftIso. -/
 @[irreducible]
 def secondTraceStrength (L : Modules Λ (ProjectiveLine Y))
     (K V : DerivedCategory (Modules Λ Y)) :
@@ -130,9 +113,7 @@ def secondTraceStrength (L : Modules Λ (ProjectiveLine Y))
     tensorIso (secondTraceTensorIso Λ Y K V) (Iso.refl T) ≪≫
     tensorShiftIso Λ (ProjectiveLine Y) L (F.obj (K ⊗ V))
 
-/-- The projection part of the counit, before any scalar trace is applied.
-Source: cancellation of the projection and its inverse in the Second identity
-(blueprint: lem-sfb-rational-p1-second-pretrace). -/
+/-- The projection part of the counit, before any scalar trace is applied. -/
 @[irreducible]
 def counitProjectionPart (L : Modules Λ (ProjectiveLine Y))
     (K : DerivedCategory (Modules Λ Y))
@@ -151,9 +132,7 @@ def counitProjectionPart (L : Modules Λ (ProjectiveLine Y))
     inv (projectionMap Λ (ProjectiveLine Y ↘ Y) K _)
 
 /-- The literal trace-free equation, checked before substituting a coefficient ring.
-Its sole field is an equality of the specified maps, with no additional data.
-Source: extraction of q*K in the Second identity
-(blueprint: lem-sfb-rational-p1-second-pretrace). -/
+Its sole field is an equality of the specified maps, with no additional data. -/
 structure SecondPretraceEquation (L : ∀ X : Scheme.{u}, Modules Λ X)
     (e : (moduleObjectDerivedPullback Λ (secondProjection Y)).obj
       (((DerivedCategory.singleFunctor (Modules Λ (ProjectiveLine Y)) 0).obj
@@ -178,9 +157,7 @@ structure SecondPretraceEquation (L : ∀ X : Scheme.{u}, Modules Λ X)
       ((moduleObjectDerivedPullback Λ (firstProjection Y)).obj M))) :
     J ≫ unitTail Λ Y L e M hb hp ≫ f = (M ◁ x) ≫ S
 
-/-- The native self-square exchange, with the fixed module-object endpoints.
-Source: rational projective-line triangle calculation, Second identity
-(blueprint: def-sfb-rational-p1-second-pretrace-data). -/
+/-- The native self-square exchange, with the fixed module-object endpoints. -/
 @[irreducible]
 def secondPretraceExchangeMap (M : DerivedCategory (Modules Λ (ProjectiveLine Y))) :
     (moduleObjectDerivedPullback Λ (ProjectiveLine Y ↘ Y)).obj
@@ -191,8 +168,7 @@ def secondPretraceExchangeMap (M : DerivedCategory (Modules Λ (ProjectiveLine Y
   exact (condensedAmbientExchange Λ (square Y)).app M
 
 /-- Transfer invertibility of the native exchange to its literal fixed-endpoint wrapper.
-Source: definition of the native exchange wrapper
-(blueprint: def-sfb-rational-p1-second-pretrace-data). -/
+Source: definition of the native exchange wrapper. -/
 theorem secondPretraceExchangeMap_isIso
     (M : DerivedCategory (Modules Λ (ProjectiveLine Y)))
     (hb : IsIso ((condensedAmbientExchange Λ (square Y)).app M)) :
@@ -202,8 +178,7 @@ theorem secondPretraceExchangeMap_isIso
   exact hb
 
 /-- The fixed ambient inverse is the inverse of the literal exchange wrapper.
-Source: definitions of the native exchange wrapper and ambient inverse
-(blueprint: def-sfb-rational-p1-second-pretrace-data). -/
+Source: definitions of the native exchange wrapper and ambient inverse. -/
 theorem secondPretraceExchangeMap_inverse
     (M : DerivedCategory (Modules Λ (ProjectiveLine Y)))
     (hb : IsIso ((condensedAmbientExchange Λ (square Y)).app M)) :
@@ -218,9 +193,7 @@ theorem secondPretraceExchangeMap_inverse
   unfold moduleObjectDerivedPullback moduleObjectDerivedPushforward
   exact IsIso.hom_inv_id ((condensedAmbientExchange Λ (square Y)).app M)
 
-/-- The forward scalar exchange on the shifted line, with its fixed root comparison.
-Source: rational projective-line triangle calculation, Second identity
-(blueprint: lem-sfb-rational-p1-second-pretrace). -/
+/-- The forward scalar exchange on the shifted line, with its fixed root comparison. -/
 @[irreducible]
 def secondTraceExchange
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
@@ -238,9 +211,7 @@ def secondTraceExchange
       (secondProjection Y)).map (firstLineComparisonForTrace l c k p hpl Y).hom
 
 /-- The forward projection with the untwisted factor q*K outside the second direct image.
-The first pulled Tate line is identified with the fixed line on the self-product.
-Source: Second identity, extraction of q*K
-(blueprint: def-sfb-rational-p1-second-pretrace-data). -/
+The first pulled Tate line is identified with the fixed line on the self-product. -/
 @[irreducible]
 def secondExtractProjection
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))

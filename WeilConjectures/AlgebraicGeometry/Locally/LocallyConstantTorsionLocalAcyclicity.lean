@@ -18,8 +18,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 /-!
 # Local acyclicity for locally constant torsion coefficients
 
-Source: Stacks Project, Tag 0GJR, lemma-locally-acyclic-locally-constant
-(blueprint: lem-weil-pbc-locally-constant-torsion-local-acyclicity).
+Source: Stacks Project, Tag 0GJR.
 -/
 
 @[expose] public section
@@ -33,30 +32,7 @@ namespace AlgebraicGeometry.Etale
 /-- Local acyclicity extends to locally constant abelian sheaves whose stalk elements
 have finite order prime to the residue characteristic; in characteristic zero every
 finite order is allowed. No finiteness of stalks or common annihilator is assumed.
-Source: Stacks Project, Tag 0GJR, lemma-locally-acyclic-locally-constant
-(blueprint: lem-weil-pbc-locally-constant-torsion-local-acyclicity).
-
-Proof:
-1. Fix a geometric point x and a test geometric point t, and put V equal to the
-strict-local fibre. The strict henselizations are affine, so V is affine and qcqs.
-The germ-compatible constant comparison identifies the pullback of G to V with the
-constant sheaf on its geometric stalk M. Under this comparison the specified alpha
-map is the constant-section unit followed by the sections of the comparison.
-2. Apply this same comparison first to every admissible constant cyclic sheaf on X.
-Its geometric stalk is canonically its coefficient group. Naturality of the
-constant-section unit and invariance of cohomology under isomorphism convert the
-hypothesis on f into invertibility of that unit and positive cohomology vanishing
-for the constant cyclic sheaf on V itself.
-3. Apply the constant-coefficient devissage lemma. The finitely generated subgroups
-of M form a directed colimit and are finite because M is torsion. A finite abelian
-group is a finite sum of cyclic groups; each cyclic generator retains its order in M,
-so its order is admissible. Additivity of derived cohomology handles these finite sums.
-Constant sheaves preserve colimits, and qcqs etale cohomology preserves filtered colimits
-at the coefficient universe, including degree zero through its comparison with sections.
-Thus the constant-section unit for M is invertible and its positive cohomology vanishes.
-4. Transport these two conclusions along the germ-compatible comparison from step 1.
-The equality for the specified alpha map gives its invertibility, and the cohomology
-isomorphism gives positive vanishing. This holds for every x and t. -/
+Source: Stacks Project, Tag 0GJR. -/
 theorem isLocallyAcyclicRelative_of_locallyConstant_torsion
     {X S : Scheme.{u}} (f : X ⟶ S) (hf : IsLocallyAcyclic f)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

@@ -58,19 +58,7 @@ attribute [local irreducible] ModuleRingedComparison.tensor tensorComparison qTe
 
 -- Paste the localization diagram with its functors retained.
 /-- The conjugation equation on flat-term K-flat representatives.
-Source: Stacks 06YY, 07A4 and 07A6; parent proof steps 6--8.
-(blueprint: lem-sfb-quotient-section-tensor-transport-kflat).
-
-Proof: the section equivalence preserves the K-flat and flat-term tests. Compare
-ordinary scalar tensor maps on scalar-unit pure tensors and use the two coequalizer
-universal properties. Extend this equality to signed totals by checking every
-coproduct summand. Paste the scalar normalization on the total tensor with its
-counit naturality, the two tensor-localization equations, and `hb`. The factor
-scalar normalizations and naturality identify one path; `hbarB` identifies the
-other. The ordinary total square makes its total map invertible. K-flat scalar
-computation and counit naturality then make the section localization map invertible.
-Cancel it, the two factor scalar counits and localization maps, and finally the
-two scalar realization isomorphisms to obtain the displayed conjugation equation. -/
+Source: Stacks 06YY, 07A4 and 07A6. -/
 theorem section_tensor_transport_kflat (T : Scheme.{u})
     (c : ScalarSectionData a T) (hc : ScalarSectionNormalized a T c)
     (b : TensorIso a T) (hb : TensorNormalized a T b)

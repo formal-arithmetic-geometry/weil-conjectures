@@ -16,7 +16,6 @@ import Mathlib.LinearAlgebra.TensorProduct.Quotient
 # Unramifiedness detected on a principal quotient of a local base
 
 Source: Stacks Project, Tag 02GU, differential criterion, and Nakayama's lemma (00DV).
-(blueprint: lem-sbc-finite-unramified-principal-quotient)
 -/
 
 @[expose] public section
@@ -51,18 +50,7 @@ private theorem algebra_unramified_of_quotient
 /-- A finite morphism over a local ring is formally unramified if its principal
 quotient is etale and the defining element belongs to the maximal ideal.
 
-Source: Stacks Project, Tag 02GU (differential criterion), and Tag 00DV (Nakayama).
-(blueprint: lem-sbc-finite-unramified-principal-quotient)
-
-Proof: Write the finite morphism as Spec B to Spec A, with B a finite A-algebra.
-Since A is Noetherian, B is finitely presented, and its module of relative
-Kahler differentials is finite over A. Base change identifies the quotient of
-this module by f with the relative differentials of B/fB over A/fA. The latter
-vanish because the quotient morphism is etale. Thus the module equals f times
-itself. As f lies in the maximal ideal of A, Nakayama's lemma makes the module
-zero. Vanishing of relative differentials is equivalent to formal
-unramifiedness, which yields the claimed scheme property. The argument includes
-the zero algebra and f = 0; it needs no flatness or depth hypothesis. -/
+Source: Stacks Project, Tag 02GU (differential criterion), and Tag 00DV (Nakayama). -/
 theorem formallyUnramified_of_finite_of_principal_quotient_etale
     (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A]
     (f : A) (hf : f ∈ IsLocalRing.maximalIdeal A)

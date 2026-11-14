@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 /-! # Base change of finite Galois torsors
 
 Source: Stacks Project, Tag 0EZJ, final pullback step; finite étale torsors as in Tag 0BTV.
-(blueprint: lem-sbc-galois-cover-base-change)
 -/
 
 @[expose] public section
@@ -107,14 +106,7 @@ private theorem torsor_comparison_baseChange
 
 /-- A finite Galois torsor has a base change along every morphism of schemes.
 
-Source: Stacks Project, Tag 0EZJ, final pullback step; Tag 0BTV.
-(blueprint: lem-sbc-galois-cover-base-change)
-
-Proof: Form the fibre product, pull back the action using the universal property,
-and check its laws on the two projections. Finite, étale, and surjective morphisms
-are stable under base change. Universality of finite coproducts and pullback pasting
-identify the new torsor comparison with the base change of the original one,
-so it is an isomorphism. -/
+Source: Stacks Project, Tag 0EZJ, final pullback step; Tag 0BTV. -/
 theorem GaloisCover.exists_baseChange
     {X Y : Scheme.{u}} (G : Type (u + 1)) [Group G] [Finite G]
     (Z : GaloisCover G X) (f : Y ⟶ X) :

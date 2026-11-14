@@ -10,7 +10,6 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Mono
 
 /-! Sectionwise injectivity input for the proper/open counit.
-(blueprint: lem-exc-proetale-proper-open-counit-mono-section)
 -/
 @[expose] public section
 set_option autoImplicit false

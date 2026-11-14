@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedMatchingChartKernelT
 /-! # The localized ring equivalence behind the punctured section comparison
 
 Source: Stacks Project, Tags 0BLH, 05ER and 05EU.
-(blueprint: new-sbc-punctured-completion-matching-affine-sections-comparison)
 -/
 
 @[expose] public section
@@ -73,7 +72,6 @@ identification of sections on an affine scheme, this localized projection is
 exactly the `appTop` map displayed below.  The compatibility with addition and
 multiplication is the algebra compatibility in Tag 05EU, so the localized
 isomorphism is a `RingEquiv`.
-(blueprint: new-sbc-punctured-completion-matching-affine-sections-comparison)
 -/
 theorem exists_puncturedMap_basicOpen_appTop_ringEquiv
     {A : Type u} [CommRing A] [IsNoetherianRing A] [IsLocalRing A]

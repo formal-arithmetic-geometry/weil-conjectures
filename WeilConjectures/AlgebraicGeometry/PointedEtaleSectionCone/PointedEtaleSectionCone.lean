@@ -29,7 +29,7 @@ variable {S T : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω]
   {N : I ⥤ (Scheme.pointSmallEtale s).fiber.Elements} {g : T ⟶ S}
 
 /-- Compatible sections of the pullbacks of an initial pointed étale diagram.
-Source: Stacks Project, Tag 03Q9 (blueprint: def-weil-pbc-pointed-etale-section-cone). -/
+Source: Stacks Project, Tag 03Q9. -/
 structure PointedEtaleSectionCone (g : T ⟶ S)
     (N : I ⥤ (Scheme.pointSmallEtale s).fiber.Elements) where
   initial : N.Initial
@@ -43,7 +43,7 @@ namespace PointedEtaleSectionCone
 variable (c : PointedEtaleSectionCone g N)
 
 /-- Restrict sections using the inverse-image unit and a section of the pullback.
-Source: Stacks Project, Tag 03Q9 (blueprint: def-weil-pbc-pointed-etale-section-cone). -/
+Source: Stacks Project, Tag 03Q9. -/
 noncomputable def restriction
     (F : Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}) (i : I) :
     F.obj.obj (op (N.obj i).1) ⟶
@@ -58,7 +58,7 @@ noncomputable def restriction
         (Scheme.Etale.mk (𝟙 T)) Over.mkIdTerminal)).inv.app _
 
 /-- A stalk restriction is specified by all its pointed germ components.
-Source: Stacks Project, Tag 03Q9 (blueprint: def-weil-pbc-pointed-etale-section-cone). -/
+Source: Stacks Project, Tag 03Q9. -/
 def IsRestriction (F : Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1})
     (r : (Scheme.pointSmallEtale s).sheafFiber.obj F ⟶
       (Sheaf.Γ T.smallEtaleTopology AddCommGrpCat.{v + 1}).obj
@@ -67,11 +67,7 @@ def IsRestriction (F : Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1})
     c.restriction F i
 
 /-- Compatible restrictions descend uniquely from the geometric stalk.
-Source: Stacks Project, Tag 03Q9 (blueprint: def-weil-pbc-pointed-etale-section-cone).
-Proof: initiality of N makes its opposite final. Whisker the stalk colimit cocone by N.op.
-Naturality of the unit and of the given sections makes the restrictions a cocone.
-The colimit descent has the prescribed germ components; colimit extensionality proves
-uniqueness. This also covers an arbitrary choice of representatives. -/
+Source: Stacks Project, Tag 03Q9. -/
 theorem existsUnique_restriction
     (F : Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}) :
     ∃! r : (Scheme.pointSmallEtale s).sheafFiber.obj F ⟶

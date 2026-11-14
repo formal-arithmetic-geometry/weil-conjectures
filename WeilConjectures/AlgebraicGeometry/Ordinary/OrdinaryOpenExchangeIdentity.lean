@@ -14,8 +14,7 @@ import all Mathlib.Algebra.Homology.Localization
 
 /-! # Identity normalization for ordinary open exchange
 
-Source: Stacks Project, Tags 03DI, 07A7 and 099N; the identity part of
-proof step 7 of `proposition-composition-base-change-rf-shriek--4`.
+Source: Stacks Project, Tags 03DI, 07A7 and 099N.
 -/
 
 

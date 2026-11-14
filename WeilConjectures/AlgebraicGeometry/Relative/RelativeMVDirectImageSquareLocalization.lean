@@ -116,22 +116,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Localization of an ordinary direct-image square gives the square mate of
 pinned derived pullbacks on every complex. Source: Stacks Project, Tags 08HY
-and 0D5T. (blueprint: lem-pc-relative-mv-direct-image-square-localization).
-Proof: On homotopy categories the two normalized composition isomorphisms
-satisfy the pasted right-derived unit equations. The proved normalized
-square-mate theorem identifies the conjugate of the fixed pullback square
-with the first composition comparison, equality transport, and the inverse
-second comparison. Paste the two composition-unit equations with the
-ordinary square's unit transport, cancelling only composition isomorphisms.
-For complexes, expand the localization unit's quotient comparison factors;
-their components are identities and their images cancel by map_id. Apply the
-homotopy equation to the quotient of J. The induced square transformation on
-that quotient is the quotient of its termwise transformation, by the
-construction of mapHomotopyCategory. Functoriality and the identity factors
-in mapHomologicalComplexCompIso identify its localization with Q of the
-complex square. This requires neither K-injectivity, a cartesian square, a
-cover nor exactness. Identity morphisms, empty schemes and zero complexes
-satisfy the same natural transformation equations. -/
+and 0D5T. -/
 theorem relativeMV_direct_image_square_localization
     {X S X' S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)

@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.SingleComplexOpenRestrictionData
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 
 /-! # Coherence of the local perfect target model
-Source: Stacks Project, Tags 06YJ, 0D5S and 08DW.
-(blueprint: lem-sc-picard-termwise-target-coherence) -/
+Source: Stacks Project, Tags 06YJ, 0D5S and 08DW. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -153,27 +152,7 @@ private theorem open_model_iso (W : Scheme.{v}) (E : schemeDerivedCategory W)
 
 /-- The perfect target model has object comparisons compatible with the canonical
 composition counit. This assertion involves no morphism out of a source single.
-Source: Stacks Project, Tags 06YJ, 0D5S and 08DW.
-(blueprint: lem-sc-picard-termwise-target-coherence)
-
-Proof:
-1. Fix once the given representing isomorphism for E restricted to U. Transport K
-   by the exact open-site equivalence. The equivalence preserves zero terms and
-   finite-free retracts, so the resulting complex is bounded above and flat in
-   every degree. It is therefore K-flat.
-2. Identify derived pullback along the open immersion with exact open restriction,
-   followed by the open-site equivalence. Pull back the representing isomorphism
-   along s and compose with the K-flat counit at the transported complex. Precompose
-   with the inverse derived composition comparison for s followed by U.ι, and
-   transport along hf. These are the b_(t,s,hf).
-3. Substitute these composites in the displayed equation. Associativity of the
-   canonical derived composition isomorphisms identifies the two paths through
-   the open immersion. The defining counit equation for composition, evaluated at
-   the transported K-flat model, identifies the remaining paths with the termwise
-   underived composition comparison. Naturality of the counit moves the fixed
-   model isomorphism across the square. Equality transports hs, ht, hf and hf'
-   agree by proof irrelevance. No vanishing in negative degrees is used; the
-   calculation is unchanged for a zero model or an empty scheme. -/
+Source: Stacks Project, Tags 06YJ, 0D5S and 08DW. -/
 theorem picard_termwise_target_coherence
     (W : Scheme.{v}) (E : schemeDerivedCategory W) (U : W.Opens)
     (K : CochainComplex

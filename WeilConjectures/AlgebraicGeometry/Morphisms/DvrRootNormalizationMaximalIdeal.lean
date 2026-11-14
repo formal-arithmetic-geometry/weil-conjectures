@@ -28,29 +28,7 @@ namespace AlgebraicGeometry.Scheme
 set_option linter.unusedVariables false in
 /-- Adjoining a group-order root of a DVR uniformizer kills the ramification of a torsor.
 
-Source: Stacks Project, Tags 09EV, 09EB, 0BRM, 09E7, and 0307.
-(blueprint: lem-sbc-dvr-root-normalization-maximal-ideal)
-
-Proof: A group has positive order n. Tag 09EV gives that B[t]/(t^n-pi) is a DVR
-with uniformizer t and ramification index n over B. The generic torsor is a product
-of Galois field extensions with stabilizer groups, so each field degree divides n.
-For each field factor, 09EB gives degree = number of primes times ramification
-index times residue degree. Both indices divide n. Since n is invertible, the
-residue inseparable degree is one and the ramification index is prime to residue
-characteristic. Apply 0BRM to these tame extensions and the index-n root extension.
-Its normalized factors are weakly unramified by 09E7. In each local factor the
-image of t therefore generates the maximal ideal. Integral closure localization
-0307 identifies those factors with the displayed normalization stalks and preserves
-the structural map, giving the equality below. For n=1 this is the original
-unramified extension; disconnected torsors are treated factor by factor.
-
-Lean assembly: field_torsor_galois_components isolates the field classification.
-The component-wise tame calculation dvr_galois_components_root_cotangent supplies
-only m <= (tau) + m^2, without assuming finite normalization. Finiteness in this
-statement makes the normalization locally Noetherian, hence m finitely generated.
-Nakayama yields m <= (tau). The root-prime hypothesis and stalk localization identify
-the base maximal ideal with the root germ's span; locality maps that germ into m,
-proving the opposite inclusion. -/
+Source: Stacks Project, Tags 09EV, 09EB, 0BRM, 09E7, and 0307 -/
 theorem dvr_root_normalization_maximalIdeal
     (B : CommRingCat.{u}) [IsDomain B] [IsDiscreteValuationRing B]
     (pi : B) (hpi : Irreducible pi)

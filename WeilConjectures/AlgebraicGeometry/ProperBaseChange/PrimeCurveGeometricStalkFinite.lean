@@ -22,7 +22,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
 # Finite geometric stalks for prime coefficients on smooth proper curves
 
 Source: Stacks Project, Tag 0GKV, case (a), finite-stalk paragraph.
-(blueprint: lem-weil-pbc-prime-curve-geometric-stalks-finite)
 -/
 
 @[expose] public section
@@ -64,19 +63,7 @@ private theorem constant_curve_cohomology_finite
   exact Finite.of_equiv _ E.addCommGroupIsoToAddEquiv.toEquiv.symm
 /-- The geometric stalks of every nonnegative prime-coefficient higher direct image
 are finite, including at points of residue characteristic equal to the prime.
-Source: Stacks Project, Tag 0GKV, case (a), finite-stalk paragraph.
-(blueprint: lem-weil-pbc-prime-curve-geometric-stalks-finite)
-
-Proof: smoothness and geometric connectedness imply geometric irreducibility. The
-residue-field dimension hypothesis therefore gives smooth relative dimension one.
-After base change to the algebraically closed field, the source is a smooth proper
-connected curve of dimension one. The curve calculation C5 gives finite cohomology of
-the constant module R/(ell), where R is the lifted prime field. Since ell = 0 in R,
-this constant module is R. The module/abelian cohomology comparison and the Ext/derived
-comparison transfer C5 to module-valued derived cohomology. Proper base change identifies
-the required stalk with this cohomology; inverse image preserves the constant sheaf.
-The input constant sheaf has finite stalks by the constant-stalk isomorphism, supplying
-the finiteness hypothesis of the geometric-fibre formula. -/
+Source: Stacks Project, Tag 0GKV, case (a), finite-stalk paragraph. -/
 theorem prime_constant_stalk_finite
     {C S : Scheme.{u}} (f : C ⟶ S) [Smooth f] [IsProper f]
     [GeometricallyConnected f]

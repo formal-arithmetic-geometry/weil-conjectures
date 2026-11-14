@@ -34,7 +34,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Shift.CommShift
 # Exactness of a representative-normalized fixed-factor tensor
 
 Source: Stacks Project, Tags 06YU and 07A4; More on Algebra, Tag 0FNH.
-(blueprint: lem-weil-pbc-ringed-projection-tensor-exact).
 -/
 
 @[expose] public noncomputable section
@@ -170,21 +169,7 @@ private theorem resolvingExact (a : TensorModel R) [sa : TensorShifts a]
   exact Functor.isTriangulated_of_iso eP
 
 /-- Fixed-factor tensor is exact for the specified normalized integer shifts.
-Source: Stacks Project, Tags 06YU and 07A4; More on Algebra, Tag 0FNH.
-(blueprint: lem-weil-pbc-ringed-projection-tensor-exact).
-
-Proof: choose a flat-term K-flat complex P representing E. Tensoring with P
-preserves quasi-isomorphisms, mapping cones and their actual connecting maps.
-Consequently its localization is triangulated with the signed total-complex shift.
-The representative isomorphism of a identifies that localization with tensoring by
-Q(P) under a.functor. Full faithfulness on resolving pairs makes this identification
-natural in the second input. The second normalization equation of sa identifies
-its shift with the specified shift on the fixed-factor functor. Thus exactness
-transports through this shift-compatible isomorphism. Finally the chosen
-isomorphism Q(P) ≅ E induces a shift-compatible isomorphism of fixed-factor
-functors by sa.shifts, and exactness transports once more. This works for all
-integer shifts, zero coefficients and unbounded complexes; it requires no
-pullback, direct image, projection mate or slice comparison. -/
+Source: Stacks Project, Tags 06YU and 07A4; More on Algebra, Tag 0FNH. -/
 theorem ringedProjectionTensorExact
     {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
     {J : GrothendieckTopology C} {R : Sheaf J CommRingCat.{u + 1}}

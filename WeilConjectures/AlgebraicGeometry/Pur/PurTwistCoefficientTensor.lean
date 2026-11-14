@@ -20,9 +20,6 @@ import Mathlib.CategoryTheory.Limits.Types.Limits
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 
 /-! # Finite coefficient extension and sheafwise completion
-
-Source: coefficient-twist blueprint, order 1505, proof step 6.
-(blueprint: lem-pur-twist-coefficient-tensor)
 -/
 
 @[expose] public section
@@ -1050,7 +1047,7 @@ private theorem tensor_completion_comparison
 
 /-- The canonical balanced coefficient map, constructed from the two actual scalar
 inclusions. Its pure-tensor formula is definitional.
-Source: Stacks 03EK (blueprint: lem-pur-twist-coefficient-tensor). -/
+Source: Stacks 03EK. -/
 noncomputable def purTwistCoefficientTensorMap (S : Scheme.{t}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (U : S.ProEtᵒᵖ) :
@@ -1085,28 +1082,7 @@ set_option backward.defeqAttrib.useBackward true in
 
 /-- Completion of the finite integral extension is the sectionwise scalar tensor.
 
-Source: coefficient-twist blueprint, order 1505, proof step 6; Stacks Project,
-Tag 03EK. (blueprint: lem-pur-twist-coefficient-tensor)
-
-Proof: identify O_E with the integral closure of Z_l in E. An element of O_E
-has monic minimal polynomial over Q_l with integral coefficients by the spectral
-norm criterion, hence is integral over Z_l. Conversely integrality over Z_l
-implies integrality over the integrally closed valuation ring O_E, hence membership
-in O_E. Finiteness of integral closure over the complete DVR, and torsion freeness
-in E, give a finite free Z_l-module. Choose a finite basis and its coordinate maps.
-Constant sheafification transports the basis and its inverse to every section
-ring, naturally under restriction. Reducing modulo l^r identifies the coefficient
-modules with a finite power of Z/l^r. Limits commute with this finite power.
-Writing l as a unit times a positive power of the chosen uniformizer identifies
-the l-power quotient limit with the uniformizer-power quotient limit: a tuple
-on the cofinal subsequence extends uniquely by reduction at any later index.
-The resulting additive comparison on each object sends b tensor a to the product
-of the two specified scalar inclusions. That formula makes it multiplicative
-and unital; it agrees definitionally with purTwistCoefficientTensorMap. The
-finite-basis inverse proves bijectivity. Pure tensors also prove compatibility
-with restrictions. Rank zero and the zero section ring cause no exception: their
-tensors and both limits are zero. No hypothesis on the characteristic of the
-base scheme is used in this coefficient calculation.
+Source: Stacks Project, Tag 03EK.
 -/
 theorem purTwistCoefficientTensor (S : Scheme.{t}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

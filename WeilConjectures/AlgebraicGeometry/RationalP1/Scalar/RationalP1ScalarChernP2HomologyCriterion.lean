@@ -12,8 +12,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Local.DiagonalLoca
 import WeilConjectures.AlgebraicGeometry.ProEtale.Tate.ProEtaleTateTwists
 
 /-! # Homological criterion for the scalar second-projection splitting
-
-Source: diagonal-tower unit/Chern splitting and the second rational P1 triangle.
 -/
 
 @[expose] public noncomputable section
@@ -217,18 +215,8 @@ private theorem map_desc_left_iso
 
 /-- The componentwise homological data needed by the abstract biproduct criterion.
 
-Source: the positive twist and shift of the diagonal tower splitting, followed by
-restriction, completion, realization, and scalar extension in the second rational
-P1 triangle (blueprint: lem-sfb-rational-p1-scalar-p2-homology-criterion).
-
-Proof: evaluate the normalized completed splitting on the strict constant systems,
-transport its two components through the specified realization and scalar mates,
-and use the projective-line cohomological concentration in degrees `0` and `-2`.
-The normalized Chern equation identifies the degree-zero component with the actual
-scalarP2Chern arrow, while the unit component identifies the degree-minus-two map
-with scalarTwistedUnit. The same concentration gives the vanishing of the target in
-all other degrees. The remaining transport is by the recorded endpoint and
-right-derived isomorphisms, so each displayed homology map is invertible. -/
+Source: the positive twist and shift of the diagonal tower splitting, followed by restriction,
+completion, realization, and scalar extension in the second rational P1 triangle. -/
 theorem scalar_p2_chern_homology_criterion
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

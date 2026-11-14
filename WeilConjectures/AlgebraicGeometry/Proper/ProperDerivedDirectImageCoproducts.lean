@@ -16,9 +16,7 @@ import WeilConjectures.AlgebraicGeometry.Proper.ProperTorsionDirectImageBound
 /-!
 # Coproducts and proper derived direct image
 
-Source: blueprint sec-smooth-purity/sk-prop-sf-cbc/lem-amb-proper-coproducts.md;
-Stacks Project, Tags 0A3V, 095U and 0F11 (blueprint:
-corollary-proper-direct-image-finite-coefficients-localizing).
+Source: Stacks Project, Tags 0A3V, 095U and 0F11.
 -/
 
 @[expose] public section
@@ -35,26 +33,7 @@ namespace AlgebraicGeometry.Etale
 coproduct on the ordinary unbounded derived categories. Its restriction to the bounded-below
 category agrees with the bounded-below derived direct image.
 
-Source: blueprint sec-smooth-purity/sk-prop-sf-cbc/lem-amb-proper-coproducts.md;
-Stacks Project, Tags 0A3V, 095U and 0F11 (blueprint:
-corollary-proper-direct-image-finite-coefficients-localizing).
-
-Proof:
-1. By pqf-lem-proper-basic, r is quasi-compact and quasi-separated. Since T is
-   quasi-compact, lem-fin-finite-type-fibre-dimension-bound gives a uniform nonnegative
-   bound e on fibre dimensions, including empty fibres, without an absolute dimension bound.
-2. Finiteness of A gives N > 0 with N * 1 = 0. Every A-module sheaf is killed by N,
-   hence its underlying abelian sheaf is torsion: in the filtered colimit of the n-torsion
-   subsheaves the N-torsion term is already the whole sheaf, and passage to lcm(n,N)
-   shows that its inclusion is inverse to the canonical colimit map.
-   Apply lem-kun-proper-torsion-cd-bound to get vanishing above 2e. By
-   lem-sbc-higher-direct-image-forget-comparison this also gives module-sheaf vanishing;
-   a module sheaf with zero underlying abelian sheaf is zero.
-3. Apply corollary-proper-direct-image-finite-coefficients-localizing with c = 2e. Its finite
-acyclic-resolution
-   argument proves coproduct preservation for arbitrary unbounded inputs, including
-   the empty family. Finally src-right-derived-functor-plus-compatibility, applied to
-   the additive module direct image, supplies the bounded-below comparison isomorphism.
+Source: Stacks Project, Tags 0A3V, 095U and 0F11.
 -/
 theorem proper_rightDerivedLowerStar_preservesCoproducts
     (A : Type (u + 1)) [CommRing A] [Finite A]

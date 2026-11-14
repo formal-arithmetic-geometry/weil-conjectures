@@ -22,16 +22,12 @@ namespace AlgebraicGeometry.ProEtale.IntegralFiniteScalar
 open CondensedRing
 
 /-! Pullback naturality of a normalized finite-free beta comparison.
-(blueprint: new-sfb-finite-free-scalar-derived-comparison-beta-pullback)
 -/
 
 /--
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md, formal-properties
-paragraphs. The K-flat representative calculation and its descent to the
+The K-flat representative calculation and its descent to the
 unbounded derived category are supplied by the two strictly simpler lemmas
 imported above.
-(blueprint: new-sfb-finite-free-scalar-derived-comparison-beta-pullback)
 -/
 theorem finiteFreeScalarDerivedComparison_beta_pullback
     (D : ScalarSixPullbackData.{u}) {Λ Λ' : ScalarSixRing.{u}}

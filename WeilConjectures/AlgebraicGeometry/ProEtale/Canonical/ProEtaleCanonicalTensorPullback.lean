@@ -137,8 +137,7 @@ import all WeilConjectures.AlgebraicGeometry.ProEtaleTensorComparison.ProEtaleIn
 /-!
 # Canonical tensor pullback on the small pro-etale site
 
-Source: Stacks Project, Cohomology on Sites, Tags 07A4 and 0G7E;
-Modules on Sites, Tag 03EL (blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback).
+Source: Stacks Project, Cohomology on Sites, Tags 07A4 and 0G7E; Modules on Sites, Tag 03EL.
 The object universe of the site is u+1 and its morphism universe is u.
 -/
 
@@ -186,13 +185,7 @@ attribute [local irreducible] proEtaleTensorPullbackTotal proEtaleTensorPullback
 attribute [local irreducible] CategoryTheory.Functor.mapDerivedCategory
 
 /-- Pullback preserves flat K-flat representatives and has a unique canonical tensor comparison.
-Source: Stacks 07A4 and 0G7E (blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback).
-Proof: flat pullback and the K-flat pullback theorem preserve the representative class.
-Resolve both inputs by flat K-flat complexes. On them, compose the inverse of the total
-ordinary comparison with the two tensor representative isomorphisms and the exact
-pullback factorization. The displayed square is precisely this construction. Tensor
-descent extends it naturally to all derived inputs and proves uniqueness. The identity
-resolution gives the same formula when the inputs are already flat K-flat. -/
+Source: Stacks 07A4 and 0G7E. -/
 theorem proEtaleCanonicalTensorPullback
     (a : ProEtaleTensorModel Y R) (b : ProEtaleTensorModel X S) :
     (∀ P : CochainComplex (proEtaleRingModules Y R) ℤ,
@@ -262,7 +255,7 @@ theorem proEtaleCanonicalTensorPullback
 
 /-- The unique derived comparison specified on every flat K-flat pair, rather than an
 arbitrary natural isomorphism.
-Source: Stacks 07A4 (blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback). -/
+Source: Stacks 07A4. -/
 noncomputable def proEtaleCanonicalTensorComparison
     (a : ProEtaleTensorModel Y R) (b : ProEtaleTensorModel X S) :=
   Classical.choose (proEtaleCanonicalTensorPullback f R S c a b).2.exists

@@ -15,9 +15,7 @@ import all WeilConjectures.AlgebraicGeometry.Scalar.ScalarPullbackRepresentative
 /-!
 # Tensor normalization of a scalar/pullback comparison
 
-Source: Stacks Project, sites-cohomology.tex, Tags 07A4, 0G7E and 07A7;
-more-etale.tex, Tag 0GL6
-(blueprint: lem-pur-scalar-tensor-pullback-normalization).
+Source: Stacks Project, Tags 07A4, 0G7E and 07A7; Tag 0GL6.
 -/
 
 @[expose] public noncomputable section
@@ -47,33 +45,7 @@ attribute [local irreducible] scalarTensorIso scalarGeometricRepresentative
 comparison gives the specified monoidal pullback comparison, with the coefficient
 object identified by exact inverse image and its monoidal unit.
 
-Source: Stacks Project, sites-cohomology.tex, Tags 07A4, 0G7E and 07A7;
-more-etale.tex, Tag 0GL6; step 2 of lem-pur-etale-scalar-mate-projection
-(blueprint: lem-pur-scalar-tensor-pullback-normalization).
-
-Proof: the hypothesis hc computes c
-on the given complex P by the ordinary scalar/pullback comparison. The defining
-equation of scalarTensorIso computes both scalar/tensor comparisons using the
-ordinary balancing map m tensor b -> b tensor m. This map is an isomorphism:
-its inverse is b tensor m -> m tensor b, and the balancing relations make these
-maps well-defined before sheafification. Both descend through sheafification.
-The defining counit square of leftDerivedUpperStarTensorComparison computes its
-value on P and the coefficient sheaf in degree zero. The exact restriction/pullback
-square is computed termwise. Substitute these representative equations into hc
-after applying exact restriction. The ordinary comparisons in the resulting two
-composites agree: on a pulled-back pure tensor m tensor b both retain m and b;
-the coefficient-unit identification sends the pulled-back unit to the unit.
-Indeed the conjugate scalar/pullback comparison preserves the composite
-adjunction units by its defining Hom-equivalence equation. The restriction/pullback
-comparison has the same unit normalization, by the two adjunction triangle
-identities. These equations identify their values on the pullback generators.
-This can be checked before sheafification and then degreewise on complexes.
-There is no interchange of complex degrees, so no sign occurs. The tensorator
-of Q with K-flat first factor P is invertible. The tensor counit square transfers
-this invertibility to its inverse image. The geometric representative counits
-and the ordinary balancing maps are also invertible.
-Cancel their images to obtain the displayed equality at Q(P). No flatness of
-B over A is used, since the K-flat factor is P. -/
+Source: Stacks Project, Tags 07A4, 0G7E and 07A7; Tag 0GL6. -/
 theorem scalarTensorPullback_normalization_kFlat
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {Z W : Scheme.{u}} (f : Z ⟶ W)

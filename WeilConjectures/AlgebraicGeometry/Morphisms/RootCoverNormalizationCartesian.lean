@@ -95,23 +95,7 @@ private theorem normalization_cartesian_of_isIso
 set_option linter.unusedVariables false in
 /-- The normalization of the DVR root cover is the coefficient-localized normalization.
 
-Source: Stacks Project, Tag 0307; the proof of
-lem-sbc-root-normalization-localization-comparison, step 2.
-(blueprint: lem-sbc-root-cover-normalization-cartesian)
-
-Proof: Identify Spec B with the spectrum of the stalk of Spec H at (g), using
-uniqueness of prime localization. The supplied root localization identifies the
-base-changed root chart with Spec A0. Paste hT with hbranch to identify the whole
-generic pullback of W with T, rather than just one component. Pullback associativity
-then identifies the base change of a with a0: the inverse image of D(g) is D(pi),
-and D(pi) is the fraction-field spectrum because pi is a DVR uniformizer.
-Quasi-compactness and quasi-separatedness of a follow from finite p and the
-principal affine open inclusion; the corresponding properties of a0 are supplied.
-Apply
-Hom.isIso_normalizationPullback_stalk to q and a, and transport its comparison
-through these identifications. Composing with the first pullback projection gives
-c and its cartesian square over the explicit AdjoinRoot.map. This statement has
-no chosen normalization point and makes no assertion about roots in stalks. -/
+Source: Stacks Project, Tag 0307 -/
 theorem root_cover_normalization_cartesian
     {L U : Scheme.{u}} (i : U ⟶ L)
     (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)

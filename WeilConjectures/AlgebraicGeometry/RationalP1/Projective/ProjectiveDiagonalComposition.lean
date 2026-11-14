@@ -24,9 +24,6 @@ import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 import Mathlib.Algebra.Ring.ULift
 
 /-! # Canonical direct-image section and supported-unit comparisons
-
-Source: blueprint main-20261015, rational projective-line unit/counit, clause 2
-(blueprint: def-sfb-projective-diagonal-composition).
 -/
 
 @[expose] public noncomputable section
@@ -44,8 +41,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
 -- Keep fixed site and derived comparisons folded during elaboration.
-/-- The canonical conjugate section comparison. Source: blueprint unit/counit clause 2
-(blueprint: def-sfb-projective-diagonal-composition). -/
+/-- The canonical conjugate section comparison. -/
 def pushSectionIso (Y : Scheme.{u}) :
     𝟭 (DerivedCategory (Modules Λ (ProjectiveLine Y))) ≅
       CondensedRing.moduleObjectDerivedPushforward Λ (diagonalImmersion Y) ⋙
@@ -57,11 +53,7 @@ def pushSectionIso (Y : Scheme.{u}) :
 
 set_option linter.unusedSectionVars false in
 -- Keep fixed site and derived comparisons folded during elaboration.
-/-- Closed direct image on internal modules is exact. Source: blueprint unit/counit,
-proof steps 6 and 8 (blueprint: def-sfb-projective-diagonal-composition).
-Proof: the projective diagonal is closed; its direct image is extension from closed
-support, exact on the underlying abelian sheaves. The exact conservative forgetful
-functor creates kernels and cokernels, giving the assertion for internal modules. -/
+/-- Closed direct image on internal modules is exact. -/
 theorem diagonalPush_preservesFiniteColimits (Y : Scheme.{u}) :
     PreservesFiniteColimits (CondensedRing.lowerStar Λ (diagonalImmersion Y)) := by
   have := SmoothOfRelativeDimension.smooth 1 (ProjectiveLine Y ↘ Y)
@@ -101,8 +93,7 @@ theorem diagonalPush_preservesFiniteColimits (Y : Scheme.{u}) :
 attribute [instance] diagonalPush_preservesFiniteColimits
 
 -- Keep fixed site and derived comparisons folded during elaboration.
-/-- The actual single-degree comparison for the supported coefficient unit. Source:
-blueprint clause 2 (blueprint: def-sfb-projective-diagonal-composition). -/
+/-- The actual single-degree comparison for the supported coefficient unit. -/
 def supportedUnitIso (Y : Scheme.{u}) :
     (CondensedRing.moduleObjectDerivedPushforward Λ (diagonalImmersion Y)).obj
       (unit Λ (ProjectiveLine Y)) ≅
@@ -110,24 +101,19 @@ def supportedUnitIso (Y : Scheme.{u}) :
   (CondensedRing.lowerStar Λ (diagonalImmersion Y)).singleFunctorCompRightDerivedFunctorIso.app
     (Mod.regular (condensedRingObj Λ (ProjectiveLine Y)))
 
-/-- The literal family of left-factor projection arrows in the shared tensor interface.
-Source: blueprint clause 1 (blueprint: def-sfb-projective-diagonal-composition). -/
+/-- The literal family of left-factor projection arrows in the shared tensor interface. -/
 def ProjectionFamily := ∀ {X S : Scheme.{u}} (f : X ⟶ S)
   (K : DerivedCategory (Modules Λ S)) (N : DerivedCategory (Modules Λ X)),
   K ⊗ (CondensedRing.moduleObjectDerivedPushforward Λ f).obj N ⟶
     (CondensedRing.moduleObjectDerivedPushforward Λ f).obj
       ((CondensedRing.moduleObjectDerivedPullback Λ f).obj K ⊗ N)
 
-/-- Fix every arrow to the published canonical projection, including its Koszul symmetries.
-Source: blueprint clause 1 (blueprint: def-sfb-projective-diagonal-composition). -/
+/-- Fix every arrow to the published canonical projection, including its Koszul symmetries. -/
 def ProjectionNormalized (a : ProjectionFamily Λ) : Prop :=
   ∀ {X S : Scheme.{u}} (f : X ⟶ S) (K : DerivedCategory (Modules Λ S))
     (N : DerivedCategory (Modules Λ X)), HEq (a f K N) (CondensedRing.traceProjection Λ f K N)
 
-/-- The published projection has a unique realization in the fixed shared tensor interface.
-Source: blueprint clause 1 (blueprint: def-sfb-projective-diagonal-composition).
-Proof: unfold the fixed native bundle fields. The Hom types become those of the published
-projection. That projection supplies existence; equality to each fixed map gives uniqueness. -/
+/-- The published projection has a unique realization in the fixed shared tensor interface. -/
 theorem projection_existsUnique : ∃! a : ProjectionFamily Λ, ProjectionNormalized Λ a := by
   unfold ProjectionFamily ProjectionNormalized internalMonoidal internalTensorBundle
     nativeTensorBundle
@@ -138,8 +124,7 @@ theorem projection_existsUnique : ∃! a : ProjectionFamily Λ, ProjectionNormal
     funext X S f K N
     exact eq_of_heq (ha f K N)
 
-/-- The same canonical left projection, through its uniquely fixed interface.
-Source: blueprint clause 1 (blueprint: def-sfb-projective-diagonal-composition). -/
+/-- The same canonical left projection, through its uniquely fixed interface. -/
 def projectionMap : ProjectionFamily Λ := (projection_existsUnique Λ).exists.choose
 
 end AlgebraicGeometry.ProEtale.RationalP1

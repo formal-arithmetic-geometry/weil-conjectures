@@ -17,9 +17,7 @@ public import WeilConjectures.AlgebraicGeometry.Line.LineQuotientHomogeneousFrac
 /-!
 # Inverse line-quotient charts and arbitrary pullback
 
-Source: Stacks Project, Constructions, Tags 01OA (section-projective-bundle) and
-01O4 (lemma-apply-relative)
-(blueprint: def-trf-line-quotient-chart-inverse-data).
+Source: Stacks Project, Constructions.
 
 The classifying morphism is specified by the existing homogeneous-fraction charts.
 Quantification over every such morphism avoids making a second choice of that map.
@@ -48,8 +46,7 @@ local instance instModuleRestrictedSections (T : Scheme.{u}) (L : T.Modules)
   inferInstanceAs (Module Γ(T, V) (L.val.obj (op V)))
 
 /-- Pull back the quotient using the section-normalized composite-pullback comparison.
-Source: Stacks, Constructions, Tag 01OA
-(blueprint: def-trf-line-quotient-chart-inverse-data). -/
+Source: Stacks, Constructions, Tag 01OA. -/
 noncomputable def lineQuotientPullback {S T T' : Scheme.{u}} (h : T ⟶ S)
     (u : T' ⟶ T) (E : S.Modules) (L : T.Modules)
     (q : (tensorPullback h).obj E ⟶ L) :
@@ -58,8 +55,7 @@ noncomputable def lineQuotientPullback {S T T' : Scheme.{u}} (h : T ⟶ S)
 
 /-- The normalized tautological section associated with a degree-one generator.
 The datum's chart equation identifies this section with iota(m)/1 in the twist.
-Source: Stacks, Constructions, Tags 01OA and 01O4
-(blueprint: def-trf-line-quotient-chart-inverse-data). -/
+Source: Stacks, Constructions, Tags 01OA and 01O4. -/
 noncomputable def tautologicalGenerator {S : Scheme.{u}} {E : S.Modules}
     [E.IsQuasicoherent] (D : TautologicalQuotient E) (U : S.affineOpens)
     (m : Γ(E, U.1)) :
@@ -70,8 +66,7 @@ noncomputable def tautologicalGenerator {S : Scheme.{u}} {E : S.Modules}
 
 /-- The actual pullback of the normalized degree-one tautological section, restricted
 onto an arbitrary open. This is the pulled frame e on a generator chart.
-Source: Stacks, Constructions, Tag 01OA
-(blueprint: def-trf-line-quotient-chart-inverse-data). -/
+Source: Stacks, Constructions, Tag 01OA. -/
 noncomputable def pulledTautologicalGenerator {S T : Scheme.{u}} {E : S.Modules}
     [E.IsQuasicoherent] (D : TautologicalQuotient E)
     (F : T ⟶ (SymmetricAlgebraSheaf.gradedAlgebraData E).relProj)
@@ -88,8 +83,7 @@ noncomputable def pulledTautologicalGenerator {S T : Scheme.{u}} {E : S.Modules}
 D(b_m) the pulled frame e goes to b_m*l. Taking any v in place of m gives b_v*l;
 the fraction-chart equation identifies its pulled quotient coefficient with b_v/b_m.
 The equation on every smaller open expresses compatibility on all overlaps and refinements.
-Source: Stacks, Constructions, Tag 01OA
-(blueprint: def-trf-line-quotient-chart-inverse-data). -/
+Source: Stacks, Constructions, Tag 01OA. -/
 def InverseLineChartNormalization {S T : Scheme.{u}} {E : S.Modules}
     [E.IsQuasicoherent] (D : TautologicalQuotient E) (h : T ⟶ S)
     (L : T.Modules) (q : (tensorPullback h).obj E ⟶ L)
@@ -129,8 +123,7 @@ def InverseLineChartNormalization {S T : Scheme.{u}} {E : S.Modules}
 /-- On a chart pulled back along a, use the pulled tautological generator itself as frame.
 Its own quotient coefficient is one. The all-degree fraction charts then recover the ring
 map of a on every c/e^d, including degree zero.
-Source: Stacks, Constructions, Tags 01OA and 01O4
-(blueprint: def-trf-line-quotient-chart-inverse-data). -/
+Source: Stacks, Constructions, Tags 01OA and 01O4. -/
 def RecoveredQuotientFrame {S T : Scheme.{u}} {E : S.Modules} [E.IsQuasicoherent]
     (D : TautologicalQuotient E) (h : T ⟶ S)
     (a : T ⟶ (SymmetricAlgebraSheaf.gradedAlgebraData E).relProj)
@@ -150,8 +143,7 @@ def RecoveredQuotientFrame {S T : Scheme.{u}} {E : S.Modules} [E.IsQuasicoherent
 /-- The recovered all-degree chart ring map is exactly pullback by a: the coefficient
 of c in the pulled e frame is a^*(c/e^d). The map k is the factorization of a into
 Spec (A_e)_0, so appTop and the canonical affine section isomorphisms give its ring map.
-Source: Stacks, Constructions, Tags 01OA and 01O4
-(blueprint: def-trf-line-quotient-chart-inverse-data). -/
+Source: Stacks, Constructions, Tags 01OA and 01O4. -/
 def RecoveredFractionCoefficients {S T : Scheme.{u}} {E : S.Modules}
     [E.IsQuasicoherent] (D : TautologicalQuotient E) (h : T ⟶ S)
     (a : T ⟶ (SymmetricAlgebraSheaf.gradedAlgebraData E).relProj)
@@ -179,8 +171,7 @@ def RecoveredFractionCoefficients {S T : Scheme.{u}} {E : S.Modules}
 /-- Arbitrary pullback sends all homogeneous coefficients and all degree-zero fractions
 to the fractions of their images. The localization homomorphism is fixed on every scalar,
 so it is the canonical localization map rather than an arbitrary comparison.
-Source: Stacks, Constructions, Tags 01OA and 01O4
-(blueprint: def-trf-line-quotient-chart-inverse-data). -/
+Source: Stacks, Constructions, Tags 01OA and 01O4. -/
 def QuotientFractionNaturality {S T T' : Scheme.{u}} (h : T ⟶ S) (u : T' ⟶ T)
     (E : S.Modules) [E.IsQuasicoherent] (L : T.Modules)
     (q : (tensorPullback h).obj E ⟶ L)

@@ -59,9 +59,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Proper.P
 
 /-! # Comparison of native exchange with the restricted condensed exchange
 
-Source: blueprint thm-weil-pbc-qbar.proof.md, Constructibility and the isomorphism;
-finite-span coefficient comparison and unit--square--counit normalization.
-(blueprint: lem-sf-native-derived-exchange-condensed-comparison).
+Source: finite-span coefficient comparison and unit--square--counit normalization.
 -/
 
 @[expose] public noncomputable section
@@ -75,13 +73,11 @@ namespace AlgebraicGeometry.ProEtale
 /-- Scalar forgetting followed by the normalized ring-realization transport, before
 section-ring presentation. The chosen isomorphisms form a single family normalized on
 every finite-extension chart and natural in scheme maps.
-Source: nativeModuleConstructibilityComparison.
-(blueprint: lem-sf-native-derived-exchange-condensed-comparison). -/
+Source: nativeModuleConstructibilityComparison. -/
 def nativeExchangeEncoding (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) :=
   AdicSheaf.forgetAb l X ⋙ Mod.comap (nativeModuleCoefficientIso l X).hom
 
-/-- Scalar forgetting and transport are equivalences. Source: Stacks 03EK.
-(blueprint: lem-sf-native-derived-exchange-condensed-comparison). -/
+/-- Scalar forgetting and transport are equivalences. Source: Stacks 03EK. -/
 @[instance] theorem nativeExchangeEncoding_isEquivalence (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) :
     (nativeExchangeEncoding l X).IsEquivalence := by
   have : (AdicSheaf.forgetAb l X).IsEquivalence :=
@@ -91,8 +87,7 @@ def nativeExchangeEncoding (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) :=
   dsimp only [nativeExchangeEncoding]
   infer_instance
 
-/-- Scalar transport leaves addition of underlying maps unchanged. Source: Stacks 03EK.
-(blueprint: lem-sf-native-derived-exchange-condensed-comparison). -/
+/-- Scalar transport leaves addition of underlying maps unchanged. Source: Stacks 03EK. -/
 @[instance] theorem nativeExchangeEncoding_additive (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) :
     (nativeExchangeEncoding l X).Additive := by
   refine ⟨?_⟩
@@ -103,8 +98,7 @@ attribute [irreducible] nativeExchangeEncoding
 
 /-- The same real encoding, transported along a specified equality of bundled
 coefficient rings. Equality fixes the multiplication as well as the underlying sheaf.
-Source: normalized coefficient transport in nativeModuleConstructibilityComparison.
-(blueprint: lem-sf-native-derived-exchange-condensed-comparison). -/
+Source: normalized coefficient transport in nativeModuleConstructibilityComparison. -/
 def nativeExchangeEncodingAt (l : ℕ) [Fact l.Prime]
     (Λ : Mon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}))
     (hΛ : Λ = Mon.mk (Profinite.padicAlgClRingObj l)) (X : Scheme.{u}) :
@@ -112,8 +106,7 @@ def nativeExchangeEncodingAt (l : ℕ) [Fact l.Prime]
       (condensedRingObj Λ.X X) :=
   hΛ.symm ▸ nativeExchangeEncoding l X
 
-/-- Equality transport preserves the encoding equivalence. Source: Stacks 03EK.
-(blueprint: lem-sf-native-derived-exchange-condensed-comparison). -/
+/-- Equality transport preserves the encoding equivalence. Source: Stacks 03EK. -/
 @[instance] theorem nativeExchangeEncodingAt_isEquivalence (l : ℕ) [Fact l.Prime]
     (Λ : Mon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}))
     (hΛ : Λ = Mon.mk (Profinite.padicAlgClRingObj l)) (X : Scheme.{u}) :
@@ -122,8 +115,7 @@ def nativeExchangeEncodingAt (l : ℕ) [Fact l.Prime]
   change (nativeExchangeEncoding l X).IsEquivalence
   infer_instance
 
-/-- Equality transport preserves additivity. Source: Stacks 03EK.
-(blueprint: lem-sf-native-derived-exchange-condensed-comparison). -/
+/-- Equality transport preserves additivity. Source: Stacks 03EK. -/
 @[instance] theorem nativeExchangeEncodingAt_additive (l : ℕ) [Fact l.Prime]
     (Λ : Mon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}))
     (hΛ : Λ = Mon.mk (Profinite.padicAlgClRingObj l)) (X : Scheme.{u}) :
@@ -135,15 +127,13 @@ def nativeExchangeEncodingAt (l : ℕ) [Fact l.Prime]
 attribute [irreducible] nativeExchangeEncodingAt
 
 /-- The underlying arrow of a morphism in a full subcategory.
-Source: the fully faithful inclusion of an object-property subcategory.
-(blueprint: lem-sf-native-derived-exchange-condensed-comparison). -/
+Source: the fully faithful inclusion of an object-property subcategory. -/
 def nativeUnderlyingExchangeArrow {C : Type*} [Category C] (P : ObjectProperty C)
     {A B : P.FullSubcategory} (f : A ⟶ B) : Arrow C :=
   Arrow.mk (P.ι.map f)
 
 /-- The inclusion of a full subcategory preserves invertibility.
-Source: functoriality of inverses.
-(blueprint: lem-sf-native-derived-exchange-condensed-comparison). -/
+Source: functoriality of inverses. -/
 theorem nativeUnderlyingExchangeArrow_isIso {C : Type*} [Category C] (P : ObjectProperty C)
     {A B : P.FullSubcategory} (f : A ⟶ B) (hf : IsIso f) :
     IsIso (nativeUnderlyingExchangeArrow P f).hom := by
@@ -702,31 +692,7 @@ private theorem generic_exchange_comparison_at
 
 /-- The encoded native mate and the underlying restricted condensed mate are isomorphic
 as arrows. No properness or native constructibility hypothesis enters this comparison.
-Source: blueprint thm-weil-pbc-qbar.proof.md, Constructibility and the isomorphism;
-finite-span comparison, steps 4--8; Stacks 09T5 and 070Y.
-(blueprint: lem-sf-native-derived-exchange-condensed-comparison).
-
-Proof: the normalized coefficient isomorphism identifies direct images by their
-identity section maps. The inverse-image comparison is its adjunction conjugate.
-Consequently the ordinary units, counits and pullback compositors are compatible.
-Exact scalar transport preserves K-injectives, so these direct-image comparisons
-localize on common K-injective representatives. The derived adjunction transpose is
-the localization of the ordinary transpose, by derived_exact_forget_mate. Localize
-the ordinary pullback cube with mapDerivedCategory_exactCube. The theorem
-exchangeMate_cube then identifies encoding of the native
-exchange with the exact-localization condensed exchange. Exact condensed inverse
-image identifies its localization with its left derived functor. Finally the
-bounded-constructible restricted adjunction is obtained by full faithful restriction:
-its unit and counit are carried by the inclusion to the ambient unit and counit,
-through the canonical push and pull compatibility isomorphisms. Pasting these
-isomorphisms identifies the restricted unit--square--counit formula with the same
-ambient exchange. Naturality in the input carries the native-to-exact comparison
-along e from the encoded M to K.obj. Transport along hΛ supplies that comparison
-for Λ, while the total-derived and restriction comparisons hold for every
-commutative coefficient. Their composite is the required isomorphism of arrows.
-This is valid for every Cartesian square and every input whose encoded
-complex is identified with a bounded-constructible K; it asserts no invertibility
-of either exchange. -/
+Source: Stacks 09T5 and 070Y. -/
 theorem nativeDerivedExchange_condensed_comparison
     (l : ℕ) [Fact l.Prime] (k : Type u) [Field k]
     [Fact (ringChar k).Prime] [Fact (ringChar k ≠ l)]

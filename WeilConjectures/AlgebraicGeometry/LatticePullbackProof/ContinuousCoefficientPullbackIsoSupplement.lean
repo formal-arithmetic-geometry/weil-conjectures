@@ -339,16 +339,7 @@ private theorem ringAdjunct_isIso {X Y : Scheme.{u}} (f : Y ⟶ X)
     (((Scheme.proEtaleSheafAdjunction f CommRingCat.{u + 1}).homEquiv _ _).symm h) UR
 
 /-- The canonical coefficient adjunct is invertible for totally disconnected rings.
-Source: Bhatt--Scholze, Section 6.8, continuous coefficients; Stacks Tag 03D2.
-(blueprint: lem-sfb-continuous-coefficient-inverse-image-iso)
-
-Proof: the continuous coefficient realization identifies its additive adjunct
-with the composition isomorphism for pullback from the profinite point.
-Naturality of the realization follows by composing continuous functions with
-pullback projections. Forgetting commutative rings and abelian groups commutes
-with filtered left Kan extension and sheafification, with the same adjunction
-units. Thus the underlying set map of the ring adjunct is conjugate to the
-additive adjunct, and is invertible. Forgetting reflects isomorphisms. -/
+Source: Bhatt--Scholze, Section 6.8, continuous coefficients; Stacks Tag 03D2 -/
 theorem continuousCoefficientInverseImageMap_isIso {X Y : Scheme.{u}} (f : Y ⟶ X)
     (T : Type u) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T]
     [TotallyDisconnectedSpace T] : IsIso (continuousCoefficientInverseImageMap f T) := by

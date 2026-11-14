@@ -55,43 +55,8 @@ component's generic residue field. The supplied open marks a thickening locus th
 each normalized component densely. The output keeps the supplied number of components
 and identifies their generic fibres with the supplied diagram by cartesian squares.
 
-Source: Stacks Project, Tag 0GK7, proof of `lemma-make-good-curves`, from the paragraph
-reducing the inseparable extension through the last paragraph.
-(blueprint: lem-weil-pbc-spread-marked-curve-diagram)
-
-Proof:
-1. Restrict to an affine neighbourhood of η and reduce the base. Its generic local ring
-is the residue field, the filtered colimit of the principal localizations outside the
-minimal prime. The spectrum of K is a finitely presented finite radicial surjection over
-that field. Apply finite radicial model descent to this inverse system. Reduce the model;
-its unique point over η still has local ring K. To make a shrinking of this finite
-radicial cover come from the original base, remove the closed image of its closed
-complement. This produces the reduced affine finite radicial cover required below.
-2. Write its generic field as the filtered colimit of principal localizations outside
-the minimal prime. Descend the finitely presented objects A i, B i and Spec (L i), the
-arrows j i, q i and the components of ν₀, and their commuting equations to a common
-localization. The finite-family object, arrow and equality descent lemmas provide a
-common stage, with the displayed cartesian squares and compatibility equations.
-All the field objects are finitely presented: proper B i is finite type
-over a field, its open subscheme A i is Noetherian and quasi-compact, and L i is finite.
-3. Descend finiteness and surjectivity of ν₀, finite etaleness of the constant-field
-maps, open immersions j i, smoothness of their composites, and smooth properness of q i.
-A finite set of stages has a common refinement. Nonempty smooth field fibres give
-surjectivity of A i → Spec (L i); spread this too. Local constancy of proper smooth
-geometric component counts and upper semicontinuity of proper fibre dimension give
-neighbourhoods on each finite etale constant-field model where its proper smooth fibres
-are geometrically connected and have dimension at most one. Delete the finite closed
-images of their complements from the base.
-4. The generic target is Noetherian, so W₀ is quasi-compact. The scheme-over-limit
-lemma realizes it on the limit of the target models. Descend this marked open and
-its closed-immersion comparison map.
-Surjectivity of ν persists and makes that comparison a thickening. Its inverse image
-in each A i is nonempty generically by density and nonemptiness of A i. The smooth
-map of this open to the constant-field model is open; deleting finite closed images
-of its complement makes it surjective.
-Empty families are allowed: the descended surjection from the empty scheme forces
-X to be empty. All further shrinkings descend through the finite radicial cover
-as in step 1. Fibrewise density follows separately from the supplied surjectivity.
+Source: Stacks Project, Tag 0GK7, from the paragraph reducing the inseparable extension through the
+last paragraph.
 -/
 theorem exists_spread_marked_curve_diagram
     {X S : Scheme.{u}} (f : X ⟶ S) [IsSeparated f]

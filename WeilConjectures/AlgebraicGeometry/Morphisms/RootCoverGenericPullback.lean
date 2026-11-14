@@ -16,9 +16,7 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 
 /-! # Base change of the generic root cover
 
-Source: Stacks Project, Tags 01JT and 00PD; the geometric identification in
-lem-sbc-root-cover-normalization-cartesian, step 1.
-(blueprint: lem-sbc-root-cover-generic-pullback)
+Source: Stacks Project, Tags 01JT and 00PD
 -/
 
 @[expose] public section
@@ -43,24 +41,8 @@ set_option backward.defeqAttrib.useBackward true in
 set_option linter.unusedVariables false in
 /-- The explicit generic model is the pullback of the original root-cover morphism.
 
-Source: Stacks Project, Tag 01JT (fibre products of affine schemes), Tag 00PD
-(discrete valuation rings); lem-sbc-root-cover-normalization-cartesian, step 1.
-(blueprint: lem-sbc-root-cover-generic-pullback)
-
-Proof: The coefficient formula AdjoinRoot.map_of gives beta followed by q equal
-to q0 followed by Spec of the coefficient map. Since every nonzero element of
-the DVR is associated to a power of pi, its fraction ring is B[1/pi], and the
-image of its spectrum is D(pi). Thus beta inverse-image of D(g) equals the
-q0 inverse-image of this generic open. The model morphism a0 consequently lifts
-to D(g), and its cover projection followed by rho defines a map m to the
-original pullback. For any cone to a and beta, the basic-open equality uniquely
-lifts its q0 projection to Spec Frac(B). The pullback hbranch identifies the
-resulting map to U with the given W-cover projection; hT then lifts this pair
-uniquely to T. Pair this lift with the cone's N0 projection to get its unique
-map to the model pullback. Uniqueness uses the two supplied pullback properties
-and the monomorphisms of the principal open and the fraction-spectrum inclusion.
-This proves the displayed cartesian square without normalization, Noetherian
-hypotheses, finiteness of p, or coefficient-localization of the root algebra. -/
+Source: Stacks Project, Tag 01JT (fibre products of affine schemes), Tag 00PD (discrete valuation
+rings) -/
 theorem root_cover_generic_pullback
     {L U : Scheme.{u}} (i : U ⟶ L)
     (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)

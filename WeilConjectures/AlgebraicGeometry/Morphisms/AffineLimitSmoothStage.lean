@@ -17,7 +17,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 # Eventual smoothness of a finitely presented model over affine transition limits
 
 Source: Stacks Project, Tag 0C0C.
-(blueprint: lem-sbc-affine-limit-smooth-stage)
 -/
 
 @[expose] public section
@@ -43,17 +42,7 @@ private theorem smooth_snd_source {A B D E : Scheme.{u}}
 /-- A finitely presented model whose limit base change is smooth becomes smooth later.
 
 Source: Stacks Project, Tag 0C0C, with Situation 081D; affine descent via 0CAQ
-and comparison via 01ZM(2)-(3).
-Proof: identify the given cartesian square with the canonical pullback. The source P
-is compact because p is quasi-compact and its base is Noetherian. Take a finite
-subcover of P.affineCover. Pulling back each chart preserves the open immersion,
-so the canonical limit chart projection is smooth. Apply affine-source descent
-exists_smooth_stage_of_affine_source_limit separately to the finitely many charts.
-Cofilteredness of Over i supplies a common later object, including for an empty
-cover. Pullback pasting transports each chart's smoothness to that common stage.
-The pulled-back source charts cover the later model, and source locality of
-smoothness proves the result. No arbitrary model is chosen in a definition.
-(blueprint: lem-sbc-affine-limit-smooth-stage) -/
+and comparison via 01ZM(2)-(3). -/
 theorem exists_smooth_stage_of_affine_limit {I : Type u} [SmallCategory I]
     [IsCofiltered I] {S C : Scheme.{u}}
     (X : I ⥤ Scheme.{u}) (α : (Functor.const I).obj S ⟶ X)

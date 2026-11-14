@@ -11,8 +11,7 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictSc
 /-!
 # Coherence of comparison with quotient scalar extension
 
-Source: Stacks Tags 06YY, 07A4 and 09B1, coefficient-reduction refinement
-(blueprint: lem-weil-pbc-normalized-origin-comparison-coherence).
+Source: Stacks Tags 06YY, 07A4 and 09B1, coefficient-reduction refinement.
 -/
 
 -- After pruning, this module only keeps private declarations.

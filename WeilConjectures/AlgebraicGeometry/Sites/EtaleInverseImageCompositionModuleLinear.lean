@@ -12,8 +12,7 @@ import WeilConjectures.AlgebraicGeometry.Etale.EtaleInverseImageCompositionModul
 /-!
 # Linearity of the composition comparisons on constant-ring etale modules
 
-Source: Stacks Project, Modules on Sites, Tags 03D8 and 03D7
-(blueprint: lem-weil-pbc-inverse-image-composition-module-linear).
+Source: Stacks Project, Modules on Sites, Tags 03D8 and 03D7.
 -/
 
 @[expose] public section
@@ -50,29 +49,13 @@ private theorem exists_comparison_with_unique_unit
 
 set_option backward.defeqAttrib.useBackward true in
 /-- The abelian composition comparisons lift to module isomorphisms, uniquely for inverse
-image with the specified unit equation. Source: Stacks Project, Tags 03D8 and 03D7
-(blueprint: lem-weil-pbc-inverse-image-composition-module-linear).
+image with the specified unit equation. Source: Stacks Project, Tags 03D8 and 03D7.
 
 The lambda-bound ring sheaves, forgetful functors and module direct images below are
 immediately applied to their actual definitions. The gamma maps are characterized by
 constant sections. The inverse images, comparison maps and adjunctions are the data of
 `etaleInverseImageModulesExact`; the hom-equivalence equations specify that these are
-precisely the module adjunctions with the underlying abelian adjunctions.
-
-Proof:
-1. The constant-section characterization of gamma and the universal property of the
-constant sheaf show that gamma for the composite agrees with successive gamma maps,
-after the abelian direct-image composition comparison. This uses
-situation-conventions.
-2. The direct-image comparison is restriction along the pullback-pasting isomorphism.
-Restrictions are semilinear, so step 1 makes this comparison linear over the target ring.
-3. The two module hom-equivalences restrict the abelian ones, by
-situation-conventions. Their composite takes linear maps to linear maps.
-4. The abelian inverse-image comparison is adjoint to the direct-image comparison after
-the composite-map unit, by lem-weil-pbc-inverse-image-composition. Steps 2 and 3 make it linear.
-5. Inverses of linear bijections are linear; abelian naturality gives module naturality.
-The unit equation is inherited from the abelian comparison. Injectivity of the composite
-adjunction hom-equivalence gives uniqueness, component by component. -/
+precisely the module adjunctions with the underlying abelian adjunctions. -/
 theorem etaleInverseImageCompositionModuleLinear
     (X Y Z : Scheme.{u}) (uMap : Y ⟶ X) (vMap : Z ⟶ Y) (R : CommRingCat.{u + 1}) :
     (fun (RX : Sheaf (X.smallGrothendieckTopology @Etale) CommRingCat.{u + 1})

@@ -11,8 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearTensorEvalu
 import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearScalarTensor
 
 /-! # Evaluation and scalar tensor comparisons for semilinear systems
-Source: Zheng Construction 4.1 and Stacks 06YY, 07A4.
-(blueprint: lem-coef-semilinear-tensor-coherence-comparisons)
+Source: Zheng Construction 4.1 and Stacks 06YY, 07A4
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false

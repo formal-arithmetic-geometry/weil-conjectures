@@ -110,23 +110,7 @@ private theorem tensorComplexTransportAux
   exact ⟨asIso (HomologicalComplex.mapBifunctorComparison τ (.up ℤ) V W)⟩
 
 /-- Canonical coefficient realization commutes with ordinary total tensor complexes.
-Source: Stacks Project, Modules on Sites, Tag 0GMW; Cohomology on Sites, Tag 06YN
-(blueprint: lem-exc-intrinsic-realization-tensor-complex).
-
-Proof: write realization as the fixed-scalar module-presheaf functor followed by
-module sheafification along the constant-ring unit. The module-presheaf functor
-identifies sectionwise fixed-scalar tensors with presheaf module tensors. The
-sheafification tensor comparison of Tag 0GMW then identifies the tensor of the
-realized sheaves with realization of the sheafified fixed-scalar tensor: its maps
-are specified by sending each local pure tensor to the same local pure tensor.
-The sheafification units are local isomorphisms; tensor preserves those local
-isomorphisms, so this comparison is invertible and natural in both sheaves.
-Realization is an equivalence and hence preserves the coproducts indexed by
-pairs of integers whose sum is a fixed degree. Apply the ordinary tensor
-comparison to each summand of the total complex. Naturality commutes with each
-factor's differential, and additivity commutes with the Koszul sign. These degree
-isomorphisms therefore assemble into the required chain isomorphism. This uses
-no resolutions, localization, cohomology, or interval bounds.
+Source: Stacks Project, Modules on Sites, Tag 0GMW; Cohomology on Sites, Tag 06YN.
 -/
 theorem intrinsic_realization_tensor_complex_iso
     (A : Type u) [CommRing A] [Finite A] (T : Scheme.{u})

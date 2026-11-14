@@ -11,9 +11,7 @@ import WeilConjectures.AlgebraicGeometry.QuotientTensorFlatModel.QuotientTensorR
 
 /-! # The quotient tensor square on resolving complexes
 
-Source: Stacks Project, Tags 07A4, 0G7E and 06YY; the representative calculation
-in steps 2--5 of the quotient pullback tensor coherence argument.
-(blueprint: lem-sfb-quotient-pullback-tensor-flat-model).
+Source: Stacks Project, Tags 07A4, 0G7E and 06YY.
 
 The statement is restricted to flat-term K-flat complexes. The parent module
 performs the separate resolution and naturality argument for arbitrary inputs.
@@ -42,22 +40,7 @@ open QuotientChange QuotientSectionTensor
 
 /-- The quotient tensor square on two flat-term K-flat complexes.
 
-Source: Stacks Project, sites-cohomology.tex, Tags 07A4, 0G7E and 06YY;
-steps 2--5 and the signed-total calculation of step 6 of
-`lem-sfb-quotient-pullback-tensor-coherence`.
-(blueprint: lem-sfb-quotient-pullback-tensor-flat-model).
-
-Proof: compute each derived path separately using the normalized scalar tensor
-and pullback counit equations. The left computation uses only b at X; the right
-computation uses only b at Y. Both have the same source computation and target
-localization inverse. The ordinary signed-total paths agree by monoidality of
-the actual balancing isomorphism, prolonged to complexes. Geometric pullback
-preserves K-flatness, so its counits and the scalar counits on the pulled-back
-factors are invertible. Tensor normalization proves invertibility of the target
-localization tensorator without assuming exactness of quotient extension.
-Rewrite the ordinary square and cancel the common factor computation. The
-parent supplies the resolution and naturality step for arbitrary derived
-objects. -/
+Source: Stacks Project, Tags 07A4, 0G7E and 06YY. -/
 theorem quotient_pullback_tensor_flat_model
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ)

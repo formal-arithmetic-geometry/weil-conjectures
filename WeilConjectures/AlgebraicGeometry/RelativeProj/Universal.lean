@@ -11,7 +11,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
 /-!
 # Uniqueness and cover independence of the relative `Proj`
 
-Let `A : X.GradedAlgebraData`. We show that the relative `Proj` is characterised by its affine
+Let `A: X.GradedAlgebraData`. We show that the relative `Proj` is characterised by its affine
 charts: if `P` is a scheme over `X` together with open immersions `Proj (A(V)) ⟶ P` for a
 family of affine opens `V` that is closed under refinement around every point and covers `X`,
 such that each chart is the preimage of `V` and the charts are compatible with restriction, then
@@ -23,11 +23,9 @@ Consequences:
 - `AlgebraicGeometry.Scheme.GradedAlgebraData.relProjIsoOfIsPullback` and
   `AlgebraicGeometry.Scheme.GradedAlgebraData.existsUnique_relProjIso`: any scheme over `X` with
   compatible chart identifications over all affine opens is isomorphic over `X` to the relative
-  `Proj`, via a unique isomorphism compatible with the charts
-  (blueprint: `definition-admissible-blow-up--1`, uniqueness).
+  `Proj`, via a unique isomorphism compatible with the charts.
 - `AlgebraicGeometry.Scheme.GradedAlgebraData.isColimitRestrict`: the relative `Proj` is also
-  glued from the charts of any covering family of affine opens which is closed under refinement
-  (blueprint: `definition-admissible-blow-up--1`, independence of the chosen affine cover).
+  glued from the charts of any covering family of affine opens which is closed under refinement.
 -/
 
 @[expose] public section
@@ -199,8 +197,7 @@ include hj hjc in
 /-- **Uniqueness of the relative `Proj`**: any scheme `P` over `X` with chart identifications
 `Proj (Γ(V, 𝒜)) ⟶ P` over all affine opens `V`, exhibiting `Proj (Γ(V, 𝒜))` as `V ×_X P` and
 compatible with restriction, is isomorphic to `Proj_X(𝒜)` via a unique isomorphism compatible with
-the chart identifications; this isomorphism lies over `X` (`relProjIsoOfIsPullback_hom_comp`).
-(blueprint: `definition-admissible-blow-up--1`, uniqueness) -/
+the chart identifications; this isomorphism lies over `X` (`relProjIsoOfIsPullback_hom_comp`). -/
 theorem existsUnique_relProjIso :
     ∃! e : A.relProj ≅ P, ∀ U, A.relProjι U ≫ e.hom = j U := by
   refine ⟨A.relProjIsoOfIsPullback p j hj hjc,
@@ -212,7 +209,7 @@ theorem existsUnique_relProjIso :
 
 /-- **Independence of the affine cover**: the relative `Proj` is also the colimit of the charts
 `Proj (A(V)) ⟶ Proj_X(𝒜)` over any family of affine opens `V` that covers `X` and is closed under
-refinement around every point. (blueprint: `definition-admissible-blow-up--1`) -/
+refinement around every point. -/
 noncomputable def isColimitRestrict {I : Type u} [Preorder I] {π : I → X.affineOpens}
     (hπ : Monotone π) (hcov : ∀ x : X, ∃ i, x ∈ (π i).1)
     (hdir : ∀ (i i' : I) (x : X), x ∈ (π i).1 → x ∈ (π i').1 →

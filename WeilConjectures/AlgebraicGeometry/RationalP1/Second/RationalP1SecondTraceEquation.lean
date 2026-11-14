@@ -9,8 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.RationalP1.Second.RationalP1Seco
 public import WeilConjectures.AlgebraicGeometry.RationalP1.Ambient.RationalP1AmbientTail
 
 /-! # A generic interface for the literal second trace equation
-
-Source: the second identity of the rational projective-line triangle calculation.
 -/
 
 @[expose] public noncomputable section
@@ -39,9 +37,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 
 /-- The exact trace-tail equation for an object M and a tail-shaped arrow f.
 The sole field is the literal equality for every pair of proofs of invertibility of
-its fixed exchange and projection arrows. No geometric identity is built into data.
-Source: rational projective-line triangle calculation, Second identity
-(blueprint: def-sfb-rational-p1-second-trace-equation). -/
+its fixed exchange and projection arrows. No geometric identity is built into data. -/
 structure SecondTraceEquation (d : Diagram Λ Y L)
     (e : (moduleObjectDerivedPullback Λ (secondProjection Y)).obj
       (((DerivedCategory.singleFunctor (Modules Λ (ProjectiveLine Y)) 0).obj
@@ -71,12 +67,7 @@ structure SecondTraceEquation (d : Diagram Λ Y L)
         d.trace₂ ≫ (singleUnitIso Λ (ProjectiveLine Y)).hom)) ≫
       (ρ_ M).hom
 
-/-- Assemble the insertion and trace equations in the fixed coefficient interfaces.
-Source: rational projective-line triangle calculation, Second identity
-(blueprint: def-sfb-rational-p1-second-trace-equation).
-Proof: factor the literal unit, postcompose the insertion equation and precompose
-the trace field, combine tensor whiskerings, and cancel the canonical comparison
-with its inverse. This is categorical composition for an arbitrary object M. -/
+/-- Assemble the insertion and trace equations in the fixed coefficient interfaces. -/
 theorem assemble_second_unit (d : Diagram Λ Y L)
     (e : (moduleObjectDerivedPullback Λ (secondProjection Y)).obj
       (((DerivedCategory.singleFunctor (Modules Λ (ProjectiveLine Y)) 0).obj

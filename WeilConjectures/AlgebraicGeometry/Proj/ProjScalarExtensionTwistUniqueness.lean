@@ -7,8 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Proj.ProjScalarExtensionTwistData
 
-/-! Uniqueness part of the normalized scalar-extension twist laws.
-(blueprint: lem-sfb-proj-scalar-extension-twist-fraction-laws-uniqueness). -/
+/-! Uniqueness part of the normalized scalar-extension twist laws. -/
 
 @[expose] public section
 

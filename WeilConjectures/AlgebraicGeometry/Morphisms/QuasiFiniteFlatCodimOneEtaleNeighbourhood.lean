@@ -19,7 +19,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 # The pointwise ramification criterion for a flat quasi-finite morphism
 
 Source: Stacks Project, Lemma 58.21.2 (Tag 0BJH).
-(blueprint: lem-sbc-quasi-finite-flat-codimension-one-etale-neighbourhood)
 -/
 
 @[expose] public section
@@ -32,34 +31,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- A flat morphism that is quasi-finite at a positive-dimensional source point
 is etale near that point if it is unramified at its dimension-one generalizations.
 
-Source: Stacks Project, Lemma 58.21.2 (Tag 0BJH).
-(blueprint: lem-sbc-quasi-finite-flat-codimension-one-etale-neighbourhood)
-
-Proof:
-1. Quasi-finiteness at x makes its singleton in the fibre open. Apply the
-   elementary etale finite-open theorem (Stacks 02LK), obtaining b : T → Y,
-   a finite open piece V of X ×[Y] T and a point v above x. The maps
-   a : V → X and g : V → T are etale and finite flat, respectively.
-2. Flat locally quasi-finite maps preserve coheight. The source-library theorem
-   `Scheme.Hom.coheight_apply_of_flat` and the stalk-dimension/coheight identity
-   therefore identify the local dimensions at z and a(z). Specialization maps
-   along a. Pull a supplied unramified neighbourhood back along a and cancel
-   the formally unramified map b to obtain the codimension-one hypotheses for g.
-3. Apply the existing finite-flat codimension-one criterion to g at v.
-   Its branch-locus argument is the finite case of Stacks 0BJH.
-4. The resulting etale open piece B → X has open image U containing x.
-   Factor it through U to get an etale surjection q : B → U. Since the
-   composite B → Y is etale, smoothness descends along q by the already proved
-   source-library theorem `Smooth.of_comp_of_flat_of_surjective` (Stacks 05B5).
-5. The isolated singleton in the original fibre has dimension zero. In the
-   infimum defining dimension at the point, this singleton gives the upper
-   bound zero; every neighbourhood contains the point and has dimension at
-   least zero. Apply the existing smooth-zero-fibre-dimension neighbourhood
-   criterion to shrink U to an etale neighbourhood of x.
-
-No source point exists when X is empty. Positive stalk dimension excludes
-zero-dimensional source points. No global quasi-finiteness, normality,
-dominance, separateness or quasi-compactness assumption is added. -/
+Source: Stacks Project, Lemma 58.21.2 (Tag 0BJH). -/
 theorem exists_etale_neighbourhood_of_flat_of_quasiFiniteAt_of_codimension_one
     {X Y : Scheme.{u}} [IsLocallyNoetherian X] [IsLocallyNoetherian Y]
     (f : X ⟶ Y) [LocallyOfFiniteType f] [Flat f] (x : X)

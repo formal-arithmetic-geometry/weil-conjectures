@@ -18,9 +18,7 @@ public import Mathlib.Topology.Irreducible
 /-!
 # Generic neighborhoods in a finite scheme stratification
 
-Source: main-20261015 blueprint, `lemma-constructible-sheaves`, final curve clause;
-Stacks Project, Tags 0BA8, 01IS, 004V, 004W, 004X, 01JR, 01JY and 01IQ
-(blueprint: lem-sfb-coefficient-heart-curve-generic-neighborhood).
+Source: Stacks Project, Tags 0BA8, 01IS, 004V, 004W, 004X, 01JR, 01JY and 01IQ.
 -/
 
 @[expose] public section
@@ -38,29 +36,7 @@ stratum images. The actual pullback retains the stratum's scheme structure: its 
 projection is a surjective closed immersion, and its second projection is an open immersion.
 The union of the neighborhoods is a dense open containing all component generic points.
 
-Source: main-20261015 blueprint, `lemma-constructible-sheaves`, final curve clause;
-Stacks Project, Tags 0BA8, 01IS, 004V, 004W, 004X, 01JR, 01JY and 01IQ
-(blueprint: lem-sfb-coefficient-heart-curve-generic-neighborhood).
-
-Proof:
-1. By `lem-weil-pbc-noetherian-finitely-many-components`, the components are finite.
-   By `lem-sc-scheme-sober`, each component C has a unique generic point eta(C).
-2. The partition in `definition-constructible-sheaves--2` gives a unique stratum j(C).
-   Write its locally closed image as O intersect F, with O open and F closed.
-   Since eta(C) belongs to F, `def-sc-generic-point` gives C contained in F.
-3. Remove all components other than C. Their finite union is closed, and maximality
-   of components shows that its complement V contains eta(C). Components cover X
-   (`lem-sc-irreducible-components-cover`), so V is contained in C. Take W(C) = V intersect O.
-4. By `lem-weil-pbc-open-preimage-fibre-product`, the actual pullback, after exchanging
-   its factors, is the open inverse image of W(C) in the given stratum. Thus its second
-   projection is open. The containment of W(C) in the stratum image makes the first
-   projection surjective on points.
-5. By `lem-weil-pbc-immersion-base-change-lft`, the first projection is an immersion.
-   Its image is its whole target, hence closed. Apply
-   `lem-weil-pbc-immersion-closed-image-closed-immersion` to make it a closed immersion.
-6. The union is open and contains all eta(C), hence its closure contains all components,
-   which cover X. It is therefore dense. If X is empty there are no components and the
-   empty union equals X. No reducedness or irreducibility hypothesis is used. -/
+Source: Stacks Project, Tags 0BA8, 01IS, 004V, 004W, 004X, 01JR, 01JY and 01IQ. -/
 theorem exists_stratification_generic_neighborhoods
     (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X]
     (s : FiniteLocallyClosedStratification X) :

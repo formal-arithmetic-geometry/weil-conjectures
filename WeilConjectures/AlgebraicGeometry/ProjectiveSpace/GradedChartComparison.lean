@@ -19,7 +19,6 @@ import Mathlib.RingTheory.Localization.Module
 # Comparing Proj module sheaves from fraction charts
 
 Source: Stacks Project, Constructions, Lemma 01M7; Sheaves on Spaces, Tags 009N and 009U.
-(blueprint: lem-sc-proj-graded-chart-comparison)
 -/
 
 @[expose] public section
@@ -189,26 +188,7 @@ private theorem iso_of_indexed_basis (X : TopCat.{u}) (R : TopCat.Sheaf RingCat.
   exact hlin' (idx U) (idx V) U.val V.val (hidx U) (hidx V) h s
 
 /-- A linear equivalence preserving numerator degrees compares sheaves given by charts.
-Source: Stacks Project, Constructions, Lemma 01M7; Sheaves on Spaces, Tags 009N and 009U;
-steps 2 and 3 of lem-sc-p1-homogeneous-basis-proj-coproduct.
-(blueprint: lem-sc-proj-graded-chart-comparison)
-
-Proof: Localize e and e.symm at powers of each positive homogeneous f. On a fraction,
-these maps send y/h to e(y)/h and e.symm(y)/h. The degree hypothesis identifies the
-prescribed degree-zero subsets in both directions, since the denominator is unchanged.
-The injective chart maps with the stated images therefore give additive equivalences
-of the section groups. The scalar formulas make them linear over the chart ring, which
-is isomorphic to the ring of sections via awayToSection. For an inclusion D(g) <= D(f),
-standardOpenProperties supplies e'>0 and homogeneous a with g^e'=a*f. Choose a fraction
-representative y/f^m for a section. The two restriction formulas agree after applying
-the localized equivalence, because e(a^m • y)=a^m • e(y). Thus the linear equivalences
-and their inverses commute with every restriction. Positive homogeneous standard opens
-form a basis closed under intersections and admitting finite refinements. Restrict F
-and G to this basis. The uniqueness clause of exists_sheafOfModules_from_basis glues
-the compatible equivalences to a sheaf isomorphism. Alternatively, extend both maps
-from the basis and check their inverse identities there. Empty opens cause no exception:
-the section modules and the relevant localized degree-zero subsets are zero. No stalk
-comparison or internal-grading hypothesis is required once these charts are provided. -/
+Source: Stacks Project, Constructions, Lemma 01M7; Sheaves on Spaces, Tags 009N and 009U. -/
 theorem graded_chart_comparison (k : Type u) [Field k]
     (M N : ModuleCat.{u} (MvPolynomial (Fin 2) k))
     (𝓜 : ℕ → Set M) (𝓝 : ℕ → Set N)

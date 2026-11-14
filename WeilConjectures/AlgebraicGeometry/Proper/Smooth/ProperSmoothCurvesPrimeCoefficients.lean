@@ -31,8 +31,7 @@ import WeilConjectures.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparis
 /-!
 # Prime coefficients in proper smooth curve families
 
-Source: Stacks Project, more-etale.tex, Tag 0GKV, lemma-proper-smooth-family-curves,
-the Noetherian case (blueprint: lem-weil-pbc-proper-smooth-curves-prime-coefficients).
+Source: Stacks Project, Tag 0GKV, the Noetherian case.
 -/
 
 @[expose] public section
@@ -111,14 +110,7 @@ higher direct image of the constant prime-field module sheaf is constructible.
 fibres; field extension preserves their dimension, so this is the geometric fibre condition.
 The lift of `ZMod ell` places the same finite prime field in the coefficient universe.
 
-Source: Stacks Project, more-etale.tex, Tag 0GKV, lemma-proper-smooth-family-curves,
-for a prime invertible on the base, the case Tag 0GL0 uses.
-(blueprint: lem-weil-pbc-proper-smooth-curves-prime-coefficients)
-
-Proof: the proved geometric stalk finiteness lemma and smooth proper specialization,
-transported by the module/abelian comparison, make every higher direct image finite
-locally constant by the specialization criterion. A finite locally constant sheaf is
-constructible for the trivial stratification.
+Source: Stacks Project, Tag 0GKV, for a prime invertible on the base, the case Tag 0GL0 uses.
 -/
 theorem properSmoothCurves_prime_higherDirectImage_constructible
     {C S : Scheme.{u}} [IsLocallyNoetherian S] [CompactSpace S]

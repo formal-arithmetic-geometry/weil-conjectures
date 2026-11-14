@@ -95,7 +95,6 @@ map of the closed base change, rather than an ideal selected from existence.
 Source: Stacks Project, Tag 09AC, first reduction, and Tag 01IH for closed
 immersions into affine schemes. The single-cover lifting criterion is
 `AffineProEt.isLocallySurjective_iff_of_isSheaf` in the source library.
-(blueprint: new-lem-weil-pbc-specialization-affine-coordinates).
 
 Proof. An epimorphism of sheaves on the affine basis lifts any given section
 along a single surjective affine cover. Compose that cover with the affine

@@ -13,7 +13,7 @@ import WeilConjectures.AlgebraicGeometry.Finite.FiniteLisseTowerSectionCover
 
 /-! # Compatible markings for a supplied algebraic stalk tower
 
-Source: Stacks Project, proetale.tex, Tags 09BV and 09C6.
+Source: Stacks Project, Tags 09BV and 09C6
 -/
 
 @[expose] public noncomputable section
@@ -33,34 +33,8 @@ chosen compatibly on a common pro-etale cover. The tower K, its bounds and its
 normalization arrows are inputs; this theorem constructs only compatible markings.
 There is no Noetherian or immersion hypothesis.
 
-Source: Stacks Project, proetale.tex, Tag 09BV (lemma-weird), the inverse system of
-isomorphism sheaves and its stable images; Tag 09C6 (lemma-connected-adic-lisse),
-compatibility of finite reductions.
-(blueprint: lem-weil-pbc-lisse-tower-compatible-stalk-markings).
-
-Proof: work in the localized pro-etale site over U and identify it with the site of
-U.left. Transport finite constant coefficients through the canonical inverse-image
-and constant-ring comparisons. Separate markings identify every level locally
-with the supplied bounded finite algebraic K. Thus the derived isomorphism sheaf
-at each level is finite locally constant with nonempty geometric stalks, by finite
-ring derived local constancy. Universality of t and of M's normalization arrows
-defines reduction on these sheaves by taking the adjoint of scalar extension.
-At each stalk the images of later levels stabilize, because the sets are finite;
-the stable images are nonempty and have surjective consecutive maps. Represent
-these finite locally constant sheaves on affine etale charts by finite etale
-schemes. Their affine inverse limits are weakly etale and jointly surjective,
-by the nonempty inverse limits of the stable stalk images. Refine by weakly
-contractible affines to evaluate the derived isomorphism sheaves. The compatible
-sections give actual b and the consecutive normalization squares. The
-identity-on-constant-sections quotient comparison sends these squares to the
-specified C-linear arrows s. Coefficient restriction composition and inverse image
-composition are the canonical sectionwise identity maps, hence satisfy their
-associativity and identity laws after localization. Compose consecutive squares
-using those laws and M.cocycle; induction on m-n gives exactly the displayed
-all-pairs equation, with the identity case supplied by the identity normalization.
-Generate a covering sieve in the localized site and restrict the compatible
-markings along all its arrows. Empty U uses the empty cover. Zero levels have
-singleton isomorphism stalks and require no exception. -/
+Source: Stacks Project, Tag 09BV (lemma-weird), the inverse system of isomorphism sheaves and its
+stable images. -/
 theorem lisse_tower_compatible_stalk_markings
     (X Y : Scheme.{u}) (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (M : AdicTower X d)

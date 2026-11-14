@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedMatchingChartRestric
 /-! # Vanishing of a localized matching numerator
 
 Source: Stacks Project, Tags 0BLH and 05ER.
-(blueprint: lem-sbc-punctured-matching-chart-kernel-torsion-injectivity)
 -/
 
 @[expose] public section
@@ -26,26 +25,7 @@ namespace AlgebraicGeometry.Scheme.CompletionGluingData
 section on the corresponding principal open of the affine candidate.
 
 Source: Stacks Project, Tag 0BLH, proof (construction of the chart algebras),
-and Tag 05ER, proof (localized first-projection comparison).
-
-Proof: Since the closed point is absent from D(f), f lies in the maximal ideal.
-Choose generators of that ideal and append f. Their principal opens cover U.
-Finiteness of q makes their inverse images affine; finiteness of s makes E affine.
-The overlap isomorphism supplies the completed chart comparisons, and restriction
-supplies the pairwise chart comparisons. These satisfy the cocycle equations.
-The sheaf equalizer for this finite cover identifies the underlying A-module of
-D.matchingRing with the formal-gluing module H0. The completion map is flat,
-so exists_unique_bijective_h0_localization identifies H0 localized at f with
-the appended f-chart module. The principal-open section ring of Spec D.matchingRing
-is the localization of D.matchingRing at D.baseMap.hom f. Under these identifications,
-functoriality of appTop and the Spec-global-sections adjunction identify the
-localized first projection with the pullback along D.puncturedMap restricted to W.
-Its injectivity sends the assumed zero image of the numerator to zero in that
-principal-open section ring. If f is nilpotent (including f = 0), W is empty
-and its section ring is the zero ring, so the conclusion holds directly.
-This step asserts only vanishing in the chart ring; clearing its denominator
-is a separate localization zero-criterion argument.
-(blueprint: lem-sbc-punctured-matching-chart-kernel-torsion-injectivity) -/
+and Tag 05ER, proof (localized first-projection comparison). -/
 theorem puncturedMatching_chart_section_injective
     {A : Type u} [CommRing A] [IsNoetherianRing A] [IsLocalRing A]
     {U : (Spec (.of A)).Opens}

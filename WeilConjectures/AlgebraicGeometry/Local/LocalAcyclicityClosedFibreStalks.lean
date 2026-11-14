@@ -14,8 +14,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
 /-! # Stalk cohomology of the geometric-fibre pushforward
 
-Source: Stacks Project, Tag 0GJU, stalk calculation in lemma-beta-is-isomorphism.
-(blueprint: lem-weil-pbc-local-acyclicity-closed-fibre-stalks).
+Source: Stacks Project, Tag 0GJU.
 -/
 
 @[expose] public section
@@ -50,18 +49,7 @@ private theorem nonempty_cohomology_iso_of_iso_over
 
 /-- For an arbitrary coefficient sheaf, the nonnegative target stalks of the derived
 unit on the closed fibre are the cohomology of a variety of vanishing cycles. No local
-acyclicity is assumed. Source: Stacks Project, Tag 0GJU, displayed stalk calculation.
-(blueprint: lem-weil-pbc-local-acyclicity-closed-fibre-stalks).
-
-Proof: the geometric-fibre projection is affine, being the base change of a morphism
-between affine schemes, and hence is quasi-compact and quasi-separated. Commute homology
-with exact inverse image, then use the inverse-image stalk comparison. Commute the other
-inverse image with the degree-zero single functor and apply the unrestricted
-strict-henselization stalk formula. The symmetry and associativity isomorphisms for
-pullbacks identify its strict-local fibre with the fibre of the strict localization of
-X'. Apply the strict-fibre comparison over X, and use invariance of derived global
-sections under scheme isomorphisms and inverse-image composition to transport its
-coefficients. This works in degree zero, in positive degrees, and for empty fibres. -/
+acyclicity is assumed. Source: Stacks Project, Tag 0GJU, displayed stalk calculation. -/
 theorem closedFibre_derivedUnit_target_stalks
     {X S : Scheme.{u}} (f : X ⟶ S)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

@@ -46,16 +46,7 @@ private theorem ideal_depth_le_of_equiv_of_le {R : Type u} [CommRing R]
       fun x hx => hIJ (hmem x hx), rfl⟩
 
 /-- The sheaf of the actual finite double dual has depth two at boundary points.
-Source: Stacks Project, Tags 0EY6, 0583 and the local Hom-depth bound 0AV5(2).
-(blueprint: new-affine-depth-two-boundary-property)
-
-Proof: Localization commutes with both duals of a finite module over a
-Noetherian ring. Thus the stalk is the double dual of the finite stalk of
-tilde M. Both local duals are finite. The local dual depth theorem applies
-to the first dual, using the assumed depth of the structure stalk. Transport
-finiteness and depth along the stalk comparison. A zero stalk has infinite
-depth; an empty boundary imposes no condition. This asserts nothing about
-an arbitrary coherent extension. -/
+Source: Stacks Project, Tags 0EY6, 0583 and the local Hom-depth bound 0AV5(2). -/
 theorem affine_depth_two_boundary_property
     (A : CommRingCat.{u}) [IsNoetherianRing A] (W : (Spec A).Opens)
     (hboundary : ∀ x : Spec A, x ∉ W →

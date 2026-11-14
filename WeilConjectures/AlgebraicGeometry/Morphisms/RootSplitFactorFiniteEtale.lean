@@ -19,7 +19,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
 
 Source: Stacks Project, Tags 02LA and 02VN, finite and etale fpqc descent applied to the punctured
 root cover in Tag 0EYG.
-(blueprint: lem-sbc-root-split-factor-finite-etale)
 -/
 
 @[expose] public section
@@ -32,18 +31,7 @@ namespace AlgebraicGeometry.Scheme
 /-- Finiteness and etaleness descend from a splitting over a punctured root cover.
 
 Source: Stacks Project, Tags 02LA and 02VN, applied to the punctured cover in
-Tag 0EYG. (blueprint: lem-sbc-root-split-factor-finite-etale)
-
-Proof: On U=D(g), the algebra U[T]/(T^n-g) is finite free of positive rank n.
-Its root t is a unit since t^n=g, and n is a unit, so the derivative n*t^(n-1)
-is a unit. Thus the punctured root map V to U is finite etale and faithfully
-flat. The equation hj identifies the supplied pullback over Spec R with the
-pullback of j over U. The equation for delta identifies its structural map
-with the projection from d copies of V. That projection is finite etale,
-including d=0. Finiteness and etaleness descend along V to U by Tags 02LA
-and 02VN. Neither regularity nor a point on the divisor is needed.
-Edge cases: n=0 is excluded; d=0 gives the empty finite etale cover; when
-D(g) is empty, j has empty source and the conclusion still holds. -/
+Tag 0EYG. -/
 theorem root_split_factor_finite_etale
     (R : CommRingCat.{u}) (g : R) (n : ℕ) (hn : 0 < n ∧ IsUnit (n : R))
     {Y : Scheme.{u}} (p : Y ⟶ Spec R)

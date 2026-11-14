@@ -12,8 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.Supported.SupportedCup
 
 The coordinate map of a unit, its Kummer class and the induced support boundary.
 Part of the construction in
-`WeilConjectures.AlgebraicGeometry.Picard.PurityFiniteSetting.FrameClass`
-(blueprint: proposition-purity-vector-bundles).
+`WeilConjectures.AlgebraicGeometry.Picard.PurityFiniteSetting.FrameClass`.
 -/
 
 @[expose] public noncomputable section
@@ -26,10 +25,7 @@ namespace WeilConjectures.PurityFiniteSetting
 
 /-- The map defined by a unit to the punctured affine line over the coefficient base.
 Its factorization through the coordinate basic open is the explicit frame map used
-for the Kummer pullback.
-Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/
-sec-smooth-purity/sec-the-trace-map-of-affine-space/sk-prop-an/def-pur-frame-class.md,
-step 1 (blueprint: proposition-purity-vector-bundles). -/
+for the Kummer pullback. -/
 noncomputable def frameCoordinateMap (P : PurityFiniteSetting.{u}) {X : Scheme.{u}}
     (a : X ⟶ Spec (.of P.field.k)) (t : Γ(X, ⊤)ˣ) :
     X ⟶ Punctured (Spec (.of P.field.k)) := by
@@ -56,10 +52,7 @@ noncomputable def frameCoordinateMap (P : PurityFiniteSetting.{u}) {X : Scheme.{
 
 /-- Pull back the recorded affine-line datum's coordinate Kummer class along the unit's
 map to G_m over Spec k. The cartesian twist comparison identifies its target with A(1).
-The inherited divisibility hypothesis is the one required by `coordinateKummer`.
-Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/
-sec-smooth-purity/sec-the-trace-map-of-affine-space/sk-prop-an/def-pur-frame-class.md,
-step 1 (blueprint: proposition-purity-vector-bundles). -/
+The inherited divisibility hypothesis is the one required by `coordinateKummer`. -/
 def frameCoordinateKummer (P : PurityFiniteSetting.{u})
     (h : P.ramificationIndex ∣ P.level)
     (X : Scheme.{u}) (a : X ⟶ Spec (.of P.field.k)) (t : Γ(X, ⊤)ˣ) :
@@ -71,20 +64,13 @@ def frameCoordinateKummer (P : PurityFiniteSetting.{u})
   exact (Abelian.Ext.mk₀ (P.frameConstantPullback g).inv).comp κg (zero_add 1) |>.comp
     (Abelian.Ext.mk₀ (P.frameCoefficientPullback h g (puncturedProjection S)).hom) (add_zero 1)
 
-/-- The frame unit's Kummer class, namely g^* kappa(t) from the affine-line datum.
-Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/
-sec-smooth-purity/sec-the-trace-map-of-affine-space/sk-prop-an/def-pur-frame-class.md,
-step 1 (blueprint: proposition-purity-vector-bundles). -/
+/-- The frame unit's Kummer class, namely g^* kappa(t) from the affine-line datum. -/
 def finiteFrameKummer (P : PurityFiniteSetting.{u}) (h : P.ramificationIndex ∣ P.level)
     (X : Scheme.{u}) (a : X ⟶ Spec (.of P.field.k)) (t : Γ(X, ⊤)ˣ) :
     Abelian.Ext (P.constant X) (P.frameCoefficientTwist h X 1) 1 :=
   P.frameCoordinateKummer h X a t
 
-/-- The normalized twist counit for the individual complementary basic open.
-Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/
-sec-smooth-purity/sec-the-trace-map-of-affine-space/sk-prop-an/def-pur-frame-class.md,
-step 2, restriction of A(1) and the open-immersion counit
-(blueprint: proposition-purity-vector-bundles). -/
+/-- The normalized twist counit for the individual complementary basic open. -/
 def finiteFrameTwistCounit (P : PurityFiniteSetting.{u})
     (h : P.ramificationIndex ∣ P.level) (X : Scheme.{u})
     (a : X ⟶ Spec (.of P.field.k)) (f : Γ(X, ⊤)) :
@@ -96,11 +82,7 @@ def finiteFrameTwistCounit (P : PurityFiniteSetting.{u})
       (X.basicOpen f).ι).counit.app (P.frameCoefficientTwist h X 1)
 
 /-- Extend the Kummer class by zero and apply the normalized twist counit.
-The source is the first object of the canonical coefficient localization sequence.
-Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/
-sec-smooth-purity/sec-the-trace-map-of-affine-space/sk-prop-an/def-pur-frame-class.md,
-step 2, extend the individual Kummer class by zero before the connecting map
-(blueprint: proposition-purity-vector-bundles). -/
+The source is the first object of the canonical coefficient localization sequence. -/
 def finiteFrameOpenKummer (P : PurityFiniteSetting.{u})
     (h : P.ramificationIndex ∣ P.level) (X : Scheme.{u})
     (a : X ⟶ Spec (.of P.field.k)) (f : Γ(X, ⊤)) :
@@ -120,8 +102,7 @@ def finiteFrameOpenKummer (P : PurityFiniteSetting.{u})
 splice with the canonical short exact localization sequence is the right-derived
 support connecting map, with the usual positive boundary convention. A principal
 basic-open immersion is affine, hence quasi-compact; no quasi-compactness assumption
-on X is imposed. Constant pullback identifies the closed source with i_* A_D.
-Source: thm-pur-with-support-exactness (blueprint: proposition-purity-vector-bundles). -/
+on X is imposed. Constant pullback identifies the closed source with i_* A_D. -/
 def finiteFrameBoundary (P : PurityFiniteSetting.{u})
     (h : P.ramificationIndex ∣ P.level) (X : Scheme.{u})
     (a : X ⟶ Spec (.of P.field.k)) (f : Γ(X, ⊤)) :

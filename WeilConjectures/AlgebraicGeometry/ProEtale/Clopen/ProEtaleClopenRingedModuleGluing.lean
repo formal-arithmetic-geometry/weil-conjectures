@@ -30,8 +30,7 @@ import Mathlib.Algebra.Category.Grp.FilteredColimits
 /-!
 # Module gluing on a finite clopen pro-etale partition
 
-Source: Stacks Project, Tags 04TQ, 04TR and 04TS, finite-disjoint module expansion
-(blueprint: lem-pur-clopen-ringed-module-gluing).
+Source: Stacks Project, Tags 04TQ, 04TR and 04TS, finite-disjoint module expansion.
 
 The restriction helpers below are the existing continuous pushforward constructions.
 The gluing theorem specifies its inverse on sections, morphisms and restriction maps.
@@ -51,13 +50,13 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme.ProEt
 
 /-- Restriction of ring sheaves along composition into a weakly etale open subscheme.
-Source: Stacks Project, Tag 04TR (blueprint: lem-pur-clopen-ringed-module-gluing). -/
+Source: Stacks Project, Tag 04TR. -/
 abbrev clopenRingRestriction {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j] :=
   (MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale j)).sheafPushforwardContinuous
     RingCat.{u} (topology Y) (topology X)
 
 /-- Restriction of module sheaves, with the unchanged sectionwise scalar actions.
-Source: Stacks Project, Tag 04TR (blueprint: lem-pur-clopen-ringed-module-gluing). -/
+Source: Stacks Project, Tag 04TR. -/
 abbrev clopenModuleRestriction {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology X) RingCat.{u}) :
     ringedSiteModules.{v} R ⥤ ringedSiteModules.{v} ((clopenRingRestriction j).obj R) :=
@@ -65,12 +64,12 @@ abbrev clopenModuleRestriction {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion
     (inferInstance : WeaklyEtale j)) (𝟙 _)
 
 /-- The component of a test object, as an object of the component's own pro-etale site.
-Source: Stacks Project, Tag 04TR (blueprint: lem-pur-clopen-ringed-module-gluing). -/
+Source: Stacks Project, Tag 04TR. -/
 abbrev clopenTestPiece {X Y : Scheme.{t}} (j : Y ⟶ X) (U : X.ProEt) : Y.ProEt :=
   (MorphismProperty.Over.pullback @WeaklyEtale ⊤ j).obj U
 
 /-- The component projection into the ambient test object.
-Source: Stacks Project, Tag 04TR (blueprint: lem-pur-clopen-ringed-module-gluing). -/
+Source: Stacks Project, Tag 04TR. -/
 def clopenTestInclusion {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (U : X.ProEt) :
     (MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale j)).obj
@@ -78,9 +77,7 @@ def clopenTestInclusion {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
   MorphismProperty.Over.homMk (pullback.fst U.hom j) pullback.condition
 
 /-- Additivity of restriction, used to form the component short complexes.
-Source: Stacks Project, Tag 04TR (blueprint: lem-pur-clopen-ringed-module-gluing).
-Proof: restriction evaluates each linear morphism on the same test object, so it
-preserves sums of morphisms componentwise (step 3 of the node). -/
+Source: Stacks Project, Tag 04TR. -/
 theorem clopenModuleRestriction_additive {X Y : Scheme.{t}} (j : Y ⟶ X)
     [IsOpenImmersion j] (R : Sheaf (topology X) RingCat.{u}) :
     (clopenModuleRestriction.{t, u, v} j R).Additive := by
@@ -92,7 +89,7 @@ theorem clopenModuleRestriction_additive {X Y : Scheme.{t}} (j : Y ⟶ X)
 attribute [instance] clopenModuleRestriction_additive
 
 /-- Restriction to all members of a finite clopen family.
-Source: Stacks Project, Tag 04TS (blueprint: lem-pur-clopen-ringed-module-gluing). -/
+Source: Stacks Project, Tag 04TS. -/
 abbrev clopenRestriction {X : Scheme.{t}} {I : Type w} {Y : I → Scheme.{t}}
     (j : ∀ i, Y i ⟶ X) [∀ i, IsOpenImmersion (j i)]
     (R : Sheaf (topology X) RingCat.{u}) :=
@@ -100,7 +97,7 @@ abbrev clopenRestriction {X : Scheme.{t}} {I : Type w} {Y : I → Scheme.{t}}
 
 /-- The diagonal identification of a component object with its own base change.
 This is the unit of the actual composition/base-change adjunction.
-Source: Stacks Project, Tag 04TS (blueprint: lem-pur-clopen-ringed-module-gluing). -/
+Source: Stacks Project, Tag 04TS. -/
 abbrev clopenDiagonal {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (W : Y.ProEt) :=
   (MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ j
@@ -733,37 +730,7 @@ its scalar action, its restriction maps, the restriction unit and the projection
 The functors e_i are characterized as G applied to a tuple supported in coordinate i.
 The bicone with vertex the identity is the natural direct-sum decomposition.
 
-Source: Stacks Project, Tags 04TQ, 04TR, 04TS and 03DB
-(blueprint: lem-pur-clopen-ringed-module-gluing).
-
-Proof plan, following the node's steps:
-1. Use the actual continuous composition and base-change functors on the small
-   pro-etale sites. Pull back the finite clopen cover to every test object; the
-   comparison etalePrecoverage_le_proetalePrecoverage makes it a pro-etale cover.
-   Distinct overlaps are empty and diagonal overlaps are the component itself.
-2. The empty cover forces every module's sections on the empty object to be zero.
-   The matching conditions between distinct components are therefore automatic.
-3. Extend each component by continuous pushforward along the base-change functor,
-   using the ring map induced by the composition/base-change counit. Form the explicit
-   product presheaf with componentwise addition, maps and restricted R-actions.
-4. Its coordinate projections form a limit of module presheaves, as can be checked
-   at every test object using the concrete product of modules. Limits of sheaves are
-   sheaves, so this explicitly constructed product presheaf is a sheaf.
-5. Restriction of sections gives eta; projection on the diagonal gives epsilon. The
-   sheaf axiom and the zero off-diagonal factors make them natural isomorphisms. Both
-   triangle identities hold coordinatewise.
-6. Insert a module in one coordinate and zero elsewhere, then apply G. Projection gives
-   r_i e_i = id and r_i e_j = 0. The finite coordinate inclusions and projections give
-   a bilimit bicone with vertex the identity.
-7. Module categories are abelian. The tuple of kernels and cokernels has its universal
-   property coordinatewise; transport across the equivalence gives preservation and
-   detection, hence detection of exact short complexes. This uses preservation of limits
-   and colimits by equivalences, not sectionwise surjectivity of sheaf epimorphisms.
-8-9. Coefficient normalizations are stated separately in clopen_integral_coefficients;
-   they follow by constant sheafification and sectionwise inverse limits.
-10. Empty component sites have only empty objects, so all their module sheaves are zero.
-    If the index is empty the covering hypothesis forces X empty; the product category
-    is the category with one object and one arrow. -/
+Source: Stacks Project, Tags 04TQ, 04TR, 04TS and 03DB. -/
 theorem clopen_ringed_module_gluing
     (X : Scheme.{t}) (I : Type w) [Finite I] (Y : I → Scheme.{t})
     (j : ∀ i, Y i ⟶ X) [∀ i, IsOpenImmersion (j i)] [∀ i, IsClosedImmersion (j i)]

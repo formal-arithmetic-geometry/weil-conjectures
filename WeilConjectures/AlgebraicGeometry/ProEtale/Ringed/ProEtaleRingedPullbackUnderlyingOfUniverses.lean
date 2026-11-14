@@ -47,8 +47,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModuleAdjunction
 
 /-! # Underlying abelian sheaf of ringed pro-etale pullback
 
-Source: Stacks sites-modules.tex, Tags 03D2 and 03D3.
-(blueprint: lem-fix-proetale-ringed-pullback-underlying-universes).
+Source: Tags 03D2 and 03D3.
 -/
 
 @[expose] public section
@@ -173,24 +172,7 @@ private noncomputable def modelForgetForwardIso (Z : Scheme.{t})
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- Pullback with an invertible coefficient adjunct has ordinary abelian inverse
-image as its underlying sheaf. The coefficient rings and the adjoints are arbitrary.
-
-Source: Stacks sites-modules.tex, lemma-pullback-module (03D2) and
-lemma-adjoint-push-pull-modules (03D3).
-(blueprint: lem-fix-proetale-ringed-pullback-underlying-universes)
-
-Proof: apply set inverse image to addition, zero, negation and scalar multiplication.
-Its finite-product comparisons transport the module identities, so this constructs
-a module over the inverse-image ring on the abelian inverse image. Transport its
-scalar action through the specified invertible coefficient adjunct to the target
-ring. A map from this module is linear exactly when its abelian adjunct is linear
-for the original direct ring map: transpose the scalar-action square using the
-ring and abelian adjunctions and their finite-product comparisons. This restricts
-the abelian adjunction bijection to a natural module Hom bijection with the displayed
-module direct image. Uniqueness of left adjoints identifies its left functor with P,
-giving the stated natural isomorphism. Make the constructions on the
-coefficientProEtaleSiteModel and transport them back; no scheme/coefficient universe
-is identified. The zero ring and empty scheme satisfy the same module identities. -/
+image as its underlying sheaf. The coefficient rings and the adjoints are arbitrary. -/
 theorem proEtale_ringedPullback_underlying_of_isIso
     {X Y : Scheme.{t}} (f : X ⟶ Y)
     (L : Sheaf (ProEt.topology Y) RingCat.{max u (t + 1)} ⥤

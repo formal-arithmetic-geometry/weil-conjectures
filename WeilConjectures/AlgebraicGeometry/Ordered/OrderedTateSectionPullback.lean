@@ -13,7 +13,6 @@ import all WeilConjectures.AlgebraicGeometry.Ordered.OrderedTateExactOpenComposi
 /-! # Section coherence of the ordered Tate coefficient
 
 Source: smooth-purity, Agreement on the model, restriction to the diagonal.
-(blueprint: lem-pur-ordered-tate-section-pullback).
 -/
 
 @[expose] public noncomputable section
@@ -59,24 +58,7 @@ private lemma coefficient_identity (A : Type (u + 1)) [CommRing A]
 
 /-- Restricting the canonical ordered Tate pullback along a section gives the
 canonical section compositor, with no residual automorphism of the coefficient.
-Source: smooth-purity, Agreement on the model, restriction of trace base change;
-the normalized root and pure-tensor comparisons in def-asd-ordinary-finite-p1-arrows.
-(blueprint: lem-pur-ordered-tate-section-pullback).
-
-Proof: induct on d. At zero the comparison is inverse image of the constant
-coefficient single complex. The inverse-image composition and identity unit laws
-identify its two pullbacks with the section compositor. At a successor, expand
-vectorIntegrationBaseCoefficientPullback once. The tensor pullback composition
-law separates the preceding ordered coefficient and the shifted Tate line.
-Use the induction hypothesis on the former. On the latter the root comparison
-commutes with composition because its composite followed by the roots inclusion
-is the canonical map to units; cancel that monomorphism. The line comparison
-then commutes with composition because its adjoint has the prescribed value on
-each pure tensor of a coefficient and a root. Derivation and shift preserve this
-equality by naturality of their canonical comparisons. The identity comparison
-is obtained by the same normalization. Thus the two line comparisons cancel
-against the section compositor too. Recombine with the tensor composition law.
-No permutation of factors is used. The zero-rank and empty-base cases are included. -/
+Source: smooth-purity, Agreement on the model, restriction of trace base change. -/
 theorem orderedTateSectionPullback (A : Type (u + 1)) [CommRing A]
     (N : ℕ) (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     {X Z : Scheme.{u}} (p : Z ⟶ X) (s : X ⟶ Z) (hs : s ≫ p = 𝟙 X)

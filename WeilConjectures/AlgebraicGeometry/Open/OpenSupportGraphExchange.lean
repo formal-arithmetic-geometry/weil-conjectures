@@ -295,7 +295,6 @@ import all WeilConjectures.AlgebraicGeometry.EtaleGraphFromOpenBaseChange
 /-! # Cartesian exchange of the graph comparison between compactifications
 
 Source: Stacks Project, Tag 0F7F, the product-graph base-change calculation.
-(blueprint: lem-asd-open-support-graph-exchange)
 -/
 
 @[expose] public section
@@ -352,15 +351,7 @@ private theorem cartesian_exchange_transport
   rfl
 
 /-- The graph factor alone commutes with Cartesian compactification exchange.
-Source: Stacks Project, Tag 0F7F; `etaleGraphFromOpen_baseChange`.
-
-Proof: apply the single-graph exchange to the presentation of d and its supplied
-Cartesian representative d'. Remove R(id)_* by its unit-normalized exchange equation.
-This gives the result for exact termwise inverse image. Conjugate by the canonical
-isomorphisms between exact inverse image and left derived inverse image. Naturality
-cancels the endpoint comparison isomorphisms. No proper exchange is inverted and no
-quasi-compactness is used.
-(blueprint: lem-asd-open-support-graph-exchange) -/
+Source: Stacks Project, Tag 0F7F; `etaleGraphFromOpen_baseChange`. -/
 theorem openRestrictionGraphIso_cartesianExchange
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}

@@ -19,10 +19,6 @@ import Mathlib.Logic.Equiv.Fin.Basic
 /-!
 # Immersion extensions and finite constant scalar models
 
-Source: blueprint main-20261015, chap-Construction-of-f,
-sk-lem-integral-models-operations.proof.md, paragraph (3)
-(blueprint: lem-sfb-scalar-model-immersion-extension).
-
 The assertion includes exactness, preservation of constructibility, and the extended
 adapted stratifications. Isomorphisms on the old strata retain every chosen covering
 and scalar presentation; the complementary stratum has the zero model.
@@ -50,10 +46,7 @@ The two existential stratifications contain exactly the original strata and one
 complementary stratum, as schemes over the target, and are adapted to the extension.
 The stratum isomorphisms retain the original covers and finitely presented scalar modules.
 `IsZero` on the additional stratum specifies the zero scalar model, using the identity
-cover and the zero presentation over the point.
-
-Source: blueprint main-20261015, sk-lem-integral-models-operations.proof.md, paragraph (3)
-(blueprint: lem-sfb-scalar-model-immersion-extension). -/
+cover and the zero presentation over the point. -/
 def ScalarModelImmersionExtensionAssertions
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {U Z T : Scheme.{u}}
@@ -346,32 +339,7 @@ private theorem immersion_assertions
 
 /-- Exact open extension by zero and closed direct image preserve finite constant
 scalar-model constructibility, retaining the source stratification and its local models
-and adjoining the complementary locus with zero model, for every admissible coefficient.
-
-Source: blueprint main-20261015, sk-lem-integral-models-operations.proof.md, paragraph (3)
-(blueprint: lem-sfb-scalar-model-immersion-extension).
-
-Proof:
-1. Use noetherian_complementary_stratifications to obtain qcqs source schemes, a
-quasi-compact open immersion, and the two extended stratifications with their actual maps.
-2. Open extension is exact by its existing internal-module instances. Apply
-ringSheaf_closed_localization to the pulled-back coefficient ring on T. Its linear closed
-image is exact and fully faithful. Restriction along the coefficient isomorphism is an
-exact equivalence; comapPullbackHomCompIso therefore gives exactness and full faithfulness
-of the specified closed image, whose adjunction counit is consequently invertible.
-3. The open adjunction unit is invertible. Disjoint-support vanishing gives the closed
-restriction of open extension; the underlying-sheaf comparison gives the open restriction
-of closed image. Thus both extensions have their original source restriction and zero
-complementary restriction.
-4. Pullback composition identifies each old stratum restriction with the original one.
-Map this isomorphism along every member of the original cover and compose with its model
-isomorphism, retaining the same finite scalar presentation.
-5. A zero restriction has a finite constant model on the identity cover, with scalar
-module zero and its rank-zero presentation. Transfer these models using the dependent
-scheme/map equalities supplied by step 1. Reindex by the old indices plus one option.
-6. On the qcqs source and target schemes, constructibility is exactly existence of an
-adapted finite stratification. Apply the preceding construction to its witnesses, then
-specialize this argument for an arbitrary commutative condensed ring to each coefficient. -/
+and adjoining the complementary locus with zero model, for every admissible coefficient. -/
 theorem scalarModelImmersionExtension
     (ℓ : ℕ) [Fact ℓ.Prime] {U Z T : Scheme.{u}} [IsNoetherian T]
     (j : U ⟶ T) [IsOpenImmersion j] (i : Z ⟶ T) [IsClosedImmersion i]

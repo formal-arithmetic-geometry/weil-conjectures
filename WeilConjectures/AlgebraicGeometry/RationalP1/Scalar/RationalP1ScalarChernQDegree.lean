@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.RationalP1.Scalar.RationalP1Scal
 import WeilConjectures.AlgebraicGeometry.RationalP1.RationalP1CompletedChernDegree
 
 /-! # Trace one on the two transported Chern generators
-
-Source: the completed Chern-degree proof in DiagonalUniformizerTraceChernDegree,
-followed by the normalized realization and coefficient squares.
 -/
 
 @[expose] public noncomputable section
@@ -96,18 +93,7 @@ private theorem extend_degree
       ((s.square.mate a).app _ ≫ R'.R.map (cL.shift a)) c t t'
       (by simpa only [Category.assoc] using s.trace) hc
 
-/-- The transported positive Chern adjunct of Q has normalized trace one.
-
-Source: latest blueprint, diagonal-tower coefficient changes, paragraphs (1)--(2)
-(blueprint: lem-sfb-rational-p1-scalar-chern-q-degree).
-
-Proof: Apply completed_chern_degree to the whole-system normalized adjunct.
-The recorded realization square transports its degree equation. Apply the
-actual integral and rational scalar mates and their trace squares in succession.
-For the closure, also apply Family.toClosure along the bottom finite subfield.
-In each step F(t)u=vt' and ct=1 imply (u^-1 F(c)v)t'=1. Finally compose with
-the specified native pushforward comparison and cancel it against its inverse
-in the native trace. All arrows are the explicit scalar Chern composites. -/
+/-- The transported positive Chern adjunct of Q has normalized trace one. -/
 theorem scalar_chern_q_degree
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (Y : Scheme.{u}) [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)]

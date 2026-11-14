@@ -13,8 +13,7 @@ import Mathlib.CategoryTheory.Sites.EpiMono
 
 /-! # Epimorphic transitions of the prime-power root tower
 
-Source: Stacks Project, Tag 03PK; coefficient-twist blueprint, proof step 2.
-(blueprint: lem-pur-twist-root-transitions)
+Source: Stacks Project, Tag 03PK
 -/
 
 @[expose] public section
@@ -27,15 +26,7 @@ namespace AlgebraicGeometry.Scheme
 /-- The power transitions of the root tower are epimorphisms when the prime
 is invertible on the base.
 
-Source: Stacks Project, Tag 03PK; coefficient-twist blueprint, proof step 2.
-(blueprint: lem-pur-twist-root-transitions)
-
-Proof: invertibility in every residue field implies invertibility in every stalk,
-and hence in global sections. On a test object a root of order l^(n+1) is a unit.
-The Kummer cover supplies a local l-th root of this unit. Its l^(n+2)-th power
-is one, so it is a section of the next root sheaf. The defining kernel transition
-sends this section to the given section. These étale surjective covers are pro-étale
-covers, proving local surjectivity and thus epimorphy, including on the empty base. -/
+Source: Stacks Project, Tag 03PK -/
 theorem purTwistRootTransitions_epi (S : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     [∀ x : S, Invertible (l : S.residueField x)] (n : ℕ) :
     Epi (proEtaleRootsOfUnityTransition S (l ^ (n + 1)) (l ^ (n + 2))

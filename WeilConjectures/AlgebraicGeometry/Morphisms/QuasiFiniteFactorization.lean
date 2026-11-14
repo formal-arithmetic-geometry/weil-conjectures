@@ -15,7 +15,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.ZariskisMainTheorem
 # Zariski's Main Theorem: the finite factorization
 
 Mathlib's `Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean` proves Grothendieck's form of
-Zariski's Main Theorem: a separated, quasi-compact, locally quasi-finite morphism `f : X ⟶ S`
+Zariski's Main Theorem: a separated, quasi-compact, locally quasi-finite morphism `f: X ⟶ S`
 locally of finite type factors as an open immersion into the relative normalization of `S` in
 `X` followed by an integral morphism. Over a quasi-compact quasi-separated base we deduce the
 factorization through a *finite* `S`-scheme (Stacks Project Tag 05K0), by writing the relative
@@ -28,7 +28,7 @@ finite `S`-scheme can be chosen of finite presentation (Stacks Project Tag 0F2N)
 
 - `AlgebraicGeometry.Scheme.Hom.FiniteApproximation.exists_isOpenImmersion_isClosedImmersion`:
   a quasi-compact open of a limit of finite `S`-schemes is open in a closed subscheme of some
-  stage (blueprint `thm-pqf-immersion-descent`).
+  stage.
 - `AlgebraicGeometry.Scheme.Hom.exists_isOpenImmersion_isFinite_of_locallyQuasiFinite`:
   **Zariski's Main Theorem**, finite factorization (Stacks Project Tag 05K0; blueprint
   `thm-pqf-zmt-factorization`).
@@ -48,9 +48,9 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
-/-- **Descent of the immersion to a finite stage** (blueprint `thm-pqf-immersion-descent`).
-Let `ν : N ⟶ S` be presented as a cofiltered limit of finite `S`-schemes `T_λ`, with `S`
-quasi-compact and quasi-separated, and let `ι : X ⟶ N` be a quasi-compact open immersion with
+/-- **Descent of the immersion to a finite stage**.
+Let `ν: N ⟶ S` be presented as a cofiltered limit of finite `S`-schemes `T_λ`, with `S`
+quasi-compact and quasi-separated, and let `ι: X ⟶ N` be a quasi-compact open immersion with
 `X` locally of finite type over `S`. Then there are an index `λ₀` and a factorization
 `X ⟶ T ⟶ T_{λ₀}` of `X ⟶ N ⟶ T_{λ₀}` into a quasi-compact open immersion followed by a closed
 immersion. If `S` is locally Noetherian, `T_{λ₀}` is moreover of finite presentation over `S`.

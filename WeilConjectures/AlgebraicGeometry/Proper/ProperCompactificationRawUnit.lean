@@ -106,16 +106,7 @@ private theorem identity_mixed_unit
 
 /-- The chosen proper comparison agrees with every normalized sheaf comparison after
 precomposition with the raw right-derived unit.
-Source: Stacks Project, Tags 0F7I and 0D6E.
-(blueprint: lem-pur-proper-compactification-raw-unit).
-
-Proof in words: for the identity-open compactification, the support inclusion is the
-identity-open adjunction isomorphism followed by the ordinary direct-image unit law.
-Naturality of the right-derived unit gives the claimed identity there. Compare this
-compactification to c using the raw common-refinement unit equation. Its hypothesis is
-exactly the stated normalization of a. Finally the common-refinement cocycle identifies
-the resulting map through the chosen compactification with the displayed two comparisons.
-This also proves the identity case and the empty-scheme case. -/
+Source: Stacks Project, Tags 0F7I and 0D6E. -/
 theorem properCompactification_raw_unit
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]

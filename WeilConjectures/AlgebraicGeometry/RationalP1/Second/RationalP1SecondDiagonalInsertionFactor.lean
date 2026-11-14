@@ -13,8 +13,6 @@ import WeilConjectures.AlgebraicGeometry.RationalP1.RationalP1ProjectionNaturali
 import WeilConjectures.AlgebraicGeometry.RationalP1.Projective.ProjectiveSupportedSectionProjection
 
 /-! # Factoring the second diagonal insertion before any trace
-
-Source: the second identity of the rational projective-line triangle calculation.
 -/
 
 @[expose] public noncomputable section
@@ -322,27 +320,7 @@ private theorem diagonal_insertion_from_section
 /-- The section/projection factorization of the insertion, before applying any trace.
 No trace, counit, exchange inverse, projection inverse, localizing hypothesis or completed
 reference occurs in this equation. The diagram is used only for its class, full derived
-unit, and supported-source normalization.
-
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md,
-Second identity, cancellation on the diagonal
-(blueprint: lem-sfb-rational-p1-second-diagonal-insertion-factor).
-
-Proof: express the inverse diagonal tensor comparison using the second projection.
-The comparison secondPullComparison has identity restriction to the diagonal: its q*K
-factor restricts to the identity by pullback composition coherence, and its Tate factor
-by the Cartesian root normalization. Transposing under the diagonal pullback adjunction
-therefore identifies its composite with the p1 diagonal tensor comparison. Apply the
-section case of ringed projection/composition coherence to Delta and p2, transported by
-the normalized module/ringed comparison. This identifies the pushSection source with
-M tensor the coefficient source, via the right unitor. Naturality of projection in the
-supported coefficient arrow then moves delta outside the projection. The full derived
-unit and supported-source normalization identify the remaining source arrow with the
-recorded support2.hom. Finally the canonical derived-functor equality transports R2
-back to the fixed module-object pushforward. The tensor-shift comparison at the target
-is exactly the one in secondForwardProjection. This proves the equation for arbitrary
-K, without using either integration identity or any trace property. -/
+unit, and supported-source normalization. -/
 theorem second_diagonal_insertion_factor
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

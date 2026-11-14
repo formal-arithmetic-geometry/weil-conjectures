@@ -70,20 +70,7 @@ private theorem mixed
     conjugateIsoEquiv_symm_apply_inv, conjugateIsoEquiv_symm_apply_hom]
 
 /-- The tensor mate and the ordinary pullback triangle define the same map.
-Source: Stacks Project, Tags 0096 and 0D5S; uniqueness of a left adjoint.
-(blueprint: lem-picard-tensor-ordinary-coefficient-triangle)
-
-Proof: Convert the second tensor adjoint in tensorCoefficientComparison to the
-ordinary pullback adjoint by leftAdjointUniq. Conjugation sends that conversion
-to the identity, so the resulting coefficient comparison is the mixed
-leftAdjointCompIso for tensor pullback along q and ordinary pullback along b.
-Conjugate the displayed ordinary triangle by the same two adjunctions.
-The leftAdjointUniq factors have identity mates; pullbackComp has mate
-pushforwardComp, and equality transport has mate pushforwardCongr. Its mate is
-therefore the same pushforward composition followed by pushforwardCongr hb.
-Injectivity of conjugateEquiv proves equality of natural transformations;
-evaluation at L gives the stated isomorphism equality. No scheme, module or
-morphism needs to be nonempty, flat or invertible. -/
+Source: Stacks Project, Tags 0096 and 0D5S; uniqueness of a left adjoint. -/
 theorem picard_tensor_ordinary_coefficient_triangle
     {A B X : Scheme.{v}} (q : A ⟶ X) (q' : B ⟶ X) (b : B ⟶ A)
     (hb : b ≫ q = q') (L : X.Modules) :

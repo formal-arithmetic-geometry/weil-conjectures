@@ -140,7 +140,6 @@ import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 # Rational pullback computation on flat-term K-flat complexes
 
 Source: Stacks Tags 0G7E and 06YY; Bhatt--Scholze, Remark 6.8.15.
-(blueprint: lem-per-rational-pullback-flat-computation-counit).
 -/
 
 @[expose] public noncomputable section

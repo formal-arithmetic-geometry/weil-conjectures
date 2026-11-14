@@ -85,8 +85,7 @@ ambient section at level `n`. The proof factors the transition of image ideals
 through O_W and applies
 the natural section boundary sequence, expressing the factorization in Tag 0H3D.
 It is recorded as a separate node so the elementary recursion argument
-in the parent theorem can be checked independently.
-(blueprint: new-principal-thickening-single-lift) -/
+in the parent theorem can be checked independently. -/
 theorem principal_thickening_single_lift
     (R : Type u) [CommRing R] (g : R) (W : (Spec (.of R)).Opens)
     (hH : Subsingleton (Modules.H (X := W.toScheme)

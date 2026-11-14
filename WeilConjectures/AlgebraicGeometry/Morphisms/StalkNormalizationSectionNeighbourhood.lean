@@ -21,8 +21,7 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.StalkNormalizationDepthTwoSec
 /-!
 # Etaleness near the local section of a normalization
 
-Source: Stacks Project, Tag 0EYJ, local computation; Tags 0EYI and 0EY9.
-(blueprint: lem-sbc-stalk-normalization-section-neighbourhood)
+Source: Stacks Project, Tag 0EYJ, local computation; Tags 0EYI and 0EY9
 -/
 
 @[expose] public section
@@ -77,33 +76,8 @@ private theorem etale_shrink_of_fibre_source_opens {X Y : Scheme.{u}}
 
 /-- The section meets an open over which the finite local normalization is etale.
 
-Source: Stacks Project, Tag 0EYJ (pione-lemma-extend-covering), formal section
-calculation; Tag 0EYI (split-section trait test), Tag 0EY9 (power series
-full faithfulness), and Tag 0EY6 (flat base change for the depth-two extension).
-(blueprint: lem-sbc-stalk-normalization-section-neighbourhood)
-
-Proof: After localization at s, the complement is the closed point of the
-normal Noetherian local base A. Smoothness makes the total space normal.
-Extend the action on the punctured cover by generic full faithfulness.
-The rational point and the torsor action split its generic section fibre;
-normal generic full faithfulness extends this splitting over the punctured
-section. If A has dimension one, A is a DVR. Tame normalization gives the
-standard local ramification forms, and the split-section test forces their
-exponents to be one near the section. If A has dimension at least two,
-normality gives depth at least two, and flatness propagates it to the total
-space. The finite normalization is the unique depth-two extension: its normal
-finite algebra equals the pushforward of the punctured algebra. Complete a
-smooth affine chart at the section ideal; its completion is a power series
-ring over A. Full faithfulness on the punctured power series scheme identifies
-the cover with the split cover, because their restrictions to the section
-are split. For relative dimension zero this identification is immediate.
-Uniqueness and flat base change of the depth-two extension identify the
-completed normalization with the split finite algebra. Completion is flat
-and faithfully flat at the section point, so etaleness descends there.
-As the normalization is finite over a Noetherian scheme, its non-etale locus
-has closed image. The complementary target open is the required W.
-The argument applies to each component, with stabilizer orders dividing |G|;
-an empty finite algebra gives an empty etale cover and causes no exception. -/
+Source: Stacks Project, formal section calculation; Tag 0EYI (split-section trait test), Tag 0EY9
+(power series full faithfulness), and Tag 0EY6 (flat base change for the depth-two extension). -/
 theorem GaloisCover.stalk_normalization_section_neighbourhood {S C : Scheme.{u}} [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]
     (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))

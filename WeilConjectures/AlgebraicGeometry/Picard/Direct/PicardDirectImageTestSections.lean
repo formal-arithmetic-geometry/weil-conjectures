@@ -20,7 +20,6 @@ import WeilConjectures.AlgebraicGeometry.Picard.Direct.PicardDirectImageSectionN
 /-! # Derived test sections of a base-changed direct image
 
 Source: Stacks Project, Tags 0B91 and 08HY.
-(blueprint: lem-sc-picard-direct-image-test-sections)
 -/
 
 @[expose] public section
@@ -33,24 +32,7 @@ namespace AlgebraicGeometry.Scheme
 sections upstairs, and the identification respects the canonical fibre restriction.
 This assertion has no perfect model, scalar basis, differential, or cycle hypothesis.
 Source: Stacks Project, Tag 0B91, arbitrary base change; Tag 08HY, canonical mate;
-Tag 01IQ, residue fibre image.
-(blueprint: lem-sc-picard-direct-image-test-sections)
-
-Proof: Put E=R(f_W)_*(L_W[0]). Invertible L is finitely presented and flat relative to
-f, since f is flat; these properties survive arbitrary base change. Tag 0B91 identifies
-Lt^*E with R(f_T)_*(L_T[0]), using the canonical base-change map and tensor-pullback
-composition. The pulled-back degree-zero structure sheaf is canonically the structure
-sheaf of T. Derived adjunction and full faithfulness of the single functor identify
-morphisms from it to R(f_T)_*(L_T[0]) with ordinary global sections of L_T. All these
-identifications are additive; denote their composite by q t. Factor the residue point
-through V using picardResidueLift, and form the cartesian comparison j:Y -> X_V. The
-image of j is exactly the fibre over w, by the residue-field fibre description; every
-point above w lifts. Tensor-pullback composition supplies e:j^*L_V -> L_Y. The canonical
-mate square, after H0 and evaluation on the top open, identifies pullback of a derived
-test section with the adjunction unit on q V ξ followed by e. Composition comparisons
-are canonical, so this is the conjugation defining picardDerivedModelRestriction.
-The unit at top is restricted along j inverse top = top, giving exactly the displayed
-expression. Empty fibres yield zero section groups; no nonempty-fibre assumption is used. -/
+Tag 01IQ, residue fibre image. -/
 theorem picard_direct_image_test_sections
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

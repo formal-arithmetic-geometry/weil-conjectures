@@ -21,7 +21,6 @@ import WeilConjectures.AlgebraicGeometry.ProjStandardOpenProperties
 # Exact maps on fixed associated graded-module sheaves
 
 Source: Stacks Project, Tag 01M7, final paragraph.
-(blueprint: lem-sc-p1-graded-chain-maps-exact).
 -/
 
 @[expose] public section
@@ -114,29 +113,7 @@ private theorem basis_chain_exact
   · exact ComposableArrows.exact₂_mk _ hc₁ he₁
 
 /-- Fixed associated sheaves of an exact graded chain admit an exact chain of maps.
-Source: Stacks Project, Constructions, Tag 01M7, final paragraph.
-(blueprint: lem-sc-p1-graded-chain-maps-exact).
-
-Proof:
-1. Give K = range f₁ its induced grading. Degree-preserving maps have graded images
-   and kernels: decompose preimages into their homogeneous components and compare
-   components using internality. The given range/kernel equalities split the chain
-   into the short exact sequences A₂ → A₁ → K and K → A₀ → M.
-2. Use the underlying additive-subgroup polynomial grading when applying
-   gradedModuleSheaf_exists and tilde_functorial. Identify its Proj with the
-   homogeneous-submodule Proj by identical homogeneous ideals and fractions; the
-   chart ring maps and restrictions agree under this identification. Construct the
-   associated sheaf of K using gradedModuleSheaf_exists. For the fixed
-   sheaves Eᵢ and F, the injective chart maps identify their sections with the same
-   degree-zero fractions as the canonical associated sheaves. The restriction and
-   scalar formulas give unique isomorphisms on the standard-open basis, so transport
-   the canonical stalk charts across these isomorphisms.
-3. Apply tilde_functorial to the two triples to obtain maps with the chart fraction
-   formulas. Apply proj_sheafification_shortExact to both short exact sequences.
-4. Compose the map E₁ → K~ with K~ → E₀. The first short exact sequence gives a
-   monic E₂ → E₁, the second an epic E₀ → F. At E₁, composing with a mono does not
-   change the kernel; at E₀, composing with an epi does not change the image.
-   Consequently the spliced chain is exact at both middle terms. -/
+Source: Stacks Project, Constructions, Tag 01M7, final paragraph. -/
 theorem graded_chain_maps_exact (k : Type u) [Field k]
     (M : ModuleCat.{u} (MvPolynomial (Fin 2) k))
     (𝓜 : ℤ → AddSubgroup M) (h𝓜 : DirectSum.IsInternal 𝓜)

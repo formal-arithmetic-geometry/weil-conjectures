@@ -22,17 +22,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Density of the localized source in the relative normalization.
 
-Source: Stacks Project, Tags 035I and 081I (flat base change of schematic images).
-(blueprint: lem-sbc-stalk-normalization-dense-part)
-
-Proof: Put M = f.normalization and N = M ×_C L. The map P → M has zero
-kernel by the integral-closure construction. The stalk morphism Spec O_{S,s} → S
-is flat, since on an affine neighbourhood it is a localization. Consequently
-L → C and N → M are flat. Pulling P → M back along N → M gives a
-quasi-compact schematically dominant map k : P ×_M N → N, so its image is dense.
-The pullback identities and P → M → C = f show that every point in that image
-maps into C_U under N → L → C. The displayed open therefore contains a dense
-subset and is dense itself. This also covers an empty source or empty U. -/
+Source: Stacks Project, Tags 035I and 081I (flat base change of schematic images). -/
 theorem stalk_normalization_dense_part {S C : Scheme.{u}}
     [IsNoetherian S] [QuasiSeparatedSpace S] [IsIntegral S]
     (_hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))

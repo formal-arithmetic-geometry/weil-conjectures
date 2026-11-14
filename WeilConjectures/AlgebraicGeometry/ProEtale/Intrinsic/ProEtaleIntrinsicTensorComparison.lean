@@ -35,8 +35,7 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 /-!
 # Tensor comparison for the intrinsic constant-ring realization
 
-Source: Stacks Project, Modules on Sites, Tags 03EK and 03EL, and Tag 00YV
-(blueprint: lem-sfb-proetale-intrinsic-tensor-comparison).
+Source: Stacks Project, Modules on Sites, Tags 03EK and 03EL, and Tag 00YV.
 -/
 
 @[expose] public section
@@ -105,18 +104,7 @@ attribute [local irreducible] SheafOfModules.monoidalCategory
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The canonical realization over the constant ring respects right tensoring.
-Source: Stacks Project, Tags 03EK, 03EL and 00YV
-(blueprint: lem-sfb-proetale-intrinsic-tensor-comparison).
-
-Proof: apply the scalar sheafification unit to both factors of a sectionwise tensor.
-The resulting bilinear map is balanced over the constant ring and extends uniquely
-by module sheafification. Locally each section of the constant ring comes from a
-constant scalar, since the scalar unit is locally bijective. Therefore the balanced
-relations for that ring agree locally with the fixed-scalar balanced relations.
-The map is locally bijective, so its sheafification is an isomorphism. It is natural
-in the first factor because both maps send a pure tensor x tensor y to f(x) tensor y.
-This includes the empty object and the zero ring, since the universal properties
-of tensor and sheafification make no nonemptiness assumption. -/
+Source: Stacks Project, Tags 03EK, 03EL and 00YV. -/
 theorem proEtale_intrinsic_tensorRight_comparison
     (T : Scheme.{u}) (A : Type u) [CommRing A] [Finite A]
     (N : Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1, u} A))) :

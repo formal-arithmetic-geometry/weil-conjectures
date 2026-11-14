@@ -101,24 +101,7 @@ private theorem discr_span_map_eq_basicOpen
 
 /-- Restriction between two free affine charts preserves the discriminant ideal.
 
-Source: Stacks Project, Tag 0BVH, construction before Lemma 49.3.1.
-(blueprint: lem-sbc-trace-discriminant-affine-restriction)
-
-Proof: Finiteness makes the inverse images of the two affine opens affine. The
-section algebra on the smaller open is the base change of the section algebra on
-the larger open. The given basis on the larger open therefore base changes to a
-basis on the smaller one. In this transported basis, multiplication matrices are
-obtained by applying the restriction map entrywise. Matrix trace and determinant
-commute with that map, so the transported discriminant generates the extended ideal.
-Changing to the supplied basis multiplies the determinant by the square of the
-unit determinant of the basis-change matrix. This does not change the principal
-ideal. On a nonempty smaller chart, invariant basis number identifies the two finite
-index cardinalities. On an empty chart its section ring is the zero ring and both
-ideals coincide. For arbitrary affine inclusions, take common principal refinements
-around each point,
-apply the localization calculation on both sides, and compare the resulting ideals
-in the stalk. Affine ideals are determined by their extensions to the stalks.
-This also covers a rank-zero source, whose discriminant is one. -/
+Source: Stacks Project, Tag 0BVH, construction before Lemma 49.3.1 -/
 theorem trace_discriminant_span_map_affine_restriction
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsFinite f]
     (U V : Y.affineOpens) (h : V.1 ≤ U.1) :

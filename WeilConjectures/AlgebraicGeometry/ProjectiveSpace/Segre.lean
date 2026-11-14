@@ -574,8 +574,7 @@ lemma isPullback_prodToProjInt :
 
 /-- **The relative Segre morphism** `ℙ(n; S) ×_S ℙ(m; S) ⟶ ℙ(n × m; S)`, obtained from the
 Segre morphism `ℙⁿ_ℤ ×_ℤ ℙᵐ_ℤ ⟶ ℙ^(n×m)_ℤ` of the integral models by base change along the
-structure morphism of `S`.
-(blueprint: `def:chow-segre`, binary case) -/
+structure morphism of `S`. -/
 def segre : pullback (ℙ(n; S) ↘ S) (ℙ(m; S) ↘ S) ⟶ ℙ(n × m; S) :=
   pullback.lift (pullback.fst _ _ ≫ (ℙ(n; S) ↘ S))
     (prodToProjInt n m S ≫ Proj.segre n m) (terminal.hom_ext _ _)
@@ -603,8 +602,7 @@ lemma isPullback_segre :
   exact (isPullback_prodToProjInt n m S).flip
 
 /-- **The relative Segre morphism is a closed immersion**, being the base change of the Segre
-morphism of the integral models.
-(blueprint: `lem:chow-segre`, binary case) -/
+morphism of the integral models. -/
 instance isClosedImmersion_segre : IsClosedImmersion (segre n m S) :=
   MorphismProperty.of_isPullback (isPullback_segre n m S) inferInstance
 

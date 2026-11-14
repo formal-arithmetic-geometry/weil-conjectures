@@ -66,24 +66,7 @@ private theorem normal_stalks_of_flat_preimmersion {X Y : Scheme.{u}}
 /-- Normality of the localized relative normalization.
 
 Source: Stacks Project, Tags 033C (smooth ascent of normality), 035L
-(relative normalization in a normal source), and 0307 (localization of integral closure).
-(blueprint: lem-sbc-stalk-normalization-normal-part)
-
-Proof: Apply smooth ascent directly to the smooth composite P -> C_U -> C -> S.
-On affine charts, the base section ring is an integrally closed domain, by the
-normality of the stalks of the integral S. `RingHom.Smooth.isNormalRing` makes
-all prime localizations of each smooth source section ring normal domains.
-The affine stalk-localization equivalence transports this to the stalks of P.
-Finite type over the locally Noetherian S also makes P locally Noetherian.
-Apply `relativeNormalization_normal_stalks` to f: its relative normalization
-has normal domain stalks, by the finite-component argument of Stacks 035L.
-The map Spec O(S,s) -> S is a flat preimmersion. Both pullback projections
-l: L -> C and N -> f.normalization inherit flatness and the preimmersion
-property. On stalks a preimmersion is surjective, while a flat local ring map
-is faithfully flat and therefore injective. Thus N -> f.normalization induces
-ring isomorphisms on every stalk. Transport domainhood and integral closedness
-across these isomorphisms. This uses no assertion about arbitrary flat base
-change preserving normality. Empty source schemes have no stalks to check. -/
+(relative normalization in a normal source), and 0307 (localization of integral closure). -/
 theorem stalk_normalization_normal_part {S C : Scheme.{u}}
     [IsNoetherian S] [QuasiSeparatedSpace S] [IsIntegral S]
     (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))

@@ -11,7 +11,6 @@ import WeilConjectures.AlgebraicGeometry.Lisse.Finite.LisseFiniteQuotientEtaleOr
 /-! # Conditional constant-model transport for a finite quotient origin
 
 Source: Stacks Project, Tag 09C6.
-(blueprint: lem-weil-pbc-lisse-finite-quotient-etale-origin-transport).
 -/
 
 @[expose] public noncomputable section
@@ -24,14 +23,7 @@ attribute [local instance] HasDerivedCategory.ofIsGrothendieckAbelian
 
 /-- Transport a supplied constant model through a core finite quotient origin.
 
-Proof: restrict the core comparison to an étale chart `Z`, compose it with the
-supplied constant-model isomorphism, and pull the resulting square to `W`. The
-comparison-pullback coherence and the canonical finite-coefficient comparison
-identify the constant side with `constantAdicQuotientRealization`; pulling the
-finite constant local models gives the relative finite lisse statement.
-
-Source: Stacks Project, proetale.tex, Tag 09C6
-(blueprint: lem-weil-pbc-lisse-finite-quotient-etale-origin-transport).
+Source: Stacks Project, Tag 09C6.
 -/
 theorem lisse_finite_quotient_etale_origin_transport
     {X Y : Scheme.{u}} {g : Y ⟶ X}

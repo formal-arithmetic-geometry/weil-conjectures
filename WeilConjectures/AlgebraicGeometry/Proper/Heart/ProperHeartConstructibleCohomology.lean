@@ -15,9 +15,6 @@ import all WeilConjectures.AlgebraicGeometry.Integral.IntegralIndConstructibleHe
 
 /-!
 # Constructibility of proper higher direct images with rational coefficients
-
-Source: blueprint main-20261015, lemma-uniform-bound-proper-direct-image, final paragraph
-(blueprint: lem-proper-heart-constructible-cohomology).
 -/
 
 @[expose] public section
@@ -53,22 +50,7 @@ attribute [local irreducible] Functor.rightDerivedFunctor
 
 /-- Proper higher direct images of finite constant-model constructible rational modules
 are again finite constant-model constructible, for finite extensions and the condensed
-algebraic closure.
-
-Source: blueprint main-20261015, lemma-uniform-bound-proper-direct-image, final paragraph, first
-sentence; proposition-proper-direct-image-constructible-complexes, rational bounded-constructibility
-clause (blueprint: lem-proper-heart-constructible-cohomology).
-
-Proof: place M in degree zero. Its degree-zero cohomology is isomorphic to M;
-all other cohomology modules are zero. Transport finite constant local models through
-the isomorphism and use the rank-zero constant model for zero modules, obtaining
-finite-constant-model bounded constructibility. In the standing finite-type setting,
-clause (4) of finiteCoefficientDescentTwoColimit identifies this predicate with the
-boundedConstructible predicate for both rational coefficient rings. Use that equality
-on X, apply properPushforward_boundedConstructible_rational to the actual morphism
-over Spec k, and use the equality on Y in the reverse direction. Extract degree q.
-The zero module and empty schemes are included by the same construction. No uniform
-fibre dimension bound or passage to ind-objects is used. -/
+algebraic closure. -/
 theorem properHeart_constructible_cohomology
     (ℓ : ℕ) [Fact ℓ.Prime]
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]

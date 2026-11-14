@@ -82,22 +82,7 @@ private theorem singleAugmentation_quasiIso
 set_option backward.isDefEq.respectTransparency false in
 /-- The augmented section row of an injective module sheaf on a representable
 hypercover is quasi-isomorphic, independently of weak contractibility.
-Source: Stacks Project, Tags 01GE and 01GW, ringed-module analogue.
-(blueprint: lem-weil-pbc-proetale-hypercover-injective-row).
-
-Proof: the degree-zero and matching-map sheaf epimorphisms are locally surjective.
-For a compatible family of lower simplices over a test object, use the limit of
-the two vertices in degree one, or the proper-face multicospan limit in higher
-degrees, to obtain a map to the matching object. The epimorphism supplies a local
-lift to U_n. Every lower simplex factors through a face, so the face equalities
-and simplicial compatibility give the required equalities for the entire family.
-Apply ringedHypercover_injective_augmentation_exact to the underlying augmented
-simplicial object in the pro-etale site. Its exact augmented alternating section
-sequence identifies with the displayed map of complexes: the source is supported
-in degree zero and the target is the alternating coface complex extended by zero
-to negative degrees. Injectivity gives homology isomorphism in degree zero;
-exactness gives zero positive homology, and negative terms are zero on both sides.
-Restriction of scalars to R(W) does not change these kernel-image equalities. -/
+Source: Stacks Project, Tags 01GE and 01GW, ringed-module analogue. -/
 theorem hypercoverRowAugmentationComplex_quasiIso_of_injective
     (X : Scheme.{u}) (R : Sheaf (topology X) CommRingCat.{u + 1})
     (W : X.ProEt) (U : SimplicialObject (Over W))

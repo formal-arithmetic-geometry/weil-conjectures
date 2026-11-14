@@ -10,8 +10,6 @@ public import WeilConjectures.Compactification.RefinementOfIsPullback
 import all WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedEtaleCompactSupportComparisonsSupplement
 
 /-! # Proper/open exchange along one cartesian refinement
-
-Source: blueprint `proposition-exceptional-inverse-image-smooth-morphism--6`, coherence (i).
 -/
 
 @[expose] public section
@@ -353,28 +351,7 @@ private lemma supportPullback_factor
   exact supportRaw_factor (unboundedFormalism Λ) sq c
 
 /-- Proper/open exchange intertwines the comparison for one cartesian refinement
-with its literal pullback. No common-refinement choice or graph comparison occurs.
-Source: blueprint `proposition-exceptional-inverse-image-smooth-morphism--6`, coherence (i),
-restriction of the compactification diagram; the unit formula in
-`LowerShriekIndependenceUnbounded.lean`. (blueprint: lem-asd-open-support-refinement-exchange)
-
-Proof: form two triangles of compactifications with common output c.precomp a:
-(p,j), using c.ofIsPullback sq and the trivial compactification of j; and (a,f),
-using the trivial compactification of a and c. The supplied refinement r and its
-literal pullback give morphisms between the respective triangles for c and d.
-Their output refinements have the same proper map r.hom and the same open part.
-Apply compIso_naturality to both morphisms in the existing arbitrary-scheme
-unbounded formalism. Its refinement maps are the specified derived refinement
-comparisons by unbounded_refinement_comparison. Remove the identity proper
-pushforwards from the trivial open compactifications. The (a,f) composition
-then becomes just composition of open extension; the (p,j) composition becomes
-proper/open exchange followed by composition of open extension. The raw
-comparison P(c), followed by the former isomorphism, is the latter isomorphism:
-this follows from the exact normalization of the formalism's open compositor
-and exchange. Substitute this factorization into the two naturality equations
-and cancel the common (a,f) composition isomorphism for c. The displayed equation
-results. No density, quasi-compactness of either open, or Noetherian hypothesis
-is used. Identity and empty opens and the zero ring use the same identities. -/
+with its literal pullback. No common-refinement choice or graph comparison occurs. -/
 theorem openSupportPullbackIso_refinement
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Y U V : Scheme.{u}} {f : X ⟶ Y}

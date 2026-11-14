@@ -16,9 +16,7 @@ set_option linter.privateModule false
 
 /-! # Geometric composition of the scalar/pullback comparison
 
-Source: Stacks Project, Tag 0D6D; the geometric composition clause of
-lem-sfb-kflat-scalar-comparison-normalization.
-(blueprint: lem-sf-scalar-pullback-composition-coherence).
+Source: Stacks Project, Tag 0D6D.
 -/
 
 @[expose] public noncomputable section

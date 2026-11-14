@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective
 /-!
 # Separability of global sections of a proper geometrically reduced scheme
 
-Source: Stacks Project, Varieties, Lemma 0BUG (clause (4))
-(blueprint: lem-pc-proper-geometrically-reduced-global-sections-separable).
+Source: Stacks Project, Varieties, Lemma 0BUG (clause (4)).
 
 The `k`-algebra structure on `Γ(X, ⊤)` is the structure map
 `AlgebraicGeometry.Scheme.globalSectionsRingHom`, and the field structure is the one given by
@@ -33,8 +32,7 @@ namespace AlgebraicGeometry
 
 /-- If `X` is proper and geometrically reduced over a field `k`, and the structure map makes
 `A = Γ(X, ⊤)` a field extension of `k`, then `A/k` is separable.
-Source: Stacks Project, Varieties, Lemma 0BUG, clause (4)
-(blueprint: lem-pc-proper-geometrically-reduced-global-sections-separable).
+Source: Stacks Project, Varieties, Lemma 0BUG, clause (4).
 
 By `theorem-riemann-roch-coherent-serre-duality--1` (with `F = 𝒪_X`, `i = 0`) `A` is
 finite-dimensional over `k`, so `A/k` is a finite field extension. For an algebraic closure

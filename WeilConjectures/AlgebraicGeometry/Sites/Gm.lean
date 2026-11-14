@@ -118,8 +118,7 @@ theorem isSheaf_gmPresheaf : Presheaf.IsSheaf X.smallEtaleTopology X.gmPresheaf 
 written additively.
 
 The blueprint node cited is about `𝔾ₘ`-torsors and introduces `𝔾ₘ` itself only in passing;
-the block has no node of its own for the sheaf.
-(blueprint: `lemma-cohomology-multiplicative-group--3`) -/
+the block has no node of its own for the sheaf. -/
 noncomputable def gmSheaf : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} :=
   ⟨X.gmPresheaf, X.isSheaf_gmPresheaf⟩
 
@@ -134,8 +133,8 @@ lemma gmPresheaf_map_apply {X : Scheme.{u}} {U V : X.Etale} (g : V ⟶ U)
 
 It is called cohomological because the Picard group proper, the group of invertible
 `𝒪_X`-modules up to isomorphism, is a different definition; that the two are in bijection is
-`AlgebraicGeometry.Scheme.nonempty_equiv_cohomologicalPicardGroup`
-(blueprint: `lemma-cohomology-multiplicative-group--3`), and the invertible-module definition
+`AlgebraicGeometry.Scheme.nonempty_equiv_cohomologicalPicardGroup`, and the invertible-module
+definition
 together with the degree homomorphism and `Pic⁰` belong to the blueprint block
 `def-sc-picard-group`. Its vanishing for the spectrum of a field (Hilbert 90) is
 `AlgebraicGeometry.Scheme.subsingleton_cohomologicalPicardGroup_of_field`, in
@@ -147,8 +146,7 @@ noncomputable abbrev CohomologicalPicardGroup : Type (u + 1) := Sheaf.H X.gmShea
 It is called cohomological because the Brauer group proper, the group of Azumaya algebras up
 to Morita equivalence — Mathlib's `BrauerGroup K` for a field `K` — is a different definition;
 the two agree for a quasi-compact separated scheme with an ample family of line bundles
-(Gabber), which is not stated here.
-(blueprint: `lemma-cohomology-multiplicative-group--5`) -/
+(Gabber), which is not stated here. -/
 noncomputable abbrev CohomologicalBrauerGroup : Type (u + 1) := Sheaf.H X.gmSheaf 2
 
 variable {X} {Y : Scheme.{u}}

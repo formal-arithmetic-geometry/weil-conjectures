@@ -43,17 +43,7 @@ private lemma terminalLift_isIso {S T : Scheme.{u}} (f : T ⟶ S) :
   infer_instance
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Source: Stacks Project, Tag 0GLZ, first proof paragraph; Tag 09XN.
-(blueprint: lem-cbc-comparison-section-descent).
-Proof: let a pro-etale covering family over Y and a matching family of P-sections
-be given. Decode it using e, and transport the values by the inverse-image
-composition isomorphisms to sections of the pullbacks of Y.hom inverse image F.
-The restriction equation identifies matching on each fibre product with the two
-arrows in the fpqc descent equalizer. The family is fpqc, so Tag 09XN supplies a
-unique global section on Y. Encode it using e inverse. The same restriction
-formula identifies its restrictions with the original matching family; uniqueness
-follows from fpqc separatedness. This proves the sheaf condition on the generating
-pro-etale precoverage, hence on its topology, also for the empty covering. -/
+/-- Source: Stacks Project, Tag 0GLZ, first proof paragraph; Tag 09XN. -/
 theorem proEtaleComparisonSectionDescent
     (X : Scheme.{u}) (F : Sheaf X.smallEtaleTopology (Type (u + 1)))
     (P : X.ProEtᵒᵖ ⥤ Type (u + 1))

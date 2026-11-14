@@ -20,9 +20,7 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
 /-!
 # A specified scalar presentation after extension to coefficient sheaves
 
-Source: blueprint main-20261015, proper base change unbounded, pullback proof,
-paragraph "Constructible complexes"; Stacks, Modules on Sites, Tags 03CY, 03CZ,
-0GMW and Section 03EK (blueprint: lem-sfb-scalar-presentation-cokernel).
+Source: Stacks, Modules on Sites, Tags 03CY, 03CZ, 0GMW and Section 03EK.
 
 The coefficient functor and scalar matrix are the existing local-model constructions.
 Matrix entries are maps from the integer tensor unit, equivalently elements of Λ(*).
@@ -45,35 +43,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- A specified finite scalar presentation remains a cokernel diagram after taking
 constant module sheaves and extending scalars to Λ_U. The free comparisons send
 `1 ⊗ e_j` to `e_j`; the final cokernel comparison commutes with the specified quotient.
-Source: blueprint proper-base-change-unbounded pullback proof, "Constructible complexes";
-Stacks, Modules on Sites, Tags 03CY, 03CZ, 0GMW and Section 03EK
-(blueprint: lem-sfb-scalar-presentation-cokernel).
-
-Proof:
-1. On the small pro-étale site, use the closed sheaf tensor structure
-   [lem-weil-pbc-sheaf-tensor-closed], the internal/section-module equivalence
-   [def-weil-pbc-internal-abelian-sheaf-module-equivalence] and its pure-tensor comparison
-   [lem-pe-internal-section-tensor-comparison]. Commutativity identifies the coequalizer
-   for extension [def-sfb-modobj-extension] with the relative tensor
-   [prose-03-02], preserving the coefficient-ring action.
-2. The constant presheaf diagram is a cokernel objectwise, with natural factorizations
-   forced by uniqueness. Module sheafification [lem-cbc-sieve-module-sheafification]
-   preserves this cokernel and finite free sums, being a left adjoint
-   [situation-conventions]. It preserves standard basis sections.
-3. Extension by the canonical scalar map is the tensor left adjoint of
-   [lem-weil-pbc-ringed-topoi-module-adjunction]. It preserves that specified cokernel,
-   zero maps and finite sums; no flatness assumption is required.
-4. The free comparison sends s ⊗ (v_i) to (s φ(v_i)); its inverse sends (s_i) to
-   ∑ s_i ⊗ e_i. Balancing and the bilinear universal property
-   [lem-pc-sites-sheaf-tensor-bilinear-universal] prove the inverse identities, including
-   the empty-sum case. This gives exactly the displayed basis normalization.
-5. On each basis vector the transported matrix sends e_j to ∑ φ(a_ij)e_i.
-   Thus it is the existing scalarMatrix of [definition-constructible-sheaves--1],
-   with the original entries mapped by the canonical scalar map.
-6. Transport the cokernel universal property along these free comparisons. Its
-   factorization and uniqueness give the asserted IsColimit, and then the unique
-   isomorphism to the chosen cokernel commuting with the quotient arrows
-   [definition-constructible-sheaves--1]. -/
+Source: Stacks, Modules on Sites, Tags 03CY, 03CZ, 0GMW and Section 03EK. -/
 theorem scalar_presentation_cokernel
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     (U : Scheme.{u}) (m n : ℕ)

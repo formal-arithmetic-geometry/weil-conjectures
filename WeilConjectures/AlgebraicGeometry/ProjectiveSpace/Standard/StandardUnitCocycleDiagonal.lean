@@ -20,16 +20,7 @@ namespace AlgebraicGeometry.ProjectiveSpace
 
 /-- The diagonal equations left after the off-diagonal normalization.
 
-Source: Stacks Project, divisors.tex, Tag 0BXJ, lemma-Pic-projective-space-UFD.
-(blueprint: lem-sfb-projective-standard-unit-cocycle-diagonal)
-
-Proof: evaluate the given cocycle equation at i = j = l on the diagonal
-overlap. All restriction maps are identities, so t_ii * t_ii = t_ii; cancellation
-of the unit gives t_ii = 1. Apply the standard transition cocycle equation at
-i = j = l and restrict back from the triple overlap to the diagonal overlap.
-Functoriality makes each composite restriction the identity, so the same
-cancellation gives u_ii = 1. The two restrictions of a_i agree, since the
-inclusions from U_i ∩ U_i to U_i agree. Substitution proves the result.
+Source: Stacks Project, Tag 0BXJ.
 -/
 theorem standardUnitCocycle_diagonal_normalization (k : Type u) [Field k]
     (r : ℕ) (hr : 3 ≤ r)

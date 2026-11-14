@@ -22,7 +22,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Functor.ReflectsIso.Exact
 # Closed localization for arbitrary ring-sheaf module objects
 
 Source: Stacks Tags 09AA, 09BM and 09AH.
-(blueprint: lem-sf-ring-sheaf-closed-localization)
 -/
 
 @[expose] public noncomputable section
@@ -113,26 +112,7 @@ private theorem modIsoDetect
   exact isIso_of_mono_of_epi φ
 
 /-- Closed localization for arbitrary ring-sheaf module objects.
-Source: Stacks Tags 09AA, 09BM, 09AG, 09AH and 03DA
-(blueprint: lem-sf-ring-sheaf-closed-localization).
-
-Proof:
-1. The abelian closed counit and supported-unit theorem imply that complementary
-   restrictions detect zero abelian sheaves. Forgetting module actions reflects zero
-   objects and isomorphisms, so the same holds for B-modules. Exact restrictions applied
-   to kernels and cokernels therefore jointly detect isomorphisms.
-2. The module counit has exactly the abelian counit as its carrier, and is invertible.
-   Open restriction of a closed direct image vanishes on carriers. The open module unit
-   is invertible because its carrier is the unit of the fully faithful abelian extension.
-3. Adjunction transposition shows closed restriction of an open extension is zero, and
-   that the composite of the open counit with the closed unit is zero. The resulting
-   short complex restricts to split short exact complexes on both pieces, by the two
-   triangle identities. Joint reflection of isomorphisms by exact restriction reflects
-   short exactness, proving the actual counit-unit sequence short exact.
-4. For an epimorphism on Z, the cokernel of its direct image has zero closed restriction
-   by the counit and zero open restriction by vanishing. Joint zero detection kills the
-   cokernel. Closed direct image is additive and left exact as a right adjoint; preservation
-   of epimorphisms then gives finite-colimit preservation. No commutativity is used. -/
+Source: Stacks Tags 09AA, 09BM, 09AG, 09AH and 03DA. -/
 theorem ringSheaf_closed_localization
     {X Z U : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j]

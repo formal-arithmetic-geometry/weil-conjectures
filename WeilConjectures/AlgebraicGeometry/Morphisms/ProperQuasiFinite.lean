@@ -39,9 +39,7 @@ variable {X S : Scheme.{u}} (f : X ⟶ S)
 
 /-- **Basic properties of proper morphisms.** A proper morphism is separated, universally
 closed, of finite type, quasi-compact and quasi-separated; if the target is affine, the source
-is separated and quasi-compact.
-
-(blueprint: `pqf-lem-proper-basic`) -/
+is separated and quasi-compact. -/
 theorem IsProper.isSeparated_and_universallyClosed [IsProper f] :
     IsSeparated f ∧ UniversallyClosed f ∧ LocallyOfFiniteType f ∧ QuasiCompact f ∧
       QuasiSeparated f ∧ (IsAffine S → IsSeparated (X ↘ ⊤_ Scheme) ∧ CompactSpace X) :=
@@ -50,9 +48,7 @@ theorem IsProper.isSeparated_and_universallyClosed [IsProper f] :
       QuasiCompact.compactSpace_of_compactSpace f⟩⟩
 
 /-- **Finite morphisms are quasi-finite**: a finite morphism is locally quasi-finite and
-quasi-compact.
-
-(blueprint: `pqf-lem-finite-qf`) -/
+quasi-compact. -/
 theorem IsFinite.locallyQuasiFinite_and_quasiCompact [IsFinite f] :
     LocallyQuasiFinite f ∧ QuasiCompact f :=
   ⟨inferInstance, inferInstance⟩
@@ -62,9 +58,7 @@ quasi-compact if and only if it is locally of finite type, quasi-compact and has
 
 Here "locally quasi-finite" is Mathlib's `LocallyQuasiFinite` (quasi-finite stalk maps, which
 does not include finite type: `Spec ℚ ⟶ Spec ℤ` is locally quasi-finite and quasi-compact), so
-the finite type hypothesis appears on both sides.
-
-(blueprint: `pqf-lem-qf-finitefibres`) -/
+the finite type hypothesis appears on both sides. -/
 theorem locallyQuasiFinite_and_quasiCompact_iff_finite_preimage_singleton :
     (LocallyOfFiniteType f ∧ LocallyQuasiFinite f ∧ QuasiCompact f) ↔
       (LocallyOfFiniteType f ∧ QuasiCompact f ∧ ∀ s : S, (f ⁻¹' {s}).Finite) :=
@@ -73,9 +67,7 @@ theorem locallyQuasiFinite_and_quasiCompact_iff_finite_preimage_singleton :
 
 /-- **A finite fibre is discrete.** If `f` is locally of finite type and the fibre `f⁻¹{s}` is
 finite, then the fibre `X_s` is a finite discrete space and `f` is quasi-finite at every point of
-`X` lying over `s`.
-
-(blueprint: `pqf-lem-locqf-fibre-discrete`) -/
+`X` lying over `s`. -/
 theorem Scheme.Hom.discreteTopology_fiber_and_quasiFiniteAt [LocallyOfFiniteType f] (s : S)
     (hs : (f ⁻¹' {s}).Finite) :
     Finite (f.fiber s) ∧ DiscreteTopology (f.fiber s) ∧
@@ -89,9 +81,7 @@ theorem Scheme.Hom.discreteTopology_fiber_and_quasiFiniteAt [LocallyOfFiniteType
 proper with finite fibres. The blueprint assumes the target locally noetherian and argues with
 Serre's criterion for affineness; the statement holds without this assumption, and is proved
 here through Zariski's main theorem
-(`AlgebraicGeometry.IsFinite.iff_isProper_and_locallyQuasiFinite`).
-
-(blueprint: `thm-pqf-finite-iff-proper-finite-fibres`) -/
+(`AlgebraicGeometry.IsFinite.iff_isProper_and_locallyQuasiFinite`). -/
 theorem IsFinite.iff_isProper_and_finite_preimage_singleton :
     IsFinite f ↔ IsProper f ∧ ∀ s : S, (f ⁻¹' {s}).Finite := by
   rw [IsFinite.iff_isProper_and_locallyQuasiFinite]

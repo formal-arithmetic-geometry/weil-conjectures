@@ -24,7 +24,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 /-! # Realizing scalar cycles of a fixed perfect direct-image model
 
 Source: Stacks Project, Tag 0BF2, the lifting of a degree-zero cycle through the
-base-change comparison. (blueprint: lem-sc-picard-scalar-model-cycles-realization)
+base-change comparison.
 -/
 
 @[expose] public section
@@ -36,30 +36,8 @@ namespace AlgebraicGeometry.Scheme
 /-- A connective strictly perfect model with a scalar degree-zero basis realizes its
 scalar cycles as sections, compatibly with restriction to the marked residue fibre.
 This fixes a model; it constructs no degree-one map and assumes no H¹ injectivity.
-Source: Stacks Project, Tag 0BF2, the paragraph after the chain-map calculation,
-with the arbitrary base-change comparison of Tag 0B91.
-(blueprint: lem-sc-picard-scalar-model-cycles-realization)
-
-Proof: On the affine U a strictly perfect complex has quasi-coherent finite-projective
-terms. The supplied section bases therefore sheafify to bases of K⁰ and K¹ on U.
-The equality hd identifies its outgoing differential with multiplication by d. Restrict
-to V: a scalar a annihilating the restricted vector is a degree-zero cycle. There are
-no degree-minus-one terms, so there are no degree-zero boundaries. Apply the comparison
-hE and canonical open base change for the relatively flat invertible module L. Degree-zero
-homology of the direct image is ordinary pushforward, so this cycle gives a section σ
-on X_V. Since hdw makes the residue differential zero, the residue degree-zero homology
-is the one-dimensional scalar term. The same comparison at Spec κ(w) gives the additive
-equivalence c with fibre sections. The comparison is compatible with the adjunction
-unit: canonical derived base change is the mate of pullback composition, and taking H⁰
-recovers the underived mate. Thus σ restricts to c.symm of a(w).
-Factor W.fromSpecResidueField w through V and base change f to obtain j. Its fibre above
-w is the residue fibre of X_V, canonically isomorphic to the stated fibre Y. Every point
-above w is hit: the projection Spec κ(w) ×_V X_V → X_V has exactly that image, by the
-residue-field fibre description. Tensor-pullback composition and the equality of the
-composite maps to X supply e. Computing the mate on global sections yields exactly the
-adjunction-unit expression in the conclusion, including the restriction from j⁻¹(⊤)
-to ⊤. These comparisons come from a single hE and e0, so c works for every V. For m = 0
-all scalars are cycles. The point w excludes an empty U or V. -/
+Source: Stacks Project, Tag 0BF2, the paragraph after the chain-map calculation, with the arbitrary
+base-change comparison of Tag 0B91 -/
 theorem picard_scalar_model_cycles_realization
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

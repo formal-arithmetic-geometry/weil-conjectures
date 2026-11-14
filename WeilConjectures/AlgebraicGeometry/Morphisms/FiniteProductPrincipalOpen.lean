@@ -21,17 +21,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- A principal open of a finite product spectrum is the coproduct of the component opens.
 
 Source: Stacks Project, Tag 01I1 (affine schemes), and the finite product description
-of spectra in Mathlib.AlgebraicGeometry.Limits.
-Proof: the evaluation maps give sigmaSpec, which is an isomorphism for a finite
-index set. The inverse image of D(h) under each evaluation is D(h_i), because
-prime-spectrum comap takes basic opens to basic opens. Restrict sigmaSpec to this
-open. Restriction commutes with disjoint union, so the restricted source is the
-coproduct of the component basic opens. This gives the isomorphism e. Composing
-with the open inclusion gives the coproduct of component inclusions followed by
-the evaluation maps. Composing further with Spec of the diagonal H-algebra map
-reduces each summand to its structural map, giving the equation by Sigma.hom_ext.
-The empty-index case follows from sigmaSpec for the zero ring.
-(blueprint: lem-sbc-finite-product-principal-open) -/
+of spectra in Mathlib.AlgebraicGeometry.Limits. -/
 theorem finite_product_principal_open
     (H : CommRingCat.{u}) (h : H) (m : ℕ)
     (F : Fin m → Type u) [∀ i, CommRing (F i)] [∀ i, Algebra H (F i)] :

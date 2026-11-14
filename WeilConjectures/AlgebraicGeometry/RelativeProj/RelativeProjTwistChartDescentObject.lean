@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.TraceFormula.DirectedTensorMatchingSect
 /-! # Object part of relative Proj twist descent
 
 Source: Stacks Project, Constructions, Tag 01NR.
-(blueprint: lem-trf-relative-proj-twist-chart-descent).
 -/
 
 @[expose] public section
@@ -147,19 +146,7 @@ private theorem restriction_comparison_comp {U V W : S.affineOpens}
 
 /-- The affine degree-one twists admit a descended module and local chart isomorphisms.
 
-Source: Stacks Project, Constructions, Tag 01NR, object gluing portion of
-`lemma-glue-relative-proj-twists`.
-
-Proof: use the scalar-extension comparison on each affine restriction of the relative
-Proj.  Its fraction formula gives identity and composition on refinements.  Refine
-intersections of affine opens by affine opens and apply module-sheaf object descent to
-the resulting cocycle.  The descended object and its local comparison isomorphisms are
-the required `L` and `chart`; the same datum supplies the normalized scalar-extension
-comparison and commuting chart square for every affine restriction. Empty opens are
-covered by the zero module case.
-(blueprint: lem-trf-relative-proj-twist-chart-descent-object).
-
-The proof is the object-gluing component of the parent descent statement. -/
+Source: Stacks Project, Constructions, Tag 01NR. -/
 theorem exists_twist_chart_descent_object :
     ∃ (L : A.relProj.Modules),
       ∃ (chart : ∀ U : S.affineOpens,

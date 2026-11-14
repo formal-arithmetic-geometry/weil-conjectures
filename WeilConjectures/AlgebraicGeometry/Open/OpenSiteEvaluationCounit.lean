@@ -33,9 +33,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-! # The open evaluation normalization
 
-Source: Stacks Project, Tags 09A6, 09AF and 099R; the factor calculation in
-lem-amb-compact-support-site-comparison-open
-(blueprint: lem-amb-open-site-evaluation-counit).
+Source: Stacks Project, Tags 09A6, 09AF and 099R.
 -/
 
 @[expose] public noncomputable section
@@ -215,19 +213,7 @@ private theorem plus_unit (A : Type (u + 1)) [CommRing A] [Finite A]
     Functor.id_obj] using h
 set_option backward.isDefEq.respectTransparency false in
 /-- Site comparison preserves the evaluation counit of extension by zero.
-Source: Stacks Project, Tags 09AF and 099R; step 7 of
-lem-amb-compact-support-site-comparison-open
-(blueprint: lem-amb-open-site-evaluation-counit).
-
-Proof: transpose the inverse open comparison under the target open adjunction.
-The unit-normalization of the open comparison identifies its transpose with the
-pullback comparison followed by the image of the etale open unit. Naturality of
-pullback comparison and the etale triangle identity show that the transpose of
-the displayed left side has that value. The pro-etale triangle identity gives the
-same transpose for the right side. Injectivity of the Hom adjunction proves the
-identity. The exact functors and transformations act degreewise on complexes and
-preserve quasi-isomorphisms, so this identity descends to the displayed D+ counits.
-The calculation also applies to an empty open and to the zero coefficient ring. -/
+Source: Stacks Project, Tags 09AF and 099R. -/
 theorem openSiteEvaluationCounit (A : Type (u + 1)) [CommRing A] [Finite A]
     {U Z : Scheme.{u}} (j : U ⟶ Z) [IsOpenImmersion j] :
     ∀ B : DerivedCategory.Plus (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} A)),

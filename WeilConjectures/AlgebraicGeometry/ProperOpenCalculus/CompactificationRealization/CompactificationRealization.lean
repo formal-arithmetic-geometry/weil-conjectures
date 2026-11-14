@@ -11,7 +11,6 @@ public import Mathlib.CategoryTheory.Whiskering
 /-! # Transport of compactification words through fixed realizations
 
 Source: Stacks 0F7J--0F7K, conjugation by the fixed realization equivalences.
-(blueprint: lem-sp-compactification-realization).
 -/
 
 @[expose] public noncomputable section
@@ -25,8 +24,7 @@ variable {A : Scheme.{u} → Prop} (F : ProperOpenCalculus.{u, v, w} A)
 
 set_option linter.checkUnivs false in
 /-- Fixed native functors and their comparison to the literal proper/open word.
-The comparison is part of the coordinates, not a map recovered by evaluation.
-Source: blueprint Local pairs (blueprint: lem-sp-compactification-realization). -/
+The comparison is part of the coordinates, not a map recovered by evaluation. -/
 structure CompactificationRealization where
   obj : {X : Scheme.{u} // A X} → Type w'
   [category (X : {X : Scheme.{u} // A X}) : Category.{v'} (obj X)]
@@ -41,8 +39,7 @@ namespace CompactificationRealization
 attribute [instance] category
 variable {F} (R : CompactificationRealization.{u, v, w, v', w'} F) (G : Geometry A)
 
-/-- Transport a known model comparison through a fully faithful target coordinate.
-Source: blueprint Local pairs (blueprint: lem-sp-compactification-realization). -/
+/-- Transport a known model comparison through a fully faithful target coordinate. -/
 def refinement (X Y : {X : Scheme.{u} // A X}) (f : X.val ⟶ Y.val)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
     (c d : Compactification f) (hc : A c.Z) (hd : A d.Z) :
@@ -52,8 +49,7 @@ def refinement (X Y : {X : Scheme.{u} // A X}) (f : X.val ⟶ Y.val)
       Functor.isoWhiskerLeft (R.coordinate X).functor (F.comparison G X Y f c d hc hd) ≪≫
         (R.comparison X Y d hd).symm)
 
-/-- Transport the actual binary word through the fixed coordinates.
-Source: blueprint Local pairs (blueprint: lem-sp-compactification-realization). -/
+/-- Transport the actual binary word through the fixed coordinates. -/
 def composition (X Y Z : {X : Scheme.{u} // A X})
     (f : X.val ⟶ Y.val) (g : Y.val ⟶ Z.val) (fg : X.val ⟶ Z.val) (wfg : f ≫ g = fg)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
@@ -71,8 +67,7 @@ def composition (X Y Z : {X : Scheme.{u} // A X})
         (F.namedBinary G X Y Z f g fg wfg c d e hc hd he) ≪≫
       (R.comparison X Z e he).symm)
 
-/-- The identity word transported through the fixed coordinates.
-Source: blueprint Local pairs (blueprint: lem-sp-compactification-realization). -/
+/-- The identity word transported through the fixed coordinates. -/
 def identity (X : {X : Scheme.{u} // A X})
     (c : Compactification (𝟙 X.val)) (hc : A c.Z) :
     R.H X X c hc ≅ 𝟭 (R.obj X) :=
@@ -81,8 +76,7 @@ def identity (X : {X : Scheme.{u} // A X})
       Functor.isoWhiskerLeft (R.coordinate X).functor (F.chosenIdentity G X c hc) ≪≫
       Functor.rightUnitor _ ≪≫ (Functor.leftUnitor _).symm)
 
-/-- The composition map is the actual conjugated binary word at every native object.
-Source: blueprint Local pairs (blueprint: lem-sp-compactification-realization). -/
+/-- The composition map is the actual conjugated binary word at every native object. -/
 theorem composition_map (X Y Z : {X : Scheme.{u} // A X})
     (f : X.val ⟶ Y.val) (g : Y.val ⟶ Z.val) (fg : X.val ⟶ Z.val) (wfg : f ≫ g = fg)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
@@ -112,8 +106,7 @@ theorem composition_map (X Y Z : {X : Scheme.{u} // A X})
     Functor.associator_inv_app, Functor.leftUnitor_inv_app, Functor.rightUnitor_hom_app,
     Category.id_comp, Category.comp_id, Category.assoc] using NatTrans.congr_app h M
 
-/-- Identity transport at a native object.
-Source: blueprint Local pairs (blueprint: lem-sp-compactification-realization). -/
+/-- Identity transport at a native object. -/
 theorem identity_map (X : {X : Scheme.{u} // A X})
     (c : Compactification (𝟙 X.val)) (hc : A c.Z) (M : R.obj X) :
     (R.coordinate X).functor.map ((R.identity G X c hc).hom.app M) =
@@ -131,8 +124,7 @@ theorem identity_map (X : {X : Scheme.{u} // A X})
     Functor.associator_inv_app, Functor.leftUnitor_inv_app, Functor.rightUnitor_hom_app,
     Category.id_comp, Category.comp_id, Category.assoc] using NatTrans.congr_app h M
 
-/-- Naturality pins the image of every native support morphism.
-Source: blueprint Local pairs (blueprint: lem-sp-compactification-realization). -/
+/-- Naturality pins the image of every native support morphism. -/
 theorem support_map (X Y : {X : Scheme.{u} // A X}) {f : X.val ⟶ Y.val}
     [QuasiCompact f] (c : Compactification f) (hc : A c.Z)
     {M N : R.obj X} (t : M ⟶ N) :
@@ -146,7 +138,7 @@ theorem support_map (X Y : {X : Scheme.{u} // A X}) {f : X.val ⟶ Y.val}
   simp
 
 /-- Left identity for native composition.
-Source: Stacks 0F7K (blueprint: lem-sp-compactification-realization). -/
+Source: Stacks 0F7K. -/
 theorem composition_left (X Y : {X : Scheme.{u} // A X}) (f : X.val ⟶ Y.val)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
     (c : Compactification f) (hc : A c.Z)

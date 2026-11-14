@@ -13,7 +13,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Fpqc
 /-!
 # The fibrewise degree on the relative Picard functor
 
-Let `f : X ⟶ S` be a proper morphism locally of finite presentation.  For a scheme `T` over `S`
+Let `f: X ⟶ S` be a proper morphism locally of finite presentation.  For a scheme `T` over `S`
 and a class `ℒ ∈ Pic (X_T)` of the Picard presheaf, the *fibrewise degree* of `ℒ` at a point
 `t ∈ T` is `deg ℒ_t = χ(ℒ_t) - χ(𝒪_{X_t})`, computed on the fibre `X_t` of `X_T ⟶ T` over the
 residue field `κ(t)`.  We show that it is compatible with base change and, for `f` flat, locally
@@ -24,19 +24,17 @@ section of `Pic_{X/S}` over `T`.
 ## Main definitions
 
 - `AlgebraicGeometry.picardPresheafDegree`: the fibrewise degree `t ↦ deg ℒ_t` of a class
-  `ℒ ∈ Pic (X_T)` (blueprint `proposition-jacobian-over-ground-field--2`).
+  `ℒ ∈ Pic (X_T)`.
 - `AlgebraicGeometry.picardDegree`: the degree of a section of the relative Picard functor, a
-  function `T → ℤ` (blueprint `theorem-picard-scheme-jacobian-over-separably--1`).
+  function `T → ℤ`.
 
 ## Main statements
 
 - `AlgebraicGeometry.isLocallyConstant_picardPresheafDegree` and
   `AlgebraicGeometry.picardPresheafDegree_map`: the fibrewise degree is locally constant and
-  compatible with base change (blueprint `theorem-picard-scheme-jacobian-over-separably--1`, parts 1
-  and 3).
+  compatible with base change.
 - `AlgebraicGeometry.picardPresheafDegree_mul_map_snd`: twisting by a class pulled back from
-  the base does not change the fibrewise degree (blueprint
-  `theorem-picard-scheme-jacobian-over-separably--1`, part 2).
+  the base does not change the fibrewise degree.
 - `AlgebraicGeometry.picardPresheafDegree_eq_of_toPicardFunctor_eq`: two classes with the same
   image in `Pic_{X/S}` have the same fibrewise degree.
 - `AlgebraicGeometry.Scheme.Modules.degree_pullback_of_isPullback`: the degree of an invertible
@@ -45,7 +43,7 @@ section of `Pic_{X/S}` over `T`.
 - `AlgebraicGeometry.picardDegree_toPicardFunctor`, `AlgebraicGeometry.picardDegree_map` and
   `AlgebraicGeometry.isLocallyConstant_picardDegree`: the degree of a section of `Pic_{X/S}` is
   the fibrewise degree of any local representative, is compatible with base change, and is
-  locally constant (blueprint `theorem-picard-scheme-jacobian-over-separably--1`).
+  locally constant.
 
 ## Implementation notes
 
@@ -77,12 +75,10 @@ variable {X S : Scheme.{u}}
 
 section PresheafDegree
 
-/-- The **fibrewise degree** of a class of the Picard presheaf.  Let `f : X ⟶ S` be a morphism,
+/-- The **fibrewise degree** of a class of the Picard presheaf.  Let `f: X ⟶ S` be a morphism,
 `T` a scheme over `S` and `ℒ ∈ Pic (X_T)`, `X_T = X ×_S T`.  For a point `t ∈ T` the fibre
 `X_t` of the projection `X_T ⟶ T` is a scheme over the residue field `κ(t)`, and the fibrewise
-degree of `ℒ` at `t` is `deg ℒ_t = χ(X_t, ℒ_t) - χ(X_t, 𝒪_{X_t})`.
-
-(blueprint: `proposition-jacobian-over-ground-field--2`) -/
+degree of `ℒ` at `t` is `deg ℒ_t = χ(X_t, ℒ_t) - χ(X_t, 𝒪_{X_t})`. -/
 noncomputable def picardPresheafDegree (f : X ⟶ S) {T : Over S}
     (L : (picardPresheaf f).obj (.op T)) (t : T.left) : ℤ :=
   Modules.eulerCharFiber ((fromSkeleton _).obj (Pic.val (Y := pullback f T.hom) L))
@@ -92,11 +88,9 @@ noncomputable def picardPresheafDegree (f : X ⟶ S) {T : Over S}
 
 variable (f : X ⟶ S)
 
-/-- **The fibrewise degree is compatible with base change.** For `g : T' ⟶ T` and
+/-- **The fibrewise degree is compatible with base change.** For `g: T' ⟶ T` and
 `ℒ ∈ Pic (X_T)`, the fibrewise degree of the pullback of `ℒ` to `X_{T'}` at `t'` is the
-fibrewise degree of `ℒ` at the image of `t'`.
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably--1`, part 3) -/
+fibrewise degree of `ℒ` at the image of `t'`. -/
 theorem picardPresheafDegree_map [IsProper f] [LocallyOfFinitePresentation f] {T T' : Over S}
     (g : T' ⟶ T) (L : (picardPresheaf f).obj (.op T)) (t : T'.left) :
     picardPresheafDegree f ((picardPresheaf f).map g.op L) t =
@@ -146,9 +140,7 @@ theorem picardPresheafDegree_pic_map_of_isPullback [IsProper f] [LocallyOfFinite
 
 /-- **The fibrewise degree is locally constant** when `f` is proper, flat and locally of finite
 presentation: the fibre Euler characteristics of `ℒ` and of `𝒪_{X_T}` are locally constant on `T`
-since both modules are invertible, hence of finite presentation and flat over `T`.
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably--1`, part 1) -/
+since both modules are invertible, hence of finite presentation and flat over `T`. -/
 theorem isLocallyConstant_picardPresheafDegree [IsProper f] [LocallyOfFinitePresentation f]
     [Flat f] {T : Over S} (L : (picardPresheaf f).obj (.op T)) :
     IsLocallyConstant (picardPresheafDegree f L) := by
@@ -187,10 +179,8 @@ lemma Scheme.Modules.eulerCharFiber_eq_of_pic_map_fiberι_eq {Y T : Scheme.{u}} 
 
 /-- **Twisting by a class from the base does not change the fibrewise degree.** For
 `ℒ ∈ Pic (X_T)` and an invertible module `𝒩` on `T`, the fibrewise degree of `ℒ ⊗ f_T^* 𝒩` is
-that of `ℒ`, where `f_T : X_T ⟶ T` is the projection: on the fibre over `t` the module `f_T^* 𝒩`
-is pulled back from `Spec κ(t)`, hence trivial.
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably--1`, part 2) -/
+that of `ℒ`, where `f_T: X_T ⟶ T` is the projection: on the fibre over `t` the module `f_T^* 𝒩`
+is pulled back from `Spec κ(t)`, hence trivial. -/
 theorem picardPresheafDegree_mul_map_snd {T : Over S} (L : (pullback f T.hom).Pic)
     (N : T.left.Pic) :
     picardPresheafDegree f (T := T) (L * Pic.map (pullback.snd f T.hom) N) =
@@ -233,11 +223,9 @@ lemma exists_picardPresheafDegree_eq {T : Over S} (x : (picardFunctor f).obj.obj
 
 /-- The **degree** of a section `x` of the relative Picard functor `Pic_{X/S}` over `T`: the
 function `T → ℤ` whose value at `t` is the fibrewise degree `deg ℒ_z` of any local
-representative `ℒ ∈ Pic (X_Z)` of `x` along `g : Z ⟶ T`, at any point `z` over `t`.  It is well
+representative `ℒ ∈ Pic (X_Z)` of `x` along `g: Z ⟶ T`, at any point `z` over `t`.  It is well
 defined by `AlgebraicGeometry.picardDegree_eq`, locally constant when `f` is flat, and natural in
-`T`, so that it is the degree morphism `Pic_{X/S} ⟶ ℤ` to the constant sheaf.
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably--1`) -/
+`T`, so that it is the degree morphism `Pic_{X/S} ⟶ ℤ` to the constant sheaf. -/
 noncomputable def picardDegree {T : Over S} (x : (picardFunctor f).obj.obj (.op T))
     (t : T.left) : ℤ :=
   (exists_picardPresheafDegree_eq f x t).choose
@@ -321,13 +309,11 @@ section BaseChange
 
 /-- **The degree is invariant under base change along a cartesian square.** Let `C` be a proper
 scheme over a field `K`, let `C'` over a field `K'` sit in a cartesian square over
-`g : Spec K' ⟶ Spec K`, and let `ℒ` be an invertible module on `C`. Then the degree of the pullback
+`g: Spec K' ⟶ Spec K`, and let `ℒ` be an invertible module on `C`. Then the degree of the pullback
 of `ℒ` to `C'` is the degree of `ℒ`: both are fibre Euler characteristics over the unique points,
 which are invariant under base change
 (`AlgebraicGeometry.Scheme.Modules.eulerCharFiber_pullback_of_isPullback`). The square need not
-be the canonical one, and `g` need not be a `K`-algebra map.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--1`) -/
+be the canonical one, and `g` need not be a `K`-algebra map. -/
 theorem Scheme.Modules.degree_pullback_of_isPullback {C C' : Scheme.{u}} {K K' : Type u} [Field K]
     [Field K'] [C.Over (Spec (.of K))] [C'.Over (Spec (.of K'))] [IsProper (C ↘ Spec (.of K))]
     (g : Spec (.of K') ⟶ Spec (.of K)) (g' : C' ⟶ C)

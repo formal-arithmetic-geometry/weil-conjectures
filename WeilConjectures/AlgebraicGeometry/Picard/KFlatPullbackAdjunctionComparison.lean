@@ -56,19 +56,7 @@ set_option maxHeartbeats 800000 in
 -- Comparing the concrete sheaf adjunctions requires unfolding their chosen instances.
 /-- For a K-flat source, the localized ordinary transpose computes the pinned derived
 transpose. The comparison is independent of the target complex and the chain map.
-Source: Stacks Project, Cohomology, Tags 06YI, 06YJ, and 079W.
-(blueprint: lem-pc-kflat-pullback-adjunction-comparison).
-
-Proof: take the left-derived counit selected by exists_derivedPullbackComposition.
-On a K-flat complex it is invertible, by the K-flat computation of derived pullback
-and uniqueness of left-derived counits. Transport its inverse across quotientCompQhIso
-and mapHomotopyCategoryFactors to obtain the displayed comparison e. Apply the pinned
-Hom formula of exists_schemeDerivedAdjunction to the homotopy class of the ordinary
-transpose. The homotopy-category adjunction is induced by the termwise adjunction,
-so its forward transpose is the class of alpha. The right-derived unit transported
-across the quotient comparison is schemeMVDirectImageLocalization. Reassociation and
-cancellation of the left-derived counit give the formula. Neither K-injectivity of the
-target nor boundedness is needed; the right-derived unit exists on every complex. -/
+Source: Stacks Project, Cohomology, Tags 06YI, 06YJ, and 079W. -/
 theorem kFlat_pullback_adjunction_comparison
     [d : ∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

@@ -17,7 +17,6 @@ import WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal
 /-! # Monoidality of forgetting ambient scalars
 
 Source: Stacks Tags 03EK and 07A4, relative tensor and extension of scalars.
-(blueprint: lem-sf-native-scalar-forgetting-monoidal).
 -/
 
 @[expose] public section
@@ -40,22 +39,7 @@ private theorem monoidalRightAdjointOfEquivalence
 /-- Forgetting ambient scalars admits a strong monoidal structure for relative tensor.
 This is entirely underived and involves no choice of closed models.
 
-Source: Stacks Tags 03EK and 07A4; step 1 of
-lem-sf-native-coefficient-tensor-comparison.
-(blueprint: lem-sf-native-scalar-forgetting-monoidal).
-
-Proof: Let F be the free ambient-module functor and G its forgetful right adjoint.
-For the native coefficient algebra B, first apply F to modules over G(B), then
-extend scalars along the counit F(G(B)) to B. Both operations are strong monoidal.
-The lifted free-forgetful adjunction followed by extension-restriction adjunction
-shows that this composite is left adjoint to G on B-modules: the restriction map
-on the right is the identity by the right triangle identity. Scalar forgetting
-is already an equivalence, so this left adjoint is an equivalence too. Its
-monoidal inverse is naturally isomorphic to the original scalar-forgetting
-functor by uniqueness of right adjoints. Transport the monoidal structure along
-that isomorphism. All functors here are the existing relative module functors;
-no derived category or tensor representative is used. The argument includes the
-zero module and empty scheme. -/
+Source: Stacks Tags 03EK and 07A4. -/
 theorem nativeScalarForgetting_monoidal (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) :
     Nonempty (AdicSheaf.forgetAb l Y).Monoidal := by
   classical

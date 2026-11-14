@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.Pur.PurCompletedReindexingData
 import all WeilConjectures.AlgebraicGeometry.RingedRestrictionExchange.RingedOrdinaryOpenExchange
 
 /-! # PurReindexingOrdinaryMate
-
-Source: Stacks Project and the extracted proof of
-lem-pur-isomorphism-completed-reduction-reindexing.
 -/
 
 @[expose] public noncomputable section

@@ -21,7 +21,6 @@ import WeilConjectures.AlgebraicGeometry.ResiduePullbackGlobalSections
 /-! # Natural residue homology comparison for localized strictly perfect complexes
 
 Source: Stacks Project, Tags 06YJ and 0098.
-(blueprint: lem-sc-localized-strict-perfect-residue-homology).
 -/
 
 @[expose] public section
@@ -152,24 +151,7 @@ private theorem exists_homology_comparison_of_counit
 /-- Termwise residue stalk homology of strictly perfect localized complexes agrees
 naturally with localized derived residue homology. The comparisons are simultaneous
 for all strictly perfect complexes and all their chain maps.
-Source: Stacks Project, Tags 06YJ and 0098.
-(blueprint: lem-sc-localized-strict-perfect-residue-homology).
-
-Proof: Transport a localized complex to the open subscheme by overEquiv. This exact
-module equivalence preserves zero objects and finite free retractions. Stalks take
-these retractions to finite projective modules, hence flat modules. Finite support
-bounds the stalk complexes above. Bounded-above flat module complexes are K-flat,
-and the stalk criterion makes the transported sheaf complex K-flat. The chosen
-derived pullback's counit is therefore invertible. The counit is
-a natural transformation on the homotopy category; therefore its inverse comparisons
-commute with every chain map between these complexes. The exact over-site equivalence
-also has a natural comparison with localization Q. Apply degree-zero derived homology
-and the exact global-sections functor of the one-point residue scheme. Its homology
-comparison identifies this with homology of termwise tensor pullback. Finally the
-natural residuePullback_globalSections_iso identifies that complex with residue
-extension of the localized stalk complex. Composing gives t; naturality of each
-factor gives the displayed equation. Zero complexes, zero maps and shifted complexes
-satisfy the same equation. No sign or negative-degree vanishing assumption is used. -/
+Source: Stacks Project, Tags 06YJ and 0098. -/
 theorem exists_localizedStrictPerfectResidueHomology_iso (S : Scheme.{u}) (U : S.Opens)
     [HasDerivedCategory.{w}
       (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U))]

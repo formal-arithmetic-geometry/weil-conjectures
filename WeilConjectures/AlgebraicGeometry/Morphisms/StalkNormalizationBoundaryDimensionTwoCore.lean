@@ -19,17 +19,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- Boundary points of the smooth pullback have stalk dimension at least two.
-Source: Stacks Project, Tags 0EYJ, 0337, 00LK, 033C and 00H8.
-(blueprint: new-stalk-normalization-boundary-dimension-two-target)
-Proof: put a = S.fromSpecStalk s and f = pullback.snd c a ≫ a. Every point of
-Spec O(S,s) specializes to its closed point, whose image under a is s. The
-pullback identity and the boundary hypothesis show f(y) is outside U, so
-minimality gives f(y) = s. The canonical map a is flat, and pullback.snd c a is
-smooth, hence their composite is flat. The pullback is locally Noetherian,
-since it is locally of finite type over the spectrum of the Noetherian stalk.
-Apply the flat local depth formula to f.stalkMap y: the nonnegative fibre depth
-shows depth at y is at least depth at s, hence at least two. The depth-support
-bound for the stalk as a module over itself gives the Krull dimension bound. -/
+Source: Stacks Project, Tags 0EYJ, 0337, 00LK, 033C and 00H8 -/
 theorem stalk_normalization_boundary_dimension_two_target {S C : Scheme.{u}}
     [IsNoetherian S] [QuasiSeparatedSpace S] [IsIntegral S]
     (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [Smooth c]

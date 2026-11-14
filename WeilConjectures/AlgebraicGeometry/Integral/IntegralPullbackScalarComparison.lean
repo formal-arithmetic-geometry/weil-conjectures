@@ -93,14 +93,7 @@ private def derivedPullbackScalarIso {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 
 /-- Derived pullback, after scalar normalization, is the raw inverse image.
-Source: Stacks Tags 03D3 and 03D8, inverse image adjunction and composition.
-(blueprint: lem-weil-pbc-integral-pullback-scalar-comparison).
-
-Proof: scalar restriction along a coefficient isomorphism is an exact equivalence.
-Compose its inverse adjunction with the inverse image adjunction. The right
-adjoints identify sectionwise, so uniqueness of left adjoints identifies the
-module pullbacks. Apply the exact-functor derived comparison to this natural
-isomorphism and its identity-coefficient case. -/
+Source: Stacks Tags 03D3 and 03D8, inverse image adjunction and composition. -/
 theorem proEtaleRingDerivedPullback_scalarComparison {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
     (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})

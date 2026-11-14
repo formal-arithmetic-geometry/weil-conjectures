@@ -32,23 +32,7 @@ set_option maxHeartbeats 600000 in
 /-- Punctured root charts commute with cofiltered affine ring colimits over R.
 
 Source: Stacks Project, Tags 05N9 and 01YW; universal properties of polynomial
-quotients and localization.
-(blueprint: lem-sbc-punctured-root-colimit-continuity)
-
-Proof: First identify every punctured root chart with the base change of the
-chart V₀ over R, using punctured_root_base_change. Apply Spec to the ring colimit
-cocone, and extend the resulting limit cone along Spec(e₀) to put its point at
-Spec H. The hypothesis ha identifies every composite of a cone leg and its base
-map with Spec b. Lift this cone to schemes over Spec R. Pullback along the fixed
-map V₀ to Spec R is a right adjoint, so it preserves this limit. The forgetful
-functor from schemes over V₀ preserves connected limits; cofilteredness supplies
-connectedness. This gives a limit in schemes of the pullback diagram. Its objects
-are affine pullbacks of affine schemes over Spec R, since V₀ is a basic affine open.
-The base-change comparison at H identifies its cone point with the required chart;
-the comparisons at the stages give the required stage isomorphisms. Their projection
-formulas, the pullback leg equations and ha give both structural-map equations.
-No positivity or regularity is used: polynomial quotient base change and inverse
-images of basic opens also work for n=0, f=0, and zero rings. -/
+quotients and localization. -/
 theorem punctured_root_colimit_continuity
     (R H : CommRingCat.{u}) (f : R) (n : ℕ) (b : R ⟶ H)
     (I : Type u) [Category.{u} I] [IsCofiltered I]

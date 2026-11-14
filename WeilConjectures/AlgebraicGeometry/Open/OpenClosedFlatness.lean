@@ -46,9 +46,7 @@ import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 /-!
 # Flatness on an open--closed decomposition
 
-Source: literature/stacks-project/proetale.tex, Tag 09AH, together with
-etale-cohomology.tex, Tag 095L, and sites-modules.tex, Tag 03ER
-(blueprint: lem-sfb-open-closed-flatness).
+Source: Tag 09AH, Tag 095L, Tag 03ER.
 
 The two declarations below spell out the ordinary module-sheaf assertion on the
 small étale and small pro-étale sites. Étale flatness is detected on geometric
@@ -71,14 +69,7 @@ namespace AlgebraicGeometry
 
 /-- Flatness is detected on the two members of a complementary pair on the
 small étale site; extension by zero and closed direct image preserve flatness.
-Source: Stacks Tags 095L, 03ER and 05VD (blueprint: lem-sfb-open-closed-flatness).
-
-Proof: inverse image preserves flatness. Conversely, every geometric point
-factors through one member of the complementary pair. Pullback-fiber composition
-and the geometric-fiber criterion therefore detect flatness of the original
-sheaf. The open unit and closed counit identify the nonzero restrictions of the
-two extensions with their inputs; disjoint-range vanishing makes the remaining
-restrictions zero. Applying detection proves the last two clauses.
+Source: Stacks Tags 095L, 03ER and 05VD.
 -/
 theorem openClosedFlatness_etale
     (A : Type (u + 1)) [CommRing A] [Finite A]
@@ -240,26 +231,12 @@ private theorem fixed_flat_detect
       ((isZero_kernel_of_mono _).of_iso (PreservesKernel.iso _ _)))
 
 /-- The same assertion for ordinary module sheaves on the small pro-étale site.
-Source: Stacks Tags 09AH, 03DI and 05VD (blueprint: lem-sfb-open-closed-flatness).
+Source: Stacks Tags 09AH, 03DI and 05VD.
 
 The coefficient is the constant finite ring sheaf.  The open object is the
 canonical pro-étale object associated to `j`; its extension by zero and the
 closed direct image are the ringed-site constructions used in the localization
 sequence.
-
-Proof: the intrinsic constant-ring realization is an equivalence, and its
-right-tensor comparison transports exactness of tensoring in both directions;
-braiding supplies left tensoring. The local equational criterion makes site
-flatness invariant under isomorphism. The canonical pullback comparison then
-identifies the restricted flatness conditions with fixed-scalar flatness.
-Fixed-scalar inverse image preserves flatness. Conversely, right-exact tensoring
-is exact once it preserves monomorphisms. Monoidal pullback identifies each
-restricted tensored monomorphism with tensoring by a flat restricted sheaf, so
-its kernel vanishes. Exact pullback preserves this kernel, and complementary
-zero detection makes the original kernel vanish. The open unit, closed counit
-and disjoint-range vanishing give preservation by the two fixed-scalar
-extensions. Transfer through the realization, using the canonical direct-image
-comparison for closed direct image, proves the stated preservation assertions.
 -/
 theorem openClosedFlatness_proEtale
     (A : Type u) [CommRing A] [Finite A]

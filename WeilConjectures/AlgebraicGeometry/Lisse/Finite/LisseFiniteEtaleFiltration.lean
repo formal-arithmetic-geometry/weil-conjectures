@@ -26,8 +26,8 @@ import WeilConjectures.RepresentationTheory.PrimaryPGroupFiltration
 /-!
 # Prime-to-primary finite étale filtration covers
 
-Source: Stacks Project, Tags 0GJ0 and 0DV5 (3), with componentwise assembly on an
-affine Noetherian base (blueprint: lem-weil-pbc-etale-lisse-finite-etale-filtration).
+Source: Stacks Project, Tags 0GJ0 and 0DV5 (3), with componentwise assembly on an affine Noetherian
+base.
 -/
 
 @[expose] public section
@@ -641,33 +641,7 @@ private theorem connected_sylow_sheaf_data
 /-- A finite local system of modules over a finite ring, killed by a positive prime power,
 admits a finite étale surjection of constant prime-to-primary degree, and on a finite affine
 clopen decomposition of its source the pullback has constant finite-module graded pieces.
-Source: Stacks Project, Tags 0GJ0, 0DV5 (3), 0DV6 and 0GIZ
-(blueprint: lem-weil-pbc-etale-lisse-finite-etale-filtration).
-
-Proof:
-Partition the Noetherian affine base into its finitely many connected clopen components.
-Their inclusions are also closed immersions, so the components are affine. On each
-component trivialize the underlying finite set sheaf by a connected finite monodromy
-torsor, and recover a module trivialization. Quotient this torsor by an ell-Sylow subgroup;
-the quotient cover has positive prime-to-ell geometric degree.
-
-Use the concrete associated module functor for the resulting Sylow torsor to recover the
-pulled-back sheaf from a representation M. Its torsor-pullback comparison identifies every
-geometric stalk with the underlying module functor. Conservativity of geometric stalks
-makes the associated functor exact and transfers finiteness and ell-power annihilation
-to M. The rank-one comparison and finite presentations show it sends every finite
-trivial representation to the corresponding constant module sheaf.
-
-Apply the primary p-group filtration to the additive representation and take coefficient
-spans. Linearity preserves stability and triviality of the successive actions. Exactness
-sends the resulting submodules to a genuine Subobject filtration; its cokernels are the
-associated sheaves of the finite trivial quotient modules, hence are constant.
-
-Repeat each component cover by the product of all the other component degrees, and take
-their finite coproduct. An explicit coproduct-fibre bijection proves its geometric degree
-is the common product. Its summands are affine and clopen, and inverse-image composition
-transports their filtrations to the restrictions of the global pullback. The empty scheme
-uses the empty coproduct, empty partition and degree one. -/
+Source: Stacks Project, Tags 0GJ0, 0DV5 (3), 0DV6 and 0GIZ. -/
 theorem exists_lisse_finiteEtale_filtration
     (A : Type u) [CommRing A] [IsNoetherianRing A]
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]

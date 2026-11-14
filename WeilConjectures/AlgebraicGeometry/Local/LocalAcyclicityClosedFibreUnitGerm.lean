@@ -12,8 +12,7 @@ import WeilConjectures.CategoryTheory.Adjunction.Derived.DerivedAdjunctionSingle
 
 /-! # The unit map on closed-fibre stalks
 
-Source: Stacks Project, Tag 0GJU, stalk calculation in lemma-beta-is-isomorphism.
-(blueprint: lem-weil-pbc-local-acyclicity-closed-fibre-unit-germ).
+Source: Stacks Project, Tag 0GJU.
 -/
 
 @[expose] public section
@@ -57,18 +56,8 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- On zeroth cohomology, the closed-fibre stalk of the derived adjunction unit is
 conjugate to the canonical map defining local acyclicity. No local acyclicity is assumed.
-Source: Stacks Project, Tag 0GJU, identification with alpha following the stalk calculation;
-Tag 0GJP, equation-alpha-K.
-(blueprint: lem-weil-pbc-local-acyclicity-closed-fibre-unit-germ).
-
-Proof: commute exact inverse image along i with degree-zero homology and apply the
-geometric stalk functor. The generic single-object normalization of the derived
-adjunction unit supplies an isomorphism from its target homology to the ordinary
-pushforward, intertwining the actual unit maps. Compose these source and target
-isomorphisms with the ordinary closed-fibre unit-germ comparison. Naturality of the
-exact-inverse-image homology comparison moves the unit through the first isomorphism;
-the normalization equation and the ordinary germ equation then give the displayed
-equality. Neither local acyclicity nor any cohomological vanishing is used. -/
+Source: Stacks Project, Tag 0GJU, identification with alpha following the stalk calculation; Tag
+0GJP. -/
 theorem closedFibre_derivedUnit_zero_stalk_comparison
     {X S : Scheme.{u}} (f : X ⟶ S)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

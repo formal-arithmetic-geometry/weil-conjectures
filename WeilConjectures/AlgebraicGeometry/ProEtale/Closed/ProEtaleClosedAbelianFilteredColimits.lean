@@ -114,19 +114,7 @@ private theorem evaluation_preserves_filteredColimits
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Abelian closed direct image commutes with filtered colimits on a qcqs base.
-Source: Stacks Project, Tags 0738 (4) and 098D
-(blueprint: lem-weil-pbc-proetale-closed-abelian-filtered-colimits).
-
-Proof: The canonical comparison is tested on affine objects `V` over the base.
-Both `V` and its closed fibre `V_Z` are qcqs. Use localization at these objects
-to identify evaluation with global sections on their pro-etale sites. Localization
-is inverse image and preserves colimits. By the sections clause of the qcqs section
-calculus, these global sections commute with the filtered colimit. The direct-image
-formula evaluates a sheaf at `V_Z`; thus both sides of the comparison at `V` identify
-with the same colimit of groups of sections at `V_Z`. The comparison is the identity
-under these identifications, since all identifications respect coprojections.
-Affine objects form a covering basis, so these sectionwise inverses give an inverse
-of the sheaf comparison. This proves preservation of the given diagram shape. -/
+Source: Stacks Project, Tags 0738 (4) and 098D. -/
 theorem proEtale_closed_abelian_filteredColimits {X Z : Scheme.{u}} (i : Z ⟶ X)
     [IsClosedImmersion i] [CompactSpace X] [QuasiSeparatedSpace X]
     (I : Type (u + 1)) [SmallCategory I] [IsFiltered I] :

@@ -25,8 +25,7 @@ import Mathlib.CategoryTheory.Sites.Point.Skyscraper
 
 /-! # Sheafification preserves pro-etale geometric stalks
 
-Source: Stacks Project, Tags 0F6B, 0F6C, the paragraph before 0993, and 00Y8(3)
-(blueprint: lem-cbc-proetale-sheafification-geometric-stalk).
+Source: Stacks Project, Tags 0F6B, 0F6C, the paragraph before 0993, and 00Y8(3).
 -/
 
 @[expose] public section
@@ -66,28 +65,7 @@ private theorem lift_geometricPoint_cover
 
 /-- The colimit of the abelian sheafification unit on pointed weakly etale neighbourhoods
 is an isomorphism, naturally in the presheaf.
-Source: Stacks Project, Tags 0F6B, 0F6C, paragraph before 0993, and 00Y8(3)
-(blueprint: lem-cbc-proetale-sheafification-geometric-stalk).
-
-Proof:
-1. For a covering sieve and a map from `Spec Ω`, use `ProEt.mem_topology_iff` to choose
-   a covering family. Base change it to `Spec Ω` with
-   `Precoverage.mem_coverings_of_isPullback`; a nonempty member has a point over the
-   closed point of `Spec Ω`. The existing source theorem
-   `AlgebraicGeometry.exists_comp_eq_id_of_weaklyEtale` supplies a section, yielding the
-   lift in the private helper `lift_geometricPoint_cover`.
-2. For a covering sieve `R` and a map from a pointed neighbourhood `U`, apply the helper
-   to `R.pullback f`. The resulting neighbourhood `V` and arrow `V ⟶ U` satisfy the
-   lifting hypothesis of `GrothendieckTopology.Point.ofIsCofiltered`; the existing
-   cofilteredness and initial-smallness instances provide the required index category.
-3. For every abelian presheaf `F`, identify the colimit over pointed neighbourhoods with
-   the presheaf fibre of the resulting point using
-   `Point.isColimitPresheafFiberOfIsCofilteredCocone`. The coprojection equation and its
-   inverse identify every induced colimit map with the corresponding fibre map.
-4. Mathlib's point sheafification instance makes the fibre map induced by `toSheafify` an
-   isomorphism. Conjugating it by the colimit isomorphisms proves the first conjunct.
-5. For `a : P ⟶ Q`, `colim.map_comp`, `Functor.whiskerLeft_comp`, and
-   `toSheafify_naturality` prove the stated naturality equality.
+Source: Stacks Project, Tags 0F6B, 0F6C, paragraph before 0993, and 00Y8(3).
 -/
 theorem proEtaleGeometricStalk_sheafification
     {X : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]

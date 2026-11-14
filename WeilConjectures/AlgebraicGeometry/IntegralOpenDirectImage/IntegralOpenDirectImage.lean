@@ -192,9 +192,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteOp
 /-!
 # Integral open direct image preserves constructibility
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-thm-sf-pf-adic,
-`sk-thm-sf-pf-adic-open.md` and its proof; Stacks Tags 099L, 09A6 and 09C1
-(blueprint: proposition-direct-image-along-open-immersion--1).
+Source: Stacks Tags 099L, 09A6 and 09C1.
 
 The residue comparison is specified by its adjunction equation, rather than by an
 unconstrained isomorphism of objects. The coefficient-change pullback square used in that
@@ -221,9 +219,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The canonical pullback/reduction transformation, obtained by transposing the inverse
 of the exact restriction-of-scalars pullback square along the two derived scalar
-adjunctions. No flatness of O_E -> F_E is assumed.
-Source: blueprint open-direct-image proof, Reduction paragraph and the coefficient square
-(blueprint: proposition-direct-image-along-open-immersion--1). -/
+adjunctions. No flatness of O_E -> F_E is assumed. -/
 def reductionPullbackMap :
     (CondensedRing.upperStar (DerivedNakayama.integerRing l E) j).mapDerivedCategory ⋙
         AdicCompletion.derivedReduction l E U 0 ⟶
@@ -338,39 +334,7 @@ private theorem residue_open_image
 reduction, and is bounded constructible; integral Dbc equals its finite-Tor subcategory.
 The unique comparison is characterized by the usual pullback/reduction square and the
 two geometric counits. This is the canonical coefficient-change (projection-formula) map.
-Source: blueprint main-20261015, `sk-thm-sf-pf-adic-open.md` and its proof; Stacks
-Tags 099L, 09A6, 09C1 (blueprint: proposition-direct-image-along-open-immersion--1).
-
-Proof:
-1. Apply lemma-integral-models on U: K is complete and its residue reduction is bounded
-   constructible of etale origin. The extension-integers DVR theorem gives a finite residue
-   field of characteristic l, which is invertible in k.
-2. lemma-reduction-derived-nakayama--1 identifies reduction with the uniformizer cone.
-   The right derived module pushforward is triangulated and O_E-linear. The canonical
-   finite-projection clause of proposition-proper-base-change-complete-integral--1, with the finite
-   perfect quotients of lemma-reduction-derived-nakayama--1, identifies the residue comparison
-   and all tower transitions. Its adjunction equation is the one displayed below.
-3. Apply the direct-image/derived-limit comparison to K's reduction tower. The completion
-   unit compatibility in that same node identifies the composite with the completion unit
-   of Rj_*K, proving completeness (definition-derived-adic-completeness).
-4. Descend the residue reduction to the etale site by theorem-comparison-constructible-sheaves.
-   corollary-open-direct-image-over-field--1 makes its etale open direct image bounded
-   constructible, since the residue field is finite and killed by l.
-5. An open immersion has identity diagonal, so quasi-compactness makes j qcqs.
-6. theorem-comparison-direct-images--1 identifies the residue pro-etale direct image
-   with the pullback of the etale one; constructible comparison preserves its finiteness.
-7. lemma-inverse-image-coefficient-sheaves and sk-def-sfb-coefficient-change give the compatible
-   integral/residue ring square. lem-weil-pbc-ring-sheaf-change-adjunction compares the
-   direct images after restriction, without imposing flatness on the residue quotient.
-8. Exact scalar restriction (lem-weil-restriction-of-scalars-exact) identifies cohomology
-   of these two residue complexes as integral modules.
-9. The coefficient resolution makes O_E -> F_E an epimorphism. Lift residue scalars
-   locally to integral scalars; integral linearity then gives residue linearity of the
-   cohomology isomorphisms and their inverses. The actual reduction is bounded constructible.
-10. Constructible comparison gives etale origin for that actual residue reduction.
-11. Apply the residue criterion lemma-integral-models on X. It gives bounded
-    constructibility and the equality of integral bounded constructible and finite-Tor
-    subcategories. This proves all clauses, including the empty-open and identity cases. -/
+Source: Stacks Tags 099L, 09A6, 09C1. -/
 theorem integral_open_direct_image
     (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ l)]
     [U.Over (Spec (.of k))] [X.Over (Spec (.of k))]

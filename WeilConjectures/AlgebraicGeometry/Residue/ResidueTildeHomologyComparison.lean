@@ -11,7 +11,6 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 /-! # The canonical homology comparison for associated sheaves over a field
 
 Source: Stacks Project, Tag 01XK.
-(blueprint: new-residue-tilde-homology-comparison)
 -/
 
 @[expose] public section
@@ -25,7 +24,6 @@ namespace AlgebraicGeometry.Scheme
 -- The scalar and sheaf homology structures require several comparison instances.
 /-- Associated sheaves followed by derived homology and field sections compute
 module-complex homology naturally. Source: Stacks Project, Tag 01XK.
-(blueprint: new-residue-tilde-homology-comparison)
 
 Construction: Global sections on the spectrum of a field are an exact equivalence.
 Commute them with homology and apply the tilde/sections unit isomorphism termwise.

@@ -27,7 +27,6 @@ inverse system with affine transitions and with the original closed subscheme as
 Source: Stacks Project, Limits, Tag 0A0P (approximation argument), and
 Morphisms, Tag 01R8 (quasi-compact scheme-theoretic images). The closed-image
 implementation below is an argument written here, rather than the proof of 0A0P.
-(blueprint: `lem-weil-pbc-closed-image-limit-system`)
 -/
 theorem exists_closedImmersion_system_of_isLimit
     {J : Type u} [SmallCategory J] [IsCofiltered J]

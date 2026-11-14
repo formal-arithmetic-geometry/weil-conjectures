@@ -14,9 +14,8 @@ import all WeilConjectures.AlgebraicGeometry.Adic.AdicCoefficientDatumSupplement
 
 /-! # Composition and coefficient-tower coherence of scalar operations
 
-Source: blueprint proper base change, order 1307; Milne, Section 19.
+Source: Milne, Section 19.
 Existing declarations extracted from `PbcScalarExtension` to bound compilation cost.
-(blueprint: lem-pbc-scalar-operation-composition-coherence)
 -/
 
 @[expose] public noncomputable section
@@ -418,12 +417,7 @@ private theorem scalarDerivedCoefficients
     Category.id_comp, ← LG.map_comp_assoc, Iso.hom_inv_id_app, LG.map_id] at he
   exact he
 
-/-- Pullback comparison respects successive finite coefficient extensions.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-operation-composition-coherence).
-Proof: on resolving complexes all three coefficient extensions are sheafified
-tensor. The two paths multiply exactly the same coefficients in the same order.
-Associativity identifies them before localization; the prescribed derived
-counits give the displayed equality of derived morphisms. -/
+/-- Pullback comparison respects successive finite coefficient extensions. -/
 theorem pbcScalarOrdinaryPull_coefficients
     (K : PbcCompletedDerived Y (pbcIntegralDatum l E)) :
     (pbcScalarOrdinaryPullIso l F G j g).hom.app
@@ -495,12 +489,7 @@ private theorem scalarMate_coefficients
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Direct-image comparison respects successive finite coefficient extensions.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-operation-composition-coherence).
-Proof: the two composites are projection mates with the same counit tensored
-with the product coefficient. Ordinary tensor balancing sends the iterated
-coefficient tensor to that product. The universal derived normalizations make
-this equality independent of the chosen flat representative. -/
+/-- Direct-image comparison respects successive finite coefficient extensions. -/
 theorem pbcScalarDirectImage_coefficients
     (K : PbcCompletedDerived X (pbcIntegralDatum l E)) :
     (pbcEmbeddingAmbientTensor l F G j Y).map
@@ -526,12 +515,7 @@ theorem pbcScalarDirectImage_coefficients
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Completion comparison respects successive coefficients with its actual unit.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-operation-composition-coherence).
-Proof: both composites preserve the completion unit, since each comparison and
-the balancing associator does. The completion reflector's uniqueness therefore
-identifies them. This is also the strict quotient-tower calculation followed by
-derived inverse limit, so includes every transition and the augmentation. -/
+/-- Completion comparison respects successive coefficients with its actual unit. -/
 theorem pbcScalarCompletion_coefficients (W : Scheme.{u})
     (K : PbcCompletedDerived W (pbcIntegralDatum l E)) :
     (pbcScalarCompletionIso l F G j W).hom.app
@@ -592,13 +576,7 @@ theorem pbcScalarCompletion_coefficients (W : Scheme.{u})
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Pullback comparison respects successive finite coefficient extensions.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-operation-composition-coherence).
-Proof: the ordinary comparison is balanced on K-flat models. The three coefficient
-extensions are sheafified tensor. The two paths multiply exactly the same
-coefficients in the same order.
-Associativity identifies them before localization; the prescribed derived
-counits give the displayed equality of derived morphisms. -/
+/-- Pullback comparison respects successive finite coefficient extensions. -/
 theorem pbcScalarCompletedPull_coefficients
     (K : PbcCompletedDerived Y (pbcIntegralDatum l E)) :
     (pbcScalarCompletedPullIso l F G j g).hom.app

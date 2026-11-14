@@ -206,18 +206,7 @@ end Construction
 attribute [local irreducible] evaluationExtensionIso
 
 /-- Evaluation commutes with ordinary scalar extension, with its section generator fixed.
-Source: Stacks Project, Section 03EK and Tag 03CY, restricted to a vertical slice.
-(blueprint: lem-sp-scalar-extension-evaluation-comparison).
-
-Proof: the identity on pure tensors identifies the evaluated tensor presheaf with
-finite-level scalar extension. The coefficient evaluation maps are identities on
-sections and the system morphism has the prescribed components. Naturality follows
-from restriction of the two tensor factors. The vertical inclusion is continuous
-and cocontinuous, so the existing restriction/sheafification comparison is an
-isomorphism. Sheafify the presheaf comparison and transport along S.model.obj_eq.
-Naturality of the sheafification unit and the comparison's unit equation give the
-displayed value on 1 tensor x. This equation determines the comparison on the locally
-generating pure tensors. -/
+Source: Stacks Project, Section 03EK and Tag 03CY, restricted to a vertical slice. -/
 theorem scalarExtension_evaluation_comparison
     {C : Type c} [Category.{v} C] [EssentiallySmall.{max c v r} C]
     (J : GrothendieckTopology C)

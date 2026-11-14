@@ -15,7 +15,6 @@ import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 /-! # Dualizing finite free quotients
 
 Source: Stacks Project, Tag 0EKP, the dual-surjection construction in (2) to (3).
-(blueprint: new-sbc-quasi-affine-embedding-pullback)
 -/
 
 @[expose] public section
@@ -152,23 +151,7 @@ private theorem embedding_of_locallySplit
 composed with biduality and the finite free dual comparison, is a universally
 monic embedding with finite locally free cokernel.
 
-Source: Stacks Project, Tag 0EKP, the dual-surjection construction in (2) to (3).
-(blueprint: new-sbc-quasi-affine-embedding-pullback)
-
-Proof: Near each point shrink to an affine open on which M is finite free.
-The sheaf epimorphism β induces a surjection onto the finite free module of
-sections of the dual there: the kernel is quasi-coherent, so the affine
-sections functor is exact. Lift the standard basis to split this surjection.
-Its kernel K is a finitely generated projective direct summand of the finite
-free source. Shrinking further makes K finite free. Dualize the split sequence:
-the map from the bidual of M to the dual of the free source is the inclusion
-of a direct summand, with cokernel the dual of K. The displayed α is exactly
-this map under biduality and homObjFreeUnitIso. Hence α is monic and its
-categorical cokernel is finite locally free. For any g the inverse images of
-these opens cover Y; pulling back a local left inverse preserves its identity
-with α. The pulled-back map is monic on that cover, hence monic on Y. Nothing
-requires X to be Noetherian or quasi-affine, a constant rank for M, or r > 0.
-The construction and the splitting work also for zero modules and empty schemes. -/
+Source: Stacks Project, Tag 0EKP, the dual-surjection construction in (2) to (3). -/
 theorem dual_free_quotient_embedding
     {X : Scheme.{u}} (M : X.Modules) [M.IsFiniteLocallyFree]
     {r : ℕ} (β : free (R := X.ringCatSheaf) (ULift.{u} (Fin r)) ⟶ dual M) [Epi β] :

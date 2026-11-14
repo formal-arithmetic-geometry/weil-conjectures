@@ -16,7 +16,7 @@ commutes with the finite reductions, up to the level isomorphisms, and with the 
 reductions, up to the constant quotient ring isomorphisms. Constructibility is invariant
 under restriction along an isomorphism of constant finite coefficient rings.
 
-Source: Bhatt--Scholze, Definition 6.5.1 (auxiliary; not a blueprint node).
+Source: Bhatt--Scholze, Definition 6.5.1.
 -/
 
 @[expose] public noncomputable section
@@ -52,14 +52,13 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Derived restriction along the identity. (auxiliary; not a blueprint node). -/
+/-- Derived restriction along the identity. -/
 def pbcDerivedRestrictIdIso {T : Scheme.{u}}
     (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1}) :
     pbcDerivedRestrict (𝟙 R) ≅ 𝟭 (DerivedCategory (pbcModules T R)) :=
   Functor.mapDerivedCategoryNatIso (pbcRestrictIdIso R) ≪≫ Functor.mapDerivedCategoryIdIso _
 
-/-- Derived restriction along a ring sheaf isomorphism is an equivalence.
-(auxiliary; not a blueprint node). -/
+/-- Derived restriction along a ring sheaf isomorphism is an equivalence. -/
 def pbcDerivedRestrictIsoEquivalence {T : Scheme.{u}}
     {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (e : R ≅ S) :
     DerivedCategory (pbcModules T S) ≌ DerivedCategory (pbcModules T R) :=
@@ -73,16 +72,12 @@ variable {A A' : Type (u + 1)} [CommRing A] [CommRing A']
   (d : AdicCoefficientDatum A) (d' : AdicCoefficientDatum A')
   (φ : A ≃+* A') (hφ : d.ideal.map φ = d'.ideal)
 
-/-- The level isomorphism of finite quotient coefficient sheaves.
-(auxiliary; not a blueprint node). -/
+/-- The level isomorphism of finite quotient coefficient sheaves. -/
 abbrev AdicCoefficientDatum.levelIso (T : Scheme.{u}) (n : ℕ) :
     (pbcAdicRings T d).obj (op n) ≅ (pbcAdicRings T d').obj (op n) :=
   asIso ((d.ringSystemHom d' φ hφ T).app (op n))
 
-/-- Finite reduction commutes with the transport of coefficient data.
-(auxiliary; not a blueprint node).
-Proof: both functors are left adjoints, and their right adjoints are restrictions along the
-two equal composites of the completed isomorphism with the level projections. -/
+/-- Finite reduction commutes with the transport of coefficient data. -/
 def AdicCoefficientDatum.reductionTransportIso (T : Scheme.{u}) (n : ℕ) :
     d.transportDerived d' φ hφ T ⋙ pbcCompletedReduction T d' n ≅
       pbcCompletedReduction T d n ⋙ pbcDerivedRestrict (d.levelIso d' φ hφ T n).inv :=
@@ -98,15 +93,14 @@ def AdicCoefficientDatum.reductionTransportIso (T : Scheme.{u}) (n : ℕ) :
       (pbcDerivedRestrictComp (pbcAdicProjection T d n) lv.hom
         (pbcAdicProjection T d n ≫ lv.hom) rfl).symm).symm
 
-/-- The constant quotient ring isomorphism. (auxiliary; not a blueprint node). -/
+/-- The constant quotient ring isomorphism. -/
 abbrev AdicCoefficientDatum.constantLevelIso (T : Scheme.{u}) (n : ℕ) :
     adicLisseConstantRing T (A ⧸ d.ideal ^ (n + 1)) ≅
       adicLisseConstantRing T (A' ⧸ d'.ideal ^ (n + 1)) :=
   (constantSheaf (ProEt.topology T) CommRingCat.{u + 1}).mapIso
     (d.quotientRingEquiv d' φ hφ n).toCommRingCatIso
 
-/-- The level isomorphisms are compatible with the constant level comparisons.
-(auxiliary; not a blueprint node). -/
+/-- The level isomorphisms are compatible with the constant level comparisons. -/
 theorem AdicCoefficientDatum.levelConstant_square (T : Scheme.{u}) (n : ℕ) :
     (pbcLevelConstantComparison T d' n).hom ≫ (d.levelIso d' φ hφ T n).inv =
       (d.constantLevelIso d' φ hφ T n).inv ≫ (pbcLevelConstantComparison T d n).hom := by
@@ -115,8 +109,7 @@ theorem AdicCoefficientDatum.levelConstant_square (T : Scheme.{u}) (n : ℕ) :
   let := d'.quotientFinite
   exact pbcLevelConstantComparison_naturality T d d' n (d.quotientRingEquiv d' φ hφ n).toRingHom
 
-/-- Constant reduction commutes with the transport of coefficient data.
-(auxiliary; not a blueprint node). -/
+/-- Constant reduction commutes with the transport of coefficient data. -/
 def AdicCoefficientDatum.constantReductionTransportIso (T : Scheme.{u}) (n : ℕ) :
     d.transportDerived d' φ hφ T ⋙ pbcConstantReduction T d' n ≅
       pbcConstantReduction T d n ⋙
@@ -135,8 +128,7 @@ section ConstantRing
 
 variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] (q : Λ ≃+* Λ')
 
-/-- The constant ring sheaf isomorphism induced by a ring isomorphism.
-(auxiliary; not a blueprint node). -/
+/-- The constant ring sheaf isomorphism induced by a ring isomorphism. -/
 abbrev constantRingIso (X : Scheme.{u}) :
     adicLisseConstantRing X Λ ≅ adicLisseConstantRing X Λ' :=
   (constantSheaf (ProEt.topology X) CommRingCat.{u + 1}).mapIso q.toCommRingCatIso
@@ -182,8 +174,7 @@ private def constantGlobalSectionsIso (X : Scheme.{u}) (Tm : X.ProEt) :
       ext x
       rfl)
 
-/-- Constant module sheaves commute with restriction along a constant ring isomorphism.
-(auxiliary; not a blueprint node). -/
+/-- Constant module sheaves commute with restriction along a constant ring isomorphism. -/
 private def adicLisseConstantModulesTransportIso (X : Scheme.{u}) :
     adicLisseConstantModules X Λ' ≅
       ModuleCat.restrictScalars q.toRingHom ⋙ adicLisseConstantModules X Λ ⋙
@@ -197,7 +188,7 @@ private def adicLisseConstantModulesTransportIso (X : Scheme.{u}) :
   (conjugateIsoEquiv (adj₁.comp (adjG.comp adj₃)) adjG').symm
     (constantGlobalSectionsIso q X Tm).symm
 
-/-- Constructibility is invariant under isomorphism. (auxiliary; not a blueprint node). -/
+/-- Constructibility is invariant under isomorphism. -/
 theorem isConstructibleProEtaleCoefficientModuleSheaf_of_iso (Y : Scheme.{u})
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {F G : pbcModules Y (adicLisseConstantRing Y Λ)} (e : F ≅ G)
@@ -212,11 +203,7 @@ theorem isConstructibleProEtaleCoefficientModuleSheaf_of_iso (Y : Scheme.{u})
     ((proEtaleModuleInverseImage (S.immersion i) (adicLisseConstantRing Y Λ)).mapIso e.symm) ≪≫
       e'⟩⟩
 
-/-- Constructibility is invariant under restriction along a constant ring isomorphism.
-(auxiliary; not a blueprint node).
-Proof: on the same strata and sieves, restriction of scalars commutes with inverse image and
-slice restriction, and carries the constant sheaf of a finite module to the constant sheaf
-of the same module with transported scalars. -/
+/-- Constructibility is invariant under restriction along a constant ring isomorphism. -/
 theorem isConstructible_restrict_constantRingIso (Y : Scheme.{u}) [Finite Λ] [Finite Λ']
     (F : pbcModules Y (adicLisseConstantRing Y Λ))
     (hF : IsConstructibleProEtaleCoefficientModuleSheaf Y Λ F) :
@@ -248,10 +235,7 @@ variable {A A' : Type (u + 1)} [CommRing A] [CommRing A']
   (φ : A ≃+* A') (hφ : d.ideal.map φ = d'.ideal)
 
 /-- The uniform reduction profile transports along an isomorphism of coefficient data.
-Source: Bhatt--Scholze, Definition 6.5.1 (auxiliary; not a blueprint node).
-Proof: the constant reductions of the transported object are the restrictions of those of
-`K` along the constant quotient ring isomorphisms. This exact equivalence preserves the
-cohomological bounds and commutes with cohomology; constructibility is invariant under it. -/
+Source: Bhatt--Scholze, Definition 6.5.1. -/
 theorem AdicCoefficientDatum.transport_uniformReductionProfile (T : Scheme.{u})
     (K : PbcCompletedDerived T d) (hK : PbcUniformReductionProfile T d K) :
     PbcUniformReductionProfile T d' ((d.transportDerived d' φ hφ T).obj K) := by

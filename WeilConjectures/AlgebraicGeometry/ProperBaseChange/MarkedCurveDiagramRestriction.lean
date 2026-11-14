@@ -60,25 +60,6 @@ fibres and marks already have the desired properties. The conclusion records the
 cartesian comparisons needed to retain an independently supplied generic diagram.
 
 Source: Stacks Project, Tag 0GK7, the base restrictions in the final paragraphs.
-(blueprint: lem-weil-pbc-marked-curve-diagram-restriction)
-
-Proof: Write U'=U.ι(U₀), identify U₀ with U', and let V'=g⁻¹(U₀). Its map to U'
-is the restriction of g followed by this isomorphism. Its finiteness, surjectivity
-and universal injectivity follow by base change. Restrict T_i, Y_i and B_i over V'
-and restrict their arrows. Restriction pullback squares give the displayed three
-cartesian comparisons; cancellation of the open inclusions gives compatibility
-with j and p. The target restriction is canonically X×_S V'. Coproducts commute
-with base change, so the restricted ν has source the coproduct of the restricted
-Y_i; it remains finite and surjective. Pull back W to the restricted target.
-Its comparison remains a thickening by base change. Geometric connectedness and
-the dimension bound hold by the assumed good-fibre conditions: restriction at a
-base point preserves the fibre up to isomorphism. The marked image condition gives
-surjectivity of each restricted marked open onto T'_i, since every point of T'_i
-lifts to the corresponding old marked open, and its lift automatically lies over
-U₀. Thus Y'_i→T'_i is surjective too. Smoothness of this map follows from openness
-of j'_i and smoothness of p'_i; properness and smoothness of p'_i are preserved
-under restriction. The image hypothesis factors σ uniquely through V'. These
-constructions include empty schemes and an empty component family.
 -/
 theorem exists_marked_curve_diagram_restriction
     {X S V Z : Scheme.{u}} (f : X ⟶ S) (U : S.Opens) (η : S) (hη : η ∈ U)

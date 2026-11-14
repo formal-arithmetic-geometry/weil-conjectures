@@ -278,9 +278,9 @@ end Points
 
 section GeometricFiber
 
-/-- Blueprint `lem-galois-geometric-fibre`: the geometric fibre of a finite étale cover.
+/-- the geometric fibre of a finite étale cover.
 
-Let `f : P ⟶ Y` be finite étale and `y : Spec k ⟶ Y` a point with `k` separably closed. Then
+Let `f: P ⟶ Y` be finite étale and `y: Spec k ⟶ Y` a point with `k` separably closed. Then
 the fibre `P ×_Y Spec k` is, as a scheme over `Spec k`, a finite disjoint union of copies of
 `Spec k`, the number of copies being the `k`-dimension of its ring of global sections. -/
 theorem Scheme.Hom.exists_overIso_sigma_of_isSepClosed {P Y : Scheme.{u}} (f : P ⟶ Y)
@@ -690,14 +690,14 @@ lemma Scheme.Hom.apply_genericPoint_of_isDominant [IrreducibleSpace X] [Irreduci
   have := (genericPoint_spec X).image f.continuous
   rwa [Set.image_univ, f.denseRange.closure_range] at this
 
-/-- Blueprint `proposition-multiplication-n--1`: Finite morphisms with constant fibre length
+/-- Finite morphisms with constant fibre length
 are flat (degree part).
 
-If a finite morphism `f : X ⟶ Y` from an integral scheme has all fibres of degree `n`, then
-the degree `[κ(η) : κ(f η)]` of the residue field extension at the generic point `η` of `X` is
+If a finite morphism `f: X ⟶ Y` from an integral scheme has all fibres of degree `n`, then
+the degree `[κ(η): κ(f η)]` of the residue field extension at the generic point `η` of `X` is
 `n`. When `Y` is integral and `f` is dominant, `f η` is the generic point of `Y`
 (`AlgebraicGeometry.Scheme.Hom.apply_genericPoint_of_isDominant`), so this is the degree
-`[k(X) : k(Y)]` of the extension of function fields: `deg f = [k(X) : k(Y)] = n`. -/
+`[k(X): k(Y)]` of the extension of function fields: `deg f = [k(X): k(Y)] = n`. -/
 theorem Scheme.Hom.finrank_residueField_genericPoint_of_fiberDegree_eq [IsFinite f] {n : ℕ}
     (h : ∀ y, f.fiberDegree y = n) :
     letI := (f.residueFieldMap (genericPoint X)).hom.toAlgebra
@@ -752,10 +752,10 @@ private lemma Scheme.Hom.flat_and_finrank_of_fiberDegree_eq_of_affine {R : CommR
 
 variable (f : X ⟶ Y) [IsFinite f] [LocallyOfFinitePresentation f] [IsReduced Y] {n : ℕ}
 
-/-- Blueprint `proposition-multiplication-n--1`: Finite morphisms with constant fibre length
+/-- Finite morphisms with constant fibre length
 are flat.
 
-A finite morphism `f : X ⟶ Y` of finite presentation to a reduced scheme, all of whose fibres
+A finite morphism `f: X ⟶ Y` of finite presentation to a reduced scheme, all of whose fibres
 have the same degree `n`, is flat. -/
 theorem Scheme.Hom.flat_of_fiberDegree_eq (h : ∀ y, f.fiberDegree y = n) : Flat f := by
   rw [IsZariskiLocalAtTarget.iff_of_openCover (P := @Flat) Y.affineCover]
@@ -767,10 +767,10 @@ theorem Scheme.Hom.flat_of_fiberDegree_eq (h : ∀ y, f.fiberDegree y = n) : Fla
   exact (flat_and_finrank_of_fiberDegree_eq_of_affine (pullback.snd f (Y.affineCover.f i))
     fun y ↦ (Scheme.Hom.fiberDegree_of_isPullback f (.of_hasPullback _ _) y).trans (h _)).1
 
-/-- Blueprint `proposition-multiplication-n--1`: Finite morphisms with constant fibre length
+/-- Finite morphisms with constant fibre length
 are flat.
 
-A finite morphism `f : X ⟶ Y` of finite presentation to a reduced scheme, all of whose fibres
+A finite morphism `f: X ⟶ Y` of finite presentation to a reduced scheme, all of whose fibres
 have the same degree `n`, is finite flat of rank `n`: `f_* 𝒪_X` is locally free of rank `n`. -/
 theorem Scheme.Hom.finrank_eq_of_fiberDegree_eq (h : ∀ y, f.fiberDegree y = n) (y : Y) :
     f.finrank y = n := by
@@ -849,20 +849,20 @@ theorem Scheme.Hom.fiberDegree_eq_of_forall_isClosed
 
 variable [LocallyOfFinitePresentation f] [IsReduced Y]
 
-/-- Blueprint `proposition-multiplication-n--1`: Finite morphisms with constant fibre length
+/-- Finite morphisms with constant fibre length
 are flat.
 
-A finite morphism `f : X ⟶ Y` of finite presentation to a reduced Jacobson scheme (for example
+A finite morphism `f: X ⟶ Y` of finite presentation to a reduced Jacobson scheme (for example
 a reduced scheme of finite type over a field), whose fibres over all closed points of `Y` have
 the same degree `n`, is flat. -/
 theorem Scheme.Hom.flat_of_fiberDegree_eq_of_isClosed
     (h : ∀ y : Y, IsClosed {y} → f.fiberDegree y = n) : Flat f :=
   f.flat_of_fiberDegree_eq (f.fiberDegree_eq_of_forall_isClosed h)
 
-/-- Blueprint `proposition-multiplication-n--1`: Finite morphisms with constant fibre length
+/-- Finite morphisms with constant fibre length
 are flat.
 
-A finite morphism `f : X ⟶ Y` of finite presentation to a reduced Jacobson scheme, whose fibres
+A finite morphism `f: X ⟶ Y` of finite presentation to a reduced Jacobson scheme, whose fibres
 over all closed points of `Y` have the same degree `n`, is finite flat of rank `n`: `f_* 𝒪_X` is
 locally free of rank `n`. -/
 theorem Scheme.Hom.finrank_eq_of_fiberDegree_eq_of_isClosed
@@ -870,13 +870,13 @@ theorem Scheme.Hom.finrank_eq_of_fiberDegree_eq_of_isClosed
   f.finrank_eq_of_fiberDegree_eq (f.fiberDegree_eq_of_forall_isClosed h) y
 
 omit [LocallyOfFinitePresentation f] [IsReduced Y] in
-/-- Blueprint `proposition-multiplication-n--1`: Finite morphisms with constant fibre length
+/-- Finite morphisms with constant fibre length
 are flat (degree part).
 
-If a finite morphism `f : X ⟶ Y` from an integral scheme to a Jacobson scheme has all fibres
-over closed points of degree `n`, then the degree `[κ(η) : κ(f η)]` of the residue field
+If a finite morphism `f: X ⟶ Y` from an integral scheme to a Jacobson scheme has all fibres
+over closed points of degree `n`, then the degree `[κ(η): κ(f η)]` of the residue field
 extension at the generic point `η` of `X` is `n`; for `f` dominant and `Y` integral this is the
-degree `[k(X) : k(Y)]` of the extension of function fields. -/
+degree `[k(X): k(Y)]` of the extension of function fields. -/
 theorem Scheme.Hom.finrank_residueField_genericPoint_of_fiberDegree_eq_of_isClosed
     [IsIntegral X] (h : ∀ y : Y, IsClosed {y} → f.fiberDegree y = n) :
     letI := (f.residueFieldMap (genericPoint X)).hom.toAlgebra
@@ -889,18 +889,14 @@ section FiniteLocallyFree
 
 variable {X S : Scheme.{u}}
 
-/-- A morphism of schemes `f : X ⟶ S` is **finite locally free** if it is finite, flat and
-locally of finite presentation.
-
-(blueprint: `def-pc-finite-locally-free`) -/
+/-- A morphism of schemes `f: X ⟶ S` is **finite locally free** if it is finite, flat and
+locally of finite presentation. -/
 class Scheme.Hom.IsFiniteLocallyFree (f : X ⟶ S) : Prop
     extends IsFinite f, Flat f, LocallyOfFinitePresentation f
 
-/-- A morphism of schemes `f : X ⟶ S` is **finite locally free of degree `d`** if it is finite
+/-- A morphism of schemes `f: X ⟶ S` is **finite locally free of degree `d`** if it is finite
 locally free and every fibre `X_s` has degree `d`: `dim_{κ(s)} Γ(X_s, 𝒪_{X_s}) = d` for every point
-`s` of `S` (`AlgebraicGeometry.Scheme.Hom.fiberDegree`).
-
-(blueprint: `def-pc-finite-locally-free`) -/
+`s` of `S` (`AlgebraicGeometry.Scheme.Hom.fiberDegree`). -/
 class Scheme.Hom.IsFiniteLocallyFreeOfDegree (f : X ⟶ S) (d : ℕ) : Prop
     extends f.IsFiniteLocallyFree where
   fiberDegree_eq (s : S) : f.fiberDegree s = d

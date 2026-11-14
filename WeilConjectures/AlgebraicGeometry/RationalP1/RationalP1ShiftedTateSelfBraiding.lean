@@ -352,15 +352,7 @@ private theorem line_flat_and_braiding
 /-- The native Koszul braiding of the positive Tate line shifted by two with itself
 is identity wherever l is invertible.
 Source: rational projective-line triangle calculation, Second identity, interchange of
-its two shifted Tate factors; the root-frame description of the positive Tate line.
-Proof: work locally on a common compatible root frame for the positive Tate module.
-There it is a free rank-one coefficient module, and the tensor swap fixes the tensor of
-the chosen generator with itself. Descent gives identity self-symmetry of the degree-zero
-Tate line. Its flat rank-one model computes its derived tensor. After shifting each
-factor by two, the native Koszul symmetry multiplies this swap by (-1)^(2*2) = 1.
-The comparison from that model to the derived category transports the identity.
-This last step is the existing generic evenShiftCanonicalSelfSymmetry with d = 1.
-(blueprint: lem-sfb-rational-p1-shifted-tate-self-braiding). -/
+its two shifted Tate factors; the root-frame description of the positive Tate line. -/
 theorem shifted_tate_self_braiding
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (X : Scheme.{u}) [∀ x : X, Invertible (l : X.residueField x)] :

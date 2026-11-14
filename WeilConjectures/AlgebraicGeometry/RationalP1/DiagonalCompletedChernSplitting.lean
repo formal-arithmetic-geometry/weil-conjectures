@@ -12,8 +12,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalTraceTwistedSplit
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryReflectsIso
 
 /-! # Splitting off a normalized completed Chern adjunct
-
-Source: diagonal-tower trace proof (1), after positive twist and shift.
 -/
 
 @[expose] public noncomputable section
@@ -76,19 +74,7 @@ private theorem completed_line_shift_complete (l : ℕ) [Fact l.Prime] (S : Sche
   exact @Subsingleton.elim _ (hshift V hV) (e a) (e b)
 
 -- The derived biproduct structure on completed coefficients is found by unfolding.
-/-- A normalized completed Chern adjunct is the second component of a splitting.
-
-Source: blueprint latest, diagonal-tower trace proof, paragraph (1).
-(blueprint: lem-sfb-diagonal-completed-chern-splitting).
-
-Proof: positively twist and shift the recorded tower splitting, using its component
-identities. Restrict coefficients and apply derived inverse limit. The unit and
-line comparisons are invertible, and the normalization identifies the given Chern
-map with the transported second component. The shifted completed line and its
-pushforward are complete: shift preserves scalar orthogonality and derived
-pushforward does so by its exact left adjoint. Full faithfulness on complete
-objects lifts the first component. The exact faithful scalar restriction reflects
-isomorphisms on homology, and hence reflects this biproduct splitting. -/
+/-- A normalized completed Chern adjunct is the second component of a splitting. -/
 theorem completed_chern_splitting
     (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}
     [IsNoetherian X] [IsNoetherian S]

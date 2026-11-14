@@ -32,9 +32,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 /-!
 # Canonical trivialization of absolute Frobenius on the small pro-etale site
 
-Source: the main-20261015 blueprint, six-functors-basics,
-`sk-prop-sf-rf-shriek-preservation/lem-trf-absolute-frobenius-site`, and Stacks Tag 0F6W
-(blueprint: lemma-scheme-frobenius-geometric-frobenius--1).
+Source: six-functors-basics, and Stacks Tag 0F6W.
 
 All constant commutative coefficient rings are allowed. The module adjunction unit,
 evaluated on every section, fixes the trivialization; its derived version is exact

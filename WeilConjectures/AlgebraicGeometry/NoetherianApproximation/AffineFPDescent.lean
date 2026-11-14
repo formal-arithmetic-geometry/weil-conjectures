@@ -98,7 +98,7 @@ lemma map_fpDescentRelations (l : ι) :
     MvPolynomial.map (c.ι.app (fpDescentStage hc r)).hom (fpDescentRelations hc r l) = r l :=
   (exists_lift_relations hc r).choose_spec.choose_spec l
 
-/-- Blueprint `theorem-nagata-s-compactification-theorem--1`: Finite-stage model of a finitely
+/-- Finite-stage model of a finitely
 presented affine algebra.
 
 For `B = c.pt[x_σ] ⧸ (r_l)_{l ∈ ι}` over the colimit `c.pt` of a filtered diagram of rings, the

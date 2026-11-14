@@ -17,7 +17,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 # A finite flat chart with a singleton fibre
 
 Source: Stacks Project, Tags 02LK and 0BJH.
-(blueprint: lem-sbc-finite-flat-singleton-fibre-chart)
 -/
 
 @[expose] public section
@@ -29,21 +28,8 @@ namespace AlgebraicGeometry.Scheme
 set_option backward.isDefEq.respectTransparency false in
 /-- Etale localization separates the selected point from the other points of its fibre.
 
-Source: Stacks Project, Tag 02LK (more-morphisms-lemma-etale-makes-quasi-finite-finite),
-and Tag 0BJH (pione-lemma-ramification-quasi-finite-flat), first proof paragraph.
-(blueprint: lem-sbc-finite-flat-singleton-fibre-chart)
-
-Proof: Apply 02LK to the finite, hence quasi-finite, morphism at x. After an etale
-base neighbourhood T of f(x), select the finite open-and-closed piece Z containing
-an appropriate lift z of x and having only z above g(z). The map a to X and the
-map b to Y are etale and the square commutes. Flatness is preserved by base
-change and restriction; the schemes are locally Noetherian because etale maps
-are locally of finite type. For each w in Z, g is etale at w if and only if
-f is etale at a(w): the equation a f = g b and etale b identify the etale
-loci of g and a f, and etale localization on the source identifies the latter
-with the inverse image of the etale locus of f. These loci are open, so being
-etale at a point is expressed by the existence of the indicated open neighbourhood.
-No ramification hypothesis or positive-dimension hypothesis is used. -/
+Source: Stacks Project, Tag 02LK (more-morphisms-lemma-etale-makes-quasi-finite-finite), first proof
+paragraph. -/
 theorem exists_finite_flat_singleton_fibre_chart
     {X Y : Scheme.{u}} [IsLocallyNoetherian X] [IsLocallyNoetherian Y]
     (f : X ⟶ Y) [IsFinite f] [Flat f] (x : X) :

@@ -17,9 +17,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleMixedProjectionMate
 
 /-! # Normalized signed projection formula on chosen resolutions
 
-Source: main-20261015 blueprint, proper base change, perfect projection formula,
-proof paragraphs 2 and 3; Stacks Tag 0B56, equation-projection-formula-map
-(blueprint: lem-weil-pbc-signed-projection-resolution-normalization).
+Source: Stacks Tag 0B56.
 
 The source and target comparisons are the specified mixed tensor comparisons,
 with arbitrary derived isomorphisms to the chosen representatives. All operations
@@ -42,40 +40,30 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y)
   (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
   (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ S)
 
-/-- The coefficient complex pulled back termwise by the exact module pullback.
-Source: blueprint, perfect projection formula, paragraph 2
-(blueprint: lem-weil-pbc-signed-projection-resolution-normalization). -/
+/-- The coefficient complex pulled back termwise by the exact module pullback. -/
 abbrev pulledCoefficient (F : CochainComplex (proEtaleRingModules Y R) ℤ) :=
   ((proEtaleRingModulePullback f R S c).mapHomologicalComplex (.up ℤ)).obj F
 
 /-- The signed total complex C = Tot(f_* I tensor F); its second differential
-has sign (-1)^a on bidegree (a,r).
-Source: blueprint, perfect projection formula, paragraph 2
-(blueprint: lem-weil-pbc-signed-projection-resolution-normalization). -/
+has sign (-1)^a on bidegree (a,r). -/
 abbrev sourceComplex (I : CochainComplex (proEtaleRingModules X S) ℤ)
     (F : CochainComplex (proEtaleRingModules Y R) ℤ) :=
   CochainComplex.mapBifunctor
     (((proEtaleRingModuleDirectImage f R S c).mapHomologicalComplex (.up ℤ)).obj I)
     F (proEtaleOrdinaryTensor Y R)
 
-/-- The signed total complex J = Tot(I tensor f^* F), with the same sign convention.
-Source: blueprint, perfect projection formula, paragraph 2
-(blueprint: lem-weil-pbc-signed-projection-resolution-normalization). -/
+/-- The signed total complex J = Tot(I tensor f^* F), with the same sign convention. -/
 abbrev targetComplex (I : CochainComplex (proEtaleRingModules X S) ℤ)
     (F : CochainComplex (proEtaleRingModules Y R) ℤ) :=
   CochainComplex.mapBifunctor I (pulledCoefficient f R S c F) (proEtaleOrdinaryTensor X S)
 
-/-- The ordinary direct image B = f_* J, taken termwise.
-Source: blueprint, perfect projection formula, paragraph 2
-(blueprint: lem-weil-pbc-signed-projection-resolution-normalization). -/
+/-- The ordinary direct image B = f_* J, taken termwise. -/
 abbrev pushTargetComplex (I : CochainComplex (proEtaleRingModules X S) ℤ)
     (F : CochainComplex (proEtaleRingModules Y R) ℤ) :=
   ((proEtaleRingModuleDirectImage f R S c).mapHomologicalComplex (.up ℤ)).obj
     (targetComplex f R S c I F)
 
-/-- The right-derived comparison eta_H, without an injectivity restriction on H.
-Source: blueprint, perfect projection formula, paragraph 2
-(blueprint: lem-weil-pbc-signed-projection-resolution-normalization). -/
+/-- The right-derived comparison eta_H, without an injectivity restriction on H. -/
 def derivedComparison (H : CochainComplex (proEtaleRingModules X S) ℤ) :
     DerivedCategory.Q.obj
         (((proEtaleRingModuleDirectImage f R S c).mapHomologicalComplex (.up ℤ)).obj H) ⟶
@@ -83,15 +71,7 @@ def derivedComparison (H : CochainComplex (proEtaleRingModules X S) ℤ) :
   (proEtaleRingModuleDirectImage f R S c).rightDerivedFunctorUnitQ H
 
 /-- Flat-term K-flat coefficient models, the K-injective target total, and the
-invertible right-derived comparisons.
-Source: blueprint, perfect projection formula, paragraph 2
-(blueprint: lem-weil-pbc-signed-projection-resolution-normalization).
-Proof: each F^r is a retract of a finite sum of copies of R via the supplied splitting,
-so tensor with it is exact. Boundedness and the bounded-above flat K-flat criterion
-make F K-flat. Exact pullback preserves the splitting, the bounds, and the flat
-K-flat representative class. The split-perfect tensor K-injective lemma then makes
-J K-injective, without boundedness of I. The K-injective total-derived comparison
-lemma makes eta_I and eta_J invertible. -/
+invertible right-derived comparisons. -/
 theorem model_properties
     (I : CochainComplex (proEtaleRingModules X S) ℤ) (hI : I.IsKInjective)
     (F : CochainComplex (proEtaleRingModules Y R) ℤ)
@@ -149,9 +129,7 @@ variable (a : ProEtaleTensorModel Y R) (b : ProEtaleTensorModel X S)
 
 /-- The specified S = m_Y ((eta_I^{-1} Rf_* alpha) tensor beta^{-1}).
 Its mixed tensor factor is normalized on every flat K-flat resolution, including
-when the complex f_* I itself is not K-flat.
-Source: blueprint, perfect projection formula, paragraphs 2 and 3
-(blueprint: lem-weil-pbc-signed-projection-resolution-normalization). -/
+when the complex f_* I itself is not K-flat. -/
 def sourceModel :
     a.tensor.obj ((proEtaleRingDerivedDirectImage f R S c).obj K, P) ≅
       DerivedCategory.Q.obj (sourceComplex f R S c I F) :=
@@ -164,9 +142,7 @@ def sourceModel :
       F (model_properties f R S c I hI F package bounded).1
 
 /-- The specified T, using exact pullback of beta^{-1}, then ell_F, mixed tensor on X,
-and eta_J^{-1}. This is an isomorphism in the derived category.
-Source: blueprint, perfect projection formula, paragraphs 2 and 3
-(blueprint: lem-weil-pbc-signed-projection-resolution-normalization). -/
+and eta_J^{-1}. This is an isomorphism in the derived category. -/
 def targetModel :
     (proEtaleRingDerivedDirectImage f R S c).obj
         (b.tensor.obj (K, (proEtaleRingDerivedPullback f R S c).obj P)) ≅
@@ -180,9 +156,7 @@ def targetModel :
     (@asIso _ _ _ _ (derivedComparison f R S c (targetComplex f R S c I F))
       (model_properties f R S c I hI F package bounded).2.2.2.2).symm
 
-/-- The ordinary signed total counit mate t, using the published total construction.
-Source: blueprint, perfect projection formula, paragraph 2
-(blueprint: lem-weil-pbc-signed-projection-resolution-normalization). -/
+/-- The ordinary signed total counit mate t, using the published total construction. -/
 def totalMate : sourceComplex f R S c I F ⟶ pushTargetComplex f R S c I F := by
   letI := SheafOfModules.monoidalCategory R
   letI := SheafOfModules.monoidalCategory S
@@ -193,9 +167,7 @@ def totalMate : sourceComplex f R S c I F ⟶ pushTargetComplex f R S c I F := b
 
 /-- The specified finite-total retract inverse s. The existing construction has
 summand (1 tensor p_r) q_{I^a,N_r} f_*(1 tensor f^* i_r), by
-tensorAdjunctionTotalInverse_summand, including rank zero. No i_r or p_r is a chain map.
-Source: blueprint, perfect projection formula, paragraph 2
-(blueprint: lem-weil-pbc-signed-projection-resolution-normalization). -/
+tensorAdjunctionTotalInverse_summand, including rank zero. No i_r or p_r is a chain map. -/
 def totalInverse : pushTargetComplex f R S c I F ⟶ sourceComplex f R S c I F := by
   letI := SheafOfModules.monoidalCategory R
   letI := SheafOfModules.monoidalCategory S
@@ -207,9 +179,7 @@ def totalInverse : pushTargetComplex f R S c I F ⟶ sourceComplex f R S c I F :
     (fun {_ _ _ _} v z ↦ proEtaleOrdinaryTensorPullback_naturality f R S c _ _ _ _ v z)
     j hj I F bounded package.N package.i package.p package.splitting
 
-/-- The inverse S^{-1} Q_Y(s) T, for the supplied representatives and splitting package.
-Source: blueprint, perfect projection formula, paragraph 3
-(blueprint: lem-weil-pbc-signed-projection-resolution-normalization). -/
+/-- The inverse S^{-1} Q_Y(s) T, for the supplied representatives and splitting package. -/
 def inverse :
     (proEtaleRingDerivedDirectImage f R S c).obj
         (b.tensor.obj (K, (proEtaleRingDerivedPullback f R S c).obj P)) ⟶
@@ -257,22 +227,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- On every chosen K-injective and bounded strict-perfect representative, the canonical
 counit mate is T^{-1} Q_Y(t) S, and S^{-1} Q_Y(s) T is its two-sided inverse.
 No boundedness of K or I, and no chain-map condition on the splittings, is imposed.
-Source: blueprint, perfect projection formula, paragraphs 2 and 3; Stacks Tag 0B56
-(blueprint: lem-weil-pbc-signed-projection-resolution-normalization).
-Proof: model_properties gives the flat K-flat models and the K-injective total.
-The fixed-tensor localization normalization gives precisely the mixed comparisons
-in sourceModel and targetModel. Naturality of the ordinary counit mate identifies
-its finite-free components with finite sums of the unit case. Its retract inverse
-is (1 tensor p) q f_*(1 tensor f^* i); the splitting identity proves both component
-inverse laws. Naturality then makes these inverses commute with both differentials,
-with the same (-1)^a on the coefficient differential. Boundedness of F makes every
-relevant diagonal finite, so direct image preserves its biproduct and gives chain
-inverse laws. The mixed projection mate lemma identifies the localized forward
-map with the canonical derived mate at Q_X I and Q_Y F. Cancel eta_I and eta_J.
-Naturality of the canonical mate in both inputs conjugates that equality by alpha
-and beta^{-1}, giving exactly S and T. Localize the two chain inverse laws and
-cancel S and T to obtain the two displayed identity equations. Uniqueness of an
-inverse gives independence of every choice; nothing used boundedness of K. -/
+Source: Stacks Tag 0B56. -/
 theorem normalization :
     derivedProjectionFormulaMate (proEtaleRingDerivedPullback f R S c)
       (proEtaleRingDerivedDirectImage f R S c) (proEtaleRingDerivedAdjunction f R S c)

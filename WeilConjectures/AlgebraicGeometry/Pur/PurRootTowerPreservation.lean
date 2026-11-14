@@ -45,9 +45,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
 import WeilConjectures.AlgebraicGeometry.InternalModuleOperationsTransport
 
 /-! # Preservation of the cyclotomic inverse limit
-
-Source: the Roots of unity and Integral twist paragraphs of the Cartesian twists proof.
-(blueprint: lem-pur-root-tower-preservation).
 -/
 
 @[expose] public noncomputable section
@@ -61,29 +58,7 @@ attribute [local instance] IsCofiltered.isConnected
 /-- Inverse image preserves the particular root tower defining Z_ell(1).
 It need not preserve arbitrary inverse limits.
 
-Source: literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/
-sk-prop-sfb-cartesian-coefficients-twists.proof.md, Roots of unity and Integral twist;
-Stacks Project, Tags 09A5 and 03CF.
-(blueprint: lem-pur-root-tower-preservation).
-
-Proof: take the pro-etale cover carrying compatible primitive roots. On each
-member the finite root modules have compatible bases over the finite constant
-rings Z/ell^(n+1). Restriction to slices preserves their sectionwise inverse
-limits. Use weakly etale localization to identify these slices with the small
-pro-etale sites of the covering schemes. The normalized slice inverse-image
-comparison transports the bases. Under the induced limit bases the module limit
-comparison is the base coefficient limit comparison, which is invertible by
-lem-pur-base-completion-pullback-iso. Apply
-lem-pur-inverse-image-compatible-free-tower on small site models. Since these
-models enlarge the Hom universe, first raise all sheaf values by ULift into the
-next universe. Lifted sheafification and inverse image have their canonical
-unit-normalized comparisons; their fully faithful lift preserves the relevant
-limits and reflects isomorphisms. Transport back to the original sites and value
-universe. Forgetting scalars and then sets preserves limits
-and reflects isomorphisms. The base-changed covering covers X, so the comparison
-is invertible globally. The limit-comparison criterion gives the displayed
-PreservesLimit assertion. The empty-site case follows from the same covering
-criterion and does not require choosing a primitive global root. -/
+Source: Stacks Project, Tags 09A5 and 03CF. -/
 private theorem globalPrimeUnit (Y : Scheme.{u}) (l : ℕ)
     [∀ y : Y, Invertible (l : Y.residueField y)] : IsUnit (l : Γ(Y, ⊤)) := by
   apply Y.toRingedSpace.isUnit_of_isUnit_germ

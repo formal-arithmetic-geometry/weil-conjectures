@@ -11,14 +11,13 @@ public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationLocal
 /-!
 # The strict henselization of a regular scheme is a domain
 
-Let `S` be a regular scheme and `s : Spec Ω ⟶ S` a geometric point. The strict henselization
+Let `S` be a regular scheme and `s: Spec Ω ⟶ S` a geometric point. The strict henselization
 `𝒪^{sh}_{S,s}` is the filtered colimit of the rings `Γ(V, 𝒪_V)` of the affine pointed étale
 neighbourhoods `(V, v)` of `s`. A product `ab` vanishing in the colimit vanishes in some
 `Γ(V, 𝒪_V)`; the local ring of `V` at `v` is regular (`V` is étale over the regular `S`), hence a
 domain, so `a` or `b` is killed by a section not vanishing at `v`, which becomes a unit in the
 colimit (the strict henselization is local), hence vanishes in the colimit. So `𝒪^{sh}_{S,s}` is a
-domain and the strict localization is integral (blueprint
-`lemma-cohomology-near-two-transverse-divisors--1`).
+domain and the strict localization is integral.
 
 ## Main statements
 
@@ -72,8 +71,7 @@ lemma colimit_ι_strictHenselizationDiagram_eq_zero_of_germ_eq_zero
 
 variable [IsRegular S] (s)
 
-/-- The strict henselization of a regular scheme at a geometric point is a domain
-(blueprint `lemma-cohomology-near-two-transverse-divisors--1`). -/
+/-- The strict henselization of a regular scheme at a geometric point is a domain. -/
 theorem isDomain_strictHenselization_of_isRegular : IsDomain (strictHenselization s) := by
   refine @NoZeroDivisors.to_isDomain _ _ _ ⟨fun {a b} hab ↦ ?_⟩
   obtain ⟨x, hx⟩ := exists_forall_mem_range_colimit_ι 2 ![a, b]
@@ -103,8 +101,7 @@ theorem isDomain_strictHenselization_of_isRegular : IsDomain (strictHenselizatio
   · exact Or.inl (colimit_ι_strictHenselizationDiagram_eq_zero_of_germ_eq_zero k.unop _ _ h)
   · exact Or.inr (colimit_ι_strictHenselizationDiagram_eq_zero_of_germ_eq_zero k.unop _ _ h)
 
-/-- The strict localization of a regular scheme at a geometric point is irreducible
-(blueprint `lemma-cohomology-near-two-transverse-divisors--1`). -/
+/-- The strict localization of a regular scheme at a geometric point is irreducible. -/
 theorem irreducibleSpace_strictLocalization_of_isRegular :
     IrreducibleSpace (strictLocalization s) := by
   have := isDomain_strictHenselization_of_isRegular s

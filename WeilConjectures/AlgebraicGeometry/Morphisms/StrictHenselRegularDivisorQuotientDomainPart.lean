@@ -25,11 +25,6 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The divisor quotient of the canonical strict henselization is a domain.
 Source: Stacks Project, Tag 00NP.
-Proof: The local-structure theorem makes the canonical strict henselization local.
-Since b(f) is not a unit, its principal ideal is proper, so the quotient is nontrivial
-and local. The regularity component makes this quotient regular, hence regular local.
-Apply the proved upstream theorem that a regular local ring is a domain.
-(blueprint: lem-sbc-strict-hensel-regular-divisor-quotient-domain-part)
 -/
 theorem strictHenselizationRing_divisor_quotient_domain_part
     (R : CommRingCat.{u}) [IsRegularRing R] (f : R)

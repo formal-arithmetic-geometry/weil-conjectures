@@ -109,7 +109,6 @@ import Mathlib.CategoryTheory.Functor.ReflectsIso.Jointly
 /-! # Assembly of compatible coefficient-level isomorphisms
 
 Source: Zheng Construction 4.1, module sheaves on the ringed sequence site.
-(blueprint: lem-coef-system-iso-assembly)
 -/
 
 @[expose] public noncomputable section
@@ -286,16 +285,7 @@ private theorem assemble_iso_evaluation
 end Assembly
 
 /-- Compatible isomorphisms on every coefficient level assemble to a system isomorphism.
-Source: Zheng Construction 4.1, the actual module sheaves on the product site.
-(blueprint: lem-coef-system-iso-assembly).
-
-Proof: undo the identity scalar restriction in evaluation to obtain linear maps on
-the actual component modules. Naturality in the site and compatibility with horizontal
-transitions imply naturality on the product category, since every product arrow
-factors as a vertical arrow followed by a horizontal arrow. This constructs a module
-sheaf morphism. Evaluations are jointly faithful, so they jointly reflect
-isomorphisms in the abelian system category. Each evaluation is the prescribed
-isomorphism, and therefore the constructed morphism is invertible. -/
+Source: Zheng Construction 4.1, the actual module sheaves on the product site. -/
 theorem systemIsoOfEvaluation_exists
     {M N : Systems.{c, v, max c v r} J B τ}
     (δ : ∀ n : ℕ, (evaluation.{c, v, max c v r} J B τ n).obj M ≅

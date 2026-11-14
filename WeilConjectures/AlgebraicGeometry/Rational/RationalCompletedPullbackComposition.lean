@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.Pbc.PbcActualRingedExchange
 /-! # Completed composition and descent to all raw rational fraction arrows.
 
 Source: Bhatt--Scholze, Remark 6.8.15, p. 62; Stacks Tags 03CB, 0D6D, 07A4, 099N.
-(blueprint: lem-per-rational-completed-pullback-composition).
 -/
 
 @[expose] public noncomputable section
@@ -39,27 +38,7 @@ variable {X Y Z : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] [IsNoetherian Z]
 set_option maxHeartbeats 700000 in
 -- Nested chart conversions arise in the explicit tensor-section normalization.
 /-- Completed composition and descent to all raw rational fraction arrows.
-Source: Stacks Tags 099N, 099J, 0A0E, 0B65 and 0DV0; BS Remark 6.8.15.
-
-Proof: apply QuotientCompleted.compositor_unit and restrict its natural
-isomorphism to bounded constructible complete objects. Its underlying objects
-are exactly the supplied completed functors; full-subcategory transport gives
-integralComp and the displayed strict quotient-unit equation. The supplied
-unit_isIso fields allow cancellation of gamma_g, gamma_h and gamma_composite.
-Identify the supplied ordinary comparisons with their normalized balanced maps
-using module_unit, hmodule and derived_normalization, testing on flat-term K-flat
-representatives. The ordinary composition square then follows from
-localizedOrdinaryPullbackNormalization. Substitute alpha_normalization three
-times into that square and use naturality of the h comparison at gamma_g inverse.
-Cancel the invertible gamma factors and obtain the displayed alpha equation on
-integral objects. Define rawComp on each raw object by the displayed rationalized
-integralComp with the recorded object transports. For f/varpi^n, raw_fractions
-reduces naturality to the integral compositor naturality multiplied by the same
-central denominator. Its inverse is the rationalization of integralComp inverse;
-the two inverse identities follow by functoriality. All raw objects are integral
-objects, so the component calculation proves equality of natural transformations.
-No faithfulness of realization is used.
-(blueprint: lem-per-rational-completed-pullback-composition). -/
+Source: Stacks Tags 099N, 099J, 0A0E, 0B65 and 0DV0; BS Remark 6.8.15. -/
 theorem rationalCompletedPullbackComposition (g : Y ⟶ X) (h : Z ⟶ Y)
     (sX : RationalModuleRealization l E X) (sY : RationalModuleRealization l E Y)
     (sZ : RationalModuleRealization l E Z)

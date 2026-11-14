@@ -60,13 +60,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
 attribute [local irreducible] systemRing ringPresheaf rings
 
 /-- Evaluation commutes with open restriction by the identity on sections.
-Source: Stacks 03DJ (blueprint: lem-coef-open-restriction-evaluation-sections).
-Proof: Both composites have section group N(n,W.left). The scalar action in each
-case is restriction along the identity maps supplied by openRing and evaluation_ring.
-Their composite ring maps agree by functoriality of equality transport. Apply
-pushforwardComp on both sides and pushforwardCongr to this equality. Each comparison
-is identity on sections, giving the stated normalization. This construction is
-natural in N and W because each pushforward comparison is natural. -/
+Source: Stacks 03DJ. -/
 theorem openRestrictionEvaluationSections (U : C) (n : ℕ) :
     ∃ δ : openRestriction.{c, v, r} J B τ U ⋙
       evaluation.{max c v, v, max c v r} (J.over U)

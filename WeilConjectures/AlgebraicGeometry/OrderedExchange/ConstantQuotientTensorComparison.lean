@@ -997,29 +997,7 @@ private theorem comparisonOnRepresentatives (n : ℕ)
 /-- Evaluated reduction is tensor by any flat K-flat resolution of the constant quotient,
 and its specified pullback square is the canonical tensor square. This statement makes
 no finite-support or finite-projectivity assumption on the coefficient resolution.
-Source: Stacks Tags 06YY (derived localization), 07A4 (derived tensor), 099M (adic
-reduction), and 0B56 (canonical tensor/pullback comparison).
-(blueprint: lem-sp-constant-quotient-tensor-comparison).
-
-Proof: construct the ordinary derived tensor models by flat K-flat localization on
-both sites. On V, exact evaluation of the universal reduction counit identifies the
-left-hand functor on a flat K-flat complex P with restricted scalar extension of P
-to the finite coefficient ring. The canonical finite constant-to-function comparison
-identifies that coefficient ring with the constant quotient. Balanced tensor symmetry
-and cancellation identify restricted extension with P tensor the quotient complex.
-Tensoring the given quasi-isomorphism q with P is a quasi-isomorphism, since P is
-K-flat. Localize its inverse to replace the quotient by F. These comparisons are
-natural in P and descend through the resolving-class localization to eV.
-Exact inverse image carries F and q to the corresponding resolution on U: inverse
-image preserves constant module realizations and the finite coefficient comparison.
-The same construction on U therefore gives eU, with coefficient Lf^* Q(F).
-On a flat K-flat P both sides of the displayed square are the balancing map sending
-m tensor a to pullback(m) tensor pullback(a). The defining normalization of
-reductionPullIso, together with exact evaluation and its pullback factorization,
-identifies its side of this square with that same map. Cancel the resolution
-quasi-isomorphisms and descend the equality along localization. This proves the
-square for every M. No projection formula or invertibility of its mate is used;
-zero coefficient modules and the empty site are covered by the same constructions. -/
+Source: Stacks Tags 06YY (derived localization), 07A4 (derived tensor), 099M (adic reduction). -/
 theorem constantQuotientTensorComparison (n : ℕ)
     (F : CochainComplex (reductionModules V (exchangeConstantRing V A)) ℤ)
     (hF : proEtaleFlatRepresentatives V (exchangeConstantRing V A) F)

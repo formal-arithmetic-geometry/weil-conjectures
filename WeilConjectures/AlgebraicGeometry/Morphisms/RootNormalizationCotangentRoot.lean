@@ -27,32 +27,7 @@ namespace AlgebraicGeometry.Scheme
 /-- The root class spans the cotangent space of each normalized factor at the root prime.
 
 Source: Stacks Project, Tag 09EB (Galois degree formula), Tag 0BRM (Abhyankar),
-Tag 09E7 (index-one clause), and Tag 0307 (localization of integral closure).
-(blueprint: lem-sbc-root-normalization-cotangent-root)
-
-Proof: Write n=|G| and t for the root. The hypothesis identifies the base prime
-with (t), so its stalk is A_(t). Since g is regular and H/(g) is a domain,
-H_(g) is a DVR with uniformizer g. The monic root algebra is free over H,
-the equation t^n=g makes t regular, and A/(t)=H/(g). Thus the regular local
-ring A_(t) is a DVR with uniformizer t, and its extension over H_(g) has
-ramification index n. The cartesian chart beta restricts W to a G-torsor on
-D(f); localizing at (g) gives a G-torsor on the fraction field of H_(g).
-Each connected factor is Galois for its stabilizer subgroup in G. By 09EB,
-its ramification index divides the stabilizer order, which divides n, and
-its residue extension is separable because n is invertible. The factors are
-tame. Abhyankar 0BRM for the index-n root extension makes the normalized
-base-change factors adically formally smooth. The index-one implication of
-09E7 says that the valuation of t in each factor is one. By 0307, localizing
-the concrete relative normalization gives precisely these integral closures;
-further localization at x gives their DVR local rings, with the displayed
-structural stalk map. Every element of their maximal ideal is therefore a
-multiple of the image of t. Passing to the quotient by the square of that
-ideal gives the asserted cotangent spanning statement. Only this first-order
-conclusion is retained; the caller uses Noetherianity and Nakayama to recover
-ideal generation. No Cartier centre, divisor generic point, or comparison
-with the base maximal ideal occurs in this statement. For n=1 the root base
-change is the identity and the same tame calculation applies. Empty factors
-have no x and give no assertion. -/
+Tag 09E7 (index-one clause), and Tag 0307 (localization of integral closure). -/
 theorem root_normalization_cotangent_root
     {L U : Scheme.{u}} (i : U ⟶ L)
     (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)

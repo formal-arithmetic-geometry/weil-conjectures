@@ -18,8 +18,7 @@ import Mathlib.AlgebraicGeometry.PullbackCarrier
 
 /-! # Images of single stabilizer components
 
-Source: Stacks Project, Tag 03SF.
-(blueprint: lem-sbc-affine-torsor-component-image-orbit) -/
+Source: Stacks Project, Tag 03SF. -/
 
 @[expose] public section
 universe u
@@ -137,23 +136,7 @@ private theorem orbit_deck_cover
 set_option linter.unusedVariables false in
 /-- Membership in one descended component is exactly membership in its label orbit.
 
-Source: Stacks Project, Tag 03SF, stabilizer quotients of Galois covers.
-Proof: write V = D(h) and B = D(ι g). The finite faithfully flat map V -> B is
-finite étale, and the unique rotation condition makes V ×_B V the disjoint union
-of the deck graphs indexed by G (check the finite étale map on geometric fibres).
-For the subgroup K, C is integral over its invariant subring: each c satisfies
-its monic orbit polynomial. Thus q:V -> D(h in C^K) is surjective, also after base
-change. The two projection equations identify q followed by f with the explicit
-section over H. Pulling this image back to V, the deck-graph description gives
-exactly the union of the translates of that section. Their labels are the orbit
-of x under fixedPunctureDescentAction, by the reconstruction and label laws.
-In the pulled-back splitting the summands are disjoint, so a point on the y-th
-section belongs to this image precisely when y is in that orbit. Membership in
-an open subscheme is detected after extension of a residue field; hence this
-geometric-fibre computation proves the equivalence for all ordinary points a.
-For d = 0 the binder x is empty, and for G trivial the criterion selects x alone.
-No completeness or distinctness of any representative family is assumed.
-(blueprint: lem-sbc-affine-torsor-component-image-orbit) -/
+Source: Stacks Project, Tag 03SF, stabilizer quotients of Galois covers. -/
 theorem affine_torsor_component_image_orbit
     (R H : CommRingCat.{u}) (g : R) (ι : R →+* H)
     (C : Type u) [CommRing C] [Algebra H C] [IsDomain C]
@@ -382,7 +365,7 @@ surjective. Pulling the open immersion and its section equation back along
 this cover identifies its range with the union of the translated split
 sections. Membership therefore supplies a deck label ζ with A(ζ)x = y;
 membership is unchanged after extending the residue field to an algebraic
-closure. (blueprint: lem-sbc-affine-torsor-component-image-orbit-forward) -/
+closure. -/
 theorem affine_torsor_component_image_orbit_forward
     (R H : CommRingCat.{u}) (g : R) (ι : R →+* H)
     (C : Type u) [CommRing C] [Algebra H C] [IsDomain C]
@@ -454,7 +437,7 @@ labelled A(ζ)x lies in the pulled-back range. Since the invariant-ring map is
 integral and surjective on the relevant basic opens, this membership descends
 through the stabilizer quotient to the original open immersion. Thus a deck
 label ζ with A(ζ)x = y gives membership of the explicit section over every
-point a. (blueprint: lem-sbc-affine-torsor-component-image-orbit-backward) -/
+point a. -/
 theorem affine_torsor_component_image_orbit_backward
     (R H : CommRingCat.{u}) (g : R) (ι : R →+* H)
     (C : Type u) [CommRing C] [Algebra H C] [IsDomain C]

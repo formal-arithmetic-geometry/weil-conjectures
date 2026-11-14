@@ -14,9 +14,6 @@ public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 
 /-!
 # Cohomological support on the small pro-etale site
-
-Source: the Weil conjectures blueprint, `sec-smooth-purity/sk-def-sf-operations`,
-`def-weil-cohomological-support`, order 1458 (blueprint: def-weil-cohomological-support).
 -/
 
 @[expose] public section
@@ -29,10 +26,7 @@ namespace AlgebraicGeometry.Scheme
 pro-etale site of `Y` is the set of integers where its cohomology sheaf is nonzero.
 The complex is viewed in `proEtaleDerivedCategory Y A`; cohomology depends only on
 its quasi-isomorphism class. Here nonzero means not a zero object of the category
-of sheaves of modules, rather than inequality with a chosen zero object.
-
-Source: the Weil conjectures blueprint, `sec-smooth-purity/sk-def-sf-operations`,
-order 1458 (blueprint: def-weil-cohomological-support). -/
+of sheaves of modules, rather than inequality with a chosen zero object. -/
 def proEtaleCohomologicalSupport {Y : Scheme.{t}} {A : Type t} [CommRing A]
     (K : proEtaleDerivedCategory Y A) : Set ℤ :=
   {r | ¬ CategoryTheory.Limits.IsZero

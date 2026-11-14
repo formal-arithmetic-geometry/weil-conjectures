@@ -19,7 +19,6 @@ import WeilConjectures.CategoryTheory.Scalar.ScalarLocalizationSheafExact
 /-! # Normalized coefficients and exact extension for rational module localization
 
 Source: Bhatt--Scholze, Lemma 6.8.2 and the construction of Proposition 6.8.14(2).
-(blueprint: lem-per-rational-module-localization-coefficients)
 -/
 
 @[expose] public noncomputable section
@@ -38,8 +37,7 @@ namespace RationalModuleLocalizationTransport
 section
 
 /-- Normalized coefficient helper for completed-to-rational extension.
-Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2).
-(blueprint: lem-per-rational-module-localization-coefficients). -/
+Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2). -/
 def rationalSections (X : Scheme.{u}) :
     E →+* RingCat.sectionsSubring
       ((rationalCoefficientSheaf l X E).obj ⋙ forget₂ CommRingCat RingCat) := by
@@ -53,8 +51,7 @@ def rationalSections (X : Scheme.{u}) :
       map_add' := by intros; ext; rfl }
 
 /-- Normalized coefficient helper for completed-to-rational extension.
-Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2).
-(blueprint: lem-per-rational-module-localization-coefficients). -/
+Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2). -/
 @[instance_reducible]
 def rationalLinear (X : Scheme.{u}) :
     Linear E (pbcModules X (rationalCoefficientSheaf l X E)) :=
@@ -212,14 +209,12 @@ private theorem integralExtensionExact (X : Scheme.{u}) :
     preservesFiniteColimits_of_natIso (extensionComp a e.hom _ he)⟩
 
 /-- Normalized coefficient helper for completed-to-rational extension.
-Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2).
-(blueprint: lem-per-rational-module-localization-coefficients). -/
+Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2). -/
 def integralToField : PbcIntegralRing l E →+* E :=
   (algebraMap (Padic.coefficientExtensionIntegers l E) E).comp ULift.ringEquiv.toRingHom
 
 /-- Normalized coefficient helper for completed-to-rational extension.
-Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2).
-(blueprint: lem-per-rational-module-localization-coefficients). -/
+Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2). -/
 theorem coefficientAlgebraMap (a : PbcIntegralRing l E) :
     pbcRationalCoefficientEquiv l E (algebraMap _ _ a) = integralToField l E a := by
   dsimp only [pbcRationalCoefficientEquiv, RingEquiv.trans_apply]
@@ -258,8 +253,7 @@ private theorem completedScalarSquare (X : Scheme.{u})
   rfl
 
 /-- Normalized coefficient helper for completed-to-rational extension.
-Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2).
-(blueprint: lem-per-rational-module-localization-coefficients). -/
+Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2). -/
 theorem completedExtensionExact (X : Scheme.{u})
     (i : pbcAdicCompletion X (pbcIntegralDatum l E) ≅ integralCoefficientSheaf l X E) :
     PreservesFiniteLimits (pbcExtend (i.hom ≫ integralRationalCoefficientMap l E X)) ∧
@@ -279,8 +273,7 @@ theorem completedExtensionExact (X : Scheme.{u})
   exact ⟨preservesFiniteLimits_of_natIso e, preservesFiniteColimits_of_natIso e⟩
 
 /-- Normalized coefficient helper for completed-to-rational extension.
-Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2).
-(blueprint: lem-per-rational-module-localization-coefficients). -/
+Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2). -/
 theorem completedRestrictionLinear (X : Scheme.{u})
     (i : pbcAdicCompletion X (pbcIntegralDatum l E) ≅ integralCoefficientSheaf l X E)
     (hi : pbcCompletedScalar X (pbcIntegralDatum l E) ≫ i.hom =

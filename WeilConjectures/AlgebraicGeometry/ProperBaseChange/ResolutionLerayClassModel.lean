@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.Direct.DirectImageResolutionNormalizati
 
 /-! # The Leray comparison on a supplied K-injective model
 
-Source: Stacks Project, cohomology.tex, Tags 0D5W, 0D5X and 079V.
-(blueprint: lem-weil-pbc-resolution-leray-class-model).
+Source: Stacks Project, Tags 0D5W, 0D5X and 079V.
 -/
 
 @[expose] public section
@@ -35,14 +34,7 @@ namespace AlgebraicGeometry
 
 /-- On a supplied K-injective model, the inverse composite-resolution comparison,
 Leray comparison, and direct-image comparison give the ordinary derived-section unit.
-Source: Stacks Project, cohomology.tex, Tags 0D5W, 0D5X and 079V.
-(blueprint: lem-weil-pbc-resolution-leray-class-model).
-
-Proof: Normalize the comparison between the two derived direct images on the supplied
-model. Naturality of the universal Leray map moves the supplied derived isomorphism
-across it. On the K-injective complex the composite-resolution comparison is inverse
-to its derived unit. Cancel that comparison and apply the universal Leray unit equation.
-No homology degree or local cohomology class is used. -/
+Source: Stacks Project, Tags 0D5W, 0D5X and 079V. -/
 theorem resolutionLerayClassModel
     {X Y : RingedSpace.{u}}
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X))]

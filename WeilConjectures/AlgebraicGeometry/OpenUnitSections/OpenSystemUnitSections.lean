@@ -9,9 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearDerivedCalc
 
 /-! # Actual section carriers and normalized open-extension units
 
-Source: Mathlib continuous module pushforward and adjunction Hom equivalences;
-Stacks 03DI--03DJ, with the `OpenSystems` normalization identities.
-(blueprint: lem-pur-open-system-unit-sections)
+Source: Stacks 03DI--03DJ, with the `OpenSystems` normalization identities.
 
 Carrier equalities are proved before specializing the coefficient systems. Explicit transports
 then keep the unit calculations from repeatedly unfolding the coefficient and sheafification
@@ -455,15 +453,7 @@ private theorem localized_hom_ext_cast
   exact he V x
 
 /-- Maps from an evaluated open extension are determined by the transported system unit.
-Source: Stacks 03DI--03DJ and the normalized `OpenSystems.unit_evaluation` identity.
-(blueprint: lem-pur-open-system-unit-sections)
-
-Proof: identify the evaluated extension with the actual ordinary extension. Its adjunction
-Hom equivalence is injective, and its value is precomposition by the ordinary unit followed
-by restriction of the proposed morphism. Evaluate on slice sections. The normalized system
-unit is carried to that ordinary unit by `rawUnit_evaluation`; the extension evaluation
-isomorphism cancels, so the assumed equality on system unit sections gives equality of the
-adjunction transposes and hence of the original morphisms. No flatness is used. -/
+Source: Stacks 03DI--03DJ and the normalized `OpenSystems.unit_evaluation` identity. -/
 theorem open_level_hom_ext_raw
     (hO : ∀ (n : ℕ) N V x,
       HEq (((O.restrictionEvaluation n).hom.app N).val.app V x) x)

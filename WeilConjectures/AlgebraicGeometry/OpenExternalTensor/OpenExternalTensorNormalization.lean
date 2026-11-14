@@ -17,10 +17,7 @@ import WeilConjectures.Algebra.Homology.SiteDerivedTensorDescentIndependentCoeff
 /-!
 # Normalized open external tensor comparison
 
-Source: the symmetry paragraph of the proof of `lem-sf-kunneth-coherence`,
-`sec-six-functors/sk-thm-sf-kunneth-relative`, blueprint main-20261015;
-Stacks Project, Tags 0GL1, 03S6, 0B65
-(blueprint: lem-sf-open-external-tensor-normalization).
+Source: Stacks Project, Tags 0GL1, 03S6, 0B65.
 
 The auxiliary constructions use ordinary unbounded finite-coefficient categories.
 All comparisons are the canonical adjunction, base-change and projection maps.
@@ -44,8 +41,7 @@ open WeilConjectures
 
 variable (A : Type (u + 1)) [CommRing A] [Finite A]
 
-/-- Transport open extension along equality of its geometric map. Source: Stacks 03DI
-(blueprint: lem-sf-open-external-tensor-normalization). -/
+/-- Transport open extension along equality of its geometric map. Source: Stacks 03DI. -/
 def shriekCongr {U V : Scheme.{u}} {f g : U ⟶ V}
     [IsOpenImmersion f] [IsOpenImmersion g] (h : f = g) :
     finiteShriek A f ≅ finiteShriek A g :=
@@ -53,9 +49,7 @@ def shriekCongr {U V : Scheme.{u}} {f g : U ⟶ V}
 
 /-- The two chosen intermediate products and all their canonical projection squares.
 The outer product cones are specified separately by the final statement. These fields
-only record choices of the two factorizations of the product open, with their equations.
-Source: the two factorizations in the node's statement and proof steps 3, 4, 6
-(blueprint: lem-sf-open-external-tensor-normalization). -/
+only record choices of the two factorizations of the product open, with their equations. -/
 structure Diagram {X Y Xb Yb : Scheme.{u}} (j : X ⟶ Xb) (k : Y ⟶ Yb)
     (T Tb : Scheme.{u}) [IsOpenImmersion j] [IsOpenImmersion k] where
   S : Scheme.{u}
@@ -98,8 +92,7 @@ variable {X Y Xb Yb T Tb : Scheme.{u}} {j : X ⟶ Xb} {k : Y ⟶ Yb}
   [IsOpenImmersion j] [IsOpenImmersion k]
 
 /-- Swap the factors, on the same chosen fiber product. This means that the swapped
-product has already been transported back along its canonical swap isomorphism.
-Source: proof step 7 (blueprint: lem-sf-open-external-tensor-normalization). -/
+product has already been transported back along its canonical swap isomorphism. -/
 def Diagram.swap (d : Diagram j k T Tb) : Diagram k j T Tb where
   S := d.S'
   S' := d.S
@@ -129,16 +122,13 @@ def Diagram.swap (d : Diagram j k T Tb) : Diagram k j T Tb where
   left := d.right
   right := d.left
 
-/-- The ambient external product of the two extensions.
-Source: the definition of H in proof step 6
-(blueprint: lem-sf-open-external-tensor-normalization). -/
+/-- The ambient external product of the two extensions. -/
 def ambient (d : Diagram j k T Tb) (K : FiniteD A X) (L : FiniteD A Y) : FiniteD A Tb :=
   FiniteOpenProduct.tensor A Tb
     ((FiniteOpenProduct.pull A d.pb).obj ((finiteShriek A j).obj K))
     ((FiniteOpenProduct.pull A d.qb).obj ((finiteShriek A k).obj L))
 
-/-- The external product on the open.
-Source: D in the statement (blueprint: lem-sf-open-external-tensor-normalization). -/
+/-- The external product on the open. -/
 def inside (d : Diagram j k T Tb) (K : FiniteD A X) (L : FiniteD A Y) : FiniteD A T :=
   FiniteOpenProduct.tensor A T
     ((FiniteOpenProduct.pull A d.p).obj K) ((FiniteOpenProduct.pull A d.q).obj L)
@@ -146,8 +136,7 @@ def inside (d : Diagram j k T Tb) (K : FiniteD A X) (L : FiniteD A Y) : FiniteD 
 /-- The prescribed first-factor construction: beta for j, gamma for j₁, beta for k,
 then signed symmetry, gamma for k₁, signed symmetry inside k₁!, and the normalized
 composition comparison. All equalities are transported by pullback composition.
-Source: proof steps 3 and 4, Stacks 03S6 and 0GL1
-(blueprint: lem-sf-open-external-tensor-normalization). -/
+Source: proof steps 3 and 4, Stacks 03S6 and 0GL1. -/
 def comparison (d : Diagram j k T Tb) (K : FiniteD A X) (L : FiniteD A Y) :=
   FiniteOpenProduct.tensorMap A Tb
       ((ProEtale.ordinaryOpenExtensionBaseChangeIso A
@@ -174,8 +163,7 @@ def comparison (d : Diagram j k T Tb) (K : FiniteD A X) (L : FiniteD A Y) :=
       shriekCongr A d.factor).hom.app (inside A d K L)
 
 /-- Identify D with the restriction of H by the inverse tensor comparison, the two
-projection squares and the section-normalized open units.
-Source: proof step 5 (blueprint: lem-sf-open-external-tensor-normalization). -/
+projection squares and the section-normalized open units. -/
 def restriction (d : Diagram j k T Tb) (K : FiniteD A X) (L : FiniteD A Y) :=
   FiniteOpenProduct.tensorMap A T
     ((FiniteOpenProduct.pull A d.p).map ((FiniteOpenProduct.adj A j).unit.app K) ≫
@@ -184,15 +172,13 @@ def restriction (d : Diagram j k T Tb) (K : FiniteD A X) (L : FiniteD A Y) :=
       (FiniteOpenProduct.square A _ _ _ _ d.right).inv.app ((finiteShriek A k).obj L)) ≫
     (FiniteOpenProduct.tensorPullIso A d.u _ _).inv
 
-/-- The other factorization, with both signed interchanges in the specified places.
-Source: proof step 6 (blueprint: lem-sf-open-external-tensor-normalization). -/
+/-- The other factorization, with both signed interchanges in the specified places. -/
 def oppositeComparison (d : Diagram j k T Tb) (K : FiniteD A X) (L : FiniteD A Y) :=
   FiniteOpenProduct.sigma A Tb _ _ ≫ comparison A d.swap L K ≫
     (finiteShriek A d.u).map (FiniteOpenProduct.sigma A T _ _)
 
 /-- The binary normalization, opposite-factorization and signed-symmetry equations.
-The symmetry is written after transporting the swapped products to the same cones.
-Source: proof steps 5--7 (blueprint: lem-sf-open-external-tensor-normalization). -/
+The symmetry is written after transporting the swapped products to the same cones. -/
 def BinaryAssertion (d : Diagram j k T Tb) (K : FiniteD A X) (L : FiniteD A Y) : Prop :=
   IsIso (comparison A d K L) ∧ IsIso (oppositeComparison A d K L) ∧
     (restriction A d K L ≫ (FiniteOpenProduct.pull A d.u).map (comparison A d K L) =

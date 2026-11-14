@@ -89,11 +89,9 @@ import WeilConjectures.Algebra.Homology.KernelShiftedMappingCone
 /-!
 # Bounds for derived limits with epimorphic top cohomology
 
-Source: Stacks Project, Tag 0947, `proposition-enough-weakly-contractibles`, (5)-(7)
-and its proof, specialized to the small pro-etale site
-(blueprint: lem-sf-bounded-epimorphic-top-derived-limit).
+Source: Stacks Project, Tag 0947, (5)-(7) and its proof, specialized to the small pro-etale site.
 
-The index `n : ℕ` denotes the positive level `n + 1` of the source tower.
+The index `n: ℕ` denotes the positive level `n + 1` of the source tower.
 The coefficient sheaf is written as a sheaf of rings with sectionwise commutativity;
 this retains exactly the given ring and module structures. A derived limit is any
 object satisfying the existing Roos-triangle property, without a chosen cone model.
@@ -113,30 +111,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 /-- A strict tower with cohomology in `[a,b]` and epimorphic top-cohomology
 transitions has every derived limit cohomologically in the same interval.
 
-Source: Stacks Project, Tag 0947, `proposition-enough-weakly-contractibles`, (5)-(7)
-and its proof (blueprint: lem-sf-bounded-epimorphic-top-derived-limit).
-
-Proof plan:
-1. By proposition-exact-products--1 and lem-weil-derived-limit-products-core, derived
-   homology preserves countable products. The canonical comparison identifies
-   homology of the supplied product with the product of the homologies, with
-   components given by homology of its projections. Additivity and the projection
-   equations identify the Roos map on homology with the actual `1 - T_j`.
-   Naturality of homologyFunctorFactors identifies the localized transitions with
-   the transitions on complex homology.
-2. Apply lem-sf-derived-homology-long-exact to the supplied distinguished triangle
-   of def-weil-derived-limit. Writing V_j for the product of H^j(P_n), obtain
-   V_(j-1) -> V_(j-1) -> H^j(L) -> V_j -> V_j, with arrows `1 - T` on the V's.
-3. For j < a or j > b + 1, both adjacent V's vanish by the common bounds.
-   A product of zero objects is zero by its universal property, and exactness
-   then forces H^j(L) to vanish.
-4. Apply the first assertion of proposition-milnor-sequence--3 to the module-sheaf
-   tower H^b(P_n), using exactly the assumed epimorphy. It makes `1 - T_b`
-   epic. Reindexing the positive levels by ℕ changes no consecutive transition.
-5. At j = b + 1, V_(b+1) = 0. The connecting map out of V_b annihilates the
-   epic map `1 - T_b`, so it is zero. Exactness says its image is all of
-   H^(b+1)(L); consequently that object is zero as well. No degreewise
-   epimorphy of the strict tower maps is used. -/
+Source: Stacks Project, Tag 0947, (5)-(7) and its proof. -/
 theorem bounded_epimorphic_top_derivedLimit
     (X : Scheme.{t})
     (R : Sheaf (topology X) RingCat.{max u (t + 1)})

@@ -29,9 +29,6 @@ scheme `M_tors` is quasi-coherent if `M` is
 - `AlgebraicGeometry.Scheme.Modules.IsTorsionSection`: sections vanishing on a dense open.
 - `AlgebraicGeometry.Scheme.Modules.torsion`: the torsion subsheaf `M_tors`.
 - `AlgebraicGeometry.Scheme.Modules.torsionι`: its inclusion `M_tors ⟶ M`.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--1`,
-`theorem-riemann-roch-coherent-serre-duality`)
 -/
 
 @[expose] public section
@@ -164,9 +161,7 @@ lemma isSheaf_torsionSubmodule :
 variable (M) in
 /-- **The torsion subsheaf** `M_tors ⊆ M`: the sheaf of sections of `M` which vanish on a dense
 open subset of their domain. On an integral scheme it is the kernel of `M → M_η`, `η` the
-generic point.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--1`) -/
+generic point. -/
 noncomputable def torsion : X.Modules where
   val := (torsionSubmodule M).toPresheafOfModules
   isSheaf := isSheaf_torsionSubmodule

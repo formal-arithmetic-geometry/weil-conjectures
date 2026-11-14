@@ -69,8 +69,7 @@ private theorem transport_normalization
 
 /-- Restriction along an open triangle is inverse-image composition followed by
 restriction of the proper counit. This construction does not require properness.
-Source: Stacks 03D6, 0F7B; the restriction in the compactification-coherence proof
-(blueprint: lem-sf-proetale-proper-open-unit-normalization). -/
+Source: Stacks 03D6, 0F7B. -/
 def properOpenRestriction (A : Type (u + 1)) [CommRing A]
     {X T₁ T₂ : Scheme.{u}} (r : T₁ ⟶ T₂)
     (j₁ : X ⟶ T₁) (j₂ : X ⟶ T₂) (h : j₁ ≫ r = j₂) :
@@ -279,25 +278,7 @@ private theorem open_unit_inclusion
 
 /-- The transported proper/open map has the open-unit normalization on its original
 bounded-below etale input, before coefficient realization or witness conjugation.
-Source: compactification-coherence proof, first paragraph; Stacks 03DI, 03D6, 0F7B
-(blueprint: lem-sf-proetale-proper-open-unit-normalization).
-
-Proof: the etale proper/open comparison is the open-adjunction transpose of the
-inverse identification properOpenIdentification. Thus its transpose followed by
-properOpenIdentification.hom is the identity. Postcompose with the first open unit
-and use properOpenIdentification_unit: the identification followed by that unit
-is inverse-image composition followed by restriction of the proper counit. This
-is the required etale unit equation. Transport through the exact site comparison.
-The extension-by-zero comparison is the mate of the pullback comparison, so it
-preserves the open units. The direct-image comparison is the counit-normalized
-mate of that same inverse-image comparison, so it preserves the proper counit.
-The inverse-image composition comparisons respect composition. Expanding these
-three squares and cancelling their inverse pairs proves the equation for
-properOpenProEtaleIsoPlus. Include into the unbounded categories using the
-canonical exact-functor and right-derived inclusion comparisons. Their unit and
-counit factorization equations give exactly properOpenProEtaleIso and the displayed
-restriction. No quasi-compactness of the opens is used. Empty opens and zero
-coefficients satisfy the same adjunction and cancellation equations. -/
+Source: Stacks 03DI, 03D6, 0F7B. -/
 theorem properOpenProEtaleIso_unit
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X T₁ T₂ : Scheme.{u}} (r : T₁ ⟶ T₂) [IsProper r]

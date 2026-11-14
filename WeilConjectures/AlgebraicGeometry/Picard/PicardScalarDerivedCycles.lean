@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.Picard.PicardConnectiveModelComparison
 /-! # Scalar cycles as derived test sections
 
 Source: Stacks Project, Tag 0BF2, the degree-zero cycle calculation.
-(blueprint: lem-sc-picard-scalar-derived-cycles)
 -/
 
 @[expose] public section
@@ -25,23 +24,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The scalar-cycle calculation for an arbitrary derived object with a fixed connective
 strictly perfect model. No direct image or family of line bundles occurs in this lemma.
-Source: Stacks Project, Tag 0BF2, degree-zero cycle calculation; Tags 08C4 and 0D5S.
-(blueprint: lem-sc-picard-scalar-derived-cycles)
-
-Proof: Apply picard_connective_model_comparison to the fixed model isomorphism hE.
-It supplies simultaneous additive equivalences q from derived test sections to ordinary
-cycles on all schemes factoring through U, compatible with the canonical composition
-restriction. Apply picard_ordinary_scalar_coordinates to the section bases and hd.
-It gives a raw residue coordinate equivalence b, proves that every residue morphism
-is a cycle using hdw, and constructs a local ordinary cycle x for each annihilating
-scalar a, with restricted b-coordinate a(w). Restrict b to the residue cycles subgroup;
-its inverse sends a scalar z to the cycle with raw representative b.symm z. Compose
-with q at the residue point to obtain c. The factorization of the residue point through
-V and then U equals the direct factorization through U, since U.ι is mono. Put ξ=q_V.symm x.
-Naturality of q identifies its derived restriction with the ordinary restriction of x.
-The coordinate equality gives c of this restriction equal to a(w); injectivity of c
-then gives the asserted equality with c.symm(a(w)). The fixed model makes c independent
-of V. Rank m=0 has zero outgoing differential; w excludes empty V and U. -/
+Source: Stacks Project, Tag 0BF2, degree-zero cycle calculation; Tags 08C4 and 0D5S. -/
 theorem picard_scalar_derived_cycles
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

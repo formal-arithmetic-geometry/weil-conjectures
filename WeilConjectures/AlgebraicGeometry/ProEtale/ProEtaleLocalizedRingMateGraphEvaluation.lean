@@ -40,8 +40,8 @@ import Mathlib.CategoryTheory.Sites.ConstantSheaf
 /-!
 # Localized ring-sheaf mates evaluated on graphs
 
-Source: Stacks Project, Sites and Sheaves, Tags 03CE, 00Y0, 00VE and 00WX;
-Modules on Sites, Tag 03EL (blueprint: lem-sfb-localized-ring-mate-graph-evaluation).
+Source: Stacks Project, Sites and Sheaves, Tags 03CE, 00Y0, 00VE and 00WX; Modules on Sites, Tag
+03EL.
 
 The helpers only expand the maps in the statement. In particular the mate uses the
 specified Kan-extension/sheafification adjunction, and both forgetful and integer-unit

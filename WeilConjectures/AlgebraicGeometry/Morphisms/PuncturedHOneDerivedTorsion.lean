@@ -27,24 +27,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The localization boundary identifies H¹ of the puncture with derived torsion in degree two.
 Source: Stacks Project, Tag 0BK0, Lemma 51.8.2(2), and Tag 0A6T, Lemma 51.2.1.
-The flasqueness input is Tag 09T2, Lemma 36.8.1.
-(blueprint: lem-sbc-punctured-h-one-derived-torsion).
-
-Proof: Put X=Spec R and m=maximalIdeal R. A prime containing m equals m,
-so hW identifies W with X minus V(m). Take an injective R-module resolution
-R → E. On a Noetherian affine scheme the associated sheaves of injective
-modules are flasque, so their restrictions to W compute H^*(W,O_W).
-The kernel of Γ(X,tilde E^k) → Γ(W,tilde E^k) is the m-power torsion
-submodule: choose finite generators of m, test vanishing on their principal
-opens by localization, and bound the finitely many annihilating exponents
-by one power of m. Flasqueness makes restriction surjective, giving a short
-exact sequence of complexes from the torsion subcomplex to E to Γ(W,tilde E).
-The middle complex resolves R and has zero cohomology in degrees one and
-two. Its long exact sequence therefore gives H¹(W,O_W) ≃ H²(torsion(E)),
-and the latter computes the right derived torsion functor. Identify O_W
-with the additive sheaf underlying the unit module to obtain Modules.H.
-For an empty puncture restriction has zero target and the same exact sequence
-and degree-two calculation apply. No depth hypothesis or Ext comparison is used. -/
+The flasqueness input is Tag 09T2, Lemma 36.8.1. -/
 theorem nonempty_punctured_h_one_addEquiv_derived_torsion
     (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R]
     (W : (Spec (.of R)).Opens)

@@ -492,9 +492,7 @@ private theorem affine_closed_square {X Z : Scheme.{u}}
 projective evaluation gives the actual inverse-image unit isomorphism on V.
 No specialization assumption is made in this comparison lemma.
 
-Source: Stacks Project, Tag 09BL, lemma-closed-immersion-affines-apply (1),(2),
-and Tag 09AC, localization and unit identification
-(blueprint: new-lem-weil-pbc-specialization-unit-comparison).
+Source: Stacks Project, Tag 09BL, (2), and Tag 09AC, localization and unit identification.
 
 Proof. First transfer projective evaluation from B to r(B). A locally surjective
 map admits a lift over a single affine surjective cover of r(B). The lift functor

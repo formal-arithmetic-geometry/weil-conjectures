@@ -10,10 +10,7 @@ import all WeilConjectures.AlgebraicGeometry.Finite.FiniteRootSiteComparison
 
 /-! # Invertibility of normalized finite root pullback
 
-Source: the Roots of unity paragraph of
-`sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md`
-in the current blueprint; Stacks 03PK.
-(blueprint: lem-pur-transport-root-pull-is-iso).
+Source: Stacks 03PK.
 -/
 
 @[expose] public section
@@ -35,16 +32,7 @@ private theorem globalPrimeUnit (Y : Scheme.{u}) (ell : ℕ)
   simpa only [map_natCast] using
     (isUnit_of_invertible (ell : Y.residueField y)).ne_zero
 
-/-- The normalized root inverse image is invertible at every prime-power level.
-
-Source: current blueprint, Roots of unity, and finiteRootSiteComparison.
-(blueprint: lem-pur-transport-root-pull-is-iso).
-Proof: invertibility in every residue field implies that ell is a unit globally,
-by the stalkwise unit criterion and the local-ring residue criterion. Hence
-ell^n is a unit. Use the finite-root site square with ULift(ZMod(ell^n)); its
-other factors are isomorphisms, so cancellation proves the kernel-presentation
-pullback invertible. Conjugate with the generator-normalized root comparisons.
-The same argument includes n=0 and empty schemes. -/
+/-- The normalized root inverse image is invertible at every prime-power level. -/
 theorem normalizedRootPull_isIso (ell : ℕ) [Fact ell.Prime]
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     [∀ x : X, Invertible (ell : X.residueField x)]

@@ -119,8 +119,7 @@ import all WeilConjectures.CategoryTheory.Exact.ExactLocalizationInverseMate
 /-! # Derived semilinear evaluation through the constant diagonal
 
 Source: Stacks Project, Tags 07A7 and 03DI; the evaluation factorization in
-`SemilinearProperOpenMatePasting`, lines 2112–2444.
-(blueprint: lem-sf-semilinear-evaluation-derived-adjunction)
+`SemilinearProperOpenMatePasting`, lines 2112–2444
 
 The comparisons below retain the specified adjunctions. They are transformations on
 whole unbounded derived categories, with arbitrary coefficient transition maps.

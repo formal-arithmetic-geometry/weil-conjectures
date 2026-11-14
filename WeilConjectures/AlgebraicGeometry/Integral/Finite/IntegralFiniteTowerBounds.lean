@@ -13,8 +13,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.RepleteAddCommGrp
 import WeilConjectures.Algebra.Homology.DerivedCategory.Ext.TowerLimit
 
 /-! # The cohomological range of a complete integral reduction tower
-
-Source: blueprint latest, lemma-bounds-finite-reductions, third proof paragraph.
 -/
 
 @[expose] public noncomputable section
@@ -87,20 +85,7 @@ private theorem limitTriangle_bounds
     (DerivedCategory.isLE_iff K b).mpr (fun q hq ↦ hz q (Or.inr hq))⟩
 
 /-- The common cohomological range of the canonical reductions bounds a complete complex
-when the top cohomology transitions are epic.
-
-Source: blueprint latest, lemma-bounds-finite-reductions, third proof paragraph
-(blueprint: lem-pe-integral-finite-tower-bounds).
-
-Proof: use completeness to identify K with its specified augmented Roos model. The
-Roos triangle is the triangle of one minus the transition on the product of the canonical
-integral levels. Pro-etale repleteness passes from abelian sheaves to internal modules,
-so countable products are exact and commute with cohomology. The long exact sequence
-then gives vanishing outside [a,b], except possibly at b+1. At that degree, repleteness
-and the epimorphic transitions on H^b imply that one minus the product transition is
-epic. The connecting map is zero, and exactness kills H^(b+1) as well. Transport this
-range across the completion isomorphism. This proof also covers the zero complex,
-empty schemes and intervals containing no nonzero cohomology. -/
+when the top cohomology transitions are epic. -/
 theorem integral_finite_tower_bounds
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

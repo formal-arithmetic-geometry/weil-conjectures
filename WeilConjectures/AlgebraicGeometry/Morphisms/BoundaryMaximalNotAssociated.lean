@@ -37,23 +37,7 @@ private theorem no_maximal_associated_of_annihilator_zero
 /-- The maximal ideal is not associated to a boundary localization of a submodule
 of restriction sections.
 
-Source: Stacks Project, Tag 0AVN, finite basic-open cover argument; Tags 01LC and 05AM.
-(blueprint: stage3-boundary-maximal-not-associated)
-
-Proof: Put R = O(V) and P = (j_*(N|U))(V). Since V is Noetherian,
-U intersect V is covered by finitely many basic opens D(f_i) contained in U.
-The boundary hypothesis implies f_i belongs to p for every i. The open immersion
-is quasi-compact and quasi-separated, so its pushforward is quasi-coherent
-(Tag 01LC). Thus its basic-open section maps are module localizations at f_i.
-Sheaf separatedness on U intersect V makes P inject into the finite product of
-these localized section modules. Localization at p preserves this injection
-and the finite product. The inclusion S into P also remains injective.
-If the maximal ideal of R_p were associated to S_p, there would be a nonzero
-z in S_p annihilated by that ideal. The image of each f_i lies in the maximal
-ideal and kills z, but is invertible in the i-th localized section module.
-Every component of z therefore vanishes, contradicting injectivity. An empty
-cover makes P, and hence S, zero, which has no associated primes. This argument
-also covers S = 0 and does not require N to be finite. -/
+Source: Stacks Project, Tag 0AVN, finite basic-open cover argument; Tags 01LC and 05AM. -/
 theorem boundary_maximal_not_associated
     {L : Scheme.{u}} [IsLocallyNoetherian L] (U : L.Opens) (N : L.Modules)
     (hqc : N.IsQuasicoherent) (V : L.Opens) (hV : IsAffineOpen V)

@@ -10,7 +10,7 @@ public import WeilConjectures.CategoryTheory.HomComparison.HomComparisonEquivale
 
 /-! # Bifunctor form of the normalized native section Hom comparison
 
-Source: Stacks 03EO (blueprint: lem-sf-native-section-hom-bifunctor).
+Source: Stacks 03EO.
 -/
 
 @[expose] public noncomputable section
@@ -21,7 +21,7 @@ namespace AlgebraicGeometry.ProEtale.NativeFrobenius
 variable (Y : Scheme.{u}) (l : ℕ) [Fact l.Prime]
 
 /-- The two-variable native internal Hom functor.
-Source: Stacks 03EO (blueprint: lem-sf-native-section-hom-bifunctor). -/
+Source: Stacks 03EO. -/
 def nativeHom : (AdicSheaf l Y)ᵒᵖ × AdicSheaf l Y ⥤ AdicSheaf l Y :=
   Functor.uncurry.obj
     { obj := fun M ↦ AdicSheaf.ihom M.unop
@@ -33,7 +33,7 @@ attribute [local irreducible] comparisonModuleFunctor comparisonRing
   SheafOfModules.homObjMap
 
 /-- The normalized forward native Hom comparison as a single bifunctor isomorphism.
-Source: Stacks 03EO (blueprint: lem-sf-native-section-hom-bifunctor). -/
+Source: Stacks 03EO. -/
 def forwardHomComparison (H : AdicModuleHomComparisonCore l Y) :
     nativeHom Y l ⋙ (adicSectionModuleEquivalence l Y).functor ≅
       (adicSectionModuleEquivalence l Y).functor.op.prod
@@ -59,7 +59,7 @@ def forwardHomComparison (H : AdicModuleHomComparisonCore l Y) :
 attribute [local irreducible] nativeHom adicSectionModuleEquivalence
 
 /-- The Hom comparison reversed along the native section equivalence.
-Source: Stacks 03EO (blueprint: lem-sf-native-section-hom-bifunctor). -/
+Source: Stacks 03EO. -/
 def inverseNativeHomComparison (H : AdicModuleHomComparisonCore l Y) :
     Functor.uncurry.obj (SheafOfModules.homFunctor (comparisonRing l Y)) ⋙
         (adicSectionModuleEquivalence l Y).inverse ≅

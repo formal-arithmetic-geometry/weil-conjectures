@@ -15,7 +15,6 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 # Lifting finite support through a smaller open
 
 Source: Stacks Project, Tags 00WK and 09AE.
-(blueprint: lem-exc-proetale-finite-support-lifting)
 -/
 
 @[expose] public section
@@ -31,8 +30,7 @@ ambient sheaf along the weakly etale localization, refine the covering to finite
 many affine representatives, and enclose their nonzero images in a compact open.
 Pull back the covering to the localized site. The open counit is monic and locally
 surjective on these representatives, so their lifts glue uniquely.
-Source: Stacks Project, Tags 00WK and 09AE.
-(blueprint: lem-exc-proetale-finite-support-lifting). -/
+Source: Stacks Project, Tags 00WK and 09AE. -/
 theorem finiteSupport_lifting (R : Type (u + 1)) [Ring R]
     {X Y T : Scheme.{u}} (r : Y ⟶ X) [WeaklyEtale r] (p : Y ⟶ T)
     (Q : Y.ProEt) [CompactSpace Q.left] [QuasiSeparatedSpace Q.left]

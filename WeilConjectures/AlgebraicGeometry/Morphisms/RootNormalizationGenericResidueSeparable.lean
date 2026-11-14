@@ -51,31 +51,7 @@ private theorem sep_of_degree_dvd {K E : Type*} [Field K] [Field E] [Algebra K E
 /-- The residue-field extension at a normalization point above the root divisor
 generic point is separable.
 
-Source: Stacks Project, Tags 09EB (lemma-galois-conclusion), 0BRM
-(lemma-abhyankar), 0EYG (pione-lemma-abhyankar-one-divisor), 0307, and 09E7.
-
-Proof: The root t is regular since A is free over H and t^n=g is regular.
-Evaluation at t=0 gives A/(t)=H/(g), hence (t) is prime. Its regular
-height-one localization is a DVR. The generic point of the integral
-Cartier centre with complement D(g)=D(t) maps to this prime. The local
-ring H_(g) is a DVR with uniformizer g, and the root DVR extension has
-index n=|G|. Via beta the cover comes from the original G-torsor over
-D(f). Over the fraction field of H_(g), its connected field factors are
-Galois for stabilizer subgroups, whose orders divide n. By the Galois
-degree formula each residue degree divides n. In positive residue
-characteristic the inseparable degree is a power of that characteristic;
-as n is a unit this degree must be one. The ramification indices are
-also prime to the residue characteristic. Thus these factors are tame.
-Abhyankar's lemma for the root extension preserves residue separability
-in the normalized base-change factors (its local adic formal smoothness
-criterion gives separability of the residue extensions by Tag 09E7). Localization
-of integral closure identifies these local maps with the normalization
-stalk maps in the statement. Passing to residues identifies the induced
-map with the canonical scheme residueFieldMap, giving precisely the
-algebra structure displayed. This assertion does not claim maximal-ideal
-equality. Empty fibres have no x; n=1 is the unramified case, and no
-perfectness of the base residue field is assumed.
-(blueprint: lem-sbc-root-normalization-generic-stalk-residue-separable) -/
+Source: Stacks Project, 0BRM (lemma-abhyankar), 0307, and 09E7. -/
 theorem root_normalization_generic_stalk_residue_separable
     {L U : Scheme.{u}} (i : U ⟶ L)
     (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)

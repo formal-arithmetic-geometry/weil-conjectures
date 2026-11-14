@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinaryLocalClassCycles
 
 /-! # The derived local class on the fixed direct-image model
 
-Source: Stacks Project, cohomology.tex, Tags 0BKJ, 0D5X and 079W.
-(blueprint: lem-weil-pbc-resolution-direct-image-class-model).
+Source: Stacks Project, Tags 0BKJ, 0D5X and 079W.
 -/
 
 @[expose] public section
@@ -173,17 +172,7 @@ variable [∀ X : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
 
 /-- The derived local class becomes the ordinary section edge on the fixed direct-image
-complex. Source: Stacks Project, cohomology.tex, Tags 0BKJ, 0D5X and 079W.
-(blueprint: lem-weil-pbc-resolution-direct-image-class-model).
-
-Proof: Evaluate the universal Leray unit equation on the fixed K-injective complex.
-The direct-image resolution normalization identifies the two derived direct images.
-Taking homology gives the inverse Leray comparison followed by the section derived
-unit. Naturality of the normalized local class transports the cohomology-sheaf
-identification. The local class of the section derived unit is the ordinary
-sheafification class. Finally the ordinary cycle formula identifies that class with
-the left-exact homology edge of sections, by cancellation of the cycle quotient.
-No boundedness, or preservation of homology by direct image, is used. -/
+complex. Source: Stacks Project, Tags 0BKJ, 0D5X and 079W. -/
 theorem resolutionDirectImageClassModel {T S : Scheme.{u}} (g : T ⟶ S) (q : ℤ)
     (K : schemeDerivedCategory T) :
     let f := g.toLRSHom.toShHom

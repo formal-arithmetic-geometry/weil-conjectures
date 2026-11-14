@@ -130,8 +130,7 @@ import WeilConjectures.Algebra.Homology.SmoothPurity.ChangeOfRingsTensorCancella
 
 /-! # Tensor compatibility of derived coefficient extension
 
-Source: Stacks 03EK, 06YY, 07A4 and 07A6
-(blueprint: lem-coef-semilinear-scalar-tensor).
+Source: Stacks 03EK, 06YY, 07A4 and 07A6.
 -/
 
 @[expose] public noncomputable section
@@ -313,20 +312,7 @@ private theorem reverseTensorSquare {K : Type*} [Category* K]
   simp
 
 /-- Scalar extension commutes with the tensor of the actual K-flat models.
-Source: Stacks 03EK, 06YY, 07A4 and 07A6
-(blueprint: lem-coef-semilinear-scalar-tensor).
-Proof: for a ring map R to S the ordinary comparison sends the scalar extension
-of x tensor y to (1 tensor x) tensor (1 tensor y), with the outer scalar acting on
-either factor; its inverse multiplies the two S scalars. Balancing gives inverse
-maps of the sheafified tensors. Use the model's ordinary object and map equations
-to transport this comparison to its recorded extension functor. On total-complex
-summands use its inverse ordinary map; it commutes with the signed differential.
-Extension takes flat-term K-flat complexes to flat-term K-flat complexes, by K-flat
-change of rings, without requiring S flat over R. Thus both iterated total tensors
-compute the derived tensors. Descend the chain comparison through the K-flat
-localizations. The counit comparison of the scalar model identifies the descended
-square with the derived field of ScalarTensorComparisonModel. Its ordinary pure
-formula is the stated multiplication formula, checked before sheafification. -/
+Source: Stacks 03EK, 06YY, 07A4 and 07A6. -/
 theorem semilinearScalarTensor
     (R S : Sheaf J CommRingCat.{max c v r}) (φ : R ⟶ S)
     (scalar : ScalarData.{c, v, max c v r} φ)

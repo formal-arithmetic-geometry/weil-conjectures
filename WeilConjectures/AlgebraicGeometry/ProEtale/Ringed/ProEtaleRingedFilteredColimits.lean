@@ -47,17 +47,7 @@ namespace AlgebraicGeometry.Scheme
 /-- Closed direct image with arbitrary inverse-image-ring coefficients commutes
 with filtered colimits on a quasi-compact quasi-separated base.
 
-Source: Stacks Project, Tags 0738 (4) and 098D
-(blueprint: lem-weil-pbc-proetale-ringed-filtered-colimits).
-
-Proof: Forget module sheaves on both sites to abelian sheaves. The underlying
-abelian functor of the specified module pushforward is definitionally the composite
-of this forgetful functor with abelian direct image. Abelian direct image preserves
-the filtered colimits by the geometric closed-image comparison. The module forgetful
-functors preserve these colimits by `moduleSheaves_colimits_forgetful`; hence the
-composite of module pushforward and the target forgetful functor preserves them.
-The latter forgetful functor reflects isomorphisms and preserves colimits, and so
-reflects colimits. Reflection now gives preservation by module pushforward itself. -/
+Source: Stacks Project, Tags 0738 (4) and 098D. -/
 theorem proEtale_ringed_filtered_colimits {X Z : Scheme.{u}} (i : Z ⟶ X)
     [IsClosedImmersion i] (A : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
     [CompactSpace X] [QuasiSeparatedSpace X]

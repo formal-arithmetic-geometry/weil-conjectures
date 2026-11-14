@@ -24,9 +24,7 @@ public import WeilConjectures.AlgebraicGeometry.RelativeKummerExchangeGenerators
 /-!
 # Exchange on normalized global generators
 
-Source: blueprint main-20261015, sk-prop-a1-kummer,
-prop-pur-gm-relative-kummer.proof.md, Step 3; Stacks Tags 0736 and 072W
-(blueprint: lem-pur-relative-kummer-exchange-generators).
+Source: Stacks Tags 0736 and 072W.
 
 Global classes are derived morphisms out of the constant free rank-one module sheaf.
 Sections are sheaf morphisms out of that same sheaf, equivalently their value on 1.

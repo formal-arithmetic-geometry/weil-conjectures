@@ -24,8 +24,6 @@ import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrFactorizationUniq
 import WeilConjectures.Mathlib.RingTheory.OrderOfVanishing.Noetherian
 
 /-! # Finite presentation of integral point-complex cohomology
-
-Source: current blueprint proposition-integral-constructibility-criterion, (3) implies (1).
 -/
 
 @[expose] public noncomputable section
@@ -36,14 +34,7 @@ open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
-/-- Finite free integral point complexes have finitely presented cohomology.
-Source: current blueprint proposition-integral-constructibility-criterion, (3) implies (1)
-(blueprint: lem-sfb-integral-point-complex-homology).
-
-Proof: the scalar ring of integers of the finite coefficient extension is a DVR,
-hence a PID. Apply the scalar-complex cohomology theorem to that ring with its
-specified spectral absolute-value topology. The coefficient sheaf and its ring
-structure are exactly the continuous coefficient sheaf used by derived completion. -/
+/-- Finite free integral point complexes have finitely presented cohomology. -/
 theorem integral_point_complex_homology
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

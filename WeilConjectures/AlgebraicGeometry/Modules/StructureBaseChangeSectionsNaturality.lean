@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.Modules.PullbackSectionFactoriza
 /-! # Naturality on sections of the canonical structure-sheaf comparison
 
 Source: Stacks Project, Tag 02KG, the canonical tensor comparison.
-(blueprint: new-sbc-structure-base-change-sections-naturality)
 -/
 
 @[expose] public section
@@ -45,22 +44,7 @@ private theorem comp_adjunction_homEquiv
 
 /-- The canonical structure-sheaf comparisons commute with a map of base-change squares.
 
-Source: Stacks Project, Tag 02KG, canonical tensor comparison, and Tag 01CA.
-(blueprint: new-sbc-structure-base-change-sections-naturality)
-
-Proof: Unfold the constructed section transport. Substitute the defining equalities
-hb and hb'. Apply the
-pullback-pushforward adjunction to the proposed sheaf identity.
-The adjunction units and the pullback composition comparison identify the adjoints
-with the two restrictions from O_X to O_Z. Restrictions compose along w then k;
-the equality wk identifies their composite with l. The equality wq identifies the
-two pushforward factorizations. The canonical pushforward composition comparisons
-are coherent, so the two adjoints agree. Injectivity of the adjunction homEquiv gives
-the sheaf identity; evaluate it at the top open and on x. The structure-sheaf unit
-on sections is w.appTop, and the pullback unit is pullbackΓ, yielding the displayed
-equality after replacing b(x) by a using hx. No invertibility of b or b' is used.
-In particular this identity is valid
-for non-cartesian commuting squares, and for empty schemes. -/
+Source: Stacks Project, Tag 02KG, canonical tensor comparison, and Tag 01CA. -/
 theorem structure_baseChange_sections_naturality
     {X Y A B C D : Scheme.{u}}
     (p : X ⟶ Y) (q : A ⟶ B) (t : C ⟶ D)

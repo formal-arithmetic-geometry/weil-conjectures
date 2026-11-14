@@ -10,8 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Picard.CanonicalSinglePullbackCo
 
 /-! # The actual coefficient arrow for a Picard direct-image comparison
 
-Source: Stacks Project, Tags 01F7, 08HY and 0B91.
-(blueprint: new-picard-derived-coefficient-map)
+Source: Stacks Project, Tags 01F7, 08HY and 0B91
 -/
 
 @[expose] public section
@@ -46,7 +45,6 @@ variable
 
 /-- Construct the coefficient-induced arrow between base-changed direct images.
 Source: Stacks Project, Tags 01F7 and 08HY.
-(blueprint: new-picard-derived-coefficient-map)
 
 Construction: Let j:X'_W -> X_W be the pullback of u. The two projection
 identities identify j^*(L_W) with (u^*L)_W by ordinary pullback composition and

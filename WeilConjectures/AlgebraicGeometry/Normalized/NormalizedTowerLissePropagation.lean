@@ -32,8 +32,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- A finite native constant model on a covering sieve.
 
-Source: Stacks Project, sites-cohomology.tex, Tag 094I; local-effectivity step 3.
-(blueprint: lem-weil-pbc-normalized-tower-common-lisse-strata)
+Source: Stacks Project, Tag 094I
 
 The predicate records the local finite constant models after transporting to the
 native coefficient ring. It is the fixed-level input for nilpotent propagation.
@@ -136,23 +135,7 @@ end LissePropagationProof
 
 /-- Level-zero native finite models propagate through every normalized quotient.
 
-Source: Stacks Project, sites-cohomology.tex, Tag 094I; finite refinement and
-nilpotent propagation in local-effectivity step 3.
-(blueprint: new-lem-weil-pbc-normalized-tower-lisse-propagation)
-
-Proof: restrict each level along its native constant-coefficient comparison. Exact
-restriction preserves the common upper bound. At level zero, finite native models
-imply relative finite lissity for the supplied arbitrary coefficient isomorphism.
-Exact inverse-image homology and uniqueness of left adjoints identify the ordinary
-inverse image with the identity-coefficient pullback in the conclusion.
-
-Induct on the level using A/I^(n+2) to A/I^(n+1). These maps are surjective with
-square-zero kernel, since I^(2(n+1)) is contained in I^(n+2). Naturality of the
-constant coefficient comparisons and the scalar adjunctions transport normalization
-to the native complexes. The preceding level therefore supplies the reduced
-lissity hypothesis of the nilpotent coefficient theorem. Finally, the exact
-restriction and pullback comparisons transport the resulting finite models to the
-coefficient-restricted cohomology appearing in the original conclusion.
+Source: Stacks Project, Tag 094I
 -/
 theorem normalizedTower_lisse_of_native_strata
     (X : Scheme.{u}) [IsNoetherian X] {A : Type (u + 1)} [CommRing A]

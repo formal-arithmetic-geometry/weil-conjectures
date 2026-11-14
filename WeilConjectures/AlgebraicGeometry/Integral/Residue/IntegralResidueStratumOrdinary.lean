@@ -107,25 +107,8 @@ attribute [local irreducible] integralConstantModule completedAdicChange
 /-- The ordinary constant-module realization commutes with normalized coefficient
 transport and inverse image. This concerns modules, without complexes or perfectness.
 
-Source: Bhatt--Scholze, Lemma 6.5.8(1), Proposition 6.6.11, and the normalized
-coefficient presentations in Definition 6.5.1.
-(blueprint: lem-weil-pbc-integral-residue-stratum-ordinary).
-
-Proof: constant presheaves are left adjoint to evaluation at a terminal object:
-a map is determined by its component there, and the inverse extends a component
-by restriction along the unique maps to the terminal object. Compose this
-adjunction with module sheafification, ordinary scalar extension, and the
-coefficient equivalence to obtain the adjunction for integralConstantModule.
-Compose further with the ringed inverse-image adjunction and restriction along
-the inverse normalized coefficient isomorphism. Its right adjoint evaluates the
-underlying module at the base change of the terminal object. This object is
-terminal on S as well. The right adjoint for koszulConstantFunctor followed by
-completedAdicChange evaluates at precisely that same object. Their underlying
-abelian groups agree. integralResidueStratum_scalar identifies their coefficient
-actions, so identity section functions give a natural linear isomorphism of
-right adjoints. Transport the adjunction along this isomorphism and apply
-uniqueness of left adjoints. The construction uses neither complexes nor
-perfectness, and includes zero modules and empty schemes. -/
+Source: Bhatt--Scholze, Lemma 6.5.8(1), Proposition 6.6.11, and the normalized coefficient
+presentations in Definition 6.5.1. -/
 theorem integralResidueStratum_ordinary
     (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

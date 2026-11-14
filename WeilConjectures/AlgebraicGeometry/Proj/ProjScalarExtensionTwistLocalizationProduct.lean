@@ -7,8 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Proj.ProjScalarExtensionTwistData
 
-/-! A localization identity used in the local fraction calculation.
-(blueprint: lem-sfb-proj-scalar-extension-twist-localization-product). -/
+/-! A localization identity used in the local fraction calculation. -/
 
 @[expose] public section
 
@@ -23,9 +22,7 @@ open AlgebraicGeometry.Scheme.Modules
 namespace AlgebraicGeometry.Proj
 
 /-- Multiplication by a denominator turns a displayed localization fraction into its numerator.
-Source: the elementary localization calculation in Stacks, Constructions, Tag 01N2.
-Proof: use the defining relation for localization fractions with multiplier one.
-(blueprint: lem-sfb-proj-scalar-extension-twist-localization-product). -/
+Source: the elementary localization calculation in Stacks, Constructions, Tag 01N2. -/
 theorem localization_mk_mul_denominator
     {R : Type u} [CommRing R] (P : Ideal R) [P.IsPrime]
     (a b : R) (hb : b ∉ P) :

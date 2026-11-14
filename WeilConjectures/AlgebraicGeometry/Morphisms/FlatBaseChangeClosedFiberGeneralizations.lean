@@ -15,7 +15,6 @@ import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 # Lifting generalizations in the closed fibre of a flat chart
 
 Source: Stacks Project, Tags 0EYB and 00HS, closed-fibre base change and going down.
-(blueprint: lem-sbc-flat-base-change-closed-fiber-generalizations)
 -/
 
 @[expose] public section
@@ -27,20 +26,7 @@ namespace AlgebraicGeometry.Scheme
 /-- A flat morphism to a base-changed scheme lifts generalizations in the original
 closed fibre to generalizations over the closed point of the changed base.
 
-Source: Stacks Project, Tag 0EYB, the closed-fibre image argument; Tag 00HS, going down.
-(blueprint: lem-sbc-flat-base-change-closed-fiber-generalizations)
-
-Proof: Localness sends the closed point of Spec B to that of Spec A. The commuting
-square puts the image of v in the closed fibre of q, giving eta by the fibre
-homeomorphism. Base change t to the residue field of B; the resulting map is flat.
-Its target is the base change of the closed fibre of q along the induced residue
-field extension. The projection from this target to the original closed fibre is
-flat, since every field extension is flat. The composite is therefore flat and
-lifts generalizations by going down. Lift v to the closed fibre of Spec R over B
-using its fibre homeomorphism, and apply this generalizing property to eta'. Send
-the resulting point back to Spec R. Continuity gives w specializing to v, the
-fibre equation gives its contraction, and commutativity gives the required image.
-No flatness of A to B and no smoothness or Noetherian hypothesis is used. -/
+Source: Stacks Project, Tag 0EYB, the closed-fibre image argument; Tag 00HS, going down. -/
 theorem exists_closed_fiber_generalization_lifts
     (A B R : Type u) [CommRing A] [IsLocalRing A]
     [CommRing B] [IsLocalRing B] [CommRing R]

@@ -10,9 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
 
 /-!
 # Exterior sheaf maps induced by module morphisms
-
-Source: blueprint, Riemann--Roch, proof of (*), determinant paragraph,
-exterior-power universal properties (blueprint: lem-sc-exterior-sheaf-map-exists).
 -/
 
 @[expose] public section
@@ -35,9 +32,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Apply the sectionwise exterior-power functor to a module morphism. Naturality is checked
 on pure wedges using naturality of the original morphism; pure wedges span the exterior
 power. Sheafify this presheaf morphism. Naturality of the sheafification unit gives its
-formula on wedge sections. No exactness or local freeness is required.
-Source: blueprint, Riemann--Roch, proof of (*), determinant paragraph,
-exterior-power universal properties (blueprint: lem-sc-exterior-sheaf-map-exists). -/
+formula on wedge sections. No exactness or local freeness is required. -/
 theorem exteriorSheaf_map_exists {X : Scheme.{v}} {M N : X.Modules}
     (f : M ⟶ N) (n : ℕ) :
     ∃ e : exteriorPower M n ⟶ exteriorPower N n,

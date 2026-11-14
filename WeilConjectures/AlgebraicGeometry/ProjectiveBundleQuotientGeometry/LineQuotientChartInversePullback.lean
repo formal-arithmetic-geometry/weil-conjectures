@@ -413,35 +413,7 @@ private theorem fractionNaturality_of_coefficients {S T T' : Scheme.{u}}
 normalizations, invariance under quotient isomorphisms, and arbitrary pullback compatibility.
 The existing fraction-map theorem provides the maps quantified over below, uniquely.
 
-Source: Stacks, Constructions, Tags 01OA and 01O4
-(blueprint: lem-trf-line-quotient-chart-inverse-pullback).
-
-Proof:
-1. Pullback preserves invertibility and epimorphisms, and the normalized composition
-comparison gives exactly pulledQuotient (lem-weil-pbc-invertible-pullback-invertible,
-lem-weil-pbc-module-pullback-epi-direct-sum, lem-pc-module-pullback-identity-composition).
-2. On each affine base the degree-one generators cover Proj. Multiplication by e
-trivializes the degree-one twist with inverse division by e; on overlaps e=(e/f)f
-(def-trf-canonical-symmetric-graded-algebra, prop-nagata-proj-standard-open,
-def-weil-pbc-proj-twisting-sheaf, def-per-projective-bundle-quotient-data).
-3. On W_m use the fraction maps of lem-trf-line-quotient-homogeneous-fraction-map.
-Send the pulled frame e to b_m*l, with inverse l mapping to b_m^(-1)*e. The quotient
-of v has coefficient b_v/b_m, so its image is b_v*l. The affine section formula is
-lem-weil-pbc-module-pullback-affine-sections.
-4. On overlaps the fraction e/f pulls back to b_m/b_n. All local line maps are
-quotient compatible, hence equal by cancellation of the pulled epimorphism. Glue
-maps and inverses by lem-pur-sheaf-hom-cover-gluing, including all frame and base changes.
-5. Starting from a, the frame a^*e has coefficient one. Products of degree-one
-sections and additivity recover a^*(c/e^d) for every homogeneous c. Equality of maps
-into affine charts (def-weil-affine-spectrum), then lem-weil-pbc-scheme-morphism-gluing,
-gives F=a. No affine intersection is assumed affine.
-6. An isomorphism of quotient pairs sends l to v(l), preserving every coefficient.
-Uniqueness in lem-trf-line-quotient-homogeneous-fraction-map gives the same morphism.
-7. For arbitrary u, affine section naturality sends b(z) to u^*b(z), hence sends
-b(z)/b_m^d to u^*b(z)/(u^*b_m)^d. The same affine-map uniqueness and scheme gluing
-give F'=u;F, without flatness or finite generation.
-8. Both the pulled line isomorphism and the new line isomorphism send e to u^*q(m).
-Equality on frames and lem-pur-sheaf-hom-cover-gluing prove the isomorphism equality. -/
+Source: Stacks, Constructions, Tags 01OA and 01O4. -/
 theorem line_quotient_chart_inverse_pullback {S : Scheme.{u}} (E : S.Modules)
     [E.IsQuasicoherent] (D : TautologicalQuotient E) :
     (∀ (T : Scheme.{u}) (h : T ⟶ S)

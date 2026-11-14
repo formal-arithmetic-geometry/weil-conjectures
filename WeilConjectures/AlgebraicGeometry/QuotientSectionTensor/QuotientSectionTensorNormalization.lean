@@ -16,9 +16,7 @@ import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientGeometric
 
 /-! # Normalized quotient tensors under the section equivalence
 
-Source: blueprint latest, integral proper-base-change proof, paragraph (3);
-Stacks 03EL, 06YY, 07A4 and 07A6
-(blueprint: lem-sfb-quotient-section-tensor-normalization).
+Source: Stacks 03EL, 06YY, 07A4 and 07A6.
 
 The fixed normalization data is reexported from QuotientSectionTensorData.
 The proof assembles scalar tensor uniqueness, the regular unit and the section
@@ -67,8 +65,7 @@ variable [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ T)]
 All section tensors, units and counits are fixed by the recorded constructions.
 In particular the scalar model has its actual sectionwise object and map functions
 and its universal counit, not an arbitrary functor with isomorphic objects.
-Source: Stacks 03EK, 03EL, 06YY, 07A4 and 07A6
-(blueprint: lem-sfb-quotient-section-tensor-normalization). -/
+Source: Stacks 03EK, 03EL, 06YY, 07A4 and 07A6. -/
 def ComparisonSpec : Prop :=
   (∃! b : ∀ T : Scheme.{u}, TensorIso a T, ∀ T : Scheme.{u}, TensorNormalized a T (b T)) ∧
     ∀ b : ∀ T : Scheme.{u}, TensorIso a T,
@@ -91,26 +88,7 @@ def ComparisonSpec : Prop :=
               SectionPullNormalized a f (c X) (c Y) barLam
 
 /-- Unique normalized quotient scalar tensor and its simultaneous section realization.
-Source: blueprint main-20261015, integral proper-base-change proof, paragraph (3);
-Stacks Tags 03EK, 03EL, 06YY, 07A4 and 07A6
-(blueprint: lem-sfb-quotient-section-tensor-normalization).
-
-Proof:
-1. Derive the strong monoidal internal scalar-extension functor. Its generic
-counit square gives TensorNormalized. Flat-term K-flat resolutions and cancellation
-of the computation isomorphisms prove uniqueness on each scheme, hence uniqueness
-of the whole family. The generic derived oplax unit and its constraint laws give
-UnitCondition for every normalized family.
-2. Choose a normalized scalar section model on every scheme, once and for all.
-The section tensor transport theorem gives the tensor comparison for those same
-models and every normalized internal tensorator. The section pullback transport
-theorem gives the scalar/pullback comparison for those same models and every
-counit-normalized internal pullback comparison.
-3. Identify the native geometric tensorator with the generic derived tensorator.
-The existing section-derived tensor and pushpull normalization theorem supplies
-the tensor, unit and counit comparison equations for both coefficient rings.
-Assemble these independent assertions into ComparisonSpec. No flatness of the
-coefficient map, boundedness, or exactness of quotient scalar extension is used. -/
+Source: Stacks Tags 03EK, 03EL, 06YY, 07A4 and 07A6. -/
 theorem quotient_section_tensor_normalization
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ)

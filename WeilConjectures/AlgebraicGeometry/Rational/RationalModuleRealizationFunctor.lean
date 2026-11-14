@@ -77,8 +77,8 @@ import Mathlib.Algebra.Field.ULift
 /-!
 # Construction and cohomology of rational module realization
 
-Source: Bhatt--Scholze, Lemma 6.8.2, Proposition 6.8.11(3), and the construction
-in Proposition 6.8.14(2) (blueprint: lem-per-rational-module-realization-functor).
+Source: Bhatt--Scholze, Lemma 6.8.2, Proposition 6.8.11(3), and the construction in Proposition
+6.8.14(2).
 
 The realization asserted below has no full-faithfulness or essential-image equivalence
 requirement. Field linearity is expressed by the canonical constant scalar action.
@@ -97,14 +97,12 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- The actual lifted inclusion of the valuation ring into its field.
-Source: Bhatt--Scholze, Section 6.8
-(blueprint: lem-per-rational-module-realization-functor). -/
+Source: Bhatt--Scholze, Section 6.8. -/
 def rationalModuleIntegerInclusion : PbcIntegralRing l E →+* ULift.{u + 1} E :=
   RingHom.ulift (Padic.coefficientExtensionIntegers l E).subtype
 
 /-- Constant field sections, extended through constant-sheaf sheafification.
-Source: Bhatt--Scholze, Definition 6.8.1 and Proposition 6.8.14(2)
-(blueprint: lem-per-rational-module-realization-functor). -/
+Source: Bhatt--Scholze, Definition 6.8.1 and Proposition 6.8.14(2). -/
 def rationalModuleConstantMap (X : Scheme.{u}) :
     adicLisseConstantRing X (ULift.{u + 1} E) ⟶ rationalCoefficientSheaf l X E := by
   letI := coefficientExtensionNormedField l E
@@ -119,8 +117,7 @@ def rationalModuleConstantMap (X : Scheme.{u}) :
         naturality := fun _ _ _ ↦ rfl }
 
 /-- The rational model `E_X ⊗_E V`, using the existing constant module and sheaf tensor.
-Source: Bhatt--Scholze, Definitions 6.8.6 and 6.8.10
-(blueprint: lem-per-rational-module-realization-functor). -/
+Source: Bhatt--Scholze, Definitions 6.8.6 and 6.8.10. -/
 def rationalModuleConstantModel (X : Scheme.{u}) :
     ModuleCat.{u + 1} (ULift.{u + 1} E) ⥤ pbcModules X (rationalCoefficientSheaf l X E) :=
   adicLisseConstantModules X (ULift.{u + 1} E) ⋙ pbcExtend (rationalModuleConstantMap l E X)
@@ -129,8 +126,7 @@ def rationalModuleConstantModel (X : Scheme.{u}) :
 All coefficient maps are fixed by their section or quotient normalizations.
 The model clause is an ordinary tensor identity for every finitely presented N,
 including torsion N. Its inverse images give the same identity on all stratum covers.
-Source: Bhatt--Scholze, Lemma 6.8.2, Proposition 6.8.11(3), and Proposition 6.8.14(2)
-(blueprint: lem-per-rational-module-realization-functor). -/
+Source: Bhatt--Scholze, Lemma 6.8.2, Proposition 6.8.11(3), and Proposition 6.8.14(2). -/
 structure RationalModuleRealization (X : Scheme.{u}) [IsNoetherian X]
     [Fact (∃ n : ℕ, topologicalKrullDim X ≤ n)]
     [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))] where
@@ -292,20 +288,8 @@ attribute [-instance] WeilConjectures.integralOperationsAbSheafify
   WeilConjectures.integralOperationsCommHasDerivedCategory in
 /-- Scalar localization induces the raw rational module realization, with its
 coefficient, cohomology, constructibility and local-model normalizations.
-Source: Bhatt--Scholze, Lemma 6.8.2, Definition 6.8.10, Proposition 6.8.11(3),
-and the construction of Proposition 6.8.14(2)
-(blueprint: lem-per-rational-module-realization-functor).
-
-Proof: compare the completed coefficient presentation with continuous functions using
-its normalized finite quotient maps. The constant-sheaf adjunction identifies the scalar
-square. Apply rationalModuleLocalizationTransport for exactness, cohomology and the fixed
-raw fraction functor, with the canonical constant field action. The integral stratified
-perfect characterization supplies cohomological bounds and ordinary finitely presented
-local models. The cohomology comparison and exactness preserve the bounds; apply
-rationalModuleLocalModelsTransport to the integral cohomology sheaves and pull back this
-comparison to each stratum. Finally, tensoring a finitely presented integral module with
-the field is finite dimensional and free. These constructions fill every realization
-field, including both quotient normalizations and the ordinary model formula. -/
+Source: Bhatt--Scholze, Lemma 6.8.2, Definition 6.8.10, Proposition 6.8.11(3), and the construction
+of Proposition 6.8.14(2). -/
 theorem rationalModuleRealizationFunctor (X : Scheme.{u}) [IsNoetherian X]
     [Fact (∃ n : ℕ, topologicalKrullDim X ≤ n)]
     [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))] :

@@ -36,9 +36,8 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Ringed.ProEtaleRingedOpenClose
 
 /-! # Completion and normalized rationalization of integral open/closed pieces
 
-Source: Bhatt--Scholze, Lemma 6.8.2(2), Definition 6.8.10,
-Proposition 6.8.11(3), Lemma 6.8.13 and Remark 6.8.15, pp. 59--62
-(blueprint: lem-per-integral-piece-completion-normalization).
+Source: Bhatt--Scholze, Lemma 6.8.2(2), Definition 6.8.10, Proposition 6.8.11(3), Lemma 6.8.13 and
+Remark 6.8.15, pp. 59--62.
 
 The completed-membership predicate and pure-tensor and open/closed generators are
 reused from `RationalStratumIntegralModelBasic`. All comparison maps below are fixed on
@@ -60,8 +59,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- The map on ordinary rationalizations is sheafification of `1 ⊗ f`.
-Source: Stacks Tag 03EK; Bhatt--Scholze, Lemma 6.8.2(2)
-(blueprint: lem-per-integral-piece-completion-normalization). -/
+Source: Stacks Tag 03EK; Bhatt--Scholze, Lemma 6.8.2(2). -/
 def integralPieceLocalizationMap (T : Scheme.{u})
     {H K : SheafOfModules.{u + 1} (latticeModuleRing T (latticeCoefficientIntegers l E))}
     (f : H ⟶ K) : integralModelRationalize l E T H ⟶ integralModelRationalize l E T K :=
@@ -71,8 +69,7 @@ def integralPieceLocalizationMap (T : Scheme.{u})
 on sections. The coefficient restriction is the actual one along the integral inclusion.
 The comparison to the cocone point is fixed by all fraction maps, rather than chosen
 as an unspecified module isomorphism.
-Source: Bhatt--Scholze, Lemma 6.8.2(2); Stacks Tags 00CM, 03CY and 03EK
-(blueprint: lem-per-integral-piece-completion-normalization). -/
+Source: Bhatt--Scholze, Lemma 6.8.2(2); Stacks Tags 00CM, 03CY and 03EK. -/
 def HasNormalizedIntegralLocalization (T : Scheme.{u})
     (H : SheafOfModules.{u + 1} (latticeModuleRing T (latticeCoefficientIntegers l E))) :
     Prop :=
@@ -93,8 +90,7 @@ def HasNormalizedIntegralLocalization (T : Scheme.{u})
 
 /-- The separate closed comparison on all localization fractions. Closed direct image
 is evaluated on the actual base change.
-Source: Bhatt--Scholze, Lemma 6.8.2(2) and Remark 6.8.15; Stacks Tag 03DJ
-(blueprint: lem-per-integral-piece-completion-normalization). -/
+Source: Bhatt--Scholze, Lemma 6.8.2(2) and Remark 6.8.15; Stacks Tag 03DJ. -/
 def IsNormalizedClosedComparison {V S : Scheme.{u}} (t : S ⟶ V)
     (N : SheafOfModules.{u + 1} (latticeModuleRing S (latticeCoefficientIntegers l E)))
     (d : integralModelRationalize l E V
@@ -112,8 +108,7 @@ def IsNormalizedClosedComparison {V S : Scheme.{u}} (t : S ⟶ V)
 
 open Classical in
 /-- The separate open comparison on every fraction of each presheaf extension generator.
-Source: Stacks Tag 03DI; Bhatt--Scholze, Lemma 6.8.2(2) and Remark 6.8.15
-(blueprint: lem-per-integral-piece-completion-normalization). -/
+Source: Stacks Tag 03DI; Bhatt--Scholze, Lemma 6.8.2(2) and Remark 6.8.15. -/
 def IsNormalizedOpenComparison {X : Scheme.{u}} (U : X.ProEt)
     (P : SheafOfModules.{u + 1}
       (latticeModuleRing U.left (latticeCoefficientIntegers l E)))
@@ -150,35 +145,8 @@ def IsNormalizedOpenComparison {X : Scheme.{u}} (U : X.ProEt)
 ordinary rationalization commutes with both operations through the fraction-normalized
 comparisons. Their composite is natural and transports a specified lattice isomorphism
 by the displayed composite, with the same formula on every localization leg.
-Source: Bhatt--Scholze, Lemma 6.8.2(2), Definition 6.8.10,
-Proposition 6.8.11(3), Lemma 6.8.13 and Remark 6.8.15, pp. 59--62
-(blueprint: lem-per-integral-piece-completion-normalization).
-
-Proof following the six DAG steps:
-1. Use lem-weil-pbc-continuous-coefficients-immersion-restriction to identify coefficients.
-Extend a witnessing finite stratification first across the closed immersion, then the
-open immersion, adjoining the complementary zero strata. The module identities of
-lem-weil-pbc-proetale-ringed-open-closed retain the finitely presented models, including
-torsion models; the added model is zero.
-2. Apply (iii) implies (i) of lem-weil-pbc-integral-stratified-perfect-characterization
-on S, V and X to the degree-zero complexes. This retains derived completeness, uniform
-constructible reductions and compatible etale-origin witnesses. The finite residue maps
-fix precisely the coefficient identification in IsCompletedModel.
-3. Apply lem-weil-pbc-scalar-localization-module-colimit and
-lem-weil-pbc-extension-tensor-comparison. The stage-n leg is varpi^(-n) tensor h,
-including torsion and zero modules.
-4. Noetherian V is qcqs. The filtered-colimit clause of
-lem-weil-pbc-proetale-ringed-open-closed makes closed direct image preserve this colimit.
-It commutes with coefficient restriction sectionwise. Colimit uniqueness gives d,
-normalized by every leg. Its B-linearity and commutation with inverse varpi make it
-E-linear.
-5. The open extension adjunction preserves the same colimit. Its presheaf construction
-commutes with scalar restriction before sheafification. The same argument gives e,
-with the displayed generator formula on every leg.
-6. Compose e with open extension of d. On every leg this is the image under v_! t_*;
-colimit uniqueness identifies it with the induced comparison and proves naturality.
-Postcompose with v_! t_* alpha to obtain exactly the specified comparison with L.
-Apply step 2 to identity immersions for the last assertion. -/
+Source: Bhatt--Scholze, Lemma 6.8.2(2), Definition 6.8.10, Proposition 6.8.11(3), Lemma 6.8.13 and
+Remark 6.8.15, pp. 59--62. -/
 theorem integralPieceCompletionNormalization
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

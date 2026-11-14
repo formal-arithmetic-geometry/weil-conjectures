@@ -119,18 +119,7 @@ private theorem depth_le_of_ringEquiv {R S : Type u} [CommRing R] [CommRing S]
 set_option backward.isDefEq.respectTransparency false in
 /-- Restriction to the punctured spectrum is bijective at depth at least two.
 
-Source: Stacks Project, Tags 0AVY, 0BK0 and 0E9I.
-(blueprint: lem-sbc-depth-two-puncture-global-sections)
-
-Proof: Apply depth-two Hartogs restriction to the structure module on Spec R.
-It is quasi-coherent, and its sections on every affine open are free of rank one.
-The complement of W consists of the closed point. The stalk of the structure
-module there is linearly equivalent to the structure-sheaf stalk, which is
-isomorphic to R. Transport regular sequences through these equivalences to
-obtain the required depth bound at the only boundary point. Hartogs makes the
-restriction-adjunction unit invertible. Its component on the top open is the
-canonical restriction map on structure-sheaf sections, proving bijectivity.
-The argument includes nilpotents and does not assume completeness. -/
+Source: Stacks Project, Tags 0AVY, 0BK0 and 0E9I. -/
 theorem depth_two_puncture_globalSections_bijective
     (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R]
     (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth (R := R) R)

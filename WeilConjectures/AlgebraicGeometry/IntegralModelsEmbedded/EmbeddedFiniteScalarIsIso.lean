@@ -27,20 +27,7 @@ attribute [local irreducible] upperStarFromPoint upperStarFromPointComp
 attribute [-instance] integralModel_coefficientMonObj in
 /-- The specified finite constant-function scalar map is an isomorphism.
 
-Source: integral-models proof, first paragraph (1), finite discrete coefficients;
-Stacks Tag 093J and the finite-discrete condensed-ring comparison.
-(blueprint: lem-sfb-embedded-finite-scalar-is-iso).
-
-Proof: on the coherent site of profinite sets the constant-to-continuous
-presheaf map is locally injective and locally surjective. These are the two
-proved local properties of the underlying additive constant-function map;
-the equalizer and image sieves of the ring map are the same sieves. Hence
-sheafification sends the ring map to an isomorphism. The adjunction formula
-for constantToContinuous expresses it as that sheafified map composed with
-the canonical comparison and counit isomorphisms. Forget to additive sheaves
-and apply the inverse-image functor from the point to X; both preserve
-isomorphisms. This gives precisely finiteScalarMap, including its prescribed
-constant-function map rather than an unspecified isomorphism. -/
+Source: Stacks Tag 093J and the finite-discrete condensed-ring comparison. -/
 theorem embeddedFiniteScalarIsIso
     (X : Scheme.{u}) (A : Type) [CommRing A] [TopologicalSpace A]
     [IsTopologicalRing A] [Finite A] [DiscreteTopology A] :

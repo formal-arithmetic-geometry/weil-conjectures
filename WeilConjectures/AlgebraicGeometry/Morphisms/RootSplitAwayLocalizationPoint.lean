@@ -20,21 +20,6 @@ namespace AlgebraicGeometry.Scheme
 /-- The punctured root cover has an affine etale chart containing a lift of y.
 
 Source: Stacks Project, Tag 0EYG, off-divisor branch; standard basic-open localization.
-(blueprint: lem-sbc-root-split-away-localization-point)
-
-Proof: Put A=R[T]/(T^n-g), h=algebraMap R A g, and take the actual localization
-S=A[1/h], with phi the composite R to A to S. The basic-open localization
-isomorphism gives e:Spec S to V and its compatibility with Spec phi. Over
-U=D(g) the monic polynomial gives a finite free algebra of positive rank n.
-The root t is invertible because t^n=g is invertible, and n is invertible by hn.
-Thus the derivative n*t^(n-1) is invertible and the cover V to U is etale.
-It is surjective: each residue-field fibre is a nonzero algebra of dimension n,
-so has a prime ideal. Since hy places y in U, choose a point of V over y and
-transport it through e to z. Open immersions are etale, so Spec phi is etale.
-The localization makes phi(g) a unit. This constructs the ring explicitly;
-only a point over the prescribed point is chosen, not data for a definition.
-For n=1 the cover is just D(g); n=0 is excluded. A point y excludes the zero
-base ring, while g=0 makes hy impossible. No regularity is used.
 -/
 theorem root_split_away_localization_point
     (R : CommRingCat.{u}) (g : R) (n : ℕ) (hn : 0 < n ∧ IsUnit (n : R))

@@ -24,28 +24,15 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The normalization over the local trait agrees with the original cover on a generic section.
 
-Let `a : Spec 𝒪_{S,s} ⟶ S` be the canonical morphism, `n` the base change along
+Let `a: Spec 𝒪_{S,s} ⟶ S` be the canonical morphism, `n` the base change along
 `C ×_S Spec 𝒪_{S,s} ⟶ C` of the relative normalization of `C` in the finite étale cover
 `PA` of `C_U`, and `τ` the section of `C ×_S Spec 𝒪_{S,s}` induced by `σ`. For an injective
-ring map `δ : 𝒪_{S,s} →+* A` into a domain with fraction field `K`, the composite
-`𝒪_{S,s} → A → K` extends to `ε : k(S) →+* K`, and the pullback of `n` along
-`t : Spec K ⟶ Spec 𝒪_{S,s}` followed by `τ` is identified over `Spec K` with the pullback of
+ring map `δ: 𝒪_{S,s} →+* A` into a domain with fraction field `K`, the composite
+`𝒪_{S,s} → A → K` extends to `ε: k(S) →+* K`, and the pullback of `n` along
+`t: Spec K ⟶ Spec 𝒪_{S,s}` followed by `τ` is identified over `Spec K` with the pullback of
 the Galois cover `Z` along `b = Spec ε` followed by the generic section `sη`.
 
-Source: Stacks Project, Tag 0EYJ, local trait reduction, and Tag 0EYI.
-(blueprint: lem-sbc-trait-normalization-generic-section-comparison)
-
-Proof: Compose delta with the fraction-field inclusion and extend this injection
-uniquely from O_(S,s) to its fraction field k(S). Applying Spec gives b and the
-identity t followed by a = b followed by the generic-point inclusion. The section
-compatibility then identifies t followed by tau and the projection to C with
-b followed by seta, jU and the open inclusion. The existing normalization-over-an-open
-isomorphism identifies PA with the normalization over C pulled back to C_U; PA is
-finite and therefore equals its relative normalization over C_U. Paste this square
-with hpsi and the pullback along b followed by seta. Paste the defining square of
-n with the pullback along t followed by tau. Their bottom morphisms agree by the
-section identity, so uniqueness of pullbacks gives beta with the asserted projection
-equality. This proof uses no ramification, smooth ascent of normality, or split fibre. -/
+Source: Stacks Project, Tag 0EYJ, local trait reduction, and Tag 0EYI. -/
 theorem GaloisCover.trait_normalization_generic_section_comparison {S C : Scheme.{u}}
     [IsNoetherian S] [IsIntegral S]
     (c : C ⟶ S) (σ : S ⟶ C) (hσ : σ ≫ c = 𝟙 S)

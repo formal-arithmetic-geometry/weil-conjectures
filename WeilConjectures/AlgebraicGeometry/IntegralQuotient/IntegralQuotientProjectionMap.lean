@@ -14,9 +14,6 @@ public import WeilConjectures.AlgebraicGeometry.ModuleObjectProjectionMap
 
 /-! # Integral quotient comparison for unbounded direct image
 
-Source: blueprint main-20261015, integral proper base change proof, paragraphs (1), (3)
-(blueprint: def-sfb-integral-quotient-projection-map).
-
 The mate is formed with the actual derived adjunctions. Quotient levels are indexed by
 n + 1 and every tensor product is the ordinary, uncompleted derived tensor product.
 -/
@@ -38,8 +35,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- The actual ordinary cartesian identification of the restricted quotient coefficient.
-Source: Stacks 0D6D, cartesian coefficients
-(blueprint: def-sfb-integral-quotient-projection-map). -/
+Source: Stacks 0D6D, cartesian coefficients. -/
 def coefficientPull₀ {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     (CondensedRing.upperStar (integral l E) f).obj (B₀ (reduction l E n) Y) ≅
       B₀ (reduction l E n) X :=
@@ -48,7 +44,7 @@ def coefficientPull₀ {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
       (Functor.Monoidal.εIso (CondensedRing.upperStar (finite l E n) f)).symm
 
 /-- The canonical inverse-image computation at a cochain representative.
-Source: Stacks 0G7E (blueprint: def-sfb-integral-quotient-projection-map). -/
+Source: Stacks 0G7E. -/
 def computePull {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : CochainComplex (Modules Λ Y) ℤ) :
@@ -63,7 +59,7 @@ def computePull {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
       (((CondensedRing.upperStar Λ f).mapHomologicalComplex (.up ℤ)).obj P)
 
 /-- The specified coefficient pullback arrow in the derived category.
-Source: Stacks 0D6D (blueprint: def-sfb-integral-quotient-projection-map). -/
+Source: Stacks 0D6D. -/
 def coefficientPull {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     (L (integral l E) f).obj (B (reduction l E n) Y) ⟶ B (reduction l E n) X :=
   computePull f ((CochainComplex.singleFunctor _ 0).obj (B₀ (reduction l E n) Y)) ≫
@@ -76,7 +72,7 @@ def coefficientPull {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
 (the counit transpose of the specified derived tensor-pullback comparison followed by the
 integral counit), followed by the direct image of the actual cartesian pullback of the
 quotient coefficient.
-Source: Stacks 0944, 0B56 (blueprint: def-sfb-integral-quotient-projection-map). -/
+Source: Stacks 0944, 0B56. -/
 @[irreducible] def projectionMap {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (K : DerivedCategory (Modules (integral l E) X)) :
     (F (integral l E) f).obj K ⊗ B (reduction l E n) Y ⟶

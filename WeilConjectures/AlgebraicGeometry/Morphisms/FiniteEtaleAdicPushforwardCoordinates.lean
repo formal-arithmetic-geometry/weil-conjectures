@@ -72,7 +72,6 @@ def coordinates {r : ℕ}
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Bundled-function form of the transition identity.
 (Source: Stacks Project, Tag 02KG.)
-(blueprint: new-sbc-finite-etale-adic-pushforward-coordinates-core)
 -/
 theorem pushforward_coordinates_transition_fun :
     ∀ (r : ℕ)
@@ -156,23 +155,7 @@ theorem pushforward_coordinates_transition_fun :
 under successive thickenings.
 
 Source: Stacks Project, Tag 02KG, affine base change, and Tag 0EKP, restriction of the
-finite free embedding to infinitesimal neighbourhoods.
-(blueprint: new-sbc-finite-etale-adic-pushforward-coordinates)
-
-Proof: The square formed by coverMap, coverToBase, P's structure map and the projection
-of the thickened base is cartesian, by pasting the two defining pullback squares.
-P's structure morphism is finite, hence affine. The affine base-change comparison for
-its quasi-coherent structure sheaf is an isomorphism. Its composition with the
-pullback-of-structure-sheaf isomorphism is exactly pushforwardComparison: both are
-adjoint to restriction of functions along coverMap. Evaluation on the top open is bijective,
-so liftSection is its unique inverse. For transitions, the two cartesian
-squares paste; the affine tensor comparison is associative. Thus restriction along
-coverTransition corresponds to pulling the section of the direct image along the
-base transition. Apply the pulled-back map alpha and its finite free coordinate
-projections. Pullback of the structure sheaf acts on these scalar coordinates by
-appTop, giving the transition formula. No freeness, injectivity, matrix-kernel lifting,
-Noetherian hypothesis, or inverse-limit comparison is needed in this argument.
-Empty schemes and zero ranks use the same canonical maps. -/
+finite free embedding to infinitesimal neighbourhoods. -/
 theorem pushforward_coordinates_transition :
     ∀ (r : ℕ)
       (α : (Modules.pushforward P.obj.hom).obj (Modules.unit P.obj.left) ⟶

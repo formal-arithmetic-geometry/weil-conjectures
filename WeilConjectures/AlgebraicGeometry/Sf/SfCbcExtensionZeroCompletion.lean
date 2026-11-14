@@ -110,9 +110,7 @@ import WeilConjectures.CategoryTheory.TowerComparisonOfUniversal
 /-!
 # Strict reduction of completed extension by zero
 
-Source: blueprint proposition-composition-base-change-rf-shriek, integral open factor, Steps 1–2;
-Stacks Project Tags 099M, 099N and 0941
-(blueprint: lem-sf-cbc-extension-zero-completion).
+Source: Stacks Project Tags 099M, 099N and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -133,7 +131,7 @@ class of complexes admits a unique comparison isomorphism normalized on that cla
 The left path is an exact functor followed by a derived functor `towerX`; the right path is
 a derived functor `towerU` followed by an exact functor `TD`; `c` compares the underlying
 functors on complexes.
-Source: Stacks Project, Tags 05S7 and 06XN (auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 05S7 and 06XN. -/
 theorem existsUnique_iso_of_resolving
     {M C₂ C₃ C₄ D₂ H₁ H : Type*} {_ : Category M} {_ : Abelian M} {_ : HasDerivedCategory M}
     {_ : Category C₂} {_ : Category C₃} {_ : Category C₄} {_ : Category D₂} {_ : Category H₁}
@@ -196,13 +194,7 @@ attribute [-instance] sfCbcTensorTotal sfCbcSliceTransport_additive
 
 /-- Ordinary tensor projection comparison, as one isomorphism of strict quotient diagrams.
 Its equation fixes the map by the actual quotient units, not just its endpoints.
-Source: Stacks Tag 0E8I; Step 2 of the node.
-Proof: use the ringed-slice tensor projection formula on every quotient.
-Both unit composites send m to the extension of 1 tensor m. Quotient units
-are epimorphisms, so this equation determines each component uniquely.
-Naturality of tensor in the quotient coefficient makes the components commute
-with every quotient transition, giving the isomorphism of strict diagrams.
-(blueprint: lem-sf-cbc-extension-zero-completion). -/
+Source: Stacks Tag 0E8I. -/
 theorem sfCbcOrdinaryTensorComparison_existsUnique {U X : Scheme.{t}}
     (j : U ⟶ X) [IsOpenImmersion j] {A : Type t} [CommRing A]
     (d : CompleteCoefficientDatum A) :
@@ -241,7 +233,7 @@ theorem sfCbcOrdinaryTensorComparison_existsUnique {U X : Scheme.{t}}
         (sfCbcModelRestriction_isReducedModule j d n Q hQ) f') f)
 
 /-- The unique strict ordinary tensor comparison with the quotient-unit normalization.
-Source: Stacks Tag 0E8I (blueprint: lem-sf-cbc-extension-zero-completion). -/
+Source: Stacks Tag 0E8I. -/
 def sfCbcOrdinaryTensorComparison {U X : Scheme.{t}} (j : U ⟶ X)
     [IsOpenImmersion j] {A : Type t} [CommRing A] (d : CompleteCoefficientDatum A) :=
   (sfCbcOrdinaryTensorComparison_existsUnique j d).exists.choose
@@ -249,8 +241,7 @@ def sfCbcOrdinaryTensorComparison {U X : Scheme.{t}} (j : U ⟶ X)
 attribute [local semireducible] sfCbcModelDerived
 
 /-- Canonical transport of the exact derived extension functor.
-Source: Stacks Tags 00VC and 05RU
-(blueprint: lem-sf-cbc-extension-zero-completion). -/
+Source: Stacks Tags 00VC and 05RU. -/
 def sfCbcExtensionTransport {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j]
     (A : Type t) [CommRing A] :
     sfCbcDerivedExtension j A ⋙ (sfCbcModelDerived X A).functor ≅
@@ -273,8 +264,7 @@ attribute [local irreducible] sfCbcExtensionTransport sfCbcOrdinaryTensorCompari
 
 /-- Normalization of the derived tensor comparison on every flat-term K-flat complex.
 Both sides use the universal quotient counits and the ordinary tensor comparison.
-Source: Stacks Tag 06YY; Step 2 of the node
-(blueprint: lem-sf-cbc-extension-zero-completion). -/
+Source: Stacks Tag 06YY. -/
 def sfCbcTensorComparisonNormalized {U X : Scheme.{t}} (j : U ⟶ X)
     [IsOpenImmersion j] {A : Type t} [CommRing A] (d : CompleteCoefficientDatum A)
     (e : sfCbcModelDerivedExtension j A ⋙ (sfCbcQuotientPresentation X d).tower ≅
@@ -311,14 +301,7 @@ def sfCbcTensorComparisonNormalized {U X : Scheme.{t}} (j : U ⟶ X)
             (c.hom.app P))
 
 /-- The tensor projection comparison descends uniquely to derived strict towers.
-Source: Stacks Tags 06YY, 0E8I and 0941; Steps 1–2 of the node.
-Proof: extension preserves flat K-flat complexes by Step 1. The ordinary
-comparison is a strict quotient-diagram isomorphism. Apply it degreewise on
-one such complex and localize in the tower category. The universal quotient
-counits give the displayed formula. All complexes have flat K-flat resolutions;
-localization at quasi-isomorphisms therefore extends the comparison uniquely,
-naturally in the input, and preserves its inverse.
-(blueprint: lem-sf-cbc-extension-zero-completion). -/
+Source: Stacks Tags 06YY, 0E8I and 0941. -/
 theorem sfCbcTensorComparison_existsUnique {U X : Scheme.{t}} (j : U ⟶ X)
     [IsOpenImmersion j] {A : Type t} [CommRing A] (d : CompleteCoefficientDatum A) :
     ∃! e : sfCbcModelDerivedExtension j A ⋙ (sfCbcQuotientPresentation X d).tower ≅

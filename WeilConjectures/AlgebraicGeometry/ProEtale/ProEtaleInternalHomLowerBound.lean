@@ -76,7 +76,6 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 /-! # A lower bound for pro-etale derived internal Hom
 
 Source: Bhatt--Scholze, Lemma 6.3.14, boundedness argument; Stacks Project, Tag 08JA.
-(blueprint: lem-weil-pbc-proetale-internal-hom-lower-bound).
 -/
 
 @[expose] public noncomputable section
@@ -115,15 +114,7 @@ private theorem homObj_zero_right (T : Scheme.{u})
 
 /-- Internal Hom from an object bounded above by b to one bounded below by N is
 bounded below by N-b. The coefficient ring sheaf is arbitrary.
-Source: Bhatt--Scholze, Lemma 6.3.14; Stacks Project, Tag 08JA.
-(blueprint: lem-weil-pbc-proetale-internal-hom-lower-bound).
-
-Proof: choose a source complex vanishing above b. Resolve a target complex vanishing
-below N by injectives, still vanishing below N. This resolution is K-injective.
-The representative comparison identifies derived internal Hom with the Hom complex.
-In degree n<N-b its product factors are Hom(L^p,I^(p+n)). For p>b the source is zero;
-otherwise p+n<N and the target is zero. Every factor, hence the product, is zero.
-This termwise bound implies the claimed cohomological bound. -/
+Source: Bhatt--Scholze, Lemma 6.3.14; Stacks Project, Tag 08JA. -/
 theorem proEtale_internalHom_isGE (T : Scheme.{u})
     (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1})
     [HasDerivedCategory (SheafOfModules.{u + 1} ((sheafCompose (ProEt.topology T)

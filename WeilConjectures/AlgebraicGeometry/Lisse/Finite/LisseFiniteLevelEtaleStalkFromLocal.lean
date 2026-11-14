@@ -9,8 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Derived.DerivedLocalIsomorphismS
 
 /-! # From an étale local isomorphism to a geometric stalk section
 
-Source: Stacks Project, proetale.tex, Tag 09BV.
-(blueprint: lem-weil-pbc-lisse-finite-level-etale-stalk-from-local-section).
+Source: Stacks Project, Tag 09BV.
 -/
 
 @[expose] public noncomputable section
@@ -23,13 +22,7 @@ namespace AlgebraicGeometry.Scheme
 geometric point gives an element of the sheafified Isom stalk.  This isolates the
 sheafification and point-fibre step from finite-level comparison.
 
-Source: Stacks Project, proetale.tex, Tag 09BV.
-(blueprint: lem-weil-pbc-lisse-finite-level-etale-stalk-from-local-section).
-
-Proof: Apply the canonical map from the local Isom presheaf to its sheafification
-at the pointed étale object `(V,v)`.  The resulting germ lies in the geometric
-stalk, and the point-fibre colimit map sends it to an element of the sheaf fibre.
-No finite-level or boundedness hypothesis is needed for this evaluation step.
+Source: Stacks Project, Tag 09BV.
 -/
 theorem lisse_finite_level_etale_stalk_from_local_section
     (X : Scheme.{u}) (B : Type (u + 1)) [CommRing B]

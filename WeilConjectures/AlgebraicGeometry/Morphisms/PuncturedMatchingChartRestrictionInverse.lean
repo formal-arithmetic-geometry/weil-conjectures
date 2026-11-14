@@ -19,9 +19,7 @@ namespace AlgebraicGeometry.Scheme.CompletionGluingData
 ring-theoretic left inverse.  This is the localized affine comparison in the
 proof of Stacks Project, Tags 0BLH and 05ER: the formal-gluing localization
 identifies the matching numerator with the corresponding punctured chart
-section.  The left inverse is induced by that identification.
-
-(blueprint: lem-sbc-punctured-matching-chart-restriction-left-inverse) -/
+section.  The left inverse is induced by that identification. -/
 theorem puncturedMatching_chart_restriction_leftInverse
     {A : Type u} [CommRing A] [IsNoetherianRing A] [IsLocalRing A]
     {U : (Spec (.of A)).Opens}

@@ -8,9 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Bounded.BoundedConstructibleCompleteSupplement
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Constructible.ProEtaleConstructibleCoefficientSheaf
 
-/-! # Uniform reduction cohomology
-Source: uniform triangulation supplement, steps 2 and 5.
-(blueprint: def-weil-pbc-uniform-reduction-profile). -/
+/-! # Uniform reduction cohomology -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -19,17 +17,13 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 open ProEtale
 
-/-- Reduction followed by the exact change from function coefficients to constants.
-Source: blueprint order 1250
-(blueprint: def-weil-pbc-uniform-reduction-profile). -/
+/-- Reduction followed by the exact change from function coefficients to constants. -/
 abbrev pbcConstantReduction (T : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) :=
   pbcCompletedReduction T d n ⋙
     pbcDerivedRestrict (pbcLevelConstantComparison T d n).hom
 
-/-- One cohomological interval for all reductions, with intrinsic constructibility.
-Source: blueprint triangulation supplement, steps 2 and 5
-(blueprint: def-weil-pbc-uniform-reduction-profile). -/
+/-- One cohomological interval for all reductions, with intrinsic constructibility. -/
 def PbcUniformReductionProfile (T : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (K : PbcCompletedDerived T d) : Prop :=

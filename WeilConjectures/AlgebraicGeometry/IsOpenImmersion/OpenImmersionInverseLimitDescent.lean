@@ -17,8 +17,8 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseLimitDescent
 /-!
 # Eventual descent of open immersions along qcqs inverse limits
 
-Source: Stacks Project, Limits, Tag 0EUU in Situation 081D, and stability of open
-immersions under base change (blueprint: lem-weil-pbc-descend-open-immersion-qcqs).
+Source: Stacks Project, Limits, Tag 0EUU in Situation 081D, and stability of open immersions under
+base change.
 -/
 
 @[expose] public section
@@ -72,24 +72,7 @@ qcqs inverse system with affine transitions is an open immersion at every suffic
 late stage if its base change to the limit is an open immersion. Neither its source
 nor its target is required to be affine.
 
-Source: Stacks Project, Limits, Tag 0EUU in Situation 081D; base-change persistence.
-(blueprint: lem-weil-pbc-descend-open-immersion-qcqs).
-
-Proof:
-1. The limit morphism is etale and monic, by lem-weil-pbc-open-immersion-etale and
-   lem-weil-pbc-open-immersion-monomorphism.
-2. Local finite presentation implies locally finite type, by Mathlib's instance
-   in Morphisms.FinitePresentation, so monomorphism descent applies.
-3. Apply lem-weil-pbc-descend-etale and lem-weil-pbc-descend-monomorphism to obtain
-   stages a and b where the morphism is respectively etale and monic.
-4. Choose a common upper bound i. For every j >= i and c = a,b, the fibre-product
-   universal property identifies X_j with X_c times_{Y_c} Y_j: on T-points,
-   (x0,t) maps to ((x0,s_c t),(f0 x0,t)), and the inverse forgets the redundant
-   coordinates. Cartesian-square cancellation proves this identification in Lean.
-5. Etaleness and monicity persist across that square by base-change stability.
-   Thus f_j is both etale and monic for every j >= i.
-6. A monomorphism is universally injective (Mathlib's diagonal criterion), so
-   lem-weil-pbc-radicial-etale-open makes every such f_j an open immersion. -/
+Source: Stacks Project, Limits, Tag 0EUU in Situation 081D; base-change persistence. -/
 theorem IsOpenImmersion.eventually_of_inverseLimit
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

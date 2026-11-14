@@ -14,10 +14,6 @@ public import WeilConjectures.SixFunctors.BaseChange.Square
 
 /-!
 # Open-immersion squares
-
-Source: blueprint, chap-Proper-base-change, proposition-proper-base-change-projective-line,
-node proposition-extension-zero-restriction-closed-subscheme--11 (blueprint:
-proposition-extension-zero-restriction-closed-subscheme--11).
 -/
 
 @[expose] public section
@@ -31,10 +27,7 @@ namespace AlgebraicGeometry
 /-- An open-immersion square is a chosen Cartesian square with both vertical arrows
 open immersions. The inherited datum includes `gU ≫ j = j' ≫ g`, a chosen isomorphism
 `U' ≅ CategoryTheory.Limits.pullback j g`, and its compatibility with both projections.
-No condition is imposed on the bottom arrow `g`.
-Source: blueprint, chap-Proper-base-change, proposition-proper-base-change-projective-line,
-node proposition-extension-zero-restriction-closed-subscheme--11 (blueprint:
-proposition-extension-zero-restriction-closed-subscheme--11). -/
+No condition is imposed on the bottom arrow `g`. -/
 structure OpenImmersionSquare {U' U X' X : Scheme.{u}}
     (gU : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     extends ChosenCartesianSquare gU j' j g where

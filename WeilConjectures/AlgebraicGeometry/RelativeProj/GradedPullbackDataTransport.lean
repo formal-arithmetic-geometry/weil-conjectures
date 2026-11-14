@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.RelativeProj.GradedBaseChangeTra
 /-! # Transport of graded-algebra pullback data
 
 Source: Stacks Project, Constructions, Tag 01O3.
-(blueprint: def-pur-graded-pullback-data-transport).
 -/
 
 @[expose] public section
@@ -21,8 +20,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme.GradedAlgebraData
 
 /-- The ring equivalence induced by one affine component of a graded-algebra isomorphism.
-Source: Stacks Project, Tag 01O3
-(blueprint: def-pur-graded-pullback-data-transport). -/
+Source: Stacks Project, Tag 01O3. -/
 def gradedAlgebraSectionRingEquiv {X : Scheme.{u}} {A B : X.GradedAlgebraData}
     (e : A ≅ B) (U : X.affineOpens) : A.obj U ≃+* B.obj U where
   toFun := e.hom.app U
@@ -39,8 +37,7 @@ def gradedAlgebraSectionRingEquiv {X : Scheme.{u}} {A B : X.GradedAlgebraData}
 /-- Transport the source and target graded algebras of coefficientwise pullback data.
 The component map is the old one conjugated by the supplied graded-algebra isomorphisms;
 coefficientwise base change and both restriction laws transport along them.
-Source: Stacks Project, Tag 01O3.
-(blueprint: def-pur-graded-pullback-data-transport). -/
+Source: Stacks Project, Tag 01O3. -/
 noncomputable def PullbackData.transport
     {X Y : Scheme.{u}} {g : Y ⟶ X}
     {A₀ A₁ : X.GradedAlgebraData} {B₀ B₁ : Y.GradedAlgebraData}

@@ -16,8 +16,7 @@ import Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # Constructibility for the specified finite-coefficient heart realization
 
-Source: integral-models proof, first paragraph; Stacks Tags 03ET, 09AJ and 099Y.
-(blueprint: lem-sfb-embedded-finite-heart-constructibility).
+Source: Stacks Tags 03ET, 09AJ and 099Y.
 -/
 
 @[expose] public noncomputable section
@@ -104,25 +103,7 @@ private instance liftedScalarPointMap_isIso (A : Type) [CommRing A]
 set_option backward.isDefEq.respectTransparency.types false in
 attribute [-instance] integralModel_coefficientMonObj in
 /-- Constructibility is unchanged by the specified heart realization, on a single sheaf.
-Source: integral-models proof, first paragraph; Stacks Tags 03ET, 09AJ and 099Y
-(blueprint: lem-sfb-embedded-finite-heart-constructibility).
-
-Proof: Noetherian X is qcqs, so the embedded definition uses a finite constructible
-stratification. The constant-function scalar map is invertible, and scalar extension
-along it identifies a finite presentation matrix with the identical matrix of constant
-functions. Section-action, constant-scalar restriction, and intrinsic realization
-preserve its cokernel. Their comparisons with inverse image along a stratum immersion
-follow from the common constant-section maps and uniqueness of the left adjoints to
-sectionwise restriction. Thus the same strata and covering families identify the
-finite constant models on the embedded side with constant finite modules intrinsically.
-Conversely intrinsic local constancy and finite geometric stalks give local finite
-module models: refine each local constant cover into the clopen loci of the module
-values; discard empty members. A finite-dimensional module over the finite field is
-finitely presented, so each such model is presented by a finite scalar matrix. Apply
-the inverse coefficient equivalences to that matrix and its cokernel. This recovers
-precisely the embedded local models on the same stratification. Positive strata cause
-no restriction on an empty X: replace a zero-stratum partition by the one-stratum
-identity partition, whose module is trivialized by the empty cover. -/
+Source: Stacks Tags 03ET, 09AJ and 099Y. -/
 theorem finiteHeartConstructibility
     (X : Scheme.{u}) [IsNoetherian X] (A : Type) [Field A]
     [TopologicalSpace A] [IsTopologicalRing A] [Finite A] [DiscreteTopology A]

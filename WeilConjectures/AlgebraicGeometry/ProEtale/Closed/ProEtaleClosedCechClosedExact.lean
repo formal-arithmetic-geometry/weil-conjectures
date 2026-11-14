@@ -12,9 +12,6 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.I
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.ClosedImmersion
 
 /-! # Exactness of the closed Cech presentation on the closed fibre
-
-Source: the matching-relations calculation in Steps 1--3 of
-`lem-sp-proetale-closed-affine-cech-presentation-exact`.
 -/
 
 @[expose] public section
@@ -27,16 +24,8 @@ attribute [local instance] Over.ConstructProducts.over_finiteProducts_of_finiteW
 /-- The closed Čech presentation is exact after restriction to the closed fibre, for an
 arbitrary pro-étale object `V` and an arbitrary finite family `U` over it.
 
-Source: Steps 1--3 of `lem-sp-proetale-closed-affine-cech-presentation-exact`; the
-affineness and covering hypotheses of `closedAffineCech_closed_restriction_exact` are not
-used there.
-
-Proof: it suffices that every map from i^*T_2 to an injective J that vanishes on
-i^*T_1 factors through i^*T_3. By the adjunction i^* -| i_* these maps are maps
-from T_j to i_*J, and by the corepresenting property they are Cech cochains of
-the coefficient sheaf P^*i_*i^*i_*J. The closed counit i^*i_*J -> J is invertible,
-and i_* and P^* preserve injectives, so that sheaf is injective. The Cech complex
-of an injective presheaf is exact in positive degrees, which gives the factorization. -/
+Source: the affineness and covering hypotheses of `closedAffineCech_closed_restriction_exact` are
+not used there. -/
 theorem closedCech_closed_restriction_exact
     (A : Type u) [CommRing A] {B O : Scheme.{u}}
     (b : O ⟶ B) [IsOpenImmersion b] [QuasiCompact b]

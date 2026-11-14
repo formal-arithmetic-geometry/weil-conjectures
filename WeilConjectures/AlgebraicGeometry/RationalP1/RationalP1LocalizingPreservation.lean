@@ -32,10 +32,6 @@ import WeilConjectures.AlgebraicGeometry.RationalP1.RationalP1PositiveLineConstr
 
 /-! # Rational projective-line localizing preservation
 
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md,
-Well-definedness (1)--(3) (blueprint: lem-sfb-rational-p1-localizing-preservation).
-
 The proposition records all geometry, coefficient, intermediate-functor and exactness
 checks, as well as the final preservation pair. Its auxiliary propositions only group
 clauses of this node; the categories, operations and full-subcategory lifts are existing
@@ -70,8 +66,7 @@ open DiagonalCoefficients CondensedRing
 
 /-- Preservation and exactness on the ambient category and its full localizing subcategories.
 The shifts and triangles on the subcategories are inherited; `ObjectProperty.lift` fixes the
-restriction on both objects and morphisms. Source: the rational projective-line unit/counit
-proof, Well-definedness (2)--(3) (blueprint: lem-sfb-rational-p1-localizing-preservation). -/
+restriction on both objects and morphisms. -/
 structure LocalizingFunctorChecks
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X S : Scheme.{u}}
@@ -98,8 +93,7 @@ structure LocalizingFunctorChecks
         (fun A ↦ preserves A.obj A.property)).IsTriangulated) (_commShift := s)
 
 /-- The bounded constructible generators, tensor closure and exact positive Tate twist at
-one of the three schemes. Source: the rational projective-line unit/counit proof,
-Well-definedness (2)--(3) (blueprint: lem-sfb-rational-p1-localizing-preservation). -/
+one of the three schemes. -/
 structure ProjectiveLineLocalizingObjectChecks (l : ℕ) [Fact l.Prime]
     (c : Option (PadicAlgCl.FiniteIntermediateField l)) (Z : Scheme.{u}) : Prop where
   coefficientUnit : constantModelBoundedConstructible (coefficient l c).X Z
@@ -117,9 +111,7 @@ structure ProjectiveLineLocalizingObjectChecks (l : ℕ) [Fact l.Prime]
     (RationalP1.twist (coefficient l c).X Z (line l c Z))
 
 /-- All geometric domain checks for the projective line, its self-product and the open
-complement of the closed diagonal. Structural maps are the displayed composites to `Spec k`.
-Source: the rational projective-line unit/counit proof, Well-definedness (1)--(3)
-(blueprint: lem-sfb-rational-p1-localizing-preservation). -/
+complement of the closed diagonal. Structural maps are the displayed composites to `Spec k`. -/
 structure ProjectiveLineLocalizingGeometry (l : ℕ) {k : Type u} [Field k]
     (Y : Scheme.{u}) [Y.Over (Spec (.of k))] : Prop where
   noetherianY : IsNoetherian Y
@@ -156,9 +148,7 @@ structure ProjectiveLineLocalizingGeometry (l : ℕ) {k : Type u} [Field k]
 
 /-- The entire preservation package; `pushQ` and `twistedPullQ` contain the two obligations
 called `localizingPreservation` in the original assembly, together with their exact
-restrictions. The remaining fields retain every hypothesis check and intermediate assertion.
-Source: the rational projective-line unit/counit proof, Well-definedness (1)--(3)
-(blueprint: lem-sfb-rational-p1-localizing-preservation). -/
+restrictions. The remaining fields retain every hypothesis check and intermediate assertion. -/
 structure ProjectiveLineLocalizingChecks (l : ℕ) [Fact l.Prime]
     (c : Option (PadicAlgCl.FiniteIntermediateField l)) {k : Type u} [Field k]
     (Y : Scheme.{u}) [Y.Over (Spec (.of k))] : Prop where
@@ -347,43 +337,6 @@ private theorem object_checks
           twist := htw }
 
 /-- All localizing preservation and exactness assertions in the projective-line geometry.
-Source: the rational projective-line unit/counit proof, Well-definedness (1)--(3)
-(blueprint: lem-sfb-rational-p1-localizing-preservation).
-
-Proof:
-1. Projective space is proper (lemma-nagata-projective-space-base-change-proper).
-   Base change makes the projections proper; separatedness makes the diagonal closed,
-   hence proper (lem-weil-pbc-proper-fp-permanence, def-weil-proper-morphism).
-2. A field is Noetherian. Finite type over a Noetherian scheme makes Y, P and W
-   Noetherian and quasi-compact (lem-weil-pbc-finite-type-over-noetherian).
-   Locally Noetherian schemes are quasi-separated
-   (lem-weil-pbc-locally-noetherian-quasi-separated).
-3. Composing the proper maps with Y's structure map gives separated finite-type
-   structure maps. Opens in a Noetherian scheme are quasi-compact
-   (lem-weil-pbc-noetherian-open-subscheme-noetherian), so the complement immersion is
-   quasi-compact and finite type (lem-weil-pbc-qc-open-immersion-finite-type).
-   Its composition is separated finite type too (def-weil-finite-type-morphism).
-4. The distinct primes imply that l is a unit in k and in every residue field.
-   Cartesian coefficients identify all pulled-back rings and Tate lines and make
-   module inverse image exact (lemma-inverse-image-coefficient-sheaves).
-5. On these qcqs schemes the constant-model Dctf and Dbc coincide
-   (det-def-localizing-closure-ctf-equals-bc). Inverse image preserves their closures
-   (proposition-proper-base-change-localizing-categories--1). Proper direct image preserves them
-   because the standing rational setting supplies its constructibility and sum
-   hypotheses (proposition-proper-direct-image-extension-zero--1).
-6. The coefficient unit is free of rank one and the positive Tate line is locally
-   free of rank one (definition-tate-twists). Both have finite constant local models
-   with scalar module Lambda(*) and are concentrated in degree zero
-   (definition-constructible-sheaves). For the empty scheme use the empty stratification.
-7. Tensor closure is proposition-projection-formula-rational-coefficients--1. The positive line
-belongs to the
-   generators; tensor with it preserves the closure, as does shift by two since
-   the closure is triangulated (definition-localizing-subcategory).
-8. Derived tensor is exact in each variable (lem-weil-pbc-ringed-projection-mate-exact).
-   The even shift is exact by the cone description (def-weil-abstract-derived-category).
-   Restriction to the inherited shifts and triangles is exact
-   (def-weil-triangulated-subcategory), as is composition. This yields every
-   intermediate restriction and the final pushforward/twisted-pullback pair.
 -/
 theorem localizingPreservationChecks
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))

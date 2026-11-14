@@ -29,14 +29,7 @@ attribute [local irreducible] coefficient line twist firstProjection secondProje
 attribute [local irreducible] square
 
 /--
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md,
-Second identity, first factor before the Tate twist.
-(blueprint: lem-sfb-rational-p1-second-pull-section-core-comm).
-Proof: expand the ambient square comparison into the normalized inverse-image compositors.
-Restrict along the diagonal, use diagonal followed by either projection equal to the identity,
-and cancel the identity compositor. The resulting equation is exactly the comm field of the
-untwisted pull-section compatibility structure.
+Source: Second identity, first factor before the Tate twist.
 -/
 theorem second_pull_section_core_comm
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))

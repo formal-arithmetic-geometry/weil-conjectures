@@ -17,9 +17,7 @@ public import WeilConjectures.CategoryTheory.ProEtaleCoefficients.LocalizingAdmi
 
 /-! # Concrete coefficients and the root-tower Tate line
 
-Source: current blueprint theorem-smooth-purity-all-admissible-coefficients, coefficient list and
-formula f* K(d)[2d]; Bhatt--Scholze, Section 6.8.
-(blueprint: def-pur-transport-concrete-coefficients).
+Source: Bhatt--Scholze, Section 6.8.
 The index is presentation data for the existing six admissible coefficients.
 Every ring and every line below is constructed, not selected from an existence assertion.
 -/
@@ -34,9 +32,7 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.PurityTransport
 
 /-- Presentations of exactly the six admissible coefficient types. The positive
-finite exponent only records an annihilator; its choice does not alter the ring.
-Source: theorem-smooth-purity-all-admissible-coefficients, first paragraph
-(blueprint: def-pur-transport-concrete-coefficients). -/
+finite exponent only records an annihilator; its choice does not alter the ring. -/
 inductive Coefficient (ell : ℕ) [Fact ell.Prime] where
   | finite (A : CommRingCat.{0}) (fin : Finite A) (n : ℕ)
       (annihilates : (ell ^ (n + 1) : A) = 0)
@@ -49,9 +45,7 @@ inductive Coefficient (ell : ℕ) [Fact ell.Prime] where
 variable (ell : ℕ) [Fact ell.Prime]
 
 /-- The actual condensed commutative ring, with continuous integral and field
-coefficients and the finite-subextension-valued algebraic closure.
-Source: definition-constructible-sheaves and coefficient conventions
-(blueprint: def-pur-transport-concrete-coefficients). -/
+coefficients and the finite-subextension-valued algebraic closure. -/
 def Coefficient.ring : Coefficient ell →
     Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1}
   | .finite A _ _ _ =>
@@ -64,16 +58,13 @@ def Coefficient.ring : Coefficient ell →
   | .rational E => Profinite.padicSubfieldCondensedRing ell E
   | .closure => Profinite.padicAlgClCondensedRing ell
 
-/-- The existing abelian ring object underlying the coefficient presentation.
-Source: condensed-module coefficient convention
-(blueprint: def-pur-transport-concrete-coefficients). -/
+/-- The existing abelian ring object underlying the coefficient presentation. -/
 abbrev Coefficient.obj (c : Coefficient ell) :=
   (sheafCompose (coherentTopology Profinite.{u})
     (forget₂ RingCat.{u + 1} AddCommGrpCat.{u + 1})).obj (c.ring ell)
 
 /-- Commutativity is pointwise, and at the closure is inherited from the recorded
-finite-subextension coefficient. Source: coefficient convention
-(blueprint: def-pur-transport-concrete-coefficients). -/
+finite-subextension coefficient. -/
 instance Coefficient.comm (c : Coefficient ell) : IsCommMonObj (c.obj.{u} ell) := by
   cases c with
   | finite A fin n h =>
@@ -89,8 +80,7 @@ instance Coefficient.comm (c : Coefficient ell) : IsCommMonObj (c.obj.{u} ell) :
   | closure => exact Profinite.isCommMonObj_padicAlgClRingObj ell
 
 /-- The canonical integral coefficient map, including the quotient map at a
-finite coefficient ring. Source: root-tower construction of Tate twists
-(blueprint: def-pur-transport-concrete-coefficients). -/
+finite coefficient ring. Source: root-tower construction of Tate twists. -/
 def Coefficient.fromIntegers : (c : Coefficient ell) →
     Profinite.padicIntCondensedRing.{u} ell ⟶ c.ring ell
   | .finite A _ n h =>
@@ -108,16 +98,14 @@ def Coefficient.fromIntegers : (c : Coefficient ell) →
       Profinite.padicCondensedRingToPadicSubfieldCondensedRing ell E
   | .closure => Profinite.padicIntCondensedRingToPadicAlgCl ell
 
-/-- Its underlying internal ring homomorphism. Source: coefficient pullback
-(blueprint: def-pur-transport-concrete-coefficients). -/
+/-- Its underlying internal ring homomorphism. Source: coefficient pullback. -/
 def Coefficient.integralMap (c : Coefficient ell) :
     Profinite.continuousMapRingObj.{u} ℤ_[ell] ⟶ c.obj ell :=
   (sheafCompose (coherentTopology Profinite.{u})
     (forget₂ RingCat.{u + 1} AddCommGrpCat.{u + 1})).map (c.fromIntegers ell)
 
 /-- The integral coefficient map is a morphism of ring objects, being induced by a morphism of
-ring sheaves. Source: coefficient pullback
-(blueprint: def-pur-transport-concrete-coefficients). -/
+ring sheaves. Source: coefficient pullback. -/
 instance Coefficient.isMonHom_integralMap (c : Coefficient ell) :
     IsMonHom (c.integralMap.{u} ell) :=
   inferInstanceAs (IsMonHom ((sheafCompose (coherentTopology Profinite.{u})
@@ -125,43 +113,33 @@ instance Coefficient.isMonHom_integralMap (c : Coefficient ell) :
 
 /-- The root-tower line extended along the actual integral coefficient map.
 For finite A this is A tensor mu at any annihilating positive level; for the
-other coefficients it is the completed line followed by ordinary scalar extension.
-Source: Bhatt--Scholze 6.8 and definition-tate-twists
-(blueprint: def-pur-transport-concrete-coefficients). -/
+other coefficients it is the completed line followed by ordinary scalar extension. -/
 def Coefficient.firstLine (c : Coefficient ell) (X : Scheme.{u}) :=
   (Mod.extendScalars (coefficientMap (c.integralMap ell) X)).obj (tateModule X ell)
 
-/-- The positive Tate line, including the regular unit at d=0.
-Source: definition-tate-twists, tensor powers
-(blueprint: def-pur-transport-concrete-coefficients). -/
+/-- The positive Tate line, including the regular unit at d=0. -/
 def Coefficient.line (c : Coefficient ell) (X : Scheme.{u}) :
     ℕ → Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj (c.obj ell) X)
   | 0 => 𝟙_ _
   | d + 1 => c.line X d ⊗ c.firstLine ell X
 
-/-- Ambient derived modules on the specified small pro-etale site.
-Source: definition-constructible-sheaves
-(blueprint: def-pur-transport-concrete-coefficients). -/
+/-- Ambient derived modules on the specified small pro-etale site. -/
 abbrev Coefficient.derived (c : Coefficient ell) (X : Scheme.{u}) :=
   DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
     (condensedRingObj (c.obj ell) X))
 
 /-- The recorded Dctf full subcategory, without changing its morphisms or
-identifying the integral coefficient with a discrete constant ring.
-Source: definition-constructible-sheaves
-(blueprint: def-pur-transport-concrete-coefficients). -/
+identifying the integral coefficient with a discrete constant ring. -/
 abbrev Coefficient.ctf (c : Coefficient ell) (X : Scheme.{u}) :=
   ConstantModelConstructibleFiniteTor (c.obj ell) X
 
 /-- The root-tower line in its prescribed cohomological degree.
-Source: coefficient twists (blueprint: def-pur-transport-concrete-coefficients). -/
+Source: coefficient twists. -/
 def Coefficient.derivedLine (c : Coefficient ell) (X : Scheme.{u}) (d : ℕ) :
     c.derived ell X :=
   ((DerivedCategory.singleFunctor _ 0).obj (c.line ell X d)) ⟦2 * (d : ℤ)⟧
 
-/-- The actual ambient f* K(d)[2d] functor.
-Source: theorem-smooth-purity-all-admissible-coefficients, displayed formula
-(blueprint: def-pur-transport-concrete-coefficients). -/
+/-- The actual ambient f* K(d)[2d] functor. -/
 def Coefficient.smoothSource (c : Coefficient ell) {X Y : Scheme.{u}}
     (f : X ⟶ Y) (d : ℕ) : c.derived ell Y ⥤ c.derived ell X :=
   (CondensedRing.upperStar (c.obj ell) f).leftDerivedFunctor ⋙
@@ -170,8 +148,7 @@ def Coefficient.smoothSource (c : Coefficient ell) {X Y : Scheme.{u}}
 /-- Every existing purity coefficient is an admissible localizing coefficient.
 This certificate only supplies the empty coefficient change; its ring and topology
 are the existing Coefficient.obj, independently of the site universe.
-Source: concrete coefficient list and its admissibility certificate
-(blueprint: def-per-transport-concrete-coefficients). -/
+Source: concrete coefficient list and its admissibility certificate. -/
 abbrev coefficientAdmissible (ell : ℕ) [Fact ell.Prime] (c : PurityTransport.Coefficient ell) :
     IsLocalizingAdmissibleCoefficient ell (c.obj.{u} ell) := by
   cases c with

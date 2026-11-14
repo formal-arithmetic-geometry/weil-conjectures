@@ -167,7 +167,6 @@ public import WeilConjectures.AlgebraicGeometry.IntegralConstantModelRealization
 
 Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(3), and the
 projection-normalized integral coefficient comparison.
-(blueprint: def-sfb-integral-constant-model-realization).
 -/
 
 @[expose] public noncomputable section

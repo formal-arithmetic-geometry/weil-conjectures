@@ -27,21 +27,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The prescribed quotient restriction lifts over the completion.
 
-Source: Stacks Project, proof of Tag 0BLS, Tags 0BM6, 09ZL, 0AVY and 0A02.
-(blueprint: lem-sbc-depth-three-completed-quotient-lift)
-
-Proof: Write C for the maximal-ideal completion. This is Noetherian and flat over A,
-and its closed point is the unique point above the closed point of A. Thus W is
-its punctured spectrum. Depth at least three gives zero first and second local
-cohomology of A, and flat base change gives the same vanishing for C. Base change
-of the supplied finite etale quotient extension to C/fC extends the actual
-quotient restriction of the completed cover. Completeness and f in the maximal
-ideal make (C,fC) a henselian pair. Tag 09ZL lifts that quotient extension to a
-finite etale cover E of Spec C. Tag 0BM6 makes restriction from W to its principal
-quotient fully faithful. The common quotient identification therefore lifts to
-an isomorphism of covers over W; its inverse lifts too and faithfulness verifies
-the inverse identities. Forgetting to schemes gives the stated isomorphism and
-its equality over W. This includes f = 0 and the empty cover. -/
+Source: Stacks Project, proof of Tag 0BLS, Tags 0BM6, 09ZL, 0AVY and 0A02 -/
 theorem exists_completed_etale_extension_of_depth_three_of_quotient_extension
     (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A]
     (f : A) (hf : f ∈ IsLocalRing.maximalIdeal A)

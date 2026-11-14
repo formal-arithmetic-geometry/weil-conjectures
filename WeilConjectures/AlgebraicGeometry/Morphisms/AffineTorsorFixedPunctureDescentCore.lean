@@ -21,8 +21,7 @@ set_option autoImplicit false
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- Orbit enumeration for the finite descent action. 
-(blueprint: lem-sbc-affine-torsor-fixed-puncture-orbit-data)
+/-- Orbit enumeration for the finite descent action.
 -/
 theorem affine_torsor_orbit_data (d : ℕ) :
     ∃ (m : ℕ) (K : Fin m → Subgroup (Equiv.Perm (Fin d))),
@@ -33,13 +32,7 @@ theorem affine_torsor_orbit_data (d : ℕ) :
 
 /-- Choose the actual orbit stabilizers and descend to their fixed-ring punctures.
 
-Source: Stacks Project, Tag 03SF and affine descent, Tag 023R.
-Proof: first descend the split cover to the explicitly constructed algebra of
-equivariant functions. Evaluation on orbit representatives identifies that
-algebra with the product of their stabilizer fixed rings. Restrict the resulting
-H-algebra isomorphism to D(ι(g)) and compose the two isomorphisms over Spec H.
-The number of orbits is at most the number of split components.
-(blueprint: lem-sbc-affine-torsor-fixed-puncture-descent-core) -/
+Source: Stacks Project, Tag 03SF and affine descent, Tag 023R. -/
 theorem affine_torsor_fixed_orbits
     (R H : CommRingCat.{u}) (g : R) (ι : R →+* H)
     (C : Type u) [CommRing C] [Algebra H C] [IsDomain C]

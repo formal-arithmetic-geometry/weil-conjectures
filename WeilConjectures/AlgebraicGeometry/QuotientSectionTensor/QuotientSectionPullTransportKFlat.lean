@@ -118,8 +118,7 @@ private theorem sectionPullTransportDerived_realization (φ : Λ ⟶ Λ') [IsMon
 /-- The flat-term fragment of `SectionPullNormalized`. It retains the ordinary
 section square and requires the derived computation square only on the flat-term
 K-flat representatives used by localization descent.
-Source: Stacks 06YS, 06YY, 0D6D and 0G7E; flat-term part of parent proof step 8.
-(blueprint: lem-sfb-quotient-section-pull-transport-kflat).
+Source: Stacks 06YS, 06YY, 0D6D and 0G7E.
 -/
 def SectionPullNormalizedOnKFlat {X Y : Scheme.{u}} (f : X ⟶ Y)
     (cX : ScalarSectionData a X) (cY : ScalarSectionData a Y)
@@ -147,14 +146,7 @@ def SectionPullNormalizedOnKFlat {X Y : Scheme.{u}} (f : X ⟶ Y)
           DerivedCategory.Q.map
             ((Functor.mapHomologicalComplexCompIso e (.up ℤ)).hom.app P)
 
-/-- Flat-term construction of the normalized section pullback comparison.
-Proof: conjugate the ordinary pullback comparison through the endpoint scalar
-models, then compute the derived map on flat-term K-flat representatives. The
-ordinary generator equations in `ScalarSectionNormalized` identify the section
-map, while `PullNormalized` identifies the derived computation square.
-Localization descent is deliberately left to
-`section_pull_transport_extend_kflat`.
-(blueprint: lem-sfb-quotient-section-pull-transport-kflat). -/
+/-- Flat-term construction of the normalized section pullback comparison. -/
 theorem section_pull_transport_section_normalized_kflat {X Y : Scheme.{u}} (f : X ⟶ Y)
     (cX : ScalarSectionData a X) (cY : ScalarSectionData a Y)
     (hcX : ScalarSectionNormalized a X cX) (hcY : ScalarSectionNormalized a Y cY)

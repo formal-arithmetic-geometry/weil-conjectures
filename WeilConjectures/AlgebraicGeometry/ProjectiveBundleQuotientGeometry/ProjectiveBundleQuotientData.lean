@@ -19,8 +19,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 /-!
 # Normalized projective bundle quotient data
 
-Source: Stacks Project, Constructions, Tags 01OA, 01OB, 01O4, 01O9, 01OD and 01OE
-(blueprint: lem-trf-projective-bundle-quotient-geometry).
+Source: Stacks Project, Constructions, Tags 01OA, 01OB, 01O4, 01O9, 01OD and 01OE.
 
 The auxiliary records below spell out the conclusion for the fixed canonical symmetric
 algebra. This interface asserts no existence or geometric properties.
@@ -46,8 +45,7 @@ variable {S : Scheme.{u}} (E : S.Modules) [E.IsQuasicoherent]
 
 /-- The global degree-one twist and quotient, normalized on every affine base chart.
 The chart equation sends the pulled-back section m to iota(m)/1 in the affine twist.
-Source: Stacks, Tags 01OB, 01NR, 01O4
-(blueprint: lem-trf-projective-bundle-quotient-geometry). -/
+Source: Stacks, Tags 01OB, 01NR, 01O4. -/
 structure TautologicalQuotient where
   line : (SymmetricAlgebraSheaf.gradedAlgebraData E).relProj.Modules
   quotient : (Scheme.Modules.tensorPullback
@@ -82,7 +80,7 @@ variable {E}
 
 /-- The actual pullback quotient along an S-morphism, using the section-normalized
 composition comparison of tensor pullbacks.
-Source: Stacks, Tag 01OA (blueprint: lem-trf-projective-bundle-quotient-geometry). -/
+Source: Stacks, Tag 01OA. -/
 noncomputable def pulledQuotient (D : TautologicalQuotient E) {T : Scheme.{u}}
     (h : T ⟶ S) (a : T ⟶ (SymmetricAlgebraSheaf.gradedAlgebraData E).relProj)
     (ha : a ≫ (SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom = h) :
@@ -95,7 +93,7 @@ noncomputable def pulledQuotient (D : TautologicalQuotient E) {T : Scheme.{u}}
 
 /-- A quotient pair corresponds to a exactly when the pullback of the universal
 quotient is isomorphic to that pair, with the quotient map preserved.
-Source: Stacks, Tag 01OA (blueprint: lem-trf-projective-bundle-quotient-geometry). -/
+Source: Stacks, Tag 01OA. -/
 def Classifies (D : TautologicalQuotient E) {T : Scheme.{u}} (h : T ⟶ S)
     (L : T.Modules) (q : (Scheme.Modules.tensorPullback h).obj E ⟶ L)
     (a : T ⟶ (SymmetricAlgebraSheaf.gradedAlgebraData E).relProj) : Prop :=
@@ -108,8 +106,7 @@ q into coefficients. The unique ring map fixing scalars and those coefficients i
 Sym(E) to the tensor powers of L in that frame. The displayed map is precisely the
 usual homogeneous-fraction construction, also used in GradedLineMap.IsCanonicalMap.
 The ring map and its irrelevant-ideal condition are asserted to exist, not assumed.
-Source: Stacks, Tags 01O9, 01OA; def-trf-space-line-module-proj-input
-(blueprint: lem-trf-projective-bundle-quotient-geometry). -/
+Source: Stacks, Tags 01O9, 01OA. -/
 def IsCanonicalMap {T : Scheme.{u}} (h : T ⟶ S) (L : T.Modules)
     (q : (Scheme.Modules.tensorPullback h).obj E ⟶ L)
     (a : T ⟶ (SymmetricAlgebraSheaf.gradedAlgebraData E).relProj) : Prop :=
@@ -140,8 +137,7 @@ def IsCanonicalMap {T : Scheme.{u}} (h : T ⟶ S) (L : T.Modules)
 
 /-- Restricting the canonical projective bundle to an arbitrary open of its base.
 The map exhibits the fibre product and the line isomorphism preserves the quotient.
-Source: Stacks, Tags 01NQ, 01NR, 01OA
-(blueprint: lem-trf-projective-bundle-quotient-geometry). -/
+Source: Stacks, Tags 01NQ, 01NR, 01OA. -/
 def HasOpenCompatibility (D : TautologicalQuotient E) : Prop :=
   ∀ V : S.Opens,
     ∃ hE : ((Scheme.Modules.tensorPullback V.ι).obj E).IsQuasicoherent,
@@ -169,8 +165,7 @@ def HasOpenCompatibility (D : TautologicalQuotient E) : Prop :=
 polynomial algebra. Both projective-space identifications use these polynomial charts,
 and the degree-one twists correspond by a section-preserving isomorphism.
 The local instance is only the specified Mathlib polynomial grading inside this definition.
-Source: Stacks, Tags 01OE, 01OB, 01MN
-(blueprint: lem-trf-projective-bundle-quotient-geometry). -/
+Source: Stacks, Tags 01OE, 01OB, 01MN. -/
 def AffineFreeComparison (r : ℕ) (b : RelativeProjectiveSpace.freeModule S r ≅ E)
     (eRel : (SymmetricAlgebraSheaf.gradedAlgebraData E).relProj ≅
       RelativeProjectiveSpace.scheme S r) (V : S.affineOpens) : Prop := by
@@ -224,8 +219,7 @@ def AffineFreeComparison (r : ℕ) (b : RelativeProjectiveSpace.freeModule S r �
 
 /-- The finite free case, with its ordered coordinate quotients and affine polynomial
 models. ULift changes only the index universe, retaining all r+1 basis elements.
-Source: Stacks, Tag 01OE; ProjectiveSpace.twist and its coordinate sections
-(blueprint: lem-trf-projective-bundle-quotient-geometry). -/
+Source: Stacks, Tag 01OE; ProjectiveSpace.twist and its coordinate sections. -/
 def HasFreeCompatibility (D : TautologicalQuotient E) : Prop :=
   ∀ (r : ℕ) (b : RelativeProjectiveSpace.freeModule S r ≅ E),
     ∃ (eRel : (SymmetricAlgebraSheaf.gradedAlgebraData E).relProj ≅

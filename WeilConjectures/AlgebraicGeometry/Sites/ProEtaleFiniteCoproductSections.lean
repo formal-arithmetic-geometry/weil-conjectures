@@ -37,13 +37,11 @@ set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 /-- Sections on a finite disjoint union are the product of the sections on its summands.
 
-Source: Stacks Project, Tag 0F4P, proof of `lemma-weakly-contractible-cover`, and
-Tag 0DB1, hypotheses (a)--(c) of `remark-take-unions-hypercovering-X`.
+Source: Stacks Project, Tag 0F4P, and Tag 0DB1.
 The proof uses the sheaf equalizer condition for the finite pro-etale covering by the
 pairwise disjoint open summands: off-diagonal pullbacks are empty and diagonal pullbacks
 are identities, so compatible tuples glue uniquely. The empty family is included; its
 cover is the empty cover and the sheaf axiom gives a singleton of sections.
-(auxiliary; not a blueprint node)
 -/
 theorem finite_coproduct_sheaf_core (X : Scheme.{u}) (I : Type v) [Finite I]
     (V : I → X.ProEt) (W : X.ProEt) (ι : ∀ i, V i ⟶ W)

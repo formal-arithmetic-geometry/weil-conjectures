@@ -14,8 +14,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 
 /-! # The normalized first reduction under constant scalar restriction
 
-Source: integral-models proof, first paragraph; Stacks Tags 099L and 06YQ.
-(blueprint: lem-sfb-embedded-first-reduction-comparison).
+Source: Stacks Tags 099L and 06YQ.
 -/
 
 @[expose] public noncomputable section
@@ -108,19 +107,7 @@ attribute [-instance] integralModel_coefficientMonObj in
 isomorphic under the specified constant-function scalar realization. This assertion
 concerns only the derived scalar square, with no constructibility or Tor condition.
 
-Source: integral-models proof, first paragraph; Stacks Tags 099L and 06YQ
-(blueprint: lem-sfb-embedded-first-reduction-comparison).
-
-Proof: choose a K-flat cochain complex P quasi-isomorphic to a cochain representative
-of K. The flatness of the specified integral scalar map makes its termwise restriction
-K-flat as well. The left-derived scalar-extension counits on P and its restriction
-are therefore invertible. The finite residue constant-function map is an isomorphism,
-so its scalar extension is exact and its derived counit is invertible everywhere.
-Use these three counits and the degreewise ordinary balanced-tensor comparison to
-identify the two derived first reductions of P. Apply the right-derived intrinsic
-realization and transport through the quasi-isomorphism from P to K. This proves the
-claim for arbitrary integer-indexed complexes without completeness, boundedness,
-constructibility or a Tor-amplitude assumption, including K = 0. -/
+Source: Stacks Tags 099L and 06YQ. -/
 theorem firstReductionComparison
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (π : PadicAlgCl.integers ℓ E.1)

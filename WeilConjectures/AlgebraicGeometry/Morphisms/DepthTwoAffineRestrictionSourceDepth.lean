@@ -27,7 +27,6 @@ public import Mathlib.RingTheory.Nakayama
 /-! # Affine comparison for the restriction source
 
 Source: Stacks Project, Tags 0AV8, 0AVN and 0E9I.
-(blueprint: lem-sbc-affine-restriction-source-depth)
 -/
 
 @[expose] public section
@@ -183,17 +182,7 @@ private theorem localization_surjective_of_stalk_surjective
 set_option backward.isDefEq.respectTransparency false in
 /-- The restriction unit is surjective after localization at an interior prime.
 
-Source: Stacks Project, Tags 01LC, 01HV and 008C.
-
-Proof: Restrict to the Noetherian affine chart V. Its intersection with U is
-quasi-compact, and the open immersion is quasi-separated. Tag 01LC makes the
-pushforward of the quasi-coherent restriction quasi-coherent on V. Tag 01HV
-identifies the prime localizations of its sections and of N(V) with their stalks,
-compatibly with the unit map and scalar actions. At the corresponding point in U,
-Tag 008C identifies the unit on stalks with the identity: every sufficiently small
-neighbourhood is contained in U. Thus its stalk map is bijective, and the
-localized unit is surjective. No finiteness, injectivity, depth or intermediate
-submodule is needed. Empty U has no interior prime; the zero module is included. -/
+Source: Stacks Project, Tags 01LC, 01HV and 008C. -/
 private theorem localized_restriction_unit_surjective
     {L : Scheme.{u}} [IsLocallyNoetherian L] (U : L.Opens)
     (N : L.Modules) (hqc : N.IsQuasicoherent)
@@ -215,23 +204,7 @@ private theorem localized_restriction_unit_surjective
 set_option backward.isDefEq.respectTransparency false in
 /-- Affine comparison for the restriction source.
 
-Source: Stacks Project, Tags 0AV8, 0AVN, 0E9I, 01LC, 05AM and 00LL.
-(blueprint: lem-sbc-affine-restriction-source-depth)
-
-Proof: Write a for the injective restriction unit on V and K for its range pulled
-back to S. The inclusion a(M) ≤ S and injectivity identify K with M = N(V)
-by the actual map m ↦ ⟨a(m), hMS ⟨m, rfl⟩⟩. Thus K is finite, as is its
-localization. Let y be the point of V corresponding to p. Quasi-coherence
-identifies the localization of M at p with N_y, and the affine stalk
-comparison identifies R_p with the local ring at y. These identifications
-respect the module actions, so regular sequences and their lengths are
-preserved; at y outside U the assumed depth-two bound transfers to K_p.
-At y in U, the restriction unit on stalks is an isomorphism. Localizing the
-inclusions a(M) ⊆ S ⊆ P gives M_p ⊆ S_p ⊆ P_p with the outer map an
-isomorphism. Hence K_p → S_p is surjective, and exactness of localization
-makes (S/K)_p zero. This comparison uses no assertion about the depth of the
-quotient at boundary points. Empty U and zero M are included; a zero stalk
-has infinite depth. -/
+Source: Stacks Project, Tags 0AV8, 0AVN, 0E9I, 01LC, 05AM and 00LL. -/
 theorem affine_restriction_source_depth_comparison
     {L : Scheme.{u}} [IsLocallyNoetherian L] (U : L.Opens)
     (N : L.Modules)

@@ -9,8 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.RationalP1.Ambient.RationalP1Amb
 public import WeilConjectures.AlgebraicGeometry.RationalP1.Tate.RationalTatePullback
 
 /-! # The canonical comparison between the two pullbacks of a twisted base object
-
-Source: the second identity of the rational projective-line triangle calculation.
 -/
 
 @[expose] public noncomputable section
@@ -28,9 +26,7 @@ open DiagonalCoefficients CondensedRing
 attribute [local irreducible] coefficient line twist firstProjection secondProjection square
 attribute [local irreducible] moduleObjectDerivedPullback moduleObjectDerivedPushforward
 
-/-- The published square comparison through the fixed module-object functor names.
-Source: rational projective-line triangle calculation, Second identity
-(blueprint: def-sfb-rational-p1-second-pull-comparison). -/
+/-- The published square comparison through the fixed module-object functor names. -/
 @[irreducible]
 def ambientPullbackComparison
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -42,9 +38,7 @@ def ambientPullbackComparison
   unfold moduleObjectDerivedPullback
   exact condensedAmbientPullbackComparison Λ sq
 
-/-- The diagram's second direct image identified with the fixed module-object functor.
-Source: rational projective-line triangle calculation, Second identity
-(blueprint: def-sfb-rational-p1-second-pull-comparison). -/
+/-- The diagram's second direct image identified with the fixed module-object functor. -/
 @[irreducible]
 def secondDiagramPushIso
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -54,9 +48,7 @@ def secondDiagramPushIso
   unfold moduleObjectDerivedPushforward secondProjection
   exact eqToIso d.p₂_canonical
 
-/-- Pullback commutes with the specified twist, using its native tensor and shift maps.
-Source: rational projective-line triangle calculation, Second identity
-(blueprint: def-sfb-rational-p1-second-pull-comparison). -/
+/-- Pullback commutes with the specified twist, using its native tensor and shift maps. -/
 @[irreducible]
 def pullTwistIso
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -76,9 +68,7 @@ def pullTwistIso
   exact ((traceTensorComparison Λ f).app A).app T
 
 -- The comparisons cross the fixed native and bundled derived tensor interfaces.
-/-- The comparison p1*M ≅ p2*M for M=q*K(1)[2], with no freely chosen map data.
-Source: rational projective-line triangle calculation, Second identity
-(blueprint: def-sfb-rational-p1-second-pull-comparison). -/
+/-- The comparison p1*M ≅ p2*M for M=q*K(1)[2], with no freely chosen map data. -/
 @[irreducible]
 def secondPullComparison
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
@@ -110,9 +100,7 @@ def secondPullComparison
 
 -- The comparisons cross the fixed native and bundled derived tensor interfaces.
 /-- Forward p2 projection, followed by the canonical change from p2*M to p1*M.
-This map has no diagonal class, trace, inverse projection, or invertibility hypothesis.
-Source: rational projective-line triangle calculation, Second identity
-(blueprint: def-sfb-rational-p1-second-pull-comparison). -/
+This map has no diagonal class, trace, inverse projection, or invertibility hypothesis. -/
 @[irreducible]
 def secondForwardProjection
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))

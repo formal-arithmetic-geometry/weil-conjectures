@@ -15,7 +15,7 @@ import Mathlib.AlgebraicGeometry.Cover.MorphismProperty
 
 /-! # Separate local markings of the algebraic stalk tower
 
-Source: Stacks Project, proetale.tex, Tags 09BV and 09C6.
+Source: Stacks Project, Tags 09BV and 09C6
 -/
 
 @[expose] public noncomputable section
@@ -110,25 +110,9 @@ set_option linter.unusedVariables false in
 /-- On a cover, one algebraic stalk tower models each level separately on a
 possibly level-dependent further cover. No compatible family of markings is asserted.
 
-Source: Stacks Project, proetale.tex, Tag 09C6 (lemma-connected-adic-lisse), the
-construction of the normalized algebraic stalk diagram, with the bounded finite
-cohomology version of finite-ring local constancy; Tag 09BV (lemma-weird), first
-paragraph before the inverse system of isomorphism sheaves.
-(blueprint: lem-weil-pbc-lisse-tower-stalk-level-models).
-
-Proof: obtain connected etale presentations with their actual geometric stalks and
-normalized stalk arrows. Exact stalk homology transfers each vanishing cohomology,
-and finite locally constant etale cohomology gives finite module stalks. The finite
-completion quotients are finite via the canonical quotient comparison. On each
-connected chart, finite-ring derived local constancy identifies every etale level
-separately with that same stalk on an etale cover. Pull this cover back to each
-pro-etale refinement of the chart and generate its covering sieve. Factor each
-member through a pulled-back chart and apply the presentation's conditional
-coefficient transport. Generate the outer sieve from the original etale cover;
-the unique terminal-object isomorphism proves it covering. Compose refinement
-arrows to pull the original lissity to every W. This does not choose compatible
-markings, a simultaneous cover, or a completed algebraic model. Empty schemes and
-zero objects are handled by the same covering and exactness arguments. -/
+Source: Stacks Project, the construction of the normalized algebraic stalk diagram, with the bounded
+finite cohomology version of finite-ring local constancy; Tag 09BV (lemma-weird), first paragraph
+before the inverse system of isomorphism sheaves. -/
 theorem lisse_tower_stalk_level_models
     (X Y : Scheme.{u}) [IsNoetherian X] (g : Y ⟶ X) [IsImmersion g]
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (M : AdicTower X d)

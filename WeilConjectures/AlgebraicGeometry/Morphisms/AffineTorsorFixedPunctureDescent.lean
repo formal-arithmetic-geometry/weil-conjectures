@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.AffineTorsorFixedPunctureDesc
 
 Source: Stacks Project, Tag 0EYG, normal-domain and intermediate-field paragraphs;
 Tag 03SF, Galois covers and their quotients.
-(blueprint: lem-sbc-affine-torsor-fixed-puncture-descent)
 -/
 
 @[expose] public section
@@ -31,31 +30,7 @@ namespace AlgebraicGeometry.Scheme
 /-- A split cover descends along a connected affine torsor to fixed-ring punctures.
 
 Source: Stacks Project, Tag 03SF (quotients of Galois covers), and Tag 0EYG
-(normal-domain and intermediate-field paragraphs).
-(blueprint: lem-sbc-affine-torsor-fixed-puncture-descent)
-
-Proof: Write h=iota(g). Finite faithful flatness of C over H makes its principal
-open V a finite faithfully flat cover of D(h). The etale hypothesis and the
-unique-rotation condition on field-valued points identify the finite etale
-map from the disjoint union of G copies of V to V times_D(h) V with an
-isomorphism: it is bijective on all geometric fibres. Since C is a domain and
-h is nonzero, V is nonempty and connected. Pull the given splitting on T back
-along k. The associativity of pullbacks and universality of scheme coproducts
-give d copies of V, with their original projection to V. The torsor descent
-datum permutes these copies, since every map between connected copies over V
-is specified by its index. The cocycle identity is a G-action on Fin d.
-Enumerate its finitely many orbits by Fin m, choose one representative from
-each orbit, and take its stabilizer K. Effective finite etale descent
-identifies the corresponding component with V/K. On affine rings this is
-Spec of the K-invariants of C[1/h]. The action fixes h. If a/h^r is invariant,
-then rho(zeta)(a)-a vanishes after localization for each zeta in K; since C
-is a domain and h is nonzero, it already vanishes in C. Thus invariants
-commute with this localization. The finite coproduct of these spectra is the
-principal open D(h) in Spec of the product of the unlocalized fixed rings.
-All identifications are over H, giving the stated projection equation. For
-d=0 the orbit set is empty and the product is the zero ring, with empty Spec.
-For the trivial group the torsor is an isomorphism, and this is the original
-split cover. No normality or regularity is required for this descent step. -/
+(normal-domain and intermediate-field paragraphs). -/
 theorem affine_torsor_fixed_puncture_descent
     (R H : CommRingCat.{u}) (g : R) (ι : R →+* H)
     (C : Type u) [CommRing C] [Algebra H C] [IsDomain C]

@@ -65,10 +65,9 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 
 /-! # Constructible adic hearts, pullback, and geometric coefficient fibres
 
-Source: Bhatt--Scholze, The pro-etale topology for schemes, Section 6.8,
-Lemmas 6.8.2 and 6.8.7, Definitions 6.8.3, 6.8.6, 6.8.8 and 6.8.10,
-Propositions 6.8.4, 6.8.11 and 6.8.14, and Remark 6.8.15
-(blueprint: lem-per-adic-heart-pullback-fibres).
+Source: Bhatt--Scholze, The pro-etale topology for schemes, Section 6.8, Lemmas 6.8.2 and 6.8.7,
+Definitions 6.8.3, 6.8.6, 6.8.8 and 6.8.10, Propositions 6.8.4, 6.8.11 and 6.8.14, and Remark
+6.8.15.
 
 The finite-stage categories are the recorded raw localizations, and the algebraic
 coefficient category is the recorded common-stage pair category. The fibres below
@@ -102,9 +101,7 @@ variable {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
 
 /-- If `Q` is essentially surjective, maps the aisle of `t` into that of `t'` and commutes
 with the truncations, then the aisle of `t'` is the essential image of the aisle of `t`.
-Source: BBD 1.3.3 (blueprint: lem-per-adic-heart-pullback-fibres).
-Proof: an object in the aisle is isomorphic to its truncation, which is the image of
-the truncation of a preimage. -/
+Source: BBD 1.3.3. -/
 lemma le_iff_exists_of_truncLE (t : TStructure C) (t' : TStructure D) (Q : C ⥤ D) (n : ℤ)
     (hQ : ∀ X : D, ∃ K : C, Nonempty (X ≅ Q.obj K))
     (htr : Nonempty (Q ⋙ t'.truncLE n ≅ t.truncLE n ⋙ Q))
@@ -119,8 +116,7 @@ lemma le_iff_exists_of_truncLE (t : TStructure C) (t' : TStructure D) (Q : C ⥤
 
 /-- If `Q` is essentially surjective, maps the coaisle of `t` into that of `t'` and
 commutes with the truncations, then the coaisle of `t'` is the essential image of the
-coaisle of `t`. Source: BBD 1.3.3 (blueprint: lem-per-adic-heart-pullback-fibres).
-Proof: dual to `le_iff_exists_of_truncLE`. -/
+coaisle of `t`. Source: BBD 1.3.3. -/
 lemma ge_iff_exists_of_truncGE (t : TStructure C) (t' : TStructure D) (Q : C ⥤ D) (n : ℤ)
     (hQ : ∀ X : D, ∃ K : C, Nonempty (X ≅ Q.obj K))
     (htr : Nonempty (Q ⋙ t'.truncGE n ≅ t.truncGE n ⋙ Q))
@@ -134,7 +130,7 @@ lemma ge_iff_exists_of_truncGE (t : TStructure C) (t' : TStructure D) (Q : C ⥤
     ⟨e ≪≫ asIso ((t'.truncGEπ n).app (Q.obj K)) ≪≫ e'.app K⟩⟩
 
 /-- A t-structure is determined by its aisles and coaisles.
-Source: BBD 1.3.1 (blueprint: lem-per-adic-heart-pullback-fibres). -/
+Source: BBD 1.3.1. -/
 lemma ext_of_le_ge {t₁ t₂ : TStructure C} (hle : t₁.le = t₂.le) (hge : t₁.ge = t₂.ge) :
     t₁ = t₂ := by
   cases t₁
@@ -153,9 +149,7 @@ variable {X : Scheme.{u}} {R S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}} (
   [PreservesFiniteLimits (pbcExtend f)] [PreservesFiniteColimits (pbcExtend f)]
 
 /-- An exact ordinary scalar extension computes its universal derived functor.
-Source: Stacks Tag 06YY (blueprint: lem-per-adic-heart-pullback-fibres).
-Proof: an exact functor inverts quasi-isomorphisms, so its termwise extension is a
-left derived functor; two left derived functors are canonically isomorphic. -/
+Source: Stacks Tag 06YY. -/
 theorem pbcDerivedExtend_iso_mapDerivedCategory :
     Nonempty (pbcDerivedExtend f ≅ (pbcExtend f).mapDerivedCategory) := by
   have : (pbcDerivedExtend f).IsLeftDerivedFunctor (pbcExtensionCounit f)
@@ -169,7 +163,7 @@ theorem pbcDerivedExtend_iso_mapDerivedCategory :
     (HomotopyCategory.quasiIso (pbcModules X R) (.up ℤ)) (Iso.refl _)⟩
 
 /-- An exact scalar extension preserves the standard aisles.
-Source: BS 6.8.2(1) (blueprint: lem-per-adic-heart-pullback-fibres). -/
+Source: BS 6.8.2(1). -/
 theorem pbcDerivedExtend_le (K : DerivedCategory (pbcModules X R)) (n : ℤ)
     (hK : DerivedCategory.TStructure.t.le n K) :
     DerivedCategory.TStructure.t.le n ((pbcDerivedExtend f).obj K) := by
@@ -179,7 +173,7 @@ theorem pbcDerivedExtend_le (K : DerivedCategory (pbcModules X R)) (n : ℤ)
   exact (DerivedCategory.TStructure.t.isLE_of_iso (e.app K).symm n).le
 
 /-- An exact scalar extension preserves the standard coaisles.
-Source: BS 6.8.2(1) (blueprint: lem-per-adic-heart-pullback-fibres). -/
+Source: BS 6.8.2(1). -/
 theorem pbcDerivedExtend_ge (K : DerivedCategory (pbcModules X R)) (n : ℤ)
     (hK : DerivedCategory.TStructure.t.ge n K) :
     DerivedCategory.TStructure.t.ge n ((pbcDerivedExtend f).obj K) := by
@@ -197,17 +191,14 @@ variable (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω
   (T : Scheme.{u}) {E F : Padic.FiniteCoefficientFields l Ω}
 
 /-- Ordinary finite coefficient extension between stages preserves finite limits.
-Source: BS 6.8.2(1) (blueprint: lem-per-adic-heart-pullback-fibres).
-Proof: the completed stage map is the completed embedding of the small fields, whose
-ordinary extension is exact by the finite free coefficient comparison. -/
+Source: BS 6.8.2(1). -/
 theorem pbcExtend_completedScalarMap_preservesFiniteLimits (h : E ≤ F) :
     PreservesFiniteLimits (pbcExtend (pbcCompletedScalarMap l Ω T h)) := by
   rw [pbcStageCoefficientMap_eq l Ω T h]
   exact (WeilConjectures.scalarExtension_exact l _ _ _ T).1
 
 /-- Ordinary finite coefficient extension between stages preserves finite colimits.
-Source: BS 6.8.2(1) (blueprint: lem-per-adic-heart-pullback-fibres).
-Proof: as for finite limits, using the second exactness clause. -/
+Source: BS 6.8.2(1). -/
 theorem pbcExtend_completedScalarMap_preservesFiniteColimits (h : E ≤ F) :
     PreservesFiniteColimits (pbcExtend (pbcCompletedScalarMap l Ω T h)) := by
   rw [pbcStageCoefficientMap_eq l Ω T h]
@@ -220,7 +211,7 @@ end AlgebraicGeometry.Scheme
 namespace AlgebraicGeometry.Scheme.PerAdic
 
 /-- A separated finite-type k-scheme; no geometric connectedness or nonemptiness is imposed.
-Source: BS 6.8, geometric hypotheses (blueprint: lem-per-adic-heart-pullback-fibres). -/
+Source: BS 6.8, geometric hypotheses. -/
 structure Base (k : Type u) [Field k] where
   scheme : Scheme.{u}
   [isOver : scheme.Over (Spec (.of k))]
@@ -235,10 +226,7 @@ variable {k : Type u} [Field k] (l : ℕ) [Fact l.Prime] [hl : Fact (IsUnit (l :
 set_option linter.unusedSectionVars false in
 include hl in
 /-- Finite type over a field gives exactly the hypotheses of the recorded adic categories.
-Source: BS 6.8.11 and 6.8.14 (blueprint: lem-per-adic-heart-pullback-fibres).
-Proof: finite type over the noetherian one-point scheme Spec k gives noetherianity.
-The source library bounds the dimension of a quasi-compact finite-type k-scheme.
-The unit l in k maps to a unit in every local ring of the scheme. -/
+Source: BS 6.8.11 and 6.8.14. -/
 theorem base_properties (W : Base k) :
     IsNoetherian W.scheme ∧ (∃ n : ℕ, topologicalKrullDim W.scheme ≤ n) ∧
       (∀ x : W.scheme, IsUnit (l : W.scheme.presheaf.stalk x)) := by
@@ -253,9 +241,7 @@ theorem base_properties (W : Base k) :
       W.scheme.presheaf.germ ⊤ x trivial).hom
 
 /-- The two geometric finiteness properties do not depend on the coefficient prime.
-Source: BS 6.8 (blueprint: lem-per-adic-heart-pullback-fibres).
-Proof: finite type over the noetherian affine point gives noetherianity. Apply the
-source library theorem exists_topologicalKrullDim_le directly to the structure morphism. -/
+Source: BS 6.8. -/
 theorem base_geometric_properties (W : Base k) :
     IsNoetherian W.scheme ∧ (∃ n : ℕ, topologicalKrullDim W.scheme ≤ n) := by
   have hloc : IsLocallyNoetherian W.scheme :=
@@ -265,17 +251,17 @@ theorem base_geometric_properties (W : Base k) :
   exact ⟨⟨⟩, exists_topologicalKrullDim_le (W.scheme ↘ Spec (.of k))⟩
 
 /-- The noetherian structure supplied by the finite-type hypothesis.
-Source: BS 6.8 (blueprint: lem-per-adic-heart-pullback-fibres). -/
+Source: BS 6.8. -/
 instance baseNoetherian (W : Base k) : IsNoetherian W.scheme :=
   (base_geometric_properties W).1
 
 /-- The finite dimension bound supplied by the finite-type hypothesis.
-Source: BS 6.8 (blueprint: lem-per-adic-heart-pullback-fibres). -/
+Source: BS 6.8. -/
 instance baseDimension (W : Base k) : Fact (∃ n : ℕ, topologicalKrullDim W.scheme ≤ n) :=
   ⟨(base_geometric_properties W).2⟩
 
 /-- Invertibility of the coefficient prime on every local ring.
-Source: BS 6.8 (blueprint: lem-per-adic-heart-pullback-fibres). -/
+Source: BS 6.8. -/
 instance basePrimeUnit (W : Base k) : Fact (∀ x : W.scheme,
     IsUnit (l : W.scheme.presheaf.stalk x)) :=
   ⟨(base_properties l W).2.2⟩
@@ -283,7 +269,7 @@ instance basePrimeUnit (W : Base k) : Fact (∀ x : W.scheme,
 variable (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- The recorded localized standard t-structure; its classes are fixed by integral images.
-Source: BS 6.8.11 and 6.8.14 (blueprint: lem-per-adic-heart-pullback-fibres). -/
+Source: BS 6.8.11 and 6.8.14. -/
 @[irreducible]
 def rationalT (W : Base k) :
     Triangulated.TStructure
@@ -293,23 +279,20 @@ def rationalT (W : Base k) :
     (hInv := basePrimeUnit l W))
 
 /-- The recorded finite-stage aisle, exposed as an object predicate independently
-of competing stage shift instances. Source: BS 6.8.11
-(blueprint: lem-per-adic-heart-pullback-fibres). -/
+of competing stage shift instances. Source: BS 6.8.11. -/
 abbrev rationalLE (W : Base k) (n : ℤ) :
     ObjectProperty (PbcRationalCategory W.scheme (pbcIntegralDatum l E)
       (pbcUniformizer l E)) := (rationalT l E W).le n
 
 /-- The recorded finite-stage coaisle, exposed as an object predicate.
-Source: BS 6.8.11 (blueprint: lem-per-adic-heart-pullback-fibres). -/
+Source: BS 6.8.11. -/
 abbrev rationalGE (W : Base k) (n : ℤ) :
     ObjectProperty (PbcRationalCategory W.scheme (pbcIntegralDatum l E)
       (pbcUniformizer l E)) := (rationalT l E W).ge n
 
 /-- The aisles of the recorded localized t-structure consist of the images of integral
 objects in the corresponding integral aisles.
-Source: BS 6.8.11 (blueprint: lem-per-adic-heart-pullback-fibres).
-Proof: an object in the aisle is its own truncation, and rationalization commutes with
-the truncations. The converse is the t-exactness of rationalization. -/
+Source: BS 6.8.11. -/
 theorem rationalLE_iff (W : Base k) (n : ℤ)
     (X : PbcRationalCategory W.scheme (pbcIntegralDatum l E) (pbcUniformizer l E)) :
     rationalLE l E W n X ↔
@@ -325,8 +308,7 @@ theorem rationalLE_iff (W : Base k) (n : ℤ)
 
 /-- The coaisles of the recorded localized t-structure consist of the images of integral
 objects in the corresponding integral coaisles.
-Source: BS 6.8.11 (blueprint: lem-per-adic-heart-pullback-fibres).
-Proof: dual to `rationalLE_iff`. -/
+Source: BS 6.8.11. -/
 theorem rationalGE_iff (W : Base k) (n : ℤ)
     (X : PbcRationalCategory W.scheme (pbcIntegralDatum l E) (pbcUniformizer l E)) :
     rationalGE l E W n X ↔
@@ -341,7 +323,7 @@ theorem rationalGE_iff (W : Base k) (n : ℤ)
     (fun X ↦ ⟨X.obj, ⟨Iso.refl _⟩⟩) (h.2.2.2.1 n).2 (fun K ↦ (h.2.2.1 K n).2) X
 
 /-- The recorded localized t-structure is bounded.
-Source: BS 6.8.11 (blueprint: lem-per-adic-heart-pullback-fibres). -/
+Source: BS 6.8.11. -/
 theorem rationalT_bounded (W : Base k) : (rationalT l E W).bounded = ⊤ := by
   unfold rationalT
   exact (Classical.choose_spec (pbc_localized_tstructure W.scheme l E
@@ -349,28 +331,26 @@ theorem rationalT_bounded (W : Base k) : (rationalT l E W).bounded = ⊤ := by
     (hInv := basePrimeUnit l W))).2.1
 
 /-- Orthogonality of the recorded localized aisle and shifted coaisle.
-Source: BS 6.8.11 (blueprint: lem-per-adic-heart-pullback-fibres). -/
+Source: BS 6.8.11. -/
 theorem rational_hom_eq_zero (W : Base k)
     {X Y : PbcRationalCategory W.scheme (pbcIntegralDatum l E) (pbcUniformizer l E)}
     (f : X ⟶ Y) (hX : rationalLE l E W 0 X) (hY : rationalGE l E W 1 Y) : f = 0 :=
   (rationalT l E W).zero' f hX hY
 
-/-- The recorded localized aisles increase. Source: BS 6.8.11
-(blueprint: lem-per-adic-heart-pullback-fibres). -/
+/-- The recorded localized aisles increase. Source: BS 6.8.11. -/
 theorem rationalLE_zero_one (W : Base k)
     (X : PbcRationalCategory W.scheme (pbcIntegralDatum l E) (pbcUniformizer l E))
     (hX : rationalLE l E W 0 X) : rationalLE l E W 1 X :=
   (rationalT l E W).le_zero_le X hX
 
-/-- The recorded localized coaisles decrease. Source: BS 6.8.11
-(blueprint: lem-per-adic-heart-pullback-fibres). -/
+/-- The recorded localized coaisles decrease. Source: BS 6.8.11. -/
 theorem rationalGE_one_zero (W : Base k)
     (X : PbcRationalCategory W.scheme (pbcIntegralDatum l E) (pbcUniformizer l E))
     (hX : rationalGE l E W 1 X) : rationalGE l E W 0 X :=
   (rationalT l E W).ge_one_le X hX
 
 /-- Every object is bounded for the recorded localized t-structure.
-Source: BS 6.8.11 (blueprint: lem-per-adic-heart-pullback-fibres). -/
+Source: BS 6.8.11. -/
 theorem rational_exists_bounds (W : Base k)
     (X : PbcRationalCategory W.scheme (pbcIntegralDatum l E) (pbcUniformizer l E)) :
     (∃ a : ℤ, rationalGE l E W a X) ∧ ∃ b : ℤ, rationalLE l E W b X := by
@@ -384,17 +364,17 @@ variable (Qbar : Type v) [Field Qbar] [Algebra (Padic l) Qbar]
   [IsAlgClosure (Padic l) Qbar]
 
 /-- The recorded coherent scalar system at a separated finite-type base.
-Source: BS 6.8.14 (blueprint: lem-per-adic-heart-pullback-fibres). -/
+Source: BS 6.8.14. -/
 abbrev stages (W : Base k) :=
   pbcScalarSystem l Qbar W.scheme (baseDimension W).out (basePrimeUnit l W).out
 
 /-- The existing inclusion of a finite coefficient field in the raw common-stage category.
-Source: BS 6.8.14, common finite stages (blueprint: lem-per-adic-heart-pullback-fibres). -/
+Source: BS 6.8.14, common finite stages. -/
 abbrev inclusion (W : Base k) (L : Padic.FiniteCoefficientFields l Qbar) :=
   (stages l Qbar W).ι L
 
 /-- Common-stage classes are precisely the isomorphism closures of finite-stage classes.
-Source: BS 6.8.14, common finite stages (blueprint: lem-per-adic-heart-pullback-fibres). -/
+Source: BS 6.8.14, common finite stages. -/
 @[irreducible]
 def commonClass (W : Base k) (nonpositive : Bool) (n : ℤ) :
     ObjectProperty (pbcQbarCategory l Qbar W.scheme) :=
@@ -405,7 +385,7 @@ def commonClass (W : Base k) (nonpositive : Bool) (n : ℤ) :
       Nonempty (K ≅ (inclusion l Qbar W L).obj M)
 
 /-- The nonpositive common-stage classes, unfolded.
-Source: BS 6.8.14 (blueprint: lem-per-adic-heart-pullback-fibres). -/
+Source: BS 6.8.14. -/
 theorem commonClass_true_iff (W : Base k) (n : ℤ) (K : pbcQbarCategory l Qbar W.scheme) :
     commonClass l Qbar W true n K ↔ ∃ (L : Padic.FiniteCoefficientFields l Qbar)
       (M : pbcStageCategory l Qbar W.scheme L),
@@ -415,7 +395,7 @@ theorem commonClass_true_iff (W : Base k) (n : ℤ) (K : pbcQbarCategory l Qbar 
   exact Iff.rfl
 
 /-- The nonnegative common-stage classes, unfolded.
-Source: BS 6.8.14 (blueprint: lem-per-adic-heart-pullback-fibres). -/
+Source: BS 6.8.14. -/
 theorem commonClass_false_iff (W : Base k) (n : ℤ) (K : pbcQbarCategory l Qbar W.scheme) :
     commonClass l Qbar W false n K ↔ ∃ (L : Padic.FiniteCoefficientFields l Qbar)
       (M : pbcStageCategory l Qbar W.scheme L),
@@ -425,9 +405,7 @@ theorem commonClass_false_iff (W : Base k) (n : ℤ) (K : pbcQbarCategory l Qbar
   exact Iff.rfl
 
 /-- Finite scalar extension between stages preserves the finite-stage aisles.
-Source: BS 6.8.2(1) and 6.8.14 (blueprint: lem-per-adic-heart-pullback-fibres).
-Proof: choose an integral representative in the integral aisle. Scalar extension
-commutes with rationalization, and its ambient derived extension is exact. -/
+Source: BS 6.8.2(1) and 6.8.14. -/
 theorem rationalLE_stageExtension (W : Base k) {L L' : Padic.FiniteCoefficientFields l Qbar}
     (h : L ≤ L') (n : ℤ) (M : pbcStageCategory l Qbar W.scheme L)
     (hM : rationalLE l (pbcFiniteField.{u} l Qbar L) W n M) :
@@ -443,8 +421,7 @@ theorem rationalLE_stageExtension (W : Base k) {L L' : Padic.FiniteCoefficientFi
         (baseDimension W).out (basePrimeUnit l W).out h).app K⟩⟩
 
 /-- Finite scalar extension between stages preserves the finite-stage coaisles.
-Source: BS 6.8.2(1) and 6.8.14 (blueprint: lem-per-adic-heart-pullback-fibres).
-Proof: dual to `rationalLE_stageExtension`. -/
+Source: BS 6.8.2(1) and 6.8.14. -/
 theorem rationalGE_stageExtension (W : Base k) {L L' : Padic.FiniteCoefficientFields l Qbar}
     (h : L ≤ L') (n : ℤ) (M : pbcStageCategory l Qbar W.scheme L)
     (hM : rationalGE l (pbcFiniteField.{u} l Qbar L) W n M) :
@@ -460,8 +437,7 @@ theorem rationalGE_stageExtension (W : Base k) {L L' : Padic.FiniteCoefficientFi
         (baseDimension W).out (basePrimeUnit l W).out h).app K⟩⟩
 
 /-- The finite-stage aisles are stable under the normalized stage shift.
-Source: BS 6.8.11 (blueprint: lem-per-adic-heart-pullback-fibres).
-Proof: shift an integral representative; rationalization commutes with shifts. -/
+Source: BS 6.8.11. -/
 theorem rationalLE_shift (W : Base k) (L : Padic.FiniteCoefficientFields l Qbar)
     (n a n' : ℤ) (hn : a + n' = n) (M : pbcStageCategory l Qbar W.scheme L)
     (hM : rationalLE l (pbcFiniteField.{u} l Qbar L) W n M) :
@@ -476,8 +452,7 @@ theorem rationalLE_shift (W : Base k) (L : Padic.FiniteCoefficientFields l Qbar)
       ((pbcStageLocalization l Qbar W.scheme L).commShiftIso a).symm.app K⟩⟩
 
 /-- The finite-stage coaisles are stable under the normalized stage shift.
-Source: BS 6.8.11 (blueprint: lem-per-adic-heart-pullback-fibres).
-Proof: dual to `rationalLE_shift`. -/
+Source: BS 6.8.11. -/
 theorem rationalGE_shift (W : Base k) (L : Padic.FiniteCoefficientFields l Qbar)
     (n a n' : ℤ) (hn : a + n' = n) (M : pbcStageCategory l Qbar W.scheme L)
     (hM : rationalGE l (pbcFiniteField.{u} l Qbar L) W n M) :
@@ -492,7 +467,7 @@ theorem rationalGE_shift (W : Base k) (L : Padic.FiniteCoefficientFields l Qbar)
       ((pbcStageLocalization l Qbar W.scheme L).commShiftIso a).symm.app K⟩⟩
 
 /-- The common-stage classes are closed under isomorphisms.
-Source: BS 6.8.14 (blueprint: lem-per-adic-heart-pullback-fibres). -/
+Source: BS 6.8.14. -/
 theorem commonClass_of_iso (W : Base k) (b : Bool) (n : ℤ)
     {X Y : pbcQbarCategory l Qbar W.scheme} (e : X ≅ Y) (hX : commonClass l Qbar W b n X) :
     commonClass l Qbar W b n Y := by
@@ -501,7 +476,7 @@ theorem commonClass_of_iso (W : Base k) (b : Bool) (n : ℤ)
   exact ⟨L, M, hM, ⟨e.symm ≪≫ e'⟩⟩
 
 /-- The nonpositive common-stage classes are stable under shifts.
-Source: BS 6.8.14 (blueprint: lem-per-adic-heart-pullback-fibres). -/
+Source: BS 6.8.14. -/
 theorem commonClass_true_shift (W : Base k) (n a n' : ℤ) (hn : a + n' = n)
     (X : pbcQbarCategory l Qbar W.scheme) (hX : commonClass l Qbar W true n X) :
     commonClass l Qbar W true n' (X⟦a⟧) := by
@@ -511,7 +486,7 @@ theorem commonClass_true_shift (W : Base k) (n a n' : ℤ) (hn : a + n' = n)
     ⟨(shiftFunctor _ a).mapIso e ≪≫ ((inclusion l Qbar W L).commShiftIso a).symm.app M⟩⟩
 
 /-- The nonnegative common-stage classes are stable under shifts.
-Source: BS 6.8.14 (blueprint: lem-per-adic-heart-pullback-fibres). -/
+Source: BS 6.8.14. -/
 theorem commonClass_false_shift (W : Base k) (n a n' : ℤ) (hn : a + n' = n)
     (X : pbcQbarCategory l Qbar W.scheme) (hX : commonClass l Qbar W false n X) :
     commonClass l Qbar W false n' (X⟦a⟧) := by
@@ -521,9 +496,7 @@ theorem commonClass_false_shift (W : Base k) (n a n' : ℤ) (hn : a + n' = n)
     ⟨(shiftFunctor _ a).mapIso e ≪≫ ((inclusion l Qbar W L).commShiftIso a).symm.app M⟩⟩
 
 /-- Orthogonality of the common-stage classes, checked at a common field.
-Source: BS 6.8.14 (blueprint: lem-per-adic-heart-pullback-fibres).
-Proof: represent the morphism at a common stage; by t-exactness of scalar extension
-both ends lie in the finite-stage classes there, so the representative vanishes. -/
+Source: BS 6.8.14. -/
 theorem commonClass_hom_eq_zero (W : Base k) {X Y : pbcQbarCategory l Qbar W.scheme}
     (f : X ⟶ Y) (hX : commonClass l Qbar W true 0 X) (hY : commonClass l Qbar W false 1 Y) :
     f = 0 := by
@@ -538,8 +511,7 @@ theorem commonClass_hom_eq_zero (W : Base k) {X Y : pbcQbarCategory l Qbar W.sch
   exact ((stages l Qbar W).pairPreadditive_exists.exists.choose_spec _ _ P hL hL' 0 0).2
 
 /-- The finite-stage truncation triangle gives the common-stage decomposition.
-Source: BS 6.8.14 (blueprint: lem-per-adic-heart-pullback-fibres).
-Proof: truncate an integral representative, rationalize and include the triangle. -/
+Source: BS 6.8.14. -/
 theorem commonClass_exists_triangle (W : Base k) (A : pbcQbarCategory l Qbar W.scheme) :
     ∃ (X Y : pbcQbarCategory l Qbar W.scheme) (_ : commonClass l Qbar W true 0 X)
       (_ : commonClass l Qbar W false 1 Y) (f : X ⟶ A) (g : A ⟶ Y)
@@ -557,7 +529,7 @@ theorem commonClass_exists_triangle (W : Base k) (A : pbcQbarCategory l Qbar W.s
       ⟨Iso.refl _⟩⟩, _, _, _, hD⟩
 
 /-- Every common-stage object is bounded for the common-stage classes.
-Source: BS 6.8.14 (blueprint: lem-per-adic-heart-pullback-fibres). -/
+Source: BS 6.8.14. -/
 theorem commonClass_exists_bounds (W : Base k) (A : pbcQbarCategory l Qbar W.scheme) :
     (∃ a : ℤ, commonClass l Qbar W false a A) ∧
       ∃ b : ℤ, commonClass l Qbar W true b A := by
@@ -567,21 +539,21 @@ theorem commonClass_exists_bounds (W : Base k) (A : pbcQbarCategory l Qbar W.sch
     ⟨b, (commonClass_true_iff l Qbar W b A).2 ⟨A.stage, A.obj, hb, ⟨Iso.refl _⟩⟩⟩⟩
 
 /-- The nonpositive common-stage classes increase.
-Source: BS 6.8.14 (blueprint: lem-per-adic-heart-pullback-fibres). -/
+Source: BS 6.8.14. -/
 theorem commonClass_true_zero_one (W : Base k) (X : pbcQbarCategory l Qbar W.scheme)
     (hX : commonClass l Qbar W true 0 X) : commonClass l Qbar W true 1 X := by
   obtain ⟨L, M, hM, e⟩ := (commonClass_true_iff l Qbar W 0 X).1 hX
   exact (commonClass_true_iff l Qbar W 1 X).2 ⟨L, M, rationalLE_zero_one l _ W M hM, e⟩
 
 /-- The nonnegative common-stage classes decrease.
-Source: BS 6.8.14 (blueprint: lem-per-adic-heart-pullback-fibres). -/
+Source: BS 6.8.14. -/
 theorem commonClass_false_one_zero (W : Base k) (X : pbcQbarCategory l Qbar W.scheme)
     (hX : commonClass l Qbar W false 1 X) : commonClass l Qbar W false 0 X := by
   obtain ⟨L, M, hM, e⟩ := (commonClass_false_iff l Qbar W 1 X).1 hX
   exact (commonClass_false_iff l Qbar W 0 X).2 ⟨L, M, rationalGE_one_zero l _ W M hM, e⟩
 
 /-- The t-structure on the common-stage category with the prescribed classes.
-Source: BS 6.8.14 (blueprint: lem-per-adic-heart-pullback-fibres). -/
+Source: BS 6.8.14. -/
 def commonTStructure (W : Base k) :
     Triangulated.TStructure (pbcQbarCategory l Qbar W.scheme) where
   le := commonClass l Qbar W true
@@ -596,19 +568,14 @@ def commonTStructure (W : Base k) :
   exists_triangle_zero_one := commonClass_exists_triangle l Qbar W
 
 /-- The common-stage t-structure is bounded.
-Source: BS 6.8.14 (blueprint: lem-per-adic-heart-pullback-fibres). -/
+Source: BS 6.8.14. -/
 theorem commonTStructure_bounded (W : Base k) : (commonTStructure l Qbar W).bounded = ⊤ := by
   refine le_antisymm le_top fun A _ ↦ ?_
   obtain ⟨⟨a, ha⟩, ⟨b, hb⟩⟩ := commonClass_exists_bounds l Qbar W A
   exact ⟨⟨a, ⟨ha⟩⟩, ⟨b, ⟨hb⟩⟩⟩
 
 /-- The common-stage t-structure is fixed by its two finite-stage image classes.
-Source: BS 6.8.14 (blueprint: lem-per-adic-heart-pullback-fibres).
-Proof: finite scalar extension is t-exact by its finite free integral description.
-Descend both truncations with their scalar comparisons. Orthogonality is checked
-at a common field; all later Hom groups are zero, hence so is their colimit. The
-finite-stage truncation triangle supplies the decomposition axiom. Finite-stage
-bounds give boundedness. The prescribed indexed classes determine the t-structure. -/
+Source: BS 6.8.14. -/
 theorem commonT_existsUnique (W : Base k) :
     ∃! t : Triangulated.TStructure (pbcQbarCategory l Qbar W.scheme),
       (∀ n : ℤ, t.le n = commonClass l Qbar W true n ∧
@@ -620,7 +587,7 @@ theorem commonT_existsUnique (W : Base k) :
     (funext fun n ↦ (h' n).2)
 
 /-- The bounded common-stage t-structure, determined by its specified classes.
-Source: BS 6.8.14 (blueprint: lem-per-adic-heart-pullback-fibres). -/
+Source: BS 6.8.14. -/
 @[irreducible]
 def commonT (W : Base k) :
     Triangulated.TStructure (pbcQbarCategory l Qbar W.scheme) :=

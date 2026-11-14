@@ -14,8 +14,7 @@ import WeilConjectures.CategoryTheory.Sites.Point.Linear
 /-!
 # The fibre functors of lisse adic sheaves
 
-Source: Deligne, Weil II (1.1.1) b)-d), SGA 5 VI
-(blueprint: def-pod-lisse-adic-fibre-functors).
+Source: Deligne, Weil II (1.1.1) b)-d), SGA 5 VI.
 The objects are the recorded integral, rational and algebraic fibres.
 -/
 
@@ -31,7 +30,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type (d + 1)) [Field E]
   {Ω : Type d} [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y)
 
 /-- The integral fibre on objects and compatible families of maps.
-Source: Weil II (1.1.1) b) (blueprint: def-pod-lisse-adic-fibre-functors). -/
+Source: Weil II (1.1.1) b). -/
 noncomputable def lisseIntegralFiberFunctor :
     LisseIntegralSheaf l E Y ⥤ ModuleCat.{d + 1} (Padic.coefficientExtensionIntegers l E) :=
   ObjectProperty.ι _ ⋙
@@ -118,11 +117,7 @@ private lemma rationalFiberMap_comp (F G H : LisseRationalSheaf l E Y)
   | add f g hf hg => simp [hf, hg, LinearMap.comp_add]
 
 /-- The rational fibre map is scalar extension of the integral map.
-Source: Weil II (1.1.1) c) (blueprint: def-pod-lisse-adic-fibre-functors).
-Proof: extend `(a,f) ↦ a • (f_y ⊗ 1)` by the balanced-tensor universal property.
-Integral fibre maps respect the coefficient action, so this is balanced. Identity and
-composition follow on pure tensors from the defining rational composition and from
-functoriality of the integral fibre, and then everywhere by additivity. -/
+Source: Weil II (1.1.1) c). -/
 theorem lisseRationalFiberFunctor_exists :
     ∃ T : LisseRationalSheaf l E Y ⥤ ModuleCat.{d + 1} E,
       ∃ h : ∀ F, T.obj F = lisseRationalFiber l E Y y F,
@@ -143,22 +138,18 @@ theorem lisseRationalFiberFunctor_exists :
   exact congrArg ModuleCat.ofHom (rationalFiberMap_tmul l E Y y F G a f)
 
 /-- The rational fibre functor with its prescribed maps on pure tensors.
-Source: Weil II (1.1.1) c) (blueprint: def-pod-lisse-adic-fibre-functors). -/
+Source: Weil II (1.1.1) c). -/
 noncomputable def lisseRationalFiberFunctor : LisseRationalSheaf l E Y ⥤ ModuleCat.{d + 1} E :=
   (lisseRationalFiberFunctor_exists l E Y y).choose
 
 /-- Its object value is exactly the recorded rational fibre.
-Source: Weil II (1.1.1) c) (blueprint: def-pod-lisse-adic-fibre-functors).
-Proof: the functor was selected from the existence theorem with precisely these
-object values; use its first specification. -/
+Source: Weil II (1.1.1) c). -/
 theorem lisseRationalFiberFunctor_obj (F : LisseRationalSheaf l E Y) :
     (lisseRationalFiberFunctor l E Y y).obj F = lisseRationalFiber l E Y y F := by
   exact (lisseRationalFiberFunctor_exists l E Y y).choose_spec.choose F
 
 /-- The rational fibre functor has its prescribed action on integral pure tensors.
-Source: Weil II (1.1.1) c), p.147.
-(blueprint: def-pod-lisse-adic-fibre-functors).
-Proof: this is the morphism specification in its defining existence theorem. -/
+Source: Weil II (1.1.1) c), p.147. -/
 theorem lisseRationalFiberFunctor_map_spec :
     IsLisseRationalFiberFunctor Y y l E (lisseRationalFiberFunctor l E Y y)
       (lisseRationalFiberFunctor_obj l E Y y) :=
@@ -182,7 +173,7 @@ section Algebraic
 variable (K : Type (d + 1)) [Field K] [Algebra ℚ_[l] K] [IsAlgClosure ℚ_[l] K]
 
 /-- The arrow on a fixed rational model in the coefficient localization.
-Source: Weil II (1.1.1) d) (blueprint: def-pod-lisse-adic-fibre-functors). -/
+Source: Weil II (1.1.1) d). -/
 noncomputable def lisseAlgebraicModelMap (E₀ : Padic.FiniteCoefficientFields l K)
     {F H : LisseRationalSheaf l E₀.val Y} (f : F ⟶ H) :
     lisseAlgebraicOfModel l Y K E₀ F ⟶ lisseAlgebraicOfModel l Y K E₀ H :=
@@ -193,9 +184,7 @@ noncomputable def lisseAlgebraicModelMap (E₀ : Padic.FiniteCoefficientFields l
 
 omit [IsAlgClosure ℚ_[l] K] in
 /-- Fixed-model arrows preserve identities.
-Source: Weil II (1.1.1) d) (blueprint: def-pod-lisse-adic-fibre-functors).
-Proof: the Grothendieck identity is the pseudofunctor identity constraint itself;
-localization and the category-value transport preserve identities. -/
+Source: Weil II (1.1.1) d). -/
 theorem lisseAlgebraicModelMap_id (E₀ : Padic.FiniteCoefficientFields l K)
     (F : LisseRationalSheaf l E₀.val Y) :
     lisseAlgebraicModelMap l Y K E₀ (𝟙 F) = 𝟙 _ := by
@@ -206,9 +195,7 @@ theorem lisseAlgebraicModelMap_id (E₀ : Padic.FiniteCoefficientFields l K)
 
 omit [IsAlgClosure ℚ_[l] K] in
 /-- Fixed-model arrows preserve composition.
-Source: Weil II (1.1.1) d) (blueprint: def-pod-lisse-adic-fibre-functors).
-Proof: the pseudofunctor triangle identity cancels its identity constraints in the
-Grothendieck composite. Category-value transport and localization preserve composition. -/
+Source: Weil II (1.1.1) d). -/
 theorem lisseAlgebraicModelMap_comp (E₀ : Padic.FiniteCoefficientFields l K)
     {F H J : LisseRationalSheaf l E₀.val Y} (f : F ⟶ H) (g : H ⟶ J) :
     lisseAlgebraicModelMap l Y K E₀ (f ≫ g) =
@@ -219,7 +206,7 @@ theorem lisseAlgebraicModelMap_comp (E₀ : Padic.FiniteCoefficientFields l K)
   exact T.map_comp f g
 
 /-- The canonical functor of a rational coefficient model into algebraic coefficients.
-Source: Weil II (1.1.1) d) (blueprint: def-pod-lisse-adic-fibre-functors). -/
+Source: Weil II (1.1.1) d). -/
 noncomputable def lisseAlgebraicModelFunctor (E₀ : Padic.FiniteCoefficientFields l K) :
     LisseRationalSheaf l E₀.val Y ⥤ LisseAlgebraicSheaf l Y K where
   obj := lisseAlgebraicOfModel l Y K E₀
@@ -229,10 +216,7 @@ noncomputable def lisseAlgebraicModelFunctor (E₀ : Padic.FiniteCoefficientFiel
 
 omit [IsAlgClosure ℚ_[l] K] in
 /-- The fibre of a displayed rational model is its specified scalar extension.
-Source: Weil II (1.1.1) d) (blueprint: def-pod-lisse-adic-fibre-functors).
-Proof: the localization keeps objects. The coefficient pair of the model has base
-E₀ and fibre F, transported along the recorded category-value equality and back;
-these inverse transports cancel. Unfold the recorded algebraic fibre. -/
+Source: Weil II (1.1.1) d). -/
 theorem lisseAlgebraicFiber_ofModel (E₀ : Padic.FiniteCoefficientFields l K)
     (F : LisseRationalSheaf l E₀.val Y) :
     lisseAlgebraicFiber l Y K y (lisseAlgebraicOfModel l Y K E₀ F) =
@@ -252,8 +236,7 @@ theorem lisseAlgebraicFiber_ofModel (E₀ : Padic.FiniteCoefficientFields l K)
       ((lisseCoefficientDiagramData l Y K).obj_eq E₀) F)
 
 /-- Fibre on one coefficient category, transported through its recorded category equality.
-Source: Weil II (1.1.1) d), pp.146-147.
-(blueprint: def-pod-lisse-adic-fibre-functors). -/
+Source: Weil II (1.1.1) d), pp.146-147. -/
 noncomputable def lisseCanonicalCoefficientModelFiberFunctor
     (E₀ : Padic.FiniteCoefficientFields l K) :
     (lisseCoefficientDiagramData l Y K).diagram.obj ⟨E₀⟩ ⥤ ModuleCat.{d + 1} K :=
@@ -266,8 +249,7 @@ attribute [local irreducible] lisseRationalFiberFunctor lisseIntegralFiberFuncto
   lisseIntegralFiber
 
 /-- The explicit rational scalar comparison on the recorded coefficient categories.
-Source: Weil II (1.1.1) d), pp.146-147.
-(blueprint: def-pod-lisse-adic-fibre-functors). -/
+Source: Weil II (1.1.1) d), pp.146-147. -/
 noncomputable def lisseCanonicalRawCoefficientComparison
     {E₀ L₀ : Padic.FiniteCoefficientFields l K} (f : E₀ ⟶ L₀) :
     lisseCanonicalCoefficientModelFiberFunctor l Y y K E₀ ≅
@@ -284,10 +266,7 @@ noncomputable def lisseCanonicalRawCoefficientComparison
       (lisseRationalFiberFunctor_map_spec l L₀.val Y y))
 
 /-- Restriction from the least coefficient field detects natural endomorphisms.
-Source: Weil II (1.1.1) d), pp.146-147.
-(blueprint: def-pod-lisse-adic-fibre-functors).
-Proof: apply the existing finite coefficient restriction theorem to the concrete
-rational fibre functors and their pure tensor formula. -/
+Source: Weil II (1.1.1) d), pp.146-147. -/
 theorem lisseCanonicalCoefficientEndomorphisms (E₀ : Padic.FiniteCoefficientFields l K) :
     Function.Bijective (fun u : lisseCanonicalCoefficientModelFiberFunctor l Y y K E₀ ⟶
         lisseCanonicalCoefficientModelFiberFunctor l Y y K E₀ ↦
@@ -300,8 +279,7 @@ theorem lisseCanonicalCoefficientEndomorphisms (E₀ : Padic.FiniteCoefficientFi
     (fun E₀ ↦ lisseRationalFiberFunctor_map_spec l E₀.val Y y) E₀
 
 /-- The coefficient-pair fibre functor constructed from uniquely normalized comparisons.
-Source: Weil II (1.1.1) d), pp.146-147.
-(blueprint: def-pod-lisse-adic-fibre-functors). -/
+Source: Weil II (1.1.1) d), pp.146-147. -/
 @[irreducible]
 noncomputable def lisseCanonicalCoefficientFiberFunctor :
     Pseudofunctor.Grothendieck (lisseCoefficientDiagramData l Y K).diagram ⥤
@@ -314,10 +292,7 @@ noncomputable def lisseCanonicalCoefficientFiberFunctor :
     (lisseCanonicalCoefficientEndomorphisms l Y y K)
 
 /-- The concrete coefficient functor inverts the cocartesian coefficient arrows.
-Source: Weil II (1.1.1) d), pp.146-147.
-(blueprint: def-pod-lisse-adic-fibre-functors).
-Proof: a cocartesian arrow has invertible fibre part. The comparison is an isomorphism,
-and the rational fibre functor preserves isomorphisms, so their composite is invertible. -/
+Source: Weil II (1.1.1) d), pp.146-147. -/
 theorem lisseCanonicalCoefficientFiberFunctor_inverts :
     (lisseCoefficientCocartesian l Y K).IsInvertedBy
       (lisseCanonicalCoefficientFiberFunctor l Y y K) := by
@@ -329,7 +304,7 @@ theorem lisseCanonicalCoefficientFiberFunctor_inverts :
   infer_instance
 
 /-- The algebraic fibre induced by the concrete normalized coefficient construction.
-Source: Weil II (1.1.1) d) (blueprint: def-pod-lisse-adic-fibre-functors). -/
+Source: Weil II (1.1.1) d). -/
 @[irreducible]
 noncomputable def lisseAlgebraicFiberFunctor :
     LisseAlgebraicSheaf l Y K ⥤ ModuleCat.{d + 1} K :=
@@ -337,8 +312,7 @@ noncomputable def lisseAlgebraicFiberFunctor :
     (lisseCanonicalCoefficientFiberFunctor_inverts l Y y K)
 
 /-- Its object value is the recorded algebraic fibre.
-Source: Weil II (1.1.1) d) (blueprint: def-pod-lisse-adic-fibre-functors).
-Proof: localization keeps objects; use the rational fibre object formula. -/
+Source: Weil II (1.1.1) d). -/
 theorem lisseAlgebraicFiberFunctor_obj (F : LisseAlgebraicSheaf l Y K) :
     (lisseAlgebraicFiberFunctor l Y y K).obj F = lisseAlgebraicFiber l Y K y F := by
   unfold lisseAlgebraicFiberFunctor lisseCanonicalCoefficientFiberFunctor

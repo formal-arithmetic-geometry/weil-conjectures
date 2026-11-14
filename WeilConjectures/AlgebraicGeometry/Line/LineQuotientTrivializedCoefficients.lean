@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.Tensor.TensorPullbackQuasiCoherent
 /-!
 # Trivialized coefficients of a symmetric graded line map
 
-Source: Stacks Project, Constructions, Tags 01OA and 01O9.
-(blueprint: lem-trf-line-quotient-trivialized-coefficients)
+Source: Stacks Project, Constructions, Tags 01OA and 01O9
 -/
 
 @[expose] public section
@@ -377,29 +376,7 @@ private theorem coefficient_irrelevant_top {S T : Scheme.{u}} (h : T ⟶ S)
 This is an algebra statement about its coefficients and does not construct a Proj map.
 
 Source: Stacks Project, Constructions, Tags 01OA and 01O9 (the induced graded algebra
-map into tensor powers of an invertible sheaf, and its generation locus).
-(blueprint: lem-trf-line-quotient-trivialized-coefficients).
-
-Proof: Restrict the component maps to the affine scheme W. Tensor pullback preserves
-addition, scalar action, the structural unit, and tensor products. Apply the tensor
-powers of the given trivialization e, then the unit-section equivalence. These maps
-on homogeneous pieces are additive, send the degree-zero unit to 1, and send a
-product of degrees m,n to the product of the two coefficients: the tensor-power
-comparison and the tensor powers of e both respect concatenation. The graded-ring
-decomposition therefore extends them uniquely to a unital ring map on Sym(E(V)).
-Its scalar equation follows from the scalar axiom and the degree-zero unit axiom.
-In degree one the right unitor cancels the tensor-power comparison, and the extension
-hypothesis identifies the component with q applied to 1 tensor m, giving the stated
-section formula. Surjectivity of q implies that at every point of W the image of a frame germ is
-a finite sum of images of pure tensors m tensor b from E(V). Indeed, affine
-quasi-coherent pullback identifies these sections with the base change of E(V).
-The displayed degree-one equation therefore writes 1 in the local ideal generated
-by the coefficients of the m. Thus the degree-one coefficients generate the unit
-ideal of the affine coordinate ring of W: otherwise a maximal ideal containing
-them would contradict that stalk calculation. All degree-one generators belong
-to the irrelevant ideal, so its image under the constructed map is the unit ideal.
-The same proof
-includes zero rings and empty charts, where the unit-ideal conclusion is tautological. -/
+map into tensor powers of an invertible sheaf, and its generation locus). -/
 theorem line_quotient_trivialized_coefficients {S T : Scheme.{u}} (h : T ⟶ S)
     (E : S.Modules) [E.IsQuasicoherent] (L : T.Modules) [L.IsInvertible]
     (q : (tensorPullback h).obj E ⟶ L) [Epi q]

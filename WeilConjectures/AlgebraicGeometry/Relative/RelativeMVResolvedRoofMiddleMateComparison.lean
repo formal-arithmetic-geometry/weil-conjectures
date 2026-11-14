@@ -30,29 +30,7 @@ attribute [local irreducible] Functor.rightDerivedFunctor
 set_option maxHeartbeats 900000 in
 -- The middle-vertex type contains fixed complex and derived functor comparisons.
 /-- The diagonal middle component of the normalized resolved row roof has the
-specified mate comparison. Source: Stacks Project, Tags 08BV, 08FE, 08HY and 0D5T.
-(blueprint: lem-pc-relative-mv-resolved-roof-middle-mate-comparison).
-Proof: The additive biproduct comparisons conjugate the middle denominator to
-the diagonal pair of one-open denominators. Since the middle denominator is
-invertible, its diagonal components are invertible: the inverse on either
-component is the corresponding inclusion, inverse diagonal map and projection.
-Apply relativeMV_resolved_open_roof_comparison to U and V to obtain their
-source and target comparison isomorphisms and roof equations.
-Compare Q(f_*(openI_U biprod openI_V)) with Q(f_*openI_U) biprod
-Q(f_*openI_V), first using Q of f_*'s biproduct comparison and then Q's biproduct
-comparison. Apply Lg and its biproduct comparison, then the biproduct of the two
-one-open source isomorphisms. Use the corresponding Q(f'_*(-)) comparison and
-the two one-open target isomorphisms on the target. Naturality of these additive
-biproduct comparisons identifies the middle numerator with the diagonal pair of
-one-open numerators, the middle denominator with the diagonal pair of one-open
-denominators, and the localization unit with the corresponding pair of units.
-The inverse diagonal denominator is the pair of their inverses. Adjunction
-naturality and the biproduct projections identify its transpose with the
-biproduct of the two local-arrow transposes. Substituting the two one-open roof
-equations proves the displayed equation under the constructed comparison
-isomorphisms. No global or intersection component, row construction, exactness
-or cover occurs. Empty, repeated and full opens and zero coefficient maps satisfy
-the same additive and naturality identities. -/
+specified mate comparison. Source: Stacks Project, Tags 08BV, 08FE, 08HY and 0D5T. -/
 theorem relativeMV_resolved_roof_middle_mate_comparison
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

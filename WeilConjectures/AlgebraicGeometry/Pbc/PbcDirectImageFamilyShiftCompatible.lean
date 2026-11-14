@@ -12,8 +12,6 @@ import all WeilConjectures.CategoryTheory.StageSystem.CommonStageCalculus
 import all WeilConjectures.AlgebraicGeometry.Pbc.PbcCompletedPullbackActualSupplement
 
 /-! # Exact structures on a normalized direct-image family
-
-Source: blueprint main-20261015, proper base change, order 1312, final paragraph.
 -/
 
 @[expose] public noncomputable section
@@ -443,8 +441,7 @@ private theorem rationalBetaShift (f : X ⟶ Y)
     exact ⟨K.obj, 𝟙 _, by infer_instance⟩
 
 /-- Transport the uniquely normalized actual stage shifts along the endpoint
-identifications. Source: blueprint order 1312
-(blueprint: lem-weil-pbc-direct-image-family-shift-compatible). -/
+identifications. -/
 @[instance_reducible] def pbcDirectImageFamilyCommShift (f : X ⟶ Y)
     (pres : ∀ (E : Padic.FiniteCoefficientFields l Ω)
       (K : pbcIntegralStage l Ω X E),
@@ -459,26 +456,7 @@ identifications. Source: blueprint order 1312
 
 /-- Normalized direct-image scalar comparisons commute with the fixed stage shifts.
 This asserts only the comparison equation; it constructs no stage functor,
-coherent family, or exact structure.
-Source: blueprint main-20261015, order 1307, scalar shift equation, and order 1312,
-compatibility in the final direct-image paragraph
-(blueprint: lem-weil-pbc-direct-image-family-shift-compatible).
-
-Proof: the ambient direct-image scalar mate commutes with shifts by
-pbcScalarOperations_shift. Identify the completed coefficient maps with the
-small-field coefficient maps. The raw ambient tensor shift and the normalized
-ambient tensor shift agree: both are the unique left-adjoint shift compatible
-with the canonical restriction shift, as witnessed by the scalar adjunction's
-unit and counit equations. The fully faithful integral inclusions reflect the
-commuting-shift equation for the restricted mate. The rational stage shifts are
-uniquely fixed by their integral localization squares. Both scalar/integral
-comparisons commute with shifts by pbcScalarShift_exists. Consequently the
-BetaSpec conjugation identifies the localized integral mate with R.β, and
-cancellation of these commuting-shift isomorphisms proves its shift equation.
-Every rational object has an integral representative, which reflects the
-natural-transformation equation. Transport along hR yields the displayed stage
-shifts. This proof applies to every integer, repeated coefficient fields, the
-zero object, and empty schemes without an extra hypothesis. -/
+coherent family, or exact structure. -/
 theorem pbcDirectImageFamilyShiftCompatible (f : X ⟶ Y)
     (pres : ∀ (E : Padic.FiniteCoefficientFields l Ω)
       (K : pbcIntegralStage l Ω X E),

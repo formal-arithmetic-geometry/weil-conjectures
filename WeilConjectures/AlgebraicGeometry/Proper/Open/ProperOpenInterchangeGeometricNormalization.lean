@@ -315,29 +315,7 @@ The ordinary and derived isomorphisms are supplied. The derived map is the
 canonical rightDerivedFunctorPlusBaseChange of the ordinary map;
 this theorem asserts only the indicated equalities for those fixed isomorphisms.
 
-Source: Stacks Project, More on Etale Cohomology, Tags 0F7B, 0F7C, 0F7D and 0F7F;
-the corresponding numbered steps of lem-cbc-proper-open-interchange-coherence.
-(blueprint: lem-cbc-normalized-proper-open-geometric-normalization)
-
-Proof:
-For a proper refinement fixing X, form the pullback of the target open. The section
-of this pullback induced by (j1,id) is open and closed, has proper projection equal to
-the identity on X, and its square with j1 is Cartesian. Restrict the normalized comparison
-to the target open. The ordinary support equation is identity on that clopen component
-and zero on the complement. Derived open restriction, the specified extension-by-zero
-base-change isomorphism and clopen-component restriction identify its adjoint transpose
-with the inverse of properOpenIdentification. The descended open-extension adjunction
-therefore identifies it with the defined properOpenComparison. For arbitrary base change,
-include both ordinary support comparisons into their common ordinary direct image. Both
-pasted paths pull back the same section; the support-composition pullback equation and
-ordinary mate pasting prove equality after inclusion. The inclusions are monic and inverse
-image is exact, so the ordinary cube commutes before inclusion. Lift that cube by the
-right-derived-unit universal property (equivalently rightDerivedFunctorPlusBaseChange_cube).
-The exact comparisons are the specified extension-zero base-change maps, and the other
-faces are the canonical derivedBaseChangeMapPlus maps. Their factorization equations and
-the assumed canonical-map equality identify the lifted faces with the stated gamma maps.
-This gives the displayed equation without any injective-preservation assumption on inverse
-image. The argument never cancels a noninvertible derived exchange map.
+Source: Stacks Project, More on Etale Cohomology, Tags 0F7B, 0F7C, 0F7D and 0F7F.
 -/
 theorem properOpenInterchangeGeometricNormalization_of_normalization (Λ : Type (u + 1)) [CommRing
   Λ] [Finite Λ]

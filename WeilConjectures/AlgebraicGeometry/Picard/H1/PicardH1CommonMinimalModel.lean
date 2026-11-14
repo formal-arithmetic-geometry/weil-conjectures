@@ -27,7 +27,6 @@ import WeilConjectures.AlgebraicGeometry.Residue.ResidueRankModelDifferential
 /-! # Common trivializations and a minimal source model
 
 Source: Stacks Project, Tag 0BF2, through the first displayed source complex.
-(blueprint: lem-sc-picard-h1-common-minimal-model)
 -/
 
 @[expose] public section
@@ -108,30 +107,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Choose a common affine neighbourhood with trivial target bundles and a minimal
 finite-free representative of the source direct image.
-Source: Stacks Project, Tag 0BF2, first two proof paragraphs; Tags 0B91 and 0BCD.
-(blueprint: lem-sc-picard-h1-common-minimal-model)
-
-Proof: For each target, the universal structure adjunction unit on the residue field
-excludes an empty fibre. Pull a local finite-free presentation of its descended N to
-one fibre point. The invertible pullback has rank one over the nonzero residue field,
-so the rank of N at w is one. Trivialize the finitely many N on a common neighbourhood.
-Their descent isomorphisms and pullback of the structure module trivialize the target
-bundles there. The source fibre descent gives a trivial source bundle by the field
-rank-one lemma and the nonempty source fibre. The immersion identifies the two marked
-residue fields. Apply perfect direct-image base change to the base-changed invertible
-source module, which is finitely presented and relatively flat. Its derived residue
-cohomology is the cohomology of the trivial bundle on the marked fibre. Negative
-cohomology vanishes, and H-zero has dimension one by the structure adjunction unit.
-Apply the finite-free residue-model theorem at w and refine inside the common target
-neighbourhood. Its term ranks are precisely these fibre Betti numbers. The zero-degree
-term is free of rank one; choose its section basis e0, and the degree-one basis e1 with
-m equal to its rank. In the finite-dimensional residue complex, equality of every term
-dimension with the corresponding cohomology dimension forces every differential to
-vanish (dimension of a term is dimension of cohomology plus the two adjacent ranks).
-Thus evaluating every coordinate of d-zero(e0 inverse(1)) gives zero. The boundedness
-and all term-rank isomorphisms are retained, rather than just their two low degrees.
-For no targets the common neighbourhood restriction is vacuous. For m zero use the
-unique basis of the zero module. No injectivity on H-one is used. -/
+Source: Stacks Project, Tag 0BF2, first two proof paragraphs; Tags 0B91 and 0BCD. -/
 theorem picard_h1_common_minimal_model
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

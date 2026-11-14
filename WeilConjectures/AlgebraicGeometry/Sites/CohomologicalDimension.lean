@@ -26,7 +26,7 @@ it is the node `lemma-uniform-bounds-pro-etale-affines` of the blueprint subsect
 `Hᵖ = 0` for `p > d` by Grothendieck vanishing, and `Rᵠε_* F = 0` for `q > d + c` since `Rᵠε_* F` is
 the sheafification of `V ↦ Hᵠ(V_ét, F|_V)`, which vanishes on affine opens `V` by the affine bound
 `AlgebraicGeometry.Scheme.hasTorsionCohomologicalDimensionLE_of_isAffine`
-(`lemma-uniform-bounds-pro-etale-affines`); see
+; see
 `WeilConjectures.AlgebraicGeometry.Sites.EtaleZariskiComparison`.
 -/
 
@@ -38,7 +38,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Blueprint `lemma-uniform-bounds-pro-etale-affines`: Torsion cohomological dimension of a
+/-- Torsion cohomological dimension of a
 finite-type scheme.
 
 Let `K` be a field with `cd_tor(K) ≤ c` and let `X` be a finite-type `K`-scheme of dimension at
@@ -50,8 +50,7 @@ The Leray spectral sequence for the comparison `ε_*` of the étale with the Zar
 (`AlgebraicGeometry.Scheme.subsingleton_H_of_isZero_rightDerived_etaleToZariski`) reduces the
 bound to Grothendieck vanishing on `X_Zar` and to `Rᵠε_* F = 0` for `q > d + c`; the latter holds
 since `Hᵠ(V_ét, F|_V) = 0` for `q > d + c` on every affine open `V` of `X` by the affine bound
-`AlgebraicGeometry.Scheme.hasTorsionCohomologicalDimensionLE_of_isAffine`
-(`lemma-uniform-bounds-pro-etale-affines`). -/
+`AlgebraicGeometry.Scheme.hasTorsionCohomologicalDimensionLE_of_isAffine` -/
 theorem subsingleton_H_of_two_mul_add_lt {K : Type u} [Field K] (c d : ℕ)
     (hK : ∀ F : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1}, F.IsTorsion →
       ∀ q : ℕ, c < q → Subsingleton (Sheaf.H F q))
@@ -70,14 +69,14 @@ theorem subsingleton_H_of_two_mul_add_lt {K : Type u} [Field K] (c d : ℕ)
     ((topologicalKrullDim_subspace_le X U).trans hX) _
     (Etale.isTorsion_upperStar U.ι hF) p hp
 
-/-- Blueprint `sk-prop-sf-finiteness`: Finiteness and constructibility, the
+/-- Finiteness and constructibility, the
 cohomological-dimension bound over a separably closed field.
 
 Let `K` be a separably closed field and let `X` be a finite-type `K`-scheme of dimension at most
 `d`. Then `cd_tor(X) ≤ 2d`: `H^q(X_ét, F) = 0` for every torsion abelian étale sheaf `F` on `X`
 and every `q > 2d`. This is the bound `cd_tor(X) ≤ 2d + c` of
 `AlgebraicGeometry.Scheme.subsingleton_H_of_two_mul_add_lt`
-(`lemma-uniform-bounds-pro-etale-affines`) with `c = 0`, which is allowed since `cd_tor(Spec K) = 0`
+ with `c = 0`, which is allowed since `cd_tor(Spec K) = 0`
 (`AlgebraicGeometry.Scheme.subsingleton_H_of_isSepClosed`,
 `lemma-cohomological-dimension-base-field--1`). -/
 theorem subsingleton_H_of_two_mul_lt_of_isSepClosed {K : Type u} [Field K] [IsSepClosed K]

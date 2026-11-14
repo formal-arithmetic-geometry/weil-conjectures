@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.SignedProjectionResolution.SignedProjec
 
 /-! # Perfect projection for one constant quotient
 
-Source: Stacks Tags 0944, 06YY and 099M
-(blueprint: lem-sp-constant-perfect-quotient-projection).
+Source: Stacks Tags 0944, 06YY and 099M.
 -/
 
 @[expose] public noncomputable section
@@ -30,23 +29,23 @@ variable {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 variable {U V : Scheme.{t}} (f : U ⟶ V)
 
 /-- Exact derived evaluation of a strict quotient diagram.
-Source: Stacks 0941 (blueprint: def-sp-constant-quotient-projection). -/
+Source: Stacks 0941. -/
 abbrev quotientEvaluation (T : Scheme.{t}) (n : ℕᵒᵖ) : TD (A := A) T ⥤ D (A := A) T :=
   ((CategoryTheory.evaluation ℕᵒᵖ
     (reductionModules T (exchangeConstantRing T A))).obj n).mapDerivedCategory
 
 /-- The canonical comparison of evaluation and pullback.
-Source: Stacks 0941 (blueprint: def-sp-constant-quotient-projection). -/
+Source: Stacks 0941. -/
 abbrev quotientEvaluationPull (n : ℕᵒᵖ) :=
   AlgebraicGeometry.ProEtale.StrictTower.evalG A f n.unop
 
 /-- The mate of the inverse pullback/evaluation comparison.
-Source: Stacks 0941 (blueprint: def-sp-constant-quotient-projection). -/
+Source: Stacks 0941. -/
 abbrev quotientEvaluationPush (n : ℕᵒᵖ) :=
   AlgebraicGeometry.ProEtale.StrictTower.evalR A f n.unop
 
 /-- The normalized reduction/pullback square at one fixed quotient.
-Source: Stacks 0B56, 099M (blueprint: def-sp-constant-quotient-projection). -/
+Source: Stacks 0B56, 099M. -/
 def quotientTensorPull (n : ℕᵒᵖ) :
     (reduction d V ⋙ quotientEvaluation (A := A) V n) ⋙ pull (A := A) f ≅
       pull (A := A) f ⋙ (reduction d U ⋙ quotientEvaluation (A := A) U n) :=
@@ -58,7 +57,7 @@ def quotientTensorPull (n : ℕᵒᵖ) :
           Functor.associator _ _ _
 
 /-- The finite projection is the counit mate of the specified normalized square.
-Source: Stacks 0B56, 0944 (blueprint: def-sp-constant-quotient-projection). -/
+Source: Stacks 0B56, 0944. -/
 def quotientProjection (n : ℕᵒᵖ) :
     push (A := A) f ⋙ (reduction d V ⋙ quotientEvaluation V n) ⟶
       (reduction d U ⋙ quotientEvaluation U n) ⋙ push (A := A) f :=
@@ -217,25 +216,7 @@ private theorem projection_transport
     (eJ.hom.naturality (adj.counit.app K)).symm
 
 /-- The finite counit projection is invertible for a perfect quotient.
-Source: Stacks Tag 0944, lemma-projection-formula, and Tag 06YY
-(blueprint: lem-sp-constant-perfect-quotient-projection).
-Proof: choose a bounded finite-projective A-resolution of A/I^(n+1) using
-quotientPerfect. Its exact constant module realization, followed by the normalized
-finite constant-to-function comparison, represents the restricted quotient sheaf.
-For a flat K-flat complex, scalar tensor cancellation identifies quotientEvaluation
-of reduction with total tensor by this resolution; the universal reduction counit
-fixes that identification. The normalization of reductionPullIso identifies
-quotientTensorPull with inverse image of this same total tensor comparison.
-Choose a K-injective representative J of K. The bounded finite-projective tensor of
-J with the pulled-back resolution remains K-injective. The canonical derived
-adjunction counit factorization identifies quotientProjection with localization of
-tensorAdjunctionTotal between these representatives. Each coefficient term is a
-retract of a finite free module. The free projection is the finite-product
-comparison, hence invertible; its retraction inverse extends to the signed total
-complex because the resolution is bounded. Thus tensorAdjunctionTotal is an
-isomorphism, and its localization and the normalized representative comparisons
-prove the claim. No bound on J, completeness of K, or compatible choices at other
-quotient levels are required. Zero quotients and rank-zero terms are included. -/
+Source: Stacks Tag 0944, and Tag 06YY. -/
 theorem quotientProjection_isIso (n : ℕᵒᵖ) (K : D (A := A) U) :
     IsIso ((quotientProjection d f n).app K) := by
   obtain ⟨F, lo, hi, q, hq, ⟨package⟩, hb, hF⟩ := constantResolution d V n.unop

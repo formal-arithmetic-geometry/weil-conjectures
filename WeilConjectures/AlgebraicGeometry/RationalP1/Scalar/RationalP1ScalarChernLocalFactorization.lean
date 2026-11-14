@@ -13,8 +13,6 @@ import all WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.DiagonalCanoni
 import all WeilConjectures.AlgebraicGeometry.RationalP1.First.RationalP1FirstScalarTrace
 
 /-! # Local classes underlying the scalar Chern adjuncts
-
-Source: diagonal tower trace proof (1) and coefficient changes (1).
 -/
 
 @[expose] public noncomputable section
@@ -27,9 +25,7 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.RationalP1
 open DiagonalCoefficients CondensedRing
 
-/-- Whole-system normalization of a local completed section class.
-Source: diagonal tower trace proof (1).
-(blueprint: lem-sfb-rational-p1-scalar-chern-local-factorization). -/
+/-- Whole-system normalization of a local completed section class. -/
 def CompletedLocalChernNormalized (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}
     [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]
     {f : X ⟶ S} (t : DiagonalTrace.Presentation l (ULift.{u} (Padic l)) f)
@@ -56,8 +52,7 @@ private theorem completed_local_chern_exists (l : ℕ) [Fact l.Prime]
         (Scheme.Pic.map p.model.model.hom (SpTowerClasses.hyperplanePic S)))).exists
 
 /-- Realization of a local completed class, with no direct image.
-Source: coefficient changes (1).
-(blueprint: lem-sfb-rational-p1-scalar-chern-local-factorization). -/
+Source: coefficient changes (1). -/
 @[irreducible]
 def realizeLocalChern (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
     [DiagonalTraceLocalizations l X] (e : CompletedRealization l X)
@@ -73,8 +68,7 @@ def realizeLocalChern (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
   inv (e.singleUnit l X) ≫ e.F.mapDerivedCategory.map z ≫ e.shiftedLine l X
 
 /-- Extend a local class through the specified unit and line endpoints.
-Source: coefficient changes (1).
-(blueprint: lem-sfb-rational-p1-scalar-chern-local-factorization). -/
+Source: coefficient changes (1). -/
 @[irreducible]
 def extendLocalChern
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
@@ -97,8 +91,7 @@ variable (l : ℕ) [Fact l.Prime] (E : PadicAlgCl.FiniteIntermediateField l)
   {family : Family l Y} (r : Reference l Y δ family)
 
 /-- The two scalar extensions of the local class on the line.
-Source: coefficient changes (1).
-(blueprint: lem-sfb-rational-p1-scalar-chern-local-factorization). -/
+Source: coefficient changes (1). -/
 @[irreducible]
 def scalarQLocalChern
     (z : DiagonalTrace.completedUnit l (ProjectiveLine Y) ⟶
@@ -114,8 +107,7 @@ def scalarQLocalChern
       (realizeLocalChern l _ r.eP z))
 
 /-- The two scalar extensions of the local class on the product.
-Source: coefficient changes (1).
-(blueprint: lem-sfb-rational-p1-scalar-chern-local-factorization). -/
+Source: coefficient changes (1). -/
 @[irreducible]
 def scalarP2LocalChern
     (z : DiagonalTrace.completedUnit l (diagonalSurface Y) ⟶
@@ -131,8 +123,7 @@ def scalarP2LocalChern
       (realizeLocalChern l _ r.eW z))
 
 /-- The coefficient-unit pullback comparison on the second projection.
-Source: the ordinary monoidal coefficient unit and its derived comparison.
-(blueprint: lem-sfb-rational-p1-scalar-chern-local-factorization). -/
+Source: the ordinary monoidal coefficient unit and its derived comparison. -/
 @[irreducible]
 def scalarP2UnitIso
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -354,25 +345,7 @@ private theorem canonical_p2_local_adjunct
 /-- A normalized completed adjunct comes from its local section class, and this
 factorization survives realization and both finite-field scalar changes.
 
-Source: diagonal tower trace proof (1), construction of the section-class adjunct;
-diagonal coefficient changes (1), normalization of the scalar mates.
-(blueprint: lem-sfb-rational-p1-scalar-chern-local-factorization).
-
-Proof: restrict the whole-system first Chern class of the model's pullback of O(1)
-to constant Z_l systems and apply the specified derived limit. The unit and shifted
-line are complete; fullness of completed scalar restriction lifts this map to z.
-Its normalization is the displayed whole-system equation. The normalized model
-adjunct is its coefficient-unit adjunct: this follows from the varying-unit seed
-equation and naturality of the completed/direct-image and limit comparisons.
-Cancel sourceMap and use faithfulness on complete objects to identify the given
-adjunct with that one. Apply the realization square's universal-unit equation.
-Its ordinary normalization sends the coefficient unit to the coefficient unit.
-For each of the two coefficient changes, scalar-adjunction naturality transports
-the local arrow, while the unit endpoint normalization transports the adjunction
-unit. The full-unit-normalized canonical right-derived comparison then identifies
-the last adjunct with the native derived adjunction. Apply this argument separately
-to q and p2. No square between those two maps or Chern pullback is used.
-The same construction covers empty schemes and requires only invertibility of l. -/
+Source: diagonal coefficient changes (1), normalization of the scalar mates. -/
 theorem scalar_chern_local_factorization
     [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)] [IsNoetherian (diagonalSurface Y)]
     (hY : IsUnit (l : Γ(Y, ⊤)))

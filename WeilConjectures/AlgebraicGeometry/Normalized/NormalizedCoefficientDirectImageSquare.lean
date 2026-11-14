@@ -15,7 +15,6 @@ import all WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientDirectImageR
 /-! # Compatibility of normalized direct-image squares with coefficient presentations
 
 Source: Stacks Project, Cohomology on Sites, Tags 0D6D and 0D6E.
-(blueprint: lem-pbc-normalized-coefficient-direct-image-square).
 -/
 
 @[expose] public noncomputable section
@@ -28,7 +27,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 /-- The canonical comparison for the source coefficient presentation.
-Source: Stacks 0D6E (blueprint: lem-pbc-normalized-coefficient-direct-image-square). -/
+Source: Stacks 0D6E. -/
 def normalizedCoefficientSourceComparison
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R₀ R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
@@ -47,7 +46,7 @@ def normalizedCoefficientSourceComparison
     (Iso.refl _) cR (by simp)
 
 /-- The canonical comparison between identified and literal target coefficients.
-Source: Stacks 0D6E (blueprint: lem-pbc-normalized-coefficient-direct-image-square). -/
+Source: Stacks 0D6E. -/
 def normalizedCoefficientTargetComparison
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (SY : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
@@ -93,24 +92,7 @@ attribute [local irreducible] Functor.rightDerivedFunctor Functor.mapDerivedCate
 direct-image square. This theorem involves only exact scalar restrictions and right
 derived direct images; it involves neither scalar extension nor its mate.
 
-Source: Stacks Project, sites-cohomology.tex, lemma-derived-pushforward-composition
-(Tag 0D6E), together with the uniqueness of right derivation.
-(blueprint: lem-pbc-normalized-coefficient-direct-image-square).
-
-Proof: form the canonical direct-image coefficient comparison p for b and q, where
-q is the inverse image of b followed by cR. For cS use the comparison between
-identified and literal inverse-image coefficients, canceling restriction by the
-identity on SY; this gives z. At the ordinary level all these comparisons are
-identity on sections. Consequently the two composites around the restriction
-square agree on every module, including their scalar actions, by the given
-coefficient square. Identify the given ordinary comparison i using hi and
-sectionwise faithfulness. Derive the ordinary equality. The normalization he and
-the defining unit normalization of each canonical coefficient comparison identify
-both derived composites with the same right-derived transformation. Uniqueness
-of right derivation gives the asserted equality on every derived object. This
-argument uses K-injective resolutions to compute the universal comparisons, but
-does not require scalar restriction to preserve K-injectivity. It remains valid
-for zero rings and empty sites. -/
+Source: Stacks Project, together with the uniqueness of right derivation. -/
 theorem normalizedCoefficientDirectImageSquare
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R₀ R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})

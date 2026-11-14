@@ -20,7 +20,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.TraitNormalizationGenericSect
 
 /-! Generic section factors of a supplied trait-divisor chart.
 Source: Stacks Project, Tags 0EYH, 0EYI and 0EYJ.
-(blueprint: lem-sbc-trait-divisor-chart-section-generic-factor)
 -/
 
 @[expose] public section
@@ -34,35 +33,17 @@ root of a uniformizer over an unramified trait extension.
 
 Precisely: let `n` be the base change of the relative normalization to
 `C ×_S Spec 𝒪_{S,s}`, `τ` the section induced by `σ`, and
-`φ : Spec R ⟶ C ×_S Spec 𝒪_{S,s}` an étale chart through a point of `n` over `τ` of the
+`φ: Spec R ⟶ C ×_S Spec 𝒪_{S,s}` an étale chart through a point of `n` over `τ` of the
 closed point, lying over `Spec ρ`, on which `n` is the product of the root covers
 `R[T]/(T^(e k) - ρ(ϖ₀))`. Then there are a DVR `A` with an injective
-`δ : 𝒪_{S,s} →+* A` and `ι : R →+* A` such that `Spec ι` followed by `φ` equals `Spec δ`
+`δ: 𝒪_{S,s} →+* A` and `ι: R →+* A` such that `Spec ι` followed by `φ` equals `Spec δ`
 followed by `τ`, `δ ϖ₀` is a uniformizer of `A` equal to `ι (ρ ϖ₀)`, and, writing
-`K = Frac A` and `ε : k(S) →+* K` for the extension of `𝒪_{S,s} → A → K`, the `k`-th
+`K = Frac A` and `ε: k(S) →+* K` for the extension of `𝒪_{S,s} → A → K`, the `k`-th
 root factor `K[T]/(T^(e k) - δ ϖ₀)` is an open subscheme of `Z` pulled back along
 `Spec ε` followed by the generic section `sη`, compatibly with the projections to `Spec K`.
 
 Source: Stacks Project, Tag 0EYI, preliminary paragraph before parts (1) and (2),
-and Tag 0EYJ, the local trait reduction.
-(blueprint: lem-sbc-trait-divisor-chart-section-generic-factor)
-
-Proof: Pull phi back along the trait section tau. The point y lies above its closed
-point, so the pullback has a point above y and that closed point (take a common
-extension of their residue fields). Its local ring A is an unramified DVR extension
-of the base trait. The structural equality for phi identifies rho(varpi0) in A
-with the image varpi of the base uniformizer. Unramifiedness gives m_A=(varpi).
-Take the fraction field K. The composite of delta with the inclusion into K extends to
-the function field of S and gives b. Base change alpha along Spec K: polynomial quotients
-and finite products commute with field extension, so each factor is
-Spec K[T]/(T^(e k)-varpi). A factor inclusion is an open immersion. The generic
-restriction of the concrete relative normalization is the original Z, since the finite
-etale cover is normal over the smooth generic fibre and normalization commutes with the
-relevant localization. The pullback square hpsi and the section equality hsj identify
-this generic restriction over Spec K with pullback Z.pi (b composed with seta). Compose
-the kth factor inclusion with that isomorphism; both preserve the projection to Spec K,
-which is precisely the displayed structural equality. This needs no rational point or
-splitting. -/
+and Tag 0EYJ, the local trait reduction. -/
 theorem GaloisCover.trait_divisor_chart_section_generic_factor {S C : Scheme.{u}}
     [IsNoetherian S] [IsIntegral S]
     (c : C ⟶ S) (σ : S ⟶ C) (hσ : σ ≫ c = 𝟙 S)

@@ -26,7 +26,6 @@ namespace AlgebraicGeometry.Scheme
 /-- Noetherianity of the canonical strict henselization over a regular affine ring.
 Source: Stacks Project, Tag 06LJ, applied to the local ring at the geometric point.
 The proof identifies the coordinate-ring colimit with the ring strict henselization.
-(blueprint: lem-sbc-strict-hensel-regular-divisor-quotient-noetherian)
 -/
 theorem strictHenselizationRing_noetherian_of_regular
     (R : CommRingCat.{u}) [IsRegularRing R]

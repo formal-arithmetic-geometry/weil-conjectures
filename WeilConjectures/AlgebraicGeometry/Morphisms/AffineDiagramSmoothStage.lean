@@ -15,7 +15,6 @@ import WeilConjectures.RingTheory.SmoothPushoutFilteredColimitStage
 # Smoothness of an affine model over an affine inverse system
 
 Source: Stacks Project, Tags 0C0C, 0CAQ and 01ZM(2)-(3).
-(blueprint: lem-sbc-affine-diagram-smooth-stage)
 -/
 
 @[expose] public section
@@ -28,20 +27,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Smoothness of a fixed finitely presented affine model descends along an affine system.
 
-Source: Stacks Project, Tag 0C0C, affine case, using Tags 0CAQ and 01ZM(2)-(3).
-Proof: an inverse limit of affine schemes is affine. Its global sections are the
-filtered colimit of the stage rings. Write A for the ring of Q and B for the ring
-of P; B is finitely presented over A. The compatible maps to Q give compatible
-A-algebra structures on the stage rings and their colimit. Smoothness of the
-limit pullback says that the base change of B to this colimit is smooth. Tag 0CAQ
-provides a smooth finitely presented model over one stage. Compare its base change
-with that of B. Descend the comparison isomorphism and its inverse to a common
-later stage by Tag 01ZM(2), and descend their composite identities by 01ZM(3).
-The base change of B at that stage is isomorphic to a smooth algebra and hence
-smooth. Translate back by the affine criterion for smooth scheme morphisms.
-The index category is nonempty by cofilteredness; zero rings and empty spectra
-are allowed throughout, and no nonempty-source hypothesis is used.
-(blueprint: lem-sbc-affine-diagram-smooth-stage) -/
+Source: Stacks Project, Tag 0C0C, affine case, using Tags 0CAQ and 01ZM(2)-(3). -/
 theorem exists_smooth_stage_of_affine_diagram {I : Type u} [SmallCategory I]
     [IsCofiltered I] (D : I ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)
     (hD : ∀ j, IsAffine (D.obj j))

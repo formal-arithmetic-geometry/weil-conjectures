@@ -16,7 +16,6 @@ Source: Stacks Project, Tags 0307, 035I and 02KH.
 The affine comparison proof adapts the smooth-base-change proof in
 Mathlib.AlgebraicGeometry.Normalization, replacing smooth integral-closure base change
 with TensorProduct.toIntegralClosure_bijective_of_isLocalization.
-(blueprint: lem-sbc-normalization-stalk-base-change)
 -/
 
 @[expose] public section
@@ -114,20 +113,7 @@ private theorem normalizationPullback_affine_localization {X C Y : Scheme.{u}}
 /-- Relative normalization commutes with base change from a base scheme to one of its stalks.
 
 Source: Stacks Project, Tag 0307 (localization of integral closure), Tag 035I,
-and Tag 02KH (flat base change of sections, degree zero).
-(blueprint: lem-sbc-normalization-stalk-base-change)
-
-Proof: Choose an affine neighbourhood Spec B of s in S, with prime q corresponding to s,
-and affine opens Spec R covering its inverse image in C. Their base changes to Spec O_{S,s}
-are Spec R_M, where M is the image of B minus q. Because f is quasi-compact and
-quasi-separated, its sections over these opens commute with this flat localization.
-The affine description of relative normalization is the integral closure of R in
-these sections. Integral closure commutes with localization by Tag 0307, so the
-canonical normalizationPullback is an isomorphism on each of these affine opens.
-These opens cover the base change of C. The ring comparisons respect localization
-and the base algebra maps, hence identify the canonical comparison map on overlaps.
-Thus the canonical comparison is an isomorphism globally. No normality, smoothness,
-Noetherian hypothesis, or nonemptiness assumption is required. -/
+and Tag 02KH (flat base change of sections, degree zero). -/
 theorem Hom.isIso_normalizationPullback_stalk {S C P : Scheme.{u}}
     (c : C ⟶ S) (f : P ⟶ C) [QuasiCompact f] [QuasiSeparated f] (s : S) :
     IsIso (f.normalizationPullback (pullback.fst c (S.fromSpecStalk s))) := by

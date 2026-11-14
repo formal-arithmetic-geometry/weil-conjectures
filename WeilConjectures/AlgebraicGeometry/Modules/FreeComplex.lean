@@ -19,7 +19,7 @@ public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Rank
 
 Let `P` be a cochain complex of `𝒪_Y`-modules whose terms are free of finite rank,
 `P^n ≅ 𝒪_Y^{r_n}`, so that its differentials are given by matrices `A_n` of global functions on
-`Y`. At a point `g : Spec R ⟶ Y` with values in a field `R`, the pullback `g^* P` is a complex of
+`Y`. At a point `g: Spec R ⟶ Y` with values in a field `R`, the pullback `g^* P` is a complex of
 finite dimensional `R`-vector spaces with differentials the matrices `A_n(g)`, and linear algebra
 gives
 `dim_R H^q(g^* P) = r_q - rank A_q(g) - rank A_{q-1}(g)`.
@@ -27,7 +27,7 @@ gives
 The rank of `A_n(g)` is at least `ρ` if and only if some `ρ × ρ` minor of `A_n` does not vanish at
 the point. Hence the ranks can only go up near a point, and the fibre dimension of the cohomology
 can only go down: it is upper semicontinuous. This is the linear algebra in the proof of the
-semicontinuity theorem (blueprint `lemma-triviality-fibres--2`, part (2)).
+semicontinuity theorem.
 
 ## Main statements
 
@@ -203,17 +203,15 @@ theorem finite_moduleSpecΓFunctor_obj_homology_pullback {P : CochainComplex Y.M
     ((Q.sc' (q - 1) q (q + 1)).mapHomologyIso F).symm).toLinearEquiv.symm
 
 /-- **Upper semicontinuity of the fibre cohomology of a complex of finite free modules.** Let `P`
-be a complex of `𝒪_Y`-modules whose terms are free of finite rank, and `g : Spec R ⟶ Y` a point
+be a complex of `𝒪_Y`-modules whose terms are free of finite rank, and `g: Spec R ⟶ Y` a point
 with values in a field. There is an open neighbourhood `V` of the point such that at every point
-`g' : Spec R' ⟶ Y` in `V`, `dim_{R'} H^q(g'^* P) ≤ dim_R H^q(g^* P)`.
+`g': Spec R' ⟶ Y` in `V`, `dim_{R'} H^q(g'^* P) ≤ dim_R H^q(g^* P)`.
 
 Take for `V` the non-vanishing locus of a maximal nonvanishing minor at `g` of each of the two
 differentials around degree `q`: on `V` their ranks can only be larger
 (`AlgebraicGeometry.Scheme.Modules.le_rank_map_appTop_iff`), so the dimension of the cohomology
 can only be smaller
-(`AlgebraicGeometry.Scheme.Modules.finrank_homology_pullback_add_rank_add_rank`).
-
-(blueprint: `lemma-triviality-fibres--2`) -/
+(`AlgebraicGeometry.Scheme.Modules.finrank_homology_pullback_add_rank_add_rank`). -/
 theorem exists_finrank_homology_pullback_le {P : CochainComplex Y.Modules ℤ}
     (hP : ∀ n, ∃ r : ℕ, Nonempty (P.X n ≅ free (R := Y.ringCatSheaf) (ULift.{u} (Fin r))))
     (q : ℤ) {R : CommRingCat.{u}} (hR : IsField R) (g : Spec R ⟶ Y) :

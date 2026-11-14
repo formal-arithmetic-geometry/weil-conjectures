@@ -19,12 +19,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 
 /-!
 # Stalk and filtered-colimit extension of finite Tor tests
-
-Source: literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
-`sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md`,
-the closed-support paragraph, with the detailed steps 4--6 of
-`lem-sf-open-tor-bound-arbitrary-field`
-(blueprint: lem-sf-open-tor-bound-stalk-filtered-extension).
 -/
 
 @[expose] public section
@@ -180,41 +174,7 @@ private theorem stalk_tensor_single_iso
     (_root_.DerivedCategory.homologyFunctor _ q).mapIso
       (e₀ ≪≫ tensorIso (Iso.refl _) ((S.mapDerivedCategorySingleFunctor 0).app F))⟩
 
-/-- Finite constant-module Tor tests extend to arbitrary module sheaves.
-
-Source: blueprint main-20261015, chap-Construction-of-f,
-`sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md`,
-the closed-support paragraph; steps 4--6 of `lem-sf-open-tor-bound-arbitrary-field`
-(blueprint: lem-sf-open-tor-bound-stalk-filtered-extension).
-
-Proof:
-1. Fix a geometric point t of T and write C for the derived stalk of Q.
-   Derived inverse image commutes with derived tensor, exact stalks commute with
-   cohomology, and the stalk of the constant module sheaf M_T is M. These
-   identifications are A-linear (in particular the constant-stalk comparison is
-   natural for scalar endomorphisms). Apply the given vanishing and these
-   comparisons to obtain H^q(C tensor^L M) = 0 for every finite module M whenever
-   q lies outside [a,b].
-2. Represent C by a K-flat module complex P. The tensor localization counit
-   identifies tensor cohomology naturally with H^q(P tensor N[0]). The degree-zero
-   embedding and tensor with P preserve colimits; filtered module colimits are
-   exact and thus preserve homology. This gives the needed filtered-colimit
-   comparison for the existing monoidal derived tensor, without selecting another
-   derived-tensor bifunctor. For an arbitrary module N, take its finitely generated
-   submodules in the same universe. They are directed by sum, include zero, and
-   their union is N because every element lies in its cyclic submodule. A submodule
-   on r generators is a quotient of A^r, hence is finite since A is finite. Apply the filtered
-   colimit comparison just proved to the diagram of these submodules. It identifies
-   H^q(C tensor^L N) with the colimit of the zero modules from step 1. This is zero.
-   This step does not commute a direct image with colimits.
-3. Given any module sheaf F, take N = F_t separately at each geometric point.
-   The same tensor and cohomology comparisons identify the stalk of
-   H^q(Q tensor^L F) with H^q(C tensor^L F_t), which vanishes by step 2.
-   The existing jointly faithful family of module-valued geometric stalks makes
-   the identity of this cohomology sheaf equal to zero. Hence the cohomology sheaf
-   is zero. Vary F and q to obtain
-   exactly the all-module-sheaf Tor amplitude in the conclusion. This also works
-   for an empty scheme, a zero ring, or an empty interval. -/
+/-- Finite constant-module Tor tests extend to arbitrary module sheaves. -/
 theorem open_tor_bound_stalk_filtered_extension
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {T : Scheme.{u}} (a b : ℤ) (Q : DerivedCategoryModule A T)

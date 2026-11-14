@@ -61,24 +61,7 @@ private theorem reduction_transition_naturality (X : Scheme.{u})
 /-- On an immersed lisse stratum a normalized tower has a single bounded local
 completed-coefficient model, with every forward quotient square.
 
-Source: Stacks, proetale.tex, Tag 09BV; more-algebra.tex, Tags 09AV and 066E.
-(blueprint: lem-weil-pbc-lisse-normalized-tower-local-models).
-
-Proof: the algebraic derived presentation supplies a covering sieve and on each
-member a pseudo-coherent complex E over the completion, with cohomology in [a,b].
-Its exact relative completed realization has the given finite reductions, with
-finite-lisse cohomology and all the specified transition equations. Truncate a
-finite-free model of E above b and below a: Noetherianity makes the cycles at b
-finite, and the cokernel at a is finite. Both truncations are quasi-isomorphisms.
-Apply exact completed realization termwise to the resulting finite complex P.
-The terms vanish in the same interval and are relatively adic lisse. The exact
-functor's localization comparison and the isomorphism Q(P)≅E give an isomorphism
-from Q(L) to the realized derived object. Apply each derived quotient functor to
-this single isomorphism and compose with the algebraic presentation. Homology
-and scalar restriction transport finite lissity through these isomorphisms.
-Naturality of the reduction adjunct gives the forward semilinear squares after
-composition. There is no finite Tor assumption, and no assertion that the first
-truncated term is projective. -/
+Source: Stacks, Tag 09BV; Tags 09AV and 066E. -/
 theorem lisseNormalizedTower_local_models
     (X Y : Scheme.{u}) [IsNoetherian X] (g : Y ⟶ X) [IsImmersion g]
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (M : AdicTower X d)

@@ -13,7 +13,6 @@ public import WeilConjectures.AlgebraicGeometry.LocallyClosedModuleExtensionData
 # Coefficient parameters and normalization formulas for locally closed extension
 
 Source: Stacks Project, Tags 01OV, 01IO, 03D2 and 03D8.
-(blueprint: def-sfb-locally-closed-module-extension-data).
 
 These existing parameter definitions are moved verbatim from
 `LocallyClosedModuleExtensionCoherence` and publicly reexported there.
@@ -46,7 +45,7 @@ namespace LocallyClosedCoefficientImmersion
 
 
 /-- The canonical inverse-image composition, fixed by the sectionwise fibre-product map.
-Source: Stacks, Tag 03D8 (blueprint: lem-sfb-locally-closed-extension-coherence). -/
+Source: Stacks, Tag 03D8. -/
 def pullComp {S X T : LocallyClosedCoefficients.{u}}
     (a : LocallyClosedCoefficientImmersion S X) (b : LocallyClosedCoefficientImmersion T S) :
     (a.comp b).pull ≅ a.pull ⋙ b.pull :=
@@ -57,8 +56,7 @@ end LocallyClosedCoefficientImmersion
 
 
 /-- The composite of the two restriction comparisons and inverse-image composition.
-Source: Stacks, Tags 02V0 and 09AH
-(blueprint: def-sfb-locally-closed-module-extension-data). -/
+Source: Stacks, Tags 02V0 and 09AH. -/
 def LocallyClosedCompositeRestrictionMap
     {A B C : Type*} [Category A] [Category B] [Category C]
     (Ea : B ⥤ C) (Eb : A ⥤ B) (La : C ⥤ B) (Lb : B ⥤ A) (Lab : C ⥤ A)
@@ -67,8 +65,7 @@ def LocallyClosedCompositeRestrictionMap
   c.hom.app (Ea.obj (Eb.obj M)) ≫ Lb.map (ra.hom.app (Eb.obj M)) ≫ rb.hom.app M
 
 /-- An objectwise comparison has a specified restriction.
-Source: Stacks, Tags 02V0 and 09AH
-(blueprint: def-sfb-locally-closed-module-extension-data). -/
+Source: Stacks, Tags 02V0 and 09AH. -/
 def LocallyClosedObjectNormalization
     {C D : Type*} [Category C] [Category D] (H : C ⥤ D) (L : D ⥤ C)
     (r : H ⋙ L ≅ 𝟭 C) {A : D} {M : C} (t : L.obj A ⟶ M) (e : A ≅ H.obj M) : Prop :=
@@ -76,8 +73,7 @@ def LocallyClosedObjectNormalization
     L.map e.hom ≫ r.hom.app M = t
 
 /-- A natural binary comparison has the composite restriction normalization.
-Source: Stacks, Tags 02V0 and 09AH
-(blueprint: def-sfb-locally-closed-module-extension-data). -/
+Source: Stacks, Tags 02V0 and 09AH. -/
 def LocallyClosedBinaryNormalization
     {A B C : Type*} [Category A] [Category B] [Category C]
     (Ea : B ⥤ C) (Eb : A ⥤ B) (La : C ⥤ B) (Lb : B ⥤ A) (Lab : C ⥤ A)

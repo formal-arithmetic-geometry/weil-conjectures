@@ -31,25 +31,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Descend the family and its generic torsor, without constructing an extension.
 
-Source: Stacks Project, Tag 0EZJ, proof of Lemma 58.31.9.
-(blueprint: lem-sbc-noetherian-spreading-data)
-
-Proof:
-Write the qcqs integral normal base as a directed limit of normal integral schemes of
-finite type over the integers with affine transition maps. This is obtained from absolute
-Noetherian approximation by normalizing each stage in the base: these normalizations are
-finite by the finiteness theorem over the integers and their limit is the given normal
-base, as is checked on affine opens. Descend the finitely presented smooth qcqs family and
-its section to one stage. Replace the descended family by the open locus with geometrically
-connected fibres; the original family maps into this locus, and the section lands in it
-after enlarging the stage. Descend invertibility of the group order. The generic fibre is
-the limit of the generic fibres at the stages. Finite étale descent therefore descends the
-cover and its finite group action, including the torsor isomorphism, to some generic fibre.
-Descend the rational point and its equality with the generic section after enlarging the
-stage once more. The resulting family comparison and generic-fibre comparison commute;
-the comparison of covers is a pullback by finite étale descent. Retain these comparison
-maps and all the descended hypotheses. No extension of the descended cover is constructed
-in this lemma. -/
+Source: Stacks Project, Tag 0EZJ, proof of Lemma 58.31.9 -/
 theorem GaloisCover.exists_noetherian_spreading_data {S C : Scheme.{u}} [CompactSpace S]
     [QuasiSeparatedSpace S] [IsIntegral S]
     (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))

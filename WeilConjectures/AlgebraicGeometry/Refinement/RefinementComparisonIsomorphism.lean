@@ -40,10 +40,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 /-!
 # Refinement comparison with an explicit etale-origin witness
 
-Source: Weil blueprint, sec-smooth-purity/sk-def-sf-operations,
-prop-compactification-coherence, proof steps 1--2, order 1485
-(blueprint: def-sf-refinement-comparison-isomorphism).
-
 The recorded witness uses modules over the continuous-function coefficient sheaf.
 The recorded compact-support candidate uses fixed scalar module sheaves. We evaluate
 it on the canonical inverse realization of the same object. The witness is transported
@@ -61,9 +57,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.ProEtale
 
 /-- The canonical change between the two recorded coefficient presentations, derived
-termwise from the existing coefficient realization equivalence.
-Source: blueprint order 1485, ambient finite-coefficient derived categories
-(blueprint: def-sf-refinement-comparison-isomorphism). -/
+termwise from the existing coefficient realization equivalence. -/
 def refinementCoefficientEquivalence (T : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] :
     DerivedCategory (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} Λ)) ≌
@@ -71,9 +65,7 @@ def refinementCoefficientEquivalence (T : Scheme.{u}) (Λ : Type (u + 1))
   (finiteCoefficientRealization T Λ).mapDerivedCategory.asEquivalence
 
 /-- The underlying object in the fixed scalar presentation of the recorded compact-support
-candidate. This is the canonical inverse realization of `K`, retaining no new choice.
-Source: blueprint order 1485, input `(K,L,alpha)`
-(blueprint: def-sf-refinement-comparison-isomorphism). -/
+candidate. This is the canonical inverse realization of `K`, retaining no new choice. -/
 def refinementFixedObject (T : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ]
     (O : EtaleOriginDerivedCategory T Λ) :
@@ -82,9 +74,7 @@ def refinementFixedObject (T : Scheme.{u}) (Λ : Type (u + 1))
 
 /-- The retained witness in the fixed scalar presentation. Starting with `nu^* L`, insert
 inverse realization after realization via the equivalence unit, then transport the actual
-retained `alpha`. The composition and bounded below inclusion comparisons are canonical.
-Source: blueprint order 1485, transport in part (a)
-(blueprint: def-sf-refinement-comparison-isomorphism). -/
+retained `alpha`. The composition and bounded below inclusion comparisons are canonical. -/
 def refinementFixedWitnessIso (T : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ]
     (O : EtaleOriginDerivedCategory T Λ) :
@@ -99,9 +89,7 @@ def refinementFixedWitnessIso (T : Scheme.{u}) (Λ : Type (u + 1))
       DerivedCategory.Plus.ι.mapIso O.2.alpha)
 
 /-- Part (a): `j₂!(alpha)⁻¹`, followed by the canonical proper-open comparison for `L`,
-followed by `Ru_* j₁!(alpha)`. The order here is Lean's left-to-right composition order.
-Source: blueprint order 1485, proper-open comparison and witness transport
-(blueprint: def-sf-refinement-comparison-isomorphism). -/
+followed by `Ru_* j₁!(alpha)`. The order here is Lean's left-to-right composition order. -/
 def refinementProperOpenIso (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     [TopologicalSpace Λ] [DiscreteTopology Λ]
     {X Y : Scheme.{u}} {f : X ⟶ Y} {c₁ c₂ : Compactification f}
@@ -120,9 +108,7 @@ def refinementProperOpenIso (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 /-- Part (b): the canonical direct-image compositor at `j₁!K`, followed by the ambient
 proper direct image of the inverse of part (a). The factorization equality is exactly
-`r.hom_g`; no Cartesian-square assumption on `r` is used.
-Source: blueprint prop-compactification-coherence, proof steps 1--2, order 1485
-(blueprint: def-sf-refinement-comparison-isomorphism). -/
+`r.hom_g`; no Cartesian-square assumption on `r` is used. -/
 def refinementComparisonAtWitness (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     [TopologicalSpace Λ] [DiscreteTopology Λ]
     {X Y : Scheme.{u}} {f : X ⟶ Y} {c₁ c₂ : Compactification f}
@@ -143,9 +129,7 @@ def refinementComparisonAtWitness (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
       (refinementProperOpenIso Λ r O).symm
 
 /-- Positive-level coefficient specialization of the witness category. `ULift` places the
-coefficient ring in the site's coefficient universe; its discrete topology is explicit.
-Source: blueprint order 1485, `A = O_E/(varpi_E^n)` and the retained triple
-(blueprint: def-sf-refinement-comparison-isomorphism). -/
+coefficient ring in the site's coefficient universe; its discrete topology is explicit. -/
 abbrev RefinementFiniteLevelOrigin (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (n : ℕ) (hn : 1 ≤ n)
     (X : Scheme.{u}) :=
@@ -154,9 +138,7 @@ abbrev RefinementFiniteLevelOrigin (l : ℕ) [Fact l.Prime] (E : Type u) [Field 
       Padic.coefficientExtensionRing l E n).finite_iff.mpr
         (Padic.finite_coefficientExtensionRing l E n hn)) ⊥ (discreteTopology_bot _)
 
-/-- The retained finite-level object in the canonical fixed scalar presentation.
-Source: blueprint order 1485, ambient derived category
-(blueprint: def-sf-refinement-comparison-isomorphism). -/
+/-- The retained finite-level object in the canonical fixed scalar presentation. -/
 def refinementFiniteLevelFixedObject (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (n : ℕ) (hn : 1 ≤ n)
     (X : Scheme.{u}) (O : RefinementFiniteLevelOrigin l E n hn X) :
@@ -173,9 +155,7 @@ def refinementFiniteLevelFixedObject (l : ℕ) [Fact l.Prime] (E : Type u) [Fiel
 for separated finite-type morphisms between finite-type schemes over the field `K₀`.
 The value in the fixed scalar presentation is the canonical inverse realization of the
 retained `K`. The definition is objectwise and makes no naturality, witness-independence,
-identity-refinement, or composition-law assertion.
-Source: blueprint prop-compactification-coherence, proof steps 1--2, order 1485
-(blueprint: def-sf-refinement-comparison-isomorphism). -/
+identity-refinement, or composition-law assertion. -/
 def refinementComparisonIsomorphism (K₀ : Type u) [Field K₀]
     (l : ℕ) [Fact l.Prime] (_hl : IsUnit (l : K₀))
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -204,8 +184,7 @@ variable (A : Type (u + 1)) [CommRing A] [Finite A]
 
 /-- Transport proper direct image by equality of scheme maps, without comparing
 large derived functor structures when the equality transport is evaluated.
-Source: equality induction; the original refinement transport
-(blueprint: def-sf-refinement-comparison-isomorphism). -/
+Source: equality induction; the original refinement transport. -/
 def properTransportDirectImageCongr {X Y : Scheme.{u}} {f g : X ⟶ Y} (h : f = g) :
     (lowerStar (ModuleCat.{u + 1} A) f).rightDerivedFunctorPlus ≅
       (lowerStar (ModuleCat.{u + 1} A) g).rightDerivedFunctorPlus := by
@@ -221,8 +200,7 @@ theorem properTransportDirectImageCongr_rfl {X Y : Scheme.{u}} (f : X ⟶ Y) :
 /-- The actual refinement arrow on bounded-below comparison inputs: the direct-image
 compositor followed by the proper image of the inverse specified proper/open arrow.
 It is meaningful for every refinement, including noncartesian refinements.
-Source: Stacks 0F7I, and def-sf-refinement-comparison-isomorphism, part (b)
-(blueprint: def-sf-refinement-comparison-isomorphism). -/
+Source: Stacks 0F7I, part (b). -/
 def properTransportRefinementPlus {X Y : Scheme.{u}} {f : X ⟶ Y}
     {c d : Compactification f} (r : c.Refinement d)
     (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) :=
@@ -236,8 +214,7 @@ def properTransportRefinementPlus {X Y : Scheme.{u}} {f : X ⟶ Y}
       (properOpenProEtaleIsoPlus A r.hom c.i d.i r.i_hom L).symm
 
 /-- The same actual refinement arrow in the ambient derived category.
-Source: Stacks 0F7I, canonical inclusion of D-plus
-(blueprint: def-sf-refinement-comparison-isomorphism). -/
+Source: Stacks 0F7I, canonical inclusion of D-plus. -/
 def properTransportRefinement {X Y : Scheme.{u}} {f : X ⟶ Y}
     {c d : Compactification f} (r : c.Refinement d)
     (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) :=

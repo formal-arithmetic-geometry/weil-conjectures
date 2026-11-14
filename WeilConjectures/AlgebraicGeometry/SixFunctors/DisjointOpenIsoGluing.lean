@@ -14,7 +14,6 @@ import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
 # Gluing module isomorphisms on disjoint opens
 
 Source: Stacks Project, Sheaves, Tags 00AL, 00AM and 04TN.
-(blueprint: lem-sfb-disjoint-open-iso-gluing)
 -/
 
 @[expose] public section
@@ -30,18 +29,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- On a disjoint open covering, arbitrary local isomorphisms glue.
 
-Source: Stacks Project, Sheaves, Tags 04TN and 00AM.
-(blueprint: lem-sfb-disjoint-open-iso-gluing)
-
-Proof: Choose one isomorphism on each member of the covering. Identify tensor
-pullback by an open inclusion with restriction, via the pullback adjunction.
-Two distinct members intersect in the empty open. A sheaf of modules has only
-its zero section there, so all maps agree on these overlaps; for a repeated
-index compatibility is reflexivity. Apply morphism gluing to the local forward
-maps and to their inverses. The two composites restrict to the identity on
-every covering open. Uniqueness of glued morphisms therefore proves both
-inverse identities. This applies also to the empty covering of an empty scheme,
-and requires no quasi-compactness or bound on the number of opens. -/
+Source: Stacks Project, Sheaves, Tags 04TN and 00AM. -/
 theorem disjointOpen_nonempty_iso {X : Scheme.{u}} {ι : Type}
     (U : ι → X.Opens)
     (hcover : ∀ x : X, ∃ i : ι, x ∈ U i)

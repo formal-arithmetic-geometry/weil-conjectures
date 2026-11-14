@@ -13,8 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.ScalarPullbackSquareCoherence
 
 /-! # Scalar pullback square coherence
 
-Source: Stacks Project, Tags 03EK, 0D6D, 07A6 and 0E47.
-(blueprint: lem-sfb-scalar-pullback-square-coherence)
+Source: Stacks Project, Tags 03EK, 0D6D, 07A6 and 0E47
 -/
 
 @[expose] public noncomputable section
@@ -446,7 +445,7 @@ private theorem pull_counit_iso
   exact NatIso.isIso_app_of_isIso _ P
 
 /-- The typed square is the paste of the two canonical compositors.
-Source: Stacks 07A7 (blueprint: def-sfb-scalar-pullback-square-data). -/
+Source: Stacks 07A7. -/
 theorem scalarPullbackSquare_eq
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj R] [IsCommMonObj R]
@@ -760,21 +759,7 @@ private theorem scalar_congr (φ : Λ ⟶ Λ') [IsMonHom φ]
 set_option backward.isDefEq.respectTransparency false in
 /-- The scalar/pullback comparisons intertwine the canonical geometric square
 compositors before taking any geometric mates.
-Source: Stacks 0D6D and 0E47; scalar exchange rectangle, proof step 2.
-(blueprint: lem-sfb-scalar-pullback-square-coherence)
-
-Proof: conjugate the ordinary scalar/pullback composition equation through the
-specified adjunctions. The right adjoint equation is equality of the same maps
-on underlying sheaves, so faithfulness proves it. Apply the ordinary equation
-degreewise and pass to homotopy categories. Invert the supplied normalization
-formula; naturality and the geometric compositor counit formula show that the
-pasted inverse comparison and the inverse comparison for the composite have the
-same computation. On a K-flat representative the scalar counit is invertible,
-and the geometric counit is invertible by exactness, so cancel their composite.
-Every derived object is isomorphic to such a representative, and naturality
-extends the equation. Invert it and paste the two factorizations of the chosen
-square. Equality transport is natural by substitution. Only commutativity of the
-square is used; no pushforward, exchange, or mate invertibility is used. -/
+Source: Stacks 0D6D and 0E47 -/
 theorem scalar_pullback_square_coherence (φ : Λ ⟶ Λ') [IsMonHom φ]
     {X' X C Y : Scheme.{u}} {a : X' ⟶ X} {c : C ⟶ Y}
     {f : X ⟶ Y} {f' : X' ⟶ C} (sq : ChosenCartesianSquare a f' f c)

@@ -10,8 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Scalar.ScalarTensorRepresentativ
 /-!
 # Scalar tensor representatives commute with pullback
 
-Source: Stacks Project, sites-cohomology.tex, Tags 07A4 and 0FPH
-(blueprint: lem-pur-scalar-tensor-representative-pullback).
+Source: Stacks Project, Tags 07A4 and 0FPH.
 -/
 
 @[expose] public noncomputable section
@@ -26,12 +25,7 @@ attribute [local irreducible] Functor.leftAdjoint Functor.rightAdjoint
   Functor.leftDerivedFunctor Functor.mapDerivedCategory upperStar lowerStar
 
 /-- The tensor counit square in the scalar tensor functor's endpoint convention.
-Source: Stacks 07A4 and 0FPH
-(blueprint: lem-pur-scalar-tensor-representative-pullback).
-Proof: specialize upperStar_single_tensor_representative to the ordinary scalar
-coefficient iso. The exact single-coefficient comparison is the specified scalar
-coefficient iso. The endpoint transports are equality isos between two expressions
-for the same tensor functor, and are identities after unfolding those expressions. -/
+Source: Stacks 07A4 and 0FPH. -/
 theorem scalarTensorRepresentative_pullback
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {Z W : Scheme.{u}} (f : Z ⟶ W)

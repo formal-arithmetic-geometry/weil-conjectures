@@ -50,8 +50,7 @@ namespace AlgebraicGeometry.Scheme
 variable {X : Scheme.{u}}
 
 /-- A *qcqs hypercover* of `X`: a semi-simplicial hypercover of the small étale site of `X` all of
-whose terms are quasi-compact and quasi-separated. (blueprint
-`corollary-cohomology-pro-etale-affine`) -/
+whose terms are quasi-compact and quasi-separated. -/
 structure IsQcqsHypercover (U : SemiSimplicialObject X.Etale) : Prop where
   isHypercover : U.IsHypercover X.smallEtaleTopology
   compactSpace (n : ℕ) : CompactSpace (U.obj n).left
@@ -170,7 +169,7 @@ lemma exists_isQcqsHypercover [CompactSpace X] [QuasiSeparatedSpace X] :
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- **Local lifting after refinement** (blueprint `corollary-cohomology-pro-etale-affine`): a
+/-- **Local lifting after refinement**: a
 section of a quotient sheaf over a term `U_p` of a qcqs hypercover lifts, after refinement of the
 hypercover within qcqs hypercovers. -/
 theorem IsQcqsHypercover.exists_refinement_lift [CompactSpace X] [QuasiSeparatedSpace X]
@@ -214,7 +213,7 @@ theorem IsQcqsHypercover.exists_refinement_lift [CompactSpace X] [QuasiSeparated
   exact key _ (dite_eq_left rfl) _ (SemiSimplicialObject.refinementToW_π _ _ _ p)
 
 /-- **Étale cohomology is computed by qcqs hypercovers**: every class is the class of a cocycle
-on a qcqs hypercover. (blueprint `corollary-cohomology-pro-etale-affine`) -/
+on a qcqs hypercover. -/
 theorem exists_cohomologyClass_eq_of_isQcqsHypercover [CompactSpace X] [QuasiSeparatedSpace X]
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ)
     (x : Ext (SemiSimplicialObject.constSheaf X.smallEtaleTopology Λ) F q) :
@@ -224,7 +223,7 @@ theorem exists_cohomologyClass_eq_of_isQcqsHypercover [CompactSpace X] [QuasiSep
     exists_isQcqsHypercover (fun _ hU p _ _ φ _ w ↦ hU.exists_refinement_lift Λ p φ w) F q x
 
 /-- **A hypercover cocycle with vanishing class is a coboundary after refinement** within qcqs
-hypercovers. (blueprint `corollary-cohomology-pro-etale-affine`) -/
+hypercovers. -/
 theorem exists_isCoboundary_of_isQcqsHypercover [CompactSpace X] [QuasiSeparatedSpace X]
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ)
     {U : SemiSimplicialObject X.Etale} (hU : IsQcqsHypercover U) (z : F.obj.obj (op (U.obj q)))

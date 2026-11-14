@@ -337,7 +337,7 @@ lemma exists_basicOpen_mem_of_mem_zariskiTopology {X : S.AffineProEt}
       (proAffineEtale.comp_mem _ _ (proAffineEtale.of_isAffine _) X.prop)
   let ι' : ∀ x, Z x ⟶ X := fun x ↦
     MorphismProperty.Over.homMk (X.left.basicOpen (g x)).ι
-  -- For each `x : X.left` the basic open `D(g x)` factors through some `Z'` in the
+  -- For each `x: X.left` the basic open `D(g x)` factors through some `Z'` in the
   -- pushforward sieve, hence `(ι' x)` itself lies in `T`.
   have hT_map : ∀ x : X.left, T ((toProEt S).map (ι' x)) := by
     intro x
@@ -655,7 +655,7 @@ lemma isSheafFor_ofArrows_of_finite {F : (AffineProEt S)ᵒᵖ ⥤ Type*}
   obtain ⟨W, q, j, hq, hcomp, hoi, hcov⟩ := exists_surjective_factorization V f hsurj
   rw [Presieve.isSheafFor_arrows_iff]
   intro x hx
-  -- Step 1: glue the `x i` over the Zariski cover `{j i}` of `W` to obtain `z : F(W)`.
+  -- Step 1: glue the `x i` over the Zariski cover `{j i}` of `W` to obtain `z: F(W)`.
   have hW : (Presieve.ofArrows V j).IsSheafFor F :=
     (Presieve.isSheafFor_iff_generate _).mpr (h₁ _ (generate_mem_zariskiTopology j hoi hcov))
   rw [Presieve.isSheafFor_arrows_iff] at hW

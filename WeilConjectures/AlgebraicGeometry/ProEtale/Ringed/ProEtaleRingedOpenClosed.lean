@@ -117,8 +117,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Ringed.ProEtaleRingedFilteredC
 /-!
 # Ringed pro-etale open-closed localization
 
-Source: Stacks Project, Tags 09AA, 09BM, 09BN, 09AH, 09AG, 03DI, 03DJ and 0738
-(blueprint: lem-weil-pbc-proetale-ringed-open-closed).
+Source: Stacks Project, Tags 09AA, 09BM, 09BN, 09AH, 09AG, 03DI, 03DJ and 0738.
 -/
 
 @[expose] public section
@@ -130,16 +129,14 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 /-- The underlying ring sheaf of arbitrary commutative pro-etale coefficients.
-Source: Stacks, Modules on Sites, Tag 03D1
-(blueprint: lem-weil-pbc-proetale-ringed-open-closed). -/
+Source: Stacks, Modules on Sites, Tag 03D1. -/
 noncomputable abbrev proEtaleModuleCoefficients {X : Scheme.{u}}
     (A : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :=
   (sheafCompose (ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj A
 
 /-- Direct image with action through the inverse-image adjunction unit. On sections
 it is evaluation on the base change; on morphisms it retains the same linear components.
-Source: Stacks, Tags 09A5 and 03D6
-(blueprint: lem-weil-pbc-proetale-ringed-open-closed). -/
+Source: Stacks, Tags 09A5 and 03D6. -/
 noncomputable def proEtaleRingedDirectImage {X Y : Scheme.{u}} (f : X ⟶ Y)
     (A : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) :=
   SheafOfModules.pushforward.{u + 1} (F := proEtaleBaseChange f)
@@ -154,8 +151,7 @@ noncomputable def proEtaleRingedDirectImage {X Y : Scheme.{u}} (f : X ⟶ Y)
 The presheaf is the sum over factorizations through `U`, with its actual module action;
 sheafification is the existing module sheafification. For a monic open immersion the
 index set is empty or a singleton. No finiteness restriction is placed on coefficients.
-Source: Stacks, Tags 03DI and 03DJ
-(blueprint: lem-weil-pbc-proetale-ringed-open-closed). -/
+Source: Stacks, Tags 03DI and 03DJ. -/
 noncomputable def proEtaleRingedExtensionByZero {X : Scheme.{u}} (U : X.ProEt)
     (A : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :=
   SheafOfModules.extensionByZeroPresheaf.{u + 1} (proEtaleModuleCoefficients A) U ⋙
@@ -634,40 +630,7 @@ is presented on the slice `X.ProEt / U`, as in the weakly-etale localization the
 its ring is `A.over U`, and inverse image is `overFunctor`. The closed part uses the
 actual inverse-image ring and the base-change direct image.
 
-Source: Stacks, Tags 09AA, 09BM, 09BN, 09AH, 09AG, 03DI, 03DJ and 0738
-(blueprint: lem-weil-pbc-proetale-ringed-open-closed).
-
-Proof:
-1. Identify the open site with the slice using
-   lem-weil-proetale-weakly-etale-localization. The module extension presheaf has a
-   unique summand over an object mapping to U and no summands otherwise. Its
-   sheafification is left adjoint to restriction and exact by Tags 03DI and 03DJ.
-   The unit is invertible after restriction. Base change of an object over U to Z
-   is empty, giving the first zero composite.
-2. On affine ind-etale bases use the closed-site lift and its adjunction
-   (proposition-pro-etale-affines-form-basis,
-   proposition-extension-zero-restriction-closed-subscheme,
-   proposition-extension-zero-restriction-closed-subscheme). The inverse-image colimit has the
-   terminal evaluation object given by the lift. The closed counit is therefore the identity on the
-   basis and globally invertible. Naturality with multiplication makes the maps linear.
-3. Refine to the bounded w-contractible affine covering family. Quasi-compactness
-   of the open complement selects finitely many basic opens. The closed-localization
-   covering consists of these opens and the specialization neighbourhood of the
-   closed fibre. On the opens the counit is the identity and the closed term is zero.
-   On the neighbourhood the shriek term is zero by Tag 09AG and the closed unit is
-   the identity by specialization restriction. Thus the actual unit/counit sequence
-   is locally short exact, hence short exact as module sheaves (Tag 09AH).
-4. The two adjunctions identify maps from i* j! G to H with maps from G to j* i_* H.
-   The latter object is zero by the empty-fibre computation, so i* j! G is zero.
-   For an epimorphism on Z, its direct-image cokernel has
-   zero restrictions on both parts, hence vanishes by the sequence. Direct image is
-   already left exact as a right adjoint, so it is exact (Tag 09BM).
-5. If X is qcqs, test filtered colimits on affine objects V. Both V and V times_X Z
-   are qcqs. Tag 0738 identifies their sections of filtered colimits with the colimits
-   of sections. Underlying abelian filtered colimits compute module filtered colimits:
-   the action on a representative is a[s]=[as], followed by module sheafification.
-   The canonical direct-image colimit comparison is the identity on these sections,
-   hence an isomorphism on a covering basis. -/
+Source: Stacks, Tags 09AA, 09BM, 09BN, 09AH, 09AG, 03DI, 03DJ and 0738. -/
 theorem proEtale_ringed_open_closed {X Z : Scheme.{u}} (i : Z ⟶ X)
     [IsClosedImmersion i] (U : X.ProEt) [IsOpenImmersion U.hom] [QuasiCompact U.hom]
     (hU : Set.range U.hom = (Set.range i)ᶜ)

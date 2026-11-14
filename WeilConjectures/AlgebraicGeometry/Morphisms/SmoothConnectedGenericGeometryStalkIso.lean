@@ -19,17 +19,7 @@ namespace AlgebraicGeometry.Scheme
 /-- The integral generic fibre of a smooth morphism has the same function field
 as its integral total space.
 
-Source: Stacks Project, Tag 01UA; generic-fibre localization of the generic stalk.
-(blueprint: lem-sbc-smooth-connected-generic-geometry-stalk-iso)
-
-Proof: The spectrum of the base function field has dense image in S. Since c is
-open, its inverse image is dense in C. The pullback range formula therefore
-makes j dominant. Its image sends the generic point of Cη to that of C.
-The map from the spectrum of a stalk is a preimmersion, and this property is
-stable under base change, so j is a preimmersion. Its generic stalk map is
-surjective. Both generic stalks are fields, so this map is also injective,
-hence an isomorphism. Take the spectrum of that ring isomorphism. Naturality
-of fromSpecStalk gives the required compatibility equation. -/
+Source: Stacks Project, Tag 01UA; generic-fibre localization of the generic stalk. -/
 theorem smooth_connected_generic_geometry_stalk_iso {S C : Scheme.{u}} [IsIntegral S]
     [IsIntegral C] (c : C ⟶ S) [Smooth c]
     {Cη : Scheme.{u}} [IsIntegral Cη]

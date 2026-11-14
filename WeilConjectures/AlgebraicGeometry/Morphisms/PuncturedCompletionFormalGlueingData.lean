@@ -12,9 +12,8 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionFormalGlue
 
 /-! # Finite affine charts as module glueing data
 
-Source: Stacks Project, Lemma 0BLH, first two paragraphs of its proof,
-and Remark 05EL, the definition of H0.
-(blueprint: lem-sbc-punctured-completion-formal-glueing-data)
+Source: Stacks Project, Lemma 0BLH, first two paragraphs of its proof, and Remark 05EL, the
+definition of H0
 -/
 
 @[expose] public section
@@ -25,29 +24,7 @@ namespace AlgebraicGeometry.Scheme.CompletionGluingData
 
 /-- Affine chart sections give a module glueing datum and a map from compatible
 families to the explicit matching ring, preserving the completed coordinate.
-Source: Stacks Project, Lemma 0BLH, first two
-paragraphs; Remark 05EL (remark-glueing-data), definition of H0.
-(blueprint: lem-sbc-punctured-completion-formal-glueing-data)
-
-Proof: the given finite list f generates the maximal ideal of A. Its
-principal opens cover U by hU, including the empty cover when U is empty.
-Since q is finite, its inverse images of these principal opens
-are affine; let their section modules be the chart modules. Since s is finite,
-E is affine; its section module is the prime module. The given overlapIso
-identifies its localized prime module with the scalar extensions of the chart
-modules. Restriction to double principal opens gives the overlap maps.
-Functoriality of restriction proves their square and cocycle equations.
-These maps are A-linear, and the prime comparison commutes with completed
-scalars, so they form FormalGlueing.Data. Identify its prime module with
-Gamma(E) with the module action induced by s. For an H0 family, the second
-compatibility equations glue the chart sections to a section on Y. The first
-compatibility equations make this section agree with its prime coordinate on
-the overlap: check on the principal-open cover and use sheaf separatedness.
-The two sections give an element of the ring pullback D.matchingRing. Its
-second projection is the prime coordinate by the pullback lift equation.
-No surjectivity or finiteness assertion about D.matchingRing is used here.
-For empty U, both punctured section rings are zero and the pullback retains
-just the prime coordinate. Zero chart rings satisfy the same sheaf equations. -/
+Source: Stacks Project, Lemma 0BLH, first two paragraphs -/
 theorem exists_formalGlueingData_matching_projection
     {A : Type u} [CommRing A] [IsLocalRing A]
     {U : (Spec (.of A)).Opens}

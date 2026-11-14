@@ -92,8 +92,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 
 /-! # The complex-level setup for canonical tensor pullback
 
-Source: Stacks Project, Cohomology on Sites, Tags 07A4 and 0G7E;
-Categories, Tag 04VK (blueprint: lem-weil-pbc-proetale-tensor-descent-data).
+Source: Stacks Project, Cohomology on Sites, Tags 07A4 and 0G7E; Categories, Tag 04VK.
 -/
 
 @[expose] public section
@@ -209,15 +208,7 @@ private theorem totalTensorPullbackIso_exists :
   exact ⟨b0, fun _ _ ↦ rfl⟩
 
 /-- The complex-level inputs for tensor-comparison descent, with every component fixed.
-Source: Stacks 07A4, 0G7E and Categories 04VK
-(blueprint: lem-weil-pbc-proetale-tensor-descent-data).
-Proof: apply ringed-topos K-flat pullback to the normalized algebraic inverse image.
-Resolve each homotopy object by a flat-term K-flat complex, identify the two tensor
-flatness predicates, and apply the resolving-representative restriction theorem.
-The quotient comparison transfers full faithfulness to the specified localization.
-Finally, the signed-total comparisons form a natural isomorphism: naturality holds
-on every homogeneous tensor summand by ordinary tensor naturality. Its inverse
-component is the stipulated inverse total comparison by construction. -/
+Source: Stacks 07A4, 0G7E and Categories 04VK. -/
 theorem proEtaleTensorPullbackDescentData :
     (∀ (P : CochainComplex (proEtaleRingModules Y R) ℤ),
       proEtaleFlatRepresentatives Y R P →

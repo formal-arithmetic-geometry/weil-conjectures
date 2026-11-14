@@ -39,10 +39,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 /-!
 # Reindexing completed modules and strict reductions by scheme isomorphisms
 
-Source: blueprint sec-six-functors/sk-thm-sf-package,
-prop-pur-weil-equivariance-compatibilities.proof.md, constituent compatibility;
-Stacks Tags 09A5, 0A07, 07A4, 0G7E, 099N and 07A7
-(blueprint: lem-pur-isomorphism-completed-reduction-reindexing).
+Source: Stacks Tags 09A5, 0A07, 07A4, 0G7E, 099N and 07A7.
 
 The ordinary pullbacks are the published tensor presentations of inverse-image
 reindexing, with the canonical completed coefficient identifications. The predicates
@@ -70,9 +67,7 @@ attribute [local instance 2000] reductionModulesHasDerivedCategory reductionTowe
 variable {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 
 /-- Whisker a transformation between composites, with the composite tower functors
-written explicitly. This generic wrapper keeps checking away from tensor data.
-Source: Mathlib Functor.whiskeringRight
-(blueprint: def-pur-completed-reindexing-data). -/
+written explicitly. This generic wrapper keeps checking away from tensor data. -/
 def purWhiskerCompositeMap
     {J C D D' E : Type*} [Category J] [Category C] [Category D] [Category D'] [Category E]
     (F : C ⥤ D) (G : D ⥤ E) (F' : C ⥤ D') (G' : D' ⥤ E)
@@ -82,8 +77,7 @@ def purWhiskerCompositeMap
   (Functor.whiskeringRight J C E).map a
 
 /-- The canonical completed-coefficient specialization of the ringed square.
-Source: Stacks Tag 07A7, using the completed coefficient composition equations
-(blueprint: lem-pur-isomorphism-completed-reduction-reindexing). -/
+Source: Stacks Tag 07A7, using the completed coefficient composition equations. -/
 def purReindexingRingedSquare {X' X Y' Y : Scheme.{t}}
     {v : X' ⟶ X} {p' : X' ⟶ Y'} {p : X ⟶ Y} {g : Y' ⟶ Y}
     (sq : ChosenCartesianSquare v p' p g) : StrictTowerRingedSquare sq where
@@ -98,8 +92,7 @@ def purReindexingRingedSquare {X' X Y' Y : Scheme.{t}}
   coherent := d.integral_coherent sq
 
 /-- The ordinary module mate of the specified, section-normalized pullback square.
-Source: Stacks Tag 07A7; the canonical adjunctions have their tensor-unit normalization
-(blueprint: lem-pur-isomorphism-completed-reduction-reindexing). -/
+Source: Stacks Tag 07A7; the canonical adjunctions have their tensor-unit normalization. -/
 def purReindexingModuleMate {X' X Y' Y : Scheme.{t}}
     {v : X' ⟶ X} {p' : X' ⟶ Y'} {p : X ⟶ Y} {g : Y' ⟶ Y}
     (sq : ChosenCartesianSquare v p' p g) :
@@ -118,8 +111,7 @@ def purReindexingModuleMate {X' X Y' Y : Scheme.{t}}
     (TwoSquare.mk _ _ _ _ (purReindexingRingedSquare d sq).exchangeModuleSquare.hom))
 
 /-- The actual ordinary strict-diagram mate, including every index arrow.
-Source: Stacks Tag 07A7 on the ringed diagram site
-(blueprint: lem-pur-isomorphism-completed-reduction-reindexing). -/
+Source: Stacks Tag 07A7 on the ringed diagram site. -/
 def purReindexingTowerModuleMate {X' X Y' Y : Scheme.{t}}
     {v : X' ⟶ X} {p' : X' ⟶ Y'} {p : X ⟶ Y} {g : Y' ⟶ Y}
     (sq : ChosenCartesianSquare v p' p g) :
@@ -128,8 +120,7 @@ def purReindexingTowerModuleMate {X' X Y' Y : Scheme.{t}}
   purWhiskerCompositeMap (J := ℕᵒᵖ) _ _ _ _ (purReindexingModuleMate d sq)
 
 /-- The specified ordinary completed-ring derived direct-image mate.
-Source: Stacks Tag 07A7, with the published coherent completed coefficient maps
-(blueprint: lem-pur-isomorphism-completed-reduction-reindexing). -/
+Source: Stacks Tag 07A7, with the published coherent completed coefficient maps. -/
 def purReindexingDerivedMate {X' X Y' Y : Scheme.{t}}
     {v : X' ⟶ X} {p' : X' ⟶ Y'} {p : X ⟶ Y} {g : Y' ⟶ Y}
     (sq : ChosenCartesianSquare v p' p g) :
@@ -143,12 +134,10 @@ def purReindexingDerivedMate {X' X Y' Y : Scheme.{t}}
 reduction tensor normalization. The ordinary tensor presentation is canonically
 inverse image with action a.x = c inverse(a).x; no completeness restriction is imposed
 on the equivalences or on the inverse-limit comparison.
-Source: extracted argument, steps 1--5; Stacks Tags 09A5, 0A07, 03EL and 099N
-(blueprint: lem-pur-isomorphism-completed-reduction-reindexing). -/
+Source: Stacks Tags 09A5, 0A07, 03EL and 099N. -/
 
 /-- A literal clause of PurCompletedReindexingAt.
-Source: extracted reindexing normalization
-(blueprint: def-pur-completed-reindexing-data). -/
+Source: extracted reindexing normalization. -/
 def PurCompletedReindexingAtLimit {T' T : Scheme.{t}} (u : T' ⟶ T) [IsIso u] : Prop :=
   (∃ beta : completedTowerLimit T (d.completedRing T) ⋙
       proEtaleRingModulePullback u (d.completedRing T)
@@ -182,27 +171,23 @@ The first equation is restriction along the canonical fibre-product square after
 inverse-image units. Since g is an isomorphism, its base-changed tests cover all tests.
 The last equations identify the derived mates on actual K-injective complexes,
 including strict tower complexes, rather than merely asserting they are invertible.
-Source: extracted argument, steps 6--8; Stacks Tags 07A7, 08BJ and 0FND
-(blueprint: lem-pur-isomorphism-completed-reduction-reindexing). -/
+Source: Stacks Tags 07A7, 08BJ and 0FND. -/
 /-- A literal clause of PurCompletedReindexingSquare.
-Source: extracted reindexing normalization
-(blueprint: def-pur-completed-reindexing-data). -/
+Source: extracted reindexing normalization. -/
 def PurCompletedReindexingSquareDerived {X' X Y' Y : Scheme.{t}}
     {v : X' ⟶ X} {p' : X' ⟶ Y'} {p : X ⟶ Y} {g : Y' ⟶ Y}
     (sq : ChosenCartesianSquare v p' p g) : Prop :=
   IsIso (purReindexingDerivedMate d sq)
 
 /-- A literal clause of PurCompletedReindexingSquare.
-Source: extracted reindexing normalization
-(blueprint: def-pur-completed-reindexing-data). -/
+Source: extracted reindexing normalization. -/
 def PurCompletedReindexingSquareDerivedTowers {X' X Y' Y : Scheme.{t}}
     {v : X' ⟶ X} {p' : X' ⟶ Y'} {p : X ⟶ Y} {g : Y' ⟶ Y}
     (sq : ChosenCartesianSquare v p' p g) : Prop :=
   IsIso (purReindexingRingedSquare d sq).exchangeTowerMate
 
 /-- A literal clause of PurCompletedReindexingSquare.
-Source: extracted reindexing normalization
-(blueprint: def-pur-completed-reindexing-data). -/
+Source: extracted reindexing normalization. -/
 def PurCompletedReindexingSquareDerivedUnits {X' X Y' Y : Scheme.{t}}
     {v : X' ⟶ X} {p' : X' ⟶ Y'} {p : X ⟶ Y} {g : Y' ⟶ Y}
     (sq : ChosenCartesianSquare v p' p g) : Prop :=
@@ -225,8 +210,7 @@ def PurCompletedReindexingSquareDerivedUnits {X' X Y' Y : Scheme.{t}}
         (d.completedRing X') (d.integralRingIso v)).mapHomologicalComplex (.up ℤ)).obj I))
 
 /-- A literal clause of PurCompletedReindexingSquare.
-Source: extracted reindexing normalization
-(blueprint: def-pur-completed-reindexing-data). -/
+Source: extracted reindexing normalization. -/
 def PurCompletedReindexingSquareDerivedTowerUnits {X' X Y' Y : Scheme.{t}}
     {v : X' ⟶ X} {p' : X' ⟶ Y'} {p : X ⟶ Y} {g : Y' ⟶ Y}
     (sq : ChosenCartesianSquare v p' p g) : Prop :=

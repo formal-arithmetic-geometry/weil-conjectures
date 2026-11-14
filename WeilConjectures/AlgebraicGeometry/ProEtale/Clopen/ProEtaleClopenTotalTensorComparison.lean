@@ -8,8 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.ClopenData.ProEtaleClopenTotalTensorKFlatDetectionData
 
 /-! Canonical total tensor comparison for clopen restriction.
-Source: Stacks Project, Tag 0FPQ.
-(blueprint: lem-pur-clopen-total-tensor-comparison). -/
+Source: Stacks Project, Tag 0FPQ. -/
 
 @[expose] public noncomputable section
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
@@ -28,8 +27,7 @@ namespace AlgebraicGeometry.Scheme.ProEt
 
 /-- Keep the total comparison as a single term, avoiding repeated unfolding of
 monoidal sheafification data while checking the normalization clauses.
-Source: Stacks 0FPQ; canonical bifunctor comparison.
-(blueprint: lem-pur-clopen-total-tensor-comparison). -/
+Source: Stacks 0FPQ; canonical bifunctor comparison. -/
 @[irreducible] def clopenTotalComparison
     {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)})
@@ -70,8 +68,7 @@ Source: Stacks 0FPQ; canonical bifunctor comparison.
       (Functor.OplaxMonoidal.δNatTrans G) (.up ℤ)))
 
 /-- The canonical total comparison has the expected formula on each summand.
-Source: Stacks 0FPQ; canonical bifunctor comparison.
-(blueprint: lem-pur-clopen-total-tensor-comparison). -/
+Source: Stacks 0FPQ; canonical bifunctor comparison. -/
 theorem clopenTotalComparison_summand
     {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)})

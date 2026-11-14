@@ -182,11 +182,7 @@ private theorem systemMap_app (n : ℕ) (U : Cᵒᵖ) :
     (M.val.obj (op (n, U.unop)))
 
 /-- The sectionwise comparison for evaluated tensor products fixes pure tensors.
-Source: Stacks Project, Section 03EK, the sectionwise construction of scalar extension.
-
-Proof: both section rings are unchanged by evaluation. The coefficient morphism has
-component alpha, and the two evaluation transports are the identity ring maps.
-After substituting these equalities, both extension modules and the map are identical. -/
+Source: Stacks Project, Section 03EK, the sectionwise construction of scalar extension. -/
 private theorem evaluationExtensionPresheafObjIso_pure
     (M : Systems.{c, v, max c v r} J B τ) (n : ℕ) (U : Cᵒᵖ)
     (a : (D n).obj.obj U) (x : M.val.obj (op (n, U.unop))) :
@@ -206,12 +202,7 @@ private theorem evaluationExtensionPresheafObjIso_pure
     (M.val.obj (op (n, U.unop))) a x
 
 /-- Evaluation identifies sectionwise scalar extensions, fixing pure tensors.
-Source: Stacks Project, Section 03EK, the sectionwise construction of scalar extension.
-(blueprint: lem-sp-scalar-extension-evaluation-objects).
-
-Proof: the evaluation coefficient transports are identity ring maps, and phi has
-component alpha. Substitute these equalities to identify the two tensor modules.
-The resulting identity isomorphism fixes every pure tensor. -/
+Source: Stacks Project, Section 03EK, the sectionwise construction of scalar extension. -/
 theorem scalarExtension_evaluation_objects
     (M : Systems.{c, v, max c v r} J B τ) (n : ℕ) :
     ∃ e : ∀ U : Cᵒᵖ,

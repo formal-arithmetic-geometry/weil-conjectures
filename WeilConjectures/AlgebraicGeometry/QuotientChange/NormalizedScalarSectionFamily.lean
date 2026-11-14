@@ -10,8 +10,7 @@ import WeilConjectures.AlgebraicGeometry.SectionPullNormalizationTransport
 
 /-! # Simultaneous normalized scalar section comparisons
 
-Source: Stacks Project, Tags 03EK, 0D6D, 07A6 and 0E47.
-(blueprint: lem-sfb-normalized-scalar-section-family)
+Source: Stacks Project, Tags 03EK, 0D6D, 07A6 and 0E47
 -/
 
 @[expose] public noncomputable section
@@ -43,16 +42,7 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
 /-- Normalized scalar realization data can be fixed simultaneously, and every
 universally normalized internal pull comparison has a section-normalized realization
 using that same family. This assertion concerns pullbacks only.
-Source: Stacks 03EK, 0D6D and 07A6; scalar exchange rectangle, proof step 1.
-(blueprint: lem-sfb-normalized-scalar-section-family)
-
-Proof: apply internal_scalar_pullback_normalization to the identity at every
-scheme T, and retain its normalized section scalar comparison at the source T.
-Choose these comparisons pointwise. For each edge h, apply
-section_pull_normalized_of_normalized to the two chosen normalized endpoint
-comparisons and the supplied PullNormalized witness. Its conclusion is exactly
-the required SectionPullNormalized witness for that edge. The construction works
-for identity edges, nonflat coefficient maps, zero rings and empty schemes. -/
+Source: Stacks 03EK, 0D6D and 07A6 -/
 theorem normalized_scalar_section_family (φ : Λ ⟶ Λ') [IsMonHom φ]
     (b : ∀ {U V : Scheme.{u}} (h : U ⟶ V),
       D φ V ⋙ L Λ' h ≅ L Λ h ⋙ D φ U)

@@ -86,7 +86,6 @@ import Mathlib.CategoryTheory.Shift.Adjunction
 /-! # Canonical projection-formula models
 
 Source: Stacks Project, Cohomology on Sites, Tags 07A4 and 07A6.
-(blueprint: lem-weil-pbc-ringed-projection-global-model).
 -/
 
 @[expose] public noncomputable section
@@ -400,20 +399,7 @@ private def globalOrdinaryTensor {X Y : Scheme.{u}} (f : X ⟶ Y)
   exact ht
 
 /-- The canonically normalized global operations, tensor models and their shifts exist.
-Source: Stacks Project, Tags 03D7, 06YS, 06YU, 07A4 and 07A6.
-(blueprint: lem-weil-pbc-ringed-projection-global-model).
-
-Proof: use the adjunct of the specified coefficient isomorphism for the ordinary
-module pushforward and its canonical left adjoint. Inverse image of abelian sheaves
-is exact and the coefficient map is an isomorphism, so this left adjoint is exact.
-K-injective resolutions construct the right derived functor and its adjunction to
-the exact derived pullback. Their counit agrees on K-injectives with the ordinary
-counit by the derived-adjunction factorization. On each of the two coefficient
-sites, localize the signed total tensor on flat-term K-flat pairs. The resolving
-localization gives its representative isomorphism and descent bijection. Descend
-the two signed integer shifts. The ordinary pullback tensor isomorphism is fixed
-on pure tensors by the adjunction unit; its signed total comparison descends
-uniquely, commutes with both shifts, and supplies the required global package. -/
+Source: Stacks Project, Tags 03D7, 06YS, 06YU, 07A4 and 07A6. -/
 theorem globalModel_exists {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R_Y : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
     (R_X : Sheaf (ProEt.topology X) CommRingCat.{u + 1})

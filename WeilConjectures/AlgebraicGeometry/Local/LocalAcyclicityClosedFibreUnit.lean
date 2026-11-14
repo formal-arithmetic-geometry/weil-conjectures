@@ -17,8 +17,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 /-!
 # Local acyclicity and the closed-fibre restriction of the derived unit
 
-Source: Stacks Project, Tag 0GJU, lemma-beta-is-isomorphism, specialized to `G[0]`
-(blueprint: lem-weil-pbc-local-acyclicity-closed-fibre-unit).
+Source: Stacks Project, Tag 0GJU, specialized to `G[0]`.
 -/
 
 @[expose] public section
@@ -59,20 +58,7 @@ private theorem isZero_exact_homology
 /-- For a locally acyclic morphism relative to an abelian étale sheaf, the derived
 unit for any geometric fibre over the strict local base becomes an isomorphism
 on the closed geometric fibre. No properness or torsion assumption is needed.
-Source: Stacks Project, Tag 0GJU, lemma-beta-is-isomorphism, specialized to `G[0]`
-(blueprint: lem-weil-pbc-local-acyclicity-closed-fibre-unit).
-
-Proof:
-1. The target-stalk comparison identifies every nonnegative cohomology stalk with
-   cohomology of the variety of vanishing cycles. Its proof uses the affine base-change
-   property, the unrestricted stalk formula, and strict-base closed-point localizations.
-2. The degree-zero unit-germ comparison conjugates the actual stalk map to
-   `localAcyclicityAlpha`. Local acyclicity makes this map invertible.
-3. In positive degrees the source vanishes because it is an exact inverse image of a
-   single complex. Local acyclicity and the target-stalk comparison kill the target.
-4. In negative degrees exact inverse images and the nonnegativity of right derived
-   functors kill both source and target. A map between zero objects is invertible.
-5. Geometric stalk conservativity and the bounded-below cohomology criterion conclude.
+Source: Stacks Project, Tag 0GJU, specialized to `G[0]`.
 -/
 theorem isIso_closedFibre_derivedUnit_of_isLocallyAcyclicRelative
     {X S : Scheme.{u}} (f : X ⟶ S)

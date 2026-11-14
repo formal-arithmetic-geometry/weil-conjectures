@@ -15,9 +15,6 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleResidueTorTest
 `proEtale_torAmplitude_iff_residue_tensor` carries a finite-field datum, an invertibility
 assumption on `l` and a constructibility assumption which its proof never uses. This file
 records the same statement without them, so that it applies over an arbitrary scheme.
-
-Source: Weil conjectures blueprint, localization unit, node order 1867
-(blueprint: lemma-bounds-finite-reductions--2).
 -/
 
 @[expose] public section
@@ -32,16 +29,8 @@ set_option synthInstance.maxSize 2048 in
 set_option maxRecDepth 2048 in
 /-- Tor amplitude over `A = A_{E,n}` is detected by derived tensor with `A/(ϖ_E)`, for an
 arbitrary cochain complex `K` on the pro-etale site of an arbitrary scheme `T` and any
-K-flat resolution `f : P ⟶ K`. This is `proEtale_torAmplitude_iff_residue_tensor` without
-its unused finite-field, invertibility and constructibility hypotheses.
-
-Source: Weil conjectures blueprint, localization unit, node order 1867
-(blueprint: lemma-bounds-finite-reductions--2).
-
-Proof: one direction is the definition of Tor amplitude applied to the residue module.
-Conversely, filter an arbitrary module by the images of the powers of `ϖ_E`; the graded
-pieces are residue modules, for which tensor with the flat resolution commutes with
-cohomology, and flatness of the terms of the resolution gives long exact sequences. -/
+K-flat resolution `f: P ⟶ K`. This is `proEtale_torAmplitude_iff_residue_tensor` without
+its unused finite-field, invertibility and constructibility hypotheses. -/
 theorem proEtale_torAmplitude_iff_residue_tensor'
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) (T : Scheme.{u})

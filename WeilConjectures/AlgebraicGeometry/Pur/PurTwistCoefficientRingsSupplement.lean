@@ -17,9 +17,6 @@ public import WeilConjectures.AlgebraicGeometry.PurTwistCoefficientRings
 
 /-! # Coefficient rings of the integral Tate twist
 
-Source: coefficient-twist blueprint, order 1505.
-(blueprint: def-pur-twist-coefficient-rings)
-
 The constant and completed coefficient rings, their quotient projections, and the
 canonical comparison form the coefficient data used before constructing the Tate line.
 -/
@@ -32,14 +29,13 @@ open scoped ChangeOfRings
 namespace AlgebraicGeometry.Scheme
 variable (S : Scheme.{t}) (l : ℕ) [Fact l.Prime]
 
-/-- The constant discrete `Z_l` ring sheaf.
-Source: coefficient-twist blueprint, order 1505 (blueprint: lem-pur-twist-sheaf-locally-free). -/
+/-- The constant discrete `Z_l` ring sheaf. -/
 noncomputable abbrev purTwistZlConstantOfUniverses :=
   (constantSheaf (ProEt.topology S) CommRingCat.{max u (t + 1)}).obj
     (CommRingCat.of (ULift.{max u (t + 1)} ℤ_[l]))
 
 /-- Reduction of constant finite coefficient rings.
-Source: Stacks Tag 03PK (blueprint: lem-pur-twist-sheaf-locally-free). -/
+Source: Stacks Tag 03PK. -/
 noncomputable def purTwistFiniteTransitionOfUniverses (n : ℕ) :
     purTwistFiniteRingOfUniverses S l (n + 1) ⟶ purTwistFiniteRingOfUniverses S l n :=
   (constantSheaf (ProEt.topology S) CommRingCat.{max u (t + 1)}).map
@@ -49,22 +45,22 @@ noncomputable def purTwistFiniteTransitionOfUniverses (n : ℕ) :
 
 /-- The positive finite coefficient inverse system. It is reducible, so unfolding the
 tied-universe name `purTwistZlTower` still exposes `Functor.ofOpSequence` to `simp`.
-Source: Stacks Tag 03CO (blueprint: lem-pur-twist-sheaf-locally-free). -/
+Source: Stacks Tag 03CO. -/
 noncomputable abbrev purTwistZlTowerOfUniverses :=
   Functor.ofOpSequence (purTwistFiniteTransitionOfUniverses S l)
 
 /-- The completed `Z_l` coefficient sheaf, as the specified inverse limit.
-Source: Stacks Tag 03CO (blueprint: lem-pur-twist-sheaf-locally-free). -/
+Source: Stacks Tag 03CO. -/
 noncomputable def purTwistZlCompletionOfUniverses := limit (purTwistZlTowerOfUniverses S l)
 
 /-- The coefficient projection to exponent `n + 1`.
-Source: Stacks Tag 03CO (blueprint: lem-pur-twist-sheaf-locally-free). -/
+Source: Stacks Tag 03CO. -/
 noncomputable def purTwistZlProjectionOfUniverses (n : ℕ) :
     purTwistZlCompletionOfUniverses S l ⟶ purTwistFiniteRingOfUniverses S l n :=
   limit.π (purTwistZlTowerOfUniverses S l) (op n)
 
 /-- Constant p-adic reduction.
-Source: Stacks Tag 03CO (blueprint: lem-pur-twist-sheaf-locally-free). -/
+Source: Stacks Tag 03CO. -/
 noncomputable def purTwistZlReductionOfUniverses (n : ℕ) :
     purTwistZlConstantOfUniverses S l ⟶ purTwistFiniteRingOfUniverses S l n :=
   (constantSheaf (ProEt.topology S) CommRingCat.{max u (t + 1)}).map
@@ -72,9 +68,7 @@ noncomputable def purTwistZlReductionOfUniverses (n : ℕ) :
       ((PadicInt.toZModPow (n + 1)).comp ULift.ringEquiv.toRingHom)))
 
 /-- The completion map is uniquely fixed by all finite reductions.
-Source: Stacks Tag 03CO (blueprint: lem-pur-twist-sheaf-locally-free).
-Proof: the p-adic residue maps commute with reductions. They form a cone over the
-positive quotient tower; its limit property gives the unique indicated morphism. -/
+Source: Stacks Tag 03CO. -/
 theorem purTwistZlCompletionMap_existsUniqueOfUniverses :
     ∃! a : purTwistZlConstantOfUniverses S l ⟶ purTwistZlCompletionOfUniverses S l,
       ∀ n : ℕ, a ≫ purTwistZlProjectionOfUniverses S l n =
@@ -102,64 +96,57 @@ theorem purTwistZlCompletionMap_existsUniqueOfUniverses :
     exact (ha n.unop).trans (limit.lift_π c n).symm
 
 /-- The actual constant-to-completed coefficient map, fixed by its residue projections.
-Source: Stacks Tag 03CO (blueprint: lem-pur-twist-sheaf-locally-free). -/
+Source: Stacks Tag 03CO. -/
 noncomputable def purTwistZlCompletionMapOfUniverses :=
   (purTwistZlCompletionMap_existsUniqueOfUniverses S l).exists.choose
 
-/-- The constant discrete `Z_l` ring sheaf.
-Source: coefficient-twist blueprint, order 1505 (blueprint: lem-pur-twist-sheaf-locally-free). -/
+/-- The constant discrete `Z_l` ring sheaf. -/
 noncomputable abbrev purTwistZlConstant :=
   purTwistZlConstantOfUniverses.{t, t} S l
 
 /-- Reduction of constant finite coefficient rings.
-Source: Stacks Tag 03PK (blueprint: lem-pur-twist-sheaf-locally-free). -/
+Source: Stacks Tag 03PK. -/
 noncomputable abbrev purTwistFiniteTransition (n : ℕ) :
     purTwistFiniteRing S l (n + 1) ⟶ purTwistFiniteRing S l n :=
   purTwistFiniteTransitionOfUniverses.{t, t} S l n
 
 /-- The positive finite coefficient inverse system.
-Source: Stacks Tag 03CO (blueprint: lem-pur-twist-sheaf-locally-free). -/
+Source: Stacks Tag 03CO. -/
 noncomputable abbrev purTwistZlTower :=
   purTwistZlTowerOfUniverses.{t, t} S l
 
 /-- The completed `Z_l` coefficient sheaf, as the specified inverse limit.
-Source: Stacks Tag 03CO (blueprint: lem-pur-twist-sheaf-locally-free). -/
+Source: Stacks Tag 03CO. -/
 noncomputable abbrev purTwistZlCompletion :=
   purTwistZlCompletionOfUniverses.{t, t} S l
 
 /-- The coefficient projection to exponent `n + 1`.
-Source: Stacks Tag 03CO (blueprint: lem-pur-twist-sheaf-locally-free). -/
+Source: Stacks Tag 03CO. -/
 noncomputable abbrev purTwistZlProjection (n : ℕ) :
     purTwistZlCompletion S l ⟶ purTwistFiniteRing S l n :=
   purTwistZlProjectionOfUniverses.{t, t} S l n
 
 /-- Constant p-adic reduction.
-Source: Stacks Tag 03CO (blueprint: lem-pur-twist-sheaf-locally-free). -/
+Source: Stacks Tag 03CO. -/
 noncomputable abbrev purTwistZlReduction (n : ℕ) :
     purTwistZlConstant S l ⟶ purTwistFiniteRing S l n :=
   purTwistZlReductionOfUniverses.{t, t} S l n
 
 /-- The completion map is uniquely fixed by all finite reductions.
-Source: Stacks Tag 03CO (blueprint: lem-pur-twist-sheaf-locally-free).
-Proof: the p-adic residue maps commute with reductions. They form a cone over the
-positive quotient tower; its limit property gives the unique indicated morphism. -/
+Source: Stacks Tag 03CO. -/
 theorem purTwistZlCompletionMap_existsUnique :
     ∃! a : purTwistZlConstant S l ⟶ purTwistZlCompletion S l,
       ∀ n : ℕ, a ≫ purTwistZlProjection S l n = purTwistZlReduction S l n := by
   exact purTwistZlCompletionMap_existsUniqueOfUniverses.{t, t} S l
 
 /-- The actual constant-to-completed coefficient map, fixed by its residue projections.
-Source: Stacks Tag 03CO (blueprint: lem-pur-twist-sheaf-locally-free). -/
+Source: Stacks Tag 03CO. -/
 noncomputable abbrev purTwistZlCompletionMap :=
   purTwistZlCompletionMapOfUniverses.{t, t} S l
 
 variable (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The canonical `Z_l` inclusion into the extension's valuation ring is fixed in the field.
-Source: coefficient-twist blueprint, order 1505 (blueprint: lem-pur-twist-sheaf-locally-free).
-Proof: the spectral absolute value extends the p-adic norm, so the image of each
-p-adic integer has norm at most one. It lies in the specified valuation subring.
-Corestrict the field inclusion. Injectivity of the subring inclusion gives uniqueness. -/
+/-- The canonical `Z_l` inclusion into the extension's valuation ring is fixed in the field. -/
 theorem purTwistIntegersMap_existsUnique :
     ∃! i : ℤ_[l] →+* Padic.coefficientExtensionIntegers l E,
       ∀ z : ℤ_[l], (i z : E) = algebraMap ℚ_[l] E (z : ℚ_[l]) := by
@@ -176,18 +163,16 @@ theorem purTwistIntegersMap_existsUnique :
   ext z
   exact (hj z).trans rfl
 
-/-- The canonical inclusion, chosen from its equality in the coefficient field.
-Source: coefficient-twist blueprint, order 1505 (blueprint: lem-pur-twist-sheaf-locally-free). -/
+/-- The canonical inclusion, chosen from its equality in the coefficient field. -/
 noncomputable def purTwistIntegersMap := (purTwistIntegersMap_existsUnique l E).exists.choose
 
-/-- The constant valuation-ring sheaf.
-Source: coefficient-twist blueprint, order 1505 (blueprint: lem-pur-twist-sheaf-locally-free). -/
+/-- The constant valuation-ring sheaf. -/
 noncomputable abbrev purTwistIntegralConstant :=
   (constantSheaf (ProEt.topology S) CommRingCat.{max u (t + 1)}).obj
     (CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionIntegers l E)))
 
 /-- The constant scalar-extension map induced by the field inclusion.
-Source: Stacks Tag 03EK (blueprint: lem-pur-twist-sheaf-locally-free). -/
+Source: Stacks Tag 03EK. -/
 noncomputable def purTwistConstantIntegersMap :
     purTwistZlConstantOfUniverses S l ⟶ purTwistIntegralConstant S l E :=
   (constantSheaf (ProEt.topology S) CommRingCat.{max u (t + 1)}).map
@@ -195,7 +180,7 @@ noncomputable def purTwistConstantIntegersMap :
       ((purTwistIntegersMap l E).comp ULift.ringEquiv.toRingHom)))
 
 /-- The canonical quotient of the discrete valuation-ring sheaf.
-Source: Stacks Tag 03EK (blueprint: lem-pur-twist-sheaf-locally-free). -/
+Source: Stacks Tag 03EK. -/
 noncomputable def purTwistIntegralQuotient (n : ℕ) :
     purTwistIntegralConstant S l E ⟶
       WeilConjectures.integralCoefficientCommRingSheaf l E S n :=
@@ -205,9 +190,7 @@ noncomputable def purTwistIntegralQuotient (n : ℕ) :
         ULift.ringEquiv.toRingHom)))
 
 /-- The constant valuation ring maps canonically into its completion.
-Source: Stacks Tag 03CO (blueprint: lem-pur-twist-sheaf-locally-free).
-Proof: the quotient maps form a cone over the coefficient tower. Its limit property
-produces a unique ring-sheaf morphism; forgetting commutativity changes no sections. -/
+Source: Stacks Tag 03CO. -/
 theorem purTwistIntegralCompletionMap_existsUnique :
     ∃! a : purTwistIntegralConstant S l E ⟶
       WeilConjectures.completedIntegralCommRingSheafUnrestricted l E S,
@@ -249,14 +232,13 @@ theorem purTwistIntegralCompletionMap_existsUnique :
     ((congrArg F.map ((hb n.unop).trans (ha n.unop).symm)).trans (F.map_comp _ _))
 
 /-- The actual constant-to-completed valuation-ring map.
-Source: Stacks Tag 03CO (blueprint: lem-pur-twist-sheaf-locally-free). -/
+Source: Stacks Tag 03CO. -/
 noncomputable def purTwistIntegralCompletionMap :=
   (purTwistIntegralCompletionMap_existsUnique S l E).exists.choose
 
 /-- A completed scalar map is canonical when each finite projection factors through a
 finite p-adic quotient with the specified constant residues. The index is allowed to depend
-on the target quotient, as required for ramified extensions.
-Source: coefficient-twist blueprint, order 1505 (blueprint: lem-pur-twist-sheaf-locally-free). -/
+on the target quotient, as required for ramified extensions. -/
 def IsPurTwistCompletedScalarMap
     (a : purTwistZlCompletionOfUniverses S l ⟶
       WeilConjectures.completedIntegralCommRingSheafUnrestricted l E S) : Prop :=
@@ -308,13 +290,7 @@ private theorem purTwistZlFiniteFactor_ext
   rw [← hp k (le_max_left k m), ← hp m (le_max_right k m),
     Category.assoc, Category.assoc, he]
 
-/-- The completed scalar map is uniquely determined by its finite quotient formulas.
-Source: coefficient-twist blueprint, order 1505 (blueprint: lem-pur-twist-sheaf-locally-free).
-Proof: write `l = unit * uniformizer^e` with positive ramification index. For each
-positive target exponent choose a sufficiently large p-adic exponent. Quotient factorization
-then gives `q`. The residue formulas make these maps independent of the choice and compatible
-with transitions, so the limit property constructs the map. Surjectivity of p-adic reduction
-and joint injectivity of completion projections prove uniqueness. -/
+/-- The completed scalar map is uniquely determined by its finite quotient formulas. -/
 theorem purTwistCompletedScalarMap_existsUnique :
     ∃! a : purTwistZlCompletionOfUniverses S l ⟶
       WeilConjectures.completedIntegralCommRingSheafUnrestricted l E S,
@@ -418,15 +394,11 @@ theorem purTwistCompletedScalarMap_existsUnique :
     exact (hq' z.down).trans (hq n.unop z.down).symm
   exact (F.map_comp _ _).symm.trans ((congrArg F.map he).trans (F.map_comp _ _))
 
-/-- The canonical completed scalar map, with its finite quotient characterization.
-Source: coefficient-twist blueprint, order 1505 (blueprint: lem-pur-twist-sheaf-locally-free). -/
+/-- The canonical completed scalar map, with its finite quotient characterization. -/
 noncomputable def purTwistCompletedScalarMap :=
   (purTwistCompletedScalarMap_existsUnique S l E).exists.choose
 
-/-- The two inclusions of the discrete p-adic ring agree.
-Source: coefficient-twist blueprint, order 1505 (blueprint: lem-pur-twist-sheaf-locally-free).
-Proof: compose with every finite projection and apply the specified constant-residue
-formula; joint injectivity of limit projections then gives the displayed equality. -/
+/-- The two inclusions of the discrete p-adic ring agree. -/
 theorem purTwistCoefficientSquare :
     purTwistZlCompletionMapOfUniverses S l ≫ purTwistCompletedScalarMap S l E =
       purTwistConstantIntegersMap S l E ≫ purTwistIntegralCompletionMap S l E := by
@@ -457,7 +429,7 @@ theorem purTwistCoefficientSquare :
     (F.map_comp _ _))
 
 /-- The coefficient comparison is the canonical map from the ring-sheaf tensor (pushout).
-Source: Stacks Tag 03EK (blueprint: lem-pur-twist-sheaf-locally-free). -/
+Source: Stacks Tag 03EK. -/
 noncomputable def purTwistCoefficientComparison :=
   pushout.desc (purTwistCompletedScalarMap S l E) (purTwistIntegralCompletionMap S l E)
     (purTwistCoefficientSquare S l E)

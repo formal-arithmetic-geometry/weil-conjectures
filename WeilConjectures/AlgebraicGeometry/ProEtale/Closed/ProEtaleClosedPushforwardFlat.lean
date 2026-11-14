@@ -96,16 +96,7 @@ private theorem flat_of_closed_open_restrictions
           upperStar C i ⋙ tensorLeft ((upperStar C i).obj F)
         exact (Functor.Monoidal.commTensorLeft (upperStar C i) F).symm)).1
 
-/-- Closed direct image preserves flat module sheaves on a locally Noetherian scheme.
-Source: blueprint supported exterior product, K-flat descent.
-(blueprint: lem-pur-proetale-closed-pushforward-flat).
-Proof: restriction to the closed subset and its open complement jointly detects
-isomorphisms, hence exactness of tensoring. Both restrictions are exact and monoidal.
-For a closed direct image its closed restriction is the original flat sheaf, by the
-closed-immersion counit, and its open restriction is zero. Their tensor functors are
-exact. The jointly conservative criterion therefore makes tensoring with the closed
-direct image exact, which is flatness. The open complement is quasi-compact by the
-locally Noetherian hypothesis. This includes empty supports and the whole scheme. -/
+/-- Closed direct image preserves flat module sheaves on a locally Noetherian scheme. -/
 theorem lowerStar_preserves_flat_closed
     (A : Type (u + 1)) [CommRing A] {Z X : Scheme.{u}}
     (i : Z ⟶ X) [IsClosedImmersion i] [IsLocallyNoetherian X]

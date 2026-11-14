@@ -80,8 +80,7 @@ private theorem mate_unit_maps
         congrArg (fun t ↦ t ≫ R'.map e₂) (b.unit.naturality j).symm
 
 /-- Ambient twisted-unit mate assembly. Apply `unit_mateEquiv`, then use
-naturality of the exchange and the two adjunction units.
-(blueprint: lem-sfb-ambient-twisted-unit-mate) -/
+naturality of the exchange and the two adjunction units. -/
 theorem ambient_twisted_unit_mate
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]

@@ -82,25 +82,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Local membership in a zero-section kernel power kills each lower coefficient
 in the corresponding base stalk.
 
-Source: Stacks Project, Tag 0EY9, fixed-index thickening calculation; canonical
-localization coordinates for stalks from the affine-scheme construction.
-(blueprint: lem-sbc-power-series-local-kernel-coefficients)
-
-Proof: Write B = A[[X]], p for the base prime and q for its inverse image under
-constant coefficient. Open restriction and spectrum stalk isomorphisms identify
-this stalk map with the localized constant-coefficient homomorphism B_q to A_p.
-Let T=A_p. Coefficientwise localization B to T[[X]] sends every denominator
-outside q to a unit: its constant coefficient is a unit in T. It therefore
-extends to a ring homomorphism l:B_q to T[[X]]. Its composite with constant
-coefficient is the localized constant-coefficient map, by the universal property
-of localization. Consequently the kernel maps into the variables ideal of
-T[[X]]: a series with zero constant coefficient belongs to that ideal by the
-proved coefficient criterion at order one. Ideal comap and power monotonicity
-send the n-th kernel power into the n-th variables-ideal power. Applying the
-coefficient criterion at order n gives zero for each coefficient of degree less
-than n. The canonical germ formulas transport the input membership and these
-coefficient zeros back to scheme stalks. At n=0 the coefficient condition is
-vacuous; d=0 is allowed as well. No depth or Noetherian hypothesis is needed. -/
+Source: Stacks Project, Tag 0EY9, fixed-index thickening calculation. -/
 theorem powerSeries_low_coeff_germ_eq_zero_of_kernel_pow
     (A : Type u) [CommRing A] (d : ℕ)
     (V : (Spec (.of (MvPowerSeries (Fin d) A))).Opens) :

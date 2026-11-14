@@ -186,16 +186,6 @@ private theorem projection_coefficient_transport
     whiskerLeft_id, Category.id_comp]
 
 /-- The supported-unit transport equality for section/projection coherence.
-
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md,
-second identity, coefficient normalization after the section identity.
-(blueprint: lem-sfb-projective-canonical-section-projection-transport).
-
-Proof: use naturality of the canonical projection map in its coefficient argument for the
-supported-unit isomorphism, then cancel the inverse/hom pair under the direct image. The
-result identifies the normalized expression with the regular-coefficient expression;
-the core section/projection identity is applied separately by the parent theorem.
 -/
 theorem canonical_section_projection_transport
     (Y : Scheme.{u})

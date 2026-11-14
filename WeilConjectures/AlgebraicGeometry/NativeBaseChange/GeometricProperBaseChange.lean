@@ -22,10 +22,6 @@ import Mathlib.CategoryTheory.Comma.Over.Pullback
 
 /-!
 # The geometric native derived proper base-change mate
-
-Source: blueprint sec-six-functors-basics/sk-thm-sfb-proper-base-change,
-thm-weil-pbc-qbar.proof.md, "Constructibility and the isomorphism".
-(blueprint: lem-sf-geometric-native-proper-base-change)
 -/
 
 @[expose] public noncomputable section
@@ -45,9 +41,7 @@ attribute [local irreducible] DerivedCategory HasDerivedCategory.standard
 
 variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
 
-/-- Base change of a map to the fixed algebraic closure.
-Source: native WeilSheaf/Category.lean.
-(blueprint: lem-sf-geometric-native-proper-base-change). -/
+/-- Base change of a map to the fixed algebraic closure. -/
 abbrev geometricMap {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
     [Y.Over (Spec (CommRingCat.of k₀))] (f : X ⟶ Y)
     [f.IsOver (Spec (CommRingCat.of k₀))] :=
@@ -62,8 +56,7 @@ variable {Z' Z T' T : Scheme.{u}}
 
 omit [Finite k₀] in
 /-- The commutative geometric square, without imposing Cartesian hypotheses.
-Source: functoriality of geometricFiberMap.
-(blueprint: lem-sf-geometric-native-proper-base-change). -/
+Source: functoriality of geometricFiberMap. -/
 theorem geometricSquare (sq : CommSq v p' p g) :
     CommSq (geometricMap k₀ v) (geometricMap k₀ p')
       (geometricMap k₀ p) (geometricMap k₀ g) := by
@@ -149,23 +142,7 @@ private theorem affineChart_descent
   obtain ⟨e⟩ := ProEtale.adicDerivedBaseChange_openChart l sq i j h w M
   exact (Arrow.isIso_iff_isIso_of_isIso e.hom).mpr hl
 
-/-- Invertibility of the geometric mate on bounded constructible native modules.
-Source: thm-weil-pbc-qbar.proof.md, "Constructibility and the isomorphism";
-parent lem-sf-native-weil-proper-natural-base-change, steps 5--7.
-(blueprint: lem-sf-geometric-native-proper-base-change).
-
-Proof: base change the Cartesian square to the fixed algebraic closure. Cover the
-geometric base by affine opens A, and cover the inverse image of each A by affine
-opens B. Restriction to the corresponding source chart is exact, preserves boundedness,
-and preserves native constructible cohomology. The native affine proper base-change
-lemma applies: properness supplies the separated finite-type source schemes, the
-constructibility comparison supplies the encoded bounded constructible input, and
-rational proper base change supplies the local isomorphism after the specified
-native-to-condensed exchange comparison. The native open-chart comparison identifies
-restriction of the global mate with this chart mate as an arrow. The already proved
-joint conservativity of native derived restriction along a pro-etale cover then gives
-the global isomorphism. This uses no absolute separatedness of T or T', no condition
-on g, and no Frobenius structure. Empty charts and zero complexes use the same proof. -/
+/-- Invertibility of the geometric mate on bounded constructible native modules. -/
 theorem geometric_proper_baseChange_isIso [Fact (ringChar k₀ ≠ l)]
     (sq : ChosenCartesianSquare v p' p g) [IsProper p]
     [QuasiCompact (T ↘ Spec (CommRingCat.of k₀))]

@@ -375,26 +375,7 @@ private theorem scalar_unit_pull_naturality_aux
 end ProofHelpers
 
 /-- The scalar/pullback comparison respects the normalized coefficient-unit endpoints.
-This equation has no direct image, exchange map, Tate line, or Chern adjunct.
-
-Source: latest blueprint, diagonal-tower coefficient changes, paragraphs (2)--(3),
-coefficient functors commuting with pullback.
-(blueprint: lem-sfb-scalar-unit-pull-naturality).
-
-Proof: Transpose through the derived extension/restriction adjunction at the
-projective line. The Endpoint.normalization equations replace both scalar
-endpoint maps by the degree-zero images of the prescribed coefficient maps.
-The scalar/pullback comparison is conjugate to the identity restriction/direct-image
-comparison. Its transpose therefore inserts the coefficient unit before applying
-ordinary inverse image. The unit pullback comparison is the ordinary regular-module
-comparison, transported through the single/unit comparisons. Both transposed
-composites send the coefficient unit to the coefficient unit, by naturality of
-coefficientMap and condensedPullbackHom. The extension/restriction adjunction and
-faithful module forgetful functor identify the ordinary arrows. Exact inverse image
-computes on degree-zero complexes; its canonical single comparison transports this
-equality into the derived category. Injectivity of the derived adjunction returns
-the displayed square. No basis, coefficient flatness beyond that defining the
-specified derivedPullIso, or nonempty scheme is used. -/
+This equation has no direct image, exchange map, Tate line, or Chern adjunct. -/
 theorem scalar_unit_pull_naturality
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
@@ -411,11 +392,7 @@ theorem scalar_unit_pull_naturality
   scalar_unit_pull_naturality_aux a Y cY cP
 
 /-- The unit square in native functor notation.
-Source: diagonal coefficient changes (2)--(3).
-(blueprint: lem-sfb-scalar-unit-pull-naturality).
-
-Proof: unfold PullEndpointSquare in scalar_unit_pull_naturality and identify the
-functor wrappers by structural heterogeneous congruence. -/
+Source: diagonal coefficient changes (2)--(3). -/
 theorem scalar_unit_pull_naturality_explicit
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']

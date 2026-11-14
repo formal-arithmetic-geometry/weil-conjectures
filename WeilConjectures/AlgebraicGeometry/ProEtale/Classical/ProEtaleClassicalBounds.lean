@@ -38,10 +38,6 @@ import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
 
 /-!
 # Uniform classical pro-étale cohomological bounds
-
-Source: blueprint `sec-six-functors-basics/sk-prop-pe-unbounded-classical`, detail
-`sk-prop-pe-unbounded-classical-bounds.md` and its proof
-(blueprint: lemma-uniform-bounds-pro-etale-affines).
 -/
 
 universe u
@@ -58,8 +54,6 @@ namespace AlgebraicGeometry.ProEtale
 finite-type schemes over a finite or algebraically closed field. The dimensions are the
 topological Krull dimensions, with the empty scheme assigned dimension zero, and the bound
 is `2 * d + 1`.
-Source: blueprint `sec-six-functors-basics/sk-prop-pe-unbounded-classical`, node
-`lemma-uniform-bounds-pro-etale-affines` (blueprint: lemma-uniform-bounds-pro-etale-affines).
 -/
 def HasClassicalUniformBounds {S R : Scheme.{u}} (f : S ⟶ R)
     (F : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}) : Prop :=
@@ -257,69 +251,6 @@ private theorem uniform_bounds_of_field_cd {k : Type u} [Field k]
 algebraically closed field.  This is the three-part statement of
 `lemma-uniform-bounds-pro-etale-affines`; the final conjunct repeats it with source `Y` and an
 arbitrary finite-type map from `Y` to a finite-type `k`-scheme.
-
-Source: blueprint `sec-six-functors-basics/sk-prop-pe-unbounded-classical`, node
-`lemma-uniform-bounds-pro-etale-affines` (blueprint: lemma-uniform-bounds-pro-etale-affines).
-Proof (the eleven steps of the node, with their dependency nodes):
-1. Use `lemma-uniform-bounds-pro-etale-affines` and `lemma-uniform-bounds-pro-etale-affines`
-   to identify derived field sections with derived invariants. The additive equivalence
-   preserves injectives by the Hom lifting criterion. Apply
-   `lemma-cohomological-dimension-base-field` (1); torsion sections give torsion stalks.
-2. For finite k, `lemma-cohomological-dimension-base-field--2` identifies its absolute Galois group
-   with the profinite integers. Every element of a discrete torsion module has finite
-   orbit, generating a finite stable subgroup. Finite sums give a directed union of
-   finite stable modules; use `lemma-cohomological-dimension-base-field` (2).
-3. A finite stable module has exponent e and action through a finite cyclic quotient.
-   Coordinate kernels are cofinal, so `lemma-cohomological-dimension-base-field` (3) computes its
-   cohomology by finite quotients. Inflation to the quotient multiplied by e is zero
-   in degrees at least two by `lemma-cohomological-dimension-base-field--2`. Every colimit class
-   dies. For algebraically closed k use `lemma-cohomological-dimension-base-field--1`. Thus the
-   all-torsion field dimension of `definition-cohomological-dimension` is at most one.
-4. `lemma-uniform-bounds-pro-etale-affines` gives finite dimension, agreeing with
-   `lemma-uniform-bounds-pro-etale-affines` and `lemma-uniform-bounds-pro-etale-affines`; nonempty
-   schemes have a length-zero chain by `lemma-uniform-bounds-pro-etale-affines`. Finite-type schemes
-   over k are Noetherian by `lemma-uniform-bounds-pro-etale-affines`. Each affine etale stage
-   is finite type over k. For the products with X, finite affine covers over affine
-   opens of Y give a finite affine cover using
-   `lemma-uniform-bounds-pro-etale-affines`. The projection to X is etale by
-   `situation-conventions`, hence finite type over k. The stages
-   are qcqs: use `lemma-uniform-bounds-pro-etale-affines` for compact
-   opens and `lemma-uniform-bounds-pro-etale-affines`.
-5. `lemma-uniform-bounds-pro-etale-affines` identifies the local dimensions of etale source
-   and target. `lemma-uniform-bounds-pro-etale-affines`, generic points
-   from `lemma-uniform-bounds-pro-etale-affines`, and the topological dimension definition bound
-   every finite irreducible chain in an etale stage by the source dimension. This also
-   applies to the product stages by etale base change; no separatedness is needed.
-6. `lemma-uniform-bounds-pro-etale-affines` with field bound one gives the common stage bound
-   `2 * d + 1`. Empty stages have zero sections by the empty covering axiom.
-   `lemma-uniform-bounds-pro-etale-affines` keeps the pulled-back coefficients torsion.
-7. `lemma-uniform-bounds-pro-etale-affines` gives the bound for U. Apply
-   `proposition-comparison-etale-derived-category--5` to the etale pullback of G, and
-   `lemma-uniform-bounds-pro-etale-affines` to identify restriction to U.
-   The inverse-image Kan colimit is evaluation: (W, graph) is initial before
-   taking the opposite category. `theorem-bounded-below-cohomology-comparison` for the discrete ring
-   of integers and the degree-zero complex identifies pro-etale and etale cohomology.
-8. The fibre-product universal property identifies X times V with the limit of
-   X times the V_i. Transition maps are affine by base change, using
-   `lemma-uniform-bounds-pro-etale-affines`. These stages are qcqs with the bound
-   from step 6, so `lemma-uniform-bounds-pro-etale-affines` gives the same bound on the product.
-9. Its etale pullback coefficient is torsion. Use
-   `proposition-comparison-etale-derived-category--5` and
-   `theorem-bounded-below-cohomology-comparison` on this scheme, again only for G in degree zero, to
-   obtain clause 2.
-10. `lemma-uniform-bounds-pro-etale-affines` identifies the higher
-    image with the sheafified cohomology presheaf. Use
-    `lemma-uniform-bounds-pro-etale-affines`,
-    `lemma-uniform-bounds-pro-etale-affines`, and
-    `lemma-uniform-bounds-pro-etale-affines` to identify coefficients.
-    On affine etale target objects steps 4--6 give zero above the bound.
-    Every etale object has an affine open covering, so this presheaf is locally
-    zero. By the universal property in `lemma-uniform-bounds-pro-etale-affines` its
-    sheafification is zero, proving clause 3.
-11. For empty X, all schemes in clauses 1--2 are empty, hence have zero sections
-    and cohomology; direct image out of the zero sheaf category is zero as well.
-    Thus the explicit empty bound one works. Repeat with source Y and an arbitrary
-    finite-type target and map to obtain the last conjunct (including the identity).
 -/
 theorem hasClassicalUniformBounds {k : Type u} [Field k]
     (hk : Finite k ∨ IsAlgClosed k)

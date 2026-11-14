@@ -11,10 +11,6 @@ import WeilConjectures.AlgebraicGeometry.RationalP1.FlatCoefficientExchange
 public import WeilConjectures.SixFunctors.Supporting.ModCondensedCachedInstances
 
 /-! # Coefficient naturality of the projective-line exchange
-
-Source: diagonal coefficient changes, paragraphs (2)-(3), finite-subextension
-scalar extension and commutation with pullback, and the canonical exchange mate
-in the second rational P1 triangle.
 -/
 
 @[expose] public noncomputable section
@@ -53,35 +49,7 @@ adjunct from the coefficient unit to the direct image of the shifted root line.
 There is no completed Chern class, normalization, trace equation, or prescribed
 second adjunct in this statement.
 
-Source: latest blueprint, diagonal-tower coefficient changes proof, paragraphs (2)-(3),
-scalar extension to the algebraic closure and commutation with pullback; the
-canonical mate comparisons in the
-second rational projective-line triangle.
-(blueprint: lem-sfb-rational-p1-closure-exchange-naturality).
-
-Proof: Identify the two right-derived models with their canonical functors using
-their functor equalities and their full universal-unit normalizations. The given
-restriction squares then become the canonical derived restriction/direct-image
-comparisons: their normalization on every complex determines these comparisons.
-Their mates are the canonical scalar/direct-image maps. The pullback/scalar
-comparison is the conjugate comparison. Conjugation and mate pasting show that
-the square exchanging q with its self-base-change commutes with scalar extension.
-More explicitly, transpose through the p2 pullback/direct-image adjunction. Both
-exchange maps become the pullback square comparison followed by the q counit;
-the scalar/direct-image mate becomes the inverse scalar/pullback comparison
-followed by the scalar image of that same counit. Pullback-composition coherence
-identifies the two resulting paths. No exchange map is inverted.
-
-The scalar endpoints in this equation are the supplied endpoints: their derived
-adjunction normalizations determine them from the coefficient and root maps.
-The root map into the closure is the specified finite-field colimit leg, so its
-pullback square commutes on each integral root projection, then on localization
-and on the finite-field colimit. Shift by two using the canonical shift
-comparisons. The analogous coefficient-unit square sends one to one. Naturality
-of the scalar/pullback comparison on the arbitrary arrow x now gives the stated
-equation. Insert the canonical right-derived model comparisons at both ends and
-cancel their inverse pairs. The formula includes x = 0 and empty schemes; it
-requires neither proper base change nor invertibility of an exchange map. -/
+Source: the canonical mate comparisons in the second rational projective-line triangle. -/
 theorem closure_exchange_naturality
     (l : ℕ) [Fact l.Prime] (E : PadicAlgCl.FiniteIntermediateField l)
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

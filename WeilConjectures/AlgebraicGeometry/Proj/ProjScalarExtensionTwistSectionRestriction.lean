@@ -7,8 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Proj.ProjScalarExtensionTwistData
 
-/-! Restriction compatibility for normalized scalar-extension twist sections.
-(blueprint: lem-sfb-proj-scalar-extension-twist-section-restriction). -/
+/-! Restriction compatibility for normalized scalar-extension twist sections. -/
 
 @[expose] public section
 
@@ -37,11 +36,7 @@ private theorem tensorPullbackSection_map {X Y : Scheme.{u}} (f : X ⟶ Y)
   exact Hom.app_presheaf_map ((tensorPullbackSectionAdjunction f).unit.app M)
     (homOfLE h) s
 
-/-- The normalized scalar-extension section commutes with restriction to a smaller open.
-Source: the naturality of the comparison morphism and of the tensor-pullback section.
-Proof: expand `scalarExtensionTwistSection`; apply naturality of the comparison morphism
-and the defining naturality of `tensorPullbackSection`, then evaluate at the given point.
-(blueprint: lem-sfb-proj-scalar-extension-twist-section-restriction). -/
+/-- The normalized scalar-extension section commutes with restriction to a smaller open. -/
 theorem scalarExtensionTwistSection_restrict
     {A B : Type u} [CommRing A] [CommRing B]
     {σ τ : Type u} [SetLike σ A] [AddSubgroupClass σ A]

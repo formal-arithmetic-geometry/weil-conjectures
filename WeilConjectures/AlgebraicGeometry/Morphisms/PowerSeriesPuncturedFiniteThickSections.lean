@@ -15,7 +15,6 @@ import WeilConjectures.RingTheory.PowerSeriesQuotientVariables
 /-! # Sections on a finite power-series thickening
 
 Source: Stacks Project, Tag 0EY9, the first displayed calculation.
-(blueprint: lem-sbc-power-series-punctured-finite-thickening-sections)
 -/
 
 @[expose] public section
@@ -27,18 +26,6 @@ namespace AlgebraicGeometry.Scheme
 /-- Restricting quotient power series to the punctured finite thickening is surjective.
 
 Source: Stacks Project, Tag 0EY9, the finite-index part of the first displayed calculation.
-(blueprint: lem-sbc-power-series-punctured-finite-thickening-sections)
-
-Proof: The existing quotient_first_variables_kernels theorem identifies the
-variables ideal with ker(constantCoeff).
-The existing finite-index restriction theorem identifies B/I^(n+1) with sections
-on the pullback of V along the quotient spectrum map. The pullback symmetry
-isomorphism followed by pullbackRestrictIsoRestrict identifies that scheme with
-the inverse-image open q inverse-image V. Its inverse induces an isomorphism
-on global sections, so composing preserves surjectivity. The identity of its
-inverse followed by pullback.snd with the open inclusion, and contravariant
-functoriality of appTop, show that this composition is the displayed canonical
-restriction. Thus no new Hartogs or finite-free calculation is needed here.
 -/
 theorem surjective_powerSeries_punctured_thickening_sections
     (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]

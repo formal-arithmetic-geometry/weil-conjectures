@@ -12,7 +12,6 @@ import Mathlib.CategoryTheory.Filtered.Final
 /-! # Descent of a map to a finitely presented scheme at a fixed stage
 
 Source: Stacks Project, Tag 01ZM.
-(blueprint: lem-sbc-pointed-section-stage-descent)
 -/
 
 @[expose] public section
@@ -25,17 +24,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- A map to a finitely presented scheme over one stage descends after refining that stage.
 
-Source: Stacks Project, Tag 01ZM, morphism descent.
-(blueprint: lem-sbc-pointed-section-stage-descent)
-
-Proof:
-Restrict the diagram to the cofiltered category `Over i`. The forgetful functor is
-initial, so the original limit cone induces a limit cone on this restriction.
-Its maps to `K.obj i` are the transition maps. The given map is over `K.obj i` by
-`ha`. Apply finite-presentation factorization of maps from an affine-transition
-limit to obtain an object of `Over i`, hence a stage `j`, a map `f : j ⟶ i`,
-and a map `a₀` with the two asserted equalities. Quasi-compactness,
-quasi-separatedness, and affine transitions are inherited by the restriction. -/
+Source: Stacks Project, Tag 01ZM, morphism descent. -/
 theorem exists_map_at_refinement_of_affine_limit
     {I : Type u} [SmallCategory I] [IsCofiltered I] (K : I ⥤ Scheme.{u})
     (hKqc : ∀ i, CompactSpace (K.obj i)) (hKqs : ∀ i, QuasiSeparatedSpace (K.obj i))

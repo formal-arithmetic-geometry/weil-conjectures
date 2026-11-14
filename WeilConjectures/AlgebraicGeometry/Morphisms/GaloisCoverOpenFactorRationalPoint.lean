@@ -22,18 +22,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- A nonempty affine open part of a split Galois fibre has a rational point.
 
-Source: Stacks Project, Tag 0EYI(2), and the simply transitive torsor identity.
-(blueprint: lem-sbc-galois-cover-open-factor-rational-point)
-
-Proof: A rational point of the fibre and its G-translates trivialize the whole
-fibre: base changing the torsor identity along this point identifies it with a
-coproduct of copies of Spec F. After extension along b it is a coproduct of copies
-of Spec K. An open immersion from Spec A identifies its image with an open subset
-of that coproduct. Nontriviality of A makes Spec A nonempty, so the image contains
-one component Spec K. The inverse of the open immersion on that component gives
-a K-valued point of Spec A. The contravariant affine equivalence identifies that
-point, using the structural-map identity, with a K-algebra homomorphism A to K.
-Neither normality nor any trait or tame-chart hypothesis is needed. -/
+Source: Stacks Project, Tag 0EYI(2), and the simply transitive torsor identity. -/
 theorem GaloisCover.open_factor_rational_point
     {Y : Scheme.{u}} (G : Type (u + 1)) [Group G] [Finite G]
     (Z : GaloisCover G Y) (F : CommRingCat.{u}) [Field F]

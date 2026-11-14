@@ -34,14 +34,7 @@ variable [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ T)]
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ' T)]
 
 /-- A fixed sectionwise model admits the ordinary comparison normalized on generators.
-Source: Stacks 03EK and 06YY; this is the ordinary half of the fixed-model
-comparison construction.
-(blueprint: lem-sfb-quotient-scalar-section-ordinary-comparison-existence).
-
-Proof: identify the ordinary extension functor of the fixed model with the
-sheafified change-of-rings functor. The isomorphism is fixed by the universal
-scalar-extension generator `1 tensor m`, and naturality extends it from those
-generators to every module. -/
+Source: Stacks 03EK and 06YY. -/
 theorem scalar_section_ordinary_comparison_exists (T : Scheme.{u})
     (model : SectionModel a T) :
     ∃ ordinary : QuotientChange.extension a T ⋙

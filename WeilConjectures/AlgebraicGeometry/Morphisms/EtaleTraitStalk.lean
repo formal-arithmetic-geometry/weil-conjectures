@@ -25,21 +25,7 @@ namespace AlgebraicGeometry.Scheme
 /-- The canonical local ring of an etale scheme at a point over the closed point
 of a trait is a DVR with the same uniformizer.
 
-Source: Stacks Project, Tags 0AP2 (15.45.4) and 0EYI, preliminary paragraph.
-(blueprint: lem-sbc-etale-trait-stalk)
-
-Proof: Identify the base stalk at f(x) with R by the closed-point stalk
-isomorphism. A DVR is a regular local ring. The source is locally Noetherian,
-since it is locally of finite type over the Noetherian scheme Spec R. The stalk
-map is flat and local, hence faithfully flat and injective. Formal unramifiedness
-says it maps the base maximal ideal onto the target maximal ideal. Regularity
-ascends under a flat local map with this maximal-ideal identity, so the target
-stalk is regular local and hence a domain. Mapping the given generator of the
-base maximal ideal gives the displayed principal maximal ideal. Its generator
-is nonzero by injectivity, so the stalk is not a field. The Noetherian local
-domain with nonzero principal maximal ideal is a DVR (the DVR TFAE). This is
-the local argument underlying Tags 0AP2 and 0EYI. The ring and map here are the
-actual stalk and its canonical structural map, not chosen existence witnesses. -/
+Source: Stacks Project, Tags 0AP2 (15.45.4) and 0EYI, preliminary paragraph. -/
 theorem etale_trait_stalk (R : CommRingCat.{u})
     [IsDomain R] [IsDiscreteValuationRing R]
     {X : Scheme.{u}} (f : X ⟶ Spec R) [Etale f] (x : X)

@@ -19,8 +19,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjec
 /-!
 # Derived Hom on finite disjoint unions of pro-etale objects
 
-Source: Stacks Project, Tags 04TS, 015F and 0F63.
-(blueprint: lem-weil-pbc-derived-hom-finite-products)
+Source: Stacks Project, Tags 04TS, 015F and 0F63
 -/
 
 @[expose] public section
@@ -624,25 +623,7 @@ namespace AlgebraicGeometry.Scheme
 to a product, including the empty union.
 
 Source: Stacks Project, Tags 04TS (gluing sheaves), 015F (exact derived functors),
-and 0F63 (finite disjoint union criterion).
-(blueprint: lem-weil-pbc-derived-hom-finite-products)
-
-Proof: Apply the section-product hypothesis to the internal Hom sheaf of two
-module sheaves. It gives the product bijection for morphisms between their
-restrictions. Apply this degreewise to glue complex maps and homotopies; the
-complex-map and homotopy equations are checked after restriction by injectivity.
-Restriction to a slice preserves K-injective complexes: construct its left adjoint
-by taking, over a test object V, the direct sum indexed by maps V to the slice
-object, then sheafify. This left adjoint preserves monomorphisms by componentwise
-injectivity of direct sums, and preserves colimits by adjunction, so is exact.
-Choose K-injective representatives of the global derived objects. Maps to their
-restrictions are represented by complex maps, and equality is precisely homotopy.
-The preceding gluing of maps and homotopies therefore gives surjectivity and
-injectivity on derived Hom. The factorization isomorphisms for exact derived
-functors identify this bijection with the specified local restriction map.
-Conjugate by the chosen derived isomorphisms to return to the original objects.
-Every construction works for an empty index set: the section-product hypothesis
-then asserts unique sections, hence unique maps and homotopies. -/
+and 0F63 (finite disjoint union criterion). -/
 theorem proEtaleDerivedHom_finiteProducts (X : Scheme.{u})
     (B : Type (u + 1)) [CommRing B]
     (I : Type (u + 1)) [Finite I] (W : I → X.ProEt) (c : Cofan W)

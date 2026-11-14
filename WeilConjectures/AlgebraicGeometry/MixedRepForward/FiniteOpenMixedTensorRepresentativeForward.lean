@@ -17,7 +17,7 @@ import WeilConjectures.AlgebraicGeometry.MixedRepForward.ForwardTransportGeneral
 /-!
 # The forward cochain tensor counit square
 
-Source: Stacks Project, sites-cohomology.tex, Tag 07A4, tensor pullback comparison.
+Source: Stacks Project, Tag 07A4, tensor pullback comparison.
 Unpack the defining equation of the published comparison on homotopy objects. Its two
 counits are the tensor of the pullback counits followed by the target tensorator, and
 the source tensorator followed by the pullback counit. Evaluate at the homotopy
@@ -85,8 +85,7 @@ quotients of `P` and `Q`. Expand the two counits and combine their whiskered com
 into a tensor of morphisms. The cochain tensorators equal the homotopy tensorators by
 `cochainLocalization_tensorator_eq`; the homotopy oplax comparison is the quotient of
 the signed-total cochain comparison. Finally `leftDerivedFactors_eq_counit` identifies
-each pullback counit with its exact-derived factors. No tensorator is inverted.
-(blueprint: lem-sf-finite-open-mixed-tensor-representative-forward-transport) -/
+each pullback counit with its exact-derived factors. No tensorator is inverted. -/
 theorem forward_transport
     (P Q : CochainComplex ShX ℤ) :
     ((AlgebraicGeometry.ProEtale.leftDerivedUpperStarTensorNatIso

@@ -109,9 +109,7 @@ def monomialCechCosimplicialObject : CosimplicialObject (ModuleCat.{u} A) where
 
 /-- **The monomial Čech complex** of `𝒪(m)` on the standard covering of `ℙ = Proj A[xᵢ]`: the
 alternating coface map complex of `monomialCechCosimplicialObject n A m`. Its differential is
-`(d c) σ = ∑ i, (-1) ^ i • c (σ ∘ Fin.succAbove i)` (`monomialCechComplex_d_apply`).
-
-(blueprint: `lem-pc-projective-space-twist-cohomology`) -/
+`(d c) σ = ∑ i, (-1) ^ i • c (σ ∘ Fin.succAbove i)` (`monomialCechComplex_d_apply`). -/
 def monomialCechComplex : CochainComplex (ModuleCat.{u} A) ℕ :=
   (AlgebraicTopology.alternatingCofaceMapComplex (ModuleCat.{u} A)).obj
     (monomialCechCosimplicialObject n A m)
@@ -289,9 +287,7 @@ variable (n A m) in
 /-- **The monomial Čech complex is exact in the middle degrees**: with `d + 1` coordinates, it
 is exact in every degree `q` with `0 < q < d`. On the summand of an exponent vector with a
 nonnegative coordinate this is the contracting homotopy `monomialCechHomotopy`; the summands of
-the strictly negative exponent vectors vanish below degree `d`.
-
-(blueprint: `lem-pc-projective-space-twist-cohomology`) -/
+the strictly negative exponent vectors vanish below degree `d`. -/
 theorem exactAt_monomialCechComplex {d : ℕ} (hn : Fintype.card n = d + 1) (q : ℕ)
     (hq : q + 1 < d) : (monomialCechComplex n A m).ExactAt (q + 1) := by
   rw [HomologicalComplex.exactAt_iff' _ q (q + 1) (q + 2) (by simp) (by simp),
@@ -387,9 +383,7 @@ lemma monomialExponents_eq_empty (hm : m < 0) : monomialExponents n m = ∅ := b
 
 variable (n A) in
 /-- **`H⁰` of the monomial Čech complex in negative degree**: for `m < 0` and at least two
-coordinates, the `0`-th cohomology of the monomial Čech complex of `𝒪(m)` vanishes.
-
-(blueprint: `lem-pc-projective-space-twist-cohomology` (i)) -/
+coordinates, the `0`-th cohomology of the monomial Čech complex of `𝒪(m)` vanishes. -/
 lemma subsingleton_monomialCechComplex_homology_zero [Nontrivial n] (hm : m < 0) :
     Subsingleton ((monomialCechComplex n A m).homology 0) := by
   refine (monomialCechComplex n A m).homologyZeroLinearEquiv.toEquiv.subsingleton_congr.2
@@ -468,9 +462,7 @@ def homogeneousSubmoduleBasis (D : ℕ) :
 
 variable (n A) in
 /-- **`H⁰` of the monomial Čech complex**: for `m ≥ 0`, the `0`-th cohomology of the monomial
-Čech complex of `𝒪(m)` is the module `A[xᵢ]ₘ` of homogeneous polynomials of degree `m`.
-
-(blueprint: `lem-pc-projective-space-twist-cohomology` (i)) -/
+Čech complex of `𝒪(m)` is the module `A[xᵢ]ₘ` of homogeneous polynomials of degree `m`. -/
 def monomialCechComplexHomologyZeroLinearEquiv [Nonempty n] (D : ℕ) :
     (monomialCechComplex n A D).homology 0 ≃ₗ[A] MvPolynomial.homogeneousSubmodule n A D :=
   (monomialCechComplex n A D).homologyZeroLinearEquiv ≪≫ₗ
@@ -806,11 +798,9 @@ variable (n A m) in
 /-- **The top cohomology of the monomial Čech complex**: with `d + 1` coordinates, `Hᵈ` is the
 free module on the strictly negative exponent vectors of sum `m` (for `d = 0` this requires
 `m < 0`; the case `m ≥ 0` is `H⁰`). The isomorphism takes the coefficients of a cocycle on a
-fixed bijective tuple `E : Fin (d + 1) ≃ n`: on the summands of the exponent vectors with a
+fixed bijective tuple `E: Fin (d + 1) ≃ n`: on the summands of the exponent vectors with a
 nonnegative coordinate every cocycle is a coboundary, and on the other summands the
-cocycles are the alternating functions of the tuple.
-
-(blueprint: `lem-pc-projective-space-twist-cohomology` (ii)) -/
+cocycles are the alternating functions of the tuple. -/
 def monomialCechComplexHomologyTopLinearEquiv :
     ∀ {d : ℕ} (_ : Fintype.card n = d + 1) (_ : Fin (d + 1) ≃ n) (_ : d ≠ 0 ∨ m < 0),
       (monomialCechComplex n A m).homology d ≃ₗ[A] (negativeExponents n m →₀ A)
@@ -831,9 +821,7 @@ lemma isEmpty_negativeExponents {d : ℕ} (hn : Fintype.card n = d + 1) (hm : -(
   omega
 
 /-- **Vanishing of the top cohomology of the monomial Čech complex**: with `d + 1 ≥ 2`
-coordinates, `Hᵈ = 0` for `m ≥ -d`.
-
-(blueprint: `lem-pc-projective-space-twist-cohomology` (ii)) -/
+coordinates, `Hᵈ = 0` for `m ≥ -d`. -/
 theorem subsingleton_monomialCechComplex_homology_top {d : ℕ} (hn : Fintype.card n = d + 1)
     (hd : d ≠ 0) (hm : -(d : ℤ) ≤ m) :
     Subsingleton ((monomialCechComplex n A m).homology d) := by
@@ -881,10 +869,7 @@ variable (n A m) in
 /-- **The top cohomology of the monomial Čech complex as a dual**: with `d + 1` coordinates,
 `Hᵈ ≅ (A[xᵢ]_{-m-d-1})^∨` for `m ≤ -d - 1`. In the monomial bases, the class of the cocycle
 `x^{-f-1}` on `E` is the dual basis vector of the monomial `x^f`; this is the perfect pairing of
-`theorem-riemann-roch-coherent-serre-duality--2`.
-
-(blueprint: `lem-pc-projective-space-twist-cohomology` (ii),
-`theorem-riemann-roch-coherent-serre-duality--2`) -/
+`theorem-riemann-roch-coherent-serre-duality--2`. -/
 def monomialCechComplexHomologyTopLinearEquivDual {d : ℕ} (hn : Fintype.card n = d + 1)
     (hm : m ≤ -(d : ℤ) - 1) :
     (monomialCechComplex n A m).homology d ≃ₗ[A]
@@ -1008,9 +993,7 @@ lemma eq_negOneExponents {d : ℕ} (hn : Fintype.card n = d + 1)
 variable (n A) in
 /-- **The trace** `Hᵈ(𝒪(-d-1)) ≅ A` of the monomial Čech complex with `d + 1 ≥ 2` coordinates:
 the top cohomology of `𝒪(-d-1)` is free of rank one, with basis the class of the cocycle
-`x₀⁻¹ ⋯ x_d⁻¹`.
-
-(blueprint: `lem-pc-projective-space-twist-cohomology` (ii)) -/
+`x₀⁻¹ ⋯ x_d⁻¹`. -/
 def monomialCechTrace {p : ℕ} (hn : Fintype.card n = p + 1 + 1) :
     (monomialCechComplex n A (-((p + 1 : ℕ) : ℤ) - 1)).homology (p + 1) ≃ₗ[A] A :=
   haveI : Subsingleton (negativeExponents n (-((p + 1 : ℕ) : ℤ) - 1)) :=
@@ -1027,9 +1010,7 @@ lemma monomialCechPairing_aux {d : ℕ} (hm : m ≤ -(d : ℤ) - 1) :
 variable (n A) in
 /-- **The Serre pairing on the monomial Čech complex**: for `m ≤ -d - 1` and `D = -m - d - 1`,
 a homogeneous polynomial `f` of degree `D`, i.e. a global section of `𝒪(D)`, pairs with a class
-in `Hᵈ(𝒪(m))` to the trace of the product, `⟨f, x⟩ = tr (f · x) ∈ Hᵈ(𝒪(-d-1)) ≅ A`.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
+in `Hᵈ(𝒪(m))` to the trace of the product, `⟨f, x⟩ = tr (f · x) ∈ Hᵈ(𝒪(-d-1)) ≅ A`. -/
 def monomialCechPairing {p : ℕ} (hn : Fintype.card n = p + 1 + 1)
     (hm : m ≤ -((p + 1 : ℕ) : ℤ) - 1)
     (f : MvPolynomial.homogeneousSubmodule n A (-m - ((p + 1 : ℕ) : ℤ) - 1).toNat) :
@@ -1075,9 +1056,7 @@ lemma homogeneousSubmoduleBasis_apply (D : ℕ) (s : {s : n →₀ ℕ | s.degre
 and `m ≤ -d - 1`, the isomorphism `Hᵈ(𝒪(m)) ≅ (A[xᵢ]_{-m-d-1})^∨` of
 `monomialCechComplexHomologyTopLinearEquivDual` is `x ↦ (f ↦ ⟨f, x⟩)` for the pairing
 `monomialCechPairing` induced by multiplication. In the monomial bases, `x^f` pairs to `1` with
-the class of `x^{-f-1}` and to `0` with the other basis elements.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
+the class of `x^{-f-1}` and to `0` with the other basis elements. -/
 theorem monomialCechComplexHomologyTopLinearEquivDual_apply {p : ℕ}
     (hn : Fintype.card n = p + 1 + 1) (hm : m ≤ -((p + 1 : ℕ) : ℤ) - 1)
     (x : (monomialCechComplex n A m).homology (p + 1))

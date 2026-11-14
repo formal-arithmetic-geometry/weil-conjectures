@@ -11,8 +11,7 @@ public import WeilConjectures.SixFunctors.WeilFrobeniusAction.WeilFrobeniusActio
 
 /-! # Explicit ordinary small model for native Frobenius
 
-Source: prose-10-20, internal-Hom paragraph; Stacks 03D6 and 03EO.
-(blueprint: def-sf-native-frobenius-model-data)
+Source: Stacks 03D6 and 03EO.
 -/
 
 @[expose] public noncomputable section
@@ -25,12 +24,12 @@ open WeilConjectures.WeilFrobeniusAction
 variable (Y : Scheme.{u}) (l : ℕ) [Fact l.Prime]
 
 /-- The actual locally finite coefficient functions, restricted to the lifted site.
-Source: Stacks 03D6 (blueprint: def-sf-native-frobenius-model-data). -/
+Source: Stacks 03D6. -/
 abbrev ring : Sheaf (topology Y) CommRingCat.{u + 1} :=
   SheafOfModules.SmallSite.coefficient (Scheme.ProEt.topology Y) (comparisonRing l Y)
 
 /-- The ordinary equivalence first un-lifts the site, then reverses native section encoding.
-Source: Stacks 03D6 and 03EO (blueprint: def-sf-native-frobenius-model-data). -/
+Source: Stacks 03D6 and 03EO. -/
 def equivalence : TwistedActionRingedSite.Modules (ring Y l) ≌ AdicSheaf l Y :=
   ((SheafOfModules.SmallSite.equivalence (Scheme.ProEt.topology Y)
     (comparisonRing l Y)).trans (adicSectionModuleEquivalence l Y).symm).changeFunctor
@@ -41,7 +40,7 @@ def equivalence : TwistedActionRingedSite.Modules (ring Y l) ≌ AdicSheaf l Y :
           (adicSectionModuleEquivalence l Y).inverse)
 
 /-- The equivalence retains addition of actual section maps.
-Source: Stacks 03EO (blueprint: def-sf-native-frobenius-model-data). -/
+Source: Stacks 03EO. -/
 instance equivalence_additive : (equivalence Y l).functor.Additive := by
   have : (comparisonModuleFunctor l Y).Additive :=
     { map_add := by intros; ext V x; rfl }
@@ -75,8 +74,7 @@ private theorem postcompose_continuous (g : Y ≅ Y) :
   rw [presieve_map_comp]
   exact hS
 
-/-- Both directions of inverse geometric translation preserve covers.
-Source: ordinary Frobenius step 1 (blueprint: def-sf-native-frobenius-model-data). -/
+/-- Both directions of inverse geometric translation preserve covers. -/
 theorem translation_continuous (g : Y ≅ Y) :
     (translation g).functor.IsContinuous (topology Y) (topology Y) ∧
       (translation g).inverse.IsContinuous (topology Y) (topology Y) := by
@@ -100,8 +98,7 @@ theorem translation_continuous (g : Y ≅ Y) :
   exact ⟨Functor.isContinuous_comp AsSmall.down _ _ (Scheme.ProEt.topology Y) _,
     Functor.isContinuous_comp _ AsSmall.up _ (Scheme.ProEt.topology Y) _⟩
 
-/-- Coefficient functions have exactly the same values under postcomposition.
-Source: ordinary Frobenius step 2 (blueprint: def-sf-native-frobenius-model-data). -/
+/-- Coefficient functions have exactly the same values under postcomposition. -/
 def ringIso (g : Y ≅ Y) :
     let _ := (translation_continuous Y g).2
     ((translation g).inverse.sheafPushforwardContinuous CommRingCat.{u + 1}

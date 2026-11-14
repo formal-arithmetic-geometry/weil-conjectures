@@ -99,29 +99,8 @@ private theorem conjugate_square
 /-- The finite Isom sheaves, their reduction and evaluation on contractible objects.
 This constructs neither a covering nor a compatible family of markings.
 
-Source: Stacks Project, proetale.tex, Tag 09BV, the construction of I_n and its
-reduction maps, and Tag 09C6, compatibility of finite reductions.
-(blueprint: lem-weil-pbc-lisse-tower-isomorphism-sections).
-
-Proof: work over U.left, using the localization equivalence of pro-etale sites.
-The inverse-image constant coefficient comparisons transport each level to sheaves
-of modules over the finite ring C/J^(n+1). The separate markings make its bounded
-finite cohomology locally constant and classical. Descend each level and the actual
-normalization arrows to the etale site by bounded-below finite-coefficient comparison.
-Take the sheafification of the presheaf of derived isomorphisms from the constant K_n
-to this descended level. Finite-ring derived local constancy makes it finite locally
-constant; separate local markings and comparison of finite locally constant sheaves
-imply every geometric stalk is nonempty. The adjoint of scalar extension, with the
-supplied universal t_n and M's invertible normalization, defines reduction on Isom
-sheaves. Universality makes this operation independent of local representatives and
-compatible with restriction. On an affine weakly contractible pro-etale object, the
-Isom sheaf evaluation theorem identifies its sections with actual derived isomorphisms.
-Transport back through the canonical coefficient comparisons and restrict along any
-W over this object. Naturality of evaluation with respect to scalar extension gives
-the consecutive normalization square. The quotient/right restriction comparison is
-identity on constant sections, so its adjunct is exactly the displayed s_n, with the
-specified scalar compositors. Empty bases and zero levels use the same construction.
-No compatible sections or inverse limit is selected anywhere in this argument. -/
+Source: Stacks Project, Tag 09BV, the construction of I_n and its reduction maps, and Tag 09C6,
+compatibility of finite reductions. -/
 theorem lisse_tower_isomorphism_sections
     (X Y : Scheme.{u}) (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (M : AdicTower X d)

@@ -100,7 +100,7 @@ lemma segre_comp_toProjInt_appLE (k k' : n) (l l' : m)
     Proj.segre_appLE_awayToSection_awayXRatio, map_mul]
   rfl
 
-/-- Blueprint `theorem-chow-s-lemma-projective-form`: The Segre embedding is a closed immersion (the
+/-- The Segre embedding is a closed immersion (the
 consequence `𝒪(1) ⊠ 𝒪(1)` recorded in its detailed form).
 
 **The pullback of `𝒪(1)` along the relative Segre morphism is `𝒪(1) ⊠ 𝒪(1)`**, the tensor

@@ -11,8 +11,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Clopen.ProEtaleClopenStructura
 import WeilConjectures.AlgebraicGeometry.ProEtale.Clopen.ProEtaleClopenTotalTensorComparison
 
 /-! Split structural comparison data for finite clopen restriction.
-Source: Stacks Project, sites-modules.tex, Tag 0GMW; sites-cohomology.tex, Tag 0FPQ.
-(blueprint: lem-pur-clopen-structural-comparison). -/
+Source: Stacks Project, Tag 0GMW; Tag 0FPQ. -/
 
 @[expose] public noncomputable section
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
@@ -85,8 +84,7 @@ def clopenStructuralPrefix
                 p (q + 1) (n + 1) hq))))
 
 /-- The normalized pure-tensor, summand, and differential clauses for one component.
-Source: Stacks Project, sites-modules.tex, Tags 0GMW and 0FPQ.
-(blueprint: lem-pur-clopen-structural-comparison-prefix).
+Source: Stacks Project, Tags 0GMW and 0FPQ.
 
 Use the ordinary normalized braided restriction and coproduct preservation from clopen
 gluing. Uncurrying the canonical totalization comparison constructs the total isomorphism;

@@ -105,8 +105,7 @@ public import WeilConjectures.AlgebraicGeometry.InternalSectionTensorLocalizatio
 
 /-! # Localization of the sectionwise tensor comparison
 
-Source: Stacks Project, Tags 03CV, 03EK, 06YL, 06YS and 08J9
-(blueprint: lem-sfb-internal-section-tensor-localization).
+Source: Stacks Project, Tags 03CV, 03EK, 06YL, 06YS and 08J9.
 -/
 
 @[expose] public noncomputable section
@@ -650,26 +649,7 @@ set_option backward.isDefEq.respectTransparency false in
 closed tensor, with the prescribed K-flat representative squares, globally and on
 all localized sites. This statement contains no comparison of internal Homs.
 
-Source: Stacks 03CV, 03EK, 06YL, 06YS and 08J9
-(blueprint: lem-sfb-internal-section-tensor-localization).
-
-Proof: The ordinary section-action equivalence is exact and comes with tensor and
-unit isomorphisms normalized on pure tensors. Its associator and unitor equations
-construct a strong monoidal structure. On each signed total summand, the specified
-complex comparison is the inverse of its mapCochainComplex tensorator; the coproduct
-universal property makes this identification unique. Closedness makes both tensor
-variables preserve countable coproducts. Use coherent derived monoidal descent of the
-exact equivalence. The monoidality
-equation of its localization factor supplies the representative tensor square.
-Take the ringed closed structure and K-flat tensor models from the native tensor-Hom
-adjunction. On K-flat pairs, cancel the target localization tensorator. Its inverse
-is precisely the representative model comparison, giving TensorComparison with its
-stated normalization. For every slice repeat this construction for the actual
-restricted coefficient monoid. The equality between its reconstructed section ring
-and the literal restricted section ring transports the same normalized construction
-to SliceTensorComparison. Total-summand uniqueness identifies the transported raw
-comparison with sliceTotalComparison. These arguments use arbitrary unbounded
-complexes and apply also to zero rings and empty sites. -/
+Source: Stacks 03CV, 03EK, 06YL, 06YS and 08J9. -/
 theorem internalSection_tensorLocalization :
     (∃ (S : CoefficientClosedStructure (hom Λ X))
       (T : CoefficientTensorModels.{u, u + 1, u, u + 1}

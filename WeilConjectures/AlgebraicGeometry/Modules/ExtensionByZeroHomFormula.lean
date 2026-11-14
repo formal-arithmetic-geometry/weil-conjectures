@@ -210,16 +210,7 @@ private noncomputable def extensionSheafAdjunction
     rfl
 
 /-- The canonical adjunction has the stated formula on each direct-sum injection.
-Source: Stacks Project, Sheaves, Definition 00A4 and Lemma 00A7 (2).
-(blueprint: lem-weil-pbc-module-extension-by-zero-hom-formula).
-
-Proof: A map from the extension presheaf to a global module sends each summand
-indexed by V → U through a module morphism on U. Conversely such a morphism defines
-a map on each summand; the direct-sum universal property gives its components.
-Naturality follows on summands from naturality on U. The constructions are inverse
-on each injection and natural in both modules. Compose this Hom equivalence with
-the sheafification Hom equivalence. Its formula is the evaluation of the composite
-on each injection, which is precisely the asserted equation. -/
+Source: Stacks Project, Sheaves, Definition 00A4 and Lemma 00A7 (2). -/
 theorem module_extensionByZero_hom_formula (X : Scheme.{u}) (U : X.Opens) :
     let R := X.ringCatSheaf
     let P := SheafOfModules.extensionByZeroPresheaf.{u} R U

@@ -78,9 +78,6 @@ import Mathlib.RingTheory.DedekindDomain.Dvr
 
 /-!
 # Closure of the integral ind-constructible heart
-
-Source: blueprint main-20261015, integral compactness proof step 9 and integral proper
-sums proof steps 7 and 11 (blueprint: lem-sfb-integral-ind-heart-closure).
 -/
 
 @[expose] public noncomputable section
@@ -177,9 +174,7 @@ private lemma constantModelConstructible_single
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-/-- The cofinality argument for a filtered presentation by finitely presentable objects.
-Source: canonical-presentation proof, Cofinality paragraph.
-(blueprint: proposition-ind-constructible-sheaves). -/
+/-- The cofinality argument for a filtered presentation by finitely presentable objects. -/
 private theorem final_constructiblePresentation
     {C : Type*} [Category.{u + 1} C] (P : ObjectProperty C)
     (hP : ∀ A : P.FullSubcategory, IsFinitelyPresentable.{u + 1} A.obj)
@@ -213,9 +208,7 @@ private theorem final_constructiblePresentation
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-/-- Assemble a canonical colimit from essential smallness and finite presentation.
-Source: canonical-presentation proof, Essential smallness and Colimit paragraphs.
-(blueprint: proposition-ind-constructible-sheaves). -/
+/-- Assemble a canonical colimit from essential smallness and finite presentation. -/
 private theorem canonicalPresentation_of_finitePresentation
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     (X : Scheme.{u})
@@ -281,9 +274,8 @@ private theorem integral_sheaf_ext_continuity_noetherian
   infer_instance
 
 /-- The integral ind-constructible heart closure over a Noetherian scheme, with no base field.
-Source: blueprint lem-sfb-integral-ind-heart-closure; the base field of
-`integralIndConstructibleHeartClosure` only makes the scheme Noetherian
-(blueprint: lem-sfb-integral-ind-heart-closure). -/
+Source: the base field of `integralIndConstructibleHeartClosure` only makes the scheme Noetherian.
+-/
 theorem integralIndConstructibleHeartClosure_of_isNoetherian
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (X : Scheme.{u}) [IsNoetherian X] :
@@ -368,28 +360,7 @@ theorem integralIndConstructibleHeartClosure_of_isNoetherian
 set_option linter.unusedVariables false in
 /-- The filtered-colimit closure of integral constructibles is a weak Serre class
 and is closed under ambient small coproducts. This is a statement in the abelian
-module category; it involves neither derived truncations nor localizing subcategories.
-
-Source: blueprint main-20261015, proposition-compactness-proper-direct-image--1, proof steps 1--7
-and 9; proposition-compactness-proper-direct-image--2, proof steps 7 and 11.
-(blueprint: lem-sfb-integral-ind-heart-closure).
-
-Proof: integral constant-model heart closure gives ambient kernels, cokernels and
-extensions of constructibles. Bounded-below integral Hom and Ext-one continuity
-makes the filtered-colimit realization fully faithful. Present a morphism between
-two realized diagrams on the filtered category of constructible squares. Exact
-filtered colimits identify its ambient kernel and cokernel with the colimits of
-the constructible kernels and cokernels. For an extension, pull it back to each
-constructible quotient stage. Ext-one continuity lifts its class to an extension
-by one constructible kernel stage. Push that extension out to later kernel stages;
-these constructible extensions have colimit the pulled-back extension. Taking the
-filtered colimit over the quotient stages recovers the original extension. The zero
-scalar model on one stratum is constructible. Finite sums are constructible by split
-extensions. A coproduct is the filtered colimit of its finite subsums; take the
-filtered category of finite tuples of constructible presentation stages to flatten
-these presentations into one small filtered constructible diagram. Its cocones are
-exactly families of maps from the summands, so it presents the original coproduct.
-The empty family uses the zero model. -/
+module category; it involves neither derived truncations nor localizing subcategories. -/
 theorem integralIndConstructibleHeartClosure
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (k : Type u) [Field k] (p₀ : ℕ) [CharP k p₀] (hp₀ : 0 < p₀) (hpℓ : p₀ ≠ ℓ)

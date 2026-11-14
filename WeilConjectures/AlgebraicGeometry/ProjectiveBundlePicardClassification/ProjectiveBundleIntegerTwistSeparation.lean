@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveBundlePicardClassification.Pr
 # Integer twists separate on every nonempty base neighbourhood
 
 Source: EGA II, Remark 4.2.7; Stacks, Tag 0BXJ.
-(blueprint: lem-sfb-projective-bundle-integer-twist-separation)
 -/
 
 @[expose] public section
@@ -46,17 +45,7 @@ private theorem invertible_integerLinePower {X : Scheme.{u}} (A : X.Modules)
 
 /-- Integer twists which agree above a neighbourhood containing a base point have equal degrees.
 
-Source: EGA II, Remark 4.2.7, printed p.75; Stacks, divisors.tex, Tag 0BXJ.
-(blueprint: lem-sfb-projective-bundle-integer-twist-separation)
-
-Proof: pull the given isomorphism back to the fibre over s. Base change identifies that
-fibre and its normalized tautological quotient with the projective bundle of the
-r-dimensional residue vector space E(s). Pullback preserves integer tensor powers,
-including negative powers because their inverse evaluations pull back. The field
-normal-form theorem, applied to this residue-field bundle and its tautological line,
-has a unique integer exponent. Both m and n satisfy that normal form, so m = n.
-The hypothesis s in U supplies a nonempty base fibre; r >= 2 excludes projective
-space of dimension zero, where integer twists would all be trivial. -/
+Source: EGA II, Remark 4.2.7, printed p.75; Stacks, Tag 0BXJ. -/
 theorem projective_bundle_integer_twist_separation (S : Scheme.{u}) (E : S.Modules)
     [E.IsQuasicoherent] (r : ℕ)
     [SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u} E r] (hr : 2 ≤ r)

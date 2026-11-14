@@ -125,11 +125,10 @@ lemma constantZModToGmSheaf_comp_nsmul (ζ : Γ(X, ⊤)ˣ) (hζ : ζ ^ n = 1) :
   rfl
 
 /-- **The trivialization associated to `ζ`.** For a global unit `ζ` of `X` with `ζ ^ n = 1`,
-the map of étale sheaves `θ_ζ : ℤ/n ⟶ μₙ`, `a ↦ ζ ^ a`. It is an isomorphism when `X` lives over
+the map of étale sheaves `θ_ζ: ℤ/n ⟶ μₙ`, `a ↦ ζ ^ a`. It is an isomorphism when `X` lives over
 a field `k` and `ζ` comes from a primitive `n`-th root of unity of `k`
 (`AlgebraicGeometry.Scheme.isIso_constantZModToRootsOfUnitySheaf`); the isomorphism is
-`AlgebraicGeometry.Scheme.constantZModIsoRootsOfUnitySheaf`.
-(blueprint: `def-sc-mu-trivialization`) -/
+`AlgebraicGeometry.Scheme.constantZModIsoRootsOfUnitySheaf`. -/
 noncomputable def constantZModToRootsOfUnitySheaf (ζ : Γ(X, ⊤)ˣ) (hζ : ζ ^ n = 1) :
     X.constantZMod n ⟶ X.rootsOfUnitySheaf n :=
   kernel.lift _ (X.constantZModToGmSheaf n ζ hζ) (X.constantZModToGmSheaf_comp_nsmul n ζ hζ)
@@ -253,11 +252,10 @@ lemma injective_kernelι_app (U : X.Etaleᵒᵖ) :
   exact (AddCommGrpCat.mono_iff_injective _).1 this
 
 /-- **`θ_ζ` is an isomorphism.** Let `X` be a scheme over a field `k`, `ζ₀ ∈ k` a primitive
-`n`-th root of unity and `ζ` its image on `X`. Then `θ_ζ : ℤ/n ⟶ μₙ`, `a ↦ ζ ^ a`, is an
+`n`-th root of unity and `ζ` its image on `X`. Then `θ_ζ: ℤ/n ⟶ μₙ`, `a ↦ ζ ^ a`, is an
 isomorphism of étale sheaves: it is locally injective
 (`AlgebraicGeometry.Scheme.isLocallyInjective_zmodToGmPresheaf`) and locally surjective
-(`AlgebraicGeometry.Scheme.imageSieve_zmodToGmPresheaf_mem`).
-(blueprint: `def-sc-mu-trivialization`) -/
+(`AlgebraicGeometry.Scheme.imageSieve_zmodToGmPresheaf_mem`). -/
 theorem isIso_constantZModToRootsOfUnitySheaf [NeZero n] (f : X ⟶ Spec (.of k)) {ζ₀ : k}
     (hζ₀ : IsPrimitiveRoot ζ₀ n) (ζ : Γ(X, ⊤)ˣ) (hζ : ζ ^ n = 1)
     (h : (ζ : Γ(X, ⊤)) = ((ΓSpecIso (.of k)).inv ≫ f.appTop) ζ₀) :
@@ -298,10 +296,9 @@ theorem isIso_constantZModToRootsOfUnitySheaf [NeZero n] (f : X ⟶ Spec (.of k)
           (NatTrans.naturality_apply ι.hom g.op s).symm
     exact Presheaf.isLocallySurjective_of_isLocallySurjective _ (toSheafify _ _) θ.hom
 
-/-- **The canonical trivialization `θ_ζ : ℤ/n ≅ μₙ`.** Let `X` be a scheme over a field `k` and
+/-- **The canonical trivialization `θ_ζ: ℤ/n ≅ μₙ`.** Let `X` be a scheme over a field `k` and
 let `ζ ∈ k` be a primitive `n`-th root of unity. Then `a ↦ ζ ^ a` is an isomorphism of étale
-sheaves from the constant sheaf `ℤ/n` to the sheaf `μₙ` of `n`-th roots of unity.
-(blueprint: `def-sc-mu-trivialization`) -/
+sheaves from the constant sheaf `ℤ/n` to the sheaf `μₙ` of `n`-th roots of unity. -/
 noncomputable def constantZModIsoRootsOfUnitySheaf [NeZero n] (f : X ⟶ Spec (.of k)) {ζ : k}
     (hζ : IsPrimitiveRoot ζ n) : X.constantZMod n ≅ X.rootsOfUnitySheaf n :=
   have hu : IsUnit (((ΓSpecIso (.of k)).inv ≫ f.appTop) ζ) :=

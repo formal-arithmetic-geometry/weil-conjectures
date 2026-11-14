@@ -13,7 +13,6 @@ import Mathlib.RingTheory.Localization.Ideal
 /-! # Stalk kernels of finite power-series thickenings
 
 Source: Stacks Project, Tag 0EY9, the first displayed calculation.
-(blueprint: lem-sbc-power-series-punctured-thickening-kernel)
 -/
 
 @[expose] public section
@@ -105,19 +104,6 @@ set_option backward.isDefEq.respectTransparency false in
 powers of the zero-section stalk kernels.
 
 Source: Stacks Project, Tag 0EY9, the finite-index structure-sheaf comparison.
-(blueprint: lem-sbc-power-series-punctured-thickening-kernel)
-
-Proof: For n=0 the conclusion is membership in the unit ideal. For n positive,
-at x in the inverse image of V write p for its prime in A and let Q be the inverse
-image of p under constant coefficient. The kernel of B_Q to A_p is I B_Q:
-constant coefficient is onto with kernel I, and localization preserves the quotient.
-The point Q belongs to Spec(B/I^n), since I is contained in Q. The stalk of the
-restricted thickening at that point is B_Q/(I B_Q)^n, because localization commutes
-with ideal powers and quotients. The open-immersion stalk isomorphisms identify
-B_Q to A_p with the restricted zero-section stalk map, and identify the germ of
-the pulled-back section with the quotient of its germ on V. If the pullback is
-zero, that quotient germ is zero. Its original germ thus belongs to (I B_Q)^n,
-which under these identifications is precisely the asserted kernel power.
 -/
 theorem powerSeries_punctured_germs_mem_pow_of_thickening_zero
     (A : Type u) [CommRing A] (d : ℕ)

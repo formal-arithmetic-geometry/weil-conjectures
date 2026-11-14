@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale
 Transport the upstream affine-chart theorem along the canonical comparison of the small
 representative colimit with the full affine pointed-neighbourhood colimit.
 Source: Stacks Project, Tags 04HX and 04GW.
-(blueprint: lem-weil-pbc-small-strict-henselization-ind-etale).
 -/
 
 @[expose] public section
@@ -64,15 +63,8 @@ private theorem smallStrictHenselization_base_compatibility
   simpa only [Category.assoc] using hh.trans hsmall
 
 /-- The upstream ind-etale chart theorem also holds for the small representative model.
-Source: Stacks Project, Tag 04HX, with independence of the neighbourhood presentation
-from Tag 04GW (blueprint: lem-weil-pbc-small-strict-henselization-ind-etale).
-
-Proof: the final-functor colimit isomorphism compares the small and full affine diagrams.
-On any small representative, its inverse coprojection equation identifies the structural
-maps after taking spectra. Compose the prescribed spectrum isomorphism with this canonical
-comparison. The structural-map equation then becomes the hypothesis of the upstream
-ind-etale chart theorem. No nonemptiness assumption is added: the geometric point makes
-the representative neighbourhood category nonempty. -/
+Source: Stacks Project, Tag 04HX, with independence of the neighbourhood presentation from Tag 04GW.
+-/
 theorem smallStrictHenselization_indEtale_of_affine_chart
     {S : Scheme.{u}} {Ω A : Type u} [Field Ω] [IsAlgClosed Ω] [CommRing A]
     (s : Spec (.of Ω) ⟶ S) (R : CommRingCat.{u})

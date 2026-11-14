@@ -102,9 +102,7 @@ import all WeilConjectures.AlgebraicGeometry.Open.OpenComparisonUnitNormalizatio
 
 /-! # Open extension, scalar extension, and site comparison
 
-Source: Stacks Project, Tags 0GL1, 0E8I, 09AF, 06YQ and 0G7E; the specified
-scalar/site square and open composition laws
-(blueprint: lem-sp-open-scalar-site-coherence).
+Source: Stacks Project, Tags 0GL1, 0E8I, 09AF, 06YQ and 0G7E.
 
 ## Main declarations
 
@@ -332,7 +330,7 @@ private def site_pullback (A : Type (u + 1)) [CommRing A]
   supportSiteComparisonCoefficientPullbackIso (ModuleCat.{u + 1} A) j
 
 /-- The sectionwise coefficient identification for pro-etale open restriction.
-Source: Stacks 03EL, 03EK (blueprint: lem-sp-open-scalar-site-coherence). -/
+Source: Stacks 03EL, 03EK. -/
 def restrictScalarsIso {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     upperStar (ModuleCat.{u + 1} B) j ⋙
@@ -351,8 +349,7 @@ def restrictScalarsIso {A B : Type (u + 1)} [CommRing A] [CommRing B]
 /-- The canonical pro-etale scalar/open comparison. This is the mate of the literal
 coefficient/restriction identification under the derived scalar and exact open
 adjunctions. Thus it specifies the summand-preserving map, rather than choosing an
-arbitrary isomorphism. Source: Stacks 0GL1, 0E8I, 06YY
-(blueprint: lem-sp-open-scalar-site-coherence). -/
+arbitrary isomorphism. Source: Stacks 0GL1, 0E8I, 06YY. -/
 def scalarOpen {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapDerivedCategory ⋙
@@ -368,7 +365,7 @@ def scalarOpen {A B : Type (u + 1)} [CommRing A] [CommRing B]
       (Functor.mapDerivedCategorySquareIso (restrictScalarsIso φ j)))
 
 /-- Exact descent of the recorded pro-etale extension compositor.
-Source: Stacks 03DI, 09AF (blueprint: lem-sp-open-scalar-site-coherence). -/
+Source: Stacks 03DI, 09AF. -/
 def extensionComp (A : Type (u + 1)) [CommRing A] {V U X : Scheme.{u}}
     (k : V ⟶ U) (j : U ⟶ X) [IsOpenImmersion k] [IsOpenImmersion j] :=
   Functor.mapDerivedCategoryNatIso (proEtaleOpenExtensionComp A k j) ≪≫
@@ -893,16 +890,7 @@ private theorem scalar_site_square_aux {A B : Type (u + 1)} [CommRing A] [CommRi
     Functor.mapIso_hom, Iso.app_hom, Category.assoc] using congrArg Iso.hom hr
 
 /-- Scalar/open composition coherence on the etale site, with the canonical
-open compositors. Source: Stacks 03DI, 0E8I, 0GL1
-(blueprint: lem-sp-open-scalar-site-coherence).
-Proof: The ordinary compositor composes the extension factorizations. Both
-scalar routes send each generating section tensored with b to the same extension
-generator with section s tensor b; if there is no factorization the source is
-zero. The sheafification universal property gives equality of sheaf maps, also
-through intermediate sheafification. Apply this calculation degreewise on K-flat
-resolutions, preserved by open extension, and descend to the derived category.
-Equivalently, compose the specified scalar/open adjunction mates and use their
-uniqueness with the restriction compositor. -/
+open compositors. Source: Stacks 03DI, 0E8I, 0GL1. -/
 theorem etale_scalar_comp {A B : Type (u + 1)} [CommRing A] [CommRing B]
     [Finite A] [Finite B] (φ : A →+* B) {V U X : Scheme.{u}}
     (k : V ⟶ U) (j : U ⟶ X) [IsOpenImmersion k] [IsOpenImmersion j]
@@ -941,12 +929,7 @@ theorem etale_scalar_comp {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (et_derived_restrict_comp φ k j (et_restrict_comp φ k j)) L
 
 /-- The scalar/open comparison for the identity open is the identity after the
-canonical identity identifications. Source: Stacks 03DI, 0E8I, 0GL1
-(blueprint: lem-sp-open-scalar-site-coherence).
-Proof: The unique identity factorization leaves every extension generator
-unchanged. Tensoring its section gives the identity scalar comparison; apply the
-sheafification universal property and descend on K-flat representatives.
-The adjunction definition has exactly this identity normalization. -/
+canonical identity identifications. Source: Stacks 03DI, 0E8I, 0GL1. -/
 theorem etale_scalar_id {A B : Type (u + 1)} [CommRing A] [CommRing B]
     [Finite A] [Finite B] (φ : A →+* B) (X : Scheme.{u})
     (L : Etale.DerivedCategoryModule A X) :

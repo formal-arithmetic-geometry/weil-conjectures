@@ -12,9 +12,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Proper.ProEtaleProperOpenCouni
 
 /-! Monomorphism half of the proper/open pro-etale counit support argument.
 
-Source: Stacks, Tags 09AE and 09AG; blueprint
-`lem-exc-proetale-proper-open-counit-isiso`.
-(blueprint: lem-exc-proetale-proper-open-counit-isiso-mono)
+Source: Stacks, Tags 09AE and 09AG.
 -/
 
 @[expose] public section

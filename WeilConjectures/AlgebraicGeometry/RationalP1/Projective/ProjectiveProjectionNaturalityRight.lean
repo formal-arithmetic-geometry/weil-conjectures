@@ -10,8 +10,6 @@ import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.RationalP1.Projective.ProjectiveDiagonalComposition
 
 /-! # Naturality of the projection in its coefficient argument
-
-Source: current blueprint, rational projective-line triangle, First identity.
 -/
 
 @[expose] public noncomputable section
@@ -152,13 +150,7 @@ private theorem normalized_projection_naturality_right
   exact replace_square (eq_of_heq (ha g K N')) (eq_of_heq (ha g K N))
     (trace_projection_naturality_right Λ g K n)
 
-/-- Naturality in the supported coefficient argument of the fixed projection map.
-Source: the First identity of the rational projective-line triangle calculation,
-functoriality in the inserted kernel arrow
-(blueprint: lem-sfb-projective-projection-naturality-right).
-Proof: paste naturality of the two native derived braidings with naturality of the
-right-adjoint projection mate, then transport through the uniquely normalized family.
-The proof uses no invertibility, support condition, or diagonal geometry. -/
+/-- Naturality in the supported coefficient argument of the fixed projection map. -/
 theorem projectionMap_naturality_right
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X S : Scheme.{u}} (g : X ⟶ S)

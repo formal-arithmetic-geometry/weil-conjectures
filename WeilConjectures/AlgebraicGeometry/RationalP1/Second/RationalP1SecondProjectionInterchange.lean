@@ -10,8 +10,6 @@ import WeilConjectures.AlgebraicGeometry.RationalP1.Second.RationalP1SecondProje
 import WeilConjectures.AlgebraicGeometry.RationalP1.Second.RationalP1SecondProjectionInterchangeTail
 
 /-! # Interchanging a Tate factor with the second projection
-
-Source: the second identity of the rational projective-line triangle calculation.
 -/
 
 @[expose] public noncomputable section
@@ -33,26 +31,7 @@ attribute [local irreducible] firstProjection secondProjection square condensedA
 
 /-- Move an outside shifted Tate factor across a forward two-factor projection.
 This is a projection/tensor equation for an arbitrary scalar arrow z; it contains
-no exchange map, unitTail, counitProjectionPart, or inverse projection.
-
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md,
-Second identity, extraction of q*K; two-factor projection identity.
-(blueprint: lem-sfb-rational-p1-second-projection-interchange).
-
-Proof: expand secondTraceStrength and cancel its monoidal tensorator against the
-inverse tensorator displayed inside the twist. Naturality of tensorShiftIso moves
-this cancellation through the twist. Apply the two-factor projection law for p2,
-with the last factor the pulled shifted Tate line. Its associators and symmetries
-are exactly those in the strength. Naturality in the second input moves the
-arbitrary arrow z to the beginning. The comparison on q*K is the canonical
-self-square pullback comparison. The two line comparisons are the root-normalized
-pullbacks to W, so on a common root frame their interchange is the identity: the
-rank-one degree-zero line has trivial self-braiding and the degree-two shifts give
-(-1)^(2*2)=1. Thus the comparison on the twisted object is secondPullComparison.
-Cancel the tensorShiftIso pairs in the two projections. The remaining forward word
-is precisely secondForwardProjection. This calculation is valid for arbitrary V
-and z, without any projection or exchange invertibility assumption. -/
+no exchange map, unitTail, counitProjectionPart, or inverse projection. -/
 theorem second_projection_interchange
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

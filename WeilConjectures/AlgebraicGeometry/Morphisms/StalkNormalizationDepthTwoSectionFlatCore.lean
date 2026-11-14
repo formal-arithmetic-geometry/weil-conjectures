@@ -16,7 +16,6 @@ import WeilConjectures.Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 # Flatness near a point from a flat test
 
 Source: Stacks Project, Tag 0EYJ, flatness descent and openness.
-(blueprint: lem-sbc-stalk-normalization-depth-two-section-flat-core)
 
 This module proves only the descent step, after flatness of the test pullback
 has been established. In the normalization application, the rational generic
@@ -37,14 +36,7 @@ splitting calculation. The assumption `Flat (pullback.snd p t)` is an input,
 not a consequence of depth two. For the normalization application, the rational
 point over the generic section is used upstream to split this pullback.
 
-Source: Stacks Project, Tag 0EYJ, final flatness descent and neighbourhood argument.
-(blueprint: lem-sbc-stalk-normalization-depth-two-section-flat-core)
-
-Proof: Lift every source point over x to the pullback using the specified test
-point. The local map of the projection is flat and local, hence faithfully flat.
-The composite stalk map is flat. Faithful flatness reflects tensor injectivity,
-so the original stalk map is flat. The finite flat target locus is open and
-contains x; restrict the morphism to that open and apply the stalk criterion. -/
+Source: Stacks Project, Tag 0EYJ, final flatness descent and neighbourhood argument. -/
 theorem stalk_normalization_depth_two_section_flat_core
     {L E T : Scheme.{u}} [IsLocallyNoetherian L]
     (p : E ⟶ L) [IsFinite p] (t : T ⟶ L)

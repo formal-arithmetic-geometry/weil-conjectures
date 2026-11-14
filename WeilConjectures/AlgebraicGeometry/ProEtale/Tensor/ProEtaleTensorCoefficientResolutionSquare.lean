@@ -41,7 +41,6 @@ import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-! # The coefficient-resolution square for pro-etale tensor pullback
 
 Source: Stacks Project, Cohomology on Sites, Tags 07A4 and 06YU.
-(blueprint: lem-sp-proetale-tensor-coefficient-resolution-square)
 
 The ordinary comparison, localization factors and derived comparison are the published
 canonical constructions. The bottom-right complex is written as the tensor with F(N[0]);
@@ -60,8 +59,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- The existing direct-sum total tensor, including its cochain signs.
-Source: Stacks, Tag 06YM
-(blueprint: lem-sp-proetale-tensor-coefficient-resolution-square). -/
+Source: Stacks, Tag 06YM. -/
 abbrev proEtaleResolutionTotal (Z : Scheme.{u})
     (R : Sheaf (ProEt.topology Z) CommRingCat.{u + 1}) :=
   Functor.uncurry.obj ((proEtaleOrdinaryTensor Z R).map₂HomologicalComplex
@@ -70,8 +68,7 @@ abbrev proEtaleResolutionTotal (Z : Scheme.{u})
 /-- The formula for alpha from a resolution and the localized tensor-resolution iso.
 The inverse here is the specified inverse of Q(1 tensor q), supplied as e. This is an
 actual composite, with no choice of a comparison map or of a coefficient resolution.
-Source: Stacks, Tag 06YU, construction preceding definition-derived-tor
-(blueprint: lem-sp-proetale-tensor-coefficient-resolution-square). -/
+Source: Stacks, Tag 06YU. -/
 def proEtaleCoefficientResolutionAlpha (Z : Scheme.{u})
     (R : Sheaf (ProEt.topology Z) CommRingCat.{u + 1}) (a : ProEtaleTensorModel Z R)
     (P M H : CochainComplex (proEtaleRingModules Z R) ℤ)
@@ -90,8 +87,7 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y)
   (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ S)
 
 /-- The arrow 1 tensor q on the existing direct-sum total tensor.
-Source: Stacks, Tags 06YP and 06YU
-(blueprint: lem-sp-proetale-tensor-coefficient-resolution-square). -/
+Source: Stacks, Tags 06YP and 06YU. -/
 abbrev proEtaleResolutionTensorMap (Z : Scheme.{u})
     (R : Sheaf (ProEt.topology Z) CommRingCat.{u + 1})
     (P : CochainComplex (proEtaleRingModules Z R) ℤ)

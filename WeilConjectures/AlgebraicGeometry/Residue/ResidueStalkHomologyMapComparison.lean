@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.Localized.LocalizedStrictPerfectResidue
 /-! # Naturality of residue derived homology in a local perfect representative
 
 Source: Stacks Project, Tags 0E62, 06YJ and 0D5S.
-(blueprint: lem-sc-residue-stalk-homology-map-comparison).
 -/
 
 @[expose] public section
@@ -54,22 +53,7 @@ private theorem strictlyPerfect_single_restricted_unit (S : Scheme.{u}) (U : S.O
       exact ⟨0, 0, 0, by simpa using (hz.eq_of_src (0 : A.X n ⟶ A.X n) (𝟙 _))⟩
 
 /-- The representing chain arrow induces an isomorphism on residue stalk H⁰.
-Source: Stacks Project, Tag 0E62, residue-field argument; Tags 06YJ and 0D5S.
-(blueprint: lem-sc-residue-stalk-homology-map-comparison).
-
-Proof: transport the localized module category to the open subscheme by overEquiv.
-Each term of P is a retract of a finite free module, hence flat; finite support gives
-boundedness above. The single restricted structure sheaf is also bounded and flat.
-The K-flat counit therefore computes both residue pullbacks termwise. Its naturality
-identifies the pullback of Q(α) with the termwise pullback of α. Restriction to U and
-pullback to its residue point compose to pullback to s; the composition comparison is
-natural. Apply these comparisons to hα. The resulting arrow is conjugate to the
-residue pullback of a by the images of c and e. Degree-zero homology is therefore
-invertible by ha. Finally sections on the one-point residue scheme identify termwise
-tensor pullback with extension of scalars of the stalk along the residue quotient.
-This identification is natural in sheaf maps, so it intertwines the homology arrow
-with the displayed homologyMap. Transporting an isomorphism along these comparisons
-proves the assertion. No linear frames or vanishing of negative terms are required. -/
+Source: Stacks Project, Tag 0E62, residue-field argument; Tags 06YJ and 0D5S. -/
 theorem isIso_residue_stalk_homologyMap (S : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
     [∀ U : S.Opens,

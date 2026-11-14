@@ -44,10 +44,9 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {k : Type u} [Field k] [IsAl
   {S X₀ : Scheme.{u}} {f₀ : X₀ ⟶ Spec (.of k₀)} {a : S ⟶ Spec (.of k)} {p : S ⟶ X₀}
   {σ : Spec (.of k) ⟶ Spec (.of k₀)}
 
-/-- **A local point fixed by a lift of a Frobenius is constant** (blueprint
-`lemma-frobenius-fixed-scheme--1`, the fixed scheme is reduced): let `S = X₀ ×_{k₀} k` with `k`
+/-- **A local point fixed by a lift of a Frobenius is constant**: let `S = X₀ ×_{k₀} k` with `k`
 algebraically closed, let `h` be a `k`-endomorphism of `S` with `h ≫ p = p ≫ G` for a
-`#k₀ ^ m`-power Frobenius `G` of `X₀`, `m ≥ 1`, and let `t : Spec A ⟶ S` be a point with values
+`#k₀ ^ m`-power Frobenius `G` of `X₀`, `m ≥ 1`, and let `t: Spec A ⟶ S` be a point with values
 in a local ring fixed by `h`. Then `t` factors through a `k`-rational point `x` of `S` fixed by
 `h`, along the structure morphism `Spec A ⟶ Spec k`. -/
 theorem exists_eq_comp_of_comp_eq_self_of_isFrobenius (hp : IsPullback p a f₀ σ)
@@ -57,7 +56,7 @@ theorem exists_eq_comp_of_comp_eq_self_of_isFrobenius (hp : IsPullback p a f₀ 
     ∃ x : Spec (.of k) ⟶ S, x ≫ a = 𝟙 _ ∧ x ≫ h = x ∧ t = t ≫ a ≫ x := by
   have hN : 2 ≤ Nat.card k₀ ^ m :=
     (Nat.le_self_pow (by omega) _).trans' (Finite.one_lt_card (α := k₀))
-  -- the structure map `ι : k ⟶ A`
+  -- the structure map `ι: k ⟶ A`
   let ι : CommRingCat.of k ⟶ A := Spec.preimage (t ≫ a)
   have hι : Spec.map ι = t ≫ a := Spec.map_preimage _
   let _ : Algebra k A := ι.hom.toAlgebra
@@ -72,7 +71,7 @@ theorem exists_eq_comp_of_comp_eq_self_of_isFrobenius (hp : IsPullback p a f₀ 
   have : IsLocalHom χ.hom := ⟨fun r hr ↦ by
     rw [hχ] at hr
     exact (isUnit_pow_iff (by omega)).mp hr⟩
-  -- its stalk map `φ₀ : 𝒪_{X₀, y₀} ⟶ A`
+  -- its stalk map `φ₀: 𝒪_{X₀, y₀} ⟶ A`
   let y₀ := t₀ (closedPoint A)
   let φ₀ : X₀.presheaf.stalk y₀ ⟶ A := Scheme.stalkClosedPointTo t₀
   have hφ₀ : Spec.map φ₀ ≫ X₀.fromSpecStalk y₀ = t₀ :=
@@ -103,7 +102,7 @@ theorem exists_eq_comp_of_comp_eq_self_of_isFrobenius (hp : IsPullback p a f₀ 
     exact hc' s
   have hcN (s) : c s ^ Nat.card k₀ ^ m = c s :=
     hιinj (by rw [map_pow, hc', hpow])
-  -- the rational point `x₀ : Spec k ⟶ X₀`
+  -- the rational point `x₀: Spec k ⟶ X₀`
   let x₀ := Spec.map (CommRingCat.ofHom φ') ≫ X₀.fromSpecStalk y₀
   have ht₀ : Spec.map ι ≫ x₀ = t₀ := by
     rw [← Category.assoc, ← Spec.map_comp, hφ', hφ₀]

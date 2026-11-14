@@ -12,8 +12,7 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Standard.StandardUnitCo
 /-!
 # Normalizing unit cocycles on the standard projective-space cover
 
-Source: Stacks Project, divisors.tex, Tag 0BXJ, lemma-Pic-projective-space-UFD.
-(blueprint: lem-sfb-projective-standard-unit-cocycle-normalization)
+Source: Stacks Project, Tag 0BXJ.
 -/
 
 @[expose] public section
@@ -31,24 +30,7 @@ namespace AlgebraicGeometry.ProjectiveSpace
 coordinates, differs from a standard integer transition cocycle by chart units.
 This is a statement about functions, with no module sheaf or gluing conclusion.
 
-Source: Stacks Project, divisors.tex, Tag 0BXJ, proof of
-lemma-Pic-projective-space-UFD, the double- and triple-overlap calculations.
-(blueprint: lem-sfb-projective-standard-unit-cocycle-normalization)
-
-Proof: For distinct i,j identify the overlap ring with the Laurent polynomial
-ring k[t,t^-1,z], with t=T_i/T_j. Since degrees in each z add for products over
-a domain, a unit has degree zero in all the z. The greatest and least exponents
-of a Laurent polynomial add under multiplication. A unit therefore has just one
-exponent and is c*t^e, with c in k^*. This expression is unique. On a triple
-intersection with distinct indices i,j,k, the ratios T_i/T_j and T_j/T_k are
-algebraically independent Laurent variables. Substitution in the cocycle equation
-and comparison of their exponents gives e_ij=e_jk=e_ik, and comparison of constants
-gives c_ij*c_jk=c_ik. Reversing a pair gives the same exponent; the graph of pairs
-is connected by triples when there are at least three indices. Thus there is a
-single integer d. The diagonal equations give t_ii=1 and c_ii=1. Fix an index b.
-The scalar cocycle is the boundary c_ij=c_ib/c_jb. Choose a_i=c_ib^-1, regarded
-as a constant chart unit. Then a_i*t_ij=(T_i/T_j)^d*a_j on every overlap, also
-when indices coincide. All arguments use only that k is a field. -/
+Source: Stacks Project, Tag 0BXJ, the double- and triple-overlap calculations. -/
 theorem exists_standardUnitCocycle_normalization (k : Type u) [Field k]
     (r : ℕ) (hr : 3 ≤ r)
     (t : ∀ i j : ULift.{u} (Fin r),

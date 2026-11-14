@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.Lisse.Finite.LisseFiniteLevelEtaleModel
 /-! # Bounded finite-lisse model at one coefficient level
 
 Source: Stacks Tags 099Y, 099Z and 09B1.
-(blueprint: new-lem-weil-pbc-lisse-finite-level-etale-model).
 -/
 
 @[expose] public noncomputable section
@@ -37,15 +36,7 @@ finite-locally-constant etale complex and its fixed-realization comparison.
 This is the model-and-comparison part of
 `lisse_finite_level_etale_descent`; geometric Isom stalks are handled separately.
 
-Source: Stacks Project, proetale.tex, Tags 099Y, 099Z and 09B1.
-(blueprint: new-lem-weil-pbc-lisse-finite-level-etale-model).
-
-Proof: identify the completion quotient with the finite quotient using finite
-generation of the ideal, transport the local models through the exact scalar
- equivalence, and apply bounded-below classical comparison to descend the
- resulting complex and its finite locally constant cohomology. The comparison
- with the actual pullback is the transported local-model comparison and is
- natural under restriction. Empty bases are covered by the zero complex.
+Source: Stacks Project, Tags 099Y, 099Z and 09B1.
 -/
 theorem lisse_finite_level_etale_model
     (X Y : Scheme.{u}) (g : Y ⟶ X)

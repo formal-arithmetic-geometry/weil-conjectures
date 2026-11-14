@@ -46,26 +46,7 @@ private theorem maximalIdeal_eq_span_of_equiv
 
 /-- The image of the root does not belong to the square of the normalized maximal ideal.
 
-Source: Stacks Project, Tags 09EB, 0BRM, 09E7 and 0307.
-(blueprint: lem-sbc-root-normalization-root-not-square)
-
-Proof: Put n = |G|, g = b(f), and t for the adjoined root. A group is nonempty,
-so n is positive. The monic relation makes A free over H; regularity of g makes
- t regular, and A/(t) = H/(g). At the root prime the maximal ideal is generated
-by this nonzero t. Its regular local stalk is therefore a DVR. Localizing H at
-(g) likewise gives a DVR with uniformizer g, and t^n = g gives ramification index n.
-The chart beta identifies the cover before the root extension with a G-torsor over
-the fraction field of H_(g). Each field factor is Galois with group a stabilizer
-subgroup of G. The degree formula 09EB makes its ramification index and residue
-degree divide n. In positive residue characteristic the inseparable residue degree
-is a power of that characteristic; since n is a unit, this degree is one and the
-ramification index is prime to the characteristic. Thus every factor is tame.
-Apply 0BRM to the index-n root extension. By 09E7 the resulting normalized DVR
-extensions have index one. Tag 0307 identifies their local rings and structural
-maps with the actual relative-normalization stalk and stalkMap in the statement.
-The image of t consequently has valuation one, whereas every element of the square
-of the maximal ideal has valuation at least two. It cannot lie in that square.
-For n = 1 the same calculation holds. An empty cover has no normalization point x. -/
+Source: Stacks Project, Tags 09EB, 0BRM, 09E7 and 0307 -/
 theorem root_normalization_root_not_square
     {L U : Scheme.{u}} (i : U ⟶ L)
     (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)

@@ -16,7 +16,6 @@ import Mathlib.Algebra.Ring.GeomSum
 
 Source: Stacks Project, Tags 0EYG and 09EV, root-of-unity input to the
 intermediate-root calculation; Hensel lifting of simple roots.
-(blueprint: lem-sbc-strict-local-roots-of-unity)
 -/
 
 @[expose] public section
@@ -31,22 +30,7 @@ an order-n cyclic group, and a nonidentity root differs from one by a unit.
 
 Source: Stacks Project, Tag 0EYG, final intermediate-field paragraph, and
 Tag 09EV, root-of-unity argument. This is the Hensel-lifting input to the
-intermediate-root calculation, extended to arbitrary strict local rings.
-(blueprint: lem-sbc-strict-local-roots-of-unity)
-
-Proof: Put k = H/m. The image of n is nonzero in k, so X^n-1 is separable
-and splits over the separably closed field k. It has exactly n roots, all
-units. Each residue root lifts to a root in H by the simple-root version
-of Hensel's lemma. The lift is unique: if a and b are roots with the same
-residue, then a^n-b^n=(a-b) times the sum of a^(n-1-j)*b^j; the sum has
-residue n times the common residue to power n-1 and is a unit. Thus a=b.
-Every lifted root is a unit, since its nth power is one. Reduction is
-therefore a bijective group homomorphism from the roots in H to the roots
-in k. The latter form a finite cyclic group of cardinality n. Transport
-cardinality and cyclicity across the bijection. A nonidentity root has
-residue different from one by injectivity, so its difference from one
-is outside the maximal ideal of H and is a unit. For n=1 the group is
-trivial and the last assertion is vacuous. -/
+intermediate-root calculation, extended to arbitrary strict local rings. -/
 theorem strict_local_roots_of_unity
     (H : Type u) [CommRing H] [IsStrictlyHenselianLocalRing H]
     (n : ℕ) (hn : 0 < n ∧ IsUnit (n : H)) :

@@ -25,8 +25,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
 /-!
 # Pro-etale direct image and uniformly bounded-below coproducts
 
-Source: Stacks Project, Tag 09A3, relative rational-algebra module version
-(blueprint: lem-weil-pbc-proetale-bounded-below-coproducts).
+Source: Stacks Project, Tag 09A3, relative rational-algebra module version.
 -/
 
 @[expose] public section

@@ -24,16 +24,7 @@ variable (l : ℕ) [Fact l.Prime] (Y : Scheme.{d})
   (ι : E →ₐ[ℚ_[l]] L)
 
 /-- An integral multiple of the separability section gives compatible integral maps.
-Source: Deligne, Weil II (1.1.1) c)-d), pp. 146-147; the finite separable
-algebra section `Algebra.FormallyUnramified.sec` and `comp_sec`.
-(blueprint: lem-pod-lisse-coefficient-restriction-separability).
-
-Proof: apply `lisseIntegerInclusion_separability_tensor` to obtain a central integral
-tensor whose multiplication is nonzero. Apply `lisseIntegralRestriction_tensor_maps`
-to this tensor and the explicit restricted system. Its two compatible integral maps
-have composite multiplication of the tensor times the identity. Taking this nonzero
-multiplication as a proves the assertion. The tensor, and hence its scalar, is chosen
-once in the coefficient rings and works at every level of the sheaf system. -/
+Source: Deligne, Weil II (1.1.1) c)-d), pp. 146-147. -/
 theorem lisseIntegralRestriction_bounded_retract
     (F : LisseIntegralSheaf l L Y)
     (hF : IsLisseIntegralDiagram l E Y

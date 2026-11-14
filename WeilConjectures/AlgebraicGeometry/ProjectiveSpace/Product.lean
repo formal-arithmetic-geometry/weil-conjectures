@@ -74,8 +74,7 @@ variable {ι : Type u} [Finite ι] (n : ι → Type u) [∀ i, Finite (n i)] (S 
 
 /-- **A finite fibre product of projective spaces over `S` embeds into a projective space
 over `S`**: the product `∏ᶜ fun i ↦ ℙ(n i; S)` in `Over S` admits a closed immersion into
-`ℙ(N; S)` for some finite index type `N`, namely the iterated Segre embedding.
-(blueprint: `lem:chow-segre`) -/
+`ℙ(N; S)` for some finite index type `N`, namely the iterated Segre embedding. -/
 theorem exists_isClosedImmersion_pi :
     ∃ (N : Type u) (_ : Finite N)
       (g : (∏ᶜ fun i ↦ Over.mk (ℙ(n i; S) ↘ S)) ⟶ Over.mk (ℙ(N; S) ↘ S)),

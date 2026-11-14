@@ -149,36 +149,7 @@ private theorem puncture_rotation
 
 /-- Exact stabilizers make a selected descended section a monomorphism.
 
-Source: Stacks Project, Tag 03SF, the finite Galois cover/permutation-set argument.
-(blueprint: lem-sbc-affine-torsor-stabilizer-section-mono)
-
-Proof: the structural map u : U -> Spec H is etale by
-`affine_torsor_invariant_puncture_etale`. Therefore f is formally unramified
-and locally of finite type, by the corresponding properties of f followed
-by its second projection. Its diagonal is consequently an open immersion.
-It remains to show that the diagonal is surjective.
-
-The inclusion F -> C is integral because C is finite over H. Lying over,
-restricted to the principal opens, makes q : V -> U surjective. Every deck
-map belonging to K fixes q, by the equalizer definition of F. On the connected
-nonempty V, the split-section reconstruction identifies a deck translate of
-the x-section with the section whose label is the explicit descent action.
-
-Suppose a,b : Spec Omega -> V have equal images under q followed by f.
-Their images over H agree, so hrot gives a rotation zeta with b = a followed
-by that deck map. The first-projection equation for f identifies their
-section values. Reconstruction and disjointness of the coproduct summands
-then give zeta(x) = x, hence zeta belongs to K. Since K fixes q, a and b
-have equal images under q.
-
-For a point z of U times_f U, pull back q along each projection in turn.
-Both pullbacks are surjective, so z lifts to their iterated pullback W.
-The residue field of a lift supplies the two maps a,b to V above. Their
-q-images agree, so the residue-field map to U times_f U factors through
-the diagonal. Evaluating at its closed point places z in the diagonal's
-image. The diagonal is a surjective open immersion, hence an isomorphism;
-therefore f is a monomorphism. This uses no finiteness or etaleness of p.
-For K = G or K trivial the same cancellation works; d = 0 has no x. -/
+Source: Stacks Project, Tag 03SF. -/
 theorem affine_torsor_stabilizer_section_mono
     (R H : CommRingCat.{u}) (g : R) (ι : R →+* H)
     (C : Type u) [CommRing C] [Algebra H C] [IsDomain C]

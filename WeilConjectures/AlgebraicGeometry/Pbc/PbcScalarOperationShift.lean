@@ -14,9 +14,8 @@ import WeilConjectures.Mathlib.CategoryTheory.Shift.Adjunction
 
 /-! # Shift coherence of scalar operation comparisons
 
-Source: blueprint proper base change, order 1307; Milne, Section 19.
+Source: Milne, Section 19.
 Existing declarations extracted from `PbcScalarExtension` to bound compilation cost.
-(blueprint: lem-pbc-scalar-operation-shift-coherence)
 -/
 
 @[expose] public noncomputable section
@@ -375,12 +374,7 @@ private theorem scalarCompletion_shift (W : Scheme.{u}) :
           (C.obj (K⟦n⟧))).property)
     exact pbcCompletion_hom_ext W (pbcIntegralDatum l F) _ _ hComplete a b hab
 
-/-- Both ambient scalar comparisons preserve the canonical derived shift structures.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-operation-shift-coherence).
-Proof: the ordinary tensor comparisons commute with shifts term by term. The
-universal derived counits and units fix their descendants uniquely. The completion
-comparison is fixed by the quotient augmentation, which has the same shift identity.
-Thus both natural transformations satisfy the displayed CommShift equations. -/
+/-- Both ambient scalar comparisons preserve the canonical derived shift structures. -/
 theorem pbcScalarOperations_shift :
     NatTrans.CommShift (pbcScalarDirectImageIso l E F i g).hom ℤ ∧
       NatTrans.CommShift (pbcScalarCompletedPullIso l E F i g).hom ℤ := by

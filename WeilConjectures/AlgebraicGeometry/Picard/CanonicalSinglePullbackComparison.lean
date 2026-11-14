@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.FlatModuleCanonicalDerivedPullback
 /-! # The pinned derived pullback comparison on a single module
 
 Source: Stacks Project, Tags 06YD, 06YJ and 08HY.
-(blueprint: lem-pc-canonical-single-pullback-comparison).
 -/
 
 @[expose] public section
@@ -32,15 +31,14 @@ variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
 /-- The additive structure used in the canonical derived composition comparisons.
-Source: Stacks, Tag 0D5S (blueprint: lem-pc-canonical-single-pullback-comparison). -/
+Source: Stacks, Tag 0D5S. -/
 abbrev canonicalTensorPullbackAdditive {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (tensorPullback f).Additive :=
   (Classical.choose exists_derivedPullbackComposition) f
 
 /-- The specified derived counit, followed by the single-complex comparison and the
 unique comparison of the two left adjoints to module pushforward.
-Source: Stacks, Tags 06YJ and 08HY
-(blueprint: lem-pc-canonical-single-pullback-comparison). -/
+Source: Stacks, Tags 06YJ and 08HY. -/
 def canonicalSinglePullbackMap {X Y : Scheme.{u}} (f : X ⟶ Y) (M : Y.Modules) :
     (AlgebraicGeometry.derivedPullback f).obj ((DerivedCategory.singleFunctor
       (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj M) ⟶
@@ -57,14 +55,7 @@ def canonicalSinglePullbackMap {X Y : Scheme.{u}} (f : X ⟶ Y) (M : Y.Modules) 
     (DerivedCategory.singleFunctor _ 0).map (t.hom.app M)
 
 /-- The pinned comparison is invertible on an invertible module.
-Source: Stacks, Tags 06YD and 06YJ
-(blueprint: lem-pc-canonical-single-pullback-comparison).
-
-Proof: An invertible module is quasi-coherent and intrinsically flat, including on
-an empty scheme. The single complex is bounded above and termwise flat. The
-left-derived counit is therefore invertible on it. Apply the canonical flat-module
-comparison theorem to this counit; compose with the single embedding of the unique
-adjunction-preserving tensor-pullback comparison, which is an isomorphism. -/
+Source: Stacks, Tags 06YD and 06YJ. -/
 theorem isIso_canonicalSinglePullbackMap {X Y : Scheme.{u}} (f : X ⟶ Y)
     (M : Y.Modules) [SheafOfModules.IsInvertible.{u, u, u} M] :
     IsIso (canonicalSinglePullbackMap f M) := by

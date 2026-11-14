@@ -21,10 +21,6 @@ import Mathlib.RingTheory.KrullDimension.Polynomial
 
 /-!
 # Roots-of-unity computation on the two lines
-
-Source: latest blueprint, sec-smooth-purity/sk-lem-sp-reduction/
-thm-pur-kummer-affine-line.proof.md, root-coefficient computation
-(blueprint: lem-pur-kummer-root-line-computation).
 -/
 
 @[expose] public noncomputable section
@@ -38,9 +34,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 /-- Roots-of-unity cohomology is killed by `m`, hence has its unique `ZMod m` action.
-Source: Stacks, Tag 03PK (blueprint: def-pur-kummer-module-coefficients).
-Proof: multiplication by m on the roots sheaf is zero by its kernel inclusion into G_m.
-The additive cohomology functor sends this equality to multiplication by m equal to zero. -/
+Source: Stacks, Tag 03PK. -/
 theorem kummerRootCohomology_annihilated (X : Scheme.{u}) (m q : ℕ)
     (x : Sheaf.H (X.rootsOfUnitySheaf m) q) : m • x = 0 := by
   have h : m • 𝟙 (X.rootsOfUnitySheaf m) = 0 := by
@@ -54,7 +48,7 @@ theorem kummerRootCohomology_annihilated (X : Scheme.{u}) (m q : ℕ)
   exact hx
 
 /-- The unique residue-ring action on roots-of-unity cohomology.
-Source: Stacks, Tag 03PK (blueprint: def-pur-kummer-module-coefficients). -/
+Source: Stacks, Tag 03PK. -/
 instance kummerRootCohomologyModule (X : Scheme.{u}) (m q : ℕ) :
     Module (ULift.{u + 1} (ZMod m)) (Sheaf.H (X.rootsOfUnitySheaf m) q) :=
   letI := AddCommGroup.zmodModule (kummerRootCohomology_annihilated X m q)
@@ -443,36 +437,7 @@ private lemma root_one (k : Type u) [Field k] [IsAlgClosed k]
 
 
 /-- Roots-of-unity cohomology on the affine and punctured lines, with the actual Kummer
-boundary of the coordinate as the degree-one generator.
-Source: latest blueprint thm-pur-kummer-affine-line.proof.md, the root calculation
-(blueprint: lem-pur-kummer-root-line-computation).
-
-Proof:
-(1) Both schemes are connected, as spectra of domains. The primitive-root trivialization
-identifies the roots sheaf with the constant Z/m sheaf. Constant sections on a connected scheme
-are exactly the constants. Evaluate the sheafification unit and the trivialization at the identity
-terminal object: 1 maps to the displayed scalar root zeta. These additive equivalences are linear
-for the lifted residue ring.
-(2) The root restriction commutes with inclusion in the unit sheaf. The degree-zero cohomology map
-on units is pullback of actual units. Pulling the scalar root along the open inclusion gives the
-same scalar on the punctured line because inclusion followed by the affine-line structure map is
-the punctured-line structure map. Injectivity of the root inclusion therefore gives
-restriction(z_false)=z_true.
-(3) The affine line has dimension at most one by the polynomial Krull-dimension formula. The
-punctured line is its principal open t not equal to zero, hence has dimension at most one. Both
-structure morphisms are separated, quasi-compact and locally of finite type. Multiplication by m
-annihilates the roots sheaf by the kernel condition, so it is torsion. The affine cohomological-
-dimension theorem gives vanishing for all q>1 on both curves.
-(4) The Kummer exact sequence says that the kernel of its degree-zero boundary is the subgroup of
-mth powers and its cokernel maps into H^1(Gm). Both Picard groups vanish, and Pic is canonically
-H^1(Gm), so the boundary is surjective. On the affine line its unit group is k-units; algebraic
-closure makes all these units mth powers, so H^1 is zero.
-(5) On the punctured line the first isomorphism theorem identifies H^1(mu_m) with the quotient of
-the unit group by mth powers. The explicit unit-quotient isomorphism gives (k-units modulo mth
-powers) times Multiplicative(ZMod m). The first factor is trivial by algebraic closure. Invert the
-resulting isomorphism to obtain the additive equivalence ZMod m to H^1. The explicit quotient
-formula for t fixes its value at 1 as the actual boundary of t. Lift the source ring and use
-automatic residue-ring linearity. -/
+boundary of the coordinate as the degree-one generator. -/
 theorem kummer_root_line_computation (k : Type u) [Field k] [IsAlgClosed k]
     (m : ℕ) (hmpos : 1 ≤ m) (hmk : IsUnit (m : k))
     (ζ : kˣ) (hζ : IsPrimitiveRoot ζ m)

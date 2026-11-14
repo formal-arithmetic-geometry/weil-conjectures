@@ -22,7 +22,6 @@ namespace AlgebraicGeometry.Scheme
 Source: Stacks Project, Tags 0307, 035I and 0539.
 Apply `Module.isTorsionFree_iff_algebraMap_injective` to the injectivity of the
 normalization stalk map established by the affine localization argument.
-(blueprint: lem-sbc-punctured-dvr-normalization-stalk-torsion-free)
 -/
 theorem punctured_dvr_normalization_stalk_torsionFree
     {X : Scheme.{u}} [IsLocallyNoetherian X] (U : X.Opens)

@@ -32,14 +32,7 @@ attribute [local irreducible] CategoryTheory.Sheaf.monoidalCategory
   DerivedCategory.monoidalClosed
   DerivedCategory.monoidalCategoryOfMonoidalClosedBraidedCategory
 
-/-- Evaluate the native kernel prefix with an arbitrary condensed coefficient ring.
-Source: rational projective-line triangle, First identity, section evaluation
-(blueprint: lem-sfb-native-section-tensor-prefix).
-Proof: projection naturality extends the supported-unit evaluation to the chosen
-kernel arrow. Naturality of the canonical diagram functor comparison identifies
-the resulting coefficient arrow. Transport the section through the path comparison,
-map the forward identity by the outer direct image, and cancel the specified
-inverse projection. The object-equality loop is the identity by proof irrelevance. -/
+/-- Evaluate the native kernel prefix with an arbitrary condensed coefficient ring. -/
 theorem native_section_tensor_prefix
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]

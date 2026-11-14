@@ -10,9 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.RationalP1.RationalP1SectionEval
 public import WeilConjectures.AlgebraicGeometry.RationalP1.Second.RationalP1SecondPretraceData
 
 /-! # The trace-free first projective-line Kunneth comparison
-
-Source: the First identity in the current rational projective-line triangle proof.
-(blueprint: lem-sfb-rational-p1-first-trace-pretrace).
 -/
 
 @[expose] public noncomputable section
@@ -33,23 +30,7 @@ attribute [local irreducible] condensedAmbientPullbackComparison
 
 /-- The trace-free Kunneth comparison, with the q projection cancelled.
 
-Source: current blueprint, rational projective-line triangle proof, First identity;
-the two Kunneth factorizations stated by ringedKunnethFactorizations.
-(blueprint: lem-sfb-rational-p1-first-trace-pretrace).
-
-Proof: apply the two Kunneth factorizations to M and the shifted line T. The first
-route is the q projection followed by exchange on M and the second projection.
-The second is the right-factor q projection followed by the opposite exchange on
-T and the first projection. Transport their equality by the conjugate path
-comparison. Naturality in the fixed secondLineComparison identifies the second route with
-firstTraceExchange. Expand twistProjectionMap and cancel the tensorShiftIso
-pairs. Invertibility of the displayed exchange and projections permits cancelling
-the first route and the first projection. The resulting equation is exactly the
-one below after postcomposing with the direct image of the arbitrary functional
-in the fixed first direct image, its single-unit comparison, and the right unitor.
-Functoriality combines this suffix with the inverse first projection into
-firstTerminalFunctional. Diagram supplies only the canonical first-direct-image
-identification. No prescribed trace, diagonal class, or integration equation is used. -/
+Source: the two Kunneth factorizations stated by ringedKunnethFactorizations. -/
 theorem first_trace_pretrace
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

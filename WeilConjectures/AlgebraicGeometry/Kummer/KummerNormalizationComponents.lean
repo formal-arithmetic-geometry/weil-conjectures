@@ -9,9 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Kummer.KummerPureKernelNormaliza
 import WeilConjectures.AlgebraicGeometry.Kummer.KummerComparedKernelTriangle
 import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalFiniteUnderlyingIsoLift
 
-/-! # The three properties of the concrete Kummer coefficient record
-Source: diagonal tower system proof, steps (2), (3), and (4).
-(blueprint: lem-sfb-kummer-normalization-components). -/
+/-! # The three properties of the concrete Kummer coefficient record. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -27,10 +25,7 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext DerivedCategory.singleF
   cartierProKummerUnit cartierProRootMap diagonalFiniteToPadic diagonalForget
   diagonalScalarExtension diagonalScalarAdjunction
 
-/-- The actual coefficient record has the signed Kummer triangles.
-Source: diagonal tower proof, steps (3) and (4)
-(blueprint: lem-sfb-kummer-normalization-components).
-Proof: unfold the record property and apply the proved Kummer-triangle theorem. -/
+/-- The actual coefficient record has the signed Kummer triangles. -/
 theorem strict_kummer_kernel_triangles (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     (hW : IsUnit (ℓ : Γ(W, ⊤)))
     [HasDerivedCategory.{u + 1} (DiagonalAb W)] :
@@ -38,10 +33,7 @@ theorem strict_kummer_kernel_triangles (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.
   unfold KummerNormalizationCoefficients.Kernel
   exact kummer_compared_kernel_triangle ℓ W hW
 
-/-- Pure evaluation supplies the evaluation property of the actual coefficient record.
-Source: diagonal tower proof, steps (2) and (3)
-(blueprint: lem-sfb-kummer-normalization-components).
-Proof: for every supplied H and b apply the generic pure-evaluation triangle. -/
+/-- Pure evaluation supplies the evaluation property of the actual coefficient record. -/
 theorem strict_kummer_evaluation_triangles (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     (hW : IsUnit (ℓ : Γ(W, ⊤)))
     [HasDerivedCategory.{u + 1} (DiagonalAb W)]
@@ -55,10 +47,7 @@ theorem strict_kummer_evaluation_triangles (ℓ : ℕ) [Fact ℓ.Prime] (W : Sch
   intro H b
   exact diagonal_pure_evaluation_triangle ℓ W D η _ H b
 
-/-- The actual coefficient record has the ordinary root-normalized scalar lift.
-Source: diagonal tower proof, steps (3) and (4)
-(blueprint: lem-sfb-kummer-normalization-components).
-Proof: unfold the record property and apply the proved finite-lift theorem. -/
+/-- The actual coefficient record has the ordinary root-normalized scalar lift. -/
 theorem strict_kummer_coefficient_lift (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     (hW : IsUnit (ℓ : Γ(W, ⊤))) :
     (strictKummerNormalizationCoefficients ℓ W hW).FiniteLift := by

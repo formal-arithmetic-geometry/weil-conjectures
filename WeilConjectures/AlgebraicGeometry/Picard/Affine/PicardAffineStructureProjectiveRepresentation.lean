@@ -23,7 +23,6 @@ import WeilConjectures.AlgebraicGeometry.OpenImmersionRestrictionDerivedProperti
 /-! # Picard affine structure projective representation
 
 Source: Stacks Project, Tags 0BF2, 0B91, 08EB and 06Z0.
-(blueprint: lem-sc-picard-affine-structure-projective-representation).
 -/
 
 @[expose] public section
@@ -183,22 +182,7 @@ private theorem open_trivialized_image_spectrum_comparison
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- A bounded finite-projective model of the restricted trivialized coefficient image.
-Source: Stacks Project, Tags 0BF2 (perfect-image paragraph), 0B91(2), 08EB and 06Z0.
-(blueprint: lem-sc-picard-affine-structure-projective-representation).
-
-Proof: Write R = Gamma(W,U). Exact open restriction and open base change identify
-this image on U with the derived direct image along X times S U -> U of the
-pulled-back M in degree zero. The given isomorphism replaces that coefficient
-by the structure sheaf. This sheaf is finitely presented and flat over U, since
-f is flat; properness and finite presentation persist under base change.
-Tag 0B91(2) makes its derived image perfect. Transport to Spec R using isoSpec
-and the equivalence of modules on U with modules on its localized open site.
-The affine derived quasi-coherent equivalence (06Z0) and perfectness criterion
-(08EB) give a bounded finite-projective R-complex P representing this image.
-Transport its representing isomorphism back through those exact equivalences;
-the termwise transport is precisely affinePerfectSheafification W U hU.
-The zero ring and empty affine open use the zero complex. No universal H0
-hypothesis is needed, and no terms or differentials are normalized. -/
+Source: Stacks Project, Tags 0BF2 (perfect-image paragraph), 0B91(2), 08EB and 06Z0. -/
 theorem picard_affine_structure_projective_representation
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

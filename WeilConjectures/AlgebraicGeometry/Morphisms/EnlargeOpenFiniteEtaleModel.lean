@@ -33,32 +33,7 @@ namespace AlgebraicGeometry.Scheme
 /-- An extension over a proper open containing the generic point extends over a strictly
 larger open. This is the local extension step, before Noetherian induction.
 
-Source: Stacks Project, Tag 0EYJ, proof of Lemma 58.31.8, the local claim and its spreading.
-(blueprint: lem-sbc-enlarge-open-finite-etale-model)
-
-Proof:
-Let s be a generic point of an irreducible component of S minus U. The inverse image
-of U in Spec O(S,s) is the punctured spectrum. Normality of the smooth total space
-implies full faithfulness of restriction of finite étale covers to the generic fibre,
-so the action on Z extends uniquely to the given model over c⁻¹(U). The torsor identities
-and surjectivity follow from generic comparison on this normal integral family.
-If the local base has dimension one it is a trait. Tameness follows because the
-ramification index divides the invertible group order. The tame normalization and
-trait test, using the split section fibre, give étaleness near the section. The special
-fibre is irreducible, so purity extends the cover across it (0EYG, 0EYH, 0EYI, 0EYE).
-In higher dimension normality gives depth two on the local base, and flatness transfers
-it to the total space. Extend the finite algebra by 0EY6; this extension is unique among
-depth-two extensions and commutes with flat base change. Complete a smooth affine
-neighbourhood of the section: it is a power series ring over the local base. The
-restriction to the punctured section is split, since it is finite étale over a normal
-integral base and split generically. By 0EY9 the cover on the punctured completion is
-split, so its depth-two extension is split. Flat descent and 0EYB imply étaleness on the
-missing fibre. Spread this local extension and glue it to the original one by 0BQ5
-and 0EY3. The resulting open V contains U and s, hence U < V, and still contains the
-generic point. For a disconnected torsor apply the connected argument to each component
-and its stabilizer. Stabilizer orders divide the invertible group order; the split
-section fibre meets every component. Induce and take the finite disjoint union to
-recover Z, and retain only the underlying finite étale cover and comparison. -/
+Source: Stacks Project, Tag 0EYJ, proof of Lemma 58.31.8, the local claim and its spreading. -/
 theorem GaloisCover.exists_larger_open_finiteEtale_model {S C : Scheme.{u}} [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]
     (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))

@@ -8,9 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalPureEvaluationTriangle
 public import WeilConjectures.AlgebraicGeometry.SixFunctors.PureKernelTriangleComparison
 
-/-! # The generic Kummer normalization proposition and its triangle criterion
-Source: diagonal tower proof, steps (3) and (4).
-(blueprint: lem-sfb-kummer-normalization-from-triangles). -/
+/-! # The generic Kummer normalization proposition and its triangle criterion. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -60,17 +58,7 @@ strict-system comparison. This definition constructs no data. -/
             ((DerivedCategory.singleFunctor A 0).obj ((V n).obj (P n))))
 
 /-- Signed multiplication triangles and an ordinary coefficient lift imply the
-prescribed root and evaluated-unit normalization.
-Source: diagonal tower proof, steps (3) and (4)
-(blueprint: lem-sfb-kummer-normalization-from-triangles).
-Proof: unpack the signed kernel triangles and evaluate a supplied pure comparison.
-Full faithfulness of shifted singles and comparison of triangles determine the
-underlying isomorphisms and their second-arrow equations. Cancelling monic kernel
-inclusions makes these isomorphisms natural along the actual root tower. Apply
-the supplied ordinary coefficient lift. Its underlying-map equation substitutes
-in the second-arrow equation and gives exactly the displayed normalization after
-expanding the canonical evaluation comparison. The supplied pure comparison is
-never constructed in this argument. -/
+prescribed root and evaluated-unit normalization. -/
 theorem kummer_normalization_of_triangles
     {A B : Type*} [catA : Category A] [abA : Abelian A] [hA : HasExt.{w} A]
     [catB : Category B] [abB : Abelian B]
@@ -127,9 +115,7 @@ theorem kummer_normalization_of_triangles
     Functor.mapIso_hom, Functor.comp_map, Category.assoc] using h
 
 /-- Shared coefficient parameters for normalization. Every field is actual data;
-no existence theorem or proof is used to choose any of it.
-Source: diagonal tower proof, steps (3) and (4)
-(blueprint: lem-sfb-kummer-normalization-from-triangles). -/
+no existence theorem or proof is used to choose any of it. -/
 structure KummerNormalizationCoefficients
     {A B : Type*} [Category A] [Abelian A] [hA : HasExt.{w} A]
     [Category B] (U : B ⥤ A) (C : ℕ → Type uC) where
@@ -146,9 +132,7 @@ structure KummerNormalizationCoefficients
   rootMap : ∀ n, R.obj (op n) ⟶ (V n).obj (P n)
 
 /-- Normalization for a shared coefficient record. This is the original generic
-proposition applied to its fields, with no new condition.
-Source: diagonal tower proof, steps (3) and (4)
-(blueprint: lem-sfb-kummer-normalization-from-triangles). -/
+proposition applied to its fields, with no new condition. -/
 def KummerNormalizationCoefficients.Normalized
     {A B : Type*} [Category A] [abA : Abelian A] [hA : HasExt.{w} A]
     [Category B] [abB : Abelian B]
@@ -161,9 +145,7 @@ def KummerNormalizationCoefficients.Normalized
   KummerPureKernelNormalization (abA := abA) (abB := abB) (hA := hA)
     (catC := s.catC) ℓ L U ad D C s.TateF s.V s.M s.R s.P s.κ s.rootNorm s.σ η
 
-/-- The signed kernel-triangle property for shared coefficients.
-Source: diagonal tower proof, steps (3) and (4)
-(blueprint: lem-sfb-kummer-normalization-from-triangles). -/
+/-- The signed kernel-triangle property for shared coefficients. -/
 def KummerNormalizationCoefficients.Kernel
     {A B : Type*} [Category A] [Abelian A] [HasExt.{w} A] [Category B]
     [HasDerivedCategory.{w} A] {U : B ⥤ A}
@@ -174,9 +156,7 @@ def KummerNormalizationCoefficients.Kernel
       (shiftFunctorAdd (DerivedCategory A) (1 : ℤ) 1).inv.app
         ((DerivedCategory.singleFunctor A 0).obj ((s.V n).obj (s.P n)))))
 
-/-- The pure-evaluation triangle property for shared coefficients.
-Source: diagonal tower proof, steps (2) and (3)
-(blueprint: lem-sfb-kummer-normalization-from-triangles). -/
+/-- The pure-evaluation triangle property for shared coefficients. -/
 def KummerNormalizationCoefficients.PureTriangles
     {A B : Type*} [Category A] [Abelian A] [HasExt.{w} A]
     [Category B] [Abelian B]
@@ -190,19 +170,14 @@ def KummerNormalizationCoefficients.PureTriangles
       ((DerivedCategory.singleFunctor (ℕᵒᵖ ⥤ B) 0).obj H)⟦(2 : ℤ)⟧),
     PureEvaluationTriangle ℓ L U ad D η s.M H b
 
-/-- The ordinary finite-lifting property for shared coefficients.
-Source: diagonal tower proof, steps (3) and (4)
-(blueprint: lem-sfb-kummer-normalization-from-triangles). -/
+/-- The ordinary finite-lifting property for shared coefficients. -/
 def KummerNormalizationCoefficients.FiniteLift
     {A B : Type*} [Category A] [Abelian A] [HasExt.{w} A] [Category B]
     {U : B ⥤ A} {C : ℕ → Type uC} (s : KummerNormalizationCoefficients U C) : Prop :=
   letI := s.catC
   FiniteKernelLift U s.R C s.TateF s.V s.P s.σ s.rootMap s.rootNorm
 
-/-- The generic triangle criterion with its coefficient parameters shared.
-Source: diagonal tower proof, steps (3) and (4)
-(blueprint: lem-sfb-kummer-normalization-from-triangles).
-Proof: apply kummer_normalization_of_triangles to the actual fields of s. -/
+/-- The generic triangle criterion with its coefficient parameters shared. -/
 theorem kummer_normalization_of_coefficients
     {A B : Type*} [catA : Category A] [abA : Abelian A] [hA : HasExt.{w} A]
     [catB : Category B] [abB : Abelian B]

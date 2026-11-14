@@ -18,9 +18,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.ExteriorTensorLiftHomExt
 
 /-!
 # Factorization of the pre-quotient wedge map
-
-Source: blueprint, Riemann--Roch, proof of (*), determinant paragraph,
-lift independence (blueprint: lem-sc-determinant-wedge-quotient-factor).
 -/
 
 @[expose] public section
@@ -45,9 +42,7 @@ the kernel of `q`. The cokernel universal property in the abelian category of mo
 gives `φ` with `q ≫ φ = ψ`. This statement asserts only factorization of two given maps, not
 the construction or the prescribed value of the final quotient wedge map. If `r₁ = 0`, the
 kernel sheaf is zero; if `r₃ = 0`, the quotient exterior map is the identity in degree zero.
-The empty scheme gives zero section modules, so the same reasoning applies.
-Source: blueprint, Riemann--Roch, proof of (*), determinant paragraph, lift independence
-(blueprint: lem-sc-determinant-wedge-quotient-factor). -/
+The empty scheme gives zero section modules, so the same reasoning applies. -/
 theorem determinant_wedge_quotient_factor {X : Scheme.{v}}
     (S : ShortComplex X.Modules) (hS : S.ShortExact) (r₁ r₂ r₃ : ℕ)
     (hr : r₂ = r₁ + r₃) [S.X₁.IsFiniteLocallyFreeOfRank r₁]

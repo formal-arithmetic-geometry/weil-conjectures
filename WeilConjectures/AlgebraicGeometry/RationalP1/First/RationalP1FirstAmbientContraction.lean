@@ -14,9 +14,6 @@ import WeilConjectures.AlgebraicGeometry.RationalP1.First.RationalP1FirstTraceTr
 import WeilConjectures.AlgebraicGeometry.RationalP1.RationalP1UnitFactorization
 
 /-! # First ambient projective-line contraction
-
-Source: the first and second kernel calculations in the rational projective-line
-triangle proof, before integration.
 -/
 
 @[expose] public noncomputable section
@@ -43,33 +40,7 @@ attribute [local irreducible] condensedAmbientExchange
 normalized by the literal ambient formulas. No natural transformation or adjunction for the twisted
 functor is assumed.
 No integration identity is used. The completed class need not be a limit class for this calculation.
-
-Source: current blueprint, sec-six-functors-basics/sk-prop-p1-adjunction-rational/
-sk-prop-p1-adjunction-rational-triangle.proof.md, First identity
-(blueprint: lem-sfb-rational-p1-first-ambient-contraction).
-
-Proof: Open the two normalization predicates and rewrite their HEq witnesses. The
-existential witnesses select only proofs of invertibility of fixed arrows. Put P = P¹_Y, W = P ×_Y
-P, R = Rq_*, A = p₁*, B = p₂*,
-S = Rp₁*, U = Rp₂*, and T_Z = L_Z[2]. Transport the canonical projection and exchange
-maps through the module/ringed-topos comparison, preserving their adjoint transposes.
-Cancel the tensorShiftIso factors in the unit and counit. The unit is the section map
-M → UΔ_*M, followed by U of the diagonal tensor isomorphism and the class, then the
-inverse of b_M: q*RM ⊗ T_P → U(AM ⊗ T_W). The counit is the inverse q projection
-followed by identity tensor Tr_q. Properness and the localizing projection formula
-make the remaining projection factors invertible.
-
-The two Kunneth factorizations, with second factor T_P, identify R(b_M) with the
-alternative factorization through S and the base-changed trace. Reference identifies
-the completed traces with family.zl, and the scalar squares in Family transport this
-equality to the selected rational or closure coefficient. The canonical base-change
-trace square identifies q*Tr_q with Tr_p₁ after exchange. Projection naturality then
-moves M outside S and moves the class through that projection. The inverse diagonal
-tensor map has identity adjoint transpose under Δ*p₁* = identity, so the projection
-section identity identifies its source with the coefficient right unitor on M.
-The full-unit normalizations of the selected diagram and its source identify the remaining
-arrow with support₁.hom ≫ R₁(delta) ≫ trace₁. Conjugating by singleUnitIso gives the
-stated literal endomorphism. No assertion that this integral equals identity is used. -/
+ -/
 theorem rationalP1_first_ambient_contraction
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

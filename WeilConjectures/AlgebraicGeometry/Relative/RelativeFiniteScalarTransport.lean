@@ -361,22 +361,7 @@ attribute [-instance] WeilConjectures.integralCoefficientAbSheafify
 /-- Transport and inverse image commute with derived scalar extension, without any
 assumption on cohomology, finite generation, or the coefficient homomorphism.
 
-Source: Stacks Project, Cohomology on Sites, Tag 06YY; Modules on Sites, Tags 03CY and 03D1.
-(blueprint: lem-weil-pbc-relative-finite-scalar-transport)
-
-Proof: restriction of scalars and precomposition with AsSmall.down commute on
-sections. Naturality of the two canonical constant-section isomorphisms identifies
-the scalar actions as well, giving the commutative square of exact restriction
-functors. The same holds for the restriction and inverse-image square, by the
-canonical ring-sheaf change adjunction. Pass these exact functors and their
-isomorphisms to the derived categories. The native scalar extension is left adjoint
-to pbcDerivedRestrict and the small-site extension to ConstantCompletion.dres.
-Compose the adjunctions with the inverse equivalences for relativeFiniteModelDerived
-and with the inverse-image/direct-image adjunction. The two composite right adjoints
-are isomorphic by the restriction squares. Uniqueness of left adjoints gives the
-displayed isomorphism. On K-flat representatives it is the map identifying the same
-pure tensors, so it agrees with the recorded adicFiniteExtension. No choice of a
-new derived scalar extension is made. -/
+Source: Stacks Project, Cohomology on Sites, Tag 06YY; Modules on Sites, Tags 03CY and 03D1 -/
 theorem relativeFiniteScalarTransport {X Y : Scheme.{u}} (g : Y ⟶ X)
     {B R : Type (u + 1)} [CommRing B] [CommRing R] (f : B →+* R) :
     Nonempty ((pbcDerivedExtend ((constantSheaf (ProEt.topology X)

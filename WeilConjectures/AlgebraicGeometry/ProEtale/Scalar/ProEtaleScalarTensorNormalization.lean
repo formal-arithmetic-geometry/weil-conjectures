@@ -64,9 +64,8 @@ set_option linter.privateModule false
 
 /-! # Underlying tensor normalization of pro-etale scalar pullback
 
-Source: Stacks Project, sites-cohomology.tex, Tag 07A4, proof on flat K-flat
-representatives; sites-modules.tex, Tag 03EL, coefficient-action normalization
-(blueprint: lem-sp-proetale-scalar-tensor-normalization).
+Source: Stacks Project, Tag 07A4, proof on flat K-flat representatives; Tag 03EL, coefficient-action
+normalization.
 
 The scalar-to-tensor identifications and the coefficient-factor identification are
 those already normalized in `ProEtaleScalarMateNormalization`. Tensor models are

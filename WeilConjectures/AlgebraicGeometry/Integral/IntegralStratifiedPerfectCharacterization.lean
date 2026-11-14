@@ -191,9 +191,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
 /-!
 # Integral stratified perfect characterization
 
-Source: Bhatt--Scholze, Definition 6.5.1, Proposition 6.6.11 and
-Proposition 6.8.11(1),(3)
-(blueprint: lem-weil-pbc-integral-stratified-perfect-characterization).
+Source: Bhatt--Scholze, Definition 6.5.1, Proposition 6.6.11 and Proposition 6.8.11(1), (3).
 
 The perfect and finitely presented models below are actual constant-module
 realizations extended to the completed coefficient ring. They are restricted to
@@ -565,129 +563,8 @@ private theorem stratified_perfect_bounded (T : Scheme.{u}) [IsNoetherian T]
   exact ⟨⟨a₀, (DerivedCategory.isGE_iff _ _).2 fun q hq ↦ key q (.inl hq)⟩,
     ⟨b₀, (DerivedCategory.isLE_iff _ _).2 fun q hq ↦ key q (.inr hq)⟩⟩
 
-/-- The three descriptions are equivalent. Source: Bhatt--Scholze, Definition 6.5.1,
-Proposition 6.6.11 and Proposition 6.8.11(3)
-(blueprint: lem-weil-pbc-integral-stratified-perfect-characterization).
-Proof, following the node step by step:
-
-1. Fix the completed coefficient convention throughout. The completed-constant reduction lemma
-gives flatness of A_T over the constant A-sheaf and A_T\otimes_A^L A/\varpi^n\simeq(A/\varpi^n)_T.
-For a stratum immersion i:S\to T, inverse image is exact and preserves limits, hence
-i^{-1}A_T=A_S; for a site object U\to S, slice restriction has the same property by the
-localization description. In particular these restrictions preserve finite reductions and their
-normalization maps. To check completeness, use the quotient-tower completion unit furnished by the
-constant-completion equivalence. Exact countable products compute derived products termwise, and
-the strict-tower Roos triangle computes its derived limit. Exact restriction preserving products
-therefore preserves this unit and its cone. The finite-stratum detection lemma, followed by
-covering detection of zero sheaves, shows that the cone vanishes on T if and only if it vanishes
-on all chosen stratum covers. Thus intrinsic completeness restricts to strata and covers and is
-detected on a finite stratification. This argument uses the actual coefficient isomorphism for
-immersions and slices, not scalar extension along an arbitrary scheme morphism.
-Uses: lem-weil-pbc-completed-constant-sheaf-reduction, lem-weil-pbc-proetale-immersion-limit-
-preservation, lem-weil-proetale-weakly-etale-localization, lem-weil-pbc-constant-completion-
-equivalence, lem-weil-proetale-countable-products-exact, lem-weil-derived-countable-products-core,
-lem-weil-pbc-ringed-strict-tower-homotopy-limit, lem-weil-pbc-noetherian-stratum-detection.
-
-2. For a bounded finite-projective A-complex P, its completed constant realization is A_U\otimes_A
-P termwise. Its finite reductions are the constant complexes P\otimes_A A/\varpi^n by the
-completed-constant reduction lemma. In each degree the finite-projective module is a summand of
-A^r; the transition maps on the corresponding constant sheaves are sectionwise surjective by the
-constant-module section lemma. On products of this tower, 1-s is sectionwise surjective: given
-(y_n), choose x_1 and recursively lift x_n-y_n to x_{n+1}, so x_n-q(x_{n+1})=y_n. Its kernel is
-the inverse limit. The limit of a finite-projective summand is the same summand of A_U^r. The Roos
-triangle therefore identifies the quotient completion unit with an isomorphism onto the original
-realized complex. Such a complex is intrinsically complete. A finite stratification with perfect
-local models has globally bounded cohomology and globally bounded reductions: each stratum is
-quasi-compact, so the covering axiom of the pro-etale site allows finitely many quasi-compact
-pieces of the trivializing cover to cover it; take the smallest and largest term degrees of their
-finitely many models. The finite-stratum detection lemma detects vanishing outside these bounds.
-Completeness also follows from step 1.
-Uses: lem-weil-pbc-completed-constant-sheaf-reduction, lem-weil-pbc-constant-module-section-
-properties, lem-weil-pbc-ringed-strict-tower-homotopy-limit, lem-weil-pbc-constant-completion-
-equivalence, lem-weil-pbc-noetherian-stratum-detection, definition-small-pro-etale-site--1.
-
-3. Assume (i). The uniform tower definition gives local complexes in a fixed term interval
-[d_0,d_1], and every cohomology sheaf of K_1 is finite lisse on its finite stratification. Uniform
-boundedness of the derived reductions requires a separate check: for every n\geq1, over the DVR A,
-[A\xrightarrow{\varpi^n}A] in degrees [-1,0] resolves A/\varpi^n. Flatness and finite reduction in
-the completed-constant reduction lemma therefore give the flat resolution
-[A_T\xrightarrow{\varpi^n}A_T] of (A/\varpi^n)_T. Tensoring a local complex from the uniform tower
-definition with this resolution has terms only in [d_0-1,d_1]. Its quasi-isomorphism with K_n on
-the chosen covers, and the finite-stratum detection of step 1, give that same global cohomological
-interval independently of n. In particular K_1 is bounded with intrinsically constructible
-cohomology. Finite-ring derived origin gives a bounded constructible etale complex L_1 with
-\nu_T^*L_1\simeq K_1; one may use the existing compatible witness, since bounded-below full
-faithfulness identifies it with this origin. By the definition of etale constructibility choose a
-finite stratification on which all the finitely many nonzero cohomology sheaves of L_1 are finite
-locally constant. A common refinement is obtained by intersecting the finitely many locally closed
-partitions and using their fibre-product immersions. Comparison-pullback identifies its
-restriction to every new stratum with the corresponding restriction of K_1. Apply finite-ring
-derived local constancy on each stratum to L_1. Since A/\varpi is a field, its bounded finite-
-module constant models are perfect: split cycles and boundaries as vector spaces to replace the
-complex by its finitely many finite-dimensional cohomology spaces in their degrees. Step 1 makes K
-intrinsically complete on every stratum. The coefficient ring is adically complete: for a
-compatible family in A/\varpi^n, choose representatives x_n\in A. Compatibility gives
-x_{n+1}-x_n\in\varpi^nA, so |x_m-x_n|_E\leq|\varpi|_E^n for m\geq n. Completeness of E gives a
-limit x in its closed unit ball A; each closed ball x_n+\varpi^nA contains that limit. Thus x has
-the prescribed residues, and \bigcap_n\varpi^nA=0 gives uniqueness. This verifies the extra adic-
-completeness hypothesis of the lifting lemma. The residue-lisse perfect-lifting lemma now gives
-pro-etale locally a perfect A-complex on each stratum. This proves (ii). No claim is made that a
-general finite-ring bounded complex is perfect; the residue field is essential here.
-Uses: def-weil-pbc-bounded-constructible-complete, def-weil-pbc-bounded-constructible-tower, prop-
-weil-pbc-site-comparison-finite-level, lem-weil-pbc-finite-ring-constructible-derived-origin, lem-
-weil-pbc-finite-ring-derived-local-constancy, lem-weil-l-adic-extension-integers-dvr, lem-weil-
-pbc-residue-lisse-perfect-lift, proposition-comparison-etale-derived-category--5,
-lem-weil-l-adic-extension- complete, lem-weil-l-adic-extension-absolute-value,
-lem-weil-pbc-completed-constant-sheaf- reduction, lem-weil-pbc-noetherian-stratum-detection,
-def-weil-pbc-etale-constructible-sheaf, thm- weil-pbc-site-comparison.
-
-4. Assume (ii). Steps 1 and 2 give intrinsic completeness and a common cohomological interval for
-all reductions K_n. Their restrictions to the given strata are constant perfect
-(A/\varpi^n)-complexes locally, so every finite-level cohomology sheaf is finite lisse there. The
-quotient tower has the strict realization and normalization cocycle of the coefficient-datum
-definition. Normalized constructible local effectivity supplies exactly the common local models
-required by the uniform tower definition. Finite-ring derived origin supplies L_n\in
-D^+(T_{\mathrm{et}},A/\varpi^n) and \alpha_n:\nu_T^*L_n\simeq K_n. Pullback commutes with
-coefficient tensor, so the source L_{n+1}\otimes^L_{A/\varpi^{n+1}}A/\varpi^n pulls back to K_n.
-Exact finite-level comparison reflects zero cohomology sheaves, by its sheaf unit; therefore this
-source is bounded before bounded-below full faithfulness is applied. Lift
-\alpha_n^{-1}\rho_n(\alpha_{n+1}\otimes^L A/\varpi^n) uniquely by full faithfulness to \beta_n.
-Its inverse also lifts, so \beta_n is an isomorphism. Faithfulness turns the quotient-cocycle
-equalities after pullback into equalities of the lifted maps. These are compatible etale-origin
-witnesses as required, not unrelated levelwise origins. All conditions of (i) hold.
-Uses: def-weil-pbc-adic-coefficient-datum, lem-weil-pbc-normalized-constructible-local-
-effectivity, lem-weil-pbc-finite-ring-constructible-derived-origin, lem-weil-pbc-ringed-topoi-
-derived-tensor-pullback, prop-weil-pbc-site-comparison-finite-level,
-theorem-bounded-below-cohomology-comparison, def-weil-pbc-bounded-constructible-complete.
-
-5. Assume (ii). On a perfect local model P, flatness over the constant A-sheaf identifies \mathcal
-H^q(A_U\otimes_A P) with A_U\otimes_A H^q(P). The kernels of the differentials in the finite-
-projective terms of P are finitely generated by Noetherian submodule finiteness, and their
-quotient cohomology modules are finitely generated. They are finitely presented over A by the
-Noetherian finite-presentation lemma. Step 2 supplies the global finite cohomological bound. These
-descriptions on the same strata are precisely (iii).
-Uses: lem-weil-pbc-completed-constant-sheaf-reduction, lem-weil-pbc-noetherian-submodule-finite,
-lem-sc-noetherian-finite-module-finite-presentation, lem-weil-l-adic-extension-integers-dvr.
-
-6. Let C be any cohomology sheaf allowed by (iii). On a stratum cover it is A_U\otimes_A N with N
-finitely presented. Choose a surjection A^r\to N. Its kernel is finitely generated by Noetherian
-submodule finiteness and torsion-free as a submodule of A^r. The DVR torsion-free module lemma
-makes it finite free. Thus 0\to A^s\to A^r\to N\to0 gives a perfect A-complex in degrees [-1,0].
-Flatness of A_U over the constant A-sheaf realizes this resolution with cohomology exactly C in
-degree zero. This proves (ii) for C[0], with the same two term bounds on all strata and covers;
-step 4 proves (i) for C[0]. This is a resolution argument, not an additional node restating the
-degree-zero clause.
-Uses: lem-weil-l-adic-extension-integers-dvr, lem-weil-pbc-noetherian-submodule-finite, lem-sc-
-dvr-fg-torsionfree-free, lem-weil-pbc-completed-constant-sheaf-reduction.
-
-7. Assume (iii), with \mathcal H^q(K)=0 outside [a,b]. Step 6 puts each \mathcal H^q(K)[-q] in
-(i). Start with \tau^{\leq a-1}K=0. For q=a,\ldots,b, the standard truncation triangle has
-vertices \tau^{\leq q-1}K, \tau^{\leq q}K, and \mathcal H^q(K)[-q]. Inductively the outer vertices
-belong to (i), and the uniform-complete triangulated lemma puts the middle vertex in (i). At q=b
-the middle vertex is K. This proves (iii) implies (i), completing all three equivalences. The
-induction is finite; it does not commute truncation with finite coefficient reduction.
-Uses: def-sbc-standard-tstructure-derived-category, lem-sf-derived-truncation-triangle, lem-weil-
-pbc-uniform-complete-triangulated. -/
+/-- The three descriptions are equivalent. Source: Bhatt--Scholze, Definition 6.5.1, Proposition
+6.6.11 and Proposition 6.8.11(3). -/
 theorem integralStratifiedPerfectCharacterization
     (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E]
@@ -733,12 +610,7 @@ theorem integralStratifiedPerfectCharacterization
     · exact hK.2
 
 /-- Closure under all shifts, ambient cones, standard truncations and cohomology in
-degree zero. Source: Bhatt--Scholze, Proposition 6.8.11(3)
-(blueprint: lem-weil-pbc-integral-stratified-perfect-characterization).
-Proof: uniform complete objects form a triangulated subcategory. By the characterization,
-standard truncations are bounded and retain the same allowed cohomology sheaves, with
-some replaced by zero; likewise cohomology placed in degree zero. Apply (iii) ⇒ (i).
-This uses no assertion that truncation commutes with finite reduction. -/
+degree zero. Source: Bhatt--Scholze, Proposition 6.8.11(3). -/
 theorem integralStratifiedPerfectClosure
     (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E]
@@ -826,27 +698,7 @@ theorem integralStratifiedPerfectClosure
 /-- The same conditions describe precisely the detailed integral category under
 its own coefficient hypotheses. The comparison is fixed by all quotient projections,
 so it compares the same completed ring and reduction functors.
-Source: Bhatt--Scholze, Definition 6.5.1 and Proposition 6.8.11(3)
-(blueprint: lem-weil-pbc-integral-stratified-perfect-characterization).
-Proof (step 8 of the node): For the detailed integral notation, use it only under its own
-coefficient hypotheses and with the same completed ring and reduction functors. Membership in (i)
-implies levelwise finite-torsion constructibility and the uniform interval, hence the reduction
-conditions of the detailed definition. Intrinsic completeness is the quotient completion condition
-by the constant-completion equivalence, and its Roos triangle supplies the completeness condition
-of the detailed definition. Conversely a detailed object has intrinsically constructible finite-
-level cohomology and the stipulated common interval. Its completeness Roos triangle identifies its
-underlying object with the quotient derived limit. The latter is the Koszul completion object and
-is intrinsically complete by the completion-reflector lemma; completeness is invariant under
-isomorphism. This argument only needs the object identification and does not assert uniqueness of
-a lift of its projection maps. Normalized constructible local effectivity gives the required
-uniform tower models, and the full-faithfulness lifting argument in step 4 gives compatible etale
-witnesses. Thus it belongs to (i). No equality between the constant and completed ambient module
-categories is used.
-Uses: def-weil-derived-complete-integral-detailed, def-weil-derived-complete, def-weil-finite-
-torsion-constructibility, def-weil-pbc-bounded-constructible-complete, lem-weil-pbc-constant-
-completion-equivalence, lem-weil-pbc-ringed-koszul-completion-reflector, lem-weil-pbc-normalized-
-constructible-local-effectivity, theorem-bounded-below-cohomology-comparison,
-lem-weil-pbc-ringed-topoi-derived- tensor-pullback, prop-weil-pbc-site-comparison-finite-level. -/
+Source: Bhatt--Scholze, Definition 6.5.1 and Proposition 6.8.11(3). -/
 theorem integralStratifiedPerfectDetailed
     (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

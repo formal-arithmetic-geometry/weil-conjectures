@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionAffineChar
 /-! # Affine localization coordinates and their restriction squares
 
 Source: Stacks Project, Tags 0BLH and 05EL.
-(blueprint: lem-sbc-punctured-completion-affine-coordinate-squares)
 -/
 
 @[expose] public section
@@ -52,24 +51,7 @@ private theorem chart_scalar
 /-- Affine localization gives coordinates on chart intersections and completed charts,
 with all four maps from the original section modules commuting with restriction.
 
-Source: Stacks Project, Tag 0BLH, first two proof paragraphs; Tag 05EL, item (1).
-
-Proof: the finite morphisms make E and each chart V_j affine. Apply
-exists_affine_chart_transitions to obtain T and affine_chart_transition_coherence
-to supply the square and cocycle fields of X, keeping the modules and transition
-maps of T.F. Recover A-linearity of T.c_j by restricting to V_j intersect V_j:
-that restriction is an isomorphism, and T.b_right and T.b_scalar identify its
-value on a scalar multiple with the structural scalar times the restricted
-section. Functoriality of the structure presheaf identifies the two structural
-scalar maps. Upgrade T.c_j to the A-linear equivalence d_j without changing
-its function. Similarly, C-linearity of T.e and naturality of GammaSpecIso
-along A to C identify the restricted A-action with the displayed aE action;
-this gives e. Take the underlying equivalences of T.d_j and T.b_ij for b_j
-and c_ij. The four equations are T.d_prime, T.d_chart, T.b_left and T.b_right.
-All existential witnesses are eliminated in this proposition; no definition
-chooses arbitrary data. No cover or H0 assertion is needed. The same argument
-includes t=0, zero or nilpotent generators, and empty principal opens.
-(blueprint: lem-sbc-punctured-completion-affine-coordinate-squares) -/
+Source: Stacks Project, Tag 0BLH, first two proof paragraphs; Tag 05EL, item (1). -/
 theorem exists_affine_coordinate_squares
     {A : Type u} [CommRing A] [IsLocalRing A]
     {U : (Spec (.of A)).Opens}

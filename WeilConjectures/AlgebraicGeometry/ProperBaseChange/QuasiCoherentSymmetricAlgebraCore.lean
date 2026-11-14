@@ -10,7 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.SymmetricAlgebraSheaf.SymmetricA
 /-! # Core universal property for the symmetric algebra sheaf
 
 Source: Stacks Project, Modules, Lemmas 01CG and 01CL.
-(blueprint: lem-weil-pbc-quasi-coherent-symmetric-algebra-core).
 -/
 
 @[expose] public section
@@ -93,14 +92,7 @@ private noncomputable def liftAlgebra : algebra F ⟶ B :=
 end SymmetricAlgebraSheaf
 
 /-- The sheafification has the symmetric-algebra universal property for its degree-one map.
-Source: Stacks Project, Modules, Lemma 01CG (lemma-local-tensor-algebra) and Algebra,
-Section 00DM. (blueprint: lem-weil-pbc-quasi-coherent-symmetric-algebra-core).
-
-Proof: extend the module morphism sectionwise using SymmetricAlgebra.lift. Both composites
-with restriction agree on scalars and degree-one generators, so the extensions are natural.
-Sheafification extends this transformation uniquely. Its scalar compatibility makes it a
-morphism under the structure sheaf. Any other extension agrees on generators before
-sheafification and therefore agrees after sheafification by its universal property. -/
+Source: Stacks Project, Modules, Section 00DM. -/
 theorem exists_quasiCoherentSymmetricAlgebra_core
     (X : Scheme.{u}) (F : X.Modules)
     (B : X.CommAlgebraSheaf) (f : F ⟶ B.toModule) :

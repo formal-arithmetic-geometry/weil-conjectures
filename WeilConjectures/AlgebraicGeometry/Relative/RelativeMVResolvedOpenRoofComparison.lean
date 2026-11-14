@@ -250,26 +250,7 @@ private theorem open_resolution_denominator
     (open_resolution_denominator_intersection g' K' s hs W W)
 
 /-- A normalized direct-image roof on one open realizes the prescribed local
-base-change arrow. Source: Stacks Project, Tags 08BV, 08FE, 08HY and 0D5T.
-(blueprint: lem-pc-relative-mv-resolved-open-roof-comparison).
-Proof: Compare each open-image complex with exact restriction followed by derived
-open direct image of its coefficient object, using its K-injective computation
-and the resolution isomorphism. Naturality of open-image localization identifies
-the open image of r with H_W of the transpose of phi. The image-resolution
-intersection comparison, applied to W,W and transported along inf_idem, identifies
-the open component of s with its direct-image unit, Rg' of the target comparison
-and schemeMVOpenComparison.hom. Compose the comparison for L with the inverse
-open comparison. The normalized coefficient-roof theorem now computes the roof
-for the coefficient morphism H_W(transpose(phi)) followed by the inverse open
-comparison. The proved derivedBaseChange_open_transpose identifies this morphism
-with the transpose of the exact-open coefficient base-change map. Expanding the
-composite counit turns the outer conjugate square into the transpose of
-mvBaseChangeOpenMap. Follow the source comparison by Lg of relativeMVExactOpenIso
-and the target comparison by relativeMVInverseOpenIso. Its proved mate equation
-identifies the resulting map with the specified local arrow. Adjunction naturality
-transports the two comparisons through the Hom equivalence. No cover, second open,
-row, exactness or biproduct enters; empty and full opens and zero phi satisfy the
-same naturality equations. -/
+base-change arrow. Source: Stacks Project, Tags 08BV, 08FE, 08HY and 0D5T. -/
 theorem relativeMV_resolved_open_roof_comparison
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

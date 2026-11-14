@@ -14,8 +14,7 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 /-!
 # Pullback and coefficient comparisons for finite-ring associated module sheaves
 
-Source: Stacks Project, Tags 0DV5 (3), 0DV6, 04TR and 04TS
-(blueprint: lem-weil-pbc-finite-ring-torsor-module-comparisons).
+Source: Stacks Project, Tags 0DV5 (3), 0DV6, 04TR and 04TS.
 -/
 
 @[expose] public section
@@ -214,17 +213,7 @@ private theorem trivial_comparison (Λ : Type (u + 1)) [CommRing Λ] :
 
 /-- The associated sheaf of a representation becomes its constant value upstairs,
 and the trivial coefficient representation gives the constant coefficient sheaf.
-Source: Stacks Project, Tags 0DV5 (3), 0DV6, 04TR and 04TS
-(blueprint: lem-weil-pbc-finite-ring-torsor-module-comparisons).
-
-Proof: Evaluate on the graph upstairs. The torsor splitting extends a function by
-rho(g) on each graph translate, proving the evaluation is a linear equivalence.
-Its restriction and representation naturalities give the presheaf comparison.
-Sheafification commutes with etale localization restriction, giving the pullback
-comparison. For the unit, the map from coefficients to invariant functions is
-locally bijective: its local surjectivity follows by covering with open fibres
-of a function, and its local injectivity follows from surjectivity of the torsor.
-Sheafification inverts this map. Empty objects and the zero ring cause no exception. -/
+Source: Stacks Project, Tags 0DV5 (3), 0DV6, 04TR and 04TS. -/
 theorem associatedModuleFunctorOver_comparisons (Λ : Type (u + 1)) [CommRing Λ] :
     let C := ModuleCat.{u + 1} Λ
     let T := c.associatedModuleFunctorOver Λ

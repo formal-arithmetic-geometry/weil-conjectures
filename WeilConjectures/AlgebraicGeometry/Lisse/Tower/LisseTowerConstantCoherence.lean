@@ -1315,8 +1315,7 @@ private theorem constantRealization_coherence (M : ModuleCat.{u + 1} (lisseTower
 
 /-- The ordinary constant comparisons are compatible with the coefficient restriction
 from level `n + 1` to level `n`: both composites send every constant section to itself.
-Source: Stacks Tags 03CY, 03DA and 0H7J
-(blueprint: lem-weil-pbc-lisse-tower-constant-complex-comparisons). -/
+Source: Stacks Tags 03CY, 03DA and 0H7J. -/
 theorem lisseTowerOrdinaryConstant_coherence :
     (lisseTowerOrdinaryConstantScalarIso g a b d n ≪≫
         lisseTowerOrdinaryConstantModelIso g a b d n).hom =
@@ -1349,8 +1348,7 @@ theorem lisseTowerOrdinaryConstant_coherence :
 
 /-- The derived constant comparisons built from the natural constant model satisfy the
 coefficient identity on every represented complex.
-Source: Stacks Tags 03CY, 03DA and 05RU
-(blueprint: lem-weil-pbc-lisse-tower-constant-complex-comparisons). -/
+Source: Stacks Tags 03CY, 03DA and 05RU. -/
 theorem lisseTowerConstantModel_coherence
     (K : CochainComplex (ModuleCat.{u + 1} (lisseTowerEtaleRing d n)) ℤ) :
     ((lisseTowerConstantScalarIso g a b d n) ≪≫

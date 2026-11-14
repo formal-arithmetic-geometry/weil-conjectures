@@ -14,7 +14,6 @@ import Mathlib.RingTheory.Etale.StandardEtale
 # Etaleness of the punctured root cover
 
 Source: Stacks Project, Tag 0EYG, off-divisor branch.
-(blueprint: lem-sbc-root-split-away-cover-etale)
 -/
 
 @[expose] public section
@@ -24,15 +23,6 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The punctured root cover is etale over the original affine base.
 Source: Stacks Project, Tag 0EYG, off-divisor branch.
-(blueprint: lem-sbc-root-split-away-cover-etale)
-
-Proof: Write f=X^n-C(g) and choose a unit u with u=n in R. The polynomial
-identity f'*(C(u^-1)*X) + f*(-1) = C(g) exhibits (f,C(g)) as a standard
-etale pair. Its ring is R-algebra isomorphic to A[1/g], so this explicit
-localization is etale over R. The standard basic-open isomorphism identifies
-its spectrum with V and its structure map with V.ι followed by q. Transfer
-etaleness along this isomorphism. The identity also works for n=1 and g=0;
-n=0 is excluded and the zero ring causes no exception.
 -/
 theorem root_split_away_cover_etale
     (R : CommRingCat.{u}) (g : R) (n : ℕ) (hn : 0 < n ∧ IsUnit (n : R)) :

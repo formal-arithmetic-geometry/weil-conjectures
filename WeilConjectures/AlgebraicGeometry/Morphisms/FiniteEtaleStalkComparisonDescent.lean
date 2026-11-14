@@ -18,7 +18,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 # Descent of a comparison between two existing finite etale models
 
 Source: Stacks Project, Tag 0BQ5, comparison descent in its proof.
-(blueprint: lem-sbc-finite-etale-stalk-comparison-descent)
 -/
 
 @[expose] public section
@@ -346,28 +345,7 @@ private theorem overlap_transition_affine {S C : Scheme.{u}} (c : C ⟶ S)
 on an open overlap after shrinking the second neighbourhood.
 
 Source: Stacks Project, Tag 0BQ5 (limits-lemma-glueing-near-point), the last
-paragraph of the proof, using the morphism and equality parts of Tag 01ZM.
-(blueprint: lem-sbc-finite-etale-stalk-comparison-descent)
-
-Proof:
-1. Restrict the affine neighbourhood diagram to V containing s and contained in W;
-   this inclusion is initial. Pullback pasting and connected limits show that the
-   overlap cone has limit C_U times_C C_s^loc. Noetherianity of C makes its overlap
-   opens qcqs, and pullback squares over inclusions of affine V give affine transitions.
-   The equation for l identifies the restriction of the fixed model R to this
-   limit with the iterated pullback appearing in the hypothesis.
-2. Both covers on each overlap are finite etale, hence finitely presented. Apply
-   exists_iso_of_isPullback to their two cartesian models of the same limit cover.
-   This proved theorem descends the comparison and its inverse by Tag 01ZM.
-3. The same theorem descends their inverse equations at a common later stage.
-   Lift its underlying scheme isomorphism to the category of finite etale covers
-   using the proved compatibility with the structure morphisms.
-4. Pullback pasting identifies the second cover with the restriction to the overlap
-   of (FiniteEtale.pullback (C.homOfLE (c.preimage_mono hVW))).obj R.
-   The first cover is PA restricted by the left inclusion. These identifications
-   produce the stated isomorphism. V is contained in W and still contains s.
-The empty overlap is allowed: the same descent of maps and equations applies;
-no new finite etale model and no gluing over the union are required. -/
+paragraph of the proof, using the morphism and equality parts of Tag 01ZM. -/
 theorem FiniteEtale.exists_neighbourhood_comparison_of_stalk {S C : Scheme.{u}}
     [IsNoetherian S] [QuasiSeparatedSpace S]
     (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [LocallyOfFinitePresentation c]

@@ -10,9 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
 import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPresheafOpenPullback
 
 /-! Auxiliary homotopy data for exterior sheaf restriction.
-
-Source: blueprint, Riemann--Roch, proof of (*), determinant paragraph.
-(blueprint: lem-sc-exterior-sheaf-restrict-hom-data).
 -/
 
 @[expose] public section
@@ -24,7 +21,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- The comparison between the restricted exterior sheaf and the exterior sheaf of the
 restricted module has mutually inverse morphisms.
-(blueprint: lem-sc-exterior-sheaf-restrict-hom-data)
 The construction is by sheafifying the
 sectionwise map carrying a pure wedge to the wedge of the corresponding restricted sections;
 the inverse is obtained from the opposite sectionwise identification. The two composites are

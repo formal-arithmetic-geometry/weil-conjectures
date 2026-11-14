@@ -21,8 +21,7 @@ attribute [local irreducible] coefficient line firstProjection secondProjection 
 attribute [local irreducible] condensedAmbientExchange
 /-- The explicit second-trace exchange equality used by the scalar component.
 It is packaged as a proposition so callers do not repeatedly normalize its
-large categorical expression during elaboration.
-(blueprint: lem-sfb-scalar-trace-equation) -/
+large categorical expression during elaboration. -/
 structure ScalarTraceWitness
     (l : ℕ) [Fact l.Prime]
     (c : Option (PadicAlgCl.FiniteIntermediateField l))
@@ -36,8 +35,7 @@ structure ScalarTraceWitness
         (firstLineComparisonForTrace l c k p hpl Y).hom
 
 /-- Construct the packaged second-trace exchange witness from the trace
-calculation in the scalar P1 square.
-(blueprint: lem-sfb-scalar-trace-equation) -/
+calculation in the scalar P1 square. -/
 theorem scalar_trace_equation
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

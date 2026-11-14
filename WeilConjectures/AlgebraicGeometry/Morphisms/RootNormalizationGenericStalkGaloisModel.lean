@@ -72,33 +72,7 @@ private theorem basicOpen_pullback_torsor_square
 set_option linter.unusedVariables false in
 /-- A root-normalization residue extension has a finite flat Galois integral-closure model.
 
-Source: Stacks Project, Tags 0307 and 09EB, and the root-chart argument of
-`lem-sbc-root-normalization-generic-stalk-residue-degree-dvd`.
-
-Proof: Put n=|G|>0. The monic root quotient is free over H. Thus g stays regular,
-and t^n=g makes t regular. Evaluation at t=0 gives A/(t)=H/(g), a domain.
-Consequently (t) is prime, has height one by the principal ideal theorem, and is
-not minimal because t is regular. The assumed regular local ring at (t) is a DVR.
-The Cartier centre's support is V(t), so its generic point maps to (t).
-Let R₀ be the displayed stalk N.presheaf.stalk (j η), this DVR, with fraction field K.
-The compatibility of beta identifies p over V with the base change of W to V.
-As K maps into V, the generic fibre is a G-torsor over K. Choose the connected
-field factor containing the generization of x, and let T be its stabilizer in G.
-Simple transitivity of the G-action makes this field factor a finite Galois
-extension of K with group T. Let S be the integral closure of R₀ in that field.
-Tag 0307, or normalization stalk base change, identifies the localized relative
-normalization with the product of these integral closures. Its assumed finiteness
-makes S finite over R₀. As a subring of a field S is a domain and is torsion free;
-over the DVR R₀ it is therefore flat. The T-action preserves S, is faithful, and
-has invariant ring R₀: invariants belong to K and are integral over the normal
-ring R₀, hence belong to R₀. This supplies IsGaloisGroup T R₀ S. The chosen point
-x corresponds to a prime q₀ of S. Localization respects the canonical base maps,
-so the two residue-field extensions are isomorphic over the corresponding base
-residue fields. Their finranks agree, giving the displayed inertia-degree equality.
-This statement asserts the local model and its residue comparison, and uses neither
-the fundamental degree formula nor any residue-degree divisibility assertion.
-Empty normalization fibres are vacuous; n=1 gives the single trivial generic factor.
-(blueprint: lem-sbc-root-normalization-generic-stalk-galois-model) -/
+Source: Stacks Project, Tags 0307 and 09EB. -/
 theorem root_normalization_generic_stalk_galois_model
     {L U : Scheme.{u}} (i : U ⟶ L)
     (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)

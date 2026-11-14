@@ -9,8 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.Pbc.PbcDescentInterfaces
 import WeilConjectures.AlgebraicGeometry.Pbc.PbcDirectImageFamilyShiftCompatible
 
 /-! # Exact structures on a normalized direct-image family
-
-Source: blueprint main-20261015, proper base change, order 1312, final paragraph.
 -/
 
 @[expose] public noncomputable section
@@ -44,28 +42,7 @@ variable {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
 
 /-- The fixed actual direct-image family admits the compatible exact structures.
 The input family, including its scalar coherence, is supplied independently.
-Source: blueprint main-20261015, order 1312, final operations paragraph, exactness
-clause; orders 1306 and 1307, rational exact transport and scalar shift equations
-(blueprint: lem-weil-pbc-direct-image-family-exact).
-
-Proof: on each integral full subcategory use the inherited shift, the ordinary
-right-derived direct-image shift and preservation of ambient distinguished
-triangles. The fully faithful inclusion reflects the exactness of its conditional
-restriction. Rationalization has the integral-image characterization of
-triangles, so localizing the integral shift and conjugating by the localization
-square gives an exact shift structure on the actual rational operation. Transport
-it along hR to the specified stage functor. The scalar direct-image comparison
-commutes with shifts by pbcScalarOperations_shift. The completed coefficient maps
-are equal to the corresponding small-field maps, and both ambient scalar shift
-structures are characterized by the same derived counit, so these comparisons
-have the same shift normalization in the stage presentation. Restrict and
-localize this equation. The scalar/integral comparisons themselves commute with
-shifts, so the two direct-image BetaSpec conjugations cancel and imply the
-required shift equation for each R.β. Every rational object is an integral
-representative; thus this verifies the natural-transformation equation at every
-object and every integer. Additivity follows from tensor base change of the
-integral arrow maps. Package these data with the unchanged family R. No nonempty
-scheme or strictness assumption for repeated coefficient fields is used. -/
+Source: orders 1306 and 1307, rational exact transport and scalar shift equations. -/
 theorem pbcDirectImageFamilyExact (f : X ⟶ Y)
     (pres : ∀ (E : Padic.FiniteCoefficientFields l Ω)
       (K : pbcIntegralStage l Ω X E),

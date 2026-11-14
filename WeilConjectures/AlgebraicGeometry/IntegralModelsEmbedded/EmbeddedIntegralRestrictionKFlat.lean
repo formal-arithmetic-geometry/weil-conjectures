@@ -193,29 +193,7 @@ private theorem flat_from_small (X : Scheme.{u})
 attribute [-instance] integralModel_coefficientMonObj in
 /-- Restriction of embedded integral scalars preserves K-flat cochain complexes.
 
-Source: integral-models proof, first paragraph (1), flat scalar restriction;
-Stacks Tags 06YN, 06YY and 03ER.
-(blueprint: lem-sfb-embedded-integral-restriction-kflat).
-
-Proof: the existing embedded scalar-flatness theorem gives flatness of the
-restricted regular B-module on the coefficient-sized equivalent site. Translate
-categorical flatness to the independent-universe flatness predicate. Flatness
-on the original pro-etale site follows from the local equational criterion:
-lift an object and a finite relation by AsSmall.up, take its covering solution
-on the small site, and push that covering sieve through AsSmall.down. Fullness,
-faithfulness and the induced-topology criterion identify the covering and all
-its local solutions. This includes empty covering sieves.
-
-Section-module reconstruction commutes with scalar restriction and sends the
-regular internal B-module to the sectionwise unit module. Transport flatness
-along those specified isomorphisms. The section tensor comparison identifies
-native K-flatness of P with independent-coefficient K-flatness of its section
-complex. Apply flat scalar restriction for sheaves of modules: tensoring an
-acyclic R-complex with restricted P is identified with the restriction of its
-scalar extension tensored over B with P. Flatness makes scalar extension exact,
-so this is acyclic. Finally undo the restriction and section tensor isomorphisms.
-The argument treats arbitrary integer-indexed complexes and does not infer flat
-terms from K-flatness. -/
+Source: Stacks Tags 06YN, 06YY and 03ER. -/
 theorem embeddedIntegralRestrictionKFlat
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (π : PadicAlgCl.integers ℓ E.1)

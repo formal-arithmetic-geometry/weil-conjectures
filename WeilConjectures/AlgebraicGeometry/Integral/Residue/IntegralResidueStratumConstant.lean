@@ -60,7 +60,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-! # Constant perfect complexes under the normalized stratum comparison
 
 Source: Bhatt--Scholze, Lemma 6.5.8(1) and Proposition 6.6.11.
-(blueprint: lem-weil-pbc-integral-residue-stratum-constant).
 -/
 
 @[expose] public section
@@ -120,27 +119,7 @@ attribute [local irreducible] completedAdicDerivedChange
 
 /-- The normalized coefficient comparison carries constant perfect realizations to
 constant perfect realizations. No complete input object or residue charts are involved.
-Source: Bhatt--Scholze, Lemma 6.5.8(1), Lemma 6.6.8, Proposition 6.6.11.
-(blueprint: lem-weil-pbc-integral-residue-stratum-constant).
-
-Proof: represent P by a bounded finite-projective complex B over O_E. Apply the
-module-universe lift and restrict its scalar action along ULift.down to obtain a
-complex B' over PbcIntegralRing l E. The module equivalences preserve finite generation
-and projectivity, and carry zero terms to zero, so Q(B') is perfect. Take this as Q.
-
-For a module N over PbcIntegralRing l E, both ways of realizing it on S are left
-adjoints to scalar restriction followed by evaluation at the base change of a
-terminal pro-etale object of T. The normalized coefficient projection equations
-identify their scalar actions. Identity maps on sections give a natural linear
-isomorphism of the right adjoints, hence uniqueness of left adjoints gives the
-ordinary comparison, as proved in integralResidueStratum_ordinary.
-The constant realization
-of B' is bounded above with flat terms, hence K-flat, so the derived scalar extension
-is computed by ordinary scalar extension on this representative. Apply the exact
-left-side functors' localization factorization isomorphisms and this K-flat comparison.
-This gives the displayed isomorphism. Finally transport along the chosen realization of P.
-The comparison is independent of that representative by naturality. The zero complex,
-empty stratum, and complexes with nonzero differentials are included. -/
+Source: Bhatt--Scholze, Lemma 6.5.8(1), Lemma 6.6.8, Proposition 6.6.11. -/
 theorem integralResidueStratum_constant
     (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

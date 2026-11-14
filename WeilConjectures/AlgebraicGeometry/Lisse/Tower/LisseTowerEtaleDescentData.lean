@@ -34,14 +34,14 @@ namespace AlgebraicGeometry.Scheme
 attribute [local irreducible] HasDerivedCategory.standard
 
 /-- Completion quotient coefficients, indexed by positive exponents.
-Source: Stacks Tag 031C (blueprint: lem-weil-pbc-lisse-tower-etale-descent). -/
+Source: Stacks Tag 031C. -/
 abbrev lisseTowerEtaleRing {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (n : ℕ) :=
   AdicCompletion d.ideal A ⧸
     (d.ideal.map (algebraMap A (AdicCompletion d.ideal A))) ^ (n + 1)
 
 /-- The consecutive quotient homomorphism.
-Source: Stacks Tag 031C (blueprint: lem-weil-pbc-lisse-tower-etale-descent). -/
+Source: Stacks Tag 031C. -/
 def lisseTowerEtaleQuotient {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (n : ℕ) :
     lisseTowerEtaleRing d (n + 1) →+* lisseTowerEtaleRing d n :=
@@ -49,7 +49,7 @@ def lisseTowerEtaleQuotient {A : Type (u + 1)} [CommRing A]
     (I := d.ideal.map (algebraMap A (AdicCompletion d.ideal A))) (Nat.le_succ (n + 1)))
 
 /-- Forget quotient coefficients to the completion.
-Source: Stacks Tag 06YY (blueprint: lem-weil-pbc-lisse-tower-etale-descent). -/
+Source: Stacks Tag 06YY. -/
 abbrev lisseTowerAlgebraForget {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (n : ℕ) :=
   (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1}
@@ -57,7 +57,7 @@ abbrev lisseTowerAlgebraForget {A : Type (u + 1)} [CommRing A]
       (algebraMap A (AdicCompletion d.ideal A))) ^ (n + 1)))).mapDerivedCategory
 
 /-- The algebraic arrow after forgetting scalars, with the specified compositors.
-Source: Stacks Tag 06YY (blueprint: lem-weil-pbc-lisse-tower-etale-descent). -/
+Source: Stacks Tag 06YY. -/
 def lisseTowerAlgebraArrow {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (n : ℕ)
     {E : DerivedCategory (ModuleCat.{u + 1} (lisseTowerEtaleRing d (n + 1)))}
@@ -87,8 +87,7 @@ attribute [local irreducible] pbcDerivedRestrict
 
 /-- Raw etale descent data. The source arrows are not supplied: the model comparison
 respects *every* algebraic arrow. There are no Isom-sheaf reduction maps or evaluations.
-Source: Stacks Tags 099Z, 09B1, 099Y and 06YY
-(blueprint: lem-weil-pbc-lisse-tower-etale-descent). -/
+Source: Stacks Tags 099Z, 09B1, 099Y and 06YY. -/
 structure LisseTowerEtaleDescent
     (X Y : Scheme.{u}) (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
@@ -199,8 +198,7 @@ structure LisseTowerEtaleDescent
 
 /-- The normalization and realization part of descent, relative to already descended
 etale levels. There are no local marking, finiteness or stalk fields in this record.
-Source: Stacks Tags 06YY, 099Z and 09B1
-(blueprint: def-weil-pbc-lisse-tower-etale-descent-data). -/
+Source: Stacks Tags 06YY, 099Z and 09B1. -/
 structure LisseTowerEtaleNormalization
     (X Y : Scheme.{u}) (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
@@ -295,9 +293,7 @@ structure LisseTowerEtaleNormalization
         (constantAdicFiniteRealization (W.hom ≫ g) d).map (lisseTowerAlgebraArrow d n k)
 
 /-- Inverse image preserves constant coefficient rings by the constant-section map.
-Source: Stacks Tag 0H7J; the proof is the constant-adjunction calculation of
-relativeFiniteConstantInverseImage_isIso, without its extra coefficient instances.
-(blueprint: def-weil-pbc-lisse-tower-etale-descent-data). -/
+Source: Stacks Tag 0H7J. -/
 theorem lisseTowerFiniteConstantInverseImage_isIso {X Y : Scheme.{u}} (g : Y ⟶ X)
     (B : Type (u + 1)) [CommRing B] :
     IsIso (proEtaleConstantInverseImageMap g CommRingCat.{u + 1} (CommRingCat.of B)) := by
@@ -332,8 +328,7 @@ theorem lisseTowerFiniteConstantInverseImage_isIso {X Y : Scheme.{u}} (g : Y ⟶
   infer_instance
 
 /-- The canonical identification of the actual pulled finite ring with constant scalars.
-Source: Stacks Tags 031C and 0H7J
-(blueprint: def-weil-pbc-lisse-tower-etale-descent-data). -/
+Source: Stacks Tags 031C and 0H7J. -/
 def lisseTowerFiniteCoefficientIso {X Z : Scheme.{u}} (f : Z ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) :
     (adicTowerInverseImage f).obj ((pbcAdicRings X d).obj (op n)) ≅
@@ -344,8 +339,7 @@ def lisseTowerFiniteCoefficientIso {X Z : Scheme.{u}} (f : Z ⟶ X)
       (CommRingCat.of (A ⧸ d.ideal ^ (n + 1))))
 
 /-- Constant scalar sections of the actual inverse-image finite ring.
-Source: Stacks Tags 03CY and 0H7J
-(blueprint: def-weil-pbc-lisse-tower-etale-descent-data). -/
+Source: Stacks Tags 03CY and 0H7J. -/
 def lisseTowerFiniteScalarMap {X Z : Scheme.{u}} (f : Z ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) :
     (Functor.const Z.ProEtᵒᵖ).obj (RingCat.of (A ⧸ d.ideal ^ (n + 1))) ⟶
@@ -367,8 +361,7 @@ instance lisseTowerFiniteScalarMap_surjective {X Z : Scheme.{u}} (f : Z ⟶ X)
   infer_instance
 
 /-- Realize fixed finite scalars by the specified associated-module-sheaf construction.
-Source: Stacks Tag 03CY
-(blueprint: def-weil-pbc-lisse-tower-etale-descent-data). -/
+Source: Stacks Tag 03CY. -/
 def lisseTowerFiniteSheafRealization {X Z : Scheme.{u}} (f : Z ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) :
     Sheaf (ProEt.topology Z) (ModuleCat.{u + 1} (A ⧸ d.ideal ^ (n + 1))) ⥤
@@ -391,8 +384,7 @@ instance lisseTowerFiniteSheafRealization_additive {X Z : Scheme.{u}} (f : Z ⟶
 /-- The fixed realization used in the single-level descent statement. It is constructed
 from restriction of algebraic scalars and module sheafification, without an existence
 choice of functors or module objects.
-Source: Stacks Tags 031C, 03CY and 05RU
-(blueprint: def-weil-pbc-lisse-tower-etale-descent-data). -/
+Source: Stacks Tags 031C, 03CY and 05RU. -/
 def lisseTowerFixedRealization {X Z : Scheme.{u}} (f : Z ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) :
     DerivedCategory (Sheaf (ProEt.topology Z)
@@ -403,8 +395,7 @@ def lisseTowerFixedRealization {X Z : Scheme.{u}} (f : Z ⟶ X)
     (lisseTowerFiniteSheafRealization f d n).mapDerivedCategory
 
 /-- Completion quotients retain the finiteness of the original positive quotients.
-Source: Stacks Tag 031C
-(blueprint: def-weil-pbc-lisse-tower-etale-descent-data). -/
+Source: Stacks Tag 031C. -/
 instance lisseTowerEtaleRing_finite {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (n : ℕ) : Finite (lisseTowerEtaleRing d n) := by
   have := d.quotientFinite n
@@ -412,8 +403,7 @@ instance lisseTowerEtaleRing_finite {A : Type (u + 1)} [CommRing A]
     (quotient_map_bijective d.ideal d.finitelyGenerated n).surjective
 
 /-- The explicitly constructed fixed realization is an equivalence at the base scheme.
-Source: Stacks Tags 031C, 03CY and 05RU
-(blueprint: def-weil-pbc-lisse-tower-etale-descent-data). -/
+Source: Stacks Tags 031C, 03CY and 05RU. -/
 instance lisseTowerFixedRealization_isEquivalence {X Z : Scheme.{u}} (f : Z ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) :
     (lisseTowerFixedRealization f d n).IsEquivalence := by

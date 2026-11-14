@@ -17,9 +17,6 @@ public import Mathlib.Tactic.IrreducibleDef
 
 /-!
 # Constant-coefficient pro-etale pullback comparison
-
-Source: literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/
-pur713-def-pullback-comparison.md (blueprint: proposition-compatibility-purity-base-change--1).
 -/
 
 @[expose] public section
@@ -59,16 +56,6 @@ namespace AlgebraicGeometry.Scheme
 /--
 The composite of the canonical constant-section coefficient comparisons is the
 canonical comparison for the composite morphism.
-Source: the constant-section clause of
-literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/
-pur713-def-pullback-comparison.md (blueprint: proposition-compatibility-purity-base-change--1).
-Proof: apply the defining constant-section formula for rho to k, h and h ≫ k.
-The adjoint of the composite coefficient map therefore sends a constant section a
-to the constant section a, just as the adjoint of c_(h ≫ k) does. A map from the
-constant presheaf is determined by these sections. Its sheafification is the
-constant ring sheaf, so the sheafification universal property identifies the two
-adjoints. Injectivity of the inverse-image adjunction identifies the ring-sheaf
-maps; an isomorphism is determined by its forward map, giving the displayed equality.
 -/
 theorem proEtaleConstantRingCompositeCoefficients_eq
     {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V)
@@ -144,9 +131,6 @@ theorem proEtaleConstantRingCompositeCoefficients_eq
 The canonical derived comparison for two composable morphisms with constant
 coefficients, in the direction from the iterated pullback to the pullback of
 the composite.
-Source: the composition clause of
-literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/
-pur713-def-pullback-comparison.md (blueprint: proposition-compatibility-purity-base-change--1).
 -/
 noncomputable irreducible_def proEtaleConstantRingPullbackComposition
     {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V)
@@ -165,8 +149,7 @@ noncomputable irreducible_def proEtaleConstantRingPullbackComposition
       (proEtaleConstantRingCompositeCoefficients_eq h k A))
 
 /-- The normalized coefficient compositor, characterized by the canonical ring-sheaf
-comparison and the constant-section coefficient transport. Source: blueprint
-(blueprint: proposition-compatibility-purity-base-change--1). -/
+comparison and the constant-section coefficient transport. -/
 theorem proEtaleConstantRingPullbackComposition_eq
     {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V)
     (A : Type u) [CommRing A] :

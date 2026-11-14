@@ -49,8 +49,7 @@ import WeilConjectures.AlgebraicGeometry.Constructible.ConstructibleRationalHomC
 
 /-! # Cancellation in the specified mixed rational realization square
 
-Source: Bhatt--Scholze, Remark 6.8.15, pp. 61--62; Stacks Tags 0G7E, 0D6D and 07A4
-(blueprint: lem-per-rational-scalar-mixed-unit-cancellation).
+Source: Bhatt--Scholze, Remark 6.8.15, pp. 61--62; Stacks Tags 0G7E, 0D6D and 07A4.
 
 Theta and D below are rationalBalancedTheta and extension along
 rationalBalancedCoefficient. The completed comparison is rationalScalarStrictBeta.
@@ -85,8 +84,7 @@ variable {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
   [Fact (∀ y : Y, IsUnit (l : Y.presheaf.stalk y))]
 
 /-- The specified strict beta, restricted and rationalized, on every unchanged raw object.
-Source: BS 6.8.15; Stacks 0A0E, 099N
-(blueprint: lem-per-rational-scalar-mixed-unit-cancellation). -/
+Source: BS 6.8.15; Stacks 0A0E, 099N. -/
 def rationalMixedBetaComponent (g : X ⟶ Y)
     (sXE : RationalModuleRealization l E X) (sYE : RationalModuleRealization l E Y)
     (sXF : RationalModuleRealization l F X) (sYF : RationalModuleRealization l F Y)
@@ -110,8 +108,7 @@ def rationalMixedBetaComponent (g : X ⟶ Y)
 /-- The mixed square for the specific alpha and the specified scalar/pullback comparison.
 The ordinary comparison is fixed on tensor units and on derived computation counits;
 its section formula determines the balanced map, including all coefficient factors.
-Source: BS 6.8.15; Stacks 0D6D, 0A0E and 0A0G
-(blueprint: lem-per-rational-scalar-mixed-unit-cancellation). -/
+Source: BS 6.8.15; Stacks 0D6D, 0A0E and 0A0G. -/
 structure RationalScalarMixedUnitCancellation (g : X ⟶ Y)
     (sXE : RationalModuleRealization l E X) (sYE : RationalModuleRealization l E Y)
     (sXF : RationalModuleRealization l F X) (sYF : RationalModuleRealization l F Y)
@@ -198,30 +195,7 @@ variable (g : X ⟶ Y)
   (aF : RationalRealizationPullbackComparison l F g sXF sYF)
 
 /-- The mixed equation uses exactly the owning dependencies' theta, D, strict beta and alpha.
-Source: BS Remark 6.8.15, pp. 61--62; Stacks 0G7E, 0D6D, 07A4
-(blueprint: lem-per-rational-scalar-mixed-unit-cancellation).
-
-Proof, following the seven steps of this node:
-1. Ordinary pullback and finite scalar extension preserve the three integral
-constructibility conditions. The actual quotient-completion units are invertible.
-2. Precompose by scalar extension of that unit. Naturality of rationalBalancedTheta
-and alpha_normalization cancel the E unit. The actual unit equation for
-rationalScalarStrictBeta and alpha_normalization cancel the F unit on the other path.
-3. On a simultaneous flat-term K-flat model the remaining normalized maps flatten
-l' tensor b' tensor p to l' i(b') tensor p. The finite-projection coefficient square
-makes this balanced. It commutes with restrictions and differentials, hence descends.
-Cancel the invertible precomposition to obtain compatibility for the specified maps.
-4. Multiply integral naturality by the reciprocal denominator. The annihilating-power
-fraction criterion proves descent even when the integral Hom groups have torsion.
-5. For two geometric maps use the canonical inverse-image compositor. Both remaining
-ordinary routes send l'' tensor l' tensor p to l'' c_h(l') tensor p; identity is
-multiplication. The derived computation counits retain these particular maps.
-6. Substitute alpha as ordinary balancing after inverse completion unit. The reflected
-unit and compositor equations cancel every adjacent inverse-unit/unit pair.
-7. For successive fields the specified scalar associators flatten to multiplication;
-three scalar factors have product nml independently of parentheses. Thus the four-field
-pentagon, identity and both orders of mixed pasting agree. Reinsert the same outer
-units, and descend all these equations to raw fractions as in step 4. -/
+Source: BS Remark 6.8.15, pp. 61--62; Stacks 0G7E, 0D6D, 07A4. -/
 theorem rationalScalarMixedUnitCancellation :
     Nonempty (RationalScalarMixedUnitCancellation l E F i g sXE sYE sXF sYF aE aF) := by
   sorry
@@ -237,8 +211,7 @@ variable (h : Z ⟶ X) (sZE : RationalModuleRealization l E Z)
 /-- The ambient compositor extracted from the full normalized dependency theorem.
 Its tensor-generator, inverse-image-pasting, computation-counit and strict-unit equations
 fix its maps; this does not select from an unnormalized endpoint-isomorphism existence.
-Source: BS 6.8.15; Stacks 0D6D, 099N
-(blueprint: lem-per-rational-scalar-mixed-unit-cancellation). -/
+Source: BS 6.8.15; Stacks 0D6D, 099N. -/
 def rationalMixedGeometricCompositor :
     rationalPullDerived l E g aE.rationalCoefficient ⋙
       rationalPullDerived l E h ahE.rationalCoefficient ≅
@@ -269,17 +242,7 @@ variable (h : Z ⟶ X) (sZE : RationalModuleRealization l E Z)
   (mc : RationalScalarMixedUnitCancellation l E F i (h ≫ g) sZE sYE sZF sYF acE acF)
 
 /-- The same zeta comparisons commute with geometric composition.
-Source: BS 6.8.15, pp. 61--62; Stacks 0G7E, 0D6D and 07A4
-(blueprint: lem-per-rational-scalar-mixed-unit-cancellation).
-
-Proof: precompose with scalar extension of the actual completion units. Substitute
-the recorded alpha normalization and rationalScalarCompletionUnitSquare. Adjacent
-inverse-unit/unit factors cancel. On the same flat-term K-flat representative all
-remaining comparisons are the generator-normalized ordinary tensor maps. Geometric
-composition uses the canonical inverse-image compositor and scalar insertion; coefficient
-composition multiplies the scalar factors. Their associative product is independent of
-parentheses. The normalized derived computation counits descend these maps, and the
-annihilating-power fraction criterion extends the equations to raw rational morphisms. -/
+Source: BS 6.8.15, pp. 61--62; Stacks 0G7E, 0D6D and 07A4. -/
 theorem rationalMixedGeometricComposition
     (K : DerivedCategory (pbcModules Y (rationalCoefficientSheaf l Y E))) :
     mh.zeta.hom.app ((rationalPullDerived l E g aE.rationalCoefficient).obj K) ≫
@@ -304,17 +267,7 @@ variable (G : Type u) [Field G] [Algebra ℚ_[l] G] [FiniteDimensional ℚ_[l] G
     sXE sYE sXG sYG aE aG)
 
 /-- The same zeta comparisons respect the specified coefficient associators.
-Source: BS 6.8.15, pp. 61--62; Stacks 0G7E, 0D6D and 07A4
-(blueprint: lem-per-rational-scalar-mixed-unit-cancellation).
-
-Proof: precompose with scalar extension of the actual completion units. Substitute
-the recorded alpha normalization and rationalScalarCompletionUnitSquare. Adjacent
-inverse-unit/unit factors cancel. On the same flat-term K-flat representative all
-remaining comparisons are the generator-normalized ordinary tensor maps. Geometric
-composition uses the canonical inverse-image compositor and scalar insertion; coefficient
-composition multiplies the scalar factors. Their associative product is independent of
-parentheses. The normalized derived computation counits descend these maps, and the
-annihilating-power fraction criterion extends the equations to raw rational morphisms. -/
+Source: BS 6.8.15, pp. 61--62; Stacks 0G7E, 0D6D and 07A4. -/
 theorem rationalMixedCoefficientTower
     (K : DerivedCategory (pbcModules Y (rationalCoefficientSheaf l Y E))) :
     (pbcDerivedExtend (rationalBalancedCoefficient l F G j X)).map (mEF.zeta.hom.app K) ≫

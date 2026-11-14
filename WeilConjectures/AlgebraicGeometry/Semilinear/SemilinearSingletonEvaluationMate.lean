@@ -115,7 +115,6 @@ import Mathlib.CategoryTheory.Adjunction.Mates
 /-! # The singleton evaluation mate below its source vertex
 
 Source: Zheng Construction 4.1; Stacks 06YT and 0FND.
-(blueprint: lem-coef-semilinear-singleton-evaluation-mate).
 -/
 
 @[expose] public noncomputable section
@@ -235,21 +234,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
 
 /-- Below a singleton vertex, the mate of the actual transition is invertible.
 This assertion involves no tensor product or projection map.
-Source: Zheng Construction 4.1; Stacks 06YT, 0FND
-(blueprint: lem-coef-semilinear-singleton-evaluation-mate).
-Proof: use the strict-system/sequence-site equivalence, which identifies ordinary
-evaluations and their actual horizontal transitions. Localize those identities.
-Choose ordinary singleton extension and its normalized derived adjunction. The
-below-level singleton comparison is the inverse mate of the localized transition:
-the ordinary singleton unit square, its localized transition square and the
-normalized derived-mate comparison prove this identification. The common resolving
-class is the flat-term K-flat complexes. The given L and adj are identified with
-this left adjoint by the unique unit-compatible left-adjoint isomorphism. The
-scalar left adjoints are likewise identified by uniqueness of left adjoints. The
-mate for L and A is conjugate to the invertible singleton mate by these two
-isomorphisms, hence invertible. Its component is exactly scalar extension of the
-unit followed by reduction, since reduction is the transpose of the transition.
-Identity indices, zero coefficient rings and empty sites use the same argument. -/
+Source: Zheng Construction 4.1; Stacks 06YT, 0FND. -/
 theorem semilinearSingletonEvaluationMate_isIso
     (n q : ℕ) (h : q ≤ n)
     (A : ScalarData.{c, v, max c v r}

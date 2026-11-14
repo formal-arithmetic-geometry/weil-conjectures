@@ -425,10 +425,9 @@ end SheafTorsor
 /-- **The sheaf torsor of an `M`-torsor.** The functor of points `U ↦ Hom_Y(U, P)` of an
 `M`-torsor `P ⟶ Y`, as a torsor under the constant sheaf `M` on the small étale site of `Y`: the
 constant section `m` acts by composition with the action of `m` on `P`, and a section of the
-constant sheaf over `U`, which is a locally constant function `f : U → M`
-(`AlgebraicGeometry.Scheme.Etale.constantSheafIsoContinuousMapSheaf`), acts on `φ : U ⟶ P` as
-`m` on the open fibre `f⁻¹(m)` (`AlgebraicGeometry.Scheme.EtaleTorsor.smulHom`).
-(blueprint: `sbc-prop-torsors-h1`, `thm-galois-lc-etale`) -/
+constant sheaf over `U`, which is a locally constant function `f: U → M`
+(`AlgebraicGeometry.Scheme.Etale.constantSheafIsoContinuousMapSheaf`), acts on `φ: U ⟶ P` as
+`m` on the open fibre `f⁻¹(m)` (`AlgebraicGeometry.Scheme.EtaleTorsor.smulHom`). -/
 noncomputable def toSheafTorsor (t : EtaleTorsor M Y) :
     Sheaf.Torsor ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
       (AddCommGrpCat.of M)) :=
@@ -486,8 +485,7 @@ of `M`-torsors over `Y` to the first étale cohomology of the constant sheaf `M`
 `P ⟶ Y` is the class (`CategoryTheory.Sheaf.Torsor.classH1`) of its sheaf torsor of points
 (`AlgebraicGeometry.Scheme.EtaleTorsor.toSheafTorsor`). It is injective
 (`AlgebraicGeometry.Scheme.EtaleTorsor.injective_classH1`), and bijective by effective étale
-descent of finite étale morphisms (`AlgebraicGeometry.Scheme.EtaleTorsor.bijective_classH1`).
-(blueprint: `sk-prop-input-torsors`, `sbc-prop-torsors-h1`) -/
+descent of finite étale morphisms (`AlgebraicGeometry.Scheme.EtaleTorsor.bijective_classH1`). -/
 noncomputable def classH1 :
     Quotient (EtaleTorsor.setoid M Y) → Sheaf.H
       ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of M)) 1 :=

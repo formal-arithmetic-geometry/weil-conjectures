@@ -104,8 +104,7 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
 Source: Stacks, Cohomology on Sites, Tags 06YY and 07A4.
 Expand the termwise functor comparison in ScalarSectionNormalized. The comparison
 for the identity is the identity cochain map; localization preserves its identity.
-Remove that final identity and identify the mapped ordinary comparison components.
-(blueprint: lem-sfb-quotient-section-scalar-normalization). -/
+Remove that final identity and identify the mapped ordinary comparison components. -/
 theorem section_scalar_normalization (T : Scheme.{u})
     (c : ScalarSectionData a T) (hc : ScalarSectionNormalized a T c)
     (P : CochainComplex (Modules Λ T) ℤ) :

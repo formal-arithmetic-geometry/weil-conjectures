@@ -7,10 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Canonical.CanonicalSheafExt
 
-/-! # Coefficient data for the strict Kummer comparison
-
-Source: diagonal tower system proof, the target paragraph of step (3) and naturality in step (4).
-(blueprint: def-sfb-kummer-strict-adjunct-data). -/
+/-! # Coefficient data for the strict Kummer comparison -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -34,9 +31,7 @@ attribute [local irreducible] DerivedCategory.singleFunctors
 
 /-- Conditional scalar-adjunct computation for a strict target, with coefficient
 categories and functors shared parameters. The definition produces no object and
-asserts no existence of residue lifts.
-Source: diagonal tower system proof, steps (3) and (4)
-(blueprint: def-sfb-kummer-strict-adjunct-data). -/
+asserts no existence of residue lifts. -/
 @[irreducible] def KummerTargetAdjunctCompatibility
     (ℓ : ℕ) {A : Type*} [Category A] [abA : Abelian A] [hA : HasExt.{w} A]
     {B : Type*} [Category B] [abB : Abelian B] [hB : HasExt.{w} B]
@@ -77,9 +72,7 @@ Source: diagonal tower system proof, steps (3) and (4)
 
 /-- The positive Kummer unit after the comparison isomorphism on units.
 This is the actual Ext composite, named to share its coefficient constructions
-rather than checking the concrete sheaf abelian structures at each occurrence.
-Source: the units-comparison composite in the diagonal tower proof, step (4)
-(blueprint: def-sfb-kummer-strict-adjunct-data). -/
+rather than checking the concrete sheaf abelian structures at each occurrence. -/
 @[irreducible] def kummerComparedUnit (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     (hW : IsUnit (ℓ : Γ(W, ⊤))) (n : ℕ) :
     Ext.{u + 1} ((comparisonUpperStar AddCommGrpCat.{u + 1} W).obj W.gmSheaf)
@@ -92,8 +85,6 @@ Source: the units-comparison composite in the diagonal tower proof, step (4)
       (by simpa using hW.pow (n + 1))) (zero_add 1)
 
 /-- The actual roots comparison equation, named before derived specialization.
-Source: diagonal tower system proof, step (3), target normalization
-(blueprint: def-sfb-kummer-strict-adjunct-data).
 This is precisely the canonical underlying-map equation, with no chosen data. -/
 def kummerRootNormalization (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     (hW : IsUnit (ℓ : Γ(W, ⊤))) (H : DiagonalSystems ℓ W)
@@ -108,8 +99,7 @@ def kummerRootNormalization (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
       (pow_pos (Fact.out : ℓ.Prime).pos _) (by simpa using hW.pow (n + 1)))
 
 /-- The concrete compatibility formula, with its coefficient expressions shared.
-This is a real proposition definition and chooses no data.
-(blueprint: def-sfb-kummer-strict-adjunct-data). -/
+This is a real proposition definition and chooses no data. -/
 @[irreducible] def kummerStrictAdjunctCompatibilityStatement (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     (hW : IsUnit (ℓ : Γ(W, ⊤)))
     [HasDerivedCategory.{u + 1} (DiagonalAb W)]

@@ -53,9 +53,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 /-!
 # Pullback of locally constant finite module sheaves
 
-Source: Stacks Project, sites-modules.tex, Tag 093R, lemma-pullback-locally-constant,
-specialized to the small pro-etale topoi
-(blueprint: lem-exc-proetale-pullback-locally-constant).
+Source: Stacks Project, Tag 093R, specialized to the small pro-etale topoi.
 -/
 
 @[expose] public section
@@ -74,26 +72,7 @@ set_option linter.unusedVariables false in
 /-- Pullback preserves the given finite constant module models on the base-changed cover.
 The arrows to `ProEt.mk (𝟙 V)` are unique, hence are precisely the structure maps of the
 base-changed objects. The conclusion retains the same modules `M i`, not just their sizes.
-Source: Stacks Project, Tag 093R, lemma-pullback-locally-constant
-(blueprint: lem-exc-proetale-pullback-locally-constant).
-
-Proof:
-1. The base-change functor preserves finite limits and coverings. By
-   lem-weil-pbc-left-exact-site-inverse-image-tensor it induces a geometric morphism.
-   By prop-weil-pbc-proetale-constant-ring-map its canonical coefficient map is an
-   isomorphism preserving constant scalars. Thus the tensor module pullback is the
-   fixed-ring module inverse image of lem-pe-constant-left-module-inverse-image.
-   By lem-sfb-geometric-inverse-image-constant-module it takes a constant module
-   sheaf to the constant sheaf with the very same module.
-2. The objects W_i = u_f(U_i) form a cover, by base-change preservation of covers.
-   Apply lem-weil-pbc-localize-ringed-site-morphism at U_i: restriction of the tensor
-   pullback to W_i is the localized tensor pullback of the restriction to U_i.
-   Its ring map is the restricted coefficient isomorphism. Apply this localized
-   pullback to the given trivialization, then the constant-module comparison of
-   step 1 on the localized sites. This gives the displayed isomorphism with M_i.
-   Every M_i is still finite, and these isomorphisms witness local constancy.
-   Empty covering members require no choice of a point: their sheaves are zero.
-   Empty schemes and empty covering families are included throughout. -/
+Source: Stacks Project, Tag 093R. -/
 theorem proEtaleConstantModulePullback_locallyConstant
     {V X : Scheme.{u}} (f : V ⟶ X) (A : Type u) [CommRing A] [Finite A]
     (F : SheafOfModules.{u + 1}

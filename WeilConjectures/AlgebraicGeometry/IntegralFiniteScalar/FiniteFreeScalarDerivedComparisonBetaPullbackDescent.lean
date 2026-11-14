@@ -35,14 +35,11 @@ private theorem app_eq_of_iso {C D : Type*} [Category* C] [Category* D]
   rw [α.naturality, ρ.naturality, h]
 
 /--
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md, formal-properties
-paragraphs. Equality of the two displayed morphisms is determined by K-flat
+Equality of the two displayed morphisms is determined by K-flat
 representatives. Given the representative equation, choose a K-flat model of an
 arbitrary derived object and use naturality of beta, the scalar restriction square,
 and the tensor pullback comparison to transport the equality across the model
 isomorphism.
-(blueprint: new-sfb-finite-free-scalar-derived-comparison-beta-pullback-descent)
 -/
 theorem finiteFreeScalarDerivedComparison_beta_pullback_of_kflat
     (D : ScalarSixPullbackData.{u}) {Λ Λ' : ScalarSixRing.{u}}

@@ -23,12 +23,7 @@ open CategoryTheory.Pretriangulated.Opposite Opposite
 namespace AlgebraicGeometry.Etale
 
 /-- The native signed exact shift also satisfies the tensor-Hom evaluation identity.
-Source: Stacks Project, Tags 08JC and 08J9.
-Proof: take the component-prescribed exact shift from nativeDerivedHom_signed_exact.
-Apply the signed mate evaluation identity to those same components. Its two signs
-cancel and its raw mate identity is the right-adjoint uniqueness counit equation.
-All shifts and adjunctions are the canonical derived structures.
-(blueprint: lem-coef-native-derived-hom-normalized-shift) -/
+Source: Stacks Project, Tags 08JC and 08J9. -/
 theorem derivedHom_normalizedShift_exists
     {C : Type d} [Category.{u + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C] [MonoidalPreadditive C]

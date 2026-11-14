@@ -33,10 +33,6 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek
 /-!
 # Small families of integral scalar local models
 
-Source: blueprint main-20261015, `sk-lem-int-integral-heart-triangulated.proof.md`,
-paragraph (2), final sentence
-(blueprint: lem-sfb-proetale-scalar-local-model-representatives).
-
 The site has objects in `Type (u + 1)` and morphisms in `Type u`; its module sections
 and the representative index set live in `Type (u + 1)`. Scalar matrix quotients are
 constructed before applying the existing constant-module scalar-extension functor.
@@ -60,17 +56,14 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
 /-- The actual scalar quotient `A^n / range q`, with a universe lift for the existing
-scalar-model functor. The labels `(m, n, q)` form `Σ m n : ℕ, Matrix (Fin n) (Fin m) A`.
-Source: Stacks Tag 0518, finite presentations; blueprint integral-heart proof (2)
-(blueprint: lem-sfb-proetale-scalar-local-model-representatives). -/
+scalar-model functor. The labels `(m, n, q)` form `Σ m n: ℕ, Matrix (Fin n) (Fin m) A`.
+Source: Stacks Tag 0518, finite presentations. -/
 def sfbScalarPresentationModule (A : Type u) [CommRing A] (m n : ℕ)
     (q : Matrix (Fin n) (Fin m) A) : ModuleCat.{u + 1} A :=
   ModuleCat.of A (ULift.{u + 1} ((Fin n → A) ⧸ LinearMap.range q.mulVecLin))
 
 /-- The scalar-extension model of the actual quotient by a scalar matrix. The topology
-and coefficient ring are exactly those of `integralModelCondensedCoefficients`.
-Source: blueprint integral-heart proof (2), finite scalar local models
-(blueprint: lem-sfb-proetale-scalar-local-model-representatives). -/
+and coefficient ring are exactly those of `integralModelCondensedCoefficients`. -/
 def sfbIntegralScalarPresentationModel (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (U : Scheme.{u}) (m n : ℕ)
@@ -355,31 +348,7 @@ private theorem point_scalarPresentation_iff (A : Type u) [CommRing A]
 
 /-- A small family of modules with finite constant scalar local models exhausts that
 class up to isomorphism. The second conjunct identifies the local condition using
-precisely the quotients indexed by scalar matrices, without matrices of local sections.
-
-Source: blueprint main-20261015, integral-heart triangulated proof, paragraph (2),
-final sentence (blueprint: lem-sfb-proetale-scalar-local-model-representatives).
-
-Proof:
-1. Code finite presented modules on the condensed point by maps between finite free
-regular modules and their cokernels. Their labels form a small type.
-2. Covers with index type in Type u form a type in Type (u + 1). A code consists of
-one such cover and a point-model label on each member. Form the product of the direct
-images of these models.
-Adjunction transposes a witnessing cover's local isomorphisms to a map into this
-product. Cover pullbacks are jointly faithful: the coefficient map is invertible,
-the localization comparison reduces to restriction, and sheaf separatedness on
-base-changed covers detects equality. Thus the product map is monic. Well-poweredness
-and the proved subobject-counting helper of the prescribed-model theorem give a small
-family of representatives, all satisfying the local condition.
-3. The continuous scalar finite-presentation comparison identifies each finite
-presented point module with scalar extension of a finite presented ordinary module.
-Write that ordinary module as A^n/range(q), using finite generators of its relations.
-Apply scalar realization and point inverse image to the quotient isomorphism.
-4. Conversely each matrix quotient is finite presented, since its relations are the
-range of a map from a finite free module. The same comparison gives a point model,
-and therefore the required local-model condition on the given cover. Zero ranks,
-torsion quotients and empty covers are included; no flatness is used. -/
+precisely the quotients indexed by scalar matrices, without matrices of local sections. -/
 theorem proetale_scalar_local_model_representatives
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (T : Scheme.{u}) :

@@ -17,10 +17,6 @@ import WeilConjectures.AlgebraicGeometry.IntegralFiniteScalar.FiniteFreeScalarTo
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteFreeScalarOrdinaryTensorPullback
 
 /-! # Pullback compatibility of normalized beta on K-flat representatives
-
-Source: blueprint scalar-six direct-image proof, formal properties and finite free
-coefficient extensions.
-(blueprint: new-sfb-finite-free-scalar-derived-comparison-beta-pullback-kflat)
 -/
 
 @[expose] public noncomputable section
@@ -563,13 +559,10 @@ private lemma normalized_beta_pullback_computes
 
 -- The composition compares exact and total derived realizations of the same complexes.
 /--
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md, formal-properties
-paragraphs. For a K-flat representative, transport the representative comparison
+For a K-flat representative, transport the representative comparison
 through exact point pullback. The normalized augmentation equation identifies the
 scalar-first map with the tensor pullback comparison; the K-flat counits are
 isomorphisms, so cancellation gives the displayed equation.
-(blueprint: new-sfb-finite-free-scalar-derived-comparison-beta-pullback-kflat)
 -/
 theorem finiteFreeScalarDerivedComparison_beta_pullback_kflat
     (D : ScalarSixPullbackData.{u}) {Λ Λ' : ScalarSixRing.{u}}

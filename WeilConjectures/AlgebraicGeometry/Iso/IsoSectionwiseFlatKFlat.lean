@@ -29,8 +29,7 @@ import WeilConjectures.AlgebraicGeometry.Iso.IsoSectionwiseKFlat
 
 /-! # Flatness under sectionwise reindexing
 
-Source: Stacks Project, Tags 03EL and 06YN; the tensor argument in Steps 4--5 of
-`lem-pod-reindexing-hom-resolution-model`.
+Source: Stacks Project, Tags 03EL and 06YN.
 -/
 
 @[expose] public section
@@ -46,26 +45,7 @@ attribute [local instance 2000] SheafOfModules.wEqualsLocallyBijective_coefficie
 
 /-- Sectionwise inverse image, with an invertible coefficient identification, preserves
 flat module sheaves and K-flat complexes.
-Source: Stacks Project, Tags 03EL and 06YN; blueprint dual-Tate compatibility, Step 1
-(blueprint: lem-pod-sectionwise-flat-kflat).
-
-Proof: postcomposition by the scheme isomorphism is an equivalence of pro-etale sites.
-Its reverse, with the inverse transported scalar action, gives an inverse module
-functor G to the displayed functor F. Both functors are additive and exact, and
-preserve all existing sums. Compare sheafified sectionwise tensor products by sending
-a pure tensor a tensor b to the same tensor, with its scalar action transported by c.
-The balanced relations match because c is a ring isomorphism. This gives a natural
-isomorphism F(A tensor B) = FA tensor FB. For a flat module M and any exact sequence
-on X, apply G, tensor with M, and apply F. The comparison identifies the resulting
-exact sequence with the original sequence tensored with FM, proving flatness.
-For complexes, in degree r use preservation of the direct sum over p+q=r and the
-same tensor comparison. Naturality and additivity identify both differential terms,
-including the sign (-1)^p, so this is an isomorphism of total tensor complexes.
-If K is K-flat and C is acyclic on X, then GC is acyclic; hence GC tensor K is
-acyclic. Applying F and the total comparison identifies it with C tensor FK,
-which is therefore acyclic. This is precisely the independent-coefficient K-flat
-predicate. The argument applies to arbitrary ring sheaves and unbounded complexes;
-it uses no exactness of infinite products and no boundedness hypothesis. -/
+Source: Stacks Project, Tags 03EL and 06YN. -/
 theorem isoSectionwiseModuleInverseImage_flat_kFlat
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [EssentiallySmall.{u + 1} X.ProEt] [EssentiallySmall.{u + 1} Y.ProEt]

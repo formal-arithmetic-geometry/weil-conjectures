@@ -14,9 +14,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantRingO
 /-!
 # Derived pro-etale direct image and restriction of scalars
 
-Source: blueprint `prose-03-02`, order 1468, coefficient tower maps;
-Stacks Project, Tags 0D6E, 0D6J and 015F
-(blueprint: lem-weil-proetale-direct-image-restriction-of-scalars).
+Source: Stacks Project, Tags 0D6E, 0D6J and 015F.
 -/
 
 @[expose] public section
@@ -33,8 +31,7 @@ namespace AlgebraicGeometry.Scheme
 unchanged-underlying-abelian-sheaf restriction functor. Its exactness is the instance
 `proEtaleRingRestrictScalars_preservesFiniteLimits/Colimits`; its derived functor is
 therefore the termwise `mapDerivedCategory`.
-Source: Stacks Tags 03DA and 015F
-(blueprint: lem-weil-proetale-direct-image-restriction-of-scalars). -/
+Source: Stacks Tags 03DA and 015F. -/
 noncomputable abbrev proEtaleCoefficientRestrictScalars (X : Scheme.{u})
     {A B : Type u} [CommRing A] [CommRing B] (φ : A →+* B) :
     proEtaleRingModules X (proEtaleConstantRing X B) ⥤
@@ -43,8 +40,7 @@ noncomputable abbrev proEtaleCoefficientRestrictScalars (X : Scheme.{u})
     ((constantSheaf (ProEt.topology X) CommRingCat.{u + 1}).map
       (CommRingCat.ofHom φ.ulift))
 
-/-- Exact restriction preserves finite limits. Source: Stacks Tag 015F
-(blueprint: lem-weil-proetale-direct-image-restriction-of-scalars). -/
+/-- Exact restriction preserves finite limits. Source: Stacks Tag 015F. -/
 noncomputable instance proEtaleCoefficientRestrictScalars_preservesFiniteLimits
     (X : Scheme.{u}) {A B : Type u} [CommRing A] [CommRing B] (φ : A →+* B) :
     PreservesFiniteLimits (proEtaleCoefficientRestrictScalars X φ) :=
@@ -52,8 +48,7 @@ noncomputable instance proEtaleCoefficientRestrictScalars_preservesFiniteLimits
     ((constantSheaf (ProEt.topology X) CommRingCat.{u + 1}).map
       (CommRingCat.ofHom φ.ulift))).1
 
-/-- Exact restriction preserves finite colimits. Source: Stacks Tag 015F
-(blueprint: lem-weil-proetale-direct-image-restriction-of-scalars). -/
+/-- Exact restriction preserves finite colimits. Source: Stacks Tag 015F. -/
 noncomputable instance proEtaleCoefficientRestrictScalars_preservesFiniteColimits
     (X : Scheme.{u}) {A B : Type u} [CommRing A] [CommRing B] (φ : A →+* B) :
     PreservesFiniteColimits (proEtaleCoefficientRestrictScalars X φ) :=
@@ -165,13 +160,7 @@ private theorem coefficientComparisonForMaps_existsUnique
     (coefficientInverseImage_naturality f φ)
 
 /-- The underived coefficient square has the uniquely normalized identity-on-sections
-comparison. Source: blueprint order 1468; Stacks Tag 0D6E
-(blueprint: lem-weil-proetale-direct-image-restriction-of-scalars).
-Proof: the two constant-ring structure maps send each a to the constant section φ(a).
-Their equality follows by the universal property of sheafification. Both functors have
-sections N(X ×_Y W), the same restrictions and the same restricted scalar action.
-Identity on these sections is linear, natural, invertible and uniquely determines the
-comparison because module sheaf morphisms are determined by their section maps. -/
+comparison. Source: Stacks Tag 0D6E. -/
 theorem proEtaleCoefficientDirectImageComparison_existsUnique
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) :
@@ -185,8 +174,7 @@ theorem proEtaleCoefficientDirectImageComparison_existsUnique
     (coefficientRingDirectImage_eq f A).symm (coefficientRingDirectImage_eq f B).symm
 
 /-- The actual identity-on-sections comparison, selected by its unique characterization.
-Source: blueprint order 1468; Stacks Tag 0D6E
-(blueprint: lem-weil-proetale-direct-image-restriction-of-scalars). -/
+Source: Stacks Tag 0D6E. -/
 noncomputable def proEtaleCoefficientDirectImageComparison
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) :
@@ -359,23 +347,7 @@ private theorem coefficientDerivedComparison_exists
 The displayed equality says that the comparison is the inverse of f_*(j), after the
 canonical termwise-localization and K-injective resolution identifications. In particular
 restriction of scalars is not assumed to preserve K-injectivity.
-Source: blueprint `prose-03-02`, order 1468; Stacks Tags 0D6E, 0D6J,
-015F (blueprint: lem-weil-proetale-direct-image-restriction-of-scalars).
-Proof:
-1. Naturality of sheafification makes the constant-section coefficient square commute.
-Taking adjoints gives the inverse-image square, and the adjunction triangle identifies
-its direct-image structure maps with the prescribed canonical ones.
-2. Specialize the identity-on-sections comparison and normalized derived comparison of
-lem-weil-pbc-ring-sheaf-change-adjunction. Substitute the structure-map equalities before
-specialization, so all module actions and their localization identifications agree.
-3. On a K-injective B-complex J, the derived B-unit is invertible. The normalized square
-therefore makes the derived A-unit on Res(J) invertible. Naturality at j:Res(J) → I,
-together with invertibility of Q(j) and the unit at I, makes Q(f_*(j)) invertible.
-The localization criterion now gives the required quasi-isomorphism.
-4. Invert the comparison from step 2. Postcompose the desired equation with the unit
-at I, use its naturality at j, and cancel the B-unit and comparison isomorphisms in
-the normalized square. This proves the displayed inverse-resolution formula for every
-j, without assuming that restriction preserves K-injectivity. -/
+Source: Stacks Tags 0D6E, 0D6J, 015F. -/
 theorem proEtaleDerivedDirectImage_restrictScalars
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) :

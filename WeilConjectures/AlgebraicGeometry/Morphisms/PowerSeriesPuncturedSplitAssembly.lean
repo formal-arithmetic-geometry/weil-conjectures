@@ -22,13 +22,7 @@ set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
 /-- Full faithfulness, or an isomorphic base, lifts a splitting from a base change.
-Source: Stacks Project, Tag 0EY9; zero variables give an isomorphic base.
-(blueprint: lem-sbc-power-series-punctured-split-assembly)
-Proof: Lift the isomorphism and its inverse by surjectivity on hom sets.
-Injectivity on endomorphisms checks both inverse identities. The morphisms
-are in the category of finite etale covers, so they respect the base.
-Alternatively, if the base map is an isomorphism, both pullback projections
-are isomorphisms and the splitting transports along them. -/
+Source: Stacks Project, Tag 0EY9; zero variables give an isomorphic base. -/
 theorem powerSeries_punctured_split_assembly
     {B W E F : Scheme.{u}} (z : W ⟶ B) (p : E ⟶ B) (r : F ⟶ B)
     [IsFinite p] [Etale p] [IsFinite r] [Etale r]

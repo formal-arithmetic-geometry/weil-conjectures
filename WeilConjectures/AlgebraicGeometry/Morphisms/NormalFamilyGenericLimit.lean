@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.CartesianFamilyGenericLimit
 # A normal Noetherian family system and its pointed generic fibres
 
 Source: Stacks Project, Tag 0EZJ, limit reduction before descent of the cover.
-(blueprint: lem-sbc-normal-family-generic-limit)
 -/
 
 @[expose] public section
@@ -34,45 +33,7 @@ namespace AlgebraicGeometry.Scheme
 fibres and generic base points. No finite cover or group action is involved.
 
 Source: Stacks Project, Tag 0EZJ, proof of Lemma 58.31.9, paragraphs from absolute
-Noetherian approximation through the assertion that the generic fibre is a limit.
-(blueprint: lem-sbc-normal-family-generic-limit)
-
-Proof:
-1. Apply absolute Noetherian approximation to S. Replace each stage by the normalization
-   of its integral scheme-theoretic image in that image's own fraction field, embedded
-   in the function field of S. This normalization is finite because the image is
-   excellent and of finite type over the integers.
-   Normality of S factors the projection through this normalization. The resulting
-   stages are normal integral finite type integer schemes, the projections are dominant,
-   and transition maps exist by the universal property of normalization. They are affine:
-   their composites with the finite normalization maps are affine, and an S-morphism
-   between affine S-schemes is affine. On affine charts the new coordinate rings lie in
-   the corresponding rings of S, contain the old images, and their union is that ring.
-   Thus the new system still has limit S.
-2. Descend the finitely presented smooth family and its section to a stage. Smoothness
-   holds after increasing the stage. Restrict to the open relative component through
-   the descended section, whose fibres are geometrically irreducible. The section lies
-   in this open. The projection from C factors through it: each geometric fibre of C
-   is connected and meets that component at the section point, so its image lies in
-   the component. Thus the pullback is all of C. Pass to the cofiltered tail of this
-   stage. Descend the inverse of n in the
-   global section rings (on a finite affine cover, including agreement on overlaps).
-   Every later family is its base change, so the section, smoothness, geometric
-   connectedness, and invertibility persist.
-3. Dominance embeds each stage function field into the function field of S. On affine
-   charts each fraction in the latter uses two elements from a common stage and a
-   nonzero denominator. Hence these function fields have filtered colimit S.functionField.
-   Their spectra form the inverse system K with the stated limit cone b. Form D from
-   the generic fibres of the descended families; cartesian base change commutes with
-   limits, so Cη is its limit, using the supplied generic-fibre pullback square.
-4. Let e identify K at each stage with the spectrum of the stage function field. Base
-   change the descended sections to obtain the natural transformation s. The universal
-   properties of these pullbacks give both section equalities and the compatibility
-   of the given generic section with the two limit cones. The family projections give
-   a, and the generic-fibre projections give κ; their composites with j₀ and j agree.
-   Generic fibres are qcqs, being base changes of finitely presented families to fields;
-   their transition maps are affine base changes. The spectra of fields are qcqs and
-   have affine transition maps. Retain these data as existential witnesses. -/
+Noetherian approximation through the assertion that the generic fibre is a limit. -/
 theorem exists_normal_family_generic_limit {S C : Scheme.{u}} [CompactSpace S]
     [QuasiSeparatedSpace S] [IsIntegral S]
     (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))

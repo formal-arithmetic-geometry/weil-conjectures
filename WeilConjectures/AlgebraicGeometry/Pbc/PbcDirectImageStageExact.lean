@@ -9,8 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.Pbc.PbcDescentInterfaces
 import all WeilConjectures.CategoryTheory.StageSystem.CommonStageCalculus
 
 /-! # Normalized exact direct image at one coefficient stage
-
-Source: blueprint main-20261015, proper base change, order 1312, final paragraph.
 -/
 
 @[expose] public noncomputable section
@@ -68,9 +66,7 @@ variable {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
   [dY : Fact (∃ n : ℕ, topologicalKrullDim Y ≤ (n : WithBot ℕ∞))]
   [iY : Fact (∀ t : Y, IsUnit (l : Y.presheaf.stalk t))]
 
-/-- The actual direct-image shift is fixed by its integral localization square.
-Source: blueprint main-20261015, orders 1306 and 1312
-(blueprint: lem-weil-pbc-direct-image-stage-exact). -/
+/-- The actual direct-image shift is fixed by its integral localization square. -/
 def PbcDirectImageStageShiftSpec (f : X ⟶ Y)
     (pres : ∀ (E : Padic.FiniteCoefficientFields l Ω)
       (K : pbcIntegralStage l Ω X E),
@@ -93,19 +89,7 @@ def PbcDirectImageStageShiftSpec (f : X ⟶ Y)
   exact (pbcDescentDirectImage l Ω f pres E).IsTriangulated ∧
     NatTrans.CommShift e.hom ℤ
 
-/-- Exact direct image, with a unique shift fixed by the integral square.
-Source: blueprint main-20261015, order 1306, exact rational transport, and order
-1312, direct-image exactness (blueprint: lem-weil-pbc-direct-image-stage-exact).
-Proof: the full integral subcategories inherit their triangulations from the
-ambient derived categories. Ordinary right-derived direct image is exact, so
-its restriction is exact by full faithfulness. The universal localization shift
-is uniquely fixed by its identity integral square. Every distinguished rational
-triangle is isomorphic to the image of an integral distinguished triangle.
-The restriction takes that integral triangle to a distinguished triangle, and
-its rational image is distinguished. The localization square identifies it
-with the image under rational direct image, proving exactness. Uniqueness of
-shift already follows from the normalized integral square, without any
-nonvanishing or nonempty-scheme hypothesis. -/
+/-- Exact direct image, with a unique shift fixed by the integral square. -/
 theorem pbcDirectImageStageShift_exists (f : X ⟶ Y)
     (pres : ∀ (E : Padic.FiniteCoefficientFields l Ω)
       (K : pbcIntegralStage l Ω X E),
@@ -161,8 +145,7 @@ theorem pbcDirectImageStageShift_exists (f : X ⟶ Y)
     (pbcDescentDirectImage l Ω f pres E) (Iso.refl _) hQ hQ'
 
 /-- The uniquely normalized stage shift; its construction uses the proved
-localization universal property above, which determines it uniquely.
-Source: blueprint order 1306 (blueprint: lem-weil-pbc-direct-image-stage-exact). -/
+localization universal property above, which determines it uniquely. -/
 @[instance_reducible] def pbcDirectImageStageCommShift (f : X ⟶ Y)
     (pres : ∀ (E : Padic.FiniteCoefficientFields l Ω)
       (K : pbcIntegralStage l Ω X E),

@@ -133,9 +133,7 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # Chain-level intrinsic Hom transport
 
-Source: Stacks Project, Tags 00YV, 08J7 and 0A95; coefficient-presentation
-transport in Step 2 of lem-sf-tensor-exchange-ctf-domains.
-(blueprint: lem-sf-intrinsic-site-hom-transport-chain)
+Source: Stacks Project, Tags 00YV, 08J7 and 0A95.
 -/
 
 @[expose] public section
@@ -245,15 +243,7 @@ private noncomputable def fixedHomRepresentative
 /-- The realized fixed-coefficient derived Hom is represented by the intrinsic
 Hom complex on the chosen K-injective representatives.
 
-Source: Stacks Project, Tags 00YV, 08J7 and 0A95; coefficient-presentation
-transport in Step 2 of lem-sf-tensor-exchange-ctf-domains.
-
-Proof: apply the exact associated-module-sheaf realization termwise to the
-fixed-coefficient Hom complex. The sheaf-Hom/tensor adjunction identifies each
-term and its signed differential with the intrinsic constant-ring Hom complex;
-exactness of the realization then carries the localized representative to the
-localized intrinsic complex.
-(blueprint: lem-sf-intrinsic-site-hom-transport-chain) -/
+Source: Stacks Project, Tags 00YV, 08J7 and 0A95. -/
 theorem intrinsicSiteHom_transport_chain (X : Scheme.{u}) (A : Type u)
     [CommRing A] [Finite A]
     (Lc Ic : CochainComplex

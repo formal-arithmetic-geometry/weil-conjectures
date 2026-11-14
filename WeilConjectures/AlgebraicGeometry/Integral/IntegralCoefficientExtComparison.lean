@@ -20,10 +20,6 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
 
 /-!
 # Comparing the two integral coefficient presentations
-
-Source: the coefficient conventions of sk-def-sf-setting and lemma-uniform-ext-bound;
-Mathlib spectralNorm_unique_field_norm_ext and the definition of finite constant models.
-(blueprint: lem-integral-coefficient-ext-comparison).
 -/
 
 @[expose] public section

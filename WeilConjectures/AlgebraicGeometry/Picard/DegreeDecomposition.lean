@@ -86,13 +86,11 @@ lemma picardPresheafDegree_one {T : Over (Spec (.of k))} (t : T.left) :
   rw [← h]
   exact picardFibreDegree_one f τ
 
-/-- **The degree as a homomorphism.** For a smooth proper curve `f : X ⟶ Spec k` and a
+/-- **The degree as a homomorphism.** For a smooth proper curve `f: X ⟶ Spec k` and a
 `k`-scheme `T`, the fibrewise degree `ℒ ↦ (t ↦ deg ℒ_t)` is a group homomorphism from `Pic (X_T)`
 to the group of functions `T → ℤ` (written multiplicatively); it is natural in `T`
 (`AlgebraicGeometry.picardPresheafDegreeHom_map`) and its values are locally constant
-(`AlgebraicGeometry.isLocallyConstant_picardPresheafDegree`).
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably--1`, part (1)) -/
+(`AlgebraicGeometry.isLocallyConstant_picardPresheafDegree`). -/
 noncomputable def picardPresheafDegreeHom (T : Over (Spec (.of k))) :
     (pullback f T.hom).Pic →* (T.left → Multiplicative ℤ) where
   toFun L t := .ofAdd (picardPresheafDegree f L t)
@@ -109,10 +107,8 @@ lemma picardPresheafDegreeHom_apply (T : Over (Spec (.of k))) (L : (pullback f T
     picardPresheafDegreeHom f T L t = .ofAdd (picardPresheafDegree f L t) :=
   rfl
 
-/-- **The degree homomorphism is natural**: the degree of the pullback of `ℒ` along `φ : T' ⟶ T`
-is the degree of `ℒ` composed with `φ`.
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably--1`, part (1)) -/
+/-- **The degree homomorphism is natural**: the degree of the pullback of `ℒ` along `φ: T' ⟶ T`
+is the degree of `ℒ` composed with `φ`. -/
 lemma picardPresheafDegreeHom_map {T T' : Over (Spec (.of k))} (φ : T' ⟶ T)
     (L : (pullback f T.hom).Pic) (t : T'.left) :
     picardPresheafDegreeHom f T' (Pic.map (baseChangeMap f φ) L) t =
@@ -120,9 +116,7 @@ lemma picardPresheafDegreeHom_map {T T' : Over (Spec (.of k))} (φ : T' ⟶ T)
   congrArg Multiplicative.ofAdd (picardPresheafDegree_map f φ L t)
 
 /-- **`Pic^0` is the kernel of the degree.** The classes of fibrewise degree zero are the kernel
-of the degree homomorphism `AlgebraicGeometry.picardPresheafDegreeHom`.
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably--1`, part (1)) -/
+of the degree homomorphism `AlgebraicGeometry.picardPresheafDegreeHom`. -/
 theorem ker_picardPresheafDegreeHom (T : Over (Spec (.of k))) :
     (picardPresheafDegreeHom f T).ker = picardSubgroupDegreeZero f T := by
   ext L
@@ -131,9 +125,7 @@ theorem ker_picardPresheafDegreeHom (T : Over (Spec (.of k))) :
   exact forall_congr' fun t ↦ ofAdd_eq_one
 
 /-- **`Pic^d · Pic^e ⊆ Pic^{d+e}`**: the product of a class of fibrewise degree `d` and a class
-of fibrewise degree `e` has fibrewise degree `d + e`.
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably--1`, part (1)) -/
+of fibrewise degree `e` has fibrewise degree `d + e`. -/
 theorem mul_mem_picardSubfunctorDegree {T : Over (Spec (.of k))} {d e : ℤ}
     {L M : (pullback f T.hom).Pic} (hL : L ∈ (picardSubfunctorDegree f d).obj (.op T))
     (hM : M ∈ (picardSubfunctorDegree f e).obj (.op T)) :
@@ -152,9 +144,7 @@ attribute [local instance] sheafifyGroup in
 /-- **The degree on `Pic_{X/k}` is a homomorphism of sheaves of groups.** For sections `x`, `y`
 of the relative Picard functor over `T`, with the group law that the sheafification inherits
 from the Picard presheaf (`CategoryTheory.sheafifyGroup`), the degree of `x * y` is the sum of
-the degrees of `x` and `y`.
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably--1`, part (1)) -/
+the degrees of `x` and `y`. -/
 theorem picardDegree_mul {T : Over (Spec (.of k))}
     (x y : (sheafify (fppfTopology.over (Spec (.of k)))
       (picardPresheafGrp f ⋙ forget GrpCat)).obj (.op T)) :
@@ -175,11 +165,9 @@ section SubgroupScheme
 variable {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k))
 
 /-- **The inclusion of `Pic^0` is a group homomorphism.** Let `P` represent `Pic_{X/k}` and `P₀`
-represent `Pic^0_{X/k}`, both respecting the group laws, and let `j : P₀ ⟶ P` send the point of
+represent `Pic^0_{X/k}`, both respecting the group laws, and let `j: P₀ ⟶ P` send the point of
 `P₀` classifying a class of fibrewise degree zero to the point of `P` classifying the same
-class. Then `j` is a morphism of group objects.
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably--1`, part (3)) -/
+class. Then `j` is a morphism of group objects. -/
 theorem isMonHom_of_isPicardMul {P P₀ : Over (Spec (.of k))} [GrpObj P] [GrpObj P₀]
     (hP : (picardFunctor f).obj.RepresentableBy P) (hPm : IsPicardMul f hP)
     (e : (picardFunctorDegree f 0).obj.RepresentableBy P₀) (he : IsPicardZeroMul f e)
@@ -221,10 +209,8 @@ theorem isMonHom_of_isPicardMul {P P₀ : Over (Spec (.of k))} [GrpObj P] [GrpOb
 
 /-- **The comparison of two Jacobians is a homomorphism.** Let `J` and `J'` be group schemes
 representing `Pic^0_{X/k}` by `e` and `e'`, both respecting the group laws. Then the unique
-isomorphism `u : J ≅ J'` compatible with `e` and `e'`
-(`CategoryTheory.Functor.RepresentableBy.uniqueUpToIso`) is a morphism of group objects.
-
-(blueprint: `proposition-jacobian-over-ground-field--1`) -/
+isomorphism `u: J ≅ J'` compatible with `e` and `e'`
+(`CategoryTheory.Functor.RepresentableBy.uniqueUpToIso`) is a morphism of group objects. -/
 theorem isMonHom_uniqueUpToIso_hom_of_isPicardZeroMul [SmoothOfRelativeDimension 1 f]
     [IsProper f] {J J' : Over (Spec (.of k))} [GrpObj J] [GrpObj J']
     (e : (picardFunctorDegree f 0).obj.RepresentableBy J) (he : IsPicardZeroMul f e)
@@ -270,10 +256,8 @@ theorem isMonHom_uniqueUpToIso_hom_of_isPicardZeroMul [SmoothOfRelativeDimension
       tensorHom_snd]
 
 /-- **Uniqueness of the Jacobian.** Let `J` and `J'` be group schemes representing `Pic^0_{X/k}`
-by `e` and `e'`, both respecting the group laws. Then there is a unique isomorphism `u : J ≅ J'`
-with `e' ∘ h_u = e`, and it is an isomorphism of group schemes.
-
-(blueprint: `proposition-jacobian-over-ground-field--1`) -/
+by `e` and `e'`, both respecting the group laws. Then there is a unique isomorphism `u: J ≅ J'`
+with `e' ∘ h_u = e`, and it is an isomorphism of group schemes. -/
 theorem existsUnique_iso_isMonHom_of_isPicardZeroMul [SmoothOfRelativeDimension 1 f]
     [IsProper f] {J J' : Over (Spec (.of k))} [GrpObj J] [GrpObj J']
     (e : (picardFunctorDegree f 0).obj.RepresentableBy J) (he : IsPicardZeroMul f e)
@@ -295,9 +279,7 @@ is a commutative group scheme whose group law is the tensor product of invertibl
 its decomposition into the open and closed subschemes `P^d` representing `Pic^d_{X/k}`
 (`AlgebraicGeometry.exists_decomposition_picardFunctor_representableBy`) can be chosen such
 that `P^0` is a commutative group scheme representing `Pic^0_{X/k}` compatibly with the group
-laws, and the open immersion `P^0 ⟶ P` is a morphism of group objects.
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably--1`, part (3)) -/
+laws, and the open immersion `P^0 ⟶ P` is a morphism of group objects. -/
 theorem exists_decomposition_picardFunctor_isMonHom (P : Over (Spec (.of k)))
     (hP : (picardFunctor (X ↘ Spec (.of k))).obj.RepresentableBy P) :
     ∃ (_ : CommGrpObj P) (Pd : ℤ → Over (Spec (.of k))) (j : ∀ d, Pd d ⟶ P)
@@ -329,9 +311,7 @@ Schemes `P`, `P'` representing `Pic^d_{X/k}` and `Pic^{d'}_{X/k}` are isomorphic
 isomorphism whose functor of points is tensoring with `pr_X^* M`: the point of `P` classifying a
 class `ℒ` is sent to the point of `P'` classifying `ℒ ⊗ pr_X^* M`
 (`AlgebraicGeometry.picardSubfunctorDegreeMulMapFst`). The inverse is tensoring with
-`pr_X^* M⁻¹`, by the same statement applied to `M⁻¹`.
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably--1`, part (4)) -/
+`pr_X^* M⁻¹`, by the same statement applied to `M⁻¹`. -/
 theorem exists_iso_representableBy_picardFunctorDegree {d d' e : ℤ} (M : X.Pic)
     (hM : picDegreeHom k X M = .ofAdd e) (h : d' = d + e) (P P' : Over (Spec (.of k)))
     (hP : (picardFunctorDegree (X ↘ Spec (.of k)) d).obj.RepresentableBy P)
@@ -397,13 +377,11 @@ noncomputable def picardPresheafMulMapFstIso (M : X.Pic) :
 
 omit [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))] in
 /-- **Translation on the Picard scheme.** Let `P` represent the relative Picard functor
-`Pic_{X/k}` through `hP` and let `M ∈ Pic X`. The translation `τ_M : P ≅ P` is the automorphism
+`Pic_{X/k}` through `hP` and let `M ∈ Pic X`. The translation `τ_M: P ≅ P` is the automorphism
 of `P` whose functor of points is the sheafification of `ℒ ↦ ℒ ⊗ pr_X^* M`: a `T`-point `x` of
 `P` is sent to the point `hP.homEquiv.symm (x · (a_M)_T)` (`picardTranslation_homEquiv`,
 `picardTranslation_hom_eq_mul`), where `a_M` is the `k`-point `[M]`. For `M = 𝒪_X(dx)` this is
-the translation `τ_d` of the blueprint.
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably--1`, part (4)) -/
+the translation `τ_d` of the blueprint. -/
 noncomputable def picardTranslation {P : Over (Spec (.of k))}
     (hP : (picardFunctor (X ↘ Spec (.of k))).obj.RepresentableBy P) (M : X.Pic) : P ≅ P :=
   hP.uniqueUpToIso (hP.ofIso ((sheafToPresheaf (fppfTopology.over (Spec (.of k))) _).mapIso
@@ -429,9 +407,7 @@ lemma picardTranslation_homEquiv {P : Over (Spec (.of k))}
 
 omit [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))] in
 /-- **The translation `τ_M` on points coming from invertible modules**: the point classifying
-`ℒ ∈ Pic (X_T)` is sent to the point classifying `ℒ ⊗ pr_X^* M`.
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably--1`, part (4)) -/
+`ℒ ∈ Pic (X_T)` is sent to the point classifying `ℒ ⊗ pr_X^* M`. -/
 lemma homEquiv_symm_toPicardFunctor_comp_picardTranslation_hom {P : Over (Spec (.of k))}
     (hP : (picardFunctor (X ↘ Spec (.of k))).obj.RepresentableBy P) (M : X.Pic)
     {T : Over (Spec (.of k))} (L : (pullback (X ↘ Spec (.of k)) T.hom).Pic) :
@@ -444,9 +420,7 @@ lemma homEquiv_symm_toPicardFunctor_comp_picardTranslation_hom {P : Over (Spec (
     (toSheafify_naturality (fppfTopology.over (Spec (.of k))) (picardPresheafMulMapFst M))).symm
 
 omit [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))] in
-/-- **The inverse of `τ_M` is `τ_{M⁻¹}`.** For `M = 𝒪_X(dx)` this says `τ_d⁻¹ = τ_{-d}`.
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably--1`, part (4)) -/
+/-- **The inverse of `τ_M` is `τ_{M⁻¹}`.** For `M = 𝒪_X(dx)` this says `τ_d⁻¹ = τ_{-d}`. -/
 theorem picardTranslation_inv {P : Over (Spec (.of k))}
     (hP : (picardFunctor (X ↘ Spec (.of k))).obj.RepresentableBy P) (M : X.Pic) :
     (picardTranslation hP M).inv = (picardTranslation hP M⁻¹).hom := by
@@ -463,9 +437,7 @@ theorem picardTranslation_inv {P : Over (Spec (.of k))}
 omit [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))] in
 /-- **`τ_M` is translation by the `k`-point `[M]`.** If `P` is a group scheme representing
 `Pic_{X/k}` compatibly with the group laws, then `τ_M = m ∘ (id, a_M ∘ π)`: a `T`-point `x` is
-sent to `x · (a_M)_T`, where `a_M : Spec k ⟶ P` classifies `M` and `π : T ⟶ Spec k`.
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably--1`, part (4)) -/
+sent to `x · (a_M)_T`, where `a_M: Spec k ⟶ P` classifies `M` and `π: T ⟶ Spec k`. -/
 theorem picardTranslation_hom_eq_mul {P : Over (Spec (.of k))} [GrpObj P]
     (hP : (picardFunctor (X ↘ Spec (.of k))).obj.RepresentableBy P)
     (hPm : IsPicardMul (X ↘ Spec (.of k)) hP) (M : X.Pic) {T : Over (Spec (.of k))}
@@ -498,13 +470,11 @@ theorem picardTranslation_hom_eq_mul {P : Over (Spec (.of k))} [GrpObj P]
     MonObj.comp_mul, ha, ← Category.assoc, comp_toUnit, hb, ← Pic.map_comp, hfst, hPm]
 
 /-- **The translation restricts to the translation between degree components.** Let `P`
-represent `Pic_{X/k}`, let `j : P^d ⟶ P` and `j' : P^{d'} ⟶ P` be the inclusions of schemes
+represent `Pic_{X/k}`, let `j: P^d ⟶ P` and `j': P^{d'} ⟶ P` be the inclusions of schemes
 representing `Pic^d_{X/k}` and `Pic^{d'}_{X/k}`, compatible with the representations, and let
-`φ : P^d ≅ P^{d'}` act on points by tensoring with `pr_X^* M`, where `M ∈ Pic X` has degree
+`φ: P^d ≅ P^{d'}` act on points by tensoring with `pr_X^* M`, where `M ∈ Pic X` has degree
 `e = d' - d` (`AlgebraicGeometry.exists_iso_representableBy_picardFunctorDegree`). Then the
-translation `τ_M` of `P` restricts to `φ`: `j ≫ τ_M = φ ≫ j'`.
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably--1`, part (4)) -/
+translation `τ_M` of `P` restricts to `φ`: `j ≫ τ_M = φ ≫ j'`. -/
 theorem comp_picardTranslation_hom {d d' e : ℤ} (M : X.Pic)
     (hM : picDegreeHom k X M = .ofAdd e) (h : d' = d + e) {P Pd Pd' : Over (Spec (.of k))}
     (hP : (picardFunctor (X ↘ Spec (.of k))).obj.RepresentableBy P)
@@ -556,9 +526,7 @@ theorem comp_picardTranslation_hom {d d' e : ℤ} (M : X.Pic)
 omit [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))] in
 /-- **The inverse translation restricts to the inverse.** In the situation of
 `comp_picardTranslation_hom`, the translation `τ_{M⁻¹} = τ_M⁻¹` of `P` restricts to `φ⁻¹`:
-`j' ≫ τ_{M⁻¹} = φ⁻¹ ≫ j`.
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably--1`, part (4)) -/
+`j' ≫ τ_{M⁻¹} = φ⁻¹ ≫ j`. -/
 theorem comp_picardTranslation_inv_hom {P Pd Pd' : Over (Spec (.of k))}
     (hP : (picardFunctor (X ↘ Spec (.of k))).obj.RepresentableBy P) (M : X.Pic)
     (j : Pd ⟶ P) (j' : Pd' ⟶ P) (φ : Pd ≅ Pd')
@@ -573,9 +541,7 @@ variable [GeometricallyIntegral (X ↘ Spec (.of k))]
 field `k` and let `x` be a rational point of `X`. There is an isomorphism between
 schemes `P₀`, `P_d` representing `Pic^0_{X/k}` and `Pic^d_{X/k}` whose functor of points is
 `ℒ ↦ ℒ ⊗ pr_X^* 𝒪_X(dx)`. Here `𝒪_X(dx)` is the class `M` of `𝒪_X(-x)^{⊗(-d)}`, `𝒪_X(-x)` the
-ideal sheaf of `x`, and the inverse isomorphism is tensoring with `pr_X^* 𝒪_X(-dx)`.
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably--1`, part (4)) -/
+ideal sheaf of `x`, and the inverse isomorphism is tensoring with `pr_X^* 𝒪_X(-dx)`. -/
 theorem exists_iso_representableBy_picardFunctorDegree_zero (d : ℤ)
     (x : (X ↘ Spec (.of k)).fieldPoints k) (P₀ Pd : Over (Spec (.of k)))
     (hP₀ : (picardFunctorDegree (X ↘ Spec (.of k)) 0).obj.RepresentableBy P₀)
@@ -605,11 +571,9 @@ theorem exists_iso_representableBy_picardFunctorDegree_zero (d : ℤ)
 subschemes `P^d` representing `Pic^d_{X/k}` (`exists_decomposition_picardFunctor_representableBy`).
 Let `M = 𝒪_X(dx)` and let `τ_d = picardTranslation hP M` be the translation of `P` by the
 `k`-point `[𝒪_X(dx)]`, whose inverse is `τ_{-d} = picardTranslation hP M⁻¹`
-(`picardTranslation_inv`). Then `τ_d` restricts to an isomorphism `φ : P^0 ≅ P^d` which on
+(`picardTranslation_inv`). Then `τ_d` restricts to an isomorphism `φ: P^0 ≅ P^d` which on
 points is tensoring with `pr_X^* 𝒪_X(dx)`, i.e. `j_0 ≫ τ_d = φ ≫ j_d`, and `τ_{-d}` restricts to
-its inverse, `j_d ≫ τ_{-d} = φ⁻¹ ≫ j_0`.
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably--1`, part (4)) -/
+its inverse, `j_d ≫ τ_{-d} = φ⁻¹ ≫ j_0`. -/
 theorem exists_decomposition_picardTranslation [IsSepClosed k] (d : ℤ)
     (x : (X ↘ Spec (.of k)).fieldPoints k) (P : Over (Spec (.of k)))
     (hP : (picardFunctor (X ↘ Spec (.of k))).obj.RepresentableBy P) :

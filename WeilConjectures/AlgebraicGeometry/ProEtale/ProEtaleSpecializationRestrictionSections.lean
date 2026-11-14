@@ -38,8 +38,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleSpecializationUnitComp
 /-!
 # Sections on a closed specialization neighbourhood in the pro-etale site
 
-Source: Stacks Project, `proetale.tex`, Tag 09AC, `lemma-compute-i-star`
-(blueprint: lem-weil-pbc-proetale-specialization-restriction-sections).
+Source: Stacks Project, Tag 09AC.
 -/
 
 @[expose] public section
@@ -55,35 +54,7 @@ neighbourhood is a natural isomorphism of abelian groups. Whiskering the unit wi
 sections at `V` retains its naturality in the abelian sheaf. Its target at `F` is
 `(i⁻¹ F)((proEtaleBaseChange i).obj V)`, i.e. sections on `V ×[X] Z`.
 
-Source: Stacks Project, Tag 09AC, `lemma-compute-i-star`
-(blueprint: lem-weil-pbc-proetale-specialization-restriction-sections).
-
-Proof plan:
-1. Use weakly-etale localization to replace `X` by the affine scheme `V`, preserving
-restriction and the unit. Write `B = V`, `T = B ×[X] Z`, and `k : T ⟶ B`.
-2. Use the affine closed-site functors `v ⊣ u` of Tags 09BK/09BL and their counit
-`p : v(T) ⟶ B`. The image of `p` contains `T`. Ind-etale maps are flat, so their
-images are stable under generalization (flat going-down). The specialization
-hypothesis makes `p` surjective. As an affine weakly-etale morphism it is a cover.
-3. Local surjectivity for the representable epimorphism of this cover and weak
-contractibility of `B` give a section `s` of `p`. After applying `u`, the counit
-is an isomorphism by full faithfulness of `v`. Thus `p ≫ s` and the identity have
-the same image under `u`; the adjunction bijection makes them equal. Hence `p`
-is an isomorphism.
-4. A finite affine ind-etale cover of `T` lifts by `v` to a cover of `B`: its image
-contains `T` and is stable under generalization. Weak contractibility supplies a
-section over `B`; base change and the canonical `u(v(T)) ≅ T` give a section of
-the original cover.
-5. Refine local lifts of a section along a set-sheaf epimorphism to a finite
-ind-etale cover of `T`. Finite-coproduct evaluation and the section from step 4
-produce a global lift. This proves weak contractibility of `T`; the dense-subsite
-sheaf equivalence gives the same conclusion on the affine ind-etale basis.
-6. Apply affine closed inverse-image evaluation to obtain `(k⁻¹ F)(T) ≅ F(v(T))`.
-Under `v ⊣ u`, the inverse-image unit is precisely restriction along the counit
-`p`, followed by sheafification/evaluation. It is an isomorphism by step 3.
-7. Transport back through localization. All maps preserve addition. Naturality of
-restriction and sheafification identifies the result with the original unit,
-naturally in `F`, rather than merely an abstract isomorphism of section groups. -/
+Source: Stacks Project, Tag 09AC. -/
 theorem isIso_proEtaleUnit_sections_of_specialization
     {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
     (V : X.ProEt) [IsAffine V.left]

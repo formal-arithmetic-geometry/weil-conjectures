@@ -10,10 +10,7 @@ import all WeilConjectures.AlgebraicGeometry.SmoothPurity.RootsOfUnityInverseIma
 
 /-! # Compatibility of normalized root power transitions
 
-Source: the Roots of unity paragraph of
-`sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md`
-in the current blueprint; Stacks 03PK.
-(blueprint: lem-pur-transport-root-pull-step).
+Source: Stacks 03PK.
 -/
 
 @[expose] public section
@@ -82,17 +79,7 @@ private theorem rootPull_cast {X Y : Scheme.{u}} (f : X ⟶ Y)
   subst N'
   simp
 
-/-- Normalized root pullback commutes with the successive power transitions.
-
-Source: current blueprint, Roots of unity, final Kummer transition sentence.
-(blueprint: lem-pur-transport-root-pull-step).
-Proof: on sheafification generators the normalized root comparison preserves the
-root itself. The kernel power transition takes that root to its ell-th power,
-since (ell*N)/N=ell for positive N. Sheafification hom-extensionality proves
-compatibility of the two root presentations. Conjugating the existing kernel
-inverse-image transition square gives compatibility for rootPull. Equality
-transport along ell^(n+1)=ell*ell^n is compatible by substitution. This includes
-n=0 and empty schemes. -/
+/-- Normalized root pullback commutes with the successive power transitions. -/
 theorem normalizedRootPull_step (ell : ℕ) [Fact ell.Prime]
     {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     (upperStar Ab.{u + 1} f).map

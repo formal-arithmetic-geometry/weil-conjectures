@@ -14,8 +14,7 @@ public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor
 
 /-! # The scalar-extension twist map on a single standard chart
 
-Source: Stacks Project, constructions.tex, Tags 01MY and 01N2.
-(blueprint: lem-sfb-proj-scalar-extension-twist-chart). -/
+Source: Stacks Project, Tags 01MY and 01N2. -/
 
 @[expose] public section
 
@@ -32,38 +31,8 @@ namespace AlgebraicGeometry.Proj
 /-- A morphism with the prescribed pointwise fraction formula is bijective on every
 open inside a scalar-extended standard chart, for one fixed integer twist.
 
-Source: Stacks Project, constructions.tex, Tag 01N2, clause (3), proof on standard
-opens; Tag 01MY, the map on localized graded modules.
-
-Proof: Let H = (A_f)_0 and L = (A_f)_j. The graded-module sheaf construction, applied
-to the degree shift A(j), identifies the restriction of the concrete locally-fraction
-sheaf twist A j to D_+(f) with the quasi-coherent sheaf associated to L. Indeed both
-have the same homogeneous fractions on standard subopens, with the same restrictions;
-the basis-extension uniqueness in the graded-module sheaf theorem identifies them.
-The analogous construction identifies twist B j on D_+(psi f) with the sheaf of
-(B_(psi f))_j. The affine pullback-sections theorem identifies the pullback of the
-first sheaf with the sheaf associated to L tensor_H (B_(psi f))_0.
-
-The homogeneous-localization scalar-extension equivalence identifies the last
-coefficient ring with S tensor_R H. Tensor associativity and the balancing relations
-give L tensor_H (S tensor_R H) = S tensor_R L, sending u tensor (s tensor h) to
-s tensor h*u, with inverse s tensor u mapped to u tensor (s tensor 1). The
-homogeneous-module localization scalar-extension equivalence, followed by beta on
-fractions, identifies S tensor_R L with (B_(psi f))_j. These equivalences send
-(a/f^m) tensor c to c*psi(a)/psi(f)^m. The grading compatibility of beta follows
-from hgraded and hbeta: beta maps the span of the tensors s tensor a, a in A_n,
-onto B_n. No flatness is used, since homogeneous pieces are direct summands before
-localization and the comparison is an equivalence on each such piece.
-
-The hypothesis on eta gives exactly this formula on pullbacks of chart sections.
-These sections, multiplied by coefficients, generate the pullback chart module;
-linearity therefore identifies eta with the displayed equivalence on chart sections.
-The affine tilde--sections adjunction identifies the restriction of eta with its
-associated sheaf isomorphism. Every further restriction is an isomorphism as well,
-so its map on sections over any W contained in the chart is bijective. Empty charts
-and empty W give the unique map between zero section modules, and negative j uses
-the same shifted graded-module localization, without an invertibility assumption.
-(blueprint: lem-sfb-proj-scalar-extension-twist-chart). -/
+Source: Stacks Project, Tag 01N2, clause (3), proof on standard opens; Tag 01MY, the map on
+localized graded modules. -/
 theorem scalarExtension_twistMap_basicOpen_bijective
     {R S A B : Type u} [CommRing R] [CommRing S] [CommRing A] [CommRing B]
     [Algebra R S] [Algebra R A] [Algebra S B]

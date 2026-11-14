@@ -51,8 +51,7 @@ set_option backward.isDefEq.respectTransparency.types false
 
 /-- Evaluation at n followed by the actual constant strict diagram. This construction
 retains the input module, without choices of maps or coefficient lifts.
-Source: Zheng 4.1 and 4.10
-(blueprint: lem-sf-semilinear-proper-open-mate-pasting). -/
+Source: Zheng 4.1 and 4.10. -/
 abbrev levelTower (n : ℕ) (X : Scheme.{u}) :
     Modules C τ X ⥤ StrictTower.Towers (C n) X :=
   SemilinearSections.evaluation.{u + 1, u, u + 1}
@@ -61,8 +60,7 @@ abbrev levelTower (n : ℕ) (X : Scheme.{u}) :
 
 /-- Exact localization of evaluation followed by a constant diagram. Evaluation at
 any tower index recovers the actual n-th module, with its C_n action.
-Source: Zheng 4.1 and 4.10
-(blueprint: lem-sf-semilinear-proper-open-mate-pasting). -/
+Source: Zheng 4.1 and 4.10. -/
 abbrev E (n : ℕ) (X : Scheme.{u}) := (levelTower C τ n X).mapDerivedCategory
 section Evaluation
 set_option backward.isDefEq.respectTransparency true
@@ -150,11 +148,7 @@ set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 -- The uniqueness proof compares the section carriers of both composite functors.
 /-- Direct image and evaluation commute by the identity on component sections.
-Source: the ring-sheaf change adjunction; Stacks 03CZ and 03D7
-(blueprint: lem-sf-semilinear-proper-open-mate-pasting).
-Proof: both composites evaluate to M_n(U ×_Y X), with the C_n action.
-The identity is linear, natural in U, n and M, and invertible. Its components on
-all sections uniquely determine the comparison. -/
+Source: the ring-sheaf change adjunction; Stacks 03CZ and 03D7. -/
 theorem evalPushOrdinary_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃! e : levelTower C τ n X ⋙ StrictTower.towerDirectImage (C n) f ≅
       push C τ f ⋙ levelTower C τ n Y,
@@ -176,8 +170,7 @@ theorem evalPushOrdinary_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
     exact eval_constant_diagram_eq C τ n f (push C τ f) d hd e' he'
 
 /-- The ordinary inverse-image scalar comparison is the transpose of the uniquely
-section-normalized direct-image comparison. Source: the ring-sheaf change adjunction
-(blueprint: lem-sf-semilinear-proper-open-mate-pasting). -/
+section-normalized direct-image comparison. Source: the ring-sheaf change adjunction. -/
 def evalPullInv {X Y : Scheme.{u}} (f : X ⟶ Y) :
     levelTower C τ n Y ⋙ StrictTower.towerPullback (C n) f ⟶
       pull C τ f ⋙ levelTower C τ n X :=
@@ -267,10 +260,7 @@ private theorem eval_pull_mate_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     (StrictTower.modulePullback (C n) f) (VaryingRing.moduleEvalG C τ f n)).isIso_inv
 
 /-- The identified-coefficient inverse-image scalar comparison is invertible.
-Source: the ring-sheaf change adjunction; Stacks 03EK
-(blueprint: lem-sf-semilinear-proper-open-mate-pasting).
-Proof: on component n the transpose is the identity inverse-image comparison.
-The constant diagram retains that identity at every index, giving its inverse. -/
+Source: the ring-sheaf change adjunction; Stacks 03EK. -/
 theorem evalPullInv_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     IsIso (evalPullInv C τ n f) := by
   exact eval_pull_mate_isIso C τ n f (push C τ f) (push_eq C τ f)
@@ -278,8 +268,7 @@ theorem evalPullInv_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (evalPushOrdinary_existsUnique C τ n f).choose_spec.1
 
 /-- The canonical evaluation inverse-image comparison after exact localization.
-Source: the ring-sheaf change adjunction
-(blueprint: lem-sf-semilinear-proper-open-mate-pasting). -/
+Source: the ring-sheaf change adjunction. -/
 def evalP {X Y : Scheme.{u}} (f : X ⟶ Y) :
     P C τ f ⋙ E C τ n X ≅ E C τ n Y ⋙ StrictTower.G (C n) f :=
   Functor.mapDerivedCategoryCompIso _ _ ≪≫
@@ -288,8 +277,7 @@ def evalP {X Y : Scheme.{u}} (f : X ⟶ Y) :
   (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The direct-image comparison is the actual derived mate of evalP inverse.
-Source: the ring-sheaf change adjunction
-(blueprint: lem-sf-semilinear-proper-open-mate-pasting). -/
+Source: the ring-sheaf change adjunction. -/
 def evalR {X Y : Scheme.{u}} (f : X ⟶ Y) :
     R C τ f ⋙ E C τ n Y ⟶ E C τ n X ⋙ StrictTower.R (C n) f :=
   mateEquiv (adj C τ f) (StrictTower.adj (C n) f) (evalP C τ n f).inv
@@ -601,12 +589,7 @@ private theorem eval_open_mate_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) [IsOpenImm
       (StrictTower.modulePullback (C n) f) (VaryingRing.moduleEvalG C τ f n))
 
 /-- The specified derived direct-image mate is invertible.
-Source: the ring-sheaf change adjunction; Zheng 4.10
-(blueprint: lem-sf-semilinear-proper-open-mate-pasting).
-Proof: the simultaneous section model computes direct images after evaluation by
-the identical section complexes. The derived adjunction identifies this comparison
-with the displayed mate. The constant diagram preserves its inverse.
-This uses detection of isomorphisms and never faithfulness on morphisms. -/
+Source: the ring-sheaf change adjunction; Zheng 4.10. -/
 theorem evalR_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     IsIso (evalR C τ n f) := by
   let s := @asIso _ _ _ _ (evalPullInv C τ n f) (evalPullInv_isIso C τ n f)
@@ -620,17 +603,13 @@ theorem evalR_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (evalPushOrdinary_existsUnique C τ n f).choose_spec.1 s rfl
 
 /-- The open scalar comparison is fixed by the open-adjunction transpose of evalP.
-Source: Stacks 03DI and the ring-sheaf change adjunction
-(blueprint: lem-sf-semilinear-proper-open-mate-pasting). -/
+Source: Stacks 03DI and the ring-sheaf change adjunction. -/
 def evalJInv {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     E C τ n U ⋙ StrictTower.J (C n) j ⟶ J C τ j ⋙ E C τ n X :=
   (mateEquiv (jAdj C τ j) (StrictTower.jAdj (C n) j)).symm (evalP C τ n j).hom
 
 /-- Open extension commutes with evaluation under its ordinary section units.
-Source: Stacks 03DI (blueprint: lem-sf-semilinear-proper-open-mate-pasting).
-Proof: localized extension is the same module on the open and zero on its complement.
-Evaluation keeps both pieces, and its open-adjunction transpose is the
-identity on the original sections. Exact localization preserves this comparison. -/
+Source: Stacks 03DI. -/
 theorem evalJInv_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     IsIso (evalJInv C τ n j) := by
   let s := @asIso _ _ _ _ (evalPullInv C τ n j) (evalPullInv_isIso C τ n j)
@@ -647,7 +626,7 @@ theorem evalJInv_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (evalPushOrdinary_existsUnique C τ n j).choose_spec.1 s rfl
 
 /-- The invertible, open-unit-normalized evaluation comparison.
-Source: Stacks 03DI (blueprint: lem-sf-semilinear-proper-open-mate-pasting). -/
+Source: Stacks 03DI. -/
 def evalJ {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     J C τ j ⋙ E C τ n X ≅ E C τ n U ⋙ StrictTower.J (C n) j :=
   (@asIso _ _ _ _ (evalJInv C τ n j) (evalJInv_isIso C τ n j)).symm

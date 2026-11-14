@@ -979,12 +979,7 @@ attribute [-instance] additiveWeakSheafification additiveLocallyBijective setShe
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Ordinary tensor comparison, uniquely normalized on scalar-extension generators.
-Source: Stacks 03EL and 0G7E (blueprint: lem-sf-site-pullback-tensor-generators).
-Proof: construct the algebraic inverse image and extend scalars along the adjunct
-coefficient morphism. The set-sheaf adjunction identifies its unit on pure tensors.
-Restrictions and scalar multiplication give the generator equation. The module
-adjunction and pure tensor generation give uniqueness. K-flatness with flat terms
-is preserved by the same inverse-image/scalar-extension construction. -/
+Source: Stacks 03EL and 0G7E. -/
 theorem sitePullbackTensorGenerators
     {C D : Type c} [Category.{v} C] [Category.{v} D]
     [EssentiallySmall.{r} C] [EssentiallySmall.{r} D]

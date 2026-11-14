@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
 /-!
 # Restriction, tensor and pullback for glued integer powers
 
-Source: Stacks, Tags 00AL, 00AM, 01CD and 01CR; EGA II, Remark 4.2.7.
-(blueprint: lem-sfb-locally-constant-line-twist-identities)
+Source: Stacks, Tags 00AL, 00AM, 01CD and 01CR; EGA II, Remark 4.2.7
 -/
 
 @[expose] public section
@@ -37,8 +36,7 @@ private theorem degree_disjoint {X : Scheme.{u}} (d : LocallyConstant X ℤ)
 to the `m`-th integer line power: the projection from the defining product to its `m`-th
 factor, via `disjointOpenProductRestrictIso`.
 
-Source: Stacks, sheaves.tex, Tags 00AL and 00AM.
-(blueprint: lem-sfb-locally-constant-line-twist-identities) -/
+Source: Stacks, Tags 00AL and 00AM. -/
 noncomputable def locallyConstantLineTwistRestrictIso {X : Scheme.{u}} (A : X.Modules)
     (hA : A.IsInvertible) (d : LocallyConstant X ℤ) (m : ℤ) (U : X.Opens)
     (hU : ∀ x : X, x ∈ U → d x = m) :
@@ -84,27 +82,7 @@ private theorem restriction_of_eq {X Y : Scheme.{u}} {g h : Y ⟶ X}
 powers (the restriction identity is `locallyConstantLineTwistRestrictIso`).
 These statements hold for any invertible module, independently of projective geometry.
 
-Source: Stacks, sheaves.tex, Tags 00AL and 00AM; modules.tex, Tags 01CD and 01CR;
-EGA II, Remark 4.2.7.
-(blueprint: lem-sfb-locally-constant-line-twist-identities)
-
-Proof: On the open degree-m stratum the projection from the defining product to
-its m-th factor is an isomorphism: the other factors restrict to the zero module,
-and restriction of direct image from this same open is the original module.
-For any open on which the degree equals m, restrict this comparison once more.
-For the tensor assertion refine by the intersections of a stratum of d and a
-stratum of e. On each such open the assertion is the integer tensor-power product
-isomorphism, constructed from evaluation and associativity (for negative powers
-use the chosen dual tensor inverse). These local maps and their inverses agree
-on overlaps, since unequal strata are disjoint, and glue to the desired global
-isomorphism. For pullback use the inverse images of the degree strata. Pullback
-commutes with restriction, tensors and the unit. It identifies the pulled-back
-dual with the dual of the pulled-back line by the evaluation pairing in a local
-basis; hence it preserves negative as well as positive integer powers. The
-stratumwise isomorphisms glue. This argument uses the local universal property
-of the disjoint gluing, not preservation of arbitrary products by pullback.
-The empty strata and empty scheme have the unique maps of zero modules, so the
-same construction includes them. -/
+Source: Stacks, Tags 00AL and 00AM; Tags 01CD and 01CR; EGA II, Remark 4.2.7 -/
 theorem locallyConstantLineTwist_identities {X : Scheme.{u}} (A : X.Modules)
     (hA : A.IsInvertible) :
     (∀ d e : LocallyConstant X ℤ,

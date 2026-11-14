@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.RootSplitCoverAwayDivisorChar
 
 Source: Stacks Project, Tag 0EYG, final paragraph on intermediate root extensions,
 and finite etale descent (Tags 02LA and 02VN).
-(blueprint: lem-sbc-root-split-cover-cyclic-chart-model)
 -/
 
 @[expose] public section
@@ -30,22 +29,8 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Cyclic descent gives a root chart with equation the image of the original divisor.
 
-Source: Stacks Project, Tag 0EYG, final intermediate-root-extension paragraph;
-Tags 02LA, 02VN, 0BSK and 05N9.
-(blueprint: lem-sbc-root-split-cover-cyclic-chart-model)
-
-Proof: Descend finiteness and etaleness from the faithfully flat punctured root cover.
-At a divisor point, strict henselization makes the root cover a connected cyclic torsor:
-regularity of the divisor makes its equation prime, and Hensel lifts roots of unity.
-The splitting induces a cyclic action on Fin d. Decompose into orbits of lengths e.
-The orbit of length e is the intermediate root extension with root t^(n/e), as follows
-by comparing invariant fraction fields and normal integral closures. Thus e divides n
-and is a positive unit. Descend the finite collection of orbit isomorphisms, their
-inverses, and their projection identities to an affine pointed etale neighborhood.
-Keep the equation equal to the image of g. Away from the divisor, that image is a unit:
-split the finite etale cover etale locally and use e=1 for each component. The empty
-cover uses m=0. Spec of the product, restricted to the basic open, assembles the orbit
-charts. This lemma supplies the model; etale preservation of regularity is separate. -/
+Source: Stacks Project, Tag 0EYG, final intermediate-root-extension paragraph; Tags 02LA, 02VN, 0BSK
+and 05N9 -/
 theorem root_split_cover_cyclic_chart_model
     (R : CommRingCat.{u}) (g : R) (n : ℕ) (hn : 0 < n ∧ IsUnit (n : R))
     [IsRegularRing R] (hg : IsSMulRegular R g)

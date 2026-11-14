@@ -197,22 +197,7 @@ private theorem residueScalar_sameSite
     ((completedAdicScalar_exists S d).exists.choose_spec n.unop U a).symm)
 
 /-- The normalized stratum comparison carries every constant integral scalar to itself.
-Source: Bhatt--Scholze, Definition 6.5.1, Lemma 6.5.8(1), Proposition 6.6.11.
-(blueprint: lem-weil-pbc-integral-residue-stratum-scalar).
-
-Proof: compose both sections with each finite quotient projection. The projection
-identity of integralRingIso reduces the inverse-image expression to the constant
-quotient on S. The normalization of purCoefficientIso is inherited from
-integralDetailedCoefficientComparison: its nth projection is the nth integral
-projection followed by integralDetailedLevelComparison. That level comparison
-sends the class of ULift.up a to ULift.up of the class of a, by
-integralCoefficientULift_exists. The equation c.completed_projection replaces
-c.completed inverse by c.finite at that projection. Then c.finite_constants
-identifies the resulting section with the finite scalar section of d.
-The defining projection equation of completedAdicScalar identifies this with the
-nth projection of the right side. Limit projections are jointly monic, so the
-original sections coincide. The argument includes zero scalars, empty schemes,
-and arbitrary morphisms; no assertion about modules or complexes is needed. -/
+Source: Bhatt--Scholze, Definition 6.5.1, Lemma 6.5.8(1), Proposition 6.6.11. -/
 theorem integralResidueStratum_scalar
     (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

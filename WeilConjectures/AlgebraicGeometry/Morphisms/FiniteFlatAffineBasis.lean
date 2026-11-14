@@ -25,19 +25,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- A finite flat section algebra has a finite basis near every target point.
 
-Source: Stacks Project, Tag 0BVH, construction before Lemma 49.3.1; Tags 02K9 and 00NX.
-(blueprint: lem-sbc-finite-flat-affine-basis)
-
-Proof: Choose an affine neighbourhood U of the point. Its inverse image is affine
-because f is finite. The section algebra B is a finite flat module over the
-Noetherian ring A of sections of U, hence is finitely presented. At the prime of
-the chosen point, its localization is finite flat over a local ring, hence free.
-The openness of freeness for a finitely presented module gives an element r outside
-that prime on whose principal open the localized module is free. Sections of the
-inverse image of this principal open are the localization of B at the image of r.
-Transport the finite basis through these localization identifications and reindex
-its finite index set by Fin n. The principal open contains the point and is affine.
-No fixed positive rank is required; the empty source gives n = 0. -/
+Source: Stacks Project, Tag 0BVH, construction before Lemma 49.3.1; Tags 02K9 and 00NX. -/
 theorem exists_affine_basis_of_finite_flat
     {X Y : Scheme.{u}} [IsLocallyNoetherian Y]
     (f : X ⟶ Y) [IsFinite f] [Flat f] (y : Y) :

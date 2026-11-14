@@ -121,10 +121,8 @@ lemma extUnitLinearEquivH_apply (M : X.Modules) (n : ℕ) (x : Ext (𝟙_ X.Modu
 /-- **The Yoneda pairing** `Ext¹(𝒢, ω) × H⁰(X, 𝒢) → k`, as the `k`-linear map
 `Ext¹(𝒢, ω) → H⁰(X, 𝒢)^∨`. A class `s ∈ H⁰(X, 𝒢) ≅ Hom(𝒪_X, 𝒢) = Ext⁰(𝒪_X, 𝒢)` and
 `ξ ∈ Ext¹(𝒢, ω)` compose to the Yoneda product `s ∘ ξ ∈ Ext¹(𝒪_X, ω) ≅ H¹(X, ω)`
-(`extUnitAddEquivH`), which `t : H¹(X, ω) → k` evaluates (`yonedaDualMap_apply`). It is natural
-in `𝒢` (`yonedaDualMap_naturality`).
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
+(`extUnitAddEquivH`), which `t: H¹(X, ω) → k` evaluates (`yonedaDualMap_apply`). It is natural
+in `𝒢` (`yonedaDualMap_naturality`). -/
 noncomputable def yonedaDualMap (G : X.Modules) : Ext G ω 1 →ₗ[k] Module.Dual k (G.H 0) :=
   (((Abelian.Ext.bilinearCompOfLinear k (𝟙_ X.Modules) G ω 0 1 1 (zero_add 1)).compr₂
       (t ∘ₗ (extUnitLinearEquivH k ω 1).toLinearMap)).comp
@@ -289,9 +287,7 @@ variable (k : Type u) [Field k]
 `0 → ℰ₂ → ℰ₁ → ℰ₀ → 𝒢 → 0` in which each `ℰᵢ` is a finite direct sum of twists `𝒪(d)`. In
 fact `ℰ₂ = 0` can be taken: `exists_shortExact_sigma_twist` gives a resolution
 `0 → 𝒪(-N - 1)^a → 𝒪(-N)^b → 𝒢 → 0` by Castelnuovo–Mumford regularity, replacing the graded
-Hilbert syzygy theorem of the blueprint.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality`) -/
+Hilbert syzygy theorem of the blueprint. -/
 theorem exists_exact_sigma_twist (𝒢 : (ProjectiveLine (Spec (.of k))).Modules)
     [SheafOfModules.IsQuasicoherent (R := (ProjectiveLine (Spec (.of k))).ringCatSheaf) 𝒢]
     [SheafOfModules.IsFinitePresentation (R := (ProjectiveLine (Spec (.of k))).ringCatSheaf) 𝒢] :
@@ -511,9 +507,7 @@ The isomorphism is the inverse of the duality pairing `φ ↦ t ∘ H¹(φ)` for
 `t` on `H¹(ℙ¹_k, Ω¹) ≅ k` (`Scheme.Modules.dualPairingH`). It is bijective on the twists
 (`bijective_dualPairing_twist`, by descending induction along the Koszul sequences and a
 dimension count), hence on finite sums of twists, hence on every coherent `𝒢` by left exactness
-of both sides and a presentation by sums of twists (`bijective_dualPairing_of_isCoherent`).
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`, first isomorphism) -/
+of both sides and a presentation by sums of twists (`bijective_dualPairing_of_isCoherent`). -/
 theorem nonempty_dual_H_one_iso :
     Nonempty ((Scheme.Modules.isCoherent (ProjectiveLine (Spec (.of k)))).ι.op ⋙
         (Scheme.Modules.cohomologyFunctor k 1).op ⋙ ModuleCat.dualFunctor k ≅
@@ -557,9 +551,7 @@ surjections `𝒪(-eⱼ - 1)² ⟶ 𝒪(-eⱼ)`. Its kernel `𝒦` is coherent, 
 `Ext¹(𝒪(-d), ω) ≅ H¹(ℙ¹_k, 𝒪(d) ⊗ ω) = H¹(ℙ¹_k, 𝒪(d - 2)) = 0` for `d ≥ 1`
 (`Scheme.Modules.nonempty_ext_addEquiv_H`). The `H¹`-duality on `𝒦` and `ℰ`
 (`bijective_dualPairing_of_isCoherent`) then gives the bijectivity on `𝒢`
-(`Scheme.Modules.bijective_yonedaDualMap_of_shortExact`).
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`, second isomorphism) -/
+(`Scheme.Modules.bijective_yonedaDualMap_of_shortExact`). -/
 theorem bijective_yonedaDualMap [HasExt.{u} (ProjectiveLine (Spec (.of k))).Modules]
     (t : Module.Dual k ((ω).H 1)) (ht : t ≠ 0) (𝒢 : (ProjectiveLine (Spec (.of k))).Modules)
     [SheafOfModules.IsQuasicoherent (R := (ProjectiveLine (Spec (.of k))).ringCatSheaf) 𝒢]
@@ -620,9 +612,7 @@ theorem bijective_yonedaDualMap [HasExt.{u} (ProjectiveLine (Spec (.of k))).Modu
 /-- **Duality on the projective line, `H⁰`, for one module.** For a coherent
 `𝒪_{ℙ¹_k}`-module `𝒢` and a nonzero linear form `t` on `H¹(ℙ¹_k, Ω¹) ≅ k`,
 `H⁰(ℙ¹_k, 𝒢)^∨ ≅ Ext¹(𝒢, Ω¹_{ℙ¹_k/k})`: the inverse of the Yoneda pairing
-(`bijective_yonedaDualMap`).
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`, second isomorphism) -/
+(`bijective_yonedaDualMap`). -/
 noncomputable def dualHZeroLinearEquivExt [HasExt.{u} (ProjectiveLine (Spec (.of k))).Modules]
     (t : Module.Dual k ((ω).H 1)) (ht : t ≠ 0) (𝒢 : (ProjectiveLine (Spec (.of k))).Modules)
     [SheafOfModules.IsQuasicoherent (R := (ProjectiveLine (Spec (.of k))).ringCatSheaf) 𝒢]
@@ -642,9 +632,7 @@ lemma dualHZeroLinearEquivExt_symm_apply [HasExt.{u} (ProjectiveLine (Spec (.of 
 /-- **The Yoneda pairing on `ℙ¹_k` as a natural isomorphism**: on coherent
 `𝒪_{ℙ¹_k}`-modules `𝒢`, the Yoneda pairings `Ext¹(𝒢, Ω¹) → H⁰(ℙ¹_k, 𝒢)^∨` of
 `Scheme.Modules.yonedaDualMap` for a nonzero linear form `t` on `H¹(ℙ¹_k, Ω¹) ≅ k` form a natural
-isomorphism (`bijective_yonedaDualMap`, `Scheme.Modules.yonedaDualMap_naturality`).
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`, second isomorphism) -/
+isomorphism (`bijective_yonedaDualMap`, `Scheme.Modules.yonedaDualMap_naturality`). -/
 noncomputable def extIsoDualHZero [HasExt.{u} (ProjectiveLine (Spec (.of k))).Modules]
     (t : Module.Dual k ((ω).H 1)) (ht : t ≠ 0) :
     (Scheme.Modules.isCoherent (ProjectiveLine (Spec (.of k)))).ι.op ⋙
@@ -676,9 +664,7 @@ The isomorphism is the inverse of the Yoneda pairing
 `Ext¹(𝒢, ω) × Hom(𝒪, 𝒢) → Ext¹(𝒪, ω) ≅ H¹(ℙ¹_k, ω) → k` for a nonzero linear form `t` on
 `H¹(ℙ¹_k, Ω¹) ≅ k` (`extIsoDualHZero`), the same `t` as for the `H¹`-duality
 `nonempty_dual_H_one_iso`. Bijectivity comes from a resolution `0 → 𝒦 → ℰ → 𝒢 → 0` by twists
-and the `H¹`-duality on `𝒦` and `ℰ` (`bijective_yonedaDualMap`).
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`, second isomorphism) -/
+and the `H¹`-duality on `𝒦` and `ℰ` (`bijective_yonedaDualMap`). -/
 theorem nonempty_dual_H_zero_iso_ext [HasExt.{u} (ProjectiveLine (Spec (.of k))).Modules] :
     Nonempty ((Scheme.Modules.isCoherent (ProjectiveLine (Spec (.of k)))).ι.op ⋙
         (Scheme.Modules.cohomologyFunctor k 0).op ⋙ ModuleCat.dualFunctor k ≅
@@ -690,9 +676,7 @@ theorem nonempty_dual_H_zero_iso_ext [HasExt.{u} (ProjectiveLine (Spec (.of k)))
 
 /-- **Duality on the projective line, `H⁰`, additively.** For a coherent `𝒪_{ℙ¹_k}`-module
 `𝒢`, `H⁰(ℙ¹_k, 𝒢)^∨ ≅ Ext¹(𝒢, Ω¹_{ℙ¹_k/k})`, by the inverse of the Yoneda pairing
-(`dualHZeroLinearEquivExt`).
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`, second isomorphism) -/
+(`dualHZeroLinearEquivExt`). -/
 theorem nonempty_dual_H_zero_addEquiv_ext [HasExt.{u} (ProjectiveLine (Spec (.of k))).Modules]
     (𝒢 : (ProjectiveLine (Spec (.of k))).Modules)
     [SheafOfModules.IsQuasicoherent (R := (ProjectiveLine (Spec (.of k))).ringCatSheaf) 𝒢]
@@ -707,9 +691,7 @@ theorem nonempty_dual_H_zero_addEquiv_ext [HasExt.{u} (ProjectiveLine (Spec (.of
 `𝒢`, `H⁰(ℙ¹_k, 𝒢)^∨ ≅ Ext¹(𝒢, Ω¹_{ℙ¹_k/k})` as `k`-vector spaces, for the `k`-linear structure
 of `𝒪_{ℙ¹_k}`-modules (`Scheme.Modules.linearOfOver`) and the induced `k`-vector space structure
 on `Ext`, by the inverse of the Yoneda pairing (`dualHZeroLinearEquivExt`); it is natural in `𝒢`
-(`nonempty_dual_H_zero_iso_ext`).
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`, second isomorphism) -/
+(`nonempty_dual_H_zero_iso_ext`). -/
 theorem nonempty_dual_H_zero_linearEquiv_ext [HasExt.{u} (ProjectiveLine (Spec (.of k))).Modules]
     (𝒢 : (ProjectiveLine (Spec (.of k))).Modules)
     [SheafOfModules.IsQuasicoherent (R := (ProjectiveLine (Spec (.of k))).ringCatSheaf) 𝒢]

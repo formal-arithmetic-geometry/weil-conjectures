@@ -35,7 +35,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleImmersionAlgebraicLimi
 
 /-! # Closed inverse image and countable products in independent universes
 
-Source: Stacks Project, Tag 09AA, lemma-closed-immersion.
+Source: Stacks Project, Tag 09AA.
 -/
 
 @[expose] public section
@@ -50,22 +50,7 @@ namespace AlgebraicGeometry.Scheme
 /-- Closed inverse image preserves countable products of abelian sheaves, with
 independent universes for schemes and sections.
 
-Source: Stacks Project, Tag 09AA (lemma-closed-immersion), assertion (1).
-(blueprint: lem-sf-closed-abelian-products-of-universes).
-
-Proof in words: preservation of products can be tested on an affine open cover of X
-and its inverse-image cover of Z, since restriction to opens preserves products
-sectionwise and these restrictions jointly reflect isomorphisms. For an affine
-closed immersion, Tag 09BL constructs an additional left adjoint to set-sheaf inverse
-image: on affine pro-etale objects it is induced by the henselian lifting construction.
-The adjunction is valid for sheaves valued in any universe containing the site.
-Consequently set inverse image preserves products in that universe. Lift the inverse
-image/direct-image adjunction to commutative group objects. The forgetful functor from
-abelian sheaves to set sheaves creates products and reflects isomorphisms, and this
-lift agrees with the constructed additive sheaf pullback by uniqueness of left adjoints.
-It follows that abelian inverse image preserves countable products. Glue the affine
-comparisons using their characterization by product projections. No quasi-compactness
-of X is used; the empty closed subscheme and the identity immersion are included. -/
+Source: Stacks Project, assertion (1). -/
 theorem proEtaleClosedAbelianProductsOfUniverses
     {X Z : Scheme.{t}} (i : Z ⟶ X) [IsClosedImmersion i] :
     PreservesLimitsOfShape (Discrete ℕ)

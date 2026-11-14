@@ -13,7 +13,6 @@ import all WeilConjectures.SixFunctors.Open.OpenQuotientKoszulCompleteness
 /-! # Normalized DVR coefficient comparison without open-completeness data
 
 Source: Bhatt--Scholze, Definition 6.5.1 and Lemma 6.5.8(1).
-(blueprint: lem-weil-pbc-integral-residue-coefficient-model).
 -/
 
 @[expose] public section
@@ -26,8 +25,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Only the finite coefficient comparisons and their completed limit are retained.
 No quotient-completeness criterion or open-operation model is part of this structure.
-Source: Bhatt--Scholze, Definition 6.5.1, Lemma 6.5.8(1)
-(blueprint: lem-weil-pbc-integral-residue-coefficient-model). -/
+Source: Bhatt--Scholze, Definition 6.5.1, Lemma 6.5.8(1). -/
 structure IntegralResidueCoefficientModel
     (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -58,18 +56,7 @@ structure IntegralResidueCoefficientModel
       completedAdicProjection T d n
 
 /-- Existence of the coefficient comparison uses only finite constants and limits.
-Source: Bhatt--Scholze, Definition 6.5.1, Lemma 6.5.8(1)
-(blueprint: lem-weil-pbc-integral-residue-coefficient-model).
-
-Proof: at each positive quotient, finite constant sheafification is identified with
-continuous functions on connected components, normalized on constant sections.
-Naturality on constant sections identifies the quotient transition maps. These
-isomorphisms therefore form an isomorphism of the entire inverse diagrams. Take
-its inverse limit and lift the resulting ring isomorphism through the fully
-faithful forgetful functor from commutative ring sheaves. The limit projection
-identity proves completed_projection. This is precisely the already proved private
-coefficient construction dvrCoefficientModel_exists; retain its five coefficient
-fields. None of the later open restriction or derived-completeness assembly is used. -/
+Source: Bhatt--Scholze, Definition 6.5.1, Lemma 6.5.8(1). -/
 theorem integralResidueCoefficientModel_exists
     (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

@@ -34,7 +34,6 @@ public import WeilConjectures.AlgebraicGeometry.Derived.DerivedFiberCohomologyFu
 /-! # A strictly perfect affine model computes residue cycle homology
 
 Source: Stacks Project, Tags 01IB, 064K, 06YJ and 010V.
-(blueprint: new-picard-residue-homology-comparison-source-residue)
 -/
 
 @[expose] public section
@@ -52,11 +51,7 @@ representatives `φ i`, and there are geometric fibre comparisons `e`, `ei` inte
 derived coefficient arrows with structure-sheaf pullback, such that the canonical affine
 residue comparisons `affineResidueModelEquiv` followed by `e`, `ei` intertwine the residue
 cycle homology maps of `φ i` with structure-sheaf pullback.
-Source: Stacks Project, Tags 0BF2, 0B91, 01XK, 06YJ and 010V.
-(blueprint: lem-sc-picard-residue-homology-chosen-geometric-maps)
-
-Proof: Combine the chain representatives, which satisfy the derived-category equation and
-hence the affine residue naturality square, with the geometric fibre naturality. -/
+Source: Stacks Project, Tags 0BF2, 0B91, 01XK, 06YJ and 010V. -/
 theorem picard_residue_homology_chosen_geometric_maps
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

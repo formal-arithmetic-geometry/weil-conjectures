@@ -13,7 +13,7 @@ import WeilConjectures.AlgebraicGeometry.ProperBaseChange.LerayWholeOpenClass
 
 /-! # The cocycle Leray edge on a restricted resolution
 
-Source: Stacks Project, cohomology.tex, Tags 01E4, 01F4 and 01FB.
+Source: Stacks Project, Tags 01E4, 01F4 and 01FB.
 -/
 
 @[expose] public section
@@ -161,28 +161,7 @@ private theorem restrictedResolution_sectionClass {Z Y : Scheme.{u}}
 /-- Restricting a global class and applying the restricted-resolution class map
 computes the restriction of its classical Leray edge. This concerns a single morphism,
 with no square, derived pullback, top-degree bound or derived adjunction.
-Source: Stacks Project, cohomology.tex, Tag 01E4, lemma-describe-higher-direct-images;
-Tag 01F4(2), and Tag 01FB, remark-explain-arrow.
-(blueprint: lem-weil-pbc-leray-edge-restricted-resolution).
-
-Proof: Compute restriction on cohomology by restrictedResolution_cohomology.
-The augmentation equation and the pinned components of R.sections identify its map
-on a fixed resolution with ordinary restriction of sections. Naturality of the
-homology/evaluation comparison and of sectionCohomologyTheta therefore identifies
-the left side with the restriction to V of resolutionSectionClass I at the whole
-open, followed by the inverse right-derived resolution comparison.
-It remains to identify this whole-open class map with the chosen Leray edge.
-Represent any cohomology class by a cycle of the global-sections complex of I.
-The adjunction defining sectionCohomologyTheta sends the cycle to its image under
-the quotient from cycles to cohomology sheaf: this follows by applying the exact
-sheafification functor to the short complex of boundaries and cycles and using
-its counit. Global sections preserve the kernel defining cycles, so the section
-of the cycle sheaf with the specified image under iCycles is unique. It is therefore
-the section z in the cocycle characterization of exists_lerayEdge_isIso_of_vanishing.
-The two maps agree on the homology class of every cycle. Homology projection is
-surjective, and the resolution comparisons are isomorphisms, so they agree on every
-class. Finally naturality of I.isoRightDerivedObj inverse carries restriction through
-the comparison. Degree zero, empty opens and zero coefficients use the same argument.
+Source: Stacks Project, Tag 01E4; Tag 01F4(2), and Tag 01FB.
 -/
 theorem lerayEdge_restrictedResolution {X S : Scheme.{u}} (f : X ⟶ S)
     (F : X.Modules) (I : InjectiveResolution F) (n : ℕ) (V : S.Opens)

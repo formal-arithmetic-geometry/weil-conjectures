@@ -54,8 +54,7 @@ variable (B : Type (u + 1)) [CommRing B]
   (hφ : ∀ n : ℕ, (τ n).hom.comp (φ (n + 1)) = φ n)
 
 /-- The actual level scalar restriction along the supplied B -> C_n.
-Source: Stacks 03CZ; ring-sheaf change adjunction
-(blueprint: lem-sf-semilinear-proper-open-mate-pasting). -/
+Source: Stacks 03CZ; ring-sheaf change adjunction. -/
 abbrev levelRestriction (X : Scheme.{u}) (n : ℕ) :=
   SemilinearSections.res.{u + 1, u, u + 1}
     ((constantSheaf (ProEt.topology X) CommRingCat.{u + 1}).map (CommRingCat.ofHom (φ n)))
@@ -64,13 +63,7 @@ set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 -- Constructing the entire scalar-restriction functor requires sectionwise transports.
 /-- Termwise scalar restriction to ordinary constant-B towers, uniquely characterized
-on objects, transitions, and morphisms. Source: Stacks 03CZ; Zheng 4.1
-(blueprint: lem-sf-semilinear-proper-open-mate-pasting).
-Proof: keep the component sheaves and restrict their scalar actions along phi_n.
-The equation hphi makes each horizontal restriction B-linear. Functor identities
-and composition are those of the system presheaf. The evaluated functor equations
-fix all objects and morphisms, and the section formula fixes every transition;
-thus this is a unique actual functor, rather than an arbitrary comparison map. -/
+on objects, transitions, and morphisms. Source: Stacks 03CZ; Zheng 4.1. -/
 theorem rhoOrdinary_existsUnique (X : Scheme.{u})
     (compatible : ∀ n : ℕ, (τ n).hom.comp (φ (n + 1)) = φ n) :
     ∃! F : Modules C τ X ⥤ StrictTower.Towers B X,
@@ -94,7 +87,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- The unique ordinary restriction functor with the prescribed section formulas.
-Source: Stacks 03CZ (blueprint: lem-sf-semilinear-proper-open-mate-pasting). -/
+Source: Stacks 03CZ. -/
 def rhoOrdinary (X : Scheme.{u}) :=
   (rhoOrdinary_existsUnique C τ B φ X hφ).choose
 attribute [local irreducible] rhoOrdinary
@@ -220,10 +213,7 @@ end OrdinaryScalarProof
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- Scalar restriction is exact without coefficient flatness.
-Source: Stacks 03CZ (blueprint: lem-sf-semilinear-proper-open-mate-pasting).
-Proof: the ordinary functor leaves underlying additive sheaves and all transition
-maps unchanged. Kernels and sheafified cokernels therefore have the same restricted
-actions. Componentwise exactness gives additivity and both preservation assertions. -/
+Source: Stacks 03CZ. -/
 theorem rhoOrdinary_exact (X : Scheme.{u}) :
     (rhoOrdinary C τ B φ hφ X).Additive ∧
       PreservesFiniteLimits (rhoOrdinary C τ B φ hφ X) ∧
@@ -240,33 +230,26 @@ theorem rhoOrdinary_exact (X : Scheme.{u}) :
     preservesFiniteLimits_of_natIso (F := D.rho X) e,
     preservesFiniteColimits_of_natIso (F := D.rho X) e⟩
 
-/-- Additivity of scalar restriction. Source: Stacks 03CZ
-(blueprint: lem-sf-semilinear-proper-open-mate-pasting). -/
+/-- Additivity of scalar restriction. Source: Stacks 03CZ. -/
 instance rho_additive (X : Scheme.{u}) : (rhoOrdinary C τ B φ hφ X).Additive :=
   (rhoOrdinary_exact C τ B φ hφ X).1
 
-/-- Left exactness of scalar restriction. Source: Stacks 03CZ
-(blueprint: lem-sf-semilinear-proper-open-mate-pasting). -/
+/-- Left exactness of scalar restriction. Source: Stacks 03CZ. -/
 instance rho_limits (X : Scheme.{u}) :
     PreservesFiniteLimits (rhoOrdinary C τ B φ hφ X) :=
   (rhoOrdinary_exact C τ B φ hφ X).2.1
 
-/-- Right exactness of scalar restriction. Source: Stacks 03CZ
-(blueprint: lem-sf-semilinear-proper-open-mate-pasting). -/
+/-- Right exactness of scalar restriction. Source: Stacks 03CZ. -/
 instance rho_colimits (X : Scheme.{u}) :
     PreservesFiniteColimits (rhoOrdinary C τ B φ hφ X) :=
   (rhoOrdinary_exact C τ B φ hφ X).2.2
 
 /-- Exact scalar restriction on ordinary derived systems.
-Source: Stacks 03CZ (blueprint: lem-sf-semilinear-proper-open-mate-pasting). -/
+Source: Stacks 03CZ. -/
 abbrev rho (X : Scheme.{u}) := (rhoOrdinary C τ B φ hφ X).mapDerivedCategory
 
 /-- Direct image and scalar restriction commute by the identity on component sections.
-Source: the ring-sheaf change adjunction; Stacks 03CZ and 03D7
-(blueprint: lem-sf-semilinear-proper-open-mate-pasting).
-Proof: both composites evaluate to M_n(U ×_Y X), with the B action through phi_n.
-The identity is linear, natural in U, n and M, and invertible. Its components on
-all sections uniquely determine the comparison. -/
+Source: the ring-sheaf change adjunction; Stacks 03CZ and 03D7. -/
 theorem rhoPushOrdinary_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃! e : rhoOrdinary C τ B φ hφ X ⋙ StrictTower.towerDirectImage B f ≅
       push C τ f ⋙ rhoOrdinary C τ B φ hφ Y,
@@ -413,8 +396,7 @@ private theorem restriction_pull_mate_normalization
   exact restriction_pull_mate_normalization_canonical C τ B φ hφ D G f e he
 
 /-- The ordinary inverse-image scalar comparison is the transpose of the uniquely
-section-normalized direct-image comparison. Source: the ring-sheaf change adjunction
-(blueprint: lem-sf-semilinear-proper-open-mate-pasting). -/
+section-normalized direct-image comparison. Source: the ring-sheaf change adjunction. -/
 def rhoPullInv {X Y : Scheme.{u}} (f : X ⟶ Y) :
     rhoOrdinary C τ B φ hφ Y ⋙ StrictTower.towerPullback B f ⟶
       pull C τ f ⋙ rhoOrdinary C τ B φ hφ X :=
@@ -426,11 +408,7 @@ def rhoPullInv {X Y : Scheme.{u}} (f : X ⟶ Y) :
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The identified-coefficient inverse-image scalar comparison is invertible.
-Source: the ring-sheaf change adjunction; Stacks 03EK
-(blueprint: lem-sf-semilinear-proper-open-mate-pasting).
-Proof: on underlying inverse-image additive sheaves this transpose is the identity.
-The scalar action is restricted along the identified constant maps, so the identity
-has an inverse, simultaneously in the coefficient index. -/
+Source: the ring-sheaf change adjunction; Stacks 03EK. -/
 theorem rhoPullInv_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     IsIso (rhoPullInv C τ B φ hφ f) := by
   have hψ : ∀ n, CommRingCat.ofHom (φ (n + 1)) ≫ τ n = CommRingCat.ofHom (φ n) :=
@@ -452,8 +430,7 @@ theorem rhoPullInv_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (rhoPullInv C τ B φ hφ f) g h hg
 
 /-- The canonical scalar-restriction inverse-image comparison after exact localization.
-Source: the ring-sheaf change adjunction
-(blueprint: lem-sf-semilinear-proper-open-mate-pasting). -/
+Source: the ring-sheaf change adjunction. -/
 def rhoP {X Y : Scheme.{u}} (f : X ⟶ Y) :
     P C τ f ⋙ rho C τ B φ hφ X ≅ rho C τ B φ hφ Y ⋙ StrictTower.G B f :=
   Functor.mapDerivedCategoryCompIso _ _ ≪≫
@@ -462,8 +439,7 @@ def rhoP {X Y : Scheme.{u}} (f : X ⟶ Y) :
   (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The direct-image comparison is the actual derived mate of rhoP inverse.
-Source: the ring-sheaf change adjunction
-(blueprint: lem-sf-semilinear-proper-open-mate-pasting). -/
+Source: the ring-sheaf change adjunction. -/
 def rhoR {X Y : Scheme.{u}} (f : X ⟶ Y) :
     R C τ f ⋙ rho C τ B φ hφ Y ⟶ rho C τ B φ hφ X ⋙ StrictTower.R B f :=
   mateEquiv (adj C τ f) (StrictTower.adj B f) (rhoP C τ B φ hφ f).inv

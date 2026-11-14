@@ -147,7 +147,7 @@ attribute [local implicit_reducible]
   CategoryTheory.Sheaf.symmetricCategory CategoryTheory.Sheaf.braidedCategory
 
 /-- The existing sheaf symmetry with its native braiding retained explicitly.
-Source: sheaf symmetric tensor (blueprint: lem-sfb-quotient-scalar-tensor-canonical). -/
+Source: sheaf symmetric tensor. -/
 @[instance_reducible] def AlgebraicGeometry.ProEtale.QuotientSectionTensor.scalarSheafSymmetric
     (T : AlgebraicGeometry.Scheme.{u}) :
     SymmetricCategory (Sheaf (AlgebraicGeometry.Scheme.ProEt.topology T) Ab.{u + 1}) :=
@@ -159,21 +159,21 @@ attribute [local instance 21000]
   AlgebraicGeometry.ProEtale.QuotientSectionTensor.scalarSheafSymmetric
 
 /-- The existing closed structure on internal modules, with structural arguments shared.
-Source: the relative module tensor (blueprint: lem-sfb-quotient-scalar-tensor-canonical). -/
+Source: the relative module tensor. -/
 @[instance_reducible] def AlgebraicGeometry.ProEtale.QuotientSectionTensor.scalarModuleClosed
     (B : CategoryTheory.Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj B] [IsCommMonObj B] (T : AlgebraicGeometry.Scheme.{u}) :
     MonoidalClosed (AlgebraicGeometry.ProEtale.QuotientChange.Modules B T) := inferInstance
 
 /-- The existing braiding on internal modules, with the ambient sheaf structure shared.
-Source: the symmetric module tensor (blueprint: lem-sfb-quotient-scalar-tensor-canonical). -/
+Source: the symmetric module tensor. -/
 @[instance_reducible] def AlgebraicGeometry.ProEtale.QuotientSectionTensor.scalarModuleBraided
     (B : CategoryTheory.Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj B] [IsCommMonObj B] (T : AlgebraicGeometry.Scheme.{u}) :
     BraidedCategory (AlgebraicGeometry.ProEtale.QuotientChange.Modules B T) := inferInstance
 
 /-- The existing functorial flat resolutions of internal modules.
-Source: the module flat resolution (blueprint: lem-sfb-quotient-scalar-tensor-canonical). -/
+Source: the module flat resolution. -/
 theorem AlgebraicGeometry.ProEtale.QuotientSectionTensor.scalarModuleFlat
     (B : CategoryTheory.Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj B] [IsCommMonObj B] (T : AlgebraicGeometry.Scheme.{u}) :
@@ -181,7 +181,7 @@ theorem AlgebraicGeometry.ProEtale.QuotientSectionTensor.scalarModuleFlat
       (AlgebraicGeometry.ProEtale.QuotientChange.Modules B T) := inferInstance
 
 /-- Scalar extension preserves quasi-isomorphisms between K-flat complexes.
-Source: derived scalar extension (blueprint: lem-sfb-quotient-scalar-tensor-canonical). -/
+Source: derived scalar extension. -/
 theorem AlgebraicGeometry.ProEtale.QuotientSectionTensor.scalarPreservesKFlat
     {B B' : CategoryTheory.Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj B] [IsCommMonObj B] [MonObj B'] [IsCommMonObj B']
@@ -278,7 +278,7 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
 open ModuleRingedComparison
 
 /-- Uncurry a tensor comparison isomorphism without changing any components.
-Source: functor naturality (blueprint: lem-sfb-quotient-scalar-tensor-canonical). -/
+Source: functor naturality. -/
 def uncurryTensorIso
     {C₁ C₂ : Type*} [Category* C₁] [Category* C₂]
     (G : C₁ ⥤ C₂) (T₁ : C₁ ⥤ C₁ ⥤ C₁) (T₂ : C₂ ⥤ C₂ ⥤ C₂)
@@ -293,7 +293,7 @@ def uncurryTensorIso
     rw [Functor.map_comp, Category.assoc, h₂, reassoc_of% h₁])
 
 /-- The actual bifunctor-derived scalar tensorator, uncurried to pairs.
-Source: Stacks 07A4 (blueprint: lem-sfb-quotient-scalar-tensor-canonical). -/
+Source: Stacks 07A4. -/
 @[irreducible] def canonicalTensor (T : Scheme.{u}) : TensorIso a T := by
   let := scalarModuleClosed Λ T
   let := scalarModuleClosed Λ' T
@@ -310,7 +310,7 @@ Source: Stacks 07A4 (blueprint: lem-sfb-quotient-scalar-tensor-canonical). -/
   exact uncurryTensorIso _ _ _ (@asIso _ _ _ _ δ hδ)
 
 /-- The canonical derived scalar tensorator has the specified cochain counit square.
-Source: Stacks 07A4 (blueprint: lem-sfb-quotient-scalar-tensor-canonical). -/
+Source: Stacks 07A4. -/
 theorem canonicalTensor_normalized (T : Scheme.{u}) :
     TensorNormalized a T (canonicalTensor a T) := by
   intro P Q _ _ _ _

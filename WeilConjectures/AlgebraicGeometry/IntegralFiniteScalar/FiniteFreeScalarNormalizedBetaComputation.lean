@@ -6,7 +6,6 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.IntegralFiniteScalar.IntegralFiniteScalarModelDefinitions
 /-! # The forced cochain formula for an augmentation-normalized comparison
-(blueprint: new-sfb-finite-free-scalar-normalized-beta-computation)
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -24,8 +23,6 @@ attribute [local irreducible] Functor.mapDerivedCategory Functor.leftDerivedFunc
 -- Compare the two total tensors using their invertible coefficient summands.
 /-- Augmentation normalization computes beta using any ordinary and total comparisons
 with the prescribed underlying maps and degree-zero summands.
-Source: blueprint scalar-six formal properties, the specified augmentation normalization.
-(blueprint: new-sfb-finite-free-scalar-normalized-beta-computation)
 
 Proof. Faithfulness of the forgetful functor identifies the ordinary comparisons.
 In degree n the (0,n) inclusion becomes invertible after the supplied total

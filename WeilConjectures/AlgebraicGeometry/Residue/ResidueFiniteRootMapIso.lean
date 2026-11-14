@@ -7,8 +7,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinaryFiniteP1KummerSupplement
 import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 import Mathlib.CategoryTheory.Adjunction.FullyFaithful
-/-! # The residue root map is an isomorphism
-(blueprint: lem-sp-residue-finite-root-map-iso). -/
+/-! # The residue root map is an isomorphism. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -22,13 +21,7 @@ attribute [local instance] cachedModSheafify
 
 /-- For a scheme Z, n≥0 and R=ULift(Z/n), the ordinary finite root tensor map μ_n→forget(R_Z(1)) is
 an isomorphism [def-asd-ordinary-finite-p1-kummer-class, def-asd-finite-etale-tate-sheaf].
-Source: blueprint Cartier derived reduction and comparison paragraphs; Stacks 0152,
-06YY and 0GLZ (blueprint: lem-sp-residue-finite-root-map-iso).
-Proof: The coefficient hom Z/n→ULift(Z/n) is the inverse ULift ring equivalence, since ring
-homomorphisms from Z/n are unique. Its scalar restriction and scalar extension are equivalences. The
-module presheaf of roots is already a sheaf, as is its extension by this equivalence. Thus both the
-coefficient adjunction unit and the sheafification unit in the root map are isomorphisms. Their
-sectionwise composite is the root map. This also handles n=0 and n=1. -/
+Source: Stacks 0152, 06YY and 0GLZ. -/
 theorem residueFiniteRootMap_isIso (Z : Scheme.{u}) (n : ℕ)
     (hR : (n : ULift.{u + 1} (ZMod n)) = 0) :
     IsIso (ordinaryFiniteRootMap (ULift.{u + 1} (ZMod n)) n hR Z) := by

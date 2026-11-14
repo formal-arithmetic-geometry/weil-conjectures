@@ -13,15 +13,14 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfAmple
 # Finite morphisms and projective morphisms
 
 A projective morphism is presented, as in the blueprint's H-projective convention
-(`def-pc-projective-morphism`), by a closed immersion `i : X ⟶ ℙ(n; S)` over `S` with a finite
+, by a closed immersion `i: X ⟶ ℙ(n; S)` over `S` with a finite
 type `n` of homogeneous coordinates.
 
 * A projective morphism whose geometric fibres are finite sets is finite
-  (`proposition-proper-direct-image-finite-coefficients`).
+
 * A projective family over a Noetherian domain whose generic fibre has dimension `≤ 0` is finite
-  over a nonempty open of the base (`proposition-proper-direct-image-finite-coefficients`).
+  over a nonempty open of the base.
 * A scheme finite over a projective scheme over an affine base is projective over that base
-  (`proposition-proper-direct-image-finite-coefficients`).
 
 The first two are consequences of Zariski's main theorem in the form
 `AlgebraicGeometry.exists_isFinite_morphismRestrict_of_finite_preimage_singleton` (a proper
@@ -46,10 +45,10 @@ namespace AlgebraicGeometry.ProjectiveSpace
 
 variable {n : Type u} [Finite n]
 
-/-- Blueprint `proposition-proper-direct-image-finite-coefficients`: Projective morphisms with
+/-- Projective morphisms with
 finite fibres are finite.
 
-Let `f : D ⟶ T` be projective, i.e. `f = π ∘ i` for a closed immersion `i : D ⟶ ℙ(n; T)`. If
+Let `f: D ⟶ T` be projective, i.e. `f = π ∘ i` for a closed immersion `i: D ⟶ ℙ(n; T)`. If
 every geometric fibre `D ×_T Spec Ω`, for `Ω` algebraically closed, has only finitely many
 points, then `f` is finite. The blueprint assumes `T` Noetherian; this is not needed. -/
 theorem isFinite_of_finite_pullback {D T : Scheme.{u}} (f : D ⟶ T) (i : D ⟶ ℙ(n; T))
@@ -73,10 +72,10 @@ theorem isFinite_of_finite_pullback {D T : Scheme.{u}} (f : D ⟶ T) (i : D ⟶ 
     exact ⟨z, hz⟩
   exact IsFinite.of_isProper_of_locallyQuasiFinite _
 
-/-- Blueprint `proposition-proper-direct-image-finite-coefficients`: A projective family with finite
+/-- A projective family with finite
 generic fibre is generically finite.
 
-Let `A` be a Noetherian domain with fraction field `K` and `f : D ⟶ Spec A` projective. If the
+Let `A` be a Noetherian domain with fraction field `K` and `f: D ⟶ Spec A` projective. If the
 generic fibre `D_K = D ×_{Spec A} Spec K` has dimension at most zero, then `f` is finite over a
 nonempty open `U` of `Spec A`. -/
 theorem exists_isFinite_morphismRestrict_of_generic_fibre {A : Type u} [CommRing A] [IsDomain A]
@@ -104,12 +103,12 @@ theorem exists_isFinite_morphismRestrict_of_generic_fibre {A : Type u} [CommRing
       exact ⟨z, hz⟩
   exact ⟨V, fun h ↦ by simp [h] at hV, hfin⟩
 
-/-- Blueprint `proposition-proper-direct-image-finite-coefficients`: Finite covers of projective
+/-- Finite covers of projective
 schemes are projective.
 
-Let `S` be affine, `f : T ⟶ S` projective, i.e. `f = π ∘ i` for a closed immersion
-`i : T ⟶ ℙ(n; S)`, and `h : Y ⟶ T` finite. Then `h ≫ f` is projective: there is a closed
-immersion `j : Y ⟶ ℙ(m; S)` over `S` for a finite type `m`.
+Let `S` be affine, `f: T ⟶ S` projective, i.e. `f = π ∘ i` for a closed immersion
+`i: T ⟶ ℙ(n; S)`, and `h: Y ⟶ T` finite. Then `h ≫ f` is projective: there is a closed
+immersion `j: Y ⟶ ℙ(m; S)` over `S` for a finite type `m`.
 
 The blueprint assumes `S` Noetherian and argues over an affine open of `S`; with the
 H-projective convention (a closed immersion into `ℙ(m; S)` itself) the global statement needs

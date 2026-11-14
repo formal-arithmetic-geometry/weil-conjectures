@@ -139,21 +139,7 @@ private theorem evaluation_smul
   rfl
 
 /-- Evaluation of an ordinary coefficient extension represents coefficient-linear maps.
-Source: Stacks Project, sites-modules.tex, Section 03EK and Tag 03CY;
-vertical restriction in the proof of blueprint classes (2).
-(blueprint: lem-sp-scalar-extension-evaluation).
-
-Proof: restrict the sectionwise tensor presheaf to the vertical slice at n.
-The coefficient evaluation equalities identify its sections with the extension
-of scalars of the evaluated module. The vertical inclusion is both continuous
-and cocontinuous, so restriction of the sheafification unit is locally bijective.
-Consequently its restricted sheafification is the sheafification of the restricted
-tensor presheaf. Apply the module-sheafification adjunction and the sectionwise
-tensor/restriction adjunction. This gives the Hom equivalences. Both adjunctions
-commute with postcomposition. Their unit sends x to the sheafified tensor 1 tensor x;
-the object equality of S.model transports that formula to S.model.E.
-Evaluation retains the underlying section groups and scalar actions. Linearity
-therefore gives the formula for arbitrary scalar multiples of a generator. -/
+Source: Stacks Project, Section 03EK and Tag 03CY. -/
 theorem scalarExtension_evaluation
     {C : Type c} [Category.{v} C] [EssentiallySmall.{max c v r} C]
     (J : GrothendieckTopology C)

@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.Picard.Termwise.PicardTermwiseTargetCoh
 /-! # Termwise model comparisons before imposing connectivity
 
 Source: Stacks Project, Tags 06YJ and 0D5S.
-(blueprint: lem-sc-picard-termwise-model-comparison)
 -/
 
 @[expose] public section
@@ -61,35 +60,7 @@ restriction of a localized chain map is represented by a chain map whose zeroth
 component is ordinary tensor restriction. No connectivity is assumed: this theorem
 computes objects and the restriction of already given chain maps, not all derived
 morphisms. The degree-zero source identification is included explicitly.
-Source: Stacks Project, Tags 06YJ and 0D5S; open restriction via Tag 08DW.
-(blueprint: lem-sc-picard-termwise-model-comparison)
-
-Proof:
-1. Choose the given model isomorphism once. Transport K along Modules.overEquiv U.
-   The equivalence preserves finite-free retracts and zero terms. Each transported
-   term is therefore flat and the transported complex is bounded above. The K-flat
-   counit computes its pullback along every s by the termwise tensor complex P_s.
-   Identify restriction of E to U with its derived open pullback using
-   Modules.overFunctorEquiv and the exact open-site equivalence, then use the
-   canonical derived composition isomorphism and the factorization s;U.ι=t.
-   This gives b. Apply the same counit to the single structure sheaf and the
-   single-mapHomologicalComplex comparison to get a (retaining the tensor-pulled
-   unit as source, rather than changing it by an arbitrary unit isomorphism).
-2. For a chain map f from the source single to P_s, termwise pull it back along i.
-   Conjugate by the single-complex comparison and the underived composition
-   comparisons for t and s, including the given equalities ht and hs. This is f'.
-   In degree zero the single comparison cancels against singleObjXSelf; the
-   resulting component is exactly picardOrdinaryModelRestriction of the component
-   of f. All other degrees of its source are zero; the chain-map condition is
-   preserved by the additive pullback functor and the comparison isomorphisms.
-3. The derived composition map is the left-derived lift of the very same
-   underived composition comparisons and counits. Evaluate its defining counit
-   equation on the bounded K-flat model and on the single unit, where the counits
-   are invertible. Naturality of the counits for f then gives the displayed
-   restriction equation. Naturality of the fixed model isomorphism under further
-   pullback cancels it on both sides. Equality transports ht, hs and the two
-   factorizations commute by proof irrelevance. No assumption on negative terms
-   is used; zero complexes and empty schemes are preserved by these functors. -/
+Source: Stacks Project, Tags 06YJ and 0D5S; open restriction via Tag 08DW. -/
 theorem picard_termwise_model_comparison
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

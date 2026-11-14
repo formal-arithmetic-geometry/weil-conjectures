@@ -18,7 +18,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 /-! # Descent of an unpointed finite Galois torsor
 
 Source: Stacks Project, Tags 0BTV and 01ZM, used in the last paragraph of Tag 0EZJ.
-(blueprint: lem-sbc-galois-cover-stage-descent)
 -/
 
 @[expose] public section
@@ -518,27 +517,7 @@ private theorem comparison_isIso_iff
 at a later stage if its pullback is equivariantly a torsor.
 
 Source: Stacks Project, Tag 01ZM, parts (2) and (3), and Tag 0BTV, the equivalence
-of finite étale categories; applied in Tag 0EZJ, final paragraph.
-(blueprint: lem-sbc-galois-cover-stage-descent)
-
-Proof:
-Form the finite coproduct of copies of P and the fibre square P × P over the stage.
-Both are finitely presented over that stage: finite étale morphisms and their
-finite coproducts and fibre products are finitely presented. The action gives
-the comparison from the coproduct to the fibre square with g-component (s g, id).
-Finite coproducts commute with base change because Scheme is finitary extensive;
-fibre products commute with base change by pullback pasting. Equivariance and H
-identify the pullback of this comparison with Z's invertible torsor comparison.
-
-Use part (2) of 01ZM to descend its inverse between the finitely presented models.
-Use part (3) to descend both inverse equations to a common later stage. They make
-the base-changed comparison invertible. Identify the base-changed finite coproduct
-and fibre square with the coproduct and fibre square of the canonical model Pj.
-Checking the coproduct components and both product projections identifies that
-comparison with the displayed map, so it is invertible. The trivial group and
-empty schemes cause no exception: G is a nonempty finite group, directedness
-provides a common stage, and the same argument applies to empty finite étale
-objects. No surjectivity of p is used or asserted. -/
+of finite étale categories; applied in Tag 0EZJ, final paragraph. -/
 private theorem GaloisCover.exists_comparison_stage_on_action_model
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})
@@ -611,25 +590,6 @@ private theorem GaloisCover.exists_comparison_stage_on_action_model
 /-- An unpointed finite torsor descends along affine inverse limits.
 
 Source: Stacks Project, Tags 0BTV and 01ZM; Tag 0EZJ, final paragraph.
-(blueprint: lem-sbc-galois-cover-stage-descent)
-
-Proof:
-Reindex the small cofiltered category by a coinitial directed poset. This preserves
-its limit and the affine-transition and qcqs assumptions. Apply finite-presentation
-approximation to the finite étale morphism `Z.π`. Descend finiteness and étaleness
-at a later stage using Tags 01ZO and 07RP. The finite étale image is clopen.
-Surjectivity descends by Tag 07RR. In this finite étale case one can also use
-that the complementary clopen has empty pullback, and affine-transition
-compactness makes the complement empty at some later stage.
-
-Enumerate the finite group by a finite type. Descend the finitely many endomorphisms
-`Z.smul g` as maps over the base using the morphism part of 01ZM. Its equality part
-makes all unit and multiplication equations hold at a common later stage. Finite
-coproducts and fibre products commute with base change. The canonical torsor comparison
-map therefore has base change equal to the original comparison map. Descend the
-inverse of the latter map and both inverse equations by 01ZM, at a common stage.
-The descended map, action, and torsor comparison form `Z₀`; its comparison with `Z`
-gives `χ` and the cartesian square. Transfer that stage back to the original category.
 -/
 theorem GaloisCover.exists_stage_of_affine_limits
     {I : Type u} [SmallCategory I] [IsCofiltered I] (D : I ⥤ Scheme.{u})

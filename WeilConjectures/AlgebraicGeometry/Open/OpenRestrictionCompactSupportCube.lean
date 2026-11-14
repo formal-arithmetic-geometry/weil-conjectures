@@ -10,8 +10,6 @@ import WeilConjectures.AlgebraicGeometry.Open.OpenSupportBaseChangedCube
 import WeilConjectures.AlgebraicGeometry.Open.OpenSupportCompactificationNaturality
 
 /-! # The compact-support cube for restriction to an open
-
-Source: blueprint `proposition-exceptional-inverse-image-smooth-morphism--6`, coherence (i).
 -/
 
 @[expose] public section
@@ -26,25 +24,7 @@ attribute [local irreducible] openRestrictionGraphIso sfGraphCompactificationCom
   rightDerivedLowerShriekOfCompactificationBaseChangeMap
   derivedOpenImmersionLowerShriekBaseChangeIso
 
-/-- The two compact-support pastings on an open-restriction cube agree.
-Source: blueprint `proposition-exceptional-inverse-image-smooth-morphism--6`, coherence (i).
-
-Proof: expand the support comparison into its graph comparison, proper/open
-interchange, and open-composition factors. Compute both paths on the product of
-proper compactifications, using the same source-open embeddings. Proper exchange
-pastes horizontally since its defining inverse-image square does. The degreewise
-extension-by-zero exchange pastes by adjunction uniqueness, and its compositor
-satisfies associativity. These identities identify the paths for the common graph
-model. Comparison with the chosen compactifications is obtained by the proper
-projections from the product; their cocycle identity follows by the same unit and
-proper base-change pasting calculation on the triple product. Cancel the middle
-comparisons to obtain precisely the equation below. Only the output compact-support
-exchanges require qc: the open extensions themselves are exact for arbitrary opens.
-There is no boundedness, smoothness, or invertible-exponent condition. For empty
-schemes or the zero ring the identical natural-transformation equations apply.
-This is a statement solely about compact support; no exceptional functor or
-invertibility conclusion is assumed.
-(blueprint: lem-asd-open-restriction-compact-support-cube) -/
+/-- The two compact-support pastings on an open-restriction cube agree. -/
 theorem openRestrictionCompactSupport_cube
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Y X' Y' U V U' V' : Scheme.{u}}

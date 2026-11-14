@@ -71,14 +71,7 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ' T)]
 
 /-- Flat-term representative equations extend uniquely to all derived pairs.
-Source: Stacks 06YS and 06YU; parent proof steps 6--8.
-(blueprint: lem-sfb-quotient-section-tensor-transport-condition).
-
-Proof: the two sides define natural transformations between the same bifunctors on the
-product of derived categories.  The site derived-tensor descent theorem says that
-restriction to flat-term K-flat representatives is bijective on natural transformations.
-Applying this uniqueness statement to the representative equation gives the equality at
-arbitrary derived objects. -/
+Source: Stacks 06YS and 06YU. -/
 theorem tensor_section_condition_of_kflat
     (T : Scheme.{u}) (c : ScalarSectionData a T) (b : TensorIso a T)
     (barB : tensor Λ T ⋙ c.model.T ≅

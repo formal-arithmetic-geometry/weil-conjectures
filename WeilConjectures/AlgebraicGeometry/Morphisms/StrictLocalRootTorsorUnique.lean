@@ -19,10 +19,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Field valued points of the punctured root algebra differ by a unique rotation.
 
-Source: Stacks Project, Tags 0EYG and 09EV.
-Proof: lift all simple roots of X^n-1 by strict henselianity; compare the
-images of the root under the two maps and use the unique lifted ratio.
-(blueprint: lem-sbc-strict-local-root-torsor-unique) -/
+Source: Stacks Project, Tags 0EYG and 09EV. -/
 theorem strict_local_root_torsor_unique
     (H : Type u) [CommRing H] [IsStrictlyHenselianLocalRing H]
     [IsRegularLocalRing H] (h : H)

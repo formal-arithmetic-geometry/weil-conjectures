@@ -18,8 +18,7 @@ import WeilConjectures.Mathlib.Topology.NoetherianSpace
 
 /-! # Connected etale presentations before choosing local stalk markings
 
-Source: Stacks Project, proetale.tex, Tags 09AL, 09B1 and 09C6.
-(blueprint: lem-weil-pbc-lisse-tower-connected-etale-presentation).
+Source: Stacks Project, Tags 09AL, 09B1 and 09C6.
 -/
 
 @[expose] public noncomputable section
@@ -34,8 +33,7 @@ attribute [local irreducible] constantAdicQuotientRealization
 The transport field only transports a supplied isomorphism; it asserts no local
 markings or covering sieves of markings.
 
-Source: Stacks Project, proetale.tex, Tags 09AL, 09B1 and 09C6, before local constancy.
-(blueprint: lem-weil-pbc-lisse-tower-connected-etale-presentation). -/
+Source: Stacks Project, Tags 09AL, 09B1 and 09C6, before local constancy. -/
 structure LisseTowerConnectedEtalePresentation
     (X Y : Scheme.{u}) (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
@@ -239,30 +237,8 @@ private theorem pointed_chart_presentation
 stalks, retaining the scalar normalization and conditional coefficient transport.
 No level is asserted locally isomorphic to its stalk in this theorem.
 
-Source: Stacks Project, proetale.tex, Tag 09AL (lemma-compare-constructible-derived),
-Tag 09B1 (lemma-compare-derived), and Tag 09C6 (lemma-connected-adic-lisse), the
-paragraph constructing the normalized algebraic diagram, before local constancy.
-(blueprint: lem-weil-pbc-lisse-tower-connected-etale-presentation).
-
-Proof: exact inverse image to the Noetherian stratum preserves each individual
-cohomological bound and each zero cohomology sheaf. Use the finite constant
-coefficient comparison to make its cohomology finite locally constant in native
-fixed-ring modules. It is constructible with the one-stratum presentation. Finite
-coefficient derived origin descends each bounded complex to the etale site.
-Bounded-below comparison full faithfulness descends the actual consecutive
-normalization arrows, since the quotient tensor of one origin compares to the
-next bounded origin. Refine Y by nonempty connected affine etale charts and choose
-a geometric point on each. Transfer the finite coefficient rings along the inverse
-of the canonical completion quotient isomorphisms. The descended levels give level,
-bounded, lisse and vanishing. Apply the exact geometric stalk functor to the
-consecutive arrows. Derived tensor commutes with geometric stalks, so their adjoint
-transposes satisfy universal. Inverse image, coefficient restriction and the etale
-comparison commute with constant complexes and further restriction. Apply these
-canonical comparisons to a supplied constant-stalk isomorphism to give transport.
-The same exact inverse-image comparisons pull finite local constant cohomology to
-every refinement, giving refinementLisse. Empty charts are omitted; if Y is empty
-take the empty cover. Zero rings and zero complexes need no separate choices.
-This construction supplies no covering or isomorphism trivializing a level. -/
+Source: Stacks Project, the paragraph constructing the normalized algebraic diagram, before local
+constancy. -/
 theorem lisse_tower_connected_etale_presentation
     (X Y : Scheme.{u}) [IsNoetherian X] (g : Y ⟶ X) [IsImmersion g]
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (M : AdicTower X d)

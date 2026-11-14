@@ -25,15 +25,7 @@ namespace AlgebraicGeometry.Scheme
 /-- Actual extension by zero is an equivalence followed by literal slice extension.
 There is no quasi-compactness hypothesis and the coefficient ring sheaves are arbitrary.
 
-Source: Stacks Project, Tags 09BN, 00XZ, 03DI and 03DJ.
-(blueprint: lem-sp-proetale-open-slice-presentation).
-
-Proof: ringed open localization identifies modules for the actual inverse-image ring
-with modules on the ambient slice. Compose this with scalar restriction along the
-specified coefficient isomorphism. This is an equivalence. Its composite with slice
-extension is left adjoint to actual ring-module pullback: the first adjunction comes
-from the coefficient equivalence and the second from ringed open localization and
-the slice adjunction. Uniqueness of left adjoints gives the asserted isomorphism. -/
+Source: Stacks Project, Tags 09BN, 00XZ, 03DI and 03DJ. -/
 theorem proEtaleOpen_slicePresentation {U V : Scheme.{u}} (j : U ⟶ V)
     [IsOpenImmersion j]
     (RV : Sheaf (ProEt.topology V) CommRingCat.{u + 1})

@@ -10,9 +10,6 @@ import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.RationalP1.Projective.ProjectiveDiagonalComposition
 
 /-! # Naturality of the rational left-factor projection
-
-Source: rational projective-line unit/counit, naturality of the canonical comparisons
-(blueprint: lem-sfb-rational-p1-left-projection-naturality).
 -/
 
 @[expose] public noncomputable section
@@ -89,12 +86,7 @@ private theorem normalized_projection_naturality
   rw [eq_of_heq (ha g K' N), eq_of_heq (ha g K N)]
   exact trace_projection_naturality Λ g k N
 
-/-- Naturality in the first factor of the fixed left-factor projection comparison.
-Source: unit/counit proof, inverse projection in the counit, steps 11--12
-(blueprint: lem-sfb-rational-p1-left-projection-naturality).
-Proof: the native left-factor projection is the right projection mate conjugated
-by the braiding on both sides. Paste braiding naturality with the projection mate's
-naturality, then transfer the result along the uniquely normalized family. -/
+/-- Naturality in the first factor of the fixed left-factor projection comparison. -/
 theorem projectionMap_naturality {X S : Scheme.{u}} (g : X ⟶ S)
     {K K' : DerivedCategory (Modules Λ S)} (k : K ⟶ K')
     (N : DerivedCategory (Modules Λ X)) :

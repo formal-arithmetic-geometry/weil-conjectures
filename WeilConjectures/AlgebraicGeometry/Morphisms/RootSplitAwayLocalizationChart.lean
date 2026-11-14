@@ -13,7 +13,6 @@ public import Mathlib.RingTheory.AdjoinRoot
 # Affine localization of the punctured root cover
 
 Source: Stacks Project, Tag 0EYG, off-divisor branch.
-(blueprint: lem-sbc-root-split-away-localization-chart)
 -/
 
 @[expose] public section
@@ -23,14 +22,6 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The basic-open localization chart for the punctured root algebra.
 Source: Stacks Project, Tag 0EYG, affine localization construction.
-(blueprint: lem-sbc-root-split-away-localization-chart)
-
-Proof: Put h=algebraMap R A g and S=Localization.Away h, with the composite
-ring map R to A to S. Take the inverse of basicOpenIsoSpecAway h. Its
-compatibility with the localization map and contravariant functoriality of
-Spec give the displayed equality. The image of h in its localization is a
-unit, proving the last clause. This construction does not require positive
-n, a point, or a nonzero ring; empty basic opens are allowed.
 -/
 theorem root_split_away_localization_chart
     (R : CommRingCat.{u}) (g : R) (n : ℕ) :

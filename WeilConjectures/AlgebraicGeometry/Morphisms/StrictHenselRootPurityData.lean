@@ -92,32 +92,7 @@ private noncomputable def root_quotient_equiv (R : Type u) [CommRing R]
 
 /-- A finite normalization model is etale at the generic point of the root divisor.
 Source: Stacks Project, Tags 09EB, 0BRM, 0EYG and 0EYH, through the construction
-of B' and tame normalization.
-(blueprint: lem-sbc-strict-hensel-root-purity-data)
-
-Proof: Identify the torsor over D(f) using beta, then base change it to H. The
-canonical pointed-neighbourhood colimit is the strict henselization of the local
-ring at barY. Flatness keeps g regular; quotient compatibility identifies H/(g)
-with the strict henselization of the regular divisor local ring. For nonunit g,
-H is regular local and H/(g) is a regular local domain. The monic root algebra
-A is finite local over H, its root t is regular, and A/(t) is H/(g); hence A is
-regular local. Put D=Spec(A/(t)), with its quotient closed immersion j. Since
-t^n=g, its complement is V=D(g). In particular D is integral and regular,
-j is an effective Cartier centre, and N is locally Noetherian.
-
-At the generic point of D the local ring is a DVR. Each connected generic
-component of the pulled-back torsor has Galois group a stabilizer in G. The
-Galois degree formula 09EB makes its ramification and residue degrees divide
-|G|, which is invertible, so its ramification is tame. The n-th root extension
-has ramification index n there; Abhyankar 0BRM kills every component index.
-Normalize N in the finite etale cover of V, taking the disjoint union over
-its finitely many generic components. Tame normalization is finite (the
-finite locally free tame normalization theorem 0EYH), and agrees with the cover on V by
-normality. Its localization over the divisor generic point is finite etale
-by Abhyankar. Etaleness is open for this finite presentation, giving O.
-The agreement over V gives ζ and its projection identity. This lemma only
-constructs the finite model: purity and surjectivity are proved separately.
-The nonunit condition excludes the empty divisor; n>0 since G is a group. -/
+of B' and tame normalization. -/
 theorem GaloisCover.strict_hensel_root_purity_data
     {L U : Scheme.{u}} (i : U ⟶ L)
     (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)

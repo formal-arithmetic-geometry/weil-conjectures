@@ -61,12 +61,12 @@ lemma spec_map_apply_eq_closedPoint {R : CommRingCat.{u}} [IsLocalRing R] {K : T
   rfl
 
 /-- **Sections of étale morphisms over a strictly henselian local ring.** Let `R` be a strictly
-henselian local ring, `e : R ⟶ K` a ring map to a field with kernel the maximal ideal,
-`p : X ⟶ Spec R` an étale morphism and `μ : Spec K ⟶ X` a lift of `Spec e` along `p`. Then `p`
+henselian local ring, `e: R ⟶ K` a ring map to a field with kernel the maximal ideal,
+`p: X ⟶ Spec R` an étale morphism and `μ: Spec K ⟶ X` a lift of `Spec e` along `p`. Then `p`
 has exactly one section `σ` with `Spec e ≫ σ = μ`.
 
-This is the geometric form of `IsStrictlyHenselianLocalRing.existsUnique_algHom_comp_eq`
-(blueprint: `lem-weil-pbc-map-into-henselian-colimit`), applied on an affine open of `X`
+This is the geometric form of `IsStrictlyHenselianLocalRing.existsUnique_algHom_comp_eq`, applied on
+an affine open of `X`
 around the image of `μ`: every section through that point factors through the affine open. -/
 theorem existsUnique_section_of_etale {R : CommRingCat.{u}} [IsStrictlyHenselianLocalRing R]
     {K : Type u} [Field K] (e : R ⟶ CommRingCat.of K)
@@ -129,12 +129,10 @@ theorem existsUnique_section_of_etale {R : CommRingCat.{u}} [IsStrictlyHenselian
     exact congr($hτ d)
 
 /-- **Lifting along étale morphisms over a strictly henselian local ring.** Let `R` be a strictly
-henselian local ring, `e : R ⟶ K` a ring map to a field with kernel the maximal ideal, `f : V ⟶ S`
-an étale morphism, `ψ : Spec R ⟶ S` a morphism and `v : Spec K ⟶ V` a lift of
-`Spec e ≫ ψ` along `f`. Then there is exactly one `φ : Spec R ⟶ V` with `φ ≫ f = ψ` and
-`Spec e ≫ φ = v`.
-
-(blueprint: `lem-weil-pbc-map-into-henselian-colimit`) -/
+henselian local ring, `e: R ⟶ K` a ring map to a field with kernel the maximal ideal, `f: V ⟶ S`
+an étale morphism, `ψ: Spec R ⟶ S` a morphism and `v: Spec K ⟶ V` a lift of
+`Spec e ≫ ψ` along `f`. Then there is exactly one `φ: Spec R ⟶ V` with `φ ≫ f = ψ` and
+`Spec e ≫ φ = v`. -/
 theorem existsUnique_lift_of_etale {R : CommRingCat.{u}} [IsStrictlyHenselianLocalRing R]
     {K : Type u} [Field K] (e : R ⟶ CommRingCat.of K)
     (he : RingHom.ker e.hom = maximalIdeal R) {S V : Scheme.{u}} (f : V ⟶ S) [Etale f]
@@ -197,9 +195,7 @@ lemma eq_strictLocalizationLift (x : AffinePointedEtaleNeighborhood (t ≫ g))
       spec_map_strictHenselizationEval_comp_strictLocalizationLift g t x⟩
 
 /-- The local homomorphism `𝒪^{sh}_{S,t ≫ g} ⟶ 𝒪^{sh}_{T,t}` of strict henselizations induced
-by `g : T ⟶ S`.
-
-(blueprint: `lem-weil-pbc-strict-henselization-functoriality`) -/
+by `g: T ⟶ S`. -/
 noncomputable def strictHenselizationMap :
     strictHenselization (t ≫ g) ⟶ strictHenselization t :=
   colimit.desc (strictHenselizationDiagram (t ≫ g))
@@ -247,9 +243,7 @@ lemma spec_map_strictHenselizationMap_comp_strictLocalizationCone_π_app
   rw [hy, Category.assoc, IsIso.hom_inv_id, Category.comp_id]
 
 /-- `Spec` of the strict henselization map is compatible with the structure morphisms:
-`j_S ∘ Spec h = g ∘ j_T`.
-
-(blueprint: `lem-weil-pbc-strict-henselization-functoriality`) -/
+`j_S ∘ Spec h = g ∘ j_T`. -/
 @[reassoc]
 lemma spec_map_strictHenselizationMap_comp_strictLocalizationToBase :
     Spec.map (strictHenselizationMap g t) ≫ strictLocalizationToBase (t ≫ g) =
@@ -260,9 +254,7 @@ lemma spec_map_strictHenselizationMap_comp_strictLocalizationToBase :
     strictLocalizationLift_comp_hom]
 
 /-- The strict henselization map is compatible with the evaluations at the geometric points,
-i.e. it induces the inclusion of residue fields inside `Ω`.
-
-(blueprint: `lem-weil-pbc-strict-henselization-functoriality`) -/
+i.e. it induces the inclusion of residue fields inside `Ω`. -/
 @[reassoc (attr := simp)]
 lemma strictHenselizationMap_comp_strictHenselizationEval :
     strictHenselizationMap g t ≫ strictHenselizationEval t = strictHenselizationEval (t ≫ g) := by
@@ -272,9 +264,7 @@ lemma strictHenselizationMap_comp_strictHenselizationEval :
     spec_map_strictHenselizationEval_comp_strictLocalizationLift,
     spec_map_strictHenselizationEval_comp_strictLocalizationCone_π_app]
 
-/-- The strict henselization map is a local homomorphism.
-
-(blueprint: `lem-weil-pbc-strict-henselization-functoriality`) -/
+/-- The strict henselization map is a local homomorphism. -/
 instance isLocalHom_strictHenselizationMap : IsLocalHom (strictHenselizationMap g t).hom := by
   refine ⟨fun a ha ↦ ?_⟩
   rw [isUnit_iff_strictHenselizationEval_ne_zero] at ha ⊢
@@ -294,10 +284,8 @@ lemma eq_strictHenselizationMap (h : strictHenselization (t ≫ g) ⟶ strictHen
       spec_map_strictHenselizationEval_comp_strictLocalizationCone_π_app]
 
 /-- **Functoriality of the strict henselization** (clause 3): the strict henselization map is the
-unique (local) ring homomorphism `h : 𝒪^{sh}_{S,t ≫ g} ⟶ 𝒪^{sh}_{T,t}` with
-`j_S ∘ Spec h = g ∘ j_T` inducing the inclusion of residue fields inside `Ω`.
-
-(blueprint: `lem-weil-pbc-strict-henselization-functoriality`) -/
+unique (local) ring homomorphism `h: 𝒪^{sh}_{S,t ≫ g} ⟶ 𝒪^{sh}_{T,t}` with
+`j_S ∘ Spec h = g ∘ j_T` inducing the inclusion of residue fields inside `Ω`. -/
 theorem existsUnique_strictHenselizationMap :
     ∃! h : strictHenselization (t ≫ g) ⟶ strictHenselization t,
       IsLocalHom h.hom ∧
@@ -309,11 +297,9 @@ theorem existsUnique_strictHenselizationMap :
     fun h ⟨_, h₁, h₂⟩ ↦ eq_strictHenselizationMap g t h h₁ h₂⟩
 
 /-- **Compatibility of the strict henselization map with neighbourhoods** (clause 4): if `(V, v)`
-is an affine pointed étale neighbourhood of `t ≫ g`, `(W, w)` one of `t` and `w : W ⟶ V` is
+is an affine pointed étale neighbourhood of `t ≫ g`, `(W, w)` one of `t` and `w: W ⟶ V` is
 compatible with the structure morphisms and the points, then `T_(t) ⟶ W ⟶ V` equals
-`T_(t) ⟶ S_(t ≫ g) ⟶ V`.
-
-(blueprint: `lem-weil-pbc-strict-henselization-functoriality`) -/
+`T_(t) ⟶ S_(t ≫ g) ⟶ V`. -/
 theorem strictLocalizationCone_π_app_comp_eq (x : AffinePointedEtaleNeighborhood (t ≫ g))
     (y : AffinePointedEtaleNeighborhood t) (w : y.obj.1.left ⟶ x.obj.1.left)
     (hw : w ≫ x.obj.1.hom = y.obj.1.hom ≫ g) (hpt : y.obj.2.left ≫ w = x.obj.2.left) :

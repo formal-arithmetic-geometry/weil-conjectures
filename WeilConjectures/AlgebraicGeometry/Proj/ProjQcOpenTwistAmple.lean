@@ -24,8 +24,7 @@ set_option linter.privateModule false
 /-!
 # Sufficiently divisible twists on a quasi-compact Proj open
 
-Source: Stacks Project, Constructions, Tag 01MW and Properties, Tag 01Q2
-(blueprint: lem-trf-proj-qc-open-twist-ample).
+Source: Stacks Project, Constructions, Tag 01MW and Properties, Tag 01Q2.
 
 The statement records the common positive degree whose restricted Proj twists are
 invertible and ample, together with the canonical tensor-power identification.

@@ -19,9 +19,8 @@ import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 /-!
 # Pullback, tensor products and fibres of invertible modules
 
-Source: Stacks Project, Modules, Tags 01CD, 0B8L, 01C8, 01CT, 01CA, 01CB;
-Sheaves, Tags 0096, 0097, 0098; Algebra, Tags 00D0, 00CY, 00D2
-(blueprint: lem-weil-pbc-invertible-pullback-tensor).
+Source: Stacks Project, Modules, Tags 01CD, 0B8L, 01C8, 01CT, 01CA, 01CB; Sheaves, Tags 0096, 0097,
+0098; Algebra, Tags 00D0, 00CY, 00D2.
 -/
 
 @[expose] public section
@@ -94,39 +93,8 @@ this also permits every permutation of a finite tensor product (including the em
 product, the structure module). Fibres commute with pullback and tensor product, and
 these identifications send section values to their indicated pure tensors.
 
-Source: Stacks Project, Modules, Tags 01CD, 0B8L, 01C8, 01CT, 01CA, 01CB;
-Sheaves, Tags 0096, 0097, 0098
-(blueprint: lem-weil-pbc-invertible-pullback-tensor).
-
-Proof, following the node's eight steps:
-1. Choose a local free generator (`exists_isFreeGenerator`). Its germ generates the
-stalk bijectively: represent stalk elements on smaller opens, and use local uniqueness
-of coefficients after shrinking whenever two germs agree. Extend this linear
-isomorphism to the residue field and use the monoidal unit comparison to obtain rank one.
-2. Identify tensor pullback with Mathlib pullback by uniqueness of left adjoints.
-Transport the instance `IsInvertible.pullback` across this isomorphism (01C8, 0B8L).
-3. Use `IsInvertible.tensorObj` from ProjectionFormula (01CT), which trivializes
-both factors on common opens and tensors their trivializations.
-4. Apply lem-weil-pbc-module-pullback-tensor (01CD), including its naturality and its
-formula on tensor sections.
-5. Compose the adjunctions of def-pc-module-pullback (0096). Both successive and
-composite pullbacks are left adjoints of the same pushforward (0097). The comparison
-isomorphism compatible with the units therefore sends the successive pullback of a
-section to its composite pullback.
-6. Apply lem-weil-pbc-module-tensor-symmetric-monoidal (01CA). Its symmetry swaps
-pure tensor sections, and composites of associators and adjacent symmetries reorder
-any finite family. Induction on `List.Perm` uses a tensor isomorphism for cons,
-associators and braiding for swap, and isomorphism composition for transitivity.
-The nil case is the identity of the structure module.
-7. By lem-weil-pbc-module-stalk-pullback (0098), the pulled-back stalk is the base
-extension of the original stalk, sending the pulled-back germ to the germ tensored
-with one. Extend further to the residue field. Associativity of base extension (00D2)
-and the residue-field map identify this with extension of the original fibre; following
-the germ gives the asserted section-value formula.
-8. By lem-weil-pbc-module-stalk-tensor (01CB), the tensor stalk is the tensor of
-stalks, with the tensor-germ formula. Extend to the residue field and use associativity
-and commutativity (00D0, 00CY, 00D2) to obtain the tensor of fibres. Following the two
-germs gives the tensor of their values. -/
+Source: Stacks Project, Modules, Tags 01CD, 0B8L, 01C8, 01CT, 01CA, 01CB; Sheaves, Tags 0096, 0097,
+0098. -/
 theorem invertible_pullback_tensor {X Y : Scheme.{v}} (f : X ⟶ Y) :
     let pb : ∀ {A B : Scheme.{v}} (h : A ⟶ B) (N : B.Modules) (V : B.Opens),
         Γ(N, V) → Γ((tensorPullback h).obj N, h ⁻¹ᵁ V) :=

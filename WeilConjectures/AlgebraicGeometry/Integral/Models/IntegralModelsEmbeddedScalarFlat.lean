@@ -504,23 +504,7 @@ private def smallRingIso (X : Scheme.{u})
 attribute [-instance] integralModel_coefficientMonObj in
 /-- The actual embedded integral scalar map is flat.
 
-Source: Stacks Project, sites-modules.tex, lemma-completion-flat (Tag 093M);
-blueprint integral-models proof, paragraph (1)
-(blueprint: lem-sfb-embedded-integral-scalar-flat).
-
-Proof: the embedded integer ring of the finite extension is a discrete valuation
-ring, hence Noetherian. Identify its continuous coefficient sheaf with the inverse
-limit of its positive constant quotients using completedCondensedIntegral. Its
-projection formulas fix this identification. The scalar map sends an integer to its
-constant continuous function, so its composites with all these projections are the
-constant quotient maps. Consequently it is the canonical completion map, not merely
-some map between isomorphic rings. Apply ConstantCompletion.flat_and_quotients, or
-its integral_constant_completion specialization after the spectral/embedded integer
-ring comparison. Exact inverse image and the section-ring reconstruction identify
-the corresponding scalar restriction and tensor functors. Precomposition with
-AsSmall is an exact equivalence and preserves the tensor product; it therefore
-preserves this flatness. This proves flatness of the displayed restricted regular
-module. No nonempty-site hypothesis is used; on the empty site exactness is automatic.
+Source: Stacks Project.
 -/
 theorem integralModelsEmbeddedScalarFlat
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)

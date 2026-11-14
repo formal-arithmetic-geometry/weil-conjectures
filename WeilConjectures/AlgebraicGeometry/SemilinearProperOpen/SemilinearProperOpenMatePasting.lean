@@ -134,9 +134,7 @@ import all WeilConjectures.AlgebraicGeometry.SemilinearProperOpen.Normalization.
 
 /-! # Intrinsic proper/open mates for semilinear coefficient systems
 
-Source: Stacks Project, Tags 0F7B, 0F7C, 0F7D and 0F7F, open cases; blueprint
-`fix-prop-coherence`, coefficient-system realization, step 2
-(blueprint: lem-sf-semilinear-proper-open-mate-pasting).
+Source: Stacks Project, Tags 0F7B, 0F7C, 0F7D and 0F7F, open cases.
 
 ## Main definitions and statements
 
@@ -400,17 +398,7 @@ set_option backward.isDefEq.respectTransparency.types true in
 set_option linter.unusedVariables false in
 /-- Vertical, horizontal and base-change coherence for every commutative proper/open
 square, as equalities in derived semilinear-system categories, without assuming evaluation
-faithful. Source: Stacks, Tags 0F7C, 0F7D and 0F7F, and blueprint, steps 5, 6, 10, 11
-(blueprint: lem-sf-semilinear-proper-open-mate-pasting).
-Proof: for alpha, pull the clopen decompositions to each test object. In a vertical
-or horizontal pasting the selected opens are nested, so successive component
-projections equal the outer component projection. Base change pulls both clopen
-components and the identity/zero projector to the corresponding components. Verify
-these equations on their intersections using sheaf uniqueness. Apply the exact
-functors termwise to towers and complexes, then use localization uniqueness to
-descend the equations. Take proper-adjunction mates with composition adjunctions.
-Mate pasting gives the two composition laws; the pullback cube gives the base-change
-law. Associativity of normalized compositors makes all parenthesizations agree. -/
+faithful. Source: Stacks, Tags 0F7C, 0F7D and 0F7F. -/
 theorem semilinearProperOpenMatePasting :
     (∀ {A C₀ E B₀ D F : Scheme.{u}}
       (k : A ⟶ B₀) (i : C₀ ⟶ D) (j : E ⟶ F)
@@ -613,11 +601,7 @@ private alias jComp_transport := SemilinearProperOpenCoherenceAliases.jComp_tran
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- Identity normalizations of gamma in both directions.
-Source: Stacks, Tags 0F7B and 07A7, blueprint, steps 6 and 10
-(blueprint: lem-sf-semilinear-proper-open-mate-pasting).
-Proof: the clopen projection is identity for either identity square. Its alpha is the
-canonical inverse-image/open-extension identity; taking the mate and using the
-triangle identities gives the corresponding identity on direct image or extension. -/
+Source: Stacks, Tags 0F7B and 07A7, steps 6 and 10. -/
 theorem gamma_identities :
     (∀ {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
       (h : j ≫ (𝟙 X) = (𝟙 U) ≫ j) (M : Derived C τ U),
@@ -654,12 +638,7 @@ theorem gamma_identities :
       ((VaryingRing.gamma_identities C τ).2 p h)
 
 /-- The projector selects the clopen image: identity there, zero on its complement.
-Source: Stacks 09AE and the proof of 0F7B
-(blueprint: lem-sf-semilinear-proper-open-mate-pasting).
-Proof: split each test object into its intersections with the two clopen components.
-The direct-image unit keeps precisely the image factor. The inverse open-to-direct
-comparison identifies it with extension by zero. Thus restriction to the image is
-the open unit, and restriction to the complement is zero, also on complexes. -/
+Source: Stacks 09AE and the proof of 0F7B. -/
 theorem pi_components {U X D : Scheme.{u}} (s : U ⟶ X) (c : D ⟶ X)
     [IsOpenImmersion s] [IsClosedImmersion s] [IsOpenImmersion c]
     (hc : Set.range c = (Set.range s)ᶜ) (M : Derived C τ X) :

@@ -40,11 +40,7 @@ completed Chern lifts.  The lifts are existential here; their uniqueness is a
 separate statement, so this is the concrete geometric exchange obligation
 below the arbitrary-input theorem.
 
-Source: diagonal-tower coefficients (2)-(3), second rational P1 triangle.
-Proof: construct the two normalized lifts, apply the finite coefficient Chern
-exchange at the bottom field, and extend that equality to the closure using
-coefficient/exchange naturality. Cancel the canonical endpoint isomorphisms.
-(blueprint: lem-sfb-rational-p1-scalar-chern-base-change-chern-none-canonical) -/
+Source: diagonal-tower coefficients (2)-(3), second rational P1 triangle. -/
 theorem scalar_chern_base_change_chern_none_canonical
     (l : ℕ) [Fact l.Prime]
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

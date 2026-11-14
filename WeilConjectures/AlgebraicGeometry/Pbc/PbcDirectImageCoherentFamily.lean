@@ -12,8 +12,6 @@ import all WeilConjectures.AlgebraicGeometry.Finite.FiniteStagePairCategory
 import all WeilConjectures.CategoryTheory.StageSystem.CommonStageCalculus
 
 /-! # Normalized direct-image coefficient families
-
-Source: blueprint main-20261015, proper base change, order 1312, final paragraph.
 -/
 
 @[expose] public noncomputable section
@@ -620,23 +618,7 @@ variable {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
 
 /-- The actual rationalized direct-image operations form a coherent exact family,
 with the prescribed normalized scalar comparisons at every pair of stages.
-Source: blueprint main-20261015, order 1312, final paragraph; rational transport
-and finite scalar extension (blueprint: lem-weil-pbc-direct-image-coherent-family).
-
-Proof: restrict the actual derived operation to the full bounded constructible
-complete subcategories using pres. Its additive linear maps extend to the raw
-scalar localization. For E ≤ F conjugate the localized ambient scalar-operation
-comparison by pbcScalarIntegralComparison at its two endpoints; for pullback take
-the inverse comparison. The unique finite-quotient characterization identifies
-the small-field coefficient map with the canonical completed map. The ambient
-coefficient tower equation then gives the stage-system associator equation after
-restriction and localization, including repeated fields. The unit equation follows
-by cancellation from this equation at repeated stages. The integral comparison
-commutes with shifts by pbcScalarOperations_shift; localization preserves that
-identity on pure tensors, hence on all rational morphisms. Give each functor its
-localized shift structure. Integral exactness and the characterization of rational
-distinguished triangles as integral image triangles prove stage exactness. Finally
-the two conjugating comparisons cancel to give precisely the BetaSpec formula. -/
+Source: rational transport and finite scalar extension. -/
 theorem pbcDirectImageCoherentFamily (f : X ⟶ Y)
     (pres : ∀ (E : Padic.FiniteCoefficientFields l Ω)
       (K : pbcIntegralStage l Ω X E),

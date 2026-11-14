@@ -52,7 +52,6 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 /-! # Tensor reduction without internal-Hom comparison data
 
 Source: Zheng Construction 4.1; Stacks 03EK, 06YY, 07A4.
-(blueprint: lem-coef-semilinear-tensor-reduction-cochain).
 -/
 
 @[expose] public noncomputable section
@@ -74,8 +73,7 @@ variable {C : Type c} [Category.{v} C] [EssentiallySmall.{max c v r} C]
 
 /-- The normalized tensor models and scalar comparisons, without internal-Hom
 or cartesianness data. These are the tensor fields of the ordinary calculus.
-Source: Zheng Construction 4.1; Stacks 07A4
-(blueprint: def-coef-semilinear-tensor-reduction-models). -/
+Source: Zheng Construction 4.1; Stacks 07A4. -/
 structure SystemTensorReductionModels where
   scalar : ∀ {m n : ℕ} (h : n ≤ m),
     ScalarData.{c, v, max c v r} (coefficientMap.{c, v, max c v r} J B τ h)
@@ -275,8 +273,7 @@ private theorem transition_apply_cast {m n : ℕ} (h : n ≤ m)
   exact eq_of_heq (hh.trans hy.symm)
 
 /-- The ordinary scalar-adjunction transpose of the actual horizontal restriction.
-Source: Zheng Construction 4.1; Stacks 03CZ, 06YY
-(blueprint: lem-coef-semilinear-tensor-reduction-cochain). -/
+Source: Zheng Construction 4.1; Stacks 03CZ, 06YY. -/
 def ordinaryReduction (A : SystemTensorReductionModels.{c, v, r} J B τ) {m n : ℕ} (h : n ≤ m)
     (M : Systems.{c, v, max c v r} J B τ) :
     (A.scalar h).model.E.obj ((evaluation.{c, v, max c v r} J B τ m).obj M) ⟶
@@ -313,15 +310,7 @@ attribute [local irreducible] ordinaryTensorHom tensorSection
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.defeqAttrib.useBackward true in
 /-- Ordinary reduction commutes with tensor under the canonical comparisons.
-Source: Zheng Construction 4.1; Stacks 03EK, 03CZ, 06YY
-(blueprint: lem-coef-semilinear-tensor-reduction-cochain).
-Proof: transpose both maps through extension/restriction adjunction. Precompose with
-inverse tensor evaluation and test on pure tensors, which generate the sheafified
-module tensor. The adjunction unit sends x to its scalar-extension section. The
-ordinary scalar comparison sends the extension of x tensor y to the tensor of the
-two extended sections. Horizontal restriction commutes with pure tensor sections,
-and evaluation's comparison is the identity on these sections. Thus the two
-transposes agree on pure sections, hence on the whole tensor sheaf. -/
+Source: Zheng Construction 4.1; Stacks 03EK, 03CZ, 06YY. -/
 private theorem ordinary_tensor_reduction
     (A : SystemTensorReductionModels.{c, v, r} J B τ) {m n : ℕ}
     (h : n ≤ m) (M N : Systems.{c, v, max c v r} J B τ) :
@@ -386,8 +375,7 @@ variable {C : Type c} [Category.{v} C] [EssentiallySmall.{max c v r} C]
   (τ : ∀ n : ℕ, B (n + 1) ⟶ B n)
 
 /-- The degreewise ordinary horizontal adjoints form a cochain morphism.
-Source: Zheng Construction 4.1; Stacks 06YN
-(blueprint: lem-coef-semilinear-tensor-reduction-cochain). -/
+Source: Zheng Construction 4.1; Stacks 06YN. -/
 def cochainReduction (A : SystemTensorReductionModels.{c, v, r} J B τ) {m n : ℕ} (h : n ≤ m)
     (P : CochainComplex (Systems.{c, v, max c v r} J B τ) ℤ) :
     ((A.scalar h).model.E.mapHomologicalComplex (.up ℤ)).obj
@@ -415,9 +403,7 @@ private theorem cochainReduction_f
       ordinaryReduction.{c, v, r} J B τ A h (P.X k) := rfl
 
 /-- The degreewise construction agrees with the induced cochain adjunction.
-Source: Stacks 06YN (blueprint: lem-coef-semilinear-tensor-reduction-cochain).
-Proof: the inverse Hom equivalence is extension of the map followed by the
-counit in both constructions, and the cochain counit is degreewise. -/
+Source: Stacks 06YN. -/
 theorem cochainReduction_eq_transpose
     (A : SystemTensorReductionModels.{c, v, r} J B τ) {m n : ℕ} (h : n ≤ m)
     (P : CochainComplex (Systems.{c, v, max c v r} J B τ) ℤ) :
@@ -496,14 +482,7 @@ set_option backward.isDefEq.respectTransparency true in
 set_option maxHeartbeats 400000 in
 -- The summand calculation compares three dependent ringed module categories.
 /-- Cochain reduction commutes with the normalized total tensor comparisons.
-Source: Zheng Construction 4.1; Stacks 06YN, 07A4
-(blueprint: lem-coef-semilinear-tensor-reduction-cochain).
-Proof: test equality in each total degree on every (p,q) summand. The comparison
-model summand equations express both maps using the inverse ordinary comparisons.
-Naturality moves the horizontal adjoint past the system tensor summand. The
-ordinary tensor reduction identity then equates the two remaining maps. This
-argument uses every summand of the unbounded total and changes no differential
-or Koszul sign. -/
+Source: Zheng Construction 4.1; Stacks 06YN, 07A4. -/
 theorem cochain_tensor_reduction
     (A : SystemTensorReductionModels.{c, v, r} J B τ) {m n : ℕ} (h : n ≤ m)
     (P Q : CochainComplex (Systems.{c, v, max c v r} J B τ) ℤ) :

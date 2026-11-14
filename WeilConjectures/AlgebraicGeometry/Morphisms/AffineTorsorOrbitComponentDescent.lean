@@ -25,26 +25,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Descent identifies the individual orbit components before assembling the product ring.
 
-Source: Stacks Project, Tags 03SF and 0EYG.
-Proof: put h = algebraMap H C (ι g). Finite faithful flatness gives a faithfully
-flat finite cover D(h) of D(ι g). The étale and unique-rotation conditions identify
-its fibre square with the disjoint union of its G deck transformations: the natural
-map is finite étale and bijective on geometric fibres. Pull the supplied splitting
-back to D(h). Its connectedness (C is a domain and h is nonzero) makes each deck
-transformation permute the split sections. Evaluation at the generic point is the
-specified fixedPunctureDescentAction. Completeness and distinctness index exactly
-its orbits, and hstabilizer gives their stabilizers. Effective descent of finite
-étale schemes therefore identifies each component with the stabilizer quotient.
-Its coordinate ring is the invariant subring of C[1/h]. This is (C^K)[1/h]: write
-an invariant fraction as a/h^n; for each ζ in K, the difference ρ(ζ)(a)-a becomes
-zero after localization. Injectivity into C[1/h] implies the difference was zero.
-The reverse inclusion follows because h comes from H. The basic-open/localization
-isomorphism identifies this component with D(h) in Spec(C^K). Taking the coproduct
-of these component identifications gives e. Every descent and localization map is
-over Spec H, so coproduct universality gives the stated structural-map equation.
-For d = 0 completeness forces m = 0; both sides are empty. No product-spectrum
-identification is used here.
-(blueprint: lem-sbc-affine-torsor-orbit-component-descent) -/
+Source: Stacks Project, Tags 03SF and 0EYG. -/
 theorem affine_torsor_orbit_component_descent
     (R H : CommRingCat.{u}) (g : R) (ι : R →+* H)
     (C : Type u) [CommRing C] [Algebra H C] [IsDomain C]

@@ -218,9 +218,7 @@ public import WeilConjectures.AlgebraicGeometry.ProfiniteFreeSliceDerivedHom
 
 /-! # Profinite free modules and unbounded derived slice Hom
 
-Source: Stacks Project, Cohomology on Sites, Tags 08FI and 08J7;
-Hemo--Richarz--Scholbach, Section 3, Example 3.1 and equation (4.1)
-(blueprint: lem-sfb-profinite-free-slice-derived-hom).
+Source: Stacks Project, Cohomology on Sites, Tags 08FI and 08J7.
 
 The normalized comparison retains the universal free generators, an actual chain
 isomorphism on K-injective representatives, and its derived localization square.
@@ -250,38 +248,31 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) (P : Profinite.{u})
 
 /-- The existing relative profinite test object X[P], including its projection to X.
-Source: Stacks 08FI, 08J7; HRS Section 3
-(blueprint: lem-sfb-profinite-free-slice-derived-hom). -/
+Source: Stacks 08FI, 08J7; HRS Section 3. -/
 abbrev test : X.ProEt := (profiniteToProEtOf X).obj P
 /-- The representable sheaf of the actual object X[P] of the small pro-etale site.
-Source: Stacks 08FI, 08J7; HRS Section 3
-(blueprint: lem-sfb-profinite-free-slice-derived-hom). -/
+Source: Stacks 08FI, 08J7; HRS Section 3. -/
 abbrev represented := ((Scheme.ProEt.topology X).uliftYoneda.{u + 1}).obj (test X P)
 /-- The existing free condensed module on the representable profinite parameter.
-Source: Stacks 08FI, 08J7; HRS Section 3
-(blueprint: lem-sfb-profinite-free-slice-derived-hom). -/
+Source: Stacks 08FI, 08J7; HRS Section 3. -/
 abbrev freeParameter := (Profinite.CondensedAction.InternalBar.free (Mon.mk Λ)).obj
   (parameter P)
 /-- The actual pullback p_X^*(Λ[P]) of the free condensed module.
-Source: Stacks 08FI, 08J7; HRS Section 3
-(blueprint: lem-sfb-profinite-free-slice-derived-hom). -/
+Source: Stacks 08FI, 08J7; HRS Section 3. -/
 abbrev pulledFree := (pointModulePullback Λ X).obj (freeParameter Λ P)
 /-- The pulled-back free module concentrated in degree zero in the unbounded category.
-Source: Stacks 08FI, 08J7; HRS Section 3
-(blueprint: lem-sfb-profinite-free-slice-derived-hom). -/
+Source: Stacks 08FI, 08J7; HRS Section 3. -/
 abbrev derivedFree := (DerivedCategory.singleFunctor (Internal Λ X) 0).obj
   (pulledFree Λ X P)
 
 /-- The free internal B-module functor, using free abelian sheaves and Mod.free.
-Source: Stacks 08FI, 08J7; HRS Section 3
-(blueprint: lem-sfb-profinite-free-slice-derived-hom). -/
+Source: Stacks 08FI, 08J7; HRS Section 3. -/
 abbrev localFree : Sheaf (Scheme.ProEt.topology X) (Type (u + 1)) ⥤ Internal Λ X :=
   Sheaf.composeAndSheafify (Scheme.ProEt.topology X) AddCommGrpCat.free.{u + 1} ⋙
     Mod.free (condensedRingObj Λ X)
 
 /-- The composite free-forgetful adjunction, fixing all local generators.
-Source: Stacks 08FI, 08J7; HRS Section 3
-(blueprint: lem-sfb-profinite-free-slice-derived-hom). -/
+Source: Stacks 08FI, 08J7; HRS Section 3. -/
 def localFreeAdjunction : localFree Λ X ⊣
     Mod.forget (condensedRingObj Λ X) ⋙
       sheafCompose (Scheme.ProEt.topology X) (forget Ab.{u + 1}) :=
@@ -289,27 +280,23 @@ def localFreeAdjunction : localFree Λ X ⊣
     (Mod.freeForgetAdjunction (condensedRingObj Λ X))
 
 /-- The actual free internal module B[h_U] on the relative representable.
-Source: Stacks 08FI, 08J7; HRS Section 3
-(blueprint: lem-sfb-profinite-free-slice-derived-hom). -/
+Source: Stacks 08FI, 08J7; HRS Section 3. -/
 abbrev freeOnTest := (localFree Λ X).obj (represented X P)
 
 /-- The unit generator at the identity of P in the existing free condensed module.
-Source: Stacks 08FI, 08J7; HRS Section 3
-(blueprint: lem-sfb-profinite-free-slice-derived-hom). -/
+Source: Stacks 08FI, 08J7; HRS Section 3. -/
 def pointGenerator : (freeParameter Λ P).X.obj.obj (op P) :=
   (((Profinite.CondensedAction.InternalBar.freeAdjunction (Mon.mk Λ)).unit.app
     (parameter P)).hom.app (op P)) (ULift.up (𝟙 P))
 
 /-- The local generator indexed by an actual arrow V to U, from the free unit.
-Source: Stacks 08FI, 08J7; HRS Section 3
-(blueprint: lem-sfb-profinite-free-slice-derived-hom). -/
+Source: Stacks 08FI, 08J7; HRS Section 3. -/
 def testGenerator (V : X.ProEt) (a : V ⟶ test X P) :
     (freeOnTest Λ X P).X.obj.obj (op V) :=
   (((localFreeAdjunction Λ X).unit.app (represented X P)).hom.app (op V)) (ULift.up a)
 
 /-- The canonical composite set inverse-image/direct-image adjunction from the point.
-Source: Stacks 08FI, 08J7; HRS Section 3
-(blueprint: lem-sfb-profinite-free-slice-derived-hom). -/
+Source: Stacks 08FI, 08J7; HRS Section 3. -/
 def setAdjunction :=
   (Functor.sheafPullbackConstruction.sheafAdjunctionContinuous profiniteToProEt
     (Type (u + 1)) (coherentTopology Profinite.{u})
@@ -317,67 +304,55 @@ def setAdjunction :=
       (Scheme.proEtaleSheafAdjunction (toSpecZ X) (Type (u + 1)))
 
 /-- The existing composite abelian inverse-image/direct-image adjunction from the point.
-Source: Stacks 08FI, 08J7; HRS Section 3
-(blueprint: lem-sfb-profinite-free-slice-derived-hom). -/
+Source: Stacks 08FI, 08J7; HRS Section 3. -/
 def abelianAdjunction :=
   pointUpperStarLowerStarAdjunction.comp
     (upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ X))
 
 /-- The existing internal module pullback along the projection of X[P].
-Source: Stacks 08FI, 08J7; HRS Section 3
-(blueprint: lem-sfb-profinite-free-slice-derived-hom). -/
+Source: Stacks 08FI, 08J7; HRS Section 3. -/
 abbrev restriction := CondensedRing.upperStar Λ (test X P).hom
 /-- The full existing module direct image, including restriction of coefficient scalars.
-Source: Stacks 08FI, 08J7; HRS Section 3
-(blueprint: lem-sfb-profinite-free-slice-derived-hom). -/
+Source: Stacks 08FI, 08J7; HRS Section 3. -/
 abbrev directImage := CondensedRing.lowerStar Λ (test X P).hom
 /-- Pullback applied termwise to an unbounded cochain complex.
-Source: Stacks 08FI, 08J7; HRS Section 3
-(blueprint: lem-sfb-profinite-free-slice-derived-hom). -/
+Source: Stacks 08FI, 08J7; HRS Section 3. -/
 abbrev restrictionComplex := (restriction Λ X P).mapHomologicalComplex (.up ℤ)
 /-- Pullback then direct image applied termwise, with the original differential.
-Source: Stacks 08FI, 08J7; HRS Section 3
-(blueprint: lem-sfb-profinite-free-slice-derived-hom). -/
+Source: Stacks 08FI, 08J7; HRS Section 3. -/
 abbrev sliceComplex := ((restriction Λ X P) ⋙ directImage Λ X P).mapHomologicalComplex
   (.up ℤ)
 /-- Exact pullback followed by K-injective total right derived direct image.
-Source: Stacks 08FI, 08J7; HRS Section 3
-(blueprint: lem-sfb-profinite-free-slice-derived-hom). -/
+Source: Stacks 08FI, 08J7; HRS Section 3. -/
 abbrev sliceDerived := (restriction Λ X P).mapDerivedCategory ⋙
   CondensedRing.moduleObjectDerivedPushforward Λ (test X P).hom
 /-- The ordinary complex concentrated in degree zero on p_X^*(Λ[P]).
-Source: Stacks 08FI, 08J7; HRS Section 3
-(blueprint: lem-sfb-profinite-free-slice-derived-hom). -/
+Source: Stacks 08FI, 08J7; HRS Section 3. -/
 abbrev freeComplex := (HomologicalComplex.single (Internal Λ X) (.up ℤ) 0).obj
   (pulledFree Λ X P)
 /-- The actual section-module equivalence applied to the free complex.
-Source: Stacks 08FI, 08J7; HRS Section 3
-(blueprint: lem-sfb-profinite-free-slice-derived-hom). -/
+Source: Stacks 08FI, 08J7; HRS Section 3. -/
 abbrev sectionFreeComplex := (complexForward Λ X).obj (freeComplex Λ X P)
 
 /-- The canonical base change of V to U in the small pro-etale site of U.
-Source: Stacks 08FI, 08J7; HRS Section 3
-(blueprint: lem-sfb-profinite-free-slice-derived-hom). -/
+Source: Stacks 08FI, 08J7; HRS Section 3. -/
 abbrev baseChanged (V : X.ProEt) : (test X P).left.ProEt :=
   (Scheme.proEtaleBaseChange (test X P).hom).obj V
 /-- The base object V ×_X U, formed by the existing base change and composition functors.
-Source: Stacks 08FI, 08J7; HRS Section 3
-(blueprint: lem-sfb-profinite-free-slice-derived-hom). -/
+Source: Stacks 08FI, 08J7; HRS Section 3. -/
 abbrev product (V : X.ProEt) : X.ProEt :=
   (MorphismProperty.Over.map (f := (test X P).hom) ⊤ (test X P).prop).obj
     (baseChanged X P V)
 
 /-- The canonical projection V ×_X U to U, as an arrow over X.
-Source: Stacks 08FI, 08J7; HRS Section 3
-(blueprint: lem-sfb-profinite-free-slice-derived-hom). -/
+Source: Stacks 08FI, 08J7; HRS Section 3. -/
 def productToTest (V : X.ProEt) : product X P V ⟶ test X P :=
   MorphismProperty.Over.homMk (baseChanged X P V).hom rfl trivial
 
 /-- The canonical section map M(V ×_X U) to (ρ_*ρ^*M)(V).
 It is the module adjunction unit at the product followed by restriction along
 the composition/base-change adjunction unit; hence it chooses no comparison map.
-Source: Stacks 08FI, 08J7; HRS Section 3
-(blueprint: lem-sfb-profinite-free-slice-derived-hom). -/
+Source: Stacks 08FI, 08J7; HRS Section 3. -/
 def sectionToSlice (M : Internal Λ X) (V : X.ProEt) :
     M.X.obj.obj (op (product X P V)) ⟶
       (((restriction Λ X P ⋙ directImage Λ X P).obj M).X.obj.obj (op V)) :=
@@ -389,8 +364,7 @@ def sectionToSlice (M : Internal Λ X) (V : X.ProEt) :
 
 /-- The free generator transported through the inverse free-module identification
 and the canonical degree-zero identification of the single complex.
-Source: Stacks 08FI, 08J7; HRS Section 3
-(blueprint: lem-sfb-profinite-free-slice-derived-hom). -/
+Source: Stacks 08FI, 08J7; HRS Section 3. -/
 def freeSectionGenerator
     (e : pulledFree Λ X P ≅ freeOnTest Λ X P)
     (V : X.ProEt) (a : V ⟶ test X P) :
@@ -402,8 +376,7 @@ def freeSectionGenerator
 /-- Free-generator evaluation of the degree n Hom-complex section.
 Project onto the (0,n) Hom factor, restrict to V ×_X U over V, and apply the
 resulting linear map to the generator indexed by the projection to U.
-Source: Stacks 08FI, 08J7; HRS Section 3
-(blueprint: lem-sfb-profinite-free-slice-derived-hom). -/
+Source: Stacks 08FI, 08J7; HRS Section 3. -/
 def evaluateHomSection (e : pulledFree Λ X P ≅ freeOnTest Λ X P)
     (J : CochainComplex (Internal Λ X) ℤ) (n : ℤ) (V : X.ProEt)
     (φ : ((homComplex (R := ring Λ X) (sectionFreeComplex Λ X P)
@@ -419,8 +392,7 @@ def evaluateHomSection (e : pulledFree Λ X P ≅ freeOnTest Λ X P)
 /-- The canonical K-injective representative of Rρ_*ρ^* on Q(J).
 It uses the exact-pullback localization factorization and the existing
 right-derived-functor unit comparison on the K-injective restricted complex.
-Source: Stacks 08FI, 08J7; HRS Section 3
-(blueprint: lem-sfb-profinite-free-slice-derived-hom). -/
+Source: Stacks 08FI, 08J7; HRS Section 3. -/
 def derivedSliceModel (J : CochainComplex (Internal Λ X) ℤ)
     [CochainComplex.IsKInjective ((restrictionComplex Λ X P).obj J)] :
     (sliceDerived Λ X P).obj (DerivedCategory.Q.obj J) ≅
@@ -431,16 +403,7 @@ def derivedSliceModel (J : CochainComplex (Internal Λ X) ℤ)
 
 /-- Exactness of the point inverse image lifted to internal modules, needed for
 its termwise derived functor and the final pullback-composition assertion.
-Source: Stacks 03D2; HRS Section 3 and the exact inverse-image assertion of
-lem-weil-pbc-profinite-point-pullback
-(blueprint: lem-sfb-profinite-free-slice-derived-hom).
-Proof: the point inverse image and scheme inverse image preserve finite limits
-and finite colimits by lem-weil-pbc-profinite-point-pullback and
-lem-weil-pbc-left-exact-site-inverse-image-tensor. Their composite does too.
-The forgetful functors from internal modules create kernels and cokernels,
-so mapMod preserves these finite limits and colimits. A functor between
-abelian categories preserving finite products and the zero object is additive.
-This supplies the exact additive functor used in step 7 of this node. -/
+Source: Stacks 03D2. -/
 theorem pointModulePullback_exact : (pointModulePullback Λ X).Additive ∧
     PreservesFiniteLimits (pointModulePullback Λ X) ∧
       PreservesFiniteColimits (pointModulePullback Λ X) := by
@@ -454,26 +417,22 @@ theorem pointModulePullback_exact : (pointModulePullback Λ X).Additive ∧
   exact ⟨Functor.additive_of_preserves_binary_products _, inferInstance, inferInstance⟩
 
 /-- The additive structure supplied by the exact point-module pullback theorem.
-Source: Stacks 08FI, 08J7; HRS Section 3
-(blueprint: lem-sfb-profinite-free-slice-derived-hom). -/
+Source: Stacks 08FI, 08J7; HRS Section 3. -/
 instance pointModulePullback_additive : (pointModulePullback Λ X).Additive :=
   (pointModulePullback_exact Λ X).1
 /-- Finite-limit preservation supplied by the exact point-module pullback theorem.
-Source: Stacks 08FI, 08J7; HRS Section 3
-(blueprint: lem-sfb-profinite-free-slice-derived-hom). -/
+Source: Stacks 08FI, 08J7; HRS Section 3. -/
 instance pointModulePullback_limits : PreservesFiniteLimits (pointModulePullback Λ X) :=
   (pointModulePullback_exact Λ X).2.1
 /-- Finite-colimit preservation supplied by the exact point-module pullback theorem.
-Source: Stacks 08FI, 08J7; HRS Section 3
-(blueprint: lem-sfb-profinite-free-slice-derived-hom). -/
+Source: Stacks 08FI, 08J7; HRS Section 3. -/
 instance pointModulePullback_colimits : PreservesFiniteColimits (pointModulePullback Λ X) :=
   (pointModulePullback_exact Λ X).2.2
 
 /-- The dependency’s evaluation-normalization square, expressed as a predicate.
 The sectionwise tensor comparison carries the internal evaluation counit to
 the ringed-site evaluation; no unnormalized choice of derived Hom is admitted.
-Source: Stacks 08FI, 08J7; HRS Section 3
-(blueprint: lem-sfb-profinite-free-slice-derived-hom). -/
+Source: Stacks 08FI, 08J7; HRS Section 3. -/
 def homTransportNormalized
     (S : CoefficientClosedStructure (hom Λ X))
     (T : CoefficientTensorModels.{u, u + 1, u, u + 1}
@@ -500,8 +459,7 @@ The tensor and Hom transport data are exactly those of the recorded comparison
 dependency. `gamma` is a natural isomorphism of functors on the ordinary unbounded
 derived category. The chain-level evaluation and localization fields fix its
 normalization, including the original differential and the section-module encoding.
-Source: Stacks 08FI, 08J7; HRS Section 3
-(blueprint: lem-sfb-profinite-free-slice-derived-hom). -/
+Source: Stacks 08FI, 08J7; HRS Section 3. -/
 structure Comparison where
   /-- The inverse image of h_P is the representable h_U. -/
   setIso : (profinitePointSetSchemeInverseImage X).obj (parameter P) ≅ represented X P

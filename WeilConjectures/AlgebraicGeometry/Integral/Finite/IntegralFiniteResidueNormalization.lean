@@ -10,8 +10,6 @@ import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalarsComp
 import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-! # Canonical residue normalization for native integral reductions
-
-Source: blueprint latest, lemma-bounds-finite-reductions, second paragraph.
 -/
 
 @[expose] public noncomputable section
@@ -31,24 +29,20 @@ attribute [local instance] AdicCompletion.ringMonoidalObject AdicCompletion.ring
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u})
 
-/-- The actual composite from a positive finite level to the first quotient.
-Source: blueprint second paragraph (blueprint: lem-pe-integral-finite-residue-normalization). -/
+/-- The actual composite from a positive finite level to the first quotient. -/
 def integralResidueTransition : ∀ n : ℕ,
     AdicCompletion.finiteRing l E X n ⟶ AdicCompletion.finiteRing l E X 0
   | 0 => 𝟙 _
   | n + 1 => AdicCompletion.transition l E X n ≫ integralResidueTransition n
 
-/-- Composites of quotient ring maps preserve multiplication and the unit.
-Source: blueprint second paragraph (blueprint: lem-pe-integral-finite-residue-normalization). -/
+/-- Composites of quotient ring maps preserve multiplication and the unit. -/
 instance integralResidueTransition_isMonHom (n : ℕ) :
     IsMonHom (integralResidueTransition l E X n) := by
   induction n with
   | zero => dsimp [integralResidueTransition]; infer_instance
   | succ n ih => dsimp only [integralResidueTransition]; infer_instance
 
-/-- The composite integral quotient and residue map is the first quotient.
-Source: blueprint second paragraph (blueprint: lem-pe-integral-finite-residue-normalization).
-Proof: induction, composing the defining consecutive quotient identity. -/
+/-- The composite integral quotient and residue map is the first quotient. -/
 theorem integralResidueTransition_quotient (n : ℕ) :
     AdicCompletion.quotient l E X n ≫ integralResidueTransition l E X n =
       AdicCompletion.quotient l E X 0 := by
@@ -59,7 +53,6 @@ theorem integralResidueTransition_quotient (n : ℕ) :
       AdicCompletion.quotient_transition, ih]
 
 /-- The residue quotient used by the etale Tor test is the actual first finite ring.
-Source: blueprint second paragraph (blueprint: lem-pe-integral-finite-residue-normalization).
 Construction: the image of the principal uniformizer ideal is the principal ideal of
 its image. The third isomorphism theorem, since its positive power lies inside it,
 identifies the further quotient with the first coefficient quotient. -/
@@ -82,10 +75,7 @@ def integralResidueQuotientEquiv (n : ℕ) :
     ((DoubleQuot.quotQuotEquivQuotOfLE (Ideal.pow_le_self (by omega))).trans
       (Ideal.quotEquivOfEq (pow_one J).symm))
 
-/-- The residue quotient identification preserves every original integral scalar.
-Source: blueprint second paragraph (blueprint: lem-pe-integral-finite-residue-normalization).
-Proof: each equality-of-ideal quotient identification preserves quotient representatives,
-and the third isomorphism theorem does so as well. -/
+/-- The residue quotient identification preserves every original integral scalar. -/
 theorem integralResidueQuotientEquiv_mk (n : ℕ)
     (a : Padic.coefficientExtensionIntegers l E) :
     integralResidueQuotientEquiv l E n
@@ -95,16 +85,7 @@ theorem integralResidueQuotientEquiv_mk (n : ℕ)
   rfl
 
 /-- Derived scalar extension of a native finite reduction to the residue quotient is
-canonically isomorphic to the first native reduction.
-
-Source: blueprint latest, lemma-bounds-finite-reductions, second paragraph
-(blueprint: lem-pe-integral-finite-residue-normalization).
-
-Proof: construct the residue map as the composite of the consecutive quotient maps.
-Its composite with the integral quotient is the first quotient, by induction. Apply
-transitivity of the existing derived extension-of-scalars functors to this equality.
-These are the canonical functors, and no K-flat choices or ordinary completed-tower
-presentation are needed. Exponents are positive, including the first quotient at n=0. -/
+canonically isomorphic to the first native reduction. -/
 theorem integral_finite_residue_normalization
     (K : DerivedCategory (AdicCompletion.Modules l E X)) (n : ℕ) :
     Nonempty ((Mod.extendScalars (integralResidueTransition l E X n)).leftDerivedFunctor.obj

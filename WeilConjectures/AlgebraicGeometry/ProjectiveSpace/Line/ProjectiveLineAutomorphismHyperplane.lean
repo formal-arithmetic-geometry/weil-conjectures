@@ -72,19 +72,7 @@ private theorem exists_baseChange_automorphism {S T : Scheme.{u}} (g : T ⟶ S)
 Source: EGA II, Remark 4.2.7, printed p.75, the tautological-line clause for
 projective-bundle isomorphisms; arbitrary bases follow by finite-presentation descent
 as in Stacks, Tag 0B8W. This is just the change-of-model step, and contains no diagonal,
-Cartier ideal, Chern class or integration assertion.
-(blueprint: lem-sfb-projective-line-automorphism-hyperplane).
-
-Proof: base change the automorphism and its inverse to every residue-field fibre,
-using the pullback square for standard projective space. Over the residue field,
-classify the invertible pullback as O(d). Its space of sections has dimension two,
-because pullback by a field-linear isomorphism preserves cohomology. The monomial
-formula gives zero for negative d and d+1 for nonnegative d, so d=1. Base-change
-compatibility of the actual projective twists now shows that the Picard class
- a*[O(1)] * [O(1)]^(-1) restricts to the unit on every residue-field fibre.
-Apply the fibrewise trivial descent theorem to this class, obtaining a base class
-B. Multiply the resulting equality by [O(1)] to get the required formula.
-The descent theorem includes disconnected, nonreduced and empty bases. -/
+Cartier ideal, Chern class or integration assertion. -/
 theorem automorphism_hyperplane (S : Scheme.{u})
     (a : ProjectiveLine S ≅ ProjectiveLine S)
     (ha : a.hom ≫ (ProjectiveLine S ↘ S) = (ProjectiveLine S ↘ S)) :

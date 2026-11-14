@@ -23,8 +23,7 @@ public import Mathlib.CategoryTheory.Functor.ReflectsIso.Balanced
 /-!
 # Classicality of bounded-below direct images
 
-Source: blueprint, direct-image comparison, proof step 5; Stacks Tag 09A6.
-(blueprint: lem-pe-classical-direct-image-preservation).
+Source: Stacks Tag 09A6.
 -/
 
 -- After pruning, this module only keeps private declarations.

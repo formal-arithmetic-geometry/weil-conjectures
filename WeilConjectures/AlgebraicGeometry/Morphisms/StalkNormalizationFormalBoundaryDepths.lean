@@ -41,22 +41,7 @@ private theorem depth_le_of_flat_stalk {X Y : Scheme.{u}}
   rw [hd]
   exact le_self_add
 
-/-- Source: Stacks Project, Tag 0EYJ; Tags 0EY6, 0EY9, 0337 and 031S.
-(blueprint: lem-sbc-stalk-normalization-formal-boundary-depths)
-
-Proof: Minimality identifies the local base open with the punctured spectrum
-of A. The localized normalization is normal and its open preimage is dense.
-Smooth flat local maps make boundary target points have height at least two,
-using the depth hypothesis on A and the flat local depth formula. Going down
-for the finite integral extension of normal domains gives height at least two
-at its boundary source points. Normal Serre S2 then gives source depth at least
-two. Flat base change by t induces flat local maps on source stalks, so the
-flat local depth formula preserves this bound. Each stalk of the split finite
-coproduct is a stalk of one copy of T. The Noetherian power-series ring is flat
-over A, and the base equation makes the complement of V lie over the closed
-point of A. The flat local depth formula therefore gives depth at least two
-for these stalks as well. The argument includes d = 0; a trivial group has
-one summand. These bounds do not identify either cover on V. -/
+/-- Source: Stacks Project, Tag 0EYJ; Tags 0EY6, 0EY9, 0337 and 031S. -/
 theorem GaloisCover.stalk_normalization_formal_boundary_depths {S C : Scheme.{u}}
     [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]

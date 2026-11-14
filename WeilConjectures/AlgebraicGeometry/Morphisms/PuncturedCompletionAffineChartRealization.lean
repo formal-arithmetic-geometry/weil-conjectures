@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionAffineChar
 # Realizing formal glueing data on affine principal charts
 
 Source: Stacks Project, Tag 0BLH, first two proof paragraphs; Tag 05EL.
-(blueprint: lem-sbc-punctured-completion-affine-chart-realization)
 -/
 
 @[expose] public section
@@ -55,42 +54,6 @@ principal affine charts. This statement concerns arbitrary chart and prime eleme
 it neither constructs an H0 family nor asserts that the charts cover.
 
 Source: Stacks Project, Tag 0BLH, first two proof paragraphs; Tag 05EL, item (1).
-(blueprint: lem-sbc-punctured-completion-affine-chart-realization)
-
-Proof: write V_i for the inverse image of D(f_i) under q followed by U's inclusion.
-The containment hypothesis identifies V_i with the finite inverse image of the
-whole affine D(f_i), so V_i is affine. The finite scheme E over Spec C is affine.
-Use Gamma(E,top) for M' with its structural C-action. Use Gamma(Y,V_i) for M_i,
-with the A_{f_i}-action induced by q. Let e and c_i be the identity identifications.
-The open V_i intersect V_j is the principal open f_i in V_j. Its section ring
-is the localization of M_j at f_i; this gives b_ij (Mathlib's
-IsAffineOpen.isLocalization_basicOpen and the module localization universal property).
-The overlap above V_i is the
-affine base change of V_i to Spec C; its section ring is C tensor_A M_i. This
-gives d_i, with tensor factors in Mathlib's order (use pullbackSpecIso and
-its projection formulas after the affine identifications). On the E side the supplied
-isomorphism D identifies this same open with the principal open f_i of E,
-using D.over. Thus its section ring also identifies with the localization of
-M' at f_i. Compose these identifications to define alpha_i and alpha_overlap.
-They respect scalars because all are induced by morphisms over the affine base.
-On double and triple principal opens both routes are restriction of the same
-section, proving square and cocycle. More explicitly, restriction to V_i makes
-f_i invertible, so its A-action extends uniquely to A_{f_i}. Each localized
-section m/f_j^a maps to the restriction of m divided by the image of f_j^a.
-For cocycle, on (m/f_j^a)/f_k^b both paths give the restriction of m to the
-triple intersection divided by f_j^a f_k^b; the swap maps exchange the order
-of these denominators. For square, on (m'/f_i^a)/f_j^b both paths give the
-restriction of the E section m' to the completed double intersection divided
-by f_i^a f_j^b. The compare maps send (c tensor m)/f_j^b to
-c tensor (m/f_j^b), so these are precisely the maps in Data.square.
-Every iterated localization element is a fraction, and tensor elements are
-sums of pure tensors; these calculations prove equality of the linear maps.
-The universal localization map is
-restriction on original elements, giving the two b equations. The base-change
-map sends 1 tensor m to the pullback of m, giving the second d equation.
-The E-side localization map is restriction along D.toCompleted, giving the
-first d equation. These arguments include empty or zero principal charts:
-their section and localization modules are zero. With t=0 only M' and e remain.
 -/
 theorem exists_affine_chart_realization
     {A : Type u} [CommRing A] [IsLocalRing A]

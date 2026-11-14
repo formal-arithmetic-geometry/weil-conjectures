@@ -40,8 +40,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Replete
 
 /-! # Abelian specialization with independently sized coefficients
 
-Source: Stacks Project, Tag 09AC, lemma-compute-i-star.
-(blueprint: lem-u9-proetale-abelian-specialization-universes).
+Source: Stacks Project, Tag 09AC.
 -/
 
 @[expose] public section
@@ -185,7 +184,6 @@ map of the closed base change, rather than an ideal selected from existence.
 Source: Stacks Project, Tag 09AC, first reduction, and Tag 01IH for closed
 immersions into affine schemes. The single-cover lifting criterion is
 `AffineProEt.isLocallySurjective_iff_of_isSheaf` in the source library.
-(blueprint: lem-u9-proetale-abelian-specialization-universes).
 
 Proof. An epimorphism of sheaves on the affine basis lifts any given section
 along a single surjective affine cover. Compose that cover with the affine
@@ -418,9 +416,7 @@ private theorem precomposition_unit_surjective {S T : Scheme.{t}}
 /-- The affine closed-site counit is invertible at a weakly contractible object
 whose points specialize into the closed fibre.
 
-Source: Stacks Project, Tag 09AC, lemma-compute-i-star, with the fully faithful
-adjunction of Tag 09BK
-(blueprint: lem-u9-proetale-abelian-specialization-universes).
+Source: Stacks Project, Tag 09AC, with the fully faithful adjunction of Tag 09BK.
 
 Proof. Full faithfulness makes the base change of the counit invertible. Hence
 its image contains the closed fibre. Its underlying morphism is weakly etale,
@@ -898,9 +894,7 @@ private theorem affine_closed_square {X Z : Scheme.{t}}
 projective evaluation gives the actual inverse-image unit isomorphism on V.
 No specialization assumption is made in this comparison lemma.
 
-Source: Stacks Project, Tag 09BL, lemma-closed-immersion-affines-apply (1),(2),
-and Tag 09AC, localization and unit identification
-(blueprint: lem-u9-proetale-abelian-specialization-universes).
+Source: Stacks Project, Tag 09BL, (2), and Tag 09AC, localization and unit identification.
 
 Proof. First transfer projective evaluation from B to r(B). A locally surjective
 map admits a lift over a single affine surjective cover of r(B). The lift functor
@@ -968,28 +962,7 @@ end IndependentSpecialization
 /-- The actual abelian inverse-image unit is bijective on an affine specialization
 neighbourhood, for any chosen left adjoint and independently sized coefficients.
 
-Source: Stacks Project, Tag 09AC, lemma-compute-i-star, and Tag 09BL (1),(2).
-(blueprint: lem-u9-proetale-abelian-specialization-universes).
-
-Proof: localize the pro-etale sites at V and its closed fibre, retaining the unit
-under the cartesian base-change comparison. On affine ind-etale bases use the
-fully faithful closed-lift adjunction v adjoint to r. The base change of its
-counit at V is invertible, so its image contains the closed fibre. Flat going-down
-and the specialization assumption make the counit surjective. Subcanonical
-Yoneda in Type(max u (t+1)) and projectivity at V split that cover. Full
-faithfulness and the adjunction show that the section is also a left inverse.
-Covers of r(V) lift through v to covers of v(r(V)), hence of V, and split there;
-full faithfulness descends these splittings to r(V). Therefore sheafification of
-precomposition by v does not change sections at r(V): equality is tested on
-covers lifted through v; local lifts of sections glue on finite coproduct covers
-and are pulled back along a splitting. Forgetting abelian groups commutes with
-sheafification, so the same map is invertible for abelian sheaves. The affine
-basis equivalences identify this map, preceded by restriction along the counit,
-with the inverse-image unit. Transport back through localization and compare
-the supplied adjunction using unit_leftAdjointUniq_hom_app. Perform all sheaf
-constructions in max u (t+1); site object and morphism sizes are at most t+1.
-The empty affine has singleton sections by the empty-cover axiom, so the same
-argument includes it. This assertion concerns no ring or scalar extension. -/
+Source: Stacks Project, Tag 09AC, and Tag 09BL (1), (2). -/
 theorem proEtale_abelian_unit_bijective_of_specialization
     {X Z : Scheme.{t}} (i : Z ⟶ X) [IsClosedImmersion i]
     (V : X.ProEt) [IsAffine V.left]

@@ -27,11 +27,7 @@ variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
   {f : X ⟶ Y} {g : Y' ⟶ Y} {sq : ChosenCartesianSquare g' f' f g}
 
 /-- Upper pullback in a Cartesian square over an open immersion preserves K-injectives.
-Source: Stacks Project, Tags 08FI and 09A5
-(blueprint: lem-sf-upper-open-pullback-preserves-kinjective).
-Proof: the chosen square identifies g' with the first projection from the pullback
-of g along f. Base change preserves open immersions, so g' is open. Apply open
-pullback preservation to g' and the specified upper coefficient isomorphism. -/
+Source: Stacks Project, Tags 08FI and 09A5. -/
 @[instance] theorem upper_pull_preservesKInjectiveComplexes
     (r : StrictTowerRingedSquare sq) [IsOpenImmersion g] :
     (upperPull r).PreservesKInjectiveComplexes := by

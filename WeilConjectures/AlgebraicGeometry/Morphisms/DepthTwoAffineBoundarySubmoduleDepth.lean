@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.BoundaryMaximalNotAssociated
 /-! # Positive depth of finite boundary submodules
 
 Source: Stacks Project, Tags 0AV8, 0AVN and 0E9I.
-(blueprint: lem-sbc-affine-restriction-boundary-submodule-depth)
 -/
 
 @[expose] public section
@@ -30,24 +29,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Positive depth of finite boundary submodules.
 
-Source: Stacks Project, Tags 0AV8, 0AVN, 0E9I, 01LC, 05AM and 00LL.
-(blueprint: lem-sbc-affine-restriction-boundary-submodule-depth)
-
-Proof: The affine V is Noetherian. Cover U intersect V by finitely many
-basic opens D(f_i) contained in it. Since the point of p lies outside U,
-every f_i belongs to p. The direct image is quasi-coherent by Tag 01LC;
-its section module P therefore localizes on D(f_i) to P[1/f_i]. Since its
-sections are sections on U intersect V, sheaf separatedness makes the map
-P → product_i P[1/f_i] injective. Localize this injection at p, using
-exactness and commutation with finite products. If z in P_p is killed by
-the maximal ideal pR_p, each f_i kills z. But f_i is a unit in the i-th
-factor, so every component of z is zero, and injectivity gives z = 0.
-The same holds in S_p because S_p injects into P_p. Thus the maximal ideal
-is not an associated prime of S_p. Finiteness follows from S.FG and
-localization. If S_p is nonzero, Tag 00LL supplies a regular element in the
-maximal ideal; its singleton is a regular sequence, giving depth at least
-one. If S_p is zero (in particular when the cover is empty), its depth is
-infinite. This is the finite basic-open form of the argument of Tag 0AVN. -/
+Source: Stacks Project, Tags 0AV8, 0AVN, 0E9I, 01LC, 05AM and 00LL. -/
 theorem depth_one_affine_boundary_submodule
     {L : Scheme.{u}} [IsLocallyNoetherian L] (U : L.Opens)
     (N : L.Modules)

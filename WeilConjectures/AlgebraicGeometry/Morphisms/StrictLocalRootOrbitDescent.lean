@@ -25,7 +25,6 @@ import WeilConjectures.Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 
 Source: Stacks Project, Tag 0EYG, local and intermediate-field paragraphs; Tag 09EV, intermediate
 subextensions.
-(blueprint: lem-sbc-strict-local-root-orbit-descent)
 -/
 
 @[expose] public section
@@ -37,28 +36,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Root-split covers descend to products of fixed subalgebras of the root algebra.
 
-Source: Stacks Project, Tag 0EYG, strict local and normal-domain paragraphs.
-(blueprint: lem-sbc-strict-local-root-orbit-descent)
-
-Proof: Put h=iota(g) and C=H[t]/(t^n-h). Apply the strict-local root torsor
-properties to obtain the domain property, etaleness of its puncture, and unique
-rotations between field-valued points over H. The monic relation makes C finite
-and faithfully flat over H. Regular-local-domain makes H a domain. Multiplication
-regularity implies h is nonzero, and the positive-degree relation makes H to C
-injective, so its image is nonzero too. The roots of unity form a finite group.
-Checking on t proves that the identity rotation is the identity homomorphism and
-that rotations compose according to multiplication of roots of unity.
-Evaluate the root of A=R[T]/(T^n-g) at t in C, and its constants via iota. Since
-t^n=h, this defines a ring homomorphism phi:A to C. It carries g to h and so
-Spec(phi) restricts to k:D(h) in Spec C to D(g) in Spec A. Functoriality of Spec
-and the equation on constants show that k is over Spec R. Apply the general
-affine-torsor fixed-puncture descent lemma to this map k and the original splitting.
-It supplies m, stabilizers K(k), and an isomorphism with the puncture in the spectrum
-of their fixed-ring product. Its fixed subalgebras are definitionally rootFixedAlgebra;
-its projection equation is exactly the desired one. The two imported lemmas isolate
-the local torsor properties and general orbit descent, without identifying any
-invariant algebra with an intermediate root algebra. The empty splitting d=0 is
-included by the general descent lemma's empty-product case. -/
+Source: Stacks Project, Tag 0EYG, strict local and normal-domain paragraphs. -/
 theorem strict_local_root_orbit_descent
     (R H : CommRingCat.{u}) (g : R) (ι : R →+* H)
     [IsStrictlyHenselianLocalRing H] [IsRegularLocalRing H]

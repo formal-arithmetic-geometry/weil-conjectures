@@ -22,8 +22,7 @@ set_option autoImplicit false
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- Canonical orbit data for a finite permutation action. 
-(blueprint: lem-sbc-affine-torsor-fixed-puncture-geometric)
+/-- Canonical orbit data for a finite permutation action.
 -/
 structure FixedOrbitData (G : Type u) [Group G] (d : ℕ) where
   action : G →* Equiv.Perm (Fin d)
@@ -40,8 +39,7 @@ structure FixedOrbitData (G : Type u) [Group G] (d : ℕ) where
 
 Source: the finite orbit decomposition of a finite permutation action (Stacks 03SF).
 The construction takes the quotient of `Fin d` by the orbit relation, chooses its
-finitely many classes as representatives, and uses stabilizer preimages.
-(blueprint: lem-sbc-affine-torsor-fixed-orbit-data-of-action) -/
+finitely many classes as representatives, and uses stabilizer preimages. -/
 theorem fixedOrbitData_of_action
     (G : Type u) [Group G] [Finite G] (d : ℕ) (A : G →* Equiv.Perm (Fin d)) :
     ∃ D : FixedOrbitData G d, D.action = A := by
@@ -84,25 +82,7 @@ components then descend to the stabilizer fixed subalgebras, and invariants comm
 with localization at the nonzero puncture element. This is the geometric descent
 construction, with the projection compatibility supplied by the resulting affine
 identification. The two-component trivial-group splitting yields two singleton
-orbits, so an empty index cannot satisfy the corrected hypotheses.
-
-Proof: finite faithful flatness makes V = D(h) in Spec C a finite faithfully flat
-cover of D(iota(g)) in Spec H. The etale assumption and unique rotations on
-field-valued points identify the finite etale map from G copies of V to the fibre
-square with an isomorphism, since it is bijective on all geometric fibres.
-Pull back the splitting along k. The sections used in fixedPunctureLabel enumerate
-its d copies of V. Connectedness of V makes precomposition with a deck map a
-permutation of these sections, and evaluation at the zero prime gives exactly
-fixedPunctureDescentAction. Hence hD identifies D with the actual descent action.
-Finite etale descent identifies each orbit component with V divided by its
-representative's stabilizer. On rings this is the stabilizer invariant subring of
-C[1/h]. These invariants equal (C^K)[1/h]: if a/h^n is invariant, then each
-rho(zeta)(a)-a vanishes after localization; injectivity of C into C[1/h], using
-IsDomain C and hne, makes a itself invariant. Thus each component is D(h) in
-Spec(C^K). The finite coproduct is D(h) in the spectrum of the product of these
-rings. Every map is over Spec H, which gives the projection equation. For d=0,
-completeness and the representative map force m=0, and both schemes are empty.
-(blueprint: lem-sbc-affine-torsor-fixed-puncture-geometric) -/
+orbits, so an empty index cannot satisfy the corrected hypotheses. -/
 theorem affine_torsor_fixed_orbits_geometric
     (R H : CommRingCat.{u}) (g : R) (ι : R →+* H)
     (C : Type u) [CommRing C] [Algebra H C] [IsDomain C]

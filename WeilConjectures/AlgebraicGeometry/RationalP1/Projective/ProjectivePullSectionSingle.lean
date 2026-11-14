@@ -23,12 +23,8 @@ attribute [local irreducible] CondensedRing.upperStar CondensedRing.lowerStar
 /--
 The single-complex component of the derived pullback section is the ordinary
 section map conjugated by the two left-derived single comparisons.
-Source: the second identity proof in
-`literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md`.
 The proof expands the left-derived composition and identity comparison
 naturality squares, then uses `mapDerivedCategoryIdIso_factorsh`.
-(blueprint: lem-sfb-projective-supported-source-arrow-derived-core)
 -/
 theorem projective_pull_section_single (Y : Scheme.{u})
     (f : diagonalSurface Y ⟶ ProjectiveLine Y)

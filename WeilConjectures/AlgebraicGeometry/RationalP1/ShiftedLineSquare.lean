@@ -417,8 +417,7 @@ private theorem shifted_line_square_native
     (scalarLineMap l c g') (scalarLineMap l c f') (shifted_line_square_general l c sq)
 
 /-- The shifted line square follows from the unshifted comparison equation,
-exact single-complex functoriality, and compatibility of the canonical shift.
-(blueprint: lem-sfb-shifted-line-square) -/
+exact single-complex functoriality, and compatibility of the canonical shift. -/
 theorem shifted_line_square
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

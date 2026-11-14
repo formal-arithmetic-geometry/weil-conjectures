@@ -65,8 +65,7 @@ Transport the representative tests under the section equivalence. The ordinary
 scalar square gives the signed total square. Paste scalar normalization on the
 total tensor, counit naturality, tensor localization and hb. The two factor scalar
 normalizations identify one path; the section representative equation and
-naturality identify the other. Both paths have the same specified final map.
-(blueprint: lem-sfb-quotient-section-tensor-transport-diagram). -/
+naturality identify the other. Both paths have the same specified final map. -/
 theorem section_tensor_transport_diagram (T : Scheme.{u})
     (c : ScalarSectionData a T) (hc : ScalarSectionNormalized a T c)
     (b : TensorIso a T) (hb : TensorNormalized a T b)

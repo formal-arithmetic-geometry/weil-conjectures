@@ -139,8 +139,7 @@ public import WeilConjectures.AlgebraicGeometry.PbcActualScalarPullback
 The recorded arbitrary ringed-topos tensor/pullback interface is reexported.
 The helpers retain its ordinary adjunction and K-flat normalization for the
 completed coefficient structure maps, which need not be isomorphisms.
-Source: Stacks Tags 03EL, 06YY, 0D6D and 099N
-(blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback).
+Source: Stacks Tags 03EL, 06YY, 0D6D and 099N.
 -/
 
 @[expose] public noncomputable section
@@ -319,11 +318,7 @@ variable (hφ : pbcActualCoefficientRingMap Y φY ≫ pbcActualStructureMap g dB
 set_option backward.isDefEq.respectTransparency false in
 include hφ in
 /-- The two right-adjoint composites agree by the coefficient square, with identity
-underlying section maps. Source: Stacks Tag 03EL
-(blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback).
-Proof: both composites evaluate a target module on the same base-changed site
-object. Their actions agree by hφ. The identity function is therefore linear
-and natural. These identity section functions specify the isomorphism uniquely. -/
+underlying section maps. Source: Stacks Tag 03EL. -/
 theorem pbcActualScalarRightIso_exists :
     ∃! δ : pbcActualModulePush g dB ⋙
         SheafOfModules.restrictScalars.{u + 1} (pbcActualCoefficientRingMap Y φY) ≅
@@ -337,14 +332,12 @@ theorem pbcActualScalarRightIso_exists :
     (pbcActualStructureMap g dB) hφ
 
 /-- The identity-on-sections right-adjoint comparison, retaining its coefficient square.
-Source: Stacks Tag 03EL
-(blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback). -/
+Source: Stacks Tag 03EL. -/
 def pbcActualScalarRightIso := (pbcActualScalarRightIso_exists g dA dB φY φX hφ).exists.choose
 
 /-- The ordinary scalar/pullback comparison is the conjugate of the identity section
 comparison under the actual tensor-unit-normalized adjunctions.
-Source: Stacks Tag 03EL
-(blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback). -/
+Source: Stacks Tag 03EL. -/
 def pbcActualScalarOrdinaryPullIso :
     pbcExtend φY ⋙ pbcActualModulePull g dB ≅
       pbcActualModulePull g dA ⋙ pbcExtend φX :=
@@ -356,8 +349,7 @@ def pbcActualScalarOrdinaryPullIso :
       (pbcActualScalarRightIso g dA dB φY φX hφ)).symm
 
 /-- The same canonical comparison on actual cochain complexes, degree by degree.
-Source: Stacks Tag 0D6D
-(blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback). -/
+Source: Stacks Tag 0D6D. -/
 def pbcActualScalarOrdinaryPullComplexIso :
     (pbcExtend φY).mapHomologicalComplex (.up ℤ) ⋙
       (pbcActualModulePull g dB).mapHomologicalComplex (.up ℤ) ≅
@@ -377,15 +369,7 @@ def pbcActualScalarOrdinaryPullComplexIso :
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The derived scalar/pullback comparison retains the ordinary adjunction conjugate
-on flat-term K-flat representatives. Source: Stacks Tags 06YY and 0D6D
-(blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback).
-Proof: scalar extension and ringed pullback preserve the flat-term K-flat resolving
-class. On that class the two paths are identified by their invertible universal
-counits and the ordinary adjunction conjugate above. The displayed equation is
-that conjugation written without selecting inverse counits. It is natural on
-resolving models and invariant under resolving quasi-isomorphisms. Descend it to
-the derived localization. Every derived object has a resolving representative,
-which proves invertibility and uniqueness of the resulting natural isomorphism. -/
+on flat-term K-flat representatives. Source: Stacks Tags 06YY and 0D6D. -/
 theorem pbcActualScalarDerivedPullIso_exists :
     ∃! e : pbcDerivedExtend φY ⋙ pbcActualDerivedPull g dB ≅
         pbcActualDerivedPull g dA ⋙ pbcDerivedExtend φX,
@@ -478,15 +462,13 @@ theorem pbcActualScalarDerivedPullIso_exists :
     exact (normalize e' K).2 (he' K hp.1 hp.2)
 
 /-- The canonical derived coefficient/pullback comparison, with its normalization retained.
-Source: Stacks Tag 0D6D
-(blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback). -/
+Source: Stacks Tag 0D6D. -/
 def pbcActualScalarDerivedPullIso :=
   (pbcActualScalarDerivedPullIso_exists g dA dB φY φX hφ).exists.choose
 
 /-- The direct-image scalar comparison is the actual adjunction mate of the normalized
 ordinary-derived pullback comparison, before completeness or constructibility.
-Source: Stacks Tag 03EL
-(blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback). -/
+Source: Stacks Tag 03EL. -/
 def pbcActualScalarDirectImageMap :
     pbcActualDerivedPush g dA ⋙ pbcDerivedExtend φY ⟶
       pbcDerivedExtend φX ⋙ pbcActualDerivedPush g dB :=

@@ -83,8 +83,7 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ScalarTensorComparisonOf
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUniverses
 /-! # Integral canonical truncations and their conditional tower computation
 
-Source: blueprint, smooth base change, order 1430; Stacks Tags 0118 and 08J5
-(blueprint: thm-weil-pbc-integral-truncations).
+Source: Stacks Tags 0118 and 08J5.
 The Roos-limit formulation retains the actual quotient transitions and makes no
 choice of an unspecified derived-limit object.
 -/
@@ -106,18 +105,11 @@ variable [hNoeth : IsNoetherian T] [hDim : Fact (∃ n : ℕ, topologicalKrullDi
 variable [hInv : Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]
 include hNoeth hDim hInv
 
-/-- The ambient standard t-structure on completed coefficients.
-Source: blueprint order 1430 (blueprint: thm-weil-pbc-integral-truncations). -/
+/-- The ambient standard t-structure on completed coefficients. -/
 abbrev pbcAmbientTStructure :=
   DerivedCategory.TStructure.t (C := pbcModules T (pbcAdicCompletion T (pbcIntegralDatum l E)))
 
-/-- The canonical ambient truncations remain in the integral full subcategory.
-Source: blueprint order 1430, canonical-truncation clause
-(blueprint: thm-weil-pbc-integral-truncations).
-Proof: stalkwise invertibility of l implies invertibility of its global section.
-Apply the standard-truncation clause of integralStratifiedPerfectClosure to K.property,
-using the supplied finite-dimensional bound. This uses ambient truncation closure and
-does not require commutation with coefficient reduction. -/
+/-- The canonical ambient truncations remain in the integral full subcategory. -/
 theorem pbcIntegralCanonicalTruncations_mem
     (K : PbcBoundedConstructibleComplete T (pbcIntegralDatum l E)) (m : ℤ) :
     PbcIsBoundedConstructibleComplete T (pbcIntegralDatum l E)
@@ -130,8 +122,7 @@ theorem pbcIntegralCanonicalTruncations_mem
     simpa using (hInv.out t)
   exact (integralStratifiedPerfectClosure T l E hDim.out hl).2.2.1 K.obj K.property m
 
-/-- Restriction of the actual ambient lower truncation, with all ambient maps.
-Source: blueprint order 1430 (blueprint: thm-weil-pbc-integral-truncations). -/
+/-- Restriction of the actual ambient lower truncation, with all ambient maps. -/
 def pbcIntegralTruncLE (m : ℤ) :
     PbcBoundedConstructibleComplete T (pbcIntegralDatum l E) ⥤
       PbcBoundedConstructibleComplete T (pbcIntegralDatum l E) :=
@@ -140,8 +131,7 @@ def pbcIntegralTruncLE (m : ℤ) :
       (pbcAmbientTStructure T l E).truncLE m)
     (fun K ↦ (pbcIntegralCanonicalTruncations_mem T l E K m).1)
 
-/-- Restriction of the actual ambient upper truncation, with all ambient maps.
-Source: blueprint order 1430 (blueprint: thm-weil-pbc-integral-truncations). -/
+/-- Restriction of the actual ambient upper truncation, with all ambient maps. -/
 def pbcIntegralTruncGE (m : ℤ) :
     PbcBoundedConstructibleComplete T (pbcIntegralDatum l E) ⥤
       PbcBoundedConstructibleComplete T (pbcIntegralDatum l E) :=
@@ -152,8 +142,7 @@ def pbcIntegralTruncGE (m : ℤ) :
 
 variable {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 
-/-- The normalized reduction diagram, including the canonical semilinear transitions.
-Source: blueprint order 1430 (blueprint: thm-weil-pbc-integral-truncations). -/
+/-- The normalized reduction diagram, including the canonical semilinear transitions. -/
 def pbcCanonicalReductionDiagram (K : PbcCompletedDerived T d) :
     ℕᵒᵖ ⥤ PbcCompletedDerived T d :=
   Functor.ofOpSequence
@@ -169,9 +158,7 @@ def pbcCanonicalReductionDiagram (K : PbcCompletedDerived T d) :
           ((pbcCompletedReduction T d n).obj K))
 
 /-- The higher-Tor vanishing formulation of the source's compatibility condition,
-required above every cutoff. The single cohomology module is placed in degree zero.
-Source: order 1430 and the Tor formulation of order 1429
-(blueprint: thm-weil-pbc-integral-truncations). -/
+required above every cutoff. The single cohomology module is placed in degree zero. -/
 def PbcTruncationTorCompatible (K : PbcCompletedDerived T d) : Prop :=
   ∀ (n : ℕ) (q p : ℤ), p < 0 →
     IsZero ((DerivedCategory.homologyFunctor _ p).obj
@@ -483,16 +470,7 @@ private theorem extend_truncations
 omit hNoeth hDim hInv in
 /-- Flat cohomology is sufficient for the compatibility used in the theorem.
 The single complex in degree zero expresses flatness by K-flatness and uses the
-actual completed ring, rather than the underlying constant coefficient ring.
-Source: blueprint order 1430, the sufficient condition from order 1429
-(blueprint: thm-weil-pbc-integral-truncations).
-Proof: flatness of ambient cohomology identifies the cohomology of each quotient
-reduction with the ordinary quotient of that cohomology sheaf, by the tensor spectral
-sequence. That quotient is flat over the quotient ring. Consequently all its higher
-Tor modules for the next quotient vanish, which is precisely the displayed predicate.
-The same condition may be checked on the common local models: flatness is local and
-inverse image is exact; the strata cover all stalks and coefficient change is the
-specified restriction. -/
+actual completed ring, rather than the underlying constant coefficient ring. -/
 theorem pbc_flat_cohomology_torCompatible (K : PbcCompletedDerived T d)
     (_hflat : ∀ i : ℤ, CochainComplex.IsKFlatIndependentCoefficients
       (R := pbcAdicCompletion T d)
@@ -513,19 +491,7 @@ theorem pbc_flat_cohomology_torCompatible (K : PbcCompletedDerived T d)
 
 /-- On the integral constructible category, the all-level compatibility condition
 is equivalent to flat cohomology of the local models, as stipulated in the source.
-Flatness is expressed by K-flatness of each actual cohomology module in degree zero.
-Source: blueprint order 1430, hypothesis paragraph
-(blueprint: thm-weil-pbc-integral-truncations).
-Proof: flat cohomology implies compatibility by pbc_flat_cohomology_torCompatible.
-Conversely, apply the compatibility condition to the finite local models at all
-positive quotient levels. The local flatness criterion over the artinian principal
-quotient rings makes their cohomology flat over those quotients. The bounded finite
-models and intrinsic completeness identify their cohomology with the inverse limits
-of these quotient modules. Compatible quotient-flat finite modules have torsion-free
-limits over the complete DVR: an element killed by the uniformizer vanishes at each
-fixed quotient after lifting to arbitrarily higher levels. Hence the limit is flat.
-The same argument on each stratum proves flatness of the local model cohomology;
-the canonical local identifications transport this to the ambient cohomology sheaves. -/
+Flatness is expressed by K-flatness of each actual cohomology module in degree zero. -/
 theorem pbc_torCompatible_iff_flat_cohomology
     (K : PbcBoundedConstructibleComplete T (pbcIntegralDatum l E)) :
     PbcTruncationTorCompatible T (pbcIntegralDatum l E) K.obj ↔
@@ -561,10 +527,7 @@ theorem pbc_torCompatible_iff_flat_cohomology
 
 omit hNoeth hDim hInv in
 /-- Exact countable products for modules over the actual completed coefficient sheaf.
-Source: order 1430; Bhatt--Scholze 4.2.8
-(blueprint: thm-weil-pbc-integral-truncations).
-Proof: apply countableProducts_exact to pbcAdicCompletion. Its product-of-epimorphisms
-clause, together with sectionwise kernels, is precisely CountableAB4Star. -/
+Source: Bhatt--Scholze 4.2.8. -/
 theorem pbcCompletedCountableAB4Star : CountableAB4Star
     (pbcModules T (pbcAdicCompletion T d)) := by
   let : HasSheafify (ProEt.topology T) AddCommGrpCat.{u + 1} :=
@@ -594,7 +557,7 @@ theorem pbcCompletedCountableAB4Star : CountableAB4Star
   exact CountableAB4Star.of_hasExactLimitsOfShape_nat _
 
 /-- Countable products in the ambient derived category, fixed by their limit property.
-Source: order 1430, Tag 07KC (blueprint: thm-weil-pbc-integral-truncations). -/
+Source: Tag 07KC. -/
 instance pbcCompletedDerivedCountableProducts : HasCountableProducts
     (PbcCompletedDerived T d) :=
   letI := pbcCompletedCountableAB4Star T d
@@ -716,19 +679,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- Under exactly the higher-Tor compatibility condition at all levels, canonical
 integral truncations are the derived limits of the levelwise truncated reduction tower.
 Their quotient reductions are canonically the quotient-coefficient truncations: the
-comparison isomorphisms are normalized by the truncation counit and unit.
-Source: blueprint order 1430 (blueprint: thm-weil-pbc-integral-truncations).
-Proof: the levelwise truncation result uses the Tor hypothesis in the tensor truncation
-triangle to remove its higher-Tor obstruction. It gives normalized adic towers with
-uniformly bounded constructible models and compatible etale origins. Reconstruction
-identifies their Roos limits with complete objects and identifies their finite reductions
-with those towers. The cohomology formulas and the derived-limit truncation triangle
-identify these limits with the ambient canonical truncations, by their adjunctions.
-Uniqueness with the counit and unit proves naturality in K and compatibility with all
-quotient normalizations, including equal indices. The resulting triangle is the
-canonical ambient truncation triangle; its end objects belong to the full category
-by pbcIntegralCanonicalTruncations_mem. No assertion of reduction compatibility without
-the Tor condition is made. -/
+comparison isomorphisms are normalized by the truncation counit and unit. -/
 theorem pbc_integral_truncations
     (K : PbcBoundedConstructibleComplete T (pbcIntegralDatum l E))
     (_hTor : PbcTruncationTorCompatible T (pbcIntegralDatum l E) K.obj) (m : ℤ) :

@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.Lisse.Tower.LisseTowerLocalizati
 
 This is the transition-equation part of the actual localized realization argument.
 Source: Stacks Project, Tags 03CY, 03DA and 06YY.
-(blueprint: lem-weil-pbc-lisse-tower-localized-actual-normalized).
 -/
 
 @[expose] public noncomputable section
@@ -63,13 +62,6 @@ need not commute with transitions. The corrected statement uses the composites o
 statement is unchanged.
 
 Source: Stacks Project, Tags 03CY, 03DA and 0D6D.
-(blueprint: lem-weil-pbc-lisse-tower-localized-actual-normalized).
-
-Proof: use the source face of the localization comparison cube. Naturality of its
-scalar comparison moves the supplied e_n across the scalar face. Functoriality and
-hdelta replace the resulting composite by e_(n+1) followed by the actual transition
-on U. The target face of the cube identifies this transition with the restricted
-transition on W. Recombine the three factors of each constructed level comparison.
 -/
 theorem lisseTower_localized_actual_normalized
     (X Y : Scheme.{u}) (g : Y ⟶ X)

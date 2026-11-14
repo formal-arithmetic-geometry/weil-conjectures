@@ -16,7 +16,7 @@ import Mathlib.AlgebraicGeometry.Limits
 
 /-! # Sections of covers of finite algebras over a strictly henselian ring
 
-Source: Stacks Project, Tags 04GH and 04GK; the splitting calculation in 0EYG.
+Source: Stacks Project, Tags 04GH and 04GK.
 -/
 
 @[expose] public section
@@ -29,17 +29,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- A surjective étale morphism to a finite algebra over a strictly henselian local
 ring admits a section.
 
-Source: Stacks Project, Tags 04GH, 04GK and 0EYG.
-(blueprint: lem-sbc-finite-strict-henselian-algebra-etale-section)
-
-Proof: A finite algebra over a henselian local ring is a finite product of henselian
-local rings (04GH). Each residue field is a finite extension of the separably closed
-residue field of H, hence purely inseparable and separably closed. Thus each nonzero
-factor is strictly henselian. For each factor, surjectivity supplies a point over its
-closed point. The strictly henselian étale section theorem gives a section on that
-factor. The spectrum of the product is the disjoint union of these factor spectra;
-assemble their sections using the coproduct universal property. The empty product
-(zero algebra) has empty spectrum, whose unique map is already a section. -/
+Source: Stacks Project, Tags 04GH, 04GK and 0EYG. -/
 theorem finite_strict_henselian_algebra_etale_section
     (H A : Type u) [CommRing H] [IsStrictlyHenselianLocalRing H]
     [CommRing A] [Algebra H A] [Module.Finite H A]

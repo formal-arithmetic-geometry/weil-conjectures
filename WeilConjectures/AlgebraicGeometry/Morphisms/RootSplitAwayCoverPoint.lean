@@ -15,7 +15,6 @@ import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 # Points of the punctured root cover
 
 Source: Stacks Project, Tag 0EYG, off-divisor branch.
-(blueprint: lem-sbc-root-split-away-cover-point)
 -/
 
 @[expose] public section
@@ -25,15 +24,6 @@ namespace AlgebraicGeometry.Scheme
 
 /-- A point off g lifts to the punctured monic root cover.
 Source: Stacks Project, Tag 0EYG; lying over for finite integral algebras.
-(blueprint: lem-sbc-root-split-away-cover-point)
-
-Proof: The point off g ensures that R is nontrivial. The defining polynomial
-is monic of positive degree, so its root algebra is finite free with the
-nonempty power basis 1,t,...,t^(n-1), hence faithfully flat. Surjectivity of
-prime-spectrum comap gives a prime v above y. Membership of g in its comap
-is exactly membership of algebraMap(g) in v; the hypothesis therefore puts
-v in the basic open. Regard v as a point of that open subscheme. Neither
-invertibility of n nor an arbitrary choice of ring data is needed.
 -/
 theorem root_split_away_cover_point
     (R : CommRingCat.{u}) (g : R) (n : ℕ) (hn : 0 < n)

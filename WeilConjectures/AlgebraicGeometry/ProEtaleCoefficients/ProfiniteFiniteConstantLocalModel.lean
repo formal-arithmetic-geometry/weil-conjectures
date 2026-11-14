@@ -11,8 +11,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.Free
 
 /-! # Finite scalar local models on a profinite slice
 
-Source: blueprint latest, definition-constructible-sheaves, clause (1); Hemo--Richarz--Scholbach,
-Remark 3.2 and Definition 3.5 (blueprint: definition-constructible-sheaves).
+Source: Hemo--Richarz--Scholbach, Remark 3.2 and Definition 3.5.
 
 This is the profinite-slice companion of the imported scheme-site predicate. A finite
 presentation on the condensed point is a cokernel of a finite scalar matrix: maps between

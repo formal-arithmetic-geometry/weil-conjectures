@@ -78,9 +78,7 @@ import all WeilConjectures.AlgebraicGeometry.ExactProductFunctorRoosCompatibilit
 
 /-! # Product-preserving exact functors commute with the specified derived-limit mate
 
-Source: Stacks Tags 0940, 0941; the ordinary-limit normalization calculation in
-`CompletedOpenEndpointLimitTransport`, specialized before any completed pullback.
-(blueprint: lem-weil-pbc-product-preserving-derived-limit-mate).
+Source: Stacks Tags 0940, 0941.
 -/
 
 @[expose] public noncomputable section
@@ -224,16 +222,7 @@ attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall
   WeilConjectures.integralCoefficientAbLocallyBijective in
 /-- The canonical constant-tower mate is invertible for an exact module functor
 preserving countable products.
-Source: Stacks Tags 0940, 0941
-(blueprint: lem-weil-pbc-product-preserving-derived-limit-mate).
-Proof: choose the existing normalized Roos models for both total derived limits.
-Product preservation gives an isomorphism on their two signed coordinates. Descend
-it to a natural isomorphism lambda. The normalized inclusion of the ordinary limit
-shows that lambda intertwines the universal right-derived units with the ordinary
-limit comparison. That ordinary comparison is the constant-tower mate, by its limit
-projections. The derived mate has the same universal-unit equation, so uniqueness
-of the right-derived comparison identifies it with lambda. Hence it is invertible.
-This works for arbitrary unbounded strict towers and arbitrary coefficient sheaves. -/
+Source: Stacks Tags 0940, 0941. -/
 theorem productPreservingDerivedLimitMate_isIso {T S : Scheme.{t}}
     {R : Sheaf (ProEt.topology T) CommRingCat.{t + 1}}
     {R' : Sheaf (ProEt.topology S) CommRingCat.{t + 1}}

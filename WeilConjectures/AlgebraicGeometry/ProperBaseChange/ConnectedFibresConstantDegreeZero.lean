@@ -18,7 +18,6 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 
 Source: Stacks Project, Tag 0A3H, applied over every etale base object;
 Tag 0GKV, case (b), degree zero.
-(blueprint: lem-weil-pbc-connected-fibres-constant-degree-zero)
 -/
 
 @[expose] public section
@@ -84,18 +83,7 @@ private theorem constant_finiteLocallyConstant
 
 /-- Degree-zero direct image of finite constant coefficients is constructible under
 a flat quasi-compact morphism with geometrically connected nonempty fibres.
-Source: Stacks Project, Tags 0A3H and 0GKV, case (b), degree zero.
-(blueprint: lem-weil-pbc-connected-fibres-constant-degree-zero)
-
-Proof: apply the connected-fibre section theorem to the pullback over every etale
-object of the base. Its section map is the component of the inverse-image adjunction
-unit, followed by restriction along the identity chart. That restriction is an
-isomorphism, so the unit is an isomorphism objectwise and hence as a sheaf morphism.
-The degree-zero derived functor is the underived direct image. Inverse image preserves
-constant sheaves, so its value on the constant sheaf is the base constant sheaf.
-This is finite locally constant: identity charts prove local constancy, and the
-constant-stalk comparison gives finite stalks. The trivial stratification proves
-constructibility. The proof includes empty bases and zero coefficient modules. -/
+Source: Stacks Project, Tags 0A3H and 0GKV, case (b), degree zero. -/
 theorem higherDirectImage_zero_constant_constructible
     {X S : Scheme.{u}} {R : Type (u + 1)} [CommRing R]
     (f : X ⟶ S) [Flat f] [QuasiCompact f] [GeometricallyConnected f]

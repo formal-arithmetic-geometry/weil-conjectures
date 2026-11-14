@@ -17,7 +17,6 @@ import Mathlib.RingTheory.Localization.Module
 # Finite restriction detectors at the boundary of an open subscheme
 
 Source: Stacks Project, Tag 0AVN, finite basic-open restriction argument.
-(blueprint: stage3-boundary-localized-finite-detector)
 -/
 
 @[expose] public section
@@ -87,27 +86,7 @@ private lemma localized_smul_injective {R : Type u} [CommRing R]
 set_option backward.isDefEq.respectTransparency false in
 /-- Finite localized restriction maps detect sections of a boundary submodule.
 
-Source: Stacks Project, Tag 0AVN, finite basic-open restriction argument.
-(blueprint: stage3-boundary-localized-finite-detector)
-
-Proof: Write R = O(V) and F = j_*(N|U). Local Noetherianity makes j quasi-compact,
-so U intersect V is compact and admits a finite cover by basic opens D(f_i).
-Each f_i belongs to p because its basic open is contained in U and the point
-of p is outside U. Let T_i be F(D(f_i)), regarded as an R-module by restriction.
-The maps S -> T_i jointly detect zero: their underlying maps are restrictions
-of N|U on the cover of j^{-1}(V), so sheaf separatedness applies, including
-when the cover is empty. The restriction of f_i to D(f_i) is a unit, hence
-multiplication by f_i is injective on T_i.
-
-Take Q_i = (T_i)_p, a_i the image of f_i in the maximal ideal of R_p, and phi_i
-the localized restriction maps. Localization preserves injective scalar
-multiplication. To prove joint zero detection, represent a localized section
-by m/d. Each vanishing image gives a denominator c_i outside p killing the
-restriction of m. Multiply the finitely many c_i to obtain a common c outside
-p. All restrictions of c*m vanish, so c*m = 0 by the preceding separatedness
-argument and m/d = 0. This also handles the empty family, with c = 1.
-No identification of T_i with P[1/f_i], and no quasi-coherent pushforward
-result, is required. -/
+Source: Stacks Project, Tag 0AVN, finite basic-open restriction argument. -/
 theorem boundary_localized_finite_detector
     {L : Scheme.{u}} [IsLocallyNoetherian L] (U : L.Opens) (N : L.Modules)
     (hqc : N.IsQuasicoherent) (V : L.Opens) (hV : IsAffineOpen V)

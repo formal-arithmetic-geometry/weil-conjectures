@@ -20,7 +20,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank
 
 Source: Stacks Project, Constructions, Tags 01OA and 01OE;
 EGA II, Remark 4.2.7, residue-field normalization.
-(blueprint: lem-sfb-projective-bundle-fiber-twist-model)
 -/
 
 @[expose] public section
@@ -72,22 +71,7 @@ projective space and the pulled-back normalized line with the standard degree-on
 twist. There is no assertion about arbitrary invertible modules or other powers.
 
 Source: Stacks Project, Constructions, Tags 01OA and 01OE; EGA II,
-Remark 4.2.7, field normalization; the tensor-power convention is Tag 01CR.
-(blueprint: lem-sfb-projective-bundle-fiber-twist-model)
-
-Proof: Choose a trivializing neighbourhood of s for the rank-r module E. Pull
-that frame back to Spec kappa(s), obtaining an ordered basis of its rank-r
-vector space. Tensor pullback of the universal invertible quotient represents
-quotients of this vector space: tensor-pullback adjunction, composition and the
-quotient classification identify this representing scheme with the fibre.
-The symmetric algebra of the ordered free module is kappa(s)[T_0,...,T_(r-1)].
-The free comparison identifies its projective bundle with standard projective
-space. On an affine base chart the normalization in D.chart and D.generator
-identifies D.line with the degree-one polynomial twist, preserving the quotient.
-These comparisons agree on the homogeneous standard charts and hence glue.
-Compose their inverses to obtain e from standard projective space to the fibre.
-A base point s ensures a nonempty residue
-field spectrum; neither a reduced base nor a globally chosen frame is needed. -/
+Remark 4.2.7, field normalization; the tensor-power convention is Tag 01CR. -/
 theorem exists_projective_bundle_fiber_twist_model (S : Scheme.{u}) (E : S.Modules)
     [E.IsQuasicoherent] (r : ℕ)
     [SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u} E r] (hr : 2 ≤ r)

@@ -18,8 +18,7 @@ import WeilConjectures.AlgebraicGeometry.Geometric.GeometricFibreConnectedPreima
 /-!
 # An étale clopen partition adapted to a proper geometric fibre
 
-Source: Stacks Project, More on Morphisms, Tag 0BUI, proof of
-`lemma-proper-flat-nr-geom-conn-comps-lower-semicontinuous`, Stein splitting paragraph.
+Source: Stacks Project, More on Morphisms, Tag 0BUI, Stein splitting paragraph.
 -/
 
 @[expose] public section
@@ -36,33 +35,8 @@ namespace AlgebraicGeometry
 partition whose pieces meet the marked geometric fibre in connected nonempty subsets.
 There is no assertion about other fibres and no flatness hypothesis.
 
-Source: Stacks Project, More on Morphisms, Tag 0BUI, proof of
-`lemma-proper-flat-nr-geom-conn-comps-lower-semicontinuous`, from the Stein factorization
-through the sentence identifying its purely inseparable fibre pieces.
-(blueprint: lem-weil-pbc-proper-geometric-fibre-clopen-partition)
-
-Proof: First restrict the base to an affine neighbourhood of the marked point, and
-identify it with its affine spectrum. Apply affine Stein factorization to obtain
-X → T → S with T affine, the second map integral, and the first proper with
-geometrically connected (thus nonempty) fibres. The Stein finite-fibre lemma gives
-finitely many points over the marked point and finite residue extensions. Apply
-integral-fibre étale splitting to T → S. Pull its finite disjoint clopen covering
-back along the base change of X → T. Preimages preserve closedness, openness,
-disjointness and the covering property. On the marked fibre each intermediate
-piece has one point with purely inseparable residue extension. That fibre is
-radicial: its point map is injective and its only residue extension is purely
-inseparable. Universal injectivity shows that its base change to the algebraic
-closure has at most one point. It is nonempty because the purely inseparable
-residue field embeds in the algebraic closure (uniqueness of p-power roots gives
-this embedding; in characteristic zero the extension is trivial). Thus its
-geometric fibre has exactly one point. Over that point the base-changed Stein
-map has connected nonempty fibre, by geometric connectedness. The fibre
-homeomorphism identifies it with the corresponding clopen subset of the total
-geometric fibre. Compose the pointed étale neighbourhood with the initial open
-immersion to the original base, and transport the clopens and their geometric
-fibres by the iterated-pullback isomorphisms. If the marked fibre is empty,
-integral splitting produces the empty partition after shrinking; the same
-argument and all universally quantified connectedness conditions still apply.
+Source: Stacks Project, More on Morphisms, Tag 0BUI, from the Stein factorization through the
+sentence identifying its purely inseparable fibre pieces.
 -/
 theorem Scheme.Hom.exists_etale_geometricFibre_clopen_partition
     {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f] (s : S) :

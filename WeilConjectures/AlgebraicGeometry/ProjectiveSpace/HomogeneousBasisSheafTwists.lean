@@ -18,9 +18,7 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 /-!
 # Homogeneous bases give finite sums of twists
 
-Source: blueprint `theorem-riemann-roch-coherent-serre-duality`, shifted-free clause;
-Stacks Project, Constructions, Definitions 01M6, 01MN and Lemma 01M7.
-(blueprint: lem-sc-p1-homogeneous-basis-sheaf-twists).
+Source: Stacks Project, Constructions, Definitions 01M6, 01MN and Lemma 01M7.
 -/
 
 @[expose] public section
@@ -36,30 +34,7 @@ attribute [local instance] MvPolynomial.gradedAlgebra
 
 /-- The inverse transport of an associated sheaf of a finite graded free module is the
 finite sum of twists with the prescribed basis degrees. No resolution or exactness is assumed.
-Source: blueprint `theorem-riemann-roch-coherent-serre-duality`, shifted-free clause;
-Stacks Project, Constructions, Definitions 01M6, 01MN and Lemma 01M7.
-(blueprint: lem-sc-p1-homogeneous-basis-sheaf-twists).
-
-Proof:
-1. The basis coordinate equivalence identifies `M` with `Fin r → k[x₀,x₁]`.
-   Decompose each polynomial coefficient into homogeneous parts. Because `b a` has
-   degree `-d a`, the term with coefficient of degree n has degree `n - d a`.
-   Internality of the grading implies that the degree-j component is exactly the
-   tuples whose a-th coefficient has degree `d a + j`, or is zero if that degree
-   is negative. Thus this is a degree-preserving isomorphism with `⊕ S(d a)`.
-2. By `lem-sc-p1-proj-shifted-free-twist`, the finite coproduct of the Proj twists has
-   exactly the associated-sheaf charts for this sum. The coordinate equivalence of
-   step 1 induces an isomorphism of associated sheaves by
-   `lem-sc-p1-proj-tilde-functorial`; the supplied chart maps identify its domain with `F`.
-3. Pull back this isomorphism along `C.iso.inv`. Pullback by an isomorphism is an
-   equivalence (composition and identity comparisons), hence commutes with coproducts.
-   For each d, on the two standard charts, the generator of `S(d)` is `xᵢᵈ` and
-   the two generators satisfy `x₀ᵈ = t⁻ᵈ x₁ᵈ`. The chart equations of `C` therefore
-   identify the transported Proj twist with `ProjectiveSpace.twist d`, by gluing
-   the two rank-one trivializations. The tensor-formula pullback of the shifted-free
-   lemma agrees with `Scheme.Modules.pullback` by uniqueness of left adjoints to the
-   same pushforward. Taking the coproduct gives the required isomorphism. For r = 0
-   the basis forces `M = 0`, and both associated sheaf and empty coproduct are zero. -/
+Source: Stacks Project, Constructions, Definitions 01M6, 01MN and Lemma 01M7. -/
 theorem homogeneous_basis_sheaf_twists (k : Type u) [Field k]
     (C : ProjectiveLine.ProjChartIsomorphism k)
     (M : ModuleCat.{u} (MvPolynomial (Fin 2) k))

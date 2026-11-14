@@ -48,9 +48,8 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 
 /-! # Chain-level data for the completed scalar formula
 
-Source: Stacks Project, sites-modules.tex, Tag 03EL; the completed coefficient
-square and normalized ordinary scalar adjunction
-(blueprint: lem-weil-isomorphism-scalar-completed-formula-chain-data).
+Source: Stacks Project, Tag 03EL; the completed coefficient square and normalized ordinary scalar
+adjunction.
 -/
 
 @[expose] public noncomputable section
@@ -375,26 +374,7 @@ private theorem completedTensor_smul (W : Scheme.{t})
 
 /-- The completed tensor comparison on sheaves, normalized on every pure tensor.
 
-Source: Stacks Project, Tag 03EL, with the coefficient-limit calculation of
-`lem-weil-isomorphism-limit-scalar-chain-comparison`.
-(blueprint: lem-weil-isomorphism-scalar-completed-formula-chain-data).
-
-Proof: The two completed coefficient maps agree after each finite projection:
-constant sheafification is natural in the quotient scalar map, and the completed
-maps have their specified residues. Joint monicity of the limit projections
-therefore gives the coefficient square. Restriction of scalars commutes with
-sectionwise inverse image by that square; its comparison is the identity on
-underlying sections. Scalar extension is left adjoint to restriction of scalars,
-and inverse image along a scheme isomorphism is an equivalence. The adjunction
-square gives a natural isomorphism whose unit equation fixes the tensor `1 ⊗ p`.
-Linearity and the inverse completed coefficient isomorphism give the displayed
-rule for every scalar. No K-flatness, completeness, or boundedness of the input
-module is used. This also applies to the zero module and the empty site.
-
-The former statement used HEq to identify maps on inverse-image complexes and
-Roos cones. STATEMENT-DISPUTED: those are distinct chain models, and their
-augmentation is only a quasi-isomorphism on complete inputs. This sheaf-level
-comparison supplies the correct argument to the unchanged completed formula. -/
+Source: Stacks Project, Tag 03EL. -/
 theorem completed_formula_chain_data :
     ∃ b : inverseImageIntegralModules l E g ⋙ completedOrdinaryScalarExtension l E L ι X ≅
         completedOrdinaryScalarExtension l E L ι Y ⋙ inverseImageIntegralModules l L g,

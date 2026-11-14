@@ -51,7 +51,7 @@ lemma HasTorsionCohomologicalDimensionLE.of_isUniversalHomeomorphism {X Y : Sche
   have := h _ (Etale.isTorsion_upperStar f hF) q hq
   (Etale.cohomologyMap_bijective f F q).injective.subsingleton
 
-/-- Blueprint `lemma-cohomological-dimension-base-field--1`: Vanishing on a separably closed point.
+/-- Vanishing on a separably closed point.
 
 If `K` is separably closed and `F` is an abelian sheaf on `Spec(K)_ét`, then
 `Hᵠ(Spec(K)_ét, F) = 0` for every `q > 0`. This is
@@ -93,7 +93,7 @@ lemma isZero_of_isZero_upperStar_of_surjective {X S : Scheme.{u}} (s : S ⟶ X)
     exact ⟨⟨hz'.to_ _, h.eq_of_src _ _, hz'.eq_of_src _ _⟩⟩
   exact IsZero.of_iso hz (asIso (hz.from_ M))
 
-/-- Blueprint `lemma-uniform-bounds-pro-etale-affines`: Descent of a geometric cohomological
+/-- Descent of a geometric cohomological
 dimension bound.
 
 Let `X` be a scheme of finite type over a field `K` (structure morphism `a`), and let `K̄` be an

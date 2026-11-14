@@ -14,7 +14,7 @@ import WeilConjectures.AlgebraicGeometry.Regular.RegularQuotientPresentationTowe
 /-! # Regular ordinary quotients as the positive principal derived quotient tower
 
 The comparison is natural in the tower index and preserves the specified augmentation.
-Source: Stacks Project, Tag 099M (blueprint: lem-sfb-integral-regular-quotient-tower).
+Source: Stacks Project, Tag 099M.
 -/
 
 @[expose] public section
@@ -27,25 +27,7 @@ namespace AlgebraicGeometry.ProEtale
 quotient tower, compatibly with the specified quotient projections. This statement
 contains no inverse limit, derived-limit comparison, or Milnor triangle.
 
-Source: Stacks Project, proetale.tex, Tag 099M, lemma-naive-completion, the two-term
-free resolution of the principal coefficients
-(blueprint: lem-sfb-integral-regular-quotient-tower).
-
-Proof: the monomorphism hypothesis and the cokernel universal property give the
-short exact sequence of complexes P --ell^(n+1)--> P --> O_n(P). The canonical map
-from its cone to the quotient is a quasi-isomorphism, respecting the inclusion
-from P. An additive equivalence is exact and preserves integer multiplications.
-The two-term free resolution of Z/ell^(n+1), tensored with the image of P,
-identifies this cone with the derived tensor quotient. This does not require P
-itself to be K-flat: the coefficient resolution is bounded and free. The maps of
-coefficient resolutions have components (ell,1). They agree with the given ordinary
-quotient transitions because the quotient projections are epimorphisms degreewise.
-Consequently the cone-to-cokernel comparisons and their localized inverses give
-one isomorphism of towers, not independent identifications of the levels. Its
-augmentation equation is the cone inclusion equation followed by the unitors of
-the derived tensor product. The positive index is n+1; the full principal tower's
-index zero is deliberately absent here. The same constructions work for the zero
-complex and the empty scheme. -/
+Source: Stacks Project, Tag 099M, the two-term free resolution of the principal coefficients. -/
 theorem integral_regular_quotient_tower (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     [HasDerivedCategory.{u + 1} (DiagonalAb W)]
     [HasDerivedCategory.{u + 1} (ℕᵒᵖ ⥤ DiagonalAb W)]

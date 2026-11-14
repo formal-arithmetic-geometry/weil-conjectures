@@ -9,8 +9,7 @@ public import Mathlib.CategoryTheory.Localization.Predicate
 
 /-! # Reflection and unit equations under localization
 
-Source: Stacks Tag 099M, localization step; Mathlib's fully faithful precomposition API.
-(blueprint: lem-weil-pbc-koszul-localization-assembly).
+Source: Stacks Tag 099M, localization step.
 -/
 
 @[expose] public noncomputable section
@@ -18,9 +17,7 @@ set_option autoImplicit false
 open CategoryTheory
 
 /-- Localization descent interface used to assemble the Koszul comparison.
-Source: Stacks Tag 099M (blueprint: lem-weil-pbc-koszul-localization-assembly).
-Proof: fullness and faithfulness of precomposition by a right-fraction localization
-transport the inverse from the dense subcategory. -/
+Source: Stacks Tag 099M. -/
 theorem AlgebraicGeometry.Scheme.localizationNatTransIso
     {C D E : Type*} [Category C] [Category D] [Category E]
     (P : ObjectProperty C) (L : C ⥤ D) (W : MorphismProperty C)
@@ -39,8 +36,7 @@ theorem AlgebraicGeometry.Scheme.localizationNatTransIso
   exact ⟨asIso η, rfl⟩
 
 /-- Unit normalization on a right-fraction-dense localization.
-Source: Stacks Tag 099M (blueprint: lem-weil-pbc-koszul-localization-assembly).
-Proof: naturality and localization faithfulness extend the equality from the dense subcategory. -/
+Source: Stacks Tag 099M. -/
 theorem AlgebraicGeometry.Scheme.localizationUnitEq
     {C D E : Type*} [Category C] [Category D] [Category E]
     (P : ObjectProperty C) (L : C ⥤ D) (W : MorphismProperty C)

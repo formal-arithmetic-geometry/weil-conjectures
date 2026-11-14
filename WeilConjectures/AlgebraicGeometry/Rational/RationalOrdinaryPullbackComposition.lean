@@ -134,7 +134,6 @@ import WeilConjectures.AlgebraicGeometry.Continuous.ContinuousCoefficientGeneral
 /-! # Ordinary rational coefficient composition and the normalized module and derived compositor.
 
 Source: Bhatt--Scholze, Remark 6.8.15, p. 62; Stacks Tags 03CB, 0D6D, 07A4, 099N.
-(blueprint: lem-per-rational-ordinary-pullback-composition).
 -/
 
 @[expose] public noncomputable section
@@ -235,20 +234,7 @@ private def ordinaryRightIso {S T : Scheme.{u}} (f : S ⟶ T)
 -- Nested chart conversions arise in the explicit tensor-section normalization.
 attribute [local irreducible] rationalCoefficientSheaf in
 /-- Ordinary rational coefficient composition and the normalized module and derived compositor.
-Source: Stacks Tags 03CB, 03EL, 0D6D and 07A4; BS Remark 6.8.15.
-
-Proof: normalization uniquely identifies the three coefficient maps with continuous
-pullback, whose composition law gives the coefficient equality. The coefficient maps
-are isomorphisms by the existing arbitrary-morphism theorem, without any new hypothesis.
-Identify the right adjoint of inverse image followed by scalar extension with ringed
-direct image. Transport the normalized direct-image compositor and take its adjoint
-mate. The mate's unit equation gives the chart restriction on unit sections; linearity
-and the restricted scalar action give the displayed scalar product. Exactness of scalar
-extension and the inverse-image derived factors identify derived pullback on every
-complex with ordinary pullback followed by localization. Descend the module compositor
-through the fully faithful precomposition functor for localization. The resulting
-equation is precisely the required computation-counit equation on every complex.
-(blueprint: lem-per-rational-ordinary-pullback-composition). -/
+Source: Stacks Tags 03CB, 03EL, 0D6D and 07A4; BS Remark 6.8.15. -/
 theorem rationalOrdinaryPullbackComposition (g : Y ⟶ X) (h : Z ⟶ Y)
     (sX : RationalModuleRealization l E X) (sY : RationalModuleRealization l E Y)
     (sZ : RationalModuleRealization l E Z)

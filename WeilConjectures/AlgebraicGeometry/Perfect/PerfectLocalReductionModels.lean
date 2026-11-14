@@ -147,25 +147,7 @@ private theorem constant_kflat (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
 /-- A perfect completed-constant model on one chart has a common support interval
 before and after every finite reduction, and finite constant cohomology after reduction.
 Source: Bhatt--Scholze, Lemma 6.5.8(1), Lemma 6.6.10(1), and the local calculation
-in Proposition 6.6.11; Stacks Tags 06YS, 06YT, 06YU, 093J.
-(blueprint: lem-weil-pbc-perfect-local-reduction-models).
-
-Proof: choose a bounded finite-projective representative C of P. Each term is a
-retract of a finite free A-module; constants and scalar extension preserve these
-splittings. Hence its completed realization is a bounded complex of flat modules,
-and is K-flat. Exact inverse image to the stratum and exact slice restriction
-preserve K-flatness and commute with cohomology. Restriction commutes with reduction,
-so apply the local-model isomorphism and compute the derived reduction on C.
-Associativity of scalar extension identifies its n-th reduction with the constant
-complex C tensor_A A/I^(n+1): the balancing map is
-(b tensor x) tensor c ↦ x tensor pi_n(b)c. It is an isomorphism on finite free
-modules, hence on their retracts, and respects the differentials. These complexes
-have exactly the original term support interval, enlarged to contain zero if
-necessary. Exactness of constant module sheafification identifies cohomology with
-the constant module H^q(C tensor_A A/I^(n+1)). Every term is a retract of a finite
-power of the finite quotient ring; its cycles and their quotient are finite sets.
-They therefore supply the asserted finite constant models on the original chart.
-Outside the term interval both completed and reduced cohomology vanish. -/
+in Proposition 6.6.11; Stacks Tags 06YS, 06YT, 06YU, 093J. -/
 theorem perfect_local_reduction_models
     {X Y : Scheme.{u}} (g : Y ⟶ X) [IsImmersion g]
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)

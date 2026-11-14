@@ -12,9 +12,8 @@ import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.Bidual
 
 /-! # Evaluation of the internal dual on a finite-free open
 
-Source: the coordinate expansion of determinant inversion in Stacks Project, Tag 0BRT,
-recorded in `lem-sc-exterior-dual-local-frames`, steps 1 and 3.
-(blueprint: lem-sc-finite-free-dual-local-evaluation).
+Source: the coordinate expansion of determinant inversion in Stacks Project, Tag 0BRT, steps 1 and
+3.
 -/
 
 @[expose] public section
@@ -92,21 +91,7 @@ private theorem evaluation_bijective_of_generators (X : Scheme.{u}) (M : X.Modul
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Evaluation identifies the internal dual with the dual of sections on a finite-free open.
-Source: the coordinate reconstruction in steps 1 and 3 of
-`lem-sc-exterior-dual-local-frames`, expanding Stacks Project, Tag 0BRT
-(lemma-smooth-proper), determinant inversion.
-(blueprint: lem-sc-finite-free-dual-local-evaluation).
-
-Proof: use the given free trivialization on every smaller open. For a linear functional
-on sections over V, take its values on the standard generators as coefficients in O(V).
-On W contained in V, restrict those coefficients to O(W), and form the linear combination
-of the coordinate projections from the trivialization on W. Naturality follows from
-naturality of the projections and composition of restrictions of O. Evaluating at V gives
-the original functional, by the basis expansion of any vector. Conversely, a natural
-morphism is determined on W by its values on the restricted generators: naturality says
-these values are the restrictions of its values on V. Thus evaluation is bijective, and
-its linearity gives the required linear equivalence. The argument uses finite sums only,
-and includes the empty index type, zero rings, and empty opens. -/
+Source: expanding Stacks Project, determinant inversion. -/
 theorem dual_local_evaluation_equiv (X : Scheme.{u}) (M : X.Modules)
     (U : X.Opens) (I : Type u) [Finite I]
     (e : M.over U ≅ SheafOfModules.free I) (V : X.Opens) (g : V ⟶ U) :

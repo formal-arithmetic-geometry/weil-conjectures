@@ -37,18 +37,7 @@ namespace AlgebraicGeometry.Scheme
 set_option linter.unusedVariables false in
 set_option linter.style.haveILetI false in
 /-- Choose common affine residue models and representatives for the finite family.
-Source: Stacks Project, Tags 01IB, 064K, 06YJ and 0B91.
-(blueprint: new-picard-derived-fibre-residue-bridge)
-
-Proof: Restrict the proper flat direct images to a common affine neighbourhood of `w`.
-Perfectness gives strictly perfect representatives there; finite intersections of the
-neighbourhoods for the finitely many targets are affine and retain the source model.
-The affine residue model comparison gives additive equivalences from the explicit residue
-cycle homologies to the derived fibre cohomology.  The coefficient pullback unit and its
-derived direct-image composition have chain representatives after restriction.  Choosing
-these representatives and applying naturality of the affine residue comparison gives the
-displayed equation.  The construction is simultaneous in `Fin n`, including the empty
-family. -/
+Source: Stacks Project, Tags 01IB, 064K, 06YJ and 0B91 -/
 theorem picard_derived_fibre_residue_bridge
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

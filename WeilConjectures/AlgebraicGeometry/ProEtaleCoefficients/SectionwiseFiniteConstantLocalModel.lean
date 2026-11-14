@@ -54,8 +54,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 
 /-! # Sectionwise finite constant local models
 
-Source: blueprint, definition-constructible-sheaves, clause 1; Stacks 03CY and 03EK
-(blueprint: definition-constructible-sheaves).
+Source: Stacks 03CY and 03EK.
 
 The existing ringed-site and internal condensed-module definitions remain available
 through the public import. This companion interface expresses the scalar local-model

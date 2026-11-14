@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
 /-!
 # Homogeneous twist sections and standard opens on the invertibility locus
 
-Source: Stacks Project, Constructions, Tags 01MU, 01MV and 01MW (5)--(7)
-(blueprint: lem-trf-proj-twist-section-basic-open).
+Source: Stacks Project, Constructions, Tags 01MU, 01MV and 01MW (5)--(7).
 
 ## Main definitions
 

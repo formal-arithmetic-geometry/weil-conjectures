@@ -276,22 +276,7 @@ variable {D : Type d} [Category.{v} D] [Preadditive D] [HasShift D ℤ]
 
 /-- The signed mates have the correct zero component and satisfy addition
 coherence, stated before assembling a `CommShift` structure.
-Source: Stacks Project, Tags 08J9 and 08JC, signed total-tensor evaluation
-(blueprint: lem-sf-native-hom-signed-shift-laws).
-
-Proof: expand the defining mate at zero. The tensor zero laws and coevaluation
-naturality cancel the middle unitors, and the opposite zero-unitor formula gives
-the required zero equation. Tensor-shift naturality transposes to source-Hom
-naturality, so the prescribed components form explicit natural isomorphisms.
-The raw degree-one recurrence is siteHom_opposite_source_shift_successor. For
-q(m)=m*(m+1)/2, expansion of the numerator gives q(m+1)=q(m)+m+1, hence the
-quadratic signs cancel its factor (-1)^m. This yields the successor law for the
-signed natural isomorphisms. Fix m and induct on n over the integers. Zero is
-unitality; the forward step is associativity and the successor law. For the
-backward step apply the successor law to both candidates, use associativity,
-then cancel the invertible degree-one component and addition comparators. The
-faithfulness of shift by one cancels its action on morphisms. Evaluating the
-resulting equality of natural isomorphisms gives the displayed addition law. -/
+Source: Stacks Project, Tags 08J9 and 08JC, signed total-tensor evaluation. -/
 theorem siteHom_signed_source_shift_laws [MonoidalPreadditive D] (M : D) :
     let H := MonoidalClosed.internalHom.flip.obj M
     (∀ X : Dᵒᵖ, siteHomSignedSourceComponent M 0 X =

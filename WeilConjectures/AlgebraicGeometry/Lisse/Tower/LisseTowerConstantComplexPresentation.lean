@@ -206,8 +206,7 @@ private def canonicalDerivedConstantModel {X Z : Scheme.{u}} (g : Z ⟶ X)
 /-- The natural constant model: constants commute with the etale/pro-etale comparison
 and with the two inverse images, and the fixed realization of constants is the constant
 quotient realization.
-Source: Stacks Tags 03DA and 0H7J
-(blueprint: lem-weil-pbc-lisse-tower-constant-complex-comparisons). -/
+Source: Stacks Tags 03DA and 0H7J. -/
 def lisseTowerConstantModel :
     lisseTowerConstantInput g a b d n ≅ constantAdicQuotientRealization g d n := by
   let B := lisseTowerEtaleRing d n
@@ -221,8 +220,7 @@ def lisseTowerConstantModel :
     canonicalDerivedConstantModel g d n
 
 /-- The ordinary natural constant model, before localization.
-Source: Stacks Tags 03DA and 0H7J
-(blueprint: lem-weil-pbc-lisse-tower-constant-complex-comparisons). -/
+Source: Stacks Tags 03DA and 0H7J. -/
 def lisseTowerOrdinaryConstantModel :
     constantSheaf S.smallEtaleTopology (ModuleCat.{u + 1} (lisseTowerEtaleRing d n)) ⋙
         (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (lisseTowerEtaleRing d n)) S ⋙

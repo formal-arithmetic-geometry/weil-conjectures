@@ -36,9 +36,6 @@ public import WeilConjectures.Compactification.Defs
 
 /-!
 # Integral proper cohomological estimates
-
-Source: blueprint main-20261015, proposition-compactness-proper-direct-image--2, proof steps 1--7.
-(blueprint: lem-sfb-integral-proper-cohomological-bounds).
 -/
 
 @[expose] public noncomputable section
@@ -153,28 +150,7 @@ private theorem integral_upper_from_heart
 argument. This does not assert a window isomorphism, preservation of coproducts, or
 preservation of a localizing closure.
 
-Source: blueprint main-20261015, proposition-compactness-proper-direct-image--2, proof steps 1--7;
-Stacks Project, Tags 095U, 099B, 0A0E, 08TB, 08TC and 07KC.
-(blueprint: lem-sfb-integral-proper-cohomological-bounds).
-
-Proof:
-1. The canonical integer-coefficient isomorphism gives an exact equivalence preserving
-finite constant models and bounded constructibility. Integral proper preservation in
-the completion convention, transported back, gives preservation of Dbc. Apply this
-to a constructible N[0] to obtain constructibility of its higher images.
-2. The separate constructible-heart estimate bounds Rp_*(N[0]) above by 2d+1.
-It uses finite reduction models, geometric proper torsion vanishing and the completion
-Roos triangle; it permits torsion N and does not substitute rational coefficients.
-3. Present an ind-constructible module as a small filtered colimit of constructibles.
-The coefficient-independent proper heart continuity argument identifies every higher
-image with the filtered colimit of the corresponding constructible higher images.
-These are ind-constructible and retain their common upper bound 2d+1.
-4. The integral Ind-heart is closed under kernels, cokernels and extensions. Apply
-the coefficient-independent bounded-below hypercohomology argument to extend the
-heart bound to bounded-below complexes with this cohomology class. The generic
-left-complete lower-truncation-tower argument removes the lower bound, yielding
-b+2d+1 for all bounded-above complexes with ind-constructible cohomology. The generic
-helpers used here apply to any coefficient ring; no rational specialization is used. -/
+Source: Stacks Project, Tags 095U, 099B, 0A0E, 08TB, 08TC and 07KC. -/
 theorem integralProperCohomologicalBounds
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (k : Type u) [Field k] (p₀ : ℕ) [CharP k p₀] (hp₀ : 0 < p₀) (hpℓ : p₀ ≠ ℓ)

@@ -253,32 +253,7 @@ The ordinary and derived isomorphisms are supplied. The derived map is the
 canonical rightDerivedFunctorPlusBaseChange of the ordinary map;
 this theorem asserts only the indicated equalities for those fixed isomorphisms.
 
-Source: Stacks Project, More on Etale Cohomology, Tags 0F7B, 0F7C, 0F7D and 0F7F;
-the corresponding numbered steps of lem-cbc-proper-open-interchange-coherence.
-(blueprint: lem-cbc-normalized-proper-open-pasting)
-
-Proof:
-The ordinary normalization determines each delta uniquely: its composite with the support
-inclusion into the direct image of the composite map is prescribed, and that inclusion is
-monic. For two horizontally adjacent squares, compose the two delta maps and include the
-result in the direct image of the outside composite. Naturality of the support inclusions,
-the two given normalizations and associativity of direct-image composition give the same
-map as the outside delta. Cancel the inclusion. This proves ordinary horizontal pasting,
-with the specified extension-zero composition isomorphisms.
-
-Represent K by a bounded-below injective complex J. Choose injective resolutions
-t:k!J -> I and v:l!I -> L. The canonical base-change factorization equation, together with
-hgamma, says that the first derived comparison is represented by p_*t composed with delta
-at J. The second comparison is represented by
-q_*v composed with delta at I. Exactness of l! makes w = v composed with l!t a
-quasi-isomorphism, so w is also a resolution of l!k!J. Naturality of the second ordinary
-delta moves t through it. The ordinary horizontal equation just proved then identifies
-the two-square representative with q_*w composed with the outside delta. The derived
-comparison for the outside rectangle has exactly this representative, by the same
-canonical factorization equation. The specified exact extension-zero compositors descend
-from the ordinary ones. Thus these representatives give precisely the displayed equation
-in D+, for every K. Their independence of resolutions follows from the canonical
-right-derived-unit characterization, already imposed by hgamma.
+Source: Stacks Project, More on Etale Cohomology, Tags 0F7B, 0F7C, 0F7D and 0F7F.
 -/
 theorem properOpenInterchangeHorizontalPasting_of_normalization (Λ : Type (u + 1)) [CommRing Λ]
   [Finite Λ]

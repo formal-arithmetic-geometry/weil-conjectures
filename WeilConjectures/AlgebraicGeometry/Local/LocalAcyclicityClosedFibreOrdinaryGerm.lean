@@ -38,8 +38,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
 /-! # The unit map on closed-fibre stalks
 
-Source: Stacks Project, Tag 0GJU, stalk calculation in lemma-beta-is-isomorphism.
-(blueprint: lem-weil-pbc-local-acyclicity-closed-fibre-ordinary-germ).
+Source: Stacks Project, Tag 0GJU.
 -/
 
 @[expose] public section
@@ -225,35 +224,7 @@ attribute [local irreducible] squareUpperStarIso upperStarComp baseChangeMap
 attribute [local irreducible] Sheaf.Γ upperStarCompSheafFiberIso localAcyclicityAlpha
 
 /-- The ordinary adjunction unit on a closed-fibre stalk is the local-acyclicity map.
-Source: Stacks Project, Tag 0GJU, ordinary germ calculation; Tag 0GJP, equation-alpha-K.
-(blueprint: lem-weil-pbc-local-acyclicity-closed-fibre-ordinary-germ).
-
-Proof: put x' = iz and K = p-inverse-image of G. The strict-fibre comparison
-supplies the canonical isomorphism q from X'_(x') to X_(x), a base isomorphism e,
-and a fibre isomorphism. Pullback symmetry and associativity express the latter
-as an isomorphism E from X_t times_X' X'_(x') to the vanishing-cycles fibre.
-
-Choose the unique germ restriction from strictLocalSectionCone. Its residue lift,
-the strictly henselian sections-stalk theorem and the general pointed-section-cone
-criterion show that this same map is invertible. Naturality in the coefficient sheaf
-follows from the representative germ colimit, naturality of the adjunction unit,
-and naturality of terminal evaluation. Define A using inverse-image stalk comparison,
-restriction of K, the section transport along q, and inverse restriction of G.
-
-For B, follow inverse-image stalk comparison and restriction of h_*h-inverse-image K
-by ordinary exchange on strict-local sections, direct-image global sections, and
-transport along E. The map h is affine, hence qcqs. The small-model strict-local
-base-change theorem on global homology, together with the ordinary degree-zero arrow
-comparison, makes this exchange on global sections invertible. Thus B is an isomorphism.
-
-Naturality of inverse-image stalk comparison and of restriction moves the ordinary
-unit across the first two comparisons. The equation map_unit_baseChangeMap_app
-identifies the remaining composite with pullback of sections followed by the
-inverse-image square comparison. The section transport identity gives pullback
-along the vanishing-cycles projection after A. Cancel inverse restriction of G
-against the first map defining localAcyclicityAlpha. The resulting equation is the
-asserted equality of the actual morphisms. No local acyclicity, torsion or vanishing
-hypothesis is used; the same equations include zero sheaves and empty fibres. -/
+Source: Stacks Project, Tag 0GJU, ordinary germ calculation; Tag 0GJP. -/
 theorem closedFibre_unit_stalk_comparison
     {X S : Scheme.{u}} (f : X ⟶ S)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

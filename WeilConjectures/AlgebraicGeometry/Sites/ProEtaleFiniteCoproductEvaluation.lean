@@ -18,8 +18,7 @@ public import Mathlib.CategoryTheory.Sites.Subcanonical
 /-!
 # Finite disjoint unions in the pro-etale site
 
-Source: Stacks Project, Tags 0F4P and 0DB1
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tags 0F4P and 0DB1.
 -/
 
 @[expose] public section
@@ -37,31 +36,7 @@ Here `uliftYoneda` places representables in the same universe as the sheaves of 
 The colimit witness asserts existence in sheaves; `hc.desc` is the canonical comparison
 from any chosen coproduct. Empty families give the empty scheme and singleton sections.
 
-Source: Stacks Project, Tag 0F4P, proof of `lemma-weakly-contractible-cover`, and
-Tag 0DB1, `remark-take-unions-hypercovering-X`, hypotheses (a)-(c)
-(auxiliary; not a blueprint node).
-
-Proof:
-1. Construct the scheme coproduct and its clopen coprojections using
-   lem-weil-pbc-scheme-coproduct-family. Apply lem-weil-pbc-finite-coproduct-lfp-qcqs
-   for qcqs and lem-weil-pbc-finite-affine-coproduct-spectrum for affineness.
-   The empty coproduct is the spectrum of the zero ring, hence empty.
-2. The structural morphism is weakly etale: flatness and flatness of its diagonal
-   are checked on each open summand using definition-ind-etale-pro-etale-weakly--3 and
-   def-weil-flat-morphism. Finite unions respect prose-01-10.
-3. The summand inclusions cover in definition-small-pro-etale-site--1. For an affine open
-   of the union, its intersections with summands are clopen and quasi-compact;
-   finite affine covers of these intersections verify the covering criterion.
-   The empty family covers the empty scheme, so its sections form a singleton.
-   Apply the sheaf equalizer axiom of def-weil-pbc-sites-and-cohomology: distinct
-   summands have empty overlaps, and self-overlaps give identity restrictions.
-   Every tuple therefore glues uniquely. Naturality of a sheaf morphism on each
-   coprojection proves naturality of this bijection.
-4. By lem-weil-pbc-proetale-subcanonical the representables are sheaves.
-   Use lem-galois-yoneda-hom-bijection to identify maps out of each representable
-   with sections. Step 3 gives exactly the coproduct universal property of
-   def-weil-pbc-category-colimit. The universal maps in both directions between
-   two such coproducts are inverse since they agree on all coprojections. -/
+Source: Stacks Project, Tag 0F4P, and Tag 0DB1, hypotheses (a)-(c). -/
 theorem finite_coproduct_evaluation (X : Scheme.{u}) (I : Type v) [Finite I]
     (V : I → X.ProEt) (hqc : ∀ i, CompactSpace (V i).left)
     (hqs : ∀ i, QuasiSeparatedSpace (V i).left) :

@@ -61,9 +61,6 @@ import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors
 public import WeilConjectures.SixFunctors.Supporting.ModCondensedCachedInstances
 
 /-! # Scalar base change for the first projective-line trace
-
-Source: the First identity in the current rational projective-line triangle proof.
-(blueprint: lem-sfb-rational-p1-first-scalar-trace).
 -/
 
 @[expose] public noncomputable section
@@ -1282,23 +1279,7 @@ private theorem native_scalar_trace
   exact ht
 
 -- Assemble the completed square and the three concrete scalar transports.
-/-- Base change of the normalized q trace to the first projection.
-
-Source: current blueprint, rational projective-line triangle proof, First identity,
-"The trace in epsilon becomes, under base change, Tr_p1."
-(blueprint: lem-sfb-rational-p1-first-scalar-trace).
-
-Proof: pull back the unit/Chern splitting of the completed projective-line direct
-image along q. The opposite square mate preserves the unit by the adjunction
-triangle and the positive Chern class by Kummer pullback. Both completed traces
-are zero on the shifted unit and one on the Chern summand, so their square
-commutes. Transport it through the full-unit-normalized realization squares of
-reference, then the integral, rational and closure scalar squares of family.
-The root-normalized secondLineComparison identifies the pulled coefficient line
-with the line on the product. The canonical comparison of the derived direct
-images gives firstNativeFunctional. Finally the monoidal unit comparison and
-singleUnitIso convert the coefficient units to tensor units. This argument uses
-only the scalar line, not an arbitrary M, its projections, or a diagonal class. -/
+/-- Base change of the normalized q trace to the first projection. -/
 theorem first_scalar_trace
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

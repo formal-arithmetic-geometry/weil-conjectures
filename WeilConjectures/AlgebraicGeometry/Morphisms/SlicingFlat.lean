@@ -487,7 +487,7 @@ private theorem exists_etale_factorization_of_mem_aux {X S : Scheme.{u}} (f : X 
   have hxx' : x ∈ connectedComponentIn (f ⁻¹' {f x}) x' := by
     rw [← connectedComponentIn_eq (hW ⟨hx₂W, hfx'⟩)]
     exact mem_connectedComponentIn rfl
-  -- an étale slice `ι : Z ⟶ X` through `x'`, and the section `σ` of `X ×_S Z ⟶ Z`
+  -- an étale slice `ι: Z ⟶ X` through `x'`, and the section `σ` of `X ×_S Z ⟶ Z`
   obtain ⟨Z, ι₀, z, hZ, hιf, hι₀z⟩ := Smooth.exists_etale_comp_of_etale_residueFieldMap _ hx₂
   set ι := ι₀ ≫ L.ι
   have hιz : ι z = x' := by simp [ι, hι₀z, x']

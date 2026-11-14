@@ -13,9 +13,6 @@ import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationBilinea
 
 /-!
 # Wedging two exterior sheaves before quotient descent
-
-Source: blueprint, Riemann--Roch, proof of (*), determinant paragraph,
-exterior-power and tensor universal properties (blueprint: lem-sc-exterior-sheaf-wedge-map).
 -/
 
 @[expose] public section
@@ -129,9 +126,7 @@ with the target's sheafification unit. Extend to the sheafifications of both sou
 using local representatives; equality on overlaps follows from separatedness of the target.
 The tensor sheaf universal property gives the asserted sheaf morphism. Its pure-wedge formula
 follows from the defining sectionwise maps. This construction works for arbitrary `f`; it uses
-neither exactness nor a rank bound. Empty blocks give multiplication by the degree-zero scalar.
-Source: blueprint, Riemann--Roch, proof of (*), determinant paragraph, universal properties
-(blueprint: lem-sc-exterior-sheaf-wedge-map). -/
+neither exactness nor a rank bound. Empty blocks give multiplication by the degree-zero scalar. -/
 theorem exteriorSheaf_wedgeMap_exists {X : Scheme.{v}} {A B : X.Modules}
     (f : A ⟶ B) (r s t : ℕ) (ht : t = r + s) :
     ∃ ψ : exteriorPower A r ⊗ exteriorPower B s ⟶ exteriorPower B t,

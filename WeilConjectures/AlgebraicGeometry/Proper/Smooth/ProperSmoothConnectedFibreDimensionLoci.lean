@@ -22,8 +22,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Fiber
 # Clopen dimension loci in proper smooth connected families
 
 Source: Stacks Project, Morphisms, Tags 02G1, 02G2, 02NK, 01W1, 01W4, 01TH;
-Varieties, Tags 0387 and 06LH. Agent-formulated consequence
-(blueprint: lem-weil-pbc-proper-smooth-connected-fibre-dimension-loci).
+Varieties, Tags 0387 and 06LH. Agent-formulated consequence.
 -/
 
 @[expose] public section
@@ -107,31 +106,7 @@ private theorem smooth_connected_isPureDimension
 nonempty connected geometric fibres into clopen loci. On each locus the geometric fibres
 have the indicated pure dimension, and the dimension-zero family is quasi-finite.
 Source: Stacks Project, Morphisms, Tags 02G1, 02G2, 02NK, 01W1, 01W4, 01TH;
-Varieties, Tags 0387 and 06LH.
-(blueprint: lem-weil-pbc-proper-smooth-connected-fibre-dimension-loci)
-
-Proof:
-1. Geometric connectedness is detected after extension to an algebraic closure. Pullback
-   pasting identifies that test with the assumed geometric fibre, so f is geometrically
-   connected and surjective.
-2. A connected smooth scheme over a field is regular and integral. Choose a nonempty
-   standard smooth chart of relative dimension n. Nonempty opens of an integral scheme
-   locally of finite type over a field have the same dimension. Thus the whole scheme
-   is smooth of relative dimension n. Base change to the algebraic closure preserves n,
-   and both ordinary and geometric fibres have dimension n.
-3. Consequently the geometric fibre dimension composed with f is the local fibre
-   dimension on X, which is locally constant. A proper surjective map is a quotient
-   map, so the dimension function on S is locally constant. Its level sets are clopen;
-   their natural-number values and the bound d give the finite disjoint cover.
-4. On each open locus, ordinary fibres have unchanged dimension: base change along an
-   open immersion identifies the fibres over the isomorphic residue fields. The smooth
-   relative-dimension criterion on fibres gives relative dimension i for the restricted
-   family. Properness, smoothness and geometric connectedness survive base change.
-   The geometric fibres are connected and smooth, hence irreducible, so dimension i
-   implies pure dimension i.
-5. The dimension-zero restriction is etale, hence has discrete fibres. Properness supplies
-   finite type, and each fibre singleton is open, exactly the definition of quasi-finite.
-   All constructions and fibre claims also apply when the base or a locus is empty. -/
+Varieties, Tags 0387 and 06LH. -/
 theorem proper_smooth_connected_fibre_dimension_loci
     {X S : Scheme.{u}} [IsNoetherian S] (f : X ⟶ S) [IsProper f] [Smooth f]
     (d : ℕ)

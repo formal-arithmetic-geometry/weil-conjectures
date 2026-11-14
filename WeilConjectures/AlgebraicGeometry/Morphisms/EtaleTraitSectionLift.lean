@@ -22,18 +22,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- A pointed etale neighbourhood of a trait section supplies an unramified trait lift.
 
-Source: Stacks Project, Tag 0EYI, preliminary paragraph; Tag 0AP2 (15.45.4).
-(blueprint: lem-sbc-etale-trait-section-lift)
-
-Proof: Form Spec B times_L Spec R and choose a point above y and the closed point
-using a common extension of their residue fields. Take its local ring A. The
-projection to Spec B induces iota and that to Spec R induces delta. The projection
-to the trait is etale; its local ring at this point is a DVR, and the local map
-delta is flat and injective. Its closed fibre is a field, so the maximal ideal of
-A is the extension of the maximal ideal of R. Thus delta(varpi0) generates it.
-The equality phi followed by p = Spec rho and the pullback square give both the
-commuting scheme maps and iota(rho(varpi0)) = delta(varpi0). These witnesses are
-used only in the existential proof, never to define an unspecified object. -/
+Source: Stacks Project, Tag 0EYI, preliminary paragraph; Tag 0AP2 (15.45.4). -/
 theorem etale_trait_section_lift (R : CommRingCat.{u})
     [IsDomain R] [IsDiscreteValuationRing R]
     {L : Scheme.{u}} (p : L ⟶ Spec R) (τ : Spec R ⟶ L) (hτ : τ ≫ p = 𝟙 _)

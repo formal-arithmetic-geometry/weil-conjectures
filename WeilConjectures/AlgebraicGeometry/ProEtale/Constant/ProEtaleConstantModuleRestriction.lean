@@ -13,9 +13,7 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Localization
 
 /-! # Restriction of localized constant module sheaves
 
-Source: Stacks Project, Sites Tag 00XR and Modules on Sites Tag 04IY;
-blueprint type decomposition, steps 4 and 8
-(blueprint: lem-pe-constant-module-restriction-universes).
+Source: Stacks Project, Sites Tag 00XR and Modules on Sites Tag 04IY.
 -/
 
 @[expose] public section
@@ -29,20 +27,7 @@ namespace AlgebraicGeometry.Scheme
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- A local constant model remains the same model on every smaller slice.
-Source: Stacks Project, Sites Tag 00XR, lemma-when-shriek (1), and Modules on Sites
-Tag 04IY, lemma-relocalize; blueprint type-decomposition steps 4 and 8
-(blueprint: lem-pe-constant-module-restriction-universes).
-
-Proof: restrict the given isomorphism using `SheafOfModules.overMap`. The
-canonical `overFunctorMap` identifies the restriction of `F.over U` with `F.over W`.
-The unit of module sheafification is locally bijective after forgetting the module
-structure. Its restriction along the continuous and cocontinuous slice functor
-remains locally bijective. Transpose that restricted unit under sheafification on
-the smaller slice. Its underlying additive map is the sheafification of a local
-bijection followed by the invertible sheafification counit, so is an isomorphism.
-The comparison identifies the restricted constant model with the constant model
-on the smaller slice. Compose these three isomorphisms. This uses no finiteness,
-nonemptiness, or equality between the coefficient and scheme universes. -/
+Source: Stacks Project, Sites Tag 00XR, and Modules on Sites Tag 04IY, lemma-relocalize. -/
 theorem proEtaleConstantModule_restrict (X : Scheme.{t}) (Λ : Type u) [CommRing Λ]
     (F : SheafOfModules.{max u (t + 1)}
       ((sheafCompose (ProEt.topology X)

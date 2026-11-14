@@ -215,13 +215,7 @@ private noncomputable def proEtaleModuleModelEquivalence (X : Scheme.{u})
     (by ext U; dsimp [AsSmall.equiv]; erw [A.obj.map_id]; rfl)
 
 /-- The module inverse-image unit is bijective on specialization-neighbourhood sections.
-Source: Stacks Project, Tags 09AC and 03D2.
-(blueprint: lem-weil-pbc-proetale-module-specialization-unit).
-Proof: compare model-site module inverse image with abelian inverse image using
-the scalar-action construction and its unit equation. Transport the abelian
-specialization isomorphism through the strict small-site equivalences. The module
-unit is thus bijective on the stated sections. Equivalence adjunctions and the
-uniqueness isomorphism comparing any other module adjunction preserve this fact. -/
+Source: Stacks Project, Tags 09AC and 03D2. -/
 theorem proEtale_module_unit_bijective_of_specialization
     {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
     (V : X.ProEt) [IsAffine V.left]

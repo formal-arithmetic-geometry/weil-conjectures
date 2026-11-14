@@ -36,10 +36,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 
 /-!
 # Pro-etale restriction preserves injectives
-
-Source: Weil conjectures blueprint, `sec-proper-base-change/sk-thm-properbasechange`,
-node `lemma-acyclicity-pulled-back-injectives`
-(blueprint: lemma-acyclicity-pulled-back-injectives).
 -/
 
 @[expose] public section
@@ -56,9 +52,7 @@ namespace AlgebraicGeometry
 /-- The sectionwise comparison evaluates restriction at the identity of `W`.
 Its components are the sheaf maps along the canonical identity-underlying-scheme
 isomorphism from `W` to the image of that terminal object under composition with `W.hom`.
-Source: blueprint node `lemma-acyclicity-pulled-back-injectives`, proof step 4;
-Stacks Project, `proetale.tex`, small-site localization and derived sections
-(blueprint: lemma-acyclicity-pulled-back-injectives). -/
+Source: Stacks Project, small-site localization and derived sections. -/
 noncomputable def proEtaleLocalizationSectionsIso {X : Scheme.{u}} (W : X.ProEt)
     (Λ : Type (u + 1)) [Ring Λ] :
     ProEtale.sectionsFunctor (ModuleCat.{u + 1} Λ) W ≅

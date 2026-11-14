@@ -57,8 +57,7 @@ attribute [local irreducible] ModuleRingedComparison.tensor tensorComparison qTe
 Source: Stacks, Cohomology on Sites, Tags 06YY and 07A4.
 Compose the tensor of the two localized section equivalence maps, the tensor of
 the scalar localization counits, and the section tensor localization map. Every
-factor is the specified existing map; this definition makes no choices.
-(blueprint: def-sfb-quotient-section-tensor-transport-suffix). -/
+factor is the specified existing map; this definition makes no choices. -/
 @[irreducible] def section_tensor_transport_suffix (T : Scheme.{u})
     (c : ScalarSectionData a T) (P Q : CochainComplex (Modules Λ T) ℤ) :
     let ERc := (equivalence Λ T).functor.mapHomologicalComplex (.up ℤ)

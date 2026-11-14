@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeOpenChoices
 
 /-! # The section cohomology comparison on cycles
 
-Source: Stacks Project, cohomology.tex, Tags 01E4, 01F4 and 01FB.
+Source: Stacks Project, Tags 01E4, 01F4 and 01FB.
 -/
 
 @[expose] public section
@@ -90,17 +90,7 @@ attribute [local instance] enoughInjectives
 -- The adjunction comparison crosses sheaf, presheaf, and evaluation homology objects.
 /-- Evaluation of theta sends the homology class of a cycle to its sheaf cohomology class.
 The cycle section is pinned by the inverse kernel comparison and exact evaluation.
-Source: Stacks Project, cohomology.tex, Tag 01E4.
-(blueprint: lem-weil-pbc-section-cohomology-cycle-formula).
-
-Proof: For an exact left adjoint L with left-exact right adjoint U, precompose the adjoint
-homology comparison with the cycle quotient. Apply the adjunction equivalence and commute
-this quotient through L using its canonical homology comparison. Counit naturality and
-monicity of the cycle inclusion identify the remaining cycles map with the inverse kernel
-comparison followed by the counit. Transport back across the adjunction. Specialize to
-module-sheafification and forgetting module sheaves, and evaluate at the given open. Exact
-evaluation identifies the cycle and homology objects with those of the section complex.
-This argument uses no positive degree or nonempty-open assumption.
+Source: Stacks Project, Tag 01E4.
 -/
 theorem section_comparison_cycles {Y : Scheme.{u}}
     (K : CochainComplex (SheafOfModules.{u} Y.ringCatSheaf) ℕ)

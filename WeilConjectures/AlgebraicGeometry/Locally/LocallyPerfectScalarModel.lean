@@ -8,10 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.Perfect.PerfectScalarChangeModel
 
 /-! # Locally perfect scalar models
-
-Source: blueprint sec-six-functors-basics/sk-prop-scalar-six,
-lemma-extension-scalars-preserves-dctf, clause (1).
-(blueprint: def-sfb-locally-perfect-scalar-model).
 -/
 
 @[expose] public noncomputable section
@@ -28,9 +24,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- Pro-etale locally a bounded complex of finite projective scalar modules, extended
 through the existing constant-sheaf coefficient map. Finite projective scalar modules
-are expressed as retracts of finite free scalar modules, including rank zero.
-Source: blueprint scalar-six-ctf (1), local scalar models
-(blueprint: def-sfb-locally-perfect-scalar-model). -/
+are expressed as retracts of finite free scalar modules, including rank zero. -/
 def IsLocallyPerfectScalarModel
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (S : Scheme.{u})

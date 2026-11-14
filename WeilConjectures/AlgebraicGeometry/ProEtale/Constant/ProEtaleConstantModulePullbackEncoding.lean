@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsCanonicalAdj
 # Pullback and restriction to constant scalars
 
 Source: Stacks Project, Tags 093I and 03D3.
-(blueprint: lem-weil-pbc-proetale-constant-module-pullback-encoding).
 -/
 
 @[expose] public section
@@ -88,16 +87,7 @@ private noncomputable def directImageComparison
 
 /-- Restriction to constant scalars commutes with canonical module pullback when the
 canonical coefficient inverse-image map is invertible.
-Source: Stacks Project, Tags 093I and 03D3
-(blueprint: lem-weil-pbc-proetale-constant-module-pullback-encoding).
-
-Proof: use the assumed invertibility of the canonical coefficient map. Its adjunct extends the
-constant-section map. Hence direct image followed by restriction to constant
-scalars is exactly precomposition of fixed-module sheaves, with identity on all
-sections and maps. Conjugate the fixed-module pullback adjunction by the two
-coefficient-encoding equivalences. Its right adjoint is the intrinsic direct image
-by this identity. Uniqueness of left adjoints identifies its left adjoint with the
-specified intrinsic tensor pullback. Evaluate the resulting comparison at F. -/
+Source: Stacks Project, Tags 093I and 03D3. -/
 theorem proEtaleModuleRestriction_pullback_of_isIso
     [IsIso (proEtaleCoefficientInverseImageMap f B)]
     (F : proEtaleRingModules Y (proEtaleConstantRing Y B)) :
@@ -122,11 +112,7 @@ theorem proEtaleModuleRestriction_pullback_of_isIso
   exact ⟨EX.functor.mapIso (e.app F) ≪≫ EX.counitIso.app (L.obj (EY.functor.obj F))⟩
 
 /-- Restriction to constant scalars commutes with canonical pullback for finite rings.
-Source: Stacks Project, Tags 093I, 03D3 and 098T(2)
-(blueprint: lem-weil-pbc-proetale-constant-module-pullback-encoding).
-
-Proof: specialize the finite-level profinite coefficient comparison to the constant
-tower with value ULift B, then apply the comparison with an invertible coefficient map. -/
+Source: Stacks Project, Tags 093I, 03D3 and 098T(2). -/
 theorem proEtaleModuleRestriction_pullback [Finite B]
     (F : proEtaleRingModules Y (proEtaleConstantRing Y B)) :
     Nonempty ((proEtaleModuleRestriction X B).obj (proEtaleConstantModulePullback f B F) ≅

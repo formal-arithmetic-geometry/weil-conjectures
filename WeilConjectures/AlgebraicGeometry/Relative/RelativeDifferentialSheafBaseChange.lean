@@ -24,8 +24,7 @@ import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 /-!
 # Arbitrary base change of relative differential sheaves
 
-Source: Stacks Project, Morphisms, Tags 01UT, 01UV, 01V0 and 01V2
-(blueprint: lem-trf-relative-differential-sheaf-base-change).
+Source: Stacks Project, Morphisms, Tags 01UT, 01UV, 01V0 and 01V2.
 
 The affine tensor product ring is expressed intrinsically as the section ring of the
 open fibre product. The `IsPushout` clause identifies it canonically with `R' ⊗[R] A`.
@@ -49,8 +48,7 @@ namespace AlgebraicGeometry.Scheme.Hom
 
 /-- The open `U ×_V V'` inside the global fibre product, with `V` implicit in the
 conditions that both affine opens map into it.
-Source: Stacks, Schemes, Tag 01JR; Morphisms, Tag 01V0
-(blueprint: lem-trf-relative-differential-sheaf-base-change). -/
+Source: Stacks, Schemes, Tag 01JR; Morphisms, Tag 01V0. -/
 noncomputable abbrev relativeDifferentialsBaseChangeOpen {X S T : Scheme.{u}}
     (f : X ⟶ S) (g : T ⟶ S) (U : X.Opens) (V' : T.Opens) :
     (pullback f g).Opens :=
@@ -364,33 +362,7 @@ private theorem affine_baseChange_comparison {X S T : Scheme.{u}}
 /-- Relative differentials are quasi-coherent, their canonically normalized cartesian
 base-change map is an isomorphism, and they have finite type for a locally finite-type
 morphism. On every affine triple the map is `b ⊗ da ↦ b d(1 ⊗ a)`.
-Source: Stacks, Morphisms, Tags 01UT, 01UV, 01V0 and 01V2
-(blueprint: lem-trf-relative-differential-sheaf-base-change).
-
-Proof:
-1. Compose the target universal derivation with the first projection on functions.
-   The cartesian equation makes this relative to the base. The differential universal
-   property and the normalized tensor-pullback adjunction give a unique global map c
-   with the asserted formula on all opens. Both differential sheaves are quasi-coherent
-   by the proved source-library instance.
-2. On an affine triple, the restricted square is cartesian. Its fibre product is affine
-   and its section rings form the stated pushout. The general affine pullback-sections
-   theorem, composed with the differential-sections comparison, gives alpha; the target
-   differential-sections comparison gives delta. Mathlib's ring base-change equivalence
-   gives beta with its pure-tensor formula.
-3. The scalar-extension adjunction and the universal property of ring differentials
-   reduce c alpha = delta beta to tensors 1 tensor da. Naturality of c and of the target
-   derivation, together with the normalization of c, prove this equation. These affine
-   descriptions therefore agree on overlaps as restrictions of one global morphism.
-4. The affine fibre-product charts cover: choose a common affine base neighbourhood
-   and affine neighbourhoods of the two projected points above it. On each chart c is
-   delta beta alpha inverse, hence bijective. Tensor pullback preserves quasi-coherence,
-   so the proved affine-cover isomorphism criterion makes c an isomorphism.
-5. For a locally finite type morphism, choose an affine-pair cover. The ring differential
-   module is finite by KaehlerDifferential.finite; transport through the affine section
-   equivalence and apply the affine finite-type criterion. Apply this to f and its
-   locally finite type base change. The argument includes empty schemes and zero rings
-   and uses neither flatness nor finite presentation. -/
+Source: Stacks, Morphisms, Tags 01UT, 01UV, 01V0 and 01V2. -/
 theorem relativeDifferentialSheaf_baseChange {X S T : Scheme.{u}}
     (f : X ⟶ S) (g : T ⟶ S) :
     f.relativeDifferentials.IsQuasicoherent ∧

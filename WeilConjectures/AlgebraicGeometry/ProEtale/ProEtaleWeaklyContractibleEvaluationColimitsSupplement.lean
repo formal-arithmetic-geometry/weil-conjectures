@@ -19,8 +19,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleWeaklyContractibleEvalua
 /-!
 # Evaluation at affine weakly contractible pro-etale objects
 
-Source: Stacks Project, Tags 0946 (1), 03DA and 0935 (2)
-(blueprint: lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits).
+Source: Stacks Project, Tags 0946 (1), 03DA and 0935 (2).
 -/
 
 @[expose] public section
@@ -231,27 +230,7 @@ and preserves all small colimits. The filtered-colimit comparison is invertible
 and natural in diagrams. Commutativity is forgotten only to use Mathlib's ringed-site
 module category. Smallness is relative to the universe of section modules.
 
-Source: Stacks Project, Tags 0946 (1), 03DA, 0935 (2), and 002F
-(blueprint: lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits).
-
-Proof:
-1. The existing weakly contractible evaluation theorem gives preservation of homology.
-   Since evaluation is additive, it preserves finite limits and finite colimits.
-2. A covering sieve on affine W admits a finite covering refinement. The comparison
-   from a presheaf colimit to its sheaf colimit is locally surjective: it is the
-   sheafification unit followed by an isomorphism, by the sheafification adjunction.
-3. Express a coproduct as the filtered colimit of its finite subcoproducts. A section
-   locally comes from these finite subcoproducts. The finite refinement bounds the
-   union of their supports. Projection onto this union fixes the section on a cover,
-   hence globally by separatedness. Thus the section comes from a finite subcoproduct.
-4. Evaluation preserves finite coproducts by additivity. The finite-support result
-   makes the arbitrary coproduct comparison surjective. For injectivity, represent
-   a kernel element in a finite subcoproduct and use its split inclusion together
-   with the finite comparison isomorphism. This includes the empty coproduct.
-5. Mathlib constructs arbitrary colimits from coproducts and coequalizers. Their
-   preservation gives preservation of all colimits of the stated size.
-6. The filtered comparison is therefore invertible. Its naturality is the general
-   identity colimit.map_post, with no filteredness assumption needed. -/
+Source: Stacks Project, Tags 0946 (1), 03DA, 0935 (2), and 002F. -/
 theorem affine_weaklyContractible_evaluation_colimits
     (X : Scheme.{u}) (R : Sheaf (topology X) CommRingCat.{u + 1})
     (W : X.ProEt) [IsAffine W.left]

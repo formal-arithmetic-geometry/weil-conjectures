@@ -12,9 +12,6 @@ import all WeilConjectures.SixFunctors.Finite.Scalar.Fixed.FiniteScalarFixedTens
 import all WeilConjectures.AlgebraicGeometry.SectionDerivedRepresentativeSquare
 
 /-! # Computing the tensor pullback comparison on cochain representatives
-
-Source: blueprint scalar-six direct-image proof, formal properties.
-(blueprint: new-sfb-finite-free-scalar-tensor-pull-computation)
 -/
 
 @[expose] public noncomputable section
@@ -77,9 +74,6 @@ private theorem exactTensorComparison
 -- Elaborating the two monoidal presentations requires the exact pullback instances.
 /-- The specified derived tensor pullback comparison computes the termwise oplax
 comparison after the canonical localization factors.
-
-Source: blueprint scalar-six direct-image proof, formal properties.
-(blueprint: new-sfb-finite-free-scalar-tensor-pull-computation)
 
 Proof. Exact inverse image preserves flat modules: ordinary inverse image does so,
 and extension along its coefficient isomorphism is a monoidal equivalence. The

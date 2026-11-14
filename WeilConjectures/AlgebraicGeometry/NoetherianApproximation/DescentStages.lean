@@ -80,10 +80,10 @@ noncomputable def baseChangeQcOpenDescentStage (W : (pullback p (c.π.app i)).Op
     (hW : IsCompact (W : Set ↥(pullback p (c.π.app i)))) : Over i :=
   qcOpenDescentIndex (isLimitBaseChangeCone D c p hc) W hW
 
-/-- Blueprint `theorem-nagata-s-compactification-theorem--1`: Finite-stage model of a quasi-compact
+/-- Finite-stage model of a quasi-compact
 open.
 
-For `p : Y ⟶ Dᵢ` and a quasi-compact open `W` of `Y ×_{Dᵢ} lim Dⱼ`, this is a quasi-compact open
+For `p: Y ⟶ Dᵢ` and a quasi-compact open `W` of `Y ×_{Dᵢ} lim Dⱼ`, this is a quasi-compact open
 `W_{λ_W}` of `Y_{λ_W} = Y ×_{Dᵢ} D_{λ_W}`, where `λ_W = baseChangeQcOpenDescentStage hc p W hW`,
 whose preimage under the projection `Y ×_{Dᵢ} lim Dⱼ ⟶ Y_{λ_W}` is `W`. -/
 noncomputable def baseChangeQcOpenDescent (W : (pullback p (c.π.app i)).Opens)
@@ -91,7 +91,7 @@ noncomputable def baseChangeQcOpenDescent (W : (pullback p (c.π.app i)).Opens)
     (pullback p (D.map (baseChangeQcOpenDescentStage hc p W hW).hom)).Opens :=
   qcOpenDescent (isLimitBaseChangeCone D c p hc) W hW
 
-/-- Blueprint `theorem-nagata-s-compactification-theorem--1`: Property of the descended
+/-- Property of the descended
 quasi-compact open. The finite-stage model `W_{λ_W}` is quasi-compact. See also
 `AlgebraicGeometry.preimage_baseChangeQcOpenDescent`. -/
 lemma isCompact_baseChangeQcOpenDescent (W : (pullback p (c.π.app i)).Opens)
@@ -100,7 +100,7 @@ lemma isCompact_baseChangeQcOpenDescent (W : (pullback p (c.π.app i)).Opens)
       Set ↥(pullback p (D.map (baseChangeQcOpenDescentStage hc p W hW).hom))) :=
   isCompact_qcOpenDescent (isLimitBaseChangeCone D c p hc) W hW
 
-/-- Blueprint `theorem-nagata-s-compactification-theorem--1`: Property of the descended
+/-- Property of the descended
 quasi-compact open. The preimage of the finite-stage model `W_{λ_W}` in `Y ×_{Dᵢ} lim Dⱼ` is `W`.
 See also `AlgebraicGeometry.isCompact_baseChangeQcOpenDescent`. -/
 @[simp]
@@ -143,10 +143,10 @@ lemma exists_forall_pullback_fst_preimage_eq {W₁ W₂ : Y.Opens} (hW₁ : IsCo
     Scheme.Hom.comp_preimage, Scheme.Hom.comp_preimage, Scheme.Hom.comp_preimage]
   exact congrArg ((baseChangeDiagram D p).map g ⁻¹ᵁ ·) hf
 
-/-- Blueprint `theorem-nagata-s-compactification-theorem--1`: Stage of equality for descended
+/-- Stage of equality for descended
 quasi-compact opens.
 
-For quasi-compact opens `W₁, W₂ ⊆ Y` (with `p : Y ⟶ Dᵢ`) whose preimages in `Y ×_{Dᵢ} lim Dⱼ`
+For quasi-compact opens `W₁, W₂ ⊆ Y` (with `p: Y ⟶ Dᵢ`) whose preimages in `Y ×_{Dᵢ} lim Dⱼ`
 agree, a selected stage `λ_{W₁ = W₂} ≥ i` past which their preimages in `Y ×_{Dᵢ} Dₖ` agree
 (`AlgebraicGeometry.pullback_fst_preimage_eq_of_baseChangeQcOpenEqStage`). -/
 noncomputable def baseChangeQcOpenEqStage {W₁ W₂ : Y.Opens} (hW₁ : IsCompact (W₁ : Set Y))
@@ -154,7 +154,7 @@ noncomputable def baseChangeQcOpenEqStage {W₁ W₂ : Y.Opens} (hW₁ : IsCompa
     (H : pullback.fst p (c.π.app i) ⁻¹ᵁ W₁ = pullback.fst p (c.π.app i) ⁻¹ᵁ W₂) : Over i :=
   (exists_forall_pullback_fst_preimage_eq hc p hW₁ hW₂ H).choose
 
-/-- Blueprint `theorem-nagata-s-compactification-theorem--1`: Eventual equality of descended
+/-- Eventual equality of descended
 quasi-compact opens. For every stage `k ≥ λ_{W₁ = W₂}`, the preimages of `W₁` and `W₂` in
 `Y ×_{Dᵢ} Dₖ` are equal. -/
 lemma pullback_fst_preimage_eq_of_baseChangeQcOpenEqStage {W₁ W₂ : Y.Opens}
@@ -206,11 +206,11 @@ noncomputable def morphismDescentStage (φ : pullback pV (c.π.app i) ⟶ pullba
     (hφ : φ ≫ pullback.snd pW (c.π.app i) = pullback.snd pV (c.π.app i)) : Over i :=
   (exists_baseChangeCone_π_app_comp_eq hc pV pW φ hφ).choose
 
-/-- Blueprint `theorem-nagata-s-compactification-theorem--1`: Finite-stage model of a morphism.
+/-- Finite-stage model of a morphism.
 
-For schemes `pV : V ⟶ Dᵢ`, `pW : W ⟶ Dᵢ` of finite presentation and a morphism
-`φ : V ×_{Dᵢ} lim Dⱼ ⟶ W ×_{Dᵢ} lim Dⱼ` over `lim Dⱼ`, this is a morphism
-`φ_{λ_φ} : V ×_{Dᵢ} D_{λ_φ} ⟶ W ×_{Dᵢ} D_{λ_φ}` over `D_{λ_φ}`, where
+For schemes `pV: V ⟶ Dᵢ`, `pW: W ⟶ Dᵢ` of finite presentation and a morphism
+`φ: V ×_{Dᵢ} lim Dⱼ ⟶ W ×_{Dᵢ} lim Dⱼ` over `lim Dⱼ`, this is a morphism
+`φ_{λ_φ}: V ×_{Dᵢ} D_{λ_φ} ⟶ W ×_{Dᵢ} D_{λ_φ}` over `D_{λ_φ}`, where
 `λ_φ = morphismDescentStage hc pV pW φ hφ`, whose base change to `lim Dⱼ` is `φ`
 (`AlgebraicGeometry.baseChangeCone_π_app_comp_morphismDescent`). -/
 noncomputable def morphismDescent (φ : pullback pV (c.π.app i) ⟶ pullback pW (c.π.app i))
@@ -228,7 +228,7 @@ lemma morphismDescent_snd (φ : pullback pV (c.π.app i) ⟶ pullback pW (c.π.a
       pullback.snd pV (D.map (morphismDescentStage hc pV pW φ hφ).hom) :=
   (exists_baseChangeCone_π_app_comp_eq hc pV pW φ hφ).choose_spec.choose_spec.1
 
-/-- Blueprint `theorem-nagata-s-compactification-theorem--1`: Property of the descended morphism.
+/-- Property of the descended morphism.
 The base change of `φ_{λ_φ}` to `lim Dⱼ` is `φ`: the square formed by `φ`, `φ_{λ_φ}` and the
 projections `V ×_{Dᵢ} lim Dⱼ ⟶ V ×_{Dᵢ} D_{λ_φ}`, `W ×_{Dᵢ} lim Dⱼ ⟶ W ×_{Dᵢ} D_{λ_φ}` commutes.
 Since `W ×_{Dᵢ} lim Dⱼ` is the pullback of `W ×_{Dᵢ} D_{λ_φ}` along `lim Dⱼ ⟶ D_{λ_φ}`
@@ -255,8 +255,8 @@ theorem exists_forall_pullback_fst_comp_eq (ψ χ : V ⟶ W) (hψ : ψ ≫ pW = 
   simp only [Over.mk_hom] at hg
   rw [← hg, Category.assoc, Category.assoc, hf]
 
-/-- Blueprint `theorem-nagata-s-compactification-theorem--1`: Stage of equality for two descended
-morphisms. For morphisms `ψ χ : V ⟶ W` over `Dᵢ` of schemes of finite presentation whose base
+/-- Stage of equality for two descended
+morphisms. For morphisms `ψ χ: V ⟶ W` over `Dᵢ` of schemes of finite presentation whose base
 changes to `lim Dⱼ` agree, a selected stage `λ_{ψ = χ} ≥ i` past which their base changes agree
 (`AlgebraicGeometry.pullback_map_eq_of_morphismEqStage`). -/
 noncomputable def morphismEqStage (ψ χ : V ⟶ W) (hψ : ψ ≫ pW = pV) (hχ : χ ≫ pW = pV)
@@ -269,7 +269,7 @@ lemma pullback_fst_comp_eq_of_morphismEqStage (ψ χ : V ⟶ W) (hψ : ψ ≫ pW
     pullback.fst pV (D.map k.hom) ≫ ψ = pullback.fst pV (D.map k.hom) ≫ χ :=
   (exists_forall_pullback_fst_comp_eq hc pV pW ψ χ hψ hχ h).choose_spec k g
 
-/-- Blueprint `theorem-nagata-s-compactification-theorem--1`: Eventual equality of morphisms. For
+/-- Eventual equality of morphisms. For
 every stage `k ≥ λ_{ψ = χ}`, the base changes `V ×_{Dᵢ} Dₖ ⟶ W ×_{Dᵢ} Dₖ` of `ψ` and `χ` are
 equal. -/
 lemma pullback_map_eq_of_morphismEqStage (ψ χ : V ⟶ W) (hψ : ψ ≫ pW = pV)
@@ -290,10 +290,10 @@ variable {k : I} {Z Y : Over (D.obj k)} (γ : Z ⟶ Y)
   [LocallyOfFinitePresentation γ.left] [QuasiCompact γ.left] [QuasiSeparated γ.left]
   [CompactSpace Y.left] [QuasiSeparatedSpace Y.left]
 
-/-- Blueprint `theorem-nagata-s-compactification-theorem--1`: Stage at which a finite-presentation
+/-- Stage at which a finite-presentation
 map is closed.
 
-For a morphism `γ : Z ⟶ Y` of finite presentation between schemes over the stage `D_k`, with `Y`
+For a morphism `γ: Z ⟶ Y` of finite presentation between schemes over the stage `D_k`, with `Y`
 quasi-compact and quasi-separated, whose base change to `lim Dⱼ` is a closed immersion, this is
 the index `μ_cl(γ) ≥ k` of the witness given by
 `AlgebraicGeometry.Scheme.exists_isClosedImmersion_overPullbackMap`. -/
@@ -301,7 +301,7 @@ noncomputable def closedImmersionStage
     (hS : IsClosedImmersion ((Over.pullback (c.π.app k)).map γ).left) : Over k :=
   Over.mk (Scheme.exists_isClosedImmersion_overPullbackMap hc γ hS).choose_spec.choose
 
-/-- Blueprint `theorem-nagata-s-compactification-theorem--1`: A finite-presentation closed immersion
+/-- A finite-presentation closed immersion
 descends at the selected stage. For every stage `μ ≥ μ_cl(γ)`, the base change of `γ` to `D_μ`
 is a closed immersion. -/
 lemma isClosedImmersion_of_closedImmersionStage
@@ -319,11 +319,11 @@ variable {k : I} [CompactSpace (D.obj k)] [QuasiSeparatedSpace (D.obj k)] {Y : S
   {p : Y ⟶ D.obj k} [LocallyOfFinitePresentation p] [QuasiCompact p] [QuasiSeparated p]
   {X : Scheme.{u}} {g : X ⟶ c.pt} [IsSeparated g] {h : X ⟶ Y}
 
-/-- Blueprint `theorem-nagata-s-compactification-theorem--1`: Separated stage of a descended
+/-- Separated stage of a descended
 finite-presentation model.
 
-Let `g : X ⟶ lim Dⱼ` be separated, and let `p : Y ⟶ D_k` be a finite-presentation model of it,
-i.e. `H : IsPullback h g p (c.π.app k)`. This is the index `λ_sep ≥ k` of the witness given by
+Let `g: X ⟶ lim Dⱼ` be separated, and let `p: Y ⟶ D_k` be a finite-presentation model of it,
+i.e. `H: IsPullback h g p (c.π.app k)`. This is the index `λ_sep ≥ k` of the witness given by
 `AlgebraicGeometry.Scheme.exists_isSeparated_pullback_snd`; the separated model is
 `X^sep = Y ×_{D_k} D_{λ_sep}` (`AlgebraicGeometry.separatedDescentModel`). -/
 noncomputable def separatedDescentStage (H : IsPullback h g p (c.π.app k)) : Over k :=

@@ -140,8 +140,7 @@ lemma flat_presheaf_map {U V : X.affineOpens} (h : U ≤ V) :
 
 /-- The **Rees algebra** `⨁ₙ Iⁿ` of a quasi-coherent ideal, as a quasi-coherent graded algebra:
 over an affine open `U` it is the Rees algebra `⨁ₙ I(U)ⁿ` of `I(U)`, with multiplication induced by
-the maps `Iᵐ ⊗ Iⁿ → Iᵐ⁺ⁿ` (`powMulMap`) and unit the degree-zero copy of `𝒪_X`.
-(blueprint: `definition-admissible-blow-up--1`) -/
+the maps `Iᵐ ⊗ Iⁿ → Iᵐ⁺ⁿ` (`powMulMap`) and unit the degree-zero copy of `𝒪_X`. -/
 noncomputable def reesData : X.GradedAlgebraData where
   obj U := reesAlgebra (I.ideal U)
   commRing U := inferInstance
@@ -205,8 +204,7 @@ variable (U : X.affineOpens)
 
 /-- The multiplication map `Iᵐ ⊗ Iⁿ → Iᵐ⁺ⁿ` of the powers of a quasi-coherent ideal over an
 affine open `U`, i.e. `I(U)ᵐ ⊗_{Γ(X, U)} I(U)ⁿ → I(U)ᵐ⁺ⁿ`, `x ⊗ y ↦ xy`. These are the
-multiplication maps of the sheaf Rees algebra `reesData`.
-(blueprint: `definition-admissible-blow-up--1`, multiplication maps) -/
+multiplication maps of the sheaf Rees algebra `reesData`. -/
 noncomputable def powMulMap (m n : ℕ) :
     (I ^ m).ideal U ⊗[Γ(X, U.1)] (I ^ n).ideal U →ₗ[Γ(X, U.1)] (I ^ (m + n)).ideal U :=
   TensorProduct.lift (LinearMap.mk₂ Γ(X, U.1)
@@ -234,8 +232,7 @@ lemma coe_powZeroUnit (r : Γ(X, U.1)) : (I.powZeroUnit U r : Γ(X, U.1)) = r :=
 /-- **Associativity of ideal-power multiplication**: over every affine open `U`, the
 multiplication maps `Iᵐ ⊗ Iⁿ → Iᵐ⁺ⁿ` are associative, i.e. the two maps
 `Iᵐ ⊗ Iⁿ ⊗ Iᵏ → Iᵐ⁺ⁿ⁺ᵏ` agree, and `I⁰ = 𝒪_X` is a two-sided unit. These identities are what
-make `reesData` a graded quasi-coherent algebra.
-(blueprint: `definition-admissible-blow-up--1`) -/
+make `reesData` a graded quasi-coherent algebra. -/
 theorem powMulMap_assoc (m n k : ℕ) :
     (Submodule.subtype _ ∘ₗ I.powMulMap U (m + n) k ∘ₗ
         TensorProduct.map (I.powMulMap U m n) LinearMap.id) =
@@ -244,16 +241,14 @@ theorem powMulMap_assoc (m n k : ℕ) :
         (TensorProduct.assoc Γ(X, U.1) _ _ _).toLinearMap :=
   TensorProduct.ext_threefold fun x y z ↦ mul_assoc (x : Γ(X, U.1)) y z
 
-/-- The unit laws of the ideal-power multiplication (left unit).
-(blueprint: `definition-admissible-blow-up--1`) -/
+/-- The unit laws of the ideal-power multiplication (left unit). -/
 theorem powMulMap_powZeroUnit_left (n : ℕ) :
     (Submodule.subtype _ ∘ₗ I.powMulMap U 0 n ∘ₗ
         TensorProduct.map (I.powZeroUnit U) LinearMap.id) =
       Submodule.subtype _ ∘ₗ (TensorProduct.lid Γ(X, U.1) _).toLinearMap :=
   TensorProduct.ext' fun r y ↦ (smul_eq_mul r (y : Γ(X, U.1))).symm
 
-/-- The unit laws of the ideal-power multiplication (right unit).
-(blueprint: `definition-admissible-blow-up--1`) -/
+/-- The unit laws of the ideal-power multiplication (right unit). -/
 theorem powMulMap_powZeroUnit_right (n : ℕ) :
     (Submodule.subtype _ ∘ₗ I.powMulMap U n 0 ∘ₗ
         TensorProduct.map LinearMap.id (I.powZeroUnit U)) =
@@ -265,8 +260,7 @@ theorem powMulMap_powZeroUnit_right (n : ℕ) :
     exact mul_comm _ _
 
 /-- The degree-`n` piece of `reesData` over `U` is `I(U)ⁿ`, and multiplication of `reesData`
-restricts on homogeneous pieces to the multiplication maps `powMulMap`.
-(blueprint: `definition-admissible-blow-up--1`) -/
+restricts on homogeneous pieces to the multiplication maps `powMulMap`. -/
 lemma reesMonomial_mul_reesMonomial {m n : ℕ} (x : (I ^ m).ideal U) (y : (I ^ n).ideal U) :
     reesMonomial (I.ideal U) x.1 x.2 * reesMonomial (I.ideal U) y.1 y.2 =
       reesMonomial (I.ideal U) (I.powMulMap U m n (x ⊗ₜ y)).1 (I.powMulMap U m n (x ⊗ₜ y)).2 :=

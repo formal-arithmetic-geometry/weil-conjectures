@@ -36,10 +36,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.HomologyCoproducts
 /-!
 # Integral constructible complexes are compact
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-int-compactness,
-sk-prop-int-compactness-compact.md and its proof
-(blueprint: proposition-compactness-proper-direct-image--1).
-
 The assertion bundle expands the three clauses with the actual ambient module category.
 `H.ind` is the full replete filtered-colimit image IndCons; Dic is expanded cohomologically.
 The realization is characterized as the filtered-colimit-preserving extension of the

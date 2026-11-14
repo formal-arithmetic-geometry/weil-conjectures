@@ -12,7 +12,6 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 /-! # Etaleness of the affine fibre algebra
 
 Source: Stacks Project, Tag 0BJF, fibre-algebra argument.
-(blueprint: lem-sbc-affine-fibre-tensor-etale)
 -/
 
 @[expose] public section
@@ -22,18 +21,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- An affine fibre is etale precisely when its residue-field tensor algebra is etale.
 
-Source: Stacks Project, Tag 0BJF, fibre-algebra argument, and affine base change.
-(blueprint: lem-sbc-affine-fibre-tensor-etale)
-
-Proof: The point morphism factors through the affine open U because y belongs to U.
-Pullback along this factorization identifies the fibre of f with the fibre of its
-restriction to U. The restriction has affine source since f is affine, so writing
-R = Gamma(Y,U), B = Gamma(X,f inverse U), k = kappa(y), the affine pullback formula
-identifies this fibre with Spec(k tensor_R B), with structure map induced by k to
-k tensor_R B. This identification is over Spec(k). Etaleness is invariant under
-isomorphisms over the base, and for Spec of a ring homomorphism it is equivalent to
-etaleness of the ring homomorphism, hence of its algebra. This also covers the zero
-algebra: its spectrum is empty and both the algebra and scheme morphism are etale. -/
+Source: Stacks Project, Tag 0BJF, fibre-algebra argument, and affine base change. -/
 theorem etale_fibre_iff_etale_tensor_section_algebra
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsAffineHom f]
     (U : Y.affineOpens) (y : Y) (hy : y ∈ U.1) :

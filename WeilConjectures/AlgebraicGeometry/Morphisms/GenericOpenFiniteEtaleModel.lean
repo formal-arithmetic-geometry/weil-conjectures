@@ -124,18 +124,7 @@ private theorem exists_finiteEtale_limit_stage
 point. No normality, section, or invertibility assumption is needed for this step.
 
 Source: Stacks Project, Tag 0EYJ (choice of an initial open), Tag 01ZM
-(descending finite presentation), Tag 01ZO (finiteness), and Tag 07RP (étaleness).
-(blueprint: lem-sbc-generic-open-finite-etale-model)
-
-Proof:
-Write the generic point of the integral Noetherian base as the inverse limit of its
-nonempty affine open neighbourhoods. The qcqs family restricts to the corresponding
-inverse system with affine transition maps. Finite étale morphisms are of finite
-presentation and descend through this system. Finiteness and étaleness each hold
-at some later stage; choose a common later stage, using their stability under base
-change. Only the underlying cover is needed, so no action or torsor laws are descended.
-Restricting that neighbourhood in S gives U. The generic-fibre map j factors through c⁻¹(U),
-and the descended comparison gives the asserted pullback square. -/
+(descending finite presentation), Tag 01ZO (finiteness), and Tag 07RP (étaleness). -/
 theorem GaloisCover.exists_generic_open_finiteEtale_model {S C : Scheme.{u}}
     [IsNoetherian S] [QuasiSeparatedSpace S] [IsIntegral S]
     (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [Smooth c]

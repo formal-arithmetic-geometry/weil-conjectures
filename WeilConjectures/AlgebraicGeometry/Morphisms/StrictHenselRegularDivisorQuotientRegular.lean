@@ -20,7 +20,6 @@ namespace AlgebraicGeometry.Scheme
 /-- Regularity and integrality of the divisor quotient in the canonical strict henselization.
 Source: Stacks Project, Tags 05WS and 06LN, using the local structure at the geometric point.
 The quotient is identified with the strict henselization of the regular local divisor ring.
-(blueprint: lem-sbc-strict-hensel-regular-divisor-quotient-regular)
 -/
 theorem strictHenselizationRing_regular_divisor_quotient
     (R : CommRingCat.{u}) [IsRegularRing R] (f : R)

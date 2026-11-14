@@ -33,9 +33,7 @@ set_option linter.privateModule false
 
 /-!
 # Unit and coefficient associativity for a fixed compactification
-Source: Stacks Project, sites-cohomology.tex, Tags 0B56 and 0GL1;
-current blueprint proposition-exceptional-inverse-image-smooth-morphism, equation (G13)
-(blueprint: lem-pur-projection-formula-coefficient-coherence).
+Source: Stacks Project, Tags 0B56 and 0GL1.
 The fixed-ring coordinates below use the canonical intrinsic realization solely to
 express the recorded constructibility predicates. All arrows are the ordinary
 constant-coefficient derived arrows at the specified compactification.

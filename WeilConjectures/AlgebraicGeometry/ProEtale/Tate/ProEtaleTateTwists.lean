@@ -130,7 +130,6 @@ import WeilConjectures.AlgebraicGeometry.Sp.SpQbarRootBasis
 
 /-! # Common local bases for the constructed Tate twists
 
-Source: the common-root calculation in blueprint `definition-tate-twists`.
 The coefficient objects and their normalized transitions are publicly re-exported
 from `ProEtaleTateTwistConstructions`; no construction is changed.
 -/
@@ -156,18 +155,7 @@ variable (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A single pro-etale covering carries compatible root generators and trivializes
-all the constructed integral, rational and algebraic-closure coefficient lines.
-Source: blueprint common-cover and slice-site paragraphs (blueprint: definition-tate-twists).
-Proof: take the compatible-root cover from clause 1 of the recorded local-freeness
-theorem. The displayed root-module isomorphisms have its normalized generator formula.
-For each E and each positive quotient, tensor this formula with B_E,n; the same
-root sections work for every field. They commute with reductions. Take the inverse
-limits on the slice, identify the coefficient limit by the integral comparison,
-then extend scalars to E. These trivializations commute with every finite-extension
-transition by its finite tensor normalization. Their sheafified colimit is the
-Qbar coefficient unit by the coefficient-colimit identity. Thus the same covering
-works simultaneously for all finite E and for Qbar, with no quasi-compactness
-hypothesis on X. -/
+all the constructed integral, rational and algebraic-closure coefficient lines. -/
 theorem spTwists_commonCover
     [∀ x : X, Invertible (ℓ : X.residueField x)] :
     ∃ (I : Type (u + 1)) (U : I → X.ProEt)
@@ -218,21 +206,7 @@ theorem spTwists_commonCover
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The constructed integral, rational and sheafified-colimit lines are locally free
-of rank one over their respective pulled-back condensed coefficient rings.
-Source: blueprint local-generator paragraph (blueprint: definition-tate-twists).
-Proof: use clauses 1 and 2 of definition-tate-twists to choose one
-pro-etale cover and compatible root generators. At each positive quotient level,
-a maps to a tensor zeta_n is a free rank-one trivialization. They commute with
-root powers and coefficient reduction. On the slice site, take their sectionwise
-inverse limits. The cofinal ell-power form of the integral coefficient comparison
-identifies the coefficient limit with O_E,X; if ell=v*pi^e then the indices e*n
-are cofinal. Extend scalars to E_X using lemma-comparison-completed-coefficients--2.
-The same zeta_n work for every E, so these maps commute with all finite-extension
-transitions. Their sheafified colimit is the unit over Qbar_X, since p_X^* preserves
-the finite-subextension coefficient colimit. Limits and sheafification restrict to
-the slice with the same sections and coverings. Descend rank one along the cover.
-Only the two compatible-root and finite Kummer clauses of the cited theorem are
-used; no common-stage rational coefficient category is used. -/
+of rank one over their respective pulled-back condensed coefficient rings. -/
 theorem spTwists_locallyFree
     [∀ x : X, Invertible (ℓ : X.residueField x)]
     (E : PadicAlgCl.FiniteIntermediateField ℓ) :

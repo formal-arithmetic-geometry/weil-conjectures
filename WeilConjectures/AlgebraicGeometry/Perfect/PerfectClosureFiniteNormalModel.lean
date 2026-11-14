@@ -78,23 +78,7 @@ private theorem restrict_pullback {Z Y ZL YL : Scheme.{u}} {a : ZL ⟶ Z}
 locus on both source and target.
 
 Source: Stacks Project, Varieties, Tag 0BXT, proof, and Limits, Tags 01ZM, 01ZO,
-01Z4 and 01ZP.
-(blueprint: lem-weil-pbc-perfect-closure-finite-normal-model).
-
-Proof: Write K as the directed union of its finite intermediate extensions of k.
-On affine charts tensor product commutes with that union, so X_K is the inverse
-limit of X_E, with affine transitions. Normalize the reduction of X_K componentwise.
-Finite type over K makes X_K Noetherian; component normalization is finite and
-surjective, has normal domain stalks, and is finitely presented over X_K.
-Finite-presentation descent gives a model over some finite intermediate field E.
-Descend finiteness after enlarging E. Its base change to K remains the normal
-componentwise normalization.
-On the dense normal locus of the reduction of X_K, normalization is a closed
-immersion with dense inverse image. Descend this quasi-compact open and then the
-closed immersion, enlarging E again. Purely inseparable base-change projections
-are homeomorphisms, hence reflect surjectivity and both density assertions.
-The normality over K persists under these enlargements. For empty X all schemes
-and opens here are empty, and the bottom intermediate field suffices. -/
+01Z4 and 01ZP. -/
 theorem exists_perfectClosure_finite_normal_model
     (k K : Type u) [Field k] [Field K] [Algebra k K]
     [IsPurelyInseparable k K] [PerfectField K]

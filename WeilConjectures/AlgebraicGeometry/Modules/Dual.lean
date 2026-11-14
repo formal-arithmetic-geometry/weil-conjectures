@@ -30,7 +30,7 @@ Both are abbreviations for `SheafOfModules.homObj`, so its API (`SheafOfModules.
 
 - `AlgebraicGeometry.Scheme.Modules.homObj`: the internal hom `Hom(M, N)`.
 - `AlgebraicGeometry.Scheme.Modules.dual`: the dual `M^∨ = Hom(M, 𝒪_X)`, with notation `Mᵛ`.
-- `AlgebraicGeometry.Scheme.Modules.dualMap`: the transpose `Nᵛ ⟶ Mᵛ` of `f : M ⟶ N`.
+- `AlgebraicGeometry.Scheme.Modules.dualMap`: the transpose `Nᵛ ⟶ Mᵛ` of `f: M ⟶ N`.
 - `AlgebraicGeometry.Scheme.Modules.dualFunctor`: `M ↦ Mᵛ` as a contravariant functor.
 - `AlgebraicGeometry.Scheme.Modules.dualEvaluation`: the evaluation `M ⊗ Mᵛ ⟶ 𝒪_X`, an
   isomorphism for invertible `M` (`AlgebraicGeometry.Scheme.Modules.isIso_dualEvaluation`).
@@ -52,7 +52,7 @@ Both are abbreviations for `SheafOfModules.homObj`, so its API (`SheafOfModules.
 - `AlgebraicGeometry.Scheme.Modules.IsInvertible.dual`: the dual of an invertible module is
   invertible.
 - `AlgebraicGeometry.Scheme.Modules.nonempty_iso_dual_dual`: an invertible module is its own
-  double dual (blueprint `lem-pc-tensor-dual-invertible`).
+  double dual.
 -/
 
 @[expose] public section
@@ -170,7 +170,7 @@ theorem nonempty_dual_unit_iso :
 /-- **The dual of an invertible module is its tensor inverse.** For an invertible `𝒪_X`-module
 `M`, the evaluation `M ⊗ Mᵛ ⟶ 𝒪_X` is an isomorphism: this is local on `X`, and for `M = 𝒪_X` it
 is `𝒪_X ⊗ 𝒪_X ≅ 𝒪_X`. This is what makes the isomorphism classes of invertible modules a group,
-the Picard group (blueprint `def-sc-picard-group`). -/
+the Picard group. -/
 theorem nonempty_tensorObj_dual_iso_unit (M : X.Modules) [M.IsInvertible] :
     Nonempty (M ⊗ Mᵛ ≅ 𝟙_ X.Modules) :=
   ⟨asIso (dualEvaluation M)⟩
@@ -322,9 +322,7 @@ instance IsInvertible.dual (M : X.Modules) [M.IsInvertible] : (Mᵛ).IsInvertibl
 /-- **An invertible module is its own double dual.** For an invertible `M`, `M ≅ Mᵛᵛ`:
 `M ≅ M ⊗ (Mᵛ ⊗ Mᵛᵛ) ≅ (M ⊗ Mᵛ) ⊗ Mᵛᵛ ≅ Mᵛᵛ`. With `IsInvertible.dual`,
 `IsInvertible.tensorObj` and `nonempty_tensorObj_dual_iso_unit` this is blueprint
-`lem-pc-tensor-dual-invertible`.
-
-(blueprint: `lem-pc-tensor-dual-invertible`) -/
+`lem-pc-tensor-dual-invertible`. -/
 theorem nonempty_iso_dual_dual (M : X.Modules) [M.IsInvertible] : Nonempty (M ≅ Mᵛᵛ) := by
   obtain ⟨d⟩ := nonempty_tensorObj_dual_iso_unit M
   obtain ⟨d'⟩ := nonempty_tensorObj_dual_iso_unit Mᵛ
@@ -334,18 +332,14 @@ theorem nonempty_iso_dual_dual (M : X.Modules) [M.IsInvertible] : Nonempty (M �
 /-- **Duals of invertible modules.** For an invertible `𝒪_X`-module `M`, the dual `Mᵛ` is
 invertible, the evaluation `M ⊗ Mᵛ ⟶ 𝒪_X` is an isomorphism, and `M ≅ Mᵛᵛ`. The first two
 assertions are `IsInvertible.dual` and `nonempty_tensorObj_dual_iso_unit`, and the biduality
-is `nonempty_iso_dual_dual`.
-
-(blueprint: `lem-pc-tensor-dual-invertible`) -/
+is `nonempty_iso_dual_dual`. -/
 theorem isInvertible_dual_and_nonempty_iso (M : X.Modules) [M.IsInvertible] :
     Mᵛ.IsInvertible ∧ Nonempty (M ⊗ Mᵛ ≅ 𝟙_ X.Modules) ∧ Nonempty (M ≅ Mᵛᵛ) :=
   ⟨inferInstance, nonempty_tensorObj_dual_iso_unit M, nonempty_iso_dual_dual M⟩
 
 /-- **An invertible module has a tensor inverse.** For an invertible `𝒪_X`-module `M` there is
 an invertible `𝒪_X`-module `M⁻¹` with `M ⊗ M⁻¹ ≅ 𝒪_X`, namely the dual
-`Mᵛ = ℋom(M, 𝒪_X)`.
-
-(blueprint: `def-sc-invertible-module`) -/
+`Mᵛ = ℋom(M, 𝒪_X)`. -/
 theorem exists_tensorObj_iso_unit (M : X.Modules) [M.IsInvertible] :
     ∃ N : X.Modules, N.IsInvertible ∧ Nonempty (M ⊗ N ≅ 𝟙_ X.Modules) :=
   ⟨Mᵛ, inferInstance, nonempty_tensorObj_dual_iso_unit M⟩

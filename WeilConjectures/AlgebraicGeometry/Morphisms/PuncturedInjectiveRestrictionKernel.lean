@@ -11,8 +11,7 @@ import Mathlib.RingTheory.Finiteness.Ideal
 
 /-! # Kernel of restriction to a punctured local spectrum
 
-Source: Stacks Project, Tag 0A6T, proof of Lemma 51.2.1.
-(blueprint: new-punctured-kernel)
+Source: Stacks Project, Tag 0A6T, proof of Lemma 51.2.1
 -/
 
 @[expose] public section
@@ -22,22 +21,7 @@ namespace AlgebraicGeometry.Scheme
 set_option backward.isDefEq.respectTransparency false in
 /-- The kernel of restriction to the puncture is maximal-ideal-power torsion,
 without an injectivity assumption on the module.
-Source: Stacks Project, Tag 0A6T, proof of Lemma 51.2.1 (localization description).
-(blueprint: new-punctured-kernel)
-
-Proof: For x in M, set J = Ann(Rx). If its restriction is zero, localization
-at every prime p in W kills x, hence some element outside p annihilates x.
-Thus a prime containing J cannot lie in W and must be the maximal ideal m.
-Every prime containing J therefore contains m, so m is contained in radical J.
-Since m is finitely generated, Mathlib's exists_pow_le_of_le_radical_of_fg
-puts some power m^n inside J. This says x belongs to primaryComponent M m.
-Conversely, if m^n kills x, a prime p in W differs from m, so choose a in m
-outside p. Then a^n kills x and is invertible at p, proving the localized
-section zero at every point of W. Sections of the concrete structure sheaf
-are functions into these localizations, so the restriction is zero.
-The isomorphism modulesSpecToSheafIso identifies this with tilde.toOpen.
-Empty W is included: the first argument still shows m is contained in
-radical J, and the converse equality of sections is vacuous. -/
+Source: Stacks Project, Tag 0A6T, proof of Lemma 51.2.1 (localization description). -/
 theorem injective_punctured_restriction_kernel
     (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R]
     (W : (Spec (.of R)).Opens)

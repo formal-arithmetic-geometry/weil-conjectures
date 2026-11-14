@@ -36,8 +36,7 @@ public import WeilConjectures.AlgebraicGeometry.NoetherianStratumDetection
 /-!
 # Detection by pro-etale covers of finitely many locally closed strata
 
-Source: Stacks Project, Tags 09AH and 09AB, followed by finite-stratum induction
-(blueprint: lem-weil-pbc-noetherian-stratum-detection).
+Source: Stacks Project, Tags 09AH and 09AB, followed by finite-stratum induction.
 -/
 
 @[expose] public section
@@ -94,21 +93,7 @@ private noncomputable def modelAbelianPullbackIso {X Y : Scheme.{u}} (f : X ⟶ 
       (modelSheafEquivalence X AddCommGrpCat.{u + 1}).functor)
 
 /-- Abelian sheaves are detected by the chosen pro-etale covers of all strata.
-Source: Stacks, Tags 09AH and 09AB, and finite-stratum induction
-(blueprint: lem-weil-pbc-noetherian-stratum-detection).
-Proof: adjunction and the sectionwise base-change formula for direct image identify
-successive inverse images with inverse image along the composite, including identities.
-For a covering, localization identifies inverse image with slice restriction; the sheaf
-separatedness axiom on base-changed covers detects zero sections. Thus covering
-restrictions detect zero sheaves. Induct on the number of nonempty strata. The empty
-scheme has only zero abelian sheaves by the empty-cover axiom. Factor each stratum as a
-closed immersion into an open neighborhood. Those neighborhoods cover X. Their open
-complements are Noetherian and their open inclusions are quasi-compact. Base change the
-remaining strata to the complement and discard the empty chosen stratum; induction
-makes the restriction there zero. The closed restriction is also zero. The exact
-open/closed sequence of Tag 09AH gives zero on each neighborhood; covering detection
-gives zero globally. Actual immersion structures are retained, also for nonreduced strata.
-The constant integer sheaf action allows use of module localization and detection. -/
+Source: Stacks, Tags 09AH and 09AB, and finite-stratum induction. -/
 theorem proEtale_isZero_of_stratum_cover (X : Scheme.{u})
     [IsLocallyNoetherian X] [CompactSpace X] (S : Stratification X)
     (V : ∀ a : Fin S.n, Scheme.Cover.{w} proetalePrecoverage (S.domain a))

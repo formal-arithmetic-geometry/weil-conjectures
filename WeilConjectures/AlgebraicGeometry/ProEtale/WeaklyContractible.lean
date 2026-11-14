@@ -19,8 +19,7 @@ public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 
 We show that the small pro-étale site of a scheme `T` has enough affine weakly contractible
 objects (Stacks 0990), and deduce that vanishing of sheaves and acyclicity of complexes of
-sheaves of modules can be detected on sections over affine weakly contractible objects
-(blueprint `corollary-evaluation-weakly-contractible-objects--6`, Stacks 0947).
+sheaves of modules can be detected on sections over affine weakly contractible objects.
 
 ## Main results
 

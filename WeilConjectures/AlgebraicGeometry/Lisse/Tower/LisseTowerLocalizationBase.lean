@@ -31,33 +31,6 @@ This involves no etale comparison functor, etale arrow, tower or level marking.
 
 Source: Stacks Project, Modules on Sites, Tags 03CY, 03D2 and 03D3;
 Cohomology on Sites, Tag 0D6D.
-(blueprint: lem-weil-pbc-lisse-tower-localization-base).
-
-Proof: first use the explicit normalized construction behind
-lisseTower_fixed_sheaf_pullback. Its right-adjoint square is the identity on scalar
-sections, transported through the module sheafification unit and counit. The
-coefficient compatibility follows by transposing the inverse-image ring compositor
-through its adjunction and applying the constant-section unit. Taking the adjoint
-mate fixes a particular ordinary inverse-image comparison. An arbitrary witness of
-the bare Nonempty conclusion would not supply this normalization.
-
-Paste the fixed inverse-image compositor for a and b. After exact localization,
-cancel the realization equivalence to identify lisseTowerLocalizationPull with module
-inverse image along a followed by b. Paste the canonical module inverse-image
-composition comparison, then use h, to obtain the family e.
-
-For consecutive quotient coefficients compare the two ordinary right-adjoint squares.
-The restriction/direct-image comparison is identity on all sections. Both normalized
-endpoint scalar realization squares have the prescribed identity after forgetting
-the module action. Thus the pasted right-adjoint transformations agree on all
-sections. Faithfulness proves their equality; taking mates proves equality of the
-left-adjoint coefficient faces. Exact localization preserves this equality. The
-unique preimage under fully faithful precomposition identifies its transported scalar
-face with lisseTowerLocalizationScalar. Finally postcompose with restriction along
-the finite projection and its specified restriction compositor, and evaluate at N.
-This gives the displayed component equation. Naturality in an arbitrary semilinear
-arrow is a separate formal consequence, proved in the parent module.
-Zero rings, zero objects and empty schemes satisfy the same unit and section equations.
 -/
 theorem lisseTower_localization_base {X Z S T : Scheme.{u}}
     (t : Z ⟶ X) (s : T ⟶ X) (a : T ⟶ S) (b : S ⟶ Z)

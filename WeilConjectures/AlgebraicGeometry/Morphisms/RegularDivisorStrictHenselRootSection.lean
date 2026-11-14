@@ -28,7 +28,6 @@ import WeilConjectures.Mathlib.RingTheory.Henselian
 # A section on a punctured root cover over the strict henselization
 
 Source: Stacks Project, Tags 09EB, 0BRM, 0EYE and 0EYG, strictly henselian case.
-(blueprint: lem-sbc-regular-divisor-strict-hensel-root-section)
 -/
 
 @[expose] public section
@@ -40,26 +39,7 @@ namespace AlgebraicGeometry.Scheme
 /-- Adjoining the group-order root over the strict henselization gives a section.
 
 Source: Stacks Project, Tags 09EB, 0BRM, 0EYE and 0EYG, proof through the finite
-etale extension C. (blueprint: lem-sbc-regular-divisor-strict-hensel-root-section)
-
-Proof: Pull W back to D(f) using beta. At each generic point of the divisor the local
-ring is a DVR. A connected generic component is Galois under its stabilizer in G;
-09EB makes its ramification index and residue degree divide the stabilizer order,
-hence the group order. Invertibility of the group order makes the ramification tame
-and the residue extension separable. Pass to the strict henselization at barY. Its
-base and divisor rings are regular, and the divisor equation remains a nonzerodivisor
-by flatness. The pulled-back cover is still a G-torsor, so the same stabilizer argument
-makes all its ramification indices divide n = |G|. If barY is on the divisor, the
-root algebra H[T]/(T^n-b(f)) is a regular strictly henselian local ring: T is a
-nonzerodivisor, the quotient by T is the regular divisor ring, and the root algebra
-is a finite local extension of H. Abhyankar's DVR lemma 0BRM kills the ramification;
-purity 0EYE extends the punctured cover to a finite etale cover of the root algebra.
-This cover is split over the strictly henselian ring and is nonempty because the
-original torsor is surjective. Choose one split component and restrict its section
-to D(b(f)). If barY is off the divisor, b(f) is a unit and the pulled-back torsor
-already splits over H; pull any one section to the root algebra. Compose the
-section with the projection to W.P. Its structure equation is the pullback equation.
-No arbitrary data are defined using this existential theorem. -/
+etale extension C. -/
 theorem GaloisCover.strict_hensel_root_section
     {L U : Scheme.{u}} (i : U ⟶ L)
     (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)

@@ -12,8 +12,7 @@ import all WeilConjectures.AlgebraicGeometry.Completed.CompletedTowerPullbackSup
 import WeilConjectures.AlgebraicGeometry.Stratum.StratumCompletionUnitRestriction
 
 /-! # Functor and completion interface for the published strict-tower pullback
-Source: Stacks 099N (2),(5), blueprint order 1261
-(blueprint: def-weil-pbc-completed-pullback).
+Source: Stacks 099N (2), (5).
 The published quotient tower, resolving pullback, derived limit and comparison
 are retained. This interface supplies their functor and unit-compatible natural
 isomorphism to the intrinsic completion reflector used by scalar comparisons.
@@ -28,13 +27,13 @@ variable {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 variable {X Y : Scheme.{u}} (g : X ⟶ Y)
 
 /-- The functor underlying exactly the published completedPullbackObject.
-Source: Stacks 099N (blueprint: def-weil-pbc-completed-pullback). -/
+Source: Stacks 099N. -/
 abbrev pbcActualStrictCompletedPull :=
   (completedReductionTower Y d ⋙ completedTowerPullback g d) ⋙ completedTowerRlim d X
 
 /-- The actual compatible-family unit followed by derived limit of one strict
 quotient augmentation. Its components are completedPullbackComparison.
-Source: Stacks 099N (blueprint: def-weil-pbc-completed-pullback). -/
+Source: Stacks 099N. -/
 def pbcActualStrictCompletedPullUnit :
     pbcActualDerivedPull g d ⟶ pbcActualStrictCompletedPull d g :=
   (pbcActualDerivedPull g d).rightUnitor.inv ≫
@@ -46,19 +45,7 @@ def pbcActualStrictCompletedPullUnit :
 
 /-- The strict-tower formula and the completion reflector give the same completed
 pullback, with the canonical quotient augmentation as their unit.
-Source: Stacks 099N (2),(5) (blueprint: def-weil-pbc-completed-pullback).
-Proof: use the same normalized strict-tower comparisons as in
-completedPullback_isCompletion. Conjugating stratumReductionIso by the counit-normalized
-ordinary and tower transports gives a natural isomorphism from the pulled-back reduction
-tower to reduction of ordinary pullback. Its augmentation equation follows from
-reductionAugmentationTransport and the normalization of the constant comparison.
-Apply derived limit and compose with the inverse of actualCompletion_quotient, which
-compares the actual reflector with quotient completion and preserves its unit. The
-constant/limit unit equation identifies the specified strict comparison with the actual
-completion unit. Restrict this natural isomorphism to intrinsically complete inputs.
-For uniqueness, precompose two candidates with its inverse, then with the completion
-unit. The reflector's Hom bijection into its complete output is injective, so the
-unit equation forces equality of their components, hence of the natural isomorphisms. -/
+Source: Stacks 099N (2), (5). -/
 theorem pbcActualCompletedPullback_tower :
     ∃! e :
       ObjectProperty.ι (PbcIsIntrinsicallyComplete Y d) ⋙ pbcActualStrictCompletedPull d g ≅

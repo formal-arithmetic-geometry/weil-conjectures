@@ -26,7 +26,6 @@ import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
 /-! # Base change for an affine K-flat direct-image model
 
 Source: Stacks Project, Tags 0A1D, 08DW(2) and 06Z0.
-(blueprint: lem-sc-picard-affine-projective-base-change).
 -/
 
 @[expose] public section
@@ -99,26 +98,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 2048 in
 /-- Sheafified scalar extension of an affine K-flat model represents the structure
 sheaf's derived direct image after base change to the spectrum of the new ring.
-Source: Stacks Project, Tags 0A1D, 08DW(2), 08FE and 06Z0.
-(blueprint: lem-sc-picard-affine-projective-base-change).
-
-Proof: Apply the exact over equivalence to the representing isomorphism. It
-cancels the inverse over equivalence in affinePerfectSheafification, leaving
-tilde(P) restricted along U ≅ Spec R. Open restriction of derived direct image
-identifies the other side with the image along X ×_S U → U. Tensor-pullback
-composition and the canonical isomorphism of the two iterated pullbacks carry
-the coefficient to the given trivialization, hence to O_{X ×_S U}. Transport
-through U ≅ Spec R. Base change this direct image along Spec B → Spec R.
-The morphism X ×_S U → U is quasi-compact, separated and flat. Its
-structure module is invertible. Canonical flat-invertible base change
-(Tag 0A1D) therefore identifies this derived pullback with the derived
-image of the derived pullback of O; flatness of O and the tensor-unit
-isomorphism identify the latter coefficient with O_{X ×_S Spec B}.
-The K-flat affine pullback formula of Tag 08DW(2) identifies derived pullback
-of tilde(P) with tilde of termwise scalar extension PB. Compose the resulting
-derived isomorphisms. Neither the structure-unit hypothesis nor a homology
-claim is needed here. Empty affine opens and the zero coefficient ring satisfy
-the same comparisons; all sheaves on the empty spectrum are zero. -/
+Source: Stacks Project, Tags 0A1D, 08DW(2), 08FE and 06Z0. -/
 theorem picard_affine_projective_base_change
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

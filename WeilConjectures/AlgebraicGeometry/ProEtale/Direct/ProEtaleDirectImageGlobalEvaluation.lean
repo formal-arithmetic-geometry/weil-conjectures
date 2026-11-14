@@ -26,9 +26,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CompCo
 /-!
 # Normalized derived global sections after ordinary pro-etale direct image
 
-Source: Stacks Project, sites-cohomology.tex, Tags 0D6H and 0D6E;
-K-injective normalization and open-unit calculation in derived.tex, Tags 070Y and 0DVC
-(blueprint: lem-pur-proetale-direct-image-global-evaluation).
+Source: Stacks Project, Tags 0D6H and 0D6E; Tags 070Y and 0DVC.
 
 The section functor and its terminal-object comparison are the published ordinary
 constant-ring constructions. All derived images below are the actual finite-level
@@ -47,27 +45,26 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor Opposite
 namespace AlgebraicGeometry.Scheme
 
 /-- Fix abelian-group sheafification at the published coefficient universe.
-Source: Stacks Tag 07A5 (blueprint: lem-pur-proetale-direct-image-global-evaluation). -/
+Source: Stacks Tag 07A5. -/
 private noncomputable local instance (priority := 5000) globalEvaluation_sheafify
     (X : Scheme.{u}) : HasSheafify (ProEt.topology X) AddCommGrpCat.{u + 1} :=
   WeilConjectures.integralCoefficientAbSheafify.{u, u} X
 
 /-- Use the published locally-bijective characterization at that same universe.
-Source: Stacks Tag 07A5 (blueprint: lem-pur-proetale-direct-image-global-evaluation). -/
+Source: Stacks Tag 07A5. -/
 private noncomputable local instance (priority := 5000) globalEvaluation_locallyBijective
     (X : Scheme.{u}) :
     (ProEt.topology X).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
   WeilConjectures.integralCoefficientAbLocallyBijective.{u, u} X
 
 /-- Finiteness of the conventions' coefficient ring, supplied by its published quotient
-construction. Source: blueprint def-pur-conventions, A = O_E/(varpi^n)
-(blueprint: lem-pur-proetale-direct-image-global-evaluation). -/
+construction. -/
 instance purityGlobalEvaluation_finiteRing (P : WeilConjectures.PurityFiniteSetting.{u}) :
     Finite P.Ring :=
   WeilConjectures.PurityFiniteSetting.ringFinite.{u} P
 
 /-- The published terminal-object comparison, written for the actual finite direct image.
-Source: Stacks Tag 0D6H (blueprint: lem-pur-proetale-direct-image-global-evaluation). -/
+Source: Stacks Tag 0D6H. -/
 def proEtaleGlobalEvaluationTerminal (A : Type u) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     proEtaleConstantModuleDirectImage f A ⋙ proEtaleUnitLeraySections A Y ≅
@@ -77,9 +74,7 @@ def proEtaleGlobalEvaluationTerminal (A : Type u) [CommRing A] [Finite A]
 
 /-- The normalized identity inverse image. The source theorem specifies every section
 of its module comparison, its termwise extension, and its localization, so the extracted
-isomorphism is determined by that normalization rather than by bare existence.
-Source: blueprint lem-pur-proetale-derived-pullback-identity
-(blueprint: lem-pur-proetale-direct-image-global-evaluation). -/
+isomorphism is determined by that normalization rather than by bare existence. -/
 def proEtaleGlobalEvaluationPullbackId (A : Type u) [CommRing A] [Finite A]
     (X : Scheme.{u}) : proEtaleConstantRingDerivedPullback A (𝟙 X) ≅ 𝟭 _ :=
   (proEtaleDerivedPullback_identity X A).choose_spec.2.2.choose_spec.2.choose_spec.2.2

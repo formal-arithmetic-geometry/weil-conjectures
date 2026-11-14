@@ -13,7 +13,6 @@ public import WeilConjectures.RingTheory.FormalGlueingData
 # Concrete section modules for affine chart transitions
 
 Source: Stacks Project, Tags 0BLH and 05EL, item (1).
-(blueprint: def-sbc-punctured-completion-chart-section-modules)
 -/
 
 @[expose] public section
@@ -24,8 +23,7 @@ namespace AlgebraicGeometry.Scheme.CompletionGluingData
 
 /-- The localization acts through its canonical sections on D(f), followed by pullback.
 No object is selected from an existence theorem.
-Source: Stacks Project, Tag 0BLH, first two proof paragraphs.
-(blueprint: def-sbc-punctured-completion-chart-section-modules) -/
+Source: Stacks Project, Tag 0BLH, first two proof paragraphs. -/
 noncomputable abbrev chartSectionModule {A : Type u} [CommRing A]
     {Y : Scheme.{u}} (h : Y ⟶ Spec (.of A)) (f : A) :
     ModuleCat.{u} (Localization.Away f) :=
@@ -42,8 +40,7 @@ noncomputable abbrev chartSectionModule {A : Type u} [CommRing A]
   ModuleCat.of (Localization.Away f) Γ(Y, h ⁻¹ᵁ PrimeSpectrum.basicOpen f)
 
 /-- Global completed sections with their structural action.
-Source: Stacks Project, Tag 0BLH, first proof paragraph.
-(blueprint: def-sbc-punctured-completion-chart-section-modules) -/
+Source: Stacks Project, Tag 0BLH, first proof paragraph. -/
 noncomputable abbrev completedSectionModule {C : Type u} [CommRing C]
     {E : Scheme.{u}} (s : E ⟶ Spec (.of C)) : ModuleCat.{u} C :=
   letI : Module C Γ(E, ⊤) :=
@@ -54,8 +51,7 @@ noncomputable section
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The chosen localization action restricts to the structural action of A on sections.
-Source: Stacks Project, Tag 0BLH, structural actions on affine charts.
-(blueprint: def-sbc-punctured-completion-chart-section-modules) -/
+Source: Stacks Project, Tag 0BLH, structural actions on affine charts. -/
 theorem chartSectionModule_smul {A : Type u} [CommRing A] {Y : Scheme.{u}}
     (h : Y ⟶ Spec (.of A)) (f a : A)
     (m : Γ(Y, h ⁻¹ᵁ PrimeSpectrum.basicOpen f)) :

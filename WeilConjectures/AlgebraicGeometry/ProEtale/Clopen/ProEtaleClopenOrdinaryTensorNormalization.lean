@@ -11,8 +11,7 @@ import Mathlib.CategoryTheory.Sites.PreservesLocallyBijective
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.PushforwardZeroMonoidal
 
 /-! Ordinary normalized braided tensor restriction along a clopen immersion.
-Source: Stacks Project, sites-modules.tex, Tag 0GMW; sites-cohomology.tex, Tag 0FPQ.
-(blueprint: lem-pur-clopen-ordinary-tensor-normalization). -/
+Source: Stacks Project, Tag 0GMW; Tag 0FPQ. -/
 
 @[expose] public noncomputable section
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
@@ -222,21 +221,7 @@ attribute [local irreducible] SheafOfModules.monoidalCategory
   SheafOfModules.symmetricCategory
 
 /-- Ordinary restriction admits its canonical normalized braided structure.
-Source: Stacks Project, Modules on Sites, Tags 03EL and 0GMW.
-(blueprint: lem-pur-clopen-ordinary-tensor-normalization).
-
-Proof: Give the actual restriction functor its normalized lax module pushforward
-structure along the clopen inclusion. Its unit is sectionwise the identity. For its
-tensorator, the forward pure-tensor normalization identifies two maps out of the
-presheaf tensor: the sheafification unit followed by the tensorator, and the
-sectionwise tensor comparison followed by the restricted sheafification unit.
-Both sheafification units are local bijections, and cocontinuity preserves that
-property under restriction. Cancel the first unit to see that the tensorator is
-locally bijective, hence an isomorphism between sheaves. The lax coherence then
-gives a strong monoidal structure. Check the braided equation on pure tensors,
-which determine morphisms from a sheaf tensor by the sheafification adjunction.
-Finally apply the inverse tensorator to the forward normalization. The argument
-also applies to the empty component and the zero coefficient ring. -/
+Source: Stacks Project, Modules on Sites, Tags 03EL and 0GMW. -/
 theorem clopen_ordinary_tensor_normalization
     {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j] [IsClosedImmersion j]
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)}) :

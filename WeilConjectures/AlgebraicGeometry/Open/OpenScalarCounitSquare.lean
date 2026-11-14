@@ -77,9 +77,7 @@ import WeilConjectures.CategoryTheory.Normalized.NormalizedAdjunctionComposition
 
 /-! # Open extension preserves the normalized scalar counit
 
-Source: Stacks Project, sites-modules.tex, Tag 0E8I; sites-cohomology.tex, Tag 07A6;
-blueprint, proposition-sp-tower-geometric, Levels paragraph
-(blueprint: lem-sp-open-scalar-counit-square).
+Source: Stacks Project, Tag 0E8I; Tag 07A6.
 
 All categories are ordinary uncompleted unbounded constant-ring module derived categories.
 The open extension, scalar restriction square and tensor square are the published ones.

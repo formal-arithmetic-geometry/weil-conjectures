@@ -26,9 +26,6 @@ import WeilConjectures.AlgebraicGeometry.SixFunctors.DualizableIntegralCompletio
 /-!
 # The ordinary integral derived tensor product
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-int-tensor,
-`det-lem-int-tensor-product.md` and its proof (blueprint: lemma-inverse-image-tensor-product--2).
-
 All tensors use the ambient K-flat derived monoidal structure over the pulled-back
 continuous condensed valuation ring. Constructibility uses finite constant scalar models.
 -/
@@ -94,19 +91,7 @@ private theorem dualizable_preserves_products
 
 /-- The uncompleted integral tensor preserves bounded constructibility, and local bounded
 finite free scalar complexes are dualizable and preserve products, sequential derived limits
-and derived completeness.
-
-Source: blueprint latest, lemma-inverse-image-tensor-product--2
-(blueprint: lemma-inverse-image-tensor-product--2).
-
-Proof: the constructibility clause is the separate stratum/residue argument
-`integralTensorConstructibility`. For the moreover clause, each term of the local complex is
-pulled back from a finite sum of units, hence is dualizable. A bounded complex of such terms is
-dualizable in the derived category. Dualizability descends along the given pro-etale cover.
-Choose a right dual: its tensor adjunction makes tensoring with M a right adjoint, so it
-preserves products of every size. The derived tensor is triangulated, and the Milnor triangle
-then gives preservation of sequential homotopy-limit cones. Finally apply the separate
-canonical-completion compatibility lemma for dualizable objects. -/
+and derived completeness. -/
 theorem integralTensorProduct
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

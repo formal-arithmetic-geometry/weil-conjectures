@@ -14,8 +14,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 /-!
 # The coefficient cube for canonical constant-ring inverse images
 
-Source: Stacks Project, Tags 0D6D and 0E47, coefficient inverse-image comparisons
-(blueprint: lem-sp-constant-scalar-pullback-cube).
+Source: Stacks Project, Tags 0D6D and 0E47, coefficient inverse-image comparisons.
 -/
 
 -- After pruning, this module only keeps private declarations.

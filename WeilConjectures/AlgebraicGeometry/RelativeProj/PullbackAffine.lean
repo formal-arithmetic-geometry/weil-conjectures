@@ -11,7 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.RelativeProj.GradedTensor
 /-!
 # Pullback of a quasi-coherent graded algebra over an affine base
 
-Let `X` be an affine scheme, `A` a quasi-coherent graded algebra on `X` and `g : X' ⟶ X` any
+Let `X` be an affine scheme, `A` a quasi-coherent graded algebra on `X` and `g: X' ⟶ X` any
 morphism. We construct the coefficientwise pullback `g^* A` on `X'`,
 `(g^* A)(U') = Γ(X', U') ⊗_{Γ(X, ⊤)} A(X)` with the base-changed grading, together with
 the identification `PullbackData g A (g^* A)`. Hence the base change theorem
@@ -22,7 +22,7 @@ the identification `PullbackData g A (g^* A)`. Hence the base change theorem
 
 - `AlgebraicGeometry.Scheme.GradedAlgebraData.pullbackOfIsAffine` — the pullback `g^* A`.
 - `AlgebraicGeometry.Scheme.GradedAlgebraData.pullbackDataOfIsAffine` — its identification with
-  the coefficientwise pullback (blueprint: `definition-admissible-blow-up--1`, item 4).
+  the coefficientwise pullback.
 -/
 
 @[expose] public section
@@ -241,7 +241,7 @@ lemma pullbackMap_res_res {U' : X'.affineOpens} {U V : X.affineOpens} (h : U'.1 
 
 /-- The pullback `g^* A` of a quasi-coherent graded algebra along a morphism to an affine scheme
 is identified with the coefficientwise pullback of `A`; in particular `PullbackData` is not
-vacuous. (blueprint: `definition-admissible-blow-up--1`, item 4) -/
+vacuous. -/
 noncomputable def pullbackDataOfIsAffine : PullbackData g A (A.pullbackOfIsAffine g) where
   map h := A.pullbackMap g h
   isGradedBaseChangeAlong h := A.isGradedBaseChangeAlong_pullbackMap g h
@@ -249,8 +249,7 @@ noncomputable def pullbackDataOfIsAffine : PullbackData g A (A.pullbackOfIsAffin
   map_res h hUV x := A.pullbackMap_res_res g h hUV x
 
 /-- **Base change of relative `Proj` over an affine base**: for `X` affine and any
-`g : X' ⟶ X`, `Proj_{X'}(g^* A) ≅ X' ×_X Proj_X(A)`.
-(blueprint: `definition-admissible-blow-up--1`, item 4) -/
+`g: X' ⟶ X`, `Proj_{X'}(g^* A) ≅ X' ×_X Proj_X(A)`. -/
 theorem isPullback_pullbackOfIsAffine :
     IsPullback (A.pullbackDataOfIsAffine g).relProjComparison
       (A.pullbackOfIsAffine g).relProjHom A.relProjHom g :=

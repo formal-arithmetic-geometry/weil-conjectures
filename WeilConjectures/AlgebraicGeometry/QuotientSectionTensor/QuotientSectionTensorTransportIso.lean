@@ -45,16 +45,7 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ' T)]
 
 /-- Transport a single representative tensor equation to a fixed derived pair.
-Source: Stacks 06YS and 06YU; the naturality and cancellation part of the
-resolving-class extension in parent proof steps 6--8.
-(blueprint: new-sfb-quotient-section-tensor-transport-iso).
-
-Proof: use naturality of `b`, both tensor comparisons, `c.derived`, and `barB`
-along the two supplied isomorphisms.  Precompose by the image of the tensor of
-those isomorphisms, rewrite each naturality square, and cancel the resulting
-isomorphisms.  The representative equation then becomes the displayed equation.
-The argument is independent of the chosen representatives and also covers zero
-objects and empty schemes. -/
+Source: Stacks 06YS and 06YU. -/
 theorem tensor_section_condition_transport_iso
     (T : Scheme.{u}) (c : ScalarSectionData a T) (b : TensorIso a T)
     (barB : tensor Λ T ⋙ c.model.T ≅

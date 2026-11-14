@@ -12,7 +12,6 @@ import Mathlib.CategoryTheory.Whiskering
 # Naturality of the explicit relative torsor classification
 
 Source: Stacks Project, Tag 03AJ, relative refinement, steps 7 and 8.
-(blueprint: lem-amb-relative-torsor-class-naturality).
 -/
 
 @[expose] public section
@@ -24,14 +23,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 /-- An equivariant map of pointed torsors gives the coefficient map on relative H1.
-Source: Stacks Project, Tag 03AJ, relative refinement, steps 7 and 8.
-(blueprint: lem-amb-relative-torsor-class-naturality).
-Proof: choose lifting presentations for both torsors. Compose the source presentation
-with the resolution comparison, and compose the target presentation with the given
-map of torsors. The two resulting maps have identical equivariance. Their difference
-glues to a global degree-zero section. Its differential and its value on the specified
-open section are precisely the two coordinate differences, hence the classes differ
-by its boundary. -/
+Source: Stacks Project, Tag 03AJ, relative refinement, steps 7 and 8. -/
 theorem relativeTorsorEquiv_coefficient
     (T : Scheme.{u}) (U : T.Etale)
     {G G' : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}} (f : G ⟶ G')
@@ -99,14 +91,7 @@ theorem relativeTorsorEquiv_coefficient
   exact (hr (op U) P.2)
 
 /-- Pullback of a pointed torsor gives the transfer on relative H1.
-Source: Stacks Project, Tag 03AJ, relative refinement, steps 7 and 8; Tag 0G78.
-(blueprint: lem-amb-relative-torsor-class-naturality).
-Proof: compare the two equivariant maps from the source torsor into the direct image
-of the target degree-zero injective sheaf. Their difference glues over the source.
-Restrict this global difference along the terminal base-change map. Its differential
-is the difference of global cocycles, and its open restriction is the difference of
-chosen lifts, by the terminal/open base-change square. It is therefore the required
-boundary in the target relative complex. -/
+Source: Stacks Project, Tag 03AJ, relative refinement, steps 7 and 8; Tag 0G78. -/
 theorem relativeTorsorEquiv_transfer
     {T T' : Scheme.{u}} (h : T' ⟶ T) (W : T.Opens)
     {G : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}}

@@ -18,9 +18,7 @@ unit used by completed exchange. We specialize the library's unit-normalized
 strict/intrinsic completed-pullback comparison to the identity morphism.
 The remaining argument is categorical: constant towers are fully faithful on
 derived categories, and pullback along the identity is isomorphic to identity.
-Source: Stacks Tag 099N, and the completion comparison recorded by
-`def-weil-pbc-completed-pullback`.
-(blueprint: lem-weil-pbc-intrinsic-to-tower-complete)
+Source: Stacks Tag 099N.
 -/
 
 @[expose] public noncomputable section
@@ -133,22 +131,7 @@ private theorem towerComplete_of_identityComparison
 end
 
 /-- Intrinsic Koszul completeness implies the canonical quotient-tower unit is invertible.
-Source: Stacks Tag 099N, using the unit-normalized comparison of
-`def-weil-pbc-completed-pullback` and identity coherence from
-`definition-pro-etale-base-change-map--1`.
-(blueprint: lem-weil-pbc-intrinsic-to-tower-complete)
-Proof: on an intrinsically complete object, completed pullback by the identity
-has invertible unit. The strict/intrinsic comparison and its unit equation,
-followed by the coefficient-transport unit equation, give invertibility of
-`d.ordinaryToCompleted (𝟙 T) K`. Evaluation at zero is left adjoint to constant
-towers. Deriving this exact adjunction shows that derived constant towers are
-fully faithful, so their constant/right-derived-limit unit is invertible.
-Expand the ordinary-to-completed map and cancel this unit and the canonical
-constant-pullback comparison. This leaves the right-derived limit of the
-augmentation after identity tower pullback invertible. Identity tower pullback
-is naturally isomorphic to identity, so the right-derived limit of the
-augmentation itself is invertible. Composing with the constant-tower unit gives
-invertibility of `d.completionUnit T K`, which is `TowerComplete`. -/
+Source: Stacks Tag 099N. -/
 theorem pbcIntrinsicComplete_towerComplete
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (T : Scheme.{u}) (K : PbcCompletedDerived T d) :

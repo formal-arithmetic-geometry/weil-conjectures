@@ -20,7 +20,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.PerfectLo
 /-!
 # Representability of the Picard functor of a smooth projective curve
 
-Let `k` be a separably closed field, let `f : X ⟶ Spec k` be a smooth projective curve and let
+Let `k` be a separably closed field, let `f: X ⟶ Spec k` be a smooth projective curve and let
 `σ` be a `k`-rational point of `X`.  Write `G = Pic_{X/k,σ}` for the `σ`-normalized Picard
 functor (`AlgebraicGeometry.picardFunctorNormalized`).  This file states the four steps of the
 representability argument:
@@ -62,19 +62,17 @@ HasInjectiveResolutions (X ×[k] T).Modules`. This hypothesis always holds, sinc
 ## Main definitions
 
 - `AlgebraicGeometry.IsInvertibleDirectImage`: the condition cutting out `F`.
-- `AlgebraicGeometry.picardFunctorInvertibleDirectImage`: the subfunctor `F ⊆ Pic_{X/k,σ}`
-  (blueprint `prose-C-09`, `prose-C-09`).
+- `AlgebraicGeometry.picardFunctorInvertibleDirectImage`: the subfunctor `F ⊆ Pic_{X/k,σ}`.
 
 ## Main statements
 
 - `AlgebraicGeometry.exists_opens_isInvertibleDirectImage_map_iff`: the open locus of `T` over
-  which a class lies in `F` (blueprint `prose-C-09`).
+  which a class lies in `F`.
 - `AlgebraicGeometry.isOpenImmersion_picardFunctorInvertibleDirectImage_ι`: `F` is an open
-  subfunctor of `Pic_{X/k,σ}` (blueprint `prose-C-09`).
-- `AlgebraicGeometry.IsInvertibleDirectImage.map_of_isProper`: cohomology and base change for `F`
-  (blueprint `prose-C-09`).
+  subfunctor of `Pic_{X/k,σ}`.
+- `AlgebraicGeometry.IsInvertibleDirectImage.map_of_isProper`: cohomology and base change for `F`.
 - `AlgebraicGeometry.isRepresentable_of_representable_open_subfunctor`: the representability
-  criterion (blueprint `lemma-representability-picard-functor`).
+  criterion.
 -/
 
 @[expose] public section
@@ -110,20 +108,18 @@ def IsInvertibleDirectImage (f : X ⟶ Spec (.of k)) (T : Over (Spec (.of k)))
       IsZero (((Modules.pushforward (Limits.pullback.snd f T.hom)).rightDerived q).obj
         ((fromSkeleton _).obj L.val))
 
-/-- **The open locus of `F` for a single class.** Let `f : X ⟶ Spec k` be flat, proper and
+/-- **The open locus of `F` for a single class.** Let `f: X ⟶ Spec k` be flat, proper and
 locally of finite presentation, and let `ℒ ∈ Pic (X_T)` for a `k`-scheme `T`. There is an open
-`U ⊆ T` such that a morphism `a : W ⟶ T` of `k`-schemes factors through `U` if and only if the
+`U ⊆ T` such that a morphism `a: W ⟶ T` of `k`-schemes factors through `U` if and only if the
 pullback `ℒ_W` satisfies `IsInvertibleDirectImage`, i.e. `Rf_{W,*} ℒ_W` is an invertible
 `𝒪_W`-module placed in degree `0`.
 
 This applies
-`AlgebraicGeometry.Scheme.Modules.exists_opens_range_subset_iff_isFiniteLocallyFreeInDegree`
-(blueprint `lemma-coherent-base-change-invertible-sheaves--3`) to `f_T : X_T ⟶ T`, which is proper
+`AlgebraicGeometry.Scheme.Modules.exists_opens_range_subset_iff_isFiniteLocallyFreeInDegree` to
+`f_T: X_T ⟶ T`, which is proper
 of finite presentation as a base change of `f`, to the invertible module `ℒ`, which is of finite
 presentation and flat over `T` since `f_T` is flat, with `i = 0` and `r = 1`: a finite locally free
-module of rank `1` is an invertible module.
-
-(blueprint: `prose-C-09`) -/
+module of rank `1` is an invertible module. -/
 theorem exists_opens_isInvertibleDirectImage_map_iff (f : X ⟶ Spec (.of k)) [Flat f]
     [IsProper f] [LocallyOfFinitePresentation f]
     [∀ T : Over (Spec (.of k)), HasInjectiveResolutions (Limits.pullback f T.hom).Modules]
@@ -148,17 +144,15 @@ theorem exists_opens_isInvertibleDirectImage_map_iff (f : X ⟶ Spec (.of k)) [F
     fun ⟨h, h₀⟩ ↦ ⟨SheafOfModules.IsInvertible.of_iso.{u, u, u} (e 0).symm (h := h₀),
       fun q hq ↦ (h q hq.ne').of_iso (e q)⟩⟩
 
-/-- **`F` is a subfunctor.** For `f : X ⟶ Spec k` flat, proper and locally of finite
+/-- **`F` is a subfunctor.** For `f: X ⟶ Spec k` flat, proper and locally of finite
 presentation, the condition `IsInvertibleDirectImage` is stable under pullback along a morphism
-`i : V ⟶ U` of `k`-schemes. If `ℒ` satisfies it, then the identity of `U` factors through the
+`i: V ⟶ U` of `k`-schemes. If `ℒ` satisfies it, then the identity of `U` factors through the
 open `U' ⊆ U` of `AlgebraicGeometry.exists_opens_isInvertibleDirectImage_map_iff`, so `U' = U`
 and every morphism to `U` factors through `U'`.
 
 This is the subfunctor half of the blueprint's `prose-C-09`, the base-change half
 of `lemma-triviality-fibres--2`; it is what makes
-`AlgebraicGeometry.picardFunctorInvertibleDirectImage` a subfunctor.
-
-(blueprint: `prose-C-09`) -/
+`AlgebraicGeometry.picardFunctorInvertibleDirectImage` a subfunctor. -/
 theorem IsInvertibleDirectImage.map_of_isProper (f : X ⟶ Spec (.of k)) [Flat f] [IsProper f]
     [LocallyOfFinitePresentation f]
     [∀ T : Over (Spec (.of k)), HasInjectiveResolutions (Limits.pullback f T.hom).Modules]
@@ -172,11 +166,11 @@ theorem IsInvertibleDirectImage.map_of_isProper (f : X ⟶ Spec (.of k)) [Flat f
   refine (hU' V i).2 (subset_trans (fun t _ ↦ ?_) hU)
   exact ⟨t, rfl⟩
 
-/-- **The subfunctor `F`.** Let `k` be a field, let `f : X ⟶ Spec k` be flat, proper and locally
+/-- **The subfunctor `F`.** Let `k` be a field, let `f: X ⟶ Spec k` be flat, proper and locally
 of finite presentation, with a `k`-rational point `σ`, and let `G = Pic_{X/k,σ}` be the
 `σ`-normalized Picard functor. The subfunctor `F ⊆ G` is
 `F(T) = {ℒ ∈ G(T) | Rf_{T,*} ℒ is an invertible 𝒪_T-module placed in degree 0}`,
-where `f_T : X_T ⟶ T` is the base change of `f`; concretely (`IsInvertibleDirectImage`),
+where `f_T: X_T ⟶ T` is the base change of `f`; concretely (`IsInvertibleDirectImage`),
 `R⁰f_{T,*} ℒ` is an invertible `𝒪_T`-module and `R^q f_{T,*} ℒ = 0` for all `q > 0`.
 
 The hypotheses on `f`, which a smooth projective curve satisfies, are what make the condition
@@ -185,9 +179,7 @@ make `F` a subfunctor.
 
 Being a `CategoryTheory.Subfunctor`, `F` comes with the inclusion natural transformation
 `(picardFunctorInvertibleDirectImage f σ hσ).ι` into
-`(picardFunctorNormalized f σ hσ).toFunctor`.
-
-(blueprint: `prose-C-09`, `prose-C-09`) -/
+`(picardFunctorNormalized f σ hσ).toFunctor`. -/
 noncomputable def picardFunctorInvertibleDirectImage (f : X ⟶ Spec (.of k)) [Flat f]
     [IsProper f] [LocallyOfFinitePresentation f]
     (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ f = 𝟙 (Spec (.of k)))
@@ -210,11 +202,9 @@ inverse image of `AlgebraicGeometry.IsOpenImmersion` under `CategoryTheory.Over.
 
 The proof follows Stacks, Lemma 0B9V: for `ℒ ∈ G(T)` the open `U ⊆ T` of
 `AlgebraicGeometry.exists_opens_isInvertibleDirectImage_map_iff` has the property that
-`a : W ⟶ T` factors through `U` if and only if `ℒ_W ∈ F(W)`, which is the open-immersion
+`a: W ⟶ T` factors through `U` if and only if `ℒ_W ∈ F(W)`, which is the open-immersion
 property by `AlgebraicGeometry.relative_isOpenImmersion_of_exists_opens`. The morphism `f` is
-flat, being smooth.
-
-(blueprint: `prose-C-09`, `prose-C-09`) -/
+flat, being smooth. -/
 theorem isOpenImmersion_picardFunctorInvertibleDirectImage_ι [IsSepClosed k]
     (f : X ⟶ Spec (.of k)) [SmoothOfRelativeDimension 1 f] [IsProper f]
     [GeometricallyIntegral f] (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ f = 𝟙 (Spec (.of k)))
@@ -225,7 +215,7 @@ theorem isOpenImmersion_picardFunctorInvertibleDirectImage_ι [IsSepClosed k]
     exists_opens_isInvertibleDirectImage_map_iff f x.1
 
 /-- **The criterion: a functor generated by a representable open subfunctor.** Let
-`G : (Sch/k)ᵒᵖ ⥤ Grp` be a presheaf of groups on the category of `k`-schemes such that
+`G: (Sch/k)ᵒᵖ ⥤ Grp` be a presheaf of groups on the category of `k`-schemes such that
 
 1. `G` is a Zariski sheaf, with `u`-small values;
 2. there is a subfunctor `F ⊆ G` with
@@ -253,9 +243,7 @@ The proof follows Stacks, Lemma 0B9Q: the translates `F_{g'} = g'⁻¹ F` for `g
 open subfunctors represented by the representing scheme of `F`, and they cover `G` by (2)(c)
 applied at the residue fields of the points; the gluing criterion
 `AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable_of_isSheaf_over` gives the
-representing scheme, which is a group object by `CategoryTheory.GrpObj.ofRepresentableBy`.
-
-(blueprint: `lemma-representability-picard-functor`) -/
+representing scheme, which is a group object by `CategoryTheory.GrpObj.ofRepresentableBy`. -/
 theorem isRepresentable_of_representable_open_subfunctor
     (G : (Over (Spec (.of k)))ᵒᵖ ⥤ GrpCat.{u + 1})
     (F : Subfunctor (G ⋙ forget GrpCat.{u + 1}))
@@ -405,7 +393,7 @@ theorem exists_isOpenImmersion_of_representable_open_subfunctor
       r W g' * (G.map c.op).hom x ∈ F.obj (op W) ↔ Set.range c.left ⊆ U := by
     rw [← hU]
     simp only [P, hP, map_mul, hr]
-  -- the morphism `ψ : A ⟶ A'` classifying `ξ = r g'⁻¹ * ξ₀`
+  -- the morphism `ψ: A ⟶ A'` classifying `ξ = r g'⁻¹ * ξ₀`
   let ξ : G.obj (op A) := (r A g')⁻¹ * ξ₀
   let ψ : A ⟶ A' := e'.homEquiv.symm ξ
   have hψ : (G.map ψ.op).hom x = ξ := by

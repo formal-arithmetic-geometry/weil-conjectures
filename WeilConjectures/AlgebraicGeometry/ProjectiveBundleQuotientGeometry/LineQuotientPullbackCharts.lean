@@ -372,22 +372,7 @@ private theorem pullback_map_eq {S T T' : Scheme.{u}} (h : T ⟶ S)
 
 /-- The coefficientwise pullback of a fraction-chart morphism satisfies the fraction
 charts of the pulled quotient and preserves all homogeneous and generator coefficients.
-Source: Stacks Project, Constructions, Tags 01OA and 01O4, functoriality.
-(blueprint: lem-trf-line-quotient-pullback-charts).
-
-Proof: on W' mapping into W, the normalized composite adjunction identifies the
-pulled quotient image of m with the pullback of q(m). The pulled frame is 1 tensor l,
-so its coefficient is u^*(b_m). Induction on homogeneous products, followed by
-scalar multiplication and addition in each symmetric degree, gives the same
-formula for every b(c), including the structural degree-zero coefficient.
-The inverse image of D(b_m) is D(u^*b_m), and the
-fraction-chart formula for u;F sends each fraction to the fraction of its pulled
-coefficients. On affine
-refinements of W' the equations yield the chart factorizations for psi'; their
-uniqueness as maps into affine spectra identifies the scheme maps. Refinements
-cover the source, so sheaf gluing gives all chart equations. The same coefficient
-calculation gives frame changes and both source and base restrictions. No step
-uses flatness, finite generation, or affineness of intersections. -/
+Source: Stacks Project, Constructions, Tags 01OA and 01O4, functoriality. -/
 theorem lineQuotient_pullback_charts {S T T' : Scheme.{u}} (h : T ⟶ S)
     (u : T' ⟶ T) (E : S.Modules) [E.IsQuasicoherent]
     (L : T.Modules) [L.IsInvertible] (q : (tensorPullback h).obj E ⟶ L) [Epi q]

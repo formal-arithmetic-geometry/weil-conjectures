@@ -44,8 +44,7 @@ import Mathlib.Algebra.Category.Grp.Ulift
 
 /-! # Shifted Hom from integral constructible complexes and countable sums
 
-Source: Bhatt--Scholze, The pro-etale topology for schemes, Lemma 6.8.12
-(blueprint: lem-weil-pbc-integral-constructible-hom-sums).
+Source: Bhatt--Scholze, The pro-etale topology for schemes, Lemma 6.8.12.
 
 We use the completed coefficient presentation of the integral category. The scalar
 ring is its recorded `ULift` of the valuation ring, canonically ring-isomorphic to
@@ -178,26 +177,7 @@ The countable family may be empty and its common lower bound may be any integer.
 The source belongs to the recorded bounded constructible complete category, using
 the canonical continuous-coefficient/completed-coefficient identification.
 
-Source: Bhatt--Scholze, Lemma 6.8.12
-(blueprint: lem-weil-pbc-integral-constructible-hom-sums).
-
-Proof:
-1. Shift the family and its colimit cofan by q. A common lower bound n becomes n-q.
-Apply integralConstructible_boundedBelow_compactness to this shifted family; the
-cofan obtained by global derived Hom from K is colimiting in derived modules.
-2. Apply derivedModuleHomology_coproduct in degree zero, then forget scalars.
-The resulting cofan is colimiting in abelian groups.
-3. Evaluation at the final pro-etale object, after forgetting scalars, is naturally
-Hom from the unit module sheaf: a morphism is sent to its value on 1, and the inverse
-extends a section by restriction. Exact forgetting commutes with right derivation
-and cohomology. Compose these natural comparisons with rhom_global_sectionsOfUniverses
-to obtain H^0 RHom(K,N) isomorphic to Hom(K,N), naturally for every derived target map.
-4. Transport the cofan along these additive comparisons. Universe lifting preserves
-coproducts, so the resulting cofan has legs given by postcomposition with the shifted
-original coprojections. Forgetting scalars reflects colimits; hence this is also a
-coproduct cofan in modules. Its comparison from the concrete module direct sum is
-an isomorphism, and that comparison is exactly the displayed DirectSum.toModule map.
-All constructions include the empty family and every integer q. -/
+Source: Bhatt--Scholze, Lemma 6.8.12. -/
 theorem integralConstructible_hom_sums
     (X : Scheme.{u}) [IsNoetherian X]
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Type u) [Field E]

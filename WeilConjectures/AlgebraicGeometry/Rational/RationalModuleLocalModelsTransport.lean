@@ -287,28 +287,7 @@ private def extendInverseOverIso {X Z : Scheme.{u}} (f : Z ⟶ X)
       ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).map a) _ U
 
 /-- Ordinary localization of the completed finitely presented local models.
-Source: Bhatt--Scholze, Lemma 6.8.2, Definition 6.8.10 and Proposition 6.8.14(2)
-(blueprint: lem-per-rational-module-local-models-transport).
-
-Proof: integralConstantModule is completed scalar extension followed by restriction
-along the inverse completed coefficient comparison. Uniqueness of left adjoints
-identifies this restriction with extension along the comparison. Composing scalar
-extensions and using the supplied scalar square gives RationalStratum.directModel.
-RationalStratum.scalarModels then identifies this object with the continuous
-realization of E tensor_A N. Compare the two constant-module sheafification
-presentations to obtain the second assertion.
-
-A finite basis of E tensor_A N, together with the constant finite-free comparison,
-gives an ordinary finite free rational model on X. Inverse image preserves this
-free module: base change on the small site models is final, so Mathlib's pullback
-unit comparison is an isomorphism, and left adjoints preserve coproducts. Slice
-restriction also preserves free modules. Inverse image and slice restriction
-commute with scalar extension by their scalar comparison isomorphisms. Apply
-these functors to each given local integral model, retaining its covering sieve.
-The resulting local free isomorphisms prove finite local freeness. Forgetting
-only the constructibility proofs converts the original stratification into the
-required finite locally closed stratification. No step assumes a positive rank,
-a nonempty stratification, or torsion-freeness of N. -/
+Source: Bhatt--Scholze, Lemma 6.8.2, Definition 6.8.10 and Proposition 6.8.14(2). -/
 theorem rationalModuleLocalModelsTransport (X : Scheme.{u}) [IsNoetherian X]
     (i : pbcAdicCompletion X (pbcIntegralDatum l E) ≅ integralCoefficientSheaf l X E)
     (_hi : pbcCompletedScalar X (pbcIntegralDatum l E) ≫ i.hom =

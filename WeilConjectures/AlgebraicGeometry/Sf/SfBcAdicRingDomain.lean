@@ -10,10 +10,6 @@ import WeilConjectures.AlgebraicGeometry.Standard.StandardQuotientsPerfectSupple
 
 /-! # The base-change package's adic coefficient domain
 
-Source: literature/blueprint/main-20261015/blueprint/sec-six-functors/
-sk-thm-sf-package/prop-functor-package.proof.md, Clause (4), coefficient-ring input
-(blueprint: lem-sf-bc-adic-ring-domain).
-
 The ring assertion is independent of the site universe. The scheme assertion uses
 exactly the published completed coefficient ring and three-clause integral domain.
 -/
@@ -31,23 +27,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 /-- The package valuation ring and every positive quotient satisfy the adic hypotheses,
-with the specified two-term finite free resolution and its quotient augmentation.
-Source: blueprint package proof, Clause (4)
-(blueprint: lem-sf-bc-adic-ring-domain).
-
-Proof: (1) Use lem-weil-l-adic-extension-absolute-value and
-lem-weil-l-adic-extension-integers-dvr for nonarchimedeanness, the DVR and its finite
-residue field. A subring of a field is a domain and a principal ideal ring is Noetherian
-(def-weil-pbc-noetherian-ring). The chosen uniformizer generates its maximal ideal.
-(2) By def-weil-l-adic-numbers, the absolute value of l is l inverse, hence less than one.
-Thus l = uniformizer times an integer of E. Raising to n shows that l^n kills the nth
-quotient; the nonzero first quotient has characteristic l.
-(3) Apply lem-weil-valued-dvr-finite-quotients for finiteness and surjectivity of the
-identity-induced quotient maps. Apply the finite-extension clause of
-lemma-reduction-derived-nakayama--1 for the normalized two-term resolution and
-perfectness. (4) The principal ideal is finitely generated, its first quotient is torsion,
-and the positive quotients are finite and perfect. These are exactly the fields of
-def-weil-pbc-adic-coefficient-datum. -/
+with the specified two-term finite free resolution and its quotient augmentation. -/
 theorem sf_bc_adic_ring_domain (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :
     IsNonarchimedean (Padic.coefficientExtensionAbsoluteValue l E) ∧

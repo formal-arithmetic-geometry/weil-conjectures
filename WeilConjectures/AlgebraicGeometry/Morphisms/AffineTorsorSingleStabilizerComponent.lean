@@ -86,8 +86,7 @@ invariance of a/h^n implies invariance of a because localization of the domain C
 at nonzero h is injective. Thus V/K is the displayed basic open of Spec F and its
 quotient map is q. The descent factorization gives q followed by s equal to the
 selected section; descent over B gives the displayed base equation.
-This assertion constructs a factorization only; openness is a separate step.
-(blueprint: lem-sbc-affine-torsor-single-stabilizer-component-section) -/
+This assertion constructs a factorization only; openness is a separate step. -/
 -- STATEMENT-DISPUTED: Arbitrary f may select a component different from x; take the trivial
 -- torsor over ℚ and the two-point split cover. The former universal assertion is replaced
 -- below by existence of a factorization of the selected section.
@@ -194,11 +193,7 @@ theorem affine_torsor_single_stabilizer_component_section
   exact ⟨s, (huniq (s ≫ p) hsp).trans (huniq b hqb).symm, hs⟩
 
 
-/-- Open/base-map part of stabilizer descent.
-
-Proof: descend the selected section and form its pullback lift; the exact stabilizer
-criterion gives openness and pullback.lift_snd gives the base equation.
-(blueprint: lem-sbc-affine-torsor-single-stabilizer-component-open) -/
+/-- Open/base-map part of stabilizer descent. -/
 theorem affine_torsor_single_stabilizer_component_open
     (R H : CommRingCat.{u}) (g : R) (ι : R →+* H)
     (C : Type u) [CommRing C] [Algebra H C] [IsDomain C]
@@ -269,11 +264,7 @@ theorem affine_torsor_single_stabilizer_component_open
     R H g ι C G ρ hρone hρmul hne p j hj hEt hrot d T t k hk δ hδ x K hK f hbase hsection
   exact ⟨f, hopen, hbase⟩
 
-/-- A single representative section descends to an open component.
-
-Proof: descend the selected section, construct the pullback lift, and apply the
-exact-stabilizer openness criterion. The pullback equations give both required identities.
-(blueprint: lem-sbc-affine-torsor-single-stabilizer-component) -/
+/-- A single representative section descends to an open component. -/
 theorem affine_torsor_single_stabilizer_component
     (R H : CommRingCat.{u}) (g : R) (ι : R →+* H)
     (C : Type u) [CommRing C] [Algebra H C] [IsDomain C]

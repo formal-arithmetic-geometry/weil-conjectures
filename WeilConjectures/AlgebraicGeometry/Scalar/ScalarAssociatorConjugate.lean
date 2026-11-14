@@ -127,8 +127,7 @@ import all WeilConjectures.Algebra.Homology.SuccessiveDerivedQuotientData
 import all WeilConjectures.AlgebraicGeometry.Adic.AdicCoefficientDatumSupplement
 
 /-! The right conjugate of the prescribed scalar associator.
-Source: Stacks Tags 06YY, 07A6 and 0D6D.
-(blueprint: lem-sp-scalar-associator-conjugate) -/
+Source: Stacks Tags 06YY, 07A6 and 0D6D. -/
 
 -- After pruning, this module only keeps private declarations.
 set_option linter.privateModule false

@@ -11,9 +11,6 @@ import WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicKoszulCompletion
 import WeilConjectures.AlgebraicGeometry.ProperBaseChange.CompletionMap
 /-!
 # The augmentation comparison of Koszul and quotient completions
-
-Source: Weil conjectures blueprint, proper base change, order 1259
-(blueprint: lemma-weil-pbc-koszul-quotient-limit).
 -/
 
 -- After pruning, this module only keeps private declarations.

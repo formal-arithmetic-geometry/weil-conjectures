@@ -81,10 +81,6 @@ import WeilConjectures.AlgebraicGeometry.SixFunctors.SpecifiedExceptionalClassHo
 /-!
 # Proper exceptional inverse image and arbitrary open restriction
 
-Source: blueprint main-20261015, theorem-existence-exceptional-inverse-image,
-proposition-composition-open-restriction-compactifications-f--5, with the reviewed stage-1 repair of
-Steps 1–8 (blueprint: proposition-composition-open-restriction-compactifications-f--5).
-
 The ambient adjunction and the relative etale-origin assertion have separate hypotheses.
 The proper/open map is fixed by sectionwise restriction and the open adjunctions.
 
@@ -111,8 +107,7 @@ variable (A : Type u) [CommRing A] [Finite A]
 
 /-- Open restriction of direct image, using exactly the sectionwise fibre-product map
 of the recorded sheaf comparison, now expressed with the exact inverse-image functors.
-Source: blueprint proposition-composition-open-restriction-compactifications-f--5, Steps 2–3; Stacks
-Tags 09AE and 09BN (blueprint: proposition-composition-open-restriction-compactifications-f--5). -/
+Source: Stacks Tags 09AE and 09BN. -/
 noncomputable def sfProperOpenPullbackRestriction {U V W T : Scheme.{u}}
     (r : U ⟶ W) (k : U ⟶ V) (i : W ⟶ T) (p : V ⟶ T)
     [IsOpenImmersion i] [IsOpenImmersion k] (sq : IsPullback r k i p) :
@@ -134,9 +129,7 @@ noncomputable def sfProperOpenPullbackRestriction {U V W T : Scheme.{u}}
 /-- Derived open restriction. Direct image preserves K-injectives as right adjoint to
 exact inverse image; open pullback preserves them as right adjoint to exact extension.
 Thus this is induced by the specified sectionwise map on K-injective representatives.
-No finite-CD or ambient-adjoint hypothesis is needed for this restriction isomorphism.
-Source: blueprint proposition-composition-open-restriction-compactifications-f--5, Step 3
-(blueprint: proposition-composition-open-restriction-compactifications-f--5). -/
+No finite-CD or ambient-adjoint hypothesis is needed for this restriction isomorphism. -/
 noncomputable def sfProperOpenDerivedRestriction {U V W T : Scheme.{u}}
     (r : U ⟶ W) (k : U ⟶ V) (i : W ⟶ T) (p : V ⟶ T)
     [IsOpenImmersion i] [IsOpenImmersion k] (sq : IsPullback r k i p) :

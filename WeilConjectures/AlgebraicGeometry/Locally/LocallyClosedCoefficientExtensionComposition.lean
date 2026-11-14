@@ -10,9 +10,6 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.LocallyClosedGeneratorTensorIntersection
 
 /-! # Transitivity for the specified internal coefficient extension
-
-Source: blueprint latest, integral-models-generators proof (1), transitivity of
-extension by zero (blueprint: lem-sfb-internal-locally-closed-extension-composition).
 -/
 
 @[expose] public noncomputable section
@@ -23,10 +20,6 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
 /-- Transitivity of open-then-closed extension with the actual internal module coefficients.
-
-Source: blueprint latest, integral-models-generators proof (1), parenthetical assertion
-that composites are locally closed and extension by zero is transitive
-(blueprint: lem-sfb-internal-locally-closed-extension-composition).
 
 Proof in words. Identify internal modules with sectionwise modules over their pulled
 coefficient ring sheaves, using the canonical module equivalence. Its inverse-image

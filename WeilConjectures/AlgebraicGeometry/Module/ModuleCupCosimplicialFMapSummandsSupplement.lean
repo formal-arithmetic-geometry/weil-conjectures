@@ -55,8 +55,7 @@ public import Mathlib.Algebra.Homology.Monoidal
 /-! # Cross-scheme naturality of front/back summands
 
 This construction uses only paired cosimplicial objects and natural transformations to pushforward.
-Source: Banerjee, arXiv:1004.1491, §1.1.4, front/back formula; Stacks, Tag 0FKU.
-(blueprint: new-module-cup-cosimplicial-fmap-summands).
+Source: Banerjee, arXiv:1004.1491, §1.1.4; Stacks, Tag 0FKU.
 No Godement construction or resolution property enters the argument.
 -/
 

@@ -26,26 +26,7 @@ namespace AlgebraicGeometry.ProEtale.IntegralFiniteScalar
 open CondensedRing
 
 /-- A specified finite-free short exact point resolution gives the normalized tensor
-comparison, its pullback square, and its equality with the actual direct-image mate.
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/
-det-prop-scalar-six-direct-image.proof.md, finite free/finitely presented paragraph and
-formal properties; parent proof steps 3--7
-(blueprint: lem-sfb-finite-free-scalar-derived-comparison).
-
-Proof: exact monoidal point pullback carries the specified short exact sequence to each
-scheme. The internal/section tensor equivalence and finite-free mono-cokernel theorem
-make its augmented cone a K-flat resolution. On a flat-term K-flat representative Q of
-K, tensoring the augmentation is a quasi-isomorphism; the restricted tensor computation
-identifies its target with restricted derived scalar extension. Descent gives a natural
-beta with the stated ordinary augmentation normalization. Exact geometric pullback
-preserves these K-flat representatives, so naturality of the same augmentation gives
-the pullback square with the prescribed scalar comparison, using its balancing-arrow
-normalization. Transport the scalar and geometric adjunctions to section modules with
-their specified units and counits. The ring-sheaf change-adjunction identity identifies
-the restricted scalar mate with the O-adjunct of the restricted A-adjunct. Substitute
-the pullback square and beta naturality at the geometric counit; the resulting adjunct
-is precisely the displayed projection map. This proves equality of the actual arrows,
-without claiming invertibility of the projection or of gamma. -/
+comparison, its pullback square, and its equality with the actual direct-image mate. -/
 theorem derivedAssertions_of_finite_integral_resolution
     (D : ScalarSixPullbackData.{u}) {Λ Λ' : ScalarSixRing.{u}}
     (a : Λ ⟶ Λ') (S : ShortComplex (PointModules Λ))
@@ -84,21 +65,7 @@ theorem derivedAssertions_of_finite_integral_resolution
 
 /-- Projection is invertible on the pulled-back cone of a map between finite free
 point modules. No exactness of the map or condition on its cokernel is needed.
-Source: current scalar-six direct-image proof, finite free/finitely presented paragraph;
-parent node step 8, Stacks Tag 0944
-(blueprint: lem-sfb-finite-free-scalar-projection).
-
-Proof: the normalized projection transformation, in the coefficient variable, is a
-morphism between exact functors, including the connecting map of every triangle, by
-the projection-mate exactness theorem transported through the section equivalence.
-Its component at the tensor unit is the canonical identity. Additivity gives an
-isomorphism at every finite biproduct of the unit. Exact monoidal point pullback
-preserves the two given finite free identifications. Apply this transformation to the
-cone triangle of S.f[0]; its first two components are invertible, hence its third is
-invertible by the triangle two-out-of-three theorem. This third object is the specified
-monoCokernelComplex. The scalar-first projection is the conjugate by the canonical
-tensor braidings and the point-composition comparison modelPull. Thus its component
-is invertible too, including rank zero and arbitrary unbounded K. -/
+Source: Stacks Tag 0944. -/
 theorem finiteFreeScalarProjection (Λ : ScalarSixRing.{u})
     (S : ShortComplex (PointModules Λ)) (r : ℕ)
     (e₁ : S.X₁ ≅ biproduct (fun _ : Fin r ↦ Mod.regular Λ.X))

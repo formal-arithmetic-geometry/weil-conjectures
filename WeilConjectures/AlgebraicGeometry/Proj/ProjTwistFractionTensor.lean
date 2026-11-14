@@ -12,8 +12,7 @@ import Mathlib.Tactic.Ring
 
 /-! # Scalar extension of one homogeneous fraction piece
 
-Source: Stacks Project, constructions.tex, Tags 01MY and 01N2, standard-open calculation.
-(blueprint: lem-sfb-proj-twist-fraction-tensor).
+Source: Stacks Project, Tags 01MY and 01N2, standard-open calculation.
 -/
 
 @[expose] public section
@@ -26,7 +25,7 @@ open TensorProduct
 namespace AlgebraicGeometry.Proj
 
 /-- The degree-j fraction piece in A_f, constructed as a span of homogeneous fractions.
-Source: Stacks, Tags 01MY and 01N2 (blueprint: lem-sfb-proj-twist-fraction-tensor). -/
+Source: Stacks, Tags 01MY and 01N2. -/
 def twistChartFractionSubmodule
     {R A : Type u} [CommRing R] [CommRing A] [Algebra R A]
     (𝒜 : ℕ → Submodule R A) (n : ℕ) (f : A) (j : ℤ) :
@@ -81,8 +80,7 @@ private lemma nonnegative_offset : 0 ≤ j + (j.natAbs : ℤ) * n := by
 
 include hf hn in
 /-- Every element of the span is a single homogeneous fraction. Common denominators
-preserve its degree. Source: Stacks, Tag 01MY
-(blueprint: lem-sfb-proj-twist-fraction-tensor). -/
+preserve its degree. Source: Stacks, Tag 01MY. -/
 theorem twistChartFraction_representative
     (z : twistChartFractionSubmodule 𝒜 n f j) :
     ∃ (m i : ℕ) (a : A), (i : ℤ) = j + (m : ℤ) * n ∧ a ∈ 𝒜 i ∧
@@ -178,15 +176,7 @@ end Fractions
 
 /-- Scalar extension of the inclusion of a homogeneous fraction piece is injective.
 The map is normalized as coefficient multiplication followed by the localization of ψ.
-Source: Stacks, Tag 01N2, standard-open zero criterion
-(blueprint: lem-sfb-proj-twist-fraction-tensor).
-
-Proof: Put a tensor over a common denominator f^m, with numerator a tensor in one
-graded piece. Its image has numerator β(c). If it vanishes, a power of ψ(f)
-kills β(c). Transporting through β says the transitioned tensor numerator is zero;
-the inclusion of each base-changed graded piece is injective by the direct-sum
-decomposition. The common-denominator transition identity then kills the original
-tensor. This uses the localization relation, without cancellation or flatness. -/
+Source: Stacks, Tag 01N2, standard-open zero criterion. -/
 theorem exists_twistChartFraction_tensor_embedding
     {R S A B : Type u} [CommRing R] [CommRing S] [CommRing A] [CommRing B]
     [Algebra R S] [Algebra R A] [Algebra S B]

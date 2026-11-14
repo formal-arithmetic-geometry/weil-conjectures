@@ -14,7 +14,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 /-! # Finite underlying local models from finite geometric stalks
 
 Source: Stacks Project, Modules on Sites, Definition 093Q; Tag 099Y.
-(blueprint: lem-sp-proetale-finite-underlying-models).
 -/
 
 @[expose] public section
@@ -26,16 +25,7 @@ namespace AlgebraicGeometry.Scheme
 /-- A locally constant module sheaf with finite geometric stalks has objectwise
 finite constant underlying set models.
 
-Source: Stacks Project, Modules on Sites, Definition 093Q; Tag 099Y.
-(blueprint: lem-sp-proetale-finite-underlying-models).
-
-Proof: restrict to constant scalars. The existing finite-local comparison and the
-finite-model theorem give finite fixed-module models on a pro-étale cover of the
-final object. Pull this cover back to the given site object. Restriction to a further
-slice preserves the models, since constant sheafification commutes with localization.
-Finally forget to sets; forgetting modules commutes with constant sheafification.
-Empty covering members can be discarded by the finite-model theorem, including
-when the whole scheme is empty. No conservativity of geometric stalks is used. -/
+Source: Stacks Project, Modules on Sites, Definition 093Q; Tag 099Y. -/
 theorem proEtale_finiteUnderlyingModels_of_locallyConstant
     (X : Scheme.{u}) (A : Type u) [CommRing A] [Finite A]
     (F : proEtaleRingModules X (proEtaleConstantRing X A))

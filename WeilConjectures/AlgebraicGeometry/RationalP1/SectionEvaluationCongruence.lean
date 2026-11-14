@@ -16,8 +16,7 @@ WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteCoefficie
 (G3). All produced terms are built from HEq reflexivity, proof irrelevance, function
 extensionality and congruence theorems. -/
 /-- Equality of dependent function types under heterogeneous equality of families.
-Source: function extensionality (blueprint: lem-sfb-section-evaluation-congruence).
-Proof: eliminate the domain equality and family equality, then use reflexivity. -/
+Source: function extensionality. -/
 theorem sectionEvaluationPiEq {α β : Sort u₁} {P : α → Sort u₂}
     {Q : β → Sort u₂} (h : α = β) (hPQ : HEq P Q) :
     (∀ x, P x) = (∀ x, Q x) := by

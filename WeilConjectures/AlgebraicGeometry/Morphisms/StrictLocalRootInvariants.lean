@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.RootPowerMapInvariants
 /-! # Fixed rings of a strict local root algebra
 
 Source: Stacks Project, Tags 0EYG and 09EV, intermediate-root calculation.
-(blueprint: lem-sbc-strict-local-root-invariants)
 -/
 
 @[expose] public section
@@ -30,8 +29,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The endomorphism of a root algebra sending its root to `zeta * root`.
 Its construction is polynomial evaluation, with no choice of algebra data.
-Source: Stacks Project, Tag 09EV, cyclic intermediate-root calculation.
-(blueprint: lem-sbc-strict-local-root-invariants) -/
+Source: Stacks Project, Tag 09EV, cyclic intermediate-root calculation. -/
 noncomputable def rootRotation (H : Type u) [CommRing H] (h : H) (n : ℕ)
     (ζ : rootsOfUnity n H) :
     AdjoinRoot ((Polynomial.X : Polynomial H) ^ n - Polynomial.C h) →ₐ[H]
@@ -49,8 +47,7 @@ noncomputable def rootRotation (H : Type u) [CommRing H] (h : H) (n : ℕ)
       exact sub_self _)
 
 /-- The actual fixed subalgebra for a subgroup of the root rotations.
-Source: Stacks Project, Tag 09EV, intermediate subextensions.
-(blueprint: lem-sbc-strict-local-root-invariants) -/
+Source: Stacks Project, Tag 09EV, intermediate subextensions. -/
 noncomputable def rootFixedAlgebra (H : Type u) [CommRing H] (h : H) (n : ℕ)
     (K : Subgroup (rootsOfUnity n H)) :
     Subalgebra H (AdjoinRoot ((Polynomial.X : Polynomial H) ^ n - Polynomial.C h)) :=
@@ -58,20 +55,7 @@ noncomputable def rootFixedAlgebra (H : Type u) [CommRing H] (h : H) (n : ℕ)
 
 /-- A subgroup of the root rotations has an intermediate root algebra as its fixed ring.
 
-Source: Stacks Project, Tag 0EYG, final intermediate-field paragraph, and Tag 09EV.
-(blueprint: lem-sbc-strict-local-root-invariants)
-
-Proof: Hensel lifting of the simple residue roots of X^n-1 gives all n roots in H.
-They form a cyclic group of order n. For a subgroup K let r be its order and e its
-index. Lagrange gives r*e=n, e>0 and e dividing n. The monic relation gives the
-H-basis 1,t,...,t^(n-1) of C. A generator zeta of K acts on t^i by zeta^i.
-If r does not divide i, zeta^i-1 has nonzero residue and is a unit in H, so the
-coefficient of t^i in an invariant must vanish. The invariants therefore have
-basis 1,t^r,...,t^((e-1)*r). Evaluation s at t^r defines a map H[s]/(s^e-h)
-to C^K, since (t^r)^e=h. It carries the standard monic basis bijectively to the
-displayed invariant basis and is thus an H-algebra isomorphism. Invert it for
-the orientation below. For n=1 and for the trivial subgroup this is the whole
-root algebra; for the full subgroup it is H, via H[s]/(s-h). -/
+Source: Stacks Project, Tag 0EYG, final intermediate-field paragraph, and Tag 09EV. -/
 theorem strict_local_root_invariants
     (H : Type u) [CommRing H] [IsStrictlyHenselianLocalRing H]
     (h : H) (n : ℕ) (hn : 0 < n ∧ IsUnit (n : H))

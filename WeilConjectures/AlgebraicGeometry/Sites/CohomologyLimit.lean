@@ -23,16 +23,15 @@ comes from some `Xᵢ`, and a class on `Xᵢ` which dies on `X` dies on some `X�
 
 The proof follows the blueprint: a class on `X` is the class of a cocycle on a qcqs hypercover of
 `X` (`AlgebraicGeometry.Scheme.exists_cohomologyClass_eq_of_isQcqsHypercover`); the truncation of
-the hypercover in degrees `≤ q + 1` descends to some `Xᵢ`
-(blueprint `corollary-cohomology-pro-etale-affine`), and so do the cocycle and the cocycle
-condition by continuity of sections (blueprint `proposition-comparison-morphism-inverse-image--3`).
+the hypercover in degrees `≤ q + 1` descends to some `Xᵢ`, and so do the cocycle and the cocycle
+condition by continuity of sections.
 For injectivity one descends in the same way a refinement on which the cocycle becomes a coboundary
 (`AlgebraicGeometry.Scheme.exists_isCoboundary_of_isQcqsHypercover`), the refinement map and the
 primitive.
 
 ## Main definitions
 
-- `AlgebraicGeometry.Etale.cohomologyRestrictOver`: for a morphism `f : Y ⟶ Z` of schemes over
+- `AlgebraicGeometry.Etale.cohomologyRestrictOver`: for a morphism `f: Y ⟶ Z` of schemes over
   `S`, the restriction map `Hᵠ(Z, F|_Z) ⟶ Hᵠ(Y, F|_Y)`.
 -/
 
@@ -171,8 +170,8 @@ variable {I : Type u} [SmallCategory I] [IsCofiltered I] (D : I ⥤ Over S)
 
 include hc
 
-/-- **Continuity of étale cohomology, surjectivity** (blueprint
-`corollary-cohomology-pro-etale-affine`): every cohomology class of the pullback of `F` to
+/-- **Continuity of étale cohomology, surjectivity**: every cohomology class of the pullback of `F`
+to
 the limit `X = lim Xᵢ` comes from some `Xᵢ`. -/
 @[stacks 09YQ]
 theorem exists_cohomologyRestrictOver_eq_of_isLimit (q : ℕ)
@@ -264,8 +263,8 @@ theorem exists_cohomologyRestrictOver_eq_of_isLimit (q : ℕ)
   rw [ModuleSheaf.restrictAlong_congr _ _ _ _ _ _ hm]
 
 -- the descent of the refinement, the cocycle and its primitive is a long elaboration
-/-- **Continuity of étale cohomology, injectivity** (blueprint
-`corollary-cohomology-pro-etale-affine`): a cohomology class of the pullback of `F` to some
+/-- **Continuity of étale cohomology, injectivity**: a cohomology class of the pullback of `F` to
+some
 `Xᵢ` which vanishes on the limit `X = lim Xᵢ` vanishes on some `Xⱼ`, `j ⟶ i`. -/
 @[stacks 09YQ]
 theorem exists_cohomologyRestrictOver_eq_zero_of_isLimit (q : ℕ) (i : I)

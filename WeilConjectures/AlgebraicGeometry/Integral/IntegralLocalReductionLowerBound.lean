@@ -208,12 +208,7 @@ private theorem lower_bound_of_coefficient_sequence
 
 /-- Reducing a lower-bounded complex by a completed quotient for a principal ideal generated
 by a nonzero element of a domain loses at most one degree.
-Source: Stacks Project, sites-modules.tex, Tag 093M; sites-cohomology.tex, Tag 06YU
-(blueprint: lem-weil-pbc-integral-local-reduction-lower-bound).
-Proof: as for `integralLocalReduction_isGE`: the two-term free presentation of the
-quotient by multiplication with the nonzero generator power is realized over the
-completed coefficients, pulled back exactly, and its long exact cohomology sequence
-bounds the reduction. -/
+Source: Stacks Project, Tag 093M; Tag 06YU. -/
 theorem integralLocalReduction_isGE_of_principal
     {A : Type (u + 1)} [CommRing A] [IsDomain A] (d : AdicCoefficientDatum A)
     (π : A) (hI : d.ideal = Ideal.span {π}) (hπ : π ≠ 0)
@@ -234,22 +229,7 @@ theorem integralLocalReduction_isGE_of_principal
       exact map_one _) hz' hs' (DerivedCategory.Q.obj L) a
 
 /-- Reducing a lower-bounded complex by a completed DVR quotient loses at most one degree.
-Source: Stacks Project, sites-modules.tex, Tag 093M; sites-cohomology.tex, Tag 06YU;
-blueprint order 1429, proof of the local-model cohomological bound.
-(blueprint: lem-weil-pbc-integral-local-reduction-lower-bound).
-
-Proof: the ordinary quotient A/(varpi^(n+1)) has the short exact free presentation
-A --varpi^(n+1)--> A --> A/(varpi^(n+1)). Exact constant sheafification and flatness
-of the completed coefficient algebra give the corresponding presentation over B.
-Exact inverse image along g preserves it. The regular-module inverse-image isomorphism
-and its coefficient-restriction version identify the first two terms with g⁻¹B and the
-third with g⁻¹R_n. Their section normalization and naturality of the ring adjunction unit
-identify the quotient map with the canonical coefficient map, which sends 1 to 1.
-The normalized two-term scalar-extension triangle therefore applies to Q(L). In degree
-q<a-1 its long exact cohomology sequence has zero outer terms H^q(L) and H^(q+1)(L).
-The middle cohomology is zero after exact scalar restriction. Restriction does not change
-the underlying abelian sheaf, so faithful forgetting reflects zero and gives the result.
-This includes zero complexes, the empty scheme, and the first positive quotient. -/
+Source: Stacks Project, Tag 093M; Tag 06YU. -/
 theorem integralLocalReduction_isGE
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

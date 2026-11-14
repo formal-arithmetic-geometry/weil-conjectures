@@ -417,30 +417,8 @@ private theorem coefficient_unit_normalization
 /-- A normalized ordinary open triangle satisfies the derived unit/counit equation.
 No properness, finiteness, or invertibility of the ordinary transformation is required.
 
-Source: Stacks Project, More on Etale Cohomology, Tag 0F7B, proof of
-lemma-shriek-proper-and-open, specialized to a triangle fixing the open;
-WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusAdjunction.lean,
-`Adjunction.derivedPlus_counit_app_fac`.
-(blueprint: lem-cbc-proper-open-derived-unit-normalization)
-
-Proof:
-1. Precompose the ordinary normalization by j₂! of the inverse identity-direct-image
-comparison. The left unit law for the direct-image compositor and naturality of
-j₂! → j₂* show that the resulting map g has composite with p*(j₁! → j₁*) and
-j₁*p* → j₂* equal to j₂! → j₂*.
-2. Transpose along j₂! ⊣ j₂^* and along p^* ⊣ p_*. Conjugacy of the inverse-image and
-direct-image compositors rewrites this equality as the displayed unit equation
-before deriving. The identity characterizing j! → j* says its double transpose is
-identity; the invertible open-adjunction unit and open direct-image counit cancel.
-3. Apply the exact functors termwise to bounded-below complexes and localize. The
-localization comparison isomorphisms carry both open-adjunction units and the
-inverse-image compositor to their specified derived versions. The counit factorization
-`derivedPlus_counit_app_fac` carries the ordinary p-adjunction counit to the canonical
-derived counit. The right-derived base-change factorization and the identity-direct-image
-comparison identify the resulting map with the two factors displayed below. Equality of
-natural transformations is checked after Qh using `Localization.natTrans_ext`. Only
-exact-functor comparison isomorphisms are canceled, never a right-derived comparison unit.
-This argument also applies to the empty open and the zero coefficient ring. -/
+Source: Stacks Project, More on Etale Cohomology, Tag 0F7B, specialized to a triangle fixing the
+open. -/
 theorem properOpenDerivedUnitNormalization
     (Λ : Type (u + 1)) [CommRing Λ] {T₁ T₂ X : Scheme.{u}}
     (p : T₁ ⟶ T₂) (j₁ : X ⟶ T₁) (j₂ : X ⟶ T₂)

@@ -24,19 +24,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- A section killed on a principal thickening is locally a multiple of its defining power.
 
 Source: Stacks Project, Tag 01QQ (affine closed subschemes), and Tag 0H3E
-(the ordinary quotient sheaf in the comparison).
-(blueprint: lem-sbc-principal-thickening-local-division)
-
-Proof: The kernel of R to R/(g) is the ideal (g), whose (k+1)st power is
-(g^(k+1)). The pullback defining openThickening is the closed subscheme of
-W cut out by the restriction of this ideal. On an affine open of W its
-structure sheaf is the quotient by that principal ideal, so the kernel
-on sections consists precisely of multiples of the restricted generator
-power. Cover W by affine opens and restrict the assumed zero section to
-each of them. At any point choose one such affine open and its coefficient.
-Points outside the closed subscheme are included: the ideal is the unit
-ideal there. The empty open requires no choices, and g=0 gives the zero
-kernel and the zero local coefficient. -/
+(the ordinary quotient sheaf in the comparison). -/
 theorem principal_thickening_local_division
     (R : Type u) [CommRing R] (g : R) (W : (Spec (.of R)).Opens)
     (k : ℕ) (a : Γ(W.toScheme, ⊤))

@@ -32,8 +32,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # Evaluation and transpose for normalized scalar data
 
-Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks 07A4 and 07A6.
-(blueprint: lem-coef-semilinear-scalar-evaluation-transpose)
+Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks 07A4 and 07A6
 -/
 
 @[expose] public noncomputable section
@@ -116,14 +115,7 @@ variable {A : Type a} [Category.{av} A] {B : Type b} [Category.{bv} B]
   {QA : A ⥤ AD} {QB : B ⥤ BD} {QC : C ⥤ CD} {QD : D ⥤ DD}
 
 /-- A derived mate is computed by the ordinary mate and the normalized derived
-comparisons. Source: Stacks 0FND and 09T5
-(blueprint: lem-pur-derived-mate-comparison).
-Proof: apply the second derived Hom bijection and postcompose with the invertible
-right factorization. The mate transpose identity moves the first comparison through
-the first adjunction. Its normalization, the right-square comparison, and naturality
-of the G factorization reduce that side to the ordinary unit followed by the ordinary
-square. The ordinary mate identity identifies this with the second ordinary transpose.
-The second normalization gives the other side, and both cancellations are injective. -/
+comparisons. Source: Stacks 0FND and 09T5. -/
 private theorem mate_comparison_at
     (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂) (ad₁ : LD₁ ⊣ RD₁) (ad₂ : LD₂ ⊣ RD₂)
     (ε₁ : QA ⋙ LD₁ ⟶ L₁ ⋙ QB) (ε₂ : QC ⋙ LD₂ ⟶ L₂ ⋙ QD)
@@ -203,12 +195,7 @@ private theorem evaluation_preservesKFlat (n : ℕ)
     (rings.{c, v, max c v r} J B τ) n P hP hf).1
 
 /-- The evaluation comparison and its normalized adjunction transpose.
-Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks 07A4 and 07A6
-(blueprint: lem-coef-semilinear-scalar-evaluation-transpose).
-Proof: evaluate the ordinary change-of-rings tensor on each sequence level. The
-sectionwise tensor comparison is the identity on pure tensors. Resolve by K-flat
-complexes with flat terms, transport the comparison through localization, and use
-the mate identity for the restriction adjunction. This gives both fields below. -/
+Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks 07A4 and 07A6. -/
 structure ScalarEvaluationData
     (F : ℕ → Sheaf J CommRingCat.{max c v r})
     (σ : ∀ n : ℕ, F (n + 1) ⟶ F n) (α : ∀ n : ℕ, B n ⟶ F n)
@@ -229,11 +216,7 @@ structure ScalarEvaluationData
 -- Matching the normalized mate equations compares several large derived-functor types.
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- Existence of the level evaluation comparison normalized by the restriction mate.
-Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks 07A4 and 07A6
-(blueprint: lem-coef-semilinear-scalar-evaluation-transpose).
-Proof: the ordinary identity-on-sections tensor map is an isomorphism on each level;
-K-flat resolutions and localization preserve it. The displayed transpose is then the
-mate under the two derived adjunctions, and the mate equation proves its formula. -/
+Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks 07A4 and 07A6. -/
 theorem semilinearScalarEvaluationTranspose
     (F : ℕ → Sheaf J CommRingCat.{max c v r})
     (σ : ∀ n : ℕ, F (n + 1) ⟶ F n) (α : ∀ n : ℕ, B n ⟶ F n)

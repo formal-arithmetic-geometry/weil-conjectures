@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
 # Comparing module specialization with strict-local abelian specialization
 
 Source: Stacks Project, Tags 0GJ2 and 0GKD, the geometric-germ construction.
-(blueprint: lem-weil-pbc-module-specialization-abelian-iso)
 -/
 
 @[expose] public section
@@ -123,22 +122,7 @@ private theorem strictLocal_germ
 
 /-- An abelian identification transports invertible strict-local specialization to
 bijective specialization on module stalks.
-Source: Stacks Project, Tags 0GJ2 and 0GKD; Tag 0GKV, case (a), coefficient comparison.
-(blueprint: lem-weil-pbc-module-specialization-abelian-iso)
-
-Proof: The forgetful functor on module categories preserves filtered colimits, so the
-canonical stalk comparison identifies the abelian stalk of the forgotten sheaf with
-the underlying abelian group of its module stalk. On every representative affine
-pointed neighbourhood, the uniquely characterized module specialization sends a germ
-to the germ along the strict-localization limit projection. The abelian strict-local
-specialization has the same formula: compose the defining restriction formula with
-the germ at t, then apply the inverse-image stalk germ identity. Naturality of germs
-in the given sheaf isomorphism e identifies the two maps after conjugating by the
-stalk comparisons and the stalk maps of e. These equalities determine the maps,
-since the representative affine neighbourhoods are initial and their germs form a
-colimit cocone. Thus the underlying module map is conjugate to an isomorphism of
-abelian groups. Its underlying function is bijective. No Noetherian, finite-stalk,
-properness or relative-dimension hypothesis is needed. -/
+Source: Stacks Project, Tags 0GJ2 and 0GKD; Tag 0GKV, case (a), coefficient comparison. -/
 theorem Etale.bijective_moduleSpecialization_of_abelianIso
     {S : Scheme.{u}} {R : Type (u + 1)} [CommRing R]
     (M : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} R))

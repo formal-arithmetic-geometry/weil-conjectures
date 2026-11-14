@@ -159,7 +159,6 @@ import WeilConjectures.CategoryTheory.InverseMateEquivalence
 The unchanged native declarations formerly in NativeEncodingDerivedOperations are
 separated from its Weil-sheaf imports to make them available before native finiteness.
 Source: Bhatt--Scholze, Definitions 6.8.1 and 6.8.3.
-(blueprint: lem-sf-native-adic-encoding-ordinary-operations).
 -/
 
 @[expose] public noncomputable section
@@ -172,8 +171,7 @@ open scoped CategoryTheory.Obj TensorProduct
 namespace AlgebraicGeometry.ProEtale.NativeEncoding
 
 /-- The normalized coefficient isomorphism used in the ring-realization theorem.
-Source: Bhatt--Scholze 6.8.1--6.8.3; LocallyFiniteCoefficientRingRealization.lean.
-(blueprint: lem-sf-native-adic-encoding-ordinary-operations). -/
+Source: Bhatt--Scholze 6.8.1--6.8.3; LocallyFiniteCoefficientRingRealization.lean. -/
 abbrev coefficientIso (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) :
     condensedRingObj (Profinite.padicAlgClRingObj l) T ≅
       (weilCoefficientsForgetAb l T).obj (adicConstantSheaf l T) :=
@@ -181,10 +179,7 @@ abbrev coefficientIso (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) :
     padicAlgClSheafIsoAdicConstantSheaf T l
 
 /-- The same ring isomorphism respects multiplication and the unit.
-Source: Bhatt--Scholze 6.8.1--6.8.3; the two existing ring comparisons.
-(blueprint: lem-sf-native-adic-encoding-ordinary-operations).
-Proof: the first factor is a ring-object isomorphism. The second is the native
-ring realization; multiplicativity and preservation of one pass to the composite. -/
+Source: Bhatt--Scholze 6.8.1--6.8.3; the two existing ring comparisons. -/
 @[instance] theorem coefficientIsoMon (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) :
     IsMonHom (coefficientIso l T).hom := by
   change IsMonHom
@@ -194,18 +189,14 @@ ring realization; multiplicativity and preservation of one pass to the composite
 
 /-- Forget vector scalars in the native action and restrict it along theta.
 The lax tensorator imposes precisely the original balanced vector-space action.
-Source: Bhatt--Scholze 6.8.1--6.8.3; native AdicSheaf.forgetAb.
-(blueprint: lem-sf-native-adic-encoding-ordinary-operations). -/
+Source: Bhatt--Scholze 6.8.1--6.8.3; native AdicSheaf.forgetAb. -/
 def encoding (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) :
     AdicSheaf l T ⥤ Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj l) T) :=
   AdicSheaf.forgetAb l T ⋙ Mod.comap (coefficientIso l T).hom
 
 /-- The encoding is additive, with its existing action on underlying morphisms.
-Source: Bhatt--Scholze 6.8.1--6.8.3; native lax-monoidal scalar forgetting.
-(blueprint: lem-sf-native-adic-encoding-ordinary-operations).
-Proof: both lax-monoidal scalar forgetting and scalar restriction preserve addition
-of underlying maps; their composite does too. -/
+Source: Bhatt--Scholze 6.8.1--6.8.3; native lax-monoidal scalar forgetting. -/
 @[instance] theorem encodingAdditive (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) :
     (encoding l T).Additive := by
   constructor
@@ -216,17 +207,7 @@ of underlying maps; their composite does too. -/
   rfl
 
 /-- The specified encoding is an equivalence, rather than an arbitrary equivalence of hearts.
-Source: Bhatt--Scholze 6.8.1--6.8.3; Stacks 03EK.
-(blueprint: lem-sf-native-adic-encoding-ordinary-operations).
-
-Proof: use the sectionwise equivalence of lem-sf-finite-span-module-derived-comparison.
-For a section module, restrict its action to constant functions to obtain its Omega-vector
-space structure. Associativity makes the original action balanced over constant Omega.
-The tensor-sheafification universal property of def-pur-sheaf-tensor-product gives the
-native action. A module-linear map commutes with constant scalars and is vector-linear.
-The unit law says that constant functions act as the original vector scalars, proving
-both inverse identities on objects and morphisms. Finally transport along theta using
-Mod.comapEquivalenceOfIsIso. Empty objects and zero modules use these same formulas. -/
+Source: Bhatt--Scholze 6.8.1--6.8.3; Stacks 03EK. -/
 @[instance] theorem encoding_isEquivalence (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) :
     (encoding l T).IsEquivalence := by
   have : (AdicSheaf.forgetAb l T).IsEquivalence :=
@@ -237,25 +218,17 @@ Mod.comapEquivalenceOfIsIso. Empty objects and zero modules use these same formu
   infer_instance
 
 /-- The equivalence with the specified forward encoding; its inverse is determined by it.
-Source: Bhatt--Scholze 6.8.1--6.8.3; Stacks 03EK.
-(blueprint: lem-sf-native-adic-encoding-ordinary-operations). -/
+Source: Bhatt--Scholze 6.8.1--6.8.3; Stacks 03EK. -/
 def equivalence (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) :=
   (encoding l T).asEquivalence
 
 /-- The localization of this exact encoding on ordinary unbounded derived categories.
-Source: Stacks 015F; native right-derived exact-functor interface.
-(blueprint: lem-sf-native-adic-encoding-ordinary-operations). -/
+Source: Stacks 015F; native right-derived exact-functor interface. -/
 abbrev derivedEncoding (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) :=
   (encoding l T).mapDerivedCategory
 
 /-- Exactness and the unbounded derived equivalence, including preservation and reflection
-of K-injectivity. Source: Stacks 015F and 070I.
-(blueprint: lem-sf-native-adic-encoding-ordinary-operations).
-Proof: the equivalence and its inverse preserve kernels and cokernels, hence acyclicity.
-For an acyclic A, the termwise equivalence identifies Hom_K(A, E I) with Hom_K(G A, I).
-The null-homotopy test gives preservation; applying the inverse gives reflection.
-The termwise unit and counit descend along quasi-isomorphisms and prove the derived
-functor is an equivalence. This uses neither boundedness nor constructibility. -/
+of K-injectivity. Source: Stacks 015F and 070I. -/
 theorem encoding_exact_derived (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) :
     PreservesFiniteLimits (encoding l T) ∧ PreservesFiniteColimits (encoding l T) ∧
       (derivedEncoding l T).IsEquivalence ∧
@@ -487,15 +460,7 @@ private theorem inverseMate_mate
     ((mateEquiv adj₁ adj₂).apply_symm_apply β)
 
 /-- The actual underived direct image and ringed module pullback are identified.
-Source: Stacks 03D6--03D7; native Adic/Module.lean.
-(blueprint: lem-sf-native-adic-encoding-ordinary-operations).
-Proof: on direct images the action is precomposition of functions. The coefficient
-naturality of lem-sf-locally-finite-coefficient-ring-realization identifies that action
-with the internal R-action, giving an isomorphism which is the identity on sections.
-The pullback isomorphism is its adjunction mate, hence identifies the actual
-sheafified tensor pullback with extension along the forward coefficient map.
-The cartesian-coefficient theorem makes it exact. This argument applies to every
-scheme map, in particular geometric Frobenius and its inverse. -/
+Source: Stacks 03D6--03D7. -/
 theorem encoding_ordinary_operations (l : ℕ) [Fact l.Prime]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃ p : adicLowerStar l f ⋙ encoding l Y ≅
@@ -531,21 +496,18 @@ theorem encoding_ordinary_operations (l : ℕ) [Fact l.Prime]
       (TwoSquare.mk _ _ _ _ p.hom)
 
 /-- The identity-on-sections direct-image comparison. Its normalization determines it uniquely.
-Source: Stacks 03D6--03D7; native Module.lean.
-(blueprint: lem-sf-native-adic-encoding-ordinary-operations). -/
+Source: Stacks 03D6--03D7; native Module.lean. -/
 def pushComparison (l : ℕ) [Fact l.Prime] {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   Classical.choose (encoding_ordinary_operations l f)
 
 /-- The ordinary pullback comparison, uniquely fixed as the mate of pushComparison.
-Source: Stacks 03D7; native module adjunction.
-(blueprint: lem-sf-native-adic-encoding-ordinary-operations). -/
+Source: Stacks 03D7; native module adjunction. -/
 def pullComparison (l : ℕ) [Fact l.Prime] {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   Classical.choose (Classical.choose_spec (encoding_ordinary_operations l f)).2
 
 /-- Canonical right derivation of the normalized ordinary direct-image comparison.
 All factors are universal derived comparisons, computed using the same K-injectives.
-Source: Stacks 070I and 070Y; native RightDerivedFunctor/MapDerivedCategory.lean.
-(blueprint: lem-sf-native-adic-encoding-ordinary-operations). -/
+Source: Stacks 070I and 070Y. -/
 def derivedPushComparison (l : ℕ) [Fact l.Prime] {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (adicLowerStar l f).rightDerivedFunctor ⋙ derivedEncoding l Y ≅
       derivedEncoding l X ⋙ CondensedRing.moduleObjectDerivedPushforward

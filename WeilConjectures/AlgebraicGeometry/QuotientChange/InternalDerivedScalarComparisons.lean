@@ -14,9 +14,7 @@ public import WeilConjectures.AlgebraicGeometry.InternalDerivedScalarComparisons
 
 /-! # Integral quotient scalar comparison for unbounded direct image
 
-Source: blueprint main-20261015, proper-base-change integral proof, paragraphs (1), (3);
-Stacks Project, Tags 093M, 0D6D, 0D6E, 07A6 and 0944
-(blueprint: def-sfb-internal-derived-scalar-comparisons).
+Source: Stacks Project, Tags 093M, 0D6D, 0D6E, 07A6 and 0944.
 
 Positive quotient levels are indexed by n + 1. All categories are ordinary unbounded
 derived categories of the recorded internal module objects. No completion is applied.
@@ -75,7 +73,7 @@ variable {Λ Λ' Λ'' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [MonObj Λ''] [IsCommMonObj Λ'']
 
 /-- The ordinary balanced composition, including coefficient-map composition.
-Source: Stacks 0D6D (blueprint: def-sfb-internal-derived-scalar-comparisons). -/
+Source: Stacks 0D6D. -/
 def ordinaryComp (a : Λ ⟶ Λ') [IsMonHom a]
     (b : Λ' ⟶ Λ'') [IsMonHom b] (c : Λ ⟶ Λ'') [IsMonHom c]
     (h : a ≫ b = c) (T : Scheme.{u}) :
@@ -90,7 +88,7 @@ def ordinaryComp (a : Λ ⟶ Λ') [IsMonHom a]
 
 /-- The universal-counit characterization of successive scalar balancing. On K-flat
 representatives the ordinary comparison sends (x tensor s) tensor t to x tensor bar(s)t.
-Source: Stacks 0D6D, 0G7E (blueprint: def-sfb-internal-derived-scalar-comparisons). -/
+Source: Stacks 0D6D, 0G7E. -/
 def SuccessiveNormalized (a : Λ ⟶ Λ') [IsMonHom a]
     (b : Λ' ⟶ Λ'') [IsMonHom b] (c : Λ ⟶ Λ'') [IsMonHom c]
     (h : a ≫ b = c) (T : Scheme.{u})

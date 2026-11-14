@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearOrdinaryDir
 /-! # Direct image and transposition on strict systems
 
 Source: Zheng Construction 4.1; Stacks 03D2 and 03DA.
-(blueprint: lem-coef-ordinary-direct-system).
 -/
 
 @[expose] public noncomputable section
@@ -185,8 +184,7 @@ variable (P : OrdinaryInverseSystem.{c, v, r} J B τ J' uInv F σ I)
   (a : ∀ n, (I n).modules ⊣ V n)
 
 /-- The componentwise direct image and the restricted levelwise Hom bijection.
-Source: Zheng Construction 4.1; Stacks 03D7.
-(blueprint: lem-coef-ordinary-direct-system). -/
+Source: Zheng Construction 4.1; Stacks 03D7. -/
 structure OrdinaryDirectSystem where
   push : Systems.{c, v, max c v r} J' F σ ⥤ Systems.{c, v, max c v r} J B τ
   component : ∀ n,
@@ -207,8 +205,7 @@ structure OrdinaryDirectSystem where
 /-- The functor and component identifications used by an ordinary direct system.
 The local mate condition specifies the horizontal maps: each two-component square
 commutes exactly when its transpose commutes. It does not assert a global Hom
-bijection or assembly of morphisms. Source: Zheng Construction 4.1; Stacks 03D7.
-(blueprint: lem-coef-ordinary-direct-system-core). -/
+bijection or assembly of morphisms. Source: Zheng Construction 4.1; Stacks 03D7. -/
 structure OrdinaryDirectSystemCore where
   push : Systems.{c, v, max c v r} J' F σ ⥤ Systems.{c, v, max c v r} J B τ
   component : ∀ n,
@@ -248,32 +245,7 @@ structure OrdinaryDirectSystemHomData
         (evaluation.{c, v, max c v r} J' F σ n).map f)
 
 /-- The componentwise reassembly of the direct image.
-Source: Zheng Construction 4.1, paragraph before Lemma 4.10; Stacks 03D7.
-(blueprint: lem-coef-ordinary-direct-system-core).
-
-Proof: at level n use V_n applied to the nth vertical component. For n ≤ m,
-forget the old horizontal map to a map of set sheaves, apply uPush, and conjugate
-by eV_m and eV_n. Since uPush is a right adjoint it preserves products. Transport
-addition and scalar multiplication using these product comparisons and the adjunct
-of the coefficient ring map. The normalization ha identifies this transported
-module structure with the supplied V_n: it identifies all adjunct linear maps,
-and hence their operation graphs. Iterating hI identifies the scalar actions at
-m and n, so the conjugated horizontal map is B_m-linear after scalar restriction.
-Functoriality of uPush and cancellation of eV prove the identity and composition
-laws. On a system morphism apply V_n at level n; naturality of eV proves the
-horizontal squares. Reassemble these vertical sheaves with the specified
-horizontal maps. The presheaf is a sheaf because covers are vertical; gluing and
-separatedness hold in each component. Keep the same component carriers, so the
-evaluation isomorphisms are identity on sections.
-
-For two component maps, apply ha at both levels and use naturality of adjSet to
-transpose their horizontal square. The equation P.transition and the identity
-P.restriction_underlying identify its inverse-image edge with uInv of the old
-transition. The horizontal map constructed above identifies its direct-image
-edge with uPush of the other transition. The set adjunction is a bijection, so
-the two squares commute equivalently. Faithfulness of the underlying module
-functors gives transition_mate. This is a local assertion about two component
-maps; no global assembly of maps or global Hom equivalence is used. -/
+Source: Zheng Construction 4.1, paragraph before Lemma 4.10; Stacks 03D7. -/
 theorem ordinaryDirectSystem_core_exists [PreservesFiniteLimits uInv]
     (hI : ∀ n,
       uInv.map ((sheafCompose J (CategoryTheory.forget CommRingCat.{max c v r})).map (τ n)) ≫
@@ -316,20 +288,7 @@ private def systemLevelHomEquiv
   right_inv g := by simp [Category.assoc]
 
 /-- The component Hom bijection for an assembled ordinary direct image.
-Source: Zheng Construction 4.1 and Stacks 03D7.
-(blueprint: lem-coef-ordinary-direct-system-hom-data).
-
-Proof: assemble a compatible family of component module-sheaf maps by taking its
-nth component at (n,U). Factor every sequence-site arrow into a vertical arrow
-and a horizontal arrow. Component naturality handles the vertical factor and
-the compatibility equation handles the horizontal factor. The evaluation scalar
-identity gives linearity. Thus maps of systems are exactly compatible component
-families, and evaluation jointly detects equality. Conjugate each level Hom
-equivalence by the component isomorphisms of P and K. The local mate condition
-of K transports horizontal compatibility in both directions, so both transposed
-families assemble. Their inverse laws hold at every component, hence globally.
-Evaluation of the forward map followed by K.component.hom cancels the inverse
-component isomorphism and gives homEquiv_component. -/
+Source: Zheng Construction 4.1 and Stacks 03D7. -/
 theorem ordinaryDirectSystem_homData_exists
     (K : OrdinaryDirectSystemCore.{c, v, r} J B τ J' uInv F σ I P V a) :
     Nonempty (OrdinaryDirectSystemHomData.{c, v, r} J B τ J' uInv F σ I P V a K) := by
@@ -387,25 +346,7 @@ theorem ordinaryDirectSystem_homData_exists
 /-- Assemble right adjoints on systems from the compatible inverse-image transitions.
 This asserts the system construction and its Hom bijection; its naturality, adjunction,
 additivity and unit equations are proved by the caller.
-Source: Zheng Construction 4.1, paragraph before Lemma 4.10; Stacks 03D7.
-(blueprint: lem-coef-ordinary-direct-system).
-
-Proof: identify module sheaves on the sequence site with strict systems by restriction
-to the vertical slices and reassembly. At level n put V_n(N_n). For n ≤ m, apply uPush
-to the underlying horizontal map of N and conjugate it by eV_m and eV_n. The operation
-diagrams for direct image and the compatible coefficient square make this map linear
-over B_m. The normalization
-ha identifies these operations with the specified right adjoints: transposition of
-linear maps is the given set-sheaf transposition. Naturality of eV and functoriality
-of uPush prove the strict identity and composition laws. On system morphisms use V_n at every
-level; the same naturality proves compatibility with the transitions. Reassemble using
-exactly these component modules, so the evaluation isomorphism is identity on sections.
-Apply each level adjunction to a family of component maps. The defining mate equation
-for the new transitions says precisely that the transposed family commutes with the
-old transitions if and only if the original family commutes with P.transition.
-Restriction of the product of level Hom equivalences to these compatible families
-gives the asserted bijection; its inverse laws hold at every level, hence globally
-by sectionwise extensionality. This construction gives homEquiv_component verbatim. -/
+Source: Zheng Construction 4.1, paragraph before Lemma 4.10; Stacks 03D7. -/
 theorem ordinaryDirectSystem_exists [PreservesFiniteLimits uInv]
     (hI : ∀ n,
       uInv.map ((sheafCompose J (CategoryTheory.forget CommRingCat.{max c v r})).map (τ n)) ≫

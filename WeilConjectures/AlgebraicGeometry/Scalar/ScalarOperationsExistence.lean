@@ -24,26 +24,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   (τ : ∀ n : ℕ, B (n + 1) ⟶ B n)
 
 /-- Normalized coefficient extension on semilinear systems.
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 06YY, 07A4, 07A6.
-(blueprint: lem-coef-semilinear-scalar-operations).
-
-Proof: Regard the compatible coefficient map as a map of commutative ring sheaves on
-ℕ × C with its vertical topology. Choose the normalized derived change-of-rings model
-for this map and for each level map. Evaluation of ordinary scalar restriction is the
-identity on section carriers. Evaluation has a right coextension: its value at (m,U)
-is the product of copies of M(U) indexed by PLift(n ≤ m), with scalars restricted along
-the horizontal ring map. The mate of the restriction comparison under these coextension
-adjunctions is identity on sections, hence invertible. Iterating mates proves that the
-ordinary extension comparison is invertible and fixes its scalar-adjunction transpose.
-Resolve a sequence-site complex by a K-flat complex with flat terms. Exact evaluation
-carries this representative to a K-flat complex at each level: testing an acyclic level
-complex is equivalent, via finite singleton extension and the tensor projection formula,
-to testing an acyclic sequence complex. Both scalar models therefore compute on the
-same resolving representatives. Localize the ordinary comparison, using the canonical
-exact-evaluation factors. Its normalized derived mate is invertible on those
-representatives and hence on all derived objects by naturality along resolutions.
-The derived-mate transpose identity gives exactly transpose_evaluation. This constructs
-all four fields of ScalarSystems, without flatness of any coefficient map. -/
+Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 06YY, 07A4, 07A6. -/
 theorem semilinearScalarOperations
     (F : ℕ → Sheaf J CommRingCat.{max c v r})
     (σ : ∀ n : ℕ, F (n + 1) ⟶ F n) (α : ∀ n : ℕ, B n ⟶ F n)

@@ -277,7 +277,7 @@ noncomputable abbrev finitePresentationDescentModels :
 noncomputable abbrev finitePresentationDescentStage : I :=
   ((finitePresentationDescentModels hc g).relStage hc).left
 
-/-- Blueprint `theorem-nagata-s-compactification-theorem--1`: Finite-presentation descent
+/-- Finite-presentation descent
 construction. The scheme `X^desc_{λ_rel}`, glued from the valid relative datum
 `R_{X,λ_rel}` of the selected presentation. -/
 noncomputable abbrev finitePresentationDescent : Scheme.{u} :=

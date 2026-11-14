@@ -95,9 +95,7 @@ public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 /-!
 # Reconstruction of a uniform local tower
 
-Source: blueprint sec-proper-base-change/sk-thm-properbasechange, order 1251;
-Stacks Tags 099M, 099L, 09C7, 09C0
-(blueprint: lem-weil-pbc-reconstruction-uniform-tower).
+Source: Stacks Tags 099M, 099L, 09C7, 09C0.
 The auxiliary constructions keep the actual inverse-image coefficients on local models.
 
 ## Main statements
@@ -116,11 +114,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open scoped TensorProduct ChangeOfRings
 namespace AlgebraicGeometry.Scheme
 
-/-- Strict module towers are Grothendieck, retaining the small pro-etale site sizes.
-Source: blueprint order 1251 (blueprint: lem-weil-pbc-reconstruction-uniform-tower).
-Proof: replace the site by a small skeleton in universe u+1, apply the small module
- diagram Grothendieck theorem, and transport the structure back along the equivalence.
-Kernels, colimits, exactness and generators are invariant under that equivalence. -/
+/-- Strict module towers are Grothendieck, retaining the small pro-etale site sizes. -/
 @[instance] theorem uniformTowers_grothendieck (X : Scheme.{u})
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :
     IsGrothendieckAbelian.{u + 1} (pbcTowers X R) := by
@@ -152,8 +146,7 @@ Kernels, colimits, exactness and generators are invariant under that equivalence
 variable {X : Scheme.{u}} {A : Type (u + 1)} [CommRing A]
   (d : AdicCoefficientDatum A)
 
-/-- A retained witness of the definition's common window, stratification, covers and models.
-Source: blueprint order 1251 (blueprint: lem-weil-pbc-reconstruction-uniform-tower). -/
+/-- A retained witness of the definition's common window, stratification, covers and models. -/
 structure UniformAdicTowerData (M : AdicTower X d)
     (strata : Stratification X) where
   lower : ℤ
@@ -172,8 +165,7 @@ variable (Y : Scheme.{u})
   (π : (Functor.const ℕᵒᵖ).obj B ⟶ R)
 
 /-- Ordinary quotient reduction with the integral coefficient action restored.
-This applies also to the inverse-image coefficient diagram on a stratum cover.
-Source: blueprint orders 1239 and 1250 (blueprint: lem-weil-pbc-reconstruction-uniform-tower). -/
+This applies also to the inverse-image coefficient diagram on a stratum cover. -/
 def localReductionLevel (n : ℕ) : pbcModules Y B ⥤ pbcModules Y B :=
   pbcExtend (π.app (op n)) ⋙ pbcRestrict (π.app (op n))
 
@@ -245,11 +237,7 @@ private theorem localTensorSection_ext
   dsimp only [pbcTensorSection, completedAdicChangeTensor] at h
   exact tensorCast_ext Y B c M _ ((pbcExtensionExistence c).choose_spec.choose M) N f g h
 
-/-- The unique adjacent map is fixed by the sectionwise tensor formula.
-Source: blueprint orders 1239 and 1250 (blueprint: lem-weil-pbc-reconstruction-uniform-tower).
-Proof: the cone relation π_n=qπ_(n+1) makes b tensor x ↦ q(b) tensor x balanced
-and B-linear. Sheafify it. Restrictions and maps of modules commute with this formula.
-Local pure tensors generate, so there is exactly one such natural transformation. -/
+/-- The unique adjacent map is fixed by the sectionwise tensor formula. -/
 theorem localReductionStep_exists (n : ℕ) :
     ∃! τ : localReductionLevel Y B R π (n + 1) ⟶ localReductionLevel Y B R π n,
       ∀ (M : pbcModules Y B) (V : Y.ProEtᵒᵖ)
@@ -321,22 +309,17 @@ theorem localReductionStep_exists (n : ℕ) :
   intro V b x
   exact (hτ' M V b x).trans (hτ M V b x).symm
 
-/-- Canonical adjacent quotient map. Source: blueprint order 1251
-(blueprint: lem-weil-pbc-reconstruction-uniform-tower). -/
+/-- Canonical adjacent quotient map. -/
 def localReductionStep (n : ℕ) :
     localReductionLevel Y B R π (n + 1) ⟶ localReductionLevel Y B R π n :=
   (localReductionStep_exists Y B R π n).exists.choose
 
-/-- The strict quotient tower of a module, with its actual adjacent transitions.
-Source: blueprint order 1251 (blueprint: lem-weil-pbc-reconstruction-uniform-tower). -/
+/-- The strict quotient tower of a module, with its actual adjacent transitions. -/
 def localReductionModuleTower : pbcModules Y B ⥤ pbcTowers Y B :=
   (Functor.ofOpSequence (X := fun n : ℕ ↦ localReductionLevel Y B R π n)
     (fun n ↦ localReductionStep Y B R π n)).flip
 
-/-- Tensor towers are additive. Source: blueprint order 1251
-(blueprint: lem-weil-pbc-reconstruction-uniform-tower).
-Proof: both scalar-extension and restriction functors are additive at each level.
-Maps of towers are equal when all their components are equal. -/
+/-- Tensor towers are additive. -/
 @[instance] theorem localReductionModuleTower_additive :
     (localReductionModuleTower Y B R π).Additive := by
   have (n : ℕ) : (localReductionLevel Y B R π n).Additive := by
@@ -350,9 +333,7 @@ Maps of towers are equal when all their components are equal. -/
 
 /-- A universal left derived pair for the strict reduction tower, retaining its
 K-flat computation. The universal property fixes the pair up to unique compatible
-isomorphism. Packaging the pair avoids repeatedly reducing nested existential choices.
-Source: blueprint orders 1239 and 1251
-(blueprint: lem-weil-pbc-reconstruction-uniform-tower). -/
+isomorphism. Packaging the pair avoids repeatedly reducing nested existential choices. -/
 structure LocalReductionDerivedData where
   functor : DerivedCategory (pbcModules Y B) ⥤ DerivedCategory (pbcTowers Y B)
   counit : DerivedCategory.Qh ⋙ functor ⟶
@@ -403,13 +384,7 @@ private theorem derivedDataFromResolutions
     Functor.leftDerived_from_resolvingClass _ _ H S hr hi
   exact ⟨LF, ε, hLF, fun K hK ↦ hε _ ⟨K, hK, rfl⟩⟩
 
-/-- The local strict reduction tower has the universal left derived pair.
-Source: blueprint orders 1239 and 1250 (blueprint: lem-weil-pbc-reconstruction-uniform-tower).
-Proof: the additive tensor tower preserves mapping cones and shifts on homotopy categories.
-Resolve every complex by a K-flat complex. Quasi-isomorphisms between such complexes
-stay quasi-isomorphisms under tensor with every quotient, hence levelwise in towers.
-Apply the resolving-class theorem. Its comparison is invertible on K-flat complexes,
-and its universal property determines the pair up to unique compatible isomorphism. -/
+/-- The local strict reduction tower has the universal left derived pair. -/
 theorem localReductionDerived_exists : Nonempty (LocalReductionDerivedData Y B R π) := by
   let : HasSheafify (ProEt.topology Y) AddCommGrpCat.{u + 1} :=
     WeilConjectures.integralCoefficientAbSheafify.{u, 0} Y
@@ -434,27 +409,23 @@ theorem localReductionDerived_exists : Nonempty (LocalReductionDerivedData Y B R
       exact HomologicalComplex.quasiIso_map_of_preservesHomology _ (pbcRestrict (π.app n)))
   exact ⟨⟨LF, ε, hLF, hε⟩⟩
 
-/-- The universal derived pair, chosen only up to its unique compatible isomorphism.
-Source: blueprint order 1251 (blueprint: lem-weil-pbc-reconstruction-uniform-tower). -/
+/-- The universal derived pair, chosen only up to its unique compatible isomorphism. -/
 def localReductionDerivedData : LocalReductionDerivedData Y B R π :=
   Classical.choice (localReductionDerived_exists Y B R π)
 
-/-- The left derived strict local tensor tower, with the universal comparison retained.
-Source: blueprint order 1251 (blueprint: lem-weil-pbc-reconstruction-uniform-tower). -/
+/-- The left derived strict local tensor tower, with the universal comparison retained. -/
 def localReductionDerived :
     DerivedCategory (pbcModules Y B) ⥤ DerivedCategory (pbcTowers Y B) :=
   (localReductionDerivedData Y B R π).functor
 
-/-- Its universal comparison on homotopy categories.
-Source: blueprint order 1251 (blueprint: lem-weil-pbc-reconstruction-uniform-tower). -/
+/-- Its universal comparison on homotopy categories. -/
 def localReductionCounit :
     DerivedCategory.Qh ⋙ localReductionDerived Y B R π ⟶
       (localReductionModuleTower Y B R π).mapHomotopyCategory (.up ℤ) ⋙
         DerivedCategory.Qh :=
   (localReductionDerivedData Y B R π).counit
 
-/-- The local universal comparison written on actual cochain representatives.
-Source: blueprint order 1251 (blueprint: lem-weil-pbc-reconstruction-uniform-tower). -/
+/-- The local universal comparison written on actual cochain representatives. -/
 def localReductionComplexCounit (P : CochainComplex (pbcModules Y B) ℤ) :
     (localReductionDerived Y B R π).obj (DerivedCategory.Q.obj P) ⟶
       DerivedCategory.Q.obj
@@ -736,12 +707,7 @@ private theorem normalizedDerivedComparison
       ((he' K' hK').trans (hL K'))
 
 /-- Evaluation of the local strict derived tower is exactly scalar reduction followed
-by scalar restriction. Its isomorphism is fixed on every K-flat computation.
-Source: blueprint order 1251 (blueprint: lem-weil-pbc-reconstruction-uniform-tower).
-Proof: the two universal counits are invertible on a K-flat P. The exact evaluation
-and restriction factorizations identify both targets with the same tensor complex.
-Conjugate that identity and descend through K-flat resolutions. Naturality holds for
-chain maps, hence roofs; every object has a K-flat representative, giving uniqueness. -/
+by scalar restriction. Its isomorphism is fixed on every K-flat computation. -/
 theorem localReductionEvaluation_exists (n : ℕ) :
     ∃! e : localReductionDerived Y B R π ⋙ pbcTowerEvaluation Y B n ≅
         pbcDerivedExtend (π.app (op n)) ⋙ pbcDerivedRestrict (π.app (op n)),
@@ -796,23 +762,18 @@ theorem localReductionEvaluation_exists (n : ℕ) :
     exact (congrArg (e'.hom.app (DerivedCategory.Q.obj K) ≫ ·) (hcR K)).trans
       ((he' K hK).trans (hcL K).symm)
 
-/-- The uniquely normalized evaluation comparison.
-Source: blueprint order 1251 (blueprint: lem-weil-pbc-reconstruction-uniform-tower). -/
+/-- The uniquely normalized evaluation comparison. -/
 def localReductionEvaluation (n : ℕ) :
     localReductionDerived Y B R π ⋙ pbcTowerEvaluation Y B n ≅
       pbcDerivedExtend (π.app (op n)) ⋙ pbcDerivedRestrict (π.app (op n)) :=
   (localReductionEvaluation_exists Y B R π n).exists.choose
 
-/-- Actual inverse limit of strict towers. Source: blueprint order 1251, paragraph 1
-(blueprint: lem-weil-pbc-reconstruction-uniform-tower). -/
+/-- Actual inverse limit of strict towers. -/
 abbrev uniformTowerLimit (X : Scheme.{u})
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :
     pbcTowers X R ⥤ pbcModules X R := lim
 
-/-- Inverse limit is additive. Source: blueprint order 1251
-(blueprint: lem-weil-pbc-reconstruction-uniform-tower).
-Proof: project both sides to every level. Each component is the sum of the two
-level maps; joint monicity of the limit projections gives the equality. -/
+/-- Inverse limit is additive. -/
 @[instance] theorem uniformTowerLimit_additive (X : Scheme.{u})
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :
     (uniformTowerLimit X R).Additive := by
@@ -822,22 +783,18 @@ level maps; joint monicity of the limit projections gives the equality. -/
   intro n
   simp [uniformTowerLimit, Preadditive.add_comp, Preadditive.comp_add]
 
-/-- Total right derived inverse limit, computed by K-injective tower resolutions.
-Source: blueprint order 1251 (blueprint: lem-weil-pbc-reconstruction-uniform-tower). -/
+/-- Total right derived inverse limit, computed by K-injective tower resolutions. -/
 def uniformTowerRlim (X : Scheme.{u})
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :
     DerivedCategory (pbcTowers X R) ⥤ DerivedCategory (pbcModules X R) :=
   (uniformTowerLimit X R).rightDerivedFunctor
 
-/-- The exact constant tower functor. Source: blueprint order 1251
-(blueprint: lem-weil-pbc-reconstruction-uniform-tower). -/
+/-- The exact constant tower functor. -/
 abbrev uniformConstantTower (X : Scheme.{u})
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :
     pbcModules X R ⥤ pbcTowers X R := Functor.const ℕᵒᵖ
 
-/-- Constants are additive. Source: blueprint order 1251
-(blueprint: lem-weil-pbc-reconstruction-uniform-tower).
-Proof: every component of a constant tower map is the original map; addition is levelwise. -/
+/-- Constants are additive. -/
 @[instance] theorem uniformConstantTower_additive (X : Scheme.{u})
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :
     (uniformConstantTower X R).Additive := by
@@ -845,16 +802,14 @@ Proof: every component of a constant tower map is the original map; addition is 
   intro M N f g
   rfl
 
-/-- The canonical derived constant/limit adjunction. Source: blueprint order 1251
-(blueprint: lem-weil-pbc-reconstruction-uniform-tower). -/
+/-- The canonical derived constant/limit adjunction. -/
 def uniformTowerAdjunction (X : Scheme.{u})
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :
     (uniformConstantTower X R).mapDerivedCategory ⊣ uniformTowerRlim X R :=
   Adjunction.mapDerivedCategoryRightDerivedAdjunction
     (constLimAdj : uniformConstantTower X R ⊣ uniformTowerLimit X R)
 
-/-- Evaluation of a derived constant tower is canonically the original object.
-Source: blueprint order 1251 (blueprint: lem-weil-pbc-reconstruction-uniform-tower). -/
+/-- Evaluation of a derived constant tower is canonically the original object. -/
 def uniformConstantEvaluation (X : Scheme.{u})
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) (n : ℕ) :
     (uniformConstantTower X R).mapDerivedCategory ⋙ pbcTowerEvaluation X R n ≅ 𝟭 _ :=
@@ -862,8 +817,7 @@ def uniformConstantEvaluation (X : Scheme.{u})
     ((CategoryTheory.evaluation ℕᵒᵖ (pbcModules X R)).obj (op n)) ≪≫
       Functor.mapDerivedCategoryNatIso (Iso.refl _) ≪≫ Functor.mapDerivedCategoryIdIso _
 
-/-- The canonical derived-limit projection, evaluated from the adjunction counit.
-Source: blueprint order 1251 (blueprint: lem-weil-pbc-reconstruction-uniform-tower). -/
+/-- The canonical derived-limit projection, evaluated from the adjunction counit. -/
 def uniformTowerProjection (X : Scheme.{u})
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
     (M : DerivedCategory (pbcTowers X R)) (n : ℕ) :
@@ -874,19 +828,13 @@ def uniformTowerProjection (X : Scheme.{u})
 variable {X Y : Scheme.{u}} (g : Y ⟶ X)
   {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 
-/-- The inverse-image coefficient diagram on a stratum cover.
-Source: blueprint order 1251 (blueprint: lem-weil-pbc-reconstruction-uniform-tower). -/
+/-- The inverse-image coefficient diagram on a stratum cover. -/
 abbrev uniformLocalRings := pbcAdicRings X d ⋙ adicTowerInverseImage g
 
-/-- The actual restricted completed ring, without recompleting it.
-Source: blueprint order 1251 (blueprint: lem-weil-pbc-reconstruction-uniform-tower). -/
+/-- The actual restricted completed ring, without recompleting it. -/
 abbrev uniformLocalRing := (adicTowerInverseImage g).obj (pbcAdicCompletion X d)
 
-/-- Inverse images of the global projections form a natural cone.
-Source: blueprint order 1251 (blueprint: lem-weil-pbc-reconstruction-uniform-tower).
-Proof: the global limit cone gives pi_j=pi_i followed by the quotient transition.
-Apply the inverse-image functor and its composition law; the constant diagram map
-is the identity, so its left composite is the same map. -/
+/-- Inverse images of the global projections form a natural cone. -/
 theorem uniformLocalProjections_naturality (i j : ℕᵒᵖ) (f : i ⟶ j) :
     ((Functor.const ℕᵒᵖ).obj (uniformLocalRing g d)).map f ≫
         (adicTowerInverseImage g).map (pbcAdicProjection X d j.unop) =
@@ -899,26 +847,20 @@ theorem uniformLocalProjections_naturality (i j : ℕᵒᵖ) (f : i ⟶ j) :
   rw [Category.id_comp, ← Functor.map_comp]
   exact congrArg (adicTowerInverseImage g).map (limit.w (pbcAdicRings X d) f).symm
 
-/-- Restricted limit projections, with their actual mapped projections as components.
-Source: blueprint order 1251 (blueprint: lem-weil-pbc-reconstruction-uniform-tower). -/
+/-- Restricted limit projections, with their actual mapped projections as components. -/
 def uniformLocalProjections :
     (Functor.const ℕᵒᵖ).obj (uniformLocalRing g d) ⟶ uniformLocalRings g d where
   app n := (adicTowerInverseImage g).map (pbcAdicProjection X d n.unop)
   naturality := uniformLocalProjections_naturality g d
 
-/-- Apply exact inverse image to strict towers before derived localization.
-Source: blueprint order 1251 (blueprint: lem-weil-pbc-reconstruction-uniform-tower). -/
+/-- Apply exact inverse image to strict towers before derived localization. -/
 abbrev uniformModuleTowerPull :=
   (Functor.whiskeringRight ℕᵒᵖ (pbcModules X (pbcAdicCompletion X d))
     (pbcModules Y (uniformLocalRing g d))).obj
       (proEtaleRingModulePullback g (pbcAdicCompletion X d)
         (uniformLocalRing g d) (Iso.refl _))
 
-/-- Strict-tower inverse image preserves finite limits, computed at each level.
-Source: blueprint order 1251 (blueprint: lem-weil-pbc-reconstruction-uniform-tower).
-Proof: every finite limit of tower module sheaves is evaluated levelwise. At every
-level the given module inverse image preserves finite limits by its exactness.
-Joint reflection of limits by evaluations gives the assertion. -/
+/-- Strict-tower inverse image preserves finite limits, computed at each level. -/
 @[instance] theorem uniformModuleTowerPull_preservesFiniteLimits :
     PreservesFiniteLimits (uniformModuleTowerPull g d) := by
   constructor
@@ -931,11 +873,7 @@ Joint reflection of limits by evaluations gives the assertion. -/
         (Iso.refl _))
   infer_instance
 
-/-- Strict-tower inverse image preserves finite colimits, computed at each level.
-Source: blueprint order 1251 (blueprint: lem-weil-pbc-reconstruction-uniform-tower).
-Proof: evaluate a finite colimit cocone at each natural-number level. Exact module
-inverse image preserves the colimit there. Evaluations jointly reflect colimits,
-so the mapped tower cocone is again a colimit. -/
+/-- Strict-tower inverse image preserves finite colimits, computed at each level. -/
 @[instance] theorem uniformModuleTowerPull_preservesFiniteColimits :
     PreservesFiniteColimits (uniformModuleTowerPull g d) := by
   constructor
@@ -948,15 +886,13 @@ so the mapped tower cocone is again a colimit. -/
         (Iso.refl _))
   infer_instance
 
-/-- Derived exact restriction of strict towers.
-Source: blueprint order 1251 (blueprint: lem-weil-pbc-reconstruction-uniform-tower). -/
+/-- Derived exact restriction of strict towers. -/
 def uniformTowerPull :
     DerivedCategory (pbcTowers X (pbcAdicCompletion X d)) ⥤
       DerivedCategory (pbcTowers Y (uniformLocalRing g d)) :=
   (uniformModuleTowerPull g d).mapDerivedCategory
 
-/-- Exact evaluation and exact inverse image commute canonically.
-Source: blueprint order 1251 (blueprint: lem-weil-pbc-reconstruction-uniform-tower). -/
+/-- Exact evaluation and exact inverse image commute canonically. -/
 def uniformPullEvaluation (n : ℕ) :
     uniformTowerPull g d ⋙ pbcTowerEvaluation Y (uniformLocalRing g d) n ≅
       pbcTowerEvaluation X (pbcAdicCompletion X d) n ⋙
@@ -970,15 +906,13 @@ def uniformPullEvaluation (n : ℕ) :
       (proEtaleRingModulePullback g (pbcAdicCompletion X d)
         (uniformLocalRing g d) (Iso.refl _))).symm
 
-/-- The canonical strict reduction tower of a local complex.
-Source: blueprint order 1251 (blueprint: lem-weil-pbc-reconstruction-uniform-tower). -/
+/-- The canonical strict reduction tower of a local complex. -/
 def uniformLocalTower (L : CochainComplex (pbcModules Y (uniformLocalRing g d)) ℤ) :
     DerivedCategory (pbcTowers Y (uniformLocalRing g d)) :=
   (localReductionDerived Y (uniformLocalRing g d) (uniformLocalRings g d)
     (uniformLocalProjections g d)).obj (DerivedCategory.Q.obj L)
 
-/-- The canonical scalar unit, read as a map to each evaluation of the strict local tower.
-Source: blueprint order 1251 (blueprint: lem-weil-pbc-reconstruction-uniform-tower). -/
+/-- The canonical scalar unit, read as a map to each evaluation of the strict local tower. -/
 def uniformLocalUnit (L : CochainComplex (pbcModules Y (uniformLocalRing g d)) ℤ) (n : ℕ) :
     DerivedCategory.Q.obj L ⟶
       (pbcTowerEvaluation Y (uniformLocalRing g d) n).obj (uniformLocalTower g d L) :=
@@ -988,8 +922,7 @@ def uniformLocalUnit (L : CochainComplex (pbcModules Y (uniformLocalRing g d)) �
       (uniformLocalProjections g d) n).inv.app (DerivedCategory.Q.obj L)
 
 /-- The specified level map from restricted evaluation to the local reduction tower.
-It uses the given e_n and the canonical evaluation and scalar-restriction comparisons.
-Source: blueprint order 1251 (blueprint: lem-weil-pbc-reconstruction-uniform-tower). -/
+It uses the given e_n and the canonical evaluation and scalar-restriction comparisons. -/
 def uniformLocalLevel (M : AdicTower X d) {a b : ℤ}
     (L : AdicTowerLocalModel d g M a b) (n : ℕ) :
     (pbcTowerEvaluation Y (uniformLocalRing g d) n).obj ((uniformTowerPull g d).obj M.tower) ⟶
@@ -1009,8 +942,7 @@ def uniformLocalLevel (M : AdicTower X d) {a b : ℤ}
       (uniformLocalProjections g d) n).inv.app (DerivedCategory.Q.obj L.complex)
 
 /-- Equipment is a coherent derived-tower isomorphism lifting precisely the specified e_n.
-No choice or uniqueness of such a lift is built into this definition.
-Source: blueprint order 1251 (blueprint: lem-weil-pbc-reconstruction-uniform-tower). -/
+No choice or uniqueness of such a lift is built into this definition. -/
 structure UniformLocalEquipment (M : AdicTower X d) {a b : ℤ}
     (L : AdicTowerLocalModel d g M a b) where
   comparison : (uniformTowerPull g d).obj M.tower ≅ uniformLocalTower g d L.complex
@@ -1018,23 +950,20 @@ structure UniformLocalEquipment (M : AdicTower X d) {a b : ℤ}
     (pbcTowerEvaluation Y (uniformLocalRing g d) n).map comparison.hom =
       uniformLocalLevel g d M L n
 
-/-- The canonical quotient-linear counit, adjoint to the actual global limit projection.
-Source: blueprint order 1251 (blueprint: lem-weil-pbc-reconstruction-uniform-tower). -/
+/-- The canonical quotient-linear counit, adjoint to the actual global limit projection. -/
 def uniformReconstructionCounit (M : AdicTower X d) (n : ℕ) :
     (pbcDerivedExtend (pbcAdicProjection X d n)).obj
       ((uniformTowerRlim X (pbcAdicCompletion X d)).obj M.tower) ⟶ M.level n :=
   ((pbcDerivedScalarAdjunction (pbcAdicProjection X d n)).homEquiv _ _).symm
     (uniformTowerProjection X (pbcAdicCompletion X d) M.tower n ≫ (M.evaluation n).inv)
 
-/-- The actual reconstructed object, rather than an independent limit variable.
-Source: blueprint order 1251 (blueprint: lem-weil-pbc-reconstruction-uniform-tower). -/
+/-- The actual reconstructed object, rather than an independent limit variable. -/
 def uniformReconstructionLimit (M : AdicTower X d) :
     DerivedCategory (pbcModules X (pbcAdicCompletion X d)) :=
   (uniformTowerRlim X (pbcAdicCompletion X d)).obj M.tower
 
 /-- The type of local isomorphism families indexed by coherent equipment, with every
-local model of a retained uniform presentation on the given finite stratification.
-Source: blueprint order 1251 (blueprint: lem-weil-pbc-reconstruction-uniform-tower). -/
+local model of a retained uniform presentation on the given finite stratification. -/
 abbrev UniformReconstructionFamily (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (S : Stratification X) :=
@@ -1048,104 +977,7 @@ abbrev UniformReconstructionFamily (X : Scheme.{u})
 
 /-- Uniform reconstruction, including the actual projections, quotient-linear counits,
 normalization, cohomological window, and naturality for equipped models.
-Source: blueprint order 1251; Stacks Tags 099M, 099L, 09C7, 09C0
-(blueprint: lem-weil-pbc-reconstruction-uniform-tower).
-
-Proof plan (the seven steps of the owning DAG node):
-
-1. A field is Noetherian: its only ideals are zero and the whole ring. Thus $\operatorname{Spec}k$
-is Noetherian, and finite type over it makes $T$ Noetherian by the finite-type theorem. This is a
-consequence of the target's existing LocallyOfFiniteType and QuasiCompact assumptions, not a new
-independent Noetherian assumption. Restriction along the strata and their pro-etale covers jointly
-detects zero cohomology and isomorphisms by stratum detection. The imported statement without any
-scheme restriction is false; the explicit two-stratum counterexample in report.md explains this
-correction.
-Uses: lem-weil-pbc-finite-type-over-noetherian, lem-weil-pbc-noetherian-stratum-detection.
-
-2. For $u:U_{\alpha j}\to T$, module inverse image $u^*$ is exact and preserves countable
-products: the immersion part has this property by immersion limit preservation, and the covering
-part is slice restriction. Both pro-etale module categories have exact countable products. The
-derived product theorem therefore computes products termwise, and the exact triangulated
-inverse-image functor carries the strict Roos cone for $M_\bullet$ to that of $u^*M_\bullet$.
-Hence there is a natural comparison $c_M:u^*M\simeq R\lim(u^*M_\bullet)$ respecting projections.
-Explicitly it applies $u^*$ to both product coordinates and to the differential $1-s$, whose
-$n$-th component is projection $n$ minus transition after projection $n+1$; no arbitrary triangle
-filler is used. The coefficient inverse-image theorem identifies $u^*A_T$ and $u^*(P_n)_T$ with
-the corresponding coefficients on $U$. Choose K-flat resolutions with flat terms by the K-flat
-resolution theorem. Ringed pullback preserves K-flatness for these resolutions, and its tensor
-comparison identifies the two tensor complexes naturally. Their section formula sends the inverse
-image of $x\otimes y$ to the tensor of their inverse images; the balancing relation identifies
-multiplication by a local ring section on either factor. Derived change of rings therefore
-identifies restrictions of finite reductions with local finite reductions. The same applies to
-each finite free Koszul complex; its transition multiplies by $a_j$ in degree $-1$ and is the
-identity in degree zero. Thus $c$ also respects Koszul completion and its unit.
-Uses: lem-weil-pbc-proetale-immersion-limit-preservation,
-lem-weil-proetale-countable-products-exact, lem-weil-derived-countable-products-core,
-situation-conventions, lem-weil-pbc-ringed-strict-tower-homotopy-limit,
-lem-weil-pbc-profinite-coefficient-inverse-image, prose-03-02,
-lem-pur-derived-change-of-rings, def-weil-pbc-intrinsic-completion, lem-pc-kflat-resolution,
-lem-weil-pbc-ringed-pullback-preserves-kflat, lem-weil-pbc-ringed-topoi-module-pullback-tensor,
-lem-weil-proetale-weakly-etale-localization.
-
-3. Each term of a local model $L$ is adic lisse: after a pro-etale cover it is
-$\lim_n\underline{N/I^nN}$. Every quotient is killed by $I^n$, so torsion-limit sheaf completeness
-makes this term derived complete over the constant sheaf $\underline A$. The same theorem makes
-the bounded complex $L$ derived complete; this uses weak Serre closure, not freeness of its terms.
-The constant/completed coefficient theorem identifies restriction of scalars of the Koszul
-completion unit of $L$ with the constant-coefficient completion unit. The latter is invertible;
-restriction of scalars is exact and conservative, since its underlying abelian sheaves are
-unchanged. Thus the former is invertible as well, so this particular $A_U$-module complex is
-complete. It does not identify the two entire ambient derived categories. Koszul reconstruction
-now gives a natural isomorphism $\eta_L:L\simeq R\lim L_\bullet$ for the strict quotient tower.
-Uses: def-weil-pbc-bounded-constructible-tower, def-weil-pbc-adic-lisse-module,
-lem-weil-pbc-torsion-limit-sheaf-completeness, lem-weil-pbc-constant-completion-equivalence,
-prop-weil-pbc-koszul-reconstruction.
-
-4. The equation $e_n\rho_n=\sigma_n(e_{n+1}\otimes1)$ from the bounded-tower definition says that
-the $e_n$ commute with the underlying adjacent transitions. Sequential tower evaluation fullness
-gives a lift $E:u^*M_\bullet\to L_\bullet$ with these evaluations. Since every $e_n$ is
-invertible, $E$ is invertible. Fix one such coherent local-model comparison, as specified in the
-statement. The homotopy-correction proof of this generic lifting assertion is written in
-report.md; neither the Stacks object-lifting result nor a definition of a Roos limit is claimed to
-supply it.
-Uses: def-weil-pbc-bounded-constructible-tower, lem-weil-pbc-sequential-tower-evaluation-full.
-
-5. Define $\phi=c_M^{-1}(R\lim E)^{-1}\eta_L:L\to u^*M$. Its three factors are isomorphisms. The
-projection formula is $u^*p_n\phi=e_n^{-1}v_n$, where $v_n:L\to L_n$ is scalar extension; it
-follows from the projection compatibility of $c$, the evaluation of $E$, and the completion-unit
-clause of Koszul reconstruction. For an equipped morphism $(f,h)$ with $E'u^*f=L_\bullet(h)E$, the
-functor laws give $(R\lim E')R\lim(u^*f)=R\lim(L_\bullet(h))(R\lim E)$. Naturality of $c$ and
-$\eta$ gives $c_{M'}u^*R\lim(f)=R\lim(u^*f)c_M$ and $\eta_{L'}h=R\lim(L_\bullet(h))\eta_L$.
-Substitution proves $u^*R\lim(f)\phi=\phi'h$. This is the stated functoriality, without claiming
-independence of a chosen coherent lift.
-Uses: lem-weil-pbc-ringed-strict-tower-homotopy-limit, prop-weil-pbc-koszul-reconstruction,
-def-weil-pbc-adic-coefficient-datum.
-
-6. By the Koszul unit comparison of step 2, the unit of $M$ restricts, under $\phi$, to the
-complete local model's unit. Stratum detection therefore makes that global unit invertible; this
-is derived completeness by definition. Exact restrictions send $\mathcal H^q(M)$ to $\mathcal
-H^q(L)$, zero outside the common termwise window $[d_0,d_1]$. Stratum detection gives the asserted
-global cohomological bound. This proves the global consequences instead of assuming them in a
-restriction helper.
-Uses: def-weil-pbc-intrinsic-completion, def-weil-pbc-bounded-constructible-tower,
-lem-weil-pbc-noetherian-stratum-detection.
-
-7. Let $b_a:M\otimes^L_{A_T}(P_a)_T\to M_a$ be adjoint to the derived-limit projection $p_a$,
-where $M_a$ is regarded over $(P_a)_T$. Finite-reduction reconstruction applied to the complete
-local model gives the invertible counit $b^L_a:R\lim L_\bullet\otimes^L(P_a)_U\to L_a$. The
-adjoint of $e_a^{-1}b^L_a((R\lim E)c_M\otimes1)$ is $e_a^{-1}\operatorname{pr}_a(R\lim
-E)c_M=u^*p_a$ by step 5. Since $e_a$ is a morphism over $(P_a)_U$, scalar-extension adjunction
-therefore identifies this composite with $u^*b_a$, in the quotient-coefficient derived category
-itself. The three factors are invertible, so stratum detection makes $b_a$ invertible globally. To
-check normalization, reassociate the source
-$M\otimes^L_{A_T}(P_{a+1})_T\otimes^L_{(P_{a+1})_T}(P_a)_T$ with $M\otimes^L_{A_T}(P_a)_T$. The
-adjoint of $\rho_a(b_{a+1}\otimes1)$ is the transition $t_a$ composed with $p_{a+1}$: by
-definition $t_a$ is the scalar-extension unit followed by $\rho_a$. The adjoint of $b_a$ is
-$p_a=t_ap_{a+1}$. Equality follows from the adjunction bijection. Repetition gives compatibility
-with all quotient normalizations. This uses global tower projections, not faithfulness of local
-restrictions on derived morphisms. No finiteness of section groups is used.
-Uses: lem-weil-pbc-finite-reduction-reconstruction, lem-weil-pbc-noetherian-stratum-detection,
-def-weil-pbc-bounded-constructible-tower, def-weil-pbc-adic-coefficient-datum.
+Source: Stacks Tags 099M, 099L, 09C7, 09C0.
 -/
 theorem reconstructionUniformTower {k : Type u} [Field k] (X : Scheme.{u})
     (fX : X ⟶ Spec (.of k)) (_hX : LocallyOfFiniteType fX ∧ QuasiCompact fX)

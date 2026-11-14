@@ -15,9 +15,6 @@ import WeilConjectures.AlgebraicGeometry.Integral.IntegralStratifiedPerfectChart
 import WeilConjectures.AlgebraicGeometry.Integral.IntegralStratifiedPerfectCharacterization
 
 /-! # Torsion normal form and its consecutive-quotient obstruction
-
-Source: the DVR elementary-divisor calculation in steps 3--5 of
-`lem-weil-pbc-adic-tor-implies-flat-cohomology`.
 -/
 
 @[expose] public noncomputable section
@@ -37,34 +34,7 @@ torsion sheaf is a quotient of a consecutive-quotient Tor sheaf. This is a norma
 statement for arbitrary bounded constructible complete complexes; no Tor vanishing
 or flatness of their cohomology is assumed.
 
-Source: Bhatt--Scholze, Proposition 6.6.11 and Lemma 6.5.8; Stacks Tag 0ASV;
-the explicit alternating quotient resolution in step 5 of
-`lem-weil-pbc-adic-tor-implies-flat-cohomology`.
-(blueprint: lem-weil-pbc-integral-cohomology-torsion-normal-form).
-
-Proof: choose a finite stratification and pro-etale perfect models.
-Use the declared universe lift of the valuation ring; its ring equivalence with
-the valuation ring transports the usual integral characterization and its DVR
-elementary-divisor calculation. A finite projective module over this
-DVR is finite free. Starting at the highest degree, Smith normal form splits the
-bounded free complex into one-term free summands and two-term complexes with
-nonzero differential a power of the uniformizer. Incoming differentials land in
-the complementary kernel, so this construction proceeds downward. Contractible
-unit-differential summands contribute nothing. In degree q, complete the free
-summands to F and the cokernels of the positive-power summands to N. Constant
-realization is exact on these finite modules and commutes with finite reductions,
-so this gives the stated cohomology isomorphism. Multiplication by the uniformizer
-on N is nilpotent, with exponent at most the largest elementary divisor.
-Choose n at least that exponent. The reduction of every degree-q torsion block
-contains its original cokernel as a direct summand of H^q(K_(n+1)). The alternating
-free resolution for the map from quotient n+1 to quotient n has differentials
-uniformizer^(n+1) and uniformizer (the indexing convention uses quotient n equal
-to A/(uniformizer^(n+1))). Tensoring a torsion block makes the first differential
-zero and gives Tor_1 = N/uniformizer N. Projection onto these summands is the
-required epimorphism, after restriction of its quotient coefficients. Exact
-inverse image commutes with cohomology and derived quotient extension, so its
-source is the pullback of the displayed ambient Tor sheaf. Empty charts and the
-absence of torsion are covered by N = 0 and the epimorphism to zero. -/
+Source: Bhatt--Scholze, Proposition 6.6.11 and Lemma 6.5.8; Stacks Tag 0ASV. -/
 theorem pbc_integral_cohomology_torsion_normal_form
     (T : Scheme.{u}) [IsNoetherian T]
     (hdim : ∃ n : ℕ, topologicalKrullDim T ≤ n)

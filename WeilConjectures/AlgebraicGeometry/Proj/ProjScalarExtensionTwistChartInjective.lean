@@ -11,8 +11,7 @@ import WeilConjectures.AlgebraicGeometry.Proj.ProjTwistPullbackFractionPresentat
 import WeilConjectures.AlgebraicGeometry.ProjBasicOpenLocalizationDetection
 
 /-! The injective half of the complete standard-chart scalar-extension comparison.
-Source: Stacks Project, constructions.tex, Tags 01MY and 01N2.
-(blueprint: new-sfb-proj-scalar-extension-twist-chart-injective).
+Source: Stacks Project, Tags 01MY and 01N2.
 -/
 
 @[expose] public section
@@ -27,16 +26,7 @@ open AlgebraicGeometry.Scheme.Modules
 
 namespace AlgebraicGeometry.Proj
 
-/-- The prescribed scalar-extension twist map is injective on a complete standard chart.
-
-Proof: Present pullback chart sections as coefficient tensors of homogeneous fractions.
-The normalized map from that tensor product to B_(psi(f)) is injective by the
-common-denominator zero criterion. On pure tensors, naturality of η and hη identify
-its pointwise values with those of this map; tensor induction extends the identity.
-Homogeneous-prime localization detection then implies that equal η-images have equal
-tensor representatives, hence equal pullback sections.
-Source: Stacks Project, constructions.tex, Tags 01MY and 01N2.
-(blueprint: new-sfb-proj-scalar-extension-twist-chart-injective). -/
+/-- The prescribed scalar-extension twist map is injective on a complete standard chart. -/
 theorem scalarExtension_twistMap_chart_injective
     {R S A B : Type u} [CommRing R] [CommRing S] [CommRing A] [CommRing B]
     [Algebra R S] [Algebra R A] [Algebra S B]

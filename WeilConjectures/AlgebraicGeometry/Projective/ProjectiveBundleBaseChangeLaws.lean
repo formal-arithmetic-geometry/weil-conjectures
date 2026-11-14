@@ -12,8 +12,7 @@ import Mathlib.CategoryTheory.Adjunction.Mates
 set_option linter.privateModule false
 
 /-! # Coherence laws for normalized projective-bundle base-change data
-Source: Stacks Project, Constructions, Tag 01O3.
-(blueprint: lem-pur-projective-bundle-base-change-laws). -/
+Source: Stacks Project, Constructions, Tag 01O3. -/
 
 @[expose] public section
 set_option autoImplicit false

@@ -14,7 +14,6 @@ import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 # Local support of an open extension
 
 Source: Stacks Project, Tags 00WK and 09AE.
-(blueprint: lem-exc-proetale-open-extension-local-support)
 -/
 
 @[expose] public section
@@ -33,8 +32,7 @@ open Scheme
 through the open. Take the image sieve of the sheafification unit. If a test object
 does not factor, the comma category computing the presheaf extension is empty, so
 its value is zero and its representative maps to zero.
-Source: Stacks Project, Tags 00WK and 09AE.
-(blueprint: lem-exc-proetale-open-extension-local-support). -/
+Source: Stacks Project, Tags 00WK and 09AE. -/
 theorem openExtension_localSupport (R : Type (u + 1)) [Ring R]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (F : Sheaf (ProEt.topology U) (ModuleCat.{u + 1} R)) (Q : X.ProEt)

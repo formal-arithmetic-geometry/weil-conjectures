@@ -28,8 +28,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Finite
 /-!
 # Splitting the normalization on a compatible power-series test
 
-Source: Stacks Project, Tag 0EYJ, final splitting paragraphs; Tags 0EY6 and 0EY9.
-(blueprint: lem-sbc-stalk-normalization-formal-split)
+Source: Stacks Project, Tag 0EYJ, final splitting paragraphs; Tags 0EY6 and 0EY9
 -/
 
 @[expose] public section
@@ -41,31 +40,7 @@ namespace AlgebraicGeometry.Scheme
 /-- A fixed flat power-series test, compatible with the local base and the entire
 section, splits the finite normalization. This does not construct the test.
 
-Source: Stacks Project, Tag 0EYJ, final splitting paragraphs; Tags 0EY6 and 0EY9.
-https://stacks.math.columbia.edu/tag/0EYJ
-(blueprint: lem-sbc-stalk-normalization-formal-split)
-
-Proof: Let A be the base stalk and L the local total space. Minimality identifies
-its base open with Spec A minus the closed point. Normality of the base and
-smoothness make L normal. The normalization restricts to PA on this open.
-Going down over normal domains and the flat local depth formula put its boundary
-points in codimension at least two. Normal S2 then gives boundary depth at least
-two. Tag 0EY6(2) identifies it with the unique finite depth-two extension of PA.
-Extend the generic G-action to PA by generic-fibre full faithfulness. The given
-rational point and its translates split the generic section cover into exactly
-G copies. Normal generic full faithfulness extends the isomorphism and its
-inverse over the punctured local base. The base compatibility of t identifies
-the inverse image V of that open with the punctured-base open of Spec A[[X]].
-The entire-section compatibility identifies its zero slice with the section on
-the punctured base, so the cover is split on that slice. For d positive, Tag
-0EY9 lifts both directions of this splitting to V; faithfulness shows the two
-composites are identities. For d zero the slice is already V. Flat base change
-preserves the unique depth-two extension by 0EY6(a). The split finite cover of
-the whole power-series spectrum has boundary depth at least two, by flatness
-over A and the depth hypothesis. Uniqueness in 0EY6(2) extends the splitting
-from V to the whole test and gives the displayed equation over the test.
-No choice of chart or arbitrary witness is used to define data. The trivial
-group gives one copy; disconnected torsors and zero variables are included. -/
+Source: Stacks Project, Tag 0EYJ, final splitting paragraphs -/
 theorem GaloisCover.exists_stalk_normalization_formal_split {S C : Scheme.{u}}
     [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]

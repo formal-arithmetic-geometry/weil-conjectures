@@ -44,9 +44,7 @@ import all WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarOperationShift
 
 /-! # Finite scalar extension on the actual proper-base-change categories
 
-Source: blueprint sec-proper-base-change/sk-thm-properbasechange, order 1307,
-Milne, Lectures on Etale Cohomology, Section 19.
-(blueprint: prop-weil-pbc-scalar-extension)
+Source: Milne, Lectures on Etale Cohomology, Section 19
 
 Coefficient maps are specified on all finite reductions. Integral extension is the
 existing universal derived tensor functor. Rational extension is its balanced map

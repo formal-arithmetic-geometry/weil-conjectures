@@ -149,19 +149,7 @@ private theorem exists_inverseTensorHom {X Y : Scheme.{u}} (j : Y ⟶ X)
   exact ⟨b, fun U s t ↦ hb (Opposite.op U) s t⟩
 
 /-- Restriction along an open immersion commutes with the sheaf tensor product, compatibly
-with the canonical pure tensor sections. Source: Stacks Project, Modules, Lemma 01CD,
-label lemma-tensor-product-pullback
-(blueprint: lem-weil-pbc-module-restriction-tensor-comparison).
-
-Proof: write the tensor product as sheafification of the sectionwise tensor presheaf.
-Restriction of that presheaf is the tensor presheaf of the restrictions: the structure-ring
-isomorphism on each open identifies the balanced tensor products. Restriction commutes with
-sheafification by the restriction/direct-image adjunction: for every module sheaf H on the
-source, Hom((P^#)|Y,H) = Hom(P^#,j_*H) = Hom(P,j_*H) = Hom(P|Y,H). The middle equality is
-the sheafification adjunction and j_*H is a sheaf. Uniqueness of the representing object gives
-the comparison isomorphism. These adjunction identifications preserve the sheafification
-unit. Its component sends s tensor t to tmulSection s t, which proves the displayed formula
-on every open, after applying the canonical restriction section isomorphisms. -/
+with the canonical pure tensor sections. Source: Stacks Project, Modules, Lemma 01CD. -/
 theorem exists_restriction_tensor_comparison {X Y : Scheme.{u}} (j : Y ⟶ X)
     [IsOpenImmersion j] (F G : X.Modules) :
     ∃ e : (F ⊗ G).restrict j ≅ F.restrict j ⊗ G.restrict j,

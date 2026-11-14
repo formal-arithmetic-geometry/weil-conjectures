@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.Open.OpenBaseChangeDerivedUnit
 import WeilConjectures.AlgebraicGeometry.Tensor.TensorPullbackSquare
 
 /-! Scalar extension respects the open base-change comparison.
-Source: Stacks Project, Tag 03S6, label `lemma-shriek-base-change`, together with
-Tags 07A4 and 09AE (blueprint: lem-fix-open-scalar-exchange).
+Source: Stacks Project, Tag 03S6, together with Tags 07A4 and 09AE.
 
 All objects are in the constant-ring module coordinates `proEtaleConstantRing T A`
 (`A` lifted to the site's coefficient universe) of prose-03-02.
@@ -39,7 +38,7 @@ open AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace AlgebraicGeometry.ProEtale
 
 /-- Derived scalar extension `S_T = - ⊗^L_{A_T} B_T` along a constant coefficient-ring map.
-Source: Stacks Tag 06YY (blueprint: lem-pur-derived-change-of-rings). -/
+Source: Stacks Tag 06YY. -/
 noncomputable abbrev scalarExtension {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B) (T : Scheme.{u}) :
     DerivedCategory (Scheme.proEtaleRingModules T (Scheme.proEtaleConstantRing T A)) ⥤
@@ -48,7 +47,7 @@ noncomputable abbrev scalarExtension {A B : Type u} [CommRing A] [CommRing B]
     (Scheme.proEtaleConstantRingMap (T := T) φ)
 
 /-- Derived restriction of scalars `Res_T`, right adjoint to `scalarExtension`.
-Source: Stacks Tag 07A6 (blueprint: lem-weil-pbc-ring-sheaf-change-adjunction). -/
+Source: Stacks Tag 07A6. -/
 noncomputable abbrev scalarRestriction {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B) (T : Scheme.{u}) :
     DerivedCategory (Scheme.proEtaleRingModules T (Scheme.proEtaleConstantRing T B)) ⥤
@@ -57,7 +56,7 @@ noncomputable abbrev scalarRestriction {A B : Type u} [CommRing A] [CommRing B]
     (Scheme.proEtaleConstantRingMap (T := T) φ)).mapDerivedCategory
 
 /-- The exact derived constant-coefficient inverse image `f_A^{-1}`.
-Source: Stacks Section 0735 (blueprint: prose-03-02). -/
+Source: Stacks Section 0735. -/
 noncomputable abbrev constantPullback {A : Type u} [CommRing A]
     {U X : Scheme.{u}} (f : U ⟶ X) :
     DerivedCategory (Scheme.proEtaleRingModules X (Scheme.proEtaleConstantRing X A)) ⥤
@@ -67,8 +66,7 @@ noncomputable abbrev constantPullback {A : Type u} [CommRing A]
     (Scheme.proEtaleConstantRingComparison f A)
 
 /-- The exact derived extension by zero `j_!^A`, left adjoint to `j_A^{-1}`.
-Source: Stacks Tags 03DI and 09AE (blueprint:
-proposition-extension-zero-restriction-closed-subscheme). -/
+Source: Stacks Tags 03DI and 09AE. -/
 noncomputable abbrev openExtension {A : Type u} [CommRing A]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     DerivedCategory (Scheme.proEtaleRingModules U (Scheme.proEtaleConstantRing U A)) ⥤
@@ -77,11 +75,10 @@ noncomputable abbrev openExtension {A : Type u} [CommRing A]
     (Scheme.proEtaleConstantRing X A) (Scheme.proEtaleConstantRing U A)
     (Scheme.proEtaleConstantRingComparison j A)
 
-/-- The canonical tensor/inverse-image comparison `λ_f : f_B^{-1} S_X ≅ S_U f_A^{-1}`,
+/-- The canonical tensor/inverse-image comparison `λ_f: f_B^{-1} S_X ≅ S_U f_A^{-1}`,
 the inverse of the mate of the restriction/pullback identification; on K-flat
 representatives it is the balancing map.
-Source: Stacks Tags 07A4 and 0G7E
-(blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback). -/
+Source: Stacks Tags 07A4 and 0G7E. -/
 noncomputable def tensorPullbackIso {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B) {U X : Scheme.{u}} (f : U ⟶ X) :
     scalarExtension φ X ⋙ constantPullback f ≅
@@ -98,10 +95,10 @@ noncomputable def tensorPullbackIso {A B : Type u} [CommRing A] [CommRing B]
         (Scheme.proEtaleConstantInverseImageMap_naturality f
           (a := CommRingCat.ofHom (RingHom.ulift φ))).symm)
 
-/-- The scalar/open comparison `β_j : S_X j_!^A ≅ j_!^B S_U`, the unique isomorphism of
+/-- The scalar/open comparison `β_j: S_X j_!^A ≅ j_!^B S_U`, the unique isomorphism of
 left adjoints whose right-adjoint comparison is the identification
 `j_A^{-1} Res_X = Res_U j_B^{-1}` of lem-weil-pbc-ring-sheaf-change-adjunction.
-Source: Stacks Tags 07A6 and 03DI (blueprint: lem-fix-open-scalar-exchange). -/
+Source: Stacks Tags 07A6 and 03DI. -/
 noncomputable def openScalarIso {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     openExtension j ⋙ scalarExtension φ X ≅

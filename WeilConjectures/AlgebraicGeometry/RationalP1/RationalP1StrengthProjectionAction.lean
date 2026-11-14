@@ -163,9 +163,7 @@ open DiagonalCoefficients CondensedRing
 attribute [local irreducible] coefficient line twist projectionMap tensorShiftIso
 attribute [local implicit_reducible] moduleObjectDerivedPullback moduleObjectDerivedPushforward
 
-/-- The published native braiding through the fixed tensor bundle.
-Source: the tensor identifications in the Second identity.
-(blueprint: lem-sfb-rational-p1-strength-projection-action). -/
+/-- The published native braiding through the fixed tensor bundle. -/
 @[irreducible]
 def tensorBraiding
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -270,30 +268,7 @@ end NativeComparison
 section FinalTransport
 
 -- Compare the fixed tensor and shift structures once when specializing abstract coherence.
-/-- Tensor strength can be moved through a projection and an arbitrary inside arrow.
-Source: rational projective-line triangle calculation, Second identity, projection-formula
-compatibility with the standard tensor identifications.
-Proof: write B = single(LS)[2], T = single(LX)[2], F = f*, R = Rf*, and
-δ(U,V) : F(U tensor V) → FU tensor FV for the native inverse tensorator. Let π and ρ
-be the left and right coefficient projection maps. Conjugate both twists by tensorShiftIso.
-Its naturality and naturality of ρ move the arbitrary x to the last inside factor.
-After also using naturality of π on tensorShiftIso.inv, it suffices to check the raw law
-σ(A,B,RN); (π(A,N) tensor 1_B); ρ(FA tensor N,B) =
-π(A tensor B,N); R((δ(A,B) tensor 1_N); σ(FA,FB,N)),
-where σ(U,V,W) = α(U,V,W); (1_U tensor β(V,W)); α(U,W,V).inv.
-Postcompose this law with R(1_(FA tensor N) tensor e.hom).
-To prove the raw law, transpose along F ⊣ R. The transpose of ρ is δ followed by the
-counit in its first factor. The transpose of π is δ followed by the counit in its second
-factor: substitute its symmetry-conjugated definition and cancel the two swaps using
-preservation of braiding by F. Tensorator naturality, associativity, and braiding naturality
-then give the same transpose on both sides: δ(A tensor B,RN), then δ(A,B) tensor 1_FRN,
-then 1_(FA tensor FB) tensor counit_N, then σ(FA,FB,N). Thus injectivity of transposition
-proves the law. Restore the tensor-shift comparisons. The initial F(tensorShiftIso.inv),
-tensorator, e, and inside tensor-shift composite is precisely pullTwistIso. Its last
-comparison cancels against the displayed inverse comparison. This gives the asserted
-inside strength followed by the inside twist of x. Neither Tate self-symmetry nor a
-self-square comparison is used.
-(blueprint: lem-sfb-rational-p1-strength-projection-action). -/
+/-- Tensor strength can be moved through a projection and an arbitrary inside arrow. -/
 theorem second_trace_strength_projection_action
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (Y X : Scheme.{u})

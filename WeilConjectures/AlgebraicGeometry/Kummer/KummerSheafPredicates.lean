@@ -7,9 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Kummer.KummerStrictTargetTransport
 
-/-! # Predicate types for sheaf Kummer assembly
-Source: the normalized source, target and finite evaluation in the diagonal tower
-proof, steps (3)--(4) (blueprint: def-sfb-kummer-sheaf-predicates). -/
+/-! # Predicate types for sheaf Kummer assembly -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -31,8 +29,6 @@ set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
 /-- The type of finite-class predicates, sharing the actual exact image objects.
-Source: the finite class assertion of diagonal tower proof step (4)
-(blueprint: def-sfb-kummer-sheaf-predicates).
 This is the literal predicate type, with no chosen object or proof. -/
 def sheafKummerFinitePredicate (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     (Q : ∀ n, Sheaf (Scheme.ProEt.topology W)
@@ -43,8 +39,6 @@ def sheafKummerFinitePredicate (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
         (cartierResidue_cast ℓ (n + 1)) W)) 2 → Prop
 
 /-- The type of source-normalization predicates on the actual finite quotients.
-Source: diagonal tower proof step (3), source normalization
-(blueprint: def-sfb-kummer-sheaf-predicates).
 This shares only the predicate type and makes no existence assertion. -/
 def sheafKummerSourcePredicate (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     [HasDerivedCategory.{u + 1} (DiagonalAb W)]

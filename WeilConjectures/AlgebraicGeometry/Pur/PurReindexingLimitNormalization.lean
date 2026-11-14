@@ -11,9 +11,6 @@ import all WeilConjectures.AlgebraicGeometry.StrictTower.ConstantNormalization.C
 import Mathlib.CategoryTheory.Limits.Preserves.Limits
 
 /-! # PurReindexingLimitNormalization
-
-Source: Stacks Project and the extracted proof of
-lem-pur-isomorphism-completed-reduction-reindexing.
 -/
 
 @[expose] public noncomputable section

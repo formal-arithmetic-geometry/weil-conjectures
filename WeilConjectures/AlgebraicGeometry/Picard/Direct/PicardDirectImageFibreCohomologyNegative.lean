@@ -45,18 +45,7 @@ private theorem finiteLocallyFree_isFlatOver {X S : Scheme.{v}}
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Negative residue cohomology of a proper flat line-bundle direct image vanishes.
-Source: Stacks Project, Tag 0B91(2), and Tag 0BF2, the displayed fibre comparison.
-(blueprint: lem-sc-picard-direct-image-fibre-cohomology-negative)
-
-Proof: The pullback f_W remains flat, proper and locally finitely presented, and
-L_W is invertible, hence finitely presented and flat over W. Apply proper
-relatively flat derived base change to W.fromSpecResidueField w. The derived
-pullback of E is the derived direct image of the ordinary pullback of L_W,
-placed in degree zero. A right-derived functor of a left-exact functor sends
-this object to a complex with no negative cohomology. Evaluation on the whole
-residue-field spectrum and restriction of scalars preserve zero objects,
-giving the asserted zero cohomology vector space. No descent or triviality of
-the fibre is needed. The argument also applies when the source fibre is empty. -/
+Source: Stacks Project, Tag 0B91(2), and Tag 0BF2, the displayed fibre comparison. -/
 theorem picard_directImage_fibre_cohomology_negative
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

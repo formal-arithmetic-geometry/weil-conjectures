@@ -58,8 +58,6 @@ import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 import WeilConjectures.AlgebraicGeometry.Integral.Finite.IntegralFiniteQuotientTriangle
 
 /-! # Native quotient-linear uniformizer filtration triangles
-
-Source: blueprint latest, lemma-bounds-finite-reductions, second paragraph.
 -/
 
 @[expose] public noncomputable section
@@ -93,18 +91,7 @@ private def extensionCongr
   subst ψ
   exact Iso.refl _
 
-/-- The consecutive coefficient filtration is a triangle over the larger finite quotient.
-Source: blueprint latest, lemma-bounds-finite-reductions, first paragraph
-(blueprint: lem-pe-integral-finite-filtration-triangle).
-
-Proof: pull the uniformizer coefficient short exact sequence from the point. Identify
-its three terms with the regular modules restricted along the canonical quotient
-maps. These quotient identities also identify their scalar actions. The quotient
-map from the continuous integral ring is epic; tensor preserves this epimorphism.
-The quotient scalar triangle construction consequently lifts the coefficient-tensored
-flat K-flat complex sequence to the larger finite ring, and its derived localization
-is the required triangle. Replace each composite scalar extension by the direct one
-using the canonical quotient equalities. -/
+/-- The consecutive coefficient filtration is a triangle over the larger finite quotient. -/
 theorem integral_finite_filtration_triangle
     (K : DerivedCategory (AdicCompletion.Modules l E X)) (n : ℕ) :
     ∃ Δ : CategoryTheory.Pretriangulated.Triangle

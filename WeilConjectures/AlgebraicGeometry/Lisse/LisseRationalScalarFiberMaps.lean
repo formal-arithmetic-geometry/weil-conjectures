@@ -11,7 +11,6 @@ import Mathlib.RingTheory.Localization.BaseChange
 /-! # Rational scalar comparison of geometric fibres
 
 Source: Weil II (1.1.1) c), d), pp. 146-147.
-(blueprint: lem-pod-lisse-rational-scalar-fiber-comparison).
 -/
 
 @[expose] public section
@@ -113,8 +112,7 @@ variable (Y : Scheme.{d}) {Ω : Type d} [Field Ω] [IsAlgClosed Ω]
   (j : E →+* K) (k : L →+* K) (hjk : k.comp ι.toRingHom = j)
 
 /-- The defining pure-tensor formula for a rational geometric fibre functor.
-Source: Weil II (1.1.1) c)
-(blueprint: lem-pod-lisse-rational-scalar-fiber-comparison). -/
+Source: Weil II (1.1.1) c). -/
 def IsLisseRationalFiberFunctor
     (T : LisseRationalSheaf l E Y ⥤ ModuleCat.{d + 1} E)
     (h : ∀ F, T.obj F = lisseRationalFiber l E Y y F) : Prop :=
@@ -130,8 +128,7 @@ def IsLisseRationalFiberFunctor
             from (I.map f).hom)) ≫ eqToHom (h G).symm
 
 /-- Integral scalar extension followed by rational coefficient extension is natural.
-Source: Weil II (1.1.1) c), d)
-(blueprint: lem-pod-lisse-rational-scalar-fiber-comparison). -/
+Source: Weil II (1.1.1) c), d). -/
 def lisseIntegralScalarFiberKNatIso :
     let I := ObjectProperty.ι (IsLisseIntegralDiagram l E Y) ⋙
       (Functor.whiskeringRight _ _ _).obj
@@ -190,8 +187,7 @@ def lisseIntegralScalarFiberKNatIso :
                 (Functor.isoWhiskerLeft J (ModuleCat.extendScalarsComp.{d + 1, d + 1} t k))
 
 /-- The integral comparison after rationalization, with standard tensor module structures.
-Source: Weil II (1.1.1) c), d)
-(blueprint: lem-pod-lisse-rational-scalar-fiber-comparison). -/
+Source: Weil II (1.1.1) c), d). -/
 def lisseIntegralRationalFiberKNatIso :
     let I := ObjectProperty.ι (IsLisseIntegralDiagram l E Y) ⋙
       (Functor.whiskeringRight _ _ _).obj
@@ -217,8 +213,7 @@ def lisseIntegralRationalFiberKNatIso :
 
 /-- The rational scalar comparison is built from integral scalar comparison and
 associativity of scalar extension.
-Source: Weil II (1.1.1) c), d)
-(blueprint: lem-pod-lisse-rational-scalar-fiber-comparison). -/
+Source: Weil II (1.1.1) c), d). -/
 def lisseRationalScalarFiberIso (F : LisseRationalSheaf l E Y) :
     (ModuleCat.extendScalars j).obj (lisseRationalFiber l E Y y F) ≅
       (ModuleCat.extendScalars k).obj (lisseRationalFiber l L Y y
@@ -227,8 +222,7 @@ def lisseRationalScalarFiberIso (F : LisseRationalSheaf l E Y) :
   exact (lisseIntegralRationalFiberKNatIso Y y l E L ι K j k hjk).app F.integral
 set_option maxRecDepth 2000
 /-- Naturality of the rational comparison on integral morphisms.
-Source: Weil II (1.1.1) c), d)
-(blueprint: lem-pod-lisse-rational-scalar-fiber-comparison). -/
+Source: Weil II (1.1.1) c), d). -/
 theorem lisseRationalScalarFiberIso_integral_naturality
     (F G : LisseRationalSheaf l E Y) (f : F.integral ⟶ G.integral) :
     let I := ObjectProperty.ι (IsLisseIntegralDiagram l E Y) ⋙
@@ -254,8 +248,7 @@ variable
   (hU : ∀ F, U.obj F = lisseRationalFiber l L Y y F)
 
 /-- Objectwise comparison for any functors with the prescribed geometric fibres.
-Source: Weil II (1.1.1) c), d)
-(blueprint: lem-pod-lisse-rational-scalar-fiber-comparison). -/
+Source: Weil II (1.1.1) c), d). -/
 def lisseRationalFiberComparison (F : LisseRationalSheaf l E Y) :
     (T ⋙ ModuleCat.extendScalars j).obj F ≅
       (lisseRationalScalarExtension l E Y L ι ⋙ U ⋙ ModuleCat.extendScalars k).obj F :=
@@ -268,8 +261,7 @@ def lisseRationalFiberComparison (F : LisseRationalSheaf l E Y) :
 /-- Rational fibre comparisons are natural for all rational morphisms.
 Source: Weil II (1.1.1) c), d). Clear a common denominator to write a morphism
 as a single pure tensor. The defining morphism formulas reduce naturality to integral
-naturality; its scalar coefficient acts through the same embedding into K on both sides.
-(blueprint: lem-pod-lisse-rational-scalar-fiber-comparison). -/
+naturality; its scalar coefficient acts through the same embedding into K on both sides. -/
 theorem lisseRationalFiberComparison_naturality
     (mT : IsLisseRationalFiberFunctor Y y l E T hT)
     (mU : IsLisseRationalFiberFunctor Y y l L U hU)
@@ -326,8 +318,7 @@ theorem lisseRationalFiberComparison_naturality
       (lisseRationalScalarFiberIso_integral_naturality Y y l E L ι K j k hjk F G g)
 
 /-- The natural comparison after extending both rational fibres to K.
-Source: Weil II (1.1.1) c), d)
-(blueprint: lem-pod-lisse-rational-scalar-fiber-comparison). -/
+Source: Weil II (1.1.1) c), d). -/
 def lisseRationalFiberComparisonNatIso
     (mT : IsLisseRationalFiberFunctor Y y l E T hT)
     (mU : IsLisseRationalFiberFunctor Y y l L U hU) :

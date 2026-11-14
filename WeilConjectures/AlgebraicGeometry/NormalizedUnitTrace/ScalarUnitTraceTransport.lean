@@ -11,8 +11,7 @@ public import Mathlib.CategoryTheory.Adjunction.Basic
 # Scalar transport of normalized unit counits
 
 The categorical calculation in Step 5 of open-immersion purity normalization.
-Source: smooth purity transport, coefficient compatibility and specified counits
-(blueprint: lem-pur-scalar-unit-trace-transport).
+Source: smooth purity transport, coefficient compatibility and specified counits.
 -/
 
 @[expose] public section
@@ -22,13 +21,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.ProEtale.NormalizedUnitTrace
 
 /-- The pointwise scalar counit calculation also applies when the adjunctions
-are restricted to full subcategories but the scalar functors remain ambient.
-Source: the unit instance of coefficient compatibility in smooth purity
-transport Step 4 (blueprint: lem-pur-scalar-unit-trace-transport).
-
-Proof: substitute the scalar counit equation, move the source unitor by
-naturality of the support map, and cancel its invertible component. Cancel
-the source comparison, then apply counit naturality at the scalar-unit map. -/
+are restricted to full subcategories but the scalar functors remain ambient. -/
 theorem scalarUnitTraceTransport_pointwise
     {C₀ D₀ C₁ D₁ : Type*}
     [Category C₀] [Category D₀] [Category C₁] [Category D₁]
@@ -69,16 +62,7 @@ theorem scalarUnitTraceTransport_pointwise
       simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
 
 /-- Transport a smooth counit through its specified scalar square and the unit
-and Tate-line identifications. The formula retains all three comparison maps.
-
-Source: smooth purity transport coefficient compatibility, applied at the unit,
-and open-normalization Step 5
-(blueprint: lem-pur-scalar-unit-trace-transport).
-
-Proof: use naturality of the inverse support comparison to move the source
-unitor through it. Substitute the scalar counit identity. The inverse source
-comparison cancels its forward map. Naturality of the target counit transports
-the scalar-unit isomorphism to the target. The two unit isomorphisms cancel. -/
+and Tate-line identifications. The formula retains all three comparison maps. -/
 theorem scalarUnitTraceTransport
     {C₀ D₀ C₁ D₁ : Type*}
     [Category C₀] [Category D₀] [Category C₁] [Category D₁]

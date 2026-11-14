@@ -154,18 +154,7 @@ private def signedSourceIso (M : D) (n : ℤ) :
 end Shift
 
 /-- Native derived internal Hom has the signed exact contravariant structure.
-Source: Stacks Project, Tags 08J9 and 08JC
-(blueprint: lem-sf-native-derived-hom-signed-exact).
-
-Proof: mate composition and tensor-shift naturality prove naturality of the
-prescribed signed components. Their zero and addition equations assemble them
-into a CommShift structure, without choosing any of its maps from an existence
-theorem. For a distinguished opposite triangle, choose a distinguished original
-triangle presenting it. Present that triangle as a localized ordinary cone by
-DerivedCategory.mem_distTriang_iff. The signed cone-boundary calculation proves
-that its image, with exactly the constructed degree-one component, is
-distinguished. Transport along the two triangle isomorphisms using mapTriangle.
-All integer components have the prescribed formula by construction. -/
+Source: Stacks Project, Tags 08J9 and 08JC. -/
 theorem nativeDerivedHom_signed_exact
     {C : Type d} [Category.{u + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C]

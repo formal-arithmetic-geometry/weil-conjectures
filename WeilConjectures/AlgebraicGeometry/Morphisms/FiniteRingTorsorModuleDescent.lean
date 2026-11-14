@@ -18,8 +18,7 @@ import Mathlib.CategoryTheory.Sites.LocallyBijective
 /-!
 # Associated module sheaves for a finite torsor with finite ring coefficients
 
-Source: Stacks Project, Tags 0DV5 (3), 0DV6, 04TR and 04TS
-(blueprint: lem-weil-pbc-finite-ring-torsor-module-descent).
+Source: Stacks Project, Tags 0DV5 (3), 0DV6, 04TR and 04TS.
 -/
 
 @[expose] public section
@@ -75,26 +74,8 @@ private def SectionEvaluationNormalizedOver
 end Scheme.GaloisCover
 
 /-- Ordinary evaluation exists without imposing deck equivariance.
-Source: Stacks Project, Tags 0DV5 (3), 0DV6 and 0A3R; sites.tex, Example
-constant-sheaf and Tags 04TR and 04TS. Fixed-cover adaptation to arbitrary modules.
-(blueprint: lem-weil-pbc-torsor-ordinary-evaluation)
-
-Proof: For the etale map Y to V, inverse image identifies with restriction to
-Y's small etale site. Under the supplied trivialization, a section over an etale
-Y-object U is a locally constant A-valued function on U: constant presheaf sections
-are locally constant sections, and sheafification glues these on etale covers.
-Etale maps are open, so the glued constant labels give locally constant functions
-on the underlying space. Conversely their open fibres give the required gluing.
-These identifications preserve addition, scalars, and restriction. Since Y is
-nonempty and connected, evaluation identifies the global sections of this constant
-sheaf with A. Invert this isomorphism to identify A with F(Y); under this identification
-a global section x restricts to the constant function with value x. For each W,
-restrict s to U=W times_V Y, considered over Y, and read it as a locally constant
-F(Y)-valued function. This defines the linear map beta_W. Restriction along W' to W
-commutes with this construction, giving the naturality equation. For W=Y, restriction
-along the diagonal is the original section s, giving the diagonal equation. The
-empty object has the unique zero function; the construction also covers zero
-coefficients and the identity torsor. No equivariance is imposed at this step. -/
+Source: Stacks Project, Tags 0DV5 (3), 0DV6 and 0A3R; Example constant-sheaf and Tags 04TR and 04TS.
+Fixed-cover adaptation to arbitrary modules. -/
 private theorem Scheme.GaloisCover.exists_ordinarySectionEvaluationOver
     {V : Scheme.{u}} [ConnectedSpace V] (Λ : Type (u + 1)) [CommRing Λ]
     (P : Type u) [Group P] [Finite P]
@@ -220,25 +201,7 @@ private theorem Scheme.GaloisCover.exists_ordinarySectionEvaluationOver
 
 /-- Constant coordinates for a sheaf trivialized by a connected torsor, with a
 pointwise local description by restrictions of global sections upstairs.
-Source: Stacks Project, Tags 0DV5 (3), 0DV6, 0A3R, 04TR and 04TS;
-lem-weil-pbc-torsor-normalized-graph-evaluation, step 1.
-(blueprint: lem-weil-pbc-torsor-normalized-graph-evaluation)
-
-Proof:
-The comparison between inverse image and localization on the small etale site identifies
-F restricted to c.P with the supplied constant module sheaf A. The constant module sheaf
-on a scheme is the sheaf of locally constant A-valued functions: its constant presheaf
-maps into locally constant functions and this map is both locally injective and locally
-surjective, by covering with open fibres of a locally constant function. Sheafification
-therefore gives the comparison isomorphism. Since c.P is connected and nonempty, every
-locally constant A-valued function on c.P has a unique constant value. Evaluation of this
-isomorphism at c.P identifies A with F(c.P). Apply the coefficient equivalence pointwise
-to get the equivalence gamma on W, regarding W as etale over c.P via f. For s and w,
-take the open fibre of gamma(s) through w. Its open subscheme U, with inclusion i and
-point z over w, is etale over V. On U the coordinate function is constantly x, so the
-restricted section equals the restriction of x in F(c.P), as asserted. If W is empty
-there is no point w and the local assertion is vacuous; both section sets are singletons.
-The zero module also gives singleton section sets, so the same argument applies. -/
+Source: Stacks Project, Tags 0DV5 (3), 0DV6, 0A3R, 04TR and 04TS -/
 private theorem Scheme.GaloisCover.constantCoordinates_localRestrictionOver
     {V : Scheme.{u}} [ConnectedSpace V] (Λ : Type (u + 1)) [CommRing Λ]
     (P : Type u) [Group P] [Finite P]
@@ -374,25 +337,7 @@ private theorem Scheme.GaloisCover.constantCoordinates_localRestrictionOver
 
 /-- The value of an ordinary normalized evaluation on the graph of f gives the
 constant-sheaf coordinates on W. No equivariance of the evaluation is assumed.
-Source: Stacks Project, Tags 0DV5 (3), 0DV6, 0A3R, 04TR and 04TS;
-lem-weil-pbc-torsor-section-evaluation-local, steps 1 and 3.
-(blueprint: lem-weil-pbc-torsor-normalized-graph-evaluation)
-
-Proof:
-Use the etale inverse-image/localization comparison to identify the restriction of F
-to c.P with the given constant sheaf A. A morphism between etale V-objects is etale,
-so f makes W an object of the small etale site of c.P. Its sections on an etale object T are locally
-constant functions on T with value A. Since c.P is connected and nonempty, constant
-functions identify A with F(c.P); restriction of a global section x is the constant
-function x. This gives a canonical bijection gamma between F(W) and locally constant
-functions on W with value F(c.P), where W is regarded as etale over c.P using f.
-For a point of W and a section s, take an open neighborhood on which gamma(s) is the
-constant value x. On that neighborhood s is the restriction of x along f. Naturality
-of beta then identifies its value on the graph with beta at c.P evaluated on the
-diagonal at f(w), which equals x by normalization. Thus graph evaluation after beta
-is gamma, pointwise, and is bijective. On an empty W both the sheaf sections and locally
-constant functions have a unique element by the empty covering. No torsor splitting
-or extension of equivariant functions is used in this argument. -/
+Source: Stacks Project, Tags 0DV5 (3), 0DV6, 0A3R, 04TR and 04TS -/
 private theorem Scheme.GaloisCover.ordinaryGraphEvaluation_bijectiveOver
     {V : Scheme.{u}} [ConnectedSpace V] (Λ : Type (u + 1)) [CommRing Λ]
     (P : Type u) [Group P] [Finite P]
@@ -505,25 +450,8 @@ private theorem evaluation_of_local_presentation
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A natural ordinary evaluation normalized on the diagonal is deck-equivariant.
-Source: Stacks Project, Tags 0DV5 (3), 0DV6 and 0A3R; sites.tex, Example
-constant-sheaf and Tags 04TR and 04TS. Fixed-cover adaptation to arbitrary modules.
-(blueprint: lem-weil-pbc-torsor-ordinary-evaluation-equivariant)
-
-Proof: The constant trivialization and connectedness of Y identify the restricted
-sheaf with the locally constant function sheaf valued in F(Y), with restriction of
-a global section a corresponding to the constant function a. Put U=W times_V Y,
-with projections p to W and q to Y, and restrict s to t=p*s. Around any point x of
-U choose an etale neighbourhood T on which t=q*a for some a in F(Y). On the graph
-of q:T to Y, naturality of beta along q and diagonal normalization give value a;
-naturality along p then gives beta_W(s)(x)=a. Etale covers are surjective on points,
-so such neighbourhoods determine all the values of beta. At the translated point
-g*x, use the same T with its Y-map changed from q to g*q. The same section t is now
-the restriction of b=F(g inverse)(a), since (g*q)*b=q*a. Naturality and diagonal
-normalization therefore give beta_W(s)(g*x)=b. This is exactly the action in
-sectionRepresentation, whose scalar restriction does not change underlying values.
-This argument uses only local constant presentations of sections, not uniqueness of
-a chosen trivialization or any equivariance assumption on beta. Empty objects give
-a vacuous assertion; zero coefficients and the identity torsor obey the same formula. -/
+Source: Stacks Project, Tags 0DV5 (3), 0DV6 and 0A3R; Example constant-sheaf and Tags 04TR and 04TS.
+Fixed-cover adaptation to arbitrary modules. -/
 private theorem Scheme.GaloisCover.ordinarySectionEvaluation_equivariantOver
     {V : Scheme.{u}} [ConnectedSpace V] (Λ : Type (u + 1)) [CommRing Λ]
     (P : Type u) [Group P] [Finite P]
@@ -641,18 +569,7 @@ private theorem Scheme.GaloisCover.ordinarySectionEvaluation_equivariantOver
   rfl
 
 /-- Evaluation on the chosen graph determines an equivariant locally constant function.
-Source: Stacks Project, Tags 0DV5 (3), 0DV6 and 0A3R;
-lem-weil-pbc-torsor-section-evaluation-local, step 2.
-(blueprint: lem-weil-pbc-torsor-graph-evaluation)
-
-Proof: Base change the torsor isomorphism along f to split W times_V c.P into
-copies of W indexed by the finite group. The copy indexed by g is the graph of f
-followed by the action of g on the second factor. Thus these translates jointly
-cover the total space. If two equivariant functions agree on the graph, then at a
-point in its g-th translate their values both equal rho(g) applied to the same
-graph value. They therefore agree everywhere. This also covers empty W, with a
-vacuous pointwise assertion, and the trivial group, whose single translate is W.
-No connectedness, primality, sheaf, normalization, or constant trivialization is used. -/
+Source: Stacks Project, Tags 0DV5 (3), 0DV6 and 0A3R -/
 private theorem Scheme.GaloisCover.graphEvaluation_injectiveOver
     {V : Scheme.{u}} (Λ : Type (u + 1)) [CommRing Λ] {P : Type u} [Group P] [Finite P]
     (c : Scheme.GaloisCover (ULift.{u + 1} P) V)
@@ -711,22 +628,6 @@ private theorem Scheme.GaloisCover.graphEvaluation_injectiveOver
 
 /-- Normalized evaluation is bijective on an etale object with a map to the torsor.
 Source: Stacks Project, Tags 0DV5 (3), 0DV6 and 0A3R.
-(blueprint: lem-weil-pbc-torsor-section-evaluation-local)
-
-Proof:
-Write Y for the total space of c. Since Y is connected and nonempty, the supplied
-constant trivialization identifies F(Y) with A and identifies the restriction of F
-on Y with the locally constant function sheaf with value F(Y). The map f gives a
-section of W times_V Y over W. The torsor isomorphism splits this product into
-translates of that section, indexed by P. Evaluation on the chosen section therefore
-identifies equivariant locally constant functions with locally constant functions
-on W with value F(Y): extend such a function on each translate using the P action.
-These formulas are inverse, including on the empty W. Under the constant
-trivialization, a section of F(W) is locally a restriction of a section x of F(Y).
-Naturality of alpha along f and diagonal normalization show that its evaluation
-on the chosen section is exactly x on each such open. Equality of locally constant
-functions is local, so alpha is the inverse of the evaluation identification.
-No descent along W times_V Y to an arbitrary W is asserted here; f is essential.
 -/
 private theorem Scheme.GaloisCover.sectionEvaluation_bijective_of_sectionOver
     {V : Scheme.{u}} [ConnectedSpace V] (Λ : Type (u + 1)) [CommRing Λ]
@@ -766,26 +667,7 @@ private theorem Scheme.GaloisCover.sectionEvaluation_bijective_of_sectionOver
 
 /-- There is a normalized evaluation morphism into equivariant locally constant functions.
 This asserts existence and naturality of the evaluation map, not its bijectivity.
-Source: Stacks Project, Tags 0DV5 (3), 0DV6 and 0A3R.
-(blueprint: lem-weil-pbc-torsor-section-evaluation)
-
-Proof:
-Write Y for the total space. Restrict F to the small etale site of Y. The inverse-image
-comparison for an etale morphism identifies this restriction with c*F. The given constant
-trivialization, and connectedness and nonemptiness of Y, identify F(Y) with the constant
-value A: global locally constant functions on Y are constant. Under this identification,
-the constant section associated to x in F(Y) is the restriction of x. Thus the restriction
-of F to Y is canonically the locally constant function sheaf with value F(Y), independently
-of the initial trivialization. For W over V, restrict a section s of F(W) to W times_V Y,
-regarded as an etale Y-scheme. Read it in this function sheaf to obtain a locally constant
-function with values in F(Y). Under a deck transformation g of the second factor, this
-function changes by restriction along g inverse on F(Y). This follows by restricting a
-constant section x along g: its new constant value is F(g inverse)(x). Hence the function
-is equivariant for sectionRepresentation. The assignments are linear, with scalars
-transported through ULift.ringEquiv, and restriction of functions commutes with restriction
-of s, giving a natural transformation. At W=Y, pullback along the diagonal is the original
-section x, so evaluation there has the stated normalization. The construction also works
-for the zero module and the identity torsor. -/
+Source: Stacks Project, Tags 0DV5 (3), 0DV6 and 0A3R. -/
 private theorem Scheme.GaloisCover.exists_sectionEvaluationOver
     {V : Scheme.{u}} [ConnectedSpace V] (Λ : Type (u + 1)) [CommRing Λ]
     (P : Type u) [Group P] [Finite P]
@@ -820,30 +702,7 @@ recovers a module sheaf trivialized by the torsor. The associated functor is alr
 constructed; its pullback and coefficient comparisons are proved separately.
 This statement constructs no filtration and makes no Sylow or degree assertion.
 
-Source: Stacks Project, Tag 0DV5 (3), Tag 0DV6, and Tags 04TR and 04TS
-(blueprint: lem-weil-pbc-finite-ring-torsor-module-descent).
-
-Proof:
-Take M to be F(c.P), with g acting by restriction along its inverse deck transformation.
-Use the module-valued locally constant description of the supplied constant pullback.
-Connectedness and nonemptiness identify its coefficient module linearly with F(c.P).
-Restricting a section over W to W times_X c.P gives a natural linear evaluation beta_W,
-normalized on the diagonal. This construction stays in ModuleCat, so it works for a
-general coefficient ring without inferring linearity from additivity.
-
-On an object admitting a map f to c.P, constant coordinates identify sections with
-locally constant F(c.P)-valued functions. Restriction to an open fibre gives a local
-constant presentation. Naturality and diagonal normalization show beta's value on the
-graph of f is exactly these coordinates. Changing f by a deck transformation proves
-beta is equivariant, giving a natural map alpha into M's equivariant section presheaf.
-
-The translates of the graph cover the fibre product, so evaluation on the graph is
-injective on equivariant functions. Its composite with alpha is the coordinate
-bijection, hence alpha is bijective on every object mapping to c.P. Every etale object
-is covered by its pullback of the torsor. Thus alpha is locally injective and locally
-surjective. Sheafification inverts alpha; composing its inverse with the counit for F
-gives the claimed isomorphism. This includes empty objects, the zero module, the zero
-coefficient ring and the identity torsor. -/
+Source: Stacks Project, Tag 0DV5 (3), Tag 0DV6, and Tags 04TR and 04TS. -/
 theorem exists_finiteRing_module_descent
     {X : Scheme.{u}} [ConnectedSpace X]
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]

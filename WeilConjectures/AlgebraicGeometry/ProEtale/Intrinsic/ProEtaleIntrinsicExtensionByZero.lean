@@ -12,8 +12,7 @@ public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 /-!
 # Extension by zero over the intrinsic constant coefficient sheaf
 
-Source: Weil blueprint, order 1471; Stacks Project, Tags 03DI, 03DJ and 09AE
-(blueprint: def-weil-extension-by-zero).
+Source: Stacks Project, Tags 03DI, 03DJ and 09AE.
 -/
 
 @[expose] public section
@@ -29,7 +28,7 @@ namespace AlgebraicGeometry.Scheme
 /-- The canonical realization equivalence extends fixed scalar actions to locally constant
 scalar sections. Its inverse is the inverse of that fully faithful, essentially surjective
 functor, not a freely chosen coefficient identification.
-Source: Stacks, Tag 00YV (blueprint: def-weil-extension-by-zero). -/
+Source: Stacks, Tag 00YV. -/
 noncomputable def sfIntrinsicModuleEquivalence (T : Scheme.{u})
     (A : Type u) [CommRing A] [Finite A] :
     Sheaf (ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) ≌
@@ -42,8 +41,7 @@ the middle functor is left Kan extension along the localization followed by shea
 its sections are the unique summand indexed by a factorization through the open immersion,
 or zero if there is no such factorization. The canonical realization equivalences extend
 this same scalar action to the constant coefficient sheaves and transport both objects and
-maps. Source: blueprint order 1471; Stacks, Tags 03DI and 09AE
-(blueprint: def-weil-extension-by-zero). -/
+maps. Source: Stacks, Tags 03DI and 09AE. -/
 noncomputable def sfIntrinsicExtensionByZero {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] (A : Type u) [CommRing A] [Finite A] :
     proEtaleRingModules U (proEtaleConstantRing U A) ⥤

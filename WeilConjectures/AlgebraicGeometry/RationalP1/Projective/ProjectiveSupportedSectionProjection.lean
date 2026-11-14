@@ -36,27 +36,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 -- The statement compares the fixed derived pullback and tensor interfaces.
 /-- Section/projection coherence on the supported coefficient source, before any class map.
 
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md,
-Second identity, the section identity Rp2* RDelta* = id; Stacks Tags 0B56 and 0DV0.
-(blueprint: lem-sfb-projective-supported-section-projection).
-
-Proof: specialize the section identity in ringedProjectionTensorComposition to the
-closed section Delta of p2 and transport it by the normalized internal-module/ringed
-comparison. Use the unrestricted projection_comparison, derived_homEquiv and
-composition_comparison clauses of ModuleRingedComparison: its finite-type wrapper
-theorem is not needed. Its two projection arrows are the fixed projectionMap arrows, and the
-right comparison is conjugate to pullSectionIso, hence is pushSectionIso. Specialize
-the coefficient argument to the regular module and compose with its right unitor.
-This gives the identity using pushSectionIso on the regular coefficient source.
-The exact closed direct image identifies this source with supportedUnitIso.
-On single complexes, the normalization of d.support2.iso is precisely the ordinary
-composition Delta p2 = id. The full-unit equation d.p2_unit identifies its subsequent
-right-derived source arrow with the canonical right-derived unit. Thus the coefficient
-source arrow is d.support2.hom followed by secondDiagramPushIso. Substitute this in
-the section identity to obtain the displayed formula. Only the supported source and
-its normalization are used from d: no delta, trace or integration equation occurs.
-This proof applies to arbitrary unbounded M, including zero M and empty Y. -/
+Source: Stacks Tags 0B56 and 0DV0. -/
 theorem supported_section_projection
     (Y : Scheme.{u}) (L : ∀ X : Scheme.{u}, Modules Λ X) (d : Diagram Λ Y L)
     (M : DerivedCategory (Modules Λ (ProjectiveLine Y))) :

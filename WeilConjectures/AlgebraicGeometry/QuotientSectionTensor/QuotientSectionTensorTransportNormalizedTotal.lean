@@ -136,12 +136,7 @@ attribute [local irreducible] CochainComplex.IsKFlatIndependentCoefficients
 -- equation. The repaired statement requires its tensor-section conjugation square.
 /-- The pure section comparison extends to the normalized signed total on K-flat pairs
 for the section conjugate of the given internal tensorator.
-Source: Stacks 06YS, 07A4 and 0G7D; parent proof steps 3--5.
-(blueprint: lem-sfb-quotient-section-tensor-transport-normalized-total).
-
-Proof: totalize the balancing map with the Koszul sign on each bidegree.  The
-coproduct inclusions give the summand equations, and the localization counit square
-gives the derived comparison equation. -/
+Source: Stacks 06YS, 07A4 and 0G7D. -/
 theorem section_tensor_transport_normalized_total (T : Scheme.{u})
     (c : ScalarSectionData a T) (hc : ScalarSectionNormalized a T c)
     (b : TensorIso a T) (hb : TensorNormalized a T b)

@@ -10,7 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.RelativeProj.Basic
 /-! # Coefficients in the structural map of a relative Proj chart
 
 Source: Stacks Project, Constructions, Tags 01ME and 01NQ.
-(blueprint: lem-trf-relative-proj-chart-scalar).
 -/
 
 @[expose] public section
@@ -38,18 +37,7 @@ private theorem localization_map_constant (B : Type u) [CommRing B]
 /-- The structural map reads a base coefficient as its constant homogeneous fraction.
 This is a ring-section identity; it asserts no existence or descent of module sheaves.
 
-Source: Stacks, Tags 01ME and 01NQ, affine structural maps in relative Proj.
-(blueprint: lem-trf-relative-proj-chart-scalar).
-
-Proof: the chart inclusion followed by relProjHom equals toOpen U followed by the
-base open immersion. The latter identifies the affine base with Spec O(U), and
-its first map is toSpecOfAlgebra. The definition of toSpecZero uses the map
-from the degree-zero subring into the homogeneous localization at powers of 1,
-followed by awayToSection on D_+(1), which is the whole Proj. Cancel the global-section
-isos for the open subschemes to express the map by these ring maps. Evaluation of
-awayToSection is further localization at the point. A localization map sends a/1
-to a/1, giving the claimed formula. The open restrictions are pointwise. This also
-handles zero rings and empty charts, where there is no point. -/
+Source: Stacks, Tags 01ME and 01NQ, affine structural maps in relative Proj. -/
 theorem chart_scalar_value {S : Scheme.{u}} (A : S.GradedAlgebraData)
     (U : S.affineOpens) (r : Γ(S, U.1))
     (x : A.relProjι U ⁻¹ᵁ (A.relProjHom ⁻¹ᵁ U.1)) :

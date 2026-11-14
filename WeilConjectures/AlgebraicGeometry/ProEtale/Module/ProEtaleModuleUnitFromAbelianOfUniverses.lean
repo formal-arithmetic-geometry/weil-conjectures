@@ -48,7 +48,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModuleAdjunction
 /-! # Module units from abelian units in independent universes
 
 Source: Stacks Project, Modules on Sites, Tags 03D2 and 03D3.
-(blueprint: lem-u9-proetale-module-unit-from-abelian-universes).
 -/
 
 @[expose] public noncomputable section
@@ -196,7 +195,6 @@ private noncomputable def modelModuleEquivalence (Z : Scheme.{t})
 of the actual abelian unit to the actual module unit, for independent universes.
 
 Source: Stacks Project, Modules on Sites, Tags 03D2 and 03D3.
-(blueprint: lem-u9-proetale-module-unit-from-abelian-universes).
 
 Proof. Reindex the actual ring, abelian and module direct images to small sites
 in the coefficient universe. Restrict the supplied ring and abelian adjunctions;

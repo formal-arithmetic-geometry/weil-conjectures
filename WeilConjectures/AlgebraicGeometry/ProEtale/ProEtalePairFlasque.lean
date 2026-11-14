@@ -131,8 +131,7 @@ import WeilConjectures.CategoryTheory.SheavesAlgebraicStructuresAbelian
 /-!
 # Supported sections and flasqueness for a pro-etale open-closed pair
 
-Source: blueprint sec-smooth-purity/sk-prop-a1-kummer/def-pur-flasque-support.md;
-Stacks Project, Tags 03DA, 09BN and 09AH (blueprint: definition-local-cohomology).
+Source: Stacks Project, Tags 03DA, 09BN and 09AH.
 
 The existing `finiteSupportedSections` and `finiteClosedUpperShriek` give the kernel functor
 and its closed inverse image. Constant-coefficient module sheaves are presented as
@@ -151,8 +150,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- The canonical comparison `G_Z ⟶ s_*s^!`, obtained by applying the closed
 adjunction unit to the supported kernel. It is defined even when the open complement
-is not quasi-compact. Source: blueprint definition-local-cohomology, comparison paragraph;
-Stacks Tag 09AH (blueprint: definition-local-cohomology). -/
+is not quasi-compact. Source: Stacks Tag 09AH. -/
 noncomputable def finiteSupportedClosedComparison (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] {X Z U : Scheme.{u}} (s : Z ⟶ X) (j : U ⟶ X) :
     finiteSupportedSections Λ j ⟶
@@ -170,16 +168,7 @@ private local instance moduleSheaf_colimits (Λ : Type (u + 1)) [CommRing Λ]
   exact IsGrothendieckAbelian.hasColimits _
 
 /-- Both the supported-kernel functor and its closed inverse image are left exact.
-Source: blueprint definition-local-cohomology, left-exactness paragraph; Stacks Tag 03DA
-(blueprint: definition-local-cohomology).
-
-Proof (step 3): a supported section in the kernel of a map lifts uniquely through
-any preceding monomorphism, because kernels are sectionwise. Restricting the lift to
-the open complement and using injectivity proves that this lift is itself supported.
-The zero sheaf maps to zero, and induced kernel maps respect addition. This gives
-left exactness of the supported-kernel functor. Apply the exact constant-coefficient
-closed inverse image (`prop-weil-pbc-proetale-constant-exact`) to obtain left exactness
-of its composite `finiteClosedUpperShriek`. No quasi-compactness is used. -/
+Source: Stacks Tag 03DA. -/
 theorem finiteSupportedSections_leftExact (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Z U : Scheme.{u}} (s : Z ⟶ X) [IsClosedImmersion s]
     (j : U ⟶ X) [IsOpenImmersion j]
@@ -203,14 +192,7 @@ theorem finiteSupportedSections_leftExact (Λ : Type (u + 1)) [CommRing Λ] [Fin
   exact ⟨hG, comp_preservesFiniteLimits _ _⟩
 
 /-- With quasi-compact open complement, the specified natural comparison is an
-isomorphism. Source: blueprint definition-local-cohomology, comparison paragraph;
-Stacks Tag 09AH (blueprint: definition-local-cohomology).
-
-Proof (step 2): step 1 identifies the restriction of the supported kernel to U with
-zero, since there the restriction map is an identity. Apply the canonical-unit
-clause of `lemma-passing-schematic-closure--1` to the supported kernel, with
-its quasi-compact-complement hypothesis. This is precisely the displayed comparison,
-and its naturality makes the objectwise isomorphisms a natural isomorphism. -/
+isomorphism. Source: Stacks Tag 09AH. -/
 theorem finiteSupportedClosedComparison_isIso (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] {X Z U : Scheme.{u}} (s : Z ⟶ X) [IsClosedImmersion s]
     (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]

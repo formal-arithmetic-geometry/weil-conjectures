@@ -11,8 +11,7 @@ public import Mathlib.AlgebraicGeometry.Limits
 
 /-! # FiniteAffineNormalizationCoproduct
 
-Source: Stacks Project and Mathlib.
-(blueprint: lem-sbc-finite-affine-normalization-coproduct) -/
+Source: Stacks Project and Mathlib. -/
 
 @[expose] public section
 
@@ -64,23 +63,7 @@ private theorem integral_fin_sigma_desc (r : ℕ) (Z : Fin r → Scheme.{u})
 set_option backward.isDefEq.respectTransparency false in
 /-- Relative normalization of a finite affine coproduct.
 
-Source: Stacks Project, Tag 035I; Mathlib Scheme.Hom.normalizationDesc.
-Proof: Let g_i be the affine structural maps and j_i the summand maps into X.
-The supplied equation gives j_i followed by f equal to g_i. The universal
-property of each normalization produces a map from g_i.normalization to
-f.normalization, hence a coproduct map a. Let b be the structural map from
-this coproduct to Spec A. It is integral: a finite coproduct of integral
-maps is integral, proved by splitting Fin (r+1) into its first summand and
-its tail, with the empty coproduct handled as an empty scheme. The map
-v from X to the coproduct of normalizations factors f through b. The
-universal property of f.normalization therefore gives the reverse map z.
-The equations toNormalization_normalizationDesc and normalizationDesc_comp
-show that a and z commute with both the source and structural maps.
-Normalization.hom_ext then proves that both composites are identities,
-on each summand for one direction and on f.normalization for the other.
-The structural equation for each inclusion is normalizationDesc_comp.
-No nonempty indexing assumption is used.
-(blueprint: lem-sbc-finite-affine-normalization-coproduct) -/
+Source: Stacks Project, Tag 035I. -/
 theorem finite_affine_normalization_coproduct
     (A : CommRingCat.{u}) (r : ℕ) (D : Fin r → Type u)
     [∀ i, CommRing (D i)] [∀ i, Algebra A (D i)]

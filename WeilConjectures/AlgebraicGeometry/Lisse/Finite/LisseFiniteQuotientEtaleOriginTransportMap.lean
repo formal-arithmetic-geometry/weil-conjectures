@@ -17,7 +17,6 @@ import WeilConjectures.SixFunctors.ProEtale.GaloisEvaluation
 /-! # The comparison morphism for finite quotient origin transport
 
 Source: Stacks Project, Tag 09C6.
-(blueprint: lem-weil-pbc-lisse-finite-quotient-etale-origin-transport-map).
 -/
 
 @[expose] public noncomputable section
@@ -81,20 +80,8 @@ private def constantEncodingIso (X : Scheme.{u})
 /-- A constant model on an étale chart gives an isomorphism to the actual pullback
 of `K`, hence a morphism which is monic and epic.
 
-Proof: restrict scalars to `B = A/I^(n+1)`. The retained `C.comparison` identifies
-its level with the fixed-coefficient pullback of `K`. Restrict the supplied model
-isomorphism to `B` and pull it along the factorization of `W` through `Z`.
-Comparison, scalar restriction, and pullback composition identify the result with
-the constant sheaf associated to the restricted algebraic complex `E`. Independently,
-encode `constantAdicQuotientRealization E` in these same fixed coefficients:
-restriction along the finite-coefficient comparison cancels its inverse, and
-constant module encoding and inverse image preserve constants. Compose the two
-isomorphisms and lift through the equivalence of coefficient encodings. Its hom
-is monic and epic. No local mono/epi detection in a derived category is needed.
-
-Source: Stacks Project, proetale.tex, Tags 09AL, 09B1 and 09C6, transporting
-`K_n = epsilon^(-1) L_n` along a supplied local constant model.
-(blueprint: lem-weil-pbc-lisse-finite-quotient-etale-origin-transport-map).
+Source: Stacks Project, Tags 09AL, 09B1 and 09C6, transporting `K_n = epsilon^(-1) L_n` along a
+supplied local constant model.
 -/
 theorem lisse_finite_quotient_etale_origin_transport_map
     {X Y : Scheme.{u}} {g : Y ⟶ X}

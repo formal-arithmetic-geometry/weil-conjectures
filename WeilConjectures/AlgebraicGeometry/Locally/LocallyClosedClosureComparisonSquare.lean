@@ -34,10 +34,7 @@ import WeilConjectures.AlgebraicGeometry.Derived.DerivedImmersionComparisonNorma
 
 /-! # The normalized locally closed closure comparison square
 
-Source: Weil blueprint main-20261015, sec-smooth-purity/sk-lem-sp-tower,
-lem-weil-finite-duality-site-comparison.proof.md, second paragraph;
-Stacks Tags 0GJ1, 04CA, 09AF, 099R and 0B65
-(blueprint: lem-sf-locally-closed-closure-comparison-square).
+Source: Stacks Tags 0GJ1, 04CA, 09AF, 099R and 0B65.
 
 All composites below use the specified open comparison and the specified derived
 closed counit mate. Normalized closure identifications are expressed in derived
@@ -57,24 +54,21 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 
 namespace AlgebraicGeometry.ProEtale
 /-- The closed-then-open extension F_e on the bounded below derived category.
-Source: blueprint locally closed comparison, second paragraph; Stacks 0GJ1 and 0B65
-(blueprint: lem-sf-locally-closed-closure-comparison-square). -/
+Source: Stacks 0GJ1 and 0B65. -/
 abbrev closureSquareEtaleFactor (A : Type (u + 1)) [CommRing A]
     {S V T : Scheme.{u}} (c : S ⟶ V) (v : V ⟶ T) [IsOpenImmersion v] :=
   (Etale.lowerStar (ModuleCat.{u + 1} A) c).rightDerivedFunctorPlus ⋙
     (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} A) v).mapDerivedCategoryPlus
 
 /-- The closed-then-open extension F_p on the bounded below derived category.
-Source: blueprint locally closed comparison, second paragraph; Stacks 0GJ1 and 0B65
-(blueprint: lem-sf-locally-closed-closure-comparison-square). -/
+Source: Stacks 0GJ1 and 0B65. -/
 abbrev closureSquareProEtaleFactor (A : Type (u + 1)) [CommRing A]
     {S V T : Scheme.{u}} (c : S ⟶ V) (v : V ⟶ T) [IsOpenImmersion v] :=
   (lowerStar (ModuleCat.{u + 1} A) c).rightDerivedFunctorPlus ⋙
     (openImmersionLowerShriek (ModuleCat.{u + 1} A) v).mapDerivedCategoryPlus
 
 /-- The termwise canonical open comparison o_j, with its direction fixed.
-Source: blueprint locally closed comparison, second paragraph; Stacks 0GJ1 and 0B65
-(blueprint: lem-sf-locally-closed-closure-comparison-square). -/
+Source: Stacks 0GJ1 and 0B65. -/
 def closureSquareOpenComparison (A : Type (u + 1)) [CommRing A]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapDerivedCategoryPlus ⋙
@@ -87,8 +81,7 @@ def closureSquareOpenComparison (A : Type (u + 1)) [CommRing A]
     Functor.mapDerivedCategoryPlusCompIso _ _
 
 /-- The canonical pullback compositor for a specified factorization of s.
-Source: blueprint locally closed comparison, second paragraph; Stacks 0GJ1 and 0B65
-(blueprint: lem-sf-locally-closed-closure-comparison-square). -/
+Source: Stacks 0GJ1 and 0B65. -/
 def closureSquareEtalePullComp (A : Type (u + 1)) [CommRing A]
     {S V T : Scheme.{u}} (f : S ⟶ V) (g : V ⟶ T) (s : S ⟶ T)
     (h : f ≫ g = s) :
@@ -98,8 +91,7 @@ def closureSquareEtalePullComp (A : Type (u + 1)) [CommRing A]
   Etale.upperStarCompDerivedPlus (ModuleCat.{u + 1} A) f g s h.symm
 
 /-- The inverse open unit on D+, descended termwise from the sheaf unit.
-Source: blueprint locally closed comparison, second paragraph; Stacks 0GJ1 and 0B65
-(blueprint: lem-sf-locally-closed-closure-comparison-square). -/
+Source: Stacks 0GJ1 and 0B65. -/
 def closureSquareProEtaleOpenRestriction (A : Type (u + 1)) [CommRing A]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapDerivedCategoryPlus ⋙
@@ -111,8 +103,7 @@ def closureSquareProEtaleOpenRestriction (A : Type (u + 1)) [CommRing A]
     Functor.mapDerivedCategoryPlusIdIso _
 
 /-- The canonical pullback compositor for a specified factorization of s.
-Source: blueprint locally closed comparison, second paragraph; Stacks 0GJ1 and 0B65
-(blueprint: lem-sf-locally-closed-closure-comparison-square). -/
+Source: Stacks 0GJ1 and 0B65. -/
 def closureSquareProEtalePullComp (A : Type (u + 1)) [CommRing A]
     {S V T : Scheme.{u}} (f : S ⟶ V) (g : V ⟶ T) (s : S ⟶ T)
     (h : f ≫ g = s) :

@@ -47,10 +47,10 @@ namespace AlgebraicGeometry
 
 variable {K : Type u} [Field K] {X : Scheme.{u}}
 
-/-- Blueprint `def-sc-ample`: Ample modules and the Hilbert degree.
+/-- Ample modules and the Hilbert degree.
 
-An `𝒪_X`-module `M` is *very ample* relative to `f : X ⟶ S` if there is a closed immersion
-`i : X ⟶ ℙ(n; S)` over `S`, into a projective space with finitely many homogeneous
+An `𝒪_X`-module `M` is *very ample* relative to `f: X ⟶ S` if there is a closed immersion
+`i: X ⟶ ℙ(n; S)` over `S`, into a projective space with finitely many homogeneous
 coordinates, with `i^* 𝒪(1) ≅ M`.
 
 This is the "projective" variant of the notion: Hartshorne (II.5) and EGA II (4.4.2) only ask
@@ -86,11 +86,11 @@ lemma IsVeryAmple.pullback {S Z : Scheme.{u}} {f : X ⟶ S} {M : X.Modules} (h :
   exact ⟨n, g ≫ i, hn, inferInstance, by rw [Category.assoc, hif],
     ⟨(Scheme.Modules.pullbackComp g i).symm.app _ ≪≫ (Scheme.Modules.pullback g).mapIso e⟩⟩
 
-/-- Blueprint `theorem-chow-s-lemma-projective-form`: The Segre embedding is a closed immersion (the
+/-- The Segre embedding is a closed immersion (the
 consequence that `𝒪(1) ⊠ 𝒪(1)` is very ample, recorded in its detailed form).
 
 **A tensor product of very ample modules is very ample.** If `M = i^* 𝒪(1)` and `N = j^* 𝒪(1)`
-for closed immersions `i : X ⟶ ℙ(n; S)` and `j : X ⟶ ℙ(m; S)` over `S`, then `M ⊗ N` is the
+for closed immersions `i: X ⟶ ℙ(n; S)` and `j: X ⟶ ℙ(m; S)` over `S`, then `M ⊗ N` is the
 pullback of `𝒪(1)` along the composite of the closed immersion `(i, j)` into
 `ℙ(n; S) ×_S ℙ(m; S)` with the Segre embedding into `ℙ(n × m; S)`. -/
 theorem IsVeryAmple.tensorObj {S : Scheme.{u}} {f : X ⟶ S} {M N : X.Modules}
@@ -119,7 +119,7 @@ theorem IsVeryAmple.tensorPow {S : Scheme.{u}} {f : X ⟶ S} {M : X.Modules}
   | 1, _ => hM.of_iso (ρ_ M).symm
   | k + 2, _ => hM.tensorObj (hM.tensorPow (Nat.succ_pos k))
 
-/-- Blueprint `def-sc-ample`: Ample modules and the Hilbert degree.
+/-- Ample modules and the Hilbert degree.
 
 An `𝒪_X`-module `M` on a `K`-scheme `X` is *ample* if it is invertible and some positive tensor
 power of it is very ample in the sense of `AlgebraicGeometry.IsVeryAmple`.
@@ -166,7 +166,7 @@ theorem IsAmple.tensorPow {f : X ⟶ Spec (.of K)} {L : X.Modules} (hL : IsAmple
   exact ⟨inferInstance, m, hm, (hLm.tensorPow hk).of_iso ((L.tensorPowMulIso m k).symm ≪≫
     eqToIso (congrArg L.tensorPow (Nat.mul_comm m k)) ≪≫ L.tensorPowMulIso k m)⟩
 
-/-- Blueprint `lemma-symmetric-ample-sheaf--1`: Tensor products of ample modules.
+/-- Tensor products of ample modules.
 
 **A tensor product of ample modules is ample** (Stacks 0890). If `L^{⊗ a}` and `M^{⊗ b}` are
 very ample, then so are `(L^{⊗ a})^{⊗ b} ≅ L^{⊗ ab}` and `(M^{⊗ b})^{⊗ a} ≅ M^{⊗ ab}`, hence also
@@ -182,11 +182,9 @@ theorem IsAmple.tensorObj {f : X ⟶ Spec (.of K)} {L M : X.Modules} (hL : IsAmp
     eqToIso (congrArg M.tensorPow (Nat.mul_comm b a)))) ≪≫ (L.tensorPowTensorObjIso M _).symm
 
 /-- **Very ampleness is stable under field extension.** If `M = i^* 𝒪(1)` for a closed
-immersion `i : X ⟶ ℙ(n; k)`, then for a field extension `K/k` the base change `M_K` is the
-pullback of `𝒪(1)` along the base change `i_K : X_K ⟶ ℙ(n; K)` of `i`, which is again a closed
-immersion (Stacks 01JY).
-
-(blueprint: `theorem-hilbert-schemes-points-smooth-curve--1`, `lem-pc-closed-imm-base-change`) -/
+immersion `i: X ⟶ ℙ(n; k)`, then for a field extension `K/k` the base change `M_K` is the
+pullback of `𝒪(1)` along the base change `i_K: X_K ⟶ ℙ(n; K)` of `i`, which is again a closed
+immersion (Stacks 01JY). -/
 theorem IsVeryAmple.pullback_of_field {k : Type u} [Field k] {f : X ⟶ Spec (.of k)}
     {M : X.Modules} (h : IsVeryAmple f M) (K : Type u) [Field K] [Algebra k K] :
     IsVeryAmple (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k K))))
@@ -213,9 +211,7 @@ theorem IsVeryAmple.pullback_of_field {k : Type u} [Field k] {f : X ⟶ Spec (.o
     (Scheme.Modules.pullback (pullback.fst f g)).mapIso e
 
 /-- **Ampleness is stable under field extension**, by
-`AlgebraicGeometry.IsVeryAmple.pullback_of_field` applied to a very ample tensor power.
-
-(blueprint: `theorem-hilbert-schemes-points-smooth-curve--1`) -/
+`AlgebraicGeometry.IsVeryAmple.pullback_of_field` applied to a very ample tensor power. -/
 theorem IsAmple.pullback_of_field {k : Type u} [Field k] {f : X ⟶ Spec (.of k)}
     {M : X.Modules} (h : IsAmple f M) (K : Type u) [Field K] [Algebra k K] :
     IsAmple (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k K))))

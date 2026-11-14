@@ -21,9 +21,6 @@ import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLine
 import WeilConjectures.EtaleCohomology.Purity.Smooth.Coprojection
 
 /-! # The normalized Tate coefficient over a field
-
-Source: the rank-one local coefficient calculation in
-`lem-sp-normalized-tate-line-comparison`, proof step 2.
 -/
 
 @[expose] public section
@@ -108,26 +105,7 @@ private theorem normalized_zero_tensor_unit
   exact ⟨((derivedTensor (ModuleCat.{u + 1} Λ) Y).obj _).mapIso r.symm ≪≫
     cop.symm ≪≫ H.mapIso (derivedTensorLeftUnitor (ModuleCat.{u + 1} Λ) A L) ≪≫ q⟩
 
-/-- Over a field the zero-section normalization determines the degree-one coefficient.
-Source: `lem-sp-normalized-tate-line-comparison`, proof step 2, refining the coefficient
-identification before the diagonal construction in `thm-amb-p1-adjunction.proof.md`.
-(blueprint: lem-sp-normalized-tate-line-over-field).
-
-Proof in words: write s for the zero section and p for the projection of the affine
-line over the field. The normalized coordinate boundary gives an isomorphism from
-the constant complex to s! applied to the given line shifted by two. For the finite
-root line the concrete Kummer calculation gives the same isomorphism. Both coefficient
-lines on the affine line are pullbacks from the field. The finite root line has its
-sheaf dual as a tensor inverse, and the given line is invertible by the Tate datum.
-The co-projection formula moves either invertible pulled-back line past s!. Thus the
-two normalization isomorphisms identify tensoring s! of the constant complex with
-either shifted line with the unit. Either equality also makes that common factor
-invertible, so cancellation identifies the two shifted lines on the field. Cancel
-the shift by two. This uses the concrete Kummer computation (or its Noetherian
-projective-line/open-chart proof), without an abstract normalized projective-line
-adjunction. If the coefficient ring is zero, all module sheaves and their complexes
-are zero and the asserted isomorphism is unique. No descent to a non-field base is
-part of this statement. -/
+/-- Over a field the zero-section normalization determines the degree-one coefficient. -/
 theorem nonempty_normalizedTateLineOverField
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ]
     [HasTateTwist.IsNormalized Λ] (N : ℕ) (_hN : 0 < N) (hΛ : (N : Λ) = 0)

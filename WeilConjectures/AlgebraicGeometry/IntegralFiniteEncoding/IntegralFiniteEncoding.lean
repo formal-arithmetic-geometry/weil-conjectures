@@ -212,7 +212,6 @@ import all WeilConjectures.AlgebraicGeometry.CoefficientComparisonFixedPullback
 /-! # Finite internal coefficients on the coefficient-sized site
 
 Source: Stacks Tags 00YV, 03CY, and 099Y.
-(blueprint: def-pe-integral-finite-encoding).
 -/
 
 @[expose] public noncomputable section
@@ -268,8 +267,7 @@ def smallSiteSheafEquivalence (X : Scheme.{u})
     (Scheme.coefficientProEtaleModelTopology.{u, u} X) (ModuleCat.{u + 1} A)
 
 /-- The normalized section-action encoding followed by the actual AsSmall equivalence
-and inverse constant-scalar restriction. Source: Stacks Tags 00YV and 03CY
-(blueprint: def-pe-integral-finite-encoding). -/
+and inverse constant-scalar restriction. Source: Stacks Tags 00YV and 03CY. -/
 def finiteEncodingFunctor (A : Type u) [CommRing A]
     [TopologicalSpace A] [IsTopologicalRing A]
     (X : Scheme.{u}) (e : FiniteDiscreteOrdinary.Encoding A X) :
@@ -300,7 +298,7 @@ instance finiteEncoding_additive (A : Type u) [CommRing A]
   infer_instance
 
 /-- Exact derived encoding into constant-ring modules on the coefficient-sized site.
-Source: Stacks Tag 099Y (blueprint: def-pe-integral-finite-encoding). -/
+Source: Stacks Tag 099Y. -/
 def finiteEncodingDerived (A : Type u) [CommRing A]
     [TopologicalSpace A] [IsTopologicalRing A]
     (X : Scheme.{u}) (e : FiniteDiscreteOrdinary.Encoding A X) :=

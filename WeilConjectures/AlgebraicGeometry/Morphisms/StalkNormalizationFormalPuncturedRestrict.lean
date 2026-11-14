@@ -134,23 +134,7 @@ private theorem formal_test_zero_slice_mem {S C : Scheme.{u}}
 formal test has punctured zero slice.
 
 Source: Stacks Project, Tags 035I and 03GV (relative normalization and smooth
-base change), Tag 0EYJ (the punctured local-base calculation).
-(blueprint: lem-sbc-stalk-normalization-formal-punctured-restriction)
-
-Proof: The pullback of PA -> C_U -> C along C_U -> C is PA -> C_U,
-because the open inclusion is a monomorphism. This pullback morphism is finite
-and hence integral, so its map to its own relative normalization is an
-isomorphism. Relative normalization commutes with smooth base change along
-the open inclusion. Therefore the normalization restricted to C_U is finite
-etale. Apply base change and open restriction twice to get the two properties
-for the normalization on the test open. The constant finite coproduct is
-finite etale, and these properties persist on the test open as well.
-The coefficient inclusion followed by constant coefficient is the identity.
-Together with the local-base compatibility of t and the pullback equation,
-this identifies the zero-section inverse image of V with a inverse image of U.
-Points of Spec O_{S,s} generalize s, and the stalk map is injective on points.
-Minimality therefore makes a inverse image of U exactly the punctured
-spectrum. Normality, depth, flatness of t, and torsor data are not needed. -/
+base change), Tag 0EYJ (the punctured local-base calculation). -/
 theorem stalk_normalization_formal_punctured_restriction {S C : Scheme.{u}}
     [IsNoetherian S]
     (c : C ⟶ S)

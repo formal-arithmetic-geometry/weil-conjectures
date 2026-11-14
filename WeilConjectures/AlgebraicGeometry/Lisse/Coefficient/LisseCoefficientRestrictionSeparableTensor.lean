@@ -27,26 +27,8 @@ variable (l : ℕ) [Fact l.Prime]
   (ι : E →ₐ[ℚ_[l]] L)
 
 /-- The integer tensor square contains a central tensor with nonzero multiplication.
-Source: Deligne, Weil II (1.1.1) d), pp. 146-147; Stacks Project, Algebra,
-finite separable diagonal; Mathlib `Algebra.FormallyUnramified.iff_exists_tensorProduct`.
-(blueprint: lem-pod-lisse-coefficient-restriction-separable-tensor).
-
-Proof: put R=O_E and S=O_L, with the action induced by the given inclusion.
-Identify S with the integral closure of R in L using
-`Padic.padic_integers_integralClosure`. R is a DVR with fraction field E;
-in characteristic zero L/E is finite separable. The integral-closure finiteness
-and freeness theorems give a finite free R-module S. Localizing at the nonzero
-elements of R identifies S with L. Consequently the map
-S tensor_R S -> L tensor_E L is injective: the source is a free R-module,
-and the map identifies with its fraction-field localization. Its localization
-is surjective, so every tensor over the fields has an integral multiple in its
-image. Apply this to the separability tensor supplied by formal unramifiedness
-of L/E. Choose a nonzero denominator a in R and a tensor t mapping to a times
-that tensor. Multiplication of t maps to the nonzero element ι(a) of L, so
-multiplication(t) is nonzero in S. For each s in S, the image of
-(s tensor 1 - 1 tensor s)t is zero by the centrality of the separability tensor.
-Injectivity of the localization map makes this equality hold already over R.
-This constructs t without a choice of sheaf, lattice, or geometric point. -/
+Source: Deligne, Weil II (1.1.1) d), pp. 146-147; Stacks Project, Algebra, finite separable
+diagonal. -/
 theorem lisseIntegerInclusion_separability_tensor :
     let R := Padic.coefficientExtensionIntegers l E
     let S := Padic.coefficientExtensionIntegers l L

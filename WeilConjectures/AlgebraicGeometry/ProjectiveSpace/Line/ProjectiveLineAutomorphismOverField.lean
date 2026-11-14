@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.AffineMorphism
 /-! # Automorphisms preserve the degree-one twist over a field
 
 Source: EGA II, Remark 4.2.7; Stacks, Tags 0BXJ and 01XS.
-(blueprint: lem-sfb-projective-line-automorphism-over-field).
 -/
 
 @[expose] public noncomputable section
@@ -35,14 +34,7 @@ private lemma finrankH_twist_nonneg (k : Type u) [Field k] (d : ℕ) :
 
 /-- Pullback by a field-linear projective-line automorphism preserves the actual twist.
 
-Source: EGA II, Remark 4.2.7; Stacks, Tags 0BXJ and 01XS.
-(blueprint: lem-sfb-projective-line-automorphism-over-field).
-
-Proof: classify the invertible pullback as O(d) by the field Picard classification.
-An isomorphism over the field preserves the dimension of global sections. Negative
-twists have no sections and nonnegative twists have d+1 sections, by the monomial
-calculation. The pullback has two sections, so d=1. This works over every field,
-without algebraic closure or a characteristic restriction. -/
+Source: EGA II, Remark 4.2.7; Stacks, Tags 0BXJ and 01XS. -/
 theorem automorphism_twist_one_over_field (k : Type u) [Field k]
     (a : ProjectiveLine (Spec (.of k)) ≅ ProjectiveLine (Spec (.of k)))
     (ha : a.hom ≫ (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)) =

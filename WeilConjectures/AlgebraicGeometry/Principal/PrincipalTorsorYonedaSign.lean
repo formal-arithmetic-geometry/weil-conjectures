@@ -90,30 +90,7 @@ private theorem principal_torsor_yoneda_sign_formula
 /-- A globally framed relative torsor is the inverse-section localization pushout;
 its coefficient Yoneda splice is minus the supported localization boundary.
 All identifications are supplied with their cocycle normalization and naturality.
-Source: Stacks Tags 03AJ and 06XU; blueprint lemma-cycle-class-cartier-divisor, clause (a)
-(blueprint: lem-pur-principal-torsor-yoneda-sign).
-
-Proof:
-1. The open-closed short exact sequence and extension-by-zero adjunction identify
-   Hom(j_! Z_W,A) with A(W), taking the inclusion to one. Push it out along -g.
-   The published pushout-short-exact-sequence theorem gives its Ext class.
-2. In the quotient (G plus Z_T)/im(-g,-t), put F(a+e)=[a,1]. The relation
-   [-g,-1]=0 gives F(s)=[g,1]=0. Uniqueness of relative_extension_existsUnique
-   identifies this extension with the specified extension, not only its H1 image.
-3. Extend G into an injective resolution over E by h. Write dh=c b. The cone
-   boundary convention represents the extension by -c, by the homotopy -h.
-4. With u=hF(e), one has res(u)=-g and du=c p(1). Thus (-du,0)+D(u)=(0,-g).
-   This is the positive localization boundary of g in the stipulated signed model.
-5. Degreewise split horseshoe resolutions give short exact section complexes.
-   The normalized supported-Hom maps commute strictly with these sequences;
-   naturality of homology boundaries and extMk_resolution_connecting_eq_triangle
-   identify the coefficient connecting map with the Yoneda splice k[1] after beta.
-6. If r lifts g, the lift (0,-r) has differential (0,dr), the negative of the
-   localization representative (0,-dr). Kernel-to-cone realization gives the formula
-   in right-derived kernel-of-restriction cohomology.
-7. The equations on cocycles commute with coefficient lifts and etale section
-   transfers; the relative pushout is preserved by uniqueness. For G_m, negation
-   in the abelian sheaf is multiplication inverse, so -g means g inverse. -/
+Source: Stacks Tags 03AJ and 06XU. -/
 theorem principal_torsor_yoneda_sign :
     ∃ C : PrincipalTorsorComparisons.{u}, C.Normalized ∧ C.Natural ∧ C.Formula := by
   obtain ⟨C, hC⟩ := principalTorsorNormalizedComparison.{u}

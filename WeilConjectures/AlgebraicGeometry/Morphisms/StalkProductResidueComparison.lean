@@ -14,8 +14,7 @@ import Mathlib.AlgebraicGeometry.PullbackCarrier
 
 /-! # Residue comparison for affine product models over a stalk
 
-Source: Stacks Project, Tag 0307; residue comparison in step 3 of
-lem-sbc-cartier-generic-stalk-galois-model-core. -/
+Source: Stacks Project, Tag 0307. -/
 
 @[expose] public section
 universe u
@@ -70,26 +69,7 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- A product presentation over the actual base stalk identifies residue extensions.
 
-Source: Stacks Project, Tag 0307, and the residue comparison in step 3 of
-lem-sbc-cartier-generic-stalk-galois-model-core.
-(blueprint: lem-sbc-stalk-product-residue-comparison)
-
-Proof: Lift x to the stalk base change using the closed point of Spec O_{N,s}
-and the existence of pullback points. The stalk morphism is a preimmersion, as
-is its base change. A morphism surjective on stalks induces a surjective map of
-residue fields; as a map of fields it is injective, hence an isomorphism. The supplied isomorphism
-takes this lifted point into
-one of the disjoint affine components Spec S_i, giving its index i and prime q.
-The equation over Spec O_{N,s} identifies the contraction of q with the base
-closed point. The residue fields of affine scheme points are the fraction fields
-of their prime quotients. These identifications give e and f. Prove naturality of the affine
-residue-field isomorphisms by precomposing with the base ring: evaluation
-naturality and the Gamma-Spec isomorphism give the equality on each ring element.
-The ideal residue-field universal property extends it to the field. Combine
-this naturality with residueFieldMap_comp and the supplied structural-map
-equality to prove the square. If the index type is empty then no x
-can lie over s, so that case is vacuous. No arbitrary domain algebra is used: the
-specified scheme isomorphism is essential. -/
+Source: Stacks Project, Tag 0307. -/
 theorem stalk_product_residue_comparison
     {N X : Scheme.{u}} (f : X ⟶ N) (s : N)
     (I : Type) (S : I → CommRingCat.{u})

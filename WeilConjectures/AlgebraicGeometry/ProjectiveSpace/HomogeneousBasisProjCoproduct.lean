@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.GradedChartComparison
 # Associated sheaves of homogeneous bases on polynomial Proj
 
 Source: Stacks Project, Constructions, Definitions 01M6, 01MN and Lemma 01M7.
-(blueprint: lem-sc-p1-homogeneous-basis-proj-coproduct).
 -/
 
 @[expose] public section
@@ -34,27 +33,7 @@ namespace AlgebraicGeometry.Proj
 attribute [local instance] MvPolynomial.gradedAlgebra
 
 /-- A homogeneous basis identifies its associated sheaf with the coproduct of Proj twists.
-Source: Stacks Project, Constructions, Definitions 01M6, 01MN and Lemma 01M7;
-blueprint theorem-riemann-roch-coherent-serre-duality, shifted-free clause.
-(blueprint: lem-sc-p1-homogeneous-basis-proj-coproduct).
-
-Proof: The basis coordinate equivalence identifies M with the finite product of S.
-Expand each coefficient into its homogeneous components. Multiplication of its degree-n
-part by the basis vector b a places it in degree n-d a, by scalar compatibility.
-Uniqueness of the internal decomposition implies that the degree-j elements correspond
-exactly to tuples with a-coordinate homogeneous of degree d a+j, and zero if this integer
-is negative. Thus the coordinate equivalence and its inverse preserve the grading.
-The finite coproduct of Proj twists has precisely the associated-sheaf charts of this
-shifted coordinate module, by proj_shifted_free_is_twist. On each positive homogeneous
-standard open, localize the coordinate equivalence and restrict to degree-zero fractions.
-Compose with the supplied injective chart maps and the inverse of the canonical chart
-maps to obtain mutually inverse linear section maps. These commute with restrictions:
-both send y/f^m to its coordinate tuple divided by f^m, and restricting to D(g), where
-g^e=a*f, multiplies the numerator by a^m and changes the denominator to g^(e*m).
-The positive homogeneous standard opens form a basis. Glue these compatible maps and
-their inverses; equality on this basis proves their composites are identities.
-This construction requires only the given charts, not additional stalk identifications.
-For r=0 the basis identifies M with zero and the sheaf with the empty coproduct. -/
+Source: Stacks Project, Constructions, Definitions 01M6, 01MN and Lemma 01M7. -/
 theorem homogeneous_basis_proj_coproduct (k : Type u) [Field k]
     (M : ModuleCat.{u} (MvPolynomial (Fin 2) k))
     (𝓜 : ℤ → AddSubgroup M) (h𝓜 : DirectSum.IsInternal 𝓜)

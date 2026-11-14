@@ -12,8 +12,7 @@ import WeilConjectures.SixFunctors.Supporting.ModCondensedCachedInstances
 
 /-! # Scalar computation for normalized section transport
 
-Source: Stacks Project, Tags 06YY, 0D6D and 07A6.
-(blueprint: lem-sfb-quotient-section-pull-transport-scalar-computation)
+Source: Stacks Project, Tags 06YY, 0D6D and 07A6
 -/
 
 @[expose] public noncomputable section
@@ -84,11 +83,7 @@ private theorem native_localization_hom (T : Scheme.{u})
   rfl
 
 /-- Endpoint normalization expressed through the actual scalar localization counit.
-Source: Stacks 06YY and 07A6, the scalar computation step of normalized section transport.
-(blueprint: lem-sfb-quotient-section-pull-transport-scalar-computation).
-Proof: take the all-complex equation of ScalarSectionNormalized in reverse. Its compute
-map is the universal scalar counit, since the quotient factorization maps at objects are
-identities. Expand the composite cochain comparison and functoriality of its image. -/
+Source: Stacks 06YY and 07A6, the scalar computation step of normalized section transport. -/
 theorem section_pull_transport_scalar_computation (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u})
     (c : ScalarSectionData a T) (h : ScalarSectionNormalized a T c)
     (P : CochainComplex (Modules Λ T) ℤ) :

@@ -26,24 +26,7 @@ namespace AlgebraicGeometry.Scheme
 /-- A descended selected section with exact stabilizer is an open component.
 
 Source: Stacks Project, Tag 03SF, the equivalence between finite etale covers and
-finite permutation sets, applied to a stabilizer quotient.
-Proof: let V = D(h), B = D(ι g), and E = Y × Spec H restricted over B.
-V -> B is a connected finite etale Galois cover: finiteness and surjectivity come
-from finite faithful flatness, etaleness from hEt, connectedness from the domain,
-and the Galois property from the unique rotation hypothesis on geometric points.
-E is finite etale over B by base change of j. Pull delta back along k to split E
-on V. The section equation says the given f induces the chosen label x. Under the
-Galois equivalence, the map V/K -> E is the map from the transitive permutation
-set G/K to the labels, sending the identity coset to x. The exact stabilizer
-hypothesis hK makes this map injective: equal translated labels differ by K.
-Its image is a union of orbits, hence the corresponding finite etale subcover is
-open and closed. Therefore f is an open immersion into E and into Y × Spec H.
-Here V/K is U because C[1/h]^K = (C^K)[1/h]: h is fixed and localization of the
-domain is injective, so invariance of a fraction implies invariance of its numerator.
-The base equation ensures f lies over B; the section equation fixes its label.
-For G trivial this selects exactly one summand, not an arbitrary summand. For d=0
-there is no x. No existence of f or of a descended section is asserted here.
-(blueprint: lem-sbc-affine-torsor-stabilizer-section-open) -/
+finite permutation sets, applied to a stabilizer quotient. -/
 theorem affine_torsor_stabilizer_section_open
     (R H : CommRingCat.{u}) (g : R) (ι : R →+* H)
     (C : Type u) [CommRing C] [Algebra H C] [IsDomain C]

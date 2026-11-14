@@ -52,9 +52,7 @@ import WeilConjectures.Algebra.Homology.System.SystemScalarCoherence
 
 /-! # Finite scalar change and completed pullback with the actual units
 
-Source: Stacks Project, algebraization.tex, Tags 0A0E and 0A0G; the finite scalar
-extension construction, retained steps 5--7
-(blueprint: lem-per-rational-scalar-completion-unit-square).
+Source: Stacks Project, Tags 0A0E and 0A0G.
 The coefficient maps, derived tensors, raw categories and quotient-tower units are
 those of the imported dependency nodes. Comparison arrows below only orient the
 published canonical comparisons and transport them through the unit-normalized
@@ -89,19 +87,7 @@ private def scalarUnitIso {W : Scheme.{u}}
 
 /-- The quotient-tower construction is ordinary pullback followed by reflection,
 including the actual augmentation, on arbitrary ambient complexes.
-Source: Stacks 099M and 099N (2),(5)
-(blueprint: lem-per-rational-scalar-completion-unit-square).
-
-Proof: choose a flat-term K-flat representative of the input. The reduction/pullback
-comparison identifies the whole pulled reduction tower with the reduction tower of
-ordinary pullback, including all transitions and the constant-tower augmentation.
-Apply the specified derived inverse limit. The Koszul/quotient comparison identifies
-its augmentation with the Koszul completion unit. The Koszul reflector's Hom bijection
-identifies that completion with pbcActualCompletion, preserving its unit. These steps
-use no completeness of the input. They give a natural isomorphism with the displayed
-normalization. A map out of a reflected object into a complete object is determined by
-its composite with the unit, so the normalization determines the isomorphism uniquely.
-On complete inputs the same uniqueness recovers pbcActualCompletedPullback_tower. -/
+Source: Stacks 099M and 099N (2), (5). -/
 theorem pbcActualAmbientCompletedPullback_tower
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     {X Y : Scheme.{u}} (g : X ⟶ Y) :
@@ -171,8 +157,7 @@ theorem pbcActualAmbientCompletedPullback_tower
   exact (hb K).symm
 
 /-- The uniquely augmentation-normalized ambient comparison; no unrelated map is chosen.
-Source: Stacks 099M and 099N (2),(5)
-(blueprint: lem-per-rational-scalar-completion-unit-square). -/
+Source: Stacks 099M and 099N (2), (5). -/
 def pbcActualAmbientCompletedPullbackIso
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     {X Y : Scheme.{u}} (g : X ⟶ Y) :
@@ -184,16 +169,14 @@ variable (l : ℕ) [Fact l.Prime] (E L : Type u) [Field E] [Field L]
   [FiniteDimensional ℚ_[l] E] [FiniteDimensional ℚ_[l] L] (i : E →ₐ[ℚ_[l]] L)
 
 /-- The inverse reflected coefficient-square comparison, with the published normalization.
-Source: Stacks 0A0E and 0A0G
-(blueprint: lem-per-rational-scalar-completion-unit-square). -/
+Source: Stacks 0A0E and 0A0G. -/
 def rationalScalarReflectedBeta {X Y : Scheme.{u}} (g : X ⟶ Y) :
     pbcActualCompletedPull g (pbcIntegralDatum l E) ⋙ pbcEmbeddingAmbientTensor l E L i X ≅
       pbcEmbeddingAmbientTensor l E L i Y ⋙ pbcActualCompletedPull g (pbcIntegralDatum l L) :=
   (pbcScalarCompletedPullIso l E L i g).symm
 
 /-- The same comparison on the actual quotient-tower functors, retaining both units.
-Source: Stacks 099M, 099N, 0A0E and 0A0G
-(blueprint: lem-per-rational-scalar-completion-unit-square). -/
+Source: Stacks 099M, 099N, 0A0E and 0A0G. -/
 def rationalScalarStrictBeta {X Y : Scheme.{u}} (g : X ⟶ Y) :
     pbcActualStrictCompletedPull (pbcIntegralDatum l E) g ⋙
         pbcEmbeddingAmbientTensor l E L i X ≅

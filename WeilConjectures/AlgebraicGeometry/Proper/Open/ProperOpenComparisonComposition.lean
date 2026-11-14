@@ -13,10 +13,6 @@ import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompAssoc
 
 /-!
 # Composition and identity of proper-open comparison maps
-
-Source: blueprint main-20261015, sec-proetale-coefficients/sk-def-sf-operations,
-proposition-construction-independence-rf-shriek--7, order 1842
-(blueprint: proposition-construction-independence-rf-shriek--7).
 -/
 
 @[expose] public section
@@ -124,9 +120,7 @@ private theorem comparison_comp
   simp [← hh]
 
 /-- The canonical composition identification for bounded below derived direct images.
-Source: Stacks Project, Tag 0D6E, and the composition identification in blueprint
-proposition-construction-independence-rf-shriek--7
-(blueprint: proposition-construction-independence-rf-shriek--7).
+Source: Stacks Project, Tag 0D6E.
 It derives the fibre-product-pasting isomorphism `lowerStarComp` on injectives.
 The injective-preservation structure comes from the exact inverse-image adjunction. -/
 noncomputable def properOpenDirectImageCompIso (Λ : Type (u + 1)) [CommRing Λ]
@@ -142,21 +136,7 @@ noncomputable def properOpenDirectImageCompIso (Λ : Type (u + 1)) [CommRing Λ]
     (lowerStarComp (ModuleCat.{u + 1} Λ) f g)
 
 /-- Proper-open comparisons compose, using the canonical derived direct-image identification,
-for any commutative coefficient ring `Λ`.
-Source: blueprint (latest), proposition-construction-independence-rf-shriek, order 2508
-(blueprint: proposition-construction-independence-rf-shriek--7).
-
-Proof:
-Write `t_f = c_f ≫ j₁^*(ε_f)`, where `c_f` is inverse-image composition and
-`ε_f` is the derived counit. The existing `properOpenIdentification_unit` identifies
-`t_f` on `j₁! K` with `θ_f.hom` followed by the extension-by-zero unit.
-The derived direct-image compositor is conjugate to inverse-image composition:
-its unit equation implies its counit equation by naturality and the triangle identity.
-Together with inverse-image associativity, this gives `t_(fg) = t_g ≫ t_f`.
-Transpose both candidate comparisons under `j₃! ⊣ j₃^*`. After postcomposition
-with `t_(fg)`, naturality of `t_g` and the three normalization equations reduce
-both transposes to the unit for `j₁! ⊣ j₁^*`. That unit and `θ_(fg)` are invertible,
-so cancellation proves equality of transposes and hence of the original maps. -/
+for any commutative coefficient ring `Λ`. -/
 theorem properOpenComparisonOfCommRing_comp (Λ : Type (u + 1)) [CommRing Λ]
     {T₁ T₂ T₃ X : Scheme.{u}} (f : T₁ ⟶ T₂) (g : T₂ ⟶ T₃)
     [IsProper f] [IsProper g]
@@ -232,8 +212,7 @@ theorem properOpenComparisonOfCommRing_comp (Λ : Type (u + 1)) [CommRing Λ]
     (properOpenIdentificationOfCommRing_unit Λ (f ≫ g) j₁ j₃ hfg K)
 
 /-- The finite-coefficient case of `properOpenComparisonOfCommRing_comp`, kept for its existing
-users (`properOpenComparison` is `properOpenComparisonOfCommRing` at a finite ring).
-(blueprint: proposition-construction-independence-rf-shriek--7). -/
+users (`properOpenComparison` is `properOpenComparisonOfCommRing` at a finite ring). -/
 theorem properOpenComparison_comp (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {T₁ T₂ T₃ X : Scheme.{u}} (f : T₁ ⟶ T₂) (g : T₂ ⟶ T₃)
     [IsProper f] [IsProper g]

@@ -11,7 +11,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 /-! # All-complex normalization of the inverse realization/direct-image comparison
 
 Source: Stacks Tags 0D6E and 07A6; the K-injective normalization of realization.
-(blueprint: lem-finite-realization-direct-image-unit-normalization).
 -/
 
 @[expose] public noncomputable section
@@ -153,16 +152,7 @@ private theorem realization_kInjective
 
 /-- The inverse realization/direct-image comparison has its canonical complex-unit
 normalization on every complex.
-Source: Stacks Tags 0D6E and 07A6; sfIntrinsicDerivedDirectImageComparison_existsUnique.
-(blueprint: lem-finite-realization-direct-image-unit-normalization).
-Proof: on a K-injective complex, invert the defining normalization, cancelling
-its two K-injective computation isomorphisms. Realization is an exact equivalence,
-so the realized complex is also K-injective. To extend the resulting equation to
-an arbitrary complex, choose a K-injective resolution. The two composites are
-natural in the complex and their common target carries the localized resolution
-map to an isomorphism. Naturality and cancellation therefore give the equation
-on the original complex. No assertion about restriction preserving K-injectivity
-is involved. Zero rings, zero complexes and empty schemes are included. -/
+Source: Stacks Tags 0D6E and 07A6; sfIntrinsicDerivedDirectImageComparison_existsUnique. -/
 theorem sfIntrinsicDerivedDirectImageComparison_inv_unitQ_factors
     (A : Type u) [CommRing A] [Finite A] {Z Y : Scheme.{u}} (g : Z ⟶ Y) :
     ∀ J : CochainComplex

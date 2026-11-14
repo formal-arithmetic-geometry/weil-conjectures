@@ -39,10 +39,6 @@ import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Proper.Prop
 
 /-! # Boundary vanishing of proper direct image of open extension by zero
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-thm-sf-comp-composition,
-det-sf-comp-composition-interchange.proof.md, proof (3), closed-complement calculation
-(blueprint: lem-sfb-proper-open-boundary-zero).
-
 All functors act on ordinary unbounded derived categories of internal modules. The
 input belongs to the bounded constructible finite-Tor full subcategory. The conclusion
 is vanishing of the target object in the ambient derived category on the boundary.
@@ -64,11 +60,9 @@ their integer rings, and the finite-subextension condensed algebraic closure, up
 isomorphism of ring objects. The separate rational and integral ground-field clauses
 include Q_ell and Z_ell explicitly.
 
-Source: blueprint main-20261015, definition-localizing-subcategory, coefficient list, with the
-algebraic-closure convention of sk-def-sfb-qlbar-condensed. This item-owned specialization
+This item-owned specialization
 is not the dependency's interface: it omits the all-continuous-map algebraic-closure case
-of `IsLocalizingAdmissibleCoefficient`, as the item statement requires
-(blueprint: lem-sfb-proper-open-boundary-zero). -/
+of `IsLocalizingAdmissibleCoefficient`, as the item statement requires. -/
 def IsFiniteSubextensionLocalizingAdmissibleCoefficient (ℓ : ℕ) [Fact ℓ.Prime]
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] : Prop :=
   (∃ (A : Type) (_ : CommRing A) (_ : TopologicalSpace A)
@@ -328,41 +322,7 @@ private theorem boundaryVanishing_integral
     (pullback.snd r.left c)).isZero_rightDerivedFunctor_obj hz).of_iso (asIso β)
 
 /-- Proper direct image of extension by zero from the inverse image of an open has zero
-restriction to the reduced closed complement.
-
-Source: blueprint main-20261015, det-sf-comp-composition-interchange.proof.md, proof (3)
-(blueprint: lem-sfb-proper-open-boundary-zero).
-
-Proof plan (the six steps of this DAG node):
-1. Form T = W times_{Ybar} Z, with closed projection a to W and proper projection r_Z
-   to Z. Base change of open immersions and quasi-compact maps identifies the other
-   open projection with j : U to W. The ranges of a and j are complementary. Closed
-   immersions are proper, so Z and T stay separated and finite type over k. T need
-   not be reduced. Use lem-weil-pbc-closed-immersion-base-change,
-   lem-weil-pbc-open-immersion-base-change, lem-pc-quasi-compact-base-change,
-   lem-weil-pbc-proper-fp-permanence and lem-sfb-finite-type-composition-base-change.
-2. Mixed restriction vanishing in lem-sfb-condensed-support-derived-localization gives
-   a^* j_! A = 0, with no reducedness requirement on T.
-3. Exact termwise j_! commutes with cohomology by
-   lem-weil-pbc-exact-functor-complex-cohomology. Extend the finite constant-model
-   stratification by the zero model on the complement, using
-   lem-sf-open-extension-zero-constant-model-constructible. These models are locally
-   finitely presented by definition-constructible-sheaves--1, so both bounded
-   constructibility conventions apply (sk-def-sfb-bounded-constructible and
-   definition-constructible-sheaves). The projection formula of
-   lem-sfb-open-immersion-derived-tensor-projection and exact pullback from
-   lemma-inverse-image-coefficient-sheaves preserve the Tor interval under j_!.
-4. For finite ell-primary coefficients, proposition-proper-direct-image-constructible-complexes,
-clause
-   (2), identifies c^* Rr_* j_! A with R(r_Z)_* a^* j_! A.
-5. For integer rings use proposition-proper-direct-image-constructible-complexes, clause (3); for
-finite
-   fields and the finite-subextension condensed algebraic closure use
-   proposition-proper-direct-image-constructible-complexes, clause (3). The ground field and its
-   integer ring are the degree-one cases. This exhausts definition-localizing-subcategory.
-6. Substitute step 2. The adjunction of sk-def-sfb-module-derived-pushpull makes the
-   right derived pushforward preserve the terminal, hence zero, object. Thus the
-   object on the boundary vanishes. No comparison map or localizing extension is asserted. -/
+restriction to the reduced closed complement. -/
 theorem proper_open_boundary_zero
     (ℓ : ℕ) [Fact ℓ.Prime]
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

@@ -13,8 +13,7 @@ import all WeilConjectures.AlgebraicGeometry.Scalar.ScalarDataExistence
 
 /-! # Below-level factorization of the singleton projection
 
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 06YS, 07A4 and 08J9
-(blueprint: lem-coef-semilinear-projection-below-factorization).
+Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 06YS, 07A4 and 08J9.
 -/
 
 @[expose] public noncomputable section
@@ -94,28 +93,7 @@ reduction, after scalar/tensor reassociation. This is an equality of morphisms f
 an arbitrary system; no cartesianness or invertibility of its reduction is assumed.
 Source: Zheng Construction 4.1, printed p.21, and Proposition 4.17(a), printed
 pp.25-26; Stacks 07A4 and 08J9. This is the below-level computation in step 2 of
-lem-coef-semilinear-cartesian-projection
-(blueprint: lem-coef-semilinear-projection-below-factorization).
-Proof: identify L with derived singleton extension using the unique isomorphism
-compatible with its specified adjunction. Choose a flat-term K-flat complex for P
-and a simultaneous flat-term K-flat system complex for M. At q ≤ n the evaluated
-singleton is B_q tensor over B_n with the level-n complex. Scalar extension
-preserves K-flatness. Reassociation of total tensors therefore identifies the
-evaluated extension of P tensor M_n with the tensor of the evaluated extension of
-P and the derived scalar extension of M_n; denote this identification by alpha.
-The singleton adjunction unit inserts 1 tensor x. The tensorEvaluation model's
-summand equation, together with ordinary, says that its comparison keeps every
-local pure tensor unchanged. Thus the evaluated projection, followed by
-tensorEvaluation at q, sends a summand generator (b tensor p) tensor (c tensor m)
-to (b tensor p) tensor c times the n-to-q transition of m. The right side has
-exactly this value, since reduction is the scalar-adjunction transpose of the
-actual derived transition, whose representative is that ordinary transition.
-Balancing, the sheafification universal property and total-summand extensionality
-give equality of the cochain maps. The representative comparison equations then
-give the displayed equality after localization. Transport through the chosen
-resolutions and the unit-compatible left-adjoint isomorphism proves the statement
-for the given L and adj. This argument applies also to q = n, n = 0, zero rings,
-zero objects and an empty site. -/
+lem-coef-semilinear-cartesian-projection. -/
 theorem semilinearProjectionBelowFactorization
     (closed : Closed.{c, v, r} (coefficientSequenceTopology J)
       (systemRing.{c, v, max c v r} J B τ))

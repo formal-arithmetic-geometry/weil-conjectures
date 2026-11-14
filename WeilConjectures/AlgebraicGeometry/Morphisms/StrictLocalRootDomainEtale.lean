@@ -26,10 +26,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The root algebra is a domain and its puncture is etale.
 
-Source: Stacks Project, Tags 0EYG and 09EV.
-Proof: apply the regularity-at-root lemma at the unique prime over the root,
-then use the standard etale criterion for the monic polynomial on the basic open.
-(blueprint: lem-sbc-strict-local-root-domain-etale) -/
+Source: Stacks Project, Tags 0EYG and 09EV. -/
 theorem strict_local_root_domain_etale
     (H : Type u) [CommRing H] [IsStrictlyHenselianLocalRing H]
     [IsRegularLocalRing H] (h : H)

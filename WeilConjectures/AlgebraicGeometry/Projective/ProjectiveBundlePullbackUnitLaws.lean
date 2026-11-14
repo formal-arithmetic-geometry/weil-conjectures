@@ -13,7 +13,6 @@ Proof: conjugate the ordinary pullback unit equations by the specified tensor-to
 isomorphisms, cancel inverse pairs and use naturality. Equality transport commutes with the
 comparison family. Combine the two unit equations by cancellation against the composition
 isomorphism. Naturality of the identity comparison applied to the quotient gives its square.
-(blueprint: lem-pur-projective-bundle-pullback-unit-laws).
 -/
 
 @[expose] public section
@@ -23,8 +22,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- Associativity transported from the ordinary module-pullback pseudofunctor.
-Source: Stacks Project, Sheaves, Tag 0097; Constructions Tag 01O3
-(blueprint: lem-pur-projective-bundle-pullback-unit-laws). -/
+Source: Stacks Project, Sheaves, Tag 0097; Constructions Tag 01O3. -/
 theorem projectiveBundlePullback_associativity
     {W X Y Z : Scheme.{u}} (f : W ⟶ X) (g : X ⟶ Y) (h : Y ⟶ Z) :
     (projectiveBundlePullbackComp f (g ≫ h)).inv ≫

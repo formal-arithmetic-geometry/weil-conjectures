@@ -95,9 +95,8 @@ import WeilConjectures.AlgebraicGeometry.TensorPullbackRepresentativeDescent
 import WeilConjectures.CategoryTheory.ProperBaseChange.ResolvingRepresentativeWhiskeringSupplement
 /-! # Canonical derived section-module realization
 
-Source: Stacks Project, Sites, Tag 00YV; Modules on Sites, Tags 03EK, 03EL,
-03D7, 03DI and 03DJ; Cohomology on Sites, Tags 07A4, 07A6 and 0B56
-(blueprint: def-pd-section-derived-realization).
+Source: Stacks Project, Sites, Tag 00YV; Modules on Sites, Tags 03EK, 03EL, 03D7, 03DI and 03DJ;
+Cohomology on Sites, Tags 07A4, 07A6 and 0B56.
 
 ## Main definitions
 
@@ -107,7 +106,6 @@ Source: Stacks Project, Sites, Tag 00YV; Modules on Sites, Tags 03EK, 03EL,
 - `tensorPullComparison`: the uniquely specified ringed tensor-pullback map.
 - `derivedExtension`, `derivedOpenAdjunction`: localized open extension and restriction.
 - `derivedPullbackComposition`: localization of geometric pullback pasting.
-
 -/
 
 @[expose] public noncomputable section
@@ -671,21 +669,21 @@ private theorem complex_resolving_whiskering
       (Functor.isoWhiskerLeft P.ι (DerivedCategory.quotientCompQhIso _))))⟩
 
 /-- The existing levelwise comparison for extension by zero, fixed by its adjunction mate.
-Source: Stacks 03DI (blueprint: def-pd-section-derived-realization). -/
+Source: Stacks 03DI. -/
 def extensionComparison {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     CondensedRing.openImmersionLowerShriek Λ j ⋙ (equivalence Λ X).functor ≅
       (equivalence Λ U).functor ⋙ extension Λ j :=
   ordinaryExtensionComparison Λ j
 
 /-- The levelwise ringed extension on the unbounded derived category.
-Source: Stacks 03DJ (blueprint: def-pd-section-derived-realization). -/
+Source: Stacks 03DJ. -/
 @[implicit_reducible]
 def derivedExtension {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     DerivedCategory (modules Λ U) ⥤ DerivedCategory (modules Λ X) :=
   (extension Λ j).mapDerivedCategory
 
 /-- The ringed open adjunction is the localization of the specified ordinary adjunction.
-Source: Stacks 03DJ (blueprint: def-pd-section-derived-realization). -/
+Source: Stacks 03DJ. -/
 def derivedOpenAdjunction {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     derivedExtension Λ j ⊣ derivedPullback Λ j :=
   (openAdjunction Λ j).mapDerivedCategoryAdjunction

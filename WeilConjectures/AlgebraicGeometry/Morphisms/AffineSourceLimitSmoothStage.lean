@@ -15,7 +15,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 # Eventual smoothness for an affine source model
 
 Source: Stacks Project, Tag 0C0C, affine-local reduction using Tags 0CAQ and 01ZM.
-(blueprint: lem-sbc-affine-source-limit-smooth-stage)
 -/
 
 @[expose] public section
@@ -38,22 +37,7 @@ private theorem smooth_snd_target_iff {A B D E : Scheme.{u}}
 
 /-- Eventual smoothness for a single affine source chart.
 
-Source: Stacks Project, Tag 0C0C, with Situation 081D and Tags 0CAQ, 01ZM(2)-(3).
-Proof: cover the Noetherian base stage by finitely many affine opens. Their inverse
-images in the affine source are quasi-compact opens, so take finite affine covers
-of these inverse images. Restrict the diagram to Over i and then to each base open.
-Affine transitions imply affine limit projections, so every pulled-back chart is
-affine. Global sections of each limit chart are the filtered colimit of the stage
-chart rings. The assumed smoothness makes the limit chart algebra smooth. Tag 0CAQ
-provides a smooth finitely presented model over a later base chart. Both this model
-and the original chart are finitely presented over the common base. Descend the
-comparison isomorphism and its inverse by 01ZM(2), and their two inverse identities
-by 01ZM(3). Thus the original chart is smooth at a later stage. Take one common
-refinement for the finitely many charts. Smoothness is stable under base change
-and local on source and target, hence the affine source model is smooth there.
-Empty sources and charts are allowed: the zero algebra is smooth, and the finite
-common-refinement argument also works for an empty cover.
-(blueprint: lem-sbc-affine-source-limit-smooth-stage) -/
+Source: Stacks Project, Tag 0C0C, with Situation 081D and Tags 0CAQ, 01ZM(2)-(3). -/
 theorem exists_smooth_stage_of_affine_source_limit {I : Type u} [SmallCategory I]
     [IsCofiltered I] {S : Scheme.{u}}
     (X : I ⥤ Scheme.{u}) (α : (Functor.const I).obj S ⟶ X)

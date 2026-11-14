@@ -11,9 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConsta
 /-!
 # The normalized finite-ring module adjunction
 
-Source: Stacks Project, Modules on Sites, lemma-adjoint-push-pull-modules;
-blueprint smooth purity, inverse image on the small pro-etale site
-(blueprint: def-weil-proetale-inverse-image).
+Source: Stacks Project, Modules on Sites.
 
 The existing inverse-image module and all its previous interfaces are reexported.
 The additional adjunction uses the transported action for arbitrary finite rings.

@@ -85,8 +85,7 @@ public import WeilConjectures.AlgebraicGeometry.PbcCompletedPullbackActual
 
 /-! # Completed pullback on the published completed-coefficient categories
 
-Source: Stacks proetale.tex, Tag 099N (2),(5), blueprint order 1261.
-(blueprint: lem-weil-pbc-ringed-topoi-module-adjunction)
+Source: Tag 099N (2), (5)
 The coefficient structure is fixed on all quotient projections. Ordinary pullback
 is its total derived sheafified tensor inverse image. Completion is characterized
 by its reflection universal property on the actual intrinsic complete subcategory.
@@ -221,17 +220,17 @@ variable {X Y : Scheme.{u}} (g : X ⟶ Y) {A : Type (u + 1)} [CommRing A]
 variable (d : AdicCoefficientDatum A)
 
 /-- The published sectionwise module direct image.
-Source: Stacks 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction). -/
+Source: Stacks 099N. -/
 abbrev pbcActualModulePush := completedModuleDirectImage g d
 
 /-- The published module inverse image followed by completed scalar tensor.
-Source: Stacks 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction). -/
+Source: Stacks 099N. -/
 abbrev pbcActualModulePull := completedModulePullback g d
 
 attribute [-instance] coefficientProEtaleModelBaseChange_isContinuous
   coefficientProEtaleModelUp_isContinuous in
 /-- The ordinary tensor-unit section uses the actual model-site inverse-image unit.
-Source: Stacks 03D2 and 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction). -/
+Source: Stacks 03D2 and 099N. -/
 def pbcActualModuleUnitSection (M : pbcModules Y (pbcAdicCompletion Y d))
     (U : Y.ProEt) (x : M.val.obj (op U)) :
     ((pbcActualModulePush g d).obj ((pbcActualModulePull g d).obj M)).val.obj (op U) :=
@@ -244,12 +243,7 @@ def pbcActualModuleUnitSection (M : pbcModules Y (pbcAdicCompletion Y d))
           (op (AsSmall.up.obj U)) x)
 
 /-- The published pullback and direct image have the uniquely normalized tensor adjunction.
-Source: Stacks 03D2 and 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction).
-Proof: on the small model apply the ordinary module inverse-image adjunction,
-then the tensor-restriction adjunction of the completed coefficient map.
-Transport along the sectionwise model equivalences. Its unit is the model unit
-followed by 1 tensor x, exactly as displayed. These local tensor generators fix
-the Hom transpose and hence the adjunction uniquely. -/
+Source: Stacks 03D2 and 099N. -/
 theorem pbcActualModuleAdjunction_exists :
     ∃! adj : pbcActualModulePull g d ⊣ pbcActualModulePush g d,
       ∀ (M : pbcModules Y (pbcAdicCompletion Y d)) (U : Y.ProEt) (x : M.val.obj (op U)),
@@ -300,37 +294,35 @@ theorem pbcActualModuleAdjunction_exists :
   exact (ha' M U.unop x).trans (ha M U.unop x).symm
 
 /-- The actual module adjunction, with the inverse-image tensor unit retained.
-Source: Stacks 03D2 and 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction). -/
+Source: Stacks 03D2 and 099N. -/
 def pbcActualModuleAdjunction := (pbcActualModuleAdjunction_exists g d).exists.choose
 
 /-- Pullback and pushforward are additive.
-Source: 03D7 (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction).
-Proof: sectionwise direct image preserves sums of maps. Sheafified inverse image
-and its scalar tensor are additive, by their ordinary module construction. -/
+Source: 03D7. -/
 theorem pbcActualModuleOperations_additive :
     (pbcActualModulePull g d).Additive ∧ (pbcActualModulePush g d).Additive := by
   exact ⟨completedModulePullback_additive g d, completedModuleDirectImage_additive g d⟩
 
 /-- Additivity of the specified module pullback.
-Source: 03D7 (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction). -/
+Source: 03D7. -/
 instance pbcActualModulePull_additive : (pbcActualModulePull g d).Additive :=
   (pbcActualModuleOperations_additive g d).1
 
 /-- Additivity of the specified module direct image.
-Source: 03D7 (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction). -/
+Source: 03D7. -/
 instance pbcActualModulePush_additive : (pbcActualModulePush g d).Additive :=
   (pbcActualModuleOperations_additive g d).2
 
 /-- The published ordinary total derived pullback with its fixed resolving pair.
-Source: Stacks 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction). -/
+Source: Stacks 099N. -/
 abbrev pbcActualDerivedPull := completedOrdinaryPullback g d
 
 /-- The published universal ordinary-pullback counit.
-Source: Stacks 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction). -/
+Source: Stacks 099N. -/
 abbrev pbcActualPullCounit := completedOrdinaryPullbackCounit g d
 
 /-- Its computation on cochain representatives retains the universal counit.
-Source: Stacks 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction). -/
+Source: Stacks 099N. -/
 def pbcActualPullComplexCounit (P : CochainComplex (pbcModules Y (pbcAdicCompletion Y d)) ℤ) :
     (pbcActualDerivedPull g d).obj (DerivedCategory.Q.obj P) ⟶
       DerivedCategory.Q.obj (((pbcActualModulePull g d).mapHomologicalComplex (.up ℤ)).obj P) :=
@@ -342,21 +334,19 @@ def pbcActualPullComplexCounit (P : CochainComplex (pbcModules Y (pbcAdicComplet
       (((pbcActualModulePull g d).mapHomologicalComplex (.up ℤ)).obj P)
 
 /-- Ordinary derived direct image, computed using K-injectives in all modules.
-Source: 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction). -/
+Source: 099N. -/
 abbrev pbcActualDerivedPush : PbcCompletedDerived X d ⥤ PbcCompletedDerived Y d :=
   completedDerivedDirectImage g d
 
 /-- The universal homotopy-category unit of ordinary derived direct image.
-Source: Stacks 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction). -/
+Source: Stacks 099N. -/
 def pbcActualPushUnit :
     (pbcActualModulePush g d).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh ⟶
       DerivedCategory.Qh ⋙ pbcActualDerivedPush g d :=
   (pbcActualModulePush g d).rightDerivedFunctorUnit
 
 /-- Universality of the named ordinary left derived pair.
-Source: Stacks Tag 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction).
-Proof: unfold the named functor and counit. They are the universal pair selected
-from completedOrdinaryPullback_exists, whose first property is the assertion. -/
+Source: Stacks Tag 099N. -/
 @[instance] theorem pbcActualPullUniversal :
     (pbcActualDerivedPull g d).IsLeftDerivedFunctor (pbcActualPullCounit g d)
       (HomotopyCategory.quasiIso (pbcModules Y (pbcAdicCompletion Y d)) (.up ℤ)) := by
@@ -365,9 +355,7 @@ from completedOrdinaryPullback_exists, whose first property is the assertion. -/
   exact (completedOrdinaryPullback_exists g d).choose_spec.choose_spec.1
 
 /-- Universality of the named ordinary right derived pair.
-Source: Stacks Tag 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction).
-Proof: unfold its totalRightDerived and unit; the universal Kan-extension
-construction gives IsRightDerivedFunctor. -/
+Source: Stacks Tag 099N. -/
 @[instance] theorem pbcActualDirectUniversal :
     (pbcActualDerivedPush g d).IsRightDerivedFunctor
       (pbcActualPushUnit g d)
@@ -378,11 +366,7 @@ construction gives IsRightDerivedFunctor. -/
 -- `moduleBinaryBiproducts` has a free universe and leaves a stuck universe constraint here.
 attribute [-instance] CategoryTheory.SignedDoubleHomCone.moduleBinaryBiproducts in
 /-- The resolving left derived pair remains universal after the indicated direct image.
-Source: Stacks Tag 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction).
-Proof: the K-flat resolving construction is pointwise and hence absolute.
-Postcomposition by ordinary derived direct image preserves its universal derived
-comparison; equivalently compute at a resolving complex, where the counit is
-invertible. This gives the stated universal left derived pair. -/
+Source: Stacks Tag 099N. -/
 @[instance] theorem pbcActualDerivedLeftComposite :
     (pbcActualDerivedPull g d ⋙ pbcActualDerivedPush g d).IsLeftDerivedFunctor
       ((Functor.associator _ _ _).inv ≫
@@ -462,11 +446,7 @@ invertible. This gives the stated universal left derived pair. -/
   exact (L'.isLeftDerivedFunctor_iff_isIso_leftDerivedLift ε W L α).2 this
 
 /-- The resolving right derived pair remains universal after the indicated pullback.
-Source: Stacks Tag 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction).
-Proof: the K-injective resolving construction is pointwise and hence absolute.
-Postcomposition by ordinary derived pullback preserves its universal derived
-comparison; equivalently compute at a K-injective complex, where the unit is
-invertible. This gives the stated universal right derived pair. -/
+Source: Stacks Tag 099N. -/
 @[instance] theorem pbcActualDerivedRightComposite :
     (pbcActualDerivedPush g d ⋙ pbcActualDerivedPull g d).IsRightDerivedFunctor
       (whiskerRight (pbcActualPushUnit g d) (pbcActualDerivedPull g d) ≫
@@ -484,8 +464,7 @@ invertible. This gives the stated universal right derived pair. -/
   infer_instance
 
 /-- The derived adjunction obtained from the actual module adjunction and its
-universal derived counit/unit. Source: Stacks Tag 099N
-(blueprint: lem-weil-pbc-ringed-topoi-module-adjunction). -/
+universal derived counit/unit. Source: Stacks Tag 099N. -/
 def pbcActualDerivedAdjunction :
     pbcActualDerivedPull g d ⊣ pbcActualDerivedPush g d :=
   (pbcActualModuleAdjunction g d).mapHomotopyCategory (.up ℤ) |>.derived
@@ -495,11 +474,7 @@ def pbcActualDerivedAdjunction :
 
 set_option linter.unusedVariables false in
 /-- The ordinary comparison on resolving complexes uniquely fixes the derived shift.
-Source: Stacks Tag 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction).
-Proof: the additive ordinary functor commutes with termwise shifts. Its universal
-derived comparison descends that structure and fixes it on resolving complexes.
-Every derived object has such a representative, which proves uniqueness and
-transports the zero and addition identities. -/
+Source: Stacks Tag 099N. -/
 theorem pbcActualPullShift_exists :
     ∃! q : (pbcActualDerivedPull g d).CommShift ℤ,
       (fun [qInst : (pbcActualDerivedPull g d).CommShift ℤ] ↦
@@ -513,17 +488,13 @@ theorem pbcActualPullShift_exists :
   exact ⟨q, hq, fun q' hq' ↦ rightKanShift_unique _ _ _ _ q' q hq' hq⟩
 
 /-- The canonical shift structure, normalized by the universal derived comparison.
-Source: Stacks Tag 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction). -/
+Source: Stacks Tag 099N. -/
 instance pbcActualPullShift : (pbcActualDerivedPull g d).CommShift ℤ :=
   (pbcActualPullShift_exists g d).exists.choose
 
 set_option linter.unusedVariables false in
 /-- The ordinary comparison on resolving complexes uniquely fixes the derived shift.
-Source: Stacks Tag 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction).
-Proof: the additive ordinary functor commutes with termwise shifts. Its universal
-derived comparison descends that structure and fixes it on resolving complexes.
-Every derived object has such a representative, which proves uniqueness and
-transports the zero and addition identities. -/
+Source: Stacks Tag 099N. -/
 theorem pbcActualPushShift_exists :
     ∃! q : (pbcActualDerivedPush g d).CommShift ℤ,
       (fun [qInst : (pbcActualDerivedPush g d).CommShift ℤ] ↦
@@ -579,7 +550,7 @@ theorem pbcActualPushShift_exists :
   exact commShift_ext _ _ he
 
 /-- The canonical shift structure, normalized by the universal derived comparison.
-Source: Stacks Tag 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction). -/
+Source: Stacks Tag 099N. -/
 instance pbcActualPushShift : (pbcActualDerivedPush g d).CommShift ℤ :=
   (pbcActualPushShift_exists g d).exists.choose
 
@@ -804,13 +775,7 @@ end CompletionPresentation
 variable (T : Scheme.{u})
 
 /-- The intrinsic complete subcategory is reflective, with the Koszul completion unit.
-Source: 099N (2),(5), 099B and 0A0E
-(blueprint: lem-weil-pbc-ringed-topoi-module-adjunction).
-Proof: the derived inverse limit of the strict negative-Koszul tower is completion.
-Its degree-zero augmentation is a reflection unit, by ringed-koszul-completion-reflector.
-Transport the comparison through pbcCompletedComparison. This preserves the unit,
-so the predicate is exactly PbcIsIntrinsicallyComplete, even over the empty scheme.
-The reflection property determines the output and unit up to unique isomorphism. -/
+Source: 099N (2),(5), 099B and 0A0E. -/
 @[instance] theorem pbcActualCompleteInclusion_isRightAdjoint :
     (ObjectProperty.ι (PbcIsIntrinsicallyComplete T d)).IsRightAdjoint := by
   classical
@@ -853,32 +818,30 @@ The reflection property determines the output and unit up to unique isomorphism.
 /-- The canonical reflection onto the actual intrinsically complete subcategory.
 Its defining universal property determines its objects up to the equality used
 here, namely unique unit-compatible isomorphism.
-Source: 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction). -/
+Source: 099N. -/
 def pbcActualCompletion : PbcCompletedDerived T d ⥤ PbcCompletedDerived T d :=
   (ObjectProperty.ι (PbcIsIntrinsicallyComplete T d)).leftAdjoint ⋙
     (ObjectProperty.ι (PbcIsIntrinsicallyComplete T d))
 
 /-- The universal completion unit of the actual intrinsic complete subcategory.
-Source: 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction). -/
+Source: 099N. -/
 def pbcActualCompletionUnit : 𝟭 (PbcCompletedDerived T d) ⟶ pbcActualCompletion d T :=
   (Adjunction.ofIsRightAdjoint (ObjectProperty.ι (PbcIsIntrinsicallyComplete T d))).unit
 
 /-- Ordinary derived pullback followed by the unit-normalized completion reflector.
 This is equivalently the derived limit of the pulled-back strict reduction tower,
 with its quotient augmentation, as asserted by the source's canonical comparison.
-Source: 099N (2),(5) (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction). -/
+Source: 099N (2),(5). -/
 def pbcActualCompletedPull : PbcCompletedDerived Y d ⥤ PbcCompletedDerived X d :=
   pbcActualDerivedPull g d ⋙ pbcActualCompletion d X
 
 /-- The comparison is the actual completion unit after ordinary derived pullback.
-Source: 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction). -/
+Source: 099N. -/
 def pbcActualCompletedPullUnit : pbcActualDerivedPull g d ⟶ pbcActualCompletedPull g d :=
   whiskerLeft (pbcActualDerivedPull g d) (pbcActualCompletionUnit d X)
 
 /-- The completion reflection lands in the actual intrinsic complete predicate.
-Source: Stacks 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction).
-Proof: its left adjoint has values in that full subcategory by construction.
-Composing with the inclusion retains the same membership witness. -/
+Source: Stacks 099N. -/
 theorem pbcActualCompletedPull_isComplete (K : PbcCompletedDerived Y d) :
     PbcIsIntrinsicallyComplete X d ((pbcActualCompletedPull g d).obj K) := by
   exact ((ObjectProperty.ι (PbcIsIntrinsicallyComplete X d)).leftAdjoint.obj
@@ -970,10 +933,7 @@ private theorem actualCompletion_quotient (S : Scheme.{u}) :
 
 set_option linter.unusedVariables false in
 /-- Completion has the unique shift comparison commuting with its actual unit.
-Source: Stacks 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction).
-Proof: the Koszul tower shifts termwise and the Roos realization preserves shifts.
-Its augmentation commutes with this comparison. The reflection unit determines
-maps into complete objects, so that comparison and its coherence are unique. -/
+Source: Stacks 099N. -/
 theorem pbcActualCompletionShift_exists :
     ∃! q : (pbcActualCompletion d T).CommShift ℤ,
       (fun [qInst : (pbcActualCompletion d T).CommShift ℤ] ↦
@@ -1017,12 +977,12 @@ theorem pbcActualCompletionShift_exists :
   exact congrArg (fun f ↦ f.hom) he
 
 /-- The unit-normalized shift of the completion reflector.
-Source: Stacks 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction). -/
+Source: Stacks 099N. -/
 instance pbcActualCompletionShift : (pbcActualCompletion d T).CommShift ℤ :=
   (pbcActualCompletionShift_exists d T).exists.choose
 
 /-- Completed pullback inherits ordinary pullback and completion shifts.
-Source: Stacks 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction). -/
+Source: Stacks 099N. -/
 instance pbcActualCompletedPullShift : (pbcActualCompletedPull g d).CommShift ℤ :=
   inferInstanceAs ((pbcActualDerivedPull g d ⋙ pbcActualCompletion d X).CommShift ℤ)
 
@@ -1078,12 +1038,7 @@ private theorem quotientDirectComparison :
   simp
 
 /-- Direct image commutes with completion with the specified completion unit.
-Source: Stacks 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction).
-Proof: direct image commutes with derived inverse limits. Apply its perfect
-projection arrows to the finite free Koszul coefficient complexes and their
-strict transitions. Their derived inverse limit is the completion comparison.
-It preserves the augmentation and is invertible. Completeness of derived direct
-image of a complete object gives uniqueness from the reflection property. -/
+Source: Stacks 099N. -/
 theorem pbcActualDirectCompletionIso_exists :
     ∃! e : pbcActualDerivedPush g d ⋙ pbcActualCompletion d Y ≅
         pbcActualCompletion d X ⋙ pbcActualDerivedPush g d,
@@ -1127,7 +1082,7 @@ theorem pbcActualDirectCompletionIso_exists :
   exact (he' M).trans (he M).symm
 
 /-- The completion comparison uniquely fixed by the quotient augmentation.
-Source: Stacks 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction). -/
+Source: Stacks 099N. -/
 def pbcActualDirectCompletionIso := (pbcActualDirectCompletionIso_exists g d).exists.choose
 
 end AlgebraicGeometry.Scheme

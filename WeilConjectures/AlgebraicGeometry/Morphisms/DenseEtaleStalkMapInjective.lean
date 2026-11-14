@@ -15,9 +15,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 /-!
 # Injectivity of finite normal stalk maps with dense etale locus
 
-Source: Stacks Project, Tags 0357 and 01UA; the dominance argument in
-new-finite-normal-dense-etale-stalk-going-down, steps 1 and 2.
-(blueprint: new-dense-etale-stalk-map-injective-of-domain-stalks)
+Source: Stacks Project, Tags 0357 and 01UA
 -/
 
 @[expose] public section
@@ -63,24 +61,7 @@ that is etale over an open with dense source preimage has injective stalk maps.
 
 Source: Stacks Project, Tag 0357 (open integral normal components), and
 new-finite-normal-dense-etale-stalk-going-down, steps 1 and 2. The germ argument
-uses flatness of etale stalk maps and injectivity of germs on integral schemes.
-(blueprint: new-dense-etale-stalk-map-injective-of-domain-stalks)
-
-Proof: First suppose the target is integral. If a germ maps to zero at x,
-represent it by a section s on an open U of the target. Naturality of germs
-says that f.app U s has zero germ at x. Equality of germs gives an open W
-around x on which this pullback section is zero. Density gives a point z of W
-in the etale source open. The stalk map at z is flat and local, hence faithfully
-flat and injective. Thus s has zero germ at f(z); injectivity of germs on an
-integral scheme implies s = 0, so the original germ is zero.
-For the general target, its connected components are open by local
-Noetherianity. A connected component with domain stalks is irreducible and
-reduced, hence integral. Restrict to the component containing f(x). Density
-pulls back along the open source inclusion, and the restricted stalk maps
-are isomorphic to the original ones. Flatness on the etale source open and
-injectivity of the resulting stalk map transport across these isomorphisms.
-Only domain target stalks are used; neither finiteness nor source normality
-nor integral closedness is needed. An empty source gives no x. -/
+uses flatness of etale stalk maps and injectivity of germs on integral schemes. -/
 theorem dense_etale_stalkMap_injective_of_domain_stalks {X Y : Scheme.{u}}
     [IsLocallyNoetherian Y] (f : X ⟶ Y)
     (hY : ∀ y : Y, IsDomain (Y.presheaf.stalk y))

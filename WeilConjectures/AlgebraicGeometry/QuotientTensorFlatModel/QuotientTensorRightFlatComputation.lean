@@ -15,7 +15,6 @@ import WeilConjectures.CategoryTheory.SixFunctors.Monoidal
 /-! # The right quotient tensor path on flat models
 
 Source: Stacks Project, Tags 03EL, 06YY, 07A4 and 0G7E.
-(blueprint: lem-sfb-quotient-tensor-right-flat-computation).
 -/
 
 @[expose] public noncomputable section
@@ -221,27 +220,7 @@ private theorem pull_tensor_computation
 
 /-- Compute the path that takes the two tensorators before balancing the factors.
 Only the scalar tensor normalization at Y enters this statement.
-Source: Stacks 03EL, 06YY, 07A4 and 0G7E; steps 1, 2 and 4 of
-lem-sfb-quotient-pullback-tensor-flat-model.
-(blueprint: lem-sfb-quotient-tensor-right-flat-computation).
-
-Proof: use PullNormalized separately at P and Q to replace each factor lam
-followed by factorCompute by the scalar-then-geometric computation followed by
-its ordinary totalBalance map. Naturality of the geometric derived tensorator
-moves the two scalar computation maps back to its inputs. Apply the defining
-geometric tensor/counit equation to the complexes obtained by scalar extension,
-using leftDerivedUpperStarTensor_eq_leftDerivedTensorComparison to identify the
-native comparison. Apply TensorNormalized at Y to replace bY and the scalar computation maps by
-the localized ordinary totalScalar map on P,Q. Naturality of the geometric
-computation counit moves this ordinary map to the source computation path.
-Naturality of the localization tensorator moves the two totalBalance maps to
-the output. The output tensor localization is invertible by the stated hypothesis, so
-cancel it and move it to the right as its inverse targetTensor. This argument
-requires no exactness of the coefficient extension. The resulting map is precisely ordinaryRight.
-All comparisons are signed direct-sum totals and preserve the order of the
-homogeneous factors, so their differential and coproduct equations agree in
-all integer degrees. No scalar tensor normalization at X, and no comparison
-with ordinaryLeft, is used. -/
+Source: Stacks 03EL, 06YY, 07A4 and 0G7E. -/
 theorem right_flat_computation
     [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules R T)]
     [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules S T)]

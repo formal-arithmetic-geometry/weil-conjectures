@@ -35,26 +35,7 @@ namespace AlgebraicGeometry.Scheme
 /-- Splitting along the generic section kills the relative differentials near
 all points above the closed section point.
 
-Source: Stacks Project, Tag 0EYI(2), applied as in Tag 0EYJ, trait paragraph.
-(blueprint: lem-sbc-stalk-normalization-trait-section-unramified)
-
-Proof: The local ring A is a DVR by hypothesis. Minimality identifies the inverse image of U
-with its punctured spectrum, hence with its generic point. The smooth closed fibre is a regular
-effective Cartier divisor D. On its complement the comparison square identifies the local cover
-with Z. The G-torsor identity and a rational point above s_eta identify that entire section
-fibre with a disjoint union of copies of the fraction field. Tame ramification follows from the
-invertibility of |G|, using stabilizers for disconnected components. Tags 0EYG and 0EYH give
-etale charts of the normalization with factors B[T]/(T^e-f), where e is positive and invertible,
-and f cuts out D. The section pulls D back scheme theoretically to the reduced closed point of
-Spec A. After the etale base change used for a chart, the local section ring A' is an unramified
-DVR extension and f maps to a uniformizer pi of A'. Every generic factor remains split. A root
-of T^e-pi in the fraction field of A' would have integral valuation 1/e, so e must be one in
-every factor. In these factors the relative differential module, presented by the relation
-e*T^(e-1)*dT = 0, vanishes. Descent along the etale charts gives formal unramifiedness at every
-point over the closed section point. Vanishing of this finite differential module is open (the
-normalization is finite over a locally Noetherian scheme), yielding the asserted source open V.
-Localization of relative integral closure and its etale base change identify this chart
-normalization with n. An empty fibre gives no points to check. -/
+Source: Stacks Project, Tag 0EYI(2), applied as in Tag 0EYJ, trait paragraph. -/
 theorem GaloisCover.stalk_normalization_trait_section_unramified {S C : Scheme.{u}}
     [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]

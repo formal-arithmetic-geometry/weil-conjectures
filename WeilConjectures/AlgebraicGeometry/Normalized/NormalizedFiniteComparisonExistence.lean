@@ -59,8 +59,7 @@ import WeilConjectures.Algebra.Homology.QuasiIsoSaturatedTriangulated
 /-!
 # Existence of normalized finite completed-ring comparisons
 
-Source: Stacks 099N, 03DI and 06XN; finite-exchange proof Step 7
-(blueprint: lem-cbc-normalized-finite-comparison-existence).
+Source: Stacks 099N, 03DI and 06XN.
 
 The source and target comparisons are specified by their counit equations on
 K-flat representatives. Uniqueness is proved separately in the parent module.
@@ -645,20 +644,7 @@ attribute [local irreducible] finiteReductionCounitNT reductionCounitNT pullback
   cbcFiniteSourceModelMap cbcFiniteTargetModelMap cbcFiniteReductionModelMap cbcReductionModelMap
 
 /-- Existence of the normalized finite source and target comparisons.
-Source: Stacks 099N, 03DI, 06XN; finite-exchange proof Step 7
-(blueprint: lem-cbc-normalized-finite-comparison-existence).
-Proof: completed coefficient pullback is exact: its coefficient map is an
-isomorphism, scalar extension along it is an equivalence, and pro-etale inverse image
-is exact. Consequently its derived counit is invertible on every tower complex.
-Compose reduction, strict open extension, completed pullback and finite evaluation
-counits with the ordinary coordinate changes cbcSourceLevel and cbcTargetLevel.
-Their finite model counterparts are invertible on K-flat complexes, as are these
-composite counits. The full subcategory represented by K-flat complexes localizes
-to the derived category, so the quotients of the model maps descend to natural
-isomorphisms. Their localization factorization equations, expanded on complexes,
-are precisely the two prescribed representative-normalization equations.
-This assertion supplies existence only; uniqueness follows separately by cancellation
-of the invertible finite model maps and resolution descent. -/
+Source: Stacks 099N, 03DI, 06XN. -/
 theorem cbcNormalizedFiniteComparison_exists (n : ℕ) :
     (∃ e : completedReductionTower U d ⋙ cbcStrictOpen d j sq.isOpenImmersion ⋙
           completedTowerPullback g d ⋙ pbcTowerEvaluation X' (pbcAdicCompletion X' d) n ≅

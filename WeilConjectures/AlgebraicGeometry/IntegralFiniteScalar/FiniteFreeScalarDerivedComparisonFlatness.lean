@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.IntegralFiniteScalar.FiniteFreeScalarDe
 
 This is the first, strictly smaller conjunct of
 `derivedAssertions_of_finite_integral_resolution`.
-(blueprint: lem-sfb-finite-free-scalar-derived-comparison-flatness)
 -/
 
 @[expose] public noncomputable section
@@ -31,15 +30,11 @@ namespace AlgebraicGeometry.ProEtale.IntegralFiniteScalar
 open CondensedRing
 
 /--
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md, finite free paragraph.
-
 The point pullback of the specified short exact finite-free resolution is exact.
 The internal section tensor equivalence and the finite-free mono-cokernel theorem
 then give the displayed quasi-isomorphism, K-flatness, and native tensor comparison.
 The proof is split out here so the main comparison theorem only combines its
 independent conjuncts.
-(blueprint: lem-sfb-finite-free-scalar-derived-comparison-flatness)
 -/
 theorem finiteFreeScalarDerivedComparison_flatness
     (D : ScalarSixPullbackData.{u}) {Λ Λ' : ScalarSixRing.{u}}

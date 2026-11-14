@@ -46,30 +46,7 @@ set_option linter.unusedVariables false in
 principal-prime localization. The DVR and its uniformizer are fixed data; the generic
 map to U and its pulled-back cover are supplied separately.
 
-Source: Stacks Project, Tag 0307; Mathlib relative normalization affine description.
-(blueprint: lem-sbc-root-normalization-localization-comparison)
-
-Proof: The branch-identification square hbranch excludes extra generic branches.
-Pasting hT with hbranch identifies the supplied cover T
-over Spec H with the original generic cover. The supplied localization certificate
-hrootloc identifies the monic quotient A
-after localizing along H minus (g) with B[s]/(s^n-pi), with t mapping to s.
-The coefficientwise image of the defining polynomial is s^n-pi, and
-AdjoinRoot.map preserves the root and coefficient maps.
-The supplied contraction equality says that (t) contracts to (g), so all
-denominators are units at the given point. The localization Spec B -> Spec H is isomorphic to
-its stalk morphism at (g). Apply Hom.isIso_normalizationPullback_stalk to q and a.
-Pullback associativity and hk identify the localized source with the pullback of
-T over the generic point; D(pi) is Spec Frac(B) since pi is a DVR uniformizer.
-These identifications give the quasi-compact and quasi-separated model map.
-Finiteness of the original normalization survives base change and transport.
-The point over x in the base change exists because its image is (g); the
-normalization comparison transports it to x0 over (s). At this point localization
-induces an isomorphism of stalks: the inverted elements already are units.
-Compose that stalk isomorphism with the normalization comparison to obtain e.
-The polynomial localization sends t to s, and the normalization comparison is
-over the base. Naturality of stalk maps and structural germs therefore gives
-the displayed equality. This construction uses no ramification statement. -/
+Source: Stacks Project, Tag 0307. -/
 theorem root_normalization_localization_comparison
     {L U : Scheme.{u}} (i : U ⟶ L)
     (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)

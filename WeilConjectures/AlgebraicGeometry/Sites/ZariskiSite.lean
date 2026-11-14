@@ -16,8 +16,8 @@ The small Zariski site `X_Zar` of a scheme `X` is the category `X.Opens` of open
 with jointly surjective families of open immersions as coverings
 (`AlgebraicGeometry.Scheme.smallZariskiTopology`, blueprint
 `lemma-uniform-bounds-pro-etale-affines`); its sheaves are the sheaves on the underlying topological
-space. The cohomology `Hᵠ(X_Zar, F)` of an abelian sheaf `F` is `AlgebraicGeometry.Scheme.zariskiH`
-(blueprint `lemma-uniform-bounds-pro-etale-affines`), Mathlib's `CategoryTheory.Sheaf.H`, the `Ext`
+space. The cohomology `Hᵠ(X_Zar, F)` of an abelian sheaf `F` is `AlgebraicGeometry.Scheme.zariskiH`,
+Mathlib's `CategoryTheory.Sheaf.H`, the `Ext`
 group `Extᵠ(ℤ, F)`, i.e. the `q`-th right derived functor of `F ↦ F(X)`.
 
 * Blueprint `lemma-uniform-bounds-pro-etale-affines` (flasque sheaves) is Mathlib's
@@ -39,7 +39,7 @@ open CategoryTheory Limits TopologicalSpace
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Blueprint `lemma-uniform-bounds-pro-etale-affines`: The small Zariski site.
+/-- The small Zariski site.
 
 The small Zariski site `X_Zar` of a scheme `X`: its objects are the open subschemes of `X`
 (the category `X.Opens`), its morphisms the inclusions, and its coverings the jointly surjective
@@ -48,7 +48,7 @@ underlying topological space of `X`. -/
 abbrev smallZariskiTopology (X : Scheme.{u}) : GrothendieckTopology X.Opens :=
   Opens.grothendieckTopology X
 
-/-- Blueprint `lemma-uniform-bounds-pro-etale-affines`: Zariski sheaf cohomology.
+/-- Zariski sheaf cohomology.
 
 The Zariski cohomology `Hᵠ(X_Zar, F)` of an abelian sheaf `F` on the small Zariski site of `X`:
 the group `Extᵠ(ℤ, F)` in the category of abelian sheaves on `X_Zar`
@@ -58,7 +58,7 @@ abbrev zariskiH {X : Scheme.{u}} (F : Sheaf X.smallZariskiTopology AddCommGrpCat
     Type u :=
   Sheaf.H F q
 
-/-- Blueprint `lemma-uniform-bounds-pro-etale-affines`: The Zariski dimension bound, for schemes.
+/-- The Zariski dimension bound, for schemes.
 
 Let `X` be a noetherian scheme of dimension at most `d`. Then `Hᵠ(X_Zar, F) = 0` for every
 abelian sheaf `F` on the small Zariski site of `X` and every `q > d`. This is Grothendieck

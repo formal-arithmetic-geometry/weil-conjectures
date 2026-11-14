@@ -12,8 +12,7 @@ import all WeilConjectures.AlgebraicGeometry.SemilinearProperOpen.SemilinearProp
 
 /-! # Associativity of the intrinsic semilinear compositors
 
-Source: Stacks Project, Tags 0F7C--0F7F; section-normalized direct image and
-adjoint conjugation (blueprint: lem-sf-intrinsic-semilinear-compositor-coherence).
+Source: Stacks Project, Tags 0F7C--0F7F.
 
 The constructions, statements and proofs below are retained from the original
 mate-pasting module. This file separates their elaboration and artifact generation
@@ -182,16 +181,7 @@ private theorem jComp_transport {X Y Z : Scheme.{u}}
 
 /-- Coherence of the specified compositors makes iterated pasting independent of
 parenthesization, for inverse image, its right-adjoint mate, and open extension.
-Source: Stacks 0F7C--0F7F; Mathlib mateEquiv_hcomp and mateEquiv_vcomp
-(blueprint: lem-sf-semilinear-proper-open-mate-pasting).
-Proof: the ordinary direct-image compositor is restriction along the canonical
-iterated-fibre-product isomorphism. Both threefold composites send a section to
-its restriction along the same map, by the fibre-product universal property.
-Conjugate this equality to the inverse-image adjoints and localize. This proves
-the first assertion. Right-adjoint conjugation and mate pasting prove the second.
-Conjugation using the open adjunctions proves the third. Repeated associativity
-reduces every finite parenthesization to the same one; the binary gamma pasting
-laws therefore identify every parenthesization with the outer-square gamma. -/
+Source: Stacks 0F7C--0F7F. -/
 theorem compositor_associativity :
     (∀ {X Y Z T : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ T)
       (M : Derived C τ T),

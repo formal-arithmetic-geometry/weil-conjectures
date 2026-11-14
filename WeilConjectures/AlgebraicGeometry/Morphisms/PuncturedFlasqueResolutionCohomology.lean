@@ -24,20 +24,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The sections complex of an associated injective-module resolution computes the
 cohomology of the structure sheaf on any open of a Noetherian affine scheme.
-Source: Stacks Project, Tag 09T2, Lemma 36.8.1, and Tag 0A6T, Lemma 51.2.1.
-(blueprint: lem-sbc-punctured-flasque-resolution-cohomology).
-
-Proof: Localizing an exact sequence of modules is exact. Therefore the associated
-sheaves of the resolution I form an exact resolution of the unit structure module
-on Spec R; the augmentation uses tildeSelf. Restriction to W preserves exactness
-(stalks are unchanged). Every I.X k is injective, and its associated sheaf is
-flasque on the Noetherian affine scheme by 09T2. Restriction of a flasque sheaf
-remains flasque, hence is acyclic for sections. The acyclic-resolution comparison
-computes sheaf cohomology from the complex of sections. Sections of the restricted
-associated sheaf are precisely evaluation of modulesSpecToSheaf on W, which is
-the concrete puncturedSectionsComplex. The underlying additive sheaf of the unit
-module gives Modules.H. This includes degree zero. On the empty open each sections
-module and the structure sheaf cohomology vanish, and the same comparison holds. -/
+Source: Stacks Project, Tag 09T2, Lemma 36.8.1, and Tag 0A6T, Lemma 51.2.1. -/
 theorem nonempty_open_h_addEquiv_injective_sections
     (R : Type u) [CommRing R] [IsNoetherianRing R]
     (W : (Spec (.of R)).Opens)

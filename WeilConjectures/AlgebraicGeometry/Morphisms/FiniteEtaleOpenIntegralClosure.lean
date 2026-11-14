@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteEtaleOpenGenericAlgebra
 # Affine integral closures of finite etale covers of normal opens
 
 Source: Stacks Project, Tag 032L (finite separable integral closure).
-(blueprint: lem-sbc-finite-etale-open-integral-closure)
 -/
 
 @[expose] public section
@@ -33,23 +32,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The affine algebra defining the relative normalization in a finite etale open cover
 is finite over the affine base ring.
 
-Source: Stacks Project, Tag 032L (lemma-Noetherian-normal-domain-finite-separable-extension).
-(blueprint: lem-sbc-finite-etale-open-integral-closure)
-
-Proof: If V or U is empty, the section algebra of the cover over V is the zero ring,
-so its integral closure is a finite module. Otherwise the normal integral scheme X
-has normal Noetherian affine ring A = Gamma(X,V). The nonempty intersection of U
-and V contains the generic point. The finite etale cover is normal, and its sections
-on this intersection inject into its generic algebra: this can be checked on affine
-opens of the cover, where flatness over a domain makes restriction to the generic
-point injective. The generic algebra is a finite product of finite separable extensions
-of Frac(A). Its integral closure over A is finite, component by component, by 032L:
-choose an integral field basis and bound integral elements by the lattice of its
-trace-dual basis. Normality of A puts the trace of each integral product in A;
-Noetherianity makes every submodule of this finite lattice finite. Mapping the
-integral closure in the section algebra into that product closure is injective and
-A-linear, so it too is finite. A zero-rank cover gives the empty product and is included.
-No invertibility of the degree or group action is required. -/
+Source: Stacks Project. -/
 theorem finiteEtale_open_integralClosure_finite {X : Scheme.{u}} [IsNoetherian X]
     [IsIntegral X] (hX : ∀ x : X, IsIntegrallyClosed (X.presheaf.stalk x))
     (U : X.Opens) (P : U.toScheme.FiniteEtale) (V : X.Opens)

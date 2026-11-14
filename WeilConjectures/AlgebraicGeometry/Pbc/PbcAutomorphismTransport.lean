@@ -26,9 +26,6 @@ import WeilConjectures.AlgebraicGeometry.Pbc.PbcAutomorphismLocalReduction
 /-!
 # Completed coefficient transport and Weil categories
 
-Source: Weil conjectures blueprint, finite coefficient and Weil-category definitions
-(blueprint: def-wf-automorphism-completed-transport).
-
 The finite coefficient stages use `pbcStageDatum` and `pbcStageUniformizer`:
 these are the valuation-ring data transported along `Shrink.algEquiv`, with the
 actual field inclusions conjugated by that canonical equivalence.
@@ -207,18 +204,12 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y) [hf : IsIso f]
 
 include hf in
 set_option linter.unusedSectionVars false in
-/-- The coefficient map is invertible for a scheme isomorphism.
-Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport).
-Proof: the site equivalence preserves all limits. Each finite constant-ring
-comparison is invertible by the isomorphism inverse-image theorem. Apply
-preservation of the limit to these finite comparisons. Their limit is precisely
-the map defined by the recorded projection equations. -/
+/-- The coefficient map is invertible for a scheme isomorphism. -/
 @[instance] theorem pbcIsoCoefficientMap_isIso : IsIso (completedCoefficientMap f d) := by
   rw [completedCoefficientMap_eq_integralRingIso]
   infer_instance
 
-/-- Exact module transport: inverse image followed by the canonical scalar identification.
-Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport). -/
+/-- Exact module transport: inverse image followed by the canonical scalar identification. -/
 abbrev pbcIsoModulePullback :
     pbcModules Y (pbcAdicCompletion Y d) ⥤ pbcModules X (pbcAdicCompletion X d) :=
   proEtaleRingModulePullback f (pbcAdicCompletion Y d) (pbcAdicCompletion X d)
@@ -259,12 +250,7 @@ private theorem isoSiteModulePushforward
     exact congrArg (fun z ↦ z.hom) hh
   exact (SheafOfModules.pushforwardPushforwardEquivalence E φ ψ H₁ H₂).isEquivalence_functor
 
-/-- The module pullback is an exact equivalence with inverse transport along f inverse.
-Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport).
-Proof: inverse-image equivalences for the two inverse site functors identify
-the completed coefficient sheaves by the finite projection equations. The
-unit and counit of their site equivalence therefore lift to modules. Both
-functors are exact, since site equivalences and ring identifications are exact. -/
+/-- The module pullback is an exact equivalence with inverse transport along f inverse. -/
 @[instance] theorem pbcIsoModulePullback_isEquivalence :
     (pbcIsoModulePullback f d).IsEquivalence := by
   let hsite : (proEtaleIsoPostcompose f).IsEquivalence :=
@@ -315,17 +301,11 @@ attribute [local irreducible] proEtaleRingModulePullback completedModulePullback
   completedPullbackComparison completedPullbackObject
   completedCoefficientMap
 
-/-- The exact equivalence transported to complexes and localized at quasi-isomorphisms.
-Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport). -/
+/-- The exact equivalence transported to complexes and localized at quasi-isomorphisms. -/
 abbrev pbcIsoAmbientPullback : PbcCompletedDerived Y d ⥤ PbcCompletedDerived X d :=
   (pbcIsoModulePullback f d).mapDerivedCategory
 
 /-- The two recorded ordinary inverse images have the same tensor object and map formulas.
-Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport).
-Proof: both coefficient maps are the existing completedCoefficientMap. The ordinary
-scalar extension in completedModulePullback is fixed on objects and maps by the
-change-of-rings universal pair, so its formulas are precisely changeOfRings and
-changeOfRingsHom. Functor extensionality gives the displayed equality.
 -/
 theorem pbcIsoModulePullback_eq_completed :
     pbcIsoModulePullback f d = completedModulePullback f d := by
@@ -362,11 +342,6 @@ private theorem isoExactDerivedComparison
   exact exactDerivedCounitComparison F L ε
 
 /-- Exact descent is the unique ordinary derived inverse image with its universal counit.
-Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport).
-Proof: exactness makes the termwise descent with its localization factorization a
-left-derived pair. Transport its counit through the equality of the two ordinary
-functors. The universal property of the recorded left-derived pair gives a unique
-isomorphism satisfying the displayed complex-counit equation.
 -/
 theorem pbcIsoOrdinaryDerivedComparison_exists :
     ∃! alpha : completedOrdinaryPullback f d ≅ pbcIsoAmbientPullback f d,
@@ -381,8 +356,7 @@ theorem pbcIsoOrdinaryDerivedComparison_exists :
     (pbcIsoModulePullback_eq_completed f d) (completedOrdinaryPullback f d)
     (completedOrdinaryPullbackCounit f d)
 
-/-- The comparison fixed by the two derived counits on every complex.
-Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport). -/
+/-- The comparison fixed by the two derived counits on every complex. -/
 def pbcIsoOrdinaryDerivedComparison :=
   (pbcIsoOrdinaryDerivedComparison_exists f d).exists.choose
 
@@ -419,12 +393,7 @@ private theorem isoTransportDirectComplete
     (((ObjectProperty.ι (PbcIsIntrinsicallyComplete Y d)).leftAdjoint.obj
       ((pbcActualDerivedPush f d).obj M)).property)
 
-/-- Intrinsic completion preservation component of the automorphism transport.
-Source: blueprint order 2106, preservation clause
-(blueprint: lem-wf-pbc-automorphism-transport-intrinsic).
-Proof: transport a finite generating-family completion witness through the exact inverse-image
-functor and identify its finite projection equations with those of the ordinary pullback;
-reassociate along the normalized ordinary-derived comparison and preserve invertibility. -/
+/-- Intrinsic completion preservation component of the automorphism transport. -/
 theorem pbcIsoAmbientPullback_preserves_intrinsic
     (K : PbcBoundedConstructibleComplete Y d)
     (H : PbcCompletedDerived Y d ⥤ PbcCompletedDerived X d)
@@ -503,12 +472,7 @@ private def isoTransportStratification (S : Stratification Y) : Stratification X
       rw [IsIso.hom_inv_id]
       rfl
 
-/-- Uniform reduction preservation component of the automorphism transport.
-Source: blueprint order 2106, preservation clause
-(blueprint: lem-wf-pbc-automorphism-transport-reductions).
-Proof: apply exact inverse image levelwise to the canonical reduction tower; the finite
-coefficient projection equations preserve transitions and all local bounds, then transport
-the resulting witnesses along the normalized comparison `e`. -/
+/-- Uniform reduction preservation component of the automorphism transport. -/
 theorem pbcIsoAmbientPullback_preserves_reductions
     (K : PbcBoundedConstructibleComplete Y d)
     (H : PbcCompletedDerived Y d ⥤ PbcCompletedDerived X d)
@@ -550,12 +514,7 @@ theorem pbcIsoAmbientPullback_preserves_reductions
       |>.apply_symm_apply _)
   exact uniformReductions_iso_transport d (e.app K.obj) hOrd
 
-/-- Compatible etale-origin preservation component of the automorphism transport.
-Source: blueprint order 2106, preservation clause
-(blueprint: lem-wf-pbc-automorphism-transport-origins).
-Proof: transport each finite etale-origin witness and its normalized transition equation
-through exact inverse image; constant-section comparisons preserve the quotient maps, and
-`e` gives the displayed target object. -/
+/-- Compatible etale-origin preservation component of the automorphism transport. -/
 theorem pbcIsoAmbientPullback_preserves_origins
     (K : PbcBoundedConstructibleComplete Y d)
     (H : PbcCompletedDerived Y d ⥤ PbcCompletedDerived X d)
@@ -624,15 +583,7 @@ theorem pbcIsoAmbientPullback_preserves_origins
     (eqToIso hF).app ((pbcCompletedReduction Y d n).obj K.obj) ≪≫
     (d.chi f n).app K.obj ≪≫ (pbcCompletedReduction X d n).mapIso (h.app K.obj)
 
-/-- Transport preserves the specified integral full subcategory.
-Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport).
-Proof: the exact site equivalence and its exact inverse preserve K-injective
-resolutions of strict towers, so derived inverse limits transport. The finite
-quotient projections identify the reduction towers including transitions.
-Thus the Koszul completeness condition is preserved. Transport every stratum,
-every common local bounded model, and every etale origin and its comparison.
-All normalization equations are functorial images of the original equations;
-bounds and the number of strata remain unchanged. -/
+/-- Transport preserves the specified integral full subcategory. -/
 theorem pbcIsoAmbientPullback_preserves
     (K : PbcBoundedConstructibleComplete Y d) :
     PbcIsBoundedConstructibleComplete X d ((pbcIsoAmbientPullback f d).obj K.obj) := by
@@ -647,12 +598,6 @@ theorem pbcIsoAmbientPullback_preserves
 
 include hf in
 /-- The completed comparison is invertible on the stipulated integral complete objects.
-Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport).
-Proof: the exact inverse site functors preserve the K-injective resolutions of strict
-towers, hence their derived inverse limits and normalized constant-tower units.
-Finite coefficient projections identify the transported reduction tower with the
-reduction tower of the exact inverse image. The completion unit is invertible on K;
-transporting this unit identifies completedPullbackComparison with an isomorphism.
 -/
 @[instance] theorem pbcIsoCompletedComparison_isIso
     (K : PbcBoundedConstructibleComplete Y d) :
@@ -676,15 +621,13 @@ transporting this unit identifies completedPullbackComparison with an isomorphis
   rw [hα]
   infer_instance
 
-/-- Completed pullback is the same coefficient transport, with its normalized comparison.
-Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport). -/
+/-- Completed pullback is the same coefficient transport, with its normalized comparison. -/
 def pbcIsoCompletedPullback_identification (K : PbcBoundedConstructibleComplete Y d) :
     completedPullbackObject f d K.obj ≅ (pbcIsoAmbientPullback f d).obj K.obj :=
   (asIso (completedPullbackComparison f d K.obj)).symm ≪≫
     (pbcIsoOrdinaryDerivedComparison f d).app K.obj
 
-/-- Restriction to the full subcategory, retaining all ambient derived morphisms.
-Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport). -/
+/-- Restriction to the full subcategory, retaining all ambient derived morphisms. -/
 def pbcIsoIntegralPullback :
     PbcBoundedConstructibleComplete Y d ⥤ PbcBoundedConstructibleComplete X d :=
   ObjectProperty.lift (PbcIsBoundedConstructibleComplete X d)
@@ -693,12 +636,7 @@ def pbcIsoIntegralPullback :
 
 attribute [local irreducible] pbcIsoIntegralPullback
 
-/-- Coefficient transport is additive and linear for the original constant-section action.
-Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport).
-Proof: inverse image and scalar identification respect sums sectionwise. The
-finite comparisons send each constant scalar to itself; their limit therefore
-intertwines the recorded constant-section actions. The same equations hold on
-complexes, descend to derived morphisms, and restrict to the full subcategories. -/
+/-- Coefficient transport is additive and linear for the original constant-section action. -/
 theorem pbcIsoIntegralPullback_linear :
     (pbcIsoIntegralPullback f d).Additive ∧ (pbcIsoIntegralPullback f d).Linear A := by
   have hG : (proEtaleRingModuleDirectImage f (pbcAdicCompletion Y d)
@@ -723,19 +661,16 @@ theorem pbcIsoIntegralPullback_linear :
     unfold pbcIsoIntegralPullback
     exact (pbcIsoAmbientPullback f d).map_smul b a.hom
 
-/-- Additivity supplied by the named coefficient-transport theorem.
-Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport). -/
+/-- Additivity supplied by the named coefficient-transport theorem. -/
 instance pbcIsoIntegralPullback_additive : (pbcIsoIntegralPullback f d).Additive :=
   (pbcIsoIntegralPullback_linear f d).1
 
-/-- Linearity supplied by the named constant-section compatibility theorem.
-Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport). -/
+/-- Linearity supplied by the named constant-section compatibility theorem. -/
 instance pbcIsoIntegralPullback_isLinear : (pbcIsoIntegralPullback f d).Linear A :=
   (pbcIsoIntegralPullback_linear f d).2
 
 /-- On the raw rationalization transport sends a tensor a tensor u to a tensor P(u).
-This construction retains precisely the original integral object representatives.
-Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport). -/
+This construction retains precisely the original integral object representatives. -/
 abbrev pbcRationalIsoPullback {T : Scheme.{u}} (e : Aut T)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (p : A) :
     PbcRationalCategory T d p ⥤ PbcRationalCategory T d p :=
@@ -771,12 +706,7 @@ private theorem scalarRightInverse
     exact eq_of_heq (hr' N U x)
 
 /-- Exact transport's right adjoints commute with restriction of coefficients.
-The section equation fixes the comparison, not just its isomorphism class.
-Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport).
-Proof: both functors have exactly the same underlying sheaf, evaluated on the
-postcomposition functor of the site isomorphism. The coefficient actions agree
-by the finite constant comparisons and their limit projection equations.
-Identity on sections gives the isomorphism and determines it uniquely. -/
+The section equation fixes the comparison, not just its isomorphism class. -/
 theorem pbcIsoScalarRightComparison_exists (h : E ≤ F) :
     ∃! r :
       pbcRestrict (pbcCompletedScalarMap l Ω T h) ⋙
@@ -812,8 +742,7 @@ theorem pbcIsoScalarRightComparison_exists (h : E ≤ F) :
     (pbcActualStructureMap e.asIso.hom (pbcStageDatum.{u} l Ω E))
     (pbcActualStructureMap e.asIso.hom (pbcStageDatum.{u} l Ω F)) hs
 
-/-- The right-adjoint comparison fixed by identity on sections.
-Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport). -/
+/-- The right-adjoint comparison fixed by identity on sections. -/
 def pbcIsoScalarRightComparison (h : E ≤ F) :
     pbcRestrict (pbcCompletedScalarMap l Ω T h) ⋙
           proEtaleRingModuleDirectImage e.asIso.hom
@@ -828,8 +757,7 @@ def pbcIsoScalarRightComparison (h : E ≤ F) :
   (pbcIsoScalarRightComparison_exists l Ω e h).exists.choose
 
 /-- The ordinary comparison is the mate of the sectionwise identity comparison.
-This pins down its tensor normalization.
-Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport). -/
+This pins down its tensor normalization. -/
 def pbcIsoOrdinaryScalarComparison (h : E ≤ F) :
     pbcExtend (pbcCompletedScalarMap l Ω T h) ⋙
         pbcIsoModulePullback e.asIso.hom (pbcStageDatum.{u} l Ω F) ≅
@@ -845,8 +773,7 @@ def pbcIsoOrdinaryScalarComparison (h : E ≤ F) :
     (pbcIsoScalarRightComparison l Ω e h)
 
 /-- The ordinary comparison on nested complex functors, using the canonical
-composition isomorphisms on both sides.
-Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport). -/
+composition isomorphisms on both sides. -/
 def pbcIsoOrdinaryComplexComparison (h : E ≤ F) :
     (pbcExtend (pbcCompletedScalarMap l Ω T h)).mapHomologicalComplex (.up ℤ) ⋙
         (pbcIsoModulePullback e.asIso.hom (pbcStageDatum.{u} l Ω F)).mapHomologicalComplex
@@ -925,8 +852,7 @@ theorem pbcIsoAmbientScalarComparison_exists (h : E ≤ F) :
     (pbcStageDatum.{u} l Ω E) (pbcStageDatum.{u} l Ω F)
     (pbcCompletedScalarMap l Ω T h) (pbcIsoOrdinaryComplexComparison l Ω e h)
 
-/-- The ambient Frobenius/scalar comparison with its representative normalization.
-Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport). -/
+/-- The ambient Frobenius/scalar comparison with its representative normalization. -/
 def pbcIsoAmbientScalarComparison (h : E ≤ F) :
     pbcAmbientScalarExtension l Ω T h ⋙
         pbcIsoAmbientPullback e.asIso.hom (pbcStageDatum.{u} l Ω F) ≅
@@ -940,11 +866,7 @@ variable [IsNoetherian T] (hdim : ∃ m : ℕ, topologicalKrullDim T ≤ m)
 section
 attribute [local semireducible] pbcIsoIntegralPullback
 
-/-- Fullness restricts the normalized ambient comparison uniquely.
-Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport).
-Proof: both tensor extension and transport preserve the defining full
-subcategories. Lift ambient components and inverses by fullness; faithfulness
-proves the naturality, inverse and uniqueness equations. -/
+/-- Fullness restricts the normalized ambient comparison uniquely. -/
 theorem pbcIsoIntegralScalarComparison_exists (h : E ≤ F) :
     ∃! c : pbcIntegralScalarExtension l Ω T hdim hl h ⋙
         pbcIsoIntegralPullback e.asIso.hom (pbcStageDatum.{u} l Ω F) ≅
@@ -972,8 +894,7 @@ theorem pbcIsoIntegralScalarComparison_exists (h : E ≤ F) :
 
 end
 
-/-- The integral comparison retaining its ambient normalization.
-Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport). -/
+/-- The integral comparison retaining its ambient normalization. -/
 def pbcIsoIntegralScalarComparison (h : E ≤ F) :
     pbcIntegralScalarExtension l Ω T hdim hl h ⋙
         pbcIsoIntegralPullback e.asIso.hom (pbcStageDatum.{u} l Ω F) ≅
@@ -982,11 +903,7 @@ def pbcIsoIntegralScalarComparison (h : E ≤ F) :
   (pbcIsoIntegralScalarComparison_exists l Ω e hdim hl h).exists.choose
 
 set_option linter.unusedSectionVars false in
-/-- Integral localization commutes with the explicitly linear coefficient transport.
-Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport).
-Proof: both functors have the same object function. On morphisms they both send
-1 tensor u to 1 tensor P(u); the base-change linear map defining transport gives
-the asserted equality of functors. -/
+/-- Integral localization commutes with the explicitly linear coefficient transport. -/
 theorem pbcIsoRationalization (E : Padic.FiniteCoefficientFields l Ω) :
     pbcRationalization T (pbcStageDatum.{u} l Ω E) (pbcStageUniformizer.{u} l Ω E) ⋙
         pbcRationalIsoPullback e (pbcStageDatum.{u} l Ω E) (pbcStageUniformizer.{u} l Ω E) =
@@ -1001,11 +918,7 @@ theorem pbcIsoRationalization (E : Padic.FiniteCoefficientFields l Ω) :
   simp only [eqToHom_refl, Category.id_comp, Category.comp_id]
   exact LinearMap.baseChange_tmul _ _ _
 
-/-- The rational comparison is fixed on every original integral object.
-Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport).
-Proof: conjugate rationalization of the integral comparison by the displayed
-integral/localization comparisons. Naturality on fractions follows by inverting
-the coefficient uniformizer; all objects are integral objects, so uniqueness follows. -/
+/-- The rational comparison is fixed on every original integral object. -/
 theorem pbcIsoRationalScalarComparison_exists (h : E ≤ F) :
     ∃! c : pbcScalarExtension l Ω T hdim hl h ⋙
         pbcRationalIsoPullback e (pbcStageDatum.{u} l Ω F) (pbcStageUniformizer.{u} l Ω F) ≅
@@ -1078,8 +991,7 @@ theorem pbcIsoRationalScalarComparison_exists (h : E ≤ F) :
   obtain ⟨K⟩ := K
   exact (hc' K).trans (hnorm K).symm
 
-/-- The Frobenius/scalar comparison determined by canonical tensor transport.
-Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport). -/
+/-- The Frobenius/scalar comparison determined by canonical tensor transport. -/
 def pbcIsoRationalScalarComparison (h : E ≤ F) :
     pbcScalarExtension l Ω T hdim hl h ⋙
         pbcRationalIsoPullback e (pbcStageDatum.{u} l Ω F) (pbcStageUniformizer.{u} l Ω F) ≅

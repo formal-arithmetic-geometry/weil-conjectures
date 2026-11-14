@@ -16,7 +16,6 @@ through the quotient comparison isomorphisms. No flatness of the input complexes
 is required for this equation.
 
 Source: Stacks Project, Tags 07A4 and 0G7E.
-(blueprint: lem-sfb-quotient-tensor-pull-counit).
 -/
 
 @[expose] public noncomputable section
@@ -137,18 +136,7 @@ private theorem cochain_tensor_counit
   simpa only [Category.assoc] using ht
 
 /-- The derived geometric tensor comparison commutes with the specified cochain counits.
-Source: Stacks Project 07A4 and 0G7E, the derived tensor/pullback computation.
-(blueprint: lem-sfb-quotient-tensor-pull-counit).
-
-Proof: identify computePull with the cochain left-derived counit. The native
-comparison is leftDerivedTensorComparison for the canonical ordinary monoidal
-pullback. Its homotopy counit equation is transported through quotientCompQhIso
-at P, Q, their tensor, the three images, and the tensor of the two images.
-Naturality of the comparison at the inverse quotient isomorphisms transports its
-source; naturality of the quotient isomorphism at the signed ordinary tensorator
-transports its target. The localization tensorators are exactly the conjugates
-of the homotopy localization tensorators. Cancel the isomorphisms to obtain the
-stated equation. This works for arbitrary, including unbounded, cochains. -/
+Source: Stacks Project 07A4 and 0G7E. -/
 theorem pull_tensor_counit {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P Q : CochainComplex (Modules R Y) ℤ) :
     (L R f).map (Functor.LaxMonoidal.μ DerivedCategory.Q P Q) ≫

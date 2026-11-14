@@ -12,9 +12,8 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryM
 
 /-! # Normalized finite-field stages and their coherence
 
-Source: blueprint proper base change, order 1307; Milne, Section 19.
+Source: Milne, Section 19.
 Existing declarations extracted from `PbcScalarExtension` to bound compilation cost.
-(blueprint: lem-pbc-scalar-stage-coherence)
 -/
 
 @[expose] public noncomputable section
@@ -694,48 +693,39 @@ variable [dim : Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]
 variable [inv : Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]
 
 /-- The actual finite subfields, in a common ambient field; no algebraic closure
-hypothesis is needed for this finite tower. Source: blueprint order 1307
-(blueprint: lem-pbc-scalar-stage-coherence). -/
+hypothesis is needed for this finite tower. -/
 abbrev pbcCoefficientStage (E : Padic.FiniteCoefficientFields l Ω) :=
   PbcRationalDerivedCategory l E.val T dim.out inv.out
 
-/-- A nested finite subfield inclusion, with its actual algebra homomorphism.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-stage-coherence). -/
+/-- A nested finite subfield inclusion, with its actual algebra homomorphism. -/
 def pbcSubfieldInclusion {E F : Padic.FiniteCoefficientFields l Ω} (h : E ≤ F) :
     E.val →ₐ[Padic l] F.val := IntermediateField.inclusion h
 
-/-- Identity inclusions are the actual algebra identity.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-stage-coherence).
-Proof: both maps fix every element of the subfield. -/
+/-- Identity inclusions are the actual algebra identity. -/
 theorem pbcSubfieldInclusion_id (E : Padic.FiniteCoefficientFields l Ω) :
     pbcSubfieldInclusion l Ω (le_refl E) = AlgHom.id (Padic l) E.val := by
   rfl
 
-/-- Actual inclusions compose as direct inclusions.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-stage-coherence).
-Proof: both maps send each subfield element to its same ambient scalar. -/
+/-- Actual inclusions compose as direct inclusions. -/
 theorem pbcSubfieldInclusion_comp {E F G : Padic.FiniteCoefficientFields l Ω}
     (h : E ≤ F) (h' : F ≤ G) :
     (pbcSubfieldInclusion l Ω h').comp (pbcSubfieldInclusion l Ω h) =
       pbcSubfieldInclusion l Ω (h.trans h') := by
   rfl
 
-/-- The actual rational tensor before literal identity normalization.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-stage-coherence). -/
+/-- The actual rational tensor before literal identity normalization. -/
 abbrev pbcStageRaw {E F : Padic.FiniteCoefficientFields l Ω} (h : E ≤ F) :
     pbcCoefficientStage l Ω T E ⥤ pbcCoefficientStage l Ω T F :=
   pbcRationalScalarExtension l E.val F.val (pbcSubfieldInclusion l Ω h) T dim.out inv.out
 
-/-- Equal coefficient fields use the literal identity functor.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-stage-coherence). -/
+/-- Equal coefficient fields use the literal identity functor. -/
 def pbcStageTransition {E F : Padic.FiniteCoefficientFields l Ω} (h : E ≤ F) :
     pbcCoefficientStage l Ω T E ⥤ pbcCoefficientStage l Ω T F := by
   classical
   exact if e : E = F then e ▸ 𝟭 (pbcCoefficientStage l Ω T E)
     else pbcStageRaw l Ω T h
 
-/-- Normalization uses precisely the ordinary tensor multiplication unit.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-stage-coherence). -/
+/-- Normalization uses precisely the ordinary tensor multiplication unit. -/
 @[irreducible] def pbcStageNormalization {E F : Padic.FiniteCoefficientFields l Ω} (h : E ≤ F) :
     pbcStageRaw l Ω T h ≅ pbcStageTransition l Ω T h := by
   classical
@@ -748,8 +738,7 @@ Source: blueprint order 1307 (blueprint: lem-pbc-scalar-stage-coherence). -/
           eqToIso (by unfold pbcStageTransition; rw [dite_eq_left rfl])
   · exact eqToIso (by simp only [pbcStageTransition, dite_eq_right e])
 
-/-- Balancing, conjugated by the specified tensor units, is the chosen associator.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-stage-coherence). -/
+/-- Balancing, conjugated by the specified tensor units, is the chosen associator. -/
 @[irreducible] def pbcStageAssociator {E F G : Padic.FiniteCoefficientFields l Ω}
     (h : E ≤ F) (h' : F ≤ G) :
     pbcStageTransition l Ω T h ⋙ pbcStageTransition l Ω T h' ≅
@@ -762,15 +751,13 @@ Source: blueprint order 1307 (blueprint: lem-pbc-scalar-stage-coherence). -/
       (pbcSubfieldInclusion_comp l Ω h h')) ≪≫
     pbcStageNormalization l Ω T (h.trans h')
 
-/-- Equal coefficient fields use the identity transition.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-stage-coherence). -/
+/-- Equal coefficient fields use the identity transition. -/
 theorem pbcStageTransition_refl (E : Padic.FiniteCoefficientFields l Ω) :
     pbcStageTransition l Ω T (le_refl E) = 𝟭 _ := by
   unfold pbcStageTransition
   rw [dite_eq_left rfl]
 
-/-- The normalization at equal fields is the tensor unit.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-stage-coherence). -/
+/-- The normalization at equal fields is the tensor unit. -/
 theorem pbcStageNormalization_refl (E : Padic.FiniteCoefficientFields l Ω) :
     pbcStageNormalization l Ω T (le_refl E) =
       pbcRationalScalarUnit l E.val T dim.out inv.out ≪≫
@@ -778,12 +765,7 @@ theorem pbcStageNormalization_refl (E : Padic.FiniteCoefficientFields l Ω) :
   rw [pbcStageNormalization, dite_eq_left rfl]
   exact Iso.refl_trans _
 
-/-- Normalized tensor balancing satisfies both units and the four-field pentagon.
-Source: blueprint order 1307 (blueprint: lem-pbc-scalar-stage-coherence).
-Proof: on a K-flat complex both paths send the three nested scalar factors to
-their product, with the same remaining tensor factor. Associativity gives equality
-before localization. Multiplication by one gives each unit equation. The two
-localizations preserve these equations, including coincident adjacent fields. -/
+/-- Normalized tensor balancing satisfies both units and the four-field pentagon. -/
 theorem pbcStageAssociator_laws :
     (∀ {E F G H : Padic.FiniteCoefficientFields l Ω}
       (h : E ≤ F) (h' : F ≤ G) (h'' : G ≤ H)

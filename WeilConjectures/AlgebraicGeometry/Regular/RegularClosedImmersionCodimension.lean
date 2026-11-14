@@ -11,8 +11,8 @@ public import Mathlib.RingTheory.Regular.RegularSequence
 /-!
 # Regular closed immersions with varying codimension
 
-Source: Stacks Project, Divisors, regular ideal sheaves and regular immersions,
-Tags 063D, 063G and 063J (blueprint: def-per-regular-closed-immersion-codimension).
+Source: Stacks Project, Divisors, regular ideal sheaves and regular immersions, Tags 063D, 063G and
+063J.
 -/
 
 @[expose] public section
@@ -30,8 +30,7 @@ its ideal has regular equations of length `c y` on an ambient affine neighbourho
 The kernel on sections is the defining ideal of the closed subscheme on that affine.
 The condition is imposed along the source, so it includes open-and-closed immersions of
 codimension zero and empty sources. No constancy or rank theorem is built into the data.
-Source: Stacks Project, Divisors, Tags 063D, 063G and 063J
-(blueprint: def-per-regular-closed-immersion-codimension). -/
+Source: Stacks Project, Divisors, Tags 063D, 063G and 063J. -/
 def IsRegularClosedImmersionWithCodimension {Y X : Scheme.{u}}
     (i : Y ⟶ X) (c : Y → ℕ) : Prop :=
   IsClosedImmersion i ∧ ∀ y : Y, ∃ U : X.affineOpens, i y ∈ U.1 ∧

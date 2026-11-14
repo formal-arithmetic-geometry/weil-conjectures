@@ -16,9 +16,7 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.GradedModuleChartData
 /-!
 # Exactness of an associated graded chain on the projective line
 
-Source: blueprint `theorem-riemann-roch-coherent-serre-duality`, sheafification clause;
-Stacks Project, Constructions, Tag 01M7, final paragraph.
-(blueprint: lem-sc-p1-sheafify-graded-chain).
+Source: Stacks Project, Constructions, Tag 01M7, final paragraph.
 -/
 
 @[expose] public section
@@ -34,30 +32,7 @@ attribute [local instance] MvPolynomial.gradedAlgebra
 
 /-- Sheafification and inverse transport of a given exact graded chain. The terms need not
 be free or finitely generated; the conclusion supplies their associated sheaf chart data.
-Source: blueprint `theorem-riemann-roch-coherent-serre-duality`, sheafification clause;
-Stacks Project, Constructions, Tag 01M7, final paragraph.
-(blueprint: lem-sc-p1-sheafify-graded-chain).
-
-Proof:
-1. Form the graded image `K = range f₁`, with its grading induced from `A 0`. A
-   degree-preserving map has a graded image: decompose a preimage into homogeneous parts
-   and use internality in its source and target. Similarly its kernel is graded.
-   The supplied range/kernel equalities give the short exact sequences
-   `0 → A 2 → A 1 → K → 0` and `0 → K → A 0 → M → 0`.
-2. Apply `lem-weil-pbc-proj-graded-module-sheaf-exists` to the three `A i` and to `K`.
-   Retain its injective chart maps onto the degree-zero fractions, scalar compatibility,
-   and restriction formulas as the displayed chart data for the three resulting sheaves.
-   Use the supplied chart data for `F` as the associated sheaf of `M`.
-3. `lem-sc-p1-proj-tilde-functorial` induces the maps, including the maps to and from
-   the sheaf of `K`. The composition formula identifies the middle map with the
-   composite through `K`. Apply `lem-sc-p1-proj-sheafification-exact` to the two short
-   exact sequences and splice them. Thus the first map is monic, the last is epic,
-   and the chain is exact at its two middle terms.
-4. Module pullback along the inverse of `C.iso` is an equivalence: its inverse is
-   pullback along `C.iso.hom`, and the composition and identity isomorphisms give the
-   two inverse comparisons. Equivalences preserve kernels and cokernels, so preserve
-   monomorphisms, epimorphisms and exactness. Apply this pullback to the chain of step 3.
-   The output chart data remain on Proj; only the displayed arrows are transported. -/
+Source: Stacks Project, Constructions, Tag 01M7, final paragraph. -/
 theorem sheafify_graded_chain (k : Type u) [Field k]
     (C : ProjectiveLine.ProjChartIsomorphism k)
     (M : ModuleCat.{u} (MvPolynomial (Fin 2) k))

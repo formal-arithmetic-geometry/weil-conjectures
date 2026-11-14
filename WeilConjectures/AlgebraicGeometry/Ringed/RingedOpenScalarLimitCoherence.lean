@@ -160,9 +160,7 @@ import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 /-!
 # Scalar and normalized inverse-limit coherence for ringed open extension
 
-Source: Stacks Project, Tags 09BP, 03DI, 03DJ and 03CY; the final paragraph of
-blueprint `lem-cbc-completed-extension-zero-comparison.proof.md`
-(blueprint: lem-cbc-ringed-open-scalar-limit-coherence).
+Source: Stacks Project, Tags 09BP, 03DI, 03DJ and 03CY.
 
 ## Main statements
 
@@ -196,8 +194,7 @@ variable {A : Type uA} [Category.{vA} A] [Abelian A] [HasLimits A]
   (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
 
 /-- Actual derived postcomposition on strict towers, with levelwise exactness.
-Source: Stacks 03DJ, 05RU
-(blueprint: lem-cbc-ringed-open-scalar-limit-coherence). -/
+Source: Stacks 03DJ, 05RU. -/
 abbrev cbcTowerDerived : DerivedCategory.{wA} (ℕᵒᵖ ⥤ A) ⥤
     DerivedCategory.{wB} (ℕᵒᵖ ⥤ B) :=
   @Functor.mapDerivedCategory _ _ _ _ _ _ _ _
@@ -205,7 +202,7 @@ abbrev cbcTowerDerived : DerivedCategory.{wA} (ℕᵒᵖ ⥤ A) ⥤
     (⟨fun _ _ _ ↦ inferInstance⟩) (⟨fun _ _ _ ↦ inferInstance⟩)
 
 /-- The actual complex-to-derived factorization for tower postcomposition.
-Source: Stacks 05RU (blueprint: lem-cbc-ringed-open-scalar-limit-coherence). -/
+Source: Stacks 05RU. -/
 abbrev cbcTowerFactors :=
   @Functor.mapDerivedCategoryFactors _ _ _ _ _ _ _ _
     ((Functor.whiskeringRight ℕᵒᵖ A B).obj F) inferInstance
@@ -215,8 +212,7 @@ abbrev cbcTowerFactors :=
 K-injective normalization of `exactProductFunctorStrictLimit`: on a K-injective tower
 it reads `F lim I → lim FI → Rlim FI`. Its Roos description is precisely that theorem's
 signed two-summand formula, not an unspecified triangle isomorphism.
-Source: Stacks 0941; normalized comparison in
-(blueprint: lem-cbc-ringed-open-scalar-limit-coherence). -/
+Source: Stacks 0941; normalized comparison in. -/
 structure CbcLimitNormalized
     (LA : DerivedCategory.{wA} (ℕᵒᵖ ⥤ A) ⥤ DerivedCategory.{wA} A)
     (LB : DerivedCategory.{wB} (ℕᵒᵖ ⥤ B) ⥤ DerivedCategory.{wB} B)
@@ -249,14 +245,14 @@ variable {A : Type uA} [Category.{vA} A] [Abelian A] [HasDerivedCategory.{wA} A]
 
 /-- Canonical localization of a commuting square, using the existing derived composition
 and natural-isomorphism transports, including their exact complex factorizations.
-Source: Stacks 05RU (blueprint: lem-cbc-ringed-open-scalar-limit-coherence). -/
+Source: Stacks 05RU. -/
 def cbcDerivedSquare (e : F ⋙ G ≅ H ⋙ K) :
     F.mapDerivedCategory ⋙ G.mapDerivedCategory ≅
       H.mapDerivedCategory ⋙ K.mapDerivedCategory :=
   Functor.mapDerivedCategorySquareIso e
 
 /-- The same canonical square on derived strict towers, using levelwise exactness.
-Source: Stacks 05RU (blueprint: lem-cbc-ringed-open-scalar-limit-coherence). -/
+Source: Stacks 05RU. -/
 def cbcDerivedTowerSquare
     [HasLimits A] [HasLimits B] [HasLimits C] [HasLimits D]
     [HasDerivedCategory.{wA} (ℕᵒᵖ ⥤ A)] [HasDerivedCategory.{wB} (ℕᵒᵖ ⥤ B)]
@@ -268,8 +264,7 @@ def cbcDerivedTowerSquare
 end
 
 /-- Unit and counit equations for the scalar/open-extension square.
-Source: Stacks 03DI, the two explicit Hom maps
-(blueprint: lem-cbc-ringed-open-scalar-limit-coherence). -/
+Source: Stacks 03DI, the two explicit Hom maps. -/
 def CbcAdjunctionCompatible
     {A : Type uA} [Category.{vA} A] {B : Type uB} [Category.{vB} B]
     {C : Type uC} [Category.{vC} C] {D : Type uD} [Category.{vD} D]
@@ -283,7 +278,7 @@ def CbcAdjunctionCompatible
     adjR.counit.app (rT.obj Q) = rT.map (adjS.counit.app Q))
 
 /-- Canonical square on complexes with its composition factors explicit.
-Source: Stacks 03DJ (blueprint: lem-cbc-ringed-open-scalar-limit-coherence). -/
+Source: Stacks 03DJ. -/
 def cbcComplexSquare
     {A : Type uA} [Category.{vA} A] [Preadditive A]
     {B : Type uB} [Category.{vB} B] [Preadditive B]

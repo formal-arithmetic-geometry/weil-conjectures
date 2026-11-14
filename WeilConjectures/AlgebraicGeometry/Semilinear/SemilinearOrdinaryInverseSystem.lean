@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.OrdinarySource.SemilinearOrdinarySource
 /-! # Ordinary inverse image on the ringed sequence site
 
 Source: Zheng Construction 4.1; Stacks 03D2 and 03DA.
-(blueprint: lem-coef-ordinary-inverse-system).
 -/
 
 @[expose] public noncomputable section
@@ -38,8 +37,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   (I : ∀ n, SheafOfModules.AlgebraicInverseImage uInv (B n) (F n))
 
 /-- Only the inverse-image part of the ordinary system construction.
-Source: Zheng Construction 4.1; Stacks 03D2.
-(blueprint: lem-coef-ordinary-inverse-system). -/
+Source: Zheng Construction 4.1; Stacks 03D2. -/
 structure OrdinaryInverseSystem where
   pull : Systems.{c, v, max c v r} J B τ ⥤ Systems.{c, v, max c v r} J' F σ
   [limits : PreservesFiniteLimits pull]
@@ -298,27 +296,7 @@ private theorem strictFunctor_exact {A : Type*} [Category A]
 
 /-- Termwise inverse image, with its actual horizontal maps, can be assembled on the
 ringed sequence site. No direct image or adjunction is asserted.
-Source: Zheng Construction 4.1, paragraph before Lemma 4.10; Stacks 03D2 and 03DA.
-(blueprint: lem-coef-ordinary-inverse-system).
-
-Proof: view a system as its vertical module sheaves and horizontal semilinear maps.
-For n ≤ m, the underlying map from I_m(M_m) to I_n(M_n) is the old horizontal map
-under uInv, conjugated by I_m.moduleUnderlying and I_n.moduleUnderlying. Apply the
-operation graph equations to the universal pairs of sections to see that this map
-is additive and semilinear; hI supplies the scalar square, first for adjacent indices
-and then by composition. Functoriality of uInv and cancellation of the conjugating
-isomorphisms prove identity, composition and naturality of these horizontal maps.
-Reassemble the resulting presheaf on the product category. Vertical covers glue in
-each inverse-image module sheaf, hence it is a sheaf for the sequence topology.
-Use those same section carriers when defining the reassembled system: the evaluation
-isomorphisms are identity on sections. Limits and colimits are computed componentwise
-on strict systems, so the assumed exactness at every level proves both preservation
-properties. Finally, restriction of coefficients leaves the underlying sheaf unchanged;
-conjugating its identity by the two moduleUnderlying isomorphisms gives restriction.
-The same graph equations prove its linearity; its naturality and inverse laws follow
-from faithfulness. This gives restriction_underlying. By construction the horizontal
-map is the image of the old transition followed by this restriction comparison,
-which is exactly the displayed transition equation. -/
+Source: Zheng Construction 4.1, paragraph before Lemma 4.10; Stacks 03D2 and 03DA. -/
 theorem ordinaryInverseSystem_exists [PreservesFiniteLimits uInv]
     [∀ n, PreservesFiniteLimits (I n).modules]
     [∀ n, PreservesFiniteColimits (I n).modules]

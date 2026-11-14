@@ -127,7 +127,7 @@ theorem range_finitePart : Set.range (D.finitePart χ) = χ '' D.deg.ker := by
 section SplitExtension
 
 /-- Conjugation by the element `γ` of degree one, as an action of `ℤ` on the degree-zero subgroup
-`P = ker deg`: `n` acts by `u ↦ γⁿ u γ⁻ⁿ`. (blueprint: `corollary-rank-one-weights`) -/
+`P = ker deg`: `n` acts by `u ↦ γⁿ u γ⁻ⁿ`. -/
 def conjAction : Multiplicative ℤ →* MulAut D.deg.ker :=
   MulAut.conjNormal.comp (zpowersHom W D.degreeOneElement)
 
@@ -169,8 +169,7 @@ theorem semidirectProductHom_bijective : Function.Bijective D.semidirectProductH
 
 /-- A degree datum `(W, deg, γ)` is the split cyclic extension `P ⋊_α ℤ` of its degree-zero
 subgroup `P` by the conjugation `α` with `γ`: `(u, n) ↦ u γⁿ`. Every element of `W` thus has a
-unique form `u γⁿ` with `u ∈ P`, and then `n = deg (u γⁿ)` (`deg_semidirectProductMulEquiv`).
-(blueprint: `corollary-rank-one-weights`) -/
+unique form `u γⁿ` with `u ∈ P`, and then `n = deg (u γⁿ)` (`deg_semidirectProductMulEquiv`). -/
 noncomputable def semidirectProductMulEquiv : D.deg.ker ⋊[D.conjAction] Multiplicative ℤ ≃* W :=
   MulEquiv.ofBijective _ D.semidirectProductHom_bijective
 
@@ -185,8 +184,7 @@ theorem deg_semidirectProductMulEquiv (x : D.deg.ker ⋊[D.conjAction] Multiplic
   rw [semidirectProductMulEquiv_apply, map_mul, MonoidHom.mem_ker.1 x.left.2, one_mul,
     deg_zpow_degreeOneElement, ofAdd_toAdd]
 
-/-- Every element of a degree datum has a unique form `u γⁿ` with `u` of degree zero.
-(blueprint: `corollary-rank-one-weights`) -/
+/-- Every element of a degree datum has a unique form `u γⁿ` with `u` of degree zero. -/
 theorem existsUnique_mul_zpow (w : W) :
     ∃! p : D.deg.ker × ℤ, (p.1 : W) * D.degreeOneElement ^ p.2 = w := by
   obtain ⟨x, rfl⟩ := D.semidirectProductMulEquiv.surjective w
@@ -213,13 +211,12 @@ def ofWeilGroup (s : π.weilGroup Φ) (hs : π.weilGroupDeg Φ s = Multiplicativ
   deg_degreeOneElement := hs
 
 /-- **Finite-order part times a degree character.** Let `W = W(π, Φ)` be the Weil group of
-`π : G →* Γ` and an element `Φ` of infinite order lifting to `G` (for `π₁(U₀) → Gal(k / k₀)` and
+`π: G →* Γ` and an element `Φ` of infinite order lifting to `G` (for `π₁(U₀) → Gal(k / k₀)` and
 the geometric Frobenius, the Weil group of `U₀`), let `s ∈ W` have degree one, and let
-`χ : W → A` be a character whose image `χ(Π)` on the geometric part `Π = ker π` is finite. Then
+`χ: W → A` be a character whose image `χ(Π)` on the geometric part `Π = ker π` is finite. Then
 `(W, deg, s)` is a degree datum with degree-zero subgroup `Π`, and the finite part
-`ε : w ↦ χ(w) c ^ (-deg w)`, `c = χ(s)`, is a character of finite order with `ε(s) = 1`,
-`ε(W) = χ(Π)` and `χ = ε · c ^ deg`.
-(blueprint: `corollary-rank-one-weights`) -/
+`ε: w ↦ χ(w) c ^ (-deg w)`, `c = χ(s)`, is a character of finite order with `ε(s) = 1`,
+`ε(W) = χ(Π)` and `χ = ε · c ^ deg`. -/
 theorem finitePart_ofWeilGroup (hπ : Φ ∈ π.range) (hΦ : ¬IsOfFinOrder Φ) (s : π.weilGroup Φ)
     (hs : π.weilGroupDeg Φ s = Multiplicative.ofAdd 1) (χ : π.weilGroup Φ →* A)
     (hχ : (χ '' (π.kerToWeilGroup Φ).range).Finite) :
@@ -240,7 +237,7 @@ end WeilGroup
 
 /-- The degree datum `(P ⋊_α ℤ, deg, (1, 1))` of the split cyclic extension of a group `P` by an
 action `α` of `ℤ`: the degree map is the projection to `ℤ` (`SemidirectProduct.rightHom`), whose
-kernel is `P × {0}` (`ker_deg_ofSemidirectProduct`). (blueprint: `corollary-rank-one-weights`) -/
+kernel is `P × {0}` (`ker_deg_ofSemidirectProduct`). -/
 def ofSemidirectProduct {N : Type*} [Group N] (φ : Multiplicative ℤ →* MulAut N) :
     DegreeDatum (N ⋊[φ] Multiplicative ℤ) where
   deg := SemidirectProduct.rightHom
@@ -290,8 +287,7 @@ theorem zeroLocus_geometricMonodromy_eq_of_finite [Finite (D.degreeZero.map D.re
 /-- **Arithmetic monodromy after finite geometric image.** Let `ρ = χ` be a rank-one
 representation whose geometric image `A = χ(P)` is finite. Then the geometric monodromy group is
 `H = A` and conjugation by the Frobenius is trivial on it, so that the arithmetic monodromy
-extension is `G_arith(χ) = A × ℤ`, by `(h, m) ↦ (h, m)`.
-(blueprint: `corollary-rank-one-weights`) -/
+extension is `G_arith(χ) = A × ℤ`, by `(h, m) ↦ (h, m)`. -/
 noncomputable def arithmeticMonodromyExtensionEquivProd [Subsingleton n]
     [Finite (D.degreeZero.map D.rep)] :
     D.ArithmeticMonodromyExtension ≃* D.degreeZero.map D.rep × Multiplicative ℤ :=
@@ -301,7 +297,7 @@ noncomputable def arithmeticMonodromyExtensionEquivProd [Subsingleton n]
       simp [D.frobeniusAction_eq_one]).trans mulEquivProd
 
 /-- Through `G_arith(χ) = A × ℤ`, the map to matrices is `j(a, m) = a cᵐ`, where `c = χ(γ)` is
-the Frobenius. (blueprint: `corollary-rank-one-weights`) -/
+the Frobenius. -/
 theorem arithmeticMonodromyExtensionHom_arithmeticMonodromyExtensionEquivProd_symm
     [Subsingleton n] [Finite (D.degreeZero.map D.rep)] (a : D.degreeZero.map D.rep) (m : ℤ) :
     D.arithmeticMonodromyExtensionHom
@@ -311,8 +307,7 @@ theorem arithmeticMonodromyExtensionHom_arithmeticMonodromyExtensionEquivProd_sy
     arithmeticMonodromyExtensionHom_inl_mul_inr]
   rfl
 
-/-- Through `G_arith(χ) = A × ℤ`, `j(χ(u), m) = χ(u γᵐ)` for `u ∈ P`.
-(blueprint: `corollary-rank-one-weights`) -/
+/-- Through `G_arith(χ) = A × ℤ`, `j(χ(u), m) = χ(u γᵐ)` for `u ∈ P`. -/
 theorem arithmeticMonodromyExtensionHom_arithmeticMonodromyExtensionEquivProd_symm_rep
     [Subsingleton n] [Finite (D.degreeZero.map D.rep)] {u : W} (hu : u ∈ D.degreeZero) (m : ℤ) :
     D.arithmeticMonodromyExtensionHom

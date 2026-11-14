@@ -21,17 +21,11 @@ public import WeilConjectures.Algebra.Homology.DerivedChangeOfRingsIndependentCo
 
 /-! # Constant-ring pro-etale scalar and open operations
 
-Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/
-sec-sp-grp-ladic-summary/sec-towers-and-integral-coefficients/sk-lem-sp-tower/
-lem-fix-compact-support-coefficient-change.proof.md, first paragraph (open-immersion factor
-of the compactification and the derived tensor comparison); construction references
-Stacks Tags 06YY, 07A6, 07A4, 08FJ and 03DJ
-(blueprint: def-sp-open-scalar-operations).
+Source: construction references Stacks Tags 06YY, 07A6, 07A4, 08FJ and 03DJ.
 
 All declarations live in the namespace `AlgebraicGeometry.ProEtale.OpenScalarOperations`,
 so they do not clash with the withdrawn `OpenScalarExchange` attachment. The constant
 coefficient ring map is the existing `Scheme.proEtaleConstantRingMap`
-(def-sp-proetale-constant-coefficient-ring-map).
 -/
 
 @[expose] public noncomputable section
@@ -46,9 +40,9 @@ namespace OpenScalarOperations
 attribute [instance] Scheme.proEtaleRingRestrictScalars_preservesFiniteLimits
   Scheme.proEtaleRingRestrictScalars_preservesFiniteColimits
 
-/-- Termwise restriction of scalars `Res_T : D(B_T) ⥤ D(A_T)` (def-pc-sheaf-restrict-scalars),
+/-- Termwise restriction of scalars `Res_T: D(B_T) ⥤ D(A_T)`,
 localized to the unbounded derived categories; it is exact.
-Source: Stacks Tag 07A6 (blueprint: def-sp-open-scalar-operations). -/
+Source: Stacks Tag 07A6. -/
 noncomputable def scalarRestriction {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B) (T : Scheme.{u}) :
     Scheme.proEtaleDerivedCategory T B ⥤ Scheme.proEtaleDerivedCategory T A :=

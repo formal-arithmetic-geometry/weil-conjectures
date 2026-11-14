@@ -300,27 +300,7 @@ set_option backward.defeqAttrib.useBackward true
 
 set_option linter.all false in
 /-- The normalized coefficient lifts determine the vertex comparison of their
-concrete roof. Source: Stacks Project, Tags 08FE, 08HY, 08HZ and 0D5T.
-(blueprint: lem-pc-relative-mv-resolved-roof-vertex-normalization).
-Proof: The hypotheses pin r to the transpose of φ and s to the direct-image
-computation map, so they determine their localized maps independently of the
-chosen representatives. The sectionwise composition isomorphism c identifies
-the two ways of pushing a complex from X' to S. On J and on each of its open
-image complexes, the right-derived unit for f_* after g'_* is invertible by
-K-injective direct-image acyclicity. Apply naturality of this unit to s and its
-open-image maps. The normalized direct-image resolution comparison then makes
-all three vertices of v invertible after localization. Use the K-injective
-computation isomorphisms for f_* and f'_* and the displayed resolution
-isomorphisms to compare the row vertices. For an open W, follow these with the
-exact-open pullback comparison on the source and the inverse-open comparison
-on the target. For the middle vertex use the biproduct comparison and the U,V
-vertex isomorphisms. The composition-adjunction counit identity transposes hr
-to the global base-change arrow. The underived open counit square and the
-localization unit equations transpose its restriction to the local arrow for
-W. The two open equations combine by biproduct naturality to give the middle
-identity, and W = U intersect V gives the final identity. This proof uses no
-cover, no exactness and no connecting morphism. Empty opens, repeated opens,
-zero objects and zero φ satisfy the same functorial equalities. -/
+concrete roof. Source: Stacks Project, Tags 08FE, 08HY, 08HZ and 0D5T. -/
 theorem relativeMV_resolved_roof_vertex_normalization
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

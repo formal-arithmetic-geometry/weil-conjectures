@@ -12,8 +12,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
 /-!
 # Base change and restriction of unramified morphisms
 
-Source: Stacks Project, Morphisms, Lemma 02GA and the final clause of Lemma 02G6
-(blueprint: lem-weil-pbc-unramified-base-change-open).
+Source: Stacks Project, Morphisms, Lemma 02GA and the final clause of Lemma 02G6.
 -/
 
 @[expose] public section
@@ -24,22 +23,7 @@ universe u
 
 namespace AlgebraicGeometry
 
-/-- Stacks Project, Morphisms, Lemma 02GA and the final clause of Lemma 02G6.
-(blueprint: lem-weil-pbc-unramified-base-change-open)
-
-Proof steps:
-1. Local finite type passes to the base change by lem-weil-pbc-lft-base-change.
-2. The original morphism is formally unramified by
-   lem-weil-pbc-unramified-formally-unramified; its base change is formally unramified
-   by lem-weil-pbc-formally-unramified-base-change.
-3. Together these imply unramifiedness by
-   lem-weil-pbc-lft-formally-unramified-unramified.
-4. The restriction is locally of finite type by lem-weil-pbc-lft-affine-pairs:
-   affine opens of the open subschemes give the same section ring maps as in X and S.
-5. Formal unramifiedness is local at source and target by its ring-map property.
-   Apply Mathlib's IsZariskiLocalAtSource.resLE to restrict f to U and V.
-6. Local finite type and formal unramifiedness again imply unramifiedness by
-   lem-weil-pbc-lft-formally-unramified-unramified. -/
+/-- Stacks Project, Morphisms, Lemma 02GA and the final clause of Lemma 02G6. -/
 theorem unramified_baseChange_restrict_open
     {X S S' : Scheme.{u}} (f : X ⟶ S)
     (hf : LocallyOfFiniteType f ∧ IsOpenImmersion (pullback.diagonal f))

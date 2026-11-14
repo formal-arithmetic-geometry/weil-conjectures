@@ -47,7 +47,7 @@ lemma Scheme.Pic.map_ofIsInvertible {X Y : Scheme.{u}} (g : X ⟶ Y) (M : Y.Modu
   (Pic.eq_ofIsInvertible_iff _ _).2
     ⟨fromSkeletonToSkeletonIso _ ≪≫ (Modules.pullback g).mapIso (Pic.ofIsInvertibleIso M)⟩
 
-/-- **The `σ`-terms cancel.** Let `π : Y ⟶ T`, let `ℒ` and `𝒪(D)` be invertible `𝒪_Y`-modules
+/-- **The `σ`-terms cancel.** Let `π: Y ⟶ T`, let `ℒ` and `𝒪(D)` be invertible `𝒪_Y`-modules
 with `ℒ ≅ 𝒪(D) ⊗ π^* ℳ` for an invertible `𝒪_T`-module `ℳ`, and assume `π_* 𝒪(D)` is
 invertible. Then `π_* ℒ ≅ π_* 𝒪(D) ⊗ ℳ` (projection formula) and
 
@@ -55,9 +55,7 @@ invertible. Then `π_* ℒ ≅ π_* 𝒪(D) ⊗ ℳ` (projection formula) and
 
 For `ℳ = σ_H^* 𝒪(D_univ)^{-1}` this is the canonical isomorphism
 `ℒ_H ⊗ f_H^* 𝒩_H^{-1} ≅ 𝒪(D_univ) ⊗ f_H^* (f_{H,*} 𝒪(D_univ))^{-1}` of the blueprint, over the
-open `W ⊆ H` where `f_{H,*} 𝒪(D_univ)` is invertible.
-
-(blueprint: `proposition-divisors-degree-g-open-chart--1`) -/
+open `W ⊆ H` where `f_{H,*} 𝒪(D_univ)` is invertible. -/
 theorem Scheme.Modules.nonempty_tensorObj_dual_pullback_pushforward_iso {Y T : Scheme.{u}}
     (π : Y ⟶ T) (L OD : Y.Modules) [L.IsInvertible] [OD.IsInvertible] (M : T.Modules)
     [M.IsInvertible] [((pushforward π).obj OD).IsInvertible]
@@ -79,12 +77,10 @@ variable {k : Type u} [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))]
 
 /-- **`𝒩 = f_{T,*} 𝒪(D)` is quasi-coherent.** For a proper `k`-scheme `X`, a `k`-scheme `T` and
 an effective Cartier divisor `D ⊆ X_T` (e.g. a point of `Hilb^g_{X/k}(T)`, such as the universal
-divisor over `T = H`), the direct image `f_{T,*} 𝒪(D)` along `f_T : X_T ⟶ T` is a
+divisor over `T = H`), the direct image `f_{T,*} 𝒪(D)` along `f_T: X_T ⟶ T` is a
 quasi-coherent `𝒪_T`-module: `𝒪(D)` is invertible, hence quasi-coherent, and `f_T` is proper,
 hence quasi-compact and quasi-separated
-(`AlgebraicGeometry.Scheme.Modules.isQuasicoherent_pushforward`).
-
-(blueprint: `proposition-divisors-degree-g-open-chart--1`) -/
+(`AlgebraicGeometry.Scheme.Modules.isQuasicoherent_pushforward`). -/
 theorem isQuasicoherent_pushforward_dual_toModules [IsProper (X ↘ Spec (.of k))]
     (T : Over (Spec (.of k))) {D : (Limits.pullback (X ↘ Spec (.of k)) T.hom).IdealSheafData}
     (hD : D.IsInvertible) :
@@ -102,10 +98,10 @@ attribute [local instance] instSmoothOfSmoothOfRelativeDimensionOfNatNat_weilCon
 /-- **The adjoint section has zero scheme `D`.** Let `ℒ ∈ F(T)` and let `D` be a point of
 `Hilb^g_{X/k}(T)` with `ℒ ≅ 𝒪(D) ⊗ f_T^* N` for an invertible `𝒪_T`-module `N` (for the
 normalized universal module `ℒ_H` over the open `W ⊆ H` where it lies in `F`, `D = D_univ|_W`).
-Let `𝒩` be an invertible `𝒪_T`-module with `i : 𝒩 ≅ f_{T,*} ℒ`, i.e. `Rf_{T,*} ℒ ≅ 𝒩[0]`, and let
+Let `𝒩` be an invertible `𝒪_T`-module with `i: 𝒩 ≅ f_{T,*} ℒ`, i.e. `Rf_{T,*} ℒ ≅ 𝒩[0]`, and let
 `s ∈ H⁰(X_T, ℒ ⊗ f_T^* 𝒩^{-1})` be the section adjoint to the adjunction map `f_T^* 𝒩 ⟶ ℒ`
 (`AlgebraicGeometry.Scheme.Modules.Hom.adjointSection`, transported along an identification
-`ε : (f_T^* 𝒩)^∨ ≅ f_T^* (𝒩^∨)`). Then `Z(s) = D`.
+`ε: (f_T^* 𝒩)^∨ ≅ f_T^* (𝒩^∨)`). Then `Z(s) = D`.
 
 This is the per-`T` form of the statement that the canonical section `1` of
 `𝒪(D_univ) ⊗ f_H^* 𝒩_H^{-1} ≅ ℒ_H ⊗ f_H^* 𝒩_H^{-1}`
@@ -113,9 +109,7 @@ This is the per-`T` form of the statement that the canonical section `1` of
 scheme `D_univ` and is the adjoint section of `ℒ_H` for `𝒩_H` on `W`: `Z(s)` is the zero scheme
 of the adjunction morphism
 (`AlgebraicGeometry.Scheme.Modules.Hom.zeroLocus_adjointSection_comp_whiskerLeft`),
-which is `D` by `AlgebraicGeometry.zeroLocus_directImageCounit_eq_of_iso`.
-
-(blueprint: `proposition-divisors-degree-g-open-chart--1`) -/
+which is `D` by `AlgebraicGeometry.zeroLocus_directImageCounit_eq_of_iso`. -/
 theorem zeroLocus_adjointSection_eq_of_iso
     (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 (Spec (.of k)))
     [∀ T : Over (Spec (.of k)),

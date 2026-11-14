@@ -71,7 +71,6 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 
 The remaining construction takes place entirely before alternating cofaces and extension by zero.
 Source: Stacks Project, Tags 0FKR and 0FKU, extended by the coordinate argument below.
-(blueprint: new-module-cup-godement-fmap-models).
 -/
 
 -- After pruning, this module only keeps private declarations.

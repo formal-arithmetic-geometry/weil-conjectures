@@ -21,9 +21,6 @@ import WeilConjectures.LinearAlgebra.ExteriorTopDirectSum
 
 /-!
 # Local bijectivity of split determinant linear maps
-
-Source: blueprint `theorem-riemann-roch-coherent-serre-duality--1`, proof of (*), determinant
-paragraph. (blueprint: lem-sc-split-determinant-linear-bijective).
 -/
 
 @[expose] public section
@@ -130,24 +127,7 @@ private theorem split_wedge_bijective
   exact (src.equiv dst idx).bijective
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The wedge formula makes given linear maps bijective on common free charts.
-Source: blueprint `theorem-riemann-roch-coherent-serre-duality--1`, proof of (*), determinant
-paragraph, local direct-sum comparison (blueprint: lem-sc-split-determinant-linear-bijective).
-
-Proof: Choose a common trivializing neighborhood V of X₁ and X₃ inside U.
-On every W contained in V the outside section modules are free of the stated
-ranks. The splitting identifies the middle section module with their product.
-The exterior sheafification units on these free charts are bijective, as is
-the tensor comparison: finite free exterior presheaves and their tensor are
-already sheaves on the chart. Under these identifications, the given linear
-map d agrees with the inverse top-direct-sum equivalence on pure tensors of
-wedges. Indeed replace each l(b) by the canonical second-summand lift; its
-difference is in the first summand, and rank vanishing removes every extra
-term. Pure wedges span the exterior modules and pure tensors span the tensor,
-so the two linear maps agree everywhere. The comparison is therefore bijective
-on W. This argument proves a property of a given map; it constructs no map.
-For rank zero use the empty wedge. No cancellation of a scalar or nonzero-ring
-hypothesis is used, and the empty-open case remains valid. -/
+/-- The wedge formula makes given linear maps bijective on common free charts. -/
 theorem determinant_split_linear_maps_locally_bijective {X : Scheme.{v}}
     (S : ShortComplex X.Modules) (r₁ r₂ r₃ : ℕ) (hr : r₂ = r₁ + r₃)
     [S.X₁.IsFiniteLocallyFreeOfRank r₁] [S.X₃.IsFiniteLocallyFreeOfRank r₃]

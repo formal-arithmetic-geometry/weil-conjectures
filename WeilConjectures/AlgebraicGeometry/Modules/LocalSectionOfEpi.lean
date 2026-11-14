@@ -77,7 +77,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Local section of an epimorphism onto a finite locally free module.
 
 Source: Stacks Project, Tag 0EKP, proof of (2) to (3), finite-basis lifting.
-(blueprint: new-sbc-local-section-of-epi)
 
 The proof chooses a finite local basis of the target, lifts its members locally using
 local surjectivity of an epimorphism, and intersects the resulting finitely many opens.

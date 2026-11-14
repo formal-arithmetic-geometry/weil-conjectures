@@ -15,9 +15,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 /-!
 # Residue fields at isolated points of fibres
 
-Source: Stacks Project, Morphisms, Lemmas 01TH and 01TG
-(blueprint: `lem-weil-pbc-isolated-fibre-point-residue-finite`) and their stability under base
-change.
+Source: Stacks Project, Morphisms, Lemmas 01TH and 01TG and their stability under base change.
 -/
 
 @[expose] public section

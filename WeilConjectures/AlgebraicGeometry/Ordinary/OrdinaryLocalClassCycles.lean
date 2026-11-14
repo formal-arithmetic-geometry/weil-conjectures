@@ -10,8 +10,7 @@ import all WeilConjectures.AlgebraicGeometry.Section.SectionCohomologyCycleFormu
 
 /-! # The ordinary local class on cycles
 
-Source: Stacks Project, Cohomology, Tag 01E4, lemma-describe-higher-direct-images.
-(blueprint: lem-weil-pbc-ordinary-local-class-cycles).
+Source: Stacks Project, Cohomology, Tag 01E4.
 -/
 
 @[expose] public section
@@ -26,14 +25,6 @@ open Scheme.Modules
 /-- The ordinary abelian sheafification class sends cycles to their module cohomology
 classes through the canonical kernel comparison.
 Source: Stacks Project, Tags 01E4 and 0BKJ.
-(blueprint: lem-weil-pbc-ordinary-local-class-cycles).
-
-Proof: Apply the generic adjunction formula for homology classes to the short complex
-of underlying abelian sheaves. The sheafification comparison is its adjoint homology
-map followed by the exact comparison from module sheaves to abelian sheaves. Move the
-cycle quotient through this last exact comparison. The composite cycle comparison is
-the inverse kernel comparison for abelian presheaf sections, because their composites
-with the monic cycle inclusion agree. This proves the formula in every integer degree.
 -/
 theorem ordinaryLocalClass_cycles {Y : RingedSpace.{u}}
     (I : CochainComplex (SheafOfModules.{u} (moduleRings Y)) ℤ) (q : ℤ) :

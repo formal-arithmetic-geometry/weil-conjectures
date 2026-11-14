@@ -18,17 +18,16 @@ This module only re-exports its parts, which live in
 `WeilConjectures.AlgebraicGeometry.Picard.NormalizedDescent`; it was split to keep the
 compilation of each part cheap.
 
-Let `f : X ⟶ S` be a morphism of schemes and let `s` choose, for every scheme `Y` over `S`, a
+Let `f: X ⟶ S` be a morphism of schemes and let `s` choose, for every scheme `Y` over `S`, a
 section `s Y` of the projection `X_Y = X ×_S Y ⟶ Y`. Let `{T i ⟶ T}` be a family of schemes over
 `S` and `L i` invertible modules on `X_{T i}` whose pullbacks along the sections are trivialised
-by isomorphisms `α i : (s (T i))^* L i ≅ (T i ⟶ T)^* N`. A morphism between pullbacks of the
+by isomorphisms `α i: (s (T i))^* L i ≅ (T i ⟶ T)^* N`. A morphism between pullbacks of the
 `L i` is *normalized* if its pullback along the section is compatible with the trivialisations.
 
 When `Γ(Y, 𝒪_Y) ⟶ Γ(X_Y, 𝒪_{X_Y})` is surjective, normalized morphisms are unique, and any
 isomorphism can be rescaled by a unit to a normalized one. Consequently normalized gluing
 isomorphisms automatically satisfy the cocycle condition. This is the rigidification in the proof
-that the `σ`-normalized relative Picard functor is an fppf sheaf (blueprint
-`lemma-rigidification-along-section--1`).
+that the `σ`-normalized relative Picard functor is an fppf sheaf.
 
 ## Main definitions
 

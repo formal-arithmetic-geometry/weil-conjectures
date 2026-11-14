@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.Koszul.KoszulReconstructionModels
 /-! # Completeness under normalized integral coefficient restriction
 
 Source: Bhatt--Scholze, Lemma 6.5.8(1), Definition 6.5.1.
-(blueprint: lem-weil-pbc-integral-residue-coefficient-completeness).
 -/
 
 @[expose] public noncomputable section
@@ -52,16 +51,7 @@ private theorem completedComplete_of_iso
   infer_instance
 
 /-- Normalized scalar restriction preserves intrinsic completeness on a fixed scheme.
-Source: Bhatt--Scholze, Lemma 6.5.8(1) and Definition 6.5.1
-(blueprint: lem-weil-pbc-integral-residue-coefficient-completeness).
-
-Proof: retain the finite projections and completed comparison of c and equip them
-with the exact scalar restriction equivalence. The DVR intrinsic criterion identifies
-its singleton Koszul unit with quotient Roos completeness. The normalized integral
-coefficient equivalence identifies the latter with the given intrinsic completeness.
-The compositor for exact derived scalar restrictions identifies the resulting object
-with restriction along the composite coefficient isomorphism. Naturality of the
-Koszul unit transports its invertibility through this compositor. -/
+Source: Bhatt--Scholze, Lemma 6.5.8(1) and Definition 6.5.1. -/
 theorem integralResidueCoefficient_complete
     (S : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

@@ -26,9 +26,7 @@ For a perfect complex `C` over the valuation ring `A`, the degree-`q` cohomology
 the constant sheaf of the module-level Tor. A torsion summand `N₀` of `H^q(C)` is a retract
 of `M`, which gives the surjection onto `N₀/πN₀`.
 
-Source: Bhatt--Scholze, Proposition 6.6.11; step 5 of
-`lem-weil-pbc-adic-tor-implies-flat-cohomology`
-(blueprint: lem-weil-pbc-integral-cohomology-torsion-normal-form).
+Source: Bhatt--Scholze, Proposition 6.6.11.
 -/
 
 @[expose] public noncomputable section
@@ -192,11 +190,7 @@ theorem nonempty_tor_constant_iso (n : ℕ) (M : ModuleCat.{u + 1} (A ⧸ d.idea
   exact ⟨eq.unitIso.app _ ≪≫ (pbcRestrict j.inv).mapIso eH⟩
 
 /-- Restricting the constant sheaf of `A/I^{n+1} ⊗ X` to the completed coefficients gives
-the completed realization of `X`, when `I^{n+1}` kills `X`.
-
-Proof: since `I^{n+1}` kills `X`, the unit `X → A/I^{n+1} ⊗ X` is an isomorphism, so this is
-`nonempty_integralConstantModule_restrictScalars_iso` for the `A/I^{n+1}`-module
-`A/I^{n+1} ⊗ X`. -/
+the completed realization of `X`, when `I^{n+1}` kills `X`. -/
 theorem nonempty_restrict_level_constant_iso (n : ℕ) (X : ModuleCat.{u + 1} A)
     (hX : ∀ a ∈ d.ideal ^ (n + 1), ∀ x : X, a • x = 0) :
     Nonempty ((pbcRestrict (pbcAdicProjection T d n)).obj

@@ -16,31 +16,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- An orbit model using the representatives of the supplied fixed orbit datum.
 
-Source: Stacks Project, Tag 03SF, finite group actions on split covers; the following
-is the elementary equivariant-function calculation underlying the project's orbit model.
-
-Proof: take m = D.m and K = D.stabilizer, so the compatibility witness is the identity
-of Fin D.m with reflexive subgroup equalities. Use hD to identify D.action with α.
-Evaluation at D.representative(k) sends an equivariant function f to a K(k)-fixed
-value: for g in K(k), equivariance and D.stabilizer_spec give
-ρ(g)(f(D.representative(k))) = f(D.representative(k)). Evaluation is an H-algebra
-homomorphism because all operations are coordinatewise.
-
-For its inverse, D.complete and D.rel_spec give, for each i, an index k and g with
-α(g)(D.representative(k)) = i. For a family x of fixed values set f(i) = ρ(g)(x(k)).
-The index k is unique: two representatives reaching i lie in the same orbit, so
-D.distinct identifies their indices. If g and g' both reach i from the same
-representative, g'⁻¹*g stabilizes it. Hence x(k) is fixed by ρ(g'⁻¹*g); applying ρ(g')
-and using hρmul gives ρ(g)(x(k)) = ρ(g')(x(k)). Thus the formula is independent of
-the transporter. To check equivariance for a, use the transporter a*g for α(a)(i)
-and hρmul. At a representative, any chosen transporter stabilizes that representative,
-so f takes the prescribed fixed value there. Conversely, an equivariant function is
-recovered everywhere from its representative values by the same equivariance equation.
-Evaluation is therefore bijective, yielding the required H-algebra equivalence.
-This does not require ρ(1) = id: 1 belongs to each stabilizer, so each fixed value
-already satisfies ρ(1)(x) = x. No finiteness assumption on G is needed. For d = 0,
-the representative function forces D.m = 0 and both sides are singleton algebras.
-(blueprint: lem-sbc-fixed-orbit-product-equiv-compatible-model) -/
+Source: Stacks Project, Tag 03SF, finite group actions on split covers. -/
 theorem equivariant_orbit_model_compatible
     (H C : Type u) [CommRing H] [CommRing C] [Algebra H C]
     (G : Type u) [Group G] (ρ : G → C →ₐ[H] C)

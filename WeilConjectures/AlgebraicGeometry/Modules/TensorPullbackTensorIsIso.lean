@@ -15,9 +15,7 @@ import Mathlib.Algebra.Category.ModuleCat.Monoidal.Adjunction
 /-!
 # Invertibility of the tensor-pullback comparison
 
-Source: Stacks Project, Modules, Tag 01CD, label `lemma-tensor-product-pullback`;
-Sheaves, Tag 0098; Modules, Tag 01CB
-(blueprint: lem-weil-pbc-module-pullback-tensor-iso-criterion).
+Source: Stacks Project, Modules, Tag 01CD; Sheaves, Tag 0098; Modules, Tag 01CB.
 -/
 
 @[expose] public section
@@ -37,24 +35,7 @@ set_option backward.isDefEq.respectTransparency.types false
 /-- A comparison carrying pulled-back pure tensors to tensors of pulled-back sections
 is an isomorphism. No naturality of the comparison is assumed.
 
-Source: Stacks Project, Modules, Tag 01CD, label `lemma-tensor-product-pullback`;
-Sheaves, Tag 0098; Modules, Tag 01CB
-(blueprint: lem-weil-pbc-module-pullback-tensor-iso-criterion).
-
-Proof: Fix x in X and put y = f(x), A = O_Y,y and B = O_X,x. The natural stalk
-identifications for tensor pullback (0098) and tensor products (01CB) identify the
-source with B tensor_A (M_y tensor_A N_y), and the target with
-(B tensor_A M_y) tensor_B (B tensor_A N_y). Under these identifications the stalk map
-sends 1 tensor (s_y tensor t_y) to (1 tensor s_y) tensor (1 tensor t_y): this follows
-by taking germs in the hypothesis and using both recorded germ formulas. Every pair
-of germs is represented by sections on a common neighbourhood of y, by intersecting
-the two representative opens. These elements generate the source as a B-module,
-so the stalk map equals the base-change distributivity isomorphism. It is therefore
-bijective at every x. The underlying abelian sheaves detect isomorphisms on stalks
-(007T), and forgetting the module action reflects isomorphisms: the inverse to a
-bijective linear map is linear. Thus the original comparison is an isomorphism.
-This includes empty schemes and zero modules, since the stalk criterion and tensor
-isomorphisms require neither nonemptiness nor nonzero sections. -/
+Source: Stacks Project, Modules, Tag 01CD; Sheaves, Tag 0098; Modules, Tag 01CB. -/
 theorem isIso_tensorPullback_of_tmul {X Y : Scheme.{v}} (f : X ⟶ Y)
     (M N : Y.Modules)
     (α : (tensorPullback f).obj (M ⊗ N) ⟶

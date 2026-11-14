@@ -11,8 +11,6 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 import Mathlib.CategoryTheory.Preadditive.Biproducts
 
 /-! # The two scalar unit/Chern splittings
-
-Source: diagonal-tower unit/Chern splitting and the second rational P1 triangle.
 -/
 
 @[expose] public noncomputable section
@@ -122,17 +120,7 @@ private theorem isIso_biprod_desc_of_homology
       apply biprod.hom_ext <;> apply biprod.hom_ext' <;>
         first | exact hzU.eq_of_src _ _ | exact hzV.eq_of_src _ _
 
-/-- The scalar second-projection unit/Chern splitting isomorphism.
-
-Source: diagonal-tower unit/Chern splitting and the second rational P1 triangle.
-(blueprint: lem-sfb-rational-p1-scalar-p2-splitting)
-
-Proof: positively twist and shift the model unit/Chern splitting, restrict it to
-the strict constant coefficient systems, and apply the recorded derived limit.
-The coefficient and line comparisons are invertible. Fullness and faithfulness
-on complete objects identify the resulting completed components with the
-normalized input adjunct. The explicit realization and scalar-extension mates
-then transport the biproduct isomorphism to the native second-projection coefficient map. -/
+/-- The scalar second-projection unit/Chern splitting isomorphism. -/
 theorem scalar_p2_chern_splitting
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

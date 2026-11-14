@@ -10,8 +10,7 @@ import WeilConjectures.AlgebraicGeometry.Pbc.PbcUniformReductionCriterion
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Constructibility tested on canonical reductions
-Source: blueprint preservation proof, steps 1--2; Stacks Tags 09AL and 09C2
-(blueprint: lem-weil-pbc-canonical-reduction-constructibility-criterion).
+Source: Stacks Tags 09AL and 09C2.
 -/
 
 @[expose] public noncomputable section
@@ -23,15 +22,7 @@ open ProEtale
 
 /-- With a common cohomology interval, integral constructible completeness is equivalent
 to intrinsic completeness and the cohomology clause of the uniform reduction profile.
-Source: blueprint preservation proof, steps 1--2; Stacks Tags 09AL and 09C2
-(blueprint: lem-weil-pbc-canonical-reduction-constructibility-criterion).
-
-Proof: apply the forward uniform criterion to the local models and compatible origins
-and retain its cohomology clause. Conversely, exact coefficient restriction transports
-the given bounds to constant reductions. Together with their constructible cohomology,
-these bounds give the uniform profile on [min a b,b], including empty input intervals.
-The backward uniform criterion supplies the two witness clauses; pair them with the
-given intrinsic completeness. -/
+Source: Stacks Tags 09AL and 09C2. -/
 theorem pbc_constructible_reduction_criterion
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E]

@@ -12,9 +12,6 @@ import Mathlib.CategoryTheory.Limits.Types.Limits
 
 /-!
 # Sequential limits on weakly contractible pro-étale objects
-
-Source: blueprint `proposition-repleteness-pro-etale-topos` (chap-The-pro-etale-site,
-proposition-repleteness-pro-etale-topos).
 -/
 
 @[expose] public section
@@ -30,29 +27,10 @@ namespace AlgebraicGeometry.Scheme
 /-- Every transition and every limit projection of an epimorphic inverse sequence is
 surjective on sections over a weakly contractible object.
 
-Source: blueprint `proposition-repleteness-pro-etale-topos` (chap-The-pro-etale-site,
-proposition-repleteness-pro-etale-topos).
-
 The hypothesis `hW` uses the existing weak-contractibility definition, equivalently
 condition 3 of `lemma-w-contractible-affines-projective--2`: epimorphisms of sheaves induce
 surjections on sections at `W`. Values lie in `Type (max (u + 1) w)`, allowing arbitrary
 larger sets without equating the object and morphism universes of the site.
-
-Proof:
-1. Apply condition 3 of `lemma-w-contractible-affines-projective--2` to every adjacent
-   transition. In terms of `hW`, epimorphisms are locally surjective, and `hW` gives
-   surjectivity on `W`-sections.
-2. Fix `m` and a section `a` of `F_m` at `W`. Choose a preimage under each surjective
-   transition for each target section. Starting with `b_0 = a`, recursively apply
-   these choices at indices `m + r` to construct `b_r` at all stages above `m`.
-   The preimage equations give adjacent compatibility above `m`.
-3. Set `x_{m+r} = b_r` and define the finitely many earlier `x_n` by applying the
-   transition maps in descending order. Compatibility below `m` holds by definition,
-   compatibility from `m` upwards by step 2, and `x_m = a`. For `m = 0` the earlier
-   range is empty. These choices concern sets of sections, not sheaf morphisms.
-4. The sectionwise limit formula of `definition-repleteness--1` identifies this tuple
-   with a section of `limit F` at `W`, and `limit.π F (op m)` evaluates it to `x_m = a`.
-   As `a` and `m` were arbitrary, every limit projection is surjective on sections.
 -/
 theorem proetale_surjective_sections_of_epi_tower
     (X : Scheme.{u}) (F : ℕᵒᵖ ⥤ Sheaf (ProEt.topology X) (Type (max (u + 1) w)))

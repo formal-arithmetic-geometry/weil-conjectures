@@ -16,9 +16,6 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.D
 
 /-!
 # Compatible primitive roots on one pro-étale cover
-
-Source: clause 1 of the local-freeness statement in the current blueprint Tate-twist unit.
-(blueprint: lem-poincare-compatible-primitive-roots)
 -/
 
 @[expose] public section
@@ -471,26 +468,7 @@ private noncomputable def residuesRestrictionIso
     (Functor.associator (rawResidues X ℓ) W T).symm ≪≫
     Functor.isoWhiskerRight (rawResiduesRestrictionIso f hf ℓ) T
 
-/-- Compatible primitive roots identify the abelian root and constant residue diagrams.
-
-Source: clause 1 of `definition-tate-twists` in the current blueprint,
-used in the local rank-one construction of `definition-tate-twists`.
-
-Proof: cover X by affine opens, then by spectra of same-universe faithfully flat
-ind-etale w-contractible algebras. Over such a ring, every surjective affine weakly
-etale map has a section. Apply this first to the primitive-root cover at level one,
-then recursively to the Kummer covers to obtain compatible roots. Their images in every
-residue field have order exactly the prescribed prime power, so all differences between
-distinct powers are units. Exponentiation therefore gives a locally bijective map from
-the constant residue presheaf to the actual root presheaf: injectivity follows from the
-unit differences, and surjectivity from Lagrange interpolation and its basic-open cover.
-Sheafification makes these maps isomorphisms. Check compatibility of successive maps on
-natural-number representatives of each residue class, then assemble the diagram isomorphism.
-Finally, weakly etale inverse image is localization restriction, which commutes with
-sheafification; the raw root and constant diagrams restrict to those on the covering scheme.
-The level n=0 is included, with the unique root of order one and the zero residue group.
-The construction applies to the zero ring and the empty scheme as well.
-(blueprint: lem-poincare-compatible-primitive-roots) -/
+/-- Compatible primitive roots identify the abelian root and constant residue diagrams. -/
 theorem exists_compatible_roots_diagram_basis
     (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : IsUnit (ℓ : Γ(X, ⊤))) :
     ∃ 𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ i : 𝒰.I₀,

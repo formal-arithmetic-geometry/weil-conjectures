@@ -51,22 +51,7 @@ variable [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ T)]
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ' T)]
 
 /-- Tensor balancing on sections realizes every normalized internal scalar tensorator.
-Source: Stacks 03EK, 03EL, 07A4, 06YS and 0G7D; parent proof steps 2, 3 and 5.
-(blueprint: lem-sfb-quotient-section-tensor-transport).
-
-Proof: on presheaves send s tensor (m tensor n) to
-(1 tensor m) tensor (s tensor n). The inverse multiplies the two scalars.
-Balancing, restriction compatibility and naturality let these inverse maps sheafify.
-Scalar extension along the identity topos preserves flat-term K-flat representatives
-and countable coproducts. Totalize the map; its bidegree (i,j) component preserves
-the degrees, hence both differentials have the identical Koszul sign. The coproduct
-inclusions give the summand equation in SectionTensorNormalized. Resolving-class
-descent gives the section derived isomorphism and its stated counit square.
-Conjugate the given internal tensorator through the scalar and tensor comparisons.
-Their generator normalizations identify its value on each flat-term K-flat pair
-with the map just totalized. The exact section equivalence preserves and reflects
-these representatives. Descent and naturality give the conjugation equation on all
-derived pairs. This argument also applies to zero objects and nonflat ring maps. -/
+Source: Stacks 03EK, 03EL, 07A4, 06YS and 0G7D. -/
 theorem section_tensor_transport (T : Scheme.{u}) (c : ScalarSectionData a T)
     (hc : ScalarSectionNormalized a T c) (b : TensorIso a T)
     (hb : TensorNormalized a T b) :

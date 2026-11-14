@@ -20,8 +20,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- The ordinary coefficient comparison for an arrow over a base.
-Source: Stacks Project, Tags 0096 and 01F7.
-(blueprint: def-picard-residue-coefficient-iso)
+Source: Stacks Project, Tags 0096 and 01F7
 Construction: compare tensor and ordinary pullback, compose ordinary pullbacks,
 use the first projection identity, and undo the two tensor comparisons. -/
 noncomputable def picardResidueCoefficientIso
@@ -48,7 +47,6 @@ noncomputable def picardResidueCoefficientIso
 
 /-- The ordinary-pullback form of a tensor coefficient triangle.
 Source: Stacks Project, Tags 0096 and 0D5S.
-(blueprint: def-picard-ordinary-coefficient-triangle)
 Construction: convert the tensor pullback on the source to ordinary pullback,
 compose ordinary pullbacks, transport the arrow equality, then convert back. -/
 noncomputable def picardOrdinaryCoefficientTriangle
@@ -66,7 +64,6 @@ noncomputable def picardOrdinaryCoefficientTriangle
 
 /-- The coefficient part of the explicit residue normalization.
 Source: Stacks Project, Tags 0096 and 06YJ.
-(blueprint: def-picard-residue-normalization-coefficient)
 Construction: compose the canonical single-pullback map with the single image
 of the coefficient triangle isomorphism followed by the given trivialization. -/
 noncomputable def picardResidueNormalizationCoefficient
@@ -100,8 +97,7 @@ noncomputable def picardResidueNormalizationCoefficient
     (DerivedCategory.singleFunctor _ 0).map c.hom
 
 /-- The explicit normalization morphism, without an invertibility assertion.
-Source: Stacks Project, Tags 08HY, 0A1D and 0096.
-(blueprint: def-picard-residue-normalization-map)
+Source: Stacks Project, Tags 08HY, 0A1D and 0096
 Construction: use the identified fibre as the apex of the base-change square.
 Compose its base-change mate, the canonical single map, the tensor coefficient
 comparison for the first projection, and the single image of the trivialization.

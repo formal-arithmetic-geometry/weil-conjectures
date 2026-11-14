@@ -61,7 +61,6 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUn
 /-! # Tensor coherence of the normalized localized pullback square
 
 Source: Stacks Project, Tags 04J0 and 07A4.
-(blueprint: lem-weil-pbc-ringed-projection-local-tensor-square).
 -/
 
 @[expose] public noncomputable section
@@ -488,23 +487,7 @@ private theorem inverse_on_representatives
 -- The two routes are natural transformations; resolving-pair faithfulness
 -- therefore permits a componentwise representative calculation below.
 /-- The localized pullback square respects the four canonical tensor comparisons.
-Source: Stacks Project, Modules on Sites, Tag 04J0 and Cohomology on Sites, Tag 07A4.
-(blueprint: lem-weil-pbc-ringed-projection-local-tensor-square).
-
-Proof: the representative normalization of directImage identifies it with the
-identity comparison of the ordinary localized direct images. The counit mate
-equation therefore identifies pullback.inv with the derived ordinary pullback
-square. Resolve both inputs by flat-term K-flat complexes. The ordinary
-pullback square and each ordinary tensor comparison are fixed by their formulas
-on sheafified pure tensors. Along both tensor routes a pure tensor is restricted
-to the same underlying slice object, and its two factors acquire the same scalar
-actions. The tensor universal property proves equality. Apply direct-sum signed
-totalization: the maps preserve each bidegree, so both routes have the same sign.
-Use the representative equations of all four TensorComparison objects to
-transport this equality to the derived tensor models. Finally use the injectivity
-of restriction to resolving pairs (the descent field, with exact pullback and
-restriction) to obtain the equation for all derived inputs. This is a statement
-about pullbacks and tensors only; it uses no projection map or direct-image input. -/
+Source: Stacks Project, Modules on Sites, Tag 04J0 and Cohomology on Sites, Tag 07A4. -/
 theorem localTensorSquare
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R_Y : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})

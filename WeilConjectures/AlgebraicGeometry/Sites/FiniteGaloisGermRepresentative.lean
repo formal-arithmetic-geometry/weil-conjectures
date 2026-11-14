@@ -19,7 +19,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
 # Finite Galois representatives of geometric germs
 
 Source: Stacks Project, Tag 04JM, direct proof of Lemma 59.56.5.
-(blueprint: lem-exc-field-invariant-germ-representative-construction).
 -/
 
 @[expose] public section
@@ -34,8 +33,7 @@ attribute [local instance] Algebra.Etale.of_finite_of_isSeparable
 
 /-- A separable embedding into the algebraic closure factors through the given separable
 closure. The preimages are unique since the inclusion into Ω is injective.
-Source: Stacks 04JM, finite separable neighbourhood step; Mathlib's purely inseparable
-extension theorem for a separably closed base. -/
+Source: Stacks 04JM, finite separable neighbourhood step. -/
 private theorem factor_separable_embedding
     (K Ks Ω P : Type u) [Field K] [Field Ks] [Field Ω] [Field P]
     [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]
@@ -140,20 +138,7 @@ private theorem pointed_field_neighbourhood
   rw [← Category.assoc, ← Spec.map_comp, hc]
   exact ha
 
-/-- Source: Stacks Project, Tag 04JM, the finite Galois neighbourhood step.
-(blueprint: lem-exc-field-invariant-germ-representative-construction).
-
-Proof: Joint surjectivity of the stalk injections represents m in a pointed etale
-neighbourhood X. The component of X containing the geometric lift is an open singleton,
-isomorphic over K to the spectrum of a finite separable extension P/K, by the etale
-fibre theorem over a field. The lift embeds P into Ω. Every element in its image is
-separable over K, so lies in the image of Ks; thus this embedding factors through Ks.
-Take a finite K-basis of P and a finite K-basis of L, viewed in Ks. The finite Galois
-intermediate field obtained by adjoining all their conjugates contains both fields.
-The inclusion P into this field E gives a pointed map Spec E to X. Pull back the section
-along this map. Naturality of the stalk injections preserves its germ m. The canonical
-embedding E into Ks into Ω supplies y and its specified underlying morphism.
-No invariance or descent is used here; the construction works for every germ. -/
+/-- Source: Stacks Project, Tag 04JM, the finite Galois neighbourhood step. -/
 theorem exists_finiteGalois_germ_representative
     (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]
     [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]

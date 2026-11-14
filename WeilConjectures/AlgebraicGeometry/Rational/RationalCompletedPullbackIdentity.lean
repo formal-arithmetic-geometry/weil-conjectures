@@ -15,7 +15,6 @@ import WeilConjectures.CategoryTheory.ScalarLocalization.ScalarLocalizationNatur
 /-! # Completed identity and descent to all raw rational fraction arrows.
 
 Source: Bhatt--Scholze, Remark 6.8.15, p. 62; Stacks Tags 03CB, 0D6D, 07A4, 099N.
-(blueprint: lem-per-rational-completed-pullback-identity).
 -/
 
 @[expose] public noncomputable section

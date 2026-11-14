@@ -73,17 +73,16 @@ namespace AlgebraicGeometry.Scheme
 
 open CochainComplex
 
-/-- Blueprint `prop-weil-pbc-kinjective-resolutions-exist`: **existence of K-injective
+/-- **existence of K-injective
 resolutions.** Let `T` be a scheme and `R` a commutative ring. In the category of complexes of
 sheaves of `R`-modules on the small étale site of `T`:
 1. every complex `K` admits a K-injective resolution `K ⟶ I K`, functorially in `K`
    (`CochainComplex.kInjectiveResolutionFunctor`, `CochainComplex.toKInjectiveResolution`);
-2. two K-injective resolutions `s : K ⟶ I`, `t : K ⟶ J` of the same complex are homotopy
+2. two K-injective resolutions `s: K ⟶ I`, `t: K ⟶ J` of the same complex are homotopy
    equivalent, by a homotopy equivalence `e` with `s ≫ e` homotopic to `t`;
 3. a bounded below complex of injective objects is K-injective.
 The category of étale sheaves of modules is Grothendieck abelian, so the first statement is
-`CategoryTheory.Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian`.
-(blueprint: `prop-weil-pbc-kinjective-resolutions-exist`) -/
+`CategoryTheory.Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian`. -/
 theorem kInjectiveResolutions_smallEtale (T : Scheme.{u}) (R : Type (u + 1)) [CommRing R] :
     (∀ K : CochainComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} R)) ℤ,
       ((kInjectiveResolutionFunctor.{u + 1} _).obj K).IsKInjective ∧

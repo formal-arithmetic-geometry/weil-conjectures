@@ -24,8 +24,7 @@ import Mathlib.CategoryTheory.Limits.Shapes.Opposites.Products
 /-!
 # Coproducts and the right adjoint to closed direct image
 
-Source: Bhatt--Scholze, *Pro-étale topology*, Section 6.4, printed pp. 48--49
-(blueprint: lem-pur-etale-closed-right-adjoint-coproducts).
+Source: Bhatt--Scholze, *Pro-étale topology*, Section 6.4, printed pp. 48--49.
 -/
 
 set_option autoImplicit false
@@ -186,26 +185,8 @@ namespace AlgebraicGeometry.Etale
 /-- The right adjoint to closed derived direct image preserves arbitrary coproducts
 when the ambient scheme is finite type over an algebraically closed field.
 
-Proof: let q be the open complement. Finite type over a field makes X Noetherian,
-so its open complement is quasi-compact and quasi-separated. Finite coefficients
-are additive torsion. The finite cohomological dimension theorem for finite-type
-schemes over a separably closed field, followed by the derived coproduct theorem,
-shows that Rq_* preserves coproducts. Exact inverse image q^* is a left adjoint
-and also preserves them. Use the natural closed-support triangles
-Rg_* Rg^! K → K → Rq_* q^* K. Sum these triangles for a family K_i and compare
-with the triangle for their sum. Coproducts in the Grothendieck derived category
-are exact (represented by termwise sums). The identity and Rq_* q^* comparisons
-are isomorphisms, so the triangle comparison on Rg_* Rg^! is an isomorphism.
-Closed direct image is exact and fully faithful, and its derived functor is the
-termwise functor. Hence it preserves coproducts and reflects isomorphisms.
-The composite comparison therefore identifies with Rg_* applied to the Rg^!
-comparison, which must be invertible. This includes the empty family; for an
-empty closed subscheme the right adjoint is zero.
-
-Source: Bhatt--Scholze, Pro-étale topology, Section 6.4, Lemma 6.4.4 and the
-last paragraph of Proposition 6.4.8; closed-support argument of step 4 of
-lem-pur-etale-lisse-stratum-compact.
-(blueprint: lem-pur-etale-closed-right-adjoint-coproducts). -/
+Source: Bhatt--Scholze, Pro-étale topology, Section 6.4, Lemma 6.4.4 and the last paragraph of
+Proposition 6.4.8. -/
 theorem preservesCoproducts_closedRightAdjoint
     {k : Type u} [Field k] [IsAlgClosed k]
     (C : Type (u + 1)) [CommRing C] [Finite C]

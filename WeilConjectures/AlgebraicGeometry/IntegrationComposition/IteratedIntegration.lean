@@ -13,10 +13,6 @@ import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Braided
 set_option linter.privateModule false
 
 /-! # Composition of ordered compact-support integrations
-
-Source: blueprint sec-smooth-purity/sk-prop-an,
-cor-pur-vector-bundle-purity.proof.md, paragraph 2.
-(blueprint: lem-pur-iterated-integration).
 -/
 
 @[expose] public noncomputable section

@@ -17,7 +17,6 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 /-! # Equality detected on the open of a finite depth-two source
 
 Source: Stacks Project, Tags 0EY6, 0AUK and 0E9I.
-(blueprint: lem-sbc-depth-two-finite-hom-equality)
 -/
 
 @[expose] public section
@@ -129,26 +128,7 @@ set_option backward.isDefEq.respectTransparency false in
 of a finite source whose boundary local rings have depth at least two.
 
 Source: Stacks Project, Tags 0AUK and 0E9I, as used in the converse of
-Tag 0EY6(2); affine structure algebras, Tag 01SA.
-(blueprint: lem-sbc-depth-two-finite-hom-equality)
-
-Proof: The finite source is locally Noetherian. Apply restriction injectivity
-(Tags 0B3M and 05AR) to its structure module and the inverse image of U.
-The structure module is quasi-coherent and finite on affine opens. Its
-abelian-valued stalk is linearly equivalent to the local ring: forgetting
-rings commutes with the filtered colimit of neighbourhood sections, and
-linearity follows on representatives from the germ multiplication formula.
-Linear equivalences preserve the regular-sequence definition of depth.
-The given depth-two bound therefore implies the positive depth needed for
-restriction injectivity. For every open V of L, the maps induced by f and g
-from sections over p inverse V to sections over r inverse V become equal
-after restriction to the source open, by hfg and the composition formula
-for appLE. Cancel the injective restriction map. Under the affine-morphism
-anti-equivalence (01SA), these are precisely the components of the two
-algebra morphisms. Their equality and faithfulness give f = g. Only depth
-one is used; no depth condition on the target is needed. This also covers
-empty opens and empty schemes: injectivity is applied without assuming
-nontrivial sections or nonempty points. -/
+Tag 0EY6(2); affine structure algebras, Tag 01SA. -/
 theorem hom_eq_of_finite_depth_two
     {L : Scheme.{u}} [IsLocallyNoetherian L] (U : L.Opens)
     {F E : Scheme.{u}} (r : F ⟶ L) (p : E ⟶ L) [IsFinite r] [IsAffineHom p]

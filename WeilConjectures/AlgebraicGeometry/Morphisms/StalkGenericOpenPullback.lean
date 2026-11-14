@@ -13,7 +13,6 @@ public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 /-! # The generic fibre is the open pullback over a local trait
 
 Source: Stacks Project, Tag 0EYJ, reduction to the punctured local spectrum.
-(blueprint: lem-sbc-stalk-generic-open-pullback)
 -/
 
 @[expose] public section
@@ -24,20 +23,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Over the stalk trait at a minimal point outside U, the generic fibre is exactly C_U.
 
-Source: Stacks Project, Tag 0EYJ, local reduction and trait paragraphs.
-(blueprint: lem-sbc-stalk-generic-open-pullback)
-
-Proof: The image of Spec O_{S,s} in S consists of generalizations of s. By minimality,
-all of these except s lie in U. A discrete valuation ring has precisely its zero and
-maximal primes. The maximal prime maps to s, and the zero prime maps to the generic
-point of S, with residue field the function field of S. Hence Spec k(S) identifies
-with the inverse image of U in Spec O_{S,s}, including its scheme structure: a
-uniformizer cuts out the closed point, and localization at it is the fraction field.
-Pulling this square back along c proves that L_K is the inverse image of C_U in L.
-The specified map k lands in C_U and commutes with the projections by hk.
-The open immersion C_U into C is a monomorphism, so this factorization agrees with
-the canonical one, and the displayed square is cartesian. The argument also applies
-when C or its generic fibre is empty. -/
+Source: Stacks Project, Tag 0EYJ, local reduction and trait paragraphs. -/
 theorem stalk_generic_open_isPullback {S C : Scheme.{u}} [IsIntegral S]
     (c : C ⟶ S) (U : S.Opens) (s : S) (hs : s ∉ U)
     (hmin : ∀ t : S, t ⤳ s → t ∉ U → t = s)

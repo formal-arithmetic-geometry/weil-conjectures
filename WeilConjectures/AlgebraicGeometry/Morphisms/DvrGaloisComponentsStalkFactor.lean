@@ -23,8 +23,7 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.ReducedArtinianTensorNormaliz
 
 /-! # Normalized Galois component stalks as integral-closure local factors
 
-Source: Stacks Project, Tags 09EV, 035H and 0307.
-(blueprint: lem-sbc-dvr-galois-components-stalk-factor) -/
+Source: Stacks Project, Tags 09EV, 035H and 0307 -/
 
 @[expose] public section
 
@@ -68,25 +67,7 @@ private theorem affine_chart_stalk_germs
 set_option backward.isDefEq.respectTransparency false in
 /-- Identify the actual stalk and every structural germ with a generic field factor.
 
-Source: Stacks Project, Tags 09EV, 035H and 0307.
-(blueprint: lem-sbc-dvr-galois-components-stalk-factor)
-
-Proof: Monicity makes A finite over B, so each tensor D_i = E_i tensor_B A
-is finite over E_i and hence Artinian. The proved theorem
-dvr_galois_root_tensor_reduced gives reducedness using Eisenstein and
-separability. Compose the given coproduct equation over K with Spec K -> Spec B.
-Apply reduced_artinian_tensor_normalization_charts: relative normalization
-has a covering by open immersions c : Spec S -> a.normalization, where
-S is the integral closure of A in a maximal quotient D_i/P, and c is over A.
-Write x = c(y) and let Q be the prime ideal of y. Evaluating the equation
-c followed by fromNormalization = Spec(A -> S) at y identifies contraction
-of Q with the image prime of x; the supplied image condition gives (t).
-Compose the affine localization-to-stalk algebra equivalence with the
-inverse stalk isomorphism of the open immersion c. The helper
-affine_chart_stalk_germs proves that this composite preserves every
-structural germ using stalkMap_comp and stalkMap_toStalk, as well as the
-algebra-map compatibility of StructureSheaf.stalkIso. This uses no
-ramification, degree bound, invertibility of n, or DVR structure of A. -/
+Source: Stacks Project, Tags 09EV, 035H and 0307 -/
 theorem dvr_galois_components_stalk_factor
     (B : CommRingCat.{u}) [IsDomain B] [IsDiscreteValuationRing B]
     (pi : B) (hpi : Irreducible pi) (n : ℕ) (hnpos : 0 < n)

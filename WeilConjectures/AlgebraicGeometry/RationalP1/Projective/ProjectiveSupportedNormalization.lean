@@ -66,12 +66,8 @@ set_option linter.unusedSectionVars false in
 /--
 The inverse support isomorphism is the normalized lower-star composite,
 congruence, and identity comparison on the regular module.
-Source: the first step of the second identity proof in
-`literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md`.
 The proof applies the underlying sheaf normalization and faithfulness of
 module morphisms.
-(blueprint: lem-sfb-projective-supported-normalization)
 -/
 theorem projective_supported_normalization (Y : Scheme.{u})
     (L : ∀ X : Scheme.{u}, Modules Λ X) (d : Diagram Λ Y L) :

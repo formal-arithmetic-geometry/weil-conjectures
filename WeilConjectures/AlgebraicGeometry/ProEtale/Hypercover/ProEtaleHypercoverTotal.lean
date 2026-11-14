@@ -21,8 +21,7 @@ public import Mathlib.CategoryTheory.Preadditive.FunctorCategory
 /-!
 # Total sections of an augmented pro-etale simplicial object
 
-Source: Stacks Project, proetale.tex, Tag 09A2, lemma-compute-cohomology
-(blueprint: def-weil-pbc-proetale-hypercover-total).
+Source: Stacks Project, Tag 09A2.
 -/
 
 @[expose] public section
@@ -34,15 +33,13 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme.ProEt
 
 /-- The functor-category preadditive structure on cosimplicial modules.
-Source: Stacks Project, Tag 09A2
-(blueprint: def-weil-pbc-proetale-hypercover-total). -/
+Source: Stacks Project, Tag 09A2. -/
 instance cosimplicialModulePreadditive (A : Type (u + 1)) [Ring A] :
     Preadditive (CosimplicialObject (ModuleCat.{u + 1} A)) :=
   inferInstanceAs (Preadditive (SimplexCategory ⥤ ModuleCat.{u + 1} A))
 
 /-- Sections on the simplices, as a cosimplicial module over the augmentation ring.
-Source: Stacks Project, Tag 09A2
-(blueprint: def-weil-pbc-proetale-hypercover-total).
+Source: Stacks Project, Tag 09A2.
 Restriction to the slice makes its identity object terminal, so all section modules
 have scalars in `R(W)` and all face restrictions are linear over that ring. -/
 noncomputable def hypercoverSections (X : Scheme.{u})
@@ -61,10 +58,7 @@ noncomputable def hypercoverSections (X : Scheme.{u})
       Over.mkIdTerminal.op ⋙
     (Functor.whiskeringLeft _ _ _).obj U.rightOp
 
-/-- The section functor is additive. Source: Stacks Project, Tag 09A2
-(blueprint: def-weil-pbc-proetale-hypercover-total).
-Proof: evaluation and restriction of scalars preserve addition of module maps;
-precomposition along the simplicial object preserves that componentwise equality. -/
+/-- The section functor is additive. Source: Stacks Project, Tag 09A2. -/
 theorem hypercoverSections_additive (X : Scheme.{u})
     (R : Sheaf (topology X) CommRingCat.{u + 1}) (W : X.ProEt)
     (U : SimplicialObject (Over W)) : (hypercoverSections X R W U).Additive := by
@@ -76,10 +70,7 @@ theorem hypercoverSections_additive (X : Scheme.{u})
 attribute [instance] hypercoverSections_additive
 
 /-- Alternating coface sums preserve addition on coefficient morphisms.
-Source: Stacks Project, Tag 09A2
-(blueprint: def-weil-pbc-proetale-hypercover-total).
-Proof: the coface-complex map has the coefficient map in every degree, so its
-additivity follows degreewise from addition in the module category. -/
+Source: Stacks Project, Tag 09A2. -/
 theorem alternatingCofaceMapComplex_additive
     (A : Type (u + 1)) [Ring A] :
     (AlgebraicTopology.alternatingCofaceMapComplex (ModuleCat.{u + 1} A)).Additive := by
@@ -91,8 +82,7 @@ theorem alternatingCofaceMapComplex_additive
 attribute [instance] alternatingCofaceMapComplex_additive
 
 /-- The nonnegative alternating section complex, extended by zero to negative degrees.
-Source: Stacks Project, Tag 09A2
-(blueprint: def-weil-pbc-proetale-hypercover-total).
+Source: Stacks Project, Tag 09A2.
 Its degree `p` differential is the sum of `(-1)^j` times the face restrictions. -/
 noncomputable def hypercoverSectionRows (X : Scheme.{u})
     (R : Sheaf (topology X) CommRingCat.{u + 1}) (W : X.ProEt)
@@ -102,9 +92,7 @@ noncomputable def hypercoverSectionRows (X : Scheme.{u})
     ComplexShape.embeddingUpNat.extendFunctor _
 
 /-- Additivity of the alternating section complex.
-Source: Stacks Project, Tag 09A2
-(blueprint: def-weil-pbc-proetale-hypercover-total).
-Proof: compose additivity of sections, alternating cofaces, and extension by zero. -/
+Source: Stacks Project, Tag 09A2. -/
 theorem hypercoverSectionRows_additive (X : Scheme.{u})
     (R : Sheaf (topology X) CommRingCat.{u + 1}) (W : X.ProEt)
     (U : SimplicialObject (Over W)) : (hypercoverSectionRows X R W U).Additive := by
@@ -114,8 +102,7 @@ theorem hypercoverSectionRows_additive (X : Scheme.{u})
 attribute [instance] hypercoverSectionRows_additive
 
 /-- The total section functor with differential `delta + (-1)^p d`.
-Source: Stacks Project, Tag 09A2
-(blueprint: def-weil-pbc-proetale-hypercover-total).
+Source: Stacks Project, Tag 09A2.
 First form section rows for each coefficient degree, then flip the bicomplex so
 simplicial degree is first, and use Mathlib's signed total. Terms of negative
 simplicial degree are zero. For coefficients supported in degrees at least `N`,

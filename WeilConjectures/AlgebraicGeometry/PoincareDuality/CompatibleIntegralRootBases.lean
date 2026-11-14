@@ -13,8 +13,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal
 /-!
 # Compatible finite-level bases for the integral root tower
 
-Source: the Tate-twist unit of the current blueprint; Bhatt--Scholze, Section 6.8.
-(blueprint: lem-poincare-compatible-integral-root-bases)
+Source: Bhatt--Scholze, Section 6.8
 -/
 
 @[expose] public section
@@ -46,17 +45,7 @@ private noncomputable def tateSystemFreeIso (X : Scheme.{u}) (ℓ : ℕ) [Fact �
   have : IsIso t := NatIso.isIso_of_isIso_app t
   exact asIso t
 
-/-- A single pro-étale cover identifies the actual free root tower with the residue tower.
-
-Source: `definition-tate-twists`, compatible primitive generators and integral construction.
-Proof: take the compatible abelian root bases on one cover. The free-module functor
-commutes with inverse image: the two composites are left adjoints of the same functor,
-by the monoidal sheaf adjunction and its lift to module objects. Apply this comparison
-to the root diagram, apply the free functor to its abelian basis, and invert the same
-comparison on the constant residue diagram. Finally use the proved natural isomorphism
-from free modules on constant finite coefficients to the actual residue modules.
-All comparisons are natural in the inverse-system index, including level zero.
-(blueprint: lem-poincare-compatible-integral-root-bases) -/
+/-- A single pro-étale cover identifies the actual free root tower with the residue tower. -/
 theorem exists_tateModule_residue_diagram_iso
     (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : IsUnit (ℓ : Γ(X, ⊤))) :
     ∃ 𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ i : 𝒰.I₀,

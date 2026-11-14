@@ -22,13 +22,7 @@ namespace AlgebraicGeometry.ProjectiveSpace
 
 /-- The off-diagonal part of the standard-cover unit-cocycle normalization.
 
-Source: Stacks Project, divisors.tex, Tag 0BXJ, lemma-Pic-projective-space-UFD.
-(blueprint: new-sfb-projective-standard-unit-cocycle-off-diagonal)
-
-Proof: the Laurent-polynomial calculation on every double overlap gives a common
-integer exponent and scalar coboundary.  The calculation is carried out for
-pairwise distinct indices; this statement records precisely that part of the
-normalization argument, leaving the diagonal identities to the caller.
+Source: Stacks Project, Tag 0BXJ.
 -/
 theorem exists_standardUnitCocycle_normalization_offDiagonal (k : Type u) [Field k]
     (r : ℕ) (hr : 3 ≤ r)

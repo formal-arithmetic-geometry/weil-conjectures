@@ -56,18 +56,18 @@ private theorem baseChange_of_directSum
 variable {X : Scheme.{u}} (A : RelativeProjAlgebra X)
 
 /-- The section algebra structure supplied by the algebra sheaf.
-Source: Stacks, Tag 01LH (blueprint: definition-admissible-blow-up--1). -/
+Source: Stacks, Tag 01LH. -/
 noncomputable instance sectionAlgebra (V : X.affineOpens) :
     Algebra Γ(X, V.1) (A.sections V) := (A.algebra.obj.hom.hom.app (op V.1)).hom.toAlgebra
 
 /-- Homogeneous section images as submodules over the base section ring.
-Source: Stacks, Tag 01LH (blueprint: definition-admissible-blow-up--1). -/
+Source: Stacks, Tag 01LH. -/
 noncomputable def grade (V : X.affineOpens) (n : ℕ) :
     Submodule Γ(X, V.1) (A.sections V) :=
   ((Sigma.ι A.piece n ≫ A.decomposition.hom).val.app (op V.1)).hom.range
 
 /-- The section grading, with its base-module structure.
-Source: Stacks, Tag 01LH (blueprint: definition-admissible-blow-up--1). -/
+Source: Stacks, Tag 01LH. -/
 noncomputable instance gradeRing (V : X.affineOpens) : GradedAlgebra (A.grade V) where
   toDecomposition :=
     { decompose' := DirectSum.decompose (A.sectionGrade V)
@@ -77,17 +77,17 @@ noncomputable instance gradeRing (V : X.affineOpens) : GradedAlgebra (A.grade V)
   mul_mem := A.sectionGrade_mul V
 
 /-- Identity on sections, viewed as a map to the submodule grading.
-Source: Stacks, Tag 01LH (blueprint: definition-admissible-blow-up--1). -/
+Source: Stacks, Tag 01LH. -/
 def toGrade (V : X.affineOpens) : A.sectionGrade V →+*ᵍ A.grade V :=
   { RingHom.id _ with map_mem := fun ha ↦ ha }
 
 /-- Identity on sections, viewed as a map to the additive-subgroup grading.
-Source: Stacks, Tag 01LH (blueprint: definition-admissible-blow-up--1). -/
+Source: Stacks, Tag 01LH. -/
 def fromGrade (V : X.affineOpens) : A.grade V →+*ᵍ A.sectionGrade V :=
   { RingHom.id _ with map_mem := fun ha ↦ ha }
 
 /-- The identity grading comparison preserves the irrelevant ideal.
-Source: Stacks, Tag 01LH (blueprint: definition-admissible-blow-up--1). -/
+Source: Stacks, Tag 01LH. -/
 lemma toGrade_irrelevant (V : X.affineOpens) :
     HomogeneousIdeal.irrelevant (A.grade V) ≤
       (HomogeneousIdeal.irrelevant (A.sectionGrade V)).map (A.toGrade V) := by
@@ -97,7 +97,7 @@ lemma toGrade_irrelevant (V : X.affineOpens) :
     (HomogeneousIdeal.mem_irrelevant_of_mem _ hn hx)
 
 /-- The inverse grading comparison preserves the irrelevant ideal.
-Source: Stacks, Tag 01LH (blueprint: definition-admissible-blow-up--1). -/
+Source: Stacks, Tag 01LH. -/
 lemma fromGrade_irrelevant (V : X.affineOpens) :
     HomogeneousIdeal.irrelevant (A.sectionGrade V) ≤
       (HomogeneousIdeal.irrelevant (A.grade V)).map (A.fromGrade V) := by
@@ -107,7 +107,7 @@ lemma fromGrade_irrelevant (V : X.affineOpens) :
     (HomogeneousIdeal.mem_irrelevant_of_mem _ hn hx)
 
 /-- The local Proj is unchanged by retaining the base-module structure of its grading.
-Source: Stacks, Tag 01LH (blueprint: definition-admissible-blow-up--1). -/
+Source: Stacks, Tag 01LH. -/
 noncomputable def gradeIso (V : X.affineOpens) :
     A.localProj V ≅ Proj (A.grade V) where
   hom := Proj.map (A.fromGrade V) (A.fromGrade_irrelevant V)
@@ -124,7 +124,7 @@ noncomputable def gradeIso (V : X.affineOpens) :
         GradedRingHom.ext fun _ ↦ rfl) _ (by simp)).trans Proj.map_id
 
 /-- The grading comparison respects the structural morphism.
-Source: Stacks, Tag 01LH (blueprint: definition-admissible-blow-up--1). -/
+Source: Stacks, Tag 01LH. -/
 lemma gradeIso_hom_base (V : X.affineOpens) :
     (A.gradeIso V).hom ≫ Proj.toSpecOfAlgebra (A.grade V) ≫ V.2.isoSpec.inv =
       A.localBase V := by
@@ -166,12 +166,12 @@ namespace AlgebraicGeometry.RelativeProjAlgebra
 variable {X : Scheme.{u}} (A : RelativeProjAlgebra X)
 
 /-- Section restriction as a homomorphism of submodule-graded algebras.
-Source: Stacks, Tag 01NO (blueprint: definition-admissible-blow-up--1). -/
+Source: Stacks, Tag 01NO. -/
 def gradeRestriction {V W : X.affineOpens} (h : W ≤ V) : A.grade V →+*ᵍ A.grade W :=
   { A.restriction h with map_mem := fun ha ↦ A.restriction_mem h _ _ ha }
 
 /-- Affine section restrictions are base change in every degree.
-Source: Stacks, Tag 01NO (blueprint: lem-nagata-proj-affine-restriction). -/
+Source: Stacks, Tag 01NO. -/
 theorem gradeRestriction_baseChange {V W : X.affineOpens} (h : W ≤ V) :
     (A.gradeRestriction h).IsGradedBaseChangeAlong
       (X.presheaf.map (homOfLE (X := X.Opens) h).op).hom := by
@@ -217,7 +217,7 @@ theorem gradeRestriction_baseChange {V W : X.affineOpens} (h : W ≤ V) :
 /-- The affine graded-algebra data of the given quasi-coherent algebra sheaf.
 All rings and restrictions are the actual section rings and section restrictions.
 Degreewise base change follows from total quasi-coherent base change by direct sums.
-Source: Stacks, Tags 01LH and 01NO (blueprint: definition-admissible-blow-up--1). -/
+Source: Stacks, Tags 01LH and 01NO. -/
 noncomputable def affineData : X.GradedAlgebraData where
   obj V := A.sections V
   algebra V := A.sectionAlgebra V
@@ -234,7 +234,7 @@ noncomputable def affineData : X.GradedAlgebraData where
   isGradedBaseChangeAlong h := A.gradeRestriction_baseChange h
 
 /-- The chart grading comparisons commute with affine restriction.
-Source: Stacks, Tag 01NO (blueprint: lem-nagata-proj-affine-restriction). -/
+Source: Stacks, Tag 01NO. -/
 lemma gradeIso_naturality {V W : X.affineOpens} (h : W ≤ V) :
     (A.gradeIso W).hom ≫ A.affineData.relProjFunctor.map (homOfLE h) =
       A.localTransition h ≫ (A.gradeIso V).hom := by
@@ -244,7 +244,7 @@ lemma gradeIso_naturality {V W : X.affineOpens} (h : W ≤ V) :
   exact GradedRingHom.ext fun _ ↦ rfl
 
 /-- Identify the source-library affine chart with the inverse image of its base open.
-Source: Stacks, Tag 01NQ (blueprint: definition-admissible-blow-up--1). -/
+Source: Stacks, Tag 01NQ. -/
 noncomputable def affineRestrictionIso (V : X.affineOpens) :
     Proj (A.affineData.grading V) ≅ (A.affineData.relProjHom ⁻¹ᵁ V.1).toScheme := by
   apply IsOpenImmersion.isoOfRangeEq (A.affineData.relProjι V)
@@ -254,7 +254,7 @@ noncomputable def affineRestrictionIso (V : X.affineOpens) :
     (A.affineData.relProjHom_preimage V).symm
 
 /-- The restriction identification followed by inclusion is the source-library chart map.
-Source: Stacks, Tag 01NQ (blueprint: definition-admissible-blow-up--1). -/
+Source: Stacks, Tag 01NQ. -/
 lemma affineRestrictionIso_hom_ι (V : X.affineOpens) :
     (A.affineRestrictionIso V).hom ≫ (A.affineData.relProjHom ⁻¹ᵁ V.1).ι =
       A.affineData.relProjι V := by
@@ -265,7 +265,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The source-library relative Proj, equipped with the sheaf-input chart interface.
 This explicitly constructs the datum; no witness is selected from an existence theorem.
 The glued scheme and its structure map are the source library's `relProj` and `relProjHom`.
-Source: Stacks, Tags 01LH and 01NQ (blueprint: definition-admissible-blow-up--1). -/
+Source: Stacks, Tags 01LH and 01NQ. -/
 noncomputable def realization : RelativeProjData A where
   gluing := A.affineData.relProjGluingData
   localIso V := (A.gradeIso V).symm

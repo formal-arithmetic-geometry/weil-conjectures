@@ -411,21 +411,7 @@ private theorem second_extract_identification
 
 -- Instantiate the abstract transport with the prescribed Tate-line comparisons.
 /-- The forward exchange/projection square, before adding an outside Tate factor.
-There is no inverse projection, twisted projection, or invertibility assumption.
-
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md,
-Second identity, extraction of q*K; ringed exchange/tensor coherence.
-(blueprint: lem-sfb-rational-p1-second-exchange-projection-native).
-
-Proof: use the native tensor-square bundle and adjunction mates. Normalize the
-projection family using its adjunction transpose. In abstract monoidal categories,
-exchange naturality changes the inside object through tensorShiftIso; projection
-naturality moves the pulled-line comparison onto the scalar exchange. Cancel the
-specified isomorphisms to obtain the inverse pullTwistIso in the extraction map.
-Carry out this calculation before choosing the coefficient and Tate lines, and
-specialize the resulting equation using their prescribed root comparison. No
-projection or exchange map is inverted. -/
+There is no inverse projection, twisted projection, or invertibility assumption. -/
 theorem second_exchange_projection_native
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

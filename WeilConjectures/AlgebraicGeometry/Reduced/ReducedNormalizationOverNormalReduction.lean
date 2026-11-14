@@ -211,27 +211,7 @@ namespace Scheme
 reduction, with the comparison preserving the map to the open.
 
 Source: Stacks Project, Varieties, Tags 0BXR and 0BXT, final paragraph; Morphisms,
-Tags 035Q and 0CDV.
-(blueprint: lem-weil-pbc-reduced-normalization-over-normal-reduction).
-
-Proof: Finite type over a field makes T Noetherian with finitely many components.
-A locally Noetherian scheme whose stalks are domains has open irreducible components:
-each connected component is open and is irreducible by the domain-stalk criterion.
-Distinct such irreducible components are disjoint. The nilradical reduction is a
-homeomorphism on spaces. Hence every reduced component of T, restricted to the dense
-open U and factored through U_red, is a closed immersion onto an open component.
-Both source and target are reduced, so this factorization is an open immersion.
-Transfer integral closedness of the normal stalks of U_red to the corresponding open
-of the integral component. Its function-field normalization is an isomorphism there
-by the normalization-over-normal-locus theorem. Consequently every normalized
-component over U maps openly into U_red, onto its corresponding irreducible component.
-Density of U ensures distinct original components remain distinct, since closing
-their intersections with U recovers them. Thus these open maps have disjoint images
-and cover U_red, so their coproduct is an isomorphism. Pullback preserves the finite
-component coproduct, identifying its domain with the inverse image of U in the
-canonical componentwise normalization. Compose these two coproduct isomorphisms.
-Their defining projection equations give the required equation over U; the empty
-scheme case is included by the empty coproduct -/
+Tags 035Q and 0CDV. -/
 theorem reducedNormalization_over_normal_reduction
     {k : Type u} [Field k] (T : Scheme.{u}) (q : T ⟶ Spec (.of k))
     [LocallyOfFiniteType q] [QuasiCompact q]

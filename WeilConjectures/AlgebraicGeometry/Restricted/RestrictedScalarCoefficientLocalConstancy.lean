@@ -16,7 +16,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 /-! # The restricted constant coefficient is a finite local system
 
 Source: Stacks Project, Tags 03CY, 03DA and 00YV.
-(blueprint: lem-sp-restricted-scalar-coefficient-local-constancy).
 -/
 
 @[expose] public section
@@ -146,15 +145,7 @@ private theorem coefficientModule_lisse
 /-- The restricted coefficient complex has finite locally constant cohomology after
 arbitrary pullback. Its only possible nonzero cohomology is in degree zero.
 
-Source: Stacks Project, Tags 03CY, 03DA, 00YV and 06YU.
-(blueprint: lem-sp-restricted-scalar-coefficient-local-constancy).
-
-Proof: map the constant A-module B into the restricted regular constant B-module by
-the B-ring sheafification unit. Naturality of that unit in A → B proves linearity.
-The map is locally bijective, so sheafification is an isomorphism. Exact constant
-coefficient pullback preserves this constant model. The model's underlying set is
-finite, giving finite stalks. The single complex has this module as H⁰ and zero
-in every other degree; exact pullback preserves these zero objects. -/
+Source: Stacks Project, Tags 03CY, 03DA, 00YV and 06YU. -/
 theorem restrictedScalarCoefficient_finiteLocalConstancy
     {T X : Scheme.{u}} (a : X ⟶ T)
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B] (f : A →+* B)

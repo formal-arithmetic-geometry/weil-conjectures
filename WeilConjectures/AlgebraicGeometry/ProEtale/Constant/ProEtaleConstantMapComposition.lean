@@ -36,10 +36,6 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Iso
 
 /-!
 # Composition of constant inverse-image maps on the pro-etale site
-
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md,
-final paragraph (blueprint: lem-sfb-proetale-constant-map-composition).
 -/
 
 @[expose] public section
@@ -53,9 +49,6 @@ namespace Scheme
 
 set_option linter.unusedVariables false in
 /-- The constant-coefficient structure map is compatible with composition of morphisms.
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/
-  sk-lem-geo-cartier.proof.md, final paragraph
-  (blueprint: lem-sfb-proetale-constant-map-composition).
 -/
 theorem proEtaleConstantInverseImageMap_comp
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)

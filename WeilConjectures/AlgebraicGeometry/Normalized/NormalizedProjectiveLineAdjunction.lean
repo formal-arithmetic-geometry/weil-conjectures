@@ -28,14 +28,10 @@ namespace AlgebraicGeometry.Etale
 
 /-- The projective-line adjunction `Rq_* ⊣ Lq^*(1)[2]` determined by a finite-root splitting, a
 supported diagonal class `κ` whose two diagonal integrals are identities, and an identification
-`e : Λ(1) ≅ Λ_N(1)` of the Tate object on the projective line with the finite root-of-unity
+`e: Λ(1) ≅ Λ_N(1)` of the Tate object on the projective line with the finite root-of-unity
 line: the adjunction
 `finiteP1AdjunctionOfIntegrals` transported along `e`. Its counit is the trace counit, see
-`normalizedProjectiveLineAdjunctionOfIntegrals_counit_app`.
-
-Source: blueprint sec-six-functors-basics/sk-prop-geo-p1-adjunction/
-thm-amb-p1-adjunction.proof.md, the diagonal-kernel construction and its two triangles.
-(blueprint: lem-normalized-projective-line-adjunction). -/
+`normalizedProjectiveLineAdjunctionOfIntegrals_counit_app`. -/
 noncomputable def normalizedProjectiveLineAdjunctionOfIntegrals
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ]
     (N : ℕ) (hN : 0 < N) (hΛ : (N : Λ) = 0)
@@ -114,37 +110,7 @@ on `S`, the arbitrary-base finite-root splitting of `exists_arbitraryBaseFiniteP
 its diagonal class `finiteP1DiagonalClass` and the comparison
 `nonempty_normalizedTateLineComparison`; these are chosen, as the base results
 only assert their existence. Its counit is built from the trace
-(`normalizedProjectiveLineAdjunctionOfIntegrals_counit_app`).
-
-Source: blueprint sec-six-functors-basics/sk-prop-geo-p1-adjunction/
-thm-amb-p1-adjunction.proof.md, the diagonal-kernel construction and its two triangles.
-(blueprint: lem-normalized-projective-line-adjunction).
-
-Proof in words: extract the normalized Kummer datum underlying the given twist.
-Its hyperplane class gives the projective-line decomposition and its trace.
-On P times_S P the supported diagonal class has trace one along both projections.
-For an arbitrary complex M define the unit by the diagonal class tensored with
-p1^*M, followed by proper base change. Define the counit by inverse projection
-formula followed by tensoring with the trace. For the first triangle, proper base
-change and direct-image composition identify the composite with Rq_* applied to
-M tensored with the first diagonal integral, hence the identity. For the second
-triangle, pull the common coefficient q^*K outside the second projection: the
-composite is the identity on q^*K(1)[2] tensored with the second diagonal integral,
-again the identity. All shifts are even. The maps are natural and the triangle
-identities give the adjunction on the entire unbounded categories. The arbitrary
-base assertion uses a positive annihilator n and the universal base Spec Z[1/n].
-The given Tate line pulls back from that base by its pullback isomorphisms.
-Over Q, the normalized zero-section boundary and the rank-one local cohomology
-calculation identify it with the finite root-of-unity line tensored with Lambda.
-Both are locally constant finite rank-one sheaves on the normal connected base
-Spec Z[1/n]. Its generic-point fundamental group surjects onto its fundamental
-group: every connected finite etale cover stays connected at the generic point.
-Thus the generic identification descends uniquely as a module-sheaf map and is
-an isomorphism; pull it back to S. The case n=1 is the zero coefficient ring.
-Transport the concrete trace and diagonal class along this identification;
-proper exchange and projection commute with that transport. The trace and
-supported class commute with base change, so their two integral identities
-hold over every S. No definitional equality of twist models is assumed. -/
+(`normalizedProjectiveLineAdjunctionOfIntegrals_counit_app`). -/
 noncomputable def normalizedProjectiveLineAdjunction
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ]
     [HasTateTwist.IsNormalized Λ] (S : Scheme.{u}) [HasInvertibleExponent Λ S] :

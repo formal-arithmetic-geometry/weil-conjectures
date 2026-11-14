@@ -12,7 +12,6 @@ public import Mathlib.Algebra.Polynomial.Laurent
 /-! # Laurent coordinates on the projective-line overlap
 
 Source: Stacks Project, Tag 0BXJ, proof of divisors-lemma-Pic-projective-space-UFD.
-(blueprint: lem-sfb-projective-line-overlap-laurent-coordinates)
 -/
 
 @[expose] public section
@@ -141,20 +140,8 @@ private lemma bijective_eval_overlap (k : Type u) [Field k]
 
 /-- Laurent evaluation at x_0/x_1 identifies the overlap ring with k[z,z^-1].
 
-Source: Stacks Project, Tag 0BXJ, proof of divisors-lemma-Pic-projective-space-UFD,
-the displayed computation of the units on D_+(T_i T_j); also Constructions, Tag 01M7.
-(blueprint: lem-sfb-projective-line-overlap-laurent-coordinates)
-
-Proof: the overlap is D_+(x_0 x_1). Its ring is the degree-zero part of
-k[x_0,x_1,(x_0 x_1)^-1]. A degree-zero Laurent monomial has exponent vector
-(m,-m), with m an arbitrary integer, and equals (x_0/x_1)^m. The monomials
-form a k-basis: this is the degree-zero monomial basis of the localization,
-or equivalently bijective_sum_awayMonomial for the set of both coordinates.
-Laurent evaluation sends c*z^m to exactly c times this basis monomial,
-since ratioUnit 0 1 is x_0/x_1 and chartConst is the structural inclusion of k.
-Thus it sends the Laurent monomial basis bijectively to the overlap monomial
-basis, and so is bijective. Its multiplication and scalar compatibility are
-already part of LaurentPolynomial.eval₂, including negative exponents. -/
+Source: Stacks Project, Tag 0BXJ, proof of divisors-lemma-Pic-projective-space-UFD, the displayed
+computation of the units on D_+(T_i T_j); also Constructions, Tag 01M7 -/
 theorem bijective_overlap_laurent (k : Type u) [Field k] :
     Function.Bijective
       (LaurentPolynomial.eval₂

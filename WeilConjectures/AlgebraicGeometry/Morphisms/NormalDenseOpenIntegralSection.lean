@@ -114,26 +114,7 @@ private theorem integral_section_extends_locally {X : Scheme.{u}} [IsLocallyNoet
 /-- A section on a dense open integral over an affine chart extends over that chart.
 
 Source: Stacks Project, Tags 0357 (normal components) and 0AB1 (integral birational
-comparison), the affine integral-closure argument.
-(blueprint: lem-sbc-normal-dense-open-integral-section)
-
-Proof: On an integral normal scheme, take the generic germ of a section on a
-nonempty open. Its monic equation remains monic in the function field and over
-each local ring. Integral closedness puts that germ in every local ring, and
-`exists_germToFunctionField_eq` supplies a section on the larger open; generic-germ
-injectivity identifies its restriction with the given section.
-
-For a general X, its connected components are open, since X is locally Noetherian.
-Each component is integral: its stalks are domains and connectedness implies
-irreducibility; the stalks also imply reducedness. The stalk isomorphisms of the
-open immersion transfer integral closedness. For every point of U, intersect its
-component with U. Density ensures that this open meets V. Restrict the monic
-equation and apply the integral case to extend the section on this component open.
-On overlaps these extensions agree: their restrictions to V agree, and restriction
-to a dense open of a reduced scheme is injective. The sheaf axiom glues them over U.
-The same local equalities identify the restriction of the glued section with s.
-If U is empty, the empty family glues; no point or generic point of X is selected.
-Thus the proof covers empty schemes and arbitrarily many connected components. -/
+comparison), the affine integral-closure argument. -/
 theorem exists_integral_section_denseOpen
     {X : Scheme.{u}} [IsLocallyNoetherian X]
     (hnormal : ∀ z : X, IsDomain (X.presheaf.stalk z) ∧

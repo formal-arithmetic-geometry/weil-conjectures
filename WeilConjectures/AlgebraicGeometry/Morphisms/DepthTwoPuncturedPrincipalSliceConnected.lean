@@ -155,24 +155,7 @@ private theorem puncture_globalSections_bijective
 
 /-- A depth-two puncture is connected and meets each principal closed slice.
 
-Source: Stacks Project, Tags 0E9I, 0BK0, 00LK and 00KW.
-(blueprint: lem-sbc-depth-two-punctured-principal-slice-connected)
-
-Proof: Apply depth-two Hartogs restriction (0E9I) to the structure module
-on Spec R. It is quasi-coherent and finite on affine opens. Its module stalk
-is linearly equivalent to the local ring, and the only boundary point is
-the closed point, whose local ring is isomorphic to R. Depth is invariant
-under these equivalences, as follows directly by transporting regular
-sequences. Thus Hartogs makes restriction on global sections bijective,
-identifying Gamma(W,O_W) with R, as in the local-cohomology sequence 0BK0.
-To see that the principal slice is nonempty, depth is bounded by Krull dimension,
-so dim R >= 2. Choose a strict chain of three primes. The principal ideal theorem,
-in the form PrimeSpectrum.exist_mem_one_of_mem_maximal_ideal, gives a nonmaximal
-prime containing g. Prime correspondence for R/(g) supplies a point over W. Thus
-the slice, and hence W itself, are nonempty. The identification of global sections
-with R makes Gamma(W,O_W) local. Idempotents of global sections correspond to clopen
-decompositions; a local ring has only zero and one as idempotents, so W is connected.
-This includes g = 0 and nilpotent g; no reducedness or normality is needed. -/
+Source: Stacks Project, Tags 0E9I, 0BK0, 00LK and 00KW. -/
 theorem depth_two_punctured_principal_slice_connected
     (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R]
     (g : R) (hg : g ∈ IsLocalRing.maximalIdeal R)

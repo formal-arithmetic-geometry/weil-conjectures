@@ -34,19 +34,7 @@ variable [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ T)]
 
 /-- For any fixed actual cochain model, normalized ordinary and derived section
 comparisons exist.
-Source: Stacks 03EK, 06YY, 07A6; this is the comparison part of the
-section scalar construction.
-(blueprint: lem-sfb-quotient-scalar-section-comparison-existence).
-
-Proof: compare the fixed model with the universal sectionwise scalar model. The
-ordinary maps are uniquely determined by the object and map formulas of
-change-of-rings and are normalized on the sheafified generators `1 tensor m`.
-The derived comparison is the unique counit-compatible isomorphism between the
-fixed model and the total left-derived functor. Its universal counit square,
-transported through the ordinary comparison and the localization comparison,
-gives the displayed equation for every cochain complex. The argument is
-independent of flatness and applies to zero rings, empty schemes and unbounded
-complexes. -/
+Source: Stacks 03EK, 06YY, 07A6. -/
 theorem scalar_section_comparisons_exists (T : Scheme.{u})
     (model : SectionModel a T) :
     ∃ ordinary : QuotientChange.extension a T ⋙

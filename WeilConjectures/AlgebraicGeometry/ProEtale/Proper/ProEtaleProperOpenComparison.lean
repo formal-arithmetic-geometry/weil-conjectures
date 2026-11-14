@@ -21,9 +21,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleSiteComparisonFiniteLe
 /-!
 # The canonical proper-open comparison on the pro-etale site
 
-Source: Weil blueprint, sec-smooth-purity/sk-def-sf-operations, order 1484
-(blueprint: proposition-construction-independence-rf-shriek--7).
-
 The map is the transport of the specified etale map through the canonical
 extension-by-zero mate and direct-image comparison. No unspecified isomorphism is chosen.
 -/
@@ -39,8 +36,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.ProEtale
 
 /-- Extend the canonical sheaf extension-by-zero mate termwise to bounded below complexes.
-Source: blueprint order 1484, proof paragraph 2; Stacks Tag 09AF
-(blueprint: proposition-construction-independence-rf-shriek--7). -/
+Source: Stacks Tag 09AF. -/
 def properOpenSiteExtensionIso (Λ : Type (u + 1)) [CommRing Λ]
     {X T : Scheme.{u}} (j : X ⟶ T) [IsOpenImmersion j] :
     (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j).mapDerivedCategoryPlus ⋙
@@ -53,9 +49,7 @@ def properOpenSiteExtensionIso (Λ : Type (u + 1)) [CommRing Λ]
     Functor.mapDerivedCategoryPlusCompIso _ _
 
 /-- The specified proper-open isomorphism: inverse extension comparison, comparison
-pullback of the etale proper-open map, canonical direct-image mate, extension comparison.
-Source: blueprint order 1484, proof paragraphs 1--3
-(blueprint: proposition-construction-independence-rf-shriek--7). -/
+pullback of the etale proper-open map, canonical direct-image mate, extension comparison. -/
 def properOpenProEtaleIsoPlus (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {T₁ T₂ X : Scheme.{u}} (r : T₁ ⟶ T₂) [IsProper r]
     (j₁ : X ⟶ T₁) (j₂ : X ⟶ T₂) [IsOpenImmersion j₁] [IsOpenImmersion j₂]
@@ -78,9 +72,7 @@ def properOpenProEtaleIsoPlus (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
       ((properOpenSiteExtensionIso Λ j₁).app L)
 
 /-- The same canonical comparison in the ambient unbounded derived category, using only
-canonical compatibility isomorphisms for the bounded below inclusions.
-Source: blueprint order 1484, displayed isomorphism
-(blueprint: proposition-construction-independence-rf-shriek--7). -/
+canonical compatibility isomorphisms for the bounded below inclusions. -/
 def properOpenProEtaleIso (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {T₁ T₂ X : Scheme.{u}} (r : T₁ ⟶ T₂) [IsProper r]
     (j₁ : X ⟶ T₁) (j₂ : X ⟶ T₂) [IsOpenImmersion j₁] [IsOpenImmersion j₂]
@@ -104,16 +96,7 @@ def properOpenProEtaleIso (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     R.mapIso (J₁.mapDerivedCategory.mapIso (N.mapDerivedCategoryPlusCompatibility.app L))
 
 /-- The transported maps respect composition. No assertion about arbitrary pro-etale
-complexes is made: the same bounded below etale `L` is used in all three terms.
-Source: blueprint order 1484, final sentence
-(blueprint: proposition-construction-independence-rf-shriek--7).
-
-Proof: expand the four factors defining each comparison. The etale maps compose by
-proposition-construction-independence-rf-shriek--7, and the canonical direct-image mates
-compose by theorem-comparison-direct-images--1. Naturality of the second mate moves
-the first etale map through it. The two intermediate extension-comparison factors are
-inverse and cancel. This leaves precisely the proper-open comparison for the composite,
-with the fibre-product-pasting derived direct-image identification. -/
+complexes is made: the same bounded below etale `L` is used in all three terms. -/
 theorem properOpenProEtaleIsoPlus_comp (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {T₁ T₂ T₃ X : Scheme.{u}} [IsNoetherian T₁] [IsNoetherian T₂] [IsNoetherian T₃]
     (r : T₁ ⟶ T₂) (s : T₂ ⟶ T₃) [IsProper r] [IsProper s]

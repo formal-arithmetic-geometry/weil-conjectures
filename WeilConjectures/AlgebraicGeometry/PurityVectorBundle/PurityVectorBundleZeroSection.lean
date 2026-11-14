@@ -14,9 +14,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 /-!
 # Vector bundles with chosen total spaces in the purity setting
 
-Source: blueprint, `sec-smooth-purity/sk-def-purity-conv`, definition at order 1895;
-Stacks Project, Constructions, Tags 01M2, 01LW and 01LX
-(blueprint: proposition-purity-vector-bundles).
+Source: Stacks Project, Constructions, Tags 01M2, 01LW and 01LX.
 
 The canonical relative spectrum, symmetric-algebra augmentation, and its zero section
 are reused from `VectorBundleZeroSection`. The additional data here are an arbitrary
@@ -39,8 +37,7 @@ namespace AlgebraicGeometry
 
 /-- A rank-`c` vector bundle over a separated finite-type scheme over the fixed purity
 field, including its chosen isomorphism `phi` to `Spec_Z Sym(𝓔)` over `Z`.
-Source: blueprint, `sk-def-purity-conv`, order 1895; Stacks Tag 01M2
-(blueprint: proposition-purity-vector-bundles). -/
+Source: Stacks Tag 01M2. -/
 structure PurityVectorBundle
     (P : WeilConjectures.PurityFiniteSetting.{u})
     (Z : Scheme.{u}) (hZ : Z ⟶ Spec (CommRingCat.of P.field.k))
@@ -64,8 +61,7 @@ variable {P : WeilConjectures.PurityFiniteSetting.{u}}
 followed by the inverse of the chosen `phi`. The augmentation is the existing unique
 algebra morphism killing `SymmetricAlgebraSheaf.inclusion`; its sectionwise composite
 with `sectionMap` is `SymmetricAlgebra.algebraMapInv`.
-Source: blueprint, `sk-def-purity-conv`, order 1895; Stacks Tag 01M2
-(blueprint: proposition-purity-vector-bundles). -/
+Source: Stacks Tag 01M2. -/
 def zeroSection (V : PurityVectorBundle P Z hZ c) : Z ⟶ V.E :=
   @VectorBundleZeroSection.zero Z (isNoetherian_of_locallyOfFiniteType hZ)
     c V.𝓔 V.locallyFree ≫ V.phi.inv
@@ -73,25 +69,7 @@ def zeroSection (V : PurityVectorBundle P Z hZ c) : Z ⟶ V.E :=
 /-- The zero section is a section of the projection and a closed immersion. On every affine
 open `U` its restriction, transported through `phi`, is the spectrum of the augmentation
 `Sym(𝓔(U)) → 𝒪(U)` fixing constants and killing all degree-one generators.
-Source: blueprint, `sk-def-purity-conv`, order 1895; Stacks Tags 01M2 and 01LX
-(blueprint: proposition-purity-vector-bundles).
-
-Proof (the node's proof steps):
-1. Install the Noetherian instance `isNoetherian_of_locallyOfFiniteType hZ` (finite type over
-   the field `P.field.k`) and the locally-free instance `V.locallyFree`.
-2. `VectorBundleZeroSection.zero_spec Z c V.𝓔` gives `hsection : zero ≫ π = 𝟙 Z` and
-   `hclosed : IsClosedImmersion zero`: the augmentation is the unique algebra map killing the
-   generators (`lem-weil-pbc-quasi-coherent-symmetric-algebra-core`), on affine charts it is
-   `SymmetricAlgebra.algebraMapInv`, surjective since it fixes scalars, and the affine-cover
-   criterion (`lem-weil-pbc-closed-immersion-affine-cover-criterion`) gives closedness.
-3. Section identity: `rw [zeroSection, ← V.over_commutes]`; `Category.assoc` and
-   `Iso.inv_hom_id_assoc` cancel `phi.inv ≫ phi.hom`, and `hsection` concludes.
-4. Closedness: keep `hclosed` as a local instance; the composite of a closed immersion with
-   the isomorphism `phi.inv` is a closed immersion (`infer_instance`).
-5. Affine opens: take `zU := VectorBundleZeroSection.zeroRestricted Z c V.𝓔 U.1`; after
-   unfolding `zeroSection` and cancelling `phi.inv ≫ phi.hom`, the first equation is
-   `Scheme.Hom.resLE_comp_ι`, and the second is the chart equation of
-   `VectorBundleZeroSection.affineChart_spec Z c V.𝓔 U`. -/
+Source: Stacks Tags 01M2 and 01LX. -/
 theorem zeroSection_spec (V : PurityVectorBundle P Z hZ c) :
     V.zeroSection ≫ V.p = 𝟙 Z ∧ IsClosedImmersion V.zeroSection ∧
     ∀ U : Z.affineOpens,

@@ -11,13 +11,13 @@ public import WeilConjectures.AlgebraicGeometry.Picard.AffineRestriction
 /-!
 # The Picard functor on algebras
 
-Let `k` be a commutative ring and `f : X ⟶ Spec k` a `k`-scheme. In the chapter on smooth curves
+Let `k` be a commutative ring and `f: X ⟶ Spec k` a `k`-scheme. In the chapter on smooth curves
 the Picard functor of a curve `X / k` is presented on `k`-algebras, as the fppf sheafification of
-`R ↦ Pic (X ×_k Spec R)` (blueprint `definition-relative-picard-functor--1`). We define this functor
+`R ↦ Pic (X ×_k Spec R)`. We define this functor
 on `(CommAlgCat k)ᵒᵖ`, the fppf topology being induced along
-`Spec : (CommAlgCat k)ᵒᵖ ⥤ Over (Spec k)` (`AlgebraicGeometry.algSpec`), and show that it agrees
+`Spec: (CommAlgCat k)ᵒᵖ ⥤ Over (Spec k)` (`AlgebraicGeometry.algSpec`), and show that it agrees
 with the restriction of the relative Picard functor `Pic_{X/k}` of `AlgebraicGeometry.picardFunctor`
-along `Spec` (blueprint `lem-pc-picard-functor-agrees-sc`).
+along `Spec`.
 
 ## Main definitions
 
@@ -78,24 +78,20 @@ groups. -/
 noncomputable abbrev algPicardPresheaf (f : X ⟶ Spec k) : (CommAlgCat k)ᵒᵖᵒᵖ ⥤ Type (u + 1) :=
   (algSpec k).op ⋙ picardPresheaf f
 
-/-- **The Picard functor on `k`-algebras.** For a `k`-scheme `f : X ⟶ Spec k`, this is the fppf
+/-- **The Picard functor on `k`-algebras.** For a `k`-scheme `f: X ⟶ Spec k`, this is the fppf
 sheafification on `k`-algebras of `R ↦ Pic (X ×_k Spec R)`. For `X` a proper smooth connected curve
-over a field `k` this is the Picard functor `Pic_{X/k}` of the chapter on smooth curves.
-
-(blueprint: `definition-relative-picard-functor--1`) -/
+over a field `k` this is the Picard functor `Pic_{X/k}` of the chapter on smooth curves. -/
 noncomputable def algPicardFunctor (f : X ⟶ Spec k) :
     Sheaf (algFppfTopology k) (Type (u + 1)) :=
   (presheafToSheaf (algFppfTopology k) (Type (u + 1))).obj (algPicardPresheaf f)
 
 /-- **The Picard functor agrees with its presentation on algebras.** For a `k`-scheme
-`f : X ⟶ Spec k`, the restriction of the relative Picard functor `Pic_{X/k}`
-(`AlgebraicGeometry.picardFunctor`) along `Spec : (CommAlgCat k)ᵒᵖ ⥤ Over (Spec k)` is canonically
+`f: X ⟶ Spec k`, the restriction of the relative Picard functor `Pic_{X/k}`
+(`AlgebraicGeometry.picardFunctor`) along `Spec: (CommAlgCat k)ᵒᵖ ⥤ Over (Spec k)` is canonically
 the fppf sheafification on `k`-algebras of `R ↦ Pic (X ×_k Spec R)`, i.e. the functor
 `AlgebraicGeometry.algPicardFunctor` of the chapter on smooth curves. This holds because the
 spectra of `k`-algebras form a dense subsite of the big fppf site of `Spec k`, so that restricting
-a sheafification to them is the sheafification of the restriction.
-
-(blueprint: `lem-pc-picard-functor-agrees-sc`, `rem-ptr-pc-picard-functor-7`) -/
+a sheafification to them is the sheafification of the restriction. -/
 noncomputable def algPicardFunctorIso (f : X ⟶ Spec k) :
     algPicardFunctor f ≅
       ((algSpec k).sheafPushforwardContinuous (Type (u + 1)) (algFppfTopology k)
@@ -104,9 +100,7 @@ noncomputable def algPicardFunctorIso (f : X ⟶ Spec k) :
     (Scheme.fppfTopology.over (Spec k)) (algSpec k) (Type (u + 1))).app (picardPresheaf f)
 
 /-- The values of the two Picard functors agree: `Pic^{sc}_{X/k}(R) ≅ Pic_{X/k}(Spec R)` for every
-`k`-algebra `R`, naturally in `R`.
-
-(blueprint: `lem-pc-picard-functor-agrees-sc`) -/
+`k`-algebra `R`, naturally in `R`. -/
 noncomputable def algPicardFunctorObjIso (f : X ⟶ Spec k) (R : CommAlgCat k) :
     (algPicardFunctor f).obj.obj (op (op R)) ≅
       (picardFunctor f).obj.obj (op ((algSpec k).obj (op R))) :=

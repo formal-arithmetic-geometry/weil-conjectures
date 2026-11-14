@@ -14,9 +14,6 @@ public import WeilConjectures.CategoryTheory.StageSystem.StageSystemCommonStageC
 
 /-! # Common-stage cone triangles and their isomorphism closure
 
-Source: blueprint `def-weil-pbc-common-stage-cones`, order 1310.
-(blueprint: def-weil-pbc-common-stage-cones)
-
 The recorded generic commonStageCone and CommonStageDistinguished constructions
 are reused, with their literal cone object and all three specified arrows. This
 module supplies only their missing specialization to the published coefficient
@@ -115,14 +112,7 @@ variable (l : ℕ) [Fact l.Prime] (Qbar : Type w)
 set_option linter.unusedVariables false in
 /-- The raw rational stage has the unique pretriangulation whose triangles are
 isomorphic to localized integral triangles, for the already recorded normalized
-shift. Source: blueprint order 1310, finite-stage triangulation input;
-Stacks Tag 05R6 (blueprint: def-weil-pbc-common-stage-cones).
-Proof: the integral full subcategory inherits its ambient distinguished triangles
-by the published uniform-complete triangulated closure. Apply scalar-localization
-triangulation. Its tensor-induced shift and identity comparison with rationalization
-satisfy PbcRationalShiftNormalized, hence coincide with the recorded normalized shift.
-Transport its triangle structure along that equality. The displayed image criterion
-specifies every distinguished triangle, so proof irrelevance gives uniqueness. -/
+shift. Source: Stacks Tag 05R6. -/
 theorem qbarStagePretriangulated_exists (E : Padic.FiniteCoefficientFields l Qbar) :
     ∃! p : Pretriangulated (pbcStageCategory l Qbar T E),
       (fun [pInst : Pretriangulated (pbcStageCategory l Qbar T E)] ↦
@@ -161,8 +151,7 @@ theorem qbarStagePretriangulated_exists (E : Padic.FiniteCoefficientFields l Qba
           exact ⟨D', hD', ⟨e⟩⟩)
     exact stagePretriangulated_ext t' t heq
 
-/-- The stage triangles are fixed by integral images; no triangle set is arbitrary.
-Source: blueprint order 1310 (blueprint: def-weil-pbc-common-stage-cones). -/
+/-- The stage triangles are fixed by integral images; no triangle set is arbitrary. -/
 instance qbarStagePretriangulated (E : Padic.FiniteCoefficientFields l Qbar) :
     Pretriangulated (pbcStageCategory l Qbar T E) :=
   (qbarStagePretriangulated_exists l Qbar T E).exists.choose

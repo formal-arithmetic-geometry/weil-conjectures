@@ -29,9 +29,7 @@ attribute [local irreducible] moduleObjectDerivedPullback moduleObjectDerivedPus
 attribute [local irreducible] firstProjection secondProjection square condensedAmbientExchange
 
 /-- The fixed projection tail obtained after the strength naturality step is
-exactly the forward second projection. It is independent of the outside arrow.
-Source: the second identity of the rational projective-line triangle calculation.
-(blueprint: lem-sfb-rational-p1-second-projection-interchange). -/
+exactly the forward second projection. It is independent of the outside arrow. -/
 theorem second_projection_tail_cancellation
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

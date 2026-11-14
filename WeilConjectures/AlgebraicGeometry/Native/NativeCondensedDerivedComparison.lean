@@ -18,9 +18,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDer
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
 
 /-! # Exact native/condensed comparison and ordinary derived direct image
-
-Source: the normalized native module comparison, step 4, and uniqueness of total right
- derived functors. (blueprint: lem-pur-native-condensed-derived-comparison)
 -/
 
 @[expose] public noncomputable section
@@ -35,8 +32,7 @@ open scoped CategoryTheory.Functor CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
 /-- Forget ambient scalar linearity and transport the action along the normalized coefficient
-isomorphism. This retains the underlying abelian sheaf and every section map.
-(blueprint: lem-pur-native-condensed-derived-comparison). -/
+isomorphism. This retains the underlying abelian sheaf and every section map. -/
 abbrev nativeCondensedModules (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) :=
   AdicSheaf.forgetAb l T ⋙ Mod.comap (nativeModuleCoefficientIso l T).hom
 
@@ -102,16 +98,14 @@ private noncomputable def nativeCondensedPushforwardIso (ℓ : ℕ) [Fact ℓ.Pr
   simp only [Functor.compAlgHom, NatTrans.id_app]
   exact ((locallyFiniteCoefficientRing_realization ℓ).choose_spec.2.2 S T h).symm
 
-/-- Exact transport also commutes with pullback.
-(blueprint: lem-pur-native-condensed-derived-comparison). -/
+/-- Exact transport also commutes with pullback. -/
 theorem nativeCondensedPullbackIso (l : ℕ) [Fact l.Prime]
     {S T : Scheme.{u}} (f : S ⟶ T) :
     Nonempty (adicUpperStar l f ⋙ nativeCondensedModules l S ≅
       nativeCondensedModules l T ⋙ CondensedRing.upperStar (Profinite.padicAlgClRingObj l) f) :=
   nativeScalarForgetting_pullbackIso l f
 
-/-- Deriving the direct-image square by its common K-injective model.
-(blueprint: lem-pur-native-condensed-derived-comparison). -/
+/-- Deriving the direct-image square by its common K-injective model. -/
 theorem nativeCondensedDerivedPushforwardIso (l : ℕ) [Fact l.Prime]
     {S T : Scheme.{u}} (f : S ⟶ T) :
     Nonempty ((adicLowerStar l f).rightDerivedFunctor ⋙
@@ -125,11 +119,7 @@ theorem nativeCondensedDerivedPushforwardIso (l : ℕ) [Fact l.Prime]
     Functor.isoWhiskerRight E.rightDerivedFunctorIsoMapDerivedCategory _⟩
 
 /-- Exact pullback commutes with the normalized comparison, also after deriving.
-Source: the same native module comparison and uniqueness of the exact derived functor.
-(blueprint: lem-pur-native-condensed-derived-comparison).
-Proof: derive the underived pullback comparison and use composition compatibility of
-exact derived functors; the condensed pullback is exact, hence equals its left derived
-functor. -/
+Source: the same native module comparison and uniqueness of the exact derived functor. -/
 theorem nativeCondensedDerivedPullbackIso (l : ℕ) [Fact l.Prime]
     {S T : Scheme.{u}} (f : S ⟶ T) :
     Nonempty ((adicUpperStar l f).mapDerivedCategory ⋙
@@ -142,12 +132,7 @@ theorem nativeCondensedDerivedPullbackIso (l : ℕ) [Fact l.Prime]
     Functor.isoWhiskerLeft _ (Functor.leftDerivedFunctorIsoMapDerivedCategory
       (CondensedRing.upperStar (Profinite.padicAlgClRingObj l) f)).symm⟩
 
-/-- Constructibility is preserved by the normalized native/condensed comparison.
-Source: `nativeModuleConstructibilityComparison`, the same-strata finite-model clause.
-(blueprint: lem-pur-native-condensed-derived-comparison).
-Proof: take the constructibility clause of the native/ordinary comparison and cancel
-its final section-module equivalence using the equivalence unit. Constructibility is
-invariant under isomorphism. -/
+/-- Constructibility is preserved by the normalized native/condensed comparison. -/
 theorem nativeCondensed_constructible
     (k₀ k : Type u) [Field k₀] [Finite k₀] [Field k] [Algebra k₀ k]
     [IsAlgClosure k₀ k] (l : ℕ) [Fact l.Prime] (hl : l ≠ ringChar k₀)

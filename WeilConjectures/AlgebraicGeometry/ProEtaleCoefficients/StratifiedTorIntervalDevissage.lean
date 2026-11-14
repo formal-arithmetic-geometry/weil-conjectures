@@ -28,10 +28,6 @@ public import WeilConjectures.AlgebraicGeometry.StratifiedTorIntervalDevissage
 /-!
 # A fixed Tor interval across constructible strata
 
-Source: blueprint main-20261015, sec-proetale-coefficients/sk-def-localizing-closure,
-`sk-def-localizing-closure-ctf-equals-bc.proof.md`, Strata paragraph
-(blueprint: lem-sfb-stratified-tor-interval-devissage).
-
 The coefficient list uses the finite-subextension-valued algebraic closure.
 All modules in the Tor conditions are placed in degree zero. Constructibility uses
 finite constructible locally closed scheme strata, without a reducedness condition.
@@ -286,26 +282,7 @@ private theorem torInterval_of_stratified
 /-- A uniform Tor interval for all finite constant local models is also a uniform
 Tor interval for all constructible modules on qcqs schemes. The six coefficient cases
 are finite discrete rings killed by a power of `ℓ`, `ℤ_ℓ`, `𝒪_E`, `ℚ_ℓ`, `E`, and
-finite-subextension-valued `ℚ̄_ℓ`, with `E` a finite subextension of the fixed `PadicAlgCl ℓ`.
-
-Source: blueprint main-20261015, localizing-closure ctf-equals-bc proof, Strata paragraph
-(blueprint: lem-sfb-stratified-tor-interval-devissage).
-
-Proof:
-1. Choose the constructible stratification of `M` and its finite scheme-theoretic
-   open-closed refinement. Its nonempty leaves factor through original strata.
-2. Apply `pullback_finiteConstantLocalModel` through each such factorization, and
-   identify its result by `upperStarComp`. Empty leaves have the empty model cover.
-3. Induct on `N - v.val`, which strictly decreases at both children. Apply the
-   uniform hypothesis at leaves. At an internal vertex, exact derived pullback
-   commutes with degree-zero modules and tensor. Thus the child bounds kill both
-   restrictions of each homology object of `M_v[0] ⊗ᴸ A[0]` outside `[c,d]`.
-   Internal-module open-closed zero detection kills that homology object itself.
-   This is fixed-interval local detection proved directly in the internal category.
-4. The root map is an isomorphism. Its pullback reflects zero, by composing with
-   pullback along the inverse and using `upperStarComp` and `upperStarId`. Apply
-   this to the homology of every test tensor to obtain the interval for `M`.
-Every local comparison preserves the original interval, including empty schemes. -/
+finite-subextension-valued `ℚ̄_ℓ`, with `E` a finite subextension of the fixed `PadicAlgCl ℓ`. -/
 theorem torAmplitudeIn_of_constructible_of_uniform_local_model
     (ℓ : ℕ) [Fact ℓ.Prime]
     (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]

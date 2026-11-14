@@ -34,9 +34,7 @@ public import WeilConjectures.SixFunctors.OpenClosed.Exact
 /-!
 # The inverse-section pushout and its Yoneda sign
 
-Source: Stacks Project, Tags 03AJ and 06XU; blueprint main-20261015,
-sec-smooth-purity/sk-prop-an/lem-pur-divisor-class.proof.md, clause (a), with the
-corrected negative Yoneda normalization (blueprint: lem-pur-principal-torsor-yoneda-sign).
+Source: Stacks Project, Tags 03AJ and 06XU.
 
 The comparison is characterized on every injective-resolution cocycle. Its naturality
 is expressed for arbitrary coefficient lifts and for etale restriction of cocycles.
@@ -58,7 +56,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- The closed term of integral localization, cached to keep the normalized Ext types small.
 This is the actual closed term of the published open--closed sequence.
-Source: Stacks Tag 0A45 (blueprint: lem-pur-principal-torsor-yoneda-sign). -/
+Source: Stacks Tag 0A45. -/
 def principalTorsorClosedTerm {T Z : Scheme.{u}} (i : Z ⟶ T)
     (W : T.Opens) (h : Set.range i.base = (Set.range W.ι.base)ᶜ) :
     Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1} :=
@@ -69,7 +67,7 @@ def principalTorsorClosedTerm {T Z : Scheme.{u}} (i : Z ⟶ T)
 
 /-- The published localization sequence on the integral constant sheaf. Its end terms
 are canonically `j_! Z_W` and `i_* Z_Z`, by constant inverse-image comparison.
-Source: Stacks Tag 0A45 (blueprint: lem-pur-principal-torsor-yoneda-sign). -/
+Source: Stacks Tag 0A45. -/
 def principalTorsorLocalization {T Z : Scheme.{u}} (i : Z ⟶ T)
     (W : T.Opens) (h : Set.range i.base = (Set.range W.ι.base)ᶜ) :
     ShortComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) :=
@@ -88,8 +86,7 @@ def principalTorsorLocalization {T Z : Scheme.{u}} (i : Z ⟶ T)
 /-- Models of the two adjunction comparisons used in the framed-torsor calculation.
 The accompanying normalization fixes their values on all cocycles, so no arbitrary
 identification of Ext with cohomology is being used.
-Source: Stacks Tags 03AJ, 0A45, 06XU
-(blueprint: lem-pur-principal-torsor-yoneda-sign). -/
+Source: Stacks Tags 03AJ, 0A45, 06XU. -/
 structure PrincipalTorsorComparisons where
   openSection : ∀ (T Z : Scheme.{u}) (i : Z ⟶ T) [IsClosedImmersion i]
     (W : T.Opens) (h : Set.range i.base = (Set.range W.ι.base)ᶜ)
@@ -107,7 +104,7 @@ structure PrincipalTorsorComparisons where
 
 /-- The normalized comparison to the right-derived kernel, with its source and target
 fixed explicitly before using it in the splice formula.
-Source: Stacks Tag 0A45 (blueprint: lem-pur-principal-torsor-yoneda-sign). -/
+Source: Stacks Tag 0A45. -/
 def PrincipalTorsorComparisons.toSupport (C : PrincipalTorsorComparisons.{u})
     (T : Scheme.{u}) (W : T.Opens)
     (G : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})
@@ -122,9 +119,7 @@ def PrincipalTorsorComparisons.toSupport (C : PrincipalTorsorComparisons.{u})
 
 /-- The open adjunction is natural, takes the inclusion to one, and the supported-Hom
 comparison sends a cocycle `z` to `(z p(1),0)`. This is a characterization, not an
-assumption added to the framed-torsor theorem.
-Source: Stacks 03AJ and the supported-Hom normalization in the node
-(blueprint: lem-pur-principal-torsor-yoneda-sign). -/
+assumption added to the framed-torsor theorem. -/
 def PrincipalTorsorComparisons.Normalized (C : PrincipalTorsorComparisons.{u}) : Prop :=
   (∀ (T Z : Scheme.{u}) (i : Z ⟶ T) [IsClosedImmersion i]
     (W : T.Opens) (h : Set.range i.base = (Set.range W.ι.base)ᶜ)
@@ -151,8 +146,7 @@ def PrincipalTorsorComparisons.Normalized (C : PrincipalTorsorComparisons.{u}) :
 /-- Naturality of the normalized comparisons under coefficient maps and arbitrary
 resolution lifts. The second clause gives etale restriction on cocycles: the equation
 on evaluated supported cocycles is precisely the restriction of `z p(1)`.
-Source: Stacks 0G78 and 03AJ
-(blueprint: lem-pur-principal-torsor-yoneda-sign). -/
+Source: Stacks 0G78 and 03AJ. -/
 def PrincipalTorsorComparisons.Natural (C : PrincipalTorsorComparisons.{u}) : Prop :=
   (∀ (T Z : Scheme.{u}) (i : Z ⟶ T) [IsClosedImmersion i]
     (W : T.Opens) (h : Set.range i.base = (Set.range W.ι.base)ᶜ)
@@ -192,8 +186,7 @@ def PrincipalTorsorComparisons.Natural (C : PrincipalTorsorComparisons.{u}) : Pr
 /-- The pushout assertion for the specified extension, and the signed splice in the
 actual right-derived kernel of restriction. The horseshoe data and cocycle `x` are
 arbitrary computational models of the coefficient boundary, not extra assumptions on
-coefficients. Source: Stacks 03AJ, 06XU and the node's signed relative refinement
-(blueprint: lem-pur-principal-torsor-yoneda-sign). -/
+coefficients. Source: Stacks 03AJ. -/
 def PrincipalTorsorComparisons.Formula (C : PrincipalTorsorComparisons.{u}) : Prop :=
   ∀ (T Z : Scheme.{u}) (i : Z ⟶ T) [IsClosedImmersion i]
     (W : T.Opens) (h : Set.range i.base = (Set.range W.ι.base)ᶜ)

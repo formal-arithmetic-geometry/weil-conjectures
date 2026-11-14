@@ -13,7 +13,6 @@ import Mathlib.LinearAlgebra.TensorProduct.RightExactness
 # Residue-field tensor of the section-map cokernel
 
 Source: Stacks Project, Tag 04DG, proof, affine fibre and Nakayama steps.
-(blueprint: `lem-weil-pbc-finite-fibre-cokernel-tensor`).
 -/
 
 @[expose] public section
@@ -27,8 +26,7 @@ namespace AlgebraicGeometry
 
 /-- The cokernel of the affine section map has zero residue-field tensor when the fibre
 is a closed immersion.
-Source: Stacks Project, Tag 04DG, proof, affine fibre and Nakayama steps.
-(blueprint: `lem-weil-pbc-finite-fibre-cokernel-tensor`). -/
+Source: Stacks Project, Tag 04DG, proof, affine fibre and Nakayama steps. -/
 theorem IsFinite.subsingleton_residueField_tensor_cokernel
     {X S : Scheme.{u}} (f : X ⟶ S) [IsFinite f]
     (U : S.Opens) (hU : IsAffineOpen U) (s : U)

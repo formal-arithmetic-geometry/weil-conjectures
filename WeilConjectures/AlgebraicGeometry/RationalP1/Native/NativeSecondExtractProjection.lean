@@ -10,8 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.RationalP1.Second.RationalP1Seco
 /-! # Extraction of a pulled factor before choosing the coefficient and Tate line
 
 The construction is made over an arbitrary coefficient object. This shares the native
-module tensor structure when the rational coefficient is subsequently substituted.
-(blueprint: def-sfb-native-second-extract-projection). -/
+module tensor structure when the rational coefficient is subsequently substituted. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -29,9 +28,7 @@ attribute [local irreducible] twist projectionMap tensorShiftIso
   moduleObjectDerivedPullback moduleObjectDerivedPushforward
   firstProjection secondProjection square
 
-/-- The specified extraction map, constructed before specializing its coefficient and lines.
-Source: the Second identity, extraction of q*K
-(blueprint: def-sfb-native-second-extract-projection). -/
+/-- The specified extraction map, constructed before specializing its coefficient and lines. -/
 @[irreducible]
 def nativeSecondExtractProjection
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -56,13 +53,7 @@ def nativeSecondExtractProjection
         (tensorShiftIso Λ (diagonalSurface Y) LW _).hom ≫
         (pullTwistIso Λ (firstProjection Y) LS LW e A).inv)
 
-/-- The defining formula for extraction, with its native tensor structure fixed once.
-Source: the Second identity, extraction of q*K
-(blueprint: def-sfb-native-second-extract-projection).
-
-Proof: this is the construction's defining equation: projection is followed by the
-self-square pullback comparison, the target tensor/shift map, and the inverse twist
-pullback comparison. No projection or exchange is inverted. -/
+/-- The defining formula for extraction, with its native tensor structure fixed once. -/
 theorem nativeSecondExtractProjection_eq
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (Y : Scheme.{u})

@@ -17,7 +17,6 @@ import Mathlib.CategoryTheory.Triangulated.Adjunction
 # Natural transformation and unit normalization of the pro-etale projection mate
 
 Source: Stacks, Cohomology on Sites, Tags 06YU, 07A4, 07A6 and 0B56.
-(blueprint: lem-weil-pbc-proetale-projection-mate-data-s4).
 
 The shifts are constructed together with the mate, by transport from the normalized
 model. Arbitrary independently chosen shift structures do not suffice.
@@ -164,19 +163,7 @@ private theorem unit_isIso :
 /-- The native projection mate has its prescribed components and is invertible at the
 coefficient unit. There are compatible integer shifts making its two functors exact
 and the mate shift-compatible.
-Source: Stacks, Tags 06YU, 07A4, 07A6 and 0B56.
-(blueprint: lem-weil-pbc-proetale-projection-mate-data-s4).
-Proof: construct the normalized global model. Its tensor shifts and adjunction give
-an exact shift-compatible projection transformation. Transport both shifts, exactness
-and transformation through the native/global comparison isomorphisms. Their mate
-identity identifies every component with the specified native mate. For invertibility
-at the coefficient unit, apply signed projection normalization to the degree-zero
-ring complex, using its rank-one splitting in degree zero and zero splittings elsewhere.
-The two inverse identities there exhibit the required inverse for arbitrary E.
-
-The former statement quantified over arbitrary independent shift structures. Twisting
-one by the character n ↦ (-1)^n destroys mate compatibility over integer coefficients.
-The existential structures here repair that error and preserve the parent's full claim. -/
+Source: Stacks, Tags 06YU, 07A4, 07A6 and 0B56. -/
 theorem proEtaleProjectionMateData :
     ∃ (_sF : ((Functor.curryObj a.tensor).obj
       ((proEtaleRingDerivedDirectImage f R S c).obj E)).CommShift ℤ)

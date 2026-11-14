@@ -74,11 +74,7 @@ variable [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ T)]
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ' T)]
 
 /-- The normalized section pullback comparison exists for the supplied endpoint models.
-Source: Stacks 03EL, 06YY, 0D6D and 0G7E; parent proof step 8.
-(blueprint: lem-sfb-quotient-section-pull-transport-section-normalized).
-Proof: conjugate the ordinary pullback comparison through the endpoint scalar models,
-then descend its counit-compatible derived comparison along flat-term K-flat resolutions.
-Naturality and cancellation of the localization counits give SectionPullNormalized. -/
+Source: Stacks 03EL, 06YY, 0D6D and 0G7E. -/
 theorem section_pull_transport_section_normalized {X Y : Scheme.{u}} (f : X ⟶ Y)
     (cX : ScalarSectionData a X) (cY : ScalarSectionData a Y)
     (hcX : ScalarSectionNormalized a X cX) (hcY : ScalarSectionNormalized a Y cY)
@@ -91,11 +87,7 @@ theorem section_pull_transport_section_normalized {X Y : Scheme.{u}} (f : X ⟶ 
 
 -- Reconcile the source module-object instances with the normalized section interfaces.
 /-- The derived section comparison satisfies the pull condition once its normalized
-counit square is fixed. Source: Stacks 06YY, 0D6D and 07A6; parent proof step 8.
-(blueprint: lem-sfb-quotient-section-pull-transport-condition).
-Proof: paste the scalar and geometric computation squares with PullNormalized and cancel
-the invertible computation counits on K-flat representatives; localization descent and
-naturality extend the equality to every derived object. -/
+counit square is fixed. Source: Stacks 06YY, 0D6D and 07A6. -/
 theorem section_pull_transport_condition_of_normalized {X Y : Scheme.{u}} (f : X ⟶ Y)
     (cX : ScalarSectionData a X) (cY : ScalarSectionData a Y)
     (hcX : ScalarSectionNormalized a X cX) (hcY : ScalarSectionNormalized a Y cY)
@@ -136,22 +128,7 @@ theorem section_pull_transport_condition_of_normalized {X Y : Scheme.{u}} (f : X
   rw [θ₁.naturality, θ₂.naturality, hq]
 
 /-- The same normalized scalar models realize the specified scalar/pullback map.
-Source: Stacks 03EL, 06YY, 0D6D and 0G7E; parent proof step 8.
-(blueprint: lem-sfb-quotient-section-pull-transport).
-
-Proof: conjugate the inverse of the ordinary internal pullIso by the two normalized
-ordinary scalar comparisons and the fixed section pullback comparisons. This gives
-the ordinary section balancing isomorphism, carrying inverse image of x tensor s
-to inverse image of x tensor inverse image of s. The ordinary comparison equation
-in SectionPullNormalized holds by construction. The geometric coefficient square
-commutes by naturality of pullback from the point, so this formula respects scalars.
-Both composites preserve flat-term K-flat resolutions. Derive the ordinary square
-using the fixed pullback localization maps and the scalar model counits. This gives
-barLam and its universal-counit computation square on all complexes. Conjugating
-the given lam by the same comparisons has the same computation square, because
-PullNormalized fixes lam by the actual internal counits. Uniqueness of the derived
-comparison identifies these maps, giving PullSectionCondition. No coefficient
-flatness, boundedness, nonemptiness or nonzero-module assumption is used. -/
+Source: Stacks 03EL, 06YY, 0D6D and 0G7E. -/
 theorem section_pull_transport {X Y : Scheme.{u}} (f : X ⟶ Y)
     (cX : ScalarSectionData a X) (cY : ScalarSectionData a Y)
     (hcX : ScalarSectionNormalized a X cX) (hcY : ScalarSectionNormalized a Y cY)

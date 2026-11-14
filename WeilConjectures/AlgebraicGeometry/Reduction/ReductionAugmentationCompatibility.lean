@@ -54,12 +54,7 @@ private theorem stratumUnit_formula (T : Scheme.{u})
   exact (completedReductionTowerUnit_exists d T).exists.choose_spec P hP
 
 /-- A normalized strict reduction comparison preserves the actual quotient augmentation.
-Source: Stacks Tags 03EL, 06YY
-(blueprint: lem-weil-pbc-completed-reduction-augmentation-of-comparison).
-Proof: choose K-flat resolutions with flat terms. Their pullbacks are K-flat by the
-stated pullback property, so the target reduction counits are invertible. Apply the
-generic computing-counit augmentation lemma using the chosen ordinary and derived
-unit normalizations. No choice of a different augmentation is involved. -/
+Source: Stacks Tags 03EL, 06YY. -/
 theorem completedReduction_augmentationOfComparison {X Y : Scheme.{u}} (f : Y ⟶ X)
     (e : completedReductionModuleTowerFunctor X d ⋙ d.towerModulePull f ≅
       proEtaleRingModulePullback f (d.completedRing X) (d.completedRing Y)

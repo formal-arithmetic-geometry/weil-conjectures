@@ -30,40 +30,7 @@ private theorem completeCoefficientIso {I : Sort*} {C : Type*} [Category C]
 extension from the pulled-back open. Only the three displayed coefficient
 identifications are required; no module-pullback compositor is part of the statement.
 
-Source: Stacks Project, Tags 03DI, 04J0 and 09AE.
-(blueprint: lem-sf-ringed-pullback-ordinary-open-support).
-
-Proof: first use the open-slice equivalences for the actual inverse-image rings.
-The cartesian square gives an isomorphism from U' to X' times_X U, compatible
-with both projections; consequently the slice at j' is the localization of the
-base-change site at the inverse image of the object j. On these localized sites,
-direct image commutes with open restriction: at an object T over U its two
-values are the sections on X' times_X T. The two descriptions of that object are
-identified by the pullback universal property. These identifications commute
-with restrictions, so give a natural isomorphism. This is the ringed localization
-calculation of Tag 04J0, also stated as proEtaleOpenRestrictionCounit for the
-chosen fibre product and its inverse-image rings.
-
-For the displayed coefficient choices, transport module actions along cj, cg
-and cj'. The missing coefficient comparison along a is obtained by composing
-the inverse-image composition isomorphisms around the cartesian square with
-these three isomorphisms: a inverse(RU) is identified successively with
-(a then j) inverse(RX), (j' then g) inverse(RX), j' inverse(RX') and RU'.
-Restriction along a coefficient isomorphism is an
-equivalence, with inverse given by the inverse ring isomorphism. Thus the same
-direct-image/restriction comparison holds after this transport: its underlying
-section maps are unchanged and its linearity follows from the constructed
-coefficient comparison. There is no extra coherence assumption on the three
-independently given isomorphisms.
-
-The composite of g-pullback after j-extension is left adjoint to g-direct-image
-followed by j-restriction. The composite of a-pullback followed by j'-extension
-is left adjoint to j'-restriction followed by a-direct-image. The preceding
-comparison identifies these right adjoints. Uniqueness of left adjoints now
-gives an isomorphism between their left adjoints. Evaluate it at M to obtain
-an object in the essential image of j'-extension isomorphic to the required
-pullback. Empty opens give zero modules, and identity opens give the whole
-module category; the same adjunction calculation covers both cases. -/
+Source: Stacks Project, Tags 03DI, 04J0 and 09AE. -/
 theorem proEtaleRingPullback_openSupport {U' U X' X : Scheme.{u}}
     (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (sq : IsPullback a j' j g)

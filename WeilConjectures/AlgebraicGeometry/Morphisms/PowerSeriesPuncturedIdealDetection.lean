@@ -16,7 +16,6 @@ import WeilConjectures.RingTheory.PowerSeriesCombinedIdealCoefficients
 /-! # Detection of variable-ideal powers on the punctured zero section
 
 Source: Stacks Project, Tag 0EY9, first displayed calculation at a fixed index.
-(blueprint: lem-sbc-power-series-punctured-ideal-detection)
 -/
 
 @[expose] public section
@@ -28,23 +27,8 @@ namespace AlgebraicGeometry.Scheme
 /-- Membership in a fixed power of the variables ideal is detected by germs
 of the corresponding global section along the punctured zero section.
 
-Source: Stacks Project, Tag 0EY9 (lemma-fully-faithful-power-series-over-depth2),
-the first displayed calculation at a fixed index, and the subsequent ring comparison.
-(blueprint: lem-sbc-power-series-punctured-ideal-detection)
-
-Proof: For every coefficient of total degree less than n, transport the
-hypothesized kernel-power membership through the canonical open-restriction and
-spectrum-stalk isomorphisms. Coefficientwise localization to A_p[[X]] extends to
-B_q because denominators outside q have unit constant coefficient. The kernel
-maps into the variables ideal, so its nth power kills all these coefficients
-in the base stalk. The condition on V gives vanishing at every point away from
-the closed point. Positive depth excludes the maximal associated prime, and
-detection at associated-prime localizations then makes each coefficient zero
-in A. Apply the combined-ideal coefficient criterion with base ideal zero to
-obtain b in I^n. At n=0 the coefficient condition is vacuous and I^0 is the unit
-ideal.
-This is a single finite-order test on a global power series, not a claim
-about existence or uniqueness of a simultaneous formal approximation. -/
+Source: Stacks Project, the first displayed calculation at a fixed index, and the subsequent ring
+comparison. -/
 theorem powerSeries_mem_variables_pow_of_punctured_germs
     (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]
     (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth (R := A) A)

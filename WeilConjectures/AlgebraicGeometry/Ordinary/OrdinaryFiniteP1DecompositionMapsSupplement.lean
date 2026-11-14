@@ -165,8 +165,6 @@ public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1DecompositionMap
 
 The unit and Chern adjoint are explicit, independently of the proof of their splitting.
 The comparison and untwisting lemmas use this common interface.
-Source: main-20261015, thm-amb-p1-decomposition.md and its proof
-(blueprint: def-asd-ordinary-finite-p1-decomposition-maps).
 -/
 
 @[expose] public noncomputable section
@@ -186,8 +184,7 @@ attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The normalized inverse product is the actual evaluation.
-Source: Stacks Tag 03PK (blueprint: def-asd-ordinary-finite-p1-decomposition-maps).
-Proof: take the n=0 negative-evaluation normalization of the canonical finite-twist data. -/
+Source: Stacks Tag 03PK. -/
 theorem p1DecompositionSheafProduct_hom (A : Type (u + 1)) [CommRing A]
     (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
     (T : Scheme.{u}) (hT : IsUnit (N : Γ(T, ⊤))) :
@@ -197,8 +194,7 @@ theorem p1DecompositionSheafProduct_hom (A : Type (u + 1)) [CommRing A]
   have h := (p1DecompositionTwistTransport A N hN hA).product_normalization T hT
   simpa only [p1DecompositionSheafProduct, eqToHom_refl, Category.comp_id] using h
 
-/-- The unit component A_S -> Rq_* A_P under the constant-object comparison.
-Source: the component 1 in the blueprint (blueprint: lemma-cohomology-projective-line-trace). -/
+/-- The unit component A_S -> Rq_* A_P under the constant-object comparison. -/
 def p1DecompositionUnit (A : Type (u + 1)) [CommRing A] (S : Scheme.{u}) :
     ordinaryFiniteUnit A S ⟶
       (ordinaryFinitePushforward A (ProjectiveLine S ↘ S)).obj
@@ -208,7 +204,7 @@ def p1DecompositionUnit (A : Type (u + 1)) [CommRing A] (S : Scheme.{u}) :
       (ordinaryFiniteUnitPullback A (ProjectiveLine S ↘ S)).hom
 
 /-- Form a tensor-evaluation adjoint in arbitrary categories.
-Source: the tensor-Hom adjunction (blueprint: lemma-cohomology-projective-line-trace). -/
+Source: the tensor-Hom adjunction. -/
 @[irreducible]
 def p1DecompositionTensorAdjoint {C D : Type*} [Category C] [Category D]
     (F : C ⥤ D) (G : D ⥤ C) (adj : F ⊣ G) (tensor : D ⥤ D ⥤ D)
@@ -219,9 +215,7 @@ def p1DecompositionTensorAdjoint {C D : Type*} [Category C] [Category D]
     (tensor.map pull.hom).app L ≫ eval)
 
 /-- The component h is the adjoint of the tensor-with-Chern-class/evaluation
-composite, using the canonical negative-twist pullback and tensor unit.
-Source: the explicit definition of h in the node (blueprint:
-lemma-cohomology-projective-line-trace). -/
+composite, using the canonical negative-twist pullback and tensor unit. -/
 def p1DecompositionChernAdjoint (A : Type (u + 1)) [CommRing A]
     (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
     (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤)))
@@ -244,9 +238,7 @@ def p1DecompositionChernAdjoint (A : Type (u + 1)) [CommRing A]
       ((map_natCast (ProjectiveLine S ↘ S).appTop.hom N) ▸
         hS.map (ProjectiveLine S ↘ S).appTop.hom)) c
 
-/-- The specified ordered map (1,h), with no independent choice of decomposition.
-Source: the displayed isomorphism in the node (blueprint:
-lemma-cohomology-projective-line-trace). -/
+/-- The specified ordered map (1,h), with no independent choice of decomposition. -/
 def p1DecompositionMap (A : Type (u + 1)) [CommRing A]
     (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
     (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤)))
@@ -258,8 +250,7 @@ def p1DecompositionMap (A : Type (u + 1)) [CommRing A]
   biprod.desc (p1DecompositionUnit A S) (p1DecompositionChernAdjoint A N hN hA S hS c)
 
 /-- Assemble two component comparisons on a pulled-back biproduct.
-Source: the universal property of the biproduct (blueprint:
-lemma-cohomology-projective-line-trace). -/
+Source: the universal property of the biproduct. -/
 @[irreducible]
 def p1DecompositionBiprodMap {C D : Type*} [Category C] [Category D]
     [HasZeroMorphisms C] [HasZeroMorphisms D]
@@ -269,9 +260,7 @@ def p1DecompositionBiprodMap {C D : Type*} [Category C] [Category D]
   biprod.lift (F.map biprod.fst ≫ e.hom) (F.map biprod.snd ≫ e'.hom)
 
 /-- The canonical pullback map on A_S plus A_S(-1)[-2], assembled from the
-images of the two projections and the constant and signed-twist comparisons.
-Source: the arbitrary-base compatibility clause (blueprint:
-lemma-cohomology-projective-line-trace). -/
+images of the two projections and the constant and signed-twist comparisons. -/
 def p1DecompositionSourceMap (A : Type (u + 1)) [CommRing A]
     (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
     {S' S : Scheme.{u}} (g : S' ⟶ S) (hS : IsUnit (N : Γ(S, ⊤))) :

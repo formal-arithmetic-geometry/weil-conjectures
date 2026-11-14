@@ -112,9 +112,7 @@ import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 
 /-! # Canonical internal Hom comparison for a regular principal quotient
 
-Source: Stacks Project, Tags 08JF and 0BYU; current blueprint,
-sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-hom-reduction.proof.md
-(blueprint: lem-sf-principal-quotient-internal-hom).
+Source: Stacks Project, Tags 08JF and 0BYU.
 
 The extension, internal Hom and bidual map below are the existing ordinary unbounded
 small-etale constructions. The tensor comparison of the extension is the canonical one,
@@ -137,7 +135,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- The small etale site is essentially small (a local copy of the local instance of
 `WeilConjectures.SixFunctors.Etale.Derived.ReductionHom`, which instance search does not find).
-Source: Stacks 03NU (blueprint: lem-sf-principal-quotient-internal-hom). -/
+Source: Stacks 03NU. -/
 local instance instEssentiallySmallEtale_principalQuotientInternalHom
     (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
   have : LocallySmall.{u + 1} X.Etale :=
@@ -146,7 +144,7 @@ local instance instEssentiallySmallEtale_principalQuotientInternalHom
 
 /-- Sheaves of modules on the small etale site have countable coproducts (local copy of the
 local instance of `WeilConjectures.SixFunctors.Etale.Derived.ReductionHom`).
-Source: Stacks 03CN (blueprint: lem-sf-principal-quotient-internal-hom). -/
+Source: Stacks 03CN. -/
 local instance instHasCountableCoproductsSheaf_principalQuotientInternalHom
     (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] :
     HasCountableCoproducts (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=

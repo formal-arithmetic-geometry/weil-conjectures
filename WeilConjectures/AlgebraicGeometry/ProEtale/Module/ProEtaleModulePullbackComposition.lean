@@ -10,8 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConsta
 /-!
 # Composition of pro-etale module inverse images with constant coefficients
 
-Source: literature/stacks-project/sites-modules.tex, Tag 03D8,
-lemma-push-pull-composition-modules (blueprint: lem-pur-proetale-module-pullback-composition).
+Source: Tag 03D8.
 -/
 
 @[expose] public section
@@ -140,15 +139,7 @@ images. The canonical comparison is the conjugate of the fibre-product direct-im
 identification, with the normalized module adjunctions and the prescribed constant-section
 actions.
 
-Source: literature/stacks-project/sites-modules.tex, Tag 03D8,
-lemma-push-pull-composition-modules (blueprint: lem-pur-proetale-module-pullback-composition).
-Proof: for an object of the pro-etale site of the target, the two iterated fibre products and
-the fibre product for the composite are canonically isomorphic by the universal property of
-scheme fibre products. Restriction along these isomorphisms gives a natural direct-image
-isomorphism; naturality also shows that it preserves the canonical constant sections, hence
-its module actions. The module inverse images are left adjoint to the direct images by the
-normalized module adjunctions. The adjunction conjugation bijection therefore supplies the
-unique inverse-image isomorphism whose conjugate is that direct-image comparison.
+Source: Tag 03D8.
 -/
 theorem proEtaleConstantRingModulePullbackComposition
     {X Y Z : Scheme.{u}} (g : Z ⟶ X) (f : X ⟶ Y)

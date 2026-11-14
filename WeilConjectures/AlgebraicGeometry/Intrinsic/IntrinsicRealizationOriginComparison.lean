@@ -11,8 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConsta
 /-!
 # Compatibility of the two canonical finite-coefficient realizations
 
-Source: Stacks Project, Modules on Sites, Tag 03EI; the constant-scalar
-identification in step 1 of `lem-sf-comparison-tor-amplitude`.
+Source: Stacks Project, Modules on Sites, Tag 03EI.
 -/
 
 @[expose] public section
@@ -55,13 +54,7 @@ private theorem realizationRestrictionUnit_isIso
       (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) AddCommGrpCat.{u + 1})).obj M).property
 
 /-- Restricting the canonical associated module sheaf recovers the original module sheaf.
-Source: Stacks Project, Modules on Sites, Tag 03EI; comparison Tor-amplitude proof, step 1
-(blueprint: lem-sf-intrinsic-realization-origin-comparison).
-
-Proof: the associated-module-sheaf adjunction unit is linear over constant scalars.
-Its underlying additive map is the sheafification unit of the original additive sheaf,
-hence is an isomorphism. This unit is natural, so its inverse gives the asserted natural
-isomorphism. This also applies to empty schemes and the zero coefficient ring. -/
+Source: Stacks Project, Modules on Sites, Tag 03EI. -/
 theorem intrinsicRealization_restriction
     (T : Scheme.{u}) (B : Type u) [CommRing B] [Finite B] :
     Nonempty (finiteCoefficientIntrinsicRealization T B ⋙

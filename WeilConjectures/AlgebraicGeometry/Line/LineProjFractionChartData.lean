@@ -36,8 +36,8 @@ import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 
 /-! # Homogeneous-fraction charts for a graded map into a line module
 
-Source: Stacks Project, Constructions, Tags 01NK and 01O9, local construction and
-affine-base gluing (blueprint: lem-trf-line-proj-affine-chart-atlas).
+Source: Stacks Project, Constructions, Tags 01NK and 01O9, local construction and affine-base
+gluing.
 
 The input maps are maps of the actual tensor-pullback homogeneous sheaves. The unit
 and multiplication equations on pulled-back sections express the graded algebra law.
@@ -56,7 +56,7 @@ open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Tensor powers of a local frame, including the degree-zero unit section.
-Source: Stacks, Tag 01NK (blueprint: lem-trf-line-proj-affine-chart-atlas). -/
+Source: Stacks, Tag 01NK. -/
 noncomputable def lineProjFramePower {W : Scheme.{u}} (L : W.Modules) (U : W.Opens)
     (e : Γ(L, U)) : (n : ℕ) → Γ(L.tensorPow n, U)
   | 0 => unitSectionsEquiv U 1

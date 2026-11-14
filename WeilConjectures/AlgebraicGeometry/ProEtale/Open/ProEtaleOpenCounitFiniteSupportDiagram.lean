@@ -18,10 +18,7 @@ import WeilConjectures.SixFunctors.ProEtale.BaseChange.WeaklyEtale
 /-!
 # Finite support diagrams for the open counit
 
-Source: Stacks Project, Tags 00WK and 09AE; finite representatives and the
-smaller-open comparison in Steps 9--11 of
-`lem-exc-proetale-proper-open-sheaf-comparison`.
-(blueprint: lem-exc-proetale-open-counit-finite-support-diagram)
+Source: Stacks Project, Tags 00WK and 09AE.
 -/
 
 @[expose] public section
@@ -46,28 +43,7 @@ Properness is not assumed: quasi-compactness and quasi-separatedness suffice for
 this finite-representative step, which makes no surjectivity assertion about either
 counit.
 
-Source: Stacks Project, Tags 00WK and 09AE; Steps 9--11 of the support argument in
-`lem-exc-proetale-proper-open-sheaf-comparison`.
-(blueprint: lem-exc-proetale-open-counit-finite-support-diagram).
-
-Proof: work in fixed-scalar coordinates and localize the already extended sheaf
-at `Q`. Weakly etale direct-image base change identifies the given section with a
-section on a quasi-compact, quasi-separated test scheme over `V ×_T Q`. The
-sheafification unit gives a covering on which it is zero or factors through the
-original open. A finite affine refinement encloses the images of its nonzero
-members in one compact open `O` inside the inverse image of `W`.
-
-Restrict the localized extended sheaf to the inverse image of `O` and realize this
-restriction to construct `M₀`. The smaller open counit is monic and invertible on
-objects factoring through the smaller open. Its local lifts therefore glue to a
-section `t`. Push its counit forward and compose with inverse weakly etale base
-change to obtain the additive map `b` and the equation `b t = y` in fixed-scalar
-coordinates. The localized larger counit becomes invertible after restriction to
-`O`. Transpose the restriction of `b` followed by this inverse under the `O`-open
-adjunction to obtain `a`; counit naturality gives the commuting square. Finally
-transport this square and `t` through the proved realization section equivalences,
-which intertwine the specified intrinsic counits. Empty covers and zero sections
-are included in the same gluing argument. -/
+Source: Stacks Project, Tags 00WK and 09AE. -/
 theorem sfOpenCounit_finiteSupportDiagram {V W T : Scheme.{u}} (p : V ⟶ T)
     [QuasiCompact p] [QuasiSeparated p] (i : W ⟶ T) [IsOpenImmersion i]
     (M : proEtaleRingModules (pullback p i)

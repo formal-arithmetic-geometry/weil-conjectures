@@ -14,7 +14,6 @@ public import WeilConjectures.Mathlib.Topology.Category.TopCat.Opens
 /-! # The fixed degree-zero section comparison
 
 Source: Stacks Project, Tags 08HY, 0B91 and 0D5S.
-(blueprint: def-sc-picard-direct-image-section-map)
 -/
 
 @[expose] public section
@@ -34,8 +33,7 @@ variable [∀ Y : Scheme.{v},
 then the degree-zero direct-image comparison; evaluate on 1 and restrict to top.
 All data are actual canonical maps. Only the inverse of the canonical structure-sheaf
 comparison is used; its invertibility is already proved.
-Source: Stacks Project, Tags 08HY, 0B91 and 0D5S.
-(blueprint: def-sc-picard-direct-image-section-map) -/
+Source: Stacks Project, Tags 08HY, 0B91 and 0D5S. -/
 def picardDirectImageSectionMap {X S : Scheme.{v}} (f : X ⟶ S)
     (L : X.Modules) (W : Scheme.{v}) (k : W ⟶ S)
     {T : Scheme.{v}} (t : T ⟶ W) :

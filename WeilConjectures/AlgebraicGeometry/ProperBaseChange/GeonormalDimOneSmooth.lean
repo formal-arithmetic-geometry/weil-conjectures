@@ -18,8 +18,7 @@ import WeilConjectures.AlgebraicGeometry.Geometric.GeometricRegularitySmoothFiel
 /-!
 # Geometrically normal schemes of dimension at most one
 
-Source: Stacks Project, Tags 0BX2, 038X, 00P3, 033M, and the proof of Tag 0GK5
-(blueprint: lem-weil-pbc-geonormal-dim-one-smooth).
+Source: Stacks Project, Tags 0BX2, 038X, 00P3, 033M, and the proof of Tag 0GK5.
 -/
 
 @[expose] public section
@@ -32,33 +31,7 @@ namespace AlgebraicGeometry
 
 /-- A geometrically normal finite type scheme of dimension at most one over a field is
 smooth and geometrically reduced; any connected nonempty field base change is irreducible.
-Source: Stacks Project, Tags 0BX2, 038X, 00P3, 033M; proof of Tag 0GK5
-(blueprint: lem-weil-pbc-geonormal-dim-one-smooth).
-
-Proof:
-1. Fix an extension `L/k`. A finite affine cover of `Z` base changes to a cover by
-   spectra of finite type `L`-algebras, using
-   `lem-weil-pbc-fibre-product-affine-spectra` and the open-immersion pullback property.
-   Fields are Noetherian, so `lem-weil-pbc-finite-type-over-noetherian` makes this
-   base change Noetherian, and hence all its local rings Noetherian.
-2. Each affine chart has dimension at most one, by taking closures of chains.
-   `lem-weil-pbc-dimension-preserved-field-extension` preserves this bound after
-   scalar extension. By `lem-sc-scheme-stalk-dimension-generalization-chains`, the
-   dimension of each stalk is at most the dimension of its chart, hence at most one.
-3. The hypothesis makes every such stalk an integrally closed domain. A zero-dimensional
-   local domain is a field, thus regular. In dimension one, `lemma-proper-smooth-model--1`
-   makes it a discrete valuation ring, whose principal maximal ideal makes it regular
-   (`def-sc-discrete-valuation-ring`). Thus every field base change is regular.
-4. Apply `lem-weil-pbc-geometric-regularity-smooth-field-criterion` to obtain smoothness:
-   the structure map is locally of finite type and every finitely generated field base
-   change has regular local rings. No perfectness of the field is needed.
-5. Every stalk of every field base change is a domain, hence reduced: a nilpotent
-   element in a domain is zero. By `def-pc-reduced-scheme` these base changes are reduced,
-   which is geometric reducedness (`def-pc-geometrically-irreducible`).
-6. If a field base change is connected and nonempty, its regularity and local
-   Noetherianity give integrality by `lem-sc-regular-connected-integral`, and then
-   irreducibility by `lem-pc-integral-scheme-irreducible`. The empty scheme satisfies
-   the first two conclusions and never meets this final antecedent.
+Source: Stacks Project, Tags 0BX2, 038X, 00P3, 033M; proof of Tag 0GK5.
 -/
 theorem smooth_and_geometricallyReduced_of_geonormal_dim_le_one
     (k : Type u) [Field k] (Z : Scheme.{u}) [Z.Over (Spec (CommRingCat.of k))]

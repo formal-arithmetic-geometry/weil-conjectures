@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.IntegralCoefficientCompletenessTranspor
 
 /-! # Finite freeness of the completed scalar coefficient inclusion
 
-Source: Bhatt--Scholze, Lemma 6.8.2(1); blueprint proper base change, order 1307.
-(blueprint: lem-pbc-scalar-ambient-operation-comparisons)
+Source: Bhatt--Scholze, Lemma 6.8.2(1)
 -/
 
 @[expose] public noncomputable section
@@ -37,10 +36,7 @@ variable (l : ℕ) [Fact l.Prime]
     [FiniteDimensional ℚ_[l] E] [FiniteDimensional ℚ_[l] F] (i : E →ₐ[ℚ_[l]] F)
 
 /-- The completed target integral coefficients are finite free over the source ones.
-Source: Bhatt--Scholze, Lemma 6.8.2(1)
-(blueprint: lem-pbc-scalar-ambient-operation-comparisons).
-Proof: an integral basis of the target valuation ring is a basis of every finite
-quotient, compatibly with the transitions; pass to the limit. -/
+Source: Bhatt--Scholze, Lemma 6.8.2(1). -/
 theorem pbcScalarCoefficient_finiteFree (T : Scheme.{u}) :
     ∃ d : ℕ, Nonempty ((proEtaleRingRestrictScalars (pbcScalarCoefficientMap l E F i T)).obj
         (SheafOfModules.unit ((sheafCompose (ProEt.topology T)

@@ -31,7 +31,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-! # Tensor reduction without internal-Hom comparison data
 
 Source: Zheng Construction 4.1; Stacks 03EK, 06YY, 07A4.
-(blueprint: lem-coef-semilinear-tensor-reduction-core).
 -/
 
 @[expose] public noncomputable section
@@ -467,35 +466,8 @@ set_option backward.isDefEq.respectTransparency true in
 set_option backward.defeqAttrib.useBackward true in
 /-- Actual tensor reduction is the tensor of the two reduction adjoints under
 canonical evaluation and scalar-extension comparisons. No normalization is assumed.
-Source: Stacks Project, Cohomology on Sites, Tags 07A4 and 06YS, applied to the
-horizontal transitions in Zheng, Construction 4.1
-(blueprint: lem-coef-semilinear-tensor-reduction-core).
-Proof: resolve both system complexes by K-flat complexes with flat terms on the
-coefficient sequence site. Evaluation preserves their K-flat class by
-`tensorEvaluationModel.kflat`. It preserves flat terms as well: apply the local
-finite-relation criterion on the sequence site, and pull the resulting covering sieve
-and factorization witnesses back along the vertical inclusion at the chosen level.
-The total tensor of two K-flat complexes is K-flat.
-For each ordinary module pair, transpose the horizontal restriction by the ordinary
-scalar adjunction. Its unit sends a section x to the scalar-extension section of x,
-as fixed by `ScalarData.unit_section`. The horizontal restriction of a pure tensor
-x tensor y is the tensor of the two restricted sections. Evaluation's ordinary
-comparison is the identity on these pure sections, by
-`tensorEvaluationModel_ordinary` and `ordinaryEvaluationTensor_existsUnique`.
-The scalar comparison has the same pure-section normalization, by
-`scalarTensorModel.ordinary_pure`. The sheafification adjunction and generation of
-module tensors by pure tensors therefore identify the two ordinary adjoints.
-Apply this equality on each (p,q) summand of the total tensor. The `summand` fields
-of the two comparison models give equality of chain maps, including the signed
-differentials. Localize that chain equality. Use `ScalarData.transpose_model` to
-identify the localized ordinary adjoints with the actual reductions. The two
-`derived` comparison squares identify the remaining maps with `tensorEvaluation`
-and `scalarTensor`. Cancel their invertible representative comparisons; naturality
-of the K-flat tensor models gives the displayed equality on representatives.
-Finally every derived object admits such a representative, and naturality of the
-adjunction transpose transports the equality along the representative isomorphisms.
-This proves the formula for arbitrary unbounded systems and arbitrary coefficient
-homomorphisms, including the identity index and non-flat quotient maps. -/
+Source: Stacks Project, Cohomology on Sites, Tags 07A4 and 06YS, applied to the horizontal
+transitions in Zheng, Construction 4.1. -/
 theorem semilinearTensorReductionFromModels (A : SystemTensorReductionModels.{c, v, r} J B τ)
     (P Q : DS.{c, v, max c v r} J B τ) :
     ∀ {m n : ℕ} (h : n ≤ m),

@@ -18,8 +18,7 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.RegularLocalSurfaceDepthTwoFl
 /-!
 # A finite flat model in regular local dimension two
 
-Source: Stacks Project, Tag 0BMA, `pione-lemma-purity-regular`, dimension-two paragraph.
-(blueprint: lem-sbc-regular-local-dimension-two-punctured-flat-model)
+Source: Stacks Project, Tag 0BMA, dimension-two paragraph.
 -/
 
 @[expose] public section
@@ -61,27 +60,7 @@ private theorem depth_two_of_regular_local (R : Type u) [CommRing R]
 
 /-- A punctured finite etale cover has a finite flat model with depth-two boundary stalks.
 
-Source: Stacks Project, Tag 0BMA, `pione-lemma-purity-regular`, dimension-two case,
-and Tag 0BM9, `pione-lemma-reformulate-purity-normal`.
-(blueprint: lem-sbc-regular-local-dimension-two-punctured-flat-model)
-
-Proof: Regularity makes A a normal domain. By 0BM9, B = Gamma(Y, O_Y) is
-finite and normal over A, and Spec B restricts to Y over U. If Y is empty use
-the zero algebra. Otherwise B is a finite product of normal domains. For each
-factor, going down over the normal base and integrality give dimension two
-at every maximal ideal lying over the closed point of A. Serre's S2 condition
-therefore gives depth at least two at those localizations. They are
-Cohen-Macaulay, and the finite closed fibre has dimension zero. Miracle
-flatness over the regular local base makes each of these maximal localizations
-flat over A. Since B is finite over the local ring A, all its maximal ideals
-lie over that closed point, and the local criterion for flatness makes B flat.
-Take F = Spec B with its structure map r. It is finite and flat. Every point
-outside the inverse image of U lies over the closed point, hence corresponds
-to one of the just-considered maximal ideals, proving the stalk depth bound.
-The identification in 0BM9 is over U and gives the stated morphism equality.
-Finite products preserve flatness and finiteness; for the zero algebra the
-boundary depth assertion is vacuous. This proves all clauses without using
-purity or asserting that r is etale. -/
+Source: Stacks Project, Tag 0BMA, dimension-two case, and Tag 0BM9. -/
 theorem exists_finite_flat_model_of_regular_local_dimension_two
     (A : Type u) [CommRing A] [IsRegularLocalRing A]
     (hdim : ringKrullDim A = 2)

@@ -12,9 +12,8 @@ public import WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarOperationShift
 
 /-! # Identity coherence of scalar operation comparisons
 
-Source: blueprint proper base change, order 1307; Milne, Section 19.
+Source: Milne, Section 19.
 Existing declarations extracted from `PbcScalarExtension` to bound compilation cost.
-(blueprint: lem-pbc-scalar-operation-unit-coherence)
 -/
 
 @[expose] public noncomputable section

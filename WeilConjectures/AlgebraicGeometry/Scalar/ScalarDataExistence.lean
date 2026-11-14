@@ -10,8 +10,7 @@ import WeilConjectures.Algebra.Homology.System.SystemScalarModel
 
 /-! # Existence of normalized scalar data
 
-Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks 06YY and 07A6.
-(blueprint: lem-coef-semilinear-scalar-data)
+Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks 06YY and 07A6
 -/
 
 @[expose] public noncomputable section
@@ -52,12 +51,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   (τ : ∀ n : ℕ, B (n + 1) ⟶ B n)
 
 /-- The normalized change-of-rings models for a compatible system map and all its levels.
-Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks 06YY and 07A6
-(blueprint: lem-coef-semilinear-scalar-data).
-Proof: construct the ordinary sectionwise change-of-rings functor and its adjunction,
-then apply the independent-coefficient K-flat derived-change-of-rings construction.
-The unit formula and representative transpose are the canonical tensor unit and its
-localization; these determine the required normalization fields. -/
+Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks 06YY and 07A6. -/
 theorem semilinearScalarData
     (F : ℕ → Sheaf J CommRingCat.{max c v r})
     (σ : ∀ n : ℕ, F (n + 1) ⟶ F n) (α : ∀ n : ℕ, B n ⟶ F n)

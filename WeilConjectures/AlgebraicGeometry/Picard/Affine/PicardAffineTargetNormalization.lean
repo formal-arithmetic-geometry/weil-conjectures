@@ -19,8 +19,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # Fixed-affine models used in the Picard comparison
 
-Source: Stacks Project, Tag 0BF2.
-(blueprint: lem-sc-picard-affine-target-normalization)
+Source: Stacks Project, Tag 0BF2
 -/
 
 @[expose] public section
@@ -31,24 +30,7 @@ open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme
 
 /-- A universally trivial structure H-zero gives a normalized target on the entire affine.
-Source: Stacks Project, Tag 0BF2, target complexes; Tags 08CR, 08EB and 0B91.
-(blueprint: lem-sc-picard-affine-target-normalization)
-
-Proof: First obtain an unnormalized bounded finite projective module complex P
-on the supplied affine. The trivialization identifies its derived sheafification
-with the restricted image of M. Perfect base change and the universal ordinary
-structure unit give zero negative homology and free rank-one H0 after every ring
-base change. Normalize this ring complex to Q by finite-projective cancellation:
-remove negative contractible pairs, split its rank-one H0 summand, and cancel the
-complementary degree-zero pair. The resulting Q has no negative terms and d0=0.
-Apply the explicitly constructed affinePerfectSheafification functor termwise.
-The tilde finite-free comparison, restriction-unit comparison and over-equivalence
-unit comparison carry every finite-free module retract to a finite-free sheaf
-retract. Functoriality proves their retract equations, finite support and negative
-term vanishing; preservation of zero maps proves d0=0. Finally the affine derived
-sheafification comparison transports the derived isomorphism P to Q, and its
-endpoint isomorphisms compose with the geometric P-model isomorphism. The empty
-affine is handled by the same construction over the zero ring. -/
+Source: Stacks Project, Tag 0BF2, target complexes; Tags 08CR, 08EB and 0B91 -/
 theorem picard_affine_target_normalization
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

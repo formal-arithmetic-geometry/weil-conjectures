@@ -13,10 +13,6 @@ import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.In
 import all WeilConjectures.CategoryTheory.ModuleObjects.KFlatScalarTower.InternalKFlatScalarTowerRealizationSupplement
 
 /-! # Scalar pullback mate and representative counits
-
-Source: blueprint scalar-six direct-image proof, formal properties and finite free
-coefficient extensions.
-(blueprint: new-sfb-finite-free-scalar-pullback-counit)
 -/
 
 @[expose] public noncomputable section
@@ -47,9 +43,6 @@ attribute [local irreducible] betaTotalNatIso betaOrdinary betaTargetIso
 -- Compare the normalized derived mate with its ordinary unit square.
 /-- The normalized scalar-pullback mate commutes with the exact representative factors
 and the derived-to-ordinary scalar counits, on every cochain complex.
-
-Source: blueprint scalar-six direct-image proof, formal properties.
-(blueprint: new-sfb-finite-free-scalar-pullback-counit)
 
 Proof. Apply the generic mate computation to the extension/restriction adjunctions.
 Their computation counits satisfy the adjunction-unit equation. The ordinary square

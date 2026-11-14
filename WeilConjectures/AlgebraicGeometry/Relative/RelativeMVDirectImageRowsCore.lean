@@ -37,14 +37,7 @@ private lemma roof_mate_transport {C D : Type*} [Category C] [Category D]
 set_option linter.unusedVariables false in
 /-- Resolved source and target short exact rows and their vertex comparisons,
 before recording the three mate equations. Source: Stacks Project, Cohomology
-of Sheaves, Tags 08BV, 08HZ, 08FE and 08HY.
-(blueprint: lem-pc-relative-mv-direct-image-rows-core).
-Proof: Choose injective-term K-injective representatives, form the restriction
-Mayer--Vietoris rows, resolve the target image, and strictify the finite diagram.
-The mapping-cocone row construction supplies the short exact source row; direct
-image and restriction comparisons supply the target row and all six vertex
-isomorphisms. Naturality of the localization and the chosen adjunction
-equivalence records the three normalized equations hα, hβ, and hγ. -/
+of Sheaves, Tags 08BV, 08HZ, 08FE and 08HY. -/
 theorem relativeMV_direct_image_rows_core
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

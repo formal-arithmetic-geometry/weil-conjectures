@@ -17,8 +17,7 @@ import WeilConjectures.AlgebraicGeometry.Picard.Residue.PicardResidueHomologyCho
 
 /-! Affine residue data for the fixed-model bridge.
 
-Source: Stacks Project, Tags 01IB, 064K, 06YJ and 0B91.
-(blueprint: new-picard-derived-fibre-residue-affine-data)
+Source: Stacks Project, Tags 01IB, 064K, 06YJ and 0B91
 
 Proof: Apply the affine residue model naturality theorem to the coefficient
 arrow and choose a chain representative by the affine perfect map theorem.
@@ -36,8 +35,7 @@ namespace AlgebraicGeometry.Scheme
 
 -- The fixed-model naturality traverses derived and residue comparisons.
 /-- Fixed affine-model residue naturality data for a finite family.
-Source: Stacks Project, Tags 01IB, 064K, 06YJ and 0B91.
-(blueprint: new-picard-derived-fibre-residue-affine-data) -/
+Source: Stacks Project, Tags 01IB, 064K, 06YJ and 0B91 -/
 theorem picard_derived_fibre_residue_affine_data
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

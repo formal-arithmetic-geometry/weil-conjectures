@@ -16,10 +16,6 @@ import WeilConjectures.AlgebraicGeometry.Adic.AdicConstructibilityPredicateCompa
 import Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # Native proper base change on affine base charts
-
-Source: blueprint thm-weil-pbc-qbar.proof.md, Constructibility and the isomorphism,
-application of rational proper base change on separated finite-type affine charts.
-(blueprint: lem-sf-native-affine-proper-base-change).
 -/
 
 @[expose] public noncomputable section
@@ -184,24 +180,7 @@ private theorem proper_from_encoded_bound
   exact proper_from_encoded l k Λ hΛ sq M
     ⟨(nativeExchangeEncodingAt l Λ hΛ X.left).mapDerivedCategory.obj M, hM⟩ (Iso.refl _)
 
-/-- Proper base change on an affine chart over the algebraic closure of a finite field.
-Source: blueprint thm-weil-pbc-qbar.proof.md, Constructibility and the isomorphism,
-affine-chart application of proposition-proper-direct-image-constructible-complexes (3).
-(blueprint: lem-sf-native-affine-proper-base-change).
-
-Proof: properness over the affine base makes X separated and finite type over k;
-the Cartesian source X' has the same properties over the affine Y'. All four schemes
-are qcqs. Native constructible cohomology therefore has a finite global stratification.
-The exact coefficient encoding and nativeModuleConstructibilityComparison carry these
-strata, with their finite free local models, to finite constant condensed local models.
-The latter are locally finitely presented, so the encoded complex is bounded
-constructible. The normalized ordinary and derived comparison identifies the native
-unit--square--counit mate with the condensed exchange: the inverse-image compositors
-and adjunction transposes agree on common K-injective representatives. Apply rational
-proper base change, clause (3), to this encoded complex, then reflect the resulting
-isomorphism through the exact derived encoding equivalence. This argument is confined
-to affine bases; it makes no assertion about gluing over a nonseparated scheme.
-Empty bases, zero complexes and zero-rank local models need no exceptions. -/
+/-- Proper base change on an affine chart over the algebraic closure of a finite field. -/
 theorem adicDerivedBaseChange_isIso_of_affine
     (k₀ k : Type u) [Field k₀] [Finite k₀] [Field k] [Algebra k₀ k]
     [IsAlgClosure k₀ k] (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]

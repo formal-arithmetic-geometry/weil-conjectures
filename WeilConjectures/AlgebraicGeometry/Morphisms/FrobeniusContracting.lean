@@ -13,7 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.Frobenius
 # The relative Frobenius contracts the local ring at a fixed rational point
 
 Let `X₀` be a scheme over a finite field `k₀` with `q` elements, let `S = X₀ ×_{k₀} k` be a base
-change to a field `k`, with projections `p : S ⟶ X₀` and `a : S ⟶ Spec k`, and let `h` be a
+change to a field `k`, with projections `p: S ⟶ X₀` and `a: S ⟶ Spec k`, and let `h` be a
 `k`-endomorphism of `S` lifting a `q ^ m`-power Frobenius `G` of `X₀` (`h ≫ p = p ≫ G`), with
 `m ≥ 1`. If `x` is a `k`-rational point of `S` fixed by `h`, then the stalk map of `h` at `x`
 sends the maximal ideal `𝔪` of `𝒪_{S,x}` into `𝔪 ^ 2`: in affine coordinates,
@@ -27,8 +27,7 @@ The proof is a computation with points: the two morphisms
 ## Main statements
 
 - `AlgebraicGeometry.map_maximalIdeal_stalkMap_le_sq_of_isFrobenius`: the stalk map of `h` at a
-  fixed rational point sends `𝔪` into `𝔪 ^ 2` (blueprint `corollary-contracting-local-terms-point`,
-  proof of item 3).
+  fixed rational point sends `𝔪` into `𝔪 ^ 2`.
 -/
 
 @[expose] public section
@@ -64,8 +63,8 @@ lemma isLocalHom_of_field {K R : Type*} [Field K] [CommRing R] [Nontrivial R] (f
 variable {k : Type u} [Field k] {S X₀ : Scheme.{u}} {f₀ : X₀ ⟶ Spec (.of k₀)}
   {a : S ⟶ Spec (.of k)} {p : S ⟶ X₀} {σ : Spec (.of k) ⟶ Spec (.of k₀)}
 
-/-- **A lift of a Frobenius contracts the local ring at a fixed rational point** (blueprint
-`corollary-contracting-local-terms-point`, proof of item 3): let `S = X₀ ×_{k₀} k` with projections
+/-- **A lift of a Frobenius contracts the local ring at a fixed rational point**: let `S = X₀ ×_{k₀}
+k` with projections
 `p`, `a`, let `h` be a `k`-endomorphism of `S` with `h ≫ p = p ≫ G` for a `#k₀ ^ m`-power Frobenius
 `G` of `X₀`, `m ≥ 1`, and let `x` be a `k`-rational point of `S` fixed by `h`. Then the stalk map
 of `h` at `x` sends the maximal ideal of `𝒪_{S,x}` into its square. -/
@@ -92,7 +91,7 @@ theorem map_maximalIdeal_stalkMap_le_sq_of_isFrobenius (hp : IsPullback p a f₀
   have : IsLocalHom π.hom := isLocalHom_of_le_jacobson_bot I (by
     rw [jacobson_eq_maximalIdeal ⊥ bot_ne_top]
     exact Ideal.pow_le_self two_ne_zero)
-  -- the structure map `α : k ⟶ R` and the evaluation `ev : R ⟶ k` at `x`
+  -- the structure map `α: k ⟶ R` and the evaluation `ev: R ⟶ k` at `x`
   let α : CommRingCat.of k ⟶ R := Spec.preimage (t ≫ a)
   have hα : Spec.map α = t ≫ a := Spec.map_preimage _
   let ev : R ⟶ CommRingCat.of k := Scheme.stalkClosedPointTo x

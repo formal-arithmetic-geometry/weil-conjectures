@@ -25,20 +25,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Descended representative components cover and have disjoint images.
 
-Source: Stacks Project, Tag 03SF, finite Galois-cover classification.
-Proof: pull back to the finite faithfully flat cover D(h) -> D(ι g). The
-splitting pulled back along k identifies the cover with d labelled copies of D(h).
-For the exact stabilizer K i, the puncture of its invariant ring is the quotient
-D(h)/K i. The section equation identifies the pulled-back image of f i with exactly
-the labels in the orbit of r i: translating the chosen section gives all those
-labels, and the quotient has precisely that orbit as geometric fibre. Completeness
-therefore covers every labelled copy. Distinctness makes two different component
-images disjoint, since intersecting orbits coincide. Surjectivity of the faithfully
-flat cover detects both coverage and disjointness downstairs. The factorization of
-p through D(g) ensures the whole base change lies over D(ι g), so no points outside
-the puncture remain. If d = 0, there are no labelled copies and both conclusions
-hold for the empty scheme; the representative map forces m = 0.
-(blueprint: lem-sbc-affine-torsor-representative-component-cover) -/
+Source: Stacks Project, Tag 03SF, finite Galois-cover classification. -/
 theorem affine_torsor_representative_component_cover
     (R H : CommRingCat.{u}) (g : R) (ι : R →+* H)
     (C : Type u) [CommRing C] [Algebra H C] [IsDomain C]

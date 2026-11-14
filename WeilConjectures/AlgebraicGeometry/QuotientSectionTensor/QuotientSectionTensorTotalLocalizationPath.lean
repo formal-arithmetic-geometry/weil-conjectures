@@ -65,8 +65,7 @@ tensor localization normalization with scalar normalization on the total tensor,
 counit naturality, naturality of the derived scalar comparison on the internal
 localization tensor map, and naturality of the section localization comparison.
 This gives the normalized total path, before applying TensorNormalized or the
-section tensor representative equation.
-(blueprint: lem-sfb-quotient-section-tensor-total-localization-path). -/
+section tensor representative equation. -/
 theorem section_tensor_total_localization_path (T : Scheme.{u})
     (c : ScalarSectionData a T) (hc : ScalarSectionNormalized a T c)
     (P Q : CochainComplex (Modules Λ T) ℤ)

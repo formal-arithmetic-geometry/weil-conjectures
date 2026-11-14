@@ -23,18 +23,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The first structure-sheaf cohomology of a depth-three puncture vanishes.
 
-Source: Stacks Project, Tag 0BK0 (Lemma 51.8.2) and Tag 0AVY (Lemma 47.11.1).
-(blueprint: lem-sbc-depth-three-puncture-h-one)
-
-Proof: Apply the affine local-cohomology comparison to Spec R with support
-in its closed point, whose defining ideal is the maximal ideal. Since an
-associated quasi-coherent sheaf on Spec R has no positive cohomology, the
-comparison gives H^1(W,O_W) = H^2_m(R). The depth hypothesis and 0AVY make
-the latter zero. The unit module has underlying additive sheaf O_W, so its
-Modules.H is exactly the cohomology in this comparison. Vanishing means
-that every element equals zero, which gives Subsingleton. No completeness
-or regularity hypothesis is used. The assertion includes the empty open:
-its sheaf cohomology is zero. -/
+Source: Stacks Project, Tag 0BK0 (Lemma 51.8.2) and Tag 0AVY (Lemma 47.11.1). -/
 theorem depth_three_puncture_h_one
     (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R]
     (hdepth : (3 : ℕ∞) ≤ IsLocalRing.depth (R := R) R)

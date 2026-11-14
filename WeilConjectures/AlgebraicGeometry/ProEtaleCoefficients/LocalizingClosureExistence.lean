@@ -19,10 +19,6 @@ import Mathlib.CategoryTheory.Limits.Shapes.Opposites.Products
 /-!
 # Existence and thickness of the localizing closure
 
-Source: blueprint main-20261015, sec-proetale-coefficients/sk-def-localizing-closure,
-node definition-localizing-subcategory--1, clauses (1)--(3)
-(blueprint: definition-localizing-subcategory--1).
-
 Coefficients are arbitrary condensed rings, including noncommutative rings. The
 module category is Mathlib's category of internal left modules over the actual
 pulled-back ring object. Index sets live in `Type (u + 1)`; the larger universe
@@ -123,34 +119,7 @@ sums, including the connecting map into the shifted first vertex.
 predicate asks for closure under all existing coproducts in the object universe.
 Here this agrees with closure under `Type (u + 1)`-indexed coproducts, since the
 Hom types live in that universe: an existing larger coproduct has only that
-many nonzero summands. The generating class `S` need not be small.
-
-Source: blueprint main-20261015, sec-proetale-coefficients/sk-def-localizing-closure,
-node definition-localizing-subcategory--1, clauses (1)--(3)
-(blueprint: definition-localizing-subcategory--1).
-
-Proof:
-1. The source theorem `Mod.isGrothendieckAbelian` applies directly to internal
-left modules, without commutativity: abelian sheaves are Grothendieck and their
-closed tensor preserves colimits. This avoids reconstruction of sectionwise rings.
-2. Grothendieck categories have K-injective resolutions. Apply
-`derived_hasCoproducts` and `isColimit_mapCocone_grothendieckSum`. The explicit
-termwise cocone has a colimit cocone in each degree, including for the empty family.
-3. Use `productTriangle_distinguished` in the opposite category, then transport
-back through `triangleOpEquivalence`. Its three vertices are coproducts because
-they are the opposites of the corresponding products; the unit isomorphisms of
-the equivalence have identity vertex components. This includes the empty family.
-4. Prove the intersection is replete, contains zero, and is closed under shifts,
-extensions and all existing coproducts by testing each defining predicate.
-Containment of S and minimality follow immediately from the intersection formula.
-5. Lift any small index type to the ambient object universe to obtain coproduct
-closure in Mathlib's object-property API. Thus the full subcategory has small
-coproducts and is idempotent complete by
-`isIdempotentComplete_of_countableCoproducts`. A retract of one of its objects
-splits the same idempotent as an object of this full subcategory. The explicit
-isomorphism between the two splittings, and repleteness, put the retract in it.
-6. For S ≤ S' ≤ Loc(S), the intersection formulas give both inclusions between
-Loc(S) and Loc(S'), so antisymmetry gives equality. -/
+many nonzero summands. The generating class `S` need not be small. -/
 theorem localizingClosure_exists
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ]
     (X : Scheme.{u})

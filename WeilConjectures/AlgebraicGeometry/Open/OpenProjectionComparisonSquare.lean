@@ -17,10 +17,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-!
 # Site transport of the open projection formula
-Source: Stacks Project, `proetale.tex`, Tag 09AF, `lemma-jshriek-comparison`,
-combined with `sites-cohomology.tex`, Tag 0GL1, `lemma-j-shriek-and-tensor`.
+Source: Stacks Project, Tag 09AF, Tag 0GL1.
 The derived statement and its K-flat normalization follow the blueprint item
-`lem-pur-open-projection-site-transport` (blueprint: lem-pur-open-projection-site-transport).
+`lem-pur-open-projection-site-transport`.
 -/
 
 @[expose] public section
@@ -39,23 +38,7 @@ namespace AlgebraicGeometry.ProEtale
 unbounded derived objects. The two displayed composites use the fixed adjoint-normalized
 extension comparison, the tensor comparison of exact comparison pullback, and the
 exact-to-left-derived restriction comparisons.
-Source: Stacks Project, proetale.tex, Tag 09AF, lemma-jshriek-comparison; and
-sites-cohomology.tex, Tag 0GL1, lemma-j-shriek-and-tensor.
-Proof: First apply the unit normalization of the ordinary open comparison. Replace
-restriction by the canonically isomorphic inverse-image functor on both sites, and
-cancel the restriction isomorphisms; this says that the inverse extension comparison
-is the mate of the inverse inverse-image square. Derive this mate equality using the
-termwise derived adjunctions. The mixed tensor comparison used to define the projection
-map is obtained from the left-derived tensor comparison by replacing its first
-left-derived restriction with exact termwise restriction. Compatibility of the
-left-derived tensor comparisons with the comparison inverse-image square, followed by
-these exact-to-derived isomorphisms, gives compatibility of the mixed comparisons.
-Apply Adjunction.projectionMap_mate to the two derived open adjunctions with these
-mixed comparisons and the comparison tensor isomorphisms. Postcompose with the tensor
-of the extension comparison and cancel its inverse. Naturality and reassociation give
-precisely the two composites displayed below. This argument uses no boundedness or
-local freeness; it also applies to zero objects, an empty open, and the zero ring.
-(blueprint: lem-pur-open-projection-comparison-square). -/
+Source: Stacks Project, Tag 09AF; Tag 0GL1. -/
 theorem openProjectionTransport_projection_square
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {U X : Scheme.{u}}
     (j : U ⟶ X) [IsOpenImmersion j]

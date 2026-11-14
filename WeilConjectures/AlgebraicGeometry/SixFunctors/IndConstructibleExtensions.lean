@@ -22,10 +22,6 @@ import Mathlib.Order.CompletePartialOrder
 /-!
 # Extensions of ind-constructible module sheaves
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-ind-heart,
-`sk-prop-ind-heart-extensions.md` and its proof (blueprint:
-proposition-ind-constructible-sheaves--7).
-
 The two coefficient cases use the existing finite constant-model constructibility predicate.
 IndCons is `ObjectProperty.ind.{u + 1}` in the internal-module category itself, with small
 filtered presentations and closure under isomorphisms. No abstract ind-category replaces
@@ -44,9 +40,7 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- Surjectivity of the degree-one Hom comparison descends each Ext class to one stage.
-Source: blueprint extension proof, Pullback to C_alpha
-(blueprint: proposition-ind-constructible-sheaves--7). -/
+/-- Surjectivity of the degree-one Hom comparison descends each Ext class to one stage. -/
 private theorem ext_stage_of_comparison
     {A : Type w} [Category.{u + 1} A] [Abelian A]
     [HasDerivedCategory.{u + 1} A] [HasExt.{u + 1} A]
@@ -83,9 +77,7 @@ private theorem ext_stage_of_comparison
   rw [Equiv.apply_symm_apply]
   exact he'
 
-/-- A pushout of a finite-stage extension is a filtered colimit of constructible extensions.
-Source: blueprint extension proof, Colimit over beta-prime
-(blueprint: proposition-ind-constructible-sheaves--7). -/
+/-- A pushout of a finite-stage extension is a filtered colimit of constructible extensions. -/
 private theorem ind_pushout_extension
     {A : Type w} [Category.{u + 1} A] [Abelian A]
     (P : ObjectProperty A) [P.IsClosedUnderExtensions]
@@ -113,8 +105,7 @@ private theorem ind_pushout_extension
   exact P.prop_X₂_of_shortExact hE (hp j.right) hC
 
 /-- Filtered-colimit closures of finitely presentable extension-closed objects are extension closed.
-Source: Stacks Project, Homology, Tag 010I and Categories, Tag 002V
-(blueprint: proposition-ind-constructible-sheaves--7).
+Source: Stacks Project, Homology, Tag 010I and Categories, Tag 002V.
 The proof uses the stated degree-one Ext descent hypothesis. It presents the quotient
 and pulls back the short exact sequence; degree-one Ext
 continuity descends each pullback extension to a finitely presentable stage, and exact
@@ -195,28 +186,7 @@ private theorem ind_extension_of_finitelyPresentable
   rwa [ObjectProperty.ind_ind hfp] at hM
 
 /-- Extensions of ind-constructible sheaves with finite field coefficients are
-ind-constructible. Source: blueprint proposition-ind-constructible-sheaves--7, with the Noetherian
-setting of proposition-ind-constructible-sheaves--7 (blueprint:
-proposition-ind-constructible-sheaves--7).
-
-Proof:
-1. The existing ambient sheaf and module instances make the category Grothendieck abelian.
-2. Present the kernel and quotient by small filtered diagrams of constructibles. Pull back
-along the quotient stages. Exactness is verified by the exact-up-to-refinements criterion.
-3. Apply constructible-sheaf Ext continuity in degree one to the kernel presentation.
-4. Every element of a filtered colimit of abelian groups comes from one stage. The existing
-Ext-one classification represents it by a short exact sequence; pushout and Ext naturality
-identify its pushout with the pullback extension, up to an endpoint-fixed isomorphism.
-5. The filtered undercategory of a kernel stage has final projection to the index category;
-its induced under-cocone is colimiting by Mathlib IsColimit.underPost.
-6. Push out the finite-stage extension over this undercategory. Constructible extension
-closure, supplied by lemma-constructible-sheaves, makes every stage constructible.
-7. Cobase change preserves colimits, and the undercategory forgetful functor preserves
-connected colimits. Their composite exhibits the pushout as the required ind-presentation.
-8. Exact filtered colimits commute with the quotient-stage pullbacks by Mathlib
-IsColimit.pullbackOfHasExactColimitsOfShape. Finite presentability, supplied by
-proposition-ind-constructible-sheaves, and ObjectProperty.ind_ind flatten this ind-of-ind
-presentation to an ind-constructible presentation. -/
+ind-constructible. -/
 theorem indConstructible_of_shortExact
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X]
@@ -250,16 +220,7 @@ theorem indConstructible_of_shortExact
     X C hC pres.diag (Cocone.mk N pres.ι) pres.isColimit 1
 
 /-- Extensions of ind-constructible sheaves with condensed algebraic-closure coefficients
-are ind-constructible. Source: blueprint proposition-ind-constructible-sheaves--7, with the
-Noetherian setting of proposition-ind-constructible-sheaves--7 (blueprint:
-proposition-ind-constructible-sheaves--7).
-
-Proof: use the same eight-step extension-class and filtered-pushout argument as the
-finite-field coefficient theorem. Constructible extension closure and finite presentability
-are supplied by the algebraic-closure clauses of the same existing declarations. Apply
-constructible-sheaf Ext continuity with algebraic-closure coefficients; its auxiliary finite
-intermediate field can be the bottom field. This does not change the coefficient category
-or impose an additional hypothesis on the extension. -/
+are ind-constructible. -/
 theorem indConstructible_of_shortExact_padicAlgCl
     (ℓ : ℕ) [Fact ℓ.Prime]
     (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X]

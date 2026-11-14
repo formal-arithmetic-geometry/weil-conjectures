@@ -21,7 +21,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.DepthTwoFiniteExtensionUnique
 # Flatness of a finite depth-two extension on a power-series spectrum
 
 Source: Stacks Project, Tag 0EYA and the last completion step of Tag 0EYB.
-(blueprint: lem-sbc-power-series-test-finite-extension-flat)
 -/
 
 @[expose] public section
@@ -32,20 +31,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- A finite depth-two extension on a power-series spectrum is flat.
 
-Source: Stacks Project, Tag 0EYA; Tag 0EY6(2),(a),(b); Tag 0337.
-(blueprint: lem-sbc-power-series-test-finite-extension-flat)
-
-Proof: Put T = Spec B[[X_1,...,X_n]]. At every point of T outside V the map from
-B is flat and local. The flat local depth formula (0337) gives depth at least two
-on T there. The two assumptions on V are exactly those of 0EYA: V contains all primes
-not over the maximal ideal of B and the prime extended from that maximal ideal.
-That lemma extends r restricted to V to a finite etale scheme over T. Uniqueness of
-the finite depth-two extension (0EY6(2)) identifies this etale extension with F:
-both restrict to the same cover and have depth at least two at boundary points.
-For the etale extension this depth bound follows again from the flat local depth
-formula. Thus r is etale, hence flat.
-This calculation does not use smoothness, a closed fibre point, or a section.
-If the cover is empty so is F; if V is all of T no extension is needed. -/
+Source: Stacks Project, Tag 0EYA; Tag 0EY6(2), (a), (b); Tag 0337 -/
 theorem flat_of_power_series_depth_two_finite_extension
     (B : Type u) [CommRing B] [IsLocalRing B] [IsNoetherianRing B]
     (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth (R := B) B)

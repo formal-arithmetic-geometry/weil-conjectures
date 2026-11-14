@@ -175,8 +175,7 @@ theorem mono_gmSheafToLowerStarGmSheaf_fromSpecFunctionField :
 /-- **The unit `𝔾ₘ ⟶ i_* i^* 𝔾ₘ` is a monomorphism**, the left exactness of the divisor
 sequence. Composed with `i_*` of the comparison map `i^* 𝔾ₘ ⟶ 𝔾ₘ` it is the restriction map
 `𝔾ₘ ⟶ i_* 𝔾ₘ` to the generic fibre, which is a monomorphism by
-`AlgebraicGeometry.Scheme.mono_gmSheafToLowerStarGmSheaf_fromSpecFunctionField`.
-(blueprint: `lemma-cohomology-multiplicative-group--8`, injectivity) -/
+`AlgebraicGeometry.Scheme.mono_gmSheafToLowerStarGmSheaf_fromSpecFunctionField`. -/
 theorem mono_toGenericGm : Mono X.toGenericGm := by
   have h := X.mono_gmSheafToLowerStarGmSheaf_fromSpecFunctionField
   have e : X.toGenericGm ≫ (Etale.lowerStar _ _).map
@@ -276,8 +275,7 @@ to `f` on the generic fibre of `U`. The local rings of `V` are regular, hence un
 factorisation domains, and a rational function of order zero along every height one prime of
 a unique factorisation domain is a unit
 (`AlgebraicGeometry.Scheme.Etale.exists_toLocalGenericRing_eq_of_ord_eq_zero`); such a unit of
-the local ring spreads out (`AlgebraicGeometry.Scheme.Etale.exists_eq_of_toLocalGenericRing_eq`).
-(blueprint: `lemma-cohomology-multiplicative-group--8`, exactness in the middle) -/
+the local ring spreads out (`AlgebraicGeometry.Scheme.Etale.exists_eq_of_toLocalGenericRing_eq`). -/
 lemma Etale.exists_eq_of_ord_eq_zero [IsLocallyNoetherian X] [IsRegular X] (V : X.Etale)
     (y : V.left) (f : Γ(pullback V.hom X.fromSpecFunctionField, ⊤)ˣ)
     (hf : ∀ y', Etale.ord V y' f = 0) :
@@ -291,8 +289,7 @@ lemma Etale.exists_eq_of_ord_eq_zero [IsLocallyNoetherian X] [IsRegular X] (V : 
 /-- **Local finiteness of divisors.** Let `X` be an integral regular locally noetherian scheme,
 `V` an étale `X`-scheme and `f` a unit on the generic fibre of `V`. Near every point of `V`, the
 points at which `f` has nonzero order lie over finitely many points of `X`: they are
-finitely many (`AlgebraicGeometry.Scheme.Etale.exists_opens_finite_ord_ne_zero`).
-(blueprint: `lemma-cohomology-multiplicative-group--8`, the divisor is a finite sum) -/
+finitely many (`AlgebraicGeometry.Scheme.Etale.exists_opens_finite_ord_ne_zero`). -/
 lemma Etale.exists_finset_of_ord_ne_zero [IsLocallyNoetherian X] [IsRegular X] (V : X.Etale)
     (y : V.left) (f : Γ(pullback V.hom X.fromSpecFunctionField, ⊤)ˣ) :
     ∃ (U : V.left.Opens) (_ : y ∈ U) (T : Finset X),
@@ -308,8 +305,7 @@ regular locally noetherian scheme, `x` a point of `X` of codimension one, `V` an
 `y` of `V` there is a unit on the generic fibre whose order is `c` at the points over `x` and `0`
 elsewhere. The local rings of `V` are regular, hence unique factorisation domains, so the height
 one primes of `𝒪_{V,y}` are principal
-(`AlgebraicGeometry.Scheme.Etale.exists_ord_eq_of_forall_ne`).
-(blueprint: `lemma-cohomology-multiplicative-group--8`, surjectivity) -/
+(`AlgebraicGeometry.Scheme.Etale.exists_ord_eq_of_forall_ne`). -/
 lemma Etale.exists_ord_eq_extendByZero [IsLocallyNoetherian X] [IsRegular X] (V : X.Etale)
     (y : V.left) {x : X} (hx : coheight x = 1)
     (c : ↥(pullback V.hom (X.fromSpecResidueField x)) → ULift.{u + 1} ℤ) :
@@ -597,7 +593,7 @@ instance : Mono (X.divisorsToPointFunctionSheaf c hc) :=
       c hc)
 
 /-- **The cokernel of `𝔾ₘ ⟶ i_* i^* 𝔾ₘ` is the sheaf of Weil divisors.** Let `X` be an
-integral regular locally noetherian scheme with generic point `i : Spec k(X) ⟶ X`. Then the
+integral regular locally noetherian scheme with generic point `i: Spec k(X) ⟶ X`. Then the
 cokernel of the unit `𝔾ₘ ⟶ i_* i^* 𝔾ₘ` is isomorphic to `⨁_{x ∈ X⁽¹⁾} i_{x*} ℤ`, the vertex
 of any colimit cocone `c` on the family `x ↦ i_{x*} ℤ`, by an isomorphism induced by the
 divisor map `f ↦ ∑_x ord_x(f) [x]`: composed with extension by zero
@@ -610,7 +606,7 @@ points, by the divisor map and by extension by zero. On geometric stalks the sec
 injective, the two maps have the same image (local finiteness and local principality of
 divisors) and the kernel of the first is the image of `𝔾ₘ` (local algebraic Hartogs), so the
 cokernel is identified by `AlgebraicGeometry.Scheme.exists_cokernel_iso_hom_comp_eq_of_sheafFiber`.
-(blueprint: `lemma-cohomology-multiplicative-group--8`, exactness in the middle and surjectivity) -/
+-/
 theorem exists_cokernel_toGenericGm_iso_hom_comp_eq :
     ∃ (w : X.toGenericGm ≫ X.genericGmIso.hom ≫ X.divisorMap = 0)
       (e : cokernel X.toGenericGm ≅ c.pt),
@@ -662,7 +658,7 @@ lemma toGenericGm_comp_divisorSequenceMap :
     divisorSequenceMap_comp, w, zero_comp]
 
 /-- **The divisor sequence.** Let `X` be an integral regular locally noetherian scheme with
-generic point `i : Spec k(X) ⟶ X`, and let `X⁽¹⁾` be its set of coheight-one points. Then
+generic point `i: Spec k(X) ⟶ X`, and let `X⁽¹⁾` be its set of coheight-one points. Then
 
 ```
   0 ──▶ 𝔾ₘ ──unit──▶ i_* i^* 𝔾ₘ ──div──▶ ∐_{x ∈ X⁽¹⁾} i_{x*} ℤ ──▶ 0
@@ -673,8 +669,7 @@ colimit cocone `c` on the family `x ↦ i_{x*} ℤ`, the first map is the unit
 `AlgebraicGeometry.Scheme.toGenericGm` and `div` is the divisor map
 `AlgebraicGeometry.Scheme.divisorSequenceMap`, `f ↦ ∑_x ord_x(f) [x]`. The unit is a
 monomorphism by `AlgebraicGeometry.Scheme.mono_toGenericGm`, and `div` identifies its cokernel
-with `c.pt` by `AlgebraicGeometry.Scheme.exists_cokernel_toGenericGm_iso_hom_comp_eq`.
-(blueprint: `lemma-cohomology-multiplicative-group--8`) -/
+with `c.pt` by `AlgebraicGeometry.Scheme.exists_cokernel_toGenericGm_iso_hom_comp_eq`. -/
 theorem shortExact_divisorSequence :
     (ShortComplex.mk X.toGenericGm (X.divisorSequenceMap c hc)
       (X.toGenericGm_comp_divisorSequenceMap c hc)).ShortExact := by
@@ -692,16 +687,14 @@ include hc in
 /-- **The cokernel of `𝔾ₘ ⟶ i_* i^* 𝔾ₘ` is the sheaf of Weil divisors**, as an isomorphism
 `cokernel (𝔾ₘ ⟶ i_* i^* 𝔾ₘ) ≅ ⨁_{x ∈ X⁽¹⁾} i_{x*} ℤ`; see
 `AlgebraicGeometry.Scheme.exists_cokernel_toGenericGm_iso_hom_comp_eq` for its compatibility
-with the divisor map.
-(blueprint: `lemma-cohomology-multiplicative-group--8`, exactness in the middle and surjectivity) -/
+with the divisor map. -/
 theorem nonempty_cokernel_toGenericGm_iso : Nonempty (cokernel X.toGenericGm ≅ c.pt) :=
   let ⟨_, e, _⟩ := X.exists_cokernel_toGenericGm_iso_hom_comp_eq c hc
   ⟨e⟩
 
 include hc in
 /-- The divisor sequence of `AlgebraicGeometry.Scheme.shortExact_divisorSequence`, with the
-divisor map forgotten.
-(blueprint: `lemma-cohomology-multiplicative-group--8`) -/
+divisor map forgotten. -/
 theorem exists_shortExact_divisorSequence :
     ∃ (d : X.genericGm ⟶ c.pt) (w : X.toGenericGm ≫ d = 0),
       (ShortComplex.mk X.toGenericGm d w).ShortExact :=
@@ -780,7 +773,7 @@ theorem epi_lowerStar_map_cokernelπ_upperStar_gmSheaf [IsNoetherian X] [IsRegul
 
 /-- **Grothendieck's residue injection for the Brauer group.** Let `X` be an integral regular
 noetherian scheme with function field `k(X)`. Then the pullback along the generic point
-`i : Spec k(X) ⟶ X`
+`i: Spec k(X) ⟶ X`
 
 ```
    Spec k(X) ──── i ────▶ X            H²(X_ét, 𝔾ₘ)
@@ -798,8 +791,6 @@ The map factors as `H²(X, 𝔾ₘ) ⟶ H²(X, i_* i^* 𝔾ₘ) ⟶ H²(Spec k(X
 `i^* ⊣ i_*` followed by the edge map of the Leray spectral sequence of `i`. The first map is
 injective by the long exact cohomology sequence of the divisor sequence, since
 `H¹(X, ⨁_x i_{x*} ℤ) = 0`; the second is injective since `R¹i_*(i^* 𝔾ₘ) = 0`.
-(blueprint: `lemma-cohomology-multiplicative-group--8`, and the subsection statement
-`lemma-cohomology-multiplicative-group--8`)
 -/
 theorem injective_cohomologyMap_gmSheaf_two [IsNoetherian X] [IsRegular X] :
     Function.Injective (Etale.cohomologyMap X.fromSpecFunctionField X.gmSheaf 2) := by

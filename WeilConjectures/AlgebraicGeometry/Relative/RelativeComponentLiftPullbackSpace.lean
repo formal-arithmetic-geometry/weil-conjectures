@@ -13,9 +13,8 @@ import WeilConjectures.Topology.InverseImageStalk
 /-!
 # The relative component lift as a locally ringed topological pullback
 
-Source: Bhatt--Scholze, The pro-etale topology for schemes, Lemma 2.2.8,
-its more precise statement and finite-stage proof
-(blueprint: lem-sfb-relative-component-lift-pullback-space).
+Source: Bhatt--Scholze, The pro-etale topology for schemes, Lemma 2.2.8, its more precise statement
+and finite-stage proof.
 
 The two functors are the witnesses of the recorded construction theorems. Their
 universal and geometric characterizations determine them up to unique isomorphism
@@ -100,8 +99,7 @@ set_option backward.isDefEq.respectTransparency false in
 Its topological space is the subspace pullback, its structure sheaf is the inverse
 image under the first projection, and its components are the second coordinate.
 
-Source: Bhatt--Scholze, Lemma 2.2.8, its more precise statement and proof, printed p. 10
-(blueprint: lem-sfb-relative-component-lift-pullback-space).
+Source: Bhatt--Scholze, Lemma 2.2.8, its more precise statement and proof, printed p. 10.
 
 Proof for stage 3.
 1. The affine component-site construction gives the topological pullback with inverse-image

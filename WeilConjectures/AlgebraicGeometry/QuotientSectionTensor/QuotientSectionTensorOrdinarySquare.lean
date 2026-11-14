@@ -218,8 +218,7 @@ attribute [local irreducible] ordinaryTensorComparison Mod.extendRestrictAdjunct
 Source: Stacks, Cohomology on Sites, Tags 06YY and 07A4.
 Compare maps after the scalar and tensor coequalizer projections. Linearity reduces
 this to scalar-unit pure tensors, where the internal monoidal normalization and
-the two section normalization formulas agree by naturality of the tensor pairing.
-(blueprint: lem-sfb-quotient-section-tensor-ordinary-square). -/
+the two section normalization formulas agree by naturality of the tensor pairing. -/
 theorem section_tensor_ordinary_scalar_square (T : Scheme.{u})
     (c : ScalarSectionData a T) (hc : ScalarSectionNormalized a T c)
     (e : (Functor.postcompose₂.obj c.model.E).obj (curriedTensor (modules Λ T)) ⟶

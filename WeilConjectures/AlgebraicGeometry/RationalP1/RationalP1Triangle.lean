@@ -28,9 +28,6 @@ public import WeilConjectures.AlgebraicGeometry.RationalP1.Tate.RationalTatePull
 public import WeilConjectures.AlgebraicGeometry.RationalP1.Ambient.RationalP1AmbientComposites
 
 /-! # Triangle identities for the rational projective line
-
-Source: blueprint main-20261015, rational projective-line adjunction, triangle identities
-(blueprint: proposition-projective-line-rational-coefficients).
 -/
 
 @[expose] public noncomputable section
@@ -52,17 +49,14 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
 /-- Integration along the first or second projection, with its canonical source normalization.
-Source: blueprint triangle identities, both displayed right sides
-(blueprint: proposition-projective-line-rational-coefficients). -/
+-/
 def diagonalIntegral (Y : Scheme.{u}) (L : ∀ X : Scheme.{u}, Modules Λ X)
     (d : Diagram Λ Y L) (i : Fin 2) : unit Λ (ProjectiveLine Y) ⟶
       unit Λ (ProjectiveLine Y) :=
   if i = 0 then d.support₁.hom ≫ d.R₁.R.map d.delta ≫ d.trace₁
   else d.support₂.hom ≫ d.R₂.R.map d.delta ≫ d.trace₂
 
-/-- Identity tensor the normalized diagonal integral, using the coefficient right unitor.
-Source: blueprint triangle identities, both displayed right sides
-(blueprint: proposition-projective-line-rational-coefficients). -/
+/-- Identity tensor the normalized diagonal integral, using the coefficient right unitor. -/
 def diagonalIntegralAction (Y : Scheme.{u}) (L : ∀ X : Scheme.{u}, Modules Λ X)
     (d : Diagram Λ Y L) (i : Fin 2) (M : DerivedCategory (Modules Λ (ProjectiveLine Y))) :
     M ⟶ M :=
@@ -192,37 +186,6 @@ unit/Chern traces, as specified by `Reference`; it is not an arbitrary `Family`.
 The completion, cycle-system and limit hypotheses are exactly the input of
 `diagonalTower_coefficients`. Its base-change theorem identifies the traces
 for q and its two pullbacks used in the kernel calculations below.
-Source: blueprint main-20261015, rational projective-line triangle statement and proof
-(blueprint: proposition-projective-line-rational-coefficients).
-
-Proof:
-1. Use the original derived pullback/direct-image adjunctions, the canonical exchange,
-proper projection formula and composition comparisons to expand the unit and counit
-(proposition-projective-line-rational-coefficients--1). The ringed-topos comparison retains these
-maps, and relative projective-space properness applies to q and both projections.
-2. The two Kunneth factorizations (lem-sfb-ringed-kunneth-factorizations) and
-projection/exchange coherence rewrite the first triangle as direct image of identity
- tensor trace-p1 composed with direct image of the diagonal class. Trace base change
-(proposition-ell-adic-cycle-class-diagonal) and section normalization
-(lem-sfb-ringed-projection-tensor-composition) give exactly the first displayed integral.
-3. For M = q* K(1)[2], the pulled-back K factors agree on the self-product. Exchange/tensor
-coherence and trace base change rewrite the second triangle as identity tensor the p2
-trace, after the inverse p2 projection and the diagonal class.
-4. The two diagonal tensor comparisons have the same identity transpose. Apply the p2
-section normalization and naturality in the class to obtain the second integral. Moving
-the outside shift two past any degree r contributes the sign (-1)^(2r) = 1.
-5. The integral trace identities (proposition-ell-adic-cycle-class-diagonal), extended to E and Qbar
-by proposition-ell-adic-cycle-class-diagonal, make both integrals identities. Tensoring and
-direct image preserve identities, for all unbounded objects in the localizing closures.
-6. Naturality and the triangles give inverse Hom maps a maps to epsilon composed with
-Rq*(a), and b maps to q*(b)(1)[2] composed with eta. They determine an adjunction with
-precisely these unit and counit.
-7. Identify Loc(Dctf) with Loc(Dbc) at rational coefficients. Properness identifies the
-trivial compactification's lower shriek with Rq*. Compactification coherence compares
-any chosen compactification to it. Transport the Brown adjunction along these canonical
-identifications. Uniqueness of right adjoints (proposition-sp-unique-adjoint--1) then gives
-q! isomorphic to q*(1)[2]. The equivalences below retain the ambient inclusions, so they
-are precisely the identifications of the two localizing closures.
 -/
 theorem rationalP1_triangle
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))

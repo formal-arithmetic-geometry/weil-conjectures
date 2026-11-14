@@ -45,9 +45,7 @@ import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 /-!
 # Classical pro-étale sheaves of modules
 
-Source: Weil conjectures blueprint, main-20261015, chap-The-pro-etale-site,
-`sk-thm-pe-classical-sheaves-modules`; Stacks Project, Tags 099T, 04JC and 03DA
-(blueprint: theorem-classical-sheaves-essential-image--1).
+Source: Stacks Project, Tags 099T, 04JC and 03DA.
 
 We use the fixed-coefficient `ModuleCat` encoding explicitly allowed by
 `def-weil-pbc-etale-sheaves`. The constant-ring action is the unique extension of
@@ -131,30 +129,7 @@ private theorem comparisonForgetIso_counit (X : Scheme.{u})
 /-- Comparison inverse image is exact and fully faithful on modules over any discrete
 commutative ring, with essential image the classical module sheaves and restriction
 as quasi-inverse.
-Source: Weil conjectures blueprint, main-20261015,
-`sk-thm-pe-classical-sheaves-modules`; Stacks Project, Tags 099T, 04JC and 03DA
-(blueprint: theorem-classical-sheaves-essential-image--1).
-
-Proof:
-1. Use the existing comparison adjunction for Grothendieck abelian coefficients,
-   specialized to modules. Its left adjoint already preserves finite limits and
-   finite colimits for every ring; no finite-coefficient hypothesis is needed.
-2. The forgetful functor from modules to sets preserves filtered colimits. The
-   comma categories computing the comparison Kan extension are filtered, so this
-   forgetful functor preserves those Kan extensions. It also preserves sheafification.
-   The canonical sheafPullbackForgetIso therefore identifies the underlying set
-   sheaf of module inverse image with set inverse image of the underlying sheaf.
-3. The canonical comparison respects the adjunction units. Compose its unit equation
-   with the inverse comparison. Apply the set adjunction Hom equivalence and the
-   two right triangle identities: the module counit, after forgetting and composing
-   with the inverse comparison, is exactly the set counit.
-4. Apply det-pe-classical-sheaves-image to the underlying set sheaf. The comparison
-   is invertible and forgetting modules reflects isomorphisms, so the set counit is
-   invertible exactly when the module counit is. This proves the classicality clause.
-5. The generic comparison unit theorem gives full faithfulness on module sheaves.
-   Its Hom equivalence gives the displayed bijectivity. Finally the fully faithful
-   adjunction criterion identifies invertibility of the counit with membership in
-   the essential image. Combine it with step 4 for the last clause. -/
+Source: Stacks Project, Tags 099T, 04JC and 03DA. -/
 theorem proEtaleClassicalSheavesModules (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] :
     ∃ (adj :
         comparisonUpperStar (ModuleCat.{u + 1} Λ) X ⊣

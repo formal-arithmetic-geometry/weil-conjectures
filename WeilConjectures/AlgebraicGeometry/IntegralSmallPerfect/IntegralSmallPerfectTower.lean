@@ -18,7 +18,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.PerfectRingComplexG
 
 /-! # Descending perfect coefficient towers to the scalar universe
 
-Source: Stacks Tags 064Z and 09C6; blueprint integral local structure, step 2.
+Source: Stacks Tags 064Z and 09C6
 -/
 
 @[expose] public noncomputable section
@@ -389,7 +389,7 @@ private theorem universal_arrow_of_isos
     Functor.map_comp, Category.assoc] using h
 
 /-- The actual scalar homomorphism on the lifted rings.
-Source: Stacks Tag 064Z (blueprint: lem-pe-integral-small-perfect-tower). -/
+Source: Stacks Tag 064Z. -/
 def uliftRingMap {A B : Type u} [CommRing A] [CommRing B] (q : A →+* B) :
     ULift.{u + 1} A →+* ULift.{u + 1} B :=
   ULift.ringEquiv.symm.toRingHom.comp (q.comp ULift.ringEquiv.toRingHom)
@@ -486,22 +486,7 @@ private theorem small_universal_arrow
   exact ⟨ξ, hξ⟩
 
 /-- Perfect coefficient levels and their universal quotient arrows descend to small modules.
-Source: Stacks Tags 064Z and 09C6; blueprint integral local structure, step 2
-(blueprint: lem-pe-integral-small-perfect-tower).
-
-Proof: choose bounded finite projective representatives of the perfect lifted complexes.
-Restrict their scalar actions along the inverse lifted-ring equivalence. Each finite
-module is small, so shrink the terms and lift the differentials through the fully faithful
-universe-lift functor. The chain-complex equations follow by faithfulness. Projectivity
-and finiteness transfer along the explicit linear equivalences. Bounded projective
-complexes are K-projective, so localization identifies their derived Hom sets with
-homotopy Hom sets. Full faithfulness of universe lift on complexes and homotopies
-therefore proves bijectivity on maps from perfect sources. Scalar restriction commutes
-with both ring-equivalence restriction and universe lift. Transport the universal arrows
-of the derived scalar adjunction through the ring equivalences and the chosen perfect
-representatives. Their Hom bijections descend using the preceding bijectivity, giving
-the small universal quotient arrows. No smallness assertion is made about arbitrary
-large modules, and no compatible choices of the representing isomorphisms are required. -/
+Source: Stacks Tags 064Z and 09C6. -/
 theorem smallPerfect_tower
     (A : ℕ → Type u) [∀ n, CommRing (A n)]
     (q : ∀ n, A (n + 1) →+* A n)

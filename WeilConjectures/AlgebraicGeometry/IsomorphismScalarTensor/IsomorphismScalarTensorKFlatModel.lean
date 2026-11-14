@@ -61,9 +61,8 @@ import all WeilConjectures.AlgebraicGeometry.IsomorphismScalarKFlatDescent.Isomo
 
 /-! # Coefficient-compatible K-flat tensor models under a scheme isomorphism
 
-Source: Bhatt--Scholze, Section 6.5, Lemma 6.5.9(4), and the agent calculation
-with the specified quotient towers
-(blueprint: lem-weil-isomorphism-scalar-tensor-kflat-model).
+Source: Bhatt--Scholze, Section 6.5, Lemma 6.5.9(4), and the agent calculation with the specified
+quotient towers.
 
 The index n means positive exponent n+1. Inverse image is the recorded sectionwise
 model, with its action transported by the completed or finite structure map.
@@ -220,46 +219,8 @@ end DerivedDescent
 /-- The completed and finite tensor comparisons, their quotient/transition squares,
 and their normalized descent to the ordinary unbounded derived categories.
 
-Source: Bhatt--Scholze, Section 6.5, Lemma 6.5.9(4) for completed pullback;
-the coefficient-extension calculation is the node's agent calculation, not a
-quoted assertion of Bhatt--Scholze
-(blueprint: lem-weil-isomorphism-scalar-tensor-kflat-model).
-
-Proof:
-1. Write j for completedCoefficientMap. Compose c_L g⁻¹(j_Y) and j_X c_E
-with every finite projection. Naturality of the constant coefficient comparisons
-(lem-weil-proetale-isomorphism-inverse-image), the defining equations of c_E,c_L
-(def-weil-inverse-image-pullback-comparison), and the same-index quotient maps
-(def-weil-integral-scalar-extension) give identical components. The limit
-universal property (def-pur-sheaf-inverse-limit) gives equality.
-2. Apply lem-weil-pbc-ringed-topoi-derived-tensor-pullback to (g⁻¹,c_E).
-It preserves K-flat complexes with flat terms. Apply lem-pur-kflat-change-of-rings
-to R_Y → S_Y and R_X → S_X to obtain the assertions for Q and Z.
-3. The sheafified balanced tensor comparison of
-lem-pur-isomorphism-inverse-image-tensor-hom sends c_L(s) tensor g⁻¹(p)
-to g⁻¹(s tensor p). Step 1 identifies the actions. Naturality in each term
-makes this a natural chain isomorphism; tensor with a coefficient ring in
-degree zero has differential d tensor 1 (def-pc-tensor-complex-sheaves).
-4. Reduce at level n+1. Balanced reassociation sends t tensor (a tensor p)
-to t*iota(a) tensor p; its inverse inserts 1 in the middle factor.
-Transport by c_E,c_L gives exactly the finite formula below, in both directions.
-These local maps descend through sheafification (def-pur-sheaf-tensor-product).
-5. Both routes around the quotient square send c_L(s) tensor g⁻¹(p)
-to g⁻¹(pi_L(s) tensor p). Both routes around a transition square send
-t tensor (a tensor p) to q_L(t)*iota(q_E(a)) tensor p. The coefficient
-projection equations and q_L*iota_(n+1)=iota_n*q_E identify the results,
-also for ramified extensions. Local tensor generation proves the equalities.
-6. Choose a flat-term K-flat resolution (lem-pc-kflat-resolution).
-Exact inverse image preserves its quasi-isomorphism, and step 2 makes its
-inverse image K-flat. The counits of lem-pur-derived-change-of-rings identify
-Q and Z with the specified ordinary derived extensions. Localize b_P.
-7. Naturality of the local formula gives b_P' (G_E(f) tensor 1) =
-G_L(f tensor 1) b_P, also on chain homotopies. Scalar extension preserves
-quasi-isomorphisms between K-flat complexes (lem-pur-derived-change-of-rings).
-The K-flat localization equivalence of lem-weil-pbc-site-derived-tensor-descent
-therefore descends b uniquely. Its normalized representative equation below
-implies independence under all canonical K-flat representative comparisons.
-No boundedness, completeness, or constructibility is used. -/
+Source: Bhatt--Scholze, Section 6.5, Lemma 6.5.9(4) for completed pullback; not a quoted assertion
+of Bhatt--Scholze. -/
 theorem isomorphism_scalar_tensor_kflat_model
     (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x))
     (_hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) :

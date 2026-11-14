@@ -12,9 +12,7 @@ import all WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedDirectImageSecti
 
 /-! # The local class of the derived-section unit
 
-Source: Stacks Project, Cohomology, Tag 01E4, lemma-describe-higher-direct-images,
-and Tags 0BKJ and 0D5X.
-(blueprint: lem-weil-pbc-local-hypercohomology-complex-unit-class).
+Source: Stacks Project, Cohomology, Tag 01E4, and Tags 0BKJ and 0D5X.
 -/
 
 @[expose] public section

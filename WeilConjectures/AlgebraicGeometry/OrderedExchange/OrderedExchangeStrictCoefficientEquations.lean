@@ -92,8 +92,7 @@ end DerivedSquares
 section OrdinaryPull
 
 /-- The ordinary constant augmentation followed by `ordinaryRho` is the restricted completed
-quotient unit, at every level. Source: Stacks 099M
-(blueprint: def-weil-pbc-ordered-coefficient-comparison-data). -/
+quotient unit, at every level. Source: Stacks 099M. -/
 theorem ordinaryAugmentation_ordinaryRho (T : Scheme.{t})
     (N : reductionModules T (d.completedRing T)) (n : ℕ) :
     ((ordinaryAugmentation d T).app ((reductionRestrict T (exchangeScalar d T)).obj N)).app
@@ -126,7 +125,7 @@ theorem ordinaryAugmentation_eq_unit (T : Scheme.{t})
   exact ((pbcScalarAdjunction_exists (quotient d T n)).exists.choose_spec L W x).symm
 
 /-- The ordinary constant reduction/pullback comparison preserves the ordinary augmentation.
-Source: Stacks 099M, 0D6D (blueprint: lem-sp-completion-mate-comparison). -/
+Source: Stacks 099M, 0D6D. -/
 theorem ordinaryAugmentation_ordinaryReductionPullIso {U V : Scheme.{t}} (u : U ⟶ V)
     (L : reductionModules V (exchangeConstantRing V A)) (n : ℕ) :
     (proEtaleRingModulePullback u (exchangeConstantRing V A) (exchangeConstantRing U A)
@@ -138,7 +137,7 @@ theorem ordinaryAugmentation_ordinaryReductionPullIso {U V : Scheme.{t}} (u : U 
   exact levelPullIso_unit d u n L
 
 /-- The ordinary core of the compatibility of `rho` with pullback, at one tower level.
-Source: Stacks 099M, 0D6D (blueprint: def-weil-pbc-ordered-coefficient-comparison-data). -/
+Source: Stacks 099M, 0D6D. -/
 theorem ordinaryRho_pull {U V : Scheme.{t}} (u : U ⟶ V)
     (M : reductionModules V (d.completedRing V)) (n : ℕ) :
     (reductionRestrict U (exchangeScalar d U)).map
@@ -519,11 +518,7 @@ theorem rhoNorm_gen (T : Scheme.{t}) :
   (rho_existsUnique d T).exists.choose_spec
 
 /-- Restriction of the strict reduction comparison `rho` is compatible with pullback.
-Source: Stacks 099M, 0D6D (blueprint: def-weil-pbc-ordered-coefficient-comparison-data).
-Proof: this is `rho_pull_generic` at the strict pro-étale towers. Its normalization
-hypotheses are `rhoNorm_gen` at `V` and `U`, the normalizations of
-`reductionTowerPullbackIso` and `reductionPullIso`, and `ordinaryRho_pull_tower`. Each
-heavy definitional comparison lives in its own declaration, which keeps the kernel cheap. -/
+Source: Stacks 099M, 0D6D. -/
 theorem rho_reductionTowerPullbackIso {U V : Scheme.{t}} (u : U ⟶ V) (M : d.derived V) :
     (exchangeTowerRes d U).map ((d.reductionTowerPullbackIso u).hom.app M) ≫
         (rho d U).hom.app ((d.pull u).obj M) ≫
@@ -577,7 +572,7 @@ private theorem mate_homEquiv
 
 /-- The restriction/direct-image comparison of strict towers is the mate of the
 restriction/pullback comparison, in adjunct form.
-Source: Stacks 0D6D, 0D6E (blueprint: lem-weil-pbc-strict-tower-exchange-mate-normalization). -/
+Source: Stacks 0D6D, 0D6E. -/
 theorem exchangeResPush_homEquiv {U V : Scheme.{t}} (u : U ⟶ V)
     (Z : DerivedCategory (d.towers V)) (W : DerivedCategory (d.towers U))
     (x : (d.towerPull u).obj Z ⟶ W) :
@@ -607,8 +602,7 @@ theorem exchangeResPush_homEquiv {U V : Scheme.{t}} (u : U ⟶ V)
   exact hm
 
 /-- Restriction of the integral derived counit is the constant derived counit, conjugated by
-`alpha` and `chi`. Source: Stacks 0D6D, 0D6E
-(blueprint: lem-weil-pbc-ring-sheaf-change-adjunction). -/
+`alpha` and `chi`. Source: Stacks 0D6D, 0D6E. -/
 theorem res_counit {U V : Scheme.{t}} (u : U ⟶ V) (K : d.derived U) :
     (res d U).map ((proEtaleRingDerivedAdjunction u (d.completedRing V) (d.completedRing U)
         (d.integralRingIso u)).counit.app K) =
@@ -639,8 +633,7 @@ theorem res_counit {U V : Scheme.{t}} (u : U ⟶ V) (K : d.derived U) :
     _ = _ := by rw [h3]
 
 /-- Restriction of the strict reduction comparison `rho` is compatible with the strict
-projection formula maps. Source: Stacks 099M, 0D6E
-(blueprint: def-weil-pbc-ordered-coefficient-comparison-data). -/
+projection formula maps. Source: Stacks 099M, 0D6E. -/
 theorem rho_towerProjection {U V : Scheme.{t}} (u : U ⟶ V) (K : d.derived U) :
     (exchangeTowerRes d V).map (d.towerProjection u K) ≫
         (exchangeResPush d u).hom.app ((completedReductionTower U d).obj K) ≫
@@ -679,8 +672,7 @@ theorem rho_towerProjection {U V : Scheme.{t}} (u : U ⟶ V) (K : d.derived U) :
 
 /-- The second strict coefficient equation: restriction of the strict realization `H`
 followed by `beta` is `rhoM` followed by the constant `H`.
-Source: Stacks 099M, 0D6D, 0D6E
-(blueprint: lem-weil-pbc-ordered-strict-coefficient-equations). -/
+Source: Stacks 099M, 0D6D, 0D6E. -/
 theorem exchangeRealizationH_beta (K : d.derived X) :
     (exchangeTowerRes d Y').map (exchangeRealizationH (f := f) (g := g) d K).hom ≫
         (beta (f := f) (g := g) d K).hom =
@@ -712,7 +704,7 @@ theorem exchangeRealizationH_beta (K : d.derived X) :
   rw [reassoc_of% hR]
 
 /-- The expanded form of `towerV'_delta`, after cancelling the strict projection `towerH`.
-Source: Stacks 099M, 0E48 (blueprint: lem-weil-pbc-ordered-strict-coefficient-equations). -/
+Source: Stacks 099M, 0E48. -/
 theorem towerV'_delta_expanded (sq : ChosenCartesianSquare g' f' f g) (K : d.derived X) :
     (exchangeTowerRes d Y').map ((d.reductionTowerPullbackIso g).hom.app ((d.push f).obj K)) ≫
       (exchangeTowerRes d Y').map
@@ -804,10 +796,7 @@ theorem towerV'_delta_expanded (sq : ChosenCartesianSquare g' f' f g) (K : d.der
 
 /-- The third strict coefficient equation: restriction of the strict exchange `towerV'`
 is the constant strict tower mate, conjugated by `beta` and `delta`.
-Source: Stacks 099M, 0E48 (blueprint: lem-weil-pbc-ordered-strict-coefficient-equations).
-Proof: cancel the strict projection `towerH`, move `rho` through both corners with
-`rho_reductionTowerPullbackIso` and `rho_towerProjection`, and conclude with the ambient
-equation `restriction_strictExchange` (whose two inputs are still open). -/
+Source: Stacks 099M, 0E48. -/
 theorem towerV'_delta (sq : ChosenCartesianSquare g' f' f g) (K : d.derived X) :
     (exchangeTowerRes d Y').map (d.towerV' sq K) ≫ (delta (f' := f') (g' := g') d K).hom =
       (beta (f := f) (g := g) d K).hom ≫
@@ -827,23 +816,7 @@ theorem towerV'_delta (sq : ChosenCartesianSquare g' f' f g) (K : d.derived X) :
 
 set_option linter.unusedVariables false in
 /-- strictCoefficientEquations: the indicated part of the ordered comparison argument.
-Source: blueprint completed-exchange-coherence, second proof paragraph;
-Stacks Tags 099M, 099N, 0A07 and 0E48.
-(blueprint: lem-weil-pbc-ordered-strict-coefficient-equations).
-Proof: the diagonal exact-adjunction comparison identifies the completed strict
-exchange with the reduction of the ambient mate. The perfect quotient projection
-maps are invertible, so conjugating gives the first formula. For the second,
-transpose the projection formula map under the ordinary ringed adjunction.
-Restriction identifies its counit with the constant counit, and quotient balancing
-sends each pure tensor to the same tensor. Apply the derived pullback and tensor
-comparison to this equation on the single strict quotient diagram. Tensor descent
-makes it an equality of derived tower morphisms. For the third, transpose the
-restricted strict exchange under the constant tower adjunction. Scalar restriction
-identifies both units and counits, and coefficient inverse image respects
-composition. The transpose is therefore the transpose defining the constant mate.
-Bijectivity of the adjunction correspondence gives the equation. Naturality for
-rho then gives exactly beta and delta at the reduced complete input. No claim of
-faithfulness of derived evaluation functors is used. -/
+Source: Stacks Tags 099M, 099N, 0A07 and 0E48. -/
 theorem strictCoefficientEquations (sq : ChosenCartesianSquare g' f' f g) :
     ∀ (K : d.derived X) (hK : d.TowerComplete X K),
       (d.towerV' sq K =

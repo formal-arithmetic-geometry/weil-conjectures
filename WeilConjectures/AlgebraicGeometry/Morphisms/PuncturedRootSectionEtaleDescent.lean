@@ -20,7 +20,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedRootLimitPresentatio
 # Descending a punctured root section to an etale neighbourhood
 
 Source: Stacks Project, Tags 0BSK and 05N9; Tag 0EYG, descent paragraph.
-(blueprint: lem-sbc-punctured-root-section-etale-descent)
 -/
 
 @[expose] public section
@@ -31,22 +30,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- A section over the punctured root ring of a strict henselization descends.
 
-Source: Stacks Project, Tags 0BSK and 05N9, and the descent paragraph of 0EYG.
-(blueprint: lem-sbc-punctured-root-section-etale-descent)
-
-Proof: Via beta the base change of pi is a finite etale cover of D(f), thus an affine
-scheme with coordinate algebra finitely presented over R[1/f]. The strict
-henselization is the filtered colimit of the rings of affine pointed etale
-neighbourhoods of barY. Formation of H[T]/(T^n-b(f)) and localization at b(f)
-commutes with this colimit. By 05N9 the algebra map representing the given section
-comes from some neighbourhood. Its finitely many relations, including the equation
-over Spec R, hold after advancing in the filtered system. The pointed map to that
-neighbourhood supplies z over y. The descended section composed with the projection to P
-has exactly the stated structure equation. No regularity, nonzerodivisor, positivity
-or invertibility assumption is needed: the root algebra and punctured root algebra
-are finitely presented for every f and n, including n=0. If the limit puncture is
-empty, its unit equation descends to make a finite-stage puncture empty as well.
-The hypothesis barY(Spec Omega)=y ensures pointedness. -/
+Source: Stacks Project, Tags 0BSK and 05N9, and the descent paragraph of 0EYG. -/
 theorem punctured_root_section_etale_descent
     {L U P : Scheme.{u}} (i : U ⟶ L) (π : P ⟶ U) [IsFinite π] [Etale π]
     (R : CommRingCat.{u}) (φ : Spec R ⟶ L) (f : R)

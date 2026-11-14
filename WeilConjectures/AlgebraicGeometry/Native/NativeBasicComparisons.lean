@@ -15,11 +15,6 @@ import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraLeftAdjunction
 
 /-! # Basic comparisons for native derived Weil sheaves
 
-Source: WeilSheaf/FiniteLeray.lean, `rightDerivedLowerStarCompIso`;
-WeilSheaf/LowerStarComp.lean and LowerStarId.lean; WeilSheaf/OpenImmersion.lean,
-exactness and constructibility of extension by zero.
-(blueprint: lem-sf-native-weil-basic-comparisons)
-
 The functors act on the ordinary derived categories of all pro-etale Weil sheaves.
 The constructible subcategory is exactly `WeilComplex.objectProperty`.
 -/
@@ -51,52 +46,8 @@ private noncomputable def nativeOpenAdjunction
 /-- Direct-image composition and identities, and exact open extension with its bounded
 constructibility and composition comparisons, in the native equivariant derived categories.
 
-Source: WeilSheaf/FiniteLeray.lean, `preservesKInjectiveComplexes_lowerStar` and
-`rightDerivedLowerStarCompIso`; LowerStarComp.lean, `lowerStarCompIso`;
-LowerStarId.lean, `lowerStarIdIso`; OpenImmersion.lean, exactness instances and
-`isAdicConstructibleSheaf_extensionByZero`.
-(blueprint: lem-sf-native-weil-basic-comparisons)
-
-Proof plan, in the order of the DAG proof:
-1. The twisted action-site presentation (`lem-sf-twisted-action-ringed-site`) makes the
-native category Grothendieck, with exact conservative carrier creating limits and colimits.
-`prop-pur-kinjective-resolutions-exist` supplies native K-injective resolutions.
-2. Write the locally finite function sheaf as the sheafified colimit of finite-extension
-continuous function sheaves. The canonical pullback maps for these are isomorphisms by
-`lem-weil-pbc-continuous-coefficient-general-pullback-isIso`. Inverse image preserves the
-colimit (`situation-conventions` and
-`def-weil-proetale-inverse-image`), so the canonical coefficient pullback is an isomorphism.
-3. The module adjunction (`lem-weil-pbc-ringed-topoi-module-adjunction`) consequently has
-exact left adjoint (`lem-weil-pbc-site-pullback-abelian-exact`). The unit and counit commute
-with Frobenius on the same pulled-back test and section; their mate is the actual framework
-comparison. Thus `lem-sf-fixed-pair-adjunction-lift` gives the native adjunction.
-4. Fibre-product identifications on test objects give the underived direct-image
-composition and identity isomorphisms and commute with the coefficient actions and Frobenius.
-5. The exact-left-adjoint criterion (`lem-weil-pbc-right-adjoint-preserves-kinjective`)
-shows that direct image preserves K-injectives. On one native K-injective resolution the
-composition comparison is the underived chain isomorphism. Total derivation and the Hom
-bijection (`lem-weil-pbc-kinjective-total-derived`, `def-sfb-right-derived-functor`,
-`lem-weil-pbc-kinjective-hom-derived`) make it natural on the full derived category.
-6. The same computation for the identity gives its derived identity comparison, without
-any bound or constructibility restriction.
-7. Localize the pro-etale site at the open (`lem-weil-proetale-weakly-etale-localization`).
-The exact module extension by zero of `lem-weil-pbc-ringed-sheaf-slice-adjunction` has the
-framework's carrier. Its unit and counit commute with Frobenius on sections, so the lifted
-native extension is exact, using the conservative carrier from step 1.
-8. Exact-functor descent (`situation-conventions`) gives precisely
-`mapDerivedCategory`. Its cohomology is extension by zero of the cohomology, so it preserves
-the finite cohomological interval.
-9. `lem-sf-native-weil-open-exact-constructible` supplies the framework's locally finite
-stratified constructibility for each cohomology sheaf. Together with step 8 it gives the
-bounded constructible assertion, with exactly `WeilComplex.objectProperty`.
-10. Successive open restrictions are restriction to the same open with the same Frobenius.
-The native extension/restriction adjunctions and
-`lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection` give natural successive-open and
-identity-open extension isomorphisms in the native sheaf categories.
-11. Descend these isomorphisms termwise using `lem-sfb-exact-derived-composition` and
-`lem-sfb-exact-derived-natural-iso`. The identity localization factorization of
-`def-weil-abstract-derived-category` gives the identity derived functor. All steps are local
-on the geometric-fibre sites and use no absolute separatedness.
+Source: LowerStarComp.lean, `lowerStarCompIso`; LowerStarId.lean, `lowerStarIdIso`;
+OpenImmersion.lean, exactness instances and `isAdicConstructibleSheaf_extensionByZero`.
 -/
 theorem nativeWeilBasicComparisons (k₀ : Type u) [Field k₀] [Finite k₀]
     (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] :

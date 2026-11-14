@@ -14,10 +14,8 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.QuasiFiniteFactorization
 /-!
 # Finitely presented Zariski main finite factorization
 
-Source: Stacks Project, More on Morphisms, Tag 0F2N,
-`lemma-quasi-finite-separated-pass-through-finite-addendum`, with the quasi-compact and
-quasi-separated finite factor made explicit
-(blueprint: lem-weil-pbc-quasifinite-fp-finite-factorization).
+Source: Stacks Project, More on Morphisms, Tag 0F2N, with the quasi-compact and quasi-separated
+finite factor made explicit.
 -/
 
 @[expose] public section
@@ -32,30 +30,7 @@ namespace AlgebraicGeometry
 quasi-separated scheme factors through a finite, finitely presented, quasi-compact,
 quasi-separated scheme by a quasi-compact open immersion.
 
-Source: Stacks Project, Tag 0F2N,
-`lemma-quasi-finite-separated-pass-through-finite-addendum`
-(blueprint: lem-weil-pbc-quasifinite-fp-finite-factorization).
-
-Proof plan:
-1. Local finite presentation implies local finite type. Apply
-   `thm-pqf-zmt-factorization` to obtain a quasi-compact open immersion into a finite
-   scheme `T₀` over `S`.
-2. By `lem-weil-pbc-finite-closed-fp-approximation`, write `T₀` as a directed inverse
-   limit of finite, finitely presented `S`-schemes with closed transition maps.
-3. Finite morphisms are affine. Apply `lem-weil-pbc-affine-morphism-permanence` and
-   `lem-weil-pbc-qcqs-morphism-permanence` to see that the stages and `T₀` are qcqs,
-   and that `X` is quasi-compact.
-4. Closed transitions are affine by `lem-weil-pbc-closed-immersion-integral-separated-uc`.
-   Descend the quasi-compact open image of `X` using `pqf-lem-limit-qc-open-descends`.
-   The inverse images of this open form a limit presenting `X`; their transitions
-   remain closed immersions, since quotients remain quotients after localization.
-5. Each restricted stage is locally of finite type over `S`, by localizing finite-type
-   affine charts. Apply `lem-weil-pbc-closed-limit-lfp-stabilization` to identify `X`
-   with a sufficiently late open stage.
-6. Use that stage's finite ambient scheme as `T`. The restricted projection is over `S`,
-   giving `j ≫ p = f`. The stage is qcqs, and its structure map is finite and finitely
-   presented. Since `X` is quasi-compact and `T` quasi-separated,
-   `lem-weil-pbc-qcqs-morphism-permanence` gives quasi-compactness of `j`. -/
+Source: Stacks Project, Tag 0F2N. -/
 theorem Scheme.Hom.exists_qcqs_finitePresentation_factorization
     {X S : Scheme.{u}} (f : X ⟶ S) [IsSeparated f] (hq : f.IsQuasiFinite)
     [CompactSpace S] [QuasiSeparatedSpace S] [LocallyOfFinitePresentation f]

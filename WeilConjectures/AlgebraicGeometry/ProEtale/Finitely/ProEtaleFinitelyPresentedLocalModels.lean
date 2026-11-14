@@ -23,8 +23,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- On every site object there is a covering sieve with finitely presented constant
 module models on its members. This is the local clause of affine constructibility,
-without choosing a scheme stratification. Source: Stacks Project, Tags 09AJ and 093U
-(blueprint: def-sfb-proetale-fp-local-models). -/
+without choosing a scheme stratification. Source: Stacks Project, Tags 09AJ and 093U. -/
 def IsFinitelyPresentedLocallyConstantProEtaleModule {X : Scheme.{u}} {R : Type u} [CommRing R]
     (F : proEtaleRingModules X (proEtaleConstantRing X R)) : Prop :=
   ∀ V : X.ProEt, ∃ T : Sieve V, T ∈ ProEt.topology X V ∧

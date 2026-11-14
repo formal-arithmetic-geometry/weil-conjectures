@@ -11,9 +11,7 @@ public import Mathlib.AlgebraicGeometry.Limits
 
 /-! # Open base change of the direct image of the structure module
 
-Source: Stacks Project, Tags 008C and 0094, and the open-base-change
-calculation used in Tag 0EY6.
-(blueprint: lem-sbc-open-base-change-structure-module)
+Source: Stacks Project, Tags 008C and 0094, and the open-base-change calculation used in Tag 0EY6
 -/
 
 @[expose] public section
@@ -25,28 +23,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 set_option backward.isDefEq.respectTransparency false in
 /-- Restriction to an open chart commutes with the structure-module direct image.
 
-Source: Stacks Project, Tags 008C and 0094; Tag 0EY6, base-change identification.
-(blueprint: lem-sbc-open-base-change-structure-module)
-
-Proof: Base change f along t = j restricted to U and compose the resulting
-cover with W inclusion, where W = j inverse-image U. Pasting this square
-with the cartesian square defining t is a pullback square of g = f followed
-by U inclusion along j. In this pasted square, the first
-projection i is an open immersion with image g inverse-image of j image Y.
-For any open T of Y, the inverse-image of T under the second projection
-is carried isomorphically by i to g inverse-image of j image T. The maps
-of sections along i therefore give bijections between the two displayed
-modules' sections. Their compatibility with restriction follows from the
-naturality of i.c. For scalars, the square commutes: i followed by g equals
-the second projection followed by j. Apply the induced equality on sections,
-then the inverse of j's open-immersion structure-sheaf isomorphism. This
-proves that each section bijection is linear over the structure sheaf of Y.
-Assemble them into a morphism of presheaves of modules; its inverse is linear
-and natural by bijectivity, giving the sheaf-of-modules isomorphism.
-The algebra underlying module is definitionally the structure-module direct
-image, so the same isomorphism gives the statement. No finite, etale,
-Noetherian or depth hypothesis is used. Empty inverse-images also obey the
-section formula and give the zero module. -/
+Source: Stacks Project, Tags 008C and 0094; Tag 0EY6, base-change identification. -/
 theorem nonempty_open_base_change_structure_module_iso
     {Y L : Scheme.{u}} (j : Y ⟶ L) [IsOpenImmersion j]
     (U : L.Opens) {X : Scheme.{u}} (f : X ⟶ U.toScheme) :

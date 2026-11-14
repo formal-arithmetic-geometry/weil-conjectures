@@ -148,10 +148,6 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous
 
 /-! # Frobenius on quotient-coefficient corners and their strict completions
 
-Source: blueprint main-20261015, sec-proper-base-change/sk-prop-pbc-complete,
-lemma-weil-pbc-completed-map-reduction.proof.md, paragraph 4
-(blueprint: def-weil-pbc-quotient-corner-frobenius-structures).
-
 The quotient diagram is a ringed sequence site. All derived categories localize complexes
 of strict systems, before evaluating. Restriction retains the completed coefficient action.
 
@@ -173,8 +169,7 @@ open WeilConjectures
 namespace AlgebraicGeometry.Scheme
 namespace QuotientFrobenius
 
-/-- The original small pro-etale site keeps its actual object and morphism universes.
-Source: blueprint paragraph 4 (blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- The original small pro-etale site keeps its actual object and morphism universes. -/
 instance (priority := 2000) baseSmall (T : Scheme.{t}) : EssentiallySmall.{t + 1} T.ProEt :=
   essentiallySmallSelf.{0} T.ProEt
 
@@ -182,15 +177,13 @@ attribute [local instance 2100] WeilConjectures.sfAbSheafify
 
 attribute [local instance 2100] WeilConjectures.sfAbBijective
 
-/-- Sheafification in the fixed coefficient universe of the quotient diagram site.
-Source: blueprint paragraph 4 (blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- Sheafification in the fixed coefficient universe of the quotient diagram site. -/
 instance (priority := 2100) sequenceSheafify (T : Scheme.{t}) :
     HasSheafify (coefficientSequenceTopology (ProEt.topology T)) AddCommGrpCat.{t + 1} :=
   @SemilinearSections.abelianSheafify.{t + 1, t, t + 1} (ℕ × T.ProEt) _
     (essentiallySmallSelf.{0} _) _
 
-/-- The coefficient-sized local bijectivity criterion on the quotient diagram site.
-Source: blueprint paragraph 4 (blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- The coefficient-sized local bijectivity criterion on the quotient diagram site. -/
 instance (priority := 2100) sequenceLocallyBijective (T : Scheme.{t}) :
     (coefficientSequenceTopology (ProEt.topology T)).WEqualsLocallyBijective
       AddCommGrpCat.{t + 1} :=
@@ -199,50 +192,41 @@ instance (priority := 2100) sequenceLocallyBijective (T : Scheme.{t}) :
 
 variable {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 
-/-- The actual finite quotient transitions, with index n representing exponent n+1.
-Source: blueprint paragraph 4 (blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- The actual finite quotient transitions, with index n representing exponent n+1. -/
 abbrev transition (T : Scheme.{t}) (n : ℕ) :=
   (reductionCoefficientSystem T d).map (homOfLE (Nat.le_succ n)).op
 
-/-- Q_T is the ring of finite quotient sheaves on the strict sequence site.
-Source: blueprint paragraph 4 (blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- Q_T is the ring of finite quotient sheaves on the strict sequence site. -/
 abbrev quotientRing (T : Scheme.{t}) :
     Sheaf (coefficientSequenceTopology (ProEt.topology T)) CommRingCat.{t + 1} :=
   @SemilinearSections.systemRing.{t + 1, t, t + 1} T.ProEt _
     (essentiallySmallSelf.{0} T.ProEt) (ProEt.topology T)
     (d.finiteRing T) (transition d T)
 
-/-- Strict semilinear quotient systems; this is not a diagram category of derived objects.
-Source: blueprint paragraph 4 (blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- Strict semilinear quotient systems; this is not a diagram category of derived objects. -/
 abbrev modules (T : Scheme.{t}) : Type (t + 2) :=
   @SemilinearSections.Systems.{t + 1, t, t + 1} T.ProEt _
     (essentiallySmallSelf.{0} T.ProEt) (ProEt.topology T)
     (d.finiteRing T) (transition d T)
 
-/-- The ordinary unbounded derived category on the ringed quotient diagram site.
-Source: blueprint paragraph 4 (blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- The ordinary unbounded derived category on the ringed quotient diagram site. -/
 abbrev derived (T : Scheme.{t}) : Type (t + 2) :=
   @SemilinearSections.DS.{t + 1, t, t + 1} T.ProEt _
     (essentiallySmallSelf.{0} T.ProEt) (ProEt.topology T)
     (d.finiteRing T) (transition d T)
 
-/-- Exact quotient-linear evaluation, including the positive-level convention.
-Source: blueprint paragraph 4 (blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- Exact quotient-linear evaluation, including the positive-level convention. -/
 abbrev evaluation (T : Scheme.{t}) (n : ℕ) :=
   @SemilinearSections.e.{t + 1, t, t + 1} T.ProEt _
     (essentiallySmallSelf.{0} T.ProEt) (ProEt.topology T)
     (d.finiteRing T) (transition d T) n
 
-/-- Base change on the vertical sequence sites, acting identically on the index.
-Source: blueprint paragraph 4 (blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- Base change on the vertical sequence sites, acting identically on the index. -/
 abbrev siteMap {U V : Scheme.{t}} (u : U ⟶ V) :=
   (𝟭 ℕ).prod (proEtaleBaseChange u)
 
 /-- Vertical covers are preserved by base change.
-Source: Stacks 09A5, blueprint paragraph 4
-(blueprint: def-weil-pbc-quotient-corner-frobenius-structures).
-Proof: a cover restricts to a cover on its vertical slice; base change preserves these
-pro-etale covering sieves, independently at every positive index. -/
+Source: Stacks 09A5. -/
 theorem siteMap_continuous {U V : Scheme.{t}} (u : U ⟶ V) :
     (siteMap u).IsContinuous (coefficientSequenceTopology (ProEt.topology V))
       (coefficientSequenceTopology (ProEt.topology U)) := by
@@ -250,20 +234,12 @@ theorem siteMap_continuous {U V : Scheme.{t}} (u : U ⟶ V) :
 
 attribute [instance] siteMap_continuous
 
-/-- The vertical slice of the strict ring is the specified finite coefficient sheaf.
-Source: blueprint paragraph 4
-(blueprint: def-weil-pbc-quotient-corner-frobenius-structures).
-Proof: the system-ring construction is the uncurry of the quotient sequence, whose
-object at n is the given finite coefficient sheaf; forgetting commutativity changes no data. -/
+/-- The vertical slice of the strict ring is the specified finite coefficient sheaf. -/
 theorem quotientRing_obj (T : Scheme.{t}) (W : (ℕ × T.ProEt)ᵒᵖ) :
     (quotientRing d T).obj.obj W = (d.finiteRing T W.unop.1).obj.obj (op W.unop.2) := by
   sorry
 
-/-- Direct image and the quotient site have the same target section ring.
-Source: blueprint paragraph 4
-(blueprint: def-weil-pbc-quotient-corner-frobenius-structures).
-Proof: direct image is precomposition with base change; siteMap fixes the index.
-Evaluate the uncurry formula for the system ring at the base-changed object. -/
+/-- Direct image and the quotient site have the same target section ring. -/
 theorem coefficientTarget_obj {U V : Scheme.{t}} (u : U ⟶ V)
     (W : (ℕ × V.ProEt)ᵒᵖ) :
     (((proEtaleSheafDirectImage u CommRingCat.{t + 1}).obj
@@ -271,9 +247,7 @@ theorem coefficientTarget_obj {U V : Scheme.{t}} (u : U ⟶ V)
       (quotientRing d U).obj.obj ((siteMap u).op.obj W) := by
   sorry
 
-/-- Section component of the structural coefficient map, with explicit slice identifications.
-Source: blueprint paragraph 4
-(blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- Section component of the structural coefficient map, with explicit slice identifications. -/
 def coefficientComponent {U V : Scheme.{t}} (u : U ⟶ V) (W : (ℕ × V.ProEt)ᵒᵖ) :
     (quotientRing d V).obj.obj W ⟶ (quotientRing d U).obj.obj ((siteMap u).op.obj W) :=
   eqToHom (quotientRing_obj d V W) ≫
@@ -282,20 +256,14 @@ def coefficientComponent {U V : Scheme.{t}} (u : U ⟶ V) (W : (ℕ × V.ProEt)�
     eqToHom (coefficientTarget_obj d u W)
 
 /-- Constant-section coefficient maps commute with horizontal quotient restrictions.
-Source: Stacks 098T, blueprint paragraph 4
-(blueprint: def-weil-pbc-quotient-corner-frobenius-structures).
-Proof: at fixed index use naturality of the constant-section adjunct. Naturality in
-finite ring maps gives horizontal compatibility. Factor a product-site arrow into
-horizontal and vertical arrows and compose their naturality equations. -/
+Source: Stacks 098T. -/
 theorem coefficient_naturality {U V : Scheme.{t}} (u : U ⟶ V)
     {M N : (ℕ × V.ProEt)ᵒᵖ} (a : M ⟶ N) :
     (quotientRing d V).obj.map a ≫ coefficientComponent d u N =
       coefficientComponent d u M ≫ (quotientRing d U).obj.map ((siteMap u).op.map a) := by
   sorry
 
-/-- The ring-system map uses the specified finite adjunct at every index and section.
-Source: blueprint paragraph 4
-(blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- The ring-system map uses the specified finite adjunct at every index and section. -/
 def coefficientMap {U V : Scheme.{t}} (u : U ⟶ V) :
     SemilinearSections.ring.{t + 1, t, t + 1} _ (quotientRing d V) ⟶
       ((siteMap u).sheafPushforwardContinuous RingCat.{t + 1}
@@ -308,16 +276,11 @@ def coefficientMap {U V : Scheme.{t}} (u : U ⟶ V) :
       (quotientRing d V).obj ⟶ (siteMap u).op ⋙ (quotientRing d U).obj)
     (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})
 
-/-- Sectionwise direct image on the quotient ringed sequence site.
-Source: blueprint paragraph 4 (blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- Sectionwise direct image on the quotient ringed sequence site. -/
 abbrev modulePush {U V : Scheme.{t}} (u : U ⟶ V) : modules d U ⥤ modules d V :=
   SheafOfModules.pushforward.{t + 1} (F := siteMap u) (coefficientMap d u)
 
-/-- Direct image is additive because it retains section maps and module addition.
-Source: blueprint paragraph 4
-(blueprint: def-weil-pbc-quotient-corner-frobenius-structures).
-Proof: all component maps are the original additive maps on base-changed sections.
-Thus direct image preserves sums and zero morphisms. -/
+/-- Direct image is additive because it retains section maps and module addition. -/
 theorem modulePush_additive {U V : Scheme.{t}} (u : U ⟶ V) :
     (modulePush d u).Additive := by
   sorry
@@ -325,86 +288,62 @@ theorem modulePush_additive {U V : Scheme.{t}} (u : U ⟶ V) :
 attribute [instance] modulePush_additive
 
 /-- The tensor-formula module pullback exists on the small quotient diagram sites.
-Source: Stacks 03D3, blueprint paragraph 4
-(blueprint: def-weil-pbc-quotient-corner-frobenius-structures).
-Proof: left Kan extension of module presheaves followed by sheafification gives the left
-adjoint of the displayed sectionwise direct image. Its Hom correspondence is precisely
-inverse image followed by extension along the constant-section coefficient identification. -/
+Source: Stacks 03D3. -/
 theorem modulePush_isRightAdjoint {U V : Scheme.{t}} (u : U ⟶ V) :
     (modulePush d u).IsRightAdjoint := by
   sorry
 
 attribute [instance] modulePush_isRightAdjoint
 
-/-- Ordinary tensor pullback, fixed by the universal adjunction to actual direct image.
-Source: blueprint paragraph 4 (blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- Ordinary tensor pullback, fixed by the universal adjunction to actual direct image. -/
 abbrev modulePull {U V : Scheme.{t}} (u : U ⟶ V) : modules d V ⥤ modules d U :=
   (modulePush d u).leftAdjoint
 
 /-- The actual module adjunction, with the ordinary direct image fixed on sections.
-Source: blueprint paragraph 4; Stacks 03D3
-(blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+Source: Stacks 03D3. -/
 def moduleAdjunction {U V : Scheme.{t}} (u : U ⟶ V) : modulePull d u ⊣ modulePush d u :=
   Adjunction.ofIsRightAdjoint (modulePush d u)
 
 /-- Identified-coefficient inverse image is exact on the strict quotient diagram.
-Source: blueprint paragraph 4; Stacks 03D3
-(blueprint: def-weil-pbc-quotient-corner-frobenius-structures).
-Proof: evaluate ordinary module pullback at each vertical slice. Its coefficient map is
-c_{u,n}, an isomorphism, so it is exact inverse image. Kernels and cokernels of systems
-are computed on these slices by lem-coef-semilinear-derived-sections. -/
+Source: Stacks 03D3. -/
 theorem modulePull_exact {U V : Scheme.{t}} (u : U ⟶ V) :
     (modulePull d u).Additive ∧ PreservesFiniteLimits (modulePull d u) ∧
       PreservesFiniteColimits (modulePull d u) := by
   sorry
 
-/-- Additivity of quotient-diagram inverse image. Source: blueprint paragraph 4
-(blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- Additivity of quotient-diagram inverse image. -/
 instance modulePull_additive {U V : Scheme.{t}} (u : U ⟶ V) :
     (modulePull d u).Additive := (modulePull_exact d u).1
 
-/-- Left exactness of quotient-diagram inverse image. Source: blueprint paragraph 4
-(blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- Left exactness of quotient-diagram inverse image. -/
 instance modulePull_limits {U V : Scheme.{t}} (u : U ⟶ V) :
     PreservesFiniteLimits (modulePull d u) := (modulePull_exact d u).2.1
 
-/-- Right exactness of quotient-diagram inverse image. Source: blueprint paragraph 4
-(blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- Right exactness of quotient-diagram inverse image. -/
 instance modulePull_colimits {U V : Scheme.{t}} (u : U ⟶ V) :
     PreservesFiniteColimits (modulePull d u) := (modulePull_exact d u).2.2
 
-/-- K-injective resolutions in the actual quotient-system abelian category.
-Source: lem-coef-semilinear-derived-sections, blueprint paragraph 4
-(blueprint: def-weil-pbc-quotient-corner-frobenius-structures).
-Proof: the strict semilinear system category is Grothendieck abelian, hence has
-K-injective resolutions of all unbounded complexes. -/
+/-- K-injective resolutions in the actual quotient-system abelian category. -/
 theorem modules_kinjective (T : Scheme.{t}) :
     Abelian.HasKInjectiveResolutions (modules d T) := by
   sorry
 
 attribute [instance] modules_kinjective
 
-/-- Total left derived pullback; exactness identifies it with termwise inverse image.
-Source: blueprint paragraph 4 (blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- Total left derived pullback; exactness identifies it with termwise inverse image. -/
 abbrev pull {U V : Scheme.{t}} (u : U ⟶ V) : derived d V ⥤ derived d U :=
   (modulePull d u).mapDerivedCategory
 
-/-- K-injective total direct image on the category of strict quotient systems.
-Source: blueprint paragraph 4 (blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- K-injective total direct image on the category of strict quotient systems. -/
 abbrev push {U V : Scheme.{t}} (u : U ⟶ V) : derived d U ⥤ derived d V :=
   (modulePush d u).rightDerivedFunctor
 
-/-- The canonical module adjunction, derived before any evaluation.
-Source: blueprint paragraph 4 (blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- The canonical module adjunction, derived before any evaluation. -/
 def adjunction {U V : Scheme.{t}} (u : U ⟶ V) : pull d u ⊣ push d u :=
   (moduleAdjunction d u).mapDerivedCategoryRightDerivedAdjunction
 
 /-- Direct-image composition is fixed by fibre-product pasting at every index and section.
-Source: blueprint paragraph 4; Stacks 03D8
-(blueprint: def-weil-pbc-quotient-corner-frobenius-structures).
-Proof: use the canonical pasting map of base-changed site objects, with identity in the
-index direction. Naturality of the finite coefficient adjuncts makes it linear. Its
-inverse is the inverse pasting map; sectionwise extensionality gives uniqueness. -/
+Source: Stacks 03D8. -/
 theorem modulePushComp_exists {U V W : Scheme.{t}} (u : U ⟶ V) (v : V ⟶ W) :
     ∃! e : modulePush d u ⋙ modulePush d v ≅ modulePush d (u ≫ v),
       ∀ (N : modules d U) (n : ℕ) (Z : W.ProEt)
@@ -415,8 +354,7 @@ theorem modulePushComp_exists {U V W : Scheme.{t}} (u : U ⟶ V) (v : V ⟶ W) :
               Z)).op m) := by
   sorry
 
-/-- Ordinary pullback composition is the conjugate of the specified sectionwise pasting.
-Source: blueprint paragraph 4 (blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- Ordinary pullback composition is the conjugate of the specified sectionwise pasting. -/
 def modulePullComp {U V W : Scheme.{t}} (u : U ⟶ V) (v : V ⟶ W) :
     modulePull d (u ≫ v) ≅ modulePull d v ⋙ modulePull d u :=
   (conjugateIsoEquiv
@@ -426,75 +364,57 @@ def modulePullComp {U V W : Scheme.{t}} (u : U ⟶ V) (v : V ⟶ W) :
       (modulePushComp_exists d u v).exists.choose
 
 /-- Derived composition is the localization of the ordinary tensor associator.
-Since pullback is exact, this also gives its K-flat flat-term normalization.
-Source: blueprint paragraph 4 (blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+Since pullback is exact, this also gives its K-flat flat-term normalization. -/
 def pullComp {U V W : Scheme.{t}} (u : U ⟶ V) (v : V ⟶ W) :
     pull d (u ≫ v) ≅ pull d v ⋙ pull d u :=
   Functor.mapDerivedCategoryNatIso (modulePullComp d u v) ≪≫
     (Functor.mapDerivedCategoryCompIso (modulePull d v) (modulePull d u)).symm
 
-/-- The Frobenius face comparison, directed Phi_U Lu* to Lu* Phi_V.
-Source: blueprint paragraph 4 (blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- The Frobenius face comparison, directed Phi_U Lu* to Lu* Phi_V. -/
 def kappa {U V : Scheme.{t}} (u : U ⟶ V) (FU : U ≅ U) (FV : V ≅ V)
     (comm : FU.hom ≫ u = u ≫ FV.hom) :
     pull d u ⋙ pull d FU.hom ≅ pull d FV.hom ⋙ pull d u :=
   (pullComp d FU.hom u).symm ≪≫
     eqToIso (congrArg (fun a ↦ pull d a) comm) ≪≫ pullComp d u FV.hom
 
-/-- Exchange along a Frobenius face is the adjunction mate of kappa inverse.
-Source: blueprint paragraph 4 (blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- Exchange along a Frobenius face is the adjunction mate of kappa inverse. -/
 def beta {U V : Scheme.{t}} (u : U ⟶ V) (FU : U ≅ U) (FV : V ≅ V)
     (comm : FU.hom ≫ u = u ≫ FV.hom) :
     push d u ⋙ pull d FV.hom ⟶ pull d FU.hom ⋙ push d u :=
   mateEquiv (adjunction d u) (adjunction d u) (kappa d u FU FV comm).inv
 
-/-- A constant coefficient presheaf is a sheaf on the vertical sequence site.
-Source: blueprint paragraph 4 (blueprint: def-weil-pbc-quotient-corner-frobenius-structures).
-Proof: glue in the completed ring sheaf on the vertical slice. The restrictions in the
-index direction are identities, so uniqueness of gluing gives horizontal compatibility. -/
+/-- A constant coefficient presheaf is a sheaf on the vertical sequence site. -/
 theorem diagonalRing_isSheaf (T : Scheme.{t}) :
     Presheaf.IsSheaf (coefficientSequenceTopology (ProEt.topology T))
       ((CategoryTheory.Prod.snd ℕ T.ProEt).op ⋙ (d.completedRing T).obj) := by
   sorry
 
-/-- The completed-coefficient diagonal ring on the same vertical sequence site.
-Source: blueprint paragraph 4 (blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- The completed-coefficient diagonal ring on the same vertical sequence site. -/
 def diagonalRing (T : Scheme.{t}) :
     Sheaf (coefficientSequenceTopology (ProEt.topology T)) CommRingCat.{t + 1} :=
   ⟨(CategoryTheory.Prod.snd ℕ T.ProEt).op ⋙ (d.completedRing T).obj,
     diagonalRing_isSheaf d T⟩
 
-/-- The projection component uses the fixed vertical-slice identification.
-Source: blueprint paragraph 4
-(blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- The projection component uses the fixed vertical-slice identification. -/
 def diagonalProjectionComponent (T : Scheme.{t}) (W : (ℕ × T.ProEt)ᵒᵖ) :
     (diagonalRing d T).obj.obj W ⟶ (quotientRing d T).obj.obj W :=
   (d.projection T W.unop.1).hom.app (op W.unop.2) ≫
     eqToHom (quotientRing_obj d T W).symm
 
-/-- The coefficient projections are natural on the strict diagram site.
-Source: blueprint paragraph 4
-(blueprint: def-weil-pbc-quotient-corner-frobenius-structures).
-Proof: vertical naturality is that of the projection; horizontal naturality is the
-limit cone equation. Factor every product-site arrow into these two kinds. -/
+/-- The coefficient projections are natural on the strict diagram site. -/
 theorem diagonalProjection_naturality (T : Scheme.{t})
     {M N : (ℕ × T.ProEt)ᵒᵖ} (a : M ⟶ N) :
     (diagonalRing d T).obj.map a ≫ diagonalProjectionComponent d T N =
       diagonalProjectionComponent d T M ≫ (quotientRing d T).obj.map a := by
   sorry
 
-/-- The actual scalar map retaining all coefficient projections.
-Source: blueprint paragraph 4
-(blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- The actual scalar map retaining all coefficient projections. -/
 def diagonalProjection (T : Scheme.{t}) : diagonalRing d T ⟶ quotientRing d T where
   hom :=
     { app := fun W ↦ diagonalProjectionComponent d T W
       naturality := fun _ _ a ↦ diagonalProjection_naturality d T a }
 
-/-- Projection to the original site is continuous for vertical covers.
-Source: blueprint paragraph 4 (blueprint: def-weil-pbc-quotient-corner-frobenius-structures).
-Proof: a sheaf on the original site, made constant in the index, glues independently on
-every vertical slice. This is the continuous-functor sheaf criterion. -/
+/-- Projection to the original site is continuous for vertical covers. -/
 theorem diagonal_continuous (T : Scheme.{t}) :
     (CategoryTheory.Prod.snd ℕ T.ProEt).IsContinuous
       (coefficientSequenceTopology (ProEt.topology T))
@@ -503,68 +423,50 @@ theorem diagonal_continuous (T : Scheme.{t}) :
 
 attribute [instance] diagonal_continuous
 
-/-- The exact diagonal module functor, implemented by its sectionwise pullback presheaf.
-Source: blueprint paragraph 4 (blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- The exact diagonal module functor, implemented by its sectionwise pullback presheaf. -/
 abbrev diagonal (T : Scheme.{t}) :
     proEtaleRingModules T (d.completedRing T) ⥤
       SemilinearSections.Mod.{t + 1, t, t + 1} (coefficientSequenceTopology (ProEt.topology T))
         (diagonalRing d T) :=
   SheafOfModules.pushforward.{t + 1} (F := CategoryTheory.Prod.snd ℕ T.ProEt) (𝟙 _)
 
-/-- Diagonal retains addition of module maps on every section.
-Source: blueprint paragraph 4
-(blueprint: def-weil-pbc-quotient-corner-frobenius-structures).
-Proof: its section maps are the original maps, independently of the index, so they
-preserve sums of morphisms and the zero morphism. -/
+/-- Diagonal retains addition of module maps on every section. -/
 theorem diagonal_additive (T : Scheme.{t}) : (diagonal d T).Additive := by
   sorry
 
 attribute [instance] diagonal_additive
 
-/-- Diagonal is exact, since its restriction to every slice is identity.
-Source: blueprint paragraph 4 (blueprint: def-weil-pbc-quotient-corner-frobenius-structures).
-Proof: kernels, cokernels and addition on the sequence site are computed on vertical
-slices; diagonal restricts to identity on each slice. -/
+/-- Diagonal is exact, since its restriction to every slice is identity. -/
 theorem diagonal_exact (T : Scheme.{t}) :
     PreservesFiniteLimits (diagonal d T) ∧ PreservesFiniteColimits (diagonal d T) := by
   sorry
 
-/-- Left exactness of diagonal. Source: blueprint paragraph 4
-(blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- Left exactness of diagonal. -/
 instance diagonal_limits (T : Scheme.{t}) : PreservesFiniteLimits (diagonal d T) :=
   (diagonal_exact d T).1
 
-/-- Right exactness of diagonal. Source: blueprint paragraph 4
-(blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- Right exactness of diagonal. -/
 instance diagonal_colimits (T : Scheme.{t}) : PreservesFiniteColimits (diagonal d T) :=
   (diagonal_exact d T).2
 
 /-- The universal K-flat scalar-extension pair for Delta A_T to Q_T. Its ordinary
 functor is the sheafified tensor and its derived pair is fixed by the universal counit.
-Source: Stacks 06YY, blueprint paragraph 4
-(blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+Source: Stacks 06YY. -/
 def scalarModel (T : Scheme.{t}) :=
   (SheafOfModules.nonempty_derivedChangeOfRingsCochainModel.{t + 1, t, t + 1, t + 2, t + 2}
     (diagonalProjection d T)).some
 
 /-- Additivity of the fixed ordinary scalar-extension functor in the universal pair.
-Source: Stacks 06YY, blueprint paragraph 4
-(blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+Source: Stacks 06YY. -/
 instance scalarModel_additive (T : Scheme.{t}) : (scalarModel d T).E.Additive :=
   (scalarModel d T).additive
 
-/-- The actual strict quotient reduction of K: diagonal followed by derived extension.
-Source: blueprint paragraph 4 (blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- The actual strict quotient reduction of K: diagonal followed by derived extension. -/
 abbrev reduction (T : Scheme.{t}) : d.derived T ⥤ derived d T :=
   (diagonal d T).mapDerivedCategory ⋙ (scalarModel d T).T
 
 /-- Restriction along Delta A_T to Q_T, followed by the normalized diagram realization.
-Source: blueprint paragraph 4; Stacks 03CZ
-(blueprint: def-weil-pbc-quotient-corner-frobenius-structures).
-Proof: at index n restrict the action through pi_n. The limit cone equations make all
-horizontal restrictions A_T-linear. Retain the original horizontal restrictions and all
-component maps of morphisms. Their presheaf laws give the tower and functor laws.
-Extensionality on objects and section maps proves uniqueness. -/
+Source: Stacks 03CZ. -/
 theorem moduleRestriction_exists (T : Scheme.{t}) :
     ∃! R : modules d T ⥤ d.towers T,
       (∀ (M : modules d T) (n : ℕ),
@@ -580,47 +482,35 @@ theorem moduleRestriction_exists (T : Scheme.{t}) :
           (fun x : M.val.obj (op (n, U.unop)) ↦ a.val.app (op (n, U.unop)) x)) := by
   sorry
 
-/-- The unique actual strict scalar restriction with the prescribed section maps.
-Source: blueprint paragraph 4 (blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- The unique actual strict scalar restriction with the prescribed section maps. -/
 def moduleRestriction (T : Scheme.{t}) : modules d T ⥤ d.towers T :=
   (moduleRestriction_exists d T).exists.choose
 
 /-- Scalar restriction is additive and exact on the strict system category.
-Source: blueprint paragraph 4; Stacks 03CZ
-(blueprint: def-weil-pbc-quotient-corner-frobenius-structures).
-Proof: the underlying abelian sheaves and every transition are unchanged. Componentwise
-kernels and cokernels in the two system categories are therefore preserved. -/
+Source: Stacks 03CZ. -/
 theorem moduleRestriction_exact (T : Scheme.{t}) :
     (moduleRestriction d T).Additive ∧ PreservesFiniteLimits (moduleRestriction d T) ∧
       PreservesFiniteColimits (moduleRestriction d T) := by
   sorry
 
-/-- Additive scalar restriction. Source: blueprint paragraph 4
-(blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- Additive scalar restriction. -/
 instance moduleRestriction_additive (T : Scheme.{t}) : (moduleRestriction d T).Additive :=
   (moduleRestriction_exact d T).1
 
-/-- Left exact scalar restriction. Source: blueprint paragraph 4
-(blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- Left exact scalar restriction. -/
 instance moduleRestriction_limits (T : Scheme.{t}) :
     PreservesFiniteLimits (moduleRestriction d T) := (moduleRestriction_exact d T).2.1
 
-/-- Right exact scalar restriction. Source: blueprint paragraph 4
-(blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- Right exact scalar restriction. -/
 instance moduleRestriction_colimits (T : Scheme.{t}) :
     PreservesFiniteColimits (moduleRestriction d T) := (moduleRestriction_exact d T).2.2
 
-/-- Derived strict scalar restriction, rather than forgetting to a family of objects.
-Source: blueprint paragraph 4 (blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- Derived strict scalar restriction, rather than forgetting to a family of objects. -/
 abbrev restriction (T : Scheme.{t}) : derived d T ⥤ DerivedCategory (d.towers T) :=
   (moduleRestriction d T).mapDerivedCategory
 
 /-- Ordinary restriction/direct-image comparison is identity on every section and index.
-Source: blueprint paragraph 4; Stacks 0D6E
-(blueprint: def-weil-pbc-quotient-corner-frobenius-structures).
-Proof: both functors use the same base-changed sections and original horizontal
-restrictions. Their completed actions agree by compatibility of c_u with pi_n.
-Identity section maps are therefore linear, natural, invertible and unique. -/
+Source: Stacks 0D6E. -/
 theorem moduleRestrictionPush_exists {U V : Scheme.{t}} (u : U ⟶ V) :
     ∃! e : modulePush d u ⋙ moduleRestriction d V ≅
         moduleRestriction d U ⋙ d.towerModulePush u,
@@ -629,18 +519,12 @@ theorem moduleRestrictionPush_exists {U V : Scheme.{t}} (u : U ⟶ V) :
           (fun x : M.val.obj (op (n, (proEtaleBaseChange u).obj Z.unop)) ↦ x) := by
   sorry
 
-/-- The section-normalized restriction/direct-image comparison before deriving.
-Source: blueprint paragraph 4 (blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- The section-normalized restriction/direct-image comparison before deriving. -/
 def moduleRestrictionPush {U V : Scheme.{t}} (u : U ⟶ V) :=
   (moduleRestrictionPush_exists d u).exists.choose
 
 /-- Restriction/pullback comparison fixed by the unit of the actual module adjunction.
-Source: blueprint paragraph 4; Stacks 0D6D
-(blueprint: def-weil-pbc-quotient-corner-frobenius-structures).
-Proof: both sides are the same inverse-image sheaf with its A_U-action restricted.
-The tensor-unit identification gives their isomorphism. Transpose its section identity
-under the displayed module adjunctions to obtain the unit equation. That equation
-uniquely determines the comparison by the adjunction Hom bijection. -/
+Source: Stacks 0D6D. -/
 theorem moduleRestrictionPull_exists {U V : Scheme.{t}} (u : U ⟶ V) :
     ∃! e : modulePull d u ⋙ moduleRestriction d U ≅
         moduleRestriction d V ⋙ d.towerModulePull u,
@@ -652,8 +536,7 @@ theorem moduleRestrictionPull_exists {U V : Scheme.{t}} (u : U ⟶ V) :
             (d.towerModuleAdjunction u).unit.app ((moduleRestriction d V).obj M) := by
   sorry
 
-/-- Exact descent of the normalized ordinary restriction/pullback isomorphism.
-Source: blueprint paragraph 4 (blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- Exact descent of the normalized ordinary restriction/pullback isomorphism. -/
 def restrictionPull {U V : Scheme.{t}} (u : U ⟶ V) :
     pull d u ⋙ restriction d U ≅ restriction d V ⋙ d.towerPull u :=
   Functor.mapDerivedCategoryCompIso _ _ ≪≫
@@ -661,13 +544,7 @@ def restrictionPull {U V : Scheme.{t}} (u : U ⟶ V) :
     (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- Comparison of quotient and ambient derived direct image, normalized by universal units.
-Source: blueprint paragraph 4; Stacks 0D6E
-(blueprint: def-weil-pbc-quotient-corner-frobenius-structures).
-Proof: the ordinary comparison is the identity on sections. Derive the two factorizations
-of the same ringed diagram morphism, first through Q and first through Delta A. The
-composition theorem gives the comparison with the displayed universal-unit equation.
-Resolving the input on the quotient diagram site determines it uniquely. Restriction is
-exact; no assertion that evaluation of a K-injective system is K-injective is used. -/
+Source: Stacks 0D6E. -/
 theorem restrictionPush_exists {U V : Scheme.{t}} (u : U ⟶ V) :
     ∃! e : push d u ⋙ restriction d V ≅ restriction d U ⋙ d.towerPush u,
       ∀ C : CochainComplex (modules d U) ℤ,
@@ -687,14 +564,13 @@ theorem restrictionPush_exists {U V : Scheme.{t}} (u : U ⟶ V) :
           (d.towerPush u).map ((moduleRestriction d U).mapDerivedCategoryFactors.inv.app C) := by
   sorry
 
-/-- The canonical derived restriction/direct-image comparison with its unit normalization.
-Source: blueprint paragraph 4 (blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- The canonical derived restriction/direct-image comparison with its unit normalization. -/
 def restrictionPush {U V : Scheme.{t}} (u : U ⟶ V) :
     push d u ⋙ restriction d V ≅ restriction d U ⋙ d.towerPush u :=
   (restrictionPush_exists d u).exists.choose
 
 /-- The representative counit of strict quotient reduction, retaining its tensor construction.
-Source: blueprint paragraph 4 (blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+-/
 def reductionCounit (T : Scheme.{t}) (P : CochainComplex (proEtaleRingModules T
     (d.completedRing T)) ℤ) :
     (reduction d T).obj (DerivedCategory.Q.obj P) ⟶
@@ -704,19 +580,13 @@ def reductionCounit (T : Scheme.{t}) (P : CochainComplex (proEtaleRingModules T
     (scalarModel d T).ε.app (((diagonal d T).mapHomologicalComplex (.up ℤ)).obj P)
 
 /-- Underived evaluation on the strict quotient module category.
-Source: Zheng 4.1, blueprint paragraph 4
-(blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+Source: Zheng 4.1. -/
 abbrev moduleEvaluation (T : Scheme.{t}) (n : ℕ) :=
   @SemilinearSections.evaluation.{t + 1, t, t + 1} T.ProEt _
     (essentiallySmallSelf.{0} T.ProEt) (ProEt.topology T)
     (d.finiteRing T) (transition d T) n
 
-/-- Evaluation/direct-image comparison fixed on all ordinary component carriers.
-Source: lem-coef-semilinear-derived-sections, blueprint paragraph 4
-(blueprint: def-weil-pbc-quotient-corner-frobenius-structures).
-Proof: both functors take the original sections at (n,baseChange U), with the same
-finite scalar action. Identity functions define the comparison and its inverse;
-linearity and naturality follow from the constant-section adjunct. Sections determine it. -/
+/-- Evaluation/direct-image comparison fixed on all ordinary component carriers. -/
 theorem moduleEvaluationPush_exists {U V : Scheme.{t}} (u : U ⟶ V) (n : ℕ) :
     ∃! e : modulePush d u ⋙ moduleEvaluation d V n ≅
         moduleEvaluation d U n ⋙ proEtaleRingModuleDirectImage u
@@ -726,19 +596,11 @@ theorem moduleEvaluationPush_exists {U V : Scheme.{t}} (u : U ⟶ V) (n : ℕ) :
           (fun x : M.val.obj (op (n, (proEtaleBaseChange u).obj Z.unop)) ↦ x) := by
   sorry
 
-/-- The normalized ordinary evaluation of direct image.
-Source: blueprint paragraph 4
-(blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- The normalized ordinary evaluation of direct image. -/
 def moduleEvaluationPush {U V : Scheme.{t}} (u : U ⟶ V) (n : ℕ) :=
   (moduleEvaluationPush_exists d u n).exists.choose
 
-/-- Evaluation/pullback is fixed by the tensor-unit adjunction equation.
-Source: lem-coef-semilinear-derived-sections, blueprint paragraph 4
-(blueprint: def-weil-pbc-quotient-corner-frobenius-structures).
-Proof: inverse image and scalar extension evaluate on each vertical slice. The
-identity tensor-unit comparison is adjoint to the preceding ordinary direct-image
-comparison. The adjunction Hom bijections determine it uniquely; exact inverse image
-and its inverse coefficient identifications make it invertible. -/
+/-- Evaluation/pullback is fixed by the tensor-unit adjunction equation. -/
 theorem moduleEvaluationPull_exists {U V : Scheme.{t}} (u : U ⟶ V) (n : ℕ) :
     ∃! e : modulePull d u ⋙ moduleEvaluation d U n ≅
         moduleEvaluation d V n ⋙ proEtaleRingModulePullback u
@@ -753,18 +615,14 @@ theorem moduleEvaluationPull_exists {U V : Scheme.{t}} (u : U ⟶ V) (n : ℕ) :
             (d.finiteRingIso u n)).unit.app ((moduleEvaluation d V n).obj M) := by
   sorry
 
-/-- Exact descent of the unit-normalized evaluation/pullback comparison.
-Source: blueprint paragraph 4
-(blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- Exact descent of the unit-normalized evaluation/pullback comparison. -/
 def evaluationPull {U V : Scheme.{t}} (u : U ⟶ V) (n : ℕ) :
     pull d u ⋙ evaluation d U n ≅ evaluation d V n ⋙ d.finitePull u n :=
   Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (moduleEvaluationPull_exists d u n).exists.choose ≪≫
     (Functor.mapDerivedCategoryCompIso _ _).symm
 
-/-- The finite direct-image cochain unit, before any evaluation of a resolution.
-Source: blueprint paragraph 4
-(blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- The finite direct-image cochain unit, before any evaluation of a resolution. -/
 def finitePushUnit {U V : Scheme.{t}} (u : U ⟶ V) (n : ℕ)
     (P : CochainComplex (proEtaleRingModules U (d.finiteRing U n)) ℤ) :=
   (DerivedCategory.quotientCompQhIso _).inv.app
@@ -775,30 +633,20 @@ def finitePushUnit {U V : Scheme.{t}} (u : U ⟶ V) (n : ℕ)
         ((HomotopyCategory.quotient _ _).obj P) ≫
     (d.finitePush u n).map ((DerivedCategory.quotientCompQhIso _).hom.app P)
 
-/-- Ordinary ambient tower evaluation at the paper's positive level n+1.
-Source: blueprint paragraph 4
-(blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- Ordinary ambient tower evaluation at the paper's positive level n+1. -/
 abbrev ambientModuleEvaluation (T : Scheme.{t}) (n : ℕ) :=
   reductionTowerEvaluation T (reductionModuleRing T (d.completedRing T)) n
 
-/-- Derived ambient evaluation, using exact termwise evaluation.
-Source: blueprint paragraph 4
-(blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- Derived ambient evaluation, using exact termwise evaluation. -/
 abbrev ambientEvaluation (T : Scheme.{t}) (n : ℕ) :=
   reductionTowerDerivedEvaluation T (reductionModuleRing T (d.completedRing T)) n
 
-/-- Exact restriction of the finite coefficient action to the completed coefficient action.
-Source: blueprint paragraph 4
-(blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- Exact restriction of the finite coefficient action to the completed coefficient action. -/
 abbrev finiteRestriction (T : Scheme.{t}) (n : ℕ) :=
   reductionDerivedRestrict T (d.projection T n)
 
 /-- Restriction and evaluation commute by the identity on the original section carriers.
-Source: Stacks 03CZ, blueprint paragraph 4
-(blueprint: def-weil-pbc-quotient-corner-frobenius-structures).
-Proof: both sides are the n-th module with action restricted through pi_n and all maps
-unchanged. Identity section maps are linear by that description. They give an
-invertible natural transformation, uniquely determined on every section. -/
+Source: Stacks 03CZ. -/
 theorem moduleRestrictionEvaluation_exists (T : Scheme.{t}) (n : ℕ) :
     ∃! e : moduleRestriction d T ⋙ ambientModuleEvaluation d T n ≅
         moduleEvaluation d T n ⋙ reductionRestrict T (d.projection T n),
@@ -807,9 +655,7 @@ theorem moduleRestrictionEvaluation_exists (T : Scheme.{t}) (n : ℕ) :
           (fun x : M.val.obj (op (n, U.unop)) ↦ x) := by
   sorry
 
-/-- Derived restriction/evaluation, induced by the ordinary identity of section carriers.
-Source: blueprint paragraph 4
-(blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- Derived restriction/evaluation, induced by the ordinary identity of section carriers. -/
 def restrictionEvaluation (T : Scheme.{t}) (n : ℕ) :
     restriction d T ⋙ ambientEvaluation d T n ≅
       evaluation d T n ⋙ finiteRestriction d T n :=
@@ -825,8 +671,7 @@ variable {X' X Y' Y : Scheme.{t}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
 
 /-- Automorphisms of the four schemes commuting with all four edges. Their commutation
 identifications form the cube: in the scheme category higher coherence is equality of
-proofs, and the Cartesian faces are supplied by `face_isPullback` below.
-Source: blueprint paragraph 4 (blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+proofs, and the Cartesian faces are supplied by `face_isPullback` below. -/
 structure Cube (_sq : ChosenCartesianSquare g' f' f g) where
   FX : X ≅ X
   FY : Y ≅ Y
@@ -837,18 +682,12 @@ structure Cube (_sq : ChosenCartesianSquare g' f' f g) where
   g'_comm : FX'.hom ≫ g' = g' ≫ FX.hom
   f'_comm : FX'.hom ≫ f' = f' ≫ FY'.hom
 
-/-- Each commutative face with invertible horizontal edges is Cartesian.
-Source: blueprint Frobenius datum, paragraph 4
-(blueprint: def-weil-pbc-quotient-corner-frobenius-structures).
-Proof: a cone over u and FV has the unique lift obtained by composing its first map
-with FU inverse. The commutation equation verifies the second projection; cancellation
-of FU proves uniqueness. The same construction applies to each of the four edges. -/
+/-- Each commutative face with invertible horizontal edges is Cartesian. -/
 theorem face_isPullback {U V : Scheme.{t}} (u : U ⟶ V) (FU : U ≅ U) (FV : V ≅ V)
     (comm : FU.hom ≫ u = u ≫ FV.hom) : IsPullback FU.hom u u FV.hom := by
   sorry
 
-/-- The chosen Cartesian identification is the universal one for the Frobenius face.
-Source: blueprint paragraph 4 (blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- The chosen Cartesian identification is the universal one for the Frobenius face. -/
 def face {U V : Scheme.{t}} (u : U ⟶ V) (FU : U ≅ U) (FV : V ≅ V)
     (comm : FU.hom ≫ u = u ≫ FV.hom) :
     ChosenCartesianSquare FU.hom u u FV.hom where
@@ -858,15 +697,13 @@ def face {U V : Scheme.{t}} (u : U ⟶ V) (FU : U ≅ U) (FV : V ≅ V)
   hom_snd := (face_isPullback u FU FV comm).isoPullback_hom_snd
 
 /-- Integral beta is exactly the canonical ambient ringed exchange of the Frobenius face.
-Source: blueprint paragraph 4; Stacks 07A7
-(blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+Source: Stacks 07A7. -/
 abbrev integralBeta {U V : Scheme.{t}} (u : U ⟶ V) (FU : U ≅ U) (FV : V ≅ V)
     (comm : FU.hom ≫ u = u ≫ FV.hom) :=
   d.integralExchange (face u FU FV comm)
 
 /-- A coherent Weil structure is an isomorphism on the derived strict quotient diagram.
-Its existence is data; no equality of evaluated morphisms is used as a substitute.
-Source: blueprint paragraph 4 (blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+Its existence is data; no equality of evaluated morphisms is used as a substitute. -/
 structure WeilDatum (sq : ChosenCartesianSquare g' f' f g) (K : d.derived X)
     extends Cube sq where
   theta : (pull d FX.hom).obj ((reduction d X).obj K) ≅ (reduction d X).obj K
@@ -874,40 +711,33 @@ structure WeilDatum (sq : ChosenCartesianSquare g' f' f g) (K : d.derived X)
 variable {sq : ChosenCartesianSquare g' f' f g} {K : d.derived X}
   (F : WeilDatum d sq K)
 
-/-- The quotient diagram's B and D corners, constructed by its actual total operations.
-Source: blueprint paragraph 4 (blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- The quotient diagram's B and D corners, constructed by its actual total operations. -/
 abbrev cornerB := (pull d g).obj ((push d f).obj ((reduction d X).obj K))
 
-/-- The quotient diagram's D corner, with ordinary uncompleted pullback on X'.
-Source: blueprint paragraph 4 (blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- The quotient diagram's D corner, with ordinary uncompleted pullback on X'. -/
 abbrev cornerD := (push d f').obj ((pull d g').obj ((reduction d X).obj K))
 
-/-- Theta_E is pullback of the strict Weil map after the specified pullback composition.
-Source: blueprint paragraph 4 (blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- Theta_E is pullback of the strict Weil map after the specified pullback composition. -/
 def thetaE :
     (pull d F.FX'.hom).obj ((pull d g').obj ((reduction d X).obj K)) ⟶
       (pull d g').obj ((reduction d X).obj K) :=
   (kappa d g' F.FX' F.FX F.g'_comm).hom.app ((reduction d X).obj K) ≫
     (pull d g').map F.theta.hom
 
-/-- Theta_B is kappa_g, followed by Lg* beta_f, followed by Lg* Rf* theta.
-Source: blueprint paragraph 4 (blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- Theta_B is kappa_g, followed by Lg* beta_f, followed by Lg* Rf* theta. -/
 def thetaB : (pull d F.FY'.hom).obj (cornerB (f := f) (g := g) d (K := K)) ⟶
     cornerB (f := f) (g := g) d (K := K) :=
   (kappa d g F.FY' F.FY F.g_comm).hom.app ((push d f).obj ((reduction d X).obj K)) ≫
     (pull d g).map ((beta d f F.FX F.FY F.f_comm).app ((reduction d X).obj K)) ≫
     (pull d g).map ((push d f).map F.theta.hom)
 
-/-- Theta_D is beta_f' followed by Rf'* theta_E, on the strict quotient diagram itself.
-Source: blueprint paragraph 4 (blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- Theta_D is beta_f' followed by Rf'* theta_E, on the strict quotient diagram itself. -/
 def thetaD : (pull d F.FY'.hom).obj (cornerD (f' := f') (g' := g') d (K := K)) ⟶
     cornerD (f' := f') (g' := g') d (K := K) :=
   (beta d f' F.FX' F.FY' F.f'_comm).app ((pull d g').obj ((reduction d X).obj K)) ≫
     (push d f').map (thetaE d F)
 
-/-- Finite-linear evaluation of a strict Frobenius structure through its fixed comparison.
-Source: blueprint paragraph 4
-(blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- Finite-linear evaluation of a strict Frobenius structure through its fixed comparison. -/
 def finiteTransport {T : Scheme.{t}} (FT : T ≅ T) (n : ℕ) {M : derived d T}
     {N : DerivedCategory (proEtaleRingModules T (d.finiteRing T n))}
     (c : (evaluation d T n).obj M ≅ N) (theta : (pull d FT.hom).obj M ⟶ M) :
@@ -915,8 +745,7 @@ def finiteTransport {T : Scheme.{t}} (FT : T ≅ T) (n : ℕ) {M : derived d T}
   (d.finitePull FT.hom n).map c.inv ≫
     (evaluationPull d FT.hom n).inv.app M ≫ (evaluation d T n).map theta ≫ c.hom
 
-/-- Transport a quotient-diagram Frobenius map by restriction and the specified comparison.
-Source: blueprint paragraph 4 (blueprint: def-weil-pbc-quotient-corner-frobenius-structures). -/
+/-- Transport a quotient-diagram Frobenius map by restriction and the specified comparison. -/
 def transport {T : Scheme.{t}} (FT : T ≅ T) {M : derived d T}
     {N : DerivedCategory (d.towers T)}
     (c : (restriction d T).obj M ≅ N) (theta : (pull d FT.hom).obj M ⟶ M) :

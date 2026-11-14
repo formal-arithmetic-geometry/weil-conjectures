@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 # The canonical affine tilde tensor comparison on stalks
 
 Source: Stacks Project, Schemes, Tag 01I8(1), second proof.
-(blueprint: lem-weil-pbc-affine-tilde-tensor-stalk-bijective)
 -/
 
 @[expose] public noncomputable section
@@ -32,22 +31,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.respectTransparency false in
 /-- The canonical comparison is bijective on each stalk.
 Source: Stacks Project, Schemes, Tag 01I8(1), second proof, with Tags 01HV(7),
-00DL and Modules 01CB.
-(blueprint: lem-weil-pbc-affine-tilde-tensor-stalk-bijective)
-
-Proof: Fix a prime p and let S be its complement. The stalk ring A is the
-localization of R at S. The germ maps from M, N and M tensor_R N to their tilde
-stalks are module localization maps at S (01HV(7)). Localization commutes with
-tensor products (00DL), so m tensor n mapped to germ(m) tensor_A germ(n) is also
-such a localization map. Identify the target stalk with the tensor of the two
-stalks by 01CB. Naturality of germs and the assumed formula on global pure
-tensors identify the composite of the stalk map with this localization map;
-equality on all tensors follows by linearity and generation by pure tensors.
-The resulting map between two localizations of the same module is bijective:
-a target fraction lifts by its numerator and denominator, and a source fraction
-in the kernel has numerator killed by an element of S and hence is zero.
-Composing with the inverse of the stalk tensor identification proves the claim.
-This also covers zero modules; for the zero ring there are no points to check. -/
+00DL and Modules 01CB. -/
 theorem affine_tilde_tensor_stalk_bijective (R : CommRingCat.{u})
     (M N : ModuleCat.{u} R)
     (α : tilde (ModuleCat.of R (M ⊗[R] N)) ⟶ tilde M ⊗ tilde N)

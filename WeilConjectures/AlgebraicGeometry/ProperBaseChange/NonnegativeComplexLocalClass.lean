@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinaryLocalClassCycles
 
 /-! # Ordinary local classes and extension by zero
 
-Source: Stacks Project, Cohomology, Tag 01E4, lemma-describe-higher-direct-images.
-(blueprint: lem-weil-pbc-nonnegative-complex-local-class).
+Source: Stacks Project, Cohomology, Tag 01E4.
 -/
 
 @[expose] public section
@@ -78,24 +77,7 @@ private theorem localClass_of_cycles {C : Type*} [Category C]
 /-- The module cocycle class map is the abelian sheafification class map, compatibly
 with extension by zero and exact evaluation. No derived category or acyclicity
 hypothesis is used.
-Source: Stacks Project, Cohomology, Tag 01E4, lemma-describe-higher-direct-images.
-(blueprint: lem-weil-pbc-nonnegative-complex-local-class).
-
-Proof: Precompose both sides with the epimorphism from cycles to the cohomology
-of the section complex. The module-sheafification adjunction identifies the left
-side with the map from sections of the kernel to the cokernel defining the
-cohomology sheaf. For the right side, apply the abelian-sheafification adjunction
-and commute its exact left adjoint with homology. The counit and the exact
-forgetful functor from module sheaves to abelian sheaves identify this with the
-same kernel-to-cokernel map. The two kernel comparisons agree because their
-composites with the kernel inclusion agree. Extension by zero identifies these
-kernels using extendCyclesIso and these quotients using extendHomologyIso;
-mapExtendIso gives the degreewise functor comparison. Its compatibility with
-composition follows degreewise (identity on nonnegative indices and uniqueness
-of morphisms between zero objects on the remaining indices). Exact evaluation
-commutes with the kernel and quotient constructions through mapHomologyIso.
-Cancel the cycle epimorphism. This includes degree zero, where the incoming
-differential is zero on both complexes, and empty opens and zero complexes. -/
+Source: Stacks Project, Cohomology, Tag 01E4. -/
 theorem nonnegativeComplex_localClass {X Y : Scheme.{u}}
     (D : SheafOfModules.{u} (moduleRings X.toRingedSpace) ⥤
       SheafOfModules.{u} (moduleRings Y.toRingedSpace)) [D.Additive]

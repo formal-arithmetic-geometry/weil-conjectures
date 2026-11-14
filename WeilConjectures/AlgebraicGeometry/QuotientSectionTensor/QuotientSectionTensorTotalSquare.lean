@@ -59,8 +59,7 @@ attribute [local irreducible] HomologicalComplex₂.total Mod.inducingFunctorDat
 Source: Stacks, Cohomology on Sites, Tags 06YY and 07A4.
 Check every summand of the unbounded direct-sum total. The ordinary scalar square,
 the defining total comparison formulas and the assumed summand formula for g give
-the same composite, by naturality of the termwise scalar comparison.
-(blueprint: lem-sfb-quotient-section-tensor-total-square). -/
+the same composite, by naturality of the termwise scalar comparison. -/
 theorem section_tensor_total_scalar_square (T : Scheme.{u})
     (c : ScalarSectionData a T) (hc : ScalarSectionNormalized a T c)
     (e : (Functor.postcompose₂.obj c.model.E).obj (curriedTensor (modules Λ T)) ⟶

@@ -567,21 +567,7 @@ private theorem properEtaleCompositor_raw_unit_core
 /-- Proper-first compact-support composition carries the raw direct-image unit to the
 mixed compactification unit after the degreewise normalized support map. This statement
 has no graph transfer, base-change map, or adjunction transpose.
-Source: Stacks Project, Tags 0F7B, 0F7I, 0F7J and 0D6E.
-(blueprint: lem-pur-proper-etale-compositor-raw-unit).
-
-Proof in words: choose a compactification d of v and compactify q into d. Its restriction
-is a compactification of the proper map q; the support inclusion is invertible because
-its open immersion is also proper. Normalize its derived comparison by the identity-open
-model. The etale graph comparison is normalized by its known mixed-unit formula. Apply
-raw-unit pasting to the ordinary mate of inverse open base change. This identifies the
-derived tower with the degreewise sheaf tower followed by the final mixed unit. Include
-the sheaf tower into ordinary direct image: naturality, the exchange inclusion identity,
-open-composition compatibility and direct-image associativity give exactly the proper-first
-support inclusion. The raw common-refinement unit comparison therefore replaces the tower
-candidate by any c and its normalized map tau. Tower independence and the comparison
-cocycle identify the derived map with the chosen compositor. Identity and empty cases are
-included in the unit, exchange, and support identities used in the calculation. -/
+Source: Stacks Project, Tags 0F7B, 0F7I, 0F7J and 0D6E. -/
 theorem properEtaleCompositor_raw_unit
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {W V Y : Scheme.{u}}

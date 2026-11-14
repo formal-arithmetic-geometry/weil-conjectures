@@ -496,25 +496,7 @@ private theorem chart_scalar {S T : Scheme.{u}} (h : T ⟶ S)
 coefficient of a quotient generator v is the pullback of iota(v)/iota(m).
 
 Source: Stacks Project, Constructions, Tags 01OA and 01O4, the normalized tautological
-quotient on a standard affine chart and its compatibility with pullback.
-(blueprint: lem-trf-line-quotient-pulled-chart-normalization).
-
-Proof: use D.chart U and D.generator to identify the quotient image of v with the
-section iota(v)/1 of the degree-one twist. On D_+(iota(m)), multiplication by iota(m)
-is an isomorphism from the structure sheaf to the twist: its inverse divides by
-that generator. Thus the generator is a frame, and the transition identity
- iota(v) = (iota(v)/iota(m))*iota(m) holds in the localized module. Pull this
-identity and the inverse trivialization back along k. The section-normalized tensor
-pullback adjunction and its composition comparison identify the resulting sections
-with pulledTautologicalGenerator and the images under pulledQuotient. This gives
-the displayed degree-one equation and preserves the free generator. The scalar
-identity follows by composing the chart factorization with relProjHom: the
-standard Proj chart has structural map induced by r -> r/1, and ha identifies
-its composite with h. The affine section adjunction then gives precisely the
-ring map k.appTop transported by the two canonical affine section isomorphisms.
-These computations hold over arbitrary rings, including zero rings; empty charts
-have the unique equations. No graded extension or all-degree fraction formula is
-assumed or asserted here. -/
+quotient on a standard affine chart and its compatibility with pullback. -/
 theorem lineQuotient_pulled_chart_normalization {S T : Scheme.{u}} (h : T ⟶ S)
     (E : S.Modules) [E.IsQuasicoherent] (D : TautologicalQuotient E)
     (a : T ⟶ (SymmetricAlgebraSheaf.gradedAlgebraData E).relProj)

@@ -33,13 +33,7 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ' T)]
 
 /-- Paste the two internal-image evaluations and cancel the invertible input.
-Source: Stacks 06YY and 07A4, the scalar tensor localization square.
-(blueprint: lem-sfb-quotient-section-tensor-transport-internal-counit).
-
-Proof: evaluate each side after the same invertible section-tensor input.
-The derived-side calculation uses the normalized internal tensorator; the
-ordinary-side calculation uses the scalar-unit formula. Both give the explicit
-scalarTensorSectionPath. Equality follows by cancellation. -/
+Source: Stacks 06YY and 07A4, the scalar tensor localization square. -/
 theorem section_tensor_transport_internal_counit (T : Scheme.{u})
     (c : ScalarSectionData a T) (hc : ScalarSectionNormalized a T c)
     (b : TensorIso a T) (hb : TensorNormalized a T b)

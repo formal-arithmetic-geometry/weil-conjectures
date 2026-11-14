@@ -97,28 +97,7 @@ set_option backward.defeqAttrib.useBackward true
 
 /-- Canonical resolution rows have a normalized direct-image roof. This is a
 comparison statement without a cover assumption or any assertion of exactness.
-Source: Stacks Project, Tags 08FE, 08HY, 08HZ and 0D5T.
-(blueprint: lem-pc-relative-mv-resolved-row-roof-comparisons).
-Proof: Let I, J and L be the displayed fixed resolutions. Represent the
-transpose K → Rg'_*K' of φ by a chain map I → L, using fullness of localization
-into the K-injective L. Represent the computation isomorphism for g'_*J by a
-chain map g'_*J → L. Apply open restriction and open direct image to the first
-map and schemeMVImageChainMap to the second. Naturality of restriction units
-and their differences gives morphisms of the concrete rows. Apply f_* and the
-sectionwise composition comparison for f_*g'_* ≅ g_*f'_* to obtain u and v.
-The latter is a quasi-isomorphism on every vertex by K-injective acyclicity for
-successive direct image and the normalized open-image resolution comparisons.
-Use the computation isomorphism for f_* on the K-injective vertices of I and L,
-and for f'_* on those of J. Compose the source comparisons with exact-open
-pullback and direct-image composition comparisons and the target comparisons
-with the inverse-open comparisons. Combine the U and V comparisons using the
-canonical biproduct comparison. The defining equation for the first chain map
-and the adjunction composition counit formula give the first mate equation.
-Naturality of the underived open counit square gives the same equation for each
-open. The U,V equations combine by biproduct naturality to give the second;
-the equation at U intersect V gives the third. No boundary or strictification
-is involved. The construction applies to empty or repeated opens and to zero
-complexes because all comparisons are functorial. -/
+Source: Stacks Project, Tags 08FE, 08HY, 08HZ and 0D5T. -/
 theorem relativeMV_resolved_row_roof_comparisons
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

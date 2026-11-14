@@ -158,9 +158,7 @@ public import WeilConjectures.AlgebraicGeometry.OrdinarySupportedCartierKummer
 /-!
 # Existence of an ordinary supported Cartier Kummer map
 
-Source: Stacks Project, Tags 03PL and 0A45; blueprint
-sec-smooth-purity/sk-prop-sf-cbc/lem-amb-cartier-kummer-map.md
-(blueprint: lem-asd-ordinary-supported-kummer).
+Source: Stacks Project, Tags 03PL and 0A45.
 -/
 
 @[expose] public noncomputable section
@@ -209,33 +207,7 @@ The derived arrow is displayed explicitly; Ext is only its canonical degree-two
 representative. The boundary determines that representative uniquely. Pullback and
 scalar-extension representatives are themselves normalized by the same boundary.
 
-Source: Stacks 03PL and 0A45; blueprint lemma-cycle-class-cartier-divisor
-(blueprint: lem-asd-ordinary-supported-kummer).
-
-Proof:
-1. Take the unique relative-boundary representative from
-   supported_cartier_boundary_existsUnique. It already contains the integral
-   torsor extension and the positive Kummer normalization.
-2. The normalized roots and tensor-line comparisons of etaleFiniteTwistPullback
-   give an OrdinaryFiniteTwistTransport; take its degree-one line comparison.
-3. Let c be supportedExactDerivedMap applied to that representative, and let c₁
-   be the inverse Ext realization of supportedDerivedUnit followed by c. The
-   generic exact-single adjunction comparison identifies this with Yoneda
-   precomposition by the ordinary constant unit. The integral generator commutes
-   with that unit. The boundary's equivariant map identifies the divisor frame
-   torsor with the lifting torsor of its extension over section one. Its H¹ class
-   is therefore the Picard class of the dual Cartier ideal. Composing with the
-   positive Kummer extension and the root tensor map gives the Chern equation,
-   as proved in supported_kummer_chern_realization. Ext.homEquiv supplies the
-   derived realization equation by its inverse identity.
-4. On a Cartier pullback take the uniquely normalized primed boundary. Closed
-   immersions are finite, so finite sheaf base change and the constant comparison
-   make supportedConstantExchange invertible. Apply the separate normalized
-   boundary pullback result to obtain the required Ext square.
-5. Take the uniquely normalized boundary over the lifted residue coefficient ring.
-   The separate scalar compatibility result supplies its unbounded scalar-unit
-   universal properties and the coefficient Ext square with the chosen class.
-No flatness of the coefficient map or the Cartier-preserving base map is assumed.
+Source: Stacks 03PL and 0A45.
 -/
 theorem ordinary_supported_kummer (T : Scheme.{u}) (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)

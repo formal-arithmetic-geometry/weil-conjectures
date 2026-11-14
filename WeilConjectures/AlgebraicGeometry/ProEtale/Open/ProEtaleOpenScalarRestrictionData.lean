@@ -12,8 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Intrinsic.ProEtaleIntri
 /-!
 # Data for scalar restriction and open adjunction normalization
 
-Source: Stacks Project, Tags 03DI and 03CY; derived.tex, Tag 015F; categories.tex,
-Tag 04VG (blueprint: def-sf-open-scalar-restriction-data).
+Source: Stacks Project, Tags 03DI and 03CY; Tag 015F; Tag 04VG.
 
 The comparisons are the published `sfOpenRestriction` and its exact termwise
 localization. Normalization is expressed on the open adjunction unit: on each
@@ -41,8 +40,7 @@ variable {A B C : Type u} [CommRing A] [CommRing B] [CommRing C]
 exactly the canonical realization equivalences used to define extension by zero.
 Its fixed-scalar middle square is the identity: precomposition with the open site
 functor commutes with restriction of scalars.
-Source: Stacks Tags 03DI and 03CY
-(blueprint: def-sf-open-scalar-restriction-data). -/
+Source: Stacks Tags 03DI and 03CY. -/
 def sfOpenRestrictionCoefficientSquare {U Z : Scheme.{u}} (j : U ⟶ Z)
     [IsOpenImmersion j] (φ : A →+* B) :
     proEtaleCoefficientRestrictScalars Z φ ⋙ sfIntrinsicOpenRestriction j A ≅
@@ -61,8 +59,7 @@ def sfOpenRestrictionCoefficientSquare {U Z : Scheme.{u}} (j : U ⟶ Z)
       (sfRealizationRestriction U φ).symm
 
 /-- Identity coefficient restriction in fixed-scalar coordinates, with the identity
-on every section. Source: Stacks Tag 03DA
-(blueprint: def-sf-open-scalar-restriction-data). -/
+on every section. Source: Stacks Tag 03DA. -/
 def sfOpenFixedRestrictionId (T : Scheme.{u}) (R : Type u) [CommRing R] :
     sfFixedRestriction T (RingHom.id R) ≅ 𝟭 _ :=
   NatIso.ofComponents (fun M ↦
@@ -74,8 +71,7 @@ def sfOpenFixedRestrictionId (T : Scheme.{u}) (R : Type u) [CommRing R] :
 /-- The canonical identity coefficient comparison in intrinsic coordinates. It is
 transported from the sectionwise identity, using the already section-normalized
 realization comparison and the realization counit.
-Source: Stacks Tags 03CY and 03DA
-(blueprint: def-sf-open-scalar-restriction-data). -/
+Source: Stacks Tags 03CY and 03DA. -/
 def sfOpenCoefficientRestrictionId (T : Scheme.{u}) (R : Type u)
     [CommRing R] [Finite R] :
     proEtaleCoefficientRestrictScalars T (RingHom.id R) ≅ 𝟭 _ :=
@@ -92,8 +88,7 @@ def sfOpenCoefficientRestrictionId (T : Scheme.{u}) (R : Type u)
 open. The unit of the recorded adjunction is the sheafification map on those
 generators. Every other presheaf value is zero, so this equation includes all its
 components. The coefficient square uses only the canonical realization maps.
-Source: Stacks Tags 03DI and 03CY
-(blueprint: def-sf-open-scalar-restriction-data). -/
+Source: Stacks Tags 03DI and 03CY. -/
 def SfOpenRestrictionNormalized {U Z : Scheme.{u}} (j : U ⟶ Z)
     [IsOpenImmersion j] (φ : A →+* B)
     (e : proEtaleCoefficientRestrictScalars U φ ⋙ sfIntrinsicExtensionByZero j A ≅

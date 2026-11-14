@@ -38,14 +38,13 @@ of the criterion are:
   `h⁰ = 1` and `h¹ = 0` has `Rf_{K,*} ℒ ≅ K[0]`.
 - `AlgebraicGeometry.smoothOfRelativeDimension_and_isProper_and_geometricallyIntegral_pullback_snd`:
   the base change of a smooth projective curve to a field extension is again a smooth projective
-  curve (blueprint `rem-pc-conventions`).
+  curve.
 - `AlgebraicGeometry.isRepresentable_picardFunctor`: the Picard functor of a smooth projective
   curve over a separably closed field is representable by a group scheme whose group law is the
-  tensor product of invertible modules (blueprint `theorem-picard-scheme-jacobian-over-separably`,
-  `theorem-picard-scheme-jacobian-over-separably--1`).
+  tensor product of invertible modules.
 - `AlgebraicGeometry.smoothOfRelativeDimension_of_representableBy_picardFunctor`: the Picard
   scheme is smooth of dimension `g`, being covered by translates of an open subscheme of
-  `Hilb^g_{X/k}` (blueprint `theorem-picard-scheme-jacobian-over-separably`).
+  `Hilb^g_{X/k}`.
 -/
 
 @[expose] public section
@@ -67,9 +66,7 @@ and geometrically integral, and let `K/k` be a field extension.  Then the base c
 `X_K` is integral.
 
 This is why the lemmas used in the proof of `AlgebraicGeometry.isRepresentable_picardFunctor` can
-be applied to all the fibres `X_K` of the family.
-
-(blueprint: `rem-pc-conventions`) -/
+be applied to all the fibres `X_K` of the family. -/
 theorem smoothOfRelativeDimension_and_isProper_and_geometricallyIntegral_pullback_snd
     (f : X ⟶ Spec (.of k)) [SmoothOfRelativeDimension 1 f] [IsProper f] [GeometricallyIntegral f]
     (K : Type u) [Field K] [Algebra k K] :
@@ -268,9 +265,7 @@ Choose a `k`-rational point `σ`, so that `Pic_{X/k} ≅ Pic_{X/k,σ}`. The open
 smooth of dimension `g`
 (`AlgebraicGeometry.exists_representableBy_picardFunctorInvertibleDirectImage`),
 and the translates of `F` by `k`-points cover `A` by open subschemes isomorphic to `W`
-(`AlgebraicGeometry.exists_isOpenImmersion_of_representable_open_subfunctor`).
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably`, smoothness) -/
+(`AlgebraicGeometry.exists_isOpenImmersion_of_representable_open_subfunctor`). -/
 theorem smoothOfRelativeDimension_of_representableBy_picardFunctor [IsSepClosed k]
     (A : Over (Spec (.of k))) (e : (picardFunctor (X ↘ Spec (.of k))).obj.RepresentableBy A) :
     SmoothOfRelativeDimension (arithmeticGenus k X) A.hom := by
@@ -299,15 +294,12 @@ theorem smoothOfRelativeDimension_of_representableBy_picardFunctor [IsSepClosed 
 end Curve
 
 /-- **The Picard functor of a smooth projective curve over a separably closed field is
-representable.** Let `k` be a separably closed field and let `f : X ⟶ Spec k` be a smooth
+representable.** Let `k` be a separably closed field and let `f: X ⟶ Spec k` be a smooth
 projective curve.  Then the Picard functor `Pic_{X/k} = AlgebraicGeometry.picardFunctor f` is
 represented by a group scheme `A` over `k`, i.e. by an object of `Over (Spec k)` carrying a
 `CategoryTheory.GrpObj` structure, and the representation respects the group laws
 (`AlgebraicGeometry.IsPicardMul`): the group law of `A` is the tensor product of invertible
-modules (blueprint `theorem-picard-scheme-jacobian-over-separably--1`).
-
-(blueprint: `theorem-picard-scheme-jacobian-over-separably`,
-`theorem-picard-scheme-jacobian-over-separably--1`) -/
+modules. -/
 theorem isRepresentable_picardFunctor [IsSepClosed k] (f : X ⟶ Spec (.of k))
     [SmoothOfRelativeDimension 1 f] [IsProper f] [GeometricallyIntegral f] :
     ∃ (A : Over (Spec (.of k))) (_ : GrpObj A) (e : (picardFunctor f).obj.RepresentableBy A),

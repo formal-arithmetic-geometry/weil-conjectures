@@ -11,7 +11,6 @@ public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 /-! # Compatible mapping-cylinder presentations
 
 Source: Stacks Project, Tags 013N, 014G and 013O.
-(blueprint: new-single-complex-open-union-ses-compatibility).
 -/
 
 @[expose] public section
@@ -161,17 +160,7 @@ end
 /-- A strict square with compatible localized vertices has a short exact
 mapping-cylinder presentation with all three localized components prescribed.
 
-Source: Stacks Project, Tags 013N, 014G and 013O.
-(blueprint: new-single-complex-open-union-ses-compatibility).
-
-Proof: Use the row A → B ⊕ Cone(id A) → Cone(t). In each degree its
-retraction and section give a splitting. Projection to B becomes an isomorphism
-in the derived category since Cone(id A) is contractible. Map the cylinders by
-β on B and Cone(α,α) on the identity cone; the strict-square equation gives a
-map of rows whose quotient is Cone(α,β). Projection to B intertwines the
-middle component with β already on complexes. Compose the three localized
-comparisons with the given vertex isomorphisms and use their compatibility.
-This works for zero complexes, zero arrows and repeated vertices as well. -/
+Source: Stacks Project, Tags 013N, 014G and 013O. -/
 theorem singleComplexOpenComparison_union_ses_compatibility
     {C : Type u} [Category C] [Abelian C] [HasDerivedCategory.{w} C]
     (A B A' B' : CochainComplex C ℤ)

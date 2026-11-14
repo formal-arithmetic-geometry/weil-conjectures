@@ -8,8 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Proj.ProjScalarExtensionTwistData
 
 /-! Pointwise evaluation of the section-normalized identity comparison.
-Source: Stacks Project, constructions.tex, Tags 01MY and 01N2.
-(blueprint: lem-sfb-proj-scalar-extension-twist-canonical-section).
+Source: Stacks Project, Tags 01MY and 01N2.
 -/
 
 @[expose] public section
@@ -25,12 +24,7 @@ open AlgebraicGeometry.Scheme.Modules
 namespace AlgebraicGeometry.Proj
 
 /-- The normalized identity pullback comparison evaluates a section at the same point.
-Source: Stacks Project, constructions.tex, Tags 01MY and 01N2.
-Proof: unfold the scalar-extension section and the normalized identity adjunction; the
-identity pullback section is the original section, and evaluation in the identity
-preimage identifies the two points. This is the section-level part of the canonical
-identity fraction calculation.
-(blueprint: lem-sfb-proj-scalar-extension-twist-canonical-section).
+Source: Stacks Project, Tags 01MY and 01N2.
 -/
 theorem scalarExtension_twist_canonical_section
     {A : Type u} [CommRing A]

@@ -30,7 +30,6 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 /-! # Joint degree-one comparison for a fixed minimal source model
 
 Source: Stacks Project, Tag 0BF2, the displayed chain maps and their residue comparison.
-(blueprint: lem-sc-picard-h1-fixed-model-comparison)
 -/
 
 @[expose] public section
@@ -239,53 +238,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option linter.unusedVariables false in
 /-- On an affine with trivial target bundles, construct the joint degree-one map
 out of a supplied minimal source complex and identify its residue map geometrically.
-Source: Stacks Project, Tag 0BF2, displayed chain maps; Tags 08CR and 0B91.
-(blueprint: lem-sc-picard-h1-fixed-model-comparison)
-
-Proof: Each target bundle is trivial on the entire supplied affine U, so its direct
-image is the direct image of the structure module. The structure adjunction unit
-identifies its H-zero with O_U. Perfect direct-image base change makes the target
-complex perfect and universally connective. On the affine, choose a bounded finite
-projective representative. Starting at its lowest negative degree, residue
-connectiveness makes the outgoing map injective on every residue field. Locally
-finite projective terms are finite free, so the local-ring residue split-injection
-criterion gives a locally free cokernel. This finitely presented cokernel is finite
-projective on the affine, so the injection splits globally. Cancel this pair and
-repeat until no negative terms remain. Its degree-zero cohomology after every base
-change is the structure
-module, by hOi and the target trivialization. Use
-exists_flat_derived_structure_unit for the derived unit and its fibre H-zero
-comparison, and represent that map by a chain map on the affine. At every residue
-field its degree-zero generator is nonzero, so this cycle is unimodular in the
-connective projective degree-zero term. Split off that unit summand. The remaining
-degree-zero differential is split injective: it is injective on every residue fibre,
-so the same local-ring criterion gives a finitely presented locally free cokernel,
-which is finite projective on the affine. Split and cancel this contractible pair.
-This gives a connective finite projective model with only the unit in degree zero
-and zero outgoing degree-zero differential. Its degree-one projective term is a
-retract of a finite free module. Represent each canonical derived pullback arrow by a chain map
-using the affine perfect-map theorem. Compose its degree-one component with that
-retract inclusion. Choose the sum of the finitely many free target ranks as q and
-identify their finite product with A^q. Their joint map b annihilates the source
-outgoing differential by the chain equations and the zero target differentials.
-The supplied source term-rank isomorphisms imply that every source differential
-vanishes over the residue field: its term dimensions equal its Betti dimensions.
-Consequently its residue degree-one term is its H-one. Trivialize the source fibre
-using hLs and the field rank-one lemma; the structure adjunction unit excludes the
-empty fibre. This identifies the source residue term with structure-sheaf H-one,
-giving alpha. On each target, project from the free ambient term to the projective
-term. Over the residue field choose a linear retraction of its degree-one term onto
-the kernel of the outgoing differential; this kernel is H-one because the incoming
-differential is zero. The source minimality makes the chain-map image lie in that
-kernel, so this retraction changes none of the image vectors. Use the pullbacks of
-the one source trivialization for all target cohomology identifications. The chosen
-geometric residue square identifies the resulting maps with structure-sheaf H-one
-pullback. The private algebra lemma assembles the square with the projections and
-finite free retractions.
-The immersion identifies kappa(w) with kappa(s); affine evaluation identifies kappa(p)
-with kappa(w). Taking the product gives beta and the asserted square. When n is zero
-use q zero and the unique map. When m is zero the source H-one is zero by minimality.
-Neither a target trivialization outside U nor an H-one injectivity assumption is used.
+Source: Stacks Project, Tag 0BF2, displayed chain maps; Tags 08CR and 0B91
 -/
 theorem picard_h1_fixed_model_comparison
     [∀ Y : Scheme.{v},

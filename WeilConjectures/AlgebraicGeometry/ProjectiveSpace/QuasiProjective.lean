@@ -44,7 +44,7 @@ variable {k K : Type u} [Field k] [Field K] [Algebra k K]
 /-- A scheme `X` over a field `k`, with structure morphism `f`, is *quasi-projective* if it
 admits an immersion over `Spec k`, that is a locally closed immersion, into a projective space
 `ℙ(β; Spec k)` with finitely many homogeneous coordinates; equivalently, an open immersion into
-a closed subscheme of such a projective space. (blueprint: `lemma-proper-smooth-model--1`) -/
+a closed subscheme of such a projective space. -/
 def IsQuasiProjective {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) : Prop :=
   ∃ (β : Type u) (_ : Finite β) (i : X ⟶ ℙ(β; Spec (.of k))),
     IsImmersion i ∧ i ≫ ℙ(β; Spec (.of k)) ↘ Spec (.of k) = f

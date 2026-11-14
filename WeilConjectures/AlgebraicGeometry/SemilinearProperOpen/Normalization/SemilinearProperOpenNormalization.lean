@@ -229,17 +229,7 @@ private theorem intrinsic_beta_inverse_mate
     (SemilinearProperOpen.jAdj.{u} C τ b)
     (TwoSquare.mk _ _ _ _ (SemilinearProperOpen.squareP.{u} C τ a b i p h).inv) M
 
-/-- Ambient SystemBetaLocalization. Source: Stacks Project, Tags 015F, 07A7 and 0F7B.
-(blueprint: lem-sf-ambient-system-beta-localization)
-
-Proof: The two ordinary pushforwards are equal because their coefficient ring maps
-agree on every sequence-site object. Thus their chosen inverse images, open extensions
-and adjunctions agree. The section-normalized direct-image compositors agree by their
-uniqueness, so the pullback square compositor agrees after exact localization.
-The inverse module beta is characterized by the open-unit equation. Exact localization
-preserves that equation and the specified open adjunction; injectivity of its Hom
-bijection identifies the localized inverse beta with the intrinsic inverse beta.
-Taking inverses yields the displayed equality. -/
+/-- Ambient SystemBetaLocalization. Source: Stacks Project, Tags 015F, 07A7 and 0F7B. -/
 private theorem system_beta_localized
     (C : ℕ → CommRingCat.{u + 1}) (τ : ∀ n : ℕ, C (n + 1) ⟶ C n)
     {U' U X' X : Scheme.{u}} (a : U' ⟶ U) (b : U' ⟶ X')
@@ -553,18 +543,7 @@ private theorem system_pull_cell_localized
     Functor.isoWhiskerRight_inv] at he
   convert he using 1; rfl
 
-/-- Ambient SystemClopenLocalization. Source: Stacks Project, Tags 015F, 07A7 and 0F7B.
-(blueprint: lem-sf-ambient-system-clopen-localization)
-
-Proof: Identify the two ordinary direct images by their coefficient ring maps and use
-adjoint uniqueness for their inverse images and open extensions. Their direct-image
-compositors agree on every section, so their pullback compositors agree. Exact
-localization preserves the inverse mate defining beta. The localized module projector
-has composite with the canonical open-to-direct comparison equal to the proper unit;
-this identifies it with the intrinsic projector. The normalized composite open
-adjunction localizes to the composite exact open adjunction, fixing the open compositor.
-Exact-derived transformation pasting now identifies the complete alpha words. Every
-step occurs on the single sequence-site module category, before any evaluation. -/
+/-- Ambient SystemClopenLocalization. Source: Stacks Project, Tags 015F, 07A7 and 0F7B. -/
 private theorem system_alpha_localized
     (C : ℕ → CommRingCat.{u + 1}) (τ : ∀ n : ℕ, C (n + 1) ⟶ C n)
     {U V W Z : Scheme.{u}} (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)
@@ -669,15 +648,7 @@ private theorem adj_heq {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (aRp := VaryingRing.push_additive.{u} C τ f)
 
 /-- The intrinsic proper/open mate agrees with the varying-ring mate before evaluation.
-Source: Stacks Project, Tags 0F7B and 07A7.
-(blueprint: lem-sf-intrinsic-varying-ring-mate-normalization).
-Proof: the coefficient maps are equal by their section normalization, so the chosen
-ordinary adjunctions and their localized comparisons agree. Exact localization
-preserves the inverse open mate defining beta. The invertible open-to-direct
-comparison and the proper-adjunction Hom bijection show that the restriction to
-the open determines the projector. Normalized adjunction composition identifies
-the open compositor. Exact transformation pasting identifies the full alpha word.
-Taking mates with the identified proper adjunctions gives the assertion. -/
+Source: Stacks Project, Tags 0F7B and 07A7. -/
 theorem gamma_normalization {V W S T : Scheme.{u}}
     (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
     [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]

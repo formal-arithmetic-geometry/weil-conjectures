@@ -19,5 +19,4 @@ public import Mathlib.RingTheory.Localization.Ideal
 
 /-! # Abhyankar's lemma at the generic root-divisor fibre
 Source: Stacks Project, Tags 09EB, 0BRM, and 0EYG, root-extension paragraph.
-(blueprint: lem-sbc-root-normalization-generic-source-etale)
 -/

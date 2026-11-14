@@ -23,8 +23,7 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.NormalizationDominantLift
 /-!
 # Geometry and separable field change of reduced algebraic normalization
 
-Source: Stacks Project, Varieties, Tags 0BXR and 0C3N; Morphisms, Tags 035Q, 035K, 0CDV
-(blueprint: lem-weil-pbc-reduced-algebraic-normalization-field-change).
+Source: Stacks Project, Varieties, Tags 0BXR and 0C3N; Morphisms, Tags 035Q, 035K, 0CDV.
 -/
 
 @[expose] public section
@@ -36,8 +35,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Componentwise normalization of a finite-type scheme over a field is finite.
-Source: Stacks Project, Tag 035S
-(blueprint: lem-weil-pbc-reduced-algebraic-normalization-field-change). -/
+Source: Stacks Project, Tag 035S. -/
 theorem finite_normalization {k : Type u} [Field k]
     (X : Scheme.{u}) (q : X ⟶ Spec (.of k))
     [LocallyOfFiniteType q] [QuasiCompact q] :
@@ -79,8 +77,7 @@ private theorem surjective_normalization (X : Scheme.{u}) :
   rw [← Scheme.Hom.comp_apply, Sigma.ι_comp_desc, Scheme.Hom.comp_apply]
   exact (congrArg I.subschemeι hz).trans hy
 /-- The stalks of the componentwise normalization are integrally closed domains.
-Source: Stacks Project, Tag 035Q
-(blueprint: lem-weil-pbc-reduced-algebraic-normalization-field-change). -/
+Source: Stacks Project, Tag 035Q. -/
 theorem normal_normalization (X : Scheme.{u}) (z : X.reducedNormalization) :
     IsDomain (X.reducedNormalization.presheaf.stalk z) ∧
       IsIntegrallyClosed (X.reducedNormalization.presheaf.stalk z) := by
@@ -242,9 +239,7 @@ private theorem reduced_baseChange {k : Type u} [Field k]
   have : IsReduced (pullback (ν ≫ q) g) := isReduced_of_isReduced_stalk _
   exact IsSchemeTheoreticallyDominant.isReduced n
 
-/-- A dense open meets every irreducible component when there are finitely many.
-Source: Mathlib, `closure_sUnion_irreducibleComponents_sdiff_singleton`
-(blueprint: lem-weil-pbc-reduced-algebraic-normalization-field-change). -/
+/-- A dense open meets every irreducible component when there are finitely many. -/
 theorem component_meets_dense_open (X : Scheme.{u})
     (hfinite : (irreducibleComponents X).Finite) (U : X.Opens) (hU : Dense (U : Set X))
     (Z : irreducibleComponents X) : (Z.1 ∩ (U : Set X)).Nonempty := by
@@ -265,8 +260,7 @@ theorem component_meets_dense_open (X : Scheme.{u})
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The inverse image of a dense open under componentwise normalization is dense.
-Source: Stacks Project, Tag 035Q, applied componentwise
-(blueprint: lem-weil-pbc-reduced-algebraic-normalization-field-change). -/
+Source: Stacks Project, Tag 035Q, applied componentwise. -/
 theorem dense_preimage_normalization {k : Type u} [Field k]
     (X : Scheme.{u}) (q : X ⟶ Spec (.of k))
     [LocallyOfFiniteType q] [QuasiCompact q]
@@ -691,13 +685,12 @@ namespace AlgebraicGeometry
 /-- Componentwise normalization is finite, surjective, an isomorphism over the dense open
 normal locus, compatible with restriction to opens, and compatible with separable field change.
 The comparison is characterized over the base by its projection equations.
-Source: Stacks Project, Varieties, Tags 0BXR and 0C3N; Morphisms, Tags 035Q, 035K, 0CDV
-(blueprint: lem-weil-pbc-reduced-algebraic-normalization-field-change).
+Source: Stacks Project, Varieties, Tags 0BXR and 0C3N; Morphisms, Tags 035Q, 035K, 0CDV.
 
 Source proof (the original affine route):
 1. Finite type over a field makes X Noetherian
-(`lem-weil-pbc-finite-type-over-noetherian`), hence its components are finite in number
-(`lem-weil-pbc-noetherian-finitely-many-components`). Normalize their reduced structures
+, hence its components are finite in number
+. Normalize their reduced structures
 using `lemma-proper-smooth-model--1`. Each resulting map is finite and surjective, as is
 its finite disjoint union. On affine charts the coordinate ring is the finite product of
 the integral closures of the component domains. This includes the empty coproduct.
@@ -721,7 +714,7 @@ identifications preserve fractions on further restrictions and hence glue over e
 They are canonical because two maps over W agree on the dense isomorphism locus and
 the target is separated over W.
 6. For separable K/k, `lem-weil-pbc-normal-algebra-separable-scalar-extension` makes B_K
-normal. Flatness (`lem-weil-pbc-module-over-field-flat`, `def-weil-pbc-flat-ring-map`)
+normal. Flatness
 preserves A → B and multiplication by s as injections. Thus A_K is reduced, B_K is
 finite over A_K, and s B_K lies in A_K. Both rings are Noetherian.
 7. These inclusions identify their total fraction rings: a fraction b/t in Q(B_K) is

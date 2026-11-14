@@ -18,9 +18,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.DeterminantSplitComparisonLocal
 
 /-!
 # Construction of the determinant comparison on a split open
-
-Source: blueprint, Riemann--Roch, proof of (*), determinant paragraph.
-(blueprint: lem-sc-determinant-split-comparison).
 -/
 
 @[expose] public section
@@ -32,38 +29,6 @@ open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Construct the comparison independently of any proposed determinant morphism.
-
-Source: blueprint, Riemann--Roch, proof of (*), determinant paragraph
-(blueprint: lem-sc-determinant-split-comparison).
-
-Proof: Refine `U` by the common trivializing cover of the two outside terms.
-On each subopen of a chart, identify their sections with finite free modules,
-and identify the middle term with their product by the splitting.
-Apply `exteriorPower.existsUnique_topDirectSum` to these bases and transport its inverse along the
-splitting and the rank equality.
-The formula first holds for the second-summand lifts. Replacing them by the supplied
-lifts changes each by an element of the first summand. Expand the difference by
-multilinearity: every term has more than `r₁` first-summand factors. Expanding these
-in its rank-`r₁` basis gives a repeated basis vector, hence zero by alternation.
-Thus the formula also holds for `l`, even if those lifts are not linear or natural.
-Uniqueness on pure wedges implies compatibility with restrictions on each chart: the free generators
-restrict to the free generators, and both composites take every tensor of wedges to
-the same concatenated wedge. Sheafify the exterior presheaves and the tensor
-presheaf. On a subopen of the chart, coverings and refinements are the same whether
-viewed in the chart or in `X`. The sheafification universal properties therefore
-identify the restrictions of the original exterior sheaves with the exterior
-sheaves formed on the chart, compatibly with their units. The monoidal comparison
-identifies the sheafification of the tensor presheaf with the tensor of these
-sheafifications. Sheafification preserves the comparison isomorphism, and its unit carries
-pure tensors of wedges to `tmulSection` of `wedge`s. For each point
-of `U`, select a common trivializing chart containing it and intersect
-with `U`. The sheafified comparison on this chart gives `d` on all its subopens;
-its naturality is the compatibility with restrictions just established. This is
-only a local construction: neither gluing between charts nor comparison with a
-proposed determinant morphism is asserted here.
-Degree zero uses the empty wedge, so zero ranks, the zero ring, and empty opens
-require no nonzero or nonempty hypotheses. 
-(blueprint: new-determinant-split-local)
 -/
 theorem determinant_split_comparison_exists {X : Scheme.{v}}
     (S : ShortComplex X.Modules) (r₁ r₂ r₃ : ℕ) (hr : r₂ = r₁ + r₃)

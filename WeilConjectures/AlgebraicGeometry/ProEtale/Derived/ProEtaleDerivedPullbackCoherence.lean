@@ -15,10 +15,8 @@ import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
 /-!
 # Associativity of canonical finite-coefficient derived pro-etale pullback comparisons
 
-Source: Stacks Project, sites-cohomology.tex, Tag 0D6D,
-`lemma-derived-pullback-composition`, its K-flat representative computation and the
-associativity of inverse-image comparisons
-(blueprint: lem-trf-derived-pullback-coherence).
+Source: Stacks Project, Tag 0D6D, its K-flat representative computation and the associativity of
+inverse-image comparisons.
 -/
 
 @[expose] public section
@@ -624,8 +622,7 @@ private theorem ordinaryComp_unit_section
 
 /-- The canonical derived compositor is induced by an ordinary pullback isomorphism
 whose unit sections restrict along fibre-product pasting. This packages the normalization
-without exposing its chosen witnesses. Source: Stacks Tags 05V1 and 0D6D
-(blueprint: lem-trf-derived-pullback-coherence). -/
+without exposing its chosen witnesses. Source: Stacks Tags 05V1 and 0D6D. -/
 theorem proEtaleConstantRingPullbackComposition_ordinary
     {X Y Z : Scheme.{u}} (h : Z ⟶ Y) (f : Y ⟶ X) (A : Type u) [CommRing A] :
     ∃ a : proEtaleConstantRingPullback A (h ≫ f) ≅
@@ -651,12 +648,7 @@ theorem proEtaleConstantRingPullbackComposition_ordinary
     (constantComparison_eq h f A).symm⟩
 
 /-- Forgetting the constant coefficient action identifies the module-pullback unit
-with an invertible underlying abelian inverse-image comparison. Source: Stacks,
-Modules on Sites, lemma-adjoint-push-pull-modules
-(blueprint: lem-trf-derived-pullback-coherence).
-Proof: apply the underlying-sheaf comparison for the ring-module adjunction to the
-constant coefficient identification. Extension along that ring isomorphism is an
-equivalence, so its unit and the resulting underlying comparison are invertible. -/
+with an invertible underlying abelian inverse-image comparison. Source: Stacks, Modules on Sites. -/
 theorem proEtaleConstantRingPullback_underlyingUnit_isIso
     (A : Type u) [CommRing A] {T S : Scheme.{u}} (t : T ⟶ S)
     (M : proEtaleRingModules S (proEtaleConstantRing S A)) :

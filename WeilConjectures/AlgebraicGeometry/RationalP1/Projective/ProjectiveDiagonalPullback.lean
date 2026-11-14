@@ -17,9 +17,6 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 
 /-! # Canonical projective diagonal pullback comparisons
-
-Source: blueprint main-20261015, rational projective-line unit/counit, clause 1
-(blueprint: def-sfb-projective-diagonal-pullback).
 -/
 
 @[expose] public noncomputable section
@@ -34,15 +31,13 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.RationalP1
 open DiagonalCoefficients
 
-/-- Bundle the existing tensor and its existing shift comparison. Source: blueprint clause 1
-(blueprint: def-sfb-projective-diagonal-pullback). -/
+/-- Bundle the existing tensor and its existing shift comparison. -/
 structure TensorBundle (D : Type a) [Category.{v} D] [HasShift D ℤ]
     [Preadditive D] [∀ n : ℤ, (shiftFunctor D n).Additive] where
   monoidal : MonoidalCategory D
   comm : letI := monoidal; (curriedTensor D).CommShift₂Int
 
-/-- The native K-flat tensor with its native two-variable shift structure. Source: blueprint
-clause 1 (blueprint: def-sfb-projective-diagonal-pullback). -/
+/-- The native K-flat tensor with its native two-variable shift structure. -/
 @[irreducible]
 def nativeTensorBundle (C : Type a) [Category.{v} C] [Abelian C]
     [IsGrothendieckAbelian.{v} C] [HasDerivedCategory.{w} C]
@@ -51,40 +46,34 @@ def nativeTensorBundle (C : Type a) [Category.{v} C] [Abelian C]
   ⟨inferInstance, inferInstance⟩
 
 -- Keep the fixed site and derived-functor comparisons folded during elaboration.
-/-- First projection of the actual self-product. Source: blueprint clause 1
-(blueprint: def-sfb-projective-diagonal-pullback). -/
+/-- First projection of the actual self-product. -/
 def firstProjection (Y : Scheme.{u}) : diagonalSurface Y ⟶ ProjectiveLine Y :=
   pullback.fst (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y)
 
 -- Keep the fixed site and derived-functor comparisons folded during elaboration.
-/-- Second projection of the actual self-product. Source: blueprint clause 1
-(blueprint: def-sfb-projective-diagonal-pullback). -/
+/-- Second projection of the actual self-product. -/
 def secondProjection (Y : Scheme.{u}) : diagonalSurface Y ⟶ ProjectiveLine Y :=
   pullback.snd (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y)
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
-/-- Specialize the fixed native tensor bundle. Source: blueprint clause 1
-(blueprint: def-sfb-projective-diagonal-pullback). -/
+/-- Specialize the fixed native tensor bundle. -/
 @[irreducible]
 def internalTensorBundle (X : Scheme.{u}) :
     TensorBundle (DerivedCategory (Modules Λ X)) :=
   nativeTensorBundle (Modules Λ X)
-/-- The same derived tensor through its fixed bundle field. Source: blueprint clause 1
-(blueprint: def-sfb-projective-diagonal-pullback). -/
+/-- The same derived tensor through its fixed bundle field. -/
 instance internalMonoidal (X : Scheme.{u}) :
     MonoidalCategory (DerivedCategory (Modules Λ X)) :=
   (internalTensorBundle Λ X).monoidal
-/-- The same signed shift comparison through its fixed bundle field. Source: blueprint
-clause 1 (blueprint: def-sfb-projective-diagonal-pullback). -/
+/-- The same signed shift comparison through its fixed bundle field. -/
 instance internalTensorCommShift (X : Scheme.{u}) :
     (curriedTensor (DerivedCategory (Modules Λ X))).CommShift₂Int :=
   (internalTensorBundle Λ X).comm
 
 -- Keep the fixed site and derived-functor comparisons folded during elaboration.
-/-- The canonical section comparison, with no arbitrary isomorphism. Source: blueprint
-unit/counit clause 1 (blueprint: def-sfb-projective-diagonal-pullback). -/
+/-- The canonical section comparison, with no arbitrary isomorphism. -/
 @[no_expose]
 def pullSectionIso (Y : Scheme.{u}) (f : diagonalSurface Y ⟶ ProjectiveLine Y)
     (h : diagonalImmersion Y ≫ f = 𝟙 (ProjectiveLine Y)) :
@@ -97,8 +86,7 @@ def pullSectionIso (Y : Scheme.{u}) (f : diagonalSurface Y ⟶ ProjectiveLine Y)
 
 /-- The canonical section comparison is the pullback compositor followed by the
 identity comparison. This equation keeps the construction available without unfolding
-it during unrelated dependent interface checks. Source: blueprint unit/counit clause 1
-(blueprint: def-sfb-projective-diagonal-pullback). -/
+it during unrelated dependent interface checks. -/
 theorem pullSectionIso_eq (Y : Scheme.{u})
     (f : diagonalSurface Y ⟶ ProjectiveLine Y)
     (h : diagonalImmersion Y ≫ f = 𝟙 (ProjectiveLine Y)) :
@@ -110,10 +98,7 @@ theorem pullSectionIso_eq (Y : Scheme.{u})
   rfl
 
 /-- The canonical single/unit comparison in the bundled interface, uniquely fixed by the
-published comparison. Source: blueprint clause 1
-(blueprint: def-sfb-projective-diagonal-pullback).
-Proof: unfold the fixed native bundle fields; the endpoints and the published comparison
-are the same. Heterogeneous equality to that comparison determines the isomorphism. -/
+published comparison. -/
 theorem singleUnit_existsUnique (X : Scheme.{u}) :
     ∃! e : unit Λ X ≅ 𝟙_ (DerivedCategory (Modules Λ X)),
       HEq e (DerivedCategory.singleFunctorObjUnitIso (Modules Λ X)) := by
@@ -122,8 +107,7 @@ theorem singleUnit_existsUnique (X : Scheme.{u}) :
   intro e he
   exact eq_of_heq he
 
-/-- The published single/unit isomorphism in the shared tensor interface. Source: blueprint
-clause 1 (blueprint: def-sfb-projective-diagonal-pullback). -/
+/-- The published single/unit isomorphism in the shared tensor interface. -/
 def singleUnitIso (X : Scheme.{u}) : unit Λ X ≅ 𝟙_ (DerivedCategory (Modules Λ X)) :=
   (singleUnit_existsUnique Λ X).exists.choose
 

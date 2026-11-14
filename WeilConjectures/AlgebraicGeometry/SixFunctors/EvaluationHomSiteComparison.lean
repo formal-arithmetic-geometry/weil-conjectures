@@ -17,8 +17,7 @@ import WeilConjectures.AlgebraicGeometry.IntegralResidueDerivedMonoidal
 
 /-! # The evaluation-defined site comparison
 
-Source: Weil blueprint, proposition-six-operations-dctf--15, evaluation paragraph;
-Stacks Tags 03EO, 03EL, 08J7 (blueprint: def-sf-evaluation-hom-site-comparison).
+Source: Stacks Tags 03EO, 03EL, 08J7.
 The tensor comparison below uses only the comparison-site adjunction, avoiding
 unrelated scheme-pullback coherence modules.
 -/
@@ -30,7 +29,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposi
 namespace AlgebraicGeometry.ProEtale
 
 /-- The canonical strong monoidal structure of comparison inverse image.
-Source: Stacks Tag 03EL (blueprint: def-sf-evaluation-hom-site-comparison). -/
+Source: Stacks Tag 03EL. -/
 @[irreducible]
 noncomputable def siteComparisonMonoidal
     (A : Type (u + 2)) [Category.{u + 1} A] [Abelian A]
@@ -82,8 +81,7 @@ private theorem derived_monoidal_exists
 
 /-- The canonical derived tensor comparison admits a strong monoidal structure.
 Its tensor components are prescribed, so the structure determines the comparison maps
-used below. Source: Stacks Tags 03EL, 08J7
-(blueprint: def-sf-evaluation-hom-site-comparison). -/
+used below. Source: Stacks Tags 03EL, 08J7. -/
 theorem siteComparisonDerivedMonoidal_exists
     (A : Type (u + 2)) [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A]
@@ -108,7 +106,7 @@ theorem siteComparisonDerivedMonoidal_exists
 /-- Strong monoidal structure with the prescribed canonical derived tensor components.
 Only those components and their inverses occur in the comparison maps. The preceding
 proved theorem specifies them before the structure is selected.
-Source: Stacks Tags 03EL, 08J7 (blueprint: def-sf-evaluation-hom-site-comparison). -/
+Source: Stacks Tags 03EL, 08J7. -/
 @[irreducible]
 noncomputable def siteComparisonDerivedMonoidal
     (A : Type (u + 2)) [Category.{u + 1} A] [Abelian A]
@@ -121,7 +119,7 @@ noncomputable def siteComparisonDerivedMonoidal
 
 set_option backward.isDefEq.respectTransparency true in
 /-- The chosen structure has exactly the canonical transported tensor components.
-Source: Stacks Tags 03EL, 08J7 (blueprint: def-sf-evaluation-hom-site-comparison). -/
+Source: Stacks Tags 03EL, 08J7. -/
 theorem siteComparisonDerivedMonoidal_δ
     (A : Type (u + 2)) [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A]
@@ -143,7 +141,7 @@ theorem siteComparisonDerivedMonoidal_δ
 /-- The canonical derived tensor comparison of the comparison inverse image.
 It is obtained by deriving the oplax structure conjugate to restriction of sheaves;
 representable flatness makes that structure strong monoidal.
-Source: Stacks Tags 03EO, 03EL (blueprint: def-sf-evaluation-hom-site-comparison). -/
+Source: Stacks Tags 03EO, 03EL. -/
 @[irreducible]
 noncomputable def siteComparisonTensorIso
     (A : Type (u + 2)) [Category.{u + 1} A] [Abelian A]
@@ -164,8 +162,7 @@ noncomputable def siteComparisonTensorIso
 /-- The specified comparison is the transpose of pullback of evaluation, using the
 canonical tensor comparison. It is defined on all ambient complexes; invertibility
 requires hypotheses and is a separate assertion.
-Source: Stacks Tags 03EO, 03EL, 08J7
-(blueprint: def-sf-evaluation-hom-site-comparison). -/
+Source: Stacks Tags 03EO, 03EL, 08J7. -/
 @[irreducible]
 noncomputable def siteComparisonEvaluationHom
     (A : Type (u + 2)) [Category.{u + 1} A] [Abelian A]

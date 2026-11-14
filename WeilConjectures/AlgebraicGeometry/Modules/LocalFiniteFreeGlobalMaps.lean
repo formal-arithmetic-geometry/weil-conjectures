@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.ExtendLocalFreeMap
 /-! # Extending a local basis on a quasi-affine open
 
 Source: Stacks Project, Tag 0EKP, proof of (2) to (3), via denominator clearing.
-(blueprint: new-sbc-quasi-affine-local-free-global-map)
 -/
 
 @[expose] public section
@@ -27,19 +26,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- Around any one point, a local basis extends to a global map from a finite free module.
 
 Source: Stacks Project, Tag 0EKP, proof of (2) to (3), and the section-clearing theorem
-`exists_tensorPowSection_eq_restrict`.
-(blueprint: new-sbc-quasi-affine-local-free-global-map)
-
-Proof: choose a principal open D(f) of Spec R containing x, contained in V, and
-trivializing N, of some finite rank r. The open V is quasi-compact and separated,
-and N is quasi-coherent. Apply section clearing on V with the invertible module O_V
-and the section f to each of the r basis sections on D(f). Identify the tensor
-powers of O_V with O_V. The resulting global sections restrict to f raised to
-(possibly different) powers times the basis sections. Since f is invertible on D(f),
-these sections are still a basis there. Their associated global map is therefore an
-isomorphism on the corresponding open U of V. This is a local assertion at x;
-no finite global generating family or finite subcover is asserted. If r is zero,
-the empty family gives the map from the zero free module. -/
+`exists_tensorPowSection_eq_restrict`. -/
 theorem exists_free_map_isIso_near_of_isFiniteLocallyFree
     {R : Type u} [CommRing R] [IsNoetherianRing R]
     (V : (Spec (.of R)).Opens) (N : V.toScheme.Modules) [N.IsFiniteLocallyFree]

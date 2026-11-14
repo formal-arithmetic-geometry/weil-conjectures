@@ -149,24 +149,7 @@ private theorem integral_module_completion_reflector (ℓ : ℕ) [Fact ℓ.Prime
 /-- The total derived limit of the integral prime-power quotient tower is the
 reflection onto complexes right orthogonal to all ell-invertible complexes.
 
-Source: Stacks Project Tags 099M, 091S and 091Z; diagonal tower proof step 4
-(blueprint: lem-sfb-integral-strict-completion-reflector).
-
-Proof: pass from abelian sheaves to modules over the constant integer sheaf.
-Cokernel uniqueness identifies the strict ordinary quotient tower with tensor
-by the finite constant quotients Z/ell^(n+1), preserving its quotient maps and
-all transitions. Compute on one flat-term K-flat resolution. The left-derived
-universal property descends this comparison, and the right-derived universal
-property compares the given total inverse limit with the standard completion
-limit. Apply the principal Koszul completion reflector to the singleton ell
-in the constant integer ring. The two-term Koszul resolutions have transition
-(ell,1), so their strict augmentations identify its unit with the quotient
-augmentation. The principal-ideal criterion identifies local derived
-completeness with right orthogonality to ell-invertible complexes. The
-reflector gives complete outputs and the Hom bijection. Transfer the unit,
-output completeness and bijection along the preceding natural isomorphisms.
-All comparisons use strict system complexes before localization. No product
-exactness, boundedness or input completeness is imposed. -/
+Source: Stacks Project Tags 099M, 091S and 091Z. -/
 theorem integral_strict_completion_reflector (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     [HasDerivedCategory.{u + 1} (DiagonalAb W)]
     [HasDerivedCategory.{u + 1} (ℕᵒᵖ ⥤ DiagonalAb W)]

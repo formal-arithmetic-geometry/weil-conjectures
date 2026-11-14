@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.Sites.FiniteGaloisInvariantGermDescent
 # A section representing an invariant geometric germ
 
 Source: Stacks Project, Tag 04JM, direct proof, applied over a finite separable field.
-(blueprint: lem-exc-field-invariant-germ-representative).
 -/
 
 @[expose] public section
@@ -31,34 +30,12 @@ namespace AlgebraicGeometry.Scheme
 
 attribute [local instance] Algebra.Etale.of_finite_of_isSeparable
 
-/-- Source: Stacks Project, [Tag 04JM](https://stacks.math.columbia.edu/tag/04JM),
-the direct proof of Lemma 59.56.5, applied after restricting the sheaf to `Spec L`.
-(blueprint: lem-exc-field-invariant-germ-representative).
+/-- Source: Stacks Project, the direct proof of Lemma 59.56.5, applied after restricting the sheaf
+to `Spec L`.
 
 An invariant germ has a section representative at the specified finite separable field.
 The action is supplied as an argument and characterized on germs; this theorem neither
-constructs an action nor asserts injectivity, naturality, or independence of embeddings.
-
-Proof:
-1. Restrict `F` to the small etale site of `Spec L` by etale composition. The stalk has
-   the same pointed neighbourhoods cofinally, with the lift through `Spec L` specified by `x`.
-2. Represent `m` in an etale neighbourhood, shrink to the component containing the lift,
-   and identify it with a finite separable field by the etale fibre theorem. Embed that
-   field in `Ks` using the chosen lift. Take the normal closure inside `Ks` of its
-   compositum with `L`, using `FiniteGaloisIntermediateField.adjoin` on the images of
-   finite bases. This is finite Galois over `K`, hence over `L`. Its inclusions preserve
-   the chosen lifts. Pull the representative back to `Spec E`.
-3. The germ map from `Spec E` is injective: equality of germs holds in a common pointed
-   refinement; its map to the one-point `Spec E` is an etale surjection, hence a cover,
-   and the separated sheaf condition makes restriction injective.
-4. Every `L`-automorphism of `E` extends to an element of `L.fixingSubgroup`. Its pullback
-   on the representative has the same germ by `haction` and `hm`, so injectivity makes
-   the representative invariant under `Gal(E/L)`.
-5. Finite Galois sections descent supplies a section over `Spec L`. Naturality of the
-   colimit injections shows that its germ at `x` is `m`.
-
-The case `L = K` is the source's global-sections argument. For separably closed `K`,
-the finite separable fields are trivial and the assertion reduces to the terminal germ. -/
+constructs an action nor asserts injectivity, naturality, or independence of embeddings. -/
 theorem exists_fieldSection_of_invariant_germ
     (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]
     [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]

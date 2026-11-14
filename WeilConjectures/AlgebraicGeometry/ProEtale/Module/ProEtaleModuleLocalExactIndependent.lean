@@ -13,7 +13,6 @@ import Mathlib.CategoryTheory.Sites.LocallySurjective
 /-! # Descent of local module exactness in independent universes
 
 Source: Stacks Project, Pro-etale Cohomology, Tag 09AH; Modules on Sites, Tag 03DA.
-(blueprint: lem-fix-proetale-module-local-exact-independent).
 -/
 
 @[expose] public noncomputable section
@@ -76,17 +75,8 @@ private theorem module_epi_of_local_kernel_lifts {X : Scheme.{t}}
 /-- Sectionwise short exactness on a pro-etale covering implies categorical
 short exactness, with module universe independent of the scheme universe.
 
-Source: Stacks Project, Pro-etale Cohomology, Tag 09AH
-(lemma-ses-associated-to-open), the final local exactness argument; Modules on
-Sites, Tag 03DA, local lifting and the underlying abelian sheaf.
-(blueprint: lem-fix-proetale-module-local-exact-independent).
-
-Proof: use the sheaf separatedness axiom to descend injectivity of the first map
-and the vanishing of the composite. The last map is locally surjective, hence
-epic. For exactness, use the monomorphism from its kernel. Local image-kernel
-exactness lifts a kernel section to a source section; monicity identifies this
-lift with the desired kernel section. Thus the kernel lift is locally surjective,
-and hence epic. The kernel criterion gives categorical exactness. -/
+Source: Stacks Project, Pro-etale Cohomology, the final local exactness argument; Modules on Sites,
+Tag 03DA, local lifting and the underlying abelian sheaf. -/
 theorem proEtale_module_shortExact_of_local_sections_independent {X : Scheme.{t}}
     [HasSheafify (ProEt.topology X) AddCommGrpCat.{max u (t + 1)}]
     [(ProEt.topology X).WEqualsLocallyBijective AddCommGrpCat.{max u (t + 1)}]

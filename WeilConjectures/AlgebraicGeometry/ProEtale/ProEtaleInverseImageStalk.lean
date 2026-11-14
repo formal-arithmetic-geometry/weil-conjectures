@@ -47,9 +47,8 @@ import Mathlib.CategoryTheory.Functor.TypeValuedFlat
 /-!
 # Geometric stalks commute with pro-etale inverse image
 
-Source: Stacks Project, Tags 05V1 and 0F4F; pro-etale geometric points and
-neighbourhoods, Tags 0F6B, 0F6C and 0993
-(blueprint: lem-pur-proetale-inverse-image-stalk).
+Source: Stacks Project, Tags 05V1 and 0F4F; pro-etale geometric points and neighbourhoods, Tags
+0F6B, 0F6C and 0993.
 
 The germ equation characterizes the canonical comparison: the germ of the adjunction
 unit at the pulled-back pointed neighbourhood maps to the original germ. Naturality
@@ -280,40 +279,7 @@ The first clause fixes the canonical comparison by its value on unit germs; the
 second is naturality in the sheaf; the third reflects equality of inverse-image maps
 at the image geometric point. The comparison is additive since it is an isomorphism
 in `AddCommGrpCat`.
-Source: Stacks Project, Tags 05V1, 0F4F, 0F6B, 0F6C and 0993
-(blueprint: lem-pur-proetale-inverse-image-stalk).
-
-Proof:
-1. Put `P = u_{f,p} F`. A lift of `x ≫ f` to `V` pairs uniquely with `x` to
-   give a lift to `u_f(V)`, by `def-pc-fibre-product`. These correspondences respect
-   pointed arrows. All diagrams are small by `prose-01-10`.
-2. A cover of a pointed neighbourhood lifts the fixed field point to a member.
-   Base change the fpqc cover (`lem-galois-fpqc-covering-base-change`); choose a
-   nonempty affine fibre. Weakly etale base change and source locality reduce to
-   `theorem-pro-etale-refinements-weakly-etale`, using `definition-ind-etale-pro-etale-weakly`.
-   Its residue field embeds back into the algebraically closed field by
-   `lem-weil-pbc-separable-extension-embeds-separably-closed`. Transport to a skeleton.
-3. In sets, local representation and local equality of sheafified sections
-   (`lem-weil-pbc-site-sheafification-sections-local`), together with step 2 and
-   filteredness of pointed neighbourhoods, make the stalk of the sheafification
-   unit bijective, naturally in `P`.
-4. In abelian groups, `lem-cbc-proetale-sheafification-geometric-stalk` gives
-   the same natural isomorphism `t : P_x ≅ (f⁻¹F)_x` in abelian groups.
-5. Define `a : P_x → F_{x ≫ f}` on an inner coprojection `(U,point,V,φ)` by the
-   germ of its section at the lift obtained by projecting `φ(point)` to `V`.
-   These maps respect the inner comma arrows and outer pointed restrictions,
-   so the two colimit universal properties descend them (`def-weil-pbc-category-colimit`).
-6. Define `b : F_{x ≫ f} → P_x` using `(u_f(V),paired lift,V,id)` on each
-   germ. The inverse-image restriction formula identifies its restriction along
-   `u_f(r)` with the coprojection `(V',u_f(r))`; the inner comma arrow from
-   `(V,id)` gives compatibility, so this also descends to the colimit.
-7. On original germs `ab` is the identity. On the twice-indexed coprojections,
-   the pointed arrow `φ` identifies `ba` with the identity. Thus `a` and `b`
-   are inverse; take `c = a t⁻¹`. This yields exactly the unit-germ equation.
-8. On every inner coprojection, both naturality paths send `s` to the germ of
-   `h(s)` at its projected lift. Descend twice and use naturality of `t`.
-   All arrows in the abelian case are homomorphisms. Conjugating by `c` shows
-   that equal inverse images give equal stalk maps at `x ≫ f`.
+Source: Stacks Project, Tags 05V1, 0F4F, 0F6B, 0F6C and 0993.
 -/
 theorem proEtaleInverseImage_abelianStalk
     {X Y : Scheme.{u}} (f : X ⟶ Y)

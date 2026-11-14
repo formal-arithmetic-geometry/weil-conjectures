@@ -22,10 +22,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Generators
 
 /-! # Closed proper base change on bounded constructible finite-Tor inputs
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-sf-comp-coherence,
-det-sf-comp-coherence-refinement.proof.md, (2), proper base change along the closed
-complement (blueprint: lem-sfb-qcqs-proper-constructible-closed-base-change).
-
 The exchange is the actual unit--square--counit mate on ordinary unbounded internal module
 objects. The coefficient predicate retains exactly the node's norm-topological convention.
 -/

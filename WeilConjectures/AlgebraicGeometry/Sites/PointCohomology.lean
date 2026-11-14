@@ -202,8 +202,7 @@ lemma projective_constantSheaf_moduleCat_of_iso {k} [Field k] [IsSepClosed k]
 particular an algebraically closed one), `H^q(Spec k_ét, ℤ) = 0` for all `q ≥ 1`. The
 blueprint argues via the equivalence of étale sheaves on `Spec k` with discrete Galois modules,
 the Galois group being trivial; we use directly that the constant sheaf `ℤ` is projective
-(`AlgebraicGeometry.Scheme.projective_constantSheaf_of_isSepClosed`).
-(blueprint: `lemma-cohomology-multiplicative-group`) -/
+(`AlgebraicGeometry.Scheme.projective_constantSheaf_of_isSepClosed`). -/
 theorem subsingleton_H_constantSheaf_of_isSepClosed (q : ℕ) :
     Subsingleton (Sheaf.H ((constantSheaf (Spec (.of k)).smallEtaleTopology
       AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of (ULift ℤ))) (q + 1)) :=
@@ -354,7 +353,7 @@ theorem surjective_app_of_shortExact_constantSheaf_int
   have hT := MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale (Spec (.of K))
   have := (Spec (.of K)).isIso_constantSheafToPointFunctionSheaf M
     discreteTopology_of_etale_of_unique
-  -- replace `ℤ` by the isomorphic sheaf `P : V ↦ (V → ℤ)` of functions on points
+  -- replace `ℤ` by the isomorphic sheaf `P: V ↦ (V → ℤ)` of functions on points
   let ι' : P ⟶ E := inv ((Spec (.of K)).constantSheafToPointFunctionSheaf M) ≫ ι
   have w' : ι' ≫ π = 0 := by simp [ι', w]
   have hS' : (ShortComplex.mk ι' π w').ShortExact :=
@@ -453,8 +452,7 @@ end Field
 `H¹(Spec K_ét, ℤ) = Hom_cont(Gal(Kˢᵉᵖ/K), ℤ) = 0`: étale cohomology of `Spec K` is Galois
 cohomology, and a continuous homomorphism from the profinite group `Gal(Kˢᵉᵖ/K)` to the
 discrete group `ℤ` has finite image, hence is trivial. This is the version for a commutative
-ring which is a field, see `AlgebraicGeometry.Scheme.subsingleton_H_one_constantSheaf_of_field`.
-(blueprint: `lemma-cohomology-multiplicative-group--8`, Step 2) -/
+ring which is a field, see `AlgebraicGeometry.Scheme.subsingleton_H_one_constantSheaf_of_field`. -/
 theorem subsingleton_H_one_constantSheaf_of_isField (K : CommRingCat.{u}) (hK : IsField K) :
     Subsingleton (Sheaf.H ((constantSheaf (Spec K).smallEtaleTopology
       AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of (ULift ℤ))) 1) := by

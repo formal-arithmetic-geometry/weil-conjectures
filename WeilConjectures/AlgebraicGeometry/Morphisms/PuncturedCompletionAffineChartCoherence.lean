@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionChartGener
 # Coherence of affine chart section transitions
 
 Source: Stacks Project, Tag 0BLH, first two proof paragraphs; Tag 05EL, item (1).
-(blueprint: lem-sbc-punctured-completion-affine-chart-coherence)
 -/
 
 @[expose] public section
@@ -115,21 +114,6 @@ This checks maps already supplied; it constructs no section module or equivalenc
 
 Source: Stacks Project, Tag 0BLH, second proof paragraph (the object check);
 Tag 05EL, item (1), its square and cocycle clauses.
-(blueprint: lem-sbc-punctured-completion-affine-chart-coherence)
-
-Proof: apply the generator-coherence theorem to obtain equality on the original
-module elements. Multiplication by each power of f_j is invertible on M_j,
-since M_j is a module over A_(f_j). Map these invertible endomorphisms through
-localization and scalar extension; they remain invertible. Consequently both
-f_i and f_j act invertibly on the target C tensor_A (M_j)_(f_i). Apply the
-universal property of localization first at f_j and then at f_i: to compare the
-square paths it suffices to evaluate them on (m'/1)/1, which is exactly the
-first generator equation. Similarly f_k acts invertibly on M_k, hence on its
-two localizations. Powers of f_j act invertibly by the outer localization.
-Two applications of localization uniqueness reduce the cocycle paths to their
-values on (m/1)/1, given by the second generator equation. This proof constructs
-no geometric objects and needs no flatness. With t=0 all equalities are vacuous;
-with zero principal opens the same universal property applies to zero modules.
 -/
 theorem affine_chart_transition_coherence
     {A : Type u} [CommRing A] [IsLocalRing A]

@@ -22,33 +22,6 @@ namespace AlgebraicGeometry
 
 /-- Chain representatives for the unrestricted relative Mayer--Vietoris square.
 Source: Stacks Project, Cohomology, Tags 08BV, 08HZ, 08FE and 08HY.
-(blueprint: lem-pc-relative-mv-cover-chain-square).
-Proof: Choose injective-term K-injective representatives of K and K'. Their
-restriction-pair and restriction-difference sequences are exact on sections by
-sheaf gluing and injective flasqueness. Restriction preserves K-injectivity, so
-applying direct image computes the relative vertices (Tags 08BV and 08HZ).
-Transpose φ along the derived adjunction for g'. A map into the target
-K-injective representative represents the transpose; restriction gives a map
-of the cover diagrams. Compute source pullback with a K-flat resolution of the
-finite diagram, retaining its specified square homotopies. Exact tensor on
-K-flat models carries the restriction triangle to its cone triangle. The
-underived open counit square of Tag 08FE identifies the restricted comparison.
-Represent the first arrows and comparison components by chain maps t,t',α,β
-and retain the resulting homotopy H of their square. The induced cone map is
-mapOfHomotopy H, and the original exact restriction sequences identify its
-localization with the overlap comparison. This uses the map of resolved rows,
-not an arbitrary completion of a morphism of triangles.
-Rectify that specified square using homotopy_square_cone_rectification: replace
-B by B plus Cone(id A), and correct β on the contractible summand using H.
-Its projection to B is a homotopy equivalence, and the rectification theorem
-preserves the localized specified cone map. Compose this projection with the
-original middle comparison. Compare direct-image compositions by adjunction
-mates; use the biproduct comparison at the middle vertex. Expanding the
-base-change mate (Tag 08HY) and composing counits identifies α with the global
-map, β with the sum of the two local maps, and the functorial cone map with the
-overlap map. These are the three asserted equations. No short exact cylinder
-presentation is required here. Empty opens give zero local terms; repeated
-opens give split restriction rows; zero objects and φ=0 give zero comparisons.
 -/
 theorem relativeMV_cover_chain_square
     [∀ Z : Scheme.{u},

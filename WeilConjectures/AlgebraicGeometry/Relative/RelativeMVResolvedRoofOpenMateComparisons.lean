@@ -75,18 +75,7 @@ private theorem combine_component_comparisons
 -- The two open-vertex types contain fixed complex and derived functor comparisons.
 /-- The open and diagonal components of a normalized resolved row roof are the
 specified local base-change mates. Source: Stacks Project, Tags 08FE, 08HY,
-08HZ and 0D5T.
-(blueprint: lem-pc-relative-mv-resolved-roof-open-mate-comparisons).
-Proof: The middle-only mate comparison provides the two middle-vertex
-isomorphisms and their equation. Apply the proved one-open roof comparison to
-W=U intersect V. Its denominator is the third vertex of the fixed row denominator:
-the image chain map has schemeMVImageComponent as its third component, and
-inverse image preserves the intersection. Its numerator is the third vertex of
-the numerator row map by the prescribed third-component equation for u0.
-Rewrite these two component identities, including under the invertible denominator,
-and combine the two one-open isomorphisms and equation with the middle data.
-No exactness, cover, global comparison or row construction occurs. Empty,
-repeated and full opens and zero phi follow the same component identities. -/
+08HZ and 0D5T. -/
 theorem relativeMV_resolved_roof_open_mate_comparisons
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

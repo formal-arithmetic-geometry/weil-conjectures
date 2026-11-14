@@ -18,9 +18,7 @@ import all WeilConjectures.AlgebraicGeometry.Perfect.PerfectChartTensorCompariso
 
 /-! # Finite inverse image and normalized slice isomorphisms
 
-Source: Stacks Tags 04IX (definition-localize-ringed-site), 03DH, and
-03CE (sites-lemma-localize-given-products); Bhatt--Scholze, Section 6.5.
-(blueprint: lem-weil-pbc-integral-residue-finite-slice).
+Source: Bhatt--Scholze, Section 6.5.
 -/
 
 @[expose] public noncomputable section
@@ -33,23 +31,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- An isomorphism after finite inverse image gives an isomorphism on the actual slice.
 There are no constant-complex or perfectness hypotheses.
-Source: Stacks Tags 04IX (definition-localize-ringed-site), 03DH, and
-03CE (sites-lemma-localize-given-products); Bhatt--Scholze, Section 6.5.
-(blueprint: lem-weil-pbc-integral-residue-finite-slice).
-
-Proof: the canonical equivalence between the pro-etale site of Y.left and the slice
-of S.ProEt over (toProEt S).obj Y preserves coverings. On fixed coefficient module
-sheaves it identifies inverse image along Y.hom with restriction to that slice.
-The finiteCoefficientRealization equivalence identifies the fixed coefficient and
-ringed module presentations. Scalar restriction along the inverse coefficient
-isomorphism in integralResidueFiniteModel commutes with slice restriction: both
-have the same sections and maps, with the scalar action composed with the same
-restricted ring map. All these functors are exact. Apply their termwise versions
-to cochain complexes and descend through localization. The canonical representative
-isomorphisms identify these derived functors with the displayed constructions.
-Transport the supplied isomorphism through this chain of equivalences and cancel
-the equivalence from the slice to Y.left. The argument uses only isomorphisms and
-exact functors, and includes zero complexes, empty schemes and every n. -/
+Source: Bhatt--Scholze, Section 6.5. -/
 theorem integralResidueFiniteSlice
     (S : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

@@ -10,7 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.Picard.Derived.PicardDerivedFibr
 /-! # Geometric naturality before choosing affine models
 
 Source: Stacks Project, Tags 0B91, 0BF2 and 01XK.
-(blueprint: new-picard-derived-fibre-naturality)
 -/
 
 @[expose] public section
@@ -21,27 +20,7 @@ namespace AlgebraicGeometry.Scheme
 
 -- The derived fibre comparison elaborates nested functor and fibre-product terms.
 /-- Direct-image residue fibres admit compatible geometric comparisons.
-Source: Stacks Project, Tags 0B91, 0BF2 and 01XK.
-(blueprint: new-picard-derived-fibre-naturality)
-
-Proof: For each base-changed morphism Xi_W -> X_W, apply the coefficient
-pullback adjunction unit to L_W, then derived direct image and its canonical
-composition comparison. This is the actual construction picardDerivedCoefficientMap between the
-derived direct images E and Ei, already defined without any postponed proof. Apply derived
-residue pullback. Flatness of the morphisms and
-invertibility of L give canonical arbitrary base-change isomorphisms to the
-direct images of the fibre coefficients. Their mate construction is compatible
-with the coefficient adjunction units and direct-image composition, so b_i
-becomes the fibre coefficient pullback. The immersion k identifies the residue
-field at w with the residue field at s; pullback pasting gives compatible
-isomorphisms with the fibres X_s and Xi_s. Trivialize the source coefficient
-by tau and every target coefficient by the pullback of that same tau. Sections
-of higher direct images over a field are naturally the fibre coefficient
-cohomology (01XK). The comparison from module to additive sheaf cohomology
-intertwines the coefficient unit with structureSheafCohomologyPullback. Compose
-these maps to get e and ei. Their naturality gives the stated equation. Fix e
-once for the whole family. This assertion has no affine complex, residue
-quotient, or chain representative. -/
+Source: Stacks Project, Tags 0B91, 0BF2 and 01XK. -/
 theorem picard_derived_fibre_naturality
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

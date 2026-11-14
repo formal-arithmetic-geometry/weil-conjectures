@@ -14,9 +14,7 @@ import WeilConjectures.SixFunctors.OpenClosed.Exact
 /-!
 # Functorial open-closed recollement
 
-Source: blueprint, sec-smooth-purity/sk-prop-sf-open-closed-triangle,
-lemma Open-closed recollement (blueprint:
-proposition-extension-zero-restriction-closed-subscheme--8). Stacks Project, Tags 095L, 0152 and
+Stacks Project, Tags 095L, 0152 and
 015F.
 -/
 
@@ -29,26 +27,8 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 namespace AlgebraicGeometry.Etale
 
 /-- The natural open-closed triangle on the bounded below derived category, with its
-specified counit and unit (blueprint: proposition-extension-zero-restriction-closed-subscheme--8).
-Source: blueprint sec-smooth-purity/sk-prop-sf-open-closed-triangle, Open-closed recollement;
-Stacks Project, Tags 095L, 0152 and 015F.
-
-Proof:
-Use the exact functors on D⁺. The open unit and closed counit are isomorphisms,
-by their sheaf-level counterparts and restriction along the fully faithful inclusion
-in D. The sheaf vanishings i^* j_! = 0 and j^* i_* = 0 hold on D⁺ because exact functors
-commute with homology. The sheaf short exact sequence and the short five lemma show
-that the two restrictions jointly reflect isomorphisms, hence so do their derived functors.
-Complete the open counit to a distinguished triangle with third vertex C. Restriction
-to the open kills C, whereas restriction to the closed makes the second arrow invertible.
-Consequently the closed unit at C is invertible, and naturality identifies C with
-R I K so that the second arrow is exactly the prescribed closed unit.
-Finally Hom((L J K)[1], R I K') vanishes by the closed adjunction and i^* j_! = 0.
-A map K → K' therefore extends uniquely to the two triangles with its prescribed outer
-components; its third square is the required naturality equation.
-The cone argument follows `AlgebraicGeometry.Etale.exists_distTriang_openClosed` in
-WeilConjectures.SixFunctors.OpenClosed.Derived; the present proof works directly in D⁺
-and uses the exact closed direct image and its specified levelwise adjunction. -/
+specified counit and unit.
+Source: Stacks Project, Tags 095L, 0152 and 015F. -/
 theorem exists_functorial_distTriang_openClosed
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X U Z : Scheme.{u}} (j : U ⟶ X) (i : Z ⟶ X)

@@ -24,8 +24,7 @@ attribute [local instance 30000]
   AlgebraicGeometry.Scheme.proEtaleRingModules_hasDerivedCategory
 namespace AlgebraicGeometry.Scheme.RingedRestrictionExchange
 
-/-- The canonical chosen fibre-product square. Source: Stacks 09A5
-(blueprint: lem-sf-ringed-restriction-exchange-open-descent). -/
+/-- The canonical chosen fibre-product square. Source: Stacks 09A5. -/
 def cartesian {P T T' : Scheme.{u}} (p : P ⟶ T) (h : T' ⟶ T) :
     ChosenCartesianSquare (pullback.fst p h) (pullback.snd p h) p h where
   w := pullback.condition

@@ -46,9 +46,7 @@ import WeilConjectures.SixFunctors.Finite.BaseChange
 
 /-! # Relative torsor extensions and normalized supported cohomology
 
-Source: Stacks Project, Tags 03AJ, 06XR, 06XV and 0A45, relative refinement;
-blueprint lemma-cycle-class-cartier-divisor, first sentence and forget-support paragraph
-(blueprint: lem-pur-relative-extension-cohomology-normalization).
+Source: Stacks Project, Tags 03AJ, 06XR, 06XV and 0A45, relative refinement.
 
 The comparison is uniquely specified on every resolution cocycle by evaluation at one
 and the inclusion into the signed cone with zero open coordinate. The relative torsor
@@ -149,8 +147,7 @@ private theorem framedQuotient_shortExact
 attribute [local irreducible] relativeFiberMap relativeTorsorEquiv
 
 /-- The relative extension characterization, including its equivariant framed lift.
-Source: Stacks Tag 03AJ, relative refinement using Tag 0A45
-(blueprint: lem-pur-relative-extension-cohomology-normalization). -/
+Source: Stacks Tag 03AJ, relative refinement using Tag 0A45. -/
 def RelativeExtensionRepresents {T Z : Scheme.{u}}
     [HasExt.{u + 1} (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})]
     (i : Z ⟶ T) [IsClosedImmersion i]
@@ -173,12 +170,7 @@ def RelativeExtensionRepresents {T Z : Scheme.{u}}
       (f.app (op (Scheme.Etale.mk i.openComplement.ι)) P.2) = 0 ∧ β = hE.extClass
 
 /-- Existence and uniqueness of the framed supported extension class.
-Source: Stacks Tags 03AJ and 0A45
-(blueprint: lem-pur-relative-extension-cohomology-normalization).
-Proof: the integral open-closed sequence and its sections adjunction meet the
-hypotheses of relative_extension_existsUnique. Apply that theorem to P and its
-specified section. The quotient construction kills that section, and uniqueness
-of the extension class gives exactly the displayed characterization. -/
+Source: Stacks Tags 03AJ and 0A45. -/
 theorem relativeExtension_existsUnique {T Z : Scheme.{u}}
     [HasExt.{u + 1} (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})] (i : Z ⟶ T)
     [IsClosedImmersion i] {G : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}}
@@ -192,8 +184,7 @@ theorem relativeExtension_existsUnique {T Z : Scheme.{u}}
     ht hT η hη hηt
 
 /-- The class determined uniquely by the relative extension characterization.
-Source: Stacks Tags 03AJ and 0A45
-(blueprint: lem-pur-relative-extension-cohomology-normalization). -/
+Source: Stacks Tags 03AJ and 0A45. -/
 def relativeExtension {T Z : Scheme.{u}}
     [HasExt.{u + 1} (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})]
     (i : Z ⟶ T) [IsClosedImmersion i]
@@ -365,8 +356,7 @@ private lemma integerSectionEquiv_restrict (T : Scheme.{u})
   exact h
 
 /-- Canonical closed exchange on integral coefficients, with the constant comparison.
-Source: Stacks Tag 0A45, closed base change
-(blueprint: lem-pur-relative-extension-cohomology-normalization). -/
+Source: Stacks Tag 0A45, closed base change. -/
 def relativeExtensionExchange {T Z T' Z' : Scheme.{u}} (i : Z ⟶ T) (i' : Z' ⟶ T')
     (h : T' ⟶ T) (w : Z' ⟶ Z) (sq : CommSq w i' i h) :
     (upperStar AddCommGrpCat.{u + 1} h).obj
@@ -378,8 +368,7 @@ def relativeExtensionExchange {T Z T' Z' : Scheme.{u}} (i : Z ⟶ T) (i' : Z' �
         (AddCommGrpCat.of (ULift.{u + 1} ℤ))).hom
 
 /-- The pulled frame, including the identification of the two complementary opens.
-Source: Stacks Tag 03AJ, pullback of framed torsors
-(blueprint: lem-pur-relative-extension-cohomology-normalization). -/
+Source: Stacks Tag 03AJ, pullback of framed torsors. -/
 def relativeExtensionPulledFrame {T Z T' Z' : Scheme.{u}}
     (i : Z ⟶ T) [IsClosedImmersion i] (i' : Z' ⟶ T') [IsClosedImmersion i']
     (h : T' ⟶ T) (hW : i'.openComplement = h ⁻¹ᵁ i.openComplement)

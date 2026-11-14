@@ -87,9 +87,7 @@ def secondTraceStrengthTail
 -- The expanded monoidal coherence proof needs a larger elaboration budget.
 /-- Monoidal strength naturality for an arbitrary morphism in the second factor.
 The statement is independent of the projective-line projection and is the
-coherence calculation needed before inserting the fixed projection maps.
-Source: the second identity of the rational projective-line triangle calculation.
-(blueprint: lem-sfb-rational-p1-second-projection-interchange). -/
+coherence calculation needed before inserting the fixed projection maps. -/
 theorem secondTraceStrength_naturality
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

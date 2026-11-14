@@ -23,9 +23,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLow
 
 /-! # Integral constructible complexes and uniformly bounded below sums
 
-Source: Bhatt--Scholze, The pro-etale topology for schemes, Lemma 6.8.12 and
-Proposition 6.8.11(3)
-(blueprint: lem-weil-pbc-integral-constructible-bounded-below-compactness).
+Source: Bhatt--Scholze, The pro-etale topology for schemes, Lemma 6.8.12 and Proposition 6.8.11(3).
 
 Coproducts are supplied as colimit cofans, so the statement is independent of
 chosen coproduct objects. Their universal property constructs exactly the comparison
@@ -46,22 +44,7 @@ namespace AlgebraicGeometry.Scheme
 of complexes having one common integer cohomological lower bound. The map is the
 unique map whose component at i is RHom(K,-) of the ith coprojection. Both sums are
 coproducts in the ambient derived categories, with no completion of their sum.
-Source: Bhatt--Scholze, Lemma 6.8.12, using Proposition 6.8.11(3)
-(blueprint: lem-weil-pbc-integral-constructible-bounded-below-compactness).
-Proof:
-1. The integral stratified-perfect characterization gives a finite stratification
-with perfect local models and a cohomological upper bound b for K. The stalkwise
-invertibility assumption implies invertibility in global sections by the ringed-space
-unit criterion, so the characterization applies with its stated hypotheses.
-2. Internal Hom from K preserves the supplied uniformly bounded-below coproduct by
-integralStratifiedPerfect_internalHom_preservesColimit. Its outputs have common lower
-bound N-b by proEtale_internalHom_isGE.
-3. Derived global sections preserve this latter coproduct by
-proEtale_derivedGlobalSections_boundedBelow_preservesColimit, with the integral scalar action.
-4. Apply both preservation statements to the supplied colimit cofan s. Their composite
-image is exactly the cofan induced by global RHom(K,-) of its coprojections. The
-universal comparison from the supplied colimit cofan t to this colimit cofan is an
-isomorphism. No coproduct objects are replaced or completed. -/
+Source: Bhatt--Scholze, Lemma 6.8.12, using Proposition 6.8.11(3). -/
 theorem integralConstructible_boundedBelow_compactness
     (T : Scheme.{u}) [IsNoetherian T]
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Type u) [Field E]

@@ -34,18 +34,7 @@ private theorem unit_map_eq_zero_of_top_one {X : Scheme.{u}} {N : X.Modules}
   simp
 
 /-- Residue-field evaluations detect a morphism between finite free sheaves on a reduced scheme.
-
-Source: `lemma-triviality-fibres--2`, proof (3), larger minors vanish on a reduced base.
-(blueprint: lem-pc-free-map-residue-detection)
-
-Proof: Each matrix entry has zero evaluation at every point, so its basic open is empty.
-On a reduced scheme a section with empty basic open is zero: locally on an affine open it
-lies in every prime ideal, hence is nilpotent, hence zero; sheaf separation glues this equality.
-Thus all matrix entries vanish. A map from the structure sheaf is determined by its value on
-1 in global sections. Consequently each inclusion followed by the map and a coordinate
-projection is zero. The sum of the coordinate projection/inclusion pairs is the identity,
-so the map kills every free generator and is zero by the coproduct universal property.
-This also covers empty schemes and empty index types. -/
+ -/
 theorem free_map_eq_zero_of_residue_evaluations
     {X : Scheme.{u}} [IsReduced X] {I J : Type u} [Finite J] [DecidableEq J]
     (δ : free (R := X.ringCatSheaf) I ⟶ free J)

@@ -100,15 +100,13 @@ namespace AlgebraicGeometry.Scheme.Hom
 
 variable {X S : Scheme.{u}} (f : X ⟶ S)
 
-/-- The sheaf of relative Kähler differentials `Ω¹_{X/S}` of a morphism of schemes `f : X ⟶ S`:
+/-- The sheaf of relative Kähler differentials `Ω¹_{X/S}` of a morphism of schemes `f: X ⟶ S`:
 the sheafification of the presheaf `U ↦ Ω_{𝒪_X(U) / (f⁻¹𝒪_S)(U)}`.
 
 For a smooth curve `C` over a field `k`, `Ω¹_{C/k}` is the sheaf of Kähler differentials and
 `ω_C = Ω¹_{C/k}` the canonical sheaf. On an affine open `Spec B ⊆ C` it is `Ω_{B/k}^~`
 (`AlgebraicGeometry.Scheme.Hom.relativeDifferentialsRestrictFromSpecIso`); the blueprint also
-describes it as `Δ^*(𝓘/𝓘²)` for the ideal sheaf `𝓘` of the diagonal, which is not formalised.
-
-(blueprint: `def-sc-kahler-differentials`) -/
+describes it as `Δ^*(𝓘/𝓘²)` for the ideal sheaf `𝓘` of the diagonal, which is not formalised. -/
 @[stacks 01UM]
 noncomputable def relativeDifferentials : X.Modules :=
   (sheafification (𝟙 X.ringCatSheaf.obj)).obj
@@ -659,9 +657,7 @@ variable {X S : Scheme.{u}} (f : X ⟶ S)
 the `A`-algebra `B` (for the algebra structure given by `f.appLE U V e`).
 
 For a curve `C` over a field `k`, with `S = Spec k` and `U = ⊤`, this is the standard affine
-description `Ω¹_{C/k}|_{Spec B} = Ω_{B/k}^~` of the sheaf of Kähler differentials of `C`.
-
-(blueprint: `def-sc-kahler-differentials`) -/
+description `Ω¹_{C/k}|_{Spec B} = Ω_{B/k}^~` of the sheaf of Kähler differentials of `C`. -/
 noncomputable def relativeDifferentialsRestrictFromSpecIso {U : S.Opens} (hU : IsAffineOpen U)
     {V : X.Opens} (hV : IsAffineOpen V) (e : V ≤ f ⁻¹ᵁ U) :
     f.relativeDifferentials.restrict hV.fromSpec ≅
@@ -696,12 +692,10 @@ lemma nonempty_restrict_relativeDifferentials_iso_unit [SmoothOfRelativeDimensio
     (Modules.restrictFunctorComp hV.isoSpec.hom hV.fromSpec).app _ ≪≫
     (Modules.restrictFunctor hV.isoSpec.hom).mapIso T ≪≫ Modules.restrictUnitIso _
 
-/-- **The canonical sheaf of a smooth curve.** For `f : X ⟶ S` smooth of relative dimension one,
+/-- **The canonical sheaf of a smooth curve.** For `f: X ⟶ S` smooth of relative dimension one,
 the sheaf `Ω¹_{X/S}` is invertible: Zariski-locally `f` is standard smooth, `X = Spec B` with
 `B = R[x₁, …, xₙ₊₁]/(g₁, …, gₙ)`, and `Ω_{B/R}` is free of rank one on the class of `dxᵢ` for
-the coordinate `xᵢ` not involved in the invertible Jacobian minor.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality`) -/
+the coordinate `xᵢ` not involved in the invertible Jacobian minor. -/
 theorem isInvertible_relativeDifferentials [SmoothOfRelativeDimension 1 f] :
     SheafOfModules.IsInvertible (R := X.ringCatSheaf) f.relativeDifferentials := by
   choose V hxV hV using f.nonempty_restrict_relativeDifferentials_iso_unit

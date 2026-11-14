@@ -11,8 +11,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 /-!
 # ProEtaleDirectImageMateCompatibility
 
-Source: blueprint direct-image comparison, Stacks Tags 09A6 and 0B65.
-(blueprint: lem-pe-direct-image-mate-compatibility).
+Source: Stacks Tags 09A6 and 0B65.
 -/
 
 -- After pruning, this module only keeps private declarations.

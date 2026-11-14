@@ -39,8 +39,7 @@ public import WeilConjectures.AlgebraicGeometry.LisseLatticeCoefficients
 # Continuous coefficients and slice restrictions for lisse lattices
 
 The coefficient constructions used by the etale-local lattice theorem.
-Source: Bhatt--Scholze, Definitions 6.8.1 and 6.8.3.
-(blueprint: def-weil-pbc-lisse-lattice-coefficients)
+Source: Bhatt--Scholze, Definitions 6.8.1 and 6.8.3
 -/
 
 @[expose] public section
@@ -52,8 +51,7 @@ open CategoryTheory Opposite
 namespace AlgebraicGeometry.ProEtale
 
 /-- The commutative-ring version of the existing continuous-function ring sheaf.
-Source: Bhatt--Scholze, Definition 6.8.1
-(blueprint: lem-weil-pbc-lisse-lattice-etale-local). -/
+Source: Bhatt--Scholze, Definition 6.8.1. -/
 noncomputable def lisseContinuousCommRingSheaf (X : Scheme.{u}) (T : Type)
     [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] :
     Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=

@@ -86,21 +86,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- The closed inverse-image/direct-image adjunction is a reflection for arbitrary
 ring-sheaf coefficients. The adjunction is specified on the concrete functors.
 
-Source: Stacks Project, Tag 09AA and Tags 09BK/09BL
-(blueprint: lem-weil-pbc-proetale-ringed-closed-counit).
-
-Proof: Work on affine opens of the target and use the affine ind-etale basis.
-The closed-site lift `v` is left adjoint to base change `b`, with `b(v(W)) = W`.
-For each basis object `W`, this adjunction identifies the inverse-image indexing
-category with the opposite of a category having initial object `v(W)`. Its colimit
-is thus evaluation at `v(W)`. Applied to a direct image of `H`, this evaluation is
-`H(b(v(W))) = H(W)`. The resulting presheaf is already a sheaf on the basis;
-sheafification identifies the canonical counit with the identity. Hence the counit
-is invertible on every affine basis, and its naturality glues these inverses over
-affine intersections. Multiplication naturality of inverse image and the ring-unit
-action on direct image show that this counit and its inverse are module maps.
-The conclusion holds for every adjunction on the specified functors by uniqueness
-of adjoints, since changing adjunction conjugates the counit by an isomorphism. -/
+Source: Stacks Project. -/
 theorem proEtale_ringed_closed_counit {X Z : Scheme.{u}} (i : Z ⟶ X)
     [IsClosedImmersion i] (A : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
     (ai : proEtaleModuleInverseImage i A ⊣

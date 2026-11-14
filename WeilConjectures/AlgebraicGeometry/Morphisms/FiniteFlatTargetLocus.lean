@@ -15,7 +15,6 @@ import WeilConjectures.Mathlib.RingTheory.Flat.Localization
 # The target flat locus of a finite morphism
 
 Source: Stacks Project, Tags 00RC and 01WM.
-(blueprint: lem-sbc-finite-flat-target-locus)
 -/
 
 @[expose] public section
@@ -97,18 +96,7 @@ private theorem isOpen_finite_flat_source_locus
 /-- The points over which every source stalk is flat form an open subset.
 
 Source: Stacks Project, Tag 00RC (openness of flatness) and Tag 01WM
-(finite morphisms are closed).
-(blueprint: lem-sbc-finite-flat-target-locus)
-
-Proof: Work on an affine target chart Spec R. Its inverse image is affine
-Spec B because p is finite. The ring R is Noetherian, and B is finite over R,
-so B is of finite presentation over R. By 00RC the source stalk-flat locus
-is open. The stalk criterion for flatness identifies this with the locus
-where the local ring maps of p are flat. Its complement is closed, and its
-image is closed because p is finite (01WM). The complement of this image
-is precisely the displayed target locus. These opens agree on overlapping
-affine charts, which proves openness without quasi-compactness of L.
-If the source is empty, the locus is all of L. -/
+(finite morphisms are closed). -/
 theorem isOpen_setOf_finite_flat_stalks
     {E L : Scheme.{u}} (p : E ⟶ L) [IsFinite p] [IsLocallyNoetherian L] :
     IsOpen {y : L | ∀ z : E, p z = y → (p.stalkMap z).hom.Flat} := by

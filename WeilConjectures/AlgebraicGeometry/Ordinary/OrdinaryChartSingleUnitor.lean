@@ -159,9 +159,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
 
 /-! # Ordinary single-unit tensor unitor normalization
-
-Source: blueprint smooth-purity reduction, Charts.
-(blueprint: lem-pur-ordinary-chart-single-unitor).
 -/
 
 @[expose] public noncomputable section
@@ -183,14 +180,7 @@ attribute [local instance 20000] SymmetricCategory.toBraidedCategory
 attribute [local irreducible] Functor.leftDerivedFunctor Functor.rightDerivedFunctor
   derivedTensor upperStar lowerStar singleFunctorObjUnitIso derivedTensorRightUnitor
 
-/-- Ordinary single-unit tensor unitor normalization.
-Source: blueprint smooth-purity reduction, Charts.
-(blueprint: lem-pur-ordinary-chart-single-unitor).
-
-Proof: Expand the ordinary single-unit identification and the definition of the
-tensor-with-single-unit isomorphism.
-Both sides are the same composite with the derived right tensor unitor; reflexivity proves the
-equality for every K. -/
+/-- Ordinary single-unit tensor unitor normalization. -/
 theorem ordinaryChartSingleUnitor_eq
     {A : Type (u + 1)} [CommRing A] (T : Scheme.{u}) (K : DerivedCategoryModule A T) :
     (derivedTensorSingleUnitIso K).hom =

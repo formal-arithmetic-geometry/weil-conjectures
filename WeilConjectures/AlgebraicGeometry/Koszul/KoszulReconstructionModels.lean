@@ -102,9 +102,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory
 
 /-! # Koszul and quotient reconstruction over completed coefficients
 
-Source: blueprint sec-proper-base-change/sk-thm-properbasechange, order 1248;
-Stacks Project, Tags 091N, 091Z, 099L and 099M
-(blueprint: prop-weil-pbc-koszul-reconstruction).
+Source: Stacks Project, Tags 091N, 091Z, 099L and 099M.
 
 The Koszul functor extends the recorded explicit fibre model on maps; it introduces
 no second coefficient sheaf or Koszul complex. The quotient unit is independently
@@ -123,19 +121,19 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposi
 namespace AlgebraicGeometry.Scheme
 
 /-- Fix the additive coefficient universe when elaborating the recorded models.
-Source: Stacks Tag 00W1 (blueprint: prop-weil-pbc-koszul-reconstruction). -/
+Source: Stacks Tag 00W1. -/
 local instance reconstructionAbSheafify (Y : Scheme.{t}) :
     HasSheafify (ProEt.topology Y) AddCommGrpCat.{t + 1} :=
   WeilConjectures.integralCoefficientAbSheafify.{t, 0} Y
 
 /-- Use the canonical local-equivalence criterion in the same additive universe.
-Source: Stacks Tag 00W1 (blueprint: prop-weil-pbc-koszul-reconstruction). -/
+Source: Stacks Tag 00W1. -/
 local instance reconstructionAbLocallyBijective (Y : Scheme.{t}) :
     (ProEt.topology Y).WEqualsLocallyBijective AddCommGrpCat.{t + 1} :=
   WeilConjectures.integralCoefficientAbLocallyBijective.{t, 0} Y
 
 /-- Fix the commutative-ring coefficient universe of the completed tensor structure.
-Source: Stacks Tag 00W1 (blueprint: prop-weil-pbc-koszul-reconstruction). -/
+Source: Stacks Tag 00W1. -/
 local instance reconstructionRingSheafify (Y : Scheme.{t}) :
     HasSheafify (ProEt.topology Y) CommRingCat.{t + 1} :=
   WeilConjectures.integralCoefficientRingSheafify.{t, 0} Y
@@ -168,10 +166,7 @@ private theorem reconstructionTowersGrothendieckGeneric
     (f := fun f : P ⟶ Q ↦ f.app) (fun f g h ↦ NatTrans.ext h)⟩ }
 
 /-- Strict towers of modules over the completed ring form a Grothendieck category.
-Source: Stacks Tags 079B and 079Q (blueprint: prop-weil-pbc-koszul-reconstruction).
-Proof: replace the pro-etale site by its small skeleton in universe t+1, apply the
-Grothendieck theorem for small diagrams of module sheaves, then transport back along
-that equivalence. Kernels, cokernels and filtered colimits of towers are levelwise. -/
+Source: Stacks Tags 079B and 079Q. -/
 theorem reconstructionTowers_grothendieck :
     IsGrothendieckAbelian.{t + 1} (CompletedAdicTowers T d) := by
   have : IsGrothendieckAbelian.{t + 1} (CompletedAdicModules T d) :=
@@ -182,13 +177,11 @@ theorem reconstructionTowers_grothendieck :
 attribute [instance] reconstructionTowers_grothendieck
 
 /-- The actual ordinary strict inverse-limit functor.
-Source: Stacks Tag 0941 (blueprint: prop-weil-pbc-koszul-reconstruction). -/
+Source: Stacks Tag 0941. -/
 abbrev reconstructionLimit : CompletedAdicTowers T d ⥤ CompletedAdicModules T d := lim
 
 /-- Strict inverse limit is additive.
-Source: Stacks Tag 0941 (blueprint: prop-weil-pbc-koszul-reconstruction).
-Proof: limit projections jointly detect equality; after each projection additivity
-is the limit lift equation and bilinearity of composition. -/
+Source: Stacks Tag 0941. -/
 @[instance]
 theorem reconstructionLimit_additive : (reconstructionLimit T d).Additive := by
   constructor
@@ -198,12 +191,12 @@ theorem reconstructionLimit_additive : (reconstructionLimit T d).Additive := by
   simp [reconstructionLimit, Preadditive.add_comp, Preadditive.comp_add]
 
 /-- The total right derived strict inverse limit with its universal comparison.
-Source: Stacks Tag 0941 (blueprint: prop-weil-pbc-koszul-reconstruction). -/
+Source: Stacks Tag 0941. -/
 abbrev reconstructionRlim : DerivedCategory (CompletedAdicTowers T d) ⥤
     DerivedCategory (CompletedAdicModules T d) := (reconstructionLimit T d).rightDerivedFunctor
 
 /-- The universal derived-limit comparison on complexes of strict towers.
-Source: Stacks Tag 0941 (blueprint: prop-weil-pbc-koszul-reconstruction). -/
+Source: Stacks Tag 0941. -/
 def reconstructionRlimComparison (P : CochainComplex (CompletedAdicTowers T d) ℤ) :
     DerivedCategory.Q.obj
         (((reconstructionLimit T d).mapHomologicalComplex (ComplexShape.up ℤ)).obj P) ⟶
@@ -216,11 +209,7 @@ def reconstructionRlimComparison (P : CochainComplex (CompletedAdicTowers T d) �
       ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P) ≫
     (reconstructionRlim T d).map ((DerivedCategory.quotientCompQhIso _).hom.app P)
 
-/-- The canonical quotient module map sends one to one on every section.
-Source: blueprint order 1248 (blueprint: prop-weil-pbc-koszul-reconstruction).
-Proof: the coefficient projection is linear for its restricted scalar action and
-commutes with restrictions. These section maps give the required module map.
-Any module map from the unit is determined by the image of one, proving uniqueness. -/
+/-- The canonical quotient module map sends one to one on every section. -/
 theorem reconstructionQuotientUnit_exists (n : ℕ) :
     ∃! u : SheafOfModules.unit (completedAdicRing T d) ⟶ completedAdicFiniteModule T d n,
       ∀ U : T.ProEtᵒᵖ,
@@ -242,8 +231,7 @@ theorem reconstructionQuotientUnit_exists (n : ℕ) :
     exact (hu U).trans
       (congrArg (fun z : M.sections ↦ z.val U) (M.unitHomEquiv.apply_symm_apply s)).symm
 
-/-- The residue-normalized module map from A_T to its n+1-st quotient.
-Source: blueprint order 1248 (blueprint: prop-weil-pbc-koszul-reconstruction). -/
+/-- The residue-normalized module map from A_T to its n+1-st quotient. -/
 def reconstructionQuotientUnit (n : ℕ) :
     SheafOfModules.unit (completedAdicRing T d) ⟶ completedAdicFiniteModule T d n :=
   (reconstructionQuotientUnit_exists T d n).exists.choose
@@ -272,11 +260,7 @@ private theorem reconstructionQuotientUnit_step (n : ℕ) :
 
 set_option linter.style.haveILetI false in
 set_option backward.isDefEq.respectTransparency false in
-/-- The ordinary completion unit is determined by all quotient tensor maps.
-Source: blueprint order 1248 (blueprint: prop-weil-pbc-koszul-reconstruction).
-Proof: the maps x to x tensor one commute with quotient transitions, and hence form
-a cone. Its limit lift is natural in the module. Joint monicity of the limit
-projections proves uniqueness. The tensor formula fixes the completed scalar action. -/
+/-- The ordinary completion unit is determined by all quotient tensor maps. -/
 theorem reconstructionOrdinaryUnit_exists :
     ∃! η : 𝟭 (CompletedAdicModules T d) ⟶
         completedAdicOrdinaryTower T d ⋙ reconstructionLimit T d,
@@ -323,14 +307,13 @@ theorem reconstructionOrdinaryUnit_exists :
     intro n
     exact (hθ M n.unop).trans (limit.lift_π (c M) n).symm
 
-/-- The map to the ordinary limit induced by the actual quotient maps.
-Source: blueprint order 1248 (blueprint: prop-weil-pbc-koszul-reconstruction). -/
+/-- The map to the ordinary limit induced by the actual quotient maps. -/
 def reconstructionOrdinaryUnit : 𝟭 (CompletedAdicModules T d) ⟶
     completedAdicOrdinaryTower T d ⋙ reconstructionLimit T d :=
   (reconstructionOrdinaryUnit_exists T d).exists.choose
 
 /-- The same reduction counit on a complex representative, with localization factors.
-Source: Stacks Tag 06YY (blueprint: prop-weil-pbc-koszul-reconstruction). -/
+Source: Stacks Tag 06YY. -/
 def reconstructionReductionComplexCounit (P : CochainComplex (CompletedAdicModules T d) ℤ) :
     (completedAdicReduction T d).obj (DerivedCategory.Q.obj P) ⟶
       DerivedCategory.Q.obj
@@ -338,17 +321,14 @@ def reconstructionReductionComplexCounit (P : CochainComplex (CompletedAdicModul
   (completedAdicReductionData T d).complexCounit P
 
 /-- The strict reduction counit is invertible on every unbounded K-flat model.
-Source: Stacks Tags 06XN and 06YY (blueprint: prop-weil-pbc-koszul-reconstruction).
-Proof: the K-flat computation clause of completedAdicReduction_exists makes its
-homotopy counit invertible. The other factors are localization isomorphisms. -/
+Source: Stacks Tags 06XN and 06YY. -/
 theorem reconstructionTowerCounit_isIso
     (P : CochainComplex (CompletedAdicModules T d) ℤ)
     (hP : CochainComplex.IsAcyclicTensorKFlat (R := completedAdicCommRing T d) P) :
     IsIso (reconstructionReductionComplexCounit T d P) := by
   exact (completedAdicReductionData T d).complexCounit_isIso P hP
 
-/-- The quotient completion unit on one K-flat representative at every tower level.
-Source: blueprint order 1248 (blueprint: prop-weil-pbc-koszul-reconstruction). -/
+/-- The quotient completion unit on one K-flat representative at every tower level. -/
 def reconstructionUnitOnKFlat (P : CochainComplex (CompletedAdicModules T d) ℤ)
     (hP : CochainComplex.IsAcyclicTensorKFlat (R := completedAdicCommRing T d) P) :
     DerivedCategory.Q.obj P ⟶
@@ -606,13 +586,7 @@ private theorem reconstructionDerivedUnit_exists
     exact hθ K hK
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The canonical derived quotient unit is fixed by its value on all K-flat models.
-Source: blueprint order 1248 (blueprint: prop-weil-pbc-koszul-reconstruction).
-Proof: resolve representatives by K-flat complexes. Ordinary quotient units, the
-universal reduction counit and the right-derived-limit comparison are natural.
-Consequently these maps commute with roofs of K-flat models, and localization
-descends them to a natural transformation. Every object has such a model, giving
-uniqueness. This constructs the unit without using the reconstruction isomorphism. -/
+/-- The canonical derived quotient unit is fixed by its value on all K-flat models. -/
 theorem reconstructionCompletionUnit_exists :
     ∃! η : 𝟭 (DerivedCategory (CompletedAdicModules T d)) ⟶
         completedAdicReduction T d ⋙ reconstructionRlim T d,
@@ -644,14 +618,12 @@ theorem reconstructionCompletionUnit_exists :
   exact reconstructionDerivedUnit_exists (completedAdicReductionData T d) L RF
     L.rightDerivedFunctorUnit (reconstructionOrdinaryUnit T d) hS
 
-/-- The map comp_K induced by quotient maps, independently of chosen resolutions.
-Source: blueprint order 1248 (blueprint: prop-weil-pbc-koszul-reconstruction). -/
+/-- The map comp_K induced by quotient maps, independently of chosen resolutions. -/
 def reconstructionCompletionUnit : 𝟭 (DerivedCategory (CompletedAdicModules T d)) ⟶
     completedAdicReduction T d ⋙ reconstructionRlim T d :=
   (reconstructionCompletionUnit_exists T d).exists.choose
 
-/-- Tensoring a map of representatives and taking products gives the canonical product map.
-Source: blueprint order 1248 (blueprint: prop-weil-pbc-koszul-reconstruction). -/
+/-- Tensoring a map of representatives and taking products gives the canonical product map. -/
 def reconstructionKoszulProductMap (r : ℕ) (a : Fin r → A)
     {C D : CochainComplex (CompletedAdicModules T d) ℤ} (h : C ⟶ D) :
     completedAdicKoszulProduct T d r a C ⟶ completedAdicKoszulProduct T d r a D :=
@@ -681,10 +653,7 @@ private theorem reconstructionTensorSquare
 
 set_option backward.isDefEq.respectTransparency false in
 set_option linter.style.haveILetI false in
-/-- Product maps commute with the actual one-minus-transition endomorphism.
-Source: blueprint order 1248 (blueprint: prop-weil-pbc-koszul-reconstruction).
-Proof: after every product projection this is the naturality square of tensoring h
-with the fixed Koszul transition. Joint monicity gives the displayed square. -/
+/-- Product maps commute with the actual one-minus-transition endomorphism. -/
 theorem reconstructionKoszulProductMap_comm (r : ℕ) (a : Fin r → A)
     {C D : CochainComplex (CompletedAdicModules T d) ℤ} (h : C ⟶ D) :
     reconstructionKoszulProductMap T d r a h ≫ (-completedAdicKoszulOneSubShift T d r a D) =
@@ -707,8 +676,7 @@ theorem reconstructionKoszulProductMap_comm (r : ℕ) (a : Fin r → A)
   exact reconstructionTensorSquare (curriedTensor _) h
     (completedAdicKoszulStep T d r a m)
 
-/-- The canonical map of the recorded Koszul fibres, using the map of mapping cones.
-Source: blueprint order 1248 (blueprint: prop-weil-pbc-koszul-reconstruction). -/
+/-- The canonical map of the recorded Koszul fibres, using the map of mapping cones. -/
 def reconstructionKoszulFiberMap (r : ℕ) (a : Fin r → A)
     {C D : CochainComplex (CompletedAdicModules T d) ℤ} (h : C ⟶ D) :
     completedAdicKoszulFibre T d r a C ⟶ completedAdicKoszulFibre T d r a D :=
@@ -739,10 +707,7 @@ private theorem reconstructionKoszulProductMap_comp (r : ℕ) (a : Fin r → A)
   simp [reconstructionKoszulProductMap, HomologicalComplex.mapBifunctorMap,
     Functor.map_comp, Category.assoc]
 
-/-- The induced fibre map preserves identities.
-Source: blueprint order 1248 (blueprint: prop-weil-pbc-koszul-reconstruction).
-Proof: tensor and product maps preserve identities; the induced mapping-cone map
-and the shift functor preserve them as well. -/
+/-- The induced fibre map preserves identities. -/
 theorem reconstructionKoszulFiberMap_id (r : ℕ) (a : Fin r → A)
     (C : CochainComplex (CompletedAdicModules T d) ℤ) :
     reconstructionKoszulFiberMap T d r a (𝟙 C) = 𝟙 _ := by
@@ -753,10 +718,7 @@ theorem reconstructionKoszulFiberMap_id (r : ℕ) (a : Fin r → A)
   rw [HomologicalComplex.homotopyCofiber.mapArrowHom_id]
   exact (shiftFunctor _ (-1 : ℤ)).map_id _
 
-/-- The induced fibre map preserves composition.
-Source: blueprint order 1248 (blueprint: prop-weil-pbc-koszul-reconstruction).
-Proof: tensor and product maps preserve composition; mapArrowHom_comp followed
-by the shift functor gives the same equality for fibre maps. -/
+/-- The induced fibre map preserves composition. -/
 theorem reconstructionKoszulFiberMap_comp (r : ℕ) (a : Fin r → A)
     {C D E : CochainComplex (CompletedAdicModules T d) ℤ} (h : C ⟶ D) (k : D ⟶ E) :
     reconstructionKoszulFiberMap T d r a (h ≫ k) =
@@ -787,8 +749,7 @@ theorem reconstructionKoszulFiberMap_comp (r : ℕ) (a : Fin r → A)
   rw [hγ, HomologicalComplex.homotopyCofiber.mapArrowHom_comp]
   exact (shiftFunctor _ (-1 : ℤ)).map_comp _ _
 
-/-- Functoriality on complexes of the existing explicit Koszul fibre model.
-Source: blueprint order 1248 (blueprint: prop-weil-pbc-koszul-reconstruction). -/
+/-- Functoriality on complexes of the existing explicit Koszul fibre model. -/
 def reconstructionKoszulFiberFunctor (r : ℕ) (a : Fin r → A) :
     CochainComplex (CompletedAdicModules T d) ℤ ⥤ CochainComplex (CompletedAdicModules T d) ℤ where
   obj := completedAdicKoszulFibre T d r a
@@ -891,12 +852,7 @@ private theorem reconstructionCountableProducts_exact :
 
 set_option linter.style.haveILetI false in
 set_option backward.isDefEq.respectTransparency false in
-/-- The recorded Koszul model and its canonical maps descend through quasi-isomorphisms.
-Source: blueprint order 1248 (blueprint: prop-weil-pbc-koszul-reconstruction).
-Proof: each Koszul complex is bounded finite free. Tensoring an arbitrary complex
-by it preserves quasi-isomorphisms. Exact countable products on the pro-etale site
-preserve the resulting quasi-isomorphisms; the cone triangle then does so for the
-mapping fibre. These are exactly the representative maps constructed above. -/
+/-- The recorded Koszul model and its canonical maps descend through quasi-isomorphisms. -/
 theorem reconstructionKoszulFiberFunctor_inverts (r : ℕ) (a : Fin r → A) :
     (HomologicalComplex.quasiIso (CompletedAdicModules T d) (ComplexShape.up ℤ)).IsInvertedBy
       (reconstructionKoszulFiberFunctor T d r a ⋙ DerivedCategory.Q) := by
@@ -936,8 +892,7 @@ theorem reconstructionKoszulFiberFunctor_inverts (r : ℕ) (a : Fin r → A) :
     (fun j ↦ ⟨j - 1, sub_add_cancel j 1⟩) α)⟦(-1 : ℤ)⟧')
   exact (CochainComplex.quasiIso_shift_iff _ _).2 hc
 
-/-- The functor on the derived category induced by the existing Koszul fibre construction.
-Source: blueprint order 1248 (blueprint: prop-weil-pbc-koszul-reconstruction). -/
+/-- The functor on the derived category induced by the existing Koszul fibre construction. -/
 abbrev reconstructionKoszulDerivedFunctor (r : ℕ) (a : Fin r → A) :
     DerivedCategory (CompletedAdicModules T d) ⥤ DerivedCategory (CompletedAdicModules T d) :=
   Localization.lift (reconstructionKoszulFiberFunctor T d r a ⋙ DerivedCategory.Q)
@@ -945,11 +900,7 @@ abbrev reconstructionKoszulDerivedFunctor (r : ℕ) (a : Fin r → A) :
 
 set_option linter.style.haveILetI false in
 set_option backward.isDefEq.respectTransparency false in
-/-- The existing unit c to (u_C(c),0) is natural for the induced fibre maps.
-Source: blueprint order 1248 (blueprint: prop-weil-pbc-koszul-reconstruction).
-Proof: tensor units commute with chain maps; taking product projections proves the
-same equality for u_C. The cone map is diagonal, so the zero second coordinate
-remains zero. Shifting gives the displayed equality. -/
+/-- The existing unit c to (u_C(c),0) is natural for the induced fibre maps. -/
 theorem reconstructionKoszulUnit_naturality (r : ℕ) (a : Fin r → A)
     {C D : CochainComplex (CompletedAdicModules T d) ℤ} (h : C ⟶ D) :
     h ≫ completedAdicKoszulUnitComplex T d r a D =
@@ -1010,16 +961,14 @@ theorem reconstructionKoszulUnit_naturality (r : ℕ) (a : Fin r → A)
           change p + (-1) + 1 = p
           omega)) hu
 
-/-- The recorded degree-zero unit, assembled as a natural transformation of complexes.
-Source: blueprint order 1248 (blueprint: prop-weil-pbc-koszul-reconstruction). -/
+/-- The recorded degree-zero unit, assembled as a natural transformation of complexes. -/
 def reconstructionKoszulComplexUnit (r : ℕ) (a : Fin r → A) :
     𝟭 (CochainComplex (CompletedAdicModules T d) ℤ) ⟶
       reconstructionKoszulFiberFunctor T d r a where
   app := completedAdicKoszulUnitComplex T d r a
   naturality _ _ h := reconstructionKoszulUnit_naturality T d r a h
 
-/-- Localization of the existing completion unit gives κ on the derived category.
-Source: blueprint order 1248 (blueprint: prop-weil-pbc-koszul-reconstruction). -/
+/-- Localization of the existing completion unit gives κ on the derived category. -/
 def reconstructionKoszulDerivedUnit (r : ℕ) (a : Fin r → A) :
     𝟭 (DerivedCategory (CompletedAdicModules T d)) ⟶
       reconstructionKoszulDerivedFunctor T d r a :=
@@ -1038,12 +987,7 @@ def reconstructionKoszulDerivedUnit (r : ℕ) (a : Fin r → A) :
     (𝟭 _) (reconstructionKoszulDerivedFunctor T d r a)
     (Functor.whiskerRight (reconstructionKoszulComplexUnit T d r a) DerivedCategory.Q)
 
-/-- The functorial model uses the recorded intrinsic completion and its same unit.
-Source: blueprint order 1248 (blueprint: prop-weil-pbc-koszul-reconstruction).
-Proof: the localization factorization identifies the value on a representative with
-its explicit fibre. Apply completedAdicIntrinsicCompletion_comparison to the
-localization's own representative and compose these identifications. The units
-are both the localization of the same chain map, giving the equality. -/
+/-- The functorial model uses the recorded intrinsic completion and its same unit. -/
 theorem reconstructionKoszulIntrinsicComparison (r : ℕ) (a : Fin r → A)
     (K : DerivedCategory (CompletedAdicModules T d)) :
     ∃ j : (reconstructionKoszulDerivedFunctor T d r a).obj K ≅

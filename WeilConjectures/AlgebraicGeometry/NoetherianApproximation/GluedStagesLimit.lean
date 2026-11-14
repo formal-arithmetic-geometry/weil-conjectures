@@ -94,12 +94,12 @@ lemma fromS_preimage_opensRange_ι (a : G.ι) : l.fromS ⁻¹ᵁ (l.ι a).opensR
 
 end Stage
 
-/-- Blueprint `theorem-nagata-s-compactification-theorem--1`: Comparison from the original scheme to
+/-- Comparison from the original scheme to
 the inverse limit.
 
 The compatible morphisms `S ⟶ S_l` (`Stage.fromS`) induced by the inclusions of the coefficient
 subrings `Aₐ ⊆ Γ(S, Uₐ)`, as a cone over the diagram of the glued stages. Instead of forming the
-limit `lim S_l` and the comparison map `κ_S : S ⟶ lim S_l` explicitly, we show that this cone is
+limit `lim S_l` and the comparison map `κ_S: S ⟶ lim S_l` explicitly, we show that this cone is
 a limit cone (`isLimitStageCone`), which says precisely that `κ_S` is an isomorphism. -/
 noncomputable def stageCone (G : S.FiniteAffineGluingPresentation) : Cone G.stageDiagram where
   pt := S

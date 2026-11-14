@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleRegularDivisorBaseChange
 
 Source: Stacks Project, Tag 0EYG, final paragraph on intermediate root extensions,
 and finite etale descent (Tags 02LA and 02VN).
-(blueprint: lem-sbc-root-split-cover-prescribed-cyclic-charts)
 -/
 
 @[expose] public section
@@ -31,25 +30,7 @@ namespace AlgebraicGeometry.Scheme
 /-- Classification of a root-split cover retaining the specified equation.
 
 Source: Stacks Project, Tag 0EYG, intermediate-root and descent paragraphs;
-Tags 02LA and 02VN for faithfully flat descent.
-(blueprint: lem-sbc-root-split-cover-prescribed-cyclic-charts)
-
-Proof: The punctured n-th root map is finite etale and faithfully flat over D(g).
-The splitting therefore descends finiteness and etaleness to the factorization j.
-At y, pass to the strict henselization A. Flatness preserves g as a nonzerodivisor;
-A and A/(g) are regular local domains, so g is prime. The root ring is regular
-local and strictly henselian. Hensel lifting supplies all n-th roots of unity.
-Its punctured spectrum is connected and is a cyclic torsor over D(g). The splitting
-identifies the descent datum with a cyclic permutation action on Fin d. Decompose
-this set into orbits of lengths e dividing n. The stabilizer of each orbit fixes
-the intermediate root t^(n/e), whose e-th power is exactly g. Normality identifies
-the orbit algebra with the punctured e-th root algebra. Descend these finitely
-presented isomorphisms, inverses and projection identities to a pointed affine
-etale neighborhood. The equation remains the image of the original g throughout.
-Each e divides the unit n, hence is a unit. Etale base change preserves regularity
-of the base and quotient; flatness preserves the nonzerodivisor. Finite products
-combine the orbit charts. For d = 0 use the empty product; for n = 1 every orbit
-has length one. -/
+Tags 02LA and 02VN for faithfully flat descent. -/
 theorem root_split_cover_prescribed_cyclic_charts
     (R : CommRingCat.{u}) (g : R) (n : ℕ) (hn : 0 < n ∧ IsUnit (n : R))
     [IsRegularRing R] (hg : IsSMulRegular R g)

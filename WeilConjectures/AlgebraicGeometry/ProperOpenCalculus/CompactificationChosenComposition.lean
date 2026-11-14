@@ -11,7 +11,6 @@ import WeilConjectures.AlgebraicGeometry.ProperOpenCalculus.CompactificationRefi
 /-! # Composition for arbitrary chosen compactifications
 
 Source: Stacks 0F7J--0F7K, independence of a common refining tower.
-(blueprint: lem-sp-chosen-compactification-composition).
 -/
 
 @[expose] public noncomputable section
@@ -23,7 +22,7 @@ namespace AlgebraicGeometry.ProperOpenCalculus
 variable {A : Scheme.{u} → Prop} (F : ProperOpenCalculus.{u, v, w} A) (G : Geometry A)
 
 /-- The comparison is independent of the chosen common refinement by cofilteredness.
-Source: Stacks 0F7J (blueprint: lem-sp-chosen-compactification-composition). -/
+Source: Stacks 0F7J. -/
 def comparison (X Y : {X : Scheme.{u} // A X}) (f : X.val ⟶ Y.val)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
     (c d : Compactification f) (hc : A c.Z) (hd : A d.Z) :
@@ -36,7 +35,7 @@ def comparison (X Y : {X : Scheme.{u} // A X}) (f : X.val ⟶ Y.val)
   exact F.compare X Y hd hc he r s
 
 /-- Computing the comparison on any supplied common refinement gives the same map.
-Source: Stacks 0F7J (blueprint: lem-sp-chosen-compactification-composition). -/
+Source: Stacks 0F7J. -/
 theorem comparison_eq (X Y : {X : Scheme.{u} // A X}) (f : X.val ⟶ Y.val)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
     (c d e : Compactification f) (hc : A c.Z) (hd : A d.Z) (he : A e.Z)
@@ -74,7 +73,7 @@ theorem binary_exists (X Y Z : {X : Scheme.{u} // A X})
   exact ⟨T, hT⟩
 
 /-- A chosen binary tower. All resulting maps are independent of this choice.
-Source: Stacks 0F7J (blueprint: lem-sp-chosen-compactification-composition). -/
+Source: Stacks 0F7J. -/
 def binaryTower (X Y Z : {X : Scheme.{u} // A X})
     (f : X.val ⟶ Y.val) (g : Y.val ⟶ Z.val)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
@@ -83,7 +82,7 @@ def binaryTower (X Y Z : {X : Scheme.{u} // A X})
   ⟨(binary_exists G X Y Z f g).choose, (binary_exists G X Y Z f g).choose_spec⟩
 
 /-- The composition word evaluated on a supplied binary tower.
-Source: Stacks 0F7J (blueprint: lem-sp-chosen-compactification-composition). -/
+Source: Stacks 0F7J. -/
 def binaryOn (X Y Z : {X : Scheme.{u} // A X})
     (f : X.val ⟶ Y.val) (g : Y.val ⟶ Z.val)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
@@ -97,7 +96,7 @@ def binaryOn (X Y Z : {X : Scheme.{u} // A X})
     F.towerIso X Y Z T hT ≪≫ comparison F G X Z (f ≫ g) T.cfg e hT.2.2 he
 
 /-- Independence of the binary-tower choice, as an equality before any evaluation.
-Source: Stacks 0F7J (blueprint: lem-sp-chosen-compactification-composition). -/
+Source: Stacks 0F7J. -/
 theorem binaryOn_independent (X Y Z : {X : Scheme.{u} // A X})
     (f : X.val ⟶ Y.val) (g : Y.val ⟶ Z.val)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
@@ -129,7 +128,7 @@ theorem binaryOn_independent (X Y Z : {X : Scheme.{u} // A X})
         (comparison F G X Z (f ≫ g) S.cfg e hS.2.2 he).hom) ht
 
 /-- Composition between arbitrary compactification models.
-Source: Stacks 0F7J (blueprint: lem-sp-chosen-compactification-composition). -/
+Source: Stacks 0F7J. -/
 def binary (X Y Z : {X : Scheme.{u} // A X})
     (f : X.val ⟶ Y.val) (g : Y.val ⟶ Z.val)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
@@ -141,7 +140,7 @@ def binary (X Y Z : {X : Scheme.{u} // A X})
     (binaryTower G X Y Z f g).property
 
 /-- The chosen binary composition can be computed on any supplied tower.
-Source: Stacks 0F7J (blueprint: lem-sp-chosen-compactification-composition). -/
+Source: Stacks 0F7J. -/
 theorem binary_eq (X Y Z : {X : Scheme.{u} // A X})
     (f : X.val ⟶ Y.val) (g : Y.val ⟶ Z.val)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
@@ -154,7 +153,7 @@ theorem binary_eq (X Y Z : {X : Scheme.{u} // A X})
   binaryOn_independent F G X Y Z f g c d e hc hd he _ T _ hT
 
 /-- On a compatible tower its binary composition is exactly the specified tower word.
-Source: Stacks 0F7J (blueprint: lem-sp-chosen-compactification-composition). -/
+Source: Stacks 0F7J. -/
 theorem binary_tower (X Y Z : {X : Scheme.{u} // A X})
     (f : X.val ⟶ Y.val) (g : Y.val ⟶ Z.val)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
@@ -168,7 +167,7 @@ theorem binary_tower (X Y Z : {X : Scheme.{u} // A X})
   simp [binaryOn, comparison_refl, NatIso.hcomp]
 
 /-- Simultaneous change of all three compactifications commutes with composition.
-Source: Stacks 0F7J (blueprint: lem-sp-chosen-compactification-composition). -/
+Source: Stacks 0F7J. -/
 theorem binary_refinement (X Y Z : {X : Scheme.{u} // A X})
     (f : X.val ⟶ Y.val) (g : Y.val ⟶ Z.val)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
@@ -193,7 +192,7 @@ theorem binary_refinement (X Y Z : {X : Scheme.{u} // A X})
   rw [ht]
 
 /-- The identity comparison is obtained from the trivial proper compactification.
-Source: Stacks 0F7K (blueprint: lem-sp-chosen-compactification-composition). -/
+Source: Stacks 0F7K. -/
 def chosenIdentity (X : {X : Scheme.{u} // A X})
     (c : Compactification (𝟙 X.val)) (hc : A c.Z) :
     F.H X X c hc ≅ 𝟭 (F.obj X) :=
@@ -201,7 +200,7 @@ def chosenIdentity (X : {X : Scheme.{u} // A X})
     F.identityIso X
 
 /-- The left identity law for an arbitrary identity compactification.
-Source: Stacks 0F7K (blueprint: lem-sp-chosen-compactification-composition). -/
+Source: Stacks 0F7K. -/
 theorem binary_left (X Y : {X : Scheme.{u} // A X}) (f : X.val ⟶ Y.val)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
     (c : Compactification f) (hc : A c.Z)
@@ -220,7 +219,7 @@ theorem binary_left (X Y : {X : Scheme.{u} // A X}) (f : X.val ⟶ Y.val)
   simp [comparison_refl, chosenIdentity, H, Category.assoc]
 
 /-- The right identity law for an arbitrary identity compactification.
-Source: Stacks 0F7K (blueprint: lem-sp-chosen-compactification-composition). -/
+Source: Stacks 0F7K. -/
 theorem binary_right (X Y : {X : Scheme.{u} // A X}) (f : X.val ⟶ Y.val)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
     (c : Compactification f) (hc : A c.Z)
@@ -286,7 +285,7 @@ private theorem associativity_transfer
 end AssociativityTransfer
 
 /-- Composition with a named composite, retaining the original compactification data.
-Source: Stacks 0F7J (blueprint: lem-sp-chosen-compactification-composition). -/
+Source: Stacks 0F7J. -/
 def namedBinary (X Y Z : {X : Scheme.{u} // A X})
     (f : X.val ⟶ Y.val) (g : Y.val ⟶ Z.val) (fg : X.val ⟶ Z.val) (wfg : f ≫ g = fg)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
@@ -297,7 +296,7 @@ def namedBinary (X Y Z : {X : Scheme.{u} // A X})
   binary F G X Y Z f g c d (e.copy wfg) hc hd he
 
 /-- A reflexively named composite gives the original binary word.
-Source: equality transport (blueprint: lem-sp-chosen-compactification-composition). -/
+Source: equality transport. -/
 @[simp] theorem namedBinary_rfl (X Y Z : {X : Scheme.{u} // A X})
     (f : X.val ⟶ Y.val) (g : Y.val ⟶ Z.val)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
@@ -309,7 +308,7 @@ Source: equality transport (blueprint: lem-sp-chosen-compactification-compositio
   rfl
 
 /-- The named left unit word uses exactly the given compactification of f.
-Source: Stacks 0F7K (blueprint: lem-sp-chosen-compactification-composition). -/
+Source: Stacks 0F7K. -/
 theorem namedBinary_left (X Y : {X : Scheme.{u} // A X}) (f : X.val ⟶ Y.val)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
     (c : Compactification f) (hc : A c.Z)
@@ -323,7 +322,7 @@ theorem namedBinary_left (X Y : {X : Scheme.{u} // A X}) (f : X.val ⟶ Y.val)
   exact binary_left F G X Y f c hc i hi
 
 /-- The named right unit word uses exactly the given compactification of f.
-Source: Stacks 0F7K (blueprint: lem-sp-chosen-compactification-composition). -/
+Source: Stacks 0F7K. -/
 theorem namedBinary_right (X Y : {X : Scheme.{u} // A X}) (f : X.val ⟶ Y.val)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
     (c : Compactification f) (hc : A c.Z)
@@ -337,7 +336,7 @@ theorem namedBinary_right (X Y : {X : Scheme.{u} // A X}) (f : X.val ⟶ Y.val)
   exact binary_right F G X Y f c hc i hi
 
 /-- Copying the arrow equality does not change a comparison word.
-Source: Stacks 0F7J (blueprint: lem-sp-chosen-compactification-composition). -/
+Source: Stacks 0F7J. -/
 theorem comparison_copy (X Y : {X : Scheme.{u} // A X})
     {f f' : X.val ⟶ Y.val} (wff : f' = f)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
@@ -349,7 +348,7 @@ theorem comparison_copy (X Y : {X : Scheme.{u} // A X})
   rfl
 
 /-- Refinement compatibility also holds with a named composite.
-Source: Stacks 0F7J (blueprint: lem-sp-chosen-compactification-composition). -/
+Source: Stacks 0F7J. -/
 theorem namedBinary_refinement (X Y Z : {X : Scheme.{u} // A X})
     (f : X.val ⟶ Y.val) (g : Y.val ⟶ Z.val) (fg : X.val ⟶ Z.val) (wfg : f ≫ g = fg)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
@@ -368,16 +367,7 @@ theorem namedBinary_refinement (X Y Z : {X : Scheme.{u} // A X})
   exact binary_refinement F G X Y Z f g c c' d d' e e' hc hc' hd hd' he he'
 
 /-- Associativity for arbitrary compactifications, obtained by a common staircase.
-Source: Stacks 0F7K
-(blueprint: lem-sp-chosen-compactification-composition).
-
-Proof: choose a three-map staircase using Geometry. Its four binary words satisfy
-staircase coherence. Compare the six prescribed compactifications to the staircase
-ones. Binary refinement compatibility gives the four faces of the comparison cube.
-Naturality moves the comparisons on the first two factors past the later binary
-words. Cancelling the final comparison, an isomorphism, transfers the staircase
-equation to the prescribed compactifications. This argument proves equality of
-natural transformations before applying any coefficient evaluation. -/
+Source: Stacks 0F7K. -/
 theorem namedBinary_associativity (X Y Z W : {X : Scheme.{u} // A X})
     (f : X.val ⟶ Y.val) (g : Y.val ⟶ Z.val) (h : Z.val ⟶ W.val)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]

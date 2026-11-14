@@ -14,8 +14,7 @@ import all WeilConjectures.AlgebraicGeometry.Perfect.PerfectChartTensorCompariso
 The consecutive-quotient Tor sheaf of the degree-`q` cohomology of a reduction commutes
 with inverse image: its inverse image only depends on the inverse image of the complex.
 
-Source: Stacks Tags 0D6D and 06YY
-(blueprint: lem-weil-pbc-integral-cohomology-torsion-normal-form).
+Source: Stacks Tags 0D6D and 06YY.
 -/
 
 @[expose] public noncomputable section
@@ -68,8 +67,7 @@ private def torPullIso (K : DerivedCategory (pbcModules T (pbcAdicCompletion T d
 
 /-- Complexes with isomorphic inverse images have isomorphic inverse images of their
 consecutive-quotient Tor sheaves.
-Source: Stacks Tags 0D6D and 06YY
-(blueprint: lem-weil-pbc-integral-cohomology-torsion-normal-form). -/
+Source: Stacks Tags 0D6D and 06YY. -/
 theorem nonempty_pullback_tor_iso {K L : DerivedCategory (pbcModules T (pbcAdicCompletion T d))}
     (e : (adicTowerPullback g (pbcAdicCompletion T d)).obj K ≅
       (adicTowerPullback g (pbcAdicCompletion T d)).obj L) :

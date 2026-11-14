@@ -16,8 +16,7 @@ For a module `N` over `A/I^{n+1}`, the completed realization of `N` (viewed as a
 `A`-module) is the constant sheaf of `N`, with the completed ring acting through the
 projection to the `n`-th quotient ring.
 
-Source: Bhatt--Scholze, Proposition 6.6.11; Stacks Tags 093J and 093M
-(blueprint: lem-weil-pbc-integral-cohomology-torsion-normal-form).
+Source: Bhatt--Scholze, Proposition 6.6.11; Stacks Tags 093J and 093M.
 -/
 
 @[expose] public noncomputable section
@@ -37,13 +36,7 @@ attribute [-instance] AlgebraicGeometry.ProEtale.surjectiveTower_wEqualsLocallyB
 variable (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 
 /-- The completed realization of a module over `A/I^{n+1}` is its constant sheaf, restricted
-to the completed coefficients through the `n`-th projection.
-
-Proof: the completed realization is scalar extension of the constant sheaf along the
-constant-to-completed map, and the comparison with the restricted constant sheaf of the
-quotient module is invertible by the quotient assertion of
-`completed_constant_algebra_flat_quotients`, extended from the regular module by right
-exactness and compatibility with direct sums. -/
+to the completed coefficients through the `n`-th projection. -/
 theorem nonempty_integralConstantModule_restrictScalars_iso (n : ℕ)
     (N : ModuleCat.{u + 1} (A ⧸ d.ideal ^ (n + 1))) :
     Nonempty ((integralConstantModule T d).obj

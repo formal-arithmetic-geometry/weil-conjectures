@@ -248,19 +248,7 @@ variable (K : Type (d + 1)) [Field K] [Algebra ℚ_[l] K] [IsAlgClosure ℚ_[l] 
 
 /-- Maps of scalar-extended sheaves act on geometric fibres in the scalar span of
 maps from the least coefficient category.
-Source: Deligne, Weil II (1.1.1) c)-d), pp. 146-147.
-(blueprint: lem-pod-lisse-coefficient-restriction-hom-span).
-
-Proof: coefficient Hom base change expresses a morphism between extended objects
-in the E-span of extended base morphisms. Integral geometric fibre maps are
-additive and linear, as checked against all inverse-limit projections. The balanced
-tensor construction therefore gives a linear rational Hom map. Every rational Hom
-is a pure fraction tensor, so the prescribed pure-tensor formula identifies any S
-in the statement with this map, including the displayed object transports. Thus S
-is additive and E-linear on Hom. Scalar extension to K preserves addition and
-sends multiplication by a in E to multiplication by its image in K. Induction on
-the coefficient Hom span now gives the asserted K-span. The argument uses no
-faithfulness or nonzero-object assumption. -/
+Source: Deligne, Weil II (1.1.1) c)-d), pp. 146-147. -/
 theorem lisseCoefficientRestriction_hom_span
     {Ω : Type d} [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y)
     (S : ∀ E₀ : Padic.FiniteCoefficientFields l K,

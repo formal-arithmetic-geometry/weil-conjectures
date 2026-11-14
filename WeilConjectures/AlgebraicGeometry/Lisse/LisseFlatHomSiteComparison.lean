@@ -91,9 +91,7 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 
 /-! # Site comparison for internal Hom from a flat lisse sheaf
 
-Source: blueprint, proposition-six-operations-dctf--15, proof paragraphs 2--3;
-Stacks Tags 00NZ, 08JI, 08JB, 03EO and 095I
-(blueprint: lem-sf-lisse-flat-hom-site-comparison).
+Source: Stacks Tags 00NZ, 08JI, 08JB, 03EO and 095I.
 
 The finite-coordinate maps are actual evaluation maps at the chosen basis vectors.
 Finite products in these additive categories are the finite direct sums in the source.
@@ -118,8 +116,7 @@ namespace AlgebraicGeometry.ProEtale
 /-- Both-variable naturality, stated with abstract functors so that it does not
 unfold the derived tensor structures while checking the equation. The specialization
 below supplies exactly the existing evaluation comparison.
-Source: Stacks 03EO, naturality of evaluation
-(blueprint: lem-sf-lisse-flat-hom-site-comparison). -/
+Source: Stacks 03EO, naturality of evaluation. -/
 def lisseFlatHomNaturality
     {C : Type c} [Category.{v} C] {D : Type d} [Category.{v} D]
     (H : Cᵒᵖ ⥤ C ⥤ C) (G : Dᵒᵖ ⥤ D ⥤ D) (F : C ⥤ D)

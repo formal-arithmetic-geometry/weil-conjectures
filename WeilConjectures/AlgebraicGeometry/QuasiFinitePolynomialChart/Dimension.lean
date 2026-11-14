@@ -22,16 +22,7 @@ namespace AlgebraicGeometry
 represented by a natural number.
 
 Source: the finite-type fibre argument in Stacks Project Tag 00QE;
-`AlgebraicGeometry.topologicalKrullDim_ne_top_of_compactSpace` in the upstream library.
-Proof: The fibre projection is locally of finite type by base change. The fibre is
-an affine scheme, hence compact, so the upstream finite-type-over-a-field theorem
-bounds its global topological dimension strictly below infinity. The dimension at
-its distinguished point is at most this global dimension, by taking the whole
-space as an open neighbourhood in the defining infimum. It is nonnegative since
-every neighbourhood contains the point and hence the nonempty irreducible closed
-subset given by its closure. A nonnegative element of WithBot ENat strictly below
-infinity is the image of a natural number. Extract that natural number.
-(blueprint: lem-sbc-quasi-finite-polynomial-chart-dimension) -/
+`AlgebraicGeometry.topologicalKrullDim_ne_top_of_compactSpace` in the upstream library. -/
 theorem exists_fiber_dimension_nat
     {X T : Scheme.{u}} [IsAffine X] [IsAffine T]
     (f : X ⟶ T) [LocallyOfFinitePresentation f] (y : X) :

@@ -74,8 +74,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantModul
 
 /-! # Heart comparison for embedded finite-field coefficients
 
-Source: integral-models proof, first paragraph; Stacks Tags 03ET, 00YV and 06YQ.
-(blueprint: lem-sfb-embedded-finite-field-presentation).
+Source: Stacks Tags 03ET, 00YV and 06YQ.
 -/
 
 @[expose] public noncomputable section
@@ -97,31 +96,7 @@ attribute [-instance] integralModel_coefficientMonObj in
 coefficient-sized section-module encoding. The embedded encoding is strong monoidal;
 the specified derived realization is the induced functor under these encodings.
 
-Source: integral-models proof, first paragraph, clauses (1) and (2); Stacks Tags
-099L, 03ET, 00YV, 06YQ and 09AL
-(blueprint: lem-sfb-embedded-finite-field-presentation).
-
-Proof: identify the constant-function scalar map with the sheafification of the
-constant presheaf map. Its finite clopen fibre cover proves local surjectivity, and
-separatedness proves local injectivity. Consequently this specified map and its
-inverse image are ring isomorphisms. Extension along it is inverse scalar restriction.
-Reconstruct sectionwise module actions, restrict to constant scalar sections, and
-use the intrinsic associated-module-sheaf equivalence. Reindex along AsSmall.down;
-the constant-sheaf comparison identifies its coefficient ring with the constant
-lifted field on the coefficient-sized site. This constructs both equivalences.
-Sectionwise balanced pure tensors give the strong monoidal structure on the first;
-the unit and tensor coherence follow from the same pure-tensor equations. Each
-factor is additive and exact. Uniqueness of derived functors identifies the given
-left-derived scalar extension and right-derived intrinsic realization with the
-termwise induced functor, yielding the displayed natural isomorphism.
-For constructibility retain each finite constructible stratum and each local
-trivializing cover. The functors preserve the finite scalar matrices and their
-cokernels, so finite constant scalar models correspond to finite locally constant
-module sheaves. Conversely every such finite module over the finite field is
-finitely presented and gives the same matrix model. Geometric stalk finiteness
-is exactly finiteness of that module. These identifications commute with the
-stratum inverse images and preserve isomorphisms, proving the final equivalence.
-The empty scheme uses a one-piece empty stratification and rank-zero models. -/
+Source: Stacks Tags 099L, 03ET, 00YV, 06YQ and 09AL. -/
 theorem finiteFieldPresentation
     (X : Scheme.{u}) [IsNoetherian X] (A : Type) [Field A]
     [TopologicalSpace A] [IsTopologicalRing A] [Finite A] [DiscreteTopology A] :

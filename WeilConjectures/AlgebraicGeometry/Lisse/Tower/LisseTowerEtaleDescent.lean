@@ -36,30 +36,7 @@ arrow; this theorem has no supplied source normalization, no reduction on Isom s
 and no evaluation of sheaf sections.
 
 Source: Stacks Tags 099Z and 09B1 (bounded-below classical comparison), 099Y
-(finite locally constant descent), 09BV (Isom torsors), and 06YY (derived base change).
-(blueprint: lem-weil-pbc-lisse-tower-etale-descent).
-
-Proof: localize the pro-etale site at U. Identify each completion quotient with A/I^(n+1)
-using completeness for the finitely generated ideal; in particular it is finite. The
-canonical constant-module comparison identifies the supplied local models with exact
-constant fixed-ring realizations. Their cohomology is bounded and finite locally
-constant. Classical bounded-below comparison descends the actual level to an etale
-complex D_n, and full faithfulness descends its normalization arrow. The canonical
-coefficient interchange is the mate of sectionwise scalar restriction. Its scalar
-extension mate is invertible, so the descended arrow is universal, as M.normalization
-is invertible. Exact restriction to each etale object preserves these scalar
-extension universal arrows. For constants use exact constant realization on that object.
-Naturality of the coefficient mate and associativity of inverse image show that
-restriction takes every supplied generator square to the displayed restricted square.
-Nonempty local marking torsors give nonempty geometric Isom stalks, since finite
-locally constant sheaves descend through comparison. Realization on V followed by
-restriction along W gives the displayed functors and level comparisons. Paste their
-coefficient mates. For the actual level, the resulting identity is the definition of
-adicTowerRestrictedTransition. For constants, sectionwise restriction fixes every
-constant section. Thus the pasted identity holds for every algebraic arrow k and
-localizes to precisely the displayed scalar compositors. No section is evaluated and
-no compatible markings, Isom reduction maps, or inverse limits are selected. Empty
-bases and zero complexes use these same exact functors and the empty covering. -/
+(finite locally constant descent), 09BV (Isom torsors), and 06YY (derived base change). -/
 theorem lisse_tower_etale_descent
     (X Y : Scheme.{u}) (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (M : AdicTower X d)

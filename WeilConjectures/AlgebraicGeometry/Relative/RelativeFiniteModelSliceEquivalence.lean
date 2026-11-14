@@ -54,7 +54,6 @@ private theorem isoRestriction_isEquivalence
 small and pro-etale slices in both directions.
 
 Source: Stacks Project, Sites, Tag 03A0; Modules on Sites, Tag 03CY.
-(blueprint: lem-weil-pbc-relative-finite-constant-slice-comparison)
 
 The statement is the slice-equivalence part of the proof: precomposition with
 `AsSmall.down` and `AsSmall.up` are inverse equivalences, and pushforward of

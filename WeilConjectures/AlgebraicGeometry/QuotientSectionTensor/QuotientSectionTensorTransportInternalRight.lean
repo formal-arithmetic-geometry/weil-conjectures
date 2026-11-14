@@ -75,26 +75,8 @@ private theorem internal_right_total_tensor_map
 
 -- Retain large derived tensor terms while identifying the localized path wrappers.
 /-- Evaluate the ordinary scalar-total side on all internal complexes.
-Source: Stacks Project, sites-modules.tex, Tag 03EL, extension of scalars and pure
-sections; sites-cohomology.tex, Tags 06YY and 07A4, signed total constituents.
-(blueprint: lem-sfb-quotient-section-tensor-transport-internal-right).
-
-Proof: hc.1 identifies c.ordinary on the images of scalar-unit generators.
-The formula he then says that e is the transport of the internal scalar
-tensorator, after the ordinary section tensor comparisons. Scalar-linearity
-extends the equality to general scalar generators, tensor balancing extends it
-to ordinary tensor sections, and the universal property of sheafification
-extends it to sheaf morphisms. Totalize this ordinary square. Check each
-bidegree inclusion: mapBifunctorComparison has the specified component map,
-and the same Koszul sign occurs on both routes, so coproduct extensionality
-gives the complex square. Substitute TensorRepresentativeNormalization for the
-input qTensor and hc.2 on P tensor Q. Naturality of the model counit moves the
-section total comparison across it. The ordinary complex square then replaces
-the transported e total by totalScalar followed by the output total section
-comparison and the two c.ordinary comparisons. Naturality of the section
-localization factor yields scalarTensorSectionPath. This uses no K-flat or
-flat-term assumption, and does not involve b or barB. For zero complexes the
-same inclusion check is vacuous, and nonflat scalar maps remain allowed. -/
+Source: Stacks Project, Tag 03EL, extension of scalars and pure sections; Tags 06YY and 07A4, signed
+total constituents. -/
 theorem section_tensor_transport_internal_right (T : Scheme.{u})
     (c : ScalarSectionData a T) (hc : ScalarSectionNormalized a T c)
     [PreservesColimitsOfSize.{0, 0} c.model.E]

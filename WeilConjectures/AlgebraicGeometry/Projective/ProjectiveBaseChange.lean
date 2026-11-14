@@ -11,8 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.Projective
 /-!
 # Projective morphisms are stable under base change
 
-Source: Stacks Project, Morphisms of Schemes, Lemmas 01WF and 01K5
-(blueprint: lem-pc-projective-base-change).
+Source: Stacks Project, Morphisms of Schemes, Lemmas 01WF and 01K5.
 -/
 
 @[expose] public section
@@ -25,18 +24,7 @@ namespace AlgebraicGeometry
 
 /-- Projectivity of a morphism is preserved by arbitrary base change.
 
-Source: Stacks Project, Morphisms of Schemes, Lemmas 01WF and 01K5
-(blueprint: lem-pc-projective-base-change).
-
-Proof steps (blueprint nodes in brackets): (1) unfold `IsProjective` and choose the
-closed immersion into relative projective space supplied by `IsHProjective`
-([def-pc-projective-morphism]); base change it along `g` using the closed-immersion
-base-change statement ([lem-pc-closed-imm-base-change]), and use the canonical
-identification of the resulting projective space with projective space over `S'`
-([def-pc-fibre-product], [def-pc-base-change]) to obtain the H-projective factorization
-of `pullback.snd f g`; (2) apply quasi-compactness stability under base change
-([lem-pc-quasi-compact-base-change]) to the quasi-compact clause of `IsProjective`
-([def-pc-projective-morphism]), obtaining projectivity of the projection.
+Source: Stacks Project, Morphisms of Schemes, Lemmas 01WF and 01K5.
 -/
 theorem projective_base_change {X S S' : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S)
     [IsProjective f] : IsProjective (pullback.snd f g) := by

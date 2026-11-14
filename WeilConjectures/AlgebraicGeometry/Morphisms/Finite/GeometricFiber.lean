@@ -53,9 +53,9 @@ namespace AlgebraicGeometry.Scheme.Hom
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) {Ω : Type u} [Field Ω] (y : Spec (.of Ω) ⟶ Y)
 
-/-- The geometric fibre of `f : X ⟶ Y` over the geometric point `y : Spec Ω ⟶ Y`: the geometric
-points `x : Spec Ω ⟶ X` with `x ≫ f = y`. This is a reducible definition so that the
-coercion `t.1` is transparent to tactics (blueprint `lemma-finite-direct-images--1`). -/
+/-- The geometric fibre of `f: X ⟶ Y` over the geometric point `y: Spec Ω ⟶ Y`: the geometric
+points `x: Spec Ω ⟶ X` with `x ≫ f = y`. This is a reducible definition so that the
+coercion `t.1` is transparent to tactics. -/
 abbrev GeometricFiber : Type u :=
   {x : Spec (.of Ω) ⟶ X // x ≫ f = y}
 
@@ -193,8 +193,7 @@ section Finite
 
 variable [IsFinite f]
 
-/-- **The geometric fibre of a finite morphism is finite**
-(blueprint `lemma-finite-direct-images--1`). -/
+/-- **The geometric fibre of a finite morphism is finite**. -/
 instance GeometricFiber.finite : Finite (GeometricFiber f y) := by
   obtain ⟨Y₀, hY₀, hy, -⟩ :=
     exists_isAffineOpen_mem_and_subset (X := Y) (x := y default) (U := ⊤) trivial
@@ -203,8 +202,7 @@ instance GeometricFiber.finite : Finite (GeometricFiber f y) := by
   exact Finite.of_equiv _ (geometricFiberEquivPointsOver f y hY₀ hy).symm
 
 /-- **Every point of the fibre of a finite morphism over a geometric point `y` with values in
-an algebraically closed field is the image of a geometric point over `y`.**
-(blueprint: `lem-weil-pbc-finite-geometric-point-lift`) -/
+an algebraically closed field is the image of a geometric point over `y`.** -/
 lemma GeometricFiber.exists_apply_default_eq [IsAlgClosed Ω] (x : X) (hx : f x = y default) :
     ∃ t : GeometricFiber f y, t.1 default = x := by
   obtain ⟨Y₀, hY₀, hy, -⟩ :=

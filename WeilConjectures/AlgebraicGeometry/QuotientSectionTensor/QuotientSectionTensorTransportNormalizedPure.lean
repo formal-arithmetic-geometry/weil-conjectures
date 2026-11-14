@@ -58,16 +58,7 @@ private theorem pure_cast (T : Scheme.{u})
   simp
 
 /-- The underlying section comparison has the prescribed pure-tensor formula.
-Source: Stacks 03EK, 03EL and 07A4; parent proof steps 1--3.
-(blueprint: lem-sfb-quotient-section-tensor-transport-normalized-pure).
-
-Proof: the local map sends a scalar tensor of a pure tensor to the tensor of the
-unit scalar with the first factor and the original scalar with the second factor.
-Use the existing scalar-extension constraint isomorphism, conjugated by the model's
-object equalities. Its naturality and the model's map equality give a natural
-transformation. Identify the two sheafification-unit descriptions of scalar generators.
-The inverse tensor formula at scalars 1 and s gives the required forward formula
-by cancellation. Equality transports preserve pure tensors and cancel on generators. -/
+Source: Stacks 03EK, 03EL and 07A4. -/
 theorem section_tensor_transport_normalized_pure (T : Scheme.{u})
     (c : ScalarSectionData a T) (hc : ScalarSectionNormalized a T c)
     (b : TensorIso a T) (hb : TensorNormalized a T b)

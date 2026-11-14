@@ -16,8 +16,7 @@ set_option linter.privateModule false
 /-! # Epimorphy of the quotient of an arbitrary normalized projective-bundle realization
 Source: Stacks Project, Constructions, Tags 01OB and 01O4.
 The local argument follows SymmetricProjNormalizedQuotientEpi, transporting its generators
-by the realization section equivalence.
-(blueprint: lem-pur-projective-bundle-quotient-epi). -/
+by the realization section equivalence. -/
 
 @[expose] public section
 set_option autoImplicit false

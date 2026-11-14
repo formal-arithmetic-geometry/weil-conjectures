@@ -27,9 +27,6 @@ set_option linter.privateModule false
 
 /-!
 # Affine-chart assembly for constructible exceptional inverse image
-
-Source: Weil blueprint, `sec-six-functors/sk-prop-sf-rf-shriek-preservation`,
-`theorem-f-shriek-finite-coefficients--1` (blueprint: theorem-f-shriek-finite-coefficients--1).
 -/
 
 @[expose] public section

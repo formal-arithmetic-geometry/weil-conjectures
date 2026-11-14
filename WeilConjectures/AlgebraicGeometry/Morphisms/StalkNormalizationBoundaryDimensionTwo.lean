@@ -19,8 +19,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 /-- Boundary stalks of the finite localized normalization have dimension at least two.
-Source: Stacks Project, Tags 0EYJ, 0337, 00LK, 033C and 00H8.
-(blueprint: lem-sbc-stalk-normalization-boundary-dimension-two) -/
+Source: Stacks Project, Tags 0EYJ, 0337, 00LK, 033C and 00H8 -/
 theorem stalk_normalization_boundary_dimension_two {S C : Scheme.{u}}
     [IsNoetherian S] [QuasiSeparatedSpace S] [IsIntegral S]
     (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))

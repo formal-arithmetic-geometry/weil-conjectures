@@ -14,7 +14,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance
 /-!
 # Topological invariance of the small étale site
 
-Let `f : X ⟶ Y` be a universal homeomorphism, i.e. integral, universally injective and
+Let `f: X ⟶ Y` be a universal homeomorphism, i.e. integral, universally injective and
 surjective. Then base change along `f` is an equivalence between the category of schemes
 étale over `Y` and the category of schemes étale over `X`, and it matches the small étale
 topologies on the two sides. This is [Stacks 04DZ].
@@ -29,7 +29,7 @@ The base change functor is `AlgebraicGeometry.Scheme.Hom.Etale`; it sends an ét
             X ────────f───────→ Y
 ```
 
-so the statement is that `f.Etale : Y.Etale ⥤ X.Etale` is an equivalence of categories,
+so the statement is that `f.Etale: Y.Etale ⥤ X.Etale` is an equivalence of categories,
 with `AlgebraicGeometry.Scheme.Hom.etaleEquivalence` the bundled form.
 
 ## Main definitions
@@ -41,13 +41,11 @@ with `AlgebraicGeometry.Scheme.Hom.etaleEquivalence` the bundled form.
 
 ## Main statements
 
-- `AlgebraicGeometry.Scheme.Hom.functorPushforward_mem_smallEtaleTopology_iff`
-  (blueprint: `lemma-weil-pbc-universal-homeomorphism-coverings`): a sieve on an étale
+- `AlgebraicGeometry.Scheme.Hom.functorPushforward_mem_smallEtaleTopology_iff`: a sieve on an étale
   `Y`-scheme is a covering for the small étale topology of `Y` if and only if its base
   change along `f` is a covering for the small étale topology of `X`. Equivalently, a family
   of étale morphisms is jointly surjective if and only if its base change is.
-- `AlgebraicGeometry.Scheme.Hom.isEquivalence_etale`
-  (blueprint: `lemma-weil-pbc-universal-homeomorphism-site-equivalence`): base change along
+- `AlgebraicGeometry.Scheme.Hom.isEquivalence_etale`: base change along
   a universal homeomorphism is an equivalence of the underlying categories of the small
   étale sites. See the implementation notes for the structure of the proof.
 - `AlgebraicGeometry.Scheme.Hom.isDenseSubsite_etale`: the two statements above combined,
@@ -137,8 +135,7 @@ lemma range_etale_map_left {U V : Y.Etale} (g : V ⟶ U) :
 Equivalently, a family of étale morphisms to `U` is jointly surjective if and only if its
 base change along `f` is: the projection `U ×_Y X ⟶ U` is a base change of `f`, hence
 bijective on points, and it matches the images of the arrows of the sieve with the images of
-their base changes.
-(blueprint: `lemma-weil-pbc-universal-homeomorphism-coverings`) -/
+their base changes. -/
 @[stacks 04DZ]
 lemma functorPushforward_mem_smallEtaleTopology_iff {U : Y.Etale} (S : Sieve U) :
     S.functorPushforward f.Etale ∈ X.smallEtaleTopology (f.Etale.obj U) ↔
@@ -164,20 +161,17 @@ end Bijective
 variable [IsUniversalHomeomorphism f]
 
 /-- **Topological invariance of the small étale site**: base change along a universal
-homeomorphism `f : X ⟶ Y` is an equivalence between the category of schemes étale over `Y`
-and the category of schemes étale over `X`.
-
-(blueprint: `lemma-weil-pbc-universal-homeomorphism-site-equivalence`) -/
+homeomorphism `f: X ⟶ Y` is an equivalence between the category of schemes étale over `Y`
+and the category of schemes étale over `X`. -/
 @[stacks 04DZ]
 instance isEquivalence_etale : f.Etale.IsEquivalence where
 
 /-- **Topological invariance of the small étale site**, [Stacks 04DZ]: for a universal
-homeomorphism `f : X ⟶ Y`, the functor `V ↦ V ×_Y X` is an equivalence of categories
+homeomorphism `f: X ⟶ Y`, the functor `V ↦ V ×_Y X` is an equivalence of categories
 between schemes étale over `Y` and schemes étale over `X`.
 
 This bundled form is what `CategoryTheory.Equivalence.sheafCongr` consumes, see
-`AlgebraicGeometry.Etale.sheafEquivalence`.
-(blueprint: `lemma-weil-pbc-universal-homeomorphism-site-equivalence`) -/
+`AlgebraicGeometry.Etale.sheafEquivalence`. -/
 @[stacks 04DZ]
 noncomputable def etaleEquivalence : Y.Etale ≌ X.Etale :=
   f.Etale.asEquivalence

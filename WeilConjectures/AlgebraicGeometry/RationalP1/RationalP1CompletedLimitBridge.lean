@@ -101,15 +101,7 @@ private theorem normalizedLimit_exists
 
 open Lean Meta Elab Tactic in
 /-- Extract a completed diagonal arrow together with its full normalized limit
-presentation from the simultaneous finite and completed limit specification.
-Source: blueprint diagonal-limit clause 3 and the affine-line proof step 9
-(blueprint: lem-sfb-diagonal-completed-limit-extraction).
-Proof: eliminate the five outer witnesses of the limit specification. Its completed
-compatibility supplies a unique arrow satisfying the recorded limit equation.
-Choose that arrow, retain the finite normalization and compatibility witnesses,
-and package them as `DiagonalTrace.IsDiagonalLimit`. The generic witness
-rearrangement is proved first. Apply it with the original specification's arguments
-so its cached category and exactness instances are retained. -/
+presentation from the simultaneous finite and completed limit specification. -/
 theorem completedLimit_exists
     (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u})
     (hY : IsUnit (ℓ : Γ(Y, ⊤)))

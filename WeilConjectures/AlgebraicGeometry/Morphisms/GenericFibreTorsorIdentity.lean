@@ -70,19 +70,7 @@ private theorem genericFibre_isIso {S C : Scheme.{u}}
 /-- Any family of endomorphisms over C compatible with the generic torsor action
 has an invertible canonical torsor map. No action laws are assumed here.
 
-Source: Stacks Project, Tag 0BQM, proof; Tag 0EYJ, proof (extended action).
-(blueprint: lem-sbc-generic-fibre-torsor-identity)
-
-Proof: The structural morphisms of the finite coproduct of P indexed by G and of
-P ×_C P are finite étale: finite coproducts and fibre products preserve finite étale
-morphisms. Pulling them back along j identifies them with the corresponding coproduct
-of Z.P and Z.P ×_Cη Z.P. The compatibility equation identifies the restriction of the
-canonical map with Z's canonical map, which is invertible by Z.isIso_sigmaDesc.
-Apply generic-fibre full faithfulness to its inverse to obtain a map over C in the
-opposite direction. The two composites restrict to identities, so faithfulness shows
-that they are identities globally. They exhibit the displayed canonical map as an
-isomorphism. This uses only compatibility, not the unit or multiplication laws; it works
-for the trivial group and disconnected torsors, and also for an empty family C. -/
+Source: Stacks Project, Tag 0BQM, proof; Tag 0EYJ, proof (extended action). -/
 theorem GaloisCover.isIso_sigmaDesc_of_genericFibre {S C : Scheme.{u}}
     [IsIntegral S] (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))
     (c : C ⟶ S) [Smooth c] [GeometricallyConnected c]

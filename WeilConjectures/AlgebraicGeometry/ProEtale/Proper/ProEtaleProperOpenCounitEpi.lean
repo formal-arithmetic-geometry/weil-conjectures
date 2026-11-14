@@ -13,9 +13,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Open.ProEtaleOpenCounitFiniteS
 
 /-! Epimorphism half of the proper/open pro-etale counit support argument.
 
-Source: Stacks, Tags 09AE and 09AG; blueprint
-`lem-exc-proetale-proper-open-counit-isiso`.
-(blueprint: lem-exc-proetale-proper-open-counit-epi)
+Source: Stacks, Tags 09AE and 09AG.
 -/
 
 @[expose] public section

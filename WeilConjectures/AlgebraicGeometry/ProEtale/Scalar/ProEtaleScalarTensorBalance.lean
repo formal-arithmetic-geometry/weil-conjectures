@@ -52,7 +52,6 @@ import all WeilConjectures.CategoryTheory.ScalarHomTensor.ScalarHomTensorCompari
 /-! # Normalized total tensor comparison for pro-etale scalar extension
 
 Source: Stacks 03EL and 07A4.
-(blueprint: new-sf-proetale-scalar-tensor-balance).
 -/
 
 @[expose] public noncomputable section
@@ -266,14 +265,7 @@ private theorem total_balance_unit (X : Scheme.{u})
 end TensorCalculation
 
 /-- Scalar extension commutes with total tensor, with its scalar-first section formula.
-Source: Stacks 03EL and 07A4; Mathlib's signed direct-sum totalization.
-(blueprint: new-sf-proetale-scalar-tensor-balance).
-
-Proof: transport the ordinary tensor comparison through the recorded object and map
-identifications of scalar extension. Form the inverse comparison on total coproducts;
-its bidegree formula and naturality give a natural isomorphism. Naturality of the
-adjunction unit and the ordinary pure-tensor formula identify its sections at scalar 1.
-Linearity then gives every scalar, including for nonflat coefficient maps. -/
+Source: Stacks 03EL and 07A4. -/
 theorem pbc_tensor_balance_exists (X : Scheme.{u})
     {A B : Sheaf (ProEt.topology X) CommRingCat.{u + 1}} (φ : A ⟶ B) :
     ∃ balance : coefficientTotalTensor.{u + 1, u + 1, u} (ProEt.topology X) A ⋙

@@ -31,15 +31,7 @@ namespace AlgebraicGeometry.Scheme
 /-- The equivariant function algebra is reconstructed from orbit representatives
 as the product of the corresponding stabilizer equalizers.
 
-Source: Stacks Project, Tag 03SF (finite Galois covers).
-Proof: evaluate an equivariant function on one representative of each orbit.
-The equivariance equations determine all other coordinates uniquely by the group
-action. A coordinate at a representative is unrestricted exactly when it is
-fixed by its stabilizer, hence lies in the corresponding intersection of
-equalizers. Extending these coordinates along orbit representatives gives the
-inverse algebra map; the two maps are inverse by the orbit decomposition and
-preserve the H-algebra structures.
-(blueprint: lem-sbc-affine-torsor-equivariant-descent-algebra) -/
+Source: Stacks Project, Tag 03SF (finite Galois covers). -/
 theorem affine_torsor_equivariant_descent_algebra
     (H C : Type u) [CommRing H] [CommRing C] [Algebra H C]
     (G : Type u) [Group G] (ρ : G → C →ₐ[H] C)

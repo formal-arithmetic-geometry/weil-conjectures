@@ -12,9 +12,9 @@ public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
 /-!
 # The ideal of the zero scheme of a section is the image of its dual
 
-Let `ℳ` be an invertible `𝒪_X`-module and `s : 𝒪_X ⟶ ℳ` a global section. The blueprint defines
+Let `ℳ` be an invertible `𝒪_X`-module and `s: 𝒪_X ⟶ ℳ` a global section. The blueprint defines
 the ideal sheaf of the zero scheme `Z(s)` as the image of the transpose
-`s^∨ : ℳ^∨ ⟶ 𝒪_X^∨ ≅ 𝒪_X`. In this project `Z(s)` is defined by its local equations
+`s^∨: ℳ^∨ ⟶ 𝒪_X^∨ ≅ 𝒪_X`. In this project `Z(s)` is defined by its local equations
 (`AlgebraicGeometry.Scheme.Modules.Hom.zeroLocus`); this file proves that the two agree, as
 subobjects of `𝒪_X` in the abelian category of `𝒪_X`-modules.
 
@@ -22,19 +22,17 @@ subobjects of `𝒪_X` in the abelian category of `𝒪_X`-modules.
 
 - `AlgebraicGeometry.Scheme.Modules.dualUnitIso`: the identification `𝒪_X^∨ ≅ 𝒪_X`, `λ ↦ λ(1)`.
 - `AlgebraicGeometry.Scheme.Modules.Hom.adjointSection`: the global section
-  `s : 𝒪_X ⟶ M ⊗ N^∨` corresponding to a morphism `φ : N ⟶ M` with `N` invertible.
+  `s: 𝒪_X ⟶ M ⊗ N^∨` corresponding to a morphism `φ: N ⟶ M` with `N` invertible.
 
 ## Main statements
 
 - `AlgebraicGeometry.Scheme.Modules.Hom.imageSubobject_eq_mk_toModulesι`: for a morphism
-  `ψ : ℒ ⟶ 𝒪_X` from an invertible module, the image of `ψ` is the ideal sheaf of `Z(ψ)`.
+  `ψ: ℒ ⟶ 𝒪_X` from an invertible module, the image of `ψ` is the ideal sheaf of `Z(ψ)`.
 - `AlgebraicGeometry.Scheme.Modules.Hom.zeroLocus_dualMap_comp_dualUnitIso`: `Z(s^∨) = Z(s)`.
 - `AlgebraicGeometry.Scheme.Modules.Hom.imageSubobject_dualMap_comp_dualUnitIso`: the ideal sheaf
-  of `Z(s)` is the image of `s^∨ : ℳ^∨ ⟶ 𝒪_X` (blueprint `def-pc-zero-scheme`,
-  `lem-pc-zero-scheme-properties`).
+  of `Z(s)` is the image of `s^∨: ℳ^∨ ⟶ 𝒪_X`.
 - `AlgebraicGeometry.Scheme.Modules.Hom.zeroLocus_adjointSection`: the section `s` of
-  `M ⊗ N^{-1}` corresponding to a morphism `φ : N ⟶ M` of invertible modules has `Z(s) = Z(φ)`
-  (blueprint `proposition-divisors-degree-g-open-chart--1`).
+  `M ⊗ N^{-1}` corresponding to a morphism `φ: N ⟶ M` of invertible modules has `Z(s) = Z(φ)`.
 - `AlgebraicGeometry.Scheme.Modules.nonempty_dual_pullback_iso_pullback_dual`:
   `(g^* N)^∨ ≅ g^* (N^∨)` for invertible `N`.
 -/
@@ -158,10 +156,8 @@ theorem zeroLocus_dualMap_comp_dualUnitIso {M : X.Modules}
     (Arrow.isoMk (λ_ _).symm (asIso (dualEvaluation M)).symm (by simp))
 
 /-- **The ideal of the zero scheme of a section is the image of its dual.** For a global section
-`s : 𝒪_X ⟶ ℳ` of an invertible module, the ideal sheaf `𝓘_{Z(s)}` is the image of the transpose
-`s^∨ : ℳ^∨ ⟶ 𝒪_X^∨ ≅ 𝒪_X`, `λ ↦ λ(s)`, as a subobject of `𝒪_X`.
-
-(blueprint: `def-pc-zero-scheme`, `lem-pc-zero-scheme-properties`) -/
+`s: 𝒪_X ⟶ ℳ` of an invertible module, the ideal sheaf `𝓘_{Z(s)}` is the image of the transpose
+`s^∨: ℳ^∨ ⟶ 𝒪_X^∨ ≅ 𝒪_X`, `λ ↦ λ(s)`, as a subobject of `𝒪_X`. -/
 theorem imageSubobject_dualMap_comp_dualUnitIso {M : X.Modules}
     [SheafOfModules.IsInvertible.{u, u, u} M] (s : 𝟙_ X.Modules ⟶ M) :
     imageSubobject (dualMap s ≫ dualUnitIso.hom) = Subobject.mk s.zeroLocus.toModulesι := by
@@ -178,13 +174,11 @@ noncomputable def adjointSection {N M : X.Modules} [N.IsInvertible] (φ : N ⟶ 
     𝟙_ X.Modules ⟶ M ⊗ Nᵛ :=
   inv (dualEvaluation N) ≫ φ ▷ Nᵛ
 
-/-- **The zero scheme of the corresponding section.** For a morphism `φ : N ⟶ M` of invertible
-modules and any identification `e : N^∨ ≅ P` of `N^{-1}`, the section
-`s : 𝒪_X ⟶ M ⊗ N^∨ ≅ M ⊗ P` corresponding to `φ` has the same zero scheme as `φ`:
+/-- **The zero scheme of the corresponding section.** For a morphism `φ: N ⟶ M` of invertible
+modules and any identification `e: N^∨ ≅ P` of `N^{-1}`, the section
+`s: 𝒪_X ⟶ M ⊗ N^∨ ≅ M ⊗ P` corresponding to `φ` has the same zero scheme as `φ`:
 `Z(s) = Z(φ)`. Up to isomorphism of arrows `s` is `φ ⊗ N^∨`, and twisting by an invertible
-module does not change the zero scheme (`Hom.zeroLocus_whiskerRight`).
-
-(blueprint: `proposition-divisors-degree-g-open-chart--1`) -/
+module does not change the zero scheme (`Hom.zeroLocus_whiskerRight`). -/
 theorem zeroLocus_adjointSection_comp_whiskerLeft {N M P : X.Modules} [N.IsInvertible]
     [M.IsInvertible] (φ : N ⟶ M) (e : Nᵛ ≅ P) :
     (adjointSection φ ≫ M ◁ e.hom).zeroLocus = φ.zeroLocus := by
@@ -196,10 +190,8 @@ theorem zeroLocus_adjointSection_comp_whiskerLeft {N M P : X.Modules} [N.IsInver
     (Arrow.isoMk (asIso (dualEvaluation N)).symm (whiskerLeftIso M e).symm
       (by simp [adjointSection]))
 
-/-- **The zero scheme of the corresponding section.** For a morphism `φ : N ⟶ M` of invertible
-modules, the section `s : 𝒪_X ⟶ M ⊗ N^∨` corresponding to `φ` satisfies `Z(s) = Z(φ)`.
-
-(blueprint: `proposition-divisors-degree-g-open-chart--1`) -/
+/-- **The zero scheme of the corresponding section.** For a morphism `φ: N ⟶ M` of invertible
+modules, the section `s: 𝒪_X ⟶ M ⊗ N^∨` corresponding to `φ` satisfies `Z(s) = Z(φ)`. -/
 theorem zeroLocus_adjointSection {N M : X.Modules} [N.IsInvertible] [M.IsInvertible]
     (φ : N ⟶ M) : (adjointSection φ).zeroLocus = φ.zeroLocus := by
   simpa using zeroLocus_adjointSection_comp_whiskerLeft φ (Iso.refl _)

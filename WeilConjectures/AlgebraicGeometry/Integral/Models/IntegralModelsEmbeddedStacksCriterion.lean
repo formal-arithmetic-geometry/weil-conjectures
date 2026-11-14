@@ -173,8 +173,7 @@ import WeilConjectures.AlgebraicGeometry.Embedded.EmbeddedIntegralResidueTranspo
 
 /-! # Stacks criterion for embedded coefficients
 
-Source: the integral-models Stacks criterion, Stacks Project Tag 09C1 (blueprint:
-lem-sfb-embedded-integral-stacks-criterion).
+Source: the integral-models Stacks criterion, Stacks Project Tag 09C1.
 -/
 
 @[expose] public noncomputable section
@@ -197,24 +196,7 @@ attribute [-instance] integralModel_coefficientMonObj in
 /-- The Stacks integral constructibility criterion in the independent-universe embedded
 coefficient presentation.
 
-Source: integral-models-stacks detail of the integral-models unit; Stacks Project Tag 09C1
-(blueprint: lem-sfb-embedded-integral-stacks-criterion).
-
-Proof: apply integral_models_stacks to the finite extension ULift E in the scheme
-universe. The spectral-norm identification with the original embedded norm identifies
-its integers with ULift of the embedded integers. The uniformizer hypothesis identifies
-the chosen principal ideal with the maximal ideal, hence identifies every power quotient
-with the corresponding coefficientExtensionRing. Apply constant sheafification and the
-continuous-function functor to these ring isomorphisms. They commute with the canonical
-constant-to-continuous map and the first residue quotient. Exact inverse image to X,
-section-module equivalence and equivalent-small-site transport preserve these squares.
-Restriction along the resulting coefficient isomorphisms gives equivalences of derived
-categories; the scalar squares identify the restriction and derived reduction functors.
-These equivalences identify finite constant models and their constructible
-stratifications, homology and bounds, relative derived tensor and finite Tor amplitude.
-The same first-quotient square identifies the local kernel-ideal completeness predicates.
-Transporting the pointwise iff in integral_models_stacks gives the displayed iff for
-arbitrary K, without changing either ambient category or imposing a universe equality.
+Source: integral-models-stacks detail of the integral-models unit; Stacks Project Tag 09C1.
 -/
 theorem integralModelsEmbeddedStacksCriterion
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)

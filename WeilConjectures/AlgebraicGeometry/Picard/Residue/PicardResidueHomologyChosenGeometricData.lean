@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.Picard.Residue.PicardResidueHomologyCho
 /-! # Affine residue data for the chosen geometric maps
 
 Source: Stacks Project, Tags 0B91, 0BF2, 01IB and 08CR.
-(blueprint: lem-sc-picard-residue-homology-chosen-geometric-maps)
 
 This intermediate statement retains the derived-fibre targets. The enclosing theorem
 later composes these with the geometric fibre comparisons. -/

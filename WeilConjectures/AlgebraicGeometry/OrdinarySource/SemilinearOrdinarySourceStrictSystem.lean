@@ -109,7 +109,6 @@ public import WeilConjectures.Algebra.Homology.System.SystemLevelLeftExtensionBa
 /-! # The prescribed ordinary system as a strict system
 
 Source: Zheng Construction 4.1; Stacks 03D1.
-(blueprint: def-coef-ordinary-source-strict-system).
 
 The levels and transitions are literally the existing evaluation and transition operations.
 Their strict laws follow from the section formula and the presheaf functor laws.
@@ -134,8 +133,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
 
 -- Keep the section map separate from the coefficient transports during elaboration.
 /-- The horizontal map on section carriers, separated from its scalar transports.
-Source: Zheng Construction 4.1; the section formula in SemilinearSystemModels.
-(blueprint: def-coef-ordinary-source-strict-system). -/
+Source: Zheng Construction 4.1. -/
 def sourceSection (M : Systems.{c, v, max c v r} J B τ)
     {m n : ℕ} (h : n ≤ m) (U : Cᵒᵖ) :
     M.val.obj (op (m, U.unop)) → M.val.obj (op (n, U.unop)) :=
@@ -151,8 +149,7 @@ private theorem sourceTransition_apply (M : Systems.{c, v, max c v r} J B τ)
 attribute [local irreducible] sourceSection
 
 /-- The identity horizontal map acts as the identity on sections.
-Source: Zheng Construction 4.1; the section formula in SemilinearSystemModels.
-(blueprint: def-coef-ordinary-source-strict-system). -/
+Source: Zheng Construction 4.1. -/
 theorem sourceStrict_identity (M : Systems.{c, v, max c v r} J B τ)
     (n : ℕ) (U : Cᵒᵖ) (x : M.val.obj (op (n, U.unop))) :
     @Eq (M.val.obj (op (n, U.unop)))
@@ -165,8 +162,7 @@ theorem sourceStrict_identity (M : Systems.{c, v, max c v r} J B τ)
   exact (sourceTransition_apply.{c, v, r} J B τ M (Nat.le_refl n) U x).trans hi
 
 /-- Horizontal maps compose as presheaf restrictions.
-Source: Zheng Construction 4.1; the section formula in SemilinearSystemModels.
-(blueprint: def-coef-ordinary-source-strict-system). -/
+Source: Zheng Construction 4.1. -/
 theorem sourceStrict_compose (M : Systems.{c, v, max c v r} J B τ)
     {l m n : ℕ} (h : l ≤ m) (k : m ≤ n)
     (U : Cᵒᵖ) (x : M.val.obj (op (n, U.unop))) :
@@ -192,8 +188,7 @@ theorem sourceStrict_compose (M : Systems.{c, v, max c v r} J B τ)
               sourceSection.{c, v, r} J B τ M k U x)).symm)))
 
 /-- The strict system with exactly the prescribed evaluations and transitions.
-Source: Zheng Construction 4.1; the section formula in SemilinearSystemModels.
-(blueprint: def-coef-ordinary-source-strict-system). -/
+Source: Zheng Construction 4.1. -/
 def sourceStrictObject (M : Systems.{c, v, max c v r} J B τ) :
     SheafOfModules.StrictRingSystem.{c, v, max c v r} (rings J B τ) where
   level n := (evaluation J B τ n).obj M
@@ -208,8 +203,7 @@ def sourceStrictObject (M : Systems.{c, v, max c v r} J B τ) :
     exact he
 
 /-- Extraction of strict systems using exactly the prescribed component functors.
-Source: Zheng Construction 4.1; the section formula in SemilinearSystemModels.
-(blueprint: def-coef-ordinary-source-strict-system). -/
+Source: Zheng Construction 4.1. -/
 def sourceStrictFunctor : Systems.{c, v, max c v r} J B τ ⥤
     SheafOfModules.StrictRingSystem.{c, v, max c v r} (rings J B τ) where
   obj := sourceStrictObject.{c, v, r} J B τ

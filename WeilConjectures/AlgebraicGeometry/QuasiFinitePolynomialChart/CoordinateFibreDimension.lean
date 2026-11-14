@@ -13,8 +13,7 @@ public import WeilConjectures.Mathlib.Topology.KrullDimension
 /-!
 # Comparing affine fibre dimensions
 
-Source: Stacks Project, Tag 01I4 and Remark 00E6.
-(blueprint: lem-sbc-affine-coordinate-fibre-dimension)
+Source: Stacks Project, Tag 01I4 and Remark 00E6
 -/
 
 @[expose] public section
@@ -41,18 +40,7 @@ private theorem dimensionAt_homeomorph {A B : Type*}
 /-- The local dimension of an affine scheme fibre equals that of the coordinate-ring fibre.
 
 Source: Stacks Project, Tag 01I4 (affine fibre products), Remark 00E6 (topology of the ring fibre).
-(blueprint: lem-sbc-affine-coordinate-fibre-dimension)
-
-Proof: the homeomorphism `f.fiberHomeo (f y)` identifies the scheme fibre with the
-set-theoretic fibre through y. The canonical affine homeomorphisms identify X and T
-with their coordinate spectra. Naturality of `isoSpec` identifies f with contraction
-along its map on global sections, and hence identifies these set-theoretic fibres.
-Finally `PrimeSpectrum.preimageHomeomorphFiber` identifies the ring-map fibre with
-the spectrum of the residue-field tensor product. Each homeomorphism takes the
-specified point to the specified point. Homeomorphisms preserve open neighbourhoods
-and their Krull dimensions, so their infima, the local dimensions, agree. This does
-not require finite type, nonempty fibres other than the specified point, or a finite
-dimension; it applies equally to dimension zero and infinite dimension. -/
+-/
 theorem affine_coordinate_fibre_dimension_eq
     {X T : Scheme.{u}} [IsAffine X] [IsAffine T] (f : X ⟶ T) (y : X) :
     let : Algebra Γ(T, ⊤) Γ(X, ⊤) := f.appTop.hom.toAlgebra

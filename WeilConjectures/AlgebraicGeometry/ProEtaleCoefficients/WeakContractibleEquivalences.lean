@@ -26,10 +26,6 @@ import Mathlib.CategoryTheory.Sites.Limits
 
 /-!
 # Equivalent forms of weak contractibility
-
-Source: literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/
-`sk-def-pe-weak-contractible/det-pe-weak-contractible-equivalences.md`
-(blueprint: lemma-w-contractible-affines-projective--2).
 -/
 
 @[expose] public section
@@ -44,32 +40,9 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The three equivalent lifting and evaluation formulations of weak contractibility.
 
-Source: blueprint main-20261015, unit `definition-weak-contractibility`, node
-`lemma-w-contractible-affines-projective--2`, clauses 1--3 and final affine assertion;
-Stacks Project, Tags 001P and 00WN
-(blueprint: lemma-w-contractible-affines-projective--2).
+Source: Stacks Project, Tags 001P and 00WN.
 
 An object satisfying the equivalent conditions is called weakly contractible.
-
-Proof:
-1. By `proposition-topos-functoriality--1` the representable is a sheaf. Sheaves form
-   a full subcategory of presheaves (`lemma-w-contractible-affines-projective--2`). Yoneda
-   (`lemma-w-contractible-affines-projective--2`) identifies maps from the representable with
-   sections. Naturality identifies the lifting equation with the equation for a
-   preimage under evaluation, proving (2) iff (3).
-2. For (1) implies (2), given an epimorphism and a map from the representable, form
-   the presheaf of pairs with the same image in the target. Glue both coordinates
-   using the sheaf axioms and apply separatedness of the target to verify that
-   the glued pair still has equal images. The resulting sheaf is the pullback.
-3. Apply `lemma-w-contractible-affines-projective--2` to lift each section
-   locally in the first coordinate. The second coordinate restricts along the same
-   cover, so the pullback projection is locally surjective and hence epimorphic.
-4. Condition (1) splits this projection. Compose its section with the other
-   projection to obtain the desired lift. Conversely, (2) lifts the identity of
-   the representable along every epimorphism onto it, proving (1).
-5. For an affine object with w-contractible coordinate ring,
-   `lemma-w-contractible-affines-projective` supplies (1), so the equivalences give all three
-   conditions.
 -/
 theorem proetale_weakContractible_equivalences
     (X : Scheme.{u}) (W : X.ProEt) :

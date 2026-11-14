@@ -213,30 +213,7 @@ private noncomputable def integralForgetDirectImageIso
     Functor.isoWhiskerRight U.rightDerivedFunctorIsoMapDerivedCategory G.rightDerivedFunctor
 
 /-- On bounded input, positive integral reduction commutes with ordinary direct image
-on the underlying abelian complexes.
-Source: blueprint integral proper direct sums, proof (1), perfect quotient projection
-formula and exact restriction of scalars
-(blueprint: lem-sfb-integral-reduction-underlying-direct-image).
-
-Proof: the unit-normalized scalar pullback isomorphism identifies the specified
-inverse mate by the adjunction Hom bijection. The existing scalar-cone comparison
-then gives a morphism of distinguished triangles with identity first and second
-components. The triangle five lemma and reflection by exact faithful scalar
-restriction show that every finite projection is invertible. The reduction-tower
-comparison supplies the required integral level isomorphism.
-
-For the underlying abelian comparison, nonzero integer multiplication is injective
-on continuous integral coefficients. Exact inverse image preserves this monomorphism,
-so evaluation shows that every section of the actual integral coefficient object is
-torsion-free over the integers, hence flat. Sheafification of the sectionwise tensor
-shows that this coefficient object is flat as an abelian sheaf. The free module
-functor is therefore exact, so its right adjoint, forgetting the action, preserves
-K-injective complexes. Derive the literal underived forgetful/direct-image square
-using exact postcomposition and K-injective-preserving precomposition. Compose its
-component at the integral reduction with the forgetful image of the inverse level
-isomorphism. This argument works even without boundedness or quasi-compactness and
-quasi-separatedness; all hypotheses of the stated theorem are retained. Positive
-exponent n+1 includes n=0, and zero complexes and empty schemes are included. -/
+on the underlying abelian complexes. -/
 theorem integralReduction_underlying_directImage
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

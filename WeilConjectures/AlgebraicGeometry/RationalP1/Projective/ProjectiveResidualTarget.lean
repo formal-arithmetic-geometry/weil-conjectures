@@ -137,9 +137,7 @@ private theorem second_section_single (Y : Scheme.{u})
   rw [ordinary_second_section Λ Y L d, diagonal_single_unit Λ Y] at hs
   exact hs
 
-/- Residual section and support comparison after the diagram unit is identified.
-Source: second identity proof.
-(blueprint: lem-sfb-projective-supported-source-arrow-derived-core) -/
+/- Residual section and support comparison after the diagram unit is identified. -/
 theorem projective_residual_target (Y : Scheme.{u})
     (L : ∀ X : Scheme.{u}, Modules Λ X) (d : Diagram Λ Y L) :
     (CondensedRing.lowerStar Λ (secondProjection Y)).singleRightDerivedUnit.app

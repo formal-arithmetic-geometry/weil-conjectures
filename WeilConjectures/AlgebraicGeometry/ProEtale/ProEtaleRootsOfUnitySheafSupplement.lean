@@ -33,8 +33,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleRootsOfUnitySheaf
 
 /-! # Roots of unity on the small pro-etale site
 
-Source: Stacks Project, Section 59.28, Tag 03PK; Definition 59.23.1, Tag 03P4
-(blueprint: definition-tate-twists--1).
+Source: Stacks Project, Section 59.28, Tag 03PK; Definition 59.23.1, Tag 03P4.
 
 The power map, kernel, constant-ring module and transition maps use the original
 sectionwise global-sections rings. No invertibility hypothesis on the exponent is imposed.
@@ -49,19 +48,14 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- For divisible exponents both sheaves are killed by the larger exponent.
-Source: Stacks Project, Tag 03PK (blueprint: definition-tate-twists--1).
-Proof: write `N' = N*k`; an `N`-th root raised to `N'` is `(x^N)^k = 1`.
-Apply the sectionwise kernel description. -/
+Source: Stacks Project, Tag 03PK. -/
 theorem proEtaleRootsOfUnity_nsmul_of_dvd (S : Scheme.{u}) (N N' : ℕ) (h : N ∣ N')
     (U : S.ProEtᵒᵖ) (x : (proEtaleRootsOfUnitySheaf S N).obj.obj U) : N' • x = 0 := by
   obtain ⟨k, rfl⟩ := h
   simp [mul_comm N k, mul_nsmul, proEtaleRootsOfUnity_nsmul]
 
 /-- For a prime `ℓ`, the transition between consecutive powers is `x ↦ x^ℓ`.
-Source: Stacks Project, Tag 03PK (blueprint: definition-tate-twists--1).
-Proof: since `ℓ > 0`, division gives `ℓ^(r+2) / ℓ^(r+1) = ℓ`. The kernel lift's
-composite with the inclusion is the power map with this quotient exponent. Evaluate
-that equality at `U` and the section `x`. -/
+Source: Stacks Project, Tag 03PK. -/
 theorem proEtaleRootsOfUnityTransition_prime (S : Scheme.{u}) (ℓ : ℕ) (hℓ : ℓ.Prime)
     (r : ℕ) (U : S.ProEtᵒᵖ)
     (x : (proEtaleRootsOfUnitySheaf S (ℓ ^ (r + 2))).obj.obj U) :
@@ -90,8 +84,7 @@ theorem proEtaleRootsOfUnityTransition_prime (S : Scheme.{u}) (ℓ : ℕ) (hℓ 
   exact hx
 
 /-- The inverse system indexed by `r ≥ 1`; the natural-number index `r` denotes `r+1`.
-Source: Stacks Project, Tag 03PK and the coefficient-twist blueprint
-(blueprint: definition-tate-twists--1).
+Source: Stacks Project.
 Each successor transition is the specified power map; arbitrary transitions are composites. -/
 noncomputable def proEtaleRootsOfUnityTower (S : Scheme.{u}) (ℓ : ℕ) (hℓ : ℓ.Prime) :
     ℕᵒᵖ ⥤ Sheaf (ProEt.topology S) AddCommGrpCat.{u + 1} :=

@@ -37,7 +37,6 @@ import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Biproducts
 
 /-! K-flatness part of the finite-free scalar comparison.
-(blueprint: lem-sfb-finite-free-scalar-derived-comparison-flatness)
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false

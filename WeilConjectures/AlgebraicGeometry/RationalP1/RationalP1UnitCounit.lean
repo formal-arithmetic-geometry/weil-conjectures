@@ -44,9 +44,6 @@ set_option linter.style.haveILetI false
 set_option linter.unusedVariables false
 
 /-! # The specified rational projective-line unit and counit
-
-Source: blueprint main-20261015, rational projective-line adjunction, clauses 1--3
-(blueprint: proposition-projective-line-rational-coefficients--1).
 -/
 
 @[expose] public noncomputable section
@@ -211,13 +208,7 @@ variable (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateFiel
 
 -- Keep fixed site and derived comparisons folded during elaboration.
 include k p hpl in
-/-- The actual two functors preserve Loc of finite-constant-model Dbc.
-Source: blueprint unit/counit proof steps 1--5 and 11
-(blueprint: proposition-projective-line-rational-coefficients--1).
-Proof: proper direct image preserves bounded constructibility; pullback and the invertible
-Tate line preserve bounded constructibility. These exact functors preserve arbitrary
-coproducts on the rational localizing categories. The universal property of the localizing
-closure therefore extends preservation from Dbc to its entire closure. -/
+/-- The actual two functors preserve Loc of finite-constant-model Dbc. -/
 theorem localizingPreservation :
     (∀ M, CategoryTheory.localizingClosure
         (constantModelBoundedConstructible (coefficient l c).X (ProjectiveLine Y)) M →
@@ -233,8 +224,7 @@ theorem localizingPreservation :
   exact ⟨h.pushQ.preserves, h.twistedPullQ.preserves⟩
 
 -- Keep fixed site and derived comparisons folded during elaboration.
-/-- The restriction of the actual direct image, with the inherited full Hom sets.
-Source: blueprint unit/counit (blueprint: proposition-projective-line-rational-coefficients--1). -/
+/-- The restriction of the actual direct image, with the inherited full Hom sets. -/
 def push : rationalLocalizingCategory (coefficient l c).X (ProjectiveLine Y) ⥤
     rationalLocalizingCategory (coefficient l c).X Y :=
   (CategoryTheory.localizingClosure
@@ -244,8 +234,7 @@ def push : rationalLocalizingCategory (coefficient l c).X (ProjectiveLine Y) ⥤
     (fun M ↦ (localizingPreservation l c k p hpl Y).1 M.obj M.property)
 
 -- Keep fixed site and derived comparisons folded during elaboration.
-/-- Pullback followed by the positive Tate twist and shift two, restricted to Loc(Dbc).
-Source: blueprint unit/counit (blueprint: proposition-projective-line-rational-coefficients--1). -/
+/-- Pullback followed by the positive Tate twist and shift two, restricted to Loc(Dbc). -/
 def exceptional : rationalLocalizingCategory (coefficient l c).X Y ⥤
     rationalLocalizingCategory (coefficient l c).X (ProjectiveLine Y) :=
   (CategoryTheory.localizingClosure
@@ -256,9 +245,7 @@ def exceptional : rationalLocalizingCategory (coefficient l c).X Y ⥤
     (fun K ↦ (localizingPreservation l c k p hpl Y).2 K.obj K.property)
 
 -- Keep fixed site and derived comparisons folded during elaboration.
-/-- The type of the two natural transformations, before asserting any triangles.
-Source: blueprint unit/counit clauses 2--3
-(blueprint: proposition-projective-line-rational-coefficients--1). -/
+/-- The type of the two natural transformations, before asserting any triangles. -/
 def UnitCounitType : Type (u + 2) :=
   (𝟭 _ ⟶ push l c k p hpl Y ⋙ exceptional l c k p hpl Y) ×
     (exceptional l c k p hpl Y ⋙ push l c k p hpl Y ⟶ 𝟭 _)
@@ -356,13 +343,7 @@ private theorem unit_mate_isIso
     (h.pullFirst.preserves M.obj M.property) hline
 
 -- Keep fixed site and derived comparisons folded during elaboration.
-/-- Invertibility of precisely the exchange and twisted projection in the unit formula.
-Source: blueprint unit/counit proof steps 9--11
-(blueprint: proposition-projective-line-rational-coefficients--1).
-Proof: the projection is a relative projective line and is proper. Proper base change
-on the rational localizing categories makes its canonical exchange invertible. The
-proper projection formula and the normalized Cartesian Tate comparison make the twisted
-projection invertible. These results hold for all objects of Loc(Dbc), unbounded included. -/
+/-- Invertibility of precisely the exchange and twisted projection in the unit formula. -/
 theorem unitInversions (M : rationalLocalizingCategory (coefficient l c).X (ProjectiveLine Y)) :
     UnitInversionCondition (coefficient l c).X Y (line l c)
       (secondLineComparison l c k p hpl Y) M.obj := by
@@ -372,11 +353,7 @@ theorem unitInversions (M : rationalLocalizingCategory (coefficient l c).X (Proj
 
 -- Keep fixed site and derived comparisons folded during elaboration.
 include k p hpl in
-/-- Invertibility of precisely the projection appearing in the counit.
-Source: blueprint unit/counit proof step 11
-(blueprint: proposition-projective-line-rational-coefficients--1).
-Proof: apply the proper rational projection formula to q, with factors K and the shifted
-positive Tate line. Both belong to the localizing constructible category. -/
+/-- Invertibility of precisely the projection appearing in the counit. -/
 theorem counitInversion (K : rationalLocalizingCategory (coefficient l c).X Y) :
     CounitInversionCondition (coefficient l c).X Y (line l c) K.obj := by
   have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace (Y ↘ Spec (.of k))
@@ -396,9 +373,7 @@ theorem counitInversion (K : rationalLocalizingCategory (coefficient l c).X Y) :
     K.obj _ K.property hL
 
 -- Keep fixed site and derived comparisons folded during elaboration.
-/-- Componentwise normalization by the actual canonical ambient formulas.
-Source: blueprint unit/counit clauses 2--3
-(blueprint: proposition-projective-line-rational-coefficients--1). -/
+/-- Componentwise normalization by the actual canonical ambient formulas. -/
 def UnitCounitNormalized (family : Family l Y) (a : UnitCounitType l c k p hpl Y) : Prop :=
   (∀ M : rationalLocalizingCategory (coefficient l c).X (ProjectiveLine Y),
     UnitComponentNormalized (coefficient l c).X Y (line l c) (diagram l c Y family)
@@ -408,14 +383,7 @@ def UnitCounitNormalized (family : Family l Y) (a : UnitCounitType l c k p hpl Y
       K.obj (a.2.app K).hom)
 
 -- Keep fixed site and derived comparisons folded during elaboration.
-/-- The fixed formulas form a unique pair of natural transformations.
-Source: blueprint unit/counit proof steps 6--12
-(blueprint: proposition-projective-line-rational-coefficients--1).
-Proof: use the canonical diagonal tensor identification, tensor the fixed class, invert
-the proper exchange and twisted projection, and restrict to the full subcategories.
-For the counit invert the projection and contract the trace. Naturality of all the
-canonical comparisons proves naturality of each paste. Componentwise normalization
-uniquely determines the pair by extensionality of natural transformations. -/
+/-- The fixed formulas form a unique pair of natural transformations. -/
 theorem unitCounit_existsUnique (family : Family l Y) :
     ∃! a : UnitCounitType l c k p hpl Y, UnitCounitNormalized l c k p hpl Y family a := by
   exact restrictedUnitCounit_existsUnique (coefficient l c).X Y (line l c)
@@ -427,9 +395,7 @@ theorem unitCounit_existsUnique (family : Family l Y) :
     (by unfold push; rfl) (by unfold exceptional; rfl)
 
 -- Keep fixed site and derived comparisons folded during elaboration.
-/-- The uniquely normalized diagonal unit and trace counit; no adjunction is assumed.
-Source: blueprint unit/counit clauses 2--3
-(blueprint: proposition-projective-line-rational-coefficients--1). -/
+/-- The uniquely normalized diagonal unit and trace counit; no adjunction is assumed. -/
 def unitCounit (family : Family l Y) : UnitCounitType l c k p hpl Y :=
   (unitCounit_existsUnique l c k p hpl Y family).exists.choose
 

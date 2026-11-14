@@ -37,8 +37,7 @@ namespace AlgebraicGeometry.IsUniversalHomeomorphism
   ↓          ↓
   X ───f───→ S
 ```
-if `g` is a universal homeomorphism, then so is its base change `g'`.
-(blueprint: `lem-weil-pbc-universal-homeomorphism-base-change`) -/
+if `g` is a universal homeomorphism, then so is its base change `g'`. -/
 theorem of_isPullback {X Y Y' S : Scheme.{u}} {f : X ⟶ S} {g : Y ⟶ S} {f' : Y' ⟶ Y}
     {g' : Y' ⟶ X} (sq : IsPullback f' g' g f) [IsUniversalHomeomorphism g] :
     IsUniversalHomeomorphism g' :=

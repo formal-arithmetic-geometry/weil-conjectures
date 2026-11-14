@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.ModuleOpenRestrictionInjectives
 /-! # Natural indexed restricted coefficient roof
 
 Source: Stacks Project, Cohomology, Tags 01E4 and 01FB.
-(blueprint: lem-weil-pbc-restricted-coefficient-nat-roof).
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -133,20 +132,7 @@ private theorem coefficientData_roof_formula {X Y : Scheme.{u}} {v : X ⟶ Y}
 
 -- Compare the explicit scheme-restriction and section-functor presentations.
 /-- Restricting an augmented injective roof computes the classical coefficient map.
-Source: Stacks Project, Tags 01E4 and 01FB
-(blueprint: lem-weil-pbc-restricted-coefficient-nat-roof).
-
-Proof: Restriction to U is exact and preserves injectives. Conjugate the restriction of
-ell by the natural restriction/direct-image isomorphism and by R'.comparison to obtain
-lambda. Compose restricted beta with R.comparison to obtain betaU. Naturality of the
-restriction/direct-image isomorphism and the two augmentation equations give precisely
-the coefficient augmentation for these maps. They therefore form cohomology-map data
-with restricted L as middle complex and the canonical top-sections comparison a. The
-sections quasi-isomorphism theorem makes its denominator invertible. Independence of
-cohomology-map data identifies its formula with moduleCohomologyFMap. The components
-conditions in R and R' identify the numerator and denominator after applying the natural
-restriction-sections isomorphism. Postcompose the roof formula with the target resolution
-comparison and denominator, cancel their inverses, and use these two identities. -/
+Source: Stacks Project, Tags 01E4 and 01FB. -/
 theorem restrictedCoefficient_natRoof {X Z : Scheme.{u}} (v : Z ⟶ X)
     (F : X.Modules) (G : Z.Modules) (φ : F ⟶ (pushforward v).obj G)
     (I : InjectiveResolution F) (J : InjectiveResolution G)

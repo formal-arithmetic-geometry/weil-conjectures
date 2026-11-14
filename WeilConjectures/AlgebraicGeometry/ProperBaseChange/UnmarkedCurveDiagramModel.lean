@@ -618,29 +618,8 @@ private theorem restrict_chain_to_base
 /-- Descend the unmarked finite curve diagram, preserving its finite comparison map.
 No marked open, thickening or marked-image assertion is supplied or constructed.
 
-Source: Stacks Project, Tag 0GK7, proof of `lemma-make-good-curves`, from reduction
-of the base through diagram descent, before the paragraph beginning with W.
-(blueprint: lem-weil-pbc-unmarked-curve-diagram-model)
-
-Proof: Restrict to an affine neighbourhood and reduce the base. At its component
-point the stalk is the residue field. Apply the finite purely inseparable generic
-cover theorem, then reduce the cover. The induced residue field is K. Express the
-spectrum of that field as the limit of affine neighbourhoods of this point. All
-objects of the supplied diagram are finitely presented: finite extensions of fields
-are finitely presented, smooth proper schemes over fields are Noetherian and of
-finite presentation, and their opens are quasi-compact and finitely presented.
-Apply finite-family object descent, arrow descent and equality descent to a common
-stage, keeping X by its specified generic base change. Descend finiteness and
-surjectivity of the coproduct comparison, finite etaleness of the constant-field
-models, openness of j and smooth properness of p. A common later stage has all these
-properties. The comparison for the coproduct is cartesian because each component
-square is cartesian and finite coproducts of schemes are universal. The generic
-fibres over each T_i are the specified B_i: the finite etale generic fibre is
-Spec L_i, including its residue field. Hence they are geometrically connected,
-and the dimension bound is unchanged. Remove the finite closed image of the
-complement to descend a neighbourhood of the radicial cover to the original base.
-This argument never constructs a marked open. When n=0 the finite surjection
-forces the target to be empty, and all indexed assertions are vacuous.
+Source: Stacks Project, Tag 0GK7, from reduction of the base through diagram descent, before the
+paragraph beginning with W.
 -/
 theorem exists_unmarked_curve_diagram_model
     {X S : Scheme.{u}} (f : X ⟶ S) [IsSeparated f]

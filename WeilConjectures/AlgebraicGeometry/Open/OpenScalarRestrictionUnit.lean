@@ -15,9 +15,7 @@ import WeilConjectures.CategoryTheory.Normalized.NormalizedAdjunctionComposition
 
 /-! # Scalar restriction preserves the open adjunction unit
 
-Source: Stacks Project, Tags 03DI, 03CY and 015F; the scalar restriction part of
-lem-sp-open-scalar-counit-square, Step 2
-(blueprint: lem-sp-open-scalar-restriction-unit).
+Source: Stacks Project, Tags 03DI, 03CY and 015F.
 -/
 
 -- After pruning, this module only keeps private declarations.

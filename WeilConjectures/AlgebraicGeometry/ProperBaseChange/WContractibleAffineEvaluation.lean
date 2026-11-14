@@ -19,9 +19,8 @@ import Mathlib.CategoryTheory.Sites.LocallySurjective
 /-!
 # Evaluation at a w-contractible affine pro-etale object
 
-Source: Stacks Project, Tags 0981, 098F and 098H, with the small-site adaptation
-in the DAG proof; Sites, Tags 090K and 090L
-(blueprint: lem-weil-pbc-wcontractible-affine-weakly-contractible).
+Source: Stacks Project, Tags 0981, 098F and 098H, with the small-site adaptation in the DAG proof;
+Sites, Tags 090K and 090L.
 -/
 
 @[expose] public section
@@ -80,24 +79,7 @@ pro-etale site to a surjection, provided every faithfully flat weakly etale ring
 out of `A` has a ring retraction.
 
 Source: Stacks Project, Tags 0981 and 098H, implication (1) to (2), adapted to the
-small site over `X`; Sites, Tags 090K and 090L.
-(blueprint: lem-weil-pbc-wcontractible-affine-weakly-contractible).
-
-Proof:
-1. Local surjectivity of an epimorphism gives a cover carrying lifts of the given
-   section. Smallness of the pro-etale precoverage restricts this to a `u`-small
-   covering subfamily, so its scheme coproduct exists in the original universe.
-2. Apply `lem-weil-pbc-wcontractible-cover-section` to obtain a section of the
-   coproduct's structural map. Source locality of weak etaleness makes this
-   coproduct, with its composite map to `X`, an object of the same small site.
-3. Its coprojections form a disjoint Zariski cover, hence a pro-etale cover.
-   The local lifts are compatible: monomorphy handles equal components, and
-   distinct components have empty common test objects. The empty-cover axiom
-   gives a unique sheaf section on each such test object, including when the
-   entire coproduct is empty. Glue the lifts by the sheaf axiom.
-4. Naturality and separatedness identify the glued section's image with the
-   pullback of the original section to the coproduct. Pull back along the
-   section of the structural map; functoriality gives the required preimage. -/
+small site over `X`; Sites, Tags 090K and 090L. -/
 theorem surjective_app_of_affine_ring_retractions
     (X : Scheme.{u}) (A : Type u) [CommRing A]
     (f : Spec (CommRingCat.of A) ⟶ X) [WeaklyEtale f]

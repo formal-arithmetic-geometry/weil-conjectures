@@ -292,23 +292,7 @@ end Profinite
 namespace AlgebraicGeometry.ProEtale
 open PadicAlgCl
 /-- Scalar extension from a finite coefficient field to the condensed algebraic closure is
-faithful on the unbounded derived category.
-Source: the coefficient inclusions and finite-stage topology of upstream master,
-ModuleObject/Colimit/TwoColimit.lean, Hom-injectivity paragraph
-(blueprint: lem-weil-pbc-condensed-coefficient-derived-faithful).
-
-Proof: choose an algebraic linear projection from the algebraic closure onto the coefficient
-field, splitting its inclusion. Its restriction to every finite subfield is a linear map
-between finite-dimensional p-adic spaces and hence continuous. Postcomposition therefore
-defines a natural additive map on finite-field-valued sections, linear over the coefficient
-sheaf and splitting the inclusion. Sheafification and pullback preserve these equations.
-For every module, tensor this retraction with the module and descend the balanced map through
-the tensor product. This gives a natural retraction of the extension-restriction unit.
-Localization of the corresponding transformations of complexes preserves their composite,
-so the derived identity is a retract of derived extension followed by restriction. Equality
-of morphisms after extension then implies equality before extension. Exactness identifies
-levelwise derived extension with the existing total left derived functor.
-The argument applies to all complexes and also to the empty scheme. -/
+faithful on the unbounded derived category. -/
 theorem faithful_leftDerivedExtendScalarsToPadicAlgCl
     (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ) :
     (Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ E)).leftDerivedFunctor.Faithful := by

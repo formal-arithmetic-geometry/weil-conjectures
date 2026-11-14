@@ -76,8 +76,7 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
 open ModuleRingedComparison
 
 /-- The fixed scalar localization comparison is invertible on K-flat complexes.
-Source: localization counit computation on K-flat objects
-(blueprint: lem-sfb-quotient-scalar-tensor-exists-unique). -/
+Source: localization counit computation on K-flat objects. -/
 theorem scalar_compute_isIso (T : Scheme.{u}) (A : CochainComplex (Modules Λ T) ℤ)
     (hA : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat A) :
     IsIso (compute a T A) := by
@@ -99,12 +98,7 @@ theorem scalar_compute_isIso (T : Scheme.{u}) (A : CochainComplex (Modules Λ T)
       · infer_instance
 
 /-- Flat-term K-flat normalization determines the tensor comparison uniquely.
-Source: Stacks 07A4 and 06YS; steps 3, 5 and 6 of the parent proof.
-(blueprint: lem-sfb-quotient-scalar-tensor-exists-unique).
-Proof: derive the ordinary scalar tensorator. Its counit square gives normalization.
-Two normalized maps agree on flat-term K-flat pairs after cancellation of their
-invertible computation maps. Every pair of derived objects is isomorphic to such
-a pair by flat K-flat resolutions. Naturality therefore gives equality everywhere. -/
+Source: Stacks 07A4 and 06YS. -/
 theorem normalized_tensor_eq_canonical (T : Scheme.{u}) (b : TensorIso a T)
     (hb : TensorNormalized a T b) : b = canonicalTensor a T := by
   let := scalarModuleFlat Λ T
@@ -161,7 +155,7 @@ theorem normalized_tensor_eq_canonical (T : Scheme.{u}) (b : TensorIso a T)
   simpa only [Category.assoc, e.hom_inv_id, Category.comp_id] using h''
 
 /-- The normalized scalar tensorator exists uniquely, pointwise in the scheme.
-Source: Stacks 07A4, 06YS (blueprint: lem-sfb-quotient-scalar-tensor-exists-unique). -/
+Source: Stacks 07A4, 06YS. -/
 theorem scalar_tensor_exists_unique (T : Scheme.{u}) :
     ∃! b : TensorIso a T, TensorNormalized a T b :=
   ⟨canonicalTensor a T, canonicalTensor_normalized a T,

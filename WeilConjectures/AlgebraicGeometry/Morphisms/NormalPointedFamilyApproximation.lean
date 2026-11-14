@@ -18,7 +18,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 # Normal Noetherian approximation of a pointed smooth family
 
 Source: Stacks Project, Tag 0EZJ, normal approximation and family descent.
-(blueprint: lem-sbc-normal-pointed-family-approximation)
 -/
 
 @[expose] public section
@@ -33,30 +32,7 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Descend the base, family, section, and an invertible integer simultaneously.
 
-Source: Stacks Project, Tag 0EZJ, the limit reduction up to the choice of generic points.
-(blueprint: lem-sbc-normal-pointed-family-approximation)
-
-Proof:
-1. Use absolute Noetherian approximation (Tag 01ZA). For every stage take the integral
-scheme-theoretic image of the integral base and normalize that image in its fraction field.
-This is finite by finiteness of normalization for finite type integer domains. The normal
-base factors through each normalization. Uniqueness of this factorization supplies the
-transition maps and compatibility of the projections; the projections are dominant.
-The transition maps are affine since their composites with the finite normalization maps
-are affine. On affine charts these rings are subrings of the rings of the base; they contain
-all the original image rings, whose union is the base ring. Therefore their limit is S.
-2. Descend the finitely presented smooth family, its section, and the equation saying that
-it is a section by Tag 01ZM, and smoothness by Tag 0C0C. Replace the model by the open
-relative component through the section (Tag 055R). The geometrically connected fibres
-of the original family map into this open, so its pullback is the original family.
-The model is quasi-compact: it is an open of a Noetherian finite presentation family.
-3. Descend the inverse of n on a finite affine cover, and its agreement on a finite affine
-cover of the overlaps, using filtered colimits of sections. Restrict to a cofiltered tail
-where all these equalities hold. Define the later families and sections by base change.
-This supplies cartesian transition squares, the two compatible cones, and their section
-compatibility. Base change preserves smoothness and geometric connectedness; the base
-cones are limiting, and base change of the fixed family shows the family cone is limiting.
-All later base schemes are normal integral Noetherian qcqs, and n remains invertible. -/
+Source: Stacks Project, Tag 0EZJ, the limit reduction up to the choice of generic points. -/
 theorem exists_normal_pointed_family_approximation {S C : Scheme.{u}} [CompactSpace S]
     [QuasiSeparatedSpace S] [IsIntegral S]
     (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))

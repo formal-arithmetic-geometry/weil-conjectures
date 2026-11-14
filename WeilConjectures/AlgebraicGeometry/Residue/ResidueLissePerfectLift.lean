@@ -26,8 +26,7 @@ import WeilConjectures.CategoryTheory.Ringed.RingedDerivedRestrictionGeneralSupp
 /-!
 # Perfect local lifting of a lisse residue reduction
 
-Source: Stacks Project, proetale.tex, Tag 09C6; Bhatt--Scholze, Lemma 6.6.8 and
-Proposition 6.6.11 (blueprint: lem-weil-pbc-residue-lisse-perfect-lift).
+Source: Stacks Project, Tag 09C6; Bhatt--Scholze, Lemma 6.6.8 and Proposition 6.6.11.
 
 Constant complexes use the existing constant-module sheafification. The coefficient
 maps below are fixed uniquely on constant sections. Restriction means the actual
@@ -57,11 +56,7 @@ open AlgebraicGeometry.ProEtale
 namespace AlgebraicGeometry.Scheme
 
 /-- Constant module sheafification is additive.
-Source: Stacks Tags 03CY and 09C6
-(blueprint: lem-weil-pbc-residue-lisse-perfect-lift).
-Proof: the constant presheaf functor is sectionwise additive. Pullback of presheaves
-precomposes each component. Module sheafification is additive, since its underlying
-abelian sheafification preserves addition. Composition gives the asserted structure. -/
+Source: Stacks Tags 03CY and 09C6. -/
 @[instance]
 theorem residueLisseConstant_additive (X : Scheme.{t}) (A : Type t) [CommRing A] :
     (koszulConstantFunctor X A).Additive := by
@@ -80,10 +75,7 @@ theorem residueLisseConstant_additive (X : Scheme.{t}) (A : Type t) [CommRing A]
   exact Functor.map_add _
 
 /-- Constant module sheafification preserves finite limits.
-Source: Stacks Tags 03CY and 09C6
-(blueprint: lem-weil-pbc-residue-lisse-perfect-lift).
-Proof: finite kernels and products of constant module presheaves are computed on the
-constant modules. Associated sheafification is left exact, so preserves these limits. -/
+Source: Stacks Tags 03CY and 09C6. -/
 @[instance]
 theorem residueLisseConstant_preservesFiniteLimits
     (X : Scheme.{t}) (A : Type t) [CommRing A] :
@@ -98,10 +90,7 @@ theorem residueLisseConstant_preservesFiniteLimits
     (SheafOfModules.toSheaf.{t + 1} (adicModuleRing X A))
 
 /-- Constant module sheafification preserves finite colimits.
-Source: Stacks Tags 03CY and 09C6
-(blueprint: lem-weil-pbc-residue-lisse-perfect-lift).
-Proof: the constant presheaf functor preserves cokernels and finite sums, sectionwise.
-Sheafification is a left adjoint and preserves them. Thus their composite is exact. -/
+Source: Stacks Tags 03CY and 09C6. -/
 @[instance]
 theorem residueLisseConstant_preservesFiniteColimits
     (X : Scheme.{t}) (A : Type t) [CommRing A] :
@@ -121,13 +110,12 @@ theorem residueLisseConstant_preservesFiniteColimits
   exact comp_preservesFiniteColimits _ _
 
 /-- The standard algebraic localization, with no equality imposed on site universes.
-Source: Stacks Tags 05RU and 09C6
-(blueprint: lem-weil-pbc-residue-lisse-perfect-lift). -/
+Source: Stacks Tags 05RU and 09C6. -/
 instance residueLisseAlgebraHasDerivedCategory (A : Type u) [CommRing A] :
     HasDerivedCategory (ModuleCat.{u} A) := HasDerivedCategory.standard _
 
 /-- The standard localization for arbitrary coefficient sheaves on the small site.
-Source: Stacks Tag 05RU (blueprint: lem-weil-pbc-residue-lisse-perfect-lift). -/
+Source: Stacks Tag 05RU. -/
 instance residueLisseRingHasDerivedCategory (X : Scheme.{t})
     (R : Sheaf (ProEt.topology X) RingCat.{t + 1}) :
     HasDerivedCategory (SheafOfModules.{t + 1} R) :=
@@ -135,8 +123,7 @@ instance residueLisseRingHasDerivedCategory (X : Scheme.{t})
 
 /-- The constant complex functor uses the canonical module-universe lift and scalar
 restriction along ULift.ringEquiv before the recorded exact constant module functor.
-Source: Stacks Tags 05RU and 09C6
-(blueprint: lem-weil-pbc-residue-lisse-perfect-lift). -/
+Source: Stacks Tags 05RU and 09C6. -/
 def residueLisseDerivedConstant (X : Scheme.{t}) (A : Type t) [CommRing A] :
     DerivedCategory (ModuleCat.{t} A) ⥤
       DerivedCategory (SheafOfModules.{t + 1} (adicModuleRing X A)) :=
@@ -150,12 +137,7 @@ def residueLisseDerivedConstant (X : Scheme.{t}) (A : Type t) [CommRing A] :
       koszulConstantFunctor X A).mapDerivedCategory
 
 /-- The constant-to-component comparison is fixed on all constant quotient sections.
-Source: Stacks Tags 0H7J and 09C6
-(blueprint: lem-weil-pbc-residue-lisse-perfect-lift).
-Proof: send a constant to its constant continuous function on components and sheafify.
-Every continuous function to a discrete ring is locally constant on its inverse-image
-clopen cover. Equality is checked on that cover. These maps are therefore invertible;
-local generation by constants proves uniqueness. -/
+Source: Stacks Tags 0H7J and 09C6. -/
 theorem residueLisseConstantComparison_exists (X : Scheme.{t}) {A : Type t}
     [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) :
     ∃! φ : adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶ completedAdicFiniteCommRing X d n,
@@ -205,26 +187,21 @@ theorem residueLisseConstantComparison_exists (X : Scheme.{t}) {A : Type t}
     exact hψ.2 U a
 
 /-- The normalized constant-to-component quotient coefficient comparison.
-Source: Stacks Tags 0H7J and 09C6
-(blueprint: lem-weil-pbc-residue-lisse-perfect-lift). -/
+Source: Stacks Tags 0H7J and 09C6. -/
 def residueLisseConstantComparison (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A) (n : ℕ) :
     adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶ completedAdicFiniteCommRing X d n :=
   (residueLisseConstantComparison_exists X d n).exists.choose
 
 /-- The normalized comparison is invertible, including for the zero quotient ring.
-Source: Stacks Tags 0H7J and 09C6
-(blueprint: lem-weil-pbc-residue-lisse-perfect-lift).
-Proof: take the invertibility conjunct of its defining unique-existence theorem. -/
+Source: Stacks Tags 0H7J and 09C6. -/
 private instance residueLisseConstantComparison_isIso (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A) (n : ℕ) :
     IsIso (residueLisseConstantComparison X d n) :=
   (residueLisseConstantComparison_exists X d n).exists.choose_spec.1
 
 /-- The chosen comparison has the prescribed value on every constant section.
-Source: Stacks Tags 0H7J and 09C6
-(blueprint: lem-weil-pbc-residue-lisse-perfect-lift).
-Proof: take the normalization conjunct of its defining unique-existence theorem. -/
+Source: Stacks Tags 0H7J and 09C6. -/
 private theorem residueLisseConstantComparison_apply (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A) (n : ℕ) (U : X.ProEtᵒᵖ)
     (a : completedAdicQuotient d n) :
@@ -234,8 +211,7 @@ private theorem residueLisseConstantComparison_apply (X : Scheme.{t}) {A : Type 
   (residueLisseConstantComparison_exists X d n).exists.choose_spec.2 U a
 
 /-- Fix the coefficient universe when applying the derived reconstruction API.
-Source: Stacks Tag 03DA (blueprint: lem-weil-pbc-residue-lisse-perfect-lift).
-Proof: specialize the existing essentially-small-site instance to universe t+1. -/
+Source: Stacks Tag 03DA. -/
 private theorem residueLisseAbLocallyBijective (X : Scheme.{t}) :
     (ProEt.topology X).WEqualsLocallyBijective AddCommGrpCat.{t + 1} :=
   finitePerfectModelsAbLocallyBijective X
@@ -243,10 +219,7 @@ private theorem residueLisseAbLocallyBijective (X : Scheme.{t}) :
 attribute [local instance] residueLisseAbLocallyBijective
 
 /-- The actual quotient-completion unit is invertible on an intrinsically complete object.
-Source: Stacks Tag 099M (blueprint: lem-weil-pbc-residue-lisse-perfect-lift).
-Proof: the comparison with the explicit Koszul model identifies its unit with the
-functorial Koszul unit followed by an isomorphism. Cancel that isomorphism and apply
-Koszul reconstruction, which preserves the same normalized unit. -/
+Source: Stacks Tag 099M. -/
 private theorem residueLisse_reconstruction (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A) (r : ℕ) (a : Fin r → A)
     (ha : Ideal.span (Set.range a) = d.ideal)
@@ -260,18 +233,14 @@ private theorem residueLisse_reconstruction (X : Scheme.{t}) {A : Type t} [CommR
   exact (koszulReconstruction X d r a ha).choose_spec.2 M hκ
 
 /-- The standard localization on each slice, with its inherited coefficient ring.
-Source: Stacks Tags 05RU and 09C6
-(blueprint: lem-weil-pbc-residue-lisse-perfect-lift). -/
+Source: Stacks Tags 05RU and 09C6. -/
 instance residueLisseSliceHasDerivedCategory (X : Scheme.{t})
     (R : Sheaf (ProEt.topology X) RingCat.{t + 1}) (U : X.ProEt) :
     HasDerivedCategory (SheafOfModules.{t + 1} (R.over U)) :=
   HasDerivedCategory.standard _
 
 /-- Compare exact derived restriction with the localization representative in the statement.
-Source: Stacks Tags 03DJ and 08JB
-(blueprint: lem-weil-pbc-residue-lisse-perfect-lift).
-Proof: replace the object by the chosen localization representative, then apply the
-canonical factorization of the exact restriction functor through derived localization. -/
+Source: Stacks Tags 03DJ and 08JB. -/
 private def residueLisseRestrictionComparison (X : Scheme.{t})
     (R : Sheaf (ProEt.topology X) RingCat.{t + 1}) (U : X.ProEt)
     (M : DerivedCategory (SheafOfModules.{t + 1} R)) :
@@ -285,9 +254,7 @@ private def residueLisseRestrictionComparison (X : Scheme.{t})
     F.mapDerivedCategoryFactors.app (DerivedCategory.Q.objPreimage M)
 
 /-- Transport an isomorphism through the statement's representative-based restriction.
-Source: Stacks Tag 03DJ (blueprint: lem-weil-pbc-residue-lisse-perfect-lift).
-Proof: conjugate the exact derived restriction of the isomorphism by the canonical
-representative comparisons at its endpoints. -/
+Source: Stacks Tag 03DJ. -/
 private def residueLisseRestrictIso (X : Scheme.{t})
     (R : Sheaf (ProEt.topology X) RingCat.{t + 1}) (U : X.ProEt)
     {M N : DerivedCategory (SheafOfModules.{t + 1} R)} (e : M ≅ N) :
@@ -298,10 +265,7 @@ private def residueLisseRestrictIso (X : Scheme.{t})
       residueLisseRestrictionComparison X R U N
 
 /-- The exact constant functor computes constant complexes termwise.
-Source: Stacks Tags 05RU and 09C6
-(blueprint: lem-weil-pbc-residue-lisse-perfect-lift).
-Proof: use the localization factorization for the composite universe-lift, restriction
-of scalars and constant module sheafification functor. -/
+Source: Stacks Tags 05RU and 09C6. -/
 private def residueLisseConstantComplexComparison (X : Scheme.{t})
     (B : Type t) [CommRing B] (P : CochainComplex (ModuleCat.{t} B) ℤ) :
     (residueLisseDerivedConstant X B).obj (DerivedCategory.Q.obj P) ≅
@@ -320,23 +284,7 @@ perfect complex is pro-etale locally the completed realization of a perfect A-co
 The sieve on the final object expresses the covering, including an empty covering
 when X is empty. Perfectness is exactly the recorded bounded finite-projective model.
 
-Source: Stacks Project, proetale.tex, Tag 09C6; Bhatt--Scholze, Lemma 6.6.8 and
-Proposition 6.6.11 (blueprint: lem-weil-pbc-residue-lisse-perfect-lift).
-
-Proof:
-1. Choose bounded finite-projective representatives for the residue witnesses. The
-   exact constant functor's localization comparison identifies their derived constant
-   images with the actual termwise constant complexes.
-2. Apply residuePerfect_finite_quotient_models. The normalized finite coefficient
-   comparisons give its coefficient data. This proves uniform finite-level perfect
-   local models, without using completeness of M.
-3. Apply finitePerfectModels_adic_realization to that finite-level structure. It
-   identifies the derived limit of the specified quotient tower locally with the
-   completed realization of one bounded finite-projective A-complex.
-4. Koszul reconstruction makes the actual quotient-completion unit invertible on M.
-   Exact slice restriction transports this isomorphism to the representative-based
-   restriction in the statement. Compose with step 3 and the constant-complex
-   comparison. Localization of the chosen bounded finite-projective complex is perfect.
+Source: Stacks Project, Tag 09C6; Bhatt--Scholze, Lemma 6.6.8 and Proposition 6.6.11.
 -/
 theorem residue_lisse_perfect_lift (X : Scheme.{t}) [IsLocallyNoetherian X] [CompactSpace X]
     {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)

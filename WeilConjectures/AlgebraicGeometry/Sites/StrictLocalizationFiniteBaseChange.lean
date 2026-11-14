@@ -11,7 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.StrictlyHenselianFiniteAlg
 /-!
 # Strict localization and finite base change
 
-Let `g : S' ⟶ S` be a finite morphism, `s' : Spec Ω ⟶ S'` a geometric point and `s = s' ≫ g`.
+Let `g: S' ⟶ S` be a finite morphism, `s': Spec Ω ⟶ S'` a geometric point and `s = s' ≫ g`.
 The morphism `S'_(s') ⟶ S_(s) ×_S S'` with components `strictLocalizationMap g s'` and
 `strictLocalizationToBase s'` is an open and closed immersion: `S'_(s')` is the connected
 component of `S_(s) ×_S S'` through the point `(s, s')`.
@@ -23,8 +23,6 @@ through the point `(s, s')` is an open and closed subscheme, and it is a strictl
 local scheme over `S'` with a geometric point over `s'`. By the universal property of the
 strict localization (`exists_hom_strictLocalization_of_isStrictlyHenselianLocalRing`,
 `hom_strictLocalization_ext`) it is identified with `S'_(s')`.
-
-(blueprint: `lemma-tangent-cones-on-cover`)
 
 ## Main definitions
 
@@ -77,9 +75,7 @@ variable {S S' : Scheme.{u}} {Ω : Type u} [Field Ω] [IsSepClosed Ω] (g : S' �
   (s' : Spec (.of Ω) ⟶ S')
 
 /-- The morphism `S'_(s') ⟶ S_(s' ≫ g) ×_S S'` with components `strictLocalizationMap g s'` and
-the structure morphism `S'_(s') ⟶ S'`.
-
-(blueprint: `lemma-tangent-cones-on-cover`) -/
+the structure morphism `S'_(s') ⟶ S'`. -/
 noncomputable def strictLocalizationToPullback :
     strictLocalization s' ⟶ pullback (strictLocalizationToBase (s' ≫ g)) g :=
   pullback.lift (strictLocalizationMap g s') (strictLocalizationToBase s')
@@ -146,10 +142,8 @@ theorem exists_isIso_comp_eq_strictLocalizationToPullback (B₀ : Type u) [CommR
   exact ⟨j₀, ⟨k, h₁, h₂⟩, hj₀⟩
 
 set_option backward.isDefEq.respectTransparency false in
-/-- **Strict localization and finite base change.** For `g : S' ⟶ S` finite, the morphism
-`S'_(s') ⟶ S_(s' ≫ g) ×_S S'` is an open and closed immersion.
-
-(blueprint: `lemma-tangent-cones-on-cover`; Stacks, Tag 04GH and Tag 0BSL) -/
+/-- **Strict localization and finite base change.** For `g: S' ⟶ S` finite, the morphism
+`S'_(s') ⟶ S_(s' ≫ g) ×_S S'` is an open and closed immersion. -/
 theorem isOpenImmersion_and_isClosedImmersion_strictLocalizationToPullback [IsFinite g] :
     IsOpenImmersion (strictLocalizationToPullback g s') ∧
       IsClosedImmersion (strictLocalizationToPullback g s') := by
@@ -212,17 +206,13 @@ theorem isOpenImmersion_and_isClosedImmersion_strictLocalizationToPullback [IsFi
   exact ⟨inferInstance, inferInstance⟩
 
 /-- **Strict localization and finite base change**: `S'_(s') ⟶ S_(s' ≫ g) ×_S S'` is an open
-immersion for `g` finite.
-
-(blueprint: `lemma-tangent-cones-on-cover`) -/
+immersion for `g` finite. -/
 instance isOpenImmersion_strictLocalizationToPullback [IsFinite g] :
     IsOpenImmersion (strictLocalizationToPullback g s') :=
   (isOpenImmersion_and_isClosedImmersion_strictLocalizationToPullback g s').1
 
 /-- **Strict localization and finite base change**: `S'_(s') ⟶ S_(s' ≫ g) ×_S S'` is a closed
-immersion for `g` finite.
-
-(blueprint: `lemma-tangent-cones-on-cover`) -/
+immersion for `g` finite. -/
 instance isClosedImmersion_strictLocalizationToPullback [IsFinite g] :
     IsClosedImmersion (strictLocalizationToPullback g s') :=
   (isOpenImmersion_and_isClosedImmersion_strictLocalizationToPullback g s').2

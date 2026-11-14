@@ -61,8 +61,7 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUn
 /-!
 # Normalized comparison with the published derived tensor
 
-Source: Stacks Project, Tag 06YU (definition-derived-tor).
-(blueprint: lem-weil-pbc-ringed-projection-tensor-model-iso).
+Source: Stacks Project.
 -/
 
 @[expose] public noncomputable section
@@ -94,18 +93,7 @@ private theorem publishedRepresentative (P Q : CochainComplex (Mod R) ℤ)
 -- Compare the two normalized representative interfaces without unfolding their tensor data.
 /-- A tensor model is naturally identified with the published derived tensor, with
 its specified representative comparison.
-Source: Stacks Project, Tag 06YU (definition-derived-tor and its independence construction).
-(blueprint: lem-weil-pbc-ringed-projection-tensor-model-iso).
-
-Proof: apply cochain tensor model rigidity to the natural comparison of a. It
-extends the comparison from resolving pairs to an isomorphism e of bifunctors.
-The cochain representative arrow is the published representativeIso: the
-quotient-to-derived factorization has identity components, so its initial
-identity and the tensor's image of the product identity cancel. Evaluating the
-normalization equation of rigidity at each resolving pair gives the displayed
-equation. Both directions of e are supplied by the existing rigidity theorem;
-there is no choice of a new tensor operation. The argument uses neither a bound
-nor any shift or pullback hypotheses. -/
+Source: Stacks Project. -/
 theorem ringedProjectionTensorModelIso (a : TensorModel R) :
     ∃ e : SheafOfModules.siteDerivedTensorIndependentCoefficients J R ≅ a.functor,
       ∀ (P Q : CochainComplex (Mod R) ℤ) (hp : resolving R P) (hq : resolving R Q),

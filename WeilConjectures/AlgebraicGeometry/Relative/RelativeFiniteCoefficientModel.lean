@@ -365,28 +365,7 @@ attribute [-instance] WeilConjectures.integralCoefficientAbSheafify
 /-- Exact small-site models preserve relative finite lissity and coefficient extension.
 
 Source: Stacks Project, Modules on Sites, Tags 03CY and 03A0; Cohomology on Sites,
-Tags 06YY and 094I.
-(blueprint: lem-weil-pbc-relative-finite-coefficient-model)
-
-Proof: identify inverse-image constant coefficients with native constant coefficients
-by the canonical constant-section isomorphism. Precompose native ring sheaves and
-module sheaves with AsSmall.down. The site equivalence gives an exact equivalence of
-module categories; the constant-sheaf comparison identifies the resulting coefficient
-ring with the actual small-site constant commutative ring sheaf. Let L be the image
-of the pulled-back complex under this exact equivalence. The homology comparison for
-exact functors gives the displayed preservation of zero cohomology.
-
-On every slice, these equivalences identify relative constant modules with constant
-coefficient modules. Transport covering sieves along AsSmall.up and AsSmall.down.
-A finite module is finitely generated, and over finite B a finitely generated module
-has finite underlying set. This gives the first lissity equivalence, including empty
-slices and the zero ring. Restriction of scalars commutes with site transport and the
-canonical coefficient isomorphisms: on sections the comparison is the identity with
-the scalar action identified by naturality of the constant-section map. Uniqueness
-of left adjoints therefore identifies derived scalar extension with adicFiniteExtension,
-including after pullback. Apply the same slice argument over R and the exact-functor
-homology comparison to obtain the second equivalence. No nilpotence, surjectivity,
-boundedness, normalization, tower, or stratification is used in this comparison. -/
+Tags 06YY and 094I. -/
 theorem exists_relative_finite_coefficient_model {X Y : Scheme.{u}} (g : Y ⟶ X)
     {B R : Type (u + 1)} [CommRing B] [CommRing R] [Finite B] [Finite R]
     (f : B →+* R)

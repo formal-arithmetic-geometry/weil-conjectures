@@ -15,7 +15,7 @@ import WeilConjectures.AlgebraicGeometry.Integral.Strict.IntegralStrictLimitAugm
 
 /-! # Comparison of the strict integral completion with the source completion
 
-Source: Stacks Project, proetale.tex, Tag 099M, lemma-naive-completion.
+Source: Stacks Project, Tag 099M.
 -/
 
 @[expose] public noncomputable section
@@ -25,8 +25,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 namespace AlgebraicGeometry.ProEtale
 
 /-- The additive equivalence identifying abelian sheaves with modules over the lifted integers.
-Source: the unique integer action, Stacks 099M
-(blueprint: lem-sfb-integral-strict-completion-comparison). -/
+Source: the unique integer action, Stacks 099M. -/
 def integralCompletionCoefficientEquivalence (W : Scheme.{u}) :
     DiagonalAb W ≌ Sheaf (Scheme.ProEt.topology W) (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) := by
   let F := ModuleCat.restrictScalars
@@ -38,22 +37,19 @@ def integralCompletionCoefficientEquivalence (W : Scheme.{u}) :
   exact (sheafCompose (Scheme.ProEt.topology W) F).asEquivalence.symm
 
 /-- The coefficient identification is additive.
-Source: sectionwise integer actions, Stacks 099M
-(blueprint: lem-sfb-integral-strict-completion-comparison). -/
+Source: sectionwise integer actions, Stacks 099M. -/
 instance integralCompletionCoefficientEquivalence_additive (W : Scheme.{u}) :
     (integralCompletionCoefficientEquivalence W).functor.Additive := by
   exact Functor.additive_of_preserves_binary_products _
 
 /-- The inverse coefficient identification is additive.
-Source: sectionwise integer actions, Stacks 099M
-(blueprint: lem-sfb-integral-strict-completion-comparison). -/
+Source: sectionwise integer actions, Stacks 099M. -/
 instance integralCompletionCoefficientEquivalence_inverse_additive (W : Scheme.{u}) :
     (integralCompletionCoefficientEquivalence W).inverse.Additive := by
   exact Functor.additive_of_preserves_binary_products _
 
 /-- A prime remains a nonzerodivisor in the lifted integers.
-Source: the integral coefficient specialization of Stacks 099M
-(blueprint: lem-sfb-integral-strict-completion-comparison). -/
+Source: the integral coefficient specialization of Stacks 099M. -/
 theorem integralCompletionPrimeRegular (ℓ : ℕ) [Fact ℓ.Prime] :
     (ℓ : ULift.{u + 1} ℤ) ∈ nonZeroDivisors (ULift.{u + 1} ℤ) := by
   rw [mem_nonZeroDivisors_iff]
@@ -66,8 +62,7 @@ theorem integralCompletionPrimeRegular (ℓ : ℕ) [Fact ℓ.Prime] :
   exact ⟨hleft, fun x hx ↦ hleft x ((mul_comm _ _).trans hx)⟩
 
 /-- The standard completion endofunctor on integer-module sheaves, with no change of scalars.
-Source: Stacks 099M and the source-library completion adjunction
-(blueprint: lem-sfb-integral-strict-completion-comparison). -/
+Source: Stacks 099M and the source-library completion adjunction. -/
 def integralModuleCompletion (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u}) :=
   DerivedCategory.derivedCompletion (Scheme.ProEt.topology W)
     (Ideal.span {(ℓ : ULift.{u + 1} ℤ)})
@@ -134,23 +129,7 @@ private theorem comparison_of_complete_and_triangle
 /-- The strict integral quotient completion agrees naturally with the standard integer-module
 completion after the additive coefficient identification.
 
-Source: Stacks Project, proetale.tex, Tag 099M, lemma-naive-completion;
-Stacks 06YY, uniqueness of total derived functors
-(blueprint: lem-sfb-integral-strict-completion-comparison).
-
-Proof: equip abelian sheaves with their unique integer action. For the ordinary presentation,
-the cokernel universal property identifies each positive prime-power quotient with tensor by
-the constant quotient of the lifted integers. Cancellation of its epimorphic quotient map
-identifies the transitions, giving an isomorphism of entire strict systems. Resolve inputs
-by one flat-term K-flat complex. Tensoring the two-term free resolution of each quotient
-gives the corresponding principal cone; its transition is multiplication by ell on the
-negative term and identity on the degree-zero term. These comparisons are natural in the
-resolved complex and compatible with quasi-isomorphisms. The universal left-derived property
-therefore compares I.T with the simultaneous tensor reduction. Exact coefficient equivalence
-commutes with the constant-system/limit adjunction. Uniqueness of total right-derived functors
-compares the given RZ with its module-sheaf counterpart. The derived limit of this strict
-tensor reduction is the standard completion by Stacks 099M. Omitting exponent zero is cofinal.
-Compose these natural comparisons; no claim of reflector universality is needed here. -/
+Source: Stacks Project, Tag 099M; Stacks 06YY, uniqueness of total derived functors. -/
 theorem integral_strict_completion_comparison (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     [HasDerivedCategory.{u + 1} (DiagonalAb W)]
     [HasDerivedCategory.{u + 1} (ℕᵒᵖ ⥤ DiagonalAb W)]

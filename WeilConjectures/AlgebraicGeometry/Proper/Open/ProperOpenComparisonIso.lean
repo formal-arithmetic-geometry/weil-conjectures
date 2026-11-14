@@ -12,10 +12,6 @@ import WeilConjectures.SixFunctors.OpenClosed.Conservative
 
 /-!
 # Proper pushforward of extension by zero
-
-Source: blueprint, sec-smooth-purity/sk-def-sf-operations,
-proposition-construction-independence-rf-shriek--7, order 1482
-(blueprint: proposition-construction-independence-rf-shriek--7).
 -/
 
 @[expose] public section
@@ -88,40 +84,7 @@ private theorem isIso_restrict_comparison (Λ : Type (u + 1)) [CommRing Λ] [Fin
   rw [Functor.map_comp]
   exact inferInstance
 
-/-- The specified proper/open comparison is an isomorphism for every comparison datum.
-Source: blueprint, sec-smooth-purity/sk-def-sf-operations,
-proposition-construction-independence-rf-shriek--7, order 1482
-(blueprint: proposition-construction-independence-rf-shriek--7).
-
-Proof:
-1. Put `M = Ru_* j₁! K`. The section of the comparison construction is clopen
-   (proposition-construction-independence-rf-shriek--7). The specified restriction identification
-   `θ` is invertible (proposition-construction-independence-rf-shriek--7). Under the restriction
-   unit identification, the restriction of the adjoint `α` is `θ⁻¹`: the counit
-   restricts to the identity by lem-weil-pbc-extension-by-zero-adjunction, as the
-   extension-by-zero presheaf of proposition-extension-zero-restriction-closed-subscheme--7 already
-   agrees with the original sheaf on this restricted site. The same identities descend termwise.
-2. For a geometric point outside `j₂(X)`, its fibre in `T₁` has empty intersection
-   with `j₁(X)`, by the commuting triangle. Apply
-   proposition-extension-zero-restriction-closed-subscheme--11 to the empty-open square of
-   proposition-extension-zero-restriction-closed-subscheme--11: the pullback of `j₁! K` to this
-   fibre is zero. The empty covering forces every module sheaf on the empty scheme to be zero.
-3. Apply corollary-cohomology-geometric-fibres--2 to `f` and `j₁! K`. Extension by zero
-   preserves bounded-below objects and is termwise exact by
-   lem-weil-pbc-extension-by-zero-exact. Step 2 makes the derived fibre zero.
-   The source also has zero stalk by lem-weil-pbc-extension-by-zero-stalks.
-4. Stalks commute with cohomology by prop-weil-pbc-geometric-stalks-exact and
-   situation-conventions. Use
-   situation-conventions and
-   lem-weil-pbc-geometric-point-pullback-stalk to identify the fibre computation
-   with the actual module stalks. On the open use step 1; outside it use step 3.
-   Thus every cohomology map of `α` is invertible on every geometric stalk.
-5. Apply lemma-weil-pbc-geometric-stalk-conservative to the underlying abelian
-   cohomology sheaves. Their inverse maps are module-linear: applying the original
-   injective linear map to `v(λy)` and `λv(y)` gives the same result. Hence the
-   cohomology maps are module isomorphisms. Finally apply
-   lem-weil-pbc-derived-plus-iso-on-cohomology in the category of étale module
-   sheaves on `T₂` to conclude that this specified comparison is invertible. -/
+/-- The specified proper/open comparison is an isomorphism for every comparison datum. -/
 theorem isIso_properOpenComparison (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {T₁ T₂ X : Scheme.{u}} (f : T₁ ⟶ T₂) [IsProper f]
     (j₁ : X ⟶ T₁) (j₂ : X ⟶ T₂) [IsOpenImmersion j₁] [IsOpenImmersion j₂]

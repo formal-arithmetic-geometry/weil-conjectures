@@ -9,8 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearDerivedCalc
 public import WeilConjectures.CategoryTheory.Ringed.Site.RingedSiteDualityMaps
 
 /-! # Base tensor models for semilinear systems
-Source: Zheng Construction 4.1 and Stacks 06YS, 07A4.
-(blueprint: lem-coef-semilinear-tensor-coherence-base)
+Source: Zheng Construction 4.1 and Stacks 06YS, 07A4
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -23,7 +22,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   (B : ℕ → Sheaf J CommRingCat.{max c v r})
   (τ : ∀ n : ℕ, B (n + 1) ⟶ B n)
 /-- The normalized model uses the same explicit sheafification and derived universes as Closed.
-Source: Stacks 06YN, 08JD and 0A97 (blueprint: lem-coef-semilinear-tensor-base). -/
+Source: Stacks 06YN, 08JD and 0A97. -/
 abbrev NormalizedTensorModel (R : Sheaf J CommRingCat.{max c v r}) :=
   @RingedSiteDualityModel.{c, v, r, (max c v r) + 1} C _ J
     (abelianSheafify.{c, v, max c v r} J) (locallyBijective.{c, v, max c v r} J) R

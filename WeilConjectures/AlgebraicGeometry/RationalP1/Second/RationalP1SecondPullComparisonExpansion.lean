@@ -27,15 +27,7 @@ attribute [local irreducible] moduleObjectDerivedPullback moduleObjectDerivedPus
 
 /-- The second pullback comparison is the composite of the two twist comparisons and
 transport of the ambient square comparison. This exposes the factorization used in the
-section restriction calculation.
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md,
-Second identity, expansion of `secondPullComparison`.
-(blueprint: lem-sfb-rational-p1-second-pull-comparison-expansion).
-Proof: unfold the fixed definition `secondPullComparison`; its three factors are exactly
-the first pull-twist comparison, the twisted ambient square comparison, and the inverse
-second pull-twist comparison. The local residue-field invertibility witnesses are the
-ones inserted by that definition. -/
+section restriction calculation. -/
 theorem second_pull_comparison_inv_expansion
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

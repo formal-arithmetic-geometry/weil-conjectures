@@ -35,10 +35,6 @@ import WeilConjectures.ConstructibleSheaf.FreeLifting
 /-!
 # Inverting the prime in the integral pro-étale coefficient ring
 
-Source: literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/
-sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-invert-ell.md and its proof
-(blueprint: lemma-comparison-completed-coefficients--2).
-
 The coefficient rings and inclusion are the published constructions. The helpers only
 specialize the regular module, restriction of scalars, and sequential-diagram constructors.
 The theorem exhibits the specified fraction cocone on E_X as a colimit and identifies any
@@ -57,24 +53,18 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- The regular integral coefficient module on X.
-Source: the displayed sequence in the blueprint localization lemma
-(blueprint: lemma-comparison-completed-coefficients--2). -/
+/-- The regular integral coefficient module on X. -/
 abbrev padicIntegersRegularModule (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ) :=
   Mod.regular (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)
 
-/-- The existing coefficient ring E_X as an integral module along the specified inclusion φ.
-Source: the blueprint localization lemma, first and last sentences
-(blueprint: lemma-comparison-completed-coefficients--2). -/
+/-- The existing coefficient ring E_X as an integral module along the specified inclusion φ. -/
 abbrev padicSubfieldIntegralModule (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ) :=
   (Mod.comap (padicIntegersToPadicSubfield X ℓ E)).obj
     (Mod.regular (condensedRingObj (Profinite.continuousMapRingObj E.1) X))
 
-/-- The sequence of regular integral modules with transition multiplication by ℓ.
-Source: the displayed sequence in the blueprint localization lemma
-(blueprint: lemma-comparison-completed-coefficients--2). -/
+/-- The sequence of regular integral modules with transition multiplication by ℓ. -/
 abbrev padicIntegersEllSequence (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ) :
     ℕ ⥤ Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -133,33 +123,7 @@ carrying its localization ring structure (in particular its zeroth leg is a ring
 the comparison is a ring isomorphism with the prescribed value on every term. This states
 the comparison independently of any choice of colimit representative. Finally, exactness
 of extension of scalars expresses flatness: this functor is already a left adjoint, so
-finite-limit preservation supplies the remaining half of exactness.
-
-Source: the blueprint localization lemma and its five proof paragraphs
-(blueprint: lemma-comparison-completed-coefficients--2).
-
-Proof:
-1. On a profinite test S, compactness bounds every continuous E-valued function by one
-common denominator ℓ^m. Multiplication by ℓ is injective on C(S, O_E). Thus the maps
-h ↦ ℓ⁻ᵐh identify C(S,E) with the sequential abelian-group colimit, naturally in S.
-Use the continuous-function coefficient rings of sk-def-sfb-condensed-ring and the
-inclusion of lemma-comparison-completed-coefficients--2.
-2. Every covering of a profinite set has a finite covering family. The sheaf condition
-is therefore a finite limit; filtered colimits commute with it by
-lem-weil-pbc-filtered-colimits-commute-finite-limits. The same cocone is a sheaf colimit.
-3. Pull back using the additive strong monoidal left adjoint of
-sk-def-sfb-pullback-from-point. It preserves colimits and multiplication by ℓ. The legs
-are integral-linear. To see the colimit also in modules, compare the two linearity maps
-on O_E,X tensor E_X; tensor preserves this colimit by sk-def-sfb-sheaf-tensor, so equality
-on every stage implies equality on the colimit. The zeroth leg is the recorded φ.
-4. The inverse of multiplication by ℓ on the point pulls back to t. The ring map φ
-extends uniquely to the localization. On every stage its value is ℓ⁻ᵐφ; hence its
-underlying map is the module-colimit comparison, and is invertible. The multiplication
-formula on fractions is (a/ℓ^m)(b/ℓ^n) = ab/ℓ^(m+n), giving the claimed ring comparison.
-5. In the universes of definition-small-pro-etale-site--1, use the exact filtered colimits and
-tensor-colimit formula of lem-pc-module-filtered-colimits-tensor. Tensoring with E_X is
-the colimit of M --ℓ--> M --ℓ--> M, and thus preserves short exact sequences. This is
-flatness and requires no quasi-compactness or Noetherian hypothesis on X. -/
+finite-limit preservation supplies the remaining half of exactness. -/
 theorem padicIntegers_invertEll (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ) :
     ∃ j : padicIntegersRegularModule X ℓ E ⟶ padicSubfieldIntegralModule X ℓ E,

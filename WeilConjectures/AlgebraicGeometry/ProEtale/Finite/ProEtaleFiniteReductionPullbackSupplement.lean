@@ -82,9 +82,6 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleFiniteReductionPullback
 The finite constant-sheaf identifications and the adjunction-mate calculation for a
 single continuous finite quotient. This calculation is independent of the integral
 limit and of its ring-compatible comparison.
-
-Source: blueprint main-20261015, coefficient pullback proof, second paragraph
-(blueprint: lem-sfb-finite-reduction-pullback).
 -/
 
 -- After pruning, this module only keeps private declarations.

@@ -86,13 +86,7 @@ private theorem zero_constructible (X : Scheme.{u})
   exact ⟨oneStratum X, fun _ ↦ model_zero Λ (𝟙 X)⟩
 
 -- The homology comparison elaborates through the internal module category.
-/-- The coefficient sheaf in degree zero has a finite constant model.
-Source: rational projective-line unit/counit proof step 5, rank-one scalar model
-(blueprint: lem-sfb-rational-p1-line-from-preservation).
-Proof: use the one-stratum partition and the identity cover. The scalar model is the
-regular coefficient module, with its rank-one finite presentation. Monoidality of
-inverse image identifies both pullbacks of this regular module. The single complex
-is bounded, has this module as its zeroth cohomology and zero cohomology otherwise. -/
+/-- The coefficient sheaf in degree zero has a finite constant model. -/
 private theorem coefficientUnit_boundedConstructible (X : Scheme.{u})
     [CompactSpace X] [QuasiSeparatedSpace X] :
     constantModelBoundedConstructible Λ X (unit Λ X) := by
@@ -113,14 +107,7 @@ private theorem coefficientUnit_boundedConstructible (X : Scheme.{u})
       ((isZero_zero _).iso hz) (zero_constructible Λ X)
 
 attribute [-instance] internalMonoidal in
-/-- Preservation of pullback followed by a shifted line implies membership of that line.
-Source: rational projective-line unit/counit proof steps 5 and 11
-(blueprint: lem-sfb-rational-p1-line-from-preservation).
-Proof: the coefficient unit is a degree-zero bounded constructible generator. Its
-pullback is the coefficient unit by the exact single-functor comparison and the
-monoidal unit comparison. Tensoring this unit with the line and then shifting gives
-the shifted line itself. Repleteness of the localizing closure transports membership
-along this isomorphism. No local basis or boundedness is asserted for arbitrary K. -/
+/-- Preservation of pullback followed by a shifted line implies membership of that line. -/
 theorem line_localizing_of_preservation
     {X S : Scheme.{u}} [CompactSpace S] [QuasiSeparatedSpace S]
     (f : X ⟶ S) (L : Modules Λ X)

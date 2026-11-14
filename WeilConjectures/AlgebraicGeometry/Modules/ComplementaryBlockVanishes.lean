@@ -13,9 +13,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.ComplementaryBlockResidueVanish
 import WeilConjectures.AlgebraicGeometry.Modules.FreeMapResidueDetection
 
 /-! # Vanishing of the complementary block on a reduced scheme
-
-Source: `lemma-triviality-fibres--2`, proof (3), larger minors vanish.
-(blueprint: lem-pc-complementary-block-vanishes)
 -/
 
 @[expose] public section
@@ -27,27 +24,7 @@ open CategoryTheory Limits SheafOfModules
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- A block diagonal form with an invertible a by a pivot has zero complementary
-block if its field-valued fibre ranks are at most a on a reduced scheme.
-
-Source: `lemma-triviality-fibres--2`, proof (3), reducedness step in the
-normal-form claim. (blueprint: lem-pc-complementary-block-vanishes)
-
-Proof: For each z in U choose the field-valued point g from hrank. Its image is
-j(z), so g factors through j and then through U, since both maps are open
-immersions. Pull back hform to this field point, and take global sections.
-The chosen bases remain isomorphisms, and f remains invertible. Thus the rank
-of the original fibre matrix is a plus the rank of the fibre matrix of δ:
-the image of a block diagonal linear map is the direct sum of its two images.
-The upper bound a forces the latter rank to be zero, hence every entry of δ
-vanishes at this field point. The field map factors through the residue field
-at z by the stalk map; this is a field extension and hence injective. Each
-entry therefore vanishes in that residue field. On any affine open in U each
-entry belongs to every prime ideal, hence to the nilradical. The affine ring
-is reduced, because U is an open subscheme of the reduced scheme Y. Its
-nilradical is zero, so each entry is zero on that affine open. Affine opens
-cover U, and the sheaf axiom implies that δ is zero. Empty U is vacuous;
-if a = 0 this is the same reduced-ring criterion applied to the whole map;
-if either complementary rank is zero its morphism is automatically zero. -/
+block if its field-valued fibre ranks are at most a on a reduced scheme. -/
 theorem complementary_block_eq_zero_of_rank_le
     {Y Z : Scheme.{u}} [IsReduced Y] {M N : Y.Modules} {m n : ℕ}
     (eM : M ≅ free (R := Y.ringCatSheaf) (ULift.{u} (Fin m)))

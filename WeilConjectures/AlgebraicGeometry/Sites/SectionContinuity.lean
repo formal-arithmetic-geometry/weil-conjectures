@@ -271,8 +271,7 @@ variable {R : Scheme.{u}} {J : Type u} [SmallCategory J] [IsCofiltered J] (D : J
 
 /-- **Continuity of sections at an inverse limit, surjectivity**: every section of the pullback
 of `G` over `W ×_R lim Dⱼ` comes from a section over some `W ×_R Dⱼ`. This is the first half of
-`AlgebraicGeometry.Etale.unitComparison_app_isColimit_of_isLimit`.
-(blueprint: `proposition-comparison-morphism-inverse-image--3`) -/
+`AlgebraicGeometry.Etale.unitComparison_app_isColimit_of_isLimit`. -/
 theorem unitComparison_app_surjective_of_isLimit [∀ j, CompactSpace (D.obj j)]
     [∀ j, QuasiSeparatedSpace (D.obj j)] [∀ {j k : J} (f : j ⟶ k), IsAffineHom (D.map f)]
     [QuasiSeparatedSpace R] (hc : IsLimit c)
@@ -454,8 +453,7 @@ theorem unitComparison_app_surjective_of_isLimit [∀ j, CompactSpace (D.obj j)]
 /-- **Continuity of sections at an inverse limit, injectivity**: a section of the pullback of
 `G` over `W ×_R Dⱼ` which vanishes on `W ×_R lim Dⱼ` already vanishes on some `W ×_R Dⱼ'`,
 `j' ⟶ j`. This is the second half of
-`AlgebraicGeometry.Etale.unitComparison_app_isColimit_of_isLimit`.
-(blueprint: `proposition-comparison-morphism-inverse-image--3`) -/
+`AlgebraicGeometry.Etale.unitComparison_app_isColimit_of_isLimit`. -/
 theorem exists_unitComparison_app_eq_zero_of_isLimit [∀ j, CompactSpace (D.obj j)]
     [∀ j, QuasiSeparatedSpace (D.obj j)] [∀ {j k : J} (f : j ⟶ k), IsAffineHom (D.map f)]
     [QuasiSeparatedSpace R] (hc : IsLimit c)
@@ -512,8 +510,7 @@ of the pullbacks of `G` over the `W ×_R Dⱼ`: every section over `W ×_R X` co
 `W ×_R Dⱼ`, and a section over `W ×_R Dⱼ` which vanishes on `W ×_R X` already vanishes on some
 `W ×_R Dⱼ'`, `j' ⟶ j`. The sections of the pullback of `G` over `W ×_R Dⱼ` are written as the
 sections of `πⱼ_* πⱼ^* G` over `W`, and the transition maps are
-`AlgebraicGeometry.Etale.unitComparison`.
-(blueprint: `proposition-comparison-morphism-inverse-image--3`) -/
+`AlgebraicGeometry.Etale.unitComparison`. -/
 theorem unitComparison_app_isColimit_of_isLimit [∀ j, CompactSpace (D.obj j)]
     [∀ j, QuasiSeparatedSpace (D.obj j)] [∀ {j k : J} (f : j ⟶ k), IsAffineHom (D.map f)]
     [QuasiSeparatedSpace R] (hc : IsLimit c)

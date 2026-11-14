@@ -353,24 +353,7 @@ private theorem q_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) [IsIso f] (M : Y.Module
 set_option cleanup.letToHave false in
 -- The selected counits have large dependent types; keep their data abstract.
 /-- The single-complex coefficient square for restriction and an isomorphic apex.
-Source: Stacks Project, Tags 06YJ and 0D5S.
-(blueprint: lem-pc-open-single-coefficient-transport)
-
-Proof: Let j be U.ι and ρ the canonical tensor-pullback-to-restriction comparison,
-obtained from the unique comparison of the tensor adjunction to the restriction
-adjunction. The displayed a equals q_j(M) followed by single.map ρ.hom: expand
-singleComplexOpenPullbackIso using uniqueness of the left-derived functor and
-its factorization at a single complex. Construct b : tensorPullback k.hom
-(tensorPullback r M) ≅ tensorPullback r' (M.restrict j) from the inverse tensor
-composition comparison for (k.hom,r), transport by hr, the composition comparison
-for (r',j), and tensorPullback r' of ρ. Tensor pullback along an isomorphism is
-exact, so its left-derived counit on a single is invertible. Set d to this
-invertible single comparison for k.hom, followed by single.mapIso b. Apply
-picardTermwiseSingleMap_composition first to (k.hom,r), then to (r',j). The tensor
-composition factors are precisely b's factors. Cancel their inverses and use
-naturality for ρ. This gives the asserted coefficient equation. No base-change
-map or direct image is used. Empty opens, empty schemes and zero modules satisfy
-the same construction and identities. -/
+Source: Stacks Project, Tags 06YJ and 0D5S. -/
 theorem exists_openSingle_coefficient_transport
     {Y P P' : Scheme.{u}} (U : Y.Opens) (M : Y.Modules)
     (r : P ⟶ Y) (r' : P' ⟶ U.toScheme) (k : P' ≅ P)

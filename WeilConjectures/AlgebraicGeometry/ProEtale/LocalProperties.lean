@@ -28,8 +28,8 @@ variable {J : Type*} [Category J]
 
 namespace Sheaf
 
---structure IsLocal (P : ObjectProperty (Sheaf K A)) : Prop where
---  iff_of_coversTop (F : Sheaf K A) {ι : Type*} (X : ι → C) (h : K.CoversTop X) :
+--structure IsLocal (P: ObjectProperty (Sheaf K A)): Prop where
+--  iff_of_coversTop (F: Sheaf K A) {ι: Type*} (X: ι → C) (h: K.CoversTop X):
 --    P F ↔ ∀ i, P (F.over (X i))
 
 variable {ι : Type*} (X : ι → C) (hX : K.CoversTop X)

@@ -221,21 +221,7 @@ private def fractionChartData {S T : Scheme.{u}} (h : T ⟶ S)
 
 /-- Isomorphic quotient lines have identical coefficient maps in corresponding frames,
 and hence the same fraction charts.
-Source: Stacks Project, Constructions, Tag 01OA, isomorphism classes of quotients.
-(blueprint: lem-trf-line-quotient-iso-charts).
-
-Proof: the quotient equality identifies the degree-one images after applying v.
-In degree d, applying the dth tensor power of v identifies every homogeneous
-image, by induction on products of degree-one generators, scalar multiples and
-sums in the symmetric grading. It sends l tensor d to v(l) tensor d. Both are
-frames, so their scalar coefficients coincide by injectivity of scalar
-multiplication by a frame. The d=0 comparison is the identity of the unit.
-All degree-one coefficients and hence their localizations are equal. Substitute
-these equalities in the fraction-chart predicate: every chart map for psi also
-satisfies the equations for psi', with unchanged scheme morphism F. The generator
-cover, overlap units and refinement equations are preserved. Frame-change
-identities use linearity of v and restriction identities use its naturality.
-This proves the predicate on every affine chart, including empty ones. -/
+Source: Stacks Project, Constructions, Tag 01OA, isomorphism classes of quotients. -/
 theorem lineQuotient_iso_charts {S T : Scheme.{u}} (h : T ⟶ S)
     (E : S.Modules) [E.IsQuasicoherent] (L : T.Modules) [L.IsInvertible]
     (q : (tensorPullback h).obj E ⟶ L) [Epi q]

@@ -22,8 +22,7 @@ import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 
 /-! # Finite devissage of integral stratified perfect complexes
 
-Source: Bhatt--Scholze, Lemma 6.3.14, final paragraph, as used in Lemma 6.8.12
-(blueprint: lem-weil-pbc-integral-perfect-stratum-generation).
+Source: Bhatt--Scholze, Lemma 6.3.14, final paragraph, as used in Lemma 6.8.12.
 -/
 
 @[expose] public noncomputable section
@@ -394,31 +393,7 @@ private theorem iter_of_iso
 /-- A stratified perfect source is a finite extension of locally perfect pieces
 supported on locally closed subschemes. This assertion is purely about the source;
 it makes no reference to an internal Hom functor, target family, or colimit.
-Source: Bhatt--Scholze, Lemma 6.3.14, final devissage; Proposition 6.6.11
-(blueprint: lem-weil-pbc-integral-perfect-stratum-generation).
-
-Proof:
-1. Apply the finite-chain-of-opens theorem to the finite stratification, starting
-at the empty open. Each successive difference lies in one original stratum.
-Give that difference its reduced closed structure inside the larger open.
-The private geometric_filtration theorem proves this construction.
-2. Each reduced difference factors through its original stratum: first factor
-through the coborder open and then use reduced-source closed factorization.
-Pull back the perfect local models and their covering sieves. The datum ring
-isomorphisms and the constant-realization pullback comparison identify these with
-local perfect models for the pullback of K. Exact inverse image preserves b.
-3. Each difference is closed in its larger open with smaller-open complement.
-All open immersions in question are quasi-compact since T is Noetherian.
-The module localization short exact sequence, applied termwise to a representative
-of K restricted to the larger open, yields the localization triangle. Extend it by the
-exact open extension functor to T. Its third vertex is exactly a stratum piece.
-4. The first vertex is the extension from the smaller open: composition of open extensions is
-identified with the single open extension by uniqueness of left adjoints to the
-same composite restriction. These isomorphisms respect the localization counits.
-5. Start at the empty open, whose extension is zero, and ascend through the
-finitely many triangles. Thus K lies in a finite iterated extension of the stratum
-pieces. Include zero as a piece (the zero perfect model), and allow shifts and
-isomorphisms through shiftClosure. The argument includes the empty scheme. -/
+Source: Bhatt--Scholze, Lemma 6.3.14, final devissage; Proposition 6.6.11. -/
 theorem integralStratifiedPerfect_mem_stratum_extensions
     (T : Scheme.{u}) [IsNoetherian T]
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)

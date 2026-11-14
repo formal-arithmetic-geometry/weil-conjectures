@@ -28,20 +28,7 @@ set_option linter.all false in
 set_option maxHeartbeats 600000 in
 -- Normalization compares several chosen derived functors on three representatives.
 /-- A normalized coefficient roof localizes to the corresponding direct-image
-square mate. Source: Stacks Project, Tags 08HY and 0D5T.
-(blueprint: lem-pc-relative-mv-normalized-coefficient-roof).
-Proof: Compare Q(f_*I) with Rf_*E by the inverse K-injective computation
-isomorphism followed by Rf_*eI; similarly compare Q(f'_*J) with Rf'_*E'.
-For L use the inverse computation map followed by Rf_*eL. Naturality of the
-localization unit at r and its prescribed localization identify the numerator
-with Rf_*β. Naturality at s and its prescribed localization identify the
-denominator, followed by the comparison for L and the derived square mate,
-with η_g(f'_*J) followed by Rg_* of the target comparison. This last identity
-is the pasted complex square-unit equation, transported along eJ by naturality
-of the square mate. Cancel the assumed invertible denominator and the target
-comparison. Substitution gives exactly the displayed roof formula. No
-Mayer--Vietoris row, cover, open, boundary or coefficient transpose occurs.
-Zero β and zero objects obey the same unit naturality equations. -/
+square mate. Source: Stacks Project, Tags 08HY and 0D5T. -/
 theorem relativeMV_normalized_coefficient_roof
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

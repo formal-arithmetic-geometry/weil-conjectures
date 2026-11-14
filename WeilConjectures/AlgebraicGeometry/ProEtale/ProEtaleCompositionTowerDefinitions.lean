@@ -23,8 +23,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Intrinsic.ProEtaleIntri
 /-!
 # Constructions on a compatible pro-etale compactification tower
 
-Source: main-20261015, proposition-composition-base-change-rf-shriek--1, Construction; Stacks Tags
-0F7B and 0F7J (blueprint: def-trf-proetale-composition-tower-data).
+Source: Stacks Tags 0F7B and 0F7J.
 
 The two sides below are independently constructed: the canonical origin compositor,
 conjugated to the supplied candidates by canonical comparisons, and the open adjunct of
@@ -40,32 +39,25 @@ namespace AlgebraicGeometry.ProEtale
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- Ordinary derived direct image P on the small pro-etale site.
-Source: Construction, notation P (blueprint: lem-trf-proetale-composition-tower-normalization). -/
+/-- Ordinary derived direct image P on the small pro-etale site. -/
 abbrev towerP {X Y : Scheme.{u}} (t : X ⟶ Y) :=
   (lowerStar (ModuleCat.{u + 1} Λ) t).rightDerivedFunctor
 
-/-- Exact derived extension by zero J on the small pro-etale site.
-Source: Construction, notation J (blueprint: lem-trf-proetale-composition-tower-normalization). -/
+/-- Exact derived extension by zero J on the small pro-etale site. -/
 abbrev towerJ {X Y : Scheme.{u}} (v : X ⟶ Y) [IsOpenImmersion v] :=
   (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) v).mapDerivedCategory
 
-/-- Exact derived restriction along a scheme map.
-Source: Construction, i_p^* (blueprint: lem-trf-proetale-composition-tower-normalization). -/
+/-- Exact derived restriction along a scheme map. -/
 abbrev towerPull {X Y : Scheme.{u}} (v : X ⟶ Y) :=
   (upperStar (ModuleCat.{u + 1} Λ) v).mapDerivedCategory
 
-/-- Exact inverse image is left adjoint to total direct image.
-Source: Construction, ambient exchange adjunctions
-(blueprint: lem-trf-proetale-composition-tower-normalization). -/
+/-- Exact inverse image is left adjoint to total direct image. -/
 def towerPullPushAdjunction {X Y : Scheme.{u}} (v : X ⟶ Y) :
     towerPull Λ v ⊣ towerP Λ v :=
   (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) v).ofNatIsoLeft
     (Functor.leftDerivedFunctorIsoMapDerivedCategory _)
 
-/-- Canonical pullback comparison of the commutative square, descended termwise.
-Source: Construction, unit--square--counit exchange
-(blueprint: lem-trf-proetale-composition-tower-normalization). -/
+/-- Canonical pullback comparison of the commutative square, descended termwise. -/
 def towerPullSquare {H T V S : Scheme.{u}} (b : H ⟶ T) (i : V ⟶ S)
     (r : H ⟶ V) (p : T ⟶ S) (w : b ≫ p = r ≫ i) :
     towerPull Λ i ⋙ towerPull Λ r ≅ towerPull Λ p ⋙ towerPull Λ b :=
@@ -76,9 +68,7 @@ def towerPullSquare {H T V S : Scheme.{u}} (b : H ⟶ T) (i : V ⟶ S)
         upperStarComp (ModuleCat.{u + 1} Λ) b p) ≪≫
     (Functor.mapDerivedCategoryCompIso _ _).symm
 
-/-- The actual ambient exchange Ex^p: unit for r, square, counit for p.
-Source: Construction, exchange normalization
-(blueprint: lem-trf-proetale-composition-tower-normalization). -/
+/-- The actual ambient exchange Ex^p: unit for r, square, counit for p. -/
 def towerExchange {H T V S : Scheme.{u}} (b : H ⟶ T) (i : V ⟶ S)
     (r : H ⟶ V) (p : T ⟶ S) (w : b ≫ p = r ≫ i)
     (K : DerivedCategory (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} Λ))) :
@@ -88,9 +78,7 @@ def towerExchange {H T V S : Scheme.{u}} (b : H ⟶ T) (i : V ⟶ S)
     (towerP Λ r).map ((towerPullSquare Λ b i r p w).hom.app _ ≫
       (towerPull Λ b).map ((towerPullPushAdjunction Λ p).counit.app K))
 
-/-- The open unit eta_b, induced from the actual sheaf adjunction unit.
-Source: Construction, inverse open unit
-(blueprint: lem-trf-proetale-composition-tower-normalization). -/
+/-- The open unit eta_b, induced from the actual sheaf adjunction unit. -/
 def towerOpenUnit {X Y : Scheme.{u}} (b : X ⟶ Y) [IsOpenImmersion b] :
     𝟭 _ ≅ towerJ Λ b ⋙ towerPull Λ b :=
   (Functor.mapDerivedCategoryIdIso _).symm ≪≫
@@ -98,9 +86,7 @@ def towerOpenUnit {X Y : Scheme.{u}} (b : X ⟶ Y) [IsOpenImmersion b] :
       (asIso (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) b).unit) ≪≫
     (Functor.mapDerivedCategoryCompIso _ _).symm
 
-/-- Lambda is Ex^p on J_b N followed by P_r of inverse eta_b.
-Source: Construction, displayed lambda
-(blueprint: lem-trf-proetale-composition-tower-normalization). -/
+/-- Lambda is Ex^p on J_b N followed by P_r of inverse eta_b. -/
 def towerLambda {H T V S : Scheme.{u}} (b : H ⟶ T) (i : V ⟶ S)
     (r : H ⟶ V) (p : T ⟶ S) [IsOpenImmersion b]
     (w : b ≫ p = r ≫ i)
@@ -111,9 +97,7 @@ def towerLambda {H T V S : Scheme.{u}} (b : H ⟶ T) (i : V ⟶ S)
     (towerP Λ r).map ((towerOpenUnit Λ b).inv.app N)
 
 /-- Gamma is defined by the Hom bijection from inverse lambda, not by site transport.
-The IsIso argument is proof data furnished in the theorem, not an extra hypothesis there.
-Source: Construction, displayed open-adjoint prescription
-(blueprint: lem-trf-proetale-composition-tower-normalization). -/
+The IsIso argument is proof data furnished in the theorem, not an extra hypothesis there. -/
 def towerGamma {H T V S : Scheme.{u}} (b : H ⟶ T) (i : V ⟶ S)
     (r : H ⟶ V) (p : T ⟶ S) [IsOpenImmersion b] [IsOpenImmersion i]
     (w : b ≫ p = r ≫ i)
@@ -129,9 +113,7 @@ def towerGamma {H T V S : Scheme.{u}} (b : H ⟶ T) (i : V ⟶ S)
 /-- Canonical change of candidate on the full etale-origin class. Transport the
 canonical etale common-refinement comparison through the named site comparisons,
 then descend it uniquely along the etale-origin equivalence. This is not a choice
-of an arbitrary isomorphism.
-Source: Construction, independence under compactification comparisons
-(blueprint: lem-trf-proetale-composition-tower-normalization). -/
+of an arbitrary isomorphism. -/
 def towerCandidateComparison [Finite Λ] {X Y : Scheme.{u}} {f : X ⟶ Y}
     [QuasiCompact f] (c d : Compactification f) :
     (DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X).ι ⋙

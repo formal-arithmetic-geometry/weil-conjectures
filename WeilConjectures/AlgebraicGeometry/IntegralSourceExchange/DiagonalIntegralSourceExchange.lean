@@ -19,9 +19,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale
 namespace IntegralSourceExchange
 
-/-- The integral constant sheaf used in the ordinary exchange.
-Source: blueprint diagonal coefficient changes (3).
-(blueprint: lem-diagonal-integral-source-exchange). -/
+/-- The integral constant sheaf used in the ordinary exchange. -/
 abbrev integralConstant (X : Scheme.{u}) :=
   (constantSheaf (Scheme.ProEt.topology X) Ab.{u + 1}).obj
     (AddCommGrpCat.of (ULift.{u + 1} ℤ))
@@ -35,9 +33,7 @@ private def integralConstantComparison (X : Scheme.{u}) :=
     (constantSheafAdj (Scheme.ProEt.topology X) Ab.{u + 1}
       (Scheme.ProEt.isTerminalMkId X)))
 
-/-- The canonical inverse-image comparison of a commutative scheme square.
-Source: blueprint diagonal coefficient changes (3).
-(blueprint: lem-diagonal-integral-source-exchange). -/
+/-- The canonical inverse-image comparison of a commutative scheme square. -/
 def integralSquare {D D' Z Z' : Scheme.{u}}
     (i : D ⟶ Z) (i' : D' ⟶ Z') (g : Z' ⟶ Z) (w : D' ⟶ D)
     (sq : CommSq w i' i g) :
@@ -47,9 +43,7 @@ def integralSquare {D D' Z Z' : Scheme.{u}}
     eqToIso (congrArg (upperStar Ab.{u + 1}) sq.w.symm) ≪≫
     upperStarComp Ab.{u + 1} w i
 
-/-- The abelian closed exchange on integral constants, using the canonical inverse-image square.
-Source: blueprint diagonal coefficient changes (3).
-(blueprint: lem-diagonal-integral-source-exchange). -/
+/-- The abelian closed exchange on integral constants, using the canonical inverse-image square. -/
 def integralExchange {D D' Z Z' : Scheme.{u}}
     (i : D ⟶ Z) (i' : D' ⟶ Z') (g : Z' ⟶ Z) (w : D' ⟶ D)
     (sq : CommSq w i' i g) :=
@@ -753,19 +747,6 @@ private theorem closedExchange_mates
   rw [he]
 
 /-- Site comparison intertwines the two closed exchanges on constant modules.
-Source: blueprint sk-lem-geo-cartier.proof.md, opening and final paragraphs
-(blueprint: lem-diagonal-integral-source-exchange).
-
-Proof: transpose both composites under the inverse-image/direct-image adjunction for i'.
-Expand the source comparison as the mate of restriction commuting with direct image,
-followed by the constant comparison. The defining counit-mate identity moves this
-comparison across the counit. The inverse-image comparison is conjugate to the same
-restriction square, so its composition law identifies the two inverse-image paths
-around the commutative scheme square. Naturality moves the remaining constant map
-past the comparison. Both transposes are consequently inverse-image commutation,
-followed by the pullback of the counit for i and the constant map for gD. Injectivity
-of the adjunction equivalence gives the equality. This argument does not use
-Cartier ideals or Kummer classes; it applies also to empty schemes and identity maps.
 -/
 private theorem sourceComparison_closed_exchange
     {D D' Z Z' : Scheme.{u}} (i : D ⟶ Z) (i' : D' ⟶ Z')
@@ -820,19 +801,7 @@ private theorem sourceComparison_inverse_exchange
 
 end InverseExchange
 
-/-- The transported integral boundary source is the canonical ordinary closed exchange.
-
-Source: blueprint latest, diagonal coefficient changes (3), integral source pullback;
-the site-comparison mate calculation for the closed exchange.
-(blueprint: lem-diagonal-integral-source-exchange).
-
-Proof: compare the two closed exchanges by transposing under the primed closed
-adjunction. Coherence of comparison inverse image with scheme-map composition
-identifies the square comparison. The comparison-counit equations and the
-constant-sheaf comparison then identify the transposes. The comparison on
-integral closed sources is invertible; cancel it and substitute the definition
-of diagonalBoundarySource. This is an equality of ordinary abelian sheaf maps
-and requires neither a reduction, a derived limit, nor invertibility of a prime. -/
+/-- The transported integral boundary source is the canonical ordinary closed exchange. -/
 theorem diagonalBoundarySource_exchange {Y Y' : Scheme.{u}}
     (v : diagonalSurface Y' ⟶ diagonalSurface Y)
     (w : ProjectiveLine Y' ⟶ ProjectiveLine Y)

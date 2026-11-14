@@ -12,9 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 /-!
 # Projective morphisms are proper
 
-Source: the Weil conjectures blueprint, chapter `chap-Smooth-purity`, unit
-`proposition-ordinary-external-kunneth--1`, lemma of order 1708; Stacks Project, Tag 01WC
-(blueprint: lem-kun-projective-implies-proper).
+Source: Stacks Project, Tag 01WC.
 -/
 
 @[expose] public section
@@ -30,18 +28,7 @@ is proper. The other conjuncts record the three properness facts in the parenthe
 projective-space projections are proper, closed immersions are proper, and proper morphisms
 are closed under composition.
 
-Source: the Weil conjectures blueprint, `proposition-ordinary-external-kunneth--1`, lemma of order
-1708; Stacks Project, Tag 01WC (blueprint: lem-kun-projective-implies-proper).
-
-Proof: Choose a natural number `N` and a closed immersion `i` with `i ≫ q = f` using
-`def-kun-projective` (`IsHProjective.exists_closedImmersion`). The projection `q` is that of
-`def-nagata-projective-space-base-change` with the finite homogeneous-coordinate type
-`ULift (Fin (N + 1))`. It is proper by `lemma-nagata-projective-space-base-change-proper`
-(`ProjectiveSpace.instIsProper`). The closed immersion `i` is proper by clause (a) of
-`lem-weil-pbc-closed-immersion-proper` (`IsClosedImmersion.iff_isProper_and_mono`). Compose
-these two proper morphisms using `lem-weil-pbc-proper-composition`
-(`IsProper.instCompScheme`) and transport along the factorization equality to obtain
-properness of `f`. The same three cited results give the remaining three conjuncts. -/
+Source: Stacks Project, Tag 01WC. -/
 theorem hProjective_properness :
     (∀ {X Y : Scheme.{u}} (f : X ⟶ Y), IsHProjective f → IsProper f) ∧
     (∀ (N : ℕ) (Y : Scheme.{u}),

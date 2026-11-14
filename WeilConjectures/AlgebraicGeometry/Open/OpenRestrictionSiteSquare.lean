@@ -13,7 +13,6 @@ import all WeilConjectures.AlgebraicGeometry.Etale.ProEtale.EtaleProEtaleScalarP
 /-! # Restriction and the exact open-extension site boundary
 
 Source: Stacks 03DI, 09AF and 099R.
-(blueprint: lem-sf-open-restriction-site-square).
 -/
 
 -- After pruning, this module only keeps private declarations.

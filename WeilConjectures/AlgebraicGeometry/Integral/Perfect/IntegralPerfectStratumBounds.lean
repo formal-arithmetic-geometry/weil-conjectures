@@ -15,8 +15,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDer
 
 /-! # Upper bounds for one locally perfect support piece
 
-Source: Bhatt--Scholze, Lemma 6.3.14, exact open and closed extensions
-(blueprint: lem-weil-pbc-integral-perfect-stratum-bounds).
+Source: Bhatt--Scholze, Lemma 6.3.14, exact open and closed extensions.
 -/
 
 @[expose] public noncomputable section
@@ -30,12 +29,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- A support piece is bounded above.
-Source: Bhatt--Scholze, Lemma 6.3.14 and Lemma 6.5.8
-(blueprint: lem-weil-pbc-integral-perfect-stratum-bounds).
-Proof: closed direct image is exact for the identified inverse-image coefficient
-rings, so its right derived functor agrees with termwise descent and preserves the
-upper bound of the locally perfect source. Exact open extension preserves that
-bound as well. Transport it through the specified support-piece isomorphism. -/
+Source: Bhatt--Scholze, Lemma 6.3.14 and Lemma 6.5.8. -/
 theorem integralPerfectStratumPiece_boundedAbove
     (T : Scheme.{u}) [IsNoetherian T]
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
@@ -73,10 +67,7 @@ theorem integralPerfectStratumPiece_boundedAbove
   exact ⟨b, DerivedCategory.TStructure.t.isLE_of_iso e.symm b⟩
 
 /-- One support piece supplies the uniform target-variable lower-bound offset.
-Source: Bhatt--Scholze, Lemma 6.3.14; Stacks Tag 08JA
-(blueprint: lem-weil-pbc-integral-perfect-stratum-bounds).
-Proof: choose an upper bound b for the source, apply the internal Hom bound N-b,
-and take offset -b. -/
+Source: Bhatt--Scholze, Lemma 6.3.14; Stacks Tag 08JA. -/
 theorem integralPerfectStratumPiece_hom_lowerBound
     (T : Scheme.{u}) [IsNoetherian T]
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)

@@ -12,7 +12,6 @@ import Mathlib.Algebra.Polynomial.FieldDivision
 /-! # Transition exponents are invariant under changes of chart frames
 
 Source: Stacks Project, Tag 0BXJ, proof of divisors-lemma-Pic-projective-space-UFD.
-(blueprint: lem-sfb-projective-line-transition-degree-separation)
 -/
 
 @[expose] public section
@@ -55,16 +54,7 @@ private theorem chart_unit_constant (k : Type u) [Field k]
 /-- Standard transitions of different degrees are not related by chart units.
 
 Source: Stacks Project, Tag 0BXJ, divisors-lemma-Pic-projective-space-UFD,
-uniqueness in its Picard classification, specialized to dimension one over a field.
-(blueprint: lem-sfb-projective-line-transition-degree-separation)
-
-Proof: each chart is an affine line. Its units are the nonzero constant
-polynomials, by affine_punctured_line_algebra. Write the two chart units as
-constants c_0 and c_1. Identify the overlap with k[t,t^-1], t=x_1/x_0,
-and its standard transition of degree r with t^-r. The given equality becomes
-c_0*t^-d = t^-e*c_1. If d differs from e, comparison of the coefficient at -d
-gives c_0=0, contrary to c_0 being a unit. Hence d=e. This also covers zero
-and negative degrees and fields of arbitrary characteristic. -/
+uniqueness in its Picard classification, specialized to dimension one over a field. -/
 theorem eq_degree_of_chart_units (k : Type u) [Field k] (d e : ℤ)
     (a : Γ(ProjectiveLine (Spec (.of k)),
       standardOpen _ (Spec (.of k)) (⟨0⟩ : ULift.{u} (Fin 2)))ˣ)

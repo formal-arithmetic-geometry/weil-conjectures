@@ -60,12 +60,10 @@ lemma Scheme.Hom.preimage_fiberι_preimage (f : X ⟶ Y) (y : Y) (V : Y.Opens) (
   rw [← Scheme.Hom.comp_preimage, f.fiber_fac, Scheme.Hom.comp_preimage,
     Y.preimage_fromSpecResidueField hy, Scheme.Hom.preimage_top]
 
-/-- For an affine morphism `f : X ⟶ Y`, an affine open `V ⊆ Y` and `y ∈ V`, the square of rings
-with sides `f.app V : Γ(Y, V) ⟶ Γ(X, f⁻¹ V)`, the evaluation `Γ(Y, V) ⟶ κ(y)`, the restriction
+/-- For an affine morphism `f: X ⟶ Y`, an affine open `V ⊆ Y` and `y ∈ V`, the square of rings
+with sides `f.app V: Γ(Y, V) ⟶ Γ(X, f⁻¹ V)`, the evaluation `Γ(Y, V) ⟶ κ(y)`, the restriction
 `Γ(X, f⁻¹ V) ⟶ Γ(X_y, ⊤)` and the structure map `κ(y) ⟶ Γ(X_y, ⊤)` is a pushout: the global
-sections of the fibre `X_y` are `κ(y) ⊗_{Γ(Y, V)} Γ(X, f⁻¹ V)`.
-
-(blueprint: `lem-pc-flf-properties`) -/
+sections of the fibre `X_y` are `κ(y) ⊗_{Γ(Y, V)} Γ(X, f⁻¹ V)`. -/
 theorem Scheme.Hom.isPushout_app_evaluation_fiber (f : X ⟶ Y) [IsAffineHom f] {V : Y.Opens}
     (hV : IsAffineOpen V) (y : Y) (hy : y ∈ V) :
     IsPushout (f.app V) (Y.evaluation V y hy)
@@ -84,13 +82,11 @@ theorem Scheme.Hom.isPushout_app_evaluation_fiber (f : X ⟶ Y) [IsAffineHom f] 
   · simp [Scheme.Hom.fiberToSpecResidueField, Scheme.Hom.appLE_top_top]
 
 open TensorProduct in
-/-- **Global sections of the fibres of an affine morphism.** For an affine morphism `f : X ⟶ Y`
+/-- **Global sections of the fibres of an affine morphism.** For an affine morphism `f: X ⟶ Y`
 (e.g. `f` finite locally free), an affine open `V ⊆ Y` and `y ∈ V`, the canonical map
 `κ(y) ⊗_{Γ(Y, V)} Γ(X, f⁻¹ V) → Γ(X_y, 𝒪_{X_y})`, `a ⊗ b ↦ a · b|_{X_y}`, is a ring
 isomorphism. As `κ(y) ⊗_{Γ(Y, V)} Γ(X, f⁻¹ V) = κ(y) ⊗_{𝒪_{Y,y}} (f_* 𝒪_X)_y`, this is the
-statement that `(f_* 𝒪_X)_y ⊗_{𝒪_{Y,y}} κ(y) → Γ(X_y, 𝒪_{X_y})` is an isomorphism.
-
-(blueprint: `lem-pc-flf-properties`) -/
+statement that `(f_* 𝒪_X)_y ⊗_{𝒪_{Y,y}} κ(y) → Γ(X_y, 𝒪_{X_y})` is an isomorphism. -/
 theorem Scheme.Hom.exists_ringEquiv_tensorProduct_fiber (f : X ⟶ Y) [IsAffineHom f]
     {V : Y.Opens} (hV : IsAffineOpen V) (y : Y) (hy : y ∈ V) :
     letI := (f.app V).hom.toAlgebra
@@ -117,12 +113,10 @@ theorem Scheme.Hom.exists_ringEquiv_tensorProduct_fiber (f : X ⟶ Y) [IsAffineH
   rw [← mul_one a, ← one_mul b, ← Algebra.TensorProduct.tmul_mul_tmul, map_mul, mul_one, one_mul]
   exact congr($(hl).hom a * $(hr).hom b)
 
-/-- **Stalks of the pushforward of the structure sheaf.** Let `f : X ⟶ Y` be a morphism, `V ⊆ Y`
+/-- **Stalks of the pushforward of the structure sheaf.** Let `f: X ⟶ Y` be a morphism, `V ⊆ Y`
 an affine open with affine preimage `f⁻¹ V`, and `y ∈ V` corresponding to the prime `𝔭` of
 `Γ(Y, V)`. Then the stalk `(f_* 𝒪_X)_y` is the localization of `Γ(X, f⁻¹ V)` at the image of
-`Γ(Y, V) \ 𝔭`, through the germ map.
-
-(blueprint: `lem-pc-flf-properties`) -/
+`Γ(Y, V) \ 𝔭`, through the germ map. -/
 theorem Scheme.Hom.isLocalization_stalk_pushforward (f : X ⟶ Y) {V : Y.Opens}
     (hV : IsAffineOpen V) (hfV : IsAffineOpen (f ⁻¹ᵁ V)) (y : Y) (hy : y ∈ V) :
     letI := (f.app V).hom.toAlgebra
@@ -181,15 +175,13 @@ theorem Scheme.Hom.isLocalization_stalk_pushforward (f : X ⟶ Y) {V : Y.Opens}
     refine ⟨⟨f.app V g ^ n, g ^ n, pow_mem ((hM g).2 hyg) n, map_pow _ _ _⟩, hc⟩
 
 open TensorProduct in
-/-- **Fibres of an affine morphism via stalks.** For an affine morphism `f : X ⟶ Y` (e.g. `f`
+/-- **Fibres of an affine morphism via stalks.** For an affine morphism `f: X ⟶ Y` (e.g. `f`
 finite locally free) and `y ∈ Y`, the canonical map
 `(f_* 𝒪_X)_y ⊗_{𝒪_{Y,y}} κ(y) → Γ(X_y, 𝒪_{X_y})` is a ring isomorphism. On an affine open
 `V ∋ y` it sends `germ_y(b) ⊗ a` to `b|_{X_y} · a`; it is obtained from
 `AlgebraicGeometry.Scheme.Hom.exists_ringEquiv_tensorProduct_fiber`, since
 `(f_* 𝒪_X)_y = 𝒪_{Y,y} ⊗_{Γ(Y, V)} Γ(X, f⁻¹ V)`
-(`AlgebraicGeometry.Scheme.Hom.isLocalization_stalk_pushforward`).
-
-(blueprint: `lem-pc-flf-properties`) -/
+(`AlgebraicGeometry.Scheme.Hom.isLocalization_stalk_pushforward`). -/
 theorem Scheme.Hom.exists_ringEquiv_stalk_pushforward_tensorProduct_fiber (f : X ⟶ Y)
     [IsAffineHom f] {V : Y.Opens} (hV : IsAffineOpen V) (y : Y) (hy : y ∈ V) :
     letI : Algebra (Y.presheaf.stalk y) ((f.base _* X.presheaf).stalk y) :=

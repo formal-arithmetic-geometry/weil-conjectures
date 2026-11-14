@@ -9,9 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearDerivedSect
 
 /-! # The constant system of modules on a ringed site
 
-Source: Zheng, Construction 4.1; the actual reduction construction in step 1 of
-`lem-sfb-finite-proper-exceptional-coherent-tower`.
-(blueprint: def-sfb-constant-coefficient-system)
+Source: Zheng, Construction 4.1.
 
 The sectionwise characterizations determine the functor, including its horizontal
 maps. In particular its derived functor is an actual functor to the localization
@@ -217,18 +215,18 @@ variable {C : Type c} [Category.{v} C] [EssentiallySmall.{max c v r} C]
   (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{max c v r})
 
 /-- Constant coefficients, with the identity horizontal coefficient homomorphism.
-Source: Zheng, Construction 4.1 (blueprint: def-sfb-constant-coefficient-system). -/
+Source: Zheng, Construction 4.1. -/
 def constantCoefficients : ℕ → Sheaf J CommRingCat.{max c v r} := fun _ ↦ R
 
 /-- The identity coefficient transitions.
-Source: Zheng, Construction 4.1 (blueprint: def-sfb-constant-coefficient-system). -/
+Source: Zheng, Construction 4.1. -/
 def constantCoefficientTransitions (n : ℕ) :
     constantCoefficients.{c, v, r} J R (n + 1) ⟶ constantCoefficients.{c, v, r} J R n := 𝟙 R
 
 /-- A constant system keeps each module and each morphism at every vertex, and
 its horizontal maps are the identity. Heterogeneous equality only suppresses
 the restriction-of-scalars presentations of the same identity action.
-Source: Zheng, Construction 4.1 (blueprint: def-sfb-constant-coefficient-system). -/
+Source: Zheng, Construction 4.1. -/
 def IsConstantSystemFunctor
     (F : Mod.{c, v, max c v r} J R ⥤
       Systems.{c, v, max c v r} J (constantCoefficients.{c, v, r} J R)
@@ -244,7 +242,7 @@ def IsConstantSystemFunctor
       (constantCoefficientTransitions.{c, v, r} J R) h).app (F.obj M)) (𝟙 M))
 
 /-- The zero vertical slice is left adjoint to the projection of the sequence site.
-Source: Zheng, Construction 4.1 (auxiliary; not a blueprint node). -/
+Source: Zheng, Construction 4.1. -/
 def sectZeroSndAdjunction : Prod.sectR 0 C ⊣ CategoryTheory.Prod.snd ℕ C :=
   Adjunction.mkOfHomEquiv
     { homEquiv _ X :=
@@ -322,7 +320,7 @@ def constantSystemRingMap :
 
 /-- The constant system: the module `M` at every level, with identity horizontal maps.
 It is the pushforward along the projection `ℕ × C ⥤ C` of the sequence site.
-Source: Zheng, Construction 4.1 (blueprint: def-sfb-constant-coefficient-system). -/
+Source: Zheng, Construction 4.1. -/
 def constantSystemPushforward : Mod.{c, v, max c v r} J R ⥤
       Systems.{c, v, max c v r} J (constantCoefficients.{c, v, r} J R)
     (constantCoefficientTransitions.{c, v, r} J R) :=
@@ -399,7 +397,7 @@ theorem constantSystemPushforward_isConstantSystemFunctor :
       (constantSystemPushforward_transition_app_apply.{c, v, r} J R M h)⟩
 
 /-- Additivity of the constant-system functor.
-Source: Zheng, Construction 4.1 (blueprint: def-sfb-constant-coefficient-system). -/
+Source: Zheng, Construction 4.1. -/
 instance constantSystemPushforward_additive :
     (constantSystemPushforward.{c, v, r} J R).Additive where
   map_add := by
@@ -408,7 +406,7 @@ instance constantSystemPushforward_additive :
     rfl
 
 /-- Left exactness of the constant-system functor: kernels are computed sectionwise.
-Source: Zheng, Construction 4.1 (blueprint: def-sfb-constant-coefficient-system). -/
+Source: Zheng, Construction 4.1. -/
 instance constantSystemPushforward_limits :
     PreservesFiniteLimits (constantSystemPushforward.{c, v, r} J R) := by
   let T := SheafOfModules.forget.{max c v r} (ring.{c, v, max c v r}
@@ -424,7 +422,7 @@ instance constantSystemPushforward_limits :
 
 /-- Right exactness of the constant-system functor: pushforward along the continuous and
 cocontinuous projection is a left adjoint on abelian sheaves.
-Source: Zheng, Construction 4.1 (blueprint: def-sfb-constant-coefficient-system). -/
+Source: Zheng, Construction 4.1. -/
 instance constantSystemPushforward_colimits :
     PreservesFiniteColimits (constantSystemPushforward.{c, v, r} J R) := by
   have (F : (ℕ × C)ᵒᵖ ⥤ AddCommGrpCat.{max c v r}) :
@@ -450,19 +448,7 @@ instance constantSystemPushforward_colimits :
   exact preservesFiniteColimits_of_reflects_of_preserves _ T
 
 /-- The constant module system is uniquely determined and is exact.
-Source: Zheng, Construction 4.1; Stacks, Tag 0941
-(blueprint: def-sfb-constant-coefficient-system).
-
-Proof: on the product site put M(U) at (n,U), use the restriction of M on a
-vertical arrow and the identity on every horizontal arrow. The ring action is
-the original R(U)-action. The vertical sheaf condition is exactly that of M.
-Apply the same construction to morphisms. Evaluation gives the three displayed
-identities. Conversely these identities determine every section, action,
-restriction, horizontal map and component of every morphism, so extensionality
-of module presheaves and functors proves uniqueness. Kernels and sheafified
-cokernels in the sequence topos are computed componentwise. Constant systems
-therefore preserve finite limits and finite colimits; their maps preserve
-addition sectionwise. This includes the zero ring, empty site and zero module.
+Source: Zheng, Construction 4.1; Stacks, Tag 0941.
 -/
 theorem constantSystem_existsUnique :
     (∃! F : Mod.{c, v, max c v r} J R ⥤
@@ -491,32 +477,32 @@ theorem constantSystem_existsUnique :
   exact ⟨inferInstance, inferInstance, inferInstance⟩
 
 /-- The genuine diagonal functor, selected from its unique sectionwise characterization.
-Source: Zheng, Construction 4.1 (blueprint: def-sfb-constant-coefficient-system). -/
+Source: Zheng, Construction 4.1. -/
 def constantSystem : Mod.{c, v, max c v r} J R ⥤
       Systems.{c, v, max c v r} J (constantCoefficients.{c, v, r} J R)
     (constantCoefficientTransitions.{c, v, r} J R) :=
   (constantSystem_existsUnique.{c, v, r} J R).1.exists.choose
 
 /-- Additivity of the genuine constant-system functor.
-Source: Zheng, Construction 4.1 (blueprint: def-sfb-constant-coefficient-system). -/
+Source: Zheng, Construction 4.1. -/
 instance constantSystem_additive : (constantSystem.{c, v, r} J R).Additive :=
   ((constantSystem_existsUnique.{c, v, r} J R).2 _
     (constantSystem_existsUnique.{c, v, r} J R).1.exists.choose_spec).1
 
 /-- Left exactness of the genuine constant-system functor.
-Source: Zheng, Construction 4.1 (blueprint: def-sfb-constant-coefficient-system). -/
+Source: Zheng, Construction 4.1. -/
 instance constantSystem_limits : PreservesFiniteLimits (constantSystem.{c, v, r} J R) :=
   ((constantSystem_existsUnique.{c, v, r} J R).2 _
     (constantSystem_existsUnique.{c, v, r} J R).1.exists.choose_spec).2.1
 
 /-- Right exactness of the genuine constant-system functor.
-Source: Zheng, Construction 4.1 (blueprint: def-sfb-constant-coefficient-system). -/
+Source: Zheng, Construction 4.1. -/
 instance constantSystem_colimits : PreservesFiniteColimits (constantSystem.{c, v, r} J R) :=
   ((constantSystem_existsUnique.{c, v, r} J R).2 _
     (constantSystem_existsUnique.{c, v, r} J R).1.exists.choose_spec).2.2
 
 /-- Termwise localization of the exact diagonal, before any coefficient extension.
-Source: Zheng, Construction 4.1 (blueprint: def-sfb-constant-coefficient-system). -/
+Source: Zheng, Construction 4.1. -/
 def derivedConstantSystem : D.{c, v, max c v r} J R ⥤
     DS.{c, v, max c v r} J (constantCoefficients.{c, v, r} J R)
     (constantCoefficientTransitions.{c, v, r} J R) :=

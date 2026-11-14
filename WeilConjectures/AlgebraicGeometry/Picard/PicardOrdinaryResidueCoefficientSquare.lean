@@ -217,22 +217,7 @@ private theorem triangle_eq_ordinary
 -- Evaluating the square at L unfolds its tensor and ordinary coefficient isomorphisms.
 set_option maxRecDepth 2048 in
 /-- Ordinary coefficient normalization commutes with the fibre square.
-Source: Stacks Project, Tags 0096, 0D5S and 01F7.
-(blueprint: lem-picard-ordinary-residue-coefficient-square)
-
-Proof: Expand the ordinary coefficient triangles and the two coefficient
-isomorphisms alpha_W and alpha_t. Pullback functoriality distributes their
-composites. Naturality moves the tensor-to-ordinary comparison for the
-coefficient pulled back along ui through pullback composition. It cancels its
-inverse from alpha_W, and the same cancellation occurs for alpha_t. The
-remaining ordinary comparisons are the two paths around the pullback
-composition pentagon for j, b and the first projection on the one side and
-bi, jW and that projection on the other. The first projection equations and hr
-identify their composite arrows. The pseudofunctor pentagon and proof
-irrelevance identify the equality transports. Naturality then moves tau to the
-common final factor, and the unit comparison is that same final factor on both
-sides. No isomorphism on a derived object is assumed or inverted, and empty
-schemes or the zero module need no separate condition. -/
+Source: Stacks Project, Tags 0096, 0D5S and 01F7 -/
 theorem picard_ordinary_residue_coefficient_square
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

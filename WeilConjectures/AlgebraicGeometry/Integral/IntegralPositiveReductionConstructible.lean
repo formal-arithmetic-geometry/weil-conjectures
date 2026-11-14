@@ -71,25 +71,7 @@ private theorem fixedCriterion
       (j ≪≫ (_root_.DerivedCategory.homologyFunctor _ q).mapIso z)
       (isConstructible_comparisonUpperStar_obj H)
 
-/-- Positive uniformizer reduction preserves bounded finite constant-model constructibility.
-Source: blueprint integral proper direct sums, proof (1), finite reduction; the two-term
-resolution in derived Nakayama and the finite-matrix argument for integral local models
-(blueprint: lem-sfb-integral-positive-reduction-constructible).
-
-Proof: for a constructible sheaf in degree zero, the existing finite-model sheaf
-quotient theorem computes derived reduction by a two-term finite scalar matrix and
-proves quotient-linear bounded constructibility. Under the normalized exact finite
-coefficient encoding, this is equivalent to the fixed-module etale-origin property:
-transfer homology through the encoding and use boundedConstructible_of_homology for
-one direction, and exact comparison with constructible etale homology for the other.
-The etale-origin property is triangulated. Its inverse image under derived reduction
-followed by the exact encoding is therefore triangulated, since the derived scalar
-extension is the triangulated left adjoint of exact restriction of scalars. Apply
-finite truncation devissage to the bounded input K, using the degree-zero calculation
-for each constructible homology sheaf, and transfer back along the same criterion.
-The iso closure of the source sheaf property handles isomorphic homology models.
-No completeness, torsion-freeness, or finite Tor amplitude of K is used. The positive
-exponent includes n=0; zero objects and empty strata use the same truncation argument. -/
+/-- Positive uniformizer reduction preserves bounded finite constant-model constructibility. -/
 theorem integralReduction_constantModelBoundedConstructible
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

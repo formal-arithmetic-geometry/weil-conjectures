@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.ProperOpenCalculus.ProperOpenCal
 /-!
 # Coherence on a supplied proper/open staircase
 
-Source: Stacks Project, Tag 0F7K (blueprint: lem-sp-proper-open-staircase).
+Source: Stacks Project, Tag 0F7K.
 -/
 
 @[expose] public section
@@ -25,22 +25,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.ProperOpenCalculus
 
 /-- The two compositions on one supplied staircase agree.
-Source: Stacks Project, Tag 0F7K, lemma-pseudo-functor
-(blueprint: lem-sp-proper-open-staircase).
-
-Proof: Denote the three squares of the supplied Tower by A (the square for f,g),
-B (the middle square), and C (the square for g,h). The binary towers for f,gh
-and fg,h use the horizontal paste A+B and vertical paste B+C. Apply horizontal
-pasting to A+B and vertical pasting to B+C. Before applying the final proper
-and open compositors, both expressions have the common final factor gamma_B.
-Their preceding factors agree by naturality of gamma_C at the component of
- gamma_A. Whiskering by the first open and last proper functors preserves
-this equality. Naturality of the compositors moves them to the ends; pAssoc
-and jAssoc identify the two final parenthesizations. The named composite
-maps in Tower.fg_h and Tower.f_gh have the same boundaries by the tower
-commutativity equations, so proof irrelevance identifies all equality
-certificates. Extensionality of natural transformations gives the result.
-This calculation uses only the given staircase, not its existence. -/
+Source: Stacks Project, Tag 0F7K. -/
 theorem properOpen_staircase {A : Scheme.{u} → Prop}
     (F : ProperOpenCalculus.{u, v, w} A)
     (X Y Z W : {X : Scheme.{u} // A X})

@@ -26,11 +26,6 @@ import WeilConjectures.AlgebraicGeometry.RationalP1.RationalP1ProjectionNaturali
 import WeilConjectures.AlgebraicGeometry.RationalP1.RationalP1TensorShiftNaturality
 
 /-! # Normalized projective-line unit and counit on full subcategories
-
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md,
-Well-definedness (1)--(3)
-(blueprint: lem-sfb-projective-normalized-unit-counit-restriction).
 -/
 
 @[expose] public noncomputable section

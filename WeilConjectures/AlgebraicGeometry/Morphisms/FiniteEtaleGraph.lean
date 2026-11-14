@@ -37,11 +37,9 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry
 
 /-- **Rigidity of maps from a local spectrum to an étale scheme.** Let `B` be a local ring,
-`Ω` a field and `β : B →+* Ω` a local ring map. If `f : X ⟶ S` is étale and
-`u v : Spec B ⟶ X` agree after composing with `f` and after precomposing with `Spec β`, then
-`u = v`.
-
-(blueprint: `proposition-proper-direct-image-constructible-complexes`) -/
+`Ω` a field and `β: B →+* Ω` a local ring map. If `f: X ⟶ S` is étale and
+`u v: Spec B ⟶ X` agree after composing with `f` and after precomposing with `Spec β`, then
+`u = v`. -/
 theorem Scheme.eq_of_comp_eq_of_isLocalHom {B Ω : Type u} [CommRing B] [IsLocalRing B]
     [Field Ω] (β : B →+* Ω) [IsLocalHom β] {X S : Scheme.{u}} (f : X ⟶ S) [Etale f]
     (u v : Spec (.of B) ⟶ X) (hf : u ≫ f = v ≫ f)
@@ -83,13 +81,11 @@ lemma Scheme.isOpenImmersion_and_isClosedImmersion_of_comp_eq_id {X Y : Scheme.{
     infer_instance
   exact ⟨IsOpenImmersion.of_flat_of_mono s, IsClosedImmersion.of_comp s r⟩
 
-/-- **Morphisms into a finite étale scheme correspond to clopen graphs.** Let `p : U ⟶ Y` be a
-morphism and `q : V ⟶ Y` finite étale, and let `r : V ×_Y U ⟶ U` be the projection. Morphisms
-`a : U ⟶ V` with `a ≫ q = p` correspond bijectively to open subsets `W` of `V ×_Y U` which are
+/-- **Morphisms into a finite étale scheme correspond to clopen graphs.** Let `p: U ⟶ Y` be a
+morphism and `q: V ⟶ Y` finite étale, and let `r: V ×_Y U ⟶ U` be the projection. Morphisms
+`a: U ⟶ V` with `a ≫ q = p` correspond bijectively to open subsets `W` of `V ×_Y U` which are
 closed and such that `r` restricted to `W` is an isomorphism; the subset attached to `a` is the
-image of its graph `(a, 𝟙 U) : U ⟶ V ×_Y U`.
-
-(blueprint: `theorem-finite-etale-covers-proper-henselian--2`) -/
+image of its graph `(a, 𝟙 U): U ⟶ V ×_Y U`. -/
 theorem Scheme.exists_equiv_isClopen_graph {U V Y : Scheme.{u}} (p : U ⟶ Y) (q : V ⟶ Y)
     [IsFinite q] [Etale q] :
     ∃ e : {a : U ⟶ V // a ≫ q = p} ≃
@@ -150,13 +146,11 @@ theorem Scheme.exists_equiv_isClopen_graph {U V Y : Scheme.{u}} (p : U ⟶ Y) (q
       Set.range_eq_univ.mpr fun x ↦ ⟨(σ W).inv x, Scheme.inv_hom_apply _ x⟩, Set.image_univ,
       Scheme.Opens.range_ι]
 
-/-- **Graphs commute with base change.** Let `p : U ⟶ Y`, `q : V ⟶ Y` with `q` finite étale and
-`i : Y₀ ⟶ Y`. Write `U₀ = U ×_Y Y₀`, `V₀ = V ×_Y Y₀` and `j : V₀ ×_{Y₀} U₀ ⟶ V ×_Y U` for the
+/-- **Graphs commute with base change.** Let `p: U ⟶ Y`, `q: V ⟶ Y` with `q` finite étale and
+`i: Y₀ ⟶ Y`. Write `U₀ = U ×_Y Y₀`, `V₀ = V ×_Y Y₀` and `j: V₀ ×_{Y₀} U₀ ⟶ V ×_Y U` for the
 canonical map. Then the square formed by `j`, the projections to `U₀` and `U` and
-`U₀ ⟶ U` is cartesian, and for every `a : U ⟶ V` over `Y` the image of the graph of the base
-change `a₀ : U₀ ⟶ V₀` is the preimage under `j` of the image of the graph of `a`.
-
-(blueprint: `theorem-finite-etale-covers-proper-henselian--2`) -/
+`U₀ ⟶ U` is cartesian, and for every `a: U ⟶ V` over `Y` the image of the graph of the base
+change `a₀: U₀ ⟶ V₀` is the preimage under `j` of the image of the graph of `a`. -/
 theorem Scheme.isPullback_graph_baseChange {Y Y₀ U V : Scheme.{u}} (p : U ⟶ Y) (q : V ⟶ Y)
     [IsFinite q] [Etale q] (i : Y₀ ⟶ Y) :
     IsPullback (pullback.map (pullback.snd q i) (pullback.snd p i) q p (pullback.fst q i)
@@ -212,11 +206,9 @@ theorem Scheme.isPullback_graph_baseChange {Y Y₀ U V : Scheme.{u}} (p : U ⟶ 
     Set.range_eq_univ.mpr hsg.isoPullback.hom.surjective, Set.image_univ]
   exact IsOpenImmersion.range_pullbackSnd s j
 
-/-- **Ranks of clopen pieces of finite étale morphisms.** Let `q : X ⟶ S` be finite étale, let
+/-- **Ranks of clopen pieces of finite étale morphisms.** Let `q: X ⟶ S` be finite étale, let
 `(j, q₀, q, i)` be a cartesian square and let `W ⊆ X` be clopen. Then `q|_W` and `q₀|_{j⁻¹ W}`
-are finite étale, and the rank of the latter at `x` equals the rank of the former at `i x`.
-
-(blueprint: `lem-weil-pbc-finite-etale-clopen-restriction-rank`) -/
+are finite étale, and the rank of the latter at `x` equals the rank of the former at `i x`. -/
 theorem Scheme.finrank_restrict_isClopen_of_isPullback {X X₀ S S₀ : Scheme.{u}} (q : X ⟶ S)
     [IsFinite q] [Etale q] (j : X₀ ⟶ X) (q₀ : X₀ ⟶ S₀) (i : S₀ ⟶ S) (h : IsPullback j q₀ q i)
     (W : X.Opens) (hW : IsClosed (W : Set X)) :

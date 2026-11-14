@@ -103,8 +103,7 @@ private theorem summand_naturality (T : Scheme.{u})
 Source: Stacks, Cohomology on Sites, Tag 07A4.
 This is the defining summand property of totalComparison, selected by its unique
 normalized universal property. The private helpers express termwise tensor
-naturality and elementary pasting without expanding the concrete tensor data.
-(blueprint: lem-sfb-quotient-section-tensor-summand-formulas). -/
+naturality and elementary pasting without expanding the concrete tensor data. -/
 theorem section_tensor_total_summand
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]

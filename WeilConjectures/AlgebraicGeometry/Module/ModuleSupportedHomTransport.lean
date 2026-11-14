@@ -13,9 +13,8 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 
 /-! # Module-valued transport of normalized supported Hom
 
-Source: Milne, Lectures on Etale Cohomology, Section 9, Ext proof of Theorem 9.4;
-Stacks Tags 05TI and 070I
-(blueprint: lem-pur-module-supported-hom-transport).
+Source: Milne, Lectures on Etale Cohomology, Section 9, Ext proof of Theorem 9.4; Stacks Tags 05TI
+and 070I.
 -/
 
 @[expose] public noncomputable section
@@ -541,8 +540,7 @@ private theorem supportHom_transport_injective
       L d.inv I.obj R.obj e.hom a f hdf hdf').symm
 
 /-- The module-valued compatibility formula, with its derived support map supplied.
-Source: Milne, Section 9, Ext proof of Theorem 9.4; Stacks 015F and 070I
-(blueprint: lem-pur-module-supported-hom-transport). -/
+Source: Milne, Section 9, Ext proof of Theorem 9.4; Stacks 015F and 070I. -/
 def moduleSupportedHomCompatible
     {A : Type (u + 1)} [CommRing A]
     {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]
@@ -569,20 +567,7 @@ def moduleSupportedHomCompatible
 /-- Exact inverse image transports a module-valued, cocycle-normalized supported-Hom
 comparison.
 
-Source: Milne, Section 9, Ext proof of Theorem 9.4 and Example 9.5; Stacks Tags
-05TI and 070I (blueprint: lem-pur-module-supported-hom-transport).
-
-Proof: First represent the source by an injective complex I and resolve LI by an
-injective complex R. The defining base-change factorization through the derived unit
-identifies its action on cohomology with the chain map tau_I followed by S'(LI → R).
-A supported cycle comes from a unique map f from B. Evaluation naturality and the
-assumed evaluation square identify the image cycle with d inverse followed by Lf and
-the resolution map. Cocycle normalization on I and R then reduces the claim to exact
-termwise transport of single-complex cocycles. That identity follows by checking the
-single nonzero component and the canonical exact-functor single and shift comparisons.
-Cancel the derived resolution isomorphism. Finally use an injective representative of
-any bounded-below object and naturality of chi, base change and the shift comparison.
-No preservation of injectives by L or restriction on the integer degree is used. -/
+Source: Milne, Section 9, Ext proof of Theorem 9.4 and Example 9.5; Stacks Tags 05TI and 070I. -/
 theorem moduleSupportedHom_transport
     {A : Type (u + 1)} [CommRing A]
     {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]

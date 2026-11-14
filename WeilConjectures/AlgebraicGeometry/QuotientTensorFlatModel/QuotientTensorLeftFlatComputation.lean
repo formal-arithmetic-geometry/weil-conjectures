@@ -12,7 +12,6 @@ import all WeilConjectures.AlgebraicGeometry.InternalPullNormalizationExistence
 /-! # The left quotient tensor path on flat models
 
 Source: Stacks Project, Tags 03EL, 06YY, 07A4 and 0G7E.
-(blueprint: lem-sfb-quotient-tensor-left-flat-computation).
 -/
 
 @[expose] public noncomputable section
@@ -93,28 +92,7 @@ private theorem pull_normalization (a : R ⟶ S) [IsMonHom a]
 
 /-- Compute the path that balances before the two tensorators.
 Only the scalar tensor normalization at X enters this statement.
-Source: Stacks 03EL, 06YY, 07A4 and 0G7E; steps 1, 2 and 4 of
-lem-sfb-quotient-pullback-tensor-flat-model.
-(blueprint: lem-sfb-quotient-tensor-left-flat-computation).
-
-Proof: exact geometric pullback preserves flat terms and K-flatness, so
-TensorNormalized applies to the pulled-back P and Q. Naturality of bX moves the
-geometric computation maps through its two inputs. Apply that normalization.
-Identify the native comparison with leftDerivedTensorComparison using
-leftDerivedUpperStarTensor_eq_leftDerivedTensorComparison. Its defining
-counit equation replaces the geometric tensorator
-by the localized signed ordinary totalPull map. Move the scalar computation
-counit across that map by naturality. Naturality of lam at the localization
-map Q(P) tensor Q(Q) to Q(P tensor Q), followed by PullNormalized at P tensor Q,
-identifies the remaining source path with sourceCompute followed by totalBalance.
-Postcompose with the target localization tensorator throughout this calculation.
-The resulting equality is sourceCompute followed by the localized ordinaryLeft.
-Cancel that tensorator using the stated invertibility hypothesis to obtain
-ordinaryLeft followed by its inverse targetTensor. Tensor normalization moves only
-degree-zero scalars,
-so the signed differential agrees on every summand, including unbounded totals.
-No scalar tensor normalization at Y, and no equation between the two ordinary
-paths, is used. -/
+Source: Stacks 03EL, 06YY, 07A4 and 0G7E. -/
 theorem left_flat_computation
     [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules R T)]
     [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules S T)]

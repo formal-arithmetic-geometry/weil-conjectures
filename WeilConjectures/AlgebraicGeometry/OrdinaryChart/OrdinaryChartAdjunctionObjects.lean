@@ -12,9 +12,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
 
 /-! # Ordinary chart adjunctions and their counit-normalized comparisons
 
-Source: general-ring smooth purity, Proof (2), local adjunctions;
-exceptional coefficient change, Charts, ordered affine traces and etale sums.
-(blueprint: def-pur-ordinary-chart-adjunction-objects).
+Source: exceptional coefficient change, Charts, ordered affine traces and etale sums.
 
 These constructions use only ordinary etale compact supports. No site realization
 or constructible-origin choice is used to define a chart comparison.
@@ -31,8 +29,7 @@ namespace OrdinaryChart
 
 /-- The ordered affine-space left functor compared with a specified compactification.
 Every factor is the published proper/open composition or common-refinement comparison.
-The identity step uses the two exact identity functors, so no orientation is chosen.
-Source: blueprint Steps 10--11 (blueprint: def-pur-ordinary-chart-adjunction-objects). -/
+The identity step uses the two exact identity functors, so no orientation is chosen. -/
 def affineLeftIso (A : Type (u + 1)) [CommRing A] [Finite A]
     (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) :
     (c : Compactification (affineTraceProjection S d)) →
@@ -59,8 +56,7 @@ def affineLeftIso (A : Type (u + 1)) [CommRing A] [Finite A]
 
 /-- The chart right adjunction is literally sum/evaluation followed by the specified
 ordered affine-space adjunction. The inverse-image model comparison is the canonical
-exact-to-left-derived comparison.
-Source: blueprint Steps 8--11 (blueprint: def-pur-ordinary-chart-adjunction-objects). -/
+exact-to-left-derived comparison. -/
 def adjunction (A : Type (u + 1)) [CommRing A]
     (S : Scheme.{u}) [IsNoetherian S] (N : ℕ) (hA : (N : A) = 0)
     (t : Etale.OrdinaryFiniteTwistTransport A N hA)
@@ -78,8 +74,7 @@ def adjunction (A : Type (u + 1)) [CommRing A]
       (Etale.affineTraceAdjunction A N hA t D S hS d)
 
 /-- Canonical chart left comparison: graph-normalized sum extension, ordered affine
-composition, common refinement, then inverse source-open comparison.
-Source: blueprint Step 11 (blueprint: def-pur-ordinary-chart-adjunction-objects). -/
+composition, common refinement, then inverse source-open comparison. -/
 def leftIso (A : Type (u + 1)) [CommRing A] [Finite A]
     (M : Etale.EtaleCompactSupportNormalization A)
     {X S U : Scheme.{u}} [IsNoetherian X] [IsNoetherian S] [IsNoetherian U]
@@ -100,8 +95,7 @@ def leftIso (A : Type (u + 1)) [CommRing A] [Finite A]
 
 /-- The chart identification is the unique counit-preserving right-adjoint comparison
 for the preceding left comparison. It is therefore normalized by actual affine trace
-and summation over e, with no free scalar or arbitrary right-functor isomorphism.
-Source: blueprint Steps 11--12 (blueprint: def-pur-ordinary-chart-adjunction-objects). -/
+and summation over e, with no free scalar or arbitrary right-functor isomorphism. -/
 def rightIso (A : Type (u + 1)) [CommRing A] [Finite A]
     (M : Etale.EtaleCompactSupportNormalization A)
     {X S U : Scheme.{u}} [IsNoetherian X] [IsNoetherian S] [IsNoetherian U]

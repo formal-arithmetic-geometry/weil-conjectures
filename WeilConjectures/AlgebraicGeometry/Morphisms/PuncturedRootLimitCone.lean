@@ -24,19 +24,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The pointed etale neighbourhoods give a ring-colimit presentation over the base.
 
-Source: Stacks Project, Tag 0BSK; canonical structural map, Tag 03Q9.
-(blueprint: lem-sbc-pointed-etale-ring-colimit)
-
-Proof: Take the small representative category of affine pointed etale neighbourhoods.
-Its opposite-indexed global-section diagram is strictHenselizationDiagram barY, and its
-canonical colimit is strictHenselization barY. Cofilteredness follows from
-strictHenselizationAffineProperties. The structure maps from R are obtained by applying global
-sections to the neighbourhood structure morphisms and using GammaSpecIso. Their naturality
-follows from the over-category equations. The colimit legs composed with these maps equal b:
-apply Spec, use exists_strictHenselizationAffineStructuralMap and hb, and use faithfulness of Spec.
-Each neighbourhood is etale by its AffineEtale structure. Its lift of barY supplies a point
-above y: choose the zero prime of the field Omega, map it by the lift, and apply hy to the
-over-category equality. Transfer these points through the affine-spectrum isomorphisms. -/
+Source: Stacks Project, Tag 0BSK; canonical structural map, Tag 03Q9 -/
 theorem pointed_etale_ring_colimit
     (R : CommRingCat.{u})
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (barY : Spec (.of Ω) ⟶ Spec R)

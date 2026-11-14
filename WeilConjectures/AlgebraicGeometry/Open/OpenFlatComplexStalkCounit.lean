@@ -36,9 +36,7 @@ import all WeilConjectures.Algebra.Homology.KFlatScalarExtensionDerivedIso
 
 /-! # Local comparison factors
 
-Source: Stacks Project, perfect.tex, Tags 0DJ7 and 0DJ9;
-cohomology.tex, Tags 06YB and 0D5S.
-(blueprint: lem-pc-open-flat-complex-stalk-counit).
+Source: Stacks Project, Tags 0DJ7 and 0DJ9; Tags 06YB and 0D5S.
 -/
 
 @[expose] public section
@@ -50,11 +48,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Compatible ring isomorphisms identify ordinary scalar extension on complexes.
-Source: Stacks Project, Tag 06Y6; Mathlib adjoint uniqueness.
-Proof: scalar restriction along a ring isomorphism is an equivalence. The commuting
-ring square identifies the right adjoints of the two composite scalar functors.
-Take their conjugate isomorphism and apply it termwise, together with q.
-(blueprint: lem-pc-open-flat-complex-stalk-counit). -/
+Source: Stacks Project, Tag 06Y6. -/
 private theorem extensionComplexIso
     {S₀ S D₀ D : Type u}
     [CommRing S₀] [CommRing S] [CommRing D₀] [CommRing D]
@@ -113,23 +107,7 @@ private theorem tensorStalkIsoAt
 
 set_option linter.unusedVariables false in
 /-- The stalk scalar-extension counit computes the local sheaf pullback counit
-on a bounded-above flat sheaf complex, including transport of both local rings.
-
-Proof: bounded-above flatness makes K K-flat, hence the fixed sheaf pullback
-counit is invertible on K. The stalk criterion and restriction through the
-inverse open-stalk ring isomorphism make P K-flat, so the given universal scalar
-extension counit is invertible on P. The tensor-pullback stalk isomorphism,
-transported through both open-stalk ring isomorphisms, identifies ordinary
-pullback of K at xV with scalar extension of P along g.stalkMap a. The commuting
-stalk-ring square of resLE identifies the transported ring map. Passing through
-the homotopy and derived category quotient factors and exact stalk homology
-gives the target isomorphism r. Let c be the stalk of homology of the sheaf
-counit, and e the homology of the scalar extension counit. Define
-l = c ≪≫ r.symm ≪≫ e.symm; inverse cancellation proves the required equation.
-Zero complexes, zero rings and identity maps use the same identities.
-Source: Stacks Project, cohomology.tex, Lemma lemma-check-K-flat-stalks (Tag 06YB),
-Lemma lemma-derived-pullback-composition (Tag 0D5S); perfect.tex, equation-bc (Tag 0DJ7).
-(blueprint: lem-pc-open-flat-complex-stalk-counit). -/
+on a bounded-above flat sheaf complex, including transport of both local rings. -/
 theorem openFlatComplex_stalk_counit
     {B A : Scheme.{u}} (g : A ⟶ B) (a : A)
     (S : B.Opens) (V : A.Opens) (hS : g a ∈ S) (hV : a ∈ V)

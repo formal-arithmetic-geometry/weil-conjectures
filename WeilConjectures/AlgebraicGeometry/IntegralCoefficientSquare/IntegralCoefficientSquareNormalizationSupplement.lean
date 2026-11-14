@@ -159,9 +159,7 @@ import WeilConjectures.CategoryTheory.ModuleObjects.SixFunctors.ExtensionIsoQuot
 
 /-! # Normalized constant-to-integral coefficient pullback
 
-Source: blueprint main-20261015, lemma-inverse-image-tensor-product, first paragraph and
-Comparison with the Stacks Project; Stacks Tags 093M and 0G7E
-(blueprint: lem-sfb-integral-coefficient-square-normalization).
+Source: first paragraph and Comparison with the Stacks Project; Stacks Tags 093M and 0G7E.
 
 Constant coefficients are represented by their canonical pullback from the point;
 constantSchemeIso identifies them with ordinary constant sheaves. All complexes are
@@ -184,44 +182,36 @@ namespace AlgebraicGeometry.ProEtale.IntegralCoefficientSquare
 variable (A : Type u) [CommRing A] [TopologicalSpace A] [IsTopologicalRing A]
 
 /-- The discrete constant ring on the point, with its existing monoidal ring structure.
-Source: Stacks 093J (blueprint: lem-sfb-integral-coefficient-square-normalization). -/
+Source: Stacks 093J. -/
 abbrev constantPoint :=
   (constantSheaf (coherentTopology Profinite.{u}) Ab.{u + 1}).obj
     (AddCommGrpCat.of (ULift.{u + 1} A))
 
-/-- Internal modules over the specified coefficients pulled back to a scheme.
-Source: blueprint, pulled-back coefficients
-(blueprint: lem-sfb-integral-coefficient-square-normalization). -/
+/-- Internal modules over the specified coefficients pulled back to a scheme. -/
 abbrev Modules (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ]
     (T : Scheme.{u}) := Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
       (condensedRingObj Λ T)
 
-/-- The constant-to-continuous map pulled back from the point; no completion choice.
-Source: blueprint, constant-function map
-(blueprint: lem-sfb-integral-coefficient-square-normalization). -/
+/-- The constant-to-continuous map pulled back from the point; no completion choice. -/
 abbrev scalar (T : Scheme.{u}) := AdmissibleScalarRealization.scalarMap A T
 
 /-- Restriction along the specified constant-function map, on all modules.
-Source: Stacks 03CS (blueprint: lem-sfb-integral-coefficient-square-normalization). -/
+Source: Stacks 03CS. -/
 abbrev restriction (T : Scheme.{u}) :
     Modules (Profinite.continuousCoefficientRingObj A) T ⥤ Modules (constantPoint A) T :=
   Mod.comap (scalar A T)
 
 /-- Termwise restriction, retaining the original differential.
-Source: Stacks 06YN (blueprint: lem-sfb-integral-coefficient-square-normalization). -/
+Source: Stacks 06YN. -/
 abbrev restrictComplex (T : Scheme.{u}) :=
   (restriction A T).mapHomologicalComplex (.up ℤ)
 
-/-- The tensor-defined module pullback, applied in every degree.
-Source: blueprint, module pullback
-(blueprint: lem-sfb-integral-coefficient-square-normalization). -/
+/-- The tensor-defined module pullback, applied in every degree. -/
 abbrev pullComplex (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (g : X ⟶ Y) :=
   (CondensedRing.upperStar Λ g).mapHomologicalComplex (.up ℤ)
 
-/-- The specified extension-to-inverse-image identification on underlying abelian sheaves.
-Source: blueprint, Cartesian coefficients
-(blueprint: lem-sfb-integral-coefficient-square-normalization). -/
+/-- The specified extension-to-inverse-image identification on underlying abelian sheaves. -/
 def underlyingIso (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (g : X ⟶ Y) (M : Modules Λ Y) :
     ((CondensedRing.upperStar Λ g).obj M).X ≅
@@ -230,9 +220,7 @@ def underlyingIso (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     ((cartesianCoefficientPullbackIso Λ g).app M)
 
 /-- Both generator formulas fixing the underlying Cartesian scalar-extension isomorphism.
-The first sends r tensor h to alpha inverse(r)h; the second sends h to 1 tensor h.
-Source: blueprint, scalar-extension calculation
-(blueprint: lem-sfb-integral-coefficient-square-normalization). -/
+The first sends r tensor h to alpha inverse(r)h; the second sends h to 1 tensor h. -/
 def GeneratorNormalization (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (g : X ⟶ Y) : Prop :=
   ∀ M : Modules Λ Y,
@@ -246,8 +234,7 @@ def GeneratorNormalization (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 
 
 /-- K-flatness and flat terms in the existing section-module presentation.
 This uses the recorded predicates, rather than another definition of K-flatness or flatness.
-Source: Stacks 06YN and 03ER
-(blueprint: lem-sfb-integral-coefficient-square-normalization). -/
+Source: Stacks 06YN and 03ER. -/
 def FlatKFlat (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (T : Scheme.{u})
     (P : CochainComplex (Modules Λ T) ℤ) : Prop :=
@@ -260,8 +247,7 @@ def FlatKFlat (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 
 /-- The actual completed ring, identified by its constant scalar projections, with its
 normalized quotient squares. The pushout is precisely the ring quotient by pi^(n+1).
-Source: Stacks 093M; blueprint integral-limit paragraph
-(blueprint: lem-sfb-integral-coefficient-square-normalization). -/
+Source: Stacks 093M. -/
 def RingAssertions (p : A) (T : Scheme.{u}) : Prop :=
   ∃ e : InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}
       (Scheme.ProEt.topology T)
@@ -294,8 +280,7 @@ def RingAssertions (p : A) (T : Scheme.{u}) : Prop :=
 /-- All clauses for the actual coefficient ring, square, chain comparison and flat K-flat
 pullbacks. The natural isomorphism is on whole cochain complexes, with normalization in
 all integer degrees; there is no boundedness, completeness or constructibility condition.
-Source: blueprint lemma-inverse-image-tensor-product; Stacks 093M and 0G7E
-(blueprint: lem-sfb-integral-coefficient-square-normalization). -/
+Source: Stacks 093M and 0G7E. -/
 def Assertions (p : A) {X Y : Scheme.{u}} (g : X ⟶ Y) : Prop :=
   RingAssertions A p X ∧ RingAssertions A p Y ∧
   (∀ T : Scheme.{u}, T = X ∨ T = Y → SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1}

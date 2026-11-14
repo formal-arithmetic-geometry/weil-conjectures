@@ -178,9 +178,7 @@ free generators `fᵃ ⊗ fᵇ` and `fᵃ⁺ᵇ`, and the transition functions a
 `fᵇ = d • gᵇ` on `D₊(f) ∩ D₊(g)`, then `fᵃ ⊗ fᵇ = (c d) • gᵃ ⊗ gᵇ` and `fᵃ⁺ᵇ = (c d) • gᵃ⁺ᵇ`.
 The two modules are then isomorphic by `Scheme.Modules.nonempty_iso_of_isFreeGenerator`.
 
-TODO: construct the canonical isomorphism sending `e^{(a)} ⊗ e^{(b)}` to `e^{(a+b)}`.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality`) -/
+TODO: construct the canonical isomorphism sending `e^{(a)} ⊗ e^{(b)}` to `e^{(a+b)}`. -/
 theorem nonempty_tensorObj_twist_iso (h : ∀ x : Proj 𝒜, ∃ f ∈ 𝒜 1, x ∈ Proj.basicOpen 𝒜 f)
     (a b : ℤ) : Nonempty (twist 𝒜 a ⊗ twist 𝒜 b ≅ twist 𝒜 (a + b)) := by
   let U (i : {f : A // f ∈ 𝒜 1}) : (Proj 𝒜).Opens := Proj.basicOpen 𝒜 i.1

@@ -7,8 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Proj.ProjScalarExtensionTwistData
 
-/-! Degree-zero unit part of the normalized scalar-extension twist laws.
-(blueprint: lem-sfb-proj-scalar-extension-twist-fraction-laws-unit). -/
+/-! Degree-zero unit part of the normalized scalar-extension twist laws. -/
 
 @[expose] public section
 
@@ -25,12 +24,7 @@ namespace AlgebraicGeometry.Proj
 attribute [local irreducible] tensorPullback tensorPullbackObj tensorPullbackSection
 
 /-- The degree-zero fraction formula is the structural pullback map.
-Source: Stacks Project, Constructions, Tags 01MY and 01N2.
-Proof: normalization on the fraction `1/1` fixes the image of the unit section.
-Compose the normalized adjunction unit with the comparison to obtain a morphism
-from the structure sheaf to the pushforward of the zeroth twist. Its linearity
-then determines the image of every section from the image of one.
-(blueprint: lem-sfb-proj-scalar-extension-twist-fraction-laws-unit). -/
+Source: Stacks Project, Constructions, Tags 01MY and 01N2. -/
 theorem scalarExtension_twist_unit
     {A B : Type u} [CommRing A] [CommRing B]
     {σ τ : Type u} [SetLike σ A] [AddSubgroupClass σ A]

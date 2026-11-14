@@ -10,8 +10,7 @@ import Mathlib.CategoryTheory.Preadditive.Comma
 import all WeilConjectures.AlgebraicGeometry.Relative.RelativeCocycleCoordinates
 import all WeilConjectures.CategoryTheory.Sites.SmoothPurity.BinaryTorsorQuotient
 /-! # Addition of relative torsor classes
-Source: Stacks Project, Tag 03AJ, injective lifting-torsor argument.
-(blueprint: lem-pur-relative-torsor-pairing-addition). -/
+Source: Stacks Project, Tag 03AJ, injective lifting-torsor argument. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false

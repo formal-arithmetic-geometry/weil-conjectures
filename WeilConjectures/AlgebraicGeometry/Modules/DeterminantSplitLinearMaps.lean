@@ -17,9 +17,6 @@ import Mathlib.Data.Finset.Piecewise
 
 /-!
 # Linear part of the split determinant construction
-
-Source: blueprint `theorem-riemann-roch-coherent-serre-duality--1`, proof of (*), determinant
-paragraph. (blueprint: lem-sc-split-determinant-linear-maps).
 -/
 
 @[expose] public section
@@ -433,29 +430,7 @@ private theorem wedge_lifts_eq {X : Scheme.{v}} {A B : X.Modules}
   simpa using h Finset.univ
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Construct linear wedge maps without asserting invertibility or a rank for the quotient.
-Source: blueprint `theorem-riemann-roch-coherent-serre-duality--1`, proof of (*), determinant
-paragraph, construction and independence of lifts (blueprint: lem-sc-split-determinant-linear-maps).
-
-Proof: On the restricted scheme U, take the linear sheaf splitting
-`b ↦ e.inv (0,b)`. Wedge its images with the images under f, first on exterior
-presheaves by the alternating and tensor universal properties, then sheafify.
-This constructs a sheaf morphism on U; evaluate it on each W contained in U,
-using the restriction identifications for exterior powers and tensor sheaves.
-For any supplied lift l(b), its difference from the splitting lift lies in the
-first summand, hence is f(a') on W. Expand the difference of the concatenated
-wedges one entry at a time by multilinearity. Each extra term contains r₁+1
-factors from the rank-r₁ sheaf X₁ and vanishes by the rank wedge-zero lemma.
-Consequently the evaluated linear maps have the displayed formula even for
-nonlinear lifts. Naturality follows from the constructed sheaf morphism. For
-uniqueness, any natural family defines a morphism of module sheaves on U.
-Locally, sections of the exterior sheaves are sums of wedges and sections of
-the tensor sheaf are sums of tensors, by local surjectivity of the sheafification
-units. Two morphisms with the formula agree on these local generators and
-therefore on all sections by separatedness. Thus the natural family is unique.
-No freeness or rank hypothesis on X₃ is needed: only the first
-block is used for lift independence. Empty blocks use the degree-zero unit;
-empty opens and the zero ring give the same construction. -/
+/-- Construct linear wedge maps without asserting invertibility or a rank for the quotient. -/
 theorem determinant_split_linear_maps_exists {X : Scheme.{v}}
     (S : ShortComplex X.Modules) (r₁ r₂ r₃ : ℕ) (hr : r₂ = r₁ + r₃)
     [S.X₁.IsFiniteLocallyFreeOfRank r₁]

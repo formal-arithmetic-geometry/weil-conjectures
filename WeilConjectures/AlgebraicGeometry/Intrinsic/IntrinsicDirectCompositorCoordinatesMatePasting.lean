@@ -81,7 +81,6 @@ noncomputable def sfTransportRight
 
 The source is the ambient mate-pasting calculation and its equivalence-unit normalization;
 the direct-image comparison uniqueness equations identify the displayed morphisms.
-(blueprint: lem-sf-intrinsic-direct-compositor-coordinates-k-injective-mate-pasting).
 -/
 theorem sfIntrinsicDirectCompositorCoordinates_ambient_normalization
     (A : Type u) [CommRing A] [Finite A]
@@ -114,7 +113,6 @@ theorem sfIntrinsicDirectCompositorCoordinates_ambient_normalization
 
 The source is the composite-adjunction conjugate calculation after transporting the fixed-scalar
 right comparison through the intrinsic equivalence and cancelling the equivalence unit and counit.
-(blueprint: lem-sf-intrinsic-direct-compositor-coordinates-k-injective-mate-pasting).
 -/
 theorem sfIntrinsicDirectCompositorCoordinates_ambient_to_intrinsic
     (A : Type u) [CommRing A] [Finite A]

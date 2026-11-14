@@ -9,9 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Kummer.KummerSheafConclusion
 public import WeilConjectures.AlgebraicGeometry.Kummer.KummerSheafClassCondition
 import WeilConjectures.AlgebraicGeometry.Kummer.KummerTransportAssembly
 
-/-! # Assembly over a fixed scheme before diagonal specialization
-Source: diagonal tower system proof, steps (3)--(4).
-(blueprint: lem-sfb-sheaf-kummer-transport-assembly). -/
+/-! # Assembly over a fixed scheme before diagonal specialization. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -32,18 +30,7 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext normalizedBoundaryTarge
   cartierResidueReducedPro diagonalFiniteToPadic diagonalForget diagonalScalarExtension
   diagonalScalarAdjunction diagonalIntegralBoundary
 
-/-- Assemble arbitrary supported sources and finite-class predicates on a scheme.
-Source: the normalized source, strict target and arbitrary-arrow calculation in
-steps (3)--(4) of the diagonal tower system proof
-(blueprint: lem-sfb-sheaf-kummer-transport-assembly).
-
-Proof: use the actual strict Kummer target on W. Combine each assumed source
-normalization with its generator equation and apply the abstract transport
-assembly. Its scalar-adjunct implication supplies the finite-class predicate.
-The roots normalization and strict target are retained without choosing maps
-independently at different levels. No Cartier divisor, diagonal surface, pole
-extension or canonical finite Cartier class is part of this formal assembly.
-The sheaf coefficient interfaces are shared before substituting a geometric W. -/
+/-- Assemble arbitrary supported sources and finite-class predicates on a scheme. -/
 theorem sheaf_kummer_transport_assembly (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     (hW : IsUnit (ℓ : Γ(W, ⊤)))
     [HasDerivedCategory.{u + 1} (DiagonalAb W)]

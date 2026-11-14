@@ -15,9 +15,6 @@ import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
 import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleSiteComparisonFiniteLevel
 
 /-! # Triangulation of the compatible uniform integral category
-
-Source: Weil blueprint, proper base change, constructible-complete restriction
-(blueprint: lem-weil-pbc-uniform-complete-triangulated).
 -/
 
 @[expose] public noncomputable section
@@ -137,27 +134,7 @@ private theorem uniformProfileLocus
           toIsTriangulatedClosed₂ := htri }
 
 /-- The compatible uniform completed integral category is an isomorphism-closed
-triangulated full subcategory of its actual ambient derived category.
-Source: blueprint proper base change, constructible-complete restriction
-(blueprint: lem-weil-pbc-uniform-complete-triangulated).
-Proof: `pbcExactCompletionData` presents intrinsic completeness as invertibility of
-an exact completion unit that commutes with shifts. Naturality transports this property
-across isomorphisms; the unit on a distinguished triangle is a triangle morphism, so
-invertibility of its two outside components implies invertibility of the middle one.
-Thus `exactUnitLocus` proves closure of the complete objects.
-
-For each positive quotient, exact derived reduction followed by exact restriction to
-constant coefficients preserves distinguished triangles and shifts. The finite-level
-constructible-cohomology property is triangulated by
-`constructibleCoefficientHomology_isTriangulated`. A uniform cohomological interval
-shifts by subtracting the shift degree. For a triangle with two outside vertices in
-intervals [a1,b1] and [a3,b3], its middle vertex lies in
-[min a1 a3,max b1 b3], by the t-structure extension bounds. The same interval works
-at every quotient. This proves `uniformProfileLocus`, including its zero and isomorphism
-closure. The analytic equivalence `pbcUniformReductionCriterion` identifies that locus
-with the common local-model and compatible-etale-origin clauses. The predicate in the
-statement is therefore the intersection of these two triangulated, isomorphism-closed
-loci. -/
+triangulated full subcategory of its actual ambient derived category. -/
 theorem pbcIntegralUniformComplete_isTriangulated (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (T : Scheme.{u}) [IsNoetherian T]

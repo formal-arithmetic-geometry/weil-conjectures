@@ -30,9 +30,7 @@ set_option linter.privateModule false
 /-!
 # Etale-to-pro-etale comparison of the direct-image projection morphism
 
-Source: Stacks Project, Tags 09A6, 07A4 and 0E48; main-20261015 blueprint,
-finite proper base change proof, paragraph (3), canonical-map transport
-(blueprint: lem-sfb-projection-comparison-etale-proetale).
+Source: Stacks Project, Tags 09A6, 07A4 and 0E48.
 
 The two routes are components of a single natural transformation on the full
 subcategory of admissible pairs. This records both their equality and its

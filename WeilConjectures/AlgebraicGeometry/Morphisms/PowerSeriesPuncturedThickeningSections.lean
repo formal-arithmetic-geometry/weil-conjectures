@@ -17,7 +17,6 @@ import WeilConjectures.RingTheory.PowerSeriesCombinedIdealCoefficients
 # Compatible sections of punctured power-series thickenings
 
 Source: Stacks Project, Tag 0EY9, first displayed inverse-limit calculation.
-(blueprint: lem-sbc-power-series-punctured-thickening-sections)
 -/
 
 @[expose] public section
@@ -30,27 +29,7 @@ namespace AlgebraicGeometry.Scheme
 section determine a unique power series, by their monomial coefficients.
 
 Source: Stacks Project, Tag 0EY9, first displayed calculation, using depth-two
-Hartogs (Tag 0BK0).
-(blueprint: lem-sbc-power-series-punctured-thickening-sections)
-
-Proof: Write B = A[[x_1,...,x_d]], I = ker(constantCoeff), and let U be the
-punctured spectrum of A. Depth-two Hartogs gives Gamma(U,O_U) = A. The
-quotient B/I^(n+1) is finite free over A with basis the monomials of total
-degree at most n, and its spectrum has the same underlying space as Spec A.
-The inverse image of V in this quotient is therefore the thickening of U.
-Push its structure sheaf to U along the affine constants morphism: it is the
-finite direct sum of O_U indexed by those monomials. Taking sections gives
-B/I^(n+1), compatibly with the quotient maps as n varies. Thus every
-compatible family s gives compatible truncated polynomials. For a monomial
-of degree k take its coefficient in the k-th truncated polynomial.
-Compatibility makes that coefficient unchanged at every larger index.
-These coefficients define a power series b, whose truncation at every n
-is the polynomial belonging to s n. Under the section identifications,
-this truncation is exactly the canonical restriction displayed below.
-If two power series have all these restrictions equal, each coefficient
-is equal by choosing n at least its degree; power-series extensionality
-makes them equal. This calculation concerns the thickenings alone and
-does not assume the comparison of sections on V or on a cover of V. -/
+Hartogs (Tag 0BK0). -/
 theorem existsUnique_powerSeries_punctured_thickening_sections
     (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]
     (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth (R := A) A)

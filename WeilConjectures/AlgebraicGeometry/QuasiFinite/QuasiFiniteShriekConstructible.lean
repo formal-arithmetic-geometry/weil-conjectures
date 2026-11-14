@@ -21,9 +21,8 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusEx
 /-!
 # Constructible cohomology under quasi-finite lower shriek
 
-Source: Stacks Project, More on Etale Cohomology, Tags 0GK3 and 0GKM,
-finite-ring bounded-below specialization
-(blueprint: lem-weil-pbc-etale-quasifinite-shriek-constructible).
+Source: Stacks Project, More on Etale Cohomology, Tags 0GK3 and 0GKM, finite-ring bounded-below
+specialization.
 -/
 
 @[expose] public section
@@ -35,26 +34,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Etale
 
 /-- Quasi-finite finitely presented lower shriek preserves constructible cohomology.
-Source: Stacks Project, Tags 0GK3 and 0GKM
-(blueprint: lem-weil-pbc-etale-quasifinite-shriek-constructible).
-
-Proof plan:
-1. Use `lem-weil-pbc-quasifinite-fp-finite-factorization` to factor the morphism
-   as a quasi-compact open immersion followed by a finite finitely presented morphism.
-   The latter is proper by `lem-weil-pbc-finite-morphism-permanence`.
-2. Extension by zero preserves constructibility: transport the given strata through the
-   open immersion and add its closed complement with constant zero value. The old parts
-   remain constructible by retrocompactness. The restrictions are identified using
-   `lem-weil-pbc-extension-by-zero-unit-iso`, `lem-weil-pbc-extension-by-zero-stalks`,
-   `lemma-openclosed-stalk-upperstar`, and
-   `lem-weil-pbc-sets-etale-iso-on-geometric-stalks`.
-3. Finite direct image and open extension by zero are exact by
-   `lemma-weil-pbc-finite-direct-image-exact` and
-   `lem-weil-pbc-extension-by-zero-exact`. Thus cohomology in degree q is the finite
-   pushforward of the extension by zero of the original cohomology in degree q.
-   Exactness preserves the lower bound and needs no upper bound or Tor hypothesis.
-4. Apply `lem-weil-pbc-finite-fp-pushforward-constructible` in each degree, then
-   `lem-weil-pbc-etale-shriek-compactification-independence` to pass to every compactification.
+Source: Stacks Project, Tags 0GK3 and 0GKM.
 -/
 theorem constructibleCohomology_lowerShriek_of_quasiFinite
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
@@ -114,13 +94,7 @@ theorem constructibleCohomology_lowerShriek_of_quasiFinite
       (e₃ ≪≫ e₁ ≪≫ e₂).symm)
 
 /-- The closed-immersion consequence of quasi-finite constructibility.
-Source: Stacks Project, Tags 035C, 01TD, 0GK3 and 0GKM
-(blueprint: lem-weil-pbc-etale-quasifinite-shriek-constructible).
-
-Proof plan (step 5 of the node): a closed immersion is finite by
-`lem-weil-pbc-closed-immersion-finite`, hence of finite type and separated. Its fibres are
-empty or spectra of residue fields, so every fibre point is isolated. Apply the preceding
-quasi-finite statement, retaining finite presentation and the qcqs scheme assumptions. -/
+Source: Stacks Project, Tags 035C, 01TD, 0GK3 and 0GKM. -/
 theorem constructibleCohomology_lowerShriek_of_isClosedImmersion
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {T B : Scheme.{u}} [CompactSpace T] [QuasiSeparatedSpace T]

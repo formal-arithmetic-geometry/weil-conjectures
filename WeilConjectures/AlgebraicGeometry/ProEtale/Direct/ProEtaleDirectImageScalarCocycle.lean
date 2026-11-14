@@ -17,9 +17,7 @@ import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Coefficient cocycle for the ambient direct-image mate
 
-Source: blueprint main-20261015, sec-smooth-purity/sk-lem-sp-reduction,
-sk-lem-sp-reduction-direct-image.proof.md, Step 4; Stacks Tags 07A7 and 0E47
-(blueprint: lem-sp-proetale-direct-image-scalar-cocycle).
+Source: Stacks Tags 07A7 and 0E47.
 -/
 
 @[expose] public section

@@ -123,10 +123,7 @@ lemma twist_presheaf_map_twistGenerator {s : Set n} {i : n} (hi : i ∈ s) (m : 
   exact h.symm
 
 /-- **The product of Laurent monomial sections**: over `U_s` (`s` nonempty), the canonical
-isomorphism `𝒪(a) ⊗ 𝒪(b) ≅ 𝒪(a + b)` sends `xᵉ ⊗ xᵉ'` to `x^{e + e'}`.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality`,
-`theorem-riemann-roch-coherent-serre-duality--2`) -/
+isomorphism `𝒪(a) ⊗ 𝒪(b) ≅ 𝒪(a + b)` sends `xᵉ ⊗ xᵉ'` to `x^{e + e'}`. -/
 lemma twistTensorIso_hom_app_twistMonomialSection {s : Set n} (hs : s.Nonempty) {a b : ℤ}
     (e : laurentExponents s a) (e' : laurentExponents s b) :
     (twistTensorIso n S a b).hom.app (toProjInt n S ⁻¹ᵁ basicOpenInt n s)
@@ -144,9 +141,7 @@ omit [Fintype n] in
 variable {S} in
 /-- **Multiplication by a global section** `t` of `𝒪(a)`: the morphism `𝒪(b) ⟶ 𝒪(c)`, for
 `a + b = c`, given by `x ↦ t x`, i.e. `𝒪(b) ≅ 𝒪 ⊗ 𝒪(b) ⟶ 𝒪(a) ⊗ 𝒪(b) ≅ 𝒪(a + b)` through the
-canonical isomorphism `twistTensorIso` of `theorem-riemann-roch-coherent-serre-duality`.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
+canonical isomorphism `twistTensorIso` of `theorem-riemann-roch-coherent-serre-duality`. -/
 def twistMulHom {a b c : ℤ} (h : a + b = c) (t : Γ(twist n S a, ⊤)) :
     twist n S b ⟶ twist n S c :=
   (λ_ (twist n S b)).inv ≫ (homOfGlobalSection _ t ▷ twist n S b) ≫

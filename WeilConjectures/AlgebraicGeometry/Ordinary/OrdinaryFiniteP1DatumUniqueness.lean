@@ -562,10 +562,6 @@ import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1DiagonalBaseChange
 import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteClassComparison
 
 /-! # The normalized projective-line datum is unique
-
-Source: blueprint projective-line adjunction and vector integration, normalized
-Kummer class, decomposition components and counit.
-(blueprint: lem-amb-ordinary-finite-p1-datum-uniqueness).
 -/
 
 @[expose] public noncomputable section
@@ -577,16 +573,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
 /-- Every field of the projective-line datum is fixed by its normalization.
-Source: blueprint projective-line decomposition and adjunction; vector integration.
-(blueprint: lem-amb-ordinary-finite-p1-datum-uniqueness).
-
-Proof: the free-constant-coefficient Ext comparison makes the Chern arrow unique
-from its Kummer class. The two prescribed components then identify the decomposition.
-The reordered proper projection map is invertible, so the counit normalization
-identifies each component of the two counits. An adjunction is determined by its
-counit. Function extensionality, isomorphism extensionality and proof irrelevance
-identify all fields of the datum. No connectedness or nonzero-coefficient hypothesis
-is used, and rank plays no role. -/
+Source: vector integration. -/
 theorem ordinaryFiniteP1Datum_unique (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤)))
@@ -630,15 +617,7 @@ private theorem property_of_unique_parameters
   obtain rfl := hF j b a
   exact hb
 
-/-- The normalization already forces base change, without assuming it as extra data.
-Source: blueprint projective-line adjunction, base-change clause.
-(blueprint: lem-amb-ordinary-finite-p1-datum-uniqueness).
-
-Proof: choose the normalized family with base change supplied by the existing
-projective-line adjunction theorem. Tate-transport uniqueness identifies its
-transport with the specified one. Pointwise datum uniqueness identifies its
-family with the specified family. Transport the proved base-change equations
-through these equalities. This chooses no new mathematical object. -/
+/-- The normalization already forces base change, without assuming it as extra data. -/
 theorem ordinaryFiniteP1BaseChange_of_normalization (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
     (t : OrdinaryFiniteTwistTransport A N hA)

@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.OpenRestrictionKFlatModel
 
 /-! # Termwise finite-free models under localized derived pullback
 Source: Stacks Project, Tags 06YD, 06YJ and 08DW.
-(blueprint: lem-pc-localized-mixed-pullback-finite-free-model).
 -/
 
 @[expose] public section
@@ -27,10 +26,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Finite free terms are flat.
-Source: Stacks Project, Tag 03ER.
-Proof: finite free sheaves are finite coproducts of the unit, and tensoring with the
-unit is exact; exactness is preserved by finite coproducts.
-This is a private elementary step of the finite-free model proof. -/
+Source: Stacks Project, Tag 03ER. -/
 private theorem finiteFreeTerms_are_flat
     {T : Scheme.{u}}
     (P : CochainComplex (SheafOfModules.{u} (moduleRings T.toRingedSpace)) ℤ)
@@ -78,23 +74,7 @@ private theorem tensor_derived_model {X Y : Scheme.{u}} (g : X ⟶ Y)
     DerivedCategory.Q.mapIso ((NatIso.mapHomologicalComplex e (.up ℤ)).app P)⟩
 
 /-- Compute the localized derived pullback of an exact open restriction termwise.
-Source: Stacks Project, Tags 06YD, 06YJ and 08DW.
-Proof: the finite free terms of P are flat, including rank zero, and the bounded-above
-complex P is K-flat by Tag 06YD. Exact restriction to W preserves its bound and
-identifies its terms with finite free modules on W of the same ranks, so the
-restricted complex is also K-flat. The localization uniqueness isomorphism intertwines
-Qh, and quotientCompQhIso converts it to Q. The exact-functor factorization identifies
-the transported restriction of Q(P) with Q of the termwise restricted complex in the
-standard localization on W. Apply flatComplexDerivedPullback to this restricted
-complex and g, then use its homotopy-quotient factorization to identify the answer
-with Q of termwise tensor pullback. The tensor pullback composition isomorphism and
-the identification of open restriction with open tensor pullback identify this
-complex with pullback along g followed by W.ι. The exact inverse overEquiv V and its
-factorization transport this identification to the localized module site. Finally
-map the supplied natural isomorphism eL termwise and through Q. These operations
-are valid for any bound, for empty opens and for zero complexes; no morphism p or
-coefficient sheaf M occurs in this assertion.
-(blueprint: lem-pc-localized-mixed-pullback-finite-free-model). -/
+Source: Stacks Project, Tags 06YD, 06YJ and 08DW. -/
 theorem localizedMixedDerivedPullback_finiteFree_model
     {S T : Scheme.{u}}
     [HasDerivedCategory.{wT}

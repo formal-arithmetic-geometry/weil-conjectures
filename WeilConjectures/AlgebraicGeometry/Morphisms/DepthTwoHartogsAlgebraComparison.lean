@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.DepthTwoHartogsRestriction
 /-! # Hartogs comparison with an actual algebra pushforward
 
 Source: Stacks Project, Tag 0E9I.
-(blueprint: lem-sbc-depth-two-hartogs-algebra-comparison)
 -/
 
 @[expose] public section
@@ -92,24 +91,7 @@ private theorem algebra_stalk_linearEquiv {L : Scheme.{u}} (B : L.CommAlgebraShe
 /-- Hartogs identifies a supplied coherent depth-two extension with the actual
 pushforward, including the scalar-compatible comparison of ring-valued stalks.
 
-Source: Stacks Project, Tag 0E9I; stalks as filtered colimits, Tag 009E.
-(blueprint: lem-sbc-depth-two-hartogs-algebra-comparison)
-
-Proof: Apply isIso_restrictAdjunction_unit_of_depth_two (Tag 0E9I) to N.
-The algebra's underlying module is definitionally the direct image of the
-structure module along f followed by j. The composition isomorphism exhibits
-it as an object in the essential image of j_*, so its restriction-adjunction
-unit is invertible by full faithfulness. Push forward the supplied restriction
-isomorphism and compose it with the unit for N and the inverse unit for B. On stalks apply
-the module stalk functor to this isomorphism. Forgetting the rings of the
-algebra sheaf to abelian groups commutes with the filtered colimit defining
-the stalk, giving the additive comparison with the CommRingCat-valued stalk.
-Its scalar compatibility follows on germs from the structure sheaf map:
-the germ of r times the germ of b is the germ of r*b. Every scalar and vector
-have representatives on a common neighbourhood, so the comparison is linear.
-The inverse is linear by bijectivity. This uses no finiteness or etaleness of f
-and no boundary depth assumption on the base ring. Empty stalks and empty
-schemes obey the same functorial comparisons. -/
+Source: Stacks Project, Tag 0E9I; stalks as filtered colimits, Tag 009E. -/
 theorem depth_two_hartogs_algebra_comparison
     {L : Scheme.{u}} [IsLocallyNoetherian L] (U : L.Opens)
     {X : Scheme.{u}} (f : X ⟶ U.toScheme) (N : L.Modules)

@@ -15,7 +15,6 @@ import all WeilConjectures.AlgebraicGeometry.Tensor.TensorSinglePullbackComposit
 /-! # Composition of derived structure-sheaf normalization
 
 Source: Stacks Project, Tags 08HY and 0D5S.
-(blueprint: lem-sc-picard-derived-unit-normalization-composition)
 -/
 
 @[expose] public section
@@ -93,8 +92,7 @@ private theorem singlePullback_naturality
 end Modules
 
 /-- The derived structure-sheaf normalization, with its actual unit comparisons.
-Source: Stacks Project, Tag 0D5S.
-(blueprint: def-sc-picard-derived-unit-normalization) -/
+Source: Stacks Project, Tag 0D5S. -/
 @[irreducible]
 def picardDerivedUnitNormalization (W : Scheme.{v}) :
   ∀ {V : Scheme.{v}} (r : V ⟶ W),
@@ -117,20 +115,7 @@ def picardDerivedUnitNormalization (W : Scheme.{v}) :
 
 /-- Derived structure-sheaf normalization respects composition of base maps.
 There is no direct image, coefficient module, fibre product or test section.
-Source: Stacks Project, Tag 0D5S and Tag 08HY.
-(blueprint: lem-sc-picard-derived-unit-normalization-composition)
-
-Proof: Apply the defining left-derived composition factorization to O_W[0].
-The canonical single-pullback composition identity identifies the derived
-comparison followed by the single comparison with the successive single
-comparisons followed by ordinary pullback composition. Naturality moves the
-ordinary structure-sheaf map past the second single comparison. The ordinary
-structure-sheaf composition law identifies the resulting map with the unit
-map for the composite. Transport along h by equality elimination. Thus
-Li(e_t.hom) followed by s_i and u_i equals C.hom followed by e_t'.hom.
-Cancel the invertible structure-sheaf comparisons to get the stated inverse
-formula. Only structure-sheaf maps are inverted; identities and empty schemes
-satisfy the same calculation. -/
+Source: Stacks Project, Tag 0D5S and Tag 08HY. -/
 theorem picardDerivedUnitNormalization_comp
     {W T T' : Scheme.{v}} (i : T' ⟶ T) (t : T ⟶ W) (t' : T' ⟶ W)
     (h : i ≫ t = t') :

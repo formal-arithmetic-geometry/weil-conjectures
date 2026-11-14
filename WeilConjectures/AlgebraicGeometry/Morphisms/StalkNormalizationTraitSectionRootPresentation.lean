@@ -26,7 +26,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.StalkNormalizationTraitSectio
 # Root-algebra presentation along a transverse trait section
 
 Source: Stacks Project, Tags 0EYH and 0EYI, proof preceding parts (1) and (2).
-(blueprint: lem-sbc-stalk-normalization-trait-section-root-presentation)
 -/
 
 @[expose] public section
@@ -81,32 +80,7 @@ set_option maxHeartbeats 1000000 in
 of the auxiliary section trait. No maximal-ideal formula for the root algebra and no
 integer-valued valuation are asserted here.
 
-Source: Stacks Project, Tags 0EYH and 0EYI, proof preceding parts (1) and (2).
-(blueprint: lem-sbc-stalk-normalization-trait-section-root-presentation)
-
-Proof: Minimality of s makes the inverse image of U the punctured local trait.
-The closed fibre of the smooth total space is a regular effective Cartier divisor.
-At each of its generic points, the ramification and inseparable residue degrees of a
-connected component divide the order of its stabilizer in G. The invertibility of
-|G| therefore gives tame ramification. Apply 0EYH to obtain an affine etale chart
-with the normalization a disjoint union of root algebras, with positive exponents
-and a common equation f for the divisor. Normalization commutes with localization
-and etale base change, so these are charts for the concrete normalization n.
-Choose a point of this etale cover over x and its root factor, and localize the base
-chart at its image. Call this local base ring R. The chosen root factor becomes
-R[T]/(T^e-f). It is local: it is finite integral over R, and its reduction modulo
-m_R is k(R)[T]/(T^e), which has exactly one prime. Thus this whole root algebra is
-the stalk D at the chosen point. The stalk map beta from B is local and etale,
-hence flat. The etale local base map extends the original base maximal ideal to
-m_R; extending once more to D gives the displayed equality with J.map beta.
-Pull the etale chart back along the section and localize at its closed point.
-As in 0EYI this gives an unramified DVR A over the original trait. Transversality
-makes f map to a uniformizer varpi of A. Let K be its fraction field and pi the
-unit corresponding to varpi in K. The generic section fibre of the chart is a
-disjoint union of Spec K[T]/(T^e_i-pi). The chosen factor is open, and the generic
-normalization identifies its inclusion with g into the base change of Z. All
-identifications preserve the structural map to Spec K. A uniformizer is
-irreducible. Empty fibres have no x; no rational-point assumption is used. -/
+Source: Stacks Project, Tags 0EYH and 0EYI, proof preceding parts (1) and (2). -/
 theorem GaloisCover.stalk_normalization_trait_section_root_presentation {S C : Scheme.{u}}
     [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]

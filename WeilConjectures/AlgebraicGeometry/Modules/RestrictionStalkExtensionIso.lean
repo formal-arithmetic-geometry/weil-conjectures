@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 /-! # Open restriction and extension of stalk scalars
 
 Source: Stacks Project, Sheaves, Tag 0098; Cohomology, Tag 06YB.
-(blueprint: lem-pc-open-restriction-stalk-extension-iso).
 -/
 
 @[expose] public section
@@ -125,23 +124,7 @@ private noncomputable def restrictionStalkLinearNatIso
       ((Scheme.Modules.restrictStalkNatIso j x).hom.naturality f) m)
 
 /-- Stalks of open restriction are extension of scalars of the original stalks.
-Source: Stacks Project, Sheaves, Tag 0098; Cohomology, Tag 06YB;
-Mathlib `Scheme.Modules.restrictStalkNatIso`.
-(blueprint: lem-pc-open-restriction-stalk-extension-iso).
-
-Proof: write rho = j.stalkMap x. The hom of `restrictStalkNatIso j x` sends a
-restricted section germ on U to the same section germ on j(U). The ring-stalk
-identity sends the germ of r on U under rho's inverse to the germ of
-j.appIso(U).inv(r). Representing a scalar and a module germ on a common open
-therefore proves epsilon(r • m) = rho⁻¹(r) • epsilon(m). In particular epsilon
-is linear over the original stalk ring after restricting scalars along rho.
-It is bijective because the additive comparison is an isomorphism; its naturality
-is inherited from that comparison. Extend its inverse along rho and compose
-with the extension/restriction adjunction counit. Since rho is an isomorphism,
-restriction of scalars is an equivalence and this counit is invertible. This gives
-the displayed natural isomorphism. Apply it degreewise to K; naturality with
-respect to K.d gives a chain isomorphism. Empty schemes have no point x, and zero
-stalk rings cause no exception. No boundedness assumption is used. -/
+Source: Stacks Project, Sheaves, Tag 0098; Cohomology, Tag 06YB. -/
 theorem nonempty_restriction_stalk_extension_iso
     {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] (x : X)
     (K : CochainComplex Y.Modules ℤ) :

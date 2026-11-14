@@ -22,8 +22,6 @@ import WeilConjectures.AlgebraicGeometry.FiniteConstantModel.ConstantToContinuou
 import Mathlib.LinearAlgebra.FreeModule.PID
 
 /-! # Finite presentations of scalar-complex cohomology
-
-Source: current blueprint proposition-integral-constructibility-criterion, (3) implies (1).
 -/
 
 @[expose] public noncomputable section
@@ -101,16 +99,7 @@ private theorem continuous_kernel_free
     F.mapIso ed ≪≫ continuousFreeIso A d⟩⟩
 
 /-- A complex of finite free continuous modules over a scalar PID has finitely
-presented cohomology. This includes torsion cohomology and rank-zero terms.
-Source: current blueprint proposition-integral-constructibility-criterion, (3) implies (1)
-(blueprint: lem-sfb-integral-scalar-complex-homology).
-
-Proof: maps of finite free continuous modules are scalar matrices. Realize the
-kernel of the scalar matrix by exact constant sheafification and the flat map to
-continuous coefficients (sections are torsion-free over the PID). A submodule of
-finite free scalar modules is finite free. Thus the cycles are finite free; the
-cohomology is the cokernel of the preceding finite free term mapping to cycles,
-which is a finite presentation. No bound on the complex or torsion exclusion is used. -/
+presented cohomology. This includes torsion cohomology and rank-zero terms. -/
 theorem integral_scalar_complex_homology
     (A : Type u) [CommRing A] [IsDomain A] [IsPrincipalIdealRing A]
     [TopologicalSpace A] [IsTopologicalRing A]

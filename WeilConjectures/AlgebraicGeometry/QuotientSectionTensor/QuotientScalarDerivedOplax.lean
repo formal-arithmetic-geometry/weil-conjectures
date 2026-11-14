@@ -67,8 +67,7 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
 open ModuleRingedComparison
 
 /-- The generic derived oplax structure, with the fixed scalar functor as its target.
-Source: the generic derived monoidal construction; Stacks 07A4
-(blueprint: def-sfb-quotient-scalar-derived-oplax). -/
+Source: Stacks 07A4. -/
 @[irreducible] def scalarDerivedOplax (T : Scheme.{u}) : (D a T).OplaxMonoidal := by
   let := scalarModuleClosed Λ T
   let := scalarModuleClosed Λ' T
@@ -83,8 +82,7 @@ Source: the generic derived monoidal construction; Stacks 07A4
   exact (extension a T).leftDerivedFunctorOplaxMonoidal
 
 /-- The derived oplax unit is the specified localization-unit composite.
-Source: the definition of the generic derived oplax structure
-(blueprint: def-sfb-quotient-scalar-derived-oplax). -/
+Source: the definition of the generic derived oplax structure. -/
 theorem scalarDerivedOplax_η (T : Scheme.{u}) :
     letI := scalarDerivedOplax a T
     Functor.OplaxMonoidal.η (D a T) = derivedScalarUnit a T := by
@@ -103,8 +101,7 @@ theorem scalarDerivedOplax_η (T : Scheme.{u}) :
   rfl
 
 /-- The derived oplax unit is invertible on the K-flat regular module.
-Source: the generic derived-unit theorem; Stacks 07A4
-(blueprint: def-sfb-quotient-scalar-derived-oplax). -/
+Source: the generic derived-unit theorem; Stacks 07A4. -/
 theorem scalarDerivedOplax_η_isIso (T : Scheme.{u}) :
     letI := scalarDerivedOplax a T
     IsIso (Functor.OplaxMonoidal.η (D a T)) := by

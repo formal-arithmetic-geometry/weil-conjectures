@@ -15,10 +15,6 @@ import WeilConjectures.AlgebraicGeometry.RationalP1.FlatCoefficientExchange
 public import WeilConjectures.SixFunctors.Supporting.ModCondensedCachedInstances
 
 /-! # Coefficient naturality of the projective-line exchange
-
-Source: diagonal coefficient changes, paragraphs (2)-(3), finite-subextension
-scalar extension and commutation with pullback, and the canonical exchange mate
-in the second rational P1 triangle.
 -/
 
 @[expose] public noncomputable section
@@ -51,15 +47,7 @@ attribute [local irreducible] derivedPullIso derivedPushHom derivedComapLowerSta
   DerivedCategory.monoidalClosed Mod.monoidalClosed CondensedRing.upperStar
 
 -- Check the fixed derived model interfaces while keeping their resolutions folded.
-/-- Assemble normalized-model scalar transport with the unit and line squares.
-Source: diagonal coefficient changes (2)--(3), the native model calculation.
-(blueprint: lem-sfb-rational-p1-native-model-exchange).
-
-Proof: insert the canonical model isomorphisms and cancel inverse pairs. Cancel
-the scalar pullback isomorphism, apply the unit square, naturality on x, and the
-line square. The two scalar model equations are the cached native specializations
-of extendScalarChern_canonical. This equation uses
-native coefficients throughout, before the public coefficient-index wrappers. -/
+/-- Assemble normalized-model scalar transport with the unit and line squares. -/
 theorem closure_exchange_naturality_native
     (l : ℕ) [Fact l.Prime] (E : PadicAlgCl.FiniteIntermediateField l)
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

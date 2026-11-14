@@ -19,7 +19,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 /-! # Isomorphism descent for finitely presented affine schemes
 
 Source: Stacks Project, Tag 05N9 (2), (3); Tag 0EYG, descent paragraph.
-(blueprint: lem-sbc-affine-fp-iso-ind-etale-descent)
 -/
 
 @[expose] public section
@@ -69,24 +68,7 @@ set_option backward.defeqAttrib.useBackward true in
 /-- A relative isomorphism between two fixed finitely presented affine schemes
 and finitely many unit conditions descend to an etale stage of an ind-etale map.
 
-Source: Stacks Project, Tag 05N9 (2), (3); Tag 0EYG, descent paragraph.
-(blueprint: lem-sbc-affine-fp-iso-ind-etale-descent)
-
-Proof: Present H as a filtered colimit of etale R-algebras using the definition
-of IndEtale. Since both maps are affine over Spec R, their sources are affine;
-local finite presentation identifies their coordinate rings with finitely
-presented R-algebras. Descend the coordinate maps of the given isomorphism and
-its inverse to one stage by Tag 05N9 (2). Descend the two inverse identities by
-(3) and advance to a common stage. These are algebra homomorphisms, so the
-isomorphism obtained by Spec respects the second projections. For the unit
-conditions, first localize R at the product of the a(k). Its
-map to H factors through one stage by finite presentation. The product, and
-hence each factor, is a unit there. Perform the isomorphism descent starting
-at that stage; naturality preserves the units at the later stage. Let phi be its structural
-map and psi its cocone map; psi.comp phi=ι by the cocone compatibility, and phi
-is etale because every stage is etale. There is no point or root-chart input in
-this statement. Empty families of units need no extra advance; zero coordinate
-rings and empty schemes still satisfy the same presentation and identity argument. -/
+Source: Stacks Project, Tag 05N9 (2), (3); Tag 0EYG, descent paragraph. -/
 theorem affine_fp_iso_descend_indEtale
     (R H : CommRingCat.{u}) (ι : R →+* H) (hι : ι.IndEtale)
     {Y Z : Scheme.{u}} (p : Y ⟶ Spec R) (q : Z ⟶ Spec R)

@@ -50,19 +50,7 @@ private theorem reverse_section
   simpa only [Functor.comp_map, Functor.id_map, Functor.comp_obj, Functor.id_obj] using
     hc.trans (adj₀.unit.naturality (cA.hom.app C))
 
-/-- Scalar/pullback balancing commutes with the canonical cancellation of a section.
-Source: blueprint/latest, sec-smooth-purity/sk-thm-smooth-purity/
-sk-thm-smooth-purity-general-ring.proof.md, Proof (2), normalization at one;
-canonical tensor-pullback identification in lem-weil-pbc-ringed-topoi-derived-tensor-pullback
-(blueprint: lem-pur-scalar-section-compositor).
-Proof: identify the inverse scalar comparison with the scalar-adjunction mate.
-The ordinary restriction square respects inverse-image composition and the identity,
-so it respects cancellation along i followed by p. Transpose the two desired maps
-under the scalar adjunction. Its unit equations replace each inverse scalar comparison
-by the restriction square. Naturality moves the intermediate comparison across that
-square, and the restriction cancellation identity reduces the resulting composite to
-the naturality equation of the section compositor. Injectivity of the adjunction
-bijection gives the result. No coefficient flatness or finiteness is used. -/
+/-- Scalar/pullback balancing commutes with the canonical cancellation of a section. -/
 theorem scalar_section_compositor
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {T S : Scheme.{u}} (i : S ⟶ T) (p : T ⟶ S) (hi : i ≫ p = 𝟙 S)

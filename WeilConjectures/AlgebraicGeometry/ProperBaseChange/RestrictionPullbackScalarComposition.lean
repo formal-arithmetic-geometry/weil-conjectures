@@ -88,18 +88,7 @@ variable {X Y : Scheme.{u}} (f : Y ⟶ X)
       (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map cX ≫ eT.hom)
 
 /-- Pullback commutes coherently with successive exact scalar restrictions.
-Source: Stacks Project, Tags 03EL, 03DA and 06YY
-(blueprint: lem-weil-pbc-restriction-pullback-scalar-composition).
-Proof: on ordinary modules, transpose both pullback/restriction paths through the
-geometric module adjunction. The restriction/direct-image comparisons are the
-identity on sections, as are the scalar restriction compositors. Thus both
-transposes are equal, including their scalar actions by the three coefficient
-squares. The ordinary adjunction bijection gives equality of the inverse-image
-paths. Apply exact localization to that equality. The factorization equations
-for mapDerivedCategoryCompIso and mapDerivedCategoryNatIso identify its two sides
-with the displayed composites of the published derived comparisons. Every complex
-represents a derived object, so localization gives the equation on arbitrary M.
-No flatness, completeness, nonempty-site or nonzero-ring hypothesis is used. -/
+Source: Stacks Project, Tags 03EL, 03DA and 06YY. -/
 theorem proEtaleRestrictionPullback_scalarComposition
     (M : reductionDerivedCategory X TX) :
     (proEtaleRingRestrictionDerivedPullback f RX TX RY TY cX cY eR eT hc).inv.app M ≫

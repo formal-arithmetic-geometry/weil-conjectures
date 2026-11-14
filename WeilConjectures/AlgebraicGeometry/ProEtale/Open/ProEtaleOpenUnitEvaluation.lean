@@ -29,8 +29,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 /-!
 # Open pro-etale pullback evaluation and its specified adjunction unit
 
-Source: Stacks Project, Tags 09BN, 00VE, 00WH, 00WX, 00XZ and 03D3
-(blueprint: lem-pur-proetale-open-unit-evaluation).
+Source: Stacks Project, Tags 09BN, 00VE, 00WH, 00WX, 00XZ and 03D3.
 
 The pullback and unit are the published small-model module constructions.
 The coefficient comparison below is normalized on constant sections.
@@ -47,8 +46,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 /-- Compose a pro-etale object's structure map with an open immersion, retaining its
-underlying scheme and arrows. Source: Stacks Project, Tags 00XZ and 09BN
-(blueprint: lem-pur-proetale-open-unit-evaluation). -/
+underlying scheme and arrows. Source: Stacks Project, Tags 00XZ and 09BN. -/
 def proEtaleOpenComposition {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     U.ProEt ⥤ X.ProEt :=
   MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale j)

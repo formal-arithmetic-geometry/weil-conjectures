@@ -19,8 +19,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Coproduct continuity for one locally perfect support piece
 
-Source: Bhatt--Scholze, Lemma 6.3.14(1)--(4), including its closed-stratum argument
-(blueprint: lem-weil-pbc-integral-perfect-stratum-coproducts).
+Source: Bhatt--Scholze, Lemma 6.3.14(1)--(4), including its closed-stratum argument.
 -/
 
 @[expose] public noncomputable section
@@ -79,27 +78,7 @@ namespace AlgebraicGeometry.Scheme
 -- The unbounded derived comparisons require elaborating several functor structures.
 /-- Internal Hom from one locally perfect support piece commutes with uniformly
 bounded-below derived coproducts. The support is one closed subscheme of one open subscheme.
-Source: Bhatt--Scholze, Lemma 6.3.14(1)--(4), final paragraph
-(blueprint: lem-weil-pbc-integral-perfect-stratum-coproducts).
-
-Proof:
-1. Completed constant realization sends bounded finite-projective scalar models
-to bounded strict finite-free-retract models over the coefficient sheaf. Normalize
-the identity inverse-image coefficient isomorphism and restrict these models to
-the specified covering sieve. Thus the closed-stratum source is perfect on its
-actual ringed site.
-2. Ringed-site perfect duality identifies internal Hom from this source with
-tensor by its dual. The tensor-Hom adjunction makes that tensor functor preserve
-all colimits, hence every coproduct.
-3. Closed support transfers this continuity to the closed direct image, using
-the supported-section localization triangle and bounded-below coproduct
-continuity of the complementary qcqs open direct image.
-4. The open extension formula identifies internal Hom from the open extension
-with restriction, internal Hom on the open, and open direct image in succession.
-Exact restriction preserves coproducts and lower bounds. The support-piece
-upper bound supplies a common lower bound for the intermediate internal Homs;
-integral qcqs direct image then preserves their coproduct. Compose these three
-preservation statements and transport through the displayed source isomorphism. -/
+Source: Bhatt--Scholze, Lemma 6.3.14(1)--(4), final paragraph. -/
 theorem integralPerfectStratumPiece_coproductContinuous
     (T : Scheme.{u}) [IsNoetherian T]
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)

@@ -39,34 +39,8 @@ private theorem lisseRational_retract_of_integral_multiple
 set_option linter.unusedSectionVars false in
 /-- Every finite-coefficient rational sheaf is a retract of an extension from the
 least coefficient field.
-Source: Deligne, Weil II (1.1.1) b)-d), pp. 146-147; Stacks Project, Algebra,
-`lemma-separable-algebraic-diagonal`, finite separable case.
-(blueprint: lem-pod-lisse-coefficient-restriction-retracts).
-
-Proof: put B equal to the least coefficient field and E equal to the chosen finite
-extension. Restrict the integral E-lattice to the integers of B, taking the E-level
-e(n+1)-1 at B-level n, where e is the ramification index. A trivializing cover at
-that E-level also trivializes the restricted sheaf. Each stalk is finite as a set,
-since it is a finite module over the finite coefficient quotient, and thus finite
-as a B-integer module. The equality of uniformizer ideals gives annihilation.
-For transitions, compose the original surjective transitions. The preimage of an
-ideal multiple under a surjection is that ideal multiple plus the kernel, so
-induction gives kernel the E-uniformizer ideal to exponent e(n+1), exactly the
-image of the required B-uniformizer power. This proves the restricted system lisse.
-
-For the two maps, use the central separability tensor of E/B and clear a single
-nonzero coefficient denominator to obtain an integral tensor t with nonzero product a.
-The integral restriction and scalar-extension constructions give opposite maps whose
-composite is a times the identity. Concretely multiplication uses the transition from
-level e(floor(m/e)+1)-1 to m. The opposite map averages the scalar sheaf unit by t;
-centrality makes it E-integral-linear, and the transition kernel formula lets it descend
-to level m. These maps commute with transitions and use the same a at every level.
-In the rational Hom tensor product, replace the forward integral map by a⁻¹ tensor it
-and the backward map by 1 tensor it. The tensor composition formula and balancing
-turn their composite into 1 tensor the identity. Finally unfold the prescribed
-coefficient diagram to identify its objects and transition functor with these rational
-sheaf categories and scalar extension. The argument also applies to the zero object
-and to an equal coefficient field. -/
+Source: Deligne, Weil II (1.1.1) b)-d), pp. 146-147; Stacks Project, Algebra, finite separable case.
+-/
 theorem lisseCoefficientRestriction_retracts
     (E₀ : Padic.FiniteCoefficientFields l K) :
     let P := (lisseCoefficientDiagramData l Y K).diagram

@@ -14,8 +14,8 @@ public import Mathlib.CategoryTheory.Abelian.Injective.Ext
 /-!
 # Relative étale cohomology in an injective-resolution model
 
-Source: Stacks Project, Cohomology on Sites, Tag 03AJ, relative refinement; compare
-Cohomology, Tags 0G71 and 0G78 (blueprint: def-amb-relative-etale-cohomology).
+Source: Stacks Project, Cohomology on Sites, Tag 03AJ, relative refinement; compare Cohomology, Tags
+0G71 and 0G78.
 -/
 
 @[expose] public section
@@ -27,8 +27,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 /-- Sections of a nonnegative sheaf complex, extended by zero in negative degrees.
-Source: Stacks Project, Tag 03AJ, relative refinement
-(blueprint: def-amb-relative-etale-cohomology). -/
+Source: Stacks Project, Tag 03AJ, relative refinement. -/
 noncomputable def relativeSections {T : Scheme.{u}} (U : T.Etale)
     (I : CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) ℕ) :
     CochainComplex AddCommGrpCat.{u + 1} ℤ :=
@@ -36,8 +35,7 @@ noncomputable def relativeSections {T : Scheme.{u}} (U : T.Etale)
     ComplexShape.embeddingUpNat
 
 /-- Restriction from the terminal object, extended by zero in negative degrees.
-Source: Stacks Project, Tag 03AJ, relative refinement
-(blueprint: def-amb-relative-etale-cohomology). -/
+Source: Stacks Project, Tag 03AJ, relative refinement. -/
 noncomputable def relativeSectionRestriction (T : Scheme.{u}) (U : T.Etale)
     (I : CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) ℕ) :
     relativeSections (Scheme.Etale.mk (𝟙 T)) I ⟶ relativeSections U I :=
@@ -47,8 +45,7 @@ noncomputable def relativeSectionRestriction (T : Scheme.{u}) (U : T.Etale)
 
 /-- The actual mapping cone of restriction, shifted by minus one.
 For an injective resolution and an open U this computes the relative derived sections.
-Source: Stacks Project, Tag 03AJ, relative refinement; compare Tag 0G71
-(blueprint: def-amb-relative-etale-cohomology). -/
+Source: Stacks Project, Tag 03AJ, relative refinement; compare Tag 0G71. -/
 noncomputable def relativeSectionComplex (T : Scheme.{u}) (U : T.Etale)
     (I : CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) ℕ) :
     CochainComplex AddCommGrpCat.{u + 1} ℤ :=
@@ -56,16 +53,14 @@ noncomputable def relativeSectionComplex (T : Scheme.{u}) (U : T.Etale)
 
 /-- Relative étale cohomology in a supplied injective-resolution model.
 The resolution is a model, not an extra geometric assumption.
-Source: Stacks Project, Tag 03AJ, relative refinement; compare Tag 0G71
-(blueprint: def-amb-relative-etale-cohomology). -/
+Source: Stacks Project, Tag 03AJ, relative refinement; compare Tag 0G71. -/
 noncomputable def relativeCohomology (T : Scheme.{u}) (U : T.Etale)
     {G : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}}
     (I : InjectiveResolution G) (q : ℤ) : AddCommGrpCat.{u + 1} :=
   (relativeSectionComplex T U I.cocomplex).homology q
 
 /-- The shifted cone map associated to a strictly commuting restriction square.
-Source: Stacks Project, Tag 0G78, mapping-fibre functoriality
-(blueprint: def-amb-relative-etale-cohomology). -/
+Source: Stacks Project, Tag 0G78, mapping-fibre functoriality. -/
 noncomputable def relativeFiberMap
     {A B A' B' : CochainComplex AddCommGrpCat.{u + 1} ℤ}
     (r : A ⟶ B) (r' : A' ⟶ B') (a : A ⟶ A') (b : B ⟶ B')
@@ -77,8 +72,7 @@ noncomputable def relativeFiberMap
       (fun j ↦ ⟨j - 1, sub_add_cancel j 1⟩) (Arrow.homMk a b h))
 
 /-- Projection from relative sections to absolute sections, with the ordinary cone sign.
-Source: Stacks Project, Tag 0G71, first arrow of the relative triangle
-(blueprint: def-amb-relative-etale-cohomology). -/
+Source: Stacks Project, Tag 0G71, first arrow of the relative triangle. -/
 noncomputable def relativeForgetComplex (T : Scheme.{u}) (U : T.Etale)
     (I : CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) ℕ) :
     relativeSectionComplex T U I ⟶ relativeSections (Scheme.Etale.mk (𝟙 T)) I :=

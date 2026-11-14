@@ -12,8 +12,7 @@ import WeilConjectures.AlgebraicGeometry.Continuous.ContinuousCoefficientPullbac
 /-!
 # Immersion restriction in the lattice coefficient presentation
 
-Source: Bhatt--Scholze, Lemma 6.5.8(1), Definition 6.8.1 and the paragraph before
-Definition 6.8.6 (blueprint: lem-weil-pbc-lattice-coefficient-pullback-isIso).
+Source: Bhatt--Scholze, Lemma 6.5.8(1), Definition 6.8.1 and the paragraph before Definition 6.8.6.
 -/
 
 @[expose] public noncomputable section
@@ -74,17 +73,8 @@ private theorem coefficientPresentation_isIso
 and rational lattice presentations. The maps are the adjuncts of precomposition with the
 base-change projection, so the result fixes their normalization as well as their objects.
 
-Source: Bhatt--Scholze, Lemma 6.5.8(1), Definition 6.8.1 and the paragraph before
-Definition 6.8.6 (blueprint: lem-weil-pbc-lattice-coefficient-pullback-isIso).
-
-Proof: Give E its canonical norm. The identity ring equivalence from WithAbs to E is
-an isometry, and restricts to a homeomorphic ring equivalence of their valuation subrings.
-Postcompose continuous functions with these equivalences and move the universe lift through
-the function space. These sectionwise ring isomorphisms commute with restrictions.
-Taking inverse-image adjuncts shows that the canonical lattice coefficient map is conjugate
-to continuousCoefficientPullback. The existing immersion restriction theorem makes the
-latter invertible. Cancel the two presentation isomorphisms. This argument also applies to
-empty test objects and the empty immersed scheme. -/
+Source: Bhatt--Scholze, Lemma 6.5.8(1), Definition 6.8.1 and the paragraph before Definition 6.8.6.
+-/
 theorem latticeCoefficientPullback_isIso (l : ℕ) [Fact l.Prime] (E : Type u)
     [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     {X Y : Scheme.{u}} [IsNoetherian Y] (f : X ⟶ Y) [IsImmersion f] :

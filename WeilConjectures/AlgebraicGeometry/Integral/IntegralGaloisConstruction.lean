@@ -21,7 +21,6 @@ import WeilConjectures.AlgebraicGeometry.Canonical.CanonicalIntegralGaloisFuncto
 /-! # Integral reconstruction from finite Galois modules
 
 Source: Weil II (1.1.1), (1.1.6); Stanford Weil II seminar L19, Proposition 1.1.9.
-(blueprint: new-e7-integral-galois-construction).
 -/
 
 @[expose] public section

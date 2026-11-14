@@ -133,15 +133,7 @@ private theorem systemHom_ext
   exact congrArg (fun k ↦ k.val.app (op V.unop.2) x) (h V.unop.1)
 
 /-- Natural assembly from normalized finite isomorphisms and their transition squares.
-Source: Stacks 0941; objectwise assembly followed by naturality.
-(blueprint: lem-coef-natural-system-iso-assembly).
-
-Proof: assemble the compatible finite isomorphisms at each object by
-systemIsoOfEvaluation_exists. For an arrow of the input category, evaluate both
-naturality composites at each coefficient level. The assembly's normalization
-reduces them to naturality of the finite comparison. Ordinary evaluation is jointly
-faithful, as is seen on every section of the sequence site, so the composites agree.
-NatIso.ofComponents then assembles these objectwise isomorphisms naturally. -/
+Source: Stacks 0941; objectwise assembly followed by naturality. -/
 theorem naturalIsoOfEvaluation_exists
     {D : Type*} [Category D]
     {C : Type (t + 1)} [Category.{t} C] (J : GrothendieckTopology C)

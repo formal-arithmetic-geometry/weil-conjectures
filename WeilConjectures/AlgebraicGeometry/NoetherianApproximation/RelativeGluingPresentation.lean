@@ -35,8 +35,8 @@ namespace AlgebraicGeometry
 
 variable {I : Type u} [Category.{u} I] {D : I ⥤ Scheme.{u}} (c : Cone D)
 
-/-- Blueprint `theorem-nagata-s-compactification-theorem--1`: Selected finite relative affine
-presentation `R_X` of `g : X ⟶ lim Dⱼ`.
+/-- Selected finite relative affine
+presentation `R_X` of `g: X ⟶ lim Dⱼ`.
 
 It consists of a stage `i₀`, a finite index type `J`, affine opens `base a` of `D_{i₀}` (whose
 preimages in `lim Dⱼ` have rings that are filtered colimits of stage rings) and affine opens

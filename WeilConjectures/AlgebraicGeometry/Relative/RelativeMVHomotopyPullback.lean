@@ -292,13 +292,7 @@ private lemma map_cocone_span_eq (F : E ⥤ C) [F.Additive]
 /-- Strictify a pair of row maps whose second map is a derived isomorphism componentwise.
 The mapping-cocone row is short exact degreewise, its projection to the source row is a
 localized isomorphism, and the two projections satisfy the span equations.
-Source: Stacks Project, Cohomology of Sheaves, Tags 08BV and 08HY.
-(blueprint: lem-pc-relative-mv-direct-image-rows-strictification).
-Proof: transpose rows to complexes of rows. The mapping cocone is degreewise a biproduct
-of the source and target rows, hence short exact. The distinguished mapping-cocone
-triangle and the biproduct decomposition identify each projection with an isomorphism
-when the target map is a quasi-isomorphism. The triangle's zero composite gives the
-three span equations. -/
+Source: Stacks Project, Cohomology of Sheaves, Tags 08BV and 08HY. -/
 theorem relativeMV_homotopyPullback_row_strictify
     (S T R : ShortComplex (CochainComplex C ℤ)) (u : S ⟶ R) (v : T ⟶ R)
     (hS : S.ShortExact) (hT : T.ShortExact) (hR : R.ShortExact)

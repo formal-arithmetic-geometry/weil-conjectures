@@ -182,8 +182,7 @@ The proof first lifts the normalized completed Chern adjuncts, then transports t
 components through realization and scalar extension. The coefficient-level exchange
 mate and root-normalized Tate comparison identify the pulled-back q component with the
 p2 component; the whole-system Chern normalization identifies those components with
-`cq` and `c₂`. The remaining diagram chase is carried out at this concrete some coefficient.
-(blueprint: lem-sfb-rational-p1-scalar-chern-base-change-chern-some). -/
+`cq` and `c₂`. The remaining diagram chase is carried out at this concrete some coefficient. -/
 theorem scalar_chern_base_change_chern_some
     (l : ℕ) [Fact l.Prime] (E : PadicAlgCl.FiniteIntermediateField l)
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

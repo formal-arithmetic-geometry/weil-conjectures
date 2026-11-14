@@ -18,9 +18,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleConstantModuleEncoding
 /-!
 # Locally constant module sheaves on the small pro-etale site
 
-Source: Bhatt--Scholze, *The pro-etale topology for schemes*, Definition 7.3.1(1),
-with module coefficients as in the Weil blueprint, definition-ind-etale-pro-etale-weakly--3
-(blueprint: def-weil-proetale-locally-constant-sheaf).
+Source: Bhatt--Scholze, *The pro-etale topology for schemes*, Definition 7.3.1(1).
 
 Constant module sheaves are constructed by simultaneous sheafification of the
 constant ring and module. On a localized site the ring is the restricted constant
@@ -43,8 +41,7 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 namespace AlgebraicGeometry.Scheme
 
 /-- The constant module presheaf, with identity restriction maps and the given
-scalar multiplication. Source: the module version of Bhatt--Scholze 7.3.1(1)
-(blueprint: def-weil-proetale-locally-constant-sheaf). -/
+scalar multiplication. Source: the module version of Bhatt--Scholze 7.3.1(1). -/
 noncomputable def proEtaleConstantModulePresheaf (C : Type w) [Category.{v} C] (A : Type t)
     [CommRing A] (M : ModuleCat.{t + 1} (ULift.{t + 1, t} A)) :
     _root_.PresheafOfModules.{t + 1}
@@ -56,8 +53,7 @@ noncomputable def proEtaleConstantModulePresheaf (C : Type w) [Category.{v} C] (
 
 /-- The constant module sheaf, sheafifying the constant module presheaf together
 with the constant coefficient ring. Scalar multiplication is the sheafified original
-scalar multiplication. Source: Bhatt--Scholze 7.3.1(1), module version
-(blueprint: def-weil-proetale-locally-constant-sheaf). -/
+scalar multiplication. Source: Bhatt--Scholze 7.3.1(1), module version. -/
 noncomputable def proEtaleConstantModuleSheaf (Y : Scheme.{t}) (A : Type t)
     [CommRing A] (M : ModuleCat.{t + 1} (ULift.{t + 1, t} A)) :
     SheafOfModules.{t + 1}
@@ -74,10 +70,7 @@ noncomputable def proEtaleConstantModuleSheaf (Y : Scheme.{t}) (A : Type t)
     (proEtaleConstantModulePresheaf Y.ProEt A M)
 
 /-- The same ring unit on the localized site is locally bijective.
-Source: localization of the constant sheaf, Bhatt--Scholze 7.3.1(1)
-(blueprint: def-weil-proetale-locally-constant-sheaf).
-Proof: a local lift or equality witness in the original site pulls back along
-an arrow into U. The localized topology has exactly these covering sieves. -/
+Source: localization of the constant sheaf, Bhatt--Scholze 7.3.1(1). -/
 theorem proEtaleConstantRingUnit_over_locallyBijective (Y : Scheme.{t}) (A : Type t)
     [CommRing A] (U : Y.ProEt) :
     Presheaf.IsLocallyInjective ((ProEt.topology Y).over U)
@@ -98,8 +91,7 @@ theorem proEtaleConstantRingUnit_over_locallyBijective (Y : Scheme.{t}) (A : Typ
       (ProEt.topology Y) (Over.forget U) _⟩
 
 /-- The constant module sheaf on the localized site, formed by sheafification over
-the restricted coefficient ring. Source: Bhatt--Scholze 7.3.1(1), module version
-(blueprint: def-weil-proetale-locally-constant-sheaf). -/
+the restricted coefficient ring. Source: Bhatt--Scholze 7.3.1(1), module version. -/
 noncomputable def proEtaleConstantModuleSheafOver (Y : Scheme.{t}) (A : Type t)
     [CommRing A] (U : Y.ProEt) (M : ModuleCat.{t + 1} (ULift.{t + 1, t} A)) :
     SheafOfModules.{t + 1}
@@ -118,8 +110,7 @@ noncomputable def proEtaleConstantModuleSheafOver (Y : Scheme.{t}) (A : Type t)
 
 /-- A module sheaf is locally constant if a covering family trivializes its
 restrictions on the localized ringed sites, with arbitrary module values depending
-on the cover member. Source: Bhatt--Scholze 7.3.1(1), module version
-(blueprint: def-weil-proetale-locally-constant-sheaf). -/
+on the cover member. Source: Bhatt--Scholze 7.3.1(1), module version. -/
 noncomputable def IsLocallyConstantProEtaleModuleSheaf
     (Y : Scheme.{t}) (A : Type t) [CommRing A]
     (F : SheafOfModules.{t + 1}

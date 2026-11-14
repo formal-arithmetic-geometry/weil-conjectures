@@ -17,7 +17,6 @@ import all WeilConjectures.AlgebraicGeometry.Constructible.ConstructibleCoeffici
 /-! # Finite reduction under normalized residue coefficients
 
 Source: Bhatt--Scholze, Definition 6.5.1 and Lemma 6.5.8(1).
-(blueprint: lem-weil-pbc-integral-residue-finite-reduction).
 -/
 
 @[expose] public noncomputable section
@@ -238,8 +237,7 @@ private theorem liftRingIso_hom (S : Scheme.{u})
 
 /-- Restriction along the finite coefficient isomorphism, on a localization representative.
 The representative is canonical up to its supplied localization isomorphism.
-Source: Bhatt--Scholze, Definition 6.5.1, Lemma 6.5.8(1)
-(blueprint: lem-weil-pbc-integral-residue-finite-reduction). -/
+Source: Bhatt--Scholze, Definition 6.5.1, Lemma 6.5.8(1). -/
 def integralResidueFiniteModel
     (S : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -262,28 +260,7 @@ private local instance integralResidueFiniteCategory (T : Scheme.{u})
 set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 /-- Reduction commutes with the normalized integral coefficient comparison and inverse image.
 There is no completeness, perfectness or covering hypothesis.
-Source: Bhatt--Scholze, Definition 6.5.1 and Lemma 6.5.8(1)
-(blueprint: lem-weil-pbc-integral-residue-finite-reduction).
-
-Proof: lift the finite coefficient comparison to commutative ring sheaves and
-combine its projection equation with the detailed completed comparison and
-c.completed_projection. The resulting square transports derived scalar extension
-across the completed and finite coefficient equivalences. Normalize raw inverse
-image by the scalar restriction round trip, and apply the existing four-corners
-comparison to interchange finite reduction and inverse image.
-
-For the finite presentation comparison, the constant-section equations identify
-large-coefficient realization followed by restriction with the inverse of the
-constant-ring module encoding. This follows by restricting the sheafification
-adjunction along its fully faithful module embedding and using uniqueness of left
-adjoints. The constant-ring inverse image comparison follows in turn from the
-sectionwise direct-image comparison and uniqueness of left adjoints. Localize
-these exact functors, apply the coefficient restriction/inverse-image square,
-and reflect the resulting isomorphism through the finite coefficient equivalence.
-Finally compose with eC and the localization factorization. The canonical
-representative is identified by its localization isomorphism, giving the precise
-integralResidueFiniteModel endpoint. Every comparison allows arbitrary derived
-objects, positive quotient exponents, the empty scheme and zero objects. -/
+Source: Bhatt--Scholze, Definition 6.5.1 and Lemma 6.5.8(1). -/
 theorem integralResidueFiniteReduction
     (T S : Scheme.{u}) (g : S ⟶ T) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

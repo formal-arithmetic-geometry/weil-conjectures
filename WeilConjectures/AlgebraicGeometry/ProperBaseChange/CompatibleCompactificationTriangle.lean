@@ -14,9 +14,7 @@ import WeilConjectures.Compactification.BaseChange
 /-!
 # Compatible geometric compactifications of a composable pair
 
-Source: Stacks Project, More Étale Cohomology, Tag 0F7J, proof of
-`lemma-shriek-composition`, first paragraph and displayed diagram
-(blueprint: lem-weil-pbc-compatible-compactification-triangle).
+Source: Stacks Project, More Étale Cohomology, Tag 0F7J, first paragraph and displayed diagram.
 -/
 
 @[expose] public section
@@ -28,26 +26,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Compatible compactifications over a prescribed compactification of the second morphism.
-Source: Stacks Project, Tag 0F7J, proof of `lemma-shriek-composition`, first paragraph
-(blueprint: lem-weil-pbc-compatible-compactification-triangle).
-
-Proof: First, properness of `d.g` and its diagonal, together with qcqs permanence, makes
-`d.Z` quasi-compact and quasi-separated. Second, `f ≫ d.i` is of finite type: `d.i` is a
-quasi-compact open immersion, locally finite type is preserved by composition, and a map
-from a quasi-compact scheme to a quasi-separated scheme is quasi-compact. Monicity of
-`d.i` identifies the relative self-products for `f` and `f ≫ d.i`, so the latter is separated.
-Third, apply Nagata compactification to obtain `e`. Fourth, base change `e` along `d.i`;
-monicity identifies `X ×_{d.Z} Y` with `X`, with inverse maps `(id, f)` and the first
-projection. The resulting source map is `c`, its projections are `e.i` and `f`, and its
-proper map is the second projection. Finally, the first projection is the base change of
-the quasi-compact open immersion `d.i`; composing the proper maps `e.g` and `d.g` gives
-the total compactification. The pullback universal property gives the Cartesian square.
-
-Here `e.Z`, `e.i`, `e.g` are respectively the node's `X̄`, `a`, `p`, and the two pullback
-projections are `b`, `p_Y`. The conditions on `c` and the second projection state that
-they compactify `f`; the final properness and factorization conditions state that
-`e.i` and `e.g ≫ d.g` compactify `f ≫ g`. Quasi-compactness of `d.i` follows from
-`QuasiCompact g` by `Compactification.quasiCompact_openImmersion`. -/
+Source: Stacks Project, Tag 0F7J, first paragraph. -/
 theorem exists_compatible_compactification_triangle
     {X Y Z : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     [CompactSpace Y] [QuasiSeparatedSpace Y] [CompactSpace Z] [QuasiSeparatedSpace Z]

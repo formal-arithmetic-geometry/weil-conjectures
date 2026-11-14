@@ -10,8 +10,6 @@ import WeilConjectures.AlgebraicGeometry.RationalP1.Scalar.RationalP1ScalarChern
 import WeilConjectures.AlgebraicGeometry.RationalP1.Scalar.RationalP1ScalarChernQLeftInverse
 
 /-! # The two scalar unit/Chern splittings
-
-Source: diagonal-tower unit/Chern splitting and the second rational P1 triangle.
 -/
 
 @[expose] public noncomputable section
@@ -31,17 +29,7 @@ attribute [local irreducible] moduleObjectDerivedPullback moduleObjectDerivedPus
 attribute [local irreducible] firstProjection secondProjection square condensedAmbientExchange
 
 set_option linter.unusedVariables false
-/-- The scalar Q unit/Chern splitting isomorphism.
-
-Source: diagonal-tower unit/Chern splitting and the second rational P1 triangle.
-(blueprint: lem-sfb-rational-p1-scalar-q-splitting)
-
-Proof: positively twist and shift the model unit/Chern splitting, restrict it to
-the strict constant coefficient systems, and apply the recorded derived limit.
-The coefficient and line comparisons are invertible. Fullness and faithfulness
-on complete objects identify the resulting completed components with the
-normalized input adjunct. The explicit realization and scalar-extension mates
-then transport the biproduct isomorphism to the native Q coefficient map. -/
+/-- The scalar Q unit/Chern splitting isomorphism. -/
 theorem scalar_q_chern_splitting
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

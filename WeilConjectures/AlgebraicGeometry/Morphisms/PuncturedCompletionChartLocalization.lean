@@ -16,22 +16,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.CompletionGluingData
 
 /-- Localization of one affine chart identifies its sections with overlap sections.
-Source: Stacks Project, Tag 0BLH, first two proof paragraphs; Tag 05EL, item (1).
-(blueprint: new-sbc-punctured-completion-chart-localization)
-
-Proof: write V = h⁻¹D(g) and let r be the structural section of a on V.
-The structural action on chartSectionModule is multiplication by structural
-sections, by chartSectionModule_smul. Naturality of basic opens under h and
-restriction gives Y.basicOpen r = h⁻¹D(a) ∩ V = U. Since V is affine,
-IsAffineOpen.isLocalization_of_eq_basicOpen makes Γ(Y,U) the localization of
-Γ(Y,V) at r, with algebra map the restriction map. Give both section rings
-their structural A-actions. Restriction is A-linear since restricting the
-structural section of a scalar gives that same structural section on U.
-The ring-localization module property, restricted along A → Γ(Y,V), yields
-IsLocalizedModule at the powers of a. Compare it with LocalizedModule using
-IsLocalizedModule.linearEquiv; its formula on the original module is the
-restriction formula displayed below. This works for a = 0, g = 0 and empty
-charts: the resulting zero rings satisfy the same localization property. -/
+Source: Stacks Project, Tag 0BLH, first two proof paragraphs; Tag 05EL, item (1). -/
 theorem exists_chart_section_localization
     {A : Type u} [CommRing A] {Y : Scheme.{u}} (h : Y ⟶ Spec (.of A))
     (a g : A) (hV : IsAffineOpen (h ⁻¹ᵁ PrimeSpectrum.basicOpen g))

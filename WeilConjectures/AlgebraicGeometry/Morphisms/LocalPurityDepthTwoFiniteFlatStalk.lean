@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedLocalPurityFiniteFla
 # Flatness of a supplied depth-two extension under local purity
 
 Source: Stacks Project, Tags 0EY7 and 0EY6(2).
-(blueprint: lem-sbc-local-purity-depth-two-finite-flat-stalk)
 -/
 
 @[expose] public section
@@ -57,21 +56,7 @@ private theorem exists_minimal_boundary (S : Scheme.{u}) (U : S.Opens) (hU : U �
 
 /-- Local purity makes a supplied finite depth-two extension flat.
 
-Source: Stacks Project, Tag 0EY7, `pione-lemma-purity-essentially-surjective`,
-and Tag 0EY6(2),(3), `pione-lemma-extend-S2`.
-(blueprint: lem-sbc-local-purity-depth-two-finite-flat-stalk)
-
-Proof: The finite flat target locus W is open and contains V, by the stalk
-isomorphisms for open restriction. If W is not all of L, take a generic
-point s of an irreducible component of its closed complement. Every proper
-generalization t of s belongs to W, by maximality of that component and
-sobriety. Thus every stalk over t is flat. Since s is outside V, hdepth gives
-target depth at least two at s and hpurity gives punctured-spectrum purity.
-Apply the local pure-fibre theorem to deduce flatness at every point above
-s. This says s belongs to W, a contradiction. Hence W is all of L and all
-source stalks are flat, so the stalk criterion gives Flat p. This closed-complement
-argument does not need global quasi-compactness or quasi-separatedness. Empty sources give
-W = L, and V = L is likewise immediate. -/
+Source: Stacks Project, Tag 0EY7, and Tag 0EY6(2), (3). -/
 theorem flat_of_local_purity_depth_two_finite_extension
     {L E : Scheme.{u}} [IsLocallyNoetherian L] (V : L.Opens)
     (hdepth : ∀ y : L, y ∉ V →

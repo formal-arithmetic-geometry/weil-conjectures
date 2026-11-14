@@ -45,8 +45,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 /-!
 # Projection arrows on the original small pro-etale sites
 
-Source: proper base change, definition 1264
-(blueprint: def-weil-pbc-projection-formula-arrows).
+Source: proper base change, definition 1264.
 This repairs only the site-universe interface and reexports the existing general arrows.
 The inverse is the localization of the specified finite-total chain inverse.
 -/
@@ -162,12 +161,7 @@ attribute [local irreducible] proEtaleRingModuleAdjunction
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Unit normalization of the canonical ordinary comparison on the original site.
-Source: definition 1264, ordinary finite-free identification
-(blueprint: def-weil-pbc-projection-formula-arrows).
-Proof: scalar multiplication identifies pullback of the coefficient ring with the
-coefficient ring. On m tensor r both displayed routes multiply by the image of r.
-Pure tensors generate and sheafification is universal. At the unit this equation
-uniquely determines the unit identification. -/
+Source: definition 1264, ordinary finite-free identification. -/
 theorem proEtaleProjectionUnit_existsUnique :
     ∃! j : (proEtaleRingModulePullback f R S c).obj
         (SheafOfModules.unit ((sheafCompose (ProEt.topology Y)
@@ -276,11 +270,7 @@ end ProjectionUnitProof
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Bounded split-free coefficients are flat and K-flat on the original site.
-Source: definition 1264, representatives C and J
-(blueprint: def-weil-pbc-projection-formula-arrows).
-Proof: tensoring each finite-free retract is a retract of a finite sum of the identity.
-It is exact, so the term is flat. The bounded-above flat K-flat lemma, transported
-through the model-site equivalence, proves K-flatness with the original site universes. -/
+Source: definition 1264, representatives C and J. -/
 theorem proEtaleStrictPerfect_flat
     (F : CochainComplex (proEtaleRingModules Y R) ℤ)
     (P : SheafOfModules.StrictPerfectCoefficientPackageOnSite
@@ -327,14 +317,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option maxHeartbeats 800000 in
 -- The resolution comparison elaborates several large total-tensor naturality squares.
-/-- Mixed tensor representatives, normalized at every flat K-flat resolution.
-Source: definition 1264, displayed representatives C and J
-(blueprint: def-weil-pbc-projection-formula-arrows).
-Proof: resolve A by a flat K-flat P. Tensoring this resolution with the K-flat F is a
-quasi-isomorphism. Compose its localization with the inverse model representative
-comparison and the inverse of tensor applied to the resolution. Common refinements
-and naturality give the square for every resolution. Its invertible left factor
-also proves uniqueness. This changes no object universe or coefficient category. -/
+/-- Mixed tensor representatives, normalized at every flat K-flat resolution. -/
 theorem proEtaleMixedTensor_existsUnique (a : ProEtaleTensorModel Y R)
     (A F : CochainComplex (proEtaleRingModules Y R) ℤ)
     (hf : proEtaleFlatRepresentatives Y R F) :
@@ -508,7 +491,7 @@ theorem proEtaleMixedTensor_existsUnique (a : ProEtaleTensorModel Y R)
     rfl
 
 /-- The unique mixed tensor comparison with the specified resolution normalization.
-Source: definition 1264 (blueprint: def-weil-pbc-projection-formula-arrows). -/
+Source: definition 1264. -/
 def proEtaleMixedTensor (a : ProEtaleTensorModel Y R)
     (A F : CochainComplex (proEtaleRingModules Y R) ℤ)
     (hf : proEtaleFlatRepresentatives Y R F) :=

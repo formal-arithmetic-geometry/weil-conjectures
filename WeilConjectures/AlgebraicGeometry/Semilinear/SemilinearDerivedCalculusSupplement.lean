@@ -123,9 +123,7 @@ public import WeilConjectures.AlgebraicGeometry.SemilinearDerivedCalculus
 /-! # Ordinary derived semilinear sections
 
 Source: Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1, Lemma 4.10 and Proposition
-  4.17;
-Stacks Project, Tags 0941, 079P, 06YS, 06YY, 07A4, 07A6 and 08J7--08JB
-(blueprint: def-coef-semilinear-derived-calculus).
+4.17; Stacks Project, Tags 0941, 079P, 06YS, 06YY, 07A4, 07A6 and 08J7--08JB.
 
 The categories below are module sheaves on the actual vertical sequence site and their
 ordinary unbounded derived categories. All comparisons have specified sources, targets
@@ -573,7 +571,7 @@ namespace Data
 variable (A : Data.{c, v, r} J B τ)
 
 /-- The inverse cartesian reduction, with its required invertibility proof supplied explicitly.
-Source: Zheng 4.1 (blueprint: def-coef-semilinear-derived-calculus). -/
+Source: Zheng 4.1. -/
 def cartesianReduction (M : DS.{c, v, max c v r} J B τ)
     (hM : Normalized.{c, v, max c v r} J B τ A.scalar M) {m n : ℕ} (h : n ≤ m) :
     (A.scalar h).T.obj ((e.{c, v, max c v r} J B τ m).obj M) ≅
@@ -581,7 +579,7 @@ def cartesianReduction (M : DS.{c, v, max c v r} J B τ)
   @asIso _ _ _ _ (reduction.{c, v, max c v r} J B τ h (A.scalar h) M) (hM h)
 
 /-- The displayed tensor-Hom transpose which determines the internal-Hom reduction.
-Source: Zheng 4.1; Stacks 08J9 (blueprint: def-coef-semilinear-derived-calculus). -/
+Source: Zheng 4.1; Stacks 08J9. -/
 def homReductionTranspose (M N : DS.{c, v, max c v r} J B τ)
     (hM : Normalized.{c, v, max c v r} J B τ A.scalar M) {m n : ℕ} (h : n ≤ m) :
     (A.scalar h).T.obj
@@ -601,7 +599,7 @@ def homReductionTranspose (M N : DS.{c, v, max c v r} J B τ)
       reduction.{c, v, max c v r} J B τ h (A.scalar h) N)
 
 /-- Equality with the specified transpose, including the two Hom evaluation comparisons.
-Source: Zheng 4.1; Stacks 08J9 (blueprint: def-coef-semilinear-derived-calculus). -/
+Source: Zheng 4.1; Stacks 08J9. -/
 def HomReductionFormula : Prop :=
   ∀ (M N : DS.{c, v, max c v r} J B τ) (hM : Normalized.{c, v, max c v r} J B τ A.scalar M)
     (m n : ℕ) (h : n ≤ m),
@@ -631,23 +629,21 @@ section OpenLocalization
 variable (U : C)
 
 /-- The localized coefficient tower, with its unchanged section rings.
-Source: Stacks 03DJ (blueprint: def-coef-semilinear-derived-calculus). -/
+Source: Stacks 03DJ. -/
 abbrev openRings (n : ℕ) : Sheaf (J.over U) CommRingCat.{max c v r} := (B n).over U
 
 /-- The localized coefficient transitions are the restrictions of tau.
-Source: Stacks 03DJ (blueprint: def-coef-semilinear-derived-calculus). -/
+Source: Stacks 03DJ. -/
 def openTransitions (n : ℕ) : openRings.{c, v, r} J B U (n + 1) ⟶ openRings.{c, v, r} J B U n :=
   (J.overPullback CommRingCat.{max c v r} U).map (τ n)
 
 /-- The actual site functor defining j-star on systems.
-Source: Stacks 03DJ (blueprint: def-coef-semilinear-derived-calculus). -/
+Source: Stacks 03DJ. -/
 def openSite : ℕ × Over U ⥤ ℕ × C := (𝟭 ℕ).prod (Over.forget U)
 
 omit ambientSmall in
 /-- The product slice-forgetful functor is continuous for the vertical topologies.
-Source: Stacks 03DJ (blueprint: def-coef-semilinear-derived-calculus).
-Proof: restriction to a fixed level is the usual continuous slice-forgetful functor.
-Every generating covering is vertical, so this verifies the full sheaf condition. -/
+Source: Stacks 03DJ. -/
 theorem openSite_continuous :
     (openSite U).IsContinuous (coefficientSequenceTopology (J.over U))
       (coefficientSequenceTopology J) := by
@@ -677,9 +673,7 @@ theorem openSite_continuous :
 attribute [instance] openSite_continuous
 
 /-- Restricting the actual sequence ring gives the localized sequence ring.
-Source: Stacks 03DJ (blueprint: def-coef-semilinear-derived-calculus).
-Proof: both rings have section B_n(V) at (n,V-to-U), with the same vertical
-restrictions and the same horizontal tau maps. Extensionality gives equality. -/
+Source: Stacks 03DJ. -/
 theorem openRing :
     ((openSite U).sheafPushforwardContinuous RingCat.{max c v r}
       (coefficientSequenceTopology (J.over U)) (coefficientSequenceTopology J)).obj
@@ -714,7 +708,7 @@ theorem openRing :
   exact congrArg (fun α ↦ α.hom.app (op X.unop.2)) hh
 
 /-- Actual j-star is restriction of the system presheaf along openSite.
-Source: Stacks 03DJ (blueprint: def-coef-semilinear-derived-calculus). -/
+Source: Stacks 03DJ. -/
 def openRestriction : Systems.{c, v, max c v r} J B τ ⥤
     Systems.{max c v, v, max c v r} (J.over U)
       (openRings.{c, v, r} J B U) (openTransitions.{c, v, r} J B τ U) :=
@@ -722,9 +716,7 @@ def openRestriction : Systems.{c, v, max c v r} J B τ ⥤
     (eqToHom (openRing.{c, v, r} J B τ U).symm)
 
 /-- Actual restriction of systems is additive and exact.
-Source: Stacks 03DJ (blueprint: def-coef-semilinear-derived-calculus).
-Proof: restriction keeps each section module over the slice. Kernels are sectionwise
-and sheafified cokernels commute with slice restriction. Addition is sectionwise. -/
+Source: Stacks 03DJ. -/
 theorem openRestriction_exact :
     (openRestriction.{c, v, r} J B τ U).Additive ∧
     PreservesFiniteLimits (openRestriction.{c, v, r} J B τ U) ∧
@@ -755,17 +747,17 @@ theorem openRestriction_exact :
     (eqToHom (openRing.{c, v, r} J B τ U).symm)
 
 /-- Additivity of actual system restriction.
-Source: Stacks 03DJ (blueprint: def-coef-semilinear-derived-calculus). -/
+Source: Stacks 03DJ. -/
 instance openRestrictionAdditive : (openRestriction.{c, v, r} J B τ U).Additive :=
   (openRestriction_exact.{c, v, r} J B τ U).1
 
 /-- Left exactness of actual system restriction.
-Source: Stacks 03DJ (blueprint: def-coef-semilinear-derived-calculus). -/
+Source: Stacks 03DJ. -/
 instance openRestrictionLimits : PreservesFiniteLimits (openRestriction.{c, v, r} J B τ U) :=
   (openRestriction_exact.{c, v, r} J B τ U).2.1
 
 /-- Right exactness of actual system restriction.
-Source: Stacks 03DJ (blueprint: def-coef-semilinear-derived-calculus). -/
+Source: Stacks 03DJ. -/
 instance openRestrictionColimits : PreservesFiniteColimits (openRestriction.{c, v, r} J B τ U) :=
   (openRestriction_exact.{c, v, r} J B τ U).2.2
 
@@ -773,7 +765,7 @@ instance openRestrictionColimits : PreservesFiniteColimits (openRestriction.{c, 
 The right adjoint is the constructed sectionwise restriction. The left adjoint is
 specified by its universal property and the dependency's direct-sum/sheafification
 model at every level; unit and counit equations fix those identifications.
-Source: Stacks 03DI--03DJ (blueprint: def-coef-semilinear-derived-calculus). -/
+Source: Stacks 03DI--03DJ. -/
 structure OpenSystems where
   /-- Actual extension by zero, determined up to unique adjunction-compatible iso. -/
   extension : Systems.{max c v, v, max c v r} (J.over U)
@@ -802,7 +794,7 @@ structure OpenSystems where
       evaluation.{c, v, max c v r} J B τ n ⋙
         SheafOfModules.localizedSystemRestriction.{c, v, r} (B n) U
   /-- Restriction evaluation retains the original section, at every coefficient level.
-  Source: Stacks 03DJ, 0941 (blueprint: def-coef-semilinear-derived-calculus). -/
+  Source: Stacks 03DJ, 0941. -/
   restrictionSections : ∀ (n : ℕ)
     (N : Systems.{c, v, max c v r} J B τ) (V : (Over U)ᵒᵖ)
     (x : ((openRestriction.{c, v, r} J B τ U ⋙

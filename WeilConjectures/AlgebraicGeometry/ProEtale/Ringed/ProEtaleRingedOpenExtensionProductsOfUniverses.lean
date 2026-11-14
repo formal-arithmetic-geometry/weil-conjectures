@@ -97,25 +97,7 @@ private theorem restriction_product_comparison
 /-- Quasi-compact open extension commutes with countable products in every
 coefficient universe containing the site.
 
-Source: Stacks Project, Tag 09BP, lemma-j-shriek-limits; the ringed recollement
-proof of lem-cbc-ringed-open-extension-products.
-(blueprint: lem-sf-ringed-open-extension-products-of-universes).
-
-Proof in words: choose the reduced closed complement i of U. The direct-sum
-extension followed by module sheafification is the left adjoint to slice
-restriction. Its unit is invertible and its inverse image on the closed
-complement is zero. Both open and closed inverse image preserve products:
-for the open this is sectionwise restriction; for the closed this is Tag 09AA,
-proved affine locally by the additional left adjoint of Tag 09BL. These proofs
-use only diagrams small in the coefficient universe, and apply after enlarging
-section sets from t+1 to max u (t+1). Apply both restrictions to the canonical
-product comparison. On the open, its projections identify it with the product
-of the invertible adjunction units. On the closed, its source and target are
-zero, since closed inverse image preserves the product of the zero restrictions
-of the individual extensions. The open-closed localization short exact sequence
-jointly detects zero objects. Exactness of the restrictions therefore makes
-the kernel and cokernel of the comparison zero, so it is an isomorphism.
-The argument includes the empty open, the empty scheme, and zero rings. -/
+Source: Stacks Project, Tag 09BP. -/
 theorem proEtaleRingedExtensionByZero_products_of_universes
     {X : Scheme.{t}} (U : X.ProEt) [IsOpenImmersion U.hom] [QuasiCompact U.hom]
     (R : Sheaf (ProEt.topology X) CommRingCat.{max u (t + 1)})

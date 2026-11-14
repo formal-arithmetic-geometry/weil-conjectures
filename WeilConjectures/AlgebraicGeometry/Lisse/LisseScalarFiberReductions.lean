@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.Etale.EtaleStalkTensorScalar
 /-! # Reductions of the integral scalar comparison
 
 Source: Deligne, Weil II (1.1.1) b), d), pp. 146-147.
-(blueprint: lem-pod-lisse-scalar-fiber-reductions).
 -/
 
 @[expose] public section
@@ -282,22 +281,7 @@ private lemma reductionComparison_unit (F : LisseIntegralSheaf l E Y) (n : ℕ)
 /-- Every target-level projection of the scalar comparison is the coefficient quotient.
 
 Source: Weil II (1.1.1) b), d), pp. 146-147; scalar extension and stalks,
-and right exactness of tensor products.
-(blueprint: lem-pod-lisse-scalar-fiber-reductions).
-
-Proof: put R = O_E, S = O_L, J = (uniformizer_L), and M = the integral fibre.
-At source index N = ceil((n+1)/e)-1, the source projection is surjective with
-kernel I^(N+1)M, by the integral-fibre projection theorem. The image of I^(N+1)
-in S is contained in J^(n+1), by the definition of the ramification index and
-the ceiling inequality. Consequently (S/J^(n+1)) tensor_R (M/I^(N+1)M) is
-canonically (S tensor_R M)/J^(n+1)(S tensor_R M), by tensor right exactness.
-The stalk/scalar and sheafification comparisons identify the first of these
-modules with the target stalk at level n. Their generators are the germs of
-pure tensors. The defining projection formula for the constructed comparison
-sends 1 tensor z to precisely this germ, so its projection is the canonical
-quotient followed by that isomorphism. This proves its surjectivity and kernel
-formula. The argument includes the zero module and level zero; positivity of
-e gives a nonnegative source index and the same ideal containment in both cases. -/
+and right exactness of tensor products. -/
 theorem lisseIntegralScalarFiberComparison_reductions (F : LisseIntegralSheaf l E Y)
     (n : ℕ) :
     let S := Padic.coefficientExtensionIntegers l L

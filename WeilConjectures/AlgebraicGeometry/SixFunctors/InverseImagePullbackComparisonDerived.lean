@@ -40,8 +40,7 @@ public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 /-!
 # The specified integral comparison at an arbitrary derived object
 
-Source: Bhatt--Scholze, Section 6.5, Lemma 6.5.9(4); the chosen-resolution formula
-in part (b) (blueprint: def-weil-inverse-image-pullback-comparison).
+Source: Bhatt--Scholze, Section 6.5, Lemma 6.5.9(4).
 
 This is the recorded comparison transported through a representative of a derived
 object and a flat-term K-flat resolution. No new naturality assertion is imposed.
@@ -59,9 +58,8 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- Evaluate part (b) on the chosen representative and its chosen K-flat resolution,
 then transport its two endpoints by the representative isomorphism. The resolution
-is used only through the localized specified comparison. Source: Bhatt--Scholze,
-Section 6.5, Lemma 6.5.9(4)
-(blueprint: def-weil-inverse-image-pullback-comparison). -/
+is used only through the localized specified comparison. Source: Bhatt--Scholze, Section 6.5, Lemma
+6.5.9(4). -/
 def inverseImagePullbackComparisonDerived
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

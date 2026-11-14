@@ -51,20 +51,7 @@ variable [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ T)]
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ' T)]
 
 /-- The actual section change-of-rings model admits the normalized internal comparison.
-Source: Stacks 03EK, 03EL, 06YY; parent proof step 1.
-(blueprint: lem-sfb-quotient-scalar-section-existence).
-
-Proof: take the sheafified sectionwise scalar-extension functor and its everywhere
-defined total left derived functor with its universal cochain counit. The ordinary
-internal/section scalar adjunction gives the comparison on module sheaves: inserting
-the scalar unit internally maps to the sheafified generator 1 tensor m. Transport
-this comparison termwise to complexes and through the exact section equivalences.
-Both composites are total left derived functors of the same ordinary composite;
-the counit-compatible unique isomorphism gives the derived comparison. Its defining
-universal-counit square, with the two complex-composition comparisons inserted,
-is exactly the second normalization equation, for every complex. This construction
-uses no exactness of scalar extension and works for zero modules, zero target rings,
-empty schemes, and arbitrary unbounded complexes. -/
+Source: Stacks 03EK, 03EL, 06YY. -/
 theorem scalar_section_exists (T : Scheme.{u}) :
     ∃ c : ScalarSectionData a T, ScalarSectionNormalized a T c := by
   obtain ⟨model⟩ := scalar_section_model_exists a T

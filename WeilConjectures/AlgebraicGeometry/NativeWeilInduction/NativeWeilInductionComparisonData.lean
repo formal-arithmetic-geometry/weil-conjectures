@@ -14,9 +14,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # Native ordinary derived Weil induction and compact supports
 
-Source: blueprint `cor-coef-verdier-weil-equivariance.proof.md`, final sentence, and
-`lem-fix-weil-operations.proof.md`, first two paragraphs; Stacks Tags 079P, 08BJ, 070Y.
-(blueprint: def-sf-native-weil-induction-comparison-data)
+Source: Stacks Tags 079P, 08BJ, 070Y.
 
 All functors below are on ordinary unbounded derived categories. The localized structure
 map is a natural transformation out of derived forgetting; no equivalence between derived
@@ -42,9 +40,7 @@ section ExactComparisons
 variable {C : Type u} {D : Type v} [Category.{w} C] [Category.{w} D]
   [Abelian C] [Abelian D] [HasDerivedCategory.{w} C] [HasDerivedCategory.{w} D]
 
-/-- Localize the actual termwise identity underlying an exact lifted functor.
-Source: blueprint `prose-10-20`, first paragraph, and exact localization.
-(blueprint: def-sf-native-weil-induction-comparison-data) -/
+/-- Localize the actual termwise identity underlying an exact lifted functor. -/
 def exactForgetComparison (P : C ⥤ C) (Q : D ⥤ D) [P.Additive] [Q.Additive]
     [P.IsEquivalence] [Q.IsEquivalence] (L : C ⥤ D) [L.Additive]
     [PreservesFiniteLimits L] [PreservesFiniteColimits L]
@@ -58,8 +54,7 @@ def exactForgetComparison (P : C ⥤ C) (Q : D ⥤ D) [P.Additive] [Q.Additive]
       (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- Derive the native exchange using exact Frobenius equivalences and the specified
-right-derived units. Source: blueprint `prose-10-20`, first paragraph.
-(blueprint: def-sf-native-weil-induction-comparison-data) -/
+right-derived units. -/
 def rightExchange (P : C ⥤ C) (Q : D ⥤ D) [P.Additive] [Q.Additive]
     [P.IsEquivalence] [Q.IsEquivalence] [Abelian.HasKInjectiveResolutions C]
     (L : C ⥤ D) [L.Additive] (e : L ⋙ Q ≅ P ⋙ L) :
@@ -69,9 +64,7 @@ def rightExchange (P : C ⥤ C) (Q : D ⥤ D) [P.Additive] [Q.Additive]
     Functor.rightDerivedFunctorNatIso e ≪≫ Functor.rightDerivedFunctorCompIso P L ≪≫
       Functor.isoWhiskerRight P.rightDerivedFunctorIsoMapDerivedCategory L.rightDerivedFunctor
 
-/-- The normalization equation for localization of an exact native lifted square.
-Source: comparison proof step 4, termwise localization
-(blueprint: def-sf-native-weil-induction-comparison-data). -/
+/-- The normalization equation for localization of an exact native lifted square. -/
 def exactForgetNormalization (P : C ⥤ C) (Q : D ⥤ D) [P.Additive] [Q.Additive]
     [P.IsEquivalence] [Q.IsEquivalence] (L : C ⥤ D) [L.Additive]
     [PreservesFiniteLimits L] [PreservesFiniteColimits L]
@@ -87,9 +80,7 @@ def exactForgetNormalization (P : C ⥤ C) (Q : D ⥤ D) [P.Additive] [Q.Additiv
       (IsoAlgebra.forget Q).mapDerivedCategoryFactors.hom.app
         (((IsoAlgebra.mapOfNatIso e).mapHomologicalComplex (.up ℤ)).obj K)
 
-/-- Exact localization preserves the literal underlying square.
-Source: the exact-localization portion of comparison proof step 4.
-(blueprint: def-sf-native-weil-induction-comparison-data) -/
+/-- Exact localization preserves the literal underlying square. -/
 theorem exactForgetNormalization_proof
     (P : C ⥤ C) (Q : D ⥤ D) [P.Additive] [Q.Additive]
     [P.IsEquivalence] [Q.IsEquivalence] (L : C ⥤ D) [L.Additive]
@@ -117,24 +108,19 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)]
 
 /-- The specified ordinary derived Frobenius pullback. Source: native framework,
-`WeilSheaf.frobeniusPullback` (blueprint: def-sf-native-weil-induction-comparison-data). -/
+`WeilSheaf.frobeniusPullback`. -/
 abbrev frobenius (T : Scheme.{u}) [T.Over (Spec (.of k₀))] :=
   (WeilSheaf.frobeniusPullback k₀ l T).mapDerivedCategory
 
-/-- Ordinary derived forgetting. Source: native framework and the free-resolution node
-(blueprint: def-sf-native-weil-induction-comparison-data). -/
+/-- Ordinary derived forgetting. -/
 abbrev forget (T : Scheme.{u}) [T.Over (Spec (.of k₀))] :=
   (IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l T)).mapDerivedCategory
 
-/-- Exact free induction from the recorded ordinary derived adjunction. Source:
-`lem-sf-free-derived-weil-resolution`
-(blueprint: def-sf-native-weil-induction-comparison-data). -/
+/-- Exact free induction from the recorded ordinary derived adjunction. -/
 abbrev induction (T : Scheme.{u}) [T.Over (Spec (.of k₀))] :=
   (IsoAlgebra.Free.functor (WeilSheaf.frobeniusPullback k₀ l T)).mapDerivedCategory
 
-/-- The localized structure isomorphism, natural on all derived Weil morphisms.
-Source: native framework and proof step 6 of the ordinary-derived comparison
-(blueprint: def-sf-native-weil-induction-comparison-data). -/
+/-- The localized structure isomorphism, natural on all derived Weil morphisms. -/
 def structureIso (T : Scheme.{u}) [T.Over (Spec (.of k₀))] :
     forget k₀ l T ⋙ frobenius k₀ l T ≅ forget k₀ l T :=
   Functor.mapDerivedCategoryCompIso _ _ ≪≫
@@ -142,9 +128,7 @@ def structureIso (T : Scheme.{u}) [T.Over (Spec (.of k₀))] :
       (IsoAlgebra.strNatIso (WeilSheaf.frobeniusPullback k₀ l T))
 
 /-- The canonical integer coprojection: iterate the localized free structure on the
-zeroth coprojection, the actual derived adjunction unit. This does not identify categories.
-Source: free-integer adjunction and comparison proof step 7
-(blueprint: def-sf-native-weil-induction-comparison-data). -/
+zeroth coprojection, the actual derived adjunction unit. This does not identify categories. -/
 def inclusion (T : Scheme.{u}) [T.Over (Spec (.of k₀))]
     (A : _root_.DerivedCategory
       (ProEtale.AdicSheaf l (T ↘ Spec (.of k₀)).geometricFiber)) (n : ℤ) :
@@ -159,8 +143,7 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (.of k₀))] [Y.Over (Spec (.of k₀))
   (f : X ⟶ Y) [f.IsOver (Spec (.of k₀))] (c : Compactification f)
 
 /-- The actual ordinary compact-support composite on geometric fibres, with native
-coefficient maps. Source: framework, the chosen compactification and comparison proof step 3
-(blueprint: def-sf-native-weil-induction-comparison-data). -/
+coefficient maps. -/
 abbrev ordinaryImage :=
   (ProEtale.adicOpenImmersionLowerShriek l
     (Scheme.Hom.geometricFiberMap c.i (comp_over c.i (Spec (.of k₀))))).mapDerivedCategory ⋙
@@ -168,8 +151,7 @@ abbrev ordinaryImage :=
     (Scheme.Hom.geometricFiberMap c.g (comp_over c.g (Spec (.of k₀))))).rightDerivedFunctor
 
 /-- The proper comparison is the canonical right-derived lifted-functor comparison.
-Source: native framework and comparison proof step 4, Stacks Tags 079P and 08BJ
-(blueprint: def-sf-native-weil-induction-comparison-data). -/
+Source: native framework and comparison proof step 4, Stacks Tags 079P and 08BJ. -/
 def properComparison :
     (ProEtaleWeilSheaf.lowerStar k₀ l c.g).rightDerivedFunctor ⋙ forget k₀ l Y ≅
       forget k₀ l c.Z ⋙ (ProEtale.adicLowerStar l
@@ -182,9 +164,7 @@ def properComparison :
     (WeilSheaf.frobeniusPullback k₀ l c.Z)
     (ProEtale.adicLowerStarGeometricFiberMapCompFrobeniusIso l c.g (comp_over c.g (Spec (.of k₀))))
 
-/-- The open comparison localizes the actual termwise identity on objects and maps.
-Source: native framework, comparison proof step 4
-(blueprint: def-sf-native-weil-induction-comparison-data). -/
+/-- The open comparison localizes the actual termwise identity on objects and maps. -/
 def openComparison :
     (ProEtaleWeilSheaf.extensionByZero k₀ l c.i).mapDerivedCategory ⋙ forget k₀ l c.Z ≅
       forget k₀ l X ⋙ (ProEtale.adicOpenImmersionLowerShriek l
@@ -194,8 +174,7 @@ def openComparison :
       l c.i (comp_over c.i (Spec (.of k₀))))
 
 /-- The specified beta, the proper comparison whiskered by open extension and then
-composed with the termwise open comparison. Source: comparison proof step 4
-(blueprint: def-sf-native-weil-induction-comparison-data). -/
+composed with the termwise open comparison. -/
 def comparison :
     ProEtaleWeilSheaf.rightDerivedLowerShriek k₀ l f c ⋙ forget k₀ l Y ≅
       forget k₀ l X ⋙ ordinaryImage k₀ l f c :=
@@ -206,8 +185,7 @@ def comparison :
           Functor.associator _ _ _
 
 /-- The native first Frobenius exchange, derived from the actual proper and open
-sheaf exchanges. Source: blueprint `prose-10-20`, first two paragraphs
-(blueprint: def-sf-native-weil-induction-comparison-data). -/
+sheaf exchanges. -/
 def exchange :
     ordinaryImage k₀ l f c ⋙ frobenius k₀ l Y ≅
       frobenius k₀ l X ⋙ ordinaryImage k₀ l f c :=
@@ -225,9 +203,7 @@ def exchange :
     Functor.associator _ _ _
 
 /-- Structural clauses for each of the three native hearts and its derived forgetful
-functor; constructibility uses the existing locally stratified finite-free predicate.
-Source: comparison proof steps 1--2
-(blueprint: def-sf-native-weil-induction-comparison-data). -/
+functor; constructibility uses the existing locally stratified finite-free predicate. -/
 def HeartProperties (T : Scheme.{u}) [T.Over (Spec (.of k₀))] : Prop :=
   IsGrothendieckAbelian.{u + 1}
       (ProEtale.AdicSheaf l (T ↘ Spec (.of k₀)).geometricFiber) ∧
@@ -252,8 +228,7 @@ def HeartProperties (T : Scheme.{u}) [T.Over (Spec (.of k₀))] : Prop :=
 
 /-- Identity on the common proper K-injective model, expressed with the actual units
 and localization factors. The underlying sheaf square is literally equal on maps too.
-Source: comparison proof step 4, Stacks Tags 079P, 08BJ and 070Y
-(blueprint: def-sf-native-weil-induction-comparison-data). -/
+Source: comparison proof step 4, Stacks Tags 079P, 08BJ and 070Y. -/
 def ProperNormalization : Prop :=
   ∀ J : CochainComplex (ProEtaleWeilSheaf k₀ l c.Z) ℤ, J.IsKInjective →
     (forget k₀ l Y).map
@@ -276,8 +251,7 @@ def ProperNormalization : Prop :=
           (.up ℤ)).obj ((HomotopyCategory.quotient _ (.up ℤ)).obj J))
 
 /-- The open comparison is the termwise identity, expressed through the two exact
-localization factorizations. Source: comparison proof step 4
-(blueprint: def-sf-native-weil-induction-comparison-data). -/
+localization factorizations. -/
 def OpenNormalization : Prop :=
   exactForgetNormalization _ _ _
     (ProEtale.adicOpenImmersionLowerShriekGeometricFiberMapCompFrobeniusIso

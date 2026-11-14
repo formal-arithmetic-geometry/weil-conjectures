@@ -18,7 +18,7 @@ import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 
 /-! # Completeness of the derived strict integral quotient limit
 
-Source: Stacks Project, proetale.tex, Tag 099M, lemma-naive-completion.
+Source: Stacks Project, Tag 099M.
 -/
 
 @[expose] public noncomputable section
@@ -120,22 +120,7 @@ private theorem integral_reduction_level_annihilated (ℓ : ℕ) (W : Scheme.{u}
 /-- The strict derived quotient limit is derived complete after identifying coefficients.
 This is only the assertion about its values; it specifies no augmentation or reflector.
 
-Source: Stacks Project, proetale.tex, Tag 099M, lemma-naive-completion, and the principal
-orthogonality argument of Tags 091Q and 0999
-(blueprint: lem-sfb-integral-strict-limit-complete).
-
-Proof: each ordinary reduction is killed by ell^(n+1), since its quotient map is
-epimorphic. Derived evaluation is a right adjoint: its finite-coproduct left adjoint
-is exact and the adjunction descends through localization. It therefore preserves
-the pointwise right Kan extension defining the left derived reduction. The Kan
-extension universal property transports the annihilation identity to every derived
-level. Apply the Milnor triangle for the given total right derived inverse limit,
-then map it through the exact coefficient equivalence. Maps from an ell-invertible
-object or any of its shifts to each reduction vanish. Products preserve this
-vanishing; triangle exactness makes the inverse limit right orthogonal to
-ell-invertible objects. The principal orthogonality criterion implies completeness.
-No tensor comparison, flat resolution, augmentation, or choice of reduction is
-needed. The proof applies to unbounded and zero complexes and the empty scheme. -/
+Source: Stacks Project, Tag 099M, and the principal orthogonality argument of Tags 091Q and 0999. -/
 theorem integral_strict_limit_complete (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     [HasDerivedCategory.{u + 1} (DiagonalAb W)]
     [HasDerivedCategory.{u + 1} (ℕᵒᵖ ⥤ DiagonalAb W)]

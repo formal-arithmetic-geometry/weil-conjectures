@@ -24,7 +24,7 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Blueprint `lemma-uniform-bounds-pro-etale-affines`: The affine torsion cohomological dimension
+/-- The affine torsion cohomological dimension
 bound.
 
 Let `K` be a field with `cd_tor(K) ≤ c`, and let `X` be an affine `K`-scheme of finite type
@@ -32,9 +32,9 @@ Let `K` be a field with `cd_tor(K) ≤ c`, and let `X` be an affine `K`-scheme o
 `Hᵠ(X_ét, F) = 0` for every torsion abelian étale sheaf `F` on `X` and every `q > d + c`.
 
 The proof is by induction on `d`, over all ground fields at once; it reduces to algebraically
-closed `K` (`lemma-uniform-bounds-pro-etale-affines`) and, by Noether normalisation, to affine
+closed `K` and, by Noether normalisation, to affine
 space, where the Leray spectral sequence of `𝔸ᵈ ⟶ ℙ¹ × 𝔸ᵈ⁻¹ ⟶ 𝔸ᵈ⁻¹` and a computation of the stalks
-of the higher direct images (`lemma-uniform-bounds-pro-etale-affines`) conclude. -/
+of the higher direct images conclude. -/
 theorem hasTorsionCohomologicalDimensionLE_of_isAffine {K : Type u} [Field K] {c d : ℕ}
     (hK : (Spec (.of K)).HasTorsionCohomologicalDimensionLE c) {X : Scheme.{u}}
     (a : X ⟶ Spec (.of K)) [LocallyOfFiniteType a] [IsAffine X]

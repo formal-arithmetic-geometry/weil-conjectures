@@ -26,15 +26,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- Matrix evaluation carries the actual scalar quotient differential to the signed
-Hom differential of the ordinary quotient model.
-Source: blueprint Compatible isomorphisms, the signed finite matrix Hom complex.
-(blueprint: lem-pe-internal-perfect-differential-compatibility).
-Proof: expand the signed differential in degrees q,q+1. In the fixed quotient bases,
-each ordinary differential has its constant residue matrix. The quotient entry
-formula is the same signed sum of the two matrix products. The coefficient ring
-comparison preserves sums and signs and carries products to composition; finite
-biproduct extensionality therefore identifies the two cochains. Off the cochain
-shape both differentials are zero. This argument includes rank-zero terms. -/
+Hom differential of the ordinary quotient model. -/
 theorem evaluation_differential (W : Scheme.{u})
     (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ)
     (hfree : ∀ i, Module.Finite (A l E) (P.X i) ∧ Module.Free (A l E) (P.X i))

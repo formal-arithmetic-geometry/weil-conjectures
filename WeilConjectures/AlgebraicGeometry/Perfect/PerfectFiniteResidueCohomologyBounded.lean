@@ -38,24 +38,7 @@ private theorem flat_of_finiteFree_retract (Y : Scheme.{u})
 /-- A strictly perfect neighbourhood gives common finite support bounds for
 residue-fibre Betti numbers.
 Source: Stacks Project, More on Algebra, Tag 0BCD, first paragraph of the proof;
-Cohomology of Sheaves, Tag 08C4 (strictly perfect complexes).
-(blueprint: new-perfect-finite-residue-cohomology-bounded).
-
-Proof: Choose V, P and the given derived isomorphism from hlocal, retaining the
-bounds a and b of P. The residue morphism has constant value x, so it restricts
-from the whole residue-field spectrum to V. Transport P through Modules.overEquiv V.
-The equivalence preserves zero terms, finite coproducts of the unit, and retract
-maps, so the transported complex C is bounded with flat terms. The bounded-above
-flat-complex comparison represents its derived pullback by a termwise additive
-pullback complex FC. The open-restriction comparison identifies Q(FC) with the
-restriction of the derived fibre, transported through the open-site equivalence.
-For i outside [a,b], additivity makes FC.X i zero, hence its homology is zero.
-Restriction to the whole spectrum is faithful and exact, and the open-site
-equivalence is faithful and exact, so they reflect this cohomology vanishing back
-to the derived fibre. Evaluation and scalar restriction preserve zero objects by
-additivity. Thus derivedFiberCohomology is subsingleton and its finrank is zero.
-No exactness of evaluation is needed. The same bounds also cover the zero complex
-and a > b, when every term is zero. -/
+Cohomology of Sheaves, Tag 08C4 (strictly perfect complexes). -/
 theorem finiteFiberCohomologyBounded
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

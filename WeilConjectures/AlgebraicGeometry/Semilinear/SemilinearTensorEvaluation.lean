@@ -93,8 +93,7 @@ import WeilConjectures.AlgebraicGeometry.TensorPullbackRepresentativeDescent
 
 /-! # Evaluation of the K-flat tensor model
 
-Source: Zheng Construction 4.1; Stacks 03EK, 06YS and 07A4
-(blueprint: lem-coef-semilinear-tensor-evaluation).
+Source: Zheng Construction 4.1; Stacks 03EK, 06YS and 07A4.
 -/
 
 @[expose] public noncomputable section
@@ -375,21 +374,7 @@ private theorem evaluation_tensor_natural (n : ℕ)
     evaluation_map_section.{c, v, r} J B τ n]
 
 /-- Evaluation of total tensors, with both representative and section normalization.
-Source: Zheng Construction 4.1; Stacks 03EK, 06YS and 07A4
-(blueprint: lem-coef-semilinear-tensor-evaluation).
-Proof: evaluation is restriction to a vertical slice of the ringed sequence site.
-It is a geometric inverse image with identity structural ring map, so it preserves
-flat-term K-flat complexes. For ordinary modules its tensor comparison is the
-unique identity-on-pure-sections isomorphism ordinaryEvaluationTensor. Evaluation
-preserves direct sums; on each (p,q) summand of the total tensor apply this ordinary
-comparison. Naturality makes it commute with both differentials, including the sign
-on the second differential. The inverse ordinary comparisons give the inverse chain
-map. Restrict to flat-term K-flat representatives on the sequence site; both evaluated
-complexes compute the level tensor. The specified tensor-model comparisons therefore
-descend this chain isomorphism to derived objects. Localization uniqueness extends
-it to morphisms and inverse quasi-isomorphisms. Its defining square is exactly the
-derived field of TensorComparisonModel; its chain and summand fields are the preceding
-construction. The ordinary field is the fixed section-normalized comparison. -/
+Source: Zheng Construction 4.1; Stacks 03EK, 06YS and 07A4. -/
 theorem semilinearTensorEvaluation (n : ℕ)
     (closed : Closed.{c, v, r} (coefficientSequenceTopology J)
       (systemRing.{c, v, max c v r} J B τ))

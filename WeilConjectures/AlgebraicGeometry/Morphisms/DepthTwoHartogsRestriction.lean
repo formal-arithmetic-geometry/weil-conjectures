@@ -20,7 +20,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 /-! # Restriction and direct image of a depth-two module
 
 Source: Stacks Project, Tag 0E9I.
-(blueprint: lem-sbc-depth-two-hartogs-restriction)
 -/
 
 @[expose] public section
@@ -31,24 +30,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Restriction followed by direct image recovers a coherent depth-two module.
 
-Source: Stacks Project, Lemma 31.5.11, Tag 0E9I.
-(blueprint: lem-sbc-depth-two-hartogs-restriction)
-
-Proof: On any affine open of the locally Noetherian scheme, quasi-coherence
-identifies N with the sheaf associated to its module of sections. The latter
-is finite by hypothesis, hence finitely presented over the Noetherian affine
-ring. Thus N is coherent. The canonical map N to j_*(N restricted to U) is
-an isomorphism on U. At a point of the complement, the direct-image module
-has no associated point there (Tags 0AVN and 05AM): the open immersion is
-quasi-compact locally on the Noetherian affine opens, so its direct image
-is quasi-coherent and Tag 0AVN applies. N has depth at least two by hypothesis.
-The coherent-module comparison criterion of Tag 0AVM now proves that the
-canonical map is an isomorphism everywhere. This is exactly the restriction
-adjunction's unit: on an open V it is restriction of sections to V intersect U.
-Equivalently, apply Tag 0E9I directly after the coherence check. The argument
-is local and requires no global quasi-compactness. For U = top the unit is
-already invertible; for U empty the criterion implies that N is zero.
-The zero module is allowed since its depth is infinite. -/
+Source: Stacks Project, Lemma 31.5.11, Tag 0E9I. -/
 theorem isIso_restrictAdjunction_unit_of_depth_two
     {L : Scheme.{u}} [IsLocallyNoetherian L] (U : L.Opens)
     (N : L.Modules)

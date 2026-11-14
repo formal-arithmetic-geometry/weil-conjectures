@@ -22,10 +22,9 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The local wedge construction on a fixed open, as in the determinant paragraph.
-Source: blueprint, Riemann--Roch, proof of (*), determinant paragraph.
 The construction chooses local lifts, proves independence by finite locally free basis
 expansion and alternation, and descends the resulting alternating multilinear map through
-exterior powers and tensor products. (blueprint: new-local-wedge-at)
+exterior powers and tensor products.
 -/
 theorem determinant_wedgeMorphism_local_data_at {X : Scheme.{v}}
     (S : ShortComplex X.Modules) (hS : S.ShortExact) (r₁ r₂ r₃ : ℕ) (hr : r₂ = r₁ + r₃)

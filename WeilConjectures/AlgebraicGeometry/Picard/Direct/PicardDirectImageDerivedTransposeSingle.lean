@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.Picard.CanonicalDirectImageH0Unit
 /-! # The single-module description of the derived transpose
 
 Source: Stacks Project, Tags 08HY, 079W and 0D5S.
-(blueprint: lem-sc-picard-direct-image-derived-transpose-single)
 -/
 
 @[expose] public section
@@ -95,24 +94,7 @@ private theorem transposeFromHomology
 /-- Taking degree zero and transposing ordinarily recovers the same morphism
 as derived transposition, after the canonical single-pullback comparison.
 This is a comparison at one test scheme, with no restriction morphism.
-Source: Stacks Project, Tags 08HY, 079W and 0D5S.
-(blueprint: lem-sc-picard-direct-image-derived-transpose-single)
-
-Proof: Let p be the fibre-product projection, N its coefficient module, and e
- the canonical identification of the test source with O_T[0]. The morphism
- e.inv followed by the test morphism and the canonical base-change comparison
- has source O_T[0] and target Rp_*(N[0]). Derived adjunction identifies it with
- a morphism from Lp^*O_T[0] to N[0]. The structure sheaf is invertible, so its
- single-pullback comparison is an isomorphism. The fully faithful single
- embedding therefore gives a unique ordinary morphism b:p^*O_T -> N.
- canonicalSingleAdjunctionTranspose identifies its derived transpose with
- single(adj.homEquiv b) followed by the canonical direct-image comparison.
- Apply H^0. Naturality of singleFunctorCompHomologyFunctorIso and
- canonicalDirectImageH0Unit identify adj.homEquiv b with exactly the degree-zero
- morphism used in picardDirectImageUnitMorphism. Injectivity of the ordinary
- homEquiv gives b = pullbackObjUnitToUnit p followed by that unit morphism.
- Substitute into the derived transpose. No base-change comparison is inverted;
- identity maps, zero coefficients and empty schemes obey the same argument. -/
+Source: Stacks Project, Tags 08HY, 079W and 0D5S. -/
 theorem picardDirectImageDerivedTranspose_single
     {X S : Scheme.{v}} (f : X ⟶ S)
     (L : X.Modules) (W : Scheme.{v}) (k : W ⟶ S)

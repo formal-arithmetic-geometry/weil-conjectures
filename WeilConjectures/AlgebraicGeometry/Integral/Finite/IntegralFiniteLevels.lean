@@ -22,9 +22,6 @@ import WeilConjectures.AlgebraicGeometry.Integral.Finite.IntegralFiniteReduction
 import WeilConjectures.AlgebraicGeometry.Integral.Finite.IntegralFiniteTowerBounds
 
 /-! # Bounds for the finite reductions
-
-Source: blueprint latest, sec-proetale-coefficients/sk-lem-integral-finite-levels,
-statement (last paragraph) (blueprint: lemma-bounds-finite-reductions).
 -/
 
 @[expose] public noncomputable section
@@ -79,9 +76,6 @@ private theorem expandIntegralStrata
   exact hs S i hbase n q
 
 /-- Bounds and constructibility for all finite reductions of a complete integral complex.
-
-Source: blueprint latest, sec-proetale-coefficients/sk-lem-integral-finite-levels,
-statement (last paragraph) (blueprint: lemma-bounds-finite-reductions).
 
 Proof, following the node and the current blueprint, in the native internal coefficient
 presentation:

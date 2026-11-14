@@ -76,9 +76,7 @@ smoothness of `ℙ(n; S) ⟶ S` of relative dimension `d`.
 
 This is the first assertion of the blueprint lemma; the main assertion, the canonical module
 `ω_ℙ = Λᵈ Ω¹_{ℙ/A}` and the isomorphism `ω_ℙ ≅ 𝒪(-d-1)` over `S = Spec A`, is
-`AlgebraicGeometry.ProjectiveSpace.canonicalModuleIsoTwist`.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
+`AlgebraicGeometry.ProjectiveSpace.canonicalModuleIsoTwist`. -/
 theorem isFiniteLocallyFreeOfRank_relativeDifferentials {d : ℕ} (hn : Nat.card n = d + 1) :
     (ℙ(n; S) ↘ S).relativeDifferentials.IsFiniteLocallyFreeOfRank d :=
   have := smoothOfRelativeDimension n S hn

@@ -20,7 +20,6 @@ import WeilConjectures.AlgebraicGeometry.Picard.Direct.PicardDirectImageSectionM
 /-! # Natural section comparisons under successive base change
 
 Source: Stacks Project, Tags 0B91 and 08HY.
-(blueprint: lem-sc-picard-direct-image-section-naturality)
 -/
 
 @[expose] public section
@@ -32,33 +31,7 @@ namespace AlgebraicGeometry.Scheme
 /-- The additive section comparison for a direct image is natural for arbitrary successive
 base changes. This is the cohomological part of the argument; it asserts no property
 of the image of a scheme morphism and uses no residue point or open neighbourhood.
-Source: Stacks Project, Tags 0B91, 08HY and 0D5S.
-(blueprint: lem-sc-picard-direct-image-section-naturality)
-
-Proof: Set p = pr_W and M = pr_X^*L. Flatness of f and invertibility of L imply
-that M is finitely presented and flat over W, and these properties persist after
-base change. Tag 0B91 makes the canonical map Lt^*Rp_*(M[0]) to the derived direct
-image of M_T[0] invertible for every t. The cartesian comparison identifies M_T
-with pr_X^*L by the tensor-pullback composition isomorphism. Pullback of O_W[0]
-is O_T[0], since the tensor unit is flat. Derived adjunction and full faithfulness
-of the degree-zero single functor now identify test morphisms with morphisms
-O_{X_T} to L_T. Evaluation on 1 over the top open is the additive equivalence to
-global sections. Let q_t be the composite of these additive equivalences, using
-the canonical base-change maps throughout.
-
-For i followed by t, the two given projection equations identify j with the
-cartesian comparison by the fibre-product universal property. Tensor composition
-along j and pr_X gives the displayed, fixed coefficient isomorphism. Naturality of the
-derived adjunction unit and counit
-identifies pullback of a test morphism with pullback of its transpose. The
-canonical degree-zero mate square identifies this with the ordinary tensor
-adjunction unit. Associativity of the canonical derived composition comparisons
-shows that the pulled-back test morphism is exactly the conjugation defining
-picardDerivedModelRestriction. Evaluate the resulting equality of module
-morphisms at 1 on the top open. The pushforward unit has values on j inverse top;
-compose its presheaf restriction to top and the inverse composition comparison to obtain the
-formula. This proof uses no nonempty scheme or fibre assumption: on empty schemes
-the same maps are equivalences of zero section groups. -/
+Source: Stacks Project, Tags 0B91, 08HY and 0D5S. -/
 theorem picard_direct_image_section_naturality
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

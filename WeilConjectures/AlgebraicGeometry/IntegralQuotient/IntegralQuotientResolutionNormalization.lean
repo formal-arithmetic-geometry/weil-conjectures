@@ -179,9 +179,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 
 /-! # Actual integral finite-quotient resolutions
 
-Source: blueprint main-20261015, integral proper-base-change proof, paragraph (1);
-Stacks Project, Tags 093M, 093J and 06YQ
-(blueprint: lem-sfb-integral-quotient-resolution-normalization).
+Source: Stacks Project, Tags 093M, 093J and 06YQ.
 
 Level n denotes exponent n + 1. The ring objects, multiplication, cone and projection
 are exactly those of IntegralQuotientCoefficients. The finite constant identifications
@@ -208,39 +206,34 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- The existing reconstructed commutative section-ring sheaf of the integral object.
-Source: Stacks 00YV; blueprint paragraph (1)
-(blueprint: lem-sfb-integral-quotient-resolution-normalization). -/
+Source: Stacks 00YV. -/
 abbrev resolutionSectionRing (T : Scheme.{u}) :=
   InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}
     (Scheme.ProEt.topology T)
     (condensedRingObj (integral l E) T)
 
 /-- Forgetting commutativity of the same section ring; no coefficient is replaced.
-Source: Stacks 00YV; blueprint paragraph (1)
-(blueprint: lem-sfb-integral-quotient-resolution-normalization). -/
+Source: Stacks 00YV. -/
 abbrev resolutionUnderlyingRing (T : Scheme.{u}) :=
   (sheafCompose (Scheme.ProEt.topology T) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
     (resolutionSectionRing l E T)
 
 /-- The finite section ring, reconstructed from the actual pulled-back quotient.
-Source: Stacks 00YV; blueprint paragraph (1)
-(blueprint: lem-sfb-integral-quotient-resolution-normalization). -/
+Source: Stacks 00YV. -/
 abbrev resolutionFiniteRing (T : Scheme.{u}) (n : ℕ) :=
   InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}
     (Scheme.ProEt.topology T)
     (condensedRingObj (finite l E n) T)
 
 /-- The recorded internal/section module equivalence, with its exact forward functor.
-Source: Stacks 00YV; blueprint paragraph (1)
-(blueprint: lem-sfb-integral-quotient-resolution-normalization). -/
+Source: Stacks 00YV. -/
 abbrev resolutionSectionEquivalence (T : Scheme.{u}) :=
   InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u}
     (Scheme.ProEt.topology T)
     (condensedRingObj (integral l E) T)
 
 /-- The constant integral ring in the universe of abelian sheaves on the small site.
-Source: Stacks 093I; blueprint paragraph (1)
-(blueprint: lem-sfb-integral-quotient-resolution-normalization). -/
+Source: Stacks 093I. -/
 abbrev resolutionConstantRing (T : Scheme.{u}) :=
   (constantSheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1}).obj
     (CommRingCat.of (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)))
@@ -703,35 +696,7 @@ attribute [local irreducible] InternalAbelianSheafModule.comparison_closed
 integral scalars, the actual cokernel, and the normalized flat-term K-flat resolution.
 All assertions use the ordinary module categories and their unbounded complexes.
 
-Source: blueprint main-20261015, integral proper-base-change proof, paragraph (1);
-Stacks Project, Tags 093M, 093J and 06YQ
-(blueprint: lem-sfb-integral-quotient-resolution-normalization).
-
-Proof:
-1. Apply lem-weil-l-adic-extension-integers-dvr and lem-weil-pbc-pid-noetherian-normal
-   to the recorded integer ring. The chosen uniformizer is nonzero, so each positive
-   power is nonzero. Lem-weil-valued-dvr-finite-quotients gives finite quotients.
-   Cancellation and the principal-ideal quotient give the displayed exact sequence
-   with both free terms equal to A, hence its rank-one finite free resolution.
-2. Apply lem-pe-integral-normalized-restriction-squares at n = j - 1, using the
-   integral and finite presentation encodings. Its underlying section-action map is
-   the identity. Applying linearity to the finite regular module and its section 1
-   shows q_j = pr_j alpha. Joint injectivity of the limit projections gives uniqueness.
-3. Apply lem-weil-pbc-constant-completion-equivalence, the completed constant theorem
-   of Stacks 093M, to the ideal (pi). Constant scalars and all finite projections
-   agree under alpha, so its flatness and canonical quotient assertions transport
-   to the specified ring and the actual q_j.
-4. Apply lem-sfb-flat-scalar-cyclic-resolution to the nonzero scalar pi^j and this
-   flat algebra. Multiplication is monic. Its cokernel is the actual finite quotient
-   by step 3, giving the specified short exact sequence.
-5. Apply lem-sfb-finite-free-mono-cokernel-kflat to that sequence, with both free
-   ranks one. The cone has differential +pi^j in degrees -1,0, its terms are flat,
-   and Stacks 06YQ makes it K-flat. Its augmentation restricts to precisely q_j
-   on the unshifted summand and is a quasi-isomorphism.
-6. Lem-pe-internal-section-tensor-comparison identifies the regular modules, these
-   maps and total tensors under the fixed exact section-action equivalence. It
-   preserves and reflects flatness, acyclicity and K-flatness, giving both versions
-   of every resolution assertion, including the augmentation's degree-zero map.
+Source: Stacks Project, Tags 093M, 093J and 06YQ.
 -/
 theorem integral_quotient_resolution_normalization :
     IsNoetherianRing (Padic.coefficientExtensionIntegers l E) ∧

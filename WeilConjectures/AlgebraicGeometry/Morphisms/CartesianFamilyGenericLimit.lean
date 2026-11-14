@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.DominantFunctionFieldLimit
 # Generic fibres of a cartesian system of integral families
 
 Source: Stacks Project, Tag 0EZJ, generic-fibre limit assertion.
-(blueprint: lem-sbc-cartesian-family-generic-limit)
 -/
 
 @[expose] public section
@@ -29,30 +28,7 @@ namespace AlgebraicGeometry.Scheme
 /-- Form the generic-fibre limit system, independently of any section or normality.
 
 Source: Stacks Project, Tag 0EZJ, assertion that the generic fibre is the limit of
-stage generic fibres, with its comparison maps spelled out.
-(blueprint: lem-sbc-cartesian-family-generic-limit)
-
-Proof:
-1. Dominance of the projections sends the generic point of S to the generic point of
-X_i. The induced stalk maps embed k(X_i) in k(S). Compatibility gives a diagram of
-fields and its contravariant spectrum diagram K, with isomorphisms e_i to Spec k(X_i).
-2. The field k(S) is the filtered colimit of these fields. To check this, choose an
-affine open at a stage and pull it back along the affine transition system. Its
-coordinate ring is the filtered colimit of the stage coordinate rings. Every fraction
-in k(S) has numerator and nonzero denominator in one common stage. Dominance makes
-the stage ring maps injective, so a nonzero denominator is already nonzero there.
-This proves surjectivity of the field colimit map; injectivity follows from the same
-embeddings. The spectrum functor turns this into the limit cone b for K.
-3. Define D_i as K_i ×_{X_i} Y_i, with projections r_i and δ_i. Functoriality of
-pullbacks gives D, r, and δ. The cartesian family transition squares identify D as
-the base change of any fixed stage family along K on its cofiltered tail. Hence
-base change of limits, and the given pullback describing Cη, give its limit cone κ.
-The pullback projections give κ_i r_i = q b_i and κ_i δ_i = j γ_i.
-4. The objects K_i are spectra of fields, hence qcqs, and all maps between them are
-affine. Each D_i is qcqs by base change of the qcqs stage family. Its transition maps
-are base changes of the affine K transition maps, hence affine. The maps t_i are the
-generic point inclusions, after identification by e_i; their compatibility with b is
-induced by the compatible stalk maps. Retain these actual pullbacks as witnesses. -/
+stage generic fibres, with its comparison maps spelled out. -/
 theorem exists_cartesian_family_generic_limit {I : Type u} [SmallCategory I]
     [IsCofiltered I] {S C : Scheme.{u}} [IsIntegral S]
     (X Y : I ⥤ Scheme.{u}) [∀ i, IsIntegral (X.obj i)]

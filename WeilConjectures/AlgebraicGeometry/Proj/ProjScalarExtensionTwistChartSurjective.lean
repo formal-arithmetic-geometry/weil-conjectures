@@ -11,8 +11,7 @@ import WeilConjectures.AlgebraicGeometry.ProjTwistFractionDescent
 import WeilConjectures.AlgebraicGeometry.ProjTwistFractionRealization
 
 /-! The surjective half of the complete standard-chart scalar-extension comparison.
-Source: Stacks Project, constructions.tex, Tags 01MY and 01N2.
-(blueprint: new-sfb-proj-scalar-extension-twist-chart-surjective).
+Source: Stacks Project, Tags 01MY and 01N2.
 -/
 
 @[expose] public section
@@ -27,14 +26,7 @@ open AlgebraicGeometry.Scheme.Modules
 
 namespace AlgebraicGeometry.Proj
 
-/-- The prescribed scalar-extension twist map is surjective on a complete standard chart.
-
-Proof: The proof identifies chart sections with shifted homogeneous localized modules, applies
-the affine tensor-section comparison and homogeneous localization scalar extension,
-and uses the pointwise formula to identify that comparison with `η.app`. The remaining
-affine chart identification is the source of this intermediate stage-3 statement.
-Source: Stacks Project, constructions.tex, Tags 01MY and 01N2.
-(blueprint: new-sfb-proj-scalar-extension-twist-chart-surjective). -/
+/-- The prescribed scalar-extension twist map is surjective on a complete standard chart. -/
 theorem scalarExtension_twistMap_chart_surjective
     {R S A B : Type u} [CommRing R] [CommRing S] [CommRing A] [CommRing B]
     [Algebra R S] [Algebra R A] [Algebra S B]

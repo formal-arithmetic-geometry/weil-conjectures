@@ -79,8 +79,6 @@ import WeilConjectures.SecSmoothPurity.CochainCoefficientArrowsSupplement
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 
 /-! # The closed-support projection formula
-
-Source: the projection-identity paragraph of the current closed-costalk-duality proof.
 -/
 
 @[expose] public noncomputable section
@@ -197,21 +195,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Closed direct image commutes with derived tensor against ambient complexes.
 No exceptional functor or dualizing object occurs in this assertion.
-Source: current blueprint, closed-costalk-duality, projection-identity paragraph;
-Stacks Tags 03EL, 07A4 and 09BM.
-(blueprint: lem-weil-proetale-closed-tensor-projection).
-
-Proof: identify the actual scalar-unit module pullback and pushforward with the
-ringed open/closed presentations. Closed direct image is exact and fully faithful,
-and its complementary-open restriction vanishes. Transfer joint detection and the
-counit isomorphism to the unbounded derived categories using termwise localization
-and homology. Specialize canonical derived tensor pullback to the native tensor.
-The unit on `i_* N tensor K` becomes invertible on closed restriction by the
-adjunction triangle. Its open restriction is a map between zero objects, since
-open pullback commutes with tensor and tensor is a left adjoint in either variable.
-Joint detection therefore makes the unit invertible. Whisker that unit with the
-closed tensor comparison and counit to obtain the natural projection isomorphism.
-Finally transport the exact closed pushforward to its right-derived presentation. -/
+Source: Stacks Tags 03EL, 07A4 and 09BM. -/
 theorem proEtaleClosedTensorProjection
     {T Z U : Scheme.{u}} (i : Z ⟶ T) [IsClosedImmersion i]
     (j : U ⟶ T) [IsOpenImmersion j] [QuasiCompact j]

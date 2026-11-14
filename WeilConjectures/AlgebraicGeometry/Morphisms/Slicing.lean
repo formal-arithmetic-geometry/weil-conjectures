@@ -164,17 +164,16 @@ theorem AffineSpace.exists_etale_comp_of_etale_residueFieldMap {n : Type u} [Fin
     change (iso.hom ≫ iso.inv) w = w
     simp
 
-/-- **Étale slices** (Stacks `057G`). Let `f : X ⟶ S` be smooth and let `x : X` have finite
+/-- **Étale slices** (Stacks `057G`). Let `f: X ⟶ S` be smooth and let `x: X` have finite
 separable residue field over `κ(f x)`, so that `x` is a closed point of its fibre. Then there is
-an affine scheme `Z`, a point `z : Z` and a morphism `ι : Z ⟶ X` through `x` such that `ι ≫ f`
+an affine scheme `Z`, a point `z: Z` and a morphism `ι: Z ⟶ X` through `x` such that `ι ≫ f`
 is étale.
 
 By the normal form `AlgebraicGeometry.Scheme.Hom.exists_etale_to_affineSpace_of_mem_smoothLocus`,
 `X` is near `x` étale over an affine space `𝔸ⁿ_U`, and the image of `x` there still has finite
 separable residue field over `U`. For affine space the slice is
 `AlgebraicGeometry.AffineSpace.exists_etale_comp_of_etale_residueFieldMap`, and it pulls back to
-`X`. 
-(blueprint: lem-sbc-smooth-separable-point-etale-slice)
+`X`.
 -/
 @[stacks 057G]
 theorem Smooth.exists_etale_comp_of_etale_residueFieldMap {X S : Scheme.{u}} (f : X ⟶ S)
@@ -207,13 +206,12 @@ theorem Smooth.exists_etale_comp_of_etale_residueFieldMap {X S : Scheme.{u}} (f 
   rw [Category.assoc, this]
   infer_instance
 
-/-- **The relative connected component of a section** (Stacks `055R`). Let `g : P ⟶ T` be smooth,
+/-- **The relative connected component of a section** (Stacks `055R`). Let `g: P ⟶ T` be smooth,
 quasi-compact and quasi-separated, hence of finite presentation, with a section `σ`. The points
 `p` lying in the connected component of `σ (g p)` in their fibre form an open `P⁰` of `P`, here
 an open `U` containing them. Its fibres over `T` are the connected components through the
 rational points `σ t` of the smooth fibres, hence geometrically connected (Stacks `04KV`) and,
-being smooth, geometrically irreducible. 
-(blueprint: lem-sbc-smooth-section-component-geometrically-irreducible)
+being smooth, geometrically irreducible.
 -/
 @[stacks 055R]
 theorem Smooth.exists_geometricallyIrreducible_of_section {P T : Scheme.{u}} (g : P ⟶ T)
@@ -300,7 +298,7 @@ private theorem exists_etale_factorization_of_mem_aux {X S : Scheme.{u}} (f : X 
   have hxx' : x ∈ connectedComponentIn (f ⁻¹' {f x}) x' := by
     rw [← connectedComponentIn_eq (hW ⟨hx'W, hfx'⟩)]
     exact mem_connectedComponentIn rfl
-  -- an étale slice `ι : Z ⟶ X` through `x'`, and the section `σ` of `X ×_S Z ⟶ Z`
+  -- an étale slice `ι: Z ⟶ X` through `x'`, and the section `σ` of `X ×_S Z ⟶ Z`
   obtain ⟨Z, ι, z, hZ, hιf, rfl⟩ := Smooth.exists_etale_comp_of_etale_residueFieldMap f hx'
   let σ : Z ⟶ pullback f (ι ≫ f) := pullback.lift ι (𝟙 Z) (by rw [Category.id_comp])
   have hσ : σ ≫ pullback.snd f (ι ≫ f) = 𝟙 Z := pullback.lift_snd _ _ _
@@ -332,7 +330,7 @@ private theorem exists_etale_factorization_of_mem_aux {X S : Scheme.{u}} (f : X 
   have : GeometricallyIrreducible k := by
     have : Surjective (P₀.toScheme.homOfLE hAT ≫ h ∣_ T) := ‹Surjective k›
     exact inferInstanceAs (GeometricallyIrreducible (P₀.toScheme.homOfLE hAT ≫ h ∣_ T))
-  -- a second étale slice `ι' : Z' ⟶ A`, through a point of the fibre of `A ⟶ T` containing `p₀`
+  -- a second étale slice `ι': Z' ⟶ A`, through a point of the fibre of `A ⟶ T` containing `p₀`
   obtain ⟨a', -, hka', ha'⟩ :=
     Smooth.exists_mem_etale_residueFieldMap k ⊤ (x := ⟨⟨p₀, hp₀P₀⟩, hp₀A⟩) trivial
   obtain ⟨Z', ι', z', hZ', hι'k, rfl⟩ := Smooth.exists_etale_comp_of_etale_residueFieldMap k ha'
@@ -386,9 +384,9 @@ theorem Smooth.exists_etale_factorization_of_mem {X S : Scheme.{u}} (f : X ⟶ S
     hV, hqc, hs, ?_⟩
   rw [← Category.assoc, hqr, Category.assoc, Scheme.Hom.resLE_comp_ι, Category.assoc]
 
-/-- **Slicing a smooth morphism** (blueprint `theorem-smooth-base-change-classical-torsion`). Let
-`f : X ⟶ S` be smooth. Then there is an étale covering `p i : U i ⟶ X` of `X` such that each
-composite `p i ≫ f` factors as `q i ≫ r i` with `r i : V i ⟶ S` étale and `q i : U i ⟶ V i` a smooth
+/-- **Slicing a smooth morphism**. Let
+`f: X ⟶ S` be smooth. Then there is an étale covering `p i: U i ⟶ X` of `X` such that each
+composite `p i ≫ f` factors as `q i ≫ r i` with `r i: V i ⟶ S` étale and `q i: U i ⟶ V i` a smooth
 morphism of affine schemes with geometrically connected fibres admitting a section:
 
 ```
@@ -400,8 +398,7 @@ p i          r i
 ```
 
 This is Stacks `0EY4`, assembled pointwise from
-`AlgebraicGeometry.Smooth.exists_etale_factorization_of_mem`. 
-(blueprint: theorem-smooth-base-change-classical-torsion)
+`AlgebraicGeometry.Smooth.exists_etale_factorization_of_mem`.
 -/
 @[stacks 0EY4]
 theorem Smooth.exists_etaleCover_factorization {X S : Scheme.{u}} (f : X ⟶ S) [Smooth f] :

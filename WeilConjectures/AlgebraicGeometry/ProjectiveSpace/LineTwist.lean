@@ -24,7 +24,7 @@ to unique isomorphism compatible with the generators.
 - `AlgebraicGeometry.ProjectiveLine.TwistData.existsUnique_iso`: uniqueness up to unique
   isomorphism compatible with the generators.
 - `AlgebraicGeometry.ProjectiveLine.nonempty_twistData`: `𝒪(d)` exists, is invertible and is
-  unique (blueprint `theorem-riemann-roch-coherent-serre-duality`).
+  unique.
 -/
 
 @[expose] public section
@@ -154,9 +154,7 @@ in the sense of `AlgebraicGeometry.ProjectiveLine.TwistData` (generators `g₀` 
 an invertible module; and it is unique up to unique isomorphism compatible with the generators
 (`AlgebraicGeometry.ProjectiveLine.TwistData.existsUnique_iso`).
 
-The blueprint states this for `S = Spec k`, `k` a field.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality`) -/
+The blueprint states this for `S = Spec k`, `k` a field. -/
 theorem nonempty_twistData (d : ℤ) :
     Nonempty (TwistData S d (twist T₂ S d)) ∧ (twist T₂ S d).IsInvertible ∧
       ∀ {𝓛 𝓛' : (ProjectiveLine S).Modules} (D : TwistData S d 𝓛) (D' : TwistData S d 𝓛'),

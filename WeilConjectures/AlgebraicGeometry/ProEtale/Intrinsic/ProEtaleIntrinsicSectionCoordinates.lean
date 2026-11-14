@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Intrinsic.ProEtaleIntri
 # Section coordinates for intrinsic constant coefficients
 
 Source: Stacks Project, Tags 00YV and 09AE.
-(blueprint: lem-exc-proetale-intrinsic-section-coordinates)
 -/
 
 @[expose] public section
@@ -25,8 +24,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale
 
 /-- An isomorphism of fixed-scalar sheaves identifies their additive section groups.
-Source: Stacks Project, Tag 00YV.
-(blueprint: lem-exc-proetale-intrinsic-section-coordinates). -/
+Source: Stacks Project, Tag 00YV. -/
 noncomputable def fixedSectionEquiv (R : Type (u + 1)) [Ring R]
     {X : AlgebraicGeometry.Scheme.{u}}
     {F G : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology X) (ModuleCat.{u + 1} R)}
@@ -44,8 +42,7 @@ namespace AlgebraicGeometry.Scheme
 variable (A : Type u) [CommRing A] [Finite A]
 
 /-- The scalar sheafification unit on a fixed-scalar sheaf.
-Source: Stacks Tag 00YV
-(blueprint: lem-exc-proetale-intrinsic-section-coordinates). -/
+Source: Stacks Tag 00YV. -/
 noncomputable def sfRealizationUnit (X : Scheme.{u})
     (F : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1, u} A))) :=
   (PresheafOfModules.sheafificationAdjunction.{u + 1, u, u + 1, u + 1}
@@ -53,8 +50,7 @@ noncomputable def sfRealizationUnit (X : Scheme.{u})
       ((ProEtale.finiteCoefficientModulePresheaf X.ProEt (ULift.{u + 1, u} A)).obj F.obj)
 
 /-- The realization unit is invertible because its source is already a sheaf.
-Source: Stacks Project, Tag 00YV.
-(blueprint: lem-exc-proetale-intrinsic-section-coordinates). -/
+Source: Stacks Project, Tag 00YV. -/
 instance sfRealizationUnit_isIso (X : Scheme.{u})
     (F : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1, u} A))) :
     IsIso (sfRealizationUnit A X F) := by
@@ -66,8 +62,7 @@ instance sfRealizationUnit_isIso (X : Scheme.{u})
     (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) AddCommGrpCat.{u + 1})).obj F).property
 
 /-- The canonical realization identifies section groups by its sheafification unit.
-Source: Stacks Project, Tag 00YV.
-(blueprint: lem-exc-proetale-intrinsic-section-coordinates). -/
+Source: Stacks Project, Tag 00YV. -/
 noncomputable def sfRealizationSectionEquiv (X : Scheme.{u})
     (F : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1, u} A)))
     (Q : X.ProEtᵒᵖ) : F.obj.obj Q ≃+
@@ -83,8 +78,7 @@ noncomputable def sfRealizationSectionEquiv (X : Scheme.{u})
     map_add' := map_add ((sfRealizationUnit A X F).app Q).hom }
 
 /-- Realization section coordinates commute with sheaf morphisms.
-Source: Stacks Project, Tag 00YV.
-(blueprint: lem-exc-proetale-intrinsic-section-coordinates). -/
+Source: Stacks Project, Tag 00YV. -/
 theorem sfRealizationSectionEquiv_map (X : Scheme.{u})
     {F G : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1, u} A))}
     (f : F ⟶ G) (Q : X.ProEtᵒᵖ) (x : F.obj.obj Q) :
@@ -98,8 +92,7 @@ theorem sfRealizationSectionEquiv_map (X : Scheme.{u})
 
 /-- Every intrinsic section has canonical fixed-scalar coordinates, with the equivalence
 counit taking realization back to the specified sheaf.
-Source: Stacks Project, Tag 00YV.
-(blueprint: lem-exc-proetale-intrinsic-section-coordinates). -/
+Source: Stacks Project, Tag 00YV. -/
 noncomputable def sfIntrinsicSectionEquiv (X : Scheme.{u})
     (N : proEtaleRingModules X (proEtaleConstantRing X A)) (Q : X.ProEtᵒᵖ) :
     ((sfIntrinsicModuleEquivalence X A).inverse.obj N).obj.obj Q ≃+ N.val.obj Q :=
@@ -155,8 +148,7 @@ private theorem counitSourceIso_comp {U X : Scheme.{u}} (j : U ⟶ X)
 /-- Fixed-scalar and intrinsic open counits have isomorphic source section groups;
 the comparison intertwines their specified counits. This follows by expanding the
 composite adjunction counit and cancelling the realization unit with its inverse.
-Source: Stacks Project, Tags 00YV and 09AE.
-(blueprint: lem-exc-proetale-intrinsic-section-coordinates). -/
+Source: Stacks Project, Tags 00YV and 09AE. -/
 theorem sfIntrinsicCounit_section_coordinates {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] (N : proEtaleRingModules X (proEtaleConstantRing X A))
     (Q : X.ProEtᵒᵖ) :
@@ -199,8 +191,7 @@ theorem sfIntrinsicCounit_section_coordinates {U X : Scheme.{u}} (j : U ⟶ X)
 /-- Conjugating an open counit by a specified realization isomorphism gives a
 commuting square of additive section groups. Apply the preceding counit comparison
 and then counit naturality to the specified fixed-scalar isomorphism.
-Source: Stacks Project, Tags 00YV and 09AE.
-(blueprint: lem-exc-proetale-intrinsic-section-coordinates). -/
+Source: Stacks Project, Tags 00YV and 09AE. -/
 theorem sfIntrinsicCounit_conjugation {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] (N : proEtaleRingModules X (proEtaleConstantRing X A))
     (H : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1, u} A)))

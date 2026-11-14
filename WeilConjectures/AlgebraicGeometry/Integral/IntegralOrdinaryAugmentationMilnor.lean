@@ -14,8 +14,7 @@ import WeilConjectures.Algebra.Homology.HomotopyCategory.Products
 
 /-! # The unreduced Milnor presentation of an ordinary quotient augmentation
 
-Source: Stacks Project, proetale.tex, Tag 099M, lemma-naive-completion;
-sites-cohomology.tex, Tags 0940 and 0941.
+Source: Stacks Project, Tag 099M; Tags 0940 and 0941
 -/
 
 @[expose] public section
@@ -171,31 +170,7 @@ private theorem ordinary_milnor_of_tail
 of Milnor triangles from the constant tower to the principal derived quotient tower.
 Both product squares, including the shifted boundary square, are specified.
 
-Source: Stacks Project, proetale.tex, Tag 099M, lemma-naive-completion, and
-sites-cohomology.tex, Tags 0940 and 0941, normalized strict Roos comparison
-(blueprint: lem-sfb-integral-ordinary-augmentation-milnor).
-
-Proof: identify the localized ordinary quotient tower, including its augmentation,
-with the positive tail of the principal derived quotient tower. The normalized
-strict-limit cone theorem supplies a homotopy-limit cone on the full principal
-tower whose positive legs agree with the fixed ordinary augmentation and etaZ.
-The ordinary constant/limit adjunction identity identifies its positive composites
-with the quotient projections. Cone naturality determines the zeroth composite
-from the first positive one; no injectivity of maps into an inverse limit is used.
-The identity cone of the constant tower is a homotopy limit, so choose its Milnor
-triangle. The diagonal map has retraction the zeroth product projection. The
-triangle's last-arrow composition, followed by the shifted retraction, forces its
-boundary to vanish. Triangle exactness therefore makes its difference map epic.
-The product map induced by the principal cone commutes with the two difference
-maps, by naturality of that cone. Cancel the epic constant difference map against
-the second triangle's zero middle/last composite: the product map followed by the
-second boundary is zero as well. These two vanishing identities prove the required
-boundary square for the specified ordinary augmentation. Product extensionality
-proves the first square from the cone-leg equations. Thus no arbitrary triangle
-lift replaces the specified map. Countable products need not be exact: K-injective
-tower evaluations suffice for the strict-limit Milnor triangle. There is no
-boundedness or K-flatness assumption, and zero complexes and the empty scheme
-satisfy the same argument. -/
+Source: Stacks Project, Tag 099M, Tags 0940 and 0941, normalized strict Roos comparison. -/
 theorem integral_ordinary_augmentation_milnor (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     [HasDerivedCategory.{u + 1} (DiagonalAb W)]
     [HasDerivedCategory.{u + 1} (ℕᵒᵖ ⥤ DiagonalAb W)]

@@ -13,7 +13,6 @@ import Mathlib.CategoryTheory.Sites.LocallyBijective
 # Local lifting through an open counit
 
 Source: Stacks Project, Tags 00WK and 09AE.
-(blueprint: lem-exc-proetale-open-counit-section-lifting)
 -/
 
 @[expose] public section
@@ -63,8 +62,7 @@ private theorem openCounit_mono (R : Type (u + 1)) [Ring R]
   exact ⟨fun _ _ h ↦ by simpa using h⟩
 
 /-- The open counit is invertible on a test object that factors through the open.
-Source: Stacks Project, Tag 09AE.
-(blueprint: lem-exc-proetale-open-counit-section-lifting). -/
+Source: Stacks Project, Tag 09AE. -/
 theorem isIso_openCounit_app_of_factors (R : Type (u + 1)) [Ring R]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (F : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} R)) (Q : X.ProEt)
@@ -92,8 +90,7 @@ factors through the open. The counit is monic by the presheaf zero-extension for
 and exact sheafification. Its restriction to the open is invertible by the triangle
 identity. Thus all the local sections lift, their lifts agree by monicity, and the
 sheaf condition glues them, including for the empty covering.
-Source: Stacks Project, Tags 00WK and 09AE.
-(blueprint: lem-exc-proetale-open-counit-section-lifting). -/
+Source: Stacks Project, Tags 00WK and 09AE. -/
 theorem openCounit_section_lift (R : Type (u + 1)) [Ring R]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (F : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} R)) (Q : X.ProEt)

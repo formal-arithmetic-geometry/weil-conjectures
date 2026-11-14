@@ -19,7 +19,6 @@ The strict completed Koszul augmentation and the exact-products Roos comparison
 are assembled on K-flat complexes, then descended along localization. The unit
 calculation uses the independent characterization of the quotient completion unit.
 Source: Stacks Tags 091N, 0941 and 099M.
-(blueprint: prop-weil-pbc-koszul-reconstruction-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -173,14 +172,7 @@ variable (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
 /-- The strict comparison part of Koszul reconstruction: the completed Koszul derived
 functor is naturally isomorphic to the derived quotient limit, with the prescribed unit
  equality.
-Source: Stacks Tags 091N, 099M and 0941.
-(blueprint: prop-weil-pbc-koszul-reconstruction-comparison).
-Proof: form the comparison on K-flat representatives from the strict Koszul-to-quotient
-Roos augmentation and the normalized Roos derived-limit comparison. The reduction
-counit is invertible on these representatives, so localization descent gives a natural
-isomorphism. The chain-level unit equation and Roos normalization identify its composite
-with the independently chosen completion unit; localization extends the equality to all
-objects. -/
+Source: Stacks Tags 091N, 099M and 0941. -/
 theorem koszulReconstructionComparison (r : ℕ) (a : Fin r → A)
     (_ha : Ideal.span (Set.range a) = d.ideal) :
     ∃ c : reconstructionKoszulDerivedFunctor T d r a ≅

@@ -63,21 +63,7 @@ set_option backward.defeqAttrib.useBackward true in
 ring-sheaf coefficient with restriction of module sheaves to the slice. There is no
 closed-complement or quasi-compactness hypothesis in this comparison.
 
-Source: Stacks Project, Tags 09BN and 00XZ
-(blueprint: lem-weil-pbc-proetale-ringed-open-comparison).
-
-Proof: The weakly-etale localization equivalence identifies the site of `U.left`
-with the slice at `U`, keeping schemes, maps and covering families unchanged.
-For an object already over `U`, the inverse-image indexing category has the
-corresponding object as terminal object. Its colimit is evaluation at that object.
-This gives a natural ring isomorphism from the inverse-image ring to the slice ring,
-compatible with multiplication, and the same evaluation comparison for modules.
-Transport modules along that ring isomorphism and the site equivalence to obtain
-`q`. The module comparison is natural since it is induced by those same evaluation
-maps, and is linear by the multiplication compatibility. These comparisons apply
-to the actual inverse image transported through the model-site equivalences: each
-such transport preserves the relevant adjunction, and uniqueness of left adjoints
-identifies the transported comparison with the specified inverse-image functor. -/
+Source: Stacks Project, Tags 09BN and 00XZ. -/
 theorem proEtale_ringed_open_comparison {X : Scheme.{u}} (U : X.ProEt)
     [IsOpenImmersion U.hom] (A : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :
     ∃ q : SheafOfModules.{u + 1}

@@ -19,18 +19,7 @@ namespace AlgebraicGeometry.Scheme
 /-- Evaluation at one representative of each orbit identifies equivariant functions
 with a product of stabilizer fixed rings.
 
-Source: Stacks Project, Tag 03SF, classification by finite group sets.
-Proof: let G act on Fin d through α. Enumerate its orbit quotient by Fin m;
-its cardinality is at most d because the quotient map is surjective. Choose a
-representative r k for each orbit and let K k be its stabilizer. Evaluation at
-r k takes an equivariant function to a K k-fixed element. Conversely, extend a
-family b by f(α a (r k)) = ρ a (b k). This is well defined: if a and a' give the
-same component, a'⁻¹*a lies in K k, fixes b k, and the action law gives equal
-values. The same action law proves equivariance. Evaluation and extension are
-inverse and preserve addition, multiplication, one and the H-algebra structure.
-For d=0 both algebras are zero rings; for the trivial action all orbits are
-singletons and K k=G. Neither torsor geometry nor localization is used here.
-(blueprint: lem-sbc-affine-torsor-equivariant-orbit-product) -/
+Source: Stacks Project, Tag 03SF, classification by finite group sets. -/
 theorem affine_torsor_equivariant_orbit_product
     (H C : Type u) [CommRing H] [CommRing C] [Algebra H C]
     (G : Type u) [Group G] (ρ : G → C →ₐ[H] C)

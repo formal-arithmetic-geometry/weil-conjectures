@@ -14,8 +14,7 @@ import Mathlib.RingTheory.Ideal.AssociatedPrime.Localization
 /-!
 # Detecting sections on opens by associated-point germs
 
-Source: Stacks Project, Tag 0311, with associated-prime localization, Tag 0310.
-(blueprint: lem-sbc-open-section-associated-germ-detection)
+Source: Stacks Project, Tag 0311, with associated-prime localization, Tag 0310
 -/
 
 @[expose] public section
@@ -50,21 +49,7 @@ private theorem eq_zero_of_Spec_associated_germs
 
 /-- On an open of a Noetherian affine scheme, associated-point germs detect zero sections.
 
-Source: Stacks Project, Tags 0311 and 0310; affine-open stalk localization.
-(blueprint: lem-sbc-open-section-associated-germ-detection)
-
-Proof: Cover V by principal opens D(f) of Spec R contained in V.
-Their rings are R_f, which are Noetherian. Associated primes of R_f are
-exactly extensions of associated primes q of R with f outside q (0310).
-The stalk of D(f) at such a point is the localization of R_f at that prime,
-and its germ of the restricted section agrees with the germ on V.
-The hypothesis therefore kills the image of the restricted section in every
-associated-prime localization of R_f. The injection into the product of these
-localizations (0311) makes the restricted section zero. The principal opens
-cover V, so the sheaf section extensionality theorem makes the original
-section zero. This includes V empty and the zero ring; an empty set of associated
-primes forces each principal localization to be zero by the same injection.
-No reducedness or affineness of V is assumed. -/
+Source: Stacks Project, Tags 0311 and 0310; affine-open stalk localization. -/
 theorem eq_zero_of_associated_germs
     (R : Type u) [CommRing R] [IsNoetherianRing R]
     (V : (Spec (.of R)).Opens) (s : Γ(V.toScheme, ⊤))

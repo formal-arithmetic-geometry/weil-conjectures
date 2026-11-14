@@ -43,9 +43,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 
 /-! # Explicit stratum integral-model constructions
 
-Source: Bhatt--Scholze, Definitions 6.8.6 and 6.8.10, Proposition 6.8.11(3),
-Lemma 6.8.13 and Proposition 6.8.14(2), pp. 60--62
-(blueprint: def-per-rational-stratum-integral-model-basic).
+Source: Bhatt--Scholze, Definitions 6.8.6 and 6.8.10, Proposition 6.8.11(3), Lemma 6.8.13 and
+Proposition 6.8.14(2), pp. 60--62.
 -/
 
 @[expose] public noncomputable section
@@ -56,8 +55,7 @@ open scoped ChangeOfRings
 namespace AlgebraicGeometry.ProEtale.RationalStratum
 
 /-- The actual closed direct image followed by open extension by zero.
-Source: Bhatt--Scholze, Lemma 6.8.13
-(blueprint: def-per-rational-stratum-integral-model-basic). -/
+Source: Bhatt--Scholze, Lemma 6.8.13. -/
 def piece {X S : Scheme.{u}} (U : X.ProEt) (t : S ⟶ U.left)
     (A : Type u) [TopologicalSpace A] [CommRing A] [IsTopologicalRing A] :=
   continuousModuleDirectImage t A ⋙ continuousModuleExtensionByZero U A
@@ -65,8 +63,7 @@ def piece {X S : Scheme.{u}} (U : X.ProEt) (t : S ⟶ U.left)
 open Classical in
 /-- The generator indexed by a factorization through the open, followed by the actual
 module-sheafification unit. Closed direct image evaluates on the base change.
-Source: Stacks Tag 03DI; Bhatt--Scholze, Lemma 6.8.13
-(blueprint: def-per-rational-stratum-integral-model-basic). -/
+Source: Stacks Tag 03DI; Bhatt--Scholze, Lemma 6.8.13. -/
 def generator {X S : Scheme.{u}} (U : X.ProEt) (t : S ⟶ U.left)
     (A : Type u) [TopologicalSpace A] [CommRing A] [IsTopologicalRing A]
     (N : SheafOfModules.{u + 1} (latticeModuleRing S A))
@@ -81,8 +78,7 @@ def generator {X S : Scheme.{u}} (U : X.ProEt) (t : S ⟶ U.left)
           (op W) (DirectSum.of _ φ s)
 
 /-- A pure tensor in ordinary integral-to-field change of rings, followed by
-sheafification. Source: Stacks Tag 03EK; Bhatt--Scholze, Lemma 6.8.2
-(blueprint: def-per-rational-stratum-integral-model-basic). -/
+sheafification. Source: Stacks Tag 03EK; Bhatt--Scholze, Lemma 6.8.2. -/
 def tensorSection (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u})
     (N : SheafOfModules.{u + 1} (latticeModuleRing X (latticeCoefficientIntegers l E)))
@@ -97,8 +93,7 @@ def tensorSection (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
               ((integralLatticeCoefficientMap X l E).hom.app (op W)).hom] s)
 
 /-- The actual finite-level coefficient comparison, normalized on residue representatives.
-Source: Bhatt--Scholze, Lemma 6.8.2(1)
-(blueprint: def-per-rational-stratum-integral-model-basic). -/
+Source: Bhatt--Scholze, Lemma 6.8.2(1). -/
 def finiteComparison (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u}) (n : ℕ) :=
   (Scheme.pbcLevelConstantComparison X (Scheme.pbcIntegralDatum l E) n).symm ≪≫
@@ -109,8 +104,7 @@ def finiteComparison (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 /-- Completed membership in degree zero, with the coefficient identification fixed by
 all finite residue maps. The predicate used is the published three-clause predicate,
 including compatible etale origins. No completion or model is substituted for N.
-Source: Bhatt--Scholze, Proposition 6.8.11(3)
-(blueprint: def-per-rational-stratum-integral-model-basic). -/
+Source: Bhatt--Scholze, Proposition 6.8.11(3). -/
 def IsCompletedModel (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u})
     (N : SheafOfModules.{u + 1} (latticeModuleRing X (latticeCoefficientIntegers l E))) :
@@ -128,8 +122,7 @@ def IsCompletedModel (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
       ((DerivedCategory.singleFunctor _ 0).obj ((Scheme.pbcRestrict b.hom).obj N))
 
 /-- The chosen uniformizer viewed in the continuous field coefficient type.
-Source: Bhatt--Scholze, Lemma 6.8.2
-(blueprint: def-per-rational-stratum-integral-model-basic). -/
+Source: Bhatt--Scholze, Lemma 6.8.2. -/
 def uniformizer (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :
     WithAbs (Padic.coefficientExtensionAbsoluteValue l E) :=
@@ -141,8 +134,7 @@ of all extension-by-zero generators. The underlying closed direct-image section 
 on the actual base change. The formula is precisely h/varpi^n mapped to its image
 under the two exact module functors, and determines the comparison by sheafification
 and the localization colimit universal property.
-Source: Bhatt--Scholze, Lemmas 6.8.2(2) and 6.8.13; Stacks Tags 03DI and 03DJ
-(blueprint: def-per-rational-stratum-integral-model-basic). -/
+Source: Bhatt--Scholze, Lemmas 6.8.2(2) and 6.8.13; Stacks Tags 03DI and 03DJ. -/
 def IsNormalizedComparison (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     {X S : Scheme.{u}} (U : X.ProEt) (t : S ⟶ U.left)

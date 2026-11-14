@@ -32,31 +32,7 @@ markings is involved.
 
 Source: Stacks Project, Modules on Sites, Tags 03CY and 03DA; Sites, Tag 0H7J;
 Cohomology on Sites, Tag 06YY. This is step 3 and the constant-complex part of step 1
-of lem-weil-pbc-lisse-tower-localized-realization.
-(blueprint: lem-weil-pbc-lisse-tower-localized-constants).
-
-Proof: work first with ordinary module sheaves. The constant-sheaf adjunction identifies
-etale constants followed by comparison and inverse image along a and b with constants on Z.
-Restrict algebraic scalars along constantAdicQuotientMap and
-apply associated-module-sheafification. Its adjunction identifies this functor with
-constant modules on X pulled to Z, with the actual inverse-image finite ring; the
-coefficient identification is exactly lisseTowerFiniteCoefficientIso. This gives the
-model comparison, natural in the algebraic module. Apply the construction termwise to
-complexes and localize with mapDerivedCategoryCompIso to obtain model on every E.
-
-For a semilinear arrow k, before localization the constant/quotient restriction square
-commutes on every constant generator x: both composites carry x to k(x). The scalar
-square used in lisseTowerPulledScalarIso is the uniquely section-normalized one, so
-its underlying abelian map has this same action. The two further restriction
-compositors are pbcDerivedRestrictComp on sheaves and restrictScalarsComp' on algebraic
-modules. Localizing their ordinary generator equality produces precisely the
-normalizationConstantRestrict and localProEtaleComparisonCoefficients factors in
-localProEtaleNormalization of normalizationConstantArrow k, with those compositors.
-Finally use the identity-on-constant-sections normalization that defines
-constantAdicQuotientRightIso. Conjugating the localized equality by its inverse gives
-the displayed equation and lisseTowerAlgebraArrow, including its two inverse
-compositors. All functors are exact here. The argument uses arbitrary modules and
-complexes and therefore also includes zero objects and empty schemes. -/
+of lem-weil-pbc-lisse-tower-localized-realization. -/
 theorem lisseTower_localized_constants
     {X Z T S : Scheme.{u}} (g : Z ⟶ X) (a : T ⟶ S) (b : Z ⟶ T)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) :

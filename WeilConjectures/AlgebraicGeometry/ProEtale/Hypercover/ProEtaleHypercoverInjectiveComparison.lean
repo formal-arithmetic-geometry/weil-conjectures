@@ -36,13 +36,7 @@ set_option maxHeartbeats 600000 in
 set_option backward.isDefEq.respectTransparency false in
 /-- Exact descent for individual injective sheaves implies descent for a
 bounded-below complex of injective sheaves.
-Source: Stacks Project, Tags 09A2 and 01GE.
-(blueprint: lem-weil-pbc-proetale-hypercover-injective-complex-comparison).
-Proof: use the canonical restriction as a chain augmentation into the zeroth
-simplicial column. Naturality makes it a map of complexes. Its transposed column
-in coefficient degree n is precisely the single-sheaf row augmentation, hence is
-quasi-isomorphic by hypothesis. The bicomplex vanishes below simplicial degree zero
-and below a lower bound for J. Apply bounded-below row augmentation comparison. -/
+Source: Stacks Project, Tags 09A2 and 01GE. -/
 theorem hypercoverAugmentation_quasiIso_of_injective_rows
     (hrows : ∀ (I : ringedSiteModules.{u + 1}
         ((sheafCompose (topology X)

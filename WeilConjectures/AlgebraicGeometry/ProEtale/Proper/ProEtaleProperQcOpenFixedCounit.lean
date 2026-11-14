@@ -20,9 +20,7 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.M
 /-!
 # Proper direct image preserves quasi-compact open support
 
-Source: Stacks Project, Tags 096V, 09AG and 09AH; the specialization-localization
-argument in Steps 3--8 of `lem-exc-proetale-proper-open-sheaf-comparison`.
-(blueprint: lem-exc-proetale-proper-qc-open-fixed-counit)
+Source: Stacks Project, Tags 096V, 09AG and 09AH.
 -/
 
 @[expose] public section
@@ -198,21 +196,7 @@ private theorem proper_shriek_specialization_zero
   exact fixed_shriek_specialization_zero_general A U iV hd R hsR M
 
 /-- Proper direct image preserves support in a quasi-compact open, with fixed scalar
-coefficients. Source: Stacks, Tags 09AG and 09AH; the affine support argument in
-Steps 3--8 of `lem-exc-proetale-proper-open-sheaf-comparison`.
-(blueprint: lem-exc-proetale-proper-qc-open-fixed-counit).
-
-Proof: forget modules to abelian groups, commuting left Kan extension and sheafification
-with this left adjoint, and apply specialization-zero. For a quasi-compact separated
-object whose points specialize to the closed fibre, take a finite affine cover and
-closed-localize its charts. Flat generalization lifting shows that these charts cover;
-quasi-compactness follows from their spectral maps. Separatedness of sheaves descends
-vanishing. For a proper map, closedness lifts every specialization on the base to the
-proper inverse image, so the direct image has zero sections on the closed-localization
-pieces. On open pieces the counit is invertible by the unit triangle. The existing
-localization covering construction combines these pieces, proving local surjectivity.
-The presheaf extension counit is monic, hence so is its sheafification. Thus the counit
-is both monic and epic, and therefore invertible. -/
+coefficients. Source: Stacks, Tags 09AG and 09AH. -/
 theorem sfFixedProperQcOpenCounit_isIso
     {V T W : Scheme.{u}} (p : V ⟶ T) [IsProper p]
     (j : W ⟶ T) [IsOpenImmersion j] [QuasiCompact j]

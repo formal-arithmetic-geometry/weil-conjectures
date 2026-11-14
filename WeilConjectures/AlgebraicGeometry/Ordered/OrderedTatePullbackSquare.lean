@@ -17,25 +17,7 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 namespace AlgebraicGeometry.Etale
 
 /-- The ordered finite Tate comparisons commute around any square of scheme maps.
-Source: latest blueprint, sec-smooth-purity/sk-prop-an,
-cor-pur-vector-bundle-purity.proof.md, Tate pullback and transposition paragraph;
-lem-asd-etale-finite-twist-pullback, composition compatibility.
-(blueprint: lem-pur-ordered-tate-pullback-square).
-
-Proof: induct on d in vectorIntegrationBaseCoefficientPullback. In rank zero,
-the assertion is composition of the canonical constant-unit comparisons. For a
-successor use naturality and composition of the derived tensor pullback comparison.
-The first factor is the induction hypothesis. For the shifted line factor, the
-roots comparisons agree after their monomorphic inclusions into the units sheaf,
-by naturality of pullback to units. The line-normalization equations identify the
-two line maps on every pure coefficient/root tensor. Thus they agree. Apply the
-single-degree embedding and its exact pullback comparison, then the shift
-comparison, to obtain the same composition equation for the shifted line. No
-factors are interchanged. Reassemble the tensor product. Apply composition first
-to b followed by s and then to s' followed by v; their composites agree by hs.
-Invert the comparisons for s and s' to obtain the displayed equation. This proof
-uses no geometry of a section, no exceptional inverse image, and no integration.
-The constant-unit calculation includes empty schemes, d=0 and the zero ring.
+Source: Tate pullback and transposition paragraph.
 -/
 theorem orderedTatePullbackSquare (A : Type (u + 1)) [CommRing A]
     (N : ℕ) (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)

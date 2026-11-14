@@ -73,8 +73,7 @@ import WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal
 
 /-! # Monoidal comparison of the finite-coefficient hearts
 
-Source: integral-models proof, first paragraph; Stacks Tags 03ET, 00YV and 03CY.
-(blueprint: lem-sfb-embedded-finite-heart-monoidal-presentation).
+Source: Stacks Tags 03ET, 00YV and 03CY.
 -/
 
 @[expose] public noncomputable section
@@ -189,30 +188,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 attribute [-instance] integralModel_coefficientMonObj in
 /-- Compare the specified heart realization with the coefficient-sized module category.
 There is no derived-category or constructibility assertion here.
-Source: integral-models proof, first paragraph; Stacks Tags 03ET, 00YV and 03CY
-(blueprint: lem-sfb-embedded-finite-heart-monoidal-presentation).
-
-Proof: reconstruct the continuous internal module as its sectionwise module sheaf.
-For finite discrete A, a continuous scalar section is locally a constant scalar.
-Consequently restriction to constant scalars is fully faithful: a linear map for
-constants is linear for all sections locally, hence globally by separatedness.
-For essential surjectivity extend a fixed-scalar action locally to continuous
-sections, and glue; the local constant presentations make this independent of
-all choices. The intrinsic associated-module-sheaf construction is the inverse
-of restriction to constant scalars. These facts prove that the specified
-integralModelIntrinsicRealization is an equivalence.
-Construct H by restricting intrinsic modules to constant scalars, identifying
-the double lift of A with its single lift by the canonical ring equivalence,
-then transporting along AsSmall to the coefficient-sized site and applying the
-inverse of coefficientModelFixedScalars. Each factor is additive. On each site,
-section-action identifies internal relative tensor with the sheafification of
-balanced sectionwise tensor. The canonical constant-function map and both lift
-identifications preserve each scalar, so the tensor comparisons send every local
-pure tensor to that same pure tensor, and send the unit section to itself.
-Associativity and both unit equations follow on these generators and descend
-through the coequalizer and sheafification universal properties. They provide a
-strong monoidal structure on the displayed actual composite. Empty schemes and
-the zero ring satisfy the same local construction. -/
+Source: Stacks Tags 03ET, 00YV and 03CY. -/
 theorem finiteHeartMonoidalPresentation
     (X : Scheme.{u}) (A : Type) [CommRing A]
     [TopologicalSpace A] [IsTopologicalRing A] [Finite A] [DiscreteTopology A] :

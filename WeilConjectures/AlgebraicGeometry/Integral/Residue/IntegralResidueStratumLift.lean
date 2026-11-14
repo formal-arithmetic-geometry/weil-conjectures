@@ -107,36 +107,7 @@ private theorem sliceCoefficient_reflects
 
 set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 /-- Complete integral coefficients lift perfect constant residue models on one stratum.
-Source: Bhatt--Scholze, Proposition 6.6.11, forward implication; Lemma 6.6.8.
-(blueprint: lem-weil-pbc-integral-residue-stratum-lift).
-
-Proof: the valuation ring is a complete discrete valuation ring with finite residue
-field. For coefficient completeness, choose representatives of a compatible
-uniformizer-adic residue sequence: their differences tend to zero in the extending
-absolute value. Completeness of the finite extension gives a limit in its closed
-integer ball and in every residue coset; separatedness gives uniqueness. Transport
-this coefficient calculation through ULift. Restrict the given intrinsic completion
-unit to S; immersion inverse image preserves it by stratum-completion-unit-restriction.
-The normalized finite coefficient comparison identifies the supplied residue models
-with the residue reduction of this restriction. Pass from the etale cover to its
-pro-etale covering sieve. Apply residue-lisse-perfect-lift on S to get perfect
-integral constant models on a pro-etale refinement. Its derived Nakayama argument
-lifts a bounded finite-projective residue model and identifies its completed
-realization with the original complete object. Finally transport the models from
-the completed-adic presentation to the datum presentation: coefficient projection
-comparisons commute with scalar extension and slice restriction. The resulting
-local isomorphisms use exactly integralConstantDerived T and the inverse image of
-T's completed coefficient ring. More explicitly, ULift.ringEquiv identifies the
-uniformizer ideals and every quotient map. Constant sheafification commutes with
-this scalar equivalence. The two completed realization functors are left adjoints
-to the identified scalar restrictions, so their unit-preserving comparison is the
-unique adjunction comparison. On finite projective representatives it is termwise
-the map b tensor p to b tensor p; hence it commutes with differentials, quotient
-projections, and slice restriction. Lift the finite projective complexes supplied
-over the unlifted valuation ring to ModuleCat of PbcIntegralRing and compose these
-comparisons with the lifted model isomorphisms. Keep the same stratum S and g; no
-choice or refinement of a global stratification occurs here. For an empty stratum
-all local assertions are vacuous, and the zero residue model lifts to zero. -/
+Source: Bhatt--Scholze, Proposition 6.6.11, forward implication; Lemma 6.6.8. -/
 theorem integralResidueStratum_lift
     (T : Scheme.{u}) [IsNoetherian T] (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

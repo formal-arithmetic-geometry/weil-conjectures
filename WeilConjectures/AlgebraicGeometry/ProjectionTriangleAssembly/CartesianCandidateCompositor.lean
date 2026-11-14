@@ -14,8 +14,7 @@ public import WeilConjectures.SixFunctors.CompactSupportFiniteProjection.FiniteS
 This is the four-factor construction formerly in CartesianCompactSupportCompositor.
 It is shared by the Cartesian assembly and its canonical site square so both use
 one declaration without unfolding the four comparison factors.
-Source: Stacks Project, Tags 0F7J and 0F7K
-(blueprint: def-sf-cartesian-candidate-compositor).
+Source: Stacks Project, Tags 0F7J and 0F7K.
 -/
 
 @[expose] public noncomputable section
@@ -30,8 +29,7 @@ namespace AlgebraicGeometry.ProEtale.ProjectionTriangleAssembly
 /-- The canonical origin compositor at three specified candidates, with the canonical
 candidate comparisons inserted on both ends. This extends the existing tower component
 notation to an arbitrary retained origin object; it chooses no comparison maps.
-Source: Stacks 0F7J; proposition-composition-base-change-rf-shriek--1
-(blueprint: lem-sf-projection-compatible-triangle-assembly). -/
+Source: Stacks 0F7J. -/
 def candidateCompositor (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
     [QuasiCompact f] [QuasiCompact g]

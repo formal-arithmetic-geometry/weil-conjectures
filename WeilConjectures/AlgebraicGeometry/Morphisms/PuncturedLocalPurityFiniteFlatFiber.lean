@@ -21,8 +21,7 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.StalkNormalizationDepthTwoSec
 /-!
 # Local purity excludes a minimal nonflat fibre
 
-Source: Stacks Project, Tags 0BMA, 0EY7 and 0EY6(2),(3).
-(blueprint: lem-sbc-punctured-local-purity-finite-flat-fibre)
+Source: Stacks Project, Tags 0BMA, 0EY7 and 0EY6(2), (3).
 -/
 
 @[expose] public section
@@ -122,31 +121,7 @@ private theorem punctured_stalk_etale {L E : Scheme.{u}} [IsLocallyNoetherian L]
 /-- A finite depth-two extension is flat over s if it is flat over every proper
  generalization of s and purity holds for the punctured local spectrum at s.
 
-Source: Stacks Project, Tag 0EY7, the punctured local-spectrum step, and
-Tag 0EY6(2),(3), `pione-lemma-extend-S2`.
-(blueprint: lem-sbc-punctured-local-purity-finite-flat-fibre)
-
-Proof: Base change p to Spec O(L,s). Localization at s preserves the source
-stalks above its closed point, and its stalk maps elsewhere are localizations
-of the stalk maps over proper generalizations of s. Thus the base change is
-flat off the closed fibre by hflat. It is etale on the inverse image of V;
-the source depth bound persists on the rest under this localization. On the
-punctured target, apply 0EY6(3): the supplied finite extension is flat, its
-source boundary has depth at least two, and its restriction to the inverse
-image of V is etale. Hence it is etale on the whole punctured spectrum.
-Local purity now extends that punctured finite etale cover to a finite etale
-Q over Spec O(L,s). The depth of the local target at the closed point is
-that of O(L,s), and is at least two. By the flat local depth formula all
-source stalks of Q over this point have depth at least two. The same bound
-for the local base change of p follows from hsource: s is outside V.
-The depth-two extension uniqueness theorem 0EY6(2) gives an isomorphism over
-the local spectrum between p's base change and Q. Transport flatness across
-this isomorphism. The canonical local-spectrum morphism is flat and has
-a point above s. Apply flat descent near this point, as packaged by
-stalk_normalization_depth_two_section_flat_core, to obtain an open
-neighbourhood of s on which p is flat. Restriction induces isomorphisms
-on stalks, transferring this flatness to every original source point
-over s. If no source point lies over s the conclusion is vacuous. -/
+Source: Stacks Project, Tag 0EY7, the punctured local-spectrum step, and Tag 0EY6(2), (3). -/
 theorem flat_fibre_of_punctured_local_purity
     {L E : Scheme.{u}} [IsLocallyNoetherian L] (V : L.Opens)
     (p : E ⟶ L) [IsFinite p] [Etale (p ∣_ V)]

@@ -36,33 +36,7 @@ namespace AlgebraicGeometry.Scheme
 /-- The concrete local normalization admits jointly surjective affine etale charts on which
 it is a finite product of standard tame monic extensions.
 
-Source: Stacks Project, Tags 0EYJ (trait paragraph), 0EYG and 0EYH.
-(blueprint: lem-sbc-stalk-normalization-trait-charts)
-
-Proof: Write A = O_{S,s}. The points of Spec A map to the generalizations of s.
-Minimality outside U identifies its inverse image with the punctured spectrum, which,
-for the DVR A, is Spec Frac A. The generic-fibre pullback squares identify the given
-finite etale model there with the base change of Z. Smoothness over A makes the closed
-fibre a regular effective Cartier divisor, cut out by a uniformizer: flatness makes
-that uniformizer a nonzerodivisor and smoothness over the residue field makes the
-fibre regular. At the codimension-one points of this divisor, each connected component
-of the generic cover is Galois with stabilizer a subgroup of G. Its ramification indices
-and residue degrees divide the invertible order of the stabilizer (Tag 09EB), so the
-ramification indices are prime to the residue characteristic. In positive residue characteristic
-the inseparable residue degree is a power of that characteristic and divides the
-residue degree, so it is one. Thus the residue extensions are separable and the cover
-is tame in codimension one. Apply 0EYG and 0EYH to obtain, around each point of the local
-total space, an affine etale neighbourhood Spec R and a finite disjoint union of standard
-covers Spec R[T]/(T^e-f), with e positive and invertible in R. Relative normalization
-commutes with localization on the base (Stacks Tag 0307); hence the normalization on
-the local total space is the concrete pullback n. Its formation also commutes with
-etale base change (Tags 03GE and 03GV), so the comparison is an isomorphism over Spec R, not just
-an abstract isomorphism of schemes. Finite disjoint unions of these affine spectra
-are the spectrum of their product. Choose one neighbourhood for each point and index
-its finitely many components by Fin m. The neighbourhoods are jointly surjective.
-Off the divisor the finite etale cover is etale locally split; use e = 1 and f = 1.
-An empty cover is represented by m = 0, whose product is the zero ring. This construction
-uses no section and no rational point. -/
+Source: Stacks Project, Tags 0EYJ (trait paragraph), 0EYG and 0EYH. -/
 theorem GaloisCover.stalk_normalization_trait_charts {S C : Scheme.{u}}
     [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]

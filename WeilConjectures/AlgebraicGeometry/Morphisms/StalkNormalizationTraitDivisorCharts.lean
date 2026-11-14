@@ -25,9 +25,8 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.RegularDivisorPrescribedPunct
 import WeilConjectures.RingTheory.RegularRingSmoothAscent
 import Mathlib.RingTheory.TensorProduct.Quotient
 
-/-! Tame charts with the trait divisor equation. 
+/-! Tame charts with the trait divisor equation.
 Source: Stacks Project, Tags 0EYH, 0EYI and 0EYJ.
-(blueprint: lem-sbc-stalk-normalization-trait-divisor-charts)
 -/
 
 @[expose] public section
@@ -178,23 +177,7 @@ set_option maxHeartbeats 1000000 in
 -- Elaborating the nested pullbacks and product root algebras exceeds the default budget.
 /-- A tame affine chart using the pullback of an actual trait uniformizer.
 
-Source: Stacks Project, Tags 0EYJ (trait reduction), 0EYG and 0EYH.
-(blueprint: lem-sbc-stalk-normalization-trait-divisor-charts)
-
-Proof: Minimality of s outside U identifies the local generic restriction with the
-punctured trait. Choose a uniformizer of its DVR. Its pullback cuts out the closed
-fibre of the smooth total space and is a nonzerodivisor with regular quotient.
-The stabilizer of each connected torsor component has order dividing the invertible
-order of G. The ramification and inseparable residue degrees divide that order, so
-the cover is tame along the closed fibre. Apply 0EYG with this particular divisor
-equation, then 0EYH. If a chart initially uses a unit multiple of the equation,
-adjoin the required roots of the unit etale locally (the exponents are invertible)
-and rescale the roots. This gives the same equation rho(varpi) in every factor.
-Normalization commutes with trait localization and etale base change, identifying
-these charts with the concrete n. Choose a chart over n(x), enumerate its factors
-by Fin m, and retain the structural equality over the chart. Since n(x) is on the
-closed fibre, rho(varpi) belongs to the prime y. No stalk localization or generic
-section factor is constructed in this theorem. Empty normalizations have no x. -/
+Source: Stacks Project, Tags 0EYJ (trait reduction), 0EYG and 0EYH. -/
 theorem GaloisCover.stalk_normalization_trait_divisor_charts {S C : Scheme.{u}}
     [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]

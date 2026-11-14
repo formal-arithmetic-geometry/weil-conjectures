@@ -13,10 +13,6 @@ import WeilConjectures.AlgebraicGeometry.Locally.LocallyClosedCoefficientExtensi
 import WeilConjectures.ConstructibleSheaf.Devissage
 
 /-! # Filtration of a locally closed extension along prescribed ordered strata
-
-Source: blueprint latest, integral-models-generators proof (1), applying and pushing
-forward the ordered open-prefix filtration
-(blueprint: lem-sfb-locally-closed-ordered-filtration).
 -/
 
 @[expose] public noncomputable section
@@ -62,9 +58,6 @@ attribute [local irreducible] coefficientHeartLocallyClosedExtension
 /-- Extension by zero sends the ordered stratum filtration to a filtration of its
 specified extension, with quotients extended along the composite immersions.
 No lattice, coefficient inclusion, or lisseness hypothesis is involved.
-
-Source: blueprint latest, integral-models-generators proof (1), filtration sentence
-(blueprint: lem-sfb-locally-closed-ordered-filtration).
 
 Proof in words. Form the open prefix U_b from the given union of strata. The images
 of U_b! U_b* L -> L give subobjects G_b. Open-closed recollement identifies their

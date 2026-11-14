@@ -251,15 +251,8 @@ private theorem scalarExact_composition
 
 /-- The normalized scalar/pullback comparison commutes with composition of inverse images.
 The displayed transports express left-derived inverse images as the levelwise exact functors.
-Source: Stacks Project, Tag 0D6D (lemma-derived-pullback-composition), with the ordinary
-composition of Tag 03D8 and the K-flat normalization of Tag 0G7E
-(blueprint: lem-sf-scalar-pullback-composition).
-
-Proof: identify the normalized inverse comparison with the scalar-adjunction mate, using
-`scalarPullback_eq`. Transport its unit equation to exact derived inverse image. The existing
-composition equation for the derived restriction square transfers through the three scalar
-adjunctions by naturality and injectivity of the Hom bijection. Cancel the inverse comparisons
-to obtain the forward equation. No coefficient flatness or boundedness is used. -/
+Source: Stacks Project, with the ordinary composition of Tag 03D8 and the K-flat normalization of
+Tag 0G7E. -/
 theorem scalarPullback_composition
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {X T₁ T₂ : Scheme.{u}}
