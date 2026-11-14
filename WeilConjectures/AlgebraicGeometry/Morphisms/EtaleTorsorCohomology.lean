@@ -21,10 +21,6 @@ is natural in `Y`: the pullback of `ξ` along a morphism `f : Y' ⟶ Y` is the c
 pulled-back torsor `t ×_Y Y'`. Since a torsor has class zero exactly when it has a section,
 the pullback of `ξ` along `f` vanishes exactly when `f` lifts to the total space of `t`.
 
-This is the form in which the vanishing theorem
-`proposition-base-change-larger-algebraically-closed--1` uses the classification: it kills a class
-of `H¹` by pulling it back to a cover over which the torsor acquires a section.
-
 ## Main statements
 
 - `AlgebraicGeometry.Scheme.EtaleTorsor.exists_forall_cohomologyMap_eq_zero_iff`: a class of
@@ -42,9 +38,7 @@ namespace AlgebraicGeometry.Scheme.EtaleTorsor
 
 variable (M : Type (u + 1)) [AddCommGroup M] [Finite M]
 
-/-- Blueprint `sk-prop-input-torsors` (naturality): Torsors and étale H^1
-
-Let `M` be a finite abelian group and `ξ ∈ H¹(Y_ét, M)` a class of the constant sheaf `M` on a
+/-- Let `M` be a finite abelian group and `ξ ∈ H¹(Y_ét, M)` a class of the constant sheaf `M` on a
 scheme `Y`. Then there is an `M`-torsor `t` over `Y` representing `ξ` naturally: for every
 morphism `f: Y' ⟶ Y`, the pullback of `ξ` along `f` vanishes exactly when `f` lifts to the
 total space of `t`, that is, exactly when the pulled-back torsor `t ×_Y Y'` is trivial. -/

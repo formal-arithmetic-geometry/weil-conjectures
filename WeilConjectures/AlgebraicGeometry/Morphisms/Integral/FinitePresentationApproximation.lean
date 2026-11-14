@@ -16,6 +16,8 @@ We show that an integral morphism `f : X ⟶ S` to a quasi-compact quasi-separat
 (`AlgebraicGeometry.Scheme.Hom.exists_finiteApproximation_of_isIntegralHom`, Stacks Project
 Tag 09YZ).
 
+## Implementation details
+
 Start from a presentation `X = lim Tᵢ` with `Tᵢ` finite over `S`
 (`AlgebraicGeometry.Scheme.Hom.nonempty_finiteApproximation_of_isIntegralHom`). Every finite
 `S`-scheme `Tᵢ` is a closed subscheme of a finite `S`-scheme `Yᵢ` of finite presentation
@@ -61,9 +63,7 @@ instance Scheme.Hom.ClosedFPEmbedding.quasiSeparatedSpace_Y {T S : Scheme.{u}} {
   quasiSeparatedSpace_of_quasiSeparated P.q
 
 /-- **A finite scheme over a quasi-compact quasi-separated base is a closed subscheme of a finite
-scheme of finite presentation.** Write it as the limit of schemes of finite presentation with
-closed immersions as transition maps (Stacks Project Tag 09ZQ); some stage is finite
-(`AlgebraicGeometry.Scheme.exists_isFinite_of_isLimit`). -/
+scheme of finite presentation.** -/
 theorem Scheme.Hom.nonempty_closedFPEmbedding {T S : Scheme.{u}} (p : T ⟶ S) [IsFinite p]
     [CompactSpace S] [QuasiSeparatedSpace S] : Nonempty p.ClosedFPEmbedding := by
   have : CompactSpace T := QuasiCompact.compactSpace_of_compactSpace p
@@ -334,10 +334,7 @@ end Scheme.Hom.FiniteApproximation
 
 /-- **An integral morphism is a limit of finite morphisms of finite presentation** (Stacks
 Project Tag 09YZ). If `f : X ⟶ S` is integral and `S` is quasi-compact and quasi-separated,
-then `X` is a cofiltered limit of schemes finite and of finite presentation over `S`.
-
-This strengthens `Scheme.Hom.nonempty_finiteApproximation_of_isIntegralHom` (Step 2 of blueprint
-`thm-pqf-zmt-factorization`) by the finite presentation of the stages. -/
+then `X` is a cofiltered limit of schemes finite and of finite presentation over `S`. -/
 @[stacks 09YZ]
 theorem Scheme.Hom.exists_finiteApproximation_of_isIntegralHom {X S : Scheme.{u}} (f : X ⟶ S)
     [IsIntegralHom f] [CompactSpace S] [QuasiSeparatedSpace S] :

@@ -24,18 +24,17 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.Restriction
 
 A quasi-coherent ideal is a `Scheme.IdealSheafData`, with module realization and inclusion
 `toModules` and `toModulesι`. The product `𝒥𝓕`, its inclusion and the powers `𝒥ⁿ`
-(`𝒥ⁿ⁺¹ = 𝒥 · 𝒥ⁿ`) are the landed `Scheme.idealModuleProduct`, `Scheme.idealModuleProductι`
+(`𝒥ⁿ⁺¹ = 𝒥 · 𝒥ⁿ`) are `Scheme.idealModuleProduct`, `Scheme.idealModuleProductι`
 and `Scheme.idealSheafPower`. Restriction to an
 open `V` is `Scheme.Modules.restrictFunctor V.ι` on modules and `IdealSheafData.comap V.ι`
 on ideals. Subsheaves of `𝓕|_V` are compared as the subobjects `Subobject.mk (image.ι _)`
-of their inclusions, as in lem-weil-pbc-affine-pushforward-ideal-product.
+of their inclusions.
 
 ## References
 
 * Stacks Project, Schemes, Tags 01I8 and 01IC
-* Modules, Tags 01CE and 01AH
-* Cohomology of Schemes, Tag 087X
-* Stacks, Tags 01I8, 01IC, 01CE, 01AH and 087X
+* Stacks Project, Modules, Tags 01CE and 01AH
+* Stacks Project, Cohomology of Schemes, Tag 087X
 -/
 
 @[expose] public section

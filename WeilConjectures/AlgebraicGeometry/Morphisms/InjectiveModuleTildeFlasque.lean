@@ -28,17 +28,8 @@ namespace AlgebraicGeometry.Scheme
 noncomputable section
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Affine module coordinates for the ideal-power section extension of Tag 01YB.
-
-Apply `quasicoherent_open_section_ideal_extension` to the vanishing ideal of
-Spec R minus U. For the resulting power K, transport K's global ideal along
-`ΓSpecIso` to an ideal J of R. The inclusion on global sections is injective
-and its range is J, giving a linear equivalence between K's global sections
-and J. Compose its inverse with the global component of the extension and
-`tilde.isoTop.inv` to define φ. Naturality of the extension and the inclusion
-proves the scalar identity on U. The support of a positive ideal power equals
-the original support, so J is not contained in any prime in U. At exponent
-zero K is the unit ideal and the same assertion follows from empty support. -/
+/-- A section `s` of `M~` over an open `U ⊆ Spec R` is given by a linear map `φ : J →ₗ[R] M` on
+an ideal `J` not contained in any prime of `U`: `φ(a)|_U = a • s` for all `a ∈ J`. -/
 private theorem affine_section_ideal_presentation
     (R : Type u) [CommRing R] [IsNoetherianRing R]
     (M : ModuleCat.{u} R) (U : (Spec (.of R)).Opens)

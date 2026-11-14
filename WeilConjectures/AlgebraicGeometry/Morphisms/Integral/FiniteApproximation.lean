@@ -18,15 +18,8 @@ coequifibered presheaf of rings on `S.AffineZariskiSite` under `𝒪_S`) which i
 `𝒪_S`. We show that the relative spectrum `Spec_S F` is the cofiltered limit of the relative
 spectra of finite quasi-coherent subalgebras of `F`, which are finite over `S`. Applied to the
 relative normalization this shows that an integral morphism `X ⟶ S` is a cofiltered limit of
-finite `S`-schemes: this is the "finite approximation tail" (Step 2) of the proof of blueprint
-`thm-pqf-zmt-factorization` (compare Stacks Project Tag 09YZ, which also asks for the stages to
-be of finite presentation; the blueprint does not claim this for these stages).
-
-The key point is that every section of `F` over an affine open lies in a finite quasi-coherent
-subalgebra (Stacks Project Tag 01PG). We deduce this from the corresponding statement for ideal
-sheaves (`AlgebraicGeometry.Scheme.IdealSheafData.exists_finiteType_le_of_mem`), applied to the
-relative spectrum `D` of `𝒪_S + ε F ⊆ F[ε]`: quasi-coherent ideals of `𝒪_D` contained in `ε F` are
-the quasi-coherent `𝒪_S`-submodules of `F`.
+finite `S`-schemes (compare Stacks Project Tag 09YZ, which also asks for the stages to be of
+finite presentation; this is not claimed here).
 
 ## Main definitions and results
 
@@ -38,6 +31,14 @@ the quasi-coherent `𝒪_S`-submodules of `F`.
   integral quasi-coherent algebra is a limit of finite schemes.
 - `AlgebraicGeometry.Scheme.Hom.nonempty_finiteApproximation_of_isIntegralHom`: an integral
   morphism to a quasi-compact quasi-separated scheme is a cofiltered limit of finite morphisms.
+
+## Implementation details
+
+The key point is that every section of `F` over an affine open lies in a finite quasi-coherent
+subalgebra (Stacks Project Tag 01PG). We deduce this from the corresponding statement for ideal
+sheaves (`AlgebraicGeometry.Scheme.IdealSheafData.exists_finiteType_le_of_mem`), applied to the
+relative spectrum `D` of `𝒪_S + ε F ⊆ F[ε]`: quasi-coherent ideals of `𝒪_D` contained in `ε F` are
+the quasi-coherent `𝒪_S`-submodules of `F`.
 -/
 
 @[expose] public section
@@ -1033,13 +1034,7 @@ open Scheme.AffineZariskiSite
 
 /-- A **finite approximation** of a morphism `f : X ⟶ S` is a cofiltered system `D` of
 schemes finite over `S` together with a limit cone with point `X` whose projections are
-compatible with `f`: it presents `X` as a cofiltered limit of finite `S`-schemes. The transition
-morphisms are then affine (`Scheme.Hom.FiniteApproximation.isAffineHom_map`).
-
-An integral morphism to a quasi-compact quasi-separated scheme admits one
-(`Scheme.Hom.nonempty_finiteApproximation_of_isIntegralHom`, compare Stacks Project Tag 09YZ).
-This is the "finite approximation tail" of the proof of blueprint
-`thm-pqf-zmt-factorization`. -/
+compatible with `f`: it presents `X` as a cofiltered limit of finite `S`-schemes. -/
 structure Scheme.Hom.FiniteApproximation {X S : Scheme.{u}} (f : X ⟶ S) where
   /-- The index category of the inverse system. -/
   I : Type u
@@ -1103,11 +1098,7 @@ noncomputable def Scheme.AffineZariskiSite.finiteApproximation {S : Scheme.{u}}
 /-- **An integral morphism is a limit of finite morphisms** (the finite approximation of Stacks
 Project Tag 09YZ, without the finite presentation of the stages). If `f : X ⟶ S` is integral and
 `S` is quasi-compact and quasi-separated, then `X` is a cofiltered limit of schemes finite over
-`S`.
-
-This is Step 2 ("the finite approximation tail") of the proof of blueprint
-`thm-pqf-zmt-factorization`: `f_* 𝒪_X` is the filtered union of its finite quasi-coherent
-subalgebras. -/
+`S`. -/
 theorem Scheme.Hom.nonempty_finiteApproximation_of_isIntegralHom {X S : Scheme.{u}}
     (f : X ⟶ S) [IsIntegralHom f] [CompactSpace S] [QuasiSeparatedSpace S] :
     Nonempty f.FiniteApproximation := by

@@ -76,8 +76,8 @@ lemma eq_zero_of_presheaf_map_eq_zero (M : X.Modules) [M.IsInvertible] {U W : X.
     (h1.trans (map_zero _).symm), zero_smul]
 
 /-- **Nonzero sections of invertible modules on an integral scheme have nonzero tensor
-product.** Locally the sections are `a e` and `b e'` for free generators `e`, `e'` and nonzero
-functions `a`, `b`, and `a b ≠ 0` since the ring of functions is a domain. -/
+product.** If `s` and `t` are nonzero global sections of invertible modules on an
+integral scheme, then `s ⊗ t ≠ 0`. -/
 lemma tmulSection_ne_zero {M N : X.Modules} [M.IsInvertible] [N.IsInvertible] {s : Γ(M, ⊤)}
     {t : Γ(N, ⊤)} (hs : s ≠ 0) (ht : t ≠ 0) : tmulSection s t ≠ 0 := by
   have := IsInvertible.sheafOfModules_isInvertible M
@@ -105,11 +105,7 @@ lemma tmulSection_ne_zero {M N : X.Modules} [M.IsInvertible] [N.IsInvertible] {s
 
 /-- **A triviality criterion on an integral scheme with a field of global functions.** Let `X`
 be integral with `Γ(X, 𝒪_X)` a field, e.g. integral and proper over a field. If invertible
-modules `M`, `N` with `M ⊗ N ≅ 𝒪_X` both have nonzero global sections, then `M ≅ 𝒪_X`.
-
-For nonzero sections `s`, `t` of `M`, `N`, the section `s ⊗ t` of `M ⊗ N ≅ 𝒪_X` is a nonzero,
-hence invertible, function. Locally `s = a e` and `t = b e'` for free generators `e`, `e'`, so
-`a b` is a unit, hence so is `a`, and `s` is a global free generator of `M`. -/
+modules `M`, `N` with `M ⊗ N ≅ 𝒪_X` both have nonzero global sections, then `M ≅ 𝒪_X`. -/
 theorem nonempty_iso_unit_of_tensorObj_iso_unit (hX : IsField Γ(X, ⊤)) {M N : X.Modules}
     [M.IsInvertible] [N.IsInvertible] (e : M ⊗ N ≅ 𝟙_ X.Modules) {s : Γ(M, ⊤)}
     {t : Γ(N, ⊤)} (hs : s ≠ 0) (ht : t ≠ 0) : Nonempty (M ≅ 𝟙_ X.Modules) := by

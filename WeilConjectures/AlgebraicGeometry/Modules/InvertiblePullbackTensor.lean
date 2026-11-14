@@ -22,9 +22,8 @@ import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 ## References
 
 * Stacks Project, Modules, Tags 01CD, 0B8L, 01C8, 01CT, 01CA, 01CB
-* Sheaves, Tags 0096, 0097, 0098
-* Algebra, Tags 00D0, 00CY, 00D2
-* Sheaves, Tags 0096, 0097
+* Stacks Project, Sheaves, Tags 0096, 0097, 0098
+* Stacks Project, Algebra, Tags 00D0, 00CY, 00D2
 -/
 
 @[expose] public section
@@ -90,14 +89,10 @@ private theorem tensorFold_perm {X : Scheme.{v}} {l l' : List X.Modules}
     exact ⟨e₁ ≪≫ e₂⟩
 
 -- The eight comparisons involve several concrete-category and scalar-action transports.
-/-- Invertible modules remain invertible under pullback and tensor product. Pullback
-commutes naturally with tensor products and composition, with the stated action on
-sections. Symmetry swaps tensor sections; by associativity and adjacent transpositions,
-this also permits every permutation of a finite tensor product (including the empty
-product, the structure module). Fibres commute with pullback and tensor product, and
-these identifications send section values to their indicated pure tensors.
-
-0098. -/
+/-- Invertible modules have one-dimensional fibres and are stable under pullback and tensor
+product. Pullback commutes naturally with tensor products and composition, compatibly with
+sections; finite tensor products are invariant under permutations of the factors; and fibres
+commute with pullback and tensor product, compatibly with section values. -/
 theorem invertible_pullback_tensor {X Y : Scheme.{v}} (f : X ⟶ Y) :
     let pb : ∀ {A B : Scheme.{v}} (h : A ⟶ B) (N : B.Modules) (V : B.Opens),
         Γ(N, V) → Γ((tensorPullback h).obj N, h ⁻¹ᵁ V) :=

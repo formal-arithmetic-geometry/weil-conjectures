@@ -97,8 +97,7 @@ lemma pullbackPushforwardAdjunction_unit_app_unit (k : X ⟶ Y) :
   exact (Category.comp_id _).symm
 
 /-- The unit of the adjunction `k^* ⊣ k_*` maps a global free generator `s` of `L` to a free
-generator of `k^* L`: the trivialization `𝒪_Y ≅ L` given by `s` pulls back to a trivialization
-`𝒪_X ≅ k^* 𝒪_Y ≅ k^* L` sending `1` to `η s`. -/
+generator of `k^* L`. -/
 lemma IsFreeGenerator.pullback_unit_app_top (k : X ⟶ Y) {L : Y.Modules} {s : Γ(L, ⊤)}
     (hs : IsFreeGenerator s) :
     IsFreeGenerator (M := (pullback k).obj L) (U := k ⁻¹ᵁ ⊤)
@@ -164,12 +163,7 @@ lemma IsFreeGenerator.of_presheaf_map {M : X.Modules} {U V : X.Opens} (h : V ≤
   exact this
 
 /-- **The unit of the adjunction `g^* ⊣ g_*` maps free generators to free generators.** If `e` is
-a free generator of `N` on `V`, then `η e` is a free generator of `g^* N` on `g ⁻¹ᵁ V`.
-
-We compare the two left adjoints `(g^* -)|_{g ⁻¹ᵁ V}` and `(g ∣_ V)^* (- |_V)` of the isomorphic
-functors `g_* ∘ (g ⁻¹ᵁ V).ι_*` and `V.ι_* ∘ (g ∣_ V)_*`; the isomorphism between them is
-compatible with the units. On `V`, `e` is a global free generator of `N|_V`, which is mapped to
-a free generator by the unit of `(g ∣_ V)^* ⊣ (g ∣_ V)_*` (`pullback_unit_app_top`). -/
+a free generator of `N` on `V`, then `η e` is a free generator of `g^* N` on `g ⁻¹ᵁ V`. -/
 lemma IsFreeGenerator.pullback_unit_app (g : X ⟶ Y) {N : Y.Modules} {V : Y.Opens} {e : Γ(N, V)}
     (he : IsFreeGenerator e) :
     IsFreeGenerator (M := (pullback g).obj N) (U := g ⁻¹ᵁ V)

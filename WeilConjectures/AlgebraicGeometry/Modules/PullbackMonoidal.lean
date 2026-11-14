@@ -19,17 +19,19 @@ Let `f : X ⟶ Y` be a morphism of schemes. The pullback functor
 the structure sheaf to the structure sheaf, and the tensor product of two `𝒪ᵧ`-modules to the
 tensor product of their pullbacks.
 
+## Main declarations
+
+- `AlgebraicGeometry.Scheme.Modules.pullbackMonoidal`: the pullback functor
+  `AlgebraicGeometry.Scheme.Modules.pullback f` is monoidal (an instance).
+
+## Implementation details
+
 This is reduced to the same statement for presheaves of modules,
 `PresheafOfModules.pullbackMonoidal`, via the universal property of the category of sheaves of
 modules as a localization of presheaves of modules
 (`CategoryTheory.Localization.Monoidal.functorMonoidalOfComp`): the pullback of sheaves of
 modules lifts the pullback of presheaves of modules followed by sheafification
 (`SheafOfModules.sheafificationCompPullback`).
-
-## Main declarations
-
-- `AlgebraicGeometry.Scheme.Modules.pullbackMonoidal`: the pullback functor
-  `AlgebraicGeometry.Scheme.Modules.pullback f` is monoidal (an instance).
 -/
 
 @[expose] public section

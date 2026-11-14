@@ -476,10 +476,7 @@ theorem isFiniteLocallyConstantSheafOfTypes_sheaf
 end FiniteLocallyConstant
 
 /-- **Torsors under a finite constant sheaf come from étale torsors.** Every torsor `P` under the
-constant sheaf `M` on the small étale site of `Y` is the sheaf torsor of an `M`-torsor: `P` is a
-finite locally constant sheaf of sets, hence represented by a finite étale `Y`-scheme `Q`
-(`AlgebraicGeometry.Scheme.isFiniteLocallyConstant_yoneda_and_exists_iso`, blueprint
-`lemma-weil-pbc-finite-locally-constant-etale-equivalence`), on which the action of `M` lifts. -/
+constant sheaf `M` on the small étale site of `Y` is the sheaf torsor of an `M`-torsor. -/
 theorem exists_toSheafTorsor_equiv
     (P : Sheaf.Torsor ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
       (AddCommGrpCat.of M))) :
@@ -513,16 +510,10 @@ lemma classH1Equiv_apply (t : Quotient (EtaleTorsor.setoid M Y)) :
   rfl
 
 variable (M Y) in
-/-- Blueprint `sbc-prop-torsors-h1`, the finite étale clause: an `M`-torsor on the small étale
-site of `Y` is the same thing as a finite étale `Y`-scheme with a simply transitive
-`M`-action.
-
-The functor of points `AlgebraicGeometry.Scheme.EtaleTorsor.toSheafTorsor`, `P ↦ Hom_Y(-, P)`,
-with the action of the constant sheaf `M` induced by the action of `M` on `P`, induces a bijection
-on isomorphism classes, and the global sections of the sheaf torsor are the sections of the
-structure morphism. Full faithfulness is the Yoneda lemma
-(`AlgebraicGeometry.Scheme.EtaleTorsor.toSheafTorsor_equiv_toSheafTorsor_iff`) and essential
-surjectivity is `AlgebraicGeometry.Scheme.EtaleTorsor.exists_toSheafTorsor_equiv`. -/
+/-- An `M`-torsor on the small étale site of `Y` is the same thing as a finite étale `Y`-scheme
+with a simply transitive `M`-action: there is a map from `M`-torsors to torsors under the constant
+sheaf `M` inducing a bijection on isomorphism classes, under which sections of the structure
+morphism correspond to global sections of the sheaf torsor. -/
 theorem exists_sheafTorsor :
     ∃ F : EtaleTorsor M Y → Sheaf.Torsor
         ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of M)),
@@ -533,14 +524,10 @@ theorem exists_sheafTorsor :
     fun t ↦ (t.nonempty_toSheafTorsor_sheaf_obj_iff terminalIsTerminal).symm⟩
 
 variable (M Y) in
-/-- Torsors and étale H^1
-
-For a scheme `Y` and a finite abelian group `M` the isomorphism classes of `M`-torsors on
-the small étale site of `Y` are in canonical bijection with the first sheaf cohomology
-group `H^1(Y_ét, M)` of the constant sheaf with value `M`, under which the class of a
-torsor vanishes exactly when its structure morphism admits a section, that is, exactly
-when the torsor is trivial. The canonical bijection is
-`AlgebraicGeometry.Scheme.EtaleTorsor.classH1Equiv`; this statement forgets it. -/
+/-- **Torsors and étale `H^1`.** For a scheme `Y` and a finite abelian group `M`, the isomorphism
+classes of `M`-torsors on the small étale site of `Y` are in bijection with `H^1(Y_ét, M)`,
+under which the class of a torsor vanishes exactly when its structure morphism admits a
+section. -/
 @[stacks 02NE]
 theorem exists_quotientEquivSheafH :
     ∃ c : Quotient (EtaleTorsor.setoid M Y) ≃ Sheaf.H

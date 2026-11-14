@@ -16,20 +16,20 @@ change to an algebraically closed field `k`, with projections `p : S ⟶ X₀` a
 and let `h` be a `k`-endomorphism of `S` lifting a `q ^ m`-power Frobenius `G` of `X₀`
 (`h ≫ p = p ≫ G`), with `m ≥ 1`. If `t : Spec A ⟶ S` is a point with values in a local ring
 fixed by `h`, then `t` is constant: it factors through a `k`-rational point `x` of `S` fixed by `h`
-(`AlgebraicGeometry.exists_eq_comp_of_comp_eq_self_of_isFrobenius`).
-
-The algebraic input is that in a local algebra `A` over an algebraically closed field `k`, an
-element `r` with `r ^ N = r` is a scalar, when `r ↦ r ^ N` is a ring endomorphism and `N ≥ 2`
-(`IsLocalRing.exists_algebraMap_eq_of_pow_eq_self`, in
-`WeilConjectures.Mathlib.FieldTheory.IsAlgClosed.Basic`): `r` is congruent to a root `c` of
-`X ^ N - X` in `k` modulo the maximal ideal, and `n = r - c` satisfies `n ^ N = n` with
-`n ∈ 𝔪`, so `n (1 - n ^ (N - 1)) = 0` forces `n = 0`. This is the scheme-theoretic part of
-blueprint `lemma-frobenius-fixed-scheme--1`: the fixed scheme of `h` is reduced.
+(`AlgebraicGeometry.exists_eq_comp_of_comp_eq_self_of_isFrobenius`). In particular the fixed
+scheme of `h` is reduced.
 
 ## Main statements
 
 - `AlgebraicGeometry.exists_eq_comp_of_comp_eq_self_of_isFrobenius`: a local point fixed by `h`
   factors through a fixed rational point.
+
+## Implementation details
+
+The algebraic input is that in a local algebra `A` over an algebraically closed field `k`, an
+element `r` with `r ^ N = r` is a scalar, when `r ↦ r ^ N` is a ring endomorphism and `N ≥ 2`
+(`IsLocalRing.exists_algebraMap_eq_of_pow_eq_self`, in
+`WeilConjectures.Mathlib.FieldTheory.IsAlgClosed.Basic`).
 -/
 
 @[expose] public section

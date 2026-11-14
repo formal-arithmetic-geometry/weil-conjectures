@@ -33,11 +33,7 @@ namespace AlgebraicGeometry
 
 /-- **Generic finiteness of quasi-finite morphisms.** A separated, quasi-compact, locally
 quasi-finite morphism of finite type `e : W ⟶ Y` to an irreducible scheme whose image contains
-the generic point of `Y` is finite over a nonempty open `O` of `Y` with nonempty preimage.
-
-Apply `AlgebraicGeometry.Scheme.Hom.exists_isFinite_morphismRestrict_of_irreducibleSpace` over a
-nonempty affine open `U₀` of `Y`; the resulting nonempty open contains the generic point of `Y`,
-hence meets the image of `e`. -/
+the generic point of `Y` is finite over a nonempty open `O` of `Y` with nonempty preimage. -/
 theorem Scheme.Hom.exists_isFinite_preimage_of_locallyQuasiFinite {W Y : Scheme.{u}}
     (e : W ⟶ Y) [LocallyQuasiFinite e] [LocallyOfFiniteType e] [QuasiCompact e]
     [IsSeparated e] [IrreducibleSpace Y] (he : genericPoint Y ∈ Set.range e) :
@@ -59,8 +55,7 @@ theorem Scheme.Hom.exists_isFinite_preimage_of_locallyQuasiFinite {W Y : Scheme.
 
 /-- **Generic finiteness of étale morphisms.** A separated quasi-compact étale morphism
 `e : W ⟶ Y` from a nonempty scheme to an irreducible scheme is finite over a nonempty open `O`
-of `Y` with nonempty preimage: étale morphisms are open, so the generic point of `Y` lies in
-the image of `e`. -/
+of `Y` with nonempty preimage. -/
 theorem Scheme.Hom.exists_isFinite_preimage_of_etale {W Y : Scheme.{u}} (e : W ⟶ Y) [Etale e]
     [QuasiCompact e] [IsSeparated e] [IrreducibleSpace Y] [Nonempty W] :
     ∃ O : Y.Opens, (O : Set Y).Nonempty ∧ (e ⁻¹ᵁ O : Set W).Nonempty ∧ IsFinite (e ∣_ O) :=

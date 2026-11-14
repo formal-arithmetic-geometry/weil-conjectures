@@ -16,6 +16,12 @@ For a morphism of schemes `f : Y ⟶ X` and an `𝒪_X`-module `M`, the unit of 
 `f^* ⊣ f_*` gives maps `Γ(M, U) ⟶ Γ(f^* M, f ⁻¹ᵁ U)`. We record how these maps behave under
 composition of morphisms and under restriction along open immersions, and that morphisms out of
 `f^* M` are determined by their values on the image of these maps.
+
+## Implementation details
+
+`AlgebraicGeometry.modulesPseudofunctor` keeps only the pullback part of
+`AlgebraicGeometry.Scheme.Modules.pseudofunctor`, which is the shape required by
+`CategoryTheory.Pseudofunctor.DescentData`.
 -/
 
 @[expose] public section
@@ -120,10 +126,7 @@ namespace AlgebraicGeometry
 open Scheme.Modules
 
 /-- The pseudofunctor sending a scheme `X` to its category `X.Modules` of sheaves of
-modules and a morphism to the pullback functor. This is the pseudofunctor underlying
-`AlgebraicGeometry.Scheme.Modules.pseudofunctor`, which also records the pushforward
-functors and the adjunctions; here we only keep the contravariant part, which is the
-shape required by `CategoryTheory.Pseudofunctor.DescentData`. -/
+modules and a morphism to the pullback functor. -/
 noncomputable abbrev modulesPseudofunctor :
     Pseudofunctor (LocallyDiscrete Scheme.{u}ᵒᵖ) Cat :=
   Scheme.Modules.pseudofunctor.comp Adj.forget₁

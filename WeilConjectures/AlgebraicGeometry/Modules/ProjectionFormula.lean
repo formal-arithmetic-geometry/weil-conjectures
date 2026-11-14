@@ -78,8 +78,7 @@ theorem nonempty_pullback_tensorPow_iso (g : X ⟶ Y) (M : Y.Modules) (m : ℕ) 
     obtain ⟨e⟩ := nonempty_pullback_tensorObj_iso g M (M.tensorPow m)
     exact ⟨e ≪≫ (Iso.refl _ ⊗ᵢ ih.some)⟩
 
-/-- **A tensor product of invertible modules is invertible.** If `M` and `N` are trivial near a
-point `x`, so is `M ⊗ N`, since restriction to an open commutes with tensor products. -/
+/-- **A tensor product of invertible modules is invertible.** If `M` and `N` are invertible, so is `M ⊗ N`. -/
 instance IsInvertible.tensorObj (M N : X.Modules) [M.IsInvertible] [N.IsInvertible] :
     (M ⊗ N).IsInvertible where
   exists_isoUnit x := by
@@ -302,12 +301,7 @@ lemma bijective_projectionHom_app {V : Y.Opens} {e : Γ(N, V)} (he : IsFreeGener
 
 /-- **The projection formula** for an invertible module. For `g: X ⟶ Y`, an `𝒪_X`-module `ℱ`
 and an invertible `𝒪_Y`-module `N`, the natural map `projectionHom: g_* ℱ ⊗ N ⟶ g_* (ℱ ⊗ g^* N)`,
-`x ⊗ n ↦ x ⊗ η n` with `η: N ⟶ g_* g^* N` the unit of the adjunction, is an isomorphism. It is
-one locally on `Y`: if `e` is a free generator of `N` on `V`, then `η e` is one of `g^* N` on
-`g ⁻¹ᵁ V`, and both sides have sections `Γ(ℱ, g ⁻¹ᵁ W)` over every `W ≤ V`, via `x ↦ x ⊗ e` and
-`x ↦ x ⊗ η e`.
-
-For a closed immersion `g` this is the last clause of the blueprint lemma. -/
+`x ⊗ n ↦ x ⊗ η n` with `η: N ⟶ g_* g^* N` the unit of the adjunction, is an isomorphism. -/
 theorem isIso_projectionHom [N.IsInvertible] : IsIso (projectionHom g F N) := by
   have := IsInvertible.sheafOfModules_isInvertible N
   refine Hom.isIso_of_forall_bijective_app _ fun y ↦ ?_
@@ -327,8 +321,7 @@ theorem nonempty_pushforward_tensorObj_pullback_iso (g : X ⟶ Y) (F : X.Modules
   ⟨(asIso (projectionHom g F N)).symm⟩
 
 /-- **The projection formula** for an invertible module and the structure sheaf. For
-`g : X ⟶ Y` and an invertible `𝒪_Y`-module `N`, `g_* (g^* N) ≅ g_* 𝒪_X ⊗ N`: this is
-`nonempty_pushforward_tensorObj_pullback_iso` for `ℱ = 𝒪_X`, since `g^* N ≅ 𝒪_X ⊗ g^* N`. -/
+`g : X ⟶ Y` and an invertible `𝒪_Y`-module `N`, `g_* (g^* N) ≅ g_* 𝒪_X ⊗ N`. -/
 theorem nonempty_pushforward_pullback_iso (g : X ⟶ Y) (N : Y.Modules) [N.IsInvertible] :
     Nonempty ((pushforward g).obj ((pullback g).obj N) ≅
       (pushforward g).obj (𝟙_ X.Modules) ⊗ N) := by

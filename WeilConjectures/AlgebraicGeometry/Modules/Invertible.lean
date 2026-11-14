@@ -61,19 +61,8 @@ class IsInvertible (M : X.Modules) : Prop where
   exists_isoUnit : ∀ x : X, ∃ U : X.Opens, x ∈ U ∧
     Nonempty ((Scheme.Modules.pullback U.ι).obj M ≅ SheafOfModules.unit _)
 
-/-- **The pullback of an invertible module is invertible.** If `M` is trivial on an open `U`
-of `Y`, then `g^* M` is trivial on `g ⁻¹ᵁ U`: both paths around the restriction square
-
-```
-  (g ⁻¹ᵁ U).toScheme ── g ∣_ U ──▶ U.toScheme
-        │                              │
-  (g ⁻¹ᵁ U).ι                        U.ι
-        │                              │
-        ▼                              ▼
-        X ──────────── g ────────────▶ Y
-```
-
-pull `M` back to the same module, and `(g ∣_ U)^* 𝒪_U ≅ 𝒪_{g ⁻¹ᵁ U}`. -/
+/-- **The pullback of an invertible module is invertible.** For `g : X ⟶ Y` and an invertible
+`𝒪_Y`-module `M`, the pullback `g^* M` is invertible. -/
 instance IsInvertible.pullback {Y : Scheme.{u}} (g : X ⟶ Y) (M : Y.Modules) [M.IsInvertible] :
     ((Scheme.Modules.pullback g).obj M).IsInvertible where
   exists_isoUnit x := by
@@ -89,8 +78,7 @@ lemma IsInvertible.of_iso {M N : X.Modules} (e : M ≅ N) [M.IsInvertible] : N.I
     obtain ⟨U, hx, ⟨e'⟩⟩ := IsInvertible.exists_isoUnit (M := M) x
     exact ⟨U, hx, ⟨(Scheme.Modules.pullback U.ι).mapIso e.symm ≪≫ e'⟩⟩
 
-/-- On a scheme with a single point `x`, every invertible module is trivial: it is trivial on
-an open neighbourhood of `x`, which is all of `X`. -/
+/-- On a scheme with a single point `x`, every invertible module is trivial. -/
 lemma IsInvertible.nonempty_iso_unit [Subsingleton X] (x : X) (M : X.Modules)
     [M.IsInvertible] : Nonempty (M ≅ SheafOfModules.unit _) := by
   obtain ⟨U, hx, ⟨e⟩⟩ := IsInvertible.exists_isoUnit (M := M) x
@@ -112,7 +100,7 @@ lemma not_isZero_unit (X : Scheme.{u}) [Nonempty X] :
   rw [map_one, map_zero] at h₃
   exact one_ne_zero h₃
 
-/-- An invertible module on a nonempty scheme is not zero: it is trivial on a nonempty open. -/
+/-- An invertible module on a nonempty scheme is not zero. -/
 lemma IsInvertible.not_isZero [Nonempty X] (M : X.Modules) [M.IsInvertible] : ¬ IsZero M := by
   intro h
   obtain ⟨x⟩ := ‹Nonempty X›
@@ -137,7 +125,6 @@ instance isInvertible_tensorUnit : (𝟙_ X.Modules).IsInvertible where
 /-- The tensor product `M ⊗_{𝒪_X} N` of two `𝒪_X`-modules: the sheafification of the tensor
 product of the underlying presheaves of modules (`SheafOfModules.tensorObjIsoSheafification`).
 It is the tensor product `M ⊗ N` of the monoidal category `X.Modules`. -/
--- TODO(unify): definition-relative-picard-functor
 noncomputable abbrev tensorObj (M N : X.Modules) : X.Modules :=
   M ⊗ N
 

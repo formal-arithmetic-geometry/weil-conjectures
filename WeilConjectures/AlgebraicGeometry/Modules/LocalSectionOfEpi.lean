@@ -16,6 +16,14 @@ import Mathlib.CategoryTheory.Sites.Abelian
 import Mathlib.Algebra.Category.Grp.Abelian
 import Mathlib.Algebra.Category.Grp.EpiMono
 
+/-!
+# Local sections of epimorphisms onto finite locally free modules
+
+## References
+
+* [Stacks: Tag 0EKP](https://stacks.math.columbia.edu/tag/0EKP)
+-/
+
 @[expose] public section
 
 universe u
@@ -74,18 +82,8 @@ private theorem finite_local_lifts {X : Scheme.{u}} {B C : X.Modules}
     rfl
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Local section of an epimorphism onto a finite locally free module.
-
-Source: Stacks Project, Tag 0EKP, proof of (2) to (3), finite-basis lifting.
-
-The proof chooses a finite local basis of the target, lifts its members locally using
-local surjectivity of an epimorphism, and intersects the resulting finitely many opens.
-Restrict every lift to this intersection and extend linearly from the finite free sheaf
-using its coproduct universal property. The composite `s ≫ f|_U` fixes each basis
-section, hence is the identity by free-sheaf extensionality. For rank zero the family
-is empty: keep the trivializing open and use the unique map out of the zero sheaf.
-No quasi-coherence of the source is needed, and the empty scheme has no points.
--/
+/-- An epimorphism `f : P ⟶ Q` onto a finite locally free module has a section on a
+neighbourhood of every point. -/
 theorem exists_local_section_of_epi
     {X : Scheme.{u}} {P Q : X.Modules} (f : P ⟶ Q) [Epi f] [Q.IsFiniteLocallyFree] :
     ∀ x : X, ∃ U : X.Opens, x ∈ U ∧
