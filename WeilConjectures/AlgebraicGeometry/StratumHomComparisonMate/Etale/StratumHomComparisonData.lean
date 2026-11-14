@@ -122,9 +122,7 @@ public import Mathlib.RingTheory.Ideal.Quotient.Index
 public import WeilConjectures.ConstructibleSheaf.Defs
 /-! # Canonical data for the normalized stratum Hom comparison
 
-Source: Weil blueprint, latest, sec-smooth-purity/sk-lem-sp-tower,
-lem-weil-finite-duality-site-comparison.proof.md, second paragraph
-(blueprint: def-sf-stratum-hom-comparison-data).
+Source: Weil latest/sk-lem-sp-tower.proof.md, second paragraph.
 
 The two natural isomorphisms are specified by their inverse evaluation transposes.
 The ordinary direct-image comparison below is literally the recorded bounded-below
@@ -144,9 +142,7 @@ attribute [local instance] Sheaf.monoidalCategory Sheaf.braidedCategory
 
 namespace AlgebraicGeometry.StratumHomComparisonMate
 
-/-- The two-variable internal-Hom comparison type.
-Source: the stratum tensor-Hom adjunction in the finite-duality comparison proof
-(blueprint: def-sf-stratum-hom-comparison-data). -/
+/-- The two-variable internal-Hom comparison type. -/
 def stratumHomIsoType
     {C D : Type*} [Category C] [Category D]
     (HS : Dᵒᵖ ⥤ D ⥤ D) (HX : Cᵒᵖ ⥤ C ⥤ C)
@@ -154,9 +150,7 @@ def stratumHomIsoType
   F.op.prod (𝟭 C) ⋙ Functor.uncurry.obj HX ≅
     (𝟭 Dᵒᵖ).prod G ⋙ Functor.uncurry.obj HS ⋙ R
 
-/-- Evaluation normalization for a tensor-Hom comparison.
-Source: the inverse evaluation formula in the finite-duality comparison proof
-(blueprint: def-sf-stratum-hom-comparison-data). -/
+/-- Evaluation normalization for a tensor-Hom comparison. -/
 @[irreducible]
 def tensorHomNormalization
     {C D : Type*} [Category C] [Category D]
@@ -176,38 +170,28 @@ def tensorHomNormalization
 
 namespace Etale
 
-/-- The existing ordinary derived category, in the fixed-scalar presentation.
-Source: blueprint finite-duality site-comparison proof, second paragraph
-(blueprint: lem-sf-stratum-hom-comparison-mate). -/
+/-- The existing ordinary derived category, in the fixed-scalar presentation. -/
 abbrev D (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) :=
   DerivedCategory (Sheaf (T.smallEtaleTopology) (ModuleCat.{u + 1} A))
 
-/-- The existing K-injective internal Hom, with its contravariant first argument.
-Source: blueprint finite-duality site-comparison proof, second paragraph
-(blueprint: lem-sf-stratum-hom-comparison-mate). -/
+/-- The existing K-injective internal Hom, with its contravariant first argument. -/
 abbrev hom (A : Type (u + 1)) [CommRing A] (T : Scheme.{u})
     (P B : D A T) :=
   ((AlgebraicGeometry.Etale.derivedHom (ModuleCat.{u + 1} A) T).obj (op P)).obj B
 
-/-- The existing K-flat tensor, with the ambient factor written first.
-Source: blueprint finite-duality site-comparison proof, second paragraph
-(blueprint: lem-sf-stratum-hom-comparison-mate). -/
+/-- The existing K-flat tensor, with the ambient factor written first. -/
 abbrev tensor (A : Type (u + 1)) [CommRing A] (T : Scheme.{u})
     (P B : D A T) :=
   ((AlgebraicGeometry.Etale.derivedTensor (ModuleCat.{u + 1} A) T).obj P).obj B
 
-/-- Right-ordered evaluation, using the canonical signed tensor symmetry.
-Source: blueprint finite-duality site-comparison proof, second paragraph
-(blueprint: lem-sf-stratum-hom-comparison-mate). -/
+/-- Right-ordered evaluation, using the canonical signed tensor symmetry. -/
 def evaluation (A : Type (u + 1)) [CommRing A] (T : Scheme.{u})
     (P B : D A T) : tensor A T (hom A T P B) P ⟶ B :=
   ((ImmersionProjectionComparison.Etale.symmetry A T).hom.app (hom A T P B)).app P ≫
     (AlgebraicGeometry.Etale.derivedTensorHomAdjunction
       (ModuleCat.{u + 1} A) P).counit.app B
 
-/-- Canonical identification of derived closed/open extension with exact termwise extension.
-Source: blueprint finite-duality site-comparison proof, second paragraph
-(blueprint: lem-sf-stratum-hom-comparison-mate). -/
+/-- Canonical identification of derived closed/open extension with exact termwise extension. -/
 def extensionIso (A : Type (u + 1)) [CommRing A] [Finite A]
     {S V X : Scheme.{u}} [IsNoetherian X] (c : S ⟶ V) (v : V ⟶ X)
     [IsClosedImmersion c] [IsOpenImmersion v] :
@@ -223,9 +207,7 @@ def extensionIso (A : Type (u + 1)) [CommRing A] [Finite A]
     (AlgebraicGeometry.Etale.openImmersionLowerShriek
       (ModuleCat.{u + 1} A) v).mapDerivedCategory
 
-/-- Ordinary inverse/direct-image adjunction in the factorized restriction coordinates.
-Source: blueprint finite-duality site-comparison proof, second paragraph
-(blueprint: lem-sf-stratum-hom-comparison-mate). -/
+/-- Ordinary inverse/direct-image adjunction in the factorized restriction coordinates. -/
 @[irreducible]
 def ordinaryAdjunction (A : Type (u + 1)) [CommRing A]
     {S V X : Scheme.{u}} (c : S ⟶ V) (v : V ⟶ X) :
@@ -244,9 +226,7 @@ def ordinaryAdjunction (A : Type (u + 1)) [CommRing A]
           (AlgebraicGeometry.Etale.leftDerivedUpperStarIsoMapDerivedCategory
             (ModuleCat.{u + 1} A) c))
 
-/-- The projection arrow of the dependency, transported to the ambient derived extension.
-Source: blueprint finite-duality site-comparison proof, second paragraph
-(blueprint: lem-sf-stratum-hom-comparison-mate). -/
+/-- The projection arrow of the dependency, transported to the ambient derived extension. -/
 def projection (A : Type (u + 1)) [CommRing A] [Finite A]
     {S V X : Scheme.{u}} [IsNoetherian X] (c : S ⟶ V) (v : V ⟶ X)
     [IsClosedImmersion c] [IsOpenImmersion v] (T : D A X) (P : D A S) :
@@ -262,9 +242,7 @@ def projection (A : Type (u + 1)) [CommRing A] [Finite A]
       (tensor A S ((ImmersionProjectionComparison.Etale.pull A c).obj
         ((ImmersionProjectionComparison.Etale.pull A v).obj T)) P)
 
-/-- The type of natural stratum isomorphisms for the specified ambient right adjoint.
-Source: blueprint finite-duality site-comparison proof, second paragraph
-(blueprint: lem-sf-stratum-hom-comparison-mate). -/
+/-- The type of natural stratum isomorphisms for the specified ambient right adjoint. -/
 abbrev HomIso (A : Type (u + 1)) [CommRing A] [Finite A]
     {S V X : Scheme.{u}} (c : S ⟶ V) (v : V ⟶ X) [IsOpenImmersion v]
     (a : AlgebraicGeometry.ProEtale.LocallyClosedComparisonAdjoints A c) :=
@@ -274,9 +252,7 @@ abbrev HomIso (A : Type (u + 1)) [CommRing A] [Finite A]
     (AlgebraicGeometry.ProEtale.locallyClosedEtaleExtension A c v) (a.etaleRight v)
     (AlgebraicGeometry.Etale.lowerStar (ModuleCat.{u + 1} A) (c ≫ v)).rightDerivedFunctor
 
-/-- The displayed inverse-transpose normalization, for all two-variable inputs.
-Source: blueprint finite-duality site-comparison proof, second paragraph
-(blueprint: lem-sf-stratum-hom-comparison-mate). -/
+/-- The displayed inverse-transpose normalization, for all two-variable inputs. -/
 def Normalized (A : Type (u + 1)) [CommRing A] [Finite A]
     {S V X : Scheme.{u}} [IsNoetherian X] (c : S ⟶ V) (v : V ⟶ X)
     [IsClosedImmersion c] [IsOpenImmersion v]
@@ -298,38 +274,28 @@ end Etale
 
 namespace ProEtale
 
-/-- The existing ordinary derived category, in the fixed-scalar presentation.
-Source: blueprint finite-duality site-comparison proof, second paragraph
-(blueprint: lem-sf-stratum-hom-comparison-mate). -/
+/-- The existing ordinary derived category, in the fixed-scalar presentation. -/
 abbrev D (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) :=
   DerivedCategory (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} A))
 
-/-- The existing K-injective internal Hom, with its contravariant first argument.
-Source: blueprint finite-duality site-comparison proof, second paragraph
-(blueprint: lem-sf-stratum-hom-comparison-mate). -/
+/-- The existing K-injective internal Hom, with its contravariant first argument. -/
 abbrev hom (A : Type (u + 1)) [CommRing A] (T : Scheme.{u})
     (P B : D A T) :=
   ((AlgebraicGeometry.ProEtale.derivedHom (ModuleCat.{u + 1} A) T).obj (op P)).obj B
 
-/-- The existing K-flat tensor, with the ambient factor written first.
-Source: blueprint finite-duality site-comparison proof, second paragraph
-(blueprint: lem-sf-stratum-hom-comparison-mate). -/
+/-- The existing K-flat tensor, with the ambient factor written first. -/
 abbrev tensor (A : Type (u + 1)) [CommRing A] (T : Scheme.{u})
     (P B : D A T) :=
   ((AlgebraicGeometry.ProEtale.derivedTensor (ModuleCat.{u + 1} A) T).obj P).obj B
 
-/-- Right-ordered evaluation, using the canonical signed tensor symmetry.
-Source: blueprint finite-duality site-comparison proof, second paragraph
-(blueprint: lem-sf-stratum-hom-comparison-mate). -/
+/-- Right-ordered evaluation, using the canonical signed tensor symmetry. -/
 def evaluation (A : Type (u + 1)) [CommRing A] (T : Scheme.{u})
     (P B : D A T) : tensor A T (hom A T P B) P ⟶ B :=
   ((ImmersionProjectionComparison.ProEtale.symmetry A T).hom.app (hom A T P B)).app P ≫
     (AlgebraicGeometry.ProEtale.derivedTensorHomAdjunction
       (ModuleCat.{u + 1} A) P).counit.app B
 
-/-- Canonical identification of derived closed/open extension with exact termwise extension.
-Source: blueprint finite-duality site-comparison proof, second paragraph
-(blueprint: lem-sf-stratum-hom-comparison-mate). -/
+/-- Canonical identification of derived closed/open extension with exact termwise extension. -/
 def extensionIso (A : Type (u + 1)) [CommRing A] [Finite A]
     {S V X : Scheme.{u}} [IsNoetherian X] (c : S ⟶ V) (v : V ⟶ X)
     [IsClosedImmersion c] [IsOpenImmersion v] :
@@ -345,9 +311,7 @@ def extensionIso (A : Type (u + 1)) [CommRing A] [Finite A]
     (AlgebraicGeometry.ProEtale.openImmersionLowerShriek
       (ModuleCat.{u + 1} A) v).mapDerivedCategory
 
-/-- Ordinary inverse/direct-image adjunction in the factorized restriction coordinates.
-Source: blueprint finite-duality site-comparison proof, second paragraph
-(blueprint: lem-sf-stratum-hom-comparison-mate). -/
+/-- Ordinary inverse/direct-image adjunction in the factorized restriction coordinates. -/
 @[irreducible]
 def ordinaryAdjunction (A : Type (u + 1)) [CommRing A]
     {S V X : Scheme.{u}} (c : S ⟶ V) (v : V ⟶ X) :
@@ -366,9 +330,7 @@ def ordinaryAdjunction (A : Type (u + 1)) [CommRing A]
           (AlgebraicGeometry.ProEtale.leftDerivedUpperStarIsoMapDerivedCategory
             (ModuleCat.{u + 1} A) c))
 
-/-- The projection arrow of the dependency, transported to the ambient derived extension.
-Source: blueprint finite-duality site-comparison proof, second paragraph
-(blueprint: lem-sf-stratum-hom-comparison-mate). -/
+/-- The projection arrow of the dependency, transported to the ambient derived extension. -/
 def projection (A : Type (u + 1)) [CommRing A] [Finite A]
     {S V X : Scheme.{u}} [IsNoetherian X] (c : S ⟶ V) (v : V ⟶ X)
     [IsClosedImmersion c] [IsOpenImmersion v] (T : D A X) (P : D A S) :
@@ -384,9 +346,7 @@ def projection (A : Type (u + 1)) [CommRing A] [Finite A]
       (tensor A S ((ImmersionProjectionComparison.ProEtale.pull A c).obj
         ((ImmersionProjectionComparison.ProEtale.pull A v).obj T)) P)
 
-/-- The type of natural stratum isomorphisms for the specified ambient right adjoint.
-Source: blueprint finite-duality site-comparison proof, second paragraph
-(blueprint: lem-sf-stratum-hom-comparison-mate). -/
+/-- The type of natural stratum isomorphisms for the specified ambient right adjoint. -/
 abbrev HomIso (A : Type (u + 1)) [CommRing A] [Finite A]
     {S V X : Scheme.{u}} (c : S ⟶ V) (v : V ⟶ X) [IsOpenImmersion v]
     (a : AlgebraicGeometry.ProEtale.LocallyClosedComparisonAdjoints A c) :=
@@ -396,9 +356,7 @@ abbrev HomIso (A : Type (u + 1)) [CommRing A] [Finite A]
     (AlgebraicGeometry.ProEtale.locallyClosedProEtaleExtension A c v) (a.proetaleRight v)
     (AlgebraicGeometry.ProEtale.lowerStar (ModuleCat.{u + 1} A) (c ≫ v)).rightDerivedFunctor
 
-/-- The displayed inverse-transpose normalization, for all two-variable inputs.
-Source: blueprint finite-duality site-comparison proof, second paragraph
-(blueprint: lem-sf-stratum-hom-comparison-mate). -/
+/-- The displayed inverse-transpose normalization, for all two-variable inputs. -/
 def Normalized (A : Type (u + 1)) [CommRing A] [Finite A]
     {S V X : Scheme.{u}} [IsNoetherian X] (c : S ⟶ V) (v : V ⟶ X)
     [IsClosedImmersion c] [IsOpenImmersion v]
@@ -418,9 +376,7 @@ def Normalized (A : Type (u + 1)) [CommRing A] [Finite A]
 
 end ProEtale
 
-/-- The specified D+ direct-image mate in the ordinary unbounded categories.
-Source: blueprint finite-duality site-comparison proof, second paragraph
-(blueprint: lem-sf-stratum-hom-comparison-mate). -/
+/-- The specified D+ direct-image mate in the ordinary unbounded categories. -/
 def directImageMate (A : Type (u + 1)) [CommRing A]
     {S X : Scheme.{u}} (s : S ⟶ X)
     (K : DerivedCategory.Plus (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} A))) :
@@ -446,9 +402,7 @@ def directImageMate (A : Type (u + 1)) [CommRing A]
       ((AlgebraicGeometry.ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) S
         ).mapDerivedCategoryPlusCompatibility.hom.app K)
 
-/-- Delta with exactly the canonical closed-mate and open-unit normalization.
-Source: blueprint finite-duality site-comparison proof, second paragraph
-(blueprint: lem-sf-stratum-hom-comparison-mate). -/
+/-- Delta with exactly the canonical closed-mate and open-unit normalization. -/
 def extensionComparison (A : Type (u + 1)) [CommRing A] [Finite A]
     {S V X : Scheme.{u}} [IsNoetherian X] (c : S ⟶ V) (v : V ⟶ X)
     [IsClosedImmersion c] [IsOpenImmersion v] (P : Etale.D A S) :
@@ -462,9 +416,7 @@ def extensionComparison (A : Type (u + 1)) [CommRing A] [Finite A]
     ((ProEtale.extensionIso A c v).app
       ((ImmersionProjectionComparison.comparison A S).obj P)).symm
 
-/-- The contravariant Hom identification induced by the inverse of Delta.
-Source: blueprint finite-duality site-comparison proof, second paragraph
-(blueprint: lem-sf-stratum-hom-comparison-mate). -/
+/-- The contravariant Hom identification induced by the inverse of Delta. -/
 def homChange (A : Type (u + 1)) [CommRing A] [Finite A]
     {S V X : Scheme.{u}} [IsNoetherian X] (c : S ⟶ V) (v : V ⟶ X)
     [IsClosedImmersion c] [IsOpenImmersion v] (P : Etale.D A S) (B : Etale.D A X) :
@@ -480,9 +432,7 @@ def homChange (A : Type (u + 1)) [CommRing A] [Finite A]
     (extensionComparison A c v P).inv.op).app
       ((ImmersionProjectionComparison.comparison A X).obj B)
 
-/-- The stratum arrow H(1,gamma) after the evaluation-defined comparison beta.
-Source: blueprint finite-duality site-comparison proof, second paragraph
-(blueprint: lem-sf-stratum-hom-comparison-mate). -/
+/-- The stratum arrow H(1,gamma) after the evaluation-defined comparison beta. -/
 def stratumMap (A : Type (u + 1)) [CommRing A] [Finite A]
     {S V X : Scheme.{u}} [IsNoetherian X] (c : S ⟶ V) (v : V ⟶ X)
     [IsClosedImmersion c] [IsOpenImmersion v] [QuasiCompact (c ≫ v)]
@@ -498,9 +448,7 @@ def stratumMap (A : Type (u + 1)) [CommRing A] [Finite A]
     ((AlgebraicGeometry.ProEtale.derivedHom (ModuleCat.{u + 1} A) S).obj
       (op ((ImmersionProjectionComparison.comparison A S).obj P))).map (z.gamma.hom.app M)
 
-/-- The exact equation and all its conditional invertibility clauses at the chosen inputs.
-Source: blueprint finite-duality site-comparison proof, second paragraph
-(blueprint: lem-sf-stratum-hom-comparison-mate). -/
+/-- The exact equation and all its conditional invertibility clauses at the chosen inputs. -/
 def IdentityAndIsomorphisms (A : Type (u + 1)) [CommRing A] [Finite A]
     {S V X : Scheme.{u}} [IsNoetherian X] (c : S ⟶ V) (v : V ⟶ X)
     [IsClosedImmersion c] [IsOpenImmersion v] [QuasiCompact (c ≫ v)]
@@ -531,9 +479,7 @@ def IdentityAndIsomorphisms (A : Type (u + 1)) [CommRing A] [Finite A]
     IsIso ((AlgebraicGeometry.ProEtale.lowerStar (ModuleCat.{u + 1} A) (c ≫ v)
       ).rightDerivedFunctor.map (stratumMap A c v z P M)))
 
-/-- The conclusion for a finite coefficient ring; all auxiliary maps above are canonical data.
-Source: blueprint finite-duality site-comparison proof, second paragraph
-(blueprint: lem-sf-stratum-hom-comparison-mate). -/
+/-- The conclusion for a finite coefficient ring; all auxiliary maps above are canonical data. -/
 def Conclusion (A : Type (u + 1)) [CommRing A] [Finite A]
     {S V X : Scheme.{u}} [IsNoetherian X] (c : S ⟶ V) (v : V ⟶ X)
     [IsClosedImmersion c] [IsOpenImmersion v] [QuasiCompact (c ≫ v)] : Prop :=

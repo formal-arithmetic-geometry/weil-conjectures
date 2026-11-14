@@ -550,11 +550,10 @@ variable (O : Type (u + 1)) [CommRing O] (t : O)
   (PX : StrictEtaleEvaluation X O t) (PZ : StrictEtaleEvaluation Z O t)
 
 /-- The levelwise pieces of ordinary strict étale extension by zero.
-Source: Stacks 03S2, 03DI and 03DJ; Zheng, Construction 4.1
-(blueprint: new-lem-pur-strict-etale-level-open-data).
+Source: Stacks 03S2, 03DI and 03DJ; Zheng, Construction 4.1.
 
 The record contains the transported lower-shriek functors, their exact adjunctions,
-and the normalized scalar-restriction mates.  It is strictly below the system theorem:
+and the normalized scalar-restriction mates. It is strictly below the system theorem:
 it has no system extension, system adjunction, or system evaluation comparison. -/
 structure StrictEtaleLevelOpenData where
   level : ∀ n, strictEtaleLevel X O t n ⥤ strictEtaleLevel Z O t n
@@ -572,7 +571,6 @@ attribute [instance] StrictEtaleLevelOpenData.levelAdditive
 
 /-- The levelwise transport exists.
 Source: Stacks Project 03S2, 03DI and 03DJ; Zheng, Construction 4.1.
-(blueprint: new-lem-pur-strict-etale-level-open-data)
 
 Restrict a module along the constant-presheaf sheafification unit to obtain an
 additive equivalence with fixed-coefficient module sheaves. The ring comparison

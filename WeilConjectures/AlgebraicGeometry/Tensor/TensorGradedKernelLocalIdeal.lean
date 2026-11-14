@@ -16,7 +16,6 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 /-! # Local ideal coefficients of the graded quotient kernel
 
 Source: Stacks Project, Tag 09MS, the direct-sum ideal sequence.
-(blueprint: lem-sc-tensor-graded-kernel-local-ideal).
 -/
 
 @[expose] public section
@@ -196,24 +195,7 @@ end KernelFactor
 
 /-- Two sections of the graded quotient kernel locally lie in the extended base ideal.
 No square-zero assumption, multiplication law, or invertibility assumption is used.
-Source: Stacks Project, Tag 09MS, direct-sum ideal sequence, and Tag 04CJ (1).
-Proof: use the kernel coproduct from TensorGradedDegreeData. In each degree,
-the closed-immersion unit kernel formula factors its kernel inclusion through
-the image of J ⊗ L^d → L^d. Uniqueness of adjunctions transfers that formula
-to the chosen tensorGradedUnit. Naturality of ideal multiplication then maps
-each degreewise image into the image of J ⊗ B → B; coproduct descent factors
-the whole kernel inclusion through that image. Sections of a kernel lift on
-every open. A section of the multiplication image lifts locally to J ⊗ B,
-and local surjectivity of the tensor sheafification represents it by a tensor
-of sections on a smaller open. On every affine subopen, induction on that
-tensor reduces ideal membership to pure tensors. Their images are products
-of algebra sections with structure-map images of elements of J.ideal, by
-range_toModulesι_app and the left-unitor formula. Addition preserves membership.
-Apply this to both sections and choose an affine neighborhood inside the
-intersection of the two resulting neighborhoods. The proof uses neither
-invertibility, homogeneous multiplication, nor square-zero. The empty-scheme
-case is vacuous because a point x is part of the hypotheses.
-(blueprint: lem-sc-tensor-graded-kernel-local-ideal). -/
+Source: Stacks Project, Tag 09MS, direct-sum ideal sequence, and Tag 04CJ (1). -/
 theorem tensorGradedKernel_locally_ideal {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) (A : TensorGradedAlgebraData j L)
     (U : X.Opens) (a b : A.B.right.obj.obj (op U))

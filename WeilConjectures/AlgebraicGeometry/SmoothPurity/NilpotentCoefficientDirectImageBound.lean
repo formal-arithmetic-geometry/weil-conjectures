@@ -17,10 +17,9 @@ import WeilConjectures.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
 /-!
 # Nilpotent coefficient extensions preserve a higher direct-image bound
 
-Source: Stacks Project, Derived Categories, Tag 015B, lemma-higher-derived-functors,
-part (1). The nilpotent coefficient application uses an agent-written sheafified
-descending I-adic filtration, motivated by Bhatt--Scholze, Lemma 6.5.11.
-(blueprint: lem-sf-nilpotent-coefficient-direct-image-bound)
+Source: Stacks Project, Derived Categories, Tag 015B, part (1). The nilpotent coefficient
+application uses an agent-written sheafified descending I-adic filtration, motivated by
+Bhatt--Scholze, Lemma 6.5.11.
 -/
 
 @[expose] public section
@@ -146,29 +145,8 @@ private theorem idealPowerPresheaf_isZero {C : Type*} [Category* C]
 for the original coefficients when the coefficient ideal is nilpotent. The same integer
 `N` is retained for every positive nilpotency exponent and every module sheaf.
 
-Source: Stacks Project, Tag 015B, lemma-higher-derived-functors, part (1), applied to the
-agent-written finite coefficient filtration, motivated by Bhatt--Scholze, Lemma 6.5.11.
-(blueprint: lem-sf-nilpotent-coefficient-direct-image-bound)
-
-Proof:
-1. On the underlying module presheaf of `M`, form `P_j(U) = I^j M(U)`.
-Restrictions preserve these submodules. The inclusion `P_(j+1) → P_j` is injective,
-and its cokernel is `P_j / I P_j`, with its canonical `R / I`-module structure.
-Indeed `I P_j = I^(j+1) M` by associativity of ideal multiplication and scalar action.
-The reduction functor `ModuleCat.quotSMulTop` supplies the quotient action and maps.
-2. Sheafification is exact, so these presheaf short exact sequences give sheaf short
-exact sequences. Restriction of scalars preserves sheafification: it is left adjoint
-to coextension of scalars. Thus the third sheaf is the restriction of an actual
-`R / I`-module sheaf. The coefficient-change vanishing theorem and the hypothesis
-annihilate its higher direct image in every degree under consideration.
-3. Identify `higherDirectImage` in nonnegative degree with the classical right derived
-functor of `lowerStar`, using the existing single-object comparison. Apply the full
-long exact sequence to each sheaf short exact sequence. In a fixed degree, vanishing
-of the outer terms implies vanishing of the middle term.
-4. The last presheaf `P_t` is zero since `I^t = 0`. Descending induction therefore
-annihilates the higher direct image of every sheafified `P_j`. Finally `P_0` is
-isomorphic to the underlying presheaf of `M`, whose sheafification is `M`.
-The degree remains fixed throughout, including degree zero when `N < 0`. -/
+Source: Stacks Project, Tag 015B, part (1), applied to the agent-written finite coefficient
+filtration, motivated by Bhatt--Scholze, Lemma 6.5.11. -/
 theorem isZero_higherDirectImage_of_nilpotent_quotient_bound
     {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
     (R : Type (u + 1)) [CommRing R] (I : Ideal R) (t : ℕ)

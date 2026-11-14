@@ -35,10 +35,6 @@ import WeilConjectures.AlgebraicGeometry.Etale.EtalePrecompProjection
 /-!
 # Canonical tensor mates under etale precomposition
 
-Source: literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
-sk-prop-cohsm/thm-asd-smooth-tensor.proof.md, paragraph 3
-(blueprint: lem-asd-tensor-mate-etale-precomp).
-
 The locality isomorphism uses the graph-normalized compact-support comparison and the
 termwise sum/evaluation adjunction. The theorem states both the actual tensor-mate equality
 and the sum-counit normalization on the whole ordinary unbounded derived categories.
@@ -55,8 +51,6 @@ open CategoryTheory CategoryTheory.MonoidalCategory
 namespace AlgebraicGeometry.Etale
 
 /-- The canonical etale locality comparison `u^* f^× ≅ (fu)^×`.
-Source: the blueprint proposition-exceptional-inverse-image-smooth-morphism proof, paragraph 3
-(blueprint: lem-asd-tensor-mate-etale-precomp).
 
 Conjugate the specified proper/open tower comparison against the composite of the
 sum-extension/evaluation adjunction and the exceptional adjunction. The normalization `N`

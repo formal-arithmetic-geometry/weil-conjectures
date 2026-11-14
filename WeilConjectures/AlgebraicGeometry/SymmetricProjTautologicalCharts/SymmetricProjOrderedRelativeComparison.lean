@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.HomSection
 # Ordered relative-Proj comparison on polynomial charts
 
 Source: Stacks Project, Constructions, Tags 01OE, 01OB and 01MS.
-(blueprint: lem-trf-symmetric-proj-ordered-relative-comparison).
 -/
 
 @[expose] public section
@@ -540,31 +539,7 @@ theorem orderedRelativeComparison_hom_π {S : Scheme.{u}} {E : S.Modules}
 compatible with the affine polynomial and degree-one twist models.
 This assertion does not involve a global tautological quotient or standard projective space.
 
-Source: Stacks Project, Constructions, Tags 01OE (lemma-projective-space-bundle),
-01OB (definition-projective-bundle), and 01MS (lemma-when-invertible).
-(blueprint: lem-trf-symmetric-proj-ordered-relative-comparison).
-
-Proof: On an affine V, apply the symmetric-algebra universal property to the section
-isomorphism induced by b and the standard ordered basis of the free sheaf. The resulting
-polynomial isomorphism beta fixes coefficients and sends X_i to iota(b(e_i)). Its inverse
-sends a vector to its coordinate linear polynomial. Products of n generators span the
-nth symmetric degree, so both maps preserve degree. Naturality of b and of the basis
-inclusions shows that these isomorphisms commute with restriction on scalars and vectors.
-The defining affinePolynomialEquiv for relative projective space gives gamma, after
-reindexing the variables by ULift.down. Compose beta with gamma inverse to identify the
-two affine graded algebras, and glue by relative-Proj functoriality. This constructs eRel
-over S. On every affine, Proj functoriality gives eC and eR. The realization's
-restriction identity and composition of Proj maps give the displayed chart equation.
-Surjectivity of beta and gamma supplies their irrelevant-ideal conditions. Apply the
-scalar-extension twist comparison with the identity coefficient extension and the
-multiplication isomorphism R tensor_R P = P followed by beta. The established equality
-of homogeneous pieces supplies its grading hypothesis, and the Proj map supplies its
-standard-open formulas. Its degree-one comparison sends the pullback of s/1 to beta(s)/1.
-Transpose morphisms by the tensor-pullback adjunction: left-adjoint uniqueness identifies
-the boundary unit comparison with the structure-sheaf map. Maps from the structure sheaf
-are determined by their value at 1, so the homogeneous-section formula gives exactly the
-unitToTwist morphism equality. All formulas hold for r=0, zero coefficient rings and empty
-affine charts. No variable is cancelled in the original ring. -/
+Source: Stacks Project, Constructions, Tags 01OE, 01OB, and 01MS. -/
 theorem orderedRelativeComparison_affineFreeComparison {S : Scheme.{u}} {E : S.Modules}
     [E.IsQuasicoherent] {r : ℕ} (b : RelativeProjectiveSpace.freeModule S r ≅ E)
     (V : S.affineOpens) :

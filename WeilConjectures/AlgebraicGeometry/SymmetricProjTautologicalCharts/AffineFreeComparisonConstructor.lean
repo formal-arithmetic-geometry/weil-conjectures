@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveBundleQuotientGeometry
 
 This constructor isolates the conversion to the existing comparison predicate.
 Source: Stacks Project, Constructions, Tags 01OE and 01OB.
-(blueprint: lem-trf-affine-free-comparison-constructor).
 -/
 
 @[expose] public section
@@ -48,15 +47,7 @@ private theorem comparisonLogic {α δ ε θ : Type u}
 /-- The explicit ordered polynomial, twist and relative-chart witnesses give the affine
 comparison predicate with precisely those witnesses.
 
-Source: Stacks Project, Constructions, Tags 01OE and 01OB; the explicit interface is
-`ProjectiveBundleQuotientGeometry.AffineFreeComparison`.
-(blueprint: lem-trf-affine-free-comparison-constructor).
-
-Proof: Unfold AffineFreeComparison, choose beta, its irrelevant-ideal witness and eC,
-then gamma, its irrelevant-ideal witness and eR. Insert the supplied bijectivity,
-coefficient, ordered-variable, Proj-map, twist and relative-chart identities in the
-order of the conjunctions. The polynomial grading is the specified Mathlib grading.
-No nonemptiness or nonzero-ring hypothesis is used. -/
+Source: Stacks Project, Constructions, Tags 01OE and 01OB. -/
 theorem affineFreeComparison_mk {S : Scheme.{u}} {E : S.Modules}
     [E.IsQuasicoherent] {r : ℕ} (b : RelativeProjectiveSpace.freeModule S r ≅ E)
     (eRel : (SymmetricAlgebraSheaf.gradedAlgebraData E).relProj ≅

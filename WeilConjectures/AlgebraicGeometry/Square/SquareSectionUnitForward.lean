@@ -20,7 +20,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CommIs
 /-! # Forward normalized square comparison before endpoint cancellation
 
 Source: Stacks Project, Cohomology, Tags 0D5T and 0D5X.
-(blueprint: lem-weil-pbc-square-section-unit-forward).
 -/
 
 @[expose] public section
@@ -762,15 +761,7 @@ end Helpers
 /-- The normalized square comparison reaches the raw target endpoint before its
 inverse is applied. This is the forward equation needed for cancellation in the
 section-unit identity.
-Source: Stacks Project, Tags 0D5T and 0D5X
-(blueprint: lem-weil-pbc-square-section-unit-forward).
-
-Proof: Resolve the target coefficient by J, use the right-derived mate equation for
-the commuting square, and evaluate the universal Leray and inverse-open
-factorizations on the same K-injective representative. The resulting map is the
-hom of `squareInjectiveLocalComparison` for k. This is the forward half of the
-unit cancellation; postcomposition with its inverse gives the parent statement.
-The construction is valid for empty opens and identity squares.
+Source: Stacks Project, Tags 0D5T and 0D5X.
 -/
 theorem squareSectionUnit_forward {X S Z T : Scheme.{u}}
     (f : X ⟶ S) (k : Z ⟶ T) (g : T ⟶ S) (v : Z ⟶ X) (h : v ≫ f = k ≫ g)

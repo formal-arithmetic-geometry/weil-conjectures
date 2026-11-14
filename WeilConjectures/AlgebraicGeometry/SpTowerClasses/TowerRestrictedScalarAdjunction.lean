@@ -16,7 +16,7 @@ import Mathlib.CategoryTheory.HomCongr
 
 /-! # Restriction of coefficients in the ordinary geometric adjunction
 
-Source: blueprint classes proof (2); Stacks 03EL, ordinary coefficient extension.
+Source: Stacks 03EL, ordinary coefficient extension.
 -/
 
 @[expose] public noncomputable section
@@ -29,16 +29,12 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open AlgebraicGeometry AlgebraicGeometry.Scheme WeilConjectures
 namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 
-/-- Direct image of whole abelian towers, taken componentwise.
-Source: classes (2), ordinary system topos
-(blueprint: lem-sp-tower-restricted-scalar-adjunction). -/
+/-- Direct image of whole abelian towers, taken componentwise. -/
 abbrev abPush {X Y : Scheme.{u}} (f : X ⟶ Y) : Ab X ⥤ Ab Y :=
   (Functor.whiskeringRight ℕᵒᵖ (DiagonalAb X) (DiagonalAb Y)).obj
     (lowerStar AddCommGrpCat.{u + 1} f)
 
-/-- The componentwise ordinary abelian adjunction.
-Source: classes (2), ordinary system topos
-(blueprint: lem-sp-tower-restricted-scalar-adjunction). -/
+/-- The componentwise ordinary abelian adjunction. -/
 def abAdjunction {X Y : Scheme.{u}} (f : X ⟶ Y) : abPull f ⊣ abPush f :=
   (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).whiskerRight ℕᵒᵖ
 
@@ -573,31 +569,7 @@ end HomConstruction
 /-- The normalized restriction/direct-image square and its integral Hom adjunction.
 This statement involves neither a coefficient-unit arrow nor a Tate-line comparison.
 
-Source: blueprint latest, classes proof (2), balanced coefficient extension;
-Stacks 03EL, ordinary module inverse image and scalar restriction.
-(blueprint: lem-sp-tower-restricted-scalar-adjunction).
-
-Proof: forget the scalar action on the given ordinary direct-image system. At
-(n,U) it is the additive group of the original system at the base-changed chart.
-The section, restriction and morphism equations of the two Forget records and
-ordinaryPushEvaluation give identity-transport isomorphisms chi, natural in N.
-For horizontal compatibility, transpose the system counit at each finite level.
-Finite adjoint evaluation identifies its transpose with push-evaluation; the
-normalized unit-transition equation identifies the two transition paths. Thus
-these level isomorphisms assemble to whole abelian towers with the stated section
-formula. For an R-system M and an
-A-system N, forget an R-linear map d.pull(M) -> res(N), precompose with the
-specified forgetIso, transpose under the componentwise abelian adjunction, and
-postcompose with chi inverse. The resulting additive tower map is R-linear:
-locally every section of the constant Z/ell^(n+1) ring sheaf lifts to a constant
-integer, and additive maps commute with integer multiples. The local lifts
-cover, so separatedness proves linearity on every chart. Forget is fully
-faithful by the same argument. Thus this construction is a bijection of Hom
-sets, natural in both arguments. Compose with the target ordinary scalar
-adjunction to obtain the asserted adjunction a. Its Hom equivalence satisfies
-exactly the displayed equation by construction.
-No root object or Kummer map is used, and no coefficient flatness is required;
-the local-lift argument also applies on empty charts and to zero rings. -/
+Source: Stacks 03EL, ordinary module inverse image and scalar restriction. -/
 theorem restrictedScalarAdjunction_exists
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (b : SpTowerShriek.Base l E) (g : SpTowerShriek.Geometry l E b f)

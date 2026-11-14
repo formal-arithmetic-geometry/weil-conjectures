@@ -22,8 +22,7 @@ import WeilConjectures.AlgebraicGeometry.RingedSpaceDirectImageKInjectiveAcyclic
 /-!
 # Unbounded direct images and the presheaf of local hypercohomology
 
-Source: Stacks Project, Cohomology, Tags 0D5W and 0D5X, with Tag 0BKJ
-(blueprint: lem-trf-unbounded-direct-image-section-presheaf).
+Source: Stacks Project, Cohomology, Tags 0D5W and 0D5X, with Tag 0BKJ.
 
 Right deriving the entire presheaf of sections computes all evaluations on the same
 K-injective representative. Exact evaluation and homology give H^q(U,E), and retain
@@ -46,22 +45,21 @@ namespace AlgebraicGeometry.RingedSpace
 noncomputable section
 
 /-- The ordinary abelian presheaf of sections, with the usual restriction maps.
-Source: Stacks, Tags 0D5W and 0D5X
-(blueprint: lem-trf-unbounded-direct-image-section-presheaf). -/
+Source: Stacks, Tags 0D5W and 0D5X. -/
 abbrev localAbelianSections (X : RingedSpace.{u}) :
     ringedSiteModules.{u} (moduleRings X) ⥤ (Opens X)ᵒᵖ ⥤ AddCommGrpCat.{u} :=
   SheafOfModules.toSheaf (moduleRings X) ⋙
     sheafToPresheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}
 
 /-- Standard localization of abelian presheaf complexes. This fixes only a size convention.
-Source: Stacks, Tag 05RU (blueprint: lem-trf-unbounded-direct-image-section-presheaf). -/
+Source: Stacks, Tag 05RU. -/
 instance localAbelianPresheaves_hasDerivedCategory (X : RingedSpace.{u}) :
     HasDerivedCategory ((Opens X)ᵒᵖ ⥤ AddCommGrpCat.{u}) :=
   HasDerivedCategory.standard _
 
 /-- The published K-injective replacement supplies the arbitrary-quasi-isomorphism
 resolution hypothesis of the recorded total right-derived functor.
-Source: Stacks, Tag 079P (blueprint: lem-trf-unbounded-direct-image-section-presheaf). -/
+Source: Stacks, Tag 079P. -/
 abbrev localSectionsEnoughKInjectives (X : RingedSpace.{u}) :
     ∀ K : CochainComplex (ringedSiteModules.{u} (moduleRings X)) ℤ,
       ∃ (I : CochainComplex (ringedSiteModules.{u} (moduleRings X)) ℤ) (s : K ⟶ I),
@@ -76,8 +74,7 @@ variable (X : RingedSpace.{u})
 /-- Unbounded derived sections on all opens simultaneously. Evaluation at U gives
 RGamma(U,-): exact evaluation commutes with the localization, and this right-derived
 functor is computed by evaluating the same K-injective representative at U.
-Source: Stacks, Tags 0D5W and 0BKJ
-(blueprint: lem-trf-unbounded-direct-image-section-presheaf). -/
+Source: Stacks, Tags 0D5W and 0BKJ. -/
 abbrev derivedLocalAbelianSections :
     DerivedCategory (ringedSiteModules.{u} (moduleRings X)) ⥤
       DerivedCategory ((Opens X)ᵒᵖ ⥤ AddCommGrpCat.{u}) :=
@@ -86,8 +83,7 @@ abbrev derivedLocalAbelianSections :
 
 /-- V maps to H^q(V,E). Homology in the abelian presheaf category is computed sectionwise;
 its functor maps provide restriction and naturality for every derived morphism.
-Source: Stacks, Tags 0D5W and 0D5X
-(blueprint: lem-trf-unbounded-direct-image-section-presheaf). -/
+Source: Stacks, Tags 0D5W and 0D5X. -/
 abbrev localHypercohomologyPresheaf (q : ℤ) :
     DerivedCategory (ringedSiteModules.{u} (moduleRings X)) ⥤
       (Opens X)ᵒᵖ ⥤ AddCommGrpCat.{u} :=
@@ -99,7 +95,7 @@ variable {Y : RingedSpace.{u}}
 
 /-- Rf_* using the recorded universal-pair construction on K-injective representatives.
 The ordinary direct image is the published moduleDirectImage, including f-sharp.
-Source: Stacks, Tag 079V (blueprint: lem-trf-unbounded-direct-image-section-presheaf). -/
+Source: Stacks, Tag 079V. -/
 abbrev sectionDerivedDirectImage (f : X ⟶ Y) :
     DerivedCategory (ringedSiteModules.{u} (moduleRings X)) ⥤
       DerivedCategory (ringedSiteModules.{u} (moduleRings Y)) :=
@@ -108,7 +104,7 @@ abbrev sectionDerivedDirectImage (f : X ⟶ Y) :
 
 /-- The presheaf V maps to H^q(f^-1 V,E): right derive the actual inverse-image section
 functor, whose underlying abelian groups and restrictions are literally F(f^-1 V).
-Source: Stacks, Tag 0D5X (blueprint: lem-trf-unbounded-direct-image-section-presheaf). -/
+Source: Stacks, Tag 0D5X. -/
 abbrev inverseOpenHypercohomologyPresheaf (f : X ⟶ Y) (q : ℤ) :
     DerivedCategory (ringedSiteModules.{u} (moduleRings X)) ⥤
       (Opens Y)ᵒᵖ ⥤ AddCommGrpCat.{u} :=
@@ -117,7 +113,7 @@ abbrev inverseOpenHypercohomologyPresheaf (f : X ⟶ Y) (q : ℤ) :
 
 /-- The composite right-derived unit for f_* followed by sections. No assertion that f_*
 preserves K-injectivity is used: for general ringed spaces the needed fact is acyclicity.
-Source: Stacks, Tag 0D5W (blueprint: lem-trf-unbounded-direct-image-section-presheaf). -/
+Source: Stacks, Tag 0D5W. -/
 def localLerayCompositeUnit (f : X ⟶ Y) :
     (moduleDirectImage f ⋙ localAbelianSections Y).mapHomotopyCategory (ComplexShape.up ℤ) ⋙
         DerivedCategory.Qh ⟶
@@ -138,7 +134,7 @@ def localLerayCompositeUnit (f : X ⟶ Y) :
 
 /-- The unique canonical Leray comparison obtained from the universal bijection of the
 recorded total right-derived functor. The choice is uniquely determined by its unit.
-Source: Stacks, Tag 0D5W (blueprint: lem-trf-unbounded-direct-image-section-presheaf). -/
+Source: Stacks, Tag 0D5W. -/
 def localLerayComparison (f : X ⟶ Y) :
     (moduleDirectImage f ⋙ localAbelianSections Y).rightDerivedFunctorOfQuasiIsoResolutions
         (localSectionsEnoughKInjectives X) ⟶
@@ -150,8 +146,7 @@ def localLerayComparison (f : X ⟶ Y) :
       (localLerayCompositeUnit f))
 
 /-- The canonical comparison on the two abelian presheaves, natural in the derived input.
-Source: Stacks, Tags 0D5W and 0D5X
-(blueprint: lem-trf-unbounded-direct-image-section-presheaf). -/
+Source: Stacks, Tags 0D5W and 0D5X. -/
 def localHypercohomologyComparison (f : X ⟶ Y) (q : ℤ) :
     inverseOpenHypercohomologyPresheaf f q ⟶
       sectionDerivedDirectImage f ⋙ localHypercohomologyPresheaf Y q :=
@@ -159,7 +154,7 @@ def localHypercohomologyComparison (f : X ⟶ Y) (q : ℤ) :
 
 /-- The fixed, canonical sheafification comparison on a complex. Exact sheafification
 commutes with homology, its counit recovers a sheaf, and forgetting modules is exact.
-Source: Stacks, Tag 0BKJ (blueprint: lem-trf-unbounded-direct-image-section-presheaf). -/
+Source: Stacks, Tag 0BKJ. -/
 def localSectionComplexSheafificationIso (Y : RingedSpace.{u}) (q : ℤ)
     (I : CochainComplex (ringedSiteModules.{u} (moduleRings Y)) ℤ) :
     (presheafToSheaf (Opens.grothendieckTopology Y) AddCommGrpCat.{u}).obj
@@ -181,8 +176,7 @@ def localSectionComplexSheafificationIso (Y : RingedSpace.{u}) (q : ℤ)
 /-- Normalization of the sheafification isomorphism on any K-injective representative.
 The three factors are the right-derived unit, ordinary exact sheafification, and the
 localization's homology comparison. Thus this specifies an isomorphism uniquely.
-Source: Stacks, Tags 0BKJ and 0D5X
-(blueprint: lem-trf-unbounded-direct-image-section-presheaf). -/
+Source: Stacks, Tags 0BKJ and 0D5X. -/
 def localHypercohomologySheafificationModel (q : ℤ)
     (I : CochainComplex (ringedSiteModules.{u} (moduleRings Y)) ℤ) [I.IsKInjective] :
     (presheafToSheaf (Opens.grothendieckTopology Y) AddCommGrpCat.{u}).obj
@@ -202,7 +196,7 @@ def localHypercohomologySheafificationModel (q : ℤ)
 /-- The same normalized sheafification comparison at any derived object. A chosen complex
 representative and its published K-injective replacement merely compute the canonical map;
 the natural isomorphism below is required to agree with these components.
-Source: Stacks, Tag 0BKJ (blueprint: lem-trf-unbounded-direct-image-section-presheaf). -/
+Source: Stacks, Tag 0BKJ. -/
 def localHypercohomologySheafificationAt (q : ℤ)
     (M : DerivedCategory (ringedSiteModules.{u} (moduleRings Y))) :
     (presheafToSheaf (Opens.grothendieckTopology Y) AddCommGrpCat.{u}).obj
@@ -623,31 +617,7 @@ private theorem sheafificationAt_naturality (q : ℤ)
  degree, and sheafification is canonically the underlying abelian cohomology sheaf.
 Both comparisons are natural in E; presheaf morphisms include all restriction squares.
 The specified map and displayed K-injective normalization exclude arbitrary isomorphisms.
-Source: Stacks, Tags 0D5W, 0D5X and 0BKJ
-(blueprint: lem-trf-unbounded-direct-image-section-presheaf).
-
-Proof:
-1. For a K-injective complex I on X, resolve B=f_*I by r:B -> J on Y. Naturality of
-   the right-derived unit, together with direct-image K-injective acyclicity, shows
-   that g_*r is a quasi-isomorphism for any ringed-space map g:Y -> Z.
-2. Classify an open V of Y by its continuous map to the Sierpiński space, equipped
-   with the pushed-forward structure sheaf. Its open singleton has a least open
-   neighborhood, so evaluation there is the stalk functor and is exact. Applied to
-   the preceding quasi-isomorphism, this proves that sections of r on V are a
-   quasi-isomorphism. Sectionwise detection gives the abelian-presheaf assertion.
-3. Naturality makes the local-sections derived unit at B invertible. The defining
-   universal-unit equation for localLerayComparison then makes it invertible on
-   every K-injective representative, hence on every derived object. Taking homology
-   gives the specified presheaf comparison, including every restriction square.
-4. Naturality of the derived unit makes its inverse on K-injectives natural. Compose
-   with the homology factorizations and exact sheafification to prove naturality of
-   localHypercohomologySheafificationModel under chain maps of K-injectives.
-5. Lift derived maps between the chosen K-injective representatives to chain maps
-   using the K-injective Hom bijection and fullness of the homotopy quotient.
-   Conjugating the preceding naturality square proves naturality of the exact
-   components localHypercohomologySheafificationAt. Whisker by Rf_* to get s and
-   compose with the sheafified presheaf comparison to get t.
-No bound, scheme assumption or finiteness property is used. -/
+Source: Stacks, Tags 0D5W, 0D5X and 0BKJ. -/
 theorem unboundedDirectImage_sectionPresheaf (f : X ⟶ Y) (q : ℤ) :
     ∃ e : inverseOpenHypercohomologyPresheaf f q ≅
         sectionDerivedDirectImage f ⋙ localHypercohomologyPresheaf Y q,

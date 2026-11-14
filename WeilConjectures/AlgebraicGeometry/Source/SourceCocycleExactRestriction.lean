@@ -56,21 +56,8 @@ comparisons for exact inverse image and exact strict-local sections. This assert
 concerns complexes and their homology only, before localization or transport to a
 specified derived object.
 
-Source: Stacks Project, Tags 03Q9 (restriction of an injective complex) and 03QO
-(exactness of strict-local sections).
-(blueprint: lem-weil-pbc-source-cocycle-exact-restriction).
-
-Proof: the inverse of leftHomologyData.homologyIso sends the cohomology class of the
-cocycle to its homology class in the Hom complex. Degreewise free-generator evaluation
-sends this cycle to the section represented by f. Factor f through L.cycles n.
-Naturality of tau for the cycle inclusion says that its image is the cycle obtained
-by applying inverse image and global sections. Naturality for the homology projection
-then identifies its homology class with tau applied to the section of L.homology n.
-The exact-functor homology isomorphisms identify the mapped cycle inclusions and
-projections with those of the mapped complexes. Apply these first to global sections
-and then to inverse image. This gives the stated composite. Boundaries are killed by
-the homology projection, so the computation descends to cohomology classes. Zero
-cycles, zero complexes and negative degrees use the identical projection calculation. -/
+Source: Stacks Project, Tags 03Q9 (restriction of an injective complex) and 03QO (exactness of
+strict-local sections). -/
 private theorem sourceSectionsCocycleRestriction {S : Scheme.{v}}
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     (L : CochainComplex (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ)
@@ -216,22 +203,8 @@ set_option backward.isDefEq.respectTransparency false in
 sends the sections cohomology class of a cocycle to the restriction of its homology section.
 No K-injectivity or localization bijectivity is needed for this assertion.
 
-Source: Stacks Project, Tags 03Q9 and 03QO, the restriction of an injective complex
-and commutation of exact inverse image and strict-local sections with homology.
-(blueprint: lem-weil-pbc-source-cocycle-exact-restriction).
-
-Proof: evaluate the single-source cocycle degreewise using smallModel_sourceFreeSectionsComplexIso.
-Its class in the sections complex is the image of the Hom-complex class under the
-homology functor. Apply the natural transformation degreewise. Its naturality with
-respect to the cycle inclusion and homology projection identifies the restricted
-cycle with the image of the homology section. Exact inverse image and strict-local
-global sections preserve kernels and cokernels, hence identify this projection with
-the homology projection of the mapped complex. The quotient localization factorization
-is natural in the complex map; cancel its inverse with the homology factorization.
-The exact-functor homology comparisons are natural in r inverse, so transport along
-r gives precisely the displayed composite. Boundaries map to boundaries; thus the
-calculation descends to cohomology. Zero cycles and all integer degrees obey the same
-calculation. The transformation is arbitrary, so no stalk comparison is used. -/
+Source: Stacks Project, Tags 03Q9 and 03QO, the restriction of an injective complex and commutation
+of exact inverse image and strict-local sections with homology. -/
 theorem smallModel_sourceCocycleExactRestriction {S : Scheme.{v}}
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     (K : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}))

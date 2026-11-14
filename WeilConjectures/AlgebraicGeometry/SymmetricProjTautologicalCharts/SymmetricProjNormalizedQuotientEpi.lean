@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.RelativeProj.Functoriality
 /-! # Epimorphy of the normalized symmetric Proj quotient
 
 Source: Stacks Project, Constructions, Tags 01NR and 01OB.
-(blueprint: lem-trf-symmetric-proj-normalized-quotient-epi).
 -/
 
 @[expose] public section
@@ -124,20 +123,7 @@ private theorem symmetric_chart_cover {R M : Type u} [CommRing R]
   | add a b ha hb => exact add_mem ha hb
 
 /-- The adjoint of a section-normalized map to the degree-one twist is epic.
-Source: Stacks, Tags 01OB and 01O4 (lemma-apply-relative).
-(blueprint: lem-trf-symmetric-proj-normalized-quotient-epi).
-
-Proof: the standard opens D_+(iota(m)) cover each affine symmetric Proj. Indeed, if a
-homogeneous prime contained all iota(m), it would contain the positive-degree ideal,
-contradicting the definition of Proj. On D_+(iota(m)), multiplication by iota(m)
-trivializes the degree-one twist, with inverse division by iota(m). The assumed
-normalization says that the adjoint quotient takes the actual pulled-back section
-1 tensor m to this frame. Thus the quotient is surjective there: a target section
-is uniquely a scalar times the frame and is lifted by that scalar times 1 tensor m.
-Transport across the chart isomorphism and the tensor-pullback composition comparison.
-These standard opens over all affine base opens cover the global relative Proj, so
-local surjectivity proves the quotient is epic. The argument also covers zero and
-nilpotent sections: their standard opens are empty. -/
+Source: Stacks, Tags 01OB and 01O4. -/
 theorem epi_of_symmetric_twist_sections
     {S : Scheme.{u}} (E : S.Modules) [E.IsQuasicoherent]
     (L : (SymmetricAlgebraSheaf.gradedAlgebraData E).relProj.Modules)

@@ -10,8 +10,7 @@ import Mathlib.CategoryTheory.Functor.OfSequence
 
 /-! # Exact levelwise scalar restriction
 
-Source: Stacks Project, Modules on Sites, Tags 03CZ, 03D7 and 03DI
-(blueprint: lem-sf-semilinear-scalar-restriction). -/
+Source: Stacks Project, Modules on Sites, Tags 03CZ, 03D7 and 03DI. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -32,8 +31,7 @@ variable (R : ℕ → CommRingCat.{u + 1}) (φ : ∀ n : ℕ, R (n + 1) ⟶ R n)
   (B : Type (u + 1)) [CommRing B] (ψ : ∀ n : ℕ, CommRingCat.of B ⟶ R n)
 
 /-- The exact restriction functor and its identity-on-sections level identifications.
-Source: Stacks 03CT, 03CZ and 03DA
-(blueprint: lem-sf-semilinear-scalar-restriction). -/
+Source: Stacks 03CT, 03CZ and 03DA. -/
 structure OrdinaryScalarRestriction where
   /-- Restriction from actual semilinear systems to actual strict B towers. -/
   rho : ∀ X : Scheme.{u}, Modules R φ X ⥤ StrictTower.Towers B X
@@ -186,16 +184,7 @@ private theorem scalarRho_colimits : PreservesFiniteColimits (scalarRho J S τ A
 end SequenceRestriction
 
 /-- Restrict each coefficient action and retain all section maps.
-Source: Stacks 03CT, 03CZ and 03DA
-(blueprint: lem-sf-semilinear-scalar-restriction).
-Proof: compose each level evaluation with restriction along the constant-sheaf map.
-The equality psi_(n+1) phi_n = psi_n identifies the twice-restricted coefficient
-module with the directly restricted one. Compose that identification with the system
-transition. These natural transformations define a tower-valued functor. Its maps
-are the original section maps, so it is additive. Each evaluation and scalar
-restriction preserves finite limits and colimits. Evaluation detects these properties
-in the tower category, proving exactness. The level identifications and transition
-formula are the identity section prescriptions of the construction. -/
+Source: Stacks 03CT, 03CZ and 03DA. -/
 theorem ordinaryScalarRestriction (hψ : ∀ n : ℕ, ψ (n + 1) ≫ φ n = ψ n) :
     Nonempty (OrdinaryScalarRestriction R φ B ψ) := by
   have ha (X : Scheme.{u}) (n : ℕ) :

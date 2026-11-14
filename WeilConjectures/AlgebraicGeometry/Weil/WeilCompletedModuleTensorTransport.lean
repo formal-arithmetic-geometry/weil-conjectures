@@ -85,23 +85,8 @@ namespace AlgebraicGeometry.Scheme
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The ordinary module comparison, normalized at the regular module.
-Source: Stacks Project, Modules on Sites, Tags 03DA and 03EK, the balanced
-bilinear universal property and its invariance under an equivalence of ringed sites.
-(blueprint: lem-weil-pbc-completed-module-tensor-transport).
-
-Proof: restrict along the inverse of the completed coefficient-ring isomorphism.
-On each object the balanced tensor isomorphism takes x tensor y to x tensor y;
-its inverse uses the inverse ring map. These maps commute with restrictions
-and with linear maps in both variables. Reindex along the inverse site
-equivalence and sheafify. The sheafification universal property identifies the
-result with the tensor of the two transported sheaves and preserves the inverse
-equations. This gives the natural isomorphism of bifunctors. At the regular
-module, the coefficient-ring comparison sends the transported section 1 to 1.
-The inverse right unitor sends x to x tensor 1, so both sides of the displayed
-normalization send x to x tensor 1. Equality follows from the module-sheaf
-universal property, or directly from the section formula for the unitor.
-The construction uses no complexes, totalization, Koszul complex, or choice of
-representative; the zero ring and empty site satisfy the same equations. -/
+Source: Stacks Project, Modules on Sites, Tags 03DA and 03EK, the balanced bilinear universal
+property and its invariance under an equivalence of ringed sites. -/
 theorem completedCechModuleTensorTransport
     (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) :
     letI := SheafOfModules.isMonoidal_W_independentCoefficients

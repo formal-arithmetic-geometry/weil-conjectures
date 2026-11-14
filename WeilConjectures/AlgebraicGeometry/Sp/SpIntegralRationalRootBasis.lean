@@ -66,32 +66,7 @@ private def sectionOverIsLimit {C : Type c} [Category.{v} C] (X : Scheme.{u})
   overIsLimit X R W (isLimitOfPreserves A.functor hc)
 
 /-- On one slice with a normalized compatible root basis, the integral limit and its
-rational scalar extension are free of rank one over the constructed coefficients.
-
-Source: blueprint latest, sec-smooth-purity/sk-prop-an/
-sk-def-sp-tate-twist-locally-free.proof.md, clause (3), integral and rational cases;
-sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md, inverse-limit formula.
-(blueprint: lem-sp-integral-rational-root-basis)
-
-Proof: on the slice over W, tensor e_n with B_E,n = O_E/(ell^(n+1)). The
-finite-discrete condensed/constant comparison and the ZMod scalar-tensor comparison
-identify its target with the actual internal finite level. The basis map sends b to
-b tensor zeta_n; its inverse sends b tensor z to b times e_n^{-1}(z). These are
-inverse by the balancing relations. The normalization he and relation hζ make these
-maps commute with the specified coefficient reductions and root power transitions.
-Restriction to a slice keeps sections and coverings, so limits are sectionwise and
-module sheafification restricts to the same slice. Taking the limits of these inverse
-maps identifies the twist with the coefficient limit. The canonical coefficient
-comparison identifies the
-integral and discrete quotient coefficients with their continuous-function sheaves,
-naturally for all the specified reductions. The native continuous ell-power limit,
-restricted to its positive tail by the initial successor functor, therefore supplies
-the normalized integral coefficient limit. Its action is coordinatewise, giving the
-integral module isomorphism.
-Extend this isomorphism along O_E,X -> E_X on the slice and use E_X tensor_O O = E_X
-to obtain the rational one. The internal/sectionwise equivalence retains the actions;
-degree one is the original module and degree zero is its coefficient unit. This gives
-exactly the two signed-line isomorphisms below, without choosing a new cover. -/
+rational scalar extension are free of rank one over the constructed coefficients. -/
 theorem spIntegralRationalRootBasis
     (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     [∀ x : X, Invertible (ℓ : X.residueField x)] (W : X.ProEt)

@@ -33,9 +33,7 @@ import WeilConjectures.CategoryTheory.Derived.DerivedExactCube
 /-!
 # Open-unit normalization of base change on strict constant towers
 
-Source: Stacks Project, Tags 09AE and 04J0; the final coherence sentence of
-`thm-cbc-complete-proetale.proof.md`, main-20261015
-(blueprint: lem-cbc-tower-open-beta-normalization).
+Source: Stacks Project, Tags 09AE and 04J0.
 
 All derived categories are ordinary unbounded derived categories of strict diagrams.
 The natural transformations are compared before any derived evaluation is applied.
@@ -58,7 +56,7 @@ namespace AlgebraicGeometry.ProEtale.StrictTower
 variable (B : Type (u + 1)) [CommRing B]
 
 /-- The specified module inverse-image/direct-image adjunction, without new choices.
-Source: Stacks, Tag 04J0 (blueprint: lem-cbc-tower-open-beta-normalization). -/
+Source: Stacks, Tag 04J0. -/
 def openBetaModuleAdj {X Y : Scheme.{u}} (f : X ⟶ Y) :
     modulePullback B f ⊣ moduleDirectImage B f :=
   Scheme.proEtaleRingModuleAdjunction f (coefficients B Y) (coefficients B X)
@@ -66,7 +64,7 @@ def openBetaModuleAdj {X Y : Scheme.{u}} (f : X ⟶ Y) :
 
 /-- The restriction/direct-image exchange transformation is the mate of the canonical
 inverse-image compositor square; its section normalization is asserted below.
-Source: Stacks, Tag 04J0 (blueprint: lem-cbc-tower-open-beta-normalization). -/
+Source: Stacks, Tag 04J0. -/
 def openBetaRestriction {U' U X' X : Scheme.{u}}
     (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     (w : a ≫ j = j' ≫ g) :
@@ -90,14 +88,7 @@ private theorem openBetaModuleJUnit {U X : Scheme.{u}} (j : U ⟶ X)
     (openImmersionLowerShriek A j) (fixedOpen B j)
 
 /-- The specified inverse open-unit transpose is invertible for arbitrary constant B.
-Source: Stacks, Tags 04J0 and 09AE
-(blueprint: lem-cbc-tower-open-beta-normalization).
-Proof: conjugate the section-normalized right-adjoint comparison under the composite
-adjunctions (def-weil-pbc-composite-adjunction,
-situation-conventions). The iterated-mate formula
-lem-trf-iterated-square-mates identifies its inverse with `singleBetaInv`.
-The transpose formula lem-pur-adjunction-mate-transpose gives precisely the pulled-back
-open unit, so injectivity of the Hom equivalence proves the identification. -/
+Source: Stacks, Tags 04J0 and 09AE. -/
 theorem openBetaModule_isIso {U' U X' X : Scheme.{u}}
     (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (w : a ≫ j = j' ≫ g)
@@ -118,7 +109,7 @@ theorem openBetaModule_isIso {U' U X' X : Scheme.{u}}
   exact NatIso.isIso_of_isIso_app _
 
 /-- The sheaf comparison is the inverse of the prescribed open-unit transpose.
-Source: Stacks, Tag 09AE (blueprint: lem-cbc-tower-open-beta-normalization). -/
+Source: Stacks, Tag 09AE. -/
 def openBetaModule {U' U X' X : Scheme.{u}}
     (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (w : a ≫ j = j' ≫ g)
@@ -129,12 +120,7 @@ def openBetaModule {U' U X' X : Scheme.{u}}
 
 /-- The left-adjoint comparison of the section-normalized restriction is exactly the
 open-unit-normalized sheaf comparison, including the specified direction.
-Source: Stacks, Tags 04J0 and 09AE
-(blueprint: lem-cbc-tower-open-beta-normalization).
-Proof: apply conjugate-iso uniqueness to the two composite adjunctions. The iterated
-mate identity identifies the resulting inverse with the left open mate of the square
-compositor. Apply the mate-transpose identity to the identity of j_!M; its transpose
-is the open unit. This proves the formula and its uniqueness. -/
+Source: Stacks, Tags 04J0 and 09AE. -/
 theorem openBetaModule_normalized {U' U X' X : Scheme.{u}}
     (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (w : a ≫ j = j' ≫ g)
@@ -344,8 +330,7 @@ attribute [local semireducible] G R J adj jAdj gComp gId alpha
 set_option backward.isDefEq.respectTransparency true
 
 /-- Apply the sheaf comparison termwise to the strict inverse system, with its
-transition maps retained. Source: Stacks, Tag 09AE
-(blueprint: lem-cbc-tower-open-beta-normalization). -/
+transition maps retained. Source: Stacks, Tag 09AE. -/
 def openBetaTower {U' U X' X : Scheme.{u}}
     (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (w : a ≫ j = j' ≫ g)
@@ -359,14 +344,7 @@ def openBetaTower {U' U X' X : Scheme.{u}}
 set_option backward.isDefEq.respectTransparency true in
 /-- The derived tower comparison is the exact descent of the specific sheaf comparison,
 and its inverse has the specified open-unit transpose before evaluation.
-Source: Stacks, Tags 015F, 09AE and 04J0
-(blueprint: lem-cbc-tower-open-beta-normalization).
-Proof: extend the sheaf comparison termwise; naturality gives the transition-map and
-chain-map equations. Use situation-conventions and
-lem-weil-pbc-localization-universal-property (2),(3) to descend the comparison, its
-inverse identities and its transpose equation. The descended units are the specified
-jAdj units, so injectivity of their Hom equivalence identifies the result with beta.
-No faithfulness of derived evaluations is used. -/
+Source: Stacks, Tags 015F, 09AE and 04J0. -/
 theorem openBetaNormalization {U' U X' X : Scheme.{u}}
     (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (w : a ≫ j = j' ≫ g)
@@ -446,8 +424,7 @@ theorem openBetaNormalization {U' U X' X : Scheme.{u}}
     exact ((jAdj B j').homEquiv _ _).apply_symm_apply _
 
 /-- The module open compositor conjugate to the specified inverse-image compositor.
-Source: Stacks, Tags 09AE and 0DV0
-(blueprint: lem-cbc-tower-open-beta-normalization). -/
+Source: Stacks, Tags 09AE and 0DV0. -/
 def openBetaModuleJComp {U V X : Scheme.{u}} (j : U ⟶ V) (k : V ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion k] :
     moduleJ B j ⋙ moduleJ B k ≅ moduleJ B (j ≫ k) :=
@@ -455,7 +432,7 @@ def openBetaModuleJComp {U V X : Scheme.{u}} (j : U ⟶ V) (k : V ⟶ X)
     (moduleJAdj B (j ≫ k)) (moduleGComp B j k).symm
 
 /-- The inverse-image identity conjugate to the section-normalized direct-image identity.
-Source: Stacks, Tag 07A7 (blueprint: lem-cbc-tower-open-beta-normalization). -/
+Source: Stacks, Tag 07A7. -/
 def openBetaModuleGId (X : Scheme.{u}) : modulePullback B (𝟙 X) ≅ 𝟭 (Modules B X) :=
   Adjunction.leftAdjointIdIso (openBetaModuleAdj B (𝟙 X)) (moduleRId B X)
 
@@ -602,12 +579,7 @@ private theorem moduleInv_open_comp {V U X V₁ U₁ X₁ : Scheme.{u}}
   exact (Category.comp_id _).symm
 
 /-- Open composition before evaluation.
-Source: Stacks, Tags 04J0, 09AE and 0B65
-(blueprint: lem-cbc-tower-open-beta-normalization).
-Proof: Restriction to successive opens is the same sectionwise restriction. Paste
-these restriction comparisons and take successive open mates using the composite
-open adjunction. The normalized open compositor is its conjugate. Invert the
-resulting inverse-beta equation, the same equation remains valid on sheaves. -/
+Source: Stacks, Tags 04J0, 09AE and 0B65. -/
 theorem openBetaModuleOpenComp {V U X V₁ U₁ X₁ : Scheme.{u}}
     (k : V ⟶ U) (j : U ⟶ X) (k₁ : V₁ ⟶ U₁) (j₁ : U₁ ⟶ X₁)
     (a : U₁ ⟶ U) (b : V₁ ⟶ V) (g : X₁ ⟶ X)

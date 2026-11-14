@@ -154,7 +154,6 @@ import all WeilConjectures.AlgebraicGeometry.ModuleAbelianUnderivedExchange
 /-! # Canonical comparisons for unbounded derived block functors
 
 Source: Stacks Project, Tags 070I, 070Y, 08BJ and 09T5; Zheng Construction 4.1.
-(blueprint: lem-pur-system-block-derived-comparisons).
 
 This is the existing generic derived-comparison portion of SystemBlockRepetition,
 extracted after coefficient-transport abstraction to keep each file within the
@@ -193,8 +192,7 @@ variable {X : Type u₁} {Y : Type u₂} {Xd : Type u₃} {Yd : Type u₄}
 /-- The canonical comparison of total right derived functors, constructed from their
 universal properties. In the system application the supplied square is identity on
 sections, morphisms and transitions, so this is kappa_t of the node.
-Source: Zheng 4.1 and paragraph before 4.10; Stacks 070Y
-(blueprint: lem-pur-system-block-derived-comparisons). -/
+Source: Zheng 4.1 and paragraph before 4.10; Stacks 070Y. -/
 def blockDerivedComparison (square : RX ⋙ GD ≅ G ⋙ RY) :
     RX.mapDerivedCategory ⋙ GD.rightDerivedFunctor ≅
       G.rightDerivedFunctor ⋙ RY.mapDerivedCategory :=

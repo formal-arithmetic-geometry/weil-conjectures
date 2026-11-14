@@ -25,9 +25,7 @@ import WeilConjectures.AlgebraicGeometry.SymmetricAlgebraSheaf.SymmetricAlgebraS
 /-!
 # The vector bundle Spec Sym(F), its augmentation and zero section
 
-Source: blueprint, `sec-smooth-purity/sk-prop-an`, order 1968;
-Stacks Project, Constructions, Tags 01M2, 01LW and 01LX
-(blueprint: proposition-purity-vector-bundles).
+Source: Stacks Project, Constructions, Tags 01M2, 01LW and 01LX.
 
 The relative-spectrum anti-equivalence is the one characterized by its structure-algebra
 functor in `affine_morphism_relative_spec`. Its inverse determines the bundle up to the
@@ -48,7 +46,7 @@ noncomputable section
 namespace AlgebraicGeometry.VectorBundleZeroSection
 
 /-- The concrete structure-algebra functor, with sectionwise pullback on morphisms.
-Source: Stacks Tag 01LX (blueprint: proposition-purity-vector-bundles). -/
+Source: Stacks Tag 01LX. -/
 def structureAlgebraFunctor (S : Scheme.{u}) :
     (ObjectProperty.FullSubcategory (fun Y : Over S ↦ IsAffineHom Y.hom))ᵒᵖ ⥤
       ObjectProperty.FullSubcategory
@@ -97,10 +95,7 @@ def structureAlgebraFunctor (S : Scheme.{u}) :
       h.unop.hom.left.appLE _ _ _ ≫ k.unop.hom.left.appLE _ _ _
     rw [Scheme.Hom.appLE_comp_appLE]
 
-/-- The structure-algebra functor is an equivalence. Source: Stacks Tag 01LX
-(blueprint: proposition-purity-vector-bundles).
-Proof: the relative-spectrum theorem provides an equivalence whose object and morphism
-characterizations give a natural isomorphism to this concrete functor. -/
+/-- The structure-algebra functor is an equivalence. Source: Stacks Tag 01LX. -/
 theorem structureAlgebraFunctor_isEquivalence (S : Scheme.{u}) :
     (structureAlgebraFunctor S).IsEquivalence := by
   obtain ⟨E, hobj, ρ, hmap, _⟩ := (affine_morphism_relative_spec S).2
@@ -125,7 +120,7 @@ theorem structureAlgebraFunctor_isEquivalence (S : Scheme.{u}) :
   exact Functor.isEquivalence_of_iso η
 
 /-- The relative-spectrum equivalence with its concrete structure-algebra functor.
-Source: Stacks Tag 01LX (blueprint: proposition-purity-vector-bundles). -/
+Source: Stacks Tag 01LX. -/
 def antiEquivalence (S : Scheme.{u}) :
     (ObjectProperty.FullSubcategory (fun Y : Over S ↦ IsAffineHom Y.hom))ᵒᵖ ≌
       ObjectProperty.FullSubcategory
@@ -133,14 +128,13 @@ def antiEquivalence (S : Scheme.{u}) :
   letI := structureAlgebraFunctor_isEquivalence S
   exact (structureAlgebraFunctor S).asEquivalence
 
-/-- The base itself as an affine scheme over itself, Stacks Tag 01LX
-(blueprint: proposition-purity-vector-bundles). -/
+/-- The base itself as an affine scheme over itself, Stacks Tag 01LX. -/
 def baseObject (S : Scheme.{u}) :
     ObjectProperty.FullSubcategory (fun Y : Over S ↦ IsAffineHom Y.hom) :=
   ⟨Over.mk (𝟙 S), inferInstanceAs (IsAffineHom (𝟙 S))⟩
 
 /-- The constructed symmetric algebra, with the quasi-coherence provided by the affine
-comparison. Source: Stacks Tag 01CL (blueprint: proposition-purity-vector-bundles). -/
+comparison. Source: Stacks Tag 01CL. -/
 def algebraObject (S : Scheme.{u}) (d : ℕ) (F : S.Modules)
     [F.IsFiniteLocallyFreeOfRank d] :
     ObjectProperty.FullSubcategory
@@ -150,33 +144,33 @@ def algebraObject (S : Scheme.{u}) (d : ℕ) (F : S.Modules)
     (quasiCoherentSymmetricAlgebra_affine_comparison S F).1⟩
 
 /-- The relative affine scheme Spec_S Sym(F) as an object over S.
-Source: Stacks Tag 01M2 (blueprint: proposition-purity-vector-bundles). -/
+Source: Stacks Tag 01M2. -/
 def over (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modules)
     [F.IsFiniteLocallyFreeOfRank d] :
     ObjectProperty.FullSubcategory (fun Y : Over S ↦ IsAffineHom Y.hom) :=
   ((antiEquivalence S).inverse.obj (algebraObject S d F)).unop
 
 /-- The total space of the vector bundle of constant rank d.
-Source: Stacks Tag 01M2 (blueprint: proposition-purity-vector-bundles). -/
+Source: Stacks Tag 01M2. -/
 def scheme (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modules)
     [F.IsFiniteLocallyFreeOfRank d] : Scheme.{u} :=
   (over S d F).obj.left
 
 /-- The structural projection of Spec_S Sym(F).
-Source: Stacks Tag 01M2 (blueprint: proposition-purity-vector-bundles). -/
+Source: Stacks Tag 01M2. -/
 def π (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modules)
     [F.IsFiniteLocallyFreeOfRank d] : scheme S d F ⟶ S :=
   (over S d F).obj.hom
 
 /-- The unique algebra morphism to O_S killing the degree-one generators.
-Source: Stacks Tag 01M2 (blueprint: proposition-purity-vector-bundles). -/
+Source: Stacks Tag 01M2. -/
 def augmentation (S : Scheme.{u}) (F : S.Modules) :
     SymmetricAlgebraSheaf.algebra F ⟶ Under.mk (𝟙 S.sheaf) :=
   (exists_quasiCoherentSymmetricAlgebra_core S F (Under.mk (𝟙 S.sheaf)) 0).exists.choose
 
 /-- The same zero-generator extension into the structure algebra of the identity S-scheme.
 This is the augmentation transported to the anti-equivalence's chosen base object.
-Source: Stacks Tags 01M2 and 01LX (blueprint: proposition-purity-vector-bundles). -/
+Source: Stacks Tags 01M2 and 01LX. -/
 def augmentationToBase (S : Scheme.{u}) (F : S.Modules) :
     SymmetricAlgebraSheaf.algebra F ⟶
       ((antiEquivalence S).functor.obj (op (baseObject S))).obj :=
@@ -185,7 +179,7 @@ def augmentationToBase (S : Scheme.{u}) (F : S.Modules) :
 
 /-- The zero section: the fully faithful inverse image of the augmentation, after the
 counit identifies the bundle's structure algebra with Sym(F).
-Source: Stacks Tag 01M2 (blueprint: proposition-purity-vector-bundles). -/
+Source: Stacks Tag 01M2. -/
 def zero (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modules)
     [F.IsFiniteLocallyFreeOfRank d] : S ⟶ scheme S d F :=
   ((antiEquivalence S).functor.preimage
@@ -193,7 +187,7 @@ def zero (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modules)
     (ObjectProperty.homMk (augmentationToBase S F)))).unop.hom.left
 
 /-- The canonical symmetric-algebra identification with the direct-image structure algebra.
-Source: Stacks Tag 01LX (blueprint: proposition-purity-vector-bundles). -/
+Source: Stacks Tag 01LX. -/
 def algebraIso (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modules)
     [F.IsFiniteLocallyFreeOfRank d] :
     SymmetricAlgebraSheaf.algebra F ≅
@@ -204,8 +198,7 @@ def algebraIso (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modules)
     ((antiEquivalence S).counitIso.app (algebraObject S d F))).symm
 
 /-- The chart over an affine open is induced by the sheafification unit and the
-symmetric-algebra identification. Source: Stacks Tag 01LX
-(blueprint: proposition-purity-vector-bundles). -/
+symmetric-algebra identification. Source: Stacks Tag 01LX. -/
 def affineChart (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modules)
     [F.IsFiniteLocallyFreeOfRank d] (U : S.affineOpens) :
     ((π S d F) ⁻¹ᵁ U.1).toScheme ⟶
@@ -217,11 +210,7 @@ def affineChart (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modules)
 
 /-- The augmentation is the unique map killing every degree-one section, and on sectionwise
 symmetric algebras is the identity on scalars and zero on generators.
-Source: Stacks Tag 01M2 (blueprint: proposition-purity-vector-bundles).
-Proof: the core symmetric-algebra universal property with the zero linear map gives
-existence and uniqueness. Before sheafification the map is SymmetricAlgebra.algebraMapInv;
-uniqueness on scalars and generators identifies the composite with the sheafification unit.
-The under-category compatibility supplies the identity on scalars. -/
+Source: Stacks Tag 01M2. -/
 theorem augmentation_spec (S : Scheme.{u}) (F : S.Modules) :
     (∀ (U : S.Opens) (x : F.val.obj (op U)),
       (augmentation S F).right.hom.app (op U)
@@ -255,12 +244,7 @@ theorem augmentation_spec (S : Scheme.{u}) (F : S.Modules) :
     | add a b ha hb => simp only [map_add, ha, hb]
 
 /-- The zero section is a section and a closed immersion.
-Source: Stacks Tag 01M2 (blueprint: proposition-purity-vector-bundles).
-Proof: the augmentation is an O_S-algebra map, so its spectrum lies over S, giving the
-section identity. On each relative-spectrum affine chart it is induced by the
-augmentation Sym_R(F(U)) → R, which is surjective because it fixes scalars. It is therefore
-the quotient closed subscheme for the augmentation kernel, by the affine closed-immersion
-criterion. These charts cover the total space, so the morphism is a closed immersion. -/
+Source: Stacks Tag 01M2. -/
 theorem zero_spec (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modules)
     [F.IsFiniteLocallyFreeOfRank d] :
     zero S d F ≫ π S d F = 𝟙 S ∧ IsClosedImmersion (zero S d F) := by
@@ -274,7 +258,7 @@ theorem zero_spec (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modules)
   exact ⟨hs, IsClosedImmersion.of_comp (zero S d F) (π S d F)⟩
 
 /-- Restriction of the zero section to an open of the base.
-Source: Stacks Tag 01M2 (blueprint: proposition-purity-vector-bundles). -/
+Source: Stacks Tag 01M2. -/
 def zeroRestricted (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modules)
     [F.IsFiniteLocallyFreeOfRank d] (V : S.Opens) :
     V.toScheme ⟶ ((π S d F) ⁻¹ᵁ V).toScheme :=
@@ -321,11 +305,7 @@ attribute [local irreducible] antiEquivalence
 /-- The two compatibility equations for the affine relative-spectrum chart.
 This is the equation portion of `affineChart_spec`; it is split out because the
 relative-spectrum construction and the zero-section comparison are independent of
-chart invertibility. Source: Stacks Project, Constructions, Tags 01LX and 01M2.
-Proof: use the affine symmetric-algebra section bijection and the relative-spectrum chart
-characterization. Scalar compatibility gives the first equation, and augmentation_spec gives
-the second.
-(blueprint: lem-asd-vector-bundle-affine-chart-equations). -/
+chart invertibility. Source: Stacks Project, Constructions, Tags 01LX and 01M2. -/
 theorem affineChart_equations (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modules)
     [F.IsFiniteLocallyFreeOfRank d] (U : S.affineOpens) :
     (affineChart S d F U ≫
@@ -370,12 +350,7 @@ theorem affineChart_equations (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S
 set_option linter.style.haveILetI false in
 /-- The affine charts are isomorphisms over the corresponding base affine opens, and the
 zero section in these charts is exactly the spectrum of the augmentation.
-Source: Stacks Tags 01LX and 01M2 (blueprint: proposition-purity-vector-bundles).
-Proof: quasiCoherentSymmetricAlgebra_affine_comparison identifies affine algebra sections
-with Sym_R(F(U)). Since the structural projection is affine, its inverse image of an affine
-open is affine. Its toSpecΓ map, the counit on sections, and the section comparison are
-isomorphisms, so their spectra give the chart isomorphism. The two compatibility equations
-are exactly affineChart_equations, using scalar compatibility and the augmentation. -/
+Source: Stacks Tags 01LX and 01M2. -/
 theorem affineChart_spec (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modules)
     [F.IsFiniteLocallyFreeOfRank d] (U : S.affineOpens) :
     IsIso (affineChart S d F U) ∧
@@ -406,10 +381,7 @@ theorem affineChart_spec (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modu
 
 /-- On an inclusion of affine opens, the chart change is the spectrum of the
 symmetric-algebra restriction, so these are exactly the affine pieces glued in the node.
-Source: Stacks Tag 01LX (blueprint: proposition-purity-vector-bundles).
-Proof: naturality of the counit algebra isomorphism and of the sheafification unit
-identifies the maps on section rings with SymmetricAlgebraSheaf.restriction. Apply
-naturality of toSpecΓ and contravariant functoriality of Spec. -/
+Source: Stacks Tag 01LX. -/
 theorem affineChart_naturality (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modules)
     [F.IsFiniteLocallyFreeOfRank d] (U V : S.affineOpens) (h : U.1 ≤ V.1) :
     Scheme.Hom.resLE (𝟙 (scheme S d F)) ((π S d F) ⁻¹ᵁ V.1) ((π S d F) ⁻¹ᵁ U.1)
@@ -433,12 +405,11 @@ theorem affineChart_naturality (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : 
         (CategoryTheory.congr_fun hθ a).symm)
 
 /-- A Zariski trivialization is a frame of the given module, not an arbitrary isomorphism
-of schemes. Source: blueprint order 1968 (blueprint: proposition-purity-vector-bundles). -/
+of schemes. -/
 def Trivialization (S : Scheme.{u}) (d : ℕ) (F : S.Modules) (V : S.Opens) :=
   F.restrict V.ι ≅ SheafOfModules.free (R := V.toScheme.ringCatSheaf) (ULift.{u} (Fin d))
 
-/-- The i-th frame section over V, obtained by the inverse frame map on its standard basis.
-Source: blueprint order 1968 (blueprint: proposition-purity-vector-bundles). -/
+/-- The i-th frame section over V, obtained by the inverse frame map on its standard basis. -/
 def frameSection (S : Scheme.{u}) (d : ℕ) (F : S.Modules) (V : S.Opens)
     (e : Trivialization S d F V) (i : Fin d) : F.val.obj (op V) :=
   F.presheaf.map (eqToHom V.ι_image_top.symm).op
@@ -593,8 +564,7 @@ private theorem frameSection_restrict (S : Scheme.{u}) (d : ℕ) (F : S.Modules)
 
 end LocalFrames
 
-/-- The coordinate x_i = j(e_i), transported to the restricted total space's global ring.
-Source: blueprint order 1968 (blueprint: proposition-purity-vector-bundles). -/
+/-- The coordinate x_i = j(e_i), transported to the restricted total space's global ring. -/
 def coordinate (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modules)
     [F.IsFiniteLocallyFreeOfRank d] (V : S.Opens) (e : Trivialization S d F V) (i : Fin d) :
     Γ(((π S d F) ⁻¹ᵁ V).toScheme, ⊤) :=
@@ -721,7 +691,7 @@ private theorem zero_coordinateMap (S : Scheme.{u}) [IsNoetherian S] (d : ℕ)
   rw [Iso.inv_hom_id_apply, h0, map_zero]
 
 /-- The map to affine space induced by a module frame and its degree-one coordinates.
-Source: Stacks Tag 01M2 (blueprint: proposition-purity-vector-bundles). -/
+Source: Stacks Tag 01M2. -/
 def trivializationMap (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modules)
     [F.IsFiniteLocallyFreeOfRank d] (V : S.Opens) (e : Trivialization S d F V) :
     ((π S d F) ⁻¹ᵁ V).toScheme ⟶ AffineSpace (ULift.{u} (Fin d)) V.toScheme :=
@@ -842,15 +812,7 @@ private theorem isIso_of_affineSpace_charts {T X : Scheme.{u}} (I : Type u)
   infer_instance
 
 /-- The frame induces an affine-space isomorphism over V with the zero section at the origin.
-Source: blueprint order 1968 and Stacks Tag 01M2
-(blueprint: proposition-purity-vector-bundles).
-Proof: on every affine open inside V the frame gives a module basis. The basis-preserving
-isomorphism SymmetricAlgebra.equivMvPolynomial identifies its symmetric algebra with the
-polynomial algebra and its generators with the variables. The affine relative-spectrum
-charts therefore identify trivializationMap with an isomorphism over V. These maps agree
-on overlaps because their coordinates are the restrictions of j(e_i), so they glue.
-The augmentation kills each e_i, hence all coordinates of the zero section vanish;
-AffineSpace.homOfVector identifies this with the standard affine-space zero section. -/
+Source: blueprint order 1968 and Stacks Tag 01M2. -/
 theorem trivializationMap_spec (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modules)
     [F.IsFiniteLocallyFreeOfRank d] (V : S.Opens) (e : Trivialization S d F V) :
     IsIso (trivializationMap S d F V e) ∧
@@ -890,16 +852,7 @@ theorem trivializationMap_spec (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : 
       exact zero_coordinateMap S d F V (frameSection S d F V e i.down)
 
 /-- Two frames on an overlap differ by an invertible matrix of regular functions, and the
-same matrix changes their degree-one coordinates (with no transpose or dual convention).
-Source: blueprint order 1968 (blueprint: proposition-purity-vector-bundles).
-Proof: the composite of the two frame isomorphisms is an automorphism of the finite free
-module sheaf. Its values on the standard global basis have global coefficient sections,
-giving G. The inverse automorphism gives H. Applying their composites to each basis
-vector proves GH = HG = I. These coefficients give the displayed equation for frame
-sections on W, whether or not W is affine. The degree-one map j is O_S-linear; applying
-it and the algebra isomorphism to that equation gives the coordinate equation, with
-coefficients pulled back along the restricted projection. For d = 0 all sums are empty
-and the unique empty matrices are mutual inverses. -/
+same matrix changes their degree-one coordinates (with no transpose or dual convention). -/
 theorem transition_spec (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modules)
     [F.IsFiniteLocallyFreeOfRank d] (W : S.Opens) (e e' : Trivialization S d F W) :
     ∃ G H : Matrix (Fin d) (Fin d) (S.presheaf.obj (op W)),

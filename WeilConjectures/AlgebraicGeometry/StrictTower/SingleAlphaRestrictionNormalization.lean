@@ -13,7 +13,6 @@ import all WeilConjectures.CategoryTheory.SmoothPurity.ProperOpenCompositeTransf
 /-! # Restriction of intrinsic proper/open alpha
 
 Source: Stacks Project, Tags 09BN and 0F7C, with the arbitrary-ring underived refinement.
-(blueprint: lem-cbc-single-alpha-restriction-normalization)
 -/
 
 @[expose] public noncomputable section
@@ -292,17 +291,7 @@ private theorem singleAlpha_restriction_iso {V W S T : Scheme.{u}}
     (singleAlpha_word B k r p i h) M
 
 /-- Restriction of the intrinsic clopen alpha, with its specified open units.
-Source: Stacks Project, Tags 09BN and 0F7C; the restriction calculation in
-lem-cbc-proper-open-alpha-vertical-modules, steps 2--3.
-(blueprint: lem-cbc-single-alpha-restriction-normalization).
-Proof: factor the square through W ×_T S, with open projection b and clopen lift s.
-The inverse-transpose equation for cartesian beta identifies its restriction with
-inverse image of the inverse unit for i. The clopen projector restricts along s to
-the open unit. The unit-preserving compositor for s followed by b identifies the
-resulting unit with the unit for k. The inverse-image square compositor cancels
-all intermediate inverse-image compositors, giving the displayed equation.
-The argument also holds for the empty open and the zero coefficient ring; for
-identity opens it is exactly the unit equation for the inverse-image compositor. -/
+Source: Stacks Project, Tags 09BN and 0F7C. -/
 theorem singleAlpha_restriction_normalized {V W S T : Scheme.{u}}
     (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
     [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]

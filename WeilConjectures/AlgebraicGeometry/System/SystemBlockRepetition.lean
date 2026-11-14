@@ -34,10 +34,8 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 
 /-! # Exact block repetition of ordinary derived semilinear systems
 
-Source: Zheng, Construction 4.1 (printed p. 21) and the geometric morphism paragraph
-preceding Lemma 4.10 (printed p. 23); finite-block generalization in the DAG;
-Stacks Tags 08BJ, 070I, 070Y, 079P, 09T5
-(blueprint: lem-pur-system-block-repetition).
+Source: Zheng, Construction 4.1 (printed p. 21) and the geometric morphism paragraph preceding Lemma
+4.10 (printed p. 23); Stacks Tags 08BJ, 070I, 070Y, 079P, 09T5.
 
 Indices here start at zero: index n denotes the paper's index n+1. The actual
 module-sheaf categories are `SemilinearSections.Systems`, with ordinary unbounded
@@ -211,20 +209,7 @@ private theorem pushforwardEvaluationEquality
 
 attribute [local irreducible] systemRing ringPresheaf rings in
 /-- Exact endpoint/repetition adjunction on the dependency's actual module-sheaf categories.
-Source: Zheng 4.1, finite-block generalization; Stacks 08BJ
-(blueprint: lem-pur-system-block-repetition).
-Proof: on the sequence site ℕ × C of lem-coef-semilinear-derived-sections, the
-first-endpoint reindexing a is left adjoint to the block reindexing t: the unit has
-index i ≤ t(a(i)) = i, the counit has index a(t(m)) ≤ m, both with identity vertical
-components, and the triangle identities hold by thinness of ℕ. After applying t the
-counit and the unit are equality transports, since t(a(i)) = i; so the two ring
-equations of Mathlib's SheafOfModules.pushforwardPushforwardAdj hold for the endpoint
-and repetition ring identifications, giving blockEndpoint ⊣ blockRepeat. Its unit at
-(m,U) is the transition P_m(U) → P_(a(t(m)))(U), which is the adjunct formula.
-Composition of pushforwards gives the evaluation isomorphisms, identity on sections.
-Reindexing pushforwards are additive and exact (blockPushforward_exact). For acyclic H,
-E H is acyclic; Hom_K(H,R I)=Hom_K(E H,I)=0 for K-injective I
-(Adjunction.preservesKInjectiveComplexes), which proves the final clause. -/
+Source: Zheng 4.1, finite-block generalization; Stacks 08BJ. -/
 theorem systemBlockRepetition : Nonempty (SystemBlockRepetition J B τ t) := by
   let siteAdj : blockSite (C := C) t.endpoints ⊣ blockSite t.index :=
     { unit :=
@@ -351,8 +336,7 @@ variable {C' : Type c} [Category.{v} C']
 /-- The actual repeated geometric functors on the repeated coefficient categories.
 All level realizations are fixed to the given topos morphism. The square is the
 identity on sections, including all transitions, before localization.
-Source: Zheng 4.1 and paragraph preceding 4.10
-(blueprint: lem-pur-system-block-repetition). -/
+Source: Zheng 4.1 and paragraph preceding 4.10. -/
 structure SystemBlockGeometry where
   /-- Levelwise inverse image for D, on the actual repeated coefficient rings. -/
   pull : Systems J (blockCoefficients B₀ t) (blockTransitions J B₀ τ₀ t) ⥤
@@ -422,8 +406,7 @@ attribute [instance] SystemBlockGeometry.pull_additive SystemBlockGeometry.pull_
 
 /-- All supplied exact block functors preserve K-injectives, so the canonical
 comparison is available directly on the actual system categories.
-Source: Zheng 4.1 finite-block generalization; Stacks 070Y
-(blueprint: lem-pur-system-block-repetition). -/
+Source: Zheng 4.1 finite-block generalization; Stacks 070Y. -/
 def SystemBlockGeometry.comparison
     (H : SystemBlockGeometry J t J' B₀ τ₀ A uInv uPush adjSet G RX RY) :=
   letI := H.resolutions
@@ -439,10 +422,7 @@ variable [EssentiallySmall.{max c v r} C]
   (τ₀ : ∀ n : ℕ, B₀ (n + 1) ⟶ B₀ n) (U : C)
 
 /-- The ring identification for repetition after restriction to an open slice.
-Source: Zheng 4.1, open-localization consequence (blueprint: lem-pur-system-block-repetition).
-Proof: both section rings at (m,V→U) are B_(t(m))(V). Restriction to the slice
-commutes with composition of tau, so all horizontal and vertical maps agree.
-Functor and sheaf extensionality give the claimed equality. -/
+Source: Zheng 4.1, open-localization consequence. -/
 theorem blockOpenRepeatRing :
     ((blockSite (C := Over U) t.index).sheafPushforwardContinuous RingCat.{max c v r}
       (coefficientSequenceTopology (J.over U))
@@ -476,7 +456,7 @@ theorem blockOpenRepeatRing :
 
 /-- Actual restriction/repetition on the open sequence site, retaining its coefficient
 presentation. It has exactly the data of blockRepeat on the restricted tower.
-Source: Zheng 4.1, open-localization consequence (blueprint: lem-pur-system-block-repetition). -/
+Source: Zheng 4.1, open-localization consequence. -/
 def blockOpenRepeat :
     Systems (J.over U) (openRings.{c, v, r} J B₀ U) (openTransitions.{c, v, r} J B₀ τ₀ U) ⥤
       Systems (J.over U) (openRings.{c, v, r} J (blockCoefficients B₀ t) U)
@@ -526,17 +506,7 @@ no levelwise automorphism twists them. The normalization says that under these
 actual level realizations the comparison is the identity on every component section.
 Consequently it is the strict identity for the direct-sum and sheafification
 realizations of the dependency, and commutes with reindexing.
-Source: Zheng 4.1, ordinary levelwise operations, open-localization consequence
-(blueprint: lem-pur-system-block-repetition).
-Proof: extension by zero is the sheafification of the level direct-sum extension.
-At (m,V) both sides extend the identical module M_(t(m)) and every component map
-and transition is extended by the same j!. The summand identity respects gluing,
-so defines the system comparison, with the asserted section normalization after
-the dependency's level identifications. It is invertible by the reverse identity.
-Exactness descends this ordinary identity termwise by
-situation-conventions. A second repetition substitutes
-s(m) into the same component identity, so gives the identical comparison and
-commutes with the composition identifications; the identity map leaves it unchanged. -/
+Source: Zheng 4.1, ordinary levelwise operations, open-localization consequence. -/
 theorem blockRepeat_extensionByZero
     (R : SystemBlockRepetition J B₀ τ₀ t) :
     ∃ (O : OpenSystems.{c, v, r} J B₀ τ₀ U)

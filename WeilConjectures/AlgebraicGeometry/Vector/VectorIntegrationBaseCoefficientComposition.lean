@@ -171,7 +171,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 The proof reuses the general composition calculation underlying
 `orderedTateExactOpenComposition`, exposing its left-derived form.
-(blueprint: lem-pur-vector-integration-base-coefficient-composition).
 -/
 
 @[expose] public noncomputable section

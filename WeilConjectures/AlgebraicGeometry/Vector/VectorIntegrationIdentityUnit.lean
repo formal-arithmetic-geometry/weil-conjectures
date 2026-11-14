@@ -159,10 +159,6 @@ import WeilConjectures.SixFunctors.Etale.Derived.Shift
 import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
 
 /-! # Identity inverse image of the constant derived unit
-
-Source: blueprint sec-smooth-purity/sk-prop-an, vector-bundle purity proof paragraph 2;
-identity compatibility of inverse image and the constant sheaf adjunction.
-(blueprint: lem-pur-vector-integration-identity-unit).
 -/
 
 @[expose] public noncomputable section

@@ -75,9 +75,7 @@ import all WeilConjectures.AlgebraicGeometry.Smooth.SmoothPurityCoefficientTower
 /-!
 # Completed evaluations and the canonical tower reconstruction map
 
-Source: blueprint main-20261015, chap-Smooth-purity,
-`sk-lem-sp-tower/_section.md`; Stacks Project, Tags 0940 and 099P
-(blueprint: def-sp-tower-reconstruction-data).
+Source: Stacks Project, Tags 0940 and 099P.
 
 The natural index n denotes positive exponent n+1. A Roos triangle specifies the
 actual derived inverse limit and its projections. The comparison at each finite level
@@ -98,21 +96,18 @@ namespace AlgebraicGeometry.ProEtale
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{u})
 
-/-- The small pro-etale site fits in the actual coefficient universe.
-Source: blueprint, coefficient setup (blueprint: def-sp-tower-reconstruction-data). -/
+/-- The small pro-etale site fits in the actual coefficient universe. -/
 instance (priority := 4000) spReconstructionSiteSmall : EssentiallySmall.{u + 1} T.ProEt :=
   essentiallySmallSelf.{0, u, u + 1} _
 
 /-- The fixed-universe abelian structure used by the reconstruction interface.
 This specializes the ordinary module-sheaf structure without leaving the coefficient
-universe undetermined. Source: Stacks, Modules on Sites
-(blueprint: def-sp-tower-reconstruction-data). -/
+universe undetermined. Source: Stacks, Modules on Sites. -/
 instance (priority := 3000) spReconstructionModulesAbelian
     (R : Sheaf (Scheme.ProEt.topology T) RingCat.{u + 1}) :
     Abelian (SheafOfModules.{u + 1} R) := SheafOfModules.instAbelian R
 
-/-- The same projection retaining the existing commutative ring structures.
-Source: blueprint, coefficient setup (blueprint: def-sp-tower-reconstruction-data). -/
+/-- The same projection retaining the existing commutative ring structures. -/
 def spCompletedEllCommProjection (n : ℕ) :
     WeilConjectures.completedIntegralCommRingSheafUnrestricted l E T ⟶
       (spCoefficientCommRings l E T).obj (op n) :=
@@ -120,8 +115,7 @@ def spCompletedEllCommProjection (n : ℕ) :
     (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).preimage
       (spCompletedEllProjection.{u, u} l E T n)
 
-/-- Exact restriction from the actual ell-power quotient to completed coefficients.
-Source: blueprint, restriction in proof step 2 (blueprint: def-sp-tower-reconstruction-data). -/
+/-- Exact restriction from the actual ell-power quotient to completed coefficients. -/
 abbrev spCompletedEllRestriction (n : ℕ) :=
   restrictScalars.{u + 1} ((sheafCompose (Scheme.ProEt.topology T)
     (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
@@ -130,8 +124,7 @@ abbrev spCompletedEllRestriction (n : ℕ) :=
 variable (D : SpCoefficientTowersAbelian l E T)
 
 /-- The given tower's level as a module over the completed ring, without changing its
-underlying sheaf or transition. Source: blueprint, proof step 2
-(blueprint: def-sp-tower-reconstruction-data). -/
+underlying sheaf or transition. -/
 def spCompletedEvaluation (n : ℕ) : spCoefficientTowers l E T ⥤
     WeilConjectures.scalarReductionSource.{u, u} l E T :=
   spCoefficientEvaluation l E T D.equivalence n ⋙ spCompletedEllRestriction l E T n
@@ -163,11 +156,7 @@ private theorem spCompletedEllCommProjection_comp {m n : ℕ} (h : m ≤ n) :
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The unique ordinary transition, fixed on every section by the original strict
-semilinear tower. Source: blueprint, proof step 2 (blueprint: def-sp-tower-reconstruction-data).
-Proof: the completed projections commute with quotient transitions by the limit-cone
-condition. Thus the original semilinear transition becomes completed-ring linear.
-It commutes with sheaf restrictions and tower morphisms. Equality on all sections
-determines each component uniquely. -/
+semilinear tower. -/
 theorem spCompletedTransition_existsUnique (n : ℕ) :
     ∃! τ : spCompletedEvaluation l E T D (n + 1) ⟶ spCompletedEvaluation l E T D n,
       ∀ (M : spCoefficientTowers l E T) (U : T.ProEtᵒᵖ)
@@ -225,14 +214,12 @@ theorem spCompletedTransition_existsUnique (n : ℕ) :
     exact hσ M U x
 
 /-- The original transition with its restricted scalar action, selected only from
-its sectionwise unique characterization. Source: blueprint, proof step 2
-(blueprint: def-sp-tower-reconstruction-data). -/
+its sectionwise unique characterization. -/
 def spCompletedTransition (n : ℕ) :
     spCompletedEvaluation l E T D (n + 1) ⟶ spCompletedEvaluation l E T D n :=
   (spCompletedTransition_existsUnique l E T D n).exists.choose
 
-/-- Derived level evaluation followed by exact completed-coefficient restriction.
-Source: blueprint, proof step 2 (blueprint: def-sp-tower-reconstruction-data). -/
+/-- Derived level evaluation followed by exact completed-coefficient restriction. -/
 def spDerivedCompletedEvaluation (n : ℕ) : spDerivedCoefficientTowers l E T D ⥤
     DerivedCategory (WeilConjectures.scalarReductionSource.{u, u} l E T) :=
   spDerivedCoefficientEvaluation l E T D n ⋙

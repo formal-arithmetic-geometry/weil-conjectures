@@ -14,9 +14,8 @@ import WeilConjectures.SixFunctors.ProEtale.BaseChange.WeaklyEtale
 /-!
 # Normalized finite constant-coefficient open base change
 
-Source: Stacks Project, Tags 0F7B, 0F7C, 0F7D, 0F7F, 07A7 and 09AE, and the explicit
-strict-tower refinement in the blueprint (blueprint:
-proposition-extension-zero-restriction-closed-subscheme--11).
+Source: Stacks Project, Tags 0F7B, 0F7C, 0F7D, 0F7F, 07A7 and 09AE, and the explicit strict-tower
+refinement in the blueprint.
 
 The index `n : ℕ` denotes positive level `n+1`. All derived categories below localize
 complexes of strict towers, rather than forming towers in separate derived categories.
@@ -37,9 +36,7 @@ namespace AlgebraicGeometry.ProEtale.StrictTower
 variable (B : Type (u + 1)) [CommRing B]
 
 /-- The square compositor is uniquely determined by its explicit composition formula.
-Source: Stacks, Tag 09AE
-(blueprint: lem-fix-constant-square-compositor-specification).
-Proof: the displayed composite witnesses existence, and the required equality gives uniqueness. -/
+Source: Stacks, Tag 09AE. -/
 theorem moduleSquareG_existsUnique {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) (h : k ≫ p = r ≫ i) :
     ∃! e : modulePullback B i ⋙ modulePullback B r ≅
@@ -49,17 +46,14 @@ theorem moduleSquareG_existsUnique {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V �
   exact ⟨_, rfl, fun _ he ↦ he⟩
 
 /-- The canonical single-level pullback-square identification.
-Source: Stacks, Tag 09AE
-(blueprint: proposition-extension-zero-restriction-closed-subscheme--11). -/
+Source: Stacks, Tag 09AE. -/
 noncomputable def moduleSquareG {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) (h : k ≫ p = r ≫ i) :
     modulePullback B i ⋙ modulePullback B r ≅ modulePullback B p ⋙ modulePullback B k :=
   (moduleSquareG_existsUnique B k r p i h).choose
 
 /-- The specified square compositor equals the original explicit composite.
-Source: Stacks, Tag 09AE
-(blueprint: lem-fix-constant-square-compositor-specification).
-Proof: this is the equality clause of the unique specification. -/
+Source: Stacks, Tag 09AE. -/
 theorem moduleSquareG_eq {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) (h : k ≫ p = r ≫ i) :
     moduleSquareG B k r p i h =
@@ -68,8 +62,7 @@ theorem moduleSquareG_eq {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
   (moduleSquareG_existsUnique B k r p i h).choose_spec.1
 
 /-- The inverse open-base-change component, specified by the original open-unit transpose.
-Source: Stacks, Tag 09AE
-(blueprint: proposition-extension-zero-restriction-closed-subscheme--11). -/
+Source: Stacks, Tag 09AE. -/
 noncomputable def singleBetaInvApp {U' U X' X : Scheme.{u}}
     (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : a ≫ j = j' ≫ g) (M : Modules B U) :
@@ -80,10 +73,7 @@ noncomputable def singleBetaInvApp {U' U X' X : Scheme.{u}}
       (moduleSquareG B a j' j g h).inv.app ((moduleJ B j).obj M))
 
 /-- Naturality follows from the same open-unit transpose.
-Source: Stacks, Tag 09AE
-(blueprint: proposition-extension-zero-restriction-closed-subscheme--11).
-Proof: transpose each naturality square under the open adjunction. Naturality of
-the open unit and of the pullback-square comparison makes their transposes equal. -/
+Source: Stacks, Tag 09AE. -/
 theorem singleBetaInvApp_naturality {U' U X' X : Scheme.{u}}
     (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : a ≫ j = j' ≫ g)
@@ -104,8 +94,7 @@ theorem singleBetaInvApp_naturality {U' U X' X : Scheme.{u}}
   rw [hn]
 
 /-- The specified inverse comparison, as a natural transformation.
-Source: Stacks, Tag 09AE
-(blueprint: proposition-extension-zero-restriction-closed-subscheme--11). -/
+Source: Stacks, Tag 09AE. -/
 noncomputable def singleBetaInv {U' U X' X : Scheme.{u}}
     (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : a ≫ j = j' ≫ g) :
@@ -271,12 +260,7 @@ private theorem openSquare_image {U' U X' X : Scheme.{u}}
 end
 
 /-- The finite-coefficient canonical comparison is invertible for a cartesian square.
-Source: Stacks, Tag 09AE
-(blueprint: proposition-extension-zero-restriction-closed-subscheme--11).
-Proof: open localization identifies the right adjoints by restriction on the same
-pulled-back test objects. Their left adjoints have the unique unit-preserving
-isomorphism. Its inverse has exactly the displayed open-unit transpose, hence is
-singleBetaInv. Exactness passes this isomorphism degreewise and through localization. -/
+Source: Stacks, Tag 09AE. -/
 theorem singleBetaInv_isIso [Finite B] {U' U X' X : Scheme.{u}}
     (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : a ≫ j = j' ≫ g)
@@ -301,8 +285,7 @@ theorem singleBetaInv_isIso [Finite B] {U' U X' X : Scheme.{u}}
 
 /-- The existing finite open-base-change comparison, in constant-ring module coordinates.
 Its inverse has the prescribed open-unit transpose; no new map is chosen.
-Source: Stacks, Tag 09AE
-(blueprint: proposition-extension-zero-restriction-closed-subscheme--11). -/
+Source: Stacks, Tag 09AE. -/
 noncomputable def singleBeta [Finite B] {U' U X' X : Scheme.{u}}
     (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : a ≫ j = j' ≫ g)

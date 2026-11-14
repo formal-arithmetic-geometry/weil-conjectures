@@ -26,7 +26,6 @@ import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 The geometric construction of centred étale charts, with its affine ideal equations.
 Source: Stacks Tags 054L, 024T and 00LF.
-(blueprint: lem-sc-smooth-section-affine-coordinates).
 -/
 
 @[expose] public noncomputable section
@@ -37,8 +36,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.SmoothSectionCentredCoordinates
 
 /-- The geometric and regular-equation data of an affine centred section chart.
-Source: Stacks Tags 054L, 024T and 00LF.
-(blueprint: lem-sc-smooth-section-affine-coordinates). -/
+Source: Stacks Tags 054L, 024T and 00LF. -/
 structure AffineChart {V S : Scheme.{u}} (d : ℕ) (g : V ⟶ S)
     (s : S ⟶ V) [IsClosedImmersion s] where
   T : S.affineOpens
@@ -71,25 +69,7 @@ structure AffineChart {V S : Scheme.{u}} (d : ℕ) (g : V ⟶ S)
 set_option backward.isDefEq.respectTransparency false in
 /-- Every point of the base has a centred affine étale chart whose coordinate ideal
 is the section kernel and whose coordinates form a regular sequence.
-Source: Stacks Tags 054L, 024T, 01IT, 01I4 and 00LF.
-(blueprint: lem-sc-smooth-section-affine-coordinates).
-
-Proof: Apply the proved adopted-source theorem
-`Scheme.Hom.exists_etale_coordinates_of_mem_range` at t. It supplies affine
-opens with exactly the section preimage and an etale polynomial map generating
-the section kernel. Define e by `homOfVector` with these actual coordinates,
-transported through the affine opens' top-section isomorphisms. The polynomial
-presentation of affine space identifies its section map with the supplied map,
-up to ring isomorphisms, proving etaleness. The zero section kernel is generated
-by the polynomial variables; after pulling back this is the section kernel.
-The section composes with e to zero on the base and every coordinate. The
-closed-immersion kernel criterion therefore makes that square Cartesian.
-The quotient equivalence is induced by the surjective section augmentation.
-Flatness preserves the weak regularity of the polynomial variables; the
-quotient is the base chart ring, which is nontrivial because t belongs to it.
-This gives full regularity, including the empty list when d = 0. The affine
-source makes e separated. The map into the base change is open because its
-composite with the open first projection is the open inclusion of U. -/
+Source: Stacks Tags 054L, 024T, 01IT, 01I4 and 00LF. -/
 theorem exists_affineChart {V S : Scheme.{u}} (d : ℕ) (g : V ⟶ S)
     [SmoothOfRelativeDimension d g] (s : S ⟶ V) [IsClosedImmersion s]
     (hs : s ≫ g = 𝟙 S) (t : S) :

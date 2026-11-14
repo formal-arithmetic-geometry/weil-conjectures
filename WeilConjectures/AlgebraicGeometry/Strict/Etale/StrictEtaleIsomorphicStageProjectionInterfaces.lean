@@ -27,8 +27,7 @@ namespace AlgebraicGeometry
 attribute [local instance 5000] strictEtaleSystemDerived strictEtaleLevelDerived
 
 /-- The normalized open and proper faces of a quotient projection square.
-Source: Zheng, Construction 5.15 and Lemma 5.22
-(blueprint: def-pur-strict-etale-isomorphic-stage-projection-interfaces). -/
+Source: Zheng, Construction 5.15 and Lemma 5.22. -/
 structure StrictEtaleQuotientProjection
     {O : Type (u + 1)} [CommRing O] {ell : O}
     {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactification f}
@@ -48,8 +47,7 @@ structure StrictEtaleQuotientProjection
         (.mk _ _ _ _ (S.properDerived.derivedTensor h).hom))
 
 /-- Compose the open and proper quotient faces.
-Source: Zheng, Construction 5.15
-(blueprint: def-pur-strict-etale-isomorphic-stage-projection-interfaces). -/
+Source: Zheng, Construction 5.15. -/
 def StrictEtaleQuotientProjection.projection
     {O : Type (u + 1)} [CommRing O] {ell : O}
     {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactification f}

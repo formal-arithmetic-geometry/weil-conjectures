@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassC
 public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Integral.TowerIntegralClassPullback
 
 /-! # The intermediate integral-coefficient inverse image
-
-Source: blueprint classes proof (2), coefficient realization through the intermediate
-quotient tower (blueprint: def-sp-tower-chern-pullback-intermediate).
 -/
 
 @[expose] public noncomputable section
@@ -35,9 +32,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 The forgetful square is on whole abelian towers. Its unit is fixed by the integral
 generator, and its root comparison is part of a morphism of the actual Kummer
 sequences whose last component is pullback of full units. Thus a root comparison
-cannot be chosen independently of that boundary.
-Source: classes (2), realization steps 1--4
-(blueprint: def-sp-tower-chern-pullback-intermediate). -/
+cannot be chosen independently of that boundary. -/
 structure IntegralCoefficientPullback {X Y : Scheme.{u}} (f : X ⟶ Y)
     (cY : Chern l E Y) (cX : Chern l E X) where
   pull : Systems Y (Rrings l Y) ⥤ Systems X (Rrings l X)
@@ -67,18 +62,14 @@ attribute [instance] IntegralCoefficientPullback.additive
 variable {l E} {X Y : Scheme.{u}} {f : X ⟶ Y}
   {cY : Chern l E Y} {cX : Chern l E X}
 
-/-- Exact localization of the intermediate coefficient-unit map.
-Source: classes (2), single-complex comparison
-(blueprint: def-sp-tower-chern-pullback-intermediate). -/
+/-- Exact localization of the intermediate coefficient-unit map. -/
 def IntegralCoefficientPullback.derivedUnit
     (d : IntegralCoefficientPullback l E f cY cX) :
     d.pull.mapDerivedCategory.obj (unit Y (Rrings l Y)) ≅ unit X (Rrings l X) :=
   (d.pull.mapDerivedCategorySingleFunctor 0).app (coefficient Y (Rrings l Y)) ≪≫
     (DerivedCategory.singleFunctor (Systems X (Rrings l X)) 0).mapIso d.unitIso
 
-/-- Exact localization of the root map, including the specified shift comparison.
-Source: classes (2), positive-kernel root identification
-(blueprint: def-sp-tower-chern-pullback-intermediate). -/
+/-- Exact localization of the root map, including the specified shift comparison. -/
 def IntegralCoefficientPullback.derivedRoot
     (d : IntegralCoefficientPullback l E f cY cX) (n : ℤ) :
     d.pull.mapDerivedCategory.obj
@@ -90,9 +81,7 @@ def IntegralCoefficientPullback.derivedRoot
       ((d.pull.mapDerivedCategorySingleFunctor 0).app cY.rootModule ≪≫
         (DerivedCategory.singleFunctor (Systems X (Rrings l X)) 0).mapIso d.rootIso)
 
-/-- The scalar counit on the shifted root module, before integral reduction.
-Source: classes (2), scalar extension of the positive root line
-(blueprint: def-sp-tower-chern-pullback-intermediate). -/
+/-- The scalar counit on the shifted root module, before integral reduction. -/
 def scalarRootTarget {T : Scheme.{u}} (c : Chern l E T) :
     c.scalar.T.obj
         (((DerivedCategory.singleFunctor (Systems T (Rrings l T)) 0).obj

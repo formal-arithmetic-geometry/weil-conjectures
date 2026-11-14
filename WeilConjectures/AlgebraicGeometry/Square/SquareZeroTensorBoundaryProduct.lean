@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.Square.SquareZeroTensorBoundaryGradedRe
 /-! # The two-section product identity for transported tensor boundaries
 
 Source: Stacks Project, Tags 09MS and 0B8S.
-(blueprint: lem-sc-square-zero-tensor-boundary-product).
 -/
 
 @[expose] public section
@@ -32,26 +31,8 @@ noncomputable section
 boundaries. The second section is arbitrary in degree e+1, rather than a power of the
 first; no sequence of classes or exponent recurrence is asserted.
 
-Source: Stacks Project, Tag 09MS, the direct-sum exact sequence after equation
-(30.17.5.1), and Tag 0B8S, the square-zero boundary derivation calculation.
-(blueprint: lem-sc-square-zero-tensor-boundary-product).
-Proof: take the direct sums of the ideal sequences in nonnegative tensor degrees.
-Local frames of L make the middle graded algebra a polynomial algebra; the quotient
-is its restriction to Z and the kernel is square zero because I squared is zero.
-Apply the square-zero boundary derivation theorem to the degree-n section f and the
-arbitrary degree-n(e+1) section x. Include their homogeneous summands, then project
-the resulting identity onto degree n(e+2). The first kernel action is multiplication
-by f on the tensor-degree e coefficient, giving mulTensorPowSection f F e 1.
-The other action is tensoring the degree-n kernel class with x; its degree-zero
-coefficient is identified with F by the right unitor, giving rho inverse followed
-by F whiskered with x. The section comparison maps are formed from the monoidal
-pullback and tensor-power exponent isomorphisms, so they send the product to
-lambda inverse followed by f tensor x. The kernel comparisons are uniquely fixed
-by their inclusion equations. Naturality of the closed-immersion edge and of the
-cohomology boundary therefore identifies these two projected actions with the two
-displayed H maps. Finally the resolution boundary equals the canonical triangle
-boundary used in moduleSectionBoundary. This proves the identity for arbitrary x,
-without a power calculation or induction. -/
+Source: Stacks Project, Tag 09MS, the direct-sum exact sequence after equation (30.17.5.1), and Tag
+0B8S, the square-zero boundary derivation calculation. -/
 theorem transportedTensorBoundary_product
     {X Z : Scheme.{u}} (j : Z ⟶ X) [IsClosedImmersion j]
     [HasDerivedCategory.{wC} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

@@ -11,8 +11,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.BaseChangeCube
 import WeilConjectures.AlgebraicGeometry.Affine.Linear.AffineLinearExchangeCoherence
 
 /-! # Pasting a Cartesian affine prefix with a base-change square
-
-(blueprint: lem-pur-vector-integration-cartesian-prefix-base-change).
+.
 -/
 
 @[expose] public noncomputable section
@@ -40,17 +39,6 @@ private lemma inverse_paste
 
 /-- A Cartesian affine prefix after base change is the prefix for the pasted square.
 This concerns arbitrary Cartesian maps, without module frames or a trace counit.
-Source: blueprint vector-bundle purity proof, paragraph 2, pasting of the bundle and
-inverse-coordinate exchange squares.
-(blueprint: lem-pur-vector-integration-cartesian-prefix-base-change).
-
-Proof: naturality moves the coefficient comparison through the second exchange.
-Compact-support exchange pasting identifies the two exchange factors with exchange
-for the composite square and the inverse-image compositors. Inverse square pasting
-and naturality identify the successive coefficient maps; composition of normalized
-ordered Tate pullback identifies their base factors. Functoriality combines them
-under compact support, yielding the Cartesian prefix for the composite square.
-No property of a chosen frame or of a counit is used, including at rank zero.
 -/
 theorem vectorIntegrationCartesianPrefix_baseChange
     (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] [Finite A]

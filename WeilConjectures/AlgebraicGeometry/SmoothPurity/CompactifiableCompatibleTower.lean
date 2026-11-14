@@ -16,10 +16,8 @@ import WeilConjectures.Compactification.CategoryBaseChange
 /-!
 # Compatible compactification towers over arbitrary bases
 
-Source: Stacks Project, Tag 0F7J, proof of `lemma-shriek-composition`, with supplied
-compactifications over arbitrary bases as in `WeilConjectures.Compactification.Comp` and
-`WeilConjectures.Compactification.Triangle`
-(blueprint: lem-cbc-compactifiable-compatible-tower).
+Source: Stacks Project, Tag 0F7J, proof of, with supplied compactifications over arbitrary bases as
+in `WeilConjectures.Compactification.Comp` and `WeilConjectures.Compactification.Triangle`.
 -/
 
 @[expose] public section
@@ -35,18 +33,16 @@ change and any two have a common refinement. `Triangle` records the intermediate
 its unique isomorphism with the displayed fibre product; the first clause uses the literal
 fibre product via `restrict`. Its field `q` is the arrow called `b` in the node.
 
-Source: Stacks Project, Tag 0F7J, proof of `lemma-shriek-composition`, and the supplied-data
-construction in upstream `Compactification/Comp.lean` and `Triangle.lean`.
-(blueprint: lem-cbc-compactifiable-compatible-tower)
+Source: Stacks Project, Tag 0F7J, proof of, and the supplied-data construction in upstream
+`Compactification/Comp.lean` and `Triangle.lean`.
 
 Proof plan:
 1. Embed `X` in `W ×_Z Ybar` by `(a₀, f ≫ i)`. The projection to `W` is separated;
-   quasi-compact immersion cancellation (`lem-cbc-qc-immersion-cancellation`) applies.
+   quasi-compact immersion cancellation applies.
 2. Take its scheme-theoretic image, using `lemma-schematic-closure-uniqueness--1` and
    `lemma-nagata-immersion-into-proper`. The closed image inclusion and proper projections
-   make both ambient maps proper (`lem-pc-proper-base-change`,
-   `lem-weil-pbc-closed-immersion-proper`, `lem-weil-pbc-proper-composition`).
-3. Restrict over `Y`. Fibre-product uniqueness (`def-pc-fibre-product`) and monicity of `i`
+   make both ambient maps proper.
+3. Restrict over `Y`. Fibre-product uniqueness and monicity of `i`
    identify the induced open map as a base change of `a`; openness and quasi-compactness
    follow from `lem-weil-pbc-open-immersion-base-change` and `lem-pc-quasi-compact-base-change`.
 4. Pull back the diagram over any `Z'`. The same properties and equations survive;

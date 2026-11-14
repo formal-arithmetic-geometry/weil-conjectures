@@ -10,9 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Kummer.KummerStrictAdjunctData
 import WeilConjectures.AlgebraicGeometry.Strict.StrictKummerCohomologyConcentration
 import WeilConjectures.AlgebraicGeometry.Strict.StrictKummerPureKernelNormalization
 
-/-! # Strict Kummer target and normalization of its evaluated units
-Source: diagonal tower system proof, step (3), target paragraph, and step (4).
-(blueprint: lem-sfb-strict-kummer-unit-normalization). -/
+/-! # Strict Kummer target and normalization of its evaluated units -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -31,9 +29,7 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext DerivedCategory.singleF
 
 /-- Normalized target data, with its coefficient classes kept as parameters.
 This is the existential roots comparison and its unit equation, packaged to avoid
-unfolding coefficient constructions while checking a concrete specialization.
-Source: diagonal tower proof, steps (3) and (4)
-(blueprint: lem-sfb-strict-kummer-unit-normalization). -/
+unfolding coefficient constructions while checking a concrete specialization. -/
 @[irreducible] def KummerUnitNormalizedTarget
     {A B : Type*} [Category A] [abA : Abelian A] [hA : HasExt.{w} A]
     [Category B] [abB : Abelian B]
@@ -103,31 +99,7 @@ private theorem kummer_target_of_concentration
   exact ⟨H, roots, b, t, ht, he⟩
 
 /-- The strict Kummer comparison is normalized on the unit of shifted units.
-There is no arbitrary source, extension class, or residue lift in this statement.
-
-Source: diagonal tower system proof, step (3), target paragraph, and the
-Kummer-unit computation in step (4)
-(blueprint: lem-sfb-strict-kummer-unit-normalization).
-
-Proof: compute simultaneous reduction of comparison units on a common K-flat
-resolution, comparing evaluation with the two-term resolution of each positive
-prime-power coefficient. Kummer exactness and exact site comparison identify
-its sole cohomology with roots in degree -1. The transition of resolutions is
-multiplication by ell in degree -1 and identity in degree 0, hence induces the
-actual power-ell transition on roots. Good truncation in the strict p-adic
-system category gives H and its underlying roots isomorphism; its quotient
-scalar action and the roots-to-line comparison give t and the displayed
-underlying-map equation. Shift the comparison once and choose its negative
-normalization to give b. For the unit equation, use the complexes field of the
-given evaluated unit on the common K-flat resolution. The positive kernel
-inclusion identifies the unshifted coefficient quotient unit with the positive
-Kummer connecting morphism. Shifting once introduces the inverse
-shiftFunctorAdd comparison; negating b gives the negative of the shifted
-positive class. The exact units comparison precedes that class. This is an
-equation only on the unit at shifted comparison units; arbitrary-arrow
-compatibility follows separately by naturality. All comparisons take place
-before forgetting strict transitions. Empty schemes, ell=2, and n=0 use the
-same constructions (n+1 is always positive). -/
+There is no arbitrary source, extension class, or residue lift in this statement. -/
 theorem strict_kummer_unit_normalization (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     (hW : IsUnit (ℓ : Γ(W, ⊤)))
     [HasDerivedCategory.{u + 1} (DiagonalAb W)]

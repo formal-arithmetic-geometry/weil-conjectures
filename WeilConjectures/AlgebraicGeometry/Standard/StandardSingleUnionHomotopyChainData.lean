@@ -53,29 +53,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option maxHeartbeats 800000 in
 -- Transporting the relative comparison requires additional elaboration heartbeats.
 /-- The resolved cover comparison before cylinder rectification.
-Source: Stacks Project, Tags 08BV, 08HZ, 08FE, 08HY and 0DJ9.
-(blueprint: lem-pc-standard-single-union-homotopy-chain-data).
-
-Proof: Put W = U union V and pull its cover back to W_A. Resolve N[0] and
-its ordinary pullback by functorial injective-term K-injective complexes. The
-restriction-pair and restriction-difference rows are exact: sheaf gluing gives
-the kernel, and injectivity gives the surjection onto the overlap. Apply the
-relative direct-image computation to these rows. Resolve the source diagram
-K-flatly before applying derived pullback, keeping the restriction maps and
-the homotopies of the finite diagram. The derived-to-ordinary pullback counit,
-transposed under the pullback/direct-image adjunction, induces the comparison
-of the two resolved diagrams. Naturality of the restriction units and the
-underived open counit square supply a specified homotopy H of its first square.
-The induced cone map is mapOfHomotopy H: the homotopy term must be retained,
-rather than choosing an arbitrary third map between distinguished triangles.
-Identify the six objects using the short exact rows, direct-image composition,
-exact open restriction and the additive biproduct comparison. Expand the
-single-module comparison as the base-change mate followed by the single
-pullback counit. Pasting counits and the adjunction triangle identities gives
-the three displayed equations, including the equation for mapOfHomotopy H.
-No cylinder rectification is done here. Empty opens and zero coefficients
-produce zero rows; repeated or contained opens produce split rows. These
-constructions therefore require neither flatness nor quasi-coherence. -/
+Source: Stacks Project, Tags 08BV, 08HZ, 08FE, 08HY and 0DJ9. -/
 theorem standardSingle_union_homotopy_chain_data
     {Y B A : Scheme.{u}} (p : Y ⟶ B) (g : A ⟶ B) (U V : Y.Opens)
     (N : (U ⊔ V).toScheme.Modules) :

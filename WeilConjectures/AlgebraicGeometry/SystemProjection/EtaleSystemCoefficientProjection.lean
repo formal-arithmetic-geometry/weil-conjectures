@@ -77,9 +77,8 @@ import WeilConjectures.AlgebraicGeometry.SystemProjection.EtaleSingleCoefficient
 
 /-! # Constant coefficients and ordinary étale system compact support
 
-Source: Zheng, Theorem 2.18(2), Construction 2.26, Constructions 5.14--5.15,
-Lemma 5.16; Stacks Project, Tag 0GL6
-(blueprint: lem-pur-etale-system-coefficient-projection).
+Source: Zheng, Theorem 2.18(2), Construction 2.26, Constructions 5.14--5.15, Lemma 5.16; Stacks
+Project, Tag 0GL6.
 -/
 
 @[expose] public noncomputable section

@@ -22,8 +22,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 
 /-- Forget an integral arrow and use the canonical integer and root endpoints.
-Source: blueprint latest, `sk-prop-sp-tower-geometric-classes.proof.md`, clause (2).
-(blueprint: def-sfb-tower-underlying-arrow).
 This is the actual composite of the integer generator, exact forgetting and
 rootForget. Its explicit endpoints share the abelian-tower category witnesses. -/
 def underlyingChernArrow (l : ℕ) [Fact l.Prime]

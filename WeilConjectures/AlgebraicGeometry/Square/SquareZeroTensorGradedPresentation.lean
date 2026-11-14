@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.Tensor.TensorGradedKernelSquareZero
 /-! # Algebraic graded presentation of the tensor ideal sequences
 
 Source: Stacks Project, Tag 09MS, coherent-equation-ses and its direct sum over degrees.
-(blueprint: lem-sc-square-zero-tensor-graded-presentation).
 -/
 
 @[expose] public section
@@ -35,8 +34,7 @@ noncomputable section
 /-- A graded algebra presentation, before taking cohomology. All its data are supplied
 explicitly; this structure does not select an object from an existence theorem.
 The kernel cofan expresses its graded direct sum, and the degree maps are projections.
-Source: Stacks Project, Tag 09MS, the direct-sum ideal sequence.
-(blueprint: lem-sc-square-zero-tensor-graded-presentation). -/
+Source: Stacks Project, Tag 09MS, the direct-sum ideal sequence. -/
 structure TensorGradedPresentation {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) where
   B : X.CommAlgebraSheaf
@@ -78,8 +76,7 @@ structure TensorGradedPresentation {X Z : Scheme.{u}} (j : Z ⟶ X)
 
 /-- The algebraic and exact data underlying the graded presentation, before the
 multiplication compatibility is imposed.
-Source: Stacks Project, Tag 09MS, the direct-sum ideal sequence.
-(blueprint: lem-sc-square-zero-tensor-graded-presentation-core). -/
+Source: Stacks Project, Tag 09MS, the direct-sum ideal sequence. -/
 structure TensorGradedPresentationCore {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) where
   B : X.CommAlgebraSheaf

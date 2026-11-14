@@ -12,7 +12,7 @@ import WeilConjectures.AlgebraicGeometry.SpTowerShriek.SmoothPurityStrictOpenTen
 
 /-! # Constant-section coordinates for strict quotient towers
 
-Source: Zheng Construction 4.1 and Lemma 4.10; blueprint tower operations proof (2).
+Source: Zheng Construction 4.1 and Lemma 4.10.
 -/
 
 @[expose] public noncomputable section

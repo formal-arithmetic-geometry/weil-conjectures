@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassCoefficients
 
 /-! # Chern for canonical tower classes
-
-Source: blueprint main-20261015, chap-Smooth-purity,
-`sk-prop-sp-tower-geometric-classes` (blueprint: def-sp-tower-class-chern).
 -/
 
 @[expose] public noncomputable section
@@ -35,8 +32,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The first-Chern construction at one scheme: the target of integral reduction is
 fixed by the Kummer boundary, scalar extension uses the actual ring-object map, and
-finite evaluations are concrete finite Kummer arrows.
-Source: classes (1)--(2), proof steps 1--8 (blueprint: def-sp-tower-class-chern). -/
+finite evaluations are concrete finite Kummer arrows. -/
 structure ChernData (T : Scheme.{u})
     (R A : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1})
     (φ : SemilinearSections.systemRing.{u + 1, u, u + 1} (Scheme.ProEt.topology T)
@@ -56,15 +52,13 @@ structure ChernData (T : Scheme.{u})
   /-- The unit comparison is fixed by the scalar adjunction, sending one to one. -/
   scalarUnit : scalar.T.obj (unit T R) ≅ unit T A
 
-/-- Specialize the normalized Chern data to the actual quotient coefficient towers.
-Source: classes (2) (blueprint: def-sp-tower-class-chern). -/
+/-- Specialize the normalized Chern data to the actual quotient coefficient towers. -/
 abbrev Chern (T : Scheme.{u}) :=
   ChernData l T (Rrings l T) (Arings l E T) (coefficientSystemMap l E T)
 
 /-- Normalization of the integral quotient, positive Kummer boundary and unital scalar
 extension. These are concrete equalities of derived arrows, separated from the data
-record so that elaboration shares the already constructed categories.
-Source: classes (2), proof steps 3--8 (blueprint: def-sp-tower-class-chern). -/
+record so that elaboration shares the already constructed categories. -/
 def ChernData.Normalized (T : Scheme.{u})
     (R A : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1})
     (φ : SemilinearSections.systemRing.{u + 1, u, u + 1} (Scheme.ProEt.topology T)
@@ -82,38 +76,32 @@ def ChernData.Normalized (T : Scheme.{u})
   unitNormalization c.scalar.T (SemilinearSections.res.{u + 1, u, u + 1} φ)
     c.scalar.adjunction c.scalarUnit q
 
-/-- Specialization of the three normalization equations to the actual ring quotient.
-Source: classes (2), proof steps 3--8 (blueprint: def-sp-tower-class-chern). -/
+/-- Specialization of the three normalization equations to the actual ring quotient. -/
 abbrev Chern.Normalized {T : Scheme.{u}} (c : Chern l E T) : Prop :=
   ChernData.Normalized l T (Rrings l T) (Arings l E T)
     (coefficientSystemMap l E T) c (scalarGenerator l E T)
 
 /-- Integral coefficient-linear first Chern class, computed by simultaneous reduction
-of the actual constant-tower line-bundle morphism.
-Source: classes (2), proof steps 2--8 (blueprint: def-sp-tower-class-chern). -/
+of the actual constant-tower line-bundle morphism. -/
 def firstChernR {T : Scheme.{u}} (c : Chern l E T) (L : T.Pic) :
     unit T (Rrings l T) ⟶
       ((DerivedCategory.singleFunctor (Systems T (Rrings l T)) 0).obj c.rootModule)⟦(2 : ℤ)⟧ :=
   c.unitIso.inv ≫ c.reduction.derived.map (lineBundleClass T L) ≫ c.rootIso.hom
 
-/-- Canonical shift structure of the existing scalar model.
-Source: classes (2), derived extension (blueprint: def-sp-tower-class-chern). -/
+/-- Canonical shift structure of the existing scalar model. -/
 instance scalarShift {T : Scheme.{u}} (c : Chern l E T) : c.scalar.T.CommShift ℤ :=
   SheafOfModules.sheafScalarModelCommShift (coefficientSystemMap l E T) c.scalar.model
 
-/-- Ordinary scalar extension of the actual root module, with all tower restrictions.
-Source: classes (2), coefficient extension (blueprint: def-sp-tower-class-chern). -/
+/-- Ordinary scalar extension of the actual root module, with all tower restrictions. -/
 def lineModule {T : Scheme.{u}} (c : Chern l E T) : Systems T (Arings l E T) :=
   c.scalar.model.E.obj c.rootModule
 
-/-- The Tate line placed in degree zero.
-Source: classes (2) (blueprint: def-sp-tower-class-chern). -/
+/-- The Tate line placed in degree zero. -/
 def line {T : Scheme.{u}} (c : Chern l E T) : D T (Arings l E T) :=
   (DerivedCategory.singleFunctor (Systems T (Arings l E T)) 0).obj (lineModule l E c)
 
 /-- The canonical derived-to-ordinary scalar-extension comparison on the root module.
-It is the universal derived counit with the standard single-complex comparisons.
-Source: classes (2), K-flat target identification (blueprint: def-sp-tower-class-chern). -/
+It is the universal derived counit with the standard single-complex comparisons. -/
 def lineComparison {T : Scheme.{u}} (c : Chern l E T) :
     c.scalar.T.obj ((DerivedCategory.singleFunctor (Systems T (Rrings l T)) 0).obj
       c.rootModule) ⟶ line l E c :=
@@ -129,24 +117,20 @@ def lineComparison {T : Scheme.{u}} (c : Chern l E T) :
       (lineModule l E c)
 
 /-- The inverse line is the internal sheaf Hom into the actual coefficient unit
-on the same ringed sequence site, not an unspecified inverse object.
-Source: classes preamble, definition-tate-twists negative powers
-(blueprint: def-sp-tower-class-chern). -/
+on the same ringed sequence site, not an unspecified inverse object. -/
 def inverseLineModule {T : Scheme.{u}} (c : Chern l E T) : Systems T (Arings l E T) :=
   SheafOfModules.homObj (R := SemilinearSections.systemRing.{u + 1, u, u + 1}
     (Scheme.ProEt.topology T) (SpTowerShriek.B l E T) (SpTowerShriek.tau l E T))
     (lineModule l E c) (coefficient T (Arings l E T))
 
-/-- The inverse Tate line in degree zero.
-Source: classes (4) (blueprint: def-sp-tower-class-chern). -/
+/-- The inverse Tate line in degree zero. -/
 def inverseLine {T : Scheme.{u}} (c : Chern l E T) : D T (Arings l E T) :=
   (DerivedCategory.singleFunctor (Systems T (Arings l E T)) 0).obj
     (inverseLineModule l E c)
 
 /-- The coefficient-linear first Chern morphism is the actual scalar extension
 of the integral reduction of the line-bundle class, followed by the universal
-K-flat target comparison. No free first-Chern arrow is part of the data.
-Source: classes (2), proof steps 2--8 (blueprint: def-sp-tower-class-chern). -/
+K-flat target comparison. No free first-Chern arrow is part of the data. -/
 def firstChern {T : Scheme.{u}} (c : Chern l E T) (L : T.Pic) :
     unit T (Arings l E T) ⟶ (line l E c)⟦(2 : ℤ)⟧ :=
   c.scalarUnit.inv ≫ c.scalar.T.map (firstChernR l E c L) ≫

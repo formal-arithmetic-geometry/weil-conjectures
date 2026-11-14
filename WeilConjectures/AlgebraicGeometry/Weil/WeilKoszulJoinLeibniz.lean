@@ -10,7 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.Weil.WeilKoszulJoinGraded
 /-! # The contraction formula on a head-tail tensor summand
 
 Source: Stacks Project, More on Algebra, Tags 0622 and 0664.
-(blueprint: lem-weil-pbc-koszul-join-summand-leibniz).
 -/
 
 @[expose] public section
@@ -301,7 +300,6 @@ private theorem koszul_sign_smul (r : ℕ) (p q : ℤ) (n : ℕ) (hp : -(n : ℤ
 /-- The nonpositive-degree part of the local Leibniz equation.
 
 Source: Stacks Project, Tags 0622 and 0664.
-(blueprint: lem-weil-pbc-koszul-join-summand-leibniz-nonpositive).
 
 The proof identifies the extended terms with exterior powers and applies the
 graded contraction Leibniz rule; the main theorem handles the zero extensions
@@ -366,9 +364,7 @@ theorem koszulJoinSummand_leibniz_nonpositive
 
 /-- The local Leibniz equation before assembling the total tensor differential.
 
-Source: Stacks Project, Tag 0622, definition-koszul, and Tag 0664,
-lemma-join-sequences-koszul-complex.
-(blueprint: lem-weil-pbc-koszul-join-summand-leibniz).
+Source: Stacks Project, Tag 0622, and Tag 0664.
 -/
 theorem koszulJoinSummand_leibniz
     {A : Type (u + 1)} [CommRing A] (r : ℕ) (a : Fin (r + 1) → A)

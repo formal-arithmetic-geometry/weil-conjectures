@@ -32,10 +32,6 @@ import all WeilConjectures.AlgebraicGeometry.Tate.TateTwistFiniteLocallyFree
 
 /-! # Integral and rational Tate twists: definitions and local calculations
 
-Source: `literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/
-sk-def-sp-tate-twist-locally-free.md`, clause (3), integral and rational cases
-(blueprint: definition-tate-twists).
-
 The integral, rational and algebraically closed twist functors and signed-line predicates,
 with the integral and rational local calculations used by `tateTwist_locallyFree`
 (`WeilConjectures.AlgebraicGeometry.Tate.TateTwistLocallyFree`). The finite clauses are in
@@ -64,9 +60,7 @@ attribute [-instance] CategoryTheory.flatConstantModulesAbelian
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The canonical bounded integral twist uses the recorded intrinsic coefficient line.
-Source: blueprint clause (3), integral case
-(blueprint: definition-tate-twists). -/
+/-- The canonical bounded integral twist uses the recorded intrinsic coefficient line. -/
 def tateIntegralTwist (D : FiniteFieldDatum.{d}) (ℓ : ℕ) [Fact ℓ.Prime]
     (hD : ℓ ≠ D.p) (E : Type u) [Field E] [Algebra (Padic ℓ) E]
     [FiniteDimensional (Padic ℓ) E] (X : Scheme.{u})
@@ -74,9 +68,7 @@ def tateIntegralTwist (D : FiniteFieldDatum.{d}) (ℓ : ℕ) [Fact ℓ.Prime]
   tateTensorRight (constructibleIntegralTensor ℓ E X)
     (intrinsicIntegralCoefficientTwist D ℓ hD E X m)
 
-/-- The rational twist tensors with the localization of the same integral representative.
-Source: blueprint clause (3), rational case
-(blueprint: definition-tate-twists). -/
+/-- The rational twist tensors with the localization of the same integral representative. -/
 def tateRationalTwist (D : FiniteFieldDatum.{d}) (ℓ : ℕ) [Fact ℓ.Prime]
     (hD : ℓ ≠ D.p) (E : Type u) [Field E] [Algebra (Padic ℓ) E]
     [FiniteDimensional (Padic ℓ) E] (X : Scheme.{u})
@@ -85,9 +77,7 @@ def tateRationalTwist (D : FiniteFieldDatum.{d}) (ℓ : ℕ) [Fact ℓ.Prime]
     ((sfRationalConstructibleLocalization ℓ E X).obj
       (intrinsicIntegralCoefficientTwist D ℓ hD E X m))
 
-/-- Transport invertibility along the actual residue-field homomorphism.
-Source: the cover in blueprint clause (3)
-(blueprint: definition-tate-twists). -/
+/-- Transport invertibility along the actual residue-field homomorphism. -/
 @[instance_reducible] def tatePullbackInvertible (ℓ : ℕ) {Y X : Scheme.{u}} (f : Y ⟶ X)
     [∀ x : X, Invertible (ℓ : X.residueField x)] :
     ∀ y : Y, Invertible (ℓ : Y.residueField y) :=
@@ -97,9 +87,7 @@ Source: the cover in blueprint clause (3)
 /-- The rational signed lines, interpreted in the recorded rational category:
 every signed degree-zero line restricts to the coefficient unit on this cover,
 and the positive/negative tensor product is the coefficient unit globally.
-The integral representative of the coefficient unit is the published zero twist.
-Source: blueprint clause (3), rational interpretation via definition-tate-twists
-(blueprint: definition-tate-twists). -/
+The integral representative of the coefficient unit is the published zero twist. -/
 def TateRationalSignedLine (D : FiniteFieldDatum.{d}) (ℓ : ℕ) [Fact ℓ.Prime]
     (hD : ℓ ≠ D.p) (E : Type u) [Field E] [Algebra (Padic ℓ) E]
     [FiniteDimensional (Padic ℓ) E] (X : Scheme.{u})
@@ -122,9 +110,7 @@ def TateRationalSignedLine (D : FiniteFieldDatum.{d}) (ℓ : ℕ) [Fact ℓ.Prim
 
 /-- The same signed local-line and tensor-inverse clauses in the recorded literal
 common-stage category. Both restriction and tensor are the canonical published functors;
-the coefficient unit is the least-stage zero twist, not an arbitrarily chosen object.
-Source: blueprint clause (3), Qbar interpretation via definition-tate-twists
-(blueprint: definition-tate-twists). -/
+the coefficient unit is the least-stage zero twist, not an arbitrarily chosen object. -/
 def TateQbarSignedLine (D : FiniteFieldDatum.{d}) (ℓ : ℕ) [Fact ℓ.Prime]
     (hD : ℓ ≠ D.p) (X : Scheme.{u})
     [∀ x : X, Invertible (ℓ : X.residueField x)]

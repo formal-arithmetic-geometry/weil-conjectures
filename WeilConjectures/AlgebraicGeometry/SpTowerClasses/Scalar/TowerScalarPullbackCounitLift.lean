@@ -15,9 +15,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryAdjuncti
 import WeilConjectures.Mathlib.CategoryTheory.Shift.Adjunction
 
 /-! # Derived lifting of ordinary scalar association on whole systems
-
-Source: blueprint classes proof (2), scalar comparison on K-flat representatives.
-(blueprint: lem-sp-tower-scalar-pullback-counit-lift).
 -/
 
 @[expose] public noncomputable section
@@ -180,25 +177,7 @@ private theorem counit_square_single
 Only preservation of the flat K-flat resolving class is needed. Neither coefficient
 nor root endpoint normalizations are asserted here.
 
-Source: blueprint latest, classes proof (2), realization step 5; Stacks 06YY,
-07A4 and 0G7E (blueprint: lem-sp-tower-scalar-pullback-counit-lift).
-
-Proof: resolve each entire R-system complex by a flat-term K-flat complex P.
-The source scalar counit at P and the target scalar counit at pull(P) are
-invertible by the hypotheses. Conjugate the termwise ordinary comparison lambda
-by these counits and the exact pullback/localization factors. Naturality on the
-resolving category and full faithfulness of its localization descend the maps
-to kappa on the unbounded derived category. The same formula for the inverse
-shows that this comparison is invertible, though only its forward map is needed.
-The canonical signed shift comparisons commute with termwise lambda and with
-the scalar counits, so their equality on resolving representatives gives
-CommShift. The counit square commutes on every complex, not only on resolving
-ones: choose a resolving augmentation to that complex, use counit naturality
-on both sides, and cancel its inverted image under the two derived composites.
-Apply this square to a degree-zero single and compose with the standard single
-comparisons. Naturality of the exact pullback factors and the ordinary single
-comparison gives precisely the displayed equation. This argument is on whole
-systems and does not use faithfulness of derived level evaluation. -/
+Source: Stacks 06YY, 07A4 and 0G7E. -/
 theorem tower_scalarPullback_counitLift
     {X Y : Scheme.{u}} {f : X ⟶ Y}
     {b : SpTowerShriek.Base l E} (g : SpTowerShriek.Geometry l E b f)

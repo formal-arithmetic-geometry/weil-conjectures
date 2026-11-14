@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.Curve.InvertibleSymmetricAlgebraCoprodu
 /-! # The algebra coproduct of tensor powers of a line bundle
 
 Source: Stacks Project, Tag 09MS, the direct sum in coherent-equation-ses.
-(blueprint: lem-sc-tensor-power-algebra-coproduct).
 -/
 
 @[expose] public section
@@ -32,20 +31,7 @@ noncomputable section
 /-- Tensor powers of a line bundle have a commutative algebra coproduct, with the
 usual multiplication of homogeneous sections.
 
-Source: Stacks Project, Tag 09MS, the direct sum in coherent-equation-ses.
-(blueprint: lem-sc-tensor-power-algebra-coproduct).
-Proof: Choose local frames for L. On a frame open use the polynomial algebra over
-its structure sheaf, with degree-d inclusion sending a coefficient to its monomial
-of degree d. If frames differ by a unit v, send the polynomial variable to v times
-the variable. These maps are invertible, preserve the structure map, and satisfy
-cocycle identities. Glue the algebra sheaves and their homogeneous inclusions.
-On each frame the underlying module sheaf is the sheafification of the presheaf
-of finite sums of homogeneous terms. Its maps into any module sheaf correspond
-uniquely to families of maps from the powers of L. This is the coproduct universal
-property; the local universal maps agree on overlaps and hence glue. Multiplication
-of monomials gives the displayed identity on frames. The transitions respect it,
-and sheaf separation proves it on every open, also for degree zero and the empty
-open. This assertion constructs only the algebra on X, with no quotient data. -/
+Source: Stacks Project, Tag 09MS, the direct sum in coherent-equation-ses. -/
 theorem exists_tensorPowerAlgebraCoproduct {X : Scheme.{u}}
     (L : X.Modules) [L.IsInvertible] :
     ∃ (B : X.CommAlgebraSheaf)

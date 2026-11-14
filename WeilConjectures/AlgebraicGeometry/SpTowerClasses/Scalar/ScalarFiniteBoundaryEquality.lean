@@ -23,9 +23,6 @@ open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 open WeilConjectures
 namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 /-! Endpoint-witness reduction for the finite-boundary calculation.
-
-Source: blueprint latest, `sk-prop-sp-tower-geometric-classes.proof.md`,
-clause (2), endpoint transport and evaluation calculation.
-(blueprint: lem-sfb-scalar-finite-boundary-composition-endpoints). -/
+ -/
 end AlgebraicGeometry.ProEtale.SpTowerClasses
 attribute [instance high] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall

@@ -12,9 +12,7 @@ set_option autoImplicit false
 open CategoryTheory
 namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 
-/-- Naturality of a shift-compatible adjunction gives the normalized transpose.
-Source: adjunction unit naturality and its commutation with shifts.
-(blueprint: lem-sfb-normalized-scalar-arrow). -/
+/-- Naturality of a shift-compatible adjunction gives the normalized transpose. -/
 theorem normalizedScalarArrow_transpose
     {A B : Type*} [Category A] [Category B] [HasShift A ℤ] [HasShift B ℤ]
     (L : A ⥤ B) (R : B ⥤ A) [L.CommShift ℤ] [R.CommShift ℤ]

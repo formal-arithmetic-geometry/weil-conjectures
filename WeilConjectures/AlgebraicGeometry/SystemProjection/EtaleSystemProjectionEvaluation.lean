@@ -25,22 +25,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale.SystemProjection
 
 /-- Evaluation of the system coefficient mate is the published proper/open map.
-Source: Zheng Lemma 5.16; Stacks Tag 0GL6
-(blueprint: lem-pur-etale-system-projection-evaluation).
-
-Proof: First take the scalar-adjunction transpose of the system projection. Its word
-is compact support applied to the scalar unit followed by inverse scalar restriction.
-Evaluate the word using the ordinary sectionwise identity comparisons in Theory.
-Their inverse-image mates and their exact localizations preserve the normalized
-units and counits, by the mate identities. The proper comparison is consequently
-the mate defining scalarRestrictionDirectImageMap. Transpose once more by the
-geometric adjunction; its counit word is scalarMate. For the open factor, exact
-localization of the ordinary open mate is the canonical scalar/open balancing map.
-Its transpose is the open unit followed by scalar unit insertion, hence it is
-ExceptionalCoefficients.openIso. Naturality pastes these two words. Cancel the
-support and scalar evaluation isomorphisms to obtain the displayed equation in
-the target coefficient category. This compares the actual words before evaluation,
-and makes no claim that evaluation is faithful on derived morphisms. -/
+Source: Zheng Lemma 5.16; Stacks Tag 0GL6. -/
 theorem etaleSystemProjection_evaluation
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) (l : ℕ) (t : Theory c l) :
     (∀ (B C : Coefficients.{u} l) (a : B.rings ⟶ C.rings) (n : ℕ)

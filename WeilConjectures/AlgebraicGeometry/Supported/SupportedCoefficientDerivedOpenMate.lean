@@ -14,8 +14,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDer
 /-!
 # Normalization of the derived supported coefficient restriction mate
 
-Source: Stacks Project, Tags 09XP and 0F1E, the coefficient calculation in
-lem-pur-supported-product-localization, step 11.
+Source: Stacks Project, Tags 09XP and 0F1E, the coefficient calculation in, step 11.
 -/
 
 @[expose] public section
@@ -26,8 +25,7 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory Opposite
 namespace AlgebraicGeometry.Etale
 
 /-- The supported coefficient comparison adjoint to canonical open restriction.
-Source: Stacks Tag 09XP
-(blueprint: lem-pur-supported-coefficient-derived-open-mate). -/
+Source: Stacks Tag 09XP. -/
 noncomputable def supportCoefficientOpenMate (A : Type (u + 1)) [CommRing A]
     {T S B D : Scheme.{u}} (h : S ⟶ T) [IsOpenImmersion h]
     (b : B ⟶ T) (d : D ⟶ S) [IsClosedImmersion b] [IsClosedImmersion d]

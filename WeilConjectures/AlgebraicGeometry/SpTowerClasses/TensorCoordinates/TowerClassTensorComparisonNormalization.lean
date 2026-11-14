@@ -13,7 +13,7 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.TensorCoordinates.TowerC
 
 /-! # Adjunction normalization of the constructed ordinary tensor comparison
 
-Source: Stacks 03EL; Zheng Construction 4.1; blueprint tower-operations proof (2).
+Source: Stacks 03EL; Zheng Construction 4.1.
 -/
 
 @[expose] public noncomputable section
@@ -48,27 +48,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The constructed comparison has the ordinary finite adjunction's pure-tensor formula.
 
-Source: Stacks 03EL, Zheng Construction 4.1, and blueprint
-`sk-lem-sp-tower-bound-operations.proof.md`, clause (2).
-(blueprint: lem-sfb-tower-class-tensor-comparison-normalization).
-
-Proof: remove the specified coefficient and functor coordinate equalities. At level n,
-use T.evaluation to replace the evaluation of T.system by its finite tensor comparison,
-conjugated by the ordinary pull evaluation and the ordinary tensor evaluations. The
-siteTensorIso maps the site sheafification-unit pairing to tensorSection. Apply
-T.level_pure to the product of the two underlying module sheaves and its two projections;
-the third generalized section is their sheafified pure pairing. Evaluate at the image of
-(x,y) under the topos unit. Naturality of that unit says that its images under the two
-projections are the unit images of x and y, and its image under the pairing is the unit
-image of their pure tensor. The level_unit_underlying equation identifies these images
-with the module adjunction unit after moduleUnderlying. The identity-on-sections
-hypothesis hpush removes levelPushUnderlying. Transposing T.evaluation therefore sends
-the source pure tensor to the tensor of the two finite unit sections, transported by
-the inverses of ordinaryPullEvaluation. Finally geometry_unit_evaluation identifies
-each of these sections with sectionAdjoint of the system identity. Transport through
-the inverse target siteTensorIso to recover tensorPure. This proof uses only one
-coefficient index, no transition equation or system assembly. It also covers zero
-modules and empty charts, since the pairings and units are defined there. -/
+Source: Stacks 03EL, Zheng Construction 4.1, and clause (2). -/
 theorem comparison_normalization {b : SpTowerShriek.Base l E}
     {X Y : Scheme.{u}} {f : X ⟶ Y} (g : SpTowerShriek.Geometry l E b f)
     (T : SemilinearSections.GeometryOrdinaryTensor

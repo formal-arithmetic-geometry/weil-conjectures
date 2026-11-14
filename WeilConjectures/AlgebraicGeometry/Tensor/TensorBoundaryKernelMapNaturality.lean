@@ -11,7 +11,6 @@ import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
 /-! # Transport of maps between square-zero tensor kernels
 
 Source: Stacks Project, Tags 09MS, 01XC and 01F8.
-(blueprint: lem-sc-tensor-boundary-kernel-map-naturality).
 -/
 
 @[expose] public section
@@ -28,7 +27,6 @@ noncomputable section
 
 /-- Identify the degree kernel with the pushforward of its coefficient module.
 Source: Stacks Project, Tags 09MS and 08KS.
-(blueprint: lem-sc-tensor-boundary-kernel-map-naturality).
 The ideal-kernel isomorphism is characterized by its inclusion equation. The unit is
 invertible by square-zero annihilation. All maps here are explicit composites. -/
 def tensorBoundaryKernelPushforwardIso {X Z : Scheme.{u}} (j : Z ⟶ X)
@@ -45,8 +43,7 @@ def tensorBoundaryKernelPushforwardIso {X Z : Scheme.{u}} (j : Z ⟶ X)
     (pushforward j).mapIso (boundaryCoefficientDegreeIso j L n e)
 
 /-- Transport an arbitrary coefficient morphism back to the degree kernels.
-Source: Stacks Project, Tags 09MS and 08KS.
-(blueprint: lem-sc-tensor-boundary-kernel-map-naturality). -/
+Source: Stacks Project, Tags 09MS and 08KS. -/
 def tensorBoundaryKernelMap {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)
     (n a b : ℕ)
@@ -117,16 +114,8 @@ private theorem comparison_inv_eq {X Z : Scheme.{u}} (j : Z ⟶ X)
 attribute [local irreducible] boundaryCoefficientCohomologyIso
 
 /-- The canonical coefficient comparisons intertwine every transported kernel map.
-Source: Stacks Project, Tag 01XC (affine comparison), Tag 01F8 (functoriality),
-and Tag 09MS (ideal and tensor-degree identifications).
-(blueprint: lem-sc-tensor-boundary-kernel-map-naturality).
-Proof: Write the inverse coefficient comparison as H of the kernel-to-pushforward
-isomorphism followed by the edge map. This follows by expanding the canonical
-comparison, functoriality of H, and naturality of the edge map for the tensor-degree
-isomorphism. Apply edge naturality to v. Expand the transported map and cancel the
-kernel-to-pushforward isomorphism of the target. Evaluating this commuting square
-on w gives the assertion. No graded algebra, quotient action, or homogeneous section
-is involved; a and b are arbitrary, including zero. -/
+Source: Stacks Project, Tag 01XC (affine comparison), Tag 01F8 (functoriality), and Tag 09MS (ideal
+and tensor-degree identifications). -/
 theorem tensorBoundaryKernelMap_naturality {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)
     (n a b : ℕ)

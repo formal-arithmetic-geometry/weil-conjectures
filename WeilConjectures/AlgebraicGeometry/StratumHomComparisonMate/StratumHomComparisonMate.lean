@@ -14,8 +14,7 @@ set_option linter.privateModule false
 
 /-! # Construction of the normalized stratum Hom isomorphisms
 
-Source: Weil blueprint, latest, finite-duality site-comparison proof, second paragraph
-(blueprint: lem-sf-stratum-hom-comparison-mate).
+Source: Weil latest, finite-duality site-comparison proof, second paragraph.
 
 The normalized isomorphisms are constructed by parametrized adjunction. The comparison
 of their evaluation pairings is a separate statement; invertibility follows here by

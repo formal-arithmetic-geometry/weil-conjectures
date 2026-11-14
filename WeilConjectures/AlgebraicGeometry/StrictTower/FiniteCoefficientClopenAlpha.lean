@@ -19,8 +19,7 @@ import all WeilConjectures.AlgebraicGeometry.StrictTower.StrictTowerOrdinaryProp
 
 /-! # The coefficient comparison for the clopen alpha
 
-Source: Stacks Project, Tags 03DA, 099R, 09AF and 07A7; the first two steps of
-lem-cbc-single-level-finite-proper-open-transport.
+Source: Stacks Project, Tags 03DA, 099R, 09AF and 07A7.
 -/
 
 @[expose] public noncomputable section
@@ -38,15 +37,13 @@ variable (B Λ : Type (u + 1)) [CommRing B] [CommRing Λ] [Finite Λ]
   [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ)
 
 /-- The ordinary inverse pullback comparison, with its specified inverse.
-Source: Stacks Tags 03DA and 099R
-(blueprint: lem-cbc-finite-coefficient-clopen-alpha). -/
+Source: Stacks Tags 03DA and 099R. -/
 def hPullbackIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     H B Y Λ φ ⋙ modulePullback B f ≅
       Etale.upperStar (ModuleCat.{u + 1} Λ) f ⋙ H B X Λ φ :=
   @asIso _ _ _ _ (hPullbackInv B f Λ φ) (hPullbackInv_isIso B f Λ φ)
 
-/-- Exact descent of the inverse pullback comparison. Source: Stacks Tags 03DA and 07A7
-(blueprint: lem-cbc-finite-coefficient-clopen-alpha). -/
+/-- Exact descent of the inverse pullback comparison. Source: Stacks Tags 03DA and 07A7. -/
 def hPullbackPlus {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (H B Y Λ φ).mapDerivedCategoryPlus ⋙ (modulePullback B f).mapDerivedCategoryPlus ≅
       (Etale.upperStar (ModuleCat.{u + 1} Λ) f).mapDerivedCategoryPlus ⋙
@@ -56,8 +53,7 @@ def hPullbackPlus {X Y : Scheme.{u}} (f : X ⟶ Y) :
       (hPullbackIso B Λ φ f) ≪≫
     Functor.mapDerivedCategoryPlusCompIso _ _
 
-/-- Exact descent of the forward extension-by-zero comparison. Source: Stacks Tag 09AF
-(blueprint: lem-cbc-finite-coefficient-clopen-alpha). -/
+/-- Exact descent of the forward extension-by-zero comparison. Source: Stacks Tag 09AF. -/
 def hOpenPlus {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j).mapDerivedCategoryPlus ⋙
         (H B X Λ φ).mapDerivedCategoryPlus ≅
@@ -869,32 +865,8 @@ private lemma fcTransport
 attribute [local irreducible] hOpen hPullbackIso singleAlpha
 
 /-- Coefficient realization preserves the clopen alpha before taking proper mates.
-Source: Stacks Project, proetale.tex Tags 099R and 09AF, sites-modules.tex Tag 03DA,
-and sites-cohomology.tex Tag 07A7; steps 1--2
-of lem-cbc-single-level-finite-proper-open-transport
-(blueprint: lem-cbc-finite-coefficient-clopen-alpha).
-
-Proof: factor H as site inverse image followed by C, using the ordinary sheaf
-alpha equation already proved in FiniteClopenAlphaSiteTransport. For C over the given
-ring map, take the inverse mate of the section-normalized cDirect and then the
-inverse open mate. Naturality of cUnderlying and its section equation for cDirect
-prove composition of the direct comparisons. Mate pasting gives composition and
-commutative-square coherence of the pullback comparisons. The mate-cube identity
-then compares the cartesian open base-change maps. For a clopen immersion, the
-restriction of the specified projector is the open-adjunction unit. The open mate
-unit equation and naturality identify these restrictions after C. Maps into clopen
-extension are detected by restriction, using its isomorphism with direct image and
-the pullback/direct-image adjunction. Thus the projectors agree as well. Mate
-injectivity compares the open compositors; equality transport gives the remaining
-congruence maps. Composing these comparisons along the clopen lift gives the
-ordinary coefficient alpha equation. Finally mate pasting factors hPullbackInv
-and hOpen through the site and coefficient comparisons, and pasting the two alpha
-equations proves the assertion. An explicit natural isomorphism from H to its
-site-coefficient composite transports the equation without expanding the functors.
-This argument works directly for arbitrary B and
-phi: it needs no flatness or scalar-factorization hypothesis. Empty clopen images
-and complements and zero coefficient rings are covered by the same adjunction
-and projector identities. -/
+Source: Stacks Project, proetale.tex Tags 099R and 09AF, sites-modules.tex Tag 03DA, and
+sites-cohomology.tex Tag 07A7. -/
 theorem finiteCoefficientClopenAlpha
     {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
     [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]

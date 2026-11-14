@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.ClosedImmersionUnitEpi
 /-! # Exactness and degree projections for a graded quotient
 
 Source: Stacks Project, Tag 09MS, direct sum of coherent-equation-ses.
-(blueprint: lem-sc-tensor-graded-degree-data).
 -/
 
 @[expose] public section
@@ -83,8 +82,7 @@ private def kernelCofan {C : Type u} [Category C] [Abelian C]
 
 /-- The canonical kernel sequence of a graded algebra quotient, with its degree maps.
 The kernel object and its inclusion are fixed, rather than selected from existence.
-Source: Stacks Project, Tag 09MS, direct sum of coherent-equation-ses.
-(blueprint: lem-sc-tensor-graded-degree-data). -/
+Source: Stacks Project, Tag 09MS, direct sum of coherent-equation-ses. -/
 structure TensorGradedDegreeData {X Z : Scheme.{u}} (j : Z ⟶ X)
     (L : X.Modules) (A : TensorGradedAlgebraData j L) where
   shortExact : (ShortComplex.kernelSequence (tensorGradedAlgebraMap A.p)).ShortExact
@@ -103,21 +101,8 @@ structure TensorGradedDegreeData {X Z : Scheme.{u}} (j : Z ⟶ X)
   k_orthogonal : ∀ a d : ℕ, a ≠ d → k a ≫ (degree d).τ₁ = 0
 
 /-- Exact coproducts supply the kernel direct sum and all degree projections.
-Source: Stacks Project, Tag 09MS, coherent-equation-ses and its direct sum;
-Tag 04CJ (1), the closed-immersion module quotient.
-Proof: the adjunction unit in each degree is an epimorphism for a closed immersion,
-with kernel J L^d. Use the two coproduct universal properties of A to define the
-projections r_d from B and q_d from C by identity in degree d and zero otherwise.
-The quotient squares imply r_d;eta_d = p;q_d by testing on every b_a. Kernel
-functoriality gives the short-complex morphisms degree_d. The square
-ker(eta_d) -> L^d -> B, followed by p, is zero, and hence induces k_d into ker(p).
-Sheaf coproducts of modules are exact: on stalks these are direct sums of modules,
-where an element has finite support and degreewise lifting proves surjectivity.
-Consequently p is epi and the sum of the degreewise kernel sequences is its
-kernel sequence, proving shortExact and k_colimit. The identities and off-diagonal
-zero composites follow by testing the coproduct inclusions and then cancelling
-kernel inclusions. No multiplicative property or square-zero hypothesis is used.
-(blueprint: lem-sc-tensor-graded-degree-data). -/
+Source: Stacks Project, Tag 09MS, coherent-equation-ses and its direct sum; Tag 04CJ (1), the
+closed-immersion module quotient. -/
 theorem tensorGradedDegreeData_exists {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) (A : TensorGradedAlgebraData j L) :
     Nonempty (TensorGradedDegreeData j L A) := by

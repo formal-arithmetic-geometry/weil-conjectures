@@ -17,7 +17,6 @@ import all WeilConjectures.AlgebraicGeometry.StrictTower.StrictTowerProperOpenAr
 /-! # Ordinary clopen arrows for constant-coefficient strict towers
 
 Source: Stacks Project, Tags 09BN, 0F7B, and the underived refinement of the blueprint.
-(blueprint: def-cbc-strict-tower-ordinary-proper-open-arrows)
 
 These are the ordinary constructions underlying the recorded derived arrows. All
 functors and adjunctions are the already specified constant-ring module operations.
@@ -43,16 +42,14 @@ variable (B : Type (u + 1)) [CommRing B]
 attribute [local irreducible] Functor.leftAdjoint modulePullback
 
 /-- Unit-preserving open-adjoint transport along equality of scheme morphisms.
-Source: Stacks, Tag 09BN
-(blueprint: def-cbc-strict-tower-ordinary-proper-open-arrows). -/
+Source: Stacks, Tag 09BN. -/
 def singleJCongr {U X : Scheme.{u}} {f g : U ⟶ X}
     [IsOpenImmersion f] [IsOpenImmersion g] (h : f = g) : moduleJ B f ≅ moduleJ B g :=
   ((moduleJAdj B f).ofNatIsoRight
     (eqToIso (congrArg (modulePullback B) h))).leftAdjointUniq (moduleJAdj B g)
 
 /-- The intrinsic ordinary alpha: cartesian beta, clopen projection, and compositors.
-Source: Stacks, Tag 0F7B and the blueprint's underived refinement
-(blueprint: def-cbc-strict-tower-ordinary-proper-open-arrows). -/
+Source: Stacks, Tag 0F7B and the blueprint's underived refinement. -/
 def singleAlpha {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
@@ -78,8 +75,7 @@ def singleAlpha {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
       (eqToIso (congrArg (modulePullback B) (pullback.lift_snd k r h))).hom) (moduleJ B k)
 
 /-- Termwise alpha on strict towers, before taking complexes.
-Source: Stacks, Tag 0F7B
-(blueprint: def-cbc-strict-tower-ordinary-proper-open-arrows). -/
+Source: Stacks, Tag 0F7B. -/
 def towerAlpha {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
@@ -971,14 +967,7 @@ end DescentCalculus
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- The recorded derived alpha is exactly the localization of the intrinsic ordinary arrow.
-Source: Stacks, Tag 0F7B
-(blueprint: def-cbc-strict-tower-ordinary-proper-open-arrows).
-Proof: exact localization preserves the open-unit transpose and its inverse,
-the direct-image unit on the clopen, and the unit-preserving adjoint compositors.
-ClopenProjectorDescent expresses this equality by its equation after the localization
-functor, which determines the descended natural transformation uniquely.
-Consequently each factor of singleAlpha localizes to the corresponding factor in alpha;
-functoriality of localization identifies their composites. -/
+Source: Stacks, Tag 0F7B. -/
 theorem alpha_eq_localized_singleAlpha {V W S T : Scheme.{u}}
     (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
     [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]

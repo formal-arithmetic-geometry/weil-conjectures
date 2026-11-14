@@ -407,20 +407,7 @@ private meta partial def coefficientHEq (lhs rhs : Expr) (fuel : Nat := 160) :
   return h
 
 -- Allow explicit congruence across the standing derived-category formulas.
-/-- One inverse equation for the explicit counit-transpose candidate.
-Source: proposition-compatibility-purity-composition--1, exceptional-composition isomorphism, and
-proposition-composition-open-restriction-compactifications-f--1, the specified counit formula.
-Proof: on bounded-below etale-origin objects, combine the inverse standing Hom
-bijection for gf, precomposition by alpha, and the standing Hom bijections for g
-and f into E_K : Hom(K,(gf)!L) ≃ Hom(K,f!g!L). The comparison is E_R(id), and the
-candidate inverse is E_V.symm(id). Naturality of E in K follows by lifting maps
-between etale representatives through fully faithful comparison pullback, then
-using naturality of fixedCompactSupportComparisonIso and both adjunction Hom
-bijections. Both R=(gf)!L and V=f!g!L lie in this class. The equation E_V(E_V.symm(id))
-=id gives b ≫ c=id; applying injectivity of E_R and naturality gives c ≫ b=id.
-This theorem records only the displayed one of these two equations. No smoothness,
-nonempty-scheme or nonzero-ring hypothesis is used.
-(blueprint: lem-route-standing-exceptional-composition-inverse-hom). -/
+/-- One inverse equation for the explicit counit-transpose candidate. -/
 theorem standingExceptionalComposition_inverse_hom (P : WeilConjectures.PurityFiniteSetting.{u})
     {X Y S : Scheme.{u}}
     [X.Over (Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))]

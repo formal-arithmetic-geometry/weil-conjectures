@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Finite.FiniteInte
 import WeilConjectures.AlgebraicGeometry.SpTowerClasses.FiniteExactArrow.FiniteExactArrowCalculus
 
 /-! # Exact comparison of a cohomology map with normalized endpoints
-
-Source: diagonal-tower trace (1), finite Kummer classes and exact comparison.
-(blueprint: lem-sfb-finite-cohomology-map-normalization).
 -/
 
 @[expose] public noncomputable section
@@ -39,14 +36,7 @@ attribute [local irreducible] Functor.mapDerivedCategory Ext.homEquiv
   HasDerivedCategory.ofIsGrothendieckAbelian HomologicalComplex.quasiIso
 
 /-- Exact comparison of a cohomology map respects a given target factorization,
-with any fixed derived source normalization. Source: Sheaf.H.map and naturality
-of exact single-arrow transport
-(blueprint: lem-sfb-finite-cohomology-map-normalization).
-
-Proof: the Hom of Sheaf.H.map is shifted postcomposition. Exact single-arrow
-transport commutes with that postcomposition. Combine the two target single
-maps, apply the supplied equality of sheaf maps, then separate their single
-and shift images and associate. The statement has no coefficient ring. -/
+with any fixed derived source normalization. -/
 theorem finiteCohomologyMap_normalization (T : Scheme.{u})
     {M N : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}}
     {P Q : DiagonalAb T} (t : M ⟶ N)

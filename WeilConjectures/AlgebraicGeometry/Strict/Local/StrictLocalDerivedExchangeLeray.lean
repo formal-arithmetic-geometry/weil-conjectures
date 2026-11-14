@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.Strict.Local.StrictLocalSectionsUnitLer
 /-! # Derived exchange and Leray before taking homology
 
 Source: Stacks Project, Tag 03Q9, final injective-complex paragraph.
-(blueprint: lem-weil-pbc-strict-local-derived-exchange-leray).
 -/
 
 /- This original-model counterpart follows the proved calculation in
@@ -33,24 +32,8 @@ namespace AlgebraicGeometry.Etale
 /-- The derived exchange computation on the global sections of the pulled-back
 underived direct-image complex. No neighbourhood section restriction occurs.
 
-Source: Stacks Project, Tag 03Q9, final injective-complex paragraph, and the
-adjunction factorization in `Adjunction.derivedPlus_mateEquiv_app_fac`.
-(blueprint: lem-weil-pbc-strict-local-derived-exchange-leray).
-
-Proof: put M = ιJ and L = f_*M. In the bounded-below homotopy category apply
-`Adjunction.derivedPlus_mateEquiv_app_fac` with `squareUpperStarIso`; its square
-compatibility is `pullbackSquareComparison_hom_app_factorsh`. Invert the derived
-f_* unit at M, which is invertible since M is a bounded-below complex of
-injectives. Transport along q and the quotient/localization comparison: the
-inverse source identification is exactly `smallModel_sourceInjectiveDirectImageIso.inv`.
-Apply exact global sections on the strict-local base. Expand the Leray
-isomorphism. Naturality of the right-derived sections unit and the
-factorization of the derived composition isomorphism identify the direct-image
-unit at p^*M followed by Leray with the sections unit at p^*M, preceded by the
-underived pushforward-sections isomorphism. Transport by p^*q.inv. The result is
-the displayed derived-category identity. Only the direct-image unit at
-M is inverted; the sections unit at p^*M is retained. Hence the formula does not
-require p^*M acyclic, and includes zero complexes. -/
+Source: Stacks Project, Tag 03Q9, final injective-complex paragraph, and the adjunction
+factorization in `Adjunction.derivedPlus_mateEquiv_app_fac`. -/
 theorem smallModel_strictLocalDerivedExchange_leray {X S : Scheme.{v}} (f : X ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1}))

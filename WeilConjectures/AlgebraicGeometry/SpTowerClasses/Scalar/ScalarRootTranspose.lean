@@ -18,12 +18,7 @@ namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 attribute [local implicit_reducible] spCoefficientCommRings
 
 /-- The transpose of lineComparison is the ordinary scalar unit on the root module.
-Source: classes proof (2), Stacks 06YY and 07A6.
-(blueprint: lem-sfb-scalar-root-transpose).
-Proof: use the arbitrary-complex model-unit equation on the single root complex.
-Naturality of the exact restriction comparison moves the single comparison past
-restriction. The ordinary adjunction on single complexes then gives the single of
-its unit. This uses no flatness of the root module. -/
+Source: classes proof (2), Stacks 06YY and 07A6. -/
 theorem scalarRootTranspose (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {T : Scheme.{u}} (c : Chern l E T) :

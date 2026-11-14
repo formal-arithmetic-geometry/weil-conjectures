@@ -20,9 +20,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-!
 # Unbounded exchange agrees with bounded exchange and with degree-zero exchange
 
-Source: blueprint, chap-Smooth-purity, proposition-ordinary-external-kunneth--1,
-node lem-kun-unbounded-exchange-agrees; Stacks Project, Tags 07A7 and 05TD(3)
-(blueprint: lem-kun-unbounded-exchange-agrees).
+Source: Stacks Project, Tags 07A7 and 05TD(3).
 
 The endpoint isomorphisms below are composites of the fixed exact-functor cohomology
 comparison, the single-object right-derived comparison, and the degree-zero comparison.

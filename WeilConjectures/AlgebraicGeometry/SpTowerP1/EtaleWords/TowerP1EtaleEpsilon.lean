@@ -17,10 +17,6 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 
 /-! # Ordinary etale words for the projective-line tower comparison
 
-Source: literature/blueprint/latest/blueprint/sec-smooth-purity/
-sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md, Construction and Levels
-(blueprint: def-sp-p1-etale-epsilon-word).
-
 These are formulas in the ordinary etale derived categories. The diagonal is the
 positive supported Cartier Kummer boundary; the trace is the second projection
 of the inverse unit/Chern splitting. No adjunction unit is selected instead.
@@ -44,8 +40,7 @@ variable (A : Type (u + 1)) [CommRing A]
 
 variable [Finite A] (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
 
-/-- The finite splitting-trace formula epsilon_n, with no abstract adjunction counit.
-Source: Construction, epsilon (blueprint: def-sp-p1-etale-epsilon-word). -/
+/-- The finite splitting-trace formula epsilon_n, with no abstract adjunction counit. -/
 def epsilon (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤)))
     (t : Etale.OrdinaryFiniteTwistTransport A N hA)
     (b : Etale.ArbitraryBaseFiniteP1Splitting A N hA t S hS)

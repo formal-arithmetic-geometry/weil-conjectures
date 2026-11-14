@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.Strict.Local.StrictLocalDerivedExchange
 /-! # Derived exchange on global sections before neighbourhood restriction
 
 Source: Stacks Project, Tag 03Q9, final injective-complex paragraph.
-(blueprint: lem-weil-pbc-strict-local-derived-exchange-global-sections).
 -/
 
 /- This original-model counterpart follows the proved calculation in
@@ -33,19 +32,8 @@ namespace AlgebraicGeometry.Etale
 /-- The derived exchange computation on the global sections of the pulled-back
 underived direct-image complex. No neighbourhood section restriction occurs.
 
-Source: Stacks Project, Tag 03Q9, final injective-complex paragraph, and the
-adjunction factorization in `Adjunction.derivedPlus_mateEquiv_app_fac`.
-(blueprint: lem-weil-pbc-strict-local-derived-exchange-global-sections).
-
-Proof: apply naturality of the exact strict-local sections/homology comparison
-isomorphism to the derived mate. Expand smallModel_strictLocalBaseChangeTargetIso and
-strictHenselizationLerayHomologyIso. The bounded-below exact homology comparison
-is the unbounded comparison at the underlying object, so it cancels its inverse.
-Apply degree-n homology to smallModel_strictLocalDerivedExchange_leray. Functoriality of
-homology expands the derived-category composite into the displayed factors.
-Expand termwiseSectionsToDerived and representativeSectionsComparison to identify
-the right-hand side. No sections unit is inverted, so this holds in every degree
-and for zero complexes without an acyclicity assumption on the pulled-back complex. -/
+Source: Stacks Project, Tag 03Q9, final injective-complex paragraph, and the adjunction
+factorization in `Adjunction.derivedPlus_mateEquiv_app_fac`. -/
 theorem smallModel_strictLocalDerivedExchange_globalSections {X S : Scheme.{v}} (f : X ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1}))

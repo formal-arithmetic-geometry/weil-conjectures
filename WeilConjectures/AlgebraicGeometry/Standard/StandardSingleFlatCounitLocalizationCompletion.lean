@@ -17,28 +17,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Completion from the actual localized sheaf presentation data.
-Source: Stacks Project, Tags 0DJ9, 06YB and 0D5S.
-(blueprint: lem-pc-standard-single-flat-counit-localization-completion).
-Proof: unpack hpres into its bounded flat complex K on S, its direct-image
-identification e, ordinary-pullback identification t, and counit equation. Take
-K's termwise stalk at g(a), regarded as a point of S. Exactness and additivity of
-stalks preserve the complex, zero terms and its upper bound. Flat sheaves have
-flat stalks. Transport this complex along the open-stalk ring isomorphism
-O_S,g(a) = O_B,g(a); this is the required P, not an arbitrary flat complex.
-Choose a universal left-derived extension-of-scalars pair for g.stalkMap a.
-The ordinary tensor-pullback stalk formula, derived using exact stalk functors,
-identifies the stalk of derived pullback with that left-derived scalar extension.
-Its counit agrees with the stalk of the sheaf counit: on flat representatives this
-is the pure-tensor stalk formula, and localization descends that identity.
-Apply these comparisons to e and t and then take degree-n homology. Exact stalks
-commute with homology, so the presentation equation gives the required square.
-Finally transport from V and S to A and B by their open-stalk ring isomorphisms.
-Derived direct image commutes with restriction to full inverse-image opens,
-and derived pullback commutes with open restriction; the unit-and-counit mate
-identities identify the restricted standard base-change map with the original
-one. Thus the resulting eL and eR have exactly the displayed endpoints and
-factor the original map. One complex P works in every integer degree. No global
-bound on B, flatness of g, or arbitrary witness of unproved existence is used. -/
+Source: Stacks Project, Tags 0DJ9, 06YB and 0D5S. -/
 theorem standardSingleFlatCounit_localization_completion
     (h_affine : ∀ {Y₀ B₀ A₀ : Scheme.{u}} (p₀ : Y₀ ⟶ B₀)
       [QuasiCompact p₀] [QuasiSeparated p₀] [IsAffine B₀] [IsAffine A₀]

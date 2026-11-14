@@ -80,10 +80,6 @@ import WeilConjectures.AlgebraicGeometry.Completed.CompletedIntegralFiniteQuotie
 
 /-! # Cofinal coefficient quotient maps and completed projections
 
-Source: blueprint, chap-Smooth-purity, proposition-sp-integral-towers proof, final
-integral-constructibility sentence; prose-09-21, first paragraph; integral-limit clause (3).
-(blueprint: lem-sp-cofinal-coefficient-projection-cocone).
-
 The natural indices n and j denote positive exponents n+1 and j+1. Both coefficient
 and scheme universes are independent. The completed ell projection is the projection
 through the uniquely normalized comparison already supplied by the coefficient tower.

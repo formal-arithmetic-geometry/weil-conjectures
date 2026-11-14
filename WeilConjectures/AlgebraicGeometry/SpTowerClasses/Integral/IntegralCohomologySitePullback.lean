@@ -10,8 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.Sites.RootsOfUnityPullback
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 
 /-! # Exact-derived transport through the etale-to-pro-etale square
-
-Source: blueprint chap-Smooth-purity, classes proof (2).
 -/
 
 @[expose] public noncomputable section
@@ -167,17 +165,7 @@ set_option backward.isDefEq.respectTransparency.types false
 
 /-- Change of site preserves an arbitrary integral units cohomology class with its
 specified integer and full-units endpoints.
-Source: blueprint classes proof (2), exact transport of integral extension classes;
-Stacks Tag 00WX for the adjunction square.
-(blueprint: lem-sp-integral-cohomology-site-pullback).
-
-Proof: use integral_site_pullback_endpoints for the two ordinary endpoint squares.
-Exact-functor Ext compatibility identifies the two composites under the canonical
-comparisonUpperStarCompUpperStarIso. Apply Ext.hom and naturality of the single
-and shift comparisons; precomposition and shifted postcomposition commute with
-this transport. The integer square rewrites the source factor and the units square
-rewrites the target factor. Their composites are exactly gmCohomologyMap followed
-by the comparison inverse image and its integer and units endpoint maps. -/
+Source: Stacks Tag 00WX for the adjunction square. -/
 theorem integral_cohomology_site_pullback {X Y : Scheme.{u₁}} (f : X ⟶ Y)
     (e : Sheaf.H Y.gmSheaf 1)
     (a : (upperStar AddCommGrpCat.{u₁ + 1} f).obj (Scheme.proEtaleUnitsSheaf Y) ⟶

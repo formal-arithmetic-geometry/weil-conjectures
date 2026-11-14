@@ -21,8 +21,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 
 /-! # Injectivity of relatively flat single base change
 
-Source: Stacks Project, Tag 0A1D, lemma-base-change-tensor.
-(blueprint: lem-pc-standard-flat-single-base-change-mono).
+Source: Stacks Project, Tag 0A1D.
 -/
 
 @[expose] public section
@@ -67,29 +66,7 @@ private theorem single_qcoh_terms (X : Scheme.{u}) (M : X.Modules) [M.IsQuasicoh
 -- The stalk and pinned counit comparisons unfold several shared module carriers.
 /-- The canonical single-module base-change comparison is injective on cohomology.
 
-Source: Stacks Project, Tag 0A1D, lemma-base-change-tensor, specialized to
-E = O_Y[0] and G = M[0], and Tag 0DJ9, lemma-single-complex-base-change.
-(blueprint: lem-pc-standard-flat-single-base-change-mono).
-
-Proof: Work locally on the new base and the original base, so both bases are
-affine. On an affine source chart, relative flatness of M makes its module of
-sections flat over the original base ring. The affine derived direct image is
-therefore a flat module in degree zero; derived scalar extension computes it by
-ordinary tensor product. The affine tensor-pullback section formula identifies
-that tensor product with the sections of the pulled-back module. The canonical
-mate followed by the left-derived counit is precisely this section comparison:
-its component in degree zero is the tensor identification, and all other
-cohomology objects are zero. In particular its degree-n map is injective.
-For a general qcqs source, use the single-complex source-open induction of
-Tag 0DJ9: compare the two Mayer--Vietoris triangles for U, V, their intersection
-and union. The affine comparisons identify the local tensor-cohomology maps;
-relative flatness makes them valid at every stalk, including on the
-intersection. The long exact cohomology sequences and the five lemma propagate
-the comparison along the quasi-compact-open induction. Take the injectivity half
-of that degree-n conclusion. Finally exact open restriction detects monomorphisms
-and gives the asserted global monomorphism. This argument includes zero M,
-empty schemes, and negative n, and assumes neither flatness of g nor intrinsic
-flatness of M over O_Y. -/
+Source: Stacks Project, Tag 0A1D, specialized to E = O_Y[0] and G = M[0], and Tag 0DJ9. -/
 theorem standard_flat_single_baseChange_homology_mono
     {Y B A : Scheme.{u}} (p : Y ⟶ B) [QuasiCompact p] [QuasiSeparated p]
     (M : Y.Modules) [M.IsQuasicoherent] (hM : M.IsFlatOver p) (g : A ⟶ B) (n : ℤ) :

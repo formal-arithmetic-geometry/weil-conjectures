@@ -12,8 +12,7 @@ import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 
 /-! # Localization triangle for normalized strict coefficient towers
 
-Source: Stacks 09AH and 09BM; blueprint operations proof (2c)
-(blueprint: lem-sp-tower-localization-realization).
+Source: Stacks 09AH and 09BM.
 -/
 
 @[expose] public noncomputable section

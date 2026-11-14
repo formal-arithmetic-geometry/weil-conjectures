@@ -37,27 +37,7 @@ is the canonical comparison of termwise restriction to fibre hypercohomology.
 This statement starts with cohomology of the complex of sections on S: it contains
 neither localized Hom classes nor their canonical germ map.
 
-Source: Stacks Project, Tag 03Q9, final injective-complex paragraph.
-(blueprint: lem-weil-pbc-strict-local-complex-sections-mate).
-
-Proof: let M be the complex underlying J and L = f_*M. The invertible right-derived
-unit on M gives smallModel_sourceInjectiveDirectImageIso. In the homotopy category expand the
-mate into the adjunction unit along f, the pullback-square comparison, and the
-counit along the base-changed f. The defining compatibility of the derived
-adjunction with the underived adjunction identifies its value on M with the
-underived mate followed by the right-derived direct-image unit on p^*M.
-Naturality of the right-derived units moves the restriction of L's sections through
-this composite. The strict-local exact-sections comparison and the derived Leray
-factorization identify its result with the sections unit on p^*M. At the underived
-level evaluate f_*M on the pointed neighbourhood, using smallModel_sourceStageSectionsIso.
-The unit, square comparison, and counit send a section to its restriction on the
-pullback. Q.smallModelFirst identifies the base component of this map with the specified
-strict-henselization leg; Q.smallModelOver identifies the projection to X. These are the
-components defining termwiseSectionsRestriction. Apply localization and H^n;
-naturality of the homology and exact-sections comparisons gives the displayed
-square. Finally transport by q. Only the right-derived unit on M is inverted;
-no injectivity or acyclicity of p^*M is assumed. Zero complexes, negative degrees,
-and nonetale cone legs use the same naturality and triangle identities. -/
+Source: Stacks Project, Tag 03Q9, final injective-complex paragraph. -/
 theorem smallModel_strictLocalComplexSectionRestriction_mate {X S : Scheme.{v}}
     (f : X ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)

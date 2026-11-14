@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassReduction
 
 /-! # Evaluating the integral Kummer composite
-
-Source: diagonal-tower trace (1), finite Kummer classes and exact comparison.
-(blueprint: lem-sfb-finite-integral-class-equations).
 -/
 
 @[expose] public noncomputable section
@@ -32,9 +29,7 @@ attribute [local irreducible] Functor.mapDerivedCategory Ext.homEquiv
   HasDerivedCategory.standard DerivedCategory.singleFunctors
   integerComparison cartierRootsComparison cartierUnitsComparison
 
-/-- The line class uses the actual integer and units comparisons.
-Source: the definition of lineBundleEtaleClass
-(blueprint: lem-sfb-finite-integral-class-equations). -/
+/-- The line class uses the actual integer and units comparisons. -/
 theorem finiteLineBundleEtaleClass_eq (T : Scheme.{u}) (L : T.Pic) :
     lineBundleEtaleClass T L =
       (DerivedCategory.singleFunctor (DiagonalAb T) 0).map (integerComparison T).inv ≫

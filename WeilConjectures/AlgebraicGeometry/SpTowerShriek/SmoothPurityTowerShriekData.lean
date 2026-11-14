@@ -33,10 +33,6 @@ public import Mathlib.CategoryTheory.Adjunction.Mates
 /-!
 # Interface for compact-support operations on varying-coefficient towers
 
-Source: blueprint main-20261015, sec-smooth-purity/sk-lem-sp-tower-bound,
-`sk-lem-sp-tower-bound-operations.md`, clauses (1)--(3)
-(blueprint: def-sp-tower-shriek-data).
-
 Index n denotes the positive exponent n+1. All localizations are ordinary derived
 categories of strict semilinear systems, never diagrams in derived categories.
 -/
@@ -57,8 +53,7 @@ open WeilConjectures
 
 namespace AlgebraicGeometry.ProEtale.SpTowerShriek
 
-/-- The actual ell-power quotient, retaining the recorded tower's indexing.
-Source: blueprint coefficient convention (blueprint: def-sp-tower-shriek-data). -/
+/-- The actual ell-power quotient, retaining the recorded tower's indexing. -/
 abbrev R (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) :=
   Padic.coefficientExtensionIntegers l E ⧸ spEllIdeal l E ^ (n + 1)
@@ -66,52 +61,43 @@ abbrev R (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The existing constant commutative ring sheaf, at the paper's positive level n+1.
-Source: blueprint coefficient convention (blueprint: def-sp-tower-shriek-data). -/
+/-- The existing constant commutative ring sheaf, at the paper's positive level n+1. -/
 abbrev B (T : Scheme.{u}) (n : ℕ) :
     Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1} :=
   Scheme.proEtaleConstantRing T (R l E n)
 
-/-- The actual adjacent quotient map, not a chosen ring map.
-Source: blueprint coefficient convention (blueprint: def-sp-tower-shriek-data). -/
+/-- The actual adjacent quotient map, not a chosen ring map. -/
 def tau (T : Scheme.{u}) (n : ℕ) : B l E T (n + 1) ⟶ B l E T n :=
   (spCoefficientCommRings l E T).map (homOfLE (Nat.le_succ n)).op
 
 /-- The original small pro-etale site fits in the coefficient universe, with its
-object and morphism universes unchanged. Source: blueprint size convention
-(blueprint: def-sp-tower-shriek-data). -/
+object and morphism universes unchanged. -/
 instance (priority := 2000) small (T : Scheme.{u}) :
     EssentiallySmall.{u + 1} T.ProEt := essentiallySmallSelf.{0} _
 
-/-- The published ringed sequence-site model of these strict varying-ring systems.
-Source: blueprint clause (2), semilinear section model
-(blueprint: def-sp-tower-shriek-data). -/
+/-- The published ringed sequence-site model of these strict varying-ring systems. -/
 abbrev S (T : Scheme.{u}) :=
   SemilinearSections.Systems.{u + 1, u, u + 1}
     (Scheme.ProEt.topology T) (B l E T) (tau l E T)
 
-/-- The ordinary unbounded localization of the actual system category.
-Source: blueprint clauses (2)--(3) (blueprint: def-sp-tower-shriek-data). -/
+/-- The ordinary unbounded localization of the actual system category. -/
 abbrev D (T : Scheme.{u}) :=
   SemilinearSections.DS.{u + 1, u, u + 1}
     (Scheme.ProEt.topology T) (B l E T) (tau l E T)
 
-/-- Exact ordinary evaluation in the published sequence-site model.
-Source: blueprint clauses (1)--(3) (blueprint: def-sp-tower-shriek-data). -/
+/-- Exact ordinary evaluation in the published sequence-site model. -/
 abbrev ev (T : Scheme.{u}) (n : ℕ) :=
   SemilinearSections.evaluation.{u + 1, u, u + 1}
     (Scheme.ProEt.topology T) (B l E T) (tau l E T) n
 
-/-- Its exact derived evaluation, defined on all unbounded complexes.
-Source: blueprint clauses (1)--(3) (blueprint: def-sp-tower-shriek-data). -/
+/-- Its exact derived evaluation, defined on all unbounded complexes. -/
 abbrev Ev (T : Scheme.{u}) (n : ℕ) :=
   SemilinearSections.e.{u + 1, u, u + 1}
     (Scheme.ProEt.topology T) (B l E T) (tau l E T) n
 
 /-- Canonically normalized presentations of the recorded tower category and its tensor.
 The equivalence fixes every section and map; the tensor is the existing signed K-flat
-sequence-site tensor. Source: blueprint clauses (1)--(3)
-(blueprint: def-sp-tower-shriek-data). -/
+sequence-site tensor. -/
 class Base where
   /-- Ramification index of the specified uniformizer. -/
   ramification : ℕ
@@ -161,15 +147,13 @@ class Base where
 
 attribute [instance] Base.finite Base.kinjective
 
-/-- The existing K-flat tensor on the actual ringed sequence site.
-Source: blueprint clause (2) (blueprint: def-sp-tower-shriek-data). -/
+/-- The existing K-flat tensor on the actual ringed sequence site. -/
 abbrev tensor (b : Base l E) (T : Scheme.{u}) := (b.calculus T).closed.tensor
 
 /-- Horizontal compatibility expressed for a supplied family of finite adjunctions.
 Keeping these adjunctions as parameters avoids unfolding their sheafification models
 while checking the formula. The auxiliary section y and its HEq premise express
-the unchanged carrier of coefficient restriction without unfolding its scalar action.
-Source: actual termwise inverse image (blueprint: def-sp-tower-shriek-data). -/
+the unchanged carrier of coefficient restriction without unfolding its scalar action. -/
 @[irreducible] def OrdinaryUnitTransitionModel {X Y : Scheme.{u}}
     (P : ∀ n : ℕ, SemilinearSections.Mod.{u + 1, u, u + 1}
       (Scheme.ProEt.topology Y) (B l E Y n) ⥤
@@ -209,8 +193,7 @@ Source: actual termwise inverse image (blueprint: def-sp-tower-shriek-data). -/
 
 /-- The horizontal compatibility of the actual constant-ring finite adjunction units.
 The generic formula is specialized to the specified finite functors and adjunctions,
-not to arbitrarily supplied underlying-sheaf identifications.
-Source: actual termwise inverse image (blueprint: def-sp-tower-shriek-data). -/
+not to arbitrarily supplied underlying-sheaf identifications. -/
 @[irreducible] def OrdinaryUnitTransition {X Y : Scheme.{u}} (f : X ⟶ Y)
     (F : S l E Y ⥤ S l E X)
     (e : ∀ n : ℕ, F ⋙ ev l E X n ≅
@@ -234,8 +217,7 @@ Source: actual termwise inverse image (blueprint: def-sp-tower-shriek-data). -/
 /-- Geometric operations in the fixed constant-coefficient coordinates. The HEq fields
 are transports of the *specified* generic geometric calculus, whose units, counits,
 coefficient mates and signed K-flat tensor comparisons are normalized before evaluation.
-Source: blueprint proof, paragraphs (1)--(2); Zheng 4.10
-(blueprint: def-sp-tower-shriek-data). -/
+Source: Zheng 4.10. -/
 structure Geometry (b : Base l E) {X Y : Scheme.{u}} (f : X ⟶ Y) where
   /-- The source of the normalization, on the actual small pro-etale topoi. -/
   generic : SemilinearSections.Geometry.{u + 1, u, u + 1}
@@ -352,26 +334,20 @@ structure Geometry (b : Base l E) {X Y : Scheme.{u}} (f : X ⟶ Y) where
 attribute [instance] Geometry.pullAdditive Geometry.pullLimits Geometry.pullColimits
   Geometry.pushAdditive
 
-/-- The inverse-image functor, by exact termwise localization.
-Source: blueprint clause (2) (blueprint: def-sp-tower-shriek-data). -/
+/-- The inverse-image functor, by exact termwise localization. -/
 abbrev pull (b : Base l E) {X Y : Scheme.{u}} {f : X ⟶ Y} (g : Geometry l E b f) :=
   g.pull.mapDerivedCategory
 
-/-- The direct-image functor, by total right derivation on the system category.
-Source: blueprint clause (1) (blueprint: def-sp-tower-shriek-data). -/
+/-- The direct-image functor, by total right derivation on the system category. -/
 abbrev push (b : Base l E) {X Y : Scheme.{u}} {f : X ⟶ Y} (g : Geometry l E b f) :=
   g.push.rightDerivedFunctor
 
-/-- The canonical derived adjunction, prior to every evaluation.
-Source: blueprint proof, geometric mate construction
-(blueprint: def-sp-tower-shriek-data). -/
+/-- The canonical derived adjunction, prior to every evaluation. -/
 def adjunction (b : Base l E) {X Y : Scheme.{u}} {f : X ⟶ Y}
     (g : Geometry l E b f) : pull l E b g ⊣ push l E b g :=
   g.ordinaryAdjunction.mapDerivedCategoryRightDerivedAdjunction
 
-/-- Exact termwise descent of a transformation of actual tower functors.
-Source: blueprint clause (2c), localization of complexes
-(blueprint: def-sp-tower-shriek-data). -/
+/-- Exact termwise descent of a transformation of actual tower functors. -/
 def deriveMap {T T' : Scheme.{u}} {F G : S l E T ⥤ S l E T'}
     [F.Additive] [G.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G] (a : F ⟶ G) :
@@ -383,9 +359,7 @@ def deriveMap {T T' : Scheme.{u}} {F G : S l E T ⥤ S l E T'}
     F.mapDerivedCategory G.mapDerivedCategory
     (Functor.whiskerRight (NatTrans.mapHomologicalComplex a (ComplexShape.up ℤ)) DerivedCategory.Q)
 
-/-- The finite open adjunction, in the tensor-pullback coordinates fixed above.
-Source: blueprint clause (2c), constant-section normalization
-(blueprint: def-sp-tower-shriek-data). -/
+/-- The finite open adjunction, in the tensor-pullback coordinates fixed above. -/
 def finiteOpenAdjunction (b : Base l E) {U T : Scheme.{u}} (j : U ⟶ T)
     [IsOpenImmersion j] (n : ℕ) :
     sfIntrinsicExtensionByZero j (R l E n) ⊣ proEtaleConstantRingPullback (R l E n) j :=
@@ -394,8 +368,7 @@ def finiteOpenAdjunction (b : Base l E) {U T : Scheme.{u}} (j : U ⟶ T)
 
 /-- The exact open operation on strict systems, with its actual termwise adjunction.
 The two ordinary evaluation equations fix the adjunction, hence do not posit a lift
-of any family of derived maps. Source: blueprint clauses (1) and (2c)
-(blueprint: def-sp-tower-shriek-data). -/
+of any family of derived maps. -/
 structure Open (b : Base l E) {U T : Scheme.{u}} (j : U ⟶ T) [IsOpenImmersion j]
     (g : Geometry l E b j) where
   extension : S l E U ⥤ S l E T
@@ -432,13 +405,11 @@ structure Open (b : Base l E) {U T : Scheme.{u}} (j : U ⟶ T) [IsOpenImmersion 
 
 attribute [instance] Open.additive Open.limits Open.colimits
 
-/-- Exact derived open extension, on unbounded tower complexes.
-Source: blueprint clause (1) (blueprint: def-sp-tower-shriek-data). -/
+/-- Exact derived open extension, on unbounded tower complexes. -/
 abbrev openD (b : Base l E) {U T : Scheme.{u}} {j : U ⟶ T} [IsOpenImmersion j]
     {g : Geometry l E b j} (o : Open l E b j g) := o.extension.mapDerivedCategory
 
-/-- Its natural finite evaluation is termwise localization of the ordinary comparison.
-Source: blueprint clause (1) (blueprint: def-sp-tower-shriek-data). -/
+/-- Its natural finite evaluation is termwise localization of the ordinary comparison. -/
 def openEvaluation (b : Base l E) {U T : Scheme.{u}} {j : U ⟶ T}
     [IsOpenImmersion j] {g : Geometry l E b j} (o : Open l E b j g) (n : ℕ) :
     openD l E b o ⋙ Ev l E T n ≅
@@ -454,8 +425,7 @@ def openEvaluation (b : Base l E) {U T : Scheme.{u}} {j : U ⟶ T}
 
 /-- Actual geometric operations and canonical comparisons on the fixed sequence sites.
 Composition is fixed by its finite comparisons and by the underlying ordinary sheaf
-operations; open projection and base change are fixed as adjunction mates below.
-Source: blueprint clause (2), specified maps (blueprint: def-sp-tower-shriek-data). -/
+operations; open projection and base change are fixed as adjunction mates below. -/
 structure Operations (b : Base l E) where
   geometry : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y), Geometry l E b f
   openOp : ∀ {U T : Scheme.{u}} (j : U ⟶ T) [IsOpenImmersion j],
@@ -491,16 +461,13 @@ structure Operations (b : Base l E) where
           ((openD l E b (openOp j)).obj K, L)
 
 /-- Compactly supported total direct image for the chosen compactification.
-On bounded-below inputs this is Rp_* after the exact termwise j_!.
-Source: blueprint clause (1) (blueprint: def-sp-tower-shriek-data). -/
+On bounded-below inputs this is Rp_* after the exact termwise j_!. -/
 abbrev F (b : Base l E) (o : Operations l E b) {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f) :=
   openD l E b (o.openOp c.i) ⋙ push l E b (o.geometry c.g)
 
 /-- The canonical projection arrow: proper counit transpose, open projection,
-then pullback composition. It exists before any Tor or origin hypotheses.
-Source: blueprint clause (2a), specified compactification projection
-(blueprint: def-sp-tower-shriek-data). -/
+then pullback composition. It exists before any Tor or origin hypotheses. -/
 def projection (b : Base l E) (o : Operations l E b) {X Y : Scheme.{u}}
     {f : X ⟶ Y} (c : Compactification f) (K : D l E X) (L : D l E Y) :
     (tensor l E b Y).obj ((F l E b o c).obj K, L) ⟶
@@ -517,8 +484,7 @@ def projection (b : Base l E) (o : Operations l E b) {X Y : Scheme.{u}}
           (Prod.mkHom (𝟙 K) ((o.comp c.i c.g).hom.app L ≫
             (eqToIso (congrArg (fun h ↦ pull l E b (o.geometry h)) c.comm.symm)).hom.app L))))
 
-/-- The pullback-square comparison formed from the specified termwise composition maps.
-Source: blueprint clause (2b), geometric exchange (blueprint: def-sp-tower-shriek-data). -/
+/-- The pullback-square comparison formed from the specified termwise composition maps. -/
 def square (b : Base l E) (o : Operations l E b) {X' X Y' Y : Scheme.{u}}
     (g' : X' ⟶ X) (f' : X' ⟶ Y') (f : X ⟶ Y) (g : Y' ⟶ Y)
     (w : g' ≫ f = f' ≫ g) :
@@ -528,9 +494,7 @@ def square (b : Base l E) (o : Operations l E b) {X' X Y' Y : Scheme.{u}}
     eqToIso (congrArg (fun h ↦ pull l E b (o.geometry h)) w.symm) ≪≫
     (o.comp g' f).symm
 
-/-- The inverse open exchange as a specified counit transpose of the square comparison.
-Source: blueprint clause (2b), open-adjunction mate
-(blueprint: def-sp-tower-shriek-data). -/
+/-- The inverse open exchange as a specified counit transpose of the square comparison. -/
 def openMate (b : Base l E) (o : Operations l E b) {U' U T' T : Scheme.{u}}
     (h : U' ⟶ U) (j' : U' ⟶ T') (j : U ⟶ T) (g : T' ⟶ T)
     [IsOpenImmersion j] [IsOpenImmersion j'] (w : h ≫ j = j' ≫ g)
@@ -541,8 +505,7 @@ def openMate (b : Base l E) (o : Operations l E b) {U' U T' T : Scheme.{u}}
     ((pull l E b (o.geometry h)).map ((o.openOp j).derivedAdjunction.unit.app K) ≫
       (square l E b o h j' j g w).inv.app ((openD l E b (o.openOp j)).obj K))
 
-/-- Base change of exact extension by zero, with its inverse fixed by the open mate.
-Source: blueprint clause (2b) (blueprint: def-sp-tower-shriek-data). -/
+/-- Base change of exact extension by zero, with its inverse fixed by the open mate. -/
 structure OpenExchange (b : Base l E) (o : Operations l E b) where
   exchange : ∀ {U' U T' T : Scheme.{u}} (h : U' ⟶ U) (j' : U' ⟶ T')
     (j : U ⟶ T) (g : T' ⟶ T) [IsOpenImmersion j] [IsOpenImmersion j']
@@ -554,9 +517,7 @@ structure OpenExchange (b : Base l E) (o : Operations l E b) where
     (sq : IsPullback h j' j g) (K : D l E U),
     (exchange h j' j g sq).inv.app K = openMate l E b o h j' j g sq.w K
 
-/-- Compact-support exchange: the proper adjunction mate followed by open base change.
-Source: blueprint clause (2b), specified formula
-(blueprint: def-sp-tower-shriek-data). -/
+/-- Compact-support exchange: the proper adjunction mate followed by open base change. -/
 def exchange (b : Base l E) (o : Operations l E b) (x : OpenExchange l E b o)
     {X' X Y' Y : Scheme.{u}} {h : X' ⟶ X} {f' : X' ⟶ Y'}
     {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : IsPullback h f' f g) (c : Compactification f) :
@@ -577,15 +538,13 @@ def exchange (b : Base l E) (o : Operations l E b) (x : OpenExchange l E b o)
     (x.exchange h (c.ofIsPullback sq).i c.i (pullback.fst c.g g)
       (c.isPullback_i_ofIsPullback sq))
 
-/-- Finite-level compact support in the same constant-ring coordinates.
-Source: blueprint clause (1) (blueprint: def-sp-tower-shriek-data). -/
+/-- Finite-level compact support in the same constant-ring coordinates. -/
 abbrev finiteF (b : Base l E) {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f) (n : ℕ) :=
   sfIntrinsicDerivedOpen (R l E n) c.i ⋙
     (proEtaleConstantRingPushforward (R l E n) c.g).rightDerivedFunctor
 
-/-- Natural level comparison of the actual compactification composite.
-Source: blueprint clause (1) (blueprint: def-sp-tower-shriek-data). -/
+/-- Natural level comparison of the actual compactification composite. -/
 def Fcomparison (b : Base l E) (o : Operations l E b) {X Y : Scheme.{u}}
     {f : X ⟶ Y} (c : Compactification f) (n : ℕ) :
     F l E b o c ⋙ Ev l E Y n ≅ Ev l E X n ⋙ finiteF l E b c n :=
@@ -596,8 +555,7 @@ def Fcomparison (b : Base l E) (o : Operations l E b) {X Y : Scheme.{u}}
     Functor.associator _ _ _
 
 /-- A retained origin at one level, using the dependency's fixed-scalar witness.
-This specifies a witness independently for each n; it imposes no transition equations.
-Source: blueprint clauses (2a)--(2b) (blueprint: def-sp-tower-shriek-data). -/
+This specifies a witness independently for each n; it imposes no transition equations. -/
 structure Origin (b : Base l E) (T : Scheme.{u}) (n : ℕ) (K : D l E T) where
   level : DerivedCategory.Plus
     (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1} (R l E n))))
@@ -606,9 +564,7 @@ structure Origin (b : Base l E) (T : Scheme.{u}) (n : ℕ) (K : D l E T) where
   witness : FixedEtaleOriginWitness T (ULift.{u + 1} (R l E n)) level
 
 /-- Equality transport of quotient coefficients, induced by the identity on O_E.
-This is a real functor defined by equality elimination; no equivalence is chosen.
-Source: blueprint coefficient equation R_n = A_(E,en)
-(blueprint: def-sp-tower-shriek-data). -/
+This is a real functor defined by equality elimination; no equivalence is chosen. -/
 def quotientTransport (T : Scheme.{u})
     (I J : Ideal (Padic.coefficientExtensionIntegers l E)) (h : I = J) :
     proEtaleDerivedCategory T (Padic.coefficientExtensionIntegers l E ⧸ I) ⥤
@@ -618,9 +574,7 @@ def quotientTransport (T : Scheme.{u})
       proEtaleDerivedCategory T (Padic.coefficientExtensionIntegers l E ⧸ J)) (𝟭 _) h
 
 /-- Apply the recorded finite-Tor constructibility predicate after the canonical
-ell-power/uniformizer-power quotient identification, retaining every positive level.
-Source: blueprint clause (2a); definition-constructible-sheaves
-(blueprint: def-sp-tower-shriek-data). -/
+ell-power/uniformizer-power quotient identification, retaining every positive level. -/
 def GoodLevel (b : Base l E) (T : Scheme.{u}) (n : ℕ) (K : D l E T) : Prop :=
   finiteTorConstructible l E (b.ramification * (n + 1))
     (Nat.mul_pos b.ramification_positive (Nat.succ_pos n)) T
@@ -631,8 +585,7 @@ def GoodLevel (b : Base l E) (T : Scheme.{u}) (n : ℕ) (K : D l E T) : Prop :=
 /-- Exact closed direct image and the open--closed distinguished triangle.
 The first two arrows are the termwise localized counit and unit. Exact evaluation
 carries this same triangle to a distinguished finite triangle, including its boundary.
-Source: blueprint clause (2c), Stacks 09AH and 09BM
-(blueprint: def-sp-tower-shriek-data). -/
+Source: Stacks 09AH and 09BM. -/
 structure LocalizationData (b : Base l E) (o : Operations l E b)
     {Z U T : Scheme.{u}} (i : Z ⟶ T) (a : U ⟶ T)
     [IsClosedImmersion i] [IsOpenImmersion a] [QuasiCompact a]
@@ -658,8 +611,7 @@ structure LocalizationData (b : Base l E) (o : Operations l E b)
 
 /-- The three clauses, including the precise domains of the invertibility claims.
 Origin witnesses occur only in the testing hypotheses, never in the construction of
-operations or mates. Source: blueprint clauses (1)--(3)
-(blueprint: def-sp-tower-shriek-data). -/
+operations or mates. -/
 structure Laws (b : Base l E) (o : Operations l E b) (x : OpenExchange l E b o) : Prop where
   bounded : ∀ {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (C : DerivedCategory.Plus (S l E X)),

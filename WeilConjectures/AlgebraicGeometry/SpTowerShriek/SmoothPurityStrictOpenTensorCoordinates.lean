@@ -15,8 +15,7 @@ import WeilConjectures.Algebra.Homology.OpenTensorNormalization.ExactDerivedAdju
 
 /-! # Open extension and the invertible normalized tensor transpose
 
-Source: Zheng Construction 4.1; Stacks 03DI, 0E8I and 0GL1;
-the system case of openTensorNormalization.
+Source: Zheng Construction 4.1; Stacks 03DI, 0E8I and 0GL1.
 -/
 
 @[expose] public noncomputable section

@@ -18,10 +18,6 @@ import WeilConjectures.AlgebraicGeometry.Derived.DerivedTensorSymmetryInvolutive
 /-!
 # Adjoint of a tensor-projected morphism
 
-Source: literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
-`sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md`
-(blueprint: lem-amb-tensor-projection-adjunct).
-
 The proof expands the projection-map mate, uses compatibility of the canonical
 inverse-image tensor comparison with the signed symmetry, cancels the two opposite
 symmetries, and applies naturality and bifunctoriality of the derived tensor product.
@@ -121,14 +117,12 @@ attribute [local instance high] SymmetricCategory.toBraidedCategory in
 attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint
   ModuleCat.hasColimitsOfShape ModuleCat.hasColimitsOfSize in
 /--
-Source: the final tensor/projection-formula sentence of
-`thm-amb-p1-decomposition.proof.md` (blueprint: lem-amb-tensor-projection-adjunct).
 
 For an arbitrary scheme morphism and commutative coefficient ring, the adjoint of the
 symmetrized projection map after tensoring with `a` is tensoring the adjoint of `a` with the
-fixed inverse-image factor.  The proof expands the mate of the canonical projection map,
+fixed inverse-image factor. The proof expands the mate of the canonical projection map,
 uses the natural inverse-image tensor comparison and the signed tensor symmetry, and then
-uses the derived tensor bifunctor law.  No properness, boundedness, finiteness, torsion or
+uses the derived tensor bifunctor law. No properness, boundedness, finiteness, torsion or
 invertibility hypothesis is used.
 -/
 theorem tensorProjectionAdjunct

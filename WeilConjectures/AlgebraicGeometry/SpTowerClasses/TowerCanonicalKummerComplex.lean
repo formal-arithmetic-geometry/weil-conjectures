@@ -23,8 +23,6 @@ attribute [local instance 2000] Abelian.toPreadditive
   Preadditive.preadditiveHasZeroMorphisms
 
 /-- The actual Kummer complex, with the canonical abelian-category zero witness.
-Source: blueprint latest, `sk-prop-sp-tower-geometric-classes.proof.md`, clause (2).
-(blueprint: def-sfb-canonical-kummer-complex).
 The objects, inclusion, power map and zero-composite proof are the fields of k;
 only the definitionally equal zero-instance presentation is shared by name. -/
 def towerKummerComplex (l : ℕ) [Fact l.Prime] {T : Scheme.{u}} (k : Kummer l T) :

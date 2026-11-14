@@ -163,8 +163,7 @@ import all WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedProperOpenCompos
 /-!
 # Unbounded ordinary etale compact-support comparisons
 
-Source: Stacks Project, Tags 0F7H--0F7L and 0F7B, case (b)
-(blueprint: lem-amb-unbounded-compact-support-comparisons).
+Source: Stacks Project, Tags 0F7H--0F7L and 0F7B, case (b).
 
 The candidates, common-refinement comparisons, and proper/open tower isomorphism are the
 existing ordinary etale constructions. The definitions below assemble the specified tower
@@ -1058,11 +1057,7 @@ private lemma unbounded_chosen_comp
 
 /-- The common-refinement comparisons satisfy the identity and cocycle laws. In particular,
 passing through any third compactification produces the same map.
-Source: Stacks Project, Tag 0F7I
-(blueprint: lem-amb-unbounded-compact-support-comparisons).
-Proof: identify the actual pairwise comparison with the compact-support formalism's
-common-refinement comparison. Its identity and cocycle equations give both assertions;
-the refinement-composition and naturality equations are already proved in that formalism. -/
+Source: Stacks Project, Tag 0F7I. -/
 theorem unboundedEtaleCompactSupport_comparison_coherence
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
@@ -1088,8 +1083,7 @@ attribute [local instance] unbounded_has_base_change unbounded_has_proper_exchan
 /-- The graph-normalized comparison for the coarser open of a proper refinement.
 The two Noetherian structures on the ambient are consequences of properness over the
 Noetherian target, supplied explicitly rather than added as hypotheses.
-Source: Stacks Project, Tags 0F7I and 0F7B
-(blueprint: lem-amb-unbounded-compact-support-comparisons). -/
+Source: Stacks Project, Tags 0F7I and 0F7B. -/
 noncomputable def unboundedEtaleRefinementOpenComparison
     (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
@@ -1104,11 +1098,7 @@ noncomputable def unboundedEtaleRefinementOpenComparison
 
 /-- The composition isomorphism is computed by every proper/open tower. Thus it is
 independent of compactification choices and commutes with their refinement comparisons.
-Source: Stacks Project, Tag 0F7J
-(blueprint: lem-amb-unbounded-compact-support-comparisons).
-Proof: identify the formalism's triangle compositor with the actual proper/open tower
-map, using the exact-derived open compositor and the canonical right-derived proper
-compositor. Its every-triangle equation then gives the result for the supplied tower. -/
+Source: Stacks Project, Tag 0F7J. -/
 theorem unboundedEtaleLowerShriekCompIso_tower
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] [IsNoetherian Z]
@@ -1169,8 +1159,7 @@ private lemma unbounded_pf_id
   exact derived_star_id_conjugate A X
 
 /-- Congruence of the chosen compact-support functors under equality of morphisms.
-Source: Stacks Project, Tag 0F7K
-(blueprint: lem-amb-unbounded-compact-support-comparisons). -/
+Source: Stacks Project, Tag 0F7K. -/
 noncomputable def unboundedEtaleLowerShriekCongr
     (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} {f f' : X ⟶ Y}
@@ -1181,8 +1170,7 @@ noncomputable def unboundedEtaleLowerShriekCongr
   exact Iso.refl _
 
 /-- The identity compactification, followed by the exact identity sum-extension comparison.
-Source: Stacks Project, Tag 0F7K
-(blueprint: lem-amb-unbounded-compact-support-comparisons). -/
+Source: Stacks Project, Tag 0F7K. -/
 noncomputable def unboundedEtaleLowerShriekId
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (X : Scheme.{u}) [HasCompactification (𝟙 X)] :
@@ -1218,11 +1206,7 @@ private lemma unbounded_chosen_congr
   rfl
 
 /-- Associativity is equality of the two specified natural transformations.
-Source: Stacks Project, Tag 0F7K
-(blueprint: lem-amb-unbounded-compact-support-comparisons).
-Proof: identify the chosen compositor, congruence maps and units with the existing
-compact-support formalism. Its associativity equation, proved by refining the tower and
-pasting the proper/open squares, transports to the specified natural transformations. -/
+Source: Stacks Project, Tag 0F7K. -/
 theorem unboundedEtaleLowerShriekCompIso_assoc
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z T : Scheme.{u}}
@@ -1253,11 +1237,7 @@ theorem unboundedEtaleLowerShriekCompIso_assoc
   exact h'
 
 /-- Both unit laws have the canonical identity-compactification normalization.
-Source: Stacks Project, Tag 0F7K
-(blueprint: lem-amb-unbounded-compact-support-comparisons).
-Proof: identify the chosen composition and identity comparisons with the compact-support
-formalism. The open and proper identity compositors have the specified derived-unit
-normalizations. Transport its left and right unit equations across these identifications. -/
+Source: Stacks Project, Tag 0F7K. -/
 theorem unboundedEtaleLowerShriekCompIso_units
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
@@ -1281,8 +1261,7 @@ theorem unboundedEtaleLowerShriekCompIso_units
     exact h
 
 /-- The exact inverse-image composition is the sheaf comparison descended termwise.
-Source: Stacks Project, Tags 0F7H and 0F7L
-(blueprint: lem-amb-unbounded-compact-support-comparisons). -/
+Source: Stacks Project, Tags 0F7H and 0F7L. -/
 noncomputable def unboundedEtaleUpperStarCompIso
     (A : Type (u + 1)) [CommRing A]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
@@ -1293,8 +1272,7 @@ noncomputable def unboundedEtaleUpperStarCompIso
     (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The exact inverse-image identity is the sheaf identity descended termwise.
-Source: Stacks Project, Tags 0F7H and 0F7L
-(blueprint: lem-amb-unbounded-compact-support-comparisons). -/
+Source: Stacks Project, Tags 0F7H and 0F7L. -/
 noncomputable def unboundedEtaleUpperStarIdIso
     (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) :
     (upperStar (ModuleCat.{u + 1} A) (𝟙 X)).mapDerivedCategory ≅
@@ -1379,8 +1357,7 @@ private lemma identity_exchange_of_pasting
 /-- The chosen-compactification exchange with exact inverse images. This extends the
 existing `exactCompactSupportExchange` from the chosen fibre product to an arbitrary
 specified cartesian square, using exactly the same canonical exact-functor transport.
-Source: Stacks Project, Tag 0F7L
-(blueprint: lem-amb-unbounded-compact-support-comparisons). -/
+Source: Stacks Project, Tag 0F7L. -/
 noncomputable def unboundedEtaleCompactSupportExchange
     (A : Type (u + 1)) [CommRing A]
     {X X' Y Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}
@@ -1399,8 +1376,7 @@ noncomputable def unboundedEtaleCompactSupportExchange
 
 /-- The proper open-restriction map, followed by the inverse of the open unit. It is the
 map called lambda in the tower normalization, formed from the specified exact-derived mate.
-Source: Stacks Project, Tag 0F7B, case (b)
-(blueprint: lem-amb-unbounded-compact-support-comparisons). -/
+Source: Stacks Project, Tag 0F7B, case (b). -/
 noncomputable def unboundedEtaleProperOpenRestriction
     (A : Type (u + 1)) [CommRing A]
     {U V W Z : Scheme.{u}} {k : U ⟶ V} {r : U ⟶ W} {p : V ⟶ Z} {i : W ⟶ Z}
@@ -1418,12 +1394,7 @@ noncomputable def unboundedEtaleProperOpenRestriction
 
 /-- The tower interchange has adjunct inverse to the specified proper open-restriction
 exchange. The equation specifies the inverse without choosing any unrelated isomorphism.
-Source: Stacks Project, Tag 0F7B, case (b)
-(blueprint: lem-amb-unbounded-compact-support-comparisons).
-Proof: descend the open adjunction and its triangles termwise. Proper base
-change makes lambda invertible, and the open unit is invertible. The two mate formulas
-for the tower exchange transpose to lambda inverse by triangle identities and mate pasting.
-This is equality of the actual maps, and does not use stalks to detect derived morphisms. -/
+Source: Stacks Project, Tag 0F7B, case (b). -/
 theorem unboundedEtaleCompactSupport_tower_adjunct
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U V W Z : Scheme.{u}}
@@ -1520,13 +1491,7 @@ private theorem exchange_normalization_general
 set_option backward.isDefEq.respectTransparency false in
 /-- On a compactification, exchange is exactly proper exchange followed by the inverse
 of the degreewise open-extension comparison, with the displayed canonical associators.
-Source: Stacks Project, Tag 0F7L
-(blueprint: lem-amb-unbounded-compact-support-comparisons).
-Proof: expand the exact-functor transport in the existing exchange definition.
-The proper factor becomes the exact inverse-image adjunction mate of
-definition-derived-base-change-map. The open factor is the degreewise inverse conjugate of the sheaf
-exchange, hence the map of def-weil-pbc-etale-shriek-base-change-map. Triangle identities cancel the
-exact-functor transport isomorphisms. Localization descends this equation on every complex. -/
+Source: Stacks Project, Tag 0F7L. -/
 theorem unboundedEtaleCompactSupport_exchange_normalization
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X X' Y Y' : Scheme.{u}}
@@ -1606,12 +1571,7 @@ private lemma unbounded_chosen_base_change
 
 /-- Compact-support exchange is an isomorphism on every unbounded complex, independently
 of compactification, with the specified exact proper exchange and inverse open factor.
-Source: Stacks Project, Tag 0F7L
-(blueprint: lem-amb-unbounded-compact-support-comparisons).
-Proof: identify the canonical exact-derived proper mate and the degreewise open base-change
-isomorphism with the two factors of the compact-support formalism. Proper base change makes
-the first factor invertible for finite coefficients. The formalism's refinement naturality
-and common-refinement cocycle identify the result for every supplied compactification. -/
+Source: Stacks Project, Tag 0F7L. -/
 theorem unboundedEtaleCompactSupport_baseChange
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X X' Y Y' : Scheme.{u}}
@@ -1835,11 +1795,7 @@ theorem unboundedEtaleCompactSupportBaseChange_paste_horiz
 
 /-- Successive changes of base give the composite exchange, with the termwise
 inverse-image composition identifications.
-Source: Stacks Project, Tag 0F7L
-(blueprint: lem-amb-unbounded-compact-support-comparisons).
-Proof: use the twice base-changed compactification and the formalism's horizontal pasting
-equation. Its refinement square identifies the transported maps with the specified chosen
-exchanges; the common-refinement factors cancel by the comparison cocycle. -/
+Source: Stacks Project, Tag 0F7L. -/
 theorem unboundedEtaleCompactSupport_baseChange_comp
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X X' X'' Y Y' Y'' : Scheme.{u}}
@@ -1870,11 +1826,7 @@ attribute [local irreducible] unboundedEtaleCompactSupportBaseChange
 
 set_option backward.isDefEq.respectTransparency true in
 /-- Identity base changes give identity exchange after the canonical pullback unit maps.
-Source: Stacks Project, Tag 0F7L
-(blueprint: lem-amb-unbounded-compact-support-comparisons).
-Proof: apply the horizontal pasting equation with an identity change of base. Cancel the
-invertible compact-support exchange. Naturality of the inverse-image compositor and its
-unit equation give precisely the displayed identity after the canonical unit maps. -/
+Source: Stacks Project, Tag 0F7L. -/
 theorem unboundedEtaleCompactSupport_baseChange_id
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
@@ -1956,12 +1908,7 @@ theorem unboundedEtaleCompactSupportBaseChange_paste_vert
   exact h
 
 /-- Base change is compatible with the specified compact-support composition maps.
-Source: Stacks Project, Tag 0F7L
-(blueprint: lem-amb-unbounded-compact-support-comparisons).
-Proof: apply the proved compact-support-formalism exchange/compositor pasting equation.
-Identify its chosen compact-support compositor and exchange with the concrete maps, and
-its inverse-image compositor with the exact termwise-derived inverse-image comparison.
-The resulting component equation is the asserted equality. -/
+Source: Stacks Project, Tag 0F7L. -/
 theorem unboundedEtaleCompactSupport_baseChange_composition
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X X' Y Y' Z Z' : Scheme.{u}}
@@ -2435,12 +2382,7 @@ private lemma refinement_comparison_plus
   rfl
 
 /-- The pairwise comparisons restrict to the already specified bounded-below comparisons.
-Source: Stacks Project, Tags 0F7H and 0F7I
-(blueprint: lem-amb-unbounded-compact-support-comparisons).
-Proof: compare the right-derived proper exchange and exact open adjunction under the
-bounded-below inclusion, using their derived units, counits and square equations. This
-identifies the cartesian refinement comparisons. Apply the two common-refinement factors
-and their inverses to obtain equality of the specified pairwise comparison maps. -/
+Source: Stacks Project, Tags 0F7H and 0F7I. -/
 theorem unboundedEtaleCompactSupport_comparison_plus
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}}
@@ -3647,14 +3589,7 @@ private theorem triangle_restriction_plus
   simp only [Functor.map_comp, Functor.comp_map, Functor.comp_obj, Category.assoc]
 
 /-- The normalized composition comparison restricts to the existing bounded-below one.
-Source: Stacks Project, Tags 0F7H--0F7K
-(blueprint: lem-amb-unbounded-compact-support-comparisons).
-Proof: compare two compactifications through their common infimum, using the
-bounded/unbounded refinement squares; invert the second square and paste it with the first.
-For the chosen `ofRestrict` triangle, use this comparison on its first and composite faces,
-and the identity on its second face. The bounded and native compositor definitions give the
-same triangle word, and naturality pastes the four faces. No Noetherian, separatedness or
-finite-type hypothesis is used. -/
+Source: Stacks Project, Tags 0F7H--0F7K. -/
 theorem unboundedEtaleCompactSupport_composition_plus
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) [QuasiCompact f] [QuasiCompact g]
@@ -4384,15 +4319,7 @@ end NormalizationRefinements
 /-- Every proper refinement, including a noncartesian one, gives the comparison normalized
 as the identity on the source open. The graph-normalized open comparison is the identity
 there; applying the ambient direct image and composing direct images gives this formula.
-Source: Stacks Project, Tags 0F7I and 0F7B
-(blueprint: lem-amb-unbounded-compact-support-comparisons).
-Proof: sheaf normalization determines the comparison because its map to direct image is
-monic. The prescribed injective model then identifies its derived map with proper/open
-interchange. For a cartesian refinement, the specified adjunct identifies this with the
-formalism comparison. Apply the normalization family's refinement law to the coarser open
-to obtain composition for arbitrary refinements. The concrete dense refinement of the
-source maps cartesianly to both compactifications. Composition and cancellation of its
-isomorphism give the result for the original refinement. -/
+Source: Stacks Project, Tags 0F7I and 0F7B. -/
 theorem unboundedEtaleCompactSupport_refinement_normalization
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]

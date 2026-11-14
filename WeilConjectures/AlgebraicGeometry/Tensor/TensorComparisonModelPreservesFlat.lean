@@ -137,7 +137,6 @@ import Mathlib.CategoryTheory.Monoidal.Preadditive
 /-! # Flat modules preserved by a normalized tensor model
 
 Source: Stacks 06YS and 07A4.
-(blueprint: lem-coef-semilinear-tensor-model-preserves-flat)
 -/
 
 @[expose] public noncomputable section
@@ -168,15 +167,7 @@ private theorem siteFlat_of_catFlat (M : Mod.{c, v, max c v r} J₀ R₀)
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- A normalized tensor model preserves flat modules.
-Source: Stacks 06YS and 07A4, flat complexes and derived tensor comparison.
-(blueprint: lem-coef-semilinear-tensor-model-preserves-flat).
-
-Proof: put a flat module in degree zero. Its terms are flat (all other terms
-vanish), and the bounded-above flat criterion makes it K-flat. The model sends
-this complex to a K-flat complex. Mapping a single complex is isomorphic to the
-single complex of the image module. The converse K-flat single-complex criterion
-therefore makes that image categorically flat. The natural isomorphism between
-categorical sheaf tensor and site sheaf tensor gives the asserted site flatness. -/
+Source: Stacks 06YS and 07A4, flat complexes and derived tensor comparison. -/
 theorem tensorComparisonModel_preserves_flat
     (F : Mod.{c, v, max c v r} J₀ R₀ ⥤ Mod.{c, v, max c v r} J₁ R₁)
     [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]

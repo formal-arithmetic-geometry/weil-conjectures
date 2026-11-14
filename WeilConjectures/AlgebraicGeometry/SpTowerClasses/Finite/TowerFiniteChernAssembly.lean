@@ -33,17 +33,7 @@ private theorem finiteBoundaryEquality_transport {D : Type u₁} [Category.{v₁
   rcases h with ⟨x, y, hx, hy, hxy⟩
   exact ⟨x, y, hx.trans ha, hy.trans hb, hxy⟩
 
-/-- Integral boundary normalization and scalar compatibility give finite Chern normalization.
-Source: blueprint latest, `sk-prop-sp-tower-geometric-classes.proof.md`, clause (2),
-final evaluation of the constructed first Chern arrow.
-(blueprint: lem-sfb-chern-finite-assembly).
-
-Proof: at each line bundle L and level n, apply the scalar comparison to the
-integral arrow defined by the unit inverse, reduction of lineBundleClass, and
-root comparison. Replace its underlying integral arrow by the positive Kummer
-composite using the integral normalization. The scalar extension and evaluation
-of that integral arrow are exactly the existing firstChern and evaluatedChern
-formulas. The resulting boundary equality is the stated finite normalization. -/
+/-- Integral boundary normalization and scalar compatibility give finite Chern normalization. -/
 theorem finiteChernNormalization_of_arrowComparisons (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {T : Scheme.{u}} (c : Chern l E T)

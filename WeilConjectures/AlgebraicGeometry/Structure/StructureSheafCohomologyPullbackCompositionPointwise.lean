@@ -11,7 +11,6 @@ import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
 
 /-! Pointwise composition formula for structure-sheaf cohomology pullback.
-(blueprint: lem-sc-structure-sheaf-cohomology-pullback-composition-pointwise)
 -/
 
 @[expose] public section
@@ -77,7 +76,6 @@ is functorial under composition of exact inverse-image functors; evaluating that
 functoriality on a class gives the displayed equality. This is the pointwise
 calculation underlying the additive-homomorphism composition law.
 Source: Stacks Project, Cohomology of Sheaves, Section 01F7, equation-functorial.
-(blueprint: lem-sc-structure-sheaf-cohomology-pullback-composition-pointwise)
 -/
 theorem structureSheafCohomologyPullback_comp_apply {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z) (n : ℕ)

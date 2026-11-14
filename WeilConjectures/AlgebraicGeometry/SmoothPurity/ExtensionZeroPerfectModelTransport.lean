@@ -19,8 +19,7 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSuppleme
 
 /-! # Transport of a single local model across open extension by zero
 
-Source: Bhatt--Scholze, Lemma 6.1.12(1) and Proposition 6.6.11
-(blueprint: lem-cbc-extension-zero-perfect-model-transport).
+Source: Bhatt--Scholze, Lemma 6.1.12(1) and Proposition 6.6.11.
 -/
 
 -- After pruning, this module only keeps private declarations.

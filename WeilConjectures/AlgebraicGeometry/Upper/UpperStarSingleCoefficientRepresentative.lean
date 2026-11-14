@@ -13,8 +13,7 @@ import all WeilConjectures.AlgebraicGeometry.Scalar.ScalarPullbackRepresentative
 /-!
 # The exact single-coefficient geometric representative
 
-Source: Stacks Project, Tags 07A4 and 0FPH
-(blueprint: lem-pur-upper-star-single-coefficient-representative).
+Source: Stacks Project, Tags 07A4 and 0FPH.
 -/
 
 @[expose] public noncomputable section
@@ -53,11 +52,7 @@ private theorem geometric_single_core
 
 /-- The exact single-coefficient comparison is the geometric representative
 followed by localization of the ordinary single-complex comparison and coefficient iso.
-Source: Stacks Project, Tag 07A4
-(blueprint: lem-pur-upper-star-single-coefficient-representative).
-Proof: factor the geometric representative through the exact-derived comparison.
-Use mapDerivedCategorySingleFunctor_hom_app_eq and functoriality of Q on the
-single-complex comparison followed by k. The singleFunctor is single followed by Q. -/
+Source: Stacks Project, Tag 07A4. -/
 theorem upperStar_single_coefficient_representative
     (A : Type (u + 1)) [CommRing A] {Z W : Scheme.{u}} (f : Z ⟶ W)
     {M : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} A)}

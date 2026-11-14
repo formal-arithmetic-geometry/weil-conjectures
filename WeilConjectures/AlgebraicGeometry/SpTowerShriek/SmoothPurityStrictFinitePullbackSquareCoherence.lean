@@ -597,22 +597,7 @@ set_option linter.style.haveILetI false in
 -- Inlining the finite instance keeps the concrete realization conversions small.
 set_option maxHeartbeats 600000 in
 -- Explicit comparison congruences are checked within this declaration.
-/-- The fixed scalar pullback comparisons identify the two pullback-square words.
-Source: blueprint operations proof (2), pullback compositor normalization.
-(blueprint: new-lem-sp-strict-finite-pullback-square-coherence).
-
-Proof: compare the ordinary pullback compositors by transposing under the
-constant-ring pullback adjunction. The normalization of openSquarePullbackModel
-and the unit-composition formula for sfIntrinsicPullbackComp identify both
-transposes sectionwise. Combine this with the equivalence triangle identities
-to obtain the compositor square for comparisonFiniteOrdinaryPull. Localize
-that equation with mapDerivedCategorySquareIso_comp and the published ordinary
-normalization of proEtaleConstantRingPullbackComposition. Insert the native
-left-derived/exact comparison, using its definition for both compositors.
-Apply the resulting equation to f′,g and to h,f. Transport along sq.w and cancel
-the comparisons for the common composite. Inverting the boundary comparisons
-yields the displayed square. This is independent of direct-image adjunctions,
-properness, compactification and witnesses. -/
+/-- The fixed scalar pullback comparisons identify the two pullback-square words. -/
 theorem strictFinitePullbackSquareCoherence (b : Base l E)
     {X' X Y' Y : Scheme.{u}} {h : X' ⟶ X} {f' : X' ⟶ Y'}
     {f : X ⟶ Y} {g : Y' ⟶ Y}

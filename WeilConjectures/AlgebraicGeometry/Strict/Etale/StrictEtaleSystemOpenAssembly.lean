@@ -312,11 +312,10 @@ private theorem openSystemTransition {m n : ℕ} (h : n ≤ m)
   exact he
 
 /-- The system-level assembly data for ordinary strict étale extension.
-Source: Zheng, Construction 4.1 and Stacks 03S2, 03DI and 03DJ
-(blueprint: new-lem-pur-strict-etale-system-open-assembly).
+Source: Zheng, Construction 4.1 and Stacks 03S2, 03DI and 03DJ.
 
 This record supplies only the system functor, its exact adjunction, evaluation mate,
-and transition law.  The levelwise functors and their restriction mates are supplied
+and transition law. The levelwise functors and their restriction mates are supplied
 by `L`; hence this is a proper assembly step rather than a restatement of the full
 ordinary-open theorem. -/
 structure StrictEtaleSystemOpenAssembly where
@@ -341,34 +340,7 @@ attribute [instance] StrictEtaleSystemOpenAssembly.additive
 
 set_option linter.unusedSectionVars false in
 /-- The system-level assembly exists for every levelwise package.
-Source: Zheng, Construction 4.1; Stacks Project 03S2, 03DI and 03DJ.
-(blueprint: new-lem-pur-strict-etale-system-open-assembly)
-
-Proof. Extend the `n`th level of a system `M` by `L.level n`. Define its
-successor transition by applying the next-level extension to the source
-transition, then composing with `L.restriction`. On a morphism use the level
-functors. Naturality of the restriction comparison proves that these component
-maps commute with the transitions and that they define an additive functor.
-
-The component adjunctions `L.levelAdjunction` identify families of component maps
-with families of their transposes. The identities `L.restrictionMate`, together
-with the normalized evaluation comparison of `I.inverse`, identify the two
-transition-compatibility equations under this bijection. Thus it restricts to a
-bijection on system morphisms. Componentwise naturality makes this a natural Hom
-equivalence, hence gives `adjunction`. Evaluating the constructed functor gives
-the required `evaluation`; transposing this comparison by the same Hom
-equivalence proves `evaluationMate`.
-
-The evaluation functors are exact and jointly reflect isomorphisms. Since each
-`L.level n` is exact and the constructed extension evaluates to it, the existing
-joint-conservativity exactness criterion proves `exact`.
-
-For an arbitrary pair `n ≤ m`, transpose the identity of the extended system to
-a system map into its inverse image. Naturality of the source transition for this
-map, together with `strictEtaleInverseTransition`, gives the transposed form of
-the required transition equation. The level Hom equivalence reflects equality,
-so the transition equation follows. The same construction covers the empty open
-and zero ring; all component maps and Hom equivalences retain these formulas. -/
+Source: Zheng, Construction 4.1; Stacks Project 03S2, 03DI and 03DJ. -/
 theorem strictEtaleSystemOpenAssembly_exists :
     Nonempty (StrictEtaleSystemOpenAssembly O t j I PX PZ L) := by
   refine ⟨{

@@ -9,9 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Weil.WeilCompletedKoszulSite
 
 /-! # The regular module under completed constant realization
 
-Source: Stacks Project, Modules on Sites, Tags 03D8 and 03EK,
-lemma-adjointness-tensor-restrict, and Tag 0GMW, lemma-sheafification-tensor.
-(blueprint: lem-weil-pbc-completed-realization-regular).
+Source: Stacks Project, Modules on Sites, Tags 03D8 and 03EK, and Tag 0GMW.
 -/
 
 @[expose] public noncomputable section
@@ -224,36 +222,7 @@ private theorem transportedUnit_isIso
 /-- The specified coefficient unit identifies the realized regular module with the
 regular coefficient sheaf, and it intertwines multiplication by every scalar.
 
-Source: Stacks Project, Modules on Sites, Tags 03D8 and 03EK,
-lemma-adjointness-tensor-restrict, and Tag 0GMW, lemma-sheafification-tensor.
-(blueprint: lem-weil-pbc-completed-realization-regular).
-
-Proof: compose the scalar-extension/restriction adjunction with the
-constant-module sheafification Hom equivalence and the regular-module/sections
-bijection. For every completed module N this gives a bijection from maps
-G(A) to N to global sections of N. The normalized ordinary adjunction unit
-sends the constant generator 1 to 1 tensor 1, exactly the section formula
-characterizing completedKoszulOne. Hence this bijection equals precomposition
-with completedKoszulOne followed by the regular-module/sections bijection.
-Precomposition is therefore bijective for every N, and the Yoneda criterion
-makes completedKoszulOne invertible.
-
-Naturality of the ordinary adjunction unit with respect to multiplication by a
-says that the extended map sends 1 tensor 1 to 1 tensor a. Linearity of the
-constant-module sheafification unit identifies the constant generator a with
-the scalar section a times the generator 1. Linearity of the ordinary unit
-then identifies 1 tensor a with the image of a times 1 tensor 1.
-
-Under restriction through the inverse completed coefficient-ring isomorphism,
-the regular-module map classified by section 1 sends r to the inverse ring
-isomorphism applied to r. Its inverse is sectionwise the forward ring
-isomorphism. Reindex these maps along the site equivalence to identify this
-map with completedCechCoefficientUnit and prove it invertible. Compose with
-the image of completedKoszulOne. Equality of maps from the regular module is
-tested at 1. The scalar equation already proved before transport then becomes
-the claimed equation because completedCechScalar is the forward ring
-isomorphism applied to the original scalar section. These unit, adjunction
-and ring-isomorphism identities include the zero ring and the empty site. -/
+Source: Stacks Project, Modules on Sites, Tags 03D8 and 03EK, and Tag 0GMW. -/
 theorem completedRealizationRegular
     (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) :
     let F := intrinsicPresentationModulesBack X d ⋙ (completedCechModulesEquiv X d).functor

@@ -9,8 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassR
 import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Line.TowerLineBundleEtaleClassAdditive
 
 /-! # Additivity of the integral line class as a constant tower
-
-Source: tower classes proof (2), exact constant-tower realization.
 -/
 
 @[expose] public noncomputable section
@@ -37,15 +35,6 @@ private theorem mapSingleArrow_add
 
 /-- Tensor multiplication becomes addition for the integral line class in the
 ordinary derived category of constant towers.
-
-Source: tower classes proof (2), constant-system realization of the Picard class.
-(blueprint: lem-sfb-tower-line-bundle-class-additive).
-
-Proof: the changed-site integral line class preserves multiplication as addition
-by tower_lineBundleEtaleClass_mul. The constant-system functor is exact and
-additive. Its derived functor therefore preserves the sum, and the fixed single
-and shift comparisons preserve it under composition. This is precisely the
-mapSingleArrow transport defining lineBundleClass.
 -/
 theorem tower_lineBundleClass_mul (T : Scheme.{u}) (L M : T.Pic) :
     lineBundleClass T (L * M) = lineBundleClass T L + lineBundleClass T M := by

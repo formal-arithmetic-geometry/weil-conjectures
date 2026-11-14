@@ -9,9 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalTowerSystemInte
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import all WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalDerivedReductionExists
 
-/-! # Cohomology concentration of reduced shifted comparison units
-Source: diagonal tower system proof, step (3), target computation.
-(blueprint: lem-sfb-strict-kummer-cohomology-concentration). -/
+/-! # Cohomology concentration of reduced shifted comparison units -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -150,33 +148,7 @@ private theorem reduction_of_divisible_concentrated
 
 /-- Simultaneous reduction of shifted comparison units has cohomology only in
  degree minus two. This assertion specifies no roots identification, comparison
- isomorphism, or unit normalization.
-
-Source: diagonal tower system proof, step (3), target paragraph
-(blueprint: lem-sfb-strict-kummer-cohomology-concentration).
-
-Proof: resolve the degree-zero comparison-units complex by a flat-term K-flat
-complex P. Nonzero-integer multiplication is mono on the constant integral unit,
-hence on every flat term. Exact p-adic scalar extension preserves these monos.
-On this resolving class the multiplication/quotient short complexes are short
-exact, and their long exact homology sequences show that simultaneous reduction
-inverts quasi-isomorphisms. The resolving-class derived construction and
-uniqueness of left-derived functors therefore show that the supplied D's counit
-is invertible on P. Scalar extension of P resolves the degree-zero scalar
-extension of comparison units. Positive prime-power multiplication on units is
-epi by the small-etale Kummer exact sequence; comparison pullback and scalar
-extension, both left adjoints, preserve it. Consequently multiplication is epi
-on every cohomology object of the scalar-extended P: degree zero uses this
-Kummer epimorphism, and other degrees are zero. In the long exact sequence of
-the level quotient, multiplication is also mono in the next degree except
-when that next degree is zero. Thus each level quotient is exact away from
-minus one. Exact evaluation commutes with homology and jointly detects zero
-objects in the strict-system category, giving both bounds at minus one.
-Transport through D's invertible counit and the localized resolution. Finally
-use the shift comparison supplied by D.triangulated to shift both bounds to
-minus two. No identification of kernels, scalar Tate lines, or boundary maps
-is used. The zero sheaf and the first positive prime-power level require no
-separate argument. -/
+ isomorphism, or unit normalization. -/
 theorem strict_kummer_cohomology_concentration (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     (hW : IsUnit (ℓ : Γ(W, ⊤)))
     [HasDerivedCategory.{u + 1} (DiagonalAb W)]

@@ -14,9 +14,8 @@ import WeilConjectures.AlgebraicGeometry.Square.SquareZeroTensorGradedBoundaryPr
 
 /-! # Homogeneous realization of tensor boundaries
 
-Source: Stacks Project, Tag 09MS, coherent-equation-ses and its direct sum over degrees;
-Tag 0B8S, the quotient action on the square-zero kernel.
-(blueprint: lem-sc-square-zero-tensor-boundary-graded-realization).
+Source: Stacks Project, Tag 09MS, coherent-equation-ses and its direct sum over degrees; Tag 0B8S,
+the quotient action on the square-zero kernel.
 -/
 
 @[expose] public section
@@ -57,35 +56,8 @@ extension. This is a comparison theorem: it asserts no derivation identity, eith
 that algebra extension or for tensor boundaries. The comparison holds for every compatible
 resolution presentation and every action satisfying the displayed local formulas.
 
-Source: Stacks Project, Tag 09MS, coherent-equation-ses and the graded direct-sum sequence
-following it; Tag 0B8S, first paragraph of the proof (quotient action on the kernel).
-(blueprint: lem-sc-square-zero-tensor-boundary-graded-realization).
-Proof: form the sheaf direct sum B of L tensor powers, with multiplication given by the
-inverse tensor-power addition isomorphisms. On a trivializing open for L this is the
-polynomial algebra over O_X; the change-of-frame maps preserve multiplication, so these
-algebras glue. Form C from the direct sums of j_* j^* L powers and let p be the direct
-sum of adjunction units. The unit-quotient theorem and the ideal-kernel comparisons
-identify its kernel K with the direct sum of I tensor L powers. Direct sums of these
-short exact sequences are exact on stalks. Locally K is I times a polynomial algebra,
-so its square is zero when I squared is zero. No finite type hypothesis is needed.
-Include (f; a_0 inverse), after the degree-one right-unitor identification, in C in
-homogeneous degree n, and (x; a_e inverse) in degree n(e+1); call these sections s and t.
-Let P, Px and Pf be H^1 of the degree n(e+2), n(e+1) and n projections of K,
-followed by the respective inverse coefficient comparisons.
-For any compatible resolutions the snake boundary is the canonical section boundary:
-naturality for the degree inclusion and projection, and the resolution/triangle
-connecting comparison, identify P of boundary(s*t) with b_(e+1) inverse of the boundary
-of lambda inverse followed by f tensor x. This calculation only identifies the product
-section and its boundary; it does not expand that boundary as a sum. The local quotient
-action formula uniquely fixes multiplication on K because its inclusion is mono. For
-s acting on the degree n(e+1) summand, the coefficient comparison gives
-mulTensorPowSection f F e 1. For t acting on degree n, the degree-zero right unitor gives
-rho_F inverse followed by F whiskered with x, after H^1(rho_F). Naturality of the affine
-cohomology edge and of the degree projections gives the two action equalities on every
-cohomology class. Boundary naturality separately gives the two input boundary equalities,
-separately, without using a product rule. All comparisons are the canonical ones since
-hD identifies D with their explicit construction. Degree zero (n=0 or e=0) uses the same
-inclusion/projection and unitors, and zero sections are handled by additivity. -/
+Source: Stacks Project, Tag 09MS, coherent-equation-ses and the graded direct-sum sequence following
+it; Tag 0B8S, first paragraph of the proof (quotient action on the kernel). -/
 theorem tensorBoundary_graded_realization
     {X Z : Scheme.{u}} (j : Z ⟶ X) [IsClosedImmersion j]
     [HasDerivedCategory.{wC} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

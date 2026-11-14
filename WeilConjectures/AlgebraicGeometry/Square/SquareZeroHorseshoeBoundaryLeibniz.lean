@@ -126,28 +126,7 @@ set_option maxHeartbeats 1000000 in
 -- The cocycle calculation elaborates the underlying modules and product projections.
 /-- The connecting map obeys Leibniz for any sheaf action agreeing with multiplication
 by local lifts. The action is input; no action, cohomology action, or boundary is chosen.
-Source: Stacks Project, Cohomology, Lemma 0B8S, local-lift computation.
-(blueprint: lem-sc-square-zero-horseshoe-boundary-leibniz)
-
-Proof:
-1. For global f and g, the sheaf epimorphism p gives a common open cover with lifts
-b_a and c_a (intersect covers for f and g). Their products lift fg. Kernel exactness
-identifies overlap differences with unique sections z_f, z_g, z_fg of I; the triple
-differences telescope, so these are Cech cocycles.
-2. On each overlap, b_a*c_a - b_b*c_b = (b_a-b_b)*c_a + b_b*(c_a-c_b).
-The lift-action hypothesis identifies the two terms with the images under i of
-(mu g)(z_f) and (mu f)(z_g). Injectivity of i on sections therefore identifies z_fg
-with their sum. Square-zero guarantees that replacing any lift gives the same action.
-3. Apply boundary_cech_local_lifts and cechH1Map_natural. The comparison is additive
-and commutes with mu f and mu g, so the preceding cocycle identity yields the same
-identity on H1 for the canonical connecting classes. Either uniform convention for
-Cech differences gives this identity, since changing all three signs preserves it.
-4. The displayed snake map is that connecting map: compare the compatible resolutions
-with a horseshoe using exists_horseshoe_rightDerived_deltaFunctor and resolution
-comparison. Naturality for the identity ladder makes the transported boundaries equal;
-the degree-zero augmentation identifies the section f with its H0 class through
- toRightDerivedZero. Thus the same identity holds for the specified boundary d.
-For I = 0 it is the zero identity; for a split extension the boundary vanishes. -/
+Source: Stacks Project, Cohomology, Lemma 0B8S, local-lift computation. -/
 theorem square_zero_horseshoe_boundary_leibniz (X : Scheme.{u})
     (B C : X.CommAlgebraSheaf) (p : B ⟶ C)
     (I : SheafOfModules.{u} (moduleRings X.toRingedSpace))

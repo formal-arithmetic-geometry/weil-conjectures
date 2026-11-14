@@ -27,10 +27,6 @@ import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionReduction
 /-!
 # Cup product with closed supports
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-a1-kummer,
-proposition-purity-vector-bundles, and its coefficient calculation in the DAG
-(blueprint: proposition-purity-vector-bundles).
-
 The ordinary coefficient map is uniquely specified by restriction and multiplication of
 constants. Its derived comparison uses the actual localization tensor comparison. The cup
 product acts on the supported-Hom representatives from lemma-sections-support-closed-subscheme--1.
@@ -67,9 +63,7 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory Opposite
 namespace AlgebraicGeometry.ProEtale
 
 /-- A named reference to the existing canonical localization structure, shared by all
-occurrences below. This is the upstream instance, not a new localization.
-Source: proposition-purity-vector-bundles and definition-small-pro-etale-site--1
-(blueprint: proposition-purity-vector-bundles). -/
+occurrences below. This is the upstream instance, not a new localization. -/
 @[reducible]
 noncomputable def cupHasDerivedCategory (P : WeilConjectures.PurityFiniteSetting.{u})
     (X : Scheme.{u}) : HasDerivedCategory.{u + 1}
@@ -77,41 +71,34 @@ noncomputable def cupHasDerivedCategory (P : WeilConjectures.PurityFiniteSetting
   inferInstance
 
 /-- The existing fixed-scalar derived category with its canonical structure explicitly
-shared. Source: proposition-purity-vector-bundles (blueprint: proposition-purity-vector-bundles). -/
+shared. -/
 abbrev CupDerivedCategory (P : WeilConjectures.PurityFiniteSetting.{u}) (X : Scheme.{u}) :=
   @DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} P.Coefficient))
     _ _ (cupHasDerivedCategory P X)
 
-/-- The upstream derived monoidal structure, named once for this coefficient datum.
-Source: proposition-purity-vector-bundles, derived tensor (blueprint:
-proposition-purity-vector-bundles). -/
+/-- The upstream derived monoidal structure, named once for this coefficient datum. -/
 @[reducible]
 noncomputable def cupMonoidal (P : WeilConjectures.PurityFiniteSetting.{u}) (X : Scheme.{u}) :
     MonoidalCategory (CupDerivedCategory P X) := inferInstance
 
-/-- The object part of the existing derived tensor using the shared instance.
-Source: proposition-purity-vector-bundles (blueprint: proposition-purity-vector-bundles). -/
+/-- The object part of the existing derived tensor using the shared instance. -/
 noncomputable abbrev cupTensorObject (P : WeilConjectures.PurityFiniteSetting.{u}) (X : Scheme.{u})
     (F G : CupDerivedCategory P X) : CupDerivedCategory P X :=
   ((@curriedTensor (CupDerivedCategory P X) _ (cupMonoidal P X)).obj F).obj G
 
-/-- The existing bounded-below subcategory with that same shared localization.
-Source: proposition-purity-vector-bundles (blueprint: proposition-purity-vector-bundles). -/
+/-- The existing bounded-below subcategory with that same shared localization. -/
 abbrev CupPlus (P : WeilConjectures.PurityFiniteSetting.{u}) (X : Scheme.{u}) :=
   @DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} P.Coefficient))
     _ _ (cupHasDerivedCategory P X)
 
-/-- The actual degree-zero embedding with the shared canonical localization structure.
-Source: proposition-purity-vector-bundles (blueprint: proposition-purity-vector-bundles). -/
+/-- The actual degree-zero embedding with the shared canonical localization structure. -/
 noncomputable def cupSingle (P : WeilConjectures.PurityFiniteSetting.{u}) (X : Scheme.{u}) :
     Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} P.Coefficient) ⥤ CupDerivedCategory P X :=
   @DerivedCategory.singleFunctor _ _ _ (cupHasDerivedCategory P X) 0
 
-/-- Compare the specified finite coefficient sheaf with the constant pro-etale sheaf.
-Source: proposition-purity-vector-bundles, coefficient calculation, and the constant-sheaf
-adjunction. Both functors are left adjoint to evaluation at the terminal pro-etale object;
-uniqueness of left adjoints gives the comparison preserving constant sections.
-(blueprint: proposition-purity-vector-bundles). -/
+/-- Compare the specified finite coefficient sheaf with the constant pro-etale sheaf. Both functors
+are left adjoint to evaluation at the terminal pro-etale object; uniqueness of left adjoints gives
+the comparison preserving constant sections. -/
 noncomputable def cupConstantIso (P : WeilConjectures.PurityFiniteSetting.{u})
     (X : Scheme.{u}) :
     P.constant X ≅ (constantSheaf (Scheme.ProEt.topology X)
@@ -122,9 +109,7 @@ noncomputable def cupConstantIso (P : WeilConjectures.PurityFiniteSetting.{u})
 set_option backward.isDefEq.respectTransparency false in
 /-- Restriction of the actual finite coefficient unit to a closed support. The map is
 adjoint to the constant-presheaf sheafification unit at the base change of the terminal
-object, so on local constants it restricts the same scalar.
-Source: proposition-purity-vector-bundles, the map q_D in the coefficient calculation
-(blueprint: proposition-purity-vector-bundles). -/
+object, so on local constants it restricts the same scalar. -/
 noncomputable def cupCoefficientRestriction (P : WeilConjectures.PurityFiniteSetting.{u})
     {D X : Scheme.{u}} (c : D ⟶ X) :
     P.constant X ⟶ (lowerStar (ModuleCat.{u + 1} P.Coefficient) c).obj (P.constant D) :=
@@ -141,18 +126,14 @@ noncomputable def cupCoefficientRestriction (P : WeilConjectures.PurityFiniteSet
               (Scheme.ProEt.mk (𝟙 X))))) ≫
     (lowerStar (ModuleCat.{u + 1} P.Coefficient) c).map (cupConstantIso P D).inv
 
-/-- Multiplication on the specified coefficient sheaf, transported from the tensor unit.
-Source: proposition-purity-vector-bundles, multiplication of local constant functions
-(blueprint: proposition-purity-vector-bundles). -/
+/-- Multiplication on the specified coefficient sheaf, transported from the tensor unit. -/
 noncomputable def cupCoefficientMultiplication (P : WeilConjectures.PurityFiniteSetting.{u})
     (X : Scheme.{u}) : P.constant X ⊗ P.constant X ⟶ P.constant X :=
   (tensorIso (cupConstantIso P X) (cupConstantIso P X)).hom ≫
     (λ_ (𝟙_ (Sheaf (Scheme.ProEt.topology X)
       (ModuleCat.{u + 1} P.Coefficient)))).hom ≫ (cupConstantIso P X).inv
 
-/-- The intersection immersion, with its scheme-theoretic pullback structure.
-Source: proposition-purity-vector-bundles, V=Z times_X W and h:V into X
-(blueprint: proposition-purity-vector-bundles). -/
+/-- The intersection immersion, with its scheme-theoretic pullback structure. -/
 noncomputable abbrev cupIntersection {Z W X : Scheme.{u}} (i : Z ⟶ X) (j : W ⟶ X) :
     pullback i j ⟶ X := pullback.fst i j ≫ i
 
@@ -327,16 +308,7 @@ private theorem cupRestriction_factor (P : WeilConjectures.PurityFiniteSetting.{
     cupRestriction_comp P p g⟩
 
 /-- The coefficient multiplication map is uniquely determined by multiplying restrictions
-of local constants. Source: proposition-purity-vector-bundles, coefficient calculation
-(blueprint: proposition-purity-vector-bundles).
-
-Proof: identify the coefficient constants with the tensor unit. Restriction then equals
-lax monoidal direct-image unit, and those units commute with composition. Restrict both
-factors to the intersection, apply the direct-image tensor comparison, and multiply there.
-The lax unit law verifies the required normalization. The supported-constant cokernel
-presentation makes each restriction epic, including for empty supports and the zero ring;
-tensoring preserves these epimorphisms because the sheaf tensor functors are left adjoints.
-Cancellation of their tensor product gives uniqueness. -/
+of local constants. -/
 theorem cupCoefficientMap_existsUnique (P : WeilConjectures.PurityFiniteSetting.{u})
     {Z W X : Scheme.{u}} (i : Z ⟶ X) (j : W ⟶ X)
     [IsClosedImmersion i] [IsClosedImmersion j] :
@@ -372,9 +344,7 @@ theorem cupCoefficientMap_existsUnique (P : WeilConjectures.PurityFiniteSetting.
     (cupCoefficientRestriction P i ⊗ₘ cupCoefficientRestriction P j)).mp (hν.trans hμ.symm)⟩
 
 /-- The specified underived map mu: restrict both factors to the intersection and multiply.
-The unique characterization uses the quotient maps, so this selects no arbitrary map.
-Source: proposition-purity-vector-bundles, displayed coefficient map mu
-(blueprint: proposition-purity-vector-bundles). -/
+The unique characterization uses the quotient maps, so this selects no arbitrary map. -/
 noncomputable def cupCoefficientMap (P : WeilConjectures.PurityFiniteSetting.{u})
     {Z W X : Scheme.{u}} (i : Z ⟶ X) (j : W ⟶ X)
     [IsClosedImmersion i] [IsClosedImmersion j] :
@@ -557,14 +527,7 @@ private theorem comparison_normalization {C : Type*} [Category C] [MonoidalCateg
   rw [Functor.LaxMonoidal.μ_natural_assoc]
   rw [← F.map_comp_assoc, hμ, F.map_comp, Category.assoc]
 
-/-- The coefficient map is invertible. Source: proposition-purity-vector-bundles, coefficient
-calculation (blueprint: proposition-purity-vector-bundles).
-Proof: the existing etale closed-constant tensor map is invertible and preserves the
-normalization by constant sections. The strong monoidal comparison inverse image preserves
-this isomorphism, and base change identifies its three coefficients with the specified
-pro-etale direct images. The comparison unit agrees with cupConstantIso, and the monoidal
-mate identity identifies the restriction maps. The transported isomorphism therefore has
-exactly the normalization characterizing cupCoefficientMap; uniqueness identifies them. -/
+/-- The coefficient map is invertible. -/
 theorem cupCoefficientMap_isIso (P : WeilConjectures.PurityFiniteSetting.{u})
     {Z W X : Scheme.{u}} (i : Z ⟶ X) (j : W ⟶ X)
     [IsClosedImmersion i] [IsClosedImmersion j] : IsIso (cupCoefficientMap P i j) := by
@@ -609,15 +572,7 @@ theorem cupCoefficientMap_isIso (P : WeilConjectures.PurityFiniteSetting.{u})
 
 end CoefficientComparison
 
-/-- Flatness of each closed direct image of constants, without a geometric-stalk assumption.
-Source: proposition-purity-vector-bundles, idempotent argument for flatness
-(blueprint: proposition-purity-vector-bundles).
-Proof: the coefficient ring is finite. The étale constant coefficient module is the tensor
-unit, hence flat. The proved étale open-closed flatness theorem shows that its direct image
-under the closed immersion is flat. Comparison inverse image preserves flatness, and its
-base-change comparison with this closed direct image is an isomorphism because a closed
-immersion is quasi-compact and quasi-separated. Transport flatness through that isomorphism.
-This uses no conservativity assertion for geometric stalks of pro-étale sheaves. -/
+/-- Flatness of each closed direct image of constants, without a geometric-stalk assumption. -/
 theorem cupCoefficient_flat (P : WeilConjectures.PurityFiniteSetting.{u})
     {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] :
     ObjectProperty.flat ((lowerStar (ModuleCat.{u + 1} P.Coefficient) i).obj
@@ -636,9 +591,7 @@ theorem cupCoefficient_flat (P : WeilConjectures.PurityFiniteSetting.{u})
     exact ObjectProperty.prop_of_iso ObjectProperty.flat e
       (flat_comparisonUpperStar_obj hf)
 
-/-- The canonical degree-zero comparison, constructed before specializing the category.
-Source: proposition-purity-vector-bundles, the localization tensor comparison followed by the
-ordinary single-complex comparison (blueprint: proposition-purity-vector-bundles). -/
+/-- The canonical degree-zero comparison, constructed before specializing the category. -/
 noncomputable def cupSingleTensorMap {C : Type c} [Category.{v} C] [Abelian C]
     [hD : HasDerivedCategory.{w} C]
     [HasColimitsOfSize.{0, 0} C] [MonoidalCategory C] [MonoidalPreadditive C]
@@ -660,9 +613,7 @@ noncomputable def cupSingleTensorMap {C : Type c} [Category.{v} C] [Abelian C]
     ((DerivedCategory.singleFunctorIsoCompQ _ 0).app (L ⊗ M)).inv
 
 /-- Apply a sheaf coefficient map after the canonical degree-zero tensor comparison.
-The construction is made in a general category to keep the localization structure shared.
-Source: proposition-purity-vector-bundles, theta induced by mu (blueprint:
-proposition-purity-vector-bundles). -/
+The construction is made in a general category to keep the localization structure shared. -/
 @[irreducible]
 noncomputable def cupDerivedCoefficientMap {C : Type c} [Category.{v} C] [Abelian C]
     [hD : HasDerivedCategory.{w} C]
@@ -738,13 +689,7 @@ private theorem cupDerivedPair_isIso {C : Type c} [Category.{v} C]
   subst p
   exact cupDerivedCoefficientMap_isIso_of_flat μ hL
 
-/-- The derived coefficient comparison is invertible. Source: proposition-purity-vector-bundles,
-K-flat tensor descent (blueprint: proposition-purity-vector-bundles).
-Proof: cupCoefficient_flat makes each degree-zero supported coefficient K-flat: tensoring
-an acyclic complex by an exact tensor functor preserves its kernels, images and cohomology.
-Thus the localization tensor comparison in cupSingleTensorMap is invertible by
-isIso_mu_Qh_of_kFlat and the quotient monoidal comparison. The single-complex comparison
-is an isomorphism. Finally cupCoefficientMap_isIso inverts the remaining factor. -/
+/-- The derived coefficient comparison is invertible. -/
 theorem cupDerivedCoefficientMap_isIso (P : WeilConjectures.PurityFiniteSetting.{u})
     {Z W X : Scheme.{u}} (i : Z ⟶ X) (j : W ⟶ X)
     [IsClosedImmersion i] [IsClosedImmersion j] :
@@ -765,8 +710,7 @@ theorem cupDerivedCoefficientMap_isIso (P : WeilConjectures.PurityFiniteSetting.
 
 /-- The right-shift-first comparison in a monoidal category with both tensor-shift
 structures. On K-flat cochain representatives, its sign on P[a]^r tensor Q[b]^s is
-(-1)^(b r). Source: proposition-purity-vector-bundles, the sign-normalized shift comparison
-(blueprint: proposition-purity-vector-bundles). -/
+(-1)^(b r). -/
 noncomputable def cupTensorShiftIso {C : Type c} [Category.{v} C]
     [hM : MonoidalCategory C] [HasShift C ℤ]
     [∀ K : C, ((curriedTensor C).obj K).CommShift ℤ]
@@ -779,16 +723,14 @@ noncomputable def cupTensorShiftIso {C : Type c} [Category.{v} C]
 
 /-- Supported groups for an arbitrary unbounded target, by the node's Hom convention.
 For bounded-below targets supported_cohomology_hom identifies this with derived supported
-sections. Source: proposition-purity-vector-bundles, unbounded output convention
-(blueprint: proposition-purity-vector-bundles). -/
+sections. -/
 abbrev cupSupportedHom (P : WeilConjectures.PurityFiniteSetting.{u})
     {Z X : Scheme.{u}} (i : Z ⟶ X) (K : CupDerivedCategory P X) (r : ℤ) :=
   (cupSingle P X).obj
     ((lowerStar (ModuleCat.{u + 1} P.Coefficient) i).obj (P.constant Z)) ⟶ K⟦r⟧
 
 /-- Compose the inverse coefficient comparison, tensor of representatives, and the
-right-shift-first comparison. Source: proposition-purity-vector-bundles, the displayed cup composite
-(blueprint: proposition-purity-vector-bundles). -/
+right-shift-first comparison. -/
 noncomputable def cupComposite {C : Type c} [Category.{v} C]
     [hM : MonoidalCategory C] [HasShift C ℤ]
     [∀ K : C, ((curriedTensor C).obj K).CommShift ℤ]
@@ -799,9 +741,7 @@ noncomputable def cupComposite {C : Type c} [Category.{v} C]
 
 /-- The supported cup product, on the supported-Hom representatives supplied by
 supported_cohomology_hom. The inputs are bounded below, the integers a,b are arbitrary,
-and the output uses the ambient unbounded derived category.
-Source: blueprint main-20261015, proposition-purity-vector-bundles, displayed composite
-(blueprint: proposition-purity-vector-bundles). -/
+and the output uses the ambient unbounded derived category. -/
 noncomputable def supportedCup (P : WeilConjectures.PurityFiniteSetting.{u})
     {Z W X : Scheme.{u}} [X.Over (Spec (CommRingCat.of P.field.k))]
     (i : Z ⟶ X) (j : W ⟶ X)

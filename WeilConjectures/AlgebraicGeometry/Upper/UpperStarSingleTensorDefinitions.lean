@@ -12,8 +12,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Compar
 /-!
 # The tensor comparison with a coefficient sheaf in degree zero
 
-Source: Stacks Project, sites-cohomology.tex, Tags 07A4 and 0FPH
-(blueprint: def-pur-upper-star-single-tensor-comparisons).
+Source: Stacks Project, sites-cohomology.tex, Tags 07A4 and 0FPH.
 -/
 
 @[expose] public noncomputable section
@@ -28,7 +27,7 @@ attribute [local irreducible] Functor.leftAdjoint Functor.rightAdjoint
   Functor.leftDerivedFunctor Functor.mapDerivedCategory upperStar lowerStar
 
 /-- The canonical localization comparison for tensoring with a sheaf in degree zero.
-Source: Stacks 0G7E (blueprint: def-pur-upper-star-single-tensor-comparisons). -/
+Source: Stacks 0G7E. -/
 def tensorSingleRepresentative
     {C : Type w} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C]
     [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
@@ -43,7 +42,7 @@ def tensorSingleRepresentative
         (curriedTensor _) M).hom.app P)
 
 /-- Exact pullback on a sheaf in degree zero followed by a specified coefficient iso.
-Source: Stacks 07A4 (blueprint: def-pur-upper-star-single-tensor-comparisons). -/
+Source: Stacks 07A4. -/
 def upperStarSingleCoefficientIso
     (A : Type (u + 1)) [CommRing A] {Z W : Scheme.{u}} (f : Z ⟶ W)
     {M : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} A)}
@@ -57,7 +56,7 @@ def upperStarSingleCoefficientIso
     (DerivedCategory.singleFunctor _ 0).mapIso k
 
 /-- Ordinary pullback commutes with tensoring by a sheaf, including a coefficient iso.
-Source: Stacks 07A4 (blueprint: def-pur-upper-star-single-tensor-comparisons). -/
+Source: Stacks 07A4. -/
 def upperStarTensorSingleIso
     (A : Type (u + 1)) [CommRing A] {Z W : Scheme.{u}} (f : Z ⟶ W)
     {M : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} A)}

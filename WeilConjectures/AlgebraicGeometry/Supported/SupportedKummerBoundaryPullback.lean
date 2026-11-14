@@ -106,8 +106,7 @@ import WeilConjectures.SixFunctors.Finite.BaseChange
 /-!
 # Cartier pullback of the supported Kummer boundary
 
-Source: blueprint lemma-cycle-class-cartier-divisor; Stacks 03PL and 0A45
-(blueprint: lem-asd-supported-kummer-boundary-pullback).
+Source: Stacks 03PL and 0A45.
 -/
 
 @[expose] public noncomputable section
@@ -365,18 +364,7 @@ private theorem boundary_equation (A : Type (u + 1)) [CommRing A]
 
 /-- Cartier pullback preserves the normalized supported Kummer class, with the
 canonical closed exchange and any roots-normalized twist transport.
-Source: Stacks 03PL, 0A45; blueprint lemma-cycle-class-cartier-divisor, penultimate paragraph
-(blueprint: lem-asd-supported-kummer-boundary-pullback).
-
-Proof: the boundary witnesses determine the normalized integral pole class.
-The integral Cartier pullback square and the Kummer short-exact-sequence square
-identify the pullback of its Yoneda product with the primed product. The roots
-and pure-tensor normalizations identify the coefficient-line comparison with t.
-Naturality of the integral generator through closed exchange and the exact-functor
-comparison identify this product with the scalar adjunct of the transported module
-class. The supported integral derived unit makes this adjunct injective on Ext,
-so the transported class is the supplied primed class. Cancel inverse exchange.
-The argument includes N = 1 and uses no flatness of the base map. -/
+Source: Stacks 03PL, 0A45. -/
 theorem supported_kummer_boundary_pullback (T : Scheme.{u}) (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
     (hT : IsUnit (N : Γ(T, ⊤))) {D : Scheme.{u}} (i : D ⟶ T)

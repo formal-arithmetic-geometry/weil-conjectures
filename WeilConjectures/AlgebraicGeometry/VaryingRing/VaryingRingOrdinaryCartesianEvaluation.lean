@@ -14,7 +14,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 # Ordinary realization of cartesian open base change
 
 Source: Zheng, Construction 4.1; Stacks Project, Tags 03DI and 09AE.
-(blueprint: lem-sp-varying-ring-ordinary-cartesian-evaluation).
 -/
 
 @[expose] public noncomputable section
@@ -299,17 +298,7 @@ private theorem ordinaryBeta_inv (n : ℕ)
     Category.assoc] using he.symm
 
 /-- Realization preserves the cartesian open factor of the clopen arrow.
-Source: Stacks 09AE; Zheng, Construction 4.1
-(blueprint: lem-sp-varying-ring-ordinary-cartesian-evaluation).
-Proof: transpose the inverse comparisons under the open adjunction for j'.
-The ordinary transpose is pullback of the unit for j followed by the inverse
-pullback-square comparison. The strict-tower transpose is the same word.
-Use the unit normalization of ordinaryOpenComparison and the pullback composition
-normalization to identify these words after realization. Equality transports
-commute with realization by equality elimination. Injectivity of the open
-adjunction Hom equivalence gives the inverse-comparison equation. Cancel the
-invertible beta maps to obtain the displayed forward equation. This argument
-uses only a cartesian open square, with no clopen section projection. -/
+Source: Stacks 09AE; Zheng, Construction 4.1. -/
 theorem ordinaryCartesianEvaluation (n : ℕ) {V W S T : Scheme.{u}}
     (a : V ⟶ S) (b : V ⟶ W) (i : S ⟶ T) (p : W ⟶ T)
     [IsOpenImmersion b] [IsOpenImmersion i]

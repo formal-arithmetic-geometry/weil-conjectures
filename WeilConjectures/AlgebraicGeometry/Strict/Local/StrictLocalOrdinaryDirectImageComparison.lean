@@ -15,7 +15,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSi
 
 /-! # Ordinary strict-local direct-image comparison
 
-Source: Stacks Project, Tag 03Q9, theorem-higher-direct-images in degree zero.
+Source: Stacks Project, Tag 03Q9 in degree zero.
 -/
 
 @[expose] public section
@@ -156,20 +156,7 @@ private theorem ordinaryExchangeArrowIso
   exact ⟨Arrow.isoMapApp δ (DerivedCategory.Plus.homologyFunctor _ 0) ε.symm ≪≫ e₂ ≪≫ e₃⟩
 
 /-- The canonical ordinary exchange comparison on strict-local sections is invertible.
-Source: Stacks Project, Tag 03Q9, theorem-higher-direct-images, degree zero.
-(blueprint: lem-weil-pbc-strict-local-ordinary-direct-image-comparison).
-
-Proof: on the single complex F[0], factor the derived exchange through the levelwise
-ordinary exchange and the two right-derived-functor units. Left exactness makes both
-units invertible on H^0; exact inverse image commutes with H^0. The single-complex
-homology isomorphisms identify the middle factor with the ordinary exchange. This gives
-an isomorphism of arrows between H^0 of derived exchange and ordinary exchange.
-The derived exchange is the mate used in strict-local base-change on global homology:
-the latter satisfies the resolution factorization by the derived mate factorization
-and the inverse-image square comparison equation, hence uniqueness identifies them.
-Apply the small-model global-homology comparison to F[0] in degree zero and map the
-arrow isomorphism through global sections. Invertibility transfers along this arrow
-isomorphism. No stalk-map identification or closed-fibre transport is assumed. -/
+Source: Stacks Project, Tag 03Q9, degree zero. -/
 theorem isIso_strictLocalOrdinaryDirectImageComparison
     {X S : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f]
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)

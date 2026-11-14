@@ -138,10 +138,7 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChan
 /-!
 # Constant strict towers and normalized direct image
 
-Source: Stacks, Tags 08BJ, 070K, 0940, 0941, 0A07, 06YS, 07A4 and 0B56;
-agent-supplied constant-tower normalization supporting
-proposition-composition-base-change-rf-shriek, Step 5 (blueprint:
-lem-sf-cbc-constant-tower-direct-image-normalization).
+Source: Stacks, Tags 08BJ, 070K, 0940, 0941, 0A07, 06YS, 07A4 and 0B56.
 
 The index n denotes positive exponent n+1. Quotients need not be finite sets.
 All tower derived categories localize strict diagrams before evaluation.
@@ -187,7 +184,7 @@ attribute [local irreducible] Functor.mapDerivedCategory Functor.rightDerivedFun
 
 /-- The literal ordinary-square normalization on every K-injective representative.
 The formula includes the exact-localization and derived-resolution comparisons.
-Source: Stacks 070K (blueprint: lem-sf-cbc-constant-tower-direct-image-normalization). -/
+Source: Stacks 070K. -/
 def IsDirectImageNormalizedOnKInjectives
     (F : C ⥤ D) [F.Additive] (P : C ⥤ T) [P.Additive]
     [PreservesFiniteLimits P] [PreservesFiniteColimits P]
@@ -208,8 +205,7 @@ def IsDirectImageNormalizedOnKInjectives
 
 /-- The canonical pullback/reduction square at a homotopy representative. The two
 counits and exact-localization factors specify the whole-tower tensor comparison.
-Source: Stacks 06YY, 07A4
-(blueprint: lem-sf-cbc-constant-tower-direct-image-normalization). -/
+Source: Stacks 06YY, 07A4. -/
 def IsReductionPullAt
     (P : C ⥤ T) [P.Additive] (Q : D ⥤ U) [Q.Additive]
     (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
@@ -791,24 +787,24 @@ private theorem restrictionPullback_unit
 end ScalarPullback
 
 /-- Exact diagonal, using the existing strict tower category.
-Source: Stacks 0941 (blueprint: lem-sf-cbc-constant-tower-direct-image-normalization). -/
+Source: Stacks 0941. -/
 abbrev delta (X : Scheme.{u}) :=
   (Functor.const ℕᵒᵖ : Modules A X ⥤ Towers A X).mapDerivedCategory
 
 /-- Ordinary direct image in the same identified constant coefficients.
-Source: Stacks 07A5 (blueprint: lem-sf-cbc-constant-tower-direct-image-normalization). -/
+Source: Stacks 07A5. -/
 abbrev push {X Y : Scheme.{u}} (f : X ⟶ Y) := (moduleDirectImage A f).rightDerivedFunctor
 
 /-- Ordinary exact inverse image.
-Source: Stacks 03EK (blueprint: lem-sf-cbc-constant-tower-direct-image-normalization). -/
+Source: Stacks 03EK. -/
 abbrev pull {X Y : Scheme.{u}} (f : X ⟶ Y) := (modulePullback A f).mapDerivedCategory
 
 /-- The existing unbounded derived inverse limit on the original small site.
-Source: Stacks 0941 (blueprint: lem-sf-cbc-constant-tower-direct-image-normalization). -/
+Source: Stacks 0941. -/
 abbrev L (X : Scheme.{u}) := completedRlim X (coefficients A X)
 
 /-- The canonical ordinary constant/inverse-image square, with identity components.
-Source: Stacks 00YV (blueprint: lem-sf-cbc-constant-tower-direct-image-normalization). -/
+Source: Stacks 00YV. -/
 def deltaPull {X Y : Scheme.{u}} (f : X ⟶ Y) :
     delta A Y ⋙ G A f ≅ pull A f ⋙ delta A X :=
   Functor.mapDerivedCategoryCompIso _ _ ≪≫
@@ -816,12 +812,7 @@ def deltaPull {X Y : Scheme.{u}} (f : X ⟶ Y) :
       (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The exact diagonal preserves K-injectives because it is right adjoint to exact
-terminal-index evaluation. Source: Stacks 08BJ
-(blueprint: lem-sf-cbc-constant-tower-direct-image-normalization).
-Proof: a map from a tower to a constant tower is uniquely determined at index zero;
-all other components are its composites with the transitions to zero. This gives
-an adjunction from exact evaluation to the diagonal. Transport a map from an acyclic
-complex through that adjunction and use K-injectivity to null-homotope it. -/
+terminal-index evaluation. Source: Stacks 08BJ. -/
 @[instance] theorem delta_preservesKInjective (X : Scheme.{u}) :
     (Functor.const ℕᵒᵖ : Modules A X ⥤ Towers A X).PreservesKInjectiveComplexes := by
   let adj₀ : (evaluation ℕᵒᵖ (Modules A X)).obj (op 0) ⊣ Functor.const ℕᵒᵖ :=
@@ -846,8 +837,7 @@ complex through that adjunction and use K-injectivity to null-homotope it. -/
 /-- The canonical derived direct-image/diagonal isomorphism. Both composition
 comparisons retain their universal derived units; the middle comparison has identity
 components on ordinary modules.
-Source: Stacks 08BJ, 070K
-(blueprint: lem-sf-cbc-constant-tower-direct-image-normalization). -/
+Source: Stacks 08BJ, 070K. -/
 def chi {X Y : Scheme.{u}} (f : X ⟶ Y) :
     push A f ⋙ delta A Y ≅ delta A X ⋙ R A f :=
   (Functor.rightDerivedFunctorCompMapDerivedCategoryIso (moduleDirectImage A f)
@@ -857,7 +847,7 @@ def chi {X Y : Scheme.{u}} (f : X ⟶ Y) :
   Functor.isoWhiskerRight
     (Functor.rightDerivedFunctorIsoMapDerivedCategory (Functor.const ℕᵒᵖ)) (R A f)
 /-- Evaluation of a diagonal is canonically the identity.
-Source: Stacks 0941 (blueprint: lem-sf-cbc-constant-tower-direct-image-normalization). -/
+Source: Stacks 0941. -/
 def deltaEval (X : Scheme.{u}) (n : ℕ) : delta A X ⋙ ev A X n ≅ 𝟭 _ :=
   Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso
@@ -909,21 +899,21 @@ attribute [local irreducible] completedAdicChange
 variable {A} (I : Ideal A)
 
 /-- The genuine quotient map of constant coefficient sheaves at positive exponent n+1.
-Source: Stacks 099M (blueprint: lem-sf-cbc-constant-tower-direct-image-normalization). -/
+Source: Stacks 099M. -/
 def quotient (X : Scheme.{u}) (n : ℕ) :
     coefficients A X ⟶ coefficients (A ⧸ I ^ (n + 1)) X :=
   (constantSheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}).map
     (CommRingCat.ofHom (Ideal.Quotient.mk _))
 
 /-- The quotient transition of constant sheaves, including its coefficient action.
-Source: Stacks 099M (blueprint: lem-sf-cbc-constant-tower-direct-image-normalization). -/
+Source: Stacks 099M. -/
 def quotientStep (X : Scheme.{u}) (n : ℕ) :
     coefficients (A ⧸ I ^ (n + 2)) X ⟶ coefficients (A ⧸ I ^ (n + 1)) X :=
   (constantSheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}).map
     (CommRingCat.ofHom (Ideal.Quotient.factorPow I (Nat.le_succ (n + 1))))
 
 /-- Ordinary tensor with a quotient, restricted back to the original coefficients.
-Source: Stacks 06YY (blueprint: lem-sf-cbc-constant-tower-direct-image-normalization). -/
+Source: Stacks 06YY. -/
 def level (X : Scheme.{u}) (n : ℕ) : Modules A X ⥤ Modules A X :=
   reductionChange X (quotient I X n) ⋙ reductionRestrict X (quotient I X n)
 
@@ -1245,10 +1235,7 @@ private theorem quotientStep_comp (X : Scheme.{u}) (n : ℕ) :
   congr 1
 
 /-- Quotient transitions are the unique maps on sheafified pure tensors.
-Source: Stacks 06YY (blueprint: lem-sf-cbc-constant-tower-direct-image-normalization).
-Proof: quotient maps commute with the scalar maps from A, so s tensor x maps to
-q(s) tensor x by a balanced linear map. Sheafification extends it uniquely. The
-formula proves compatibility with site restrictions and naturality in the module. -/
+Source: Stacks 06YY. -/
 theorem step_existsUnique (X : Scheme.{u}) (n : ℕ) :
     ∃! τ : level I X (n + 1) ⟶ level I X n,
       ∀ (M : Modules A X) (U : X.ProEtᵒᵖ)
@@ -1279,14 +1266,12 @@ theorem step_existsUnique (X : Scheme.{u}) (n : ℕ) :
     exact (hf U s x).trans (hg U s x).symm
 
 /-- The strict reduction functor, including all coefficient transition maps.
-Source: Stacks 099M (blueprint: lem-sf-cbc-constant-tower-direct-image-normalization). -/
+Source: Stacks 099M. -/
 def reductionModule (X : Scheme.{u}) : Modules A X ⥤ Towers A X :=
   (Functor.ofOpSequence (fun n ↦ (step_existsUnique I X n).exists.choose)).flip
 
 /-- Reduction is additive before localization.
-Source: Stacks 06YY (blueprint: lem-sf-cbc-constant-tower-direct-image-normalization).
-Proof: every level is scalar extension followed by additive scalar restriction.
-Evaluation jointly detects equality of maps of strict diagrams. -/
+Source: Stacks 06YY. -/
 @[instance] theorem reductionModule_additive (X : Scheme.{u}) :
     (reductionModule I X).Additive := by
   constructor
@@ -1299,7 +1284,7 @@ Evaluation jointly detects equality of maps of strict diagrams. -/
   exact (level I X n.unop).map_add
 
 /-- The homotopy functor to be left derived.
-Source: Stacks 06YY (blueprint: lem-sf-cbc-constant-tower-direct-image-normalization). -/
+Source: Stacks 06YY. -/
 def reductionHomotopy (X : Scheme.{u}) :
     HomotopyCategory (Modules A X) (.up ℤ) ⥤ Derived A X :=
   (reductionModule I X).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh
@@ -1307,8 +1292,7 @@ def reductionHomotopy (X : Scheme.{u}) :
 set_option genSizeOf false in
 set_option genInjectivity false in
 /-- A derived reduction pair, retaining its determining universal property and K-flat
-computation. Source: Stacks 06YS, 06YY
-(blueprint: lem-sf-cbc-constant-tower-direct-image-normalization). -/
+computation. Source: Stacks 06YS, 06YY. -/
 structure ReductionModel (X : Scheme.{u}) where
   functor : DerivedCategory (Modules A X) ⥤ Derived A X
   counit : DerivedCategory.Qh ⋙ functor ⟶ reductionHomotopy I X
@@ -1319,13 +1303,7 @@ structure ReductionModel (X : Scheme.{u}) where
     IsIso (counit.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))
 
 /-- Universal derived reduction, with its K-flat representative normalization.
-Source: Stacks 06YS, 06YY (blueprint: lem-sf-cbc-constant-tower-direct-image-normalization).
-Proof: choose flat-term K-flat resolutions. Their diagonal is K-flat: tensoring an
-acyclic tower evaluates to tensoring an acyclic complex with the K-flat model at
-every level. Evaluations are exact and jointly detect acyclicity. The strict
-quotient construction therefore inverts resolving quasi-isomorphisms. The resolving
-class left-derived theorem gives the universal counit, invertible on these models.
-This universal property determines the derived pair up to its unique comparison. -/
+Source: Stacks 06YS, 06YY. -/
 theorem reduction_exists (X : Scheme.{u}) : Nonempty (ReductionModel I X) := by
   let H := HomotopyCategory.quotient (Modules A X) (.up ℤ)
   let F := reductionHomotopy I X
@@ -1371,26 +1349,23 @@ theorem reduction_exists (X : Scheme.{u}) : Nonempty (ReductionModel I X) := by
   exact ⟨⟨LF, ε, hLF, fun P hP ↦ hε (H.obj P) ⟨P, hP, rfl⟩⟩⟩
 
 /-- Select the derived pair by its universal property, retaining its comparison.
-Source: Stacks 06YY (blueprint: lem-sf-cbc-constant-tower-direct-image-normalization). -/
+Source: Stacks 06YY. -/
 def reductionModel (X : Scheme.{u}) : ReductionModel I X :=
   Classical.choice (reduction_exists I X)
 
 /-- Reduction is the functor of the universal derived pair.
-Source: Stacks 06YY (blueprint: lem-sf-cbc-constant-tower-direct-image-normalization). -/
+Source: Stacks 06YY. -/
 def reduction (X : Scheme.{u}) : DerivedCategory (Modules A X) ⥤ Derived A X :=
   (reductionModel I X).functor
 
 /-- The universal reduction counit, retained rather than forgotten.
-Source: Stacks 06YY (blueprint: lem-sf-cbc-constant-tower-direct-image-normalization). -/
+Source: Stacks 06YY. -/
 def reductionCounit (X : Scheme.{u}) :
     DerivedCategory.Qh ⋙ reduction I X ⟶ reductionHomotopy I X :=
   (reductionModel I X).counit
 
 /-- Ordinary quotient augmentation, uniquely fixed by the tensor unit at every level.
-Source: Stacks 06YY (blueprint: lem-sf-cbc-constant-tower-direct-image-normalization).
-Proof: insert 1 tensor x. Quotient transitions preserve 1 and their pure tensor
-formula therefore makes these maps a strict tower map, natural in the module.
-The formula on all sections determines every component uniquely. -/
+Source: Stacks 06YY. -/
 theorem ordinaryAugmentation_existsUnique (X : Scheme.{u}) :
     ∃! η : (Functor.const ℕᵒᵖ : Modules A X ⥤ Towers A X) ⟶ reductionModule I X,
       ∀ (M : Modules A X) (n : ℕ) (U : X.ProEtᵒᵖ) (x : M.val.obj U),
@@ -1427,14 +1402,13 @@ theorem ordinaryAugmentation_existsUnique (X : Scheme.{u}) :
     exact (hη' M n.unop U x).trans (levelUnitMap_apply I X n.unop M U x).symm
 
 /-- The actual ordinary quotient augmentation.
-Source: Stacks 06YY (blueprint: lem-sf-cbc-constant-tower-direct-image-normalization). -/
+Source: Stacks 06YY. -/
 def ordinaryAugmentation (X : Scheme.{u}) :
     (Functor.const ℕᵒᵖ : Modules A X ⥤ Towers A X) ⟶ reductionModule I X :=
   (ordinaryAugmentation_existsUnique I X).exists.choose
 
 /-- The ordinary augmentation after homotopy localization, with the diagonal
-localization factor. Source: Stacks 06YY
-(blueprint: lem-sf-cbc-constant-tower-direct-image-normalization). -/
+localization factor. Source: Stacks 06YY. -/
 def augmentationHomotopy (X : Scheme.{u}) :
     DerivedCategory.Qh ⋙ delta A X ⟶ reductionHomotopy I X :=
   (Functor.const ℕᵒᵖ : Modules A X ⥤ Towers A X).mapDerivedCategoryFactorsh.hom ≫
@@ -1444,7 +1418,7 @@ def augmentationHomotopy (X : Scheme.{u}) :
 /-- The specified tensor-with-quotient map i_M, constructed by the determining
 universal property of derived reduction. Its factorization is the ordinary
 x maps to 1 tensor x formula after homotopy localization.
-Source: Stacks 06YY (blueprint: lem-sf-cbc-constant-tower-direct-image-normalization). -/
+Source: Stacks 06YY. -/
 def augmentation (X : Scheme.{u}) : delta A X ⟶ reduction I X :=
   have : (reduction I X).IsLeftDerivedFunctor (reductionCounit I X)
       (HomotopyCategory.quasiIso (Modules A X) (.up ℤ)) := (reductionModel I X).universal
@@ -1523,14 +1497,7 @@ private theorem levelPull_step {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
 
 /-- Ordinary tensor/pullback comparison on the entire strict quotient tower.
 Its formula is imposed on all inverse-image generators, not only constant sections.
-Source: Stacks 07A4, 03EL
-(blueprint: lem-sf-cbc-constant-tower-direct-image-normalization).
-Proof: pullback of each constant quotient ring is its canonical constant sheaf.
-The scalar square commutes on constants and therefore on the sheafifications.
-Tensor balancing sends the inverse image of s tensor x to the inverse image of s
- tensored with the inverse image of x. The reverse reassociation is inverse.
-The quotient transition formulas make these maps a strict diagram isomorphism.
-Local generation of inverse-image sections and sheafification prove uniqueness. -/
+Source: Stacks 07A4, 03EL. -/
 theorem ordinaryReductionPull_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃! σ : reductionModule I Y ⋙ towerPullback A f ≅
         modulePullback A f ⋙ reductionModule I X,
@@ -1594,7 +1561,7 @@ theorem ordinaryReductionPull_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
     exact (hτ M n.unop U s x).trans (levelPull_formula I f n.unop M U s x).symm
 
 /-- The normalized ordinary comparison, retaining its strict transition maps.
-Source: Stacks 07A4 (blueprint: lem-sf-cbc-constant-tower-direct-image-normalization). -/
+Source: Stacks 07A4. -/
 def ordinaryReductionPull {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   (ordinaryReductionPull_existsUnique I f).exists.choose
 
@@ -1608,13 +1575,7 @@ section
 attribute [local irreducible] modulePullback reductionModule reduction reductionCounit
   reductionModel
 /-- Derived tensor/pullback comparison characterized on K-flat representatives.
-Source: Stacks 06YS, 07A4
-(blueprint: lem-sf-cbc-constant-tower-direct-image-normalization).
-Proof: a flat-term K-flat model P remains K-flat with flat terms after exact
-constant-coefficient inverse image. The reduction counits are invertible there.
-Conjugate the ordinary strict comparison by these counits and the localization
-factors. This descends through chain maps, homotopies and resolving
-quasi-isomorphisms. Every object has such a model, proving uniqueness. -/
+Source: Stacks 06YS, 07A4. -/
 theorem reductionPull_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃! τ : reduction I Y ⋙ G A f ≅ pull A f ⋙ reduction I X,
       ∀ P : CochainComplex (Modules A Y) ℤ,
@@ -1633,14 +1594,14 @@ theorem reductionPull_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
 end
 
 /-- The canonical whole-tower tensor/pullback comparison.
-Source: Stacks 07A4 (blueprint: lem-sf-cbc-constant-tower-direct-image-normalization). -/
+Source: Stacks 07A4. -/
 def reductionPull {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   (reductionPull_existsUnique I f).exists.choose
 
 /-- The projection map h, defined by its counit-tensor adjunction mate. The comparison
 being transposed is the canonical tensor balancing map on the full quotient diagram.
 Its source therefore includes precisely the diagonal identification chi.
-Source: Stacks 0B56 (blueprint: lem-sf-cbc-constant-tower-direct-image-normalization). -/
+Source: Stacks 0B56. -/
 def projection {X Y : Scheme.{u}} (f : X ⟶ Y) :
     push A f ⋙ reduction I Y ⟶ reduction I X ⋙ R A f :=
   mateEquiv

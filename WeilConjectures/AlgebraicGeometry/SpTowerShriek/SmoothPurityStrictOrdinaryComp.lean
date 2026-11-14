@@ -12,8 +12,6 @@ import all WeilConjectures.AlgebraicGeometry.Geometry.SemilinearCoefficientPullb
 import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearNaturalIsoAssembly
 
 /-! # Ordinary pullback compositors for strict geometric coordinates
-
-Source: blueprint operations proof (2), constant-section inverse-image composition.
 -/
 
 @[expose] public noncomputable section

@@ -28,8 +28,7 @@ include d in
 /-- Blueprint `proposition-exceptional-inverse-image-smooth-morphism--6` without the
 quasi-separatedness of the base: the canonical morphism `Lg'^* Rf^! ⟶ Rf'^! Lg^*` is an isomorphism
 for `f` smooth of relative dimension `d` and quasi-compact `f'` (the statement of
-`isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension` before the sync).
-(blueprint: proposition-exceptional-inverse-image-smooth-morphism--6) -/
+`isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension` before the sync). -/
 theorem isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension_general
     {X' Y' : Scheme.{u}} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X} (sq : IsPullback g' f' f g)
     [HasCompactification f'] [QuasiCompact f'] :

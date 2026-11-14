@@ -14,7 +14,6 @@ import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
 /-! # Normalized degree-one sections of the glued symmetric Proj twist
 
 Source: Stacks Project, Constructions, Tags 01NR and 01OB.
-(blueprint: lem-trf-symmetric-proj-glued-sections).
 -/
 
 @[expose] public section
@@ -102,22 +101,7 @@ private theorem twist_chart_read_bijective {S : Scheme.{u}} (A : S.GradedAlgebra
 
 /-- The degree-one affine twists glue, together with the sheaf map sending a module
 section to its homogeneous fraction. No invertibility or surjectivity is asserted here.
-Source: Stacks, Tag 01NR (lemma-glue-relative-proj-twists), specialized to degree one
-of the symmetric algebra as in Tag 01OB (definition-projective-bundle).
-(blueprint: lem-trf-symmetric-proj-glued-sections).
-
-Proof: on every affine base open U take the existing module Proj.twist A(U) 1.
-Quasi-coherent affine restriction is coefficientwise scalar extension. On the standard
-open D_+(e), the scalar-extension isomorphism sends a/e^k to res(a)/res(e)^k.
-These maps and their inverses commute with further standard-open restriction and
-compose by the fraction formula. Refine intersections of affine base opens by affine
-opens; agreement after refinement supplies the descent cocycle on the relative-Proj
-chart cover. Glue these actual module sheaves and the chart isomorphisms. The sections
-m ↦ iota(m)/1 are additive, linear over the base structure map, and compatible with
-restriction by that same fraction formula. They therefore glue to a module morphism
-σ from E to the direct image of the glued module. Its displayed normalization is the
-local formula for this morphism, transported through the actual tensor-pullback unit.
-No local freeness, finite generation, or nonemptiness is needed. -/
+Source: Stacks, Tag 01NR, specialized to degree one of the symmetric algebra as in Tag 01OB. -/
 theorem exists_symmetric_twist_sections
     (S : Scheme.{u}) (E : S.Modules) [E.IsQuasicoherent] :
     ∃ (L : (SymmetricAlgebraSheaf.gradedAlgebraData E).relProj.Modules)

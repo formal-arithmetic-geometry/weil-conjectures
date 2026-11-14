@@ -12,8 +12,7 @@ import all WeilConjectures.AlgebraicGeometry.StrictTower.StrictTowerPullbackSqua
 /-!
 # Source factorization of the normalized inverse open comparison
 
-Source: Stacks, Tags 03DI, 07A7 and 0F7B; the source-factorization calculation in
-step 8 of (blueprint: lem-cbc-proper-open-clopen-projector).
+Source: Stacks, Tags 03DI, 07A7 and 0F7B.
 -/
 
 @[expose] public section
@@ -93,17 +92,7 @@ private theorem transpose_conjugate
 /-- Factoring the source open through another open inserts precisely its open
 adjunction counit in the inverse comparison. This requires neither properness nor
 cartesianness and concerns the specified transformations on the full derived category.
-Source: Stacks 03DI, 07A7 and 0F7B, the open-factorization calculation
-(blueprint: lem-cbc-open-beta-source-factorization).
-Proof: transpose both sides under the open adjunction for k. The compositor
-jComp followed by jCongr is conjugate to the corresponding gComp and equality
-transport. The counit for s cancels the unit introduced by the composite open
-adjunction, by its triangle identity. Naturality moves the inverse-image
-compositor across the remaining open unit. Associativity of the inverse-image
-compositors identifies the remaining square with the square for r,k,i,p.
-The two transposes are therefore G_r of the open unit for i followed by that
-square's inverse. Injectivity of the adjunction Hom equivalence gives the equality.
-This proof uses no faithfulness of evaluations and remains valid for the empty open. -/
+Source: Stacks 03DI, 07A7 and 0F7B, the open-factorization calculation. -/
 theorem betaInv_source_factorization {V P W S T : Scheme.{u}}
     (s : V ⟶ P) (b : P ⟶ W) (q : P ⟶ S)
     (k : V ⟶ W) (r : V ⟶ S) (i : S ⟶ T) (p : W ⟶ T)

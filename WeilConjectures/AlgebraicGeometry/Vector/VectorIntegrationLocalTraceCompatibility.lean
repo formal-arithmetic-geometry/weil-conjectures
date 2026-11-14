@@ -170,10 +170,6 @@ import WeilConjectures.AlgebraicGeometry.Vector.VectorIntegrationOverlapChartPre
 import WeilConjectures.AlgebraicGeometry.Affine.Trace.AffineTraceTowerCounitBaseChange
 
 /-! # Compatibility of vector-bundle local traces on overlaps
-
-Source: blueprint sec-smooth-purity/sk-prop-an/def-amb-vector-integration,
-overlap calculation and normalization paragraph.
-(blueprint: lem-amb-vector-integration-local-trace-compatibility).
 -/
 
 @[expose] public noncomputable section
@@ -303,9 +299,7 @@ private theorem overlap_prefix_counit (N : ℕ) (hN : 0 < N)
 
 /-- The sheaf map corresponding to the prescribed derived trace on a frame open.
 The identification of the source with a single sheaf is supplied explicitly; it is
-not chosen by this definition. The local Hom correspondence has unique preimages.
-Source: blueprint vector integration, degree-zero gluing paragraph.
-(blueprint: lem-amb-vector-integration-local-trace-compatibility). -/
+not chosen by this definition. The local Hom correspondence has unique preimages. -/
 @[irreducible]
 def vectorIntegrationLocalSheafTrace (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
@@ -325,9 +319,7 @@ def vectorIntegrationLocalSheafTrace (N : ℕ) (hN : 0 < N)
     (vectorIntegrationLocalTrace N hN A hA t D S hS d F V e ≫
       (ordinaryFiniteUnitPullback A V.ι).inv)
 
-/-- The local sheaf trace has exactly the prescribed derived normalization.
-Source: blueprint vector integration, degree-zero gluing.
-(blueprint: lem-amb-vector-integration-local-trace-compatibility). -/
+/-- The local sheaf trace has exactly the prescribed derived normalization. -/
 theorem vectorIntegrationLocalSheafTrace_normalization_iff (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
     (t : OrdinaryFiniteTwistTransport A N hA)
@@ -351,28 +343,7 @@ theorem vectorIntegrationLocalSheafTrace_normalization_iff (N : ℕ) (hN : 0 < N
     (vectorIntegrationLocalTrace N hN A hA t D S hS d F V e)
 
 /-- On an étale object with lifts to two frame opens, the two traces from a fixed
-normalized projective-line family with its base-change equations agree.
-Source: blueprint vector integration, overlap calculation.
-(blueprint: lem-amb-vector-integration-local-trace-compatibility).
-
-Proof:
-1. Restrict the frames to their intersection. Open inverse image is exact, so the
-   degree-zero Hom correspondence commutes with restriction. Pasting of the actual
-   compact-support exchanges and the normalized Tate composition equations express
-   each restricted map as the prescribed affine counit for its restricted frame.
-   The supplied base-change equation for the projective-line family passes to the
-   ordered affine counit by composition of adjunctions.
-2. Write the change of frames as e_j=e_i G. Their coordinate change is G transpose;
-   consequently phi_i phi_j inverse is the substitution g=(G transpose) inverse.
-   The inverse-coordinate squares paste to give B_j=rho_g B_i, with rho_g exactly
-   affineLinearTraceAction. The intersection is Noetherian and N remains invertible.
-3. Apply affineSpaceLinearTraceInvariance there: rho_g followed by the affine counit
-   is that counit. Pull this equality back to the given étale object and evaluate
-   its terminal section. Full faithfulness of singleFunctor gives equality of the
-   sheaf maps, hence of the displayed descent components. The inserted alpha cancels
-   on both sides. Rank zero and the empty intersection satisfy the same equations.
-The separate uniqueness lemmas prove the base-change hypothesis from normalization,
-and identify every other normalized family with the one used here. -/
+normalized projective-line family with its base-change equations agree. -/
 theorem vectorIntegrationLocalSheafTrace_compatible_of_baseChange (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
     (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)
@@ -435,9 +406,7 @@ theorem vectorIntegrationLocalSheafTrace_compatible_of_baseChange (N : ℕ) (hN 
     descentComponent_eq_compRestriction V'.ι p' U.ι hp' _ q' a ha' haw, hψ]
 
 /-- The overlap equality also holds for separately supplied normalized Tate transports,
-since the normalization determines both the Tate transport and the projective-line data.
-Source: blueprint vector integration, overlap and canonical coefficient identifications.
-(blueprint: lem-amb-vector-integration-local-trace-compatibility). -/
+since the normalization determines both the Tate transport and the projective-line data. -/
 theorem vectorIntegrationLocalSheafTrace_compatible (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
     (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)

@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassFinite
 
 /-! # Finite boundary comparison with shared single-complex witnesses
-
-Source: blueprint classes clause (3), finite supported normalization.
-(blueprint: def-sp-single-boundary-normalization).
 -/
 
 @[expose] public noncomputable section
@@ -24,8 +21,6 @@ namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 /-- Form the finite boundary predicate before specializing the abelian category.
 The quotient is placed in degree zero and the root map in degree zero shifted by two.
 The two supplied arrows retain exactly the endpoint transports of `finiteBoundaryEquality`.
-Source: classes (2)--(3), finite Kummer boundary and supported Cartier boundary.
-(blueprint: def-sp-single-boundary-normalization).
 
 Construction: apply the degree-zero single functor to the quotient and the root map,
 shift the latter by two, and use these actual morphisms in `finiteBoundaryEquality`.

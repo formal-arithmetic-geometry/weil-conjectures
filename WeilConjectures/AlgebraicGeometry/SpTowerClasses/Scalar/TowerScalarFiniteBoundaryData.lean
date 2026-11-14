@@ -26,8 +26,6 @@ open WeilConjectures
 namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 
 /-- The scalar/finite comparison for an arbitrary integral arrow.
-Source: blueprint latest, `sk-prop-sp-tower-geometric-classes.proof.md`, clause (2).
-(blueprint: def-sfb-scalar-finite-boundary).
 Fact wraps the actual finiteBoundaryEquality after scalarChernArrow, evaluation,
 forgetting, and the fixed integer and root maps. The integral arrow is arbitrary
 and no Kummer boundary or its normalization is part of this proposition. -/

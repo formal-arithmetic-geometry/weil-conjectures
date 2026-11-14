@@ -19,7 +19,6 @@ import all WeilConjectures.AlgebraicGeometry.StrictTower.StrictTowerProperOpenAr
 
 Source: the clopen construction in Stacks 0F7B and Zheng, Construction 4.1.
 The comparison concerns the clopen projector and its outgoing composition identifications.
-(blueprint: lem-sp-varying-ring-clopen-section-evaluation).
 -/
 
 @[expose] public noncomputable section
@@ -259,26 +258,7 @@ private theorem strictSection_descent (B : Type (u + 1)) [CommRing B]
 
 /-- Coefficient evaluation preserves the clopen section projection and its
 outgoing composition identifications.
-Source: Stacks 0F7B, open case, and 09AE; Zheng, Construction 4.1
-(blueprint: lem-sp-varying-ring-clopen-section-evaluation).
-Proof: put q = pullback.snd p i, b = pullback.fst p i and s = squareLift k r p i h.
-The lift s is open and closed. In the ordinary module category the normalized
-map pi_s restricts to the open-adjunction unit on its image and to zero on the
-complement. The clopen sheaf product decomposition therefore determines it.
-Module evaluation preserves these two restrictions and the unit. Consequently
-it gives the single-coefficient clopen projection, and strict-tower evaluation
-gives the same map termwise. Compose with b_!, then use the specified
-identifications b_! s_! = k_! and s^* q^* = r^*. Coefficient evaluation preserves
-the pullback compositor by the unit-normalized pull/direct mate calculation;
-it preserves the open compositor by taking open-adjunction mates. Equality
-transport is proof-irrelevant. These equations identify both evaluated section
-factors with the single-coefficient one. Carry out the varying-system argument
-on complexes and apply Q, since sectionArrow is the exact localization of the
-ordinary section factor. For strict towers, the derived units and the inverse
-open-to-direct comparison localize the same ordinary clopen projection. The
-localization factor isomorphisms and essential surjectivity extend the equations
-to arbitrary derived inputs. No cartesian open base-change comparison enters
-this factor, and no equality of arbitrary derived maps is detected by evaluation. -/
+Source: Stacks 0F7B, open case, and 09AE; Zheng, Construction 4.1. -/
 theorem clopenSectionEvaluation {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]

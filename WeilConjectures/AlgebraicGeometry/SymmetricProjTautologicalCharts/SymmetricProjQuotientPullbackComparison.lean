@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.FreeGeneratorIso
 /-! # Comparison of normalized quotient lines along a fixed Proj comparison
 
 Source: Stacks Project, Constructions, Tags 01NR, 01NQ and 01OB.
-(blueprint: lem-trf-symmetric-proj-quotient-pullback-comparison).
 -/
 
 @[expose] public section
@@ -70,32 +69,8 @@ private theorem iso_of_common_frame_coefficients {T : Scheme.{u}}
 /-- For fixed normalized quotients and a fixed generator-preserving graded pullback
 comparison, the quotient lines agree along its induced relative Proj map.
 
-Source: Stacks Project, Constructions, Tag 01NQ (lemma-relative-proj-base-change),
-the degree-one part of theta; Tag 01NR (lemma-glue-relative-proj-twists), uniqueness;
-Tag 01OB (definition-projective-bundle), the quotient normalization.
-(blueprint: lem-trf-symmetric-proj-quotient-pullback-comparison).
-
-Proof: write A = Sym(E), A' = Sym(g*E). On a pair of affine base charts W, U
-with W contained in g inverse U, the map of graded rings is the specified b.map.
-On D_+(iota(m)), the normalized twist has the free frame iota(m). Pull back this
-frame to the chart D_+(b.map(iota(m))) of Proj A'(W), and send it to the frame
-b.map(iota(m)). This gives an isomorphism of free rank-one modules: its inverse
-sends the new frame to the pulled frame. All degree-one elements of A(U) are
-inclusion generators, and their charts cover. On an overlap the old transition
-is the degree-zero fraction iota(m)/iota(n); its pullback is exactly
-b.map(iota(m))/b.map(iota(n)), the new transition. Hence these local isomorphisms
-and their inverses agree and glue. Refining overlaps of affine base opens by
-affine opens gives the same calculation, so the isomorphisms glue over the
-relative Proj. The chosen charts of D and D' identify their quotients with the
-same inclusion sections. By the generator equation for b, the glued isomorphism
-therefore preserves the quotient on every pulled section 1 tensor m. These
-sections generate the pullback module locally; equality extends by linearity
-and the sheaf axiom. The pullback composition isomorphisms used here are the
-ones fixed by those sections, giving the displayed equation with the equality
-proof induced by b.isPullback. Proof irrelevance gives the same equation with
-any supplied proof e of that equality of module objects. Empty
-charts, the zero module, and zero coefficient rings give zero localizations and
-the same equations. No finite-generation or flatness hypothesis is used. -/
+Source: Stacks Project, Constructions, Tag 01NQ, the degree-one part of theta; Tag 01NR, uniqueness;
+Tag 01OB, the quotient normalization. -/
 theorem quotient_comparison_of_normalized_pullbackData
     {X S : Scheme.{u}} (g : X ⟶ S) (E : S.Modules) [E.IsQuasicoherent]
     [((Scheme.Modules.tensorPullback g).obj E).IsQuasicoherent]

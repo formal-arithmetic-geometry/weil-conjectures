@@ -364,17 +364,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- A strict section scalar presentation, constructed from the scalar cone functor.
-Source: blueprint first-reduction Cones and Locality paragraphs; Stacks 014E and 03EK
-(blueprint: lem-sfb-strict-section-scalar-presentation).
-
-Proof: Conjugate the internal scalar by the exact section equivalence and its counit.
-Naturality and the triangle identities identify its value on every internal module.
-The left unitor sends the local tensor 1 tensor x to x. Naturality of the relative
-tensor sends that tensor under the scalar to d(1) tensor x; the unitor therefore
-identifies its section action with sectionScalarValue times x. The counit and its
-linearity extend this formula to all section modules. Form the strict powers, cone
-transitions and augmentation and descend them through derived localization.
-Exact countable products ensure that the Roos functor inverts quasi-isomorphisms. -/
+Source: Stacks 014E and 03EK. -/
 theorem strictSectionScalarPresentation (X : Scheme.{u})
     (d : End (Mod.regular (DerivedNakayama.integerRing l E))) :
     ∃ T : Presentation.{u + 2, u + 1, u + 1}

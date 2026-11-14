@@ -17,9 +17,8 @@ import WeilConjectures.AlgebraicGeometry.QuasiCompactOpenInduction
 
 /-! # Flat scalar-extension coordinates for a single-module comparison
 
-Source: Stacks Project, Tags 0A1D and 0DJ9, affine calculation and
-relative Mayer--Vietoris induction.
-(blueprint: lem-pc-standard-single-stalk-flat-counit-model).
+Source: Stacks Project, Tags 0A1D and 0DJ9, affine calculation and relative Mayer--Vietoris
+induction.
 -/
 
 @[expose] public section
@@ -32,36 +31,8 @@ namespace AlgebraicGeometry
 
 /-- Flat scalar-extension coordinates for the canonical comparison at one base point.
 
-Source: Stacks Project, Tag 0A1D, specialized to the structure sheaf and M[0],
-and Tag 0DJ9, affine calculation and relative Mayer--Vietoris induction.
-(blueprint: lem-pc-standard-single-stalk-flat-counit-model).
-
-Proof: Choose an affine neighbourhood V of g(a) in B and an affine neighbourhood
-of a mapping into V. Cover p inverse-image V by finitely many affine opens.
-For an affine source open, sections of M are flat over O(V) by relative flatness;
-the degree-zero section complex computes direct image. Tensor pullback sections
-are the ordinary scalar extension of this complex. The affine adjunction counit
-calculation identifies the canonical mate followed by the single pullback counit
-with the scalar-extension counit, without asserting its invertibility.
-For a quasi-compact separated source open use a finite affine cover: intersections
-are affine, so the finite alternating Cech complex gives the same identifications.
-For a general qcqs source induct on the finite affine cover by relative
-Mayer--Vietoris. The intersection of a previously covered open with the next affine
-is a quasi-compact separated open of that affine. Its preceding Cech construction
-therefore applies. Lift the restriction arrows to bounded-above flat resolutions
-and form the shifted cone of the map from the two open complexes to the overlap
-complex. Finite sums and cones preserve termwise flatness and the upper bound.
-Functoriality of the relative Mayer--Vietoris triangle identifies the comparison
-on this cone with the scalar-extension counit. Thus the induction gives both
-cohomology identifications and the commuting square, not a cancellation property
-of its middle arrow. Localize the resulting complex at g(a), then extend to O_A,a;
-localization preserves flatness and the support bound. Exact stalks and the
-canonical pullback stalk formula give the displayed isomorphisms and equality.
-Use any universal left-derived scalar-extension pair; uniqueness transports the
-source identification and the counit equality. Negative degrees and zero modules
-are covered by the same complexes; an empty A supplies no point a. No separatedness
-of p or flatness of g is used. All witnesses here are used in proofs only; no
-object is defined by selecting a witness of this existence theorem. -/
+Source: Stacks Project, Tag 0A1D, specialized to the structure sheaf and M[0], and Tag 0DJ9, affine
+calculation and relative Mayer--Vietoris induction. -/
 theorem exists_standardSingle_stalk_flat_counit_model
     {Y B A : Scheme.{u}} (p : Y ⟶ B) [QuasiCompact p] [QuasiSeparated p]
     (M : Y.Modules) [M.IsQuasicoherent] (hM : M.IsFlatOver p) (g : A ⟶ B) (a : A) :

@@ -32,9 +32,6 @@ import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
 set_option linter.privateModule false
 
 /-! # Finite reduction of the projection from a normalized tower limit
-
-Source: current blueprint, sec-smooth-purity/sk-lem-sp-tower, finite-reduction paragraph.
-(blueprint: lem-sp-tower-projection-finite-reduction)
 -/
 
 @[expose] public noncomputable section

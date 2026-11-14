@@ -10,8 +10,7 @@ import WeilConjectures.AlgebraicGeometry.Ordered.OrderedTateExactOpenComposition
 import WeilConjectures.SixFunctors.Etale.Derived.BaseChangeCube
 
 /-! # Geometric coefficient composition after tower descent
-
-(blueprint: lem-amb-vector-integration-restricted-chart-coefficient-composition).
+.
 -/
 
 @[expose] public noncomputable section
@@ -273,16 +272,7 @@ private lemma restricted_chart_geometry
     ((derivedSquareUpperStarIso (ModuleCat.{u + 1} A) sq₂).inv.app
       ((ordinaryFinitePullback A V.ι).obj L)) hg hinv'
 
-/-- Coefficient descent for a frame restricted through two nested opens.
-Source: blueprint vector integration, overlap calculation.
-(blueprint: lem-amb-vector-integration-restricted-chart-coefficient-composition).
-
-Proof: cancel the affine descent over V and identify the chart's explicit
-compositor with its inverse square comparison. Paste the chart and tower squares,
-take inverses, and cancel the mapped inverse base compositor. Naturality moves
-coefficient transport through the tower square. Finally the proved ordered Tate
-transport composition equation identifies the two base transports with transport
-along U into S, leaving the inverse affine descent over U. -/
+/-- Coefficient descent for a frame restricted through two nested opens. -/
 theorem vectorIntegration_restricted_chart_coefficient_composition
     (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] (hA : (N : A) = 0)
     (t : OrdinaryFiniteTwistTransport A N hA)

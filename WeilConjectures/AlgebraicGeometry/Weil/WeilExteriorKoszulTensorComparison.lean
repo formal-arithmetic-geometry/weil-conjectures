@@ -11,8 +11,7 @@ import WeilConjectures.AlgebraicGeometry.Weil.WeilKoszulAdjoinGenerator
 
 /-! # The algebraic exterior-to-tensor comparison
 
-Source: Stacks Project, More on Algebra, Tag 0664, lemma-join-sequences-koszul-complex.
-(blueprint: lem-weil-pbc-exterior-negative-koszul-tensor).
+Source: Stacks Project, More on Algebra, Tag 0664.
 -/
 
 @[expose] public noncomputable section
@@ -86,27 +85,7 @@ private theorem emptyKoszulIso_hom_f_zero {A : Type (u + 1)} [CommRing A]
 
 /-- Joining one-generator exterior complexes gives the exterior complex of the list.
 
-Source: Stacks Project, More on Algebra, Tag 0664, lemma-join-sequences-koszul-complex.
-(blueprint: lem-weil-pbc-exterior-negative-koszul-tensor).
-
-Proof: split the ordered basis Fin (r+1) into its first vector and its tail.
-In exterior degree k, separate the increasing k-subsets according as they contain
-that first vector. The two summands are the tail exterior powers of degrees k and
-k-1, respectively. Send a wedge not containing the first vector to 1 tensor that
-wedge, and a wedge containing it to that vector tensor the remaining wedge. The
-inverse concatenates the wedges, so both composites are identity on the ordered
-subset bases. Contraction of a wedge containing the first vector is the first
-coefficient times its tail minus the first vector wedged with tail contraction;
-this is exactly the total differential, whose sign on the first degree -1
-summand is minus. On the other summand both differentials are tail contraction.
-This constructs the chain isomorphism for adjoining one generator. Induct on r,
-starting from the exterior degree-zero identification with A and the vanishing
-of all positive exterior powers of the zero module. Extension to integer degrees
-by zero preserves the formulas. The diagonal exterior transition multiplies a
-subset by the product of its a_i, which is also the tensor transition. The empty
-subset maps to the tensor of empty subsets with coefficient 1, giving the unit
-identity. These computations use no division, regularity or nonzero coefficient;
-they hold over the zero ring and for empty lists. -/
+Source: Stacks Project, More on Algebra, Tag 0664. -/
 theorem exteriorNegativeKoszulTensorComparison
     {A : Type (u + 1)} [CommRing A] (r : ℕ) (a : Fin r → A) :
     ∃ e : ∀ m : ℕ, completedKoszulPower (A := A) r a m ≅

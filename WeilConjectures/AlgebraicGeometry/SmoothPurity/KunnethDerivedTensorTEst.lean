@@ -18,10 +18,8 @@ import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 /-!
 # Connectivity of the derived tensor product
 
-Source: `literature/blueprint/master/blueprint/sec-smooth-purity/
-sk-prop-sf-kunneth-ordinary/lem-kun-derived-tensor-t-est.md`, node
-`lem-kun-derived-tensor-t-est`; Stacks Project, Tag 0F1J, first reduction paragraph,
-using Tag 0F1M and the lower truncation of Tag 0118.
+Source: Stacks Project, Tag 0F1J, first reduction paragraph, using Tag 0F1M and the lower truncation
+of Tag 0118.
 
 The first factor has Tor amplitude in `[a, ∞)`, and the second factor has no
 cohomology below `b`. We use bounded dévissage for each canonical upper truncation
@@ -160,12 +158,7 @@ private theorem etale_tensor_isGE_of_single
 
 /-- If `A` has Tor amplitude in `[a, ∞)` and `B` has no cohomology below `b`,
 then the derived tensor `A ⊗ᴸ B` has no cohomology below `a + b`.
-
-Source: `literature/blueprint/master/blueprint/sec-smooth-purity/
-sk-prop-sf-kunneth-ordinary/lem-kun-derived-tensor-t-est.md`, node
-`lem-kun-derived-tensor-t-est` (blueprint: lem-kun-derived-tensor-t-est); corrected source
-proof uses the existing bounded dévissage theorem on each good upper truncation,
-then the integer-indexed colimit of these truncations. A categorical K-flat model
+ A categorical K-flat model
 computes the tensors before passing to this colimit. Exactness of filtered colimits
 transfers the lower cohomology bound to the original second factor. This gives the
 connectivity estimate used in Stacks Tag 0F1J, first reduction paragraph.

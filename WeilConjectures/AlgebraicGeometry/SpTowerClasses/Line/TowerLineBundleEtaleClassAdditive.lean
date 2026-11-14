@@ -9,8 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassR
 import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
 
 /-! # Additivity of the integral line class after change of site
-
-Source: tower classes proof (2), Picard additivity and exact derived comparison.
 -/
 
 @[expose] public noncomputable section
@@ -49,14 +47,6 @@ private theorem mapExtensionEndpoints_add
 
 /-- Tensor multiplication becomes addition in the integral line class after changing
 from the etale site to the pro-etale site.
-
-Source: tower classes proof (2), Picard-to-H1 additivity (lemma-cohomology-multiplicative-group--3).
-(blueprint: lem-sfb-tower-line-bundle-etale-class-additive).
-
-Proof: the Picard-to-H1 map is additive. Its Ext realization preserves sums;
-exact derived change of site is additive, and pre- and postcomposition with the
-fixed integer and units comparisons distribute over sums. The generic endpoint
-transport lemma makes these comparisons without unfolding their constructions.
 -/
 theorem tower_lineBundleEtaleClass_mul (T : Scheme.{u}) (L M : T.Pic) :
     lineBundleEtaleClass T (L * M) =

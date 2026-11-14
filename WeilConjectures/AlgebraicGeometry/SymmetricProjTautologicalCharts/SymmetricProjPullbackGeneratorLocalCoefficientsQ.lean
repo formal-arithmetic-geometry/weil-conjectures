@@ -14,7 +14,6 @@ public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 Source: Stacks Project, Constructions, Tags 01N2, 01NQ, 01NR and 01OB.
 The statement isolates the first (pulled quotient) coefficient formula from the
 common-coefficient conclusion.
-(blueprint: lem-trf-symmetric-proj-pullback-generator-local-coefficients-q)
 -/
 @[expose] public section
 set_option autoImplicit false

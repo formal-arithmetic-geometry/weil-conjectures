@@ -40,9 +40,6 @@ set_option linter.privateModule false
 
 /-! # The reduction tower is normalized
 
-Source: blueprint latest, chap-Smooth-purity, normalized-towers-reduction
-(blueprint: proposition-sp-integral-towers--1).
-
 The data declarations are re-exported unchanged from SmoothPurityReductionTowerData.
 The proof assembles strict descent, the actual reduction adjuncts, the Tor interval
 comparison and finite-level constructibility. Positive level n+1 is indexed by n.

@@ -12,10 +12,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 
 /-! # Normalized tensor coordinates for projective-line level comparison
 
-Source: literature/blueprint/latest/blueprint/sec-smooth-purity/
-sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md, Levels
-(blueprint: def-sp-p1-fixed-total-tensor).
-
 The coordinates retain the canonical associated-module-sheaf functor. Its tensor
 comparison is fixed on scalar-unit pure tensors, on total-complex summands, and
 on K-flat representatives. Thus the final level equations cannot be satisfied
@@ -40,8 +36,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
   (n : ℕ) [Finite (SpTowerShriek.R l E n)]
 
-/-- The existing fixed-scalar total tensor, exposed without its monoidal-complex wrapper.
-Source: Levels (blueprint: def-sp-p1-fixed-total-tensor). -/
+/-- The existing fixed-scalar total tensor, exposed without its monoidal-complex wrapper. -/
 def fixedTotalTensor (T : Scheme.{u}) :
     CochainComplex (FixedSheaves l E n T) ℤ × CochainComplex (FixedSheaves l E n T) ℤ ⥤
       CochainComplex (FixedSheaves l E n T) ℤ :=

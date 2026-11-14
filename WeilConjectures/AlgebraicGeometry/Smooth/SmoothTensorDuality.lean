@@ -27,9 +27,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
 
 /-! # Smooth tensor duality for ordinary etale coefficients
 
-Source: blueprint sec-smooth-purity/sk-prop-sf-cbc/thm-asd-smooth-tensor.md
-(blueprint: proposition-exceptional-inverse-image-smooth-morphism).
-
 The tensor morphism is the specified adjunction mate, with no chosen orientation.
 -/
 
@@ -43,9 +40,7 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
 
 /-- The canonical derived braiding, obtained from the Koszul braiding of the homotopy
-category by the derived tensor universal property. Source: blueprint
-sec-smooth-purity/sk-prop-sf-cbc/thm-asd-smooth-tensor.md, the tensor mate;
-(blueprint: proposition-exceptional-inverse-image-smooth-morphism). This uses the actual derived
+category by the derived tensor universal property. This uses the actual derived
 braiding construction, not a choice of an unspecified isomorphism. -/
 @[instance_reducible]
 noncomputable def smoothTensorCanonicalDerivedBraiding
@@ -56,9 +51,7 @@ noncomputable def smoothTensorCanonicalDerivedBraiding
   DerivedMonoidal.braidedCategory' (_root_.DerivedCategory.Qh (C := C))
     (HomotopyCategory.quasiIso C (.up ℤ))
 
-/-- The canonical tensor morphism for the ordinary exceptional adjoint. Source: blueprint
-sec-smooth-purity/sk-prop-sf-cbc/thm-asd-smooth-tensor.md, first displayed composite in
-its proof (blueprint: proposition-exceptional-inverse-image-smooth-morphism).
+/-- The canonical tensor morphism for the ordinary exceptional adjoint.
 
 Transpose the inverse compact-support projection formula followed by tensoring the
 counit at the coefficient unit and the right unit constraint. The upstream projection

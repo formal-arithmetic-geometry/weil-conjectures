@@ -27,7 +27,7 @@ variable {S : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω]
   (s : Spec (.of Ω) ⟶ S)
 
 /-- The geometric section obtained from a limit leg of the small strict-local cone.
-Source: Stacks, Tag 03Q9 (blueprint: def-weil-pbc-small-strict-local-section-cone). -/
+Source: Stacks, Tag 03Q9. -/
 noncomputable def strictLocalNeighbourhoodSection
     (j : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)) :
     Scheme.Etale.mk (𝟙 (Scheme.strictHenselizationScheme s)) ⟶
@@ -50,10 +50,7 @@ noncomputable def strictLocalNeighbourhoodSection
       rfl) (by trivial)
 
 /-- The small strict-local cone supplies compatible sections over an initial diagram.
-Source: Stacks, Tag 03Q9 (blueprint: def-weil-pbc-small-strict-local-section-cone).
-Proof: initiality is strictHenselization_properties. For compatibility, compare both
-pullback projections. The base projection is the identity, and the other projection
-is natural by the limit-cone equation and naturality of the affine spectrum comparison. -/
+Source: Stacks, Tag 03Q9. -/
 noncomputable def strictLocalSectionCone :
     PointedEtaleSectionCone (Scheme.strictHenselizationStructuralMap s)
       ((equivSmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)).inverse ⋙

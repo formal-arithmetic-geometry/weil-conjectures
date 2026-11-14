@@ -108,7 +108,6 @@ import WeilConjectures.Algebra.Homology.CanonicalRingedTensorComparison.RingedTo
 /-! # Normalized tensor comparison for varying-ring inverse image
 
 Source: Stacks Project, Tags 03EL, 0B56, 06YS, 06YU and 07A4.
-(blueprint: lem-pur-varying-ring-tensor-comparison).
 -/
 
 -- After pruning, this module only keeps private declarations.

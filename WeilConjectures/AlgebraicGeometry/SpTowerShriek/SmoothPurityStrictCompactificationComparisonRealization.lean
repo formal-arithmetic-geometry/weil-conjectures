@@ -15,9 +15,6 @@ import WeilConjectures.AlgebraicGeometry.SpTowerShriek.SmoothPurityStrictFiniteW
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 
 /-! # Assembly of normalized strict compactification comparisons
-
-Source: blueprint operations proof (2).
-(blueprint: lem-sp-strict-compactification-comparison-realization).
 -/
 
 @[expose] public noncomputable section

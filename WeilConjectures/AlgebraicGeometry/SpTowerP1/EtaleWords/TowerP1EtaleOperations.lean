@@ -286,10 +286,6 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 
 /-! # Ordinary etale words for the projective-line tower comparison
 
-Source: literature/blueprint/latest/blueprint/sec-smooth-purity/
-sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md, Construction and Levels
-(blueprint: def-sp-p1-etale-operations).
-
 These are formulas in the ordinary etale derived categories. The diagonal is the
 positive supported Cartier Kummer boundary; the trace is the second projection
 of the inverse unit/Chern splitting. No adjunction unit is selected instead.
@@ -309,27 +305,22 @@ namespace AlgebraicGeometry.ProEtale.SpTowerP1.EtaleWords
 
 variable (A : Type (u + 1)) [CommRing A]
 
-/-- Exact etale inverse image, with its canonical left-derived presentation.
-Source: Construction (blueprint: def-sp-p1-etale-operations). -/
+/-- Exact etale inverse image, with its canonical left-derived presentation. -/
 abbrev pull {X Y : Scheme.{u}} (f : X ⟶ Y) := Etale.ordinaryFinitePullback A f
 
-/-- Ordinary total right-derived etale direct image.
-Source: Construction (blueprint: def-sp-p1-etale-operations). -/
+/-- Ordinary total right-derived etale direct image. -/
 abbrev push {X Y : Scheme.{u}} (f : X ⟶ Y) := Etale.ordinaryFinitePushforward A f
 
-/-- The same unbounded etale derived tensor used by the finite projection theorem.
-Source: Construction (blueprint: def-sp-p1-etale-operations). -/
+/-- The same unbounded etale derived tensor used by the finite projection theorem. -/
 abbrev tensor (T : Scheme.{u}) := Etale.ordinaryFiniteTensor A T
 
-/-- The counit-transpose projection, with the direct-image factor first.
-Source: Construction (blueprint: def-sp-p1-etale-operations). -/
+/-- The counit-transpose projection, with the direct-image factor first. -/
 def projection {X Y : Scheme.{u}} (f : X ⟶ Y)
     (N : Etale.DerivedCategoryModule A X) (K : Etale.DerivedCategoryModule A Y) :=
   ((Etale.rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} A) f).app N).app K
 
 /-- Pullback of a projection along the diagonal is identity, using the specified
-ordinary compositor and identity isomorphism, localized canonically.
-Source: Construction, composition source (blueprint: def-sp-p1-etale-operations). -/
+ordinary compositor and identity isomorphism, localized canonically. -/
 def diagonalPull (S : Scheme.{u}) (a : Bool) :
     pull A (Etale.projectiveLineDiagonalProjection S a) ⋙ pull A (diagonalImmersion S) ≅
       𝟭 (Etale.DerivedCategoryModule A (ProjectiveLine S)) :=
@@ -342,9 +333,7 @@ def diagonalPull (S : Scheme.{u}) (a : Bool) :
       (Etale.upperStarId (ModuleCat.{u + 1} A) (ProjectiveLine S)) ≪≫
     (𝟭 _).leftDerivedFunctorIsoMapDerivedCategory ≪≫ Functor.mapDerivedCategoryIdIso _
 
-/-- The finite composition source is the pasted ordinary adjunction unit.
-Source: Construction, source identification
-(blueprint: def-sp-p1-etale-operations). -/
+/-- The finite composition source is the pasted ordinary adjunction unit. -/
 def sourceUnit (S : Scheme.{u}) (a : Bool)
     (M : Etale.DerivedCategoryModule A (ProjectiveLine S)) :
     M ⟶ (push A (Etale.projectiveLineDiagonalProjection S a)).obj
@@ -356,8 +345,7 @@ def sourceUnit (S : Scheme.{u}) (a : Bool)
         (diagonalImmersion S)).unit.app _ ≫
         (push A (diagonalImmersion S)).map ((diagonalPull A S a).hom.app M))
 
-/-- The supported projection followed by the specified identity pullback and scalar unitor.
-Source: Construction (blueprint: def-sp-p1-etale-operations). -/
+/-- The supported projection followed by the specified identity pullback and scalar unitor. -/
 def diagonalProjection (S : Scheme.{u}) (a : Bool)
     (M : Etale.DerivedCategoryModule A (ProjectiveLine S)) :
     ((tensor A (diagonalSurface S)).obj
@@ -373,8 +361,7 @@ def diagonalProjection (S : Scheme.{u}) (a : Bool)
         (Etale.derivedTensorSingleUnitIso M).hom)
 
 /-- Proper exchange for the Cartesian q/q square, including its flipped version.
-It is the unit/square/counit mate, with exact/left-derived identifications.
-Source: Construction (blueprint: def-sp-p1-etale-operations). -/
+It is the unit/square/counit mate, with exact/left-derived identifications. -/
 def exchange (S : Scheme.{u}) (a : Bool)
     (M : Etale.DerivedCategoryModule A (ProjectiveLine S)) :
     (pull A (ProjectiveLine S ↘ S)).obj ((push A (ProjectiveLine S ↘ S)).obj M) ⟶

@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.Square.SquareZeroTensorPowerBoundary
 /-! # The obstruction-and-lifting conjunct
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 09MS.
-(blueprint: lem-sc-square-zero-section-power-obstruction-core).
 -/
 
 @[expose] public section
@@ -30,23 +29,7 @@ private theorem nsmul_addHom_zero {A B : Type*} [AddZeroClass A] [AddMonoid B]
 
 /-- Core obstruction and lifting criterion, omitting quasi-coherence.
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 09MS.
-(blueprint: lem-sc-square-zero-section-power-obstruction-core).
-Proof: Tensor the ideal sequence by L^d, which is invertible, to obtain an exact
-sequence with kernel I tensor L^d and quotient j_*j^*(L^d). The kernel is killed
-by I, since I^2=0. Identify it with the pushforward of its pullback using the
-annihilated-module theorem. The affine-morphism edge isomorphism identifies its
-H^1 with H^1 on Z. Take F=j^*(I tensor L^n), and take xi
-to be the boundary of s under this identification. Form the direct sum of the
-sequences over d. Local frames of L identify the resulting graded algebra with
-a polynomial algebra, so it is commutative and its kernel is square zero.
-The boundary derivation theorem and induction give boundary(s^(e+1)) =
-(e+1) s^e xi. Inclusion and projection of graded summands identify this with
-the degree n*(e+1) boundary. Naturality of the edge isomorphism identifies the
-s^e action with the displayed H^1 map. Its vanishing therefore makes the
-boundary zero. Exactness supplies a global lift t. Iterated tensor-pullback
-comparisons (including the unit comparison when n=0) give a, and identify
-restriction of t followed by a with the pure tensor power of s. -/
+Source: Stacks Project, Cohomology of Schemes, Lemma 09MS. -/
 theorem square_zero_section_power_obstruction_core
     {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j]

@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassR
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 
 /-! # Exact-derived transport from sheaves to constant towers
-
-Source: blueprint chap-Smooth-purity, classes proof (2), and exact-functor
-compatibility of Ext with composite and isomorphic functors.
 -/
 
 @[expose] public noncomputable section
@@ -167,8 +164,7 @@ private theorem mapSingleArrow_square_cancel
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- The degree-zero derived endpoint map with its objectwise source type.
-Source: exact single comparison (blueprint: lem-sp-constant-tower-derived-square). -/
+/-- The degree-zero derived endpoint map with its objectwise source type. -/
 def derivedSingleEndpoint
     {C : Type u₁} [Category.{v₁} C] [Abelian C]
     {D : Type u₂} [Category.{v₂} D] [Abelian D]
@@ -180,9 +176,7 @@ def derivedSingleEndpoint
   (P.mapDerivedCategorySingleFunctor 0).hom.app A ≫
     (DerivedCategory.singleFunctor D 0).map s
 
-/-- The shifted derived endpoint map with its objectwise source type.
-Source: exact single and shift comparisons
-(blueprint: lem-sp-constant-tower-derived-square). -/
+/-- The shifted derived endpoint map with its objectwise source type. -/
 def derivedShiftedSingleEndpoint
     {C : Type u₁} [Category.{v₁} C] [Abelian C]
     {D : Type u₂} [Category.{v₂} D] [Abelian D]
@@ -196,17 +190,6 @@ def derivedShiftedSingleEndpoint
     ((DerivedCategory.singleFunctor D 0).map t)⟦(1 : ℤ)⟧'
 
 /-- Transport a sheaf-level derived square through exact constant towers.
-Source: blueprint classes proof (2); exact functoriality of Ext.
-(blueprint: lem-sp-constant-tower-derived-square).
-
-Proof: realize the source derived arrow as an Ext class. Exact-functor Ext
-compatibility identifies the two paths around the functor square, conjugated by
-its specified isomorphism. Naturality under source precomposition and shifted
-target postcomposition transports the given endpoint square. The two endpoint
-identities identify the conjugated endpoints with s and t. Finally cancel the
-inverse single comparison. This gives the displayed single and shift comparisons.
-The argument applies to arbitrary source and target objects and does not require
-s, t, z or a to be invertible.
 -/
 theorem constant_tower_derived_square {X Y : Scheme.{u}}
     [hDiagY : HasDerivedCategory.{u + 1} (DiagonalAb Y)]

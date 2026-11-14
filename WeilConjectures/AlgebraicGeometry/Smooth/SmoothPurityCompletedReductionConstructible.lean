@@ -10,8 +10,7 @@ import WeilConjectures.AlgebraicGeometry.Smooth.SmoothPurityCompletedReductionCo
 
 /-! # Constructibility of the completed ell-power reduction
 
-Source: latest blueprint, chap-Smooth-purity, sk-lem-sp-tower-equivalence.proof.md;
-Bhatt--Scholze, Lemma 3.5.7 (blueprint: lem-sp-completed-reduction-constructible).
+Source: Bhatt--Scholze, Lemma 3.5.7.
 -/
 
 @[expose] public section

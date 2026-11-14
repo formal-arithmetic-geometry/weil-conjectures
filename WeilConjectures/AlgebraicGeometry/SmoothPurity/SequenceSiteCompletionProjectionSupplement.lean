@@ -116,8 +116,7 @@ public import WeilConjectures.AlgebraicGeometry.SequenceSiteCompletionProjection
 
 /-! # The constant/limit ringed sequence projection
 
-Source: Stacks, sites-cohomology.tex, Tags 0940 and 06YY; Zheng, Construction 4.1,
-printed p. 21 (blueprint: lem-pur-sequence-site-completion-projection).
+Source: Stacks, sites-cohomology.tex, Tags 0940 and 06YY; Zheng, Construction 4.1, printed p. 21.
 
 The index `n : ℕ` denotes the positive level `n+1`. All systems retain their actual
 horizontal section maps. The record below specifies the geometric morphism, its
@@ -181,16 +180,14 @@ variable {C : Type c} [Category.{v} C] [EssentiallySmall.{r} C]
   (B : ℕ → Sheaf J CommRingCat.{r}) (τ : ∀ n : ℕ, B (n + 1) ⟶ B n)
 
 /-- The underlying sheaf of sets of the existing module category.
-Source: Stacks 03D1 and 03D6
-(blueprint: lem-pur-sequence-site-completion-projection). -/
+Source: Stacks 03D1 and 03D6. -/
 abbrev completionUnderlying (R : Sheaf J CommRingCat.{r}) :
     Mod.{c, v, r} J R ⥤ Sheaf J (Type r) :=
   SheafOfModules.toSheaf (ring.{c, v, r} J R) ⋙
     sheafCompose J (forget AddCommGrpCat.{r})
 
 /-- A sheafified pure scalar-extension tensor, in the dependency's actual ordinary model.
-Source: Stacks 03CZ and 06YY
-(blueprint: lem-pur-sequence-site-completion-projection). -/
+Source: Stacks 03CZ and 06YY. -/
 def completionScalarSection {R S : Sheaf J CommRingCat.{r}} (φ : R ⟶ S)
     (A : ScalarData.{c, v, r} φ) (M : Mod.{c, v, r} J R) (U : Cᵒᵖ)
     (a : S.obj.obj U) (x : M.val.obj U) : (A.model.E.obj M).val.obj U :=
@@ -202,8 +199,7 @@ def completionScalarSection {R S : Sheaf J CommRingCat.{r}} (φ : R ⟶ S)
 /-- The constant/limit geometric morphism with its canonical structural ring map.
 The section equations fix the coordinate-wise adjunction and ring projection.
 No condition on coefficient flatness or transition surjectivity is imposed.
-Source: Stacks 0940, 03D6, 03D7 and 06YY; Zheng, Construction 4.1, p. 21
-(blueprint: lem-pur-sequence-site-completion-projection). -/
+Source: Stacks 0940, 03D6, 03D7 and 06YY; Zheng, Construction 4.1, p. 21. -/
 structure SequenceSetProjection (b : Cone (rings.{c, v, r} J B τ)) where
   /-- The ringed geometric morphism, with the induced action on module direct image. -/
   π : RingedToposMorphismOfUniverses

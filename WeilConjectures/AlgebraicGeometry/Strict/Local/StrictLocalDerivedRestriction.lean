@@ -107,8 +107,7 @@ noncomputable def strictLocalDerivedRestriction
         AddCommGrpCat.{u + 1}).rightDerivedFunctorPlusIsoMapDerivedCategoryPlus.inv
 
 /-- The comparison is germ restriction, exchange for the strict-base square, and Leray.
-Source: Stacks Project, Tag 0GJV, proof of lemma-specialization-cospecialization.
-(blueprint: def-weil-pbc-small-model-derived-restriction). -/
+Source: Stacks Project, Tag 0GJV, proof of. -/
 noncomputable def strictLocalSheafComparison
     {X S : Scheme.{u}} (f : X ⟶ S)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

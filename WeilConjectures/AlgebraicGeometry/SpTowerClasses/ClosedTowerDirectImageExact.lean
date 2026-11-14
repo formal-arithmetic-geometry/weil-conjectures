@@ -12,8 +12,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Functor.ReflectsIso.Exact
 
 /-! # Exactness of closed direct image on coefficient systems
 
-Source: Bhatt--Scholze, Lemma 6.1.17; blueprint classes clause (3).
-(blueprint: lem-sp-closed-tower-direct-image-exact).
+Source: Bhatt--Scholze, Lemma 6.1.17.
 -/
 
 @[expose] public noncomputable section
@@ -58,16 +57,7 @@ private theorem constantRingPushforward_exact
   exact preservesFiniteColimits_of_natIso q
 
 /-- A closed immersion locally of finite presentation has exact ordinary system direct image.
-Source: Bhatt--Scholze, Lemma 6.1.17, applied to each finite coefficient level.
-(blueprint: lem-sp-closed-tower-direct-image-exact).
-
-Proof: a closed immersion is finite. At each level, identify the intrinsic constant-ring
-pushforward with fixed-scalar module-sheaf direct image through the coefficient equivalences
-and uniqueness of right adjoints. Finite direct image preserves finite colimits, and its
-adjunction supplies finite limits. System evaluation functors are exact and jointly faithful:
-a morphism is determined at every pair consisting of a level and a chart. Their ordinary
-pushforward comparison therefore detects exactness of the system direct image. Empty
-schemes and the zero coefficient ring cause no exception. -/
+Source: Bhatt--Scholze, Lemma 6.1.17, applied to each finite coefficient level. -/
 theorem closedTowerPush_exact {b : SpTowerShriek.Base l E}
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsClosedImmersion f] [LocallyOfFinitePresentation f]
     (g : SpTowerShriek.Geometry l E b f) :

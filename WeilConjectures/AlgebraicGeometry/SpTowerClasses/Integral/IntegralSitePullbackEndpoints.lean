@@ -38,8 +38,7 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Integral.IntegralSitePul
 
 /-! # Integer and units endpoints in the change-of-site pullback square
 
-Source: Stacks Project, Tag 00WX; the integral class construction in
-sec-smooth-purity/sk-prop-sp-tower-geometric, classes proof (2).
+Source: Stacks Project, Tag 00WX.
 -/
 
 @[expose] public noncomputable section
@@ -61,27 +60,8 @@ The first equality concerns only constant integer sheaves; the second concerns o
 units sheaves. There is no line bundle, cohomology class or derived-category map in
 this statement.
 
-Source: Stacks Project, Tag 00WX, the change-of-site construction in
-sec-smooth-purity/sk-prop-sp-tower-geometric, classes proof (2).
-(blueprint: lem-sp-integral-site-pullback-endpoints).
-
-Proof: comparisonUpperStarCompUpperStarIso is the mate of the canonical commuting
-square of direct images, oriented from f_proet^* nu_Y^* to nu_X^* f_et^*.
-For integers, transpose the claimed equality through the two composite
-inverse-image adjunctions, followed by the constant-sheaf adjunction. The definition
-of integerComparison by uniqueness of left adjoints and the definition of
-upperStarConstantSheafIso turn both transposes into the map sending each integer k
-to the constant section k on the base-changed chart. Thus the maps agree.
-For units, transpose through the same composite inverse-image adjunctions.
-cartierUnitsComparison is adjoint to the identity on units of each etale chart.
-By ha, a is adjoint to pullback along the fibre-product projection.
-upperStarGmSheafToGmSheaf has precisely the same adjoint on etale charts, by its
-definition. The direct-image compositor in the mate is the chart base-change
-isomorphism, whose first projection commutes with the two projections used here.
-Both transposes therefore pull back a unit along the same projection; naturality
-of the adjunction gives the second equality. All checks are on arbitrary charts,
-so empty schemes, nonflat f and noninvertible full-units comparisons cause no
-exception.
+Source: Stacks Project, Tag 00WX, the change-of-site construction in/sk-prop-sp-tower-geometric,
+classes proof (2).
 -/
 theorem integral_site_pullback_endpoints {X Y : Scheme.{u}} (f : X ⟶ Y)
     (a : (upperStar AddCommGrpCat.{u + 1} f).obj (Scheme.proEtaleUnitsSheaf Y) ⟶

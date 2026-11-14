@@ -11,9 +11,8 @@ import WeilConjectures.AlgebraicGeometry.Curve.tensorGradedAction_projection_sec
 
 /-! # Projection of homogeneous quotient actions
 
-Source: Stacks Project, Tag 09MS, the graded direct-sum ideal sequence;
-Tag 0B8S, the quotient action on a square-zero ideal.
-(blueprint: lem-sc-square-zero-tensor-graded-action-projection).
+Source: Stacks Project, Tag 09MS, the graded direct-sum ideal sequence; Tag 0B8S, the quotient
+action on a square-zero ideal.
 -/
 
 @[expose] public section
@@ -32,26 +31,8 @@ set_option linter.unusedVariables false in
 /-- The homogeneous quotient actions commute with the coefficient projections.
 This statement concerns only actions: it has no connecting map or resolution presentation.
 
-Source: Stacks Project, Tag 09MS, the graded ideal sequence; Tag 0B8S, first paragraph
-of the proof (the quotient action); Tag 01XC, functoriality of the affine cohomology edge.
-(blueprint: lem-sc-square-zero-tensor-graded-action-projection).
-Proof: The local lift formula uniquely determines an action on I, since its inclusion
-in B is mono. Cover an open by opens on which the section in question lifts through
-the degreewise adjunction unit. Express local sections of I, after another refinement,
-as finite sums of homogeneous sections using the colimit cofan k. The relation
-k_inclusion and homogeneous multiplication b_multiply compute the action of each lift
-on each summand. The k_projection and k_orthogonal relations extract only the summand
-whose degree plus the section degree is n(e+2). Thus s extracts degree n(e+1) and t
-extracts degree n. For n=0 both degrees can coincide; the same diagonal projection,
-not the off-diagonal relation, applies. The computations commute with restriction and
-glue. Apply H^1 to these module morphism identities and use haction. The canonical
-coefficient comparisons consist of the ideal-kernel inclusion comparison, the inverse
-annihilated-module unit, the inverse affine cohomology edge, and the tensor-degree
-comparison. Naturality of each transports the first square to mulTensorPowSection
-f F e 1 and the second to rho_F inverse followed by F whiskered with x, preceded by
-rho_F on the degree-zero coefficient. The equality hD fixes exactly these comparisons.
-Evaluation gives the two equations for every cohomology class, including zero classes
-and zero sections, with no use of a product rule for boundaries. -/
+Source: Stacks Project, Tag 09MS, the graded ideal sequence; Tag 0B8S, first paragraph of the proof
+(the quotient action); Tag 01XC, functoriality of the affine cohomology edge. -/
 theorem tensorGradedAction_projection {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)
     (n : ℕ) (T : TensorGradedPresentation j L) (D : TensorBoundaryComparisonData j L n)

@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.Tensor.TensorGradedActionKernelSecondDi
 /-! # Homogeneous quotient multiplication on degree kernels
 
 Source: Stacks Project, Tags 09MS and 0B8S.
-(blueprint: lem-sc-tensor-graded-action-kernel-second).
 -/
 
 @[expose] public section
@@ -30,32 +29,8 @@ noncomputable section
 
 /-- Multiplication by x followed by the output projection factors through the input
 projection and the explicit transported tensor-by-x map, already on sheaves.
-Source: Stacks Project, Tag 09MS, coherent-equation-ses and the graded direct sum;
-Tag 0B8S, quotient multiplication on the square-zero ideal.
-(blueprint: lem-sc-tensor-graded-action-kernel-second).
-Proof: First substitute hD, so the section comparison is boundarySectionDegreeIso.
-Since the inclusion of the ideal is mono, the local lift formula fixes the
-quotient action. Check the asserted morphism identity after each coproduct injection
-T.k d, which jointly determine a morphism by T.k_colimit. Locally trivialize L and
-lift the quotient section x through the degreewise quotient unit in degree n(e+1).
-The relation b_quotient identifies its image with tensorGradedSection. The relations
-k_inclusion and b_multiply compute multiplication on the degree-d ideal summand
-as ideal tensor multiplication in degree d+n(e+1). Project to n(e+2). If d is not n,
-the output is zero by k_orthogonal; the input projection is also zero. If d=n,
-k_projection identifies both sides with multiplication by x on the ideal coefficient.
-In a trivialization with generator ell, write the kernel inclusion of y as
-r times ell^d with r in J, and a lift of x as a times ell^(n(e+1)). The product
-is ar times ell^(d+n(e+1)). The inclusion equation of boundaryIdealKernelIso
-identifies y with r; the annihilated-module unit reduces the coefficient to Z.
-The recursive tensor-power and pullback comparisons send each tensor of ell
-to the same tensor of its pullback, with the unitors in exponent zero. Thus
-boundaryCoefficientDegreeIso identifies the diagonal product with F tensor x,
-and conjugating by the kernel-to-pushforward isomorphisms gives the stated map.
-Changing a lift by a kernel section contributes zero,
-by squareZero. These calculations hold on an open cover and glue by sheaf separation;
-hglobal identifies the sectionwise action with the given module endomorphism.
-For n=0 the output degree is d, so exactly d=0 survives; no distinct-degree assumption
-is made. The zero section and zero ideal give zero maps on both sides. -/
+Source: Stacks Project, Tag 09MS, coherent-equation-ses and the graded direct sum; Tag 0B8S,
+quotient multiplication on the square-zero ideal. -/
 theorem tensorGradedAction_kernel_second {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)
     (n : ℕ) (T : TensorGradedPresentation j L) (D : TensorBoundaryComparisonData j L n)

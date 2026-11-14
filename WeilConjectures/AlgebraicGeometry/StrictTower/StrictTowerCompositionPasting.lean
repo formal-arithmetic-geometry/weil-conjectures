@@ -919,14 +919,13 @@ all compatible proper refinements, and satisfies vertical interchange under arbi
 base change. The latter two clauses are equalities of natural transformations on the
 whole derived strict-tower categories; no evaluation-faithfulness premise is made.
 
-Source: Stacks, Tags 0F7J, 0F7C, 0F7D and 0F7F, adapted to strict towers
-(blueprint: lem-cbc-complete-proetale-composition-pasting-coherence).
+Source: Stacks, Tags 0F7J, 0F7C, 0F7D and 0F7F, adapted to strict towers.
 
 Proof plan, following the node's ten steps:
 1. Evaluation commutes with J_c. A scalar etale origin L_n evaluates J_c M as the
    scalar realization of c_! L_n, by finite constant coefficient transport and
    proposition-comparison-immersions--1. Exactness of etale c_!
-   (lem-weil-pbc-extension-by-zero-exact) retains its individual lower bound.
+ retains its individual lower bound.
 2. Apply gamma_isIso to Q at J_c M, and whisker with R_q. The jComp and rComp
    identifications give exactly compositionD, naturally in M.
 3. For a refinement let A be its c-square, H its i-square, and T its b-square.
@@ -1012,13 +1011,7 @@ private theorem refinementFactor_isIso {A C D E : Type*}
   infer_instance
 
 /-- Both boundaries of the refinement square are invertible on finite-origin objects.
-Source: Stacks, Tag 0F7J, choice independence
-(blueprint: lem-cbc-complete-proetale-composition-pasting-coherence).
-Proof: apply gamma_isIso to the refinement square for the compactifications of hf;
-its left proper map is identity. Whisker by the outer proper direct image to obtain
-invertibility of C_hf. By compositionPastingCoherence both D's are invertible and
-C_hf D2 = D1 H, so H = D1⁻¹ C_hf D2 is invertible. This avoids any finite-origin
-assumption on F_f M, as in step 10 of the node. -/
+Source: Stacks, Tag 0F7J, choice independence. -/
 theorem compositionRefinement_isIso {X Y Z : Scheme.{u}} (f : X ⟶ Y) (h : Y ⟶ Z)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
     [IsSeparated h] [LocallyOfFiniteType h] [QuasiCompact h]
@@ -1050,8 +1043,7 @@ theorem compositionRefinement_isIso {X Y Z : Scheme.{u}} (f : X ⟶ Y) (h : Y �
 
 /-- The horizontal and hf comparisons from a common refining compatible tower, on a
 finite-origin input. In the node's right-to-left convention they are H₂⁻¹H₁ and C₂⁻¹C₁.
-Source: Stacks, Tag 0F7J, common refinements
-(blueprint: lem-cbc-complete-proetale-composition-pasting-coherence). -/
+Source: Stacks, Tag 0F7J, common refinements. -/
 noncomputable def compositionCommonComparison
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (h : Y ⟶ Z)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]

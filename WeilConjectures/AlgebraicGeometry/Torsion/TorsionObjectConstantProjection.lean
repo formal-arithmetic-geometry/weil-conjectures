@@ -22,10 +22,9 @@ import WeilConjectures.CategoryTheory.DerivedModuleFreeGeneration
 /-!
 # Constant-module projection for bounded torsion objects
 
-Source: Stacks Project, Tag 0F12, `lemma-pull-out-constant-mod-n`, relative fixed-exponent
-extension; and the docstring of `torAmplitudeIn_rightDerivedLowerStar_of_isNoetherianRing`
-in `WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImage`
-(blueprint: lem-sf-projection-torsion-object-constant).
+Source: Stacks Project, Tag 0F12, relative fixed-exponent extension; and the docstring of
+`torAmplitudeIn_rightDerivedLowerStar_of_isNoetherianRing` in
+`WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImage`.
 
 The map is the existing counit mate, a natural transformation of bifunctors. Its target
 is identified with `Rf_*(E ⊗ᴸ M_X[0])` by the canonical constant inverse-image isomorphism.
@@ -51,32 +50,8 @@ is that of `rightDerivedLowerStarProjectionMap`, restricted along the constant-s
 and the degree-zero embedding. The canonical constant inverse-image comparison identifies
 its target with `Rf_*(E ⊗ᴸ M_X[0])`, naturally in `M`.
 
-Source: Stacks Project, Tag 0F12, `lemma-pull-out-constant-mod-n`, direct-sum/triangle/unit
-argument adapted to relative direct image and a fixed-exponent torsion object; the docstring
-of `torAmplitudeIn_rightDerivedLowerStar_of_isNoetherianRing` in the direct-image stability
-module (blueprint: lem-sf-projection-torsion-object-constant).
-
-Proof:
-1. Finite-type schemes over a field are Noetherian and the source is quasi-compact.
-   Tag 0F10(1) gives finite relative torsion cohomological dimension for `f`.
-2. Restrict the existing projection natural transformation along the exact termwise
-   derived constant-sheaf functor `C`. Its source and target are triangulated and it
-   commutes with shifts, by the existing etale shift and triangulated-functor instances.
-   The existing projection-unit theorem, the monoidal constant-sheaf unit comparison,
-   and `mapDerivedCategorySingleFunctor` give its invertibility at `Λ[0]`.
-3. For every `P`, the additive functor `(- ⊗ᴸ P)` sends `N • id_E = 0` to
-   `N • id_(E ⊗ᴸ P) = 0`. Apply the fixed-exponent coproduct theorem to the family
-   `E ⊗ᴸ Lf^* C(P_i)`. Its invertible canonical coproduct comparison proves preservation
-   of this particular coproduct by `Rf_*`. Constants, inverse image, and tensor preserve
-   all coproducts, so both functors in the restricted transformation preserve coproducts.
-4. The isomorphism locus contains shifts of the rank-one free module, including the
-   harmless `ULift` used by `derivedModuleFreeGeneration`. It is closed under coproducts
-   by naturality and preservation, under third vertices of distinguished triangles by
-   the triangle-isomorphism theorem, and under retracts by naturality. Free generation
-   therefore gives invertibility at every object of `D(Λ)`.
-5. Evaluate at `M[0]` and transport along `mapDerivedCategorySingleFunctor`, obtaining
-   exactly the displayed component of the original projection transformation. The result
-   does not require changing coefficients or identifying a different projection map.
+Source: Stacks Project, Tag 0F12, direct-sum/triangle/unit argument adapted to relative direct image
+and a fixed-exponent torsion object.
 -/
 theorem isIso_rightDerivedLowerStarProjectionMap_constant_of_torsion_object
     (Λ : Type (u + 1)) [CommRing Λ] [IsNoetherianRing Λ]

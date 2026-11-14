@@ -21,8 +21,6 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 
 /-- Scalar extension with the prescribed source, shift and target comparisons.
-Source: blueprint latest, `sk-prop-sp-tower-geometric-classes.proof.md`, clause (2).
-(blueprint: def-sfb-scalar-chern-arrow).
 The formula is exactly the existing firstChern construction applied to an
 arbitrary integral arrow; no Kummer boundary or line-bundle class is assumed. -/
 def scalarChernArrow (l : ℕ) [Fact l.Prime]

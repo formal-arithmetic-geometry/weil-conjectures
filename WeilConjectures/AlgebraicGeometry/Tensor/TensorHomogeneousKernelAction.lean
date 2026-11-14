@@ -13,7 +13,6 @@ import Mathlib.Topology.Sheaves.LocallySurjective
 /-! # Homogeneous quotient multiplication on the degree kernels
 
 Source: Stacks Project, Tags 09MS and 0B8S.
-(blueprint: lem-sc-tensor-homogeneous-kernel-action).
 -/
 
 @[expose] public section
@@ -28,8 +27,7 @@ noncomputable section
 
 /-- Multiply an ideal tensor by a section of a pulled-back tensor power.
 All maps are explicit; the equality h merely identifies the output degree.
-Source: Stacks Project, Tag 09MS, multiplication in the graded ideal sequence.
-(blueprint: lem-sc-tensor-homogeneous-kernel-action). -/
+Source: Stacks Project, Tag 09MS, multiplication in the graded ideal sequence. -/
 def tensorIdealSectionMultiply {X Z : Scheme.{u}} (j : Z ⟶ X) (L : X.Modules)
     (a d t : ℕ) (h : d + a = t)
     (s : 𝟙_ Z.Modules ⟶ (tensorPullback j).obj (L.tensorPow a)) :
@@ -44,8 +42,7 @@ def tensorIdealSectionMultiply {X Z : Scheme.{u}} (j : Z ⟶ X) (L : X.Modules)
 
 /-- Transport homogeneous ideal multiplication to the kernels using their canonical
 inclusion comparisons and the unit on the annihilated ideal tensor.
-Source: Stacks Project, Tags 09MS and 08KS.
-(blueprint: lem-sc-tensor-homogeneous-kernel-action). -/
+Source: Stacks Project, Tags 09MS and 08KS. -/
 def tensorHomogeneousKernelMap {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)
     (a d t : ℕ) (h : d + a = t)
@@ -64,22 +61,7 @@ def tensorHomogeneousKernelMap {X Z : Scheme.{u}} (j : Z ⟶ X)
 /-- The raw quotient action on a homogeneous kernel is ideal tensor multiplication.
 This statement has arbitrary degrees and no coefficient-degree comparison, block size,
 or cohomology data.
-Source: Stacks Project, Tag 09MS, graded ideal sequence; Tag 0B8S, quotient action.
-(blueprint: lem-sc-tensor-homogeneous-kernel-action).
-Proof: The closed-immersion unit on L^a is an epimorphism, so lift the
-restriction of s(1) locally to x in L^a. The equation b_quotient identifies
-c_a(s(1)) with p(b_a(x)) on that cover. Apply hglobal and hlocal to compute the
-quotient action after the monic inclusion i. The source k_inclusion equation
-and commutativity in B express this as b_d(kernel inclusion y) times b_a(x).
-Apply b_multiply in degrees d and a. The proved local ideal-tensor multiplication
-formula computes the target kernel inclusion of tensorHomogeneousKernelMap as
-exactly the degree-d+a tensor product of kernel inclusion y with x, transported
-along h. Apply the target k_inclusion and eliminate the degree transport by
-equality induction. Cancel i on sections. Naturality of both global morphisms
-and sheaf separation on the local lifting cover give the equality globally.
-No global lift or restriction law for arbitrary quotient sections is needed;
-hglobal supplies the restrictions of the one global quotient section used.
-Zero degrees and empty opens use the same unitors and separation argument. -/
+Source: Stacks Project, Tag 09MS, graded ideal sequence; Tag 0B8S, quotient action. -/
 theorem tensorHomogeneousKernel_action {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)
     (T : TensorGradedPresentation j L) (a d t : ℕ) (h : d + a = t)

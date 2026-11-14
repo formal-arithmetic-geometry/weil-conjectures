@@ -13,9 +13,6 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.TowerOrdinaryScalarAssoc
 import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Scalar.TowerScalarCounitNormalization
 
 /-! # Ordinary scalar association for the integral quotient tower
-
-Source: blueprint classes proof (2), scalar association before deriving.
-(blueprint: lem-sp-tower-chern-ordinary-scalar-pullback).
 -/
 
 @[expose] public noncomputable section
@@ -40,28 +37,7 @@ attribute [local instance] SheafOfModules.isMonoidal_W_independentCoefficients
 -- These two private calculations follow TowerChernScalarUnit.
 /-- Ordinary inverse image and balanced scalar association, normalized at the unit
 and root modules. The last two equations are in the abelian category of A-systems;
-there is no derived scalar/pullback comparison in this statement.
-
-Source: blueprint latest, classes proof (2), realization steps 1--4 and the
-ordinary tensor calculation in step 5
-(blueprint: lem-sp-tower-chern-ordinary-scalar-pullback).
-
-Proof: choose the integral inverse image and its flat-term K-flat preservation
-from integralCoefficientPullback_exists. Define eY and eX by applying the inverse
-ordinary scalar-adjunction Hom equivalence to scalarGenerator. The inverse laws
-give their ordinary normalization equations. The ordinary association theorem,
-applied to this integral inverse image and these maps, supplies alpha and its
-coefficient and root equations. It remains to prove the two derived coefficient
-normalizations, and these require no further existence result. The coefficient
-module placed in degree zero is K-flat by the cochain tensor right unitor.
-Apply the representative transpose formula of ScalarData to this complex and
-the chain map induced by eY or eX. The adjunction on singles has the ordinary
-adjunct as its degree-zero component. The exact restriction single comparison
-therefore identifies the derived transpose with the single of scalarGenerator.
-The third Chern normalization gives exactly the same transpose for scalarUnit.
-Cancel the single comparison and use injectivity of the derived adjunction to
-obtain both required counit equations. Assemble these with the flatness and
-ordinary association equations. No faithfulness of derived evaluation is used. -/
+there is no derived scalar/pullback comparison in this statement. -/
 theorem tower_chernOrdinaryScalar_pullback
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (hX : IsUnit (l : Γ(X, ⊤))) (hY : IsUnit (l : Γ(Y, ⊤)))

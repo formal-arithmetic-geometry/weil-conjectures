@@ -21,7 +21,6 @@ public import WeilConjectures.AlgebraicGeometry.LerayDegenerateSections
 /-! The affine Leray comparison before passing from modules to abelian sheaves.
 
 Source: Stacks Project, Tags 01XK, 01FB and 03FD.
-(blueprint: new-structure-derived-image-module-naturality)
 
 Proof: Apply the affine Leray edge isomorphisms to the degree-one cohomology of
 the two proper direct images. The cocycle square for the derived adjunction unit,
@@ -281,17 +280,8 @@ noncomputable def affineLerayTargetEquiv
 
 /-- The affine Leray module equivalences `(affineLerayEquiv q).symm` and
 `affineLerayTargetEquiv q j hj` are natural for a map `j` of proper total spaces.
-Source: Stacks Project, Tags 01XK (affine higher-image vanishing), 01FB (h-maps),
-and 03FD (module cohomology); local classes and sheafification as in Tag 0BKJ.
-(blueprint: new-structure-derived-image-module-naturality).
-
-Proof: The cocycle Leray edge is bijective by affine higher-image vanishing; compose
-with the inverse total/classical comparison. The identity-base truncated edge is an
-isomorphism since its local-class square sheafifies to a square of isomorphisms.
-Naturality of relativeMVImageComp and the canonical single adjunction transpose
-identify the displayed map b with the derived-square unit alpha followed by an
-isomorphism psi. Apply globalLeray_unitSquare with the identity base, then compose
-the target comparison with the identity edge and inverse psi. -/
+Source: Stacks Project, Tags 01XK (affine higher-image vanishing), 01FB (h-maps), and 03FD (module
+cohomology); local classes and sheafification as in Tag 0BKJ. -/
 theorem structure_derived_image_module_naturality
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

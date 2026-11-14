@@ -187,8 +187,7 @@ import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 
 /-! # Completeness of limits of power-torsion pro-etale sheaves
 
-Source: Stacks Project, Tags 099P and 099Q (1), (4), (5)
-(blueprint: lem-weil-pbc-torsion-limit-sheaf-completeness).
+Source: Stacks Project, Tags 099P and 099Q (1), (4), (5).
 
 We use the existing coefficient-sized small model of the unchanged small pro-etale site.
 It is equivalent via AsSmall.down to X.ProEt; its topology is the induced topology.

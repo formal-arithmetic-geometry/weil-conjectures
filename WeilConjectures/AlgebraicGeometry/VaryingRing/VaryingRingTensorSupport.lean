@@ -14,7 +14,6 @@ import all WeilConjectures.Algebra.Homology.OpenTensorNormalization.OpenTensorNo
 /-! # Tensor support for extension of varying-ring systems
 
 Source: Stacks Project, Tag 0E8I, and Tags 06YS and 06YU.
-(blueprint: lem-pur-varying-ring-tensor-support).
 -/
 
 @[expose] public noncomputable section

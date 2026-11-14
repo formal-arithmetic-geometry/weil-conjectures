@@ -25,16 +25,14 @@ variable {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (A : Type u) [CommRing A] (I : Ideal A) (n : ℕ)
 
 /-- Ordinary finite evaluation retains the quotient scalar action.
-Source: Stacks Tags 0940 and 099M
-(blueprint: lem-sf-quotient-tower-evaluation-complex). -/
+Source: Stacks Tags 0940 and 099M. -/
 def quotientEvaluationIso :
     reductionTower J A I false ⋙ (evaluation ℕᵒᵖ (Mod (constant J A))).obj (op n) ≅
       change (quotient J A I n) ⋙ res (quotient J A I n) :=
   Iso.refl _
 
 /-- Finite evaluation with both iterated complex functors visible in its type.
-Source: Stacks Tags 0941 and 099M
-(blueprint: lem-sf-quotient-tower-evaluation-complex). -/
+Source: Stacks Tags 0941 and 099M. -/
 @[irreducible]
 def quotientEvaluationComplexIso :
     (reductionTower J A I false).mapHomologicalComplex (.up ℤ) ⋙

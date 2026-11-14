@@ -19,8 +19,7 @@ namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 attribute [local implicit_reducible] spCoefficientCommRings
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-/-- Identity transports intertwine heterogeneous additive maps.
-Source: equality elimination (blueprint: def-sfb-finite-forget-comparison). -/
+/-- Identity transports intertwine heterogeneous additive maps. -/
 theorem finiteBoundary_transport_addHom {A B A' B' : AddCommGrpCat.{u + 1}}
     (eA : A = A') (eB : B = B') (f : A ⟶ B) (g : A' ⟶ B')
     (h : HEq f.hom g.hom) :
@@ -31,9 +30,7 @@ theorem finiteBoundary_transport_addHom {A B A' B' : AddCommGrpCat.{u + 1}}
   simp only [eqToHom_refl, Category.comp_id, Category.id_comp]
   exact AddCommGrpCat.hom_ext h'
 
-/-- The recorded forgetting agrees with additive pushforward at each finite level.
-Source: the section, restriction and morphism equations of Forget.
-(blueprint: def-sfb-finite-forget-comparison). -/
+/-- The recorded forgetting agrees with additive pushforward at each finite level. -/
 def forgetUnderlyingEvaluationIso (T : Scheme.{u})
     (R : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1})
     (F : Forget T R) (n : ℕ) :
@@ -60,9 +57,7 @@ def forgetUnderlyingEvaluationIso (T : Scheme.{u})
     exact finiteBoundary_transport_addHom (F.sections M n U) (F.sections N n U)
       _ _ (F.morphisms f n U)
 
-/-- Restriction of module scalars retains the underlying additive evaluation.
-Source: the section equations of Forget and additive restriction and evaluation.
-(blueprint: def-sfb-finite-forget-comparison). -/
+/-- Restriction of module scalars retains the underlying additive evaluation. -/
 def forgetScalarEvaluationIso (T : Scheme.{u})
     (R A : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1})
     (φ : SemilinearSections.systemRing.{u + 1, u, u + 1} (Scheme.ProEt.topology T)
@@ -83,9 +78,7 @@ def forgetScalarEvaluationIso (T : Scheme.{u})
     (SemilinearSections.evaluationToSheafIso (Scheme.ProEt.topology T)
       (fun n ↦ A.obj (op n)) (fun n ↦ A.map (homOfLE (Nat.le_succ n)).op) n).symm
 
-/-- The actual underlying additive sheaves are unchanged by restricting scalars.
-Source: classes proof (2), the section and morphism equations of Forget.
-(blueprint: def-sfb-finite-forget-comparison). -/
+/-- The actual underlying additive sheaves are unchanged by restricting scalars. -/
 def finiteScalarForgetIso (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {T : Scheme.{u}} (c : Chern l E T) (n : ℕ) :
@@ -95,16 +88,13 @@ def finiteScalarForgetIso (l : ℕ) [Fact l.Prime]
   forgetScalarEvaluationIso T (Rrings l T) (Arings l E T) (coefficientSystemMap l E T)
     c.reduction.forget n
 
-/-- An identity transport sends a section to its heterogeneous representative.
-Source: equality elimination (blueprint: def-sfb-finite-forget-comparison). -/
+/-- An identity transport sends a section to its heterogeneous representative. -/
 theorem finiteBoundary_transport_element {A B : AddCommGrpCat.{u + 1}} (e : A = B)
     (x : A) (y : B) (h : HEq x y) : (eqToHom e) x = y := by
   subst B
   exact eq_of_heq h
 
-/-- The forgetting comparison sends a forgotten section to the same actual section.
-Source: the definition of finiteScalarForgetIso
-(blueprint: def-sfb-finite-forget-comparison). -/
+/-- The forgetting comparison sends a forgotten section to the same actual section. -/
 theorem finiteScalarForgetIso_section (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {T : Scheme.{u}} (c : Chern l E T) (n : ℕ)
@@ -118,9 +108,7 @@ theorem finiteScalarForgetIso_section (l : ℕ) [Fact l.Prime]
   exact finiteBoundary_transport_element (c.reduction.forget.sections
     ((SemilinearSections.res (coefficientSystemMap l E T)).obj M) n U) x' x hx
 
-/-- Recorded forgetting takes a module morphism to its actual map on sections.
-Source: the morphism field of Forget, by heterogeneous equality elimination.
-(blueprint: def-sfb-finite-forget-comparison). -/
+/-- Recorded forgetting takes a module morphism to its actual map on sections. -/
 theorem finiteBoundary_forgetMapSection (T : Scheme.{u})
     (B : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1})
     (F : Forget T B) {M N : Systems T B} (a : M ⟶ N)
@@ -138,8 +126,7 @@ theorem finiteBoundary_forgetMapSection (T : Scheme.{u})
       (congrArg g (eq_of_heq hx)))
   exact happ (F.sections M n U) (F.sections N n U) (F.morphisms a n U) hx
 
-/-- Identity transport retains a section heterogeneously.
-Source: equality elimination (blueprint: def-sfb-finite-forget-comparison). -/
+/-- Identity transport retains a section heterogeneously. -/
 theorem finiteBoundary_cast_heq {A B : AddCommGrpCat.{u + 1}} (h : A = B) (x : A) :
     HEq ((eqToHom h) x) x := by
   subst B

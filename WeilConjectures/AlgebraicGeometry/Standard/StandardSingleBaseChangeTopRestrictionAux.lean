@@ -18,8 +18,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- The derived pullback unit for a scheme isomorphism is invertible.
-Source: Stacks Project, Tag 0D5S.
-(blueprint: lem-pc-standard-single-base-change-top-restriction-iso-pullback-unit) -/
+Source: Stacks Project, Tag 0D5S. -/
 theorem standardSingleBaseChange_topRestriction_iso_pullback_unit
     [∀ X : Scheme.{u},
       HasDerivedCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
@@ -41,8 +40,7 @@ theorem standardSingleBaseChange_topRestriction_iso_pullback_unit
 
 set_option linter.unusedVariables false in
 /-- Canonical source restriction comparison for the top open.
-Source: Stacks Project, Tags 08HY and 0D5S.
-(blueprint: def-pc-standard-single-base-change-top-restriction-source-iso) -/
+Source: Stacks Project, Tags 08HY and 0D5S. -/
 noncomputable def standardSingleBaseChange_topRestriction_sourceIso
     {Y B : Scheme.{u}} (p : Y ⟶ B) (M : Y.Modules) :
     letI := fun X : Scheme.{u} ↦ HasDerivedCategory.standard
@@ -74,94 +72,7 @@ noncomputable def standardSingleBaseChange_topRestriction_sourceIso
 
 set_option linter.unusedVariables false in
 /-- Compatibility equation for the canonical source restriction comparison.
-Source: Stacks Project, Tags 08HY and 0D5S.
-(blueprint: lem-pc-standard-single-base-change-top-restriction-compatibility)
-
-Proof: Substitute the hypothesis on `e`. Write L_f = derivedPullback f and
-R_f = schemeDerivedDirectImage f; composition of arrows below is written `≫`.
-Put j = (⊤ : Y.Opens).ι, N = M.restrict j, K = M[0], K' = N[0]. Let
-P = pullback p g have projections r = pullback.fst p g and s = pullback.snd p g.
-Let P' = pullback (j ≫ p) g have projections r' and s'. The universal property
-constructs k : P' ≅ P with k.hom ≫ r = r' ≫ j and k.hom ≫ s = s': its forward
-map is pullback.lift (r' ≫ j) s', and its inverse is pullback.lift (r ≫ j.inv) s.
-Here j.inv denotes Y.topIso.inv. Pullback projection extensionality and the two
-inverse identities for Y.topIso prove that these maps are inverse.
-
-Let a : L_j K ≅ K' be precisely the single restriction comparison in sourceIso.
-For any f write q_f(V) = Scheme.picardTermwiseSingleMap f V. Tensor pullback
-along the isomorphism k.hom is exact, so q_k on any module is invertible.
-The canonical module isomorphism b from tensorPullbackObj k.hom
-(tensorPullbackObj r M) to tensorPullbackObj r' N is obtained by tensor-pullback
-composition along k.hom,r, transport across k.hom ≫ r = r' ≫ j, inverse
-composition along r',j, and tensorPullback r' of the canonical comparison
-from tensorPullbackObj j M to N. More explicitly, put
-δ(h,f) = Scheme.Modules.tensorPullbackCompositionIso h f (h ≫ f) rfl, directed from tensor pullback
-of h ≫ f to tensor pullback
-along f followed by h. If ρ : tensorPullbackObj j M ≅ N is the canonical
-adjoint-uniqueness comparison to restriction used in a, then
-  b = δ(k.hom,r).inv.app M ≫ transport ≫ δ(r',j).hom.app M
-    ≫ (Scheme.Modules.tensorPullback r').map ρ.hom,
-where transport is along k.hom ≫ r = r' ≫ j. Thus a.hom is q_j(M) followed
-by single.map ρ.hom. All these comparisons are pinned to the
-same tensor-pullback adjunctions. Define
-  T = (tensorPullbackObj r M)[0], T' = (tensorPullbackObj r' N)[0],
-  d : L_k T ≅ T' = asIso(q_k(tensorPullbackObj r M)) ≪≫ single.mapIso b.
-Write C(h,f) for relativeMVComp h f, including equality transport when paths
-are identified. The coefficient-composition identity is
-  L_k(q_r(M)) ≫ d.hom =
-    C(k,r).hom.app K ≫ C(r',j).inv.app K ≫ L_r'(a.hom) ≫ q_r'(N).
-The equality transport between the two C components uses k.hom ≫ r = r' ≫ j.
-To verify this identity, apply Scheme.picardTermwiseSingleMap_composition to
-(k.hom,r) and (r',j). Its tensorPullbackCompositionIso and single-complex
-comparison factors are exactly those defining b. Cancel the inverse factors,
-and use naturality of the single comparison for the tensor-to-restriction map.
-The defining leftDerivedLift factorization in exists_derivedPullbackComposition
-ensures that these are the pinned C comparisons, rather than arbitrary ones.
-
-Define F : R_s T ≅ R_s' T' by composing R_s of the invertible unit
-T ≅ R_k L_k T, (relativeMVImageComp k.hom s).app (L_k T), transport across
-k.hom ≫ s = s', and R_s'.mapIso d. Invertibility of the unit follows from
-standardSingleBaseChange_topRestriction_iso_pullback_unit k. Set t = F.symm.
-
-Here is the compatibility calculation before cancelling F. Put D = L_g R_p K.
-Write B(r,s,p;K) for the transpose of schemeDerivedBaseChangeMap p s g r:
-  B(r,s,p;K) = C(s,g).hom.app (R_p K) ≫ C(r,p).inv.app (R_p K)
-    ≫ L_r((relativeMVAdj p).counit.app K),
-with the pullback.condition transport between the two C components. Thus the
-transpose of standardSingleBaseChangeMap p M g under relativeMVAdj s is
-B(r,s,p;K) ≫ q_r(M). Under relativeMVAdj s', the transpose of that map followed
-by F.hom is
-  C(k,s).inv.app D ≫ L_k(B(r,s,p;K)) ≫ L_k(q_r(M)) ≫ d.hom.
-This follows by expanding F and the right-adjoint mate relativeMVImageComp:
-its mate formula converts the composite adjunction to relativeMVAdj s', and
-L_k of the unit followed by the k counit cancels by the left triangle identity.
-
-Substitute the coefficient identity. The remaining prefix satisfies
-  C(k,s).inv.app D ≫ L_k(B(r,s,p;K)) ≫ C(k,r).hom.app K
-    ≫ C(r',j).inv.app K ≫ L_r'(a.hom)
-  = L_s'(L_g(e.hom)) ≫ B(r',s',j ≫ p;K').
-For this equation, expand e as R_p(unit_j) followed by relativeMVImageComp j p
-and R_(j≫p)(a). Move a through the counit by counit naturality. Expand the
-composition counit using the right-adjoint mate defining relativeMVImageComp:
-the counit for j ≫ p is C(j,p).inv followed by L_j of the p counit and then
-the j counit (with the right-adjoint comparison on its source). Naturality moves
-the inserted unit_j next to the j counit, where
-  L_j(unit_j.app K) ≫ counit_j.app (L_j K) = 𝟙 (L_j K)
-cancels it. The other mate cancellation is
-  unit_j.app (R_j V) ≫ R_j(counit_j.app V) = 𝟙 (R_j V).
-Associativity and the identity laws in exists_derivedPullbackComposition
-identify the remaining C paths using r ≫ p = s ≫ g, r' ≫ j ≫ p = s' ≫ g,
-and the two projection identities for k. These are the pinned composition
-laws, the single-map composition identity, and the two adjunction triangle
-identities; no comparison along g is inverted.
-
-Appending q_r'(N) shows equality of the two transposes under relativeMVAdj s'.
-The adjunction hom equivalence is injective, hence
-  standardSingleBaseChangeMap p M g ≫ F.hom =
-    L_g(e.hom) ≫ standardSingleBaseChangeMap (j ≫ p) N g.
-Compose on the right with F.inv and cancel F.hom ≫ F.inv to get the claimed
-equation with t = F.symm. All constructions are functorial and remain valid
-for empty schemes and zero modules. -/
+Source: Stacks Project, Tags 08HY and 0D5S. -/
 theorem standardSingleBaseChange_topRestriction_compatibility
     {Y B A : Scheme.{u}} (p : Y ⟶ B) (M : Y.Modules) (g : A ⟶ B) :
     letI := fun X : Scheme.{u} ↦ HasDerivedCategory.standard

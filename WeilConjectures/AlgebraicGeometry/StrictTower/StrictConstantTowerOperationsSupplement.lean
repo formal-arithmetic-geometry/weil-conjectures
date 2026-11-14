@@ -157,8 +157,8 @@ public import WeilConjectures.AlgebraicGeometry.StrictConstantTowerOperations
 /-!
 # Strict constant-coefficient tower operations
 
-Source: Stacks Project, Tags 0F7B, 0F7C, 0F7D, 0F7F, 07A7 and 09AE, and the explicit
-strict-tower refinement in the blueprint (blueprint: def-cbc-strict-constant-tower-operations).
+Source: Stacks Project, Tags 0F7B, 0F7C, 0F7D, 0F7F, 07A7 and 09AE, and the explicit strict-tower
+refinement in the blueprint.
 
 The index `n : ℕ` denotes positive level `n+1`. All derived categories below localize
 complexes of strict towers, rather than forming towers in separate derived categories.
@@ -346,16 +346,13 @@ private theorem adjunct_comp_comparison {C D E : Type*}
 
 variable (B : Type (u + 1)) [CommRing B]
 
-/-- Evaluation of the derived strict tower, keeping its actual derived-category source.
-Source: blueprint, evaluation clauses (blueprint: def-cbc-strict-constant-tower-operations). -/
+/-- Evaluation of the derived strict tower, keeping its actual derived-category source. -/
 noncomputable abbrev ev (X : Scheme.{u}) (n : ℕ) :
     Derived B X ⥤ DerivedCategory (Modules B X) :=
   ((evaluation ℕᵒᵖ (Modules B X)).obj (op n)).mapDerivedCategory
 
 /-- Compatibility of the canonical constant-section identifications with composition.
-Source: Stacks, Tag 0H7J (blueprint: def-cbc-strict-constant-tower-operations).
-Proof: transpose both maps under inverse image. On every constant scalar both maps
-are the same constant section; the sheafification universal property gives equality. -/
+Source: Stacks, Tag 0H7J. -/
 theorem constantRingIso_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     constantRingIso B (f ≫ g) = Scheme.proEtaleRingCompositeCoefficients f g
       (coefficients B Z) (coefficients B Y) (coefficients B X)
@@ -422,12 +419,7 @@ theorem constantRingIso_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     (Scheme.proEtaleConstantDirectImageMap f CommRingCat.{u + 1} A)
 
 /-- Fibre-product pasting uniquely normalizes ordinary direct-image composition.
-Source: Stacks, Tag 0D6D
-(blueprint: def-cbc-strict-constant-tower-operations).
-Proof: evaluate both direct images on a test object. Restriction along the canonical
-fibre-product pasting isomorphism gives the displayed map and its inverse. These are
-linear by preservation of constant sections and natural by the universal property
-of pullbacks. Equality on all sections proves uniqueness. -/
+Source: Stacks, Tag 0D6D. -/
 theorem moduleRComp_existsUnique {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     ∃! d : moduleDirectImage B f ⋙ moduleDirectImage B g ≅ moduleDirectImage B (f ≫ g),
       ∀ (N : Modules B X) (U : Z.ProEt)
@@ -450,15 +442,13 @@ theorem moduleRComp_existsUnique {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z
   ext m
   exact (he N U.unop m).trans (hd N U.unop m).symm
 
-/-- The section-normalized direct-image compositor. Source: Stacks, Tag 0D6D
-(blueprint: def-cbc-strict-constant-tower-operations). -/
+/-- The section-normalized direct-image compositor. Source: Stacks, Tag 0D6D. -/
 noncomputable def moduleRComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     moduleDirectImage B f ⋙ moduleDirectImage B g ≅ moduleDirectImage B (f ≫ g) :=
   Classical.choose (moduleRComp_existsUnique B f g)
 
 /-- Pullback composition is the unit-preserving conjugate of fibre-product pasting.
-Source: Stacks, Tags 0D6D and 07A7
-(blueprint: def-cbc-strict-constant-tower-operations). -/
+Source: Stacks, Tags 0D6D and 07A7. -/
 noncomputable def moduleGComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     modulePullback B (f ≫ g) ≅ modulePullback B g ⋙ modulePullback B f :=
   (Adjunction.leftAdjointCompIso
@@ -470,32 +460,27 @@ noncomputable def moduleGComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
       (coefficients B X) (constantRingIso B (f ≫ g))) (moduleRComp B f g)).symm
 
 /-- Strict tower pullback composition is the actual whiskered module comparison.
-Source: Stacks, Tag 0D6D
-(blueprint: def-cbc-strict-constant-tower-operations). -/
+Source: Stacks, Tag 0D6D. -/
 noncomputable def towerGComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     towerPullback B (f ≫ g) ≅ towerPullback B g ⋙ towerPullback B f :=
   ((Functor.whiskeringRight ℕᵒᵖ _ _).mapIso (moduleGComp B f g)) ≪≫
     Functor.whiskeringRightObjCompIso (modulePullback B g) (modulePullback B f)
 
 /-- The pullback compositor descends from the actual termwise module compositor.
-Source: Stacks, Tag 0D6D (blueprint: def-cbc-strict-constant-tower-operations). -/
+Source: Stacks, Tag 0D6D. -/
 noncomputable def gComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     G B (f ≫ g) ≅ G B g ⋙ G B f :=
   Functor.mapDerivedCategoryNatIso (towerGComp B f g) ≪≫
     (Functor.mapDerivedCategoryCompIso (towerPullback B g) (towerPullback B f)).symm
 
 /-- The direct-image compositor is the conjugate for the composition adjunction.
-Source: Stacks, Tags 0D6D and 07A7
-(blueprint: def-cbc-strict-constant-tower-operations). -/
+Source: Stacks, Tags 0D6D and 07A7. -/
 noncomputable def rComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     R B f ⋙ R B g ≅ R B (f ≫ g) :=
   conjugateIsoEquiv ((adj B g).comp (adj B f)) (adj B (f ≫ g)) (gComp B f g)
 
 /-- The identity direct image is the sectionwise pullback-identity comparison.
-Source: Stacks, Tag 07A7 (blueprint: def-cbc-strict-constant-tower-operations).
-Proof: the inverse base-change identity sends U to U ×_X X by its graph. Restrict
-sections along this map. It preserves constant scalar sections, so is linear. Its
-inverse is restriction along the inverse graph. Sections determine a unique map. -/
+Source: Stacks, Tag 07A7. -/
 theorem moduleRId_existsUnique (X : Scheme.{u}) :
     ∃! e : moduleDirectImage B (𝟙 X) ≅ 𝟭 (Modules B X),
       ∀ (M : Modules B X) (U : X.ProEt)
@@ -576,13 +561,13 @@ theorem moduleRId_existsUnique (X : Scheme.{u}) :
   exact (hd' M U.unop m).trans (hd M U.unop m).symm
 
 /-- The section-normalized identity direct-image comparison.
-Source: Stacks, Tag 07A7 (blueprint: def-cbc-strict-constant-tower-operations). -/
+Source: Stacks, Tag 07A7. -/
 noncomputable def moduleRId (X : Scheme.{u}) :
     moduleDirectImage B (𝟙 X) ≅ 𝟭 (Modules B X) :=
   Classical.choose (moduleRId_existsUnique B X)
 
 /-- The inverse-image identity is the normalized conjugate of the sectionwise identity.
-Source: Stacks, Tag 07A7 (blueprint: def-cbc-strict-constant-tower-operations). -/
+Source: Stacks, Tag 07A7. -/
 noncomputable def gId (X : Scheme.{u}) : G B (𝟙 X) ≅ 𝟭 (Derived B X) :=
   Functor.mapDerivedCategoryNatIso
     (((Functor.whiskeringRight ℕᵒᵖ _ _).mapIso
@@ -592,23 +577,17 @@ noncomputable def gId (X : Scheme.{u}) : G B (𝟙 X) ≅ 𝟭 (Derived B X) :=
       Functor.whiskeringRightObjIdIso) ≪≫ Functor.mapDerivedCategoryIdIso _
 
 /-- The normalized derived direct-image identity.
-Source: Stacks, Tag 07A7 (blueprint: def-cbc-strict-constant-tower-operations). -/
+Source: Stacks, Tag 07A7. -/
 noncomputable def rId (X : Scheme.{u}) : R B (𝟙 X) ≅ 𝟭 (Derived B X) :=
   (conjugateIsoEquiv Adjunction.id (adj B (𝟙 X)) (gId B X)).symm
 
-/-- Evaluation commutes with strict termwise inverse image.
-Source: blueprint evaluation normalization
-(blueprint: def-cbc-strict-constant-tower-operations).
-Proof: both object maps evaluate the same strict tower at n and apply the same
-module functor. Their maps are the same evaluated natural transformations. -/
+/-- Evaluation commutes with strict termwise inverse image. -/
 theorem evaluationPullback {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     towerPullback B f ⋙ (evaluation ℕᵒᵖ (Modules B X)).obj (op n) =
       (evaluation ℕᵒᵖ (Modules B Y)).obj (op n) ⋙ modulePullback B f := by
   rfl
 
-/-- The evaluation/pullback comparison induced by the actual termwise equality.
-Source: blueprint evaluation normalization
-(blueprint: def-cbc-strict-constant-tower-operations). -/
+/-- The evaluation/pullback comparison induced by the actual termwise equality. -/
 noncomputable def evalG {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     G B f ⋙ ev B X n ≅ ev B Y n ⋙ (modulePullback B f).mapDerivedCategory :=
   Functor.mapDerivedCategoryCompIso _ _ ≪≫
@@ -616,8 +595,7 @@ noncomputable def evalG {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
   (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The direct-image evaluation map is its specified adjunction mate.
-Source: Stacks, Tags 07A7 and 0DVC
-(blueprint: def-cbc-strict-constant-tower-operations). -/
+Source: Stacks, Tags 07A7 and 0DVC. -/
 noncomputable def evalR {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     R B f ⋙ ev B Y n ⟶ ev B X n ⋙ (moduleDirectImage B f).rightDerivedFunctor :=
   mateEquiv (adj B f)
@@ -645,13 +623,7 @@ private theorem evaluation_mate {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     (coefficients B X) (constantRingIso B f)).right_triangle_components _
 
 /-- This normalized mate is invertible, without a uniform lower bound.
-Source: blueprint evaluation proof step, and Stacks, Tag 08BJ
-(blueprint: def-cbc-strict-constant-tower-operations).
-Proof: a K-injective strict tower evaluates to a K-injective complex: evaluation
-has an exact left adjoint given by sums over the index arrows. On such a
-representative both direct images give the identical evaluated complex.
-The homotopy adjunction is termwise, so the derived Hom bijection identifies
-this equality with the displayed mate, including its unit and counit. -/
+Source: and Stacks, Tag 08BJ. -/
 theorem evalR_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     IsIso (evalR B f n) := by
   let L := towerPullback B f

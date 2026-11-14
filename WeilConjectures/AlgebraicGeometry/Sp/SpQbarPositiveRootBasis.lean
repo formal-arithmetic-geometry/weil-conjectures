@@ -208,21 +208,7 @@ private def sectionUnitIso (X : Scheme.{u})
       inv_hom_id := SheafOfModules.hom_ext i.inv_hom_id }
 
 /-- A compatible root tower trivializes every positive signed degree of the
-algebraic-closure coefficient twist on the prescribed slice.
-
-Source: blueprint latest, sec-smooth-purity/sk-prop-an/
-sk-def-sp-tate-twist-locally-free.proof.md, clause (3), positive tensor powers
-of the compatible algebraic-closure basis.
-(blueprint: lem-sp-qbar-positive-root-basis)
-
-Proof: construct the normalized finite-level pure-tensor maps from the supplied
-root sections and module isomorphisms. Their transition identities give inverse
-maps on the inverse-limit and finite-subextension diagrams. The compatible
-maps therefore identify the colimit twist with its coefficient unit. Tensoring
-this degree-one identification repeatedly gives every positive signed degree;
-the sectionwise/internal equivalence preserves the resulting isomorphisms.
-The details are split from the degree-one use in `spQbarRootBasis` so the
-finite-level and colimit constructions can be proved independently. -/
+algebraic-closure coefficient twist on the prescribed slice. -/
 theorem spQbarPositiveRootBasis
     (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     [∀ x : X, Invertible (ℓ : X.residueField x)] (W : X.ProEt)

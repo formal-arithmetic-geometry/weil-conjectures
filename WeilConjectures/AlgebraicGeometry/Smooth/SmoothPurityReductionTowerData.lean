@@ -34,10 +34,6 @@ public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 /-!
 # The reduction tower is normalized
 
-Source: blueprint main-20261015, chap-Smooth-purity,
-`sk-def-sp-normalized-towers/sk-def-sp-normalized-towers-reduction.md`
-(blueprint: proposition-sp-integral-towers--1).
-
 The source is the sectionwise realization of the pulled-back condensed integer ring.
 Its comparison with the completed ring is fixed on the underlying abelian sheaf by
 `sfb_integral_coefficient_limit`. Positive exponent n+1 is represented by n : ℕ.
@@ -62,49 +58,39 @@ namespace AlgebraicGeometry.ProEtale
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{u})
 
-/-- The existing condensed integral coefficients, as an abelian sheaf on the point.
-Source: blueprint, completed integral coefficients
-(blueprint: proposition-sp-integral-towers--1). -/
+/-- The existing condensed integral coefficients, as an abelian sheaf on the point. -/
 abbrev spIntegralCondensed := (sfbCondensedIntegers l E).X
 
 /-- Commutativity of the continuous-function integral coefficients, with their existing
-ring-object structure. Source: blueprint, integral coefficients
-(blueprint: proposition-sp-integral-towers--1). -/
+ring-object structure. -/
 instance spIntegralCondensedComm : IsCommMonObj (spIntegralCondensed l E) :=
   letI := spectralNorm.normedField (Padic l) E
   Profinite.isCommMonObj_continuousMapRingObjOfUniverse
     (Padic.coefficientExtensionIntegers l E)
 
 /-- The section-ring realization of the actual pulled-back integral coefficient sheaf.
-Source: blueprint, R_T; Stacks 00YV
-(blueprint: proposition-sp-integral-towers--1). -/
+Source: Stacks 00YV. -/
 abbrev spIntegralSectionRing :=
   InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u} (Scheme.ProEt.topology T)
     (condensedRingObj (spIntegralCondensed l E) T)
 
-/-- Modules over R_T, using the recorded sectionwise/internal equivalence.
-Source: blueprint, ordinary unbounded derived source
-(blueprint: proposition-sp-integral-towers--1). -/
+/-- Modules over R_T, using the recorded sectionwise/internal equivalence. -/
 abbrev spIntegralSectionModules :=
   ringedSiteModules.{u + 1}
     ((sheafCompose _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
       (spIntegralSectionRing l E T))
 
-/-- The standard localization of integral section-module complexes.
-Source: blueprint, D(R_T) (blueprint: proposition-sp-integral-towers--1). -/
+/-- The standard localization of integral section-module complexes. -/
 instance spIntegralSectionHasDerived : HasDerivedCategory (spIntegralSectionModules l E T) :=
   HasDerivedCategory.standard _
 
 /-- The recorded equivalence, with unchanged underlying sections and linear maps.
-Source: blueprint, identification of coefficient-module presentations; Stacks 00YV
-(blueprint: proposition-sp-integral-towers--1). -/
+Source: Stacks 00YV. -/
 abbrev spIntegralModuleEquivalence :=
   InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u} (Scheme.ProEt.topology T)
     (condensedRingObj (spIntegralCondensed l E) T)
 
-/-- The exact inverse equivalence on ordinary unbounded derived categories.
-Source: blueprint, Dbc and Tor amplitude over the pulled-back integral ring
-(blueprint: proposition-sp-integral-towers--1). -/
+/-- The exact inverse equivalence on ordinary unbounded derived categories. -/
 def spIntegralInternalization :
     DerivedCategory (spIntegralSectionModules l E T) ⥤
       DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
@@ -115,16 +101,12 @@ def spIntegralInternalization :
 
 /-- The canonical integral comparison selected by its projection normalization on
 profinite test objects. The existence theorem determines this object uniquely after
-its finite-label representation is chosen; it is not a choice of an arbitrary map.
-Source: blueprint, completed integral sheaf; integral-limit clause (3)
-(blueprint: proposition-sp-integral-towers--1). -/
+its finite-label representation is chosen; it is not a choice of an arbitrary map. -/
 def spIntegralAbComparison :
     (condensedRingObj (spIntegralCondensed l E) T) ≅ sfbCompletedIntegersAb l E T :=
   (sfb_integral_coefficient_limit l E T).choose_spec.choose_spec.choose_spec.2.2.2.2.2.choose
 
-/-- The canonical ell-power projection, retaining the commutative ring structure.
-Source: blueprint, R_T -> R_(T,n+1), coefficient-limit normalization
-(blueprint: proposition-sp-integral-towers--1). -/
+/-- The canonical ell-power projection, retaining the commutative ring structure. -/
 def spIntegralEllProjection (n : ℕ) :
     WeilConjectures.completedIntegralCommRingSheafUnrestricted l E T ⟶
       (spCoefficientCommRings l E T).obj (op n) :=
@@ -132,24 +114,19 @@ def spIntegralEllProjection (n : ℕ) :
     ((sp_completed_coefficient_limit l E T).exists.choose.hom ≫
       limit.π (spCoefficientRings l E T) (op n))
 
-/-- The actual scalar map defining M/ell^(n+1), in the section-ring presentation.
-Source: blueprint, derived reduction formula
-(blueprint: proposition-sp-integral-towers--1). -/
+/-- The actual scalar map defining M/ell^(n+1), in the section-ring presentation. -/
 abbrev spIntegralReductionScalar
     (e : spIntegralSectionRing l E T ≅
       WeilConjectures.completedIntegralCommRingSheafUnrestricted l E T) (n : ℕ) :=
   e.hom ≫ spIntegralEllProjection l E T n
 
 /-- The ordinary localization of strict tower complexes in the localization chosen
-by the recorded coefficient-tower lemma.
-Source: blueprint, D(Tow) (blueprint: proposition-sp-integral-towers--1). -/
+by the recorded coefficient-tower lemma. -/
 abbrev spTowerLocalization (D : SpCoefficientTowersAbelian l E T) :
     CochainComplex (spCoefficientTowers l E T) ℤ ⥤ spDerivedCoefficientTowers l E T D :=
   @DerivedCategory.Q (spCoefficientTowers l E T) _ _ D.hasDerived
 
-/-- The level condition of the canonical reduction construction.
-Source: blueprint, normalized-towers-reduction
-(blueprint: proposition-sp-integral-towers--1). -/
+/-- The level condition of the canonical reduction construction. -/
 def spReductionOrdinaryLevels (D : SpCoefficientTowersAbelian l E T)
     (coefficient : spIntegralSectionRing l E T ≅
       WeilConjectures.completedIntegralCommRingSheafUnrestricted l E T)
@@ -159,9 +136,7 @@ def spReductionOrdinaryLevels (D : SpCoefficientTowersAbelian l E T)
 
 /-- The local tensor generator transported to the strict ordinary reduction tower.
 Naming this map keeps the kernel from repeatedly comparing the sectionwise scalar-model
-presentations in the transition predicate. It is the same scalar-first pure tensor.
-Source: blueprint, quotient-induced transition formula
-(blueprint: proposition-sp-integral-towers--1). -/
+presentations in the transition predicate. It is the same scalar-first pure tensor. -/
 def spReductionGenerator (D : SpCoefficientTowersAbelian l E T)
     (coefficient : spIntegralSectionRing l E T ≅
       WeilConjectures.completedIntegralCommRingSheafUnrestricted l E T)
@@ -177,18 +152,14 @@ def spReductionGenerator (D : SpCoefficientTowersAbelian l E T)
 
 /-- The section function of the actual strict transition, after forgetting restriction
 of scalars. Its underlying additive sections are unchanged. Keeping the ring tower
-abstract here avoids unfolding its concrete constant quotient rings in kernel conversion.
-Source: blueprint, quotient-induced transitions
-(blueprint: proposition-sp-integral-towers--1). -/
+abstract here avoids unfolding its concrete constant quotient rings in kernel conversion. -/
 def spStrictTransitionSection
     (B : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1})
     (C : StrictRingSystem.{u + 1, u, u + 1} B) {m n : ℕ} (h : m ≤ n)
     (U : T.ProEtᵒᵖ) (x : (C.level n).val.obj U) : (C.level m).val.obj U :=
   (C.transition h).val.app U x
 
-/-- The transition condition of the canonical reduction construction.
-Source: blueprint, normalized-towers-reduction
-(blueprint: proposition-sp-integral-towers--1). -/
+/-- The transition condition of the canonical reduction construction. -/
 def IsSpReductionTransition (D : SpCoefficientTowersAbelian l E T)
     (coefficient : spIntegralSectionRing l E T ≅
       WeilConjectures.completedIntegralCommRingSheafUnrestricted l E T)
@@ -203,9 +174,7 @@ def IsSpReductionTransition (D : SpCoefficientTowersAbelian l E T)
     spReductionGenerator l E T D coefficient ordinary level M m U
       (((spCoefficientCommRings l E T).map (homOfLE h).op).hom.app U c) x
 
-/-- The evaluation condition of the canonical reduction construction.
-Source: blueprint, normalized-towers-reduction
-(blueprint: proposition-sp-integral-towers--1). -/
+/-- The evaluation condition of the canonical reduction construction. -/
 def spReductionDerivedEvaluations (D : SpCoefficientTowersAbelian l E T)
     (coefficient : spIntegralSectionRing l E T ≅
       WeilConjectures.completedIntegralCommRingSheafUnrestricted l E T)
@@ -214,9 +183,7 @@ def spReductionDerivedEvaluations (D : SpCoefficientTowersAbelian l E T)
   ∀ n : ℕ, red ⋙ spDerivedCoefficientEvaluation l E T D n ≅
     (D.scalar (spIntegralReductionScalar l E T coefficient n)).model.T
 
-/-- The constructible condition of the canonical reduction construction.
-Source: blueprint, normalized-towers-reduction
-(blueprint: proposition-sp-integral-towers--1). -/
+/-- The constructible condition of the canonical reduction construction. -/
 def IsSpReductionConstructible (D : SpCoefficientTowersAbelian l E T)
     (red : DerivedCategory (spIntegralSectionModules l E T) ⥤
       spDerivedCoefficientTowers l E T D) : Prop :=
@@ -242,9 +209,7 @@ def IsSpReductionConstructible (D : SpCoefficientTowersAbelian l E T)
 /-- The reduction construction and its assertions. The ordinary functor is fixed by
 its level tensor identifications and by its quotient formula on local tensor generators.
 The derived functor is its universal left derived functor, computing on K-flat complexes.
-This specifies a strict object of D(Tow), rather than only an inverse system in D(R_T).
-Source: blueprint, construction, normalization, and final Tor-bound sentence
-(blueprint: proposition-sp-integral-towers--1). -/
+This specifies a strict object of D(Tow), rather than only an inverse system in D(R_T). -/
 structure SpReductionTower (D : SpCoefficientTowersAbelian l E T) where
   /-- The integral ring identification, with its underlying sheaf map fixed below. -/
   coefficient : spIntegralSectionRing l E T ≅

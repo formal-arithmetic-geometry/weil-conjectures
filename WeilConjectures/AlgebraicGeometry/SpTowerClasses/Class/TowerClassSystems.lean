@@ -14,9 +14,6 @@ public import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
 
 /-! # Systems for canonical tower classes
-
-Source: blueprint main-20261015, chap-Smooth-purity,
-`sk-prop-sp-tower-geometric-classes` (blueprint: def-sp-tower-class-systems).
 -/
 
 @[expose] public noncomputable section
@@ -38,73 +35,62 @@ namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 
 attribute [local instance 4000] AlgebraicGeometry.ProEtale.VaryingRing.ringSheafify
 
-/-- Towers of abelian sheaves. Source: classes (1) (blueprint: def-sp-tower-class-systems). -/
+/-- Towers of abelian sheaves. -/
 abbrev Ab (T : Scheme.{u}) := ℕᵒᵖ ⥤ DiagonalAb T
 
 /-- The existing abelian structure on towers, shared by name to avoid rebuilding
-its sheafification witnesses. Source: classes (1)--(2)
-(blueprint: def-sp-tower-class-systems). -/
+its sheafification witnesses. -/
 instance (priority := 3000) towerAbelian (T : Scheme.{u}) : Abelian (Ab T) :=
   inferInstance
 
-/-- Ordinary localization. Source: classes (1)--(2)
-(blueprint: def-sp-tower-class-systems). -/
+/-- Ordinary localization. -/
 instance abDerived (T : Scheme.{u}) : HasDerivedCategory.{u + 2} (Ab T) :=
   HasDerivedCategory.standard _
 
-/-- Ext in the same localization. Source: classes (2)
-(blueprint: def-sp-tower-class-systems). -/
+/-- Ext in the same localization. -/
 instance abExt (T : Scheme.{u}) : HasExt.{u + 2} (Ab T) := HasExt.standard (Ab T)
 
-/-- Constant towers. Source: classes (2) (blueprint: def-sp-tower-class-systems). -/
+/-- Constant towers. -/
 def constant (T : Scheme.{u}) : DiagonalAb T ⥤ Ab T :=
   Functor.const (ℕᵒᵖ) (C := DiagonalAb T)
 
-/-- Exactness of the actual constant-system functor.
-Source: classes (2) (blueprint: def-sp-tower-class-systems).
-Proof: limits and colimits in the functor category are levelwise, so the
-constant-system functor preserves them, including the additive group laws. -/
+/-- Exactness of the actual constant-system functor. -/
 theorem constant_exact (T : Scheme.{u}) :
     (constant T).Additive ∧ PreservesFiniteLimits (constant T) ∧
       PreservesFiniteColimits (constant T) := by
   unfold constant
   exact ⟨⟨fun {_ _ _ _} ↦ rfl⟩, inferInstance, inferInstance⟩
 
-/-- Additivity of constant systems. Source: classes (2)
-(blueprint: def-sp-tower-class-systems). -/
+/-- Additivity of constant systems. -/
 instance constantAdditive (T : Scheme.{u}) : (constant T).Additive :=
   (constant_exact T).1
 
-/-- Left exactness of constant systems. Source: classes (2)
-(blueprint: def-sp-tower-class-systems). -/
+/-- Left exactness of constant systems. -/
 instance constantLimits (T : Scheme.{u}) : PreservesFiniteLimits (constant T) :=
   (constant_exact T).2.1
 
-/-- Right exactness of constant systems. Source: classes (2)
-(blueprint: def-sp-tower-class-systems). -/
+/-- Right exactness of constant systems. -/
 instance constantColimits (T : Scheme.{u}) : PreservesFiniteColimits (constant T) :=
   (constant_exact T).2.2
 
-/-- Integral coefficients. Source: classes (2) (blueprint: def-sp-tower-class-systems). -/
+/-- Integral coefficients. -/
 abbrev integers (T : Scheme.{u}) :=
   (constant T).obj ((constantSheaf (Scheme.ProEt.topology T) AddCommGrpCat.{u + 1}).obj
     (AddCommGrpCat.of (ULift.{u + 1} ℤ)))
 
-/-- The actual roots tower. Source: classes (1) (blueprint: def-sp-tower-class-systems). -/
+/-- The actual roots tower. -/
 abbrev roots (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) :=
   Scheme.proEtaleRootsOfUnityTower T l (Fact.out : l.Prime)
 
-/-- Power-transition units. Source: classes (1) (blueprint: def-sp-tower-class-systems). -/
+/-- Power-transition units. -/
 def powerUnits (l : ℕ) (T : Scheme.{u}) : Ab T :=
   Functor.ofOpSequence (X := fun _ : ℕ ↦ Scheme.proEtaleUnitsSheaf T)
     (fun _ ↦ Scheme.proEtaleUnitsPower T l)
 
-/-- Identity-transition units. Source: classes (1)
-(blueprint: def-sp-tower-class-systems). -/
+/-- Identity-transition units. -/
 abbrev units (T : Scheme.{u}) := (constant T).obj (Scheme.proEtaleUnitsSheaf T)
 
-/-- The exact sequence uses the actual inclusions and power maps at every positive level.
-Source: classes (1) (blueprint: def-sp-tower-class-systems). -/
+/-- The exact sequence uses the actual inclusions and power maps at every positive level. -/
 structure Kummer (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) where
   inclusion : roots l T ⟶ powerUnits l T
   inclusion_eq : ∀ n : ℕ,
@@ -114,15 +100,13 @@ structure Kummer (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) where
   zero : inclusion ≫ power = 0
   exact : (ShortComplex.mk inclusion power zero).ShortExact
 
-/-- Ringed sequence-site systems, with the dependency's exact site universes.
-Source: coefficient towers and classes (2) (blueprint: def-sp-tower-class-systems). -/
+/-- Ringed sequence-site systems, with the dependency's exact site universes. -/
 abbrev Systems (T : Scheme.{u})
     (B : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1}) :=
   SemilinearSections.Systems.{u + 1, u, u + 1} (Scheme.ProEt.topology T)
     (fun n ↦ B.obj (op n)) (fun n ↦ B.map (homOfLE (Nat.le_succ n)).op)
 
-/-- Share the published abelian witness of the ringed sequence-site category.
-Source: classes (2), the recorded system model (blueprint: def-sp-tower-class-systems). -/
+/-- Share the published abelian witness of the ringed sequence-site category. -/
 instance (priority := 5000) systemsAbelian (T : Scheme.{u})
     (B : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1}) :
     Abelian (Systems T B) :=
@@ -131,14 +115,12 @@ instance (priority := 5000) systemsAbelian (T : Scheme.{u})
     (SemilinearSections.systemRing.{u + 1, u, u + 1} (Scheme.ProEt.topology T)
       (fun n ↦ B.obj (op n)) (fun n ↦ B.map (homOfLE (Nat.le_succ n)).op))
 
-/-- The ordinary derived category of these systems.
-Source: classes (2) (blueprint: def-sp-tower-class-systems). -/
+/-- The ordinary derived category of these systems. -/
 abbrev D (T : Scheme.{u})
     (B : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1}) :=
   DerivedCategory (Systems T B)
 
-/-- The actual coefficient module, not a free source-object parameter.
-Source: classes (2) (blueprint: def-sp-tower-class-systems). -/
+/-- The actual coefficient module, not a free source-object parameter. -/
 def coefficient (T : Scheme.{u})
     (B : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1}) : Systems T B :=
   SheafOfModules.unit (SemilinearSections.ring.{u + 1, u, u + 1}
@@ -146,16 +128,13 @@ def coefficient (T : Scheme.{u})
       (SemilinearSections.systemRing.{u + 1, u, u + 1} (Scheme.ProEt.topology T)
         (fun n ↦ B.obj (op n)) (fun n ↦ B.map (homOfLE (Nat.le_succ n)).op)))
 
-/-- Coefficients in degree zero. Source: classes (2)
-(blueprint: def-sp-tower-class-systems). -/
+/-- Coefficients in degree zero. -/
 abbrev unit (T : Scheme.{u})
     (B : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1}) :=
   (DerivedCategory.singleFunctor (Systems T B) 0).obj (coefficient T B)
 
 /-- The canonical forgetful functor is specified on every section, restriction and map.
-These equalities identify a functor, rather than assuming a free map between categories.
-Source: classes (2), modules in the inverse-system topos
-(blueprint: def-sp-tower-class-systems). -/
+These equalities identify a functor, rather than assuming a free map between categories. -/
 structure Forget (T : Scheme.{u})
     (B : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1}) where
   F : Systems T B ⥤ Ab T
@@ -298,11 +277,7 @@ private theorem integerLevelMap_transitions (T : Scheme.{u})
   ext U k
   exact congrArg (fun a ↦ a k) (integerSectionMap_transitions T B F n U)
 
-/-- The quotient of the constant integer tower is fixed on every constant section.
-Source: classes (2), coefficient unit (blueprint: def-sp-tower-class-systems).
-Proof: at each level the integer acts on the coefficient unit by its integer
-multiple of one. This commutes with restrictions and quotient transitions;
-the constant-sheaf universal property gives existence and uniqueness. -/
+/-- The quotient of the constant integer tower is fixed on every constant section. -/
 theorem integerGenerator_existsUnique (T : Scheme.{u})
     (B : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1})
     (F : Forget T B) :
@@ -328,8 +303,7 @@ theorem integerGenerator_existsUnique (T : Scheme.{u})
   ext U k
   exact eq_of_heq ((hg n.unop U k).trans (integerLevelMap_spec T B F n.unop U k).symm)
 
-/-- The canonical integer-to-coefficient quotient, fixed by constant generators.
-Source: classes (2) (blueprint: def-sp-tower-class-systems). -/
+/-- The canonical integer-to-coefficient quotient, fixed by constant generators. -/
 def integerGenerator (T : Scheme.{u})
     (B : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1})
     (F : Forget T B) : integers T ⟶ F.F.obj (coefficient T B) :=

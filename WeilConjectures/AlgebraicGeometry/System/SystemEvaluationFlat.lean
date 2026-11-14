@@ -126,7 +126,6 @@ import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 # Evaluation preserves flat semilinear systems
 
 Source: Zheng, Construction 4.1, and Stacks Project, Tag 08FC.
-(blueprint: lem-pur-system-evaluation-flat).
 -/
 
 @[expose] public noncomputable section
@@ -206,16 +205,7 @@ private theorem evaluationCoefficientEquiv_map (n : ℕ) {U V : Cᵒᵖ} (f : U 
 attribute [local irreducible] evaluation evaluationCoefficientEquiv evaluationSectionEquiv
 
 /-- Evaluation preserves flatness on the coefficient sequence site.
-Source: Zheng, Construction 4.1, and Stacks Project, Tag 08FC
-(blueprint: lem-pur-system-evaluation-flat).
-Proof: test the local finite-relation criterion at an object U of the original site.
-Identify evaluated sections and scalars with those of the system at (n,U).
-Apply flatness on the sequence site to this finite relation. Its covering sieve pulls
-back along the vertical inclusion to a covering sieve of U, by the definition of the
-sequence topology. Restrict its finite factorization witnesses to vertical arrows.
-The coefficient and additive section identifications preserve restriction, scalar
-multiplication, finite sums and products, so these are the required witnesses on U.
-The argument also applies to empty finite families and empty covering sieves. -/
+Source: Zheng, Construction 4.1, and Stacks Project, Tag 08FC. -/
 theorem evaluation_preserves_flat (n : ℕ) (M : Systems.{c, v, max c v r} J B τ)
     (hM : SheafOfModules.IsFlatOnSite.{c, v, max c v r, max c v r}
       (J := coefficientSequenceTopology J) (R := systemRing J B τ) M) :

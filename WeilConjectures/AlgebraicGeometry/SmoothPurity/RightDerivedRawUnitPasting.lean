@@ -42,8 +42,7 @@ private lemma expand_raw_unit
 and the second is exact. This is a categorical calculation, with no scheme, graph or chosen
 compactification.
 
-Source: Stacks Project, Tags 0F7B, 0F7J and 0D6E; the composition unit identity.
-(blueprint: lem-pur-right-derived-raw-unit-pasting).
+Source: Stacks Project, Tags 0F7B, 0F7J and 0D6E.
 
 Proof in words: evaluate at a homotopy object and expand the exact-right composition unit.
 Naturality moves the first unit and the first comparison through the second comparison.

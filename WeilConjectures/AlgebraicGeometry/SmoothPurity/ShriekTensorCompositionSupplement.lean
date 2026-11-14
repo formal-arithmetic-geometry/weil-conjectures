@@ -41,8 +41,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProject
 
 /-! # Tensor projection maps and compact-support composition
 
-Source: Stacks Project, `more-etale.tex`, Tags 0F7B and 0F7J, and
-`sites-cohomology.tex`, Tag 0E48 (blueprint: lem-amb-shriek-tensor-composition).
+Source: Stacks Project, `more-etale.tex`, Tags 0F7B and 0F7J, and `sites-cohomology.tex`, Tag 0E48.
 
 The projection map is the existing proper/open compactification construction with both
 factors exchanged by the canonical signed derived tensor symmetry. Exact termwise inverse
@@ -99,8 +98,7 @@ private theorem projection_transport
 namespace AlgebraicGeometry.Etale
 
 /-- The coefficient-first compact-support tensor projection map on a specified compactification.
-Source: Stacks Project, Tags 0B56, 0GL1, and 0F7I
-(blueprint: lem-amb-shriek-tensor-composition).
+Source: Stacks Project, Tags 0B56, 0GL1, and 0F7I.
 
 The middle map is exactly the proper projection followed by the derived termwise
 open-extension tensor comparison. The two symmetries and the exact-pullback comparison
@@ -126,8 +124,7 @@ noncomputable def compactSupportProjectionMapOfCompactification
         ((upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategory.obj K)).app M)
 
 /-- The same canonical map on the chosen, compactification-independent compact-support functor.
-Source: Stacks Project, Tags 0F7I and 0F7J
-(blueprint: lem-amb-shriek-tensor-composition). -/
+Source: Stacks Project, Tags 0F7I and 0F7J. -/
 noncomputable def compactSupportProjectionMap
     (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]

@@ -39,12 +39,6 @@ set_option linter.privateModule false
 /-!
 # Counit normalization of the site-transported closed adjoint
 
-Source: literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/
-lem-coef-finite-dualizing.md, closed-immersion calculation (*); the normalized Hom chain in
-literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/
-thm-sf-ambient-adjoint-class.proof.md
-(blueprint: lem-coef-site-closed-counit-transport).
-
 We retain the identity-open compactification in the notation. Its ordinary adjunction is
 identified with the closed direct-image adjunction by the canonical identity-open
 normalization, and the inverse compact-support comparison is the direct-image mate delta.

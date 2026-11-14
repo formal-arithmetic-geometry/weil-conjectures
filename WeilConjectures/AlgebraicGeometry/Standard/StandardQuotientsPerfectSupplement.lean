@@ -33,9 +33,7 @@ import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 /-!
 # Perfectness of the standard coefficient quotients
 
-Source: literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/
-lem-weil-pbc-standard-quotients-perfect.md, node order 1254; Stacks Project, Tag 0657
-(blueprint: lemma-reduction-derived-nakayama--1).
+Source: Stacks Project, Tag 0657.
 -/
 
 @[expose] public noncomputable section
@@ -49,8 +47,7 @@ open CategoryTheory CategoryTheory.Limits HomologicalComplex
 namespace AlgebraicGeometry
 
 /-- An exact scalar presentation gives its normalized two-term finite-free resolution.
-Source: Stacks Tags 0115 and 0657, the cohomology calculation in proof steps 3--4
-(blueprint: lemma-reduction-derived-nakayama--1). -/
+Source: Stacks Tags 0115 and 0657, the cohomology calculation in proof steps 3--4. -/
 private theorem twoTermResolution {R : Type u} [CommRing R]
     (a : R) (M : ModuleCat.{u} R)
     (q : ModuleCat.of R R ⟶ M)
@@ -141,9 +138,7 @@ private theorem twoTermResolution {R : Type u} [CommRing R]
       · exact ExactAt.of_isZero (hz i hm hi)
   exact ⟨P, hge, hle, hterms, em, e0, double_d f hrel (by omega), ε, hε, hε0, hεi⟩
 
-/-- A quotient whose kernel is a principal ideal is exact after scalar multiplication.
-Source: the elementary divisibility calculation in proof step 2
-(blueprint: lemma-reduction-derived-nakayama--1). -/
+/-- A quotient whose kernel is a principal ideal is exact after scalar multiplication. -/
 private theorem principalExact {R : Type u} [CommRing R]
     (a : R) (M : ModuleCat.{u} R) (q : ModuleCat.of R R ⟶ M)
     (hq : ∀ x : R, q x = 0 ↔ x ∈ Ideal.span ({a} : Set R)) :
@@ -163,8 +158,7 @@ private theorem principalExact {R : Type u} [CommRing R]
   exact ⟨y, hy.symm⟩
 
 /-- The canonical quotient identification retains the specified reduction homomorphism.
-Source: Mathlib `PadicInt.ker_toZModPow`, proof step 1
-(blueprint: lemma-reduction-derived-nakayama--1). -/
+Source: Mathlib `PadicInt.ker_toZModPow`, proof step 1. -/
 private theorem baseEquiv (l : ℕ) [Fact l.Prime] (n : ℕ) :
     ∃ e : ZMod (l ^ n) ≃+* PadicInt l ⧸
       (Ideal.span ({(l : PadicInt l)} : Set (PadicInt l))) ^ n,
@@ -180,9 +174,7 @@ private theorem baseEquiv (l : ℕ) [Fact l.Prime] (n : ℕ) :
   ext x
   simp [e]
 
-/-- The recorded generator of the nonzero maximal ideal is nonzero.
-Source: `Padic.extension_integers_dvr`, proof step 1
-(blueprint: lemma-reduction-derived-nakayama--1). -/
+/-- The recorded generator of the nonzero maximal ideal is nonzero. -/
 private theorem uniformizer_ne_zero (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] :
     Padic.coefficientExtensionUniformizer l E ≠ 0 := by
@@ -201,9 +193,7 @@ set_option linter.unusedVariables false in
 /-- The standard ℓ-adic and finite-extension quotient modules are represented by the
 corresponding two-term finite-free complexes and are finite as sets.
 
-Source: literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/
-lem-weil-pbc-standard-quotients-perfect.md, Proof and Source note; Stacks Project, Tag 0657
-(blueprint: lemma-reduction-derived-nakayama--1).
+Source: Stacks Project, Tag 0657.
 
 Proof plan (the five DAG steps):
 1. By `def-weil-l-adic-numbers`, the base ring is a DVR with uniformizer `l` and
@@ -211,7 +201,7 @@ Proof plan (the five DAG steps):
    uniformizer of `def-weil-l-adic-coefficient-extension` and apply
    `lem-weil-l-adic-extension-integers-dvr`. Both coefficient rings are domains,
    their uniformizers are nonzero, and the extension has finite residue field
-   (`def-sc-discrete-valuation-ring`).
+.
 2. For either pair `(A,t)`, the domain property makes `t ^ n` nonzero, hence
    multiplication by it injective and A-linear. Induction using the ideal product
    of `def-weil-pbc-algebra-hom-quotient` gives `(tA)^n = t^n A`: products of
@@ -223,7 +213,7 @@ Proof plan (the five DAG steps):
    The induced map sends the class of x to its quotient class; its inverse is
    well defined because two representatives differ by `t^n A`. All other
    cohomologies vanish. Thus the augmentation is a quasi-isomorphism and its
-   image under Q is invertible (`def-weil-abstract-derived-category`). In the
+   image under Q is invertible. In the
    base case compose with the indicated quotient identification to `ZMod (l ^ n)`.
 4. The two terms have basis 1, so they are finite free. For projectivity, lift a
    map from A through a surjection by lifting the image of 1 and extending

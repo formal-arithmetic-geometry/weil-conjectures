@@ -47,9 +47,7 @@ set_option linter.privateModule false
 /-!
 # Actual unbounded open adjunctions and site-comparison counits
 
-Source: Stacks Project, Tags 03DI, 03DJ and 09AF; blueprint
-sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md,
-Locality paragraph (blueprint: lem-sp-unbounded-open-counit-site-transport).
+Source: Stacks Project, Tags 03DI, 03DJ and 09AF.
 
 The sheaf adjunctions are the specified Kan-extension/sheafification adjunctions.
 `Adjunction.mapHomologicalComplex` gives their actual degreewise units and counits,

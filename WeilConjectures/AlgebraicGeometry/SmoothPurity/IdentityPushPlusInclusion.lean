@@ -64,21 +64,7 @@ private theorem plus_identity_unit
     Iso.symm_hom, a, R, e, d, C, Functor.id_obj, Category.assoc] using hv
 
 /-- The canonical identity direct-image normalization agrees across D+ inclusion.
-Source: Step 3 of lem-pur-refinement-mate-plus-compatibility; Stacks Tags 015F
-and 0B65 (blueprint: lem-pur-identity-push-plus-inclusion).
-
-Proof: conjugate the inverse canonical identity pullback under its derived
-adjunction and the identity adjunction. The inverse conjugate is the transpose
-of the identity pullback comparison. The derived adjunction factorization and
-the identity localization factorization show that this is the right-derived
-localization of lowerStarId followed by the canonical right-derived identity
-isomorphism. For bounded-below complexes the analogous localization is exactly
-d as displayed. The comparison rightDerivedFunctorPlusCompatibility is the
-unique comparison respecting the derived units; naturality of right-derived
-localization therefore identifies the included d inverse followed by that
-comparison with the unbounded inverse conjugate. This is an identity of natural
-transformations, so evaluating at any K gives the asserted formula. It involves
-no proper/open square and holds for the zero object and the zero ring. -/
+Source: Stacks Tags 015F and 0B65. -/
 theorem identityPush_plus_inclusion
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (X : Scheme.{u})
     (K : DerivedCategory.Plus

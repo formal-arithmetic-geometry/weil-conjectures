@@ -18,8 +18,6 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Chern.TowerChernRealizat
 
 /-! # Pullback of the Kummer Chern morphism in coefficient towers
 
-Source: blueprint, sec-smooth-purity/sk-prop-sp-tower-geometric,
-classes proof paragraph (2) (blueprint: lem-sp-tower-chern-pullback).
 The equality is in the ordinary derived category of entire varying-ring systems.
 -/
 
@@ -41,7 +39,6 @@ open SpTowerClasses
 
 /-- Kummer Chern morphisms commute with arbitrary scheme pullback, with the unit
 and root-tensor comparisons normalized on sections and the canonical shift comparison.
-Source: blueprint classes proof (2) (blueprint: lem-sp-tower-chern-pullback).
 
 Proof plan:
 1. Exact inverse image on the system topos transports the integral, finite and

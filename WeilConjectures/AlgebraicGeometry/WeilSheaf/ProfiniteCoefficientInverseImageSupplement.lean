@@ -38,8 +38,7 @@ public import WeilConjectures.AlgebraicGeometry.ProfiniteCoefficientInverseImage
 /-!
 # Inverse image of profinite coefficient rings
 
-Source: Stacks Project, Tags 098T (2), 097N, 04D3 and 01YW
-(blueprint: lem-weil-pbc-profinite-coefficient-inverse-image).
+Source: Stacks Project, Tags 098T (2), 097N, 04D3 and 01YW.
 -/
 
 @[expose] public section
@@ -113,16 +112,14 @@ private theorem proEtaleConstantComparison_isIso {X Y : Scheme.{u}} (f : X ⟶ Y
   infer_instance
 
 /-- The constant ring-sheaf tower; index `op n` means the paper's level `n+1`.
-Source: Stacks, Tags 098T (2), 097N and 01YW
-(blueprint: lem-weil-pbc-profinite-coefficient-inverse-image). -/
+Source: Stacks, Tags 098T (2), 097N and 01YW. -/
 noncomputable abbrev proEtaleCoefficientTower (X : Scheme.{u})
     (Q : ℕᵒᵖ ⥤ CommRingCat.{u + 1}) :=
   Q ⋙ constantSheaf (ProEt.topology X) CommRingCat.{u + 1}
 
 /-- The specific infinite-limit comparison, without assuming preservation of limits.
 Its data is the universal limit comparison followed by the map induced by the canonical
-constant comparisons. Source: Stacks, Tags 098T (2), 097N, 04D3 and 01YW
-(blueprint: lem-weil-pbc-profinite-coefficient-inverse-image). -/
+constant comparisons. Source: Stacks, Tags 098T (2), 097N, 04D3 and 01YW. -/
 noncomputable def proEtaleProfiniteComparison {X Y : Scheme.{u}} (f : X ⟶ Y)
     (Q : ℕᵒᵖ ⥤ CommRingCat.{u + 1}) :
     (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj
@@ -240,8 +237,7 @@ private theorem proEtaleConstantComparison_comp {X Y Z : Scheme.{u}}
 /-- Compatible canonical inverse image of a countable tower of finite commutative rings.
 The value universe is `u+1`, as required by sheafification on the small site; finite rings
 in universe `u` are included by their canonical `ULift`. No surjectivity of transitions is
-required. Source: Stacks, Tags 098T (2), 097N, 04D3 and 01YW
-(blueprint: lem-weil-pbc-profinite-coefficient-inverse-image).
+required. Source: Stacks, Tags 098T (2), 097N, 04D3 and 01YW.
 
 Proof plan, following the node's eight steps:
 1. Use fpqc descent of morphisms to show the small pro-etale site is subcanonical.

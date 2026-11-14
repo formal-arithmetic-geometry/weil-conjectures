@@ -11,7 +11,7 @@ import WeilConjectures.AlgebraicGeometry.Closed.ClosedLiftStalkSpecialization
 
 /-! # Fibre maps factor through restriction on the strict-local base
 
-Source: Stacks Project, Tag 0GJV, proof of lemma-specialization-cospecialization.
+Source: Stacks Project, Tag 0GJV, proof of.
 -/
 
 @[expose] public section
@@ -22,8 +22,7 @@ namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Fibre-map factorization through strict-local restriction.
-Source: Stacks Project, Tag 0GJV, proof of lemma-specialization-cospecialization.
-(blueprint: lem-weil-pbc-strict-base-fibre-map-factorization).
+Source: Stacks Project, Tag 0GJV, proof of.
 
 Proof plan: Put `K = G[0]` and form the comparison from the derived stalk at `s` to
 sections over the strict henselization by the canonical germ restriction, the derived

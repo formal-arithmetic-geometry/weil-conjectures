@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.CanonicalModuleBaseChangeOpenComparison
 /-! # Open restriction of the canonical single-module derived arrow
 
 Source: Stacks Project, Tags 08HY, 0DJ9 and 08FE.
-(blueprint: lem-pc-standard-single-open-derived-arrow).
 -/
 
 @[expose] public section
@@ -174,26 +173,7 @@ private theorem pinnedSingle_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
     hε hr (Scheme.single_map_normalize f M) (Scheme.single_map_normalize f N)
 
 -- The coefficient transports compare dependent derived-category witnesses.
-/-- The derived arrow square before taking homology or stalks.
-
-Proof: Apply restricted_base_change_compatibility to the chosen pullback square.
-For each coefficient use the pinned homotopy counit at the single complex, followed
-by singleMapHomologicalComplex. Expand canonicalSinglePullbackMap and cancel the
-single images of the adjunction comparison and its inverse; the resulting map is
-picardTermwiseSingleMap. The comparison predicate is witnessed by the pinned
-left-derived structure. The theorem gives source and target restriction isomorphisms
-and their commuting square with coefficients H = schemeOpenRestriction(Y,p⁻¹S)(M).
-Use overFunctorEquiv at p⁻¹S to identify H with the literal restriction MS.
-Naturality of the derived mate and of the pinned counit under this coefficient
-isomorphism transports both sides of the square to MS. Compose the source comparison
-with derivedPullback of derivedDirectImage of the single image of that isomorphism;
-compose the target comparison with derivedDirectImage of the single image of its
-tensor pullback. Their naturality gives exactly the displayed equation. No homology,
-stalk, finiteness, flatness or quasi-coherence condition is involved. Empty opens
-and top opens use the same natural isomorphisms.
-Source: Stacks Project, Tag 08HY, Remark base-change; Tag 0DJ9, locality paragraph;
-Tag 08FE, restriction of derived direct image.
-(blueprint: lem-pc-standard-single-open-derived-arrow). -/
+/-- The derived arrow square before taking homology or stalks. -/
 theorem standardSingle_open_derived_arrow
     {Y B A : Scheme.{u}} (p : Y ⟶ B) (M : Y.Modules) (g : A ⟶ B)
     (S : B.Opens) (V : A.Opens) (hVS : V ≤ g ⁻¹ᵁ S) :

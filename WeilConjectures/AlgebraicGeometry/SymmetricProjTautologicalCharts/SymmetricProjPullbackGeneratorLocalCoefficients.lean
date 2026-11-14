@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.SymmetricProjTautologicalCharts.Symmetr
 import WeilConjectures.AlgebraicGeometry.SymmetricProjTautologicalCharts.SymmetricProjPullbackGeneratorLocalCoefficientsQPrime
 
 /-! Local coefficient charts for the normalized pullback generator relation.
-(blueprint: lem-trf-symmetric-proj-pullback-generator-cross-tensor).
 -/
 @[expose] public section
 set_option autoImplicit false

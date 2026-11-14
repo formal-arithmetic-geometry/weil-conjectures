@@ -47,8 +47,7 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 
 /-! # Supported constructible origin and unbounded coefficient comparison
 
-Source: Stacks Project, Tags 09AK, 09AL, 09AF, 07A4 and 03DJ
-(blueprint: lem-sp-supported-constructible-origin-comparison).
+Source: Stacks Project, Tags 09AK, 09AL, 09AF, 07A4 and 03DJ.
 
 All functors use the fixed-scalar presentation of constant-ring module sheaves.
 Intrinsic constructibility is the recorded fixed-module predicate, not an etale-origin
@@ -69,8 +68,7 @@ namespace SupportedConstructibleOriginComparison
 
 /-- Pullback of constant module sheaves, uniquely normalized by the adjunction on
 terminal sections. Hence each pulled-back constant section is sent to itself.
-Source: Stacks 0H7J and 099R
-(blueprint: lem-sp-supported-constructible-origin-comparison). -/
+Source: Stacks 0H7J and 099R. -/
 @[irreducible] def constantModuleComparison (T : Scheme.{u}) (A : Type (u + 1)) [CommRing A] :
     constantSheaf T.smallEtaleTopology (ModuleCat.{u + 1} A) ⋙
       comparisonUpperStar (ModuleCat.{u + 1} A) T ≅
@@ -79,8 +77,7 @@ Source: Stacks 0H7J and 099R
 
 /-- The degree-zero coefficient comparison. Restriction of scalars gives B exactly
 its A-action through f; the constant comparison preserves every b in B.
-Source: Stacks 0H7J and 07A4
-(blueprint: lem-sp-supported-constructible-origin-comparison). -/
+Source: Stacks 0H7J and 07A4. -/
 @[irreducible] def coefficientComparison {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (f : A →+* B) (T : Scheme.{u}) :
     (comparisonUpperStar (ModuleCat.{u + 1} A) T).mapDerivedCategory.obj
@@ -98,8 +95,7 @@ Source: Stacks 0H7J and 07A4
 /-- The canonical c_e: descend the natural sheaf comparison termwise, then apply
 pro-etale extension by zero to the specified e. These are the fixed-module coordinates
 of the recorded intrinsic extension by zero.
-Source: Stacks 09AF and 03DJ
-(blueprint: lem-sp-supported-constructible-origin-comparison). -/
+Source: Stacks 09AF and 03DJ. -/
 @[irreducible] def openComparison (A : Type (u + 1)) [CommRing A]
     {U Z : Scheme.{u}} (j : U ⟶ Z) [IsOpenImmersion j]
     (L : Etale.DerivedCategoryModule A U)
@@ -114,8 +110,7 @@ Source: Stacks 09AF and 03DJ
 
 /-- The canonical t_e in the unbounded derived category: derived tensor pullback,
 then 1 tensor beta_B, then c_e tensor 1. No Tor bound is used.
-Source: Stacks 07A4, 09AF and 0H7J
-(blueprint: lem-sp-supported-constructible-origin-comparison). -/
+Source: Stacks 07A4, 09AF and 0H7J. -/
 @[irreducible] def tensorComparison
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (f : A →+* B) {U Z : Scheme.{u}} (j : U ⟶ Z) [IsOpenImmersion j]

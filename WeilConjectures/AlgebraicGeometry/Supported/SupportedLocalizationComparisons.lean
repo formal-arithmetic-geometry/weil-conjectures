@@ -14,8 +14,7 @@ public import WeilConjectures.AlgebraicGeometry.Normalized.NormalizedSupportTria
 /-!
 # Canonical support comparisons for product localization
 
-Source: Stacks Tags 09XP and 0F1E; blueprint lem-pur-supported-product-localization,
-proof steps 1 and 5 (blueprint: def-pur-supported-localization-comparisons).
+Source: Stacks Tags 09XP and 0F1E.
 All changes of support use equality of open complements. All changes of ambient scheme
 use the uniquely specified open-complement isomorphism and normalized support restriction.
 -/
@@ -33,27 +32,21 @@ variable (E : Type v) [Category.{u + 1} E] [Abelian E]
   [SymmetricCategory E] [MonoidalClosed E] [Abelian.HasFunctorialFlatResolution E]
 
 /-- Cache the upstream graded-tensor property at a variable scheme, so that later
-specializations reuse its proof without reopening the monoidal sheaf construction.
-Source: upstream K-flat tensor construction
-(blueprint: def-pur-supported-localization-comparisons). -/
+specializations reuse its proof without reopening the monoidal sheaf construction. -/
 noncomputable instance supportGradedTensorFour (T : Scheme.{u}) :
     ∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ (Sheaf T.smallEtaleTopology E)),
       GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄ :=
   inferInstance
 
 /-- Cache the upstream graded-tensor property at a variable scheme, so that later
-specializations reuse its proof without reopening the monoidal sheaf construction.
-Source: upstream K-flat tensor construction
-(blueprint: def-pur-supported-localization-comparisons). -/
+specializations reuse its proof without reopening the monoidal sheaf construction. -/
 noncomputable instance supportGradedTensorLeft (T : Scheme.{u}) :
     ∀ (X₁ X₂ X₃ : GradedObject ℤ (Sheaf T.smallEtaleTopology E)),
       GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃ :=
   inferInstance
 
 /-- Cache the upstream graded-tensor property at a variable scheme, so that later
-specializations reuse its proof without reopening the monoidal sheaf construction.
-Source: upstream K-flat tensor construction
-(blueprint: def-pur-supported-localization-comparisons). -/
+specializations reuse its proof without reopening the monoidal sheaf construction. -/
 noncomputable instance supportGradedTensorRight (T : Scheme.{u}) :
     ∀ (X₁ X₂ X₃ : GradedObject ℤ (Sheaf T.smallEtaleTopology E)),
       GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃ :=
@@ -61,11 +54,7 @@ noncomputable instance supportGradedTensorRight (T : Scheme.{u}) :
 
 /-- The existing external product is the displayed tensor of projection pullbacks.
 The equality keeps the upstream construction opaque to downstream kernel reduction.
-Source: Tag 0F1E and upstream Kunneth.Defs
-(blueprint: def-pur-supported-localization-comparisons).
-Proof: unfold externalProduct. Its definition is exactly this derived-tensor expression
-with the two generic left derived inverse-image functors; all instance proof arguments
-agree by proof irrelevance. No model or comparison map is changed. -/
+Source: Tag 0F1E and upstream Kunneth.Defs. -/
 theorem supportedExternalProduct_eq {S X Y : Scheme.{u}}
     (f : X ⟶ S) (g : Y ⟶ S)
     (K : DerivedCategory (Sheaf X.smallEtaleTopology E))
@@ -77,7 +66,7 @@ theorem supportedExternalProduct_eq {S X Y : Scheme.{u}}
   rfl
 
 /-- The canonical equality isomorphism exposing the upstream external-product formula.
-Source: Tag 0F1E (blueprint: def-pur-supported-localization-comparisons). -/
+Source: Tag 0F1E. -/
 noncomputable def supportedExternalProductIso {S X Y : Scheme.{u}}
     (f : X ⟶ S) (g : Y ⟶ S)
     (K : DerivedCategory (Sheaf X.smallEtaleTopology E))
@@ -92,7 +81,7 @@ end
 
 /-- Compose a functorial equality comparison with the tensor-square comparison,
 keeping the categorical composition generic before specializing the scheme arguments.
-Source: Tag 0F1E (blueprint: def-pur-supported-localization-comparisons). -/
+Source: Tag 0F1E. -/
 noncomputable def supportIsoTransport
     {C : Type w₁} {D : Type w₂} [Category.{w₃} C] [Category.{w₄} D]
     (F : C ⥤ D) {X Y : C} {Z W : D}
@@ -107,7 +96,7 @@ variable (E : Type v) [Category.{u + 1} E] [Abelian E]
   [UpperStarPreservesFlat E]
 
 /-- Exact inverse image composition, induced by the existing sheaf composition iso.
-Source: Tag 0F1E (blueprint: def-pur-supported-localization-comparisons). -/
+Source: Tag 0F1E. -/
 noncomputable def supportExactPullbackCompIso
     {R S T : Scheme.{u}} (a : R ⟶ S) (b : S ⟶ T) (c : R ⟶ T) (hc : c = a ≫ b) :
     (upperStar E c).mapDerivedCategory ≅
@@ -116,7 +105,7 @@ noncomputable def supportExactPullbackCompIso
     (Functor.mapDerivedCategoryCompIso (upperStar E b) (upperStar E a)).symm
 
 /-- Pullback comparison for a commuting projection square.
-Source: Tag 0F1E (blueprint: def-pur-supported-localization-comparisons). -/
+Source: Tag 0F1E. -/
 noncomputable def supportPullbackSquareIso
     {P Q X X' : Scheme.{u}} (h : Q ⟶ P) (p : P ⟶ X) (q : Q ⟶ X')
     (a : X' ⟶ X) (hp : h ≫ p = q ≫ a) (K : DerivedCategory (Sheaf X.smallEtaleTopology E)) :
@@ -130,7 +119,7 @@ noncomputable def supportPullbackSquareIso
       ((leftDerivedUpperStarIsoMapDerivedCategory E a).app K)
 
 /-- Pullback comparison when the uncut projection has the same target.
-Source: Tag 0F1E (blueprint: def-pur-supported-localization-comparisons). -/
+Source: Tag 0F1E. -/
 noncomputable def supportPullbackProjectionIso
     {P Q X : Scheme.{u}} (h : Q ⟶ P) (p : P ⟶ X) (q : Q ⟶ X)
     (hp : h ≫ p = q) (K : DerivedCategory (Sheaf X.smallEtaleTopology E)) :
@@ -141,7 +130,7 @@ noncomputable def supportPullbackProjectionIso
     (leftDerivedUpperStarComp E h p q hp.symm).symm.app K
 
 /-- Tensor the two projection-square comparisons before specializing the ambient schemes.
-Source: Tag 0F1E (blueprint: def-pur-supported-localization-comparisons). -/
+Source: Tag 0F1E. -/
 noncomputable def supportTensorFirstSquareIso
     {P Q X X' Y : Scheme.{u}} (h : Q ⟶ P) (p : P ⟶ X) (q : P ⟶ Y)
     (p' : Q ⟶ X') (q' : Q ⟶ Y) (a : X' ⟶ X)
@@ -162,7 +151,7 @@ noncomputable def supportTensorFirstSquareIso
 /-- Canonical exterior-product transport for a projection square with variable schemes.
 Its construction composes the canonical tensor and pullback comparisons before any
 open subscheme is substituted for the variable ambient scheme.
-Source: Tag 0F1E (blueprint: def-pur-supported-localization-comparisons). -/
+Source: Tag 0F1E. -/
 noncomputable def supportExternalFirstSquareIso
     {S X X' Y : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S)
     (f' : X' ⟶ S) (a : X' ⟶ X)
@@ -183,7 +172,7 @@ end
 
 /-- Canonical supported restriction followed by a specified coefficient comparison.
 The construction is shared before specializing to product schemes.
-Source: Tags 09XP and 0F1E (blueprint: def-pur-supported-localization-comparisons). -/
+Source: Tags 09XP and 0F1E. -/
 noncomputable def supportedRestrictionWithComparison (A : Type (u + 1)) [CommRing A]
     {T S B D : Scheme.{u}} (h : S ⟶ T) [IsOpenImmersion h]
     (b : B ⟶ T) (d : D ⟶ S) [IsClosedImmersion b] [IsClosedImmersion d]
@@ -195,7 +184,7 @@ noncomputable def supportedRestrictionWithComparison (A : Type (u + 1)) [CommRin
 
 /-- Canonical support transport through a scheme isomorphism over an ambient scheme,
 followed by the canonical pullback-composition and the specified coefficient comparison.
-Source: Tags 09XP and 0F1E (blueprint: def-pur-supported-localization-comparisons). -/
+Source: Tags 09XP and 0F1E. -/
 noncomputable def supportedAmbientComparison (A : Type (u + 1)) [CommRing A]
     {P T S B D : Scheme.{u}} (e : S ≅ T)
     (b : B ⟶ T) (d : D ⟶ S) [IsClosedImmersion b] [IsClosedImmersion d]
@@ -212,14 +201,13 @@ noncomputable def supportedAmbientComparison (A : Type (u + 1)) [CommRing A]
       ((supportExactPullbackCompIso (ModuleCat.{u + 1} A) e.hom h a ha).symm.app K ≪≫ c)
 
 /-- The product map after restricting the First ambient scheme.
-Source: Tag 0F1E (blueprint: def-pur-supported-localization-comparisons). -/
+Source: Tag 0F1E. -/
 noncomputable def supportedFirstOpenMap {S X Y : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S)
     (U : X.Opens) : pullback (U.ι ≫ f) g ⟶ pullback f g :=
   pullback.map (U.ι ≫ f) g f g U.ι (𝟙 Y) (𝟙 S) (by simp) (by simp)
 
 /-- The fst projection square for the product-open inclusion.
-Source: Tag 0F1E (blueprint: def-pur-supported-localization-comparisons).
-Proof: apply pullback.map_fst, and simplify the identity on the uncut factor. -/
+Source: Tag 0F1E. -/
 theorem supportedFirstOpenMap_fst {S X Y : Scheme.{u}}
     (f : X ⟶ S) (g : Y ⟶ S) (U : X.Opens) :
     supportedFirstOpenMap f g U ≫ pullback.fst f g =
@@ -227,8 +215,7 @@ theorem supportedFirstOpenMap_fst {S X Y : Scheme.{u}}
   simp [supportedFirstOpenMap]
 
 /-- The snd projection square for the product-open inclusion.
-Source: Tag 0F1E (blueprint: def-pur-supported-localization-comparisons).
-Proof: apply pullback.map_snd, and simplify the identity on the uncut factor. -/
+Source: Tag 0F1E. -/
 theorem supportedFirstOpenMap_snd {S X Y : Scheme.{u}}
     (f : X ⟶ S) (g : Y ⟶ S) (U : X.Opens) :
     supportedFirstOpenMap f g U ≫ pullback.snd f g =
@@ -236,9 +223,7 @@ theorem supportedFirstOpenMap_snd {S X Y : Scheme.{u}}
   simp [supportedFirstOpenMap]
 
 /-- This product map is an open immersion, by base change of the open inclusion.
-Source: Tag 0F1E (blueprint: def-pur-supported-localization-comparisons).
-Proof: identify the map with the base change of the open inclusion along the projection;
-open immersions are preserved by base change and composition with an isomorphism. -/
+Source: Tag 0F1E. -/
 @[instance]
 theorem supportedFirstOpenMap_open {S X Y : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S)
     (U : X.Opens) : IsOpenImmersion (supportedFirstOpenMap f g U) := by
@@ -253,7 +238,7 @@ variable (E : Type v) [Category.{u + 1} E] [Abelian E]
   [UpperStarPreservesFlat E]
 
 /-- The canonical external-product comparison for the indicated open product.
-Source: Tag 0F1E (blueprint: def-pur-supported-localization-comparisons). -/
+Source: Tag 0F1E. -/
 noncomputable def supportedFirstExternalOpenIso
     {S X Y : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S) (U : X.Opens)
     (K : DerivedCategory (Sheaf X.smallEtaleTopology E))
@@ -276,9 +261,7 @@ private theorem productComplement {S X Y B D : Scheme.{u}}
     Scheme.Pullback.range_map, Set.compl_inter, Set.preimage_compl]
 
 /-- Complement identity for the product support after open base change.
-Source: Tag 09XP (blueprint: def-pur-supported-localization-comparisons).
-Proof: on affine charts the product support is defined by the sum of the extended
-support ideals. Pulling back to the indicated open restricts those same ideals. -/
+Source: Tag 09XP. -/
 theorem supportedFirstOpenSupport_complement {S X Y B D : Scheme.{u}}
     (f : X ⟶ S) (g : Y ⟶ S) (b : B ⟶ X) (d : D ⟶ Y)
     [IsClosedImmersion b] [IsClosedImmersion d] (U : X.Opens) :
@@ -288,8 +271,7 @@ theorem supportedFirstOpenSupport_complement {S X Y B D : Scheme.{u}}
     ← Scheme.Hom.comp_preimage, supportedFirstOpenMap_fst, supportedFirstOpenMap_snd]
 
 /-- Restriction of supported sections on the external product, with its canonical
-external-product pullback comparison. Source: Tags 09XP and 0F1E
-(blueprint: def-pur-supported-localization-comparisons). -/
+external-product pullback comparison. Source: Tags 09XP and 0F1E. -/
 noncomputable def supportedFirstExternalRestriction (A : Type (u + 1)) [CommRing A]
     {S X Y B D : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S) (b : B ⟶ X) (d : D ⟶ Y)
     [IsClosedImmersion b] [IsClosedImmersion d] (U : X.Opens)
@@ -309,10 +291,7 @@ noncomputable def supportedFirstExternalRestriction (A : Type (u + 1)) [CommRing
     (supportedFirstExternalOpenIso (ModuleCat.{u + 1} A) f g U K L)
 
 /-- The actual open-product identification is uniquely specified over the product.
-Source: Tag 09XP, affine support identification
-(blueprint: def-pur-supported-localization-comparisons).
-Proof: the inverse image of the closed cut support has open complement the indicated
-open product. The universal property of the open subscheme gives the unique isomorphism. -/
+Source: Tag 09XP, affine support identification. -/
 theorem exists_unique_supportedFirstProductComplementIso {S X Y C : Scheme.{u}}
     (f : X ⟶ S) (g : Y ⟶ S) (c : C ⟶ X) [IsClosedImmersion c] :
     ∃! e : pullback (c.openComplement.ι ≫ f) g ≅ (supportedProductImmersion f g c (𝟙
@@ -333,15 +312,14 @@ theorem exists_unique_supportedFirstProductComplementIso {S X Y C : Scheme.{u}}
   exact he.trans (IsOpenImmersion.isoOfRangeEq_hom_fac h U.ι hr).symm
 
 /-- The uniquely specified identification with the open product.
-Source: Tag 09XP (blueprint: def-pur-supported-localization-comparisons). -/
+Source: Tag 09XP. -/
 noncomputable def supportedFirstProductComplementIso {S X Y C : Scheme.{u}}
     (f : X ⟶ S) (g : Y ⟶ S) (c : C ⟶ X) [IsClosedImmersion c] :
     pullback (c.openComplement.ι ≫ f) g ≅ (supportedProductImmersion f g c (𝟙 Y)).openComplement :=
   (exists_unique_supportedFirstProductComplementIso f g c).choose
 
 /-- The product-complement isomorphism lies over the original product.
-Source: Tag 09XP (blueprint: def-pur-supported-localization-comparisons).
-Proof: this is the normalization of the unique open-subscheme isomorphism. -/
+Source: Tag 09XP. -/
 theorem supportedFirstProductComplementIso_over {S X Y C : Scheme.{u}}
     (f : X ⟶ S) (g : Y ⟶ S) (c : C ⟶ X) [IsClosedImmersion c] :
     (supportedFirstProductComplementIso f g c).hom ≫ (supportedProductImmersion f g c (𝟙
@@ -350,9 +328,7 @@ theorem supportedFirstProductComplementIso_over {S X Y C : Scheme.{u}}
   exact (exists_unique_supportedFirstProductComplementIso f g c).choose_spec.1
 
 /-- Identification of the restricted product support under that open-product isomorphism.
-Source: Tag 09XP (blueprint: def-pur-supported-localization-comparisons).
-Proof: both complements are obtained by restricting the complement of B times D to
-the product open. Apply the complement identity for base change and the over equality. -/
+Source: Tag 09XP. -/
 theorem supportedFirstProductComplement_support {S X Y B C D : Scheme.{u}}
     (f : X ⟶ S) (g : Y ⟶ S) (b : B ⟶ X) (c : C ⟶ X) (d : D ⟶ Y)
     [IsClosedImmersion b] [IsClosedImmersion c] [IsClosedImmersion d] :
@@ -366,7 +342,7 @@ theorem supportedFirstProductComplement_support {S X Y B C D : Scheme.{u}}
 
 /-- The third target term is identified with supported sections on the actual open
 product, using the canonical scheme, support and external-product comparisons.
-Source: Tags 09XP and 0F1E (blueprint: def-pur-supported-localization-comparisons). -/
+Source: Tags 09XP and 0F1E. -/
 noncomputable def supportedFirstLocalizationThirdIso (A : Type (u + 1)) [CommRing A]
     {S X Y B C D : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S)
     (b : B ⟶ X) (c : C ⟶ X) (d : D ⟶ Y)
@@ -396,14 +372,13 @@ noncomputable def supportedFirstLocalizationThirdIso (A : Type (u + 1)) [CommRin
     (supportedFirstExternalOpenIso (ModuleCat.{u + 1} A) f g c.openComplement K L)
 
 /-- The product map after restricting the Second ambient scheme.
-Source: Tag 0F1E (blueprint: def-pur-supported-localization-comparisons). -/
+Source: Tag 0F1E. -/
 noncomputable def supportedSecondOpenMap {S X Y : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S)
     (V : Y.Opens) : pullback f (V.ι ≫ g) ⟶ pullback f g :=
   pullback.map f (V.ι ≫ g) f g (𝟙 X) V.ι (𝟙 S) (by simp) (by simp)
 
 /-- The fst projection square for the product-open inclusion.
-Source: Tag 0F1E (blueprint: def-pur-supported-localization-comparisons).
-Proof: apply pullback.map_fst, and simplify the identity on the uncut factor. -/
+Source: Tag 0F1E. -/
 theorem supportedSecondOpenMap_fst {S X Y : Scheme.{u}}
     (f : X ⟶ S) (g : Y ⟶ S) (V : Y.Opens) :
     supportedSecondOpenMap f g V ≫ pullback.fst f g =
@@ -411,8 +386,7 @@ theorem supportedSecondOpenMap_fst {S X Y : Scheme.{u}}
   simp [supportedSecondOpenMap]
 
 /-- The snd projection square for the product-open inclusion.
-Source: Tag 0F1E (blueprint: def-pur-supported-localization-comparisons).
-Proof: apply pullback.map_snd, and simplify the identity on the uncut factor. -/
+Source: Tag 0F1E. -/
 theorem supportedSecondOpenMap_snd {S X Y : Scheme.{u}}
     (f : X ⟶ S) (g : Y ⟶ S) (V : Y.Opens) :
     supportedSecondOpenMap f g V ≫ pullback.snd f g =
@@ -420,9 +394,7 @@ theorem supportedSecondOpenMap_snd {S X Y : Scheme.{u}}
   simp [supportedSecondOpenMap]
 
 /-- This product map is an open immersion, by base change of the open inclusion.
-Source: Tag 0F1E (blueprint: def-pur-supported-localization-comparisons).
-Proof: identify the map with the base change of the open inclusion along the projection;
-open immersions are preserved by base change and composition with an isomorphism. -/
+Source: Tag 0F1E. -/
 @[instance]
 theorem supportedSecondOpenMap_open {S X Y : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S)
     (V : Y.Opens) : IsOpenImmersion (supportedSecondOpenMap f g V) := by
@@ -439,7 +411,7 @@ variable (E : Type v) [Category.{u + 1} E] [Abelian E]
 end
 
 /-- Canonical restriction between the cut complements, specified over the ambient scheme.
-Source: Tag 09XP (blueprint: def-pur-supported-localization-comparisons). -/
+Source: Tag 09XP. -/
 noncomputable def supportCutOpenMap {T S C C' : Scheme.{u}}
     (h : S ⟶ T) [IsOpenImmersion h] (c : C ⟶ T) (c' : C' ⟶ S)
     [IsClosedImmersion c] [IsClosedImmersion c']
@@ -449,8 +421,7 @@ noncomputable def supportCutOpenMap {T S C C' : Scheme.{u}}
     morphismRestrict h c.openComplement
 
 /-- The canonical cut-complement map has its defining composite.
-Source: Tag 09XP (blueprint: def-pur-supported-localization-comparisons).
-Proof: use morphismRestrict_ι and transport along the given equality of open subsets. -/
+Source: Tag 09XP. -/
 theorem supportCutOpenMap_over {T S C C' : Scheme.{u}}
     (h : S ⟶ T) [IsOpenImmersion h] (c : C ⟶ T) (c' : C' ⟶ S)
     [IsClosedImmersion c] [IsClosedImmersion c']
@@ -464,9 +435,7 @@ theorem supportCutOpenMap_over {T S C C' : Scheme.{u}}
   rw [← Category.assoc, transport _ _ hc]
 
 /-- Restriction between cut complements is an open immersion.
-Source: Tag 09XP (blueprint: def-pur-supported-localization-comparisons).
-Proof: its composite with the open inclusion is the composite of two open immersions.
-Cancel the open inclusion, or identify the map with the corresponding open base change. -/
+Source: Tag 09XP. -/
 @[instance]
 theorem supportCutOpenMap_open {T S C C' : Scheme.{u}}
     (h : S ⟶ T) [IsOpenImmersion h] (c : C ⟶ T) (c' : C' ⟶ S)
@@ -477,9 +446,7 @@ theorem supportCutOpenMap_open {T S C C' : Scheme.{u}}
   infer_instance
 
 /-- On the cut complements the restricted support has the inverse-image complement.
-Source: Tag 09XP (blueprint: def-pur-supported-localization-comparisons).
-Proof: use supportOnOpen_complement on both sides. The defining over equality of the
-cut-complement map and the complement equality for B identify the two inverse images. -/
+Source: Tag 09XP. -/
 theorem supportRestrictedCut_complement {T S B C B' C' : Scheme.{u}}
     (h : S ⟶ T) [IsOpenImmersion h]
     (b : B ⟶ T) (c : C ⟶ T) (b' : B' ⟶ S) (c' : C' ⟶ S)
@@ -495,7 +462,7 @@ theorem supportRestrictedCut_complement {T S B C B' C' : Scheme.{u}}
 /-- Canonical third-term restriction of a support localization triangle.
 The coefficient comparison is the composite of the two exact pullback composition
 isomorphisms for the commuting square of cut-complement inclusions.
-Source: Tag 09XP (blueprint: def-pur-supported-localization-comparisons). -/
+Source: Tag 09XP. -/
 noncomputable def supportTriangleRestrictionThird (A : Type (u + 1)) [CommRing A]
     {T S B C B' C' : Scheme.{u}} (h : S ⟶ T) [IsOpenImmersion h]
     (b : B ⟶ T) (c : C ⟶ T) (b' : B' ⟶ S) (c' : C' ⟶ S)

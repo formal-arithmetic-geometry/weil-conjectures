@@ -11,8 +11,7 @@ import WeilConjectures.AlgebraicGeometry.Weil.WeilKoszulJoinLeibniz
 
 /-! # Adjoining one generator to an exterior Koszul complex
 
-Source: Stacks Project, More on Algebra, Tag 0664, lemma-join-sequences-koszul-complex.
-(blueprint: lem-weil-pbc-koszul-adjoin-generator).
+Source: Stacks Project, More on Algebra, Tag 0664.
 -/
 
 @[expose] public noncomputable section
@@ -151,7 +150,7 @@ private theorem joinSummand_transition (r : ℕ) (a : Fin (r + 1) → A)
   · simp [koszulJoinSummand, hp]
 
 /-- Exterior multiplication commutes with all power transitions.
-Source: Stacks, Tag 0664 (blueprint: def-weil-pbc-koszul-join-graded). -/
+Source: Stacks, Tag 0664. -/
 private theorem koszulJoinGraded_transition (r : ℕ) (a : Fin (r + 1) → A) (m : ℕ) (i : ℤ) :
     (HomologicalComplex.tensorHom
       (completedKoszulTransition (A := A) 1 (fun _ ↦ a 0) m)
@@ -175,7 +174,7 @@ private theorem zeroEquiv_symm_coe (s : ℕ) (c : A) :
   rw [ExteriorAlgebra.ιMulti_zero_apply, Algebra.smul_def, mul_one]
 
 /-- Multiplication sends the tensor of the exterior units to the exterior unit.
-Source: Stacks, Tag 0664 (blueprint: def-weil-pbc-koszul-join-graded). -/
+Source: Stacks, Tag 0664. -/
 private theorem koszulJoinGraded_unit (r : ℕ) (a : Fin (r + 1) → A) (m : ℕ) :
     (ρ_ (ModuleCat.of A A)).inv ≫
         (finiteKoszulExteriorUnitZero 1 (fun _ ↦ a 0) m ⊗ₘ
@@ -254,23 +253,7 @@ private instance koszulJoinMap_isIso {A : Type (u + 1)} [CommRing A]
 
 /-- Splitting off the first exterior generator gives a tensor with a rank-one complex.
 
-Source: Stacks Project, More on Algebra, Tag 0664, lemma-join-sequences-koszul-complex.
-(blueprint: lem-weil-pbc-koszul-adjoin-generator).
-
-Proof: split the ordered free basis Fin (r+1) into its first vector and its tail.
-In exterior degree k, separate increasing k-subsets according as they contain the
-first vector. Send a wedge without it to 1 tensor the tail wedge, and a wedge
-with it to the first vector tensor the remaining wedge. The inverse concatenates
-wedges; the two maps are inverse on the ordered subset bases, over any ring.
-Contraction of a wedge with the first vector is its first coefficient times the
-tail minus the first vector wedged with tail contraction. This is exactly the
-total differential on the first degree -1 summand. Without that vector it is
-tail contraction. Extension by zero to integer degrees respects these formulas.
-The exterior transition on a subset is multiplication by the product of its
-coefficients, equal to the product of the first and tail transition factors.
-The empty subset maps to 1 tensor 1, proving the unit equation. The same basis
-maps apply when k=0 or k>r+1, the tail is empty, coefficients vanish or are units,
-and over the zero ring. No sheaf transport or dual complex is involved. -/
+Source: Stacks Project, More on Algebra, Tag 0664. -/
 theorem koszulAdjoinGenerator
     {A : Type (u + 1)} [CommRing A] (r : ℕ) (a : Fin (r + 1) → A) :
     ∃ e : ∀ m : ℕ, completedKoszulPower (A := A) (r + 1) a m ≅

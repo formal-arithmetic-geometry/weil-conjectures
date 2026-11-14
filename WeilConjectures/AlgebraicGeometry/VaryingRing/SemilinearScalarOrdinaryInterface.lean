@@ -9,9 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingProperOpe
 
 /-! # Section-normalized ordinary scalar restriction
 
-Source: Stacks Project, Tags 03CY, 03D7, 03D8, 03DA, 03DI, 03DJ and 0F7B;
-blueprint fix-prop-coherence, coefficient comparisons of adjunction units and counits
-(blueprint: def-sf-semilinear-scalar-ordinary-interface).
+Source: Stacks Project, Tags 03CY, 03D7, 03D8, 03DA, 03DI, 03DJ and 0F7B.
 
 The interface records one simultaneous package on the actual ordinary
 semilinear-system and strict-tower categories. Every comparison has a section or
@@ -36,26 +34,26 @@ variable (R : ℕ → CommRingCat.{u + 1}) (φ : ∀ n : ℕ, R (n + 1) ⟶ R n)
   (B : Type (u + 1)) [CommRing B] (ψ : ∀ n : ℕ, CommRingCat.of B ⟶ R n)
 
 /-- The given scalar map on constant sheaves, with no flatness condition.
-Source: Stacks 03CZ (blueprint: lem-sf-semilinear-scalar-ordinary-comparison). -/
+Source: Stacks 03CZ. -/
 def ordinaryScalarMap (X : Scheme.{u}) (n : ℕ) :
     StrictTower.coefficients B X ⟶ coefficients R X n :=
   (constantSheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}).map (ψ n)
 
 /-- The specified termwise ordinary inverse/direct-image adjunction.
-Source: Stacks 03D7 (blueprint: lem-sf-semilinear-scalar-ordinary-comparison). -/
+Source: Stacks 03D7. -/
 def scalarTowerAdj {X Y : Scheme.{u}} (f : X ⟶ Y) :
     StrictTower.towerPullback B f ⊣ StrictTower.towerDirectImage B f :=
   (Scheme.proEtaleRingModuleAdjunction f (StrictTower.coefficients B Y)
     (StrictTower.coefficients B X) (StrictTower.constantRingIso B f)).whiskerRight ℕᵒᵖ
 
 /-- The specified termwise ordinary open adjunction.
-Source: Stacks 03DI (blueprint: lem-sf-semilinear-scalar-ordinary-comparison). -/
+Source: Stacks 03DI. -/
 def scalarTowerOpenAdj {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     StrictTower.towerJ B j ⊣ StrictTower.towerPullback B j :=
   (StrictTower.moduleJAdj B j).whiskerRight ℕᵒᵖ
 
 /-- The ordinary constant-tower pullback square uses the recorded compositors.
-Source: Stacks 03D8 (blueprint: lem-sf-semilinear-scalar-ordinary-comparison). -/
+Source: Stacks 03D8. -/
 def scalarTowerSquare {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) (h : k ≫ p = r ≫ i) :
     StrictTower.towerPullback B i ⋙ StrictTower.towerPullback B r ≅
@@ -65,7 +63,7 @@ def scalarTowerSquare {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
       StrictTower.towerGComp B k p
 
 /-- The ordinary open compositor is the unit-preserving adjoint comparison.
-Source: Stacks 03DI (blueprint: lem-sf-semilinear-scalar-ordinary-comparison). -/
+Source: Stacks 03DI. -/
 def scalarTowerOpenComp {U V X : Scheme.{u}} (j : U ⟶ V) (k : V ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion k] :
     StrictTower.towerJ B j ⋙ StrictTower.towerJ B k ≅ StrictTower.towerJ B (j ≫ k) :=
@@ -73,9 +71,7 @@ def scalarTowerOpenComp {U V X : Scheme.{u}} (j : U ⟶ V) (k : V ⟶ X)
     (scalarTowerOpenAdj B (j ≫ k)) (StrictTower.towerGComp B j k).symm
 
 /-- Ordinary extension respects equality of the open scheme map.
-Source: Stacks 03DI (blueprint: lem-sf-semilinear-scalar-ordinary-comparison).
-Proof: substitute the equality of maps. Proof irrelevance identifies the open-immersion
-instances, so both chosen adjoints are definitionally the same functor. -/
+Source: Stacks 03DI. -/
 theorem scalarTowerOpen_congr {U X : Scheme.{u}} {f g : U ⟶ X}
     [IsOpenImmersion f] [IsOpenImmersion g] (h : f = g) :
     StrictTower.towerJ B f = StrictTower.towerJ B g := by
@@ -85,8 +81,7 @@ theorem scalarTowerOpen_congr {U X : Scheme.{u}} {f g : U ⟶ X}
 /-- All ordinary scalar comparisons with their defining normalizations. The level
 isomorphisms identify the actual restricted module sheaves, including the B action;
 transition and morphism equations retain the underlying section maps.
-Source: Stacks 03D7, 03DI and 0F7B; blueprint fix-prop-coherence
-(blueprint: lem-sf-semilinear-scalar-ordinary-comparison). -/
+Source: Stacks 03D7, 03DI and 0F7B. -/
 structure OrdinaryScalarComparison where
   /-- Restriction from actual semilinear systems to actual strict B towers. -/
   rho : ∀ X : Scheme.{u}, Modules R φ X ⥤ StrictTower.Towers B X

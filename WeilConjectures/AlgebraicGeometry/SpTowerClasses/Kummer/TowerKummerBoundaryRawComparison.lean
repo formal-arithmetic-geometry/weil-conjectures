@@ -22,11 +22,7 @@ universe u
 open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 
-/-- The named positive Kummer boundary gives the existing raw composite.
-Source: blueprint latest, geometric classes proof, clause (2).
-(blueprint: lem-sfb-kummer-boundary-raw-comparison).
-Proof: compose the proved equality with the named-complex composite and
-the proved proof-irrelevance comparison to the original literal complex. -/
+/-- The named positive Kummer boundary gives the existing raw composite. -/
 theorem towerKummerBoundary_eq_raw (l : ℕ) [Fact l.Prime] {T : Scheme.{u}}
     (k : Kummer l T)
     (f : (DerivedCategory.singleFunctor (Ab T) 0).obj (integers T) ⟶

@@ -78,9 +78,7 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.Bounded.ProEtaleBoundedCon
 /-!
 # Reconstruction of a normalized smooth-purity coefficient tower
 
-Source: blueprint main-20261015, chap-Smooth-purity,
-`sk-lem-sp-tower/_section.md`; Stacks Project, Tags 0940 and 099P
-(blueprint: proposition-sp-integral-towers).
+Source: Stacks Project, Tags 0940 and 099P.
 
 The natural index n denotes positive exponent n+1. A Roos triangle specifies the
 actual derived inverse limit and its projections. The comparison at each finite level

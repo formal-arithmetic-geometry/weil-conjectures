@@ -163,9 +163,7 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingRestricti
 /-!
 # Canonical comparisons for strict-tower realization
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-sf-cbc,
-Definition 1939 and the proof of proposition-composition-base-change-rf-shriek--4; Stacks 03DI,
-09BP, 0A07 (blueprint: def-cbc-strict-tower-realization-comparisons).
+Source: /sk-prop-sf-cbc, Definition 1939 and the proof of; Stacks 03DI, 09BP, 0A07.
 
 All comparisons below are adjunction mates or their exact derived transports.
 The strict composite is constructed before applying either Rlim or evaluation.
@@ -194,7 +192,7 @@ attribute [local instance 2000] reductionModulesHasDerivedCategory reductionTowe
 variable {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 
 /-- Constant-tower/Rlim adjunction for an arbitrary coefficient sheaf.
-Source: Stacks 079P (blueprint: lem-cbc-complete-proetale-strict-tower-realization). -/
+Source: Stacks 079P. -/
 def cbcRealizationLimitAdj (T : Scheme.{t})
     (R : Sheaf (ProEt.topology T) CommRingCat.{t + 1}) :
     (Functor.const ℕᵒᵖ : reductionModules T R ⥤ _).mapDerivedCategory ⊣ completedRlim T R :=
@@ -202,7 +200,7 @@ def cbcRealizationLimitAdj (T : Scheme.{t})
     completedTowerLimit T R).mapDerivedCategoryRightDerivedAdjunction
 
 /-- Exact transport of the identity constant-diagram comparison.
-Source: Stacks 079P (blueprint: lem-cbc-complete-proetale-strict-tower-realization). -/
+Source: Stacks 079P. -/
 def cbcRealizationConst {T S : Scheme.{t}}
     {R : Sheaf (ProEt.topology T) CommRingCat.{t + 1}}
     {R' : Sheaf (ProEt.topology S) CommRingCat.{t + 1}}
@@ -217,8 +215,7 @@ def cbcRealizationConst {T S : Scheme.{t}}
 
 /-- The canonical limit comparison, defined by the constant-diagram mate.
 This definition fixes its value on resolutions and on strict augmentations.
-Source: Stacks 09BP, 0A07
-(blueprint: lem-cbc-complete-proetale-strict-tower-realization). -/
+Source: Stacks 09BP, 0A07. -/
 def cbcRealizationLimitMap {T S : Scheme.{t}}
     {R : Sheaf (ProEt.topology T) CommRingCat.{t + 1}}
     {R' : Sheaf (ProEt.topology S) CommRingCat.{t + 1}}
@@ -445,13 +442,7 @@ private theorem cbcRealizationLimit_mate_eq
   simpa only [exactDerivedMate, Functor.mapDerivedCategorySquareIso] using hh
 
 /-- The specified mate is invertible for an exact product-preserving functor.
-Source: Stacks 09BP and the normalized strict-limit lemma
-(blueprint: lem-cbc-complete-proetale-strict-tower-realization).
-Proof: apply lem-cbc-exact-product-functor-strict-limit. Its signed Roos formula
-is induced by the canonical product map. On a K-injective tower it is the ordinary
-limit comparison followed by a target resolution; adjunction transposition shows
-that this is exactly cbcRealizationLimitMap. The normalized comparison is invertible,
-and its augmentation equation also identifies the constant-diagram mate. -/
+Source: Stacks 09BP and the normalized strict-limit lemma. -/
 theorem cbcRealizationLimitMap_isIso {T S : Scheme.{t}}
     {R : Sheaf (ProEt.topology T) CommRingCat.{t + 1}}
     {R' : Sheaf (ProEt.topology S) CommRingCat.{t + 1}}
@@ -481,12 +472,12 @@ end LimitMateNormalization
 attribute [local irreducible] limit
 
 /-- Restriction of the scalar action on the ordinary module category.
-Source: Stacks 03D3 (blueprint: lem-cbc-complete-proetale-strict-tower-realization). -/
+Source: Stacks 03D3. -/
 abbrev cbcRealizationRes (T : Scheme.{t}) :=
   proEtaleRingRestrictScalars (exchangeScalar d T)
 
 /-- The recorded open extension adjunction transported by the section-normalized map.
-Source: Stacks 03DI (blueprint: lem-cbc-complete-proetale-strict-tower-realization). -/
+Source: Stacks 03DI. -/
 def cbcRealizationOpenAdj {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j] :
     cbcOpenShriek d j inferInstance ⊣
       proEtaleRingModulePullback j (d.completedRing T) (d.completedRing U)
@@ -495,17 +486,17 @@ def cbcRealizationOpenAdj {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j] :
     (@asIso _ _ _ _ (cbcPullToRestriction d j) (cbcPullToRestriction_isIso d j)).symm
 
 /-- Termwise completed open extension on strict towers, retaining every transition.
-Source: Stacks 03DI (blueprint: lem-cbc-complete-proetale-strict-tower-realization). -/
+Source: Stacks 03DI. -/
 abbrev cbcRealizationTowerJ {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j] :=
   (Functor.whiskeringRight ℕᵒᵖ _ _).obj (cbcOpenShriek d j inferInstance)
 
 /-- The exact derived open functor on completed strict towers.
-Source: Stacks 03DJ (blueprint: lem-cbc-complete-proetale-strict-tower-realization). -/
+Source: Stacks 03DJ. -/
 abbrev cbcRealizationJ {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j] :=
   (cbcRealizationTowerJ d j).mapDerivedCategory
 
 /-- Derived adjunction on completed towers with the normalized open unit.
-Source: Stacks 03DI (blueprint: lem-cbc-complete-proetale-strict-tower-realization). -/
+Source: Stacks 03DI. -/
 def cbcRealizationTowerAdj {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j] :
     cbcRealizationJ d j ⊣ d.towerPull j :=
   Adjunction.ofNatIsoRight
@@ -514,8 +505,7 @@ def cbcRealizationTowerAdj {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j] 
 
 /-- The inverse tensor/open comparison is the transpose of the reduced open unit.
 It is one strict-tower map, not a family of maps in separate derived categories.
-Source: Stacks 03DI, 0E8I
-(blueprint: lem-cbc-complete-proetale-strict-tower-realization). -/
+Source: Stacks 03DI, 0E8I. -/
 def cbcRealizationReductionInv {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j]
     (K : d.derived U) :
     (cbcRealizationJ d j).obj ((completedReductionTower U d).obj K) ⟶
@@ -551,14 +541,7 @@ private theorem cbcTranspose_leftAdjointUniq
     Adjunction.unit_leftAdjointUniq_hom_app]
 
 /-- The tensor/open transpose is natural and invertible.
-Source: Stacks 03DI, 0E8I
-(blueprint: lem-cbc-complete-proetale-strict-tower-realization).
-Proof: naturality is naturality of the open unit and of the strict reduction/pullback
-comparison. On K-flat representatives its evaluation is the sheafified balancing map
-j_!(Q) tensor P_n to j_!(Q tensor j^*P_n). Extension preserves K-flatness: tensor
-with an acyclic ambient complex is extension of tensor with its exact restriction.
-The inverse balancing maps commute with differentials and all quotient transitions.
-Thus the inverse exists in the derived category of strict towers itself. -/
+Source: Stacks 03DI, 0E8I. -/
 theorem cbcRealizationReductionInv_properties {U T : Scheme.{t}} (j : U ⟶ T)
     [IsOpenImmersion j] :
     (∀ K : d.derived U, IsIso (cbcRealizationReductionInv d j K)) ∧
@@ -603,7 +586,7 @@ theorem cbcRealizationReductionInv_properties {U T : Scheme.{t}} (j : U ⟶ T)
     simp only [Category.assoc]
 
 /-- The canonical tensor comparison on the full strict quotient tower.
-Source: Stacks 0E8I (blueprint: lem-cbc-complete-proetale-strict-tower-realization). -/
+Source: Stacks 0E8I. -/
 def cbcRealizationReduction {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j]
     (K : d.derived U) :
     (completedReductionTower T d).obj ((cbcDerivedOpenShriek d j inferInstance).obj K) ≅
@@ -612,7 +595,7 @@ def cbcRealizationReduction {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j]
     ((cbcRealizationReductionInv_properties d j).1 K)).symm
 
 /-- Scalar restriction/open extension comparison, defined by the pullback mate.
-Source: Stacks 03DI (blueprint: lem-cbc-complete-proetale-strict-tower-realization). -/
+Source: Stacks 03DI. -/
 def cbcRealizationScalarOpenInv {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j] :
     cbcRealizationRes d U ⋙ ProEtale.StrictTower.moduleJ A j ⟶
       cbcOpenShriek d j inferInstance ⋙ cbcRealizationRes d T :=
@@ -633,13 +616,7 @@ section ScalarOpenInvertibility
 attribute [local irreducible] cbcRealizationOpenAdj
 
 /-- The scalar/open mate is invertible and preserves the normalized open adjunction.
-Source: Stacks 03DI
-(blueprint: lem-cbc-complete-proetale-strict-tower-realization).
-Proof: the extension presheaf has the same direct-sum summands and restriction maps
-after scalar restriction. Its action is the completed action composed with the scalar
-map. Sheafification therefore gives the identity on the underlying additive sheaf.
-The open unit includes the structure-map summand and the counit evaluates that
-summand; both are unchanged. Its transpose is the displayed mate, so it is invertible. -/
+Source: Stacks 03DI. -/
 theorem cbcRealizationScalarOpenInv_isIso {U T : Scheme.{t}} (j : U ⟶ T)
     [IsOpenImmersion j] : IsIso (cbcRealizationScalarOpenInv d j) := by
   let R := exchangeConstantRing T A
@@ -703,7 +680,7 @@ theorem cbcRealizationScalarOpenInv_isIso {U T : Scheme.{t}} (j : U ⟶ T)
 end ScalarOpenInvertibility
 
 /-- Canonical scalar/open comparison on ordinary modules.
-Source: Stacks 03DI (blueprint: lem-cbc-complete-proetale-strict-tower-realization). -/
+Source: Stacks 03DI. -/
 def cbcRealizationScalarOpen {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j] :
     cbcOpenShriek d j inferInstance ⋙ cbcRealizationRes d T ≅
       cbcRealizationRes d U ⋙ ProEtale.StrictTower.moduleJ A j :=
@@ -711,7 +688,7 @@ def cbcRealizationScalarOpen {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j
     (cbcRealizationScalarOpenInv_isIso d j)).symm
 
 /-- Apply scalar/open comparison to a whole strict diagram, then derive exactly.
-Source: Stacks 03DI (blueprint: lem-cbc-complete-proetale-strict-tower-realization). -/
+Source: Stacks 03DI. -/
 def cbcRealizationTowerScalarOpen {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j] :
     cbcRealizationJ d j ⋙ exchangeTowerRes d T ≅
       exchangeTowerRes d U ⋙ ProEtale.StrictTower.J A j :=
@@ -723,7 +700,7 @@ def cbcRealizationTowerScalarOpen {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmers
     (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- Scalar/open comparison on single derived objects, by exact descent.
-Source: Stacks 03DI (blueprint: lem-cbc-complete-proetale-strict-tower-realization). -/
+Source: Stacks 03DI. -/
 def cbcRealizationDerivedScalarOpen {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j] :
     cbcDerivedOpenShriek d j inferInstance ⋙ (cbcRealizationRes d T).mapDerivedCategory ≅
       (cbcRealizationRes d U).mapDerivedCategory ⋙
@@ -733,8 +710,7 @@ def cbcRealizationDerivedScalarOpen {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImme
       (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The quotient/open tensor identification followed by scalar/open identification.
-Source: Stacks 03DI, 0E8I
-(blueprint: lem-cbc-complete-proetale-strict-tower-realization). -/
+Source: Stacks 03DI, 0E8I. -/
 def cbcRealizationQuotientOpen {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j]
     (K : d.derived U) :
     (exchangeTowerRes d T).obj
@@ -759,13 +735,7 @@ private theorem cbcRealizationRestrictionForgetsProducts
 -- The cached universe-polymorphic sheafification instance gets stuck on the coefficient universe.
 attribute [-instance] SheafOfModules.RingedCoefficientProjection.cachedSheafifyModules in
 /-- Products are preserved by scalar restriction and by quasi-compact constant open extension.
-Source: Stacks 03D3, 09BP
-(blueprint: lem-cbc-complete-proetale-strict-tower-realization).
-Proof: restriction leaves the underlying additive sheaves and all limits unchanged.
-For open extension, use j!N = ker(j*N to i*i^-1j*N). Direct images preserve
-products sectionwise and closed inverse image preserves products on the pro-etale
-site. Kernels commute with products. These are the canonical projection maps,
-including for the empty product; no qcqs hypothesis on the ambient scheme is used. -/
+Source: Stacks 03D3, 09BP. -/
 theorem cbcRealizationProducts (T : Scheme.{t}) :
     (∀ M : ℕ → reductionModules T (d.completedRing T),
       IsIso (piComparison (cbcRealizationRes d T) M)) ∧
@@ -826,7 +796,7 @@ theorem cbcRealizationProducts (T : Scheme.{t}) :
     infer_instance
 
 /-- The specified scalar-restriction/Rlim isomorphism.
-Source: Stacks 03D3 (blueprint: lem-cbc-complete-proetale-strict-tower-realization). -/
+Source: Stacks 03D3. -/
 def cbcRealizationResLimit (T : Scheme.{t}) :
     completedRlim T (d.completedRing T) ⋙ (cbcRealizationRes d T).mapDerivedCategory ≅
       exchangeTowerRes d T ⋙ completedRlim T (exchangeConstantRing T A) :=
@@ -834,7 +804,7 @@ def cbcRealizationResLimit (T : Scheme.{t}) :
     (cbcRealizationLimitMap_isIso _ (cbcRealizationProducts d T).1)
 
 /-- The specified constant open-extension/Rlim isomorphism.
-Source: Stacks 09BP (blueprint: lem-cbc-complete-proetale-strict-tower-realization). -/
+Source: Stacks 09BP. -/
 def cbcRealizationOpenLimit (d : AdicCoefficientDatum A) {U T : Scheme.{t}} (j : U ⟶ T)
     [IsOpenImmersion j] [QuasiCompact j] :
     completedRlim U (exchangeConstantRing U A) ⋙
@@ -845,7 +815,7 @@ def cbcRealizationOpenLimit (d : AdicCoefficientDatum A) {U T : Scheme.{t}} (j :
 
 /-- Direct-image/Rlim comparison for constant coefficients, as the conjugate
 of the identity constant-diagram/pullback comparison, including both units.
-Source: Stacks 0A07 (blueprint: lem-cbc-complete-proetale-strict-tower-realization). -/
+Source: Stacks 0A07. -/
 def cbcRealizationPushLimit {U T : Scheme.{t}} (f : U ⟶ T) :
     completedRlim U (exchangeConstantRing U A) ⋙
         (ProEtale.StrictTower.moduleDirectImage A f).rightDerivedFunctor ≅
@@ -858,7 +828,7 @@ def cbcRealizationPushLimit {U T : Scheme.{t}} (f : U ⟶ T) :
     (cbcRealizationConst (ProEtale.StrictTower.modulePullback A f)).symm
 
 /-- The single-object direct-image/scalar comparison, with its published universal units.
-Source: Stacks 0D6E (blueprint: lem-cbc-complete-proetale-strict-tower-realization). -/
+Source: Stacks 0D6E. -/
 def cbcRealizationResPush {U T : Scheme.{t}} (f : U ⟶ T) :
     d.push f ⋙ (cbcRealizationRes d T).mapDerivedCategory ≅
       (cbcRealizationRes d U).mapDerivedCategory ⋙
@@ -870,8 +840,7 @@ def cbcRealizationResPush {U T : Scheme.{t}} (f : U ⟶ T) :
     (exchangeConstantIso f A) (d.integralRingIso f) (exchangeScalar_comm d f)
 
 /-- Canonical constant-tower presentation of completed pullback.
-Source: Stacks 099M and finite reduction comparison
-(blueprint: lem-cbc-complete-proetale-strict-tower-realization). -/
+Source: Stacks 099M and finite reduction comparison. -/
 def cbcRealizationPullLimit {U T : Scheme.{t}} (f : U ⟶ T) (K : d.derived T) :
     (cbcRealizationRes d U).mapDerivedCategory.obj ((d.completedPull f).obj K) ≅
       (completedRlim U (exchangeConstantRing U A)).obj
@@ -886,9 +855,7 @@ variable {X' X Y' Y : Scheme.{t}} {f : X ⟶ Y} {f' : X' ⟶ Y'}
   {g : Y' ⟶ Y} {g' : X' ⟶ X}
 
 /-- The actual strict-tower proper/open composite, defined before evaluation.
-The proper mate is the normalization dependency's mate on constant A towers.
-Source: blueprint Definition 1939 and strict normalization, final paragraph
-(blueprint: lem-cbc-complete-proetale-strict-tower-realization). -/
+The proper mate is the normalization dependency's mate on constant A towers. -/
 def cbcRealizationStrict (c : Compactification f) (c' : Compactification f')
     (gbar : c'.Z ⟶ c.Z) (sp : ChosenCartesianSquare gbar c'.g c.g g)
     (sj : OpenImmersionSquare g' c'.i c.i gbar)
@@ -904,9 +871,7 @@ def cbcRealizationStrict (c : Compactification f) (c' : Compactification f')
         (IsPullback.of_iso_pullback sj.toCommSq sj.isoPullback sj.hom_fst sj.hom_snd)).hom.app M)
 
 /-- Source identification: specified strict projection, scalar/limit comparison,
-proper corner b, and canonical quotient/open tensor comparison, in that order.
-Source: blueprint strict realization, proof step 9
-(blueprint: lem-cbc-complete-proetale-strict-tower-realization). -/
+proper corner b, and canonical quotient/open tensor comparison, in that order. -/
 def cbcRealizationSource (c : Compactification f) (c' : Compactification f')
     (gbar : c'.Z ⟶ c.Z) (K : d.derived X) :
     (cbcRealizationRes d Y').mapDerivedCategory.obj
@@ -928,9 +893,7 @@ def cbcRealizationSource (c : Compactification f) (c' : Compactification f')
           ((ProEtale.StrictTower.R A c.g).mapIso (cbcRealizationQuotientOpen d c.i K)))
 
 /-- Target identification: inverse direct-image/limit and extension/limit maps,
-followed by inverse completed-pullback, scalar/open, and scalar/direct-image maps.
-Source: blueprint strict realization, proof step 9
-(blueprint: lem-cbc-complete-proetale-strict-tower-realization). -/
+followed by inverse completed-pullback, scalar/open, and scalar/direct-image maps. -/
 def cbcRealizationTarget (c' : Compactification f') (g' : X' ⟶ X)
     [qc : QuasiCompact c'.i] (K : d.derived X) :
     (completedRlim Y' (exchangeConstantRing Y' A)).obj
@@ -966,8 +929,7 @@ attribute [local irreducible] cbcRealizationResLimit cbcRealizationPushLimit
   cbcRealizationTarget
 
 /-- The published completed open factor, with its derived quasi-compactness instance.
-Source: blueprint Definition 1939
-(blueprint: lem-cbc-complete-proetale-strict-tower-realization). -/
+Source: blueprint Definition 1939. -/
 abbrev cbcRealizationOpenFactor [QuasiCompact f]
     (c : Compactification f) (c' : Compactification f') (gbar : c'.Z ⟶ c.Z)
     (sj : OpenImmersionSquare g' c'.i c.i gbar)

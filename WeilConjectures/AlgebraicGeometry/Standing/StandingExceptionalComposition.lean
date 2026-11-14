@@ -15,10 +15,7 @@ public import Mathlib.CategoryTheory.Adjunction.Basic
 
 /-!
 # Composition comparison for the standing exceptional inverse images
-
-Source: main-20261015 blueprint, sec-smooth-purity/sk-prop-sp-composition,
-pur9-def-upper-shriek-composition.md (blueprint:
-proposition-composition-open-restriction-compactifications-f--1). The comparison is the transpose of
+ The comparison is the transpose of
 the canonical compact-support compositor followed by the standing counit. The relative adjunctions
 use the canonical comparison; no right adjoint on the ambient pro-etale category is assumed.
 -/
@@ -35,9 +32,7 @@ namespace AlgebraicGeometry.ProEtale
 comparison of thm-sf-ambient-adjoint-class. A retained etale-origin representative is
 used only to compute the uniquely determined transpose: conjugate by its isomorphism,
 apply the fixed compact-support comparison, the comparison adjunction, the ordinary
-etale adjunction, and fully faithful comparison pullback, in that order.
-Source: blueprint thm-sf-ambient-adjoint-class, clause (2), as used in the definition
-of c_{g,f,L} (blueprint: proposition-composition-open-restriction-compactifications-f--1). -/
+etale adjunction, and fully faithful comparison pullback, in that order. -/
 def standingExceptionalHomEquiv (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] [CompactSpace Y]
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
@@ -71,9 +66,7 @@ This order is exactly Adjunction.comp_homEquiv for def-weil-pbc-composite-adjunc
 The output is a morphism (gf)^!L to f^!g^!L in the ambient small pro-etale derived
 category, written in rightDerivedUpperShriek form (isomorphic to the recorded
 sfFiniteExceptionalAt functor values at the chosen compactifications, both being right
-adjoints of the etale compact-support pushforward).
-Source: main-20261015 blueprint, proposition-compatibility-purity-composition, definition of
-c_{g,f,L} (blueprint: proposition-composition-open-restriction-compactifications-f--1). -/
+adjoints of the etale compact-support pushforward). -/
 def standingExceptionalComposition (P : WeilConjectures.PurityFiniteSetting.{u})
     {X Y S : Scheme.{u}}
     [X.Over (Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))]

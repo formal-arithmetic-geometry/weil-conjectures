@@ -10,8 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingProperOpe
 /-!
 # The two factors of the clopen inverse-image arrow
 
-Source: Stacks Project, Tag 0F7B, open case
-(blueprint: def-sp-varying-ring-clopen-arrow-factors).
+Source: Stacks Project, Tag 0F7B, open case.
 The cartesian open comparison and the subsequent clopen section projection are
 kept separate, before taking proper-adjunction mates.
 -/
@@ -26,7 +25,7 @@ namespace AlgebraicGeometry.ProEtale.VaryingRing
 variable (R : ℕ → CommRingCat.{u + 1}) (φ : ∀ n : ℕ, R (n + 1) ⟶ R n)
 
 /-- Exact localization of a transformation between two composites.
-Source: Stacks 05RU (blueprint: def-sp-varying-ring-clopen-arrow-factors). -/
+Source: Stacks 05RU. -/
 def localizedArrow
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
     [Abelian A] [Abelian B] [Abelian C] [Abelian D]
@@ -73,7 +72,7 @@ private theorem localizedArrow_comp
     Localization.comp_liftNatTrans_assoc]
 
 /-- The exact cartesian open comparison, prior to the clopen projection.
-Source: Stacks 09AE (blueprint: def-sp-varying-ring-clopen-arrow-factors). -/
+Source: Stacks 09AE. -/
 def openBaseChange {U' U X' X : Scheme.{u}}
     (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : a ≫ j = j' ≫ g)
@@ -82,7 +81,7 @@ def openBaseChange {U' U X' X : Scheme.{u}}
     (moduleBeta R φ a j' j g h hsq).hom
 
 /-- The clopen section projection, with its outgoing open and pullback compositors.
-Source: Stacks 0F7B (blueprint: def-sp-varying-ring-clopen-arrow-factors). -/
+Source: Stacks 0F7B. -/
 def moduleSectionArrow {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
@@ -104,7 +103,7 @@ def moduleSectionArrow {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
       (eqToIso (congrArg (pull R φ) (pullback.lift_snd k r h))).hom) (extension R φ k)
 
 /-- Exact localization of the clopen section projection.
-Source: Stacks 0F7B (blueprint: def-sp-varying-ring-clopen-arrow-factors). -/
+Source: Stacks 0F7B. -/
 def sectionArrow {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
@@ -114,7 +113,7 @@ def sectionArrow {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (pull R φ r) (extension R φ k) (moduleSectionArrow R φ k r p i h)
 
 /-- The same clopen section factor in the existing strict-tower calculus.
-Source: Stacks 0F7B (blueprint: def-sp-varying-ring-clopen-arrow-factors). -/
+Source: Stacks 0F7B. -/
 def strictSectionArrow (B : Type (u + 1)) [CommRing B]
     {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
@@ -145,9 +144,7 @@ def strictSectionArrow (B : Type (u + 1)) [CommRing B]
         (eqToIso (congrArg (StrictTower.G B) (pullback.lift_snd k r h))).hom) (StrictTower.J B k)
 
 /-- The varying-system arrow is the composite of its two separately localized factors.
-Source: Stacks 0F7B (blueprint: def-sp-varying-ring-clopen-arrow-factors).
-Proof: localization preserves composition; the original moduleAlpha is the open
-base-change comparison followed by moduleSectionArrow, with the same associators. -/
+Source: Stacks 0F7B. -/
 theorem alpha_factorization {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
@@ -160,8 +157,7 @@ theorem alpha_factorization {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
   rfl
 
 /-- The strict-tower arrow has the identical two-factor expression.
-Source: Stacks 0F7B (blueprint: def-sp-varying-ring-clopen-arrow-factors).
-Proof: expand the two definitions and associate their composites. -/
+Source: Stacks 0F7B. -/
 theorem strictAlpha_factorization (B : Type (u + 1)) [CommRing B]
     {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]

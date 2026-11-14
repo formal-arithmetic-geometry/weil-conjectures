@@ -77,19 +77,7 @@ private theorem normalizedDerivedExtension_arrow
       (shiftFunctorAdd (DerivedCategory C) (1 : ℤ) 1).inv.app
         ((DerivedCategory.singleFunctor C 0).obj s.X₁)) he ht f
 
-/-- The integral reduction of any arrow is its normalized boundary composite.
-
-Source: blueprint latest, `sk-prop-sp-tower-geometric-classes.proof.md`, clause (2),
-integral reduction and the positive Kummer connecting morphism.
-(blueprint: lem-sfb-chern-data-integral-normalization).
-
-Proof: move the source-normalized integer generator through the derived
-adjunction. Naturality cancels the unit comparison and moves the given arrow
-outside the adjunct. The target normalization identifies the remaining adjunct
-with the positive Kummer boundary, including its shift-addition comparison.
-This is a calculation with the actual reduction model of c. Only the first two
-fields of the supplied normalization record are used. Its scalar field and finite
-evaluation play no role in this calculation. -/
+/-- The integral reduction of any arrow is its normalized boundary composite. -/
 theorem integralArrow_of_normalized (l : ℕ) [Fact l.Prime]
     {T : Scheme.{u}}
     (R A : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1})

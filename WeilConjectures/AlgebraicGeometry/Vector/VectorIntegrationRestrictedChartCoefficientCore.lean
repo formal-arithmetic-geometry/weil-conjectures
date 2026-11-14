@@ -168,8 +168,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionBaseChange
 
 /-! # Affine tower coefficient base-change recursion
-
-(blueprint: lem-amb-vector-integration-restricted-chart-coefficient-core).
+.
 -/
 
 @[expose] public noncomputable section
@@ -591,8 +590,7 @@ canonical descent comparison for the ordered Tate coefficient. This is the
 coefficient recursion part of the restricted-chart calculation; it has no
 vector bundle or frame. The proof is by induction on the ordered tower length,
 using derived inverse-image identity coherence at zero, one-coordinate descent
-naturality, and monoidal shifted-line comparison at a successor.
-(blueprint: lem-amb-vector-integration-restricted-chart-coefficient-core). -/
+naturality, and monoidal shifted-line comparison at a successor. -/
 theorem affineTraceRightBaseChange_unit_coefficient
     (A : Type (u + 1)) [CommRing A] (N : ℕ) (hA : (N : A) = 0)
     (t : OrdinaryFiniteTwistTransport A N hA)

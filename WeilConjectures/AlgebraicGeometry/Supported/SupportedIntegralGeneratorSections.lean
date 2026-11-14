@@ -9,8 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.Cartier.CartierReductionDataSupp
 import all WeilConjectures.AlgebraicGeometry.Cartier.CartierProIntegralScalar
 
 /-! # Constant sections of the supported integral generator
-
-Source: the source normalization in the diagonal tower construction, step (3).
 -/
 
 @[expose] public noncomputable section
@@ -237,25 +235,7 @@ private theorem supportedGenerator_eq (A : Type (u + 1)) [CommRing A]
   erw [reassoc_of% hc']
   rfl
 
-/-- The supported integral generator sends a constant integer to its coefficient cast.
-
-Source: diagonal tower system proof, step (3), source paragraph; the comparison
-constant-generator calculation in the Cartier site-comparison proof.
-(blueprint: new-sfb-supported-integral-generator-sections).
-
-Proof: first evaluate the etale integral generator using the constant-sheaf/global-
-sections adjunction. At the terminal object it is the coefficient integer cast,
-by the defining hom equivalence, and naturality gives the same formula on every
-etale object. Transpose the pro-etale generator equation through the comparison
-adjunction. The unit equation of the supported-source base-change mate reduces
-it to direct image of this etale constant-generator equation. The constant-sheaf
-comparison is the unique comparison of the two constant/global-sections left
-adjoints, so its unit equation carries the etale constant section to the identical
-pro-etale constant section. The direct-image comparisons are the identity on
-sections at the base-changed test object. Cancel the invertible supported integral
-source comparison. This gives the asserted formula on every pro-etale test object.
-No residue ring, reduction presentation, or completed coefficient is involved;
-the formula also holds for zero rings and empty schemes. -/
+/-- The supported integral generator sends a constant integer to its coefficient cast. -/
 theorem supported_integral_generator_sections (A : Type (u + 1)) [CommRing A]
     {X Z : Scheme.{u}} (i : X ⟶ Z) [IsClosedImmersion i]
     (U : Z.ProEtᵒᵖ) (n : ℤ) :

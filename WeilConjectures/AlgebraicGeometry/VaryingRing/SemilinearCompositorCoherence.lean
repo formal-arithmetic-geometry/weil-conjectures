@@ -16,8 +16,7 @@ import all WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingProperOpenPa
 /-!
 # Coherence of normalized semilinear compositors
 
-Source: Stacks Project, Tags 0D6D and 0D6E; section-normalized coherence on ringed
-sequence sites (blueprint: lem-sf-semilinear-compositor-coherence).
+Source: Stacks Project, Tags 0D6D and 0D6E.
 
 The inverse-image functor denoted `P` in the node is `VaryingRing.G`; its direct-image
 functor `S` is `VaryingRing.P`. The forward inverse-image compositor is `gComp.inv`.
@@ -883,45 +882,7 @@ private theorem coherence_clause_9 :
 attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- Associativity and both unit laws for the three normalized semilinear compositors,
 including transport along arbitrary equalities identifying intermediate and total maps.
-Source: Stacks Project, Tags 0D6D, 0D6E, 0B65, 0DV0 and 04VG
-(blueprint: lem-sf-semilinear-compositor-coherence).
-
-Proof:
-1. The two ordinary direct-image pastings restrict sections along the same map of
-iterated fibre products: their projections agree. The fibre-product universal property
-(def-pc-fibre-product) identifies these maps. The same projection check identifies
-identity composition with the graph-normalized modulePId.
-2. Apply lem-trf-adjoint-composition-coherence to the ordinary inverse-image adjoints,
-using the inverses of these section comparisons on the right adjoints. The composite
-adjunction is def-weil-pbc-composite-adjunction. Unit-compatible uniqueness from
-situation-conventions identifies the resulting comparisons with
-moduleGComp, hence proves their associativity.
-3. For identities, insert the explicit composite-adjunction unit. Naturality of the
-ordinary unit and modulePId makes each whiskered identity comparison satisfy the
-same unit equation as moduleGComp. Unit-compatible uniqueness gives both unit laws.
-No two distinct adjunction structures are identified.
-4. Localize the exact ordinary inverse images termwise, using
-situation-conventions. After postcomposition by the
-factorization isomorphism, both pastings reduce to the corresponding ordinary pastings;
-naturality cancels the intermediate factorization maps. They agree by steps 2 and 3.
-Part (3) of lem-weil-pbc-localization-universal-property promotes equality on every
-localized complex to equality on the entire unbounded derived category.
-5. Invert inverse-image coherence and take its conjugate under the fixed derived
-adjunctions (def-weil-pbc-adjunction-conjugate). Composition of conjugates and
-lem-weil-pbc-mate-pasting (2) identify the two pastings with the pComp pastings.
-Apply the same argument to inverse unit equations, using mate-pasting (4) for identities.
-6. Apply lem-trf-adjoint-composition-coherence to ordinary open extension left adjoints
-and inverse-image right adjoints, using step 2 for the right-adjoint hypothesis.
-Unit-compatible uniqueness identifies the result with moduleJComp. Repeat step 3's
-unit calculation for these open adjunctions to obtain both ordinary open unit laws.
-7. Localize these exact open functors as in step 4. Ordinary open coherence becomes
-jComp coherence by the factorization isomorphisms and localization extensionality.
-Localized units have the same unit equation as jId; unit-compatible uniqueness
-identifies them with this specified derived identity normalization.
-8. Eliminate the supplied equalities of intermediate and total scheme maps, one at
-a time. The transports then become identities and the claims are precisely the
-coherence and unit equations already obtained. Proof irrelevance identifies the
-open-immersion instances under this transport. -/
+Source: Stacks Project, Tags 0D6D, 0D6E, 0B65, 0DV0 and 04VG. -/
 theorem semilinear_compositor_coherence
     (R : ℕ → CommRingCat.{u + 1}) (φ : ∀ n : ℕ, R (n + 1) ⟶ R n) :
     (∀ {X Y Z T : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ T)

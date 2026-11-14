@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassTwisting
 
 /-! # Projective for canonical tower classes
-
-Source: blueprint main-20261015, chap-Smooth-purity,
-`sk-prop-sp-tower-geometric-classes` (blueprint: def-sp-tower-class-projective).
 -/
 
 @[expose] public noncomputable section
@@ -34,8 +31,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- The geometric data used by the projective-line splitting. All functors are the
-recorded proper tower direct image and its geometric inverse-image adjunction.
-Source: classes (4) (blueprint: def-sp-tower-class-projective). -/
+recorded proper tower direct image and its geometric inverse-image adjunction. -/
 structure Projective (b : SpTowerShriek.Base l E) (S : Scheme.{u})
     (cS : Chern l E S) (cP : Chern l E (ProjectiveLine S))
     (tS : Twisting l E cS) (tP : Twisting l E cP) where
@@ -50,8 +46,7 @@ structure Projective (b : SpTowerShriek.Base l E) (S : Scheme.{u})
 attribute [instance] Projective.projection_iso
 
 /-- Twisting and shifting Rq_* of the coefficient unit: the projection mate, the
-ordinary Tate-line identification, and the derived shift comparison in that order.
-Source: classes (4), trace definition (blueprint: def-sp-tower-class-projective). -/
+ordinary Tate-line identification, and the derived shift comparison in that order. -/
 def Projective.twistedPush {b : SpTowerShriek.Base l E} {S : Scheme.{u}}
     {cS : Chern l E S} {cP : Chern l E (ProjectiveLine S)}
     {tS : Twisting l E cS} {tP : Twisting l E cP}
@@ -66,8 +61,7 @@ def Projective.twistedPush {b : SpTowerShriek.Base l E} {S : Scheme.{u}}
       ((SpTowerShriek.push l E b p.geometry).mapIso (tP.positiveUnit l E)) ≪≫
     ((SpTowerShriek.push l E b p.geometry).commShiftIso (2 : ℤ)).symm.app (line l E cP)
 
-/-- The adjoint of c1(O_P(1)), using the actual coefficient pullback unit.
-Source: classes (4) (blueprint: def-sp-tower-class-projective). -/
+/-- The adjoint of c1(O_P(1)), using the actual coefficient pullback unit. -/
 def Projective.chernAdjoint {b : SpTowerShriek.Base l E} {S : Scheme.{u}}
     {cS : Chern l E S} {cP : Chern l E (ProjectiveLine S)}
     {tS : Twisting l E cS} {tP : Twisting l E cP}
@@ -79,8 +73,7 @@ def Projective.chernAdjoint {b : SpTowerShriek.Base l E} {S : Scheme.{u}}
       firstChern l E cP (hyperplanePic S))
 
 /-- Cancellation of positive twisting followed by negative twisting, obtained by
-localizing the specified ordinary tensor/Hom unit isomorphism.
-Source: classes (4), untwisting the Chern arrow (blueprint: def-sp-tower-class-projective). -/
+localizing the specified ordinary tensor/Hom unit isomorphism. -/
 def Twisting.cancelNegative {T : Scheme.{u}} {c : Chern l E T} (t : Twisting l E c) :
     t.T l E ⋙ t.N l E ≅ 𝟭 (D T (Arings l E T)) :=
   Functor.mapDerivedCategoryCompIso t.equivalence.functor t.equivalence.inverse ≪≫
@@ -89,8 +82,7 @@ def Twisting.cancelNegative {T : Scheme.{u}} {c : Chern l E T} (t : Twisting l E
 
 /-- The second summand is obtained by untwisting the actual adjoint Chern class.
 The inverse tensor/Hom adjunction and shift cancellation specify its orientation;
-it is not a free morphism whose finite components alone are prescribed.
-Source: classes (4), construction of b_q (blueprint: def-sp-tower-class-projective). -/
+it is not a free morphism whose finite components alone are prescribed. -/
 def Projective.second {b : SpTowerShriek.Base l E} {S : Scheme.{u}}
     {cS : Chern l E S} {cP : Chern l E (ProjectiveLine S)}
     {tS : Twisting l E cS} {tP : Twisting l E cP}
@@ -112,8 +104,7 @@ def Projective.second {b : SpTowerShriek.Base l E} {S : Scheme.{u}}
         (unit (ProjectiveLine S) (Arings l E (ProjectiveLine S))))
 
 /-- The specified b_q is the biproduct map with the unit first and the untwisted
-Chern class second.
-Source: classes (4) (blueprint: def-sp-tower-class-projective). -/
+Chern class second. -/
 def Projective.bq {b : SpTowerShriek.Base l E} {S : Scheme.{u}}
     {cS : Chern l E S} {cP : Chern l E (ProjectiveLine S)}
     {tS : Twisting l E cS} {tP : Twisting l E cP}
@@ -124,8 +115,7 @@ def Projective.bq {b : SpTowerShriek.Base l E} {S : Scheme.{u}}
   biprod.desc (unitArrow l E p.coefficientPullback) (p.second l E)
 
 /-- The trace is literally positive twisting and shifting of b_q inverse,
-followed by its second projection and the canonical dual-line evaluation.
-Source: classes (4), trace normalization (blueprint: def-sp-tower-class-projective). -/
+followed by its second projection and the canonical dual-line evaluation. -/
 def Projective.trace {b : SpTowerShriek.Base l E} {S : Scheme.{u}}
     {cS : Chern l E S} {cP : Chern l E (ProjectiveLine S)}
     {tS : Twisting l E cS} {tP : Twisting l E cP}
@@ -141,8 +131,7 @@ def Projective.trace {b : SpTowerShriek.Base l E} {S : Scheme.{u}}
     (shiftFunctorCompIsoId (D S (Arings l E S)) (-2 : ℤ) 2 (by decide)).hom.app
       ((tS.T l E).obj (inverseLine l E cS)) ≫ (tS.contract l E).hom
 
-/-- The exact ordinary Tate-line pullback, localized and shifted by two.
-Source: classes (4) (blueprint: def-sp-tower-class-projective). -/
+/-- The exact ordinary Tate-line pullback, localized and shifted by two. -/
 def LinePullback.derivedIso {b : SpTowerShriek.Base l E} {X Y : Scheme.{u}}
     {f : X ⟶ Y} {g : SpTowerShriek.Geometry l E b f}
     {cY : Chern l E Y} {cX : Chern l E X} (p : LinePullback l E f g cY cX) :
@@ -150,8 +139,7 @@ def LinePullback.derivedIso {b : SpTowerShriek.Base l E} {X Y : Scheme.{u}}
   (g.pull.mapDerivedCategorySingleFunctor 0).app _ ≪≫
     (DerivedCategory.singleFunctor _ 0).mapIso p.iso
 
-/-- The unit component of the twisted projective-line decomposition.
-Source: classes (4), finite trace normalization (blueprint: def-sp-tower-class-projective). -/
+/-- The unit component of the twisted projective-line decomposition. -/
 def Projective.twistedUnit {b : SpTowerShriek.Base l E} {S : Scheme.{u}}
     {cS : Chern l E S} {cP : Chern l E (ProjectiveLine S)}
     {tS : Twisting l E cS} {tP : Twisting l E cP}

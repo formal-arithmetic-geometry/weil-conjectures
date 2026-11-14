@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Weil.WeilKoszulJoinGraded
 /-! # Positive-degree vanishing for graded exterior multiplication
 
 The positive-degree part of `koszulJoinGraded_bijective` is a zero-object
-argument. (blueprint: new-weil-pbc-koszul-join-graded-positive)
+argument.
 -/
 
 @[expose] public section

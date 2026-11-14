@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Finite.FiniteIntegralCategoryWitnesses
 
 /-! # The integral Kummer composite and exact evaluation
-
-Source: diagonal-tower trace (1), finite Kummer classes and exact comparison.
-(blueprint: def-sfb-finite-integral-tower-boundary).
 -/
 
 @[expose] public noncomputable section
@@ -30,9 +27,7 @@ attribute [local irreducible] Functor.mapDerivedCategory Ext.homEquiv
   HasDerivedCategory.standard DerivedCategory.singleFunctors
   integerComparison cartierRootsComparison cartierUnitsComparison
 
-/-- The integral tower boundary, with its single-complex endpoints cached.
-Source: the Yoneda composite defining the Kummer first Chern class
-(blueprint: def-sfb-finite-integral-tower-boundary). -/
+/-- The integral tower boundary, with its single-complex endpoints cached. -/
 def finiteIntegralTowerBoundary (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
     (k : Kummer l T) (L : T.Pic) :
     (DerivedCategory.singleFunctor (Ab T) 0).obj (integers T) ⟶
@@ -40,9 +35,7 @@ def finiteIntegralTowerBoundary (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
   kummerComposite (C := Ab T) (ShortComplex.mk k.inclusion k.power k.zero) k.exact
     (lineBundleClass T L)
 
-/-- Exact evaluation of the integral tower boundary.
-Source: evaluation of the Kummer composite at a positive coefficient level
-(blueprint: def-sfb-finite-integral-tower-boundary). -/
+/-- Exact evaluation of the integral tower boundary. -/
 def finiteEvaluatedIntegralBoundary (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
     (k : Kummer l T) (n : ℕ) (L : T.Pic) :
     FiniteIntegralBoundaryArrow l T n :=

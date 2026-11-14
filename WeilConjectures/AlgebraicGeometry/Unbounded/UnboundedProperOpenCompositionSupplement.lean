@@ -637,24 +637,6 @@ private theorem ordinary_vertical (Λ : Type (u + 1)) [CommRing Λ]
 
 /-- The two pasting equations for normalized unbounded proper/open interchange.
 Source: Stacks Project, Tags 0F7C and 0F7D.
-(blueprint: lem-amb-unbounded-proper-open-composition).
-
-Proof:
-For the ordinary vertical equation, postcompose both sides with the support inclusion
-into the common composite direct image. It is monic. Apply the assumed normalization
-for each square, naturality of the direct-image compositor and of the open support
-inclusion, and associativity of the direct-image compositors. This identifies the maps.
-For the unbounded vertical equation, first treat six abstract abelian categories with
-proper-edge functors G1,G2 and H1,H2 preserving K-injectives. Their iterated derived unit
-is invertible on K-injectives and hence is a right-derivation unit, even after exact
-extension by zero. Right-derived transformation uniqueness reduces the desired equality
-to the unit equations. Expand the composite unit, move the square transformations past
-the units by naturality, use the three assumed normalizations, and the two compositor
-factorization equations. The ordinary equation then identifies the residual maps.
-The geometric lowerStar compositors agree with these derived compositors because both
-are conjugates of upperStar composition under the exact-inverse-image adjunctions.
-Insert their inverses to obtain the displayed vertical equation. The horizontal equation
-is the separate Tag 0F7D result, applied to the same normalized families.
 -/
 theorem unboundedProperOpenComposition_of_normalization (A : Type (u + 1)) [CommRing A] [Finite A]
     (θ : ∀ {U V W Z : Scheme.{u}}

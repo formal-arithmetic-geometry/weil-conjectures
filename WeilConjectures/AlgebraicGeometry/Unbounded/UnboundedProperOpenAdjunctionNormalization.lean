@@ -312,19 +312,6 @@ private lemma iso_of_normalization
 
 /-- Adjunction normalization of comparisons normalized on K-injective representatives.
 Source: Stacks Project, Tags 0F7B.
-(blueprint: lem-amb-unbounded-proper-open-adjunction-normalization).
-
-Proof:
-For a cartesian square, apply the sheaf support normalization and restrict along i.
-Under the open-unit identifications the ordinary exchange sends i*theta followed by the
-open unit to r* of the other open unit. Resolve k!J by a K-injective I. Exact restriction
-preserves the resolution, and k*I is K-injective because restriction is right adjoint to
-exact extension by zero. The exchange representative formula and naturality along the
-resolution show that the displayed lambda, followed by the adjunct of Gamma, is identity.
-The representative normalization makes Gamma an isomorphism. The open unit is also an
-isomorphism, so the adjunct is invertible. Its inverse is lambda. Descend the resulting
-natural isomorphism and apply the inverse adjunction formula to get the asserted counit
-expression. This works for unbounded J because no truncation occurs.
 -/
 theorem unboundedProperOpenAdjunctionNormalization_of_normalization
     (A : Type (u + 1)) [CommRing A] [Finite A]

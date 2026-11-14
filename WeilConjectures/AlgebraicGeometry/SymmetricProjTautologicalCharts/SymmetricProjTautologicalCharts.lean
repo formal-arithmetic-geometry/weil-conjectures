@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.SymmetricProjTautologicalCharts.Symmetr
 /-!
 # Degree-one charts of the tautological quotient on symmetric Proj
 
-Source: Stacks Project, Constructions, Tags 01OB, 01NR, 01MS and 01OE
-(blueprint: lem-trf-symmetric-proj-tautological-chart-gluing).
+Source: Stacks Project, Constructions, Tags 01OB, 01NR, 01MS and 01OE.
 
 The auxiliary predicates spell out fraction, frame and restriction equations for the
 existing normalized quotient datum. They neither select a line bundle nor assume its
@@ -52,8 +51,7 @@ variable {R A M : Type u} [CommRing R] [CommRing A] [Algebra R A]
 /-- Explicit chart equations for the specified degree-one generators. The module
 `degreePart` is the actual submodule of ordinary localization. The chart equivalence
 is additive and explicitly respects the action through `awayToSection`, hence is linear.
-Source: Stacks, Tags 01MS, 01OB and 01M4
-(blueprint: lem-trf-symmetric-proj-tautological-chart-gluing). -/
+Source: Stacks, Tags 01MS, 01OB and 01M4. -/
 def AffineChartFormulas : Prop :=
   (⨆ m : M, Proj.basicOpen 𝒜 (ι m)) = ⊤ ∧
   (∀ m : M, IsAffineOpen (Proj.basicOpen 𝒜 (ι m))) ∧
@@ -353,8 +351,7 @@ set_option backward.isDefEq.respectTransparency.types true in
 /-- The affine-restriction comparison respects the chosen normalization charts of D,
 and sends every degree-one homogeneous section to its restricted section. The formula
 on arbitrary fractions is expressed both in degree zero and on degree-one twist sections.
-Source: Stacks, Tags 01NR, 01N2 and 01OB
-(blueprint: lem-trf-symmetric-proj-tautological-chart-gluing). -/
+Source: Stacks, Tags 01NR, 01N2 and 01OB. -/
 def AffineRestrictionFormulas
     (D : ProjectiveBundleQuotientGeometry.TautologicalQuotient E) : Prop :=
   ∀ (U V : S.affineOpens) (h : U ≤ V),
@@ -380,49 +377,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- The normalized tautological quotient and its degree-one charts, affine restrictions,
 open-base comparisons and ordered finite-free comparisons.
 
-Source: Stacks Project, Constructions, Tags 01OB, 01NR, 01MS and 01OE
-(blueprint: lem-trf-symmetric-proj-tautological-chart-gluing).
-
-Proof:
-1. Over each affine U use the canonical symmetric grading. Its positive-degree pieces
-are spanned by products of degree-one generators (lem-weil-pbc-symmetric-algebra-graded).
-The standard-open theorem prop-nagata-proj-standard-open therefore gives the cover by
-all iota(m); lemma-nagata-relative-proj-exists identifies it with the relative chart.
-2. Take the actual associated sheaf of A(1), using
-lem-weil-pbc-proj-graded-module-sheaf-exists and def-weil-pbc-proj-twisting-sheaf.
-Multiplication by e has inverse division by e in the localization. Affine tilde,
-lem-weil-pbc-affine-tilde-gamma-adjunction, identifies these maps with sheaf maps.
-3. By lem-weil-pbc-module-pullback-affine-sections and
-lem-weil-pbc-module-pullback-quasi-coherent the quotient is v tensor h to h iota(v)/1.
-It hits the frame e, so is split surjective on each degree-one chart.
-4. By lem-weil-pbc-proj-basic-open-intersection the overlap is D(f/e). The identities
-e=(e/f)f and (e/f)(f/g)=e/g give the transition and cocycle; quotient coefficients agree.
-Glue maps by applying the sheaf axiom to their images of sections.
-5. On affine refinements quasi-coherence identifies module sections by scalar extension.
-Use lem-weil-pbc-symmetric-algebra-base-change and the grading theorem, then
-lem-nagata-affine-proj-scalar-extension: a/e^k maps to bar(a)/bar(e)^k. Restricted
-old generators still span the degree-one part, so their charts cover after restriction.
-6. Compare twists by taking e to bar(e). This sends degree-one fractions to their
-restricted fractions and respects the quotient and transitions; comparisons compose.
-7. Refine intersections of affine base opens by lem-weil-pbc-affine-opens-basis.
-The comparisons agree on common refinements and satisfy the triple cocycle.
-8. Apply lem-weil-pbc-site-module-sheaf-gluing on the small Zariski site. The local
-quotients glue, and the frame descriptions make the resulting line invertible and
-quasi-coherent (def-sc-invertible-module, pqf-def-coherent). Its normalization is exactly
-def-per-projective-bundle-quotient-data.
-9. For any open V the same affine models identify the restricted relative Proj with
-the relative Proj over V by the unique chart-compatible isomorphism of
-lemma-nagata-relative-proj-exists and definition-admissible-blow-up--1.
-The inverse-image open satisfies def-pc-fibre-product. Identity on each frame compares
-both lines and their quotients.
-10. The ordered free basis identifies Sym with the polynomial ring by
-lem-weil-pbc-symmetric-algebra-free-module-polynomial, preserving grading and base
-restriction. Def-nagata-relative-projective-space supplies its relative Proj.
-Frames T_i and transitions T_i=(T_i/T_j)T_j identify the line and quotient sections
-with def-pc-projective-space-twist, including the affine polynomial models.
-11. Nilpotent e gives the zero localization and an empty chart. For E=0 the irrelevant
-ideal is zero and Proj is empty. For r=0 the sole polynomial chart has ring R and
-frame T_0. All equations still hold, including over the empty base or zero ring. -/
+Source: Stacks Project, Constructions, Tags 01OB, 01NR, 01MS and 01OE. -/
 theorem symmetric_proj_tautological_chart_gluing (S : Scheme.{u}) (E : S.Modules)
     [E.IsQuasicoherent] :
     ∃ D : ProjectiveBundleQuotientGeometry.TautologicalQuotient E,

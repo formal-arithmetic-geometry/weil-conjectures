@@ -82,31 +82,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- Finite free-rank-one pullback maps commute with the actual quotient transitions.
 
-Source: Stacks 03D2, 03EL, and the unit construction in blueprint
-`sk-lem-sp-tower-bound-operations.proof.md`, clause (2).
-(blueprint: lem-sfb-tower-class-unit-level-coordinates).
-
-Proof: use the coefficient calculus and Base of strictSystemGeometricRealization.
-Construct the ordinary geometry on the ringed sequence site using the canonical
-constant-section presentations at every level, then derive these functors using
-the same K-injective and K-flat constructions as semilinearGeometryBaseExistence.
-The level functors and their adjunctions are the actual constant-ring operations,
-and the level direct-image underlying comparisons act identically on sections.
-Use these presentations before making the derived geometry: an arbitrary geometry
-can have unrelated underlying-coordinate automorphisms.
-At level n use pullback of the rank-one module, with its map to the target
-rank-one module sending the pullback of a coefficient section to its constant
-restriction. In the small site model this is pullbackObjUnitToUnit, followed by
-the canonical constant-ring comparison and scalar-extension multiplication.
-Both factors are isomorphisms, including on the empty chart. Transport through
-the fixed ordinary pull-evaluation comparison to obtain delta_n. Its finite
-adjoint is the constant direct-image map, by the unit normalization of the actual
-constant-ring adjunction. For m >= n, transpose the two horizontal composites
-with the level-m adjunction. The recorded ordinaryPullTransition formula and
-naturality of constant sheafification identify both with restriction along the
-same quotient R_m -> R_n followed by constant direct image. Injectivity of the
-adjunction transpose proves the horizontal equation. This constructs only finite
-maps and their compatibility; it does not assemble a system isomorphism. -/
+Source: Stacks 03D2, 03EL, and the unit construction in clause (2). -/
 theorem exists_unitLevelCoordinates {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃ b : SpTowerShriek.Base l E, ∃ g : SpTowerShriek.Geometry l E b f,
       (∀ (n : ℕ)

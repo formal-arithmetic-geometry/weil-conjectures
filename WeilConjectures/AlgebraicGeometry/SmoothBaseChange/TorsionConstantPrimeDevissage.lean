@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.SmoothBaseChange.ConstantFiniteSubmodul
 # Prime-coefficient vanishing for a constant bounded torsion group
 
 Source: Stacks Project, Tag 0F08, cyclic-coefficient step; Tag 0739, colimits.
-(blueprint: lem-sbc-torsion-constant-prime-devissage)
 -/
 
 @[expose] public section
@@ -30,24 +29,8 @@ namespace AlgebraicGeometry.Etale
 /-- A constant bounded torsion group has zero higher direct image if its relevant prime
 cyclic coefficients do. A prime is irrelevant if multiplication by it is injective.
 
-Source: Stacks Project, Tag 0F08, proof's cyclic-coefficient reduction; Tag 0739,
-cohomology and filtered colimits; Mathlib.GroupTheory.FiniteAbelian.Basic.
-(blueprint: lem-sbc-torsion-constant-prime-devissage)
-
-Proof:
-1. Let P(A) mean that the degree-q higher image of the constant sheaf on A is zero.
-The composite functor preserves zero objects and isomorphisms. Constant sheafification
-is exact by the arbitrary-coefficient instances in ConstantSheafOver. Map a short exact
-sequence through it, and then use map_exact_of_isHomological for the derived pushforward
-followed by degree-q homology. Exactness at the middle term shows P is extension closed.
-2. Apply isZero_higherDirectImage_constant_of_finite_submodules, which reduces the
-claim to P(N) for every finite submodule N of M, including the filtered-index universe
-obligation. The nonzero annihilator n restricts to N along its subtype inclusion.
-3. Apply finite_torsion_property_of_prime to N with the property from step 1.
-For each prime required by that theorem, noninjectivity on N implies noninjectivity
-on M: an injective multiplication map on M restricts to an injective map on N.
-Thus hprime supplies every required prime cyclic case. The finite induction includes
-zero modules and n=1; both reductions also apply in negative degrees. -/
+Source: Stacks Project, Tag 0F08, proof's cyclic-coefficient reduction; Tag 0739, cohomology and
+filtered colimits; Mathlib.GroupTheory.FiniteAbelian.Basic. -/
 theorem isZero_higherDirectImage_constant_of_prime_vanishing
     {X Y : Scheme.{u}} (h : Y ⟶ X) [QuasiCompact h] [QuasiSeparated h]
     (q : ℤ) (M : ModuleCat.{u + 1} (ULift.{u + 1} ℤ))

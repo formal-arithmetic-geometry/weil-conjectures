@@ -12,9 +12,6 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Finite.FiniteIntegralRoo
 import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Finite.FiniteKummerComparisonComposite
 
 /-! # Evaluating the integral Kummer composite
-
-Source: diagonal-tower trace (1), finite Kummer classes and exact comparison.
-(blueprint: lem-sfb-finite-compared-kummer-boundary).
 -/
 
 @[expose] public noncomputable section
@@ -41,8 +38,7 @@ attribute [local irreducible] Functor.mapDerivedCategory Ext.homEquiv
   HasDerivedCategory.ofIsGrothendieckAbelian HomologicalComplex.quasiIso
 
 /-- The comparison morphism of Kummer sequences transports the Picard boundary.
-Source: Stacks 03PL and naturality of short-exact extension classes
-(blueprint: lem-sfb-finite-compared-kummer-boundary). -/
+Source: Stacks 03PL and naturality of short-exact extension classes. -/
 theorem finiteComparedKummerBoundary (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
     (k : Kummer l T) (n : ℕ) (hT : IsUnit ((l ^ (n + 1) : ℕ) : Γ(T, ⊤)))
     (L : T.Pic) :

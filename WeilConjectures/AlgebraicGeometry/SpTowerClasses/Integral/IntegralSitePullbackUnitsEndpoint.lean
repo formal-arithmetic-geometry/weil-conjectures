@@ -38,8 +38,7 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Integral.IntegralSitePul
 
 /-! # Units endpoint in the change-of-site pullback square
 
-Source: Stacks Project, Tag 00WX; the integral class construction in
-sec-smooth-purity/sk-prop-sp-tower-geometric, classes proof (2).
+Source: Stacks Project, Tag 00WX.
 -/
 
 @[expose] public noncomputable section
@@ -53,16 +52,8 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 
 /-- Units endpoint square for the etale-to-pro-etale pullback.
 
-Source: Stacks Project, Tag 00WX, and the units endpoint part of the
-change-of-site construction in the classes proof.
-(blueprint: lem-sp-integral-site-pullback-units-endpoint).
-
-Proof: transpose through the two inverse-image adjunctions. The hypothesis on
-`a`, the adjunction definition of `cartierUnitsComparison`, and the definition
-of `upperStarGmSheafToGmSheaf` all give pullback of a unit along the same
-fibre-product projection on every chart. Adjunction injectivity proves the
-identity. This endpoint identity is a strict substatement of the conjunction
-in `integral_site_pullback_endpoints`.
+Source: Stacks Project, Tag 00WX, and the units endpoint part of the change-of-site construction in
+the classes proof.
 -/
 theorem integral_site_pullback_units_endpoint {X Y : Scheme.{u}} (f : X ⟶ Y)
     (a : (upperStar AddCommGrpCat.{u + 1} f).obj (Scheme.proEtaleUnitsSheaf Y) ⟶

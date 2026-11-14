@@ -11,7 +11,6 @@ import WeilConjectures.AlgebraicGeometry.PullbackTensorUnitSection
 /-! # Local multiplication in the ideal tensor kernel
 
 Source: Stacks Project, Tags 09MS and 08KS.
-(blueprint: lem-sc-tensor-ideal-section-local-multiplication).
 -/
 
 @[expose] public section
@@ -59,26 +58,8 @@ private theorem ideal_tensor_assoc {X : Scheme.{u}} (J M N P : X.Modules)
 lift of the quotient section. This is a statement about tensor modules alone;
 it contains no graded algebra presentation or quotient action.
 
-Source: Stacks Project, Tag 09MS, coherent-equation-ses, multiplication on the
-ideal coefficient; Tag 08KS, the closed-immersion quotient unit.
-(blueprint: lem-sc-tensor-ideal-section-local-multiplication).
-Proof: Compare the tensor-pullback adjunction unit with the ordinary pullback
-unit via boundaryPullbackComparison. The proved formula for the ordinary
-pullback cotensorator on section tensors therefore gives the same formula for
-boundaryPullbackTensorIso. Set z to the input section transported through the
-inverse degree-d ideal-kernel comparison. Naturality of s identifies its value
-at 1 over j inverse U with the unit applied to x, by hx. The right unitor inserts
-1 and tensoring by s replaces it with this unit image. The inverse tensor
-comparison sends the resulting section tensor to the unit of z tensor x.
-Naturality of the unit moves the pulled-back associator and degree multiplication
-past that unit. Its target inverse cancels, since the ideal tensor is annihilated
-by J and its unit is invertible. The defining inclusion equation of the target
-kernel comparison now leaves ordinary ideal multiplication. Naturality of the
-left unitor and associator identifies this with tensoring the input kernel
-inclusion with x and then multiplying degrees d and a. The source comparison's
-inclusion equation gives the asserted formula. This is a direct calculation on
-U, with no trivialization or choice of further lifts. Degree zero uses the same
-unitors, and empty opens and zero sections use the same equations. -/
+Source: Stacks Project, Tag 09MS, coherent-equation-ses, multiplication on the ideal coefficient;
+Tag 08KS, the closed-immersion quotient unit. -/
 theorem tensorIdealSection_local_multiplication {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)
     (a d t : ℕ) (h : d + a = t)

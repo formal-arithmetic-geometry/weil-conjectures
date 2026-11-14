@@ -9,10 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.Smooth.SmoothPurityCoefficientTo
 /-!
 # Normalized right adjoints of coefficient-tower evaluation
 
-Source: blueprint main-20261015, sec-smooth-purity/sk-lem-sp-tower-levels,
-`sk-lem-sp-tower-levels-adjoint.proof.md`
-(blueprint: lem-sp-tower-normalized-right-adjoints).
-
 Index n represents the positive coefficient exponent n+1.
 -/
 

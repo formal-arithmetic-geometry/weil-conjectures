@@ -252,31 +252,7 @@ private theorem equiv_tensor_unit_transpose
   rw [e.unit_naturality_assoc c.inv, e.unit_inverse_comp_assoc]
   rfl
 
-/-- The ordinary tensor/restriction adjunction for abelian towers, including its free unit.
-
-Source: blueprint latest, `sk-prop-sp-tower-geometric-classes.proof.md`, clause (2),
-and IntegralUnitReduction proof steps 1 and 3.
-(blueprint: lem-sfb-integral-tower-scalar-presentation).
-
-Proof: let O be the constant lifted-integer ring sheaf on the base site, and take R
-to be its constant sequence ring on the vertical sequence site.
-Flattening a tower of abelian sheaves identifies it with an abelian sheaf on this site:
-the sheaf condition is precisely the sheaf condition at each fixed index. Give every
-section its unique integer action and extend it to R by the universal property of
-constant sheafification. This gives the additive equivalence e; its inverse forgets
-that action and takes the levels. The flattened constant integer tower is the free
-rank-one R-module, giving the displayed source isomorphism. The unique unital integer
-map into each B-section sheafifies to phi. Restriction along phi, followed by levels,
-is the functor F: its section groups, vertical maps, horizontal maps and morphisms
-are the four formulas in Forget, and it is exact since underlying abelian sheaves
-compute kernels and sheafified cokernels. Sheafified balanced tensor with B is left
-adjoint to this restriction. For any functor E with the stated objects and maps,
-transport this adjunction by the component equality isomorphisms. Multiplication
-B tensor_R R to B identifies E(e(Z)) with the coefficient module. Its adjoint sends
-a constant integer k to k times one on every section, so uniqueness in
-integerGenerator_existsUnique gives the last equality. No nonzero-ring, nonempty-site,
-prime, or coefficient-flatness assumption is used. This statement concerns ordinary
-categories only; it supplies no derived functor or derived adjunction. -/
+/-- The ordinary tensor/restriction adjunction for abelian towers, including its free unit. -/
 theorem exists_integralTowerScalarPresentation (T : Scheme.{u})
     (B : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1}) :
     let J := coefficientSequenceTopology (Scheme.ProEt.topology T)

@@ -64,9 +64,7 @@ private def coefficientUnit (X : Scheme.{u}) :
 /-- The entire section-action and restriction assertion, with no boundedness,
 Noetherianity or prime-invertibility assumptions.
 
-Source: blueprint main-20261015, localizing-closure finite-model proof, Locality;
-Stacks 09AA, 03EK, 03DB, 014E, 08TC
-(blueprint: lem-sfb-strict-completion-restriction-comparison).
+Source: Stacks 09AA, 03EK, 03DB, 014E, 08TC.
 
 Proof plan (the seven steps of the node):
 1. Section action is exact and unchanged on sections and scalar matrices. It
