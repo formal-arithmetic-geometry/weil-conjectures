@@ -8,8 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassPullback
 
 /-! # Explicit section carriers for tower adjunction
-
-Source: the ordinary evaluation comparison for strict coefficient systems.
 -/
 
 @[expose] public noncomputable section
@@ -30,11 +28,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 -- Comparing the two section carriers traverses the fixed direct-image construction.
-/-- Sectionwise ordinary adjunction with its explicit target carrier.
-
-Source: the ordinary evaluation comparison in `def-sp-tower-shriek-data`.
-This is the recorded adjoint followed by that comparison, evaluated on a chart.
-(blueprint: def-sfb-tower-class-section-adjoint). -/
+/-- Sectionwise ordinary adjunction with its explicit target carrier, evaluated on a chart. -/
 def sectionAdjoint
     {b : SpTowerShriek.Base l E} {X Y : Scheme.{u}} {f : X ⟶ Y}
     (g : SpTowerShriek.Geometry l E b f)
@@ -44,9 +38,7 @@ def sectionAdjoint
     N.val.obj (op (n, (chart f U).unop)) :=
   adjointSection l E g h n U x
 
-/-- The explicit-carrier adjoint is the original evaluated ordinary adjoint.
-Source: the definition of sectionwise evaluation.
-(blueprint: def-sfb-tower-class-section-adjoint). -/
+/-- The explicit-carrier adjoint is the original evaluated ordinary adjoint. -/
 theorem sectionAdjoint_heq
     {b : SpTowerShriek.Base l E} {X Y : Scheme.{u}} {f : X ⟶ Y}
     (g : SpTowerShriek.Geometry l E b f)

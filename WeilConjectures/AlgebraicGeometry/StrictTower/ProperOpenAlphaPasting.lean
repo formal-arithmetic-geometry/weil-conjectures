@@ -10,16 +10,14 @@ public import WeilConjectures.AlgebraicGeometry.Open.OpenImmersionSquare
 public import WeilConjectures.CategoryTheory.RingedSiteModules
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 -- Vertical uses singleAlpha_restriction_normalized; horizontal uses singleAlpha_restriction.
--- Both restriction identities must coexist when these dependency branches are imported.
+-- Both restriction identities must coexist when these modules are imported.
 import all WeilConjectures.AlgebraicGeometry.StrictTower.ProperOpenAlphaVerticalModules
 import all WeilConjectures.AlgebraicGeometry.StrictTower.ProperOpenAlphaHorizontalModules
 import all WeilConjectures.AlgebraicGeometry.StrictTower.ProperOpenAlphaBaseChangeModules
 
 /-! # Intrinsic clopen alpha commutes with pasting and pullback before derivation
 
-Source: Stacks Project, Tags 0F7C, 0F7D, 0F7F, 09AH and 09BN, with the arbitrary-ring
-underived strict-tower refinement in the blueprint.
-(blueprint: lem-cbc-proper-open-alpha-pasting)
+Source: Stacks Project, Tags 0F7C, 0F7D, 0F7F, 09AH and 09BN.
 
 Each law includes equality on module sheaves, on strict towers, on their unbounded
 complexes, and on their ordinary unbounded derived categories. The two ordinary paths
@@ -40,8 +38,7 @@ namespace AlgebraicGeometry.ProEtale.StrictTower
 variable (B : Type (u + 1)) [CommRing B]
 
 /-- The alphaVerticalPasted ordinary path, with the canonical compositors inserted.
-Source: Stacks, Tags 0F7C, 0F7D and 0F7F
-(blueprint: lem-cbc-proper-open-alpha-pasting). -/
+Source: Stacks, Tags 0F7C, 0F7D and 0F7F. -/
 def alphaVerticalPasted {A C E B₀ D F : Scheme.{u}}
     (k : A ⟶ B₀) (i : C ⟶ D) (j : E ⟶ F)
     (r₁ : A ⟶ C) (r₂ : C ⟶ E) (p₁ : B₀ ⟶ D) (p₂ : D ⟶ F)
@@ -59,8 +56,7 @@ def alphaVerticalPasted {A C E B₀ D F : Scheme.{u}}
     (Functor.associator _ _ _).inv
 
 /-- The alphaVerticalOuter ordinary path, with the canonical compositors inserted.
-Source: Stacks, Tags 0F7C, 0F7D and 0F7F
-(blueprint: lem-cbc-proper-open-alpha-pasting). -/
+Source: Stacks, Tags 0F7C, 0F7D and 0F7F. -/
 def alphaVerticalOuter {A C E B₀ D F : Scheme.{u}}
     (k : A ⟶ B₀) (j : E ⟶ F)
     (r₁ : A ⟶ C) (r₂ : C ⟶ E) (p₁ : B₀ ⟶ D) (p₂ : D ⟶ F)
@@ -74,8 +70,7 @@ def alphaVerticalOuter {A C E B₀ D F : Scheme.{u}}
     Functor.whiskerRight (moduleGComp B r₁ r₂).hom (moduleJ B k)
 
 /-- The alphaHorizontalOuter ordinary path, with the canonical compositors inserted.
-Source: Stacks, Tags 0F7C, 0F7D and 0F7F
-(blueprint: lem-cbc-proper-open-alpha-pasting). -/
+Source: Stacks, Tags 0F7C, 0F7D and 0F7F. -/
 def alphaHorizontalOuter {A C E B₀ D F : Scheme.{u}}
     (k : A ⟶ B₀) (l : B₀ ⟶ E) (i : C ⟶ D) (j : D ⟶ F)
     (r : A ⟶ C) (q : E ⟶ F)
@@ -89,8 +84,7 @@ def alphaHorizontalOuter {A C E B₀ D F : Scheme.{u}}
     singleAlpha B (k ≫ l) r q (i ≫ j) h
 
 /-- The alphaHorizontalPasted ordinary path, with the canonical compositors inserted.
-Source: Stacks, Tags 0F7C, 0F7D and 0F7F
-(blueprint: lem-cbc-proper-open-alpha-pasting). -/
+Source: Stacks, Tags 0F7C, 0F7D and 0F7F. -/
 def alphaHorizontalPasted {A C E B₀ D F : Scheme.{u}}
     (k : A ⟶ B₀) (l : B₀ ⟶ E) (i : C ⟶ D) (j : D ⟶ F)
     (r : A ⟶ C) (p : B₀ ⟶ D) (q : E ⟶ F)
@@ -108,8 +102,7 @@ def alphaHorizontalPasted {A C E B₀ D F : Scheme.{u}}
     Functor.whiskerLeft (modulePullback B r) (openBetaModuleJComp B k l).hom
 
 /-- The alphaCubeOriginal ordinary path, with the canonical compositors inserted.
-Source: Stacks, Tags 0F7C, 0F7D and 0F7F
-(blueprint: lem-cbc-proper-open-alpha-pasting). -/
+Source: Stacks, Tags 0F7C, 0F7D and 0F7F. -/
 def alphaCubeOriginal {V W S T V₁ W₁ S₁ T₁ : Scheme.{u}}
     (k : V ⟶ W) (i : S ⟶ T) (r : V ⟶ S) (p : W ⟶ T)
     (k₁ : V₁ ⟶ W₁) (i₁ : S₁ ⟶ T₁) (r₁ : V₁ ⟶ S₁) (p₁ : W₁ ⟶ T₁)
@@ -133,8 +126,7 @@ def alphaCubeOriginal {V W S T V₁ W₁ S₁ T₁ : Scheme.{u}}
     Functor.whiskerRight (moduleSquareG B d r₁ r c wr).inv (moduleJ B k₁)
 
 /-- The alphaCubeChanged ordinary path, with the canonical compositors inserted.
-Source: Stacks, Tags 0F7C, 0F7D and 0F7F
-(blueprint: lem-cbc-proper-open-alpha-pasting). -/
+Source: Stacks, Tags 0F7C, 0F7D and 0F7F. -/
 def alphaCubeChanged {V W S T V₁ W₁ S₁ T₁ : Scheme.{u}}
     (k : V ⟶ W) (i : S ⟶ T) (r : V ⟶ S) (p : W ⟶ T)
     (k₁ : V₁ ⟶ W₁) (i₁ : S₁ ⟶ T₁) (r₁ : V₁ ⟶ S₁) (p₁ : W₁ ⟶ T₁)
@@ -157,26 +149,7 @@ def alphaCubeChanged {V W S T V₁ W₁ S₁ T₁ : Scheme.{u}}
 attribute [local irreducible] G J
 
 /-- Intrinsic alpha obeys vert pasting at the four specified levels.
-Source: Stacks, Tag 0F7C, and the underived strict-tower refinement, proof steps 1--7
-(blueprint: lem-cbc-proper-open-alpha-pasting).
-Proof: First detect equality of maps to open extension on module sheaves: the image of
-their difference restricts to zero both on the open and its closed complement.
-Exact inverse image and the open/closed short exact sequence force that image to vanish.
-The inverse-transpose definition of beta gives its restriction normalization through
-the specified open units. The clopen projector restricts to the identity, so intrinsic
-alpha restricts to the canonical inverse-image square identification followed by
-inverse image of the inverse open unit. All detection opens are quasi-compact.
-For vertical pasting, restrict along k and use p₁k = ir₁. The second square reduces
-the input to r₁* r₂* of the original module. The first alpha is then the identity
-under its open-unit identification. The inverse-image compositor identifies this
-with the restriction of intrinsic outer alpha. Detection gives the module equation.
-Naturality makes the module transformations commute with all tower transitions,
-then with all differentials on unbounded complexes. Termwise application gives the
-second and third equations. Apply exact-derived-transformation pasting to the finite
-diagram. Exactness of inverse image and open extension and the localization
-specification of alpha identify its localized cells with the recorded intrinsic
-alpha, beta and compositors. This gives the last equation in the ordinary unbounded
-derived category; no derived-evaluation faithfulness or coefficient finiteness is used. -/
+Source: Stacks, Tag 0F7C. -/
 theorem alpha_vertical_beforeDerivation {A C E B₀ D F : Scheme.{u}}
     (k : A ⟶ B₀) (i : C ⟶ D) (j : E ⟶ F)
     (r₁ : A ⟶ C) (r₂ : C ⟶ E) (p₁ : B₀ ⟶ D) (p₂ : D ⟶ F)
@@ -220,26 +193,7 @@ theorem alpha_vertical_beforeDerivation {A C E B₀ D F : Scheme.{u}}
   all_goals rw [hm]
 
 /-- Intrinsic alpha obeys horiz pasting at the four specified levels.
-Source: Stacks, Tag 0F7D, and the underived strict-tower refinement, proof steps 1--7
-(blueprint: lem-cbc-proper-open-alpha-pasting).
-Proof: First detect equality of maps to open extension on module sheaves: the image of
-their difference restricts to zero both on the open and its closed complement.
-Exact inverse image and the open/closed short exact sequence force that image to vanish.
-The inverse-transpose definition of beta gives its restriction normalization through
-the specified open units. The clopen projector restricts to the identity, so intrinsic
-alpha restricts to the canonical inverse-image square identification followed by
-inverse image of the inverse open unit. All detection opens are quasi-compact.
-For horizontal pasting, restrict along lk. The second alpha reduces q* j! i! to
-p* i!; the open unit for l and then the first alpha reduce this to r*. The
-unit-preserving open compositor identifies the successive open units with the
-outer open unit. Detection along lk identifies the pasted and intrinsic outer maps.
-Naturality makes the module transformations commute with all tower transitions,
-then with all differentials on unbounded complexes. Termwise application gives the
-second and third equations. Apply exact-derived-transformation pasting to the finite
-diagram. Exactness of inverse image and open extension and the localization
-specification of alpha identify its localized cells with the recorded intrinsic
-alpha, beta and compositors. This gives the last equation in the ordinary unbounded
-derived category; no derived-evaluation faithfulness or coefficient finiteness is used. -/
+Source: Stacks, Tag 0F7D. -/
 theorem alpha_horizontal_beforeDerivation {A C E B₀ D F : Scheme.{u}}
     (k : A ⟶ B₀) (l : B₀ ⟶ E) (i : C ⟶ D) (j : D ⟶ F)
     (r : A ⟶ C) (p : B₀ ⟶ D) (q : E ⟶ F)
@@ -283,28 +237,7 @@ theorem alpha_horizontal_beforeDerivation {A C E B₀ D F : Scheme.{u}}
   all_goals rw [hm]
 
 /-- Intrinsic alpha obeys cube pasting at the four specified levels.
-Source: Stacks, Tag 0F7F, and the underived strict-tower refinement, proof steps 1--7
-(blueprint: lem-cbc-proper-open-alpha-pasting).
-Proof: First detect equality of maps to open extension on module sheaves: the image of
-their difference restricts to zero both on the open and its closed complement.
-Exact inverse image and the open/closed short exact sequence force that image to vanish.
-The inverse-transpose definition of beta gives its restriction normalization through
-the specified open units. The clopen projector restricts to the identity, so intrinsic
-alpha restricts to the canonical inverse-image square identification followed by
-inverse image of the inverse open unit. All detection opens are quasi-compact.
-For base change, restrict along k₁. The original-alpha route reduces through
-ak₁ = kd to d* r*, then through rd = cr₁ to r₁* c*. The beta for k is exactly
-the open-unit identification. On the changed-alpha route the beta for i first gives
-that same open-unit identification, and intrinsic alpha for Q₁ reduces to r₁* c*.
-The initial square identification for hp₁ = pa makes the starting comparisons equal.
-Detection gives the cube equation without proper direct-image base change.
-Naturality makes the module transformations commute with all tower transitions,
-then with all differentials on unbounded complexes. Termwise application gives the
-second and third equations. Apply exact-derived-transformation pasting to the finite
-diagram. Exactness of inverse image and open extension and the localization
-specification of alpha identify its localized cells with the recorded intrinsic
-alpha, beta and compositors. This gives the last equation in the ordinary unbounded
-derived category; no derived-evaluation faithfulness or coefficient finiteness is used. -/
+Source: Stacks, Tag 0F7F. -/
 theorem alpha_baseChange_beforeDerivation {V W S T V₁ W₁ S₁ T₁ : Scheme.{u}}
     (k : V ⟶ W) (i : S ⟶ T) (r : V ⟶ S) (p : W ⟶ T)
     (k₁ : V₁ ⟶ W₁) (i₁ : S₁ ⟶ T₁) (r₁ : V₁ ⟶ S₁) (p₁ : W₁ ⟶ T₁)

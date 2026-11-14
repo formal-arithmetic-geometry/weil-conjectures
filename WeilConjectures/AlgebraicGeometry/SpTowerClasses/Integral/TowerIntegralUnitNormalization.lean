@@ -11,8 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearOrdinaryInv
 import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Integral.TowerIntegralUnitNormalizationComponents
 
 /-! # Unit normalization for integral ordinary inverse systems
-
-Source: blueprint classes proof (2), integral reduction.
 -/
 
 @[expose] public noncomputable section
@@ -23,17 +21,6 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Sc
 namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 
 /-- The coefficient unit comparison is normalized on constant integer sections.
-Source: blueprint latest, classes proof (2), integral reduction, and the defining
-properties of `integerGenerator` and `integerPull`.
-(blueprint: lem-sp-tower-integral-unit-normalization).
-
-Proof: apply the ringUnderlying comparison to the coefficient module.  The ring
-addition, multiplication, zero and one equations, together with module scalar
-compatibility, make it a linear isomorphism and the ordinary transition equation
-assembles it over the tower.  On constant integer sections the composite sends
-one to one and preserves addition, hence it fixes every integer.  The universal
-property defining `integerGenerator`, the adjunction defining `integerPull`, and
-sheafification of constant sections then give the displayed equality.
 -/
 theorem integralInverseSystem_unit_normalization (l : ℕ) [Fact l.Prime]
     {X Y : Scheme.{u}} (f : X ⟶ Y)

@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.SquareZeroTensorSectionProductCompariso
 /-! # Homogeneous sections and their product in a graded presentation
 
 Source: Stacks Project, Tag 09MS, the graded direct-sum ideal sequence.
-(blueprint: lem-sc-square-zero-tensor-graded-product-projection).
 -/
 
 @[expose] public section
@@ -28,8 +27,7 @@ attribute [local irreducible] RingedSpace.moduleCohomology
 noncomputable section
 
 /-- Include the transported section in its homogeneous degree.
-Source: Stacks Project, Tag 09MS, the graded ideal sequence.
-(blueprint: lem-sc-square-zero-tensor-graded-product-projection). -/
+Source: Stacks Project, Tag 09MS, the graded ideal sequence. -/
 def tensorGradedSection {X Z : Scheme.{u}} {j : Z ⟶ X} [IsClosedImmersion j]
     {L : X.Modules} {n : ℕ} (T : TensorGradedPresentation j L)
     (D : TensorBoundaryComparisonData j L n) (e : ℕ)
@@ -38,9 +36,7 @@ def tensorGradedSection {X Z : Scheme.{u}} {j : Z ⟶ X} [IsClosedImmersion j]
   (T.c (n * (e + 1))).app ⊤ ((x ≫ (D.a e).inv).app ⊤ (1 : Γ(Z, ⊤)))
 
 /-- Take cohomology of a degree projection and then the inverse coefficient comparison.
-This is an explicit composite, with no object selected from an unproved theorem.
-Source: Stacks Project, Tag 09MS, the graded ideal sequence.
-(blueprint: lem-sc-square-zero-tensor-graded-product-projection). -/
+Source: Stacks Project, Tag 09MS, the graded ideal sequence. -/
 def tensorGradedCoefficientProjection {X Z : Scheme.{u}} {j : Z ⟶ X}
     [IsClosedImmersion j] {L : X.Modules} {n : ℕ}
     (T : TensorGradedPresentation j L) (D : TensorBoundaryComparisonData j L n) (e : ℕ) :
@@ -53,8 +49,7 @@ def tensorGradedCoefficientProjection {X Z : Scheme.{u}} {j : Z ⟶ X}
       (T.degree (n * (e + 1))).τ₁).hom.toAddMonoidHom)
 
 /-- Evaluation of the explicit additive coefficient projection.
-Source: Stacks Project, Tag 09MS, the graded ideal sequence.
-(blueprint: lem-sc-square-zero-tensor-graded-product-projection). -/
+Source: Stacks Project, Tag 09MS, the graded ideal sequence. -/
 theorem tensorGradedCoefficientProjection_apply {X Z : Scheme.{u}} {j : Z ⟶ X}
     [IsClosedImmersion j] {L : X.Modules} {n : ℕ}
     (T : TensorGradedPresentation j L) (D : TensorBoundaryComparisonData j L n) (e : ℕ)
@@ -72,13 +67,7 @@ theorem tensorGradedCoefficientProjection_apply {X Z : Scheme.{u}} {j : Z ⟶ X}
 attribute [irreducible] tensorGradedCoefficientProjection
 
 /-- The raw homogeneous multiplication identity.
-Source: Stacks Project, Tag 09MS, multiplication in the direct-sum algebra.
-(blueprint: lem-sc-square-zero-tensor-graded-product-projection-raw).
-Proof: Work locally where the invertible module is free of rank one, lift both quotient
-sections through the degreewise adjunction unit, apply `b_multiply`, and use `b_quotient`
-and `c_projection`. Tensor-power associativity and the unitors identify the resulting
-section with the displayed transported tensor product; local equality glues by sheaf
-separation. -/
+Source: Stacks Project, Tag 09MS, multiplication in the direct-sum algebra. -/
 theorem tensorGradedSection_product_raw {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)
     (n : ℕ) (T : TensorGradedPresentation j L) (D : TensorBoundaryComparisonData j L n)
@@ -117,8 +106,7 @@ theorem tensorGradedSection_product_raw {X Z : Scheme.{u}} (j : Z ⟶ X)
   rfl
 
 /-- Applying the degree quotient projection to the raw homogeneous product identity.
-Source: Stacks Project, Tag 09MS, the projection relation for the graded quotient.
-(blueprint: lem-sc-square-zero-tensor-graded-product-projection-projection). -/
+Source: Stacks Project, Tag 09MS, the projection relation for the graded quotient. -/
 theorem tensorGradedSection_projection_of_raw {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)
     (n : ℕ) (T : TensorGradedPresentation j L) (D : TensorBoundaryComparisonData j L n)
@@ -141,20 +129,9 @@ theorem tensorGradedSection_projection_of_raw {X Z : Scheme.{u}} (j : Z ⟶ X)
       (1 : Γ(Z, ⊤)))) (T.c_projection (n * ((e + 1) + 1)))
 
 /-- Projecting a product of the two homogeneous sections gives the transported tensor
-product section. No cohomology boundary, action, or derivation identity occurs here.
+product section.
 
-Source: Stacks Project, Tag 09MS, multiplication in the direct-sum algebra.
-(blueprint: lem-sc-square-zero-tensor-graded-product-projection).
-Proof: Work locally where L is free of rank one and lift each quotient section through
-the degreewise adjunction unit, which is an epimorphism. The compatibility b_quotient
-identifies its homogeneous image with the image of its homogeneous lift under p.
-Apply the algebra map p to b_multiply. The c_projection identity extracts degree
-n+n(e+1)=n(e+2). The canonical monoidal pullback comparison and tensor-power multiplication
-identify this product with lambda inverse followed by f tensor x. For s, tensorPowSection
-f 1 includes exactly the degree-one right unitor needed by a_0. Changing a lift changes
-it by a kernel section and hence does not change the quotient product. These identities
-hold locally and glue by sheaf separation. The same argument for n=0 uses the unit
-summand twice; it does not require the two summands to have different degrees. -/
+Source: Stacks Project, Tag 09MS, multiplication in the direct-sum algebra. -/
 theorem tensorGradedSection_product {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)
     (n : ℕ) (T : TensorGradedPresentation j L) (D : TensorBoundaryComparisonData j L n)

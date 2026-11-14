@@ -49,9 +49,7 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 /-!
 # Finite coefficient filtrations preserve constructibility and cohomological bounds
 
-Source: Stacks Project, proetale.tex, Tag 09B5, lemma-constructible-serre;
-agent-written finite-filtration application
-(blueprint: lem-sf-filtered-coefficient-tensor-bounds).
+Source: Stacks Project, proetale.tex, Tag 09B5.
 
 The coefficient tensor is constructed as `(B_Y ⊗_R P) ⊗_{B_Y} U_Y`.
 The canonical balanced identification sends `(b ⊗ p) ⊗ v` to `p ⊗ bv`;
@@ -83,8 +81,7 @@ variable (Y : Scheme.{u}) (B : Type (u + 1)) [CommRing B]
   (P : CochainComplex (pbcModules Y R) ℤ)
 
 /-- Tensoring constant B-modules on the pro-etale site.
-Source: Stacks Project, Modules on Sites, Tag 03EK
-(blueprint: lem-sf-filtered-coefficient-tensor-bounds). -/
+Source: Stacks Project, Modules on Sites, Tag 03EK. -/
 noncomputable def filteredCoefficientTensorFunctor (U : ModuleCat.{u + 1} B) :
     pbcModules Y (adicLisseConstantRing Y B) ⥤ pbcModules Y (adicLisseConstantRing Y B) :=
   SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}
@@ -92,8 +89,7 @@ noncomputable def filteredCoefficientTensorFunctor (U : ModuleCat.{u + 1} B) :
     (A := adicLisseConstantRing Y B) ((adicLisseConstantModules Y B).obj U)
 
 /-- Differential obtained by extending scalars and tensoring with the constant module.
-Source: Stacks Project, Modules on Sites, Tag 03EK
-(blueprint: lem-sf-filtered-coefficient-tensor-bounds). -/
+Source: Stacks Project, Modules on Sites, Tag 03EK. -/
 noncomputable def filteredCoefficientTensorDifferential
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
     (ρ : R ⟶ adicLisseConstantRing Y B) (P : CochainComplex (pbcModules Y R) ℤ)
@@ -106,13 +102,7 @@ noncomputable def filteredCoefficientTensorDifferential
     (SheafOfModules.changeOfRingsHom.{u, u + 1, u + 1} ρ (P.X i) (P.d i j))
 
 /-- Well-definedness of the termwise coefficient tensor differential.
-Source: Stacks Project, Modules on Sites, Tag 03EK
-(blueprint: lem-sf-filtered-coefficient-tensor-bounds).
-Proof: sectionwise change of rings sends d to 1 tensor d, preserves composition
-and zero, and sheafification is additive. Tensoring with U_Y again preserves
-composition and zero, as can be checked on pure tensors before sheafification.
-Consequently the shape and square-zero equations follow from those of P.
-These are only the proof fields needed by the displayed tensor construction. -/
+Source: Stacks Project, Modules on Sites, Tag 03EK. -/
 theorem filteredCoefficientTensorComplex_laws (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
     (ρ : R ⟶ adicLisseConstantRing Y B) (P : CochainComplex (pbcModules Y R) ℤ)
     (U : ModuleCat.{u + 1} B) :
@@ -136,12 +126,9 @@ theorem filteredCoefficientTensorComplex_laws (R : Sheaf (ProEt.topology Y) Comm
       (SheafOfModules.siteSheafTensorRight_preservesZeroMorphisms
         ((adicLisseConstantModules Y B).obj U)).map_zero _ _
 
-/-- The actual B_Y-complex P tensor_R U_Y, formed by ordinary sheaf tensors.
-Its associative presentation first extends P to B_Y and then tensors with U_Y.
-The balanced mutually inverse formulas in the module documentation identify
-this with the direct R-tensor, and commute with d_P tensor 1.
-Source: Stacks Project, Modules on Sites, Tag 03EK
-(blueprint: lem-sf-filtered-coefficient-tensor-bounds). -/
+/-- The B_Y-complex P tensor_R U_Y, formed by ordinary sheaf tensors as
+`(B_Y ⊗_R P) ⊗_{B_Y} U_Y`.
+Source: Stacks Project, Modules on Sites, Tag 03EK. -/
 def filteredCoefficientTensorComplex (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
     (ρ : R ⟶ adicLisseConstantRing Y B) (P : CochainComplex (pbcModules Y R) ℤ)
     (U : ModuleCat.{u + 1} B) :
@@ -401,34 +388,7 @@ private theorem coefficientGood_extension [Finite B]
     (((h₁ n).2 hn).eq_of_src _ _) (((h₃ n).2 hn).eq_of_tgt _ _)
 
 /-- Finite coefficient devissage keeps exactly the common cohomological interval.
-Source: Stacks Project, proetale.tex, Tag 09B5; finite-filtration application
-(blueprint: lem-sf-filtered-coefficient-tensor-bounds).
-
-Proof:
-1. For j<t, take the quotient sequence 0→V_(j+1)→V_j→W_j→0.
-Constant presheaves are sectionwise exact; exact module sheafification
-(lem-weil-pbc-site-r-module-presheaf-sheafification-exact) gives the constant
-B_Y-module sequence. Restriction through rho retains its underlying additive
-sheaves and exactness (def-pc-sheaf-restrict-scalars).
-2. Flatness of each P^q gives a short exact sequence after tensoring with P^q
-(def-pc-flat-sheaf-modules). The maps commute with d_P tensor 1 and are B_Y-linear,
-as verified on pure tensors (def-pur-sheaf-tensor-product). Thus the sequence
-of coefficient complexes is degreewise short exact in Mod(B_Y).
-3. Descend from j=t. The zero coefficient gives the zero complex and zero
-cohomology, constructible using a single stratum, even for the empty scheme.
-This also handles t=0. At each step use the assertion for V_(j+1) and the
-assumed assertion for W_j.
-4. The long exact cohomology sequence
-(lem-weil-pbc-complex-ses-homology-long-exact) gives exactness of the same-degree
-segment. Outside [r,s] both outer cohomology sheaves vanish, hence the middle
-one vanishes. Neither endpoint moves.
-5. The short exact complex sequence gives a distinguished triangle
-(lem-weil-pbc-complex-ses-triangle). Derived cohomology agrees with cohomology
-of these representatives (def-weil-derived-cohomology-sheaves and
- def-weil-abstract-derived-category). The middle-vertex clause of
-lem-weil-proetale-dbc-triangulated preserves constructibility and boundedness
-for the finite ring B on arbitrary Y. Descending induction proves every V_j;
-V_0=V proves the final assertion. The interval is independent of t. -/
+Source: Stacks Project, proetale.tex, Tag 09B5. -/
 theorem filteredCoefficientTensor_constructible_bounds [Finite B]
     (hP : ∀ q : ℤ, SheafOfModules.IsFlatOnSite (C := Y.ProEt)
       (J := ProEt.topology Y) (R := R)

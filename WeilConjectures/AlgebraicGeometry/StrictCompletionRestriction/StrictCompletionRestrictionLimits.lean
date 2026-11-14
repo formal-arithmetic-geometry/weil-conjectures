@@ -138,15 +138,7 @@ private theorem module_limits
 /-- Inverse image along the multiplicative closure of immersions and weakly etale
 maps preserves all limits in the coefficient universe.
 
-Source: Stacks Tag 09AA and the localized-site description, Tags 00Y0 and 03DB
-(blueprint: lem-sfb-strict-completion-restriction-limits).
-
-Proof: For weakly etale maps identify inverse image with localized restriction.
-Its composite with the sheaf inclusion preserves limits, and the inclusion reflects
-them. For immersions use the immersion limit-preservation theorem. Limits of internal
-modules are detected on underlying sheaves; extension along the coefficient isomorphism
-is equivalent to restriction along its inverse, and preserves limits. The canonical
-composition isomorphism proves the multiplicative-closure induction, including identity. -/
+Source: Stacks Tag 09AA and the localized-site description, Tags 00Y0 and 03DB. -/
 theorem strictCompletionRestrictionLimits
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     {X Y : Scheme.{u}} (f : X ⟶ Y)

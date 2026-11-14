@@ -10,10 +10,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.RestrictScalarsLowerStar
 
 /-!
 # Normalized ordinary scalar maps for arbitrary coefficient homomorphisms
-
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/
-lem-amb-cartier-kummer-map.proof.md, final scalar-extension paragraph
-(blueprint: lem-asd-supported-kummer-arbitrary-scalar-maps).
 -/
 @[expose] public noncomputable section
 
@@ -28,17 +24,9 @@ namespace AlgebraicGeometry.Etale
 
 /--
 For arbitrary commutative rings and a closed immersion, normalized coefficient maps exist on
-both small étale sites.  Their components send a constant `r` to the constant `φ r`.
+both small étale sites. Their components send a constant `r` to the constant `φ r`.
 The direct-image composite is the corresponding restriction-of-scalars map on the ambient site,
-with the same component formula.  The three proof steps are: (1) factor the sectionwise map from
-the constant presheaf through sheafification on each site; (2) evaluate the factorization on every
-étale object, including empty objects and zero rings; (3) use the objectwise direct-image formula
-and `lowerStarCompRestrictScalarsIso` to identify the two restriction-of-scalars direct images.
-The constructions use `def-weil-pbc-constant-sheaf`, `def-pc-sheaf-restrict-scalars`,
-`def-weil-pbc-sheafification`, and `def-weil-pbc-direct-image`; the resulting ambient map has the
-source and target required by `def-asd-ordinary-supported-kummer-scalar`.
-Source: the final scalar-extension paragraph of the blueprint proof cited above
-(blueprint: lem-asd-supported-kummer-arbitrary-scalar-maps).
+with the same component formula.
 -/
 theorem exists_supported_kummer_arbitrary_scalar_maps
     {R S : Type (u + 1)} [CommRing R] [CommRing S] (φ : R →+* S)

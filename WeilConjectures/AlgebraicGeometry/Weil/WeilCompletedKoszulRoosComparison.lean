@@ -94,9 +94,7 @@ import Mathlib.CategoryTheory.Monoidal.Preadditive
 /-!
 # Finite exterior and tensor-dual Koszul comparison
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E,
-lemma-derived-completion-koszul, and sites-cohomology.tex, Tags 0941 and 0A0A.
-(blueprint: lem-weil-pbc-completed-fiber-roos-comparison).
+Source: Stacks Project, algebraization.tex, Tag 0A0E, and sites-cohomology.tex, Tags 0941 and 0A0A.
 
 The site and coefficient transports are publicly re-exported from the lower site module.
 The termwise-limit comparison is constructed here. The finite comparison is assembled
@@ -116,8 +114,7 @@ variable (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDa
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The canonical comparison between limits of complexes and termwise limits.
-Source: Stacks Tag 0941
-(blueprint: lem-weil-pbc-completed-fiber-roos-comparison). -/
+Source: Stacks Tag 0941. -/
 def completedKoszulTermwiseLimitIso {B : Type*} [Category B] [Abelian B] [HasLimitsOfShape ℕᵒᵖ B] :
     HomologicalComplex.complexOfFunctorsToFunctorToComplex ⋙
       (lim : (ℕᵒᵖ ⥤ CochainComplex B ℤ) ⥤ CochainComplex B ℤ) ≅
@@ -273,32 +270,8 @@ set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The finite exterior Koszul tower agrees with the ordered tensor-dual tower.
 
-Source: Stacks Project, more-algebra.tex Tag 0664, Lemma 15.29.12
-(tensor decomposition), and algebraization.tex Tag 0A0E,
-proof of lemma-derived-completion-koszul (finite-free duality identification).
-(blueprint: lem-weil-pbc-completed-fiber-roos-comparison).
-
-Proof: on the free module with ordered basis Fin r, use the sorted subset basis of
-its exterior powers. A k-subset indexes degree -k. Identify its basis vector with the
-dual tensor coordinate, multiplied by (-1)^(k*(k-1)/2). The ratio in adjacent degrees
-is the sign in the Hom-complex differential, so the exterior contraction differential
-agrees with the dual of the ordered positive tensor differential. This gives inverse
-chain maps, identity in degree zero. The same calculation can be organized by induction
-on r, splitting off the last exterior generator and the last two-term tensor factor.
-Apply the actual constant-module construction and its completed coefficient extension.
-The coefficient comparison is an isomorphism and the site change is an equivalence;
-their tensor and finite-sum comparisons therefore carry this finite chain isomorphism
-through the displayed functor H. Tensor with the arbitrary complex C: in each total
-degree the Koszul coordinate has finite support, so the same coordinates give an
-isomorphism on the total complexes. Use the identity-on-sections round trip to identify
-the transported input with N. For a transition, both subset coordinates are multiplied
-by the product of the corresponding generators, hence the chain isomorphisms commute
-with the power transitions. In degree zero the empty subset has sign +1, giving exactly
-the displayed augmentation equation. No products, inverse limits or cones occur here.
-
-For r=0 both finite complexes are the tensor unit and the comparison is the unit
-isomorphism. The formulas allow zero or invertible generators, a zero coefficient ring,
-and an empty site; no regularity or generation hypothesis is used. -/
+Source: Stacks Project, more-algebra.tex Tag 0664, Lemma 15.29.12 (tensor decomposition), and
+algebraization.tex Tag 0A0E (finite-free duality identification). -/
 theorem completedKoszulFiniteComparison
     (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A)

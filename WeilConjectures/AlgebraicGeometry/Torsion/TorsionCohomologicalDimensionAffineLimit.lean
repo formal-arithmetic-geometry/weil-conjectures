@@ -20,8 +20,8 @@ import WeilConjectures.AlgebraicGeometry.Sites.TorsionSheaf
 /-!
 # Torsion cohomological dimension at an affine inverse limit
 
-Source: literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/
-lem-sc-cd-affine-limit.md (blueprint: lemma-uniform-bounds-pro-etale-affines).
+A uniform torsion étale cohomological dimension bound passes to cofiltered limits with affine
+transition morphisms.
 -/
 
 @[expose] public section
@@ -33,26 +33,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- A uniform torsion étale cohomological dimension bound passes to a cofiltered
-limit of quasi-compact quasi-separated schemes with affine transition morphisms.
-
-Source: blueprint sec-smooth-purity/sk-prop-sf-cbc, lemma lemma-uniform-bounds-pro-etale-affines,
-statement and proof (blueprint: lemma-uniform-bounds-pro-etale-affines).
-
-Proof:
-1. Mathlib's affine-limit results show that the limit is qcqs. Construct the
-   pull-push approximations p_i^* p_i* F with their adjunction transitions.
-   The reconstruction theorem proves that the counit cocone is a colimit:
-   direct images are jointly faithful by descent of affine étale basis objects;
-   a germ in a counit kernel becomes zero at a later stage by finite-data descent.
-2. If n > 0 kills F, additivity of direct image shows that it kills F_i = p_i* F.
-   Hence F_i and all its inverse images are torsion. Étale cohomology continuity
-   represents any class in H^q(X, p_i^* F_i) by a class on a later stage.
-   The stagewise bound kills that class when q > c. The comparison between
-   Sheaf.H and derived étale cohomology identifies the two vanishing statements.
-3. Commutation of Sheaf.H with filtered colimits now kills H^q(X, F) for a fixed
-   exponent. The existing bounded-exponent reduction for torsion sheaves applies
-   this vanishing to the factorial-torsion filtration and gives the result for
-   every torsion sheaf. Transport back through the derived comparison. -/
+limit of quasi-compact quasi-separated schemes with affine transition morphisms. -/
 theorem hasTorsionEtaleCohomologicalDimensionLE_of_isLimit
     {I : Type u} [SmallCategory I] [IsCofiltered I] (D : I ⥤ Scheme.{u})
     [∀ i : I, CompactSpace (D.obj i)] [∀ i : I, QuasiSeparatedSpace (D.obj i)]

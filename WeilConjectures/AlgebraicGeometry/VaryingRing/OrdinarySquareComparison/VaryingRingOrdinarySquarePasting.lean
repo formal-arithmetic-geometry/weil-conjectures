@@ -8,8 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOrdinaryEvaluationComparisons
 
 /-! Pasting of two ordinary realization comparison equations.
-Source: Zheng, Construction 4.1; functoriality and associativity.
-(blueprint: lem-sp-varying-ring-ordinary-square-pasting). -/
+Source: Zheng, Construction 4.1. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -17,11 +16,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.ProEtale.VaryingRing
 
 /-- Comparison equations for consecutive natural transformations compose.
-Source: functoriality and associativity in Zheng, Construction 4.1
-(blueprint: lem-sp-varying-ring-ordinary-square-pasting).
-Proof: apply map_comp to their composite. Substitute the second comparison
-at its component, then the first comparison with the remaining factor on the
-right. Associativity identifies the result with the required equation. -/
+Source: functoriality and associativity in Zheng, Construction 4.1. -/
 theorem OrdinarySquareComparison.trans
     {A B C D M A' B' C' D' M' : Type*}
     [Category A] [Category B] [Category C] [Category D]

@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassFinite
 
 /-! # The finite Kummer sequence comparison
-
-Source: diagonal-tower trace (1), finite Kummer classes and exact comparison.
-(blueprint: def-sfb-finite-kummer-sequence-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -27,8 +24,7 @@ attribute [local irreducible] Functor.mapDerivedCategory Ext.homEquiv
   integerComparison cartierRootsComparison cartierUnitsComparison
 
 /-- The morphism from the etale Kummer sequence after exact site comparison
-into the evaluated tower Kummer sequence. Source: Stacks 03PL; Cartier comparison
-(blueprint: def-sfb-finite-kummer-sequence-comparison). -/
+into the evaluated tower Kummer sequence. Source: Stacks 03PL. -/
 def finiteKummerSequenceComparison (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
     (k : Kummer l T) (n : ℕ) :
     (T.kummerSequence (l ^ (n + 1))).map

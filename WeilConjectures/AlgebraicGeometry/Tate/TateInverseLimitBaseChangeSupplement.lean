@@ -13,10 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.Strict.Tower.StrictTowerOperatio
 /-!
 # Base change of an inverse-limit tower and its finite tensor reduction
 
-Source: literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
-sk-def-purity-conv/lem-pur-finite-kummer-level.proof.md, final sentence;
-Stacks Project, Tags 03DB, 03CO and 03EL
-(blueprint: lem-pur-tate-inverse-limit-base-change).
+Source: Stacks Project, Tags 03DB, 03CO and 03EL.
 
 The index `op r` denotes the positive level `r + 1`. Scalar extension is the
 recorded sheaf tensor construction, with its pure tensors written in the order `a ⊗ x`.
@@ -204,12 +201,12 @@ private theorem tensorHomEquiv_tmul (T : Scheme.{u})
 attribute [local irreducible] restrictionToTensor
 
 /-- The actual constant-coefficient module category.
-Source: Stacks Tag 03DB (blueprint: lem-pur-tate-inverse-limit-base-change). -/
+Source: Stacks Tag 03DB. -/
 abbrev tateModules (T : Scheme.{u}) (R : Type u) [CommRing R] :=
   proEtaleRingModules T (proEtaleConstantRing T R)
 
 /-- The constant sheaf map induced by a coefficient homomorphism.
-Source: Stacks Tag 03EK (blueprint: lem-pur-tate-inverse-limit-base-change). -/
+Source: Stacks Tag 03EK. -/
 def tateConstantMap (T : Scheme.{u}) {R A : Type u} [CommRing R] [CommRing A]
     (f : R →+* A) : proEtaleConstantRing T R ⟶ proEtaleConstantRing T A :=
   (constantSheaf (ProEt.topology T) CommRingCat.{u + 1}).map
@@ -217,7 +214,7 @@ def tateConstantMap (T : Scheme.{u}) {R A : Type u} [CommRing R] [CommRing A]
       (f.comp ULift.ringEquiv.toRingHom)))
 
 /-- Restriction along the indicated constant coefficient map, with unchanged sections.
-Source: Stacks Tag 03EK (blueprint: lem-pur-tate-inverse-limit-base-change). -/
+Source: Stacks Tag 03EK. -/
 def tateRestrict (T : Scheme.{u}) {R A : Type u} [CommRing R] [CommRing A]
     (f : R →+* A) : tateModules T A ⥤ tateModules T R :=
   SheafOfModules.restrictScalars.{u + 1}
@@ -225,14 +222,14 @@ def tateRestrict (T : Scheme.{u}) {R A : Type u} [CommRing R] [CommRing A]
       (tateConstantMap T f))
 
 /-- The sheaf tensor `M ⊗_R A_T`, with its natural A-module structure.
-Source: Stacks Tag 03EK (blueprint: lem-pur-tate-inverse-limit-base-change). -/
+Source: Stacks Tag 03EK. -/
 def tateTensor (T : Scheme.{u}) {R A : Type u} [CommRing R] [CommRing A]
     (f : R →+* A) (M : tateModules T R) : tateModules T A :=
   SheafOfModules.changeOfRingsOfUniverses.{u, u + 1, u + 1, u + 1}
     (tateConstantMap T f) M
 
 /-- A pure tensor in the sheaf tensor, using the module sheafification unit.
-Source: Stacks Tag 03EK (blueprint: lem-pur-tate-inverse-limit-base-change). -/
+Source: Stacks Tag 03EK. -/
 def tateTmul {T : Scheme.{u}} {R A : Type u} [CommRing R] [CommRing A]
     (f : R →+* A) (M : tateModules T R) (U : T.ProEt)
     (a : (proEtaleConstantRing T A).obj.obj (op U)) (x : M.val.obj (op U)) :
@@ -241,16 +238,14 @@ def tateTmul {T : Scheme.{u}} {R A : Type u} [CommRing R] [CommRing A]
     (tateConstantMap T f) M U a x
 
 /-- Inverse image, transported through the stipulated canonical constant-ring isomorphism.
-Source: Stacks Tags 03D2 and 09A5
-(blueprint: lem-pur-tate-inverse-limit-base-change). -/
+Source: Stacks Tags 03D2 and 09A5. -/
 def tatePullback {T T' : Scheme.{u}} (h : T' ⟶ T) (R : Type u) [CommRing R]
     [IsIso (proEtaleCoefficientInverseImageMap h R)] : tateModules T R ⥤ tateModules T' R :=
   proEtaleRingModulePullback h (proEtaleConstantRing T R) (proEtaleConstantRing T' R)
     (asIso (proEtaleCoefficientInverseImageMap h R))
 
 /-- The canonical inverse-image unit on local module sections.
-Source: Stacks Tags 03D2 and 09A5
-(blueprint: lem-pur-tate-inverse-limit-base-change). -/
+Source: Stacks Tags 03D2 and 09A5. -/
 def tateUnit {T T' : Scheme.{u}} (h : T' ⟶ T) (R : Type u) [CommRing R]
     [IsIso (proEtaleCoefficientInverseImageMap h R)] (M : tateModules T R)
     (U : T.ProEt) (x : M.val.obj (op U)) :

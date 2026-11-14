@@ -16,7 +16,6 @@ import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.CohomologicalDimension
 
 Source: Stacks Project, Tag 0F10, and the separable-closure descent proof in
 `WeilConjectures.SixFunctors.Etale.Derived.Kunneth.CohomologicalDimension`.
-(blueprint: lem-kun-torsion-abelian-direct-image-dimension-bound).
 -/
 
 @[expose] public section
@@ -185,22 +184,7 @@ private theorem module_vanishing
       ((Etale.upperStarId (ModuleCat.{u + 1} Λ) X).app F).symm)))
 
 /-- A uniform dimension bound after extension of the ground field bounds higher direct
-images of every torsion abelian sheaf. Source: Stacks Project, Tag 0F10; separable-closure
-descent as in the source library's Kunneth/CohomologicalDimension module.
-(blueprint: lem-kun-torsion-abelian-direct-image-dimension-bound)
-
-Proof: Regard abelian sheaves as sheaves of modules over ULift Z. Over a separably closed
-field, apply the finite-type cohomology bound on affine etale objects of the target.
-Injective ULift Z-module sheaves have injective underlying abelian sheaves, so the Ext
-comparison computes this as higher direct image. Torsion is preserved by inverse image
-and by the comparison with underlying abelian sheaves. For an arbitrary ground field,
-write its separable closure as the filtered union of finite separable subextensions.
-Base change the source to this system. Its higher direct image at the limit vanishes
-by the separably closed case and the uniform dimension bound. Transition maps from the
-original higher direct image are monic: after the etale surjective extension of the
-target they factor the base change isomorphism. Continuity then forces the original
-higher direct image to vanish. Finally, the exact equivalence with abelian sheaves
-commutes with single-degree complexes, derived direct image, and homology. -/
+images of every torsion abelian sheaf. Source: Stacks Project, Tag 0F10. -/
 theorem isZero_torsion_higherDirectImage_of_forall_field_dimension_le
     {K : Type u} [Field K] {X Y : Scheme.{u}}
     (aX : X ⟶ Spec (.of K)) (aY : Y ⟶ Spec (.of K))

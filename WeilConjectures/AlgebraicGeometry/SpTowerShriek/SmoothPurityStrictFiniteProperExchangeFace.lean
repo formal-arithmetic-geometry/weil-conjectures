@@ -324,18 +324,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 set_option maxHeartbeats 700000 in
 -- Explicit comparison congruences are checked within this declaration.
-/-- Fixed-scalar realization preserves the proper base-change mate.
-Source: blueprint operations proof (2), finite proper exchange face.
-(blueprint: new-lem-sp-strict-finite-proper-exchange-face).
-
-Proof: strictFinitePullbackSquareCoherence identifies the inverse-image cube
-for the four fixed scalar comparisons. The coordinates' counit equations
-identify the two vertical mates with their right comparisons, by injectivity
-of adjunction transposition. Apply exchangeMate_cube and substitute these
-two mate identifications. Its component equation is exactly the displayed
-proper exchange face; derivedBaseChangeMap is the native mate by definition.
-This works for every unbounded object, including zero objects, and does not
-assert that either exchange is invertible. -/
+/-- Fixed-scalar realization preserves the proper base-change mate. -/
 theorem strictFiniteProperExchangeFace (b : Base l E)
     (coordinates : StrictFiniteCoordinates l E b)
     {X' X Y' Y : Scheme.{u}} {h : X' ⟶ X} {f' : X' ⟶ Y'}

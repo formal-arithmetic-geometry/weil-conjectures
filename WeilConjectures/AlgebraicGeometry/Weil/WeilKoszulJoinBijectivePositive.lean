@@ -9,8 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.Weil.WeilKoszulJoinGraded
 
 /-! # Positive-degree vanishing for graded exterior multiplication
 
-The positive-degree part of `koszulJoinGraded_bijective` is a zero-object
-argument. (blueprint: new-weil-pbc-koszul-join-graded-positive)
+We prove the positive-degree part of `koszulJoinGraded_bijective`, where source and target
+are zero.
 -/
 
 @[expose] public section
@@ -61,9 +61,7 @@ private theorem koszulJoinTensor_isZero_of_pos
       (completedKoszulPower_isZero_of_pos r (fun j ↦ a j.succ) m z.as.1.2 hq)
 
 /-- In positive cochain degree both the total tensor term and the target term
-are zero, hence the graded join map is bijective. The proof uses the defining
-extension by zero of `completedKoszulPower` and the coproduct description of a
-homological tensor term. -/
+are zero, hence the graded join map is bijective. -/
 theorem koszulJoinGraded_bijective_of_pos
     {A : Type (u + 1)} [CommRing A] (r : ℕ) (a : Fin (r + 1) → A)
     (m : ℕ) (i : ℤ) (hi : 0 < i) :

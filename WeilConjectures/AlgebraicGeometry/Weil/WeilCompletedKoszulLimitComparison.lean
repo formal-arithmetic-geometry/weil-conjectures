@@ -81,9 +81,7 @@ import Mathlib.CategoryTheory.Limits.Preserves.Limits
 /-!
 # Comparing the published Koszul fiber with the strict derived limit
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E,
-lemma-derived-completion-koszul, and sites-cohomology.tex, Tags 0941 and 0A0A.
-(blueprint: lem-weil-pbc-completed-fiber-strict-limit-comparison).
+Source: Stacks Project, algebraization.tex, Tag 0A0E, and sites-cohomology.tex, Tags 0941 and 0A0A.
 
 This is a comparison of constructions, including the specified units. It makes no
 assertion about Cech complexes, completeness, or the mapping property of completion.
@@ -103,35 +101,8 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The published signed Koszul fiber computes the prescribed strict derived limit,
 including the canonical degree-zero unit, after the explicit ringed-site equivalence.
 
-Source: Stacks Project, Tag 0A0E, proof of lemma-derived-completion-koszul;
-Tags 0A0A and 0941; Bhatt--Scholze, Proposition 3.1.9.
-(blueprint: lem-weil-pbc-completed-fiber-strict-limit-comparison).
-
-Proof: use the explicit small site, completed ring and module equivalence above.
-The coefficient restriction equivalence and the site equivalence preserve products
-and tensor, and their induced derived equivalences commute with localization.
-At power m+1, identify the exterior Koszul complex with the dual of the ordered tensor
-of the positive two-term factors. On the basis of sorted k-element subsets in degree
--k, multiply the identification by (-1)^(k*(k-1)/2). The ratio in consecutive degrees
-is (-1)^(k+1), the dual-differential sign, so contraction agrees with the differential.
-The degree-zero identification is the identity. Both transitions multiply a subset
-by the product of its generators. Tensoring with C therefore gives an isomorphism
-of strict towers with their degree-zero units.
-
-Exact countable products on the pro-etale site imply that the ordinary product of
-complexes preserves quasi-isomorphisms. Resolve the strict tower by a K-injective
-tower and apply its levelwise quasi-isomorphisms to products. The induced map on
-the mapping fibers of 1-shift is a quasi-isomorphism. The strict-tower Roos theorem
-computes the derived inverse limit on this resolution. Its right-derived universal
-property identifies this computation with D.inverseLimit, normalized by D.comparison;
-D.tensorFactors identifies its input with the actual strict tower. The compatible
-degree-zero units have zero composite with 1-shift. Their zero-homotopy lift is
-exactly the published (u,0) map, and all the displayed comparisons preserve that map.
-The representative normalization in D.unit supplies the final equation.
-
-For r=0 the tower is the constant identity tower and its fiber comparison carries
-the diagonal unit to the identity. Zero or invertible generators, the zero ring and
-the empty site satisfy the same formulas. No generation hypothesis is required. -/
+Source: Stacks Project, Tag 0A0E; Tags 0A0A and 0941; Bhatt--Scholze, Proposition 3.1.9.
+-/
 theorem completed_fiber_strict_limit_comparison
     (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A)

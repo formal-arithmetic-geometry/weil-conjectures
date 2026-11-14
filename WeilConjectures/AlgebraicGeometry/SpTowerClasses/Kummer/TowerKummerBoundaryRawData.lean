@@ -22,8 +22,6 @@ open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 
 /-- The actual comparison formula, with its concrete endpoints shared by name.
-Source: blueprint latest, geometric classes proof, clause (2).
-(blueprint: def-sfb-kummer-boundary-raw-equality).
 This predicate is exactly the stated equality of the actual Kummer arrows;
 it adds no hypotheses and no existentially chosen data. -/
 def KummerBoundaryRawEquality (l : ℕ) [Fact l.Prime] {T : Scheme.{u}}

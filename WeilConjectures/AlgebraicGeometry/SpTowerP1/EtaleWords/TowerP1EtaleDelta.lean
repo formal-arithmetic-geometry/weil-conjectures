@@ -17,13 +17,9 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 
 /-! # Ordinary etale words for the projective-line tower comparison
 
-Source: literature/blueprint/latest/blueprint/sec-smooth-purity/
-sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md, Construction and Levels
-(blueprint: def-sp-p1-etale-diagonal-word).
-
 These are formulas in the ordinary etale derived categories. The diagonal is the
 positive supported Cartier Kummer boundary; the trace is the second projection
-of the inverse unit/Chern splitting. No adjunction unit is selected instead.
+of the inverse unit/Chern splitting.
 -/
 
 @[expose] public noncomputable section
@@ -44,12 +40,10 @@ variable (A : Type (u + 1)) [CommRing A]
 
 variable [Finite A] (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
 
-/-- The ordinary shifted finite Tate line, at the actual annihilating exponent.
-Source: Levels, twists and shifts (blueprint: def-sp-p1-etale-diagonal-word). -/
+/-- The ordinary shifted finite Tate line, at the actual annihilating exponent. -/
 abbrev line (T : Scheme.{u}) := (Etale.ordinaryFiniteLine A N hA T)⟦(2 : ℤ)⟧
 
-/-- The positive supported Cartier class in total-derived direct-image coordinates.
-Source: Construction, delta (blueprint: def-sp-p1-etale-diagonal-word). -/
+/-- The positive supported Cartier class in total-derived direct-image coordinates. -/
 def delta (S : Scheme.{u}) (hD : (diagonalImmersion S).ker.IsInvertible)
     (hW : IsUnit (N : Γ(diagonalSurface S, ⊤))) :
     (push A (diagonalImmersion S)).obj (Etale.ordinaryFiniteUnit A (ProjectiveLine S)) ⟶

@@ -17,13 +17,9 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 
 /-! # Ordinary etale words for the projective-line tower comparison
 
-Source: literature/blueprint/latest/blueprint/sec-smooth-purity/
-sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md, Construction and Levels
-(blueprint: def-sp-p1-etale-word-invertibility).
-
 These are formulas in the ordinary etale derived categories. The diagonal is the
 positive supported Cartier Kummer boundary; the trace is the second projection
-of the inverse unit/Chern splitting. No adjunction unit is selected instead.
+of the inverse unit/Chern splitting.
 -/
 
 @[expose] public noncomputable section
@@ -45,8 +41,7 @@ variable (A : Type (u + 1)) [CommRing A]
 variable [Finite A] (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
 
 /-- Only invertibility of named finite arrows, used to spell their inverses.
-These are conclusions in the tower comparison theorem, not hypotheses on its inputs.
-Source: Construction (blueprint: def-sp-p1-etale-word-invertibility). -/
+These are conclusions in the tower comparison theorem, not hypotheses on its inputs. -/
 structure InvertibleWords (S : Scheme.{u}) : Prop where
   projection_q : ∀ K : Etale.DerivedCategoryModule A S,
     IsIso (projection A (ProjectiveLine S ↘ S) (line A N hA (ProjectiveLine S)) K)

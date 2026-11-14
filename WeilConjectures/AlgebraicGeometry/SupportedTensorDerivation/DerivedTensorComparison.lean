@@ -27,9 +27,7 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 
 namespace AlgebraicGeometry.ProEtale.SupportedTensorDerivation
 
-/-- Morphisms comparing a mapped tensor complex with the tensor of two mapped complexes.
-Source: blueprint signed total tensor construction
-(blueprint: lem-pur-derived-tensor-comparison). -/
+/-- Morphisms comparing a mapped tensor complex with the tensor of two mapped complexes. -/
 noncomputable def ComplexHom
     {C : Type*} [Category.{w} C] {D : Type*} [Category.{w} D]
     [Preadditive C] [Preadditive D] [MonoidalCategory C] [MonoidalCategory D]
@@ -41,9 +39,7 @@ noncomputable def ComplexHom
     HomologicalComplex.tensorObj ((F₁.mapHomologicalComplex (.up ℤ)).obj P)
       ((F₂.mapHomologicalComplex (.up ℤ)).obj Q)
 
-/-- The prescribed comparison on each signed tensor bidegree summand.
-Source: blueprint signed total tensor construction
-(blueprint: lem-pur-derived-tensor-comparison). -/
+/-- The prescribed comparison on each signed tensor bidegree summand. -/
 noncomputable def ComplexCondition
     {C : Type*} [Category.{w} C] {D : Type*} [Category.{w} D]
     [Preadditive C] [Preadditive D] [MonoidalCategory C] [MonoidalCategory D]
@@ -58,9 +54,7 @@ noncomputable def ComplexCondition
         ((F₁.mapHomologicalComplex (.up ℤ)).obj P)
         ((F₂.mapHomologicalComplex (.up ℤ)).obj Q) r s n h
 
-/-- Extension from the bidegree summands is unique, by the coproduct universal property.
-Source: blueprint signed total tensor construction
-(blueprint: lem-pur-derived-tensor-comparison). -/
+/-- Extension from the bidegree summands is unique, by the coproduct universal property. -/
 theorem exists_unique_complex
     {D : Type*} [Category.{w} D] {E : Type*} [Category.{w} E]
     [Preadditive D] [Preadditive E] [MonoidalCategory D] [MonoidalCategory E]
@@ -107,9 +101,7 @@ variable (G F₁ F₂ : C ⥤ D) [G.Additive] [F₁.Additive] [F₂.Additive]
   (τ : (Functor.postcompose₂.obj G).obj (curriedTensor C) ⟶
     (((Functor.whiskeringLeft₂ D).obj F₁).obj F₂).obj (curriedTensor D))
 
-/-- The natural comparison of signed total complexes.
-Source: blueprint signed total tensor construction
-(blueprint: lem-pur-derived-tensor-comparison). -/
+/-- The natural comparison of signed total complexes. -/
 noncomputable def ComplexNatTrans :
     (Functor.postcompose₂.obj (G.mapHomologicalComplex (.up ℤ))).obj
         (curriedTensor (CochainComplex C ℤ)) ⟶
@@ -117,18 +109,14 @@ noncomputable def ComplexNatTrans :
         (F₂.mapHomologicalComplex (.up ℤ))).obj (curriedTensor _) :=
   HomologicalComplex.mapBifunctorComparisonNatTrans τ (.up ℤ)
 
-/-- The component of the comparison of signed total complexes.
-Source: blueprint signed total tensor construction
-(blueprint: lem-pur-derived-tensor-comparison). -/
+/-- The component of the comparison of signed total complexes. -/
 noncomputable def ComplexComparison (P Q : CochainComplex C ℤ) :
     ComplexHom G F₁ F₂ P Q :=
   ((ComplexNatTrans G F₁ F₂ τ).app P).app Q
 
 omit [HasDerivedCategory C] [Abelian.HasFunctorialFlatResolution C]
   [HasDerivedCategory D] [Abelian.HasFunctorialFlatResolution D] in
-/-- The comparison has the prescribed map on every bidegree summand.
-Source: blueprint signed total tensor construction
-(blueprint: lem-pur-derived-tensor-comparison). -/
+/-- The comparison has the prescribed map on every bidegree summand. -/
 theorem complex_comparison_spec (P Q : CochainComplex C ℤ) :
     ComplexCondition G F₁ F₂ (fun M N ↦ (τ.app M).app N) P Q
       (ComplexComparison G F₁ F₂ τ P Q) := by
@@ -211,8 +199,7 @@ private theorem mixedTensor_isLeftDerived (F₁ F₂ : C ⥤ D)
   simp only [mixedTensorCounit, NatTrans.comp_app]
   exact IsIso.comp_isIso' inferInstance (IsIso.comp_isIso' inferInstance this)
 
-/-- Families of morphisms between the derived tensor images.
-Source: blueprint derived tensor comparison (blueprint: lem-pur-derived-tensor-comparison). -/
+/-- Families of morphisms between the derived tensor images. -/
 noncomputable def ComparisonHom
     (G F₁ F₂ : C ⥤ D) [G.Additive] [F₁.Additive] [F₂.Additive]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G]
@@ -222,9 +209,7 @@ noncomputable def ComparisonHom
       G.mapDerivedCategory.obj (M ⊗ N) ⟶
         F₁.mapDerivedCategory.obj M ⊗ F₂.mapDerivedCategory.obj N
 
-/-- Reexpress a comparison family using an explicitly presented tensor bifunctor.
-Source: blueprint derived tensor normalization
-(blueprint: lem-pur-derived-tensor-comparison). -/
+/-- Reexpress a comparison family using an explicitly presented tensor bifunctor. -/
 theorem comparisonHom_tensor
     (G F₁ F₂ : C ⥤ D) [G.Additive] [F₁.Additive] [F₂.Additive]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G]
@@ -249,8 +234,7 @@ theorem comparisonHom_tensor
     (fun E : DerivedCategory C → DerivedCategory C → Type (u + 1) ↦ ∀ M N, E M N) e
 
 omit [HasDerivedCategory D] [Abelian.HasFunctorialFlatResolution D] in
-/-- The monoidal tensor on cochain complexes is the signed total tensor.
-Source: blueprint signed total tensor (blueprint: lem-pur-derived-tensor-comparison). -/
+/-- The monoidal tensor on cochain complexes is the signed total tensor. -/
 theorem complexTensor_eq (P Q : CochainComplex D ℤ) :
     P ⊗ Q = HomologicalComplex.tensorObj P Q := rfl
 
@@ -261,8 +245,7 @@ private theorem tensorLocalization_model_eq (P Q : CochainComplex D ℤ) :
   have h : eqToHom (complexTensor_eq P Q) = 𝟙 (P ⊗ Q) := rfl
   rw [h, CategoryTheory.Functor.map_id, Category.comp_id]
 
-/-- Naturality and normalization on all complex models, retaining the signed total tensor.
-Source: blueprint derived tensor comparison (blueprint: lem-pur-derived-tensor-comparison). -/
+/-- Naturality and normalization on all complex models, retaining the signed total tensor. -/
 noncomputable def ComparisonFamilyCondition
     (G F₁ F₂ : C ⥤ D) [G.Additive] [F₁.Additive] [F₂.Additive]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G]
@@ -295,8 +278,7 @@ noncomputable def ComparisonFamilyCondition
             ((F₁.mapHomologicalComplex (.up ℤ)).obj P)
             ((F₂.mapHomologicalComplex (.up ℤ)).obj Q)))))
 
-/-- Naturality and model normalization for a natural tensor comparison.
-Source: blueprint K-flat descent (blueprint: lem-pur-derived-tensor-comparison). -/
+/-- Naturality and model normalization for a natural tensor comparison. -/
 noncomputable def ComparisonCondition
     (G F₁ F₂ : C ⥤ D) [G.Additive] [F₁.Additive] [F₂.Additive]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G]
@@ -309,17 +291,7 @@ noncomputable def ComparisonCondition
     (t : ComparisonHom G F₁ F₂) : Prop :=
   ComparisonFamilyCondition G F₁ F₂ (fun P Q ↦ (τ.app P).app Q) t
 
-/-- A natural comparison of tensor complexes descends uniquely to the derived tensor.
-Source: blueprint supported exterior product, K-flat descent.
-(blueprint: lem-pur-derived-tensor-comparison).
-Proof: resolve the second variable by functorial flat complexes. Since F₂ preserves
-flat objects and colimits, their images are K-flat. The mixed target tensor is therefore
-a total left derived bifunctor, with counit the two exact-functor comparisons followed
-by the tensor-localization counit. Apply its universal property to the image under G
-of the source tensor counit followed by the given comparison. Its factorization equation
-is the displayed model normalization. Naturality comes from the resulting natural
-transformation. Conversely, a normalized natural family gives a natural transformation;
-the uniqueness part of the same universal property identifies it with the constructed one. -/
+/-- A natural comparison of tensor complexes descends uniquely to the derived tensor. -/
 theorem exists_unique_comparison
     (G F₁ F₂ : C ⥤ D) [G.Additive] [F₁.Additive] [F₂.Additive]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G]

@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Finite.FiniteIntegralCategoryWitnesses
 
 /-! # Exact comparison of an integral root class
-
-Source: diagonal-tower trace (1), finite Kummer classes and exact comparison.
-(blueprint: def-sfb-finite-integral-root-class).
 -/
 
 @[expose] public noncomputable section
@@ -31,8 +28,7 @@ attribute [local irreducible] Functor.mapDerivedCategory Ext.homEquiv
   integerComparison cartierRootsComparison cartierUnitsComparison
 
 /-- The comparison image of an arbitrary degree-two etale root class, with the
-canonical integral source and roots endpoints. Source: Stacks 03PL and exact site
-comparison (blueprint: def-sfb-finite-integral-root-class). -/
+canonical integral source and roots endpoints. Source: Stacks 03PL and exact site comparison. -/
 def finiteIntegralRootClass (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) (n : ℕ)
     (x : Sheaf.H (T.rootsOfUnitySheaf (l ^ (n + 1))) 2) :
     FiniteIntegralBoundaryArrow l T n :=
@@ -41,9 +37,7 @@ def finiteIntegralRootClass (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) (n : ℕ)
       ((DerivedCategory.singleFunctor (DiagonalAb T) 0).map
         (cartierRootsComparison T (l ^ (n + 1))))⟦(2 : ℤ)⟧'
 
-/-- The cached root class uses the actual integer and roots comparisons.
-Source: the definition of finiteIntegralRootClass
-(blueprint: def-sfb-finite-integral-root-class). -/
+/-- The cached root class uses the actual integer and roots comparisons. -/
 theorem finiteIntegralRootClass_eq (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) (n : ℕ)
     (x : Sheaf.H (T.rootsOfUnitySheaf (l ^ (n + 1))) 2) :
     finiteIntegralRootClass l T n x =

@@ -24,11 +24,7 @@ import WeilConjectures.CategoryTheory.ScalarLocalization.SemilinearScalarLocaliz
 
 /-! # Tate twists are well defined and locally free of rank one
 
-Source: `literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/
-sk-def-sp-tate-twist-locally-free.md`, clauses (1)--(3)
-(blueprint: definition-tate-twists).
-
-The helpers specialize the recorded constant sheaf, root module, scalar extension,
+The helpers specialize the constant sheaf, root module, scalar extension,
 signed line and tensor functors. All positive root levels are indexed by `n + 1`.
 The theorem includes one common cover, normalized generators, canonical Kummer
 independence, signed invertible lines and equivalences with the negative twists.
@@ -204,45 +200,6 @@ private theorem tateQbarInverse
 /-- One common covering trivializes the compatible root generators and all coefficient
 lines; Kummer transitions induce the canonical A-linear isomorphisms; every signed twist
 is a line, with positive and negative twist functors inverse on the specified categories.
-
-Source: `literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/
-sk-def-sp-tate-twist-locally-free.md`, all three clauses
-(blueprint: definition-tate-twists).
-
-Proof:
-1. The compatible root-tower local model supplies one pro-etale cover, compatible
-   sections at every positive root level, and unit-to-root basis isomorphisms.
-   Their naturality gives the displayed transition and slice formulas.
-2. Annihilation supplies the quotient map from Z/ell^(r+1) to A. Form the
-   scalar-extension adjunct of the specified root transition. Its value on a
-   pure tensor is the prescribed Kummer formula. On the root cover it carries
-   the chosen generator to the chosen generator, so it is locally and globally
-   an isomorphism. Signed-line tensor equivalences give all finite signed powers
-   and their two inverse functors on unbounded complexes.
-3. Extend the same integral root basis to every finite coefficient field E.
-   The completed integral local model identifies this extension with the actual
-   integral Tate line. Signed powers and internal duals remain trivial on the
-   same cover. The finite scalar reductions are the finite Tate lines already
-   constructed, so coherent reduction and reconstruction give the two inverse
-   intrinsic integral twist functors.
-4. Identify the actual integral right-tensor functor with its completed line
-   model. Prove its additivity and scalar linearity. Localize the two inverse
-   natural isomorphisms; induction on pure Hom scalar tensors identifies these
-   localized functors with the intrinsic rational twist functors.
-5. For each signed integral line, the completed pullback calculation for a
-   supplied slice basis identifies its actual derived inverse image with the
-   regular line. Rational pullback then gives the required rational local
-   trivializations. Transport these from the least finite coefficient stage
-   to obtain the algebraically closed local trivializations.
-6. Compute opposite integral Tate object products using a flat single-complex
-   representative, completeness, the ordinary-to-completed comparison and the
-   signed evaluation isomorphism. Localize this product to rational
-   coefficients and identify the common-stage product on objects from one stage.
-7. Natural fixed-right tensor associativity and the specified regular unit in
-   the common-stage category combine with the opposite object products (and
-   braiding for the reversed product) to give both inverse composites of the
-   actual algebraically closed twist functors. Assemble all clauses using the
-   original common root cover.
 -/
 theorem tateTwist_locallyFree
     (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]

@@ -39,8 +39,7 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Integral.IntegralSitePul
 
 /-! # Integer endpoint in the change-of-site pullback square
 
-Source: Stacks Project, Tag 00WX; the integral class construction in
-sec-smooth-purity/sk-prop-sp-tower-geometric, classes proof (2).
+Source: Stacks Project, Tag 00WX.
 -/
 
 @[expose] public noncomputable section
@@ -54,15 +53,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 
 /-- Integer endpoint square for the etale-to-pro-etale pullback.
 
-Source: Stacks Project, Tag 00WX, and the integer endpoint part of the
-change-of-site construction in the classes proof.
-(blueprint: lem-sp-integral-site-pullback-integer-endpoint).
-
-Proof: transpose through the two inverse-image adjunctions and the
-constant-sheaf adjunction. The two resulting maps are the same constant-section
-map on every base-changed chart, so adjunction injectivity proves the equality.
-This endpoint identity is a strict substatement of the conjunction in
-`integral_site_pullback_endpoints`.
+Source: Stacks Project, Tag 00WX.
 -/
 theorem integral_site_pullback_integer_endpoint {X Y : Scheme.{u}} (f : X ⟶ Y) :
     let κ := comparisonUpperStarCompUpperStarIso AddCommGrpCat.{u + 1} f

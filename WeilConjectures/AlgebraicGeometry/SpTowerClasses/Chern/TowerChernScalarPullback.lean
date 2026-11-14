@@ -11,9 +11,6 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Chern.TowerChernOrdinary
 import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Scalar.TowerScalarPullbackCounitLift
 
 /-! # Pullback of scalar extension from integral quotient coefficients
-
-Source: blueprint classes proof (2), realization steps 1, 2 and 5
-(blueprint: lem-sp-tower-chern-scalar-pullback).
 -/
 
 @[expose] public noncomputable section
@@ -67,43 +64,8 @@ private theorem scalar_shift_endpoint
       simp only [Functor.map_comp, Category.assoc]
       rw [Q.commShiftIso_hom_naturality_assoc]
 
-/-- Construct the intermediate R inverse image and the R-to-A scalar comparison.
-The endpoint equations start on R-modules, not on integral complexes. In particular
-they contain no integral reduction functor, unitIso of Chern data, or rootIso of
-Chern data. They can be used with any reduction model after its separate comparison.
-
-Source: blueprint classes proof (2); realization proof steps 1, 2 and 5
-(blueprint: lem-sp-tower-chern-scalar-pullback).
-
-Proof: present whole abelian and module towers on the vertical sequence site.
-Pullback of the actual constant rings Z/ell^(n+1) preserves their quotient
-transitions. Construct the exact inverse image of R-modules and its forgetful
-comparison. Pullback of the coefficient unit sends each integer to itself. The
-pullback maps on units and roots, with their power transitions, form a morphism
-of the Kummer sequences. Kernel exactness and cartesianness of roots give its
-root isomorphism. These give d and its displayed ordinary normalizations.
-Apply algebra-diagram pullback/extension coherence to R -> A. Its balanced
-comparison on flat-term K-flat representatives sends a tensor of a pulled-back
-module section and a scalar to the same tensor after restriction. Descend to all
-derived R-systems and transport to cY.scalar and cX.scalar through their universal
-derived counits. This gives kappa. Scalar-unit normalization fixes its component
-on the coefficient module; after the fixed ordinary adjunction, both sides send
-each scalar to itself. CoefficientPullback.normalization identifies this with
-theta_0. For the root module choose a pro-etale cover with compatible generators
-of the whole root tower. On this cover its tensor is exact levelwise; hence the
-derived scalar counit is ordinary root-tensor extension. The comparison sends
-u tensor a to f^*u tensor f^*a and respects the power/quotient transitions. The
-uniquely normalized finite line realization and LinePullback.normalization
-identify this ordinary map with theta_1. Single full faithfulness for the whole
-module-system category identifies the derived degree-zero map, and canonical
-shift compatibility gives the equation at shift two below. No Kummer boundary,
-integral reduction, or line-bundle class is used in either scalar equation.
-
-Implementation: factor the ordinary construction and the generic derived lift into
-separate obligations. Naturality of the scalar counit gives both endpoint squares;
-its component at the root is lineComparison. Transport the unshifted root square
-using the proved shift calculation, without inverting this counit or using derived
-single full faithfulness. -/
+/-- Construct the intermediate R inverse image and the R-to-A scalar comparison,
+with their compatibilities on the coefficient unit and root modules. -/
 theorem tower_chernScalar_pullback
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (_hX : IsUnit (l : Γ(X, ⊤))) (_hY : IsUnit (l : Γ(Y, ⊤)))

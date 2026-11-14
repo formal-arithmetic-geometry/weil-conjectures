@@ -17,8 +17,7 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.B
 /-!
 # Normalized proper/open calculus on strict pro-etale towers
 
-Source: Stacks Project, Tags 0F7B, 0F7C, 0F7D, 0F7F, 07A7 and 09AE, and the explicit
-strict-tower refinement in the blueprint (blueprint: def-cbc-strict-tower-proper-open-arrows).
+Source: Stacks Project, Tags 0F7B, 0F7C, 0F7D, 0F7F, 07A7 and 09AE.
 
 The index `n : ℕ` denotes positive level `n+1`. All derived categories below localize
 complexes of strict towers, rather than forming towers in separate derived categories.
@@ -744,15 +743,14 @@ private noncomputable def fixedOpen {U X : Scheme.{u}} (j : U ⟶ X)
     (asIso (openImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} B) j))
 
 /-- Canonical comparison of the two iterated inverse images around any commutative square.
-Source: Stacks, Tag 07A7 (blueprint: def-cbc-strict-tower-proper-open-arrows). -/
+Source: Stacks, Tag 07A7. -/
 noncomputable def squareG {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) (h : k ≫ p = r ≫ i) :
     G B i ⋙ G B r ≅ G B p ⋙ G B k :=
   (gComp B r i).symm ≪≫ eqToIso (congrArg (G B) h.symm) ≪≫ gComp B k p
 
 /-- The inverse cartesian open comparison is defined by precisely the open-unit transpose.
-Source: Stacks, Tags 09AE and 07A7
-(blueprint: def-cbc-strict-tower-proper-open-arrows). -/
+Source: Stacks, Tags 09AE and 07A7. -/
 noncomputable def betaInvApp {U' U X' X : Scheme.{u}}
     (gU : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : gU ≫ j = j' ≫ g)
@@ -762,10 +760,7 @@ noncomputable def betaInvApp {U' U X' X : Scheme.{u}}
     ((G B gU).map ((jAdj B j).unit.app M) ≫
       (squareG B gU j' j g h).inv.app ((J B j).obj M))
 
-/-- Naturality of the specified open-unit transpose. Source: Stacks, Tag 09AE
-(blueprint: def-cbc-strict-tower-proper-open-arrows).
-Proof: use naturality of the open unit, the pullback compositor and the adjunction
-Hom equivalence. The transposes of both sides are the same naturality square. -/
+/-- Naturality of the specified open-unit transpose. Source: Stacks, Tag 09AE. -/
 theorem betaInvApp_naturality {U' U X' X : Scheme.{u}}
     (gU : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : gU ≫ j = j' ≫ g)
@@ -777,7 +772,7 @@ theorem betaInvApp_naturality {U' U X' X : Scheme.{u}}
     Functor.whiskerLeft (J B j) (squareG B gU j' j g h).inv).naturality f
 
 /-- The inverse comparison as a natural transformation with the specified transpose.
-Source: Stacks, Tag 09AE (blueprint: def-cbc-strict-tower-proper-open-arrows). -/
+Source: Stacks, Tag 09AE. -/
 noncomputable def betaInv {U' U X' X : Scheme.{u}}
     (gU : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : gU ≫ j = j' ≫ g) :
@@ -785,11 +780,7 @@ noncomputable def betaInv {U' U X' X : Scheme.{u}}
   app := betaInvApp B gU j' j g h
   naturality := betaInvApp_naturality B gU j' j g h
 
-/-- The open-extension unit is invertible. Source: Stacks, Tags 03DI and 09AE
-(blueprint: def-cbc-strict-tower-proper-open-arrows).
-Proof: on an object lying over the open there is exactly one lift to it, so restriction
-of the extension presheaf is the original module. This survives sheafification,
-termwise extension to strict towers, and exact localization. -/
+/-- The open-extension unit is invertible. Source: Stacks, Tags 03DI and 09AE. -/
 theorem jAdj_unit_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     IsIso (jAdj B j).unit := by
   let A := ModuleCat.{u + 1} B
@@ -889,12 +880,7 @@ private theorem squareG_lift {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
       (moduleJ B j') (moduleOpenSquare B gU j' j g hsq))
 
 /-- The unit-normalized comparison is invertible for a cartesian open square and
-arbitrary B. Source: Stacks, Tag 09AE and blueprint, second proof step
-(blueprint: def-cbc-strict-tower-proper-open-arrows).
-Proof: transport ordinary open base change through the equivalence between constant-ring
-modules and sheaves of fixed B-modules, then extend termwise and localize. Thus G_g J_j M
-lies in the essential image of the fully faithful J_jprime. The specified transpose is
-its invertible counit composed with J_jprime of the pulled-back invertible open unit. -/
+arbitrary B. Source: Stacks, Tag 09AE. -/
 theorem betaInv_isIso {U' U X' X : Scheme.{u}}
     (gU : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : gU ≫ j = j' ≫ g)
@@ -916,7 +902,7 @@ theorem betaInv_isIso {U' U X' X : Scheme.{u}}
   exact NatIso.isIso_of_isIso_app _
 
 /-- Cartesian open base change, oriented as G_g j_! → j'_! G_gU.
-Source: Stacks, Tag 09AE (blueprint: def-cbc-strict-tower-proper-open-arrows). -/
+Source: Stacks, Tag 09AE. -/
 noncomputable def beta {U' U X' X : Scheme.{u}}
     (gU : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : gU ≫ j = j' ≫ g)
@@ -1010,13 +996,8 @@ private theorem evalG_eq {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     Iso.symm_hom, Category.id_comp]
 
 set_option backward.isDefEq.respectTransparency true in
-/-- Evaluation at finite constant coefficients gives exactly the dependency's
-unit-normalized open base change. Source: Stacks, Tag 09AE
-(blueprint: def-cbc-strict-tower-proper-open-arrows).
-Proof: transpose inverse comparisons under the open adjunction. Evaluation
-commutes with termwise G and J, and evaluates their units to the ordinary units.
-The two transposes are identical. Exact localization and the adjunction Hom
-bijection give equality of these particular comparisons. -/
+/-- Evaluation at finite constant coefficients gives exactly the
+finite-coefficient unit-normalized open base change. Source: Stacks, Tag 09AE. -/
 theorem beta_evaluation [Finite B] {U' U X' X : Scheme.{u}}
     (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : a ≫ j = j' ≫ g)
@@ -1056,18 +1037,12 @@ theorem beta_evaluation [Finite B] {U' U X' X : Scheme.{u}}
 
 
 /-- The map of a proper/open commutative square into its canonical fibre product.
-Source: Stacks, Tag 0F7B and blueprint, third proof step
-(blueprint: def-cbc-strict-tower-proper-open-arrows). -/
+Source: Stacks, Tag 0F7B. -/
 noncomputable abbrev squareLift {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) (h : k ≫ p = r ≫ i) := pullback.lift k r h
 
 /-- The induced lift is open and closed; no cartesian or identity-left assumption.
-Source: Stacks, Tags 01W6 and 01IQ, and blueprint, third proof step
-(blueprint: def-cbc-strict-tower-proper-open-arrows).
-Proof: identify the fibre product with p⁻¹(S), an open in W. The map s identifies V
-with k(V) inside this open. The base change q of p is separated and q s = r is
-proper, so the proper-over-separated theorem makes s proper. A proper open immersion
-is closed. This includes the empty open and gives the complementary open component. -/
+Source: Stacks, Tags 01W6 and 01IQ. -/
 theorem squareLift_clopen {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
@@ -1084,16 +1059,14 @@ theorem squareLift_clopen {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
   exact ⟨hopen, IsClosedImmersion.of_isPreimmersion _
     ((squareLift k r p i h).isClosedMap.isClosed_range)⟩
 
-/-- Open part of the clopen factorization. Source: Stacks, Tags 01W6 and 01IQ
-(blueprint: def-cbc-strict-tower-proper-open-arrows). -/
+/-- Open part of the clopen factorization. Source: Stacks, Tags 01W6 and 01IQ. -/
 noncomputable instance squareLift_open {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
     (h : k ≫ p = r ≫ i) : IsOpenImmersion (squareLift k r p i h) :=
   (squareLift_clopen k r p i h).1
 
-/-- Closed part of the clopen factorization. Source: Stacks, Tags 01W6 and 01IQ
-(blueprint: def-cbc-strict-tower-proper-open-arrows). -/
+/-- Closed part of the clopen factorization. Source: Stacks, Tags 01W6 and 01IQ. -/
 noncomputable instance squareLift_closed {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
@@ -1101,8 +1074,7 @@ noncomputable instance squareLift_closed {V W S T : Scheme.{u}} (k : V ⟶ W) (r
   (squareLift_clopen k r p i h).2
 
 /-- The canonical map from open extension to direct image is the counit mate of the
-inverse open unit. Source: Stacks, Tags 03DI and 09AE
-(blueprint: def-cbc-strict-tower-proper-open-arrows). -/
+inverse open unit. Source: Stacks, Tags 03DI and 09AE. -/
 noncomputable def openToR {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     J B j ⟶ R B j :=
   (Functor.rightUnitor _).inv ≫ Functor.whiskerLeft (J B j) (adj B j).unit ≫
@@ -1123,13 +1095,7 @@ noncomputable def openToR {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (towerDirectImage B j).rightDerivedFunctorIsoMapDerivedCategory.symm
 
 /-- For a clopen immersion the canonical open-to-direct-image comparison is invertible.
-Source: Stacks, Tag 09AE and blueprint, fourth proof step
-(blueprint: def-cbc-strict-tower-proper-open-arrows).
-Proof: transport the ordinary clopen extension/direct-image isomorphism through the
-constant-ring module equivalence. Termwise direct image is therefore exact, so its
-right derived functor R is isomorphic to J and is fully faithful. The direct-image
-adjunction unit is invertible on J M, which lies in the essential image of R. The
-specified comparison is this unit followed by R of the inverse open unit. -/
+Source: Stacks, Tag 09AE. -/
 theorem openToR_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     [IsClosedImmersion j] : IsIso (openToR B j) := by
   let d := derivedClopenIso B j
@@ -1151,17 +1117,15 @@ theorem openToR_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     exact IsIso.comp_isIso' hu (IsIso.comp_isIso' hw (IsIso.id _))
   exact NatIso.isIso_of_isIso_app _
 
-/-- The intrinsic clopen component projection, with no arbitrary splitting choice.
-Source: Stacks, Tag 09AE and blueprint, fourth proof step
-(blueprint: def-cbc-strict-tower-proper-open-arrows). -/
+/-- The intrinsic clopen component projection.
+Source: Stacks, Tag 09AE. -/
 noncomputable def pi {U X : Scheme.{u}} (s : U ⟶ X) [IsOpenImmersion s]
     [IsClosedImmersion s] : 𝟭 (Derived B X) ⟶ G B s ⋙ J B s :=
   (adj B s).unit ≫ Functor.whiskerLeft (G B s)
     (@inv _ _ _ _ (openToR B s) (openToR_isIso B s))
 
 /-- The normalized non-cartesian open comparison uses beta and the intrinsic clopen
-projection, followed by the open and pullback compositors. Source: Stacks, Tag 0F7B
-(blueprint: def-cbc-strict-tower-proper-open-arrows). -/
+projection, followed by the open and pullback compositors. Source: Stacks, Tag 0F7B. -/
 noncomputable def alpha {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
@@ -1183,8 +1147,7 @@ noncomputable def alpha {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
       (eqToIso (congrArg (G B) (pullback.lift_snd k r h))).hom) (J B k)
 
 /-- The proper/open comparison is exactly the proper-adjunction mate of alpha.
-Source: Stacks, Tags 0F7B and 07A7
-(blueprint: def-cbc-strict-tower-proper-open-arrows). -/
+Source: Stacks, Tags 0F7B and 07A7. -/
 noncomputable def gamma {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
@@ -1192,7 +1155,7 @@ noncomputable def gamma {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
   mateEquiv (adj B r) (adj B p) (alpha B k r p i h)
 
 /-- The base-change arrow is the mate of the canonical pullback-square isomorphism.
-Source: Stacks, Tag 07A7 (blueprint: def-cbc-strict-tower-proper-open-arrows). -/
+Source: Stacks, Tag 07A7. -/
 noncomputable def exchange {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) (h : k ≫ p = r ≫ i) :
     R B p ⋙ G B i ⟶ G B k ⋙ R B r :=

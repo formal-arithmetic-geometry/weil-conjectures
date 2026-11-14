@@ -16,7 +16,6 @@ import all WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedDirectImageSecti
 /-! # The normalized derived square on an injective roof
 
 Source: Stacks Project, Cohomology, Tags 01FB, 0D5T and 0D5X.
-(blueprint: lem-weil-pbc-square-injective-roof-action).
 -/
 
 @[expose] public section
@@ -215,24 +214,9 @@ attribute [local irreducible] Functor.rightDerivedFunctor Functor.rightDerivedFu
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The derived square, on raw section cohomology, is represented by its augmented
-injective roof. This statement contains no classical cohomology or restricted resolution.
-Source: Stacks Project, Tag 01FB (Remark explain-arrow), Tag 0D5T (composition of
-right-derived direct images), Tag 0D5X (local derived sections)
-(blueprint: lem-weil-pbc-square-injective-roof-action).
-
-Proof: Extend I, J and L by zero to integer indices. Their injective terms and lower bound
-make them K-injective. The augmentation equation identifies the derived coefficient map
-with Q(beta) followed by the inverse of Q(ell), using naturality of the right-derived unit
-and of the single-complex comparison. The direct-image square mate theorem and the pasted
-unit equation identify the two routes through Rf Rv and Rg Rk with the sectionwise ordinary
-pushforward comparison. Compute local sections on these representatives. Naturality of the
-local derived-sections unit and its universal factorization for local Leray carry the two
-arrows to Gamma(U,beta) and Gamma(U,ell). Exact evaluation commutes with homology. The
-inverse-open comparison uses the same K-injective representative as its local model;
-its two model comparisons therefore cancel. The raw endpoint comparisons are exactly
-squareInjectiveLocalComparison, so postcomposing with H(Gamma(U,ell)) gives the displayed
-numerator equation. The argument is valid on empty opens and in degree zero and requires
-neither flatness nor preservation of injectives by v_* or f_*. -/
+injective roof.
+Source: Stacks Project, Tag 01FB (Remark explain-arrow), Tag 0D5T (composition of right-derived
+direct images), Tag 0D5X (local derived sections). -/
 theorem square_injectiveRoof_action {X S Z T : Scheme.{u}}
     (f : X ⟶ S) (k : Z ⟶ T) (g : T ⟶ S) (v : Z ⟶ X) (h : v ≫ f = k ≫ g)
     (F : X.Modules) (G : Z.Modules) (φ : F ⟶ (pushforward v).obj G)

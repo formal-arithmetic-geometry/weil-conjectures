@@ -12,8 +12,7 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-! # Computing source derived sections on an injective representative
 
-Source: Stacks Project, Tags 03Q8 and 03Q9, final injective-complex paragraph.
-(blueprint: lem-weil-pbc-strict-local-injective-source-transition).
+Source: Stacks Project, Tags 03Q8 and 03Q9.
 -/
 
 /- This original-model counterpart follows the proved calculation in
@@ -32,26 +31,8 @@ namespace AlgebraicGeometry.Etale
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- The canonical cycle comparison commutes with neighbourhood restriction.
-Source: Stacks Project, Tag 03Q8, computation of direct images by injective complexes;
-Tag 03Q9, restrictions of the complex of sections.
-(blueprint: lem-weil-pbc-strict-local-injective-source-transition).
-
-Proof: write M for the complex underlying J and L for f_*M. The right-derived unit
-on M is natural and invertible. Under its comparison with Rf_*K, precomposition by
-the free sheaf of a neighbourhood map is precomposition in HomComplex(Z[V][0], L).
-The localization bijection on Hom into the K-injective complex L commutes with
-this precomposition: apply Qh to the corresponding chain maps and use functoriality.
-Evaluation of the free generator commutes with the neighbourhood map by Yoneda
-naturality. Hence the induced map on the complex of sections is L's restriction
-map. Direct image evaluates this as restriction on the base-changed neighbourhood.
-The localization-restriction comparison for each etale projection is the unique
-comparison of two left adjoints to the same direct image; its unit compatibility
-identifies this map with sectionsPullbackNat followed by upperStarComp.inv.
-This is exactly the chain map defining termwiseSectionsRestriction. Naturality of
-the Hom-complex homology isomorphism and of homologyFunctorFactors gives the stated
-square. Transport by q is natural and therefore preserves it. No cone leg or mate
-is involved. Identity transitions reduce to identity chain maps; zero complexes
-and all integer degrees use the same computation. -/
+Source: Stacks Project, Tag 03Q8, computation of direct images by injective complexes; Tag 03Q9,
+restrictions of the complex of sections. -/
 theorem smallModel_strictLocalInjectiveSourceIso_transition {X S : Scheme.{v}}
     (f : X ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)

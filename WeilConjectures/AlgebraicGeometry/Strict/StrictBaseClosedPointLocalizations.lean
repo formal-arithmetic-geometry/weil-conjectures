@@ -50,8 +50,7 @@ import WeilConjectures.AlgebraicGeometry.Strict.Henselization.StrictHenselizatio
 
 /-! # Strict localizations above the closed point of a strict-local base change
 
-Source: Stacks Project, Tags 0GIP (case (2)), 0GJS and 0GJU, first paragraph
-(blueprint: lem-weil-pbc-strict-base-closed-point-localizations).
+Source: Stacks Project, Tags 0GIP (case (2)), 0GJS and 0GJU.
 -/
 
 @[expose] public section
@@ -222,38 +221,14 @@ private theorem strict_pointed_hom_ext
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Strict-local base change preserves strict localizations above its closed point.
-Source: Stacks Project, Tags 0GIP (case (2)), 0GJS and 0GJU, first paragraph
-(blueprint: lem-weil-pbc-strict-base-closed-point-localizations).
+Source: Stacks Project, Tags 0GIP (case (2)), 0GJS and 0GJU.
 
 `hcart` allows any presentation of the specified fibre product. The canonical
 closed-point lift is `Spec.map (CommRingCat.ofHom (strictHenselizationRingPointEvaluation s))`.
 The functorial maps `b`, `d`, `q` are specified by their structural equations and their
-compatibility with the canonical geometric-point lifts. By strict-henselization
-functoriality these are precisely the canonical maps, not arbitrary maps over the base.
+compatibility with the canonical geometric-point lifts.
 Here `b` is the map from the strict localization of the new base to that of the old
-base, `d` is the strict-local map induced by `f`, and `q` is induced by `p`.
-
-Proof:
-1. The canonical evaluation factors through a surjection onto the relative separable
-closure and its embedding into the geometric-point field. It is therefore local, and
-its spectrum sends the field point to the closed point of the strict-local ring.
-2. Every strict-local structural map is weakly etale. Indeed it factors through an
-   affine open containing the image of the closed point; the affine-chart ind-etale
-   lemma makes that factor ind-etale, hence weakly etale. Open immersions are etale.
-3. Base change makes p weakly etale. The structural equations hb and hq, together with
-   cancellation for weakly etale morphisms, make b and q weakly etale. Their pointed
-   equations make the corresponding ring maps local. Olivier's theorem for local
-   weakly etale maps out of strictly henselian rings makes b and q isomorphisms.
-4. The equation hclosed places the new base point at the closed point of the original
-   strict-local ring. Its structural map is thus local and weakly etale, so the same
-   theorem makes it an isomorphism. Define e as its inverse followed by b.
-5. The two maps in the compatibility equation have the same structural and pointed
-   composites, by hcart, hb, hd, hq and the corresponding pointed equations. Compose
-   with each pointed etale neighbourhood. Etale pointed-map rigidity makes these
-   composites equal; the strict-local limit then identifies the two maps themselves.
-6. Apply pullback.map to q, the identity on the geometric point, and e.hom. All three
-   maps are isomorphisms, so the induced map is an isomorphism. Its two projection
-   equations are exactly the equations asserted here. No field algebraicity is used. -/
+base, `d` is the strict-local map induced by `f`, and `q` is induced by `p`. -/
 theorem strictBaseClosedPointLocalizations
     {X S X' : Scheme.{u}} (f : X ⟶ S)
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)

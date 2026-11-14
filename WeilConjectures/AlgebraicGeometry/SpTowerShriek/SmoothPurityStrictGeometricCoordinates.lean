@@ -34,7 +34,7 @@ import WeilConjectures.AlgebraicGeometry.SpTowerShriek.SmoothPurityStrictOrdinar
 
 /-! # Constant-section geometric coordinates on strict ell-power systems
 
-Source: Zheng Construction 4.1 and Lemma 4.10; blueprint operations proof (2).
+Source: Zheng Construction 4.1 and Lemma 4.10.
 -/
 
 @[expose] public noncomputable section

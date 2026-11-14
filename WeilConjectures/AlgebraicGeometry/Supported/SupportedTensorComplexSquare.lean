@@ -17,9 +17,8 @@ universe w
 open CategoryTheory CategoryTheory.Limits MonoidalCategory HomologicalComplex
 namespace AlgebraicGeometry.Etale
 
-/-- The square of signed total coefficient comparisons, packaged before specialization
-so its repeated tensor-complex structures remain shared.
-Source: Tag 0F1E (blueprint: lem-pur-supported-tensor-complex-square). -/
+/-- The square of signed total coefficient comparisons.
+Source: Tag 0F1E. -/
 @[irreducible]
 noncomputable def supportedTensorComplexSquareCondition
     {C D E : Type*} [Category.{w} C] [Category.{w} D] [Category.{w} E]
@@ -51,14 +50,7 @@ noncomputable def supportedTensorComplexSquareCondition
         (curriedTensor E) (.up ℤ)
 
 /-- An ordinary coefficient tensor square induces the same square on signed total complexes.
-Source: Tag 0F1E, the signed totalization step of supported product localization.
-(blueprint: lem-pur-supported-tensor-complex-square).
-Proof: in each total degree, use the coproduct extensionality for the image under G' of
-all tensor bidegree summands. Naturality of the degreewise coefficient map moves it past
-the summand inclusion. The normalization of each total comparison reduces the resulting
-square to the assumed ordinary square in that bidegree. Tensoring the two degreewise
-maps commutes with the summand inclusions. This proves equality in every degree, hence
-equality of the chain maps, with the signed differentials already built into totalization. -/
+Source: Tag 0F1E. -/
 theorem supportedTensorComplex_square
     {C D E : Type*} [Category.{w} C] [Category.{w} D] [Category.{w} E]
     [Preadditive C] [Preadditive D] [Preadditive E]

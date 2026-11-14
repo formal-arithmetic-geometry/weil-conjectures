@@ -21,8 +21,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 
 /-- Apply exact forgetting between prescribed source and target maps.
-Source: blueprint latest, geometric classes proof, clause (2).
-(blueprint: def-sfb-underlying-single-arrow).
 This is the actual composite of the single source map, exact transport and
 shifted single target map, constructed before specializing either category. -/
 @[irreducible] def underlyingSingleArrow

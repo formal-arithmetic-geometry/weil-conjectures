@@ -10,9 +10,6 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Line.TowerLineEvaluation
 import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Finite.FiniteTateLineUniversal
 
 /-! # Diagonal for canonical tower classes
-
-Source: blueprint main-20261015, chap-Smooth-purity,
-`sk-prop-sp-tower-geometric-classes` (blueprint: def-sp-tower-class-diagonal).
 -/
 
 @[expose] public noncomputable section
@@ -35,31 +32,21 @@ namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The divisor line is the dual of the actual diagonal ideal.
-Source: classes (3), def-pc-divisor-line-bundle
-(blueprint: def-sp-tower-class-diagonal). -/
+/-- The divisor line is the dual of the actual diagonal ideal. -/
 def diagonalLine (S : Scheme.{u}) : (diagonalSurface S).Modules :=
   Scheme.Modules.dual ((diagonalImmersion S).ker.toModules)
 
-/-- The divisor line is invertible because the specified diagonal ideal is Cartier.
-Source: classes (3) (blueprint: def-sp-tower-class-diagonal).
-Proof: the equations b-a and 1-ab are regular on the standard charts. The
-recorded Cartier theorem makes the ideal invertible, and its dual is invertible
-by def-pc-divisor-line-bundle. -/
+/-- The divisor line is invertible because the specified diagonal ideal is Cartier. -/
 theorem diagonalLine_invertible (S : Scheme.{u}) :
     Scheme.Modules.IsInvertible (diagonalLine S) := by
   exact (diagonalImmersion_cartier S).isInvertible_dual_toModules
 
-/-- The Picard class of the actual diagonal divisor line.
-Source: classes (3) (blueprint: def-sp-tower-class-diagonal). -/
+/-- The Picard class of the actual diagonal divisor line. -/
 def diagonalPic (S : Scheme.{u}) : (diagonalSurface S).Pic :=
   @Scheme.Pic.ofIsInvertible _ (diagonalLine S) (diagonalLine_invertible S)
 
 /-- The standard negative-projection Cartier boundary with values in all pro-etale
-units. The dependency's positive projection class is negated before the canonical
-units comparison and the exact constant-tower functor are applied.
-Source: classes (3), beta = a[1](-p v inverse)
-(blueprint: def-sp-tower-class-diagonal). -/
+units, transported along the units comparison and the exact constant-tower functor. -/
 def diagonalBoundary (S : Scheme.{u}) :
     (DerivedCategory.singleFunctor (Ab (diagonalSurface S)) 0).obj
       ((constant (diagonalSurface S)).obj (diagonalIntegralSource S)) ⟶
@@ -70,15 +57,12 @@ def diagonalBoundary (S : Scheme.{u}) :
       ((DerivedCategory.singleFunctor (DiagonalAb (diagonalSurface S)) 0).map
         (cartierUnitsComparison (diagonalSurface S)))⟦(1 : ℤ)⟧')
 
-/-- The actual hyperplane line on the recorded relative projective line.
-Source: classes (4), def-pc-projective-space-twist
-(blueprint: def-sp-tower-class-diagonal). -/
+/-- The actual hyperplane line on the recorded relative projective line. -/
 def hyperplanePic (S : Scheme.{u}) : (ProjectiveLine S).Pic :=
   Scheme.Pic.mk (ProjectiveSpace.twist (ULift.{u} (Fin 2)) S 1)
 
-/-- Canonical pullback of the coefficient unit: after taking the ordinary
-adjoint and evaluating, its sections are the actual constant-ring restriction.
-Source: classes (3)--(4), tower units (blueprint: def-sp-tower-class-diagonal). -/
+/-- Canonical pullback of the coefficient unit, whose ordinary adjoint evaluates to the
+constant-ring restriction on sections. -/
 structure CoefficientPullback (b : SpTowerShriek.Base l E) {X Y : Scheme.{u}}
     (f : X ⟶ Y) (g : SpTowerShriek.Geometry l E b f) where
   iso : g.pull.obj (coefficient Y (Arings l E Y)) ≅ coefficient X (Arings l E X)
@@ -92,8 +76,7 @@ structure CoefficientPullback (b : SpTowerShriek.Base l E) {X Y : Scheme.{u}}
       ((Scheme.proEtaleConstantDirectImageMap.{u, u + 2} f CommRingCat.{u + 1}
         (CommRingCat.of.{u + 1} (ULift.{u + 1} (SpTowerShriek.R l E n)))).hom.app U x)
 
-/-- Exact localization of the canonical ordinary coefficient pullback.
-Source: classes (3)--(4) (blueprint: def-sp-tower-class-diagonal). -/
+/-- Exact localization of the canonical ordinary coefficient pullback. -/
 def CoefficientPullback.derivedIso {b : SpTowerShriek.Base l E} {X Y : Scheme.{u}}
     {f : X ⟶ Y} {g : SpTowerShriek.Geometry l E b f}
     (p : CoefficientPullback l E b f g) :
@@ -102,8 +85,7 @@ def CoefficientPullback.derivedIso {b : SpTowerShriek.Base l E} {X Y : Scheme.{u
   (g.pull.mapDerivedCategorySingleFunctor 0).app (coefficient Y (Arings l E Y)) ≪≫
     (DerivedCategory.singleFunctor (Systems X (Arings l E X)) 0).mapIso p.iso
 
-/-- The actual coefficient unit of the derived geometric adjunction.
-Source: classes (3)--(4) (blueprint: def-sp-tower-class-diagonal). -/
+/-- The actual coefficient unit of the derived geometric adjunction. -/
 def unitArrow {b : SpTowerShriek.Base l E} {X Y : Scheme.{u}}
     {f : X ⟶ Y} {g : SpTowerShriek.Geometry l E b f}
     (p : CoefficientPullback l E b f g) :
@@ -111,8 +93,7 @@ def unitArrow {b : SpTowerShriek.Base l E} {X Y : Scheme.{u}}
   (SpTowerShriek.adjunction l E b g).unit.app (unit Y (Arings l E Y)) ≫
     (SpTowerShriek.push l E b g).map (p.derivedIso l E).hom
 
-/-- The canonical supported integral unit, transported by the actual site comparison.
-Source: classes (3), Cartier extension (blueprint: def-sp-tower-class-diagonal). -/
+/-- The canonical supported integral unit, transported by the actual site comparison. -/
 def supportedIntegralUnit (S : Scheme.{u}) :
     ((constantSheaf (Scheme.ProEt.topology (diagonalSurface S)) AddCommGrpCat.{u + 1}).obj
       (AddCommGrpCat.of (ULift.{u + 1} ℤ))) ⟶ diagonalIntegralSource S :=
@@ -121,16 +102,14 @@ def supportedIntegralUnit (S : Scheme.{u}) :
       (Etale.supportedIntegralUnit (diagonalImmersion S)) ≫
     (cartierIntegralSourceIso (diagonalImmersion S)).hom
 
-/-- The supported source after the same two canonical derived scalar extensions.
-Source: classes (3) (blueprint: def-sp-tower-class-diagonal). -/
+/-- The supported source after the same two canonical derived scalar extensions. -/
 def diagonalExtendedSource {S : Scheme.{u}} (c : Chern l E (diagonalSurface S)) :
     D (diagonalSurface S) (Arings l E (diagonalSurface S)) :=
   c.scalar.T.obj (c.reduction.derived.obj
     ((DerivedCategory.singleFunctor (Ab (diagonalSurface S)) 0).obj
       ((constant (diagonalSurface S)).obj (diagonalIntegralSource S))))
 
-/-- The supported coefficient generator is the scalar extension of the integral unit.
-Source: classes (3), quotient-unit normalization (blueprint: def-sp-tower-class-diagonal). -/
+/-- The supported coefficient generator is the scalar extension of the integral unit. -/
 def diagonalExtendedUnit {S : Scheme.{u}} (c : Chern l E (diagonalSurface S)) :
     unit (diagonalSurface S) (Arings l E (diagonalSurface S)) ⟶
       diagonalExtendedSource l E c :=
@@ -139,10 +118,7 @@ def diagonalExtendedUnit {S : Scheme.{u}} (c : Chern l E (diagonalSurface S)) :
       ((DerivedCategory.singleFunctor (Ab (diagonalSurface S)) 0).map
         ((constant (diagonalSurface S)).map (supportedIntegralUnit S))))
 
-/-- The diagonal arrow is the specified coefficient extension of beta_Delta.
-Its supported source is fixed by a quotient-unit-preserving isomorphism below.
-Source: classes (3), beta = a[1](-p v inverse)
-(blueprint: def-sp-tower-class-diagonal). -/
+/-- The diagonal arrow is the specified coefficient extension of beta_Delta. -/
 def diagonalArrow {S : Scheme.{u}} (c : Chern l E (diagonalSurface S))
     {b : SpTowerShriek.Base l E}
     {g : SpTowerShriek.Geometry l E b (diagonalImmersion S)}
@@ -160,9 +136,7 @@ def diagonalArrow {S : Scheme.{u}} (c : Chern l E (diagonalSurface S))
     (lineComparison l E c)⟦(2 : ℤ)⟧'
 
 /-- The canonical diagonal construction, with the supported source fixed by its
-quotient unit and the forget-support map equal to c1 of the actual divisor line.
-All sources and targets are the recorded module derived categories and geometry.
-Source: classes (3) (blueprint: def-sp-tower-class-diagonal). -/
+quotient unit and the forget-support map equal to c1 of the diagonal divisor line. -/
 structure Diagonal (b : SpTowerShriek.Base l E) (S : Scheme.{u})
     (c : Chern l E (diagonalSurface S)) where
   geometry : SpTowerShriek.Geometry l E b (diagonalImmersion S)
@@ -175,18 +149,15 @@ structure Diagonal (b : SpTowerShriek.Base l E) (S : Scheme.{u})
   chern_normalization : unitArrow l E coefficientPullback ≫
       diagonalArrow l E c sourceIso = firstChern l E c (diagonalPic S)
 
-/-- The actual positive-level coefficient ring.
-Source: coefficient convention (blueprint: def-sp-tower-class-diagonal). -/
+/-- The actual positive-level coefficient ring. -/
 abbrev FiniteRing (n : ℕ) := ULift.{u + 1} (SpTowerShriek.R l E n)
 
-/-- The unital Z/ell^(n+1) coefficient map, before taking constant sheaves.
-Source: coefficient convention (blueprint: def-sp-tower-class-diagonal). -/
+/-- The unital Z/ell^(n+1) coefficient map, before taking constant sheaves. -/
 def finiteScalar (n : ℕ) : ZMod (l ^ (n + 1)) →+* FiniteRing l E n :=
   ULift.ringEquiv.symm.toRingHom.comp
     (ZMod.castHom (ringChar.dvd (coefficient_annihilates l E n)) (SpTowerShriek.R l E n))
 
-/-- The recorded finite Tate line, with no independently chosen line object.
-Source: definition-tate-twists (blueprint: def-sp-tower-class-diagonal). -/
+/-- The finite Tate line at level `n`. -/
 abbrev finiteLine (T : Scheme.{u}) (n : ℕ) :=
   Scheme.tateFiniteLine T l (FiniteRing l E n) n (finiteScalar l E n)
 
@@ -195,14 +166,7 @@ private theorem section_cast_heq {A B : AddCommGrpCat.{u + 1}}
   subst B
   rfl
 
-/-- The finite comparison is fixed on every scalar multiple of every root generator.
-Source: classes (2), evaluation of coefficient extension
-(blueprint: def-sp-tower-class-diagonal).
-Proof: restriction to a sequence-site slice commutes with the sheafified ordinary
-scalar extension. The underlying root module is identified by rootForget. Both
-sides are sheafifications of the same local tensor product; send a tensor to the
-identical tensor. This commutes with restrictions and quotient transitions.
-These local pure tensors generate the tensor sheaf, giving uniqueness. -/
+/-- The finite comparison is fixed on every scalar multiple of every root generator. -/
 theorem lineEvaluation_existsUnique {T : Scheme.{u}} (c : Chern l E T) (n : ℕ) :
     ∃! e : (SpTowerShriek.ev l E T n).obj (lineModule l E c) ≅ finiteLine l E T n,
       ∀ (U : T.ProEtᵒᵖ) (a : (SpTowerShriek.B l E T n).obj.obj U)
@@ -274,8 +238,7 @@ theorem lineEvaluation_existsUnique {T : Scheme.{u}} (c : Chern l E T) (n : ℕ)
   have hval : e'.hom.val.app U v = f.val.app U v := h₃.trans h₄.symm
   simpa only [one_smul, hz] using h₁.symm.trans (hval.trans h₂)
 
-/-- The uniquely normalized finite Tate-line realization.
-Source: classes (2) (blueprint: def-sp-tower-class-diagonal). -/
+/-- The uniquely normalized finite Tate-line realization. -/
 def lineEvaluation {T : Scheme.{u}} (c : Chern l E T) (n : ℕ) :=
   (lineEvaluation_existsUnique l E c n).exists.choose
 

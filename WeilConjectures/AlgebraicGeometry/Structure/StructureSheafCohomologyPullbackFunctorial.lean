@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.Structure.StructureSheafCohomologyPullb
 /-!
 # Functoriality of pullback on structure sheaf cohomology
 
-Source: Stacks Project, Cohomology of Sheaves, Section 01F7, equation-functorial
-(blueprint: lem-sc-structure-sheaf-cohomology-pullback-functorial).
+Source: Stacks Project, Cohomology of Sheaves, Section 01F7.
 -/
 
 @[expose] public section
@@ -26,23 +25,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- Canonical pullback on structure sheaf cohomology preserves identities and reverses
-composition. Source: Stacks Project, Cohomology of Sheaves, Section 01F7,
-equation-functorial and Remark 20.14.2
-(blueprint: lem-sc-structure-sheaf-cohomology-pullback-functorial).
-
-Proof: Regard the structure ring map of each scheme morphism as a map of abelian sheaves
-into the direct image. On injective resolutions, lift this map as in Remark 20.14.2 and
-apply global sections. For the identity, the identity resolution map is a lift and induces
-the identity on cohomology. For two composable morphisms, compose the lifted maps after
-pushforward; the composite lifts the structure ring map of their composite, since scheme
-structure maps compose. Any two such lifts give the same derived map, by the comparison
-and homotopy uniqueness theorem for resolutions. Thus their induced cohomology maps
-compose in the displayed order. Finally compare this resolution construction with the
-Ext construction used in structureSheafCohomologyPullback: the exact inverse image,
-its constant-integer-sheaf comparison, and the adjoint structure map induce the same
-map of derived global sections. Naturality of the adjunction and of the constant-sheaf
-comparison identifies the composite Ext map with the resolution map. This gives both
-identities for every degree, including degree zero. -/
+composition. Source: Stacks Project, Cohomology of Sheaves, Section 01F7 and Remark 20.14.2. -/
 theorem structureSheafCohomologyPullback_functorial :
     (∀ (X : Scheme.{u}) (n : ℕ),
       structureSheafCohomologyPullback (𝟙 X) n =

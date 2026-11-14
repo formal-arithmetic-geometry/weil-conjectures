@@ -11,8 +11,6 @@ import WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantModuleComparisonLocalization
 
 /-! # Evaluation of ordinary strict geometric compositors
-
-Source: blueprint operations proof (2), localized inverse-image composition.
 -/
 
 @[expose] public noncomputable section

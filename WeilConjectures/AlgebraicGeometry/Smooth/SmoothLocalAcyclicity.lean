@@ -35,8 +35,7 @@ import WeilConjectures.AlgebraicGeometry.Sites.StrictlyHenselian
 /-!
 # Smooth morphisms are universally locally acyclic
 
-Source: Stacks Project, Tag 0GJQ, proposition-smooth-locally-acyclic
-(blueprint: lem-weil-pbc-smooth-local-acyclicity).
+Source: Stacks Project, Tag 0GJQ.
 -/
 
 @[expose] public section
@@ -449,33 +448,7 @@ private theorem smooth_isLocallyAcyclic
 
 /-- Smooth morphisms are universally locally acyclic, and in particular locally acyclic.
 There is no properness or relative-dimension hypothesis.
-Source: Stacks Project, Tag 0GJQ, proposition-smooth-locally-acyclic
-(blueprint: lem-weil-pbc-smooth-local-acyclicity).
-
-Proof:
-1. Smoothness is stable under arbitrary base change, so it suffices to prove local
-acyclicity. Fix a geometric point x and a positive integer n prime to its residue
-characteristic. Then n is a unit in its geometric field.
-2. Replace the base by its strict localization at f(x). Its evaluation into the
-geometric field is local, so n is invertible on this affine strict-local base. Lift x
-to the base-changed scheme. The pointed strict-local comparison identifies the original
-vanishing-cycle fibres with those for this base change
-(`lem-weil-pbc-strict-base-closed-point-localizations`).
-3. Apply smooth base change to each geometric test point of this base, with constant
-coefficients Z/n. Transfer the exchange isomorphism from integer-module sheaves to
-abelian sheaves. The strict-local exchange criterion gives bijective cohomology pullbacks
-from the test field to the strict-local fibre
-(`lem-weil-pbc-exchange-strict-local-cohomology`).
-4. The separably closed test field is strictly henselian. Its constant-section unit is
-invertible and its positive cohomology vanishes. Transfer these properties along the
-comparison maps, using the degree-zero comparison, the Ext/derived-cohomology comparison,
-and the inverse-image constant-sheaf isomorphism. The adjunction identity for constant
-sections ensures this identifies the actual constant-section unit.
-5. The strict-local constant comparison identifies the canonical alpha with that unit
-followed by the coefficient isomorphism
-(`lem-weil-pbc-strict-local-constant-comparison`). Transport along the constant-stalk
-isomorphism gives the required invertibility and positive cohomology vanishing.
-All test points and n were arbitrary; step 1 gives universality. -/
+Source: Stacks Project, Tag 0GJQ. -/
 theorem smooth_localAcyclicity {X S : Scheme.{u}} (f : X ⟶ S) [Smooth f] :
     IsUniversallyLocallyAcyclic f ∧ IsLocallyAcyclic f := by
   exact ⟨fun _ _ ↦ smooth_isLocallyAcyclic _, smooth_isLocallyAcyclic f⟩

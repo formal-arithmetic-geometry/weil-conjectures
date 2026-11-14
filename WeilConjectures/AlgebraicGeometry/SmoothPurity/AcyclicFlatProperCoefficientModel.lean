@@ -23,9 +23,7 @@ import all WeilConjectures.AlgebraicGeometry.ProperBaseChange.WitnessCompatibili
 /-!
 # Bounded acyclic flat models for the proper coefficient map
 
-Source: Stacks Project, `literature/stacks-project/more-etale.tex`, Tag 0GL6,
-remark-Rf-lower-shriek-change-of-rings (blueprint:
-lem-sp-acyclic-flat-proper-coefficient-model).
+Source: Stacks Project, Tag 0GL6.
 
 The scalar extension, its pullback comparison, and the coefficient mate are the
 canonical constructions already provided by the étale six-functor interface.
@@ -46,8 +44,7 @@ namespace AlgebraicGeometry.Etale
 /- The three names below expose the canonical objects named in the statement. -/
 
 /-- The derived tensor `T_T = - ⊗ᴸ_{A_T} B_T` used in the coefficient comparison.
-Source: Stacks Project, Tag 0GL6 (blueprint:
-`lem-sp-acyclic-flat-proper-coefficient-model`). -/
+Source: Stacks Project, Tag 0GL6. -/
 abbrev properCoefficientTensor {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) (T : Scheme.{u}) :
     DerivedCategoryModule A T ⥤ DerivedCategoryModule B T :=
@@ -55,22 +52,20 @@ abbrev properCoefficientTensor {A B : Type (u + 1)} [CommRing A] [CommRing B]
 
 /-- The canonical tensor/pullback comparison `λ : T_W r_A^* ≅ r_B^* T_V` for the
 coefficient extension; `scalarPullbackIso` is its inverse, used in the transpose below.
-Source: Stacks Project, Tag 0GL6 (blueprint:
-`lem-sp-acyclic-flat-proper-coefficient-model`). -/
+Source: Stacks Project, Tag 0GL6. -/
 abbrev properCoefficientPullbackComparison {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {W V : Scheme.{u}} (r : W ⟶ V) :=
   (scalarPullbackIso φ r).symm
 
 /-- The canonical coefficient map `q_r`, defined as the adjoint mate of the
 scalar-extended counit through the comparison above.
-Source: Stacks Project, Tag 0GL6 (blueprint:
-`lem-sp-acyclic-flat-proper-coefficient-model`). -/
+Source: Stacks Project, Tag 0GL6. -/
 abbrev properCoefficientMap {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {W V : Scheme.{u}} (r : W ⟶ V) :=
   scalarMate φ r
 
 /-- The termwise scalar extension `C_B` of a cochain complex on `W`.
-Source: Stacks 0GL6 (blueprint: lem-sp-acyclic-flat-proper-coefficient-model). -/
+Source: Stacks 0GL6. -/
 abbrev coefficientExtendedComplex {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) (W : Scheme.{u})
     (C : CochainComplex (Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) :
@@ -78,7 +73,7 @@ abbrev coefficientExtendedComplex {A B : Type (u + 1)} [CommRing A] [CommRing B]
   ((ProEtale.etaleSheafExtendScalars φ W).mapHomologicalComplex (.up ℤ)).obj C
 
 /-- The canonical acyclic-complex comparison, including the homotopy quotient factor.
-Source: Stacks 015E (blueprint: lem-sp-acyclic-flat-proper-coefficient-model). -/
+Source: Stacks 015E. -/
 def properAcyclicComparison
     (A : Type (u + 1)) [CommRing A] {W V : Scheme.{u}} (r : W ⟶ V)
     (C : CochainComplex (Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) :
@@ -97,7 +92,7 @@ def properAcyclicComparison
 /-- The ordinary B-linear projection map: the mate of scalar extension of the A-counit
 through the ordinary scalar/pullback isomorphism. Its degreewise adjunct is precisely
 pullback/tensor reassociation followed by counit tensor identity.
-Source: Stacks 0GL6, 07A4 (blueprint: lem-sp-acyclic-flat-proper-coefficient-model). -/
+Source: Stacks 0GL6, 07A4. -/
 def properSheafCoefficientMap
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {W V : Scheme.{u}} (r : W ⟶ V) :
@@ -107,9 +102,9 @@ def properSheafCoefficientMap
     (upperStarLowerStarAdjunction (ModuleCat.{u + 1} B) r)
     (TwoSquare.mk _ _ _ _ (scalarSheafPullbackIso φ r).hom))
 
-/-- The termwise projection chain map pi_C. Mapping the ordinary natural transformation
-on complexes guarantees that its components commute with the differentials.
-Source: Stacks 0GL6, 015E (blueprint: lem-sp-acyclic-flat-proper-coefficient-model). -/
+/-- The termwise projection chain map pi_C, obtained by mapping the ordinary projection
+natural transformation on complexes.
+Source: Stacks 0GL6, 015E. -/
 def properCoefficientComplexMap
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {W V : Scheme.{u}} (r : W ⟶ V)

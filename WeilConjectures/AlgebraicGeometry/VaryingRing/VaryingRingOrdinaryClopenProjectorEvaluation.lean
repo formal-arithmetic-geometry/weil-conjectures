@@ -14,7 +14,6 @@ import Mathlib.CategoryTheory.Adjunction.Triple
 # Ordinary realization of the intrinsic clopen projector
 
 Source: Stacks Project, Tags 09AE and 0F7B; Zheng, Construction 4.1.
-(blueprint: lem-sp-varying-ring-ordinary-clopen-projector-evaluation).
 -/
 
 @[expose] public noncomputable section
@@ -97,19 +96,7 @@ private theorem modulePi_image {U X : Scheme.{u}} (s : U ⟶ X)
   exact (Category.id_comp _).symm
 
 /-- Ordinary realization preserves the intrinsic projection onto a clopen component.
-Source: Stacks 09AE and 0F7B, open case; Zheng, Construction 4.1
-(blueprint: lem-sp-varying-ring-ordinary-clopen-projector-evaluation).
-Proof: for an adjoint triple J ⊣ G ⊣ P, the intrinsic clopen projection
-satisfies G(pi_M) = unit_(G M). This is the triangle identity after cancelling
-the invertible canonical J-to-P comparison. Apply it to ordinary systems and
-strict towers. Naturality of the ordinary pullback comparison, together with
-ordinaryOpen_mate, shows that the image under strict G of the realized
-ordinary projection is the strict open unit. Thus its image under G agrees
-with that of strict pi. To detect this equality of maps into J(G(E M)), compose
-with the invertible J-to-P comparison and transpose under G ⊣ P. The transpose
-is G applied to the map followed by the counit, so the two transposes agree.
-Injectivity of the adjunction equivalence proves the equation. This argument
-requires no complementary-open choice or faithfulness of derived evaluations. -/
+Source: Stacks 09AE and 0F7B, open case; Zheng, Construction 4.1. -/
 theorem ordinaryClopenProjectorEvaluation (n : ℕ) {U X : Scheme.{u}} (s : U ⟶ X)
     [IsOpenImmersion s] [IsClosedImmersion s] (M : Modules R φ X) :
     (ordinaryRealization R φ n X).map ((modulePi R φ s).app M) ≫

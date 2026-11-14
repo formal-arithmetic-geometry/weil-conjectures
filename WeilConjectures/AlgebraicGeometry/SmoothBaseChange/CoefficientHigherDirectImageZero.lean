@@ -15,7 +15,6 @@ import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Coefficients
 # Reflection of higher-direct-image vanishing under restriction of coefficients
 
 Source: Stacks Project, Tag 03FD and Tag 0D6J.
-(blueprint: lem-sbc-coefficient-higher-direct-image-zero)
 -/
 
 @[expose] public section
@@ -29,14 +28,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- Restriction of scalars detects vanishing of a higher direct image.
 
-Source: Stacks Project, Tags 03FD and 0D6J.
-(blueprint: lem-sbc-coefficient-higher-direct-image-zero)
-
-Proof: apply the existing base-change coefficient comparison to the identity Cartesian
-square with right vertical map h. The base-change target identifies with higher direct
-image because pullback along the identity is the identity. Restriction of scalars
-preserves zero morphisms and is faithful; it therefore preserves and reflects zero
-objects, by the criterion that the identity morphism is zero. -/
+Source: Stacks Project, Tags 03FD and 0D6J. -/
 theorem isZero_higherDirectImage_restrictScalars_iff
     {R S : Type (u + 1)} [CommRing R] [CommRing S] (φ : R →+* S)
     {X Y : Scheme.{u}} (h : Y ⟶ X) [QuasiCompact h] [QuasiSeparated h]

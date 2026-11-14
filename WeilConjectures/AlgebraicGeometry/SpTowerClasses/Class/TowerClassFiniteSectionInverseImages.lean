@@ -358,22 +358,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- Finite-level inverse images in the constant quotient coordinates.
-Source: Stacks 03D2 and 03D7; Zheng Construction 4.1; blueprint operations proof (2).
-(blueprint: lem-sfb-tower-class-finite-section-inverse-images).
-
-Proof: transport the algebraic ring and module inverse image through the canonical
-constant-section coefficient comparison. Extension along this ring isomorphism
-identifies its underlying module with inverse image on sets. The tensor insertion
-map sends a section m to 1 tensor m; the inverse sends a tensor a tensor m to the
-transported scalar action a times m. These maps respect tensor balancing and
-sheafification and are inverse. Their graph equations give the algebraic lift.
-Naturality of the constant-section comparison in the coefficient ring gives the
-adjacent quotient equation. Use the specified tensor-insertion module adjunction
-and the identity comparison for sectionwise pushforward. Its transpose evaluated
-on m is the image of 1 tensor m, which is exactly the set-sheaf transpose.
-The inverse-image functor, right adjoint and adjunction are retained as a single
-package. This finite construction uses neither system functors nor derived
-categories or tensor localizations. It includes empty schemes and n = 0. -/
+Source: Stacks 03D2 and 03D7; Zheng Construction 4.1. -/
 theorem finite_sectionInverseImages {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃ I : ∀ n, SheafOfModules.AlgebraicInverseImage
         (Scheme.proEtaleSheafInverseImage f (Type (u + 1)))

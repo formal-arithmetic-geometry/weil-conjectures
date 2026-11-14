@@ -16,11 +16,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 /-- Existence of the universal derived scalar-extension pair for a bounded-above
 termwise-flat stalk complex under the affine presentation hypothesis.
-Source: Stacks Project, Tags 0DJ9, 06YB and 0D5S.
-Apply the general K-projective scalar-extension construction to the stalk ring map
-and retain its universal pair. This pair exists independently of the input complex;
-its boundedness and flatness hypotheses are not needed here.
-(blueprint: lem-pc-standard-single-flat-counit-localization-pair). -/
+Source: Stacks Project, Tags 0DJ9, 06YB and 0D5S. -/
 theorem standardSingleFlatCounit_localization_pair
     (h_affine : ∀ {Y₀ B₀ A₀ : Scheme.{u}} (p₀ : Y₀ ⟶ B₀)
       [QuasiCompact p₀] [QuasiSeparated p₀] [IsAffine B₀] [IsAffine A₀]

@@ -14,8 +14,7 @@ public import WeilConjectures.AlgebraicGeometry.StrictTowerOperations
 
 /-! # Canonical operations on strict module towers
 
-Source: blueprint completed-exchange-coherence, first two proof sentences;
-Stacks 07A7 and 0D6D (blueprint: def-weil-pbc-strict-tower-operations).
+Source: Stacks 07A7 and 0D6D.
 
 ## Main definitions
 
@@ -34,8 +33,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 /-- Coefficient sheaves and their compatible inverse-image identifications on a square.
-Source: strict normalization, paragraph 2; Stacks 07A7
-(blueprint: def-weil-pbc-strict-tower-operations). -/
+Source: Stacks 07A7. -/
 structure StrictTowerRingedSquare
     {X' X Y' Y : Scheme.{t}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
     {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : ChosenCartesianSquare g' f' f g) where
@@ -51,15 +49,12 @@ structure StrictTowerRingedSquare
     (proEtaleRingCompositeCoefficients f' g RY RY' RX' cg cf')
 
 /-- Strict towers over an arbitrary coefficient sheaf on the original small site.
-Source: strict normalization, paragraph 2; Stacks 07A7
-(blueprint: def-weil-pbc-strict-tower-operations). -/
+Source: Stacks 07A7. -/
 abbrev exchangeTowers (T : Scheme.{t})
     (R : Sheaf (ProEt.topology T) CommRingCat.{t + 1}) :=
   ℕᵒᵖ ⥤ proEtaleRingModules T R
 
-/-- Standard localization of strict towers, with the actual two site universes retained.
-Source: strict normalization, paragraph 2
-(blueprint: def-weil-pbc-strict-tower-operations). -/
+/-- Standard localization of strict towers, with the actual two site universes retained. -/
 instance exchangeTowers_hasDerived (T : Scheme.{t})
     (R : Sheaf (ProEt.topology T) CommRingCat.{t + 1}) :
     HasDerivedCategory (exchangeTowers T R) := HasDerivedCategory.standard _
@@ -70,23 +65,17 @@ variable {U V : Scheme.{t}} (f : U ⟶ V)
   (c : (proEtaleSheafInverseImage f CommRingCat.{t + 1}).obj R ≅ S)
 
 /-- Termwise inverse image of strict module towers with identified coefficients.
-Source: strict normalization, paragraph 2; Stacks 07A7
-(blueprint: def-weil-pbc-strict-tower-operations). -/
+Source: Stacks 07A7. -/
 abbrev exchangeTowerModulePull : exchangeTowers V R ⥤ exchangeTowers U S :=
   (Functor.whiskeringRight _ _ _).obj (proEtaleRingModulePullback f R S c)
 
 /-- Termwise direct image, including all transition maps.
-Source: strict normalization, paragraph 2; Stacks 07A7
-(blueprint: def-weil-pbc-strict-tower-operations). -/
+Source: Stacks 07A7. -/
 abbrev exchangeTowerModulePush : exchangeTowers U S ⥤ exchangeTowers V R :=
   (Functor.whiskeringRight _ _ _).obj (proEtaleRingModuleDirectImage f R S c)
 
 /-- Exactness of termwise inverse image on the whole strict diagram category.
-Source: strict normalization, proof step 1; Stacks 07A7
-(blueprint: def-weil-pbc-strict-tower-operations).
-Proof: kernels and cokernels in the functor category are pointwise. The ordinary
-identified-coefficient module inverse image preserves both, since its coefficient
-map is an isomorphism. Evaluation at every index proves both preservation claims. -/
+Source: Stacks 07A7. -/
 theorem exchangeTowerModulePull_exact :
     PreservesFiniteLimits (exchangeTowerModulePull f R S c) ∧
       PreservesFiniteColimits (exchangeTowerModulePull f R S c) := by
@@ -94,42 +83,36 @@ theorem exchangeTowerModulePull_exact :
   · exact ⟨fun _ _ _ ↦ inferInstance⟩
   · exact ⟨fun _ _ _ ↦ inferInstance⟩
 
-/-- Left exactness on strict towers. Source: strict normalization, proof step 1
-(blueprint: def-weil-pbc-strict-tower-operations). -/
+/-- Left exactness on strict towers. -/
 instance exchangeTowerModulePull_finiteLimits :
     PreservesFiniteLimits (exchangeTowerModulePull f R S c) :=
   (exchangeTowerModulePull_exact f R S c).1
 
-/-- Right exactness on strict towers. Source: strict normalization, proof step 1
-(blueprint: def-weil-pbc-strict-tower-operations). -/
+/-- Right exactness on strict towers. -/
 instance exchangeTowerModulePull_finiteColimits :
     PreservesFiniteColimits (exchangeTowerModulePull f R S c) :=
   (exchangeTowerModulePull_exact f R S c).2
 
 /-- Exact termwise inverse image descends to the localization of strict towers.
-Source: strict normalization, paragraph 2; Stacks 07A7
-(blueprint: def-weil-pbc-strict-tower-operations). -/
+Source: Stacks 07A7. -/
 abbrev exchangeTowerPull : DerivedCategory (exchangeTowers V R) ⥤
     DerivedCategory (exchangeTowers U S) :=
   (exchangeTowerModulePull f R S c).mapDerivedCategory
 
 /-- Total right derived termwise direct image, using K-injective strict towers.
-Source: strict normalization, paragraph 2; Stacks 07A7
-(blueprint: def-weil-pbc-strict-tower-operations). -/
+Source: Stacks 07A7. -/
 abbrev exchangeTowerPush : DerivedCategory (exchangeTowers U S) ⥤
     DerivedCategory (exchangeTowers V R) :=
   (exchangeTowerModulePush f R S c).rightDerivedFunctor
 
 /-- The ordinary adjunction on strict towers is the termwise normalized module adjunction.
-Source: strict normalization, proof step 1; Stacks 07A7
-(blueprint: def-weil-pbc-strict-tower-operations). -/
+Source: Stacks 07A7. -/
 def exchangeTowerModuleAdjunction :
     exchangeTowerModulePull f R S c ⊣ exchangeTowerModulePush f R S c :=
   (proEtaleRingModuleAdjunction f R S c).whiskerRight ℕᵒᵖ
 
 /-- The derived adjunction uses precisely the termwise normalized module adjunction.
-Source: strict normalization, proof step 1; Stacks 0DVC
-(blueprint: def-weil-pbc-strict-tower-operations). -/
+Source: Stacks 0DVC. -/
 def exchangeTowerAdjunction :
     exchangeTowerPull f R S c ⊣ exchangeTowerPush f R S c :=
   (exchangeTowerModuleAdjunction f R S c).mapDerivedCategoryRightDerivedAdjunction
@@ -138,12 +121,7 @@ variable {X' X Y' Y : Scheme.{t}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
   {f : X ⟶ Y} {g : Y' ⟶ Y} {sq : ChosenCartesianSquare g' f' f g}
 
 /-- The two coefficient paths agree over the equality of composite scheme maps.
-Source: strict normalization, paragraph 2; Stacks 07A7
-(blueprint: def-weil-pbc-strict-tower-operations).
-Proof: the commutative scheme square identifies f' followed by g with g' followed
-by f. The coefficient coherence field, in the reverse direction, identifies the
-isomorphism components over that equality. Dependent-pair extensionality gives
-the displayed equality, so transport does not choose any additional ring map. -/
+Source: Stacks 07A7. -/
 theorem StrictTowerRingedSquare.exchangeCoefficients_eq (r : StrictTowerRingedSquare sq) :
     (⟨f' ≫ g, proEtaleRingCompositeCoefficients f' g r.RY r.RY' r.RX' r.cg r.cf'⟩ :
       Σ q : X' ⟶ Y,
@@ -152,8 +130,7 @@ theorem StrictTowerRingedSquare.exchangeCoefficients_eq (r : StrictTowerRingedSq
   exact Sigma.ext sq.w.symm r.coherent.symm
 
 /-- The canonical module pullback comparison around the chosen ringed square.
-Source: strict normalization, paragraph 2; Stacks 07A7, 0D6D
-(blueprint: def-weil-pbc-strict-tower-operations). -/
+Source: Stacks 07A7, 0D6D. -/
 def StrictTowerRingedSquare.exchangeModuleSquare (r : StrictTowerRingedSquare sq) :
     proEtaleRingModulePullback g r.RY r.RY' r.cg ⋙
         proEtaleRingModulePullback f' r.RY' r.RX' r.cf' ≅
@@ -174,8 +151,7 @@ def StrictTowerRingedSquare.exchangeModuleSquare (r : StrictTowerRingedSquare sq
   exact a' ≪≫ b
 
 /-- The strict square is obtained by termwise application before localization.
-Source: strict normalization, paragraph 2; Stacks 07A7
-(blueprint: def-weil-pbc-strict-tower-operations). -/
+Source: Stacks 07A7. -/
 def StrictTowerRingedSquare.exchangeTowerSquare (r : StrictTowerRingedSquare sq) :
     exchangeTowerPull g r.RY r.RY' r.cg ⋙ exchangeTowerPull f' r.RY' r.RX' r.cf' ≅
       exchangeTowerPull f r.RY r.RX r.cf ⋙ exchangeTowerPull g' r.RX r.RX' r.cg' :=
@@ -193,8 +169,7 @@ def StrictTowerRingedSquare.exchangeTowerSquare (r : StrictTowerRingedSquare sq)
     (exchangeTowerModulePull g' r.RX r.RX' r.cg')).symm
 
 /-- The canonical mate in the derived category of strict towers.
-Source: strict normalization, paragraph 2; Stacks 07A7
-(blueprint: def-weil-pbc-strict-tower-operations). -/
+Source: Stacks 07A7. -/
 def StrictTowerRingedSquare.exchangeTowerMate (r : StrictTowerRingedSquare sq) :
     exchangeTowerPush f r.RY r.RX r.cf ⋙ exchangeTowerPull g r.RY r.RY' r.cg ⟶
       exchangeTowerPull g' r.RX r.RX' r.cg' ⋙ exchangeTowerPush f' r.RY' r.RX' r.cf' :=

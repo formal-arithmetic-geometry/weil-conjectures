@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.SymmetricProjTautologicalCharts.Symmetr
 /-! # Local frame atlas for normalized symmetric Proj pullback
 
 Source: Stacks Project, Constructions, Tags 01NQ, 01NR and 01OB.
-(blueprint: lem-trf-symmetric-proj-quotient-pullback-comparison-local).
 -/
 
 @[expose] public section
@@ -227,24 +226,8 @@ private theorem pullback_atlas_of_cross_tensor
 
 /-- Common local frames and quotient coefficients for the fixed Proj pullback map.
 
-Source: Stacks Project, Constructions, Tags 01NQ and 01N2 (base-change fractions),
-01NR (twist frames and transition ratios), and 01OB (quotient normalization).
-(blueprint: lem-trf-symmetric-proj-quotient-pullback-comparison-local).
-
-Proof: cover the source by degree-one basic opens over pairs of affine base opens.
-Scalar extension preserves the degree-one cover. On each such open choose the
-pulled degree-one frame and its image frame. Both are free generators, since
-localizing at the corresponding generator trivializes the degree-one twist.
-On intersections the transition coefficient is the same pulled homogeneous ratio;
-this remains true after any further restriction. The equation hb identifies the
-image of every pulled module generator with the same coefficient times the two
-frames. Pure tensors locally generate the tensor pullback; linearity and sheaf
-uniqueness give this coefficient equation for every section on every subopen of a chart.
-The section-normalized composition isomorphisms identify these with the two
-morphisms below, including their equality transport. Refining base intersections
-by affine opens gives compatibility without a separatedness assumption. Empty
-schemes admit the empty cover; zero rings and empty charts satisfy the same formulas.
-No global line isomorphism or gluing of line morphisms is asserted here. -/
+Source: Stacks Project, Constructions, Tags 01NQ and 01N2 (base-change fractions), 01NR (twist
+frames and transition ratios), and 01OB (quotient normalization). -/
 theorem exists_normalized_pullback_frame_atlas
     {X S : Scheme.{u}} (g : X ⟶ S) (E : S.Modules) [E.IsQuasicoherent]
     [((Scheme.Modules.tensorPullback g).obj E).IsQuasicoherent]

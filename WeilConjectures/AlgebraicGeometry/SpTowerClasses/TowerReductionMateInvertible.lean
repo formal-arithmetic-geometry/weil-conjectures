@@ -12,9 +12,6 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
 import Mathlib.CategoryTheory.Functor.ReflectsIso.Balanced
 
 /-! # Invertibility of the integral reduction mate
-
-Source: blueprint classes proof (2), integral quotient reduction.
-(blueprint: lem-sp-tower-reduction-mate-invertible).
 -/
 
 @[expose] public noncomputable section
@@ -243,9 +240,7 @@ private theorem regular_reduction_computes (T : Scheme.{u})
     exact reduction_preserves_regular_quasiIso l T r q hP hQ hq
 
 /-- The canonical mate of the derived forgetful square. Its construction uses only
-adjunction units and counits, with no choices of normalized endpoints.
-Source: classes (2), reduction/pullback comparison
-(blueprint: lem-sp-tower-reduction-mate-invertible). -/
+adjunction units and counits, with no choices of normalized endpoints. -/
 def reductionPullbackMate {X Y : Scheme.{u}} {f : X ⟶ Y}
     {cY : Chern l E Y} {cX : Chern l E X}
     (d : IntegralCoefficientPullback l E f cY cX) :
@@ -255,29 +250,7 @@ def reductionPullbackMate {X Y : Scheme.{u}} {f : X ⟶ Y}
     (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso d.forgetIso).hom))
 
 /-- Exact geometric inverse image commutes with integral quotient reduction, before
-specifying either the integer or Kummer normalization.
-
-Source: blueprint latest, sec-smooth-purity/sk-prop-sp-tower-geometric,
-classes proof (2); reduction-pullback proof steps 1--2
-(blueprint: lem-sp-tower-reduction-mate-invertible).
-
-Proof: the ordinary adjunction units are cokernels of the variable-power maps
-on entire towers. Evaluate at each level. Exact abelian inverse image preserves
-these cokernels and integer multiplication, so the ordinary mate identifies two
-cokernels of the same map and is invertible. The faithful exact forgetful functor
-reflects this invertibility back to quotient-module systems.
-
-Every complex has a quasi-isomorphic resolution whose levelwise prime-power
-multiplications are monic. The resolving-class computation of ordinary reduction
-makes its specified universal-derived counit invertible on every such complex.
-Exact inverse image preserves this regularity, so both derived counits compute
-on the same resolution. Transpose through the target derived adjunction and use
-the recorded representative transpose equations. Naturality of the localized
-forgetful square identifies the specified derived mate, followed by the source
-counit and exact-pullback factor, with the target counit followed by the localized
-ordinary mate. All these comparison factors are invertible on the resolution.
-Thus the specified mate is invertible there, and naturality transports this to
-every derived object. No endpoint normalization or Kummer boundary is used. -/
+specifying either the integer or Kummer normalization. -/
 theorem tower_reductionMate_isIso {X Y : Scheme.{u}} {f : X ⟶ Y}
     {cY : Chern l E Y} {cX : Chern l E X}
     (d : IntegralCoefficientPullback l E f cY cX) :

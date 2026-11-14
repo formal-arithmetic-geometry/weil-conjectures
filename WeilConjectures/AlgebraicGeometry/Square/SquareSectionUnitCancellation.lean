@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.Square.SquareSectionUnitForward
 /-! # Cancelling the normalized square on a cochain section unit
 
 Source: Stacks Project, Cohomology, Tags 0D5T and 0D5X.
-(blueprint: lem-weil-pbc-square-section-unit-cancellation).
 -/
 
 @[expose] public section
@@ -31,27 +30,8 @@ variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
 /-- A square transports the canonical section unit to the identity on the upstairs
-section complex. This concerns only the target injective representative: it has no
-source coefficient, coefficient morphism, numerator, denominator or replacement complex.
-Source: Stacks Project, Tags 0D5T and 0D5X
-(blueprint: lem-weil-pbc-square-section-unit-cancellation).
-
-Proof: Identify the right-adjoint mate of the square with the normalized direct-image
-composition square by derivedDirectImage_square_mate. Apply
-normalizedDirectImageSquare_unit on J extended by zero. It identifies the two pasted
-units with the ordinary pushforward square. Apply local derived sections. The universal
-factorization equation for localLerayComparison carries each pasted unit to the
-inverse-open section unit. Its change from sectionDerivedDirectImage to the standard
-derived direct image preserves the unit, since both comparisons are inverse units
-on the same K-injective representative. The definition of squareInverseOpenComparison
-then cancels the two comparisons with the fixed K-injective representative. The
-remaining ordinary pushforward square acts as the canonical equality transport of
-sections on v inverse(f inverse V) and k inverse(g inverse V). The target raw comparison
-uses precisely this equality of opens. Its inverse cancels the target section unit,
-and naturality transports back along J.ι'. The resulting map is the identity.
-No preservation of injectives by a pushforward is asserted; local Leray uses the
-already established direct-image acyclicity. Empty opens and identity squares obey
-the same unit equations. -/
+section complex, on the target injective representative.
+Source: Stacks Project, Tags 0D5T and 0D5X. -/
 theorem squareSectionUnit_cancellation {X S Z T : Scheme.{u}}
     (f : X ⟶ S) (k : Z ⟶ T) (g : T ⟶ S) (v : Z ⟶ X) (h : v ≫ f = k ≫ g)
     (G : Z.Modules) (J : InjectiveResolution G) (q : ℕ) (V : S.Opens) :

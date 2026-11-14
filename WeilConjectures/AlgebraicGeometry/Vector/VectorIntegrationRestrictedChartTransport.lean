@@ -11,9 +11,6 @@ import WeilConjectures.AlgebraicGeometry.Affine.Trace.AffineTraceUnitCompactBase
 import WeilConjectures.AlgebraicGeometry.Vector.VectorIntegrationRestrictedChartCoefficient
 
 /-! # Restriction of one vector integration chart comparison
-
-Source: blueprint vector integration, overlap calculation, exchange-pasting part.
-(blueprint: lem-amb-vector-integration-restricted-chart-transport).
 -/
 
 @[expose] public noncomputable section
@@ -53,27 +50,7 @@ private theorem exchange_paste_named
 
 /-- Restricting the prefix for a single frame is exchange for the composite inverse
 chart with its coefficient descended directly from the base. There is no second frame,
-change-of-frame matrix, action or trace counit in this assertion.
-Source: blueprint sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md,
-restriction to an overlap, original overlap-chart-prefix proof Steps 3--4.
-(blueprint: lem-amb-vector-integration-restricted-chart-transport).
-
-Proof: paste the Cartesian tower square for U into V with the inverse-frame square.
-Horizontal compact-support exchange pasting identifies the two exchange factors;
-naturality moves the pulled-back chart coefficient through the second exchange.
-Naturality of the bounded-below/unbounded compact-support comparisons changes the
-tower exchange into the ordinary compact-support exchange. On coefficients expand
-vectorIntegrationChartCoefficient and affineTraceRightBaseChange. Associativity of
-inverse-image compositors and the composition law of the normalized Tate transport
-identify the successive pullbacks with the direct pullback along U into S. Prove this
-coefficient identity by induction on d: the zero stage is the constant-unit pullback
-composition identity; the successor uses tensor-pullback composition and the normalized
-shifted-line pullback composition equation. The resulting comparison is precisely the
-inverse square isomorphism, pullback of vectorIntegrationBaseCoefficientPullback, and
-inverse affineLinearCoefficientDescent defining vectorIntegrationCartesianCoefficient.
-The final compact-support comparison is the one over U. Associativity and cancellation
-of the intervening isomorphisms give the formula. These same identities cover d=0,
-empty opens and the zero coefficient ring. -/
+change-of-frame matrix, action or trace counit in this assertion. -/
 theorem vectorIntegration_restricted_chart_transport
     (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] [Finite A]
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)

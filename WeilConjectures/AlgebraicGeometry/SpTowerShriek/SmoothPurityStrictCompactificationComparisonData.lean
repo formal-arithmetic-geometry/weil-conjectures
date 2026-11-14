@@ -17,10 +17,6 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Low
 /-!
 # Normalized strict-tower compactification comparisons
 
-Source: blueprint main-20261015, sec-smooth-purity/sk-lem-sp-tower-bound,
-`sk-lem-sp-tower-bound-operations.proof.md`, paragraph (2).
-(blueprint: def-sp-strict-compactification-comparison-interfaces).
-
 The existing SpTowerShriek interfaces name the strict quotient tower, its
 identity-section presentation, and the actual counit/open-mate words. No
 invertibility of a proper projection or exchange is included here. Level n in
@@ -57,8 +53,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The induced equivalence on ordinary derived categories of the actual
 strict towers. Both functors are exact localization of the identity-section
-presentation and its inverse. Source: blueprint operations proof (2)
-(blueprint: def-sp-strict-compactification-comparison-interfaces). -/
+presentation and its inverse. -/
 def comparisonTowerEquivalence (b : Base l E) (T : Scheme.{u}) :
     DerivedCategory (spCoefficientTowers l E T) ≌ D l E T := by
   letI := b.realizationAdditive T
@@ -66,15 +61,12 @@ def comparisonTowerEquivalence (b : Base l E) (T : Scheme.{u}) :
     Functor.additive_of_preserves_binary_products _
   exact (b.realization T).mapDerivedCategory
 
-/-- Tensor at an actual coefficient level, using the existing K-flat total model.
-Source: blueprint operations proof (2)
-(blueprint: def-sp-strict-compactification-comparison-interfaces). -/
+/-- Tensor at an actual coefficient level, using the existing K-flat total model. -/
 abbrev comparisonLevelTensor (b : Base l E) (T : Scheme.{u}) (n : ℕ) :=
   (b.calculus T).levelClosed n |>.tensor
 
 /-- The normalized finite open adjunction, obtained from the actual ordinary
-section adjunction by exact localization. Source: blueprint operations proof (2)
-(blueprint: def-sp-strict-compactification-comparison-interfaces). -/
+section adjunction by exact localization. -/
 def comparisonLevelOpenAdjunction (b : Base l E) {U T : Scheme.{u}}
     (j : U ⟶ T) [IsOpenImmersion j] (n : ℕ) :
     @sfIntrinsicDerivedOpen (R l E n) _ (b.finite n) _ _ j _ ⊣
@@ -101,9 +93,7 @@ def comparisonLevelOpenAdjunction (b : Base l E) {U T : Scheme.{u}}
 
 /-- Finite counterparts of the open and tensor comparisons. The inverse open
 maps are fixed by their adjunction transposes, and the geometric tensor map is
-fixed by the existing pure-tensor and total-complex normalization.
-Source: blueprint operations proof (2), the finite adjunction words
-(blueprint: def-sp-strict-compactification-comparison-interfaces). -/
+fixed by the existing pure-tensor and total-complex normalization. -/
 structure ComparisonLevels (b : Base l E) (o : Operations l E b) where
   tensorPullback : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ),
     comparisonLevelTensor l E b Y n ⋙ proEtaleConstantRingDerivedPullback (R l E n) f ≅
@@ -150,9 +140,7 @@ structure ComparisonLevels (b : Base l E) (o : Operations l E b) where
             ((sfIntrinsicDerivedOpen (R l E n) j).obj K)
 
 /-- The finite compactification projection, with exactly the proper counit,
-open tensor comparison, and pullback compositor in that order.
-Source: blueprint operations proof (2); def-exchange-projection
-(blueprint: def-sp-strict-compactification-comparison-interfaces). -/
+open tensor comparison, and pullback compositor in that order. -/
 def comparisonLevelProjection (b : Base l E) (o : Operations l E b)
     (a : ComparisonLevels l E b o) {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f) (n : ℕ)
@@ -181,8 +169,7 @@ def comparisonLevelProjection (b : Base l E) (o : Operations l E b)
                     c.comm.symm)).app L))))
 
 /-- The finite compactification exchange, the same unit--square--counit--open
-word as the tower exchange. Source: blueprint operations proof (2)
-(blueprint: def-sp-strict-compactification-comparison-interfaces). -/
+word as the tower exchange. -/
 def comparisonLevelExchange (b : Base l E) (o : Operations l E b)
     (a : ComparisonLevels l E b o) {X' X Y' Y : Scheme.{u}}
     {h : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
@@ -211,9 +198,7 @@ def comparisonLevelExchange (b : Base l E) (o : Operations l E b)
       (c.isPullback_i_ofIsPullback sq) n)
 
 /-- The coefficient direct-image comparison is the existing adjunction mate,
-with the source and target coefficient systems retained. Source: blueprint
-operations proof (2)
-(blueprint: def-sp-strict-compactification-comparison-interfaces). -/
+with the source and target coefficient systems retained. -/
 abbrev comparisonCoefficientMate (b : Base l E) (o : Operations l E b)
     {X Y : Scheme.{u}} (f : X ⟶ Y) {m n : ℕ} (h : n ≤ m) :=
   (o.geometry f).generic.coefficientMate
@@ -223,9 +208,7 @@ abbrev comparisonCoefficientMate (b : Base l E) (o : Operations l E b)
     (proEtaleSheafDirectImage f (Type (u + 1)))
     (proEtaleSheafAdjunction f (Type (u + 1))) h
 
-/-- Coefficient and tensor coherence of the actual strict-system calculus.
-Source: blueprint operations proof (2)
-(blueprint: def-sp-strict-compactification-comparison-interfaces). -/
+/-- Coefficient and tensor coherence of the actual strict-system calculus. -/
 def StrictSystemComparisons (b : Base l E) (o : Operations l E b) : Prop :=
   (∀ T : Scheme.{u},
     ∃ s : SemilinearSections.SemilinearDerivedSectionsData.{u + 1, u, u + 1}
@@ -272,8 +255,7 @@ def StrictSystemComparisons (b : Base l E) (o : Operations l E b) : Prop :=
       (comparisonCoefficientMate l E b o f (h.trans k)).app Q)
 
 /-- Compatibility with bounded-below injective-resolution derivation.
-Source: blueprint operations proof (2); Stacks 05TI, 070J
-(blueprint: def-sp-strict-compactification-comparison-interfaces). -/
+Source: Stacks 05TI, 070J. -/
 def StrictPlusComparisons (b : Base l E) (o : Operations l E b)
     [enoughInjectives : ∀ T : Scheme.{u}, EnoughInjectives (S l E T)] : Prop :=
   ∀ {X Y : Scheme.{u}} (f : X ⟶ Y),
@@ -285,9 +267,7 @@ def StrictPlusComparisons (b : Base l E) (o : Operations l E b)
       a.right = (o.geometry f).push.rightDerivedFunctorPlusCompatibility
 
 /-- Bounded-below evaluation is pinned by the same ordinary evaluation square
-and the canonical comparisons with unbounded derivation.
-Source: blueprint operations proof (2)
-(blueprint: def-sp-strict-compactification-comparison-interfaces). -/
+and the canonical comparisons with unbounded derivation. -/
 def StrictPlusEvaluation (b : Base l E) (o : Operations l E b)
     [enoughInjectives : ∀ T : Scheme.{u}, EnoughInjectives (S l E T)]
     [levelEnoughInjectives : ∀ (T : Scheme.{u}) (n : ℕ),
@@ -309,15 +289,13 @@ def StrictPlusEvaluation (b : Base l E) (o : Operations l E b)
           ((ev l E X n).mapDerivedCategoryPlusCompatibility.inv.app K)
 
 /-- Fixed-scalar realization at a positive coefficient level, using the published
-identity-section equivalence. Source: blueprint operations proof (2)
-(blueprint: def-sp-strict-compactification-comparison-interfaces). -/
+identity-section equivalence. -/
 abbrev comparisonFiniteRealization (b : Base l E) (T : Scheme.{u}) (n : ℕ) :=
   (sfIntrinsicModuleEquivalence T (R l E n)).functor.mapDerivedCategory
 
 /-- The ordinary pullback square in the fixed-scalar realization. Its only
 extra factor is the realization unit, so the square fixes the actual scalar
-and section action. Source: blueprint operations proof (2)
-(blueprint: def-sp-strict-compactification-comparison-interfaces). -/
+and section action. -/
 def comparisonFiniteOrdinaryPull (b : Base l E) {X Y : Scheme.{u}}
     (f : X ⟶ Y) (n : ℕ) :
     (sfIntrinsicModuleEquivalence Y (R l E n)).functor ⋙
@@ -329,8 +307,7 @@ def comparisonFiniteOrdinaryPull (b : Base l E) {X Y : Scheme.{u}}
     (sfIntrinsicModuleEquivalence Y (R l E n)).funInvIdAssoc _
 
 /-- The derived fixed-scalar pullback square, with the published exact-functor
-comparison to total left derivation. Source: blueprint operations proof (2)
-(blueprint: def-sp-strict-compactification-comparison-interfaces). -/
+comparison to total left derivation. -/
 def comparisonFinitePull (b : Base l E) {X Y : Scheme.{u}}
     (f : X ⟶ Y) (n : ℕ) :
     (upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) f).leftDerivedFunctor ⋙
@@ -344,8 +321,7 @@ def comparisonFinitePull (b : Base l E) {X Y : Scheme.{u}}
     (Functor.mapDerivedCategorySquareIso (comparisonFiniteOrdinaryPull l E b f n)).symm
 
 /-- The ordinary open-extension square, determined solely by the realization
-unit. Source: blueprint operations proof (2)
-(blueprint: def-sp-strict-compactification-comparison-interfaces). -/
+unit. -/
 def comparisonFiniteOrdinaryOpen (b : Base l E) {U T : Scheme.{u}}
     (j : U ⟶ T) [IsOpenImmersion j] (n : ℕ) :
     openImmersionLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) j ⋙
@@ -354,9 +330,7 @@ def comparisonFiniteOrdinaryOpen (b : Base l E) {U T : Scheme.{u}}
         sfIntrinsicExtensionByZero j (R l E n) :=
   ((sfIntrinsicModuleEquivalence U (R l E n)).funInvIdAssoc _).symm
 
-/-- Exact derived open-extension square for the canonical scalar realization.
-Source: blueprint operations proof (2)
-(blueprint: def-sp-strict-compactification-comparison-interfaces). -/
+/-- Exact derived open-extension square for the canonical scalar realization. -/
 def comparisonFiniteOpen (b : Base l E) {U T : Scheme.{u}}
     (j : U ⟶ T) [IsOpenImmersion j] (n : ℕ) :
     (openImmersionLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n)))
@@ -369,10 +343,7 @@ def comparisonFiniteOpen (b : Base l E) {U T : Scheme.{u}}
 
 /-- An adjunction square allowing the fixed-scalar sheaf presentation and the
 intrinsic module presentation to have different Hom universes. The unit and
-counit equations determine the right-adjoint comparison from the left one.
-Source: blueprint operations proof (2), invariance of adjunction mates under
-coefficient realization
-(blueprint: def-sp-strict-compactification-comparison-interfaces). -/
+counit equations determine the right-adjoint comparison from the left one. -/
 structure ComparisonAdjunctionCoordinates
     {C₁ : Type c₁} {C₂ : Type c₂} {C₃ : Type c₃} {C₄ : Type c₄}
     [Category.{v₁} C₁] [Category.{v₂} C₂] [Category.{v₃} C₃] [Category.{v₄} C₄]
@@ -389,9 +360,7 @@ structure ComparisonAdjunctionCoordinates
       left.inv.app (G.obj K) ≫ d.map (adj.counit.app K)
 
 /-- Right-adjoint coordinates are pinned by their actual left-adjoint square
-and both adjunction equations. There is no free comparison of direct images.
-Source: blueprint operations proof (2)
-(blueprint: def-sp-strict-compactification-comparison-interfaces). -/
+and both adjunction equations. There is no free comparison of direct images. -/
 def StrictFiniteCoordinates (b : Base l E) : Type _ :=
   { adjunctions : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ),
     ComparisonAdjunctionCoordinates
@@ -404,8 +373,7 @@ def StrictFiniteCoordinates (b : Base l E) : Type _ :=
     (adjunctions f n).left = comparisonFinitePull l E b f n }
 
 /-- Compact-support coordinates are the composite of the normalized open and
-proper right-adjoint coordinates. Source: blueprint operations proof (2)
-(blueprint: def-sp-strict-compactification-comparison-interfaces). -/
+proper right-adjoint coordinates. -/
 def comparisonFiniteF (b : Base l E) (a : StrictFiniteCoordinates l E b)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) (n : ℕ) :
     rightDerivedLowerShriekOfCompactification
@@ -418,10 +386,7 @@ def comparisonFiniteF (b : Base l E) (a : StrictFiniteCoordinates l E b)
     Functor.isoWhiskerRight (comparisonFiniteOpen l E b c.i n) _
 
 /-- The finite exchange is the recorded ambient exchange, and on every specified
-etale witness it is the transported etale exchange. Coordinates in this square
-are fixed by ordinary sections and adjunction units, not chosen for this arrow.
-Source: blueprint operations proof (2); compact-support exchange transport,
-lines 21--22 (blueprint: def-sp-strict-compactification-comparison-interfaces). -/
+etale witness it is the transported etale exchange. -/
 def StrictFiniteExchangeComparisons (b : Base l E) (o : Operations l E b)
     (levels : ComparisonLevels l E b o) (a : StrictFiniteCoordinates l E b) : Prop :=
   (∀ {X' X Y' Y : Scheme.{u}} {h : X' ⟶ X} {f' : X' ⟶ Y'}
@@ -449,9 +414,7 @@ def StrictFiniteExchangeComparisons (b : Base l E) (o : Operations l E b)
         ((comparisonFiniteRealization l E b X n).obj N))
 
 /-- The published finite projection word with product tensor endpoints made explicit.
-Only the currying wrappers are expanded; the actual projection map is retained.
-Source: blueprint operations proof (2); def-exchange-projection
-(blueprint: def-sp-strict-compactification-comparison-interfaces). -/
+Only the currying wrappers are expanded; the actual projection map is retained. -/
 def comparisonFiniteProjection (b : Base l E) {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f) (n : ℕ)
     (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X)

@@ -17,9 +17,7 @@ import WeilConjectures.AlgebraicGeometry.DenseCompactification
 /-!
 # Dimension after field extension and dense open restriction
 
-Source: blueprint `sec-smooth-purity/sk-prop-sf-kunneth-ordinary`,
-`lem-kun-dimension-extension`; Stacks Project, Tags 00P3 and 0A21.
-(blueprint: lem-kun-dimension-extension)
+Source: Stacks Project, Tags 00P3 and 0A21.
 -/
 
 @[expose] public section
@@ -31,19 +29,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Dimension of a finite type scheme over a field is unchanged by any field extension
-or any dense open immersion. Source: blueprint `lem-kun-dimension-extension`,
-Stacks Project, Tags 00P3 and 0A21 (blueprint: lem-kun-dimension-extension).
-
-Proof:
-1. Apply the existing source theorem `topologicalKrullDim_pullback_eq_of_field`
-   (the closed source attachment of `lem-pc-dim-base-change`) to the structure map
-   and the spectrum map of the field extension.
-2. The range of an open immersion is open. Apply `topologicalKrullDim_le_of_dense`
-   (`lem-weil-pbc-dense-open-dimension-comparison`) to this dense open image.
-3. The open embedding identifies its source homeomorphically with its range.
-   Transport the preceding bound along that homeomorphism, and combine it with
-   inducing-map dimension monotonicity to obtain equality. Both source results
-   include empty schemes, so no separate nonemptiness assumption is needed. -/
+or any dense open immersion. Source: Stacks Project, Tags 00P3 and 0A21. -/
 theorem topologicalKrullDim_fieldExtension_and_denseOpen
     {K : Type u} [Field K] {X : Scheme.{u}} [X.Over (Spec (.of K))]
     [LocallyOfFiniteType (X ↘ Spec (.of K))] [QuasiCompact (X ↘ Spec (.of K))] :

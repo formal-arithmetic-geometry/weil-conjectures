@@ -33,9 +33,7 @@ variable (B : Type (u + 1)) [CommRing B]
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- The normalized compositor is uniquely determined by canonical adjunction conjugation.
-Source: Stacks, Tags 0D6D and 07A7
-(blueprint: lem-cbc-strict-tower-direct-image-coherence).
-Proof: take the displayed conjugate; equality to it also proves uniqueness. -/
+Source: Stacks, Tags 0D6D and 07A7. -/
 theorem rCompEq_existsUnique {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z) (h : X ⟶ Z) (w : f ≫ g = h) :
     ∃! e : R B f ⋙ R B g ≅ R B h,
@@ -45,17 +43,14 @@ theorem rCompEq_existsUnique {X Y Z : Scheme.{u}}
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- Direct-image composition with a supplied equation for the composite.
-The determining theorem fixes its data by equality to the canonical conjugate.
-Source: Stacks, Tags 0D6D and 07A7
-(blueprint: lem-cbc-strict-tower-direct-image-coherence). -/
+Source: Stacks, Tags 0D6D and 07A7. -/
 def rCompEq {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (h : X ⟶ Z)
     (w : f ≫ g = h) : R B f ⋙ R B g ≅ R B h :=
   Classical.choose (rCompEq_existsUnique B f g h w)
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- This representative is exactly the canonical conjugate compositor.
-Source: Stacks, Tag 07A7 (blueprint: lem-cbc-strict-tower-direct-image-coherence).
-Proof: apply the specification of its uniquely determining choice. -/
+Source: Stacks, Tag 07A7. -/
 theorem rCompEq_spec {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (h : X ⟶ Z) (w : f ≫ g = h) :
     rCompEq B f g h w =
@@ -64,8 +59,7 @@ theorem rCompEq_spec {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
   (Classical.choose_spec (rCompEq_existsUnique B f g h w)).1
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
-/-- Equality transport agrees with the standard equality isomorphism.
-Source: equality elimination (blueprint: lem-cbc-strict-tower-direct-image-coherence). -/
+/-- Equality transport agrees with the standard equality isomorphism. -/
 theorem rCompEq_eq {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (h : X ⟶ Z) (w : f ≫ g = h) :
     rCompEq B f g h w = rComp B f g ≪≫ eqToIso (congrArg (R B) w) := by
@@ -838,16 +832,14 @@ attribute [local irreducible] G R rId rComp adj exchange towers_hasDerivedCatego
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- Contravariant functor families on schemes.
-Source: Stacks, Tags 0D6D and 07A7
-(blueprint: lem-cbc-strict-tower-direct-image-coherence). -/
+Source: Stacks, Tags 0D6D and 07A7. -/
 abbrev InverseImageFamily (C : Scheme.{u} → Type*)
     [∀ X, Category.{u + 2} (C X)] :=
   ∀ {X Y : Scheme.{u}}, (X ⟶ Y) → (C Y ⥤ C X)
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- Covariant functor families on schemes.
-Source: Stacks, Tags 0D6D and 07A7
-(blueprint: lem-cbc-strict-tower-direct-image-coherence). -/
+Source: Stacks, Tags 0D6D and 07A7. -/
 abbrev DirectImageFamily (C : Scheme.{u} → Type*)
     [∀ X, Category.{u + 2} (C X)] :=
   ∀ {X Y : Scheme.{u}}, (X ⟶ Y) → (C X ⥤ C Y)
@@ -1128,8 +1120,7 @@ private theorem system_exchange_vertical {C : Scheme.{u} → Type*}
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- Composition isomorphisms with a supplied equation for the composite.
-Source: Stacks, Tags 0D6D and 07A7
-(blueprint: lem-cbc-strict-tower-direct-image-coherence). -/
+Source: Stacks, Tags 0D6D and 07A7. -/
 abbrev RightCompositionFamily (C : Scheme.{u} → Type*)
     [∀ X, Category.{u + 2} (C X)] (R₀ : DirectImageFamily C) :=
   ∀ {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (h : X ⟶ Z),
@@ -1137,8 +1128,7 @@ abbrev RightCompositionFamily (C : Scheme.{u} → Type*)
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- Natural transformations for arbitrary commutative squares.
-Source: Stacks, Tags 0D6D and 07A7
-(blueprint: lem-cbc-strict-tower-direct-image-coherence). -/
+Source: Stacks, Tags 0D6D and 07A7. -/
 abbrev ExchangeFamily (C : Scheme.{u} → Type*)
     [∀ X, Category.{u + 2} (C X)]
     (L : InverseImageFamily C) (R₀ : DirectImageFamily C) :=
@@ -1147,8 +1137,7 @@ abbrev ExchangeFamily (C : Scheme.{u} → Type*)
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- Square mates respect vertical pasting and direct-image composition.
-Source: Stacks, Tags 0D6D and 07A7
-(blueprint: lem-cbc-strict-tower-direct-image-coherence). -/
+Source: Stacks, Tags 0D6D and 07A7. -/
 def matePastingLaw {C : Scheme.{u} → Type*} [∀ X, Category.{u + 2} (C X)]
     (L : InverseImageFamily C) (R₀ : DirectImageFamily C)
     (K : RightCompositionFamily C R₀) (E : ExchangeFamily C L R₀) : Prop :=
@@ -1177,8 +1166,7 @@ private theorem system_matePastingLaw {C : Scheme.{u} → Type*}
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- The identity-vertical square mate respects direct-image units.
-Source: Stacks, Tags 0D6D and 07A7
-(blueprint: lem-cbc-strict-tower-direct-image-coherence). -/
+Source: Stacks, Tags 0D6D and 07A7. -/
 def mateIdentityLaw {C : Scheme.{u} → Type*} [∀ X, Category.{u + 2} (C X)]
     (L : InverseImageFamily C) (R₀ : DirectImageFamily C)
     (I : ∀ X, R₀ (𝟙 X) ≅ 𝟭 (C X)) (E : ExchangeFamily C L R₀) : Prop :=
@@ -1278,17 +1266,14 @@ private theorem concrete_matePastingLaw (A : Type (u + 1)) [CommRing A] :
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- The canonical square mates respect direct-image composition.
-Source: Stacks, Tag 07A7
-(blueprint: lem-cbc-strict-tower-direct-image-coherence).
-Proof: the full compositor and exchange family equalities transport formal mate pasting. -/
+Source: Stacks, Tag 07A7. -/
 theorem strictTowerMatePasting :
     matePastingLaw (G B) (R B) (@rCompEq.{u} B _) (@exchange.{u} B _) :=
   concrete_matePastingLaw B
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- The four canonical direct-image and square-mate normalization equations.
-Source: Stacks, Tags 0D6D and 07A7
-(blueprint: lem-cbc-strict-tower-direct-image-coherence). -/
+Source: Stacks, Tags 0D6D and 07A7. -/
 def DirectImageCoherence : Prop :=
     (∀ {X Y : Scheme.{u}} (f : X ⟶ Y) (M : Derived B X),
       (rCompEq B (𝟙 X) f f (Category.id_comp f)).hom.app M =
@@ -1313,24 +1298,7 @@ private theorem packedDirectImageCoherence_proof : DirectImageCoherence B := by
 attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- The canonical direct-image compositors are unital and associative, and the
 canonical proper-square mates preserve identity maps and pasting.
-Source: Stacks, Tags 0D6D and 07A7; the canonical composition and mate normalizations
-(blueprint: lem-cbc-strict-tower-direct-image-coherence).
-
-Proof: first check the module direct-image comparisons on sections. Their components
-are restriction along the canonical pullback composition and identity isomorphisms.
-Pullback pasting gives their triangle and pentagon equations. The uniqueness in
-moduleRComp_existsUnique and moduleRId_existsUnique identifies these section maps
-with the published choices. Conjugate through the module adjunctions to get the
-same equations for module pullback. Termwise whiskering to towers and complexes
-and exact localization preserve them, giving the equations for gComp and gId.
-Conjugate again through the derived adjunctions: conjugation respects composition,
-associators and unitors, giving the first two clauses of DirectImageCoherence for rComp and rId.
-For the last two equations expand squareG. The pullback triangle equation identifies
-the identity square with the two identity comparisons. The pentagon equation
-identifies the square of a pasted rectangle with the two pasted square comparisons.
-Take proper-adjunction mates. Mate pasting and the two conjugation equations for
-composite adjunctions give exactly the displayed identity and pasting equations.
-All these equalities hold before evaluation, on every derived strict tower. -/
+Source: Stacks, Tags 0D6D and 07A7. -/
 theorem strictTowerDirectImageCoherence : DirectImageCoherence B := by
   exact packedDirectImageCoherence_proof B
 

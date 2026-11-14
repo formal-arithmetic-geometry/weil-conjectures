@@ -22,22 +22,7 @@ namespace AlgebraicGeometry
 attribute [local instance 5000] strictEtaleSystemDerived strictEtaleLevelDerived
 
 /-- The ordinary inverse image respects every normalized iterated transition.
-Source: Zheng, Construction 4.1 and Lemma 4.10.
-(blueprint: lem-pur-strict-etale-inverse-transition)
-
-Proof: compose the underlying map of the inverse-evaluation comparison at level q
-with the algebraic lift's underlying-sheaf comparison, obtaining a map a_q to the
-geometric inverse image of the underlying qth level. Faithful forgetting and the
-prescribed underlying formula for scalar restriction identify the claimed equation
-with tau_inverse(m,n) followed by a_n = a_m followed by inverse image of tau(m,n).
-For equal indices this follows from normalized identity transitions and preservation
-of identities. The successor case is the ordinary image package's inverseTransition.
-For n ≤ m+1 factor the iterated transition through level m. Apply the induction
-hypothesis, then the successor case, and use preservation of composition. The
-normalization fields identify these composites with the prescribed iterated
-transitions on both sides. Faithfulness gives the original module-map equation.
-This is the already proved ordinaryInverseTransition calculation, specialized to
-small étale sites; no property of an open immersion is required. -/
+Source: Zheng, Construction 4.1 and Lemma 4.10. -/
 theorem strictEtaleInverseTransition (O : Type (u + 1)) [CommRing O] (t : O)
     {X Z : Scheme.{u}} (j : X ⟶ Z) (I : StrictEtaleOrdinaryImage O t j)
     (PX : StrictEtaleEvaluation X O t) (PZ : StrictEtaleEvaluation Z O t)

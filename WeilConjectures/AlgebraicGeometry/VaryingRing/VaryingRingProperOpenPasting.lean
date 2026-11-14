@@ -14,9 +14,7 @@ import WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingClopenArrowEvalu
 /-!
 # Proper/open projection and pasting for varying coefficient rings
 
-Source: Stacks Project, Tags 0F7B, 0F7C and 0F7D, open-immersion cases; the
-agent-formulated varying-ring extension extracted from the blueprint's local-pairs
-construction (blueprint: lem-sp-varying-ring-proper-open-pasting).
+Source: Stacks Project, Tags 0F7B, 0F7C and 0F7D, open-immersion cases.
 
 Every map below lives on the ordinary derived category of strict semilinear systems.
 The ordinary system maps and their two pasting equations are stated separately, so
@@ -399,13 +397,7 @@ private theorem module_disjoint_extension {U X C : Scheme.{u}}
   exact (module_disjoint_direct R φ s c hc _).eq_of_tgt _ _
 
 /-- The system clopen projection is identity on its image and zero on the complement.
-Source: Stacks 09AE; node proof Step 4
-(blueprint: lem-sp-varying-ring-proper-open-pasting).
-Proof: split every test object into its pullbacks of the clopen image and its
-complement. The sheaf axiom identifies its sections with the product of the two
-section modules. The unit followed by inverse open-to-direct comparison is (x,y) ↦
-(x,0). The horizontal restrictions are semilinear componentwise maps, so they
-commute with this projection, as do module maps and differentials. -/
+Source: Stacks 09AE. -/
 theorem modulePi_components {U X C : Scheme.{u}} (s : U ⟶ X) (c : C ⟶ X)
     [IsOpenImmersion s] [IsClosedImmersion s] [IsOpenImmersion c]
     (hc : Set.range c = (Set.range s)ᶜ) (M : Modules R φ X) :
@@ -617,13 +609,7 @@ private theorem ordinaryRealization_jointlyFaithful {X : Scheme.{u}}
   exact congrArg (fun a ↦ a.val.app (op U.unop.2) x) (he U.unop.1)
 
 /-- Intrinsic moduleAlpha agrees with vertical pasting on every input.
-Source: Stacks, Tag 0F7C and blueprint, fifth proof step
-(blueprint: lem-sp-varying-ring-proper-open-pasting).
-Proof: ordinary coefficient evaluation followed by the constant tower and degree-zero
-embeddings preserves the single-square comparison and the pullback compositors.
-The finite categorical transport calculation below therefore turns strict-tower vertical
-pasting into the evaluated equation. The degree-zero and constant embeddings are
-faithful, and ordinary system maps are determined componentwise, giving the equality. -/
+Source: Stacks, Tag 0F7C -/
 theorem moduleAlpha_vertical {A C E B₀ D F : Scheme.{u}}
     (k : A ⟶ B₀) (i : C ⟶ D) (j : E ⟶ F)
     (r₁ : A ⟶ C) (r₂ : C ⟶ E) (p₁ : B₀ ⟶ D) (p₂ : D ⟶ F)
@@ -666,13 +652,7 @@ theorem moduleAlpha_vertical {A C E B₀ D F : Scheme.{u}}
     (StrictTower.alpha_vertical (R n) k i j r₁ r₂ p₁ p₂ h₁ h₂ h) N
 
 /-- Intrinsic moduleAlpha agrees with horizontal pasting on every input.
-Source: Stacks, Tag 0F7D and blueprint, fifth proof step
-(blueprint: lem-sp-varying-ring-proper-open-pasting).
-Proof: ordinary coefficient evaluation followed by the constant tower and degree-zero
-embeddings preserves the single-square comparison and the open-extension compositors.
-The finite categorical transport calculation below turns strict-tower horizontal
-pasting into the evaluated equation. Faithfulness of the two embeddings and
-componentwise extensionality of ordinary system maps then give the equality. -/
+Source: Stacks, Tag 0F7D -/
 theorem moduleAlpha_horizontal {A C E B₀ D F : Scheme.{u}}
     (k : A ⟶ B₀) (l : B₀ ⟶ E) (i : C ⟶ D) (j : D ⟶ F)
     (r : A ⟶ C) (p : B₀ ⟶ D) (q : E ⟶ F)
@@ -717,12 +697,7 @@ theorem moduleAlpha_horizontal {A C E B₀ D F : Scheme.{u}}
 end OrdinaryPastingProofs
 
 /-- Intrinsic alpha agrees with vertical pasting on every input.
-Source: Stacks, Tag 0F7C and blueprint, fifth proof step
-(blueprint: lem-sp-varying-ring-proper-open-pasting).
-Proof: after beta, the two clopen projections select nested open components.
-On every test object's intersections of the two clopen decompositions the two
-composites are both identity or both zero. Sheaf uniqueness proves equality,
-termwise extension preserves it, and exact localization descends it. -/
+Source: Stacks, Tag 0F7C -/
 theorem alpha_vertical {A C E B₀ D F : Scheme.{u}}
     (k : A ⟶ B₀) (i : C ⟶ D) (j : E ⟶ F)
     (r₁ : A ⟶ C) (r₂ : C ⟶ E) (p₁ : B₀ ⟶ D) (p₂ : D ⟶ F)
@@ -747,11 +722,7 @@ theorem alpha_vertical {A C E B₀ D F : Scheme.{u}}
       (fun X ↦ moduleAlpha_vertical R φ k i j r₁ r₂ p₁ p₂ h₁ h₂ h X) N
 
 /-- Intrinsic alpha agrees with horizontal pasting on every input.
-Source: Stacks, Tag 0F7D and blueprint, fifth proof step
-(blueprint: lem-sp-varying-ring-proper-open-pasting).
-Proof: the first clopen projection selects l(W), and the second selects lk(V)
-inside it. Their composite selects lk(V) and vanishes on its complement. Use the
-open-composition beta equation and exact localization to identify the displayed maps. -/
+Source: Stacks, Tag 0F7D -/
 theorem alpha_horizontal {A C E B₀ D F : Scheme.{u}}
     (k : A ⟶ B₀) (l : B₀ ⟶ E) (i : C ⟶ D) (j : D ⟶ F)
     (r : A ⟶ C) (p : B₀ ⟶ D) (q : E ⟶ F)
@@ -776,40 +747,7 @@ theorem alpha_horizontal {A C E B₀ D F : Scheme.{u}}
       (fun X ↦ moduleAlpha_horizontal R φ k l i j r p q h₁ h₂ h X) N
 
 /-- Both normalized proper/open mate-pasting laws, as system transformations.
-Source: Stacks 0F7C, 0F7D and the varying-ring extension of the local-pairs argument
-(blueprint: lem-sp-varying-ring-proper-open-pasting).
-Proof (the node's eleven steps):
-1. Apply the constant-ring geometric calculus, with ring Z, to obtain the clopen
-   lift s=(k,r) into W ×_T S and its complementary open, without cartesianness.
-2. Inverse image and direct-sum extension act on the same underlying abelian
-   sheaves after restriction along φ. A semilinear transition sends [a,x] to
-   [a,t(x)], with t(cx)=φ(c)t(x); exactness is componentwise.
-3. Cartesian open comparison preserves the lift label under the fibre-product
-   bijection. It is the inverse open-unit transpose moduleBeta. Both routes past
-   a transition therefore send a generator to [a',t(x)]. Sheafify this equality.
-4. On the two clopen components the projection is (x,y) ↦ (x,0). It commutes with
-   every semilinear transition, restriction and differential. This is modulePi;
-   composition with moduleBeta and the compositors gives moduleAlpha.
-5. Inverse-image composition identifies iterated pullbacks, and open composition
-   combines lift labels without changing sections. The section-normalized
-   direct-image compositor and its conjugate fix these comparisons and units.
-6. Vertically, the projections retain nested components. On the final retained
-   component both composites are identity, and on every other component one
-   projection is zero. Sheaf uniqueness proves moduleAlpha_vertical.
-7. Horizontally the projections select l(W) and then lk(V) inside it. The same
-   identity/zero calculation and the open compositor give moduleAlpha_horizontal.
-8. Apply the simultaneous ordinary-derived section model. Localize these actual
-   degreewise maps of systems, obtaining alpha and its two pasting equations.
-   Equalities are not inferred from evaluation of arbitrary derived morphisms.
-9. Take the proper-adjunction mate. Its definition is precisely eta_p, alpha
-   whiskered by Rr, and Rp(k! epsilon_r), with the specified order.
-10. mateEquiv_hcomp applied to Step 6 proves the first displayed law, and
-    mateEquiv_vcomp applied to Step 7 proves the second. Conjugate comparisons
-    transport from composite adjunctions to the intrinsic proper compositors.
-11. Identity lift labels and projections give the identity mate via the triangle
-    laws. Evaluation preserves the constructed maps, units and counits, so the
-    evaluated mate is the arbitrary constant-R_n clopen-projection mate. This
-    uses neither finite-coefficient invertibility nor faithfulness of evaluation. -/
+Source: Stacks 0F7C and 0F7D. -/
 theorem properOpenPasting :
     (∀ {A C E B₀ D F : Scheme.{u}}
       (k : A ⟶ B₀) (i : C ⟶ D) (j : E ⟶ F)
@@ -1299,11 +1237,7 @@ private theorem alpha_second {U X : Scheme.{u}} (p : U ⟶ X) [IsProper p]
   simpa only [Functor.map_comp, Category.assoc, Functor.comp_obj] using ht'.symm
 
 /-- Identity normalizations of the intrinsic inverse-image/open-extension arrow.
-Source: Stacks 07A7, 0F7B; node proof Steps 5 and 11
-(blueprint: lem-sp-varying-ring-proper-open-pasting).
-Proof: the identity square has the identity lift and its projection retains the
-entire component. The unit normalization of beta and the identity compositors
-therefore gives these equalities already on system complexes; localize them. -/
+Source: Stacks 07A7, 0F7B. -/
 theorem alpha_identities :
     (∀ {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
       (h : j ≫ (𝟙 X) = (𝟙 U) ≫ j) (M : Derived R φ U),
@@ -1322,11 +1256,7 @@ theorem alpha_identities :
     exact alpha_second R φ p h M
 
 /-- Identity normalizations of gamma in both directions.
-Source: Stacks, Tags 0F7B and 07A7, blueprint, steps 6 and 10
-(blueprint: lem-sp-varying-ring-proper-open-pasting).
-Proof: the clopen projection is identity for either identity square. Its alpha is the
-canonical inverse-image/open-extension identity; taking the mate and using the
-triangle identities gives the corresponding identity on direct image or extension. -/
+Source: Stacks, Tags 0F7B and 07A7. -/
 theorem gamma_identities :
     (∀ {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
       (h : j ≫ (𝟙 X) = (𝟙 U) ≫ j) (M : Derived R φ U),

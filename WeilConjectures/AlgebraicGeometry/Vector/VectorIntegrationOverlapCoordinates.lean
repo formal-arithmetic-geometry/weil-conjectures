@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.Vector.VectorIntegrationCartesianPrefix
 
 /-! # Linear change between restricted inverse frames
-
-Source: blueprint vector integration, overlap calculation, geometric part.
-(blueprint: lem-amb-vector-integration-overlap-coordinates).
 -/
 
 @[expose] public noncomputable section
@@ -300,24 +297,7 @@ private theorem restrict_chart
   exact tower_map_iso (S.homOfLE h) d
 
 /-- The two restricted inverse frames differ by an invertible linear coordinate map.
-This statement concerns scheme maps only and has no coefficient ring or exchange map.
-Source: blueprint sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md,
-identification on overlaps by linear changes of frame, and the coordinate convention
-of proposition-purity-vector-bundles.
-(blueprint: lem-amb-vector-integration-overlap-coordinates).
-
-Proof: restrict each module frame along U into its frame open, using restrictFunctorComp
-and the canonical restriction of the finite free module. Their composite is an
-isomorphism of the free module on U. The images of its standard global basis and of the
-inverse give inverse matrices G,H over Gamma(U,O_U), as in transition_spec. This uses
-sections over U itself, with no affineness assumption. In the convention
- e'_j = sum_i G_ij e_i the coordinate substitution is G transpose, so the inverse charts
-are related by g = inverse(G transpose). Check this relation on the degree-one
-symmetric-algebra generators. The symmetric-algebra universal property and the relative
-Spec equivalence give equality of the scheme maps; affineTraceAffineSpaceIso conjugates
-the coordinate substitution to affineTraceLinearMap. Restriction of the charts is
-exactly affineTraceMap followed by the original inverse chart. For rank zero the empty
-matrices are inverse; on the empty open the same generator test is vacuous. -/
+This statement concerns scheme maps only and has no coefficient ring or exchange map. -/
 theorem vectorIntegration_overlap_coordinates
     (S : Scheme.{u}) [IsNoetherian S] (d : ℕ)
     (F : S.Modules) [F.IsFiniteLocallyFreeOfRank d]

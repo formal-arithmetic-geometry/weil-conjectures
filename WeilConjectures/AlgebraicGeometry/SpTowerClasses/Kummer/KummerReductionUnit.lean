@@ -162,28 +162,7 @@ private theorem assemble_reduction
       ha).trans he
 
 /-- Reduction of units is the roots module shifted once, with the unshifted positive
-Kummer boundary as its adjunct. No comparison on the integer source is involved.
-
-Source: blueprint latest, `sk-prop-sp-tower-geometric-classes.proof.md`, clause (2),
-and NormalizedKummerReduction proof steps 3--4.
-(blueprint: lem-sfb-kummer-reduction-unit).
-
-Proof: apply the coefficient-resolution unit triangle. Compare it by TR3 with the
-rotation of the distinguished single triangle of the supplied Kummer short exact
-sequence, using identities on its first two objects. The triangulated five lemma
-makes the third comparison an isomorphism to the roots object shifted once, and the
-second square identifies the actual adjunction unit with the positive Kummer boundary.
-The supplied forgetting functor is faithful: its morphism specification identifies
-all section maps, which determine a sheaf-of-modules morphism. Exact faithful
-forgetting reflects concentration of homology in degree -1. Hence the derived
-reduction is isomorphic to a single coefficient module shifted once. Compare its
-underlying shifted single object with roots by the preceding triangle isomorphism;
-full faithfulness of the shifted single functor recovers the required abelian
-isomorphism i. Its preimage equation gives the stated comparison after composing
-with the unit, by the adjunction formula for homEquiv. No faithfulness of the derived
-forgetting functor or detection of derived morphisms by individual evaluations is
-used. The zero roots object, the empty scheme, l=2 and level n=0 require no separate
-argument. -/
+Kummer boundary as its adjunct. No comparison on the integer source is involved. -/
 theorem exists_kummerReductionUnit (l : ℕ) [Fact l.Prime]
     (T : Scheme.{u}) (hT : IsUnit (l : Γ(T, ⊤))) (k : Kummer l T)
     (r : Reduction T (Rrings l T)) :

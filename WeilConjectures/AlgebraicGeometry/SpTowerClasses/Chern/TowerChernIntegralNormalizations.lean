@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassChern
 
 /-! # Extract the integral part of normalized Chern data
-
-Source: classes (2), the three normalization equations
-(blueprint: lem-sp-tower-chern-integral-normalizations).
 -/
 
 @[expose] public noncomputable section
@@ -35,14 +32,7 @@ namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 
 variable (l : ℕ) [Fact l.Prime]
 
-/-- The integral generator normalization follows from normalized Chern data.
-
-Source: classes (2), the first normalization equation
-(blueprint: lem-sp-tower-chern-integral-normalizations).
-
-Proof: project the first conjunct of the three normalization equations.
-Keep the coefficient diagrams as parameters so extracting this equation does
-not construct or expand the scalar-unit normalization at concrete coefficients. -/
+/-- The integral generator normalization follows from normalized Chern data. -/
 theorem chern_integral_source_normalization
     (T : Scheme.{u})
     (R A : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1})

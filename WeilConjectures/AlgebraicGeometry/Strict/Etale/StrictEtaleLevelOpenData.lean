@@ -550,12 +550,10 @@ variable (O : Type (u + 1)) [CommRing O] (t : O)
   (PX : StrictEtaleEvaluation X O t) (PZ : StrictEtaleEvaluation Z O t)
 
 /-- The levelwise pieces of ordinary strict étale extension by zero.
-Source: Stacks 03S2, 03DI and 03DJ; Zheng, Construction 4.1
-(blueprint: new-lem-pur-strict-etale-level-open-data).
+Source: Stacks 03S2, 03DI and 03DJ; Zheng, Construction 4.1.
 
 The record contains the transported lower-shriek functors, their exact adjunctions,
-and the normalized scalar-restriction mates.  It is strictly below the system theorem:
-it has no system extension, system adjunction, or system evaluation comparison. -/
+and the normalized scalar-restriction mates. -/
 structure StrictEtaleLevelOpenData where
   level : ∀ n, strictEtaleLevel X O t n ⥤ strictEtaleLevel Z O t n
   [levelAdditive : ∀ n, (level n).Additive]
@@ -571,32 +569,7 @@ structure StrictEtaleLevelOpenData where
 attribute [instance] StrictEtaleLevelOpenData.levelAdditive
 
 /-- The levelwise transport exists.
-Source: Stacks Project 03S2, 03DI and 03DJ; Zheng, Construction 4.1.
-(blueprint: new-lem-pur-strict-etale-level-open-data)
-
-Restrict a module along the constant-presheaf sheafification unit to obtain an
-additive equivalence with fixed-coefficient module sheaves. The ring comparison
-`constantCommuteCompose` and `constant_ring_module_sheaves` prove this equivalence.
-Transport the fixed-coefficient open extension by zero and its exact adjunction.
-The addition and scalar graph equations of the supplied lift, together with its
-constant-section normalization, identify its right adjoint with literal open
-restriction. This gives the chosen adjunctions with `(I.lift n).modules`.
-
-Naturality of sheafification identifies scalar restriction through the equivalences
-by the identity on sections. For fixed coefficients, scalar coextension commutes
-with open restriction. Taking its mate twice shows that extension by zero commutes
-with scalar restriction. Transport this isomorphism through the equivalences to
-identify scalar restriction of an extended object with extension of its scalar
-restriction. Extension by zero and its transports are fully faithful. The inverse
-mate of `I.restrictInverse.inv` is a composite of the image of the invertible unit,
-the given inverse-image coefficient isomorphism, and a counit at an object
-isomorphic to an extended object. That counit is invertible by full faithfulness,
-so this exact inverse mate is invertible. Define `restriction` as its isomorphism;
-the inverse law of `mateEquiv` gives `restrictionMate` exactly.
-
-The constructions apply to the zero coefficient ring and to the empty open: the
-same section formulas and Hom transposes give the zero functors and identities.
-No nonzero-ring, regularity or completeness assumption enters the construction. -/
+Source: Stacks Project 03S2, 03DI and 03DJ; Zheng, Construction 4.1. -/
 theorem strictEtaleLevelOpenData_exists :
     Nonempty (StrictEtaleLevelOpenData O t j I) := by
   have (n : ℕ) : (StrictEtaleOpenProof.fixed X

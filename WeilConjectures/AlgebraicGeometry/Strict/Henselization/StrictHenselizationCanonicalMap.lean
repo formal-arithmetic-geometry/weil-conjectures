@@ -33,8 +33,8 @@ import WeilConjectures.AlgebraicGeometry.Strict.Henselization.StrictHenselizatio
 
 /-! # The canonical pointed strict-local morphism
 
-Source: Stacks Project, Tags 04HX, 03PS and 04GU
-(blueprint: lem-weil-pbc-strict-henselization-functoriality).
+Source: Stacks Project, Tags 04HX, 03PS and 04GU.
+
 The existing residue-field formulation is retained; this interface packages its uniquely
 characterized map without requiring the caller to supply residue identifications.
 -/
@@ -48,8 +48,7 @@ namespace AlgebraicGeometry.Scheme
 /-- Evaluation at the geometric point `y` on the small coordinate-ring colimit
 `strictHenselizationRing y`: upstream's `strictHenselizationPointEvaluation` precomposed with
 the comparison isomorphism `smallStrictHenselizationColimitIso`.
-Source: Stacks Project, Tag 04HX
-(blueprint: def-weil-pbc-strict-henselization-point-evaluation). -/
+Source: Stacks Project, Tag 04HX. -/
 noncomputable def strictHenselizationRingPointEvaluation
     {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (y : Spec (.of Ω) ⟶ Y) : strictHenselizationRing y →+* Ω :=
@@ -69,8 +68,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The ring-level evaluation recovers the given geometric point at every chosen
 neighbourhood; this transports `strictHenselizationPointEvaluation_pointed` along
 `smallStrictHenselizationColimitIso`.
-Source: Stacks Project, Tag 04HX
-(blueprint: lem-weil-pbc-strict-henselization-point-evaluation-pointed). -/
+Source: Stacks Project, Tag 04HX. -/
 theorem strictHenselizationRingPointEvaluation_pointed
     {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (y : Spec (.of Ω) ⟶ Y) (j : SmallModel.{u} (strictHenselizationNeighbourhoods y)) :
@@ -192,16 +190,7 @@ private theorem Spec_map_smallStrictHenselizationColimitIso_inv_hom
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The unique pointed map over the original morphism.
-Source: Stacks Project, Tags 04HX, 03PS and 04GU
-(blueprint: lem-weil-pbc-strict-henselization-functoriality).
-Proof: apply strictHenselizationResidue to obtain the local structures and the uniquely
-pointed residue identifications. Use strictHenselizationFunctoriality with these
-identifications and the residue embeddings furnished by the geometric points.
-Its local homomorphism gives the required spectrum map. Evaluation is the compatible
-geometric-point cocone, so its residue equation is exactly the second displayed equation.
-Conversely a pointed map maps the closed point to the closed point and is local.
-The residue equation and the uniqueness clause of functoriality give uniqueness.
-Finally transport along the comparison isomorphisms `smallStrictHenselizationColimitIso`. -/
+Source: Stacks Project, Tags 04HX, 03PS and 04GU. -/
 theorem strictHenselizationMap_existsUnique
     {X S : Scheme.{u}} (f : X ⟶ S) {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (x : Spec (.of Ω) ⟶ X) :

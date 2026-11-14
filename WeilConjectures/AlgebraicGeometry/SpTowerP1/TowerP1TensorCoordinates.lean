@@ -12,10 +12,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 
 /-! # Normalized tensor coordinates for projective-line level comparison
 
-Source: literature/blueprint/latest/blueprint/sec-smooth-purity/
-sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md, Levels
-(blueprint: def-sp-p1-tensor-derived-coordinates).
-
 The coordinates retain the canonical associated-module-sheaf functor. Its tensor
 comparison is fixed on scalar-unit pure tensors, on total-complex summands, and
 on K-flat representatives. Thus the final level equations cannot be satisfied
@@ -39,8 +35,7 @@ namespace AlgebraicGeometry.ProEtale.SpTowerP1
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
   (n : ℕ) [Finite (SpTowerShriek.R l E n)]
-/-- Fixed-scalar K-flat tensor model, with its standard localization comparison.
-Source: Levels (blueprint: def-sp-p1-tensor-derived-coordinates). -/
+/-- Fixed-scalar K-flat tensor model, with its standard localization comparison. -/
 def fixedTensorModel (T : Scheme.{u}) (P Q : CochainComplex (FixedSheaves l E n T) ℤ)
     (hP : (HomologicalComplex.quasiIso (FixedSheaves l E n T) (.up ℤ)).kFlat P) :
     ((ProEtale.derivedTensor
@@ -50,8 +45,7 @@ def fixedTensorModel (T : Scheme.{u}) (P Q : CochainComplex (FixedSheaves l E n 
   DerivedCategory.QObjTensorQObjIsoOfKFlatLeft P Q hP
 
 /-- Derived tensor realization fixed on every K-flat representative, including total
-summands and exact localization factors. The data cannot be an arbitrary endpoint iso.
-Source: Levels (blueprint: def-sp-p1-tensor-derived-coordinates). -/
+summands and exact localization factors. -/
 structure TensorCoordinates (b : SpTowerShriek.Base l E) (T : Scheme.{u})
     extends TensorChainCoordinates l E n T where
   derived : Functor.uncurry.obj

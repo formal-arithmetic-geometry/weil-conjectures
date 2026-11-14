@@ -22,10 +22,6 @@ import WeilConjectures.CategoryTheory.Sites.SectionsWithSupport
 /-!
 # The supported exterior product
 
-Source: blueprint, sec-smooth-purity/sk-prop-a1-kummer,
-`proposition-purity-vector-bundles`, pulling back supported sections and tensoring them
-(blueprint: proposition-purity-vector-bundles).
-
 Supported coefficients are closed direct images of constant modules. The ordinary
 adjunction is normalized by the quotient from constant coefficients. Its derived
 adjunction and the coefficient tensor comparison specify the supported pairing.
@@ -42,15 +38,13 @@ open CategoryTheory CategoryTheory.Category CategoryTheory.Limits MonoidalCatego
 
 namespace AlgebraicGeometry.Etale
 
-/-- Cache the existing sheafification existence proof at the coefficient universe.
-Source: the small-etale sheafification API (blueprint: proposition-purity-vector-bundles). -/
+/-- Cache the existing sheafification existence proof at the coefficient universe. -/
 theorem supportedHasSheafify
     (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) :
     HasSheafify X.smallEtaleTopology (ModuleCat.{u + 1} A) :=
   GrothendieckTopology.hasSheafify_smallEtaleTopology (ModuleCat.{u + 1} A) X
 
-/-- Cache the weak sheafification consequence of the existing exact sheafification.
-Source: the small-etale sheafification API (blueprint: proposition-purity-vector-bundles). -/
+/-- Cache the weak sheafification consequence of the existing exact sheafification. -/
 theorem supportedHasWeakSheafify
     (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) :
     HasWeakSheafify X.smallEtaleTopology (ModuleCat.{u + 1} A) :=
@@ -58,16 +52,13 @@ theorem supportedHasWeakSheafify
 
 attribute [local instance] supportedHasSheafify supportedHasWeakSheafify
 
-/-- Use the existing preadditive tensor structure without reopening sheafification
-instance search under each tensor-complex binder.
-Source: blueprint `proposition-purity-vector-bundles`, tensor construction
-(blueprint: proposition-purity-vector-bundles). -/
+/-- The existing preadditive tensor structure on sheaves of modules. -/
 noncomputable instance supportedSheaf_monoidalPreadditive (A : Type (u + 1)) [CommRing A]
     (X : Scheme.{u}) : MonoidalPreadditive (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) :=
   Sheaf.monoidalPreadditive
 
 /-- The cochain tensor is the signed total tensor complex.
-Source: Mathlib cochain monoidal structure (blueprint: proposition-purity-vector-bundles). -/
+Source: Mathlib cochain monoidal structure. -/
 theorem supportedComplexTensor_eq
     {D : Type*} [Category.{w} D] [Abelian D] [HasColimitsOfSize.{0, 0} D]
     [MonoidalCategory D] [MonoidalPreadditive D] [MonoidalClosed D] [BraidedCategory D]
@@ -80,51 +71,42 @@ variable (C : Type v) [Category.{u + 1} C] [Abelian C]
   [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C] [MonoidalPreadditive C]
   [SymmetricCategory C] [MonoidalClosed C] [Abelian.HasFunctorialFlatResolution C]
 
-/-- The existing monoidal sheafification property, with generic coefficients.
-Source: blueprint tensor construction (blueprint: proposition-purity-vector-bundles). -/
+/-- The existing monoidal sheafification property, with generic coefficients. -/
 noncomputable instance supportedSheaf_isMonoidalGeneric (X : Scheme.{u}) :
     (X.smallEtaleTopology.W (A := C)).IsMonoidal := GrothendieckTopology.W.monoidal
 
-/-- The existing preadditive tensor structure, with generic coefficients.
-Source: blueprint tensor construction (blueprint: proposition-purity-vector-bundles). -/
+/-- The existing preadditive tensor structure, with generic coefficients. -/
 noncomputable instance supportedSheaf_monoidalPreadditiveGeneric (X : Scheme.{u}) :
     MonoidalPreadditive (Sheaf X.smallEtaleTopology C) := Sheaf.monoidalPreadditive
 
-/-- The existing sheaf tensor bifunctor at a variable scheme.
-Source: blueprint constant tensor pairing (blueprint: proposition-purity-vector-bundles). -/
+/-- The existing sheaf tensor bifunctor at a variable scheme. -/
 @[implicit_reducible]
 noncomputable def supportedSheafTensorGeneric (X : Scheme.{u}) :
     Sheaf X.smallEtaleTopology C ⥤ Sheaf X.smallEtaleTopology C ⥤ Sheaf X.smallEtaleTopology C :=
       curriedTensor _
 
-/-- The signed complex tensor at a variable scheme, using the upstream structure.
-Source: blueprint signed tensor pairing (blueprint: proposition-purity-vector-bundles). -/
+/-- The signed complex tensor at a variable scheme, using the upstream structure. -/
 @[implicit_reducible]
 noncomputable def supportedComplexTensorGeneric (X : Scheme.{u}) :
     CochainComplex (Sheaf X.smallEtaleTopology C) ℤ ⥤
       CochainComplex (Sheaf X.smallEtaleTopology C) ℤ ⥤
         CochainComplex (Sheaf X.smallEtaleTopology C) ℤ := curriedTensor _
 
-/-- The signed total tensor object, using the existing total complex construction.
-Source: blueprint signed tensor construction (blueprint: proposition-purity-vector-bundles). -/
+/-- The signed total tensor object, using the existing total complex construction. -/
 noncomputable def supportedTotalTensorGeneric (X : Scheme.{u})
     (P Q : CochainComplex (Sheaf X.smallEtaleTopology C) ℤ) :=
   HomologicalComplex.tensorObj (C := Sheaf X.smallEtaleTopology C) (c := .up ℤ) P Q
 
 end TensorWrappers
 
-/-- Closed supported constant coefficients. Source: blueprint
-`proposition-purity-vector-bundles`, supported-section construction
-(blueprint: proposition-purity-vector-bundles). -/
+/-- Closed supported constant coefficients. -/
 noncomputable def supportedCoefficients (A : Type (u + 1)) [CommRing A]
     {Z X : Scheme.{u}} (i : Z ⟶ X) :
     ModuleCat.{u + 1} A ⥤ Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A) :=
   constantSheaf Z.smallEtaleTopology (ModuleCat.{u + 1} A) ⋙
     lowerStar (ModuleCat.{u + 1} A) i
 
-/-- The quotient from constant coefficients to closed supported coefficients.
-Source: blueprint `proposition-purity-vector-bundles`, open-closed coefficient sequence
-(blueprint: proposition-purity-vector-bundles). -/
+/-- The quotient from constant coefficients to closed supported coefficients. -/
 noncomputable def supportedCoefficientQuotient (A : Type (u + 1)) [CommRing A]
     {Z X : Scheme.{u}} (i : Z ⟶ X) (M : ModuleCat.{u + 1} A) :
     (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)).obj M ⟶
@@ -132,36 +114,27 @@ noncomputable def supportedCoefficientQuotient (A : Type (u + 1)) [CommRing A]
   ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) i).homEquiv _ _)
     ((Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} A) i).hom.app M)
 
-/-- Additivity of closed supported coefficients. Source: blueprint
-`proposition-purity-vector-bundles` (blueprint: proposition-purity-vector-bundles). -/
+/-- Additivity of closed supported coefficients. -/
 noncomputable instance supportedCoefficients_additive
     (A : Type (u + 1)) [CommRing A] {Z X : Scheme.{u}} (i : Z ⟶ X) :
     (supportedCoefficients A i).Additive :=
   inferInstanceAs ((constantSheaf Z.smallEtaleTopology (ModuleCat.{u + 1} A) ⋙
     lowerStar (ModuleCat.{u + 1} A) i).Additive)
 
-/-- Exactness of closed supported coefficients.
-Source: blueprint `proposition-purity-vector-bundles`, closed-support construction
-(blueprint: proposition-purity-vector-bundles).
-Proof: at a geometric point the closed direct image of a constant module has stalk
-that module on the closed subset and zero outside. Both functors on modules are exact.
-Exact and conservative geometric stalks detect finite limits and finite colimits.
-The same argument handles the empty closed subscheme. -/
+/-- Exactness of closed supported coefficients. -/
 theorem supportedCoefficients_exact (A : Type (u + 1)) [CommRing A]
     {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] :
     PreservesFiniteLimits (supportedCoefficients A i) ∧
       PreservesFiniteColimits (supportedCoefficients A i) := by
   constructor <;> unfold supportedCoefficients <;> infer_instance
 
-/-- The finite-limit instance from closed-support exactness. Source: blueprint
-`proposition-purity-vector-bundles` (blueprint: proposition-purity-vector-bundles). -/
+/-- The finite-limit instance from closed-support exactness. -/
 noncomputable instance supportedCoefficients_preservesFiniteLimits
     (A : Type (u + 1)) [CommRing A] {Z X : Scheme.{u}}
     (i : Z ⟶ X) [IsClosedImmersion i] :
     PreservesFiniteLimits (supportedCoefficients A i) := (supportedCoefficients_exact A i).1
 
-/-- The finite-colimit instance from closed-support exactness. Source: blueprint
-`proposition-purity-vector-bundles` (blueprint: proposition-purity-vector-bundles). -/
+/-- The finite-colimit instance from closed-support exactness. -/
 noncomputable instance supportedCoefficients_preservesFiniteColimits
     (A : Type (u + 1)) [CommRing A] {Z X : Scheme.{u}}
     (i : Z ⟶ X) [IsClosedImmersion i] :
@@ -571,13 +544,7 @@ end OrdinaryAdjunctionProof
 set_option backward.isDefEq.respectTransparency true
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The ordinary adjunction, uniquely normalized by inclusion of the support kernel.
-Source: blueprint `proposition-purity-vector-bundles`, supported-section construction
-(blueprint: proposition-purity-vector-bundles).
-Proof: apply Hom into F to the open-closed sequence of constant M. The kernel of
-restriction is Hom from M into the kernel defining supported sections. The quotient
-is epic, so precomposition determines the Hom equivalence uniquely. Naturality of
-restriction gives naturality in both variables and hence the adjunction. -/
+/-- The ordinary adjunction, uniquely normalized by inclusion of the support kernel. -/
 theorem exists_unique_supportedCoefficientAdjunction
     (A : Type (u + 1)) [CommRing A] {Z X : Scheme.{u}}
     (i : Z ⟶ X) [IsClosedImmersion i] :
@@ -603,43 +570,33 @@ theorem exists_unique_supportedCoefficientAdjunction
   exact h
 
 /-- Canonical ordinary supported-coefficient adjunction, selected from its unique
-normalization. Source: blueprint `proposition-purity-vector-bundles`
-(blueprint: proposition-purity-vector-bundles). -/
+normalization. -/
 noncomputable def supportedCoefficientAdjunction
     (A : Type (u + 1)) [CommRing A] {Z X : Scheme.{u}}
     (i : Z ⟶ X) [IsClosedImmersion i] :
     supportedCoefficients A i ⊣ supportedEtaleSections A X i.openComplement :=
   (exists_unique_supportedCoefficientAdjunction A i).choose
 
-/-- The unbounded support functor, extending the bounded-below injective construction.
-Source: blueprint `proposition-purity-vector-bundles`, derived support resolutions
-(blueprint: proposition-purity-vector-bundles). -/
+/-- The unbounded support functor, extending the bounded-below injective construction. -/
 noncomputable abbrev supportedSectionsDerived
     (A : Type (u + 1)) [CommRing A] {Z X : Scheme.{u}}
     (i : Z ⟶ X) [IsClosedImmersion i] :=
   (supportedEtaleSections A X i.openComplement).rightDerivedFunctor
 
-/-- Derive the normalized ordinary adjunction with its exact left adjoint.
-Source: blueprint `proposition-purity-vector-bundles`, K-flat and injective derivation
-(blueprint: proposition-purity-vector-bundles). -/
+/-- Derive the normalized ordinary adjunction with its exact left adjoint. -/
 noncomputable def supportedCoefficientDerivedAdjunction
     (A : Type (u + 1)) [CommRing A] {Z X : Scheme.{u}}
     (i : Z ⟶ X) [IsClosedImmersion i] :
     (supportedCoefficients A i).mapDerivedCategory ⊣ supportedSectionsDerived A i :=
   (supportedCoefficientAdjunction A i).mapDerivedCategoryRightDerivedAdjunction
 
-/-- The closed immersion of the product of the two supports.
-Source: blueprint `proposition-purity-vector-bundles`
-(blueprint: proposition-purity-vector-bundles). -/
+/-- The closed immersion of the product of the two supports. -/
 noncomputable def supportedProductImmersion {B X Y Z W : Scheme.{u}}
     (f : X ⟶ B) (g : Y ⟶ B) (i : Z ⟶ X) (j : W ⟶ Y) :
     pullback (i ≫ f) (j ≫ g) ⟶ pullback f g :=
   pullback.map (i ≫ f) (j ≫ g) f g i j (𝟙 B) (by simp) (by simp)
 
-/-- Closedness of the product support. Source: blueprint
-`proposition-purity-vector-bundles` (blueprint: proposition-purity-vector-bundles).
-Proof: the product map is the composite of the two base changes of the closed
-immersions. Closed immersions are stable under base change and composition. -/
+/-- Closedness of the product support. -/
 @[instance]
 theorem supportedProductImmersion_isClosedImmersion {B X Y Z W : Scheme.{u}}
     (f : X ⟶ B) (g : Y ⟶ B) (i : Z ⟶ X) (j : W ⟶ Y)
@@ -650,16 +607,12 @@ theorem supportedProductImmersion_isClosedImmersion {B X Y Z W : Scheme.{u}}
       (inferInstanceAs (IsClosedImmersion i))
       (inferInstanceAs (IsClosedImmersion j)) rfl rfl
 
-/-- Supported coefficients pulled back along the first projection.
-Source: blueprint `proposition-purity-vector-bundles`
-(blueprint: proposition-purity-vector-bundles). -/
+/-- Supported coefficients pulled back along the first projection. -/
 noncomputable abbrev supportedFirstCoefficients (A : Type (u + 1)) [CommRing A]
     {B X Y Z : Scheme.{u}} (f : X ⟶ B) (g : Y ⟶ B) (i : Z ⟶ X) :=
   supportedCoefficients A i ⋙ upperStar (ModuleCat.{u + 1} A) (pullback.fst f g)
 
-/-- Supported coefficients pulled back along the second projection.
-Source: blueprint `proposition-purity-vector-bundles`
-(blueprint: proposition-purity-vector-bundles). -/
+/-- Supported coefficients pulled back along the second projection. -/
 noncomputable abbrev supportedSecondCoefficients (A : Type (u + 1)) [CommRing A]
     {B X Y W : Scheme.{u}} (f : X ⟶ B) (g : Y ⟶ B) (j : W ⟶ Y) :=
   supportedCoefficients A j ⋙ upperStar (ModuleCat.{u + 1} A) (pullback.snd f g)
@@ -678,8 +631,7 @@ attribute [local instance] supportedHasSheafify supportedHasWeakSheafify
 
 end ComplexTensorProof
 
-/-- Morphisms from the image of a tensor complex to the tensor of the two images.
-Source: blueprint total tensor construction (blueprint: proposition-purity-vector-bundles). -/
+/-- Morphisms from the image of a tensor complex to the tensor of the two images. -/
 noncomputable def supportedComplexComparisonHom
     {D : Type*} [Category.{w} D] {E : Type*} [Category.{w} E]
     [Preadditive D] [Preadditive E] [MonoidalCategory D] [MonoidalCategory E]
@@ -692,9 +644,7 @@ noncomputable def supportedComplexComparisonHom
           ((G₁.mapHomologicalComplex (.up ℤ)).obj P)
           ((G₂.mapHomologicalComplex (.up ℤ)).obj Q)
 
-/-- Normalization on all bidegree summands of a tensor-complex comparison.
-Source: blueprint signed total tensor construction
-(blueprint: proposition-purity-vector-bundles). -/
+/-- Normalization on all bidegree summands of a tensor-complex comparison. -/
 noncomputable def supportedComplexComparisonCondition
     {D : Type*} [Category.{w} D] {E : Type*} [Category.{w} E]
     [Preadditive D] [Preadditive E] [MonoidalCategory D] [MonoidalCategory E]
@@ -722,8 +672,7 @@ variable {C : Type v} [Category.{u + 1} C] [Abelian C]
   [MonoidalCategory D] [MonoidalPreadditive D] [MonoidalClosed D] [BraidedCategory D]
   [Abelian.HasFunctorialFlatResolution D]
 
-/-- The natural transformation of signed tensor complexes induced by a coefficient pairing.
-Source: blueprint signed tensor construction (blueprint: proposition-purity-vector-bundles). -/
+/-- The natural transformation of signed tensor complexes induced by a coefficient pairing. -/
 noncomputable def supportedComplexComparisonNatTrans
     (G F₁ F₂ : C ⥤ D) [G.Additive] [F₁.Additive] [F₂.Additive]
     [PreservesColimitsOfSize.{0, 0} G]
@@ -735,8 +684,7 @@ noncomputable def supportedComplexComparisonNatTrans
         (F₂.mapHomologicalComplex (.up ℤ))).obj (curriedTensor _) :=
   HomologicalComplex.mapBifunctorComparisonNatTrans τ (.up ℤ)
 
-/-- A signed tensor comparison, constructed through the totalization bifunctor.
-Source: blueprint signed tensor construction (blueprint: proposition-purity-vector-bundles). -/
+/-- A signed tensor comparison, constructed through the totalization bifunctor. -/
 noncomputable def supportedComplexComparison
     (G F₁ F₂ : C ⥤ D) [G.Additive] [F₁.Additive] [F₂.Additive]
     [PreservesColimitsOfSize.{0, 0} G]
@@ -758,8 +706,7 @@ private theorem tensorLocalization_isIso (P Q : CochainComplex D ℤ)
     (Functor.LaxMonoidal.μ DerivedCategory.Qh _ _ ≫ DerivedCategory.Qh.map _) ≫ _)
   infer_instance
 
-/-- Families of morphisms between the derived tensor images.
-Source: blueprint derived tensor comparison (blueprint: proposition-purity-vector-bundles). -/
+/-- Families of morphisms between the derived tensor images. -/
 noncomputable def supportedDerivedComparisonHom
     (G F₁ F₂ : C ⥤ D) [G.Additive] [F₁.Additive] [F₂.Additive]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G]
@@ -769,8 +716,7 @@ noncomputable def supportedDerivedComparisonHom
       G.mapDerivedCategory.obj (M ⊗ N) ⟶
         F₁.mapDerivedCategory.obj M ⊗ F₂.mapDerivedCategory.obj N
 
-/-- Naturality and normalization on all complex models, retaining the signed total tensor.
-Source: blueprint derived tensor comparison (blueprint: proposition-purity-vector-bundles). -/
+/-- Naturality and normalization on all complex models, retaining the signed total tensor. -/
 noncomputable def supportedDerivedComparisonCondition
     (G F₁ F₂ : C ⥤ D) [G.Additive] [F₁.Additive] [F₂.Additive]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G]

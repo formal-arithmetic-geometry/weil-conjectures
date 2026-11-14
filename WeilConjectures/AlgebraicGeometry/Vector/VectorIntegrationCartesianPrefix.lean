@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.Vector.VectorBundleIntegrationCh
 import WeilConjectures.AlgebraicGeometry.Affine.Linear.AffineLinearExchangeCoherence
 
 /-! # A descended-coefficient comparison for a Cartesian affine chart
-
-Source: blueprint vector integration, overlap calculation before the counit.
-(blueprint: lem-amb-vector-integration-cartesian-prefix-action).
 -/
 
 @[expose] public noncomputable section
@@ -25,9 +22,7 @@ attribute [local irreducible] rightDerivedLowerShriek affineLinearCompactCompari
   leftDerivedUpperStarComp derivedSquareUpperStarIso upperStar Functor.leftDerivedFunctor
 
 /-- Pull a descended coefficient through a Cartesian chart, then use the fixed tower
-coefficient descent. The base coefficient transport is explicit.
-Source: blueprint vector integration, canonical coefficient comparison on an overlap.
-(blueprint: lem-amb-vector-integration-cartesian-prefix-action). -/
+coefficient descent. The base coefficient transport is explicit. -/
 def vectorIntegrationCartesianCoefficient
     (A : Type (u + 1)) [CommRing A] (N : ℕ) (hA : (N : A) = 0)
     (t : OrdinaryFiniteTwistTransport A N hA)
@@ -44,9 +39,7 @@ def vectorIntegrationCartesianCoefficient
     (affineLinearCoefficientDescent A N hA t T hT d).symm
 
 /-- Exchange for one Cartesian chart with a coefficient descended from its base.
-There is no frame and no counit in this construction.
-Source: blueprint vector integration, inverse-coordinate comparison.
-(blueprint: lem-amb-vector-integration-cartesian-prefix-action). -/
+There is no frame and no counit in this construction. -/
 def vectorIntegrationCartesianPrefix
     (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] [Finite A]
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
@@ -133,13 +126,7 @@ private theorem exchange_paste_named
 
 /-- Precomposing a Cartesian chart with a linear automorphism acts on its prefix by
 exactly the specified affine trace action. The only geometric hypothesis is equality
-of the chart maps; frames, restrictions and existential matrices are absent.
-Source: blueprint vector integration overlap calculation, exchange-pasting part.
-(blueprint: lem-amb-vector-integration-cartesian-prefix-action).
-Proof: inverse-image associativity identifies the two coefficient comparisons.
-Paste the chart square with the automorphism square, use exchange naturality for the
-coefficient comparison, and cancel the compact-support comparison and identity
-inverse-image isomorphisms. -/
+of the chart maps; frames, restrictions and existential matrices are absent. -/
 theorem vectorIntegrationCartesianPrefix_action
     (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] [Finite A]
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
@@ -209,9 +196,7 @@ theorem vectorIntegrationCartesianPrefix_action
   dsimp only [E, K, R, C, ordinaryFinitePullback] at hp ⊢
   rw [reassoc_of% hp]
 
-/-- The inverse frame over V, restricted geometrically to U.
-Source: blueprint vector integration, restriction to an overlap.
-(blueprint: lem-amb-vector-integration-cartesian-prefix-action). -/
+/-- The inverse frame over V, restricted geometrically to U. -/
 def vectorIntegrationRestrictedChart (S : Scheme.{u}) [IsNoetherian S] (d : ℕ)
     (F : S.Modules) [F.IsFiniteLocallyFreeOfRank d]
     (U V : S.Opens) (hUV : U ≤ V)
@@ -219,9 +204,7 @@ def vectorIntegrationRestrictedChart (S : Scheme.{u}) [IsNoetherian S] (d : ℕ)
     affineTraceTower U.toScheme d ⟶ VectorBundleZeroSection.scheme S d F :=
   affineTraceMap (S.homOfLE hUV) d ≫ vectorIntegrationChart S d F V e
 
-/-- The restricted inverse frame still gives a Cartesian square over U into S.
-Source: blueprint vector integration, pasting the open restriction square.
-(blueprint: lem-amb-vector-integration-cartesian-prefix-action). -/
+/-- The restricted inverse frame still gives a Cartesian square over U into S. -/
 theorem vectorIntegrationRestrictedChart_isPullback
     (S : Scheme.{u}) [IsNoetherian S] (d : ℕ)
     (F : S.Modules) [F.IsFiniteLocallyFreeOfRank d]

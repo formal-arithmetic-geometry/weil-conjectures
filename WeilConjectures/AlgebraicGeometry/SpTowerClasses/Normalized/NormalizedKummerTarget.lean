@@ -153,22 +153,7 @@ private theorem normalize_targets
   obtain ⟨data⟩ := derived_target_normalization r f g hfg hs M i c hc
   exact ⟨M, i, data.comparison, data.normalization⟩
 
-/-- Shift the unshifted Kummer comparison, preserving its positive boundary adjunct.
-
-Source: blueprint latest, `sk-prop-sp-tower-geometric-classes.proof.md`, clause (2);
-expanded `SmoothPurityTowerClasses`, steps 3--7.
-(blueprint: lem-sfb-normalized-kummer-target).
-
-Proof: obtain the roots module and its once-shifted comparison from the unshifted
-Kummer computation. The adjunction to exact forgetting induces a coherent shift
-structure on the derived extension. Shift its comparison once, prepend the
-extension's shift comparison, and collapse the two target shifts by the inverse
-of shiftFunctorAdd. The adjunction-unit shift identity identifies the adjunct
-of the shifted comparison; commShiftIso_add identifies its composite with the
-forgetful shift comparison. Naturality of shiftFunctorAdd with the single-functor
-comparison followed by the roots isomorphism gives targetNormalization with
-exactly the positive boundary and specified shift-addition map. These are
-identities in the entire derived system category, without evaluation. -/
+/-- Shift the unshifted Kummer comparison, preserving its positive boundary adjunct. -/
 theorem exists_normalizedKummerTarget (l : ℕ) [Fact l.Prime]
     (T : Scheme.{u}) (hT : IsUnit (l : Γ(T, ⊤))) (k : Kummer l T)
     (r : Reduction T (Rrings l T)) :

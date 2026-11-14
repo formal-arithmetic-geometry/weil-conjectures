@@ -20,9 +20,8 @@ import all Mathlib.Algebra.Homology.Localization
 /-!
 # The clopen section projector of a proper/open square
 
-Source: Stacks Project, more-etale.tex, Tag 0F7B; morphisms.tex, Tag 01W6(2);
-sites-modules.tex, Tag 03DI; derived.tex, Tag 015F, and the strict-tower refinement
-(blueprint: lem-cbc-proper-open-clopen-projector).
+Source: Stacks Project, more-etale.tex, Tag 0F7B; morphisms.tex, Tag 01W6(2); sites-modules.tex, Tag
+03DI; derived.tex, Tag 015F.
 
 All coefficient rings are arbitrary commutative rings. The categories and normalized
 operations are the recorded constant-ring module and strict-tower constructions.
@@ -91,13 +90,7 @@ private theorem projector_image
   exact (Category.id_comp _).symm
 
 /-- The canonical lift is clopen, with the two prescribed projections and a complementary
-open subscheme. Source: Stacks 0F7B and 01W6(2)
-(blueprint: lem-cbc-proper-open-clopen-projector).
-Proof: b is the base change of i, so W_S is the open p^{-1}(S) of W and s is the open
-k(V) in that open. The pullback equations give bs=k and qs=r. The base change q of
-p is proper, hence separated. Properness of qs=r and Tag 01W6(2) imply s proper.
-Its image is closed; an open immersion with closed image is a closed immersion.
-The complementary open subscheme supplies C and c, including the empty cases. -/
+open subscheme. Source: Stacks 0F7B and 01W6(2). -/
 theorem properOpen_clopen_geometry {V W S T : Scheme.{u}}
     (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
     [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]
@@ -116,18 +109,14 @@ theorem properOpen_clopen_geometry {V W S T : Scheme.{u}}
   exact ⟨O.toScheme, O.ι, inferInstance, Scheme.Opens.range_ι O⟩
 
 /-- The ordinary direct-image adjunction, using exactly the constant-ring comparison.
-Source: Stacks 03DA and 03DI
-(blueprint: lem-cbc-proper-open-clopen-projector). -/
+Source: Stacks 03DA and 03DI. -/
 abbrev clopenModuleAdj {U X : Scheme.{u}} (s : U ⟶ X) :
     modulePullback B s ⊣ moduleDirectImage B s :=
   Scheme.proEtaleRingModuleAdjunction s (coefficients B X) (coefficients B U)
     (constantRingIso B s)
 
 /-- The ordinary open unit is invertible, including on the empty open.
-Source: Stacks 03DI (blueprint: lem-cbc-proper-open-clopen-projector).
-Proof: identify the small pro-etale site of U with the localization of X's site at U.
-Restriction of extension by zero recovers the original sheaf, with its specified
-unit. Transport along the unit-preserving adjoint identification. -/
+Source: Stacks 03DI. -/
 theorem clopenModule_openUnit_isIso {U X : Scheme.{u}} (s : U ⟶ X)
     [IsOpenImmersion s] : IsIso (moduleJAdj B s).unit := by
   let A := ModuleCat.{u + 1} B
@@ -142,7 +131,7 @@ theorem clopenModule_openUnit_isIso {U X : Scheme.{u}} (s : U ⟶ X)
     (openImmersionLowerShriek A s) (fixedOpen B s)
 
 /-- The direct-image transpose of the inverse ordinary open unit.
-Source: Stacks 03DI (blueprint: lem-cbc-proper-open-clopen-projector). -/
+Source: Stacks 03DI. -/
 def clopenModuleToDirect {U X : Scheme.{u}} (s : U ⟶ X) [IsOpenImmersion s] :
     moduleJ B s ⟶ moduleDirectImage B s :=
   (Functor.rightUnitor _).inv ≫
@@ -153,11 +142,7 @@ def clopenModuleToDirect {U X : Scheme.{u}} (s : U ⟶ X) [IsOpenImmersion s] :
       (moduleDirectImage B s) ≫ (Functor.leftUnitor _).hom
 
 /-- The canonical transpose is invertible for clopen immersions.
-Source: Stacks 03DI (blueprint: lem-cbc-proper-open-clopen-projector).
-Proof: for a sheaf N on U both extension by zero and direct image have sections
-N(H_U). The extension adjunction is given by gluing a prescribed section on H_U
-with zero on H_C. Its unit is identity under this model, so the displayed transpose
-is identity on N(H_U). Therefore it is an isomorphism, for arbitrary B. -/
+Source: Stacks 03DI. -/
 theorem clopenModuleToDirect_isIso {U X : Scheme.{u}} (s : U ⟶ X)
     [IsOpenImmersion s] [IsClosedImmersion s] : IsIso (clopenModuleToDirect B s) := by
   let d := moduleClopenIso B s
@@ -178,9 +163,8 @@ theorem clopenModuleToDirect_isIso {U X : Scheme.{u}} (s : U ⟶ X)
     infer_instance
   exact NatIso.isIso_of_isIso_app _
 
-/-- The ordinary intrinsic projector. Its section characterization is stated below;
-no arbitrary splitting or map is chosen.
-Source: Stacks 03DI (blueprint: lem-cbc-proper-open-clopen-projector). -/
+/-- The ordinary intrinsic projector.
+Source: Stacks 03DI. -/
 def clopenModulePi {U X : Scheme.{u}} (s : U ⟶ X)
     [IsOpenImmersion s] [IsClosedImmersion s] :
     𝟭 (Modules B X) ⟶ modulePullback B s ⋙ moduleJ B s :=
@@ -191,15 +175,7 @@ def clopenModulePi {U X : Scheme.{u}} (s : U ⟶ X)
 and is the first factor of the section decomposition under the natural additive
 identification of the target sections with F(H_U). Its composite with t is the
 specified direct-image unit.
-Source: Stacks 03DI and 09AE (blueprint: lem-cbc-proper-open-clopen-projector).
-Proof: the disjoint-cover equalizer gives F(H)=F(H_U) times F(H_C). The model
-I(N)(H)=N(H_U), with restricted scalar action, has the extension-by-zero adjunction:
-glue the given map on H_U with zero on H_C. Adjoint uniqueness identifies it with
-moduleJ preserving the unit. Direct image has the same model, and its unit is
-restriction to H_U. Thus t is identity in this model, and unit followed by t inverse
-is first-factor restriction. It is natural and additive. Restriction to U is the
-open unit, and restriction to C has zero target. Maps with these two restrictions
-coincide, since the two section factors detect equality. -/
+Source: Stacks 03DI and 09AE. -/
 theorem clopenModule_section_projector {U X C : Scheme.{u}}
     (s : U ⟶ X) (c : C ⟶ X) [IsOpenImmersion s] [IsClosedImmersion s]
     [IsOpenImmersion c] (hc : Set.range c = (Set.range s)ᶜ) :
@@ -311,7 +287,7 @@ theorem clopenModule_section_projector {U X C : Scheme.{u}}
     exact ConcreteCategory.congr_hom (e₂H.inv_hom_id) _
 
 /-- The ordinary projector applied termwise to strict inverse systems.
-Source: Stacks 02MZ and 03DI (blueprint: lem-cbc-proper-open-clopen-projector). -/
+Source: Stacks 02MZ and 03DI. -/
 def clopenTowerPi {U X : Scheme.{u}} (s : U ⟶ X)
     [IsOpenImmersion s] [IsClosedImmersion s] :
     𝟭 (Towers B X) ⟶ towerPullback B s ⋙ towerJ B s :=
@@ -319,10 +295,7 @@ def clopenTowerPi {U X : Scheme.{u}} (s : U ⟶ X)
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- On towers and complexes the section identities hold before localization.
-Source: Stacks 02MZ and 03DI (blueprint: lem-cbc-proper-open-clopen-projector).
-Proof: naturality of the ordinary projector makes it commute with all transitions
-and differentials. Apply the two ordinary restriction identities componentwise.
-The zero target is zero at every level and degree. -/
+Source: Stacks 02MZ and 03DI. -/
 theorem clopenTower_section_projector {U X C : Scheme.{u}}
     (s : U ⟶ X) (c : C ⟶ X) [IsOpenImmersion s] [IsClosedImmersion s]
     [IsOpenImmersion c] (hc : Set.range c = (Set.range s)ᶜ) :
@@ -369,8 +342,7 @@ theorem clopenTower_section_projector {U X C : Scheme.{u}}
     exact ⟨hz, hz.eq_zero_of_tgt _⟩
 
 /-- Mathlib's abelian structure on strict towers, with the coefficient universe fixed.
-This is the existing functor-category instance over the existing module-sheaf instance.
-Source: Stacks 02MZ and 03DA (blueprint: lem-cbc-proper-open-clopen-projector). -/
+Source: Stacks 02MZ and 03DA. -/
 abbrev clopenTowerAbelian (X : Scheme.{u}) : Abelian (Towers B X) :=
   @Abelian.functorCategoryAbelian ℕᵒᵖ inferInstance (Modules B X) inferInstance
     (@SheafOfModules.instAbelian.{u + 1, u, u + 1, u + 1} _ _ _
@@ -380,10 +352,9 @@ abbrev clopenTowerAbelian (X : Scheme.{u}) : Abelian (Towers B X) :=
       (SheafOfModules.wEqualsLocallyBijective_coefficientUniverse.{u + 1, u, u + 1}))
 
 /-- Compatibility of an exact natural transformation with localization on complexes.
-This predicate records the representative equation using the existing exact-functor
-factorizations; it introduces no new derived functor or map.
-Source: Stacks 015F and localization's universal property
-(blueprint: lem-cbc-proper-open-clopen-projector). -/
+This predicate records the representative equation using the exact-functor
+factorizations.
+Source: Stacks 015F and localization's universal property. -/
 def ClopenProjectorDescent
     {A : Type uC} [Category.{vC} A] [aA : Abelian A] [HasDerivedCategory.{wC} A]
     {D : Type uD} [Category.{vD} D] [aD : Abelian D] [HasDerivedCategory.{wD} D]
@@ -623,16 +594,7 @@ private theorem intrinsic_projector_normalization {U X : Scheme.{u}}
 set_option backward.isDefEq.respectTransparency true in
 /-- Localization gives the specified intrinsic projector and preserves the normalized
 unit and both component equations as actual transformations on D(T_X).
-Source: Stacks 015F, 0DVC, 0FND and localization's universal property
-(blueprint: lem-cbc-proper-open-clopen-projector).
-Proof: the ordinary clopen identification makes termwise direct image exact.
-The exact-derived-functor theorem identifies its descent with total R_s. Use the
-cochain-derived-adjunction unit equation for both adjunctions, with all complexes
-as resolving class. Both comparisons are invertible, so the descended transpose
-is precisely openToR and the descended section projection is pi. Localization
-preserves the ordinary equations; its universal property identifies transformations
-agreeing after the localization functor. The complementary target is the image
-of a zero complex. No faithfulness of tower evaluations is used. -/
+Source: Stacks 015F, 0DVC, 0FND and localization's universal property. -/
 theorem clopenDerived_section_projector {U X C : Scheme.{u}}
     (s : U ⟶ X) (c : C ⟶ X) [IsOpenImmersion s] [IsClosedImmersion s]
     [IsOpenImmersion c] (hc : Set.range c = (Set.range s)ᶜ) :
@@ -780,18 +742,7 @@ private theorem iso_projector_counit {U X : Scheme.{u}}
 /-- Alpha is beta followed by the descended section projection and the specified
 open and inverse-image compositors. Cartesian squares recover beta; an identity
 left vertical map makes the lift the indicated clopen section.
-Source: Stacks 0F7B, with the arbitrary-ring strict-tower refinement
-(blueprint: lem-cbc-proper-open-clopen-projector).
-Proof: insert the section projection into the definition of alpha and use its
-identification with pi. The equations bs=k and qs=r give the displayed final
-compositors. In a cartesian square the canonical lift is the pullback isomorphism.
-Its inverse-image functor is faithful, by the inverse-map and identity compositors.
-The projector restriction and adjunction triangle then show that pi followed by
-the open counit is identity. Source factorization of betaInv inserts this counit;
-naturality and cancellation of the open and inverse-image compositors give beta.
-For V=S and r=identity the pullback equations give qs=identity, so the same
-projector selects the clopen section (k,identity). All equalities are equalities
-of natural transformations on the whole unbounded derived category. -/
+Source: Stacks 0F7B. -/
 theorem properOpen_clopen_projector {V W S T : Scheme.{u}}
     (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
     [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]

@@ -229,8 +229,7 @@ import WeilConjectures.CategoryTheory.ProperBaseChange.ExtendedCechCompletionMod
 /-!
 # The Koszul reflector at the actual small pro-etale universes
 
-Source: Stacks Project, Tags 0999, 099B and 0A0E
-(blueprint: lem-weil-pbc-ringed-koszul-completion-reflector).
+Source: Stacks Project, Tags 0999, 099B and 0A0E.
 The completed coefficient ring, signed fiber and (u,0) unit are the published ones.
 
 ## Main definitions
@@ -250,30 +249,30 @@ variable (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDa
   (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal)
 
 /-- A genuine complex representative supplied by essential surjectivity of localization.
-Source: Stacks 0A0E (blueprint: lem-weil-pbc-ringed-koszul-completion-reflector). -/
+Source: Stacks 0A0E. -/
 abbrev wfCompletionRepresentative (M : PbcCompletedDerived X d) :=
   DerivedCategory.Q.objPreimage M
 
 /-- The specified Koszul fiber, localized after choosing a representative of this very M.
-Source: Stacks 0A0E (blueprint: lem-weil-pbc-ringed-koszul-completion-reflector). -/
+Source: Stacks 0A0E. -/
 def wfCompletionObj (M : PbcCompletedDerived X d) : PbcCompletedDerived X d :=
   intrinsicCompletion X d r a ha M (wfCompletionRepresentative X d M)
     (DerivedCategory.Q.objObjPreimageIso M)
 
 /-- Its actual (u,0) unit, including the realization of the chosen representative.
-Source: Stacks 0A0E (blueprint: lem-weil-pbc-ringed-koszul-completion-reflector). -/
+Source: Stacks 0A0E. -/
 def wfCompletionUnit (M : PbcCompletedDerived X d) : M ⟶ wfCompletionObj X d r a ha M :=
   intrinsicCompletionUnit X d r a ha M (wfCompletionRepresentative X d M)
     (DerivedCategory.Q.objObjPreimageIso M)
 
 /-- Intrinsic completeness, using exactly the published completion predicate.
-Source: Stacks 0999 (blueprint: lem-weil-pbc-ringed-koszul-completion-reflector). -/
+Source: Stacks 0999. -/
 def WfIsComplete (M : PbcCompletedDerived X d) : Prop :=
   IsDerivedCompleteIntrinsic X d r a ha M (wfCompletionRepresentative X d M)
     (DerivedCategory.Q.objObjPreimageIso M)
 
 /-- The complete full subcategory has no chosen completion witnesses in its objects.
-Source: Stacks 0999 (blueprint: lem-weil-pbc-ringed-koszul-completion-reflector). -/
+Source: Stacks 0999. -/
 abbrev WfCompleteCategory := ObjectProperty.FullSubcategory (WfIsComplete X d r a ha)
 
 set_option backward.isDefEq.respectTransparency false in
@@ -338,14 +337,7 @@ private theorem transportIdempotentUnit {C D : Type*} [Category* C] [Category* D
       simp only [Category.assoc, IsIso.hom_inv_id, Category.comp_id]
 
 /-- The published Koszul fiber is the reflector, also with distinct site object/Hom sizes.
-Source: Stacks 099B and 0A0E
-(blueprint: lem-weil-pbc-ringed-koszul-completion-reflector).
-Proof: pass to a small model of the site in the coefficient universe. The site equivalence
-preserves module tensor, strict towers and their derived inverse limits. Apply the ringed
-Koszul reflector there. Exact countable products on the small pro-etale site identify its
-strict derived limit with the published product/mapping-fiber complex. The comparison
-preserves the degree-zero augmentation, hence precisely the (u,0) unit. Transport back.
-The reflector's complete-output and Hom-bijection assertions give the two clauses. -/
+Source: Stacks 099B and 0A0E. -/
 theorem wfCompletionReflector :
     (∀ M : PbcCompletedDerived X d,
       WfIsComplete X d r a ha (wfCompletionObj X d r a ha M)) ∧
@@ -387,12 +379,12 @@ theorem wfCompletionReflector :
     (wfCompletionObj X d r a ha) (wfCompletionUnit X d r a ha) e he
 
 /-- The complete object defined by the explicit Koszul fiber.
-Source: Stacks 0A0E (blueprint: lem-weil-pbc-ringed-koszul-completion-reflector). -/
+Source: Stacks 0A0E. -/
 def wfCompleteObj (M : PbcCompletedDerived X d) : WfCompleteCategory X d r a ha :=
   ⟨wfCompletionObj X d r a ha M, (wfCompletionReflector X d r a ha).1 M⟩
 
 /-- Unique extension across the actual completion unit, rather than a chosen arbitrary map.
-Source: Stacks 099B (blueprint: lem-weil-pbc-ringed-koszul-completion-reflector). -/
+Source: Stacks 099B. -/
 def wfCompletionExtend (M : PbcCompletedDerived X d)
     (L : WfCompleteCategory X d r a ha) (f : M ⟶ L.obj) :
     wfCompletionObj X d r a ha M ⟶ L.obj :=
@@ -400,10 +392,7 @@ def wfCompletionExtend (M : PbcCompletedDerived X d)
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The unique extended maps preserve identities and composition.
-Source: Stacks 099B (blueprint: lem-weil-pbc-ringed-koszul-completion-reflector).
-Proof: compose with the completion unit. Both identity candidates become the same unit;
-both composition candidates become f followed by g followed by the final unit. The Hom
-bijection's injectivity gives both equations. -/
+Source: Stacks 099B. -/
 theorem wfCompletionMap_laws :
     (∀ M : PbcCompletedDerived X d,
       wfCompletionExtend X d r a ha M (wfCompleteObj X d r a ha M)
@@ -433,7 +422,7 @@ theorem wfCompletionMap_laws :
     rw [Category.assoc, hext]
 
 /-- Completion with its canonical morphism action determined by reflection.
-Source: Stacks 099B (blueprint: lem-weil-pbc-ringed-koszul-completion-reflector). -/
+Source: Stacks 099B. -/
 def wfCompletion : PbcCompletedDerived X d ⥤ WfCompleteCategory X d r a ha where
   obj := wfCompleteObj X d r a ha
   map {M N} f := ObjectProperty.homMk

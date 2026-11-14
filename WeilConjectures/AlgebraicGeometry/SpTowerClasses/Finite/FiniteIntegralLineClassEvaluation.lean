@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Finite.FiniteEval
 import WeilConjectures.AlgebraicGeometry.SpTowerClasses.FiniteExactArrow.FiniteExactArrowCalculus
 
 /-! # Evaluating the integral Kummer composite
-
-Source: diagonal-tower trace (1), finite Kummer classes and exact comparison.
-(blueprint: lem-sfb-finite-integral-line-class-evaluation).
 -/
 
 @[expose] public noncomputable section
@@ -35,8 +32,7 @@ attribute [local irreducible] Functor.mapDerivedCategory Ext.homEquiv
   integerComparison cartierRootsComparison cartierUnitsComparison
 
 /-- Exact evaluation cancels the constant-system transport of the actual line
-bundle class. Source: the definition of lineBundleClass and exact functor composition
-(blueprint: lem-sfb-finite-integral-line-class-evaluation). -/
+bundle class. -/
 theorem finiteIntegralLineClass_evaluation (T : Scheme.{u}) (n : ℕ) (L : T.Pic) :
     finiteEvaluatedIntegralLineClass T n L =
       lineBundleEtaleClass T L := by

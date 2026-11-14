@@ -11,8 +11,7 @@ import WeilConjectures.AlgebraicGeometry.BoundaryPullbackTensorUnit
 
 /-! # Local tensor multiplication under the canonical kernel comparisons
 
-Source: Stacks Project, Tag 09MS, coherent-equation-ses and its ideal coefficient.
-(blueprint: lem-sc-tensor-boundary-kernel-map-local-multiplication).
+Source: Stacks Project, Tag 09MS, the ideal short exact sequence and its ideal coefficient.
 -/
 
 @[expose] public section
@@ -54,35 +53,8 @@ private theorem whiskerLeft_section {Z : Scheme.{u}} (F N : Z.Modules)
 kernel map is ordinary tensor multiplication after the kernel inclusion.
 There is no graded presentation, ring action or degree projection in this statement.
 
-Source: Stacks Project, Tag 09MS, coherent-equation-ses and the identification
-of its ideal coefficient over Z; Modules, Tag 08KS, the closed-immersion quotient.
-(blueprint: lem-sc-tensor-boundary-kernel-map-local-multiplication).
-Proof: It suffices by sheaf separation to work on an open trivializing L, and
-then on a refinement lifting the restricted quotient section. Write ell^r for
-the recursively parenthesized tensor of a local generator ell in degree r;
-ell^0 is the tensor unit section. The inclusion equation in
-boundaryIdealKernelIso identifies a degree-n kernel section y with r ell^n
-for a section r of J. Write t=a ell^(n(e+1)). The map in the conclusion has
-source and target kernel comparisons made of three factors. The first factor,
-the inverse ideal-kernel isomorphism, sends y to r ell^n by its inclusion
-equation. The second, the annihilated-module adjunction unit, sends this to
-the class of r ell^n over Z. The third, boundaryCoefficientDegreeIso at zero,
-sends it to the same coefficient tensored with the degree-zero unit.
-Tensoring by x changes this to the class of ar times the coefficient tensor
-ell^(n(e+1)). Inverting the three target factors gives ar ell^(n(e+2)).
-For the tensor identifications, induction on each exponent in
-boundaryPullbackPowIso sends ell^q to the tensor of q copies of the image
-of ell: the zero case is pullbackObjUnitIso, and the successor case is
-boundaryPullbackTensorIso followed by the induction hypothesis. Induction
-on e in tensorPowMulIso and its associators identifies blocks of n copies
-with n(e+1) copies. The same inductions in boundaryCoefficientDegreeIso
-leave the J factor fixed and repartition the L factors. Thus every displayed
-factor sends the stated generator tensor to the stated generator tensor,
-with the right and left unitors at exponent zero. This proves equality
-with the tensorPowAddIso product on the right. A change of lift changes a
-by an element of J; its product with r vanishes since J^2=0. The local
-equalities agree on overlaps and give the asserted equality on U, including
-n=0, e=0, the zero section, the zero ideal and the empty open. -/
+Source: Stacks Project, Tag 09MS, the ideal short exact sequence and the identification of its ideal
+coefficient over Z; Modules, Tag 08KS, the closed-immersion quotient. -/
 theorem tensorBoundaryKernelMap_local_multiplication {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)
     (n e : ℕ)

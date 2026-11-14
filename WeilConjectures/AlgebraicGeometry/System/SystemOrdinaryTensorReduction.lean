@@ -47,7 +47,6 @@ import all Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 # Tensor compatibility of ordinary horizontal reduction adjoints
 
 Source: Zheng Construction 4.1; Stacks 03EK, 03CZ, 06YY.
-(blueprint: lem-pur-system-ordinary-tensor-reduction).
 -/
 
 @[expose] public noncomputable section
@@ -224,8 +223,7 @@ private theorem transition_apply_cast {m n : ℕ} (h : n ≤ m)
   exact eq_of_heq (hh.trans hy.symm)
 
 /-- The ordinary scalar-adjunction transpose of the actual horizontal restriction.
-Source: Zheng Construction 4.1; Stacks 03CZ, 06YY
-(blueprint: lem-pur-system-ordinary-tensor-reduction). -/
+Source: Zheng Construction 4.1; Stacks 03CZ, 06YY. -/
 def ordinaryReduction (A : Data.{c, v, r} J B τ) {m n : ℕ} (h : n ≤ m)
     (M : Systems.{c, v, max c v r} J B τ) :
     (A.scalar h).model.E.obj ((evaluation.{c, v, max c v r} J B τ m).obj M) ⟶
@@ -263,15 +261,7 @@ set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Ordinary reduction commutes with tensor under the canonical comparisons.
-Source: Zheng Construction 4.1; Stacks 03EK, 03CZ, 06YY
-(blueprint: lem-pur-system-ordinary-tensor-reduction).
-Proof: transpose both maps through extension/restriction adjunction. Precompose with
-inverse tensor evaluation and test on pure tensors, which generate the sheafified
-module tensor. The adjunction unit sends x to its scalar-extension section. The
-ordinary scalar comparison sends the extension of x tensor y to the tensor of the
-two extended sections. Horizontal restriction commutes with pure tensor sections,
-and evaluation's comparison is the identity on these sections. Thus the two
-transposes agree on pure sections, hence on the whole tensor sheaf. -/
+Source: Zheng Construction 4.1; Stacks 03EK, 03CZ, 06YY. -/
 theorem ordinary_tensor_reduction (A : Data.{c, v, r} J B τ) {m n : ℕ}
     (h : n ≤ m) (M N : Systems.{c, v, max c v r} J B τ) :
     ordinaryReduction.{c, v, r} J B τ A h

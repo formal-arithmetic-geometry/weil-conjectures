@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassDiagonal
 
 /-! # Pullback of canonical tower classes
-
-Source: blueprint main-20261015, chap-Smooth-purity,
-`sk-prop-sp-tower-geometric-classes` (blueprint: def-sp-tower-class-pullback).
 -/
 
 @[expose] public noncomputable section
@@ -33,14 +30,12 @@ namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- Base change of a pro-etale chart along a morphism.
-Source: the recorded pro-etale site (blueprint: def-sp-tower-class-pullback). -/
+/-- Base change of a pro-etale chart along a morphism. -/
 abbrev chart {X Y : Scheme.{u}} (f : X ⟶ Y) (U : Y.ProEtᵒᵖ) :=
   (MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).op.obj U
 
 /-- Restriction of roots along the actual global-sections ring map on a pulled-back
-chart. This defines the canonical map, including on the empty chart.
-Source: classes (2)--(4), roots base change (blueprint: def-sp-tower-class-pullback). -/
+chart. -/
 def restrictRoot {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) (U : Y.ProEtᵒᵖ)
     (z : (Scheme.proEtaleRootsOfUnitySheaf Y (l ^ (n + 1))).obj.obj U) :
     (Scheme.proEtaleRootsOfUnitySheaf X (l ^ (n + 1))).obj.obj (chart f U) :=
@@ -50,8 +45,7 @@ def restrictRoot {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) (U : Y.ProEtᵒᵖ)
         (Scheme.Γ.map (pullback.fst U.unop.hom f).op).hom (l ^ (n + 1))
           (Additive.toMul (Scheme.proEtaleRootsOfUnitySections Y (l ^ (n + 1)) U z))))
 
-/-- The ordinary adjoint before evaluating on sections.
-Source: classes (3)--(4), tower adjunction (blueprint: def-sp-tower-class-pullback). -/
+/-- The ordinary adjoint before evaluating on sections. -/
 def ordinaryAdjoint {b : SpTowerShriek.Base l E} {X Y : Scheme.{u}}
     {f : X ⟶ Y} (g : SpTowerShriek.Geometry l E b f)
     {M : Systems Y (Arings l E Y)} {N : Systems X (Arings l E X)}
@@ -59,8 +53,7 @@ def ordinaryAdjoint {b : SpTowerShriek.Base l E} {X Y : Scheme.{u}}
   (g.ordinaryAdjunction.homEquiv M N) h
 
 -- Evaluating the fixed tower adjunction unfolds both section realizations.
-/-- Evaluate the normalized ordinary adjoint as a map of finite module sheaves.
-Source: classes (3)--(4), tower adjunction (blueprint: def-sp-tower-class-pullback). -/
+/-- Evaluate the normalized ordinary adjoint as a map of finite module sheaves. -/
 def evaluatedAdjoint {b : SpTowerShriek.Base l E} {X Y : Scheme.{u}}
     {f : X ⟶ Y} (g : SpTowerShriek.Geometry l E b f)
     {M : Systems Y (Arings l E Y)} {N : Systems X (Arings l E X)}
@@ -69,9 +62,7 @@ def evaluatedAdjoint {b : SpTowerShriek.Base l E} {X Y : Scheme.{u}}
     (g.ordinaryPushEvaluation n).hom.app N
 
 -- The two canonical finite sheaf realizations share their section carrier.
-/-- The canonical ordinary adjoint evaluated on one finite chart. The dependency's
-pushforward realization retains exactly these section carriers.
-Source: classes (3)--(4), tower adjunction (blueprint: def-sp-tower-class-pullback). -/
+/-- The canonical ordinary adjoint evaluated on one finite chart. -/
 def adjointSection {b : SpTowerShriek.Base l E} {X Y : Scheme.{u}}
     {f : X ⟶ Y} (g : SpTowerShriek.Geometry l E b f)
     {M : Systems Y (Arings l E Y)} {N : Systems X (Arings l E X)}
@@ -81,9 +72,7 @@ def adjointSection {b : SpTowerShriek.Base l E} {X Y : Scheme.{u}}
 
 -- Elaborate the fixed section formula through both finite Tate-line comparisons.
 /-- Pullback of the actual Tate line. Its ordinary adjoint is fixed on all finite
-pure tensors by the quotient-ring map and the root restriction above.
-Source: classes (4), canonical twist transport
-(blueprint: def-sp-tower-class-pullback). -/
+pure tensors by the quotient-ring map and the root restriction above. -/
 structure LinePullback {b : SpTowerShriek.Base l E} {X Y : Scheme.{u}}
     (f : X ⟶ Y) (g : SpTowerShriek.Geometry l E b f)
     (cY : Chern l E Y) (cX : Chern l E X) where

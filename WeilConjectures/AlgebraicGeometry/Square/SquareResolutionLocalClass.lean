@@ -12,7 +12,6 @@ import WeilConjectures.CategoryTheory.ProperBaseChange.TotalClassicalResolutionC
 /-! # Agreement of classical resolution classes and derived local classes
 
 Source: Stacks Project, Cohomology, Tags 01E4, 01FB, 0BKJ and 0D5X.
-(blueprint: lem-weil-pbc-square-resolution-local-class).
 -/
 
 @[expose] public section
@@ -55,20 +54,7 @@ variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
 /-- Agreement of classical resolution classes and derived local classes.
-Source: Stacks Project, Cohomology, Tags 01E4, 01FB, 0BKJ and 0D5X
-(blueprint: lem-weil-pbc-square-resolution-local-class).
-
-Proof: Compute total and classical right-derived cohomology on the same integer extension of I.
-Uniqueness of derived units and the total/plus compatibility identify the cohomology comparison
-with isoRightDerivedObj. Transport the section computation along the augmentation-preserving
-restricted-resolution comparison.
-
-On that representative, the underlying abelian module-sheafification unit and the abelian
-sheafification unit both send a cocycle to its cohomology-sheaf class. Their exact homology
-comparisons agree by naturality of the cycle and boundary quotients and their counits. Transport
-through the normalized local Leray and sheafification comparisons and the comparisons of the first
-step. This is the displayed equality; the equality of opens contributes just the indicated
-transport. -/
+Source: Stacks Project, Cohomology, Tags 01E4, 01FB, 0BKJ and 0D5X. -/
 theorem squareResolution_localClass {X Y : Scheme.{u}} (f : X ⟶ Y)
     (F : X.Modules) (q : ℕ) (V : Y.Opens) (I : InjectiveResolution F)
     (U : X.Opens) (hU : U = f ⁻¹ᵁ V) (R : RestrictedResolutionSections I U) :

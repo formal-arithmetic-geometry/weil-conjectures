@@ -9,8 +9,10 @@ public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality
 import WeilConjectures.AlgebraicGeometry.Exceptional.ExceptionalBaseChangeAffineLocality
 import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.SmoothBaseChange
 
-/-! The upstream sync moved the smooth base-change theorem and added quasi-separatedness.
-This module keeps the earlier statement under a new name for Sheaf users. -/
+/-! # Smooth base change for exceptional inverse images without quasi-separatedness
+
+This module states smooth base change for `Rf^!` without a quasi-separatedness hypothesis
+on the base. -/
 
 @[expose] public section
 
@@ -25,11 +27,9 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Y : Scheme.{u}}
   (f : X ⟶ Y) [HasCompactification f] (d : ℕ) [SmoothOfRelativeDimension d f]
 
 include d in
-/-- Blueprint `proposition-exceptional-inverse-image-smooth-morphism--6` without the
-quasi-separatedness of the base: the canonical morphism `Lg'^* Rf^! ⟶ Rf'^! Lg^*` is an isomorphism
-for `f` smooth of relative dimension `d` and quasi-compact `f'` (the statement of
-`isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension` before the sync).
-(blueprint: proposition-exceptional-inverse-image-smooth-morphism--6) -/
+/-- Smooth base change for exceptional inverse images, without quasi-separatedness of the base:
+the canonical morphism `Lg'^* Rf^! ⟶ Rf'^! Lg^*` is an isomorphism for `f` smooth of relative
+dimension `d` and quasi-compact `f'`. -/
 theorem isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension_general
     {X' Y' : Scheme.{u}} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X} (sq : IsPullback g' f' f g)
     [HasCompactification f'] [QuasiCompact f'] :

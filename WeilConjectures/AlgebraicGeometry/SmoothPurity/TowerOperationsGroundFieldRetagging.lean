@@ -26,11 +26,6 @@ import WeilConjectures.AlgebraicGeometry.Pur.PurTwistSheafLocallyFree
 
 /-! # Ground-field retagging of ordinary strict-tower operations
 
-Source: blueprint main-20261015, chap-Smooth-purity,
-sk-prop-sp-tower-geometric-gamma.proof.md, clauses (2)--(3), and
-proposition-purity-trace-commute-frobenius, proof Step 1
-(blueprint: lem-pur-tower-operations-ground-field-retagging).
-
 Retagging is postcomposition of the structure map, not pullback of the scheme.
 The equalities below concern entire strict systems and entire derived functors.
 The parameters b and o fix the published, representative-normalized operations once
@@ -51,9 +46,7 @@ open WeilConjectures
 namespace AlgebraicGeometry.ProEtale
 
 /-- The actual ell-power quotient in commutative ring sheaves. Forgetting commutativity
-recovers spCoefficientConstantQuotient; no coefficient action is changed by retagging.
-Source: blueprint gamma proof (2), actual quotient coefficients
-(blueprint: lem-pur-tower-operations-ground-field-retagging). -/
+recovers spCoefficientConstantQuotient; no coefficient action is changed by retagging. -/
 def spEllTwistQuotient (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{u}) (n : ℕ) :
     purTwistIntegralConstant T l E ⟶ SpTowerShriek.B l E T n :=
@@ -62,26 +55,20 @@ def spEllTwistQuotient (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
       ((Ideal.Quotient.mk (spEllIdeal l E ^ (n + 1))).comp ULift.ringEquiv.toRingHom)))
 
 /-- The ell-power quotient of the published integral Tate line, using the actual
-constant quotient map. This is O_E(1) tensor_{O_E} O_E/ell^(n+1), before signed powers.
-Source: blueprint gamma proof (2), coefficient twists and quotient transitions
-(blueprint: lem-pur-tower-operations-ground-field-retagging). -/
+constant quotient map. This is O_E(1) tensor_{O_E} O_E/ell^(n+1), before signed powers. -/
 def spEllTwistOne (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{u}) (n : ℕ) :=
   SheafOfModules.changeOfRingsOfUniverses.{u, u + 1, u + 1, u + 1}
     (spEllTwistQuotient l E T n) (purTwistIntegralOne T l E)
 
 /-- Signed finite Tate lines at the ell-power levels of the strict tower. Positive
-powers and internal duals are exactly those of the recorded coefficient-twist definition.
-Source: blueprint gamma proof (2), signed Tate twists
-(blueprint: lem-pur-tower-operations-ground-field-retagging). -/
+powers and internal duals are exactly those of the recorded coefficient-twist definition. -/
 def spEllTwistLine (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{u})
     (n : ℕ) (m : ℤ) :=
   coefficientTwistLine T (R := SpTowerShriek.B l E T n) (spEllTwistOne l E T n) m
 
-/-- The family of actual scalar-extension comparisons between adjacent signed lines.
-Source: blueprint gamma proof (2), signed quotient transitions
-(blueprint: lem-pur-tower-operations-ground-field-retagging). -/
+/-- The family of actual scalar-extension comparisons between adjacent signed lines. -/
 abbrev SpEllTwistComparisons (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{u}) (n : ℕ) :=
   ∀ m : ℤ, SheafOfModules.changeOfRingsOfUniverses.{u, u + 1, u + 1, u + 1}
@@ -89,11 +76,8 @@ abbrev SpEllTwistComparisons (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     (spEllTwistLine l E T (n + 1) m) ≅ spEllTwistLine l E T n m
 
 /-- The quotient comparisons are fixed at exponent one on ordinary local pure tensors;
-all other signed powers use the published tensor/dual normalization. In particular the
-negative formula precomposes with the inverse positive comparison, rather than dualizing
-in the wrong direction.
-Source: blueprint gamma proof (2), signed-line quotient construction
-(blueprint: lem-pur-tower-operations-ground-field-retagging). -/
+all other signed powers use the published tensor/dual normalization, negative powers
+precomposing with the inverse positive comparison. -/
 def SpEllTwistComparisonsNormalized (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{u}) (n : ℕ)
     (B : SpEllTwistComparisons l E T n) : Prop :=
@@ -116,9 +100,7 @@ def SpEllTwistComparisonsNormalized (l : ℕ) [Fact l.Prime] (E : Type u) [Field
     (spEllTwistOne l E T n) (B 1) B
 
 /-- The actual semilinear quotient transition, obtained from its scalar-extension
-comparison by the canonical scalar unit. These are maps of sheaves, before derivation.
-Source: blueprint gamma proof (2), strict quotient transitions
-(blueprint: lem-pur-tower-operations-ground-field-retagging). -/
+comparison by the canonical scalar unit. These are maps of sheaves, before derivation. -/
 def spEllTwistTransition (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{u}) (n : ℕ)
     (B : SpEllTwistComparisons l E T n) (m : ℤ) :=

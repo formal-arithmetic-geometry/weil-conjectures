@@ -29,7 +29,6 @@ namespace AlgebraicGeometry.Etale
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 -- Pointwise form of the restriction comparison unit equation.
--- Adapted from the proved helper in EtaleChartSectionsObjectComparison.
 private theorem restriction_unit
     {T Y : Scheme.{v}} (f : T ⟶ Y) [Etale f]
     (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1})
@@ -59,7 +58,6 @@ private theorem restriction_unit
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 -- Pointwise form of the composition unit equation, after restriction.
--- Adapted from the proved helper in EtaleChartSectionsObjectComparison.
 private theorem composition_unit
     {T Y R : Scheme.{v}}
     (f : T ⟶ Y) (g : Y ⟶ R) (t : T ⟶ R) (ht : t = f ≫ g)
@@ -377,8 +375,7 @@ private theorem lowerStarSections_eval {T Y : Scheme.{v}} (h : T ⟶ Y)
   rw [hz]
 
 /-- The underived exchange map evaluated after restriction to the strict-local base.
-Source: Stacks Project, Tag 03Q9, final injective-complex paragraph.
-(blueprint: lem-weil-pbc-strict-local-underived-sections-mate). -/
+Source: Stacks Project, Tag 03Q9. -/
 noncomputable def smallModel_strictLocalUnderivedMateSections {X S : Scheme.{v}} (f : X ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     (i : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)) :
@@ -411,22 +408,7 @@ set_option backward.defeqAttrib.useBackward true in
 /-- Evaluating the underived mate on sections is restriction along the cone leg.
 This is an equality of transformations of sheaves, before complexes or derivation.
 
-Source: Stacks Project, Tag 03Q9, final injective-complex paragraph.
-(blueprint: lem-weil-pbc-strict-local-underived-sections-mate).
-
-Proof: expand the restriction on the base as the inverse-image adjunction unit
-followed by evaluation at the pointed neighbourhood section. Expand baseChangeMap
-as the unit along the second pullback projection, the inverse-image square
-comparison, and the counit along f. Naturality of evaluation moves the latter
-maps across the neighbourhood section. The two adjunction triangle identities
-cancel the intermediate unit and counit. The result is evaluation of f_*F on
-the stage, identified by smallModel_sourceStageSectionsIso, followed by sectionsPullbackNat
-along the cone leg and the inverse composition comparison upperStarComp.
-Q.smallModelFirst identifies the map on the base with the pointed neighbourhood section;
-Q.smallModelOver identifies the composite projection to X. These equations determine the
-map into the scheme pullback, so both evaluations use the same map. All operations
-are functorial in F, giving the equality of natural transformations. No etaleness
-of the cone leg is needed. The zero sheaf and empty fibre use the same identities. -/
+Source: Stacks Project, Tag 03Q9. -/
 theorem smallModel_strictLocalUnderivedMateSections_eq {X S : Scheme.{v}} (f : X ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     (Q : StrictLocalNeighbourhoodGeometry f s)

@@ -11,9 +11,6 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Chern.TowerChernReductio
 import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Chern.TowerChernScalarPullback
 
 /-! # Coefficient realization of integral tower classes and pullback
-
-Source: blueprint classes proof (2), and lem-sp-tower-chern-pullback, steps 4--7
-(blueprint: lem-sp-tower-chern-realization-pullback).
 -/
 
 @[expose] public noncomputable section
@@ -34,22 +31,19 @@ namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The actual successive derived coefficient extension, before applying it to a class.
-Source: classes (2) (blueprint: lem-sp-tower-chern-realization-pullback). -/
+/-- The actual successive derived coefficient extension, before applying it to a class. -/
 def chernRealization {T : Scheme.{u}} (c : Chern l E T) :
     DerivedCategory (Ab T) ⥤ D T (Arings l E T) :=
   c.reduction.derived ⋙ c.scalar.T
 
-/-- The composite of the two specified coefficient-unit identifications.
-Source: classes (2) (blueprint: lem-sp-tower-chern-realization-pullback). -/
+/-- The composite of the two specified coefficient-unit identifications. -/
 def chernSource {T : Scheme.{u}} (c : Chern l E T) :
     (chernRealization l E c).obj
         ((DerivedCategory.singleFunctor (Ab T) 0).obj (integers T)) ≅
       unit T (Arings l E T) :=
   c.scalar.T.mapIso c.unitIso ≪≫ c.scalarUnit
 
-/-- Realization of the full-units target, with positive Kummer kernel and scalar counit.
-Source: classes (2) (blueprint: lem-sp-tower-chern-realization-pullback). -/
+/-- Realization of the full-units target, with positive Kummer kernel and scalar counit. -/
 def chernTarget {T : Scheme.{u}} (c : Chern l E T) :
     (chernRealization l E c).obj
         (((DerivedCategory.singleFunctor (Ab T) 0).obj (units T))⟦(1 : ℤ)⟧) ⟶
@@ -59,8 +53,7 @@ def chernTarget {T : Scheme.{u}} (c : Chern l E T) :
       ((DerivedCategory.singleFunctor (Systems T (Rrings l T)) 0).obj c.rootModule) ≫
     (lineComparison l E c)⟦(2 : ℤ)⟧'
 
-/-- The first Chern definition factors through integral realization.
-Source: classes (2) (blueprint: lem-sp-tower-chern-realization-pullback). -/
+/-- The first Chern definition factors through integral realization. -/
 theorem firstChern_eq_realization {T : Scheme.{u}} (c : Chern l E T) (L : T.Pic) :
     firstChern l E c L =
       (chernSource l E c).inv ≫ (chernRealization l E c).map (lineBundleClass T L) ≫
@@ -90,25 +83,9 @@ private theorem scalar_comparison_paste
     _ = Q.map (S.map a) ≫ (Q.map v ≫ w) := by rw [hs]
     _ = _ := by simp only [Functor.map_comp, Category.assoc]
 
-/-- Geometric inverse image commutes with the successive coefficient realization. The
-comparison is natural on all integral derived objects, has the coefficient-unit source,
-and carries the full-units target map to the specified root-tensor comparison. This
-assertion involves no line bundle or Chern class.
-Source: blueprint classes proof (2); lem-sp-tower-chern-pullback, steps 4--7
-(blueprint: lem-sp-tower-chern-realization-pullback).
-
-Proof: first construct the exact inverse image of the intermediate R-module
-systems and its scalar-extension comparison kappa by tower_chernScalar_pullback.
-Then apply tower_chernReduction_pullback to that same inverse image, obtaining
-rho between integral reductions. Whisker kappa on the left by the reduction on Y,
-whisker rho on the right by scalar extension on X, and compose to obtain eta.
-For either endpoint, combine the two reduction factors under scalar extension,
-substitute rho's endpoint equation, and use naturality of kappa with respect to
-the unit or root identification. Kappa's endpoint equation then gives exactly
-the required coefficient or line comparison. Functoriality of scalar extension
-and pullback supplies the final composition equations. The private lemma
-scalar_comparison_paste proves this calculation uniformly for both endpoints.
-All comparisons are in the derived categories of whole systems. -/
+/-- Geometric inverse image commutes with the successive coefficient realization,
+naturally on integral derived objects and compatibly with the coefficient-unit source and the
+full-units target maps. -/
 theorem tower_chernRealization_pullback
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (_hX : IsUnit (l : Γ(X, ⊤))) (_hY : IsUnit (l : Γ(Y, ⊤)))

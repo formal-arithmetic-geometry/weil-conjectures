@@ -11,8 +11,7 @@ import WeilConjectures.AlgebraicGeometry.Etale.EtaleTensorHomTransposeNaturality
 
 /-! # Tensor-Hom shift comparison from evaluation
 
-The categorical diagram chase underlying the étale Hom comparison shift square.
-(blueprint: lem-coef-tensor-hom-shift-comparison-component) -/
+The categorical diagram chase underlying the étale Hom comparison shift square. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -101,15 +100,7 @@ end
 
 /-- An evaluation transpose preserves normalized Hom shifts when the tensor comparison
 preserves cancellation of opposite shifts.
-Source: Stacks Project, Tags 08JC and 08J9; blueprint `lemma-change-coefficients-internal-hom--1`,
-proof paragraph 2.
-
-Proof. Cancel the target Hom shift and transpose using evaluation normalization. Tensor
-cancellation naturality moves the shifted comparison past cancellation. Cancel the scalar
-shift in the first tensor variable, use the evaluation-transpose equation, scalar tensor
-cancellation, and naturality of the tensor comparison. The source evaluation normalization
-finishes the chase; adjunction injectivity gives the original square.
-(blueprint: lem-coef-tensor-hom-shift-comparison-component) -/
+Source: Stacks Project, Tags 08JC and 08J9. -/
 private theorem tensorHomShiftComparison_aux
     {C : Type u₁} [Category.{v₁} C] [Preadditive C] [HasShift C ℤ]
     {D : Type u₂} [Category.{v₂} D] [Preadditive D] [HasShift D ℤ]
@@ -187,8 +178,8 @@ attribute [local irreducible] _root_.DerivedCategory.monoidalClosed
   _root_.DerivedCategory.instMonoidalCategory
   _root_.DerivedCategory.commShift₂CurriedTensor
 
-/-- `EtaleHomShiftNormalization` in the form used by the abstract chase. Stated once for both
-coefficient categories, so the kernel unfolds the normalization only here. -/
+/-- `EtaleHomShiftNormalization` in the form used by the abstract chase,
+stated for both coefficient categories. -/
 private theorem etaleHomShiftNormalization_apply
     (C : Type*) [Category.{u + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C] [MonoidalPreadditive C]
@@ -204,17 +195,7 @@ private theorem etaleHomShiftNormalization_apply
   exact h K n
 
 /-- Derived tensor-Hom comparison respects normalized shifts.
-Source: Stacks Project, Tags 08JC and 08J9; blueprint `lemma-change-coefficients-internal-hom--1`,
-proof paragraph 2.
-
-Proof. Apply the abstract tensor-Hom evaluation chase to the derived tensor and Hom
-bifunctors. First-variable adjunction naturality and tensor-shift cancellation naturality
-supply its two categorical compatibility hypotheses; the other hypotheses are given.
-The abstract chase cancels the target Hom shift and the tensor image of the first scalar
-shift, then uses cancellation naturality, the evaluation-transpose equation, scalar tensor
-cancellation, binary comparison naturality, and the source evaluation normalization.
-Adjunction injectivity recovers the shift square.
-(blueprint: lem-coef-tensor-hom-shift-comparison-component) -/
+Source: Stacks Project, Tags 08JC and 08J9. -/
 theorem derivedTensorHomShiftComparison_component
     (C : Type*) [Category.{u + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C] [MonoidalPreadditive C]

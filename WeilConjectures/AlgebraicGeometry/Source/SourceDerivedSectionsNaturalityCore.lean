@@ -27,12 +27,7 @@ namespace AlgebraicGeometry.Etale
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Naturality of the localization and derived Hom part of the source comparison.
-Source: Stacks Project, Tags 03Q8 and 03Q9.
-(blueprint: lem-weil-pbc-source-derived-sections-naturality-core)
-
-The proof is the cocycle computation: precomposition on the Hom complex descends
-through cocycles and boundaries, and the quotient and the specified derived
-representative preserve this map. -/
+Source: Stacks Project, Tags 03Q8 and 03Q9. -/
 theorem smallModel_sourceDerivedSections_naturality_core
     {C : Type (v + 1)} [Category.{v} C]
     {T : GrothendieckTopology C} [HasSheafify T AddCommGrpCat.{v + 1}]
@@ -179,12 +174,7 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 set_option linter.unusedVariables false in
 /-- Naturality of evaluation of the Hom complex at the free sheaf generator.
-Source: Stacks Project, Tags 03Q8 and 03Q9.
-(blueprint: lem-weil-pbc-source-derived-sections-naturality-evaluation)
-
-This is the degreewise Yoneda calculation: the free-sheaf evaluation sends
-precomposition by the map induced by `a` to restriction of sections, and the
-left-homology comparison is functorial. -/
+Source: Stacks Project, Tags 03Q8 and 03Q9. -/
 theorem smallModel_sourceDerivedSections_naturality_evaluation
     {C : Type (v + 1)} [Category.{v} C]
     {T : GrothendieckTopology C} [HasSheafify T AddCommGrpCat.{v + 1}]
@@ -223,8 +213,8 @@ theorem smallModel_sourceDerivedSections_naturality_evaluation
   rw [← Functor.map_comp, sourceFreeSectionsComplexIso_naturality, Functor.map_comp]
 
 /-- Composition of the localization and evaluation squares gives the displayed
-source comparison square. This is the categorical pasting step in Tags 03Q8--03Q9.
-(blueprint: lem-weil-pbc-source-derived-sections-naturality-compose) -/
+source comparison square.
+Source: Stacks Project, Tags 03Q8 and 03Q9. -/
 theorem smallModel_sourceDerivedSections_naturality_compose
     {C : Type (v + 1)} [Category.{v} C]
     {T : GrothendieckTopology C} [HasSheafify T AddCommGrpCat.{v + 1}]

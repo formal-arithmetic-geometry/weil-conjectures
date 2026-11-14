@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassP
 import WeilConjectures.AlgebraicGeometry.Cartesian.CartesianCoefficientTwistsSupplement
 
 /-! # Finite root-line comparisons in the coefficient-tower coordinates
-
-Source: current classes blueprint, clause (2), scalar extension of the root tower.
-(blueprint: lem-sfb-tower-class-finite-line-comparisons).
 -/
 
 @[expose] public noncomputable section
@@ -29,19 +26,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- Finite inverse image of the scalar-extended root line, with its tensor formula.
-
-Source: current blueprint `sk-prop-sp-tower-geometric-classes.proof.md`, clause (2),
-scalar extension of the root tower; the existing finite Tate comparison.
-(blueprint: lem-sfb-tower-class-finite-line-comparisons).
-
-Proof: map the global unit ell from Y to X, and then into every residue field.
-The supplied finite coefficient quotients are finite by Base.finite. Apply
-spFiniteTwists_cartesian with the n-th quotient as coefficient ring and exponent
-n, and take its degree-one isomorphism. Its tensor formula uses the actual
-constant coefficient direct-image map and the direct-image roots map. The unique
-section characterization of the latter identifies it with restrictRoot through
-the roots-section equivalence. This proves the displayed formula without any
-tower assembly or compatibility assertion. No condition on the morphism is used.
 -/
 theorem finiteLineComparisons_exists
     {b : SpTowerShriek.Base l E} {X Y : Scheme.{u}} (f : X ⟶ Y)

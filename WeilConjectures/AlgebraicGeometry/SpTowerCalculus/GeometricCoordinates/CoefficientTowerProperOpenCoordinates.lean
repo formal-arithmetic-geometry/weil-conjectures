@@ -18,8 +18,6 @@ import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearSystemIsoAssembly
 The ordinary section comparisons identify the supplied operations with the
 canonical semilinear model. Derived transport uses exact localization and the
 canonical right-derived comparisons, before any finite evaluation.
-Source: blueprint gluing proof, Local pairs and Levels.
-(blueprint: lem-sp-geometric-proper-open-coordinates).
 -/
 
 @[expose] public noncomputable section
@@ -36,15 +34,11 @@ namespace AlgebraicGeometry.ProEtale.SpTowerCalculus.GeometricCoordinates
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The actual lifted quotient rings for the graph construction, with index n meaning n+1.
-Source: Local pairs, coefficient convention
-(blueprint: lem-sp-geometric-proper-open-coordinates). -/
+/-- The actual lifted quotient rings for the graph construction, with index n meaning n+1. -/
 def graphRings (n : ℕ) : CommRingCat.{u + 1} :=
   CommRingCat.of (ULift.{u + 1} (SpTowerShriek.R l E n))
 
-/-- The adjacent quotient maps, lifted without changing coefficients.
-Source: Local pairs, coefficient convention
-(blueprint: lem-sp-geometric-proper-open-coordinates). -/
+/-- The adjacent quotient maps, lifted without changing coefficients. -/
 def graphTransitions (n : ℕ) : graphRings l E (n + 1) ⟶ graphRings l E n :=
   CommRingCat.ofHom (ULift.ringEquiv.symm.toRingHom.comp
     ((Ideal.Quotient.factorPowSucc (spEllIdeal l E) (n + 1)).comp
@@ -52,10 +46,7 @@ def graphTransitions (n : ℕ) : graphRings l E (n + 1) ⟶ graphRings l E n :=
 
 /-- Section-preserving ordinary presentations and direct-image comparisons for the
 existing graph model. Units and counits are pinned as functions on sections.
-The push square agrees levelwise with the given ordinaryPushEvaluation isomorphism,
-allowing arbitrary carrier presentations without an independent scalar twist.
-Source: Local pairs, section-model and graph construction
-(blueprint: lem-sp-geometric-proper-open-coordinates). -/
+The push square agrees levelwise with the given `ordinaryPushEvaluation` isomorphism. -/
 structure GraphCoordinates (b : SpTowerShriek.Base l E)
     (o : SpTowerShriek.Operations l E b) where
   presentation : ∀ T : Scheme.{u}, SpTowerShriek.S l E T ≌
@@ -81,8 +72,7 @@ structure GraphCoordinates (b : SpTowerShriek.Base l E)
   push : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y),
     (presentation X).inverse ⋙ (o.geometry f).push ⋙ (presentation Y).functor ≅
       SemilinearProperOpen.push (graphRings l E) (graphTransitions l E) f
-  /-- Compatibility with the supplied ordinary evaluation iso, on all component sections.
-  Both sides are functions; no equality with the input section's carrier is required. -/
+  /-- Compatibility with the supplied ordinary evaluation iso, on all component sections. -/
   push_evaluation : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y)
     (M : SemilinearProperOpen.Modules (graphRings l E) (graphTransitions l E) X)
     (n : ℕ) (V : Y.ProEtᵒᵖ),
@@ -92,9 +82,7 @@ structure GraphCoordinates (b : SpTowerShriek.Base l E)
 
 attribute [instance] GraphCoordinates.additive GraphCoordinates.inverseAdditive
 
-/-- Remove an ordinary conjugation using only the presentation's fixed unit.
-Source: Local pairs, canonical coordinate transport
-(blueprint: lem-sp-geometric-proper-open-coordinates). -/
+/-- Remove an ordinary conjugation using only the presentation's fixed unit. -/
 def graphForward (b : SpTowerShriek.Base l E)
     (o : SpTowerShriek.Operations l E b) (g : GraphCoordinates l E b o) {X Y : Scheme.{u}}
     (F : SpTowerShriek.S l E X ⥤ SpTowerShriek.S l E Y)
@@ -106,9 +94,7 @@ def graphForward (b : SpTowerShriek.Base l E)
     Functor.isoWhiskerRight (g.presentation X).unitIso _ ≪≫
     Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft _ a
 
-/-- Pullback comparison uniquely preserving the section-normalized geometric adjunction.
-Source: Local pairs, canonical coordinate transport
-(blueprint: lem-sp-geometric-proper-open-coordinates). -/
+/-- Pullback comparison uniquely preserving the section-normalized geometric adjunction. -/
 def graphPullCoordinates (b : SpTowerShriek.Base l E)
     (o : SpTowerShriek.Operations l E b) (g : GraphCoordinates l E b o) {X Y : Scheme.{u}}
     (f : X ⟶ Y) :
@@ -118,9 +104,7 @@ def graphPullCoordinates (b : SpTowerShriek.Base l E)
     (g.presentation X).toAdjunction).ofNatIsoRight (g.push f)).leftAdjointUniq
       (SemilinearProperOpen.ordinaryAdj (graphRings l E) (graphTransitions l E) f)
 
-/-- Open extension comparison obtained from the specified ordinary adjunctions.
-Source: Local pairs, canonical coordinate transport
-(blueprint: lem-sp-geometric-proper-open-coordinates). -/
+/-- Open extension comparison obtained from the specified ordinary adjunctions. -/
 def graphOpenCoordinates (b : SpTowerShriek.Base l E)
     (o : SpTowerShriek.Operations l E b) (g : GraphCoordinates l E b o) {U T : Scheme.{u}}
     (j : U ⟶ T) [IsOpenImmersion j] :
@@ -237,8 +221,7 @@ private noncomputable def ordinaryModel
 -- Cancellation compares horizontal morphisms on large module-sheaf categories.
 -- Assemble the level isomorphisms and check their naturality on every section.
 /-- Derived proper/open transport uses the ordinary section square and the canonical
-right-derived composition maps. No arbitrary derived comparison is selected.
-Source: Local pairs, graph comparison (blueprint: lem-sp-geometric-proper-open-coordinates). -/
+right-derived composition maps. -/
 def graphSupportCoordinates (b : SpTowerShriek.Base l E)
     (o : SpTowerShriek.Operations l E b) (g : GraphCoordinates l E b o)
     {U T : Scheme.{u}} {e : U ⟶ T} (c : Compactification e) :

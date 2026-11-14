@@ -17,13 +17,9 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 
 /-! # Ordinary etale words for the projective-line tower comparison
 
-Source: literature/blueprint/latest/blueprint/sec-smooth-purity/
-sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md, Construction and Levels
-(blueprint: def-sp-p1-etale-eta-word).
-
 These are formulas in the ordinary etale derived categories. The diagonal is the
 positive supported Cartier Kummer boundary; the trace is the second projection
-of the inverse unit/Chern splitting. No adjunction unit is selected instead.
+of the inverse unit/Chern splitting.
 -/
 
 @[expose] public noncomputable section
@@ -44,8 +40,7 @@ variable (A : Type (u + 1)) [CommRing A]
 
 variable [Finite A] (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
 
-/-- The finite diagonal formula eta_n, using the actual supported class and mate inverses.
-Source: Construction, eta (blueprint: def-sp-p1-etale-eta-word). -/
+/-- The finite diagonal formula eta_n, using the actual supported class and mate inverses. -/
 def eta (S : Scheme.{u}) (hD : (diagonalImmersion S).ker.IsInvertible)
     (hW : IsUnit (N : Γ(diagonalSurface S, ⊤)))
     (t : Etale.OrdinaryFiniteTwistTransport A N hA)

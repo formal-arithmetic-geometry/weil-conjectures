@@ -67,9 +67,7 @@ import Mathlib.LinearAlgebra.Finsupp.Pi
 
 /-! # Realization of a single exterior Koszul factor
 
-Source: Stacks Project, Modules on Sites, Tags 03D8, 03EK and 0GMW;
-algebraization.tex, Tag 0A0E, lemma-derived-completion-koszul.
-(blueprint: lem-weil-pbc-negative-koszul-factor-realization).
+Source: Stacks Project, Modules on Sites, Tags 03D8, 03EK and 0GMW; algebraization.tex, Tag 0A0E.
 -/
 
 @[expose] public noncomputable section
@@ -347,24 +345,8 @@ private theorem scalar_power
 
 /-- The rank-one exterior complex realizes as the explicit negative two-term factor.
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E,
-lemma-derived-completion-koszul, finite free factors; Modules on Sites,
-Tags 03D8, 03EK and 0GMW for constant sheafification and scalar extension.
-(blueprint: lem-weil-pbc-negative-koszul-factor-realization).
-
-Proof: the basis of A^(Fin 1) identifies its first exterior power with A;
-exteriorPower.zeroEquiv identifies its zeroth power with A. All higher powers
-have empty exterior basis and are zero. Reindexing gives a complex supported in
--1 and 0. Contraction sends the first basis vector to a^(m+1), and the exterior
-transition is a in degree -1 and identity in degree zero. Constant sheafification
-and extension of scalars carry these two bases to the regular coefficient module.
-Restriction along the completed coefficient ring isomorphism and the site
-equivalence carry scalar a to completedCechScalar X d a. Thus the degreewise
-basis maps form the required chain isomorphism and intertwine the transitions.
-The exterior degree-zero unit is 1, and the two coefficient units are sections 1,
-so its composite is exactly the specified degree-zero double-complex inclusion.
-There is no tensor induction, duality, or internal Hom in this assertion. The
-argument uses no nonzero scalar and applies to the zero ring and empty site. -/
+Source: Stacks Project, algebraization.tex, Tag 0A0E, finite free factors; Modules on Sites, Tags
+03D8, 03EK and 0GMW for constant sheafification and scalar extension. -/
 theorem negativeKoszulFactorRealization
     (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (a : A) :

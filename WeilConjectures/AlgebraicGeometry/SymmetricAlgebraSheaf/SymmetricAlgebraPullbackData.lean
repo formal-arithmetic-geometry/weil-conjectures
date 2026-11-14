@@ -15,9 +15,7 @@ import Mathlib.RingTheory.GradedAlgebra.TensorProduct
 
 /-! # Normalized pullback data for symmetric graded algebras
 
-Source: Stacks Project, Modules, lemma-pullback-tensor-algebra;
-Constructions, Tag 01OB; Algebra, lemma-tensor-algebra-localization (general base change).
-(blueprint: lem-trf-symmetric-algebra-normalized-pullback-data).
+Source: Stacks Project, Modules; Constructions, Tag 01OB.
 -/
 
 @[expose] public section
@@ -295,20 +293,7 @@ private theorem unitSection_map_res {X S : Scheme.{u}} (g : X ⟶ S) (E : S.Modu
 /-- Canonical coefficientwise pullback data for the symmetric graded algebra, with its
 specified degree-one generator formula.
 
-Source: Stacks Project, Modules, lemma-pullback-tensor-algebra;
-Constructions, Tag 01OB; Algebra, lemma-tensor-algebra-localization (general base change).
-(blueprint: lem-trf-symmetric-algebra-normalized-pullback-data).
-
-Proof: send a scalar by the scheme structure map and send iota(m) to the inclusion
-of the restricted section 1 tensor m. The symmetric universal property constructs
-this ring map. Products of n degree-one generators show that it preserves degree n.
-Affine pullback sections identify the target module with scalar extension of the
-source module. Symmetric algebra base change therefore makes the corresponding
-scalar extension map bijective. Its grading and the direct-sum decomposition give
-bijectivity in each degree. Naturality of the pullback unit and restriction gives
-compatibility on affine refinements in both variables. These identities hold on
-scalars and on degree-one generators and extend by symmetric-algebra induction.
-This argument applies to every base morphism and includes zero rings and modules. -/
+Source: Stacks Project, Modules; Constructions, Tag 01OB. -/
 theorem exists_normalized_pullbackData {X S : Scheme.{u}} (g : X ⟶ S)
     (E : S.Modules) [E.IsQuasicoherent]
     [((Scheme.Modules.tensorPullback g).obj E).IsQuasicoherent] :

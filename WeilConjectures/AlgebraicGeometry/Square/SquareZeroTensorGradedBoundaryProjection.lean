@@ -12,7 +12,6 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 /-! # Naturality of homogeneous boundary projections
 
 Source: Stacks Project, Tag 09MS, the graded direct-sum ideal sequence.
-(blueprint: lem-sc-square-zero-tensor-graded-boundary-projection).
 -/
 
 @[expose] public section
@@ -36,22 +35,10 @@ attribute [local instance] boundary_enoughInjectives
 noncomputable section
 
 /-- Cohomology of a degree projection carries the canonical section boundary to the
-boundary of its quotient projection. This statement concerns one short-complex morphism,
-not products, actions, or the realization existential. Compatible resolutions only
-present the single boundary whose degree projection is computed.
+boundary of its quotient projection.
 
-Source: Stacks Project, Tag 01DZ, naturality of the cohomology boundary;
-Tag 09MS, projections of the graded direct-sum short exact sequence.
-(blueprint: lem-sc-square-zero-tensor-graded-boundary-projection).
-Proof: The snake/triangle comparison for the supplied compatible resolutions identifies
-δ-prime with the canonical section boundary. Apply rightDerived_triangle_connecting
-to global sections. Its triangle comparison
-identifies its delta with moduleCohomologyBoundary after the canonical single-complex
-isomorphisms. Delta naturality for T.degree in degrees zero and one, followed by naturality
-of toRightDerivedZero, identifies the two section-boundary composites. Evaluate on z and
-use degree_quotient to replace the third component by q. Compose with the inverse additive
-coefficient comparison D.k; tensorGradedCoefficientProjection_apply identifies the left
-side. No multiplication rule is used. The argument includes n=0, e=0 and zero sections. -/
+Source: Stacks Project, Tag 01DZ, naturality of the cohomology boundary; Tag 09MS, projections of
+the graded direct-sum short exact sequence. -/
 theorem tensorGradedProjection_boundary {X Z : Scheme.{u}} {j : Z ⟶ X}
     [IsClosedImmersion j]
     [HasDerivedCategory.{wC} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

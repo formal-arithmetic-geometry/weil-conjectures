@@ -250,16 +250,7 @@ private theorem cubeSquare_swap {A B C D : Scheme.{u}} (a : A ⟶ B) (b : B ⟶ 
 
 /-- The canonical ordinary inverse-image comparisons agree around a commutative cube.
 No cartesian, open, or proper hypothesis is needed.
-Source: Stacks Project, Tags 03D8, 07A7 and the compositor calculation in Tag 0F7F
-(blueprint: lem-sf-semilinear-pullback-cube-coherence).
-Proof: expand each square comparison as inverse composition, equality transport,
-and forward composition. Direct-image composition is identity on section carriers
-up to the canonical iterated fibre-product comparison. The universal property of
-the fibre product identifies its two triple-composition maps. Taking adjoints gives
-inverse-image associativity. Use this associativity on both sides of the cube and
-cancel inverse composition comparisons. Both resulting maps are the comparison
-from k1-star p1-star h-star to r1-star c-star i-star along the same scheme composite.
-Equality transports agree by proof irrelevance. -/
+Source: Stacks Project, Tags 03D8, 07A7 and the compositor calculation in Tag 0F7F. -/
 theorem moduleSquareG_cube
     {U V W Z U₁ V₁ W₁ Z₁ : Scheme.{u}}
     (k : U ⟶ V) (i : W ⟶ Z) (r : U ⟶ W) (p : V ⟶ Z)

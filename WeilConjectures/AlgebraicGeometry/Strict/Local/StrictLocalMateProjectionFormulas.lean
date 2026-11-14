@@ -11,7 +11,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
 
 /-! # Projection restriction formulas for the strict-local mate
 
-Source: Stacks Project, Tag 03Q9, final injective-complex paragraph.
+Source: Stacks Project, Tag 03Q9.
 -/
 
 /- This original-model counterpart follows the proved calculation in
@@ -31,25 +31,7 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Derived neighbourhood sections identify with stage hypercohomology, compatibly
 with transition pullbacks and with projection restriction for the derived mate.
-This does not assert that the canonical source cocone is colimiting.
-Source: Stacks, Tag 03Q9, final injective-complex paragraph; Tag 03Q8
-(blueprint: lem-weil-pbc-strict-local-mate-projection-formulas).
-
-Proof: choose a bounded below injective representative J of K. Under derived adjunction,
-Hom(Z[V][0], (Rf_*K)[n]) is Hom(f^*Z[V][0], K[n]); the free sheaf f^*Z[V] corepresents
-sections on V ×_S X. Restriction along its etale projection to X preserves injectives,
-so this derived Hom is the n-th hypercohomology of the restricted complex J.
-These identifications provide e. Precomposition by a neighbourhood morphism is the
-restriction of sections; express this restriction using the derived unit, Leray,
-and the exact inverse-image composition isomorphism to obtain transition.
-For the limit projection, evaluate the adjunction mate on J: its sections map is
-inverse-image restriction along the pullback square. The canonical cohomology germ
-map is taking the homology class of that same section. The first leg equation for Q
-identifies the representative germ restriction with the limit projection. Exact
-inverse image commutes with homology, and exact strict-local sections followed by
-Leray give smallModel_strictLocalBaseChangeTargetIso. Thus the two composites agree on every
-derived section, proving restriction. Naturality of all the comparisons transports
-the formulas from J to K. No continuity or invertibility of the mate is used. -/
+Source: Stacks, Tags 03Q9 and 03Q8. -/
 theorem smallModel_nonempty_strictLocalMateProjectionData {X S : Scheme.{v}}
     (f : X ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)

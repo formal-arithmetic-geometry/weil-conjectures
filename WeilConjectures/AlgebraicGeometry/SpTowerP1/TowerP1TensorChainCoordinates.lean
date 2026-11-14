@@ -12,10 +12,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 
 /-! # Normalized tensor coordinates for projective-line level comparison
 
-Source: literature/blueprint/latest/blueprint/sec-smooth-purity/
-sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md, Levels
-(blueprint: def-sp-p1-tensor-chain-coordinates).
-
 The coordinates retain the canonical associated-module-sheaf functor. Its tensor
 comparison is fixed on scalar-unit pure tensors, on total-complex summands, and
 on K-flat representatives. Thus the final level equations cannot be satisfied
@@ -40,8 +36,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
   (n : ℕ) [Finite (SpTowerShriek.R l E n)]
 
-/-- The signed total-complex tensor at the intrinsic level, as a named functor.
-Source: Levels (blueprint: def-sp-p1-tensor-chain-coordinates). -/
+/-- The signed total-complex tensor at the intrinsic level, as a named functor. -/
 def intrinsicTotal (T : Scheme.{u}) :
     CochainComplex (SemilinearSections.Mod.{u + 1, u, u + 1}
       (ProEt.topology T) (SpTowerShriek.B l E T n)) ℤ ×
@@ -52,15 +47,13 @@ def intrinsicTotal (T : Scheme.{u}) :
   SemilinearSections.totalTensor.{u + 1, u, u + 1}
     (ProEt.topology T) (SpTowerShriek.B l E T n)
 
-/-- The fixed total tensor and its signed source inclusions are the existing ones.
-Source: Levels (blueprint: def-sp-p1-tensor-chain-coordinates). -/
+/-- The fixed total tensor and its signed source inclusions are the existing ones. -/
 def fixedSummand (T : Scheme.{u}) (P Q : CochainComplex (FixedSheaves l E n T) ℤ)
     (i j k : ℤ) (h : i + j = k) :
     P.X i ⊗ Q.X j ⟶ ((fixedTotalTensor l E n T).obj (P, Q)).X k :=
   CochainComplex.ιMapBifunctor P Q (curriedTensor (FixedSheaves l E n T)) i j k h
 
-/-- Intrinsic total tensor inclusions, retaining the section-model sign convention.
-Source: Levels (blueprint: def-sp-p1-tensor-chain-coordinates). -/
+/-- Intrinsic total tensor inclusions, retaining the section-model sign convention. -/
 def intrinsicSummand (T : Scheme.{u})
     (P Q : CochainComplex (SemilinearSections.Mod.{u + 1, u, u + 1}
       (ProEt.topology T) (SpTowerShriek.B l E T n)) ℤ)
@@ -71,8 +64,7 @@ def intrinsicSummand (T : Scheme.{u})
   SemilinearSections.tensorSummand.{u + 1, u, u + 1}
     (ProEt.topology T) (SpTowerShriek.B l E T n) P Q i j k h
 
-/-- Total-complex realization coordinates fixed on every signed tensor summand.
-Source: Levels (blueprint: def-sp-p1-tensor-chain-coordinates). -/
+/-- Total-complex realization coordinates fixed on every signed tensor summand. -/
 structure TensorChainCoordinates (T : Scheme.{u}) extends TensorOrdinaryCoordinates l E n T where
   chain : ∀ P Q : CochainComplex (FixedSheaves l E n T) ℤ,
     ((realization l E n T).mapHomologicalComplex (.up ℤ)).obj

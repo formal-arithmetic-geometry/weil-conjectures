@@ -59,29 +59,7 @@ private theorem systemHom_ext {T : Scheme.{u}}
 
 /-- The geometric tower operations can be chosen with their ordinary unit and tensor maps.
 
-Source: blueprint `sk-prop-sp-tower-geometric-classes.proof.md`, clauses (2)--(4),
-and the geometric realization in `sk-lem-sp-tower-bound-operations.proof.md`;
-Zheng Construction 4.1, Lemma 4.10; Stacks 03D2, 03EL and 07A4.
-(blueprint: lem-sfb-tower-class-tensor-geometry-existence).
-
-Proof: use the coefficient-tower calculus and the ringed sequence site from
-strictSystemGeometricRealization. Realize inverse image by the algebraic inverse
-image of each constant quotient ring. Choose the constant-section comparison at
-each level, so its adjoint is the specified constant direct-image map. Quotient
-maps commute with those section maps; hence the unit comparisons assemble to
-CoefficientPullback. This constructs a normalized geometry, rather than asserting
-an extra normalization for every geometry with the same level functors.
-For two ordinary module systems, apply geometricOrdinaryTensor_exists to that
-ordinary realization. Its system and system_natural fields provide the assembled
-tensor isomorphisms and naturality. Its evaluation and level_pure fields express
-the finite maps as the inverse images of pure tensors. Scalar restriction
-commutes with that pairing, since both composites send a generalized pure tensor
-to the tensor of its two restricted inverse images. Transpose with the ordinary
-system adjunction, whose unit evaluates to the finite unit: a pure tensor maps
-to the tensor of the two unit sections. This is TensorPullback.normalization.
-The construction uses the unital constant-ring comparison also on empty charts;
-no nonempty-chart assumption or flatness of a quotient-ring map is needed.
-There is no roots-of-unity line, twisting equivalence, or projection assertion here.
+Source: Zheng Construction 4.1, Lemma 4.10; Stacks 03D2, 03EL and 07A4.
 -/
 theorem exists_tensorGeometry {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃ b : SpTowerShriek.Base l E, ∃ g : SpTowerShriek.Geometry l E b f,

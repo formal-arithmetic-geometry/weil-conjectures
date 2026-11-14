@@ -179,44 +179,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 /-- The scalar-cone presentation computes the actual principal quotient tensors,
 with their normalized tensor models and augmented Roos completion.
 
-Source: blueprint latest, derived-nakayama-first-reduction proof, Cones paragraph;
-Locality in integral-ctf-equals-bc; Stacks Tags 03EK, 06YS, 06YT and 08TC
-(blueprint: lem-sfb-strict-section-principal-quotient-models).
-
-Proof:
-The canonical datum identifies d with multiplication by the chosen uniformizer.
-The point resolution 0 to A, multiplication by pi^(n+1), A to A/pi^(n+1) to 0
-is short exact. Exact point pullback and the exact section-action equivalence give
-the same short exact resolution of the section quotient module. Its scalar is
-precisely the given section multiplication, by evaluation at one. The actual
-quotient ring sheaves and their sectionScalarMap transitions form B and its algebra
-map from the constant ring tower; quotient-transition compatibility follows from
-the quotient homomorphisms.
-
-Tensor this two-term resolution with an arbitrary K-flat complex. Tensoring a
-quasi-isomorphism with that K-flat complex is a quasi-isomorphism, even when the
-quotient is nonflat and the complex is unbounded. The single-degree-zero total
-comparison has only the (p,0) summand and sends x tensor y to the same local pure
-tensor. The cone-to-tensor map therefore identifies each strict level with the
-actual KFlatRoos.level. The two maps on the free coefficient resolution for a
-successor transition are identity and multiplication by pi. Hence the cone maps
-commute with all transitions, and the cone inclusion maps to x tensor 1.
-
-Fix the supplied section derived tensor structure and its TensorComparison.
-Resolve the quotient in the second variable by a K-flat Q. The comparison from
-its total tensor to the singleton quotient total, followed by the preceding level
-map, is a quasi-isomorphism. Its inverse after localization gives model. The
-universal derived tensor comparison gives tensor; naturality of the same map gives
-tensor_model exactly, with no twist. Localization of the cone inclusion and the
-successor squares proves the unit and step fields.
-
-The level quasi-isomorphisms form an augmented tower map. Exact countable products
-on the small pro-etale site and the Roos cone lemma make its Roos map a
-quasi-isomorphism. The two Roos coordinates and the level unit equations identify
-its augmentation with the actual tensor-Roos augmentation. The presentation descent
-then gives the displayed completion isomorphism for Q(P); transport it along e to
-arbitrary K. Naturality of its unit gives e.inv followed by that augmentation.
-The argument includes the zero quotient, empty site and every positive exponent. -/
+Source: Stacks Tags 03EK, 06YS, 06YT and 08TC. -/
 theorem strictSectionPrincipalQuotientModels (X : Scheme.{u})
     (T : Presentation.{u + 2, u + 1, u + 1}
       (Modules (DerivedNakayama.integerRing l E) X))

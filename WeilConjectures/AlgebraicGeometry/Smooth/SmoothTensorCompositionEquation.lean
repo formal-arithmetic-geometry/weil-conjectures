@@ -28,9 +28,10 @@ import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormulaCoherence
 /-!
 # Canonical tensor composition at the coefficient unit
 
-The comparison coordinates are the original constructed compactification and
-adjunction comparisons. The theorem isolates the equality in clause 4 of
-cohomological smoothness, independently of invertibility, base change and Dctf.
+For composable morphisms, the canonical tensor morphism of the composite agrees with the
+composite of the tensor morphisms at the coefficient unit, under the compact-support and
+exceptional composition comparisons. This equality is proved independently of
+invertibility, base change and Dctf.
 -/
 
 @[expose] public section
@@ -42,12 +43,8 @@ open AlgebraicGeometry
 namespace AlgebraicGeometry.ProEtale
 
 /-- The compact-support composition comparison, constructed from the compatible
-compactifications and the common-refinement comparisons, rather than chosen from a
-Nonempty assertion. The compatible compactification is the closure of X in the product
-of the chosen compactifications of g and fg.
-Source: blueprint proposition-exceptional-inverse-image-smooth-morphism, clause 4 and proof Step 9;
-proposition-composition-base-change-rf-shriek--1, triangle construction
-(blueprint: proposition-exceptional-inverse-image-smooth-morphism). -/
+compactifications and the common-refinement comparisons. The compatible compactification
+is the closure of X in the product of the chosen compactifications of g and fg. -/
 noncomputable def smoothCompactSupportCompIso
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
@@ -65,9 +62,7 @@ noncomputable def smoothCompactSupportCompIso
 
 /-- The adjunction-compatible exceptional composition comparison. Its counit is
 ε_g followed in adjunction order by g_! ε_f, through the displayed compact-support
-comparison, since this is rightAdjointUniq for precisely that composite adjunction.
-Source: blueprint proposition-exceptional-inverse-image-smooth-morphism, clause 4, proof Step 9
-(blueprint: proposition-exceptional-inverse-image-smooth-morphism). -/
+comparison. -/
 noncomputable def smoothExceptionalCompIso
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
@@ -82,11 +77,7 @@ noncomputable def smoothExceptionalCompIso
     ((Etale.rightDerivedUpperShriekAdjunction Λ f).comp
       (Etale.rightDerivedUpperShriekAdjunction Λ g))
 
-/-- The specified dualizing comparison q = θ_(f,ω_g) followed by c_Λ⁻¹.
-Its invertibility is asserted below; its data use only the existing tensor mate
-and the adjunction-induced composition comparison.
-Source: blueprint proposition-exceptional-inverse-image-smooth-morphism, clause 4, proof Step 9
-(blueprint: proposition-exceptional-inverse-image-smooth-morphism). -/
+/-- The dualizing comparison q = θ_(f,ω_g) followed by c_Λ⁻¹. -/
 noncomputable def smoothDualizingCompMap
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
@@ -778,19 +769,7 @@ private theorem unitCompositionEtale
   case hθg => intro N; rfl
   case hθh => intro N; rfl
 
-/-- Unit specialization of the canonical tensor-composition identity.
-Proof: the compactification-tower projection identity is transported through the
-three common-refinement comparisons. Naturality of projection maps under each
-comparison gives ProjectionCompCompatible for smoothCompactSupportCompIso.
-Apply lowerShriekRightAdjointTensorMap_comp with this compatibility and specialize
-its first variable to the coefficient unit. Naturality of the adjoint comparison
-cancels its inverse from q. The projectionTensorMap_assoc identity, naturality of
-the tensor map in both variables, and the left-unitor identity then give precisely
-the reassociated right-hand composite. This argument needs no smoothness or
-invertibility of the dualizing object; it also applies to empty schemes and the
-zero coefficient ring.
-Source: blueprint proposition-exceptional-inverse-image-smooth-morphism, clause 4, proof Steps 9--10
-(blueprint: lem-v8-smooth-tensor-composition-equation). -/
+/-- Unit specialization of the canonical tensor-composition identity. -/
 theorem smoothTensorCompositionEquation
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)

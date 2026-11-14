@@ -13,9 +13,7 @@ public import Mathlib.Algebra.Category.Grp.Zero
 /-!
 # Torsion cohomological dimension of a separably closed field
 
-Source: blueprint, sec-smooth-purity/sk-prop-sf-fullcd-etale-origin,
-lemma lemma-cohomological-dimension-base-field--1; Stacks Project, Tags 03QO, 04JQ and 04JM
-(blueprint: lemma-cohomological-dimension-base-field--1).
+Source: Stacks Project, Tags 03QO, 04JQ and 04JM.
 -/
 
 @[expose] public section
@@ -25,21 +23,7 @@ universe u
 namespace AlgebraicGeometry.Scheme
 
 /-- A separably closed field has torsion étale cohomological dimension at most zero.
-Source: blueprint, sec-smooth-purity/sk-prop-sf-fullcd-etale-origin,
-lemma lemma-cohomological-dimension-base-field--1; Stacks Project, Tags 03QO, 04JQ and 04JM
-(blueprint: lemma-cohomological-dimension-base-field--1).
-
-Proof:
-1. Evaluation at the terminal object preserves epimorphisms by
-`preservesEpimorphisms_sheafSections_of_isSepClosed`: every covering of the spectrum
-has a section, so local lifts of sections give global lifts. The natural isomorphism
-`CategoryTheory.Sheaf.ΓNatIsoSheafSections` transfers this property to global sections.
-2. Global sections is additive and preserves limits as a right adjoint. Preserving
-kernels and epimorphisms implies that it preserves homology, hence finite colimits.
-3. The total right derived functor of this exact functor commutes with the
-single-degree embedding. Its value on a sheaf in degree zero is thus the group of
-global sections placed in degree zero, whose positive-degree homology vanishes.
-This applies to all abelian sheaves, including every locally torsion sheaf. -/
+Source: Stacks Project, Tags 03QO, 04JQ and 04JM. -/
 theorem hasTorsionEtaleCohomologicalDimensionLE_zero_of_isSepClosed
     (K : Type u) [Field K] [IsSepClosed K] :
     HasTorsionEtaleCohomologicalDimensionLE (Spec (.of K)) 0 := by

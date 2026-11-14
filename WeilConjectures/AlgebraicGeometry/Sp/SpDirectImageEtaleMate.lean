@@ -23,9 +23,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleSiteComparisonSuppleme
 /-!
 # The normalized pro-etale transpose of the etale projection
 
-Source: blueprint main-20261015, sec-smooth-purity/sk-lem-sp-reduction,
-`sk-lem-sp-reduction-direct-image.proof.md`, Step 1; Stacks Tags 0E48 and 07A4
-(blueprint: lem-sp-direct-image-etale-mate-isomorphism).
+Source: Stacks Tags 0E48 and 07A4.
 
 All categories are ordinary uncompleted constant-ring module categories, in their
 fixed-ring sheaf presentation. The coefficient on X is written as the canonical
@@ -104,8 +102,7 @@ namespace AlgebraicGeometry.ProEtale
 open Scheme
 
 /-- B_Y in degree zero, with its A-action given by the specified ring homomorphism.
-Source: blueprint direct-image proof, Step 1; Stacks 0E48
-(blueprint: lem-sp-direct-image-etale-mate-isomorphism). -/
+Source: Stacks 0E48. -/
 def spEtaleCoefficient {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (a : A →+* B) (Y : Scheme.{u}) :
     DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A)) :=
@@ -114,11 +111,9 @@ def spEtaleCoefficient {A B : Type (u + 1)} [CommRing A] [CommRing B]
       ((ModuleCat.restrictScalars a).obj (ModuleCat.of B B)))
 
 /-- Include the recorded normalized D+ comparison into the unbounded categories.
-The four endpoint isomorphisms are the standard exact-functor and right-derived
-compatibilities with the fully faithful D+ inclusion. In particular the middle
-arrow is exactly fixedComparisonDirectImageMatePlus, not a chosen endpoint isomorphism.
-Source: blueprint direct-image proof, Step 1; Stacks 099R and 0B65
-(blueprint: lem-sp-direct-image-etale-mate-isomorphism). -/
+The middle arrow is `fixedComparisonDirectImageMatePlus`, conjugated by the standard
+compatibilities of exact and right derived functors with the D+ inclusion.
+Source: Stacks 099R and 0B65. -/
 def spDirectImageComparisonIso (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
     (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)))

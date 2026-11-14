@@ -7,8 +7,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.StrictTower.FiniteOpenBaseChangeNormalized
 public import WeilConjectures.AlgebraicGeometry.StrictTower.StrictConstantTowerOperationsSupplement
 /-! # Unit sections of the canonical compositor square
-Source: Stacks, Tags 04J0 and 07A7
-(blueprint: lem-cbc-tower-square-unit-sections).
+Source: Stacks, Tags 04J0 and 07A7.
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -20,7 +19,7 @@ attribute [-instance] CategoryTheory.catToReflQuiver
 namespace AlgebraicGeometry.ProEtale.StrictTower
 variable (B : Type (u + 1)) [CommRing B]
 /-- The canonical module adjunction unit evaluated on a section.
-Source: Stacks, Tag 04J0 (blueprint: lem-cbc-tower-square-unit-sections). -/
+Source: Stacks, Tag 04J0. -/
 def towerUnitSection {X Y : Scheme.{u}} (f : X ⟶ Y)
     (M : Modules B Y) (V : Y.ProEt) (s : M.val.obj (op V)) :
     ((modulePullback B f).obj M).val.obj (op ((Scheme.proEtaleBaseChange f).obj V)) :=

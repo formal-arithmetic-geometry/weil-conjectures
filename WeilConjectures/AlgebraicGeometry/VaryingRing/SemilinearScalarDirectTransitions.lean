@@ -9,8 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.VaryingRing.SemilinearScalarRest
 
 /-! # Transition compatibility of normalized scalar direct-image components
 
-Source: Zheng, Construction 4.1
-(blueprint: lem-sf-scalar-direct-transition-compatibility). -/
+Source: Zheng, Construction 4.1. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -83,15 +82,7 @@ private theorem scalarPushedLevel_heq (C : OrdinaryScalarRestriction R φ B ψ)
     ((Scheme.proEtaleBaseChange f).op.obj H) _).trans h
 
 /-- Normalized direct-image component maps respect the successor transitions.
-Source: Zheng, Construction 4.1
-(blueprint: lem-sf-scalar-direct-transition-compatibility).
-Proof: postcompose with the pushed level comparison, which is an isomorphism.
-On sections, the normalization hd turns the source transition into C.transitions on Y.
-The actual system pushforward changes the site coordinate by pro-etale base change;
-it leaves the horizontal successor map unchanged, since base change preserves the
-identity site arrow. Apply hd at n+1 and C.transitions on X to obtain the target
-transition. The section view of pushed morphisms identifies this with the required
-postcomposed target word. Extensionality and cancellation finish the equality. -/
+Source: Zheng, Construction 4.1. -/
 theorem ordinaryScalarDirectComponents_step (C : OrdinaryScalarRestriction R φ B ψ)
     {X Y : Scheme.{u}} (f : X ⟶ Y) (M : Modules R φ X)
     (d : ∀ n : ℕ, (((C.rho Y).obj ((push R φ f).obj M)).obj (op n)) ≅

@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
 /-! The normalized tautological quotients intertwine on affine-pair Proj charts.
 
 Source: Stacks Project, Constructions, Tags 01MY, 01N2, 01NR and 01OB.
-(blueprint: lem-trf-symmetric-proj-pullback-normalized-chart-factor)
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -481,15 +480,6 @@ attribute [local irreducible] Proj.twist
 /-- On an affine pair, the normalized pulled quotients admit an intertwining morphism.
 
 Source: Stacks Project, Constructions, Tags 01MY, 01N2, 01NR and 01OB.
-Proof: conjugate the explicit homogeneous-localization map on degree-one twists by
-both normalized chart isomorphisms and the normalized pullback-composition maps.
-The localization map takes the section iota(t)/1 to b(iota(t))/1, which `hb`
-identifies with the corresponding pulled generator. Naturality and the quotient
-normalizations give the intertwining equation on these pulled sections. Since
-sections over an affine base generate the pulled quasi-coherent module locally,
-the affine tensor-section comparison extends this equation to module morphisms.
-This works for empty charts and zero rings as well.
-(blueprint: lem-trf-symmetric-proj-pullback-normalized-chart-factor)
 -/
 theorem normalized_pullback_quotient_chart_factor
     {X S : Scheme.{u}} (g : X ⟶ S) (E : S.Modules) [E.IsQuasicoherent]

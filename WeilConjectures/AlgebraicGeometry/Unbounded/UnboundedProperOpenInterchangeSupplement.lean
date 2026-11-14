@@ -261,8 +261,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 /-!
 # Unbounded proper/open interchange and its canonical normalizations
 
-Source: Stacks Project, More on Étale Cohomology, Tags 0F7B (case (b)), 0F7C, 0F7D
-and 0F7F (blueprint: lem-amb-unbounded-proper-open-interchange).
+Source: Stacks Project, More on Étale Cohomology, Tags 0F7B (case (b)), 0F7C, 0F7D and 0F7F.
 
 The sheaf isomorphism is specified by equality of its two maps into the common direct
 image. This is precisely equality of the proper-support subsheaves, and fixes the map.
@@ -669,60 +668,7 @@ private noncomputable def constructedDerivedComparison
 set_option linter.unusedVariables false in
 /-- Unbounded proper/open interchange, including its representative, adjunction, pasting,
 identity and arbitrary base-change normalizations.
-Source: Stacks Project, Tags 0F7B, 0F7C, 0F7D and 0F7F
-(blueprint: lem-amb-unbounded-proper-open-interchange).
-
-Proof:
-
-1. Construct the normalized sheaf comparison from properSupportSheafComposition: the two paths
-through the square identify r_* followed by i_! and k_! followed by p_* with the same
-proper-support functor for k≫p=r≫i. Use the proper identifications and the open identifications,
-and cancel the common composition isomorphism to obtain exactly the stated normalization into the
-common direct image. This is exists_sheafComparison in Lean.
-Uses: lem-cbc-proper-support-sheaf-composition, def-weil-proper-morphism, def-weil-open-immersion,
-def-weil-finite-type-morphism.
-
-2. For P=p_* and K=k_!, prove the derived unit on KJ is invertible for every K-injective J.
-Resolve J by a K-injective complex Jprime whose terms are injective. The open-extended-injective
-proper-acyclicity theorem says every term of KJprime is P-acyclic. For an exact complex of
-P-acyclic objects use the adopted-source pointwise bound
-exists_isZero_upperStar_rightDerived_lowerStar_of_isProper, the joint conservativity
-isZero_of_forall_isZero_upperStar_algClosurePoint, and
-HomologicalComplex.Acyclic.map_of_rightAcyclic_of_forall_isZero. Unlike the previous global-bound
-route, the bound may depend on the geometric point. The right-acyclic complex API makes the
-canonical unit invertible on KJprime. The resolution J→Jprime is a homotopy equivalence because
-both are K-injective, so naturality transports invertibility to KJ. This is
-openExtension_derivedUnit_isIso.
-Uses: lem-cbc-open-extended-injective-proper-acyclic, lem-pur-kinjective-degreewise-existence,
-lem-kun-pointwise-finite-cd-exact-complex, lem-weil-pbc-kinjective-hom-derived,
-lem-weil-pbc-module-sheaves-grothendieck-abelian.
-
-3. Work first with four abstract abelian categories. The canonical unit alpha for RR⋙DE is
-right-derived because E is exact. The unit beta for DK⋙RP is right-derived by the K-injective
-derivability structure: beta is invertible on K-injectives by the preceding step. Apply the
-universal-property rightDerivedNatIso to the termwise descent of theta. Its factorization
-equation, together with the exact-functor factorsh comparison, gives the unit normalization on
-every homotopy object. The private NormalizedDerivedComparison record retains the constructed
-isomorphism and both proved normalizations. Its irreducible constructor constructedDerivedComparison
-builds the isomorphism directly, and its fields provide the normalization API.
-Uses: lem-weil-pbc-extension-by-zero-exact, lem-weil-pbc-kinjective-total-derived,
-lem-weil-pbc-localization-universal-property.
-
-4. Prove comparison_representative abstractly. Transport the unit normalization along
-quotientCompQhIso to the complex quotient Q, using the exact-functor factors. Apply naturality of
-the derived unit to any quasi-isomorphism rho:KJ→I with I K-injective. The
-rightDerivedFunctorObjQIso identifications on J and I turn the resulting equality into the
-representative formula of the statement. This works for every rho and J, not just the chosen
-resolutions. Apply the abstract construction to every geometric square.
-Uses: lem-weil-pbc-kinjective-total-derived, lem-weil-pbc-extension-by-zero-exact.
-
-5. Apply the independent adjunction-normalization lemma, the independent normalized
-pasting-and-identities lemma, and the independent arbitrary base-change lemma to these same global
-families theta and Gamma. Their hypotheses are respectively the proved support normalization,
-representative normalization and homotopy-unit normalization. Assemble the eight clauses without
-changing any target signature.
-Uses: lem-amb-unbounded-proper-open-adjunction-normalization,
-lem-amb-unbounded-proper-open-pasting, lem-amb-unbounded-proper-open-base-change.
+Source: Stacks Project, Tags 0F7B, 0F7C, 0F7D and 0F7F.
 -/
 theorem unboundedProperOpenInterchange (A : Type (u + 1)) [CommRing A] [Finite A] :
     ∃ (θ : ∀ {U V W Z : Scheme.{u}}

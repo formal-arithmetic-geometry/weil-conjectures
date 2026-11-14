@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
 /-! # Sections of the directed tensor matching module
 
 Source: Stacks Project, Sheaves, Tags 00AL, 00AM and 04TN; Constructions, Tag 01LI.
-(blueprint: lem-trf-directed-tensor-matching-chart-is-iso)
 -/
 
 @[expose] public section
@@ -164,7 +163,7 @@ instance tensorMatchingEvaluation_preservesLimits (V : X.Opens) :
   let : PreservesLimitsOfSize.{u, u} (E ⋙ G) := comp_preservesLimits E G
   exact comp_preservesLimits (toPresheaf X) (E ⋙ G)
 
-/-- The sections of the actual matching module are the matching families of local sections. -/
+/-- The sections of the matching module are the matching families of local sections. -/
 def tensorMatchingSectionsEquiv (V : X.Opens) :
     Γ(tensorMatchingModule 𝒰 M t, V) ≃
       ((tensorMatchingDiagram 𝒰 M t).map (tensorMatchingEvaluation V)).sections :=

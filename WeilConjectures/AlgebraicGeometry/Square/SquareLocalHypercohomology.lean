@@ -16,7 +16,6 @@ import all WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedDirectImageSecti
 /-! # Local hypercohomology of a normalized coefficient square
 
 Source: Stacks Project, Cohomology, Tags 01E4, 01FB, 0BKJ and 0D5X.
-(blueprint: lem-weil-pbc-square-local-hypercohomology).
 -/
 
 @[expose] public section
@@ -99,17 +98,7 @@ variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
 /-- Local hypercohomology of a normalized coefficient square.
-Source: Stacks Project, Cohomology, Tags 01E4, 01FB, 0BKJ and 0D5X
-(blueprint: lem-weil-pbc-square-local-hypercohomology).
-
-Proof: Factor each endpoint comparison into the classical-to-section comparison and the
-raw injective local comparison. Choose an injective replacement ell of v_*J, then extend the
-coefficient augmentation to beta:I -> L. The already proved local direct-image sections
-theorem and exact evaluation show that sections of ell are a quasi-isomorphism on U.
-The derived injective-roof action and the restricted coefficient-roof equation have the
-same numerator H(Gamma(U,beta)) and denominator H(Gamma(U,ell)). Postcompose by the inverse
-raw target comparison and this invertible denominator, use both equations, and cancel.
-The original endpoint factorizations give the required equality before sheafification. -/
+Source: Stacks Project, Cohomology, Tags 01E4, 01FB, 0BKJ and 0D5X. -/
 theorem square_localHypercohomology {X S Z T : Scheme.{u}}
     (f : X ⟶ S) (k : Z ⟶ T) (g : T ⟶ S) (v : Z ⟶ X) (h : v ≫ f = k ≫ g)
     (F : X.Modules) (G : Z.Modules) (φ : F ⟶ (pushforward v).obj G) (q : ℕ)

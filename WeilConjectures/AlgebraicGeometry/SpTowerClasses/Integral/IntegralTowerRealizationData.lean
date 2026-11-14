@@ -23,9 +23,7 @@ namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 attribute [local irreducible] Functor.mapDerivedCategory mapSingleArrow
   DerivedCategory.singleFunctors
 
-/-- Realize a degree-one ordinary sheaf arrow as an arrow between constant towers.
-Source: blueprint classes proof (2)
-(blueprint: def-sp-integral-tower-realization-data). -/
+/-- Realize a degree-one ordinary sheaf arrow as an arrow between constant towers. -/
 def normalizedConstantArrow (T : Scheme.{u})
     [hDiag : HasDerivedCategory.{u + 1} (DiagonalAb T)]
     [hAb : HasDerivedCategory.{u + 2} (Ab T)]
@@ -43,9 +41,7 @@ def normalizedConstantArrow (T : Scheme.{u})
     ((constantSheaf (Scheme.ProEt.topology T) AddCommGrpCat.{u + 1}).obj
       (AddCommGrpCat.of (ULift.{u + 1} ℤ)))
     (Scheme.proEtaleUnitsSheaf T) 1 h
-/-- An ordinary integral class together with its specified constant-tower realization.
-Source: blueprint classes proof (2)
-(blueprint: def-sp-integral-tower-realization-data). -/
+/-- An ordinary integral class together with its specified constant-tower realization. -/
 structure IntegralConstantClass (T : Scheme.{u})
     [hDiag : HasDerivedCategory.{u + 1} (DiagonalAb T)]
     [hAb : HasDerivedCategory.{u + 2} (Ab T)] where
@@ -58,9 +54,7 @@ structure IntegralConstantClass (T : Scheme.{u})
     ((DerivedCategory.singleFunctor (Ab T) 0).obj (units T))⟦(1 : ℤ)⟧
   realization : towerClass = @normalizedConstantArrow T hDiag hAb sheafClass
 
-/-- The morphism type of the derived integer comparison, with fixed localization models.
-Source: blueprint classes proof (2)
-(blueprint: def-sp-integral-tower-realization-data). -/
+/-- The morphism type of the derived integer comparison, with fixed localization models. -/
 def IntegerDerivedPullType {X Y : Scheme.{u}}
     [hAbY : HasDerivedCategory.{u + 2} (Ab Y)]
     [hAbX : HasDerivedCategory.{u + 2} (Ab X)]
@@ -69,9 +63,7 @@ def IntegerDerivedPullType {X Y : Scheme.{u}}
   P.mapDerivedCategory.obj ((DerivedCategory.singleFunctor (Ab Y) 0).obj (integers Y)) ⟶
     (DerivedCategory.singleFunctor (Ab X) 0).obj (integers X)
 
-/-- The morphism type of the derived units comparison, including its shift by one.
-Source: blueprint classes proof (2)
-(blueprint: def-sp-integral-tower-realization-data). -/
+/-- The morphism type of the derived units comparison, including its shift by one. -/
 def UnitsDerivedPullType {X Y : Scheme.{u}}
     [hAbY : HasDerivedCategory.{u + 2} (Ab Y)]
     [hAbX : HasDerivedCategory.{u + 2} (Ab X)]
@@ -81,9 +73,7 @@ def UnitsDerivedPullType {X Y : Scheme.{u}}
     (((DerivedCategory.singleFunctor (Ab Y) 0).obj (units Y))⟦(1 : ℤ)⟧) ⟶
     ((DerivedCategory.singleFunctor (Ab X) 0).obj (units X))⟦(1 : ℤ)⟧
 
-/-- The canonical derived integer comparison associated to an ordinary tower map.
-Source: blueprint classes proof (2)
-(blueprint: def-sp-integral-tower-realization-data). -/
+/-- The canonical derived integer comparison associated to an ordinary tower map. -/
 def normalizedIntegerComparison {X Y : Scheme.{u}}
     [hAbY : HasDerivedCategory.{u + 2} (Ab Y)]
     [hAbX : HasDerivedCategory.{u + 2} (Ab X)]
@@ -92,9 +82,7 @@ def normalizedIntegerComparison {X Y : Scheme.{u}}
     IntegerDerivedPullType P :=
   derivedSingleEndpoint P s
 
-/-- The canonical shifted derived units comparison associated to an ordinary tower map.
-Source: blueprint classes proof (2)
-(blueprint: def-sp-integral-tower-realization-data). -/
+/-- The canonical shifted derived units comparison associated to an ordinary tower map. -/
 def normalizedUnitsComparison {X Y : Scheme.{u}}
     [hAbY : HasDerivedCategory.{u + 2} (Ab Y)]
     [hAbX : HasDerivedCategory.{u + 2} (Ab X)]
@@ -106,9 +94,7 @@ def normalizedUnitsComparison {X Y : Scheme.{u}}
 attribute [local instance 100000] abDerived
 
 /-- The line-bundle class with its defining ordinary sheaf realization.
-The realization equality follows by unfolding the two definitions.
-Source: blueprint classes proof (2)
-(blueprint: def-sp-integral-tower-realization-data). -/
+The realization equality follows by unfolding the two definitions. -/
 def towerIntegral_realizedClass (T : Scheme.{u}) (L : T.Pic) :
     IntegralConstantClass T where
   sheafClass := lineBundleEtaleClass T L

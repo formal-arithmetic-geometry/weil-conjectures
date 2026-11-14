@@ -67,9 +67,7 @@ import WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicCompletionCompletedS
 /-!
 # The completed coefficient ring on the canonical small site
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E,
-lemma-derived-completion-koszul, and sites-cohomology.tex, Tags 0941 and 0A0A.
-(blueprint: def-weil-pbc-completed-cech-site-transport).
+Source: Stacks Project, algebraization.tex, Tag 0A0E, and sites-cohomology.tex, Tags 0941 and 0A0A.
 
 The site, module, derived and scalar transports are constructed here. The regular-module
 unit is the transported section 1. The finite Koszul comparison is proved in its own
@@ -87,31 +85,26 @@ namespace AlgebraicGeometry.Scheme
 variable (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 
 /-- The pro-etale category with its morphisms lifted to the coefficient universe.
-Source: Stacks, Tag 0A0E, with the canonical equivalence of ringed sites
-(blueprint: def-weil-pbc-completed-cech-site-transport). -/
+Source: Stacks, Tag 0A0E, with the canonical equivalence of ringed sites. -/
 abbrev completedCechSite := AsSmall.{0} X.ProEt
 
 /-- The canonical equivalence with the category whose Hom universe has been lifted.
-Source: Stacks, Tag 0A0E, with the canonical equivalence of ringed sites
-(blueprint: def-weil-pbc-completed-cech-site-transport). -/
+Source: Stacks, Tag 0A0E, with the canonical equivalence of ringed sites. -/
 abbrev completedCechSiteEquiv : X.ProEt ≌ completedCechSite X := AsSmall.equiv
 
 /-- The topology induced along the inverse of the canonical site equivalence.
-Source: Stacks, Tag 0A0E, with the canonical equivalence of ringed sites
-(blueprint: def-weil-pbc-completed-cech-site-transport). -/
+Source: Stacks, Tag 0A0E, with the canonical equivalence of ringed sites. -/
 abbrev completedCechTopology :=
   (completedCechSiteEquiv X).inverse.inducedTopology (ProEt.topology X)
 
 /-- The actual completed ring sheaf pulled to the canonical small site.
-Source: Stacks, Tag 0A0E, with the canonical equivalence of ringed sites
-(blueprint: def-weil-pbc-completed-cech-site-transport). -/
+Source: Stacks, Tag 0A0E, with the canonical equivalence of ringed sites. -/
 abbrev completedCechRing : Sheaf (completedCechTopology X) CommRingCat.{u + 1} :=
   ((completedCechSiteEquiv X).inverse.sheafPushforwardContinuous CommRingCat.{u + 1}
     (completedCechTopology X) (ProEt.topology X)).obj (pbcAdicCompletion X d)
 
 /-- The module-sheaf equivalence induced by the canonical ringed-site equivalence.
-Source: Stacks, Tag 0A0E, with the canonical equivalence of ringed sites
-(blueprint: def-weil-pbc-completed-cech-site-transport). -/
+Source: Stacks, Tag 0A0E, with the canonical equivalence of ringed sites. -/
 def completedCechModulesEquiv :
     pbcModules X (pbcAdicCompletion X d) ≌ ringedSiteModules.{u + 1, u + 1, u + 1, u + 1}
       ((sheafCompose (completedCechTopology X)
@@ -145,29 +138,25 @@ def completedCechModulesEquiv :
   exact (SheafOfModules.pushforwardPushforwardEquivalence.{u + 1} e φ ψ h₁ h₂).symm
 
 /-- The standard derived category in the original ambient derived universe.
-Source: Stacks, Tag 0A0E, with the canonical equivalence of ringed sites
-(blueprint: def-weil-pbc-completed-cech-site-transport). -/
+Source: Stacks, Tag 0A0E, with the canonical equivalence of ringed sites. -/
 instance : HasDerivedCategory.{u + 2} (ringedSiteModules.{u + 1, u + 1, u + 1, u + 1}
     ((sheafCompose (completedCechTopology X)
         (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
       (completedCechRing X d))) := HasDerivedCategory.standard _
 
 /-- The exact module equivalence is additive because it preserves products and zero.
-Source: Stacks, Tag 0A0E, with the canonical equivalence of ringed sites
-(blueprint: def-weil-pbc-completed-cech-site-transport). -/
+Source: Stacks, Tag 0A0E, with the canonical equivalence of ringed sites. -/
 instance : (completedCechModulesEquiv X d).functor.Additive := by
   exact Functor.additive_of_preserves_binary_products _
 
 /-- The equivalence induced on unbounded derived categories by the module equivalence.
-Source: Stacks, Tag 0A0E, with the canonical equivalence of ringed sites
-(blueprint: def-weil-pbc-completed-cech-site-transport). -/
+Source: Stacks, Tag 0A0E, with the canonical equivalence of ringed sites. -/
 def completedCechDerivedEquiv : PbcCompletedDerived X d ≌
     ringedSiteDerived.{u + 1, u + 2} (completedCechRing X d) :=
   (completedCechModulesEquiv X d).mapDerivedCategory
 
 /-- The compatible-residue scalar map, followed by the fixed coefficient comparison.
-Source: Stacks, Tag 0A0E, with the canonical equivalence of ringed sites
-(blueprint: def-weil-pbc-completed-cech-site-transport). -/
+Source: Stacks, Tag 0A0E, with the canonical equivalence of ringed sites. -/
 def completedCechScalarMap :
     (Functor.const (completedCechSite X)ᵒᵖ).obj (CommRingCat.of A) ⟶
       (completedCechRing X d).obj :=
@@ -177,8 +166,7 @@ def completedCechScalarMap :
         (pbcCompletedComparison X d).hom.hom)
 
 /-- The actual compatible-residue scalar as a global section on the canonical small site.
-Source: Stacks, Tag 0A0E, with the canonical equivalence of ringed sites
-(blueprint: def-weil-pbc-completed-cech-site-transport). -/
+Source: Stacks, Tag 0A0E, with the canonical equivalence of ringed sites. -/
 def completedCechScalar (a : A) :
     ((completedCechRing X d).obj ⋙ CategoryTheory.forget CommRingCat.{u + 1}).sections := by
   refine ⟨fun U ↦ (completedCechScalarMap X d).app U a, ?_⟩
@@ -186,8 +174,7 @@ def completedCechScalar (a : A) :
   exact congrArg (fun g ↦ g a) ((completedCechScalarMap X d).naturality f).symm
 
 /-- The strict-tower derived category in the same ambient universe.
-Source: Stacks, Tag 0941
-(blueprint: def-weil-pbc-completed-cech-site-transport). -/
+Source: Stacks, Tag 0941. -/
 instance : HasDerivedCategory.{u + 2} (ℕᵒᵖ ⥤
     ringedSiteModules.{u + 1, u + 1, u + 1, u + 1}
       ((sheafCompose (completedCechTopology X)
@@ -201,8 +188,7 @@ namespace AlgebraicGeometry.Scheme
 variable (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 
 /-- The transported regular-module unit, given by the section 1.
-Source: Stacks Project, Tag 03DA, restriction along a ring isomorphism and site equivalence
-(blueprint: def-weil-pbc-completed-cech-site-transport). -/
+Source: Stacks Project, Tag 03DA, restriction along a ring isomorphism and site equivalence. -/
 def completedCechCoefficientUnit :
     SheafOfModules.unit ((sheafCompose (completedCechTopology X)
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (completedCechRing X d)) ⟶

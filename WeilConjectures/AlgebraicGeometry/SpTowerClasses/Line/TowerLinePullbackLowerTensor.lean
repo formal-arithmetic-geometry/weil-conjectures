@@ -197,20 +197,6 @@ private theorem map_conjugate
 /-- A normalized comparison at the lower level computes the adjunct of the lower
 path on each higher-level pure tensor. No comparison at the higher level, target
 Chern datum, system isomorphism, or horizontal square is assumed or constructed.
-
-Source: current classes blueprint, clause (2), scalar extension of the roots tower;
-step 2 of lem-sfb-tower-class-line-pullback-horizontal.
-(blueprint: lem-sfb-tower-line-pullback-lower-tensor).
-
-Proof: the ordinaryUnitTransition equation of the repaired Geometry interface
-identifies the finite adjunct of the lower horizontal restriction with the lower-level
-unit precomposed with the Y transition. Naturality of the finite adjunction and
-lineEvaluation_transition_tensor reduce the path on a unit tensor to the assumed
-level-n unit-tensor normalization. The root direct-image maps form a natural
-transformation of towers: their section formula is restriction along a ring map,
-which preserves powers. Its naturality identifies the resulting root with the X
-tower transition of the restricted root. The calculation includes empty charts and
-equal indices. Only unit tensors are needed for the finite-line universal property.
 -/
 theorem linePullback_lower_tensor
     {b : SpTowerShriek.Base l E} {X Y : Scheme.{u}} (f : X ⟶ Y)

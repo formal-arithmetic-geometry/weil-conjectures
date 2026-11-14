@@ -14,11 +14,10 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triang
 
 /-! # Exact completed-coefficient tower functors and their Roos presentation
 
-Source: latest blueprint, chap-Smooth-purity, sk-lem-sp-tower-equivalence.proof.md,
-Adjunction paragraph; Stacks 0941 (blueprint: lem-sp-completed-tower-roos).
+Source: Stacks 0941.
 
-The five completed-tower constructions are moved verbatim from
-SmoothPurityNormalizedEquivalence. Evaluation proves exactness of scalar forgetting.
+This file defines the completed-coefficient tower functors (scalar forgetting, reduction,
+total derived inverse limit and its projections) and shows that scalar forgetting is exact.
 -/
 
 @[expose] public noncomputable section
@@ -31,16 +30,14 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{u})
 
 /-- Forget the finite-level actions to completed coefficients, retaining all strict
-transitions. Source: blueprint, definition of L_T (blueprint:
-lemma-sp-tower-adjunction-foundation). -/
+transitions. -/
 def spCompletedStrictTower (D : SpCoefficientTowersAbelian l E T) :
     spCoefficientTowers l E T ⥤
       (ℕᵒᵖ ⥤ WeilConjectures.scalarReductionSource.{u, u} l E T) :=
   (Functor.ofOpSequence (spCompletedTransition l E T D)).flip
 
 /-- The coefficient-ring identification transports the existing reduction functor
-from section modules to modules over the completed ring. Source: blueprint, r_T
-(blueprint: lemma-sp-tower-adjunction-foundation). -/
+from section modules to modules over the completed ring. -/
 def spCompletedReduction (D : SpCoefficientTowersAbelian l E T)
     (R : SpReductionTower l E T D) :
     DerivedCategory (WeilConjectures.scalarReductionSource.{u, u} l E T) ⥤
@@ -51,8 +48,7 @@ def spCompletedReduction (D : SpCoefficientTowersAbelian l E T)
 
 /-- Total derived inverse limit after the exact scalar-forgetting functor. The
 fixed-ring limit is the existing K-injective total derived inverse limit, including its
-resolution-normalized projections. Source: blueprint, L_T; Stacks 0941
-(blueprint: lemma-sp-tower-adjunction-foundation). -/
+resolution-normalized projections. Source: Stacks 0941. -/
 def spCompletedTotalLimit (D : SpCoefficientTowersAbelian l E T)
     [(spCompletedStrictTower l E T D).Additive]
     [PreservesFiniteLimits (spCompletedStrictTower l E T D)]
@@ -64,8 +60,7 @@ def spCompletedTotalLimit (D : SpCoefficientTowersAbelian l E T)
     WeilConjectures.coefficientConstantTowerLimit l E T
 
 /-- Exact evaluation commutes with forgetting the finite-level coefficient actions.
-The comparison is the canonical localization comparison for the two exact composites.
-Source: blueprint, definition of L_T (blueprint: lemma-sp-tower-adjunction-foundation). -/
+The comparison is the canonical localization comparison for the two exact composites. -/
 def spCompletedForgettingEvaluationIso (D : SpCoefficientTowersAbelian l E T)
     [(spCompletedStrictTower l E T D).Additive]
     [PreservesFiniteLimits (spCompletedStrictTower l E T D)]
@@ -85,8 +80,7 @@ def spCompletedForgettingEvaluationIso (D : SpCoefficientTowersAbelian l E T)
       (spCompletedEllRestriction l E T n)).symm
 
 /-- The actual total-limit projection to each completed-coefficient level. Its
-normalization comes from the existing projection on simultaneous K-injective towers.
-Source: blueprint, total limit and its counit (blueprint: lemma-sp-tower-adjunction-foundation). -/
+normalization comes from the existing projection on simultaneous K-injective towers. -/
 def spCompletedTotalProjection (D : SpCoefficientTowersAbelian l E T)
     [(spCompletedStrictTower l E T D).Additive]
     [PreservesFiniteLimits (spCompletedStrictTower l E T D)]

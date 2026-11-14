@@ -11,8 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 import WeilConjectures.AlgebraicGeometry.SymmetricProjTautologicalCharts.SymmetricProjPullbackGeneratorLocalCoefficients
 import WeilConjectures.AlgebraicGeometry.SymmetricProjTautologicalCharts.SymmetricProjCrossTensorFromLocal
 
-/-! # Degree-two relation on pulled module generators
-(blueprint: lem-trf-symmetric-proj-pullback-generator-cross-tensor).
+/-! # Degree-two relation on pulled module generators.
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -27,31 +26,7 @@ open Scheme.Modules CategoryTheory.MonoidalCategory
 
 /-- The degree-two cross relation on actual pulled generators over affine opens.
 
-Source: Stacks Project, Constructions, Tags 01N2 (lemma-base-change-map-proj),
-01NQ (lemma-relative-proj-base-change), 01NR (lemma-glue-relative-proj-twists),
-and 01OB (definition-projective-bundle).
-(blueprint: lem-trf-symmetric-proj-pullback-generator-cross-tensor).
-
-Proof: refine W by inverse images of affine-pair charts for g and by their
-standard opens D_+(b(iota(v))). They cover: the degree-one base-change condition
-says that the images of the old degree-one elements span the new degree-one
-part, so a homogeneous prime containing all images contains the irrelevant ideal.
-On such a standard open, the chart normalization D.generator writes the image
-of a pulled generator m as iota(m)/iota(v) times the pulled old twist frame.
-The new chart normalization D'.generator writes its image as
-b(iota(m))/b(iota(v)) times the new frame, by hb. The fraction formula for the
-Proj map identifies the pulled old coefficient with this new coefficient.
-Thus the two displayed tensors have respective coefficients c_m*c_n and c_n*c_m
-in the same tensor of the two frames; they agree by commutativity. The
-section-normalized pullback composition and its unit equation identify the
-sections with m' and n', including the equality transport e; proof irrelevance
-makes the choice of equality proof immaterial. Where U and an affine pair's
-base open differ, refine their intersection by affine opens and apply the same
-calculation to restricted m and n. Separation of the tensor sheaf glues the
-identity on W. Empty standard opens and zero coefficient rings satisfy the
-same equality. This proves only the formula for the specified pulled generators;
-no extension to arbitrary sections, free-frame atlas or line isomorphism is
-asserted. -/
+Source: Stacks Project, Constructions, Tags 01N2, 01NQ, 01NR, and 01OB. -/
 theorem normalized_pullback_generator_cross_tensor
     {X S : Scheme.{u}} (g : X ⟶ S) (E : S.Modules) [E.IsQuasicoherent]
     [((Scheme.Modules.tensorPullback g).obj E).IsQuasicoherent]

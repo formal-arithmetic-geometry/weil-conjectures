@@ -45,14 +45,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 /-- The inverse-image map defined from the pro-etale adjunction is the adjoint of the
 constant direct-image map.
 
-Source: Stacks Project, Tag 00WX; this is the adjunction compatibility used in the
-integer endpoint calculation.
-(blueprint: lem-sp-integral-site-pullback-integer-endpoint-inverse-image).
-
-Proof: expand `proEtaleConstantInverseImageMap`.  The hom-set equivalence for the
-pro-etale inverse-image adjunction sends the counit composite back to its defining
-direct-image map by `Adjunction.homEquiv_counit`; the two adjunction presentations
-have the same sheaf-pullback construction. -/
+Source: Stacks Project, Tag 00WX. -/
 theorem integral_site_pullback_integer_endpoint_inverse_image {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).homEquiv _ _).symm
         (Scheme.proEtaleConstantDirectImageMap f AddCommGrpCat.{u + 1}

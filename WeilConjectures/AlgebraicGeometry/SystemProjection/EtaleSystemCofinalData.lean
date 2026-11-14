@@ -84,9 +84,7 @@ import Mathlib.CategoryTheory.Functor.Derived.PointwiseRightDerived
 
 /-! # Cofinal restriction and the compact-support adjunction mate
 
-Source: Zheng, Construction 4.1 and Lemma 5.22, printed pp. 21 and 36;
-the finite-block and arbitrary finite-coefficient extension in the DAG
-(blueprint: lem-pur-etale-system-cofinal-mate).
+Source: Zheng, Construction 4.1 and Lemma 5.22, printed pp. 21 and 36.
 
 The index n denotes positive level n+1. All categories are ordinary unbounded
 localizations of actual strict systems. No cartesianness or flatness is imposed.
@@ -108,7 +106,7 @@ open WeilConjectures.SemilinearSections
 namespace AlgebraicGeometry.Etale.SystemProjection
 
 /-- Restrict the coefficient tower, retaining its actual composite maps.
-Source: Zheng 4.1 (blueprint: lem-pur-etale-system-cofinal-mate). -/
+Source: Zheng 4.1. -/
 def cofinalCoefficients {l : ℕ} (B : Coefficients.{u} l) (r : ℕ ↪o ℕ) :
     Coefficients.{u} l where
   rings := r.toOrderHom.toFunctor.op ⋙ B.rings
@@ -116,12 +114,12 @@ def cofinalCoefficients {l : ℕ} (B : Coefficients.{u} l) (r : ℕ ↪o ℕ) :
   torsion n := B.torsion (r n)
 
 /-- Reindex the sequence site by the given increasing function.
-Source: Zheng 4.1 (blueprint: lem-pur-etale-system-cofinal-mate). -/
+Source: Zheng 4.1. -/
 def cofinalSite (W : Scheme.{u}) (r : ℕ ↪o ℕ) : ℕ × W.Etale ⥤ ℕ × W.Etale :=
   r.toOrderHom.toFunctor.prod (𝟭 W.Etale)
 
 /-- The canonical continuity witness.
-Source: Zheng 4.1 (blueprint: lem-pur-etale-system-cofinal-mate). -/
+Source: Zheng 4.1. -/
 instance cofinalSiteContinuous (W : Scheme.{u}) (r : ℕ ↪o ℕ) :
     (cofinalSite W r).IsContinuous
       (WeilConjectures.coefficientSequenceTopology W.smallEtaleTopology)
@@ -149,9 +147,7 @@ private theorem cofinalCoefficientRings (W : Scheme.{u})
   simpa only [NatTrans.ofOpSequence_app, Category.id_comp, Category.comp_id] using hh
 
 /-- The structural ring map for restriction is the identity at selected levels.
-Source: Zheng 4.1 (blueprint: lem-pur-etale-system-cofinal-mate).
-Proof: unfold the sequence ring. The value at (i,U) is C_(r(i))(U) on both
-sides. Functoriality identifies horizontal composites; vertical maps are unchanged. -/
+Source: Zheng 4.1. -/
 theorem cofinalRing (W : Scheme.{u}) {l : ℕ} (B : Coefficients.{u} l)
     (r : ℕ ↪o ℕ) :
     ((cofinalSite W r).sheafPushforwardContinuous RingCat.{u + 1}
@@ -171,7 +167,7 @@ theorem cofinalRing (W : Scheme.{u}) {l : ℕ} (B : Coefficients.{u} l)
   rfl
 
 /-- Actual restriction of module sheaves on the sequence site, including all maps.
-Source: Zheng 4.1 (blueprint: lem-pur-etale-system-cofinal-mate). -/
+Source: Zheng 4.1. -/
 def cofinalRestriction (W : Scheme.{u}) {l : ℕ} (B : Coefficients.{u} l)
     (r : ℕ ↪o ℕ) : Modules W B.rings ⥤ Modules W (cofinalCoefficients B r).rings :=
   SheafOfModules.pushforward (F := cofinalSite W r) (eqToHom (cofinalRing W B r).symm)
@@ -213,9 +209,7 @@ private theorem cofinalPushforward_exact (W : Scheme.{u}) (r : ℕ ↪o ℕ)
     exact preservesFiniteColimits_of_reflects_of_preserves _ T
 
 /-- Restriction is exact and additive because kernels, cokernels and addition are
-componentwise. Source: Zheng 4.1 (blueprint: lem-pur-etale-system-cofinal-mate).
-Proof: restriction selects the same components in every finite diagram. Kernels
-are termwise and cokernels are vertical sheafifications, which commute with selection. -/
+componentwise. Source: Zheng 4.1. -/
 theorem cofinalRestriction_exact (W : Scheme.{u}) {l : ℕ} (B : Coefficients.{u} l)
     (r : ℕ ↪o ℕ) :
     (cofinalRestriction W B r).Additive ∧
@@ -224,36 +218,36 @@ theorem cofinalRestriction_exact (W : Scheme.{u}) {l : ℕ} (B : Coefficients.{u
   exact cofinalPushforward_exact W r (eqToHom (cofinalRing W B r).symm)
 
 /-- Additivity witness for exact localization.
-Source: Zheng 4.1 (blueprint: lem-pur-etale-system-cofinal-mate). -/
+Source: Zheng 4.1. -/
 instance cofinalRestrictionAdditive (W : Scheme.{u}) {l : ℕ} (B : Coefficients.{u} l)
     (r : ℕ ↪o ℕ) : (cofinalRestriction W B r).Additive :=
   (cofinalRestriction_exact W B r).1
 
 /-- Finite-limit witness for exact localization.
-Source: Zheng 4.1 (blueprint: lem-pur-etale-system-cofinal-mate). -/
+Source: Zheng 4.1. -/
 instance cofinalRestrictionLimits (W : Scheme.{u}) {l : ℕ} (B : Coefficients.{u} l)
     (r : ℕ ↪o ℕ) : PreservesFiniteLimits (cofinalRestriction W B r) :=
   (cofinalRestriction_exact W B r).2.1
 
 /-- Finite-colimit witness for exact localization.
-Source: Zheng 4.1 (blueprint: lem-pur-etale-system-cofinal-mate). -/
+Source: Zheng 4.1. -/
 instance cofinalRestrictionColimits (W : Scheme.{u}) {l : ℕ} (B : Coefficients.{u} l)
     (r : ℕ ↪o ℕ) : PreservesFiniteColimits (cofinalRestriction W B r) :=
   (cofinalRestriction_exact W B r).2.2
 
 /-- Restriction on the ordinary unbounded derived categories.
-Source: Zheng 4.1 (blueprint: lem-pur-etale-system-cofinal-mate). -/
+Source: Zheng 4.1. -/
 abbrev cofinalU (W : Scheme.{u}) {l : ℕ} (B : Coefficients.{u} l) (r : ℕ ↪o ℕ) :=
   (cofinalRestriction W B r).mapDerivedCategory
 
 /-- K-flat representatives on the actual ringed sequence site.
-Source: Zheng 4.1; Stacks 06YS (blueprint: lem-pur-etale-system-cofinal-mate). -/
+Source: Zheng 4.1; Stacks 06YS. -/
 def cofinalResolving (W : Scheme.{u}) {l : ℕ} (B : Coefficients.{u} l)
     (P : CochainComplex (Modules W B.rings) ℤ) : Prop :=
   CochainComplex.IsKFlatIndependentCoefficients (R := rings W B.rings) P
 
 /-- The normalized right-adjoint comparison of the two composite adjunctions.
-Source: Zheng 5.22 (blueprint: lem-pur-etale-system-cofinal-mate).
+Source: Zheng 5.22.
 Its data are constructed by counit-compatible uniqueness, not chosen from existence. -/
 def cofinalMate
     {A : Type a} [Category.{av} A] {B : Type b} [Category.{bv} B]
@@ -265,14 +259,13 @@ def cofinalMate
   (x.comp f).rightAdjointUniq ((g.comp y).ofNatIsoLeft h.symm)
 
 /-- The ordinary coefficient functor on the small etale site.
-Source: Zheng 4.1 (blueprint: lem-pur-etale-system-cofinal-mate). -/
+Source: Zheng 4.1. -/
 abbrev cofinalSheafRings (W : Scheme.{u}) {l : ℕ} (B : Coefficients.{u} l) :
     ℕᵒᵖ ⥤ Sheaf W.smallEtaleTopology CommRingCat.{u + 1} :=
   B.rings ⋙ constantSheaf W.smallEtaleTopology CommRingCat.{u + 1}
 
 /-- Identity-on-sections equivalence between the two recorded strict-system encodings.
-This is presentation data for the same category, not a replacement notion of system.
-Source: Zheng 4.1 (blueprint: lem-pur-etale-system-cofinal-mate). -/
+Source: Zheng 4.1. -/
 structure CofinalEncoding (W : Scheme.{u}) {l : ℕ} (B : Coefficients.{u} l) where
   equivalence : Modules W B.rings ≌
     SheafOfModules.StrictRingSystem.{u + 1, u, u + 1} (cofinalSheafRings W B)
@@ -287,14 +280,14 @@ structure CofinalEncoding (W : Scheme.{u}) {l : ℕ} (B : Coefficients.{u} l) wh
       (fun x ↦ M.val.map (Prod.mkHom (homOfLE h) (𝟙 U.unop)).op x)
 
 /-- Termwise evaluation with the exactness witnesses of the recorded evaluation.
-Source: Zheng 4.1 (blueprint: lem-pur-etale-system-cofinal-mate). -/
+Source: Zheng 4.1. -/
 def Evaluation.cofinalComplex {W : Scheme.{u}} {B : ℕᵒᵖ ⥤ CommRingCat.{u + 1}} {n : ℕ}
     (e : Evaluation W B n) :=
   letI := e.additive
   (level W B n).mapHomologicalComplex (.up ℤ)
 
 /-- The canonical exact-evaluation comparison on cochain representatives.
-Source: Zheng 4.1 (blueprint: lem-pur-etale-system-cofinal-mate). -/
+Source: Zheng 4.1. -/
 def Evaluation.cofinalFactor {W : Scheme.{u}} {B : ℕᵒᵖ ⥤ CommRingCat.{u + 1}} {n : ℕ}
     (e : Evaluation W B n) : DerivedCategory.Q ⋙ e.E ≅
       e.cofinalComplex ⋙ DerivedCategory.Q :=
@@ -304,7 +297,7 @@ def Evaluation.cofinalFactor {W : Scheme.{u}} {B : ℕᵒᵖ ⥤ CommRingCat.{u 
   (level W B n).mapDerivedCategoryFactors
 
 /-- The ordinary selected tensor comparison on actual cochain representatives.
-Source: Zheng 4.1 (blueprint: lem-pur-etale-system-cofinal-mate). -/
+Source: Zheng 4.1. -/
 def cofinalLevelComplex {W : Scheme.{u}} {l : ℕ} {B : Coefficients.{u} l} {r : ℕ ↪o ℕ}
     (F : Modules W (cofinalCoefficients B r).rings ⥤ Modules W B.rings) [F.Additive]
     (m : ℕ) (eb : Evaluation W B.rings m)
@@ -323,7 +316,7 @@ def cofinalLevelComplex {W : Scheme.{u}} {l : ℕ} {B : Coefficients.{u} l} {r :
   exact (NatIso.mapHomologicalComplex o (.up ℤ)).app P
 
 /-- Ordinary tensor-adjunction normalization at every selected level.
-Source: Zheng 4.1 (blueprint: lem-pur-etale-system-cofinal-mate). -/
+Source: Zheng 4.1. -/
 def cofinalOrdinaryLevelUnit {W : Scheme.{u}} {l : ℕ} {B : Coefficients.{u} l}
     {r : ℕ ↪o ℕ}
     (model : SheafOfModules.SystemDerivedLeftExtension (cofinalRestriction W B r)
@@ -346,7 +339,7 @@ def cofinalOrdinaryLevelUnit {W : Scheme.{u}} {l : ℕ} {B : Coefficients.{u} l}
           (op (SheafOfModules.systemNextSelected r m, U.unop))).hom.toFun)
 
 /-- Normalization of derived evaluation by its universal cochain comparison.
-Source: Zheng 4.1 (blueprint: lem-pur-etale-system-cofinal-mate). -/
+Source: Zheng 4.1. -/
 def cofinalLevelNormalization {W : Scheme.{u}} {l : ℕ} {B : Coefficients.{u} l}
     {r : ℕ ↪o ℕ}
     (model : SheafOfModules.SystemDerivedLeftExtension (cofinalRestriction W B r)
@@ -375,10 +368,9 @@ def cofinalLevelNormalization {W : Scheme.{u}} {l : ℕ} {B : Coefficients.{u} l
         eb.cofinalFactor.hom.app ((model.ordinary.mapHomologicalComplex (.up ℤ)).obj P) ≫
         DerivedCategory.Q.map (cofinalLevelComplex model.ordinary m eb er (ordinaryLevel m) P).hom
 
-/-- A selected left extension on the sequence-site encoding. Its ordinary functor
-is identified with the recorded selected extension, so all transitions and tensor
-associators, including repeated least indices, are retained before derivation.
-Source: Zheng 4.1 (blueprint: lem-pur-etale-system-cofinal-mate). -/
+/-- A selected left extension on the sequence-site encoding, whose ordinary
+functor is identified with the given selected extension.
+Source: Zheng 4.1. -/
 structure CofinalExtension (W : Scheme.{u}) {l : ℕ} (B : Coefficients.{u} l)
     (r : ℕ ↪o ℕ) where
   base : CofinalEncoding W B
@@ -403,7 +395,7 @@ structure CofinalExtension (W : Scheme.{u}) {l : ℕ} (B : Coefficients.{u} l)
     model ordinaryLevel level
 
 /-- Cofinal restriction composition, normalized by the identity on selected sections.
-Source: Zheng 4.1 (blueprint: lem-pur-etale-system-cofinal-mate). -/
+Source: Zheng 4.1. -/
 structure CofinalComposition (W : Scheme.{u}) {l : ℕ} (B : Coefficients.{u} l)
     (r s : ℕ ↪o ℕ) where
   ordinary : cofinalRestriction W B r ⋙
@@ -415,20 +407,20 @@ structure CofinalComposition (W : Scheme.{u}) {l : ℕ} (B : Coefficients.{u} l)
     HEq (((ordinary.hom.app M).val.app (op (n, U.unop))) x) x
 
 /-- Derived restriction composition is the exact localization of the ordinary compositor.
-Source: Zheng 4.1 (blueprint: lem-pur-etale-system-cofinal-mate). -/
+Source: Zheng 4.1. -/
 def CofinalComposition.derived {W : Scheme.{u}} {l : ℕ} {B : Coefficients.{u} l}
     {r s : ℕ ↪o ℕ} (a : CofinalComposition W B r s) :
     cofinalU W B r ⋙ cofinalU W (cofinalCoefficients B r) s ≅
       cofinalU W B (s.trans r) := Functor.mapDerivedCategoryCompNatIso a.ordinary
 
 /-- The least-selected index as a monotone map, including constant finite blocks.
-Source: Zheng 4.1 (blueprint: lem-pur-etale-system-cofinal-mate). -/
+Source: Zheng 4.1. -/
 def cofinalNext (r : ℕ ↪o ℕ) : ℕ →o ℕ :=
   ⟨SheafOfModules.systemNextSelected r, fun _ _ h ↦
     SheafOfModules.systemNextSelected_monotone r h⟩
 
 /-- The intermediate tower D_m=C_(r(t(m))).
-Source: Zheng 4.1 (blueprint: lem-pur-etale-system-cofinal-mate). -/
+Source: Zheng 4.1. -/
 def cofinalRepeated {l : ℕ} (B : Coefficients.{u} l) (r : ℕ ↪o ℕ) :
     Coefficients.{u} l where
   rings := (cofinalNext r).toFunctor.op ⋙ (cofinalCoefficients B r).rings
@@ -436,9 +428,7 @@ def cofinalRepeated {l : ℕ} (B : Coefficients.{u} l) (r : ℕ ↪o ℕ) :
   torsion n := B.torsion (r (SheafOfModules.systemNextSelected r n))
 
 /-- Naturality of the selected quotient transitions D_m→C_m.
-Source: Zheng 4.1 (blueprint: lem-pur-etale-system-cofinal-mate).
-Proof: both composites are the ring map of B for the unique inequality
-m≤r(t(n)); use functoriality and monotonicity of t. -/
+Source: Zheng 4.1. -/
 theorem cofinalCoefficient_naturality {l : ℕ} (B : Coefficients.{u} l) (r : ℕ ↪o ℕ)
     {m n : ℕᵒᵖ} (f : m ⟶ n) :
     (cofinalRepeated B r).rings.map f ≫
@@ -449,16 +439,15 @@ theorem cofinalCoefficient_naturality {l : ℕ} (B : Coefficients.{u} l) (r : �
   rw [← B.rings.map_comp, ← B.rings.map_comp]
   congr 1
 
-/-- The actual map D→C, not an unspecified coefficient morphism.
-Source: Zheng 4.1 (blueprint: lem-pur-etale-system-cofinal-mate). -/
+/-- The coefficient map D→C induced by restriction along `r`.
+Source: Zheng 4.1. -/
 def cofinalCoefficient {l : ℕ} (B : Coefficients.{u} l) (r : ℕ ↪o ℕ) :
     (cofinalRepeated B r).rings ⟶ B.rings where
   app m := B.rings.map (homOfLE (SheafOfModules.systemNextSelected_spec r m.unop).1).op
   naturality := fun _ _ f ↦ cofinalCoefficient_naturality B r f
 
 /-- Repetition at t(m), specified on module sections, all restrictions and maps.
-These data specify the actual block functor of the recorded block-repetition lemma.
-Source: Zheng 4.1 (blueprint: lem-pur-etale-system-cofinal-mate). -/
+Source: Zheng 4.1. -/
 structure CofinalRepeat (W : Scheme.{u}) {l : ℕ} (B : Coefficients.{u} l)
     (r : ℕ ↪o ℕ) where
   R : Modules W (cofinalCoefficients B r).rings ⥤ Modules W (cofinalRepeated B r).rings
@@ -480,9 +469,7 @@ structure CofinalRepeat (W : Scheme.{u}) {l : ℕ} (B : Coefficients.{u} l)
 attribute [instance] CofinalRepeat.additive CofinalRepeat.limits CofinalRepeat.colimits
 
 /-- Normalized geometric repetition on the fixed compactification, before localization.
-The derived comparison is built by the universal derived functor construction below.
-Source: Zheng 4.1, paragraph before 4.10
-(blueprint: lem-pur-etale-system-cofinal-mate). -/
+Source: Zheng 4.1, paragraph before 4.10. -/
 structure CofinalRepeatSupport {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactification f}
     {l : ℕ} (T : Theory c l) (B : Coefficients.{u} l) (r : ℕ ↪o ℕ) where
   x : CofinalRepeat X B r
@@ -504,8 +491,7 @@ structure CofinalRepeatSupport {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactific
 
 /-- The canonical kappa for repetition: exact open comparison followed by the
 universal total-right-derived proper comparison. It is specified before evaluation.
-Source: Zheng 4.1, paragraph before 4.10
-(blueprint: lem-pur-etale-system-cofinal-mate). -/
+Source: Zheng 4.1, paragraph before 4.10. -/
 def CofinalRepeatSupport.kappa {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactification f}
     {l : ℕ} {T : Theory c l} {B : Coefficients.{u} l} {r : ℕ ↪o ℕ}
     (a : CofinalRepeatSupport T B r) :
@@ -534,7 +520,7 @@ def CofinalRepeatSupport.kappa {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactific
 
 /-- The selected-extension/repetition-factor comparison, fixed both on ordinary
 units and by the total-left-derived universal counit, before taking evaluations.
-Source: Zheng 4.1 (blueprint: lem-pur-etale-system-cofinal-mate). -/
+Source: Zheng 4.1. -/
 structure CofinalFactor (W : Scheme.{u}) {l : ℕ} (B : Coefficients.{u} l) (r : ℕ ↪o ℕ)
     (L : CofinalExtension W B r) (R : CofinalRepeat W B r)
     (S : Scalar W (cofinalCoefficient B r)) where
@@ -556,7 +542,7 @@ structure CofinalFactor (W : Scheme.{u}) {l : ℕ} (B : Coefficients.{u} l) (r :
 
 /-- A coherent family of selected extensions and the normalized support comparison.
 All support functors come from the recorded projection theory on the fixed compactification.
-Source: Zheng 4.1, 5.22 (blueprint: lem-pur-etale-system-cofinal-mate). -/
+Source: Zheng 4.1, 5.22. -/
 structure CofinalSupport {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (l : ℕ) where
   projection : Theory c l
@@ -607,7 +593,7 @@ structure CofinalSupport {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification 
             (SheafOfModules.systemNextSelected r m))).hom.app N)
 
 /-- The actual right-adjoint mate for any fixed compact-support adjunctions.
-Source: Zheng 5.22 (blueprint: lem-pur-etale-system-cofinal-mate). -/
+Source: Zheng 5.22. -/
 def CofinalSupport.rho {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactification f}
     {l : ℕ} (t : CofinalSupport c l) (B : Coefficients.{u} l) (r : ℕ ↪o ℕ)
     {G : Derived Y B.rings ⥤ Derived X B.rings}

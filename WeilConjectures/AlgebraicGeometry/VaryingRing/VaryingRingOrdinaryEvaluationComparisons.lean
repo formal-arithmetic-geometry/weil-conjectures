@@ -14,7 +14,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks Project, Tags 09AE and 0F7B.
 The evaluation used here first takes an ordinary system component, then makes a
 constant tower concentrated in degree zero. Its faithfulness concerns ordinary
-system morphisms only (blueprint: lem-sp-varying-ring-ordinary-evaluation-comparisons).
+system morphisms only.
 -/
 
 @[expose] public noncomputable section
@@ -31,8 +31,7 @@ attribute [local instance 2000] WeilConjectures.SemilinearSections.sequenceSmall
   StrictTower.towers_hasDerivedCategory Scheme.proEtaleRingModules_hasDerivedCategory
 
 /-- The realization functor is fixed uniquely by its explicit construction.
-Source: Zheng 4.1 (blueprint: lem-sp-varying-ring-ordinary-evaluation-comparisons).
-Proof: the displayed functor is a witness; the defining equality gives uniqueness. -/
+Source: Zheng 4.1. -/
 theorem ordinaryRealization_existsUnique (n : ℕ) (X : Scheme.{u}) :
     ∃! E : Modules R φ X ⥤ StrictTower.Derived (R n) X,
       E = eval R φ X n ⋙ Functor.const ℕᵒᵖ ⋙
@@ -40,14 +39,13 @@ theorem ordinaryRealization_existsUnique (n : ℕ) (X : Scheme.{u}) :
   exact ⟨_, rfl, fun _ h ↦ h⟩
 
 /-- An actual ordinary component, viewed as a degree-zero constant strict tower.
-Source: Zheng 4.1 (blueprint: lem-sp-varying-ring-ordinary-evaluation-comparisons). -/
+Source: Zheng 4.1. -/
 def ordinaryRealization (n : ℕ) (X : Scheme.{u}) :
     Modules R φ X ⥤ StrictTower.Derived (R n) X :=
   (ordinaryRealization_existsUnique R φ n X).choose
 
 /-- The realization retains exactly the explicit component/single construction.
-Source: Zheng 4.1 (blueprint: lem-sp-varying-ring-ordinary-evaluation-comparisons).
-Proof: this is the equality in its proved unique specification. -/
+Source: Zheng 4.1. -/
 theorem ordinaryRealization_eq (n : ℕ) (X : Scheme.{u}) :
     ordinaryRealization R φ n X = eval R φ X n ⋙ Functor.const ℕᵒᵖ ⋙
       DerivedCategory.singleFunctor (StrictTower.Towers (R n) X) 0 :=
@@ -58,8 +56,7 @@ attribute [local irreducible] ordinaryRealization moduleAlpha moduleGComp module
   Functor.leftAdjoint
 
 /-- A square comparison records its four functors before its component equation.
-Source: functoriality of the clopen comparison, Zheng 4.1
-(blueprint: lem-sp-varying-ring-ordinary-evaluation-comparisons). -/
+Source: functoriality of the clopen comparison, Zheng 4.1. -/
 structure OrdinarySquareComparison
     {A B C D A' B' C' D' : Type*}
     [Category A] [Category B] [Category C] [Category D]
@@ -75,21 +72,21 @@ structure OrdinarySquareComparison
     eP.hom.app (I.obj N) ≫ p.map (eI.hom.app N) ≫ a'.app (EC.obj N)
 
 /-- The inverse-image comparisons for ordinary realization.
-Source: Zheng 4.1 (blueprint: lem-sp-varying-ring-ordinary-evaluation-comparisons). -/
+Source: Zheng 4.1. -/
 abbrev OrdinaryPullComparison (n : ℕ) :=
   ∀ (X Y : Scheme.{u}) (f : X ⟶ Y),
     pull R φ f ⋙ ordinaryRealization R φ n X ≅
       ordinaryRealization R φ n Y ⋙ StrictTower.G (R n) f
 
 /-- The open-extension comparisons for ordinary realization.
-Source: Zheng 4.1 (blueprint: lem-sp-varying-ring-ordinary-evaluation-comparisons). -/
+Source: Zheng 4.1. -/
 abbrev OrdinaryOpenComparison (n : ℕ) :=
   ∀ (U X : Scheme.{u}) (j : U ⟶ X) [IsOpenImmersion j],
     extension R φ j ⋙ ordinaryRealization R φ n X ≅
       ordinaryRealization R φ n U ⋙ StrictTower.J (R n) j
 
 /-- Pullback compositor normalization.
-Source: Stacks 09AE (blueprint: lem-sp-varying-ring-ordinary-evaluation-comparisons). -/
+Source: Stacks 09AE. -/
 def OrdinaryPullComposition (n : ℕ) (gIso : OrdinaryPullComparison R φ n) : Prop :=
   ∀ {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (N : Modules R φ Z),
     (ordinaryRealization R φ n X).map ((moduleGComp R φ f g).hom.app N) ≫
@@ -99,7 +96,7 @@ def OrdinaryPullComposition (n : ℕ) (gIso : OrdinaryPullComparison R φ n) : P
         (StrictTower.gComp (R n) f g).hom.app ((ordinaryRealization R φ n Z).obj N)
 
 /-- Extension compositor normalization.
-Source: Stacks 09AE (blueprint: lem-sp-varying-ring-ordinary-evaluation-comparisons). -/
+Source: Stacks 09AE. -/
 def OrdinaryOpenComposition (n : ℕ) (jIso : OrdinaryOpenComparison R φ n) : Prop :=
   ∀ {U V X : Scheme.{u}} (i : U ⟶ V) (j : V ⟶ X)
     [IsOpenImmersion i] [IsOpenImmersion j] (N : Modules R φ U),
@@ -110,7 +107,7 @@ def OrdinaryOpenComposition (n : ℕ) (jIso : OrdinaryOpenComparison R φ n) : P
         (StrictTower.jComp (R n) i j).hom.app ((ordinaryRealization R φ n U).obj N)
 
 /-- Preservation of the single-square clopen arrow.
-Source: Stacks 0F7B (blueprint: lem-sp-varying-ring-ordinary-evaluation-comparisons). -/
+Source: Stacks 0F7B. -/
 def OrdinaryClopenComparison (n : ℕ) (gIso : OrdinaryPullComparison R φ n)
     (jIso : OrdinaryOpenComparison R φ n) : Prop :=
   ∀ {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
@@ -136,7 +133,7 @@ variable {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
   [PreservesFiniteColimits ((Functor.whiskeringRight ℕᵒᵖ C D).obj F)]
 
 /-- Constant towers and the degree-zero embedding commute with exact functors.
-Source: Zheng 4.1 (blueprint: lem-sp-varying-ring-ordinary-evaluation-comparisons). -/
+Source: Zheng 4.1. -/
 def ordinaryConstantSingleComparison :
     F ⋙ (Functor.const ℕᵒᵖ ⋙ DerivedCategory.singleFunctor (ℕᵒᵖ ⥤ D) 0) ≅
       (Functor.const ℕᵒᵖ ⋙ DerivedCategory.singleFunctor (ℕᵒᵖ ⥤ C) 0) ⋙
@@ -151,7 +148,7 @@ def ordinaryConstantSingleComparison :
 end ConstantSingle
 
 /-- The actual inverse-image comparison, obtained from moduleEvalG and degree zero.
-Source: Zheng 4.1 (blueprint: lem-sp-varying-ring-ordinary-evaluation-comparisons). -/
+Source: Zheng 4.1. -/
 def ordinaryPullComparison (n : ℕ) : OrdinaryPullComparison R φ n := by
   intro X Y f
   unfold StrictTower.G
@@ -175,7 +172,7 @@ variable {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
   [PreservesFiniteLimits G] [PreservesFiniteColimits G]
 
 /-- Recover an ordinary functor comparison through the fully faithful degree-zero embedding.
-Source: Stacks 06YY (blueprint: lem-sp-varying-ring-ordinary-evaluation-comparisons). -/
+Source: Stacks 06YY. -/
 def ordinaryRecoverSingleIso (e : F.mapDerivedCategory ≅ G.mapDerivedCategory) : F ≅ G :=
   let h := (Functor.FullyFaithful.ofFullyFaithful
     (DerivedCategory.singleFunctor D 0)).whiskeringRight C
@@ -185,7 +182,7 @@ def ordinaryRecoverSingleIso (e : F.mapDerivedCategory ≅ G.mapDerivedCategory)
 end RecoverSingle
 
 /-- The ordinary open comparison recovered from the specified derived open mate.
-Source: Stacks 03DI (blueprint: lem-sp-varying-ring-ordinary-evaluation-comparisons). -/
+Source: Stacks 03DI. -/
 def ordinaryOpenEvaluation (n : ℕ) {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] :
     extension R φ j ⋙ eval R φ X n ≅ eval R φ U n ⋙ StrictTower.moduleJ (R n) j :=
@@ -195,7 +192,7 @@ def ordinaryOpenEvaluation (n : ℕ) {U X : Scheme.{u}} (j : U ⟶ X)
       Functor.mapDerivedCategoryCompIso (eval R φ U n) (StrictTower.moduleJ (R n) j))
 
 /-- The actual open comparison, obtained from ordinary evaluation and degree zero.
-Source: Stacks 03DI (blueprint: lem-sp-varying-ring-ordinary-evaluation-comparisons). -/
+Source: Stacks 03DI. -/
 def ordinaryOpenComparison (n : ℕ) : OrdinaryOpenComparison R φ n := by
   intro U X j _
   unfold StrictTower.J

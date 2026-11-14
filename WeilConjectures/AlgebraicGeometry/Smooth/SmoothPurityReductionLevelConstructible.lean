@@ -19,8 +19,7 @@ set_option linter.privateModule false
 
 /-! # Constructible cohomology of the evaluated strict reductions
 
-Source: blueprint latest, normalized-towers-reduction, constructibility paragraph;
-Stacks Tags 093M, 093U, 06YY, 08J5.
+Source: Stacks Tags 093M, 093U, 06YY, 08J5.
 -/
 
 @[expose] public noncomputable section

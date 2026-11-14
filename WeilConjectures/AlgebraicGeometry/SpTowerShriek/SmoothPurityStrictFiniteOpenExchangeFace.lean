@@ -676,20 +676,7 @@ private theorem open_exchange_inverse (b : Base l E)
     exactByConversion h
 
 -- Explicit comparison congruences are checked within this declaration.
-/-- Fixed-scalar realization preserves the normalized open exchange.
-Source: blueprint operations proof (2), finite open exchange face.
-(blueprint: new-lem-sp-strict-finite-open-exchange-face).
-
-Proof: transpose the inverse of both exchange isomorphisms by the normalized
-open adjunction. The open comparison is localization of the realization unit,
-and the pullback comparison preserves the ordinary adjunction units. The two
-transposes are therefore the horizontal pullback of the open unit followed by
-the same canonical pullback-square compositor. Use openExchange_mate to identify
-the intrinsic transpose and the native open base-change mate formula to identify
-the other. Injectivity of the adjunction Hom bijection gives equality of the
-inverse exchange words. Cancel their isomorphisms to obtain the forward face.
-The argument uses exact localization on arbitrary unbounded objects and also
-covers empty opens. -/
+/-- Fixed-scalar realization preserves the normalized open exchange. -/
 theorem strictFiniteOpenExchangeFace (b : Base l E)
     (o : Operations l E b) (levels : ComparisonLevels l E b o)
     {U' U T' T : Scheme.{u}} {h : U' ⟶ U} {j' : U' ⟶ T'}

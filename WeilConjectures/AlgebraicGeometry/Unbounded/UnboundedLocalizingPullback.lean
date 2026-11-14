@@ -28,12 +28,15 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 
 /-! # Inverse image on localizing categories
 
-Source: blueprint main-20261015, chap-Construction-of-f,
-sk-prop-proper-base-change-unbounded/sk-prop-proper-base-change-unbounded-pullback.md
-(blueprint: proposition-proper-base-change-localizing-categories--1).
-
 The restriction uses the ordinary unbounded derived module-object categories and the
 constant-scalar-model definition of constructibility. No derived completion is imposed.
+
+## Implementation details
+
+Preservation of coproducts indexed in the larger universe is reduced to small coproducts by
+embedding the nonzero support of a coproduct into its endomorphisms via coordinate idempotents.
+Finite Tor amplitude is preserved by representing objects by bounded flat complexes
+(`DerivedCategory.exists_iso_Q_obj_flat_of_torAmplitudeIn`).
 -/
 
 @[expose] public noncomputable section
@@ -291,40 +294,7 @@ private theorem pullback_of_constructible
 
 -- Elaborating all six coefficient instances needs the same heartbeat budget.
 /-- Exact inverse image preserves small sums, bounded constructible finite-Tor objects,
-and their localizing closure, for each of the six admissible coefficient types.
-Source: blueprint main-20261015, inverse image on the localizing categories
-(blueprint: proposition-proper-base-change-localizing-categories--1).
-
-Proof (the four steps of the node):
-
-1. Transport exactness of the termwise derived inverse image along
-   `leftDerivedUpperStarIsoMapDerivedCategory`, using the canonical shift structure
-   above. The derived adjunction gives preservation of every existing coproduct.
-
-2. The structure maps make both schemes quasi-compact and quasi-separated. Pull
-   back a finite constructible stratification, and apply
-   `pullback_finiteConstantLocalModel` to its strata. Composition isomorphisms
-   identify the resulting inverse images. The exact-derived homology comparison
-   and boundedness API then preserve bounded constructible complexes.
-
-3. For every commutative condensed coefficient ring, represent a finite-Tor object
-   by a bounded complex of flat modules using
-   `DerivedCategory.exists_iso_Q_obj_flat_of_torAmplitudeIn`. The coefficient
-   comparison is invertible, so `inverseImageModule_preservesFlat` preserves its
-   flat terms. The termwise inverse image retains the strict degree bounds.
-   `DerivedCategory.torAmplitudeIn_Q_obj_of_flat` and the derived comparison
-   therefore preserve Tor amplitude, uniformly for all six coefficient types.
-
-4. The inverse image of the target localizing closure is localizing and contains
-   the source generators. The defining intersection gives the object inclusion,
-   and the full-subcategory lift inherits exactness. Closure under coproducts
-   makes the source inclusion preserve them; the target inclusion reflects them.
-   To cover the larger indexing universe, embed the nonzero support of any
-   existing coproduct into its endomorphisms using coordinate idempotents. This
-   support is small in the Hom universe. Shrink it and omit the zero summands to
-   reduce preservation to the smaller coproducts. `localizingClosure_exists`
-   supplies the ambient coproducts and the closure's triangulated structure.
--/
+and their localizing closure, for each of the six admissible coefficient types. -/
 theorem unboundedLocalizingPullback
     (p l : ℕ) [Fact p.Prime] [Fact l.Prime] (hpl : p ≠ l)
     (k : Type u) [Field k] [CharP k p]

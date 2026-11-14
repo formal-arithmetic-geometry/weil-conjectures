@@ -15,7 +15,6 @@ import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor
 /-! # Ordered quotient frames over one affine base open
 
 Source: Stacks Project, Constructions, Tags 01OE, 01OB, 01MS and 01NR.
-(blueprint: lem-trf-symmetric-proj-ordered-twist-affine-frames).
 -/
 
 @[expose] public section
@@ -347,27 +346,9 @@ private theorem quotient_chart_section (S : Scheme.{u}) (E : S.Modules)
   exact unit_section_res (Proj.unitToTwist (symmetricGenerator E V m).property) _
 
 /-- On one affine base open the ordered quotient sections have the standard free
-frames and homogeneous coordinate ratios. This is a local calculation and does
-not assert a global comparison of line modules.
+frames and homogeneous coordinate ratios.
 
 Source: Stacks Project, Constructions, Tags 01OE, 01OB, 01MS and 01NR.
-(blueprint: lem-trf-symmetric-proj-ordered-twist-affine-frames).
-
-Proof: unpack the affine comparison into beta, eC, gamma and eR. Compose the chart equation for
-eRel with theta and its integral projection. The normalization of gamma and the integral
-comparison imply that this composite is eC followed by extension of coefficients from the
-integral polynomial ring: both graded maps fix every ordered variable and map integers by the
-structure map, hence are equal by polynomial extensionality. The inverse image of D_+(X_i) is
-consequently D_+(beta(X_i)). On it beta(X_i) is a free frame of the degree-one symmetric twist.
-The generator equation for D, applied to b(e_i), identifies the pullback of the displayed global
-section with that frame. Naturality of the adjoint quotient identifies restriction of the global
-section with the quotient of the local basis section. Transport freeness across D.chart and the
-affine open immersion. The degree-one fraction identity on D_+(beta(X_i)) is
-beta(X_j)=(beta(X_j)/beta(X_i))*beta(X_i). The Proj map sends X_j/X_i to this same ratio.
-Transport this identity through D.chart and the open-immersion restriction comparison to obtain
-the second assertion. No intersections of distinct affine base opens and no global gluing are
-involved. For r=0 the sole ratio is 1. Empty opens and the zero coefficient ring satisfy the
-same identities of zero localizations.
 -/
 theorem ordered_quotient_affine_frames (S : Scheme.{u}) (E : S.Modules)
     [E.IsQuasicoherent] (D : ProjectiveBundleQuotientGeometry.TautologicalQuotient E)

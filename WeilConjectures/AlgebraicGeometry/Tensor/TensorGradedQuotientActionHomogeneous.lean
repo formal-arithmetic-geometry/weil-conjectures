@@ -12,7 +12,6 @@ import Mathlib.Topology.Sheaves.LocallySurjective
 /-! # Degree support of the quotient action
 
 Source: Stacks Project, Tags 09MS and 0B8S.
-(blueprint: lem-sc-tensor-graded-quotient-action-homogeneous).
 -/
 
 @[expose] public section
@@ -29,24 +28,7 @@ noncomputable section
 whose degree is increased by the degree of that section. This assertion uses no
 canonical coefficient comparison and no output projection.
 
-Source: Stacks Project, Tag 09MS, coherent-equation-ses and its direct sum;
-Tag 0B8S, cohomology-lemma-boundary-derivation-over-cup-product, first proof paragraph.
-(blueprint: lem-sc-tensor-graded-quotient-action-homogeneous).
-Proof: Use the epi closed-immersion unit to lift s locally to t in L^a.
-For a degree-d kernel section y, b_quotient identifies b_a(t) as a lift of
-c_a(s). The equations hglobal, hlocal, k_inclusion and b_multiply identify
-i of the acted-on section with b_(a+d)(z), where z is the tensor product of t
-and kernel.ι(y) under tensorPowAddIso. Apply p. Since p i=0, b_quotient gives
-c_(a+d)(unit(z))=0. The left inverse c_projection makes c_(a+d) mono, so
-unit(z)=0. Sections preserve kernels, giving z' in the degree-(a+d) kernel
-with kernel.ι(z')=z. By k_inclusion and monicity of i, the acted-on section
-is k_(a+d)(z'). Define v globally as k_d followed by the given action and
-then degree_(d+a).tau1. The left inverse k_projection identifies its value
-locally with z', so k_d;action=v;k_(d+a) locally. Naturality of the global
-action and sheaf separation prove this equality globally. This proof never
-chooses a global lift and does not require restriction compatibility of sigma.
-It works for a=0 or d=0 and for the empty open; if s=0 or the ideal is zero,
-the same formula for v is the zero map. -/
+Source: Stacks Project, Tag 09MS, the ideal short exact sequence and its direct sum; Tag 0B8S. -/
 theorem tensorGradedQuotientAction_homogeneous {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible]
     (T : TensorGradedPresentation j L) (a d : ℕ)

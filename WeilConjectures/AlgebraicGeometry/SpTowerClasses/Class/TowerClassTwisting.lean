@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassPullback
 
 /-! # Twisting for canonical tower classes
-
-Source: blueprint main-20261015, chap-Smooth-purity,
-`sk-prop-sp-tower-geometric-classes` (blueprint: def-sp-tower-class-twisting).
 -/
 
 @[expose] public noncomputable section
@@ -33,14 +30,12 @@ namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The actual ring object of the coefficient tower on the vertical sequence site.
-Source: coefficient convention (blueprint: def-sp-tower-class-twisting). -/
+/-- The actual ring object of the coefficient tower on the vertical sequence site. -/
 abbrev systemRing (T : Scheme.{u}) :=
   SemilinearSections.systemRing.{u + 1, u, u + 1} (Scheme.ProEt.topology T)
     (SpTowerShriek.B l E T) (SpTowerShriek.tau l E T)
 
-/-- Tensor by the actual Tate line before localization.
-Source: definition-tate-twists (blueprint: def-sp-tower-class-twisting). -/
+/-- Tensor by the actual Tate line before localization. -/
 def positive {T : Scheme.{u}} (c : Chern l E T) :
     Systems T (Arings l E T) ⥤ Systems T (Arings l E T) :=
   letI := SemilinearSections.abelianSheafify.{u + 1, u, u + 1}
@@ -49,8 +44,7 @@ def positive {T : Scheme.{u}} (c : Chern l E T) :
     (coefficientSequenceTopology (Scheme.ProEt.topology T))
   SheafOfModules.siteSheafTensorRight (A := systemRing l E T) (lineModule l E c)
 
-/-- Pure tensors in that exact, ordinary line twist.
-Source: definition-tate-twists (blueprint: def-sp-tower-class-twisting). -/
+/-- Pure tensors in that exact, ordinary line twist. -/
 def pure {T : Scheme.{u}} (c : Chern l E T)
     (M : Systems T (Arings l E T)) (U : (ℕ × T.ProEt)ᵒᵖ)
     (x : M.val.obj U) (y : (lineModule l E c).val.obj U) :
@@ -66,11 +60,8 @@ local instance coefficientSectionSMul {T : Scheme.{u}}
     SMul ((coefficient T (Arings l E T)).val.obj U) ((lineModule l E c).val.obj U) :=
   inferInstanceAs (SMul ((systemRing l E T).obj.obj U) ((lineModule l E c).val.obj U))
 
-/-- Line twisting is the actual tensor/Hom equivalence. The coevaluation and
- evaluation are fixed on local sections, including their signs. Neither an arbitrary
- equivalence nor a second, independently chosen inverse line occurs.
-Source: classes (4); definition-tate-twists negative powers
-(blueprint: def-sp-tower-class-twisting). -/
+/-- Line twisting is the tensor/Hom equivalence, with coevaluation and evaluation
+specified on local sections. -/
 structure Twisting {T : Scheme.{u}} (c : Chern l E T) where
   equivalence : Systems T (Arings l E T) ≌ Systems T (Arings l E T)
   forward : equivalence.functor = positive l E c
@@ -118,33 +109,28 @@ structure Twisting {T : Scheme.{u}} (c : Chern l E T) where
 attribute [instance] Twisting.additive Twisting.inverseAdditive Twisting.limits
   Twisting.colimits Twisting.inverseLimits Twisting.inverseColimits
 
-/-- Positive line twist in the ordinary unbounded derived category.
-Source: classes (4) (blueprint: def-sp-tower-class-twisting). -/
+/-- Positive line twist in the ordinary unbounded derived category. -/
 abbrev Twisting.T {T : Scheme.{u}} {c : Chern l E T} (t : Twisting l E c) :=
   t.equivalence.functor.mapDerivedCategory
 
-/-- Negative twist in the same ordinary localization.
-Source: classes (4) (blueprint: def-sp-tower-class-twisting). -/
+/-- Negative twist in the same ordinary localization. -/
 abbrev Twisting.N {T : Scheme.{u}} {c : Chern l E T} (t : Twisting l E c) :=
   t.equivalence.inverse.mapDerivedCategory
 
-/-- The inverse line is the negative twist of the unit, identified termwise.
-Source: classes (4) (blueprint: def-sp-tower-class-twisting). -/
+/-- The inverse line is the negative twist of the unit, identified termwise. -/
 def Twisting.inverseUnit {T : Scheme.{u}} {c : Chern l E T} (t : Twisting l E c) :
     (t.N l E).obj (unit T (Arings l E T)) ≅ inverseLine l E c :=
   (t.equivalence.inverse.mapDerivedCategorySingleFunctor 0).app _ ≪≫
     (DerivedCategory.singleFunctor (Systems T (Arings l E T)) 0).mapIso
       (eqToIso (t.backward (coefficient T (Arings l E T))))
 
-/-- The positive twist of the unit is the actual Tate line.
-Source: classes (4) (blueprint: def-sp-tower-class-twisting). -/
+/-- The positive twist of the unit is the actual Tate line. -/
 def Twisting.positiveUnit {T : Scheme.{u}} {c : Chern l E T} (t : Twisting l E c) :
     (t.T l E).obj (unit T (Arings l E T)) ≅ line l E c :=
   (t.equivalence.functor.mapDerivedCategorySingleFunctor 0).app _ ≪≫
     (DerivedCategory.singleFunctor (Systems T (Arings l E T)) 0).mapIso t.unitIso
 
-/-- Evaluation contracts the inverse Tate line against the Tate line.
-Source: classes (4) (blueprint: def-sp-tower-class-twisting). -/
+/-- Evaluation contracts the inverse Tate line against the Tate line. -/
 def Twisting.contract {T : Scheme.{u}} {c : Chern l E T} (t : Twisting l E c) :
     (t.T l E).obj (inverseLine l E c) ≅ unit T (Arings l E T) :=
   (t.T l E).mapIso (t.inverseUnit l E).symm ≪≫
@@ -155,10 +141,8 @@ def Twisting.contract {T : Scheme.{u}} {c : Chern l E T} (t : Twisting l E c) :
     (Functor.mapDerivedCategoryIdIso (Systems T (Arings l E T))).app
       (unit T (Arings l E T))
 
-/-- Pullback of positive twisting is fixed before deriving: its adjoint sends a
-local pure tensor to the tensor of the two ordinary adjunction units. The second
-factor uses the normalized root/coefficient pullback, rather than a chosen scalar.
-Source: classes (4), projection mate (blueprint: def-sp-tower-class-twisting). -/
+/-- Pullback compatibility of positive twisting before deriving: its adjoint sends a
+local pure tensor to the tensor of the two ordinary adjunction units. -/
 structure PositivePullback {b : SpTowerShriek.Base l E} {X Y : Scheme.{u}}
     (f : X ⟶ Y) (g : SpTowerShriek.Geometry l E b f)
     {cY : Chern l E Y} {cX : Chern l E X}
@@ -177,8 +161,7 @@ structure PositivePullback {b : SpTowerShriek.Base l E} {X Y : Scheme.{u}}
     HEq (adjointSection l E g (iso.hom.app M) n U v)
       (pure l E cX (g.pull.obj M) (op (n, (chart f U).unop)) x' y')
 
-/-- Termwise localization of the ordinary, section-normalized twist comparison.
-Source: classes (4) (blueprint: def-sp-tower-class-twisting). -/
+/-- Termwise localization of the ordinary, section-normalized twist comparison. -/
 def PositivePullback.derivedIso {b : SpTowerShriek.Base l E} {X Y : Scheme.{u}}
     {f : X ⟶ Y} {g : SpTowerShriek.Geometry l E b f}
     {cY : Chern l E Y} {cX : Chern l E X}
@@ -196,8 +179,7 @@ def PositivePullback.derivedIso {b : SpTowerShriek.Base l E} {X Y : Scheme.{u}}
     (Functor.mapDerivedCategoryCompIso g.pull tX.equivalence.functor).symm
 
 /-- The canonical projection map is the counit mate of the specified inverse-image
-comparison. It is formed in the tower category, before any finite evaluation.
-Source: classes (4), proof step 15 (blueprint: def-sp-tower-class-twisting). -/
+comparison. It is formed in the tower category, before any finite evaluation. -/
 def projection {b : SpTowerShriek.Base l E} {X Y : Scheme.{u}}
     {f : X ⟶ Y} (g : SpTowerShriek.Geometry l E b f)
     {cY : Chern l E Y} {cX : Chern l E X}

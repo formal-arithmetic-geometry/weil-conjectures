@@ -83,8 +83,8 @@ noncomputable def strictLocalRestrictionNat
     erw [ht]
     rfl
 
-/-- Derive the uniquely specified restriction and use exactness of inverse image and
-strict-local sections to separate the two derived functors.
+/-- The derived restriction from the derived stalk at `s` to derived sections on the strict
+henselization, obtained by deriving the pointed-neighbourhood restriction.
 Source: Stacks Project, Tags 03Q9 and 03QO. -/
 noncomputable def strictLocalDerivedRestriction
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
@@ -107,8 +107,7 @@ noncomputable def strictLocalDerivedRestriction
         AddCommGrpCat.{u + 1}).rightDerivedFunctorPlusIsoMapDerivedCategoryPlus.inv
 
 /-- The comparison is germ restriction, exchange for the strict-base square, and Leray.
-Source: Stacks Project, Tag 0GJV, proof of lemma-specialization-cospecialization.
-(blueprint: def-weil-pbc-small-model-derived-restriction). -/
+Source: Stacks Project, Tag 0GJV. -/
 noncomputable def strictLocalSheafComparison
     {X S : Scheme.{u}} (f : X ⟶ S)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

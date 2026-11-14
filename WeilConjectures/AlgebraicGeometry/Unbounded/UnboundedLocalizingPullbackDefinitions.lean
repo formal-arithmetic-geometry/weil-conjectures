@@ -18,16 +18,10 @@ public import WeilConjectures.CategoryTheory.SixFunctors.LocalizingClosure
 
 /-! # The canonical localizing pullback preservation proposition
 
-Source: blueprint latest, sec-six-functors-basics/sk-prop-proper-base-change-unbounded,
-sk-prop-proper-base-change-unbounded-pullback.proof.md, exactness, sums and localizing closures
-(blueprint: def-zl-unbounded-localizing-pullback).
-
-These two declarations are moved from
-`WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedLocalizingPullback` with their
-names, signatures, and bodies unchanged. The canonical shift is constructed from the
-existing exact-derived comparison; the proposition records the ambient and restricted
-preservation clauses without asserting them. The localizing hull and constant-model
-constructibility are the existing imported definitions.
+The canonical shift-commutation of the derived inverse image, constructed from the
+exact-derived comparison, and the proposition stating the ambient and restricted
+preservation properties used by
+`WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedLocalizingPullback`.
 -/
 
 @[expose] public noncomputable section
@@ -43,10 +37,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- The canonical shift-commutation of the total derived inverse image `Lg^*`: the one of the
 termwise functor `D(g^*)` (Mathlib's `Functor.mapDerivedCategory`), transported along the
-canonical isomorphism `CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory`. Exactness of
-`Lg^*` is asserted for this shift structure, not for an arbitrary one.
-Source: blueprint main-20261015, inverse image on the localizing categories
-(blueprint: def-zl-unbounded-localizing-pullback). -/
+canonical isomorphism `CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory`. -/
 @[instance_reducible]
 def unboundedLocalizingPullbackCommShift
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -60,9 +51,7 @@ attribute [local instance] unboundedLocalizingPullbackCommShift
 inclusions. `Lg^*` carries its canonical shift-commutation
 `unboundedLocalizingPullbackCommShift`; the restriction is Mathlib's `ObjectProperty.lift` of
 `Lg^*` along the full inclusions, with its inherited shift-commutation, and the triangulations
-on the restricted categories are the inherited ones.
-Source: blueprint main-20261015, inverse image on the localizing categories
-(blueprint: def-zl-unbounded-localizing-pullback). -/
+on the restricted categories are the inherited ones. -/
 structure UnboundedLocalizingPullback
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {Y' Y : Scheme.{u}} (g : Y' ⟶ Y) : Prop where

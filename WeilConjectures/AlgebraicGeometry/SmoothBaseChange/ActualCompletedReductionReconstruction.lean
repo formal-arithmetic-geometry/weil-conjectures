@@ -574,22 +574,7 @@ private theorem reconstructionLimit_transport
     rw [CategoryTheory.Functor.map_id, Category.comp_id]
 
 /-- An intrinsically complete object is a Roos limit of its actual quotient reductions.
-Source: blueprint order 1270, Koszul reconstruction; Stacks Tags 091N and 0DVC.
-(blueprint: lem-weil-pbc-actual-completed-reduction-reconstruction).
-
-Proof: choose a K-flat representative in the constant completed-ring presentation
-used to define intrinsic completeness. The completed Koszul reduction Roos triangle
-identifies its intrinsic completion with the derived limit of its strict quotient
-tower. The completeness hypothesis makes the completion map invertible, so transport
-that triangle's first vertex to the given object. Transport the coefficient ring
-along pbcCompletedComparison. This exact equivalence preserves countable products,
-so it preserves the Roos triangle. At each finite level the normalized constant
-quotient comparison identifies the transported tower with the actual quotient
-extension followed by scalar restriction. The tensor-unit normalization makes the
-adjacent square commute: both adjuncts are the direct quotient unit. The product of
-these level isomorphisms conjugates the transition endomorphisms. Transporting the
-two product vertices therefore gives the displayed distinguished Roos triangle.
-No bound, constructibility, flatness, or choice of a limit functor is needed. -/
+Source: Stacks Tags 091N and 0DVC. -/
 theorem pbc_actual_completed_reduction_reconstruction
     [HasCountableProducts (PbcCompletedDerived T d)]
     (K : PbcCompletedDerived T d) (hK : PbcIsIntrinsicallyComplete T d K) :

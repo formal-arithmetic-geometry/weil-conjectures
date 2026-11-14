@@ -12,8 +12,7 @@ import all WeilConjectures.AlgebraicGeometry.StrictTower.StrictTowerOrdinaryProp
 
 /-! # Canonical normalization of the ordinary scalar alpha
 
-Source: Stacks, Tags 03D7, 03DI and 0F7B; the intrinsic proper/open word.
-(blueprint: lem-sf-semilinear-scalar-ordinary-alpha-normalization)
+Source: Stacks, Tags 03D7, 03DI and 0F7B.
 -/
 
 @[expose] public noncomputable section
@@ -337,18 +336,7 @@ private theorem towerAlpha_eq_word4
   exact termwise_word4 _ _ _ _ _ _ _ _ _ _ _ _
 
 /-- The alpha of a normalized ordinary scalar package is canonical.
-Source: Stacks, Tags 03D7, 03DI and 0F7B, and the intrinsic proper/open word.
-(blueprint: lem-sf-semilinear-scalar-ordinary-alpha-normalization).
-Proof: beta_unit identifies the inverse cartesian beta by injectivity of the open
-adjunction Hom equivalence. clopen_unit identifies the open-to-direct map with the
-transpose of the inverse open unit; pi_eq then identifies its projector with the
-canonical clopen projector. The unit-normalized open compositor is the whiskering
-of the single-level compositor. Transport along equality is checked by substitution
-of the equality, where both maps are identities. Substitute these identifications
-in alpha_eq. The ordinary alpha word is the termwise image of singleAlpha: whiskering
-preserves composition and its compositor components are identities. This is exactly
-towerAlpha, for arbitrary commutative proper/open squares. No derived evaluation or
-faithfulness assertion is involved. -/
+Source: Stacks, Tags 03D7, 03DI and 0F7B, and the intrinsic proper/open word. -/
 theorem scalarOrdinaryAlphaNormalization (D : OrdinaryScalarComparison R φ B ψ)
     {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
     [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]

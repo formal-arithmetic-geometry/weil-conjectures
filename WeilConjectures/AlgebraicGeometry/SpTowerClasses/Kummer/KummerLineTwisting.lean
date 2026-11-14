@@ -152,34 +152,7 @@ private theorem positive_isEquivalence
     (SheafOfModules.siteSheafTensorRightIso R L)).mpr e.isEquivalence_functor
 
 /-- The root module already present in Chern data defines the normalized tensor/Hom twist.
-No existence or normalization of Chern arrows is asserted here.
-
-Source: blueprint latest, `sk-prop-diagonal-tower/_section.md`, Tate-twist paragraph;
-`sk-prop-sp-tower-geometric-classes.proof.md`, clause (2), rank-one scalar extension.
-(blueprint: lem-sfb-kummer-line-twisting).
-
-Proof: on the pro-etale covering obtained by adjoining compatible primitive
-l^(n+1)-th roots, identify the actual roots tower with its quotient ring system,
-using the chosen roots as compatible generators. The specified section and map
-equations for c.reduction.forget, followed by c.rootForget, identify c.rootModule
-with this root system as modules: the action of the constant finite quotient
-ring is determined by the additive group and its annihilation. Scalar extension
-along coefficientSystemMap preserves this rank-one trivialization, with its
-counit giving the same lineModule that defines positive. Define the inverse
-functor by homObj from this line and homObjMap on morphisms. The ordinary sheaf
-tensor/Hom adjunction gives coevaluation x mapping to (y mapping to x tensor y)
-and evaluation z tensor y mapping to z(y). On every trivializing chart these
-are the ordinary rank-one module unit and counit, hence are isomorphisms.
-Their formulas commute with restrictions and the power transitions, so they
-glue on the sequence site; local isomorphy proves global isomorphy. Use these
-unit and counit isomorphisms and the tensor/Hom triangle identities to construct
-the equivalence. Both functors are additive, and equivalences preserve finite
-limits and colimits. Multiplication a tensor y mapping to a times y identifies
-the tensor of the coefficient unit with lineModule and supplies exactly the
-unit_normalization field. These formulas also give the backward_maps,
-coevaluation and evaluation fields, with the displayed endpoint HEq transports.
-The empty scheme is covered by the same sheaf-local argument; l=2 and n=0
-use the same primitive-root and tensor formulas. -/
+No existence or normalization of Chern arrows is asserted here. -/
 theorem nonempty_kummerLineTwisting (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (l : Γ(T, ⊤))) (c : Chern l E T) :

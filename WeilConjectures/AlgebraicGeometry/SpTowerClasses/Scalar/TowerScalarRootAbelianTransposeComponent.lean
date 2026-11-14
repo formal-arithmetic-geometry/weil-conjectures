@@ -25,16 +25,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The finite-level component calculation underlying the scalar root transpose.
 
-Source: blueprint latest, classes proof (2), Kummer roots followed by ordinary
-coefficient extension; Stacks 03EL.
-(blueprint: lem-sp-tower-scalar-root-abelian-transpose-component)
-
-Proof: evaluate the two displayed tower morphisms at one finite level and one
-pro-etale chart. The Kummer root restriction, the normalized line evaluation,
-and the section identity of chi give the same value on every section. This is
-the component form of the first Kummer square and the ordinary scalar unit
-calculation; the remaining assembly over levels is handled by the parent
-transpose theorem.
+Source: Stacks 03EL.
 -/
 theorem scalarRoot_abelianTranspose_component
     {X Y : Scheme.{u}} (f : X ⟶ Y)

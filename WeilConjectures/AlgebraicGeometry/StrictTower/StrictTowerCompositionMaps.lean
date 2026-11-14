@@ -129,10 +129,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 /-!
 # Canonical composition maps for strict constant-coefficient towers
 
-Source: Stacks Project, Tags 0F7J, 0F7C, 0F7D and 0F7F, and the strict-tower adaptation
-in the blueprint (blueprint: def-cbc-strict-tower-composition-maps).
+Source: Stacks Project, Tags 0F7J, 0F7C, 0F7D and 0F7F.
 
-`Compactification.Triangle` names the node's maps as follows: `cf.i = c`, `cf.g = p_Y`,
+In the notation used below, the maps of a `Compactification.Triangle` are `cf.i = c`, `cf.g = p_Y`,
 `cg.i = i`, `cg.g = q`, `cfg.i = a`, `q = b`, and `p = p`.
 All maps below are constructed in the derived category of strict towers, before evaluation.
 -/
@@ -152,14 +151,12 @@ namespace AlgebraicGeometry.ProEtale.StrictTower
 variable (B : Type (u + 1)) [CommRing B]
 
 /-- The supplied-compactification functor `R_p J_j`.
-Source: Stacks, Tag 0F7J
-(blueprint: def-cbc-strict-tower-composition-maps). -/
+Source: Stacks, Tag 0F7J. -/
 noncomputable def compositionF {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f) : Derived B X ⥤ Derived B Y := J B c.i ⋙ R B c.g
 
 /-- The actual composition comparison `R_q gamma_Q J_c`, including both compositors.
-Source: Stacks, Tag 0F7J
-(blueprint: def-cbc-strict-tower-composition-maps). -/
+Source: Stacks, Tag 0F7J. -/
 noncomputable def compositionD {X Y Z : Scheme.{u}} {f : X ⟶ Y} {h : Y ⟶ Z}
     (T : Compactification.Triangle f h) [QuasiCompact T.cf.i] [QuasiCompact T.cg.i]
     [QuasiCompact T.q] :
@@ -174,8 +171,7 @@ noncomputable def compositionD {X Y Z : Scheme.{u}} {f : X ⟶ Y} {h : Y ⟶ Z}
     ((rComp B T.p T.cg.g).hom ≫ (eqToIso (congrArg (R B) T.p_g)).hom)
 
 /-- The refinement comparison is gamma for the identity-left square, followed by R.
-Source: Stacks, Tag 0F7J, choice independence
-(blueprint: def-cbc-strict-tower-composition-maps). -/
+Source: Stacks, Tag 0F7J, choice independence. -/
 noncomputable def compositionC {X Y : Scheme.{u}} {f : X ⟶ Y}
     {c d : Compactification f} [QuasiCompact c.i] [QuasiCompact d.i]
     (r : c.Refinement d) : compositionF B d ⟶ compositionF B c :=
@@ -187,8 +183,7 @@ noncomputable def compositionC {X Y : Scheme.{u}} {f : X ⟶ Y}
     ((rComp B r.hom d.g).hom ≫ (eqToIso (congrArg (R B) r.hom_g)).hom)
 
 /-- The specified exchange: first the proper-square mate, then the open comparison.
-Source: Stacks, Tag 0F7F
-(blueprint: def-cbc-strict-tower-composition-maps). -/
+Source: Stacks, Tag 0F7F. -/
 noncomputable def compositionE {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}
     (c : Compactification f) (c' : Compactification f')
     (x : X' ⟶ X) (y : Y' ⟶ Y) (s : c'.Z ⟶ c.Z)
@@ -200,8 +195,7 @@ noncomputable def compositionE {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' �
 
 /-- A refinement of the supplied towers consists of the three existing compactification
 refinements and the two remaining compatibility equations. No cartesian condition is imposed.
-Source: Stacks, Tag 0F7J, refinement diagram; compatible-tower dependency
-(blueprint: def-cbc-strict-tower-composition-maps). -/
+Source: Stacks, Tag 0F7J, refinement diagram. -/
 structure CompositionRefinement {X Y Z : Scheme.{u}} {f : X ⟶ Y} {h : Y ⟶ Z}
     (T₁ T₂ : Compactification.Triangle f h) where
   rf : T₁.cf.Refinement T₂.cf
@@ -211,8 +205,7 @@ structure CompositionRefinement {X Y Z : Scheme.{u}} {f : X ⟶ Y} {h : Y ⟶ Z}
   p_comm : rfh.hom ≫ T₂.p = T₁.p ≫ rh.hom
 
 /-- The horizontal refinement `(C_h F_f1)(F_h2 C_f)`.
-Source: Stacks, Tag 0F7J
-(blueprint: def-cbc-strict-tower-composition-maps). -/
+Source: Stacks, Tag 0F7J. -/
 noncomputable def compositionH {X Y Z : Scheme.{u}} {f : X ⟶ Y} {h : Y ⟶ Z}
     {T₁ T₂ : Compactification.Triangle f h}
     [QuasiCompact T₁.cf.i] [QuasiCompact T₁.cg.i]
@@ -224,9 +217,8 @@ noncomputable def compositionH {X Y Z : Scheme.{u}} {f : X ⟶ Y} {h : Y ⟶ Z}
     Functor.whiskerLeft (compositionF B T₁.cf) (compositionC B r.rh)
 
 /-- The cartesian faces of a base change of a supplied compatible tower. All arrows
-are supplied projections; this does not choose a compactification or an arbitrary comparison.
-Source: Stacks, Tags 0F7J and 0F7F; compatible-tower dependency
-(blueprint: def-cbc-strict-tower-composition-maps). -/
+are supplied projections.
+Source: Stacks, Tags 0F7J and 0F7F. -/
 structure CompositionBaseChange {X Y Z X' Y' Z' : Scheme.{u}}
     {f : X ⟶ Y} {h : Y ⟶ Z} {f' : X' ⟶ Y'} {h' : Y' ⟶ Z'}
     (T : Compactification.Triangle f h) (T' : Compactification.Triangle f' h')
@@ -244,8 +236,7 @@ structure CompositionBaseChange {X Y Z X' Y' Z' : Scheme.{u}}
   p : IsPullback s T'.p T.p t
 
 /-- Exchange for f on the supplied pulled-back tower.
-Source: Stacks, Tag 0F7F
-(blueprint: def-cbc-strict-tower-composition-maps). -/
+Source: Stacks, Tag 0F7F. -/
 noncomputable def compositionEf {X Y Z X' Y' Z' : Scheme.{u}}
     {f : X ⟶ Y} {h : Y ⟶ Z} {f' : X' ⟶ Y'} {h' : Y' ⟶ Z'}
     {T : Compactification.Triangle f h} {T' : Compactification.Triangle f' h'}
@@ -254,8 +245,7 @@ noncomputable def compositionEf {X Y Z X' Y' Z' : Scheme.{u}}
   compositionE B T.cf T'.cf x y A.d A.cf_i.w A.cf_g.w A.cf_i
 
 /-- Exchange for h on the supplied pulled-back tower.
-Source: Stacks, Tag 0F7F
-(blueprint: def-cbc-strict-tower-composition-maps). -/
+Source: Stacks, Tag 0F7F. -/
 noncomputable def compositionEh {X Y Z X' Y' Z' : Scheme.{u}}
     {f : X ⟶ Y} {h : Y ⟶ Z} {f' : X' ⟶ Y'} {h' : Y' ⟶ Z'}
     {T : Compactification.Triangle f h} {T' : Compactification.Triangle f' h'}
@@ -264,8 +254,7 @@ noncomputable def compositionEh {X Y Z X' Y' Z' : Scheme.{u}}
   compositionE B T.cg T'.cg y g A.t A.cg_i.w A.cg_g.w A.cg_i
 
 /-- Exchange for hf on the supplied pulled-back tower.
-Source: Stacks, Tag 0F7F
-(blueprint: def-cbc-strict-tower-composition-maps). -/
+Source: Stacks, Tag 0F7F. -/
 noncomputable def compositionEhf {X Y Z X' Y' Z' : Scheme.{u}}
     {f : X ⟶ Y} {h : Y ⟶ Z} {f' : X' ⟶ Y'} {h' : Y' ⟶ Z'}
     {T : Compactification.Triangle f h} {T' : Compactification.Triangle f' h'}
@@ -274,8 +263,7 @@ noncomputable def compositionEhf {X Y Z X' Y' Z' : Scheme.{u}}
   compositionE B T.cfg T'.cfg x g A.s A.cfg_i.w A.cfg_g.w A.cfg_i
 
 /-- The horizontal exchange `(F_h' e_f)(e_h F_f)` with explicit associators.
-Source: Stacks, Tag 0F7F
-(blueprint: def-cbc-strict-tower-composition-maps). -/
+Source: Stacks, Tag 0F7F. -/
 noncomputable def compositionHorizontalE {X Y Z X' Y' Z' : Scheme.{u}}
     {f : X ⟶ Y} {h : Y ⟶ Z} {f' : X' ⟶ Y'} {h' : Y' ⟶ Z'}
     {T : Compactification.Triangle f h} {T' : Compactification.Triangle f' h'}

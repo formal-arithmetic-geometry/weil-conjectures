@@ -165,9 +165,6 @@ import WeilConjectures.SixFunctors.Etale.Derived.Exchange
 
 /-! # Vector-bundle integration charts and local trace maps
 
-Source: blueprint sec-smooth-purity/sk-prop-an, order 1972.
-(blueprint: proposition-purity-vector-bundles).
-
 These are the existing coefficient, chart and normalization constructions. Cohomology
 concentration follows by exact inverse image and the affine-space trace on a frame cover.
 -/
@@ -180,16 +177,14 @@ open scoped CategoryTheory.Functor ZeroObject
 namespace AlgebraicGeometry.Etale
 
 /-- Reuse concrete sheafification on each Zariski slice when elaborating finite-rank
-module frames. This packages the existing Mathlib instance without a new assumption.
-Source: blueprint order 1972, module frames (blueprint: proposition-purity-vector-bundles). -/
+module frames. -/
 instance vectorIntegrationZariskiWeakSheafify (S : Scheme.{u}) :
     ∀ V : S.Opens, HasWeakSheafify
       ((Opens.grothendieckTopology S).over V) AddCommGrpCat.{u} :=
   fun V ↦ sheafToPresheaf_isRightAdjoint ((Opens.grothendieckTopology S).over V)
     AddCommGrpCat.{u}
 
-/-- Reuse the existing local-bijection characterization of sheafification on each slice.
-Source: blueprint order 1972, module frames (blueprint: proposition-purity-vector-bundles). -/
+/-- The local-bijection characterization of sheafification on each Zariski slice. -/
 instance vectorIntegrationZariskiLocallyBijective (S : Scheme.{u}) :
     ∀ V : S.Opens,
       ((Opens.grothendieckTopology S).over V).WEqualsLocallyBijective AddCommGrpCat.{u} :=
@@ -204,12 +199,6 @@ instance vectorIntegrationZariskiLocallyBijective (S : Scheme.{u}) :
     GrothendieckTopology.WEqualsLocallyBijective.mk' J AddCommGrpCat.{u}
 
 /-- The geometric properties needed to form the ordinary compact support of the bundle.
-Source: blueprint order 1972, first paragraph (blueprint: proposition-purity-vector-bundles).
-Proof: the relative spectrum is affine, hence quasi-compact and separated by
-lem-weil-pbc-affine-morphism-permanence. On an affine trivializing open its coordinate
-ring is the polynomial algebra on d generators. The pointwise finite-type criterion
-lem-weil-pbc-lft-pointwise-criterion gives local finite type. Finite type over the
-Noetherian base gives a Noetherian total space by lem-weil-pbc-finite-type-over-noetherian.
 -/
 theorem vectorIntegration_geometry (S : Scheme.{u}) [IsNoetherian S] (d : ℕ)
     (F : SheafOfModules.{u} S.ringCatSheaf) [F.IsFiniteLocallyFreeOfRank d] :
@@ -234,7 +223,6 @@ theorem vectorIntegration_geometry (S : Scheme.{u}) [IsNoetherian S] (d : ℕ)
 
 /-- Canonical inverse image of the ordered shifted Tate tensor: recurse using tensor
 pullback, the normalized finite-line comparison, and the constant-unit comparison.
-Source: blueprint order 1972, Tate identifications (blueprint: proposition-purity-vector-bundles).
 -/
 def vectorIntegrationBaseCoefficientPullback (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
@@ -252,8 +240,7 @@ def vectorIntegrationBaseCoefficientPullback (A : Type (u + 1)) [CommRing A] (N 
 
 /-- A_E(d)[2d], written as inverse image of the existing ordered shifted Tate tensor.
 Each of the d factors is the concrete finite roots-of-unity Tate line shifted by two;
-the zero-fold tensor is the constant complex. This uses no additional twist definition.
-Source: blueprint order 1972, C_pi (blueprint: proposition-purity-vector-bundles). -/
+the zero-fold tensor is the constant complex. -/
 def vectorIntegrationCoefficient (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (S : Scheme.{u}) [IsNoetherian S] (d : ℕ)
     (F : SheafOfModules.{u} S.ringCatSheaf) [F.IsFiniteLocallyFreeOfRank d] :
@@ -261,9 +248,7 @@ def vectorIntegrationCoefficient (A : Type (u + 1)) [CommRing A] (N : ℕ)
   (ordinaryFinitePullback A (VectorBundleZeroSection.π S d F)).obj
     (affineLinearBaseCoefficient A N hA S d)
 
-/-- C_pi = R pi_! A_E(d)[2d], using the canonical chosen compactification. Nagata applies
-because the bundle is separated and finite type and the Noetherian base is qcqs.
-Source: blueprint order 1972, C_pi (blueprint: proposition-purity-vector-bundles). -/
+/-- C_pi = R pi_! A_E(d)[2d], using the canonical chosen compactification. -/
 def vectorIntegrationSource (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (S : Scheme.{u}) [IsNoetherian S] (d : ℕ)
     (F : SheafOfModules.{u} S.ringCatSheaf) [F.IsFiniteLocallyFreeOfRank d] :
@@ -275,8 +260,7 @@ def vectorIntegrationSource (A : Type (u + 1)) [CommRing A] (N : ℕ)
   (rightDerivedLowerShriek (ModuleCat.{u + 1} A) (VectorBundleZeroSection.π S d F)).obj
     (vectorIntegrationCoefficient A N hA S d F)
 
-/-- L_pi is the degree-zero cohomology sheaf of C_pi.
-Source: blueprint order 1972, L_pi (blueprint: proposition-purity-vector-bundles). -/
+/-- L_pi is the degree-zero cohomology sheaf of C_pi. -/
 def vectorIntegrationSheaf (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (S : Scheme.{u}) [IsNoetherian S] (d : ℕ)
     (F : SheafOfModules.{u} S.ringCatSheaf) [F.IsFiniteLocallyFreeOfRank d] :
@@ -284,9 +268,7 @@ def vectorIntegrationSheaf (A : Type (u + 1)) [CommRing A] (N : ℕ)
   (_root_.DerivedCategory.homologyFunctor _ 0).obj (vectorIntegrationSource A N hA S d F)
 
 /-- The inverse frame from the coordinate-tower affine space to the restricted bundle,
-followed by the actual open inclusion into E. No coordinate isomorphism is chosen.
-Source: blueprint order 1972, inverse-coordinate square
-(blueprint: proposition-purity-vector-bundles). -/
+followed by the open inclusion into E. -/
 def vectorIntegrationChart (S : Scheme.{u}) [IsNoetherian S] (d : ℕ)
     (F : SheafOfModules.{u} S.ringCatSheaf) [F.IsFiniteLocallyFreeOfRank d] (V : S.Opens)
     (e : VectorBundleZeroSection.Trivialization S d F V) :
@@ -297,11 +279,6 @@ def vectorIntegrationChart (S : Scheme.{u}) [IsNoetherian S] (d : ℕ)
       ((VectorBundleZeroSection.π S d F) ⁻¹ᵁ V).ι
 
 /-- The inverse-frame square over V → S is Cartesian.
-Source: blueprint order 1972, inverse-coordinate square
-(blueprint: proposition-purity-vector-bundles).
-Proof: the open inverse-image square is Cartesian. The frame's concrete coordinate map
-is an isomorphism over V by proposition-purity-vector-bundles; the coordinate tower is
-the same affine space. Paste this isomorphism square with the open inverse-image square.
 -/
 theorem vectorIntegrationChart_isPullback (S : Scheme.{u}) [IsNoetherian S] (d : ℕ)
     (F : SheafOfModules.{u} S.ringCatSheaf) [F.IsFiniteLocallyFreeOfRank d] (V : S.Opens)
@@ -323,10 +300,7 @@ theorem vectorIntegrationChart_isPullback (S : Scheme.{u}) [IsNoetherian S] (d :
   simpa only [vectorIntegrationChart, Category.id_comp, Category.assoc] using
     hi.paste_horiz (isPullback_morphismRestrict (VectorBundleZeroSection.π S d F) V).flip
 
-/-- Canonical coefficient identification in the inverse-frame square. The equality of
-its two composites is used between the inverse-image composition comparisons; then the
-base Tate tensor is pulled back and the existing affine coefficient descent is inverted.
-Source: blueprint order 1972, a_i (blueprint: proposition-purity-vector-bundles). -/
+/-- Canonical coefficient identification in the inverse-frame square. -/
 def vectorIntegrationChartCoefficient (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)
@@ -347,8 +321,7 @@ def vectorIntegrationChartCoefficient (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (affineTracePullbackInvertible N V.ι hS) d).symm
 
 /-- The prescribed local map a_i: exchange for the actual inverse-coordinate square,
-canonical Tate identification, comparison with the ordered tower, and its actual counit.
-Source: blueprint order 1972, a_i (blueprint: proposition-purity-vector-bundles). -/
+canonical Tate identification, comparison with the ordered tower, and its actual counit. -/
 def vectorIntegrationLocalTrace (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
     (t : OrdinaryFiniteTwistTransport A N hA)
@@ -380,7 +353,6 @@ def vectorIntegrationLocalTrace (N : ℕ) (hN : 0 < N)
 /-- The defining local normalization on every Zariski linear trivialization. Quantifying
 normalized projective-line data avoids making any such datum an extra hypothesis or a
 choice in the global map: the Kummer and counit normalizations fix the actual trace.
-Source: blueprint order 1972, uniqueness paragraph (blueprint: proposition-purity-vector-bundles).
 -/
 def VectorIntegrationNormalization (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
@@ -394,14 +366,7 @@ def VectorIntegrationNormalization (N : ℕ) (hN : 0 < N)
     (ordinaryFinitePullback A V.ι).map f ≫ (ordinaryFiniteUnitPullback A V.ι).hom =
       vectorIntegrationLocalTrace N hN A hA t D S hS d F V e
 
-/-- The bundle compact-support complex has no cohomology outside degree zero.
-Source: blueprint vector integration, concentration paragraph.
-(blueprint: lem-amb-vector-integration-cohomology-zero).
-
-Proof: choose a finite-rank frame cover. Exchange, coefficient descent and the affine
-trace identify each restriction with the constant complex. Exact inverse image commutes
-with cohomology. The cover detects that the map of each other cohomology sheaf to zero
-is an isomorphism. This also applies to the empty base and to rank zero. -/
+/-- The bundle compact-support complex has no cohomology outside degree zero. -/
 theorem vectorIntegration_cohomology_zero (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
     (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)

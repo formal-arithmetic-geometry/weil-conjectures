@@ -12,8 +12,7 @@ import WeilConjectures.AlgebraicGeometry.VaryingRing.SemilinearCompositorCoheren
 
 /-! # Packaging the actual varying-ring proper/open calculus
 
-Source: Stacks 0F7B--0F7D; the intrinsic varying-ring pasting theorem.
-(blueprint: lem-sp-varying-ring-proper-open-model).
+Source: Stacks 0F7B--0F7D.
 -/
 
 @[expose] public noncomputable section
@@ -42,21 +41,19 @@ private theorem iso_trans_app {C D : Type*} [Category* C] [Category* D]
 variable (R : ℕ → CommRingCat.{u + 1}) (φ : ∀ n, R (n + 1) ⟶ R n)
 
 /-- Equality transport of open extension, including the open-immersion instance.
-Source: Stacks 03DI (blueprint: lem-sp-varying-ring-proper-open-model). -/
+Source: Stacks 03DI. -/
 def openCongr {X Y : Scheme.{u}} {f g : X ⟶ Y}
     [IsOpenImmersion f] [IsOpenImmersion g] (h : f = g) : J R φ f ≅ J R φ g := by
   subst g
   exact Iso.refl _
 
-/-- Proper composition with a named composite, retained as a compact term.
-Source: actual proper compositor (blueprint: lem-sp-varying-ring-proper-open-model). -/
+/-- Proper composition with a named composite, retained as a compact term. -/
 @[irreducible] def namedPComp {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z) (fg : X ⟶ Z) (h : f ≫ g = fg) :
     P R φ f ⋙ P R φ g ≅ P R φ fg :=
   pComp R φ f g ≪≫ eqToIso (congrArg (P R φ) h)
 
-/-- Open composition with a named composite, retained as a compact term.
-Source: actual open compositor (blueprint: lem-sp-varying-ring-proper-open-model). -/
+/-- Open composition with a named composite, retained as a compact term. -/
 @[irreducible] def namedJComp {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z) (fg : X ⟶ Z)
     [IsOpenImmersion f] [IsOpenImmersion g] [IsOpenImmersion fg] (h : f ≫ g = fg) :
@@ -85,39 +82,34 @@ private theorem namedJComp_hom_app {X Y Z : Scheme.{u}}
   unfold namedJComp openCongr
   exact iso_trans_app _ _ M
 
-/-- Reflexive named proper composition is the specified proper compositor.
-Source: identity transport (blueprint: lem-sp-varying-ring-proper-open-model). -/
+/-- Reflexive named proper composition is the specified proper compositor. -/
 theorem namedPComp_rfl {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     namedPComp R φ f g (f ≫ g) rfl = pComp R φ f g := by
   unfold namedPComp
   exact Iso.trans_refl _
 
-/-- Reflexive named open composition is the specified open compositor.
-Source: identity transport (blueprint: lem-sp-varying-ring-proper-open-model). -/
+/-- Reflexive named open composition is the specified open compositor. -/
 theorem namedJComp_rfl {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     [IsOpenImmersion f] [IsOpenImmersion g] :
     namedJComp R φ f g (f ≫ g) rfl = jComp R φ f g := by
   unfold namedJComp openCongr
   exact Iso.trans_refl _
 
-/-- The proper left unitor with the actual named compositor.
-Source: compositor coherence (blueprint: lem-sp-varying-ring-proper-open-model). -/
+/-- The proper left unitor with the actual named compositor. -/
 theorem namedProperLeft {X Y : Scheme.{u}} (f : X ⟶ Y) (M : Derived R φ X) :
     (namedPComp R φ (𝟙 X) f f (Category.id_comp f)).hom.app M =
       (P R φ f).map ((pId R φ X).hom.app M) := by
   rw [namedPComp_hom_app]
   exact (semilinear_compositor_coherence R φ).2.2.2.2.2.1 f M
 
-/-- The proper right unitor with the actual named compositor.
-Source: compositor coherence (blueprint: lem-sp-varying-ring-proper-open-model). -/
+/-- The proper right unitor with the actual named compositor. -/
 theorem namedProperRight {X Y : Scheme.{u}} (f : X ⟶ Y) (M : Derived R φ X) :
     (namedPComp R φ f (𝟙 Y) f (Category.comp_id f)).hom.app M =
       (pId R φ Y).hom.app ((P R φ f).obj M) := by
   rw [namedPComp_hom_app]
   exact (semilinear_compositor_coherence R φ).2.2.2.2.2.2.1 f M
 
-/-- The proper named-composite associativity equation.
-Source: compositor coherence (blueprint: lem-sp-varying-ring-proper-open-model). -/
+/-- The proper named-composite associativity equation. -/
 theorem namedProperAssoc {X Y Z W : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ W)
     (fg : X ⟶ Z) (gh : Y ⟶ W) (fgh : X ⟶ W)
@@ -131,8 +123,7 @@ theorem namedProperAssoc {X Y Z W : Scheme.{u}}
   exact regroup_four _ _ _ _ _ _ _
     ((semilinear_compositor_coherence R φ).2.1 f g h fg gh fgh hfg hgh hl hr M)
 
-/-- The open left unitor with the actual named compositor.
-Source: compositor coherence (blueprint: lem-sp-varying-ring-proper-open-model). -/
+/-- The open left unitor with the actual named compositor. -/
 theorem namedOpenLeft {X Y : Scheme.{u}} (f : X ⟶ Y) [IsOpenImmersion f]
     (M : Derived R φ X) :
     (namedJComp R φ (𝟙 X) f f (Category.id_comp f)).hom.app M =
@@ -140,8 +131,7 @@ theorem namedOpenLeft {X Y : Scheme.{u}} (f : X ⟶ Y) [IsOpenImmersion f]
   rw [namedJComp_hom_app]
   exact (semilinear_compositor_coherence R φ).2.2.2.2.2.2.2.1 f M
 
-/-- The open right unitor with the actual named compositor.
-Source: compositor coherence (blueprint: lem-sp-varying-ring-proper-open-model). -/
+/-- The open right unitor with the actual named compositor. -/
 theorem namedOpenRight {X Y : Scheme.{u}} (f : X ⟶ Y) [IsOpenImmersion f]
     (M : Derived R φ X) :
     (namedJComp R φ f (𝟙 Y) f (Category.comp_id f)).hom.app M =
@@ -149,8 +139,7 @@ theorem namedOpenRight {X Y : Scheme.{u}} (f : X ⟶ Y) [IsOpenImmersion f]
   rw [namedJComp_hom_app]
   exact (semilinear_compositor_coherence R φ).2.2.2.2.2.2.2.2 f M
 
-/-- The open named-composite associativity equation.
-Source: compositor coherence (blueprint: lem-sp-varying-ring-proper-open-model). -/
+/-- The open named-composite associativity equation. -/
 theorem namedOpenAssoc {X Y Z W : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ W)
     (fg : X ⟶ Z) (gh : Y ⟶ W) (fgh : X ⟶ W)
@@ -172,7 +161,7 @@ universe v w
 
 set_option linter.checkUnivs false in
 /-- The functor data underlying a proper/open calculus, retaining both universes.
-Source: Stacks 0F7B--0F7D (blueprint: lem-sp-varying-ring-proper-open-model). -/
+Source: Stacks 0F7B--0F7D. -/
 structure ProperOpenInputs (A : Scheme.{u} → Prop) where
   obj : {X : Scheme.{u} // A X} → Type w
   [category (X : {X : Scheme.{u} // A X}) : Category.{v} (obj X)]
@@ -199,7 +188,7 @@ structure ProperOpenInputs (A : Scheme.{u} → Prop) where
 attribute [instance] ProperOpenInputs.category
 
 /-- The proper/open equations, referring to one fixed record of functor data.
-Source: Stacks 0F7B--0F7D (blueprint: lem-sp-varying-ring-proper-open-model). -/
+Source: Stacks 0F7B--0F7D. -/
 structure ProperOpenEquations {A : Scheme.{u} → Prop}
     (D : ProperOpenInputs.{u, v, w} A) : Prop where
   pAssoc (X Y Z W : {X : Scheme.{u} // A X})
@@ -279,9 +268,7 @@ structure ProperOpenEquations {A : Scheme.{u} → Prop}
         (D.P U V p).map ((D.jId U).hom.app M) =
       (D.jId V).hom.app ((D.P U V p).obj M)
 
-/-- Combining the supplied functors with their equations gives the calculus.
-Source: the defining fields of ProperOpenCalculus
-(blueprint: lem-sp-varying-ring-proper-open-model). -/
+/-- Combining the supplied functors with their equations gives the calculus. -/
 def assembleProperOpen {A : Scheme.{u} → Prop} (D : ProperOpenInputs.{u, v, w} A)
     (L : ProperOpenEquations D) : ProperOpenCalculus.{u, v, w} A where
   obj := D.obj
@@ -305,7 +292,7 @@ def assembleProperOpen {A : Scheme.{u} → Prop} (D : ProperOpenInputs.{u, v, w}
   horizontalIdentity := L.horizontalIdentity
 
 /-- The actual derived functors and their specified comparison isomorphisms.
-Source: Stacks 0F7B--0F7D (blueprint: lem-sp-varying-ring-proper-open-model). -/
+Source: Stacks 0F7B--0F7D. -/
 def actualProperOpenInputs (A : Scheme.{u} → Prop)
     (hgamma : ∀ {U V W Z : Scheme.{u}}
       (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)
@@ -322,14 +309,7 @@ def actualProperOpenInputs (A : Scheme.{u} → Prop)
   gamma _U _V _W _Z k r p i _ _ _ _ _ _ h :=
     @asIso _ _ _ _ (gamma R φ k r p i h) (hgamma k r p i h)
 
-/-- The actual proper/open data satisfy all the defining equations.
-Source: intrinsic pasting and semilinear compositor coherence
-(blueprint: lem-sp-varying-ring-proper-open-model).
-
-Proof: use the named-composite associativity and unit lemmas. On reflexive
-composites, the named maps reduce to the original compositors. After unfolding
-only the data record, the two pasting and two identity equations are exactly
-properOpenPasting and gamma_identities; asIso retains the original hom map. -/
+/-- The actual proper/open data satisfy all the defining equations. -/
 theorem actualProperOpenEquations (A : Scheme.{u} → Prop)
     (hgamma : ∀ {U V W Z : Scheme.{u}}
       (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)
@@ -371,16 +351,7 @@ theorem actualProperOpenEquations (A : Scheme.{u} → Prop)
 
 /-- Invertibility is the only additional input to the existing proper/open equations.
 All functors and maps are the actual varying-ring constructions.
-Source: Stacks 0F7B--0F7D
-(blueprint: lem-sp-varying-ring-proper-open-model).
-
-Proof: use the actual direct images, open extensions and their specified identity
-and composition comparisons. Turn the specified gamma into an isomorphism using
-its invertibility, without choosing a different arrow. The named-composite
-associativity and unit equations are precisely semilinear compositor coherence.
-The proper/open vertical, horizontal and identity equations are the existing
-pasting equations. Restricting the scheme index to any predicate changes none
-of these maps or equations. -/
+Source: Stacks 0F7B--0F7D. -/
 def properOpenModel (A : Scheme.{u} → Prop)
     (hgamma : ∀ {U V W Z : Scheme.{u}}
       (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)

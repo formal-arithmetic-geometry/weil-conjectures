@@ -11,7 +11,7 @@ import WeilConjectures.AlgebraicGeometry.Closed.ClosedLiftStalkSpecialization
 
 /-! # Fibre maps factor through restriction on the strict-local base
 
-Source: Stacks Project, Tag 0GJV, proof of lemma-specialization-cospecialization.
+Source: Stacks Project, Tag 0GJV.
 -/
 
 @[expose] public section
@@ -22,23 +22,7 @@ namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Fibre-map factorization through strict-local restriction.
-Source: Stacks Project, Tag 0GJV, proof of lemma-specialization-cospecialization.
-(blueprint: lem-weil-pbc-strict-base-fibre-map-factorization).
-
-Proof plan: Put `K = G[0]` and form the comparison from the derived stalk at `s` to
-sections over the strict henselization by the canonical germ restriction, the derived
-pullback exchange mate, and Leray. Exactness of strict-local sections identifies this
-with the displayed derived morphism. On every affine pointed etale neighbourhood,
-the defining equation of the germ restriction says that its composite with the
-limit-leg section is restriction of that section. Restricting a representative germ
-along the limit leg and then to `t` is exactly the definition of
-`derivedEtaleStalkSpecialization`; at the distinguished closed lift the same equation
-is the original germ because the point-evaluation map is the closed lift. Naturality
-of the derived exchange mate and the global-germ/exchange identity move these
-representative equations through the derived comparison. The resulting equations
-are equalities of morphisms in the bounded-below derived category, giving the two
-conjuncts. This argument uses no local acyclicity, properness, torsion, or
-invertibility assertion. -/
+Source: Stacks Project, Tag 0GJV. -/
 theorem strictBaseSheafFiberMap_factorization
     {X S : Scheme.{u}} (f : X ⟶ S)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

@@ -12,8 +12,7 @@ import all WeilConjectures.AlgebraicGeometry.Scalar.ScalarPullbackRepresentative
 /-!
 # Tensor counit squares with a coefficient in degree zero
 
-Source: Stacks Project, Tags 07A4 and 0FPH
-(blueprint: lem-pur-tensor-single-cochain-counit).
+Source: Stacks Project, Tags 07A4 and 0FPH.
 -/
 
 @[expose] public noncomputable section
@@ -145,8 +144,7 @@ private theorem tensorCounitSingleDiagram
   simpa only [Functor.map_comp, Category.assoc] using h
 
 /-- The tensor counit square after fixing a coefficient in degree zero.
-Source: Stacks Project, Tags 07A4 and 0FPH
-(blueprint: lem-pur-tensor-single-cochain-counit). -/
+Source: Stacks Project, Tags 07A4 and 0FPH. -/
 def TensorSingleCounitSquare
     {C : Type w} {D : Type w'} [Category.{v} C] [Category.{v'} D]
     [Abelian C] [Abelian D]
@@ -179,16 +177,7 @@ def TensorSingleCounitSquare
               (.up ℤ)).symm).hom.app P)
 
 /-- The cochain tensor counit square implies its single-coefficient specialization.
-Source: Stacks Project, Tags 07A4 and 0FPH
-(blueprint: lem-pur-tensor-single-cochain-counit).
-Proof: write the single-coefficient comparison as its geometric representative
-followed by localization of the ordinary single-complex comparison and k. Lax
-monoidal naturality moves this latter morphism through the tensorator. Apply the
-cochain tensor counit square to P and single M. The ordinary bifunctor comparison
-on a single complex, and naturality of its single-complex iso with respect to k,
-identify the remaining map with the degreewise tensor comparison t. Naturality
-of the geometric representative moves the total-tensor/single iso to the other
-side; functoriality of Q and associativity finish the equation. -/
+Source: Stacks Project, Tags 07A4 and 0FPH. -/
 theorem tensor_single_cochain_counit
     {C : Type w} {D : Type w'} [Category.{v} C] [Category.{v'} D]
     [Abelian C] [Abelian D]

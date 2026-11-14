@@ -12,7 +12,6 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 # Tensor compatibility of cochain horizontal reduction adjoints
 
 Source: Zheng Construction 4.1; Stacks 03EK, 06YN, 07A4.
-(blueprint: lem-pur-system-cochain-tensor-reduction).
 -/
 
 @[expose] public noncomputable section
@@ -33,8 +32,7 @@ variable {C : Type c} [Category.{v} C] [EssentiallySmall.{max c v r} C]
   (τ : ∀ n : ℕ, B (n + 1) ⟶ B n)
 
 /-- The degreewise ordinary horizontal adjoints form a cochain morphism.
-Source: Zheng Construction 4.1; Stacks 06YN
-(blueprint: lem-pur-system-cochain-tensor-reduction). -/
+Source: Zheng Construction 4.1; Stacks 06YN. -/
 def cochainReduction (A : Data.{c, v, r} J B τ) {m n : ℕ} (h : n ≤ m)
     (P : CochainComplex (Systems.{c, v, max c v r} J B τ) ℤ) :
     ((A.scalar h).model.E.mapHomologicalComplex (.up ℤ)).obj
@@ -61,9 +59,7 @@ private theorem cochainReduction_f (A : Data.{c, v, r} J B τ) {m n : ℕ} (h : 
       ordinaryReduction.{c, v, r} J B τ A h (P.X k) := rfl
 
 /-- The degreewise construction agrees with the induced cochain adjunction.
-Source: Stacks 06YN (blueprint: lem-pur-system-cochain-tensor-reduction).
-Proof: the inverse Hom equivalence is extension of the map followed by the
-counit in both constructions, and the cochain counit is degreewise. -/
+Source: Stacks 06YN. -/
 theorem cochainReduction_eq_transpose (A : Data.{c, v, r} J B τ) {m n : ℕ} (h : n ≤ m)
     (P : CochainComplex (Systems.{c, v, max c v r} J B τ) ℤ) :
     cochainReduction.{c, v, r} J B τ A h P =
@@ -141,14 +137,7 @@ set_option backward.isDefEq.respectTransparency true in
 set_option maxHeartbeats 400000 in
 -- The summand calculation compares three dependent ringed module categories.
 /-- Cochain reduction commutes with the normalized total tensor comparisons.
-Source: Zheng Construction 4.1; Stacks 06YN, 07A4
-(blueprint: lem-pur-system-cochain-tensor-reduction).
-Proof: test equality in each total degree on every (p,q) summand. The comparison
-model summand equations express both maps using the inverse ordinary comparisons.
-Naturality moves the horizontal adjoint past the system tensor summand. The
-ordinary tensor reduction identity then equates the two remaining maps. This
-argument uses every summand of the unbounded total and changes no differential
-or Koszul sign. -/
+Source: Zheng Construction 4.1; Stacks 06YN, 07A4. -/
 theorem cochain_tensor_reduction (A : Data.{c, v, r} J B τ) {m n : ℕ} (h : n ≤ m)
     (P Q : CochainComplex (Systems.{c, v, max c v r} J B τ) ℤ) :
     (A.scalarTensorModel h).chain

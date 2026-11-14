@@ -142,7 +142,7 @@ lemma slicePt_sliceX (x : 𝟙_ _ ⟶ X) (y : 𝟙_ _ ⟶ Y) :
   congr 1
   ext <;> simp
 
-/-- The identification `Z ×_{X × Y × Z} ... `: pulling back to `{x} × {y} × Z` through either
+/-- The identification of the two pullbacks of `L` to `{x} × {y} × Z`, through either
 slice. -/
 noncomputable abbrev sliceComparison (x : 𝟙_ _ ⟶ X) (y : 𝟙_ _ ⟶ Y)
     (L : ((X ⊗ Y) ⊗ Z).left.Modules) :

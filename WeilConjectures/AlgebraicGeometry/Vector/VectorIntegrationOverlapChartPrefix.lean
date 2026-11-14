@@ -10,10 +10,6 @@ import WeilConjectures.AlgebraicGeometry.Vector.VectorIntegrationOverlapCoordina
 import WeilConjectures.AlgebraicGeometry.Vector.VectorIntegrationRestrictedChartTransport
 
 /-! # The change of frame before applying the affine counit
-
-Source: blueprint sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md,
-overlap calculation, and proposition-purity-vector-bundles.
-(blueprint: lem-amb-vector-integration-overlap-chart-prefix).
 -/
 
 @[expose] public noncomputable section
@@ -25,9 +21,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
 /-- Exchange and coefficient transport for the affine tower at the constant object.
-This comparison contains neither a projective-line datum nor its counit.
-Source: blueprint affine trace construction, base-change comparison in Step 6.
-(blueprint: lem-amb-vector-integration-overlap-chart-prefix). -/
+This comparison contains neither a projective-line datum nor its counit. -/
 def affineTraceUnitBaseChange (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     {T S : Scheme.{u}} (f : T ⟶ S) (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ) :
@@ -42,9 +36,7 @@ def affineTraceUnitBaseChange (A : Type (u + 1)) [CommRing A] [Finite A]
       ((affineTraceRight A N hA T d).map (ordinaryFiniteUnitPullback A f).hom)
 
 /-- The actual inverse-frame exchange and coefficient comparison, stopping before the
-counit. This is exactly the first three factors of vectorIntegrationLocalTrace.
-Source: blueprint vector integration, prescribed local map.
-(blueprint: lem-amb-vector-integration-overlap-chart-prefix). -/
+counit. This is exactly the first three factors of vectorIntegrationLocalTrace. -/
 def vectorIntegrationChartPrefix (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
     (t : OrdinaryFiniteTwistTransport A N hA)
@@ -72,9 +64,7 @@ def vectorIntegrationChartPrefix (N : ℕ) (hN : 0 < N)
       (affineTracePullbackInvertible N V.ι hS) d).inv
 
 /-- Restrict a frame comparison to a smaller open and transport its affine tower there.
-The source compositor uses the specified equality of the open inclusions.
-Source: blueprint vector integration, restriction to an overlap.
-(blueprint: lem-amb-vector-integration-overlap-chart-prefix). -/
+The source compositor uses the specified equality of the open inclusions. -/
 def vectorIntegrationOverlapPrefix (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
     (t : OrdinaryFiniteTwistTransport A N hA)
@@ -95,29 +85,6 @@ def vectorIntegrationOverlapPrefix (N : ℕ) (hN : 0 < N)
 /-- On a common smaller open the two inverse-frame comparisons differ by the actual
 linear-coordinate pullback action. No counit, projective-line datum, sheaf Hom
 correspondence, or descent assertion occurs in this statement.
-Source: blueprint vector integration, overlap calculation, and linear-trace invariance,
-coordinate convention; original local-compatibility proof Steps 1--2.
-(blueprint: lem-amb-vector-integration-overlap-chart-prefix).
-
-Proof: restrict both module frames to U using the restriction functor on module sheaves
-and its free-module comparison. Their composite is an automorphism of the free module.
-Its images of the standard global basis give a matrix G of global sections with inverse
-obtained from the inverse automorphism, as in transition_spec. In the convention
- e'_j = sum_i G_ij e_i the coordinate change is G transpose. Thus the inverse charts
-are related by g = (G transpose) inverse. Check this equality on degree-one generators
-of the symmetric algebra and then use its universal property. The corresponding
-linear map is affineTraceLinearMap, and its square over the identity is Cartesian.
-Paste each restricted inverse-coordinate square with its original chart square.
-Compact-support exchange pasting, its naturality in the coefficient, and naturality
-of the bounded/unbounded compact-support comparisons identify the two resulting
-prefixes. Associativity of inverse-image compositors and the composition equations
-of normalized Tate pullback identify the coefficient factors: they are exactly
-vectorIntegrationChartCoefficient and affineTraceRightBaseChange followed by the
-constant-unit comparison in affineTraceUnitBaseChange. The remaining automorphism
-factor, conjugated by affineLinearCompactComparison, is precisely
-affineLinearTraceAction (with no counit applied). This proves the displayed equation.
-For rank zero the basis and matrix are empty and all these equations are unit equations;
-restriction to the empty open and the zero coefficient ring obey the same formulas.
 -/
 theorem vectorIntegration_overlap_chart_prefix (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)

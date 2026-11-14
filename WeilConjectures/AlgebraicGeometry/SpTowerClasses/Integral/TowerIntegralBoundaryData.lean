@@ -22,8 +22,6 @@ open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 
 /-- The exact integral boundary equality, with its category witnesses shared by name.
-Source: blueprint latest, `sk-prop-sp-tower-geometric-classes.proof.md`, clause (2).
-(blueprint: def-sfb-integral-boundary-normalization).
 Fact wraps the actual equality of the transported integral arrow and the positive
 Kummer composite, including its prescribed shift-addition comparison. -/
 def IntegralBoundaryNormalization (l : ℕ) [Fact l.Prime]

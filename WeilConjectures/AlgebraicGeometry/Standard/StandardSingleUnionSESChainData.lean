@@ -39,43 +39,7 @@ set_option maxHeartbeats 500000 in
 Unlike a short exact presentation, this asserts no monomorphism, epimorphism,
 short complex or exactness of complexes on A.
 
-Source: Stacks Project, Tags 08BV, 08HZ, 08FE, 08HY, 0DJ9, 013N--013O.
-(blueprint: new-pc-standard-single-union-ses-chain-data).
-
-Proof:
-Set W = U union V and form its cartesian base change W_A. The opens induced
-by U and V cover W, and their inverse images cover W_A. Choose K-injective
-resolutions with injective terms of N[0] and of its ordinary pullback in degree
-zero. For each cover form the restriction-pair and restriction-difference row.
-Sheaf gluing proves exactness at the first two terms, and flasqueness of injective
-module sheaves makes the difference map surjective. Thus the cone of the first
-map represents the overlap term, with the usual difference sign.
-Relative Mayer--Vietoris (Tag 08HZ) computes the two direct-image
-cover diagrams functorially. Apply derived pullback to the source diagram.
-These functors are triangulated and additive. Represent the finite diagrams by
-complexes using diagram resolutions (K-flat for the source
-pullback and K-injective for direct images). The counit from derived to ordinary
-pullback of N[0], transposed under the derived adjunction, gives the comparison
-of these two diagrams. Restriction-unit naturality and the underived open
-counit square give its compatibility with the restriction maps, including the
-specified homotopies. Rectify the first square by replacing its representatives
-by functorial cylinders; carry the specified homotopies into the induced cone
-map. Use the comparison of resolved cover diagrams, including its homotopies,
-rather than an arbitrary completion of a square in the triangulated category:
-that completion alone would not identify the prescribed overlap map. This gives
-t, t', alpha and beta with a strict commuting square and ensures
-that its functorial cone map represents the original overlap comparison.
-Exact open restriction identifies the coefficients with the literal tensor
-pullbacks displayed below. Direct-image composition and the additive biproduct
-comparison give the six vertex isomorphisms. Expand each base-change map as the
-mate of the pulled-back direct-image counit followed by the single-complex
-pullback counit. The composite-counit identity and adjunction triangle identities
-identify the first component with the union comparison, the middle component
-with the biproduct of the two member comparisons, and the cone component with
-the overlap comparison. This gives the three conjugacy equations.
-Empty opens give zero terms. Repeated or contained opens give split restriction
-rows. Zero coefficients give zero rows. All choices are existential witnesses,
-not definitions of data from an unproved existence theorem. -/
+Source: Stacks Project, Tags 08BV, 08HZ, 08FE, 08HY, 0DJ9, 013N--013O. -/
 theorem standardSingle_union_ses_chain_data
     {Y B A : Scheme.{u}} (p : Y ⟶ B) (g : A ⟶ B) (U V : Y.Opens)
     (N : (U ⊔ V).toScheme.Modules) :

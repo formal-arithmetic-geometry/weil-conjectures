@@ -12,15 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.Module.ModuleCohomologyExtHMap
 
 /-! The module-to-abelian comparison for structure modules.
 
-Source: Stacks Project, Tags 03FD and 01F7.
-(blueprint: new-structure-derived-image-module-abelian-compatibility)
-
-Proof: Use the fixed injective-resolution comparison between module cohomology and
-Ext of the underlying additive sheaf. Its h-map square is the coefficient
-factorization theorem, and the explicit Zariski h-map formula is exactly the
-inverse-image Ext construction defining `structureSheafCohomologyPullback`.
-The resulting additive equivalences are chosen independently for each scheme and
-the square holds for every morphism and every module h-map. -/
+Source: Stacks Project, Tags 03FD and 01F7. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -42,12 +34,7 @@ noncomputable def structureModuleAbelianEquiv
 -- Transporting the fixed resolution comparison through the module aliases is expensive.
 /-- The fixed resolution comparison `structureModuleAbelianEquiv` respects every structure
 h-map.
-Source: Stacks Project, Tags 03FD (comparison) and 01FB (coefficient factorization).
-(blueprint: new-structure-derived-image-module-abelian-compatibility).
-
-Proof: Apply moduleCohomologyExtResolutionEquiv_hmap to unitToPushforwardObjUnit. Its
-underlying abelian coefficient and inverse-image Ext formula are definitionally those
-defining structureSheafCohomologyPullback. -/
+Source: Stacks Project, Tags 03FD (comparison) and 01FB (coefficient factorization). -/
 theorem structure_module_abelian_comparison
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

@@ -505,24 +505,7 @@ private def unitCokernel (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
 
 /-- The ordinary coefficient unit is the cokernel of the variable-power map.
 
-Source: blueprint latest, `sk-prop-sp-tower-geometric-classes.proof.md`, clause (2),
-coefficient-resolution calculation; Stacks 03D7, ordinary extension of scalars.
-(blueprint: lem-sfb-power-system-ordinary-cokernel).
-
-Proof: at level n the coefficient ring is the constant sheaf Z/l^(n+1).
-Its sections kill l^(n+1), so the ordinary unit kills the indicated power map.
-The sheaf cokernel of that map has a unique Z/l^(n+1)-module structure: an
-integer acts by its multiple, and this factors through the residue ring because
-l^(n+1) acts by zero. Extend this action from constant sections to the constant
-ring sheaf by its sheafification universal property. Restrictions are linear,
-and the original transitions are semilinear for the quotient transitions of the
-rings, since they commute with all integer multiples. Thus this cokernel is an
-object of the ringed sequence-site module category. Additive maps out of it are
-exactly module-system maps, as can be checked locally on constant integer
-sections of the coefficient ring. Its quotient universal property therefore
-identifies it with the ordinary left adjoint applied to X; the comparison takes
-the quotient projection to the actual ordinary adjunction unit. Consequently
-that unit, with its specified source X, is a cokernel of the power map. -/
+Source: Stacks 03D7, ordinary extension of scalars. -/
 theorem powerSystem_ordinary_cokernel (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
     (r : Reduction T (Rrings l T)) (X : Ab T) :
     ∃ hz : (PowerTransition.multiplication l).app X ≫

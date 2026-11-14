@@ -37,10 +37,6 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Line.LineBundleTowerPull
 import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Integral.IntegralTowerPullbackSquare
 
 /-! # Integral line-bundle classes and geometric pullback
-
-Source: blueprint, sec-smooth-purity/sk-prop-sp-tower-geometric,
-classes proof (2), and the integral extension argument in steps 1--3 of
-lem-sp-tower-chern-pullback (blueprint: lem-sp-tower-integral-class-pullback).
 -/
 
 @[expose] public noncomputable section
@@ -60,20 +56,7 @@ open AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 
 /-- Integral line-bundle classes commute with pullback to full units, in the ordinary
- derived category of abelian towers. No torsion coefficient or root comparison occurs.
-Source: blueprint classes proof (2); lem-sp-tower-chern-pullback, steps 1--3
-(blueprint: lem-sp-tower-integral-class-pullback).
-
-Proof: lineBundle_proEtaleClass_pullback gives the class identity before making
-constant towers. It follows from the already proved arbitrary-scheme Picard
-cohomology naturality and the ordinary integer and units endpoint squares.
-Functor.compConstIso identifies inverse image of a constant tower with the constant
-tower of inverse image. Exact-functor Ext compatibility with composition and
-isomorphisms transports the sheaf identity through this comparison. The components
-of integerPull and unitsPull are exactly the endpoints in that identity. Finally,
-cancel the inverse single comparison on the source; this produces precisely the
-single and shift comparisons in integerDerivedPull and unitsDerivedPull.
-Empty schemes, trivial bundles and nonflat morphisms require no extra assumptions. -/
+ derived category of abelian towers. No torsion coefficient or root comparison occurs. -/
 theorem tower_integralClass_pullback {X Y : Scheme.{u}} (f : X ⟶ Y)
     (L : Y.Modules) [Scheme.Modules.IsInvertible L] :
     (abPull f).mapDerivedCategory.map (lineBundleClass Y (Scheme.Pic.ofIsInvertible L)) ≫

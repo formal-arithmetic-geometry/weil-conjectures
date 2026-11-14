@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.SymmetricProjTautologicalCharts.Symmetr
 # Gluing the ordered tautological twist comparison
 
 Source: Stacks Project, Constructions, Tags 01OE, 01OB and 01MS.
-(blueprint: lem-trf-symmetric-proj-ordered-twist-gluing).
 -/
 
 @[expose] public section
@@ -37,30 +36,9 @@ attribute [local irreducible] Scheme.Modules.tensorPullback Scheme.Modules.tenso
 
 /-- Once the ordered scheme and affine twist comparisons are supplied, normalization
 of a tautological quotient identifies its line and coordinate quotients with the pullback
-of the standard twist. No scheme isomorphism is constructed by this statement.
+of the standard twist.
 
-Source: Stacks Project, Constructions, Tags 01OE (lemma-projective-space-bundle),
-01OB (definition-projective-bundle), and 01MS (lemma-when-invertible).
-(blueprint: lem-trf-symmetric-proj-ordered-twist-gluing).
-
-Proof: Fix an affine V and unpack AffineFreeComparison to get beta, eC, its
-section-preserving twist isomorphism, and gamma and eR. The integral polynomial chart
-normalization of theta says that the composite local map to the integral Proj is the
-coefficient-extension map fixing every ordered variable. The chart equation for eRel
-therefore identifies the restriction of eRel followed by theta with this same standard
-polynomial chart. Pulling back the standard twist gives the local polynomial degree-one
-twist: on D_+(X_i) its generator is X_i, and extension of coefficients preserves both
-this frame and every ratio X_j/X_i. Compose this comparison with the beta twist
-isomorphism and the inverse of D.chart V. It sends the pulled coordinate section X_i
-to the quotient of b(e_i), by D.generator. On intersections these maps agree: each
-sends a local free frame to the same normalized quotient frame. The local inverses
-agree as well, so they glue to an isomorphism t. Refine intersections of affine base
-opens by affine opens; no separatedness of S is needed. Equality of the displayed
-morphisms from the unit module can be checked on these charts, where the generator
-formula gives it. The tensor pullback composition and unit comparisons in the formula
-are precisely the canonical identifications used to transport these sections. The
-argument includes r=0 and empty charts because it only uses free frames on standard
-opens, and those opens still form a cover. -/
+Source: Stacks Project, Constructions, Tags 01OE, 01OB, and 01MS. -/
 theorem exists_ordered_twist_comparison (S : Scheme.{u}) (E : S.Modules)
     [E.IsQuasicoherent] (D : ProjectiveBundleQuotientGeometry.TautologicalQuotient E)
     (r : ℕ) (b : RelativeProjectiveSpace.freeModule S r ≅ E)

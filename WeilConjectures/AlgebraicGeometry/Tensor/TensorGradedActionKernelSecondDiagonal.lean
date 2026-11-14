@@ -14,7 +14,6 @@ import Mathlib.Topology.Sheaves.LocallySurjective
 /-! # The canonical tensor action on the surviving ideal summand
 
 Source: Stacks Project, Tags 09MS and 0B8S.
-(blueprint: lem-sc-tensor-graded-action-kernel-second-diagonal).
 -/
 
 @[expose] public section
@@ -31,21 +30,7 @@ noncomputable section
 canonical transported tensor-by-x map followed by the output inclusion.
 This statement concerns one summand only, before applying any degree projection.
 
-Source: Stacks Project, Tag 09MS, coherent-equation-ses and its direct sum;
-Tag 0B8S, cohomology-lemma-boundary-derivation-over-cup-product, first proof paragraph.
-(blueprint: lem-sc-tensor-graded-action-kernel-second-diagonal).
-Proof: Substitute hD and locally lift the canonically transported x(1)
-through the epi degree-n(e+1) unit. Use the local kernel-map multiplication
-formula to compute the target kernel inclusion as the tensorPowAddIso product
-of this lift with the input kernel inclusion. Apply k_inclusion at the output;
-the arithmetic equality n(e+1)+n=n(e+2) commutes with b by equality elimination.
-On the action side, hglobal, hlocal, b_quotient and k_inclusion compute the
-included action as the product of the two homogeneous sections, and b_multiply
-identifies it with exactly the preceding tensor product. Cancel the mono i.
-Naturality of both global morphisms and sheaf separation glue the equality
-on the local lifting cover. This uses only the degree-n summand; when n=0
-the same calculation uses degree-zero tensor unitors and needs no distinct
-degree assumption. Zero sections, zero ideals and empty opens are included. -/
+Source: Stacks Project, Tag 09MS, the ideal short exact sequence and its direct sum; Tag 0B8S. -/
 theorem tensorGradedAction_kernel_second_diagonal {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)
     (n : ℕ) (T : TensorGradedPresentation j L) (D : TensorBoundaryComparisonData j L n)

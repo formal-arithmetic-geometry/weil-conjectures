@@ -12,8 +12,8 @@ import Mathlib.CategoryTheory.Adjunction.Triple
 
 /-! # Scalar restriction preserves ordinary open support
 
-Source: Stacks Project, Modules on Sites, Tag 03DI, the sheafified direct-sum
-construction of extension by zero (blueprint: lem-sf-scalar-restriction-open-support).
+Source: Stacks Project, Modules on Sites, Tag 03DI, the sheafified direct-sum construction of
+extension by zero.
 -/
 
 @[expose] public noncomputable section
@@ -106,24 +106,7 @@ private theorem localizedOpen_unit_isIso
 
 /-- Restricting a single constant coefficient action preserves open support.
 
-Source: Stacks Project, sites-modules.tex, Tag 03DI (lemma-extension-by-zero),
-using Tag 03CY (lemma-sheafification-presheaf-modules)
-(blueprint: lem-sf-scalar-restriction-open-support).
-
-Proof: identify the small pro-etale site of U with the site localized at the
-subterminal open j. The specified module pullback is restriction in these coordinates;
-adjoint uniqueness identifies its chosen left adjoint with localized extension by zero.
-For a localized A-module M, the extension presheaf at H is the direct sum of M(H -> U)
-over lifts H -> U. Restrict the action on each summand through a. The two resulting
-presheaves have the same underlying additive groups, restrictions, and B-actions.
-Identity on each summand therefore identifies restriction of the A-extension
-presheaf with the B-extension presheaf of the restricted localized module. The same
-identity extends to sheafification: restriction changes only the action, and the
-underlying additive sheafification is unchanged. Thus the restricted extension lies
-in the essential image of the chosen B-extension. Its B-open counit is invertible,
-since open extension is fully faithful. The argument includes the empty open, where
-both extension presheaves are zero, and the identity open, where restriction is the
-identity. It assumes no flatness of a. -/
+Source: Stacks Project, sites-modules.tex, Tag 03DI, using Tag 03CY. -/
 theorem restrictScalars_openCounit_isIso
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     {U X : Scheme.{u}} (a : coefficients B X ⟶ coefficients A X)

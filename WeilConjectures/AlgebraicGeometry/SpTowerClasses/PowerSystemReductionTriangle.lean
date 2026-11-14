@@ -144,31 +144,7 @@ private theorem power_triangle_assembly
     (ad.unit.app ((DerivedCategory.singleFunctor C 0).obj X)) e₁ e₂ e₃ hf hg
 
 /-- Reduction of the constant units tower has the power-system multiplication triangle.
-No invertibility of the prime on the scheme or surjectivity of the power map is assumed.
-
-Source: blueprint latest, `sk-prop-sp-tower-geometric-classes.proof.md`, clause (2),
-and the coefficient-resolution calculation in step 1 of lem-sfb-kummer-reduction-unit.
-(blueprint: lem-sfb-power-system-reduction-triangle).
-
-Proof: work on the sequence site. The quotient coefficient system has the bounded flat
-integer resolution [Z --l^(n+1)--> Z], in degrees -1 and 0, whose transition is
-multiplication by l in degree -1 and the identity in degree 0. Tensor a flat-term
-K-flat resolution of the constant units system with this resolution. The resulting
-short exact sequence of total complexes has first map multiplication by l^(n+1)
-at level n and has quotient the ordinary scalar extension of that K-flat resolution.
-The two integer terms identify respectively with the power-transition and constant
-units systems. The flat resolution of the coefficient system identifies the quotient
-with the restriction of derived extension. This gives the asserted distinguished
-triangle, including its map from units. For an arbitrary supplied reduction, uniqueness
-of ordinary left adjoints identifies its ordinary functor with sheafified extension,
-compatibly with the ordinary unit. Uniqueness of universal derived pairs identifies
-its derived functor and counit with the K-flat model. Apply the representative
-transpose equation to its counit to identify the map from units with its actual
-adjunction unit. Transporting the distinguished triangle along these isomorphisms
-gives the assertion. The component prescription determines p as a natural
-transformation, so the first map is precisely the supplied p. All constructions
-are on the sequence site before evaluation. This argument uses no Kummer exactness;
-when the prime is not invertible, degree-zero cohomology need not vanish. -/
+No invertibility of the prime on the scheme or surjectivity of the power map is assumed. -/
 theorem powerSystem_reduction_triangle (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
     (r : Reduction T (Rrings l T)) (p : powerUnits l T ⟶ units T)
     (hp : ∀ n : ℕ, p.app (op n) = Scheme.proEtaleUnitsPower T (l ^ (n + 1))) :

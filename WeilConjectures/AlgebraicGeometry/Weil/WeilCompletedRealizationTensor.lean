@@ -16,7 +16,6 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSuppleme
 /-! # Tensor comparison for completed constant realization
 
 Source: Stacks Project, Modules on Sites, Tags 03D8, 03EK and 0GMW.
-(blueprint: lem-weil-pbc-completed-realization-tensor).
 -/
 
 @[expose] public noncomputable section
@@ -211,28 +210,8 @@ attribute [local irreducible] completedCechModulesEquiv pbcCompletedComparison
 /-- Completed constant realization commutes with total tensor products, naturally
 and with the specified normalization on the (0,0) pure tensor summand.
 
-Source: Stacks Project, Modules on Sites, Tags 03D8, 03EK and 0GMW;
-algebraization.tex, Tag 0A0E, the finite free coefficient realization.
-(blueprint: lem-weil-pbc-completed-realization-tensor).
-
-Proof: on modules, the balanced tensor universal property identifies extension of
-a tensor product with the tensor product of extensions. Constant sheafification
-has the same comparison, by the sheaf tensor universal property. Restriction
-along the coefficient ring isomorphism and reindexing along the site equivalence
-are monoidal equivalences. Compose these comparisons. All four functors preserve
-the coproducts in totalization: sheafification and extension are left adjoints,
-restriction along a ring isomorphism and site reindexing are equivalences. Apply
-the module comparison on each summand of each total degree and its inverse on
-the same summands. These are inverse because total inclusions are jointly epic.
-The two parts of the total differential commute with the comparison by
-naturality; additivity preserves its Koszul sign. This constructs t. Applying
-the same argument to two chain maps proves naturality. On the (0,0) summand the
-module comparison sends 1 tensor (u(1) tensor v(1)) to
-(1 tensor u(1)) tensor (1 tensor v(1)); both prescribed coefficient units send
-1 to 1. This proves the displayed normalization, with the inverse unitors and
-total inclusion in exactly the displayed order. No flatness, boundedness, or
-nonzero-ring assumption is needed; coproduct preservation also covers unbounded
-complexes and the empty site. -/
+Source: Stacks Project, Modules on Sites, Tags 03D8, 03EK and 0GMW; algebraization.tex, Tag 0A0E,
+the finite free coefficient realization. -/
 theorem completedRealizationTensor
     (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) :
     let F := intrinsicPresentationModulesBack X d ⋙ (completedCechModulesEquiv X d).functor

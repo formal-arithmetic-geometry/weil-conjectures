@@ -11,9 +11,8 @@ import WeilConjectures.AlgebraicGeometry.Tensor.TensorCoefficientActionSupport
 
 /-! # The homogeneous coefficient action before cohomology
 
-Source: Stacks Project, Tag 09MS, the graded direct-sum ideal sequence;
-Tag 0B8S, the quotient action on a square-zero ideal.
-(blueprint: lem-sc-square-zero-tensor-graded-coefficient-sheaf-action).
+Source: Stacks Project, Tag 09MS, the graded direct-sum ideal sequence; Tag 0B8S, the quotient
+action on a square-zero ideal.
 -/
 
 @[expose] public section
@@ -31,8 +30,7 @@ noncomputable section
 /-- Identify the pushed-forward coefficient module with the degreewise kernel.
 The map uses only the explicit tensor-degree comparison, the inverse annihilated-module
 unit, and the ideal-kernel comparison determined by its inclusion equation.
-Source: Stacks Project, Tags 09MS and 08KS.
-(blueprint: lem-sc-square-zero-tensor-graded-coefficient-sheaf-action). -/
+Source: Stacks Project, Tags 09MS and 08KS. -/
 def tensorCoefficientSheafIso {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)
     (n e : ℕ) :
@@ -46,8 +44,7 @@ def tensorCoefficientSheafIso {X Z : Scheme.{u}} (j : Z ⟶ X)
     boundaryIdealKernelIso j (L.tensorPow (n * (e + 1)))
 
 /-- Transport an explicit coefficient morphism to the degreewise kernels.
-Source: Stacks Project, Tag 09MS, the graded ideal sequence.
-(blueprint: lem-sc-square-zero-tensor-graded-coefficient-sheaf-action). -/
+Source: Stacks Project, Tag 09MS, the graded ideal sequence. -/
 def tensorCoefficientKernelMap {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)
     (n a b : ℕ)
@@ -65,25 +62,8 @@ attribute [irreducible] tensorCoefficientSheafIso tensorCoefficientKernelMap
 /-- The first homogeneous action square, as an equality of sheaf morphisms.
 There is no cohomology or cohomology action in this statement.
 
-Source: Stacks Project, Tag 09MS, coherent-equation-ses and the graded direct sum;
-Tag 0B8S, cohomology-lemma-boundary-derivation-over-cup-product, first proof paragraph.
-(blueprint: lem-sc-square-zero-tensor-graded-coefficient-sheaf-action).
-Proof: Cancel the monomorphism i to compute the quotient action using hlocal.
-Locally lift the restriction of the homogeneous section through the tensor-pullback
-unit in degree n; the unit is epi by the closed-immersion unit quotient theorem.
-Use b_quotient to identify its image under p. Precompose the proposed square with
-k d for every d. By k_inclusion and b_multiply, multiplication by the chosen lift
-has degree n+d. If d differs from n(e+1), k_orthogonal kills its projection to
-n(e+2); otherwise k_projection leaves exactly the product on that coefficient.
-The ideal-kernel inclusion equation identifies this product with tensoring by the
-lift. The inverse annihilated-module unit and tensor-degree comparisons identify
-it with pushforward of mulTensorPowSection f F e 1. A different local lift changes
-the product by the product of two kernel sections, zero by squareZero. Naturality
-of these comparisons and hrestrict glue the local equalities; hglobal identifies
-the global endomorphism. Finally k_colimit.hom_ext proves the square from its
-restrictions to all k d. When n=0, n+d=d and the same projection calculation uses
-only the diagonal identity for d=0 and orthogonality for d≠0. No positive-degree,
-affineness, or nonzero-section assumption is needed. -/
+Source: Stacks Project, Tag 09MS, the ideal short exact sequence and the graded direct sum;
+Tag 0B8S. -/
 theorem tensorGradedCoefficient_sheaf_action {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)
     (n : ℕ) (T : TensorGradedPresentation j L) (D : TensorBoundaryComparisonData j L n)

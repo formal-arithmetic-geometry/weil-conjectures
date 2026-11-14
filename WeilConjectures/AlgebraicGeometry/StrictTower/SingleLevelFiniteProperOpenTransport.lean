@@ -20,8 +20,7 @@ import all WeilConjectures.AlgebraicGeometry.ClopenMateNormalization.EtaleClopen
 This is the coefficient-realization step between the finite site comparison and
 strict-tower evaluation. It contains no strict-tower object or evaluation functor.
 
-Source: Stacks Project, Tags 03DA, 07A7, 099R and 09AF
-(blueprint: lem-cbc-single-level-finite-proper-open-transport).
+Source: Stacks Project, Tags 03DA, 07A7, 099R and 09AF.
 -/
 
 @[expose] public section
@@ -329,23 +328,7 @@ private theorem coefficientPlusCounit
   exact Iso.inv_hom_id_app_assoc (hPullbackPlus B Λ φ f) _ _
 
 /-- The canonical coefficient realization transports the normalized finite etale mate.
-Source: Stacks Project, Tags 03DA, 07A7, 099R and 09AF; the coefficient-realization
-part of steps 4--5 of the parent calculus proof
-(blueprint: lem-cbc-single-level-finite-proper-open-transport).
-Proof: factor H as site inverse image, finite-coefficient realization, and restriction
-of scalars. The underlying-sheaf identification of C fixes every sheafification-unit
-section. Its direct-image comparison is cDirect, and the inverse-image comparison is
-its adjunction mate. The open comparison is the mate for extension by zero. On the
-clopen lift all three comparisons preserve the projection onto the first factor of
-the disjoint-cover product, since they preserve restriction and zero sections.
-They consequently preserve the ordinary alpha, with its inverse cartesian comparison
-and its two compositors. Apply exact localization to this equality. The unit-normalized
-derived direct-image comparison is hR, including the bounded-below inclusion into the
-unbounded category. Transposing alpha under the two proper adjunctions gives the
-singleDerivedGamma square. The finite site-transport theorem identifies its fixed-ring
-site part with the etale derived mate; etale clopen normalization identifies this with
-the specified normalizedComparison. Composition of the coefficient and site squares
-is exactly the displayed equation. No flatness of the scalar map is required. -/
+Source: Stacks Project, Tags 03DA, 07A7, 099R and 09AF. -/
 theorem singleLevelFiniteProperOpenTransport
     (B Λ : Type (u + 1)) [CommRing B] [CommRing Λ] [Finite Λ]
     [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ)

@@ -586,23 +586,6 @@ private theorem derived_identity_fac
 
 /-- Pasting and identities for comparisons normalized by the homotopy derived units.
 Source: Stacks Project, Tags 0F7C and 0F7D, including their identity cases.
-(blueprint: lem-amb-unbounded-proper-open-pasting).
-
-Proof:
-The two composition equations are the conclusions of the separate composition theorem.
-For proper identity edges, include the sheaf comparison into the common direct image.
-The support normalization, naturality and the direct-image identity compositor imply
-that theta followed by the target identity map is k! of the source identity map.
-For open identity edges use the same monic-inclusion argument and the two open-adjunction
-triangle identities to identify theta with the open identity comparisons. In either case,
-right-derived transformation uniqueness transports this ordinary identity to derived
-categories: precompose with the derived unit, use the assumed unit normalization,
-move the identity comparison past the unit by naturality, and use its termwise
-factorization. The exact identity factorization follows from the exact-derived natural
-isomorphism and identity APIs; for proper identity maps also compose with the comparison
-between the right-derived and exact-derived functors. Cancel the resulting invertible
-identity comparison to obtain each displayed formula. This argument uses K-injectives
-only to establish the derivability structure and imposes no boundedness condition.
 -/
 theorem unboundedProperOpenPasting_of_normalization (A : Type (u + 1)) [CommRing A] [Finite A]
     (θ : ∀ {U V W Z : Scheme.{u}}

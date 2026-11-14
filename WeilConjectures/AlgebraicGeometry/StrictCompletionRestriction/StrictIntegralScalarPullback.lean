@@ -186,16 +186,7 @@ private theorem pullback_scalar {X Y : Scheme.{u}} (f : X ⟶ Y)
   apply monoidal_scalar
   rw [regular_scalar_eq, regular_scalar_eq]
   exact pullback_unit_scalar (DerivedNakayama.integerRing l E) f d
-/-- Pullback transports the canonical integral scalar action on the nose.
-Source: canonical coefficient naturality; blueprint Locality, scalar comparison
-(blueprint: lem-sfb-strict-integral-scalar-pullback).
-
-Proof: The canonical point scalar is the specified uniformizer endomorphism for
-every canonical cone datum. Naturality of the coefficient comparison gives the
-regular-module scalar square. The extension adjunction unit identifies the inverse
-monoidal unit comparison with the coefficient map; cancelling that unit proves
-the scalar square for geometric module pullback. The monoidal unitor identities
-then identify the scalar action on every module. -/
+/-- Pullback transports the canonical integral scalar action on the nose. -/
 theorem strictIntegralScalarPullback {X Y : Scheme.{u}} (f : X ⟶ Y)
     (S : Presentation.{u + 2, u + 1, u + 1} (AdicCompletion.Modules l E Y))
     (T : Presentation.{u + 2, u + 1, u + 1} (AdicCompletion.Modules l E X))

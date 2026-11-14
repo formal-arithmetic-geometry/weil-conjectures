@@ -16,10 +16,14 @@ import WeilConjectures.Compactification.CategoryBaseChange
 /-!
 # Compatible compactification towers over arbitrary bases
 
-Source: Stacks Project, Tag 0F7J, proof of `lemma-shriek-composition`, with supplied
-compactifications over arbitrary bases as in `WeilConjectures.Compactification.Comp` and
-`WeilConjectures.Compactification.Triangle`
-(blueprint: lem-cbc-compactifiable-compatible-tower).
+Source: Stacks Project, Tag 0F7J (proof), with supplied compactifications over arbitrary bases
+as in `WeilConjectures.Compactification.Comp` and `WeilConjectures.Compactification.Triangle`.
+
+## Implementation details
+
+`Triangle` records the intermediate scheme only up to its unique isomorphism with the
+fibre product; the first clause of `exists_compactifiable_compatible_tower` uses the literal
+fibre product via `restrict`.
 -/
 
 @[expose] public section
@@ -31,35 +35,9 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Supplied compactifications extend to a compatible tower; towers survive arbitrary base
-change and any two have a common refinement. `Triangle` records the intermediate scheme up to
-its unique isomorphism with the displayed fibre product; the first clause uses the literal
-fibre product via `restrict`. Its field `q` is the arrow called `b` in the node.
+change and any two have a common refinement.
 
-Source: Stacks Project, Tag 0F7J, proof of `lemma-shriek-composition`, and the supplied-data
-construction in upstream `Compactification/Comp.lean` and `Triangle.lean`.
-(blueprint: lem-cbc-compactifiable-compatible-tower)
-
-Proof plan:
-1. Embed `X` in `W ×_Z Ybar` by `(a₀, f ≫ i)`. The projection to `W` is separated;
-   quasi-compact immersion cancellation (`lem-cbc-qc-immersion-cancellation`) applies.
-2. Take its scheme-theoretic image, using `lemma-schematic-closure-uniqueness--1` and
-   `lemma-nagata-immersion-into-proper`. The closed image inclusion and proper projections
-   make both ambient maps proper (`lem-pc-proper-base-change`,
-   `lem-weil-pbc-closed-immersion-proper`, `lem-weil-pbc-proper-composition`).
-3. Restrict over `Y`. Fibre-product uniqueness (`def-pc-fibre-product`) and monicity of `i`
-   identify the induced open map as a base change of `a`; openness and quasi-compactness
-   follow from `lem-weil-pbc-open-immersion-base-change` and `lem-pc-quasi-compact-base-change`.
-4. Pull back the diagram over any `Z'`. The same properties and equations survive;
-   `lem-pod-separated-finite-type-base-change` supplies the properties of `f'` and `h'`.
-   No claim that scheme-theoretic image commutes with arbitrary base change is needed.
-5. For two towers, `lem-cbc-compactifiable-cofiltered` gives a common compactification `D`
-   of `Y` over `Z`, with proper maps to both original ambient schemes of `Y`.
-6. Close `X` in the product over `D` of the two pulled-back ambient schemes of `X`.
-   Cancellation and the immersion construction again give the new compactification.
-   Maps to the old ambient schemes are proper by `lemma-nagata-proper-to-separated-target`.
-7. Restrict to `Y`. The projection identities give all seven refinement equations;
-   properness of the intermediate maps follows from the same proper-to-separated lemma.
--/
+Source: Stacks Project, Tag 0F7J (proof). -/
 theorem exists_compactifiable_compatible_tower
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (h : Y ⟶ Z)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]

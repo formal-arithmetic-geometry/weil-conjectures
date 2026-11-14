@@ -18,7 +18,7 @@ open CategoryTheory
 namespace CategoryTheory.ConstantCompletion
 
 /-- Lift a square while retaining its two iterated complex functors as endpoints.
-Source: Stacks Tag 010V (blueprint: def-sf-complex-functor-square). -/
+Source: Stacks Tag 010V. -/
 @[irreducible]
 def mapComplexSquare
     {C D D' E : Type*} [Category C] [Category D] [Category D'] [Category E]

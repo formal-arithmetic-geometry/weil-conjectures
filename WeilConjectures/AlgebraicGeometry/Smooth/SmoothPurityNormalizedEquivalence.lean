@@ -60,9 +60,7 @@ import WeilConjectures.AlgebraicGeometry.Smooth.SmoothPurityCompletedReductionCo
 /-!
 # Normalized coefficient towers and derived-complete integral complexes
 
-Source: blueprint main-20261015, chap-Smooth-purity,
-`sk-lem-sp-tower/sk-lem-sp-tower-equivalence.md`; Bhatt--Scholze, Lemma 3.5.7
-(blueprint: lemma-sp-tower-adjunction-foundation).
+Source: Bhatt--Scholze, Lemma 3.5.7.
 
 ## Main definitions and statements
 

@@ -12,9 +12,6 @@ import WeilConjectures.AlgebraicGeometry.SpTowerShriek.SmoothPurityTowerLocaliza
 import WeilConjectures.AlgebraicGeometry.SpTowerShriek.SmoothPurityTowerExchange
 
 /-! # Compact-support laws on varying-coefficient towers
-
-Source: blueprint operations proof (1)--(3)
-(blueprint: prose-09-23).
 -/
 
 @[expose] public noncomputable section

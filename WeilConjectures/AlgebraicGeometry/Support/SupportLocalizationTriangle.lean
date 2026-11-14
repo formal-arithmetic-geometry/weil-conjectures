@@ -17,11 +17,9 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.I
 /-!
 # Localization for the ambient bounded-below exceptional inverse image
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-a1-kummer,
-`lemma-local-cohomology-right-adjoint--2` (blueprint: lemma-local-cohomology-right-adjoint--2).
-The categories are all constant-coefficient module sheaves, as in
-`definition-local-cohomology`; there is no constructibility condition. The right derived
-functors below are the existing ordinary injective-derived functors on `D⁺`.
+The categories are all constant-coefficient module sheaves, as for local cohomology;
+there is no constructibility condition. The right derived functors below are the existing
+ordinary injective-derived functors on `D⁺`.
 -/
 
 @[expose] public section
@@ -46,8 +44,7 @@ variable {C : Type u} {D : Type v} [Category C] [Category D] [Abelian C] [Abelia
   [HasDerivedCategory C] [HasDerivedCategory D]
 
 /-- Transport a model isomorphism through an exact functor, with the fixed derived
-factorization. Source: blueprint lemma-local-cohomology-right-adjoint--2, step 5
-(blueprint: lemma-local-cohomology-right-adjoint--2). -/
+factorization. -/
 noncomputable def CategoryTheory.Functor.supportExactModelComparison
     (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     (I : CochainComplex C ℤ) (K : DerivedCategory.Plus C)
@@ -57,9 +54,7 @@ noncomputable def CategoryTheory.Functor.supportExactModelComparison
   (F.mapDerivedCategoryFactors.app I).symm ≪≫ F.mapDerivedCategory.mapIso e ≪≫
     (F.mapDerivedCategoryPlusCompatibility.app K).symm
 
-/-- Compute a right derived functor on a K-injective model with its fixed unit.
-Source: blueprint lemma-local-cohomology-right-adjoint--2, steps 1 and 4
-(blueprint: lemma-local-cohomology-right-adjoint--2). -/
+/-- Compute a right derived functor on a K-injective model with its fixed unit. -/
 noncomputable def CategoryTheory.Functor.supportRightModelComparison
     [EnoughInjectives C] [CategoryTheory.Abelian.HasKInjectiveResolutions C]
     (F : C ⥤ D) [F.Additive] (I : CochainComplex C ℤ) [I.IsKInjective]
@@ -112,9 +107,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
   [hs : IsClosedImmersion s] [hj : IsOpenImmersion j] [hqc : QuasiCompact j]
   (hPair : IsCompl (Set.range s) (Set.range j))
 
-/-- The termwise-induced closed direct image on D⁺, using its exactness, rather than
-an independently chosen functor. Source: blueprint lemma-local-cohomology-right-adjoint--2
-(blueprint: lemma-local-cohomology-right-adjoint--2). -/
+/-- The termwise-induced closed direct image on D⁺, using its exactness. -/
 noncomputable def supportClosedDerivedPlus :
     DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology Z) (ModuleCat.{u + 1} Λ)) ⥤
       DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) :=
@@ -123,10 +116,7 @@ noncomputable def supportClosedDerivedPlus :
 
 set_option linter.unusedSectionVars false in
 /-- A model in the stated class is K-injective.
-Source: Stacks Tag 070J; blueprint lemma-local-cohomology-right-adjoint--2, step 1
-(blueprint: lemma-local-cohomology-right-adjoint--2).
-Proof: choose a lower bound from hI. Its terms are injective by hI. Apply
-CochainComplex.isKInjective_of_injective with that bound. -/
+Source: Stacks Tag 070J. -/
 theorem supportModelKInjective (I : SupportComplex Λ X)
     (hI : IsSupportInjectiveModel Λ I) : I.IsKInjective := by
   obtain ⟨⟨n, hn⟩, hInj⟩ := hI
@@ -137,12 +127,7 @@ theorem supportModelKInjective (I : SupportComplex Λ X)
 include hj in
 set_option linter.unusedSectionVars false in
 /-- Open restriction of a bounded below injective model is K-injective.
-Source: Stacks Tag 08FI; blueprint lemma-local-cohomology-right-adjoint--2, step 4
-(blueprint: lemma-local-cohomology-right-adjoint--2).
-Proof: identify open inverse image with the slice restriction by
-lem-weil-proetale-weakly-etale-localization. Its exact left adjoint, extension by
-zero, implies that it preserves injectives (lemma-acyclicity-pulled-back-injectives).
-It preserves the lower bound since it is additive. Apply Stacks Tag 070J. -/
+Source: Stacks Tag 08FI. -/
 theorem supportOpenModelKInjective (I : SupportComplex Λ X)
     (hI : IsSupportInjectiveModel Λ I) :
     CochainComplex.IsKInjective
@@ -158,9 +143,7 @@ theorem supportOpenModelKInjective (I : SupportComplex Λ X)
   exact CochainComplex.isKInjective_of_injective _ n
 
 /-- The canonical computation of Rs^! on the chosen model, normalized by the derived
-functor unit and by the bounded/unbounded comparison; no model isomorphism is chosen.
-Source: blueprint lemma-local-cohomology-right-adjoint--2, steps 1 and 3
-(blueprint: lemma-local-cohomology-right-adjoint--2). -/
+functor unit and by the bounded/unbounded comparison. -/
 noncomputable def supportShriekModelComparison
     (I : SupportComplex Λ X) (hI : IsSupportInjectiveModel Λ I)
     (K : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)))
@@ -172,9 +155,7 @@ noncomputable def supportShriekModelComparison
   (finiteClosedUpperShriek Λ s j).supportRightModelComparison I K eB
 
 /-- The canonical first-term comparison, using termwise exact s_* and the preceding
-unit-normalized computation of Rs^!.
-Source: blueprint lemma-local-cohomology-right-adjoint--2, step 5
-(blueprint: lemma-local-cohomology-right-adjoint--2). -/
+unit-normalized computation of Rs^!. -/
 noncomputable def supportFirstModelComparison
     (I : SupportComplex Λ X) (hI : IsSupportInjectiveModel Λ I)
     (K : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)))
@@ -189,9 +170,7 @@ noncomputable def supportFirstModelComparison
     (supportShriekModelComparison Λ s j I hI K eB)
 
 /-- The canonical third-term comparison, using injectivity after open restriction,
-the derived functor unit, and the ordinary bounded/unbounded comparison for Rj_*.
-Source: blueprint lemma-local-cohomology-right-adjoint--2, steps 4 and 5
-(blueprint: lemma-local-cohomology-right-adjoint--2). -/
+the derived functor unit, and the ordinary bounded/unbounded comparison for Rj_*. -/
 noncomputable def supportThirdModelComparison
     (I : SupportComplex Λ X) (hI : IsSupportInjectiveModel Λ I)
     (K : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)))

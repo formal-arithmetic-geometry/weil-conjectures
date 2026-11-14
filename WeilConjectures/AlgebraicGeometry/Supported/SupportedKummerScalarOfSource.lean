@@ -153,16 +153,7 @@ attribute [local irreducible] ordinaryFiniteRootMap supportedIntegralGenerator
 
 /-- A normalized supported constant scalar unit extends the normalized supported
 Kummer boundary square to the target root line.
-Source: blueprint lemma-cycle-class-cartier-divisor, final scalar-extension paragraph;
-Stacks 03PL and 07A6 (blueprint: lem-asd-supported-kummer-scalar-of-source).
-
-Proof: take the normalized root-line derived unit. The given constant coefficient
-map preserves the integral supported generator, and the root-line map preserves the
-root coefficient generator. Both normalized boundaries satisfy their integral pole
-and Kummer equations. The integral supported derived unit detects equality on Ext.
-Apply that injection, use exact-functor composition coherence, and reassociate the
-Yoneda products; both sides become the same integral boundary followed by the target
-root coefficient map. Combine this square with the two derived units. -/
+Source: Stacks 03PL and 07A6. -/
 theorem supported_kummer_scalar_of_source
     {R A : Type (u + 1)} [CommRing R] [Finite R] [CommRing A] [Finite A]
     (φ : R →+* A) (T : Scheme.{u}) (N : ℕ) (hN : 0 < N)

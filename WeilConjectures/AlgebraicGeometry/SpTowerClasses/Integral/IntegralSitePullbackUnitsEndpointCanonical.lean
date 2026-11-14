@@ -11,15 +11,9 @@ import WeilConjectures.WeilSheaf.FieldCoefficientTateTwist
 
 /-! # Canonical units endpoint mate calculation
 
-Source: Stacks Project, Tag 00WX; the units endpoint of the change-of-site
-pullback square. This is the canonical special case used to reduce the
-arbitrary units-map endpoint to the chartwise normalized map.
-(blueprint: lem-sp-integral-site-pullback-units-endpoint-canonical)
+The units endpoint square for the canonical units map, whose transpose is `unitsDirect`.
 
-The proof transposes both sides through the comparison and inverse-image
-adjunctions. For the canonical units map, its transpose is `unitsDirect`,
-whose value on every pro-etale chart is pullback along the first projection.
-The defining conjugate adjunction comparison then identifies both mates.
+Source: Stacks Project, Tag 00WX.
 -/
 
 @[expose] public noncomputable section
@@ -31,10 +25,7 @@ open AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 
-/-- The endpoint equality for the canonical units map `towerIntegral_unitsSheafPull`.
-
-This is strictly simpler than the arbitrary-map endpoint: the map is fixed by
-its adjoint `unitsDirect`, so no chartwise hypothesis is required. -/
+/-- The endpoint equality for the canonical units map `towerIntegral_unitsSheafPull`. -/
 theorem integral_site_pullback_units_endpoint_canonical {X Y : Scheme.{u}} (f : X ⟶ Y) :
     let κ := comparisonUpperStarCompUpperStarIso AddCommGrpCat.{u + 1} f
     (κ.inv.app Y.gmSheaf ≫

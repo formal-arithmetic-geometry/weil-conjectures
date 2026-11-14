@@ -10,7 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.Derived.DerivedSquareLocalClassM
 /-! # Separate the classical and total resolution comparisons
 
 Source: Stacks Project, Cohomology, Tags 01E4, 01FB and 0D5X.
-(blueprint: def-weil-pbc-square-resolution-roof-models).
 -/
 
 @[expose] public section
@@ -24,8 +23,7 @@ open Scheme.Modules
 
 /-- Classical cohomology on an open, computed by the integer extension of its fixed
 restricted resolution. All comparisons preserve the augmentation.
-Source: Stacks Project, Tags 01E4 and 01FB
-(blueprint: def-weil-pbc-square-resolution-roof-models). -/
+Source: Stacks Project, Tags 01E4 and 01FB. -/
 @[irreducible] def squareResolutionCohomologyIso {X : Scheme.{u}} {F : X.Modules}
     (I : InjectiveResolution F) (U : X.Opens) (R : RestrictedResolutionSections I U)
     (q : ℕ) :
@@ -56,9 +54,8 @@ variable [∀ Y : Scheme.{u},
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- Local hypercohomology of a direct image, computed on the fixed injective resolution
-upstairs. This involves no restricted resolution or classical cohomology.
-Source: Stacks Project, Tag 0D5X
-(blueprint: def-weil-pbc-square-resolution-roof-models). -/
+upstairs.
+Source: Stacks Project, Tag 0D5X. -/
 @[irreducible] def squareInjectiveLocalComparison {X Y : Scheme.{u}} (f : X ⟶ Y)
     (F : X.Modules) (q : ℕ) (V : Y.Opens) (I : InjectiveResolution F)
     (U : X.Opens) (hU : U = f ⁻¹ᵁ V) :
@@ -123,10 +120,9 @@ attribute [local implicit_reducible] Scheme.Modules Scheme.Modules.Hom
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- The published comparison is the classical section comparison followed by the
+/-- The resolution comparison is the classical section comparison followed by the
 comparison computing total direct image on the same injective complex.
-Source: Stacks Project, Tags 01E4 and 0D5X
-(blueprint: def-weil-pbc-square-resolution-roof-models). -/
+Source: Stacks Project, Tags 01E4 and 0D5X. -/
 theorem squareLocalResolutionComparison_factor {X Y : Scheme.{u}} (f : X ⟶ Y)
     (F : X.Modules) (q : ℕ) (V : Y.Opens) (I : InjectiveResolution F)
     (U : X.Opens) (hU : U = f ⁻¹ᵁ V) (R : RestrictedResolutionSections I U) :

@@ -169,9 +169,8 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # Composition of the ordered Tate coefficient along arbitrary maps
 
-The proof reuses the general composition calculation underlying
-`orderedTateExactOpenComposition`, exposing its left-derived form.
-(blueprint: lem-pur-vector-integration-base-coefficient-composition).
+We expose the left-derived form of the general composition calculation underlying
+`orderedTateExactOpenComposition`.
 -/
 
 @[expose] public noncomputable section

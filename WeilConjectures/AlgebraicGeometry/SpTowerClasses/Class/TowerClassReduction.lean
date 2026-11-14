@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassSystems
 
 /-! # Reduction for canonical tower classes
-
-Source: blueprint main-20261015, chap-Smooth-purity,
-`sk-prop-sp-tower-geometric-classes` (blueprint: def-sp-tower-class-reduction).
 -/
 
 @[expose] public noncomputable section
@@ -30,8 +27,7 @@ open AlgebraicGeometry AlgebraicGeometry.Scheme WeilConjectures
 
 namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 
-/-- The total derived extension adjunction, specified before specializing its categories.
-Source: classes (2), proof steps 3--8 (blueprint: def-sp-tower-class-reduction). -/
+/-- The total derived extension adjunction, specified before specializing its categories. -/
 structure DerivedExtension {C : Type u₁} [Category.{v₁} C] [Abelian C]
     {D : Type u₂} [Category.{v₂} D] [Abelian D]
     [HasDerivedCategory.{w₁} C] [HasDerivedCategory.{w₂} D]
@@ -51,8 +47,7 @@ structure DerivedExtension {C : Type u₁} [Category.{v₁} C] [Abelian C]
         G.mapDerivedCategoryFactors.hom.app Q =
       DerivedCategory.Q.map (((adjunction.mapHomologicalComplex (.up ℤ)).homEquiv P Q) f)
 
-/-- Source normalization for a derived extension, expressed in arbitrary abelian categories.
-Source: classes (2), quotient generator (blueprint: def-sp-tower-class-reduction). -/
+/-- Source normalization for a derived extension, expressed in arbitrary abelian categories. -/
 def DerivedExtension.sourceNormalization
     {C : Type u₁} [Category.{v₁} C] [Abelian C]
     {D : Type u₂} [Category.{v₂} D] [Abelian D]
@@ -66,8 +61,7 @@ def DerivedExtension.sourceNormalization
     (G.mapDerivedCategorySingleFunctor 0).hom.app Y =
       (DerivedCategory.singleFunctor C 0).map q
 
-/-- Target normalization for a derived extension, retaining the boundary sign and shift.
-Source: classes (2), positive kernel normalization (blueprint: def-sp-tower-class-reduction). -/
+/-- Target normalization for a derived extension, retaining the boundary sign and shift. -/
 def DerivedExtension.targetNormalization
     {C : Type u₁} [Category.{v₁} C] [Abelian C]
     {D : Type u₂} [Category.{v₂} D] [Abelian D]
@@ -87,9 +81,7 @@ def DerivedExtension.targetNormalization
         (shiftFunctorAdd (DerivedCategory C) (1 : ℤ) 1).inv.app
           ((DerivedCategory.singleFunctor C 0).obj s.X₁)
 
-/-- Realize an extension as its ordinary derived morphism, sharing the abstract
-category instances before specialization to a tower topos.
-Source: classes (2)--(3), Ext realization (blueprint: def-sp-tower-class-reduction). -/
+/-- Realize an extension as its ordinary derived morphism. -/
 def extensionArrow {C : Type u₁} [Category.{v₁} C] [Abelian C]
     [HasDerivedCategory.{w₁} C] [HasExt.{w₂} C]
     {X Y : C} {n : ℕ} (e : Ext.{w₂} X Y n) :
@@ -97,8 +89,7 @@ def extensionArrow {C : Type u₁} [Category.{v₁} C] [Abelian C]
       ((DerivedCategory.singleFunctor C 0).obj Y)⟦(n : ℤ)⟧ :=
   e.hom
 
-/-- Transport the source normalization through the specified derived adjunction.
-Source: classes (2), quotient generator (blueprint: def-sp-tower-class-reduction). -/
+/-- Transport the source normalization through the specified derived adjunction. -/
 def unitNormalization {C : Type u₁} [Category.{v₁} C] [Abelian C]
     {D : Type u₂} [Category.{v₂} D] [Abelian D]
     [HasDerivedCategory.{w₁} C] [HasDerivedCategory.{w₂} D]
@@ -110,8 +101,7 @@ def unitNormalization {C : Type u₁} [Category.{v₁} C] [Abelian C]
   (a.homEquiv _ _) e.hom ≫ (G.mapDerivedCategorySingleFunctor 0).hom.app Y =
     (DerivedCategory.singleFunctor C 0).map q
 
-/-- Ordinary coefficient extension and its representative-normalized total derivation.
-Source: classes (2), proof steps 3--8 (blueprint: def-sp-tower-class-reduction). -/
+/-- Ordinary coefficient extension and its representative-normalized total derivation. -/
 structure Reduction (T : Scheme.{u})
     (B : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1}) where
   forget : Forget T B
@@ -121,21 +111,18 @@ structure Reduction (T : Scheme.{u})
 
 attribute [instance] Reduction.additive
 
-/-- The normalized derived extension functor.
-Source: classes (2) (blueprint: def-sp-tower-class-reduction). -/
+/-- The normalized derived extension functor. -/
 abbrev Reduction.derived {T : Scheme.{u}}
     {B : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1}}
     (r : Reduction T B) := r.model.derived
 
-/-- The normalized derived extension adjunction.
-Source: classes (2) (blueprint: def-sp-tower-class-reduction). -/
+/-- The normalized derived extension adjunction. -/
 abbrev Reduction.derivedAdjunction {T : Scheme.{u}}
     {B : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1}}
     (r : Reduction T B) := r.model.derivedAdjunction
 
 /-- Exact functors transport a single-to-shifted-single arrow using their canonical
-single and shift comparisons. Source: classes (2)--(3), transport of extension
-classes (blueprint: def-sp-tower-class-reduction). -/
+single and shift comparisons. -/
 def mapSingleArrow {C : Type u₁} [Category.{v₁} C] [Abelian C]
     {D : Type u₂} [Category.{v₂} D] [Abelian D]
     [HasDerivedCategory.{w₁} C] [HasDerivedCategory.{w₂} D]
@@ -151,10 +138,7 @@ def mapSingleArrow {C : Type u₁} [Category.{v₁} C] [Abelian C]
       ((DerivedCategory.singleFunctor C 0).obj Y) ≫
     ((F.mapDerivedCategorySingleFunctor 0).hom.app Y)⟦n⟧'
 
-/-- Transport an Ext class to an ordinary derived arrow with specified endpoints.
-The Ext realization is made before changing sites; no new Ext-size instance is
-chosen in the target. Source: classes (2)--(3), integral extension classes
-(blueprint: def-sp-tower-class-reduction). -/
+/-- Transport an Ext class to an ordinary derived arrow with specified endpoints. -/
 def mapExtensionEndpoints {C : Type u₁} [Category.{v₁} C] [Abelian C]
     {D : Type u₂} [Category.{v₂} D] [Abelian D]
     [HasDerivedCategory.{w₁} C] [HasDerivedCategory.{w₂} D] [HasExt.{w₃} C]
@@ -167,14 +151,12 @@ def mapExtensionEndpoints {C : Type u₁} [Category.{v₁} C] [Abelian C]
     mapSingleArrow F (1 : ℤ) e.hom ≫
     ((DerivedCategory.singleFunctor D 0).map b)⟦(1 : ℤ)⟧'
 
-/-- Share exactness of the recorded change of site before forming extension classes.
-Source: classes (2), proof step 2 (blueprint: def-sp-tower-class-reduction). -/
+/-- Exactness of the recorded change of site. -/
 instance comparisonColimits (T : Scheme.{u}) :
     PreservesFiniteColimits (comparisonUpperStar AddCommGrpCat.{u + 1} T) :=
   inferInstance
 
-/-- The constant-sheaf comparison induced by the recorded site morphism.
-Source: classes (2), restriction to etale charts (blueprint: def-sp-tower-class-reduction). -/
+/-- The constant-sheaf comparison induced by the recorded site morphism. -/
 def integerComparison (T : Scheme.{u}) :
     (comparisonUpperStar AddCommGrpCat.{u + 1} T).obj
       ((constantSheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
@@ -190,8 +172,7 @@ def integerComparison (T : Scheme.{u}) :
     (constantSheafAdj (Scheme.ProEt.topology T) AddCommGrpCat.{u + 1}
       (Scheme.ProEt.isTerminalMkId T))).app (AddCommGrpCat.of (ULift.{u + 1} ℤ)))
 
-/-- The etale units extension of the Picard class, before site comparison.
-Source: classes (2), proof steps 2--3 (blueprint: def-sp-tower-class-reduction). -/
+/-- The etale units extension of the Picard class, before site comparison. -/
 def lineBundleEtaleClass (T : Scheme.{u}) (L : T.Pic) :
     (DerivedCategory.singleFunctor (DiagonalAb T) 0).obj
       ((constantSheaf (Scheme.ProEt.topology T)
@@ -203,7 +184,7 @@ def lineBundleEtaleClass (T : Scheme.{u}) (L : T.Pic) :
     (integerComparison T).inv (cartierUnitsComparison T)
 
 /-- The actual line-bundle class, pulled to full pro-etale units and then made constant
-as a tower. Source: classes (2), proof steps 2--3 (blueprint: def-sp-tower-class-reduction). -/
+as a tower. -/
 def lineBundleClass (T : Scheme.{u}) (L : T.Pic) :
     (DerivedCategory.singleFunctor (Ab T) 0).obj (integers T) ⟶
       ((DerivedCategory.singleFunctor (Ab T) 0).obj (units T))⟦(1 : ℤ)⟧ :=

@@ -598,21 +598,6 @@ private theorem derived_open_comparison
 -- Elaborating the specialization compares the eight sheaf categories of the cube.
 /-- BaseChange for families normalized on sheaves and on every K-injective representative.
 Source: Stacks Project, Tags 0F7F.
-(blueprint: lem-amb-unbounded-proper-open-base-change).
-
-Proof:
-Extend the representative normalization to a right-derived unit identity on every complex.
-Both sides form natural transformations; they agree on K-injective complexes by resolving
-k!J and using naturality of the derived unit, and equality extends to all complexes by a
-K-injective resolution. The exact adjunction-mate factorization gives the same unit identity
-for the specified unbounded exchange. Prove the ordinary sheaf cube by including both paths
-in the common direct image: the open comparison is monic, its base-change identity moves it
-through the open faces, and mate pasting and support normalization identify the two paths.
-For the derived cube, precompose its two paths on Q(M) by the twice-exact image of the derived
-unit. Naturality, the four unit identities, and the exact comparison factorizations reduce
-the equality to the degreewise ordinary cube. For K-injective M the precomposed unit is an
-isomorphism, so cancel it; naturality transports the equality to every derived object.
-No exchange map is cancelled and inverse image need not preserve K-injectives.
 -/
 theorem unboundedProperOpenBaseChange_of_normalization (A : Type (u + 1)) [CommRing A] [Finite A]
     (θ : ∀ {U V W Z : Scheme.{u}}

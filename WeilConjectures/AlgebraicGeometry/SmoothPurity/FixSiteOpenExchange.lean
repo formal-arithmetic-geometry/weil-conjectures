@@ -23,11 +23,17 @@ import WeilConjectures.CategoryTheory.Derived.DerivedExactCube
 /-!
 # Site comparison respects the normalized open base-change map
 
-Source: Stacks Project, Tag 03S6 (`lemma-shriek-base-change`), with the normalized
-comparison of Tag 09AF and pullback coherence of Tag 099R (blueprint:
-`lem-fix-site-open-exchange`).  The theorem below states the ordinary derived
-comparison equation for every bounded-below etale complex and arbitrary bottom
-map `g`. The proof lifts the ordinary sheaf equation through exact-functor localization.
+Source: Stacks Project, Tag 03S6, with the normalized comparison of Tag 09AF and pullback coherence
+of Tag 099R. The theorem below states the ordinary derived comparison equation for every
+bounded-below etale complex and arbitrary bottom map `g`.
+
+## Implementation details
+
+The derived comparisons are rebuilt here degreewise, as in the upstream
+`mapDerivedCategoryOpenImmersionLowerShriekComparisonUpperStarIso` and
+`mapDerivedCategoryComparisonUpperStarCompUpperStarIso`, because those modules cannot be
+imported together with this file's other imports. The derived equation is obtained by
+lifting the ordinary sheaf equation through exact-functor localization.
 -/
 
 @[expose] public noncomputable section
@@ -43,12 +49,9 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.ProEtale
 
 /-- The derived site comparison for extension by zero, `c_j : N_X j_!^et ≅ j_!^proet N_U`,
-the degreewise extension of the sheaf comparison of
-proposition-comparison-immersions--1.  It is the same construction as the upstream
-`mapDerivedCategoryOpenImmersionLowerShriekComparisonUpperStarIso`, whose module cannot be
-imported together with this item's side imports.
-Source: Stacks Tag 09AF (`lemma-jshriek-comparison`), blueprint
-`lem-fix-site-open-exchange`. -/
+the degreewise extension of the sheaf comparison
+`openImmersionLowerShriekComparisonUpperStarIso`.
+Source: Stacks Tag 09AF. -/
 noncomputable def fixSiteOpenComparison (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j).mapDerivedCategory ⋙
@@ -62,10 +65,8 @@ noncomputable def fixSiteOpenComparison (Λ : Type (u + 1)) [CommRing Λ] [Finit
 
 /-- The inverse-image comparison, oriented as `rho_u : u_proet⁻¹ N_V ≅
 N_T u_et⁻¹`: degreewise `comparisonUpperStarCompUpperStarIso`, the inverse of the canonical
-comparison of proposition-comparison-etale-derived-category--5.  It is the same construction as the
-upstream `mapDerivedCategoryComparisonUpperStarCompUpperStarIso`, whose module cannot be
-imported together with this item's side imports.
-Source: Stacks Tag 099R; blueprint `lem-fix-site-open-exchange`. -/
+site-comparison/inverse-image comparison.
+Source: Stacks Tag 099R. -/
 noncomputable def fixSitePullbackComparison (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Y : Scheme.{u}} (u : X ⟶ Y) :
     (comparisonUpperStar (ModuleCat.{u + 1} Λ) Y).mapDerivedCategory ⋙
@@ -123,31 +124,12 @@ private theorem derivedPlusFace (e : R ⋙ G ≅ L ⋙ S)
 end Localization
 
 /-- The normalized site-comparison/open-exchange equation.
-Source: Stacks Tag 03S6 (`lemma-shriek-base-change`), Tags 09AF and 099R
-(blueprint: lem-fix-site-open-exchange).
+Source: Stacks Tag 03S6, Tags 09AF and 099R.
 
 For each bounded-below `K`, the left side is `g⁻¹(c_j)`, then the actual pro-etale
-base-change isomorphism `e_j^proet`, then `j'_!(rho_h)`.  The right side is `rho_g`,
-then `N_X'` of the actual etale base-change isomorphism `e_j^et`, then `c_{j'}`.  The
-cartesian square is the chosen one of `sq`, read as an `IsPullback` witness.  The
-inverse-unit normalization of `c_j` asserted by the node is the published statement
-`openComparison_unit_normalization` (lem-sf-open-comparison-unit-normalization) about
-the same sheaf comparison `openImmersionLowerShriekComparisonUpperStarIso`.
-
-Proof:
-1. The ordinary equation is `fixSiteOpenExchangeSheaf`: the inverse open exchanges
-   satisfy their unit formulas; comparison-unit normalization and cartesian-square
-   coherence identify the two inverse transposes under the open adjunction.
-2. Apply `Functor.mapDerivedCategory_exactCube` to this equation and the six specified
-   ordinary isomorphisms. Exactness permits degreewise passage to complexes and
-   localization. The localization factors identify these maps with the stated derived
-   comparisons, without any faithfulness assumption on localization.
-3. Evaluate at the image of `K` under the bounded-below inclusion. The composition and
-   natural-isomorphism compatibility formulas identify the etale bounded-below exchange
-   with the corresponding unbounded derived face. For the inverse composition map,
-   cancel its forward isomorphism and use functoriality.
-4. All calculations include identity squares, empty opens, zero complexes and the zero
-   coefficient ring. No additional hypothesis on `g` is used. -/
+base-change isomorphism `e_j^proet`, then `j'_!(rho_h)`. The right side is `rho_g`,
+then `N_X'` of the actual etale base-change isomorphism `e_j^et`, then `c_{j'}`. The
+cartesian square is the chosen one of `sq`, read as an `IsPullback` witness. -/
 theorem fixSiteOpenExchange (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {U' U X' X : Scheme.{u}} {gU : U' ⟶ U} {j' : U' ⟶ X'}
     {j : U ⟶ X} {g : X' ⟶ X} [IsOpenImmersion j] [IsOpenImmersion j']

@@ -11,10 +11,6 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Zero
 /-!
 # Finite colimits of the normalized right extensions
 
-Source: blueprint main-20261015, sec-smooth-purity/sk-lem-sp-tower-levels,
-`sk-lem-sp-tower-levels-adjoint.proof.md`
-(blueprint: lem-sp-tower-right-extension-finite-colimits).
-
 Index n represents the positive coefficient exponent n+1.
 -/
 

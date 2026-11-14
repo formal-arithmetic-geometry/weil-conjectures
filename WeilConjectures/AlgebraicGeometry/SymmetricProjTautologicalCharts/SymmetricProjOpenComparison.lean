@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.Tensor.TensorPullbackQuasiCoherent
 # Open restriction of the normalized symmetric Proj quotient
 
 Source: Stacks Project, Constructions, Tags 01NR, 01NQ and 01OB.
-(blueprint: lem-trf-symmetric-proj-open-comparison).
 -/
 
 @[expose] public section
@@ -47,18 +46,7 @@ set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- Open restriction of the normalized symmetric Proj quotient.
 
-Source: Stacks Project, Constructions, Tags 01NR, 01NQ and 01OB.
-(blueprint: lem-trf-symmetric-proj-open-comparison).
-
-Proof: For an open V, tensor pullback preserves quasi-coherence and normalized
-descent supplies a quotient DV over V. The normalized pullback unit and affine
-tensor-section identification induce coefficientwise pullback data for the
-symmetric graded algebras; symmetric algebra base change proves its degreewise
-base-change property. The relative-Proj base-change theorem then supplies j and
-its pullback square. The fixed-comparison quotient-line theorem supplies w by
-matching degree-one frames and their transition ratios on the corresponding
-charts, and gives the exact quotient equation. These witnesses are precisely
-HasOpenCompatibility D. The argument includes nonaffine and empty V. -/
+Source: Stacks Project, Constructions, Tags 01NR, 01NQ and 01OB. -/
 theorem open_compatibility_of_normalized_quotient (S : Scheme.{u}) (E : S.Modules)
     [E.IsQuasicoherent] (D : ProjectiveBundleQuotientGeometry.TautologicalQuotient E) :
     ProjectiveBundleQuotientGeometry.HasOpenCompatibility D := by

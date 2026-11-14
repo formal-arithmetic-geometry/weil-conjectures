@@ -106,18 +106,6 @@ attribute [local irreducible] lineModule
 
 /-- Evaluation carries the actual tower transition on a unit tensor to the unit tensor
 of the actual roots transition.
-
-Source: blueprint classes (2), scalar extension of the roots tower.
-(blueprint: lem-sfb-tower-line-transition-tensor).
-
-Proof: lift the root through rootForget and the section equality of Forget.
-The normalization of lineEvaluation identifies its tensor generator with the
-scalar-adjunction unit. Naturality of this unit along the horizontal sequence-site
-arrow sends the generator to the generator of the root restriction. The transition
-equation of Forget and naturality of rootForget
-identify that root restriction with the actual roots-tower transition. Apply the
-normalization of lineEvaluation at the target level. The argument uses identities of
-sections and applies to empty charts as well as equal indices.
 -/
 theorem lineEvaluation_transition_tensor {T : Scheme.{u}} (c : Chern l E T)
     {m n : ℕ} (h : n ≤ m) (U : T.ProEtᵒᵖ)

@@ -131,27 +131,9 @@ private theorem affine_single_unit_iso
     (DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (.up ℤ)).map r)) _
 
 set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
-/-- The single complex of the actual affine direct image realizes the pinned comparison.
-Source: Stacks Project, Tag 0A1D, affine tensor calculation; Tag 08HY,
-base-change mate; Tag 0DJ9, initial affine case.
-
-Proof: Put F = f_*N, and K = F[0]. Affine higher direct image vanishing makes
-N acyclic for f_*, so the canonical right-derived unit on N[0], composed with
-the single-complex comparison, is invertible. Its inverse gives e. The base
-change f' is affine and g'^*N is quasi-coherent, so the same right-derived unit
-there is invertible. Ordinary affine base change identifies g^*F with
-f'_*g'^*N by the map sending b tensor n to b times the pulled-back section n.
-Apply the single functor to that isomorphism, the canonical isomorphism between
-termwise pullback of a single complex and the single of the pullback, and the
-right-derived unit for f' to obtain t. To check the equation, transpose the
-derived base-change mate under the g'^* / Rg'_* adjunction. Naturality of the
-right-derived units and the two adjunction triangle identities reduce both
-sides to the ordinary affine exchange map followed by the single pullback
-counit. On affine sections this is the displayed pure-tensor formula; it is
-natural in restriction and balanced over the base ring. Transport through the
-canonical spectrum isomorphisms using the derived composition counit equations.
-No flatness is needed: the pullback counit is retained, never inverted. This also
-covers empty affines and the zero module. -/
+/-- The single complex of the affine direct image realizes the pinned comparison.
+Source: Stacks Project, Tag 0A1D, affine tensor calculation; Tag 08HY, base-change mate; Tag 0DJ9,
+initial affine case. -/
 private theorem affine_single_counit_comparison
     {X B A : Scheme.{u}} [IsAffine X] [IsAffine B] [IsAffine A]
     (f : X ⟶ B) (g : A ⟶ B)
@@ -295,26 +277,7 @@ private theorem affine_single_counit_comparison
   exact ((derivedPullback.{u, u + 1} g).mapIso e.symm).eq_inv_comp.mpr heq
 
 /-- Affine source charts have bounded flat presentations over affine bases.
-Source: Stacks Project, Tag 0A1D, affine tensor calculation; Tag 0DJ9,
-initial affine case. (blueprint: lem-pc-standard-single-flat-counit-affine).
-
-Proof: Identify the three affine schemes U, B and A with spectra of their section
-rings. The one-member affine cover of U has alternating section complex N(U) in
-degree zero and zero in all other degrees. Relative flatness evaluated on the
-top opens makes N(U) flat over the section ring of B. Sheafify this module on B;
-its stalks are localizations, so it is a flat sheaf, and take its single complex K.
-Affine direct image of a quasi-coherent module is acyclic; the augmentation gives
-e identifying Rp_*N[0] with QK. On the pulled-back affine chart the pure-tensor
-section formula identifies ordinary g-pullback of K with the target, giving t.
-The formula sends b tensor n to b times the pulled-back section n and commutes
-with the augmentation. Transpose the canonical mate under the derived adjunction
-for the source pullback. Naturality and the two triangle identities cancel its
-units and leave that pure-tensor section map. Thus its composite with the pinned
-single pullback counit is Lg*(e) followed by the pinned counit at K and t.
-Transport along the affine-spectrum isomorphisms using the derived composition
-comparisons; their defining counit equations preserve this equality. Bound K by
-zero. If U is empty its section ring is zero and the same single complex is zero.
-No flatness of g or invertibility of a counit is assumed. -/
+Source: Stacks Project, Tag 0A1D, affine tensor calculation; Tag 0DJ9, initial affine case. -/
 theorem standardSingleFlatCounitOnOpen_affine
     {Y B A : Scheme.{u}} (p : Y ⟶ B) [IsAffine B] [IsAffine A]
     (g : A ⟶ B) (U : Y.Opens) (hU : IsAffineOpen U) :

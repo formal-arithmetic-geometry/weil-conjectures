@@ -10,9 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Finite.FiniteInte
 import WeilConjectures.AlgebraicGeometry.SpTowerClasses.FiniteExactArrow.FiniteExactArrowCalculus
 
 /-! # Evaluating the integral Kummer composite
-
-Source: diagonal-tower trace (1), finite Kummer classes and exact comparison.
-(blueprint: lem-sfb-finite-kummer-comparison-composite).
 -/
 
 @[expose] public noncomputable section
@@ -40,13 +37,7 @@ attribute [local irreducible] Functor.mapDerivedCategory Ext.homEquiv
 
 /-- The actual comparison of Kummer short complexes preserves the boundary
 composite of any degree-one extension and any source normalization.
-Source: Stacks 03PL, short-exact extension naturality and Yoneda associativity
-(blueprint: lem-sfb-finite-kummer-comparison-composite).
-
-Proof: apply the generic short-exact comparison formula to the etale Kummer
-sequence, the evaluated tower sequence and finiteKummerSequenceComparison.
-Its first and third components are exactly the Cartier roots and units maps.
-The formula is natural for every extension and source map. -/
+Source: Stacks 03PL, short-exact extension naturality and Yoneda associativity. -/
 theorem finiteKummerComparison_composite (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
     (k : Kummer l T) (n : ℕ) (hT : IsUnit ((l ^ (n + 1) : ℕ) : Γ(T, ⊤)))
     {M : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}} {Z : DiagonalAb T}

@@ -9,8 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.SpTowerCalculus.CoefficientTower
 import WeilConjectures.AlgebraicGeometry.Smooth.SmoothPurityCoefficientTowersAbelian
 
 /-! # Section-normalized strict tower coordinates
-
-Source: blueprint Local pairs and Levels, coefficient tower shriek calculus.
 -/
 
 @[expose] public noncomputable section

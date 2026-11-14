@@ -146,16 +146,7 @@ private theorem coordinates_cast_congr {A : Type*} [Category A] [Abelian A]
 /-- The canonical integral completion has a Presentation with all strict coordinates
 and derived units fixed by the completion-triangle comparison.
 
-Source: blueprint first-reduction Cones paragraph; Stacks Tags 014E and 08TC
-(blueprint: lem-sfb-strict-integral-completion-presentation).
-
-Proof: Extract the canonical cone datum and its coordinate, transition, augmentation
-and localization equalities from completion_triangle_comparison. Express the scalar
-of the datum as an endomorphism of the identity functor. Functoriality and cancellation
-of the regular-module comparison identify its powers with the given cone powers.
-Use the canonical scalar-extension adjunction to assemble the reduction transitions
-as natural transformations. The supplied descent equalities give every reduction
-field. The completion and its unit are precisely those of the input theorem. -/
+Source: Stacks Tags 014E and 08TC. -/
 theorem strictIntegralCompletionPresentation (X : Scheme.{u}) :
     ∃ S : Presentation.{u + 2, u + 1, u + 1} (AdicCompletion.Modules l E X),
       IsIntegral l E X S := by

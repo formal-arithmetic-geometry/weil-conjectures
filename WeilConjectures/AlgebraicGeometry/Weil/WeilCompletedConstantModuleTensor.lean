@@ -210,25 +210,7 @@ private theorem constant_tensor (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A]
 /-- Completed constant extension preserves the ordinary module tensor product,
 with its regular coefficient map normalized by the section `1 tensor 1`.
 
-Source: Stacks Project, Modules on Sites, Tags 03D8, 03EK and 0GMW.
-(blueprint: lem-weil-pbc-completed-constant-module-tensor).
-
-Proof: the constant module presheaf functor identifies sectionwise tensor products.
-Apply the tensor comparison for module sheafification along the locally bijective
-constant-ring sheafification unit. Apply ordinary scalar extension along the
-compatible-residue ring map. Its balanced tensor comparison takes
-`s tensor (x tensor y)` to `(s tensor x) tensor (1 tensor y)`; its inverse
-multiplies the two scalars. The balancing relations show that these maps are
-well defined, mutually inverse and natural in both modules. The sheafification
-universal property preserves these equations and naturality. Their composite
-is the asserted natural isomorphism. To check the normalization, evaluate a map
-from the regular module at the section 1. The inverse right unitor sends 1 to
-`1 tensor 1`. Each constant sheafification unit preserves 1, and ordinary scalar
-extension sends it to `1 tensor 1`. The comparison therefore gives the tensor
-of the two specified regular-module maps. The inverse left unitor has the same
-value at 1. Maps from the regular module are determined by this section, proving
-the equation. This uses neither complexes nor a site equivalence, and works for
-the zero ring and on the empty site. -/
+Source: Stacks Project, Modules on Sites, Tags 03D8, 03EK and 0GMW. -/
 theorem completedConstantModuleTensor
     (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (d : ProEtaleAdicCoefficientDatum A) :

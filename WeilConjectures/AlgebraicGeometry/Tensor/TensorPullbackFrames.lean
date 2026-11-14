@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.PullbackMonoidalUnitComparison
 import WeilConjectures.AlgebraicGeometry.Modules.AffineDescent
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Descent.IsPrestack
 /-! # Tensoring frames under monoidal pullback
-Source: Stacks Project, Tags 0095 and 0096, tensor pullback coherence.
-(blueprint: lem-pur-tensor-pullback-frames). -/
+Source: Stacks Project, Tags 0095 and 0096, tensor pullback coherence. -/
 
 @[expose] public noncomputable section
 
@@ -28,7 +27,7 @@ open scoped AlgebraicGeometry.Scheme.Modules
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Tensor two pulled-back frames using the monoidal comparison.
-Source: Stacks 0095, 0096 (blueprint: lem-pur-tensor-pullback-frames). -/
+Source: Stacks 0095, 0096. -/
 def tensorPullbackFrames {T : Scheme.{u}} (L M : T.Modules)
     {X : Scheme.{u}} (f : X ⟶ T)
     (x : (Scheme.Modules.pullback f).obj (Scheme.Modules.unit T) ⟶
@@ -64,8 +63,7 @@ private theorem presheafHom_map_eq {T : Scheme.{u}} (L M : T.Modules)
   simp only [Pseudofunctor.presheafHom_map, TypeCat.ofHom_apply, Quiver.Hom.unop_op]
 
 /-- Restricting a pulled-back global map gives its pullback on the smaller object.
-Source: Stacks 01CD (blueprint: lem-pur-tensor-pullback-frames).
-Proof: use the pseudofunctor restriction formula on a mapped global morphism. -/
+Source: Stacks 01CD. -/
 theorem pullbackMap_presheaf_map {T : Scheme.{u}} (L M : T.Modules)
     {A B : Over T} (f : B ⟶ A) (s : L ⟶ M) :
     (modulesPseudofunctor.presheafHom L M).map f.op ((pullback A.hom).map s) =

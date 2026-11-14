@@ -35,7 +35,6 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.DiagonalIntegralUnitEpi
 /-! # Morphisms from closed direct images of the integer sheaf
 
 Source: Milne, Section 9, p. 67, exact sequence (*).
-(blueprint: lem-sp-closed-integral-hom-ext).
 -/
 
 @[expose] public noncomputable section
@@ -49,15 +48,7 @@ namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 
 /-- Morphisms from a closed direct image of the integer sheaf agree if they agree on
 constant integer generators on all pulled-back charts.
-Source: Milne, Section 9, p. 67, exact sequence (*), and the sheafification adjunction.
-(blueprint: lem-sp-closed-integral-hom-ext).
-
-Proof: the ambient integer sheaf maps epimorphically onto the closed direct image.
-Cancel that map. By the sheafification universal property, equality of the resulting
-maps from the ambient constant sheaf is equality on the constant presheaf. The
-canonical direct-image map sends each integer generator to the same integer on the
-pulled-back chart, so the assumed equality gives the required presheaf equality.
-This also covers empty schemes and charts. -/
+Source: Milne, Section 9, p. 67, exact sequence (*), and the sheafification adjunction. -/
 theorem closedIntegral_hom_ext {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
     {N : Sheaf (ProEt.topology X) AddCommGrpCat.{u + 1}}
     {q q' : (lowerStar AddCommGrpCat.{u + 1} i).obj

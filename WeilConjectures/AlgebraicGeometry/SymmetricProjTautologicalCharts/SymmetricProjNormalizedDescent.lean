@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.SymmetricProjTautologicalCharts.Symmetr
 # Descent of the normalized symmetric Proj quotient
 
 Source: Stacks Project, Constructions, Tags 01NR, 01OB, 01MS and 01N2.
-(blueprint: lem-trf-symmetric-proj-normalized-descent).
 -/
 
 @[expose] public section
@@ -38,8 +37,7 @@ attribute [local irreducible] Scheme.Modules.tensorPullback Scheme.Modules.tenso
 set_option genInjectivity false in
 set_option genSizeOfSpec false in
 /-- The affine twist comparison with its chart and homogeneous-section normalizations.
-Source: Stacks, Tags 01NR and 01OB
-(blueprint: lem-trf-symmetric-proj-normalized-descent). -/
+Source: Stacks, Tags 01NR and 01OB. -/
 structure NormalizedAffineRestriction {S : Scheme.{u}} (E : S.Modules)
     [E.IsQuasicoherent] (D : ProjectiveBundleQuotientGeometry.TautologicalQuotient E)
     (U V : S.affineOpens) (h : U ≤ V) where
@@ -75,26 +73,7 @@ set_option backward.isDefEq.respectTransparency.types true in
 /-- The normalized degree-one quotient descends from the affine symmetric Proj twists.
 Its comparison on affine restriction carries every degree-one section to its image.
 
-Source: Stacks, Tags 01NR, 01OB, 01MS and 01N2.
-(blueprint: lem-trf-symmetric-proj-normalized-descent).
-
-Proof: For each affine base open U use the actual sheaf Proj.twist A(U) 1.
-On D_+(iota(m)), multiplication by iota(m) identifies this module with the
-structure sheaf. The symmetric algebra is generated in degree one, so these
-opens cover. Send v tensor h to h iota(v)/1; this hits the local frame and is
-split surjective. On a restriction U <= V, quasi-coherence identifies the new
-symmetric algebra with scalar extension. The induced map on a/e^k is
-res(a)/res(e)^k. These fraction maps send the old frame e to res(e) and give
-inverse trivializations on the corresponding charts. They preserve unitToTwist
-for every degree-one element, since that section is a/1. Their compositions
-agree on fractions. Refine nonaffine intersections by affine base opens, apply
-these comparisons there, and use the sheaf axiom to check independence of the
-refinement and the triple cocycle. Module-sheaf descent glues the local twists
-and quotient maps, with the specified charts. Their free rank-one local frames
-prove invertibility; the local splittings prove that the quotient is epi.
-Pulling the glued charts back to U <= V gives the first displayed equation.
-The fraction map proves the second equation. Empty or nilpotent
-charts are zero localizations and impose no extra assumption. -/
+Source: Stacks, Tags 01NR, 01OB, 01MS and 01N2. -/
 theorem exists_normalized_quotient_with_affine_restriction
     (S : Scheme.{u}) (E : S.Modules) [E.IsQuasicoherent] :
     ∃ D : ProjectiveBundleQuotientGeometry.TautologicalQuotient E,

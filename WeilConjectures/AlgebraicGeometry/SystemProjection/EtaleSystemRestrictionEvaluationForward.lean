@@ -640,13 +640,6 @@ attribute [local irreducible] eqToHom in
 /-- The forward compact-support restriction evaluation cube.
 
 Source: Zheng Construction 4.1 and Lemma 5.16; Stacks Tag 0GL6.
-Proof: paste the normalized proper and open restriction comparisons, using
-sectionwise identity maps and their inverse-image and right-adjoint mates; exact
-localization preserves the resulting square. Naturality of the proper and open
-comparisons gives the displayed forward cube. This is the forward form before
-cancelling the support evaluation isomorphism and replacing the canonical
-single-ring restriction by an arbitrary `d` with `hd`.
-(blueprint: lem-pur-etale-system-restriction-evaluation-forward)
 -/
 theorem etaleSystemRestriction_evaluation_forward
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) (l : ℕ) (t : Theory c l)
