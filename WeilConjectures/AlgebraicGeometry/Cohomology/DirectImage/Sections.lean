@@ -86,6 +86,29 @@ lemma subsingleton_H_pushforward_of_injective (I : X.Modules) [Injective I] (m :
   TopCat.Sheaf.IsFlasque.subsingleton_H m
     ((SheafOfModules.toSheaf T.ringCatSheaf).obj ((pushforward f).obj I))
 
+/-- Naturality of the identification of the quotient of section cycles with cohomology. -/
+private lemma cyclesQuotientToH_naturality {ℱ 𝒢 : X.Modules} (φ : ℱ ⟶ 𝒢)
+    (I : InjectiveResolution ℱ) (J : InjectiveResolution 𝒢) (n : ℕ)
+    (b : sectionsCycles I.cocomplex n ⧸ sectionsBoundaries I.cocomplex n) :
+    H.map J.isoCyclesZero.inv (n + 1)
+        ((H.cyclesZeroSuccAddEquiv J.cocomplex J.cocomplex_exactAt_succ
+          (fun _ m ↦ subsingleton_H_of_injective _ m) n).symm
+          ((cyclesQuotientAddEquiv J.cocomplex n).symm
+            (QuotientAddGroup.map _ _ (sectionsCyclesMap (InjectiveResolution.desc φ J I) n)
+              (sectionsBoundaries_le_comap (InjectiveResolution.desc φ J I) n) b))) =
+      H.map φ (n + 1) (H.map I.isoCyclesZero.inv (n + 1)
+        ((H.cyclesZeroSuccAddEquiv I.cocomplex I.cocomplex_exactAt_succ
+          (fun _ m ↦ subsingleton_H_of_injective _ m) n).symm
+          ((cyclesQuotientAddEquiv I.cocomplex n).symm b))) := by
+  let ψ := InjectiveResolution.desc φ J I
+  have hc : (cyclesQuotientAddEquiv J.cocomplex n).symm
+      (QuotientAddGroup.map _ _ (sectionsCyclesMap ψ n) (sectionsBoundaries_le_comap ψ n) b) =
+      QuotientAddGroup.map _ _ ((HomologicalComplex.cyclesMap ψ (n + 1)).app ⊤).hom
+        (range_app_toCycles_le_comap ψ n) ((cyclesQuotientAddEquiv I.cocomplex n).symm b) := by
+    rw [AddEquiv.symm_apply_eq, cyclesQuotientAddEquiv_naturality, AddEquiv.apply_symm_apply]
+  rw [hc, H.cyclesZeroSuccAddEquiv_naturality_symm, ← H.map_comp_apply,
+    ← H.map_comp_apply, InjectiveResolution.isoCyclesZero_inv_naturality]
+
 variable [IsAffine T] [QuasiCompact f] [IsSeparated f] [HasInjectiveResolutions X.Modules]
   [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ]
 
@@ -130,8 +153,6 @@ lemma sectionsHigherDirectImageSuccAddEquiv_apply (I : InjectiveResolution ℱ) 
               (((I.isoRightDerivedObj (pushforward f) (n + 1)).hom.app ⊤) x))))) :=
   rfl
 
-set_option maxHeartbeats 1600000 in
--- identifying sections of `f_* Iⁿ` and of `Iⁿ` over `⊤` unfolds `f ⁻¹ᵁ ⊤`
 /-- The comparison `Γ(T, R^{n+1} f_* ℱ) ≅ H^{n+1}(X, ℱ)` is natural in `ℱ`. -/
 lemma sectionsHigherDirectImageSuccAddEquiv_naturality (𝒢 : X.Modules)
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) 𝒢] (φ : ℱ ⟶ 𝒢)
@@ -142,19 +163,12 @@ lemma sectionsHigherDirectImageSuccAddEquiv_naturality (𝒢 : X.Modules)
       H.map φ (n + 1) (sectionsHigherDirectImageSuccAddEquiv f ℱ I n x) := by
   let ψ := InjectiveResolution.desc φ J I
   let χ := ((pushforward f).mapHomologicalComplex _).map ψ
-  have hK := I.cocomplex_exactAt_succ
-  have hK' := J.cocomplex_exactAt_succ
-  have hacyc : ∀ j m, Subsingleton ((I.cocomplex.X j).H (m + 1)) :=
-    fun _ m ↦ subsingleton_H_of_injective _ m
-  have hacyc' : ∀ j m, Subsingleton ((J.cocomplex.X j).H (m + 1)) :=
-    fun _ m ↦ subsingleton_H_of_injective _ m
-  have hL : ∀ j m, Subsingleton
-      (((((pushforward f).mapHomologicalComplex _).obj I.cocomplex).X j).H (m + 1)) :=
+  let LI := ((pushforward f).mapHomologicalComplex _).obj I.cocomplex
+  let LJ := ((pushforward f).mapHomologicalComplex _).obj J.cocomplex
+  have hL : ∀ j m, Subsingleton ((LI.X j).H (m + 1)) :=
     fun j m ↦ subsingleton_H_pushforward_of_injective f (I.cocomplex.X j) m
-  have hL' : ∀ j m, Subsingleton
-      (((((pushforward f).mapHomologicalComplex _).obj J.cocomplex).X j).H (m + 1)) :=
+  have hL' : ∀ j m, Subsingleton ((LJ.X j).H (m + 1)) :=
     fun j m ↦ subsingleton_H_pushforward_of_injective f (J.cocomplex.X j) m
-  -- the derived functor side
   have h1 : ((J.isoRightDerivedObj (pushforward f) (n + 1)).hom.app ⊤)
       (((higherDirectImage f (n + 1)).map φ).app ⊤ x) =
       ((HomologicalComplex.homologyMap χ (n + 1)).app ⊤)
@@ -164,39 +178,24 @@ lemma sectionsHigherDirectImageSuccAddEquiv_naturality (𝒢 : X.Modules)
     rw [InjectiveResolution.isoRightDerivedObj_hom_naturality φ I J ψ
       (InjectiveResolution.desc_commutes_zero φ J I)]
     rfl
-  let LI := ((pushforward f).mapHomologicalComplex _).obj I.cocomplex
   let a := homologySectionsAddEquiv LI hL (subsingleton_H_homology_pushforward f ℱ I) n
     (((I.isoRightDerivedObj (pushforward f) (n + 1)).hom.app ⊤) x)
   let b : sectionsCycles I.cocomplex n ⧸ sectionsBoundaries I.cocomplex n :=
     cyclesQuotientAddEquiv LI n a
-  let c := (cyclesQuotientAddEquiv I.cocomplex n).symm b
-  let w := (H.cyclesZeroSuccAddEquiv I.cocomplex hK hacyc n).symm c
-  have hc : (cyclesQuotientAddEquiv J.cocomplex n).symm
-      (QuotientAddGroup.map _ _ (sectionsCyclesMap ψ n) (sectionsBoundaries_le_comap ψ n) b) =
-      QuotientAddGroup.map _ _ ((HomologicalComplex.cyclesMap ψ (n + 1)).app ⊤).hom
-        (range_app_toCycles_le_comap ψ n) c := by
-    rw [AddEquiv.symm_apply_eq, cyclesQuotientAddEquiv_naturality, AddEquiv.apply_symm_apply]
-  have hw : (H.cyclesZeroSuccAddEquiv J.cocomplex hK' hacyc' n).symm
-      (QuotientAddGroup.map _ _ ((HomologicalComplex.cyclesMap ψ (n + 1)).app ⊤).hom
-        (range_app_toCycles_le_comap ψ n) c) =
-      H.map (HomologicalComplex.cyclesMap ψ 0) (n + 1) w := by
-    rw [AddEquiv.symm_apply_eq, H.cyclesZeroSuccAddEquiv_naturality ψ hK hacyc hK' hacyc',
-      AddEquiv.apply_symm_apply]
-  have hc' : (cyclesQuotientAddEquiv J.cocomplex n).symm
-      (QuotientAddGroup.map _ _ (sectionsCyclesMap χ n) (sectionsBoundaries_le_comap χ n)
-        (cyclesQuotientAddEquiv LI n a)) =
-      QuotientAddGroup.map _ _ ((HomologicalComplex.cyclesMap ψ (n + 1)).app ⊤).hom
-        (range_app_toCycles_le_comap ψ n) c := hc
-  have key : (H.cyclesZeroSuccAddEquiv J.cocomplex hK' hacyc' n).symm
-      ((cyclesQuotientAddEquiv J.cocomplex n).symm
-        (QuotientAddGroup.map _ _ (sectionsCyclesMap χ n) (sectionsBoundaries_le_comap χ n)
-          (cyclesQuotientAddEquiv LI n a))) =
-      H.map (HomologicalComplex.cyclesMap ψ 0) (n + 1) w := by
-    rw [hc', hw]
-  rw [sectionsHigherDirectImageSuccAddEquiv_apply, sectionsHigherDirectImageSuccAddEquiv_apply, h1,
-    homologySectionsAddEquiv_naturality χ hL (subsingleton_H_homology_pushforward f ℱ I) hL'
-      (subsingleton_H_homology_pushforward f 𝒢 J), cyclesQuotientAddEquiv_naturality χ, key,
-    ← H.map_comp_apply, ← H.map_comp_apply, InjectiveResolution.isoCyclesZero_inv_naturality]
+  have h2 : cyclesQuotientAddEquiv LJ n
+      (homologySectionsAddEquiv LJ hL' (subsingleton_H_homology_pushforward f 𝒢 J) n
+        (((J.isoRightDerivedObj (pushforward f) (n + 1)).hom.app ⊤)
+          (((higherDirectImage f (n + 1)).map φ).app ⊤ x))) =
+      QuotientAddGroup.map _ _ (sectionsCyclesMap ψ n) (sectionsBoundaries_le_comap ψ n) b := by
+    rw [h1, homologySectionsAddEquiv_naturality χ hL
+      (subsingleton_H_homology_pushforward f ℱ I) hL'
+      (subsingleton_H_homology_pushforward f 𝒢 J), cyclesQuotientAddEquiv_naturality χ]
+    rfl
+  exact (congrArg (fun z ↦ H.map J.isoCyclesZero.inv (n + 1)
+    ((H.cyclesZeroSuccAddEquiv J.cocomplex J.cocomplex_exactAt_succ
+      (fun _ m ↦ subsingleton_H_of_injective _ m) n).symm
+      ((cyclesQuotientAddEquiv J.cocomplex n).symm z))) h2).trans
+    (cyclesQuotientToH_naturality φ I J n b)
 
 
 /-- **`Γ(T, R⁰ f_* ℱ) ≅ H⁰(X, ℱ)`**: both are the global sections of `ℱ`. -/
@@ -287,8 +286,6 @@ lemma rightDerivedGlobalSectionsSuccAddEquiv_apply (I : InjectiveResolution ℱ)
               ((I.isoRightDerivedObj (globalSectionsFunctor X) (n + 1)).hom x))))) :=
   rfl
 
-set_option maxHeartbeats 1600000 in
--- the identifications of the global sections complexes unfold the sections functor
 /-- `R^{n+1} Γ(X, ℱ) ≅ H^{n+1}(X, ℱ)` is natural in `ℱ`. -/
 lemma rightDerivedGlobalSectionsSuccAddEquiv_naturality (𝒢 : X.Modules) (φ : ℱ ⟶ 𝒢)
     (I : InjectiveResolution ℱ) (J : InjectiveResolution 𝒢) (n : ℕ)
@@ -298,10 +295,7 @@ lemma rightDerivedGlobalSectionsSuccAddEquiv_naturality (𝒢 : X.Modules) (φ :
       H.map φ (n + 1) (rightDerivedGlobalSectionsSuccAddEquiv ℱ I n x) := by
   let ψ := InjectiveResolution.desc φ J I
   let Γψ := ((globalSectionsFunctor X).mapHomologicalComplex _).map ψ
-  have hK := I.cocomplex_exactAt_succ
   have hK' := J.cocomplex_exactAt_succ
-  have hacyc : ∀ j m, Subsingleton ((I.cocomplex.X j).H (m + 1)) :=
-    fun _ m ↦ subsingleton_H_of_injective _ m
   have hacyc' : ∀ j m, Subsingleton ((J.cocomplex.X j).H (m + 1)) :=
     fun _ m ↦ subsingleton_H_of_injective _ m
   have h1 : (J.isoRightDerivedObj (globalSectionsFunctor X) (n + 1)).hom
@@ -345,21 +339,10 @@ lemma rightDerivedGlobalSectionsSuccAddEquiv_naturality (𝒢 : X.Modules) (φ :
     rw [CochainComplex.abHomologySuccAddEquiv_homologyπ, QuotientAddGroup.map_mk]
     refine congrArg QuotientAddGroup.mk (Subtype.ext ?_)
     exact hv
-  rw [rightDerivedGlobalSectionsSuccAddEquiv_apply, rightDerivedGlobalSectionsSuccAddEquiv_apply,
-    hJ]
-  have hc' : (cyclesQuotientAddEquiv J.cocomplex n).symm
-      (QuotientAddGroup.map _ _ (sectionsCyclesMap ψ n) (sectionsBoundaries_le_comap ψ n)
-        (QuotientAddGroup.quotientAddEquivOfEq (range_abToCycles_globalSections I.cocomplex n)
-          (CochainComplex.abHomologySuccAddEquiv CI n
-            ((I.isoRightDerivedObj (globalSectionsFunctor X) (n + 1)).hom x)))) =
-      QuotientAddGroup.map _ _ ((HomologicalComplex.cyclesMap ψ (n + 1)).app ⊤).hom
-        (range_app_toCycles_le_comap ψ n) ((cyclesQuotientAddEquiv I.cocomplex n).symm
-          (QuotientAddGroup.quotientAddEquivOfEq (range_abToCycles_globalSections I.cocomplex n)
-            (CochainComplex.abHomologySuccAddEquiv CI n
-              ((I.isoRightDerivedObj (globalSectionsFunctor X) (n + 1)).hom x)))) := by
-    rw [AddEquiv.symm_apply_eq, cyclesQuotientAddEquiv_naturality, AddEquiv.apply_symm_apply]
-  rw [hc', H.cyclesZeroSuccAddEquiv_naturality_symm ψ hK hacyc hK' hacyc', ← H.map_comp_apply,
-    ← H.map_comp_apply, InjectiveResolution.isoCyclesZero_inv_naturality]
+  exact (congrArg (fun z ↦ H.map J.isoCyclesZero.inv (n + 1)
+    ((H.cyclesZeroSuccAddEquiv J.cocomplex hK' hacyc' n).symm
+      ((cyclesQuotientAddEquiv J.cocomplex n).symm z))) hJ).trans
+    (cyclesQuotientToH_naturality φ I J n _)
 
 end RightDerivedGlobalSections
 
