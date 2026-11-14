@@ -218,6 +218,14 @@ The source is the inverse-image part of the proof of
 `scalar_completed_preserves_models`.  The statement is
 separate because the independent site and coefficient universes require the
 ringed-topos K-flat pullback argument for the sectionwise inverse-image model.
+
+## References
+
+* Stacks Project
+* Stacks Project, Modules on Sites, Tag 03D2
+* Cohomology on Sites, Tag 0DEP
+* using the sectionwise inverse-image equivalence, K-flatness via points and the local equational
+  criterion for flatness (Stacks Tags 0DEN, 0DEP, 08FC and 09A5)
 -/
 
 @[expose] public noncomputable section
@@ -241,9 +249,7 @@ private theorem postcompose_cocontinuous
   exact (E.toAdjunction.isCocontinuous_iff_coverPreserving _ _).2 e.2.2.2.2.some
 
 /-- Sectionwise inverse image with an invertible coefficient identification preserves
-flat module sheaves.
-
-Source: Stacks Project -/
+flat module sheaves. -/
 private theorem sectionwise_preservesFlat
     {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]
     [EssentiallySmall.{max u (t + 1)} X.ProEt] [EssentiallySmall.{max u (t + 1)} Y.ProEt]
@@ -315,7 +321,6 @@ private theorem sectionwise_preservesFlat
     simpa only [hn] using h
 
 /-- The explicit algebraic presentation of sectionwise inverse image.
-Source: Stacks Project, Modules on Sites, Tag 03D2; Cohomology on Sites, Tag 0DEP.
 The ring identification is induced by `c`, and the underlying module identification
 is the identity. The scalar graph follows by cancelling `c` with its inverse. -/
 private noncomputable def sectionwiseAlgebraicLift
@@ -391,9 +396,7 @@ private noncomputable def sectionwiseAlgebraicLift
     exact h _ x
 
 /-- Sectionwise inverse image with an invertible coefficient identification preserves
-K-flat complexes for the independent-coefficient tensor predicate.
-
-Source: Stacks Project -/
+K-flat complexes for the independent-coefficient tensor predicate. -/
 private theorem sectionwise_preservesKFlat
     {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]
     [EssentiallySmall.{max u (t + 1)} X.ProEt] [EssentiallySmall.{max u (t + 1)} Y.ProEt]
@@ -452,8 +455,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]
 
 /-- The sectionwise inverse image sends every good representative to a good one.
-Source: using the sectionwise inverse-image equivalence, K-flatness via points and the local
-equational criterion for flatness (Stacks Tags 0DEN, 0DEP, 08FC and 09A5).  The proof
+The proof
 transports the K-flat independent-coefficient condition and each flat term along the exact
 equivalence; the coefficient map is the prescribed completed limit isomorphism, so no
 arbitrary module or coefficient object is selected. -/

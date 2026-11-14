@@ -11,7 +11,12 @@ public import WeilConjectures.AlgebraicGeometry.DirectImageSquareUnitTransport
 import WeilConjectures.AlgebraicGeometry.Relative.RelativeMVResolvedOpenRoofComparison
 import WeilConjectures.AlgebraicGeometry.Relative.RelativeMVBiprodRoof
 
-/-! # Mate comparisons for the concrete resolved row roof -/
+/-! # Mate comparisons for the concrete resolved row roof
+
+## References
+
+* Stacks Project, Tags 08BV, 08FE, 08HY and 0D5T
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -30,7 +35,7 @@ attribute [local irreducible] Functor.rightDerivedFunctor
 set_option maxHeartbeats 900000 in
 -- The middle-vertex type contains fixed complex and derived functor comparisons.
 /-- The diagonal middle component of the normalized resolved row roof has the
-specified mate comparison. Source: Stacks Project, Tags 08BV, 08FE, 08HY and 0D5T. -/
+specified mate comparison. -/
 theorem relativeMV_resolved_roof_middle_mate_comparison
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

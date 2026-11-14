@@ -17,6 +17,13 @@ import all WeilConjectures.Algebra.Homology.PrincipalConeExactEquivalence
 import all WeilConjectures.SixFunctors.Supporting.RoosIntrinsicCompletenessEquivalence
 
 /-! # Exact coefficient restriction preserves intrinsic completeness.
+
+## References
+
+* Bhatt--Scholze, Lemma 6.8.2(1)
+* Stacks Tag 03DA
+* Stacks Tags 0999, 099B and 0A0E
+* Stacks Project, Tags 099B and 0A0E
 -/
 
 @[expose] public noncomputable section
@@ -37,8 +44,7 @@ variable (l : ℕ) [Fact l.Prime]
     [FiniteDimensional ℚ_[l] E] [FiniteDimensional ℚ_[l] F] (i : E →ₐ[ℚ_[l]] F)
     (W : Scheme.{u})
 
-/-- The completed scalar inclusion in the published coefficient presentation.
-Source: Bhatt--Scholze, Lemma 6.8.2(1). -/
+/-- The completed scalar inclusion in the published coefficient presentation. -/
 private theorem pbcScalarModelCoefficientSquare :
     WeilConjectures.completedCoefficientMap l E F i W ≫
         (WeilConjectures.purCoefficientIso l F W).inv =
@@ -85,8 +91,7 @@ private def pbcScalarModelRestrictionIso :
     eqToIso (congrArg SheafOfModules.restrictScalars.{u + 1} h) ≪≫
     (scalarRestrictionCompose _ _).symm
 
-/-- Derived restriction in the published model commutes with the scalar restriction.
-Source: Stacks Tag 03DA. -/
+/-- Derived restriction in the published model commutes with the scalar restriction. -/
 private def pbcScalarModelDerivedRestrictionIso (K : PbcCompletedDerived W (pbcIntegralDatum l F)) :
     (pbcDerivedRestrict (WeilConjectures.purCoefficientIso l E W).inv).obj
         ((pbcDerivedRestrict (pbcScalarCoefficientMap l E F i W)).obj K) ≅
@@ -170,8 +175,7 @@ section LocalCriterion
 attribute [local instance] WeilConjectures.IntegralOnSlice.siteCategory
   WeilConjectures.IntegralOnSlice.hasDerived
 
-/-- The scalar inclusion sends the source uniformizer to a multiple of the target one.
-Source: Bhatt--Scholze, Lemma 6.8.2(1). -/
+/-- The scalar inclusion sends the source uniformizer to a multiple of the target one. -/
 private theorem scalarUniformizer_dvd (V : W.ProEtᵒᵖ) :
     ∃ c : (WeilConjectures.completedIntegralCoefficientSheafUnrestricted l F W).obj.obj V,
       (WeilConjectures.completedCoefficientMap l E F i W).hom.app V
@@ -191,8 +195,7 @@ private theorem scalarUniformizer_dvd (V : W.ProEtᵒᵖ) :
 end LocalCriterion
 
 /-- Restriction along the completed scalar inclusion preserves derived completeness in
-the published coefficient model.
-Source: Stacks Tags 0999, 099B and 0A0E. -/
+the published coefficient model. -/
 private theorem pbcScalarModelRestrictionComplete
     (M : DerivedCategory (WeilConjectures.scalarReductionSource.{u, u} l F W))
     (hM : WeilConjectures.IsSfDerivedComplete l F W M) :
@@ -287,8 +290,7 @@ private theorem pbcScalarModelRestrictionComplete
     (fun q U x ↦ hμ q U x) _ e').2.mpr
   infer_instance
 
-/-- Exact coefficient restriction preserves intrinsic completeness.
-Source: Stacks Project, Tags 099B and 0A0E. -/
+/-- Exact coefficient restriction preserves intrinsic completeness. -/
 theorem pbcScalarRestrictionComplete (K : PbcCompletedDerived W (pbcIntegralDatum l F))
     (hK : PbcIsIntrinsicallyComplete W (pbcIntegralDatum l F) K) :
     PbcIsIntrinsicallyComplete W (pbcIntegralDatum l E)

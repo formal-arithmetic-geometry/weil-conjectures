@@ -18,7 +18,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.SmoothLocalDepthTwoClosedFibe
 /-!
 # Flatness of a finite depth-two extension on a smooth local scheme
 
-Source: Stacks Project, Tag 0EYB, formal completion step; Tags 0EYA and 0EY6
+## References
+
+* Stacks Project, Tag 0EYB, formal completion step
+* Tags 0EYA and 0EY6
+* Stacks Project, formal completion step, with Tags 0EYA and 0EY6(2), (a), (b)
 -/
 
 @[expose] public section
@@ -27,9 +31,7 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
-/-- Formal completion proves flatness of the supplied finite extension.
-
-Source: Stacks Project, formal completion step, with Tags 0EYA and 0EY6(2), (a), (b). -/
+/-- Formal completion proves flatness of the supplied finite extension. -/
 theorem flat_of_smooth_local_depth_two_finite_extension
     (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]
     {L : Scheme.{u}} (q : L ⟶ Spec (.of A)) [Smooth q]

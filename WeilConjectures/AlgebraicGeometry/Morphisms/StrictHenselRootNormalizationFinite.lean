@@ -35,7 +35,13 @@ import Mathlib.RingTheory.LocalRing.Quotient
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-! # Properties of the explicit root-cover normalization
-Source: Stacks Project, Tags 0EYG, 0EYH and 032L. -/
+
+## References
+
+* Stacks Project, Tags 0EYG, 0EYH and 032L
+* Stacks Project, Tag 0EYG, root-algebra paragraph, Tag 0EYH, local regularity verification, and Tag
+  032L (finite separable integral closure)
+-/
 
 @[expose] public section
 universe u
@@ -118,9 +124,7 @@ private theorem finite_normalization_of_normal_open
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The explicit relative normalization of the punctured root cover is finite.
-Source: Stacks Project, Tag 0EYG, root-algebra paragraph, Tag 0EYH, local
-regularity verification, and Tag 032L (finite separable integral closure). -/
+/-- The explicit relative normalization of the punctured root cover is finite. -/
 theorem GaloisCover.strict_hensel_root_normalization_finite
     {L U : Scheme.{u}} (i : U ⟶ L)
     (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)

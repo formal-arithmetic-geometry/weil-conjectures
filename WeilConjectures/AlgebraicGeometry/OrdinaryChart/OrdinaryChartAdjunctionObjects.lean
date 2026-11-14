@@ -12,8 +12,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
 
 /-! # Ordinary chart adjunctions and their counit-normalized comparisons
 
-Source: exceptional coefficient change, Charts, ordered affine traces and etale sums.
-
 These constructions use only ordinary etale compact supports. No site realization
 or constructible-origin choice is used to define a chart comparison.
 -/

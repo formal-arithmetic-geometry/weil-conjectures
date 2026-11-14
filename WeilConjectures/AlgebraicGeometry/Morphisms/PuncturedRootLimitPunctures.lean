@@ -16,7 +16,12 @@ import Mathlib.CategoryTheory.Comma.Over.Pullback
 import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
 
 /-! # Auxiliary limit statements for punctured root charts
-Source: Stacks Project, Tags 0BSK, 05N9 and 01YW. -/
+
+## References
+
+* Stacks Project, Tags 0BSK, 05N9 and 01YW
+* Stacks Project, Tags 05N9 and 01YW
+-/
 
 @[expose] public section
 
@@ -29,10 +34,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 set_option maxHeartbeats 600000 in
 -- Comparing the iterated over-category cones needs additional elaboration heartbeats.
-/-- Punctured root charts commute with cofiltered affine ring colimits over R.
-
-Source: Stacks Project, Tags 05N9 and 01YW; universal properties of polynomial
-quotients and localization. -/
+/-- Punctured root charts commute with cofiltered affine ring colimits over R. -/
 theorem punctured_root_colimit_continuity
     (R H : CommRingCat.{u}) (f : R) (n : ℕ) (b : R ⟶ H)
     (I : Type u) [Category.{u} I] [IsCofiltered I]

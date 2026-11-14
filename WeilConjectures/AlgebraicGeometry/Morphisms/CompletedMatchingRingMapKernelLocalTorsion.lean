@@ -12,7 +12,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionMatchingPu
 
 /-! # Local torsion for the completed matching-ring kernel
 
-Source: Stacks Project, Tags 05ER and 05EC.
+## References
+
+* Stacks Project, Tags 05ER and 05EC
+* Stacks Project, Tag 05ER, second paragraph (05EP and 05EQ), applied to the affine charts in Tag
+  0BLH
 -/
 
 @[expose] public section
@@ -21,9 +25,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.CompletionGluingData
 
-/-- Kernel elements are killed by powers of a finite set of maximal-ideal generators.
-Source: Stacks Project, Tag 05ER, second paragraph (05EP and 05EQ), applied to
-the affine charts in Tag 0BLH. -/
+/-- Kernel elements are killed by powers of a finite set of maximal-ideal generators. -/
 theorem completedRingMap_kernel_local_torsion
     {A : Type u} [CommRing A] [IsNoetherianRing A] [IsLocalRing A]
     {U : (Spec (.of A)).Opens}

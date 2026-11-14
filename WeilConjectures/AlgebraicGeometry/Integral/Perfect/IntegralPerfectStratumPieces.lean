@@ -12,7 +12,11 @@ public import Mathlib.CategoryTheory.Triangulated.Subcategory
 
 /-! # Locally perfect pieces supported on a locally closed subscheme
 
-Source: Bhatt--Scholze, Lemma 6.3.14, final devissage, and Lemma 6.8.12.
+## References
+
+* Bhatt--Scholze, Lemma 6.3.14, final devissage, and Lemma 6.8.12
+* Bhatt--Scholze, Proposition 6.6.11 and Lemma 6.3.14
+* Bhatt--Scholze, Lemma 6.3.14, final paragraph
 -/
 
 @[expose] public noncomputable section
@@ -26,8 +30,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- A bounded-above locally perfect complex on one scheme. The covering models
 are taken on the identity stratum, with the same completed coefficient ring as
-in the stratified-perfect predicate.
-Source: Bhatt--Scholze, Proposition 6.6.11 and Lemma 6.3.14. -/
+in the stratified-perfect predicate. -/
 def IsIntegralLocallyPerfect (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A)
     (L : DerivedCategory (pbcModules T (pbcAdicCompletion T d))) : Prop :=
@@ -45,8 +48,7 @@ def IsIntegralLocallyPerfect (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
 closed filtration: extend a locally perfect complex from a closed subscheme of
 an open subscheme, and then extend by zero to T. Both functors are the actual
 ordinary uncompleted derived functors. The coefficient comparisons are the fixed
-inverse-image identifications of the adic datum.
-Source: Bhatt--Scholze, Lemma 6.3.14, final paragraph. -/
+inverse-image identifications of the adic datum. -/
 def IsIntegralPerfectStratumPiece (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) :
     ObjectProperty (DerivedCategory (pbcModules T (pbcAdicCompletion T d))) :=

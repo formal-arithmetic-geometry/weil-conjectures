@@ -11,7 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.Picard.Derived.PicardDerivedUnit
 
 /-! # Factorization of the normalized transpose
 
-Source: Stacks Project, Tag 08HY.
+## References
+
+* Stacks Project, Tag 08HY
 -/
 
 @[expose] public section
@@ -76,8 +78,7 @@ private theorem coefficientMate_tensor_evaluation
   exact coefficientMate_evaluation p p' r a ha K _ _
 
 -- Keep the explicitly constructed coefficient comparison folded.
-/-- The normalized transpose factors through the coefficient transpose.
-Source: Stacks Project, Tag 08HY. -/
+/-- The normalized transpose factors through the coefficient transpose. -/
 theorem picardDirectImageDerivedTranspose_factorization
     {X S : Scheme.{v}} (f : X ⟶ S)
     (L : X.Modules) (W : Scheme.{v}) (k : W ⟶ S)

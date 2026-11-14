@@ -19,7 +19,10 @@ import WeilConjectures.AlgebraicGeometry.Proper.Flat.ProperFlatGlobalSectionsCri
 /-!
 # Universal structure-sheaf pushforward for proper flat morphisms
 
-Source: Stacks Project, Derived Categories of Schemes, Tag 0E0L.
+## References
+
+* Stacks Project, Derived Categories of Schemes, Tag 0E0L
+* Stacks Project, Tag 0E0L
 -/
 
 @[expose] public section
@@ -37,8 +40,7 @@ the unit at `𝒪_T` of the module pullback/pushforward adjunction
 `Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction p)`, i.e.
 `𝒪_T → p_* p^* 𝒪_T` with `p^* 𝒪_T ≅ 𝒪_{X_T}`; this is the form of the hypothesis `hO` of
 `lem-sc-picard-diagonal-locally-closed`. Locally of finite presentation together with
-properness (quasi-compact, quasi-separated) is finite presentation.
-Source: Stacks Project, Tag 0E0L. -/
+properness (quasi-compact, quasi-separated) is finite presentation. -/
 theorem isIso_structureSheafMap_of_proper_flat_geometricallyReduced_connected_fibers
     {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f] [Flat f]
     [LocallyOfFinitePresentation f]

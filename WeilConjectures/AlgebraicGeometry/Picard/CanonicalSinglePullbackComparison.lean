@@ -14,7 +14,12 @@ import WeilConjectures.AlgebraicGeometry.FlatModuleCanonicalDerivedPullback
 
 /-! # The pinned derived pullback comparison on a single module
 
-Source: Stacks Project, Tags 06YD, 06YJ and 08HY.
+## References
+
+* Stacks Project, Tags 06YD, 06YJ and 08HY
+* Stacks, Tag 0D5S
+* Stacks, Tags 06YJ and 08HY
+* Stacks, Tags 06YD and 06YJ
 -/
 
 @[expose] public section
@@ -30,15 +35,13 @@ namespace AlgebraicGeometry.Scheme.Modules
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
-/-- The additive structure used in the canonical derived composition comparisons.
-Source: Stacks, Tag 0D5S. -/
+/-- The additive structure used in the canonical derived composition comparisons. -/
 abbrev canonicalTensorPullbackAdditive {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (tensorPullback f).Additive :=
   (Classical.choose exists_derivedPullbackComposition) f
 
 /-- The specified derived counit, followed by the single-complex comparison and the
-unique comparison of the two left adjoints to module pushforward.
-Source: Stacks, Tags 06YJ and 08HY. -/
+unique comparison of the two left adjoints to module pushforward. -/
 def canonicalSinglePullbackMap {X Y : Scheme.{u}} (f : X ⟶ Y) (M : Y.Modules) :
     (AlgebraicGeometry.derivedPullback f).obj ((DerivedCategory.singleFunctor
       (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj M) ⟶
@@ -54,8 +57,7 @@ def canonicalSinglePullbackMap {X Y : Scheme.{u}} (f : X ⟶ Y) (M : Y.Modules) 
         (tensorPullback f) (ComplexShape.up ℤ) 0).hom.app M))) ≫
     (DerivedCategory.singleFunctor _ 0).map (t.hom.app M)
 
-/-- The pinned comparison is invertible on an invertible module.
-Source: Stacks, Tags 06YD and 06YJ. -/
+/-- The pinned comparison is invertible on an invertible module. -/
 theorem isIso_canonicalSinglePullbackMap {X Y : Scheme.{u}} (f : X ⟶ Y)
     (M : Y.Modules) [SheafOfModules.IsInvertible.{u, u, u} M] :
     IsIso (canonicalSinglePullbackMap f M) := by

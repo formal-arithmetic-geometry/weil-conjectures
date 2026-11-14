@@ -15,11 +15,14 @@ public import Mathlib.CategoryTheory.Adjunction.Basic
 /-!
 # Adjunct normal form of iterated scalar mates
 
-Source: Stacks Project, Tag 0E46, coefficient-change specialization of the omitted verification.
-
 The exact constant-ring inverse image is represented by its canonical total left derived
 functor, as in the existing scalar/pullback comparison and scalar mate. The canonical
 `leftDerivedUpperStarIsoMapDerivedCategory` identifies it with termwise inverse image.
+
+## References
+
+* Stacks Project, Tag 0E46, coefficient-change specialization of the omitted verification
+* Stacks Project, Tag 0E46, and Categories Tag 0037
 -/
 
 @[expose] public noncomputable section
@@ -34,9 +37,7 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
 
 /-- The composite-adjunction adjunct of an arbitrary arrow with the iterated scalar-mate
-endpoints: apply both pullbacks, then the s-counit, then the r-counit.
-Source: Stacks Project, Tag 0E46, and Categories Tag 0037; the composite counit is
-`CategoryTheory.Adjunction.comp_counit_app`. -/
+endpoints: apply both pullbacks, then the s-counit, then the r-counit. -/
 def scalarIteratedAdjunct
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {X Y Z : Scheme.{u}} (r : X ⟶ Y) (s : Y ⟶ Z)
@@ -61,8 +62,7 @@ def scalarIteratedAdjunct
       ((scalarExtension φ X).obj M)
 
 /-- The adjunct of the two successive specified scalar mates is the two normalized
-scalar/pullback comparisons followed by scalar extension of the composite A-counit.
-Source: Stacks Project, Tag 0E46, coefficient-change specialization of the omitted verification. -/
+scalar/pullback comparisons followed by scalar extension of the composite A-counit. -/
 theorem scalarMate_iterated_adjunct
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {X Y Z : Scheme.{u}} (r : X ⟶ Y) (s : Y ⟶ Z)

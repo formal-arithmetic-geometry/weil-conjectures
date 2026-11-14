@@ -25,7 +25,10 @@ import Mathlib.CategoryTheory.Sites.Point.Skyscraper
 
 /-! # Sheafification preserves pro-etale geometric stalks
 
-Source: Stacks Project, Tags 0F6B, 0F6C, the paragraph before 0993, and 00Y8(3).
+## References
+
+* Stacks Project, Tags 0F6B, 0F6C, the paragraph before 0993, and 00Y8(3)
+* Stacks Project, Tags 0F6B, 0F6C, paragraph before 0993, and 00Y8(3)
 -/
 
 @[expose] public section
@@ -65,7 +68,6 @@ private theorem lift_geometricPoint_cover
 
 /-- The colimit of the abelian sheafification unit on pointed weakly etale neighbourhoods
 is an isomorphism, naturally in the presheaf.
-Source: Stacks Project, Tags 0F6B, 0F6C, paragraph before 0993, and 00Y8(3).
 -/
 theorem proEtaleGeometricStalk_sheafification
     {X : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]

@@ -105,7 +105,10 @@ public import WeilConjectures.AlgebraicGeometry.InternalSectionTensorLocalizatio
 
 /-! # Localization of the sectionwise tensor comparison
 
-Source: Stacks Project, Tags 03CV, 03EK, 06YL, 06YS and 08J9.
+## References
+
+* Stacks Project, Tags 03CV, 03EK, 06YL, 06YS and 08J9
+* Stacks 03CV, 03EK, 06YL, 06YS and 08J9
 -/
 
 @[expose] public noncomputable section
@@ -647,9 +650,7 @@ set_option backward.isDefEq.respectTransparency.types false
 set_option backward.isDefEq.respectTransparency false in
 /-- The section equivalence identifies the native derived tensors with the ringed
 closed tensor, with the prescribed K-flat representative squares, globally and on
-all localized sites. This statement contains no comparison of internal Homs.
-
-Source: Stacks 03CV, 03EK, 06YL, 06YS and 08J9. -/
+all localized sites. This statement contains no comparison of internal Homs. -/
 theorem internalSection_tensorLocalization :
     (∃ (S : CoefficientClosedStructure (hom Λ X))
       (T : CoefficientTensorModels.{u, u + 1, u, u + 1}

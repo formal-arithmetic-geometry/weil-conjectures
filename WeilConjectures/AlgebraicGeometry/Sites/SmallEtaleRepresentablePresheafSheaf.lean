@@ -15,7 +15,10 @@ public import Mathlib.CategoryTheory.Sites.SubcanonicalOver
 /-!
 # Representable presheaves are sheaves on the small étale site
 
-Source: Tags 03O3 and 03O4.
+## References
+
+* Tags 03O3 and 03O4
+* Stacks Project, Tags 03O3 and 03O4
 -/
 
 @[expose] public section
@@ -33,8 +36,6 @@ small étale site of `T` is a sheaf for the étale topology. Its value on an
 étale `T`-scheme `U` is the set of morphisms `U ⟶ X` over `T`, and the
 statement is expressed by the unique amalgamation condition for every
 covering presieve.
-
-Source: Stacks Project, Tags 03O3 and 03O4.
 -/
 theorem smallEtaleRepresentablePresheaf_isSheaf
     (T X : Scheme.{u}) [X.Over T] :

@@ -23,8 +23,11 @@ import WeilConjectures.Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 
 /-! # Descent of a root-split cover to fixed subalgebras
 
-Source: Stacks Project, Tag 0EYG, local and intermediate-field paragraphs; Tag 09EV, intermediate
-subextensions.
+## References
+
+* Stacks Project, Tag 0EYG, local and intermediate-field paragraphs
+* Tag 09EV, intermediate subextensions
+* Stacks Project, Tag 0EYG, strict local and normal-domain paragraphs
 -/
 
 @[expose] public section
@@ -34,9 +37,7 @@ set_option autoImplicit false
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- Root-split covers descend to products of fixed subalgebras of the root algebra.
-
-Source: Stacks Project, Tag 0EYG, strict local and normal-domain paragraphs. -/
+/-- Root-split covers descend to products of fixed subalgebras of the root algebra. -/
 theorem strict_local_root_orbit_descent
     (R H : CommRingCat.{u}) (g : R) (ι : R →+* H)
     [IsStrictlyHenselianLocalRing H] [IsRegularLocalRing H]

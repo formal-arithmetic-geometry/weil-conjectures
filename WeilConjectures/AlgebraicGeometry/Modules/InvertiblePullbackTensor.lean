@@ -19,8 +19,12 @@ import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 /-!
 # Pullback, tensor products and fibres of invertible modules
 
-Source: Stacks Project, Modules, Tags 01CD, 0B8L, 01C8, 01CT, 01CA, 01CB; Sheaves, Tags 0096, 0097,
-0098; Algebra, Tags 00D0, 00CY, 00D2.
+## References
+
+* Stacks Project, Modules, Tags 01CD, 0B8L, 01C8, 01CT, 01CA, 01CB
+* Sheaves, Tags 0096, 0097, 0098
+* Algebra, Tags 00D0, 00CY, 00D2
+* Sheaves, Tags 0096, 0097
 -/
 
 @[expose] public section
@@ -93,7 +97,6 @@ this also permits every permutation of a finite tensor product (including the em
 product, the structure module). Fibres commute with pullback and tensor product, and
 these identifications send section values to their indicated pure tensors.
 
-Source: Stacks Project, Modules, Tags 01CD, 0B8L, 01C8, 01CT, 01CA, 01CB; Sheaves, Tags 0096, 0097,
 0098. -/
 theorem invertible_pullback_tensor {X Y : Scheme.{v}} (f : X ⟶ Y) :
     let pb : ∀ {A B : Scheme.{v}} (h : A ⟶ B) (N : B.Modules) (V : B.Opens),

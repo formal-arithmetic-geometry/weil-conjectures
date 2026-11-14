@@ -9,7 +9,11 @@ public import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearOrdinaryDir
 
 /-! # Transposition of horizontal compatibility squares
 
-Source: Zheng Construction 4.1; Stacks 03D2 and 03DA.
+## References
+
+* Zheng Construction 4.1
+* Stacks 03D2 and 03DA
+* Stacks 03D7
 -/
 
 @[expose] public noncomputable section
@@ -38,7 +42,6 @@ variable (P : OrdinaryInverseSystem.{c, v, r} J B τ J' uInv F σ I)
   (a : ∀ n, (I n).modules ⊣ V n)
 
 /-- The local mate assertion for a componentwise direct-image datum.
-Source: Zheng Construction 4.1; Stacks 03D7.
 
 The assertion is exactly the horizontal compatibility square at two indices,
 after transposition by the supplied level adjunctions. -/
@@ -109,8 +112,7 @@ private theorem normalized_square_iff
   simp only [Category.assoc, ht]
   exact eq_comm
 
-/-- The local mate law for the reassembled componentwise direct image.
-Source: Zheng Construction 4.1; Stacks 03D7. -/
+/-- The local mate law for the reassembled componentwise direct image. -/
 theorem ordinaryDirectSystem_core_transition_mate_exists [PreservesFiniteLimits uInv]
     (_hI : ∀ n,
       uInv.map ((sheafCompose J (CategoryTheory.forget CommRingCat.{max c v r})).map (τ n)) ≫

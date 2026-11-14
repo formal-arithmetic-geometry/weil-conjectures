@@ -9,7 +9,10 @@ public import WeilConjectures.AlgebraicGeometry.RelativeProj.Affine
 
 /-! # Transport of coefficientwise graded base change
 
-Source: Stacks Project, Constructions, Tag 01O3.
+## References
+
+* Stacks Project, Constructions, Tag 01O3
+* Stacks Project, Tag 01O3
 -/
 
 @[expose] public section
@@ -36,8 +39,7 @@ private theorem degree_bijective
     rw [f.map_directSumDecompose, ha, DirectSum.decompose_of_mem_same D' b.property]
 
 /-- A coefficientwise graded base change is preserved by graded algebra isomorphisms
-on source and target.
-Source: Stacks Project, Tag 01O3. -/
+on source and target. -/
 theorem isGradedBaseChangeAlong_transport
     {R S A₀ A₁ B₀ B₁ : Type u}
     [CommRing R] [CommRing S] [CommRing A₀] [CommRing A₁]

@@ -80,10 +80,23 @@ import WeilConjectures.AlgebraicGeometry.Derived.DerivedReductionAugmentationCom
 
 /-! # Coefficient normalization of the raw ordered completed exchange
 
-Source: strict coefficient supplement, Stacks Tags 099M, 099N, 0A07 and 0E48.
-
 The maps below retain their ordinary-section, universal-derived-counit and completion-unit
 normalizations. The ambient constant and completed module categories remain distinct.
+
+## References
+
+* strict coefficient supplement, Stacks Tags 099M, 099N, 0A07 and 0E48
+* Stacks 099M
+* Stacks Tags 099M, 0941 and 0A07
+* Stacks 0E48
+* Stacks 0D6D
+* Stacks 099M, 099I
+* Stacks Tags 099C, 099I and 099M
+* Stacks 099M, 099N
+* Stacks Tags 099M and 099N
+* Stacks 099N
+* Stacks 0A07
+* Stacks 099M, 0E48
 -/
 
 @[expose] public noncomputable section
@@ -206,8 +219,7 @@ theorem completedReductionAugmentation_complexCounit (T : Scheme.{t})
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- Restriction respects the strict quotient unit, not just its evaluations.
-Source: Stacks 099M. -/
+/-- Restriction respects the strict quotient unit, not just its evaluations. -/
 theorem rho_unit_first (T : Scheme.{t}) (K : d.derived T) :
     (exchangeTowerRes d T).map ((completedReductionAugmentation d T).app K) ≫
         (rho d T).hom.app K =
@@ -246,8 +258,7 @@ theorem rho_unit_first (T : Scheme.{t}) (K : d.derived T) :
 
 end RhoUnitFirst
 
-/-- The normalized strict-tower comparison preserves the actual completion units.
-Source: Stacks Tags 099M, 0941 and 0A07. -/
+/-- The normalized strict-tower comparison preserves the actual completion units. -/
 theorem rho_unit_second (T : Scheme.{t}) (K : d.derived T) :
     (res d T).map (d.completionUnit T K) ≫
         (lambda d T).hom.app ((completedReductionTower T d).obj K) ≫
@@ -282,8 +293,7 @@ theorem rho_unit (T : Scheme.{t}) (K : d.derived T) :
 
 variable {U V : Scheme.{t}} (u : U ⟶ V)
 
-/-- The ambient direct-image/scalar comparison, with its universal unit normalization.
-Source: Stacks 0E48. -/
+/-- The ambient direct-image/scalar comparison, with its universal unit normalization. -/
 def chi : d.push u ⋙ res d V ≅ res d U ⋙ push (A := A) u :=
   proEtaleRingRestrictionDerivedDirectImage u
     (exchangeConstantRing V A) (d.completedRing V)
@@ -291,8 +301,7 @@ def chi : d.push u ⋙ res d V ≅ res d U ⋙ push (A := A) u :=
     (exchangeScalar d V) (exchangeScalar d U) (exchangeConstantIso u A)
     (d.integralRingIso u) (exchangeScalar_comm d u)
 
-/-- The ambient pullback/scalar comparison is exact descent of the ordinary normalized mate.
-Source: Stacks 0D6D. -/
+/-- The ambient pullback/scalar comparison is exact descent of the ordinary normalized mate. -/
 def alpha : d.pull u ⋙ res d U ≅ res d V ⋙ pull (A := A) u :=
   proEtaleRingRestrictionDerivedPullback u
     (exchangeConstantRing V A) (d.completedRing V)
@@ -300,17 +309,14 @@ def alpha : d.pull u ⋙ res d U ≅ res d V ⋙ pull (A := A) u :=
     (exchangeScalar d V) (exchangeScalar d U) (exchangeConstantIso u A)
     (d.integralRingIso u) (exchangeScalar_comm d u)
 
-/-- The quotient-tower complete category over completed coefficients.
-Source: Stacks 099M. -/
+/-- The quotient-tower complete category over completed coefficients. -/
 abbrev AComplete (T : Scheme.{t}) := ObjectProperty.FullSubcategory (d.TowerComplete T)
 
-/-- The inclusion of the full completed-coefficient complete category.
-Source: Stacks 099M. -/
+/-- The inclusion of the full completed-coefficient complete category. -/
 abbrev inclusion (T : Scheme.{t}) := ObjectProperty.ι (d.TowerComplete T)
 
 /-- Restriction identifies the two complete predicates and is an equivalence on the full
-complete categories; it does not assert an ambient equivalence.
-Source: Stacks 099M, 099I. -/
+complete categories; it does not assert an ambient equivalence. -/
 theorem restriction_complete_iff (T : Scheme.{t}) :
     ∀ K : d.derived T, d.TowerComplete T K ↔ IsComplete d T ((res d T).obj K) := by
   have hr : (res d T).ReflectsIsomorphisms :=
@@ -651,8 +657,7 @@ theorem res_essSurj (T : Scheme.{t}) (X : D (A := A) T) (hX : IsComplete d T X) 
 
 end CompleteEquivalence
 
-/-- Restriction gives an equivalence on the two full complete subcategories.
-Source: Stacks Tags 099C, 099I and 099M. -/
+/-- Restriction gives an equivalence on the two full complete subcategories. -/
 theorem restriction_complete_equiv (T : Scheme.{t}) :
     ∃ e : AComplete d T ≌ Complete d T,
       Nonempty (e.functor ⋙ ObjectProperty.ι (IsComplete d T) ≅
@@ -691,8 +696,7 @@ theorem ordinaryToCompleted_stratum (K : d.derived V) :
   simp only [Functor.comp_obj, Category.id_comp]
   rfl
 
-/-- The scalar comparison for completed pullback is fixed by the actual completion units.
-Source: Stacks 099M, 099N. -/
+/-- The scalar comparison for completed pullback is fixed by the actual completion units. -/
 theorem phi_exists :
     ∃ e : inclusion d V ⋙ d.completedPull u ⋙ res d U ≅
         inclusion d V ⋙ res d V ⋙ completePull d u,
@@ -716,8 +720,7 @@ theorem phi_exists :
     ← Category.assoc, completedComparison_unit]
   exact ((unit d U).naturality ((alpha d u).hom.app K.obj)).symm
 
-/-- The completed pullback/scalar comparison is determined by its unit equation.
-Source: Stacks Tags 099M and 099N. -/
+/-- The completed pullback/scalar comparison is determined by its unit equation. -/
 theorem phi_unique
     {e₁ e₂ : inclusion d V ⋙ d.completedPull u ⋙ res d U ≅
         inclusion d V ⋙ res d V ⋙ completePull d u}
@@ -766,16 +769,14 @@ theorem phi_existsUnique :
   intro e' he'
   exact (phi_unique d u he he').symm
 
-/-- The completed pullback/scalar isomorphism, retaining its completion-unit equation.
-Source: Stacks 099N. -/
+/-- The completed pullback/scalar isomorphism, retaining its completion-unit equation. -/
 def phi : inclusion d V ⋙ d.completedPull u ⋙ res d U ≅
     inclusion d V ⋙ res d V ⋙ completePull d u := (phi_existsUnique d u).exists.choose
 
 variable {X' X Y' Y : Scheme.{t}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
   {f : X ⟶ Y} {g : Y' ⟶ Y}
 
-/-- The specified completed-coefficient source reconstruction.
-Source: Stacks 099M. -/
+/-- The specified completed-coefficient source reconstruction. -/
 def sourceReconstruction (K : d.derived X) :=
   (completedRlim Y' (d.completedRing Y')).mapIso
     ((d.reductionTowerPullbackIso g).app ((d.push f).obj K))
@@ -785,47 +786,40 @@ def sourceA (K : d.derived X) :=
   (completedRlim Y' (d.completedRing Y')).mapIso
     (d.towerH (f := f) (f' := f') (g := g) (g' := g') K)
 
-/-- The specified direct-image/limit comparison c a.
-Source: Stacks 0A07. -/
+/-- The specified direct-image/limit comparison c a. -/
 def targetA (K : d.derived X) :=
   (d.directImageRlimIso f').app
     ((d.towerPull g').obj ((completedReductionTower X d).obj K))
 
-/-- The left corner comparison includes the image of the same strict reduction rho.
-Source: Stacks 0E48. -/
+/-- The left corner comparison includes the image of the same strict reduction rho. -/
 def beta (K : d.derived X) :=
   (exchangeCornerB d f g).app ((completedReductionTower X d).obj K) ≪≫
     (exchangeConstantPull (A := A) g).mapIso
       ((exchangeConstantPush (A := A) f).mapIso ((rho d X).app K))
 
-/-- The right corner comparison includes the image of that same strict reduction rho.
-Source: Stacks 0E48. -/
+/-- The right corner comparison includes the image of that same strict reduction rho. -/
 def delta (K : d.derived X) :=
   (exchangeCornerD d g' f').app ((completedReductionTower X d).obj K) ≪≫
     (exchangeConstantPush (A := A) f').mapIso
       ((exchangeConstantPull (A := A) g').mapIso ((rho d X).app K))
 
-/-- The scalar comparison at M uses finite reduction, ordinary pullback and chi f.
-Source: Stacks 099M, 0E48. -/
+/-- The scalar comparison at M uses finite reduction, ordinary pullback and chi f. -/
 def rhoM (K : d.derived X) :=
   (rho d Y').app ((d.pull g).obj ((d.push f).obj K)) ≪≫
     (reduction d Y').mapIso ((alpha d g).app ((d.push f).obj K)) ≪≫
     (reduction d Y').mapIso ((pull (A := A) g).mapIso ((chi d f).app K))
 
-/-- The pulled-back strict reduction comparison retains its full diagram, not just levels.
-Source: Stacks 099M, 0E48. -/
+/-- The pulled-back strict reduction comparison retains its full diagram, not just levels. -/
 def rhoPull (K : d.derived X) :=
   (exchangeResPull d g').app ((completedReductionTower X d).obj K) ≪≫
     (exchangeConstantPull (A := A) g').mapIso ((rho d X).app K)
 
-/-- The source scalar identification, with phi evaluated at the complete direct image.
-Source: Stacks 099N. -/
+/-- The source scalar identification, with phi evaluated at the complete direct image. -/
 def iotaS (K : d.derived X) (hK : d.TowerComplete X K) :=
   (phi d g).app ⟨(d.push f).obj K, d.push_complete f K hK⟩ ≪≫
     (completePull d g).mapIso ((chi d f).app K)
 
-/-- The target scalar identification is chi followed by direct image of phi.
-Source: Stacks 099N. -/
+/-- The target scalar identification is chi followed by direct image of phi. -/
 def iotaT (K : d.derived X) (hK : d.TowerComplete X K) :=
   (chi d f').app ((d.completedPull g').obj K) ≪≫
     (push (A := A) f').mapIso ((phi d g').app ⟨K, hK⟩)
@@ -843,8 +837,7 @@ def rawComponent (sq : ChosenCartesianSquare g' f' f g) (K : AComplete d X) :
   (res d Y').map (d.completedExchange sq K.obj) ≫
     (iotaT (g' := g') (f' := f') d K.obj K.property).hom
 
-/-- The specified constant strict mate, conjugated by s, t and the source scalar map.
-Source: Stacks 099M, 0E48. -/
+/-- The specified constant strict mate, conjugated by s, t and the source scalar map. -/
 def constantComponent (sq : ChosenCartesianSquare g' f' f g) (K : AComplete d X) :
     (normalizedSource (f := f) (g := g) d).obj K ⟶
       (normalizedTarget (g' := g') (f' := f') d).obj K :=
@@ -856,8 +849,7 @@ def constantComponent (sq : ChosenCartesianSquare g' f' f g) (K : AComplete d X)
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- Both displayed composites are natural for every morphism of complete inputs.
-Source: Stacks 0E48. -/
+/-- Both displayed composites are natural for every morphism of complete inputs. -/
 theorem normalized_naturality (sq : ChosenCartesianSquare g' f' f g)
     (K L : AComplete d X) (a : K ⟶ L) :
     (normalizedSource (f := f) (g := g) d).map a ≫ rawComponent d sq L =
@@ -935,8 +927,7 @@ def rawNormalized (sq : ChosenCartesianSquare g' f' f g) :
   app K := rawComponent d sq K
   naturality K L a := (normalized_naturality d sq K L a).1
 
-/-- The specified constant-coefficient ordered expression as a natural transformation.
-Source: Stacks 099M, 0E48. -/
+/-- The specified constant-coefficient ordered expression as a natural transformation. -/
 def constantNormalized (sq : ChosenCartesianSquare g' f' f g) :
     normalizedSource (f := f) (g := g) d ⟶ normalizedTarget (g' := g') (f' := f') d where
   app K := constantComponent d sq K

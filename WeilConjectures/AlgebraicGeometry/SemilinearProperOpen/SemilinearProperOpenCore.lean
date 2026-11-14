@@ -124,12 +124,40 @@ import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 
 /-! # Core constructions for intrinsic proper/open mates of semilinear systems
 
-Source: Stacks Project, Tags 0F7B, 0F7C, 0F7D and 0F7F, open cases.
-
 The existing ordinary and derived system operations, their canonical compositors,
 and the intrinsic beta, clopen projector, alpha and gamma are constructed here.
 The original module re-exports these declarations and proves their coherence laws.
 The adjunct normalization is retained with its proof.
+
+## References
+
+* Stacks Project, Tags 0F7B, 0F7C, 0F7D and 0F7F, open cases
+* Stacks 0F7B, coefficient-system extension
+* Zheng 4.1
+* Stacks 05RU
+* Stacks 09A5 and 0F7B
+* Stacks 09A5 and Zheng 4.1
+* Stacks 03D7 and 0F7B
+* Stacks 03D7
+* Zheng 4.10
+* Stacks 03EK
+* Stacks 079P
+* Stacks 07A4
+* Stacks 03D8, 0D6D
+* Stacks 07A7
+* Stacks 03DI, 03DJ
+* Stacks 03DI
+* Stacks 03DJ
+* Stacks 0F7D
+* Stacks, Tag 07A7
+* Stacks, Tags 09AE and 07A7
+* Stacks, Tag 09AE
+* Stacks, Tags 03DI and 09AE
+* Stacks, Tag 0F7B
+* Stacks, Tags 0F7B and 07A7
+* Stacks 0F7B
+* Stacks 0F7B and 03DI, via the inverse open unit
+* Stacks 0F7B, open case
 -/
 
 @[expose] public noncomputable section
@@ -681,45 +709,37 @@ instance proEtSmall (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.ProEt :=
 
 variable (C : ℕ → CommRingCat.{u + 1}) (τ : ∀ n : ℕ, C (n + 1) ⟶ C n)
 
-/-- The coefficient sheaves are the existing constant sheaves, at every level.
-Source: Stacks 0F7B, coefficient-system extension. -/
+/-- The coefficient sheaves are the existing constant sheaves, at every level. -/
 abbrev coefficients (X : Scheme.{u}) (n : ℕ) :
     Sheaf (ProEt.topology X) CommRingCat.{u + 1} :=
   (constantSheaf.{u, u + 1, u + 1, u + 2} (ProEt.topology X) CommRingCat.{u + 1}).obj (C n)
 
-/-- The given ring transitions, with no flatness condition.
-Source: Stacks 0F7B, coefficient-system extension. -/
+/-- The given ring transitions, with no flatness condition. -/
 abbrev transition (X : Scheme.{u}) (n : ℕ) :
     coefficients C X (n + 1) ⟶ coefficients C X n :=
   (constantSheaf.{u, u + 1, u + 1, u + 2} (ProEt.topology X) CommRingCat.{u + 1}).map (τ n)
 
-/-- The actual ring on the vertical sequence site from the recorded section model.
-Source: Zheng 4.1; Stacks 0F7B, coefficient-system extension. -/
+/-- The actual ring on the vertical sequence site from the recorded section model. -/
 abbrev ringSystem (X : Scheme.{u}) :=
   systemRing.{u + 1, u, u + 1} (ProEt.topology X) (coefficients C X) (transition C τ X)
 
-/-- Strict semilinear module systems, using the recorded ringed-site model.
-Source: Zheng 4.1; Stacks 0F7B, coefficient-system extension. -/
+/-- Strict semilinear module systems, using the recorded ringed-site model. -/
 abbrev Modules (X : Scheme.{u}) :=
   Systems.{u + 1, u, u + 1} (ProEt.topology X) (coefficients C X) (transition C τ X)
 
-/-- The standard derived-category instance at its specified localization size.
-Source: Stacks 05RU. -/
+/-- The standard derived-category instance at its specified localization size. -/
 instance derived (X : Scheme.{u}) : HasDerivedCategory.{u + 2} (Modules C τ X) :=
   HasDerivedCategory.standard _
 
-/-- Ordinary unbounded derived systems; this is not a diagram of derived categories.
-Source: Zheng 4.1; Stacks 0F7B, coefficient-system extension. -/
+/-- Ordinary unbounded derived systems; this is not a diagram of derived categories. -/
 abbrev Derived (X : Scheme.{u}) :=
   DerivedCategory (Modules C τ X)
 
-/-- Base change acts at the same index on the existing sequence site.
-Source: Stacks 09A5 and 0F7B. -/
+/-- Base change acts at the same index on the existing sequence site. -/
 abbrev siteMap {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   (𝟭 ℕ).prod (proEtaleBaseChange f)
 
-/-- Continuity on the vertical topology.
-Source: Stacks 09A5 and Zheng 4.1. -/
+/-- Continuity on the vertical topology. -/
 theorem siteMap_continuous {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (siteMap f).IsContinuous (coefficientSequenceTopology (ProEt.topology Y))
       (coefficientSequenceTopology (ProEt.topology X)) := by
@@ -727,8 +747,7 @@ theorem siteMap_continuous {X Y : Scheme.{u}} (f : X ⟶ Y) :
 
 attribute [instance] siteMap_continuous
 
-/-- The system coefficient map is uniquely fixed by the constant-section maps.
-Source: Stacks 09A5 and 0F7B. -/
+/-- The system coefficient map is uniquely fixed by the constant-section maps. -/
 theorem coefficientMap_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃! a : ringSystem C τ Y ⟶ ((siteMap f).sheafPushforwardContinuous
       CommRingCat.{u + 1} (coefficientSequenceTopology (ProEt.topology Y))
@@ -751,8 +770,7 @@ theorem coefficientMap_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
   funext U
   exact eq_of_heq (hb U.unop.1 U.unop.2)
 
-/-- The unique componentwise constant-section structural ring map.
-Source: Stacks 09A5 and 0F7B. -/
+/-- The unique componentwise constant-section structural ring map. -/
 def coefficientMap {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   (coefficientMap_existsUnique C τ f).choose
 
@@ -770,8 +788,7 @@ attribute [local irreducible] SemilinearSections.systemRing
   coefficientMap VaryingRing.ringMap
 
 set_option synthInstance.maxSize 64 in
-/-- Actual module direct image on the ringed sequence site, including transitions.
-Source: Stacks 03D7 and 0F7B. -/
+/-- Actual module direct image on the ringed sequence site, including transitions. -/
 def push {X Y : Scheme.{u}} (f : X ⟶ Y) : Modules C τ X ⥤ Modules C τ Y :=
   SheafOfModules.pushforward (F := siteMap f)
     ((sheafCompose _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
@@ -782,8 +799,7 @@ private theorem push_eq {X Y : Scheme.{u}} (f : X ⟶ Y) :
   unfold push VaryingRing.push
   rw [coefficientMap_forget_eq]
 
-/-- Sectionwise direct image is additive.
-Source: Stacks 03D7. -/
+/-- Sectionwise direct image is additive. -/
 theorem push_additive {X Y : Scheme.{u}} (f : X ⟶ Y) : (push C τ f).Additive := by
   constructor
   intros M N f g
@@ -792,8 +808,7 @@ theorem push_additive {X Y : Scheme.{u}} (f : X ⟶ Y) : (push C τ f).Additive 
 
 attribute [instance] push_additive
 
-/-- Inverse image is the left adjoint to the actual system direct image.
-Source: Stacks 03D7; Zheng 4.10. -/
+/-- Inverse image is the left adjoint to the actual system direct image. -/
 theorem push_isRightAdjoint {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (push C τ f).IsRightAdjoint := by
   rw [push_eq]
@@ -801,12 +816,10 @@ theorem push_isRightAdjoint {X Y : Scheme.{u}} (f : X ⟶ Y) :
 
 attribute [instance] push_isRightAdjoint
 
-/-- The inverse image specified by its module-sheaf adjunction universal property.
-Source: Stacks 03D7; Zheng 4.10. -/
+/-- The inverse image specified by its module-sheaf adjunction universal property. -/
 abbrev pull {X Y : Scheme.{u}} (f : X ⟶ Y) := (push C τ f).leftAdjoint
 
-/-- The ordinary system adjunction; its unit and counit fix the mate normalization.
-Source: Stacks 03D7; Zheng 4.10. -/
+/-- The ordinary system adjunction; its unit and counit fix the mate normalization. -/
 def ordinaryAdj {X Y : Scheme.{u}} (f : X ⟶ Y) : pull C τ f ⊣ push C τ f :=
   Adjunction.ofIsRightAdjoint _
 
@@ -816,28 +829,26 @@ private theorem pull_eq {X Y : Scheme.{u}} (f : X ⟶ Y) :
   congr 1
   exact push_eq C τ f
 
-/-- Inverse image is exact, since its coefficients are identified constant sheaves.
-Source: Stacks 03EK; Zheng 4.10. -/
+/-- Inverse image is exact, since its coefficients are identified constant sheaves. -/
 theorem pull_exact {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (pull C τ f).Additive ∧ PreservesFiniteLimits (pull C τ f) ∧
       PreservesFiniteColimits (pull C τ f) := by
   rw [pull_eq]
   exact VaryingRing.pull_exact C τ f
 
-/-- Exact inverse-image additivity. Source: Stacks 03EK. -/
+/-- Exact inverse-image additivity. -/
 instance pull_additive {X Y : Scheme.{u}} (f : X ⟶ Y) : (pull C τ f).Additive :=
   (pull_exact C τ f).1
 
-/-- Left exact inverse image. Source: Stacks 03EK. -/
+/-- Left exact inverse image. -/
 instance pull_limits {X Y : Scheme.{u}} (f : X ⟶ Y) :
     PreservesFiniteLimits (pull C τ f) := (pull_exact C τ f).2.1
 
-/-- Right exact inverse image. Source: Stacks 03EK. -/
+/-- Right exact inverse image. -/
 instance pull_colimits {X Y : Scheme.{u}} (f : X ⟶ Y) :
     PreservesFiniteColimits (pull C τ f) := (pull_exact C τ f).2.2
 
-/-- Simultaneous K-injectives exist on the ringed sequence site.
-Source: Stacks 079P; Zheng 4.10. -/
+/-- Simultaneous K-injectives exist on the ringed sequence site. -/
 theorem systems_kInjective (X : Scheme.{u}) :
     Abelian.HasKInjectiveResolutions (Modules C τ X) := by
   have := (Classical.choice (semilinearDerivedSections.{u + 1, u, u + 1}
@@ -846,25 +857,21 @@ theorem systems_kInjective (X : Scheme.{u}) :
 
 attribute [instance] systems_kInjective
 
-/-- Exact termwise inverse image on the ordinary derived category of systems.
-Source: Zheng 4.10; Stacks 07A4. -/
+/-- Exact termwise inverse image on the ordinary derived category of systems. -/
 def P {X Y : Scheme.{u}} (f : X ⟶ Y) : Derived C τ Y ⥤ Derived C τ X :=
   (pull C τ f).mapDerivedCategory
 
-/-- Total derived direct image on systems.
-Source: Zheng 4.10; Stacks 07A4. -/
+/-- Total derived direct image on systems. -/
 def R {X Y : Scheme.{u}} (f : X ⟶ Y) : Derived C τ X ⥤ Derived C τ Y :=
   (push C τ f).rightDerivedFunctor
 
-/-- The canonical derived adjunction of the actual ordinary system adjunction.
-Source: Zheng 4.10; Stacks 07A4. -/
+/-- The canonical derived adjunction of the actual ordinary system adjunction. -/
 def adj {X Y : Scheme.{u}} (f : X ⟶ Y) : P C τ f ⊣ R C τ f :=
   (ordinaryAdj C τ f).mapDerivedCategoryRightDerivedAdjunction
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The direct-image compositor is determined by restriction along fibre-product pasting.
-Source: Stacks 03D8, 0D6D. -/
+/-- The direct-image compositor is determined by restriction along fibre-product pasting. -/
 theorem pushComp_existsUnique {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     ∃! d : push C τ f ⋙ push C τ g ≅ push C τ (f ≫ g),
       ∀ (N : Modules C τ X) (n : ℕ) (U : Z.ProEt)
@@ -877,35 +884,30 @@ theorem pushComp_existsUnique {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
   rw [coefficientMap_forget_eq, coefficientMap_forget_eq, coefficientMap_forget_eq]
   exact VaryingRing.modulePComp_existsUnique C τ f g
 
-/-- The uniquely section-normalized ordinary direct-image compositor.
-Source: Stacks 03D8, 0D6D. -/
+/-- The uniquely section-normalized ordinary direct-image compositor. -/
 def pushComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :=
   (pushComp_existsUnique C τ f g).choose
 
-/-- Inverse-image composition, conjugate to the specified sectionwise compositor.
-Source: Stacks 07A7. -/
+/-- Inverse-image composition, conjugate to the specified sectionwise compositor. -/
 def pullComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     pull C τ (f ≫ g) ≅ pull C τ g ⋙ pull C τ f :=
   (Adjunction.leftAdjointCompIso (ordinaryAdj C τ g) (ordinaryAdj C τ f)
     (ordinaryAdj C τ (f ≫ g)) (pushComp C τ f g)).symm
 
-/-- Derived pullback composition is the localization of the ordinary compositor.
-Source: Zheng 4.10; Stacks 07A7. -/
+/-- Derived pullback composition is the localization of the ordinary compositor. -/
 def pComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     P C τ (f ≫ g) ≅ P C τ g ⋙ P C τ f :=
   Functor.mapDerivedCategoryNatIso (pullComp C τ f g) ≪≫
     (Functor.mapDerivedCategoryCompIso (pull C τ g) (pull C τ f)).symm
 
-/-- Direct-image composition is precisely the mate of inverse-image composition.
-Source: Stacks 07A7. -/
+/-- Direct-image composition is precisely the mate of inverse-image composition. -/
 def sComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     R C τ f ⋙ R C τ g ≅ R C τ (f ≫ g) :=
   conjugateIsoEquiv ((adj C τ g).comp (adj C τ f)) (adj C τ (f ≫ g)) (pComp C τ f g)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The direct-image identity is fixed by restriction along the pullback identity.
-Source: Stacks 07A7. -/
+/-- The direct-image identity is fixed by restriction along the pullback identity. -/
 theorem pushId_existsUnique (X : Scheme.{u}) :
     ∃! e : push C τ (𝟙 X) ≅ 𝟭 (Modules C τ X),
       ∀ (M : Modules C τ X) (n : ℕ) (U : X.ProEt)
@@ -917,20 +919,17 @@ theorem pushId_existsUnique (X : Scheme.{u}) :
   rw [coefficientMap_forget_eq]
   exact VaryingRing.modulePId_existsUnique C τ X
 
-/-- The unit-normalized inverse-image identity, localized from ordinary modules.
-Source: Stacks 07A7. -/
+/-- The unit-normalized inverse-image identity, localized from ordinary modules. -/
 def pId (X : Scheme.{u}) : P C τ (𝟙 X) ≅ 𝟭 (Derived C τ X) :=
   Functor.mapDerivedCategoryNatIso (Adjunction.leftAdjointIdIso
     (ordinaryAdj C τ (𝟙 X)) (pushId_existsUnique C τ X).choose) ≪≫
       Functor.mapDerivedCategoryIdIso _
 
-/-- The derived direct-image identity is its adjunction conjugate.
-Source: Stacks 07A7. -/
+/-- The derived direct-image identity is its adjunction conjugate. -/
 def sId (X : Scheme.{u}) : R C τ (𝟙 X) ≅ 𝟭 (Derived C τ X) :=
   (conjugateIsoEquiv Adjunction.id (adj C τ (𝟙 X)) (pId C τ X)).symm
 
-/-- Open inverse image is a right adjoint by localized-site extension by zero.
-Source: Stacks 03DI, 03DJ. -/
+/-- Open inverse image is a right adjoint by localized-site extension by zero. -/
 theorem openPull_isRightAdjoint {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (pull C τ j).IsRightAdjoint := by
   rw [pull_eq]
@@ -938,13 +937,11 @@ theorem openPull_isRightAdjoint {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersio
 
 attribute [instance] openPull_isRightAdjoint
 
-/-- Ordinary extension by zero, specified by its localization universal property.
-Source: Stacks 03DI. -/
+/-- Ordinary extension by zero, specified by its localization universal property. -/
 abbrev extension {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :=
   (pull C τ j).leftAdjoint
 
-/-- The ordinary open adjunction, retaining its actual unit and counit.
-Source: Stacks 03DI. -/
+/-- The ordinary open adjunction, retaining its actual unit and counit. -/
 def ordinaryOpenAdj {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     extension C τ j ⊣ pull C τ j := Adjunction.ofIsRightAdjoint _
 
@@ -954,72 +951,63 @@ private theorem extension_eq {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j
   congr 1
   exact pull_eq C τ j
 
-/-- Open extension is exact, also for the empty open.
-Source: Stacks 03DI, 03DJ. -/
+/-- Open extension is exact, also for the empty open. -/
 theorem extension_exact {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (extension C τ j).Additive ∧ PreservesFiniteLimits (extension C τ j) ∧
       PreservesFiniteColimits (extension C τ j) := by
   rw [extension_eq]
   exact VaryingRing.extension_exact C τ j
 
-/-- Additivity of open extension. Source: Stacks 03DI. -/
+/-- Additivity of open extension. -/
 instance extension_additive {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (extension C τ j).Additive := (extension_exact C τ j).1
 
-/-- Left exactness of open extension. Source: Stacks 03DJ. -/
+/-- Left exactness of open extension. -/
 instance extension_limits {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     PreservesFiniteLimits (extension C τ j) := (extension_exact C τ j).2.1
 
-/-- Right exactness of open extension. Source: Stacks 03DJ. -/
+/-- Right exactness of open extension. -/
 instance extension_colimits {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     PreservesFiniteColimits (extension C τ j) := (extension_exact C τ j).2.2
 
-/-- Exact extension by zero on ordinary derived systems.
-Source: Stacks 03DI; Zheng 4.10. -/
+/-- Exact extension by zero on ordinary derived systems. -/
 def J {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     Derived C τ U ⥤ Derived C τ X :=
   (extension C τ j).mapDerivedCategory
 
-/-- The open adjunction is the exact localization of the ordinary open adjunction.
-Source: Stacks 03DI; Zheng 4.10. -/
+/-- The open adjunction is the exact localization of the ordinary open adjunction. -/
 def jAdj {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     J C τ j ⊣ P C τ j :=
   SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction (ordinaryOpenAdj C τ j)
 
-/-- Canonical open-extension composition is adjoint to pullback composition.
-Source: Stacks 0F7D. -/
+/-- Canonical open-extension composition is adjoint to pullback composition. -/
 def jComp {U V X : Scheme.{u}} (j : U ⟶ V) (k : V ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion k] : J C τ j ⋙ J C τ k ≅ J C τ (j ≫ k) :=
   Adjunction.leftAdjointCompIso (jAdj C τ j) (jAdj C τ k) (jAdj C τ (j ≫ k))
     (pComp C τ j k).symm
 
-/-- Equality transport respects proof-irrelevant open-immersion instances.
-Source: Stacks 0F7D. -/
+/-- Equality transport respects proof-irrelevant open-immersion instances. -/
 theorem J_congr {U X : Scheme.{u}} {f g : U ⟶ X}
     [IsOpenImmersion f] [IsOpenImmersion g] (h : f = g) : J C τ f = J C τ g := by
   subst g
   rfl
 
-/-- Open-extension transport along an equality of arrows.
-Source: Stacks 0F7D. -/
+/-- Open-extension transport along an equality of arrows. -/
 def jCongr {U X : Scheme.{u}} {f g : U ⟶ X}
     [IsOpenImmersion f] [IsOpenImmersion g] (h : f = g) : J C τ f ≅ J C τ g :=
   eqToIso (J_congr C τ h)
 
-/-- The canonical open-extension identity, adjoint to inverse-image identity.
-Source: Stacks 03DI. -/
+/-- The canonical open-extension identity, adjoint to inverse-image identity. -/
 def jId (X : Scheme.{u}) : J C τ (𝟙 X) ≅ 𝟭 (Derived C τ X) :=
   Adjunction.leftAdjointIdIso (jAdj C τ (𝟙 X)) (pId C τ X)
 
-/-- Canonical comparison of the two iterated inverse images around any commutative square.
-Source: Stacks, Tag 07A7. -/
+/-- Canonical comparison of the two iterated inverse images around any commutative square. -/
 noncomputable def squareP {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) (h : k ≫ p = r ≫ i) :
     P C τ i ⋙ P C τ r ≅ P C τ p ⋙ P C τ k :=
   (pComp C τ r i).symm ≪≫ eqToIso (congrArg (P C τ) h.symm) ≪≫ pComp C τ k p
 
-/-- The inverse cartesian open comparison is defined by precisely the open-unit transpose.
-Source: Stacks, Tags 09AE and 07A7. -/
+/-- The inverse cartesian open comparison is defined by precisely the open-unit transpose. -/
 noncomputable def betaInvApp {U' U X' X : Scheme.{u}}
     (gU : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : gU ≫ j = j' ≫ g)
@@ -1029,7 +1017,7 @@ noncomputable def betaInvApp {U' U X' X : Scheme.{u}}
     ((P C τ gU).map ((jAdj C τ j).unit.app M) ≫
       (squareP C τ gU j' j g h).inv.app ((J C τ j).obj M))
 
-/-- Naturality of the specified open-unit transpose. Source: Stacks, Tag 09AE. -/
+/-- Naturality of the specified open-unit transpose. -/
 theorem betaInvApp_naturality {U' U X' X : Scheme.{u}}
     (gU : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : gU ≫ j = j' ≫ g)
@@ -1043,8 +1031,7 @@ theorem betaInvApp_naturality {U' U X' X : Scheme.{u}}
     ((P C τ gU).map f) (t.app N) (t.app M)
     ((J C τ j ⋙ P C τ g).map f) (t.naturality f)
 
-/-- The inverse comparison as a natural transformation with the specified transpose.
-Source: Stacks, Tag 09AE. -/
+/-- The inverse comparison as a natural transformation with the specified transpose. -/
 noncomputable def betaInv {U' U X' X : Scheme.{u}}
     (gU : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : gU ≫ j = j' ≫ g) :
@@ -1079,7 +1066,7 @@ private theorem R_eq {X Y : Scheme.{u}} (f : X ⟶ Y) :
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The open-extension unit is invertible. Source: Stacks, Tags 03DI and 09AE. -/
+/-- The open-extension unit is invertible. -/
 theorem jAdj_unit_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     IsIso (jAdj C τ j).unit := by
   have : (VaryingRing.pull C τ j).IsRightAdjoint :=
@@ -1096,7 +1083,7 @@ theorem jAdj_unit_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
   infer_instance
 
 /-- The unit-normalized comparison is invertible for a cartesian open square and
-arbitrary B. Source: Stacks, Tag 09AE. -/
+arbitrary B. -/
 theorem betaInv_isIso {U' U X' X : Scheme.{u}}
     (gU : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : gU ≫ j = j' ≫ g)
@@ -1120,8 +1107,7 @@ theorem betaInv_isIso {U' U X' X : Scheme.{u}}
     infer_instance
   exact NatIso.isIso_of_isIso_app _
 
-/-- Cartesian open base change, oriented as G_g j_! → j'_! G_gU.
-Source: Stacks, Tag 09AE. -/
+/-- Cartesian open base change, oriented as G_g j_! → j'_! G_gU. -/
 noncomputable def beta {U' U X' X : Scheme.{u}}
     (gU : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : gU ≫ j = j' ≫ g)
@@ -1130,7 +1116,7 @@ noncomputable def beta {U' U X' X : Scheme.{u}}
     (betaInv_isIso C τ gU j' j g h hsq)).symm
 
 /-- The canonical map from open extension to direct image is the counit mate of the
-inverse open unit. Source: Stacks, Tags 03DI and 09AE. -/
+inverse open unit. -/
 noncomputable def openToS {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     J C τ j ⟶ R C τ j :=
   (Functor.rightUnitor _).inv ≫ Functor.whiskerLeft (J C τ j) (adj C τ j).unit ≫
@@ -1139,8 +1125,7 @@ noncomputable def openToS {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
         (@inv _ _ _ _ (jAdj C τ j).unit (jAdj_unit_isIso C τ j)) (R C τ j) ≫
           (Functor.leftUnitor _).hom
 
-/-- For a clopen immersion the canonical open-to-direct-image comparison is invertible.
-Source: Stacks, Tag 09AE. -/
+/-- For a clopen immersion the canonical open-to-direct-image comparison is invertible. -/
 theorem openToS_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     [IsClosedImmersion j] : IsIso (openToS C τ j) := by
   obtain ⟨e⟩ := VaryingRing.derived_clopen_iso C τ j
@@ -1171,15 +1156,14 @@ theorem openToS_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     exact e'.isIso_hom
   exact NatIso.isIso_of_isIso_app _
 
-/-- The intrinsic clopen component projection, with no arbitrary splitting choice.
-Source: Stacks, Tag 09AE. -/
+/-- The intrinsic clopen component projection, with no arbitrary splitting choice. -/
 noncomputable def pi {U X : Scheme.{u}} (s : U ⟶ X) [IsOpenImmersion s]
     [IsClosedImmersion s] : 𝟭 (Derived C τ X) ⟶ P C τ s ⋙ J C τ s :=
   (adj C τ s).unit ≫ Functor.whiskerLeft (P C τ s)
     (@inv _ _ _ _ (openToS C τ s) (openToS_isIso C τ s))
 
 /-- The normalized non-cartesian open comparison uses beta and the intrinsic clopen
-projection, followed by the open and pullback compositors. Source: Stacks, Tag 0F7B. -/
+projection, followed by the open and pullback compositors. -/
 noncomputable def alpha {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
@@ -1200,23 +1184,20 @@ noncomputable def alpha {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     ((pComp C τ (StrictTower.squareLift k r p i h) (pullback.snd p i)).inv ≫
       (eqToIso (congrArg (P C τ) (pullback.lift_snd k r h))).hom) (J C τ k)
 
-/-- The proper/open comparison is exactly the proper-adjunction mate of alpha.
-Source: Stacks, Tags 0F7B and 07A7. -/
+/-- The proper/open comparison is exactly the proper-adjunction mate of alpha. -/
 noncomputable def gamma {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
     (h : k ≫ p = r ≫ i) : R C τ r ⋙ J C τ i ⟶ J C τ k ⋙ R C τ p :=
   mateEquiv (adj C τ r) (adj C τ p) (alpha C τ k r p i h)
 
-/-- The base-change arrow is the mate of the canonical pullback-square isomorphism.
-Source: Stacks, Tag 07A7. -/
+/-- The base-change arrow is the mate of the canonical pullback-square isomorphism. -/
 noncomputable def exchange {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) (h : k ≫ p = r ≫ i) :
     R C τ p ⋙ P C τ i ⟶ P C τ k ⋙ R C τ r :=
   mateEquiv (adj C τ p) (adj C τ r) (squareP C τ k r p i h).hom
 
-/-- The cartesian open comparison conjugated as an isomorphism of right adjoints.
-Source: Stacks 0F7B. -/
+/-- The cartesian open comparison conjugated as an isomorphism of right adjoints. -/
 def cartesianConjugate {W S T : Scheme.{u}} (p : W ⟶ T) (i : S ⟶ T)
     [IsOpenImmersion i] :
     R C τ p ⋙ P C τ i ≅ P C τ (pullback.fst p i) ⋙ R C τ (pullback.snd p i) :=
@@ -1225,8 +1206,7 @@ def cartesianConjugate {W S T : Scheme.{u}} (p : W ⟶ T) (i : S ⟶ T)
     (beta C τ (pullback.snd p i) (pullback.fst p i) i p
       pullback.condition.symm (IsPullback.of_hasPullback p i).flip).symm
 
-/-- Restricting k-extension to the pulled-back open leaves s-extension.
-Source: Stacks 0F7B and 03DI, via the inverse open unit. -/
+/-- Restricting k-extension to the pulled-back open leaves s-extension. -/
 def restrictFactor {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
@@ -1243,7 +1223,7 @@ def restrictFactor {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
 
 /-- The specified lambda isomorphism: conjugate beta, inverse open unit, the clopen
 section comparison, and direct-image composition. No isomorphism is chosen after
-coefficient evaluation. Source: Stacks 0F7B, open case. -/
+coefficient evaluation. -/
 def lambda {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
@@ -1302,7 +1282,7 @@ private theorem alpha_eq_projection_square {V W S T : Scheme.{u}}
   rfl
 
 /-- Gamma is the open adjunct of inverse lambda, and its restriction is inverse lambda
-under the open unit. Source: Stacks 0F7B. -/
+under the open unit. -/
 theorem gamma_adjunct {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]

@@ -11,7 +11,10 @@ import all WeilConjectures.AlgebraicGeometry.InternalPullNormalizationExistence
 
 /-! # The left quotient tensor path on flat models
 
-Source: Stacks Project, Tags 03EL, 06YY, 07A4 and 0G7E.
+## References
+
+* Stacks Project, Tags 03EL, 06YY, 07A4 and 0G7E
+* Stacks 03EL, 06YY, 07A4 and 0G7E
 -/
 
 @[expose] public noncomputable section
@@ -91,8 +94,7 @@ private theorem pull_normalization (a : R ⟶ S) [IsMonHom a]
   rfl
 
 /-- Compute the path that balances before the two tensorators.
-Only the scalar tensor normalization at X enters this statement.
-Source: Stacks 03EL, 06YY, 07A4 and 0G7E. -/
+Only the scalar tensor normalization at X enters this statement. -/
 theorem left_flat_computation
     [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules R T)]
     [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules S T)]

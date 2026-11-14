@@ -15,15 +15,17 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.NormalIntegralGenericHomFull
 /-!
 # Existence of extensions of generic-fibre morphisms
 
-Source: Stacks Project, Tag 0BQM, full faithfulness in the proof.
+## References
+
+* Stacks Project, Tag 0BQM, full faithfulness in the proof
+* Stacks Project, Tag 0BQM, full faithfulness argument
 -/
 
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
-/-- Existence part of finite étale generic-fibre hom extension.
-Source: Stacks Project, Tag 0BQM, full faithfulness argument. -/
+/-- Existence part of finite étale generic-fibre hom extension. -/
 theorem finiteEtale_genericFibre_hom_extension_exists {S C : Scheme.{u}}
     [IsIntegral S] (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))
     (c : C ⟶ S) [Smooth c] [GeometricallyConnected c]

@@ -61,6 +61,10 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # The fixed tensor comparison normalized on flat representatives.
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 06YP, 06YS, 06YU and 07A4
 -/
 
 @[expose] public noncomputable section
@@ -173,8 +177,7 @@ private theorem extendFixedTensorComparison
   change φ.inv.app V.obj ≫ η.hom.app (Q.obj p.obj, Q.obj V.obj) = _
   rw [hh, ← Category.assoc, φ.inv_hom_id_app, Category.id_comp]
 
-/-- The fixed tensor comparison normalized on flat representatives.
-Source: Stacks Project, Cohomology on Sites, Tags 06YP, 06YS, 06YU and 07A4. -/
+/-- The fixed tensor comparison normalized on flat representatives. -/
 theorem proEtale_fixed_tensor_representative_comparison
     (Z : Scheme.{u}) (RZ : Sheaf (ProEt.topology Z) CommRingCat.{u + 1})
     (a : ProEtaleTensorModel Z RZ)

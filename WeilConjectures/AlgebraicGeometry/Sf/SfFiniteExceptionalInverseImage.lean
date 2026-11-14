@@ -27,6 +27,12 @@ No ambient pro-etale adjunction is used or assumed.
   fixed-scalar and intrinsic coordinates.
 - `sfFiniteExceptionalOpenComparison`: the canonical comparison-site paste of the
   etale exceptional mate, using the specified site-square and restriction comparisons.
+
+## References
+
+* Stacks Tag 099R and localization
+* Stacks Tags 099R and 07A5
+* Stacks Tag 099R
 -/
 
 @[expose] public section
@@ -63,8 +69,7 @@ noncomputable def sfFiniteExceptional (A : Type u) [CommRing A] [Finite A]
   (sfIntrinsicDerivedEquivalence Y A).inverse ⋙ sfFiniteExceptionalFixed A c ⋙
     (sfIntrinsicDerivedEquivalence X A).functor
 
-/-- Comparison and an open localization commute as restriction functors.
-Source: Stacks Tag 099R and localization. -/
+/-- Comparison and an open localization commute as restriction functors. -/
 noncomputable def sfComparisonOpenRestrictionIso (A : Type u) [CommRing A]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     comparisonLowerStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X ⋙
@@ -84,8 +89,7 @@ noncomputable def sfComparisonOpenRestrictionIso (A : Type u) [CommRing A]
 /-- The derived comparison direct image commutes with restriction to an open.
 This is derived from the actual identity of localization restrictions. All first
 functors preserve K-injectives: comparison direct image is right adjoint to exact ν^*,
-and open restriction is right adjoint to exact extension by zero.
-Source: Stacks Tags 099R and 07A5. -/
+and open restriction is right adjoint to exact extension by zero. -/
 noncomputable def sfDerivedComparisonOpenRestrictionIso (A : Type u) [CommRing A]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (comparisonLowerStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X).rightDerivedFunctor ⋙
@@ -107,8 +111,7 @@ noncomputable def sfDerivedComparisonOpenRestrictionIso (A : Type u) [CommRing A
       (upperStar
         (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) j).rightDerivedFunctorIsoMapDerivedCategory _
 
-/-- Naturality of the identity components of the comparison-site pullback square.
-Source: Stacks Tag 099R. -/
+/-- Naturality of the identity components of the comparison-site pullback square. -/
 theorem sfToProEtBaseChange_naturality {U X : Scheme.{u}} (j : U ⟶ X)
     {V W : X.Etale} (h : V ⟶ W) :
     (toProEt X ⋙ MorphismProperty.Over.pullback @WeaklyEtale ⊤ j).map h ≫ 𝟙 _ =
@@ -118,13 +121,13 @@ theorem sfToProEtBaseChange_naturality {U X : Scheme.{u}} (j : U ⟶ X)
   rfl
 
 /-- The canonical site square identifying inclusion followed by base change with base
-change followed by inclusion. Source: Stacks Tag 099R. -/
+change followed by inclusion. -/
 noncomputable def sfToProEtBaseChangeIso {U X : Scheme.{u}} (j : U ⟶ X) :
     toProEt X ⋙ MorphismProperty.Over.pullback @WeaklyEtale ⊤ j ≅
       MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ j ⋙ toProEt U :=
   NatIso.ofComponents (fun _ ↦ Iso.refl _) (sfToProEtBaseChange_naturality j)
 
-/-- The site-square identification on direct image. Source: Stacks Tag 099R. -/
+/-- The site-square identification on direct image. -/
 noncomputable def sfComparisonDirectImageCompIso (A : Type u) [CommRing A]
     {U X : Scheme.{u}} (j : U ⟶ X) :
     lowerStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) j ⋙
@@ -151,8 +154,7 @@ noncomputable def sfComparisonDirectImageCompIso (A : Type u) [CommRing A]
       (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X.smallEtaleTopology
       U.smallEtaleTopology (ProEt.topology U)).symm
 
-/-- The canonical inverse-image comparison is the conjugate of the actual site square.
-Source: Stacks Tag 099R. -/
+/-- The canonical inverse-image comparison is the conjugate of the actual site square. -/
 noncomputable def sfComparisonPullbackIso (A : Type u) [CommRing A]
     {U X : Scheme.{u}} (j : U ⟶ X) :
     comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X ⋙
@@ -166,8 +168,7 @@ noncomputable def sfComparisonPullbackIso (A : Type u) [CommRing A]
       (upperStarLowerStarAdjunction (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) j))).symm
     (sfComparisonDirectImageCompIso A j).symm
 
-/-- The exact comparison square on ordinary derived categories.
-Source: Stacks Tag 099R. -/
+/-- The exact comparison square on ordinary derived categories. -/
 noncomputable def sfDerivedComparisonPullbackIso (A : Type u) [CommRing A]
     {U X : Scheme.{u}} (j : U ⟶ X) :
     (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X).mapDerivedCategory ⋙

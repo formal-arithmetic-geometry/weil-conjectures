@@ -15,7 +15,10 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 
 /-! # The restricted constant coefficient is a finite local system
 
-Source: Stacks Project, Tags 03CY, 03DA and 00YV.
+## References
+
+* Stacks Project, Tags 03CY, 03DA and 00YV
+* Stacks Project, Tags 03CY, 03DA, 00YV and 06YU
 -/
 
 @[expose] public section
@@ -143,9 +146,7 @@ private theorem coefficientModule_lisse
     (ProEtale.isFiniteLocallyConstant_of_iso e.symm hconst)
 
 /-- The restricted coefficient complex has finite locally constant cohomology after
-arbitrary pullback. Its only possible nonzero cohomology is in degree zero.
-
-Source: Stacks Project, Tags 03CY, 03DA, 00YV and 06YU. -/
+arbitrary pullback. Its only possible nonzero cohomology is in degree zero. -/
 theorem restrictedScalarCoefficient_finiteLocalConstancy
     {T X : Scheme.{u}} (a : X ⟶ T)
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B] (f : A →+* B)

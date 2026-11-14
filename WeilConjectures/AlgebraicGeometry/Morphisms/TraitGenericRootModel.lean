@@ -17,7 +17,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.RegularDivisorRootModelNormal
 /-!
 # Normal root models containing a generic trait torsor as a dense open
 
-Source: Stacks Project, Tags 0EYJ, 09EB, 0EYG and 0EYH.
+## References
+
+* Stacks Project, Tags 0EYJ, 09EB, 0EYG and 0EYH
+* Stacks Project, Tag 0EYJ, trait paragraph
+* Tags 09EB, 0EYG and 0EYH
 -/
 
 @[expose] public section
@@ -26,9 +30,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- A tame generic torsor admits local normal integral root models before normalization.
-
-Source: Stacks Project, Tag 0EYJ, trait paragraph; Tags 09EB, 0EYG and 0EYH. -/
+/-- A tame generic torsor admits local normal integral root models before normalization. -/
 theorem GaloisCover.trait_generic_root_model
     (A K : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A]
     [Field K] [Algebra A K] [IsFractionRing A K]

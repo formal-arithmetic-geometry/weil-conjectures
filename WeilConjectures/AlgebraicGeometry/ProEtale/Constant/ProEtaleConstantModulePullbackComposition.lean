@@ -12,7 +12,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 /-!
 # Composition of canonical constant-coefficient module restrictions
 
-Source: Stacks Project, Modules on Sites, Tag 03D8.
+## References
+
+* Stacks Project, Modules on Sites, Tag 03D8
 -/
 
 @[expose] public section
@@ -118,8 +120,7 @@ private noncomputable def pullbackComp {T Y X : Scheme.{u}} (a : Y ⟶ T) (b : X
         proEtaleConstantModulePullbackFunctor b A :=
   ((constAdj (b ≫ a) A).ofNatIsoRight (directComp a b A).symm).leftAdjointUniq
     ((constAdj a A).comp (constAdj b A))
-/-- The actual canonical constant-coefficient pullbacks compose up to isomorphism.
-Source: Stacks Project, Modules on Sites, Tag 03D8. -/
+/-- The actual canonical constant-coefficient pullbacks compose up to isomorphism. -/
 theorem proEtaleConstantModulePullback_comp {T Y X : Scheme.{u}}
     (a : Y ⟶ T) (b : X ⟶ Y) (A : Type u) [CommRing A] :
     Nonempty (proEtaleConstantModulePullbackFunctor (b ≫ a) A ≅

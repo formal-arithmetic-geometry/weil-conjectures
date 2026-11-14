@@ -17,8 +17,11 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseLimitDescent
 /-!
 # Eventual descent of open immersions along qcqs inverse limits
 
-Source: Stacks Project, Limits, Tag 0EUU in Situation 081D, and stability of open immersions under
-base change.
+## References
+
+* Stacks Project, Limits, Tag 0EUU in Situation 081D, and stability of open immersions under base
+  change
+* Stacks Project, Limits, Tag 0EUU in Situation 081D
 -/
 
 @[expose] public section
@@ -70,9 +73,7 @@ private theorem property_over_pullback_comp
 /-- A locally finitely presented morphism between qcqs schemes over a stage of a
 qcqs inverse system with affine transitions is an open immersion at every sufficiently
 late stage if its base change to the limit is an open immersion. Neither its source
-nor its target is required to be affine.
-
-Source: Stacks Project, Limits, Tag 0EUU in Situation 081D; base-change persistence. -/
+nor its target is required to be affine. -/
 theorem IsOpenImmersion.eventually_of_inverseLimit
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

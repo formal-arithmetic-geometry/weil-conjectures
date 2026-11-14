@@ -42,8 +42,12 @@ import Mathlib.CategoryTheory.Sites.LocallyBijective
 /-!
 # Finite continuous coefficients are constant sheaves
 
-Source: Bhatt--Scholze, Lemma 6.8.2(1). The comparison sends constant sections to
+The comparison sends constant sections to
 constant functions; its local inverse uses open fibres of discrete-valued functions.
+
+## References
+
+* Bhatt--Scholze, Lemma 6.8.2(1)
 -/
 
 @[expose] public noncomputable section

@@ -12,11 +12,13 @@ import WeilConjectures.AlgebraicGeometry.Perfect.PerfectFiniteFreeResidueModelEx
 
 /-! # Finite free local models with prescribed residue cohomology ranks
 
-Source: Stacks Project, More on Algebra, Lemma lift-perfect-from-residue-field, Tag 0BCD.
-
 The derived fibre is `derivedPullback (X.fromSpecResidueField x)`; its degree-`i`
 cohomology vector space over `κ(x)` is `derivedFiberCohomology X E i x` and its dimension
 `d_i` is `derivedFiberBetti X E i x`.
+
+## References
+
+* Stacks Project, More on Algebra, Lemma lift-perfect-from-residue-field, Tag 0BCD
 -/
 
 @[expose] public section
@@ -28,8 +30,7 @@ namespace AlgebraicGeometry.Scheme
 noncomputable section
 
 /-- Every perfect complex has an affine local bounded finite free model whose degreewise
-ranks equal its derived fibre cohomology dimensions at the prescribed point.
-Source: Stacks Project, More on Algebra, Lemma lift-perfect-from-residue-field, Tag 0BCD. -/
+ranks equal its derived fibre cohomology dimensions at the prescribed point. -/
 theorem exists_finiteFreeResidueModel
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

@@ -16,7 +16,10 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteFlatCodimensionOneEtale
 /-!
 # A flat finite depth-two extension is formally unramified
 
-Source: Stacks Project, Tag 0BJH, as applied in Tag 0EY6(3).
+## References
+
+* Stacks Project, Tag 0BJH, as applied in Tag 0EY6(3)
+* Stacks Project
 -/
 
 @[expose] public section
@@ -25,9 +28,7 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
-/-- Flatness removes ramification of a finite depth-two extension of an etale cover.
-
-Source: Stacks Project. -/
+/-- Flatness removes ramification of a finite depth-two extension of an etale cover. -/
 theorem formallyUnramified_of_flat_depth_two_finite_extension
     {L : Scheme.{u}} [IsLocallyNoetherian L] (U : L.Opens)
     {E : Scheme.{u}} (p : E ⟶ L) [IsFinite p] [Flat p] [Etale (p ∣_ U)]

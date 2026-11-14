@@ -22,7 +22,9 @@ import Mathlib.CategoryTheory.Adjunction.Triple
 
 /-! # Open extension products with independent coefficient universes
 
-Source: Stacks Project, Tag 09BP.
+## References
+
+* Stacks Project, Tag 09BP
 -/
 
 @[expose] public section
@@ -95,9 +97,7 @@ private theorem restriction_product_comparison
   infer_instance
 
 /-- Quasi-compact open extension commutes with countable products in every
-coefficient universe containing the site.
-
-Source: Stacks Project, Tag 09BP. -/
+coefficient universe containing the site. -/
 theorem proEtaleRingedExtensionByZero_products_of_universes
     {X : Scheme.{t}} (U : X.ProEt) [IsOpenImmersion U.hom] [QuasiCompact U.hom]
     (R : Sheaf (ProEt.topology X) CommRingCat.{max u (t + 1)})

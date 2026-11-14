@@ -28,7 +28,10 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Finite
 /-!
 # Splitting the normalization on a compatible power-series test
 
-Source: Stacks Project, Tag 0EYJ, final splitting paragraphs; Tags 0EY6 and 0EY9
+## References
+
+* Stacks Project, Tag 0EYJ, final splitting paragraphs
+* Tags 0EY6 and 0EY9
 -/
 
 @[expose] public section
@@ -38,9 +41,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- A fixed flat power-series test, compatible with the local base and the entire
-section, splits the finite normalization. This does not construct the test.
-
-Source: Stacks Project, Tag 0EYJ, final splitting paragraphs -/
+section, splits the finite normalization. This does not construct the test. -/
 theorem GaloisCover.exists_stalk_normalization_formal_split {S C : Scheme.{u}}
     [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]

@@ -12,7 +12,12 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf
 /-!
 # Constant rank-one modules and intrinsic coefficient realization
 
-Source: Stacks Project, Tags 00YV and 03CY, associated module sheaves and restriction of scalars.
+## References
+
+* Stacks Project, Tags 00YV and 03CY, associated module sheaves and restriction of scalars
+* Stacks, Tag 03CY
+* Stacks, Tag 00YV
+* Stacks, Tags 00YV and 03CY
 -/
 
 @[expose] public section
@@ -21,14 +26,12 @@ universe u
 open CategoryTheory Opposite
 namespace AlgebraicGeometry.Scheme
 
-/-- The constant coefficient ring as its own module, with its actual sectionwise action.
-Source: Stacks, Tag 03CY. -/
+/-- The constant coefficient ring as its own module, with its actual sectionwise action. -/
 noncomputable abbrev proEtaleConstantModule (X : Scheme.{u}) (A : Type u) [CommRing A] :=
   SheafOfModules.unit ((sheafCompose (ProEt.topology X)
     (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (proEtaleConstantRing X A))
 
-/-- The fixed-scalar constant rank-one module before the published intrinsic realization.
-Source: Stacks, Tag 00YV. -/
+/-- The fixed-scalar constant rank-one module before the published intrinsic realization. -/
 noncomputable abbrev proEtaleFixedConstantModule (X : Scheme.{u})
     (A : Type u) [CommRing A] :=
   (constantSheaf (ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1, u} A))).obj
@@ -112,8 +115,7 @@ private instance unitFixedMap_isIso (X : Scheme.{u}) (A : Type u)
     infer_instance
   exact (Sheaf.isLocallyBijective_iff_isIso (unitFixedMap X A)).mp ⟨hi, hs⟩
 
-/-- The rank-one realization isomorphism is uniquely fixed on all constant generators.
-Source: Stacks, Tags 00YV and 03CY. -/
+/-- The rank-one realization isomorphism is uniquely fixed on all constant generators. -/
 theorem proEtaleConstantModuleUnit_existsUnique (X : Scheme.{u})
     (A : Type u) [CommRing A] [Finite A] :
     ∃! e : (sfIntrinsicModuleEquivalence X A).functor.obj
@@ -187,7 +189,7 @@ theorem proEtaleConstantModuleUnit_existsUnique (X : Scheme.{u})
   exact ConcreteCategory.congr_hom (congr_app hq W) x
 
 /-- The unique comparison preserving constant scalar sections; no module data are chosen
-from a mere existence assertion. Source: Stacks, Tags 00YV and 03CY. -/
+from a mere existence assertion. -/
 noncomputable def proEtaleConstantModuleUnit (X : Scheme.{u})
     (A : Type u) [CommRing A] [Finite A] :
     (sfIntrinsicModuleEquivalence X A).functor.obj

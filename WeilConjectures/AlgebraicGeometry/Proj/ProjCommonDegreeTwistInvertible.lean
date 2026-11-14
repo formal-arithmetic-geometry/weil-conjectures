@@ -38,12 +38,14 @@ set_option linter.privateModule false
 /-!
 # Common-degree twists on a quasi-compact Proj open
 
-Source: Stacks Project, Constructions, Tags 01MU and 01MW, the characterization of the invertibility
-locus and the proof after the finite standard-open cover.
-
 The statement records the open `W_e` by its equivalent union of standard opens and records
 the canonical multiplication maps by their action on all local pure tensors. They multiply
 homogeneous fractions on the standard-open cover.
+
+## References
+
+* Stacks Project, Constructions, Tags 01MU and 01MW, the characterization of the invertibility locus
+  and the proof after the finite standard-open cover
 -/
 
 @[expose] public section

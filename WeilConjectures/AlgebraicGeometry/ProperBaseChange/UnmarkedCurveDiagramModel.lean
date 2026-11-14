@@ -30,7 +30,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 /-!
 # Descent of the unmarked finite curve diagram
 
-Source: Stacks Project, Tag 0GK7, diagram descent before the marked-open paragraph.
+## References
+
+* Stacks Project, Tag 0GK7, diagram descent before the marked-open paragraph
+* Stacks Project, Tag 0GK7, from reduction of the base through diagram descent, before the paragraph
+  beginning with W
 -/
 
 @[expose] public section
@@ -617,9 +621,6 @@ private theorem restrict_chain_to_base
 
 /-- Descend the unmarked finite curve diagram, preserving its finite comparison map.
 No marked open, thickening or marked-image assertion is supplied or constructed.
-
-Source: Stacks Project, Tag 0GK7, from reduction of the base through diagram descent, before the
-paragraph beginning with W.
 -/
 theorem exists_unmarked_curve_diagram_model
     {X S : Scheme.{u}} (f : X ⟶ S) [IsSeparated f]

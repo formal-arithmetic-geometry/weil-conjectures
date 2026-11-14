@@ -16,11 +16,15 @@ import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientGeometric
 
 /-! # Normalized quotient tensors under the section equivalence
 
-Source: Stacks 03EL, 06YY, 07A4 and 07A6.
-
 The fixed normalization data is reexported from QuotientSectionTensorData.
 The proof assembles scalar tensor uniqueness, the regular unit and the section
 and geometric realizations, always using the same scalar section models.
+
+## References
+
+* Stacks 03EL, 06YY, 07A4 and 07A6
+* Stacks 03EK, 03EL, 06YY, 07A4 and 07A6
+* Stacks Tags 03EK, 03EL, 06YY, 07A4 and 07A6
 -/
 
 @[expose] public noncomputable section
@@ -64,8 +68,7 @@ variable [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ T)]
 /-- The full normalized comparison assertion, for use at the actual quotient map.
 All section tensors, units and counits are fixed by the recorded constructions.
 In particular the scalar model has its actual sectionwise object and map functions
-and its universal counit, not an arbitrary functor with isomorphic objects.
-Source: Stacks 03EK, 03EL, 06YY, 07A4 and 07A6. -/
+and its universal counit, not an arbitrary functor with isomorphic objects. -/
 def ComparisonSpec : Prop :=
   (∃! b : ∀ T : Scheme.{u}, TensorIso a T, ∀ T : Scheme.{u}, TensorNormalized a T (b T)) ∧
     ∀ b : ∀ T : Scheme.{u}, TensorIso a T,
@@ -87,8 +90,7 @@ def ComparisonSpec : Prop :=
             PullSectionCondition a f (c X) (c Y) lam barLam ∧
               SectionPullNormalized a f (c X) (c Y) barLam
 
-/-- Unique normalized quotient scalar tensor and its simultaneous section realization.
-Source: Stacks Tags 03EK, 03EL, 06YY, 07A4 and 07A6. -/
+/-- Unique normalized quotient scalar tensor and its simultaneous section realization. -/
 theorem quotient_section_tensor_normalization
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ)

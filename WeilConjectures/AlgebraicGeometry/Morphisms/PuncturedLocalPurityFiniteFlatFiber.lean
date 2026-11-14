@@ -21,7 +21,10 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.StalkNormalizationDepthTwoSec
 /-!
 # Local purity excludes a minimal nonflat fibre
 
-Source: Stacks Project, Tags 0BMA, 0EY7 and 0EY6(2), (3).
+## References
+
+* Stacks Project, Tags 0BMA, 0EY7 and 0EY6(2), (3)
+* Stacks Project, Tag 0EY7, the punctured local-spectrum step, and Tag 0EY6(2), (3)
 -/
 
 @[expose] public section
@@ -119,9 +122,7 @@ private theorem punctured_stalk_etale {L E : Scheme.{u}} [IsLocallyNoetherian L]
   exact etale_of_flat_quasiFinite_depth_two_boundary q (q ⁻¹ᵁ T) het hdepth
 
 /-- A finite depth-two extension is flat over s if it is flat over every proper
- generalization of s and purity holds for the punctured local spectrum at s.
-
-Source: Stacks Project, Tag 0EY7, the punctured local-spectrum step, and Tag 0EY6(2), (3). -/
+ generalization of s and purity holds for the punctured local spectrum at s. -/
 theorem flat_fibre_of_punctured_local_purity
     {L E : Scheme.{u}} [IsLocallyNoetherian L] (V : L.Opens)
     (p : E ⟶ L) [IsFinite p] [Etale (p ∣_ V)]

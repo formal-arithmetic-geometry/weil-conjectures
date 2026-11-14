@@ -14,12 +14,15 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineTwist
 
 /-! # Classification of invertible modules on the projective line
 
-Source: Stacks Project, Tag 0BXJ, `divisors-lemma-Pic-projective-space-UFD`,
-specialized to dimension one over a field.
-
 The family `O` denotes any choice of twists with the standard generators and relation
 `g₀ = t^{-d} g₁`, encoded by `ProjectiveLine.TwistData`. Uniqueness is asserted only
 for the integer degree; the isomorphism of module sheaves is merely inhabited.
+
+## References
+
+* Stacks Project, Tag 0BXJ, `divisors-lemma-Pic-projective-space-UFD`, specialized to dimension one
+  over a field
+* Stacks Project, Tag 0BXJ, `divisors-lemma-Pic-projective-space-UFD`, for `n = 1` and `R = k`
 -/
 
 @[expose] public section
@@ -77,10 +80,7 @@ private theorem eq_degree_of_twistData (k : Type u) [Field k]
 
 /-- Every invertible module on the projective line over a field is isomorphic to a
 unique integer twist. The chosen twists `O d` have the standard transition convention
-specified by `TwistData`; neither their generators nor the isomorphism is claimed unique.
-
-Source: Stacks Project, Tag 0BXJ, `divisors-lemma-Pic-projective-space-UFD`, for `n = 1`
-and `R = k`. -/
+specified by `TwistData`; neither their generators nor the isomorphism is claimed unique. -/
 theorem existsUnique_degree_of_isInvertible (k : Type u) [Field k]
     (O : ℤ → (ProjectiveLine (Spec (CommRingCat.of k))).Modules)
     (hO : ∀ d : ℤ, Nonempty (TwistData (Spec (CommRingCat.of k)) d (O d)))

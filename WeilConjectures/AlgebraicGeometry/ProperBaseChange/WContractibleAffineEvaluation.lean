@@ -19,8 +19,12 @@ import Mathlib.CategoryTheory.Sites.LocallySurjective
 /-!
 # Evaluation at a w-contractible affine pro-etale object
 
-Source: Stacks Project, Tags 0981, 098F and 098H, with the small-site adaptation in the DAG proof;
-Sites, Tags 090K and 090L.
+## References
+
+* Stacks Project, Tags 0981, 098F and 098H, with the small-site adaptation in the DAG proof
+* Sites, Tags 090K and 090L
+* Stacks Project, Tag 098H, disjoint-cover gluing argument
+* Stacks Project, Tags 0981 and 098H, implication (1) to (2), adapted to the small site over `X`
 -/
 
 @[expose] public section
@@ -35,8 +39,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 /-- The sheaf axiom glues arbitrary sections on disjoint covering subobjects.
-The only compatibility on distinct components is over an empty test scheme.
-Source: Stacks Project, Tag 098H, disjoint-cover gluing argument. -/
+The only compatibility on distinct components is over an empty test scheme. -/
 private theorem exists_glue_of_disjoint
     {X : Scheme.{u}} (F : Sheaf (topology X) (Type (max (u + 1) v)))
     {W : X.ProEt} {I : Type u} (V : I → X.ProEt) (ι : ∀ i, V i ⟶ W)
@@ -76,10 +79,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Evaluation at `Spec A` sends every epimorphism of sheaves of sets on the full small
 pro-etale site to a surjection, provided every faithfully flat weakly etale ring map
-out of `A` has a ring retraction.
-
-Source: Stacks Project, Tags 0981 and 098H, implication (1) to (2), adapted to the
-small site over `X`; Sites, Tags 090K and 090L. -/
+out of `A` has a ring retraction. -/
 theorem surjective_app_of_affine_ring_retractions
     (X : Scheme.{u}) (A : Type u) [CommRing A]
     (f : Spec (CommRingCat.of A) ⟶ X) [WeaklyEtale f]

@@ -11,14 +11,25 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleLocalizedRingMateG
 /-!
 # Localized ring-sheaf mates evaluated on graphs: the main statement
 
-Source: Stacks Project, Sites and Sheaves, Tags 03CE, 00Y0, 00VE and 00WX; Modules on Sites, Tag
-03EL.
-
 The helpers only expand the maps in the statement. In particular the mate uses the
 specified Kan-extension/sheafification adjunction, and both forgetful and integer-unit
 comparisons use the coprojection-normalized restriction comparisons. The private unit
 computations live in
 `WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleLocalizedRingMateGraphEvaluation`.
+
+## References
+
+* Stacks Project, Sites and Sheaves, Tags 03CE, 00Y0, 00VE and 00WX
+* Modules on Sites, Tag 03EL
+* Stacks, Tags 00VE, 00WX and 03CE
+* Stacks, Tags 03CE and 00Y0
+* Stacks, Tag 03CE
+* Stacks, Tag 00Y0
+* Stacks, Tags 00Y0 and 03EL
+* Stacks, Tags 00Y0, 0H7J and 03EL
+* Stacks, Tags 00Y0 and 03CE
+* Stacks, Tag 03EL
+* Stacks, Sites and Sheaves, Tags 00VE, 00WX, 03CE and 00Y0
 -/
 
 @[expose] public section
@@ -31,8 +42,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The mate `u_* β ∘ e_u` for the specified ring inverse-image adjunction.
-Source: Stacks, Tags 00VE, 00WX and 03CE. -/
+/-- The mate `u_* β ∘ e_u` for the specified ring inverse-image adjunction. -/
 noncomputable def proEtaleLocalizedRingMate {B : Scheme.{u}} (V : B.ProEt)
     (R : Sheaf (ProEt.topology B) CommRingCat.{u + 1})
     (S : Sheaf (ProEt.topology V.left) CommRingCat.{u + 1})
@@ -41,8 +51,7 @@ noncomputable def proEtaleLocalizedRingMate {B : Scheme.{u}} (V : B.ProEt)
   (proEtaleSheafAdjunction V.hom CommRingCat.{u + 1}).unit.app R ≫
     (proEtaleSheafDirectImage V.hom CommRingCat.{u + 1}).map β.hom
 
-/-- The ring isomorphism `bar β: R|_V ≅ S` under the normalized restriction comparison.
-Source: Stacks, Tags 03CE and 00Y0. -/
+/-- The ring isomorphism `bar β: R|_V ≅ S` under the normalized restriction comparison. -/
 noncomputable def proEtaleLocalizedRingIso {B : Scheme.{u}} (V : B.ProEt)
     (c : ProEtaleObjectRestrictionComparison V CommRingCat.{u + 1})
     (R : Sheaf (ProEt.topology B) CommRingCat.{u + 1})
@@ -52,24 +61,21 @@ noncomputable def proEtaleLocalizedRingIso {B : Scheme.{u}} (V : B.ProEt)
       V.hom V.prop).obj R ≅ S :=
   (c.sheafIso.app R).symm ≪≫ β
 
-/-- The graph `(b, U → V)` in the localization/base-change adjunction.
-Source: Stacks, Tag 03CE. -/
+/-- The graph `(b, U → V)` in the localization/base-change adjunction. -/
 noncomputable def proEtaleLocalizationGraph {B : Scheme.{u}} (V : B.ProEt)
     (U : V.left.ProEt) (T : B.ProEt)
     (b : (MorphismProperty.Over.map (f := V.hom) ⊤ V.prop).obj U ⟶ T) :
     U ⟶ (proEtaleBaseChange V.hom).obj T :=
   (MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ V.hom V.prop trivial).homEquiv U T b
 
-/-- The identity of the underlying scheme identifies the composite of `V/V` with `V/B`.
-Source: Stacks, Tag 00Y0. -/
+/-- The identity of the underlying scheme identifies the composite of `V/V` with `V/B`. -/
 def proEtaleLocalizationIdentityIso {B : Scheme.{u}} (V : B.ProEt) :
     (MorphismProperty.Over.map (f := V.hom) ⊤ V.prop).obj
       (ProEt.mk (𝟙 V.left)) ≅ V :=
   MorphismProperty.Over.isoMk (Iso.refl V.left) rfl
 
 /-- The additive sheaf map from the integer sheaf determined by a global section `r`.
-The constant-sheaf/evaluation adjunction sends it to `n ↦ n • r` at `B/B`.
-Source: Stacks, Tags 00Y0 and 03EL. -/
+The constant-sheaf/evaluation adjunction sends it to `n ↦ n • r` at `B/B`. -/
 noncomputable def proEtaleLocalizedSectionMap (B : Scheme.{u})
     (R : Sheaf (ProEt.topology B) CommRingCat.{u + 1})
     (r : R.obj.obj (op (ProEt.mk (𝟙 B)))) :
@@ -83,8 +89,7 @@ noncomputable def proEtaleLocalizedSectionMap (B : Scheme.{u})
       (AddCommGrpCat.ofHom (uliftZMultiplesHom _ r))
 
 /-- The canonical integer-unit isomorphism `Z_V ≅ u⁻¹ Z_B` in localization coordinates.
-First commute restriction with sheafification, then invert the normalized comparison.
-Source: Stacks, Tags 00Y0, 0H7J and 03EL. -/
+First commute restriction with sheafification, then invert the normalized comparison. -/
 noncomputable def proEtaleLocalizedIntegerUnit {B : Scheme.{u}} (V : B.ProEt)
     (cA : ProEtaleObjectRestrictionComparison V AddCommGrpCat.{u + 1}) :
     (constantSheaf (ProEt.topology V.left) AddCommGrpCat.{u + 1}).obj
@@ -105,8 +110,7 @@ noncomputable def proEtaleLocalizedIntegerUnit {B : Scheme.{u}} (V : B.ProEt)
     (cA.sheafIso.app _).symm
 
 /-- The inverse-image/underlying-additive-sheaf comparison, through normalized restriction.
-Both middle presheaves are literally `U ↦ R(U → V → B)` with their additive structure.
-Source: Stacks, Tags 00Y0 and 03CE. -/
+Both middle presheaves are literally `U ↦ R(U → V → B)` with their additive structure. -/
 noncomputable def proEtaleLocalizedAbelianComparison {B : Scheme.{u}} (V : B.ProEt)
     (c : ProEtaleObjectRestrictionComparison V CommRingCat.{u + 1})
     (cA : ProEtaleObjectRestrictionComparison V AddCommGrpCat.{u + 1})
@@ -124,8 +128,7 @@ noncomputable def proEtaleLocalizedAbelianComparison {B : Scheme.{u}} (V : B.Pro
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1} ⋙
           forget₂ RingCat.{u + 1} AddCommGrpCat.{u + 1})).mapIso (c.sheafIso.app R).symm
 
-/-- Pull back the integer-to-`R` map and compose with `β`, using the canonical unit.
-Source: Stacks, Tag 03EL. -/
+/-- Pull back the integer-to-`R` map and compose with `β`, using the canonical unit. -/
 noncomputable def proEtaleLocalizedPulledSection {B : Scheme.{u}} (V : B.ProEt)
     (c : ProEtaleObjectRestrictionComparison V CommRingCat.{u + 1})
     (cA : ProEtaleObjectRestrictionComparison V AddCommGrpCat.{u + 1})
@@ -236,8 +239,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 is evaluated on any graph by ordinary restriction followed by `bar β`. At the diagonal
 this is a ring isomorphism. Pullback of an arbitrary global section uses the canonical
 integer-unit comparison, inverse to the specified constant-coefficient map.
-
-Source: Stacks, Sites and Sheaves, Tags 00VE, 00WX, 03CE and 00Y0; Modules on Sites, Tag 03EL.
 -/
 theorem proEtaleLocalizedRingMateGraphEvaluation {B : Scheme.{u}} (V : B.ProEt)
     (c : ProEtaleObjectRestrictionComparison V CommRingCat.{u + 1})

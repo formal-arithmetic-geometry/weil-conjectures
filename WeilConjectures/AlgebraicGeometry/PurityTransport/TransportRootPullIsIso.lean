@@ -10,7 +10,9 @@ import all WeilConjectures.AlgebraicGeometry.Finite.FiniteRootSiteComparison
 
 /-! # Invertibility of normalized finite root pullback
 
-Source: Stacks 03PK.
+## References
+
+* Stacks 03PK
 -/
 
 @[expose] public section

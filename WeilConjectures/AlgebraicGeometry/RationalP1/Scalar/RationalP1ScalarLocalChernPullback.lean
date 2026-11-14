@@ -7,10 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.RationalP1.Scalar.RationalP1ScalarChernLocalFactorization
 
-/-! # Pullback of the local scalar Chern classes
-
-Source: geometric tower classes (2), and diagonal coefficient changes (1).
--/
+/-! # Pullback of the local scalar Chern classes -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -24,10 +21,7 @@ open DiagonalCoefficients CondensedRing
 
 /-- Pulling the local section class along p1 gives the section class of p2.
 This is an equation of local classes on the product; it has no direct images,
-exchange mate, completed Chern adjuncts, traces, or splitting maps.
-
-Source: geometric tower classes (2), Chern pullback; diagonal coefficient changes
-(1), whole-system unit and root comparisons; rational P1 second triangle. -/
+exchange mate, completed Chern adjuncts, traces, or splitting maps. -/
 theorem scalar_local_chern_pullback
     (l : ℕ) [Fact l.Prime] (E : PadicAlgCl.FiniteIntermediateField l)
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

@@ -15,8 +15,10 @@ import WeilConjectures.ProperBaseChange.IntegralCoefficientCompletenessTransport
 
 /-! # Finite reduction comparison for integral coefficient presentations
 
-Source: Bhatt--Scholze, Section 6.5, convention before Definition 6.5.1; Lemma 4.2.12 and Lemma
-6.8.2(1).
+## References
+
+* Bhatt--Scholze, Section 6.5, convention before Definition 6.5.1
+* Lemma 4.2.12 and Lemma 6.8.2(1)
 -/
 
 @[expose] public noncomputable section
@@ -181,9 +183,7 @@ private def detailedFiniteComparison (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     Functor.isoWhiskerRight β.symm (pbcDerivedRestrict q.hom)
 
 /-- At one finite level, the normalized coefficient transport preserves exactly
-constructibility and any specified cohomological interval.
-Source: Bhatt--Scholze, Section 6.5, convention before Definition 6.5.1; Lemma 4.2.12 and Lemma
-6.8.2(1). -/
+constructibility and any specified cohomological interval. -/
 theorem integralDetailedFiniteReduction
     (T : Scheme.{u}) [IsNoetherian T] (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

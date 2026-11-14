@@ -10,8 +10,11 @@ import WeilConjectures.AlgebraicGeometry.Lisse.Tower.LisseTowerLocalizationCoher
 
 /-! # The coefficient component of the finite inverse-image composition comparison
 
-Source: Stacks Project, Modules on Sites, Tags 03CY, 03D2, 03D3;
-Cohomology on Sites, Tag 0D6D.
+## References
+
+* Stacks Project, Modules on Sites, Tags 03CY, 03D2, 03D3
+* Cohomology on Sites, Tag 0D6D
+* Stacks Project, Modules on Sites, Tags 03CY, 03D2 and 03D3
 -/
 
 @[expose] public noncomputable section
@@ -28,9 +31,6 @@ attribute [local irreducible] HasDerivedCategory.standard pbcDerivedRestrict
 /-- Composition for the actual finite-ring inverse image, expressed through the fixed
 realization equivalence, with compatibility at the coefficient mate component alone.
 This involves no etale comparison functor, etale arrow, tower or level marking.
-
-Source: Stacks Project, Modules on Sites, Tags 03CY, 03D2 and 03D3;
-Cohomology on Sites, Tag 0D6D.
 -/
 theorem lisseTower_localization_base {X Z S T : Scheme.{u}}
     (t : Z ⟶ X) (s : T ⟶ X) (a : T ⟶ S) (b : S ⟶ Z)

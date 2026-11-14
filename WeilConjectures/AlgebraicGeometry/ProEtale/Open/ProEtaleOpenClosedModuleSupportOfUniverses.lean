@@ -50,7 +50,10 @@ public import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # Open and closed support for modules in independent universes
 
-Source: Stacks Project, Tags 09AG, 09AH and 09BM.
+## References
+
+* Stacks Project, Tags 09AG, 09AH and 09BM
+* Stacks Project, with arbitrary ring sheaves
 -/
 
 @[expose] public section
@@ -357,9 +360,7 @@ private theorem support_detect_isIso
   exact isIso_of_reflects_iso f E
 
 /-- Complementary restrictions detect module isomorphisms, and closed restriction
-annihilates open extension. Neither assertion concerns preservation of products.
-
-Source: Stacks Project, with arbitrary ring sheaves. -/
+annihilates open extension. Neither assertion concerns preservation of products. -/
 theorem proEtaleOpenClosedModuleSupportOfUniverses
     {X Z : Scheme.{t}} (i : Z ⟶ X) [IsClosedImmersion i]
     (U : X.ProEt) [IsOpenImmersion U.hom] [QuasiCompact U.hom]

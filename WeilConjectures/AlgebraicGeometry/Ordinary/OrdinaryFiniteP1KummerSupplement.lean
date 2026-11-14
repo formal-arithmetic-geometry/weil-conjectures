@@ -31,13 +31,15 @@ public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Kummer
 /-!
 # Canonical arrows for the ordinary finite projective-line calculation
 
-Source: Stacks Project, Tags 03PL and 03FD.
-
 ## Main definitions
 
 * `ordinaryFiniteRootMap`: scalar extension of roots of unity.
 * `ordinaryFiniteClass`: realization of a module-derived class in abelian cohomology.
 * `ordinaryFiniteP1KummerClass`: the scalar Kummer class of the specified `O(1)`.
+
+## References
+
+* Stacks Project, Tags 03PL and 03FD
 -/
 
 @[expose] public noncomputable section

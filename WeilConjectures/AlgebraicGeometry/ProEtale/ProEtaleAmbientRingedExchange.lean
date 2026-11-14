@@ -139,6 +139,11 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 - `proEtaleCanonicalDerivedPullbackComparison`: composition comparison with its
   normalized ordinary and K-flat representative characterizations retained.
 - `proEtaleAmbientRingedExchange`: the mate of the comparison around the square.
+
+## References
+
+* Stacks Project, Lemma 0D6D
+* Stacks Tags 07A7 and 0D6D
 -/
 
 @[expose] public section
@@ -152,7 +157,6 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- Canonical derived pullback comparison extracted from the composition interface.
-Source: Stacks Project, Lemma 0D6D.
 The recorded composition theorem supplies this comparison together with its K-flat
 normalization; this definition retains that characterization when selecting the comparison.
 The adjunctions are fixed by their tensor units, the ordinary direct-image comparison
@@ -228,7 +232,6 @@ noncomputable def proEtaleCanonicalDerivedPullbackComparison
   exact hex.choose
 
 /-- The canonical pullback comparison around the coefficient-compatible square.
-Source: Stacks Tags 07A7 and 0D6D.
 This exposes the exact comparison whose mate defines ambient exchange. -/
 noncomputable def proEtaleAmbientRingedPullbackComparison
     {X' X Y' Y : Scheme.{u}}

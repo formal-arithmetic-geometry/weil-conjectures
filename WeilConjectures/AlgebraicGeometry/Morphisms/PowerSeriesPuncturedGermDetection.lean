@@ -20,7 +20,11 @@ import WeilConjectures.RingTheory.DepthLeDimAssociatedPrime
 /-!
 # Detecting sections at the punctured zero section
 
-Source: Stacks Project, Tag 0EY9, injectivity detail, expanded by Tags 0312 and 0311
+## References
+
+* Stacks Project, Tag 0EY9, injectivity detail, expanded by Tags 0312 and 0311
+* Stacks Project, Tag 0EY9, the omitted injectivity detail
+* Tags 0312, 0BK4 and 0311
 -/
 
 @[expose] public section
@@ -30,9 +34,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- A section on V vanishing as a germ at every point of the punctured zero
-section is zero.
-
-Source: Stacks Project, Tag 0EY9, the omitted injectivity detail; Tags 0312, 0BK4 and 0311 -/
+section is zero. -/
 theorem eq_zero_of_powerSeries_punctured_germs
     (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]
     (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth (R := A) A)

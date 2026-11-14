@@ -9,7 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.Derived.DerivedLocalIsomorphismS
 
 /-! # From an étale local isomorphism to a geometric stalk section
 
-Source: Stacks Project, Tag 09BV.
+## References
+
+* Stacks Project, Tag 09BV
 -/
 
 @[expose] public noncomputable section
@@ -21,8 +23,6 @@ namespace AlgebraicGeometry.Scheme
 /-- A representative of the local Isom presheaf over an étale neighbourhood of a
 geometric point gives an element of the sheafified Isom stalk.  This isolates the
 sheafification and point-fibre step from finite-level comparison.
-
-Source: Stacks Project, Tag 09BV.
 -/
 theorem lisse_finite_level_etale_stalk_from_local_section
     (X : Scheme.{u}) (B : Type (u + 1)) [CommRing B]

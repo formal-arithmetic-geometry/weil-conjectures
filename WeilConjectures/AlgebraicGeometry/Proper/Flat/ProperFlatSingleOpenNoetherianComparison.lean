@@ -24,7 +24,11 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 
 /-! # A Noetherian comparison before choosing a finite-free resolution
 
-Source: Stacks Project, Tag 0A1H, Noetherian approximation paragraph, and Tag 081F.
+## References
+
+* Stacks Project, Tag 0A1H, Noetherian approximation paragraph, and Tag 081F
+* Stacks Project, Tag 0A1H, approximation paragraph
+* Tags 081F, 08E5 and 08E7
 -/
 
 @[expose] public section
@@ -60,8 +64,7 @@ private theorem isFinitePresentation_of_isZero (X : Scheme.{u})
     SheafOfModules.IsFiniteLocallyFree.of_iso.{u, u, u} (hz.iso hN)
   infer_instance
 
-/-- Local approximation and transport data, without any finite-free resolution of the image.
-Source: Stacks Project, Tag 0A1H, approximation paragraph; Tags 081F, 08E5 and 08E7. -/
+/-- Local approximation and transport data, without any finite-free resolution of the image. -/
 theorem properFlat_single_open_noetherian_comparison
     {X S : Scheme.{u}} (f : X ⟶ S)
     [IsProper f] [LocallyOfFinitePresentation f] [QuasiCompact f]

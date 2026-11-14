@@ -11,7 +11,10 @@ import all WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarExtension
 
 /-! # Coherence of the actual finite and completed coefficient maps
 
-Source: Stacks Project, Tag 03CB; Bhatt--Scholze, Remark 6.8.15.
+## References
+
+* Stacks Project, Tag 03CB
+* Bhatt--Scholze, Remark 6.8.15
 -/
 
 @[expose] public noncomputable section
@@ -123,8 +126,7 @@ private theorem transitions {b a : ℕᵒᵖ} (q : b ⟶ a) :
 
 /-- Finite composition, identity and quotient transitions determine completed
 composition and identity by joint monicity of the actual limit projections.
-Constant scalar sections are preserved by the specified adjunction unit.
-Source: Stacks Project, Tag 03CB; Bhatt--Scholze, Remark 6.8.15. -/
+Constant scalar sections are preserved by the specified adjunction unit. -/
 theorem localizedOrdinaryCoefficientCoherence
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

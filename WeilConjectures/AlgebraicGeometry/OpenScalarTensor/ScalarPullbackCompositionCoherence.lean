@@ -16,7 +16,9 @@ set_option linter.privateModule false
 
 /-! # Geometric composition of the scalar/pullback comparison
 
-Source: Stacks Project, Tag 0D6D.
+## References
+
+* Stacks Project, Tag 0D6D
 -/
 
 @[expose] public noncomputable section

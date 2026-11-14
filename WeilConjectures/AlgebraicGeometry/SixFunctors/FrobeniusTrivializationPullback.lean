@@ -47,7 +47,9 @@ import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
 /-!
 # Pullback naturality of the canonical absolute-Frobenius trivialization
 
-Source: Stacks Project, Tag 0F6W.
+## References
+
+* Stacks Project, Tag 0F6W
 -/
 
 @[expose] public section

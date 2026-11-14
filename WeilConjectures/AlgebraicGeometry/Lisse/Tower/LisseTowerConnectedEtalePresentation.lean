@@ -18,7 +18,12 @@ import WeilConjectures.Mathlib.Topology.NoetherianSpace
 
 /-! # Connected etale presentations before choosing local stalk markings
 
-Source: Stacks Project, Tags 09AL, 09B1 and 09C6.
+## References
+
+* Stacks Project, Tags 09AL, 09B1 and 09C6
+* Stacks Project, Tags 09AL, 09B1 and 09C6, before local constancy
+* Stacks Project, the paragraph constructing the normalized algebraic diagram, before local
+  constancy
 -/
 
 @[expose] public noncomputable section
@@ -31,9 +36,7 @@ attribute [local irreducible] constantAdicQuotientRealization
 
 /-- Etale origins and scalar-normalized stalk arrows on one connected chart.
 The transport field only transports a supplied isomorphism; it asserts no local
-markings or covering sieves of markings.
-
-Source: Stacks Project, Tags 09AL, 09B1 and 09C6, before local constancy. -/
+markings or covering sieves of markings. -/
 structure LisseTowerConnectedEtalePresentation
     (X Y : Scheme.{u}) (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
@@ -235,10 +238,7 @@ private theorem pointed_chart_presentation
 
 /-- Descend the finite levels on connected charts and take their actual geometric
 stalks, retaining the scalar normalization and conditional coefficient transport.
-No level is asserted locally isomorphic to its stalk in this theorem.
-
-Source: Stacks Project, the paragraph constructing the normalized algebraic diagram, before local
-constancy. -/
+No level is asserted locally isomorphic to its stalk in this theorem. -/
 theorem lisse_tower_connected_etale_presentation
     (X Y : Scheme.{u}) [IsNoetherian X] (g : Y ⟶ X) [IsImmersion g]
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (M : AdicTower X d)

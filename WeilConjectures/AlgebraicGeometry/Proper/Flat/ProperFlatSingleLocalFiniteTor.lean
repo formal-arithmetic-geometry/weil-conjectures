@@ -23,7 +23,12 @@ import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 
 /-! # Local finite Tor dimension of a proper relatively flat single-module direct image
 
-Source: Stacks Project, Tag 0A1H, single-module case; Tags 08CG and 08CI.
+## References
+
+* Stacks Project, Tag 0A1H, single-module case
+* Tags 08CG and 08CI
+* Stacks Project, Tag 0A1H with E=O_X and G=F[0]
+* Tags 01XD, 08CG, 08CI
 -/
 
 @[expose] public section
@@ -96,7 +101,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- On each affine base open the restricted direct image has a finite Tor interval.
 The interval may depend on the neighbourhood. This supplies no finite-free model
 and asserts no pseudo-coherence.
-Source: Stacks Project, Tag 0A1H with E=O_X and G=F[0]; Tags 01XD, 08CG, 08CI.
 -/
 theorem properFlat_single_local_hasFiniteTorDimension
     {X S : Scheme.{u}} (f : X ⟶ S)

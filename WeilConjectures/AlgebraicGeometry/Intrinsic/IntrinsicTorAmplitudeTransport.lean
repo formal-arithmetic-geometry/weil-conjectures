@@ -14,7 +14,9 @@ import WeilConjectures.Algebra.Homology.ProperBaseChange.KFlatResolutionGeneral
 /-!
 # Intrinsic finite-coefficient Tor amplitude transport
 
-Source: Stacks Project, Tags 00YV, 06YS, 06YU and 08FZ.
+## References
+
+* Stacks Project, Tags 00YV, 06YS, 06YU and 08FZ
 -/
 
 @[expose] public section
@@ -102,8 +104,7 @@ private theorem intrinsicTransportAux
       N M eM i
     exact (e.isZero_iff).2 ((hzero _).2 (h N i hi))
 
-/-- The intrinsic coefficient realization transports the standard pro-etale Tor predicate.
-Source: Stacks Project, Tags 00YV, 06YS, 06YU and 08FZ. -/
+/-- The intrinsic coefficient realization transports the standard pro-etale Tor predicate. -/
 theorem intrinsic_hasProEtaleTorAmplitude_iff_torAmplitudeIn
     (A : Type u) [CommRing A] [Finite A]
     (T : Scheme.{u}) (a b : ℤ) (hab : a ≤ b)

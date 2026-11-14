@@ -37,7 +37,11 @@ import all WeilConjectures.Algebra.Homology.CanonicalTensorPullbackOfUniverses.R
 
 /-! # Computing the projection mate on mixed tensor representatives
 
-Source: Stacks Project, Cohomology on Sites, Tags 07A4, 07A6 and 0B56.
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 07A4, 07A6 and 0B56
+* Stacks 07A6 and 0B56
+* Tags 07A4, 07A6 and 0B56
 -/
 
 @[expose] public noncomputable section
@@ -498,8 +502,7 @@ attribute [local irreducible] proEtaleRingDerivedPullbackFactors
 attribute [local irreducible] proEtaleRingModulePullback proEtaleRingModuleAdjunction
   proEtaleRingDerivedAdjunction
 
-/-- The ordinary signed-total projection mate, with its explicit complex type.
-Source: Stacks 07A6 and 0B56. -/
+/-- The ordinary signed-total projection mate, with its explicit complex type. -/
 def proEtaleProjectionTotal
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
@@ -534,9 +537,7 @@ set_option maxHeartbeats 200000 in
 -- Nested localization comparisons require extra elaboration steps.
 /-- The derived counit mate is the localization of the ordinary total mate on mixed
 representatives. Only the coefficient complex is required to be flat and K-flat;
-no finite-projective splitting or inverse projection map is involved.
-
-Source: Tags 07A4, 07A6 and 0B56. -/
+no finite-projective splitting or inverse projection map is involved. -/
 theorem proEtaleMixedProjectionMate
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})

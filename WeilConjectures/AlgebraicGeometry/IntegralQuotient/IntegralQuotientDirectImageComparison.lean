@@ -56,6 +56,10 @@ import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapDualizable
 
 The mate is formed with the actual derived adjunctions. Quotient levels are indexed by
 n + 1 and every tensor product is the ordinary, uncompleted derived tensor product.
+
+## References
+
+* Stacks Tags 093M, 06YY, 0D6D, 0D6E, 0G7E, 07A6 and 0944
 -/
 
 @[expose] public noncomputable section
@@ -525,9 +529,7 @@ attribute [-instance] cachedProofInstance1 cachedProofInstance2 cachedProofInsta
   cachedProofInstance9 cachedProofInstance10 cachedProofInstance11 cachedProofInstance12 in
 /-- The quotient-linear unbounded direct-image comparison, its exact projection
 normalization, the actual augmented two-term resolution, and compatibility at all
-positive quotient levels. No condition is imposed on the scheme morphism or complex.
-
-Source: Stacks Tags 093M, 06YY, 0D6D, 0D6E, 0G7E, 07A6 and 0944. -/
+positive quotient levels. No condition is imposed on the scheme morphism or complex. -/
 theorem integral_quotient_direct_image_comparison :
     ∃ t : ∀ (T : Scheme.{u}) (n : ℕ), TensorNormalization (reduction l E n) T,
       (∀ (T : Scheme.{u}) (n : ℕ), TensorNormalized (reduction l E n) T (t T n)) ∧

@@ -10,7 +10,12 @@ import WeilConjectures.AlgebraicGeometry.OrderedExchange.OrderedExchangeStrictCo
 import WeilConjectures.AlgebraicGeometry.OrderedExchange.OrderedExchangeReconstructionEquations
 import WeilConjectures.AlgebraicGeometry.OrderedExchange.OrderedExchangeRawCoefficientEquation
 
-/-! # Assembly of the ordered coefficient comparison -/
+/-! # Assembly of the ordered coefficient comparison
+
+## References
+
+* strict coefficient supplement, Stacks 099M, 099N, 0A07 and 0E48
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -26,7 +31,6 @@ variable {X' X Y' Y : Scheme.{t}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
 
 /-- All specified strict coefficient, reconstruction and direct-image/limit normalizations,
 including equality of the ordered maps as natural transformations on the full complete category.
-Source: strict coefficient supplement, Stacks 099M, 099N, 0A07 and 0E48.
 -/
 theorem coefficientComparison (sq : ChosenCartesianSquare g' f' f g) :
     (∀ (K : d.derived X) (hK : d.TowerComplete X K),

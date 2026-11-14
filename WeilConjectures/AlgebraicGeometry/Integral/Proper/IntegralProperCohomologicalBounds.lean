@@ -36,6 +36,10 @@ public import WeilConjectures.Compactification.Defs
 
 /-!
 # Integral proper cohomological estimates
+
+## References
+
+* Stacks Project, Tags 095U, 099B, 0A0E, 08TB, 08TC and 07KC
 -/
 
 @[expose] public noncomputable section
@@ -148,9 +152,7 @@ private theorem integral_upper_from_heart
 
 /-- The heart estimates and bounded-above amplitude needed before the truncation-window
 argument. This does not assert a window isomorphism, preservation of coproducts, or
-preservation of a localizing closure.
-
-Source: Stacks Project, Tags 095U, 099B, 0A0E, 08TB, 08TC and 07KC. -/
+preservation of a localizing closure. -/
 theorem integralProperCohomologicalBounds
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (k : Type u) [Field k] (p₀ : ℕ) [CharP k p₀] (hp₀ : 0 < p₀) (hpℓ : p₀ ≠ ℓ)

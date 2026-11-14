@@ -17,7 +17,10 @@ import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor
 /-!
 # Chart data for a graded polynomial module
 
-Source: Stacks Project, Tag 01M6 and Lemma 01M7.
+## References
+
+* Stacks Project, Tag 01M6 and Lemma 01M7
+* Stacks Project, construction before Definition 01M6 and Lemma 01M7
 -/
 
 @[expose] public section
@@ -51,7 +54,7 @@ private theorem range_chart_inclusion {R N B : Type u} [Semiring R]
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Push charts forward along the identity graded ring map between the two polynomial
-presentations. Source: Stacks Project, construction before Definition 01M6 and Lemma 01M7.
+presentations.
 
 The identity ring map preserves homogeneous elements and sends the irrelevant ideal
 onto the irrelevant ideal, so Mathlib's Proj.map supplies the required scheme morphism.
@@ -148,8 +151,7 @@ private theorem graded_module_chart_regrading
   · intro f g i j s
     exact hrestrict f g j s
 
-/-- An integer-graded polynomial module has an associated sheaf with explicit chart data.
-Source: Stacks Project, construction before Definition 01M6 and Lemma 01M7. -/
+/-- An integer-graded polynomial module has an associated sheaf with explicit chart data. -/
 theorem graded_module_chart_data_exists (k : Type u) [Field k]
     (A : ModuleCat.{u} (MvPolynomial (Fin 2) k))
     (𝒢 : ℤ → AddSubgroup A) (h𝒢 : DirectSum.IsInternal 𝒢)

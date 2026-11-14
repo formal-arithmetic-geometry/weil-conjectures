@@ -15,15 +15,19 @@ import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ProperProjectionFormula
 
 /-! # Proper scalar comparison on bounded etale origins
 
-Source: Stacks Project, Tag 0F0G; Tags 09A6, 0E48 and 0B56 for the canonical comparison and scalar
-mate.
-
 ## Main definitions and statement
 
 - `properOriginTensorIso`: canonical constant-B tensor comparison.
 - `properOriginMateIso`: the specified bounded-below direct-image mate.
 - `properOriginEtaleProjection`: the actual etale projection arrow.
 - `properEtaleOriginScalarIsomorphism`: invertibility and the restriction formula.
+
+## References
+
+* Stacks Project, Tag 0F0G
+* Tags 09A6, 0E48 and 0B56 for the canonical comparison and scalar mate
+* Tag 09A6
+* Tags 0E48 and 0B56
 -/
 
 @[expose] public noncomputable section
@@ -76,9 +80,7 @@ precise conjugation formula after the canonical restriction/direct-image
 identification. The two b factors are the recorded counit mates at E_e and H_e;
 q = properOriginTensorIso is the constant-B tensor comparison expressed through
 US = tensor B. No flatness, finite Tor dimension, Noetherian hypothesis or bound
-on the tensor of Rp_* E_e is imposed.
-
-Source: Stacks Project, Tag 0F0G; Tag 09A6; Tags 0E48 and 0B56. -/
+on the tensor of Rp_* E_e is imposed. -/
 theorem properEtaleOriginScalarIsomorphism
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {Z Y : Scheme.{u}} (p : Z ⟶ Y) [IsProper p]

@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 
 /-! # Degree-zero normalization of the canonical direct-image unit
 
-Source: Stacks Project, Tags 079V and 0A1G.
+## References
+
+* Stacks Project, Tags 079V and 0A1G
 -/
 
 @[expose] public section
@@ -249,8 +251,7 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The H⁰ comparison for direct image takes the canonical single-module unit to
- the single-complex homology identification.
-Source: Stacks Project, Tags 079V and 0A1G. -/
+ the single-complex homology identification. -/
 theorem canonicalDirectImageH0Unit {X S : Scheme.{u}} (f : X ⟶ S)
     [HasInjectiveResolutions X.Modules] (M : X.Modules) :
     (DerivedCategory.homologyFunctor

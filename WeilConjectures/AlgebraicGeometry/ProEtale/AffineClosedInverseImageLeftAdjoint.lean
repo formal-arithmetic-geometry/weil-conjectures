@@ -14,7 +14,10 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Iso
 /-!
 # An extra left adjoint for affine closed pro-etale inverse image
 
-Source: Stacks Project, Tag 09BL, clause (3), using Tag 09BK.
+## References
+
+* Stacks Project, Tag 09BL, clause (3), using Tag 09BK
+* Stacks Project, Tag 09BL, clause (3), and Tag 09BK
 -/
 
 @[expose] public section
@@ -297,8 +300,6 @@ private theorem quotientInverseImage_isRightAdjoint
 /-- The ordinary inverse image on set-valued small pro-etale sheaves for a closed
 immersion of affine schemes has a left adjoint. The adjunction provides the bijections
 `Hom(L G, F) ≃ Hom(G, i⁻¹ F)`, natural in both `G` and `F`.
-
-Source: Stacks Project, Tag 09BL, clause (3), and Tag 09BK.
 -/
 theorem exists_affineClosedInverseImageLeftAdjoint {Z X : Scheme.{u}}
     [IsAffine Z] [IsAffine X] (i : Z ⟶ X) [IsClosedImmersion i] :

@@ -14,6 +14,10 @@ import WeilConjectures.Topology.PresheafModuleStalkFunctor
 
 /-!
 # Exterior powers commute with module stalks
+
+## References
+
+* Stacks Project, Lemma 007Z
 -/
 
 @[expose] public section
@@ -237,7 +241,6 @@ private theorem exteriorPresheaf_stalk_comparison {X : Scheme.{v}} (M : X.Module
 
 /-- The sheafification unit identifies the stalk of a sectionwise exterior power with
 its presheaf stalk, compatibly with the displayed wedge germs.
-Source: Stacks Project, Lemma 007Z.
 -/
 private theorem exteriorSheaf_stalk_sheafification {X : Scheme.{v}} (M : X.Modules)
     (n : ℕ) (x : X) :

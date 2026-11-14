@@ -17,7 +17,11 @@ import Mathlib.RingTheory.Filtration
 /-!
 # Global sections of a power-series open containing the punctured zero section
 
-Source: Stacks Project, Tag 0EY9, first displayed comparison in the proof.
+## References
+
+* Stacks Project, Tag 0EY9, first displayed comparison in the proof
+* Stacks Project, the comparison of global sections preceding the finite locally free argument
+* Tags 0BK0, 0EKP and 0EL8 supply Hartogs and the uniqueness argument
 -/
 
 @[expose] public section
@@ -27,10 +31,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- The canonical restriction from the power-series ring to the global sections of
-an open containing precisely the punctured zero section is bijective.
-
-Source: Stacks Project, the comparison of global sections preceding the finite locally free
-argument; Tags 0BK0, 0EKP and 0EL8 supply Hartogs and the uniqueness argument. -/
+an open containing precisely the punctured zero section is bijective. -/
 theorem bijective_powerSeries_punctured_globalSections
     (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]
     (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth (R := A) A)

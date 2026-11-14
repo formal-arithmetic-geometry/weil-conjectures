@@ -179,12 +179,16 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 
 /-! # Actual integral finite-quotient resolutions
 
-Source: Stacks Project, Tags 093M, 093J and 06YQ.
-
 Level n denotes exponent n + 1. The ring objects, multiplication, cone and projection
 are exactly those of IntegralQuotientCoefficients. The finite constant identifications
 are pinned by the existing constant-function map, and the limit isomorphism is pinned
 by all the actual projections. The module equivalence is the fixed section-action one.
+
+## References
+
+* Stacks Project, Tags 093M, 093J and 06YQ
+* Stacks 00YV
+* Stacks 093I
 -/
 
 @[expose] public noncomputable section
@@ -205,35 +209,30 @@ namespace AlgebraicGeometry.ProEtale.IntegralQuotient
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The existing reconstructed commutative section-ring sheaf of the integral object.
-Source: Stacks 00YV. -/
+/-- The existing reconstructed commutative section-ring sheaf of the integral object. -/
 abbrev resolutionSectionRing (T : Scheme.{u}) :=
   InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}
     (Scheme.ProEt.topology T)
     (condensedRingObj (integral l E) T)
 
-/-- Forgetting commutativity of the same section ring; no coefficient is replaced.
-Source: Stacks 00YV. -/
+/-- Forgetting commutativity of the same section ring; no coefficient is replaced. -/
 abbrev resolutionUnderlyingRing (T : Scheme.{u}) :=
   (sheafCompose (Scheme.ProEt.topology T) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
     (resolutionSectionRing l E T)
 
-/-- The finite section ring, reconstructed from the actual pulled-back quotient.
-Source: Stacks 00YV. -/
+/-- The finite section ring, reconstructed from the actual pulled-back quotient. -/
 abbrev resolutionFiniteRing (T : Scheme.{u}) (n : ℕ) :=
   InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}
     (Scheme.ProEt.topology T)
     (condensedRingObj (finite l E n) T)
 
-/-- The recorded internal/section module equivalence, with its exact forward functor.
-Source: Stacks 00YV. -/
+/-- The recorded internal/section module equivalence, with its exact forward functor. -/
 abbrev resolutionSectionEquivalence (T : Scheme.{u}) :=
   InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u}
     (Scheme.ProEt.topology T)
     (condensedRingObj (integral l E) T)
 
-/-- The constant integral ring in the universe of abelian sheaves on the small site.
-Source: Stacks 093I. -/
+/-- The constant integral ring in the universe of abelian sheaves on the small site. -/
 abbrev resolutionConstantRing (T : Scheme.{u}) :=
   (constantSheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1}).obj
     (CommRingCat.of (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)))
@@ -695,8 +694,6 @@ attribute [local irreducible] InternalAbelianSheafModule.comparison_closed
 /-- Arithmetic, the canonically normalized limit presentation, flatness over constant
 integral scalars, the actual cokernel, and the normalized flat-term K-flat resolution.
 All assertions use the ordinary module categories and their unbounded complexes.
-
-Source: Stacks Project, Tags 093M, 093J and 06YQ.
 -/
 theorem integral_quotient_resolution_normalization :
     IsNoetherianRing (Padic.coefficientExtensionIntegers l E) ∧

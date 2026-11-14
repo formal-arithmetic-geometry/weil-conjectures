@@ -9,7 +9,12 @@ public import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSe
 import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientScalarSectionOrdinaryComparisonExistence
 import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientScalarSectionDerivedComparisonExistence
 
-/-! Comparison and normalization for a fixed sectionwise scalar model. -/
+/-! Comparison and normalization for a fixed sectionwise scalar model.
+
+## References
+
+* Stacks 03EK, 06YY, 07A6
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -33,8 +38,7 @@ variable [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ T)]
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ' T)]
 
 /-- For any fixed actual cochain model, normalized ordinary and derived section
-comparisons exist.
-Source: Stacks 03EK, 06YY, 07A6. -/
+comparisons exist. -/
 theorem scalar_section_comparisons_exists (T : Scheme.{u})
     (model : SectionModel a T) :
     ∃ ordinary : QuotientChange.extension a T ⋙

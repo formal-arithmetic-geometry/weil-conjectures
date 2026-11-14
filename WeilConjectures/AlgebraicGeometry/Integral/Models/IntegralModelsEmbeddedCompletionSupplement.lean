@@ -15,7 +15,9 @@ import Mathlib.CategoryTheory.ObjectProperty.Equivalence
 
 /-! # Completion for embedded integral coefficients
 
-Source: Stacks Project, Tags 099I, 099L, 099M and 0A07.
+## References
+
+* Stacks Project, Tags 099I, 099L, 099M and 0A07
 -/
 
 @[expose] public noncomputable section
@@ -155,8 +157,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 attribute [-instance] integralModel_coefficientMonObj in
 /-- Restriction along constant continuous functions identifies the complete categories
 and preserves and reflects local derived completeness for every complex.
-
-Source: Stacks Project, Tags 099I, 099L, 099M and 0A07.
 -/
 theorem integralModelsEmbeddedCompletion
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)

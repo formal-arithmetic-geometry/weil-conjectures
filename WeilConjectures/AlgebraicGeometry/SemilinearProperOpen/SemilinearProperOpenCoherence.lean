@@ -12,11 +12,14 @@ import all WeilConjectures.AlgebraicGeometry.SemilinearProperOpen.SemilinearProp
 
 /-! # Associativity of the intrinsic semilinear compositors
 
-Source: Stacks Project, Tags 0F7C--0F7F.
-
 The constructions, statements and proofs below are retained from the original
 mate-pasting module. This file separates their elaboration and artifact generation
 from the proper/open pasting proof.
+
+## References
+
+* Stacks Project, Tags 0F7C--0F7F
+* Stacks 0F7C--0F7F
 -/
 
 @[expose] public noncomputable section
@@ -180,8 +183,7 @@ private theorem jComp_transport {X Y Z : Scheme.{u}}
   simp only [jCongr, eqToIso_refl, Iso.trans_refl, jComp]
 
 /-- Coherence of the specified compositors makes iterated pasting independent of
-parenthesization, for inverse image, its right-adjoint mate, and open extension.
-Source: Stacks 0F7C--0F7F. -/
+parenthesization, for inverse image, its right-adjoint mate, and open extension. -/
 theorem compositor_associativity :
     (∀ {X Y Z T : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ T)
       (M : Derived C τ T),

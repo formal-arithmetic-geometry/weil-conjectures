@@ -11,7 +11,6 @@ public import Mathlib.CategoryTheory.Adjunction.Basic
 # Scalar transport of normalized unit counits
 
 The categorical calculation in Step 5 of open-immersion purity normalization.
-Source: smooth purity transport, coefficient compatibility and specified counits.
 -/
 
 @[expose] public section

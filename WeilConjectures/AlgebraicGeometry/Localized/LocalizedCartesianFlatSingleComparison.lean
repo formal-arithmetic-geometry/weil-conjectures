@@ -17,7 +17,10 @@ import WeilConjectures.AlgebraicGeometry.DerivedPullbackComposition
 import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 
 /-! # Flat single base change on a cartesian source
-Source: Stacks Project.
+
+## References
+
+* Stacks Project
 -/
 
 @[expose] public section
@@ -167,8 +170,7 @@ private theorem standardCartesianFlatSingle
   rw [hr, hq] at transported
   exact ⟨transported.symm ≪≫ bc⟩
 
-/-- Flat single base change on a cartesian source.
-Source: Stacks Project. -/
+/-- Flat single base change on a cartesian source. -/
 theorem localized_cartesian_flat_single_comparison
     {S T Y Z : Scheme.{u}} (U : S.Opens) (V : U.toScheme.Opens) (W : T.Opens)
     [HasDerivedCategory.{wS}

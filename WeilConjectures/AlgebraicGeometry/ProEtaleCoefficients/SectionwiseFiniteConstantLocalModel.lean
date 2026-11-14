@@ -54,11 +54,13 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 
 /-! # Sectionwise finite constant local models
 
-Source: Stacks 03CY and 03EK.
-
 The existing ringed-site and internal condensed-module definitions remain available
 through the public import. This companion interface expresses the scalar local-model
 clause on the chosen small site in sectionwise module sheaves.
+
+## References
+
+* Stacks 03CY and 03EK
 -/
 
 @[expose] public noncomputable section

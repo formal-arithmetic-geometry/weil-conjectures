@@ -16,7 +16,10 @@ import all WeilConjectures.CategoryTheory.Scalar.ScalarLocalizationDerivedHom
 /-!
 # Transport of the scalar-localization Hom comparison to normalized rational coefficients
 
-Source: Bhatt--Scholze, Lemma 6.8.12 and Proposition 6.8.14(2), pp. 61--62.
+## References
+
+* Bhatt--Scholze, Lemma 6.8.12 and Proposition 6.8.14(2), pp. 61--62
+* Bhatt--Scholze, Proposition 6.8.14(2)
 -/
 
 @[expose] public noncomputable section
@@ -39,8 +42,7 @@ variable (X : Scheme.{u}) [IsNoetherian X]
 
 /-- Restrict the realization's normalized constant field action along the canonical
 identification of the localized valuation ring with E. This constructs only the scalar
-structure required to apply the existing localized-Hom comparison predicate.
-Source: Bhatt--Scholze, Proposition 6.8.14(2). -/
+structure required to apply the existing localized-Hom comparison predicate. -/
 @[instance_reducible]
 def rationalRealizationLocalizedLinear (R : RationalModuleRealization l E X) :
     Linear (Localization.Away (pbcUniformizer l E))
@@ -111,9 +113,7 @@ private theorem transportHomComparison
 
 /-- The general bounded-below Hom localization comparison, in the normalized continuous
 coefficient presentation and for the universal derived tensor functor. No constructibility
-hypothesis or conclusion about the raw rationalization functor occurs here.
-
-Source: Bhatt--Scholze, Lemma 6.8.12 and Proposition 6.8.14(2), pp. 61--62. -/
+hypothesis or conclusion about the raw rationalization functor occurs here. -/
 theorem rationalRealizationHomTransport (R : RationalModuleRealization l E X) :
     (fun [_localizedLinear : Linear (Localization.Away (pbcUniformizer l E))
         (DerivedCategory (pbcModules X (rationalCoefficientSheaf l X E)))] ↦

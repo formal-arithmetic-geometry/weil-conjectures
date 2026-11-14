@@ -13,7 +13,10 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 
 /-! # Finite underlying local models from finite geometric stalks
 
-Source: Stacks Project, Modules on Sites, Definition 093Q; Tag 099Y.
+## References
+
+* Stacks Project, Modules on Sites, Definition 093Q
+* Tag 099Y
 -/
 
 @[expose] public section
@@ -23,9 +26,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- A locally constant module sheaf with finite geometric stalks has objectwise
-finite constant underlying set models.
-
-Source: Stacks Project, Modules on Sites, Definition 093Q; Tag 099Y. -/
+finite constant underlying set models. -/
 theorem proEtale_finiteUnderlyingModels_of_locallyConstant
     (X : Scheme.{u}) (A : Type u) [CommRing A] [Finite A]
     (F : proEtaleRingModules X (proEtaleConstantRing X A))

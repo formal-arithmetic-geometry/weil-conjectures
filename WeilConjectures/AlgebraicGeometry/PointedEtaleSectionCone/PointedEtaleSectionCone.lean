@@ -13,7 +13,10 @@ The colimit universal property constructs restriction for any compatible family 
 sections above an initial diagram of pointed neighbourhoods. No strict-local model
 is built into this construction.
 
-Source: Stacks Project, Tag 03Q9, restriction from germs.
+## References
+
+* Stacks Project, Tag 03Q9, restriction from germs
+* Stacks Project, Tag 03Q9
 -/
 
 @[expose] public section
@@ -28,8 +31,7 @@ variable {S T : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω]
   {s : Spec (.of Ω) ⟶ S} {I : Type v} [Category.{v} I]
   {N : I ⥤ (Scheme.pointSmallEtale s).fiber.Elements} {g : T ⟶ S}
 
-/-- Compatible sections of the pullbacks of an initial pointed étale diagram.
-Source: Stacks Project, Tag 03Q9. -/
+/-- Compatible sections of the pullbacks of an initial pointed étale diagram. -/
 structure PointedEtaleSectionCone (g : T ⟶ S)
     (N : I ⥤ (Scheme.pointSmallEtale s).fiber.Elements) where
   initial : N.Initial
@@ -42,8 +44,7 @@ namespace PointedEtaleSectionCone
 
 variable (c : PointedEtaleSectionCone g N)
 
-/-- Restrict sections using the inverse-image unit and a section of the pullback.
-Source: Stacks Project, Tag 03Q9. -/
+/-- Restrict sections using the inverse-image unit and a section of the pullback. -/
 noncomputable def restriction
     (F : Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}) (i : I) :
     F.obj.obj (op (N.obj i).1) ⟶
@@ -57,8 +58,7 @@ noncomputable def restriction
         (MorphismProperty.Over.forget @AlgebraicGeometry.Etale ⊤ T)
         (Scheme.Etale.mk (𝟙 T)) Over.mkIdTerminal)).inv.app _
 
-/-- A stalk restriction is specified by all its pointed germ components.
-Source: Stacks Project, Tag 03Q9. -/
+/-- A stalk restriction is specified by all its pointed germ components. -/
 def IsRestriction (F : Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1})
     (r : (Scheme.pointSmallEtale s).sheafFiber.obj F ⟶
       (Sheaf.Γ T.smallEtaleTopology AddCommGrpCat.{v + 1}).obj
@@ -66,8 +66,7 @@ def IsRestriction (F : Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1})
   ∀ i : I, (Scheme.pointSmallEtale s).toPresheafFiber (N.obj i).1 (N.obj i).2 F.obj ≫ r =
     c.restriction F i
 
-/-- Compatible restrictions descend uniquely from the geometric stalk.
-Source: Stacks Project, Tag 03Q9. -/
+/-- Compatible restrictions descend uniquely from the geometric stalk. -/
 theorem existsUnique_restriction
     (F : Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}) :
     ∃! r : (Scheme.pointSmallEtale s).sheafFiber.obj F ⟶

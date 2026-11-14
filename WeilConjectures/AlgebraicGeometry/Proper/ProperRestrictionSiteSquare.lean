@@ -16,7 +16,9 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChan
 
 /-! # Restriction and the bounded direct-image site boundary
 
-Source: Stacks 09AF, 099R and 0D6E.
+## References
+
+* Stacks 09AF, 099R and 0D6E
 -/
 
 -- After pruning, this module only keeps private declarations.

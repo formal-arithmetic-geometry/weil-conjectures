@@ -12,7 +12,10 @@ import all WeilConjectures.SixFunctors.Open.OpenQuotientKoszulCompleteness
 
 /-! # Normalized DVR coefficient comparison without open-completeness data
 
-Source: Bhatt--Scholze, Definition 6.5.1 and Lemma 6.5.8(1).
+## References
+
+* Bhatt--Scholze, Definition 6.5.1 and Lemma 6.5.8(1)
+* Bhatt--Scholze, Definition 6.5.1, Lemma 6.5.8(1)
 -/
 
 @[expose] public section
@@ -24,8 +27,7 @@ open AlgebraicGeometry.ProEtale WeilConjectures
 namespace AlgebraicGeometry.Scheme
 
 /-- Only the finite coefficient comparisons and their completed limit are retained.
-No quotient-completeness criterion or open-operation model is part of this structure.
-Source: Bhatt--Scholze, Definition 6.5.1, Lemma 6.5.8(1). -/
+No quotient-completeness criterion or open-operation model is part of this structure. -/
 structure IntegralResidueCoefficientModel
     (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -55,8 +57,7 @@ structure IntegralResidueCoefficientModel
         limit.π (integralCoefficientSheafSystem.{u, u} l E T) (op n) ≫ (finite n).hom =
       completedAdicProjection T d n
 
-/-- Existence of the coefficient comparison uses only finite constants and limits.
-Source: Bhatt--Scholze, Definition 6.5.1, Lemma 6.5.8(1). -/
+/-- Existence of the coefficient comparison uses only finite constants and limits. -/
 theorem integralResidueCoefficientModel_exists
     (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

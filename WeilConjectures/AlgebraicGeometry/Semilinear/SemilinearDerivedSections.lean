@@ -112,9 +112,6 @@ import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearOperationsExistenc
 
 /-! # Ordinary derived semilinear sections
 
-Source: Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1, Lemma 4.10 and Proposition
-4.17; Stacks Project, Tags 0941, 079P, 06YS, 06YY, 07A4, 07A6 and 08J7--08JB.
-
 The categories below are module sheaves on the actual vertical sequence site and their
 ordinary unbounded derived categories. All comparisons have specified sources, targets
 and equations; there are no free proposition-valued parameters.
@@ -126,6 +123,17 @@ and equations; there are no free proposition-valued parameters.
 - `TensorComparisonModel`, `InverseTensorPure`: representative and pure-tensor normalization.
 - `semilinearDerivedSections`: existence of the complete ordinary-derived calculus.
 - `evaluation_mate`: compatibility of specified adjunction transposes with evaluation.
+
+## References
+
+* Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1, Lemma 4.10 and Proposition 4.17
+* Stacks Project, Tags 0941, 079P, 06YS, 06YY, 07A4, 07A6 and 08J7--08JB
+* Zheng 4.1 and 4.10
+* Stacks 06YY, 07A4, 08J7--08JB
+* Zheng 4.10
+* Stacks 07A4
+* Zheng, Construction 4.1, Lemma 4.10 and Proposition 4.17
+* Stacks 079P, 06YS, 06YY, 07A4, 07A6, 08J7--08JB
 -/
 
 @[expose] public noncomputable section
@@ -149,8 +157,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   (τ : ∀ n : ℕ, B (n + 1) ⟶ B n)
 
 /-- All operations of the ordinary-derived semilinear system statement, on its
-actual categories and with their specified maps and equations.
-Source: Zheng 4.1 and 4.10; Stacks 06YY, 07A4, 08J7--08JB. -/
+actual categories and with their specified maps and equations. -/
 structure SemilinearDerivedSectionsData where
   /-- The actual abelian/derived system calculus. -/
   systems : Data.{c, v, r} J B τ
@@ -188,8 +195,7 @@ variable {X Y Z W x y z w : Type k}
   [Category.{k} x] [Category.{k} y] [Category.{k} z] [Category.{k} w]
 
 /-- A pair of evaluation comparisons normalized by both adjunction identities.
-This categorical helper is applied to the actual system and level categories above.
-Source: Zheng 4.10. -/
+This categorical helper is applied to the actual system and level categories above. -/
 structure AdjunctionEvaluation (E : X ⥤ x) (F : Y ⥤ y)
     {L : X ⥤ Y} {R : Y ⥤ X} (adj : L ⊣ R)
     {l : x ⥤ y} {r : y ⥤ x} (level : l ⊣ r) where
@@ -208,8 +214,7 @@ structure AdjunctionEvaluation (E : X ⥤ x) (F : Y ⥤ y)
 
 /-- Evaluation commutes with the specified ordinary adjunction-mate word.
 It applies also to the open adjunction and to adjunctions formed by composition,
-so the existing mate-pasting identities include proper direct-image composition.
-Source: Zheng 4.10; Stacks 07A4. -/
+so the existing mate-pasting identities include proper direct-image composition. -/
 theorem evaluation_mate
     {E₁ : X ⥤ x} {F₁ : Y ⥤ y} {E₂ : Z ⥤ z} {F₂ : W ⥤ w}
     {L₁ : X ⥤ Y} {R₁ : Y ⥤ X} {L₂ : Z ⥤ W} {R₂ : W ⥤ Z}
@@ -433,9 +438,7 @@ private theorem projection_evaluation (A : Data.{c, v, r} J B τ)
   simp only [CategoryTheory.Functor.map_id]
   rfl
 
-/-- Ordinary derived semilinear sections and their coefficient-linear operations.
-Source: Zheng, Construction 4.1, Lemma 4.10 and Proposition 4.17; Stacks 079P, 06YS, 06YY, 07A4,
-07A6, 08J7--08JB. -/
+/-- Ordinary derived semilinear sections and their coefficient-linear operations. -/
 theorem semilinearDerivedSections :
     Nonempty (SemilinearDerivedSectionsData.{c, v, r} J B τ) := by
   let S := (semilinearSystemData.{c, v, r} J B τ).some

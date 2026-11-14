@@ -10,7 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.Strict.Tower.StrictTowerExchange
 
 /-! # Scalar normalization on a residue stratum
 
-Source: Bhatt--Scholze, Definition 6.5.1 and Lemma 6.5.8(1).
+## References
+
+* Bhatt--Scholze, Definition 6.5.1 and Lemma 6.5.8(1)
+* Bhatt--Scholze, Definition 6.5.1, Lemma 6.5.8(1), Proposition 6.6.11
 -/
 
 @[expose] public section
@@ -196,8 +199,7 @@ private theorem residueScalar_sameSite
   exact h.trans ((c.finite_constants n.unop U a.down).trans
     ((completedAdicScalar_exists S d).exists.choose_spec n.unop U a).symm)
 
-/-- The normalized stratum comparison carries every constant integral scalar to itself.
-Source: Bhatt--Scholze, Definition 6.5.1, Lemma 6.5.8(1), Proposition 6.6.11. -/
+/-- The normalized stratum comparison carries every constant integral scalar to itself. -/
 theorem integralResidueStratum_scalar
     (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

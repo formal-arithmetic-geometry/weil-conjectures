@@ -18,7 +18,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.CartesianFamilyGenericLimit
 /-!
 # A normal Noetherian family system and its pointed generic fibres
 
-Source: Stacks Project, Tag 0EZJ, limit reduction before descent of the cover.
+## References
+
+* Stacks Project, Tag 0EZJ, limit reduction before descent of the cover
+* Stacks Project, Tag 0EZJ, proof of Lemma 58.31.9, paragraphs from absolute Noetherian
+  approximation through the assertion that the generic fibre is a limit
 -/
 
 @[expose] public section
@@ -30,10 +34,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- Approximate a smooth pointed family, retaining the inverse systems of its generic
-fibres and generic base points. No finite cover or group action is involved.
-
-Source: Stacks Project, Tag 0EZJ, proof of Lemma 58.31.9, paragraphs from absolute
-Noetherian approximation through the assertion that the generic fibre is a limit. -/
+fibres and generic base points. No finite cover or group action is involved. -/
 theorem exists_normal_family_generic_limit {S C : Scheme.{u}} [CompactSpace S]
     [QuasiSeparatedSpace S] [IsIntegral S]
     (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))

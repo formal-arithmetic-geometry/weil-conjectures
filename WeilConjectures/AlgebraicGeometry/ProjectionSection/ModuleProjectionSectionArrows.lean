@@ -43,7 +43,11 @@ public import Mathlib.CategoryTheory.Adjunction.Mates
 /-!
 # Canonical module projection and section comparisons
 
-Source: clause (1), and Stacks 0B56.
+## References
+
+* clause (1), and Stacks 0B56
+* Stacks 07A4
+* Stacks 0B56
 -/
 
 @[expose] public noncomputable section
@@ -73,8 +77,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- A typed alias of the existing total left derived pullback, keeping its inferred
-K-flat structure fixed when using the tensor comparison. There is no new functor.
-Source: Stacks 07A4. -/
+K-flat structure fixed when using the tensor comparison. There is no new functor. -/
 abbrev moduleDerivedPullback :
     DerivedCategory
       (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) ⥤
@@ -84,8 +87,7 @@ abbrev moduleDerivedPullback :
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- A typed alias of the existing total right derived direct image, retaining its
-canonical K-injective construction. There is no new functor.
-Source: Stacks 0B56. -/
+canonical K-injective construction. There is no new functor. -/
 abbrev moduleDerivedPushforward :
     DerivedCategory
       (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) ⥤

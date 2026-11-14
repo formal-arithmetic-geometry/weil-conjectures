@@ -17,7 +17,9 @@ element of `B.X m`, where `m + 1 = n`. This file records the two coordinates, th
 construction of an element from its coordinates, and the formulas for the differential and
 for the functoriality of `relativeFiberMap` in these coordinates.
 
-Source: Stacks Project, Tag 0G71 (mapping fibre of a morphism of complexes).
+## References
+
+* Stacks Project, Tag 0G71 (mapping fibre of a morphism of complexes)
 -/
 
 @[expose] public noncomputable section

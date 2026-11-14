@@ -259,10 +259,19 @@ import all WeilConjectures.AlgebraicGeometry.Pbc.PbcActualScalarPullbackSuppleme
 
 /-! # Successive normalizations of the pulled reduction comparison
 
-Source: Stacks Project, Tags 07A4, 0D6D and 0G7E.
-
 All quotient indices are zero based: `n` denotes the positive exponent `n + 1`.
 The maps retain the finite coefficient action and the universal computation counits.
+
+## References
+
+* Stacks Project, Tags 07A4, 0D6D and 0G7E
+* Stacks 06YY
+* Stacks 0D6D
+* Stacks 03EL
+* Stacks 06YY, 0D6D
+* Stacks 0D6D, 07A4
+* Stacks 06YY, 03EL
+* Stacks 03EL, 0D6D and 0G7E
 -/
 
 @[expose] public noncomputable section
@@ -545,8 +554,7 @@ namespace AlgebraicGeometry.Scheme.PulledNormalization
 variable {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 variable {X Y : Scheme.{t}} (g : X ⟶ Y)
 
-/-- The existing scalar extension with its universal presentation, on the original site.
-Source: Stacks 06YY. -/
+/-- The existing scalar extension with its universal presentation, on the original site. -/
 def scalarPresentation (T : Scheme.{t})
     {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (a : R ⟶ S) :
     Presentation.{t + 1, t, t + 1, t + 2} a where
@@ -560,26 +568,21 @@ def scalarPresentation (T : Scheme.{t})
 
 attribute [local irreducible] Functor.mapDerivedCategory
 
-/-- Finite inverse image with the specified finite coefficient identification.
-Source: Stacks 0D6D. -/
+/-- Finite inverse image with the specified finite coefficient identification. -/
 abbrev finitePull (n : ℕ) :=
   proEtaleRingModulePullback g (d.finiteRing Y n) (d.finiteRing X n) (d.finiteRingIso g n)
 
-/-- The functor whose value is H_n, before forgetting the quotient action.
-Source: Stacks 0D6D. -/
+/-- The functor whose value is H_n, before forgetting the quotient action. -/
 def H (n : ℕ) := d.reduction Y n ⋙ (finitePull d g n).mapDerivedCategory
 
-/-- The functor whose value is N_n, for arbitrary ambient completed inputs.
-Source: Stacks 06YY. -/
+/-- The functor whose value is N_n, for arbitrary ambient completed inputs. -/
 def N (n : ℕ) := PulledReduction.source d g ⋙
   reductionDerivedChange X (OrderedExchange.quotient d X n)
 
-/-- The actual pulled finite complex functor, on modules in each cochain degree.
-Source: Stacks 03EL. -/
+/-- The actual pulled finite complex functor, on modules in each cochain degree. -/
 abbrev ordinaryH (n : ℕ) := reductionChange Y (d.projection Y n) ⋙ finitePull d g n
 
-/-- The canonical comparison from H_n on a representative to the ordinary pulled complex.
-Source: Stacks 06YY. -/
+/-- The canonical comparison from H_n on a representative to the ordinary pulled complex. -/
 def hCounit (n : ℕ) (P : CochainComplex (reductionModules Y (d.completedRing Y)) ℤ) :
     (H d g n).obj (DerivedCategory.Q.obj P) ⟶
       DerivedCategory.Q.obj (((ordinaryH d g n).mapHomologicalComplex (.up ℤ)).obj P) :=
@@ -597,8 +600,7 @@ abbrev quotientComp (T : Scheme.{t}) (b a : ℕ) (h : a ≤ b) :
       (completedReductionProjection_comp T d b a h))
 
 /-- The recorded normalization interface, with the published coefficient sheafification
-and locally-bijective comparison specified at the existing coefficient universe.
-Source: Stacks 06YY, 0D6D. -/
+and locally-bijective comparison specified at the existing coefficient universe. -/
 abbrev ScalarNormalization (T : Scheme.{t}) :=
   @Normalization.{t + 1, t, t + 1, t + 2} T.ProEt inferInstance
     (essentiallySmallSelf.{0} T.ProEt) (ProEt.topology T) inferInstance
@@ -629,8 +631,7 @@ private theorem tensor_balance (T : Scheme.{t})
     _ = s • (a.hom.app U r • reductionTensorSection T a M U 1 x) := congrArg (s • ·) h
     _ = _ := by rw [smul_smul, mul_comm s]
 
-/-- The existing normalized derived scalar associator with explicit site instances.
-Source: Stacks 0D6D. -/
+/-- The existing normalized derived scalar associator with explicit site instances. -/
 def scalarAssoc (T : Scheme.{t}) (nrm : ScalarNormalization T)
     {R S V : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (a : R ⟶ S) (b : S ⟶ V) :
     reductionDerivedChange T a ⋙ reductionDerivedChange T b ≅
@@ -725,8 +726,7 @@ private theorem collapse_complex_eq (T : Scheme.{t}) (nrm : ScalarNormalization 
   balance_eq_of_formula T a b c h (ordinaryCollapse T nrm a b c h)
     (ordinaryCollapse_formula T nrm a b c h) P
 
-/-- The canonical successive scalar normalization of N, using the recorded normalized family.
-Source: Stacks 0D6D. -/
+/-- The canonical successive scalar normalization of N, using the recorded normalized family. -/
 def thetaN (nrm : ScalarNormalization X)
     (b a : ℕ) (h : a ≤ b) :
     N d g b ⋙ reductionDerivedChange X (reductionCoefficientMap X d b a h) ≅ N d g a :=
@@ -738,8 +738,7 @@ def thetaN (nrm : ScalarNormalization X)
       (scalarAssoc X nrm (OrderedExchange.quotient d X b)
         (reductionCoefficientMap X d b a h)) (quotientComp d X b a h))
 
-/-- The coefficient-square equation needed for the canonical inverse scalar mate.
-Source: Stacks 0D6D. -/
+/-- The coefficient-square equation needed for the canonical inverse scalar mate. -/
 def QuotientCompatibility : Prop :=
   ∀ (b a : ℕ) (h : a ≤ b),
     (d.finiteRingIso g b).hom ≫ reductionCoefficientMap X d b a h =
@@ -796,8 +795,7 @@ private theorem quotientCompatibility : QuotientCompatibility d g := by
   rw [← reassoc_of% hn]
 
 /-- Theta for H is the inverse scalar/pullback mate followed by pullback of the
-specified completed normalization; no free comparison morphism is substituted.
-Source: Stacks 0D6D, 07A4. -/
+specified completed normalization; no free comparison morphism is substituted. -/
 def thetaH (hq : QuotientCompatibility d g) (b a : ℕ) (h : a ≤ b) :
     H d g b ⋙ reductionDerivedChange X (reductionCoefficientMap X d b a h) ⟶ H d g a :=
   (Functor.associator (d.reduction Y b) (finitePull d g b).mapDerivedCategory
@@ -831,8 +829,7 @@ private theorem thetaH_isIso (hq : QuotientCompatibility d g) (b a : ℕ) (h : a
   unfold thetaH
   infer_instance
 
-/-- Ordinary inverse image of a section, with its finite scalar action retained.
-Source: Stacks 03EL. -/
+/-- Ordinary inverse image of a section, with its finite scalar action retained. -/
 def finiteGenerator (n : ℕ) (M : reductionModules Y (d.completedRing Y))
     (U : Y.ProEtᵒᵖ) (x : M.val.obj U) :
     ((ordinaryH d g n).obj M).val.obj ((proEtaleBaseChange g).op.obj U) :=
@@ -841,12 +838,11 @@ def finiteGenerator (n : ℕ) (M : reductionModules Y (d.completedRing Y))
     (reductionTensorSection Y (d.projection Y n) M U 1 x)
 
 /-- The ordinary source of the finite comparison, using the same exact inverse image
-as the strict-tower comparison. Source: Stacks 06YY, 03EL. -/
+as the strict-tower comparison. -/
 abbrev ordinaryN (n : ℕ) := PulledReduction.ordinarySource d g ⋙
   reductionChange X (OrderedExchange.quotient d X n)
 
-/-- Inverse-image generator with its target scalar action made explicit.
-Source: Stacks 03EL. -/
+/-- Inverse-image generator with its target scalar action made explicit. -/
 def constantGenerator (M : reductionModules Y (d.completedRing Y))
     (U : Y.ProEtᵒᵖ) (x : M.val.obj U) :
     ((PulledReduction.ordinarySource d g).obj M).val.obj ((proEtaleBaseChange g).op.obj U) :=
@@ -854,8 +850,7 @@ def constantGenerator (M : reductionModules Y (d.completedRing Y))
     (exchangeConstantRing X A) (exchangeConstantIso g A)).unit.app
       ((PulledReduction.res d Y).obj M)).val.app U x)
 
-/-- The comparison from N_n to its common ordinary K-flat computation.
-Source: Stacks 06YY. -/
+/-- The comparison from N_n to its common ordinary K-flat computation. -/
 def nCounit (n : ℕ) (P : CochainComplex (reductionModules Y (d.completedRing Y)) ℤ) :
     (N d g n).obj (DerivedCategory.Q.obj P) ⟶
       DerivedCategory.Q.obj (((ordinaryN d g n).mapHomologicalComplex (.up ℤ)).obj P) :=
@@ -864,8 +859,7 @@ def nCounit (n : ℕ) (P : CochainComplex (reductionModules Y (d.completedRing Y
     reductionScalarComplexCounit X (OrderedExchange.quotient d X n)
       (((PulledReduction.ordinarySource d g).mapHomologicalComplex (.up ℤ)).obj P)
 
-/-- The actual derived scalar associator between two quotient changes.
-Source: Stacks 0D6D. -/
+/-- The actual derived scalar associator between two quotient changes. -/
 def quotientAssociator
     (nrm : ScalarNormalization X)
     (c b a : ℕ) (hab : a ≤ b) (hbc : b ≤ c) :
@@ -881,8 +875,7 @@ def quotientAssociator
     (reductionCoefficientMap_comp X d c b a hab hbc)
 
 /-- All finite normalization data and laws, fixed on actual sheaf tensor complexes.
-The ordinary formulas use scalar-first tensors, as does the recorded coefficient datum.
-Source: Stacks 03EL, 0D6D and 0G7E. -/
+The ordinary formulas use scalar-first tensors, as does the recorded coefficient datum. -/
 structure Comparison where
   /-- Compatibility of the specified finite coefficient identifications. -/
   quotientCompatibility : QuotientCompatibility d g

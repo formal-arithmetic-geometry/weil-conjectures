@@ -10,7 +10,12 @@ public import WeilConjectures.AlgebraicGeometry.Pbc.PbcActualRingedExchange
 
 /-! # Completed composition and descent to all raw rational fraction arrows.
 
-Source: Bhatt--Scholze, Remark 6.8.15, p. 62; Stacks Tags 03CB, 0D6D, 07A4, 099N.
+## References
+
+* Bhatt--Scholze, Remark 6.8.15, p. 62
+* Stacks Tags 03CB, 0D6D, 07A4, 099N
+* Stacks Tags 099N, 099J, 0A0E, 0B65 and 0DV0
+* BS Remark 6.8.15
 -/
 
 @[expose] public noncomputable section
@@ -37,8 +42,7 @@ variable {X Y Z : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] [IsNoetherian Z]
 
 set_option maxHeartbeats 700000 in
 -- Nested chart conversions arise in the explicit tensor-section normalization.
-/-- Completed composition and descent to all raw rational fraction arrows.
-Source: Stacks Tags 099N, 099J, 0A0E, 0B65 and 0DV0; BS Remark 6.8.15. -/
+/-- Completed composition and descent to all raw rational fraction arrows. -/
 theorem rationalCompletedPullbackComposition (g : Y ⟶ X) (h : Z ⟶ Y)
     (sX : RationalModuleRealization l E X) (sY : RationalModuleRealization l E Y)
     (sZ : RationalModuleRealization l E Z)

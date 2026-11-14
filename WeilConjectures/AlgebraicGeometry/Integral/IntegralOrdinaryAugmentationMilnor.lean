@@ -14,7 +14,11 @@ import WeilConjectures.Algebra.Homology.HomotopyCategory.Products
 
 /-! # The unreduced Milnor presentation of an ordinary quotient augmentation
 
-Source: Stacks Project, Tag 099M; Tags 0940 and 0941
+## References
+
+* Stacks Project, Tag 099M
+* Tags 0940 and 0941
+* Stacks Project, Tag 099M, Tags 0940 and 0941, normalized strict Roos comparison
 -/
 
 @[expose] public section
@@ -168,9 +172,7 @@ private theorem ordinary_milnor_of_tail
 
 /-- The ordinary quotient augmentation, before any coefficient reduction, is a map
 of Milnor triangles from the constant tower to the principal derived quotient tower.
-Both product squares, including the shifted boundary square, are specified.
-
-Source: Stacks Project, Tag 099M, Tags 0940 and 0941, normalized strict Roos comparison. -/
+Both product squares, including the shifted boundary square, are specified. -/
 theorem integral_ordinary_augmentation_milnor (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     [HasDerivedCategory.{u + 1} (DiagonalAb W)]
     [HasDerivedCategory.{u + 1} (ℕᵒᵖ ⥤ DiagonalAb W)]

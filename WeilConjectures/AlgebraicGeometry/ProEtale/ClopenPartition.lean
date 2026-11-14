@@ -21,7 +21,11 @@ contains the inclusions of a finite partition of `W` into clopen subschemes
 inherited by every clopen subscheme of `W`
 (`AlgebraicGeometry.Scheme.ProEt.surjective_app_ofOpenImmersion_of_isClosed`).
 
-Source: Stacks Project, Tags 098F and 090M.
+## References
+
+* Stacks Project, Tags 098F and 090M
+* Stacks Project, Tag 098F
+* Stacks Project, Tag 090M
 -/
 
 @[expose] public noncomputable section
@@ -144,9 +148,7 @@ theorem exists_clopen_partition_of_forall_section {T : Scheme.{t}} (W : T.ProEt)
     exact S.downward_closed (hPS _ _ (ha _)) _
 
 /-- A covering sieve on an affine object `W`, on which evaluation of sheaves of sets preserves
-epimorphisms, contains the inclusions of a finite clopen partition of `W`.
-
-Source: Stacks Project, Tag 098F. -/
+epimorphisms, contains the inclusions of a finite clopen partition of `W`. -/
 theorem exists_clopen_partition {T : Scheme.{t}} (W : T.ProEt) [IsAffine W.left]
     (hW : ∀ (F G : Sheaf (ProEt.topology T) (Type (max u (t + 1))))
       (f : F ⟶ G), Epi f → Function.Surjective (f.hom.app (op W)))
@@ -167,9 +169,7 @@ theorem exists_clopen_partition {T : Scheme.{t}} (W : T.ProEt) [IsAffine W.left]
   exact ⟨s.left, congrArg (fun f ↦ f.left) hs⟩
 
 /-- If every covering sieve of `W` contains the inclusions of a finite clopen partition of `W`,
-then evaluation at `W` sends epimorphisms of sheaves of sets to surjections.
-
-Source: Stacks Project, Tag 090M. -/
+then evaluation at `W` sends epimorphisms of sheaves of sets to surjections. -/
 theorem surjective_app_of_exists_clopen_partition {T : Scheme.{t}} (W : T.ProEt)
     (href : ∀ S ∈ ProEt.topology T W,
       ∃ (n : ℕ) (O : Fin n → W.left.Opens),
@@ -275,9 +275,7 @@ theorem exists_section_of_isClosed {T : Scheme.{t}} (W : T.ProEt) [IsAffine W.le
     Category.assoc, hs', Category.comp_id, Category.id_comp]
 
 /-- Evaluation at a clopen subscheme of `W` sends epimorphisms of sheaves of sets to
-surjections, in every universe, if evaluation at the affine object `W` does.
-
-Source: Stacks Project, Tags 098F and 090M. -/
+surjections, in every universe, if evaluation at the affine object `W` does. -/
 theorem surjective_app_ofOpenImmersion_of_isClosed {T : Scheme.{t}} (W : T.ProEt)
     [IsAffine W.left]
     (hW : ∀ (F G : Sheaf (ProEt.topology T) (Type (max u (t + 1))))

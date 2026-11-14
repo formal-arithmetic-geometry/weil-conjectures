@@ -84,7 +84,11 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleOperations
 /-!
 # Ordinary derived operations with identified pro-etale coefficients
 
-Source: Stacks Project, Modules on Sites, and Cohomology on Sites, Sections 07A5 and 0735.
+## References
+
+* Stacks Project, Modules on Sites, and Cohomology on Sites, Sections 07A5 and 0735
+* Stacks, Section 07A5
+* Stacks, Lemma 0DVC and Section 0735
 -/
 
 @[expose] public section
@@ -435,14 +439,13 @@ private theorem proEtaleModuleInverseImage_preservesFiniteLimits :
 set_option backward.isDefEq.respectTransparency false in
 attribute [instance] proEtaleRingModules_hasKInjectiveResolutions
 
-/-- Ordinary uncompleted unbounded derived direct image via K-injectives in all modules.
-Source: Stacks, Section 07A5. -/
+/-- Ordinary uncompleted unbounded derived direct image via K-injectives in all modules. -/
 noncomputable abbrev proEtaleRingDerivedDirectImage :
     DerivedCategory (proEtaleRingModules X S) ⥤ DerivedCategory (proEtaleRingModules Y R) :=
   (proEtaleRingModuleDirectImage f R S c).rightDerivedFunctor
 
 /-- Direct image is computed on every K-injective representative, naturally in that
-representative. Source: Stacks, Section 07A5. -/
+representative. -/
 theorem proEtaleRingDerivedDirectImage_kInjective
     (I : CochainComplex (proEtaleRingModules X S) ℤ) [I.IsKInjective] :
     IsIso ((proEtaleRingModuleDirectImage f R S c).rightDerivedFunctorUnit.app
@@ -450,8 +453,7 @@ theorem proEtaleRingDerivedDirectImage_kInjective
   infer_instance
 
 
-/-- The ordinary derived adjunction on the full unbounded derived categories.
-Source: Stacks, Lemma 0DVC and Section 0735. -/
+/-- The ordinary derived adjunction on the full unbounded derived categories. -/
 theorem proEtaleRingDerivedOperations_adjunction :
     Nonempty (proEtaleRingDerivedPullback f R S c ⊣ proEtaleRingDerivedDirectImage f R S c) := by
   obtain ⟨adj⟩ := (proEtaleRingModuleOperations_properties f R S c).2.2.2.2

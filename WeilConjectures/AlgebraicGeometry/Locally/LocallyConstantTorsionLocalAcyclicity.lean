@@ -18,7 +18,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 /-!
 # Local acyclicity for locally constant torsion coefficients
 
-Source: Stacks Project, Tag 0GJR.
+## References
+
+* Stacks Project, Tag 0GJR
 -/
 
 @[expose] public section
@@ -31,8 +33,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- Local acyclicity extends to locally constant abelian sheaves whose stalk elements
 have finite order prime to the residue characteristic; in characteristic zero every
-finite order is allowed. No finiteness of stalks or common annihilator is assumed.
-Source: Stacks Project, Tag 0GJR. -/
+finite order is allowed. No finiteness of stalks or common annihilator is assumed. -/
 theorem isLocallyAcyclicRelative_of_locallyConstant_torsion
     {X S : Scheme.{u}} (f : X ⟶ S) (hf : IsLocallyAcyclic f)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

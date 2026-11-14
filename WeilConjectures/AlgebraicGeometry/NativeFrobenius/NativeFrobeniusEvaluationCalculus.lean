@@ -16,7 +16,9 @@ import WeilConjectures.CategoryTheory.Monoidal.Mod.Curry
 
 /-! # Sectionwise calculus for native and translated internal-Hom evaluation
 
-Source: Stacks 03D6 and 03EO.
+## References
+
+* Stacks 03D6 and 03EO
 -/
 
 @[expose] public section
@@ -48,9 +50,7 @@ private theorem sectionPair_map {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
   exact ConcreteCategory.congr_hom
     (congr_app (Sheaf.tensorObjComparison_naturality f g) V) (p ⊗ₜ[_] q)
 
-/-- Native morphisms into internal Hom are determined by sectionwise evaluation.
-
-Source: Stacks 03D6 and 03EO. -/
+/-- Native morphisms into internal Hom are determined by sectionwise evaluation. -/
 theorem evaluation_ext {Y : Scheme.{u}} {l : ℕ} [Fact l.Prime]
     {M N Q : AdicSheaf l Y} {f g : Q ⟶ (AdicSheaf.ihom M).obj N}
     (h : ∀ (V : Y.ProEtᵒᵖ) (z : Q.X.obj.obj V) (x : M.X.obj.obj V),
@@ -71,9 +71,7 @@ theorem evaluation_ext {Y : Scheme.{u}} {l : ℕ} [Fact l.Prime]
   rw [← tensorHom_id, ← tensorHom_id, sectionPair_map, sectionPair_map]
   exact h V z x
 
-/-- Native internal-Hom evaluation commutes with precomposition.
-
-Source: Stacks 03D6 and 03EO. -/
+/-- Native internal-Hom evaluation commutes with precomposition. -/
 theorem evaluation_map_source {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
     {M M' : AdicSheaf l X} (f : M' ⟶ M) (N : AdicSheaf l X)
     (V : X.ProEtᵒᵖ) (z : ((AdicSheaf.ihom M).obj N).X.obj.obj V)
@@ -93,9 +91,7 @@ theorem evaluation_map_source {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
     ObjectProperty.FullSubcategory.id_hom, NatTrans.id_app,
     ModuleCat.id_apply] using h
 
-/-- Native internal-Hom evaluation commutes with postcomposition.
-
-Source: Stacks 03D6 and 03EO. -/
+/-- Native internal-Hom evaluation commutes with postcomposition. -/
 theorem evaluation_map_target {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
     (M : AdicSheaf l X) {N N' : AdicSheaf l X} (g : N ⟶ N')
     (V : X.ProEtᵒᵖ) (z : ((AdicSheaf.ihom M).obj N).X.obj.obj V)
@@ -114,9 +110,7 @@ theorem evaluation_map_target {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
     ← tensorHom_id, sectionPair_map, ObjectProperty.FullSubcategory.id_hom, NatTrans.id_app,
     ModuleCat.id_apply] using h
 
-/-- Native evaluation commutes with restriction of sections.
-
-Source: Stacks 03D6 and 03EO. -/
+/-- Native evaluation commutes with restriction of sections. -/
 theorem evaluation_restriction {Y : Scheme.{u}} {l : ℕ} [Fact l.Prime]
     (M N : AdicSheaf l Y) {V W : Y.ProEtᵒᵖ} (f : V ⟶ W)
     (z : ((AdicSheaf.ihom M).obj N).X.obj.obj V) (x : M.X.obj.obj V) :
@@ -166,9 +160,7 @@ private theorem sectionPair_pushforward (Y : Scheme.{u}) (l : ℕ) [Fact l.Prime
   have h0 := ConcreteCategory.congr_hom h (z ⊗ₜ[ULift.{u + 1} (PadicAlgCl l)] x)
   exact h0
 
-/-- Native inverse-pushforward Hom transport preserves sectionwise evaluation.
-
-Source: Stacks 03D6 and 03EO. -/
+/-- Native inverse-pushforward Hom transport preserves sectionwise evaluation. -/
 theorem pushforward_evaluation (Y : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (g : Y ≅ Y) (M N : AdicSheaf l Y) (V : Y.ProEtᵒᵖ)
     (z : ((adicLowerStar l g.inv).obj ((AdicSheaf.ihom M).obj N)).X.obj.obj V)
@@ -242,9 +234,7 @@ private theorem ordinary_pure_map
       pureTensor M' N' V (a.val.app V x) (b.val.app V y) := by
   exact CategoryTheory.CochainPullback.moduleTmul_map a b V x y
 
-/-- Every twisted presentation has the specified translated evaluation on local maps.
-
-Source: Stacks 03D6 and 03EO. -/
+/-- Every twisted presentation has the specified translated evaluation on local maps. -/
 theorem translated_evaluation (Y : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (g : Y ≅ Y) :
     let _ := (translation_continuous Y g).1

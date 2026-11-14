@@ -20,7 +20,9 @@ scalar action, so it commutes with restriction of scalars along the completed is
 induced by a datum isomorphism. With the pullback and slice compatibilities of restriction
 of scalars, stratified perfect models of a transported object descend.
 
-Source: Bhatt--Scholze, Proposition 6.6.11.
+## References
+
+* Bhatt--Scholze, Proposition 6.6.11
 -/
 
 @[expose] public noncomputable section
@@ -374,8 +376,7 @@ private def pullbackTransportIso {T S : Scheme.{u}} (g : S ⟶ T) (K : PbcComple
     ((adicTowerInverseImage g).map (d.completionIso d' φ hφ T).inv)
     (Iso.refl _) (Iso.refl _) (by simp)).app K).symm
 
-/-- Stratified perfect models descend along the transport of coefficient data.
-Source: Bhatt--Scholze, Proposition 6.6.11. -/
+/-- Stratified perfect models descend along the transport of coefficient data. -/
 theorem AdicCoefficientDatum.isIntegralStratifiedPerfect_of_transport (T : Scheme.{u})
     (K : PbcCompletedDerived T d)
     (hK : IsIntegralStratifiedPerfect T d' ((d.transportDerived d' φ hφ T).obj K)) :

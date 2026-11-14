@@ -17,7 +17,11 @@ import WeilConjectures.RingTheory.StrictHenselizationLocalizedDivisorQuotient
 
 /-! # Algebraic presentation of a strict henselization divisor quotient
 
-Source: Stacks Project, Tags 04HX and 05WS.
+## References
+
+* Stacks Project, Tags 04HX and 05WS
+* Stacks Project, Tag 04HX (Lemma on stalks of the structure sheaf) and Tag 05WS (Lemma on strict
+  henselization of a quotient)
 -/
 
 @[expose] public section
@@ -28,8 +32,6 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The geometric strict henselization modulo a nonunit divisor is an algebraic strict
 henselization of a prime localization of the divisor ring. No regularity hypothesis is used.
-Source: Stacks Project, Tag 04HX (Lemma on stalks of the structure sheaf) and
-Tag 05WS (Lemma on strict henselization of a quotient).
 -/
 theorem strictHenselizationRing_divisor_quotient_presentation
     (R : CommRingCat.{u}) (f : R)

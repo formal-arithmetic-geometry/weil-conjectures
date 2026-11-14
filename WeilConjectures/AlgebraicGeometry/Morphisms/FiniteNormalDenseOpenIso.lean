@@ -16,7 +16,10 @@ import Mathlib.AlgebraicGeometry.Morphisms.Separated
 /-!
 # Comparing finite normal extensions on a dense open
 
-Source: Stacks Project, Tag 0BQL, integral-closure argument.
+## References
+
+* Stacks Project, Tag 0BQL, integral-closure argument
+* Stacks Project, Tag 0BQL, proof by integral closure, applied componentwise
 -/
 
 @[expose] public section
@@ -54,9 +57,7 @@ private theorem extend_from_normalization {L X Y : Scheme.{u}}
     simp [b]
 
 /-- Finite normal schemes are determined over a locally Noetherian base by their
-restriction to an open whose preimage is dense in both sources.
-
-Source: Stacks Project, Tag 0BQL, proof by integral closure, applied componentwise. -/
+restriction to an open whose preimage is dense in both sources. -/
 theorem finite_normal_iso_of_dense_open
     {L N E : Scheme.{u}} [IsLocallyNoetherian L]
     (n : N ⟶ L) (p : E ⟶ L) [IsFinite n] [IsFinite p]

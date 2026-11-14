@@ -35,7 +35,10 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 /-!
 # Composition of pro-etale constant-section maps
 
-Source: Stacks Project, Tag 09A5, section `section-morphism`, final paragraphs.
+## References
+
+* Stacks Project, Tag 09A5, section `section-morphism`, final paragraphs
+* Stacks Project, Tag 09A5, section `section-morphism`
 -/
 
 @[expose] public section
@@ -51,9 +54,7 @@ namespace AlgebraicGeometry.Scheme
 /-- Constant-section maps compose through the canonical direct-image comparison.
 Here the coefficient object is the regular `A`-module, and `lowerStarComp` is restriction
 along the canonical fibre-product associativity isomorphism (with the variable factor
-first in the chosen pullbacks).
-
-Source: Stacks Project, Tag 09A5, section `section-morphism`. -/
+first in the chosen pullbacks). -/
 theorem proEtaleConstantDirectImageMap_comp
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (A : Type (u + 1)) [CommRing A] :

@@ -127,8 +127,7 @@ private lemma mapped_cone_bounded
 set_option linter.unusedVariables false in
 /-- The sectionwise image of the pulled-back finite-free complex is K-flat.
 
-Source: the finite-free mono-cokernel theorem after point pullback and the exact
-internal-to-sectionwise equivalence.  The theorem's independent-coefficient clause
+The theorem's independent-coefficient clause
 is transported back along the fixed equivalence, giving the displayed complex.
 -/
 theorem finiteFreeScalarDerivedComparison_kflat

@@ -10,7 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.PrincipalThickeningObs
 
 /-! # Factoring a principal ideal transition through the structure sheaf
 
-Source: Stacks Project, Tag 0H3D, the left vertical map in its diagram.
+## References
+
+* Stacks Project, Tag 0H3D, the left vertical map in its diagram
+* Stacks Project, Tag 0H3D, the map induced by multiplication by g^c
 -/
 
 @[expose] public section
@@ -81,9 +84,7 @@ private theorem principal_sections_kill
   change e (W.toScheme.presheaf.germ U x hx _) = 0
   simpa only [map_mul, map_pow, he, map_zero, z] using hc
 
-/-- Bounded principal torsion lets the inclusion of higher powers factor through O_W.
-
-Source: Stacks Project, Tag 0H3D, the map induced by multiplication by g^c. -/
+/-- Bounded principal torsion lets the inclusion of higher powers factor through O_W. -/
 theorem principal_thickening_ideal_factor
     (R : Type u) [CommRing R] (g : R) (W : (Spec (.of R)).Opens)
     (c n : ℕ)

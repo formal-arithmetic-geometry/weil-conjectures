@@ -10,7 +10,11 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSetTerminalTransport
 
 /-! # Diagonal sections for the étale-to-pro-étale comparison
 
-Source: Stacks Project, Tag 0GLZ.
+## References
+
+* Stacks Project, Tag 0GLZ
+* Stacks Project, Tag 0GLZ, the identification of F with its comparison restriction
+* Sites, Tags 03CB and 03CC
 -/
 
 @[expose] public section
@@ -54,10 +58,7 @@ private noncomputable def adj {S T : Scheme.{u}} (f : T ⟶ S) := by
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Diagonal sections commute with a morphism of étale objects, using the same
-terminal transport as the comparison sheaf's restriction law.
-
-Source: Stacks Project, Tag 0GLZ, the identification of F with its comparison
-restriction; Sites, Tags 03CB and 03CC. -/
+terminal transport as the comparison sheaf's restriction law. -/
 theorem proEtaleComparisonDiagonalSection_naturality {X : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology (Type (u + 1)))
     (U V : X.Etale) (g : V ⟶ U) (s : F.obj.obj (op U)) :

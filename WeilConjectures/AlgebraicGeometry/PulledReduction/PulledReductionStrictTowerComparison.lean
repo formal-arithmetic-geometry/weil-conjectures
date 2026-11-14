@@ -39,7 +39,9 @@ import WeilConjectures.AlgebraicGeometry.PulledReduction.PulledReductionStrictMo
 import WeilConjectures.AlgebraicGeometry.PulledReduction.RestrictionLimitProjectionUnit
 /-! # Augmented strict reduction tower comparison
 
-Source: Stacks 099N(5).
+## References
+
+* Stacks 099N(5)
 -/
 
 @[expose] public noncomputable section

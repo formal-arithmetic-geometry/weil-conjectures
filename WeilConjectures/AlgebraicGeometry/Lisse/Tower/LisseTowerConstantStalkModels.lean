@@ -13,7 +13,10 @@ import WeilConjectures.AlgebraicGeometry.Lisse.Tower.LisseTowerCompatibleStalkMa
 
 /-! # Compatible constant stalk models before algebraic effectivity
 
-Source: Stacks Tag 09BV, finite derived local constancy and compatible trivializations.
+## References
+
+* Stacks Tag 09BV, finite derived local constancy and compatible trivializations
+* Tag 09BV (lemma-weird)
 -/
 
 @[expose] public noncomputable section
@@ -24,9 +27,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- A finite lisse normalized tower is locally a constant algebraic tower. The
 comparison is stated after restriction to the common constant completion ring.
-It constructs no effective cone E and asserts no descent of such a cone.
-
-Source: Tag 09BV (lemma-weird). -/
+It constructs no effective cone E and asserts no descent of such a cone. -/
 theorem lisse_tower_constant_stalk_models
     (X Y : Scheme.{u}) [IsNoetherian X] (g : Y ⟶ X) [IsImmersion g]
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (M : AdicTower X d)

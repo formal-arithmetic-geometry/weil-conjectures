@@ -85,7 +85,12 @@ import WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionRingIsoSupplement
 
 /-! # Underlying cohomology of K-flat coefficient change
 
-Source: Stacks Project, Tags 06YY, 06YU and 00YV.
+## References
+
+* Stacks Project, Tags 06YY, 06YU and 00YV
+* Stacks Project, Tag 06YY
+* Stacks Project, Tag 06YU
+* Stacks Project, Tags 06YY, 06YU, 03DA and 00YV
 -/
 
 @[expose] public section
@@ -94,8 +99,7 @@ universe u wA wB
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace AlgebraicGeometry.Scheme
 
-/-- The actual constant coefficient map with independently lifted coefficients.
-Source: Stacks Project, Tag 06YY. -/
+/-- The actual constant coefficient map with independently lifted coefficients. -/
 noncomputable abbrev restrictedScalarRingMap (T : Scheme.{u})
     {A B : Type u} [CommRing A] [CommRing B] (f : A →+* B) :
     proEtaleConstantRing T A ⟶ proEtaleConstantRing T B :=
@@ -104,8 +108,7 @@ noncomputable abbrev restrictedScalarRingMap (T : Scheme.{u})
       ((ULift.ringEquiv : ULift.{u + 1, u} B ≃+* B).symm.toRingHom.comp
         (f.comp (ULift.ringEquiv : ULift.{u + 1, u} A ≃+* A).toRingHom)))
 
-/-- The target coefficient module, restricted to the source ring and placed in degree zero.
-Source: Stacks Project, Tag 06YU. -/
+/-- The target coefficient module, restricted to the source ring and placed in degree zero. -/
 noncomputable def restrictedScalarCoefficientComplex (T : Scheme.{u})
     {A B : Type u} [CommRing A] [CommRing B] (f : A →+* B) :
     CochainComplex (proEtaleRingModules T (proEtaleConstantRing T A)) ℤ :=
@@ -118,8 +121,7 @@ noncomputable def restrictedScalarCoefficientComplex (T : Scheme.{u})
         (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
           (proEtaleConstantRing T B))))
 
-/-- Standard-universe tensor cohomology, before choosing a localization universe.
-Source: Stacks Project, Tag 06YU. -/
+/-- Standard-universe tensor cohomology, before choosing a localization universe. -/
 noncomputable abbrev restrictedScalarTensorCohomology (T : Scheme.{u})
     {A B : Type u} [CommRing A] [CommRing B] (f : A →+* B)
     (P : CochainComplex (proEtaleRingModules T (proEtaleConstantRing T A)) ℤ)
@@ -227,9 +229,7 @@ private theorem extensionUnderlyingTensorIso
 
 /-- Forgetting the target coefficient action identifies K-flat scalar extension
 cohomology, after arbitrary pullback, with the underlying cohomology of the tensor
-with the restricted target coefficient in degree zero.
-
-Source: Stacks Project, Tags 06YY, 06YU, 03DA and 00YV. -/
+with the restricted target coefficient in degree zero. -/
 theorem restrictedScalarTensorCohomologyComparison
     {T X : Scheme.{u}} (a : X ⟶ T)
     {A B : Type u} [CommRing A] [CommRing B] (f : A →+* B)

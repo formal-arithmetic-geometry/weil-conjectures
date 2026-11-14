@@ -11,7 +11,10 @@ import WeilConjectures.Algebra.Homology.RingedSitePullback.PullbackLocalizationO
 
 /-! # The ordinary pullback mate on localized pro-étale module sites
 
-Source: Stacks Project, Modules on Sites, Tag 04J0.
+## References
+
+* Stacks Project, Modules on Sites, Tag 04J0
+* Stacks Project, Modules on Sites, Tag 04J0, localization of a morphism of ringed sites
 -/
 
 @[expose] public section
@@ -67,9 +70,7 @@ private theorem localizedInverseMate_isIso
   rw [hcomp]
   infer_instance
 
-/-- The inverse mate of the identity-on-sections direct-image square is invertible.
-Source: Stacks Project, Modules on Sites, Tag 04J0, localization of a morphism
-of ringed sites. -/
+/-- The inverse mate of the identity-on-sections direct-image square is invertible. -/
 theorem localOrdinaryInverseMate_isIso
     {X Y : Scheme.{u}} {f : X ⟶ Y}
     {R_Y : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}}

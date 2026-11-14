@@ -17,10 +17,13 @@ import WeilConjectures.Compactification.CompactificationCategory
 
 /-! # Comparison of native Weil compactification models
 
-Source: Stacks Project, Tags 0F7I and 0F7J, compactification calculations.
-
 The auxiliary predicate spells out the refinement chain, using the canonical base structures
 of the compactifications. It introduces no new operations or chosen comparison maps.
+
+## References
+
+* Stacks Project, Tags 0F7I and 0F7J, compactification calculations
+* Stacks Project, Tag 0F7I, displayed calculation along a refinement
 -/
 
 @[expose] public section
@@ -36,8 +39,6 @@ namespace AlgebraicGeometry
 /-- The displayed refinement comparison chain, on bounded constructible native inputs.
 The local base structures are exactly `Compactification.over`, induced by the proper legs.
 All functors and all isomorphisms are in the actual native equivariant derived categories.
-
-Source: Stacks Project, Tag 0F7I, displayed calculation along a refinement; native adaptation.
 -/
 noncomputable def nativeWeilCompactificationRefinementComparisons
     (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
@@ -80,8 +81,6 @@ noncomputable def nativeWeilCompactificationRefinementComparisons
 /-- Proper refinements compare native compactification models, arbitrary models are naturally
 isomorphic, and every model compares with the framework's chosen model. Only existence is
 asserted, without a cocycle or independence assertion.
-
-Source: Stacks Project, Tags 0F7I and 0F7J, compactification calculations; native adaptation.
 -/
 theorem nativeWeilCompactificationModelComparison
     (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]

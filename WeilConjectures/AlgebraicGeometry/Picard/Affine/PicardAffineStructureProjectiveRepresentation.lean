@@ -22,7 +22,11 @@ import WeilConjectures.AlgebraicGeometry.OpenImmersionRestrictionDerivedProperti
 
 /-! # Picard affine structure projective representation
 
-Source: Stacks Project, Tags 0BF2, 0B91, 08EB and 06Z0.
+## References
+
+* Stacks Project, Tags 0BF2, 0B91, 08EB and 06Z0
+* Stacks Project, Tag 08FE, and the tensor pullback composition and unit comparisons
+* Stacks Project, Tags 0BF2 (perfect-image paragraph), 0B91(2), 08EB and 06Z0
 -/
 
 @[expose] public section
@@ -55,8 +59,7 @@ private noncomputable def affineTransportEquivalence (W : Scheme.{v}) (U : W.Ope
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 -- Deriving the open square involves several independently chosen localization instances.
-/-- Open base change and a coefficient trivialization, before using any perfectness.
-Source: Stacks Project, Tag 08FE, and the tensor pullback composition and unit comparisons. -/
+/-- Open base change and a coefficient trivialization, before using any perfectness. -/
 private theorem open_trivialized_image_spectrum_comparison
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]
@@ -181,8 +184,7 @@ private theorem open_trivialized_image_spectrum_comparison
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- A bounded finite-projective model of the restricted trivialized coefficient image.
-Source: Stacks Project, Tags 0BF2 (perfect-image paragraph), 0B91(2), 08EB and 06Z0. -/
+/-- A bounded finite-projective model of the restricted trivialized coefficient image. -/
 theorem picard_affine_structure_projective_representation
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

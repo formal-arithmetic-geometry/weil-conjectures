@@ -11,7 +11,11 @@ import WeilConjectures.AlgebraicGeometry.Lisse.Tower.LisseTowerLocalizedActual
 
 /-! # Localizing a descended semilinear tower
 
-Source: Stacks Project, Tags 03CY, 03DA, 06YY and 0H7J.
+## References
+
+* Stacks Project, Tags 03CY, 03DA, 06YY and 0H7J
+* Stacks Tags 03CY and 0H7J
+* Stacks Tags 03DA, 06YY and 0H7J
 -/
 
 @[expose] public noncomputable section
@@ -31,8 +35,7 @@ attribute [local irreducible] HasDerivedCategory.standard
   lisseTowerFixedRealization
 
 /-- First pull fixed module sheaves from V to W, then use the prescribed realization
-on W. This is a concrete functor, independent of descended levels and transitions.
-Source: Stacks Tags 03CY and 0H7J. -/
+on W. This is a concrete functor, independent of descended levels and transitions. -/
 def lisseTowerLocalRealization {X Y : Scheme.{u}} (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (U : Y.ProEt)
     (V : U.left.ProEt) (W : Y.ProEt) (f : W ⟶ ProEt.mk (V.hom ≫ U.hom)) (n : ℕ) :=
@@ -41,8 +44,7 @@ def lisseTowerLocalRealization {X Y : Scheme.{u}} (g : Y ⟶ X)
       lisseTowerFixedRealization (W.hom ≫ g) d n
 
 /-- Comparisons for the concrete localized realization, after the transitions have
-already descended. This record supplies no etale levels or normalization arrows.
-Source: Stacks Tags 03DA, 06YY and 0H7J. -/
+already descended. This record supplies no etale levels or normalization arrows. -/
 structure LisseTowerLocalizedComparisons
     (X Y : Scheme.{u}) (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
@@ -102,9 +104,7 @@ structure LisseTowerLocalizedComparisons
 
 /-- Pullback transports an already descended semilinear tower and its coefficient
 square to the explicit realization on V and W. The assertion has no universality,
-lissity, stalk or boundedness conclusion, and does not construct a transition.
-
-Source: Stacks Project, Tags 03CY, 03DA, 06YY and 0H7J. -/
+lissity, stalk or boundedness conclusion, and does not construct a transition. -/
 theorem lisseTower_localized_realization
     (X Y : Scheme.{u}) (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (M : AdicTower X d)

@@ -112,7 +112,14 @@ import WeilConjectures.ConstructibleSheaf.Pullback
 /-!
 # Realization of finite normed coefficient fields
 
-Source: Bhatt--Scholze, The pro-etale topology for schemes, Definition 6.8.1 and Remark 6.8.15.
+## References
+
+* Bhatt--Scholze, The pro-etale topology for schemes, Definition 6.8.1 and Remark 6.8.15
+* Bhatt--Scholze, Definition 6.8.1
+* Stacks 03CZ
+* Bhatt--Scholze, Remark 6.8.15
+* Stacks 03CZ, 010N, 015F, 09T5
+* Bhatt--Scholze, Definition 6.8.1 and Remark 6.8.15
 -/
 
 @[expose] public noncomputable section
@@ -127,7 +134,7 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.NormedCoefficientRealization
 
 /-- Postcomposition by a continuous ring map, in the existing universe-sized continuous
-coefficient construction. Source: Bhatt--Scholze, Definition 6.8.1. -/
+coefficient construction. -/
 def condenseMap {T T' : Type u} [TopologicalSpace T] [CommRing T] [IsTopologicalRing T]
     [TopologicalSpace T'] [CommRing T'] [IsTopologicalRing T']
     (φ : T →+* T') (hφ : Continuous φ) :
@@ -141,7 +148,7 @@ def condenseMap {T T' : Type u} [TopologicalSpace T] [CommRing T] [IsTopological
          naturality := fun _ _ _ ↦ rfl }⟩)
 
 /-- The actual termwise inverse scalar restriction for the point-induced coefficient
-isomorphism. Source: Stacks 03CZ. -/
+isomorphism. -/
 abbrev transport {Λ Λ' : Profinite.CondensedRing.{u}}
     [IsCommMonObj Λ.X] [IsCommMonObj Λ'.X] (a : Λ ≅ Λ') (Z : Scheme.{u}) :
     DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
@@ -154,7 +161,7 @@ abbrev transport {Λ Λ' : Profinite.CondensedRing.{u}}
         (condensedRingObj Λ'.X Z)).mapDerivedCategory
 
 /-- The canonical inverse-image comparison from the coefficient square induced from the
-point. Source: Stacks 03CZ. -/
+point. -/
 def pullComparison {Λ Λ' : Profinite.CondensedRing.{u}}
     [IsCommMonObj Λ.X] [IsCommMonObj Λ'.X] (a : Λ ≅ Λ')
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -168,8 +175,7 @@ def pullComparison {Λ Λ' : Profinite.CondensedRing.{u}}
 
 /-- All the categorical conclusions for one of the two coefficient isomorphisms. The
 comparison is constrained by the actual derived module-adjunction counits and the
-point-induced inverse-image comparison, rather than by a freely chosen adjunction.
-Source: Bhatt--Scholze, Remark 6.8.15; Stacks 03CZ, 010N, 015F, 09T5. -/
+point-induced inverse-image comparison, rather than by a freely chosen adjunction. -/
 def IsCoefficientTransport {Λ Λ' : Profinite.CondensedRing.{u}}
     [IsCommMonObj Λ.X] [IsCommMonObj Λ'.X] (a : Λ ≅ Λ') : Prop :=
   (∀ Z : Scheme.{u},
@@ -369,8 +375,6 @@ private theorem transport_property {Λ Λ' : Profinite.CondensedRing.{u}}
 /-- A finite normed extension is realized isometrically in the fixed algebraic closure;
 its unit ball and both condensed coefficient presentations induce the specified exact
 unbounded derived equivalences, preserving bounds and stratified local finite presentation.
-
-Source: Bhatt--Scholze, Definition 6.8.1 and Remark 6.8.15; agent expansion recorded in the DAG.
 -/
 theorem normed_coefficient_realization (ℓ : ℕ) [Fact ℓ.Prime]
     (E Ω : Type u) [NormedField E] [NormedField Ω]

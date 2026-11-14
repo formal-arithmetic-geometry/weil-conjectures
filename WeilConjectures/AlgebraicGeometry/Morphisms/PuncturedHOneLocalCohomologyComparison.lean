@@ -13,7 +13,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedHOneDerivedTorsion
 
 /-! # PuncturedHOneLocalCohomologyComparison
 
-Source: Stacks Project, Tags 0AVY and 0BK0.
+## References
+
+* Stacks Project, Tags 0AVY and 0BK0
+* Stacks Project, Tag 0BK0, Lemma 51.8.2(2), Tag 0A6T, Lemma 51.2.1, and Tag 0AVY, Lemma 47.11.1
+  (the Ext-colimit description)
 -/
 
 @[expose] public section
@@ -21,10 +25,7 @@ Source: Stacks Project, Tags 0AVY and 0BK0.
 universe u
 namespace AlgebraicGeometry.Scheme
 
-/-- Comparison from punctured-spectrum cohomology to local cohomology.
-
-Source: Stacks Project, Tag 0BK0, Lemma 51.8.2(2), Tag 0A6T, Lemma 51.2.1,
-and Tag 0AVY, Lemma 47.11.1 (the Ext-colimit description). -/
+/-- Comparison from punctured-spectrum cohomology to local cohomology. -/
 theorem punctured_h_one_subsingleton_of_local_cohomology_vanishing
     (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R]
     (W : (Spec (.of R)).Opens)

@@ -14,6 +14,12 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
 /-!
 # Evaluation on affine weakly contractible objects is conservative
+
+## References
+
+* Stacks Project, Tag 03DA
+* Stacks Project, Tag 0947(1)
+* Stacks Project, Tags 0946, 0947, 05RT, and 0115
 -/
 
 @[expose] public section
@@ -28,23 +34,20 @@ namespace AlgebraicGeometry.Scheme.ProEt
 
 variable {X : Scheme.{t}}
 
-/-- The module-sheaf category is abelian in the common site/coefficient universe.
-Source: Stacks Project, Tag 03DA; `situation-conventions`. -/
+/-- The module-sheaf category is abelian in the common site/coefficient universe. -/
 noncomputable instance sections_module_abelian (R : Sheaf (topology X) RingCat.{u}) :
     Abelian (ringedSiteModules.{max u (t + 1)} R) := by
   letI := SheafOfModules.isGrothendieckAbelianOfUniverses (topology X) R
   infer_instance
 
-/-- Evaluation of module sheaves on a site object is additive.
-Source: Stacks Project, Tag 03DA; `situation-conventions`. -/
+/-- Evaluation of module sheaves on a site object is additive. -/
 noncomputable instance sections_evaluation_additive
     (R : Sheaf (topology X) RingCat.{u}) (W : X.ProEt) :
     (SheafOfModules.evaluation.{max u (t + 1)} R (op W)).Additive :=
   inferInstanceAs ((SheafOfModules.forget R ⋙
     PresheafOfModules.evaluation R.obj (op W)).Additive)
 
-/-- Exactness is detected on affine weakly contractible objects by local lifting.
-Source: Stacks Project, Tag 0947(1). -/
+/-- Exactness is detected on affine weakly contractible objects by local lifting. -/
 private theorem exact_sections_iff
     (R : Sheaf (topology X) RingCat.{u})
     (S : ShortComplex (ringedSiteModules.{max u (t + 1)} R)) :
@@ -93,8 +96,6 @@ private theorem exact_sections_iff
 
 /-- Evaluation on affine weakly contractible objects detects exact sequences, acyclic
 complexes, isomorphisms, and quasi-isomorphisms of modules on the small pro-etale site.
-
-Source: Stacks Project, Tags 0946, 0947, 05RT, and 0115.
 
 Clause 1 is Proposition 0947(1); clauses 2--3 are its degreewise and cone
 consequences, as expanded in the blueprint proof.

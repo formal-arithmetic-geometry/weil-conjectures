@@ -14,7 +14,12 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
 
 import WeilConjectures.AlgebraicGeometry.FundamentalGroup.ExtendOverInertia
 
-/-! Generic section comparison for a normalization over a local trait. -/
+/-! Generic section comparison for a normalization over a local trait.
+
+## References
+
+* Stacks Project, Tag 0EYJ, local trait reduction, and Tag 0EYI
+-/
 
 @[expose] public section
 
@@ -30,9 +35,7 @@ Let `a: Spec 𝒪_{S,s} ⟶ S` be the canonical morphism, `n` the base change al
 ring map `δ: 𝒪_{S,s} →+* A` into a domain with fraction field `K`, the composite
 `𝒪_{S,s} → A → K` extends to `ε: k(S) →+* K`, and the pullback of `n` along
 `t: Spec K ⟶ Spec 𝒪_{S,s}` followed by `τ` is identified over `Spec K` with the pullback of
-the Galois cover `Z` along `b = Spec ε` followed by the generic section `sη`.
-
-Source: Stacks Project, Tag 0EYJ, local trait reduction, and Tag 0EYI. -/
+the Galois cover `Z` along `b = Spec ε` followed by the generic section `sη`. -/
 theorem GaloisCover.trait_normalization_generic_section_comparison {S C : Scheme.{u}}
     [IsNoetherian S] [IsIntegral S]
     (c : C ⟶ S) (σ : S ⟶ C) (hσ : σ ≫ c = 𝟙 S)

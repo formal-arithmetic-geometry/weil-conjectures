@@ -32,7 +32,10 @@ import Mathlib.CategoryTheory.Sites.CoverPreserving
 
 /-! # Flatness under sectionwise reindexing
 
-Source: Stacks Project, Tags 08FC and 05VD.
+## References
+
+* Stacks Project, Tags 08FC and 05VD
+* Stacks Project
 -/
 
 @[expose] public section
@@ -56,9 +59,7 @@ private theorem postcompose_cocontinuous
   exact (E.toAdjunction.isCocontinuous_iff_coverPreserving _ _).2 e.2.2.2.2.some
 
 /-- Sectionwise inverse image with an invertible coefficient identification preserves
-flat module sheaves.
-
-Source: Stacks Project. -/
+flat module sheaves. -/
 theorem isoSectionwiseModuleInverseImage_preservesFlat
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [EssentiallySmall.{u + 1} X.ProEt] [EssentiallySmall.{u + 1} Y.ProEt]

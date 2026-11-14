@@ -12,7 +12,10 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.ProEtaleComparisonM
 
 /-! # Descent for the terminal sections of etale inverse images
 
-Source: Stacks Project, Tag 0GLZ, first paragraph; Tag 09XN.
+## References
+
+* Stacks Project, Tag 0GLZ, first paragraph
+* Tag 09XN
 -/
 
 @[expose] public section

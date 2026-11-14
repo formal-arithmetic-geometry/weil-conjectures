@@ -15,7 +15,12 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.AffineTorsorSplitActio
 import WeilConjectures.AlgebraicGeometry.Morphisms.AffineTorsorSingleStabilizerComponent
 import WeilConjectures.AlgebraicGeometry.Morphisms.AffineTorsorRepresentativeComponentCover
 
-/-! # Descent of individual orbit components of a split finite étale cover -/
+/-! # Descent of individual orbit components of a split finite étale cover
+
+## References
+
+* Stacks Project, Tags 03SF and 0EYG
+-/
 
 @[expose] public section
 universe u
@@ -23,9 +28,7 @@ set_option autoImplicit false
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- Descent identifies the individual orbit components before assembling the product ring.
-
-Source: Stacks Project, Tags 03SF and 0EYG. -/
+/-- Descent identifies the individual orbit components before assembling the product ring. -/
 theorem affine_torsor_orbit_component_descent
     (R H : CommRingCat.{u}) (g : R) (ι : R →+* H)
     (C : Type u) [CommRing C] [Algebra H C] [IsDomain C]

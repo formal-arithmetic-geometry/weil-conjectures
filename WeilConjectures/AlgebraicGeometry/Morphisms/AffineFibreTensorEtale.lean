@@ -11,7 +11,10 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 
 /-! # Etaleness of the affine fibre algebra
 
-Source: Stacks Project, Tag 0BJF, fibre-algebra argument.
+## References
+
+* Stacks Project, Tag 0BJF, fibre-algebra argument
+* Stacks Project, Tag 0BJF, fibre-algebra argument, and affine base change
 -/
 
 @[expose] public section
@@ -19,9 +22,7 @@ universe u
 open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- An affine fibre is etale precisely when its residue-field tensor algebra is etale.
-
-Source: Stacks Project, Tag 0BJF, fibre-algebra argument, and affine base change. -/
+/-- An affine fibre is etale precisely when its residue-field tensor algebra is etale. -/
 theorem etale_fibre_iff_etale_tensor_section_algebra
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsAffineHom f]
     (U : Y.affineOpens) (y : Y) (hy : y ∈ U.1) :

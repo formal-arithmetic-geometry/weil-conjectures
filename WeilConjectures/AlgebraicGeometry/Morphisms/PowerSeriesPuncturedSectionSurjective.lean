@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedHomAlgebr
 /-!
 # Surjectivity of restriction on the punctured power-series section
 
-Source: Stacks Project, Tags 0EY9, 0BK0, 0EKP and 0EL8
+## References
+
+* Stacks Project, Tags 0EY9, 0BK0, 0EKP and 0EL8
 -/
 
 @[expose] public section

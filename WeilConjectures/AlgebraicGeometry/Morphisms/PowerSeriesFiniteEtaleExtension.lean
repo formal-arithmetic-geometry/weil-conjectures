@@ -21,7 +21,12 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteEtaleDescentNearClosedP
 /-!
 # Extending finite etale covers of a power-series open
 
-Source: Stacks Project, Tag 0EYA, with the boundary depth calculation of Tag 0337
+## References
+
+* Stacks Project, Tag 0EYA, with the boundary depth calculation of Tag 0337
+* Stacks Project, Tag 0EYA
+* Tag 0EY6(1), (2), (a), (b)
+* Tag 0337
 -/
 
 @[expose] public section
@@ -31,9 +36,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- A finite etale cover of the indicated power-series open extends to a finite
-etale cover, with depth at least two above the complement.
-
-Source: Stacks Project, Tag 0EYA; Tag 0EY6(1), (2), (a), (b); Tag 0337 -/
+etale cover, with depth at least two above the complement. -/
 theorem exists_finite_etale_extension_of_power_series_open
     (B : Type u) [CommRing B] [IsLocalRing B] [IsNoetherianRing B]
     (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth (R := B) B)

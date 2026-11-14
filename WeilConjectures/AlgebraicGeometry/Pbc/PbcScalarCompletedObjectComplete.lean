@@ -12,6 +12,10 @@ import all WeilConjectures.TraceFormula.Supporting.FiniteFreeCompletedScalarComp
 import all WeilConjectures.SmoothPurity.Sf.SfDerivedCompleteLegacyComparison
 
 /-! # Scalar tensor carries the output of the source completion reflector to a complete object.
+
+## References
+
+* Stacks Project, Tags 099B and 0A0E
 -/
 
 @[expose] public section
@@ -175,8 +179,7 @@ private noncomputable def scalarComplete_model (W : Scheme.{u}) :
     (WeilConjectures.completedCoefficientMap l E F i W)
     (pbcScalarCoefficientMap l E F i W) hinv).symm
 
-/-- Scalar tensor carries the output of the source completion reflector to a complete object.
-Source: Stacks Project, Tags 099B and 0A0E. -/
+/-- Scalar tensor carries the output of the source completion reflector to a complete object. -/
 theorem pbcScalarCompletedObjectComplete (W : Scheme.{u})
     (K : PbcCompletedDerived W (pbcIntegralDatum l E)) :
     PbcIsIntrinsicallyComplete W (pbcIntegralDatum l F)

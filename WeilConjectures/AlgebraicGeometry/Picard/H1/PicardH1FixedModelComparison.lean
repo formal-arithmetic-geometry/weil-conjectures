@@ -29,7 +29,12 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 
 /-! # Joint degree-one comparison for a fixed minimal source model
 
-Source: Stacks Project, Tag 0BF2, the displayed chain maps and their residue comparison.
+## References
+
+* Stacks Project, Tag 0BF2, the displayed chain maps and their residue comparison
+* Stacks Project, Tag 0BF2, the finite free degree-one calculation
+* Stacks Project, Tag 0BF2, displayed chain maps
+* Tags 08CR and 0B91
 -/
 
 @[expose] public section
@@ -80,7 +85,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 -- The tensor and quotient comparison contains several dependent module instances.
 /-- The residue square yields joint finite free coordinates.
-Source: Stacks Project, Tag 0BF2, the finite free degree-one calculation.
 The argument uses only the supplied square, source minimality and target retracts. -/
 private theorem residue_joint_coordinates
     (W : Scheme.{v}) (U : W.Opens) (p : Ideal Γ(W, U)) [p.IsPrime]
@@ -238,7 +242,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option linter.unusedVariables false in
 /-- On an affine with trivial target bundles, construct the joint degree-one map
 out of a supplied minimal source complex and identify its residue map geometrically.
-Source: Stacks Project, Tag 0BF2, displayed chain maps; Tags 08CR and 0B91
 -/
 theorem picard_h1_fixed_model_comparison
     [∀ Y : Scheme.{v},

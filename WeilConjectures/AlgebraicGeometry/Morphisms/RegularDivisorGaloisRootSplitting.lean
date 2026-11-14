@@ -18,8 +18,11 @@ import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 /-!
 # Killing ramification by one root cover
 
-Source: Stacks Project, Tags 09EB and 0EYG, paragraphs on the strictly henselian base
-and the extension after adjoining a root.
+## References
+
+* Stacks Project, Tags 09EB and 0EYG, paragraphs on the strictly henselian base and the extension
+  after adjoining a root
+* Stacks Project, Tags 09EB and 0EYG, proof through the construction of B' and C
 -/
 
 @[expose] public section
@@ -150,8 +153,7 @@ private theorem split_over_ambient_of_section
   simpa [E, Category.assoc] using congrArg (fun k ↦ E.hom ≫ k) hδ
 
 /-- A prime-to-characteristic torsor splits after one punctured root cover, locally on the base.
-
-Source: Stacks Project, Tags 09EB and 0EYG, proof through the construction of B' and C. -/
+-/
 theorem GaloisCover.regular_divisor_root_splitting
     {L U : Scheme.{u}} (i : U ⟶ L)
     (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)

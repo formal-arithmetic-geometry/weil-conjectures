@@ -19,7 +19,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Small
 /-!
 # Descent of an invariant finite Galois germ representative
 
-Source: Stacks Project, Tag 04JM, direct proof of Lemma 59.56.5.
+## References
+
+* Stacks Project, Tag 04JM, direct proof of Lemma 59.56.5
 -/
 
 @[expose] public section

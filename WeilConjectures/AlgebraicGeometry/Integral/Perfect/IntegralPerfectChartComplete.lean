@@ -11,7 +11,13 @@ import WeilConjectures.AlgebraicGeometry.Stratum.StratumCompletionUnitRestrictio
 import WeilConjectures.AlgebraicGeometry.Integral.IntegralChartPullbackComparison
 import WeilConjectures.AlgebraicGeometry.ProperBaseChange.CechPerfectModelCompleteness
 
-/-! # Completeness of a single perfect integral chart -/
+/-! # Completeness of a single perfect integral chart
+
+## References
+
+* Bhatt--Scholze, Proposition 6.6.11, reverse implication
+* Lemma 6.5.8(1),(2)
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -24,8 +30,7 @@ namespace AlgebraicGeometry.Scheme
 attribute [-instance] AlgebraicGeometry.ProEtale.surjectiveTower_wEqualsLocallyBijective
 
 set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
-/-- A perfect integral model on one pro-etale chart is intrinsically complete there.
-Source: Bhatt--Scholze, Proposition 6.6.11, reverse implication; Lemma 6.5.8(1),(2). -/
+/-- A perfect integral model on one pro-etale chart is intrinsically complete there. -/
 theorem integralPerfectChart_complete
     (T : Scheme.{u}) [IsNoetherian T] (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

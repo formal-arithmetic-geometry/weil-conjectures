@@ -12,7 +12,9 @@ import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 /-!
 # Coordinate rings of an affine open over a directed inverse system
 
-Source: Stacks Project, Limits, Tags 01YX and 01YW.
+## References
+
+* Stacks Project, Limits, Tags 01YX and 01YW
 -/
 
 @[expose] public section
@@ -25,9 +27,7 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 /-- An affine open and its inverse images have compatible spectrum presentations over
-an upper-tail coordinate-ring diagram, including its colimit.
-
-Source: Stacks Project, Limits, Tags 01YX and 01YW. -/
+an upper-tail coordinate-ring diagram, including its colimit. -/
 theorem exists_affineOpen_ringSystem_of_isLimit
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u})

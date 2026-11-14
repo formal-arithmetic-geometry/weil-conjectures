@@ -16,7 +16,11 @@ import WeilConjectures.AlgebraicGeometry.DerivedCategory
 import WeilConjectures.AlgebraicGeometry.OpenRestrictionKFlatModel
 
 /-! # Termwise finite-free models under localized derived pullback
-Source: Stacks Project, Tags 06YD, 06YJ and 08DW.
+
+## References
+
+* Stacks Project, Tags 06YD, 06YJ and 08DW
+* Stacks Project, Tag 03ER
 -/
 
 @[expose] public section
@@ -25,8 +29,7 @@ universe u wX wS wT wW wY
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-/-- Finite free terms are flat.
-Source: Stacks Project, Tag 03ER. -/
+/-- Finite free terms are flat. -/
 private theorem finiteFreeTerms_are_flat
     {T : Scheme.{u}}
     (P : CochainComplex (SheafOfModules.{u} (moduleRings T.toRingedSpace)) ℤ)
@@ -73,8 +76,7 @@ private theorem tensor_derived_model {X Y : Scheme.{u}} (g : X ⟶ Y)
     (DerivedCategory.quotientCompQhIso _).app _ ≪≫
     DerivedCategory.Q.mapIso ((NatIso.mapHomologicalComplex e (.up ℤ)).app P)⟩
 
-/-- Compute the localized derived pullback of an exact open restriction termwise.
-Source: Stacks Project, Tags 06YD, 06YJ and 08DW. -/
+/-- Compute the localized derived pullback of an exact open restriction termwise. -/
 theorem localizedMixedDerivedPullback_finiteFree_model
     {S T : Scheme.{u}}
     [HasDerivedCategory.{wT}

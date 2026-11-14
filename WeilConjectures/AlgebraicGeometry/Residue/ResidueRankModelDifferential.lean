@@ -11,7 +11,11 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 
 /-! # Residue vanishing of the differential in a Betti-rank model
 
-Source: Stacks Project, Tag 0BCD, minimal free model; Tag 0BF2, first source complex.
+## References
+
+* Stacks Project, Tag 0BCD, minimal free model
+* Tag 0BF2, first source complex
+* Stacks Project, Tag 0BCD and Tag 0BF2, first displayed source complex
 -/
 
 @[expose] public section
@@ -60,8 +64,7 @@ private theorem differential_zero_of_equal_dimensions
   rw [CategoryTheory.Limits.comp_zero]
   exact C.iCycles_d i j
 
-/-- Every degree-zero differential coordinate of a bounded Betti-rank model has zero residue.
-Source: Stacks Project, Tag 0BCD and Tag 0BF2, first displayed source complex. -/
+/-- Every degree-zero differential coordinate of a bounded Betti-rank model has zero residue. -/
 theorem residueRankModel_differential_eval_eq_zero
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

@@ -19,7 +19,13 @@ public import WeilConjectures.ConstructibleSheaf.Defs
 import WeilConjectures.AlgebraicGeometry.Relative.RelativeFiniteModelSliceEquivalence
 import WeilConjectures.AlgebraicGeometry.Relative.RelativeFiniteConstantModelIdentification
 
-/-! # Constant module comparisons on each slice of the equivalent small site -/
+/-! # Constant module comparisons on each slice of the equivalent small site
+
+## References
+
+* Stacks Project, Modules on Sites, Tags 03CY and 093U
+* Sites, Tag 03A0
+-/
 
 @[expose] public noncomputable section
 
@@ -32,9 +38,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 /-- The explicit small-site coefficient transport identifies constant local models
-on each slice, keeping the same coefficient module. No finiteness assumption is needed.
-
-Source: Stacks Project, Modules on Sites, Tags 03CY and 093U; Sites, Tag 03A0 -/
+on each slice, keeping the same coefficient module. No finiteness assumption is needed. -/
 theorem relativeFiniteConstantSliceComparison {X Y : Scheme.{u}} (g : Y ⟶ X)
     (B : Type (u + 1)) [CommRing B]
     (F : pbcModules Y ((adicTowerInverseImage g).obj (adicLisseConstantRing X B)))

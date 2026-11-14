@@ -44,9 +44,6 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleSurjectiveTowerDerivedLi
 /-!
 # Derived limits of surjective towers on the small pro-etale site
 
-Source: Bhatt--Scholze, Proposition 3.1.10, Proposition 3.2.3(1), and Proposition 4.2.8; Stacks
-Project, Tags 07KC, 08TC, and 06XS.
-
 `n: ℕ` denotes positive level `n + 1`. Products and inverse limits are the existing
 Mathlib constructions. The derived product is asserted to exist and the Roos assertion
 works for every choice of its limit structure, without an existence hypothesis.
@@ -57,6 +54,13 @@ works for every choice of its limit structure, without an existence hypothesis.
   Mathlib's sheafification structures to larger coefficient universes.
 * `proEtale_surjectiveTower_derivedLimit` states the short exact Roos sequence, its
   derived-limit triangle, and uniqueness of compatible lifts from degree-zero sheaves.
+
+## References
+
+* Bhatt--Scholze, Proposition 3.1.10, Proposition 3.2.3(1), and Proposition 4.2.8
+* Stacks Project, Tags 07KC, 08TC, and 06XS
+* Bhatt--Scholze, Proposition 3.1.10 (sign changed to `1 - s`), Proposition 3.2.3(1), and
+  Proposition 4.2.8
 -/
 
 @[expose] public section
@@ -358,9 +362,6 @@ set_option maxHeartbeats 800000 in
 set_option backward.isDefEq.respectTransparency false in
 /-- A surjective tower of module sheaves has its ordinary limit as a derived limit,
 with its canonical projections and the triangle of its short exact Roos sequence.
-
-Source: Bhatt--Scholze, Proposition 3.1.10 (sign changed to `1 - s`), Proposition 3.2.3(1), and
-Proposition 4.2.8; Stacks Project, Tags 07KC, 08TC, and 06XS.
 -/
 theorem proEtale_surjectiveTower_derivedLimit
     (Y : Scheme.{t})

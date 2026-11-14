@@ -19,8 +19,6 @@ import WeilConjectures.AlgebraicGeometry.Lisse.LisseNormalizedTowerLocalModels
 /-!
 # Local effectivity of normalized bounded constructible towers
 
-Source: Stacks Tags 09AL, 09BU--09BX and 09AV.
-
 The existing AdicTower packages the strict derived tower, quotient-linear levels,
 evaluation identifications, normalization isomorphisms, transitions and quotient cocycle.
 The positive level n+1 is indexed by n: ℕ. Intrinsic constructibility uses the canonical
@@ -28,6 +26,12 @@ constant-to-functions coefficient comparison. The etale-origin conclusion uses t
 existing bounded-constructible essential image, transported on actual cochain
 representatives along the canonical coefficient-ring isomorphism. Thus no new derived
 scalar functor or chosen comparison equivalence is needed.
+
+## References
+
+* Stacks Tags 09AL, 09BU--09BX and 09AV
+* Stacks Tag 09AL
+* agent assembly of Stacks 09AL, 09BU--09BX, 09AV
 -/
 
 @[expose] public noncomputable section
@@ -45,8 +49,7 @@ set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 C represents an object in the existing finite-coefficient bounded-constructible essential
 image. Its coefficient transport is restriction along the canonical ring-sheaf comparison,
 termwise before localization. This is just a presentation of the same derived object,
-not an additional condition on the representative.
-Source: Stacks Tag 09AL. -/
+not an additional condition on the representative. -/
 def IsAdicTowerLevelOfBoundedConstructibleEtaleOrigin
     (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (M : AdicTower X d) (n : ℕ) : Prop :=
@@ -76,7 +79,6 @@ private theorem inverse_normalization_square
 /-- A normalized adic tower with intrinsically constructible cohomology in one common
 interval has bounded constructible etale origin at every level and admits all the common
 local-model data of uniformly bounded constructibility. Local terms need not be projective.
-Source: agent assembly of Stacks 09AL, 09BU--09BX, 09AV.
 -/
 theorem normalizedConstructibleTower_local_effectivity
     (X : Scheme.{u}) [IsNoetherian X] {A : Type (u + 1)} [CommRing A]

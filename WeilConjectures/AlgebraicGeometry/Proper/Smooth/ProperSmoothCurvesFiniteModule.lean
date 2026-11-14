@@ -26,8 +26,12 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 /-!
 # Constructibility for proper smooth families of curves with finite coefficients
 
-Source: Stacks Project, Tag 0GKW; Tag 0GK3 for dimension zero, Tag 02G1 for the fibre-dimension
-decomposition.
+## References
+
+* Stacks Project, Tag 0GKW
+* Tag 0GK3 for dimension zero, Tag 02G1 for the fibre-dimension decomposition
+* Stacks Project, Tag 0GKW (dimension one), Tag 0GK3 (dimension zero), and Tag 02G1 (locally
+  constant smooth fibre dimension)
 -/
 
 @[expose] public section
@@ -170,9 +174,6 @@ private theorem finite_constant_total_constructible
 nonempty geometrically connected fibres of dimension at most one are constructible,
 when the additive orders of the coefficients are invertible on the base. `GeometricallyConnected`
 includes nonempty fibres; dimension is measured on the residue-field fibres.
-
-Source: Stacks Project, Tag 0GKW (dimension one), Tag 0GK3 (dimension zero),
-and Tag 02G1 (locally constant smooth fibre dimension).
 -/
 theorem properSmoothCurves_finiteModule_higherDirectImage_constructible
     {C S : Scheme.{u}} [IsLocallyNoetherian S] [CompactSpace S]

@@ -43,7 +43,11 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 
 /-! # Injective row descent on a pro-etale hypercover
-Source: Stacks Project, Hypercoverings, Tags 01GE and 01GW.
+
+## References
+
+* Stacks Project, Hypercoverings, Tags 01GE and 01GW
+* Stacks Project, Tags 01GE and 01GW, ringed-module analogue
 -/
 
 @[expose] public section
@@ -81,8 +85,7 @@ private theorem singleAugmentation_quasiIso
 -- Transporting the ringed site unfolds its pushforward and scalar restriction functors.
 set_option backward.isDefEq.respectTransparency false in
 /-- The augmented section row of an injective module sheaf on a representable
-hypercover is quasi-isomorphic, independently of weak contractibility.
-Source: Stacks Project, Tags 01GE and 01GW, ringed-module analogue. -/
+hypercover is quasi-isomorphic, independently of weak contractibility. -/
 theorem hypercoverRowAugmentationComplex_quasiIso_of_injective
     (X : Scheme.{u}) (R : Sheaf (topology X) CommRingCat.{u + 1})
     (W : X.ProEt) (U : SimplicialObject (Over W))

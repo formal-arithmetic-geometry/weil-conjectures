@@ -40,11 +40,20 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Proper.ProEtaleProperOpenCouni
 /-!
 # Proper/open comparison for all pro-etale module sheaves
 
-Source: Stacks Project, Tags 09AE and 09BN (open functors), with etale analogue Tag 0F7B.
-
 The comparison uses sectionwise open restriction and the inverse open unit, followed
 by the counit of the specified open extension adjunction. No etale-origin condition
 is imposed on the sheaf.
+
+## References
+
+* Stacks Project, Tags 09AE and 09BN (open functors), with etale analogue Tag 0F7B
+* Stacks, Tags 00YV and 03D1
+* Stacks, Tag 09AE
+* Stacks, Tags 00YV and 09AE
+* Stacks, Tag 09BN
+* Stacks, Tags 09AE and 09BN
+* etale analogue Tag 0F7B
+* etale analogue 0F7B
 -/
 
 @[expose] public section
@@ -61,8 +70,7 @@ namespace AlgebraicGeometry.Scheme
 variable (A : Type u) [CommRing A] [Finite A]
 
 /-- Reexpress the existing sectionwise direct image in canonical realization coordinates.
-The comparison is fixed on scalar-unit sections, so this introduces no arbitrary map.
-Source: Stacks, Tags 00YV and 03D1. -/
+The comparison is fixed on scalar-unit sections, so this introduces no arbitrary map. -/
 noncomputable def sfProperOpenDirectImageCoordinates {X Y : Scheme.{u}} (f : X ⟶ Y) :
     proEtaleConstantModuleDirectImage f A ≅
       sfIntrinsicTransport A (ProEtale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) f) :=
@@ -74,8 +82,7 @@ noncomputable def sfProperOpenDirectImageCoordinates {X Y : Scheme.{u}} (f : X �
 
 /-- Open restriction of a direct image, in fixed-scalar coordinates, induced by the
 canonical map `Q ×_W U → Q ×_T V`. For a Cartesian square this map is an isomorphism.
-Thus the comparison is exactly evaluation on the same fibre product, including maps.
-Source: Stacks, Tag 09AE. -/
+Thus the comparison is exactly evaluation on the same fibre product, including maps. -/
 noncomputable def sfProperOpenFixedRestrictionIso {U V W T : Scheme.{u}}
     (r : U ⟶ W) (k : U ⟶ V) (i : W ⟶ T) (p : V ⟶ T)
     [IsOpenImmersion i] [IsOpenImmersion k] (sq : IsPullback r k i p) :
@@ -100,8 +107,7 @@ noncomputable def sfProperOpenFixedRestrictionIso {U V W T : Scheme.{u}}
 
 /-- The same sectionwise open-restriction isomorphism with the intrinsic constant-ring
 module actions. Only the canonical realization unit, counit and scalar-normalized
-comparison of direct images are inserted.
-Source: Stacks, Tags 00YV and 09AE. -/
+comparison of direct images are inserted. -/
 noncomputable def sfProperOpenRestrictionIso {U V W T : Scheme.{u}}
     (r : U ⟶ W) (k : U ⟶ V) (i : W ⟶ T) (p : V ⟶ T)
     [IsOpenImmersion i] [IsOpenImmersion k] (sq : IsPullback r k i p) :
@@ -113,8 +119,7 @@ noncomputable def sfProperOpenRestrictionIso {U V W T : Scheme.{u}}
     sfIntrinsicTransportComp A _ _ ≪≫
     isoWhiskerLeft (sfIntrinsicOpenRestriction k A) (sfProperOpenDirectImageCoordinates A r).symm
 
-/-- The open unit as a natural isomorphism, using the already recorded open-unit theorem.
-Source: Stacks, Tag 09BN. -/
+/-- The open unit as a natural isomorphism, using the already recorded open-unit theorem. -/
 noncomputable def sfProperOpenUnitIso {U V : Scheme.{u}} (k : U ⟶ V)
     [IsOpenImmersion k] : 𝟭 _ ≅ sfIntrinsicExtensionByZero k A ⋙
       sfIntrinsicOpenRestriction k A :=
@@ -123,8 +128,7 @@ noncomputable def sfProperOpenUnitIso {U V : Scheme.{u}} (k : U ⟶ V)
     asIso ((sfIntrinsicExtensionByZeroAdjunction k A).unit.app M))
     (fun {_ _} f ↦ (sfIntrinsicExtensionByZeroAdjunction k A).unit.naturality f)
 
-/-- The specified `λ`: open restriction followed by the inverse of the open unit.
-Source: Stacks, Tags 09AE and 09BN. -/
+/-- The specified `λ`: open restriction followed by the inverse of the open unit. -/
 noncomputable def sfProperOpenLambda {U V W T : Scheme.{u}}
     (r : U ⟶ W) (k : U ⟶ V) (i : W ⟶ T) (p : V ⟶ T)
     [IsOpenImmersion i] [IsOpenImmersion k] (sq : IsPullback r k i p) :
@@ -134,8 +138,7 @@ noncomputable def sfProperOpenLambda {U V W T : Scheme.{u}}
     isoWhiskerRight (sfProperOpenUnitIso A k).symm (proEtaleConstantModuleDirectImage r A)
 
 /-- The specified `γ`, the transpose of `λ⁻¹` under `i_! ⊣ i^*`.
-Its component is `i_!(λ_M⁻¹)` followed by the open counit at `p_* k_! M`.
-Source: Stacks, Tag 09AE; etale analogue Tag 0F7B. -/
+Its component is `i_!(λ_M⁻¹)` followed by the open counit at `p_* k_! M`. -/
 noncomputable def sfProperOpenSheafComparison {U V W T : Scheme.{u}}
     (r : U ⟶ W) (k : U ⟶ V) (i : W ⟶ T) (p : V ⟶ T)
     [IsOpenImmersion i] [IsOpenImmersion k] (sq : IsPullback r k i p) :
@@ -168,8 +171,7 @@ theorem sfProperOpenCounit_isIso {V W T : Scheme.{u}} (p : V ⟶ T) [IsProper p]
 /-- Proper direct image commutes with open extension by zero for every pro-etale module
 sheaf over a finite commutative constant ring, with its canonical comparison and naturality.
 There is no quasi-compactness condition on the open immersion and no boundedness or
-etale-origin restriction on the module sheaf.
-Source: Stacks, Tags 09AE and 09BN; etale analogue 0F7B. -/
+etale-origin restriction on the module sheaf. -/
 theorem sfProperOpenSheafComparison_isIso {V W T : Scheme.{u}} (p : V ⟶ T) [IsProper p]
     (i : W ⟶ T) [IsOpenImmersion i] :
     IsIso (sfProperOpenSheafComparison A (pullback.snd p i) (pullback.fst p i) i p

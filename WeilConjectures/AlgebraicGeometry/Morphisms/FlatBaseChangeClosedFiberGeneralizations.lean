@@ -14,7 +14,11 @@ import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 /-!
 # Lifting generalizations in the closed fibre of a flat chart
 
-Source: Stacks Project, Tags 0EYB and 00HS, closed-fibre base change and going down.
+## References
+
+* Stacks Project, Tags 0EYB and 00HS, closed-fibre base change and going down
+* Stacks Project, Tag 0EYB, the closed-fibre image argument
+* Tag 00HS, going down
 -/
 
 @[expose] public section
@@ -24,9 +28,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- A flat morphism to a base-changed scheme lifts generalizations in the original
-closed fibre to generalizations over the closed point of the changed base.
-
-Source: Stacks Project, Tag 0EYB, the closed-fibre image argument; Tag 00HS, going down. -/
+closed fibre to generalizations over the closed point of the changed base. -/
 theorem exists_closed_fiber_generalization_lifts
     (A B R : Type u) [CommRing A] [IsLocalRing A]
     [CommRing B] [IsLocalRing B] [CommRing R]

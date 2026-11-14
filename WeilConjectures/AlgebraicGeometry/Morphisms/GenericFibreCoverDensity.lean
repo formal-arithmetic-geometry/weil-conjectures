@@ -14,7 +14,11 @@ import WeilConjectures.Mathlib.RingTheory.Smooth.StandardSmoothOfFree
 /-!
 # Reducedness and density for generic restrictions of smooth covers
 
-Source: Stacks Project, Tags 033B and 01UA.
+## References
+
+* Stacks Project, Tags 033B and 01UA
+* Stacks Project, Tag 033B (smooth algebras over reduced rings), and Tag 01UA (flat morphisms
+  locally of finite presentation are open)
 -/
 
 @[expose] public section
@@ -45,10 +49,7 @@ private theorem smooth_source_reduced_of_integral {X S : Scheme.{u}} (f : X ⟶ 
   exact isReduced_of_isReduced_stalk X
 
 /-- The generic restriction of an étale cover of a smooth scheme over an integral
-base is dominant, and the cover is reduced.
-
-Source: Stacks Project, Tag 033B (smooth algebras over reduced rings),
-and Tag 01UA (flat morphisms locally of finite presentation are open). -/
+base is dominant, and the cover is reduced. -/
 theorem genericFibre_cover_reduced_and_dominant {S C : Scheme.{u}} [IsIntegral S]
     (c : C ⟶ S) [Smooth c]
     {Cη : Scheme.{u}} (q : Cη ⟶ Spec S.functionField) (j : Cη ⟶ C)

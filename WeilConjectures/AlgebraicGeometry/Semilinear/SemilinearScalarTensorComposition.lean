@@ -14,7 +14,10 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Composition of the normalized scalar/tensor comparison
 
-Source: Zheng Construction 4.1, Proposition 4.17; Stacks 03EK, 06YY and 07A6.
+## References
+
+* Zheng Construction 4.1, Proposition 4.17
+* Stacks 03EK, 06YY and 07A6
 -/
 
 @[expose] public noncomputable section

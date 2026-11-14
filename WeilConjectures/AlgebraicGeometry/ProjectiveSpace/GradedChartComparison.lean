@@ -18,7 +18,10 @@ import Mathlib.RingTheory.Localization.Module
 /-!
 # Comparing Proj module sheaves from fraction charts
 
-Source: Stacks Project, Constructions, Lemma 01M7; Sheaves on Spaces, Tags 009N and 009U.
+## References
+
+* Stacks Project, Constructions, Lemma 01M7
+* Sheaves on Spaces, Tags 009N and 009U
 -/
 
 @[expose] public section
@@ -187,8 +190,7 @@ private theorem iso_of_indexed_basis (X : TopCat.{u}) (R : TopCat.Sheaf RingCat.
   intro U V h s
   exact hlin' (idx U) (idx V) U.val V.val (hidx U) (hidx V) h s
 
-/-- A linear equivalence preserving numerator degrees compares sheaves given by charts.
-Source: Stacks Project, Constructions, Lemma 01M7; Sheaves on Spaces, Tags 009N and 009U. -/
+/-- A linear equivalence preserving numerator degrees compares sheaves given by charts. -/
 theorem graded_chart_comparison (k : Type u) [Field k]
     (M N : ModuleCat.{u} (MvPolynomial (Fin 2) k))
     (𝓜 : ℕ → Set M) (𝓝 : ℕ → Set N)

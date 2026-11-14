@@ -13,7 +13,12 @@ import Mathlib.CategoryTheory.Sites.PreservesSheafification
 import Mathlib.LinearAlgebra.TensorProduct.Basis
 import Mathlib.RingTheory.TensorProduct.Quotient
 
-/-! Finite coefficient descent of lisse rational sheaves. -/
+/-! Finite coefficient descent of lisse rational sheaves.
+
+## References
+
+* Deligne, Weil II (1.1.1) d), pp. 146-147, the displayed Hom base-change formula
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -1020,8 +1025,7 @@ end CofinalLevels
 
 -- Preserve the existing target signature, including its algebraic-closure hypothesis.
 set_option linter.unusedSectionVars false in
-/-- Finite coefficient extension spans the rational morphisms between extended sheaves.
-Source: Deligne, Weil II (1.1.1) d), pp. 146-147, the displayed Hom base-change formula. -/
+/-- Finite coefficient extension spans the rational morphisms between extended sheaves. -/
 theorem lisseCoefficientHomBaseChange_span
     (E₀ : Padic.FiniteCoefficientFields l K) :
     let P := (lisseCoefficientDiagramData l Y K).diagram

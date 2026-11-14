@@ -10,7 +10,10 @@ import all WeilConjectures.AlgebraicGeometry.Section.SectionCohomologyCycleFormu
 
 /-! # The ordinary local class on cycles
 
-Source: Stacks Project, Cohomology, Tag 01E4.
+## References
+
+* Stacks Project, Cohomology, Tag 01E4
+* Stacks Project, Tags 01E4 and 0BKJ
 -/
 
 @[expose] public section
@@ -24,7 +27,6 @@ open Scheme.Modules
 
 /-- The ordinary abelian sheafification class sends cycles to their module cohomology
 classes through the canonical kernel comparison.
-Source: Stacks Project, Tags 01E4 and 0BKJ.
 -/
 theorem ordinaryLocalClass_cycles {Y : RingedSpace.{u}}
     (I : CochainComplex (SheafOfModules.{u} (moduleRings Y)) ℤ) (q : ℤ) :

@@ -15,6 +15,11 @@ import WeilConjectures.AlgebraicGeometry.Integral.IntegralStratifiedPerfectChart
 import WeilConjectures.AlgebraicGeometry.Integral.IntegralStratifiedPerfectCharacterization
 
 /-! # Torsion normal form and its consecutive-quotient obstruction
+
+## References
+
+* Bhatt--Scholze, Proposition 6.6.11 and Lemma 6.5.8
+* Stacks Tag 0ASV
 -/
 
 @[expose] public noncomputable section
@@ -32,9 +37,7 @@ namespace AlgebraicGeometry.Scheme
 and a nilpotent-uniformizer torsion sheaf. The cokernel of the uniformizer on that
 torsion sheaf is a quotient of a consecutive-quotient Tor sheaf. This is a normal-form
 statement for arbitrary bounded constructible complete complexes; no Tor vanishing
-or flatness of their cohomology is assumed.
-
-Source: Bhatt--Scholze, Proposition 6.6.11 and Lemma 6.5.8; Stacks Tag 0ASV. -/
+or flatness of their cohomology is assumed. -/
 theorem pbc_integral_cohomology_torsion_normal_form
     (T : Scheme.{u}) [IsNoetherian T]
     (hdim : ∃ n : ℕ, topologicalKrullDim T ≤ n)

@@ -13,7 +13,11 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveBundlePicardClassification.Pr
 /-!
 # Integer twists separate on every nonempty base neighbourhood
 
-Source: EGA II, Remark 4.2.7; Stacks, Tag 0BXJ.
+## References
+
+* EGA II, Remark 4.2.7
+* Stacks, Tag 0BXJ
+* EGA II, Remark 4.2.7, printed p.75
 -/
 
 @[expose] public section
@@ -44,8 +48,7 @@ private theorem invertible_integerLinePower {X : Scheme.{u}} (A : X.Modules)
   | negSucc n => exact hnat (dual A) (n + 1)
 
 /-- Integer twists which agree above a neighbourhood containing a base point have equal degrees.
-
-Source: EGA II, Remark 4.2.7, printed p.75; Stacks, Tag 0BXJ. -/
+-/
 theorem projective_bundle_integer_twist_separation (S : Scheme.{u}) (E : S.Modules)
     [E.IsQuasicoherent] (r : ℕ)
     [SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u} E r] (hr : 2 ≤ r)

@@ -228,8 +228,7 @@ private theorem regular_scalar_eq (X : Scheme.{u})
   simp only [Mod.comp_hom', Mod.id_hom', pointScalar_hom]
   rfl
 
-/-- Exact geometric module pullback preserves the action of every point scalar.
-Source: coefficient naturality and the monoidal pullback unit comparison. -/
+/-- Exact geometric module pullback preserves the action of every point scalar. -/
 theorem scalarOnModules {X Y : Scheme.{u}} (f : X ⟶ Y)
     (d : End (Mod.regular (DerivedNakayama.integerRing l E)))
     (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})

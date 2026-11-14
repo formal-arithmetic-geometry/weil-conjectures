@@ -35,7 +35,13 @@ import WeilConjectures.AlgebraicGeometry.Etale.ProEtale.EtaleProEtaleScalarMate
 
 /-! # Coefficient and site naturality of proper/open interchange
 
-Source: Stacks Project, Tags 0F7B and 0GL6.
+## References
+
+* Stacks Project, Tags 0F7B and 0GL6
+* Stacks 0F7B
+* Stacks 0F7B, exact extension and K-injective direct image
+* Stacks 0GL6 and 0F7B
+* Stacks 0F7B and 0GL6
 -/
 
 @[expose] public noncomputable section
@@ -820,8 +826,7 @@ variable {U V W Z : Scheme.{u}}
   {k : U ⟶ V} {r : U ⟶ W} {p : V ⟶ Z} {i : W ⟶ Z}
   [IsOpenImmersion k] [IsOpenImmersion i] [IsProper r] [IsProper p]
 
-/-- Existence with the exchange normalization that determines the proper/open isomorphism.
-Source: Stacks 0F7B. -/
+/-- Existence with the exchange normalization that determines the proper/open isomorphism. -/
 theorem properOpenCoefficientInterchange_normalized_exists
     (A : Type (u + 1)) [CommRing A] [Finite A] (sq : IsPullback k r p i) :
     ∃ γ :
@@ -847,7 +852,7 @@ theorem properOpenCoefficientInterchange_normalized_exists
     (unboundedProperOpenInterchange A).choose_spec.choose_spec.2.2.1 k r p i sq⟩
 
 /-- The proper/open isomorphism from the recorded theorem, whose representative and
-open adjunct determine it uniquely. Source: Stacks 0F7B. -/
+open adjunct determine it uniquely. -/
 def properOpenCoefficientInterchange (A : Type (u + 1)) [CommRing A] [Finite A]
     (sq : IsPullback k r p i) :
     R((r)_*[ModuleCat.{u + 1} A]) ⋙ D((i)_!open[ModuleCat.{u + 1} A]) ≅
@@ -888,8 +893,7 @@ private theorem properOpenCoefficientInterchange_normalization
     infer_instance
 
 /-- The restriction isomorphism selected by its specified exchange and open-unit formula.
-The hom component, rather than just its endpoints, is fixed by the recorded theorem.
-Source: Stacks 0F7B. -/
+The hom component, rather than just its endpoints, is fixed by the recorded theorem. -/
 def properOpenCoefficientRestriction (A : Type (u + 1)) [CommRing A] [Finite A]
     (sq : IsPullback k r p i) :
     D((k)_!open[ModuleCat.{u + 1} A]) ⋙ R((p)_*[ModuleCat.{u + 1} A]) ⋙
@@ -900,8 +904,7 @@ def properOpenCoefficientRestriction (A : Type (u + 1)) [CommRing A] [Finite A]
     Functor.isoWhiskerRight (properOpenCoefficientInterchange A sq)
       D((i)^*[ModuleCat.{u + 1} A])).symm
 
-/-- Canonical inclusion comparison for the target of proper/open interchange.
-Source: Stacks 0F7B, exact extension and K-injective direct image. -/
+/-- Canonical inclusion comparison for the target of proper/open interchange. -/
 def properOpenCoefficientTargetPlus (A : Type (u + 1)) [CommRing A]
     (E : DerivedCategory.Plus (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A))) :
     ((p)_*[ModuleCat.{u + 1} A].rightDerivedFunctorPlus.obj
@@ -913,8 +916,7 @@ def properOpenCoefficientTargetPlus (A : Type (u + 1)) [CommRing A]
       (((k)_!open[ModuleCat.{u + 1} A]).mapDerivedCategoryPlusCompatibility.app E)
 
 /-- The specified etale interchange, expressed in the full bounded-below subcategories.
-Full faithfulness of the inclusion transports the actual morphism, not just its objects.
-Source: Stacks 0F7B. -/
+Full faithfulness of the inclusion transports the actual morphism, not just its objects. -/
 def properOpenCoefficientInterchangePlus (A : Type (u + 1)) [CommRing A] [Finite A]
     (sq : IsPullback k r p i)
     (E : DerivedCategory.Plus (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A))) :
@@ -966,8 +968,7 @@ private lemma properOpenCoefficientInterchangePlusIso_app
   simp [properOpenCoefficientInterchangePlusIso, properOpenCoefficientInterchangePlus,
     properOpenCoefficientTargetPlus, Functor.preimageIso, Category.assoc]
 
-/-- The exact same restriction exchange in bounded-below coordinates.
-Source: Stacks 0F7B. -/
+/-- The exact same restriction exchange in bounded-below coordinates. -/
 def properOpenCoefficientRestrictionPlus (A : Type (u + 1)) [CommRing A] [Finite A]
     (sq : IsPullback k r p i)
     (E : DerivedCategory.Plus (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A))) :
@@ -1021,8 +1022,7 @@ private lemma properOpenCoefficientRestrictionPlus_inv
 
 /-- The coefficient-square composite through the B proper/open map.
 The two scalar comparisons are the recorded summandwise maps, and the proper
-coefficient arrow is the uniquely specified B-linear counit transpose.
-Source: Stacks 0GL6 and 0F7B. -/
+coefficient arrow is the uniquely specified B-linear counit transpose. -/
 def properOpenCoefficientComposite
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) (sq : IsPullback k r p i) (E : DerivedCategoryModule A U) :
@@ -1036,8 +1036,7 @@ def properOpenCoefficientComposite
 
 /-- The transpose identity for the coefficient square.  This is the counit calculation
 that remains after applying the proper direct-image adjunction; it is strictly weaker than
-the coefficient-square equality and is the mate-pasting step of the blueprint.
-Source: Stacks 0F7B and 0GL6. -/
+the coefficient-square equality and is the mate-pasting step of the blueprint. -/
 theorem properOpen_coefficient_mate_transposed
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) (sq : IsPullback k r p i) (E : DerivedCategoryModule A U)
@@ -1128,8 +1127,7 @@ variable {U V W Z : Scheme.{u}}
 
 /-- Inverse of the transported open-restriction exchange followed by the inverse
 open unit. The factors are the named counit mates, exact pullback comparison and
-open-extension comparison. It does not use the site square to define Gamma.
-Source: Stacks 0F7B. -/
+open-extension comparison. It does not use the site square to define Gamma. -/
 def properOpenSiteRestrictionInverse (A : Type (u + 1)) [CommRing A] [Finite A]
     (sq : IsPullback k r p i)
     (E : DerivedCategory.Plus (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A))) :
@@ -1177,8 +1175,7 @@ private lemma openComparisonPlus_counit
   exact (compactSupportSiteComparison_open_counits A c).2 B
 
 /-- Gamma on bounded-below etale-origin complexes, defined by the open adjunct of
-inverse transported restriction and open unit, with the retained origin E.
-Source: Stacks 0F7B. -/
+inverse transported restriction and open unit, with the retained origin E. -/
 def properOpenSiteInterchange (A : Type (u + 1)) [CommRing A] [Finite A]
     (sq : IsPullback k r p i)
     (E : DerivedCategory.Plus (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A))) :
@@ -1193,7 +1190,7 @@ def properOpenSiteInterchange (A : Type (u + 1)) [CommRing A] [Finite A]
       (properOpenSiteRestrictionInverse A sq E).hom
 
 /-- The path through the etale proper/open comparison, the specified proper counit
-mate and the open comparison. Source: Stacks 0F7B. -/
+mate and the open comparison. -/
 def properOpenSiteComposite (A : Type (u + 1)) [CommRing A] [Finite A]
     (sq : IsPullback k r p i)
     (E : DerivedCategory.Plus (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A))) :=
@@ -1205,8 +1202,7 @@ def properOpenSiteComposite (A : Type (u + 1)) [CommRing A] [Finite A]
       ((properOpenSiteExtensionIso A k).hom.app E)
 
 /-- Site naturality square for the specified open adjunct, as an equation in the
-unbounded category via the fully faithful bounded-below inclusion.
-Source: Stacks 0F7B. -/
+unbounded category via the fully faithful bounded-below inclusion. -/
 theorem properOpen_site_mate (A : Type (u + 1)) [CommRing A] [Finite A]
     (sq : IsPullback k r p i)
     (E : DerivedCategory.Plus (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A))) :

@@ -10,7 +10,12 @@ public import WeilConjectures.AlgebraicGeometry.Pbc.PbcAutomorphismLocalComplex
 public import WeilConjectures.AlgebraicGeometry.SmoothBaseChange.LevelwiseAdicTruncations
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Scalar.ScalarSixDerivedPullbackNormalization
 
-/-! Compatible finite reductions of the transported local complex. -/
+/-! Compatible finite reductions of the transported local complex.
+
+## References
+
+* Stacks Tags 06YY and 09BT
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -22,8 +27,7 @@ variable {X Y U : Scheme.{u}} (f : X ⟶ Y) [IsIso f]
   {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (g : U ⟶ Y)
 
 /-- The relabeled local complex computes the reductions of ordinary pullback, and
-these identifications intertwine every comparable pair of levels.
-Source: Stacks Tags 06YY and 09BT. -/
+these identifications intertwine every comparable pair of levels. -/
 theorem pbcIsoLocalComplex_reduction_comparison
     (K : PbcCompletedDerived Y d) (M : AdicTower Y d)
     (eK : ∀ n, M.level n ≅ (pbcCompletedReduction Y d n).obj K)
@@ -55,8 +59,7 @@ variable {Λ Λ' Λ'' : ScalarSixRing.{u}} {X Y U : Scheme.{u}}
 
 /-- The normalized scalar comparison data. Its `thetaNormalization` fixes every hom
 component to `scalarSixPullHom`, hence fixes its inverse and the entire data uniquely.
-This choice therefore selects no arbitrary comparison.
-Source: scalar-six pullback clauses (1),(3). -/
+This choice therefore selects no arbitrary comparison. -/
 def pbcLocalScalarData : ScalarSixPullbackData.{u} :=
   Classical.choice scalarSixPullbackData_exists
 
@@ -134,8 +137,7 @@ theorem pbcLocalReductionComparison_naturality (a : Λ ⟶ Λ') (f : X ⟶ Y) (h
     (fun z ↦ z ≫ (pbcLocalScalarData.theta a (h ≫ f)).inv.app K' ≫
       (scalarSixChange a U).map e'.hom) r.symm
 
-/-- Scalar-tower compatibility of the local comparison, for arbitrary coefficient maps.
-Source: scalar-six clauses (1) and (3). -/
+/-- Scalar-tower compatibility of the local comparison, for arbitrary coefficient maps. -/
 theorem pbcLocalReductionComparison_tower (a : Λ ⟶ Λ') (b : Λ' ⟶ Λ'')
     (f : X ⟶ Y) (h : U ⟶ X)
     (K : DerivedCategory (ModuleRingedComparison.internalModules Λ.X Y))
@@ -162,9 +164,7 @@ theorem pbcLocalReductionComparison_tower (a : Λ ⟶ Λ') (b : Λ' ⟶ Λ'')
 
 /-- Natural local coefficient change under isomorphism transport, with its iterated
 formula and scalar-tower coherence. The local map is parametrized as `h: U ⟶ X`;
-for a map `g: U ⟶ Y`, take `h = g ≫ f.inv`, since `h ≫ f.hom = g`.
-
-Source: scalar-six (1),(3). -/
+for a map `g: U ⟶ Y`, take `h = g ≫ f.inv`, since `h ≫ f.hom = g`. -/
 theorem pbcIsoLocalComplex_reduction_comparison (a : Λ ⟶ Λ') (f : X ≅ Y) (h : U ⟶ X)
     (K : DerivedCategory (ModuleRingedComparison.internalModules Λ.X Y))
     {N : DerivedCategory (ModuleRingedComparison.internalModules Λ.X U)}

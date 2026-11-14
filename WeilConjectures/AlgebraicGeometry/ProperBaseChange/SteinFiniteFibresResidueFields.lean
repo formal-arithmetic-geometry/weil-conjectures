@@ -22,7 +22,10 @@ import Mathlib.FieldTheory.Tower
 /-!
 # Finite fibres and residue extensions of the affine Stein factor
 
-Source: Stacks Project, More on Morphisms, Tag 0E0M.
+## References
+
+* Stacks Project, More on Morphisms, Tag 0E0M
+* Stacks Project, Tag 0E0M
 -/
 
 @[expose] public section
@@ -45,7 +48,6 @@ private theorem finite_left_of_comp {K L M : Type u} [Field K] [Field L] [Field 
 
 /-- The affine Stein factor of a proper morphism has finite point fibres and finite
 residue-field extensions, without a Noetherian assumption on the base ring.
-Source: Stacks Project, Tag 0E0M.
 
 Here `f.steinFactorizationBase` is the canonical map from `Spec Γ(X, ⊤)` to `Spec A`.
 For a point `b` over `s`, its residue-field map has source `κ(f.steinFactorizationBase b)`,

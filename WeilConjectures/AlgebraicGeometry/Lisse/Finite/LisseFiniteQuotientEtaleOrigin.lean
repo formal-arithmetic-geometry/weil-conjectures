@@ -13,7 +13,12 @@ import WeilConjectures.AlgebraicGeometry.Lisse.Finite.LisseFiniteQuotientEtaleOr
 
 /-! # Single finite quotient origins and their conditional constant-model transport
 
-Source: Stacks Project, Tags 09AL and 09B1, and coefficient transport in Tag 09C6.
+## References
+
+* Stacks Project, Tags 09AL and 09B1, and coefficient transport in Tag 09C6
+* Stacks Project, Tags 09AL, 09B1 and 09C6
+* Stacks Project, Tag 09AL (compare-constructible-derived), Tag 09B1 (compare-derived), and Tag
+  09C6, construction of an individual etale origin
 -/
 
 @[expose] public noncomputable section
@@ -24,9 +29,7 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] HasDerivedCategory.ofIsGrothendieckAbelian
 
 /-- One finite quotient descended to an etale chart. No point, normalization arrow,
-or choice of a constant model is included. Transport accepts any supplied model.
-
-Source: Stacks Project, Tags 09AL, 09B1 and 09C6. -/
+or choice of a constant model is included. Transport accepts any supplied model. -/
 structure LisseFiniteQuotientEtaleOrigin
     (X Y : Scheme.{u}) (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ)
@@ -57,10 +60,7 @@ structure LisseFiniteQuotientEtaleOrigin
         (adicTowerPullback (W.hom ≫ g) ((pbcAdicRings X d).obj (op n))).obj K)
 
 /-- Descend a single bounded relatively finite lisse quotient complex, retaining
-vanishing and transport on all further charts. This has no tower or normalization input.
-
-Source: Stacks Project, Tag 09AL (compare-constructible-derived), Tag 09B1 (compare-derived), and
-Tag 09C6, construction of an individual etale origin. -/
+vanishing and transport on all further charts. This has no tower or normalization input. -/
 theorem lisse_finite_quotient_etale_origin
     (X Y : Scheme.{u}) [IsNoetherian X] (g : Y ⟶ X) [IsImmersion g]
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ)

@@ -16,7 +16,11 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 /-!
 # Componentwise normalization over a normal reduction
 
-Source: Stacks Project, Varieties, Tags 0BXR and 0BXT; Morphisms, Tags 035Q and 0CDV.
+## References
+
+* Stacks Project, Varieties, Tags 0BXR and 0BXT
+* Morphisms, Tags 035Q and 0CDV
+* Stacks Project, Varieties, Tags 0BXR and 0BXT, final paragraph
 -/
 
 @[expose] public section
@@ -208,10 +212,7 @@ private theorem disjoint_normal_components
 namespace Scheme
 
 /-- Over an open whose reduction is normal, componentwise normalization is that
-reduction, with the comparison preserving the map to the open.
-
-Source: Stacks Project, Varieties, Tags 0BXR and 0BXT, final paragraph; Morphisms,
-Tags 035Q and 0CDV. -/
+reduction, with the comparison preserving the map to the open. -/
 theorem reducedNormalization_over_normal_reduction
     {k : Type u} [Field k] (T : Scheme.{u}) (q : T ⟶ Spec (.of k))
     [LocallyOfFiniteType q] [QuasiCompact q]

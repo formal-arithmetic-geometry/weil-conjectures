@@ -11,7 +11,10 @@ import WeilConjectures.AlgebraicGeometry.RelativeProj.RelativeProjTwistChartDesc
 
 /-! # Descent of degree-one twists, before constructing a map from a base module
 
-Source: Stacks Project, Constructions, Tag 01NR.
+## References
+
+* Stacks Project, Constructions, Tag 01NR
+* Stacks, Tag 01NR, using the restriction and transitivity formulas in Tags 01N2 and 01MY
 -/
 
 @[expose] public section
@@ -28,9 +31,7 @@ namespace AlgebraicGeometry.Scheme.GradedAlgebraData
 variable {S : Scheme.{u}} (A : S.GradedAlgebraData)
 
 /-- The affine twists descend with their restriction maps. This is object descent only:
-there is no morphism from a module on the base in the conclusion.
-
-Source: Stacks, Tag 01NR, using the restriction and transitivity formulas in Tags 01N2 and 01MY. -/
+there is no morphism from a module on the base in the conclusion. -/
 theorem exists_twist_chart_descent :
     ∃ (L : A.relProj.Modules)
       (chart : ∀ U : S.affineOpens,

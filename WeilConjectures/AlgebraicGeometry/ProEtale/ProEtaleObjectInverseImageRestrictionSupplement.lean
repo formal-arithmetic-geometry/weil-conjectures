@@ -27,12 +27,15 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleObjectInverseImageRestri
 /-!
 # Inverse image along an object of the small pro-etale site
 
-Source: Stacks Project, Sites and Sheaves, Tags 03CE, 00VC, 00XZ, 00WH and 0H7J; Modules on Sites,
-Tags 03D2 and 03EK; pro-etale functoriality, Tag 09A5.
-
 The comparison data below spell out the canonical presheaf coprojections and
 sheafification unit. The theorem applies to an arbitrary site object, with no
 monomorphism or finiteness hypothesis.
+
+## References
+
+* Stacks Project, Sites and Sheaves, Tags 03CE, 00VC, 00XZ, 00WH and 0H7J
+* Modules on Sites, Tags 03D2 and 03EK
+* pro-etale functoriality, Tag 09A5
 -/
 
 -- After pruning, this module only keeps private declarations.

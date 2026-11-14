@@ -51,8 +51,7 @@ private theorem completed_local_chern_exists (l : ℕ) [Fact l.Prime]
       (SpTowerClasses.firstChern l (ULift.{u} (Padic l)) p.chernX
         (Scheme.Pic.map p.model.model.hom (SpTowerClasses.hyperplanePic S)))).exists
 
-/-- Realization of a local completed class, with no direct image.
-Source: coefficient changes (1). -/
+/-- Realization of a local completed class, with no direct image. -/
 @[irreducible]
 def realizeLocalChern (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
     [DiagonalTraceLocalizations l X] (e : CompletedRealization l X)
@@ -67,8 +66,7 @@ def realizeLocalChern (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
     infer_instance
   inv (e.singleUnit l X) ≫ e.F.mapDerivedCategory.map z ≫ e.shiftedLine l X
 
-/-- Extend a local class through the specified unit and line endpoints.
-Source: coefficient changes (1). -/
+/-- Extend a local class through the specified unit and line endpoints. -/
 @[irreducible]
 def extendLocalChern
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
@@ -90,8 +88,7 @@ variable (l : ℕ) [Fact l.Prime] (E : PadicAlgCl.FiniteIntermediateField l)
   {δ : diagonalCompletedDomain l Y ⟶ diagonalCompletedCodomain l Y}
   {family : Family l Y} (r : Reference l Y δ family)
 
-/-- The two scalar extensions of the local class on the line.
-Source: coefficient changes (1). -/
+/-- The two scalar extensions of the local class on the line. -/
 @[irreducible]
 def scalarQLocalChern
     (z : DiagonalTrace.completedUnit l (ProjectiveLine Y) ⟶
@@ -106,8 +103,7 @@ def scalarQLocalChern
       ((family.toIntegral E).units (ProjectiveLine Y)) (family.toIntegral E).lineP
       (realizeLocalChern l _ r.eP z))
 
-/-- The two scalar extensions of the local class on the product.
-Source: coefficient changes (1). -/
+/-- The two scalar extensions of the local class on the product. -/
 @[irreducible]
 def scalarP2LocalChern
     (z : DiagonalTrace.completedUnit l (diagonalSurface Y) ⟶
@@ -122,8 +118,7 @@ def scalarP2LocalChern
       ((family.toIntegral E).units (diagonalSurface Y)) (family.toIntegral E).lineW
       (realizeLocalChern l _ r.eW z))
 
-/-- The coefficient-unit pullback comparison on the second projection.
-Source: the ordinary monoidal coefficient unit and its derived comparison. -/
+/-- The coefficient-unit pullback comparison on the second projection. -/
 @[irreducible]
 def scalarP2UnitIso
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -343,9 +338,7 @@ private theorem canonical_p2_local_adjunct
 
 -- Concrete coefficient conversions cross the named derived functor interfaces.
 /-- A normalized completed adjunct comes from its local section class, and this
-factorization survives realization and both finite-field scalar changes.
-
-Source: diagonal coefficient changes (1), normalization of the scalar mates. -/
+factorization survives realization and both finite-field scalar changes. -/
 theorem scalar_chern_local_factorization
     [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)] [IsNoetherian (diagonalSurface Y)]
     (hY : IsUnit (l : Γ(Y, ⊤)))

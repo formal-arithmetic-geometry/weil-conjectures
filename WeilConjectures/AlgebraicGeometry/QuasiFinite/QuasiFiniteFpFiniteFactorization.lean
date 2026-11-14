@@ -14,8 +14,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.QuasiFiniteFactorization
 /-!
 # Finitely presented Zariski main finite factorization
 
-Source: Stacks Project, More on Morphisms, Tag 0F2N, with the quasi-compact and quasi-separated
-finite factor made explicit.
+## References
+
+* Stacks Project, More on Morphisms, Tag 0F2N, with the quasi-compact and quasi-separated finite
+  factor made explicit
+* Stacks Project, Tag 0F2N
 -/
 
 @[expose] public section
@@ -28,9 +31,7 @@ namespace AlgebraicGeometry
 
 /-- A separated quasi-finite morphism of finite presentation over a quasi-compact,
 quasi-separated scheme factors through a finite, finitely presented, quasi-compact,
-quasi-separated scheme by a quasi-compact open immersion.
-
-Source: Stacks Project, Tag 0F2N. -/
+quasi-separated scheme by a quasi-compact open immersion. -/
 theorem Scheme.Hom.exists_qcqs_finitePresentation_factorization
     {X S : Scheme.{u}} (f : X ⟶ S) [IsSeparated f] (hq : f.IsQuasiFinite)
     [CompactSpace S] [QuasiSeparatedSpace S] [LocallyOfFinitePresentation f]

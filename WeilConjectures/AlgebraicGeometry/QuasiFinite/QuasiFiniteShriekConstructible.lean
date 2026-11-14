@@ -21,8 +21,12 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusEx
 /-!
 # Constructible cohomology under quasi-finite lower shriek
 
-Source: Stacks Project, More on Etale Cohomology, Tags 0GK3 and 0GKM, finite-ring bounded-below
-specialization.
+## References
+
+* Stacks Project, More on Etale Cohomology, Tags 0GK3 and 0GKM, finite-ring bounded-below
+  specialization
+* Stacks Project, Tags 0GK3 and 0GKM
+* Stacks Project, Tags 035C, 01TD, 0GK3 and 0GKM
 -/
 
 @[expose] public section
@@ -33,9 +37,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Etale
 
-/-- Quasi-finite finitely presented lower shriek preserves constructible cohomology.
-Source: Stacks Project, Tags 0GK3 and 0GKM.
--/
+/-- Quasi-finite finitely presented lower shriek preserves constructible cohomology. -/
 theorem constructibleCohomology_lowerShriek_of_quasiFinite
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {T B : Scheme.{u}} [CompactSpace T] [QuasiSeparatedSpace T]
@@ -93,8 +95,7 @@ theorem constructibleCohomology_lowerShriek_of_quasiFinite
         ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) a).obj F))
       (e₃ ≪≫ e₁ ≪≫ e₂).symm)
 
-/-- The closed-immersion consequence of quasi-finite constructibility.
-Source: Stacks Project, Tags 035C, 01TD, 0GK3 and 0GKM. -/
+/-- The closed-immersion consequence of quasi-finite constructibility. -/
 theorem constructibleCohomology_lowerShriek_of_isClosedImmersion
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {T B : Scheme.{u}} [CompactSpace T] [QuasiSeparatedSpace T]

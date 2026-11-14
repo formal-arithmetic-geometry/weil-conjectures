@@ -114,7 +114,11 @@ import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # The singleton evaluation mate below its source vertex
 
-Source: Zheng Construction 4.1; Stacks 06YT and 0FND.
+## References
+
+* Zheng Construction 4.1
+* Stacks 06YT and 0FND
+* Stacks 06YT, 0FND
 -/
 
 @[expose] public noncomputable section
@@ -233,8 +237,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   (B : ℕ → Sheaf J CommRingCat.{max c v r}) (τ : ∀ n : ℕ, B (n + 1) ⟶ B n)
 
 /-- Below a singleton vertex, the mate of the actual transition is invertible.
-This assertion involves no tensor product or projection map.
-Source: Zheng Construction 4.1; Stacks 06YT, 0FND. -/
+This assertion involves no tensor product or projection map. -/
 theorem semilinearSingletonEvaluationMate_isIso
     (n q : ℕ) (h : q ≤ n)
     (A : ScalarData.{c, v, max c v r}

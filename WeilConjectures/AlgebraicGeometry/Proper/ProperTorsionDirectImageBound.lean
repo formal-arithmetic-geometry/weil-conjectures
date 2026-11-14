@@ -34,7 +34,10 @@ import WeilConjectures.AlgebraicGeometry.TorsionSheafCharacterizations
 /-!
 # Proper direct-image bound for torsion étale sheaves
 
-Source: Stacks Project, Etale Cohomology, Tag 095U.
+## References
+
+* Stacks Project, Etale Cohomology, Tag 095U
+* Stacks Project, Tag 095U
 -/
 
 @[expose] public section
@@ -161,7 +164,7 @@ private theorem torsionHomology_single {X : Scheme.{u}}
     refine ⟨1, Nat.one_pos, ?_⟩
     simpa using hs.elim x 0
 
-/-- Source: Stacks Project, Tag 095U. For a proper morphism with fibre dimensions
+/-- For a proper morphism with fibre dimensions
 at most `d`, every torsion abelian étale sheaf has zero higher direct image above `2 * d`. -/
 theorem isZero_higherDirectImage_of_isProper_of_fiber_dimension_le
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] (d : ℕ)

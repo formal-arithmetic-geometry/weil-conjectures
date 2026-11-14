@@ -15,7 +15,10 @@ import WeilConjectures.AlgebraicGeometry.Modules.RestrictionStalkExtensionIso
 
 /-! # K-flatness under open restriction
 
-Source: Stacks Project, Tag 06YB, applied to open restriction.
+## References
+
+* Stacks Project, Tag 06YB, applied to open restriction
+* Stacks Project, Cohomology, Tag 06YB
 -/
 
 @[expose] public section
@@ -30,8 +33,7 @@ set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- Open restriction preserves K-flat complexes of module sheaves.
-Source: Stacks Project, Cohomology, Tag 06YB. -/
+/-- Open restriction preserves K-flat complexes of module sheaves. -/
 theorem isKFlat_restrict {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j]
     (K : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
     (hK : CochainComplex.IsKFlatTensor (R := Y.sheaf) K) :

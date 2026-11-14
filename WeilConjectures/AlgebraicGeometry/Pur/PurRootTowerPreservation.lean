@@ -45,6 +45,10 @@ import WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
 import WeilConjectures.AlgebraicGeometry.InternalModuleOperationsTransport
 
 /-! # Preservation of the cyclotomic inverse limit
+
+## References
+
+* Stacks Project, Tags 09A5 and 03CF
 -/
 
 @[expose] public noncomputable section
@@ -56,9 +60,7 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] IsCofiltered.isConnected
 
 /-- Inverse image preserves the particular root tower defining Z_ell(1).
-It need not preserve arbitrary inverse limits.
-
-Source: Stacks Project, Tags 09A5 and 03CF. -/
+It need not preserve arbitrary inverse limits. -/
 private theorem globalPrimeUnit (Y : Scheme.{u}) (l : ℕ)
     [∀ y : Y, Invertible (l : Y.residueField y)] : IsUnit (l : Γ(Y, ⊤)) := by
   apply Y.toRingedSpace.isUnit_of_isUnit_germ

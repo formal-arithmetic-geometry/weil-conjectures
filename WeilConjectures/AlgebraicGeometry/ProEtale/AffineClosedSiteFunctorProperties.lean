@@ -16,10 +16,13 @@ import WeilConjectures.RingTheory.ProEtale.ClosedLiftUnits
 
 /-! # Affine closed-immersion site functor properties
 
-Source: Stacks Project, Tag 09BK.
-
 The functors are the recorded `closedSiteBaseChange` and `closedSiteLift`.
 The geometric inclusion below is the spectrum of the retained algebra map.
+
+## References
+
+* Stacks Project, Tag 09BK
+* Stacks Project, Tag 09BK, the map V → v(V)
 -/
 
 @[expose] public noncomputable section
@@ -30,8 +33,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme.AffineProEt
 
-/-- The canonical map from an affine object of the closed site to its lift.
-Source: Stacks Project, Tag 09BK, the map V → v(V). -/
+/-- The canonical map from an affine object of the closed site to its lift. -/
 def closedSiteLiftInclusion (A : Type u) [CommRing A] (I : Ideal A)
     (V : (Spec (.of (A ⧸ I))).AffineProEt) :
     V.left ⟶ ((closedSiteLift A I).obj V).left :=
@@ -525,8 +527,7 @@ private theorem siteHomMap_naturality_right (A : Type u) [CommRing A] (I : Ideal
 
 /-- The affine closed-site lift is a fully faithful cocontinuous left adjoint,
 preserves covering families, and contains its input as its closed fibre, with every
-point specializing to that fibre.
-Source: Stacks Project, Tag 09BK. -/
+point specializing to that fibre. -/
 theorem affine_closed_site_functor_properties (A : Type u) [CommRing A] (I : Ideal A) :
     (∀ (U : (Spec (.of A)).AffineProEt) (R : Presieve U),
       R ∈ precoverage U →

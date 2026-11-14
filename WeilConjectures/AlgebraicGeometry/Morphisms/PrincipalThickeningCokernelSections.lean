@@ -14,7 +14,11 @@ import WeilConjectures.AlgebraicGeometry.PrincipalQuotientMultiplicationImage
 
 /-! # Principal thickening sections as degree-zero cohomology of the quotient
 
-Source: Stacks Project, Tags 01IH, 01QP and 01DZ.
+## References
+
+* Stacks Project, Tags 01IH, 01QP and 01DZ
+* Stacks Project, Tags 01IH and 01QP (quotient structure sheaves), and Tag 01DZ, Section 20.2
+  (degree-zero cohomology)
 -/
 
 @[expose] public section
@@ -106,10 +110,7 @@ private theorem zero_sections_naturality {X : Scheme.{u}} {M N : X.Modules}
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The cokernel of the principal ideal inclusion has the sections of the thickening,
-naturally for maps over the ambient open.
-
-Source: Stacks Project, Tags 01IH and 01QP (quotient structure sheaves), and
-Tag 01DZ, Section 20.2 (degree-zero cohomology). -/
+naturally for maps over the ambient open. -/
 theorem principal_thickening_cokernel_sections
     (R : Type u) [CommRing R] (g : R) (W : (Spec (.of R)).Opens) :
     let p := fun n : ℕ ↦ Modules.smulHom (SheafOfModules.unit W.toScheme.ringCatSheaf)

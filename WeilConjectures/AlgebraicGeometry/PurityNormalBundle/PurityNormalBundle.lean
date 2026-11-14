@@ -26,10 +26,17 @@ import WeilConjectures.AlgebraicGeometry.ProperBaseChange.QuasiCoherentSymmetric
 /-!
 # The normal cone, its augmentation section, and the regular normal bundle
 
-Source: Stacks Project, Divisors, Tags 0636, 0637, 063M; Algebra, Tag 00LN.
-
 The cone is the relative spectrum of the conormal algebra for the given immersion.
 The regular case uses the conormal module itself, with no globally chosen frame.
+
+## References
+
+* Stacks Project, Divisors, Tags 0636, 0637, 063M
+* Algebra, Tag 00LN
+* Stacks Tags 0630, 0636
+* Stacks Tag 0636
+* Stacks Tags 0636, 01LX
+* Stacks Tags 0636, 01LX, 01QO
 -/
 
 @[expose] public section
@@ -46,30 +53,25 @@ namespace AlgebraicGeometry.PurityNormalBundle
 
 variable {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
 
-/-- The conormal algebra as an object of the quasi-coherent algebra category.
-Source: Stacks Tags 0630, 0636. -/
+/-- The conormal algebra as an object of the quasi-coherent algebra category. -/
 def algebraObject : ObjectProperty.FullSubcategory
     (fun A : Z.CommAlgebraSheaf ↦ A.toModule.IsQuasicoherent) :=
   ⟨(ConormalGradedAlgebra.presentation i).algebra,
     (ConormalGradedAlgebra.presentation i).quasicoherent⟩
 
 /-- The normal cone as an affine scheme over `Z`, defined by relative spectrum of
-`G = direct sum I^n/I^(n+1)`, with the actual conormal algebra of this immersion.
-Source: Stacks Tag 0636. -/
+`G = direct sum I^n/I^(n+1)`, with the actual conormal algebra of this immersion. -/
 def over : ObjectProperty.FullSubcategory (fun Y : Over Z ↦ IsAffineHom Y.hom) :=
   ((VectorBundleZeroSection.antiEquivalence Z).inverse.obj (algebraObject i)).unop
 
-/-- The normal cone `Spec_Z G` for the given closed immersion.
-Source: Stacks Tag 0636. -/
+/-- The normal cone `Spec_Z G` for the given closed immersion. -/
 def normalCone : Scheme.{u} := (over i).obj.left
 
-/-- The affine projection from the normal cone to the closed subscheme.
-Source: Stacks Tag 0636. -/
+/-- The affine projection from the normal cone to the closed subscheme. -/
 def projection : normalCone i ⟶ Z := (over i).obj.hom
 
 /-- The degree-zero augmentation, transported along the structure map to the algebra of
-the identity scheme over `Z`. Both arrows are specified algebra morphisms.
-Source: Stacks Tags 0636, 01LX. -/
+the identity scheme over `Z`. Both arrows are specified algebra morphisms. -/
 def augmentationToBase : (algebraObject i).obj ⟶
     ((VectorBundleZeroSection.antiEquivalence Z).functor.obj
       (op (VectorBundleZeroSection.baseObject Z))).obj :=
@@ -77,15 +79,13 @@ def augmentationToBase : (algebraObject i).obj ⟶
     Under.homMk (((VectorBundleZeroSection.antiEquivalence Z).functor.obj
       (op (VectorBundleZeroSection.baseObject Z))).obj.hom) (Category.id_comp _)
 
-/-- The canonical section induced contravariantly by projection to degree zero.
-Source: Stacks Tags 0636, 01LX. -/
+/-- The canonical section induced contravariantly by projection to degree zero. -/
 def zeroSection : Z ⟶ normalCone i :=
   ((VectorBundleZeroSection.antiEquivalence Z).functor.preimage
     (((VectorBundleZeroSection.antiEquivalence Z).counitIso.app (algebraObject i)).hom ≫
       ObjectProperty.homMk (augmentationToBase i))).unop.hom.left
 
-/-- The augmentation gives a closed section even when the immersion is not regular.
-Source: Stacks Tags 0636, 01LX, 01QO. -/
+/-- The augmentation gives a closed section even when the immersion is not regular. -/
 theorem zeroSection_spec :
     zeroSection i ≫ projection i = 𝟙 Z ∧ IsClosedImmersion (zeroSection i) := by
   have hs : zeroSection i ≫ projection i = 𝟙 Z := by

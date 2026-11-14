@@ -12,7 +12,10 @@ public import Mathlib.RingTheory.AdjoinRoot
 /-!
 # Affine localization of the punctured root cover
 
-Source: Stacks Project, Tag 0EYG, off-divisor branch.
+## References
+
+* Stacks Project, Tag 0EYG, off-divisor branch
+* Stacks Project, Tag 0EYG, affine localization construction
 -/
 
 @[expose] public section
@@ -20,9 +23,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- The basic-open localization chart for the punctured root algebra.
-Source: Stacks Project, Tag 0EYG, affine localization construction.
--/
+/-- The basic-open localization chart for the punctured root algebra. -/
 theorem root_split_away_localization_chart
     (R : CommRingCat.{u}) (g : R) (n : ℕ) :
     let A := AdjoinRoot ((Polynomial.X : Polynomial R) ^ n - Polynomial.C g)

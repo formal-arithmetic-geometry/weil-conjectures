@@ -15,8 +15,7 @@ namespace AlgebraicGeometry.ProEtale.RationalP1
 WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteCoefficientProperFormulaTools
 (G3). All produced terms are built from HEq reflexivity, proof irrelevance, function
 extensionality and congruence theorems. -/
-/-- Equality of dependent function types under heterogeneous equality of families.
-Source: function extensionality. -/
+/-- Equality of dependent function types under heterogeneous equality of families. -/
 theorem sectionEvaluationPiEq {α β : Sort u₁} {P : α → Sort u₂}
     {Q : β → Sort u₂} (h : α = β) (hPQ : HEq P Q) :
     (∀ x, P x) = (∀ x, Q x) := by

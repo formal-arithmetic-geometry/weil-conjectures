@@ -22,10 +22,7 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] Over.ConstructProducts.over_finiteProducts_of_finiteWidePullbacks
 
 /-- The closed Čech presentation is exact after restriction to the closed fibre, for an
-arbitrary pro-étale object `V` and an arbitrary finite family `U` over it.
-
-Source: the affineness and covering hypotheses of `closedAffineCech_closed_restriction_exact` are
-not used there. -/
+arbitrary pro-étale object `V` and an arbitrary finite family `U` over it. -/
 theorem closedCech_closed_restriction_exact
     (A : Type u) [CommRing A] {B O : Scheme.{u}}
     (b : O ⟶ B) [IsOpenImmersion b] [QuasiCompact b]

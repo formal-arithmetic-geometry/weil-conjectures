@@ -18,7 +18,9 @@ import WeilConjectures.AlgebraicGeometry.SingleComplexTargetLocality
 
 /-! # Degreewise monomorphism in qcqs single-complex base change
 
-Source: Stacks Project, Tag 0DJ9.
+## References
+
+* Stacks Project, Tag 0DJ9
 -/
 
 @[expose] public section
@@ -27,9 +29,7 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-/-- The monomorphism part in one degree of the qcqs single-complex stalk criterion.
-
-Source: Stacks Project, Tag 0DJ9. -/
+/-- The monomorphism part in one degree of the qcqs single-complex stalk criterion. -/
 theorem singleComplexBaseChange_homology_mono
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

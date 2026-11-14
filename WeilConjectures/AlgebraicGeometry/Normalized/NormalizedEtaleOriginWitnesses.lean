@@ -15,10 +15,12 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Comparison
 /-!
 # Compatible etale origins of normalized finite-coefficient towers
 
-Source: Stacks Project, Tag 09B1.
-
 The published fixed-ring presentation is used through its canonical coefficient
 realization. Index n denotes the positive exponent n+1. No level is omitted.
+
+## References
+
+* Stacks Project, Tag 09B1
 -/
 
 @[expose] public noncomputable section

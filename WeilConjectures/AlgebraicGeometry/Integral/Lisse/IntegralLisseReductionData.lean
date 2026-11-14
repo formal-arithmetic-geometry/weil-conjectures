@@ -21,13 +21,24 @@ public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 /-!
 # Integral lisse modules and their normalized reduction towers
 
-Source: Bhatt--Scholze, Lemma 6.8.2, Definition 6.8.3 and Proposition 6.8.4(1), pp. 58--59.
-
 The finite coefficient sheaves are first presented as continuous functions into the quotient
 rings, with their quotient topology. The statement identifies these with constant sheaves.
 Towers are written in the integral module category by restriction of scalars. Normalization
 is the cokernel universal property for multiplication by the relevant power of the uniformizer;
 this is precisely the induced sheaf tensor quotient, not invertibility of the transition itself.
+
+## References
+
+* Bhatt--Scholze, Lemma 6.8.2, Definition 6.8.3 and Proposition 6.8.4(1), pp. 58--59
+* Bhatt--Scholze, Definition 6.8.1
+* Bhatt--Scholze, Lemma 6.8.2(1)
+* Bhatt--Scholze, Proposition 6.8.4(1)
+* Stacks, Tag 03EK
+* Bhatt--Scholze, Definition 6.8.3
+* Bhatt--Scholze, Definition 6.8.3 and Proposition 6.8.4(1)
+* Bhatt--Scholze, Lemma 6.8.2
+* Bhatt--Scholze, Lemma 6.8.2(2)
+* Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.4(1)
 -/
 
 @[expose] public noncomputable section
@@ -43,20 +54,17 @@ namespace AlgebraicGeometry.ProEtale
 variable (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u})
 
-/-- The integral module ring, forgetting only commutativity.
-Source: Bhatt--Scholze, Definition 6.8.1. -/
+/-- The integral module ring, forgetting only commutativity. -/
 abbrev integralLisseRing : Sheaf (Scheme.ProEt.topology X) RingCat.{u + 1} :=
   (sheafCompose _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (lisseIntegerSheafSized l E X)
 
-/-- Positive finite coefficient levels; index `n` denotes exponent `n+1`.
-Source: Bhatt--Scholze, Lemma 6.8.2(1). -/
+/-- Positive finite coefficient levels; index `n` denotes exponent `n+1`. -/
 def integralLisseFiniteRing (n : ℕ) :
     Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
   letI := spectralNorm.normedField ℚ_[l] E
   lisseContinuousCommRingSheafSized X (Padic.coefficientExtensionRing l E (n + 1))
 
-/-- The pointwise quotient map to finite coefficients, with its quotient topology.
-Source: Bhatt--Scholze, Lemma 6.8.2(1). -/
+/-- The pointwise quotient map to finite coefficients, with its quotient topology. -/
 def integralLisseReduction (n : ℕ) :
     lisseIntegerSheafSized l E X ⟶ integralLisseFiniteRing l E X n :=
   letI := spectralNorm.normedField ℚ_[l] E
@@ -66,16 +74,14 @@ def integralLisseReduction (n : ℕ) :
            _ continuous_quot_mk).comp ULift.ringEquiv.toRingHom))
      naturality := fun _ _ _ ↦ rfl }⟩
 
-/-- The constant residue section in the quotient topology.
-Source: Bhatt--Scholze, Lemma 6.8.2(1). -/
+/-- The constant residue section in the quotient topology. -/
 def integralLisseFiniteConstant (n : ℕ) (U : X.ProEtᵒᵖ)
     (a : Padic.coefficientExtensionRing l E (n + 1)) :
     (integralLisseFiniteRing l E X n).obj.obj U :=
   letI := spectralNorm.normedField ℚ_[l] E
   ULift.up (ContinuousMap.const U.unop.left a)
 
-/-- Adjacent reduction of continuous finite coefficients.
-Source: Bhatt--Scholze, Lemma 6.8.2(1). -/
+/-- Adjacent reduction of continuous finite coefficients. -/
 def integralLisseFiniteTransition (n : ℕ) :
     integralLisseFiniteRing l E X (n + 1) ⟶ integralLisseFiniteRing l E X n :=
   letI := spectralNorm.normedField ℚ_[l] E
@@ -87,21 +93,18 @@ def integralLisseFiniteTransition (n : ℕ) :
                continuous_quot_mk)).comp ULift.ringEquiv.toRingHom))
      naturality := fun _ _ _ ↦ rfl }⟩
 
-/-- The finite coefficient diagram, with all positive powers represented.
-Source: Bhatt--Scholze, Lemma 6.8.2(1). -/
+/-- The finite coefficient diagram, with all positive powers represented. -/
 def integralLisseFiniteDiagram :
     ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
   Functor.ofOpSequence (integralLisseFiniteTransition l E X)
 
-/-- Restrict scalars along the actual pointwise coefficient reduction.
-Source: Bhatt--Scholze, Proposition 6.8.4(1). -/
+/-- Restrict scalars along the actual pointwise coefficient reduction. -/
 def integralLisseFiniteRestriction (n : ℕ) :=
   SheafOfModules.restrictScalars.{u + 1}
     ((sheafCompose _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
       (integralLisseReduction l E X n))
 
-/-- Multiplication by a constant integral section on a module sheaf.
-Source: Bhatt--Scholze, Proposition 6.8.4(1). -/
+/-- Multiplication by a constant integral section on a module sheaf. -/
 def integralLisseScalar (M : ringedSiteModules.{u + 1} (integralLisseRing l E X))
     (a : Padic.coefficientExtensionIntegers l E) : M ⟶ M :=
   ⟨{ app := fun U ↦ ModuleCat.ofHom
@@ -116,23 +119,20 @@ def integralLisseScalar (M : ringedSiteModules.{u + 1} (integralLisseRing l E X)
        ext x
        exact (M.val.map_smul f (lisseIntegerConstantSized l E X U a) x).symm }⟩
 
-/-- Quotient by a scalar, specified by its sheaf cokernel universal property.
-Source: Bhatt--Scholze, Proposition 6.8.4(1); Stacks, Tag 03EK. -/
+/-- Quotient by a scalar, specified by its sheaf cokernel universal property. -/
 def IsIntegralLisseQuotient {M N : ringedSiteModules.{u + 1} (integralLisseRing l E X)}
     (a : Padic.coefficientExtensionIntegers l E) (q : M ⟶ N) : Prop :=
   ∃ h : integralLisseScalar l E X M a ≫ q = 0,
     Nonempty (IsColimit (CokernelCofork.ofπ q h))
 
-/-- Integral lisse objects form the full subcategory with locally varying finite rank.
-Source: Bhatt--Scholze, Definition 6.8.3. -/
+/-- Integral lisse objects form the full subcategory with locally varying finite rank. -/
 abbrev IntegralLisseModule :=
   (SheafOfModules.isFiniteLocallyFree (integralLisseRing l E X)).FullSubcategory
 
 /-- The normalized tower property in the integral module category. Each level is the
 restriction of an actual finite locally free finite-coefficient module. Normalization says
 that its transition is the quotient by the appropriate scalar, equivalently that the induced
-sheaf tensor map is invertible.
-Source: Bhatt--Scholze, Definition 6.8.3 and Proposition 6.8.4(1). -/
+sheaf tensor map is invertible. -/
 def IsIntegralReductionTower
     (F : ℕᵒᵖ ⥤ ringedSiteModules.{u + 1} (integralLisseRing l E X)) : Prop :=
   (∀ n : ℕ, ∃ N : SheafOfModules.{u + 1}
@@ -144,13 +144,11 @@ def IsIntegralReductionTower
     (Padic.coefficientExtensionUniformizer l E ^ (n + 1))
     (F.map (homOfLE (Nat.le_succ n)).op)
 
-/-- Normalized towers, with compatible families of module maps as morphisms.
-Source: Bhatt--Scholze, Proposition 6.8.4(1). -/
+/-- Normalized towers, with compatible families of module maps as morphisms. -/
 abbrev IntegralReductionTower :=
   ObjectProperty.FullSubcategory (IsIntegralReductionTower l E X)
 
-/-- The ring unit mapped along a ring-sheaf homomorphism, regarded as an integral-linear map.
-Source: Bhatt--Scholze, Lemma 6.8.2. -/
+/-- The ring unit mapped along a ring-sheaf homomorphism, regarded as an integral-linear map. -/
 def integralLisseRingMap {S : Sheaf (Scheme.ProEt.topology X) RingCat.{u + 1}}
     (f : integralLisseRing l E X ⟶ S) :
     SheafOfModules.unit (integralLisseRing l E X) ⟶
@@ -158,8 +156,7 @@ def integralLisseRingMap {S : Sheaf (Scheme.ProEt.topology X) RingCat.{u + 1}}
   SheafOfModules.unitHomEquiv _ |>.symm
     ⟨fun U ↦ (1 : S.obj.obj U), fun {_U _V} g ↦ (S.obj.map g).hom.map_one⟩
 
-/-- The fraction map at the `n`th stage of localization by `l`.
-Source: Bhatt--Scholze, Lemma 6.8.2(2). -/
+/-- The fraction map at the `n`th stage of localization by `l`. -/
 def integralLisseFraction (n : ℕ) :
     SheafOfModules.unit (integralLisseRing l E X) ⟶
       (SheafOfModules.restrictScalars
@@ -172,8 +169,7 @@ def integralLisseFraction (n : ℕ) :
 
 /-- All the coefficient identifications and the canonical reduction equivalence.
 Quotient and limit universal properties fix both functors and the displayed unit/counit maps.
-The two naturality equations quantify over all module and tower morphisms, at every level.
-Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.4(1). -/
+The two naturality equations quantify over all module and tower morphisms, at every level. -/
 structure IntegralLisseReductionEquivalence where
   finiteConstant : ∀ n : ℕ,
     (constantSheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}).obj

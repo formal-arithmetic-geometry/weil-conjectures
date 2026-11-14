@@ -11,7 +11,12 @@ public import WeilConjectures.AlgebraicGeometry.DirectImageSquareUnitTransport
 import WeilConjectures.AlgebraicGeometry.Relative.RelativeMVResolvedOpenRoofComparison
 import WeilConjectures.AlgebraicGeometry.Relative.RelativeMVResolvedRoofMiddleMateComparison
 
-/-! # Mate comparisons for the concrete resolved row roof -/
+/-! # Mate comparisons for the concrete resolved row roof
+
+## References
+
+* Stacks Project, Tags 08FE, 08HY, 08HZ and 0D5T
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -74,8 +79,7 @@ private theorem combine_component_comparisons
 -- The component API keeps proof elaboration within this bound.
 -- The two open-vertex types contain fixed complex and derived functor comparisons.
 /-- The open and diagonal components of a normalized resolved row roof are the
-specified local base-change mates. Source: Stacks Project, Tags 08FE, 08HY,
-08HZ and 0D5T. -/
+specified local base-change mates. -/
 theorem relativeMV_resolved_roof_open_mate_comparisons
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

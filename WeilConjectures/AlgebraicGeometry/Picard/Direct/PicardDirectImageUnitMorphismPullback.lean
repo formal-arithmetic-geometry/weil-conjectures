@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.PullbackStructureUnitSquare
 
 /-! # Pullback compatibility before evaluation of the canonical unit morphism
 
-Source: Stacks Project, Tags 08HY and 0D5S.
+## References
+
+* Stacks Project, Tags 08HY and 0D5S
 -/
 
 @[expose] public section
@@ -93,8 +95,7 @@ set_option cleanup.letToHave false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Pullback compatibility of the underlying module morphisms, before evaluating
-on sections. No evaluation at 1 or restriction of sections is asserted here.
-Source: Stacks Project, Tags 08HY and 0D5S. -/
+on sections. No evaluation at 1 or restriction of sections is asserted here. -/
 theorem picardDirectImageUnitMorphism_pullback
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

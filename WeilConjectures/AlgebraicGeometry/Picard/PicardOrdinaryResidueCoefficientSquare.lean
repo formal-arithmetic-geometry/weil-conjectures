@@ -9,7 +9,10 @@ public import WeilConjectures.AlgebraicGeometry.Picard.Residue.PicardResidueNorm
 
 /-! # PicardOrdinaryResidueCoefficientSquare
 
-Source: Stacks Project, Tags 0096, 06YJ, 0A1D, 08HY, 0D5S and 01F7.
+## References
+
+* Stacks Project, Tags 0096, 06YJ, 0A1D, 08HY, 0D5S and 01F7
+* Stacks Project, Tags 0096, 0D5S and 01F7
 -/
 
 @[expose] public section
@@ -216,8 +219,7 @@ private theorem triangle_eq_ordinary
 
 -- Evaluating the square at L unfolds its tensor and ordinary coefficient isomorphisms.
 set_option maxRecDepth 2048 in
-/-- Ordinary coefficient normalization commutes with the fibre square.
-Source: Stacks Project, Tags 0096, 0D5S and 01F7 -/
+/-- Ordinary coefficient normalization commutes with the fibre square. -/
 theorem picard_ordinary_residue_coefficient_square
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

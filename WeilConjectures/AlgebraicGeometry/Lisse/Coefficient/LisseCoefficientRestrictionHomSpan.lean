@@ -11,7 +11,12 @@ import WeilConjectures.AlgebraicGeometry.Lisse.Coefficient.LisseCoefficientHomBa
 import Mathlib.Algebra.Module.LocalizedModule.Int
 import WeilConjectures.CategoryTheory.Sites.Point.Linear
 
-/-! Finite coefficient descent of lisse rational sheaves. -/
+/-! Finite coefficient descent of lisse rational sheaves.
+
+## References
+
+* Deligne, Weil II (1.1.1) c)-d), pp. 146-147
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -247,8 +252,7 @@ private lemma coefficientSpan_from_hom_span
 variable (K : Type (d + 1)) [Field K] [Algebra ℚ_[l] K] [IsAlgClosure ℚ_[l] K]
 
 /-- Maps of scalar-extended sheaves act on geometric fibres in the scalar span of
-maps from the least coefficient category.
-Source: Deligne, Weil II (1.1.1) c)-d), pp. 146-147. -/
+maps from the least coefficient category. -/
 theorem lisseCoefficientRestriction_hom_span
     {Ω : Type d} [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y)
     (S : ∀ E₀ : Padic.FiniteCoefficientFields l K,

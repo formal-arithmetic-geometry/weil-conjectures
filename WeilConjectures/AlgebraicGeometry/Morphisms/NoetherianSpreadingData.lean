@@ -18,7 +18,10 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PointedGaloisCoverLimitDescen
 /-!
 # Noetherian approximation data for spreading a finite torsor
 
-Source: Stacks Project, Tag 0EZJ, limit reduction.
+## References
+
+* Stacks Project, Tag 0EZJ, limit reduction
+* Stacks Project, Tag 0EZJ, proof of Lemma 58.31.9
 -/
 
 @[expose] public section
@@ -29,9 +32,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Descend the family and its generic torsor, without constructing an extension.
-
-Source: Stacks Project, Tag 0EZJ, proof of Lemma 58.31.9 -/
+/-- Descend the family and its generic torsor, without constructing an extension. -/
 theorem GaloisCover.exists_noetherian_spreading_data {S C : Scheme.{u}} [CompactSpace S]
     [QuasiSeparatedSpace S] [IsIntegral S]
     (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))

@@ -14,7 +14,10 @@ import all WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalDerivedReductionEx
 
 /-! # The prime-invertible cone of the strict quotient augmentation
 
-Source: Stacks Project, Tag 099M.
+## References
+
+* Stacks Project, Tag 099M
+* Stacks Project, Tag 099M, using its Koszul-tower proof
 -/
 
 @[expose] public noncomputable section
@@ -70,9 +73,7 @@ private theorem integral_prime_regular (ℓ : ℕ) [Fact ℓ.Prime] :
   exact ⟨hleft, fun x hx ↦ hleft x ((mul_comm _ _).trans hx)⟩
 
 /-- The strict limit admits a natural augmentation with prime-invertible cone.
-No completeness assertion about the target is included.
-
-Source: Stacks Project, Tag 099M, using its Koszul-tower proof. -/
+No completeness assertion about the target is included. -/
 theorem integral_strict_limit_augmentation_triangle (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     [HasDerivedCategory.{u + 1} (DiagonalAb W)]
     [HasDerivedCategory.{u + 1} (ℕᵒᵖ ⥤ DiagonalAb W)]

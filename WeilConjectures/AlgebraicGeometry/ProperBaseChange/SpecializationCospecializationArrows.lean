@@ -15,7 +15,15 @@ public import WeilConjectures.AlgebraicGeometry.ProperBaseChange.CohomologyPullb
 /-!
 # Canonical arrows in the specialization--cospecialization diagram
 
-Source: Stacks Project, Tags 0GJ2, 0GJU and 0GJV.
+## References
+
+* Stacks Project, Tags 0GJ2, 0GJU and 0GJV
+* Stacks Project, Tag 03Q1
+* Stacks Project, Tag 03Q1, exactness of geometric stalks
+* Stacks Project, Tag 0GJ2
+* Stacks Project, Tag 03Q1 (3)
+* Stacks Project, Tag 0GJV
+* Stacks Project, Tags 0GJU and 0GJV
 -/
 
 @[expose] public section
@@ -25,13 +33,11 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Etale
 
-/-- The coefficient universe admits filtered colimits indexed in the scheme universe.
-Source: Stacks Project, Tag 03Q1; the standard size restriction of AB5. -/
+/-- The coefficient universe admits filtered colimits indexed in the scheme universe. -/
 noncomputable instance geometricStalkCoefficientsAB5 : AB5OfSize.{u, u} AddCommGrpCat.{u + 1} :=
   AB5OfSize_shrink.{u, u, u + 1, u + 1} _
 
-/-- The exact geometric fibre functor on abelian sheaves is additive.
-Source: Stacks Project, Tag 03Q1. -/
+/-- The exact geometric fibre functor on abelian sheaves is additive. -/
 noncomputable instance geometricSheafFiber_additive
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S) :
@@ -39,8 +45,7 @@ noncomputable instance geometricSheafFiber_additive
   GrothendieckTopology.Point.sheafFiber_additive _
 
 open GrothendieckTopology.Point in
-/-- Exact geometric stalks preserve finite limits in the fixed coefficient universe.
-Source: Stacks Project, Tag 03Q1, exactness of geometric stalks. -/
+/-- Exact geometric stalks preserve finite limits in the fixed coefficient universe. -/
 noncomputable instance geometricSheafFiber_preservesFiniteLimits
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S) :
@@ -50,8 +55,7 @@ noncomputable instance geometricSheafFiber_preservesFiniteLimits
   exact instPreservesFiniteLimitsSheafSheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize
     (Φ := Scheme.pointSmallEtale s)
 
-/-- Naturality of the canonical specialization of abelian étale stalks.
-Source: Stacks Project, Tag 0GJ2. -/
+/-- Naturality of the canonical specialization of abelian étale stalks. -/
 theorem etaleStalkSpecialization_naturality
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S) {Ω' : Type u} [Field Ω'] [IsAlgClosed Ω']
@@ -137,8 +141,7 @@ theorem etaleStalkSpecialization_naturality
   erw [e.naturality]
   rw [Category.assoc]
 
-/-- The natural transformation with the already defined specialization as its components.
-Source: Stacks Project, Tag 0GJ2. -/
+/-- The natural transformation with the already defined specialization as its components. -/
 noncomputable def etaleStalkSpecializationNatTrans
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S) {Ω' : Type u} [Field Ω'] [IsAlgClosed Ω']
@@ -148,8 +151,7 @@ noncomputable def etaleStalkSpecializationNatTrans
   { app := etaleStalkSpecialization s t
     naturality := fun _ _ a ↦ etaleStalkSpecialization_naturality s t a }
 
-/-- Specialization on bounded below derived stalks, computed termwise since stalks are exact.
-Source: Stacks Project, Tag 0GJ2. -/
+/-- Specialization on bounded below derived stalks, computed termwise since stalks are exact. -/
 noncomputable def derivedEtaleStalkSpecialization
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S) {Ω' : Type u} [Field Ω'] [IsAlgClosed Ω']
@@ -163,8 +165,7 @@ noncomputable def derivedEtaleStalkSpecialization
       ((Scheme.pointSmallEtale (t ≫ Scheme.strictHenselizationStructuralMap s)).sheafFiber
         (A := AddCommGrpCat.{u + 1}))).hom
 
-/-- Inverse image followed by the identity-point stalk computes the original derived stalk.
-Source: Stacks Project, Tag 03Q1 (3). -/
+/-- Inverse image followed by the identity-point stalk computes the original derived stalk. -/
 noncomputable def derivedGeometricPointStalkIso
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S) :
@@ -177,8 +178,7 @@ noncomputable def derivedGeometricPointStalkIso
     eqToIso (by rw [Category.id_comp])
 
 /-- Fibre map for a geometric-point square: derived exchange, global sections and Leray.
-The inverse global germ on the geometric base identifies the last two operations.
-Source: Stacks Project, Tag 0GJV. -/
+The inverse global germ on the geometric base identifies the last two operations. -/
 noncomputable def etaleDerivedFiberMap
     {X Z S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     {f : X ⟶ S} {k : Z ⟶ X} {q : Z ⟶ Spec (.of Ω)} {s : Spec (.of Ω) ⟶ S}
@@ -195,22 +195,19 @@ noncomputable def etaleDerivedFiberMap
       ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq).app K) ≫
     inv ((derivedGlobalGerm q (𝟙 (Spec (.of Ω)))).app _)
 
-/-- The projection of the base change to the strict-local base.
-Source: Stacks Project, Tag 0GJV. -/
+/-- The projection of the base change to the strict-local base. -/
 noncomputable abbrev strictBaseChangeMap {X S : Scheme.{u}} (f : X ⟶ S)
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) :=
   pullback.snd f (Scheme.strictHenselizationStructuralMap s)
 
-/-- The geometric fibre inclusion after strict-local base change.
-Source: Stacks Project, Tag 0GJV. -/
+/-- The geometric fibre inclusion after strict-local base change. -/
 noncomputable abbrev strictBaseFiberInclusion {X S : Scheme.{u}} (f : X ⟶ S)
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     {Ω' : Type u} [Field Ω'] [IsAlgClosed Ω']
     (t : Spec (.of Ω') ⟶ Scheme.strictHenselizationScheme s) :=
   pullback.fst (strictBaseChangeMap f s) t
 
-/-- The fibre map for the outer square, followed by inverse-image composition.
-Source: Stacks Project, Tag 0GJV. -/
+/-- The fibre map for the outer square, followed by inverse-image composition. -/
 noncomputable def strictBaseDerivedFiberMap
     {X S : Scheme.{u}} (f : X ⟶ S)
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
@@ -230,8 +227,7 @@ noncomputable def strictBaseDerivedFiberMap
         ((upperStarCompDerivedPlus AddCommGrpCat.{u + 1} (strictBaseFiberInclusion f s t)
           (pullback.fst f (Scheme.strictHenselizationStructuralMap s))).hom.app K)
 
-/-- Fibre map with the pulled-back sheaf placed in degree zero on the strict base.
-Source: Stacks Project, Tag 0GJV. -/
+/-- Fibre map with the pulled-back sheaf placed in degree zero on the strict base. -/
 noncomputable def strictBaseSheafFiberMap
     {X S : Scheme.{u}} (f : X ⟶ S)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
@@ -247,8 +243,7 @@ noncomputable def strictBaseSheafFiberMap
               (upperStar AddCommGrpCat.{u + 1}
                 (pullback.fst f (Scheme.strictHenselizationStructuralMap s))) 0).hom.app G))
 
-/-- The closed fibre map, with its source transported along the canonical lift over `s`.
-Source: Stacks Project, Tag 0GJV. -/
+/-- The closed fibre map, with its source transported along the canonical lift over `s`. -/
 noncomputable def closedStrictBaseSheafFiberMap
     {X S : Scheme.{u}} (f : X ⟶ S)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
@@ -264,8 +259,7 @@ noncomputable def closedStrictBaseSheafFiberMap
       (Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationRingPointEvaluation s)))
 
 /-- Cospecialization: inverse Leray, restriction to the closed fibre, then inverse closed
-fibre unit. Local acyclicity supplies invertibility of precisely this last unit.
-Source: Stacks Project, Tags 0GJU and 0GJV. -/
+fibre unit. Local acyclicity supplies invertibility of precisely this last unit. -/
 noncomputable def etaleCospecialization
     {X S : Scheme.{u}} (f : X ⟶ S)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

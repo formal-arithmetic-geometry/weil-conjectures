@@ -16,7 +16,13 @@ import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
-/-! # A finite kernel presentation for sections on finite étale thickenings -/
+/-! # A finite kernel presentation for sections on finite étale thickenings
+
+## References
+
+* Stacks Project, Tag 0EKP, construction in the proof of (2) to (3), with the ample invertible
+  module equal to the structure sheaf
+-/
 
 @[expose] public section
 
@@ -220,10 +226,7 @@ private theorem pullback_matrix_relation {X Y : Scheme.{u}} {M : X.Modules}
 
 /-- Finite étale sections admit finite scalar coordinates and finitely many linear relations,
 with injective coordinates on every quotient-power thickening. This statement does not
-assume any scalar adic comparison.
-
-Source: Stacks Project, Tag 0EKP, construction in the proof of (2) to (3), with the
-ample invertible module equal to the structure sheaf; finite affine base change. -/
+assume any scalar adic comparison. -/
 theorem finiteEtale_adic_sections_kernel
     {R S : Type u} [CommRing R] [CommRing S] [IsNoetherianRing R]
     (f : R →+* S) (V : (Spec (.of R)).Opens) (P : V.toScheme.FiniteEtale) :

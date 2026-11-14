@@ -23,6 +23,10 @@ The underlying modules of `S(-2)` and `S(-1)` are `S`; by
 part of `S(-2)` is `S_n` and the degree `n + 1` part of `S(-1)` is `S_n`; all lower
 parts are zero. The quotient `k = S/(x₀,x₁)` has the quotient grading, concentrated
 in degree zero.
+
+## References
+
+* Stacks Algebra, Section 00JL, for the shift convention
 -/
 
 @[expose] public section
@@ -34,7 +38,6 @@ namespace AlgebraicGeometry.ProjectiveLine
 open MvPolynomial
 
 /-- The exact graded Koszul resolution `0 → S(-2) → S(-1)² → S → S/(x₀,x₁) → 0`.
-Source: Stacks Algebra, Section 00JL, for the shift convention.
 
 The maps are `a ↦ (a x₁, -a x₀)`, `(a, b) ↦ a x₀ + b x₁` and the quotient map.
 Degree zero: since negative-degree parts vanish, `f` sends `S(-2)_{n+2} = S_n` into

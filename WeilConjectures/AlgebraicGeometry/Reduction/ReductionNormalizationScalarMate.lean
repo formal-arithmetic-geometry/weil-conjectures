@@ -69,7 +69,9 @@ import WeilConjectures.CategoryTheory.Exact.ExactRestrictionCompositionSupplemen
 
 /-! # The scalar adjunction of the published quotient normalization
 
-Source: Stacks Project, Tags 03EL and 06YY.
+## References
+
+* Stacks Project, Tags 03EL and 06YY
 -/
 
 -- After pruning, this module only keeps private declarations.

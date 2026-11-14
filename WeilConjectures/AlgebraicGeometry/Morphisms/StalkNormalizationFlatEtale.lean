@@ -21,8 +21,12 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.FlatQuasiFiniteDepthPurity
 /-!
 # Purity turns flatness of a depth-two normalization into etaleness
 
-Source: Stacks Project, Tag 0EY6, assertion (3), applied to the local
-normalization in the proof of Tag 0EYJ.
+## References
+
+* Stacks Project, Tag 0EY6, assertion (3), applied to the local normalization in the proof of Tag
+  0EYJ
+* Stacks Project, Tag 0EY6, assertions (2) and (3)
+* Tag 0EYJ, proof of the local claim, paragraph starting with depth(A) at least two
 -/
 
 @[expose] public section
@@ -72,10 +76,7 @@ private theorem morphismProperty_pullback_restrict
 -- The unchanged statement includes normality and generic-density hypotheses;
 -- the flat source-open proof below does not need them.
 /-- On the finite local normalization, every flat source open is etale.
-No section, group action, or generic rational point is assumed.
-
-Source: Stacks Project, Tag 0EY6, assertions (2) and (3); Tag 0EYJ,
-proof of the local claim, paragraph starting with depth(A) at least two. -/
+No section, group action, or generic rational point is assumed. -/
 theorem finiteEtale_stalk_normalization_etale_of_flat {S C : Scheme.{u}}
     [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]

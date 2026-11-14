@@ -13,7 +13,10 @@ import WeilConjectures.AlgebraicGeometry.Modules.InvertiblePullbackTensor
 
 /-! # LineQuotientRecoveredCharts
 
-Source: Stacks Project, Constructions, Tags 01OA and 01O4.
+## References
+
+* Stacks Project, Constructions, Tags 01OA and 01O4
+* Stacks Project, Constructions, Tags 01OA and 01O4, second inverse calculation
 -/
 
 @[expose] public section
@@ -286,8 +289,7 @@ private theorem exists_generator_chart {S T : Scheme.{u}} (h : T ⟶ S)
   refine ⟨U, Wa, hxW, hWU, hWa, m, IsOpenImmersion.lift j (W.ι ≫ a) hrange, ?_⟩
   exact (IsOpenImmersion.lift_fac j (W.ι ≫ a) hrange).symm
 
-/-- The pulled tautological quotient has the original morphism's fraction charts.
-Source: Stacks Project, Constructions, Tags 01OA and 01O4, second inverse calculation. -/
+/-- The pulled tautological quotient has the original morphism's fraction charts. -/
 theorem lineQuotient_recovered_charts {S T : Scheme.{u}} (h : T ⟶ S)
     (E : S.Modules) [E.IsQuasicoherent] (D : TautologicalQuotient E)
     (a : T ⟶ (SymmetricAlgebraSheaf.gradedAlgebraData E).relProj)

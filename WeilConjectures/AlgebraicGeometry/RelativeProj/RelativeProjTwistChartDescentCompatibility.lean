@@ -12,7 +12,10 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.UnitToT
 
 /-! # Compatibility data for relative Proj twist charts
 
-Source: Stacks Project, Constructions, Tag 01NR.
+## References
+
+* Stacks Project, Constructions, Tag 01NR
+* Stacks Project, Constructions, Tags 01N2, 01MY and 01NR
 -/
 
 @[expose] public section
@@ -55,9 +58,7 @@ noncomputable def twistChartRead (L : A.relProj.Modules)
 
 For every affine restriction, the comparison is required to be the normalized one from
 `scalarExtension_twist_comparison`, and the chart square is required to commute after the
-canonical tensor-pullback composition isomorphism.
-
-Source: Stacks Project, Constructions, Tags 01N2, 01MY and 01NR. -/
+canonical tensor-pullback composition isomorphism. -/
 def TwistChartCompatibility (L : A.relProj.Modules)
     (chart : ∀ U : S.affineOpens,
       (Scheme.Modules.tensorPullback (A.relProjι U)).obj L ≅

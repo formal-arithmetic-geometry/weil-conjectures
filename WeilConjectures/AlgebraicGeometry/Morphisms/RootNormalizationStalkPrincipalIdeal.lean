@@ -23,7 +23,12 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Flat
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 
-/-! # Principalness of the normalized root stalk maximal ideal -/
+/-! # Principalness of the normalized root stalk maximal ideal
+
+## References
+
+* Stacks Project, Tags 0307, 035L and 00PD
+-/
 
 @[expose] public section
 universe u
@@ -141,9 +146,7 @@ private theorem normal_stalk_over_dvr
   rw [hy] at hresult
   exact hresult
 
-/-- The normalized stalk maximal ideal is principal, without a tame-ramification bound.
-
-Source: Stacks Project, Tags 0307, 035L and 00PD. -/
+/-- The normalized stalk maximal ideal is principal, without a tame-ramification bound. -/
 theorem root_normalization_stalk_maximalIdeal_isPrincipal
     (H : CommRingCat.{u}) [IsNoetherianRing H] (g : H)
     (hg : IsSMulRegular H g) [IsDomain (H ⧸ Ideal.span {g})]

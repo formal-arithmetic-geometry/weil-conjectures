@@ -12,7 +12,10 @@ import WeilConjectures.AlgebraicGeometry.Modules.HomSection
 
 /-! # Free coordinates under a factorization of scheme maps
 
-Source: Stacks Project, Tag 01CA, functoriality and associativity of tensor products.
+## References
+
+* Stacks Project, Tag 01CA, functoriality and associativity of tensor products
+* Stacks Project, Tag 01CA, tensor associativity and functoriality
 -/
 
 @[expose] public section
@@ -64,9 +67,7 @@ private theorem unit_comp {X Y Z : Scheme.{u}}
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Pulling a section through a factorization commutes with any map into finite free.
-
-Source: Stacks Project, Tag 01CA, tensor associativity and functoriality. -/
+/-- Pulling a section through a factorization commutes with any map into finite free. -/
 theorem pullback_free_coordinates_naturality
     {X Y Z : Scheme.{u}} (g : Y ⟶ X) (h : Z ⟶ X) (v : Z ⟶ Y)
     (hv : v ≫ g = h) (M : X.Modules) (r : ℕ)

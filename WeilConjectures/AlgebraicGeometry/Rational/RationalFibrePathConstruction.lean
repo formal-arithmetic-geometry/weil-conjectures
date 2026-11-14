@@ -20,7 +20,9 @@ import WeilConjectures.AlgebraicGeometry.Lisse.LisseRationalScalarFiberMaps
 set_option linter.privateModule false
 /-! # Rationalization of integral fibre paths
 
-Source: Deligne, Weil II (1.1.1) c), p.147.
+## References
+
+* Deligne, Weil II (1.1.1) c), p.147
 -/
 
 @[expose] public noncomputable section

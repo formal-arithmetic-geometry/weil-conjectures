@@ -94,7 +94,14 @@ public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 
 /-! # The arbitrary-ring-sheaf closed support adjoint
 
-Source: Stacks Project, Tags 09AA, 09BM, 09BN and 09AH; Tags 070I, 070K and 08BJ.
+## References
+
+* Stacks Project, Tags 09AA, 09BM, 09BN and 09AH
+* Tags 070I, 070K and 08BJ
+* Stacks, Tag 09AH
+* Stacks, Tags 09AA and 09AH
+* Stacks, Tags 070I and 070K
+* Stacks, Tags 09AA, 09BM, 09BN, 09AH, 070I, 070K, 08BJ and 079P
 -/
 
 @[expose] public section
@@ -108,24 +115,21 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- The natural kernel of the open adjunction unit, formed in the functor category.
-Evaluation identifies it with `ker(N → j_*j^*N)`, including the kernel inclusion.
-Source: Stacks, Tag 09AH. -/
+Evaluation identifies it with `ker(N → j_*j^*N)`, including the kernel inclusion. -/
 noncomputable def ringedSupportKernel {X U : Scheme.{u}} (j : U ⟶ X)
     (B : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
     (aj : proEtaleModuleInverseImage j B ⊣ proEtaleRingedDirectImage j B) :
     proEtaleRingModules X B ⥤ proEtaleRingModules X B :=
   kernel aj.unit
 
-/-- The closed inverse image of the support kernel: the actual underived `i!_0`.
-Source: Stacks, Tags 09AA and 09AH. -/
+/-- The closed inverse image of the support kernel: the actual underived `i!_0`. -/
 noncomputable def ringedClosedKernelShriek {X Z U : Scheme.{u}} (i : Z ⟶ X) (j : U ⟶ X)
     (B : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
     (aj : proEtaleModuleInverseImage j B ⊣ proEtaleRingedDirectImage j B) :=
   ringedSupportKernel j B aj ⋙ proEtaleModuleInverseImage i B
 
 /-- The specified computation on any K-injective resolution, obtained by localizing
-its quasi-isomorphism and using the canonical K-injective derived comparison.
-Source: Stacks, Tags 070I and 070K. -/
+its quasi-isomorphism and using the canonical K-injective derived comparison. -/
 noncomputable def ringedClosedKernelResolutionIso {X Z U : Scheme.{u}}
     (i : Z ⟶ X) (j : U ⟶ X)
     (B : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
@@ -410,9 +414,7 @@ private theorem supportedUnitIso
 /-- Closed support for arbitrary ring-sheaf coefficients, and all four ambient derived
 adjunctions. The comparison with the kernel and the K-injective counit formula fix the
 ordinary and derived counits. All module categories use the original small pro-etale
-sites, with object universe `u+1`, morphism universe `u`, and module universe `u+1`.
-
-Source: Stacks, Tags 09AA, 09BM, 09BN, 09AH, 070I, 070K, 08BJ and 079P. -/
+sites, with object universe `u+1`, morphism universe `u`, and module universe `u+1`. -/
 theorem proEtale_ringed_closed_kernel_adjoint {X Z : Scheme.{u}}
     (i : Z ⟶ X) [IsClosedImmersion i]
     (U : X.ProEt) [IsOpenImmersion U.hom] [QuasiCompact U.hom]

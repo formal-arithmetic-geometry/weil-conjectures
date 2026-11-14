@@ -33,7 +33,9 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.D
 /-!
 # Reflection of integral finite constant models across surjective closed immersions
 
-Source: Stacks Project, Tags 09AB and 09BK.
+## References
+
+* Stacks Project, Tags 09AB and 09BK
 -/
 
 @[expose] public section

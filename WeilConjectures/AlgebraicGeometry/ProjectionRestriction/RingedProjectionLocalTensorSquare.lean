@@ -60,7 +60,10 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUn
 
 /-! # Tensor coherence of the normalized localized pullback square
 
-Source: Stacks Project, Tags 04J0 and 07A4.
+## References
+
+* Stacks Project, Tags 04J0 and 07A4
+* Stacks Project, Modules on Sites, Tag 04J0 and Cohomology on Sites, Tag 07A4
 -/
 
 @[expose] public noncomputable section
@@ -486,8 +489,7 @@ private theorem inverse_on_representatives
 
 -- The two routes are natural transformations; resolving-pair faithfulness
 -- therefore permits a componentwise representative calculation below.
-/-- The localized pullback square respects the four canonical tensor comparisons.
-Source: Stacks Project, Modules on Sites, Tag 04J0 and Cohomology on Sites, Tag 07A4. -/
+/-- The localized pullback square respects the four canonical tensor comparisons. -/
 theorem localTensorSquare
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R_Y : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})

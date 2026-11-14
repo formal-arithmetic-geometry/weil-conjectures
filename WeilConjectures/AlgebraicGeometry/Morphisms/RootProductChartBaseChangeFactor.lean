@@ -11,7 +11,12 @@ public import Mathlib.RingTheory.AdjoinRoot
 import Mathlib.AlgebraicGeometry.Pullbacks
 import Mathlib.RingTheory.TensorProduct.Pi
 
-/-! Open factors of a base-changed product root chart. -/
+/-! Open factors of a base-changed product root chart.
+
+## References
+
+* Stacks Project, Tag 0EYI, preliminary root-chart base change calculation
+-/
 
 @[expose] public section
 
@@ -20,8 +25,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- A product root chart has open generic factors after any extension of its coefficient ring.
-
-Source: Stacks Project, Tag 0EYI, preliminary root-chart base change calculation. -/
+-/
 theorem rootProductChart_baseChange_factor {L N : Scheme.{u}} (n : N ⟶ L)
     (R : CommRingCat.{u}) (φ : Spec R ⟶ L) (f : R)
     (m : ℕ) (e : Fin m → ℕ)

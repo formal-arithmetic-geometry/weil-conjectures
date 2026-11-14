@@ -13,7 +13,10 @@ import WeilConjectures.AlgebraicGeometry.RelativeProj.Basic
 /-!
 # Separatedness of a projective bundle
 
-Source: Stacks Project, Constructions, Tag 01OD.
+## References
+
+* Stacks Project, Constructions, Tag 01OD
+* Stacks Project, Constructions, Tag 01OD, via Tag 01O2
 -/
 
 @[expose] public section
@@ -26,8 +29,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- The relative projective bundle of a quasi-coherent module has separated structure morphism.
-Source: Stacks Project, Constructions, Tag 01OD, via Tag 01O2. -/
+/-- The relative projective bundle of a quasi-coherent module has separated structure morphism. -/
 theorem isSeparated_projectiveBundle {S : Scheme.{u}} (E : S.Modules)
     [E.IsQuasicoherent] :
     IsSeparated (@SymmetricAlgebraSheaf.gradedAlgebraData S E inferInstance).relProjHom := by

@@ -13,7 +13,12 @@ import WeilConjectures.AlgebraicGeometry.OrdinarySource.SemilinearOrdinarySource
 
 /-! # Ordinary inverse image on the ringed sequence site
 
-Source: Zheng Construction 4.1; Stacks 03D2 and 03DA.
+## References
+
+* Zheng Construction 4.1
+* Stacks 03D2 and 03DA
+* Stacks 03D2
+* Zheng Construction 4.1, paragraph before Lemma 4.10
 -/
 
 @[expose] public noncomputable section
@@ -36,8 +41,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   (F : ℕ → Sheaf J' CommRingCat.{max c v r}) (σ : ∀ n, F (n + 1) ⟶ F n)
   (I : ∀ n, SheafOfModules.AlgebraicInverseImage uInv (B n) (F n))
 
-/-- Only the inverse-image part of the ordinary system construction.
-Source: Zheng Construction 4.1; Stacks 03D2. -/
+/-- Only the inverse-image part of the ordinary system construction. -/
 structure OrdinaryInverseSystem where
   pull : Systems.{c, v, max c v r} J B τ ⥤ Systems.{c, v, max c v r} J' F σ
   [limits : PreservesFiniteLimits pull]
@@ -295,8 +299,7 @@ private theorem strictFunctor_exact {A : Type*} [Category A]
     exact isColimitOfPreserves (G ⋙ E n) hc
 
 /-- Termwise inverse image, with its actual horizontal maps, can be assembled on the
-ringed sequence site. No direct image or adjunction is asserted.
-Source: Zheng Construction 4.1, paragraph before Lemma 4.10; Stacks 03D2 and 03DA. -/
+ringed sequence site. No direct image or adjunction is asserted. -/
 theorem ordinaryInverseSystem_exists [PreservesFiniteLimits uInv]
     [∀ n, PreservesFiniteLimits (I n).modules]
     [∀ n, PreservesFiniteColimits (I n).modules]

@@ -8,7 +8,10 @@ public import WeilConjectures.AlgebraicGeometry.Koszul.KoszulReconstructionModel
 import WeilConjectures.AlgebraicGeometry.Koszul.KoszulReconstructionComparison
 /-! # Koszul reconstruction from strict quotient reductions
 
-Source: Stacks Tags 091N, 0941, 099M.
+## References
+
+* Stacks Tags 091N, 0941, 099M
+* Stacks Tags 091N, 091Z, 099L and 099M
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -21,9 +24,7 @@ variable (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
 
 /-- Koszul completion and the total derived inverse limit of strict quotient reductions
 are naturally isomorphic, carrying the Koszul unit to the actual quotient completion unit.
-Consequently the quotient unit is invertible for every derived I-complete object.
-
-Source: Stacks Tags 091N, 091Z, 099L and 099M. -/
+Consequently the quotient unit is invertible for every derived I-complete object. -/
 theorem koszulReconstruction (r : ℕ) (a : Fin r → A)
     (_ha : Ideal.span (Set.range a) = d.ideal) :
     ∃ c : reconstructionKoszulDerivedFunctor T d r a ≅

@@ -18,7 +18,12 @@ import WeilConjectures.RingTheory.FlatLocalDepthFormula
 /-!
 # A flat power-series test through a closed boundary point
 
-Source: Stacks Project, Tag 0EYB, choice of a closed point and completion of a smooth chart.
+## References
+
+* Stacks Project, Tag 0EYB, choice of a closed point and completion of a smooth chart
+* Stacks Project, Tag 0EYB, proof from the residue extension to the sentence asserting that the
+  extended maximal ideal maps into U
+* Tags 07NE, 057G, 05D5, 00MB and 0337
 -/
 
 @[expose] public section
@@ -27,10 +32,7 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
-/-- A closed boundary point admits a flat power-series test with a generic point in the open.
-
-Source: Stacks Project, Tag 0EYB, proof from the residue extension to the sentence asserting that
-the extended maximal ideal maps into U; Tags 07NE, 057G, 05D5, 00MB and 0337 -/
+/-- A closed boundary point admits a flat power-series test with a generic point in the open. -/
 theorem exists_closed_fiber_power_series_test
     (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]
     {L : Scheme.{u}} (q : L ⟶ Spec (.of A)) [Smooth q]

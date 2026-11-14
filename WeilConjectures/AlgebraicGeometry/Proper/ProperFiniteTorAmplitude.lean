@@ -18,11 +18,13 @@ import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 /-!
 # Proper direct image preserves finite Tor amplitude
 
-Source: Stacks Project, Tags 0F0G and 0F12.
-
 Membership in `Dctf` with a specified Tor interval is expressed by bounded
 constructibility together with `hasTorAmplitudeIn` for that interval. This already
 includes finite Tor amplitude, both in the hypothesis and in the conclusion.
+
+## References
+
+* Stacks Project, Tags 0F0G and 0F12
 -/
 
 @[expose] public section

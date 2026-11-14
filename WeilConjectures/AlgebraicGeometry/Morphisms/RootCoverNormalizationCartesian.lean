@@ -19,7 +19,12 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 import WeilConjectures.AlgebraicGeometry.Morphisms.NormalizationAffineLocalization
 import WeilConjectures.AlgebraicGeometry.Morphisms.RootCoverGenericPullback
 
-/-! # Cartesian comparison of the root-cover normalizations -/
+/-! # Cartesian comparison of the root-cover normalizations
+
+## References
+
+* Stacks Project, Tag 0307
+-/
 
 @[expose] public section
 universe u
@@ -93,9 +98,7 @@ private theorem normalization_cartesian_of_isIso
   exact ⟨by rw [Category.assoc, pullback.condition, ← Category.assoc, hE]⟩
 
 set_option linter.unusedVariables false in
-/-- The normalization of the DVR root cover is the coefficient-localized normalization.
-
-Source: Stacks Project, Tag 0307 -/
+/-- The normalization of the DVR root cover is the coefficient-localized normalization. -/
 theorem root_cover_normalization_cartesian
     {L U : Scheme.{u}} (i : U ⟶ L)
     (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)

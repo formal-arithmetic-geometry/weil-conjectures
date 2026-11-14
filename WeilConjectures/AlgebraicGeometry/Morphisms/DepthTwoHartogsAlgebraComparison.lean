@@ -17,7 +17,10 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.DepthTwoHartogsRestriction
 
 /-! # Hartogs comparison with an actual algebra pushforward
 
-Source: Stacks Project, Tag 0E9I.
+## References
+
+* Stacks Project, Tag 0E9I
+* stalks as filtered colimits, Tag 009E
 -/
 
 @[expose] public section
@@ -89,9 +92,7 @@ private theorem algebra_stalk_linearEquiv {L : Scheme.{u}} (B : L.CommAlgebraShe
   exact ⟨LinearEquiv.ofBijective ℓ e.bijective⟩
 
 /-- Hartogs identifies a supplied coherent depth-two extension with the actual
-pushforward, including the scalar-compatible comparison of ring-valued stalks.
-
-Source: Stacks Project, Tag 0E9I; stalks as filtered colimits, Tag 009E. -/
+pushforward, including the scalar-compatible comparison of ring-valued stalks. -/
 theorem depth_two_hartogs_algebra_comparison
     {L : Scheme.{u}} [IsLocallyNoetherian L] (U : L.Opens)
     {X : Scheme.{u}} (f : X ⟶ U.toScheme) (N : L.Modules)

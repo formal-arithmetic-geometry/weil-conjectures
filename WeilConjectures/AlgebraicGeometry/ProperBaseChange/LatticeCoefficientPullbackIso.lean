@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.Continuous.ContinuousCoefficientPullbac
 /-!
 # Immersion restriction in the lattice coefficient presentation
 
-Source: Bhatt--Scholze, Lemma 6.5.8(1), Definition 6.8.1 and the paragraph before Definition 6.8.6.
+## References
+
+* Bhatt--Scholze, Lemma 6.5.8(1), Definition 6.8.1 and the paragraph before Definition 6.8.6
 -/
 
 @[expose] public noncomputable section
@@ -72,8 +74,6 @@ private theorem coefficientPresentation_isIso
 /-- Canonical coefficient pullback along an immersion is invertible in both the integral
 and rational lattice presentations. The maps are the adjuncts of precomposition with the
 base-change projection, so the result fixes their normalization as well as their objects.
-
-Source: Bhatt--Scholze, Lemma 6.5.8(1), Definition 6.8.1 and the paragraph before Definition 6.8.6.
 -/
 theorem latticeCoefficientPullback_isIso (l : ℕ) [Fact l.Prime] (E : Type u)
     [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

@@ -12,7 +12,12 @@ import WeilConjectures.AlgebraicGeometry.RationalP1.Second.RationalP1SecondPullS
 import WeilConjectures.AlgebraicGeometry.RationalP1.Second.RationalP1SecondPullComparisonExpansion
 import WeilConjectures.AlgebraicGeometry.RationalP1.Second.RationalP1SecondPullSectionCoreComm
 
-/-! # The second pullback comparison restricted to the diagonal -/
+/-! # The second pullback comparison restricted to the diagonal
+
+## References
+
+* Second identity, first factor before the Tate twist
+-/
 
 @[expose] public noncomputable section
 
@@ -36,8 +41,7 @@ attribute [local irreducible] projectionMap singleUnitIso secondLineComparison
 
 /-- The ambient pullback comparison restricts to the identity on the diagonal for the
 untwisted base object. This is the composition-coherence part of the second pull-section
-argument; the Tate-line and tensor transport are handled by `second_pull_section`.
-Source: Second identity, first factor before the Tate twist. -/
+argument; the Tate-line and tensor transport are handled by `second_pull_section`. -/
 theorem second_pull_section_core
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

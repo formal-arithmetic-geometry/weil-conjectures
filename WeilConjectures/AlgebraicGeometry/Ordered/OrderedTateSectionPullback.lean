@@ -10,10 +10,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 
 import all WeilConjectures.AlgebraicGeometry.Ordered.OrderedTateExactOpenComposition
 
-/-! # Section coherence of the ordered Tate coefficient
-
-Source: smooth-purity, Agreement on the model, restriction to the diagonal.
--/
+/-! # Section coherence of the ordered Tate coefficient -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -57,8 +54,7 @@ private lemma coefficient_identity (A : Type (u + 1)) [CommRing A]
       (𝟙 X) (𝟙 X) (𝟙 X) (Category.id_comp _).symm hX hX d)
 
 /-- Restricting the canonical ordered Tate pullback along a section gives the
-canonical section compositor, with no residual automorphism of the coefficient.
-Source: smooth-purity, Agreement on the model, restriction of trace base change. -/
+canonical section compositor, with no residual automorphism of the coefficient. -/
 theorem orderedTateSectionPullback (A : Type (u + 1)) [CommRing A]
     (N : ℕ) (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     {X Z : Scheme.{u}} (p : Z ⟶ X) (s : X ⟶ Z) (hs : s ≫ p = 𝟙 X)

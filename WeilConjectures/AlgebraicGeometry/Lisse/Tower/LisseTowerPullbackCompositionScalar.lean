@@ -16,8 +16,10 @@ The composition comparison of module inverse images, conjugate to the restrictio
 sections along the fibre-product pasting isomorphism, is compatible with the
 restriction/pullback mates along the quotient coefficient maps.
 
-Source: Stacks Project, Modules on Sites, Tags 03D8 and 03DA; Cohomology on Sites,
-Tag 0D6D.
+## References
+
+* Stacks Project, Modules on Sites, Tags 03D8 and 03DA
+* Cohomology on Sites, Tag 0D6D
 -/
 
 public noncomputable section

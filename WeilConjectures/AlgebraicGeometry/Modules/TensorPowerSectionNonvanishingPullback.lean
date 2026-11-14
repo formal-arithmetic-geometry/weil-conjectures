@@ -14,7 +14,10 @@ import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 
 /-! # Pullback of tensor-power sections and their nonvanishing loci
 
-Source: Stacks Project, Modules, Tags 01CD and 01CT; Morphisms, Tag 0892, part (2).
+## References
+
+* Stacks Project, Modules, Tags 01CD and 01CT
+* Morphisms, Tag 0892, part (2)
 -/
 
 @[expose] public section
@@ -27,8 +30,6 @@ universe u
 
 /-- A section of a positive tensor power pulls back to a section of the same power
 of the pulled-back invertible module, with inverse-image nonvanishing locus.
-
-Source: Stacks Project, Modules, Tags 01CD and 01CT; Morphisms, Tag 0892, part (2).
 -/
 theorem exists_tensorPow_section_nonvanishing_pullback {X Y : Scheme.{u}}
     (g : Y ⟶ X) (L : X.Modules) [L.IsInvertible] (n : ℕ) (hn : 0 < n)

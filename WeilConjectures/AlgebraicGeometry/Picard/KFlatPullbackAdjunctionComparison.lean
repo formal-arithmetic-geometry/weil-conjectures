@@ -9,7 +9,12 @@ public import WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
 public import WeilConjectures.AlgebraicGeometry.RelativeMVMaps
 public import WeilConjectures.AlgebraicGeometry.MayerVietorisImageChainData
 
-/-! # K-flat computation of the pinned adjunction on chain maps -/
+/-! # K-flat computation of the pinned adjunction on chain maps
+
+## References
+
+* Stacks Project, Cohomology, Tags 06YI, 06YJ, and 079W
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -55,8 +60,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option maxHeartbeats 800000 in
 -- Comparing the concrete sheaf adjunctions requires unfolding their chosen instances.
 /-- For a K-flat source, the localized ordinary transpose computes the pinned derived
-transpose. The comparison is independent of the target complex and the chain map.
-Source: Stacks Project, Cohomology, Tags 06YI, 06YJ, and 079W. -/
+transpose. The comparison is independent of the target complex and the chain map. -/
 theorem kFlat_pullback_adjunction_comparison
     [d : ∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

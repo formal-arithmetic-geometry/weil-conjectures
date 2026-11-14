@@ -23,7 +23,10 @@ import Mathlib.LinearAlgebra.StdBasis
 /-!
 # Flatness of tame local normalization
 
-Source: Stacks Project, Tags 0EYG, 0EYH, 0EYI and 0EYJ.
+## References
+
+* Stacks Project, Tags 0EYG, 0EYH, 0EYI and 0EYJ
+* Stacks Project, Tags 0EYJ (trait reduction), 0EYG and 0EYH
 -/
 
 @[expose] public section
@@ -32,9 +35,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- The tame local normalization is flat, without a section or a rational point.
-
-Source: Stacks Project, Tags 0EYJ (trait reduction), 0EYG and 0EYH. -/
+/-- The tame local normalization is flat, without a section or a rational point. -/
 theorem GaloisCover.stalk_normalization_trait_flat {S C : Scheme.{u}}
     [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]

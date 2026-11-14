@@ -14,7 +14,9 @@ public import Mathlib.CategoryTheory.Functor.ReflectsIso.Balanced
 /-!
 # Restricting a constant ring sheaf to its constant scalars
 
-Source: Stacks Project, Tags 093I and 03CY.
+## References
+
+* Stacks Project, Tags 093I and 03CY
 -/
 
 @[expose] public section
@@ -127,8 +129,7 @@ private noncomputable instance restriction_essSurj :
     exact (Functor.FullyFaithful.ofFullyFaithful (moduleEmbedding T B)).preimageIso
       (asIso (adj.unit.app P)).symm
 
-/-- Restricting to constant scalars is an equivalence of the two coefficient encodings.
-Source: Stacks Project, Tags 093I and 03CY. -/
+/-- Restricting to constant scalars is an equivalence of the two coefficient encodings. -/
 theorem proEtaleModuleRestriction_isEquivalence :
     (proEtaleModuleRestriction T B).IsEquivalence := by
   exact {}

@@ -11,9 +11,12 @@ public import WeilConjectures.AlgebraicGeometry.Localized.LocalizedTStructure
 
 /-! # Standard cohomology at common finite coefficient stages
 
-Source: Bhatt--Scholze, Section 6.8, Propositions 6.8.11 and 6.8.14.
 This extends the recorded ambient and rational cohomology to the actual Qbar pair
 category. Invertibility is required on the scheme, including the empty scheme.
+
+## References
+
+* Bhatt--Scholze, Section 6.8, Propositions 6.8.11 and 6.8.14
 -/
 
 @[expose] public noncomputable section

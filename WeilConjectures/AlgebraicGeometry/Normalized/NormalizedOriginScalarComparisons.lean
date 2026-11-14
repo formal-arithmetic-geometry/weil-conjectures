@@ -11,8 +11,13 @@ public import WeilConjectures.AlgebraicGeometry.Adic.AdicCoefficientDatumSupplem
 /-!
 # Canonical unit and reassociation for quotient scalar extensions
 
-Source: Stacks Tags 06YY and 09B1, coefficient refinement of the compatible-origin argument.
 The definitions are relocated verbatim from NormalizedEtaleOriginWitnesses.
+
+## References
+
+* Stacks Tags 06YY and 09B1, coefficient refinement of the compatible-origin argument
+* Stacks 06YY, unit balancing in the coefficient refinement of Tag 09B1
+* Stacks 06YY and 09B1, coefficient refinement
 -/
 
 @[expose] public noncomputable section
@@ -21,8 +26,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.ProEtale
 
-/-- Canonical identity restriction on sheaves, given by identity section maps.
-Source: Stacks 06YY, unit balancing in the coefficient refinement of Tag 09B1. -/
+/-- Canonical identity restriction on sheaves, given by identity section maps. -/
 def normalizedOriginRestrictionUnit
     {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
     {R : Type (u + 1)} [CommRing R] (φ : R →+* R) (hφ : φ = RingHom.id R) :
@@ -37,8 +41,7 @@ def normalizedOriginRestrictionUnit
       rfl)
 
 /-- Canonical self-extension unit, the adjunction mate of identity scalar restriction.
-It is the derived map x tensor a to ax, not a chosen automorphism.
-Source: Stacks 06YY, unit balancing in the coefficient refinement of Tag 09B1. -/
+It is the derived map x tensor a to ax, not a chosen automorphism. -/
 def normalizedOriginScalarUnit
     {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
     (J : GrothendieckTopology C) {R : Type (u + 1)} [CommRing R]
@@ -48,8 +51,7 @@ def normalizedOriginScalarUnit
     (Functor.mapDerivedCategoryNatIso (normalizedOriginRestrictionUnit J φ hφ) ≪≫
       Functor.mapDerivedCategoryIdIso _)
 
-/-- Direct quotient scalar extension, in the published fixed-ring presentation.
-Source: Stacks 06YY and 09B1, coefficient refinement. -/
+/-- Direct quotient scalar extension, in the published fixed-ring presentation. -/
 abbrev normalizedOriginReduction
     {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
     (J : GrothendieckTopology C) {A : Type (u + 1)} [CommRing A]

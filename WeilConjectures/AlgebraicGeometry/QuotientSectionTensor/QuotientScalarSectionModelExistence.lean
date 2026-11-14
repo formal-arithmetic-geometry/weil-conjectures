@@ -7,7 +7,12 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionTensorData
 
-/-! Existence of the actual sectionwise cochain scalar model. -/
+/-! Existence of the actual sectionwise cochain scalar model.
+
+## References
+
+* Stacks 06YY
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -27,8 +32,7 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
 variable [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ T)]
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ' T)]
 
-/-- The actual sectionwise cochain scalar model exists.
-Source: Stacks 06YY. -/
+/-- The actual sectionwise cochain scalar model exists. -/
 theorem scalar_section_model_exists (T : Scheme.{u}) :
     Nonempty (SectionModel a T) := by
   exact SheafOfModules.nonempty_derivedChangeOfRingsCochainModel (sectionQuotient a T)

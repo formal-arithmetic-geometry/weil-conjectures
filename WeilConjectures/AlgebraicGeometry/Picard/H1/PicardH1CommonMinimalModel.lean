@@ -26,7 +26,11 @@ import WeilConjectures.AlgebraicGeometry.Residue.ResidueRankModelDifferential
 
 /-! # Common trivializations and a minimal source model
 
-Source: Stacks Project, Tag 0BF2, through the first displayed source complex.
+## References
+
+* Stacks Project, Tag 0BF2, through the first displayed source complex
+* Stacks Project, Tag 0BF2, first two proof paragraphs
+* Tags 0B91 and 0BCD
 -/
 
 @[expose] public section
@@ -106,8 +110,7 @@ set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Choose a common affine neighbourhood with trivial target bundles and a minimal
-finite-free representative of the source direct image.
-Source: Stacks Project, Tag 0BF2, first two proof paragraphs; Tags 0B91 and 0BCD. -/
+finite-free representative of the source direct image. -/
 theorem picard_h1_common_minimal_model
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

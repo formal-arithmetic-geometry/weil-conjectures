@@ -10,7 +10,11 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 
 /-! # Base change of finite Galois torsors
 
-Source: Stacks Project, Tag 0EZJ, final pullback step; finite étale torsors as in Tag 0BTV.
+## References
+
+* Stacks Project, Tag 0EZJ, final pullback step
+* finite étale torsors as in Tag 0BTV
+* Tag 0BTV
 -/
 
 @[expose] public section
@@ -104,9 +108,7 @@ private theorem torsor_comparison_baseChange
     exact hSigma
   exact (hs.of_bot hc hR).isIso_snd_of_isIso
 
-/-- A finite Galois torsor has a base change along every morphism of schemes.
-
-Source: Stacks Project, Tag 0EZJ, final pullback step; Tag 0BTV. -/
+/-- A finite Galois torsor has a base change along every morphism of schemes. -/
 theorem GaloisCover.exists_baseChange
     {X Y : Scheme.{u}} (G : Type (u + 1)) [Group G] [Finite G]
     (Z : GaloisCover G X) (f : Y ⟶ X) :

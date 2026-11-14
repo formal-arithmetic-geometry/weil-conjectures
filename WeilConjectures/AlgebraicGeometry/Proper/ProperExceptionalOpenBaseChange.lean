@@ -95,6 +95,10 @@ The proper/open map is fixed by sectionwise restriction and the open adjunctions
 
 * `sfProperExceptionalOpenBaseChange`: the conditional unbounded ambient assertion.
 * `sfProperFiniteExceptionalOpenBaseChange`: the independent etale-origin assertion.
+
+## References
+
+* Stacks Tags 09AE and 09BN
 -/
 
 @[expose] public section
@@ -106,8 +110,7 @@ namespace AlgebraicGeometry.Scheme
 variable (A : Type u) [CommRing A] [Finite A]
 
 /-- Open restriction of direct image, using exactly the sectionwise fibre-product map
-of the recorded sheaf comparison, now expressed with the exact inverse-image functors.
-Source: Stacks Tags 09AE and 09BN. -/
+of the recorded sheaf comparison, now expressed with the exact inverse-image functors. -/
 noncomputable def sfProperOpenPullbackRestriction {U V W T : Scheme.{u}}
     (r : U ⟶ W) (k : U ⟶ V) (i : W ⟶ T) (p : V ⟶ T)
     [IsOpenImmersion i] [IsOpenImmersion k] (sq : IsPullback r k i p) :

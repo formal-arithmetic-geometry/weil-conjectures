@@ -54,7 +54,9 @@ set_option linter.privateModule false
 
 /-! # Exact rationalization of integral continuous coefficient modules
 
-Source: Bhatt--Scholze, Lemma 6.8.2(2).
+## References
+
+* Bhatt--Scholze, Lemma 6.8.2(2)
 -/
 
 @[expose] public section

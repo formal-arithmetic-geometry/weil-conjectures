@@ -51,7 +51,9 @@ import all WeilConjectures.CategoryTheory.ScalarHomTensor.ScalarHomTensorCompari
 
 /-! # Normalized total tensor comparison for pro-etale scalar extension
 
-Source: Stacks 03EL and 07A4.
+## References
+
+* Stacks 03EL and 07A4
 -/
 
 @[expose] public noncomputable section
@@ -264,8 +266,7 @@ private theorem total_balance_unit (X : Scheme.{u})
 
 end TensorCalculation
 
-/-- Scalar extension commutes with total tensor, with its scalar-first section formula.
-Source: Stacks 03EL and 07A4. -/
+/-- Scalar extension commutes with total tensor, with its scalar-first section formula. -/
 theorem pbc_tensor_balance_exists (X : Scheme.{u})
     {A B : Sheaf (ProEt.topology X) CommRingCat.{u + 1}} (φ : A ⟶ B) :
     ∃ balance : coefficientTotalTensor.{u + 1, u + 1, u} (ProEt.topology X) A ⋙

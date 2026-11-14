@@ -15,7 +15,11 @@ import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 
 /-! # The unit comparison from an ordinary image to a total derived image
 
-Source: Stacks Project, Tags 079V and 0A1G.
+## References
+
+* Stacks Project, Tags 079V and 0A1G
+* Stacks, Tag 079V
+* Stacks, Tags 079V and 0A1G
 -/
 
 @[expose] public section
@@ -32,8 +36,7 @@ variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
 /-- The single-complex direct-image comparison followed by the right-derived unit.
-This is an actual morphism, without a choice of a cohomological representative.
-Source: Stacks, Tag 079V. -/
+This is an actual morphism, without a choice of a cohomological representative. -/
 def canonicalSingleDirectImageMap {X S : Scheme.{u}} (f : X ⟶ S) (M : X.Modules) :
     (DerivedCategory.singleFunctor
       (SheafOfModules.{u} (moduleRings S.toRingedSpace)) 0).obj ((pushforward f).obj M) ⟶
@@ -46,8 +49,7 @@ def canonicalSingleDirectImageMap {X S : Scheme.{u}} (f : X ⟶ S) (M : X.Module
       ((HomotopyCategory.singleFunctor _ 0).obj M))
 
 /-- Vanishing of positive right-derived images makes the unit comparison invertible.
-No invertibility or flatness of either module is required.
-Source: Stacks, Tags 079V and 0A1G; the nonnegative injective-resolution computation. -/
+No invertibility or flatness of either module is required. -/
 theorem isIso_canonicalSingleDirectImageMap {X S : Scheme.{u}} (f : X ⟶ S)
     [HasInjectiveResolutions X.Modules] (M : X.Modules)
     (hq : ∀ q : ℕ, 0 < q → IsZero (((pushforward f).rightDerived q).obj M)) :

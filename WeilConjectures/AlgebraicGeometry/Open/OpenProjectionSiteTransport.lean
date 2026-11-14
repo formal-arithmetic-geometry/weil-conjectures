@@ -26,9 +26,14 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 /-!
 # Site transport of the open projection formula
 
-Source: Stacks Project, Tag 09AF, Tag 0GL1.
 The derived statement and its K-flat normalization follow the blueprint item
 `lem-pur-open-projection-site-transport`.
+
+## References
+
+* Stacks Project, Tag 09AF, Tag 0GL1
+* Stacks Project, Tag 09AF
+* Stacks Project, Tag 099R
 -/
 
 @[expose] public section
@@ -45,7 +50,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- The derived, adjoint-normalized extension comparison, obtained by descending
 `openImmersionLowerShriekComparisonUpperStarIso` termwise, with the canonical
-composition identifications. Source: Stacks Project, Tag 09AF. -/
+composition identifications. -/
 noncomputable def openProjectionExtensionComparison (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j).mapDerivedCategory ⋙
@@ -59,7 +64,7 @@ noncomputable def openProjectionExtensionComparison (Λ : Type (u + 1)) [CommRin
 
 /-- The canonical inverse-image comparison, converted from exact termwise pullbacks
 using `leftDerivedUpperStarIsoMapDerivedCategory` on both sites. Its direction is
-`C_U Lj_e^* ≅ Lj_p^* C_X`. Source: Stacks Project, Tag 099R. -/
+`C_U Lj_e^* ≅ Lj_p^* C_X`. -/
 noncomputable def openProjectionRestrictionComparison (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (Etale.upperStar (ModuleCat.{u + 1} Λ) j).leftDerivedFunctor ⋙

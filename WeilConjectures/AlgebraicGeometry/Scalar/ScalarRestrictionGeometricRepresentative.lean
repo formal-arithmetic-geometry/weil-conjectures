@@ -11,7 +11,10 @@ import all WeilConjectures.AlgebraicGeometry.Scalar.ScalarPullbackRepresentative
 /-!
 # The exact restriction and geometric representative square
 
-Source: Stacks Project, Tags 07A4 and 07A6.
+## References
+
+* Stacks Project, Tags 07A4 and 07A6
+* Stacks 07A4 and 07A6
 -/
 
 @[expose] public noncomputable section
@@ -26,8 +29,7 @@ attribute [local irreducible] Functor.leftAdjoint Functor.rightAdjoint
   Functor.leftDerivedFunctor Functor.mapDerivedCategory upperStar lowerStar
 
 /-- Exact restriction commutes with geometric representatives, with the ordinary
-restriction/pullback square as its complex representative.
-Source: Stacks 07A4 and 07A6. -/
+restriction/pullback square as its complex representative. -/
 theorem scalarRestrictionPullbackIso_geometric_representative
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {Z W : Scheme.{u}} (f : Z ⟶ W)

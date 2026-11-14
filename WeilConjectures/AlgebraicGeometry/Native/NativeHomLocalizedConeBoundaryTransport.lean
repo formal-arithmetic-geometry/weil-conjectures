@@ -10,7 +10,10 @@ public import Mathlib.CategoryTheory.Triangulated.Opposite.Functor
 
 /-! # Transport of the native Hom cone boundary
 
-Source: Stacks Project, Tags 08J9 and 08JC.
+## References
+
+* Stacks Project, Tags 08J9 and 08JC
+* Stacks Project, Tag 08JC
 -/
 
 @[expose] public noncomputable section
@@ -37,7 +40,6 @@ private theorem signedSource_coefficient_naturality
     congrArg (fun z ↦ (n * (n + 1) / 2).negOnePow • z) h
 
 /-- Naturality transports the K-injective cone boundary to any coefficient.
-Source: Stacks Project, Tag 08JC.
 
 For an isomorphism from the localization of a K-injective complex to a derived
 object, naturality of the evaluation comparison and of the signed source mate

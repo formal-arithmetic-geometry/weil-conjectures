@@ -11,7 +11,12 @@ public import Mathlib.Algebra.Polynomial.Laurent
 
 /-! # Laurent coordinates on the projective-line overlap
 
-Source: Stacks Project, Tag 0BXJ, proof of divisors-lemma-Pic-projective-space-UFD.
+## References
+
+* Stacks Project, Tag 0BXJ, proof of divisors-lemma-Pic-projective-space-UFD
+* Stacks Project, Tag 0BXJ, proof of divisors-lemma-Pic-projective-space-UFD, the displayed
+  computation of the units on D_+(T_i T_j)
+* also Constructions, Tag 01M7
 -/
 
 @[expose] public section
@@ -138,10 +143,7 @@ private lemma bijective_eval_overlap (k : Type u) [Field k]
   rw [LaurentPolynomial.single_eq_C_mul_T, LaurentPolynomial.eval₂_C_mul_T,
     monomial_zpow k q hq]
 
-/-- Laurent evaluation at x_0/x_1 identifies the overlap ring with k[z,z^-1].
-
-Source: Stacks Project, Tag 0BXJ, proof of divisors-lemma-Pic-projective-space-UFD, the displayed
-computation of the units on D_+(T_i T_j); also Constructions, Tag 01M7 -/
+/-- Laurent evaluation at x_0/x_1 identifies the overlap ring with k[z,z^-1]. -/
 theorem bijective_overlap_laurent (k : Type u) [Field k] :
     Function.Bijective
       (LaurentPolynomial.eval₂

@@ -65,7 +65,12 @@ import all WeilConjectures.CategoryTheory.InternalSectionModuleFlat
 import all WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
 import all Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 
-/-! # Ordinary scalar section tensor square -/
+/-! # Ordinary scalar section tensor square
+
+## References
+
+* Stacks, Cohomology on Sites, Tags 06YY and 07A4
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -215,7 +220,6 @@ attribute [local irreducible] ordinaryTensorComparison Mod.extendRestrictAdjunct
 
 -- Compare the concrete scalar-unit formulas through the section equivalence.
 /-- The scalar section comparison intertwines the ordinary tensor constraints.
-Source: Stacks, Cohomology on Sites, Tags 06YY and 07A4.
 Compare maps after the scalar and tensor coequalizer projections. Linearity reduces
 this to scalar-unit pure tensors, where the internal monoidal normalization and
 the two section normalization formulas agree by naturality of the tensor pairing. -/

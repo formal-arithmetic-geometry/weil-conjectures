@@ -10,8 +10,14 @@ import WeilConjectures.AlgebraicGeometry.Lisse.Tower.LisseTowerLocalizedActualNo
 
 /-! # Transport of an actual descended semilinear tower
 
-Source: Stacks Project, Tags 03CY, 03DA and 06YY. This is the actual-level part of
+This is the actual-level part of
 localized realization; it has no constant-model comparison or algebraic-arrow assertion.
+
+## References
+
+* Stacks Project, Tags 03CY, 03DA and 06YY
+* Stacks Project, Modules on Sites, Tags 03CY and 03DA
+* Cohomology on Sites, Tag 06YY
 -/
 
 @[expose] public noncomputable section
@@ -28,8 +34,7 @@ attribute [local irreducible] HasDerivedCategory.standard pbcDerivedRestrict
 /-- Transport the supplied actual comparisons and descent equations to one further
 pro-etale localization, using the constructed scalar comparison.
 
-Source: Stacks Project, Modules on Sites, Tags 03CY and 03DA; Cohomology on Sites,
-Tag 06YY. These are the actual-level parts of steps 1 and 2 of
+These are the actual-level parts of steps 1 and 2 of
 lem-weil-pbc-lisse-tower-localized-realization. -/
 theorem lisseTower_localized_actual
     (X Y : Scheme.{u}) (g : Y ⟶ X)

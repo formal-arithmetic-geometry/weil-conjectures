@@ -19,8 +19,11 @@ import WeilConjectures.AlgebraicGeometry.Regular
 
 /-! # Flatness and structure-sheaf cohomology of canonical projective bundles
 
-Source: Stacks Project, Constructions, Tags 01OB and 01OE; Morphisms,
-standard polynomial charts; Cohomology of Schemes, projective-space computation.
+## References
+
+* Stacks Project, Constructions, Tags 01OB and 01OE
+* Stacks Project, Constructions, Tags 01OB and 01OE, and Cohomology of Schemes, the projective-space
+  structure-sheaf cohomology computation
 -/
 
 @[expose] public section
@@ -173,9 +176,6 @@ private theorem subsingleton_structureH_of_iso {X Y : Scheme.{u}} (e : X ≅ Y) 
 /-- The projection of a positive-rank vector bundle is flat and locally of finite
 presentation. Its residue-field fibres are geometrically reduced and connected,
 and their structure sheaves have vanishing first cohomology.
-
-Source: Stacks Project, Constructions, Tags 01OB and 01OE, and Cohomology of
-Schemes, the projective-space structure-sheaf cohomology computation.
 -/
 theorem projective_bundle_fiber_geometry (S : Scheme.{u}) (E : S.Modules)
     [E.IsQuasicoherent] (r : ℕ)

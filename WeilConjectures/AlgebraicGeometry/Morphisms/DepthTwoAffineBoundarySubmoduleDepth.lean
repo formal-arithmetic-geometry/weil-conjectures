@@ -18,7 +18,10 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.BoundaryMaximalNotAssociated
 
 /-! # Positive depth of finite boundary submodules
 
-Source: Stacks Project, Tags 0AV8, 0AVN and 0E9I.
+## References
+
+* Stacks Project, Tags 0AV8, 0AVN and 0E9I
+* Stacks Project, Tags 0AV8, 0AVN, 0E9I, 01LC, 05AM and 00LL
 -/
 
 @[expose] public section
@@ -27,9 +30,7 @@ universe u
 open CategoryTheory Opposite TopCat.Presheaf
 namespace AlgebraicGeometry.Scheme
 
-/-- Positive depth of finite boundary submodules.
-
-Source: Stacks Project, Tags 0AV8, 0AVN, 0E9I, 01LC, 05AM and 00LL. -/
+/-- Positive depth of finite boundary submodules. -/
 theorem depth_one_affine_boundary_submodule
     {L : Scheme.{u}} [IsLocallyNoetherian L] (U : L.Opens)
     (N : L.Modules)

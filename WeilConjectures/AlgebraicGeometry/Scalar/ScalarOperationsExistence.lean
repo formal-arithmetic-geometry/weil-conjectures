@@ -11,7 +11,11 @@ import WeilConjectures.AlgebraicGeometry.Scalar.ScalarEvaluationTransposeExisten
 
 /-! # Normalized coefficient extension on semilinear systems
 
-Source: Zheng Construction 4.1 and Lemma 4.10. -/
+## References
+
+* Zheng Construction 4.1 and Lemma 4.10
+* Stacks 06YY, 07A4, 07A6
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -23,8 +27,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   (B : ℕ → Sheaf J CommRingCat.{max c v r})
   (τ : ∀ n : ℕ, B (n + 1) ⟶ B n)
 
-/-- Normalized coefficient extension on semilinear systems.
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 06YY, 07A4, 07A6. -/
+/-- Normalized coefficient extension on semilinear systems. -/
 theorem semilinearScalarOperations
     (F : ℕ → Sheaf J CommRingCat.{max c v r})
     (σ : ∀ n : ℕ, F (n + 1) ⟶ F n) (α : ∀ n : ℕ, B n ⟶ F n)

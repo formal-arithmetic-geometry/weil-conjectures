@@ -75,7 +75,11 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 
 /-! # A lower bound for pro-etale derived internal Hom
 
-Source: Bhatt--Scholze, Lemma 6.3.14, boundedness argument; Stacks Project, Tag 08JA.
+## References
+
+* Bhatt--Scholze, Lemma 6.3.14, boundedness argument
+* Stacks Project, Tag 08JA
+* Bhatt--Scholze, Lemma 6.3.14
 -/
 
 @[expose] public noncomputable section
@@ -113,8 +117,7 @@ private theorem homObj_zero_right (T : Scheme.{u})
   rfl
 
 /-- Internal Hom from an object bounded above by b to one bounded below by N is
-bounded below by N-b. The coefficient ring sheaf is arbitrary.
-Source: Bhatt--Scholze, Lemma 6.3.14; Stacks Project, Tag 08JA. -/
+bounded below by N-b. The coefficient ring sheaf is arbitrary. -/
 theorem proEtale_internalHom_isGE (T : Scheme.{u})
     (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1})
     [HasDerivedCategory (SheafOfModules.{u + 1} ((sheafCompose (ProEt.topology T)

@@ -17,7 +17,9 @@ The inverse image along a morphism of schemes of the completed realization of a 
 free module is the free module sheaf of the same rank. Both corepresent the finite
 families of global sections.
 
-Source: Bhatt--Scholze, Proposition 6.6.11.
+## References
+
+* Bhatt--Scholze, Proposition 6.6.11
 -/
 
 @[expose] public noncomputable section
@@ -113,8 +115,7 @@ private def integralConstantFreePullbackIso (r : ℕ) :
       rfl)
 
 /-- The inverse image of the completed realization of `A^r` is a module sheaf with a basis
-of `r` sections on every object.
-Source: Bhatt--Scholze, Proposition 6.6.11. -/
+of `r` sections on every object. -/
 theorem exists_basis_pullback_integralConstantModule_free (r : ℕ) :
     ∃ F : pbcModules S ((adicTowerInverseImage g).obj (pbcAdicCompletion T d)),
       (∀ U : S.ProEtᵒᵖ, Nonempty (Module.Basis (Fin r)

@@ -265,11 +265,20 @@ import all WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarRestriction
 /-!
 # Rational realization of the specified completed-pullback unit
 
-Source: Bhatt--Scholze, Proposition 6.6.11, Lemma 6.5.9 and Remark 6.8.15, pp. 50, 54, 62.
-
 The integral unit is the published strict quotient-tower unit. The ordinary
 comparison is fixed on tensor generators and by its derived computation counits.
 Its descent retains all raw fraction arrows, without taking a Karoubi envelope.
+
+## References
+
+* Bhatt--Scholze, Proposition 6.6.11, Lemma 6.5.9 and Remark 6.8.15, pp. 50, 54, 62
+* Bhatt--Scholze, Lemma 6.8.2 and Remark 6.8.15
+* Bhatt--Scholze, Section 6.8, scalar localization
+* Bhatt--Scholze, Remark 6.8.15
+* Stacks Tag 06YY
+* Bhatt--Scholze, Proposition 6.6.11 and Lemma 6.5.9
+* Bhatt--Scholze, Lemma 6.5.9 and Remark 6.8.15
+* Bhatt--Scholze, Proposition 6.6.11 and Remark 6.8.15
 -/
 
 @[expose] public noncomputable section
@@ -283,15 +292,13 @@ namespace AlgebraicGeometry.Scheme
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The scalar-localization map specified by the recorded realization data.
-Source: Bhatt--Scholze, Lemma 6.8.2 and Remark 6.8.15. -/
+/-- The scalar-localization map specified by the recorded realization data. -/
 abbrev rationalPullScalar {T : Scheme.{u}} [IsNoetherian T]
     [Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]
     [Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]
     (s : RationalModuleRealization l E T) := s.integralIso.hom ≫ s.inclusion
 
-/-- An actual raw fraction with integral numerator and the given uniformizer power.
-Source: Bhatt--Scholze, Section 6.8, scalar localization. -/
+/-- An actual raw fraction with integral numerator and the given uniformizer power. -/
 def rationalPullFraction (T : Scheme.{u})
     {K L : PbcBoundedConstructibleComplete T (pbcIntegralDatum l E)}
     (f : K ⟶ L) (n : ℕ) :
@@ -302,7 +309,7 @@ def rationalPullFraction (T : Scheme.{u})
       (pbcRationalization T (pbcIntegralDatum l E) (pbcUniformizer l E)).map f
 
 /-- Ordinary rational ringed pullback with its actual coefficient map, without an
-isomorphism assumption on that map. Source: Bhatt--Scholze, Remark 6.8.15. -/
+isomorphism assumption on that map. -/
 abbrev rationalPullModule {S T : Scheme.{u}} (g : S ⟶ T)
     (c : (proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj
       (rationalCoefficientSheaf l T E) ⟶ rationalCoefficientSheaf l S E) :=
@@ -311,14 +318,13 @@ abbrev rationalPullModule {S T : Scheme.{u}} (g : S ⟶ T)
         (rationalCoefficientSheaf l T E)) (Iso.refl _) ⋙ pbcExtend c
 
 /-- Unbounded derived rational ringed pullback: exact inverse image followed by
-actual derived scalar extension. Source: Bhatt--Scholze, Remark 6.8.15. -/
+actual derived scalar extension. -/
 def rationalPullDerived {S T : Scheme.{u}} (g : S ⟶ T)
     (c : (proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj
       (rationalCoefficientSheaf l T E) ⟶ rationalCoefficientSheaf l S E) :=
   adicTowerPullback g (rationalCoefficientSheaf l T E) ⋙ pbcDerivedExtend c
 
-/-- The ordinary computation counit of that composite on cochain representatives.
-Source: Stacks Tag 06YY; Bhatt--Scholze, Remark 6.8.15. -/
+/-- The ordinary computation counit of that composite on cochain representatives. -/
 def rationalPullComplexCounit {S T : Scheme.{u}} (g : S ⟶ T)
     (c : (proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj
       (rationalCoefficientSheaf l T E) ⟶ rationalCoefficientSheaf l S E)
@@ -342,8 +348,7 @@ variable {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
   [Fact (∀ y : Y, IsUnit (l : Y.presheaf.stalk y))]
 
 /-- Integral preservation and invertibility of exactly the quotient-tower unit.
-Membership includes intrinsic completeness, uniform reductions and compatible etale origins.
-Source: Bhatt--Scholze, Proposition 6.6.11 and Lemma 6.5.9. -/
+Membership includes intrinsic completeness, uniform reductions and compatible etale origins. -/
 structure RationalPullIntegral (g : X ⟶ Y) where
   /-- Ordinary coefficient pullback remains in the full integral category. -/
   ordinary_mem : ∀ K : PbcBoundedConstructibleComplete Y (pbcIntegralDatum l E),
@@ -357,15 +362,13 @@ structure RationalPullIntegral (g : X ⟶ Y) where
   unit_isIso : ∀ K : PbcBoundedConstructibleComplete Y (pbcIntegralDatum l E),
     IsIso ((pbcActualStrictCompletedPullUnit (pbcIntegralDatum l E) g).app K.obj)
 
-/-- Restriction keeps the actual strict completed-pullback objects and arrows.
-Source: Bhatt--Scholze, Lemma 6.5.9 and Remark 6.8.15. -/
+/-- Restriction keeps the actual strict completed-pullback objects and arrows. -/
 def RationalPullIntegral.completedFunctor {g : X ⟶ Y} (a : RationalPullIntegral l E g) :=
   pbcConditionalIntegral (pbcIntegralDatum l E)
     (pbcActualStrictCompletedPull (pbcIntegralDatum l E) g) a.completed_mem
 
 /-- All maps of the comparison, with their tensor, derived and fraction normalizations.
-The coefficient map is fixed by its localization unit, without an isomorphism hypothesis.
-Source: Bhatt--Scholze, Proposition 6.6.11 and Remark 6.8.15. -/
+The coefficient map is fixed by its localization unit, without an isomorphism hypothesis. -/
 structure RationalRealizationPullbackComparison (g : X ⟶ Y)
     (sX : RationalModuleRealization l E X) (sY : RationalModuleRealization l E Y) where
   /-- The integral preservation and specified-unit assertions. -/

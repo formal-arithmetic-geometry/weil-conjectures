@@ -10,7 +10,11 @@ public import WeilConjectures.AlgebraicGeometry.Picard.CanonicalSinglePullbackCo
 
 /-! # The actual coefficient arrow for a Picard direct-image comparison
 
-Source: Stacks Project, Tags 01F7, 08HY and 0B91
+## References
+
+* Stacks Project, Tags 01F7, 08HY and 0B91
+* Stacks Project, Tag 01F7
+* Stacks Project, Tags 01F7 and 08HY
 -/
 
 @[expose] public section
@@ -21,8 +25,7 @@ universe v
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- The base-changed coefficient morphism lies over W.
-Source: Stacks Project, Tag 01F7; the pullback functor's projection equation. -/
+/-- The base-changed coefficient morphism lies over W. -/
 theorem picardCoefficientBaseMap_snd
     {X X' S : Scheme.{v}} (f : X ⟶ S) (f' : X' ⟶ S)
     (u : X' ⟶ X) (hu : u ≫ f = f') (W : Scheme.{v}) (k : W ⟶ S) :
@@ -30,8 +33,7 @@ theorem picardCoefficientBaseMap_snd
       (Over.homMk (U := Over.mk f') (V := Over.mk f) u hu)).left) ≫
         pullback.snd f k = pullback.snd f' k := by simp
 
-/-- The other projection identifies the two pulled-back coefficients.
-Source: Stacks Project, Tag 01F7; the pullback functor's projection equation. -/
+/-- The other projection identifies the two pulled-back coefficients. -/
 theorem picardCoefficientBaseMap_fst
     {X X' S : Scheme.{v}} (f : X ⟶ S) (f' : X' ⟶ S)
     (u : X' ⟶ X) (hu : u ≫ f = f') (W : Scheme.{v}) (k : W ⟶ S) :
@@ -44,7 +46,6 @@ variable
     HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]
 
 /-- Construct the coefficient-induced arrow between base-changed direct images.
-Source: Stacks Project, Tags 01F7 and 08HY.
 
 Construction: Let j:X'_W -> X_W be the pullback of u. The two projection
 identities identify j^*(L_W) with (u^*L)_W by ordinary pullback composition and

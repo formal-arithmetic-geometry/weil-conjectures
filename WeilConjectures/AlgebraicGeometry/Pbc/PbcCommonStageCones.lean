@@ -18,6 +18,10 @@ The recorded generic commonStageCone and CommonStageDistinguished constructions
 are reused, with their literal cone object and all three specified arrows. This
 module supplies only their missing specialization to the published coefficient
 category and its normalized rational triangulation.
+
+## References
+
+* Stacks Tag 05R6
 -/
 
 @[expose] public noncomputable section
@@ -112,7 +116,7 @@ variable (l : ℕ) [Fact l.Prime] (Qbar : Type w)
 set_option linter.unusedVariables false in
 /-- The raw rational stage has the unique pretriangulation whose triangles are
 isomorphic to localized integral triangles, for the already recorded normalized
-shift. Source: Stacks Tag 05R6. -/
+shift. -/
 theorem qbarStagePretriangulated_exists (E : Padic.FiniteCoefficientFields l Qbar) :
     ∃! p : Pretriangulated (pbcStageCategory l Qbar T E),
       (fun [pInst : Pretriangulated (pbcStageCategory l Qbar T E)] ↦

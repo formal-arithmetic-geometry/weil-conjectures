@@ -118,8 +118,7 @@ theorem nativeCondensedDerivedPushforwardIso (l : ℕ) [Fact l.Prime]
     Functor.rightDerivedFunctorCompIso _ _ ≪≫
     Functor.isoWhiskerRight E.rightDerivedFunctorIsoMapDerivedCategory _⟩
 
-/-- Exact pullback commutes with the normalized comparison, also after deriving.
-Source: the same native module comparison and uniqueness of the exact derived functor. -/
+/-- Exact pullback commutes with the normalized comparison, also after deriving. -/
 theorem nativeCondensedDerivedPullbackIso (l : ℕ) [Fact l.Prime]
     {S T : Scheme.{u}} (f : S ⟶ T) :
     Nonempty ((adicUpperStar l f).mapDerivedCategory ⋙

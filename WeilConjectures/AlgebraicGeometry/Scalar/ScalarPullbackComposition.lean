@@ -15,6 +15,10 @@ The normalized comparison is already identified with the inverse scalar-adjuncti
 in `EtaleProEtaleScalarMate`. Transport that identification to exact derived inverse image.
 The existing derived restriction square respects geometric composition. Its scalar-adjunction
 transposes therefore compose, and inversion gives the stated forward comparison.
+
+## References
+
+* Stacks Project, with the ordinary composition of Tag 03D8 and the K-flat normalization of Tag 0G7E
 -/
 
 @[expose] public section
@@ -250,9 +254,7 @@ private theorem scalarExact_composition
     Category.id_comp, Category.comp_id]
 
 /-- The normalized scalar/pullback comparison commutes with composition of inverse images.
-The displayed transports express left-derived inverse images as the levelwise exact functors.
-Source: Stacks Project, with the ordinary composition of Tag 03D8 and the K-flat normalization of
-Tag 0G7E. -/
+The displayed transports express left-derived inverse images as the levelwise exact functors. -/
 theorem scalarPullback_composition
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {X T₁ T₂ : Scheme.{u}}

@@ -19,7 +19,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedRootLimitPresentatio
 /-!
 # Descending a punctured root section to an etale neighbourhood
 
-Source: Stacks Project, Tags 0BSK and 05N9; Tag 0EYG, descent paragraph.
+## References
+
+* Stacks Project, Tags 0BSK and 05N9
+* Tag 0EYG, descent paragraph
+* Stacks Project, Tags 0BSK and 05N9, and the descent paragraph of 0EYG
 -/
 
 @[expose] public section
@@ -28,9 +32,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- A section over the punctured root ring of a strict henselization descends.
-
-Source: Stacks Project, Tags 0BSK and 05N9, and the descent paragraph of 0EYG. -/
+/-- A section over the punctured root ring of a strict henselization descends. -/
 theorem punctured_root_section_etale_descent
     {L U P : Scheme.{u}} (i : U ⟶ L) (π : P ⟶ U) [IsFinite π] [Etale π]
     (R : CommRingCat.{u}) (φ : Spec R ⟶ L) (f : R)

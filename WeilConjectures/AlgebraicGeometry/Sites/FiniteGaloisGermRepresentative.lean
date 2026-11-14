@@ -18,7 +18,12 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
 /-!
 # Finite Galois representatives of geometric germs
 
-Source: Stacks Project, Tag 04JM, direct proof of Lemma 59.56.5.
+## References
+
+* Stacks Project, Tag 04JM, direct proof of Lemma 59.56.5
+* Stacks 04JM, finite separable neighbourhood step
+* Stacks 04JM and 02G8(1), together with the residue-field factorization of field points (Stacks
+  01J5)
 -/
 
 @[expose] public section
@@ -32,8 +37,7 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] Algebra.Etale.of_finite_of_isSeparable
 
 /-- A separable embedding into the algebraic closure factors through the given separable
-closure. The preimages are unique since the inclusion into Ω is injective.
-Source: Stacks 04JM, finite separable neighbourhood step. -/
+closure. The preimages are unique since the inclusion into Ω is injective. -/
 private theorem factor_separable_embedding
     (K Ks Ω P : Type u) [Field K] [Field Ks] [Field Ω] [Field P]
     [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]
@@ -60,9 +64,7 @@ private theorem factor_separable_embedding
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The residue field of the image of a geometric lift gives a finite separable pointed
-neighbourhood. No identification of its singleton with an open component is needed.
-Source: Stacks 04JM and 02G8(1), together with the residue-field factorization of field
-points (Stacks 01J5). -/
+neighbourhood. No identification of its singleton with an open component is needed. -/
 private theorem pointed_field_neighbourhood
     (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]
     [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]

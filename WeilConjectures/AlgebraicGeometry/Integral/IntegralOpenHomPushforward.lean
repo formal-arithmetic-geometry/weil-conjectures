@@ -14,7 +14,10 @@ import all WeilConjectures.AlgebraicGeometry.Completed.CompletedExtensionZeroCom
 
 /-! # Internal Hom from integral open extension by zero
 
-Source: Bhatt--Scholze, Lemma 6.3.14(3); Stacks Tags 0E8I and 06YN.
+## References
+
+* Bhatt--Scholze, Lemma 6.3.14(3)
+* Stacks Tags 0E8I and 06YN
 -/
 
 @[expose] public noncomputable section
@@ -25,8 +28,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 /-- Internal Hom out of open extension by zero is open direct image of internal
-Hom into the open restriction. All coefficients are the identified completed rings.
-Source: Bhatt--Scholze, Lemma 6.3.14(3); Stacks Tags 0E8I and 06YN. -/
+Hom into the open restriction. All coefficients are the identified completed rings. -/
 theorem integralOpen_homPushforward
     {U T : Scheme.{u}} {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (j : U ⟶ T) [IsOpenImmersion j]

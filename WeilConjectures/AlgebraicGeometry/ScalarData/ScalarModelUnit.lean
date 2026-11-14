@@ -105,7 +105,13 @@ public import Mathlib.Algebra.Homology.HomologicalComplex
 public import Mathlib.CategoryTheory.Sites.CoverPreserving
 public import WeilConjectures.Algebra.Homology.DivisibleReduction.DivisibleExtensionDerivedReductionSupplement
 import all WeilConjectures.Algebra.Homology.DivisibleReduction.DivisibleExtensionDerivedReductionSupplement
-/-! # Uniqueness and the arbitrary-complex unit of scalar extension -/
+/-! # Uniqueness and the arbitrary-complex unit of scalar extension
+
+## References
+
+* Stacks 06YY, 07A6, and the representative equation in ScalarData
+* Stacks 06YY and 07A6
+-/
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
@@ -151,8 +157,7 @@ private theorem unit_model_flat (S : ScalarData.{c, v, r} φ)
     | erw [Category.comp_id] at ht
   simpa only [Category.assoc] using ht
 
-/-- The model-unit equation holds on arbitrary complexes, without flatness.
-Source: Stacks 06YY, 07A6, and the representative equation in ScalarData. -/
+/-- The model-unit equation holds on arbitrary complexes, without flatness. -/
 theorem ScalarData.unit_model (S : ScalarData.{c, v, r} φ)
     (P₀ : CochainComplex (Mod.{c, v, r} J R) ℤ) :
     S.adjunction.unit.app (DerivedCategory.Q.obj P₀) ≫
@@ -220,8 +225,7 @@ private theorem derived_unit_eq (S : ScalarData.{c, v, r} φ) :
     _ = _ := by
       simpa only [Functor.id_map] using
         ((SheafOfModules.sheafScalarDerivedAdjunction φ S.model).unit.naturality e'.hom).symm
-/-- The specified scalar adjunction is the normalized canonical adjunction.
-Source: Stacks 06YY and 07A6. -/
+/-- The specified scalar adjunction is the normalized canonical adjunction. -/
 theorem ScalarData.adjunction_eq (S : ScalarData.{c, v, r} φ) :
     S.adjunction = SheafOfModules.sheafScalarDerivedAdjunction φ S.model :=
   Adjunction.ext (derived_unit_eq S)

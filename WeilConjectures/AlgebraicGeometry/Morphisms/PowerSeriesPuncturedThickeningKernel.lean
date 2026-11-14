@@ -12,7 +12,10 @@ import Mathlib.RingTheory.Localization.Ideal
 
 /-! # Stalk kernels of finite power-series thickenings
 
-Source: Stacks Project, Tag 0EY9, the first displayed calculation.
+## References
+
+* Stacks Project, Tag 0EY9, the first displayed calculation
+* Stacks Project, Tag 0EY9, the finite-index structure-sheaf comparison
 -/
 
 @[expose] public section
@@ -102,8 +105,6 @@ private lemma quotient_germ_mem_image (R : Type*) [CommRing R] (I : Ideal R)
 set_option backward.isDefEq.respectTransparency false in
 /-- A section vanishing on the finite thickening has germs in the corresponding
 powers of the zero-section stalk kernels.
-
-Source: Stacks Project, Tag 0EY9, the finite-index structure-sheaf comparison.
 -/
 theorem powerSeries_punctured_germs_mem_pow_of_thickening_zero
     (A : Type u) [CommRing A] (d : ℕ)

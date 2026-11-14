@@ -22,13 +22,15 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
 /-!
 # Pullback preserves bounded constructibility and cohomological intervals
 
-Source: Stacks, Tags 09AK, 09AL and 09B5.
-
 The coefficient categories and the essential-image predicate are the recorded
 `FiniteCoefficientDerivedCategory` and `isBoundedConstructibleFiniteCoefficient`.
 The auxiliary closure and preservation statements expose precisely the structures
 needed to name the canonical restriction; their arguments work for every finite
 commutative ring. The main statement retains the specified adic quotients `P_n`.
+
+## References
+
+* Stacks, Tags 09AK, 09AL and 09B5
 -/
 
 -- After pruning, this module only keeps private declarations.

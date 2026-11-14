@@ -9,11 +9,15 @@ public import WeilConjectures.AlgebraicGeometry.Proper.ProperFiniteCoefficientEx
 
 /-! # Proper finite coefficient extension
 
-Source: Stacks Project, Tag 0GL6, proper case.
-
 The theorem records the canonical unbounded coefficient-change comparison, its
 adjunction normalization, and the identification after restriction of scalars
 with the coefficient-first proper projection morphism.
+
+## References
+
+* Stacks Project, Tag 0GL6, proper case
+* Stacks Project, Tag 0GL6, with the counit-transpose normalization of Tag 0B56 and the direct-image
+  composition comparison of Tag 0D6E
 -/
 
 @[expose] public section
@@ -28,11 +32,7 @@ open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
 
-/-- Canonical unbounded proper direct-image comparison for a finite coefficient extension.
-
-Source: Stacks Project, Tag 0GL6, with the counit-transpose normalization of Tag 0B56
-and the direct-image composition comparison of Tag 0D6E.
--/
+/-- Canonical unbounded proper direct-image comparison for a finite coefficient extension. -/
 theorem properFiniteCoefficientExtension
     {R A : Type (u + 1)} [CommRing R] [CommRing A] [Finite R] [Finite A]
     (φ : R →+* A) {X Y : Scheme.{u}} (f : X ⟶ Y)

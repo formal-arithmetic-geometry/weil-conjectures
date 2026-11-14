@@ -10,7 +10,10 @@ import all WeilConjectures.AlgebraicGeometry.ProEtaleOpenRestriction.ProEtaleOpe
 
 /-! # Ordinary ringed exchange along an open immersion
 
-Source: Stacks Project.
+## References
+
+* Stacks Project
+* Stacks Project, section-morphism
 -/
 
 @[expose] public noncomputable section
@@ -627,8 +630,7 @@ private theorem ordinary_app_isIso (r : StrictTowerRingedSquare sq)
     obtain ⟨a, ha⟩ := hb.2 y
     exact ⟨_, ha⟩
 
-/-- The ordinary counit mate is invertible when the base change is open.
-Source: Stacks Project, section-morphism. -/
+/-- The ordinary counit mate is invertible when the base change is open. -/
 theorem ordinary_open_isIso
     {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
     {f : X ⟶ Y} {g : Y' ⟶ Y} {sq : ChosenCartesianSquare g' f' f g}

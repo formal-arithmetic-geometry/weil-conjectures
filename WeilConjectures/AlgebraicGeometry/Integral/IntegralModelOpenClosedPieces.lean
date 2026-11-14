@@ -69,13 +69,15 @@ set_option linter.privateModule false
 /-!
 # Integral models of the open and closed pieces
 
-Source: Bhatt--Scholze, The pro-etale topology for schemes, Definition 6.8.10 and Lemma 6.8.13;
-Stacks Project, Tags 09AA, 09AH, 09BN and 03DI.
-
 The continuous coefficients use the published lattice encoding. `WithAbs` equips the
 finite extension with its canonical topology, and `latticeCoefficientIntegers` is its
 valuation subring. The four constructions, publicly reexported from the basic module, are explicit
 specializations of the published module operations; no module or coefficient ring is chosen.
+
+## References
+
+* Bhatt--Scholze, The pro-etale topology for schemes, Definition 6.8.10 and Lemma 6.8.13
+* Stacks Project, Tags 09AA, 09AH, 09BN and 03DI
 -/
 
 @[expose] public noncomputable section

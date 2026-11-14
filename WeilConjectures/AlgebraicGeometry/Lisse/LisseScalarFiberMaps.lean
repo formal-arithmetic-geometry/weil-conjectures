@@ -9,7 +9,13 @@ public import WeilConjectures.AlgebraicGeometry.Lisse.LisseAdicSheaves
 import WeilConjectures.AlgebraicGeometry.Etale.EtaleStalkTensorScalar
 import WeilConjectures.NumberTheory.Padics.AdicLimitFiniteModulesSupplement
 
-/-! # Scalar maps on integral geometric stalk systems -/
+/-! # Scalar maps on integral geometric stalk systems
+
+## References
+
+* Weil II (1.1.1) b), Stacks Tag 09B8
+* Weil II (1.1.1) b), d)
+-/
 
 @[expose] public section
 
@@ -116,16 +122,14 @@ private lemma integralStalk_adicLimit (F : LisseIntegralSheaf l E Y) :
     (integralStalk_annihilated Y y l E F) (F.property.2.2 Ω y)
   exact ⟨h.1, h.2.1⟩
 
-/-- The integral geometric fibre is a finite coefficient module.
-Source: Weil II (1.1.1) b), Stacks Tag 09B8. -/
+/-- The integral geometric fibre is a finite coefficient module. -/
 theorem lisseIntegralFiber_finite (F : LisseIntegralSheaf l E Y) :
     Module.Finite (Padic.coefficientExtensionIntegers l E) (lisseIntegralFiber l E Y y F) := by
   have := (integralStalk_adicLimit Y y l E F).1
   exact Module.Finite.equiv (limitSectionsLinearEquiv
     (F.obj ⋙ (pointSmallEtale y).ulift.{d + 1}.sheafFiber)).symm
 
-/-- Projections of an integral geometric fibre are its coefficient reductions.
-Source: Weil II (1.1.1) b), Stacks Tag 09B8. -/
+/-- Projections of an integral geometric fibre are its coefficient reductions. -/
 theorem lisseIntegralFiber_projection (F : LisseIntegralSheaf l E Y) (n : ℕ) :
     let R := Padic.coefficientExtensionIntegers l E
     let I := Ideal.span ({Padic.coefficientExtensionUniformizer l E} : Set R)
@@ -398,8 +402,7 @@ private lemma scalarIntegralFiberComparison_unit (F : LisseIntegralSheaf l E Y)
     (adj.unit.app _ z) = scalarIntegralFiberUnit Y y l E L ι F z at h
   simpa only [ModuleCat.ringExtensionTmul, one_smul] using h
 
-/-- The projection and pure-germ formula specifying the integral scalar comparison.
-Source: Weil II (1.1.1) b), d). -/
+/-- The projection and pure-germ formula specifying the integral scalar comparison. -/
 def IsLisseIntegralScalarFiberComparison (F : LisseIntegralSheaf l E Y)
     (c : (ModuleCat.ringExtendScalars.{d + 1, d + 1}
         (lisseIntegerInclusion l E L ι)).obj (lisseIntegralFiber l E Y y F) ⟶
@@ -439,8 +442,7 @@ private theorem scalarIntegralFiberComparison_spec (F : LisseIntegralSheaf l E Y
     (p.sheafFiber.mapIso (D.levelIso F n)).inv_hom_id _
 
 /-- The canonical integral scalar comparison exists and is uniquely determined by
-its finite-level pure-germ formula.
-Source: Weil II (1.1.1) b), d). -/
+its finite-level pure-germ formula. -/
 theorem lisseIntegralScalarFiberComparison_exists (F : LisseIntegralSheaf l E Y) :
     ∃! c : (ModuleCat.ringExtendScalars.{d + 1, d + 1}
         (lisseIntegerInclusion l E L ι)).obj (lisseIntegralFiber l E Y y F) ⟶
@@ -469,8 +471,7 @@ theorem lisseIntegralScalarFiberComparison_exists (F : LisseIntegralSheaf l E Y)
   simpa only [ModuleCat.ringExtensionTmul, one_smul] using
     (hc j.unop z U x s hs.symm).trans (h₀ j.unop z U x s hs.symm).symm
 
-/-- The integral scalar comparison, constructed by its uniquely specified finite levels.
-Source: Weil II (1.1.1) b), d). -/
+/-- The integral scalar comparison, constructed by its uniquely specified finite levels. -/
 def lisseIntegralScalarFiberComparison (F : LisseIntegralSheaf l E Y) :
     (ModuleCat.ringExtendScalars.{d + 1, d + 1} (lisseIntegerInclusion l E L ι)).obj
         (lisseIntegralFiber l E Y y F) ⟶
@@ -478,8 +479,7 @@ def lisseIntegralScalarFiberComparison (F : LisseIntegralSheaf l E Y) :
         ((lisseIntegralScalarExtensionData l E Y L ι).functor.obj F) :=
   (lisseIntegralScalarFiberComparison_exists Y y l E L ι F).choose
 
-/-- The integral scalar comparison has the prescribed pure-germ formula.
-Source: Weil II (1.1.1) b), d). -/
+/-- The integral scalar comparison has the prescribed pure-germ formula. -/
 theorem lisseIntegralScalarFiberComparison_spec (F : LisseIntegralSheaf l E Y) :
     IsLisseIntegralScalarFiberComparison Y y l E L ι F
       (lisseIntegralScalarFiberComparison Y y l E L ι F) :=
@@ -491,8 +491,7 @@ private lemma lisseIntegralScalarFiberComparison_eq (F : LisseIntegralSheaf l E 
   exact ((lisseIntegralScalarFiberComparison_exists Y y l E L ι F).choose_spec.2 _
     (scalarIntegralFiberComparison_spec Y y l E L ι F)).symm
 
-/-- The integral scalar comparison is natural in the integral sheaf.
-Source: Weil II (1.1.1) b), d). -/
+/-- The integral scalar comparison is natural in the integral sheaf. -/
 theorem lisseIntegralScalarFiberComparison_naturality {F G : LisseIntegralSheaf l E Y}
     (f : F ⟶ G) :
     (ModuleCat.ringExtendScalars.{d + 1, d + 1} (lisseIntegerInclusion l E L ι)).map

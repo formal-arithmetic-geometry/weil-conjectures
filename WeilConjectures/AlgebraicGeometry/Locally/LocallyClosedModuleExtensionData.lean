@@ -12,12 +12,16 @@ public import WeilConjectures.AlgebraicGeometry.LocallyClosedModuleExtensionData
 /-!
 # Coefficient parameters and normalization formulas for locally closed extension
 
-Source: Stacks Project, Tags 01OV, 01IO, 03D2 and 03D8.
-
 These existing parameter definitions are moved verbatim from
 `LocallyClosedModuleExtensionCoherence` and publicly reexported there.
 The normalization predicates name the existing equations over abstract categories;
 this lets the kernel compare their specializations without unfolding sheaf functors.
+
+## References
+
+* Stacks Project, Tags 01OV, 01IO, 03D2 and 03D8
+* Stacks, Tag 03D8
+* Stacks, Tags 02V0 and 09AH
 -/
 
 @[expose] public noncomputable section
@@ -44,8 +48,7 @@ namespace LocallyClosedCoefficientImmersion
 
 
 
-/-- The canonical inverse-image composition, fixed by the sectionwise fibre-product map.
-Source: Stacks, Tag 03D8. -/
+/-- The canonical inverse-image composition, fixed by the sectionwise fibre-product map. -/
 def pullComp {S X T : LocallyClosedCoefficients.{u}}
     (a : LocallyClosedCoefficientImmersion S X) (b : LocallyClosedCoefficientImmersion T S) :
     (a.comp b).pull ≅ a.pull ⋙ b.pull :=
@@ -55,8 +58,7 @@ end LocallyClosedCoefficientImmersion
 
 
 
-/-- The composite of the two restriction comparisons and inverse-image composition.
-Source: Stacks, Tags 02V0 and 09AH. -/
+/-- The composite of the two restriction comparisons and inverse-image composition. -/
 def LocallyClosedCompositeRestrictionMap
     {A B C : Type*} [Category A] [Category B] [Category C]
     (Ea : B ⥤ C) (Eb : A ⥤ B) (La : C ⥤ B) (Lb : B ⥤ A) (Lab : C ⥤ A)
@@ -64,16 +66,14 @@ def LocallyClosedCompositeRestrictionMap
     Lab.obj (Ea.obj (Eb.obj M)) ⟶ M :=
   c.hom.app (Ea.obj (Eb.obj M)) ≫ Lb.map (ra.hom.app (Eb.obj M)) ≫ rb.hom.app M
 
-/-- An objectwise comparison has a specified restriction.
-Source: Stacks, Tags 02V0 and 09AH. -/
+/-- An objectwise comparison has a specified restriction. -/
 def LocallyClosedObjectNormalization
     {C D : Type*} [Category C] [Category D] (H : C ⥤ D) (L : D ⥤ C)
     (r : H ⋙ L ≅ 𝟭 C) {A : D} {M : C} (t : L.obj A ⟶ M) (e : A ≅ H.obj M) : Prop :=
   dsimp% only [Functor.comp_obj, Functor.id_obj]
     L.map e.hom ≫ r.hom.app M = t
 
-/-- A natural binary comparison has the composite restriction normalization.
-Source: Stacks, Tags 02V0 and 09AH. -/
+/-- A natural binary comparison has the composite restriction normalization. -/
 def LocallyClosedBinaryNormalization
     {A B C : Type*} [Category A] [Category B] [Category C]
     (Ea : B ⥤ C) (Eb : A ⥤ B) (La : C ⥤ B) (Lb : B ⥤ A) (Lab : C ⥤ A)

@@ -10,7 +10,10 @@ public import Mathlib.AlgebraicGeometry.Sites.Proetale
 
 /-! # Sections of pro-etale covers of w-contractible affine schemes
 
-Source: Stacks Project, Tag 098F, forward implication, with Tags 098D and 0981.
+## References
+
+* Stacks Project, Tag 098F, forward implication, with Tags 098D and 0981
+* Stacks Project, Tag 098F, forward implication, and Tags 098D and 0981
 -/
 
 @[expose] public section
@@ -22,8 +25,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- A pro-etale covering of an affine scheme whose faithfully flat weakly etale
-algebras all retract admits a section into its covering coproduct.
-Source: Stacks Project, Tag 098F, forward implication, and Tags 098D and 0981. -/
+algebras all retract admits a section into its covering coproduct. -/
 theorem exists_section_proetaleCover_of_ring_retractions
     (A : Type u) [CommRing A]
     (hsplit : ∀ (B : Type u) [CommRing B] [Algebra A B],

@@ -42,7 +42,11 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Finite.ProEtaleFiniteTowerRepr
 /-!
 # Preservation of finite constant ring towers on the pro-etale site
 
-Source: Stacks Project, Tags 098T (2), 097D, 04D3 and 00YV.
+## References
+
+* Stacks Project, Tags 098T (2), 097D, 04D3 and 00YV
+* Stacks Project, Tags 098T (2) and 097D
+* Tags 04D3 and 00YV
 -/
 
 @[expose] public section
@@ -135,8 +139,6 @@ private theorem preservesFiniteTower_of_representable
 
 /-- Inverse image preserves the limit of a countable tower of finite constant rings.
 No surjectivity of the transition maps is required.
-
-Source: Stacks Project, Tags 098T (2) and 097D; Tags 04D3 and 00YV.
 -/
 theorem proEtaleSheafInverseImage_preserves_finite_tower
     {X Y : Scheme.{u}} (f : X ⟶ Y)

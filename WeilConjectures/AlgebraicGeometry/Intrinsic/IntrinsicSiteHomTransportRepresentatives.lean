@@ -74,7 +74,9 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Hom
 
 /-! # Representative-level intrinsic Hom transport
 
-Source: Stacks Project, Tags 00YV, 08J7 and 0A95.
+## References
+
+* Stacks Project, Tags 00YV, 08J7 and 0A95
 -/
 
 @[expose] public section
@@ -89,8 +91,6 @@ set_option linter.style.haveILetI false
 /-- Representative-level coefficient transport.  The source and target derived objects
 are fixed representatives, with the second representative K-injective.  The arbitrary
 object statement is obtained by the usual representative and localization argument.
-
-Source: Stacks Project, Tags 00YV, 08J7 and 0A95.
 -/
 theorem intrinsicSiteHom_transport_representatives (X : Scheme.{u}) (A : Type u)
     [CommRing A] [Finite A]

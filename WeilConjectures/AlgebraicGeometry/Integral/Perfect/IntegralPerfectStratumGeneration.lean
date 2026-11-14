@@ -22,7 +22,11 @@ import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 
 /-! # Finite devissage of integral stratified perfect complexes
 
-Source: Bhatt--Scholze, Lemma 6.3.14, final paragraph, as used in Lemma 6.8.12.
+## References
+
+* Bhatt--Scholze, Lemma 6.3.14, final paragraph, as used in Lemma 6.8.12
+* Bhatt--Scholze, Lemma 6.3.14, final devissage
+* Proposition 6.6.11
 -/
 
 @[expose] public noncomputable section
@@ -392,8 +396,7 @@ private theorem iter_of_iso
 
 /-- A stratified perfect source is a finite extension of locally perfect pieces
 supported on locally closed subschemes. This assertion is purely about the source;
-it makes no reference to an internal Hom functor, target family, or colimit.
-Source: Bhatt--Scholze, Lemma 6.3.14, final devissage; Proposition 6.6.11. -/
+it makes no reference to an internal Hom functor, target family, or colimit. -/
 theorem integralStratifiedPerfect_mem_stratum_extensions
     (T : Scheme.{u}) [IsNoetherian T]
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)

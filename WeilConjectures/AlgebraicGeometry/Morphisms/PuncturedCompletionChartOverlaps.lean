@@ -12,7 +12,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionChartLocal
 /-!
 # Localization of actual chart sections on double intersections
 
-Source: Stacks Project, Tags 0BLH and 05EL.
+## References
+
+* Stacks Project, Tags 0BLH and 05EL
+* Stacks Project, Tag 0BLH, first two proof paragraphs
+* Tag 05EL, item (1)
 -/
 
 @[expose] public section
@@ -21,9 +25,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.CompletionGluingData
 
-/-- Localization identifies actual chart sections with sections on double intersections.
-Source: Stacks Project, Tag 0BLH, first two proof paragraphs; Tag 05EL, item (1).
--/
+/-- Localization identifies actual chart sections with sections on double intersections. -/
 theorem exists_chart_overlap_localizations
     {A : Type u} [CommRing A] {Y : Scheme.{u}} (h : Y ⟶ Spec (.of A))
     (t : ℕ) (f : Fin t → A)

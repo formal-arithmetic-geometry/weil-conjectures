@@ -11,7 +11,10 @@ import Mathlib.RingTheory.Finiteness.Ideal
 
 /-! # Kernel of restriction to a punctured local spectrum
 
-Source: Stacks Project, Tag 0A6T, proof of Lemma 51.2.1
+## References
+
+* Stacks Project, Tag 0A6T, proof of Lemma 51.2.1
+* Stacks Project, Tag 0A6T, proof of Lemma 51.2.1 (localization description)
 -/
 
 @[expose] public section
@@ -20,8 +23,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 set_option backward.isDefEq.respectTransparency false in
 /-- The kernel of restriction to the puncture is maximal-ideal-power torsion,
-without an injectivity assumption on the module.
-Source: Stacks Project, Tag 0A6T, proof of Lemma 51.2.1 (localization description). -/
+without an injectivity assumption on the module. -/
 theorem injective_punctured_restriction_kernel
     (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R]
     (W : (Spec (.of R)).Opens)

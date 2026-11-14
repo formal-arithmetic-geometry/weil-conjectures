@@ -10,7 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.Scalar.ScalarTensorRepresentativ
 /-!
 # Scalar tensor representatives commute with pullback
 
-Source: Stacks Project, Tags 07A4 and 0FPH.
+## References
+
+* Stacks Project, Tags 07A4 and 0FPH
+* Stacks 07A4 and 0FPH
 -/
 
 @[expose] public noncomputable section
@@ -24,8 +27,7 @@ namespace AlgebraicGeometry.Etale
 attribute [local irreducible] Functor.leftAdjoint Functor.rightAdjoint
   Functor.leftDerivedFunctor Functor.mapDerivedCategory upperStar lowerStar
 
-/-- The tensor counit square in the scalar tensor functor's endpoint convention.
-Source: Stacks 07A4 and 0FPH. -/
+/-- The tensor counit square in the scalar tensor functor's endpoint convention. -/
 theorem scalarTensorRepresentative_pullback
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {Z W : Scheme.{u}} (f : Z ⟶ W)

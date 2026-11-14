@@ -19,7 +19,11 @@ import WeilConjectures.AlgebraicGeometry.Stratum.StratumCompletionUnitRestrictio
 import all WeilConjectures.AlgebraicGeometry.Pbc.PbcCompletedPullbackActualSupplement
 
 /-! # The completed local perfect criterion
-Source: Bhatt--Scholze, Proposition 6.6.11.
+
+## References
+
+* Bhatt--Scholze, Proposition 6.6.11
+* Bhatt--Scholze, Proposition 6.6.11, with Definition 6.5.1
 -/
 
 @[expose] public noncomputable section
@@ -285,8 +289,7 @@ private theorem uniform_complete_perfect (T : Scheme.{u}) [IsNoetherian T]
     (𝒰.f j ≫ s.immersion i)).mapIso eL.symm ≪≫ e⟩⟩
 
 /-- The completed reduction-tower category has the local perfect description.
-This is Proposition 6.6.11 alone, before the cohomology characterization of 6.8.11(3).
-Source: Bhatt--Scholze, Proposition 6.6.11, with Definition 6.5.1. -/
+This is Proposition 6.6.11 alone, before the cohomology characterization of 6.8.11(3). -/
 theorem integralCompletedLocalPerfectCriterion
     (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E]

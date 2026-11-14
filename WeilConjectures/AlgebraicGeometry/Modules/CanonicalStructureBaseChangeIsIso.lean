@@ -14,7 +14,10 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 /-! # Invertibility of the canonical structure-sheaf base-change comparison
 
-Source: Stacks Project, Tags 02KG, 0096 and 01CA.
+## References
+
+* Stacks Project, Tags 02KG, 0096 and 01CA
+* Stacks Project, Tag 02KG, and Tags 0096 and 01CA for the structure-sheaf pullback
 -/
 
 @[expose] public section
@@ -28,8 +31,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The adjoint of restriction along a cartesian square with affine vertical map is invertible.
-
-Source: Stacks Project, Tag 02KG, and Tags 0096 and 01CA for the structure-sheaf pullback. -/
+-/
 theorem canonical_structure_baseChange_isIso {X Y X' Y' : Scheme.{u}}
     (p : X ⟶ Y) (q : X' ⟶ Y') (g : Y' ⟶ Y) (k : X' ⟶ X)
     (sq : IsPullback k q p g) [IsAffineHom p] :

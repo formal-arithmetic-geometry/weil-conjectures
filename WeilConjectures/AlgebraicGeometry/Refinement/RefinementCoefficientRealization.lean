@@ -11,8 +11,6 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunc
 /-!
 # The finite coefficient realization interface for refinement comparisons
 
-Source: module sheafification along locally bijective constant scalars.
-
 The recorded finite-module definitions are reexported. This exposes coefficient realization
 without importing the second copy of the fixed-coefficient six-functor declarations.
 -/

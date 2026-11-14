@@ -20,6 +20,14 @@ import Mathlib.CategoryTheory.Limits.Types.Limits
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 
 /-! # Finite coefficient extension and sheafwise completion
+
+## References
+
+* Bhatt--Scholze, Definition 6.8.1 and Lemma 4.2.12
+* Bhatt--Scholze, Definition 6.8.1
+* Stacks 03P5
+* Stacks 03EK
+* Stacks Project, Tag 03EK
 -/
 
 @[expose] public section
@@ -30,8 +38,7 @@ open CategoryTheory Opposite AlgebraicGeometry
 open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme
 
-/-- Continuous-function fpqc descent, restricted to the pro-etale site.
-Source: Bhatt--Scholze, Definition 6.8.1 and Lemma 4.2.12. -/
+/-- Continuous-function fpqc descent, restricted to the pro-etale site. -/
 private theorem coefficientContinuousPresheaf_isSheaf (X : Scheme.{u}) (T : Type v)
     [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] :
     Presheaf.IsSheaf (Scheme.ProEt.topology X)
@@ -57,8 +64,7 @@ private theorem coefficientContinuousPresheaf_isSheaf (X : Scheme.{u}) (T : Type
   exact (isSheaf_fpqcTopology_continuousMapPresheaf T).of_le
     Scheme.proetaleTopology_le_fpqcTopology
 
-/-- The existing continuous-function presheaf with its proved sheaf condition.
-Source: Bhatt--Scholze, Definition 6.8.1. -/
+/-- The existing continuous-function presheaf with its proved sheaf condition. -/
 private noncomputable def coefficientContinuousSheaf (X : Scheme.{t})
     (T : Type (max u (t + 1))) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] :
     Sheaf (Scheme.ProEt.topology X) CommRingCat.{max u (t + 1)} :=
@@ -337,7 +343,7 @@ private theorem discreteCoefficientComparisonOfUniverses (S : Scheme.{t})
   exact ⟨asIso φ, hφ⟩
 
 /-- The comparison of sheafified discrete constants at the tied universes, as used by
-`import all` importers. Source: Stacks 03P5. -/
+`import all` importers. -/
 private theorem discreteCoefficientComparison (S : Scheme.{t})
     (R : Type (t + 1)) [CommRing R] [TopologicalSpace R] [IsTopologicalRing R]
     [DiscreteTopology R] :
@@ -491,7 +497,7 @@ private theorem constantSection_principal_quotientOfUniverses (S : Scheme.{t})
       exact (hqk _).mpr ⟨(er t).down, rfl⟩
 
 /-- The principal-quotient section formula at the tied universes, as used by
-`import all` importers. Source: Stacks 03P5. -/
+`import all` importers. -/
 private theorem constantSection_principal_quotient (S : Scheme.{t})
     {R T : Type (t + 1)} [CommRing R] [CommRing T]
     [TopologicalSpace R] [TopologicalSpace T] [IsTopologicalRing R] [IsTopologicalRing T]
@@ -1046,8 +1052,7 @@ private theorem tensor_completion_comparison
   exact hfg ▸ hg
 
 /-- The canonical balanced coefficient map, constructed from the two actual scalar
-inclusions. Its pure-tensor formula is definitional.
-Source: Stacks 03EK. -/
+inclusions. Its pure-tensor formula is definitional. -/
 noncomputable def purTwistCoefficientTensorMap (S : Scheme.{t}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (U : S.ProEtᵒᵖ) :
@@ -1080,10 +1085,7 @@ noncomputable def purTwistCoefficientTensorMap (S : Scheme.{t}) (l : ℕ) [Fact 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 
-/-- Completion of the finite integral extension is the sectionwise scalar tensor.
-
-Source: Stacks Project, Tag 03EK.
--/
+/-- Completion of the finite integral extension is the sectionwise scalar tensor. -/
 theorem purTwistCoefficientTensor (S : Scheme.{t}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (U : S.ProEtᵒᵖ) :

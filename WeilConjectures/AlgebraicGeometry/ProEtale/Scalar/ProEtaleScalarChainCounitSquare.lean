@@ -96,7 +96,9 @@ import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 
 /-! # Scalar chain comparison and its universal counit square
 
-Source: Stacks Project, Tags 03EL, 06YY and 0D6D.
+## References
+
+* Stacks Project, Tags 03EL, 06YY and 0D6D
 -/
 
 @[expose] public noncomputable section

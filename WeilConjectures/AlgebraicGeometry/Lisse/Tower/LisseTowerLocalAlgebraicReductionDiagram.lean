@@ -16,8 +16,10 @@ import WeilConjectures.AlgebraicGeometry.Completed.Constant.CompletedConstantUnb
 
 /-! # Local finite algebra diagrams for lisse towers
 
-Source: Stacks Project, Tag 09BV, and the bounded-derived local-constancy argument in amplification
-(c).
+## References
+
+* Stacks Project, Tag 09BV, and the bounded-derived local-constancy argument in amplification (c)
+* Stacks Project, Tag 09BV
 -/
 
 @[expose] public noncomputable section
@@ -58,11 +60,7 @@ set_option linter.unusedVariables false in
 This statement constructs the finite normalized algebra tower. It requires only
 separate bounds for each level and constructs no complete algebraic object. Its last
 clause applies to any object whose actual adjunction units give compatible reductions
-to that tower.
-
-Source: Stacks Project, Tag 09BV; finite-coefficient derived origin, finite-ring derived local
-constancy, compatible finite derived trivializations, and completed constant finite-complex
-realization in amplification (c). -/
+to that tower. -/
 theorem lisse_tower_local_algebraic_reduction_diagram
     (X Y : Scheme.{u}) [IsNoetherian X] (g : Y ⟶ X) [IsImmersion g]
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (M : AdicTower X d)

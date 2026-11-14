@@ -163,14 +163,19 @@ import WeilConjectures.SixFunctors.ProEtale.Adic.ExtensionByZero
 
 /-! # Native modules, scalar local models, and bounded constructibility
 
-Source: Stacks 03CW, 03CY, 03EK and 05RU.
-
 The ordinary category is the existing sectionwise module category of the reconstructed
 ring sheaf of R_T. Its existing internal-module equivalence fixes that reconstruction.
 The comparison to native modules is normalized by the canonical coefficient realization.
 - May be used on arbitrary covering members, which need not be finite type.
 - Constructibility is compared on separated finite-type schemes over the given field.
 - Both derived categories are ordinary localizations at quasi-isomorphisms.
+
+## References
+
+* Stacks 03CW, 03CY, 03EK and 05RU
+* Stacks 03CW
+* Stacks 03CW, ordinary presentation in the module comparison
+* Stacks 05RU and the size convention in the module comparison
 -/
 
 @[expose] public noncomputable section
@@ -185,8 +190,7 @@ open scoped CategoryTheory.Obj IntermediateField
 namespace AlgebraicGeometry.ProEtale
 
 /-- The normalized coefficient realization, chosen from its already recorded theorem.
-Its finite-field normalization uniquely determines the underlying ring isomorphism.
-Source: coefficient-ring realization preceding the module comparison. -/
+Its finite-field normalization uniquely determines the underlying ring isomorphism. -/
 abbrev nativeModuleCoefficientIso (ℓ : ℕ) [Fact ℓ.Prime] (T : Scheme.{u}) :=
   (locallyFiniteCoefficientRing_realization ℓ).choose T
 
@@ -195,15 +199,13 @@ instance nativeModuleCoefficientIso_isMonHom (ℓ : ℕ) [Fact ℓ.Prime] (T : S
     IsMonHom (nativeModuleCoefficientIso ℓ T).hom :=
   (locallyFiniteCoefficientRing_realization ℓ).choose_spec.1 T
 
-/-- The existing equivalence with sectionwise R_T-modules; no new module category is made.
-Source: Stacks 03CW. -/
+/-- The existing equivalence with sectionwise R_T-modules; no new module category is made. -/
 abbrev nativeOrdinaryPresentation (ℓ : ℕ) [Fact ℓ.Prime] (T : Scheme.{u}) :=
   InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u}
     (Scheme.ProEt.topology T)
     (condensedRingObj (Profinite.padicAlgClRingObj ℓ) T)
 
-/-- Ordinary, sectionwise module sheaves over R_T, using its reconstructed ring sheaf.
-Source: Stacks 03CW, ordinary presentation in the module comparison. -/
+/-- Ordinary, sectionwise module sheaves over R_T, using its reconstructed ring sheaf. -/
 abbrev NativeOrdinaryModules (ℓ : ℕ) [Fact ℓ.Prime] (T : Scheme.{u}) :=
   ringedSiteModules.{u + 1, u + 1, u, u + 1} ((sheafCompose (Scheme.ProEt.topology T)
     (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
@@ -211,15 +213,13 @@ abbrev NativeOrdinaryModules (ℓ : ℕ) [Fact ℓ.Prime] (T : Scheme.{u}) :=
         (Scheme.ProEt.topology T)
         (condensedRingObj (Profinite.padicAlgClRingObj ℓ) T)))
 
-/-- The ordinary derived localization in the larger chosen universe.
-Source: Stacks 05RU and the size convention in the module comparison. -/
+/-- The ordinary derived localization in the larger chosen universe. -/
 instance nativeOrdinaryModules_hasDerivedCategory (ℓ : ℕ) [Fact ℓ.Prime]
     (T : Scheme.{u}) : HasDerivedCategory.{u + 2} (NativeOrdinaryModules ℓ T) :=
   HasDerivedCategory.standard _
 
 /-- Forget scalar linearity, transport the action along theta, and read it on sections.
-Thus r acts by theta(r), with the original abelian sheaf and restriction maps.
-Source: module comparison, transport and restriction-of-scalars clauses. -/
+Thus r acts by theta(r), with the original abelian sheaf and restriction maps. -/
 abbrev nativeToOrdinaryModules (ℓ : ℕ) [Fact ℓ.Prime] (T : Scheme.{u}) :
     AdicSheaf ℓ T ⥤ NativeOrdinaryModules ℓ T :=
   AdicSheaf.forgetAb ℓ T ⋙ Mod.comap (nativeModuleCoefficientIso ℓ T).hom ⋙
@@ -658,8 +658,7 @@ private theorem nativeConstructibility (ℓ : ℕ) [Fact ℓ.Prime]
       ⟨S, (nativeSameStratification ℓ T M S).mp hS⟩).isAdicConstructibleSheaf
 
 /-- The native/ordinary comparison, including its normalization, exactness, restrictions,
-finite scalar models on the same covers, constructibility, and derived support intervals.
-Source: Stacks 03CW, 03CY, 03EK and 05RU. -/
+finite scalar models on the same covers, constructibility, and derived support intervals. -/
 theorem nativeModuleConstructibilityComparison
     (k₀ k : Type u) [Field k₀] [Finite k₀] [Field k] [Algebra k₀ k]
     [IsAlgClosure k₀ k] (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : ℓ ≠ ringChar k₀)

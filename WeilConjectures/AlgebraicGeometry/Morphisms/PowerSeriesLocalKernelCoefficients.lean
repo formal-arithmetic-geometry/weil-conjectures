@@ -14,7 +14,9 @@ import WeilConjectures.RingTheory.PowerSeriesCombinedIdealCoefficients
 
 /-! # Coefficients of power-series germs modulo the zero-section ideal
 
-Source: Stacks Project, Tag 0EY9, fixed-index thickening calculation.
+## References
+
+* Stacks Project, Tag 0EY9, fixed-index thickening calculation
 -/
 
 @[expose] public section
@@ -80,9 +82,7 @@ private theorem localized_low_coefficients
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Local membership in a zero-section kernel power kills each lower coefficient
-in the corresponding base stalk.
-
-Source: Stacks Project, Tag 0EY9, fixed-index thickening calculation. -/
+in the corresponding base stalk. -/
 theorem powerSeries_low_coeff_germ_eq_zero_of_kernel_pow
     (A : Type u) [CommRing A] (d : ℕ)
     (V : (Spec (.of (MvPowerSeries (Fin d) A))).Opens) :

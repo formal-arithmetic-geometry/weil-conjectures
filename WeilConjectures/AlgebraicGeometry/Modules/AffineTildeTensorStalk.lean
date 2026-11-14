@@ -15,7 +15,10 @@ import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 /-!
 # The canonical affine tilde tensor comparison on stalks
 
-Source: Stacks Project, Schemes, Tag 01I8(1), second proof.
+## References
+
+* Stacks Project, Schemes, Tag 01I8(1), second proof
+* Stacks Project, Schemes, Tag 01I8(1), second proof, with Tags 01HV(7), 00DL and Modules 01CB
 -/
 
 @[expose] public noncomputable section
@@ -29,9 +32,7 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.respectTransparency false in
-/-- The canonical comparison is bijective on each stalk.
-Source: Stacks Project, Schemes, Tag 01I8(1), second proof, with Tags 01HV(7),
-00DL and Modules 01CB. -/
+/-- The canonical comparison is bijective on each stalk. -/
 theorem affine_tilde_tensor_stalk_bijective (R : CommRingCat.{u})
     (M N : ModuleCat.{u} R)
     (α : tilde (ModuleCat.of R (M ⊗[R] N)) ⟶ tilde M ⊗ tilde N)

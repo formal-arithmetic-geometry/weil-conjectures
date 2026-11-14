@@ -13,7 +13,9 @@ import Mathlib.Topology.Algebra.Ring.Compact
 
 /-! # Residue comparison for embedded coefficients
 
-Source: Stacks Project Tags 03ET and 06YQ.
+## References
+
+* Stacks Project Tags 03ET and 06YQ
 -/
 
 @[expose] public noncomputable section
@@ -35,8 +37,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 attribute [-instance] integralModel_coefficientMonObj in
 /-- Constructible cohomology and finite Tor amplitude of the first constant reduction
 are equivalent to bounded constructible etale origin of the first completed reduction.
-
-Source: Stacks Project Tags 03ET and 06YQ.
 -/
 theorem integralModelsEmbeddedResidueComparison
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)

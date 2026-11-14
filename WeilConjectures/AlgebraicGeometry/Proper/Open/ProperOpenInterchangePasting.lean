@@ -232,7 +232,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusBa
 /-!
 # Horizontal pasting for normalized proper/open interchange
 
-Source: Stacks Project, More on Etale Cohomology, Tags 0F7B, 0F7C, 0F7D and 0F7F.
+## References
+
+* Stacks Project, More on Etale Cohomology, Tags 0F7B, 0F7C, 0F7D and 0F7F
 -/
 
 @[expose] public section
@@ -252,8 +254,6 @@ set_option linter.unusedVariables false in
 The ordinary and derived isomorphisms are supplied. The derived map is the
 canonical rightDerivedFunctorPlusBaseChange of the ordinary map;
 this theorem asserts only the indicated equalities for those fixed isomorphisms.
-
-Source: Stacks Project, More on Etale Cohomology, Tags 0F7B, 0F7C, 0F7D and 0F7F.
 -/
 theorem properOpenInterchangeHorizontalPasting_of_normalization (Λ : Type (u + 1)) [CommRing Λ]
   [Finite Λ]

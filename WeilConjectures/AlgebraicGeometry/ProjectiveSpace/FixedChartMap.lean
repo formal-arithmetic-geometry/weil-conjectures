@@ -18,7 +18,11 @@ import WeilConjectures.AlgebraicGeometry.ProjStandardOpenProperties
 /-!
 # Morphisms from associated-sheaf chart data
 
-Source: Stacks Project, Tag 01M7, functoriality; Tag 009U, modules on a basis.
+## References
+
+* Stacks Project, Tag 01M7, functoriality
+* Tag 009U, modules on a basis
+* Stacks Project, Tag 01M7 (functoriality), and Tag 009U
 -/
 
 @[expose] public section
@@ -76,8 +80,7 @@ private theorem map_of_basis
   exact ConcreteCategory.congr_hom (ha' i) s
 
 -- Extending chart maps elaborates many dependent section and localization types.
-/-- A degree-preserving map induces a map between any two sheaves with the prescribed charts.
-Source: Stacks Project, Tag 01M7 (functoriality), and Tag 009U. -/
+/-- A degree-preserving map induces a map between any two sheaves with the prescribed charts. -/
 theorem fixed_chart_map (k : Type u) [Field k]
     (M : ModuleCat.{u} (MvPolynomial (Fin 2) k))
     (𝓜 : ℤ → AddSubgroup M)

@@ -10,7 +10,12 @@ public import WeilConjectures.AlgebraicGeometry.MayerVietorisImageChainData
 public import WeilConjectures.AlgebraicGeometry.DirectImageSquareUnitTransport
 import WeilConjectures.AlgebraicGeometry.Relative.RelativeMVDirectImageSquareLocalization
 
-/-! # Localization of a roof of normalized coefficient representatives -/
+/-! # Localization of a roof of normalized coefficient representatives
+
+## References
+
+* Stacks Project, Tags 08HY and 0D5T
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -28,7 +33,7 @@ set_option linter.all false in
 set_option maxHeartbeats 600000 in
 -- Normalization compares several chosen derived functors on three representatives.
 /-- A normalized coefficient roof localizes to the corresponding direct-image
-square mate. Source: Stacks Project, Tags 08HY and 0D5T. -/
+square mate. -/
 theorem relativeMV_normalized_coefficient_roof
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

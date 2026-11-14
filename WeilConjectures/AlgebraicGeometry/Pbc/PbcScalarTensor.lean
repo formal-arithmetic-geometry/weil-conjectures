@@ -14,8 +14,13 @@ import Mathlib.RingTheory.TensorProduct.Finite
 
 /-! # Construction of finite coefficient extension
 
-Source: Milne, Section 19.
 Existing declarations extracted from `PbcScalarExtension` to bound compilation cost.
+
+## References
+
+* Milne, Section 19
+* Bhatt--Scholze 6.6.11
+* Stacks 06YY and 08H3
 -/
 
 @[expose] public noncomputable section
@@ -276,7 +281,6 @@ private theorem scalarCompletedCoefficientSection (U : T.ProEtᵒᵖ) (a : PbcIn
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The K-flat counit computes a bounded projective completed constant model.
-Source: Bhatt--Scholze 6.6.11; Stacks 06YY and 08H3.
 This is the representative-level factorization used in the completed local-perfect
 criterion, retaining the given complex instead of choosing a new representative. -/
 private def scalarPerfectModel (X : Scheme.{u})

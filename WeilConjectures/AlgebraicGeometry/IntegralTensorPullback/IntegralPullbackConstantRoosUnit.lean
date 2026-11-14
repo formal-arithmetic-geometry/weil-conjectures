@@ -12,7 +12,9 @@ import WeilConjectures.CategoryTheory.Augmented.AugmentedTowerRoosTransport
 
 /-! # Constant scalar restriction of the strict pulled reduction tower
 
-Source: Stacks 099I.
+## References
+
+* Stacks 099I
 -/
 
 @[expose] public noncomputable section

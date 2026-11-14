@@ -17,7 +17,10 @@ import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 /-!
 # Associated sheaves of K-flat complexes on affine schemes
 
-Source: Stacks Project, Derived Categories of Schemes, Lemma 36.3.6 (Tag 08DV).
+## References
+
+* Stacks Project, Derived Categories of Schemes, Lemma 36.3.6 (Tag 08DV)
+* Stacks Project, Lemma 36.3.6 (Tag 08DV)
 -/
 
 @[expose] public section
@@ -85,8 +88,7 @@ private theorem nonempty_restrictScalars_tensor_tildeStalkIso
     (ComplexShape.up ℤ) F K)⟩
 
 /-- The termwise associated sheaf of a K-flat
-complex of modules over a commutative ring `A` is K-flat on `Spec A`.
-Source: Stacks Project, Lemma 36.3.6 (Tag 08DV). -/
+complex of modules over a commutative ring `A` is K-flat on `Spec A`. -/
 theorem isKFlat_tilde (A : Type u) [CommRing A] (K : CochainComplex (ModuleCat.{u} A) ℤ)
     (hK : ∀ F : CochainComplex (ModuleCat.{u} A) ℤ,
       F.Acyclic → (CochainComplex.mapBifunctor F K (curriedTensor (ModuleCat A))).Acyclic) :

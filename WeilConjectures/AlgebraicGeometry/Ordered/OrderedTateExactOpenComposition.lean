@@ -169,7 +169,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # Composition of exact ordinary restriction of the ordered Tate coefficient
 
-Source: and Stacks 06XS.
+## References
+
+* and Stacks 06XS
 -/
 
 @[expose] public noncomputable section

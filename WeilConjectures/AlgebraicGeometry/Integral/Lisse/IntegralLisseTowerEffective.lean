@@ -17,7 +17,9 @@ set_option linter.privateModule false
 /-!
 # IntegralLisseTowerEffective
 
-Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.4(1).
+## References
+
+* Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.4(1)
 -/
 
 @[expose] public noncomputable section

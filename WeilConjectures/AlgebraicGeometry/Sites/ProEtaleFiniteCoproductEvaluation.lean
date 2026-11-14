@@ -18,7 +18,10 @@ public import Mathlib.CategoryTheory.Sites.Subcanonical
 /-!
 # Finite disjoint unions in the pro-etale site
 
-Source: Stacks Project, Tags 0F4P and 0DB1.
+## References
+
+* Stacks Project, Tags 0F4P and 0DB1
+* Stacks Project, Tag 0F4P, and Tag 0DB1, hypotheses (a)-(c)
 -/
 
 @[expose] public section
@@ -34,9 +37,7 @@ all summands are affine. Its representable sheaf is the coproduct of the represe
 summands, and restriction gives a bijection on sections natural in the sheaf.
 Here `uliftYoneda` places representables in the same universe as the sheaves of sets.
 The colimit witness asserts existence in sheaves; `hc.desc` is the canonical comparison
-from any chosen coproduct. Empty families give the empty scheme and singleton sections.
-
-Source: Stacks Project, Tag 0F4P, and Tag 0DB1, hypotheses (a)-(c). -/
+from any chosen coproduct. Empty families give the empty scheme and singleton sections. -/
 theorem finite_coproduct_evaluation (X : Scheme.{u}) (I : Type v) [Finite I]
     (V : I → X.ProEt) (hqc : ∀ i, CompactSpace (V i).left)
     (hqs : ∀ i, QuasiSeparatedSpace (V i).left) :

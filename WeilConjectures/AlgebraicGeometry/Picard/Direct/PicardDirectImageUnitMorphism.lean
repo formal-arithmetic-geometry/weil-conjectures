@@ -9,7 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.Picard.Direct.PicardDirectImageS
 
 /-! # The unit morphism underlying the canonical section map
 
-Source: Stacks Project, Tags 08HY and 0D5S.
+## References
+
+* Stacks Project, Tags 08HY and 0D5S
 -/
 
 @[expose] public section
@@ -27,8 +29,7 @@ variable [∀ Y : Scheme.{v},
 
 /-- The morphism from the structure sheaf on the fibre product obtained by
 transposing the degree-zero canonical base-change comparison. Its value on 1
-is the fixed section map; no section is chosen.
-Source: Stacks Project, Tags 08HY and 0D5S. -/
+is the fixed section map; no section is chosen. -/
 def picardDirectImageUnitMorphism {X S : Scheme.{v}} (f : X ⟶ S)
     (L : X.Modules) (W : Scheme.{v}) (k : W ⟶ S)
     {T : Scheme.{v}} (t : T ⟶ W)

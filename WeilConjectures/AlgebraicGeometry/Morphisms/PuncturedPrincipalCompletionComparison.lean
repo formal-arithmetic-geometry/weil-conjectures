@@ -14,7 +14,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedPrincipalRestriction
 
 /-! # Formal sections as an element of the principal adic completion
 
-Source: Stacks Project, Tags 0BLD, 0AVY and 0BK0.
+## References
+
+* Stacks Project, Tags 0BLD, 0AVY and 0BK0
+* Stacks Project, Tag 0BLD (Lemma 52.3.2, p = 0), as used in Tag 0EII
+* Tags 0AVY and 0BK0
 -/
 
 @[expose] public section
@@ -57,9 +61,7 @@ private theorem scalarRestriction_quotient {R S : Type u} [CommRing R] [CommRing
   rw [← pullback.condition]
 
 /-- On a depth-three puncture, formal sections determine an element of the
-principal adic completion, even when the local ring is not complete.
-
-Source: Stacks Project, Tag 0BLD (Lemma 52.3.2, p = 0), as used in Tag 0EII; Tags 0AVY and 0BK0 -/
+principal adic completion, even when the local ring is not complete. -/
 theorem punctured_principal_completion_comparison
     (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R]
     (g : R) (hg : g ∈ IsLocalRing.maximalIdeal R)

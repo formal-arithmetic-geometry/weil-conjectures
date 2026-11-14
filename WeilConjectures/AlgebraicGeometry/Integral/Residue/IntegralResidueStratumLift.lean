@@ -15,7 +15,13 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 import WeilConjectures.CategoryTheory.Ringed.RingedDerivedRestrictionGeneralSupplement
 import WeilConjectures.AlgebraicGeometry.Finite.Perfect.FinitePerfectQuotientModels
 
-/-! # Lifting a perfect residue model on a single stratum -/
+/-! # Lifting a perfect residue model on a single stratum
+
+## References
+
+* Bhatt--Scholze, Proposition 6.6.11, forward implication
+* Lemma 6.6.8
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -106,8 +112,7 @@ private theorem sliceCoefficient_reflects
     H.mapDerivedCategory.{u + 2, u + 2}.preimageIso j' ≪≫ sliceRestrictionComparison S R' U L⟩
 
 set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
-/-- Complete integral coefficients lift perfect constant residue models on one stratum.
-Source: Bhatt--Scholze, Proposition 6.6.11, forward implication; Lemma 6.6.8. -/
+/-- Complete integral coefficients lift perfect constant residue models on one stratum. -/
 theorem integralResidueStratum_lift
     (T : Scheme.{u}) [IsNoetherian T] (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

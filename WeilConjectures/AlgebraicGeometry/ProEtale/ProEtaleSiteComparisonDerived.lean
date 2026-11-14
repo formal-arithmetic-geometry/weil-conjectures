@@ -18,6 +18,10 @@ set_option autoImplicit false
 
 /-!
 # Bounded below finite-coefficient site comparison
+
+## References
+
+* Stacks Project, Tag 099V, final paragraph
 -/
 
 @[expose] public section
@@ -61,8 +65,7 @@ noncomputable def finiteCoefficientDerivedComparisonAdjunction :
   (finiteCoefficientComparisonAdjunction T Λ).derivedPlus
 
 /-- Finite-coefficient comparison is fully faithful on all bounded below complexes,
-and its canonical derived unit is a natural isomorphism.
-Source: Stacks Project, Tag 099V, final paragraph. -/
+and its canonical derived unit is a natural isomorphism. -/
 theorem siteComparison_boundedBelow (T : Scheme.{u}) (Λ : Type (u + 1))
     [Ring Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] :
     Nonempty (finiteCoefficientComparison T Λ).mapDerivedCategoryPlus.FullyFaithful ∧

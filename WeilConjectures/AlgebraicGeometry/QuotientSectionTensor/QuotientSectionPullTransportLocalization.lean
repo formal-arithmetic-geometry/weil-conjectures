@@ -56,7 +56,12 @@ import Mathlib.Algebra.Homology.DerivedCategory.Basic
 import WeilConjectures.CategoryTheory.Sites.RGammaDerivedLimit
 import Mathlib.LinearAlgebra.Finsupp.LinearCombination
 
-/-! # Localization descent for normalized quotient section pull transport -/
+/-! # Localization descent for normalized quotient section pull transport
+
+## References
+
+* Stacks 06YS and 06YU
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -97,8 +102,6 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
 /-- Equality of the normalized computation maps on flat-term K-flat representatives
 descends through the derived localization to every complex, once the ordinary witness
 `e` is fixed.
-
-Source: Stacks 06YS and 06YU.
 -/
 theorem section_pull_normalized_localization_descent {X Y : Scheme.{u}} (f : X ⟶ Y)
     (cX : ScalarSectionData a X) (cY : ScalarSectionData a Y)

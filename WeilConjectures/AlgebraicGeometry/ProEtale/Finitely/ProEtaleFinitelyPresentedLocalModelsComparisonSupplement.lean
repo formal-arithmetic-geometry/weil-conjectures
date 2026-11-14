@@ -25,7 +25,12 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleFinitelyPresentedLocalMo
 
 /-! # Finitely presented local constant models on the pro-etale site
 
-Source: Stacks Project, Tags 09AJ and 093U.
+## References
+
+* Stacks Project, Tags 09AJ and 093U
+* Stacks Project, Tags 03CY and 093U
+* Stacks Project, Tags 03CY and 03A0
+* Stacks Project, Tags 03CY, 03A0, 093U, and 00IK
 -/
 
 @[expose] public section
@@ -164,8 +169,7 @@ private theorem fixedModels_constantRing {C : Type u} [SmallCategory C]
     | exact ⟨M, hM, (hi W M).mpr he⟩
     | exact ⟨M, hM, (hi W M).mp he⟩
 
-/-- Intrinsic module constants agree with constants after restriction to fixed scalars.
-Source: Stacks Project, Tags 03CY and 093U. -/
+/-- Intrinsic module constants agree with constants after restriction to fixed scalars. -/
 theorem intrinsic_fixedModels (X : Scheme.{u}) (R : Type u)
     [CommRing R] [IsNoetherianRing R]
     (F : proEtaleRingModules X (proEtaleConstantRing X R)) :
@@ -274,8 +278,7 @@ attribute [local instance] ProFiniteModels.asSmallDownEquivalence
 
 /-- The coefficient encoding on the equivalent small site. Each equivalence is an
 actual scalar-restriction or site-transport equivalence, retaining the underlying sheaf.
-The inverse of scalar restriction is fixed up to its natural isomorphism.
-Source: Stacks Project, Tags 03CY and 03A0. -/
+The inverse of scalar restriction is fixed up to its natural isomorphism. -/
 noncomputable def proEtaleFPModelEncoding (X : Scheme.{u}) (R : Type u) [CommRing R] :
     proEtaleRingModules X (proEtaleConstantRing X R) ≌
       ringedSiteModules.{u + 1}
@@ -293,8 +296,7 @@ noncomputable def proEtaleFPModelEncoding (X : Scheme.{u}) (R : Type u) [CommRin
           (ULift.{u + 1, u} R)).1.choose.symm)
 
 /-- The intrinsic finitely presented models agree with finite-type constant models on
-the equivalent small site under the specified scalar and site encoding.
-Source: Stacks Project, Tags 03CY, 03A0, 093U, and 00IK. -/
+the equivalent small site under the specified scalar and site encoding. -/
 theorem proEtale_fp_localModels_comparison (X : Scheme.{u}) (R : Type u)
     [CommRing R] [IsNoetherianRing R]
     (F : proEtaleRingModules X (proEtaleConstantRing X R)) :

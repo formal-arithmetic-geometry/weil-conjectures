@@ -12,7 +12,10 @@ import WeilConjectures.AlgebraicGeometry.OpenImmersionRestrictionDerivedProperti
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 
 /-! # Nested open restriction of a single direct image
-Source: Stacks Project.
+
+## References
+
+* Stacks Project
 -/
 
 @[expose] public section
@@ -23,8 +26,7 @@ namespace AlgebraicGeometry
 noncomputable section
 attribute [local instance] Functor.additive_of_preserves_binary_products
 
-/-- Nested open restriction of a single direct image.
-Source: Stacks Project. -/
+/-- Nested open restriction of a single direct image. -/
 theorem nestedOpen_single_directImage_comparison
     {X S : Scheme.{u}} (f : X ⟶ S)
     [HasDerivedCategory.{wX}

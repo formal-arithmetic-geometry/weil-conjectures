@@ -34,7 +34,10 @@ public import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
 /-!
 # Left exactness of pro-etale module direct image
 
-Source: Stacks Project, Tags 03DA and 03DC, first paragraph.
+## References
+
+* Stacks Project, Tags 03DA and 03DC, first paragraph
+* Stacks Project, Tags 03DA and 03DC
 -/
 
 @[expose] public section
@@ -47,9 +50,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Direct image of constant-ring module sheaves on the small pro-etale sites is
 additive and left exact. In these abelian categories, preservation of finite limits
-is equivalent to preserving exact sequences `0 → F' → F → F''`.
-
-Source: Stacks Project, Tags 03DA and 03DC. -/
+is equivalent to preserving exact sequences `0 → F' → F → F''`. -/
 theorem proEtaleConstantModuleDirectImage_additive_leftExact
     {X Y : Scheme.{u}} (f : X ⟶ Y) (A : Type u) [CommRing A] :
     (proEtaleConstantModuleDirectImage f A).Additive ∧

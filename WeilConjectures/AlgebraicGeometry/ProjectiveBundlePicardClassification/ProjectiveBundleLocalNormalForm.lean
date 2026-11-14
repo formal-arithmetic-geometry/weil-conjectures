@@ -14,7 +14,13 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveBundlePicardClassification.Pr
 /-!
 # Local normal forms of lines on projective bundles
 
-Source: EGA II, Remark 4.2.7; Stacks, Tags 0BXJ, 07VK and 0B8W.
+## References
+
+* EGA II, Remark 4.2.7
+* Stacks, Tags 0BXJ, 07VK and 0B8W
+* Stacks, Tag 0BXJ
+* Tag 07VK
+* Tag 0B8W
 -/
 
 @[expose] public section
@@ -54,9 +60,7 @@ private theorem nonempty_iso_of_top_restriction {X : Scheme.{u}} (M N : X.Module
   exact ⟨c.app M ≪≫ (tensorPullback X.topIso.inv).mapIso e ≪≫ (c.app N).symm⟩
 
 /-- Local integer normal forms and their field normalization. This is the local
-part of projective-bundle Picard classification; it makes no global descent assertion.
-
-Source: EGA II, Remark 4.2.7; Stacks, Tag 0BXJ; Tag 07VK; Tag 0B8W. -/
+part of projective-bundle Picard classification; it makes no global descent assertion. -/
 theorem projective_bundle_local_normal_form (S : Scheme.{u}) (E : S.Modules)
     [E.IsQuasicoherent] (r : ℕ)
     [SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u} E r] (hr : 2 ≤ r)

@@ -14,7 +14,10 @@ import WeilConjectures.RingTheory.PowerSeriesQuotientVariables
 
 /-! # Sections on a finite power-series thickening
 
-Source: Stacks Project, Tag 0EY9, the first displayed calculation.
+## References
+
+* Stacks Project, Tag 0EY9, the first displayed calculation
+* Stacks Project, Tag 0EY9, the finite-index part of the first displayed calculation
 -/
 
 @[expose] public section
@@ -23,10 +26,7 @@ universe u
 open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- Restricting quotient power series to the punctured finite thickening is surjective.
-
-Source: Stacks Project, Tag 0EY9, the finite-index part of the first displayed calculation.
--/
+/-- Restricting quotient power series to the punctured finite thickening is surjective. -/
 theorem surjective_powerSeries_punctured_thickening_sections
     (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]
     (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth (R := A) A)

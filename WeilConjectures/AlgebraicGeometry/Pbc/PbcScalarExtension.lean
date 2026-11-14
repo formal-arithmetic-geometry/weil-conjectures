@@ -44,11 +44,13 @@ import all WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarOperationShift
 
 /-! # Finite scalar extension on the actual proper-base-change categories
 
-Source: Milne, Lectures on Etale Cohomology, Section 19
-
 Coefficient maps are specified on all finite reductions. Integral extension is the
 existing universal derived tensor functor. Rational extension is its balanced map
 on the actual localized Hom modules, without adjoining retracts.
+
+## References
+
+* Milne, Lectures on Etale Cohomology, Section 19
 -/
 
 @[expose] public noncomputable section

@@ -17,7 +17,10 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.FlatFibreEtaleNeighbourhoods
 /-!
 # Local trace discriminants detect non-etale fibres
 
-Source: Stacks Project, Tag 0BVH, Lemma 49.3.1
+## References
+
+* Stacks Project, Tag 0BVH, Lemma 49.3.1
+* Stacks Project, Tag 0BVH, Lemma 49.3.1, and its finite flat fibre criterion
 -/
 
 @[expose] public section
@@ -26,9 +29,7 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
-/-- On a free affine chart, the trace determinant vanishes precisely over a non-etale point.
-
-Source: Stacks Project, Tag 0BVH, Lemma 49.3.1, and its finite flat fibre criterion. -/
+/-- On a free affine chart, the trace determinant vanishes precisely over a non-etale point. -/
 theorem trace_discriminant_zeroLocus_iff_nonEtale_fibre
     {X Y : Scheme.{u}} [IsLocallyNoetherian Y]
     (f : X ⟶ Y) [IsFinite f] [Flat f] (U : Y.affineOpens) (y : Y) (hy : y ∈ U.1) :

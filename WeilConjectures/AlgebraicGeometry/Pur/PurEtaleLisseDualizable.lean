@@ -15,7 +15,10 @@ import WeilConjectures.CategoryTheory.Monoidal.Dualizable
 /-!
 # Dualizability of a lisse flat sheaf in degree zero
 
-Source: Bhatt--Scholze, *Pro-étale topology*, Section 6.4, printed pp. 48--49.
+## References
+
+* Bhatt--Scholze, *Pro-étale topology*, Section 6.4, printed pp. 48--49
+* Bhatt--Scholze, Pro-étale topology, Example 6.4.1 and Lemma 6.4.6
 -/
 
 set_option autoImplicit false
@@ -32,9 +35,7 @@ attribute [local instance] Sheaf.monoidalCategory
 namespace AlgebraicGeometry.Etale
 
 /-- A finite locally constant module sheaf with flat geometric stalks is dualizable
-when placed in degree zero in the ordinary unbounded étale derived category.
-
-Source: Bhatt--Scholze, Pro-étale topology, Example 6.4.1 and Lemma 6.4.6. -/
+when placed in degree zero in the ordinary unbounded étale derived category. -/
 theorem isDualizable_singleFunctor_lisseFlat
     {C : Type (u + 1)} [CommRing C] [Finite C]
     {V : Scheme.{u}} (L : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} C))

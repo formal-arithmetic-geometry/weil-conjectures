@@ -14,7 +14,10 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 /-!
 # Eventual smoothness for an affine source model
 
-Source: Stacks Project, Tag 0C0C, affine-local reduction using Tags 0CAQ and 01ZM.
+## References
+
+* Stacks Project, Tag 0C0C, affine-local reduction using Tags 0CAQ and 01ZM
+* Stacks Project, Tag 0C0C, with Situation 081D and Tags 0CAQ, 01ZM(2)-(3)
 -/
 
 @[expose] public section
@@ -35,9 +38,7 @@ private theorem smooth_snd_target_iff {A B D E : Scheme.{u}}
   exact MorphismProperty.postcomp_iff @Smooth _ _
     (inferInstance : IsOpenImmersion (pullback.snd q g))
 
-/-- Eventual smoothness for a single affine source chart.
-
-Source: Stacks Project, Tag 0C0C, with Situation 081D and Tags 0CAQ, 01ZM(2)-(3). -/
+/-- Eventual smoothness for a single affine source chart. -/
 theorem exists_smooth_stage_of_affine_source_limit {I : Type u} [SmallCategory I]
     [IsCofiltered I] {S : Scheme.{u}}
     (X : I ⥤ Scheme.{u}) (α : (Functor.const I).obj S ⟶ X)

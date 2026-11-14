@@ -10,8 +10,12 @@ import all WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarTensor
 
 /-! # Units and composition of finite coefficient extension
 
-Source: Milne, Section 19.
 Existing declarations extracted from `PbcScalarExtension` to bound compilation cost.
+
+## References
+
+* Milne, Section 19
+* Stacks 03DA
 -/
 
 @[expose] public noncomputable section
@@ -171,8 +175,7 @@ section Units
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 variable [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{u})
 
-/-- Identity scalar restriction is fixed by identity functions on sections.
-Source: Stacks 03DA. -/
+/-- Identity scalar restriction is fixed by identity functions on sections. -/
 theorem pbcScalarRestrictId_exists :
     ∃! e : pbcRestrict (𝟙 (pbcAdicCompletion T (pbcIntegralDatum l E))) ≅ 𝟭 _,
       ∀ (M : pbcModules T (pbcAdicCompletion T (pbcIntegralDatum l E)))
@@ -193,8 +196,7 @@ theorem pbcScalarRestrictId_exists :
     ext M U x
     exact he' M U x
 
-/-- The ordinary identity-on-sections restriction comparison.
-Source: Stacks 03DA. -/
+/-- The ordinary identity-on-sections restriction comparison. -/
 @[irreducible] def pbcScalarRestrictId := (pbcScalarRestrictId_exists l E T).exists.choose
 
 set_option backward.isDefEq.respectTransparency false in

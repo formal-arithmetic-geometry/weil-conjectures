@@ -26,7 +26,13 @@ import Mathlib.CategoryTheory.Sites.EpiMono
 /-!
 # Exact sections at an algebraically closed pro-etale point
 
-Source: Stacks Project, Tags 0982 and 098H; Tag 0946; Tags 015F and 014X.
+## References
+
+* Stacks Project, Tags 0982 and 098H
+* Tag 0946
+* Tags 015F and 014X
+* Stacks Project, Tag 03CW
+* Tag 010N
 -/
 
 @[expose] public section
@@ -40,9 +46,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- Sections of module sheaves at the final small pro-etale object, with their actual
 section-ring action. This is exactly Mathlib evaluation, after forgetting commutativity
-of the coefficient sheaf; it introduces no different module category or section functor.
-
-Source: Stacks Project, Tag 03CW. -/
+of the coefficient sheaf; it introduces no different module category or section functor. -/
 noncomputable abbrev pointModuleSections (k : Type u) [Field k]
     (A : Sheaf (Scheme.ProEt.topology (Spec (.of k))) CommRingCat.{u + 1}) :
     ringedSiteModules.{u + 1}
@@ -56,9 +60,7 @@ noncomputable abbrev pointModuleSections (k : Type u) [Field k]
     PresheafOfModules.evaluation _ (op (Scheme.ProEt.mk (𝟙 (Spec (.of k)))))
 
 /-- Sections at an algebraically closed pro-etale point are exact, and their termwise
-extension induces the specified unbounded derived functor with natural cohomology comparison.
-
-Source: Stacks Project, Tags 0982 and 098H; Tag 0946; Tag 010N; Tags 015F and 014X. -/
+extension induces the specified unbounded derived functor with natural cohomology comparison. -/
 theorem point_proEtale_sections_exact (k : Type u) [Field k] [IsAlgClosed k] :
     (∀ (F G : Sheaf (Scheme.ProEt.topology (Spec (.of k))) AddCommGrpCat.{u + 1})
       (f : F ⟶ G), Epi f →

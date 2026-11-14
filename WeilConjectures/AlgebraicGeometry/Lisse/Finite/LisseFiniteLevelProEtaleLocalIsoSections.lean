@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.Lisse.Finite.LisseFiniteLevelFixedReali
 
 /-! # Pro-etale local sections of the finite-level derived Isom sheaf
 
-Source: Stacks Project, Tags 099Y, 099Z, 09B1 and 09BV.
+## References
+
+* Stacks Project, Tags 099Y, 099Z, 09B1 and 09BV
 -/
 
 @[expose] public noncomputable section
@@ -35,8 +37,6 @@ attribute [local irreducible] HasDerivedCategory.standard
 
 /-- The finite-level comparison data yields a local section of the pro-etale derived Isom
 presheaf through every geometric point.
-
-Source: Stacks Project, Tags 099Y, 099Z, 09B1 and 09BV.
 -/
 theorem lisse_finite_level_proetale_local_iso_sections
     (X Y : Scheme.{u}) (g : Y ⟶ X)

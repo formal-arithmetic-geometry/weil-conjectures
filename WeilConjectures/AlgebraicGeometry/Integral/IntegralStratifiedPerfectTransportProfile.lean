@@ -16,7 +16,9 @@ commutes with the finite reductions, up to the level isomorphisms, and with the 
 reductions, up to the constant quotient ring isomorphisms. Constructibility is invariant
 under restriction along an isomorphism of constant finite coefficient rings.
 
-Source: Bhatt--Scholze, Definition 6.5.1.
+## References
+
+* Bhatt--Scholze, Definition 6.5.1
 -/
 
 @[expose] public noncomputable section
@@ -234,8 +236,7 @@ variable {A A' : Type (u + 1)} [CommRing A] [CommRing A']
   (d : AdicCoefficientDatum A) (d' : AdicCoefficientDatum A')
   (φ : A ≃+* A') (hφ : d.ideal.map φ = d'.ideal)
 
-/-- The uniform reduction profile transports along an isomorphism of coefficient data.
-Source: Bhatt--Scholze, Definition 6.5.1. -/
+/-- The uniform reduction profile transports along an isomorphism of coefficient data. -/
 theorem AdicCoefficientDatum.transport_uniformReductionProfile (T : Scheme.{u})
     (K : PbcCompletedDerived T d) (hK : PbcUniformReductionProfile T d K) :
     PbcUniformReductionProfile T d' ((d.transportDerived d' φ hφ T).obj K) := by

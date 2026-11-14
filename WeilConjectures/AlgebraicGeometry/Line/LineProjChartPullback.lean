@@ -18,13 +18,15 @@ import WeilConjectures.AlgebraicGeometry.Modules.PullbackSections
 
 /-! # Pullback of generation opens and specified relative-Proj fraction maps
 
-Source: Stacks Project, Divisors on Spaces, Tag 0D2Z, opening assertion and (3); Constructions, Tags
-01O9 and 01NK.
-
 The square is only commutative. The primed algebra is identified degreewise with
 its actual tensor pullback, compatibly with the coefficientwise Proj comparison.
 The pulled-back homogeneous map is constructed from normalized composition and
 power comparisons. All fraction equations are cross-multiplied on generator opens.
+
+## References
+
+* Stacks Project, Divisors on Spaces, Tag 0D2Z, opening assertion and (3)
+* Constructions, Tags 01O9 and 01NK
 -/
 
 @[expose] public section

@@ -36,7 +36,11 @@ import all WeilConjectures.Algebra.Homology.KFlatScalarExtensionDerivedIso
 
 /-! # Local comparison factors
 
-Source: Stacks Project, Tags 0DJ7 and 0DJ9; Tags 06YB and 0D5S.
+## References
+
+* Stacks Project, Tags 0DJ7 and 0DJ9
+* Tags 06YB and 0D5S
+* Stacks Project, Tag 06Y6
 -/
 
 @[expose] public section
@@ -47,8 +51,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-/-- Compatible ring isomorphisms identify ordinary scalar extension on complexes.
-Source: Stacks Project, Tag 06Y6. -/
+/-- Compatible ring isomorphisms identify ordinary scalar extension on complexes. -/
 private theorem extensionComplexIso
     {S₀ S D₀ D : Type u}
     [CommRing S₀] [CommRing S] [CommRing D₀] [CommRing D]

@@ -10,7 +10,10 @@ import all WeilConjectures.AlgebraicGeometry.ProjectionRestriction.ProjectionExa
 import all WeilConjectures.AlgebraicGeometry.ProjectionRestriction.RingedProjectionTensorShifts
 
 /-! Signed shift verification for exact tensor descent.
-Source: Stacks 07A4 and 0FNH.
+
+## References
+
+* Stacks 07A4 and 0FNH
 -/
 
 @[expose] public noncomputable section
@@ -163,8 +166,7 @@ private theorem fixedFirst_global (o : Data R S)
   rw [ht]
   infer_instance
 
-/-- The first signed shift square for the descended tensor comparison.
-Source: Stacks 07A4 and 0FNH. -/
+/-- The first signed shift square for the descended tensor comparison. -/
 theorem exactTensorComparison_shiftFirst (L : Mod R ⥤ Mod S) [L.Additive]
     [PreservesFiniteLimits L] [PreservesFiniteColimits L]
     [PreservesColimitsOfSize.{0, 0} L]

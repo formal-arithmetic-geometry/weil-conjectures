@@ -78,7 +78,9 @@ import all WeilConjectures.AlgebraicGeometry.ExactProductFunctorRoosCompatibilit
 
 /-! # Product-preserving exact functors commute with the specified derived-limit mate
 
-Source: Stacks Tags 0940, 0941.
+## References
+
+* Stacks Tags 0940, 0941
 -/
 
 @[expose] public noncomputable section
@@ -221,8 +223,7 @@ attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall
   WeilConjectures.integralCoefficientAbSheafify
   WeilConjectures.integralCoefficientAbLocallyBijective in
 /-- The canonical constant-tower mate is invertible for an exact module functor
-preserving countable products.
-Source: Stacks Tags 0940, 0941. -/
+preserving countable products. -/
 theorem productPreservingDerivedLimitMate_isIso {T S : Scheme.{t}}
     {R : Sheaf (ProEt.topology T) CommRingCat.{t + 1}}
     {R' : Sheaf (ProEt.topology S) CommRingCat.{t + 1}}

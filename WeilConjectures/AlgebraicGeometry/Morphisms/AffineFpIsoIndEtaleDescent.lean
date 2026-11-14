@@ -18,7 +18,10 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-! # Isomorphism descent for finitely presented affine schemes
 
-Source: Stacks Project, Tag 05N9 (2), (3); Tag 0EYG, descent paragraph.
+## References
+
+* Stacks Project, Tag 05N9 (2), (3)
+* Tag 0EYG, descent paragraph
 -/
 
 @[expose] public section
@@ -66,9 +69,7 @@ private theorem finite_units_stage
 
 set_option backward.defeqAttrib.useBackward true in
 /-- A relative isomorphism between two fixed finitely presented affine schemes
-and finitely many unit conditions descend to an etale stage of an ind-etale map.
-
-Source: Stacks Project, Tag 05N9 (2), (3); Tag 0EYG, descent paragraph. -/
+and finitely many unit conditions descend to an etale stage of an ind-etale map. -/
 theorem affine_fp_iso_descend_indEtale
     (R H : CommRingCat.{u}) (ι : R →+* H) (hι : ι.IndEtale)
     {Y Z : Scheme.{u}} (p : Y ⟶ Spec R) (q : Z ⟶ Spec R)

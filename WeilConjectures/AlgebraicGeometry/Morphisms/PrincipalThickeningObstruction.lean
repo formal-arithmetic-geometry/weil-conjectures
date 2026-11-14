@@ -14,7 +14,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PrincipalThickeningCokernelSe
 
 /-! # The section obstruction sequence for principal thickenings
 
-Source: Stacks Project, Tags 01IH, 01QP and 01DZ.
+## References
+
+* Stacks Project, Tags 01IH, 01QP and 01DZ
+* Stacks Project, Tags 01IH and 01QP (quotient structure sheaves), and Tag 01DZ, Section 20.2
+  (cohomology as a universal delta-functor)
 -/
 
 @[expose] public section
@@ -55,10 +59,7 @@ private theorem boundary_naturality {X : Scheme.{u}} {S T : ShortComplex X.Modul
   exact congrArg (fun z ↦ Abelian.Ext.comp x z rfl) he.symm
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Exactness and naturality of the section obstruction sequence.
-
-Source: Stacks Project, Tags 01IH and 01QP (quotient structure sheaves), and
-Tag 01DZ, Section 20.2 (cohomology as a universal delta-functor). -/
+/-- Exactness and naturality of the section obstruction sequence. -/
 theorem principal_thickening_obstruction
     (R : Type u) [CommRing R] (g : R) (W : (Spec (.of R)).Opens) :
     ∃ δ : ∀ n : ℕ, Γ(FiniteEtale.Adic.openThickening

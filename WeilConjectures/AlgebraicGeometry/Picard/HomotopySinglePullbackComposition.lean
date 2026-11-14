@@ -11,7 +11,10 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors
 
 /-! # Composition of the tensor-to-ordinary comparison on homotopy single complexes
 
-Source: Stacks Project, Tag 0D5S, and uniqueness of adjoints.
+## References
+
+* Stacks Project, Tag 0D5S, and uniqueness of adjoints
+* Stacks Project, Tag 0D5S, and the adjunction mate formula for pullback composition
 -/
 
 @[expose] public section
@@ -120,8 +123,7 @@ private theorem homotopy_single_compat
     Quotient.natIsoLift_hom, Functor.isoWhiskerRight_hom, Quotient.natTransLift,
     Functor.whiskerRight_app, HomotopyCategory.quotient_obj_as, Category.assoc] using hq
 
-/-- The termwise tensor-to-ordinary single-complex comparison respects composition.
-Source: Stacks Project, Tag 0D5S, and the adjunction mate formula for pullback composition. -/
+/-- The termwise tensor-to-ordinary single-complex comparison respects composition. -/
 theorem homotopySinglePullbackComposition
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (N : Z.Modules)
     [(tensorPullback f).Additive] [(tensorPullback g).Additive]

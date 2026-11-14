@@ -10,7 +10,12 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Clopen.ProEtaleClopenStructura
 import WeilConjectures.AlgebraicGeometry.ProEtale.Clopen.ProEtaleClopenStructuralComparisonSymmetry
 
 /-! Split structural comparison data for finite clopen restriction.
-Source: Stacks Project, Tag 0GMW; Tag 0FPQ. -/
+
+## References
+
+* Stacks Project, Tag 0GMW
+* Tag 0FPQ
+-/
 
 @[expose] public noncomputable section
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall

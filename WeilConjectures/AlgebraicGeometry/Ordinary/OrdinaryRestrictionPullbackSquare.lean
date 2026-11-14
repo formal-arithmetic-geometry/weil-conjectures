@@ -12,7 +12,13 @@ public import WeilConjectures.AlgebraicGeometry.Stratum.StratumScalarExtension
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChangeAdjunctionSupplement
 
 /-! Restriction of scalars and ordinary inverse-image composition.
-Source: Stacks, Modules on Sites, Tags 03D8 and 03D7 -/
+
+## References
+
+* Stacks, Modules on Sites, Tags 03D8 and 03D7
+* Stacks Tag 03D7
+* Stacks Tag 03D8
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -25,14 +31,12 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 open CategoryTheory.Functor
 
-/-- Ordinary scalar restriction in constant-ring coordinates.
-Source: Stacks Tag 03D7. -/
+/-- Ordinary scalar restriction in constant-ring coordinates. -/
 abbrev ordinaryScalarRestriction {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B) (T : Scheme.{u}) :=
   Scheme.proEtaleRingRestrictScalars (Scheme.proEtaleConstantRingMap (T := T) φ)
 
-/-- The recorded ordinary constant-ring inverse image.
-Source: Stacks Tag 03D8. -/
+/-- The recorded ordinary constant-ring inverse image. -/
 abbrev ordinaryConstantPullback (A : Type u) [CommRing A] {V W : Scheme.{u}} (f : V ⟶ W) :=
   StrictTower.modulePullback (ULift.{u + 1, u} A) f
 
@@ -43,8 +47,7 @@ private abbrev padj (A : Type u) [CommRing A] {V W : Scheme.{u}} (f : V ⟶ W) :
   Scheme.proEtaleRingModuleAdjunction f (Scheme.proEtaleConstantRing W A)
     (Scheme.proEtaleConstantRing V A) (Scheme.proEtaleConstantRingComparison f A)
 
-/-- Constant coefficient maps commute with inverse-image identification.
-Source: Stacks Tag 03D7. -/
+/-- Constant coefficient maps commute with inverse-image identification. -/
 theorem coeffSquare {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B) {V W : Scheme.{u}} (f : V ⟶ W) :
     (Scheme.proEtaleConstantRingComparison f A).hom ≫
@@ -56,8 +59,7 @@ theorem coeffSquare {A B : Type u} [CommRing A] [CommRing B]
     (Scheme.proEtaleConstantInverseImageMap_naturality f
       (a := CommRingCat.ofHom (RingHom.ulift φ))).symm
 
-/-- The specified ordinary restriction/pullback mate.
-Source: Stacks Tag 03D7. -/
+/-- The specified ordinary restriction/pullback mate. -/
 def ordinaryRestrictionComparison {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B) {V W : Scheme.{u}} (f : V ⟶ W) :
     ordinaryScalarRestriction φ W ⋙ ordinaryConstantPullback A f ⟶
@@ -234,8 +236,7 @@ private lemma pasteTransport
   rw [reassoc_of% hb]
 
 /-- Restriction of scalars respects the specified ordinary pullback-square compositor.
-No derived tensor functor, localization, or extension by zero occurs here.
-Source: Stacks, Modules on Sites, Tags 03D8 and 03D7. -/
+No derived tensor functor, localization, or extension by zero occurs here. -/
 theorem ordinaryRestrictionPullbackSquare {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B)
     {U' U X' X : Scheme.{u}}

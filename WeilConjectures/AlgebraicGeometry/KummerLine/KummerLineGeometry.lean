@@ -14,11 +14,14 @@ public import Mathlib.Algebra.Polynomial.Laurent
 /-!
 # Canonical geometry and maps for the Kummer lines
 
-Source: Stacks Project, Tags 03PK and 03PL.
-
 The seven definitions are restored with the names, signatures and bodies recorded in
 `coord/changes/Q4-kummer-line-geometry-relocation.md`. The curves are the polynomial and
 Laurent polynomial spectra, and restriction uses the canonical inverse-image comparison.
+
+## References
+
+* Stacks Project, Tags 03PK and 03PL
+* Stacks, Tag 03PK
 -/
 
 @[expose] public noncomputable section
@@ -59,8 +62,7 @@ def generator (k : Type u) [Field k] (m : ℕ) (hm : IsUnit (m : Γ(curve k true
     Sheaf.H ((curve k true).rootsOfUnitySheaf m) 1 :=
   (curve k true).kummerδ₀ m hm (Additive.ofMul (coordinateUnit k))
 
-/-- Restriction on root-sheaf cohomology, using the canonical pullback comparison.
-Source: Stacks, Tag 03PK. -/
+/-- Restriction on root-sheaf cohomology, using the canonical pullback comparison. -/
 def rootRestriction (k : Type u) [Field k] (m q : ℕ) :
     Sheaf.H ((curve k false).rootsOfUnitySheaf m) q →+
       Sheaf.H ((curve k true).rootsOfUnitySheaf m) q :=

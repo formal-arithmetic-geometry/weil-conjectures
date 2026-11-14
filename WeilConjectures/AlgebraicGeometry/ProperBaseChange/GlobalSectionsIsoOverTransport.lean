@@ -9,7 +9,11 @@ public import WeilConjectures.SixFunctors.BaseChange.GlobalSections
 
 /-! # Transport of pullback of sections along isomorphisms over a scheme
 
-Source: Stacks Project, Tags 0GJP and 0GJU, transport of the variety of vanishing cycles.
+## References
+
+* Stacks Project, Tags 0GJP and 0GJU, transport of the variety of vanishing cycles
+* Stacks Project, Tag 0GJU, first paragraph and displayed fibre identification
+* Tag 0GJP
 -/
 
 @[expose] public section
@@ -32,9 +36,7 @@ private theorem iso_cancellation {C : Type*} [Category C]
 set_option maxRecDepth 4096 in
 /-- Pullback of global sections is unchanged under an isomorphism of its source and
 its target over the coefficient scheme. There are no stalks, strict local schemes,
-closed points or direct-image comparisons in this assertion.
-Source: Stacks Project, Tag 0GJU, first paragraph and displayed fibre identification; Tag 0GJP;
-inverse-image functoriality. -/
+closed points or direct-image comparisons in this assertion. -/
 theorem globalSections_iso_over_transport
     {X Y T L Z W V : Scheme.{u}}
     (p : Y ⟶ X) (h : T ⟶ Y) (ρ : L ⟶ Y)

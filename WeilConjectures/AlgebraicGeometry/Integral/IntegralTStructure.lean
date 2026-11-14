@@ -15,7 +15,10 @@ import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TStructure.SpectralOb
 
 /-! # The bounded standard integral t-structure
 
-Source: BBD 1.3.1--1.3.6.
+## References
+
+* BBD 1.3.1--1.3.6
+* BBD 1.3.3
 -/
 
 @[expose] public noncomputable section
@@ -65,7 +68,7 @@ set_option linter.unnecessarySimpa false in
 
 /-- The standard integral structure is bounded, its heart is cohomology in degree zero,
 and its canonical truncations are the ambient ones. Uniformizer torsion is preserved
-with the same exponent. Source: BBD 1.3.3. -/
+with the same exponent. -/
 theorem pbc_integral_tstructure :
     (pbcIntegralTStructure T l E).bounded = ⊤ ∧
     (∀ K : PbcBoundedConstructibleComplete T (pbcIntegralDatum l E),

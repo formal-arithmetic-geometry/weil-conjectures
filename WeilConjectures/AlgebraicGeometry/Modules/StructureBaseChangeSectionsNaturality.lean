@@ -11,7 +11,10 @@ public import WeilConjectures.AlgebraicGeometry.Modules.PullbackSectionFactoriza
 
 /-! # Naturality on sections of the canonical structure-sheaf comparison
 
-Source: Stacks Project, Tag 02KG, the canonical tensor comparison.
+## References
+
+* Stacks Project, Tag 02KG, the canonical tensor comparison
+* Stacks Project, Tag 02KG, canonical tensor comparison, and Tag 01CA
 -/
 
 @[expose] public section
@@ -42,9 +45,7 @@ private theorem comp_adjunction_homEquiv
   simp [← Functor.map_comp]
 
 
-/-- The canonical structure-sheaf comparisons commute with a map of base-change squares.
-
-Source: Stacks Project, Tag 02KG, canonical tensor comparison, and Tag 01CA. -/
+/-- The canonical structure-sheaf comparisons commute with a map of base-change squares. -/
 theorem structure_baseChange_sections_naturality
     {X Y A B C D : Scheme.{u}}
     (p : X ⟶ Y) (q : A ⟶ B) (t : C ⟶ D)

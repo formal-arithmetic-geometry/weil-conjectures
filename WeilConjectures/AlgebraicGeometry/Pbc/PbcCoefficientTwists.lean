@@ -13,10 +13,13 @@ import WeilConjectures.Algebra.Homology.TensorColimitsIndependentCoefficients
 
 /-! # The recorded Tate twists in the PBC finite-stage coordinates
 
-Source: Bhatt--Scholze, Section 6.8.
 All roots, signed powers and coefficient identifications are the published ones.
 The only new construction is their transport to the PBC completed coefficient ring.
 The original finite, integral, rational and intrinsic Qbar interfaces remain imported.
+
+## References
+
+* Bhatt--Scholze, Section 6.8
 -/
 
 @[expose] public noncomputable section

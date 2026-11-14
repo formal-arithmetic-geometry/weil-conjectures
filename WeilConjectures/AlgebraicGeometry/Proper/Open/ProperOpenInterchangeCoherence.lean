@@ -132,7 +132,11 @@ import WeilConjectures.AlgebraicGeometry.Proper.Open.ProperOpenInterchangeGeomet
 /-!
 # Proper/open interchange and its coherence
 
-Source: Stacks Project, More on Étale Cohomology, Tags 0F7B, 0F7C, 0F7D, 0F7F.
+## References
+
+* Stacks Project, More on Étale Cohomology, Tags 0F7B, 0F7C, 0F7D, 0F7F
+* Stacks Project, Tag 0F7B
+* Stacks Project, Tags 0F7B, 0F7C, 0F7D, 0F7F
 -/
 
 @[expose] public section
@@ -860,8 +864,7 @@ private theorem ordinary_vertical (Λ : Type (u + 1)) [CommRing Λ]
   rw [hr]
 
 set_option linter.unusedVariables false in
-/-- The family of underived proper/open isomorphisms.
-Source: Stacks Project, Tag 0F7B. -/
+/-- The family of underived proper/open isomorphisms. -/
 def ProperOpenUnderivedFamily (Λ : Type (u + 1)) [CommRing Λ] :=
   ∀ {A B C D : Scheme.{u}} (k : A ⟶ B) (i : C ⟶ D) (r : A ⟶ C) (p : B ⟶ D) [IsOpenImmersion
         k] [IsOpenImmersion i] [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i), (lowerStar
@@ -869,8 +872,7 @@ def ProperOpenUnderivedFamily (Λ : Type (u + 1)) [CommRing Λ] :=
         (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) k) ⋙ (lowerStar (ModuleCat.{u + 1} Λ) p)
 
 set_option linter.unusedVariables false in
-/-- The family of derived proper/open isomorphisms.
-Source: Stacks Project, Tag 0F7B. -/
+/-- The family of derived proper/open isomorphisms. -/
 def ProperOpenDerivedFamily (Λ : Type (u + 1)) [CommRing Λ] :=
   ∀ {A B C D : Scheme.{u}} (k : A ⟶ B) (i : C ⟶ D) (r : A ⟶ C) (p : B ⟶ D) [IsOpenImmersion
         k] [IsOpenImmersion i] [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i),
@@ -996,7 +998,6 @@ The ordinary isomorphism `δ` is fixed by equality in the common ordinary direct
 The unit equation is the resolution-independent form of the K-injective normalization:
 on an injective representative the left unit is invertible; the right unit is represented
 by applying `p_*` to a K-injective replacement of `k_!J`.
-Source: Stacks Project, Tags 0F7B, 0F7C, 0F7D, 0F7F.
 -/
 theorem properOpenInterchangeCoherence (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] :
     ∃ δ γ, properOpenInterchangeConditions Λ δ γ := by

@@ -45,7 +45,10 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantModul
 /-!
 # Constructibility and restriction to constant scalars
 
-Source: Stacks Project, Tags 093I, 09AJ and 099Y, using global finite partitions.
+## References
+
+* Stacks Project, Tags 093I, 09AJ and 099Y, using global finite partitions
+* Stacks Project, Tags 093I, 09AJ and 099Y
 -/
 
 @[expose] public section
@@ -280,7 +283,7 @@ private theorem positive_stratification (T : Scheme.{u}) (A : Type (u + 1)) [Com
     fun i ↦ empty_finiteLocal T A _⟩
 
 /-- The intrinsic and fixed-coefficient constructibility predicates agree under
-restriction to constant scalars. Source: Stacks Project, Tags 093I, 09AJ and 099Y.
+restriction to constant scalars.
 
 Proof in words. Restriction to constant scalars leaves additive sections and their
 restriction maps unchanged. On a slice site use the restricted constant-section

@@ -10,7 +10,11 @@ import WeilConjectures.AlgebraicGeometry.Integral.Strict.IntegralStrictCompletio
 import all Mathlib.Logic.Small.Defs
 
 /-! # Reflection by the integral strict quotient tower
-Source: Stacks Project Tags 099M, 091S and 091Z. -/
+
+## References
+
+* Stacks Project Tags 099M, 091S and 091Z
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -147,9 +151,7 @@ private theorem integral_module_completion_reflector (ℓ : ℕ) [Fact ℓ.Prime
     simpa only [he] using hb
 
 /-- The total derived limit of the integral prime-power quotient tower is the
-reflection onto complexes right orthogonal to all ell-invertible complexes.
-
-Source: Stacks Project Tags 099M, 091S and 091Z. -/
+reflection onto complexes right orthogonal to all ell-invertible complexes. -/
 theorem integral_strict_completion_reflector (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     [HasDerivedCategory.{u + 1} (DiagonalAb W)]
     [HasDerivedCategory.{u + 1} (ℕᵒᵖ ⥤ DiagonalAb W)]

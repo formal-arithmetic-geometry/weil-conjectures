@@ -10,7 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.ProperOpenCalculus.ProperOpenCal
 /-!
 # Naturality on a single refining tower
 
-Source: Stacks Project, Tag 0F7J.
+## References
+
+* Stacks Project, Tag 0F7J
+* Stacks Project, Tag 0F7J, six-square calculation
 -/
 
 @[expose] public section
@@ -24,8 +27,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.ProperOpenCalculus
 
-/-- A single refining binary tower commutes with its three refinement isomorphisms.
-Source: Stacks Project, Tag 0F7J, six-square calculation. -/
+/-- A single refining binary tower commutes with its three refinement isomorphisms. -/
 theorem properOpen_tower_refinement {A : Scheme.{u} → Prop}
     (F : ProperOpenCalculus.{u, v, w} A)
     (X Y Z : {X : Scheme.{u} // A X})

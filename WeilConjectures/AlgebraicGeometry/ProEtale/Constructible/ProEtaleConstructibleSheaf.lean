@@ -26,6 +26,10 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleLocallyConstant
 The global finite partition convention is retained, including a positive number of strata.
 The coefficient pullback is the existing tensor extension along the canonical
 constant-section comparison, with no independently chosen coefficient identification.
+
+## References
+
+* compare Stacks Tag 09AJ, whose affine-local convention differs from this global one
 -/
 
 @[expose] public section
@@ -43,8 +47,7 @@ locally constant restrictions with finite geometric stalks. The restriction is
 `proEtaleCoefficientInverseImageMap`, the canonical comparison of constant ring sheaves.
 Finiteness is imposed on the underlying set of the module stalk, equivalently finite
 module generation since the coefficient ring is finite. The coefficient ring itself
-may be the zero ring, and the empty scheme is allowed.
-Source: compare Stacks Tag 09AJ, whose affine-local convention differs from this global one. -/
+may be the zero ring, and the empty scheme is allowed. -/
 noncomputable def IsConstructibleProEtaleModuleSheaf
     (Y : Scheme.{u}) (A : Type u) [CommRing A] [Finite A]
     (F : proEtaleRingModules Y (proEtaleConstantRing Y A)) : Prop :=

@@ -15,7 +15,12 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.StrictHenselDivisorQuotientPr
 import WeilConjectures.RingTheory.StrictHenselizationRegular
 import WeilConjectures.RingTheory.RegularLocalLocalization
 
-/-! Local regularity and Noetherianity of the strict henselization divisor quotient. -/
+/-! Local regularity and Noetherianity of the strict henselization divisor quotient.
+
+## References
+
+* Stacks Project, Tags 05WS and 06LN
+-/
 
 @[expose] public section
 universe u
@@ -23,7 +28,6 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- The divisor quotient has the local regularity properties needed to assemble a regular ring.
-Source: Stacks Project, Tags 05WS and 06LN.
 The presentation theorem identifies the quotient as an algebraic strict henselization of
 a prime localization of `R/(f)`, without using regularity. The localization is regular
 local by the assumed regularity of `R/(f)`. Apply the strict-henselization regularity

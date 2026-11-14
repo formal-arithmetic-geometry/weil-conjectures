@@ -14,7 +14,9 @@ The constant section one restricts to one, and its image in the closed term of t
 integral localization sequence vanishes on the open complement, as soon as the open term
 represents sections over the open with the inclusion corresponding to one.
 
-Source: Stacks Project, Tags 03AJ and 0A45
+## References
+
+* Stacks Project, Tags 03AJ and 0A45
 -/
 
 @[expose] public section

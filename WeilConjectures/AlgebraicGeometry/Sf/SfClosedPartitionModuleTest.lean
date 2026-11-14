@@ -44,7 +44,9 @@ import WeilConjectures.AlgebraicGeometry.SixFunctors.NoetherianComplementaryStra
 /-!
 # Closed-side partitions and pro-etale module restrictions
 
-Source: Stacks Project, Tags 02V0, 01OW, 01OZ, 04ZA and 03D8.
+## References
+
+* Stacks Project, Tags 02V0, 01OW, 01OZ, 04ZA and 03D8
 -/
 
 -- After pruning, this module only keeps private declarations.

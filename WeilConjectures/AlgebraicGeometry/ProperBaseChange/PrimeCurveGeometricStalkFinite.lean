@@ -21,7 +21,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
 /-!
 # Finite geometric stalks for prime coefficients on smooth proper curves
 
-Source: Stacks Project, Tag 0GKV, case (a), finite-stalk paragraph.
+## References
+
+* Stacks Project, Tag 0GKV, case (a), finite-stalk paragraph
 -/
 
 @[expose] public section
@@ -62,8 +64,7 @@ private theorem constant_curve_cohomology_finite
   let E := (ec.app M) ≪≫ (eh.app (U.obj M)).symm
   exact Finite.of_equiv _ E.addCommGroupIsoToAddEquiv.toEquiv.symm
 /-- The geometric stalks of every nonnegative prime-coefficient higher direct image
-are finite, including at points of residue characteristic equal to the prime.
-Source: Stacks Project, Tag 0GKV, case (a), finite-stalk paragraph. -/
+are finite, including at points of residue characteristic equal to the prime. -/
 theorem prime_constant_stalk_finite
     {C S : Scheme.{u}} (f : C ⟶ S) [Smooth f] [IsProper f]
     [GeometricallyConnected f]

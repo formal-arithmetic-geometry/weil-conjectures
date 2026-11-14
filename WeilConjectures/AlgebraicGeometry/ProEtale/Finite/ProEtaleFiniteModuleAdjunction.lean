@@ -11,10 +11,12 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConsta
 /-!
 # The normalized finite-ring module adjunction
 
-Source: Stacks Project, Modules on Sites.
-
 The existing inverse-image module and all its previous interfaces are reexported.
 The additional adjunction uses the transported action for arbitrary finite rings.
+
+## References
+
+* Stacks Project, Modules on Sites
 -/
 
 @[expose] public section

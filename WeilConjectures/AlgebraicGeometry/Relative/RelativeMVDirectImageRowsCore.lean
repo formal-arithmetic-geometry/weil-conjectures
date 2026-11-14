@@ -10,7 +10,12 @@ public import WeilConjectures.AlgebraicGeometry.MayerVietorisImageChainData
 import WeilConjectures.AlgebraicGeometry.Relative.RelativeMVHomotopyPullback
 import WeilConjectures.AlgebraicGeometry.Relative.RelativeMVDirectImageRowRoof
 
-/-! # Resolved relative rows before the overlap mate -/
+/-! # Resolved relative rows before the overlap mate
+
+## References
+
+* Stacks Project, Cohomology of Sheaves, Tags 08BV, 08HZ, 08FE and 08HY
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -36,8 +41,7 @@ private lemma roof_mate_transport {C D : Type*} [Category C] [Category D]
 
 set_option linter.unusedVariables false in
 /-- Resolved source and target short exact rows and their vertex comparisons,
-before recording the three mate equations. Source: Stacks Project, Cohomology
-of Sheaves, Tags 08BV, 08HZ, 08FE and 08HY. -/
+before recording the three mate equations. -/
 theorem relativeMV_direct_image_rows_core
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

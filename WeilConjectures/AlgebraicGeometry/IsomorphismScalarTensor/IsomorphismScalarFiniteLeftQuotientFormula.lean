@@ -16,7 +16,9 @@ This is the left half of the finite quotient construction.  It is separated from
 its right counterpart because the two maps use different adjunction units and are
 checked independently on pure tensors.
 
-Source: Stacks Project, Tags 03EK and 03EL.
+## References
+
+* Stacks Project, Tags 03EK and 03EL
 -/
 
 @[expose] public noncomputable section

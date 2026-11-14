@@ -15,7 +15,12 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.AffineTorsorSplitActio
 
 import WeilConjectures.AlgebraicGeometry.Morphisms.AffineTorsorComponentImageOrbit
 
-/-! # Stabilizer components of a split affine torsor cover -/
+/-! # Stabilizer components of a split affine torsor cover
+
+## References
+
+* Stacks Project, Tag 03SF, finite Galois-cover classification
+-/
 
 @[expose] public section
 universe u
@@ -23,9 +28,7 @@ set_option autoImplicit false
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- Descended representative components cover and have disjoint images.
-
-Source: Stacks Project, Tag 03SF, finite Galois-cover classification. -/
+/-- Descended representative components cover and have disjoint images. -/
 theorem affine_torsor_representative_component_cover
     (R H : CommRingCat.{u}) (g : R) (ι : R →+* H)
     (C : Type u) [CommRing C] [Algebra H C] [IsDomain C]

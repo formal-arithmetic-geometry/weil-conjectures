@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.AffineCoverIdealStalk
 /-!
 # Local lifting of a discriminant generator
 
-Source: Stacks Project, Tag 0BVH, construction before Lemma 49.3.1.
+## References
+
+* Stacks Project, Tag 0BVH, construction before Lemma 49.3.1
 -/
 
 @[expose] public section
@@ -99,9 +101,7 @@ private theorem discr_germ_eq
   simpa only [Ideal.map_map, ← CommRingCat.hom_comp, TopCat.Presheaf.germ_res] using he
 
 /-- A discriminant generator on a free affine subchart belongs to the stalk extension
-of the explicit intersection ideal on the larger affine chart.
-
-Source: Stacks Project, Tag 0BVH, construction before Lemma 49.3.1 -/
+of the explicit intersection ideal on the larger affine chart. -/
 theorem traceDiscriminantSectionIdeal_germ_generator_mem
     {X Y : Scheme.{u}} [IsLocallyNoetherian Y]
     (f : X ⟶ Y) [IsFinite f] [Flat f] (U V : Y.affineOpens)

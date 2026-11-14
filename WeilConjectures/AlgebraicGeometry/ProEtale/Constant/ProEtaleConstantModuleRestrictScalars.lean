@@ -18,7 +18,10 @@ constructibility of pro-étale module sheaves over the constant ring sheaf
 (`AlgebraicGeometry.Scheme.isConstructibleProEtaleModuleSheaf_restrictScalars`):
 finite `B`-modules stay finite over `A`, and restriction of scalars commutes with
 pro-étale inverse image and with constant sheaves.
-Source: Stacks Project, Tags 093I and 09AJ.
+
+## References
+
+* Stacks Project, Tags 093I and 09AJ
 -/
 
 @[expose] public section
@@ -136,8 +139,7 @@ private noncomputable def restrictionEncodingIso
     rfl
 
 /-- Restriction of scalars along a map of finite coefficient rings preserves constructibility
-of pro-étale module sheaves: finite modules over the target ring stay finite over the source.
-Source: Stacks Project, Tags 093I and 09AJ. -/
+of pro-étale module sheaves: finite modules over the target ring stay finite over the source. -/
 theorem isConstructibleProEtaleModuleSheaf_restrictScalars (T : Scheme.{u}) {A B : Type u}
     [CommRing A] [CommRing B] [Finite A] [Finite B] (f : A →+* B)
     (M : proEtaleRingModules T (proEtaleConstantRing T B))

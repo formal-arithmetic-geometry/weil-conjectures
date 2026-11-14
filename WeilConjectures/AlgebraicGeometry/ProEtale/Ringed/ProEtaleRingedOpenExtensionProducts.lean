@@ -106,8 +106,11 @@ import WeilConjectures.CategoryTheory.SheavesAlgebraicStructuresAbelian
 /-!
 # Products of ringed pro-etale open extensions
 
-Source: Stacks Project, Pro-etale Cohomology, with arbitrary ring-sheaf coefficients via ringed
-recollement.
+## References
+
+* Stacks Project, Pro-etale Cohomology, with arbitrary ring-sheaf coefficients via ringed
+  recollement
+* Stacks Project, Tag 09BP, using Tags 09AA, 09AG, 09AH and 09BN
 -/
 
 @[expose] public section
@@ -146,9 +149,7 @@ The coefficient sheaf is `(proEtaleModuleCoefficients R).over U`; the functor
 `proEtaleRingedExtensionByZero U R` is the recorded extension presheaf followed by
 module sheafification. `piComparison` has components the images of the projections.
 Products are Mathlib's sectionwise module-sheaf limits. The index type may be empty.
-No quasi-compactness or quasi-separatedness condition is imposed on `X`.
-
-Source: Stacks Project, Tag 09BP, using Tags 09AA, 09AG, 09AH and 09BN. -/
+No quasi-compactness or quasi-separatedness condition is imposed on `X`. -/
 theorem proEtaleRingedExtensionByZero_products {X : Scheme.{u}} (U : X.ProEt)
     [IsOpenImmersion U.hom] [QuasiCompact U.hom]
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) (S : Type (u + 1))

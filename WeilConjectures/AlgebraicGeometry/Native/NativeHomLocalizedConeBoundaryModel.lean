@@ -16,7 +16,10 @@ import all WeilConjectures.AlgebraicGeometry.Native.NativeHomEvaluationShiftOne
 
 /-! # The K-injective native Hom cone boundary
 
-Source: Stacks Project, Tags 08J9 and 08JC.
+## References
+
+* Stacks Project, Tags 08J9 and 08JC
+* Stacks Project, Tag 08JC
 -/
 
 @[expose] public noncomputable section
@@ -85,7 +88,6 @@ private noncomputable def modelComparison (I : CochainComplex C ℤ) [I.IsKInjec
 end Model
 
 /-- The signed native-Hom cone calculation on a K-injective model.
-Source: Stacks Project, Tag 08JC.
 
 The Hom complex into a K-injective complex identifies the Hom of an ordinary
 mapping cone with the inverse rotation of the Hom cone.  The two summand

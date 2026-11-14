@@ -26,6 +26,10 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Locally closed exceptional comparison with its adjunction normalization
+
+## References
+
+* Stacks 0GJ1
 -/
 
 @[expose] public noncomputable section
@@ -122,8 +126,7 @@ def locallyClosedImageCompactification {S T : Scheme.{u}} (s : S ⟶ T)
 
 /-- The unique identity-on-the-source sheaf comparison, oriented from closed/open
 extension to closure extension. The existing theorem specifies uniqueness by the open
-unit and closed counit, so this choice cannot introduce a scalar twist.
-Source: Stacks 0GJ1. -/
+unit and closed counit, so this choice cannot introduce a scalar twist. -/
 def locallyClosedEtaleSheafIso (A : Type (u + 1)) [CommRing A] [Finite A]
     {S V T : Scheme.{u}} (c : S ⟶ V) (v : V ⟶ T)
     [IsClosedImmersion c] [IsOpenImmersion v] [IsNoetherian T] [QuasiCompact (c ≫ v)] :
@@ -136,8 +139,7 @@ def locallyClosedEtaleSheafIso (A : Type (u + 1)) [CommRing A] [Finite A]
 
 /-- The normalized identification with etale compact support at the closure
 compactification. Both closed direct images are exact; the comparison is the
-localization of the preceding uniquely normalized sheaf map.
-Source: Stacks 0GJ1. -/
+localization of the preceding uniquely normalized sheaf map. -/
 def locallyClosedEtaleSupportIso (A : Type (u + 1)) [CommRing A] [Finite A]
     {S V T : Scheme.{u}} (c : S ⟶ V) (v : V ⟶ T)
     [IsClosedImmersion c] [IsOpenImmersion v] [IsNoetherian T] [QuasiCompact (c ≫ v)] :

@@ -18,7 +18,9 @@ import all WeilConjectures.AlgebraicGeometry.Perfect.PerfectChartTensorCompariso
 
 /-! # Finite inverse image and normalized slice isomorphisms
 
-Source: Bhatt--Scholze, Section 6.5.
+## References
+
+* Bhatt--Scholze, Section 6.5
 -/
 
 @[expose] public noncomputable section
@@ -30,8 +32,7 @@ open AlgebraicGeometry.ProEtale
 namespace AlgebraicGeometry.Scheme
 
 /-- An isomorphism after finite inverse image gives an isomorphism on the actual slice.
-There are no constant-complex or perfectness hypotheses.
-Source: Bhatt--Scholze, Section 6.5. -/
+There are no constant-complex or perfectness hypotheses. -/
 theorem integralResidueFiniteSlice
     (S : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.TraceDiscriminantSectionGermG
 /-!
 # Localization of the explicit discriminant section ideal
 
-Source: Stacks Project, Tag 0BVH, construction before Lemma 49.3.1.
+## References
+
+* Stacks Project, Tag 0BVH, construction before Lemma 49.3.1
 -/
 
 @[expose] public section
@@ -91,9 +93,7 @@ private theorem sectionIdeal_map_germ_eq
   · rw [Ideal.map_span, Set.image_singleton, Ideal.span_singleton_le_iff_mem]
     exact traceDiscriminantSectionIdeal_germ_generator_mem f U V h y hy n b
 
-/-- The explicitly defined family of discriminant section ideals localizes.
-
-Source: Stacks Project, Tag 0BVH, construction before Lemma 49.3.1 -/
+/-- The explicitly defined family of discriminant section ideals localizes. -/
 theorem traceDiscriminantSectionIdeal_map_basicOpen
     {X Y : Scheme.{u}} [IsLocallyNoetherian Y]
     (f : X ⟶ Y) [IsFinite f] [Flat f] (U : Y.affineOpens) (r : Γ(Y, U.1)) :

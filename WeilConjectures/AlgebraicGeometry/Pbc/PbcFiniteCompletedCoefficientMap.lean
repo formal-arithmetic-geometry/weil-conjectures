@@ -18,8 +18,6 @@ public import Mathlib.Algebra.Field.Shrink
 /-!
 # Finite extension maps of the actual completed PBC coefficient sheaves
 
-Source: its canonical completed ring map is made explicit by finite quotient projections.
-
 ## Main definitions
 
 * `pbcIntegerInclusion`: the actual inclusion of lifted valuation rings.

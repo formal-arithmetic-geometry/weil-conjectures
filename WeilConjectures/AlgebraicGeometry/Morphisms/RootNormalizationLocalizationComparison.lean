@@ -19,7 +19,12 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 import WeilConjectures.AlgebraicGeometry.Morphisms.RootCoverNormalizationCartesian
 import WeilConjectures.AlgebraicGeometry.Morphisms.AffineLocalizationPullbackStalk
 
-/-! # Root normalization after principal-prime localization -/
+/-! # Root normalization after principal-prime localization
+
+## References
+
+* Stacks Project, Tag 0307
+-/
 
 @[expose] public section
 universe u
@@ -44,9 +49,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option linter.unusedVariables false in
 /-- The geometric root-normalization comparison over an already constructed
 principal-prime localization. The DVR and its uniformizer are fixed data; the generic
-map to U and its pulled-back cover are supplied separately.
-
-Source: Stacks Project, Tag 0307. -/
+map to U and its pulled-back cover are supplied separately. -/
 theorem root_normalization_localization_comparison
     {L U : Scheme.{u}} (i : U ⟶ L)
     (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)

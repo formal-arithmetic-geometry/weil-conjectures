@@ -15,7 +15,10 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Bidual
 
 /-! # Restriction of the actual affine double dual
 
-Source: Stacks Project, Tags 0583 and 0EY6.
+## References
+
+* Stacks Project, Tags 0583 and 0EY6
+* Stacks Project, Tag 0583 (localization of Hom) and Tag 0EY6 proof of (1)
 -/
 
 @[expose] public section
@@ -24,8 +27,7 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
-/-- Taking the actual finite double dual preserves a finite locally free restriction.
-Source: Stacks Project, Tag 0583 (localization of Hom) and Tag 0EY6 proof of (1). -/
+/-- Taking the actual finite double dual preserves a finite locally free restriction. -/
 theorem affine_double_dual_restriction
     (A : CommRingCat.{u}) [IsNoetherianRing A] (W : (Spec A).Opens)
     (M : ModuleCat.{u} A) [Module.Finite A M]

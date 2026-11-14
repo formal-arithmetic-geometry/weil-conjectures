@@ -16,7 +16,11 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 /-! # Equality detected on the open of a finite depth-two source
 
-Source: Stacks Project, Tags 0EY6, 0AUK and 0E9I.
+## References
+
+* Stacks Project, Tags 0EY6, 0AUK and 0E9I
+* Stacks Project, Tags 0AUK and 0E9I, as used in the converse of Tag 0EY6(2)
+* affine structure algebras, Tag 01SA
 -/
 
 @[expose] public section
@@ -125,10 +129,7 @@ private theorem structure_restriction_injective
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Two morphisms to an affine L-scheme agree when they agree on the open
-of a finite source whose boundary local rings have depth at least two.
-
-Source: Stacks Project, Tags 0AUK and 0E9I, as used in the converse of
-Tag 0EY6(2); affine structure algebras, Tag 01SA. -/
+of a finite source whose boundary local rings have depth at least two. -/
 theorem hom_eq_of_finite_depth_two
     {L : Scheme.{u}} [IsLocallyNoetherian L] (U : L.Opens)
     {F E : Scheme.{u}} (r : F ⟶ L) (p : E ⟶ L) [IsFinite r] [IsAffineHom p]

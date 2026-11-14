@@ -12,7 +12,12 @@ public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 import WeilConjectures.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotientRegularAux
 
-/-! Regularity component of the canonical strict henselization divisor quotient. -/
+/-! Regularity component of the canonical strict henselization divisor quotient.
+
+## References
+
+* Stacks Project, Tags 05WS and 06LN
+-/
 
 @[expose] public section
 universe u
@@ -20,7 +25,6 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- The quotient by the divisor remains regular after passage to the canonical strict henselization.
-Source: Stacks Project, Tags 05WS and 06LN.
 -/
 theorem strictHenselizationRing_regular_divisor_quotient_part
     (R : CommRingCat.{u}) [IsRegularRing R] (f : R)

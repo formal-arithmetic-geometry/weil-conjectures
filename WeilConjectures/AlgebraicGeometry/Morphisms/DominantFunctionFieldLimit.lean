@@ -13,7 +13,11 @@ import WeilConjectures.AlgebraicGeometry.SpecStalkLimitAffineNeighbourhoods
 /-!
 # Function fields in a dominant affine transition limit
 
-Source: Stacks Project, Tag 0EZJ, generic-fibre limit assertion.
+## References
+
+* Stacks Project, Tag 0EZJ, generic-fibre limit assertion
+* Stacks Project, Tag 0EZJ, the function-field part of the generic-fibre limit assertion
+* the affine ring calculation is the same limit calculation as Tag 01ZA
 -/
 
 @[expose] public section
@@ -196,10 +200,7 @@ private theorem dominantGenericSpecCone_isLimit {I : Type u} [SmallCategory I]
 
 set_option linter.unusedVariables false in
 /-- The spectra of the stage function fields have the spectrum of the limit function
-field as their limit, compatibly with the generic point inclusions.
-
-Source: Stacks Project, Tag 0EZJ, the function-field part of the generic-fibre limit
-assertion; the affine ring calculation is the same limit calculation as Tag 01ZA. -/
+field as their limit, compatibly with the generic point inclusions. -/
 theorem exists_dominant_function_field_limit {I : Type u} [SmallCategory I]
     [IsCofiltered I] {S : Scheme.{u}} [IsIntegral S]
     (X : I ⥤ Scheme.{u}) [∀ i, IsIntegral (X.obj i)]

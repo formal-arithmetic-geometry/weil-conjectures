@@ -32,6 +32,11 @@ change of coordinates used below. No existing definition is duplicated or rename
 
 The four definitions below belong to this node: the open coordinate identification,
 the transported open scalar isomorphism, Rp_* j_!, and its actual scalar comparison.
+
+## References
+
+* Stacks Tags 03DI and 03DJ
+* Stacks Tags 03DI and 06YY
 -/
 
 @[expose] public noncomputable section
@@ -47,8 +52,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- Identify the recorded sheafified extension by zero with the normalized left adjoint
 used by the open scalar comparison. The pullback coordinate change preserves the actual
-constant-section unit. Uniqueness of left adjoints therefore fixes this identification.
-Source: Stacks Tags 03DI and 03DJ. -/
+constant-section unit. Uniqueness of left adjoints therefore fixes this identification. -/
 def reductionOpenModel (A : Type u) [CommRing A] [Finite A]
     {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] :
     (sfIntrinsicExtensionByZero j A).mapDerivedCategory ≅ openExtension (A := A) j :=
@@ -59,8 +63,7 @@ def reductionOpenModel (A : Type u) [CommRing A] [Finite A]
 
 /-- The canonical B-linear open tensor comparison for the recorded extension by zero.
 The outside factors only change its adjunction coordinates; the middle comparison is
-fixed by the identity on restricted sections, hence by the usual balanced tensor map.
-Source: Stacks Tags 03DI and 06YY. -/
+fixed by the identity on restricted sections, hence by the usual balanced tensor map. -/
 def reductionOpenScalarIso {A B : Type u} [CommRing A] [CommRing B]
     [Finite A] [Finite B] (φ : A →+* B)
     {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] :

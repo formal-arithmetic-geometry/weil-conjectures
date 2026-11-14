@@ -11,7 +11,12 @@ import all WeilConjectures.AlgebraicGeometry.Adic.AdicLisseRelativeRestriction
 import all WeilConjectures.AlgebraicGeometry.Pbc.PbcFinitePullbackConstructibility
 import all WeilConjectures.AlgebraicGeometry.Relative.RelativeCompletedModuleRealizationExact
 
-/-! Local complexes under an isomorphism of base schemes. -/
+/-! Local complexes under an isomorphism of base schemes.
+
+## References
+
+* Stacks Tags 09AI and 09BT
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -242,8 +247,7 @@ private theorem relativelyAdicLisse_restrict [IsNoetherianRing A] {Z₁ Z₂ : S
     G V hm
 
 /-- Relabeling the completed action preserves adic-lisse terms and finite-lisse
-cohomology of each reduction.
-Source: Stacks Tags 09AI and 09BT. -/
+cohomology of each reduction. -/
 theorem pbcIsoLocalComplex_properties
     (M : AdicTower Y d) (a b : ℤ) (L : AdicTowerLocalModel d g M a b) :
     (∀ q : ℤ, @IsRelativelyAdicLisseModule _ _ (g ≫ inv f) A _ d.noetherian d.ideal

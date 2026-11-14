@@ -224,9 +224,7 @@ private theorem condensed_local_square_adjuncts
     run_tac coefficientCongrGoal
 
 /-- A commuting square of local arrows gives the corresponding square of adjuncts
-under the fixed projective-line exchange map.
-
-Source: the second rational projective-line triangle. -/
+under the fixed projective-line exchange map. -/
 theorem p1_local_square_adjuncts
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (Y : Scheme.{u})

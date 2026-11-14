@@ -23,7 +23,10 @@ import Mathlib.FieldTheory.SeparableDegree
 /-!
 # Local algebra of tame trait normalization
 
-Source: Stacks Project, Tag 0EYH.
+## References
+
+* Stacks Project, Tag 0EYH
+* Stacks Project, Tag 0EYH, the tame charts used in the trait paragraph of 0EYJ
 -/
 
 @[expose] public section
@@ -131,9 +134,7 @@ private theorem residueSeparableAt_of_root_charts {X Y : Scheme.{u}} (n : X ⟶ 
 
 set_option maxHeartbeats 500000 in
 -- Comparing the dependent normalization types needs this elaboration budget.
-/-- Residue extensions at points above the closed trait section are separable.
-
-Source: Stacks Project, Tag 0EYH, the tame charts used in the trait paragraph of 0EYJ. -/
+/-- Residue extensions at points above the closed trait section are separable. -/
 theorem GaloisCover.stalk_normalization_trait_section_residue_separable {S C : Scheme.{u}}
     [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]

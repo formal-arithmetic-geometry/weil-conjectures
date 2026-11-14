@@ -11,9 +11,13 @@ import Mathlib.CategoryTheory.Adjunction.Additive
 /-!
 # Functorial module stalks on the pro-etale site
 
-Source: Stacks Project, Tags 0F6B and 002F.
 The objects and scalar action are the recorded module colimit construction;
 this interface retains the induced maps and additivity needed for complexes.
+
+## References
+
+* Stacks Project, Tags 0F6B and 002F
+* Stacks Tag 0F6B
 -/
 
 @[expose] public section
@@ -23,8 +27,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 variable {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
 
-/-- The module-valued pointed-neighbourhood colimit, including its action on maps.
-Source: Stacks Tag 0F6B. -/
+/-- The module-valued pointed-neighbourhood colimit, including its action on maps. -/
 noncomputable def geometricRingModuleStalkFunctor (y : Spec (.of Ω) ⟶ Y)
     (O : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) :
     SheafOfModules.{u + 1}
@@ -36,8 +39,7 @@ noncomputable def geometricRingModuleStalkFunctor (y : Spec (.of Ω) ⟶ Y)
     PresheafOfModules.colimitFunctor
       (colimit.isColimit (proEtaleGeometricStalkRingDiagram y O))
 
-/-- Additivity of the canonical module stalk.
-Source: Stacks Tag 0F6B. -/
+/-- Additivity of the canonical module stalk. -/
 theorem geometricRingModuleStalkFunctor_additive (y : Spec (.of Ω) ⟶ Y)
     (O : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) :
     (geometricRingModuleStalkFunctor y O).Additive := by

@@ -20,7 +20,11 @@ import WeilConjectures.ProEtaleCoefficients.SingleAffineHypercover
 /-!
 # Hypercovers by single w-contractible affines
 
-Source: Stacks Project, Tag 09A1
+## References
+
+* Stacks Project, Tag 09A1
+* Stacks Project, Tag 09A1, part (2)
+* Tags 094K, 0DAV and 0DB2
 -/
 
 @[expose] public section
@@ -37,7 +41,6 @@ namespace AlgebraicGeometry
 
 /-- Hypercovers by single spectra of w-contractible rings.
 
-Source: Stacks Project, Tag 09A1, part (2); Tags 094K, 0DAV and 0DB2.
 The simplicial object is valued in `Over U`, so its augmentation is part of its data
 and its matching limits are relative to `U`. In degree one the matching object is
 `W₀ ×_U W₀`. Covering predicates are tested on the underlying arrows in `X.ProEt`.

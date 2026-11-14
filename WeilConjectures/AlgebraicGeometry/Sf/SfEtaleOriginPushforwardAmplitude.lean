@@ -27,10 +27,13 @@ import WeilConjectures.AlgebraicGeometry.Sf.SfIntrinsicRealizationTransport
 /-!
 # Direct-image amplitude for bounded complexes of etale origin
 
-Source: Stacks Project, Tags 08J5 and 05TC; Tags 099T and 09A6.
-
 The comparison is the published termwise inverse image with canonical constant-ring
 realization. Direct images are ordinary uncompleted unbounded right derived functors.
+
+## References
+
+* Stacks Project, Tags 08J5 and 05TC
+* Tags 099T and 09A6
 -/
 
 @[expose] public section
@@ -44,8 +47,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.ProEtale
 
 /-- A bound on all etale heart objects controls the direct image of a bounded etale-origin
-complex, including the zero-image conclusion when the bound is negative.
-Source: Stacks Project, Tags 08J5 and 05TC; Tags 099T and 09A6. -/
+complex, including the zero-image conclusion when the bound is negative. -/
 theorem etaleOrigin_pushforward_amplitude
     {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
     (B : Type u) [CommRing B] [Finite B] (N : ℤ)

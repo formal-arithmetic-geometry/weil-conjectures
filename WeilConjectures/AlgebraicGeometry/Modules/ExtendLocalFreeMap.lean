@@ -14,7 +14,11 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
 
 /-! # Clearing denominators for a local map from a finite free module
 
-Source: Stacks Project, Tag 01PW, specialized to the structure sheaf on a quasi-affine open.
+## References
+
+* Stacks Project, Tag 01PW, specialized to the structure sheaf on a quasi-affine open
+* Stacks Project, Tag 01PW, applied with the invertible module O_V, as in the global-generation
+  input cited in Tag 0EKP, proof of (2) to (3)
 -/
 
 @[expose] public section
@@ -189,10 +193,7 @@ private theorem extend_on_basicOpen {X S : Scheme.{u}} (g : X ⟶ S)
   exact (smulHom_naturality τ _).symm
 
 /-- A local map from a finite free module extends after an invertible change of its source
-on a smaller neighbourhood. The local map need not be an isomorphism.
-
-Source: Stacks Project, Tag 01PW, applied with the invertible module O_V, as in the
-global-generation input cited in Tag 0EKP, proof of (2) to (3). -/
+on a smaller neighbourhood. The local map need not be an isomorphism. -/
 theorem exists_global_map_of_local_free_map
     {R : Type u} [CommRing R] [IsNoetherianRing R]
     (V : (Spec (.of R)).Opens) (N : V.toScheme.Modules) [N.IsQuasicoherent]

@@ -11,7 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.Rational.RationalFibreScalarComp
 /-!
 # Rational scalar extension commutes with fibre paths
 
-Source: Weil II (1.1.1) c), d), pp.146-147.
+## References
+
+* Weil II (1.1.1) c), d), pp.146-147
 -/
 
 @[expose] public section

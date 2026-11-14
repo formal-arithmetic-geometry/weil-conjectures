@@ -13,7 +13,10 @@ public import Mathlib.CategoryTheory.Abelian.Injective.Resolution
 
 /-! # Flasque associated-module resolutions compute cohomology on an open
 
-Source: Stacks Project, Tags 09T2 and 0A6T.
+## References
+
+* Stacks Project, Tags 09T2 and 0A6T
+* Stacks Project, Tag 09T2, Lemma 36.8.1, and Tag 0A6T, Lemma 51.2.1
 -/
 
 @[expose] public section
@@ -23,8 +26,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- The sections complex of an associated injective-module resolution computes the
-cohomology of the structure sheaf on any open of a Noetherian affine scheme.
-Source: Stacks Project, Tag 09T2, Lemma 36.8.1, and Tag 0A6T, Lemma 51.2.1. -/
+cohomology of the structure sheaf on any open of a Noetherian affine scheme. -/
 theorem nonempty_open_h_addEquiv_injective_sections
     (R : Type u) [CommRing R] [IsNoetherianRing R]
     (W : (Spec (.of R)).Opens)

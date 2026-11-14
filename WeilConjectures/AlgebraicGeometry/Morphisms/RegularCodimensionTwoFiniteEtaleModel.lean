@@ -21,7 +21,10 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.FlatDepthTwoFiniteFormallyUnr
 /-!
 # Finite etale model across a regular codimension-two boundary
 
-Source: Stacks Project, Tags 0BMA and 0EY7
+## References
+
+* Stacks Project, Tags 0BMA and 0EY7
+* Stacks Project, Tags 0BMA, 0EY7, and 0EY6(2)
 -/
 
 @[expose] public section
@@ -61,9 +64,7 @@ private theorem depth_two_of_regular_local (R : Type u) [CommRing R]
     exact WithBot.coe_le_coe.mp hdim
   exact htwo.trans hdepth
 
-/-- A finite etale restriction extends across a regular codimension-two boundary.
-
-Source: Stacks Project, Tags 0BMA, 0EY7, and 0EY6(2). -/
+/-- A finite etale restriction extends across a regular codimension-two boundary. -/
 theorem exists_finite_etale_depth_two_model
     {L E : Scheme.{u}} [IsLocallyNoetherian L] (V : L.Opens)
     (hboundary : ∀ y : L, y ∉ V → IsRegularLocalRing (L.presheaf.stalk y) ∧

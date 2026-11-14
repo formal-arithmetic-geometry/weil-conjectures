@@ -18,8 +18,12 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.StrictLocalRootOrbitDescent
 
 /-! # Cyclic orbits on root-split strict local covers
 
-Source: Stacks Project, Tag 0EYG, local and intermediate-field paragraphs; Tag 09EV, intermediate
-subextensions.
+## References
+
+* Stacks Project, Tag 0EYG, local and intermediate-field paragraphs
+* Tag 09EV, intermediate subextensions
+* Stacks Project, Tag 0EYG, local and intermediate-field paragraphs, and Tag 09EV for intermediate
+  subextensions
 -/
 
 @[expose] public section
@@ -66,10 +70,7 @@ private theorem root_fixed_puncture_iso
   rw [hf, isoOfEq_hom_ι_assoc]
 
 /-- Over a fixed regular strictly henselian local base, root-split finite etale
-covers of a regular principal puncture decompose into intermediate root covers.
-
-Source: Stacks Project, Tag 0EYG, local and intermediate-field paragraphs,
-and Tag 09EV for intermediate subextensions. -/
+covers of a regular principal puncture decompose into intermediate root covers. -/
 theorem root_split_strict_local_orbits
     (R H : CommRingCat.{u}) (g : R) (ι : R →+* H)
     [IsStrictlyHenselianLocalRing H] [IsRegularLocalRing H]

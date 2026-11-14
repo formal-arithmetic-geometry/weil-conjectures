@@ -16,7 +16,11 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 /-!
 # Eventual smoothness of a finitely presented model over affine transition limits
 
-Source: Stacks Project, Tag 0C0C.
+## References
+
+* Stacks Project, Tag 0C0C
+* Stacks Project, Tag 0C0C, with Situation 081D
+* affine descent via 0CAQ and comparison via 01ZM(2)-(3)
 -/
 
 @[expose] public section
@@ -39,10 +43,7 @@ private theorem smooth_snd_source {A B D E : Scheme.{u}}
   rw [← pullbackRightPullbackFstIso_inv_snd_snd p g e]
   infer_instance
 
-/-- A finitely presented model whose limit base change is smooth becomes smooth later.
-
-Source: Stacks Project, Tag 0C0C, with Situation 081D; affine descent via 0CAQ
-and comparison via 01ZM(2)-(3). -/
+/-- A finitely presented model whose limit base change is smooth becomes smooth later. -/
 theorem exists_smooth_stage_of_affine_limit {I : Type u} [SmallCategory I]
     [IsCofiltered I] {S C : Scheme.{u}}
     (X : I ⥤ Scheme.{u}) (α : (Functor.const I).obj S ⟶ X)

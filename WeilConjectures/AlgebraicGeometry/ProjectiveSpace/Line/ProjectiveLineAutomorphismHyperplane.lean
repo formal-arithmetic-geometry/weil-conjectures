@@ -12,7 +12,13 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Line.ProjectiveLineFibr
 
 /-! # The hyperplane class under a relative projective-line automorphism
 
-Source: EGA II, Remark 4.2.7; arbitrary-base extension by Stacks, Tag 0B8W.
+## References
+
+* EGA II, Remark 4.2.7
+* arbitrary-base extension by Stacks, Tag 0B8W
+* EGA II, Remark 4.2.7, printed p.75, the tautological-line clause for projective-bundle
+  isomorphisms
+* arbitrary bases follow by finite-presentation descent as in Stacks, Tag 0B8W
 -/
 
 @[expose] public noncomputable section
@@ -69,9 +75,7 @@ private theorem exists_baseChange_automorphism {S T : Scheme.{u}} (g : T ⟶ S)
 
 /-- A relative projective-line automorphism fixes the hyperplane class modulo base lines.
 
-Source: EGA II, Remark 4.2.7, printed p.75, the tautological-line clause for
-projective-bundle isomorphisms; arbitrary bases follow by finite-presentation descent
-as in Stacks, Tag 0B8W. This is just the change-of-model step, and contains no diagonal,
+This is just the change-of-model step, and contains no diagonal,
 Cartier ideal, Chern class or integration assertion. -/
 theorem automorphism_hyperplane (S : Scheme.{u})
     (a : ProjectiveLine S ≅ ProjectiveLine S)

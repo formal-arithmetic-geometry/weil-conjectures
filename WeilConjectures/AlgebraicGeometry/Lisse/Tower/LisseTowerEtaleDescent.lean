@@ -12,7 +12,11 @@ import all WeilConjectures.AlgebraicGeometry.Etale.EtaleUniversalNormalization
 
 /-! # Descent of finite levels and their normalization arrows
 
-Source: Stacks Tags 099Z, 09B1, 099Y, 09BV and 06YY.
+## References
+
+* Stacks Tags 099Z, 09B1, 099Y, 09BV and 06YY
+* Stacks Tags 099Z and 09B1 (bounded-below classical comparison), 099Y (finite locally constant
+  descent), 09BV (Isom torsors), and 06YY (derived base change)
 -/
 
 @[expose] public noncomputable section
@@ -33,10 +37,7 @@ attribute [local irreducible] HasDerivedCategory.standard
 /-- Separately locally algebraic finite levels descend, together with the actual
 normalization arrows. The constant comparison is natural for every algebraic source
 arrow; this theorem has no supplied source normalization, no reduction on Isom sheaves,
-and no evaluation of sheaf sections.
-
-Source: Stacks Tags 099Z and 09B1 (bounded-below classical comparison), 099Y
-(finite locally constant descent), 09BV (Isom torsors), and 06YY (derived base change). -/
+and no evaluation of sheaf sections. -/
 theorem lisse_tower_etale_descent
     (X Y : Scheme.{u}) (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (M : AdicTower X d)

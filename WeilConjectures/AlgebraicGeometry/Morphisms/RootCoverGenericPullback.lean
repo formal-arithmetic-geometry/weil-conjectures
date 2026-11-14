@@ -16,7 +16,10 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 
 /-! # Base change of the generic root cover
 
-Source: Stacks Project, Tags 01JT and 00PD
+## References
+
+* Stacks Project, Tags 01JT and 00PD
+* Stacks Project, Tag 01JT (fibre products of affine schemes), Tag 00PD (discrete valuation rings)
 -/
 
 @[expose] public section
@@ -39,10 +42,7 @@ private theorem fractionRing_away_uniformizer
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 set_option linter.unusedVariables false in
-/-- The explicit generic model is the pullback of the original root-cover morphism.
-
-Source: Stacks Project, Tag 01JT (fibre products of affine schemes), Tag 00PD (discrete valuation
-rings) -/
+/-- The explicit generic model is the pullback of the original root-cover morphism. -/
 theorem root_cover_generic_pullback
     {L U : Scheme.{u}} (i : U ⟶ L)
     (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)

@@ -15,7 +15,10 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.RootSplitCoverPrescribedCycli
 
 /-! # Punctured Kummer charts retaining a prescribed divisor equation
 
-Source: Stacks Project.
+## References
+
+* Stacks Project
+* Stacks Project, strict henselization and descent paragraphs
 -/
 
 @[expose] public section
@@ -24,9 +27,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- Kummer charts on the divisor use the image of its specified equation.
-
-Source: Stacks Project, strict henselization and descent paragraphs. -/
+/-- Kummer charts on the divisor use the image of its specified equation. -/
 theorem GaloisCover.regular_divisor_prescribed_punctured_root_chart
     {L U : Scheme.{u}} (i : U ⟶ L)
     (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)

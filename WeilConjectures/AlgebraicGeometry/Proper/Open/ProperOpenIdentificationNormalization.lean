@@ -13,7 +13,10 @@ import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompAssoc
 /-!
 # Unit normalization of the proper/open restriction identification
 
-Source: Stacks Project, More on Etale Cohomology, Tags 0F7B and 0F7I.
+## References
+
+* Stacks Project, More on Etale Cohomology, Tags 0F7B and 0F7I
+* Stacks Project, Tags 0F7B and 0F7I
 -/
 
 @[expose] public section
@@ -719,8 +722,7 @@ private theorem geometric_restriction (A : Type (u + 2)) [Category.{u + 1} A]
       ((lowerStar A f).rightDerivedFunctorPlus.obj M))
 
 /-- The specified proper/open restriction identification is the canonical restriction map,
-after identifying `K` with `j₁^* j₁! K` by the extension-by-zero unit.
-Source: Stacks Project, Tags 0F7B and 0F7I. -/
+after identifying `K` with `j₁^* j₁! K` by the extension-by-zero unit. -/
 theorem properOpenIdentificationOfCommRing_unit
     (Λ : Type (u + 1)) [CommRing Λ]
     {T₁ T₂ X : Scheme.{u}} (f : T₁ ⟶ T₂) [IsProper f]

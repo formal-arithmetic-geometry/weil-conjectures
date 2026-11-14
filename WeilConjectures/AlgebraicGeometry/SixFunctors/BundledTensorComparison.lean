@@ -107,7 +107,9 @@ public import Mathlib.CategoryTheory.Sites.CoverPreserving
 
 /-! # Bundled representative-normalized tensor comparisons
 
-Source: Stacks 03EL and 07A4.
+## References
+
+* Stacks 03EL and 07A4
 -/
 
 @[expose] public noncomputable section
@@ -116,8 +118,7 @@ universe c v r
 open CategoryTheory CategoryTheory.Limits
 namespace WeilConjectures.SemilinearSections
 
-/-- A tensor comparison together with its ordinary and total-complex model.
-Source: Stacks 03EL and 07A4. -/
+/-- A tensor comparison together with its ordinary and total-complex model. -/
 structure BundledTensorComparison {C D : Type c} [Category.{v} C] [Category.{v} D]
     [EssentiallySmall.{max c v r} C] [EssentiallySmall.{max c v r} D]
     (J : GrothendieckTopology C) (K : GrothendieckTopology D)

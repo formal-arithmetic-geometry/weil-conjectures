@@ -9,7 +9,13 @@ module
 public import Mathlib.AlgebraicGeometry.Limits
 import Mathlib.AlgebraicGeometry.Restrict
 
-/-! # Principal opens in spectra of finite products -/
+/-! # Principal opens in spectra of finite products
+
+## References
+
+* Stacks Project, Tag 01I1 (affine schemes), and the finite product description of spectra in
+  Mathlib.AlgebraicGeometry.Limits
+-/
 
 @[expose] public section
 universe u
@@ -18,10 +24,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency false in
-/-- A principal open of a finite product spectrum is the coproduct of the component opens.
-
-Source: Stacks Project, Tag 01I1 (affine schemes), and the finite product description
-of spectra in Mathlib.AlgebraicGeometry.Limits. -/
+/-- A principal open of a finite product spectrum is the coproduct of the component opens. -/
 theorem finite_product_principal_open
     (H : CommRingCat.{u}) (h : H) (m : ℕ)
     (F : Fin m → Type u) [∀ i, CommRing (F i)] [∀ i, Algebra H (F i)] :

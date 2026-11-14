@@ -11,7 +11,12 @@ import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionTe
 import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionTensorTransportSuffixIso
 import all WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionTensorTransportFormulas
 
-/-! # Flat-term representative conjugation for quotient section tensors -/
+/-! # Flat-term representative conjugation for quotient section tensors
+
+## References
+
+* Stacks 06YY, 07A4 and 07A6
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -57,8 +62,7 @@ attribute [local irreducible] ModuleRingedComparison.tensor tensorComparison qTe
   InternalAbelianSheafModule.sectionModuleEquivalence SheafOfModules.monoidalCategory
 
 -- Paste the localization diagram with its functors retained.
-/-- The conjugation equation on flat-term K-flat representatives.
-Source: Stacks 06YY, 07A4 and 07A6. -/
+/-- The conjugation equation on flat-term K-flat representatives. -/
 theorem section_tensor_transport_kflat (T : Scheme.{u})
     (c : ScalarSectionData a T) (hc : ScalarSectionNormalized a T c)
     (b : TensorIso a T) (hb : TensorNormalized a T b)

@@ -119,7 +119,17 @@ import all WeilConjectures.AlgebraicGeometry.OrderedExchange.ProEtaleConstantRed
 
 /-! # Augmented strict reduction and ringed open extension
 
-Source: Stacks Project, Tags 0GL1 and 0E8I.
+## References
+
+* Stacks Project, Tags 0GL1 and 0E8I
+* Stacks 00XZ
+* Stacks 00XZ, the datum's finite coefficient presheaf
+* Stacks 03DI, 03DJ
+* Stacks 03DI
+* Stacks 03DA, 03DI
+* Stacks 0E8I, 0GL1
+* Stacks 03DJ
+* Stacks 0GL1
 -/
 
 @[expose] public noncomputable section
@@ -134,8 +144,7 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance 2000] reductionModulesHasDerivedCategory
   reductionTowerHasDerivedCategory
 
-/-- Reindex a ring sheaf from the open site's concrete category to the ambient slice.
-Source: Stacks 00XZ. -/
+/-- Reindex a ring sheaf from the open site's concrete category to the ambient slice. -/
 def cbcSliceRing {T : Scheme.{u}} (W : T.ProEt)
     (S : Sheaf (ProEt.topology W.left) CommRingCat.{u + 1}) :=
   ((cbcSliceFunctor T W).sheafPushforwardContinuous CommRingCat.{u + 1}
@@ -202,8 +211,7 @@ private theorem finiteSliceIso_unit {T : Scheme.{u}} (W : T.ProEt)
 
 attribute [local irreducible] finiteSliceIso
 
-/-- The existing normalized finite slice map is invertible.
-Source: Stacks 00XZ, the datum's finite coefficient presheaf. -/
+/-- The existing normalized finite slice map is invertible. -/
 @[instance]
 theorem cbcFiniteSliceMap_isIso {T : Scheme.{u}} (W : T.ProEt)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) :
@@ -214,8 +222,7 @@ theorem cbcFiniteSliceMap_isIso {T : Scheme.{u}} (W : T.ProEt)
   rw [h]
   infer_instance
 
-/-- The existing finite restriction map, viewed as its canonical isomorphism.
-Source: Stacks 00XZ. -/
+/-- The existing finite restriction map, viewed as its canonical isomorphism. -/
 def cbcFiniteRestriction {T : Scheme.{u}} (W : T.ProEt)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) :
     (reductionCoefficient T d n).over W ≅ cbcSliceRing W (reductionCoefficient W.left d n) :=
@@ -321,8 +328,7 @@ private theorem completedSliceIso_projection {T : Scheme.{u}} (W : T.ProEt)
   rw [← Category.assoc, preservesLimitIso_hom_π]
   rfl
 
-/-- The existing completed slice map is invertible.
-Source: sectionwise coefficient limits. -/
+/-- The existing completed slice map is invertible. -/
 @[instance]
 theorem cbcCompletedSliceMap_isIso {T : Scheme.{u}} (W : T.ProEt)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) :
@@ -333,8 +339,7 @@ theorem cbcCompletedSliceMap_isIso {T : Scheme.{u}} (W : T.ProEt)
   rw [h]
   infer_instance
 
-/-- The existing completed restriction map, with its uniquely determined inverse.
-Source: sectionwise limits. -/
+/-- The existing completed restriction map, with its uniquely determined inverse. -/
 def cbcCompletedRestriction {T : Scheme.{u}} (W : T.ProEt)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) :
     (completedReductionCoefficient T d).over W ≅
@@ -342,8 +347,7 @@ def cbcCompletedRestriction {T : Scheme.{u}} (W : T.ProEt)
   asIso (cbcCompletedSliceMap d T W)
 
 /-- Actual extension: transport along the concrete ringed slice equivalence, take the
-extension presheaf, and sheafify as modules.
-Source: Stacks 03DI, 03DJ. -/
+extension presheaf, and sheafify as modules. -/
 def cbcRingedOpenExtension {T : Scheme.{u}} (W : T.ProEt)
     {R : Sheaf (ProEt.topology T) CommRingCat.{u + 1}}
     {S : Sheaf (ProEt.topology W.left) CommRingCat.{u + 1}}
@@ -354,8 +358,7 @@ def cbcRingedOpenExtension {T : Scheme.{u}} (W : T.ProEt)
     SheafOfModules.localizedSystemExtension.{u + 1, u, u + 1} R W
 
 open Classical in
-/-- A section in the extension summand, followed by the module-sheafification unit.
-Source: Stacks 03DI. -/
+/-- A section in the extension summand, followed by the module-sheafification unit. -/
 def cbcOpenSection {T : Scheme.{u}} (W : T.ProEt)
     {R : Sheaf (ProEt.topology T) CommRingCat.{u + 1}}
     {S : Sheaf (ProEt.topology W.left) CommRingCat.{u + 1}}
@@ -516,8 +519,7 @@ variable {T : Scheme.{u}} (W : T.ProEt)
   (cR : R.over W ≅ cbcSliceRing W S) (cB : B.over W ≅ cbcSliceRing W C)
   (φ : R ⟶ B) (ψ : S ⟶ C)
 
-/-- Compatibility of the two ringed restriction identifications with a coefficient map.
-Source: the quotient maps of the datum. -/
+/-- Compatibility of the two ringed restriction identifications with a coefficient map. -/
 def CbcOpenRingSquare : Prop :=
   ((ProEt.topology T).overPullback CommRingCat.{u + 1} W).map φ ≫ cB.hom =
     cR.hom ≫ ((cbcSliceFunctor T W).sheafPushforwardContinuous CommRingCat.{u + 1}
@@ -675,8 +677,7 @@ private theorem openRestrictIsoApp_section (h : CbcOpenRingSquare W cR cB φ ψ)
 attribute [local irreducible] openRestrictIsoApp
 
 set_option backward.isDefEq.respectTransparency.types true in
-/-- Extension commutes with scalar restriction by the identity on extension summands.
-Source: Stacks 03DA, 03DI. -/
+/-- Extension commutes with scalar restriction by the identity on extension summands. -/
 theorem cbcOpenRestrictIso_existsUnique (_h : CbcOpenRingSquare W cR cB φ ψ) :
     ∃! θ : reductionRestrict W.left ψ ⋙ cbcRingedOpenExtension W cR ≅
         cbcRingedOpenExtension W cB ⋙ reductionRestrict T φ,
@@ -715,8 +716,7 @@ theorem cbcOpenRestrictIso_existsUnique (_h : CbcOpenRingSquare W cR cB φ ψ) :
     intro V a x
     exact (hθ M V a x).trans (openRestrictIsoApp_section W cR cB φ ψ _h M V a x).symm
 
-/-- Scalar restriction comparison with the prescribed underlying summand maps.
-Source: Stacks 03DA, 03DI. -/
+/-- Scalar restriction comparison with the prescribed underlying summand maps. -/
 def cbcOpenRestrictIso (h : CbcOpenRingSquare W cR cB φ ψ) :=
   (cbcOpenRestrictIso_existsUnique W cR cB φ ψ h).exists.choose
 private theorem openSection_smul (M : reductionModules W.left S)
@@ -1019,8 +1019,7 @@ private theorem scalarUnique (h : CbcOpenRingSquare W cR cB φ ψ)
   rw [map_one] at hb
   exact hb.trans hu.symm
 
-/-- The scalar-extension comparison is uniquely fixed before restricting coefficients.
-Source: Stacks 0E8I, 0GL1. -/
+/-- The scalar-extension comparison is uniquely fixed before restricting coefficients. -/
 theorem cbcOpenScalarIso_existsUnique
     (_h : CbcOpenRingSquare W cR cB φ ψ) :
     ∃! β : cbcRingedOpenExtension W cR ⋙ reductionChange T φ ≅
@@ -1042,8 +1041,7 @@ theorem cbcOpenScalarIso_existsUnique
   · intro β hβ
     exact scalarUnique W cR cB φ ψ _h β hβ
 
-/-- The canonical coefficient-linear comparison, with its pure tensor normalization.
-Source: Stacks 0E8I, 0GL1. -/
+/-- The canonical coefficient-linear comparison, with its pure tensor normalization. -/
 def cbcOpenScalarIso (h : CbcOpenRingSquare W cR cB φ ψ) :=
   (cbcOpenScalarIso_existsUnique W cR cB φ ψ h).exists.choose
 
@@ -1243,8 +1241,7 @@ variable {T : Scheme.{u}} (W : T.ProEt) [IsOpenImmersion W.hom]
   {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 
 set_option linter.unusedSectionVars false in
-/-- The canonical finite identifications preserve every quotient map.
-Source: sheafification naturality. -/
+/-- The canonical finite identifications preserve every quotient map. -/
 theorem cbcQuotientSquare (b a : ℕ) (hab : a ≤ b) :
     CbcOpenRingSquare W (cbcFiniteRestriction W d b) (cbcFiniteRestriction W d a)
       (reductionCoefficientMap T d b a hab) (reductionCoefficientMap W.left d b a hab) := by
@@ -1258,39 +1255,32 @@ theorem cbcQuotientSquare (b a : ℕ) (hab : a ≤ b) :
   exact (finiteSliceSystemMap W d).naturality (homOfLE hab).op
 
 set_option linter.unusedSectionVars false in
-/-- Completed restriction preserves every finite projection.
-Source: the completed limit sheaf. -/
+/-- Completed restriction preserves every finite projection. -/
 theorem cbcProjectionSquare (n : ℕ) :
     CbcOpenRingSquare W (cbcCompletedRestriction W d) (cbcFiniteRestriction W d n)
       (completedReductionProjection T d n) (completedReductionProjection W.left d n) := by
   exact ((cbcCompletedSliceMap_exists d T W).exists.choose_spec n).symm
 
-/-- Ordinary open extension with the completed coefficient ring.
-Source: Stacks 03DI. -/
+/-- Ordinary open extension with the completed coefficient ring. -/
 abbrev cbcCompletedExtension := cbcOpenShriek d W.hom (inferInstance : IsOpenImmersion W.hom)
 
-/-- Additivity inherited from the existing completed open extension.
-Source: Stacks 03DI. -/
+/-- Additivity inherited from the existing completed open extension. -/
 instance cbcCompletedExtension_additive : (cbcCompletedExtension W d).Additive :=
   cbcOpenShriek_additive d W.hom inferInstance
 
-/-- Exactness inherited from the existing completed open extension.
-Source: Stacks 03DJ. -/
+/-- Exactness inherited from the existing completed open extension. -/
 instance cbcCompletedExtension_limits : PreservesFiniteLimits (cbcCompletedExtension W d) :=
   cbcOpenShriek_finiteLimits d W.hom inferInstance
 
-/-- Colimit preservation inherited from the existing completed open extension.
-Source: Stacks 03DI. -/
+/-- Colimit preservation inherited from the existing completed open extension. -/
 instance cbcCompletedExtension_colimits : PreservesFiniteColimits (cbcCompletedExtension W d) :=
   cbcOpenShriek_finiteColimits d W.hom inferInstance
 
-/-- Apply the same completed-coefficient extension at every strict tower level.
-Source: strict towers in the datum. -/
+/-- Apply the same completed-coefficient extension at every strict tower level. -/
 def cbcCompletedTowerExtension :=
   (Functor.whiskeringRight ℕᵒᵖ _ _).obj (cbcCompletedExtension W d)
 
-/-- Exactness on towers is levelwise, including the zero tower.
-Source: levelwise abelian tower category. -/
+/-- Exactness on towers is levelwise, including the zero tower. -/
 theorem cbcCompletedTowerExtension_exact :
     (cbcCompletedTowerExtension W d).Additive ∧
       PreservesFiniteLimits (cbcCompletedTowerExtension W d) ∧
@@ -1298,19 +1288,16 @@ theorem cbcCompletedTowerExtension_exact :
   dsimp only [cbcCompletedTowerExtension]
   exact ⟨inferInstance, ⟨fun _ _ _ ↦ inferInstance⟩, ⟨fun _ _ _ ↦ inferInstance⟩⟩
 
-/-- Additivity on strict towers.
-Source: the datum's towers. -/
+/-- Additivity on strict towers. -/
 instance cbcCompletedTowerExtension_additive : (cbcCompletedTowerExtension W d).Additive :=
   (cbcCompletedTowerExtension_exact W d).1
 
-/-- Preservation of finite limits on strict towers.
-Source: the datum's towers. -/
+/-- Preservation of finite limits on strict towers. -/
 instance cbcCompletedTowerExtension_limits :
     PreservesFiniteLimits (cbcCompletedTowerExtension W d) :=
   (cbcCompletedTowerExtension_exact W d).2.1
 
-/-- Preservation of finite colimits on strict towers.
-Source: the datum's towers. -/
+/-- Preservation of finite colimits on strict towers. -/
 instance cbcCompletedTowerExtension_colimits :
     PreservesFiniteColimits (cbcCompletedTowerExtension W d) :=
   (cbcCompletedTowerExtension_exact W d).2.2
@@ -1417,8 +1404,7 @@ attribute [local irreducible] strictInv
 
 /-- The ordinary strict tower comparison is the coefficient-linear comparison followed
 by the inverse scalar-restriction comparison at every level. Its naturality is actual
-compatibility with all transitions, rather than merely equality in a derived category.
-Source: Stacks 0GL1. -/
+compatibility with all transitions, rather than merely equality in a derived category. -/
 theorem cbcStrictReductionIso_existsUnique :
     ∃! δ : cbcCompletedExtension W d ⋙ completedReductionModuleTowerFunctor T d ≅
         completedReductionModuleTowerFunctor W.left d ⋙ cbcCompletedTowerExtension W d,
@@ -1448,8 +1434,7 @@ theorem cbcStrictReductionIso_existsUnique :
     unfold strictDelta openDelta at hn
     exact hn.symm
 
-/-- The strict comparison with its uniquely prescribed finite-level maps.
-Source: Stacks 0GL1. -/
+/-- The strict comparison with its uniquely prescribed finite-level maps. -/
 def cbcStrictReductionIso := (cbcStrictReductionIso_existsUnique W d).exists.choose
 
 section ModelComplex
@@ -1458,8 +1443,7 @@ variable {B C : Type*} [Category B] [Abelian B] [Category C] [Abelian C]
   (P : B ⥤ C) [P.Additive]
   (H : (ℕᵒᵖ ⥤ B) ⥤ (ℕᵒᵖ ⥤ C)) [H.Additive]
 
-/-- The degreewise strict comparison, with the additive category data fixed generically.
-Source: degreewise functoriality. -/
+/-- The degreewise strict comparison, with the additive category data fixed generically. -/
 def cbcModelComplexIso (e : P ⋙ G ≅ F ⋙ H) :=
   NatIso.mapHomologicalComplex e (.up ℤ)
 
@@ -1472,7 +1456,7 @@ private theorem cbcModelComplexIso_symm_hom (e : P ⋙ G ≅ F ⋙ H) :
 end ModelComplex
 
 /-- The comparison on actual strict complexes, obtained by applying its module map
-in every degree. Source: Stacks 0GL1. -/
+in every degree. -/
 def cbcStrictReductionComplexIso :=
   @cbcModelComplexIso
     (reductionModules W.left (completedReductionCoefficient W.left d))
@@ -1502,14 +1486,12 @@ variable {B C : Type*} [Category B] [Abelian B] [Category C] [Abelian C]
   (εF : DerivedCategory.Qh ⋙ LF ⟶ F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
   (εG : DerivedCategory.Qh ⋙ LG ⟶ G.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
 
-/-- The counit computation for an exact source functor.
-Source: derived-factorization counits. -/
+/-- The counit computation for an exact source functor. -/
 def cbcModelLeft (K : CochainComplex B ℤ) :=
   LG.map (P.mapDerivedCategoryFactors.hom.app K) ≫
     reductionComplexCounit G LG εG ((P.mapHomologicalComplex (.up ℤ)).obj K)
 
-/-- The counit computation for an exact tower functor.
-Source: derived-factorization counits. -/
+/-- The counit computation for an exact tower functor. -/
 def cbcModelRight (K : CochainComplex B ℤ) :=
   H.mapDerivedCategory.map (reductionComplexCounit F LF εF K) ≫
     H.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj K)
@@ -1517,8 +1499,7 @@ def cbcModelRight (K : CochainComplex B ℤ) :=
 end ModelComputations
 
 /-- The left endpoint's canonical computation on a representative, using exact open
-extension and then the reduction tower's universal counit.
-Source: Stacks 0GL1. -/
+extension and then the reduction tower's universal counit. -/
 def cbcLeftReductionComputation
     (P : CochainComplex (reductionModules W.left
       (completedReductionCoefficient W.left d)) ℤ) :
@@ -1536,8 +1517,7 @@ def cbcLeftReductionComputation
     (completedReductionTower T d) (coherenceReductionTowerCounit T d) P
 
 /-- The right endpoint's canonical computation, reducing on the open and extending
-its entire strict tower by the exact functor.
-Source: Stacks 0GL1. -/
+its entire strict tower by the exact functor. -/
 def cbcRightReductionComputation
     (P : CochainComplex (reductionModules W.left
       (completedReductionCoefficient W.left d)) ℤ) :
@@ -1764,9 +1744,7 @@ attribute [local irreducible] coherenceReductionTowerCounit
 /-- Canonical natural strict reduction under ringed open extension. Its components
 are the desired rho_(e,K). The unique characterization ties them to actual strict
 chain maps, not just arbitrary isomorphisms of derived objects. No completeness or
-quasi-compactness assumption occurs.
-
-Source: Stacks 0GL1. -/
+quasi-compactness assumption occurs. -/
 theorem cbcRingedOpenStrictReduction :
     ∃! ρ : (cbcCompletedExtension W d).mapDerivedCategory ⋙ completedReductionTower T d ≅
         completedReductionTower W.left d ⋙ (cbcCompletedTowerExtension W d).mapDerivedCategory,

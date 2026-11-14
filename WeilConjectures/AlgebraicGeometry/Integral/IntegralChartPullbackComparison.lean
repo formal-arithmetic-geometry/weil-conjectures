@@ -17,7 +17,13 @@ import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import all WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSupplement
 
-/-! # Comparison of integral chart and ordinary datum pullbacks -/
+/-! # Comparison of integral chart and ordinary datum pullbacks
+
+## References
+
+* Bhatt--Scholze, Proposition 6.6.11, slice comparison
+* Stacks Tag 03D8
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -104,8 +110,7 @@ private theorem datumChartEquivalence {A : Type (u + 1)} [CommRing A]
       (derivedPullbackScalarIso U.hom (pbcAdicCompletion S d)
         (pbcAdicCompletion U.left d) (d.integralRingIso U.hom)) q.functor ≪≫ hq
 
-/-- An isomorphism on the integral pro-etale chart gives an ordinary pullback isomorphism.
-Source: Bhatt--Scholze, Proposition 6.6.11, slice comparison; Stacks Tag 03D8. -/
+/-- An isomorphism on the integral pro-etale chart gives an ordinary pullback isomorphism. -/
 theorem integralLocalDerived_pullbackIso {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) {T S : Scheme.{u}} (g : S ⟶ T) (U : S.ProEt)
     (K L : d.derived T)

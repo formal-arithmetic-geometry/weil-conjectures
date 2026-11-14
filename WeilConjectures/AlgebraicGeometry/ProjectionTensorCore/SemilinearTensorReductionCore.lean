@@ -30,7 +30,12 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Tensor reduction without internal-Hom comparison data
 
-Source: Zheng Construction 4.1; Stacks 03EK, 06YY, 07A4.
+## References
+
+* Zheng Construction 4.1
+* Stacks 03EK, 06YY, 07A4
+* Stacks Project, Cohomology on Sites, Tags 07A4 and 06YS, applied to the horizontal transitions in
+  Zheng, Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -465,9 +470,7 @@ private def tensorReductionRight
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.defeqAttrib.useBackward true in
 /-- Actual tensor reduction is the tensor of the two reduction adjoints under
-canonical evaluation and scalar-extension comparisons. No normalization is assumed.
-Source: Stacks Project, Cohomology on Sites, Tags 07A4 and 06YS, applied to the horizontal
-transitions in Zheng, Construction 4.1. -/
+canonical evaluation and scalar-extension comparisons. No normalization is assumed. -/
 theorem semilinearTensorReductionFromModels (A : SystemTensorReductionModels.{c, v, r} J B τ)
     (P Q : DS.{c, v, max c v r} J B τ) :
     ∀ {m n : ℕ} (h : n ≤ m),

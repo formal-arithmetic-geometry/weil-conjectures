@@ -9,7 +9,12 @@ public import WeilConjectures.AlgebraicGeometry.RelativeMVMaps
 import WeilConjectures.AlgebraicGeometry.Relative.RelativeMVCoverRows
 import Mathlib.Algebra.Homology.HomotopyCategory.ShortExact
 
-/-! # Resolved relative comparison on a two-open cover -/
+/-! # Resolved relative comparison on a two-open cover
+
+## References
+
+* Stacks Project, Tags 08BV, 08HZ, 08FE and 08HY
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -18,7 +23,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- A relative comparison on a covering pair, before identifying any coefficients
-with modules in degree zero. Source: Stacks Project, Tags 08BV, 08HZ, 08FE and 08HY. -/
+with modules in degree zero. -/
 theorem relativeMV_cover_homotopy_data
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

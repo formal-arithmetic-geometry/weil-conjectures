@@ -9,7 +9,12 @@ public import WeilConjectures.AlgebraicGeometry.RelativeMVMaps
 public import WeilConjectures.AlgebraicGeometry.MayerVietorisImageChainData
 import WeilConjectures.AlgebraicGeometry.Relative.RelativeMVResolvedRoofVertexNormalization
 
-/-! # Comparisons of canonical resolved Mayer--Vietoris rows -/
+/-! # Comparisons of canonical resolved Mayer--Vietoris rows
+
+## References
+
+* Stacks Project, Tags 08FE, 08HY, 08HZ and 0D5T
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -96,8 +101,7 @@ set_option backward.isDefEq.lazyWhnfCore false
 set_option backward.defeqAttrib.useBackward true
 
 /-- Canonical resolution rows have a normalized direct-image roof. This is a
-comparison statement without a cover assumption or any assertion of exactness.
-Source: Stacks Project, Tags 08FE, 08HY, 08HZ and 0D5T. -/
+comparison statement without a cover assumption or any assertion of exactness. -/
 theorem relativeMV_resolved_row_roof_comparisons
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

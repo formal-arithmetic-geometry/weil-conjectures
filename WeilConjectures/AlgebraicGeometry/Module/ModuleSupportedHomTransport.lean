@@ -13,8 +13,13 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 
 /-! # Module-valued transport of normalized supported Hom
 
-Source: Milne, Lectures on Etale Cohomology, Section 9, Ext proof of Theorem 9.4; Stacks Tags 05TI
-and 070I.
+## References
+
+* Milne, Lectures on Etale Cohomology, Section 9, Ext proof of Theorem 9.4
+* Stacks Tags 05TI and 070I
+* Milne, Section 9, Ext proof of Theorem 9.4
+* Stacks 015F and 070I
+* Milne, Section 9, Ext proof of Theorem 9.4 and Example 9.5
 -/
 
 @[expose] public noncomputable section
@@ -539,8 +544,7 @@ private theorem supportHom_transport_injective
     (supportHomExactCocycle_numerator.{u + 2, u + 2, u + 1, u + 1, u + 1, u + 1}
       L d.inv I.obj R.obj e.hom a f hdf hdf').symm
 
-/-- The module-valued compatibility formula, with its derived support map supplied.
-Source: Milne, Section 9, Ext proof of Theorem 9.4; Stacks 015F and 070I. -/
+/-- The module-valued compatibility formula, with its derived support map supplied. -/
 def moduleSupportedHomCompatible
     {A : Type (u + 1)} [CommRing A]
     {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]
@@ -565,9 +569,7 @@ def moduleSupportedHomCompatible
       Functor.representableTransportHom L d K a (chi K a x)
 
 /-- Exact inverse image transports a module-valued, cocycle-normalized supported-Hom
-comparison.
-
-Source: Milne, Section 9, Ext proof of Theorem 9.4 and Example 9.5; Stacks Tags 05TI and 070I. -/
+comparison. -/
 theorem moduleSupportedHom_transport
     {A : Type (u + 1)} [CommRing A]
     {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]

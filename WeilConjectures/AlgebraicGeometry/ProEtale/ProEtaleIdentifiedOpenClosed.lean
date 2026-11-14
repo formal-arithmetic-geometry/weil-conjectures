@@ -14,8 +14,12 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.Closed.ProEtaleClosedEssen
 /-!
 # Open and closed extensions with identified inverse-image coefficient rings
 
-Source: Stacks Project, Modules on Sites, Tags 03DI and 03DJ; Pro-etale Cohomology, Tags 09BN and
-09AH.
+## References
+
+* Stacks Project, Modules on Sites, Tags 03DI and 03DJ
+* Pro-etale Cohomology, Tags 09BN and 09AH
+* Stacks Project, Tags 03DI, 03DJ, 09BN and 09AH
+* Stacks Project, Tags 03DI, 03DJ, 09AA, 09BM, 09BN and 09AH
 -/
 
 @[expose] public noncomputable section
@@ -32,9 +36,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Exact open extension for the actual tensor pullback with identified coefficients.
 The extension is constructed by scalar transport to the inverse-image ring, the open
-slice equivalence, and the sheafified extension presheaf. Its adjunction unit is invertible.
-
-Source: Stacks Project, Tags 03DI, 03DJ, 09BN and 09AH. -/
+slice equivalence, and the sheafified extension presheaf. Its adjunction unit is invertible. -/
 private theorem identifiedOpenExtension
     {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
     (U : X.ProEt) [IsOpenImmersion U.hom] [QuasiCompact U.hom]
@@ -127,9 +129,7 @@ private theorem identifiedClosedImage
 
 /-- The open and closed factors of extension have their exactness and normalized
 adjunction isomorphisms with any identified inverse-image coefficient rings. The closed
-comparison is the counit of the specified actual tensor-pullback/direct-image adjunction.
-
-Source: Stacks Project, Tags 03DI, 03DJ, 09AA, 09BM, 09BN and 09AH. -/
+comparison is the counit of the specified actual tensor-pullback/direct-image adjunction. -/
 theorem proEtaleIdentifiedOpenClosed
     {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
     (U : X.ProEt) [IsOpenImmersion U.hom] [QuasiCompact U.hom]

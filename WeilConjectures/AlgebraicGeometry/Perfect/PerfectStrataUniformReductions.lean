@@ -165,8 +165,10 @@ import WeilConjectures.Algebra.Homology.Site.SitePerfectModelRestrictionSuppleme
 
 /-! # Uniform bounds and finite reductions of stratified perfect models
 
-Source: Bhatt--Scholze, Lemma 6.6.10(1), Proposition 6.6.11, reverse implication;
-Stacks Tags 06YS, 06YT, 06YU and 093J.
+## References
+
+* Bhatt--Scholze, Lemma 6.6.10(1), Proposition 6.6.11, reverse implication
+* Stacks Tags 06YS, 06YT, 06YU and 093J
 -/
 
 @[expose] public noncomputable section
@@ -339,9 +341,7 @@ private theorem uniform_bounds_of_local_vanishing
       ((SheafOfModules.toSheaf _).map (𝟙 (H t q))) ((SheafOfModules.toSheaf _).map 0)
 
 /-- Uniform bounds for K and all positive finite reductions, intrinsic constructibility,
-and finite constant models on every member of the original stratum covers.
-Source: Bhatt--Scholze, Lemma 6.6.10(1), Proposition 6.6.11, reverse implication; Stacks Tags 06YS,
-06YT, 06YU and 093J. -/
+and finite constant models on every member of the original stratum covers. -/
 theorem perfect_strata_uniform_reductions
     (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X]
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)

@@ -572,8 +572,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
-/-- Every field of the projective-line datum is fixed by its normalization.
-Source: vector integration. -/
+/-- Every field of the projective-line datum is fixed by its normalization. -/
 theorem ordinaryFiniteP1Datum_unique (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤)))

@@ -14,7 +14,10 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
 /-!
 # Generic algebra of a finite etale open cover
 
-Source: Stacks Project, Tags 02GL and 081I.
+## References
+
+* Stacks Project, Tags 02GL and 081I
+* Stacks Project, and Tag 081I (flat base change of scheme-theoretic images)
 -/
 
 @[expose] public section
@@ -24,9 +27,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Sections of a finite etale open cover embed into a finite etale generic algebra.
-
-Source: Stacks Project, and Tag 081I (flat base change of scheme-theoretic images). -/
+/-- Sections of a finite etale open cover embed into a finite etale generic algebra. -/
 theorem exists_finiteEtale_open_generic_algebra {X : Scheme.{u}} [IsIntegral X]
     (U : X.Opens) (P : U.toScheme.FiniteEtale) (V : X.Opens) [Nonempty V]
     (hV : IsAffineOpen V) :

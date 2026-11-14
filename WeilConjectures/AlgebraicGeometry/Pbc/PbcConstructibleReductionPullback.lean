@@ -12,7 +12,10 @@ import WeilConjectures.SmoothBaseChange.SbcCompletedOperations
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Canonical constructible reduction cohomology under completed pullback
-Source: Stacks Tags 099N and 09AL.
+
+## References
+
+* Stacks Tags 099N and 09AL
 -/
 
 @[expose] public noncomputable section
@@ -44,8 +47,7 @@ private theorem constructible_iso (T : Scheme.{u}) (A : Type (u + 1)) [CommRing 
     ((proEtaleModuleInverseImage (S.immersion i) (adicLisseConstantRing T A)).mapIso e) (hS i)
 
 /-- Completed pullback preserves intrinsic completeness, intrinsic reduction
-constructibility, and every common cohomological support interval.
-Source: Stacks Tags 099N and 09AL. -/
+constructibility, and every common cohomological support interval. -/
 theorem pbc_constructible_reduction_pullback
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E]

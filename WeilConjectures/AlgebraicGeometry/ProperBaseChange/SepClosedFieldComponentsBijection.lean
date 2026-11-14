@@ -13,7 +13,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
 /-!
 # Connected components after extension of a separably closed field
 
-Source: Stacks Project, Varieties, Tag 0363, first assertion.
+## References
+
+* Stacks Project, Varieties, Tag 0363, first assertion
 -/
 
 @[expose] public section
@@ -26,9 +28,7 @@ namespace AlgebraicGeometry
 
 /-- Over a separably closed field, arbitrary field extension induces a bijection on connected
 components of any scheme. The map sends the component of a point to the component of its image
-under the first projection. No finiteness or nonemptiness assumption is needed.
-
-Source: Stacks Project, Varieties, Tag 0363, first assertion. -/
+under the first projection. No finiteness or nonemptiness assumption is needed. -/
 theorem bijective_connectedComponentsMap_pullback_fst_of_isSepClosed
     (k L : Type u) [Field k] [IsSepClosed k] [Field L] [Algebra k L]
     (Z : Scheme.{u}) [Z.Over (Spec (CommRingCat.of k))] :

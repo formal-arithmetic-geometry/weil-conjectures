@@ -34,7 +34,9 @@ import WeilConjectures.Mathlib.RingTheory.Henselian
 /-!
 # Proper locally acyclic specialization
 
-Source: Stacks Project, Tag 0GJW, applied to `G[0]`.
+## References
+
+* Stacks Project, Tag 0GJW, applied to `G[0]`
 -/
 
 @[expose] public section
@@ -282,7 +284,7 @@ private theorem exact_nt_homology
 
 /-- Proper local acyclicity makes specialization on every higher direct-image stalk
 invertible for torsion abelian coefficients, without any common annihilator or finite-stalk
-hypothesis. Source: Stacks Project, Tag 0GJW, applied to `G[0]`. -/
+hypothesis. -/
 theorem isIso_etaleStalkSpecialization_of_proper_locallyAcyclic
     {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f]
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

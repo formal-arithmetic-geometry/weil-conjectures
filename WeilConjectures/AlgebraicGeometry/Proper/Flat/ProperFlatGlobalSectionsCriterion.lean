@@ -16,7 +16,10 @@ import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.Global
 /-!
 # Proper flat morphisms with fibrewise constant functions
 
-Source: Stacks Project, Tag 0E62, Lemma 36.32.5 (a), `perfect-lemma-proper-flat-h0`.
+## References
+
+* Stacks Project, Tag 0E62, Lemma 36.32.5 (a), `perfect-lemma-proper-flat-h0`
+* Stacks Project, Tag 0E62, Lemma 36.32.5 (a)
 -/
 
 @[expose] public section
@@ -54,8 +57,7 @@ private theorem fiberwise_appTop_isIso_baseChange
   exact hp.isIso_inr_of_isIso
 
 /-- The canonical map `O_S → f_* O_X` is an isomorphism, universally, if its proper flat
-finitely presented morphism has only residue-field functions on every fibre.
-Source: Stacks Project, Tag 0E62, Lemma 36.32.5 (a). -/
+finitely presented morphism has only residue-field functions on every fibre. -/
 theorem isIso_structureSheafMap_of_proper_flat_fiberwise
     {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f] [Flat f]
     [LocallyOfFinitePresentation f]

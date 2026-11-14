@@ -18,7 +18,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.StalkNormalizationDensePart
 /-!
 # Normality and density of the localized relative normalization
 
-Source: Stacks Project, Tags 035L, 035K, 035I, 0307 and 0EYJ.
+## References
+
+* Stacks Project, Tags 035L, 035K, 035I, 0307 and 0EYJ
+* Stacks Project, Tags 035L (normality of relative normalization), 035K (locality), 035I
+  (dominance), 0307 (localization), and 0EYJ
 -/
 
 @[expose] public section
@@ -27,10 +31,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- Localization of the relative normalization is normal, with dense punctured source.
-
-Source: Stacks Project, Tags 035L (normality of relative normalization),
-035K (locality), 035I (dominance), 0307 (localization), and 0EYJ. -/
+/-- Localization of the relative normalization is normal, with dense punctured source. -/
 theorem stalk_normalization_normal_and_dense {S C : Scheme.{u}}
     [IsNoetherian S] [QuasiSeparatedSpace S] [IsIntegral S]
     (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))

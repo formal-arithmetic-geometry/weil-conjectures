@@ -85,8 +85,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.SixFunctors.NativeInternal
 
 /-! # Evaluation and the ambient double-dual morphism
 
-Source: Stacks Project, Tags 08J9, 08JA and 08JC.
-
 ## Main definitions and statement
 
 * `CategoryTheory.dualityDoubleFunctor`: the covariant double internal Hom.
@@ -99,6 +97,15 @@ Source: Stacks Project, Tags 08J9, 08JA and 08JC.
 The tensor-Hom adjunction has left tensor as its left adjoint. Evaluation in the order
 DK tensor K therefore includes the Koszul symmetry. Its adjunct, with left tensor DK,
 is the double-dual morphism. All derived categories here are unbounded.
+
+## References
+
+* Stacks Project, Tags 08J9, 08JA and 08JC
+* Stacks Project, Tag 08J9
+* Stacks Project, Tags 08J9 and 08JC
+* Stacks Tags 08J9 and 08JC
+* Stacks Project, Tags 08J9 and 08JA
+* Stacks 08J9 and 08JA
 -/
 
 @[expose] public section
@@ -112,16 +119,14 @@ open CategoryTheory.MonoidalCategory Opposite
 
 namespace CategoryTheory
 
-/-- Double application of the contravariant internal Hom into W.
-Source: Stacks Project, Tag 08J9. -/
+/-- Double application of the contravariant internal Hom into W. -/
 def dualityDoubleFunctor {C : Type u} [Category.{v} C]
     (H : Cᵒᵖ ⥤ C ⥤ C) (W : C) : C ⥤ C :=
   (H.flip.obj W).rightOp ⋙ H.flip.obj W
 
 /-- The compatibility assertions for the specified evaluation and its specified transpose.
 This packages the conclusion, including the connecting square of triangles. The shift
-isomorphisms include coherence for zero and addition, through Functor.CommShift.
-Source: Stacks Project, Tags 08J9 and 08JC. -/
+isomorphisms include coherence for zero and addition, through Functor.CommShift. -/
 def DualityPairingCompatibility {C : Type u} [Category.{v} C]
     [HasShift C ℤ] [HasZeroObject C] [Preadditive C]
     [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
@@ -316,8 +321,7 @@ private theorem nativeTensorRaw
 
 /-- Evaluation and biduality with specified tensor, Hom, adjunction and interchange.
 The predicate P fixes the interchange by its components; the remaining clauses are the
-normalizations, naturality, integral shift coherence and triangle morphism.
-Source: Stacks Tags 08J9 and 08JC. -/
+normalizations, naturality, integral shift coherence and triangle morphism. -/
 private def NormalizedDualityPairing {C : Type u} [Category.{v} C]
     [HasShift C ℤ] [HasZeroObject C] [Preadditive C]
     [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
@@ -372,8 +376,7 @@ namespace Etale
 /-- Evaluation and its adjoint double-dual arrow with their canonical normalizations.
 The tensor symmetry is the descended Koszul symmetry. After interchanging its factors,
 evaluation corresponds to the identity under tensor-Hom adjunction. The arrow δ is its
-transpose, rather than an arbitrary natural map with the same endpoints.
-Source: Stacks Project, Tags 08J9, 08JA and 08JC. -/
+transpose, rather than an arbitrary natural map with the same endpoints. -/
 def AmbientDualityPairing
     (W : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) : Prop :=
   ∃ b : derivedTensor A X ≅ (derivedTensor A X).flip,
@@ -403,8 +406,7 @@ namespace ProEtale
 /-- Evaluation and its adjoint double-dual arrow with their canonical normalizations.
 The tensor symmetry is the descended Koszul symmetry. After interchanging its factors,
 evaluation corresponds to the identity under tensor-Hom adjunction. The arrow δ is its
-transpose, rather than an arbitrary natural map with the same endpoints.
-Source: Stacks Project, Tags 08J9, 08JA and 08JC. -/
+transpose, rather than an arbitrary natural map with the same endpoints. -/
 def AmbientDualityPairing
     (W : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) : Prop :=
   let T : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) ⥤
@@ -442,8 +444,6 @@ namespace Etale
 /-- Evaluation and its transpose are natural and compatible with shifts and distinguished
 triangles, on the entire ambient derived category. The dualizing object is the ordinary
 ambient exceptional inverse image of A, not a constructible exceptional functor.
-
-Source: Stacks Project, Tags 08J9, 08JA and 08JC.
 -/
 theorem ambient_duality_pairing
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
@@ -549,8 +549,7 @@ variable (A : Type a) [Category.{u + 1} A] [Abelian A]
 /-- The double-dual morphism specified by the etale evaluation-pairing theorem.
 Its value is uniquely determined: the symmetry is fixed to the descended Koszul
 symmetry, evaluation is the adjunct of the identity, and this arrow is its transpose.
-Thus this extracts determined data, rather than choosing an arbitrary pairing.
-Source: Stacks Project, Tags 08J9 and 08JA. -/
+Thus this extracts determined data, rather than choosing an arbitrary pairing. -/
 noncomputable def Etale.AmbientDualityPairing.bidualityMap
     {W : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
     (h : Etale.AmbientDualityPairing A X W)
@@ -559,8 +558,7 @@ noncomputable def Etale.AmbientDualityPairing.bidualityMap
   h.choose_spec.2.choose_spec.2.choose K
 
 /-- The double-dual morphism specified by the pro-etale evaluation-pairing theorem.
-The normalization fixes its value uniquely, just as in the etale presentation.
-Source: Stacks Project, Tags 08J9 and 08JA. -/
+The normalization fixes its value uniquely, just as in the etale presentation. -/
 noncomputable def ProEtale.AmbientDualityPairing.bidualityMap
     {W : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
     (h : ProEtale.AmbientDualityPairing A X W)
@@ -574,8 +572,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- A componentwise characterization of the actual descended Koszul symmetry.
 Naming this predicate keeps the large derived-monoidal instance out of the implicit
-predicate argument to Classical.choose; it imposes exactly the original HEq clause.
-Source: Stacks 08J9 and 08JA. -/
+predicate argument to Classical.choose; it imposes exactly the original HEq clause. -/
 def IsEtaleKoszulSymmetry (A : Type (u + 1)) [CommRing A] (X : Scheme.{u})
     (b : ∀ M N : DerivedCategoryModule A X,
       ((derivedTensor (ModuleCat.{u + 1} A) X).obj M).obj N ≅

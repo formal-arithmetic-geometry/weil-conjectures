@@ -51,7 +51,12 @@ import Mathlib.RingTheory.AdicCompletion.Completeness
 
 /-! # Exact relative realization of completion modules
 
-Source: Stacks Project, Modules on Sites, Tags 093J--093M; Pro-etale Cohomology, Tags 09BT and 09BV.
+## References
+
+* Stacks Project, Modules on Sites, Tags 093J--093M
+* Pro-etale Cohomology, Tags 09BT and 09BV
+* Stacks, Tags 093J--093M
+* Tags 09BT and 09BV
 -/
 
 @[expose] public noncomputable section
@@ -314,9 +319,7 @@ private theorem relativelyLisse_of_iso {X Y : Scheme.{u}} (h : Y ⟶ X)
 -- The original statement names an intentionally unused existential additivity witness.
 set_option linter.unusedVariables false in
 /-- The specified completion scalar maps give an exact relative module realization.
-Finite completion modules become relatively adic-lisse modules.
-
-Source: Stacks, Tags 093J--093M; Tags 09BT and 09BV. -/
+Finite completion modules become relatively adic-lisse modules. -/
 theorem relative_completed_module_realization_exact
     (X Y : Scheme.{u}) (h : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) :

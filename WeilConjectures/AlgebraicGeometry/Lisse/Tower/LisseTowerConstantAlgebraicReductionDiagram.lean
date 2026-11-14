@@ -12,8 +12,13 @@ import WeilConjectures.AlgebraicGeometry.Lisse.Tower.LisseTowerConstantStalkMode
 
 /-! # Local algebraic diagrams over the constant completion ring
 
-Source: Stacks Tag 09BV, finite-ring derived local constancy and compatible
-trivializations in amplification (c).
+## References
+
+* Stacks Tag 09BV, finite-ring derived local constancy and compatible trivializations in
+  amplification (c)
+* Tag 09BV (lemma-weird), the derived local-constancy and simultaneous-trivialization argument in
+  amplification (c)
+* Tags 06YY and 093J
 -/
 
 @[expose] public noncomputable section
@@ -87,10 +92,7 @@ private theorem reduction_square_of_units
 set_option linter.unusedVariables false in
 /-- Finite local diagrams and effective cones over the constant algebraic ring.
 This assertion has no completed ring sheaf, completed realization or scalar maps
-phi and beta. Inverse image retains exactly the constant algebraic coefficient ring.
-
-Source: Tag 09BV (lemma-weird), the derived local-constancy and simultaneous-trivialization argument
-in amplification (c); Tags 06YY and 093J. -/
+phi and beta. Inverse image retains exactly the constant algebraic coefficient ring. -/
 theorem lisse_tower_constant_algebraic_reduction_diagram
     (X Y : Scheme.{u}) [IsNoetherian X] (g : Y ⟶ X) [IsImmersion g]
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (M : AdicTower X d)

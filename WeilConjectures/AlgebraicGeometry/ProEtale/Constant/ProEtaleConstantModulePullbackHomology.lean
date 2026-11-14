@@ -12,7 +12,12 @@ public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 /-!
 # Exact constant-coefficient restriction and upper cohomological bounds
 
-Source: Stacks Project, Tags 03D2 and 0735.
+## References
+
+* Stacks Project, Tags 03D2 and 0735
+* Stacks Project, Tag 03D2
+* Stacks Project, Tag 0735, termwise exact inverse image
+* Stacks Project, Tag 0735
 -/
 
 @[expose] public section
@@ -22,8 +27,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The canonical constant-coefficient restriction functor.
-Source: Stacks Project, Tag 03D2. -/
+/-- The canonical constant-coefficient restriction functor. -/
 noncomputable def proEtaleConstantModulePullbackFunctor {X Y : Scheme.{u}} (f : X ⟶ Y)
     (A : Type u) [CommRing A] :
     proEtaleRingModules Y (proEtaleConstantRing Y A) ⥤
@@ -54,8 +58,7 @@ instance proEtaleConstantModulePullbackFunctor_preservesFiniteColimits
   unfold proEtaleConstantModulePullbackFunctor
   infer_instance
 
-/-- Exact constant-coefficient pullback commutes with cohomology.
-Source: Stacks Project, Tag 0735, termwise exact inverse image. -/
+/-- Exact constant-coefficient pullback commutes with cohomology. -/
 noncomputable def proEtaleConstantModulePullbackHomologyIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     (A : Type u) [CommRing A]
     (K : CochainComplex (proEtaleRingModules Y (proEtaleConstantRing Y A)) ℤ) (i : ℤ) :
@@ -68,8 +71,7 @@ noncomputable def proEtaleConstantModulePullbackHomologyIso {X Y : Scheme.{u}} (
     (proEtaleConstantModulePullbackFunctor f A).mapIso
       ((DerivedCategory.homologyFunctorFactors _ i).app K).symm
 
-/-- Upper cohomological bounds survive the canonical constant-coefficient restriction.
-Source: Stacks Project, Tag 0735. -/
+/-- Upper cohomological bounds survive the canonical constant-coefficient restriction. -/
 theorem proEtaleConstantModulePullback_boundedAbove {X Y : Scheme.{u}} (f : X ⟶ Y)
     (A : Type u) [CommRing A]
     (K : CochainComplex (proEtaleRingModules Y (proEtaleConstantRing Y A)) ℤ)

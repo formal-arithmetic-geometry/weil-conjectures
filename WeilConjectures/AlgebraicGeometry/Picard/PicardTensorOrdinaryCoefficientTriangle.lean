@@ -9,7 +9,10 @@ public import WeilConjectures.AlgebraicGeometry.Picard.Residue.PicardResidueNorm
 
 /-! # PicardTensorOrdinaryCoefficientTriangle
 
-Source: Stacks Project, Tags 0096, 06YJ, 0A1D, 08HY, 0D5S and 01F7.
+## References
+
+* Stacks Project, Tags 0096, 06YJ, 0A1D, 08HY, 0D5S and 01F7
+* Stacks Project, Tags 0096 and 0D5S
 -/
 
 @[expose] public section
@@ -69,8 +72,7 @@ private theorem mixed
   simp [Adjunction.leftAdjointUniq, Adjunction.leftAdjointCompIso,
     conjugateIsoEquiv_symm_apply_inv, conjugateIsoEquiv_symm_apply_hom]
 
-/-- The tensor mate and the ordinary pullback triangle define the same map.
-Source: Stacks Project, Tags 0096 and 0D5S; uniqueness of a left adjoint. -/
+/-- The tensor mate and the ordinary pullback triangle define the same map. -/
 theorem picard_tensor_ordinary_coefficient_triangle
     {A B X : Scheme.{v}} (q : A ⟶ X) (q' : B ⟶ X) (b : B ⟶ A)
     (hb : b ≫ q = q') (L : X.Modules) :

@@ -79,7 +79,13 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
 import Mathlib.Algebra.Category.Grp.AB
 import Mathlib.CategoryTheory.Monoidal.Preadditive
 
-/-! # Computing a perfect model before and after finite reduction -/
+/-! # Computing a perfect model before and after finite reduction
+
+## References
+
+* Bhatt--Scholze, Lemma 6.5.8(1), Proposition 6.6.11, local calculation
+* Stacks Tags 06YS, 06YT, 06YU and 093J
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -355,9 +361,7 @@ private def constantTensorIso (X : Scheme.{u})
     ((NatIso.mapHomologicalComplex e (.up ℤ)).app C₀ ≪≫
       asIso (CategoryTheory.ConstantScalarRealization.complexComparison J q C))
 
-/-- Finite reduction of a perfect completed model on a chart is computed termwise.
-Source: Bhatt--Scholze, Lemma 6.5.8(1), Proposition 6.6.11, local calculation;
-Stacks Tags 06YS, 06YT, 06YU and 093J. -/
+/-- Finite reduction of a perfect completed model on a chart is computed termwise. -/
 theorem perfect_chart_tensor_comparison
     {X Y : Scheme.{u}} (g : Y ⟶ X) [IsImmersion g]
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)

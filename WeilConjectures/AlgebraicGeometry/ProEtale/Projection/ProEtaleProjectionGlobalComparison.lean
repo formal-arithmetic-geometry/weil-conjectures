@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Tensor.ProEtaleTensorCompariso
 /-!
 # Comparing the native and canonical global projection mates
 
-Source: Stacks Project, Tags 06YU, 07A4, 07A6 and 0B56.
+## References
+
+* Stacks Project, Tags 06YU, 07A4, 07A6 and 0B56
 -/
 
 @[expose] public noncomputable section
@@ -149,8 +151,7 @@ private theorem globalOrdinary_square
       (proEtaleRingModuleAdjunction f R S c)) (tensor R) (tensor S)
     (proEtaleOrdinaryTensorPullback f R S c) M N
 
-/-- Comparing normalized global models does not involve a slice or exactness data.
-Source: Stacks Project, Tags 06YU, 07A4, 07A6 and 0B56. -/
+/-- Comparing normalized global models does not involve a slice or exactness data. -/
 theorem proEtaleProjectionGlobalComparison
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})

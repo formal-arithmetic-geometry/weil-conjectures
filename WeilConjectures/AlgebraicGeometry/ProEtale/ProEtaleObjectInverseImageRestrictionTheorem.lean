@@ -12,11 +12,16 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleObjectInverseImage
 /-!
 # Inverse image along an object of the small pro-etale site is slice restriction
 
-Source: Stacks Project, Sites and Sheaves, Tags 03CE, 00VC, 00XZ, 00WH and 0H7J; Modules on Sites,
-Tags 03D2 and 03EK; pro-etale functoriality, Tag 09A5.
-
 The private comparison data live in
 `WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleObjectInverseImageRestrictionSupplement`.
+
+## References
+
+* Stacks Project, Sites and Sheaves, Tags 03CE, 00VC, 00XZ, 00WH and 0H7J
+* Modules on Sites, Tags 03D2 and 03EK
+* pro-etale functoriality, Tag 09A5
+* Stacks, Tags 00XZ, 0H7J and 03D2
+* Tag 09A5
 -/
 
 @[expose] public section
@@ -32,8 +37,7 @@ namespace AlgebraicGeometry.Scheme
 /-- Restriction of constant-coefficient modules through the constant-ring localization
 isomorphism `e: A_W ≅ A_X|_W`. This is the existing sectionwise pushforward of
 module sheaves along composition; its scalar action uses `e.hom` and its underlying
-abelian presheaf is exactly `U ↦ M(U → W → X)`.
-Source: Stacks, Tags 00XZ, 0H7J and 03D2. -/
+abelian presheaf is exactly `U ↦ M(U → W → X)`. -/
 noncomputable abbrev proEtaleObjectModuleRestriction {X : Scheme.{u}} (W : X.ProEt)
     (A : Type u) [CommRing A]
     (e : proEtaleConstantRing W.left A ≅
@@ -235,10 +239,7 @@ private theorem restrictionModulePullback {X : Scheme.{u}} (W : X.ProEt)
 /-- Inverse image along an object is slice restriction, including the canonical
 presheaf comparison, the sheafification unit, the particular coefficient map, and
 module pullback. The commutative-ring comparison retains the ring structure needed
-for coefficients; `RingCat` also includes noncommutative ring sheaves.
-
-Source: Stacks Project, Sites and Sheaves, Tags 03CE, 00VC, 00XZ, 00WH and 0H7J; Modules on Sites,
-Tags 03D2 and 03EK; Tag 09A5. -/
+for coefficients; `RingCat` also includes noncommutative ring sheaves. -/
 theorem proEtaleObjectInverseImageRestriction (X : Scheme.{u}) (W : X.ProEt)
     (A : Type u) [CommRing A] :
     (∀ U : W.left.ProEt,

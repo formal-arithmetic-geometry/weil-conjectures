@@ -12,11 +12,15 @@ public import WeilConjectures.AlgebraicGeometry.Sf.SfIntrinsicRealizationTranspo
 /-!
 # The canonical open-square exchange in tensor-pullback coordinates
 
-Source: Stacks Project, Tags 03S6 and 04J0.
-
 The original exchange uses the transported fixed-scalar inverse image. The Frobenius
 comparison uses tensor inverse image over the same intrinsic constant ring. The bridge
 below is uniquely fixed by the sectionwise units, and is descended termwise.
+
+## References
+
+* Stacks Project, Tags 03S6 and 04J0
+* Stacks Tags 03S6, 03D3 and 00YV
+* Stacks Tags 03S6 and 04J0
 -/
 
 @[expose] public noncomputable section
@@ -39,8 +43,7 @@ private def openSquare_directImageModel (A : Type u) [CommRing A]
   SheafOfModules.pushforwardCongr (by rw [openSquare_coefficientMap A f])
 
 /-- The unique identification of the two pullbacks used in the open-square construction.
-Its sectionwise equation preserves their specified units and fixes the scalar action.
-Source: Stacks Tags 03S6, 03D3 and 00YV. -/
+Its sectionwise equation preserves their specified units and fixes the scalar action. -/
 theorem openSquarePullbackModel_existsUnique (A : Type u) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃! e : proEtaleConstantRingPullback A f ≅ sfIntrinsicPullback A f,
@@ -95,8 +98,7 @@ def openSquareDerivedPullbackModel (A : Type u) [CommRing A] [Finite A]
 the existing exchange, whose inverse is the specified open-adjunction mate and whose
 restriction, identity and pasting laws are recorded in SfOpenSquareExchangeData.
 The two outer factors are the unique unit-preserving changes of coordinates; consequently
-these normalizations transport with the exchange, including its identity on the open.
-Source: Stacks Tags 03S6 and 04J0. -/
+these normalizations transport with the exchange, including its identity on the open. -/
 def constantOpenSquareExchange (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (n : ℕ) (hn : 1 ≤ n)

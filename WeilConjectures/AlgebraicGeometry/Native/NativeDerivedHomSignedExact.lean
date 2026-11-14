@@ -13,7 +13,9 @@ import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Signed exactness of the native derived internal Hom
 
-Source: Stacks Project, Tags 08J9 and 08JC.
+## References
+
+* Stacks Project, Tags 08J9 and 08JC
 -/
 
 @[expose] public noncomputable section
@@ -153,8 +155,7 @@ private def signedSourceIso (M : D) (n : ℤ) :
 
 end Shift
 
-/-- Native derived internal Hom has the signed exact contravariant structure.
-Source: Stacks Project, Tags 08J9 and 08JC. -/
+/-- Native derived internal Hom has the signed exact contravariant structure. -/
 theorem nativeDerivedHom_signed_exact
     {C : Type d} [Category.{u + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C]

@@ -12,7 +12,12 @@ import WeilConjectures.AlgebraicGeometry.RingedSpaceDirectImageKInjectiveAcyclic
 import WeilConjectures.AlgebraicGeometry.DerivedMayerVietorisImageResolutionComparisonIntersection
 import WeilConjectures.AlgebraicGeometry.Relative.RelativeMVResolvedRoofMateComparisons
 
-/-! # Vertex normalization for the concrete resolved row roof -/
+/-! # Vertex normalization for the concrete resolved row roof
+
+## References
+
+* Stacks Project, Tags 08FE, 08HY, 08HZ and 0D5T
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -300,7 +305,7 @@ set_option backward.defeqAttrib.useBackward true
 
 set_option linter.all false in
 /-- The normalized coefficient lifts determine the vertex comparison of their
-concrete roof. Source: Stacks Project, Tags 08FE, 08HY, 08HZ and 0D5T. -/
+concrete roof. -/
 theorem relativeMV_resolved_roof_vertex_normalization
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

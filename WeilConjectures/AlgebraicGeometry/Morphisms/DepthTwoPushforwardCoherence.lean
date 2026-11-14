@@ -18,7 +18,11 @@ import Mathlib.RingTheory.Finiteness.Basic
 
 /-! # Coherence and depth of the canonical boundary pushforward algebra
 
-Source: Stacks Project, Tag 0EY6(1), and the depth assertion in its proof of (2).
+## References
+
+* Stacks Project, Tag 0EY6(1), and the depth assertion in its proof of (2)
+* Stacks Project, Tag 0EY6(1), proof of (2)
+* Tag 0E9I
 -/
 
 @[expose] public section
@@ -58,9 +62,7 @@ private theorem depth_eq_of_linearEquiv {R : Type u} [CommRing R] [IsLocalRing R
       exact ⟨rs, (e.isRegular_congr rs).mpr hreg, hmem, rfl⟩
 
 /-- The actual direct image algebra is quasi-coherent, finite on affine opens, and
-has finite stalk modules of depth at least two on the boundary.
-
-Source: Stacks Project, Tag 0EY6(1), proof of (2); Tag 0E9I. -/
+has finite stalk modules of depth at least two on the boundary. -/
 theorem depth_two_pushforward_coherence
     {L : Scheme.{u}} [IsLocallyNoetherian L] (U : L.Opens)
     (hboundary : ∀ y : L, y ∉ U →

@@ -14,7 +14,9 @@ import WeilConjectures.Topology.DimensionSupremumLocalDimensions
 /-!
 # Upper semicontinuity of proper fibre dimension
 
-Source: Stacks Project, More on Morphisms, Tag 0D4I.
+## References
+
+* Stacks Project, More on Morphisms, Tag 0D4I
 -/
 
 @[expose] public section
@@ -27,8 +29,6 @@ namespace AlgebraicGeometry
 
 /-- For a proper morphism, the locus of fibres of dimension at most `d` is open.
 The dimension of an empty fibre is bottom, so empty fibres belong to this locus.
-
-Source: Stacks Project, More on Morphisms, Tag 0D4I.
 -/
 theorem isOpen_setOf_topologicalKrullDim_fiber_le
     {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f] (d : ℕ) :

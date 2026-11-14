@@ -102,11 +102,18 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory
 
 /-! # Koszul and quotient reconstruction over completed coefficients
 
-Source: Stacks Project, Tags 091N, 091Z, 099L and 099M.
-
 The Koszul functor extends the recorded explicit fibre model on maps; it introduces
 no second coefficient sheaf or Koszul complex. The quotient unit is independently
 normalized on all K-flat representatives by the ordinary quotient maps.
+
+## References
+
+* Stacks Project, Tags 091N, 091Z, 099L and 099M
+* Stacks Tag 00W1
+* Stacks Tags 079B and 079Q
+* Stacks Tag 0941
+* Stacks Tag 06YY
+* Stacks Tags 06XN and 06YY
 -/
 
 @[expose] public noncomputable section
@@ -120,20 +127,17 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposi
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Fix the additive coefficient universe when elaborating the recorded models.
-Source: Stacks Tag 00W1. -/
+/-- Fix the additive coefficient universe when elaborating the recorded models. -/
 local instance reconstructionAbSheafify (Y : Scheme.{t}) :
     HasSheafify (ProEt.topology Y) AddCommGrpCat.{t + 1} :=
   WeilConjectures.integralCoefficientAbSheafify.{t, 0} Y
 
-/-- Use the canonical local-equivalence criterion in the same additive universe.
-Source: Stacks Tag 00W1. -/
+/-- Use the canonical local-equivalence criterion in the same additive universe. -/
 local instance reconstructionAbLocallyBijective (Y : Scheme.{t}) :
     (ProEt.topology Y).WEqualsLocallyBijective AddCommGrpCat.{t + 1} :=
   WeilConjectures.integralCoefficientAbLocallyBijective.{t, 0} Y
 
-/-- Fix the commutative-ring coefficient universe of the completed tensor structure.
-Source: Stacks Tag 00W1. -/
+/-- Fix the commutative-ring coefficient universe of the completed tensor structure. -/
 local instance reconstructionRingSheafify (Y : Scheme.{t}) :
     HasSheafify (ProEt.topology Y) CommRingCat.{t + 1} :=
   WeilConjectures.integralCoefficientRingSheafify.{t, 0} Y
@@ -165,8 +169,7 @@ private theorem reconstructionTowersGrothendieckGeneric
   exact { locallySmall := ⟨fun P Q ↦ small_of_injective
     (f := fun f : P ⟶ Q ↦ f.app) (fun f g h ↦ NatTrans.ext h)⟩ }
 
-/-- Strict towers of modules over the completed ring form a Grothendieck category.
-Source: Stacks Tags 079B and 079Q. -/
+/-- Strict towers of modules over the completed ring form a Grothendieck category. -/
 theorem reconstructionTowers_grothendieck :
     IsGrothendieckAbelian.{t + 1} (CompletedAdicTowers T d) := by
   have : IsGrothendieckAbelian.{t + 1} (CompletedAdicModules T d) :=
@@ -176,12 +179,10 @@ theorem reconstructionTowers_grothendieck :
 
 attribute [instance] reconstructionTowers_grothendieck
 
-/-- The actual ordinary strict inverse-limit functor.
-Source: Stacks Tag 0941. -/
+/-- The actual ordinary strict inverse-limit functor. -/
 abbrev reconstructionLimit : CompletedAdicTowers T d ⥤ CompletedAdicModules T d := lim
 
-/-- Strict inverse limit is additive.
-Source: Stacks Tag 0941. -/
+/-- Strict inverse limit is additive. -/
 @[instance]
 theorem reconstructionLimit_additive : (reconstructionLimit T d).Additive := by
   constructor
@@ -190,13 +191,11 @@ theorem reconstructionLimit_additive : (reconstructionLimit T d).Additive := by
   intro n
   simp [reconstructionLimit, Preadditive.add_comp, Preadditive.comp_add]
 
-/-- The total right derived strict inverse limit with its universal comparison.
-Source: Stacks Tag 0941. -/
+/-- The total right derived strict inverse limit with its universal comparison. -/
 abbrev reconstructionRlim : DerivedCategory (CompletedAdicTowers T d) ⥤
     DerivedCategory (CompletedAdicModules T d) := (reconstructionLimit T d).rightDerivedFunctor
 
-/-- The universal derived-limit comparison on complexes of strict towers.
-Source: Stacks Tag 0941. -/
+/-- The universal derived-limit comparison on complexes of strict towers. -/
 def reconstructionRlimComparison (P : CochainComplex (CompletedAdicTowers T d) ℤ) :
     DerivedCategory.Q.obj
         (((reconstructionLimit T d).mapHomologicalComplex (ComplexShape.up ℤ)).obj P) ⟶
@@ -312,16 +311,14 @@ def reconstructionOrdinaryUnit : 𝟭 (CompletedAdicModules T d) ⟶
     completedAdicOrdinaryTower T d ⋙ reconstructionLimit T d :=
   (reconstructionOrdinaryUnit_exists T d).exists.choose
 
-/-- The same reduction counit on a complex representative, with localization factors.
-Source: Stacks Tag 06YY. -/
+/-- The same reduction counit on a complex representative, with localization factors. -/
 def reconstructionReductionComplexCounit (P : CochainComplex (CompletedAdicModules T d) ℤ) :
     (completedAdicReduction T d).obj (DerivedCategory.Q.obj P) ⟶
       DerivedCategory.Q.obj
         (((completedAdicOrdinaryTower T d).mapHomologicalComplex (ComplexShape.up ℤ)).obj P) :=
   (completedAdicReductionData T d).complexCounit P
 
-/-- The strict reduction counit is invertible on every unbounded K-flat model.
-Source: Stacks Tags 06XN and 06YY. -/
+/-- The strict reduction counit is invertible on every unbounded K-flat model. -/
 theorem reconstructionTowerCounit_isIso
     (P : CochainComplex (CompletedAdicModules T d) ℤ)
     (hP : CochainComplex.IsAcyclicTensorKFlat (R := completedAdicCommRing T d) P) :

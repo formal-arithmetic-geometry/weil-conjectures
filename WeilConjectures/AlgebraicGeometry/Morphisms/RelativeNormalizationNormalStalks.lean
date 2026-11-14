@@ -16,7 +16,10 @@ import WeilConjectures.RingTheory.IntegralClosureFiniteNormalProduct
 /-!
 # Normal stalks of relative normalization in a locally Noetherian normal source
 
-Source: Stacks Project, Tag 035L.
+## References
+
+* Stacks Project, Tag 035L
+* Stacks Project, Tag 035L, with Tags 0357, 0358 and 034L
 -/
 
 @[expose] public section
@@ -26,9 +29,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- Relative normalization in a locally Noetherian scheme with normal local rings has
-normal local rings.
-
-Source: Stacks Project, Tag 035L, with Tags 0357, 0358 and 034L. -/
+normal local rings. -/
 theorem relativeNormalization_normal_stalks {X Y : Scheme.{u}} [IsLocallyNoetherian X]
     (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
     (hX : ∀ x : X, IsDomain (X.presheaf.stalk x) ∧

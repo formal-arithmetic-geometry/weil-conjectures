@@ -21,8 +21,6 @@ import WeilConjectures.AlgebraicGeometry.FiniteConstantModel.FiniteConstantModel
 /-!
 # Strict comparison data for integral inverse image
 
-Source: Stacks Tags 099I and 099N(2), (5).
-
 The comparison is constructed on a strict reduction tower, with the quotient
 augmentation and zero shifted coordinate. Constant scalar restriction retains a
 separate coefficient category. Positive exponent n+1 is indexed by n: ℕ.
@@ -37,6 +35,14 @@ separate coefficient category. Positive exponent n+1 is indexed by n: ℕ.
 
 The final preservation theorem is assembled in `IntegralTensorPullback`.
 These definitions are shared by its two independent normalization lemmas.
+
+## References
+
+* Stacks Tags 099I and 099N(2), (5)
+* Stacks 08TC
+* Stacks 099N(5)
+* Stacks 099I
+* Stacks 099N(2), (5)
 -/
 
 @[expose] public noncomputable section
@@ -54,8 +60,7 @@ namespace AlgebraicGeometry.ProEtale.IntegralTensorPullback
 section Augmentation
 variable {A : Type a} [Category.{b} A] [Abelian A] [HasCountableProducts A]
 
-/-- The strict augmentation has zero composite with 1 minus shift.
-Source: Stacks 08TC. -/
+/-- The strict augmentation has zero composite with 1 minus shift. -/
 theorem augmentation_condition (P : CochainComplex A ℤ)
     (T : ℕᵒᵖ ⥤ CochainComplex A ℤ)
     (γ : (Functor.const ℕᵒᵖ).obj P ⟶ T) :
@@ -76,8 +81,7 @@ theorem augmentation_condition (P : CochainComplex A ℤ)
       WeilConjectures.integralOperationsTowerStep, Category.assoc, ← hn]
   simp [h, CochainComplex.HomComplex.Cochain.ofHom_zero]
 
-/-- The strict map to the Roos complex, with quotient legs and zero homotopy.
-Source: Stacks 099N(5). -/
+/-- The strict map to the Roos complex, with quotient legs and zero homotopy. -/
 def augmentation (P : CochainComplex A ℤ) (T : ℕᵒᵖ ⥤ CochainComplex A ℤ)
     (γ : (Functor.const ℕᵒᵖ).obj P ⟶ T) :
     P ⟶ WeilConjectures.integralOperationsRoos T :=
@@ -90,14 +94,12 @@ end Augmentation
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The existing constant condensed ring on the point, for the integer scalar ring.
-Source: Stacks 099I. -/
+/-- The existing constant condensed ring on the point, for the integer scalar ring. -/
 abbrev constantRing :=
   (sfbPointConstantRing.{u}.obj
     (RingCat.of (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)))).X
 
-/-- Constant scalar coefficients are commutative.
-Source: Stacks 099I. -/
+/-- Constant scalar coefficients are commutative. -/
 theorem constantRing_isCommMonObj : IsCommMonObj (constantRing l E) := by
   let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   exact FiniteConstantModel.constantScalars_commutative
@@ -105,8 +107,7 @@ theorem constantRing_isCommMonObj : IsCommMonObj (constantRing l E) := by
 attribute [instance] constantRing_isCommMonObj
 
 /-- The constant scalar map sends a scalar to its constant continuous function.
-It is the actual sheafification-adjunction map, in the common coefficient universe.
-Source: Stacks 099I. -/
+It is the actual sheafification-adjunction map, in the common coefficient universe. -/
 def constantToIntegral : constantRing l E ⟶ DerivedNakayama.integerRing l E :=
   letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   ((sheafificationAdjunction (coherentTopology Profinite.{u}) Ab.{u + 1}).homEquiv _ _).symm
@@ -116,8 +117,7 @@ def constantToIntegral : constantRing l E ⟶ DerivedNakayama.integerRing l E :=
           map_add' := fun _ _ ↦ rfl }
       naturality := fun _ _ _ ↦ rfl }
 
-/-- The constant-function map preserves the coefficient unit and multiplication.
-Source: Stacks 099I. -/
+/-- The constant-function map preserves the coefficient unit and multiplication. -/
 theorem constantToIntegral_isMonHom : IsMonHom (constantToIntegral l E) := by
   let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   exact FiniteConstantModel.scalarToContinuous_isMonHom
@@ -125,8 +125,7 @@ theorem constantToIntegral_isMonHom : IsMonHom (constantToIntegral l E) := by
 attribute [instance] constantToIntegral_isMonHom
 
 /-- Restrict an internal continuous integral module to its constant integral scalars.
-This uses the recorded restriction-of-scalars operation on module objects.
-Source: Stacks 099I. -/
+This uses the recorded restriction-of-scalars operation on module objects. -/
 abbrev restriction (X : Scheme.{u}) :
     AdicCompletion.Modules l E X ⥤
       Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj (constantRing l E) X) :=
@@ -192,8 +191,7 @@ def pulledTower {X Y : Scheme.{u}} (g : X ⟶ Y)
     (CondensedRing.upperStar (DerivedNakayama.integerRing l E) g).mapHomologicalComplex (.up ℤ)
 
 /-- The canonical comparison on a K-flat representative, using the strict quotient
-augmentation and zero shifted coordinate, rather than a triangulated cone lift.
-Source: Stacks 099N(5). -/
+augmentation and zero shifted coordinate, rather than a triangulated cone lift. -/
 def comparison {X Y : Scheme.{u}} (g : X ⟶ Y)
     (P : CochainComplex (AdicCompletion.Modules l E Y) ℤ) :=
   augmentation
@@ -230,18 +228,15 @@ def constantUnit (X : Scheme.{u}) :
   Mod.homMk ((upperStarFromPoint X).map (constantToIntegral l E)) (constantUnit_linear l E X)
 
 /-- The same finite constant quotient, now with its constant integral scalar action.
-Finite continuous coefficients are constant; only the integral scalar action changes.
-Source: Stacks 099N(5). -/
+Finite continuous coefficients are constant; only the integral scalar action changes. -/
 abbrev constantFinite (X : Scheme.{u}) (n : ℕ) :=
   (restriction l E X).obj (AdicCompletion.finiteModule l E X n)
 
-/-- Derived reduction over constant integral coefficients, computed on a K-flat complex.
-Source: Stacks 099N(5). -/
+/-- Derived reduction over constant integral coefficients, computed on a K-flat complex. -/
 abbrev constantLevel (X : Scheme.{u}) (n : ℕ) :=
   (tensorRight (constantFinite l E X n)).mapHomologicalComplex (.up ℤ)
 
-/-- The transitions in the constant scalar reduction tower are the same quotient maps.
-Source: Stacks 099N(5). -/
+/-- The transitions in the constant scalar reduction tower are the same quotient maps. -/
 def constantStep (X : Scheme.{u}) (Q : CochainComplex (ConstantModules l E X) ℤ) (n : ℕ) :
     (constantLevel l E X (n + 1)).obj Q ⟶ (constantLevel l E X n).obj Q :=
   (NatTrans.mapHomologicalComplex
@@ -250,8 +245,7 @@ def constantStep (X : Scheme.{u}) (Q : CochainComplex (ConstantModules l E X) �
         ((DerivedNakayama.pullback l E X).map (AdicCompletion.quotientStep l E n))))
     (.up ℤ)).app Q
 
-/-- Tensoring with the actual quotient of the constant coefficient unit.
-Source: Stacks 099N(5). -/
+/-- Tensoring with the actual quotient of the constant coefficient unit. -/
 def constantLevelUnit (X : Scheme.{u})
     (Q : CochainComplex (ConstantModules l E X) ℤ) (n : ℕ) :
     Q ⟶ (constantLevel l E X n).obj Q :=
@@ -261,14 +255,12 @@ def constantLevelUnit (X : Scheme.{u})
         (constantUnit l E X ≫ (restriction l E X).map (AdicCompletion.finiteUnit l E X n)))
     (.up ℤ)).app Q
 
-/-- The strict constant scalar reduction tower.
-Source: Stacks 099N(5). -/
+/-- The strict constant scalar reduction tower. -/
 def constantTower (X : Scheme.{u}) (Q : CochainComplex (ConstantModules l E X) ℤ) :=
   Functor.ofOpSequence (X := fun n : ℕ ↦ (constantLevel l E X n).obj Q)
     (constantStep l E X Q)
 
-/-- Quotient augmentations commute with the constant scalar transitions.
-Source: Stacks 099N(5). -/
+/-- Quotient augmentations commute with the constant scalar transitions. -/
 theorem constantTowerUnit_compatible (X : Scheme.{u})
     (Q : CochainComplex (ConstantModules l E X) ℤ) (n : ℕ) :
     ((Functor.const ℕᵒᵖ).obj Q).map (homOfLE (Nat.le_succ n)).op ≫
@@ -289,22 +281,19 @@ theorem constantTowerUnit_compatible (X : Scheme.{u})
   rw [Category.assoc, ← whiskerLeft_comp, Category.assoc,
     ← Functor.map_comp, finiteUnit_step]
 
-/-- The strict constant scalar quotient augmentation.
-Source: Stacks 099N(5). -/
+/-- The strict constant scalar quotient augmentation. -/
 def constantTowerUnit (X : Scheme.{u}) (Q : CochainComplex (ConstantModules l E X) ℤ) :
     (Functor.const ℕᵒᵖ).obj Q ⟶ constantTower l E X Q :=
   NatTrans.ofOpSequence (constantLevelUnit l E X Q) (constantTowerUnit_compatible l E X Q)
 
-/-- The exact constant coefficient inverse image applied to the whole reduction tower.
-Source: Stacks 099N(5). -/
+/-- The exact constant coefficient inverse image applied to the whole reduction tower. -/
 def constantPulledTower {X Y : Scheme.{u}} (g : X ⟶ Y)
     (Q : CochainComplex (ConstantModules l E Y) ℤ) :=
   constantTower l E Y Q ⋙
     (CondensedRing.upperStar (constantRing l E) g).mapHomologicalComplex (.up ℤ)
 
 /-- The Stacks completed inverse-image unit on a constant-coefficient K-flat model.
-The target is the Roos model of Rlim of the pulled-back constant reductions.
-Source: Stacks 099N(2), (5). -/
+The target is the Roos model of Rlim of the pulled-back constant reductions. -/
 def constantComparison {X Y : Scheme.{u}} (g : X ⟶ Y)
     (Q : CochainComplex (ConstantModules l E Y) ℤ) :=
   augmentation

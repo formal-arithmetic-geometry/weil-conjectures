@@ -13,7 +13,20 @@ import all WeilConjectures.AlgebraicGeometry.Sf.SfCbcExtensionModel
 /-!
 # Extension by zero on the small model preserves reduced modules
 
-Source: Stacks Project Tags 03DA, 03DI and 0E8I.
+## References
+
+* Stacks Project Tags 03DA, 03DI and 0E8I
+* Stacks Project, Modules on Sites, Tags 03D1 and 03DA
+* Stacks Project, Modules on Sites, Tag 03D1
+* Stacks Project, Modules on Sites, Tag 03DJ
+* Stacks Project, Tag 099L
+* Stacks Project, Tags 00VC and 099L
+* Stacks Project, Sites, Tag 00XZ
+* Stacks Project, Tags 00VC and 03D1
+* Stacks Project, Tags 03D1 and 03DA
+* Stacks Project, Categories, Tag 001J
+* Stacks Project, Modules on Sites, Tags 03DA and 03DI
+* Stacks Project, Modules on Sites, Tags 03DA and 03DJ
 -/
 
 @[expose] public noncomputable section
@@ -32,8 +45,7 @@ variable {C D : Type*} [Category C] [Category D] {J : GrothendieckTopology C}
   {K : GrothendieckTopology D} {F : C ⥤ D} [F.IsContinuous J K]
 
 /-- Pushforward commutes with restriction of scalars along a commutative square of
-ring maps; both modules have the same sections.
-Source: Stacks Project, Modules on Sites, Tags 03D1 and 03DA. -/
+ring maps; both modules have the same sections. -/
 def pushforwardRestrictScalarsIso {S S' : Sheaf J RingCat.{u}} {R R' : Sheaf K RingCat.{u}}
     (φ : S ⟶ (F.sheafPushforwardContinuous RingCat.{u} J K).obj R)
     (φ' : S' ⟶ (F.sheafPushforwardContinuous RingCat.{u} J K).obj R')
@@ -73,8 +85,7 @@ private theorem sfCbcOpenExtension_eq {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenIm
       (sfCbcConstantSliceIso_unit X _ A)
   rw [hm]
 
-/-- Transport of modules from an open scheme to the localized ambient site is an equivalence.
-Source: Stacks Project, Modules on Sites, Tag 03D1. -/
+/-- Transport of modules from an open scheme to the localized ambient site is an equivalence. -/
 theorem sfCbcConstantModuleToSlice_isEquivalence (X : Scheme.{t}) (W : X.ProEt)
     (A : Type t) [CommRing A] : (sfCbcConstantModuleToSlice X W A).IsEquivalence := by
   let := ProEt.sliceDense X W
@@ -107,8 +118,7 @@ theorem sfCbcConstantModuleToSlice_isEquivalence (X : Scheme.{t}) (W : X.ProEt)
   rw [hm]
   exact hFE
 
-/-- Restriction to the open scheme, transported to the small models.
-Source: Stacks Project, Modules on Sites, Tag 03DJ. -/
+/-- Restriction to the open scheme, transported to the small models. -/
 def sfCbcModelRestriction {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j]
     (A : Type t) [CommRing A] :
     ConstantCompletion.Mod (sfCbcModelRing X A) ⥤ ConstantCompletion.Mod (sfCbcModelRing U A) :=
@@ -119,8 +129,7 @@ def sfCbcModelRestriction {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j]
     (sfCbcConstantModuleToSlice X (cbcOpenObject j inferInstance) A).asEquivalence.inverse ⋙
     sfCbcModelModules U A
 
-/-- Extension by zero on the small models is left adjoint to restriction.
-Source: Stacks Project, Modules on Sites, Tag 03DJ. -/
+/-- Extension by zero on the small models is left adjoint to restriction. -/
 def sfCbcModelExtensionAdjunction {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j]
     (A : Type t) [CommRing A] : sfCbcModelExtension j A ⊣ sfCbcModelRestriction j A := by
   letI := sfCbcConstantModuleToSlice_isEquivalence X (cbcOpenObject j inferInstance) A
@@ -136,8 +145,7 @@ section FiniteCoefficients
 
 variable {A : Type t} [CommRing A] (d : CompleteCoefficientDatum A) (n : ℕ)
 
-/-- The finite quotient of the lifted coefficient ring is the lift of the finite quotient.
-Source: Stacks Project, Tag 099L. -/
+/-- The finite quotient of the lifted coefficient ring is the lift of the finite quotient. -/
 def sfCbcFiniteRingEquiv :
     ULift.{t + 1, t} A ⧸ sfCbcModelIdeal d ^ (n + 1) ≃+* ULift.{t + 1, t} (A ⧸ d.ideal ^ (n + 1)) :=
   (Ideal.quotientEquiv (sfCbcModelIdeal d ^ (n + 1)) (d.ideal ^ (n + 1)) ULift.ringEquiv (by
@@ -152,14 +160,12 @@ theorem sfCbcFiniteRingEquiv_mk (a : ULift.{t + 1, t} A) :
     sfCbcFiniteRingEquiv d n (Ideal.Quotient.mk _ a) =
       ULift.up (Ideal.Quotient.mk (d.ideal ^ (n + 1)) a.down) := rfl
 
-/-- The quotient map of the actual constant coefficient rings on the pro-etale site.
-Source: Stacks Project, Tag 099L. -/
+/-- The quotient map of the actual constant coefficient rings on the pro-etale site. -/
 abbrev sfCbcFiniteMap (X : Scheme.{t}) :
     adicConstantRing X A ⟶ adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) :=
   adicConstantMap X (Ideal.Quotient.mk (d.ideal ^ (n + 1)))
 
-/-- The finite model coefficient sheaf maps isomorphically to the transported finite ring.
-Source: Stacks Project, Tags 00VC and 099L. -/
+/-- The finite model coefficient sheaf maps isomorphically to the transported finite ring. -/
 def sfCbcModelFiniteMap (X : Scheme.{t}) :
     ConstantCompletion.finite (proEtaleModelTopology X) (ULift.{t + 1, t} A)
         (sfCbcModelIdeal d) n ⟶
@@ -178,8 +184,7 @@ instance (X : Scheme.{t}) : IsIso (sfCbcModelFiniteMap d n X) := by
   change IsIso (_ ≫ (sfCbcModelRingMap_existsUnique X _).exists.choose)
   infer_instance
 
-/-- The finite model coefficients are compatible with the quotient maps.
-Source: Stacks Project, Tags 00VC and 099L. -/
+/-- The finite model coefficients are compatible with the quotient maps. -/
 theorem sfCbcModelFiniteMap_comm (X : Scheme.{t}) :
     ConstantCompletion.quotient (proEtaleModelTopology X) (ULift.{t + 1, t} A)
         (sfCbcModelIdeal d) n ≫ sfCbcModelFiniteMap d n X =
@@ -217,8 +222,7 @@ theorem sfCbcModelFiniteMap_comm (X : Scheme.{t}) :
   erw [hA, ← n3, ← Category.assoc]
 
 /-- Maps out of the restriction of a constant ring to a slice are determined by their
-values on constant sections.
-Source: Stacks Project, Sites, Tag 00XZ. -/
+values on constant sections. -/
 theorem sfCbcConstantOver_hom_ext (X : Scheme.{t}) (W : X.ProEt) (B : Type t) [CommRing B]
     {Z : Sheaf ((ProEt.topology X).over W) CommRingCat.{t + 1}}
     (f g : (adicConstantRing X B).over W ⟶ Z)
@@ -248,8 +252,7 @@ theorem sfCbcConstantOver_hom_ext (X : Scheme.{t}) (W : X.ProEt) (B : Type t) [C
   erw [hV]
   exact h V.unop
 
-/-- The two slice identifications of constant rings are compatible with the quotient maps.
-Source: Stacks Project, Sites, Tag 00XZ. -/
+/-- The two slice identifications of constant rings are compatible with the quotient maps. -/
 private theorem sfCbcConstantSliceIso_square (X : Scheme.{t}) (W : X.ProEt) :
     CbcOpenRingSquare W (sfCbcConstantSliceIso X W A)
       (sfCbcConstantSliceIso X W (A ⧸ d.ideal ^ (n + 1)))
@@ -275,8 +278,7 @@ private theorem sfCbcConstantSliceIso_square (X : Scheme.{t}) (W : X.ProEt) :
   erw [hA, ← n2]
   rfl
 
-/-- Transport of finite-coefficient module sheaves to the small model.
-Source: Stacks Project, Tags 00VC and 03D1. -/
+/-- Transport of finite-coefficient module sheaves to the small model. -/
 def sfCbcModelFiniteModules (X : Scheme.{t}) :
     SheafOfModules.{t + 1} (adicModuleRing X (A ⧸ d.ideal ^ (n + 1))) ⥤
       ConstantCompletion.Mod (ConstantCompletion.finite (proEtaleModelTopology X)
@@ -296,8 +298,7 @@ instance (X : Scheme.{t}) : (sfCbcModelFiniteModules d n X).IsEquivalence := by
   exact inferInstanceAs (proEtaleModuleToModel (adicModuleRing X (A ⧸ d.ideal ^ (n + 1))) ⋙
     ConstantCompletion.res (sfCbcModelFiniteMap d n X)).IsEquivalence
 
-/-- Model transport commutes with restriction along the finite quotient.
-Source: Stacks Project, Tags 03D1 and 03DA. -/
+/-- Model transport commutes with restriction along the finite quotient. -/
 def sfCbcModelModulesRestrictIso (X : Scheme.{t})
     (Q : SheafOfModules.{t + 1} (adicModuleRing X (A ⧸ d.ideal ^ (n + 1)))) :
     (sfCbcModelModules X A).obj (reductionRestrict X (sfCbcFiniteMap d n X) |>.obj Q) ≅
@@ -319,8 +320,7 @@ private theorem sfCbcConstantSliceMap_eq (X : Scheme.{t}) (W : X.ProEt) (B : Typ
 
 end FiniteCoefficients
 
-/-- If equivalences intertwine two functors objectwise, so do their inverses.
-Source: Stacks Project, Categories, Tag 001J. -/
+/-- If equivalences intertwine two functors objectwise, so do their inverses. -/
 theorem _root_.CategoryTheory.Functor.nonempty_inverse_obj_iso_of_iso
     {C₁ D₁ C₂ D₂ : Type*} [Category C₁] [Category D₁] [Category C₂] [Category D₂]
     (F₁ : C₁ ⥤ D₁) [F₁.IsEquivalence] (F₂ : C₂ ⥤ D₂) [F₂.IsEquivalence]
@@ -331,8 +331,7 @@ theorem _root_.CategoryTheory.Functor.nonempty_inverse_obj_iso_of_iso
       (r'.mapIso (F₂.asEquivalence.counitIso.app P).symm ≪≫ (σ _).symm) ≪≫
     (F₁.asEquivalence.unitIso.app _).symm⟩
 
-/-- Extension by zero on the small models preserves modules reduced at level `n`.
-Source: Stacks Project, Modules on Sites, Tags 03DA and 03DI. -/
+/-- Extension by zero on the small models preserves modules reduced at level `n`. -/
 theorem sfCbcModelExtension_isReducedModule {U X : Scheme.{t}} (j : U ⟶ X)
     [IsOpenImmersion j] {A : Type t} [CommRing A] (d : CompleteCoefficientDatum A) (n : ℕ)
     (P : ConstantCompletion.Mod (sfCbcModelRing U A))
@@ -364,8 +363,7 @@ theorem sfCbcModelExtension_isReducedModule {U X : Scheme.{t}} (j : U ⟶ X)
     (sfCbcModelModules X A).mapIso (b.symm ≪≫ (sfCbcOpenExtension j A).mapIso a.symm) ≪≫
     (sfCbcModelExtension j A).mapIso i
 
-/-- Restriction on the small models preserves modules reduced at level `n`.
-Source: Stacks Project, Modules on Sites, Tags 03DA and 03DJ. -/
+/-- Restriction on the small models preserves modules reduced at level `n`. -/
 theorem sfCbcModelRestriction_isReducedModule {U X : Scheme.{t}} (j : U ⟶ X)
     [IsOpenImmersion j] {A : Type t} [CommRing A] (d : CompleteCoefficientDatum A) (n : ℕ)
     (P : ConstantCompletion.Mod (sfCbcModelRing X A))

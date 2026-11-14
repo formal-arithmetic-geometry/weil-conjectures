@@ -10,7 +10,10 @@ import Mathlib.CategoryTheory.Adjunction.Additive
 
 /-! # The degree-one recurrence for the raw source-Hom mates
 
-Source: Stacks Project, Tags 08J9 and 08JC.
+## References
+
+* Stacks Project, Tags 08J9 and 08JC
+* Stacks Project, Tags 08J9 and 08JC, tensor-Hom adjunction and total-tensor signs
 -/
 
 @[expose] public noncomputable section
@@ -202,8 +205,7 @@ private theorem opposite_add_unop (X : Dᵒᵖ) (m n : ℤ) :
         𝟙 (X.unop⟦-(m + n)⟧) = _
   simp only [Category.id_comp, Category.comp_id]
 
-/-- Increasing the opposite source shift by one introduces the sign `(-1)^m`.
-Source: Stacks Project, Tags 08J9 and 08JC, tensor-Hom adjunction and total-tensor signs. -/
+/-- Increasing the opposite source shift by one introduces the sign `(-1)^m`. -/
 theorem siteHom_opposite_source_shift_successor (M : D) (m : ℤ) (X : Dᵒᵖ) :
     (siteHomOppositeSourceShift X.unop (m + 1)).hom.app M =
       m.negOnePow •

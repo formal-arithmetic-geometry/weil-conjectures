@@ -9,7 +9,12 @@ public import WeilConjectures.AlgebraicGeometry.ClopenData.ProEtaleClopenTotalTe
 import Mathlib.CategoryTheory.Adjunction.Limits
 
 /-! Split coproduct and adjunction data for finite clopen restriction.
-Source: Stacks Project, Tag 0GMW; Tag 0FPQ. -/
+
+## References
+
+* Stacks Project, Tag 0GMW
+* Tag 0FPQ
+-/
 
 @[expose] public noncomputable section
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall

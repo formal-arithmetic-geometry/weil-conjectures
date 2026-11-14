@@ -16,7 +16,10 @@ import WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal
 
 /-! # Monoidality of forgetting ambient scalars
 
-Source: Stacks Tags 03EK and 07A4, relative tensor and extension of scalars.
+## References
+
+* Stacks Tags 03EK and 07A4, relative tensor and extension of scalars
+* Stacks Tags 03EK and 07A4
 -/
 
 @[expose] public section
@@ -37,9 +40,7 @@ private theorem monoidalRightAdjointOfEquivalence
   exact ⟨Functor.Monoidal.transport (F.asEquivalence.toAdjunction.rightAdjointUniq a)⟩
 
 /-- Forgetting ambient scalars admits a strong monoidal structure for relative tensor.
-This is entirely underived and involves no choice of closed models.
-
-Source: Stacks Tags 03EK and 07A4. -/
+This is entirely underived and involves no choice of closed models. -/
 theorem nativeScalarForgetting_monoidal (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) :
     Nonempty (AdicSheaf.forgetAb l Y).Monoidal := by
   classical

@@ -9,7 +9,12 @@ public import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSe
 public import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionTensorTransportInternalData
 import WeilConjectures.AlgebraicGeometry.IntegralResidueDerivedMonoidal
 
-/-! The categorical paste for internal-left scalar tensor transport. -/
+/-! The categorical paste for internal-left scalar tensor transport.
+
+## References
+
+* Stacks Project, Tags 06YY and 07A4
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -75,7 +80,7 @@ set_option maxHeartbeats 900000 in
 The algebraic paste after the three normalization equations have been supplied.
 The proof is the categorical reassociation and cancellation in the proof of the
 internal-left transport lemma; the three displayed equations are its independent
-inputs.  Source: Stacks Project, Tags 06YY and 07A4
+inputs.
 -/
  theorem section_tensor_transport_internal_left_paste (T : Scheme.{u})
     (c : ScalarSectionData a T) (hc : ScalarSectionNormalized a T c)

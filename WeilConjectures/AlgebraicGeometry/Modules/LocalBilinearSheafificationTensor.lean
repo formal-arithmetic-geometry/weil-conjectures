@@ -13,7 +13,10 @@ import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationBilinea
 /-!
 # Extending a local bilinear presheaf pairing to sheaf tensors
 
-Source: Stacks Project, Tag 0GMW, and the open restriction adjunction.
+## References
+
+* Stacks Project, Tag 0GMW, and the open restriction adjunction
+* Stacks Project, Tag 0GMW
 -/
 
 @[expose] public section
@@ -138,8 +141,7 @@ private theorem restrictPushforward_bilinear_pairing {X : Scheme.{v}}
   exact hb W (V W) hW (j.image_preimage_le W) x y
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Local bilinear presheaf pairings into a sheaf extend through sheafification and tensor.
-Source: Stacks Project, Tag 0GMW. -/
+/-- Local bilinear presheaf pairings into a sheaf extend through sheafification and tensor. -/
 theorem local_bilinear_sheafification_tensor_extension {X : Scheme.{v}}
     (F G : _root_.PresheafOfModules.{v} X.ringCatSheaf.obj) (H : X.Modules)
     (U : X.Opens)

@@ -13,7 +13,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 /-!
 # Componentwise normalization
 
-Source: Stacks Project, Morphisms, Tag 0CDV.
+## References
+
+* Stacks Project, Morphisms, Tag 0CDV
 -/
 
 @[expose] public section
@@ -24,15 +26,13 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The reduced induced scheme on an irreducible component, defined by its vanishing ideal.
-Source: Stacks Project, Morphisms, Tag 0CDV. -/
+/-- The reduced induced scheme on an irreducible component, defined by its vanishing ideal. -/
 noncomputable def reducedNormalizationComponent (X : Scheme.{u})
     (Z : irreducibleComponents X) : Scheme.{u} :=
   (IdealSheafData.vanishingIdeal
     ⟨Z.1, isClosed_of_mem_irreducibleComponents _ Z.2⟩).subscheme
 
-/-- The reduced induced structure on an irreducible component is integral.
-Source: Stacks Project, Morphisms, Tag 0CDV. -/
+/-- The reduced induced structure on an irreducible component is integral. -/
 theorem isIntegral_reducedNormalizationComponent (X : Scheme.{u})
     (Z : irreducibleComponents X) : IsIntegral (X.reducedNormalizationComponent Z) := by
   let : IrreducibleSpace (X.reducedNormalizationComponent Z) := by
@@ -45,13 +45,11 @@ theorem isIntegral_reducedNormalizationComponent (X : Scheme.{u})
 
 attribute [instance] isIntegral_reducedNormalizationComponent
 
-/-- The disjoint union of the function-field normalizations of the reduced components.
-Source: Stacks Project, Morphisms, Tag 0CDV. -/
+/-- The disjoint union of the function-field normalizations of the reduced components. -/
 noncomputable def reducedNormalization (X : Scheme.{u}) : Scheme.{u} :=
   ∐ (fun Z : irreducibleComponents X ↦ (X.reducedNormalizationComponent Z).normalization)
 
-/-- The canonical map from the componentwise normalization.
-Source: Stacks Project, Morphisms, Tag 0CDV. -/
+/-- The canonical map from the componentwise normalization. -/
 noncomputable def fromReducedNormalization (X : Scheme.{u}) : X.reducedNormalization ⟶ X :=
   Sigma.desc (fun Z : irreducibleComponents X ↦
     (X.reducedNormalizationComponent Z).fromNormalization ≫

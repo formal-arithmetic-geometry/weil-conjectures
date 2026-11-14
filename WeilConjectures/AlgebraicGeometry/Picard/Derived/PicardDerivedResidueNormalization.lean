@@ -12,7 +12,12 @@ import WeilConjectures.AlgebraicGeometry.Picard.Residue.PicardResidueCoefficient
 
 /-! # Normalize derived direct images over an identified change of base
 
-Source: Stacks Project, Tags 0A1D, 08HY, 0D5S and 01F7
+## References
+
+* Stacks Project, Tags 0A1D, 08HY, 0D5S and 01F7
+* Stacks Project, Tag 0A1D, relatively flat derived base change
+* Tags 08HY and 0D5S, the base-change mate and pullback composition
+* Tag 01F7, functoriality under the residue-point and fibre isomorphisms
 -/
 
 @[expose] public section
@@ -22,10 +27,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- Proper flat base change over identified bases and one trivialization normalize
-coefficient arrows in the derived category, before homology or sections is applied.
-Source: Stacks Project, Tag 0A1D, relatively flat derived base change;
-Tags 08HY and 0D5S, the base-change mate and pullback composition;
-Tag 01F7, functoriality under the residue-point and fibre isomorphisms. -/
+coefficient arrows in the derived category, before homology or sections is applied. -/
 theorem picard_derived_residue_normalization
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

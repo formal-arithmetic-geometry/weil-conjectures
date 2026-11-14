@@ -47,9 +47,7 @@ attribute [local irreducible] derivedPullIso derivedPushHom derivedComapLowerSta
 /-- Extending coefficients commutes with the base-change operation on an arbitrary
 adjunct from the coefficient unit to the direct image of the shifted root line.
 There is no completed Chern class, normalization, trace equation, or prescribed
-second adjunct in this statement.
-
-Source: the canonical mate comparisons in the second rational projective-line triangle. -/
+second adjunct in this statement. -/
 theorem closure_exchange_naturality
     (l : ℕ) [Fact l.Prime] (E : PadicAlgCl.FiniteIntermediateField l)
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

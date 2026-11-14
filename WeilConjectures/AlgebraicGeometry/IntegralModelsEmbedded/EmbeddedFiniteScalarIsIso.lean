@@ -8,7 +8,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.IntegralModelsEmbedded.EmbeddedFiniteCoefficientRealization
 import all WeilConjectures.AlgebraicGeometry.FiniteDiscreteCondensedRing
 
-/-! # Finite constant scalar isomorphism -/
+/-! # Finite constant scalar isomorphism
+
+## References
+
+* Stacks Tag 093J and the finite-discrete condensed-ring comparison
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -25,9 +30,7 @@ attribute [local irreducible] upperStarFromPoint upperStarFromPointComp
   IntegralModelsStacks.smallMap
 
 attribute [-instance] integralModel_coefficientMonObj in
-/-- The specified finite constant-function scalar map is an isomorphism.
-
-Source: Stacks Tag 093J and the finite-discrete condensed-ring comparison. -/
+/-- The specified finite constant-function scalar map is an isomorphism. -/
 theorem embeddedFiniteScalarIsIso
     (X : Scheme.{u}) (A : Type) [CommRing A] [TopologicalSpace A]
     [IsTopologicalRing A] [Finite A] [DiscreteTopology A] :

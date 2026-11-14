@@ -11,7 +11,10 @@ import WeilConjectures.AlgebraicGeometry.Line.LineQuotientFractionKernelCategori
 
 /-! # LineQuotientFractionKernel
 
-Source: Stacks Project, Constructions, Tags 01OA and 01O4.
+## References
+
+* Stacks Project, Constructions, Tags 01OA and 01O4
+* Stacks Project, Constructions, Tag 01OA, inverse quotient construction
 -/
 
 @[expose] public section
@@ -25,8 +28,7 @@ namespace AlgebraicGeometry.ProjectiveBundleQuotientGeometry
 open Scheme.Modules
 
 /-- A fraction-chart morphism identifies the kernels of the original quotient and the
-pulled tautological quotient.
-Source: Stacks Project, Constructions, Tag 01OA, inverse quotient construction. -/
+pulled tautological quotient. -/
 theorem lineQuotient_fraction_kernel {S T : Scheme.{u}} (h : T ⟶ S)
     (E : S.Modules) [E.IsQuasicoherent] (D : TautologicalQuotient E)
     (L : T.Modules) [L.IsInvertible] (q : (tensorPullback h).obj E ⟶ L) [Epi q]

@@ -41,6 +41,18 @@ import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
 All categories are the published equivalent small models of the small pro-etale sites.
 The model enlarges only Hom universes. Letters carry scheme maps, and both functors
 are computed from those maps. Words are indexed composable chains.
+
+## References
+
+* Stacks 00VC, 099M
+* Stacks 00VC, 099N
+* Stacks 00VC
+* Stacks 00VC, 09A5
+* Stacks 00YV, 03D2, 099N
+* Stacks 099N
+* Stacks 0941, 099N
+* Stacks 099M
+* Stacks 0B56
 -/
 
 @[expose] public noncomputable section
@@ -51,63 +63,54 @@ universe t
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor Opposite
 namespace AlgebraicGeometry.Scheme
 
-/-- The published small model, retaining every pro-etale object.
-Source: Stacks 00VC, 099M. -/
+/-- The published small model, retaining every pro-etale object. -/
 def sfCbcSite (T : Scheme.{t}) : AdicSites.Site.{t + 1} where
   objects := proEtaleSiteModel T
   topology := proEtaleModelTopology T
 
 attribute [instance 2000] proEtaleModelBaseChange_isContinuous
 
-/-- Geometric inverse image on the equivalent small models, by sheafified Kan extension.
-Source: Stacks 00VC, 099N. -/
+/-- Geometric inverse image on the equivalent small models, by sheafified Kan extension. -/
 abbrev sfCbcModelInverse {U V : Scheme.{t}} (u : U ⟶ V) :=
   (proEtaleModelBaseChange u).sheafPullback (Type (t + 1))
     (proEtaleModelTopology V) (proEtaleModelTopology U)
 
-/-- Geometric direct image is precomposition with the transported base-change functor.
-Source: Stacks 00VC, 099N. -/
+/-- Geometric direct image is precomposition with the transported base-change functor. -/
 abbrev sfCbcModelDirect {U V : Scheme.{t}} (u : U ⟶ V) :=
   (proEtaleModelBaseChange u).sheafPushforwardContinuous (Type (t + 1))
     (proEtaleModelTopology V) (proEtaleModelTopology U)
 
-/-- The canonical geometric adjunction on the small models.
-Source: Stacks 00VC, 099N. -/
+/-- The canonical geometric adjunction on the small models. -/
 def sfCbcModelAdjunction {U V : Scheme.{t}} (u : U ⟶ V) :
     sfCbcModelInverse u ⊣ sfCbcModelDirect u :=
   Functor.sheafAdjunctionContinuous (proEtaleModelBaseChange u) (Type (t + 1))
     (proEtaleModelTopology V) (proEtaleModelTopology U)
 
-/-- The downward site equivalence preserves finite limits.
-Source: Stacks 00VC. -/
+/-- The downward site equivalence preserves finite limits. -/
 instance sfCbcModelDownLimits (T : Scheme.{t}) :
     PreservesFiniteLimits (AsSmall.down : proEtaleSiteModel T ⥤ T.ProEt) :=
   inferInstanceAs (PreservesFiniteLimits (AsSmall.equiv.{t, t + 1, t + 1}
     (C := T.ProEt)).inverse)
 
-/-- The upward site equivalence preserves finite limits.
-Source: Stacks 00VC. -/
+/-- The upward site equivalence preserves finite limits. -/
 instance sfCbcModelUpLimits (T : Scheme.{t}) :
     PreservesFiniteLimits (AsSmall.up : T.ProEt ⥤ proEtaleSiteModel T) :=
   inferInstanceAs (PreservesFiniteLimits (AsSmall.equiv.{t, t + 1, t + 1}
     (C := T.ProEt)).functor)
 
-/-- Transported base change preserves finite limits through the two site equivalences.
-Source: Stacks 00VC, 09A5. -/
+/-- Transported base change preserves finite limits through the two site equivalences. -/
 instance sfCbcModelBaseChangeFiniteLimits {U V : Scheme.{t}} (u : U ⟶ V) :
     PreservesFiniteLimits (proEtaleModelBaseChange u) :=
   inferInstanceAs (PreservesFiniteLimits
     ((AsSmall.down : proEtaleSiteModel V ⥤ V.ProEt) ⋙ proEtaleBaseChange u ⋙ AsSmall.up))
 
-/-- Finite limits on the site model are transported from the original site.
-Source: Stacks 00VC. -/
+/-- Finite limits on the site model are transported from the original site. -/
 instance sfCbcModelHasFiniteLimits (T : Scheme.{t}) :
     HasFiniteLimits (proEtaleSiteModel T) :=
   hasFiniteLimits_of_hasLimitsLimits_of_createsFiniteLimits
     (AsSmall.equiv.{t, t + 1, t + 1} (C := T.ProEt)).inverse
 
-/-- Geometric inverse image is left exact on the small models.
-Source: Stacks 00VC, 09A5. -/
+/-- Geometric inverse image is left exact on the small models. -/
 instance sfCbcModelInverseFiniteLimits {U V : Scheme.{t}} (u : U ⟶ V) :
     PreservesFiniteLimits (sfCbcModelInverse u) :=
   letI := flat_of_preservesFiniteLimits (proEtaleModelBaseChange u)
@@ -116,8 +119,7 @@ instance sfCbcModelInverseFiniteLimits {U V : Scheme.{t}} (u : U ⟶ V) :
     (proEtaleModelTopology V) (proEtaleModelTopology U)
 
 /-- The actual geometric morphism, with the existing algebraic lift of inverse image.
-Its module functors are the constant-ring inverse image and its representing right adjoint.
-Source: Stacks 00YV, 03D2, 099N. -/
+Its module functors are the constant-ring inverse image and its representing right adjoint. -/
 def sfCbcMorphism {U V : Scheme.{t}} (u : U ⟶ V) :
     AdicSites.Morphism (sfCbcSite V) (sfCbcSite U) :=
   letI := sfCbcModelInverseFiniteLimits u
@@ -142,8 +144,7 @@ inductive SfCbcWord : Scheme.{t} → Scheme.{t} → Type (t + 1) where
 
 variable {A : Type t} [CommRing A] (d : CompleteCoefficientDatum A)
 
-/-- The completed functor of a letter is computed from its map.
-Source: Stacks 099N. -/
+/-- The completed functor of a letter is computed from its map. -/
 def SfCbcLetter.complete {S T : Scheme.{t}} (F : SfCbcLetter S T) :
     (sfCbcSite S).derived (ULift.{t + 1, t} A) ⥤
       (sfCbcSite T).derived (ULift.{t + 1, t} A) :=
@@ -155,8 +156,7 @@ def SfCbcLetter.complete {S T : Scheme.{t}} (F : SfCbcLetter S T) :
     sfCbcModelDerivedExtension j A ⋙ (sfCbcSite T).completion _ (sfCbcModelIdeal d)
 
 /-- The strict functor is termwise inverse image, derived termwise direct image,
-or the published exact termwise extension, according to the letter.
-Source: Stacks 0941, 099N. -/
+or the published exact termwise extension, according to the letter. -/
 def SfCbcLetter.strict {S T : Scheme.{t}} (F : SfCbcLetter S T) :
     (sfCbcSite S).towerDerived (ULift.{t + 1, t} A) ⥤
       (sfCbcSite T).towerDerived (ULift.{t + 1, t} A) :=
@@ -183,8 +183,7 @@ def SfCbcWord.strict {S T : Scheme.{t}} (W : SfCbcWord S T) :
   | .nil _ => 𝟭 _
   | .snoc W F => strict W ⋙ F.strict (A := A)
 
-/-- The specified reduced completion unit, before any tower evaluation.
-Source: Stacks 099M. -/
+/-- The specified reduced completion unit, before any tower evaluation. -/
 def sfCbcModelReducedUnit (T : Scheme.{t}) :
     (sfCbcSite T).reduction _ (sfCbcModelIdeal d) ⟶
       (sfCbcSite T).completion _ (sfCbcModelIdeal d) ⋙
@@ -193,13 +192,11 @@ def sfCbcModelReducedUnit (T : Scheme.{t}) :
     ((sfCbcSite T).reduction _ (sfCbcModelIdeal d))
 
 /-- The proof needed to take the unique inverse of the specified reduced unit.
-It is a conclusion of the reconstruction theorem, never an assumption of that theorem.
-Source: Stacks 099M. -/
+It is a conclusion of the reconstruction theorem, never an assumption of that theorem. -/
 def SfCbcReducedUnitsInvertible : Prop := ∀ T : Scheme.{t}, IsIso (sfCbcModelReducedUnit d T)
 
 /-- The counit-tensor projection map as one natural transformation of strict towers.
-Its component is exactly AdicSites.Morphism.towerProjection.
-Source: Stacks 0B56. -/
+Its component is exactly AdicSites.Morphism.towerProjection. -/
 def sfCbcDirectQ {U V : Scheme.{t}} (u : U ⟶ V) :
     (sfCbcMorphism u).push (ULift.{t + 1, t} A) ⋙
         (sfCbcSite V).reduction _ (sfCbcModelIdeal d) ⟶

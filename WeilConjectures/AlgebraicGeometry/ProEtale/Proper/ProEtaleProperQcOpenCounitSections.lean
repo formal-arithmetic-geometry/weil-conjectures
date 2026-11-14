@@ -15,7 +15,9 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.F
 /-!
 # Lifting proper-support sections over a quasi-compact open of an affine base
 
-Source: Stacks Project, Tags 096V, 09AG and 09AH.
+## References
+
+* Stacks Project, Tags 096V, 09AG and 09AH
 -/
 
 @[expose] public section
@@ -31,9 +33,7 @@ namespace AlgebraicGeometry.Scheme
 variable (A : Type u) [CommRing A] [Finite A]
 
 /-- For a quasi-compact open in an affine base, every global section of the proper
-pushforward of an extension by zero lifts through the open counit.
-
-Source: Stacks Project, Tags 096V, 09AG and 09AH. -/
+pushforward of an extension by zero lifts through the open counit. -/
 theorem sfProperQcOpenCounit_sections_surjective {V T : Scheme.{u}} [IsAffine T]
     (p : V ⟶ T) [IsProper p] (O : T.Opens) (hO : IsCompact (O : Set T))
     (M : proEtaleRingModules (pullback p O.ι)

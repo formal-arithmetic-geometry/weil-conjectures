@@ -47,12 +47,15 @@ import Mathlib.CategoryTheory.Functor.TypeValuedFlat
 /-!
 # Geometric stalks commute with pro-etale inverse image
 
-Source: Stacks Project, Tags 05V1 and 0F4F; pro-etale geometric points and neighbourhoods, Tags
-0F6B, 0F6C and 0993.
-
 The germ equation characterizes the canonical comparison: the germ of the adjunction
 unit at the pulled-back pointed neighbourhood maps to the original germ. Naturality
 and reflection of equality at image geometric points are stated in both coefficient cases.
+
+## References
+
+* Stacks Project, Tags 05V1 and 0F4F
+* pro-etale geometric points and neighbourhoods, Tags 0F6B, 0F6C and 0993
+* Stacks Project, Tags 05V1, 0F4F, 0F6B, 0F6C and 0993
 -/
 
 @[expose] public section
@@ -279,7 +282,6 @@ The first clause fixes the canonical comparison by its value on unit germs; the
 second is naturality in the sheaf; the third reflects equality of inverse-image maps
 at the image geometric point. The comparison is additive since it is an isomorphism
 in `AddCommGrpCat`.
-Source: Stacks Project, Tags 05V1, 0F4F, 0F6B, 0F6C and 0993.
 -/
 theorem proEtaleInverseImage_abelianStalk
     {X Y : Scheme.{u}} (f : X ⟶ Y)

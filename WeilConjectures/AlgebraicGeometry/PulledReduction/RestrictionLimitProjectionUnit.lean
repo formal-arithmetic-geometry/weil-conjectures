@@ -13,7 +13,9 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChan
 
 /-! # Restriction of derived limits and constant units
 
-Source: Stacks 06YY, 07A4, and 099N(5).
+## References
+
+* Stacks 06YY, 07A4, and 099N(5)
 -/
 
 @[expose] public noncomputable section

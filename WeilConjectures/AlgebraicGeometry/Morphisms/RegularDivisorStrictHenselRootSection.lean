@@ -27,7 +27,10 @@ import WeilConjectures.Mathlib.RingTheory.Henselian
 /-!
 # A section on a punctured root cover over the strict henselization
 
-Source: Stacks Project, Tags 09EB, 0BRM, 0EYE and 0EYG, strictly henselian case.
+## References
+
+* Stacks Project, Tags 09EB, 0BRM, 0EYE and 0EYG, strictly henselian case
+* Stacks Project, Tags 09EB, 0BRM, 0EYE and 0EYG, proof through the finite etale extension C
 -/
 
 @[expose] public section
@@ -36,10 +39,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- Adjoining the group-order root over the strict henselization gives a section.
-
-Source: Stacks Project, Tags 09EB, 0BRM, 0EYE and 0EYG, proof through the finite
-etale extension C. -/
+/-- Adjoining the group-order root over the strict henselization gives a section. -/
 theorem GaloisCover.strict_hensel_root_section
     {L U : Scheme.{u}} (i : U ⟶ L)
     (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)

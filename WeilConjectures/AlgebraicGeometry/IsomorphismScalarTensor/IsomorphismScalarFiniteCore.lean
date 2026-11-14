@@ -17,7 +17,9 @@ finite comparison, quotient maps, and transition maps together with their local
 formulas. The two categorical commutative squares are isolated in
 `IsomorphismScalarFiniteSquares`.
 
-Source: Stacks Project, Tags 03EK and 03EL.
+## References
+
+* Stacks Project, Tags 03EK and 03EL
 -/
 
 @[expose] public noncomputable section

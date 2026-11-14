@@ -19,13 +19,16 @@ public import WeilConjectures.AlgebraicGeometry.OrdinarySupportedKummerBoundary
 /-!
 # Relative supported Cartier Kummer boundary
 
-Source: Stacks Project, Tags 03PL and 0A45.
-
 ## Main definitions
 
 * `supportedDivisorSection`: the section dual to the ideal inclusion.
 * `SupportedKummerBoundary`: the normalized relative torsor-extension boundary.
 * `supportedConstantExchange`: the canonical closed exchange on constants.
+
+## References
+
+* Stacks Project, Tags 03PL and 0A45
+* Stacks 0A45, base change
 -/
 
 @[expose] public noncomputable section
@@ -39,8 +42,7 @@ open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
 
-/-- The canonical closed-immersion exchange on the constant sheaf.
-Source: Stacks 0A45, base change. -/
+/-- The canonical closed-immersion exchange on the constant sheaf. -/
 def supportedConstantExchange (A : Type (u + 1)) [CommRing A]
     {D D' T T' : Scheme.{u}} (i : D ⟶ T) (i' : D' ⟶ T')
     (v : T' ⟶ T) (w : D' ⟶ D) (sq : CommSq w i' i v) :

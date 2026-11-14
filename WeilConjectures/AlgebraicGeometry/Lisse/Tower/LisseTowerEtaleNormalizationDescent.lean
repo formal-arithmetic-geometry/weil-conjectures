@@ -13,7 +13,11 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Comparison
 
 /-! # Descending and realizing normalization arrows after descent of the levels
 
-Source: Stacks Tags 06YY, 099Z, 09B1 and 03DA.
+## References
+
+* Stacks Tags 06YY, 099Z, 09B1 and 03DA
+* Stacks Project, Tags 099Z and 09B1 (bounded-below full faithfulness), 06YY (scalar extension),
+  03DA and 0H7J (restriction and inverse image)
 -/
 
 @[expose] public noncomputable section
@@ -49,10 +53,7 @@ private theorem etaleRealization_map_bijective
 
 /-- Normalization arrows descend once the etale levels and their comparison are given.
 The statement neither constructs etale levels nor asks for finite locally constant
-cohomology, algebraic local markings, or inhabited Isom stalks.
-
-Source: Stacks Project, Tags 099Z and 09B1 (bounded-below full faithfulness),
-06YY (scalar extension), 03DA and 0H7J (restriction and inverse image). -/
+cohomology, algebraic local markings, or inhabited Isom stalks. -/
 theorem lisse_tower_etale_normalization_descent
     (X Y : Scheme.{u}) (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (M : AdicTower X d)

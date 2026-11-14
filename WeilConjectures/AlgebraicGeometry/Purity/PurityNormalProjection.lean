@@ -13,7 +13,11 @@ import WeilConjectures.AlgebraicGeometry.NormalBundle
 
 The cone map factors through the closed immersion, independently of its
 comparison with the relative spectrum of the conormal graded algebra.
-Source: Stacks Tags 062Z and 0630.
+
+## References
+
+* Stacks Tags 062Z and 0630
+* Stacks Tag 0630
 -/
 
 @[expose] public section
@@ -23,8 +27,7 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry Opposite
 open AlgebraicGeometry.Scheme.AffineZariskiSite
 namespace AlgebraicGeometry.Scheme.Hom
 
-/-- The actual cone-to-X map factors through the closed immersion.
-Source: Stacks Tags 062Z and 0630. -/
+/-- The actual cone-to-X map factors through the closed immersion. -/
 theorem purityNormalCone_kernel {Z X : Scheme.{u}} (i : Z ⟶ X) :
     i.ker ≤ (relativeGluingData i.ker.coequifibered_toNormalConePresheaf).toBase.ker := by
   have h := i.ker.normalConeToQuotientSpec.le_ker_comp
@@ -33,8 +36,7 @@ theorem purityNormalCone_kernel {Z X : Scheme.{u}} (i : Z ⟶ X) :
   exact h
 
 /-- The projection of the actual normal cone to Z, using the unique closed-immersion
-factorization; its source is the extended-Rees quotient by t.
-Source: Stacks Tag 0630. -/
+factorization; its source is the extended-Rees quotient by t. -/
 noncomputable def purityNormalProjection {Z X : Scheme.{u}} (i : Z ⟶ X)
     [IsClosedImmersion i] : i.ker.normalCone ⟶ Z :=
   IsClosedImmersion.lift i

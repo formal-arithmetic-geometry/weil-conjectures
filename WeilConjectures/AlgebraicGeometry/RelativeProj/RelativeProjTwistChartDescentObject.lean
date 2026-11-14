@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.TraceFormula.DirectedTensorMatchingSect
 
 /-! # Object part of relative Proj twist descent
 
-Source: Stacks Project, Constructions, Tag 01NR.
+## References
+
+* Stacks Project, Constructions, Tag 01NR
 -/
 
 @[expose] public section
@@ -144,9 +146,7 @@ private theorem restriction_comparison_comp {U V W : S.affineOpens}
       Proj.awayι_comp_map ((A.res h).comp (A.res k)) hirr hn a ha
   · simpa only [A.res_comp h k] using hζ
 
-/-- The affine degree-one twists admit a descended module and local chart isomorphisms.
-
-Source: Stacks Project, Constructions, Tag 01NR. -/
+/-- The affine degree-one twists admit a descended module and local chart isomorphisms. -/
 theorem exists_twist_chart_descent_object :
     ∃ (L : A.relProj.Modules),
       ∃ (chart : ∀ U : S.affineOpens,

@@ -21,7 +21,10 @@ import WeilConjectures.Mathlib.CategoryTheory.Functor.ReflectsIso.Exact
 /-!
 # Closed localization for arbitrary ring-sheaf module objects
 
-Source: Stacks Tags 09AA, 09BM and 09AH.
+## References
+
+* Stacks Tags 09AA, 09BM and 09AH
+* Stacks Tags 09AA, 09BM, 09AG, 09AH and 03DA
 -/
 
 @[expose] public noncomputable section
@@ -111,8 +114,7 @@ private theorem modIsoDetect
     (modZeroDetect i j hU B _ (hcoker i) (hcoker j))
   exact isIso_of_mono_of_epi φ
 
-/-- Closed localization for arbitrary ring-sheaf module objects.
-Source: Stacks Tags 09AA, 09BM, 09AG, 09AH and 03DA. -/
+/-- Closed localization for arbitrary ring-sheaf module objects. -/
 theorem ringSheaf_closed_localization
     {X Z U : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j]

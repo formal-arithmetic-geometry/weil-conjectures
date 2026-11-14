@@ -10,7 +10,11 @@ import WeilConjectures.Algebra.Homology.InverseImageScalarRestriction.InverseIma
 
 /-! # Direct image and coefficient restrictions
 
-Source: Zheng Construction 4.1; Stacks 03D2 and 03DA.
+## References
+
+* Zheng Construction 4.1
+* Stacks 03D2 and 03DA
+* Stacks 03D7
 -/
 
 @[expose] public noncomputable section
@@ -132,8 +136,7 @@ private theorem directRestrictionComparison
     (a m) (a n) (I m).moduleUnderlying (I n).moduleUnderlying (eV m) (eV n)
     ρ hρ (ha m) (ha n)
 
-/-- Normalized direct-image comparisons for every coefficient restriction.
-Source: Zheng Construction 4.1; Stacks 03D7. -/
+/-- Normalized direct-image comparisons for every coefficient restriction. -/
 structure DirectRestrictions
     (uPush : Sheaf J' (Type (max c v r)) ⥤ Sheaf J (Type (max c v r)))
     (eV : ∀ n, V n ⋙ underlying.{c, v, r} J (B n) ≅
@@ -146,8 +149,7 @@ structure DirectRestrictions
 
 section DirectRestrictionConstruction
 
-/-- The level right adjoints commute with compatible coefficient restrictions.
-Source: Zheng Construction 4.1; Stacks 03D7. -/
+/-- The level right adjoints commute with compatible coefficient restrictions. -/
 theorem directRestrictions_exists [PreservesFiniteLimits uInv]
     (hI : ∀ n,
       uInv.map ((sheafCompose J (CategoryTheory.forget CommRingCat.{max c v r})).map (τ n)) ≫

@@ -15,7 +15,11 @@ import Mathlib.RingTheory.PicardGroup
 
 /-! # Frames for invertible modules on the standard projective-line charts
 
-Source: Stacks Project, Tag 0BXJ, proof of divisors-lemma-Pic-projective-space-UFD.
+## References
+
+* Stacks Project, Tag 0BXJ, proof of divisors-lemma-Pic-projective-space-UFD
+* Stacks Project, Tag 0BXJ, proof of divisors-lemma-Pic-projective-space-UFD, first paragraph,
+  specialized to the projective line over a field
 -/
 
 @[expose] public section
@@ -30,10 +34,7 @@ namespace AlgebraicGeometry.ProjectiveLine
 
 open ProjectiveSpace
 
-/-- An invertible module has a free generator on each of the two standard charts.
-
-Source: Stacks Project, Tag 0BXJ, proof of divisors-lemma-Pic-projective-space-UFD,
-first paragraph, specialized to the projective line over a field. -/
+/-- An invertible module has a free generator on each of the two standard charts. -/
 theorem exists_standardChart_frames (k : Type u) [Field k]
     (L : (ProjectiveLine (Spec (.of k))).Modules) [Scheme.Modules.IsInvertible L]
     (i : ULift.{u} (Fin 2)) :

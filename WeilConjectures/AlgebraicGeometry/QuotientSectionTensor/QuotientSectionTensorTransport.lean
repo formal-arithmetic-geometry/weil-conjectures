@@ -10,7 +10,12 @@ import WeilConjectures.AlgebraicGeometry.IntegralResidueDerivedMonoidal
 import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionTensorTransportNormalized
 import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionTensorTransportCondition
 
-/-! # A step of the normalized quotient section comparison -/
+/-! # A step of the normalized quotient section comparison
+
+## References
+
+* Stacks 03EK, 03EL, 07A4, 06YS and 0G7D
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -50,8 +55,7 @@ open ModuleRingedComparison
 variable [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ T)]
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ' T)]
 
-/-- Tensor balancing on sections realizes every normalized internal scalar tensorator.
-Source: Stacks 03EK, 03EL, 07A4, 06YS and 0G7D. -/
+/-- Tensor balancing on sections realizes every normalized internal scalar tensorator. -/
 theorem section_tensor_transport (T : Scheme.{u}) (c : ScalarSectionData a T)
     (hc : ScalarSectionNormalized a T c) (b : TensorIso a T)
     (hb : TensorNormalized a T b) :

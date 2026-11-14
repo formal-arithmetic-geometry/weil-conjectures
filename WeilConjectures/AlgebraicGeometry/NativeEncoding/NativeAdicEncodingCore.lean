@@ -158,7 +158,17 @@ import WeilConjectures.CategoryTheory.InverseMateEquivalence
 
 The unchanged native declarations formerly in NativeEncodingDerivedOperations are
 separated from its Weil-sheaf imports to make them available before native finiteness.
-Source: Bhatt--Scholze, Definitions 6.8.1 and 6.8.3.
+
+## References
+
+* Bhatt--Scholze, Definitions 6.8.1 and 6.8.3
+* Bhatt--Scholze 6.8.1--6.8.3
+* Stacks 03EK
+* Stacks 015F
+* Stacks 015F and 070I
+* Stacks 03D6--03D7
+* Stacks 03D7
+* Stacks 070I and 070Y
 -/
 
 @[expose] public noncomputable section
@@ -170,16 +180,14 @@ attribute [local instance] Sheaf.monoidalCategory Sheaf.braidedCategory
 open scoped CategoryTheory.Obj TensorProduct
 namespace AlgebraicGeometry.ProEtale.NativeEncoding
 
-/-- The normalized coefficient isomorphism used in the ring-realization theorem.
-Source: Bhatt--Scholze 6.8.1--6.8.3; LocallyFiniteCoefficientRingRealization.lean. -/
+/-- The normalized coefficient isomorphism used in the ring-realization theorem. -/
 abbrev coefficientIso (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) :
     condensedRingObj (Profinite.padicAlgClRingObj l) T ≅
       (weilCoefficientsForgetAb l T).obj (adicConstantSheaf l T) :=
   (Mon.forget _).mapIso (CondensedQbarCoefficientRealization.globalCoefficientIso l T) ≪≫
     padicAlgClSheafIsoAdicConstantSheaf T l
 
-/-- The same ring isomorphism respects multiplication and the unit.
-Source: Bhatt--Scholze 6.8.1--6.8.3; the two existing ring comparisons. -/
+/-- The same ring isomorphism respects multiplication and the unit. -/
 @[instance] theorem coefficientIsoMon (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) :
     IsMonHom (coefficientIso l T).hom := by
   change IsMonHom
@@ -188,15 +196,13 @@ Source: Bhatt--Scholze 6.8.1--6.8.3; the two existing ring comparisons. -/
   infer_instance
 
 /-- Forget vector scalars in the native action and restrict it along theta.
-The lax tensorator imposes precisely the original balanced vector-space action.
-Source: Bhatt--Scholze 6.8.1--6.8.3; native AdicSheaf.forgetAb. -/
+The lax tensorator imposes precisely the original balanced vector-space action. -/
 def encoding (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) :
     AdicSheaf l T ⥤ Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj l) T) :=
   AdicSheaf.forgetAb l T ⋙ Mod.comap (coefficientIso l T).hom
 
-/-- The encoding is additive, with its existing action on underlying morphisms.
-Source: Bhatt--Scholze 6.8.1--6.8.3; native lax-monoidal scalar forgetting. -/
+/-- The encoding is additive, with its existing action on underlying morphisms. -/
 @[instance] theorem encodingAdditive (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) :
     (encoding l T).Additive := by
   constructor
@@ -206,8 +212,7 @@ Source: Bhatt--Scholze 6.8.1--6.8.3; native lax-monoidal scalar forgetting. -/
   ext V m
   rfl
 
-/-- The specified encoding is an equivalence, rather than an arbitrary equivalence of hearts.
-Source: Bhatt--Scholze 6.8.1--6.8.3; Stacks 03EK. -/
+/-- The specified encoding is an equivalence, rather than an arbitrary equivalence of hearts. -/
 @[instance] theorem encoding_isEquivalence (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) :
     (encoding l T).IsEquivalence := by
   have : (AdicSheaf.forgetAb l T).IsEquivalence :=
@@ -217,18 +222,16 @@ Source: Bhatt--Scholze 6.8.1--6.8.3; Stacks 03EK. -/
   change (AdicSheaf.forgetAb l T ⋙ Mod.comap (coefficientIso l T).hom).IsEquivalence
   infer_instance
 
-/-- The equivalence with the specified forward encoding; its inverse is determined by it.
-Source: Bhatt--Scholze 6.8.1--6.8.3; Stacks 03EK. -/
+/-- The equivalence with the specified forward encoding; its inverse is determined by it. -/
 def equivalence (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) :=
   (encoding l T).asEquivalence
 
-/-- The localization of this exact encoding on ordinary unbounded derived categories.
-Source: Stacks 015F; native right-derived exact-functor interface. -/
+/-- The localization of this exact encoding on ordinary unbounded derived categories. -/
 abbrev derivedEncoding (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) :=
   (encoding l T).mapDerivedCategory
 
 /-- Exactness and the unbounded derived equivalence, including preservation and reflection
-of K-injectivity. Source: Stacks 015F and 070I. -/
+of K-injectivity. -/
 theorem encoding_exact_derived (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) :
     PreservesFiniteLimits (encoding l T) ∧ PreservesFiniteColimits (encoding l T) ∧
       (derivedEncoding l T).IsEquivalence ∧
@@ -459,8 +462,7 @@ private theorem inverseMate_mate
   exact congrArg (fun s : TwoSquare R₁ H G R₂ ↦ s)
     ((mateEquiv adj₁ adj₂).apply_symm_apply β)
 
-/-- The actual underived direct image and ringed module pullback are identified.
-Source: Stacks 03D6--03D7. -/
+/-- The actual underived direct image and ringed module pullback are identified. -/
 theorem encoding_ordinary_operations (l : ℕ) [Fact l.Prime]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃ p : adicLowerStar l f ⋙ encoding l Y ≅
@@ -495,19 +497,16 @@ theorem encoding_ordinary_operations (l : ℕ) [Fact l.Prime]
       (CondensedRing.upperStarLowerStarAdjunction (Profinite.padicAlgClRingObj l) f)
       (TwoSquare.mk _ _ _ _ p.hom)
 
-/-- The identity-on-sections direct-image comparison. Its normalization determines it uniquely.
-Source: Stacks 03D6--03D7; native Module.lean. -/
+/-- The identity-on-sections direct-image comparison. Its normalization determines it uniquely. -/
 def pushComparison (l : ℕ) [Fact l.Prime] {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   Classical.choose (encoding_ordinary_operations l f)
 
-/-- The ordinary pullback comparison, uniquely fixed as the mate of pushComparison.
-Source: Stacks 03D7; native module adjunction. -/
+/-- The ordinary pullback comparison, uniquely fixed as the mate of pushComparison. -/
 def pullComparison (l : ℕ) [Fact l.Prime] {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   Classical.choose (Classical.choose_spec (encoding_ordinary_operations l f)).2
 
 /-- Canonical right derivation of the normalized ordinary direct-image comparison.
-All factors are universal derived comparisons, computed using the same K-injectives.
-Source: Stacks 070I and 070Y. -/
+All factors are universal derived comparisons, computed using the same K-injectives. -/
 def derivedPushComparison (l : ℕ) [Fact l.Prime] {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (adicLowerStar l f).rightDerivedFunctor ⋙ derivedEncoding l Y ≅
       derivedEncoding l X ⋙ CondensedRing.moduleObjectDerivedPushforward

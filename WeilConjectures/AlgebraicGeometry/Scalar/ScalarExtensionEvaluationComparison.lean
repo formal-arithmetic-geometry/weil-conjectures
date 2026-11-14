@@ -109,8 +109,11 @@ import WeilConjectures.AlgebraicGeometry.Scalar.ScalarExtensionEvaluationPreshea
 
 /-! # Tensor comparison for evaluated scalar extension
 
-Source: Stacks Project, Modules on Sites, Section 03EK and Tag 03CY,
-applied to the vertical sequence topology.
+## References
+
+* Stacks Project, Modules on Sites, Section 03EK and Tag 03CY, applied to the vertical sequence
+  topology
+* Stacks Project, Section 03EK and Tag 03CY, restricted to a vertical slice
 -/
 
 @[expose] public noncomputable section
@@ -205,8 +208,7 @@ end Construction
 
 attribute [local irreducible] evaluationExtensionIso
 
-/-- Evaluation commutes with ordinary scalar extension, with its section generator fixed.
-Source: Stacks Project, Section 03EK and Tag 03CY, restricted to a vertical slice. -/
+/-- Evaluation commutes with ordinary scalar extension, with its section generator fixed. -/
 theorem scalarExtension_evaluation_comparison
     {C : Type c} [Category.{v} C] [EssentiallySmall.{max c v r} C]
     (J : GrothendieckTopology C)

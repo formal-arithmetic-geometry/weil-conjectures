@@ -11,7 +11,11 @@ import WeilConjectures.AlgebraicGeometry.PurityTransport.TransportRootPullStep
 
 /-! # The finite root tower under inverse image
 
-Source: Bhatt--Scholze, Section 6.8.
+## References
+
+* Bhatt--Scholze, Section 6.8
+* Bhatt--Scholze, Section 6.8, finite roots and their power transition maps
+* Stacks 03PK, pullback of roots of unity
 -/
 
 @[expose] public section
@@ -269,10 +273,7 @@ private def firstProofDifference (a b : Lean.Expr) (fuel : Nat) :
       firstProofDifference v w k
     | _, _ => return none
 
-/-- The finite root pullbacks form an isomorphism of the actual integral root diagrams.
-
-Source: Bhatt--Scholze, Section 6.8, finite roots and their power transition maps;
-Stacks 03PK, pullback of roots of unity. -/
+/-- The finite root pullbacks form an isomorphism of the actual integral root diagrams. -/
 theorem normalizedRootTower (ell : ℕ) [Fact ell.Prime]
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     [∀ x : X, Invertible (ell : X.residueField x)]

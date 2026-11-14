@@ -18,7 +18,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.RegularCodimensionTwoFiniteEt
 /-!
 # Flatness at a regular codimension-two boundary point
 
-Source: Stacks Project, Tags 0BMA, 0EY7 and 0EY6(2).
+## References
+
+* Stacks Project, Tags 0BMA, 0EY7 and 0EY6(2)
+* Stacks Project, Tag 0BMA (local purity), Tag 0EY7 (Noetherian extension), and Tag 0EY6(2)
+  (uniqueness of the depth-two extension)
 -/
 
 @[expose] public section
@@ -28,10 +32,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- A supplied finite depth-two extension has a flat stalk map at a missing point
-when all missing target points are regular of local dimension at least two.
-
-Source: Stacks Project, Tag 0BMA (local purity), Tag 0EY7 (Noetherian
-extension), and Tag 0EY6(2) (uniqueness of the depth-two extension). -/
+when all missing target points are regular of local dimension at least two. -/
 theorem flat_stalk_of_regular_codimension_two_depth_two_extension
     {L E : Scheme.{u}} [IsLocallyNoetherian L] (V : L.Opens)
     (hboundary : ∀ y : L, y ∉ V → IsRegularLocalRing (L.presheaf.stalk y) ∧

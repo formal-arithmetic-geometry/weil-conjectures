@@ -15,7 +15,10 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.Bounded.ProEtaleBoundedBel
 
 /-! # Integral direct image and uniformly bounded-below coproducts
 
-Source: Bhatt--Scholze, Lemma 6.3.14; Stacks Tag 09A3.
+## References
+
+* Bhatt--Scholze, Lemma 6.3.14
+* Stacks Tag 09A3
 -/
 
 @[expose] public noncomputable section
@@ -72,8 +75,7 @@ private theorem integral_higherDirectImage_preservesCoproducts
   exact preservesColimit_of_isIso_post H K
 
 /-- Direct image preserves uniformly bounded-below coproducts for arbitrary
-identified inverse-image coefficient rings, including integral coefficients.
-Source: Bhatt--Scholze, Lemma 6.3.14; Stacks Tag 09A3. -/
+identified inverse-image coefficient rings, including integral coefficients. -/
 theorem proEtaleIntegralDirectImage_preservesCoproduct
     {T U : Scheme.{u}} (h : T ⟶ U) [QuasiCompact h] [QuasiSeparated h]
     (R : Sheaf (ProEt.topology U) CommRingCat.{u + 1})

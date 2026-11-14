@@ -26,6 +26,10 @@ import Mathlib.CategoryTheory.Sites.Limits
 
 /-!
 # Equivalent forms of weak contractibility
+
+## References
+
+* Stacks Project, Tags 001P and 00WN
 -/
 
 @[expose] public section
@@ -39,8 +43,6 @@ open CategoryTheory Opposite
 namespace AlgebraicGeometry.Scheme
 
 /-- The three equivalent lifting and evaluation formulations of weak contractibility.
-
-Source: Stacks Project, Tags 001P and 00WN.
 
 An object satisfying the equivalent conditions is called weakly contractible.
 -/

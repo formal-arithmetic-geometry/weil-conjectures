@@ -17,7 +17,10 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.RegularIntegralDivisorEtalePu
 /-!
 # Purity for punctured covers of a smooth family over a DVR
 
-Source: Stacks Project, Tag 0EYE, as applied in the trait paragraph of Tag 0EYJ.
+## References
+
+* Stacks Project, Tag 0EYE, as applied in the trait paragraph of Tag 0EYJ
+* Stacks Project, Tag 0EYE, and Tag 0EYJ, first two paragraphs of the proof
 -/
 
 @[expose] public section
@@ -28,9 +31,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The purity step over a genuine DVR: a finite punctured cover with an etale
 model meeting the special fibre admits a finite etale extension. This does not
-assert normality of the extension or density of its puncture.
-
-Source: Stacks Project, Tag 0EYE, and Tag 0EYJ, first two paragraphs of the proof. -/
+assert normality of the extension or density of its puncture. -/
 theorem exists_finite_etale_extension_of_dvr_neighbourhood
     (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A]
     {L N : Scheme.{u}} (q : L ⟶ Spec (.of A))

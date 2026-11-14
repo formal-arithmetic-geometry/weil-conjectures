@@ -16,7 +16,10 @@ import all WeilConjectures.AlgebraicGeometry.Adic.AdicCoefficientDatumSupplement
 The exact-square factor identity and normalized unit equations imply compatibility
 of the derived comparison with augmentation, first on resolving complexes and then
 on the derived category. These proved helpers support the stratum restriction proof.
-Source: Stacks Tags 03EL, 06YY.
+
+## References
+
+* Stacks Tags 03EL, 06YY
 -/
 
 @[expose] public noncomputable section
@@ -53,8 +56,7 @@ private theorem stratumUnit_formula (T : Scheme.{u})
   unfold completedReductionTowerComplexCounit reductionComplexCounit
   exact (completedReductionTowerUnit_exists d T).exists.choose_spec P hP
 
-/-- A normalized strict reduction comparison preserves the actual quotient augmentation.
-Source: Stacks Tags 03EL, 06YY. -/
+/-- A normalized strict reduction comparison preserves the actual quotient augmentation. -/
 theorem completedReduction_augmentationOfComparison {X Y : Scheme.{u}} (f : Y ⟶ X)
     (e : completedReductionModuleTowerFunctor X d ⋙ d.towerModulePull f ≅
       proEtaleRingModulePullback f (d.completedRing X) (d.completedRing Y)

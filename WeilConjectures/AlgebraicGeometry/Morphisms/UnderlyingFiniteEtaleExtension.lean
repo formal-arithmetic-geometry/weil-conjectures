@@ -17,7 +17,10 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.NoetherianSpreadingData
 /-!
 # Underlying finite étale extension of a generically split Galois cover
 
-Source: Stacks Project, Tags 0EYJ and 0EZJ, proofs of the spreading theorem.
+## References
+
+* Stacks Project, Tags 0EYJ and 0EZJ, proofs of the spreading theorem
+* Stacks Project, Tags 0EYJ and 0EZJ, the construction of the finite étale morphism
 -/
 
 @[expose] public section
@@ -28,9 +31,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The underlying finite étale cover extends; no action on the extension is supplied.
-
-Source: Stacks Project, Tags 0EYJ and 0EZJ, the construction of the finite étale morphism. -/
+/-- The underlying finite étale cover extends; no action on the extension is supplied. -/
 theorem GaloisCover.exists_finiteEtale_extension {S C : Scheme.{u}} [CompactSpace S]
     [QuasiSeparatedSpace S] [IsIntegral S]
     (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))

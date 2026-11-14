@@ -12,7 +12,12 @@ import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionTe
 import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionTensorTotalLocalizationPath
 import all WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionTensorTransportFormulas
 
-/-! # The section scalar tensor localization diagram -/
+/-! # The section scalar tensor localization diagram
+
+## References
+
+* Stacks, Cohomology on Sites, Tags 06YY and 07A4
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -60,7 +65,6 @@ attribute [local irreducible] ModuleRingedComparison.tensor tensorComparison qTe
 -- Paste the remaining tensor naturality and representative faces.
 /-- The scalar tensor localization diagram commutes before its common final map
 is cancelled.
-Source: Stacks, Cohomology on Sites, Tags 06YY and 07A4.
 Transport the representative tests under the section equivalence. The ordinary
 scalar square gives the signed total square. Paste scalar normalization on the
 total tensor, counit naturality, tensor localization and hb. The two factor scalar

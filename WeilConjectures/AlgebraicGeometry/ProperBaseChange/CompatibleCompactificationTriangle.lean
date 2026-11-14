@@ -14,7 +14,10 @@ import WeilConjectures.Compactification.BaseChange
 /-!
 # Compatible geometric compactifications of a composable pair
 
-Source: Stacks Project, More Étale Cohomology, Tag 0F7J, first paragraph and displayed diagram.
+## References
+
+* Stacks Project, More Étale Cohomology, Tag 0F7J, first paragraph and displayed diagram
+* Stacks Project, Tag 0F7J, first paragraph
 -/
 
 @[expose] public section
@@ -25,8 +28,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- Compatible compactifications over a prescribed compactification of the second morphism.
-Source: Stacks Project, Tag 0F7J, first paragraph. -/
+/-- Compatible compactifications over a prescribed compactification of the second morphism. -/
 theorem exists_compatible_compactification_triangle
     {X Y Z : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     [CompactSpace Y] [QuasiSeparatedSpace Y] [CompactSpace Z] [QuasiSeparatedSpace Z]

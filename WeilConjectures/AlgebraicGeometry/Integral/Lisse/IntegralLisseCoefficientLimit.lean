@@ -44,7 +44,9 @@ import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 /-!
 # The coefficient reduction cone is limiting
 
-Source: Bhatt--Scholze, Lemma 6.8.2(1), pp. 58--59.
+## References
+
+* Bhatt--Scholze, Lemma 6.8.2(1), pp. 58--59
 -/
 
 @[expose] public noncomputable section

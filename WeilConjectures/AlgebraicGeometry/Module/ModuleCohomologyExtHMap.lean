@@ -13,7 +13,10 @@ import WeilConjectures.AlgebraicGeometry.ModuleCohomologyCoefficientTransport
 
 /-! # The fixed module/Ext comparison respects h-maps
 
-Source: Stacks Project, Tags 01FB and 03FD.
+## References
+
+* Stacks Project, Tags 01FB and 03FD
+* Stacks Project, Tag 01FB (coefficient factorization) and Tag 03FD (comparison)
 -/
 
 @[expose] public section
@@ -23,8 +26,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
 set_option autoImplicit false
 
-/-- The resolution comparison respects h-maps in its original Ext universe.
-Source: Stacks Project, Tag 01FB (coefficient factorization) and Tag 03FD (comparison). -/
+/-- The resolution comparison respects h-maps in its original Ext universe. -/
 theorem moduleCohomologyExtResolutionEquiv_hmap {X Y : Scheme.{u}} (g : Y ⟶ X)
     (F : X.Modules) (G : Y.Modules) (φ : F ⟶ (pushforward g).obj G)
     (q : ℕ) (x : (RingedSpace.moduleCohomology X.toRingedSpace q).obj F) :

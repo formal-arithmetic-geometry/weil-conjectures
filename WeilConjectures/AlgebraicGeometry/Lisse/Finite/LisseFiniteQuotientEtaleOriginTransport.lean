@@ -10,7 +10,9 @@ import WeilConjectures.AlgebraicGeometry.Lisse.Finite.LisseFiniteQuotientEtaleOr
 
 /-! # Conditional constant-model transport for a finite quotient origin
 
-Source: Stacks Project, Tag 09C6.
+## References
+
+* Stacks Project, Tag 09C6
 -/
 
 @[expose] public noncomputable section
@@ -21,10 +23,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 attribute [local instance] HasDerivedCategory.ofIsGrothendieckAbelian
 
-/-- Transport a supplied constant model through a core finite quotient origin.
-
-Source: Stacks Project, Tag 09C6.
--/
+/-- Transport a supplied constant model through a core finite quotient origin. -/
 theorem lisse_finite_quotient_etale_origin_transport
     {X Y : Scheme.{u}} {g : Y ⟶ X}
     {A : Type (u + 1)} [CommRing A] {d : AdicCoefficientDatum A} {n : ℕ}

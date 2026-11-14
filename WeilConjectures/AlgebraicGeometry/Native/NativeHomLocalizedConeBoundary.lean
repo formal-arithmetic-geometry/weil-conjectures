@@ -14,7 +14,10 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.Triangulated
 
 /-! # The signed native Hom boundary on localized cone triangles
 
-Source: Stacks Project, Tags 08J9 and 08JC.
+## References
+
+* Stacks Project, Tags 08J9 and 08JC
+* Stacks Project, Tag 08JC
 -/
 
 @[expose] public noncomputable section
@@ -26,8 +29,7 @@ open CategoryTheory.Pretriangulated CategoryTheory.Pretriangulated.Opposite
 namespace AlgebraicGeometry.ProEtale
 
 /-- On a localized ordinary cone triangle the specified signed boundary makes
-contravariant native Hom into a distinguished triangle.
-Source: Stacks Project, Tag 08JC. -/
+contravariant native Hom into a distinguished triangle. -/
 theorem nativeHom_localized_cone_boundary
     {C : Type d} [Category.{u + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C]

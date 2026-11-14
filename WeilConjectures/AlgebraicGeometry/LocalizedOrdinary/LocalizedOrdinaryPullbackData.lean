@@ -139,7 +139,18 @@ public import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 
 /-! # Data for localized ordinary pullback normalization
 
-Source: Stacks Project, Tags 03CB, 0D6D, 07A4; Bhatt--Scholze, Remark 6.8.15.
+## References
+
+* Stacks Project, Tags 03CB, 0D6D, 07A4
+* Bhatt--Scholze, Remark 6.8.15
+* Stacks 099M
+* BS 6.8.15
+* Stacks 03EL
+* Stacks 06YY
+* Stacks 03D2
+* Stacks 03EL, 0D6D, 07A4
+* Stacks 0D6D, 07A4
+* Stacks 03CB
 -/
 
 @[expose] public noncomputable section
@@ -171,38 +182,37 @@ local instance restrictedTargetSMul
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The actual completed coefficient sheaf B. Source: Stacks 099M. -/
+/-- The actual completed coefficient sheaf B. -/
 abbrev B (X : Scheme.{u}) : Sheaf (ProEt.topology X) CommRingCat.{u + 1} :=
   pbcAdicCompletion X (pbcIntegralDatum l E)
 
 variable (ϖ : PbcIntegralRing l E)
 
-/-- The constant chosen uniformizer section. Source: BS 6.8.15. -/
+/-- The constant chosen uniformizer section. -/
 def uniformizer (X : Scheme.{u}) :
     ((B l E X).obj ⋙ CategoryTheory.forget CommRingCat.{u + 1}).sections :=
   pbcCompletedScalarSections X (pbcIntegralDatum l E) ϖ
 
 attribute [-instance] WeilConjectures.integralCoefficientRingSheafify in
-/-- The actual sheaf localization B[1/varpi]. Source: Stacks 03EL. -/
+/-- The actual sheaf localization B[1/varpi]. -/
 abbrev R (X : Scheme.{u}) : Sheaf (ProEt.topology X) CommRingCat.{u + 1} :=
   ringedLocalizationRingOfUniverses.{u + 1, u + 1, u} (B l E X) (uniformizer l E ϖ X)
 
 attribute [-instance] WeilConjectures.integralCoefficientRingSheafify in
-/-- The localization unit. Source: Stacks 03EL. -/
+/-- The localization unit. -/
 abbrev iota (X : Scheme.{u}) :=
   ringedLocalizationRingUnitOfUniverses.{u + 1, u + 1, u} (B l E X) (uniformizer l E ϖ X)
 
-/-- Ordinary localization as actual scalar extension. Source: Stacks 03EL. -/
+/-- Ordinary localization as actual scalar extension. -/
 abbrev F₀ (X : Scheme.{u}) := pbcExtend (iota l E ϖ X)
 
-/-- Unbounded derived scalar localization. Source: Stacks 06YY. -/
+/-- Unbounded derived scalar localization. -/
 abbrev F (X : Scheme.{u}) := pbcDerivedExtend (iota l E ϖ X)
 
 variable {X Y : Scheme.{u}} (g : Y ⟶ X)
 
 /-- The integral tensor-unit section, typed on the actual pulled-back chart.
-This is the existing normalized adjunction unit, with no change in its data.
-Source: Stacks 03D2. -/
+This is the existing normalized adjunction unit, with no change in its data. -/
 abbrev integralUnitSection (M : pbcModules X (B l E X)) (V : X.ProEt)
     (m : M.val.obj (op V)) :
     ((pbcActualModulePull g (pbcIntegralDatum l E)).obj M).val.obj
@@ -210,17 +220,17 @@ abbrev integralUnitSection (M : pbcModules X (B l E X)) (V : X.ProEt)
   pbcActualModuleUnitSection g (pbcIntegralDatum l E) M V m
 
 /-- Ordinary ringed pullback along the localized structural map, without requiring it
-invertible. Source: Stacks 03D2. -/
+invertible. -/
 abbrev G₀ (c : (proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj (R l E ϖ X) ⟶ R l E ϖ Y) :=
   proEtaleRingModulePullback g (R l E ϖ X)
     ((proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj (R l E ϖ X)) (Iso.refl _) ⋙
       pbcExtend c
 
-/-- Exact inverse image followed by derived scalar extension. Source: Stacks 06YY. -/
+/-- Exact inverse image followed by derived scalar extension. -/
 abbrev G (c : (proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj (R l E ϖ X) ⟶ R l E ϖ Y) :=
   adicTowerPullback g (R l E ϖ X) ⋙ pbcDerivedExtend c
 
-/-- Computation counit on arbitrary complexes. Source: Stacks 06YY. -/
+/-- Computation counit on arbitrary complexes. -/
 def counit (c : (proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj (R l E ϖ X) ⟶ R l E ϖ Y)
     (P : CochainComplex (pbcModules X (R l E ϖ X)) ℤ) :
     (G l E ϖ g c).obj (DerivedCategory.Q.obj P) ⟶
@@ -234,7 +244,7 @@ def counit (c : (proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj (R l E ϖ 
         ((proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj (R l E ϖ X))
           (Iso.refl _)).mapHomologicalComplex (.up ℤ)).obj P)
 
-/-- The ordinary pullback tensor unit on a base-changed chart. Source: Stacks 03D2. -/
+/-- The ordinary pullback tensor unit on a base-changed chart. -/
 def unitSection
     (c : (proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj (R l E ϖ X) ⟶ R l E ϖ Y)
     (M : pbcModules X (R l E ϖ X)) (V : X.ProEt) (m : M.val.obj (op V)) :=
@@ -246,8 +256,7 @@ def unitSection
       ((proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj (R l E ϖ X))
         (Iso.refl _) M V m)
 
-/-- A coefficient section pulled through the ring adjunction and structural map.
-Source: Stacks 03D2. -/
+/-- A coefficient section pulled through the ring adjunction and structural map. -/
 def scalarSection
     (c : (proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj (R l E ϖ X) ⟶ R l E ϖ Y)
     (V : X.ProEt) (e : (R l E ϖ X).obj.obj (op V)) :=
@@ -256,8 +265,7 @@ def scalarSection
 
 /-- Data for the specified localization comparison. Its ring map is fixed by the
 localization unit. Its ordinary comparison is fixed on tensor-unit generators,
-and its derived comparison is fixed by the ordinary computation counits.
-Source: Stacks 03EL, 0D6D, 07A4; BS 6.8.15. -/
+and its derived comparison is fixed by the ordinary computation counits. -/
 structure Edge where
   coefficient : (proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj (R l E ϖ X) ⟶ R l E ϖ Y
   coefficient_unit : (proEtaleSheafInverseImage g CommRingCat.{u + 1}).map (iota l E ϖ X) ≫
@@ -315,8 +323,7 @@ variable {Z : Scheme.{u}} (h : Z ⟶ Y)
 
 /-- The composition comparisons with their rational tensor-generator value, inverse
 unit insertion, and derived representative equation. The last equation is the
-specified delta-compositor square on every unbounded derived object.
-Source: Stacks 0D6D, 07A4; BS 6.8.15. -/
+specified delta-compositor square on every unbounded derived object. -/
 structure Composition (ag : Edge l E ϖ g) (ah : Edge l E ϖ h) (ac : Edge l E ϖ (h ≫ g)) where
   coefficient_comp : ac.coefficient =
     (proEtaleRingInverseImageComp h g).hom.app (R l E ϖ X) ≫
@@ -404,8 +411,7 @@ structure Composition (ag : Edge l E ϖ g) (ah : Edge l E ϖ h) (ac : Edge l E �
       derived.hom.app ((F l E ϖ X).obj K)
 
 /-- Identity comparisons multiply the scalar into the module; their derived maps
-are computed by exactly those chain maps on flat-term K-flat complexes.
-Source: Stacks 0D6D, 07A4. -/
+are computed by exactly those chain maps on flat-term K-flat complexes. -/
 structure Identity (X : Scheme.{u}) (a : Edge l E ϖ (𝟙 X)) where
   coefficient_id : a.coefficient = (proEtaleRingInverseImageId X).hom.app (R l E ϖ X)
   ordinary : G₀ l E ϖ (𝟙 X) a.coefficient ≅ 𝟭 _
@@ -434,7 +440,7 @@ structure Identity (X : Scheme.{u}) (a : Edge l E ϖ (𝟙 X)) where
       (F l E ϖ X).map ((pbcActualDerivedPullIdIso (pbcIntegralDatum l E) X).hom.app K)
 
 /-- Quotient transition, projection, identity and constant-scalar normalization.
-Index n denotes the positive exponent n+1. Source: Stacks 03CB; BS 6.8.15. -/
+Index n denotes the positive exponent n+1. -/
 structure Coefficients : Prop where
   finite_comp : ∀ n : ℕ,
     completedFiniteCoefficientMap (h ≫ g) (pbcIntegralDatum l E) n =

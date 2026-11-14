@@ -13,7 +13,10 @@ import WeilConjectures.AlgebraicGeometry.Local.LocalAcyclicityClosedFibreUnit
 /-!
 # Specialization and cospecialization commute with fibre maps
 
-Source: Stacks Project, Tag 0GJV, specialized to `G[0]`.
+## References
+
+* Stacks Project, Tag 0GJV, specialized to `G[0]`
+* Stacks Project, Tag 0GJV, `K = G[0]`
 -/
 
 @[expose] public section
@@ -116,8 +119,7 @@ private lemma restriction_cospecialization
 /-- Specialization, the canonical fibre maps and cospecialization form a commutative
 square in the bounded below derived category of abelian groups. The geometric point
 `t` is arbitrary, including the distinguished closed-point lift. There is no properness
-or torsion assumption and no invertibility assertion about the arrows in the square.
-Source: Stacks Project, Tag 0GJV, `K = G[0]`. -/
+or torsion assumption and no invertibility assertion about the arrows in the square. -/
 theorem specialization_cospecialization_compatibility
     {X S : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f]
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

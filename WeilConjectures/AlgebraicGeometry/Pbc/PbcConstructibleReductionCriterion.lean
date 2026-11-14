@@ -10,7 +10,10 @@ import WeilConjectures.AlgebraicGeometry.Pbc.PbcUniformReductionCriterion
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Constructibility tested on canonical reductions
-Source: Stacks Tags 09AL and 09C2.
+
+## References
+
+* Stacks Tags 09AL and 09C2
 -/
 
 @[expose] public noncomputable section
@@ -21,8 +24,7 @@ namespace AlgebraicGeometry.Scheme
 open ProEtale
 
 /-- With a common cohomology interval, integral constructible completeness is equivalent
-to intrinsic completeness and the cohomology clause of the uniform reduction profile.
-Source: Stacks Tags 09AL and 09C2. -/
+to intrinsic completeness and the cohomology clause of the uniform reduction profile. -/
 theorem pbc_constructible_reduction_criterion
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E]

@@ -25,8 +25,13 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 /-!
 # Finite local constancy under inverse image
 
-Source: Stacks Project, Modules on Sites, Tag 093R;
-Etale Cohomology, Tag 095I (common stratifications).
+## References
+
+* Stacks Project, Modules on Sites, Tag 093R
+* Etale Cohomology, Tag 095I (common stratifications)
+* Stacks Project, Tag 0H7J, the constant-sheaf universal property
+* Stacks Project, Tag 03D2
+* Stacks Project, Modules on Sites, Tag 093R, applied to pro-etale module inverse image
 -/
 
 @[expose] public section
@@ -36,8 +41,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The coefficient direct-image map extends the constant-section unit.
-Source: Stacks Project, Tag 0H7J, the constant-sheaf universal property. -/
+/-- The coefficient direct-image map extends the constant-section unit. -/
 theorem proEtaleConstantModulePullback_rho_unit {X Y : Scheme.{u}} (f : X ⟶ Y) (A : Type u)
     [CommRing A] (W : Y.ProEtᵒᵖ) :
     (toSheafify (ProEt.topology Y)
@@ -54,8 +58,7 @@ theorem proEtaleConstantModulePullback_rho_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
         ((Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{u + 1} A)))))
   exact congrArg (fun t ↦ t.app W) h
 
-/-- The ring direct-image map is the adjunct of the canonical coefficient comparison.
-Source: Stacks Project, Tag 03D2. -/
+/-- The ring direct-image map is the adjunct of the canonical coefficient comparison. -/
 theorem proEtaleConstantModulePullback_ring_direct
     {X Y : Scheme.{u}} (f : X ⟶ Y) (A : Type u) [CommRing A]
     [IsIso (proEtaleCoefficientInverseImageMap f A)] :
@@ -65,9 +68,7 @@ theorem proEtaleConstantModulePullback_ring_direct
   exact (proEtaleSheafAdjunction f CommRingCat.{u + 1}).homEquiv _ _
     |>.apply_symm_apply (proEtaleCoefficientDirectImageMap f A)
 
-/-- Inverse image preserves finite local constancy of a module sheaf.
-
-Source: Stacks Project, Modules on Sites, Tag 093R, applied to pro-etale module inverse image. -/
+/-- Inverse image preserves finite local constancy of a module sheaf. -/
 theorem proEtale_finiteLocalConstancy_pullback
     {Y X : Scheme.{u}} (b : X ⟶ Y)
     (A : Type u) [CommRing A] [Finite A]

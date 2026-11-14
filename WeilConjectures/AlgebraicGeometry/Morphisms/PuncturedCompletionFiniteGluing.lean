@@ -16,7 +16,10 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
 
 /-! # Finite algebra gluing across maximal-ideal completion
 
-Source: Stacks Project, Tag 0BLH.
+## References
+
+* Stacks Project, Tag 0BLH
+* Stacks Project, Tag 0BLH and More on Algebra, Proposition 15.91.16
 -/
 
 @[expose] public section
@@ -25,9 +28,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- A finite completed model glues to a finite model with both prescribed restrictions.
-
-Source: Stacks Project, Tag 0BLH and More on Algebra, Proposition 15.91.16 -/
+/-- A finite completed model glues to a finite model with both prescribed restrictions. -/
 theorem exists_finite_model_of_completed_model
     (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A]
     (U : (Spec (.of A)).Opens)

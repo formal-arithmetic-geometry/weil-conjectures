@@ -20,7 +20,10 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # A coherent depth-two module extending a finite etale algebra
 
-Source: Stacks Project, Tags 0EY6, 0EBJ, 0EBI and 0E9I.
+## References
+
+* Stacks Project, Tags 0EY6, 0EBJ, 0EBI and 0E9I
+* Stacks Project, Tag 0EY6 proof of (1), Tags 0EBJ and 0EBI
 -/
 
 @[expose] public section
@@ -115,9 +118,7 @@ private theorem restrict_stalk_smul
   rw [hr]
   exact M.val.germ_smul (j x) (j ''ᵁ V) ⟨x, hxV, rfl⟩ _ m
 
-/-- The underlying finite etale module admits a coherent extension of depth two.
-
-Source: Stacks Project, Tag 0EY6 proof of (1), Tags 0EBJ and 0EBI. -/
+/-- The underlying finite etale module admits a coherent extension of depth two. -/
 theorem exists_depth_two_coherent_module_extension
     {L : Scheme.{u}} [IsLocallyNoetherian L] (U : L.Opens)
     (hboundary : ∀ y : L, y ∉ U →

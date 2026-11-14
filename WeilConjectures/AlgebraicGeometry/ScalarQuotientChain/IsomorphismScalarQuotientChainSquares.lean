@@ -11,13 +11,23 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # Balanced scalar comparisons and coefficient tower squares
 
-Source: Stacks Project, Tag 03EK, section-tensor-product.
-
 The positive level m is indexed by n = m - 1. All tensors are the existing
 sheafified balanced scalar extension, with the scalar first. Termwise extension
 is the degreewise model of the direct-sum total tensor with coefficients in degree zero.
 Inverse image uses its canonical corresponding-object model. The auxiliary structures
 only collect the coefficient data and equations in this node's hypotheses.
+
+## References
+
+* Stacks Project, Tag 03EK, section-tensor-product
+* Stacks 03EK and 09A5
+* Stacks 03EK
+* Stacks 03EL
+* Stacks 03EK and 03EL
+* Stacks 03D2
+* Stacks 09A5 and 00WX
+* Stacks 03D2, 09A5 and 00WX
+* Stacks 03D2 and 03EK
 -/
 
 @[expose] public noncomputable section
@@ -33,37 +43,31 @@ open AlgebraicGeometry.Scheme CategoryTheory.CochainPullback
 
 namespace AlgebraicGeometry.ProEtale.ScalarQuotientChain
 
-/-- Coefficients in any universe containing the small site's objects.
-Source: Stacks 03EK and 09A5. -/
+/-- Coefficients in any universe containing the small site's objects. -/
 abbrev Coeff (W : Scheme.{t}) :=
   Sheaf (ProEt.topology W) CommRingCat.{max r (t + 1)}
 
-/-- Forget only commutativity, retaining the given ring sheaf.
-Source: Stacks 03EK. -/
+/-- Forget only commutativity, retaining the given ring sheaf. -/
 abbrev forgetRing (W : Scheme.{t}) :=
   sheafCompose (ProEt.topology W)
     (forget₂ CommRingCat.{max r (t + 1)} RingCat.{max r (t + 1)})
 
-/-- The existing complex category, with all site and coefficient sizes explicit.
-Source: Stacks 03EL. -/
+/-- The existing complex category, with all site and coefficient sizes explicit. -/
 abbrev moduleComplex (W : Scheme.{t}) (R : Coeff.{t, r} W) :=
   CochainComplex (ringedSiteModules.{max r (t + 1)} ((forgetRing W).obj R)) ℤ
 
-/-- Specialization of the existing scalar-extension functor to the given pro-etale site.
-Source: Stacks 03EK and 03EL. -/
+/-- Specialization of the existing scalar-extension functor to the given pro-etale site. -/
 abbrev scalarExtend (W : Scheme.{t}) {A B : Coeff.{t, r} W} (a : A ⟶ B) :
     moduleComplex W A ⥤ moduleComplex W B :=
   (extensionFunctor.{max r (t + 1), t + 1, t} (C := W.ProEt)
     (J := ProEt.topology W) a).mapHomologicalComplex (.up ℤ)
 
-/-- Specialization of existing scalar restriction on complexes.
-Source: Stacks 03D2. -/
+/-- Specialization of existing scalar restriction on complexes. -/
 abbrev scalarRestrict (W : Scheme.{t}) {A B : Coeff.{t, r} W} (a : A ⟶ B) :=
   CochainPullback.restrictComplex.{max r (t + 1), t + 1, t} (C := W.ProEt)
     (J := ProEt.topology W) a
 
-/-- The existing scalar-extension pure tensor with its site explicitly supplied.
-Source: Stacks 03EK. -/
+/-- The existing scalar-extension pure tensor with its site explicitly supplied. -/
 abbrev pure (W : Scheme.{t}) {A B : Coeff.{t, r} W} (a : A ⟶ B)
     (M : ringedSiteModules.{max r (t + 1)} ((forgetRing W).obj A))
     (U : W.ProEtᵒᵖ) (s : B.obj.obj U) (x : M.val.obj U) :=
@@ -71,8 +75,7 @@ abbrev pure (W : Scheme.{t}) {A B : Coeff.{t, r} W} (a : A ⟶ B)
     (J := ProEt.topology W) a M U s x
 
 /-- The two towers, coefficient projections and commuting squares of the hypotheses.
-Level n denotes the positive level n+1; no map is required to be surjective or flat.
-Source: Stacks 03EK. -/
+Level n denotes the positive level n+1; no map is required to be surjective or flat. -/
 structure Tower (W : Scheme.{t}) where
   R : Coeff.{t, r} W
   S : Coeff.{t, r} W
@@ -89,13 +92,11 @@ structure Tower (W : Scheme.{t}) where
   projection_B : ∀ n : ℕ, piB (Nat.succ n) ≫ qB n = piB n
   projection_i : ∀ n : ℕ, j ≫ piB n = piA n ≫ i n
 
-/-- The recorded corresponding-object inverse image on commutative ring sheaves.
-Source: Stacks 09A5 and 00WX. -/
+/-- The recorded corresponding-object inverse image on commutative ring sheaves. -/
 abbrev inverseRing {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g] :=
   isoSectionwiseInverseImage g CommRingCat.{max r (t + 1)}
 
-/-- The four specified coefficient isomorphisms and all their compatibilities.
-Source: Stacks 03EK. -/
+/-- The four specified coefficient isomorphisms and all their compatibilities. -/
 structure Transport {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]
     (DX : Tower.{t, r} X) (DY : Tower.{t, r} Y) where
   cR : (inverseRing g).obj DY.R ≅ DX.R
@@ -114,8 +115,7 @@ structure Transport {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]
   qB_comm : ∀ n : ℕ,
     (inverseRing g).map (DY.qB n) ≫ (cB n).hom = (cB (Nat.succ n)).hom ≫ DX.qB n
 
-/-- The existing inverse image with its action transported through c inverse.
-Source: Stacks 03D2, 09A5 and 00WX. -/
+/-- The existing inverse image with its action transported through c inverse. -/
 abbrev inverseModules {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]
     {RY : Coeff.{t, r} Y} {RX : Coeff.{t, r} X}
     (c : (inverseRing g).obj RY ≅ RX) :
@@ -128,37 +128,31 @@ abbrev inverseModules {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]
 variable {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]
   {DX : Tower.{t, r} X} {DY : Tower.{t, r} Y} (d : Transport g DX DY)
 
-/-- The upper left functor P ↦ G_R(P) tensor S_X.
-Source: Stacks 03EK and 03EL. -/
+/-- The upper left functor P ↦ G_R(P) tensor S_X. -/
 abbrev left : moduleComplex Y DY.R ⥤ moduleComplex X DX.S := (inverseModules g d.cR ⋙
   extensionFunctor.{max r (t + 1), t + 1, t} DX.j).mapHomologicalComplex (.up ℤ)
 
-/-- The upper right functor P ↦ G_S(P tensor S_Y).
-Source: Stacks 03EK and 03EL. -/
+/-- The upper right functor P ↦ G_S(P tensor S_Y). -/
 abbrev right : moduleComplex Y DY.R ⥤ moduleComplex X DX.S :=
   (extensionFunctor.{max r (t + 1), t + 1, t} DY.j ⋙
   inverseModules g d.cS).mapHomologicalComplex (.up ℤ)
 
-/-- The finite source, retaining its B_X,n-linear structure.
-Source: Stacks 03EK and 03EL. -/
+/-- The finite source, retaining its B_X,n-linear structure. -/
 abbrev finiteLeft (n : ℕ) : moduleComplex Y DY.R ⥤ moduleComplex X (DX.B n) :=
   (extensionFunctor.{max r (t + 1), t + 1, t} (DY.piA n) ⋙
     inverseModules g (d.cA n) ⋙ extensionFunctor.{max r (t + 1), t + 1, t}
       (DX.i n)).mapHomologicalComplex (.up ℤ)
 
-/-- The finite target, retaining its B_X,n-linear structure.
-Source: Stacks 03EK and 03EL. -/
+/-- The finite target, retaining its B_X,n-linear structure. -/
 abbrev finiteRight (n : ℕ) : moduleComplex Y DY.R ⥤ moduleComplex X (DX.B n) :=
   (extensionFunctor.{max r (t + 1), t + 1, t} (DY.j ≫ DY.piB n) ⋙
     inverseModules g (d.cB n)).mapHomologicalComplex (.up ℤ)
 
-/-- The finite source with its S_X-action restricted along piB.
-Source: Stacks 03D2 and 03EK. -/
+/-- The finite source with its S_X-action restricted along piB. -/
 abbrev restrictedLeft (n : ℕ) :=
   finiteLeft g d n ⋙ scalarRestrict.{t, r, max r (t + 1)} X (DX.piB n)
 
-/-- A local tensor F(p tensor s) in the specified finite target.
-Source: Stacks 03EK. -/
+/-- A local tensor F(p tensor s) in the specified finite target. -/
 def finitePure (n : ℕ) (P : moduleComplex Y DY.R) (k : ℤ) (U : X.ProEt)
     (s : (DY.B n).obj.obj (op ((proEtaleIsoPostcompose g).obj U)))
     (p : (P.X k).val.obj (op ((proEtaleIsoPostcompose g).obj U))) :

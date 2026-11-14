@@ -15,7 +15,10 @@ import Mathlib.LinearAlgebra.TensorProduct.Quotient
 /-!
 # Unramifiedness detected on a principal quotient of a local base
 
-Source: Stacks Project, Tag 02GU, differential criterion, and Nakayama's lemma (00DV).
+## References
+
+* Stacks Project, Tag 02GU, differential criterion, and Nakayama's lemma (00DV)
+* Stacks Project, Tag 02GU (differential criterion), and Tag 00DV (Nakayama)
 -/
 
 @[expose] public section
@@ -48,9 +51,7 @@ private theorem algebra_unramified_of_quotient
   simpa using hx
 
 /-- A finite morphism over a local ring is formally unramified if its principal
-quotient is etale and the defining element belongs to the maximal ideal.
-
-Source: Stacks Project, Tag 02GU (differential criterion), and Tag 00DV (Nakayama). -/
+quotient is etale and the defining element belongs to the maximal ideal. -/
 theorem formallyUnramified_of_finite_of_principal_quotient_etale
     (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A]
     (f : A) (hf : f ∈ IsLocalRing.maximalIdeal A)

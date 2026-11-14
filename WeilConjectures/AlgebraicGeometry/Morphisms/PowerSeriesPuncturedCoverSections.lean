@@ -16,7 +16,10 @@ import Mathlib.RingTheory.MvPowerSeries.Equiv
 /-!
 # Sections of finite étale covers and the power-series formal neighbourhood
 
-Source: Stacks Project, Tags 0EY9 and 0EKP.
+## References
+
+* Stacks Project, Tags 0EY9 and 0EKP
+* Stacks Project, Tag 0EY9, structure-sheaf comparison, followed by Tag 0EKP, implication (1) to (3)
 -/
 
 @[expose] public section
@@ -26,10 +29,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- Sections of a single finite étale cover are recovered from compatible sections
-on its quotient-power thickenings.
-
-Source: Stacks Project, Tag 0EY9, structure-sheaf comparison, followed by
-Tag 0EKP, implication (1) to (3). -/
+on its quotient-power thickenings. -/
 theorem finiteEtale_powerSeries_punctured_cover_sections_comparison
     (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]
     (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth (R := A) A)

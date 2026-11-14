@@ -10,12 +10,15 @@ import WeilConjectures.AlgebraicGeometry.Lisse.Tower.LisseTowerConstantCoherence
 
 /-! # Constant model comparisons and the coefficient identity on complexes
 
-Source: Stacks Project, Modules on Sites, Tags 03CY and 03DA; Sites, Tag 0H7J;
-Cohomology on Sites, Tag 06YY.
-
 Only the identity semilinear arrow on a represented complex is checked here.
 Localization and naturality extend this to arbitrary derived arrows in
 `lisseTower_localized_constants_normalization`.
+
+## References
+
+* Stacks Project, Modules on Sites, Tags 03CY and 03DA
+* Sites, Tag 0H7J
+* Cohomology on Sites, Tag 06YY
 -/
 
 @[expose] public noncomputable section
@@ -31,10 +34,7 @@ attribute [local irreducible] HasDerivedCategory.standard pbcDerivedRestrict
   lisseTowerAlgebraRestrictIso
 
 /-- The natural constant comparisons can be constructed with compatible coefficient
-identity arrows on cochain complexes.
-
-Source: Stacks Project, Modules on Sites, Tags 03CY and 03DA; Sites, Tag 0H7J;
-Cohomology on Sites, Tag 06YY. -/
+identity arrows on cochain complexes. -/
 theorem lisseTower_constant_complex_comparisons
     {X Z T S : Scheme.{u}} (g : Z ⟶ X) (a : T ⟶ S) (b : Z ⟶ T)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) :

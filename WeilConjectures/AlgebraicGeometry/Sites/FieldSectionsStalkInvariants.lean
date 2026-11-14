@@ -18,7 +18,9 @@ import WeilConjectures.AlgebraicGeometry.Sites.FieldInvariantGermRepresentative
 /-!
 # Sections over finite separable fields and geometric stalk invariants
 
-Source: Stacks Project, Etale Cohomology, Tags 04JM and 03QW.
+## References
+
+* Stacks Project, Etale Cohomology, Tags 04JM and 03QW
 -/
 
 @[expose] public section

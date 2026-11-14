@@ -11,7 +11,10 @@ import WeilConjectures.AlgebraicGeometry.Etale.EtaleStalkTensorScalar
 
 /-! # Reductions of the integral scalar comparison
 
-Source: Deligne, Weil II (1.1.1) b), d), pp. 146-147.
+## References
+
+* Deligne, Weil II (1.1.1) b), d), pp. 146-147
+* Weil II (1.1.1) b), d), pp. 146-147
 -/
 
 @[expose] public section
@@ -278,10 +281,7 @@ private lemma reductionComparison_unit (F : LisseIntegralSheaf l E Y) (n : ℕ)
   rw [← ConcreteCategory.comp_apply, t.inv_hom_id]
   exact ConcreteCategory.congr_hom (e.hom_inv_id_app D) _
 
-/-- Every target-level projection of the scalar comparison is the coefficient quotient.
-
-Source: Weil II (1.1.1) b), d), pp. 146-147; scalar extension and stalks,
-and right exactness of tensor products. -/
+/-- Every target-level projection of the scalar comparison is the coefficient quotient. -/
 theorem lisseIntegralScalarFiberComparison_reductions (F : LisseIntegralSheaf l E Y)
     (n : ℕ) :
     let S := Padic.coefficientExtensionIntegers l L

@@ -12,14 +12,19 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleSiteComparison
 /-!
 # The geometric comparison from the pro-etale to the etale site
 
-Source: Stacks Project, Tag 099R, opening paragraph; Sites, Tags 00WX, 00X6 and 00YV.
-
 The inclusion is the existing `Scheme.toProEt`, identity on schemes and arrows.
 Its continuity and finite-limit preservation are the existing instances
 `Scheme.isContinuous_toProEt` and `Scheme.preservesFiniteLimits_toProEt`.
 The set adjunction below uses restriction and the left Kan extension followed by
 sheafification, rather than a chosen abstract left adjoint. The coefficient version uses
 these same constructions in modules over a fixed ring.
+
+## References
+
+* Stacks Project, Tag 099R, opening paragraph
+* Sites, Tags 00WX, 00X6 and 00YV
+* Stacks Project, Tags 099R, 00X6 and 00WJ
+* Stacks Project, Tag 00YV, module paragraph
 -/
 
 @[expose] public section
@@ -31,8 +36,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- The inverse image in `proEtaleSiteComparison` preserves finite limits, so this
-adjunction is the geometric morphism from the pro-etale to the etale topos.
-Source: Stacks Project, Tags 099R, 00X6 and 00WJ. -/
+adjunction is the geometric morphism from the pro-etale to the etale topos. -/
 theorem preservesFiniteLimits_proEtaleSiteComparison (T : Scheme.{u}) :
     PreservesFiniteLimits
       (Functor.sheafPullbackConstruction.sheafPullback (toProEt T)
@@ -58,8 +62,7 @@ theorem preservesFiniteLimits_proEtaleSiteComparison (T : Scheme.{u}) :
 /-- The same canonical comparison adjunction on sheaves of modules over a finite
 (discrete) ring. The functors act on addition, zero, negation and scalar endomorphisms
 by the module-valued Kan extension and sheafification. In particular this is the fixed
-coefficient encoding of modules over the constant ring sheaf, not a structure-sheaf map.
-Source: Stacks Project, Tag 00YV, module paragraph. -/
+coefficient encoding of modules over the constant ring sheaf, not a structure-sheaf map. -/
 noncomputable def proEtaleSiteComparisonModules (T : Scheme.{u})
     (Λ : Type (u + 1)) [Ring Λ] [Finite Λ] :
     ProEtale.comparisonUpperStar (ModuleCat.{u + 1} Λ) T ⊣

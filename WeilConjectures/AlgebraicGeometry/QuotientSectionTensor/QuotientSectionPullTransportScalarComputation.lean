@@ -12,7 +12,10 @@ import WeilConjectures.SixFunctors.Supporting.ModCondensedCachedInstances
 
 /-! # Scalar computation for normalized section transport
 
-Source: Stacks Project, Tags 06YY, 0D6D and 07A6
+## References
+
+* Stacks Project, Tags 06YY, 0D6D and 07A6
+* Stacks 06YY and 07A6, the scalar computation step of normalized section transport
 -/
 
 @[expose] public noncomputable section
@@ -82,8 +85,7 @@ private theorem native_localization_hom (T : Scheme.{u})
       (ModuleRingedComparison.sectionLocalizationComparison Λ T P).hom := by
   rfl
 
-/-- Endpoint normalization expressed through the actual scalar localization counit.
-Source: Stacks 06YY and 07A6, the scalar computation step of normalized section transport. -/
+/-- Endpoint normalization expressed through the actual scalar localization counit. -/
 theorem section_pull_transport_scalar_computation (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u})
     (c : ScalarSectionData a T) (h : ScalarSectionNormalized a T c)
     (P : CochainComplex (Modules Λ T) ℤ) :

@@ -14,7 +14,11 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Finite
 
 /-! # Finite etale restriction on the fixed formal test
 
-Source: Stacks Project, Tags 0EYJ, 035I and 03GV.
+## References
+
+* Stacks Project, Tags 0EYJ, 035I and 03GV
+* Stacks Project, Tags 035I and 03GV (relative normalization and smooth base change), Tag 0EYJ (the
+  punctured local-base calculation)
 -/
 
 @[expose] public section
@@ -131,10 +135,7 @@ private theorem formal_test_zero_slice_mem {S C : Scheme.{u}}
   exact punctured_stalk_mem U s hs hmin x
 
 /-- On the original open the relative normalization is finite etale; its fixed
-formal test has punctured zero slice.
-
-Source: Stacks Project, Tags 035I and 03GV (relative normalization and smooth
-base change), Tag 0EYJ (the punctured local-base calculation). -/
+formal test has punctured zero slice. -/
 theorem stalk_normalization_formal_punctured_restriction {S C : Scheme.{u}}
     [IsNoetherian S]
     (c : C ⟶ S)

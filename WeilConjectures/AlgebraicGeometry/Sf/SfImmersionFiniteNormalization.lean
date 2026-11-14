@@ -24,7 +24,10 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 /-! # Normalized finite evaluations of strict quotient towers
 
 The generic adic-datum calculations used by the immersion pullback comparison.
-Source: Stacks 03EL, 06YY and 0941
+
+## References
+
+* Stacks 03EL, 06YY and 0941
 -/
 
 @[expose] public noncomputable section

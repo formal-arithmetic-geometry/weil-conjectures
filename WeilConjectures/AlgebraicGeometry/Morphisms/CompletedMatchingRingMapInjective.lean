@@ -12,7 +12,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.CompletedMatchingRingMapTorsi
 
 /-! # Injectiveity of completed matching sections
 
-Source: Stacks Project, Tags 0BLH, 05ER and 05EU.
+## References
+
+* Stacks Project, Tags 0BLH, 05ER and 05EU
+* Stacks Project, Tag 05ER, kernel argument
+* Tags 0BLH and 05EU
 -/
 
 @[expose] public section
@@ -21,8 +25,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.CompletionGluingData
 
-/-- The completed matching-ring comparison is injective.
-Source: Stacks Project, Tag 05ER, kernel argument; Tags 0BLH and 05EU. -/
+/-- The completed matching-ring comparison is injective. -/
 theorem completedRingMap_injective
     {A : Type u} [CommRing A] [IsNoetherianRing A] [IsLocalRing A]
     {U : (Spec (.of A)).Opens}

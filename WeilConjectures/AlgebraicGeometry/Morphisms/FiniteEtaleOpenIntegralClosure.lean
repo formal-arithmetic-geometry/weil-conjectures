@@ -17,7 +17,10 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteEtaleOpenGenericAlgebra
 /-!
 # Affine integral closures of finite etale covers of normal opens
 
-Source: Stacks Project, Tag 032L (finite separable integral closure).
+## References
+
+* Stacks Project, Tag 032L (finite separable integral closure)
+* Stacks Project
 -/
 
 @[expose] public section
@@ -30,9 +33,7 @@ namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The affine algebra defining the relative normalization in a finite etale open cover
-is finite over the affine base ring.
-
-Source: Stacks Project. -/
+is finite over the affine base ring. -/
 theorem finiteEtale_open_integralClosure_finite {X : Scheme.{u}} [IsNoetherian X]
     [IsIntegral X] (hX : ∀ x : X, IsIntegrallyClosed (X.presheaf.stalk x))
     (U : X.Opens) (P : U.toScheme.FiniteEtale) (V : X.Opens)

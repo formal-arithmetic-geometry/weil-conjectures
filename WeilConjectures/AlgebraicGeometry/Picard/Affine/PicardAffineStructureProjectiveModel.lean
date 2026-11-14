@@ -17,7 +17,11 @@ import WeilConjectures.AlgebraicGeometry.Picard.Affine.PicardAffineStructureProj
 
 /-! # The unnormalized affine structure-image model
 
-Source: Stacks Project, Tags 0BF2, 0B91, 08EB and 06Z0.
+## References
+
+* Stacks Project, Tags 0BF2, 0B91, 08EB and 06Z0
+* Stacks Project, Tag 0BF2, perfect base-change paragraph
+* Tags 0B91, 08EB, 06Z0
 -/
 
 @[expose] public section
@@ -28,9 +32,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The trivialized coefficient image has a bounded projective affine model whose
 base changes have no negative homology and have free rank-one zeroth homology.
-No cancellation of terms or vanishing of a differential is asserted here.
-
-Source: Stacks Project, Tag 0BF2, perfect base-change paragraph; Tags 0B91, 08EB, 06Z0. -/
+No cancellation of terms or vanishing of a differential is asserted here. -/
 theorem picard_affine_structure_projective_model
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

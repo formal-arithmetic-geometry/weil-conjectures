@@ -14,7 +14,10 @@ import Mathlib.RingTheory.Ideal.AssociatedPrime.Localization
 /-!
 # Detecting sections on opens by associated-point germs
 
-Source: Stacks Project, Tag 0311, with associated-prime localization, Tag 0310
+## References
+
+* Stacks Project, Tag 0311, with associated-prime localization, Tag 0310
+* Stacks Project, Tags 0311 and 0310
 -/
 
 @[expose] public section
@@ -47,9 +50,7 @@ private theorem eq_zero_of_Spec_associated_germs
   rw [← heq, hr]
   exact map_zero _
 
-/-- On an open of a Noetherian affine scheme, associated-point germs detect zero sections.
-
-Source: Stacks Project, Tags 0311 and 0310; affine-open stalk localization. -/
+/-- On an open of a Noetherian affine scheme, associated-point germs detect zero sections. -/
 theorem eq_zero_of_associated_germs
     (R : Type u) [CommRing R] [IsNoetherianRing R]
     (V : (Spec (.of R)).Opens) (s : Γ(V.toScheme, ⊤))

@@ -14,7 +14,9 @@ public import Mathlib.CategoryTheory.Sites.Subcanonical
 /-!
 # Enough affine weakly contractible objects
 
-Source: Stacks Project, Tag 098F.
+## References
+
+* Stacks Project, Tag 098F
 -/
 
 @[expose] public section

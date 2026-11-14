@@ -20,11 +20,7 @@ import WeilConjectures.AlgebraicGeometry.RationalP1.ShiftedLineSquare
 import WeilConjectures.AlgebraicGeometry.RationalP1.Scalar.ScalarTraceEquation
 import WeilConjectures.AlgebraicGeometry.RationalP1.Scalar.ScalarComponentFromTrace
 
-/-! The unit component of the scalar exchange mate.
-
-Source: the adjunction mate and root-normalized line comparison in the second
-rational P1 triangle.
--/
+/-! The unit component of the scalar exchange mate. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false

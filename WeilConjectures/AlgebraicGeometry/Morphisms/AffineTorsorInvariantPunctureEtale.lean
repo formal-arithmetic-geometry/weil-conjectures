@@ -11,7 +11,12 @@ public import Mathlib.Algebra.Algebra.Subalgebra.Lattice
 public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 import WeilConjectures.Mathlib.RingTheory.TotallySplit
 
-/-! # Etaleness of an invariant principal open of an affine torsor -/
+/-! # Etaleness of an invariant principal open of an affine torsor
+
+## References
+
+* Stacks Project, Tag 03SF, finite Galois covers and permutation sets
+-/
 
 @[expose] public section
 universe u
@@ -50,9 +55,7 @@ private theorem puncture_etale_iff (R : CommRingCat.{u})
     infer_instance
 
 set_option linter.unusedVariables false in
-/-- A subgroup quotient of a finite etale torsor is etale on the fixed principal open.
-
-Source: Stacks Project, Tag 03SF, finite Galois covers and permutation sets. -/
+/-- A subgroup quotient of a finite etale torsor is etale on the fixed principal open. -/
 theorem affine_torsor_invariant_puncture_etale
     (H : CommRingCat.{u}) (h : H)
     (C : Type u) [CommRing C] [Algebra H C] [IsDomain C]

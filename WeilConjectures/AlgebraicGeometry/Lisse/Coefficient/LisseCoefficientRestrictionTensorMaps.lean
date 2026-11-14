@@ -7,7 +7,12 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Lisse.Coefficient.LisseCoefficientRestrictionIntegralModel
 
-/-! Maps of integral adic systems induced by a central coefficient tensor. -/
+/-! Maps of integral adic systems induced by a central coefficient tensor.
+
+## References
+
+* Deligne, Weil II (1.1.1) b)-d), pp. 146-147, restriction and extension of coefficients
+-/
 
 @[expose] public section
 noncomputable section
@@ -676,8 +681,7 @@ private theorem restrictionAverageLevel_comp
 
 end AveragedRestriction
 
-/-- A central integral tensor induces opposite maps with scalar composite.
-Source: Deligne, Weil II (1.1.1) b)-d), pp. 146-147, restriction and extension of coefficients. -/
+/-- A central integral tensor induces opposite maps with scalar composite. -/
 theorem lisseIntegralRestriction_tensor_maps
     (F : LisseIntegralSheaf l L Y)
     (hF : IsLisseIntegralDiagram l E Y

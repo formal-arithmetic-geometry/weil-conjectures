@@ -22,9 +22,6 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.Restriction
 /-!
 # Products of quasi-coherent ideals and modules
 
-Source: Stacks Project, Schemes, Tags 01I8 and 01IC; Modules, Tags 01CE and 01AH; Cohomology of
-Schemes, Tag 087X.
-
 A quasi-coherent ideal is a `Scheme.IdealSheafData`, with module realization and inclusion
 `toModules` and `toModulesι`. The product `𝒥𝓕`, its inclusion and the powers `𝒥ⁿ`
 (`𝒥ⁿ⁺¹ = 𝒥 · 𝒥ⁿ`) are the landed `Scheme.idealModuleProduct`, `Scheme.idealModuleProductι`
@@ -32,6 +29,13 @@ and `Scheme.idealSheafPower`. Restriction to an
 open `V` is `Scheme.Modules.restrictFunctor V.ι` on modules and `IdealSheafData.comap V.ι`
 on ideals. Subsheaves of `𝓕|_V` are compared as the subobjects `Subobject.mk (image.ι _)`
 of their inclusions, as in lem-weil-pbc-affine-pushforward-ideal-product.
+
+## References
+
+* Stacks Project, Schemes, Tags 01I8 and 01IC
+* Modules, Tags 01CE and 01AH
+* Cohomology of Schemes, Tag 087X
+* Stacks, Tags 01I8, 01IC, 01CE, 01AH and 087X
 -/
 
 @[expose] public section
@@ -242,7 +246,7 @@ restriction to arbitrary opens. Let `𝒥` be a quasi-coherent ideal and `𝓕` 
 module on `X`. Then `𝒥𝓕`, `𝓕/𝒥𝓕` and every `𝒥ⁿ` (`n ≥ 1`) are quasi-coherent; on every
 affine open `U`, `(𝒥𝓕)(U) = 𝒥(U)𝓕(U)`, `𝓕(U) → (𝓕/𝒥𝓕)(U)` is surjective with kernel
 `𝒥(U)𝓕(U)`, and `𝒥ⁿ(U) = 𝒥(U)ⁿ`; for every open `V`, `(𝒥𝓕)|_V = (𝒥|_V)(𝓕|_V)` as
-subobjects of `𝓕|_V`. Source: Stacks, Tags 01I8, 01IC, 01CE, 01AH and 087X. -/
+subobjects of `𝓕|_V`. -/
 theorem ideal_times_quasiCoherent_affine_sections {X : Scheme.{u}}
     (J : X.IdealSheafData) (F : X.Modules) [F.IsQuasicoherent] :
     (idealModuleProduct J.toModulesι F).IsQuasicoherent ∧

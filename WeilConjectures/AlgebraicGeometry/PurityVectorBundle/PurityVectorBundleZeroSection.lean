@@ -14,13 +14,17 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 /-!
 # Vector bundles with chosen total spaces in the purity setting
 
-Source: Stacks Project, Constructions, Tags 01M2, 01LW and 01LX.
-
 The canonical relative spectrum, symmetric-algebra augmentation, and its zero section
 are reused from `VectorBundleZeroSection`. The additional data here are an arbitrary
 chosen total space and an isomorphism over the base to that relative spectrum.
 The Noetherian instance required by that existing construction follows from finite type
 over the fixed field; it is supplied by the existing theorem, never an extra hypothesis.
+
+## References
+
+* Stacks Project, Constructions, Tags 01M2, 01LW and 01LX
+* Stacks Tag 01M2
+* Stacks Tags 01M2 and 01LX
 -/
 
 @[expose] public section
@@ -36,8 +40,7 @@ noncomputable section
 namespace AlgebraicGeometry
 
 /-- A rank-`c` vector bundle over a separated finite-type scheme over the fixed purity
-field, including its chosen isomorphism `phi` to `Spec_Z Sym(𝓔)` over `Z`.
-Source: Stacks Tag 01M2. -/
+field, including its chosen isomorphism `phi` to `Spec_Z Sym(𝓔)` over `Z`. -/
 structure PurityVectorBundle
     (P : WeilConjectures.PurityFiniteSetting.{u})
     (Z : Scheme.{u}) (hZ : Z ⟶ Spec (CommRingCat.of P.field.k))
@@ -60,16 +63,14 @@ variable {P : WeilConjectures.PurityFiniteSetting.{u}}
 /-- The zero section is the augmentation section of the canonical relative spectrum,
 followed by the inverse of the chosen `phi`. The augmentation is the existing unique
 algebra morphism killing `SymmetricAlgebraSheaf.inclusion`; its sectionwise composite
-with `sectionMap` is `SymmetricAlgebra.algebraMapInv`.
-Source: Stacks Tag 01M2. -/
+with `sectionMap` is `SymmetricAlgebra.algebraMapInv`. -/
 def zeroSection (V : PurityVectorBundle P Z hZ c) : Z ⟶ V.E :=
   @VectorBundleZeroSection.zero Z (isNoetherian_of_locallyOfFiniteType hZ)
     c V.𝓔 V.locallyFree ≫ V.phi.inv
 
 /-- The zero section is a section of the projection and a closed immersion. On every affine
 open `U` its restriction, transported through `phi`, is the spectrum of the augmentation
-`Sym(𝓔(U)) → 𝒪(U)` fixing constants and killing all degree-one generators.
-Source: Stacks Tags 01M2 and 01LX. -/
+`Sym(𝓔(U)) → 𝒪(U)` fixing constants and killing all degree-one generators. -/
 theorem zeroSection_spec (V : PurityVectorBundle P Z hZ c) :
     V.zeroSection ≫ V.p = 𝟙 Z ∧ IsClosedImmersion V.zeroSection ∧
     ∀ U : Z.affineOpens,

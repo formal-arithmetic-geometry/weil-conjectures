@@ -19,7 +19,10 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.FlatDepthTwoFiniteFormallyUnr
 /-!
 # Etaleness of a depth-two finite extension over a smooth local base
 
-Source: Stacks Project, proof of Tag 0EYB, with uniqueness in Tag 0EY6(2).
+## References
+
+* Stacks Project, proof of Tag 0EYB, with uniqueness in Tag 0EY6(2)
+* Stacks Project, proof of Tag 0EYB, and Tag 0EY6(2), (a), (b)
 -/
 
 @[expose] public section
@@ -28,9 +31,7 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
-/-- A supplied finite depth-two extension is etale when its etale open is fibrewise dense.
-
-Source: Stacks Project, proof of Tag 0EYB, and Tag 0EY6(2), (a), (b). -/
+/-- A supplied finite depth-two extension is etale when its etale open is fibrewise dense. -/
 theorem etale_of_smooth_local_depth_two_finite_extension
     (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]
     {L : Scheme.{u}} (q : L ⟶ Spec (.of A)) [Smooth q]

@@ -12,7 +12,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
 /-!
 # Base change and restriction of unramified morphisms
 
-Source: Stacks Project, Morphisms, Lemma 02GA and the final clause of Lemma 02G6.
+## References
+
+* Stacks Project, Morphisms, Lemma 02GA and the final clause of Lemma 02G6
 -/
 
 @[expose] public section

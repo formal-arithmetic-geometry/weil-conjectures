@@ -11,7 +11,12 @@ public import WeilConjectures.AlgebraicGeometry.DirectImageSquareUnitTransport
 import WeilConjectures.AlgebraicGeometry.Relative.RelativeMVNormalizedCoefficientRoof
 import WeilConjectures.AlgebraicGeometry.Relative.RelativeMVResolvedRoofOpenMateComparisons
 
-/-! # Mate comparisons for the concrete resolved row roof -/
+/-! # Mate comparisons for the concrete resolved row roof
+
+## References
+
+* Stacks Project, Tags 08FE, 08HY, 08HZ and 0D5T
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -169,8 +174,7 @@ set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 -- The three vertex comparison types include composed derived and complex functors.
 /-- Identify the three normalized roof maps with the prescribed base-change
-arrows, after their denominator vertices are known invertible.
-Source: Stacks Project, Tags 08FE, 08HY, 08HZ and 0D5T. -/
+arrows, after their denominator vertices are known invertible. -/
 theorem relativeMV_resolved_roof_mate_comparisons
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

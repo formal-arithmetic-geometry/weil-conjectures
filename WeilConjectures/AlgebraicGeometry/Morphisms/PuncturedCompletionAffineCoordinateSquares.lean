@@ -12,7 +12,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionAffineChar
 
 /-! # Affine localization coordinates and their restriction squares
 
-Source: Stacks Project, Tags 0BLH and 05EL.
+## References
+
+* Stacks Project, Tags 0BLH and 05EL
+* Stacks Project, Tag 0BLH, first two proof paragraphs
+* Tag 05EL, item (1)
 -/
 
 @[expose] public section
@@ -49,9 +53,7 @@ private theorem chart_scalar
   rfl
 
 /-- Affine localization gives coordinates on chart intersections and completed charts,
-with all four maps from the original section modules commuting with restriction.
-
-Source: Stacks Project, Tag 0BLH, first two proof paragraphs; Tag 05EL, item (1). -/
+with all four maps from the original section modules commuting with restriction. -/
 theorem exists_affine_coordinate_squares
     {A : Type u} [CommRing A] [IsLocalRing A]
     {U : (Spec (.of A)).Opens}

@@ -27,10 +27,14 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 /-!
 # Canonically normalized support localization
 
-Source: Stacks Project, Tag 09XP.
-
 This extends the published existence interface with the injective-complex normalization
 of the boundary. The ordinary arrows are uniquely fixed by the support kernel inclusions.
+
+## References
+
+* Stacks Project, Tag 09XP
+* Tag 09XP
+* Tag 09XP, restriction construction
 -/
 
 @[expose] public section
@@ -370,13 +374,11 @@ private theorem supportedSection_exists (A : Type (u + 1)) [CommRing A]
       ((evaluation _ (ModuleCat.{u + 1} A)).obj M))
   exact S.moduleCat_exact_iff.1 he x hx
 
-/-- Intersection of the two closed supports, as a closed immersion.
-Source: Tag 09XP. -/
+/-- Intersection of the two closed supports, as a closed immersion. -/
 noncomputable def supportIntersection {T B C : Scheme.{u}} (b : B ⟶ T) (c : C ⟶ T) :
     pullback b c ⟶ T := pullback.fst b c ≫ b
 
-/-- Closedness of the intersection follows by base change and composition.
-Source: Tag 09XP. -/
+/-- Closedness of the intersection follows by base change and composition. -/
 @[instance]
 theorem supportIntersection_closed {T B C : Scheme.{u}} (b : B ⟶ T) (c : C ⟶ T)
     [IsClosedImmersion b] [IsClosedImmersion c] :
@@ -384,13 +386,11 @@ theorem supportIntersection_closed {T B C : Scheme.{u}} (b : B ⟶ T) (c : C ⟶
   dsimp [supportIntersection]
   infer_instance
 
-/-- The support restricted to an actual open ambient scheme.
-Source: Tag 09XP. -/
+/-- The support restricted to an actual open ambient scheme. -/
 noncomputable def supportOnOpen {T B : Scheme.{u}} (b : B ⟶ T) (U : T.Opens) :
     pullback b U.ι ⟶ U := pullback.snd b U.ι
 
-/-- Closed immersions remain closed after open base change.
-Source: Tag 09XP. -/
+/-- Closed immersions remain closed after open base change. -/
 @[instance]
 theorem supportOnOpen_closed {T B : Scheme.{u}} (b : B ⟶ T) (U : T.Opens)
     [IsClosedImmersion b] : IsClosedImmersion (supportOnOpen b U) := by
@@ -404,8 +404,7 @@ private theorem supportIntersection_complement {T B C : Scheme.{u}}
   simp only [Scheme.Hom.coe_openComplement, supportIntersection,
     Scheme.Pullback.range_fst_comp, TopologicalSpace.Opens.coe_sup, Set.compl_inter]
 
-/-- The complement of a support after open base change.
-Source: Tag 09XP. -/
+/-- The complement of a support after open base change. -/
 theorem supportOnOpen_complement {T B : Scheme.{u}} (b : B ⟶ T)
     [IsClosedImmersion b] (U : T.Opens) :
     (supportOnOpen b U).openComplement = U.ι ⁻¹ᵁ b.openComplement := by
@@ -413,8 +412,7 @@ theorem supportOnOpen_complement {T B : Scheme.{u}} (b : B ⟶ T)
   simp only [Scheme.Hom.coe_openComplement, supportOnOpen,
     Scheme.Pullback.range_snd, Scheme.Hom.coe_preimage, Set.preimage_compl]
 
-/-- Uniquely normalized inclusion of the intersection support kernel.
-Source: Tag 09XP. -/
+/-- Uniquely normalized inclusion of the intersection support kernel. -/
 theorem exists_unique_supportInclusion (A : Type (u + 1)) [CommRing A]
     {T B C : Scheme.{u}} (b : B ⟶ T) (c : C ⟶ T)
     [IsClosedImmersion b] [IsClosedImmersion c] :
@@ -436,8 +434,7 @@ theorem exists_unique_supportInclusion (A : Type (u + 1)) [CommRing A]
   rw [ha']
   exact (kernel.lift_ι _ _ _).symm
 
-/-- Canonical support inclusion, selected by its unique kernel characterization.
-Source: Tag 09XP. -/
+/-- Canonical support inclusion, selected by its unique kernel characterization. -/
 noncomputable def supportInclusion (A : Type (u + 1)) [CommRing A]
     {T B C : Scheme.{u}} (b : B ⟶ T) (c : C ⟶ T)
     [IsClosedImmersion b] [IsClosedImmersion c] :
@@ -445,8 +442,7 @@ noncomputable def supportInclusion (A : Type (u + 1)) [CommRing A]
       supportedEtaleSections A T b.openComplement :=
   (exists_unique_supportInclusion A b c).choose
 
-/-- Supported pullback along an open immersion, normalized on ordinary sections.
-Source: Tag 09XP, restriction construction. -/
+/-- Supported pullback along an open immersion, normalized on ordinary sections. -/
 theorem exists_unique_supportTransport (A : Type (u + 1)) [CommRing A]
     {T S B D : Scheme.{u}} (h : S ⟶ T) [IsOpenImmersion h]
     (b : B ⟶ T) (d : D ⟶ S) [IsClosedImmersion b] [IsClosedImmersion d]
@@ -498,7 +494,7 @@ theorem exists_unique_supportTransport (A : Type (u + 1)) [CommRing A]
   exact (hr' M).trans (NatTrans.congr_app hr M).symm
 
 /-- Canonical restriction on supported sections is uniquely fixed by restriction on
-ordinary sections. Source: Tag 09XP. -/
+ordinary sections. -/
 theorem exists_unique_supportOpenRestriction (A : Type (u + 1)) [CommRing A]
     {T B : Scheme.{u}} (b : B ⟶ T) [IsClosedImmersion b] (U : T.Opens) :
     ∃! r : supportedEtaleSections A T b.openComplement ⟶
@@ -512,8 +508,7 @@ theorem exists_unique_supportOpenRestriction (A : Type (u + 1)) [CommRing A]
   exact exists_unique_supportTransport A U.ι b (supportOnOpen b U)
     (supportOnOpen_complement b U)
 
-/-- Restriction with support to an open ambient scheme.
-Source: Tag 09XP. -/
+/-- Restriction with support to an open ambient scheme. -/
 noncomputable def supportOpenRestriction (A : Type (u + 1)) [CommRing A]
     {T B : Scheme.{u}} (b : B ⟶ T) [IsClosedImmersion b] (U : T.Opens) :
     supportedEtaleSections A T b.openComplement ⟶
@@ -521,8 +516,7 @@ noncomputable def supportOpenRestriction (A : Type (u + 1)) [CommRing A]
         supportedEtaleSections A U (supportOnOpen b U).openComplement :=
   (exists_unique_supportOpenRestriction A b U).choose
 
-/-- The composite of intersection inclusion and restriction to T minus C is zero.
-Source: Tag 09XP. -/
+/-- The composite of intersection inclusion and restriction to T minus C is zero. -/
 theorem supportInclusion_restriction_zero (A : Type (u + 1)) [CommRing A]
     {T B C : Scheme.{u}} (b : B ⟶ T) (c : C ⟶ T)
     [IsClosedImmersion b] [IsClosedImmersion c] :
@@ -555,16 +549,14 @@ theorem supportInclusion_restriction_zero (A : Type (u + 1)) [CommRing A]
   rw [hk]
   simp only [zero_comp]
 
-/-- The ordinary support localization short complex of functors.
-Source: Tag 09XP. -/
+/-- The ordinary support localization short complex of functors. -/
 noncomputable def supportLocalizationSequence (A : Type (u + 1)) [CommRing A]
     {T B C : Scheme.{u}} (b : B ⟶ T) (c : C ⟶ T)
     [IsClosedImmersion b] [IsClosedImmersion c] :=
   ShortComplex.mk (supportInclusion A b c) (supportOpenRestriction A b c.openComplement)
     (supportInclusion_restriction_zero A b c)
 
-/-- Termwise localization of a complex of sheaves.
-Source: Tag 09XP. -/
+/-- Termwise localization of a complex of sheaves. -/
 noncomputable def supportLocalizationComplex (A : Type (u + 1)) [CommRing A]
     {T B C : Scheme.{u}} (b : B ⟶ T) (c : C ⟶ T)
     [IsClosedImmersion b] [IsClosedImmersion c]
@@ -774,8 +766,7 @@ private theorem supportLocalizationSequence_shortExact (A : Type (u + 1)) [CommR
 
 end
 
-/-- Injective sheaves give a short exact sequence of supported section complexes.
-Source: Tag 09XP. -/
+/-- Injective sheaves give a short exact sequence of supported section complexes. -/
 theorem supportLocalizationComplex_shortExact (A : Type (u + 1)) [CommRing A]
     {T B C : Scheme.{u}} (b : B ⟶ T) (c : C ⟶ T)
     [IsClosedImmersion b] [IsClosedImmersion c]
@@ -786,14 +777,13 @@ theorem supportLocalizationComplex_shortExact (A : Type (u + 1)) [CommRing A]
   exact supportLocalizationSequence_shortExact A b c (I.X n)
 
 /-- The derived functor of the third ordinary support functor before the canonical
-open-restriction comparison. Source: Tag 09XP. -/
+open-restriction comparison. -/
 noncomputable abbrev supportOpenComposite (A : Type (u + 1)) [CommRing A]
     {T B : Scheme.{u}} (b : B ⟶ T) [IsClosedImmersion b] (U : T.Opens) :=
   upperStar (ModuleCat.{u + 1} A) U.ι ⋙
     supportedEtaleSections A U (supportOnOpen b U).openComplement
 
-/-- The canonical boundary, normalized on every termwise injective K-injective complex.
-Source: Tag 09XP. -/
+/-- The canonical boundary, normalized on every termwise injective K-injective complex. -/
 theorem exists_unique_supportLocalizationBoundary (A : Type (u + 1)) [CommRing A]
     {T B C : Scheme.{u}} (b : B ⟶ T) (c : C ⟶ T)
     [IsClosedImmersion b] [IsClosedImmersion c] :
@@ -823,8 +813,7 @@ theorem exists_unique_supportLocalizationBoundary (A : Type (u + 1)) [CommRing A
   let : S.X₃.Additive := inferInstanceAs (supportOpenComposite A b c.openComplement).Additive
   exact ShortComplex.exists_unique_unboundedDerivedBoundary S hS
 
-/-- The normalized connecting map, with no arbitrary triangle completion.
-Source: Tag 09XP. -/
+/-- The normalized connecting map, with no arbitrary triangle completion. -/
 noncomputable def supportLocalizationBoundary (A : Type (u + 1)) [CommRing A]
     {T B C : Scheme.{u}} (b : B ⟶ T) (c : C ⟶ T)
     [IsClosedImmersion b] [IsClosedImmersion c] :
@@ -833,8 +822,7 @@ noncomputable def supportLocalizationBoundary (A : Type (u + 1)) [CommRing A]
         shiftFunctor (DerivedCategory (ModuleCat.{u + 1} A)) (1 : ℤ) :=
   (exists_unique_supportLocalizationBoundary A b c).choose
 
-/-- Canonical derived-composite comparison for an open immersion.
-Source: Tag 09XP. -/
+/-- Canonical derived-composite comparison for an open immersion. -/
 theorem exists_unique_supportTransportComparison (A : Type (u + 1)) [CommRing A]
     {T S D : Scheme.{u}} (h : S ⟶ T) [IsOpenImmersion h]
     (d : D ⟶ S) [IsClosedImmersion d] :
@@ -878,8 +866,7 @@ theorem exists_unique_supportTransportComparison (A : Type (u + 1)) [CommRing A]
     (F ⋙ G).rightDerivedFunctorUnit (HomotopyCategory.quasiIso _ (.up ℤ))
   exact he'.trans he.symm
 
-/-- Canonical comparison for restriction to an open before taking supported sections.
-Source: Tag 09XP. -/
+/-- Canonical comparison for restriction to an open before taking supported sections. -/
 theorem exists_unique_supportOpenDerivedComparison (A : Type (u + 1)) [CommRing A]
     {T B : Scheme.{u}} (b : B ⟶ T) [IsClosedImmersion b] (U : T.Opens) :
     ∃! e : (supportOpenComposite A b U).rightDerivedFunctor ≅
@@ -895,8 +882,7 @@ theorem exists_unique_supportOpenDerivedComparison (A : Type (u + 1)) [CommRing 
               (supportedSectionsDerived A (supportOnOpen b U))) := by
   exact exists_unique_supportTransportComparison A U.ι (supportOnOpen b U)
 
-/-- The uniquely normalized derived open comparison.
-Source: Tag 09XP. -/
+/-- The uniquely normalized derived open comparison. -/
 noncomputable def supportOpenDerivedComparison (A : Type (u + 1)) [CommRing A]
     {T B : Scheme.{u}} (b : B ⟶ T) [IsClosedImmersion b] (U : T.Opens) :
     (supportOpenComposite A b U).rightDerivedFunctor ≅
@@ -904,15 +890,13 @@ noncomputable def supportOpenDerivedComparison (A : Type (u + 1)) [CommRing A]
         supportedSectionsDerived A (supportOnOpen b U) :=
   (exists_unique_supportOpenDerivedComparison A b U).choose
 
-/-- The derived restriction arrow, with the third term on the open ambient scheme.
-Source: Tag 09XP. -/
+/-- The derived restriction arrow, with the third term on the open ambient scheme. -/
 noncomputable def derivedSupportOpenRestriction (A : Type (u + 1)) [CommRing A]
     {T B : Scheme.{u}} (b : B ⟶ T) [IsClosedImmersion b] (U : T.Opens) :=
   Functor.rightDerivedFunctorNatTrans (supportOpenRestriction A b U) ≫
     (supportOpenDerivedComparison A b U).hom
 
-/-- Localization triangle with the actual support inclusion, restriction, and boundary.
-Source: Tag 09XP. -/
+/-- Localization triangle with the actual support inclusion, restriction, and boundary. -/
 noncomputable def normalizedSupportTriangle (A : Type (u + 1)) [CommRing A]
     {T B C : Scheme.{u}} (b : B ⟶ T) (c : C ⟶ T)
     [IsClosedImmersion b] [IsClosedImmersion c]
@@ -923,8 +907,7 @@ noncomputable def normalizedSupportTriangle (A : Type (u + 1)) [CommRing A]
     ((supportOpenDerivedComparison A b c.openComplement).inv.app K ≫
       (supportLocalizationBoundary A b c).app K)
 
-/-- The uniquely normalized ordinary supported transport.
-Source: Tag 09XP. -/
+/-- The uniquely normalized ordinary supported transport. -/
 noncomputable def supportTransport (A : Type (u + 1)) [CommRing A]
     {T S B D : Scheme.{u}} (h : S ⟶ T) [IsOpenImmersion h]
     (b : B ⟶ T) (d : D ⟶ S) [IsClosedImmersion b] [IsClosedImmersion d]
@@ -933,8 +916,7 @@ noncomputable def supportTransport (A : Type (u + 1)) [CommRing A]
       upperStar (ModuleCat.{u + 1} A) h ⋙ supportedEtaleSections A S d.openComplement :=
   (exists_unique_supportTransport A h b d hd).choose
 
-/-- The normalized derived-composite comparison for an open immersion.
-Source: Tag 09XP. -/
+/-- The normalized derived-composite comparison for an open immersion. -/
 noncomputable def supportTransportComparison (A : Type (u + 1)) [CommRing A]
     {T S D : Scheme.{u}} (h : S ⟶ T) [IsOpenImmersion h]
     (d : D ⟶ S) [IsClosedImmersion d] :
@@ -943,8 +925,7 @@ noncomputable def supportTransportComparison (A : Type (u + 1)) [CommRing A]
       (upperStar (ModuleCat.{u + 1} A) h).mapDerivedCategory ⋙ supportedSectionsDerived A d :=
   (exists_unique_supportTransportComparison A h d).choose
 
-/-- The actual derived restriction with closed support, to an arbitrary open immersion.
-Source: Tag 09XP. -/
+/-- The actual derived restriction with closed support, to an arbitrary open immersion. -/
 noncomputable def derivedSupportTransport (A : Type (u + 1)) [CommRing A]
     {T S B D : Scheme.{u}} (h : S ⟶ T) [IsOpenImmersion h]
     (b : B ⟶ T) (d : D ⟶ S) [IsClosedImmersion b] [IsClosedImmersion d]
@@ -952,8 +933,7 @@ noncomputable def derivedSupportTransport (A : Type (u + 1)) [CommRing A]
   Functor.rightDerivedFunctorNatTrans (supportTransport A h b d hd) ≫
     (supportTransportComparison A h d).hom
 
-/-- Change of ambient scheme by an isomorphism is an isomorphism on derived supports.
-Source: Tag 09XP. -/
+/-- Change of ambient scheme by an isomorphism is an isomorphism on derived supports. -/
 @[instance]
 theorem derivedSupportTransport_isIso (A : Type (u + 1)) [CommRing A]
     {T S B D : Scheme.{u}} (h : S ⟶ T) [IsIso h]

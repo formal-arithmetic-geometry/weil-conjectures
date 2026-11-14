@@ -10,7 +10,12 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 
-/-! Affine neighborhoods and the principal generic open of a smooth trait family. -/
+/-! Affine neighborhoods and the principal generic open of a smooth trait family.
+
+## References
+
+* Stacks Project, Tag 0EYJ, first paragraph of the proof
+-/
 
 @[expose] public section
 
@@ -48,9 +53,7 @@ private theorem fractionRing_away_uniformizer
     exact ⟨1, by simpa using (IsFractionRing.injective A K) hxy⟩
 
 /-- An affine smooth trait neighborhood identifies its generic fibre with the principal
-open of the image of a specified uniformizer.
-
-Source: Stacks Project, Tag 0EYJ, first paragraph of the proof. -/
+open of the image of a specified uniformizer. -/
 theorem smooth_trait_affine_generic_open
     (A K : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A]
     [Field K] [Algebra A K] [IsFractionRing A K]

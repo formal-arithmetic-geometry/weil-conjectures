@@ -18,7 +18,9 @@ import WeilConjectures.AlgebraicGeometry.AffineMorphismRelativeSpec
 /-!
 # Finite extension with depth two along the boundary
 
-Source: Stacks Project, Tag 0EY6, assertions (1) and (2).
+## References
+
+* Stacks Project, Tag 0EY6, assertions (1) and (2)
 -/
 
 @[expose] public section
@@ -72,9 +74,7 @@ private noncomputable def pushforward_open_restriction_iso
     rw [← Category.assoc, hi, Scheme.Opens.ι_appIso]
     exact Category.id_comp _
 
-/-- A finite etale cover extends to a finite scheme with depth two along the boundary.
-
-Source: Stacks Project, Tag 0EY6, assertions (1) and (2). -/
+/-- A finite etale cover extends to a finite scheme with depth two along the boundary. -/
 theorem exists_finite_extension_of_depth_two
     {L : Scheme.{u}} [IsLocallyNoetherian L] (U : L.Opens)
     (hboundary : ∀ y : L, y ∉ U →

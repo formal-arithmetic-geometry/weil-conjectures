@@ -14,7 +14,9 @@ import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
 /-! # Dualizing finite free quotients
 
-Source: Stacks Project, Tag 0EKP, the dual-surjection construction in (2) to (3).
+## References
+
+* Stacks Project, Tag 0EKP, the dual-surjection construction in (2) to (3)
 -/
 
 @[expose] public section
@@ -149,9 +151,7 @@ private theorem embedding_of_locallySplit
 
 /-- The transpose of a finite free quotient of the dual of a vector bundle,
 composed with biduality and the finite free dual comparison, is a universally
-monic embedding with finite locally free cokernel.
-
-Source: Stacks Project, Tag 0EKP, the dual-surjection construction in (2) to (3). -/
+monic embedding with finite locally free cokernel. -/
 theorem dual_free_quotient_embedding
     {X : Scheme.{u}} (M : X.Modules) [M.IsFiniteLocallyFree]
     {r : ℕ} (β : free (R := X.ringCatSheaf) (ULift.{u} (Fin r)) ⟶ dual M) [Epi β] :

@@ -12,7 +12,10 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.CompletedMatchingRingMapKerne
 
 /-! # CompletedMatchingRingMapKernelTorsion
 
-Source: Stacks Project, Tags 0BLH, 05ER and 05EU.
+## References
+
+* Stacks Project, Tags 0BLH, 05ER and 05EU
+* Stacks Project, Tag 05ER, localized comparison argument, applied as in 0BLH
 -/
 
 @[expose] public section
@@ -50,8 +53,7 @@ private theorem ideal_pow_mul_annihilates
   intro a ha
   simpa only [Algebra.smul_def, RingHom.algebraMap_toAlgebra] using hn a ha
 
-/-- Kernel elements are maximal-ideal-power torsion.
-Source: Stacks Project, Tag 05ER, localized comparison argument, applied as in 0BLH. -/
+/-- Kernel elements are maximal-ideal-power torsion. -/
 theorem completedRingMap_kernel_torsion
     {A : Type u} [CommRing A] [IsNoetherianRing A] [IsLocalRing A]
     {U : (Spec (.of A)).Opens}

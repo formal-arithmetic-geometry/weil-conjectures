@@ -15,6 +15,10 @@ import Mathlib.Algebra.Category.Ring.Constructions
 import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 
 /-! # The coefficient pushout comparison
+
+## References
+
+* Stacks Project, Tag 03EK
 -/
 
 @[expose] public section
@@ -25,9 +29,7 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme
 
-/-- The normalized scalar square is a pushout of ring sheaves.
-
-Source: Stacks Project, Tag 03EK. -/
+/-- The normalized scalar square is a pushout of ring sheaves. -/
 theorem purTwistCoefficientComparison_isIso (S : Scheme.{t}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :
     IsIso (purTwistCoefficientComparison S l E) := by

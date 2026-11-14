@@ -16,11 +16,15 @@ import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 /-!
 # Finite scalar restriction preserves pro-etale constructibility
 
-Source: Stacks Tags 03DA, 03D2, 093I, 093Q, 09AJ, 010N and 015F.
-
 The coefficient map is arbitrary; no surjectivity or flatness is imposed.
 The intrinsic constant-ring module category and its existing exact restriction functor
 are used throughout. The witness statements retain each original local trivialization cover.
+
+## References
+
+* Stacks Tags 03DA, 03D2, 093I, 093Q, 09AJ, 010N and 015F
+* Stacks Tags 03D2, 093I and 093Q
+* Stacks Tag 09AJ
 -/
 
 -- After pruning, this module only keeps private declarations.
@@ -233,8 +237,7 @@ private noncomputable abbrev localizedRestriction (X : Scheme.{u})
         (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}))⟩
 
 /-- Every chosen stratum cover and its constant module models still trivialize the
-scalar-restricted sheaf. This records the unchanged witnesses in constructibility.
-Source: Stacks Tags 03D2, 093I and 093Q. -/
+scalar-restricted sheaf. This records the unchanged witnesses in constructibility. -/
 theorem proEtaleFiniteScalarRestriction_sameTrivializations
     (X : Scheme.{u}) [IsNoetherian X]
     (A B : Type u) [CommRing A] [CommRing B] [Finite A] [Finite B] (a : A →+* B)
@@ -267,8 +270,7 @@ theorem proEtaleFiniteScalarRestriction_sameTrivializations
   obtain ⟨ec⟩ := constantModelRestriction (S.domain i) A B a (U j) (M j)
   exact ⟨ep ≪≫ eo ≪≫ E.mapIso e ≪≫ ec⟩
 
-/-- The locally constant and finite-stalk conditions hold on the very same strata.
-Source: Stacks Tag 09AJ. -/
+/-- The locally constant and finite-stalk conditions hold on the very same strata. -/
 theorem proEtaleFiniteScalarRestriction_sameStratification
     (X : Scheme.{u}) [IsNoetherian X]
     (A B : Type u) [CommRing A] [CommRing B] [Finite A] [Finite B] (a : A →+* B)
@@ -341,8 +343,7 @@ private theorem constructibleOfIso (X : Scheme.{u}) (A : Type u)
 
 /-- Finite scalar restriction is exact, preserves constructible sheaves and bounded
 constructibility, commutes naturally with every cohomology functor, and preserves and
-reflects cohomology vanishing in every degree.
-Source: Stacks Tags 03DA, 03D2, 093I, 093Q, 09AJ, 010N and 015F. -/
+reflects cohomology vanishing in every degree. -/
 theorem proEtaleFiniteScalarRestriction_constructible
     (X : Scheme.{u}) [IsNoetherian X]
     (A B : Type u) [CommRing A] [CommRing B] [Finite A] [Finite B] (a : A →+* B) :

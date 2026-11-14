@@ -38,8 +38,7 @@ def orderedAffineRight (A : Type (u + 1)) [CommRing A] (N : ℕ)
             ((d + 1 : ℕ) : ℤ))) ⋙ shiftFunctor _ (2 * ((d + 1 : ℕ) : ℤ))
 
 /-- The actual ordered normal form used to construct the affine-space trace.
-It is the existing recursive construction, not a choice from Nonempty.
-Source: Charts of reduction-exceptional. -/
+It is the existing recursive construction, not a choice from Nonempty. -/
 @[irreducible]
 def orderedAffineRightIso (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)

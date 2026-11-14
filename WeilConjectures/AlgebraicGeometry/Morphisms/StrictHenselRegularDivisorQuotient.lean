@@ -15,7 +15,13 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuo
 import WeilConjectures.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotientRegular
 
 /-! # The regular divisor quotient of the canonical strict henselization
-Source: Stacks Project, Tag 0EYG, strict henselization paragraph; Tags 06LN and 05WS.
+
+## References
+
+* Stacks Project, Tag 0EYG, strict henselization paragraph
+* Tags 06LN and 05WS
+* Stacks Project, Tag 0EYG, strict henselization paragraph, using quotient compatibility (Tag 05WS)
+  and regularity of strict henselizations (Tag 06LN)
 -/
 
 @[expose] public section
@@ -24,9 +30,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- The canonical strict henselization is Noetherian and its nonempty divisor quotient
-is a regular domain.
-Source: Stacks Project, Tag 0EYG, strict henselization paragraph, using quotient
-compatibility (Tag 05WS) and regularity of strict henselizations (Tag 06LN). -/
+is a regular domain. -/
 theorem strictHenselization_regular_divisor_quotient
     (R : CommRingCat.{u}) [IsRegularRing R] (f : R)
     [IsRegularRing (R ⧸ Ideal.span {f})]

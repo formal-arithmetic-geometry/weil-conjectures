@@ -21,11 +21,14 @@ public import WeilConjectures.Algebra.Homology.DerivedChangeOfRingsIndependentCo
 
 /-! # Constant-ring pro-etale scalar and open operations
 
-Source: construction references Stacks Tags 06YY, 07A6, 07A4, 08FJ and 03DJ.
-
 All declarations live in the namespace `AlgebraicGeometry.ProEtale.OpenScalarOperations`,
 so they do not clash with the withdrawn `OpenScalarExchange` attachment. The constant
 coefficient ring map is the existing `Scheme.proEtaleConstantRingMap`
+
+## References
+
+* construction references Stacks Tags 06YY, 07A6, 07A4, 08FJ and 03DJ
+* Stacks Tag 07A6
 -/
 
 @[expose] public noncomputable section
@@ -41,8 +44,7 @@ attribute [instance] Scheme.proEtaleRingRestrictScalars_preservesFiniteLimits
   Scheme.proEtaleRingRestrictScalars_preservesFiniteColimits
 
 /-- Termwise restriction of scalars `Res_T: D(B_T) ⥤ D(A_T)`,
-localized to the unbounded derived categories; it is exact.
-Source: Stacks Tag 07A6. -/
+localized to the unbounded derived categories; it is exact. -/
 noncomputable def scalarRestriction {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B) (T : Scheme.{u}) :
     Scheme.proEtaleDerivedCategory T B ⥤ Scheme.proEtaleDerivedCategory T A :=

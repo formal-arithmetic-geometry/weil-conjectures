@@ -36,11 +36,14 @@ import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor
 
 /-! # Scalar extension of arbitrary Proj twists
 
-Source: Stacks Project, Tags 01N2, 01MY and 01MZ.
-
 The fraction normalization is stated using the existing pointwise realization of twists.
 Multiplying by the denominator avoids choosing a representative in a localization.
 The product law is stated on local sections, which generate the sheaf tensor product.
+
+## References
+
+* Stacks Project, Tags 01N2, 01MY and 01MZ
+* Stacks 01N2(3), 01MY, 01MZ
 -/
 
 @[expose] public section
@@ -178,7 +181,7 @@ private theorem scalarExtension_eq_map
     (Proj.awayι_comp_map ψ hψ i.1.2 i.2 i.2.2).symm
 
 /-- Scalar extension preserves every twist, with its fraction, algebra, section and
-composition normalizations. Source: Stacks 01N2(3), 01MY, 01MZ. -/
+composition normalizations. -/
 theorem scalarExtension_twist_comparison
     {R S A B : Type u} [CommRing R] [CommRing S] [CommRing A] [CommRing B]
     [Algebra R S] [Algebra R A] [Algebra S B]

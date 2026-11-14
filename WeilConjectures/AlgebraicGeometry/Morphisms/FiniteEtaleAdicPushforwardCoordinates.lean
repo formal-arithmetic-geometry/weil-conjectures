@@ -16,7 +16,11 @@ import Mathlib.AlgebraicGeometry.Morphisms.Finite
 
 /-! # Canonical affine base change of finite étale section coordinates
 
-Source: Stacks Project, Tag 02KG, with the naturality of the affine tensor comparison.
+## References
+
+* Stacks Project, Tag 02KG, with the naturality of the affine tensor comparison
+* Stacks Project, Tag 02KG, affine base change, and Tag 0EKP, restriction of the finite free
+  embedding to infinitesimal neighbourhoods
 -/
 
 @[expose] public section
@@ -152,10 +156,7 @@ theorem pushforward_coordinates_transition_fun :
   exact (congrArg c0 hl).trans (hc.trans (congrArg c1 hl1.symm))
 
 /-- Coordinates from the canonical finite affine base-change comparison are natural
-under successive thickenings.
-
-Source: Stacks Project, Tag 02KG, affine base change, and Tag 0EKP, restriction of the
-finite free embedding to infinitesimal neighbourhoods. -/
+under successive thickenings. -/
 theorem pushforward_coordinates_transition :
     ∀ (r : ℕ)
       (α : (Modules.pushforward P.obj.hom).obj (Modules.unit P.obj.left) ⟶

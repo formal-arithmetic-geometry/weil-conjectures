@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.NativeFrobenius.NativeFrobeniusEvaluati
 
 /-! # Native pullback versus translation on the fixed ordinary model
 
-Source: Stacks 03D6 and 03EO.
+## References
+
+* Stacks 03D6 and 03EO
 -/
 
 @[expose] public section
@@ -51,9 +53,7 @@ attribute [local irreducible] homComparison sectionCounit
 /-- For the *specified* lifted native coefficient model and its *specified* ordinary
 Hom comparison, native pushforward by an inverse scheme isomorphism is translation,
 compatibly with internal Hom. No site, ring, module equivalence, or Hom isomorphism
-is chosen by this statement: all of those have already been constructed.
-
-Source: Stacks 03D6 and 03EO. -/
+is chosen by this statement: all of those have already been constructed. -/
 theorem nativeFrobeniusComparison (Y : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (g : Y ≅ Y) (H : AdicModuleHomComparisonCore l Y) :
     let _ := (translation_continuous Y g).1

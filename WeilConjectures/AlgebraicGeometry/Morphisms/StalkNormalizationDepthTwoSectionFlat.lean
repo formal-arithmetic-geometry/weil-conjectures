@@ -27,8 +27,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.StalkNormalizationSplitFormal
 /-!
 # Flatness of the normalization near a split section
 
-Source: Stacks Project, Tag 0EYJ, the final formal-neighbourhood calculation;
-Tags 0EY6 and 0EY9.
+## References
+
+* Stacks Project, Tag 0EYJ, the final formal-neighbourhood calculation
+* Tags 0EY6 and 0EY9
+* Stacks Project, Tag 0EYJ, proof of the local claim, last three paragraphs
 -/
 
 @[expose] public section
@@ -38,10 +41,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- The formal section calculation gives flatness on a target neighbourhood.
-The depth-two calculation does not require invertibility of the group order.
-
-Source: Stacks Project, Tag 0EYJ, proof of the local claim, last three paragraphs; Tags 0EY6 and
-0EY9 -/
+The depth-two calculation does not require invertibility of the group order. -/
 theorem GaloisCover.stalk_normalization_depth_two_section_flat {S C : Scheme.{u}}
     [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]

@@ -12,7 +12,10 @@ import Mathlib.Algebra.Module.Equiv.Basic
 
 /-! # The constant-coefficient realization of Chern arrows is injective
 
-Source: Stacks Project, Tags 03FD and 03PL.
+## References
+
+* Stacks Project, Tags 03FD and 03PL
+* Stacks Project, Tag 03FD
 -/
 
 @[expose] public noncomputable section
@@ -102,8 +105,7 @@ set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
 /-- A module-derived class from the free constant coefficient sheaf is determined by
-its realization in abelian sheaf cohomology on a quasi-compact quasi-separated scheme.
-Source: Stacks Project, Tag 03FD; the universal Ext-to-cohomology comparison. -/
+its realization in abelian sheaf cohomology on a quasi-compact quasi-separated scheme. -/
 theorem ordinaryFiniteClass_injective (A : Type (u + 1)) [CommRing A]
     (T : Scheme.{u}) [CompactSpace T] [QuasiSeparatedSpace T]
     (P : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) (n : ℕ) :

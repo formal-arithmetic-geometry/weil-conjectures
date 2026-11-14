@@ -13,7 +13,9 @@ import Mathlib.CategoryTheory.Sites.EpiMono
 
 /-! # Epimorphic transitions of the prime-power root tower
 
-Source: Stacks Project, Tag 03PK
+## References
+
+* Stacks Project, Tag 03PK
 -/
 
 @[expose] public section
@@ -24,9 +26,7 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 namespace AlgebraicGeometry.Scheme
 
 /-- The power transitions of the root tower are epimorphisms when the prime
-is invertible on the base.
-
-Source: Stacks Project, Tag 03PK -/
+is invertible on the base. -/
 theorem purTwistRootTransitions_epi (S : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     [∀ x : S, Invertible (l : S.residueField x)] (n : ℕ) :
     Epi (proEtaleRootsOfUnityTransition S (l ^ (n + 1)) (l ^ (n + 2))

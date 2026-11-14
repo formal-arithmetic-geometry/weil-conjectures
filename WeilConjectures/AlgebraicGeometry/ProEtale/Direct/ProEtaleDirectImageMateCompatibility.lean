@@ -11,7 +11,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 /-!
 # ProEtaleDirectImageMateCompatibility
 
-Source: Stacks Tags 09A6 and 0B65.
+## References
+
+* Stacks Tags 09A6 and 0B65
 -/
 
 -- After pruning, this module only keeps private declarations.

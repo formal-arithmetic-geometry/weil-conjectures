@@ -22,7 +22,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
 
 /-! # Finite normal models of generic Galois covers over a DVR
 
-Source: Stacks Project, Tags 032L, 033C, 035L and 0307
+## References
+
+* Stacks Project, Tags 032L, 033C, 035L and 0307
 -/
 
 @[expose] public section
@@ -92,9 +94,7 @@ private theorem finite_normalization_of_normal_open
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A finite Galois generic cover pulled back to a DVR has finite relative normalization
-and normal local rings.
-
-Source: Stacks Project, Tags 032L, 033C, 035L and 0307 -/
+and normal local rings. -/
 theorem dvr_generic_galois_normalization
     (B A : CommRingCat.{u}) [IsDomain B] [IsDiscreteValuationRing B]
     [IsDomain A] [IsDiscreteValuationRing A]

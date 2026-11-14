@@ -70,7 +70,10 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Tensor.ProEtaleTensorPullbackD
 
 /-! # Tensor interpretation of one evaluated constant reduction
 
-Source: Stacks Tags 06YY, 07A4, 099M and 0B56.
+## References
+
+* Stacks Tags 06YY, 07A4, 099M and 0B56
+* Stacks Tags 06YY (derived localization), 07A4 (derived tensor), 099M (adic reduction)
 -/
 
 @[expose] public noncomputable section
@@ -996,8 +999,7 @@ private theorem comparisonOnRepresentatives (n : ℕ)
 
 /-- Evaluated reduction is tensor by any flat K-flat resolution of the constant quotient,
 and its specified pullback square is the canonical tensor square. This statement makes
-no finite-support or finite-projectivity assumption on the coefficient resolution.
-Source: Stacks Tags 06YY (derived localization), 07A4 (derived tensor), 099M (adic reduction). -/
+no finite-support or finite-projectivity assumption on the coefficient resolution. -/
 theorem constantQuotientTensorComparison (n : ℕ)
     (F : CochainComplex (reductionModules V (exchangeConstantRing V A)) ℤ)
     (hF : proEtaleFlatRepresentatives V (exchangeConstantRing V A) F)

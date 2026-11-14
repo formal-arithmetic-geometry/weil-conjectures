@@ -13,7 +13,11 @@ import WeilConjectures.AlgebraicGeometry.SingleComplexOpenRestrictionData
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 
 /-! # Coherence of the local perfect target model
-Source: Stacks Project, Tags 06YJ, 0D5S and 08DW. -/
+
+## References
+
+* Stacks Project, Tags 06YJ, 0D5S and 08DW
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -151,8 +155,7 @@ private theorem open_model_iso (W : Scheme.{v}) (E : schemeDerivedCategory W)
       A.mapDerivedCategoryFactors.{v + 1, v + 1}.app K⟩
 
 /-- The perfect target model has object comparisons compatible with the canonical
-composition counit. This assertion involves no morphism out of a source single.
-Source: Stacks Project, Tags 06YJ, 0D5S and 08DW. -/
+composition counit. This assertion involves no morphism out of a source single. -/
 theorem picard_termwise_target_coherence
     (W : Scheme.{v}) (E : schemeDerivedCategory W) (U : W.Opens)
     (K : CochainComplex

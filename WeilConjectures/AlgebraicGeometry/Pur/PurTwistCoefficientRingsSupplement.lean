@@ -19,6 +19,12 @@ public import WeilConjectures.AlgebraicGeometry.PurTwistCoefficientRings
 
 The constant and completed coefficient rings, their quotient projections, and the
 canonical comparison form the coefficient data used before constructing the Tate line.
+
+## References
+
+* Stacks Tag 03PK
+* Stacks Tag 03CO
+* Stacks Tag 03EK
 -/
 
 @[expose] public section
@@ -34,8 +40,7 @@ noncomputable abbrev purTwistZlConstantOfUniverses :=
   (constantSheaf (ProEt.topology S) CommRingCat.{max u (t + 1)}).obj
     (CommRingCat.of (ULift.{max u (t + 1)} ℤ_[l]))
 
-/-- Reduction of constant finite coefficient rings.
-Source: Stacks Tag 03PK. -/
+/-- Reduction of constant finite coefficient rings. -/
 noncomputable def purTwistFiniteTransitionOfUniverses (n : ℕ) :
     purTwistFiniteRingOfUniverses S l (n + 1) ⟶ purTwistFiniteRingOfUniverses S l n :=
   (constantSheaf (ProEt.topology S) CommRingCat.{max u (t + 1)}).map
@@ -44,31 +49,26 @@ noncomputable def purTwistFiniteTransitionOfUniverses (n : ℕ) :
         ULift.ringEquiv.toRingHom)))
 
 /-- The positive finite coefficient inverse system. It is reducible, so unfolding the
-tied-universe name `purTwistZlTower` still exposes `Functor.ofOpSequence` to `simp`.
-Source: Stacks Tag 03CO. -/
+tied-universe name `purTwistZlTower` still exposes `Functor.ofOpSequence` to `simp`. -/
 noncomputable abbrev purTwistZlTowerOfUniverses :=
   Functor.ofOpSequence (purTwistFiniteTransitionOfUniverses S l)
 
-/-- The completed `Z_l` coefficient sheaf, as the specified inverse limit.
-Source: Stacks Tag 03CO. -/
+/-- The completed `Z_l` coefficient sheaf, as the specified inverse limit. -/
 noncomputable def purTwistZlCompletionOfUniverses := limit (purTwistZlTowerOfUniverses S l)
 
-/-- The coefficient projection to exponent `n + 1`.
-Source: Stacks Tag 03CO. -/
+/-- The coefficient projection to exponent `n + 1`. -/
 noncomputable def purTwistZlProjectionOfUniverses (n : ℕ) :
     purTwistZlCompletionOfUniverses S l ⟶ purTwistFiniteRingOfUniverses S l n :=
   limit.π (purTwistZlTowerOfUniverses S l) (op n)
 
-/-- Constant p-adic reduction.
-Source: Stacks Tag 03CO. -/
+/-- Constant p-adic reduction. -/
 noncomputable def purTwistZlReductionOfUniverses (n : ℕ) :
     purTwistZlConstantOfUniverses S l ⟶ purTwistFiniteRingOfUniverses S l n :=
   (constantSheaf (ProEt.topology S) CommRingCat.{max u (t + 1)}).map
     (CommRingCat.ofHom (ULift.ringEquiv.symm.toRingHom.comp
       ((PadicInt.toZModPow (n + 1)).comp ULift.ringEquiv.toRingHom)))
 
-/-- The completion map is uniquely fixed by all finite reductions.
-Source: Stacks Tag 03CO. -/
+/-- The completion map is uniquely fixed by all finite reductions. -/
 theorem purTwistZlCompletionMap_existsUniqueOfUniverses :
     ∃! a : purTwistZlConstantOfUniverses S l ⟶ purTwistZlCompletionOfUniverses S l,
       ∀ n : ℕ, a ≫ purTwistZlProjectionOfUniverses S l n =
@@ -95,8 +95,7 @@ theorem purTwistZlCompletionMap_existsUniqueOfUniverses :
     intro n
     exact (ha n.unop).trans (limit.lift_π c n).symm
 
-/-- The actual constant-to-completed coefficient map, fixed by its residue projections.
-Source: Stacks Tag 03CO. -/
+/-- The actual constant-to-completed coefficient map, fixed by its residue projections. -/
 noncomputable def purTwistZlCompletionMapOfUniverses :=
   (purTwistZlCompletionMap_existsUniqueOfUniverses S l).exists.choose
 
@@ -104,43 +103,36 @@ noncomputable def purTwistZlCompletionMapOfUniverses :=
 noncomputable abbrev purTwistZlConstant :=
   purTwistZlConstantOfUniverses.{t, t} S l
 
-/-- Reduction of constant finite coefficient rings.
-Source: Stacks Tag 03PK. -/
+/-- Reduction of constant finite coefficient rings. -/
 noncomputable abbrev purTwistFiniteTransition (n : ℕ) :
     purTwistFiniteRing S l (n + 1) ⟶ purTwistFiniteRing S l n :=
   purTwistFiniteTransitionOfUniverses.{t, t} S l n
 
-/-- The positive finite coefficient inverse system.
-Source: Stacks Tag 03CO. -/
+/-- The positive finite coefficient inverse system. -/
 noncomputable abbrev purTwistZlTower :=
   purTwistZlTowerOfUniverses.{t, t} S l
 
-/-- The completed `Z_l` coefficient sheaf, as the specified inverse limit.
-Source: Stacks Tag 03CO. -/
+/-- The completed `Z_l` coefficient sheaf, as the specified inverse limit. -/
 noncomputable abbrev purTwistZlCompletion :=
   purTwistZlCompletionOfUniverses.{t, t} S l
 
-/-- The coefficient projection to exponent `n + 1`.
-Source: Stacks Tag 03CO. -/
+/-- The coefficient projection to exponent `n + 1`. -/
 noncomputable abbrev purTwistZlProjection (n : ℕ) :
     purTwistZlCompletion S l ⟶ purTwistFiniteRing S l n :=
   purTwistZlProjectionOfUniverses.{t, t} S l n
 
-/-- Constant p-adic reduction.
-Source: Stacks Tag 03CO. -/
+/-- Constant p-adic reduction. -/
 noncomputable abbrev purTwistZlReduction (n : ℕ) :
     purTwistZlConstant S l ⟶ purTwistFiniteRing S l n :=
   purTwistZlReductionOfUniverses.{t, t} S l n
 
-/-- The completion map is uniquely fixed by all finite reductions.
-Source: Stacks Tag 03CO. -/
+/-- The completion map is uniquely fixed by all finite reductions. -/
 theorem purTwistZlCompletionMap_existsUnique :
     ∃! a : purTwistZlConstant S l ⟶ purTwistZlCompletion S l,
       ∀ n : ℕ, a ≫ purTwistZlProjection S l n = purTwistZlReduction S l n := by
   exact purTwistZlCompletionMap_existsUniqueOfUniverses.{t, t} S l
 
-/-- The actual constant-to-completed coefficient map, fixed by its residue projections.
-Source: Stacks Tag 03CO. -/
+/-- The actual constant-to-completed coefficient map, fixed by its residue projections. -/
 noncomputable abbrev purTwistZlCompletionMap :=
   purTwistZlCompletionMapOfUniverses.{t, t} S l
 
@@ -171,16 +163,14 @@ noncomputable abbrev purTwistIntegralConstant :=
   (constantSheaf (ProEt.topology S) CommRingCat.{max u (t + 1)}).obj
     (CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionIntegers l E)))
 
-/-- The constant scalar-extension map induced by the field inclusion.
-Source: Stacks Tag 03EK. -/
+/-- The constant scalar-extension map induced by the field inclusion. -/
 noncomputable def purTwistConstantIntegersMap :
     purTwistZlConstantOfUniverses S l ⟶ purTwistIntegralConstant S l E :=
   (constantSheaf (ProEt.topology S) CommRingCat.{max u (t + 1)}).map
     (CommRingCat.ofHom (ULift.ringEquiv.symm.toRingHom.comp
       ((purTwistIntegersMap l E).comp ULift.ringEquiv.toRingHom)))
 
-/-- The canonical quotient of the discrete valuation-ring sheaf.
-Source: Stacks Tag 03EK. -/
+/-- The canonical quotient of the discrete valuation-ring sheaf. -/
 noncomputable def purTwistIntegralQuotient (n : ℕ) :
     purTwistIntegralConstant S l E ⟶
       WeilConjectures.integralCoefficientCommRingSheaf l E S n :=
@@ -189,8 +179,7 @@ noncomputable def purTwistIntegralQuotient (n : ℕ) :
       ((Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1))).comp
         ULift.ringEquiv.toRingHom)))
 
-/-- The constant valuation ring maps canonically into its completion.
-Source: Stacks Tag 03CO. -/
+/-- The constant valuation ring maps canonically into its completion. -/
 theorem purTwistIntegralCompletionMap_existsUnique :
     ∃! a : purTwistIntegralConstant S l E ⟶
       WeilConjectures.completedIntegralCommRingSheafUnrestricted l E S,
@@ -231,8 +220,7 @@ theorem purTwistIntegralCompletionMap_existsUnique :
   exact (F.map_comp _ _).symm.trans
     ((congrArg F.map ((hb n.unop).trans (ha n.unop).symm)).trans (F.map_comp _ _))
 
-/-- The actual constant-to-completed valuation-ring map.
-Source: Stacks Tag 03CO. -/
+/-- The actual constant-to-completed valuation-ring map. -/
 noncomputable def purTwistIntegralCompletionMap :=
   (purTwistIntegralCompletionMap_existsUnique S l E).exists.choose
 
@@ -428,8 +416,7 @@ theorem purTwistCoefficientSquare :
   exact (F.map_comp _ _).symm.trans ((congrArg F.map (hproj n.unop)).trans
     (F.map_comp _ _))
 
-/-- The coefficient comparison is the canonical map from the ring-sheaf tensor (pushout).
-Source: Stacks Tag 03EK. -/
+/-- The coefficient comparison is the canonical map from the ring-sheaf tensor (pushout). -/
 noncomputable def purTwistCoefficientComparison :=
   pushout.desc (purTwistCompletedScalarMap S l E) (purTwistIntegralCompletionMap S l E)
     (purTwistCoefficientSquare S l E)

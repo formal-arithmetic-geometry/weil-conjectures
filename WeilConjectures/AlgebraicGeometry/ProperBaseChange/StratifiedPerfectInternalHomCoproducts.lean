@@ -83,7 +83,11 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLow
 
 /-! # Internal Hom and bounded-below sums for stratified perfect sources
 
-Source: Bhatt--Scholze, Lemma 6.3.14(2)--(4), its final devissage, and Lemma 6.8.12.
+## References
+
+* Bhatt--Scholze, Lemma 6.3.14(2)--(4), its final devissage, and Lemma 6.8.12
+* Bhatt--Scholze, Lemma 6.3.14(2)--(4), the closed-stratum argument at the end of its proof, and the
+  same argument in Lemma 6.8.12
 -/
 
 @[expose] public noncomputable section
@@ -94,9 +98,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Internal derived Hom from a bounded-above stratified perfect source preserves
 uniformly bounded-below coproducts, before applying derived global sections.
-The local perfect models use the actual completed coefficient ring on every stratum.
-Source: Bhatt--Scholze, Lemma 6.3.14(2)--(4), the closed-stratum argument at the end of its proof,
-and the same argument in Lemma 6.8.12. -/
+The local perfect models use the actual completed coefficient ring on every stratum. -/
 theorem integralStratifiedPerfect_internalHom_preservesColimit
     (T : Scheme.{u}) [IsNoetherian T]
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)

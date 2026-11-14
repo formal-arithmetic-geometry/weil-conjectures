@@ -19,7 +19,9 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteNormalDenseOpenIso
 /-!
 # FiniteNormalTraitPurity
 
-Source: Stacks Project, Tags 0EYE and 0EYJ (trait case).
+## References
+
+* Stacks Project, Tags 0EYE and 0EYJ (trait case)
 -/
 
 @[expose] public section
@@ -28,9 +30,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- Purity for finite normal covers in the indicated local-base case.
-
-Source: Stacks Project, Tags 0EYE and 0EYJ (trait case). -/
+/-- Purity for finite normal covers in the indicated local-base case. -/
 theorem finite_normal_etale_of_trait_neighbourhood
     (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]
     [IsDomain A] [IsIntegrallyClosed A]

@@ -8,7 +8,10 @@ module
 public import WeilConjectures.AlgebraicGeometry.Proj.ProjScalarExtensionTwistData
 
 /-! Pointwise evaluation of the section-normalized identity comparison.
-Source: Stacks Project, Tags 01MY and 01N2.
+
+## References
+
+* Stacks Project, Tags 01MY and 01N2
 -/
 
 @[expose] public section
@@ -23,9 +26,7 @@ open AlgebraicGeometry.Scheme.Modules
 
 namespace AlgebraicGeometry.Proj
 
-/-- The normalized identity pullback comparison evaluates a section at the same point.
-Source: Stacks Project, Tags 01MY and 01N2.
--/
+/-- The normalized identity pullback comparison evaluates a section at the same point. -/
 theorem scalarExtension_twist_canonical_section
     {A : Type u} [CommRing A]
     {σ : Type u} [SetLike σ A] [AddSubgroupClass σ A]

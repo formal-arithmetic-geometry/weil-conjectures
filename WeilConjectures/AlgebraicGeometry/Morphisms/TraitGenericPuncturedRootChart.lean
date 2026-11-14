@@ -19,7 +19,12 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.RegularDivisorGaloisPunctured
 import WeilConjectures.RingTheory.RegularRingSmoothAscent
 import Mathlib.RingTheory.TensorProduct.Quotient
 
-/-! Punctured Kummer charts before normality. -/
+/-! Punctured Kummer charts before normality.
+
+## References
+
+* Stacks Project, Tags 0EYJ (first trait paragraph), 09EB and 0EYG
+-/
 
 @[expose] public section
 
@@ -51,9 +56,7 @@ private theorem smooth_trait_regular_quotient
   rw [Set.image_singleton] at hQ
   exact hQ
 
-/-- Punctured Kummer charts for a generic torsor over a smooth trait family.
-
-Source: Stacks Project, Tags 0EYJ (first trait paragraph), 09EB and 0EYG. -/
+/-- Punctured Kummer charts for a generic torsor over a smooth trait family. -/
 theorem GaloisCover.trait_generic_punctured_root_chart
     (A K : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A]
     [Field K] [Algebra A K] [IsFractionRing A K]

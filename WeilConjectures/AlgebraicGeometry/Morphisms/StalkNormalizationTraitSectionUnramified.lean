@@ -23,7 +23,10 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.FormallyUnramifiedStalkNeighb
 /-!
 # Unramifiedness along a split trait section
 
-Source: Stacks Project, Tags 0EYG, 0EYH, 0EYI and 0EYJ.
+## References
+
+* Stacks Project, Tags 0EYG, 0EYH, 0EYI and 0EYJ
+* Stacks Project, Tag 0EYI(2), applied as in Tag 0EYJ, trait paragraph
 -/
 
 @[expose] public section
@@ -33,9 +36,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- Splitting along the generic section kills the relative differentials near
-all points above the closed section point.
-
-Source: Stacks Project, Tag 0EYI(2), applied as in Tag 0EYJ, trait paragraph. -/
+all points above the closed section point. -/
 theorem GaloisCover.stalk_normalization_trait_section_unramified {S C : Scheme.{u}}
     [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]

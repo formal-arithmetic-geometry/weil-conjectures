@@ -13,7 +13,10 @@ import Mathlib.Algebra.MvPolynomial.Division
 
 /-! # Pairwise Laurent expansions on projective-space overlaps
 
-Source: Stacks Project, Tag 0BXJ.
+## References
+
+* Stacks Project, Tag 0BXJ
+* Stacks Project, Tag 0BXJ, the double-overlap calculation
 -/
 
 @[expose] public section
@@ -119,8 +122,6 @@ set_option linter.unusedVariables false in
 /-- Every unit on a distinct standard overlap has one Laurent exponent and a scalar
 coefficient.  This is the pairwise Laurent-polynomial calculation used by the
 normalization theorem.
-
-Source: Stacks Project, Tag 0BXJ, the double-overlap calculation.
 -/
 theorem exists_pairwise_laurent_unit_expansion (k : Type u) [Field k]
     (r : ℕ) (hr : 3 ≤ r)

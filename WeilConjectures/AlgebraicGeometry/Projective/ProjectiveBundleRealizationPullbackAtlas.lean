@@ -9,7 +9,10 @@ public import WeilConjectures.AlgebraicGeometry.Projective.ProjectiveBundleTauto
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeGeneratorIso
 
 /-! # Local frame atlases for realization base change
-Source: Stacks Project, Tags 01NQ, 01NR and 01OB.
+
+## References
+
+* Stacks Project, Tags 01NQ, 01NR and 01OB
 -/
 
 @[expose] public section
@@ -56,8 +59,7 @@ structure ProjectiveBundleRealizationPullbackAtlas
           c • D'.L.presheaf.map (homOfLE hi).op (t i)
 
 /-- The affine-fraction calculation and normalized quotient equations produce a common frame
-atlas for arbitrary normalized realizations.  This is the local geometric part of the proof.
-Source: Stacks Project, Tags 01NQ, 01NR and 01OB. -/
+atlas for arbitrary normalized realizations.  This is the local geometric part of the proof. -/
 theorem exists_projectiveBundleRealizationPullbackAtlas
     {B B' : Scheme.{u}} {F : B.Modules} {F' : B'.Modules}
     (D : ProjectiveBundleRealization B F) (D' : ProjectiveBundleRealization B' F')

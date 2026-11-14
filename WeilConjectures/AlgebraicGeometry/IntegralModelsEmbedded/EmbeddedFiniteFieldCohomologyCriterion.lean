@@ -13,7 +13,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeMapDerivedCate
 
 /-! # Constructible finite Tor complexes over an embedded constant finite field
 
-Source: Stacks Tags 03ET, 00YV and 06YQ.
+## References
+
+* Stacks Tags 03ET, 00YV and 06YQ
 -/
 
 @[expose] public noncomputable section
@@ -33,9 +35,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 attribute [-instance] integralModel_coefficientMonObj in
 /-- For any complex over an embedded constant finite field, constructible homology
 and finite Tor amplitude mean exactly intrinsically constructible bounded homology
-under the specified scalar realization. No integral reduction or etale origin occurs.
-
-Source: Stacks Tags 03ET, 00YV and 06YQ. -/
+under the specified scalar realization. No integral reduction or etale origin occurs. -/
 theorem finiteFieldCohomologyCriterion
     (X : Scheme.{u}) [IsNoetherian X] (A : Type) [Field A]
     [TopologicalSpace A] [IsTopologicalRing A] [Finite A] [DiscreteTopology A]

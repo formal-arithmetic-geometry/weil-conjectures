@@ -12,7 +12,11 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # Exterior sheaves under restriction to the full open
 
-Source: Stacks Project, Tag 0BR0, the expression wedge^r N[-r].
+## References
+
+* Stacks Project, Tag 0BR0, the expression wedge^r N[-r]
+* Stacks Project, Tag 0BR0, identification of the exterior sheaf on the constant-rank full stratum
+  in the expression wedge^r N[-r]
 -/
 
 @[expose] public section
@@ -25,9 +29,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Restricting to the full open, taking an exterior sheaf, and pushing back
-forward gives the original exterior sheaf.
-Source: Stacks Project, Tag 0BR0, identification of the exterior sheaf on the
-constant-rank full stratum in the expression wedge^r N[-r]. -/
+forward gives the original exterior sheaf. -/
 theorem exteriorSheaf_fullOpen_pushforward_iso {X : Scheme.{u}} (M : X.Modules)
     (d : ℕ) :
     Nonempty ((pushforward (⊤ : X.Opens).ι).obj

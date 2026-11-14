@@ -23,7 +23,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.RegularCartierGenericStalkDvr
 
 /-! # A Galois integral-closure model at the root divisor generic point
 
-Source: Stacks Project, Tags 09EB and 0307. -/
+## References
+
+* Stacks Project, Tags 09EB and 0307
+* Stacks Project, Tags 0307 and 09EB
+-/
 
 @[expose] public section
 universe u
@@ -70,9 +74,7 @@ private theorem basicOpen_pullback_torsor_square
   simpa only [he] using h
 
 set_option linter.unusedVariables false in
-/-- A root-normalization residue extension has a finite flat Galois integral-closure model.
-
-Source: Stacks Project, Tags 0307 and 09EB. -/
+/-- A root-normalization residue extension has a finite flat Galois integral-closure model. -/
 theorem root_normalization_generic_stalk_galois_model
     {L U : Scheme.{u}} (i : U ⟶ L)
     (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)

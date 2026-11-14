@@ -19,7 +19,10 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.EnlargeOpenFiniteEtaleModel
 /-!
 # Underlying finite étale extension over a Noetherian normal base
 
-Source: Stacks Project, Tag 0EYJ.
+## References
+
+* Stacks Project, Tag 0EYJ
+* Stacks Project, Tag 0EYJ, proof of Lemma 58.31.8
 -/
 
 @[expose] public section
@@ -30,9 +33,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Noetherian case of extension of a generically split finite torsor.
-
-Source: Stacks Project, Tag 0EYJ, proof of Lemma 58.31.8 -/
+/-- Noetherian case of extension of a generically split finite torsor. -/
 theorem GaloisCover.exists_finiteEtale_extension_noetherian {S C : Scheme.{u}} [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]
     (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))

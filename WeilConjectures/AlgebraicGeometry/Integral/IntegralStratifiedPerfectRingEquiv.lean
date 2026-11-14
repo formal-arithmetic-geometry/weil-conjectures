@@ -17,7 +17,9 @@ ideal of another identifies all finite quotients, hence the quotient coefficient
 their limit. Restriction of scalars along this completed isomorphism transports completed
 derived objects.
 
-Source: Bhatt--Scholze, Proposition 6.6.11.
+## References
+
+* Bhatt--Scholze, Proposition 6.6.11
 -/
 
 @[expose] public noncomputable section

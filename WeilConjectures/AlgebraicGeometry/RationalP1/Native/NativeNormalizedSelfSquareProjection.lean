@@ -74,8 +74,7 @@ attribute [local instance 20000]
   CondensedRing.projectionSheafMonoidal CondensedRing.projectionModuleMonoidal
 open DiagonalCoefficients CondensedRing
 attribute [local implicit_reducible] ProjectionFamily
-/-- The native exchange for a chosen self-square, with module-object endpoints.
-Source: the adjunction mate of canonical pullback composition. -/
+/-- The native exchange for a chosen self-square, with module-object endpoints. -/
 def nativeSelfSquareExchange
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y W : Scheme.{u}}

@@ -14,7 +14,9 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 /-!
 # Pullback and coefficient comparisons for finite-ring associated module sheaves
 
-Source: Stacks Project, Tags 0DV5 (3), 0DV6, 04TR and 04TS.
+## References
+
+* Stacks Project, Tags 0DV5 (3), 0DV6, 04TR and 04TS
 -/
 
 @[expose] public section
@@ -212,8 +214,7 @@ private theorem trivial_comparison (Λ : Type (u + 1)) [CommRing Λ] :
     (ModuleCat.{u + 1} Λ)).map η)).symm⟩
 
 /-- The associated sheaf of a representation becomes its constant value upstairs,
-and the trivial coefficient representation gives the constant coefficient sheaf.
-Source: Stacks Project, Tags 0DV5 (3), 0DV6, 04TR and 04TS. -/
+and the trivial coefficient representation gives the constant coefficient sheaf. -/
 theorem associatedModuleFunctorOver_comparisons (Λ : Type (u + 1)) [CommRing Λ] :
     let C := ModuleCat.{u + 1} Λ
     let T := c.associatedModuleFunctorOver Λ

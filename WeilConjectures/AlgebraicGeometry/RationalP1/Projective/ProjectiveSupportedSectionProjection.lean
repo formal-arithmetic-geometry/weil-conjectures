@@ -9,7 +9,12 @@ public import WeilConjectures.AlgebraicGeometry.RationalP1.Second.RationalP1Seco
 import WeilConjectures.AlgebraicGeometry.RationalP1.Projective.ProjectiveCanonicalSectionProjection
 import WeilConjectures.AlgebraicGeometry.RationalP1.Projective.ProjectiveSupportedSourceNormalization
 
-/-! # Projection coherence on the supported diagonal source -/
+/-! # Projection coherence on the supported diagonal source
+
+## References
+
+* Stacks Tags 0B56 and 0DV0
+-/
 
 @[expose] public noncomputable section
 
@@ -34,9 +39,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
 -- The statement compares the fixed derived pullback and tensor interfaces.
-/-- Section/projection coherence on the supported coefficient source, before any class map.
-
-Source: Stacks Tags 0B56 and 0DV0. -/
+/-- Section/projection coherence on the supported coefficient source, before any class map. -/
 theorem supported_section_projection
     (Y : Scheme.{u}) (L : ∀ X : Scheme.{u}, Modules Λ X) (d : Diagram Λ Y L)
     (M : DerivedCategory (Modules Λ (ProjectiveLine Y))) :

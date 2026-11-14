@@ -46,7 +46,12 @@ import all Mathlib.CategoryTheory.Sites.CoverLifting
 import all WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 import all WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSupplement
 
-/-! Ringed pro-etale localization: a geometric step of the open-closed argument. -/
+/-! Ringed pro-etale localization: a geometric step of the open-closed argument.
+
+## References
+
+* Stacks Project, Tags 09BN and 00XZ
+-/
 
 @[expose] public section
 
@@ -61,9 +66,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Localization at an open object identifies actual inverse image for an arbitrary
 ring-sheaf coefficient with restriction of module sheaves to the slice. There is no
-closed-complement or quasi-compactness hypothesis in this comparison.
-
-Source: Stacks Project, Tags 09BN and 00XZ. -/
+closed-complement or quasi-compactness hypothesis in this comparison. -/
 theorem proEtale_ringed_open_comparison {X : Scheme.{u}} (U : X.ProEt)
     [IsOpenImmersion U.hom] (A : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :
     ∃ q : SheafOfModules.{u + 1}

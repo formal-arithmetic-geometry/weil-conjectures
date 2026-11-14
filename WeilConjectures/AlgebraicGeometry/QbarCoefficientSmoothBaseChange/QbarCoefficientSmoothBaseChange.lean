@@ -42,6 +42,10 @@ No constructible landing of the ambient direct images is included.
 ## Main statements
 
 * `qbarCoefficientSmoothBaseChange`: invertibility and stage/lattice independence.
+
+## References
+
+* Stacks 099N
 -/
 
 @[expose] public noncomputable section
@@ -114,8 +118,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
   {U V : Scheme.{u}} (q : U ⟶ V)
 
-/-- The right-adjoint comparison is the mate of the normalized ordinary tensor comparison.
-Source: sketch32, lines 1191--1228 and 1291--1321. -/
+/-- The right-adjoint comparison is the mate of the normalized ordinary tensor comparison. -/
 @[irreducible] def pushModel :
     sbcAmbientPush l E q ≅ pbcActualDerivedPush q (pbcIntegralDatum l E) :=
   conjugateIsoEquiv
@@ -126,8 +129,7 @@ Source: sketch32, lines 1191--1228 and 1291--1321. -/
 
 /-- Transport the existing strict-tower/reflector comparison through reassociation.
 Its unit normalization is exactly pbcActualCompletedPullback_tower: the strict
-quotient augmentation is preserved, rather than an arbitrary completion isomorphism.
-Source: sketch32, lines 1191--1228 and 1291--1321; Stacks 099N. -/
+quotient augmentation is preserved, rather than an arbitrary completion isomorphism. -/
 @[irreducible] def pullModel :
     sbcPull l E q ⋙ ObjectProperty.ι (IsPbcComplete l E U) ≅
       ObjectProperty.ι (IsPbcComplete l E V) ⋙
@@ -165,8 +167,7 @@ private theorem levelComparison_hom (W : Scheme.{u})
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The two recorded coefficient maps have the same finite projections, hence agree.
-Source: sketch32, lines 1291--1321. -/
+/-- The two recorded coefficient maps have the same finite projections, hence agree. -/
 theorem tensorModel_eq (W : Scheme.{u}) :
     pbcAmbientScalarExtension l Ω W a =
       pbcEmbeddingAmbientTensor l (pbcFiniteField.{u} l Ω E)
@@ -191,12 +192,10 @@ theorem tensorModel_eq (W : Scheme.{u}) :
   · exact (pbcScalarCoefficientMap_exists l (pbcFiniteField.{u} l Ω E)
       (pbcFiniteField.{u} l Ω M) (pbcFiniteFieldInclusion l Ω a) W).exists.choose_spec
 
-/-- Transport between the two identical finite-projection-normalized tensors.
-Source: sketch32, lines 1291--1321. -/
+/-- Transport between the two identical finite-projection-normalized tensors. -/
 @[irreducible] def tensorModel (W : Scheme.{u}) := eqToIso (tensorModel_eq l Ω a W)
 
-/-- The specified scalar mate equation for an integral direct-image comparison.
-Source: sketch32, lines 1191--1228 and 1291--1321. -/
+/-- The specified scalar mate equation for an integral direct-image comparison. -/
 @[irreducible] def IntegralPushNormalization (push : sbcPush l (pbcFiniteField.{u} l Ω E) q ⋙
       pbcAmbientCompleteIntegralTransition l Ω V a ≅
     pbcAmbientCompleteIntegralTransition l Ω U a ⋙
@@ -215,8 +214,7 @@ Source: sketch32, lines 1191--1228 and 1291--1321. -/
         (sbcAmbientPush l (pbcFiniteField.{u} l Ω M) q).map
           ((tensorModel l Ω a U).inv.app K.obj))
 
-/-- The unit-normalized tensor equation for an integral completed-pullback comparison.
-Source: sketch32, lines 1191--1228 and 1291--1321. -/
+/-- The unit-normalized tensor equation for an integral completed-pullback comparison. -/
 @[irreducible] def IntegralPullNormalization (pull : sbcPull l (pbcFiniteField.{u} l Ω E) q ⋙
       pbcAmbientCompleteIntegralTransition l Ω U a ≅
     pbcAmbientCompleteIntegralTransition l Ω V a ⋙
@@ -237,8 +235,7 @@ Source: sketch32, lines 1191--1228 and 1291--1321. -/
 
 /-- The canonical integral comparisons, specified by the published scalar mate and
 unit-normalized completed tensor comparison. Their underlying equations determine
-both isomorphisms uniquely. This packages the construction in proof step 1.
-Source: sketch32, lines 1191--1228 and 1291--1321. -/
+both isomorphisms uniquely. This packages the construction in proof step 1. -/
 structure IntegralComparisons where
   push : sbcPush l (pbcFiniteField.{u} l Ω E) q ⋙
       pbcAmbientCompleteIntegralTransition l Ω V a ≅
@@ -270,8 +267,7 @@ variable (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω]
   [iY : Fact (∀ x : Y, IsUnit (l : Y.presheaf.stalk x))]
   (sq : ChosenCartesianSquare h e f g)
 
-/-- Normalization of the left rational comparison by the two integral comparisons.
-Source: sketch32, lines 1291--1321. -/
+/-- Normalization of the left rational comparison by the two integral comparisons. -/
 @[irreducible] def LeftBetaNormalization
     (cf : ∀ {E M : Padic.FiniteCoefficientFields l Ω} (a : E ≤ M),
     IntegralComparisons l Ω f a)
@@ -294,8 +290,7 @@ Source: sketch32, lines 1291--1321. -/
           ((cf a).pull.hom.app ((sbcPush l (pbcFiniteField.{u} l Ω E) g).obj K) ≫
             (sbcPull l (pbcFiniteField.{u} l Ω M) f).map ((cg a).push.hom.app K))
 
-/-- Normalization of the right rational comparison by the two integral comparisons.
-Source: sketch32, lines 1291--1321. -/
+/-- Normalization of the right rational comparison by the two integral comparisons. -/
 @[irreducible] def RightBetaNormalization
     (ch : ∀ {E M : Padic.FiniteCoefficientFields l Ω} (a : E ≤ M),
     IntegralComparisons l Ω h a)
@@ -323,8 +318,7 @@ The integral comparisons are fixed by the actual scalar mate and completion unit
 The raw comparison equations localize precisely their composites, also when E=M:
 the published integral/raw comparisons retain the tensor unit in that case.
 The stage operations and transformation are exactly their Karoubi extensions.
-These are witnesses supplied by the theorem, not extra assumptions on K.
-Source: sketch32, lines 1191--1228, 1291--1338 and 1439--1455. -/
+These are witnesses supplied by the theorem, not extra assumptions on K. -/
 structure Presentation where
   cf : ∀ {E M : Padic.FiniteCoefficientFields l Ω} (a : E ≤ M),
     IntegralComparisons l Ω f a
@@ -361,16 +355,14 @@ namespace Presentation
 variable (P : Presentation l Ω sq)
 
 /-- Extend the descended exchange to the ambient outer Karoubi envelope.
-The Mathlib extension sandwiches components by both images of the outer projector.
-Source: sketch32, lines 1412--1455. -/
+The Mathlib extension sandwiches components by both images of the outer projector. -/
 def ambientExchange :
     (Idempotents.functorExtension₂ _ _).obj P.F.functor ⟶
       (Idempotents.functorExtension₂ _ _).obj P.G.functor :=
   (Idempotents.functorExtension₂ _ _).map (StageSystem.Morphism.descNatTrans P.alpha)
 
 /-- The exchange on the recorded raw Qbar category, using its published inclusion
-through the finite-stage and outer identity projectors.
-Source: sketch32, lines 1412--1455. -/
+through the finite-stage and outer identity projectors. -/
 def exchange :=
   Functor.whiskerLeft
     (pbcRawQbarToComplete l Ω T ⋙ pbcConstructibleCompleteQbarInclusion l Ω T)

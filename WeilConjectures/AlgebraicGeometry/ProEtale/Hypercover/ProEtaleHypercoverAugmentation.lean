@@ -11,7 +11,11 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.SectionsConservative
 /-!
 # The restriction augmentation into total hypercover sections
 
-Source: Stacks Project, Tag 09A2.
+## References
+
+* Stacks Project, Tag 09A2
+* Stacks Project, Tag 01GE
+* Stacks Project, Tags 09A2 and 01GE
 -/
 
 @[expose] public section
@@ -27,8 +31,7 @@ variable (X : Scheme.{u}) (R : Sheaf (topology X) CommRingCat.{u + 1})
   (W : X.ProEt) (U : SimplicialObject (Over W))
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Restriction to the vertices, with scalars restricted from the augmentation object.
-Source: Stacks Project, Tag 09A2. -/
+/-- Restriction to the vertices, with scalars restricted from the augmentation object. -/
 noncomputable def hypercoverRestrictionZero
     (I : ringedSiteModules.{u + 1}
       ((sheafCompose (topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)) :
@@ -41,8 +44,7 @@ noncomputable def hypercoverRestrictionZero
       PresheafOfModules.pushforward₀, PresheafOfModules.pushforward₀Obj]
     exact I.val.map (Over.mkIdTerminal.from (U _⦋0⦌)).left.op
 
-/-- Restriction to vertices agrees with ordinary sheaf restriction.
-Source: Stacks Project, Tag 09A2. -/
+/-- Restriction to vertices agrees with ordinary sheaf restriction. -/
 @[simp]
 lemma hypercoverRestrictionZero_apply
     (I : ringedSiteModules.{u + 1}
@@ -64,8 +66,7 @@ private theorem hypercoverRestrictionZero_naturality
   simp only [ModuleCat.comp_apply, hypercoverRestrictionZero_apply]
   exact (PresheafOfModules.naturality_apply f.val (U _⦋0⦌).hom.op x).symm
 
-/-- The restriction to vertices is killed by the alternating face differential.
-Source: Stacks Project, Tag 01GE. -/
+/-- The restriction to vertices is killed by the alternating face differential. -/
 theorem hypercoverRestrictionZero_d
     (I : ringedSiteModules.{u + 1}
       ((sheafCompose (topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)) :
@@ -88,8 +89,7 @@ theorem hypercoverRestrictionZero_d
       congrArg Quiver.Hom.op ((U.δ 0).w.trans (U.δ 1).w.symm)
   rw [h]
 
-/-- Restriction into degree zero of the alternating section complex.
-Source: Stacks Project, Tag 09A2. -/
+/-- Restriction into degree zero of the alternating section complex. -/
 noncomputable def hypercoverRowAugmentation
     (I : ringedSiteModules.{u + 1}
       ((sheafCompose (topology X)
@@ -102,8 +102,7 @@ noncomputable def hypercoverRowAugmentation
         ComplexShape.embeddingUpNat (i := 0) rfl).inv
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Restriction into the extended section row is natural in the module sheaf.
-Source: Stacks Project, Tag 09A2. -/
+/-- Restriction into the extended section row is natural in the module sheaf. -/
 @[reassoc]
 lemma hypercoverRowAugmentation_naturality
     {I J : ringedSiteModules.{u + 1}
@@ -120,8 +119,7 @@ lemma hypercoverRowAugmentation_naturality
   rfl
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The extended section-row differential kills the augmentation.
-Source: Stacks Project, Tag 01GE. -/
+/-- The extended section-row differential kills the augmentation. -/
 @[reassoc (attr := simp)]
 lemma hypercoverRowAugmentation_d
     (I : ringedSiteModules.{u + 1}
@@ -134,8 +132,7 @@ lemma hypercoverRowAugmentation_d
   simp only [Category.assoc, Iso.inv_hom_id_assoc]
   rw [← Category.assoc, hypercoverRestrictionZero_d, zero_comp]
 
-/-- The augmented row, with the augmentation object placed in degree zero.
-Source: Stacks Project, Tags 09A2 and 01GE. -/
+/-- The augmented row, with the augmentation object placed in degree zero. -/
 noncomputable def hypercoverRowAugmentationComplex
     (I : ringedSiteModules.{u + 1}
       ((sheafCompose (topology X)
@@ -151,8 +148,7 @@ noncomputable def hypercoverRowAugmentationComplex
 -- The total augmentation expands the section, extension and total functors.
 set_option backward.isDefEq.respectTransparency false in
 /-- The canonical augmentation of a coefficient complex into total hypercover sections.
-Its degree-n component is restriction into the (0,n) summand.
-Source: Stacks Project, Tag 09A2. -/
+Its degree-n component is restriction into the (0,n) summand. -/
 noncomputable def hypercoverAugmentation :
     (SheafOfModules.evaluation.{u + 1}
       ((sheafCompose (topology X)

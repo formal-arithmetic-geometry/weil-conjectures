@@ -27,6 +27,10 @@ sheaves compatible with sheafification (Stacks Project, Topologies, Lemma 34.7.1
   coefficients, e.g. sets and abelian groups.
 - `AlgebraicGeometry.Scheme.AffineOver.sheafificationRestrictionIso`: restricting the fppf
   sheafification of a presheaf to affine `S`-schemes is sheafifying its restriction.
+
+## References
+
+* Stacks Project, Topologies, Lemma 34.7.11 (Tag 021V)
 -/
 
 @[expose] public section
@@ -84,15 +88,14 @@ instance isOneHypercoverDense :
 
 /-- Restriction of fppf sheaves on `S`-schemes to affine `S`-schemes is an equivalence of
 categories, for every category of coefficients with `u`-small limits, e.g. sets and abelian
-groups. Source: Stacks Project, Topologies, Lemma 34.7.11 (Tag 021V). -/
+groups. -/
 instance isEquivalence_sheafPushforwardContinuous (A : Type*) [Category* A]
     [HasLimitsOfSize.{u, u} A] :
     ((ι S).sheafPushforwardContinuous A (topology S) (fppfTopology.over S)).IsEquivalence :=
   Functor.isEquivalence_of_isOneHypercoverDense.{u} _ _ _ A
 
 /-- Restricting the fppf sheafification of a presheaf on `S`-schemes to affine `S`-schemes is
-naturally isomorphic to the sheafification of its restriction on the affine fppf site.
-Source: Stacks Project, Topologies, Lemma 34.7.11 (Tag 021V). -/
+naturally isomorphic to the sheafification of its restriction on the affine fppf site. -/
 noncomputable def sheafificationRestrictionIso (A : Type*) [Category* A]
     [HasLimitsOfSize.{u, u} A] [HasWeakSheafify (topology S) A]
     [HasWeakSheafify (fppfTopology.over S) A] :

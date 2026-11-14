@@ -91,6 +91,11 @@ import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Generators
 
 /-!
 # The compactified projection formula for locally perfect coefficients
+
+## References
+
+* Stacks, Tags 03DI and 015F
+* Stacks, Tags 03DI and 07A4
 -/
 
 @[expose] public noncomputable section
@@ -173,8 +178,7 @@ variable {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]
   (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
   (c : (proEtaleSheafInverseImage j CommRingCat.{u + 1}).obj R ≅ S)
 
-/-- The derived open adjunction is the localization of the termwise ordinary adjunction.
-Source: Stacks, Tags 03DI and 015F. -/
+/-- The derived open adjunction is the localization of the termwise ordinary adjunction. -/
 def proEtaleRingDerivedOpenAdjunction :
     proEtaleRingDerivedOpenExtension j R S c ⊣ proEtaleRingDerivedPullback j R S c :=
   letI : CatCommSq
@@ -192,8 +196,7 @@ def proEtaleRingDerivedOpenAdjunction :
       DerivedCategory.Q (HomologicalComplex.quasiIso _ (ComplexShape.up ℤ))
       (proEtaleRingDerivedOpenExtension j R S c) (proEtaleRingDerivedPullback j R S c)
 
-/-- The adjunction projection is exactly the transpose of unit tensor identity.
-Source: Stacks, Tags 03DI and 07A4. -/
+/-- The adjunction projection is exactly the transpose of unit tensor identity. -/
 def proEtaleOpenProjection
     (a : ProEtaleTensorModel Z R) (b : ProEtaleTensorModel X S)
     (E : DerivedCategory (proEtaleRingModules X S))

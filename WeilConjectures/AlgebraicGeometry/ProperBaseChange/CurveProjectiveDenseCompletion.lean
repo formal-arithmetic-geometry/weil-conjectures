@@ -20,7 +20,9 @@ import WeilConjectures.Mathlib.Topology.KrullDimension
 /-!
 # Dense projective completion of a scheme of dimension at most one
 
-Source: Stacks Project, Varieties, Tag 0BXV.
+## References
+
+* Stacks Project, Varieties, Tag 0BXV
 -/
 
 @[expose] public section
@@ -34,8 +36,7 @@ namespace AlgebraicGeometry
 /-- A separated finite type scheme of dimension at most one over a field admits an
 H-projective completion with dense, scheme-theoretically dense open image and finite
 boundary of closed points. The completion is reduced when the source is reduced and
-empty when the source is empty.
-Source: Stacks Project, Varieties, Tag 0BXV. -/
+empty when the source is empty. -/
 theorem exists_projective_dense_completion_of_dim_le_one
     {k : Type u} [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))]
     [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]

@@ -13,11 +13,13 @@ public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 /-!
 # Open adjunction in the intrinsic finite constant-coefficient presentation
 
-Source: Stacks Project, Tags 03DI, 03DJ and 09AE.
-
 The existing exact site adjunction is transported by the canonical module equivalences,
 then localized termwise on cochain complexes. This gives the full ordinary unbounded
 adjunction without constructibility, Tor, or monoidal hypotheses on an intrinsic category.
+
+## References
+
+* Stacks Project, Tags 03DI, 03DJ and 09AE
 -/
 
 @[expose] public section

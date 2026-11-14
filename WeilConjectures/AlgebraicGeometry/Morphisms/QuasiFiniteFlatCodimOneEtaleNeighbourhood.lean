@@ -18,7 +18,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 /-!
 # The pointwise ramification criterion for a flat quasi-finite morphism
 
-Source: Stacks Project, Lemma 58.21.2 (Tag 0BJH).
+## References
+
+* Stacks Project, Lemma 58.21.2 (Tag 0BJH)
 -/
 
 @[expose] public section
@@ -29,9 +31,7 @@ namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A flat morphism that is quasi-finite at a positive-dimensional source point
-is etale near that point if it is unramified at its dimension-one generalizations.
-
-Source: Stacks Project, Lemma 58.21.2 (Tag 0BJH). -/
+is etale near that point if it is unramified at its dimension-one generalizations. -/
 theorem exists_etale_neighbourhood_of_flat_of_quasiFiniteAt_of_codimension_one
     {X Y : Scheme.{u}} [IsLocallyNoetherian X] [IsLocallyNoetherian Y]
     (f : X ⟶ Y) [LocallyOfFiniteType f] [Flat f] (x : X)

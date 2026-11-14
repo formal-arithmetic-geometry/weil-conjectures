@@ -18,13 +18,17 @@ import WeilConjectures.AlgebraicGeometry.ClosedTestSectionSteps.ClosedTestClosed
 /-!
 # Closed lifted-test exchange for a qcqs, possibly nonaffine, source
 
-Source: Stacks Project, Tags 09BK and 09BL, Tag 0D6F.
-
 The public affine-model module supplies canonical maps whose definitions have no
 source-affineness assumption. Its already-general localization theorems are reused.
 The closed-test criterion supplies covering, geometry and conservativity. The new
 statements give the two normalized derived isomorphisms,
 the identification with the actual ambient mate, and the compatibility clauses.
+
+## References
+
+* Stacks Project, Tags 09BK and 09BL, Tag 0D6F
+* derived-functor convention, Tag 0D6F
+* Tag 0D6F
 -/
 
 @[expose] public noncomputable section
@@ -45,14 +49,12 @@ open ClosedTestDerivedExchangeModel ClosedTestSectionSteps
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
-/-- Reuse the canonical shift structure on the named derived direct image.
-Source: derived-functor convention, Tag 0D6F. -/
+/-- Reuse the canonical shift structure on the named derived direct image. -/
 instance pushCommShift {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (CondensedRing.moduleObjectDerivedPushforward Λ f).CommShift ℤ :=
   inferInstanceAs ((CondensedRing.lowerStar Λ f).rightDerivedFunctor.CommShift ℤ)
 
-/-- Reuse the termwise shift structure on exact pullback.
-Source: Tag 0D6F. -/
+/-- Reuse the termwise shift structure on exact pullback. -/
 instance pullCommShift {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (pull Λ f).CommShift ℤ :=
   inferInstanceAs ((CondensedRing.upperStar Λ f).mapDerivedCategory.CommShift ℤ)

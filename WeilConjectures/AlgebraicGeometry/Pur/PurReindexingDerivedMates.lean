@@ -8,6 +8,10 @@ module
 public import WeilConjectures.AlgebraicGeometry.Pur.PurCompletedReindexingData
 
 /-! # PurReindexingDerivedMates
+
+## References
+
+* Stacks Tags 08BJ, 0FND and 07A7
 -/
 
 @[expose] public noncomputable section
@@ -27,8 +31,7 @@ attribute [local instance 2000] reductionModulesHasDerivedCategory reductionTowe
 variable {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 
 /-- The ordinary isomorphism-square mate localizes to the two specified derived
-mates, with their K-injective representative equations.
-Source: Stacks Tags 08BJ, 0FND and 07A7. -/
+mates, with their K-injective representative equations. -/
 theorem purReindexingDerivedMates
     {X' X Y' Y : Scheme.{t}}
     {v : X' ⟶ X} {p' : X' ⟶ Y'} {p : X ⟶ Y} {g : Y' ⟶ Y}

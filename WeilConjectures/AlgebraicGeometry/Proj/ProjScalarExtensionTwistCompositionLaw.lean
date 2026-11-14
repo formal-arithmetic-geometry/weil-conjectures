@@ -10,7 +10,11 @@ import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor
 
 /-! # ProjScalarExtensionTwistCompositionLaw
 
-Source: Stacks Project, Constructions, Tags 01N2, 01MY and 01MZ. -/
+## References
+
+* Stacks Project, Constructions, Tags 01N2, 01MY and 01MZ
+* Stacks Project, Constructions, Tag 01MZ, with 01MY and 01N2
+-/
 
 @[expose] public section
 
@@ -166,8 +170,7 @@ private theorem twist_pullback_hom_ext
 set_option linter.unusedVariables false in
 /-- Normalized twist comparisons respect the geometric composition of scalar extensions.
 This assertion assumes the scheme-composition equality, proved in the importing item.
-It constructs no twist comparison and contains no coefficient associator.
-Source: Stacks Project, Constructions, Tag 01MZ, with 01MY and 01N2. -/
+It constructs no twist comparison and contains no coefficient associator. -/
 theorem scalarExtension_twist_composition_law
     {R S A B : Type u} [CommRing R] [CommRing S] [CommRing A] [CommRing B]
     [Algebra R S] [Algebra R A] [Algebra S B]

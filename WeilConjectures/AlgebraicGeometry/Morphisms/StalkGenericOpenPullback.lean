@@ -12,7 +12,10 @@ public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 
 /-! # The generic fibre is the open pullback over a local trait
 
-Source: Stacks Project, Tag 0EYJ, reduction to the punctured local spectrum.
+## References
+
+* Stacks Project, Tag 0EYJ, reduction to the punctured local spectrum
+* Stacks Project, Tag 0EYJ, local reduction and trait paragraphs
 -/
 
 @[expose] public section
@@ -21,9 +24,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- Over the stalk trait at a minimal point outside U, the generic fibre is exactly C_U.
-
-Source: Stacks Project, Tag 0EYJ, local reduction and trait paragraphs. -/
+/-- Over the stalk trait at a minimal point outside U, the generic fibre is exactly C_U. -/
 theorem stalk_generic_open_isPullback {S C : Scheme.{u}} [IsIntegral S]
     (c : C ⟶ S) (U : S.Opens) (s : S) (hs : s ∉ U)
     (hmin : ∀ t : S, t ⤳ s → t ∉ U → t = s)

@@ -9,7 +9,10 @@ public import WeilConjectures.AlgebraicGeometry.Proj.ProjScalarExtensionTwistDat
 import WeilConjectures.AlgebraicGeometry.Proj.ProjScalarExtensionTwistCanonicalSection
 
 /-! Canonical identity normalization for Proj twisting sheaves.
-Source: Stacks Project, Tags 01MY and 01N2.
+
+## References
+
+* Stacks Project, Tags 01MY and 01N2
 -/
 
 @[expose] public section
@@ -24,9 +27,7 @@ open AlgebraicGeometry.Scheme.Modules
 
 namespace AlgebraicGeometry.Proj
 
-/-- The section-normalized identity pullback comparison obeys the identity fraction rule.
-Source: Stacks Project, Tags 01MY and 01N2.
--/
+/-- The section-normalized identity pullback comparison obeys the identity fraction rule. -/
 theorem scalarExtension_twist_canonical_identity
     {A : Type u} [CommRing A]
     {σ : Type u} [SetLike σ A] [AddSubgroupClass σ A]

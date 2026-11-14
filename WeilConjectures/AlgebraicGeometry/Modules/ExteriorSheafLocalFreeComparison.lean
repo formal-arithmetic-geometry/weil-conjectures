@@ -13,7 +13,10 @@ import Mathlib.LinearAlgebra.ExteriorPower.Basis
 
 /-! # Exterior sheafification on a finite-free open
 
-Source: the coordinate expansion of determinant inversion in Stacks Project, Tag 0BRT, step 2.
+## References
+
+* the coordinate expansion of determinant inversion in Stacks Project, Tag 0BRT, step 2
+* expanding determinant inversion in Stacks Project
 -/
 
 @[expose] public section
@@ -204,8 +207,7 @@ private theorem local_unit_isIso (X : Scheme.{u})
 -- Keep the original containment binder, which is not needed in the conclusion itself.
 set_option linter.unusedVariables false in
 /-- On a finite-free open, exterior sheafification preserves sectionwise exterior powers
-and gives the free sheaf indexed by increasing subsets.
-Source: expanding determinant inversion in Stacks Project. -/
+and gives the free sheaf indexed by increasing subsets. -/
 theorem exteriorSheaf_local_free_comparison (X : Scheme.{u}) (M : X.Modules)
     (n : ℕ) (U : X.Opens) (r : ℕ)
     (e : M.over U ≅ SheafOfModules.free (ULift.{u} (Fin r))) :

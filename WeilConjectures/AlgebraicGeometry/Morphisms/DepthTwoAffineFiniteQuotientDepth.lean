@@ -23,7 +23,11 @@ import Mathlib.RingTheory.Localization.Finiteness
 
 /-! # Positive depth of finite quotients of restriction sections
 
-Source: Stacks Project, Tags 0AV8, 0AVN, 05AM, 00LL and 00LX.
+## References
+
+* Stacks Project, Tags 0AV8, 0AVN, 05AM, 00LL and 00LX
+* Stacks Project, surjectivity argument of Tag 0AV8, as used in 0E9I
+* Tags 0AVN, 05AM, 00LL and 00LX
 -/
 
 @[expose] public section
@@ -105,10 +109,7 @@ private theorem depth_one_of_short_exact {R : Type u} [CommRing R]
       have hsub := tsub_le_tsub_right hA 1
       exact le_trans (by decide : (1 : ℕ∞) ≤ 2 - 1) hsub
 
-/-- Every finite intermediate extension has a quotient of positive local depth.
-
-Source: Stacks Project, surjectivity argument of Tag 0AV8, as used in 0E9I;
-Tags 0AVN, 05AM, 00LL and 00LX. -/
+/-- Every finite intermediate extension has a quotient of positive local depth. -/
 theorem depth_one_affine_finite_quotient_of_depth_two
     {L : Scheme.{u}} [IsLocallyNoetherian L] (U : L.Opens)
     (N : L.Modules)

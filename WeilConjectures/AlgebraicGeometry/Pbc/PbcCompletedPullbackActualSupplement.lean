@@ -85,10 +85,20 @@ public import WeilConjectures.AlgebraicGeometry.PbcCompletedPullbackActual
 
 /-! # Completed pullback on the published completed-coefficient categories
 
-Source: Tag 099N (2), (5)
 The coefficient structure is fixed on all quotient projections. Ordinary pullback
 is its total derived sheafified tensor inverse image. Completion is characterized
 by its reflection universal property on the actual intrinsic complete subcategory.
+
+## References
+
+* Tag 099N (2), (5)
+* Stacks 099N
+* Stacks 03D2 and 099N
+* 03D7
+* 099N
+* Stacks Tag 099N
+* 099N (2),(5), 099B and 0A0E
+* 099N (2),(5)
 -/
 
 @[expose] public noncomputable section
@@ -219,18 +229,15 @@ namespace AlgebraicGeometry.Scheme
 variable {X Y : Scheme.{u}} (g : X ⟶ Y) {A : Type (u + 1)} [CommRing A]
 variable (d : AdicCoefficientDatum A)
 
-/-- The published sectionwise module direct image.
-Source: Stacks 099N. -/
+/-- The published sectionwise module direct image. -/
 abbrev pbcActualModulePush := completedModuleDirectImage g d
 
-/-- The published module inverse image followed by completed scalar tensor.
-Source: Stacks 099N. -/
+/-- The published module inverse image followed by completed scalar tensor. -/
 abbrev pbcActualModulePull := completedModulePullback g d
 
 attribute [-instance] coefficientProEtaleModelBaseChange_isContinuous
   coefficientProEtaleModelUp_isContinuous in
-/-- The ordinary tensor-unit section uses the actual model-site inverse-image unit.
-Source: Stacks 03D2 and 099N. -/
+/-- The ordinary tensor-unit section uses the actual model-site inverse-image unit. -/
 def pbcActualModuleUnitSection (M : pbcModules Y (pbcAdicCompletion Y d))
     (U : Y.ProEt) (x : M.val.obj (op U)) :
     ((pbcActualModulePush g d).obj ((pbcActualModulePull g d).obj M)).val.obj (op U) :=
@@ -242,8 +249,7 @@ def pbcActualModuleUnitSection (M : pbcModules Y (pbcAdicCompletion Y d))
         ((proEtaleModuleToModel ((adicLisseForget Y).obj (pbcAdicCompletion Y d))).obj M)).val.app
           (op (AsSmall.up.obj U)) x)
 
-/-- The published pullback and direct image have the uniquely normalized tensor adjunction.
-Source: Stacks 03D2 and 099N. -/
+/-- The published pullback and direct image have the uniquely normalized tensor adjunction. -/
 theorem pbcActualModuleAdjunction_exists :
     ∃! adj : pbcActualModulePull g d ⊣ pbcActualModulePush g d,
       ∀ (M : pbcModules Y (pbcAdicCompletion Y d)) (U : Y.ProEt) (x : M.val.obj (op U)),
@@ -293,36 +299,29 @@ theorem pbcActualModuleAdjunction_exists :
   ext U x
   exact (ha' M U.unop x).trans (ha M U.unop x).symm
 
-/-- The actual module adjunction, with the inverse-image tensor unit retained.
-Source: Stacks 03D2 and 099N. -/
+/-- The actual module adjunction, with the inverse-image tensor unit retained. -/
 def pbcActualModuleAdjunction := (pbcActualModuleAdjunction_exists g d).exists.choose
 
-/-- Pullback and pushforward are additive.
-Source: 03D7. -/
+/-- Pullback and pushforward are additive. -/
 theorem pbcActualModuleOperations_additive :
     (pbcActualModulePull g d).Additive ∧ (pbcActualModulePush g d).Additive := by
   exact ⟨completedModulePullback_additive g d, completedModuleDirectImage_additive g d⟩
 
-/-- Additivity of the specified module pullback.
-Source: 03D7. -/
+/-- Additivity of the specified module pullback. -/
 instance pbcActualModulePull_additive : (pbcActualModulePull g d).Additive :=
   (pbcActualModuleOperations_additive g d).1
 
-/-- Additivity of the specified module direct image.
-Source: 03D7. -/
+/-- Additivity of the specified module direct image. -/
 instance pbcActualModulePush_additive : (pbcActualModulePush g d).Additive :=
   (pbcActualModuleOperations_additive g d).2
 
-/-- The published ordinary total derived pullback with its fixed resolving pair.
-Source: Stacks 099N. -/
+/-- The published ordinary total derived pullback with its fixed resolving pair. -/
 abbrev pbcActualDerivedPull := completedOrdinaryPullback g d
 
-/-- The published universal ordinary-pullback counit.
-Source: Stacks 099N. -/
+/-- The published universal ordinary-pullback counit. -/
 abbrev pbcActualPullCounit := completedOrdinaryPullbackCounit g d
 
-/-- Its computation on cochain representatives retains the universal counit.
-Source: Stacks 099N. -/
+/-- Its computation on cochain representatives retains the universal counit. -/
 def pbcActualPullComplexCounit (P : CochainComplex (pbcModules Y (pbcAdicCompletion Y d)) ℤ) :
     (pbcActualDerivedPull g d).obj (DerivedCategory.Q.obj P) ⟶
       DerivedCategory.Q.obj (((pbcActualModulePull g d).mapHomologicalComplex (.up ℤ)).obj P) :=
@@ -333,20 +332,17 @@ def pbcActualPullComplexCounit (P : CochainComplex (pbcModules Y (pbcAdicComplet
     (DerivedCategory.quotientCompQhIso _).hom.app
       (((pbcActualModulePull g d).mapHomologicalComplex (.up ℤ)).obj P)
 
-/-- Ordinary derived direct image, computed using K-injectives in all modules.
-Source: 099N. -/
+/-- Ordinary derived direct image, computed using K-injectives in all modules. -/
 abbrev pbcActualDerivedPush : PbcCompletedDerived X d ⥤ PbcCompletedDerived Y d :=
   completedDerivedDirectImage g d
 
-/-- The universal homotopy-category unit of ordinary derived direct image.
-Source: Stacks 099N. -/
+/-- The universal homotopy-category unit of ordinary derived direct image. -/
 def pbcActualPushUnit :
     (pbcActualModulePush g d).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh ⟶
       DerivedCategory.Qh ⋙ pbcActualDerivedPush g d :=
   (pbcActualModulePush g d).rightDerivedFunctorUnit
 
-/-- Universality of the named ordinary left derived pair.
-Source: Stacks Tag 099N. -/
+/-- Universality of the named ordinary left derived pair. -/
 @[instance] theorem pbcActualPullUniversal :
     (pbcActualDerivedPull g d).IsLeftDerivedFunctor (pbcActualPullCounit g d)
       (HomotopyCategory.quasiIso (pbcModules Y (pbcAdicCompletion Y d)) (.up ℤ)) := by
@@ -354,8 +350,7 @@ Source: Stacks Tag 099N. -/
     completedOrdinaryPullbackCounit
   exact (completedOrdinaryPullback_exists g d).choose_spec.choose_spec.1
 
-/-- Universality of the named ordinary right derived pair.
-Source: Stacks Tag 099N. -/
+/-- Universality of the named ordinary right derived pair. -/
 @[instance] theorem pbcActualDirectUniversal :
     (pbcActualDerivedPush g d).IsRightDerivedFunctor
       (pbcActualPushUnit g d)
@@ -365,8 +360,7 @@ Source: Stacks Tag 099N. -/
 
 -- `moduleBinaryBiproducts` has a free universe and leaves a stuck universe constraint here.
 attribute [-instance] CategoryTheory.SignedDoubleHomCone.moduleBinaryBiproducts in
-/-- The resolving left derived pair remains universal after the indicated direct image.
-Source: Stacks Tag 099N. -/
+/-- The resolving left derived pair remains universal after the indicated direct image. -/
 @[instance] theorem pbcActualDerivedLeftComposite :
     (pbcActualDerivedPull g d ⋙ pbcActualDerivedPush g d).IsLeftDerivedFunctor
       ((Functor.associator _ _ _).inv ≫
@@ -445,8 +439,7 @@ Source: Stacks Tag 099N. -/
     exact (NatTrans.isIso_app_iff_of_iso δ e).1 (hδ Z' hZ')
   exact (L'.isLeftDerivedFunctor_iff_isIso_leftDerivedLift ε W L α).2 this
 
-/-- The resolving right derived pair remains universal after the indicated pullback.
-Source: Stacks Tag 099N. -/
+/-- The resolving right derived pair remains universal after the indicated pullback. -/
 @[instance] theorem pbcActualDerivedRightComposite :
     (pbcActualDerivedPush g d ⋙ pbcActualDerivedPull g d).IsRightDerivedFunctor
       (whiskerRight (pbcActualPushUnit g d) (pbcActualDerivedPull g d) ≫
@@ -464,7 +457,7 @@ Source: Stacks Tag 099N. -/
   infer_instance
 
 /-- The derived adjunction obtained from the actual module adjunction and its
-universal derived counit/unit. Source: Stacks Tag 099N. -/
+universal derived counit/unit. -/
 def pbcActualDerivedAdjunction :
     pbcActualDerivedPull g d ⊣ pbcActualDerivedPush g d :=
   (pbcActualModuleAdjunction g d).mapHomotopyCategory (.up ℤ) |>.derived
@@ -473,8 +466,7 @@ def pbcActualDerivedAdjunction :
       (pbcActualPullCounit g d) (pbcActualPushUnit g d)
 
 set_option linter.unusedVariables false in
-/-- The ordinary comparison on resolving complexes uniquely fixes the derived shift.
-Source: Stacks Tag 099N. -/
+/-- The ordinary comparison on resolving complexes uniquely fixes the derived shift. -/
 theorem pbcActualPullShift_exists :
     ∃! q : (pbcActualDerivedPull g d).CommShift ℤ,
       (fun [qInst : (pbcActualDerivedPull g d).CommShift ℤ] ↦
@@ -487,14 +479,12 @@ theorem pbcActualPullShift_exists :
     (pbcActualDerivedPull g d) (pbcActualPullCounit g d) hkan
   exact ⟨q, hq, fun q' hq' ↦ rightKanShift_unique _ _ _ _ q' q hq' hq⟩
 
-/-- The canonical shift structure, normalized by the universal derived comparison.
-Source: Stacks Tag 099N. -/
+/-- The canonical shift structure, normalized by the universal derived comparison. -/
 instance pbcActualPullShift : (pbcActualDerivedPull g d).CommShift ℤ :=
   (pbcActualPullShift_exists g d).exists.choose
 
 set_option linter.unusedVariables false in
-/-- The ordinary comparison on resolving complexes uniquely fixes the derived shift.
-Source: Stacks Tag 099N. -/
+/-- The ordinary comparison on resolving complexes uniquely fixes the derived shift. -/
 theorem pbcActualPushShift_exists :
     ∃! q : (pbcActualDerivedPush g d).CommShift ℤ,
       (fun [qInst : (pbcActualDerivedPush g d).CommShift ℤ] ↦
@@ -549,8 +539,7 @@ theorem pbcActualPushShift_exists :
     exact congrArg (fun a ↦ (shiftFunctor _ n ⋙ pbcActualDerivedPush g d).map e.hom ≫ a) hi
   exact commShift_ext _ _ he
 
-/-- The canonical shift structure, normalized by the universal derived comparison.
-Source: Stacks Tag 099N. -/
+/-- The canonical shift structure, normalized by the universal derived comparison. -/
 instance pbcActualPushShift : (pbcActualDerivedPush g d).CommShift ℤ :=
   (pbcActualPushShift_exists g d).exists.choose
 
@@ -774,8 +763,7 @@ end CompletionPresentation
 
 variable (T : Scheme.{u})
 
-/-- The intrinsic complete subcategory is reflective, with the Koszul completion unit.
-Source: 099N (2),(5), 099B and 0A0E. -/
+/-- The intrinsic complete subcategory is reflective, with the Koszul completion unit. -/
 @[instance] theorem pbcActualCompleteInclusion_isRightAdjoint :
     (ObjectProperty.ι (PbcIsIntrinsicallyComplete T d)).IsRightAdjoint := by
   classical
@@ -817,31 +805,26 @@ Source: 099N (2),(5), 099B and 0A0E. -/
 
 /-- The canonical reflection onto the actual intrinsically complete subcategory.
 Its defining universal property determines its objects up to the equality used
-here, namely unique unit-compatible isomorphism.
-Source: 099N. -/
+here, namely unique unit-compatible isomorphism. -/
 def pbcActualCompletion : PbcCompletedDerived T d ⥤ PbcCompletedDerived T d :=
   (ObjectProperty.ι (PbcIsIntrinsicallyComplete T d)).leftAdjoint ⋙
     (ObjectProperty.ι (PbcIsIntrinsicallyComplete T d))
 
-/-- The universal completion unit of the actual intrinsic complete subcategory.
-Source: 099N. -/
+/-- The universal completion unit of the actual intrinsic complete subcategory. -/
 def pbcActualCompletionUnit : 𝟭 (PbcCompletedDerived T d) ⟶ pbcActualCompletion d T :=
   (Adjunction.ofIsRightAdjoint (ObjectProperty.ι (PbcIsIntrinsicallyComplete T d))).unit
 
 /-- Ordinary derived pullback followed by the unit-normalized completion reflector.
 This is equivalently the derived limit of the pulled-back strict reduction tower,
-with its quotient augmentation, as asserted by the source's canonical comparison.
-Source: 099N (2),(5). -/
+with its quotient augmentation, as asserted by the source's canonical comparison. -/
 def pbcActualCompletedPull : PbcCompletedDerived Y d ⥤ PbcCompletedDerived X d :=
   pbcActualDerivedPull g d ⋙ pbcActualCompletion d X
 
-/-- The comparison is the actual completion unit after ordinary derived pullback.
-Source: 099N. -/
+/-- The comparison is the actual completion unit after ordinary derived pullback. -/
 def pbcActualCompletedPullUnit : pbcActualDerivedPull g d ⟶ pbcActualCompletedPull g d :=
   whiskerLeft (pbcActualDerivedPull g d) (pbcActualCompletionUnit d X)
 
-/-- The completion reflection lands in the actual intrinsic complete predicate.
-Source: Stacks 099N. -/
+/-- The completion reflection lands in the actual intrinsic complete predicate. -/
 theorem pbcActualCompletedPull_isComplete (K : PbcCompletedDerived Y d) :
     PbcIsIntrinsicallyComplete X d ((pbcActualCompletedPull g d).obj K) := by
   exact ((ObjectProperty.ι (PbcIsIntrinsicallyComplete X d)).leftAdjoint.obj
@@ -932,8 +915,7 @@ private theorem actualCompletion_quotient (S : Scheme.{u}) :
   rfl
 
 set_option linter.unusedVariables false in
-/-- Completion has the unique shift comparison commuting with its actual unit.
-Source: Stacks 099N. -/
+/-- Completion has the unique shift comparison commuting with its actual unit. -/
 theorem pbcActualCompletionShift_exists :
     ∃! q : (pbcActualCompletion d T).CommShift ℤ,
       (fun [qInst : (pbcActualCompletion d T).CommShift ℤ] ↦
@@ -976,13 +958,11 @@ theorem pbcActualCompletionShift_exists :
     exact (square q' hq' n M).trans (square q hq n M).symm
   exact congrArg (fun f ↦ f.hom) he
 
-/-- The unit-normalized shift of the completion reflector.
-Source: Stacks 099N. -/
+/-- The unit-normalized shift of the completion reflector. -/
 instance pbcActualCompletionShift : (pbcActualCompletion d T).CommShift ℤ :=
   (pbcActualCompletionShift_exists d T).exists.choose
 
-/-- Completed pullback inherits ordinary pullback and completion shifts.
-Source: Stacks 099N. -/
+/-- Completed pullback inherits ordinary pullback and completion shifts. -/
 instance pbcActualCompletedPullShift : (pbcActualCompletedPull g d).CommShift ℤ :=
   inferInstanceAs ((pbcActualDerivedPull g d ⋙ pbcActualCompletion d X).CommShift ℤ)
 
@@ -1037,8 +1017,7 @@ private theorem quotientDirectComparison :
   rw [(d.towerProjection_properties g M).2.2]
   simp
 
-/-- Direct image commutes with completion with the specified completion unit.
-Source: Stacks 099N. -/
+/-- Direct image commutes with completion with the specified completion unit. -/
 theorem pbcActualDirectCompletionIso_exists :
     ∃! e : pbcActualDerivedPush g d ⋙ pbcActualCompletion d Y ≅
         pbcActualCompletion d X ⋙ pbcActualDerivedPush g d,
@@ -1081,8 +1060,7 @@ theorem pbcActualDirectCompletionIso_exists :
     (hG (FX.obj M) (actualCompletion_complete d X M))).injective
   exact (he' M).trans (he M).symm
 
-/-- The completion comparison uniquely fixed by the quotient augmentation.
-Source: Stacks 099N. -/
+/-- The completion comparison uniquely fixed by the quotient augmentation. -/
 def pbcActualDirectCompletionIso := (pbcActualDirectCompletionIso_exists g d).exists.choose
 
 end AlgebraicGeometry.Scheme

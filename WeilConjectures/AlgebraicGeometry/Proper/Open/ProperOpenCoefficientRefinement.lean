@@ -18,10 +18,17 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 /-!
 # Coefficient naturality of the proper/open refinement
 
-Source: Stacks Project, Tags 0F7I and 0GL6.
-
 The auxiliary maps implement exactly the normalizations in the node. Scalar extension
 and the K-flat-normalized scalar/pullback comparison are existing constructions.
+
+## References
+
+* Stacks Project, Tags 0F7I and 0GL6
+* Stacks 0G7E and 0GL6
+* Stacks 0GL6
+* Stacks 03DJ, 06YS and 0GL6
+* Stacks 0F7I
+* Stacks 0F7I and 0GL6, with the explicit clopen-section argument
 -/
 
 @[expose] public noncomputable section
@@ -34,8 +41,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- The canonical tensor/pullback comparison, expressed using exact inverse image.
 It transports the existing K-flat-normalized comparison along the canonical
-identification of derived inverse image with termwise inverse image.
-Source: Stacks 0G7E and 0GL6. -/
+identification of derived inverse image with termwise inverse image. -/
 def properOpenCoefficientPullbackIso
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {W T : Scheme.{u}} (v : W ⟶ T) :
@@ -47,8 +53,7 @@ def properOpenCoefficientPullbackIso
       Functor.isoWhiskerRight
         (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) v) _
 
-/-- The inverse open coefficient map, defined by its prescribed open-unit transpose.
-Source: Stacks 0GL6. -/
+/-- The inverse open coefficient map, defined by its prescribed open-unit transpose. -/
 def properOpenCoefficientOpenInverse
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {W T : Scheme.{u}} (j : W ⟶ T) [IsOpenImmersion j]
@@ -65,8 +70,7 @@ def properOpenCoefficientOpenInverse
         (properOpenCoefficientPullbackIso φ j).inv.app
           ((openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapDerivedCategory.obj M))
 
-/-- The specified inverse open coefficient map is invertible for arbitrary derived inputs.
-Source: Stacks 03DJ, 06YS and 0GL6. -/
+/-- The specified inverse open coefficient map is invertible for arbitrary derived inputs. -/
 theorem properOpenCoefficientOpenInverse_isIso
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {W T : Scheme.{u}} (j : W ⟶ T) [IsOpenImmersion j]
@@ -97,8 +101,7 @@ theorem properOpenCoefficientOpenInverse_isIso
   rw [Adjunction.homEquiv_counit]
   infer_instance
 
-/-- The open tensor isomorphism with the inverse fixed by the open-unit transpose.
-Source: Stacks 0GL6. -/
+/-- The open tensor isomorphism with the inverse fixed by the open-unit transpose. -/
 def properOpenCoefficientOpenIso
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {W T : Scheme.{u}} (j : W ⟶ T) [IsOpenImmersion j]
@@ -111,8 +114,7 @@ def properOpenCoefficientOpenIso
     (properOpenCoefficientOpenInverse_isIso φ j M)).symm
 
 /-- The existing theta-normalized proper/open map, viewed in the unbounded category.
-Only the canonical compatibility of bounded and unbounded direct image is inserted.
-Source: Stacks 0F7I. -/
+Only the canonical compatibility of bounded and unbounded direct image is inserted. -/
 def properOpenComparisonAmbient
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {T₁ T₂ X : Scheme.{u}} (v : T₁ ⟶ T₂) [IsProper v]
@@ -422,8 +424,7 @@ private theorem coefficient_refinement_of_restriction
   rw [← reassoc_of% hb₁]
   rw [← U₁B.map_comp, Iso.inv_hom_id, U₁B.map_id, Category.comp_id]
 
-/-- Coefficient extension respects the specified proper/open refinement arrow.
-Source: Stacks 0F7I and 0GL6, with the explicit clopen-section argument. -/
+/-- Coefficient extension respects the specified proper/open refinement arrow. -/
 theorem properOpenComparison_coefficient_refinement
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {X T₁ T₂ : Scheme.{u}}

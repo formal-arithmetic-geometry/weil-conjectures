@@ -13,7 +13,10 @@ import WeilConjectures.ConstructibleSheaf.Pullback
 
 /-! # Bounded etale models from finite locally constant cohomology models
 
-Source: Stacks Tags 099Y, 099Z and 09B1.
+## References
+
+* Stacks Tags 099Y, 099Z and 09B1
+* Stacks Project
 -/
 
 @[expose] public noncomputable section
@@ -75,9 +78,7 @@ private theorem modelClassical_of_iso (Z : Scheme.{u}) (Λ : Type (u + 1))
 
 /-- A bounded pro-etale complex whose cohomology has finite locally constant etale
 models has an etale model with the same bounds and finite locally constant cohomology.
-The comparison is the canonical derived counit, so the chosen model is tied to K.
-
-Source: Stacks Project. -/
+The comparison is the canonical derived counit, so the chosen model is tied to K. -/
 theorem lisse_finite_level_etale_model_comparison
     (Z : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     (K : DerivedCategory (Sheaf (ProEt.topology Z) (ModuleCat.{u + 1} Λ)))

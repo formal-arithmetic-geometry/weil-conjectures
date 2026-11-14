@@ -14,7 +14,12 @@ public import Mathlib.Algebra.Regular.SMul
 import WeilConjectures.AlgebraicGeometry.Morphisms.RegularDivisorGaloisRootSplitting
 import WeilConjectures.AlgebraicGeometry.Morphisms.RootSplitCoverCyclicCharts
 
-/-! Kummer charts for prime-to-residue-characteristic torsors on a regular divisor complement. -/
+/-! Kummer charts for prime-to-residue-characteristic torsors on a regular divisor complement.
+
+## References
+
+* Stacks Project, Tags 09EB and 0EYG, including its case off the divisor
+-/
 
 @[expose] public section
 
@@ -22,9 +27,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- The regular-divisor Kummer theorem, applied after an affine base change.
-
-Source: Stacks Project, Tags 09EB and 0EYG, including its case off the divisor. -/
+/-- The regular-divisor Kummer theorem, applied after an affine base change. -/
 theorem GaloisCover.regular_divisor_punctured_root_chart
     {L U : Scheme.{u}} (i : U ⟶ L)
     (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)

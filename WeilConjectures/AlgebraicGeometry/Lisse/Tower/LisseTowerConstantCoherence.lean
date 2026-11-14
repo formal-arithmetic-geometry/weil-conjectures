@@ -14,8 +14,13 @@ import all WeilConjectures.AlgebraicGeometry.Lisse.Tower.LisseTowerLocalizedCons
 The ordinary constant comparisons are compatible with restriction of coefficients along
 consecutive quotients; localization gives the coherence of the derived comparisons.
 
-Source: Stacks Project, Modules on Sites, Tags 03CY and 03DA; Sites, Tag 0H7J;
-Derived Categories, Tag 05RU.
+## References
+
+* Stacks Project, Modules on Sites, Tags 03CY and 03DA
+* Sites, Tag 0H7J
+* Derived Categories, Tag 05RU
+* Stacks Tags 03CY, 03DA and 0H7J
+* Stacks Tags 03CY, 03DA and 05RU
 -/
 
 public noncomputable section
@@ -1314,8 +1319,7 @@ private theorem constantRealization_coherence (M : ModuleCat.{u + 1} (lisseTower
     (fun φ ψ h ↦ pulledConstant_ext g (AdicCompletion d.ideal A) _ φ ψ h)
 
 /-- The ordinary constant comparisons are compatible with the coefficient restriction
-from level `n + 1` to level `n`: both composites send every constant section to itself.
-Source: Stacks Tags 03CY, 03DA and 0H7J. -/
+from level `n + 1` to level `n`: both composites send every constant section to itself. -/
 theorem lisseTowerOrdinaryConstant_coherence :
     (lisseTowerOrdinaryConstantScalarIso g a b d n ≪≫
         lisseTowerOrdinaryConstantModelIso g a b d n).hom =
@@ -1347,8 +1351,7 @@ theorem lisseTowerOrdinaryConstant_coherence :
     exact constantRealization_coherence g d n M
 
 /-- The derived constant comparisons built from the natural constant model satisfy the
-coefficient identity on every represented complex.
-Source: Stacks Tags 03CY, 03DA and 05RU. -/
+coefficient identity on every represented complex. -/
 theorem lisseTowerConstantModel_coherence
     (K : CochainComplex (ModuleCat.{u + 1} (lisseTowerEtaleRing d n)) ℤ) :
     ((lisseTowerConstantScalarIso g a b d n) ≪≫

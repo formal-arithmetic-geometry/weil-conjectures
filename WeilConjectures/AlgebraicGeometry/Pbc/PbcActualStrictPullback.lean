@@ -12,10 +12,14 @@ import all WeilConjectures.AlgebraicGeometry.Completed.CompletedTowerPullbackSup
 import WeilConjectures.AlgebraicGeometry.Stratum.StratumCompletionUnitRestriction
 
 /-! # Functor and completion interface for the published strict-tower pullback
-Source: Stacks 099N (2), (5).
 The published quotient tower, resolving pullback, derived limit and comparison
 are retained. This interface supplies their functor and unit-compatible natural
 isomorphism to the intrinsic completion reflector used by scalar comparisons.
+
+## References
+
+* Stacks 099N (2), (5)
+* Stacks 099N
 -/
 
 @[expose] public noncomputable section
@@ -26,14 +30,12 @@ namespace AlgebraicGeometry.Scheme
 variable {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 variable {X Y : Scheme.{u}} (g : X ⟶ Y)
 
-/-- The functor underlying exactly the published completedPullbackObject.
-Source: Stacks 099N. -/
+/-- The functor underlying exactly the published completedPullbackObject. -/
 abbrev pbcActualStrictCompletedPull :=
   (completedReductionTower Y d ⋙ completedTowerPullback g d) ⋙ completedTowerRlim d X
 
 /-- The actual compatible-family unit followed by derived limit of one strict
-quotient augmentation. Its components are completedPullbackComparison.
-Source: Stacks 099N. -/
+quotient augmentation. Its components are completedPullbackComparison. -/
 def pbcActualStrictCompletedPullUnit :
     pbcActualDerivedPull g d ⟶ pbcActualStrictCompletedPull d g :=
   (pbcActualDerivedPull g d).rightUnitor.inv ≫
@@ -44,8 +46,7 @@ def pbcActualStrictCompletedPullUnit :
         (completedTowerRlim d X)
 
 /-- The strict-tower formula and the completion reflector give the same completed
-pullback, with the canonical quotient augmentation as their unit.
-Source: Stacks 099N (2), (5). -/
+pullback, with the canonical quotient augmentation as their unit. -/
 theorem pbcActualCompletedPullback_tower :
     ∃! e :
       ObjectProperty.ι (PbcIsIntrinsicallyComplete Y d) ⋙ pbcActualStrictCompletedPull d g ≅

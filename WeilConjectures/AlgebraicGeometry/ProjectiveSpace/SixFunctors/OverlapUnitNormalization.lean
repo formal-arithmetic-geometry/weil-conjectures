@@ -11,7 +11,11 @@ import WeilConjectures.AlgebraicGeometry.AffinePuncturedLine.AffinePuncturedLine
 
 /-! # Normalizing an overlap unit by a change of chart frame
 
-Source: Stacks Project, Tag 0BXJ, proof of divisors-lemma-Pic-projective-space-UFD.
+## References
+
+* Stacks Project, Tag 0BXJ, proof of divisors-lemma-Pic-projective-space-UFD
+* Stacks Project, Tag 0BXJ, proof of divisors-lemma-Pic-projective-space-UFD, Laurent-unit
+  computation and removal of the constant boundary, for n=1
 -/
 
 @[expose] public section
@@ -26,10 +30,7 @@ namespace AlgebraicGeometry.ProjectiveLine
 
 open ProjectiveSpace
 
-/-- A unit on the overlap is a standard transition unit after rescaling the first frame.
-
-Source: Stacks Project, Tag 0BXJ, proof of divisors-lemma-Pic-projective-space-UFD, Laurent-unit
-computation and removal of the constant boundary, for n=1 -/
+/-- A unit on the overlap is a standard transition unit after rescaling the first frame. -/
 theorem exists_normalized_overlap_unit (k : Type u) [Field k]
     (v : Γ(ProjectiveLine (Spec (.of k)),
       standardOpen _ (Spec (.of k)) (⟨0⟩ : ULift.{u} (Fin 2)) ⊓

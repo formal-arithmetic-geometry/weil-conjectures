@@ -9,7 +9,12 @@ public import WeilConjectures.AlgebraicGeometry.Lisse.Coefficient.LisseCoefficie
 import WeilConjectures.AlgebraicGeometry.Lisse.Coefficient.LisseCoefficientRestrictionSeparableTensor
 import WeilConjectures.AlgebraicGeometry.Lisse.Coefficient.LisseCoefficientRestrictionTensorMaps
 
-/-! Separability section for finite coefficient extension. -/
+/-! Separability section for finite coefficient extension.
+
+## References
+
+* Deligne, Weil II (1.1.1) c)-d), pp. 146-147
+-/
 
 @[expose] public section
 noncomputable section
@@ -23,8 +28,7 @@ variable (l : ℕ) [Fact l.Prime] (Y : Scheme.{d})
   [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (ι : E →ₐ[ℚ_[l]] L)
 
-/-- An integral multiple of the separability section gives compatible integral maps.
-Source: Deligne, Weil II (1.1.1) c)-d), pp. 146-147. -/
+/-- An integral multiple of the separability section gives compatible integral maps. -/
 theorem lisseIntegralRestriction_bounded_retract
     (F : LisseIntegralSheaf l L Y)
     (hF : IsLisseIntegralDiagram l E Y

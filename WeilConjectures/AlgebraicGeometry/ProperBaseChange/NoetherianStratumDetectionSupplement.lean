@@ -36,7 +36,10 @@ public import WeilConjectures.AlgebraicGeometry.NoetherianStratumDetection
 /-!
 # Detection by pro-etale covers of finitely many locally closed strata
 
-Source: Stacks Project, Tags 09AH and 09AB, followed by finite-stratum induction.
+## References
+
+* Stacks Project, Tags 09AH and 09AB, followed by finite-stratum induction
+* Stacks, Tags 09AH and 09AB, and finite-stratum induction
 -/
 
 @[expose] public section
@@ -92,8 +95,7 @@ private noncomputable def modelAbelianPullbackIso {X Y : Scheme.{u}} (f : X ⟶ 
     (Functor.isoWhiskerRight (b.leftAdjointUniq a)
       (modelSheafEquivalence X AddCommGrpCat.{u + 1}).functor)
 
-/-- Abelian sheaves are detected by the chosen pro-etale covers of all strata.
-Source: Stacks, Tags 09AH and 09AB, and finite-stratum induction. -/
+/-- Abelian sheaves are detected by the chosen pro-etale covers of all strata. -/
 theorem proEtale_isZero_of_stratum_cover (X : Scheme.{u})
     [IsLocallyNoetherian X] [CompactSpace X] (S : Stratification X)
     (V : ∀ a : Fin S.n, Scheme.Cover.{w} proetalePrecoverage (S.domain a))

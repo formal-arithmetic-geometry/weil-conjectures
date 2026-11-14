@@ -59,7 +59,10 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Proper.P
 
 /-! # Comparison of native exchange with the restricted condensed exchange
 
-Source: finite-span coefficient comparison and unit--square--counit normalization.
+## References
+
+* Stacks 03EK
+* Stacks 09T5 and 070Y
 -/
 
 @[expose] public noncomputable section
@@ -72,12 +75,11 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- Scalar forgetting followed by the normalized ring-realization transport, before
 section-ring presentation. The chosen isomorphisms form a single family normalized on
-every finite-extension chart and natural in scheme maps.
-Source: nativeModuleConstructibilityComparison. -/
+every finite-extension chart and natural in scheme maps. -/
 def nativeExchangeEncoding (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) :=
   AdicSheaf.forgetAb l X ⋙ Mod.comap (nativeModuleCoefficientIso l X).hom
 
-/-- Scalar forgetting and transport are equivalences. Source: Stacks 03EK. -/
+/-- Scalar forgetting and transport are equivalences. -/
 @[instance] theorem nativeExchangeEncoding_isEquivalence (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) :
     (nativeExchangeEncoding l X).IsEquivalence := by
   have : (AdicSheaf.forgetAb l X).IsEquivalence :=
@@ -87,7 +89,7 @@ def nativeExchangeEncoding (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) :=
   dsimp only [nativeExchangeEncoding]
   infer_instance
 
-/-- Scalar transport leaves addition of underlying maps unchanged. Source: Stacks 03EK. -/
+/-- Scalar transport leaves addition of underlying maps unchanged. -/
 @[instance] theorem nativeExchangeEncoding_additive (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) :
     (nativeExchangeEncoding l X).Additive := by
   refine ⟨?_⟩
@@ -97,8 +99,7 @@ def nativeExchangeEncoding (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) :=
 attribute [irreducible] nativeExchangeEncoding
 
 /-- The same real encoding, transported along a specified equality of bundled
-coefficient rings. Equality fixes the multiplication as well as the underlying sheaf.
-Source: normalized coefficient transport in nativeModuleConstructibilityComparison. -/
+coefficient rings. Equality fixes the multiplication as well as the underlying sheaf. -/
 def nativeExchangeEncodingAt (l : ℕ) [Fact l.Prime]
     (Λ : Mon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}))
     (hΛ : Λ = Mon.mk (Profinite.padicAlgClRingObj l)) (X : Scheme.{u}) :
@@ -106,7 +107,7 @@ def nativeExchangeEncodingAt (l : ℕ) [Fact l.Prime]
       (condensedRingObj Λ.X X) :=
   hΛ.symm ▸ nativeExchangeEncoding l X
 
-/-- Equality transport preserves the encoding equivalence. Source: Stacks 03EK. -/
+/-- Equality transport preserves the encoding equivalence. -/
 @[instance] theorem nativeExchangeEncodingAt_isEquivalence (l : ℕ) [Fact l.Prime]
     (Λ : Mon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}))
     (hΛ : Λ = Mon.mk (Profinite.padicAlgClRingObj l)) (X : Scheme.{u}) :
@@ -115,7 +116,7 @@ def nativeExchangeEncodingAt (l : ℕ) [Fact l.Prime]
   change (nativeExchangeEncoding l X).IsEquivalence
   infer_instance
 
-/-- Equality transport preserves additivity. Source: Stacks 03EK. -/
+/-- Equality transport preserves additivity. -/
 @[instance] theorem nativeExchangeEncodingAt_additive (l : ℕ) [Fact l.Prime]
     (Λ : Mon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}))
     (hΛ : Λ = Mon.mk (Profinite.padicAlgClRingObj l)) (X : Scheme.{u}) :
@@ -126,14 +127,12 @@ def nativeExchangeEncodingAt (l : ℕ) [Fact l.Prime]
 
 attribute [irreducible] nativeExchangeEncodingAt
 
-/-- The underlying arrow of a morphism in a full subcategory.
-Source: the fully faithful inclusion of an object-property subcategory. -/
+/-- The underlying arrow of a morphism in a full subcategory. -/
 def nativeUnderlyingExchangeArrow {C : Type*} [Category C] (P : ObjectProperty C)
     {A B : P.FullSubcategory} (f : A ⟶ B) : Arrow C :=
   Arrow.mk (P.ι.map f)
 
-/-- The inclusion of a full subcategory preserves invertibility.
-Source: functoriality of inverses. -/
+/-- The inclusion of a full subcategory preserves invertibility. -/
 theorem nativeUnderlyingExchangeArrow_isIso {C : Type*} [Category C] (P : ObjectProperty C)
     {A B : P.FullSubcategory} (f : A ⟶ B) (hf : IsIso f) :
     IsIso (nativeUnderlyingExchangeArrow P f).hom := by
@@ -691,8 +690,7 @@ private theorem generic_exchange_comparison_at
     apply totalDerivedExchange_exact_comparisonFor
 
 /-- The encoded native mate and the underlying restricted condensed mate are isomorphic
-as arrows. No properness or native constructibility hypothesis enters this comparison.
-Source: Stacks 09T5 and 070Y. -/
+as arrows. No properness or native constructibility hypothesis enters this comparison. -/
 theorem nativeDerivedExchange_condensed_comparison
     (l : ℕ) [Fact l.Prime] (k : Type u) [Field k]
     [Fact (ringChar k).Prime] [Fact (ringChar k ≠ l)]

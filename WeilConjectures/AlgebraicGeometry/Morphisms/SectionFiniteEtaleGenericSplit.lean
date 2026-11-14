@@ -14,7 +14,13 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Finite
 import WeilConjectures.Mathlib.CategoryTheory.Extensive
 
 /-! # Splitting the section pullback of a finite étale generic model
-Source: Stacks Project, Tags 0EYJ and 0BQM.
+
+## References
+
+* Stacks Project, Tags 0EYJ and 0BQM
+* Stacks Project, Tag 0EYJ, section fibre calculation
+* Stacks Project, Tag 0EYJ, the section fibre calculation
+* Tag 0BQM, full faithfulness
 -/
 
 @[expose] public section
@@ -67,8 +73,7 @@ private theorem constant_cover_generic {B K : Scheme.{u}}
     simpa [Cofan.IsColimit.desc, coproductIsCoproduct, v] using hs.flip
   exact ⟨H.isoPullback, H.isoPullback_hom_snd⟩
 
-/-- The section cover has split generic fibre, without asserting any extension over U.
-Source: Stacks Project, Tag 0EYJ, section fibre calculation. -/
+/-- The section cover has split generic fibre, without asserting any extension over U. -/
 private theorem section_cover_generic_fibre_split {S C : Scheme.{u}}
     [IsIntegral S]
     (c : C ⟶ S)
@@ -176,8 +181,7 @@ private theorem generic_iso_extends {B : Scheme.{u}} [IsIntegral B]
     · simp
   exact ⟨⟨f, g, hfg, hgf⟩, hf.1⟩
 
-/-- A finite étale model of a generic torsor splits after pullback to the section on U.
-Source: Stacks Project, Tag 0EYJ, the section fibre calculation; Tag 0BQM, full faithfulness. -/
+/-- A finite étale model of a generic torsor splits after pullback to the section on U. -/
 theorem GaloisCover.section_finiteEtale_generic_split {S C : Scheme.{u}}
     [IsIntegral S] (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))
     (c : C ⟶ S)

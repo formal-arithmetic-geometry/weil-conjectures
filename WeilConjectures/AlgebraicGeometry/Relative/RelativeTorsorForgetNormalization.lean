@@ -12,7 +12,10 @@ import WeilConjectures.CategoryTheory.Abelian.FirstResolutionExtensionClass
 /-!
 # Ordinary normalization of framed relative classes
 
-Source: Stacks Project, Tag 03AJ, relative refinement, step 6.
+## References
+
+* Stacks Project, Tag 03AJ, relative refinement, step 6
+* Tags 06XR and 06XV
 -/
 
 @[expose] public section
@@ -22,8 +25,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
-/-- Forgetting the open lift identifies the framed cocycle with the negative extension class.
-Source: Stacks Project, Tag 03AJ, relative refinement, step 6; Tags 06XR and 06XV. -/
+/-- Forgetting the open lift identifies the framed cocycle with the negative extension class. -/
 theorem relativeFrameClass_forget
     (T : Scheme.{u}) (U : T.Etale)
     {G : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}} (I : InjectiveResolution G)

@@ -15,7 +15,11 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 /-!
 # Extending integral sections from a dense open of a normal scheme
 
-Source: Stacks Project, Tags 0357 and 0AB1, affine integral-closure argument.
+## References
+
+* Stacks Project, Tags 0357 and 0AB1, affine integral-closure argument
+* Stacks Project, Tags 0357 (normal components) and 0AB1 (integral birational comparison), the
+  affine integral-closure argument
 -/
 
 @[expose] public section
@@ -111,10 +115,7 @@ private theorem integral_section_extends_locally {X : Scheme.{u}} [IsLocallyNoet
   simp only [← CommRingCat.comp_apply, ← Functor.map_comp]
   exact ht
 
-/-- A section on a dense open integral over an affine chart extends over that chart.
-
-Source: Stacks Project, Tags 0357 (normal components) and 0AB1 (integral birational
-comparison), the affine integral-closure argument. -/
+/-- A section on a dense open integral over an affine chart extends over that chart. -/
 theorem exists_integral_section_denseOpen
     {X : Scheme.{u}} [IsLocallyNoetherian X]
     (hnormal : ∀ z : X, IsDomain (X.presheaf.stalk z) ∧

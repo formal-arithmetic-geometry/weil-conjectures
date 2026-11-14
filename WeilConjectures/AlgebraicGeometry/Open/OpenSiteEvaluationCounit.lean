@@ -33,7 +33,10 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-! # The open evaluation normalization
 
-Source: Stacks Project, Tags 09A6, 09AF and 099R.
+## References
+
+* Stacks Project, Tags 09A6, 09AF and 099R
+* Stacks Project, Tags 09AF and 099R
 -/
 
 @[expose] public noncomputable section
@@ -212,8 +215,7 @@ private theorem plus_unit (A : Type (u + 1)) [CommRing A] [Finite A]
     ObjectProperty.lift, DerivedCategory.Plus.ι, ObjectProperty.ι, inducedFunctor,
     Functor.id_obj] using h
 set_option backward.isDefEq.respectTransparency false in
-/-- Site comparison preserves the evaluation counit of extension by zero.
-Source: Stacks Project, Tags 09AF and 099R. -/
+/-- Site comparison preserves the evaluation counit of extension by zero. -/
 theorem openSiteEvaluationCounit (A : Type (u + 1)) [CommRing A] [Finite A]
     {U Z : Scheme.{u}} (j : U ⟶ Z) [IsOpenImmersion j] :
     ∀ B : DerivedCategory.Plus (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} A)),

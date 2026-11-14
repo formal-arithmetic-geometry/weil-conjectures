@@ -17,7 +17,11 @@ import Mathlib.AlgebraicGeometry.Stalk
 
 /-! # Boundary depth of a finite power-series thickening
 
-Source: Stacks Project, Tag 0EY9, finite-index calculation; Tag 0337
+## References
+
+* Stacks Project, Tag 0EY9, finite-index calculation
+* Tag 0337
+* Stacks Project, Tag 0EY9, first displayed calculation, and Tag 0337
 -/
 
 @[expose] public section
@@ -27,9 +31,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- The stalks outside the punctured part of a finite power-series thickening have
- depth at least two.
-
-Source: Stacks Project, Tag 0EY9, first displayed calculation, and Tag 0337 -/
+ depth at least two. -/
 theorem powerSeries_thickening_boundary_depth
     (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]
     (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth (R := A) A)

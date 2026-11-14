@@ -21,7 +21,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCo
 
 /-! # Restriction of derived direct image to bounded constructibles
 
-Source: Stacks Project, Tags 05TC, 08J5, 09AK and 09AL.
+## References
+
+* Stacks Project, Tags 05TC, 08J5, 09AK and 09AL
 -/
 
 @[expose] public section

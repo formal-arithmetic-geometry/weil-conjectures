@@ -112,13 +112,17 @@ import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 
 /-! # Canonical internal Hom comparison for a regular principal quotient
 
-Source: Stacks Project, Tags 08JF and 0BYU.
-
 The extension, internal Hom and bidual map below are the existing ordinary unbounded
 small-etale constructions. The tensor comparison of the extension is the canonical one,
 `Functor.leftDerivedTensorIsoOfIsLeftDerivedFunctor` of the strong monoidal sheaf extension
 of scalars (not the choice-based `derivedExtendScalarsTensorIso`). In particular the comparison
 is a real transpose of evaluation, rather than a choice of an unspecified isomorphism.
+
+## References
+
+* Stacks Project, Tags 08JF and 0BYU
+* Stacks 03NU
+* Stacks 03CN
 -/
 
 @[expose] public noncomputable section
@@ -134,8 +138,7 @@ attribute [local instance 20000] AlgebraicGeometry.Etale.sheafBraidedCategory
 namespace AlgebraicGeometry.Etale
 
 /-- The small etale site is essentially small (a local copy of the local instance of
-`WeilConjectures.SixFunctors.Etale.Derived.ReductionHom`, which instance search does not find).
-Source: Stacks 03NU. -/
+`WeilConjectures.SixFunctors.Etale.Derived.ReductionHom`, which instance search does not find). -/
 local instance instEssentiallySmallEtale_principalQuotientInternalHom
     (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
   have : LocallySmall.{u + 1} X.Etale :=
@@ -143,8 +146,7 @@ local instance instEssentiallySmallEtale_principalQuotientInternalHom
   essentiallySmall_of_small_of_locallySmall _
 
 /-- Sheaves of modules on the small etale site have countable coproducts (local copy of the
-local instance of `WeilConjectures.SixFunctors.Etale.Derived.ReductionHom`).
-Source: Stacks 03CN. -/
+local instance of `WeilConjectures.SixFunctors.Etale.Derived.ReductionHom`). -/
 local instance instHasCountableCoproductsSheaf_principalQuotientInternalHom
     (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] :
     HasCountableCoproducts (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=

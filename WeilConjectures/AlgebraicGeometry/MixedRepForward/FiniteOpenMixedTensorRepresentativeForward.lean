@@ -17,12 +17,15 @@ import WeilConjectures.AlgebraicGeometry.MixedRepForward.ForwardTransportGeneral
 /-!
 # The forward cochain tensor counit square
 
-Source: Stacks Project, Tag 07A4, tensor pullback comparison.
 Unpack the defining equation of the published comparison on homotopy objects. Its two
 counits are the tensor of the pullback counits followed by the target tensorator, and
 the source tensorator followed by the pullback counit. Evaluate at the homotopy
 quotients of the two complexes, expand the native cochain tensorator transport, and
 identify the pullback counits with the canonical exact-derived factors.
+
+## References
+
+* Stacks Project, Tag 07A4, tensor pullback comparison
 -/
 
 @[expose] public section

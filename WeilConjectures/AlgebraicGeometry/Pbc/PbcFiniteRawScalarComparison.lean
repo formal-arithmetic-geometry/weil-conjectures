@@ -12,12 +12,16 @@ import Mathlib.RingTheory.Localization.BaseChange
 
 /-! # Normalized finite-stage and embedding scalar extension
 
-Source: BS Proposition 6.8.14(2), Remark 6.8.15; Stacks 03EK and 0D6D.
-
 ## Main definitions
 
 - `pbcFiniteRawScalarComparison`: the integral-normalized comparison between the
   StageSystem transition and raw scalar tensor on the same small coefficient fields.
+
+## References
+
+* BS Proposition 6.8.14(2), Remark 6.8.15
+* Stacks 03EK and 0D6D
+* BS 6.8.14(2), 6.8.15
 -/
 
 @[expose] public noncomputable section
@@ -162,8 +166,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The two finite-field scalar constructions have a unique integral-normalized
 comparison. HEq retains the canonical equality of the quotient-normalized
-coefficient maps and hence of their actual derived tensor objects.
-Source: BS 6.8.14(2), 6.8.15; Stacks 03EK and 0D6D. -/
+coefficient maps and hence of their actual derived tensor objects. -/
 theorem pbcFiniteRawScalarComparison_existsUnique :
     ∃! c : (pbcScalarSystem l Ω T dT.out iT.out).T h ≅
         pbcRationalScalarExtension l (pbcFiniteField.{u} l Ω E)
@@ -190,8 +193,7 @@ theorem pbcFiniteRawScalarComparison_existsUnique :
     _ (pbcScalarIntegralComparison l Ω T dT.out iT.out h) hJ
 
 /-- The unique comparison fixed on every integral representative; its identity-field
-case is the recorded tensor-multiplication unit, rather than an arbitrary automorphism.
-Source: BS 6.8.14(2), 6.8.15; Stacks 03EK and 0D6D. -/
+case is the recorded tensor-multiplication unit, rather than an arbitrary automorphism. -/
 def pbcFiniteRawScalarComparison :=
   (pbcFiniteRawScalarComparison_existsUnique l Ω T h).exists.choose
 

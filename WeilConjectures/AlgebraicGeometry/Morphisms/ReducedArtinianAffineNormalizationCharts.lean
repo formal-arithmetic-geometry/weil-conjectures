@@ -14,7 +14,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteAffineNormalizationCopr
 
 /-! # ReducedArtinianAffineNormalizationCharts
 
-Source: Stacks Project and Mathlib. -/
+## References
+
+* Stacks Project and Mathlib
+* Stacks Project, Tags 035H and 035I
+-/
 
 @[expose] public section
 
@@ -75,9 +79,7 @@ private theorem affine_normalization_iso (A : CommRingCat.{u}) (D : Type u)
   simpa using congrArg (fun f ↦ f (s.symm x)) h.symm
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Residue-field integral-closure charts for one reduced Artinian affine algebra.
-
-Source: Stacks Project, Tags 035H and 035I. -/
+/-- Residue-field integral-closure charts for one reduced Artinian affine algebra. -/
 theorem reduced_artinian_affine_normalization_charts
     (A : CommRingCat.{u}) (D : Type u) [CommRing D] [Algebra A D]
     [IsArtinianRing D] [_root_.IsReduced D]

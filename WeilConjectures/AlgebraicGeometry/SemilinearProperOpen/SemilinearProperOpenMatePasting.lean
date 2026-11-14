@@ -134,8 +134,6 @@ import all WeilConjectures.AlgebraicGeometry.SemilinearProperOpen.Normalization.
 
 /-! # Intrinsic proper/open mates for semilinear coefficient systems
 
-Source: Stacks Project, Tags 0F7B, 0F7C, 0F7D and 0F7F, open cases.
-
 ## Main definitions and statements
 
 - `Modules`, `Derived`, `P`, `R`, `J`: the actual ordinary and derived system operations.
@@ -143,6 +141,13 @@ Source: Stacks Project, Tags 0F7B, 0F7C, 0F7D and 0F7F, open cases.
 - `semilinearProperOpenMatePasting`: vertical, horizontal and base-change equations.
 - `gamma_adjunct`, `gamma_identities`, `compositor_associativity`: normalization and coherence.
 - `gamma_scalarRestriction`, `gamma_evaluation`, `gamma_finite`: coefficient comparisons.
+
+## References
+
+* Stacks Project, Tags 0F7B, 0F7C, 0F7D and 0F7F, open cases
+* Stacks, Tags 0F7C, 0F7D and 0F7F
+* Stacks, Tags 0F7B and 07A7, steps 6 and 10
+* Stacks 09AE and the proof of 0F7B
 -/
 
 @[expose] public noncomputable section
@@ -398,7 +403,7 @@ set_option backward.isDefEq.respectTransparency.types true in
 set_option linter.unusedVariables false in
 /-- Vertical, horizontal and base-change coherence for every commutative proper/open
 square, as equalities in derived semilinear-system categories, without assuming evaluation
-faithful. Source: Stacks, Tags 0F7C, 0F7D and 0F7F. -/
+faithful. -/
 theorem semilinearProperOpenMatePasting :
     (∀ {A C₀ E B₀ D F : Scheme.{u}}
       (k : A ⟶ B₀) (i : C₀ ⟶ D) (j : E ⟶ F)
@@ -600,8 +605,7 @@ private alias jComp_transport := SemilinearProperOpenCoherenceAliases.jComp_tran
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- Identity normalizations of gamma in both directions.
-Source: Stacks, Tags 0F7B and 07A7, steps 6 and 10. -/
+/-- Identity normalizations of gamma in both directions. -/
 theorem gamma_identities :
     (∀ {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
       (h : j ≫ (𝟙 X) = (𝟙 U) ≫ j) (M : Derived C τ U),
@@ -637,8 +641,7 @@ theorem gamma_identities :
       (Normalization.jid_heq C τ U) (Normalization.jid_heq C τ X)
       ((VaryingRing.gamma_identities C τ).2 p h)
 
-/-- The projector selects the clopen image: identity there, zero on its complement.
-Source: Stacks 09AE and the proof of 0F7B. -/
+/-- The projector selects the clopen image: identity there, zero on its complement. -/
 theorem pi_components {U X D : Scheme.{u}} (s : U ⟶ X) (c : D ⟶ X)
     [IsOpenImmersion s] [IsClosedImmersion s] [IsOpenImmersion c]
     (hc : Set.range c = (Set.range s)ᶜ) (M : Derived C τ X) :

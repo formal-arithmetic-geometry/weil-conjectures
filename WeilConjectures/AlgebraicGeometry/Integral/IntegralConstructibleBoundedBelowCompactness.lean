@@ -23,11 +23,14 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLow
 
 /-! # Integral constructible complexes and uniformly bounded below sums
 
-Source: Bhatt--Scholze, The pro-etale topology for schemes, Lemma 6.8.12 and Proposition 6.8.11(3).
-
 Coproducts are supplied as colimit cofans, so the statement is independent of
 chosen coproduct objects. Their universal property constructs exactly the comparison
 induced by the individual coprojections. The empty family is included.
+
+## References
+
+* Bhatt--Scholze, The pro-etale topology for schemes, Lemma 6.8.12 and Proposition 6.8.11(3)
+* Bhatt--Scholze, Lemma 6.8.12, using Proposition 6.8.11(3)
 -/
 
 @[expose] public noncomputable section
@@ -43,8 +46,7 @@ namespace AlgebraicGeometry.Scheme
 /-- Global derived Hom out of an integral constructible complex commutes with sums
 of complexes having one common integer cohomological lower bound. The map is the
 unique map whose component at i is RHom(K,-) of the ith coprojection. Both sums are
-coproducts in the ambient derived categories, with no completion of their sum.
-Source: Bhatt--Scholze, Lemma 6.8.12, using Proposition 6.8.11(3). -/
+coproducts in the ambient derived categories, with no completion of their sum. -/
 theorem integralConstructible_boundedBelow_compactness
     (T : Scheme.{u}) [IsNoetherian T]
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Type u) [Field E]

@@ -17,7 +17,9 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
 /-!
 # Finite locally free quotient towers
 
-Source: Bhatt--Scholze, Proposition 6.8.4(1).
+## References
+
+* Bhatt--Scholze, Proposition 6.8.4(1)
 -/
 
 @[expose] public noncomputable section

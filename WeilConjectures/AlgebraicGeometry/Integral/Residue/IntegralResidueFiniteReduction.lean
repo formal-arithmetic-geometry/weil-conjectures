@@ -16,7 +16,10 @@ import all WeilConjectures.AlgebraicGeometry.Constructible.ConstructibleCoeffici
 
 /-! # Finite reduction under normalized residue coefficients
 
-Source: Bhatt--Scholze, Definition 6.5.1 and Lemma 6.5.8(1).
+## References
+
+* Bhatt--Scholze, Definition 6.5.1 and Lemma 6.5.8(1)
+* Bhatt--Scholze, Definition 6.5.1, Lemma 6.5.8(1)
 -/
 
 @[expose] public noncomputable section
@@ -236,8 +239,7 @@ private theorem liftRingIso_hom (S : Scheme.{u})
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}))).map_preimage _
 
 /-- Restriction along the finite coefficient isomorphism, on a localization representative.
-The representative is canonical up to its supplied localization isomorphism.
-Source: Bhatt--Scholze, Definition 6.5.1, Lemma 6.5.8(1). -/
+The representative is canonical up to its supplied localization isomorphism. -/
 def integralResidueFiniteModel
     (S : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -259,8 +261,7 @@ private local instance integralResidueFiniteCategory (T : Scheme.{u})
 
 set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 /-- Reduction commutes with the normalized integral coefficient comparison and inverse image.
-There is no completeness, perfectness or covering hypothesis.
-Source: Bhatt--Scholze, Definition 6.5.1 and Lemma 6.5.8(1). -/
+There is no completeness, perfectness or covering hypothesis. -/
 theorem integralResidueFiniteReduction
     (T S : Scheme.{u}) (g : S ⟶ T) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

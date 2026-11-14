@@ -10,9 +10,16 @@ import WeilConjectures.AlgebraicGeometry.Lisse.Tower.LisseTowerConstantComplexCo
 
 /-! # Constant complexes in the localized fixed realization
 
-Source: Stacks Project, Tags 03CY, 03DA, 06YY and 0H7J. This is the constant-complex
+This is the constant-complex
 part of localized realization, independent of any descended or normalized tower.
 The three scheme morphisms need no relation to one another.
+
+## References
+
+* Stacks Project, Tags 03CY, 03DA, 06YY and 0H7J
+* Stacks Project, Modules on Sites, Tags 03CY and 03DA
+* Sites, Tag 0H7J
+* Cohomology on Sites, Tag 06YY
 -/
 
 @[expose] public noncomputable section
@@ -30,8 +37,7 @@ attribute [local irreducible] HasDerivedCategory.standard pbcDerivedRestrict
 comparison. No actual tower, descended level, descent equation or choice of local
 markings is involved.
 
-Source: Stacks Project, Modules on Sites, Tags 03CY and 03DA; Sites, Tag 0H7J;
-Cohomology on Sites, Tag 06YY. This is step 3 and the constant-complex part of step 1
+This is step 3 and the constant-complex part of step 1
 of lem-weil-pbc-lisse-tower-localized-realization. -/
 theorem lisseTower_localized_constants
     {X Z T S : Scheme.{u}} (g : Z ⟶ X) (a : T ⟶ S) (b : Z ⟶ T)

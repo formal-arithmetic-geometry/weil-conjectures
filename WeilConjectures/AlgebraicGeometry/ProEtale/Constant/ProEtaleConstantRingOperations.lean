@@ -11,10 +11,15 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsCanon
 /-!
 # Ordinary pro-etale operations with arbitrary constant coefficients
 
-Source: Stacks Project, Modules on Sites, and Tag 0H7J.
-
 This supplies the arbitrary-constant-ring specialization of the published ring-sheaf
 operations. The intrinsic finite-coefficient interface remains available.
+
+## References
+
+* Stacks Project, Modules on Sites, and Tag 0H7J
+* Stacks, Tag 0H7J
+* Stacks
+* Stacks, Section 0735
 -/
 
 @[expose] public section
@@ -28,8 +33,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The specified constant-section comparison is invertible for arbitrary rings.
-Source: Stacks, Tag 0H7J. -/
+/-- The specified constant-section comparison is invertible for arbitrary rings. -/
 theorem proEtaleConstantRingComparison_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     (A : Type u) [CommRing A] : IsIso (proEtaleCoefficientInverseImageMap f A) := by
   -- Compare the two left adjoints to sections at the base-changed terminal object.
@@ -76,38 +80,33 @@ theorem proEtaleConstantRingComparison_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 attribute [instance] proEtaleConstantRingComparison_isIso
 
-/-- The coefficient identification fixed by the constant-section map, with no finiteness.
-Source: Stacks, Tag 0H7J. -/
+/-- The coefficient identification fixed by the constant-section map, with no finiteness. -/
 noncomputable def proEtaleConstantRingComparison {X Y : Scheme.{u}} (f : X ⟶ Y)
     (A : Type u) [CommRing A] :
     (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj (proEtaleConstantRing Y A) ≅
       proEtaleConstantRing X A :=
   asIso (proEtaleCoefficientInverseImageMap f A)
 
-/-- Ordinary module inverse image in the intrinsic constant-ring presentation.
-Source: Stacks. -/
+/-- Ordinary module inverse image in the intrinsic constant-ring presentation. -/
 noncomputable abbrev proEtaleConstantRingPullback (A : Type u) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   proEtaleRingModulePullback f (proEtaleConstantRing Y A) (proEtaleConstantRing X A)
     (proEtaleConstantRingComparison f A)
 
-/-- Ordinary module direct image with the adjoint constant-section scalar action.
-Source: Stacks. -/
+/-- Ordinary module direct image with the adjoint constant-section scalar action. -/
 noncomputable abbrev proEtaleConstantRingPushforward (A : Type u) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   proEtaleRingModuleDirectImage f (proEtaleConstantRing Y A) (proEtaleConstantRing X A)
     (proEtaleConstantRingComparison f A)
 
-/-- The tensor-unit-normalized adjunction of the arbitrary constant-ring operations.
-Source: Stacks. -/
+/-- The tensor-unit-normalized adjunction of the arbitrary constant-ring operations. -/
 noncomputable abbrev proEtaleConstantRingAdjunction (A : Type u) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     proEtaleConstantRingPullback A f ⊣ proEtaleConstantRingPushforward A f :=
   proEtaleRingModuleAdjunction f (proEtaleConstantRing Y A) (proEtaleConstantRing X A)
     (proEtaleConstantRingComparison f A)
 
-/-- Exact termwise descent to the same ordinary unbounded intrinsic derived category.
-Source: Stacks, Section 0735. -/
+/-- Exact termwise descent to the same ordinary unbounded intrinsic derived category. -/
 noncomputable abbrev proEtaleConstantRingDerivedPullback (A : Type u) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     proEtaleDerivedCategory Y A ⥤ proEtaleDerivedCategory X A :=

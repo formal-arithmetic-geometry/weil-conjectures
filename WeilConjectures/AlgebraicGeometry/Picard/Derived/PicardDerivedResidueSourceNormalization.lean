@@ -10,7 +10,10 @@ import WeilConjectures.AlgebraicGeometry.Flat.FlatInvertibleCanonicalDerivedBase
 
 /-! # PicardDerivedResidueSourceNormalization
 
-Source: Stacks Project, Tags 0096, 06YJ, 0A1D, 08HY, 0D5S and 01F7.
+## References
+
+* Stacks Project, Tags 0096, 06YJ, 0A1D, 08HY, 0D5S and 01F7
+* Stacks Project, Tags 0A1D, 08HY and 0096
 -/
 
 @[expose] public section
@@ -20,8 +23,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- The explicit fibre-normalization map is invertible for a proper flat family
-and an invertible coefficient.
-Source: Stacks Project, Tags 0A1D, 08HY and 0096 -/
+and an invertible coefficient. -/
 theorem isIso_picardResidueNormalizationMap
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

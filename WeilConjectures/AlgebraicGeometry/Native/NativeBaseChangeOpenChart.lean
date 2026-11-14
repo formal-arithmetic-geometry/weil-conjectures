@@ -15,6 +15,11 @@ import WeilConjectures.CategoryTheory.Derived.DerivedExactCube
 import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.Transition
 
 /-! # Open-chart compatibility of the native derived exchange
+
+## References
+
+* Stacks 09A5, pullback pasting
+* Stacks 0D6G and 09T5
 -/
 
 @[expose] public noncomputable section
@@ -260,15 +265,13 @@ private theorem pull_cube (l : ℕ) [Fact l.Prime]
     Functor.whiskerLeft_app, Functor.whiskerRight_app, Category.assoc] using
     NatTrans.congr_app hc M
 
-/-- The pullback square over a further base map h, with all projections specified.
-Source: Stacks 09A5, pullback pasting. -/
+/-- The pullback square over a further base map h, with all projections specified. -/
 theorem adicChartSquare {X Y A B : Scheme.{u}} (p : X ⟶ Y) (i : A ⟶ Y) (h : B ⟶ A) :
     CommSq (pullback.fst (pullback.snd p i) h) (pullback.snd (pullback.snd p i) h)
       (pullback.snd p i) h :=
   ⟨pullback.condition⟩
 
-/-- Restriction of the specified global mate is isomorphic as an arrow to its chart mate.
-Source: Stacks 0D6G and 09T5. -/
+/-- Restriction of the specified global mate is isomorphic as an arrow to its chart mate. -/
 theorem adicDerivedBaseChange_openChart (l : ℕ) [Fact l.Prime]
     {X' X Y' Y A B : Scheme.{u}} {v : X' ⟶ X} {p' : X' ⟶ Y'}
     {p : X ⟶ Y} {g : Y' ⟶ Y} (sq : IsPullback v p' p g)

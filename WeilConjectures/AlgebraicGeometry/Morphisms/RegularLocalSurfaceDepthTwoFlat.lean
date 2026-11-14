@@ -19,7 +19,10 @@ import WeilConjectures.RingTheory.DepthLeSupportDimension
 /-!
 # Flatness of a depth-two finite model over a regular local surface
 
-Source: Stacks Project, Tag 0BMA, dimension-two paragraph, and Tag 00R4
+## References
+
+* Stacks Project, Tag 0BMA, dimension-two paragraph, and Tag 00R4
+* Stacks Project, Tag 0BMA, dimension-two paragraph, using miracle flatness (00R4)
 -/
 
 @[expose] public section
@@ -74,9 +77,7 @@ private theorem fibre_dimension_zero {R S : Type u}
     infer_instance
   exact ringKrullDimZero_iff_ringKrullDim_eq_zero.mp inferInstance
 
-/-- A supplied finite extension with boundary depth two is flat over a regular local surface.
-
-Source: Stacks Project, Tag 0BMA, dimension-two paragraph, using miracle flatness (00R4). -/
+/-- A supplied finite extension with boundary depth two is flat over a regular local surface. -/
 theorem flat_of_regular_local_surface_depth_two
     (A : Type u) [CommRing A] [IsRegularLocalRing A]
     (hdim : ringKrullDim A = 2) (U : (Spec (.of A)).Opens)

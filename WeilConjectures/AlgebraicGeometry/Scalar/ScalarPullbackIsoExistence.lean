@@ -13,7 +13,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.KFlatAcyclic
 
 /-! Existence of the normalized derived scalar/pullback comparison.
 
-Source: Stacks 07A4, 0G7E and 07A7.
+## References
+
+* Stacks 07A4, 0G7E and 07A7
 -/
 
 @[expose] public noncomputable section
@@ -349,7 +351,6 @@ attribute [local irreducible] ProEtale.pbcFixedScalarExtension
 
 /-- The normalized comparison exists.  It is separated from uniqueness so the
 representative descent argument can be proved independently.
-Source: Stacks 07A4, 0G7E and 07A7.
 -/
 theorem scalarPullbackIso_exists
     {A B : Type (u + 1)} [CommRing A] [CommRing B]

@@ -11,7 +11,12 @@ import WeilConjectures.AlgebraicGeometry.Relative.RelativeMVNormalizedCoefficien
 import WeilConjectures.AlgebraicGeometry.DerivedMayerVietorisImageResolutionComparisonIntersection
 import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeOpenTranspose
 import WeilConjectures.AlgebraicGeometry.RelativeMVInverseOpenMate
-/-! # Comparison of a normalized roof for one open -/
+/-! # Comparison of a normalized roof for one open
+
+## References
+
+* Stacks Project, Tags 08BV, 08FE, 08HY and 0D5T
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -250,7 +255,7 @@ private theorem open_resolution_denominator
     (open_resolution_denominator_intersection g' K' s hs W W)
 
 /-- A normalized direct-image roof on one open realizes the prescribed local
-base-change arrow. Source: Stacks Project, Tags 08BV, 08FE, 08HY and 0D5T. -/
+base-change arrow. -/
 theorem relativeMV_resolved_open_roof_comparison
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

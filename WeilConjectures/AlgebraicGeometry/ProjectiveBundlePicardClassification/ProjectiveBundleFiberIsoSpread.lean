@@ -19,7 +19,10 @@ import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 /-!
 # Spreading an isomorphism of lines on a projective-bundle fibre
 
-Source: EGA II, Remark 4.2.7 (classification announcement); Stacks Project.
+## References
+
+* EGA II, Remark 4.2.7 (classification announcement)
+* Stacks Project
 -/
 
 @[expose] public section
@@ -37,9 +40,7 @@ open Scheme.Modules
 
 /-- Two lines that are isomorphic on one projective-bundle fibre become isomorphic
 above a neighbourhood of that base point. No degree or tautological quotient is used.
-The isomorphism on the neighbourhood need not extend a prescribed fibre isomorphism.
-
-Source: EGA II, Remark 4.2.7 (classification announcement); Stacks Project. -/
+The isomorphism on the neighbourhood need not extend a prescribed fibre isomorphism. -/
 theorem projective_bundle_fiber_iso_spread (S : Scheme.{u}) (E : S.Modules)
     [E.IsQuasicoherent] (r : ℕ)
     [SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u} E r] (hr : 2 ≤ r)

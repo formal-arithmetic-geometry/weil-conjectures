@@ -108,7 +108,10 @@ import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearSystemIsoAssembly
 
 /-! # Natural isomorphisms from compatible ordinary evaluations
 
-Source: Stacks Project, Tag 0941, strict coefficient systems.
+## References
+
+* Stacks Project, Tag 0941, strict coefficient systems
+* Stacks 0941
 -/
 
 @[expose] public noncomputable section
@@ -132,8 +135,7 @@ private theorem systemHom_ext
   ext V x
   exact congrArg (fun k ↦ k.val.app (op V.unop.2) x) (h V.unop.1)
 
-/-- Natural assembly from normalized finite isomorphisms and their transition squares.
-Source: Stacks 0941; objectwise assembly followed by naturality. -/
+/-- Natural assembly from normalized finite isomorphisms and their transition squares. -/
 theorem naturalIsoOfEvaluation_exists
     {D : Type*} [Category D]
     {C : Type (t + 1)} [Category.{t} C] (J : GrothendieckTopology C)

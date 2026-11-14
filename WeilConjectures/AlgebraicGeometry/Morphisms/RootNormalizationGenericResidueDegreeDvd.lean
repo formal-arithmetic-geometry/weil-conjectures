@@ -21,7 +21,12 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.RootNormalizationGenericStalk
 
 /-! # Residue degrees of root normalization at the divisor generic point
 
-Source: Stacks Project, Tags 09EB and 0307. -/
+## References
+
+* Stacks Project, Tags 09EB and 0307
+* Stacks Project, Tag 09EB (Galois DVR degree formula) and Tag 0307 (localization of integral
+  closure)
+-/
 
 @[expose] public section
 universe u
@@ -29,10 +34,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 set_option linter.unusedVariables false in
-/-- The normalization residue degree at the root divisor divides the torsor group order.
-
-Source: Stacks Project, Tag 09EB (Galois DVR degree formula) and Tag 0307
-(localization of integral closure). -/
+/-- The normalization residue degree at the root divisor divides the torsor group order. -/
 theorem root_normalization_generic_stalk_residue_degree_dvd
     {L U : Scheme.{u}} (i : U ⟶ L)
     (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)

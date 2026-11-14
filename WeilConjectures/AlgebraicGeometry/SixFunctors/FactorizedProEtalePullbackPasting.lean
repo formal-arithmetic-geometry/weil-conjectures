@@ -94,12 +94,15 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryM
 
 /-! # Pasting constant-coefficient pro-etale pullback squares
 
-Source: Stacks Project, Tag 0D6D.
-
 ## Main statements
 
 - `proEtaleFactorizedPullback_pasting`: equality of the two canonical derived paths.
 - `proEtaleFactorizedPullback_pasting_representatives`: their termwise normalization.
+
+## References
+
+* Stacks Project, Tag 0D6D
+* Stacks Tag 0D6D
 -/
 
 @[expose] public noncomputable section
@@ -117,16 +120,14 @@ attribute [local irreducible] proEtaleRingModulePullback proEtaleConstantRingCom
 /-- The ordinary compositor with the published unit-section normalization.
 The unit-section equation in the cited theorem determines its maps: the adjunction
 identifies a map out of pullback with its composite with the unit. Thus this choice
-selects the canonical isomorphism, rather than an unspecified witness of existence.
-Source: Stacks Tag 0D6D. -/
+selects the canonical isomorphism, rather than an unspecified witness of existence. -/
 def proEtalePastingOrdinaryComposition
     {X Y Z : Scheme.{u}} (h : Z ⟶ Y) (k : Y ⟶ X) (A : Type u) [CommRing A] :
     proEtaleConstantRingPullback A k ⋙ proEtaleConstantRingPullback A h ≅
       proEtaleConstantRingPullback A (h ≫ k) :=
   (Classical.choose (proEtaleConstantRingPullbackComposition_ordinary h k A)).symm
 
-/-- The ordinary square comparison, with the specified equality transport.
-Source: Stacks Tag 0D6D. -/
+/-- The ordinary square comparison, with the specified equality transport. -/
 def proEtalePastingOrdinarySquare
     {X Y : Scheme.{u}} (u : X ⟶ Y) (vX : X ⟶ X) (vY : Y ⟶ Y)
     (e : u ≫ vY = vX ≫ u) (A : Type u) [CommRing A] :
@@ -136,8 +137,7 @@ def proEtalePastingOrdinarySquare
     eqToIso (congrArg (proEtaleConstantRingPullback A) e) ≪≫
       (proEtalePastingOrdinaryComposition vX u A).symm
 
-/-- The derived square comparison, with the specified equality transport.
-Source: Stacks Tag 0D6D. -/
+/-- The derived square comparison, with the specified equality transport. -/
 def proEtalePastingDerivedSquare
     {X Y : Scheme.{u}} (u : X ⟶ Y) (vX : X ⟶ X) (vY : Y ⟶ Y)
     (e : u ≫ vY = vX ≫ u) (A : Type u) [CommRing A] :

@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedRootLimitPunctures
 
 /-! # The pointed etale limit presentation of a punctured root chart
 
-Source: Stacks Project, Tags 0BSK and 05N9
+## References
+
+* Stacks Project, Tags 0BSK and 05N9
 -/
 
 @[expose] public section
@@ -27,9 +29,7 @@ set_option autoImplicit false
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- Punctured root charts commute with the pointed etale limit defining strict henselization.
-
-Source: Stacks Project, Tags 0BSK and 05N9 -/
+/-- Punctured root charts commute with the pointed etale limit defining strict henselization. -/
 theorem punctured_root_limit_presentation
     (R : CommRingCat.{u}) (f : R) (n : ℕ)
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (barY : Spec (.of Ω) ⟶ Spec R)

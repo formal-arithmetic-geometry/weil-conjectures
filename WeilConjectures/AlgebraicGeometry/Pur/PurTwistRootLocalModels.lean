@@ -51,6 +51,11 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 import all WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionDualLocalIso
 
 /-! # Compatible local bases of the root tower
+
+## References
+
+* Stacks Project, Tags 03PK and 03RV
+* Bhatt--Scholze, Sections 6.5 and 6.8
 -/
 
 @[expose] public section
@@ -732,9 +737,7 @@ private theorem rootReductionMap_local (S : Scheme.{u}) (l : ℕ) [Fact l.Prime]
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Finite roots have étale local bases, and compatible lifts on weakly contractible
-covers trivialize the entire inverse limit and identify its finite quotients.
-
-Source: Stacks Project, Tags 03PK and 03RV; Bhatt--Scholze, Sections 6.5 and 6.8 -/
+covers trivialize the entire inverse limit and identify its finite quotients. -/
 theorem purTwistRootLocalModels (S : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     [∀ x : S, Invertible (l : S.residueField x)] :
     (∀ n : ℕ,

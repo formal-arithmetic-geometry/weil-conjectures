@@ -16,7 +16,11 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 /-!
 # A finite flat chart with a singleton fibre
 
-Source: Stacks Project, Tags 02LK and 0BJH.
+## References
+
+* Stacks Project, Tags 02LK and 0BJH
+* Stacks Project, Tag 02LK (more-morphisms-lemma-etale-makes-quasi-finite-finite), first proof
+  paragraph
 -/
 
 @[expose] public section
@@ -26,10 +30,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Etale localization separates the selected point from the other points of its fibre.
-
-Source: Stacks Project, Tag 02LK (more-morphisms-lemma-etale-makes-quasi-finite-finite), first proof
-paragraph. -/
+/-- Etale localization separates the selected point from the other points of its fibre. -/
 theorem exists_finite_flat_singleton_fibre_chart
     {X Y : Scheme.{u}} [IsLocallyNoetherian X] [IsLocallyNoetherian Y]
     (f : X ⟶ Y) [IsFinite f] [Flat f] (x : X) :

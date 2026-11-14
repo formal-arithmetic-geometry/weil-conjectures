@@ -13,7 +13,13 @@ public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 
 /-! # Auxiliary limit statements for punctured root charts
-Source: Stacks Project, Tags 0BSK, 05N9 and 01YW. -/
+
+## References
+
+* Stacks Project, Tags 0BSK, 05N9 and 01YW
+* Stacks Project, Tag 0BSK
+* canonical structural map, Tag 03Q9
+-/
 
 @[expose] public section
 
@@ -22,9 +28,7 @@ set_option autoImplicit false
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- The pointed etale neighbourhoods give a ring-colimit presentation over the base.
-
-Source: Stacks Project, Tag 0BSK; canonical structural map, Tag 03Q9 -/
+/-- The pointed etale neighbourhoods give a ring-colimit presentation over the base. -/
 theorem pointed_etale_ring_colimit
     (R : CommRingCat.{u})
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (barY : Spec (.of Ω) ⟶ Spec R)

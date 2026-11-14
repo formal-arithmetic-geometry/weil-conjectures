@@ -13,7 +13,10 @@ import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
 /-!
 # Gluing module isomorphisms on disjoint opens
 
-Source: Stacks Project, Sheaves, Tags 00AL, 00AM and 04TN.
+## References
+
+* Stacks Project, Sheaves, Tags 00AL, 00AM and 04TN
+* Stacks Project, Sheaves, Tags 04TN and 00AM
 -/
 
 @[expose] public section
@@ -27,9 +30,7 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- On a disjoint open covering, arbitrary local isomorphisms glue.
-
-Source: Stacks Project, Sheaves, Tags 04TN and 00AM. -/
+/-- On a disjoint open covering, arbitrary local isomorphisms glue. -/
 theorem disjointOpen_nonempty_iso {X : Scheme.{u}} {ι : Type}
     (U : ι → X.Opens)
     (hcover : ∀ x : X, ∃ i : ι, x ∈ U i)

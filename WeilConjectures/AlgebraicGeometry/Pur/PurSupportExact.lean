@@ -15,7 +15,9 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.D
 /-!
 # Exact sequence of supported sections for injective pro-etale complexes
 
-Source: Stacks Project, Tags 03EJ, 03EI, 09AH and 0114.
+## References
+
+* Stacks Project, Tags 03EJ, 03EI, 09AH and 0114
 -/
 
 @[expose] public section

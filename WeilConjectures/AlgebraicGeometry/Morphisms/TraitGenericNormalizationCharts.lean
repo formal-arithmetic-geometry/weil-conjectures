@@ -17,7 +17,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.NormalizationDenseOpen
 /-!
 # Standard root charts for a generic Galois cover of a smooth trait family
 
-Source: Stacks Project, Tags 0EYJ, 0EYG and 0EYH.
+## References
+
+* Stacks Project, Tags 0EYJ, 0EYG and 0EYH
+* Stacks Project, Tag 0EYJ, first paragraph
+* Tags 0EYG and 0EYH
 -/
 
 @[expose] public section
@@ -63,9 +67,7 @@ private theorem normalization_iso_of_dense_open_model
     · exact Category.id_comp _
   exact ⟨⟨a, c, hac, hca⟩, ha⟩
 
-/-- Standard tame charts for the normalization of a generic Galois cover over a DVR.
-
-Source: Stacks Project, Tag 0EYJ, first paragraph; Tags 0EYG and 0EYH. -/
+/-- Standard tame charts for the normalization of a generic Galois cover over a DVR. -/
 theorem GaloisCover.trait_generic_normalization_chart
     (A K : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A]
     [Field K] [Algebra A K] [IsFractionRing A K]

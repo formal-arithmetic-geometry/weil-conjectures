@@ -18,7 +18,13 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteNormalDenseOpenIso
 /-!
 # Comparing a normal finite cover with a finite etale cover
 
-Source: Stacks Project, Tags 035I, 035L and 0BQM; the comparison in Tag 0EYJ.
+## References
+
+* Stacks Project, Tags 035I, 035L and 0BQM
+* the comparison in Tag 0EYJ
+* Stacks Project, Tag 033C, through `RingHom.Etale.isNormalRing`
+* Stacks Project, Tags 035I and 035L (relative normalization), Tag 0BQM (integral-closure
+  description), and the comparison in Tag 0EYJ
 -/
 
 @[expose] public section
@@ -27,8 +33,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- Etale ascent of normality on affine charts, transported to stalks.
-Source: Stacks Project, Tag 033C, through `RingHom.Etale.isNormalRing`. -/
+/-- Etale ascent of normality on affine charts, transported to stalks. -/
 private theorem normal_stalks_of_etale {B E : Scheme.{u}} [IsIntegral B]
     (hB : ∀ y : B, IsIntegrallyClosed (B.presheaf.stalk y))
     (p : E ⟶ B) [Etale p] :
@@ -61,10 +66,7 @@ private theorem normal_stalks_of_etale {B E : Scheme.{u}} [IsIntegral B]
     (E.presheaf.stalk z)).toRingEquiv
   exact ⟨e.toMulEquiv.symm.isDomain, IsIntegrallyClosed.of_equiv e⟩
 
-/-- A normal finite cover agrees with a finite etale cover if they agree on a dense open.
-
-Source: Stacks Project, Tags 035I and 035L (relative normalization), Tag 0BQM
-(integral-closure description), and the comparison in Tag 0EYJ. -/
+/-- A normal finite cover agrees with a finite etale cover if they agree on a dense open. -/
 theorem finite_normal_iso_of_dense_open_etale_comparison
     {B N E : Scheme.{u}} [IsLocallyNoetherian B] [IsIntegral B]
     (hB : ∀ y : B, IsIntegrallyClosed (B.presheaf.stalk y))

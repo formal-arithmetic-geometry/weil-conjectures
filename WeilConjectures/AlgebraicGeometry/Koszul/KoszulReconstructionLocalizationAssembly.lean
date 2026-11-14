@@ -9,15 +9,17 @@ public import Mathlib.CategoryTheory.Localization.Predicate
 
 /-! # Reflection and unit equations under localization
 
-Source: Stacks Tag 099M, localization step.
+## References
+
+* Stacks Tag 099M, localization step
+* Stacks Tag 099M
 -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
 open CategoryTheory
 
-/-- Localization descent interface used to assemble the Koszul comparison.
-Source: Stacks Tag 099M. -/
+/-- Localization descent interface used to assemble the Koszul comparison. -/
 theorem AlgebraicGeometry.Scheme.localizationNatTransIso
     {C D E : Type*} [Category C] [Category D] [Category E]
     (P : ObjectProperty C) (L : C ⥤ D) (W : MorphismProperty C)
@@ -35,8 +37,7 @@ theorem AlgebraicGeometry.Scheme.localizationNatTransIso
   have : IsIso η := isIso_of_fully_faithful R η
   exact ⟨asIso η, rfl⟩
 
-/-- Unit normalization on a right-fraction-dense localization.
-Source: Stacks Tag 099M. -/
+/-- Unit normalization on a right-fraction-dense localization. -/
 theorem AlgebraicGeometry.Scheme.localizationUnitEq
     {C D E : Type*} [Category C] [Category D] [Category E]
     (P : ObjectProperty C) (L : C ⥤ D) (W : MorphismProperty C)

@@ -11,7 +11,9 @@ import WeilConjectures.ConstructibleSheaf.InternalHom
 
 /-! # Etale representatives of pro-etale derived Isom sections
 
-Source: Stacks Project, Tag 09B1; etale geometric-point lifting.
+## References
+
+* Stacks Project, Tag 09B1
 -/
 
 @[expose] public noncomputable section
@@ -23,8 +25,6 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Pro-etale local sections of the derived Isom presheaf with bounded-below target admit
 etale representatives at every geometric point.
-
-Source: Stacks Project, Tag 09B1; etale geometric-point lifting.
 -/
 theorem exists_etale_local_representative_of_proetale_local_iso_sections
     (X : Scheme.{u}) (U : X.ProEt)

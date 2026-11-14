@@ -18,7 +18,9 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantE
 
 /-! # Flatness of finite constant-coefficient realization
 
-Source: Stacks Project, Tags 03CY and 03DA.
+## References
+
+* Stacks Project, Tags 03CY and 03DA
 -/
 
 @[expose] public noncomputable section

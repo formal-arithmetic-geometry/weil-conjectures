@@ -17,10 +17,12 @@ import WeilConjectures.WeilSheaf.IsotypicPullback
 /-!
 # Native Weil open base change
 
-Source: Stacks Project.
-
 The assertion is the natural base-change isomorphism for the actual native extension by
 zero and pullback functors on the ordinary derived categories of all native Weil sheaves.
+
+## References
+
+* Stacks Project
 -/
 
 @[expose] public section
@@ -243,9 +245,7 @@ private noncomputable def nativeOpenDerivedBaseChangeIso
 
 attribute [local irreducible] nativeOpenDerivedBaseChangeIso
 
-/-- Pullback commutes with native extension by zero in a Cartesian open square.
-
-Source: Stacks Project. -/
+/-- Pullback commutes with native extension by zero in a Cartesian open square. -/
 theorem nativeWeilOpenNaturalBaseChange
     (k₀ : Type u) [Field k₀] [Finite k₀]
     (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]

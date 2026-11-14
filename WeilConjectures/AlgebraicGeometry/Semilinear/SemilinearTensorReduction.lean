@@ -12,7 +12,11 @@ import all WeilConjectures.AlgebraicGeometry.System.SystemTensorReductionFormula
 import WeilConjectures.AlgebraicGeometry.System.SystemEvaluationFlat
 
 /-! # Reduction compatibility for semilinear tensor models
-Source: Zheng Construction 4.1 and Stacks 07A4, 08J9
+
+## References
+
+* Zheng Construction 4.1 and Stacks 07A4, 08J9
+* Stacks 06YN
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -122,8 +126,7 @@ private theorem cochainReduction_f (S : SystemScalarCoherence.{c, v, r} J B τ) 
     (cochainReduction.{c, v, r} J B τ S h P).f k =
       ordinaryReduction.{c, v, r} J B τ S h (P.X k) := rfl
 
-/-- The degreewise construction agrees with the induced cochain adjunction.
-Source: Stacks 06YN. -/
+/-- The degreewise construction agrees with the induced cochain adjunction. -/
 private theorem cochainReduction_eq_transpose (S : SystemScalarCoherence.{c, v, r} J B τ)
     {m n : ℕ} (h : n ≤ m)
     (P : CochainComplex (Systems.{c, v, max c v r} J B τ) ℤ) :

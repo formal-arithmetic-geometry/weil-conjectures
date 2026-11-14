@@ -10,7 +10,9 @@ import all WeilConjectures.AlgebraicGeometry.SmoothPurity.RootsOfUnityInverseIma
 
 /-! # Compatibility of normalized root power transitions
 
-Source: Stacks 03PK.
+## References
+
+* Stacks 03PK
 -/
 
 @[expose] public section

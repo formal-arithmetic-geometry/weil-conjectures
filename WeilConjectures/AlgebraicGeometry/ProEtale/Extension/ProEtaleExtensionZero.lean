@@ -42,12 +42,16 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoeffic
 /-!
 # Extension by zero on the small pro-etale site
 
-Source: Stacks Project, Tags 09AE, 03DI, 03DJ and 03CY.
-
 We use the recorded extension-by-zero functor with fixed module coefficients. Its
 termwise extension is Mathlib's `mapHomologicalComplex`. The scalar comparison is
 specified as the mate of the identity on restricted sections, so its normalization
 is fixed before invertibility is asserted.
+
+## References
+
+* Stacks Project, Tags 09AE, 03DI, 03DJ and 03CY
+* Stacks Project, Tags 03DJ and 09AE
+* Stacks Project, Tag 03CY
 -/
 
 @[expose] public noncomputable section
@@ -61,14 +65,12 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.ProEtale
 
 /-- The degreewise extension of the recorded `j_!`: terms are `j_!(K.X n)` and
-its differentials are `j_!(K.d n m)`, including for unbounded complexes.
-Source: Stacks Project, Tags 03DJ and 09AE. -/
+its differentials are `j_!(K.d n m)`, including for unbounded complexes. -/
 abbrev openExtensionCochain (A : Type (u + 1)) [CommRing A]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :=
   (openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapHomologicalComplex (.up ℤ)
 
-/-- Scalar restriction on fixed-module-valued sheaves is additive, section by section.
-Source: Stacks Project, Tag 03CY. -/
+/-- Scalar restriction on fixed-module-valued sheaves is additive, section by section. -/
 instance openExtensionScalarRestriction_additive {A B : Type (u + 1)}
     [CommRing A] [CommRing B] (φ : A →+* B) (X : Scheme.{u}) :
     (sheafCompose (Scheme.ProEt.topology X) (ModuleCat.restrictScalars.{u + 1} φ)).Additive :=
@@ -77,8 +79,7 @@ instance openExtensionScalarRestriction_additive {A B : Type (u + 1)}
 
 /-- The identity-on-sections scalar square, transposed along the two recorded
 extension/restriction adjunctions. This is the canonical map
-`j_!^A Res_U ⟶ Res_X j_!^B`; invertibility supplies the comparison in the node's direction.
-Source: Stacks Project, Tag 03CY. -/
+`j_!^A Res_U ⟶ Res_X j_!^B`; invertibility supplies the comparison in the node's direction. -/
 def openExtensionScalarMap {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     sheafCompose (Scheme.ProEt.topology U) (ModuleCat.restrictScalars.{u + 1} φ) ⋙

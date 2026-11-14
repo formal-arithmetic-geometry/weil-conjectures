@@ -19,12 +19,20 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 /-!
 # Normalized projective bundle quotient data
 
-Source: Stacks Project, Constructions, Tags 01OA, 01OB, 01O4, 01O9, 01OD and 01OE.
-
 The auxiliary records below spell out the conclusion for the fixed canonical symmetric
 algebra. This interface asserts no existence or geometric properties.
 The classification uses the equivalent unique-morphism formulation, avoiding a choice
 of representatives for isomorphism classes of quotient pairs.
+
+## References
+
+* Stacks Project, Constructions, Tags 01OA, 01OB, 01O4, 01O9, 01OD and 01OE
+* Stacks, Tags 01OB, 01NR, 01O4
+* Stacks, Tag 01OA
+* Stacks, Tags 01O9, 01OA
+* Stacks, Tags 01NQ, 01NR, 01OA
+* Stacks, Tags 01OE, 01OB, 01MN
+* Stacks, Tag 01OE
 -/
 
 @[expose] public section
@@ -44,8 +52,7 @@ namespace AlgebraicGeometry.ProjectiveBundleQuotientGeometry
 variable {S : Scheme.{u}} (E : S.Modules) [E.IsQuasicoherent]
 
 /-- The global degree-one twist and quotient, normalized on every affine base chart.
-The chart equation sends the pulled-back section m to iota(m)/1 in the affine twist.
-Source: Stacks, Tags 01OB, 01NR, 01O4. -/
+The chart equation sends the pulled-back section m to iota(m)/1 in the affine twist. -/
 structure TautologicalQuotient where
   line : (SymmetricAlgebraSheaf.gradedAlgebraData E).relProj.Modules
   quotient : (Scheme.Modules.tensorPullback
@@ -79,8 +86,7 @@ structure TautologicalQuotient where
 variable {E}
 
 /-- The actual pullback quotient along an S-morphism, using the section-normalized
-composition comparison of tensor pullbacks.
-Source: Stacks, Tag 01OA. -/
+composition comparison of tensor pullbacks. -/
 noncomputable def pulledQuotient (D : TautologicalQuotient E) {T : Scheme.{u}}
     (h : T ⟶ S) (a : T ⟶ (SymmetricAlgebraSheaf.gradedAlgebraData E).relProj)
     (ha : a ≫ (SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom = h) :
@@ -92,8 +98,7 @@ noncomputable def pulledQuotient (D : TautologicalQuotient E) {T : Scheme.{u}}
     (Scheme.Modules.tensorPullback a).map D.quotient
 
 /-- A quotient pair corresponds to a exactly when the pullback of the universal
-quotient is isomorphic to that pair, with the quotient map preserved.
-Source: Stacks, Tag 01OA. -/
+quotient is isomorphic to that pair, with the quotient map preserved. -/
 def Classifies (D : TautologicalQuotient E) {T : Scheme.{u}} (h : T ⟶ S)
     (L : T.Modules) (q : (Scheme.Modules.tensorPullback h).obj E ⟶ L)
     (a : T ⟶ (SymmetricAlgebraSheaf.gradedAlgebraData E).relProj) : Prop :=
@@ -105,8 +110,7 @@ def Classifies (D : TautologicalQuotient E) {T : Scheme.{u}} (h : T ⟶ S)
 q into coefficients. The unique ring map fixing scalars and those coefficients is
 Sym(E) to the tensor powers of L in that frame. The displayed map is precisely the
 usual homogeneous-fraction construction, also used in GradedLineMap.IsCanonicalMap.
-The ring map and its irrelevant-ideal condition are asserted to exist, not assumed.
-Source: Stacks, Tags 01O9, 01OA. -/
+The ring map and its irrelevant-ideal condition are asserted to exist, not assumed. -/
 def IsCanonicalMap {T : Scheme.{u}} (h : T ⟶ S) (L : T.Modules)
     (q : (Scheme.Modules.tensorPullback h).obj E ⟶ L)
     (a : T ⟶ (SymmetricAlgebraSheaf.gradedAlgebraData E).relProj) : Prop :=
@@ -136,8 +140,7 @@ def IsCanonicalMap {T : Scheme.{u}} (h : T ⟶ S) (L : T.Modules)
             (SymmetricAlgebraSheaf.gradedAlgebraData E).relProjι V
 
 /-- Restricting the canonical projective bundle to an arbitrary open of its base.
-The map exhibits the fibre product and the line isomorphism preserves the quotient.
-Source: Stacks, Tags 01NQ, 01NR, 01OA. -/
+The map exhibits the fibre product and the line isomorphism preserves the quotient. -/
 def HasOpenCompatibility (D : TautologicalQuotient E) : Prop :=
   ∀ V : S.Opens,
     ∃ hE : ((Scheme.Modules.tensorPullback V.ι).obj E).IsQuasicoherent,
@@ -164,8 +167,7 @@ def HasOpenCompatibility (D : TautologicalQuotient E) : Prop :=
 /-- Over an affine base chart, the ordered basis gives exactly the standard graded
 polynomial algebra. Both projective-space identifications use these polynomial charts,
 and the degree-one twists correspond by a section-preserving isomorphism.
-The local instance is only the specified Mathlib polynomial grading inside this definition.
-Source: Stacks, Tags 01OE, 01OB, 01MN. -/
+The local instance is only the specified Mathlib polynomial grading inside this definition. -/
 def AffineFreeComparison (r : ℕ) (b : RelativeProjectiveSpace.freeModule S r ≅ E)
     (eRel : (SymmetricAlgebraSheaf.gradedAlgebraData E).relProj ≅
       RelativeProjectiveSpace.scheme S r) (V : S.affineOpens) : Prop := by
@@ -218,8 +220,7 @@ def AffineFreeComparison (r : ℕ) (b : RelativeProjectiveSpace.freeModule S r �
             (RelativeProjectiveSpace.π S r ⁻¹ᵁ V.1).ι
 
 /-- The finite free case, with its ordered coordinate quotients and affine polynomial
-models. ULift changes only the index universe, retaining all r+1 basis elements.
-Source: Stacks, Tag 01OE; ProjectiveSpace.twist and its coordinate sections. -/
+models. ULift changes only the index universe, retaining all r+1 basis elements. -/
 def HasFreeCompatibility (D : TautologicalQuotient E) : Prop :=
   ∀ (r : ℕ) (b : RelativeProjectiveSpace.freeModule S r ≅ E),
     ∃ (eRel : (SymmetricAlgebraSheaf.gradedAlgebraData E).relProj ≅

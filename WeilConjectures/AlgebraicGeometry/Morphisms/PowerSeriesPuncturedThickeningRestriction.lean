@@ -15,7 +15,10 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedRestricti
 /-!
 # Restriction to a punctured power-series thickening
 
-Source: Stacks Project, Tag 0EY9, first displayed calculation at a fixed index.
+## References
+
+* Stacks Project, Tag 0EY9, first displayed calculation at a fixed index
+* Stacks Project, Tag 0EY9, first displayed calculation, and Tag 0BK0
 -/
 
 @[expose] public section
@@ -24,9 +27,7 @@ universe u
 open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- Sections of each individual thickening are its quotient ring.
-
-Source: Stacks Project, Tag 0EY9, first displayed calculation, and Tag 0BK0 -/
+/-- Sections of each individual thickening are its quotient ring. -/
 theorem bijective_powerSeries_punctured_thickening_restriction
     (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]
     (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth (R := A) A)

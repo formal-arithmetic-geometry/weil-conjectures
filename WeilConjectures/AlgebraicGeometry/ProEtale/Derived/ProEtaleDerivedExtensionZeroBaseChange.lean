@@ -16,12 +16,15 @@ public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 /-!
 # Ordinary pro-etale extension-by-zero base change
 
-Source: Stacks Project, and Tag 09AE.
-
 This is the ordinary constant-coefficient interface corresponding to the dependency
 node.  The previously recorded strict-tower `singleBeta` interface has a different
 category, so this module exposes the canonical mate construction on ordinary
 pro-etale module sheaves and its derived map.
+
+## References
+
+* Stacks Project, and Tag 09AE
+* and Tag 09AE
 -/
 
 @[expose] public noncomputable section
@@ -39,8 +42,7 @@ from `g⁻¹ j_!` to `j'_! g_U⁻¹`, applied degreewise.  Its inverse on sheave
 conjugate, under `j_! ⋙ g⁻¹ ⊣ g_* ⋙ j⁻¹` and `g_U⁻¹ ⋙ j'_! ⊣ j'⁻¹ ⋙ g_{U,*}`, of the
 weakly etale base-change isomorphism `ProEtale.baseChangeMap` of the chosen cartesian
 square: the construction of the upstream `derivedOpenImmersionLowerShriekBaseChangeIso`
-(with the node's orientation), whose module cannot be imported with the side imports.
-Source: and Tag 09AE. -/
+(with the node's orientation), whose module cannot be imported with the side imports. -/
 noncomputable def ordinaryOpenExtensionBaseChangeIso
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {U' U X' X : Scheme.{u}} (gU : U' ⟶ U) (j' : U' ⟶ X')

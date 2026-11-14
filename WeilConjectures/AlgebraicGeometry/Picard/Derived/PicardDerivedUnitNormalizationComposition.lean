@@ -14,7 +14,11 @@ import all WeilConjectures.AlgebraicGeometry.Tensor.TensorSinglePullbackComposit
 
 /-! # Composition of derived structure-sheaf normalization
 
-Source: Stacks Project, Tags 08HY and 0D5S.
+## References
+
+* Stacks Project, Tags 08HY and 0D5S
+* Stacks Project, Tag 0D5S
+* Stacks Project, Tag 0D5S and Tag 08HY
 -/
 
 @[expose] public section
@@ -91,8 +95,7 @@ private theorem singlePullback_naturality
 
 end Modules
 
-/-- The derived structure-sheaf normalization, with its actual unit comparisons.
-Source: Stacks Project, Tag 0D5S. -/
+/-- The derived structure-sheaf normalization, with its actual unit comparisons. -/
 @[irreducible]
 def picardDerivedUnitNormalization (W : Scheme.{v}) :
   ∀ {V : Scheme.{v}} (r : V ⟶ W),
@@ -114,8 +117,7 @@ def picardDerivedUnitNormalization (W : Scheme.{v}) :
         (asIso (SheafOfModules.pullbackObjUnitToUnit r.toRingCatSheafHom))
 
 /-- Derived structure-sheaf normalization respects composition of base maps.
-There is no direct image, coefficient module, fibre product or test section.
-Source: Stacks Project, Tag 0D5S and Tag 08HY. -/
+There is no direct image, coefficient module, fibre product or test section. -/
 theorem picardDerivedUnitNormalization_comp
     {W T T' : Scheme.{v}} (i : T' ⟶ T) (t : T ⟶ W) (t' : T' ⟶ W)
     (h : i ≫ t = t') :

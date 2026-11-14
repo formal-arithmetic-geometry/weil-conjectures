@@ -16,8 +16,12 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.RootSplitAwayTransportChart
 /-!
 # Degree-one root charts away from the divisor
 
-Source: Stacks Project, Tag 0EYG, first paragraph of the proof (the point off the divisor),
-and Tags 02LA, 02VN and 04HN.
+## References
+
+* Stacks Project, Tag 0EYG, first paragraph of the proof (the point off the divisor), and Tags 02LA,
+  02VN and 04HN
+* Stacks Project, Tag 0EYG, first proof paragraph
+* Tags 02LA, 02VN and 04HN
 -/
 
 @[expose] public section
@@ -26,10 +30,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- A root-split cover has only degree-one charts near a point off the divisor.
-
-Source: Stacks Project, Tag 0EYG, first proof paragraph; Tags 02LA, 02VN and 04HN.
--/
+/-- A root-split cover has only degree-one charts near a point off the divisor. -/
 theorem root_split_cover_away_divisor_charts
     (R : CommRingCat.{u}) (g : R) (n : ℕ) (hn : 0 < n ∧ IsUnit (n : R))
     {Y : Scheme.{u}} (p : Y ⟶ Spec R)

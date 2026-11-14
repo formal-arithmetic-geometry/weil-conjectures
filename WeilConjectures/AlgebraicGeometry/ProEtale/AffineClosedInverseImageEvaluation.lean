@@ -13,7 +13,10 @@ import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Products
 /-!
 # Inverse-image evaluation for an affine closed immersion
 
-Source: Stacks Project, Tag 09BL, (1) and (2).
+## References
+
+* Stacks Project, Tag 09BL, (1) and (2)
+* Stacks Project, Tag 09BL, (2)
 -/
 
 @[expose] public section
@@ -177,9 +180,7 @@ At a weakly contractible basis object, the sheafification unit is bijective.
 Composing its inverse with the first natural isomorphism gives the asserted
 inverse-image evaluation isomorphism, natural in sheaves and in such basis objects.
 Weak contractibility is written as surjectivity of evaluation on all epimorphisms;
-`Epi` means right cancellability, including for the empty basis object.
-
-Source: Stacks Project, Tag 09BL, (2). -/
+`Epi` means right cancellability, including for the empty basis object. -/
 theorem affine_closed_inverseImage_evaluation (A : Type u) [CommRing A] (I : Ideal A) :
     Nonempty
       (proEtaleSheafInverseImage (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))

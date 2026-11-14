@@ -11,7 +11,10 @@ import WeilConjectures.AlgebraicGeometry.Lisse.Finite.LisseFiniteLevelEtaleStalk
 
 /-! # Geometric Isom stalks for a supplied finite-level model
 
-Source: Stacks Tags 099Y and 09BV.
+## References
+
+* Stacks Tags 099Y and 09BV
+* Stacks Project, Tags 099Y and 09BV
 -/
 
 @[expose] public noncomputable section
@@ -35,8 +38,6 @@ A bounded finite-lisse etale model carrying the fixed-realization comparison
 has inhabited geometric stalks of its local derived Isom sheaf whenever the
 pro-etale local markings exist. This is the stalk-and-Isom part of
 `lisse_finite_level_etale_descent`; the etale model is supplied as input.
-
-Source: Stacks Project, Tags 099Y and 09BV.
 -/
 theorem lisse_finite_level_etale_stalks
     (X Y : Scheme.{u}) (g : Y ⟶ X)

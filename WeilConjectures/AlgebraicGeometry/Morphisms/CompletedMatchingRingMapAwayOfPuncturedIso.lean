@@ -13,7 +13,10 @@ import Mathlib.AlgebraicGeometry.Morphisms.IsIso
 
 /-! # Principal-open base change of the punctured matching comparison
 
-Source: Stacks Project, Tags 0BLH and 05ER, localized comparison paragraph.
+## References
+
+* Stacks Project, Tags 0BLH and 05ER, localized comparison paragraph
+* Stacks Project, Tag 05ER, second paragraph, applied to the overlap identification of Tag 0BLH
 -/
 
 @[expose] public section
@@ -136,10 +139,7 @@ private theorem isIso_restrict_of_le {X Z : Scheme.{u}} (k : X ⟶ Z)
 
 set_option backward.isDefEq.respectTransparency false in
 /-- An isomorphism on the punctured model gives an isomorphism of the completed
-comparison after localization at any principal open contained in the puncture.
-
-Source: Stacks Project, Tag 05ER, second paragraph, applied to the overlap
-identification of Tag 0BLH. -/
+comparison after localization at any principal open contained in the puncture. -/
 theorem completedRingMap_away_bijective_of_puncturedMap_isIso
     {A : Type u} [CommRing A] [IsLocalRing A]
     {U : (Spec (.of A)).Opens}

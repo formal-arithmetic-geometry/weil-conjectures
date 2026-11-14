@@ -14,7 +14,11 @@ import all WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientDirectImageR
 
 /-! # Compatibility of normalized direct-image squares with coefficient presentations
 
-Source: Stacks Project, Cohomology on Sites, Tags 0D6D and 0D6E.
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 0D6D and 0D6E
+* Stacks 0D6E
+* Stacks Project, together with the uniqueness of right derivation
 -/
 
 @[expose] public noncomputable section
@@ -26,8 +30,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
-/-- The canonical comparison for the source coefficient presentation.
-Source: Stacks 0D6E. -/
+/-- The canonical comparison for the source coefficient presentation. -/
 def normalizedCoefficientSourceComparison
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R₀ R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
@@ -45,8 +48,7 @@ def normalizedCoefficientSourceComparison
     (((proEtaleSheafInverseImage f CommRingCat.{u + 1}).mapIso b ≪≫ cR).hom)
     (Iso.refl _) cR (by simp)
 
-/-- The canonical comparison between identified and literal target coefficients.
-Source: Stacks 0D6E. -/
+/-- The canonical comparison between identified and literal target coefficients. -/
 def normalizedCoefficientTargetComparison
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (SY : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
@@ -90,9 +92,7 @@ attribute [local irreducible] Functor.rightDerivedFunctor Functor.mapDerivedCate
 
 /-- Changing the two coefficient presentations preserves the normalized restriction /
 direct-image square. This theorem involves only exact scalar restrictions and right
-derived direct images; it involves neither scalar extension nor its mate.
-
-Source: Stacks Project, together with the uniqueness of right derivation. -/
+derived direct images; it involves neither scalar extension nor its mate. -/
 theorem normalizedCoefficientDirectImageSquare
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R₀ R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})

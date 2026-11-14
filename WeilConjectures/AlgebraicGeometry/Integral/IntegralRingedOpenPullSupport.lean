@@ -10,7 +10,10 @@ import WeilConjectures.AlgebraicGeometry.RingedRestrictionExchange.RingedOrdinar
 
 /-! # Ordinary inverse image preserves extension-by-zero support
 
-Source: Stacks Project, Tags 03DI, 04J0 and 09AE, ringed localization and extension by zero.
+## References
+
+* Stacks Project, Tags 03DI, 04J0 and 09AE, ringed localization and extension by zero
+* Stacks Project, Tags 03DI, 04J0 and 09AE
 -/
 
 @[expose] public noncomputable section
@@ -28,9 +31,7 @@ private theorem completeCoefficientIso {I : Sort*} {C : Type*} [Category C]
 
 /-- Inverse image of an ordinary extended module lies in the essential image of
 extension from the pulled-back open. Only the three displayed coefficient
-identifications are required; no module-pullback compositor is part of the statement.
-
-Source: Stacks Project, Tags 03DI, 04J0 and 09AE. -/
+identifications are required; no module-pullback compositor is part of the statement. -/
 theorem proEtaleRingPullback_openSupport {U' U X' X : Scheme.{u}}
     (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (sq : IsPullback a j' j g)

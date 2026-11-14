@@ -12,7 +12,10 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarP
 /-! # Tensor compatibility of derived pro-etale pullback composition
 
 The proof is the pro-etale counterpart of the source library's etale composition proof.
-Source: Stacks 03EL and 07A4.
+
+## References
+
+* Stacks 03EL and 07A4
 -/
 
 @[expose] public section
@@ -93,8 +96,7 @@ open Functor.LaxMonoidal Functor.OplaxMonoidal
 attribute [local irreducible] upperStar Functor.mapDerivedCategory
 variable {T S R : Scheme.{u}} (f : T ⟶ S) (g : S ⟶ R)
 
-/-- The derived pullback compositor preserves the canonical tensor comparison.
-Source: Stacks 03EL and 07A4. -/
+/-- The derived pullback compositor preserves the canonical tensor comparison. -/
 theorem leftDerivedUpperStarTensorComparison_comp
     [NatTrans.IsMonoidal (upperStarComp A f g).inv]
     (K M : DerivedCategory (Sheaf (Scheme.ProEt.topology R) A)) :

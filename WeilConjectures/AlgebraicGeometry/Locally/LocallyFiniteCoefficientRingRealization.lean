@@ -167,14 +167,16 @@ import WeilConjectures.SixFunctors.ProEtale.Adic.PadicAlgClSheafRing
 
 /-! # Realization of the locally finite coefficient ring
 
-Source: Hemo--Richarz--Scholbach, Example 3.1 and the finite-subextension colimit preceding Lemma
-5.6.
-
 The isomorphisms are characterized by all finite-subextension inclusions and commute
 with the actual coefficient pushforward maps. The target is the existing native
 locally finite function sheaf, read in abelian sheaves through its lax monoidal
 forgetful functor. An isomorphism preserving its ring-object structure is precisely
 an isomorphism of ring sheaves; their ring structures are commutative.
+
+## References
+
+* Hemo--Richarz--Scholbach, Example 3.1 and the finite-subextension colimit preceding Lemma 5.6
+* Hemo--Richarz--Scholbach, Example 3.1 and the colimit preceding Lemma 5.6
 -/
 
 @[expose] public section
@@ -280,8 +282,7 @@ private lemma finiteLeg_native_naturality (ℓ : ℕ) [Fact ℓ.Prime]
 /-- The finite-subextension condensed coefficient ring pulls back canonically to the
 native locally finite continuous-function ring, naturally for every scheme morphism.
 The section equation fixes the comparison on every finite subextension using the
-actual adjoint continuous-function realization, not an arbitrary isomorphism.
-Source: Hemo--Richarz--Scholbach, Example 3.1 and the colimit preceding Lemma 5.6. -/
+actual adjoint continuous-function realization, not an arbitrary isomorphism. -/
 theorem locallyFiniteCoefficientRing_realization (ℓ : ℕ) [Fact ℓ.Prime] :
     ∃ θ : ∀ T : Scheme.{u},
       condensedRingObj (Profinite.padicAlgClRingObj ℓ) T ≅

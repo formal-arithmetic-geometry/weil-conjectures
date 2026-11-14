@@ -27,8 +27,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.OpenBaseChangeStructureModule
 
 /-! # Affine depth-two hull of a finite etale pushforward
 
-Source: Stacks Project, Tags 0EY6, 0G41 and 0E9I; the double-dual kernel
-calculation underlying Tags 0EBI and 0EBJ.
+## References
+
+* Stacks Project, Tags 0EY6, 0G41 and 0E9I
+* the double-dual kernel calculation underlying Tags 0EBI and 0EBJ
+* Stacks Project, Tag 0EY6 proof of (1), Tag 0G41(2), and Tag 0E9I
 -/
 
 @[expose] public section
@@ -97,7 +100,6 @@ private noncomputable def direct_image_algebra_module_iso {L X : Scheme.{u}} (g 
 set_option backward.isDefEq.respectTransparency false in
 /-- On an affine chart the actual pushforward is the coherent depth-two hull.
 
-Source: Stacks Project, Tag 0EY6 proof of (1), Tag 0G41(2), and Tag 0E9I.
 The local kernel argument expands the depth calculation of Tag 0EBI and does
 not require the integrality hypotheses of Tags 0EBI and 0EBJ. -/
 theorem affine_depth_two_pushforward_hull

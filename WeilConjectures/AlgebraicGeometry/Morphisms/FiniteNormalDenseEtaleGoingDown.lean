@@ -19,7 +19,11 @@ import Mathlib.RingTheory.IntegralClosure.GoingDown
 /-!
 # Going down on stalks of a finite map with dense etale locus
 
-Source: Stacks Project, Tags 00H8, 0357 and 01UA.
+## References
+
+* Stacks Project, Tags 00H8, 0357 and 01UA
+* Stacks Project, Tags 00H8 (going down over a normal domain), 0357 (normal components), and 01UA
+  (flat finite presentation maps are open)
 -/
 
 @[expose] public section
@@ -29,10 +33,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- A finite map between locally Noetherian normal schemes that is etale over
-an open with dense source preimage satisfies going down on each stalk map.
-
-Source: Stacks Project, Tags 00H8 (going down over a normal domain), 0357
-(normal components), and 01UA (flat finite presentation maps are open). -/
+an open with dense source preimage satisfies going down on each stalk map. -/
 theorem finite_normal_dense_etale_stalk_goingDown {X Y : Scheme.{u}}
     [IsLocallyNoetherian Y] (f : X ⟶ Y) [IsFinite f]
     (hY : ∀ y : Y, IsDomain (Y.presheaf.stalk y) ∧

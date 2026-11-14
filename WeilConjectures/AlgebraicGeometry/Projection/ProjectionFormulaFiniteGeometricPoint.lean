@@ -27,7 +27,9 @@ set_option linter.privateModule false
 
 /-! # Proper projection formula over a geometric point
 
-Source: Stacks Project, Tags 0F0G and 0F12.
+## References
+
+* Stacks Project, Tags 0F0G and 0F12
 -/
 
 @[expose] public section

@@ -24,14 +24,26 @@ import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 /-!
 # Arbitrary base change of relative differential sheaves
 
-Source: Stacks Project, Morphisms, Tags 01UT, 01UV, 01V0 and 01V2.
-
 The affine tensor product ring is expressed intrinsically as the section ring of the
 open fibre product. The `IsPushout` clause identifies it canonically with `R' ⊗[R] A`.
 The three linear equivalences identify the tensor source, the differential target,
 and the ring base-change isomorphism, and the final equation identifies their map
 with the restriction of the single global sheaf morphism. Consequently the affine
 identifications agree on overlaps by the naturality of that morphism.
+
+## References
+
+* Stacks Project, Morphisms, Tags 01UT, 01UV, 01V0 and 01V2
+* Stacks, Schemes, Tag 01JR
+* Morphisms, Tag 01V0
+* Stacks Project, Morphisms, Tag 01UV
+* Stacks Project, Morphisms, Tag 01V2
+* Algebra, Tag 00RZ
+* Stacks Project, Schemes, Tags 01JR and 01JQ
+* Stacks Project, Algebra, Tag 00RV
+* Stacks Project, Schemes, Tags 01I9 and 01IA
+* Stacks Project, Morphisms, Tag 01V0
+* Stacks, Morphisms, Tags 01UT, 01UV, 01V0 and 01V2
 -/
 
 @[expose] public section
@@ -47,15 +59,14 @@ open scoped ChangeOfRings
 namespace AlgebraicGeometry.Scheme.Hom
 
 /-- The open `U ×_V V'` inside the global fibre product, with `V` implicit in the
-conditions that both affine opens map into it.
-Source: Stacks, Schemes, Tag 01JR; Morphisms, Tag 01V0. -/
+conditions that both affine opens map into it. -/
 noncomputable abbrev relativeDifferentialsBaseChangeOpen {X S T : Scheme.{u}}
     (f : X ⟶ S) (g : T ⟶ S) (U : X.Opens) (V' : T.Opens) :
     (pullback f g).Opens :=
   (pullback.fst f g) ⁻¹ᵁ U ⊓ (pullback.snd f g) ⁻¹ᵁ V'
 
 /-- The universal derivation and the normalized pullback adjunction construct the global
-map and determine it uniquely. Source: Stacks Project, Morphisms, Tag 01UV. -/
+map and determine it uniquely. -/
 private theorem existsUnique_baseChangeMap {X S T : Scheme.{u}}
     (f : X ⟶ S) (g : T ⟶ S) :
     ∃! c : (Modules.tensorPullback (pullback.fst f g)).obj f.relativeDifferentials ⟶
@@ -120,8 +131,7 @@ private theorem existsUnique_baseChangeMap {X S T : Scheme.{u}}
     exact (he c U.unop a).trans (hc U.unop a) |>.trans
       (f.relativeDifferentialsHomEquiv_symm_app_d D a).symm
 
-/-- Finite generation on affine-pair charts descends by the affine finite-type criterion.
-Source: Stacks Project, Morphisms, Tag 01V2; Algebra, Tag 00RZ. -/
+/-- Finite generation on affine-pair charts descends by the affine finite-type criterion. -/
 private theorem differentials_finiteType {X S : Scheme.{u}} (f : X ⟶ S)
     [LocallyOfFiniteType f] : f.relativeDifferentials.IsFiniteType := by
   choose V hV U hU hxU hUV using f.exists_isAffineOpen_le_preimage
@@ -141,8 +151,7 @@ private theorem differentials_finiteType {X S : Scheme.{u}} (f : X ⟶ S)
     ⟨V x, hV x⟩ (hUV x)
   exact Module.Finite.equiv e
 
-/-- The fibre product of an affine triple is affine and its section rings form a pushout.
-Source: Stacks Project, Schemes, Tags 01JR and 01JQ. -/
+/-- The fibre product of an affine triple is affine and its section rings form a pushout. -/
 private theorem affine_baseChange_geometry {X S T : Scheme.{u}}
     (f : X ⟶ S) (g : T ⟶ S) (U : X.affineOpens) (V : S.affineOpens)
     (V' : T.affineOpens) (hU : U.1 ≤ f ⁻¹ᵁ V.1) (hV' : V'.1 ≤ g ⁻¹ᵁ V.1) :
@@ -163,8 +172,7 @@ private theorem affine_baseChange_geometry {X S T : Scheme.{u}}
       hV' hU rfl V.2 V'.2 U.2)
   exact ⟨hW, hpo⟩
 
-/-- Transport the ring base-change equivalence to ModuleCat scalar extension.
-Source: Stacks Project, Algebra, Tag 00RV. -/
+/-- Transport the ring base-change equivalence to ModuleCat scalar extension. -/
 private theorem ring_baseChange {R A R' A' : CommRingCat.{u}}
     (r : R ⟶ A) (s : R ⟶ R') (p : A ⟶ A') (q : R' ⟶ A')
     (h : IsPushout r s p q) :
@@ -193,8 +201,7 @@ private theorem ring_baseChange {R A R' A' : CommRingCat.{u}}
   rw [← he, e.symm_apply_apply]
   exact KaehlerDifferential.tensorKaehlerEquiv_tmul_D _ _ _ _ b a
 
-/-- Normalize the existing affine pullback-sections equivalence for scalar extension.
-Source: Stacks Project, Schemes, Tags 01I9 and 01IA. -/
+/-- Normalize the existing affine pullback-sections equivalence for scalar extension. -/
 private theorem affine_tensor_sections {X Y : Scheme.{u}} (p : Y ⟶ X)
     (U : X.affineOpens) (W : Y.affineOpens) (hWU : W.1 ≤ p ⁻¹ᵁ U.1)
     (F : X.Modules) [F.IsQuasicoherent] :
@@ -239,7 +246,7 @@ private theorem affine_tensor_sections {X Y : Scheme.{u}} (p : Y ⟶ X)
   exact (Classical.choose_spec (Modules.exists_tensorPullbackAdjunction p)) F (op U.1) m
 
 /-- Identify the global map on affine charts, using the universal properties to check
-equality on differential generators. Source: Stacks Project, Morphisms, Tag 01V0. -/
+equality on differential generators. -/
 private theorem affine_baseChange_comparison {X S T : Scheme.{u}}
     (f : X ⟶ S) (g : T ⟶ S)
     (c : (Modules.tensorPullback (pullback.fst f g)).obj f.relativeDifferentials ⟶
@@ -361,8 +368,7 @@ private theorem affine_baseChange_comparison {X S T : Scheme.{u}}
 
 /-- Relative differentials are quasi-coherent, their canonically normalized cartesian
 base-change map is an isomorphism, and they have finite type for a locally finite-type
-morphism. On every affine triple the map is `b ⊗ da ↦ b d(1 ⊗ a)`.
-Source: Stacks, Morphisms, Tags 01UT, 01UV, 01V0 and 01V2. -/
+morphism. On every affine triple the map is `b ⊗ da ↦ b d(1 ⊗ a)`. -/
 theorem relativeDifferentialSheaf_baseChange {X S T : Scheme.{u}}
     (f : X ⟶ S) (g : T ⟶ S) :
     f.relativeDifferentials.IsQuasicoherent ∧

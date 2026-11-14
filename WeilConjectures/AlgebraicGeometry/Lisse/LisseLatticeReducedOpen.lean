@@ -536,8 +536,10 @@ import Mathlib.RingTheory.Finiteness.Small
 /-!
 # An integral lattice on a nonempty reduced open
 
-Source: Bhatt--Scholze, The pro-etale topology for schemes, Lemma 6.8.13, first paragraph, and
-Stacks Tag 03S0
+## References
+
+* Bhatt--Scholze, The pro-etale topology for schemes, Lemma 6.8.13, first paragraph, and Stacks Tag
+  03S0
 -/
 
 @[expose] public noncomputable section

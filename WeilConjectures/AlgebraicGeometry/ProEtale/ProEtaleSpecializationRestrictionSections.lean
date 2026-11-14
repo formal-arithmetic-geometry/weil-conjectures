@@ -38,7 +38,9 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleSpecializationUnitComp
 /-!
 # Sections on a closed specialization neighbourhood in the pro-etale site
 
-Source: Stacks Project, Tag 09AC.
+## References
+
+* Stacks Project, Tag 09AC
 -/
 
 @[expose] public section
@@ -52,9 +54,7 @@ namespace AlgebraicGeometry.Scheme
 /-- The adjunction unit on sections of a weakly contractible affine specialization
 neighbourhood is a natural isomorphism of abelian groups. Whiskering the unit with
 sections at `V` retains its naturality in the abelian sheaf. Its target at `F` is
-`(i⁻¹ F)((proEtaleBaseChange i).obj V)`, i.e. sections on `V ×[X] Z`.
-
-Source: Stacks Project, Tag 09AC. -/
+`(i⁻¹ F)((proEtaleBaseChange i).obj V)`, i.e. sections on `V ×[X] Z`. -/
 theorem isIso_proEtaleUnit_sections_of_specialization
     {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
     (V : X.ProEt) [IsAffine V.left]

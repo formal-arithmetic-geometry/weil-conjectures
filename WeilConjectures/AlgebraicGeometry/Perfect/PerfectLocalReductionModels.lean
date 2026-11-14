@@ -71,7 +71,13 @@ import Mathlib.RingTheory.Finiteness.Cardinality
 import Mathlib.RingTheory.TensorProduct.Finite
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 
-/-! # Reduction of one perfect model on a stratum chart -/
+/-! # Reduction of one perfect model on a stratum chart
+
+## References
+
+* Bhatt--Scholze, Lemma 6.5.8(1), Lemma 6.6.10(1), and the local calculation in Proposition 6.6.11
+* Stacks Tags 06YS, 06YT, 06YU, 093J
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -145,9 +151,7 @@ private theorem constant_kflat (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
   exact isFlatOnSite_constantModule.{u + 1, u} (ProEt.topology X) A (C.X q) inferInstance
 
 /-- A perfect completed-constant model on one chart has a common support interval
-before and after every finite reduction, and finite constant cohomology after reduction.
-Source: Bhatt--Scholze, Lemma 6.5.8(1), Lemma 6.6.10(1), and the local calculation
-in Proposition 6.6.11; Stacks Tags 06YS, 06YT, 06YU, 093J. -/
+before and after every finite reduction, and finite constant cohomology after reduction. -/
 theorem perfect_local_reduction_models
     {X Y : Scheme.{u}} (g : Y ⟶ X) [IsImmersion g]
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)

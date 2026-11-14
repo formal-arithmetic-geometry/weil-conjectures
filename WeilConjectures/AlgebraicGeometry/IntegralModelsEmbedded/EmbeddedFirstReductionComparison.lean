@@ -14,7 +14,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 
 /-! # The normalized first reduction under constant scalar restriction
 
-Source: Stacks Tags 099L and 06YQ.
+## References
+
+* Stacks Tags 099L and 06YQ
 -/
 
 @[expose] public noncomputable section
@@ -105,9 +107,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 attribute [-instance] integralModel_coefficientMonObj in
 /-- The first reduction after restriction and the continuous first reduction become
 isomorphic under the specified constant-function scalar realization. This assertion
-concerns only the derived scalar square, with no constructibility or Tor condition.
-
-Source: Stacks Tags 099L and 06YQ. -/
+concerns only the derived scalar square, with no constructibility or Tor condition. -/
 theorem firstReductionComparison
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (π : PadicAlgCl.integers ℓ E.1)

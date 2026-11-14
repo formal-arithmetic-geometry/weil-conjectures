@@ -10,7 +10,10 @@ import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
 
 /-! # The specified finite-coefficient realization on hearts
 
-Source: Stacks Tags 03ET and 00YV.
+## References
+
+* Stacks Tags 03ET and 00YV
+* Stacks Tag 03ET
 -/
 
 @[expose] public noncomputable section
@@ -79,7 +82,7 @@ private instance finiteConstants_injective (A : Type) [CommRing A] [TopologicalS
         ⟨PEmpty, inferInstance, U, incl, hι, fun i ↦ i.elim⟩
 
 /-- The actual scalar map is invertible, rather than just admitting an abstract ring
-isomorphism. Source: Stacks Tag 03ET. -/
+isomorphism. -/
 theorem finiteScalarMap_isIso (X : Scheme.{u}) (A : Type) [CommRing A]
     [TopologicalSpace A] [IsTopologicalRing A] [Finite A] [DiscreteTopology A] :
     IsIso (finiteScalarMap.{u} X A) := by
@@ -99,8 +102,7 @@ theorem finiteScalarMap_isIso (X : Scheme.{u}) (A : Type) [CommRing A]
   infer_instance
 
 attribute [-instance] integralModel_coefficientMonObj in
-/-- Scalar extension along the specified finite constant-function map is an equivalence.
-Source: Stacks Tag 03ET. -/
+/-- Scalar extension along the specified finite constant-function map is an equivalence. -/
 theorem finiteScalarExtension_isEquivalence (X : Scheme.{u}) (A : Type) [CommRing A]
     [TopologicalSpace A] [IsTopologicalRing A] [Finite A] [DiscreteTopology A] :
     (Mod.extendScalars (C := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -112,8 +114,7 @@ theorem finiteScalarExtension_isEquivalence (X : Scheme.{u}) (A : Type) [CommRin
   exact Functor.isEquivalence_of_iso (Mod.extendScalarsIsoComapInv (finiteScalarMap X A)).symm
 
 attribute [-instance] integralModel_coefficientMonObj in
-/-- The literal heart composite whose derived functors define finiteRealization.
-Source: Stacks Tags 03ET and 00YV. -/
+/-- The literal heart composite whose derived functors define finiteRealization. -/
 def finiteHeartRealization (X : Scheme.{u}) (A : Type) [CommRing A]
     [TopologicalSpace A] [IsTopologicalRing A] [Finite A] [DiscreteTopology A] :=
   Mod.extendScalars (C := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})

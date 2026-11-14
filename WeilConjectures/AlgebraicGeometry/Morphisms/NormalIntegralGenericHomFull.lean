@@ -15,7 +15,10 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
 /-!
 # Fullness of finite étale restriction to the generic point
 
-Source: Stacks Project, Tag 0BQM, full faithfulness in the proof.
+## References
+
+* Stacks Project, Tag 0BQM, full faithfulness in the proof
+* Stacks Project, Tag 0BQM, full faithfulness of generic-point restriction
 -/
 
 @[expose] public section
@@ -25,9 +28,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- Any morphism between the generic restrictions of finite étale covers of a
-normal integral scheme extends uniquely over that scheme.
-
-Source: Stacks Project, Tag 0BQM, full faithfulness of generic-point restriction. -/
+normal integral scheme extends uniquely over that scheme. -/
 theorem finiteEtale_normalIntegral_generic_hom_full {B : Scheme.{u}} [IsIntegral B]
     (hB : ∀ x : B, IsIntegrallyClosed (B.presheaf.stalk x))
     {X Y Xη Yη : Scheme.{u}} (πX : X ⟶ B) (πY : Y ⟶ B)

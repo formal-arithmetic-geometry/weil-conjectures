@@ -18,7 +18,9 @@ import Mathlib.Algebra.Homology.Additive
 /-!
 # Tensor cohomology under intrinsic coefficient realization
 
-Source: Stacks Project, Tags 00YV, 06YS and 06YU.
+## References
+
+* Stacks Project, Tags 00YV, 06YS and 06YU
 -/
 
 @[expose] public section
@@ -195,10 +197,7 @@ private theorem intrinsicResolutionHomologyAux
   exact ⟨(_root_.DerivedCategory.homologyFunctor _ i).mapIso e ≪≫
     (F.mapDerivedCategoryHomologyFunctorIso i).symm.app _⟩
 
-/-- Intrinsic K-flat tensor cohomology agrees with fixed-scalar derived tensor cohomology.
-
-Source: Stacks Project, Tags 00YV, 06YS and 06YU.
--/
+/-- Intrinsic K-flat tensor cohomology agrees with fixed-scalar derived tensor cohomology. -/
 theorem intrinsic_resolution_tensor_homology_iso
     (A : Type u) [CommRing A] [Finite A] (T : Scheme.{u})
     (K : _root_.DerivedCategory

@@ -9,7 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.Picard.Derived.PicardDerivedFibr
 
 /-! # Geometric naturality before choosing affine models
 
-Source: Stacks Project, Tags 0B91, 0BF2 and 01XK.
+## References
+
+* Stacks Project, Tags 0B91, 0BF2 and 01XK
 -/
 
 @[expose] public section
@@ -19,8 +21,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 -- The derived fibre comparison elaborates nested functor and fibre-product terms.
-/-- Direct-image residue fibres admit compatible geometric comparisons.
-Source: Stacks Project, Tags 0B91, 0BF2 and 01XK. -/
+/-- Direct-image residue fibres admit compatible geometric comparisons. -/
 theorem picard_derived_fibre_naturality
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

@@ -48,12 +48,16 @@ public import WeilConjectures.AlgebraicGeometry.LatticeSheafBasic
 /-!
 # The sheaf of integral lattices
 
-Source: Bhatt--Scholze, The pro-etale topology for schemes, Proposition 6.8.4(6), pp. 59--60.
-
 The presentation by a surjection from pairs with its exact kernel relation avoids choosing
 representatives of isomorphism classes. Restriction is characterized by the embedded images
 on every object of the slice. This also specifies the normalization of the constant-coset
 isomorphism without making arbitrary choices of bases for integral modules.
+
+## References
+
+* Bhatt--Scholze, The pro-etale topology for schemes, Proposition 6.8.4(6), pp. 59--60
+* Bhatt--Scholze, Proposition 6.8.4(6)
+* Bhatt--Scholze, Lemma 4.2.12 and Proposition 6.8.4(6)
 -/
 
 @[expose] public section
@@ -69,8 +73,7 @@ attribute [local instance] latticeWeakSheafifyOver
   AlgebraicGeometry.Scheme.strictPerfectSliceLocallyBijective
 
 /-- The commutative-ring version of the continuous coefficient presheaf, with exactly the
-same sections and precomposition maps as `continuousMapRingPresheaf`.
-Source: Bhatt--Scholze, Proposition 6.8.4(6). -/
+same sections and precomposition maps as `continuousMapRingPresheaf`. -/
 noncomputable def latticeCoefficientPresheaf (X : Scheme.{u}) (T : Type u)
     [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] :
     X.ProEtᵒᵖ ⥤ CommRingCat.{u + 1} where
@@ -83,8 +86,7 @@ noncomputable def latticeCoefficientPresheaf (X : Scheme.{u}) (T : Type u)
   map_comp _ _ := rfl
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Continuous coefficients satisfy the sheaf axiom.
-Source: Bhatt--Scholze, Lemma 4.2.12 and Proposition 6.8.4(6). -/
+/-- Continuous coefficients satisfy the sheaf axiom. -/
 theorem isSheaf_latticeCoefficientPresheaf (X : Scheme.{u}) (T : Type u)
     [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] :
     Presheaf.IsSheaf (Scheme.ProEt.topology X) (latticeCoefficientPresheaf X T) := by

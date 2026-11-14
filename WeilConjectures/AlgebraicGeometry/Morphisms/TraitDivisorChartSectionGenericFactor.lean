@@ -19,7 +19,12 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.RootProductChartBaseChangeFac
 import WeilConjectures.AlgebraicGeometry.Morphisms.TraitNormalizationGenericSectionComparison
 
 /-! Generic section factors of a supplied trait-divisor chart.
-Source: Stacks Project, Tags 0EYH, 0EYI and 0EYJ.
+
+## References
+
+* Stacks Project, Tags 0EYH, 0EYI and 0EYJ
+* Stacks Project, Tag 0EYI, preliminary paragraph before parts (1) and (2), and Tag 0EYJ, the local
+  trait reduction
 -/
 
 @[expose] public section
@@ -40,10 +45,7 @@ closed point, lying over `Spec ρ`, on which `n` is the product of the root cove
 followed by `τ`, `δ ϖ₀` is a uniformizer of `A` equal to `ι (ρ ϖ₀)`, and, writing
 `K = Frac A` and `ε: k(S) →+* K` for the extension of `𝒪_{S,s} → A → K`, the `k`-th
 root factor `K[T]/(T^(e k) - δ ϖ₀)` is an open subscheme of `Z` pulled back along
-`Spec ε` followed by the generic section `sη`, compatibly with the projections to `Spec K`.
-
-Source: Stacks Project, Tag 0EYI, preliminary paragraph before parts (1) and (2),
-and Tag 0EYJ, the local trait reduction. -/
+`Spec ε` followed by the generic section `sη`, compatibly with the projections to `Spec K`. -/
 theorem GaloisCover.trait_divisor_chart_section_generic_factor {S C : Scheme.{u}}
     [IsNoetherian S] [IsIntegral S]
     (c : C ⟶ S) (σ : S ⟶ C) (hσ : σ ≫ c = 𝟙 S)

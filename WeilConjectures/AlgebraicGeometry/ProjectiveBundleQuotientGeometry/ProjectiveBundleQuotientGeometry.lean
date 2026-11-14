@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.Line.LineQuotientTrivializedCoefficient
 /-!
 # Projective bundles classify invertible quotients
 
-Source: Stacks Project, Constructions, Tags 01OA, 01OB, 01O4, 01O9, 01OD and 01OE.
+## References
+
+* Stacks Project, Constructions, Tags 01OA, 01OB, 01O4, 01O9, 01OD and 01OE
 -/
 
 @[expose] public section
@@ -34,9 +36,7 @@ open Scheme.Modules
 
 /-- Projective bundles of arbitrary quasi-coherent modules represent invertible
 quotients, naturally under arbitrary scheme pullback, with the prescribed twists,
-open-base identifications, separated projection and free-module polynomial models.
-
-Source: Stacks Project, Constructions, Tags 01OA, 01OB, 01O4, 01O9, 01OD and 01OE. -/
+open-base identifications, separated projection and free-module polynomial models. -/
 theorem projective_bundle_quotient_geometry (S : Scheme.{u}) (E : S.Modules)
     [E.IsQuasicoherent] :
     ∃ D : TautologicalQuotient E,

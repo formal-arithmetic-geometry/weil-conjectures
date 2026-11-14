@@ -14,7 +14,10 @@ import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 /-!
 # Points of the punctured root cover
 
-Source: Stacks Project, Tag 0EYG, off-divisor branch.
+## References
+
+* Stacks Project, Tag 0EYG, off-divisor branch
+* Stacks Project, Tag 0EYG
 -/
 
 @[expose] public section
@@ -22,9 +25,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- A point off g lifts to the punctured monic root cover.
-Source: Stacks Project, Tag 0EYG; lying over for finite integral algebras.
--/
+/-- A point off g lifts to the punctured monic root cover. -/
 theorem root_split_away_cover_point
     (R : CommRingCat.{u}) (g : R) (n : ℕ) (hn : 0 < n)
     (y : Spec R) (hy : g ∉ y.asIdeal) :

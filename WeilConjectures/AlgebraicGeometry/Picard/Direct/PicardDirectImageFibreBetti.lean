@@ -14,8 +14,12 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 
 /-! # Fibre Betti numbers for a descended line bundle
 
-Source: Stacks Project, Tag 0BF2, derived fibre equality preceding the first complex;
-Tags 0BF0 and 0B91(2).
+## References
+
+* Stacks Project, Tag 0BF2, derived fibre equality preceding the first complex
+* Tags 0BF0 and 0B91(2)
+* Stacks Project, Tag 0BF2, the displayed derived fibre equality
+* Tags 0BF0 and 0B91
 -/
 
 @[expose] public section
@@ -24,8 +28,7 @@ universe v
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- A descended marked fibre has no negative Betti numbers and Betti number one in degree zero.
-Source: Stacks Project, Tag 0BF2, the displayed derived fibre equality; Tags 0BF0 and 0B91 -/
+/-- A descended marked fibre has no negative Betti numbers and Betti number one in degree zero. -/
 theorem picard_directImage_fibre_betti
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

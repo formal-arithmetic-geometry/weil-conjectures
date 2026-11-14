@@ -12,8 +12,11 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryM
 
 /-! # Normalized finite-field stages and their coherence
 
-Source: Milne, Section 19.
 Existing declarations extracted from `PbcScalarExtension` to bound compilation cost.
+
+## References
+
+* Milne, Section 19
 -/
 
 @[expose] public noncomputable section

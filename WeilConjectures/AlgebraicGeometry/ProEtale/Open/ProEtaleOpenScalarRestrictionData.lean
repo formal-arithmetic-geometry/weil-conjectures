@@ -12,13 +12,20 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Intrinsic.ProEtaleIntri
 /-!
 # Data for scalar restriction and open adjunction normalization
 
-Source: Stacks Project, Tags 03DI and 03CY; Tag 015F; Tag 04VG.
-
 The comparisons are the published `sfOpenRestriction` and its exact termwise
 localization. Normalization is expressed on the open adjunction unit: on each
 nonzero summand of the defining extension presheaf it is the identity; maps from
 all remaining values, which are zero, are unique. Thus this unit equation is
 precisely the pre-sheafification normalization, without a choice of stalks.
+
+## References
+
+* Stacks Project, Tags 03DI and 03CY
+* Tag 015F
+* Tag 04VG
+* Stacks Tags 03DI and 03CY
+* Stacks Tag 03DA
+* Stacks Tags 03CY and 03DA
 -/
 
 @[expose] public noncomputable section
@@ -39,8 +46,7 @@ variable {A B C : Type u} [CommRing A] [CommRing B] [CommRing C]
 /-- The sectionwise coefficient square for restriction to an open, transported by
 exactly the canonical realization equivalences used to define extension by zero.
 Its fixed-scalar middle square is the identity: precomposition with the open site
-functor commutes with restriction of scalars.
-Source: Stacks Tags 03DI and 03CY. -/
+functor commutes with restriction of scalars. -/
 def sfOpenRestrictionCoefficientSquare {U Z : Scheme.{u}} (j : U ⟶ Z)
     [IsOpenImmersion j] (φ : A →+* B) :
     proEtaleCoefficientRestrictScalars Z φ ⋙ sfIntrinsicOpenRestriction j A ≅
@@ -59,7 +65,7 @@ def sfOpenRestrictionCoefficientSquare {U Z : Scheme.{u}} (j : U ⟶ Z)
       (sfRealizationRestriction U φ).symm
 
 /-- Identity coefficient restriction in fixed-scalar coordinates, with the identity
-on every section. Source: Stacks Tag 03DA. -/
+on every section. -/
 def sfOpenFixedRestrictionId (T : Scheme.{u}) (R : Type u) [CommRing R] :
     sfFixedRestriction T (RingHom.id R) ≅ 𝟭 _ :=
   NatIso.ofComponents (fun M ↦
@@ -70,8 +76,7 @@ def sfOpenFixedRestrictionId (T : Scheme.{u}) (R : Type u) [CommRing R] :
 
 /-- The canonical identity coefficient comparison in intrinsic coordinates. It is
 transported from the sectionwise identity, using the already section-normalized
-realization comparison and the realization counit.
-Source: Stacks Tags 03CY and 03DA. -/
+realization comparison and the realization counit. -/
 def sfOpenCoefficientRestrictionId (T : Scheme.{u}) (R : Type u)
     [CommRing R] [Finite R] :
     proEtaleCoefficientRestrictScalars T (RingHom.id R) ≅ 𝟭 _ :=
@@ -87,8 +92,7 @@ def sfOpenCoefficientRestrictionId (T : Scheme.{u}) (R : Type u)
 /-- The identity on the extension presheaf, expressed by its generators over the
 open. The unit of the recorded adjunction is the sheafification map on those
 generators. Every other presheaf value is zero, so this equation includes all its
-components. The coefficient square uses only the canonical realization maps.
-Source: Stacks Tags 03DI and 03CY. -/
+components. The coefficient square uses only the canonical realization maps. -/
 def SfOpenRestrictionNormalized {U Z : Scheme.{u}} (j : U ⟶ Z)
     [IsOpenImmersion j] (φ : A →+* B)
     (e : proEtaleCoefficientRestrictScalars U φ ⋙ sfIntrinsicExtensionByZero j A ≅

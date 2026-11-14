@@ -36,7 +36,11 @@ import Mathlib.RingTheory.AdicCompletion.Completeness
 
 /-! # Algebraic derived presentations of lisse towers
 
-Source: Stacks Project, Pro-etale Cohomology, Tag 09BV; More on Algebra, Tag 09AV.
+## References
+
+* Stacks Project, Pro-etale Cohomology, Tag 09BV
+* More on Algebra, Tag 09AV
+* Stacks, Tag 09BV (lemma-weird)
 -/
 
 @[expose] public noncomputable section
@@ -268,9 +272,7 @@ private noncomputable def completionQuotientEquiv {A : Type u} [CommRing A]
 
 /-- A lisse normalized tower is locally the finite-reduction system of an algebraic
 pseudo-coherent complex over the completion. This provides a derived algebraic
-object, without constructing a bounded complex of adic-lisse sheaves.
-
-Source: Stacks, Tag 09BV (lemma-weird). -/
+object, without constructing a bounded complex of adic-lisse sheaves. -/
 theorem lisse_tower_algebraic_derived_presentation
     (X Y : Scheme.{u}) [IsNoetherian X] (g : Y ⟶ X) [IsImmersion g]
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (M : AdicTower X d)

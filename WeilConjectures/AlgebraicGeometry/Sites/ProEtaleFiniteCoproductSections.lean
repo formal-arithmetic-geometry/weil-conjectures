@@ -17,6 +17,10 @@ This is the sheaf-theoretic core used by
 `WeilConjectures.AlgebraicGeometry.Sites.ProEtaleFiniteCoproductEvaluation`.
 The geometric construction and the site-cover argument are separated so that the
 latter can be proved independently.
+
+## References
+
+* Stacks Project, Tag 0F4P, and Tag 0DB1
 -/
 
 @[expose] public section
@@ -37,7 +41,6 @@ set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 /-- Sections on a finite disjoint union are the product of the sections on its summands.
 
-Source: Stacks Project, Tag 0F4P, and Tag 0DB1.
 The proof uses the sheaf equalizer condition for the finite pro-etale covering by the
 pairwise disjoint open summands: off-diagonal pullbacks are empty and diagonal pullbacks
 are identities, so compatible tuples glue uniquely. The empty family is included; its

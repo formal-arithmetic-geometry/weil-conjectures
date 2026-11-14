@@ -137,8 +137,14 @@ import all WeilConjectures.AlgebraicGeometry.ProEtaleTensorComparison.ProEtaleIn
 /-!
 # Canonical tensor pullback on the small pro-etale site
 
-Source: Stacks Project, Cohomology on Sites, Tags 07A4 and 0G7E; Modules on Sites, Tag 03EL.
 The object universe of the site is u+1 and its morphism universe is u.
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 07A4 and 0G7E
+* Modules on Sites, Tag 03EL
+* Stacks 07A4 and 0G7E
+* Stacks 07A4
 -/
 
 @[expose] public section
@@ -184,8 +190,7 @@ attribute [local irreducible] proEtaleTensorPullbackTotal proEtaleTensorPullback
 
 attribute [local irreducible] CategoryTheory.Functor.mapDerivedCategory
 
-/-- Pullback preserves flat K-flat representatives and has a unique canonical tensor comparison.
-Source: Stacks 07A4 and 0G7E. -/
+/-- Pullback preserves flat K-flat representatives and has a unique canonical tensor comparison. -/
 theorem proEtaleCanonicalTensorPullback
     (a : ProEtaleTensorModel Y R) (b : ProEtaleTensorModel X S) :
     (∀ P : CochainComplex (proEtaleRingModules Y R) ℤ,
@@ -254,8 +259,7 @@ theorem proEtaleCanonicalTensorPullback
     exact hh
 
 /-- The unique derived comparison specified on every flat K-flat pair, rather than an
-arbitrary natural isomorphism.
-Source: Stacks 07A4. -/
+arbitrary natural isomorphism. -/
 noncomputable def proEtaleCanonicalTensorComparison
     (a : ProEtaleTensorModel Y R) (b : ProEtaleTensorModel X S) :=
   Classical.choose (proEtaleCanonicalTensorPullback f R S c a b).2.exists

@@ -8,7 +8,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionPullTransportKFlat
 import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionPullTransportLocalization
 
-/-! # Localization extension for normalized quotient section pull transport -/
+/-! # Localization extension for normalized quotient section pull transport
+
+## References
+
+* Stacks 06YS and 06YU
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -34,7 +39,6 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
 /-- Flat-term computation equations extend to every complex in the derived
 category. The extension is the resolving-class/localization step and is strictly
 weaker than constructing the comparison itself.
-Source: Stacks 06YS and 06YU.
 -/
 theorem section_pull_transport_extend_kflat {X Y : Scheme.{u}} (f : X ⟶ Y)
     (cX : ScalarSectionData a X) (cY : ScalarSectionData a Y)

@@ -58,7 +58,11 @@ public import WeilConjectures.AlgebraicGeometry.IntegralStratifiedPerfectModels
 # Completed integral constant models
 
 Definitions and exact realization for the integral stratified-perfect characterization.
-Source: Bhatt--Scholze, Propositions 6.6.11 and 6.8.11(3).
+
+## References
+
+* Bhatt--Scholze, Propositions 6.6.11 and 6.8.11(3)
+* Bhatt--Scholze, Proposition 6.8.11(3)
 -/
 
 @[expose] public noncomputable section
@@ -70,8 +74,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated Opposit
 namespace AlgebraicGeometry.Scheme
 
 /-- Condition (iii): boundedness and the stated finitely presented local models for
-all cohomology sheaves. The finite stratification may depend on the cohomological degree.
-Source: Bhatt--Scholze, Proposition 6.8.11(3). -/
+all cohomology sheaves. The finite stratification may depend on the cohomological degree. -/
 def IsIntegralBoundedConstructibleCohomology (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A)
     (K : DerivedCategory (pbcModules T (pbcAdicCompletion T d))) : Prop :=

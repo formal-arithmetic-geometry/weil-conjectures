@@ -13,7 +13,12 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.AffineTorsorSplitActio
 import WeilConjectures.AlgebraicGeometry.Morphisms.AffineTorsorInvariantPunctureEtale
 
 
-/-! # Monomorphy of a selected stabilizer section -/
+/-! # Monomorphy of a selected stabilizer section
+
+## References
+
+* Stacks Project, Tag 03SF
+-/
 
 @[expose] public section
 universe u
@@ -147,9 +152,7 @@ private theorem puncture_rotation
   congr 1
   exact CommRingCat.hom_ext hζ
 
-/-- Exact stabilizers make a selected descended section a monomorphism.
-
-Source: Stacks Project, Tag 03SF. -/
+/-- Exact stabilizers make a selected descended section a monomorphism. -/
 theorem affine_torsor_stabilizer_section_mono
     (R H : CommRingCat.{u}) (g : R) (ι : R →+* H)
     (C : Type u) [CommRing C] [Algebra H C] [IsDomain C]

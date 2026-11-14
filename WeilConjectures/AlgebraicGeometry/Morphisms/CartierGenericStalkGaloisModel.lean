@@ -20,7 +20,10 @@ import Mathlib.RingTheory.Flat.TorsionFree
 
 /-! # Galois models at generic Cartier DVR stalks
 
-Source: Stacks Project, Tags 0307 and 09EB. -/
+## References
+
+* Stacks Project, Tags 0307 and 09EB
+-/
 
 @[expose] public section
 universe u
@@ -28,9 +31,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- A finite normalization of a pulled-back torsor over the complement of an integral
-Cartier centre has a Galois integral-closure model at a DVR generic stalk.
-
-Source: Stacks Project, Tags 0307 and 09EB. -/
+Cartier centre has a Galois integral-closure model at a DVR generic stalk. -/
 theorem cartier_generic_stalk_galois_model
     {N U P : Scheme.{u}} [IsLocallyNoetherian N]
     (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)

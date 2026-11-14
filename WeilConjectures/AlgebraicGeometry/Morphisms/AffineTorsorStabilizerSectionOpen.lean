@@ -15,7 +15,13 @@ import Mathlib.AlgebraicGeometry.Morphisms.FlatMono
 import WeilConjectures.AlgebraicGeometry.Morphisms.AffineTorsorInvariantPunctureEtale
 import WeilConjectures.AlgebraicGeometry.Morphisms.AffineTorsorStabilizerSectionMono
 
-/-! # Openness of a descended stabilizer section -/
+/-! # Openness of a descended stabilizer section
+
+## References
+
+* Stacks Project, Tag 03SF, the equivalence between finite etale covers and finite permutation sets,
+  applied to a stabilizer quotient
+-/
 
 @[expose] public section
 universe u
@@ -23,10 +29,7 @@ set_option autoImplicit false
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- A descended selected section with exact stabilizer is an open component.
-
-Source: Stacks Project, Tag 03SF, the equivalence between finite etale covers and
-finite permutation sets, applied to a stabilizer quotient. -/
+/-- A descended selected section with exact stabilizer is an open component. -/
 theorem affine_torsor_stabilizer_section_open
     (R H : CommRingCat.{u}) (g : R) (ι : R →+* H)
     (C : Type u) [CommRing C] [Algebra H C] [IsDomain C]

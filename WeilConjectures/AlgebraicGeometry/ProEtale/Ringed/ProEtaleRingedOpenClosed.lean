@@ -117,7 +117,13 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Ringed.ProEtaleRingedFilteredC
 /-!
 # Ringed pro-etale open-closed localization
 
-Source: Stacks Project, Tags 09AA, 09BM, 09BN, 09AH, 09AG, 03DI, 03DJ and 0738.
+## References
+
+* Stacks Project, Tags 09AA, 09BM, 09BN, 09AH, 09AG, 03DI, 03DJ and 0738
+* Stacks, Modules on Sites, Tag 03D1
+* Stacks, Tags 09A5 and 03D6
+* Stacks, Tags 03DI and 03DJ
+* Stacks, Tags 09AA, 09BM, 09BN, 09AH, 09AG, 03DI, 03DJ and 0738
 -/
 
 @[expose] public section
@@ -128,15 +134,13 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The underlying ring sheaf of arbitrary commutative pro-etale coefficients.
-Source: Stacks, Modules on Sites, Tag 03D1. -/
+/-- The underlying ring sheaf of arbitrary commutative pro-etale coefficients. -/
 noncomputable abbrev proEtaleModuleCoefficients {X : Scheme.{u}}
     (A : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :=
   (sheafCompose (ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj A
 
 /-- Direct image with action through the inverse-image adjunction unit. On sections
-it is evaluation on the base change; on morphisms it retains the same linear components.
-Source: Stacks, Tags 09A5 and 03D6. -/
+it is evaluation on the base change; on morphisms it retains the same linear components. -/
 noncomputable def proEtaleRingedDirectImage {X Y : Scheme.{u}} (f : X ⟶ Y)
     (A : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) :=
   SheafOfModules.pushforward.{u + 1} (F := proEtaleBaseChange f)
@@ -150,8 +154,7 @@ noncomputable def proEtaleRingedDirectImage {X Y : Scheme.{u}} (f : X ⟶ Y)
 /-- Extension by zero in the localized presentation of the open site's ringed topos.
 The presheaf is the sum over factorizations through `U`, with its actual module action;
 sheafification is the existing module sheafification. For a monic open immersion the
-index set is empty or a singleton. No finiteness restriction is placed on coefficients.
-Source: Stacks, Tags 03DI and 03DJ. -/
+index set is empty or a singleton. No finiteness restriction is placed on coefficients. -/
 noncomputable def proEtaleRingedExtensionByZero {X : Scheme.{u}} (U : X.ProEt)
     (A : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :=
   SheafOfModules.extensionByZeroPresheaf.{u + 1} (proEtaleModuleCoefficients A) U ⋙
@@ -628,9 +631,7 @@ private theorem open_closed_directImage_isZero {X Z : Scheme.{u}} (i : Z ⟶ X)
 /-- Open-closed localization with arbitrary ring-sheaf coefficients. The open part
 is presented on the slice `X.ProEt / U`, as in the weakly-etale localization theorem:
 its ring is `A.over U`, and inverse image is `overFunctor`. The closed part uses the
-actual inverse-image ring and the base-change direct image.
-
-Source: Stacks, Tags 09AA, 09BM, 09BN, 09AH, 09AG, 03DI, 03DJ and 0738. -/
+actual inverse-image ring and the base-change direct image. -/
 theorem proEtale_ringed_open_closed {X Z : Scheme.{u}} (i : Z ⟶ X)
     [IsClosedImmersion i] (U : X.ProEt) [IsOpenImmersion U.hom] [QuasiCompact U.hom]
     (hU : Set.range U.hom = (Set.range i)ᶜ)

@@ -17,17 +17,19 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.RootNormalizationRootNotSquar
 
 /-! # The cotangent root class after tame normalization
 
-Source: Stacks Project, Tags 09EB, 0BRM, 09E7 and 0307. -/
+## References
+
+* Stacks Project, Tags 09EB, 0BRM, 09E7 and 0307
+* Stacks Project, Tag 09EB (Galois degree formula), Tag 0BRM (Abhyankar), Tag 09E7 (index-one
+  clause), and Tag 0307 (localization of integral closure)
+-/
 
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- The root class spans the cotangent space of each normalized factor at the root prime.
-
-Source: Stacks Project, Tag 09EB (Galois degree formula), Tag 0BRM (Abhyankar),
-Tag 09E7 (index-one clause), and Tag 0307 (localization of integral closure). -/
+/-- The root class spans the cotangent space of each normalized factor at the root prime. -/
 theorem root_normalization_cotangent_root
     {L U : Scheme.{u}} (i : U ⟶ L)
     (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)

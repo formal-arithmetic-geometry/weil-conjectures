@@ -20,6 +20,10 @@ import WeilConjectures.CategoryTheory.Monoidal.Conjugate
 
 /-!
 # Canonical base-change mates for arbitrary pro-etale ring sheaves
+
+## References
+
+* Stacks Tags 03CB and 03CC
 -/
 
 @[expose] public noncomputable section
@@ -175,8 +179,7 @@ private theorem openUnit {X U : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
   exact isIso_of_reflects_iso _ (Mod.forget _)
 
 -- The transported module actions involve several nested functor structures.
-/-- The canonical open and closed base-change mates are invertible.
-Source: Stacks Tags 03CB and 03CC. -/
+/-- The canonical open and closed base-change mates are invertible. -/
 theorem ringSheaf_baseChange_mates
     {X Z U : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j]

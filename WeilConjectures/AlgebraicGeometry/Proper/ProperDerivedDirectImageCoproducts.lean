@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.Proper.ProperTorsionDirectImageBound
 /-!
 # Coproducts and proper derived direct image
 
-Source: Stacks Project, Tags 0A3V, 095U and 0F11.
+## References
+
+* Stacks Project, Tags 0A3V, 095U and 0F11
 -/
 
 @[expose] public section
@@ -32,8 +34,6 @@ namespace AlgebraicGeometry.Etale
 /-- Proper direct image with finite commutative coefficients preserves every set-indexed
 coproduct on the ordinary unbounded derived categories. Its restriction to the bounded-below
 category agrees with the bounded-below derived direct image.
-
-Source: Stacks Project, Tags 0A3V, 095U and 0F11.
 -/
 theorem proper_rightDerivedLowerStar_preservesCoproducts
     (A : Type (u + 1)) [CommRing A] [Finite A]

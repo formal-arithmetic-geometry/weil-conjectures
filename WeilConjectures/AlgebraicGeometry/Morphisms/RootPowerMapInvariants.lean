@@ -12,8 +12,12 @@ public import Mathlib.GroupTheory.Index
 
 /-! # Image of the intermediate power map in a root algebra
 
-Source: Stacks Project, Tags 0EYG and 09EV, intermediate-root calculation,
-expanded as a monic-basis calculation without a domain hypothesis.
+## References
+
+* Stacks Project, Tags 0EYG and 09EV, intermediate-root calculation, expanded as a monic-basis
+  calculation without a domain hypothesis
+* Stacks Project, Tag 0EYG, final intermediate-field paragraph, and Tag 09EV, cyclic
+  intermediate-root calculation
 -/
 
 @[expose] public section
@@ -27,8 +31,7 @@ namespace AlgebraicGeometry.Scheme
 fixed elements. The homomorphisms are supplied as data: this theorem neither
 chooses a map nor constructs an isomorphism from an existence assertion.
 
-Source: Stacks Project, Tag 0EYG, final intermediate-field paragraph, and
-Tag 09EV, cyclic intermediate-root calculation. The argument below is the
+The argument below is the
 monic-basis extension of that calculation to general commutative rings. -/
 theorem root_power_map_invariants
     (H : Type u) [CommRing H] (h : H) (n : ℕ) (hn : 0 < n)

@@ -10,7 +10,11 @@ public import WeilConjectures.AlgebraicGeometry.Lisse.Tower.LisseTowerLocalizati
 /-! # Normalized transitions for localized actual realizations
 
 This is the transition-equation part of the actual localized realization argument.
-Source: Stacks Project, Tags 03CY, 03DA and 06YY.
+
+## References
+
+* Stacks Project, Tags 03CY, 03DA and 06YY
+* Stacks Project, Tags 03CY, 03DA and 0D6D
 -/
 
 @[expose] public noncomputable section
@@ -60,8 +64,6 @@ STATEMENT-DISPUTED (original statement): an arbitrary family of level isomorphis
 need not commute with transitions. The corrected statement uses the composites of
 `cmp.level`, the inverse images of `e`, and `cmp.base`. The parent's existential
 statement is unchanged.
-
-Source: Stacks Project, Tags 03CY, 03DA and 0D6D.
 -/
 theorem lisseTower_localized_actual_normalized
     (X Y : Scheme.{u}) (g : Y ⟶ X)

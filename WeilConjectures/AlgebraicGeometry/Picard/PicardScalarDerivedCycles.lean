@@ -13,7 +13,11 @@ import WeilConjectures.AlgebraicGeometry.Picard.PicardConnectiveModelComparison
 
 /-! # Scalar cycles as derived test sections
 
-Source: Stacks Project, Tag 0BF2, the degree-zero cycle calculation.
+## References
+
+* Stacks Project, Tag 0BF2, the degree-zero cycle calculation
+* Stacks Project, Tag 0BF2, degree-zero cycle calculation
+* Tags 08C4 and 0D5S
 -/
 
 @[expose] public section
@@ -23,8 +27,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- The scalar-cycle calculation for an arbitrary derived object with a fixed connective
-strictly perfect model. No direct image or family of line bundles occurs in this lemma.
-Source: Stacks Project, Tag 0BF2, degree-zero cycle calculation; Tags 08C4 and 0D5S. -/
+strictly perfect model. No direct image or family of line bundles occurs in this lemma. -/
 theorem picard_scalar_derived_cycles
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

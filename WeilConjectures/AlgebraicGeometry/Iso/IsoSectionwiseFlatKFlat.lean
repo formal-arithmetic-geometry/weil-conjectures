@@ -29,7 +29,9 @@ import WeilConjectures.AlgebraicGeometry.Iso.IsoSectionwiseKFlat
 
 /-! # Flatness under sectionwise reindexing
 
-Source: Stacks Project, Tags 03EL and 06YN.
+## References
+
+* Stacks Project, Tags 03EL and 06YN
 -/
 
 @[expose] public section
@@ -44,8 +46,7 @@ attribute [local instance 2000] SheafOfModules.hasSheafify_coefficientUniverse
 attribute [local instance 2000] SheafOfModules.wEqualsLocallyBijective_coefficientUniverse
 
 /-- Sectionwise inverse image, with an invertible coefficient identification, preserves
-flat module sheaves and K-flat complexes.
-Source: Stacks Project, Tags 03EL and 06YN. -/
+flat module sheaves and K-flat complexes. -/
 theorem isoSectionwiseModuleInverseImage_flat_kFlat
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [EssentiallySmall.{u + 1} X.ProEt] [EssentiallySmall.{u + 1} Y.ProEt]

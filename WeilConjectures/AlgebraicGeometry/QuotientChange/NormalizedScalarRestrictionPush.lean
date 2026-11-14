@@ -14,6 +14,10 @@ public import WeilConjectures.AlgebraicGeometry.NormalizedScalarRestrictionPush
 
 The comparison obtained by uniqueness of right adjoints is the geometric mate of the
 canonical exact restriction/pullback comparison.
+
+## References
+
+* Stacks Project, Tags 0D6D, 0D6E and 07A6
 -/
 
 @[expose] public noncomputable section
@@ -272,9 +276,7 @@ private theorem normalized_inverse (a : Λ ⟶ Λ') [IsMonHom a]
   rfl
 
 /-- Normalizing scalar extension against the ordinary balancing map identifies the
-right-adjoint-uniqueness comparison with the geometric mate of exact scalar restriction.
-
-Source: Stacks Project, Tags 0D6D, 0D6E and 07A6. -/
+right-adjoint-uniqueness comparison with the geometric mate of exact scalar restriction. -/
 theorem normalized_scalar_restriction_push
     (a : Λ ⟶ Λ') [IsMonHom a] {X Y : Scheme.{u}} (f : X ⟶ Y)
     (b : D a Y ⋙ L Λ' f ≅ L Λ f ⋙ D a X)

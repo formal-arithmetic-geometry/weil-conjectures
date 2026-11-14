@@ -33,7 +33,10 @@ import WeilConjectures.Mathlib.CategoryTheory.Shift.CommShift
 /-!
 # Exactness of a representative-normalized fixed-factor tensor
 
-Source: Stacks Project, Tags 06YU and 07A4; More on Algebra, Tag 0FNH.
+## References
+
+* Stacks Project, Tags 06YU and 07A4
+* More on Algebra, Tag 0FNH
 -/
 
 @[expose] public noncomputable section
@@ -168,8 +171,7 @@ private theorem resolvingExact (a : TensorModel R) [sa : TensorShifts a]
       ⟨q.objPreimage E, (q.objObjPreimageIso E).inv, inferInstance⟩)
   exact Functor.isTriangulated_of_iso eP
 
-/-- Fixed-factor tensor is exact for the specified normalized integer shifts.
-Source: Stacks Project, Tags 06YU and 07A4; More on Algebra, Tag 0FNH. -/
+/-- Fixed-factor tensor is exact for the specified normalized integer shifts. -/
 theorem ringedProjectionTensorExact
     {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
     {J : GrothendieckTopology C} {R : Sheaf J CommRingCat.{u + 1}}

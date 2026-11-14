@@ -11,7 +11,17 @@ import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 
 /-! # Perfect projection for strict constant-coefficient reduction towers
 
-Source: Stacks Tags 0944 and 099M.
+## References
+
+* Stacks Tags 0944 and 099M
+* Stacks 0944, 099M
+* Stacks 0941
+* Stacks 0A07
+* Stacks 099M, 099N
+* Stacks 0B56, 099M
+* Stacks 099M, 0E48
+* Stacks 0A07, 099N
+* ingredient sources Stacks 099M, 099N, 0E48, 0941, 0B56, 0944
 -/
 
 @[expose] public noncomputable section
@@ -72,8 +82,7 @@ private theorem projection_evaluation (K : D (A := A) U) (n : ℕᵒᵖ) :
   rw [hp, he] at h
   exact h.symm
 
-/-- Perfect quotients make the strict projection invertible, on all ambient inputs.
-Source: Stacks 0944, 099M. -/
+/-- Perfect quotients make the strict projection invertible, on all ambient inputs. -/
 @[instance]
 theorem projection_isIso (K : D (A := A) U) : IsIso (projection d f K) := by
   apply isIso_of_evaluations
@@ -88,8 +97,7 @@ theorem projection_isIso (K : D (A := A) U) : IsIso (projection d f K) := by
     exact hf
   exact (isIso_comp_right_iff _ _).mp hc
 
-/-- The identity comparison of ordinary constant diagrams and termwise pullback.
-Source: Stacks 0941. -/
+/-- The identity comparison of ordinary constant diagrams and termwise pullback. -/
 def ordinaryDiagonalPullIso :
     (Functor.const ℕᵒᵖ) ⋙ exchangeTowerModulePull f
         (exchangeConstantRing V A) (exchangeConstantRing U A) (exchangeConstantIso f A) ≅
@@ -99,8 +107,7 @@ def ordinaryDiagonalPullIso :
     (fun M ↦ NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun _ ↦ by simp))
     (fun _ ↦ by ext n; simp)
 
-/-- Exact descent of the identity comparison, retaining the derived units and counits.
-Source: Stacks 0941. -/
+/-- Exact descent of the identity comparison, retaining the derived units and counits. -/
 def diagonalPullIso :
     diagonal (A := A) V ⋙ exchangeConstantPull (A := A) f ≅
       pull (A := A) f ⋙ diagonal (A := A) U :=
@@ -111,8 +118,7 @@ def diagonalPullIso :
 attribute [local irreducible] diagonalPullIso
 
 /-- The direct-image/limit comparison is the adjunction conjugate of the identity square.
-It is the same K-injective comparison used by comparisonT in the generic interface.
-Source: Stacks 0A07. -/
+It is the same K-injective comparison used by comparisonT in the generic interface. -/
 def directLimitIso :
     rlim (A := A) U ⋙ push (A := A) f ≅
       exchangeConstantPush (A := A) f ⋙ rlim (A := A) V :=
@@ -125,8 +131,7 @@ def directLimitIso :
 
 attribute [local irreducible] directLimitIso
 
-/-- The prescribed reconstruction of constant-coefficient completed pullback.
-Source: Stacks 099M, 099N. -/
+/-- The prescribed reconstruction of constant-coefficient completed pullback. -/
 def reconstruction (K : D (A := A) V) :
     (completePull d f).obj K ≅
       (rlim (A := A) U).obj ((exchangeConstantPull (A := A) f).obj ((reduction d V).obj K)) :=
@@ -137,8 +142,7 @@ attribute [local irreducible] reconstruction
 variable {X' X Y' Y : Scheme.{t}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
   {f : X ⟶ Y} {g : Y' ⟶ Y}
 
-/-- The constant-coefficient H is pullback of the counit-tensor projection.
-Source: Stacks 0B56, 099M. -/
+/-- The constant-coefficient H is pullback of the counit-tensor projection. -/
 def H (K : D (A := A) X) :
     (reduction d Y').obj ((pull (A := A) g).obj ((push (A := A) f).obj K)) ≅
       (exchangeConstantPull (A := A) g).obj
@@ -148,13 +152,11 @@ def H (K : D (A := A) X) :
 
 attribute [local irreducible] H
 
-/-- Exactly the prescribed s: derived strict inverse limit of H after reconstruction.
-Source: Stacks 099M, 0E48. -/
+/-- Exactly the prescribed s: derived strict inverse limit of H after reconstruction. -/
 def S (K : D (A := A) X) :=
   (rlim (A := A) Y').mapIso (H (f := f) (g := g) d K)
 
-/-- Exactly the prescribed t: reconstruction followed by direct-image/limit comparison.
-Source: Stacks 0A07, 099N. -/
+/-- Exactly the prescribed t: reconstruction followed by direct-image/limit comparison. -/
 def T (K : D (A := A) X) :=
   (push (A := A) f').mapIso (reconstruction d g' K) ≪≫
     (directLimitIso (A := A) f').app
@@ -165,9 +167,7 @@ end AlgebraicGeometry.Scheme.OrderedExchange
 namespace CategoryTheory.AdicSites.OrderedExchangeInterface
 
 /-- Reexport the existing whole-diagram mate comparison, including invertibility and
-the two finite coefficient normalization clauses. No second postponed proof is introduced.
-
-Source: ingredient sources Stacks 099M, 099N, 0E48, 0941, 0B56, 0944. -/
+the two finite coefficient normalization clauses. No second postponed proof is introduced. -/
 abbrev completionMateComparison
     {Y X Y' X' : Site.{u}}
     {f : Morphism Y X} {g : Morphism Y Y'} {h : Morphism X X'} {k : Morphism Y' X'}

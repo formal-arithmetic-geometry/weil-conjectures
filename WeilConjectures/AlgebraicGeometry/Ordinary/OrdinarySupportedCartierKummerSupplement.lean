@@ -158,7 +158,10 @@ public import WeilConjectures.AlgebraicGeometry.OrdinarySupportedCartierKummer
 /-!
 # Existence of an ordinary supported Cartier Kummer map
 
-Source: Stacks Project, Tags 03PL and 0A45.
+## References
+
+* Stacks Project, Tags 03PL and 0A45
+* Stacks 03PL and 0A45
 -/
 
 @[expose] public noncomputable section
@@ -206,8 +209,6 @@ unit/Chern equation, Cartier-preserving pullback square, and derived scalar squa
 The derived arrow is displayed explicitly; Ext is only its canonical degree-two
 representative. The boundary determines that representative uniquely. Pullback and
 scalar-extension representatives are themselves normalized by the same boundary.
-
-Source: Stacks 03PL and 0A45.
 -/
 theorem ordinary_supported_kummer (T : Scheme.{u}) (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)

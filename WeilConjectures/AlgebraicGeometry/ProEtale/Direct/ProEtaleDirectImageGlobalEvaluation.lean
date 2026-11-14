@@ -26,11 +26,16 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CompCo
 /-!
 # Normalized derived global sections after ordinary pro-etale direct image
 
-Source: Stacks Project, Tags 0D6H and 0D6E; Tags 070Y and 0DVC.
-
 The section functor and its terminal-object comparison are the published ordinary
 constant-ring constructions. All derived images below are the actual finite-level
 sectionwise direct image, without completion or a constructibility restriction.
+
+## References
+
+* Stacks Project, Tags 0D6H and 0D6E
+* Tags 070Y and 0DVC
+* Stacks Tag 07A5
+* Stacks Tag 0D6H
 -/
 
 @[expose] public noncomputable section
@@ -44,14 +49,12 @@ universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor Opposite
 namespace AlgebraicGeometry.Scheme
 
-/-- Fix abelian-group sheafification at the published coefficient universe.
-Source: Stacks Tag 07A5. -/
+/-- Fix abelian-group sheafification at the published coefficient universe. -/
 private noncomputable local instance (priority := 5000) globalEvaluation_sheafify
     (X : Scheme.{u}) : HasSheafify (ProEt.topology X) AddCommGrpCat.{u + 1} :=
   WeilConjectures.integralCoefficientAbSheafify.{u, u} X
 
-/-- Use the published locally-bijective characterization at that same universe.
-Source: Stacks Tag 07A5. -/
+/-- Use the published locally-bijective characterization at that same universe. -/
 private noncomputable local instance (priority := 5000) globalEvaluation_locallyBijective
     (X : Scheme.{u}) :
     (ProEt.topology X).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
@@ -63,8 +66,7 @@ instance purityGlobalEvaluation_finiteRing (P : WeilConjectures.PurityFiniteSett
     Finite P.Ring :=
   WeilConjectures.PurityFiniteSetting.ringFinite.{u} P
 
-/-- The published terminal-object comparison, written for the actual finite direct image.
-Source: Stacks Tag 0D6H. -/
+/-- The published terminal-object comparison, written for the actual finite direct image. -/
 def proEtaleGlobalEvaluationTerminal (A : Type u) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     proEtaleConstantModuleDirectImage f A ⋙ proEtaleUnitLeraySections A Y ≅

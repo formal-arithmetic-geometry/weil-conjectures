@@ -34,11 +34,17 @@ public import WeilConjectures.SixFunctors.OpenClosed.Exact
 /-!
 # The inverse-section pushout and its Yoneda sign
 
-Source: Stacks Project, Tags 03AJ and 06XU.
-
 The comparison is characterized on every injective-resolution cocycle. Its naturality
 is expressed for arbitrary coefficient lifts and for etale restriction of cocycles.
 The formula uses the actual open-closed sequence, not a freely supplied sequence.
+
+## References
+
+* Stacks Project, Tags 03AJ and 06XU
+* Stacks Tag 0A45
+* Stacks Tags 03AJ, 0A45, 06XU
+* Stacks 0G78 and 03AJ
+* Stacks 03AJ
 -/
 
 @[expose] public noncomputable section
@@ -55,8 +61,7 @@ open HomologicalComplex
 namespace AlgebraicGeometry.Etale
 
 /-- The closed term of integral localization, cached to keep the normalized Ext types small.
-This is the actual closed term of the published open--closed sequence.
-Source: Stacks Tag 0A45. -/
+This is the actual closed term of the published open--closed sequence. -/
 def principalTorsorClosedTerm {T Z : Scheme.{u}} (i : Z ⟶ T)
     (W : T.Opens) (h : Set.range i.base = (Set.range W.ι.base)ᶜ) :
     Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1} :=
@@ -66,8 +71,7 @@ def principalTorsorClosedTerm {T Z : Scheme.{u}} (i : Z ⟶ T)
       (AddCommGrpCat.of (ULift.{u + 1} ℤ)))).X₃
 
 /-- The published localization sequence on the integral constant sheaf. Its end terms
-are canonically `j_! Z_W` and `i_* Z_Z`, by constant inverse-image comparison.
-Source: Stacks Tag 0A45. -/
+are canonically `j_! Z_W` and `i_* Z_Z`, by constant inverse-image comparison. -/
 def principalTorsorLocalization {T Z : Scheme.{u}} (i : Z ⟶ T)
     (W : T.Opens) (h : Set.range i.base = (Set.range W.ι.base)ᶜ) :
     ShortComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) :=
@@ -85,8 +89,7 @@ def principalTorsorLocalization {T Z : Scheme.{u}} (i : Z ⟶ T)
 
 /-- Models of the two adjunction comparisons used in the framed-torsor calculation.
 The accompanying normalization fixes their values on all cocycles, so no arbitrary
-identification of Ext with cohomology is being used.
-Source: Stacks Tags 03AJ, 0A45, 06XU. -/
+identification of Ext with cohomology is being used. -/
 structure PrincipalTorsorComparisons where
   openSection : ∀ (T Z : Scheme.{u}) (i : Z ⟶ T) [IsClosedImmersion i]
     (W : T.Opens) (h : Set.range i.base = (Set.range W.ι.base)ᶜ)
@@ -103,8 +106,7 @@ structure PrincipalTorsorComparisons where
     (fun {_ _} f ↦ IsOpenImmersion f.left)
 
 /-- The normalized comparison to the right-derived kernel, with its source and target
-fixed explicitly before using it in the splice formula.
-Source: Stacks Tag 0A45. -/
+fixed explicitly before using it in the splice formula. -/
 def PrincipalTorsorComparisons.toSupport (C : PrincipalTorsorComparisons.{u})
     (T : Scheme.{u}) (W : T.Opens)
     (G : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})
@@ -145,8 +147,7 @@ def PrincipalTorsorComparisons.Normalized (C : PrincipalTorsorComparisons.{u}) :
 
 /-- Naturality of the normalized comparisons under coefficient maps and arbitrary
 resolution lifts. The second clause gives etale restriction on cocycles: the equation
-on evaluated supported cocycles is precisely the restriction of `z p(1)`.
-Source: Stacks 0G78 and 03AJ. -/
+on evaluated supported cocycles is precisely the restriction of `z p(1)`. -/
 def PrincipalTorsorComparisons.Natural (C : PrincipalTorsorComparisons.{u}) : Prop :=
   (∀ (T Z : Scheme.{u}) (i : Z ⟶ T) [IsClosedImmersion i]
     (W : T.Opens) (h : Set.range i.base = (Set.range W.ι.base)ᶜ)
@@ -186,7 +187,7 @@ def PrincipalTorsorComparisons.Natural (C : PrincipalTorsorComparisons.{u}) : Pr
 /-- The pushout assertion for the specified extension, and the signed splice in the
 actual right-derived kernel of restriction. The horseshoe data and cocycle `x` are
 arbitrary computational models of the coefficient boundary, not extra assumptions on
-coefficients. Source: Stacks 03AJ. -/
+coefficients. -/
 def PrincipalTorsorComparisons.Formula (C : PrincipalTorsorComparisons.{u}) : Prop :=
   ∀ (T Z : Scheme.{u}) (i : Z ⟶ T) [IsClosedImmersion i]
     (W : T.Opens) (h : Set.range i.base = (Set.range W.ι.base)ᶜ)

@@ -191,8 +191,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
 /-!
 # Integral stratified perfect characterization
 
-Source: Bhatt--Scholze, Definition 6.5.1, Proposition 6.6.11 and Proposition 6.8.11(1), (3).
-
 The perfect and finitely presented models below are actual constant-module
 realizations extended to the completed coefficient ring. They are restricted to
 strata and slice sites with their actual inverse-image coefficient action.
@@ -202,6 +200,13 @@ strata and slice sites with their actual inverse-image coefficient action.
 * `integralStratifiedPerfectCharacterization`: the three equivalent conditions.
 * `integralStratifiedPerfectClosure`: shifts, cones, truncations and cohomology.
 * `integralStratifiedPerfectDetailed`: comparison with the recorded detailed category.
+
+## References
+
+* Bhatt--Scholze, Definition 6.5.1, Proposition 6.6.11 and Proposition 6.8.11(1), (3)
+* Bhatt--Scholze, Definition 6.5.1, Proposition 6.6.11 and Proposition 6.8.11(3)
+* Bhatt--Scholze, Proposition 6.8.11(3)
+* Bhatt--Scholze, Definition 6.5.1 and Proposition 6.8.11(3)
 -/
 
 @[expose] public noncomputable section
@@ -563,8 +568,7 @@ private theorem stratified_perfect_bounded (T : Scheme.{u}) [IsNoetherian T]
   exact ⟨⟨a₀, (DerivedCategory.isGE_iff _ _).2 fun q hq ↦ key q (.inl hq)⟩,
     ⟨b₀, (DerivedCategory.isLE_iff _ _).2 fun q hq ↦ key q (.inr hq)⟩⟩
 
-/-- The three descriptions are equivalent. Source: Bhatt--Scholze, Definition 6.5.1, Proposition
-6.6.11 and Proposition 6.8.11(3). -/
+/-- The three descriptions are equivalent. -/
 theorem integralStratifiedPerfectCharacterization
     (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E]
@@ -610,7 +614,7 @@ theorem integralStratifiedPerfectCharacterization
     · exact hK.2
 
 /-- Closure under all shifts, ambient cones, standard truncations and cohomology in
-degree zero. Source: Bhatt--Scholze, Proposition 6.8.11(3). -/
+degree zero. -/
 theorem integralStratifiedPerfectClosure
     (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E]
@@ -697,8 +701,7 @@ theorem integralStratifiedPerfectClosure
 
 /-- The same conditions describe precisely the detailed integral category under
 its own coefficient hypotheses. The comparison is fixed by all quotient projections,
-so it compares the same completed ring and reduction functors.
-Source: Bhatt--Scholze, Definition 6.5.1 and Proposition 6.8.11(3). -/
+so it compares the same completed ring and reduction functors. -/
 theorem integralStratifiedPerfectDetailed
     (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

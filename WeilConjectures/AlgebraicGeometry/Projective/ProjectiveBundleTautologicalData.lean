@@ -27,7 +27,18 @@ public import WeilConjectures.AlgebraicGeometry.ProperBaseChange.QuasiCoherentSy
 The symmetric-algebra realization, its normalized twist, frame charts, and base-change
 comparisons. These definitions are factored out so their construction lemmas can be
 proved separately without an import cycle.
-Source: Stacks Project, Tags 01OB, 01O3, 01OE.
+
+## References
+
+* Stacks Project, Tags 01OB, 01O3, 01OE
+* Stacks, Tags 0095, 0096
+* Stacks, Tag 01OB
+* Stacks, Tag 01NR
+* Stacks, Tags 01NR, 01MN
+* Stacks, Tags 01OB, 01NR
+* Stacks, Tags 01OB, 01OE
+* Stacks, Tag 01O3
+* Stacks, Tag 01C5
 -/
 
 @[expose] public section
@@ -45,21 +56,18 @@ attribute [local irreducible] Scheme.Modules.tensorPullback
 
 /-- The unit-normalized comparison from the stipulated tensor pullback to Mathlib's
 adjoint implementation. Uniqueness of left adjoints determines this comparison; thus all
-pullback equations below also specify equations for tensor pullback, without choosing maps.
-Source: Stacks, Tags 0095, 0096. -/
+pullback equations below also specify equations for tensor pullback, without choosing maps. -/
 noncomputable def projectiveBundleTensorPullbackIso {X Y : Scheme.{u}} (g : X ⟶ Y) :
     Scheme.Modules.tensorPullback g ≅ Scheme.Modules.pullback g :=
   (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)).leftAdjointUniq
     (Scheme.Modules.pullbackPushforwardAdjunction g)
 
-/-- Tensor-pullback identity, transported by the unit-normalized adjoint comparison.
-Source: Stacks, Tags 0095, 0096. -/
+/-- Tensor-pullback identity, transported by the unit-normalized adjoint comparison. -/
 noncomputable def projectiveBundlePullbackId (X : Scheme.{u}) :
     Scheme.Modules.tensorPullback (𝟙 X) ≅ 𝟭 X.Modules :=
   projectiveBundleTensorPullbackIso (𝟙 X) ≪≫ Scheme.Modules.pullbackId X
 
-/-- Tensor-pullback composition, using the canonical adjoint comparison.
-Source: Stacks, Tags 0095, 0096. -/
+/-- Tensor-pullback composition, using the canonical adjoint comparison. -/
 noncomputable def projectiveBundlePullbackComp {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z) :
     Scheme.Modules.tensorPullback g ⋙ Scheme.Modules.tensorPullback f ≅
@@ -68,27 +76,23 @@ noncomputable def projectiveBundlePullbackComp {X Y Z : Scheme.{u}}
     Functor.isoWhiskerLeft (Scheme.Modules.pullback g) (projectiveBundleTensorPullbackIso f) ≪≫
     Scheme.Modules.pullbackComp f g ≪≫ (projectiveBundleTensorPullbackIso (f ≫ g)).symm
 
-/-- Transport of tensor pullback along equality of the underlying scheme maps.
-Source: Stacks, Tags 0095, 0096. -/
+/-- Transport of tensor pullback along equality of the underlying scheme maps. -/
 noncomputable def projectiveBundlePullbackCongr {X Y : Scheme.{u}} {f g : X ⟶ Y}
     (h : f = g) : Scheme.Modules.tensorPullback f ≅ Scheme.Modules.tensorPullback g :=
   eqToIso (congrArg Scheme.Modules.tensorPullback h)
 
-/-- The specified tensor-pullback adjunction; its universal property fixes the unit.
-Source: Stacks, Tags 0095, 0096. -/
+/-- The specified tensor-pullback adjunction; its universal property fixes the unit. -/
 noncomputable def projectiveBundlePullbackAdjunction {X Y : Scheme.{u}} (g : X ⟶ Y) :
     Scheme.Modules.tensorPullback g ⊣ Scheme.Modules.pushforward g :=
   Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)
 
-/-- Pulling back the unit module by tensor product gives the unit module.
-Source: Stacks, Tags 0095, 0096. -/
+/-- Pulling back the unit module by tensor product gives the unit module. -/
 noncomputable def projectiveBundlePullbackUnitIso {X Y : Scheme.{u}} (g : X ⟶ Y) :
     (Scheme.Modules.tensorPullback g).obj (Scheme.Modules.unit Y) ≅ Scheme.Modules.unit X :=
   (projectiveBundleTensorPullbackIso g).app (Scheme.Modules.unit Y) ≪≫
     Scheme.Modules.pullbackObjUnitIso g
 
-/-- The actual pullback of a section, defined by the tensor-pullback adjunction unit.
-Source: Stacks, Tags 0095, 0096. -/
+/-- The actual pullback of a section, defined by the tensor-pullback adjunction unit. -/
 noncomputable def projectiveBundlePullbackSection {X Y : Scheme.{u}} (g : X ⟶ Y)
     {M : Y.Modules} {U : Y.Opens} (m : Γ(M, U)) :
     Γ((Scheme.Modules.tensorPullback g).obj M, g ⁻¹ᵁ U) :=
@@ -101,15 +105,13 @@ attribute [local irreducible] projectiveBundleTensorPullbackIso
 
 namespace Scheme
 
-/-- The symmetric-degree submodule: products of exactly `d` degree-one generators.
-Source: Stacks, Tag 01OB. -/
+/-- The symmetric-degree submodule: products of exactly `d` degree-one generators. -/
 def symmetricDegree (R M : Type u) [CommRing R] [AddCommGroup M] [Module R M]
     (d : ℕ) : Submodule R (SymmetricAlgebra R M) :=
   Submodule.span R {x | ∃ v : Fin d → M,
     x = ∏ i, SymmetricAlgebra.ι R M (v i)}
 
-/-- An actual frame, rather than merely the proposition that one exists.
-Source: Stacks, Tag 01OB. -/
+/-- An actual frame, rather than merely the proposition that one exists. -/
 def ModuleFrame (B : Scheme.{u}) (F : B.Modules) (U : B.Opens) (r : ℕ) : Type u :=
   (Modules.tensorPullback U.ι).obj F ≅
     SheafOfModules.free (R := U.toScheme.ringCatSheaf) (ULift.{u} (Fin r))
@@ -117,8 +119,7 @@ def ModuleFrame (B : Scheme.{u}) (F : B.Modules) (U : B.Opens) (r : ℕ) : Type 
 set_option genInjectivity false in
 set_option genSizeOfSpec false in
 /-- The symmetric algebra presented on the affine basis, with its actual symmetric grading,
-algebra structure and canonical restriction maps.
-Source: Stacks, Tag 01OB. -/
+algebra structure and canonical restriction maps. -/
 structure SymmetricGradedAlgebraData (B : Scheme.{u}) (F : B.Modules) where
   data : B.GradedAlgebraData
   sectionEquiv : ∀ U : B.affineOpens,
@@ -135,8 +136,7 @@ structure SymmetricGradedAlgebraData (B : Scheme.{u}) (F : B.Modules) where
 
 end Scheme
 
-/-- Transport of the restriction of a global module across nested affine Proj charts.
-Source: Stacks, Tag 01NR. -/
+/-- Transport of the restriction of a global module across nested affine Proj charts. -/
 noncomputable def tautologicalTransport
     (B : Scheme.{u}) (A : B.GradedAlgebraData) (L : A.relProj.Modules)
     {U V : B.affineOpens} (h : U ≤ V) :
@@ -150,8 +150,7 @@ noncomputable def tautologicalTransport
 set_option genInjectivity false in
 set_option genSizeOfSpec false in
 /-- Compatible affine twist charts. The restriction isomorphisms are normalized on every
-homogeneous degree-one section, so they are the homogeneous-localization maps.
-Source: Stacks, Tags 01NR, 01MN. -/
+homogeneous degree-one section, so they are the homogeneous-localization maps. -/
 structure TautologicalTwistData (B : Scheme.{u}) (A : B.GradedAlgebraData)
     (L : A.relProj.Modules) where
   chart : ∀ U : B.affineOpens,
@@ -176,8 +175,7 @@ structure TautologicalTwistData (B : Scheme.{u}) (A : B.GradedAlgebraData)
 set_option genInjectivity false in
 set_option genSizeOfSpec false in
 /-- A projectivization of the actual symmetric algebra with its normalized tautological
-quotient and compatible degree-one twist charts.
-Source: Stacks, Tags 01OB, 01NR. -/
+quotient and compatible degree-one twist charts. -/
 structure ProjectiveBundleRealization (B : Scheme.{u}) (F : B.Modules) where
   A : B.SymmetricGradedAlgebraData F
   L : A.data.relProj.Modules
@@ -196,8 +194,7 @@ structure ProjectiveBundleRealization (B : Scheme.{u}) (F : B.Modules) where
           A.data.relProjι U ⁻¹ᵁ (A.data.relProjHom ⁻¹ᵁ U.1)))
 
 /-- Transport of a frame vector to the pullback of the module on the inverse-image open.
-Naming this morphism keeps the canonical pullback comparisons shared in section formulas.
-Source: Stacks, Tag 01OB. -/
+Naming this morphism keeps the canonical pullback comparisons shared in section formulas. -/
 @[no_expose]
 noncomputable def projectiveBundleFrameVector
     {B : Scheme.{u}} {F : B.Modules} (D : ProjectiveBundleRealization B F)
@@ -215,8 +212,7 @@ noncomputable def projectiveBundleFrameVector
 
 attribute [irreducible] projectiveBundleFrameVector
 
-/-- The quotient section associated to the `i`th vector of a specified frame, on `p⁻¹U`.
-Source: Stacks, Tag 01OB. -/
+/-- The quotient section associated to the `i`th vector of a specified frame, on `p⁻¹U`. -/
 @[no_expose]
 noncomputable def projectiveBundleFrameSection
     {B : Scheme.{u}} {F : B.Modules} (D : ProjectiveBundleRealization B F)
@@ -231,8 +227,7 @@ attribute [irreducible] projectiveBundleFrameSection
 set_option genInjectivity false in
 set_option genSizeOfSpec false in
 /-- The frame determines a chart over `U`, its comparison with the polynomial projective
-space, and the twist isomorphism carrying the ordered homogeneous coordinates to that frame.
-Source: Stacks, Tags 01OB, 01OE. -/
+space, and the twist isomorphism carrying the ordered homogeneous coordinates to that frame. -/
 structure ProjectiveBundleFrameChart {B : Scheme.{u}} {F : B.Modules}
     (D : ProjectiveBundleRealization B F) (n : ℕ) (U : B.Opens)
     (e : B.ModuleFrame F U (n + 1)) where
@@ -276,8 +271,7 @@ structure ProjectiveBundleFrameChart {B : Scheme.{u}} {F : B.Modules}
             (1 : Γ((D.A.data.relProjHom ⁻¹ᵁ U).toScheme, ⊤)))
 
 /-- The universal quotient square defining the degree-one Stacks base-change theta.
-Naming this equation prevents repeated expansion in the dependent record projections.
-Source: Stacks, Tag 01O3. -/
+Naming this equation prevents repeated expansion in the dependent record projections. -/
 def projectiveBundleThetaQuotientLaw
     {B B' : Scheme.{u}} {F : B.Modules} {F' : B'.Modules}
     (D : ProjectiveBundleRealization B F) (D' : ProjectiveBundleRealization B' F')
@@ -295,8 +289,7 @@ set_option genInjectivity false in
 set_option genSizeOfSpec false in
 /-- The canonical base-change comparison. Its coefficient maps are fixed on degree-one
 vectors, and its actual theta is fixed by the universal quotient square (the degree-one
-part of Stacks 01O3). No arbitrary invertible module is introduced.
-Source: Stacks, Tag 01O3. -/
+part of Stacks 01O3). No arbitrary invertible module is introduced. -/
 structure ProjectiveBundleBaseChangeDatum
     {B B' : Scheme.{u}} {F : B.Modules} {F' : B'.Modules}
     (D : ProjectiveBundleRealization B F) (D' : ProjectiveBundleRealization B' F')
@@ -317,8 +310,7 @@ structure ProjectiveBundleBaseChangeDatum
 set_option genInjectivity false in
 set_option genSizeOfSpec false in
 /-- The existing fixed-rank predicate, with the base explicit to avoid re-inferring the
-site and its sheafification instances at every dependent occurrence. This is only an alias.
-Source: Stacks, Tag 01C5. -/
+site and its sheafification instances at every dependent occurrence. This is only an alias. -/
 def projectiveBundleRank (B : Scheme.{u}) (n : ℕ) (F : B.Modules) : Prop :=
   F.IsFiniteLocallyFreeOfRank (n + 1)
 

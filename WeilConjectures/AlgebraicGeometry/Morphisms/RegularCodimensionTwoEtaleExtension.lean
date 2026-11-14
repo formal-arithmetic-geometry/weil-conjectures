@@ -19,7 +19,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.FlatDepthTwoFiniteFormallyUnr
 /-!
 # Extending finite etale covers across a regular codimension-two boundary
 
-Source: Stacks Project, Tags 0BMA, 0EY7, 0EY6 and 0H2W.
+## References
+
+* Stacks Project, Tags 0BMA, 0EY7, 0EY6 and 0H2W
+* Stacks Project, Tag 0BMA (local purity), Tag 0EY7 (extension), and Tag 0EY6(2) (uniqueness), and
+  Tag 0H2W, final paragraph (the locally Noetherian form)
 -/
 
 @[expose] public section
@@ -60,10 +64,7 @@ private theorem depth_two_of_regular_local (R : Type u) [CommRing R]
   exact htwo.trans hdepth
 
 /-- A finite etale cover of an open extends across a regular boundary whose
-local rings have dimension at least two.
-
-Source: Stacks Project, Tag 0BMA (local purity), Tag 0EY7 (extension), and
-Tag 0EY6(2) (uniqueness), and Tag 0H2W, final paragraph (the locally Noetherian form). -/
+local rings have dimension at least two. -/
 theorem exists_finite_etale_extension_of_regular_codimension_two_boundary
     {L Y : Scheme.{u}} [IsLocallyNoetherian L]
     (V : L.Opens)

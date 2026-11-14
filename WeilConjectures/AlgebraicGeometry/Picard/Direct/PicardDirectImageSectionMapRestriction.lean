@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Picard.Direct.PicardDirectImageUnitMorp
 
 /-! # Compatibility of the fixed section map with restriction
 
-Source: Stacks Project, Tags 08HY and 0D5S.
+## References
+
+* Stacks Project, Tags 08HY and 0D5S
 -/
 
 @[expose] public section
@@ -23,8 +25,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- The actual canonical section map commutes with successive base change.
-It asserts an equality of maps and does not assert their bijectivity.
-Source: Stacks Project, Tags 08HY and 0D5S. -/
+It asserts an equality of maps and does not assert their bijectivity. -/
 theorem picardDirectImageSectionMap_restriction
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

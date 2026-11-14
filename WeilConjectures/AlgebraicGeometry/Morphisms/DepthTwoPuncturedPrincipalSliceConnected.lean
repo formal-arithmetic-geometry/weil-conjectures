@@ -17,7 +17,9 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 /-! # Connectedness of a depth-two puncture and its principal slice
 
-Source: Stacks Project, Tags 0E9I, 0BK0, 00LK and 00KW.
+## References
+
+* Stacks Project, Tags 0E9I, 0BK0, 00LK and 00KW
 -/
 
 @[expose] public section
@@ -153,9 +155,7 @@ private theorem puncture_globalSections_bijective
   have := hη
   exact ConcreteCategory.bijective_of_isIso (((Modules.restrictAdjunction W.ι).unit.app N).app ⊤)
 
-/-- A depth-two puncture is connected and meets each principal closed slice.
-
-Source: Stacks Project, Tags 0E9I, 0BK0, 00LK and 00KW. -/
+/-- A depth-two puncture is connected and meets each principal closed slice. -/
 theorem depth_two_punctured_principal_slice_connected
     (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R]
     (g : R) (hg : g ∈ IsLocalRing.maximalIdeal R)

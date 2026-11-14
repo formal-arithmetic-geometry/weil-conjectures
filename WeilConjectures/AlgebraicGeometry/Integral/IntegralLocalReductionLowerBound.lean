@@ -16,6 +16,11 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleLocalRestriction.ProEtaleLocalD
 /-! # Lower cohomological bound for a restricted completed DVR quotient
 
 The coefficient ring is the actual inverse image of the completed ring.
+
+## References
+
+* Stacks Project, Tag 093M
+* Tag 06YU
 -/
 
 @[expose] public noncomputable section
@@ -207,8 +212,7 @@ private theorem lower_bound_of_coefficient_sequence
     ((SheafOfModules.toSheaf _).map (0 : H ⟶ H))
 
 /-- Reducing a lower-bounded complex by a completed quotient for a principal ideal generated
-by a nonzero element of a domain loses at most one degree.
-Source: Stacks Project, Tag 093M; Tag 06YU. -/
+by a nonzero element of a domain loses at most one degree. -/
 theorem integralLocalReduction_isGE_of_principal
     {A : Type (u + 1)} [CommRing A] [IsDomain A] (d : AdicCoefficientDatum A)
     (π : A) (hI : d.ideal = Ideal.span {π}) (hπ : π ≠ 0)
@@ -228,8 +232,7 @@ theorem integralLocalReduction_isGE_of_principal
             (pbcAdicCompletion X d)).obj.obj V) = 1
       exact map_one _) hz' hs' (DerivedCategory.Q.obj L) a
 
-/-- Reducing a lower-bounded complex by a completed DVR quotient loses at most one degree.
-Source: Stacks Project, Tag 093M; Tag 06YU. -/
+/-- Reducing a lower-bounded complex by a completed DVR quotient loses at most one degree. -/
 theorem integralLocalReduction_isGE
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

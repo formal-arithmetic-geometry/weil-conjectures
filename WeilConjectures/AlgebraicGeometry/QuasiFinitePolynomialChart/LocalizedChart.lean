@@ -15,7 +15,10 @@ public import Mathlib.RingTheory.Localization.Away.Basic
 /-!
 # Geometric realization of a localized polynomial map
 
-Source: Stacks Project, Tag 00QE, as used at the start of the proof of Tag 00RH.
+## References
+
+* Stacks Project, Tag 00QE, as used at the start of the proof of Tag 00RH
+* Stacks Project, Tag 00QE, the first reduction in the proof of Tag 00RH, and Tag 00E4
 -/
 
 @[expose] public section
@@ -43,8 +46,7 @@ private theorem quasiFinite_of_primewise
   exact Set.toFinite _
 
 /-- A supplied quasi-finite polynomial map to a localization gives a chart on that basic open.
-
-Source: Stacks Project, Tag 00QE, the first reduction in the proof of Tag 00RH, and Tag 00E4 -/
+-/
 theorem exists_chart_of_localized_polynomial_map
     {X T : Scheme.{u}} [IsAffine X] [IsAffine T]
     (f : X ⟶ T) [LocallyOfFinitePresentation f]

@@ -16,7 +16,9 @@ import WeilConjectures.RingTheory.TraceFormEtaleField
 /-!
 # Evaluating a trace discriminant on a fibre
 
-Source: Stacks Project, Tag 0BJF, discriminant-lemma-discriminant, fibre-algebra argument.
+## References
+
+* Stacks Project, Tag 0BJF, discriminant-lemma-discriminant, fibre-algebra argument
 -/
 
 @[expose] public section
@@ -26,9 +28,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- The evaluated discriminant of a finite free affine section algebra is nonzero exactly
-when the scheme-theoretic fibre is etale.
-
-Source: Stacks Project, Tag 0BJF, discriminant-lemma-discriminant, fibre-algebra argument. -/
+when the scheme-theoretic fibre is etale. -/
 theorem trace_discriminant_evaluation_ne_zero_iff_etale_fibre
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsAffineHom f]
     (U : Y.affineOpens) (y : Y) (hy : y ∈ U.1) :

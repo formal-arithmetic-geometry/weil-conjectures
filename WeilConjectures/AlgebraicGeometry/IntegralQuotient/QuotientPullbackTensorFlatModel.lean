@@ -11,10 +11,12 @@ import WeilConjectures.AlgebraicGeometry.QuotientTensorFlatModel.QuotientTensorR
 
 /-! # The quotient tensor square on resolving complexes
 
-Source: Stacks Project, Tags 07A4, 0G7E and 06YY.
-
 The statement is restricted to flat-term K-flat complexes. The parent module
 performs the separate resolution and naturality argument for arbitrary inputs.
+
+## References
+
+* Stacks Project, Tags 07A4, 0G7E and 06YY
 -/
 
 @[expose] public noncomputable section
@@ -38,9 +40,7 @@ namespace AlgebraicGeometry.ProEtale.IntegralQuotient
 
 open QuotientChange QuotientSectionTensor
 
-/-- The quotient tensor square on two flat-term K-flat complexes.
-
-Source: Stacks Project, Tags 07A4, 0G7E and 06YY. -/
+/-- The quotient tensor square on two flat-term K-flat complexes. -/
 theorem quotient_pullback_tensor_flat_model
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ)

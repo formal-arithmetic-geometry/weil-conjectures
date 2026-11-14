@@ -18,7 +18,13 @@ import Mathlib.CategoryTheory.Sites.LocallyBijective
 /-!
 # Associated module sheaves for a finite torsor with finite ring coefficients
 
-Source: Stacks Project, Tags 0DV5 (3), 0DV6, 04TR and 04TS.
+## References
+
+* Stacks Project, Tags 0DV5 (3), 0DV6, 04TR and 04TS
+* Stacks Project, Tags 0DV5 (3), 0DV6 and 0A3R
+* Example constant-sheaf and Tags 04TR and 04TS
+* Stacks Project, Tags 0DV5 (3), 0DV6, 0A3R, 04TR and 04TS
+* Stacks Project, Tag 0DV5 (3), Tag 0DV6, and Tags 04TR and 04TS
 -/
 
 @[expose] public section
@@ -74,7 +80,6 @@ private def SectionEvaluationNormalizedOver
 end Scheme.GaloisCover
 
 /-- Ordinary evaluation exists without imposing deck equivariance.
-Source: Stacks Project, Tags 0DV5 (3), 0DV6 and 0A3R; Example constant-sheaf and Tags 04TR and 04TS.
 Fixed-cover adaptation to arbitrary modules. -/
 private theorem Scheme.GaloisCover.exists_ordinarySectionEvaluationOver
     {V : Scheme.{u}} [ConnectedSpace V] (Λ : Type (u + 1)) [CommRing Λ]
@@ -200,8 +205,7 @@ private theorem Scheme.GaloisCover.exists_ordinarySectionEvaluationOver
       y y₀
 
 /-- Constant coordinates for a sheaf trivialized by a connected torsor, with a
-pointwise local description by restrictions of global sections upstairs.
-Source: Stacks Project, Tags 0DV5 (3), 0DV6, 0A3R, 04TR and 04TS -/
+pointwise local description by restrictions of global sections upstairs. -/
 private theorem Scheme.GaloisCover.constantCoordinates_localRestrictionOver
     {V : Scheme.{u}} [ConnectedSpace V] (Λ : Type (u + 1)) [CommRing Λ]
     (P : Type u) [Group P] [Finite P]
@@ -336,8 +340,7 @@ private theorem Scheme.GaloisCover.constantCoordinates_localRestrictionOver
   · rfl
 
 /-- The value of an ordinary normalized evaluation on the graph of f gives the
-constant-sheaf coordinates on W. No equivariance of the evaluation is assumed.
-Source: Stacks Project, Tags 0DV5 (3), 0DV6, 0A3R, 04TR and 04TS -/
+constant-sheaf coordinates on W. No equivariance of the evaluation is assumed. -/
 private theorem Scheme.GaloisCover.ordinaryGraphEvaluation_bijectiveOver
     {V : Scheme.{u}} [ConnectedSpace V] (Λ : Type (u + 1)) [CommRing Λ]
     (P : Type u) [Group P] [Finite P]
@@ -450,7 +453,6 @@ private theorem evaluation_of_local_presentation
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A natural ordinary evaluation normalized on the diagonal is deck-equivariant.
-Source: Stacks Project, Tags 0DV5 (3), 0DV6 and 0A3R; Example constant-sheaf and Tags 04TR and 04TS.
 Fixed-cover adaptation to arbitrary modules. -/
 private theorem Scheme.GaloisCover.ordinarySectionEvaluation_equivariantOver
     {V : Scheme.{u}} [ConnectedSpace V] (Λ : Type (u + 1)) [CommRing Λ]
@@ -568,8 +570,7 @@ private theorem Scheme.GaloisCover.ordinarySectionEvaluation_equivariantOver
   rw [evaluation_of_local_presentation Λ c F β hβ hΔ W s T p q' y b hs', ha]
   rfl
 
-/-- Evaluation on the chosen graph determines an equivariant locally constant function.
-Source: Stacks Project, Tags 0DV5 (3), 0DV6 and 0A3R -/
+/-- Evaluation on the chosen graph determines an equivariant locally constant function. -/
 private theorem Scheme.GaloisCover.graphEvaluation_injectiveOver
     {V : Scheme.{u}} (Λ : Type (u + 1)) [CommRing Λ] {P : Type u} [Group P] [Finite P]
     (c : Scheme.GaloisCover (ULift.{u + 1} P) V)
@@ -626,9 +627,7 @@ private theorem Scheme.GaloisCover.graphEvaluation_injectiveOver
   congr 1
   exact congrArg (fun t : LocallyConstant W.left N.V ↦ t w) hab
 
-/-- Normalized evaluation is bijective on an etale object with a map to the torsor.
-Source: Stacks Project, Tags 0DV5 (3), 0DV6 and 0A3R.
--/
+/-- Normalized evaluation is bijective on an etale object with a map to the torsor. -/
 private theorem Scheme.GaloisCover.sectionEvaluation_bijective_of_sectionOver
     {V : Scheme.{u}} [ConnectedSpace V] (Λ : Type (u + 1)) [CommRing Λ]
     (P : Type u) [Group P] [Finite P]
@@ -666,8 +665,7 @@ private theorem Scheme.GaloisCover.sectionEvaluation_bijective_of_sectionOver
   exact hcomp.of_comp_left hgraph
 
 /-- There is a normalized evaluation morphism into equivariant locally constant functions.
-This asserts existence and naturality of the evaluation map, not its bijectivity.
-Source: Stacks Project, Tags 0DV5 (3), 0DV6 and 0A3R. -/
+This asserts existence and naturality of the evaluation map, not its bijectivity. -/
 private theorem Scheme.GaloisCover.exists_sectionEvaluationOver
     {V : Scheme.{u}} [ConnectedSpace V] (Λ : Type (u + 1)) [CommRing Λ]
     (P : Type u) [Group P] [Finite P]
@@ -700,9 +698,7 @@ namespace Scheme.GaloisCover
 /-- Descent along a connected finite torsor realizes module representations as sheaves,
 recovers a module sheaf trivialized by the torsor. The associated functor is already
 constructed; its pullback and coefficient comparisons are proved separately.
-This statement constructs no filtration and makes no Sylow or degree assertion.
-
-Source: Stacks Project, Tag 0DV5 (3), Tag 0DV6, and Tags 04TR and 04TS. -/
+This statement constructs no filtration and makes no Sylow or degree assertion. -/
 theorem exists_finiteRing_module_descent
     {X : Scheme.{u}} [ConnectedSpace X]
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]

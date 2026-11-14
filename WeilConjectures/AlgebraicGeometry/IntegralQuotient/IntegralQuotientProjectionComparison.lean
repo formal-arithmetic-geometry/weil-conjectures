@@ -15,11 +15,20 @@ import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapMate
 
 /-! # Reduction of the actual integral projection morphism
 
-Source: Stacks Project, Tags 0B56, 07A4, 07A6 and 0D6D.
-
 The scalar tensor comparison is specified by its computation counits and the signed
 ordinary balancing map. Unlike the exact-scalar interface, this applies to reduction
 modulo a uniformizer. Positive levels are indexed by n + 1, as in the dependency.
+
+## References
+
+* Stacks Project, Tags 0B56, 07A4, 07A6 and 0D6D
+* Stacks 07A4, change-of-rings specialization
+* Stacks 07A4, identity-topos scalar extension
+* Stacks 07A4 and 0D6D
+* Stacks 07A4
+* Stacks 0B56
+* Stacks 0B56 and 07A6
+* Stacks 0B56, 07A4, 07A6, 0D6D
 -/
 
 @[expose] public noncomputable section
@@ -51,8 +60,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The signed total of the canonical ordinary scalar tensor balancing map. Its
 scalar-unit normalization sends (u tensor v) tensor s to
-(u tensor 1) tensor (v tensor s), equivalently moving s to the first factor.
-Source: Stacks 07A4, change-of-rings specialization. -/
+(u tensor 1) tensor (v tensor s), equivalently moving s to the first factor. -/
 def scalarTensorTotal (n : ℕ) (T : Scheme.{u})
     (P Q : CochainComplex (Modules (integral l E) T) ℤ) :
     ((extension (reduction l E n) T).mapHomologicalComplex (.up ℤ)).obj (P ⊗ Q) ⟶
@@ -62,8 +70,7 @@ def scalarTensorTotal (n : ℕ) (T : Scheme.{u})
   ((Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans (.up ℤ)
     (extension (reduction l E n) T)).app P).app Q
 
-/-- The type of the scalar tensor balancing isomorphism, natural in both inputs.
-Source: Stacks 07A4, identity-topos scalar extension. -/
+/-- The type of the scalar tensor balancing isomorphism, natural in both inputs. -/
 abbrev ScalarTensorIso (n : ℕ) (T : Scheme.{u}) :=
   (Functor.postcompose₂.obj (D (reduction l E n) T)).obj
       (CondensedRing.derivedTensor (integral l E) T) ≅
@@ -73,8 +80,7 @@ abbrev ScalarTensorIso (n : ℕ) (T : Scheme.{u}) :=
 /-- Universal computation-counit normalization of the scalar tensor comparison.
 On flat-term K-flat representatives all computation maps are invertible, and this
 is exactly the specified pure-tensor balancing formula. It also fixes the comparison
-on every derived object by the K-flat localization property.
-Source: Stacks 07A4 and 0D6D. -/
+on every derived object by the K-flat localization property. -/
 def ScalarTensorNormalized (n : ℕ) (T : Scheme.{u})
     (b : ScalarTensorIso l E n T) : Prop :=
   ∀ P Q : CochainComplex (Modules (integral l E) T) ℤ,
@@ -345,14 +351,12 @@ theorem scalarTensorIso_existsUnique (n : ℕ) (T : Scheme.{u}) :
   exact scalarTensor_unique l E n T b hb
 
 /-- The uniquely normalized scalar tensor balancing isomorphism. The existence
-statement determines the whole natural isomorphism, rather than an arbitrary map.
-Source: Stacks 07A4. -/
+statement determines the whole natural isomorphism, rather than an arbitrary map. -/
 @[irreducible] def scalarTensorIso (n : ℕ) (T : Scheme.{u}) :
     ScalarTensorIso l E n T :=
   (scalarTensorIso_existsUnique l E n T).exists.choose
 
-/-- The existing pullback tensor comparison with its named pullback functor.
-Source: Stacks 07A4. -/
+/-- The existing pullback tensor comparison with its named pullback functor. -/
 @[irreducible] def actualTensorPull
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -364,8 +368,7 @@ Source: Stacks 07A4. -/
 
 /-- The actual projection bifunctor transformation, using the existing adjunction
 and its actual tensor comparison. This is the recorded moduleObjectProjectionMap
-before evaluating its two components, with only its functor names made explicit.
-Source: Stacks 0B56. -/
+before evaluating its two components, with only its functor names made explicit. -/
 @[irreducible] def actualProjection
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -377,8 +380,7 @@ Source: Stacks 0B56. -/
 
 /-- The displayed projection comparison equation, with the coefficient parameters
 shared explicitly. This is an equality of actual arrows in the quotient module
-category; it neither forgets the scalar action nor asserts only cohomological equality.
-Source: Stacks 0B56 and 07A6. -/
+category; it neither forgets the scalar action nor asserts only cohomological equality. -/
 @[irreducible] def ProjectionComparisonEquation
     {R S : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj R] [IsCommMonObj R] [MonObj S] [IsCommMonObj S]
@@ -528,9 +530,7 @@ private theorem projectionComparison_of_compatible
 projection morphism under the specified scalar tensor, pullback and direct-image
 comparisons. The pullback comparison is fixed by exactly the normalization in the
 direct-image dependency; that dependency supplies its existence. Both sides are
-natural in K and M and are arrows in the quotient-coefficient derived category.
-
-Source: Stacks 0B56, 07A4, 07A6, 0D6D. -/
+natural in K and M and are arrows in the quotient-coefficient derived category. -/
 theorem integral_quotient_projection_comparison
     {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (c : D (reduction l E n) Y ⋙ L (finite l E n) f ≅

@@ -16,7 +16,10 @@ For a module `N` over `A/I^{n+1}`, the completed realization of `N` (viewed as a
 `A`-module) is the constant sheaf of `N`, with the completed ring acting through the
 projection to the `n`-th quotient ring.
 
-Source: Bhatt--Scholze, Proposition 6.6.11; Stacks Tags 093J and 093M.
+## References
+
+* Bhatt--Scholze, Proposition 6.6.11
+* Stacks Tags 093J and 093M
 -/
 
 @[expose] public noncomputable section

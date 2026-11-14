@@ -14,7 +14,12 @@ public import Mathlib.Topology.Connected.Clopen
 public import WeilConjectures.AlgebraicGeometry.InternalPerfectOrdinaryHomCohomology
 public import WeilConjectures.AlgebraicGeometry.InternalPerfectReductionHomotopyComparison
 
-/-! # Actual internal endomorphism reductions and scalar quotient cohomology -/
+/-! # Actual internal endomorphism reductions and scalar quotient cohomology
+
+## References
+
+* Stacks Project, Tags 09C5, 08JH and 06YQ
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -28,9 +33,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- Derived endomorphisms of the actual internal reductions are the locally constant
 sections of the zeroth cohomology of the quotient algebraic Hom complex, naturally in
-all quotient arrows.
-
-Source: Stacks Project, Tags 09C5, 08JH and 06YQ. -/
+all quotient arrows. -/
 theorem internalPerfectEndomorphism_homComparison
     (X : Scheme.{u}) (W : X.ProEt) (_hAffine : IsAffine W.left)
     (_hweak : (Scheme.ProEt.topology X).IsWeaklyContractible.{u + 1} W)

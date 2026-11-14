@@ -14,7 +14,10 @@ import WeilConjectures.AlgebraicGeometry.Koszul.KoszulReconstructionModels
 
 /-! # Completeness under normalized integral coefficient restriction
 
-Source: Bhatt--Scholze, Lemma 6.5.8(1), Definition 6.5.1.
+## References
+
+* Bhatt--Scholze, Lemma 6.5.8(1), Definition 6.5.1
+* Bhatt--Scholze, Lemma 6.5.8(1) and Definition 6.5.1
 -/
 
 @[expose] public noncomputable section
@@ -50,8 +53,7 @@ private theorem completedComplete_of_iso
   rw [← hj]
   infer_instance
 
-/-- Normalized scalar restriction preserves intrinsic completeness on a fixed scheme.
-Source: Bhatt--Scholze, Lemma 6.5.8(1) and Definition 6.5.1. -/
+/-- Normalized scalar restriction preserves intrinsic completeness on a fixed scheme. -/
 theorem integralResidueCoefficient_complete
     (S : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

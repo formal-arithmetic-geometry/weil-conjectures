@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.Torsion.TorsionAbelianDirectImageVanish
 /-!
 # Higher direct image bounds from affine etale objects
 
-Source: Stacks 072W.
+## References
+
+* Stacks 072W
 -/
 
 @[expose] public section
@@ -64,8 +66,7 @@ private theorem module_vanishing {X Y : Scheme.{u}} (g : X ⟶ Y) (c : ℕ)
     ).subsingleton
 
 /-- A bound on the absolute torsion cohomology of inverse images of affine etale objects
-bounds higher direct images. No finiteness assumption on the morphism is needed.
-Source: Stacks 072W. -/
+bounds higher direct images. No finiteness assumption on the morphism is needed. -/
 theorem isZero_higherDirectImage_of_affineEtale_cd {X Y : Scheme.{u}} (g : X ⟶ Y)
     (c : ℕ)
     (hc : ∀ {W : Scheme.{u}} (w : W ⟶ Y) [Etale w] [IsAffine W],

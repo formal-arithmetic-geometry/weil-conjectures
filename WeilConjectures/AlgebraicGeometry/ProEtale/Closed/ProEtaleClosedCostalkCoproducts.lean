@@ -20,7 +20,10 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 
 /-! # Closed costalks and uniformly bounded-below coproducts
 
-Source: Stacks Project, Tag 09BM; Bhatt--Scholze, Lemma 6.3.14(4).
+## References
+
+* Stacks Project, Tag 09BM
+* Bhatt--Scholze, Lemma 6.3.14(4)
 -/
 
 @[expose] public noncomputable section
@@ -32,8 +35,7 @@ namespace AlgebraicGeometry.Scheme
 -- The unbounded derived comparisons require elaborating several functor structures.
 set_option synthInstance.maxSize 4096 in
 /-- Every right adjoint to exact closed direct image preserves uniformly
-bounded-below coproducts for arbitrary ring-sheaf coefficients.
-Source: Stacks Project, Tag 09BM; Bhatt--Scholze, Lemma 6.3.14(4). -/
+bounded-below coproducts for arbitrary ring-sheaf coefficients. -/
 theorem proEtaleClosedCostalk_preservesCoproduct
     {T Z : Scheme.{u}} [TopologicalSpace.NoetherianSpace T]
     (i : Z ⟶ T) [IsClosedImmersion i]

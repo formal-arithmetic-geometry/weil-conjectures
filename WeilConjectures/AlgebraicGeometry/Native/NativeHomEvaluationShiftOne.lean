@@ -15,8 +15,12 @@ import WeilConjectures.CategoryTheory.DerivedCategory.SixFunctors.NativeDerivedC
 
 /-! # Evaluation and the signed source shift in degree one
 
-Source: Stacks Project, Tags 08J9 and 08JC, the evaluation transpose of the
-signed reindexing of the product Hom complex.
+## References
+
+* Stacks Project, Tags 08J9 and 08JC, the evaluation transpose of the signed reindexing of the
+  product Hom complex
+* Stacks Project, Tag 08JC, signed Hom-complex evaluation calculation
+* Stacks Project, Tag 08JC, Hom-complex signs and evaluation
 -/
 
 @[expose] public noncomputable section
@@ -264,8 +268,7 @@ private lemma evaluation_shift_localization
   erw [uncurry_nativeHom_comparison]
   exact localize_evaluation_shift Q P U I s₁ s₂ ev h₁ h₂
 
-/-- The signed source reindexing commutes with ordinary tensor evaluation.
-Source: Stacks Project, Tag 08JC, signed Hom-complex evaluation calculation. -/
+/-- The signed source reindexing commutes with ordinary tensor evaluation. -/
 private lemma nativeHom_evaluation_shift_one_model
     {C : Type d} [Category.{u + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C]
@@ -348,8 +351,7 @@ private lemma nativeHom_evaluation_shift_one_model
     mul_neg, mul_one, Units.neg_smul, neg_neg]
 
 -- Comparing the fixed evaluation maps unfolds their localization and internal Hom data.
-/-- The evaluation comparison respects the specified signed source shift in degree one.
-Source: Stacks Project, Tag 08JC, Hom-complex signs and evaluation. -/
+/-- The evaluation comparison respects the specified signed source shift in degree one. -/
 theorem nativeHom_evaluation_shift_one
     {C : Type d} [Category.{u + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C]

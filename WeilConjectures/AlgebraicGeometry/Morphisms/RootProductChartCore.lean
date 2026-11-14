@@ -13,7 +13,12 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 import Mathlib.AlgebraicGeometry.Limits
 import WeilConjectures.AlgebraicGeometry.Morphisms.RootFactorStalkLocalization
 
-/-! Local algebra presentation at a point of a root product chart. -/
+/-! Local algebra presentation at a point of a root product chart.
+
+## References
+
+* Stacks Project, Tags 0EYH and 0EYI, affine root charts and pointed neighborhoods
+-/
 
 @[expose] public section
 
@@ -29,9 +34,7 @@ private theorem stalkMap_comp_hom {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ 
 -- Dependent stalk types across the chart isomorphism require extra elaboration steps.
 set_option backward.isDefEq.respectTransparency false in
 /-- A root product chart, localized at a specified point, is the localization of one
-root factor over the base stalk, compatibly with the structural ring map.
-
-Source: Stacks Project, Tags 0EYH and 0EYI, affine root charts and pointed neighborhoods. -/
+root factor over the base stalk, compatibly with the structural ring map. -/
 theorem rootProductChart_stalk_localization_core {Z : Scheme.{u}}
     (R : CommRingCat.{u}) (q : Z ⟶ Spec R) (z : Z)
     (f : R) (hf : f ∈ (q z).asIdeal)

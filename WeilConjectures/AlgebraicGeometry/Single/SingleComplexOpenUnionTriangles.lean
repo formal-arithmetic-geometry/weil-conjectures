@@ -15,7 +15,11 @@ import WeilConjectures.AlgebraicGeometry.Single.SingleComplexOpenUnionSESPresent
 
 /-! # Relative comparison triangles on a source-open union
 
-Source: Stacks Project, Tags 0DJ9 and 08HZ, applied on the union.
+## References
+
+* Stacks Project, Tags 0DJ9 and 08HZ, applied on the union
+* Stacks Project, Tag 0DJ9, induction diagram, and Tag 08HZ, functorial relative Mayer--Vietoris
+* Tag 08HY, the canonical base-change map
 -/
 
 @[expose] public section
@@ -26,10 +30,7 @@ namespace AlgebraicGeometry
 
 /-- The open comparisons on a union, its two members and their intersection
 are the components of a morphism of distinguished relative Mayer--Vietoris
-triangles. No comparison is assumed or asserted to be invertible.
-
-Source: Stacks Project, Tag 0DJ9, induction diagram, and Tag 08HZ, functorial
-relative Mayer--Vietoris; Tag 08HY, the canonical base-change map. -/
+triangles. No comparison is assumed or asserted to be invertible. -/
 theorem singleComplexOpenComparison_union_triangles
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

@@ -33,7 +33,10 @@ Artin--Schreier map `℘ = Frob - 1` of `C` induces `F - 1` for the Frobenius `F
 
 This is the degree `0` case of `properSmoothCurves_higherDirectImage_ga_frobeniusLinear`.
 
-Source: Stacks Project, Tag 0GKV, case (b), and Tag 0E0L (`f_* 𝒪_C = 𝒪_S` universally).
+## References
+
+* Stacks Project, Tag 0GKV, case (b), and Tag 0E0L (`f_* 𝒪_C = 𝒪_S` universally)
+* Stacks Project, Tag 0GKV, case (b)
 -/
 
 @[expose] public section
@@ -235,9 +238,7 @@ the universe lift of the étale sheaf of `𝒪_S`, with the map induced by `℘ 
 corresponding to `F - 1` for the Frobenius `F: x ↦ xᵖ`.
 
 `H⁰(Rf_* 𝔾ₐ) = f_* 𝔾ₐ` as `f_*` is left exact, and `f_* 𝔾ₐ = 𝔾ₐ` since `𝒪_S → f_* 𝒪_C` is an
-isomorphism universally (Stacks, Tag 0E0L).
-
-Source: Stacks Project, Tag 0GKV, case (b). -/
+isomorphism universally (Stacks, Tag 0E0L). -/
 theorem properSmoothCurves_higherDirectImage_ga_frobeniusLinear_zero_aux
     {C S : Scheme.{u}} (f : C ⟶ S) [IsProper f] [Smooth f] [GeometricallyConnected f]
     (p : ℕ) [Fact p.Prime] (hpS : (p : Γ(S, ⊤)) = 0) (hpC : (p : Γ(C, ⊤)) = 0) :

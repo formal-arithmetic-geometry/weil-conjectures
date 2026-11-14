@@ -133,7 +133,12 @@ import WeilConjectures.AlgebraicGeometry.Continuous.ContinuousCoefficientGeneral
 
 /-! # Ordinary rational coefficient composition and the normalized module and derived compositor.
 
-Source: Bhatt--Scholze, Remark 6.8.15, p. 62; Stacks Tags 03CB, 0D6D, 07A4, 099N.
+## References
+
+* Bhatt--Scholze, Remark 6.8.15, p. 62
+* Stacks Tags 03CB, 0D6D, 07A4, 099N
+* Stacks Tags 03CB, 03EL, 0D6D and 07A4
+* BS Remark 6.8.15
 -/
 
 @[expose] public noncomputable section
@@ -233,8 +238,7 @@ private def ordinaryRightIso {S T : Scheme.{u}} (f : S ⟶ T)
 
 -- Nested chart conversions arise in the explicit tensor-section normalization.
 attribute [local irreducible] rationalCoefficientSheaf in
-/-- Ordinary rational coefficient composition and the normalized module and derived compositor.
-Source: Stacks Tags 03CB, 03EL, 0D6D and 07A4; BS Remark 6.8.15. -/
+/-- Ordinary rational coefficient composition and the normalized module and derived compositor. -/
 theorem rationalOrdinaryPullbackComposition (g : Y ⟶ X) (h : Z ⟶ Y)
     (sX : RationalModuleRealization l E X) (sY : RationalModuleRealization l E Y)
     (sZ : RationalModuleRealization l E Z)

@@ -52,8 +52,10 @@ import all WeilConjectures.AlgebraicGeometry.Adic.AdicCoefficientDatumSupplement
 
 /-! # Filtration quotients with completed integral models
 
-Source: Bhatt--Scholze, Definitions 6.8.6 and 6.8.10, Proposition 6.8.11(3), Lemma 6.8.13 and
-Proposition 6.8.14(2), pp. 60--62.
+## References
+
+* Bhatt--Scholze, Definitions 6.8.6 and 6.8.10, Proposition 6.8.11(3), Lemma 6.8.13 and Proposition
+  6.8.14(2), pp. 60--62
 -/
 
 @[expose] public noncomputable section
@@ -66,9 +68,7 @@ namespace AlgebraicGeometry.ProEtale.RationalStratum
 /-- Constructible rational sheaves have finite filtrations with genuine completed
 integral models for the open/closed stratum quotients. IsCompletedModel retains
 completeness, uniform constructible reductions and compatible etale-origin witnesses.
-The integral sheaves are constructible; they need not be lisse or torsion-free.
-Source: Bhatt--Scholze, Definitions 6.8.6 and 6.8.10, Proposition 6.8.11(3), Lemma 6.8.13 and
-Proposition 6.8.14(2), pp. 60--62. -/
+The integral sheaves are constructible; they need not be lisse or torsion-free. -/
 theorem exists_filtration_integral_models
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

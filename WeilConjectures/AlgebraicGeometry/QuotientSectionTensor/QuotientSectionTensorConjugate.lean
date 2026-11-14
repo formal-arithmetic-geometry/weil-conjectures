@@ -8,7 +8,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionTensorData
 import WeilConjectures.AlgebraicGeometry.IntegralResidueDerivedMonoidal
 
-/-! # Conjugating the internal scalar tensor comparison -/
+/-! # Conjugating the internal scalar tensor comparison
+
+## References
+
+* Stacks 07A4, functoriality of the canonical derived tensor comparison
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -36,8 +41,7 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ T)]
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ' T)]
 
-/-- Conjugate an internal tensor comparison through the specified section equivalences.
-Source: Stacks 07A4, functoriality of the canonical derived tensor comparison. -/
+/-- Conjugate an internal tensor comparison through the specified section equivalences. -/
 theorem section_tensor_conjugate_exists (T : Scheme.{u})
     (c : ScalarSectionData a T) (b : TensorIso a T) :
     ∃ barB : tensor Λ T ⋙ c.model.T ≅

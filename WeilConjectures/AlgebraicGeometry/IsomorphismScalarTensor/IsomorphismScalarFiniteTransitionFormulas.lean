@@ -15,7 +15,9 @@ import all WeilConjectures.SixFunctors.Integral.IntegralScalarExtensionWellDefin
 This is the adjacent-transition component of the finite scalar model.  It is
 split from the finite comparison and quotient-map constructions.
 
-Source: Stacks Project, Tags 03EK and 03EL.
+## References
+
+* Stacks Project, Tags 03EK and 03EL
 -/
 
 @[expose] public noncomputable section

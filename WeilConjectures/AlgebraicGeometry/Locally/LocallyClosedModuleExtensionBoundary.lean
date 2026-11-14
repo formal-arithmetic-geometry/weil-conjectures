@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.Clopen.ClopenScalarRestrictionReverseAd
 /-!
 # Open and closed normalizations of the fixed locally closed model
 
-Source: Stacks Project, Tags 09AH, 09AA, 09BN, 03DI, 03DJ and 02V0.
+## References
+
+* Stacks Project, Tags 09AH, 09AA, 09BN, 03DI, 03DJ and 02V0
 -/
 
 @[expose] public noncomputable section
@@ -174,9 +176,7 @@ end LocallyClosedCoefficientImmersion
 
 set_option linter.unusedVariables false in
 /-- For a single immersion, the fixed closed-then-open model has the normalized open
-adjunction and the normalized comparison with actual closed direct image.
-
-Source: Stacks Project, Tags 09AH, 09AA, 09BN, 03DI, 03DJ and 02V0. -/
+adjunction and the normalized comparison with actual closed direct image. -/
 theorem locallyClosedModel_boundary {S X : LocallyClosedCoefficients.{u}}
     (a : LocallyClosedCoefficientImmersion S X) :
     (∀ ha : IsOpenImmersion a.hom, ∃ adj : a.modelExtension ⊣ a.pull,

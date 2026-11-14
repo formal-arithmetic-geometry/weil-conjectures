@@ -90,7 +90,21 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleInverseImageTensorCompar
 /-!
 # Normalized tensor comparison for pro-etale inverse image
 
-Source: Stacks Project, Tags 03EK, 03EL and 09A5.
+## References
+
+* Stacks Project, Tags 03EK, 03EL and 09A5
+* Stacks, Section 03EK
+* Stacks, Tag 03CB
+* Stacks, Tag 03D2
+* Stacks Project, Modules on Sites, Section 03EK and Tag 03D7
+* Stacks, Tag 03EL
+* Stacks Project, Modules on Sites, Tag 03D2
+* Stacks, Tags 03CB and 03D2
+* Stacks, Tag 00VE
+* Stacks, Tags 00VE and 03D2
+* Stacks, Tag 00YV
+* Stacks Project, Sites, Tag 00YV, and Modules on Sites, Tag 03D2
+* Stacks, Tags 03EK, 03EL and 09A5, with Tags 00VE, 00WH, 00WX and 03CB for coherence
 -/
 
 @[expose] public section
@@ -104,13 +118,11 @@ open AlgebraicGeometry.Scheme SheafOfModules
 
 namespace AlgebraicGeometry.ProEtaleTensorComparison
 
-/-- The recorded sheafification of the sectionwise tensor product.
-Source: Stacks, Section 03EK. -/
+/-- The recorded sheafification of the sectionwise tensor product. -/
 noncomputable abbrev tensor {X : Scheme.{u}} {R : Rings X} (M N : Modules R) : Modules R :=
   (siteSheafTensorRight N).obj M
 
-/-- The local pure tensor followed by the existing sheafification unit.
-Source: Stacks, Section 03EK. -/
+/-- The local pure tensor followed by the existing sheafification unit. -/
 noncomputable abbrev pure {X : Scheme.{u}} {R : Rings X} (M N : Modules R)
     (V : X.ProEt) (s : M.val.obj (op V)) (t : N.val.obj (op V)) :=
   siteSheafTensorTmul M N (op V) s t
@@ -124,8 +136,7 @@ private theorem inverseSection_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
 -- Use the canonical-unit API without unfolding the small-model module construction.
 attribute [local irreducible] proEtaleModuleInverseImage inverseSection
 
-/-- The canonical ring compositor is the adjoint conjugate of pullback associativity.
-Source: Stacks, Tag 03CB. -/
+/-- The canonical ring compositor is the adjoint conjugate of pullback associativity. -/
 noncomputable def ringComp {X Y Z : Scheme.{u}} (g : X ⟶ Y) (h : Y ⟶ Z)
     (R : Rings Z) : inverseRing (g ≫ h) R ≅ inverseRing g (inverseRing h R) :=
   ((conjugateIsoEquiv
@@ -154,24 +165,21 @@ private theorem ringComp_unit {X Y Z : Scheme.{u}} (g : X ⟶ Y) (h : Y ⟶ Z)
 -- Treat the adjoint-conjugation data through its unit equations.
 attribute [local irreducible] ringComp
 
-/-- Restriction of scalars is Mathlib's existing functor.
-Source: Stacks, Section 03EK. -/
+/-- Restriction of scalars is Mathlib's existing functor. -/
 noncomputable abbrev restrict {X : Scheme.{u}} {R S : Rings X} (a : R ⟶ S) :
     Modules S ⥤ Modules R :=
   SheafOfModules.restrictScalars.{u + 1}
     ((sheafCompose (ProEt.topology X)
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map a)
 
-/-- Inverse image on ring morphisms, from the recorded functor.
-Source: Stacks, Tag 03D2. -/
+/-- Inverse image on ring morphisms, from the recorded functor. -/
 noncomputable abbrev inverseRingMap {X Y : Scheme.{u}} (f : X ⟶ Y)
     {R S : Rings Y} (a : R ⟶ S) :=
   (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map a
 
 set_option maxHeartbeats 800000 in
 -- Elaborate the two scalar actions in the sectionwise bilinear pairing.
-/-- The coefficient quotient is uniquely fixed by local pure tensors.
-Source: Stacks, Section 03EK. -/
+/-- The coefficient quotient is uniquely fixed by local pure tensors. -/
 theorem coefficientQuotient_exists {X : Scheme.{u}} {R S : Rings X} (a : R ⟶ S)
     (M N : Modules S) :
     ∃! p : tensor ((restrict a).obj M) ((restrict a).obj N) ⟶
@@ -264,16 +272,14 @@ theorem coefficientQuotient_exists {X : Scheme.{u}} {R S : Rings X} (a : R ⟶ S
   | add t s ht hs => simp only [map_add, ht, hs]
 
 /-- The canonical map from the tensor over R to the tensor over S, selected from its
-unique universal-property characterization, rather than from mere existence.
-Source: Stacks, Section 03EK. -/
+unique universal-property characterization, rather than from mere existence. -/
 noncomputable def coefficientQuotient {X : Scheme.{u}} {R S : Rings X} (a : R ⟶ S)
     (M N : Modules S) :
     tensor ((restrict a).obj M) ((restrict a).obj N) ⟶ (restrict a).obj (tensor M N) :=
   Classical.choose (coefficientQuotient_exists a M N)
 
 /-- Inverse image commutes with restriction of the scalar action through a ring map;
-the identification is uniquely normalized by the actual adjunction units.
-Source: Stacks, Tag 03D2. -/
+the identification is uniquely normalized by the actual adjunction units. -/
 theorem scalarIdentification_exists {X Y : Scheme.{u}} (f : X ⟶ Y)
     {R S : Rings Y} (a : R ⟶ S) (M : Modules S) :
     ∃! e : (inverse f R).obj ((restrict a).obj M) ≅
@@ -361,8 +367,7 @@ theorem scalarIdentification_exists {X Y : Scheme.{u}} (f : X ⟶ Y)
     (((he' V.unop s).trans (hp V.unop s).symm).trans
       (congrArg (p.val.app ((proEtaleBaseChange f).op.obj V)) hM).symm)
 
-/-- The unit-normalized scalar identification; uniqueness determines its data.
-Source: Stacks, Tag 03D2. -/
+/-- The unit-normalized scalar identification; uniqueness determines its data. -/
 noncomputable def scalarIdentification {X Y : Scheme.{u}} (f : X ⟶ Y)
     {R S : Rings Y} (a : R ⟶ S) (M : Modules S) :
     (inverse f R).obj ((restrict a).obj M) ≅
@@ -376,8 +381,7 @@ universe uC vC uD vD r
 set_option maxHeartbeats 500000 in
 -- Construct and sheafify the sectionwise bilinear pairing.
 /-- Pair two maps into module pushforwards, then use the sectionwise tensor universal
-property and module sheafification. The uniqueness is the same universal property.
-Source: Stacks Project, Modules on Sites, Section 03EK and Tag 03D7. -/
+property and module sheafification. The uniqueness is the same universal property. -/
 private theorem tensorPushforwardPairing_exists
     {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}
@@ -548,8 +552,7 @@ private theorem tensorPushforwardPairing_exists
 
 end TensorPairing
 
-/-- Existence and uniqueness of the module tensor comparison with its local normalization.
-Source: Stacks, Tag 03EL. -/
+/-- Existence and uniqueness of the module tensor comparison with its local normalization. -/
 theorem comparison_exists {X Y : Scheme.{u}} (f : X ⟶ Y) (R : Rings Y)
     (M N : Modules R) :
     ∃! s : (inverse f R).obj (tensor M N) ⟶
@@ -599,15 +602,13 @@ theorem comparison_exists {X Y : Scheme.{u}} (f : X ⟶ Y) (R : Rings Y)
       (inverseSection_unit f R M (op V) x)
       (inverseSection_unit f R N (op V) y)).symm
 
-/-- The canonical sigma, determined uniquely by its local pure-tensor formula.
-Source: Stacks, Tag 03EL. -/
+/-- The canonical sigma, determined uniquely by its local pure-tensor formula. -/
 noncomputable def comparison {X Y : Scheme.{u}} (f : X ⟶ Y) (R : Rings Y)
     (M N : Modules R) :
     (inverse f R).obj (tensor M N) ⟶ tensor ((inverse f R).obj M) ((inverse f R).obj N) :=
   Classical.choose (comparison_exists f R M N)
 
-/-- The tensor map in both variables is the composite of the two recorded factor maps.
-Source: Stacks, Section 03EK. -/
+/-- The tensor map in both variables is the composite of the two recorded factor maps. -/
 noncomputable def tensorMap {X : Scheme.{u}} {R : Rings X} {M M' N N' : Modules R}
     (a : M ⟶ M') (b : N ⟶ N') : tensor M N ⟶ tensor M' N' :=
   (siteSheafTensorRight N).map a ≫ siteSheafTensorSecondMap M' b
@@ -629,8 +630,7 @@ private theorem tensor_hom_ext {X : Scheme.{u}} {R : Rings X}
   | tmul x y => exact h U.unop x y
   | add t s ht hs => simp only [map_add, ht, hs]
 
-/-- Adjunction injectivity tests a module map on the images of original sections.
-Source: Stacks Project, Modules on Sites, Tag 03D2. -/
+/-- Adjunction injectivity tests a module map on the images of original sections. -/
 private theorem inverseModule_hom_ext {X Y : Scheme.{u}} (f : X ⟶ Y)
     {R : Rings Y} {M : Modules R} {K : Modules (inverseRing f R)}
     (p q : (inverse f R).obj M ⟶ K)
@@ -947,8 +947,7 @@ private theorem setComp_map_units {X Y Z : Scheme.{u}} (g : X ⟶ Y) (h : Y ⟶ 
 
 -- Elaborate the semilinear actions on the iterated pullback.
 /-- The module compositor is uniquely fixed by the images of original sections,
-with the canonical fibre-product associator written explicitly.
-Source: Stacks, Tags 03CB and 03D2. -/
+with the canonical fibre-product associator written explicitly. -/
 theorem moduleComp_exists {X Y Z : Scheme.{u}} (g : X ⟶ Y) (h : Y ⟶ Z)
     (R : Rings Z) (M : Modules R) :
     ∃! e : (inverse (g ≫ h) R).obj M ≅
@@ -1110,8 +1109,7 @@ theorem moduleComp_exists {X Y Z : Scheme.{u}} (g : X ⟶ Y) (h : Y ⟶ Z)
   intro V s
   exact (he' V s).trans (hp V s).symm
 
-/-- The canonical semilinear module compositor, from its unique unit characterization.
-Source: Stacks, Tags 03CB and 03D2. -/
+/-- The canonical semilinear module compositor, from its unique unit characterization. -/
 noncomputable def moduleComp {X Y Z : Scheme.{u}} (g : X ⟶ Y) (h : Y ⟶ Z)
     (R : Rings Z) (M : Modules R) :
     (inverse (g ≫ h) R).obj M ≅
@@ -1119,8 +1117,7 @@ noncomputable def moduleComp {X Y Z : Scheme.{u}} (g : X ⟶ Y) (h : Y ⟶ Z)
         ((inverse g (inverseRing h R)).obj ((inverse h R).obj M)) :=
   Classical.choose (moduleComp_exists g h R M)
 
-/-- The canonical ring identity comparison, from the inverse-image adjunction.
-Source: Stacks, Tag 00VE. -/
+/-- The canonical ring identity comparison, from the inverse-image adjunction. -/
 noncomputable def ringId {X : Scheme.{u}} (R : Rings X) : inverseRing (𝟙 X) R ≅ R :=
   ((conjugateIsoEquiv Adjunction.id
     (proEtaleSheafAdjunction (𝟙 X) CommRingCat.{u + 1})).symm
@@ -1140,8 +1137,7 @@ private theorem ringId_unit {X : Scheme.{u}} (R : Rings X)
 attribute [local irreducible] ringId
 
 -- Elaborate the identity scalar transport through the adjunction unit.
-/-- The module identity comparison is uniquely normalized by the identity unit.
-Source: Stacks, Tags 00VE and 03D2. -/
+/-- The module identity comparison is uniquely normalized by the identity unit. -/
 theorem moduleId_exists {X : Scheme.{u}} (R : Rings X) (M : Modules R) :
     ∃! e : (inverse (𝟙 X) R).obj M ≅ (restrict (ringId R).hom).obj M,
       ∀ (V : X.ProEt) (s : M.val.obj (op V)),
@@ -1239,14 +1235,12 @@ theorem moduleId_exists {X : Scheme.{u}} (R : Rings X) (M : Modules R) :
   intro V s
   exact (he' V s).trans (hp V s).symm
 
-/-- The canonical module identity comparison, from its unique unit characterization.
-Source: Stacks, Tag 00VE. -/
+/-- The canonical module identity comparison, from its unique unit characterization. -/
 noncomputable def moduleId {X : Scheme.{u}} (R : Rings X) (M : Modules R) :
     (inverse (𝟙 X) R).obj M ≅ (restrict (ringId R).hom).obj M :=
   Classical.choose (moduleId_exists R M)
 
-/-- Forget a ring morphism to its actual underlying sheaf map.
-Source: Stacks, Tag 00YV. -/
+/-- Forget a ring morphism to its actual underlying sheaf map. -/
 noncomputable abbrev ringMapSets {X : Scheme.{u}} {R S : Rings X} (a : R ⟶ S) :=
   (sheafCompose (ProEt.topology X) (CategoryTheory.forget CommRingCat.{u + 1})).map a
 
@@ -1635,7 +1629,6 @@ private theorem moduleSetsIdentification_naturality {X Y : Scheme.{u}} (f : X �
 
 /-- The specified module inverse image transports the ring and module operations along
 set inverse image.
-Source: Stacks Project, Sites, Tag 00YV, and Modules on Sites, Tag 03D2.
 Adapted from the proof attached to lem-sp-proetale-algebraic-inverse-image. -/
 private noncomputable def algebraicLift {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) :
@@ -2035,8 +2028,7 @@ private theorem comparison_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
 /-- The normalized pro-etale inverse-image tensor comparison: invertibility, local formula,
 joint naturality, coefficient change, set/ring/module composition, and the identity case.
 The existence and uniqueness assertions are comparison_exists and setComp_unique; the
-coefficient quotient and the semilinear identifications above have unique normalizations.
-Source: Stacks, Tags 03EK, 03EL and 09A5, with Tags 00VE, 00WH, 00WX and 03CB for coherence. -/
+coefficient quotient and the semilinear identifications above have unique normalizations. -/
 theorem inverseImage_tensor_comparison {X Y Z : Scheme.{u}} (g : X ⟶ Y) (h : Y ⟶ Z)
     (R : Rings Z) (M N : Modules R) :
     IsIso (comparison h R M N) ∧

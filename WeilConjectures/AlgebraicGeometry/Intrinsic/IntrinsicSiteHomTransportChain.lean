@@ -133,7 +133,9 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # Chain-level intrinsic Hom transport
 
-Source: Stacks Project, Tags 00YV, 08J7 and 0A95.
+## References
+
+* Stacks Project, Tags 00YV, 08J7 and 0A95
 -/
 
 @[expose] public section
@@ -241,9 +243,7 @@ private noncomputable def fixedHomRepresentative
     (DerivedCategory.quotientCompQhIso C).app (CochainComplex.internalHomObj L I)
 
 /-- The realized fixed-coefficient derived Hom is represented by the intrinsic
-Hom complex on the chosen K-injective representatives.
-
-Source: Stacks Project, Tags 00YV, 08J7 and 0A95. -/
+Hom complex on the chosen K-injective representatives. -/
 theorem intrinsicSiteHom_transport_chain (X : Scheme.{u}) (A : Type u)
     [CommRing A] [Finite A]
     (Lc Ic : CochainComplex

@@ -13,7 +13,11 @@ import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 
 /-! # Cofinal finite affine étale coverings
 
-Source: Section 59.51, Tag 03Q4 (label section-colimit), first paragraph.
+## References
+
+* Section 59.51, Tag 03Q4 (label section-colimit), first paragraph
+* Section 59.51, Tag 03Q4 (label section-colimit), first paragraph, using Topologies, Lemma Tag 0218
+  and Sites, Lemma Tag 0738
 -/
 
 @[expose] public section
@@ -29,9 +33,6 @@ set_option backward.isDefEq.respectTransparency false in
 For a quasi-compact and quasi-separated scheme, every jointly surjective étale
 family admits a finite affine étale refinement with quasi-compact pairwise
 fibre products.
-
-Source: Section 59.51, Tag 03Q4 (label section-colimit), first paragraph, using Topologies, Lemma
-Tag 0218 and Sites, Lemma Tag 0738.
 -/
 theorem etale_qcqs_cofinal_finite_affine_coverings
     {U : Scheme.{u}} [CompactSpace U] [QuasiSeparatedSpace U]

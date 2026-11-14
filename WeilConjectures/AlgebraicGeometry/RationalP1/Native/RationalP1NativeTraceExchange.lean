@@ -38,8 +38,7 @@ set_option allowUnsafeReducibility true in
 attribute [local semireducible] derivedScalars moduleObjectDerivedPullback
   moduleObjectDerivedPushforward
 
-/-- The finite exchange, with its native coefficient and shifted-line endpoints.
-Source: the defining exchange in the second rational P1 triangle. -/
+/-- The finite exchange, with its native coefficient and shifted-line endpoints. -/
 @[irreducible]
 def finiteSecondTraceExchange
     (l : ℕ) [Fact l.Prime] (E : PadicAlgCl.FiniteIntermediateField l)
@@ -59,8 +58,7 @@ def finiteSecondTraceExchange
         (spRationalTwist (diagonalSurface Y) l E)) ⟦(2 : ℤ)⟧) :=
   secondTraceExchange l (some E) k p hpl Y
 
-/-- The closure exchange, with its native coefficient and shifted-line endpoints.
-Source: the defining exchange in the second rational P1 triangle. -/
+/-- The closure exchange, with its native coefficient and shifted-line endpoints. -/
 @[irreducible]
 def closureSecondTraceExchange
     (l : ℕ) [Fact l.Prime] (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

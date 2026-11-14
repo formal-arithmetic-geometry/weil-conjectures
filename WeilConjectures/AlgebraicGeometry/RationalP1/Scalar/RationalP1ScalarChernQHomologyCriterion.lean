@@ -178,10 +178,7 @@ private theorem map_desc_left_iso
   rw [← he]
   infer_instance
 
-/-- The componentwise homological data needed by the abstract q biproduct criterion.
-
-Source: the positive twist and shift of the diagonal tower splitting, followed by restriction,
-completion, realization and scalar extension in the first rational P1 triangle. -/
+/-- The componentwise homological data needed by the abstract q biproduct criterion. -/
 theorem scalar_q_chern_homology_criterion
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

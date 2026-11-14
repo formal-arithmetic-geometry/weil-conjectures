@@ -13,7 +13,11 @@ import WeilConjectures.AlgebraicGeometry.Finite.FiniteLisseTowerSectionCover
 
 /-! # Compatible markings for a supplied algebraic stalk tower
 
-Source: Stacks Project, Tags 09BV and 09C6
+## References
+
+* Stacks Project, Tags 09BV and 09C6
+* Stacks Project, Tag 09BV (lemma-weird), the inverse system of isomorphism sheaves and its stable
+  images
 -/
 
 @[expose] public noncomputable section
@@ -31,10 +35,7 @@ set_option maxHeartbeats 800000 in
 /-- Separate local markings of a fixed normalized finite algebraic tower can be
 chosen compatibly on a common pro-etale cover. The tower K, its bounds and its
 normalization arrows are inputs; this theorem constructs only compatible markings.
-There is no Noetherian or immersion hypothesis.
-
-Source: Stacks Project, Tag 09BV (lemma-weird), the inverse system of isomorphism sheaves and its
-stable images. -/
+There is no Noetherian or immersion hypothesis. -/
 theorem lisse_tower_compatible_stalk_markings
     (X Y : Scheme.{u}) (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (M : AdicTower X d)

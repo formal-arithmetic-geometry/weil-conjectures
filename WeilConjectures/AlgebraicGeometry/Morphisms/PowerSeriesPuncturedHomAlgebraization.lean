@@ -17,7 +17,11 @@ import Mathlib.RingTheory.MvPowerSeries.Equiv
 /-!
 # Algebraization of compatible formal morphisms on a punctured power-series open
 
-Source: Stacks Project, Tags 0EY9, 0EKP and 0EL8
+## References
+
+* Stacks Project, Tags 0EY9, 0EKP and 0EL8
+* Stacks Project, Tag 0EY9, the comparison argument of Tag 0EKP and algebra-map verification of Tag
+  0EL8
 -/
 
 @[expose] public section
@@ -27,10 +31,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- Compatible maps on all quotient-power thickenings of finite étale covers
-algebraize on the power-series open.
-
-Source: Stacks Project, Tag 0EY9, the comparison argument of Tag 0EKP and algebra-map verification
-of Tag 0EL8 -/
+algebraize on the power-series open. -/
 theorem finiteEtale_powerSeries_punctured_formal_hom_algebraization
     (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]
     (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth (R := A) A)

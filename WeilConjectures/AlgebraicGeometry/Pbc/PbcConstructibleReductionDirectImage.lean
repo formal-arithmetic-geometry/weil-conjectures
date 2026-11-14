@@ -17,7 +17,10 @@ import Mathlib.GroupTheory.OrderOfElement
 set_option linter.privateModule false
 
 /-! # Canonical constructible reduction cohomology under proper direct image
-Source: Stacks Tags 095U and 0GL0.
+
+## References
+
+* Stacks Tags 095U and 0GL0
 -/
 
 @[expose] public noncomputable section

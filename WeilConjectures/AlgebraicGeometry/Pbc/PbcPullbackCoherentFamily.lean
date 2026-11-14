@@ -581,8 +581,7 @@ private theorem rationalPullComparisonShift (f : X ⟶ Y)
     exact ⟨K.obj, 𝟙 _, by infer_instance⟩
 
 /-- The actual rationalized completed-pullback operations form a coherent exact family,
-with the prescribed normalized scalar comparisons at every pair of stages.
-Source: rational transport and finite scalar extension. -/
+with the prescribed normalized scalar comparisons at every pair of stages. -/
 theorem pbcPullbackCoherentFamily (f : X ⟶ Y)
     (pres : ∀ (E : Padic.FiniteCoefficientFields l Ω)
       (K : pbcIntegralStage l Ω Y E),

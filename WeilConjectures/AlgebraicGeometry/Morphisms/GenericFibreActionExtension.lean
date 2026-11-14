@@ -16,7 +16,12 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.GenericFibreTorsorIdentity
 /-!
 # Extending the action on a finite étale generic-fibre torsor
 
-Source: Stacks Project, Tag 0BQM (full faithfulness), and Tag 0EYJ (extended action).
+## References
+
+* Stacks Project, Tag 0BQM (full faithfulness), and Tag 0EYJ (extended action)
+* Stacks Project, Tag 0BQM, proof (fully faithful restriction of finite étale covers of a normal
+  integral scheme to its generic point)
+* Tag 0EYJ, proof (extension of the action)
 -/
 
 @[expose] public section
@@ -28,10 +33,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- A given finite étale extension of a generic-fibre torsor inherits its action and torsor
-identity. This does not require a section or an invertible group order.
-
-Source: Stacks Project, Tag 0BQM, proof (fully faithful restriction of finite étale covers
-of a normal integral scheme to its generic point); Tag 0EYJ, proof (extension of the action). -/
+identity. This does not require a section or an invertible group order. -/
 theorem GaloisCover.exists_action_on_finiteEtale_extension {S C : Scheme.{u}}
     [IsIntegral S] (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))
     (c : C ⟶ S) [Smooth c] [GeometricallyConnected c]

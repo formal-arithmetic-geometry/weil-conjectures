@@ -17,7 +17,10 @@ import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionPu
 
 /-! # Pullback compatibility on scalar-computed representatives
 
-Source: Stacks Project, Tags 06YY, 0D6D and 07A6
+## References
+
+* Stacks Project, Tags 06YY, 0D6D and 07A6
+* Stacks 06YY, 0D6D and 07A6
 -/
 
 @[expose] public noncomputable section
@@ -616,8 +619,7 @@ attribute [local irreducible] complex_iso complex_comp_iso section_localization_
 
 -- Infer the fixed cochain instances for all eight coefficient categories together.
 /-- The normalized scalar and geometric squares commute at a cochain representative
-where the internal scalar computation counit is invertible.
-Source: Stacks 06YY, 0D6D and 07A6. -/
+where the internal scalar computation counit is invertible. -/
 theorem section_pull_transport_condition_on_computed (a : Λ ⟶ Λ') [IsMonHom a]
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (cX : ScalarSectionData a X) (cY : ScalarSectionData a Y)

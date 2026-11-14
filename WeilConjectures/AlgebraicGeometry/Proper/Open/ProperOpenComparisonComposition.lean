@@ -13,6 +13,10 @@ import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompAssoc
 
 /-!
 # Composition and identity of proper-open comparison maps
+
+## References
+
+* Stacks Project, Tag 0D6E
 -/
 
 @[expose] public section
@@ -120,7 +124,6 @@ private theorem comparison_comp
   simp [← hh]
 
 /-- The canonical composition identification for bounded below derived direct images.
-Source: Stacks Project, Tag 0D6E.
 It derives the fibre-product-pasting isomorphism `lowerStarComp` on injectives.
 The injective-preservation structure comes from the exact inverse-image adjunction. -/
 noncomputable def properOpenDirectImageCompIso (Λ : Type (u + 1)) [CommRing Λ]

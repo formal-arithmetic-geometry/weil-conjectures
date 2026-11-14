@@ -9,12 +9,15 @@ public import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearDerivedCalc
 
 /-! # Actual section carriers and normalized open-extension units
 
-Source: Stacks 03DI--03DJ, with the `OpenSystems` normalization identities.
-
 Carrier equalities are proved before specializing the coefficient systems. Explicit transports
 then keep the unit calculations from repeatedly unfolding the coefficient and sheafification
 constructions. All carrier maps, naturality statements, and the unit-generation criterion
 below are proved; this module introduces no postponed proof.
+
+## References
+
+* Stacks 03DI--03DJ, with the `OpenSystems` normalization identities
+* Stacks 03DI--03DJ and the normalized `OpenSystems.unit_evaluation` identity
 -/
 
 @[expose] public noncomputable section
@@ -452,8 +455,7 @@ private theorem localized_hom_ext_cast
   dsimp only [ordinaryUnitSection, over_type, pushforward_type, cast] at he
   exact he V x
 
-/-- Maps from an evaluated open extension are determined by the transported system unit.
-Source: Stacks 03DI--03DJ and the normalized `OpenSystems.unit_evaluation` identity. -/
+/-- Maps from an evaluated open extension are determined by the transported system unit. -/
 theorem open_level_hom_ext_raw
     (hO : ∀ (n : ℕ) N V x,
       HEq (((O.restrictionEvaluation n).hom.app N).val.app V x) x)

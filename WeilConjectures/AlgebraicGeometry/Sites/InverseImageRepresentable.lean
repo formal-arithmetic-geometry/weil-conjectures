@@ -12,7 +12,10 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 /-!
 # Inverse image of representable sheaves on the small étale site
 
-Source: Stacks Project, Étale Cohomology, Tag 03Q1, part (4), and Sites, Tag 04D3.
+## References
+
+* Stacks Project, Étale Cohomology, Tag 03Q1, part (4), and Sites, Tag 04D3
+* Stacks Project, Tag 03Q1 (4), and Tag 04D3
 -/
 
 @[expose] public section
@@ -25,7 +28,6 @@ namespace AlgebraicGeometry
 
 /-- Inverse image carries the representable sheaf of an étale `Y`-scheme to the
 representable sheaf of its base change, naturally in the étale `Y`-scheme.
-Source: Stacks Project, Tag 03Q1 (4), and Tag 04D3.
 
 Here `f.Etale` sends `V` to `V ×_Y X` with projection to `X`; symmetry of the
 scheme fibre product identifies this with `X ×_Y V` with its first projection.

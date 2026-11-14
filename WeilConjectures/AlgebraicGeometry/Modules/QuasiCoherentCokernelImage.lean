@@ -18,11 +18,14 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Cokernels and images of quasi-coherent modules
 
-Source: Stacks Project, Schemes, Tags 01IC, 01IB, 01LB; Modules, Tag 01AH.
-
 The categorical cokernel is the sheafified presheaf quotient (Mathlib's module
 sheafification adjunction and colimit construction). The abelian image is its kernel;
 the local-image formula below identifies it with the subsheaf in the node.
+
+## References
+
+* Stacks Project, Schemes, Tags 01IC, 01IB, 01LB
+* Modules, Tag 01AH
 -/
 
 @[expose] public section
@@ -46,8 +49,7 @@ private theorem surjective_affine_of_epi {X : Scheme.{u}} {M N : X.Modules}
     (cechAcyclicOnAffines_of_isQuasicoherent (kernel f)) hU
 
 /-- Cokernels and local images of maps of quasi-coherent modules are quasi-coherent,
-and their sections on affine opens are the module cokernel and image.
-Source: Stacks Project, Schemes, Tags 01IC, 01IB, 01LB; Modules, Tag 01AH. -/
+and their sections on affine opens are the module cokernel and image. -/
 theorem quasiCoherent_cokernel_image {X : Scheme.{u}} {F G : X.Modules}
     (φ : F ⟶ G) [F.IsQuasicoherent] [G.IsQuasicoherent] :
     Mono (Abelian.image.ι φ) ∧

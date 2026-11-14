@@ -16,7 +16,10 @@ import WeilConjectures.AlgebraicGeometry.FiniteEtaleLiftingComplete
 
 /-! # Lifting a quotient cover before punctured comparison
 
-Source: Stacks Project, Tags 09ZL and 0ALJ, as used in Tag 0BLS.
+## References
+
+* Stacks Project, Tags 09ZL and 0ALJ, as used in Tag 0BLS
+* Stacks Project, Tag 0BLS, complete-case lifting paragraph, using Tags 09ZL and 0ALJ
 -/
 
 @[expose] public section
@@ -70,10 +73,7 @@ private theorem base_change_iso
     (by simpa using he.symm) (by simp))
   exact ⟨a, by simp [a]⟩
 
-/-- A finite etale quotient extension gives a completed cover agreeing on the quotient.
-
-Source: Stacks Project, Tag 0BLS, complete-case lifting paragraph, using Tags 09ZL
-and 0ALJ. -/
+/-- A finite etale quotient extension gives a completed cover agreeing on the quotient. -/
 theorem exists_completed_cover_with_quotient_iso
     (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A]
     (f : A) (hf : f ∈ IsLocalRing.maximalIdeal A)

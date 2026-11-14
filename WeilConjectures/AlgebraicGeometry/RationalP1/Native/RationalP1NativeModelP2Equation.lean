@@ -43,8 +43,7 @@ attribute [local irreducible] derivedPullIso derivedPushHom derivedComapLowerSta
   firstProjection square upperStarFromPoint pullback limit
   DerivedCategory.monoidalClosed Mod.monoidalClosed CondensedRing.upperStar
 
-/-- Scalar transport through the second native normalized model, for any input z.
-Source: diagonal coefficient changes (2)--(3), normalization of the scalar push mate. -/
+/-- Scalar transport through the second native normalized model, for any input z. -/
 theorem native_p2_model_equation
     (l : ℕ) [Fact l.Prime] (E : PadicAlgCl.FiniteIntermediateField l)
     (Y : Scheme.{u})

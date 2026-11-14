@@ -14,7 +14,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.DominantFunctionFieldLimit
 /-!
 # Generic fibres of a cartesian system of integral families
 
-Source: Stacks Project, Tag 0EZJ, generic-fibre limit assertion.
+## References
+
+* Stacks Project, Tag 0EZJ, generic-fibre limit assertion
+* Stacks Project, Tag 0EZJ, assertion that the generic fibre is the limit of stage generic fibres,
+  with its comparison maps spelled out
 -/
 
 @[expose] public section
@@ -25,10 +29,7 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Form the generic-fibre limit system, independently of any section or normality.
-
-Source: Stacks Project, Tag 0EZJ, assertion that the generic fibre is the limit of
-stage generic fibres, with its comparison maps spelled out. -/
+/-- Form the generic-fibre limit system, independently of any section or normality. -/
 theorem exists_cartesian_family_generic_limit {I : Type u} [SmallCategory I]
     [IsCofiltered I] {S C : Scheme.{u}} [IsIntegral S]
     (X Y : I ⥤ Scheme.{u}) [∀ i, IsIntegral (X.obj i)]

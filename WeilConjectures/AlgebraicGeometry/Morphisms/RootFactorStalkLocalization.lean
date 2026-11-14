@@ -10,7 +10,12 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.AdjoinRoot
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 
-/-! Base localization of a single root factor at a specified point. -/
+/-! Base localization of a single root factor at a specified point.
+
+## References
+
+* Stacks Project, Tags 0EYH and 0EYI, base change of the affine root factors
+-/
 
 @[expose] public section
 
@@ -73,9 +78,7 @@ private theorem spec_stalkMap_toStalk (R S : CommRingCat.{u}) (i : R →+* S)
   subst q
   exact stalkMap_toStalk_apply (CommRingCat.ofHom i) w a
 
-/-- Localization of a root algebra at a prime commutes with localization of its base.
-
-Source: Stacks Project, Tags 0EYH and 0EYI, base change of the affine root factors. -/
+/-- Localization of a root algebra at a prime commutes with localization of its base. -/
 theorem rootFactor_stalk_localization (R : CommRingCat.{u}) (f : R)
     (d : ℕ) (hd : 0 < d)
     (q : Spec (CommRingCat.of

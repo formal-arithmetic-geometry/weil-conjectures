@@ -15,7 +15,11 @@ import all WeilConjectures.AlgebraicGeometry.Ordinary.OrdinaryRestrictionPullbac
 import all WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChangeAdjunctionSupplement
 
 /-! Scalar restriction and the ordinary ringed inverse-image square.
-Source: Stacks Project, Tags 03D7, 03D8 and 0D6D. -/
+
+## References
+
+* Stacks Project, Tags 03D7, 03D8 and 0D6D
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false

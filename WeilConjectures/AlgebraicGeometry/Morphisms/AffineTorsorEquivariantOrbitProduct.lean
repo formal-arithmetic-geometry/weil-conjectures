@@ -9,7 +9,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.Morphisms.AffineTorsorEquivariantAlgebra
 import Mathlib.Data.Fintype.Card
 
-/-! # Orbit decomposition of equivariant functions -/
+/-! # Orbit decomposition of equivariant functions
+
+## References
+
+* Stacks Project, Tag 03SF, classification by finite group sets
+-/
 
 @[expose] public section
 universe u
@@ -17,9 +22,7 @@ set_option autoImplicit false
 namespace AlgebraicGeometry.Scheme
 
 /-- Evaluation at one representative of each orbit identifies equivariant functions
-with a product of stabilizer fixed rings.
-
-Source: Stacks Project, Tag 03SF, classification by finite group sets. -/
+with a product of stabilizer fixed rings. -/
 theorem affine_torsor_equivariant_orbit_product
     (H C : Type u) [CommRing H] [CommRing C] [Algebra H C]
     (G : Type u) [Group G] (ρ : G → C →ₐ[H] C)

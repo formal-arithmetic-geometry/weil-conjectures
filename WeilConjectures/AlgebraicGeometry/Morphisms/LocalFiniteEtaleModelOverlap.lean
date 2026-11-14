@@ -20,7 +20,10 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteEtaleStalkNeighbourhood
 /-!
 # Local extension with an overlap comparison
 
-Source: Stacks Project, Tag 0EYJ.
+## References
+
+* Stacks Project, Tag 0EYJ
+* Stacks Project, Tag 0EYJ, local claim and spreading, and Tags 0BQ5 and 0EY3
 -/
 
 @[expose] public section
@@ -32,9 +35,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- A finite étale model extends near a point outside the original open, with an
-isomorphism of the two covers on the overlap. The neighbourhood need not contain U.
-
-Source: Stacks Project, Tag 0EYJ, local claim and spreading, and Tags 0BQ5 and 0EY3 -/
+isomorphism of the two covers on the overlap. The neighbourhood need not contain U. -/
 theorem GaloisCover.exists_local_finiteEtale_model_overlap {S C : Scheme.{u}} [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]
     (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))

@@ -23,7 +23,13 @@ import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 
-/-! # Degree-zero fibre cohomology of a descended line bundle -/
+/-! # Degree-zero fibre cohomology of a descended line bundle
+
+## References
+
+* Stacks Project, Tag 0BF2, the displayed fibre comparison
+* Tags 0BF0 and 0B91(2)
+-/
 
 @[expose] public section
 
@@ -75,8 +81,7 @@ private theorem appTop_isIso_of_tensor_unit {A B : Scheme.{v}} (a : A ⟶ B)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The degree-zero residue cohomology of a descended line bundle is the residue field.
-Source: Stacks Project, Tag 0BF2, the displayed fibre comparison; Tags 0BF0 and 0B91(2). -/
+/-- The degree-zero residue cohomology of a descended line bundle is the residue field. -/
 theorem picard_directImage_fibre_cohomology_zero
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

@@ -361,13 +361,15 @@ import Mathlib.CategoryTheory.Limits.Shapes.ZeroObjects
 /-!
 # Integral constructibility under immersions and generation by strata
 
-Source: Stacks Project, Tags 09AA, 09BM, 09BP.
-
 The coefficient ring is the existing continuous condensed valuation ring. Local complex
 models are pulled back from finite free complexes on the point, so their differentials
 are scalar matrices over the valuation ring, rather than arbitrary sheaf morphisms.
 Generation is expressed by membership in every isomorphism-closed full subcategory
 satisfying all three two-out-of-three conditions and containing the specified generators.
+
+## References
+
+* Stacks Project, Tags 09AA, 09BM, 09BP
 -/
 
 @[expose] public section

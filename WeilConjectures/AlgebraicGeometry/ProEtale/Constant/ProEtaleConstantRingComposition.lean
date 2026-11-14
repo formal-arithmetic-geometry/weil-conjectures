@@ -35,12 +35,15 @@ public import WeilConjectures.AlgebraicGeometry.Support.SupportComparisonPullbac
 /-!
 # Composition of canonical constant-ring maps on pro-etale sites
 
-Source: Stacks Project, Tag 09A5 (Functoriality of the pro-etale site), together with Tags 0H7J and
-00WH (constant sheaves and sheafification).
-
 The inverse-image comparison is the published adjunction mate of the canonical
 fibre-product associativity comparison on direct images. The coefficient maps are
 exactly the adjuncts of the published constant-section maps.
+
+## References
+
+* Stacks Project, Tag 09A5 (Functoriality of the pro-etale site), together with Tags 0H7J and 00WH
+  (constant sheaves and sheafification)
+* Stacks Project, Tag 09A5, with Tags 0H7J and 00WH
 -/
 
 @[expose] public section
@@ -123,8 +126,7 @@ private theorem rho_comp {T Y X : Scheme.{u}} (a : Y ⟶ T) (b : X ⟶ Y)
   change 𝟙 _ ≫ _ = _ at hn
   exact hn.symm.trans (Category.id_comp _)
 
-/-- The canonical constant-ring coefficient maps respect composition of scheme morphisms.
-Source: Stacks Project, Tag 09A5, with Tags 0H7J and 00WH. -/
+/-- The canonical constant-ring coefficient maps respect composition of scheme morphisms. -/
 theorem proEtaleCoefficientInverseImageMap_comp
     {Z W V : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V)
     (A : Type u) [CommRing A] [Finite A] :

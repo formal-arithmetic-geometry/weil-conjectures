@@ -13,7 +13,11 @@ import WeilConjectures.AlgebraicGeometry.Proj.ProjScalarExtensionTwistUnit
 
 /-! # ProjScalarExtensionTwistFractionLaws
 
-Source: Stacks Project, Constructions, Tags 01N2, 01MY and 01MZ. -/
+## References
+
+* Stacks Project, Constructions, Tags 01N2, 01MY and 01MZ
+* Stacks Project, Constructions, Tags 01MY, 01N2 and 01MZ
+-/
 
 @[expose] public section
 
@@ -28,8 +32,7 @@ open AlgebraicGeometry.Scheme.Modules
 namespace AlgebraicGeometry.Proj
 
 /-- A normalized comparison has the uniqueness, product, unit and identity laws.
-The homogeneous-section law is proved directly in the importing item, using denominator one.
-Source: Stacks Project, Constructions, Tags 01MY, 01N2 and 01MZ. -/
+The homogeneous-section law is proved directly in the importing item, using denominator one. -/
 theorem scalarExtension_twist_fraction_laws
     {R S A B : Type u} [CommRing R] [CommRing S] [CommRing A] [CommRing B]
     [Algebra R A] [Algebra S B]

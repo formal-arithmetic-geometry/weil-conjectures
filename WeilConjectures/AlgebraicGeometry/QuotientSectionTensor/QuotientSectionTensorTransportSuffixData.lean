@@ -8,7 +8,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionTensorData
 import WeilConjectures.AlgebraicGeometry.IntegralResidueDerivedMonoidal
 
-/-! # Flat-term representative conjugation for quotient section tensors -/
+/-! # Flat-term representative conjugation for quotient section tensors
+
+## References
+
+* Stacks, Cohomology on Sites, Tags 06YY and 07A4
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -54,7 +59,6 @@ attribute [local irreducible] ModuleRingedComparison.tensor tensorComparison qTe
   InternalAbelianSheafModule.sectionModuleEquivalence SheafOfModules.monoidalCategory
 
 /-- The common final map in the section scalar tensor comparison.
-Source: Stacks, Cohomology on Sites, Tags 06YY and 07A4.
 Compose the tensor of the two localized section equivalence maps, the tensor of
 the scalar localization counits, and the section tensor localization map. Every
 factor is the specified existing map; this definition makes no choices. -/

@@ -20,7 +20,10 @@ import WeilConjectures.AlgebraicGeometry.Finite.Type.FiniteTypeTorsionCohomologi
 /-!
 # Uniform torsion cohomology bound for proper geometric fibres
 
-Source: Stacks Project, paragraph (1).
+## References
+
+* Stacks Project, paragraph (1)
+* Stacks Project, Tags 0A3V, 00P3 and 0F0V
 -/
 
 @[expose] public section
@@ -34,9 +37,7 @@ namespace AlgebraicGeometry
 /-- A proper morphism with quasi-compact target has a uniform cohomology bound for
 sectionwise torsion abelian sheaves on all its geometric fibres. Each section has its
 own nonzero integer annihilator; no common annihilator is part of the hypothesis.
-Empty bases and empty fibres are included.
-
-Source: Stacks Project, Tags 0A3V, 00P3 and 0F0V. -/
+Empty bases and empty fibres are included. -/
 theorem exists_proper_geometricFibre_torsion_cohomology_bound
     {X Y : Scheme.{u}} (p : X ⟶ Y) [IsProper p] [CompactSpace Y] :
     ∃ c : ℕ, ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω]

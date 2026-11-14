@@ -21,7 +21,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.SectionFiniteEtaleGenericSpli
 
 /-! # Splitting the zero slice of the fixed formal test
 
-Source: Stacks Project, Tags 0EYJ and 0EY9.
+## References
+
+* Stacks Project, Tags 0EYJ and 0EY9
+* Stacks Project, Tag 0EYJ (the rational section point and extended action)
+* Tag 0BQM (full faithfulness over a normal integral base)
 -/
 
 @[expose] public section
@@ -110,10 +114,7 @@ set_option backward.isDefEq.respectTransparency.types true in
 set_option maxHeartbeats 1800000 in
 -- The nested normalization and iterated pullbacks require extra elaboration heartbeats.
 /-- The normalization test is split on the zero slice of its punctured open.
-This only gives an isomorphism after pulling back to the zero slice.
-
-Source: Stacks Project, Tag 0EYJ (the rational section point and extended action);
-Tag 0BQM (full faithfulness over a normal integral base). -/
+This only gives an isomorphism after pulling back to the zero slice. -/
 theorem GaloisCover.stalk_normalization_formal_zero_slice_split {S C : Scheme.{u}}
     [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]

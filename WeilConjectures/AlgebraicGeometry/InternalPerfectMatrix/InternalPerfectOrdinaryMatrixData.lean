@@ -137,8 +137,7 @@ def integralRegular (W : Scheme.{u}) :
         Mod.regularExtensionIso (FiniteConstantModel.scalarToContinuous (A l E))) ≪≫
     mapRegular (upperStarFromPoint W) _
 
-/-- Realize those same bases in the integral coefficient module category.
-Source: finite constant free realization. -/
+/-- Realize those same bases in the integral coefficient module category. -/
 def integralIso (W : Scheme.{u})
     (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ)
     (hfree : ∀ i, Module.Finite (A l E) (P.X i) ∧ Module.Free (A l E) (P.X i))
@@ -160,8 +159,7 @@ def integralIso (W : Scheme.{u})
         ModuleCat.of (A l E) (ULift.{u + 1} (A l E)))).symm) ≪≫
     F.mapBiproduct _ ≪≫ biproduct.mapIso (fun _ ↦ integralRegular l E W)
 
-/-- The quotient basis is the extension of the fixed integral basis.
-Source: ordinary quotient extension of finite sums. -/
+/-- The quotient basis is the extension of the fixed integral basis. -/
 def quotientIso (W : Scheme.{u})
     (P : CochainComplex (ModuleCat.{u} (A l E)) ℤ)
     (hfree : ∀ i, Module.Finite (A l E) (P.X i) ∧ Module.Free (A l E) (P.X i))

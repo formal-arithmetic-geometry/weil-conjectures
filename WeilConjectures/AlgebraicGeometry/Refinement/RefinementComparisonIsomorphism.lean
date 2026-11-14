@@ -44,6 +44,11 @@ The recorded witness uses modules over the continuous-function coefficient sheaf
 The recorded compact-support candidate uses fixed scalar module sheaves. We evaluate
 it on the canonical inverse realization of the same object. The witness is transported
 through that equivalence using its unit and the exact-functor composition isomorphism.
+
+## References
+
+* Stacks 0F7I, part (b)
+* Stacks 0F7I, canonical inclusion of D-plus
 -/
 
 @[expose] public noncomputable section
@@ -183,8 +188,7 @@ def refinementComparisonIsomorphism (K₀ : Type u) [Field K₀]
 variable (A : Type (u + 1)) [CommRing A] [Finite A]
 
 /-- Transport proper direct image by equality of scheme maps, without comparing
-large derived functor structures when the equality transport is evaluated.
-Source: equality induction; the original refinement transport. -/
+large derived functor structures when the equality transport is evaluated. -/
 def properTransportDirectImageCongr {X Y : Scheme.{u}} {f g : X ⟶ Y} (h : f = g) :
     (lowerStar (ModuleCat.{u + 1} A) f).rightDerivedFunctorPlus ≅
       (lowerStar (ModuleCat.{u + 1} A) g).rightDerivedFunctorPlus := by
@@ -199,8 +203,7 @@ theorem properTransportDirectImageCongr_rfl {X Y : Scheme.{u}} (f : X ⟶ Y) :
 
 /-- The actual refinement arrow on bounded-below comparison inputs: the direct-image
 compositor followed by the proper image of the inverse specified proper/open arrow.
-It is meaningful for every refinement, including noncartesian refinements.
-Source: Stacks 0F7I, part (b). -/
+It is meaningful for every refinement, including noncartesian refinements. -/
 def properTransportRefinementPlus {X Y : Scheme.{u}} {f : X ⟶ Y}
     {c d : Compactification f} (r : c.Refinement d)
     (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) :=
@@ -213,8 +216,7 @@ def properTransportRefinementPlus {X Y : Scheme.{u}} {f : X ⟶ Y}
     (lowerStar (ModuleCat.{u + 1} A) d.g).rightDerivedFunctorPlus.mapIso
       (properOpenProEtaleIsoPlus A r.hom c.i d.i r.i_hom L).symm
 
-/-- The same actual refinement arrow in the ambient derived category.
-Source: Stacks 0F7I, canonical inclusion of D-plus. -/
+/-- The same actual refinement arrow in the ambient derived category. -/
 def properTransportRefinement {X Y : Scheme.{u}} {f : X ⟶ Y}
     {c d : Compactification f} (r : c.Refinement d)
     (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) :=

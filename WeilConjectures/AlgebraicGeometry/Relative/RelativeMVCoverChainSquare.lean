@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.Relative.RelativeMVDirectImageHomotopyC
 import WeilConjectures.AlgebraicGeometry.Derived.DerivedPullbackConeSquareTransposition
 /-! # A strict relative cover comparison before cylinder replacement
 
-Source: Stacks Project, Cohomology, Tags 08BV, 08HZ, 08FE and 08HY.
+## References
+
+* Stacks Project, Cohomology, Tags 08BV, 08HZ, 08FE and 08HY
 -/
 
 @[expose] public section
@@ -20,9 +22,7 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-/-- Chain representatives for the unrestricted relative Mayer--Vietoris square.
-Source: Stacks Project, Cohomology, Tags 08BV, 08HZ, 08FE and 08HY.
--/
+/-- Chain representatives for the unrestricted relative Mayer--Vietoris square. -/
 theorem relativeMV_cover_chain_square
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

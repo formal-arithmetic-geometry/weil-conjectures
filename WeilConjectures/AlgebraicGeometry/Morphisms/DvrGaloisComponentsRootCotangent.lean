@@ -18,16 +18,17 @@ import WeilConjectures.RingTheory.PrincipalCotangentSpan
 
 /-! # The first-order tame root calculation for Galois field components
 
-Source: Stacks Project, Tags 09EV, 09EB, 0BRM, 09E7 and 0307 -/
+## References
+
+* Stacks Project, Tags 09EV, 09EB, 0BRM, 09E7 and 0307
+-/
 
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- A root extension spanning all component degrees spans the normalized cotangent ideal.
-
-Source: Stacks Project, Tags 09EV, 09EB, 0BRM, 09E7 and 0307 -/
+/-- A root extension spanning all component degrees spans the normalized cotangent ideal. -/
 theorem dvr_galois_components_root_cotangent
     (B : CommRingCat.{u}) [IsDomain B] [IsDiscreteValuationRing B]
     (pi : B) (hpi : Irreducible pi) (n : ℕ) (hnpos : 0 < n)

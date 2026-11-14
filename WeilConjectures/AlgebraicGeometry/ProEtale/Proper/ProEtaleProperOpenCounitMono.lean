@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Proper.ProEtaleProperOpenCouni
 
 /-! Monomorphism half of the proper/open pro-etale counit support argument.
 
-Source: Stacks, Tags 09AE and 09AG.
+## References
+
+* Stacks, Tags 09AE and 09AG
 -/
 
 @[expose] public section

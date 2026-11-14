@@ -131,11 +131,15 @@ import WeilConjectures.CategoryTheory.SheavesAlgebraicStructuresAbelian
 /-!
 # Supported sections and flasqueness for a pro-etale open-closed pair
 
-Source: Stacks Project, Tags 03DA, 09BN and 09AH.
-
 The existing `finiteSupportedSections` and `finiteClosedUpperShriek` give the kernel functor
 and its closed inverse image. Constant-coefficient module sheaves are presented as
 sheaves valued in `ModuleCat`, without a constructibility condition.
+
+## References
+
+* Stacks Project, Tags 03DA, 09BN and 09AH
+* Stacks Tag 09AH
+* Stacks Tag 03DA
 -/
 
 @[expose] public section
@@ -150,7 +154,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- The canonical comparison `G_Z ⟶ s_*s^!`, obtained by applying the closed
 adjunction unit to the supported kernel. It is defined even when the open complement
-is not quasi-compact. Source: Stacks Tag 09AH. -/
+is not quasi-compact. -/
 noncomputable def finiteSupportedClosedComparison (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] {X Z U : Scheme.{u}} (s : Z ⟶ X) (j : U ⟶ X) :
     finiteSupportedSections Λ j ⟶
@@ -167,8 +171,7 @@ private local instance moduleSheaf_colimits (Λ : Type (u + 1)) [CommRing Λ]
     GrothendieckTopology.isGrothendieckAbelian_sheaf_proEtTopology _ X
   exact IsGrothendieckAbelian.hasColimits _
 
-/-- Both the supported-kernel functor and its closed inverse image are left exact.
-Source: Stacks Tag 03DA. -/
+/-- Both the supported-kernel functor and its closed inverse image are left exact. -/
 theorem finiteSupportedSections_leftExact (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Z U : Scheme.{u}} (s : Z ⟶ X) [IsClosedImmersion s]
     (j : U ⟶ X) [IsOpenImmersion j]
@@ -192,7 +195,7 @@ theorem finiteSupportedSections_leftExact (Λ : Type (u + 1)) [CommRing Λ] [Fin
   exact ⟨hG, comp_preservesFiniteLimits _ _⟩
 
 /-- With quasi-compact open complement, the specified natural comparison is an
-isomorphism. Source: Stacks Tag 09AH. -/
+isomorphism. -/
 theorem finiteSupportedClosedComparison_isIso (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] {X Z U : Scheme.{u}} (s : Z ⟶ X) [IsClosedImmersion s]
     (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]

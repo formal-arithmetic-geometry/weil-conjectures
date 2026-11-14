@@ -20,7 +20,10 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.SmoothLocalDepthTwoFinitePuri
 /-!
 # Extending a finite etale cover across a depth-two local fibre
 
-Source: Stacks Project, Tags 0EYB and 0EY6
+## References
+
+* Stacks Project, Tags 0EYB and 0EY6
+* Stacks Project, Tag 0EYB, Lemma 58.26.3, and Tag 0EY6, Lemma 58.21.5
 -/
 
 @[expose] public section
@@ -53,9 +56,7 @@ private theorem depth_le_of_ringEquiv {A B : Type*}
     rw [← IsLocalRing.map_ringEquiv_maximalIdeal e]
     exact Ideal.mem_map_of_mem e (hmem a ha)
 
-/-- A fibrewise dense open containing every nonclosed fibre admits finite etale extension.
-
-Source: Stacks Project, Tag 0EYB, Lemma 58.26.3, and Tag 0EY6, Lemma 58.21.5 -/
+/-- A fibrewise dense open containing every nonclosed fibre admits finite etale extension. -/
 theorem exists_finite_etale_extension_of_local_depth_two
     (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]
     {L : Scheme.{u}} (q : L ⟶ Spec (.of A)) [Smooth q]

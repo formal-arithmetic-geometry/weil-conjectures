@@ -72,7 +72,12 @@ import Mathlib.CategoryTheory.Sites.Pullback
 
 /-! # Inverse image of continuous coefficient rings
 
-Source: Bhatt--Scholze, Section 6.8; Stacks Project, Tag 03D2.
+## References
+
+* Bhatt--Scholze, Section 6.8
+* Stacks Project, Tag 03D2
+* Bhatt--Scholze, Section 6.8, continuous coefficients
+* Stacks Tag 03D2
 -/
 
 @[expose] public section
@@ -338,8 +343,7 @@ private theorem ringAdjunct_isIso {X Y : Scheme.{u}} (f : Y ⟶ X)
   exact isIso_of_reflects_iso
     (((Scheme.proEtaleSheafAdjunction f CommRingCat.{u + 1}).homEquiv _ _).symm h) UR
 
-/-- The canonical coefficient adjunct is invertible for totally disconnected rings.
-Source: Bhatt--Scholze, Section 6.8, continuous coefficients; Stacks Tag 03D2 -/
+/-- The canonical coefficient adjunct is invertible for totally disconnected rings. -/
 theorem continuousCoefficientInverseImageMap_isIso {X Y : Scheme.{u}} (f : Y ⟶ X)
     (T : Type u) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T]
     [TotallyDisconnectedSpace T] : IsIso (continuousCoefficientInverseImageMap f T) := by

@@ -16,7 +16,11 @@ import Mathlib.Algebra.Homology.TotalComplexSymmetry
 import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
 
 /-! # From injective row descent to bounded-below injective descent
-Source: Stacks Project, Tag 09A2, comparison with a bounded-below injective complex.
+
+## References
+
+* Stacks Project, Tag 09A2, comparison with a bounded-below injective complex
+* Stacks Project, Tags 09A2 and 01GE
 -/
 
 @[expose] public section
@@ -35,8 +39,7 @@ set_option maxHeartbeats 600000 in
 -- The comparison expands the evaluation, single-complex and section functors.
 set_option backward.isDefEq.respectTransparency false in
 /-- Exact descent for individual injective sheaves implies descent for a
-bounded-below complex of injective sheaves.
-Source: Stacks Project, Tags 09A2 and 01GE. -/
+bounded-below complex of injective sheaves. -/
 theorem hypercoverAugmentation_quasiIso_of_injective_rows
     (hrows : ∀ (I : ringedSiteModules.{u + 1}
         ((sheafCompose (topology X)

@@ -19,12 +19,15 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.F
 /-!
 # Normalized reconstruction from two successive support conditions
 
-Source: Stacks Project, Pro-etale Cohomology, Tag 09AH; Categories, Tag 0037.
-
 The statement records the canonical reconstruction of a module sheaf supported on a
 closed subscheme and then on an open stratum.  The underlying ring sheaf is transported
 to additive sheaves only to use the published module-object realization; no coefficient
 or functor is chosen privately.
+
+## References
+
+* Stacks Project, Pro-etale Cohomology, Tag 09AH
+* Categories, Tag 0037
 -/
 
 -- After pruning, this module only keeps private declarations.

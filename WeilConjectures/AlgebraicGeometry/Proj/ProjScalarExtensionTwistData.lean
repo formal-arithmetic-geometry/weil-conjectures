@@ -31,7 +31,12 @@ public import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 
 The two original definitions of the scalar-extension twist comparison, separated from
 its existence proof so that the chart construction and fraction calculus can be imported
-independently. Source: Stacks Project, Tags 01MY and 01N2.
+independently.
+
+## References
+
+* Stacks Project, Tags 01MY and 01N2
+* Stacks 01MY
 -/
 
 @[expose] public section
@@ -46,8 +51,7 @@ open AlgebraicGeometry.Scheme.Modules
 
 namespace AlgebraicGeometry.Proj
 
-/-- Apply a twist comparison to the actual pullback section `1 ⊗ s`.
-Source: Stacks 01MY. -/
+/-- Apply a twist comparison to the actual pullback section `1 ⊗ s`. -/
 noncomputable def scalarExtensionTwistSection
     {A B : Type u} [CommRing A] [CommRing B]
     {σ τ : Type u} [SetLike σ A] [AddSubgroupClass σ A]
@@ -62,7 +66,7 @@ noncomputable def scalarExtensionTwistSection
 /-- The normalized fraction rule for the scalar-extension comparison. A section `s=a/b`
 is specified by `b*s=a` where `b` is invertible. For `b=f^m`, this is exactly
 `(a/f^m) ⊗ c ↦ c*ψ(a)/ψ(f)^m`. All opens are allowed, so the rule includes further
-standard-open restrictions. Source: Stacks 01MY. -/
+standard-open restrictions. -/
 def IsScalarExtensionTwistComparison
     {A B : Type u} [CommRing A] [CommRing B]
     {σ τ : Type u} [SetLike σ A] [AddSubgroupClass σ A]

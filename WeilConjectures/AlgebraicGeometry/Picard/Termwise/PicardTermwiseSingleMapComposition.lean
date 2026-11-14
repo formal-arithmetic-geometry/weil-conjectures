@@ -13,7 +13,10 @@ import WeilConjectures.AlgebraicGeometry.PerfectHomCochainCounit
 
 /-! # Composition of the canonical termwise single map
 
-Source: Stacks Project, Tags 06YJ and 0D5S.
+## References
+
+* Stacks Project, Tags 06YJ and 0D5S
+* Stacks Project, Tag 06YJ
 -/
 
 @[expose] public section
@@ -99,8 +102,7 @@ variable [∀ Y : Scheme.{v},
   HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]
 
 /-- The pinned single pullback map, retaining the tensor-pulled module as its target.
-This is a real composite of the derived counit and canonical single comparisons.
-Source: Stacks Project, Tag 06YJ. -/
+This is a real composite of the derived counit and canonical single comparisons. -/
 def picardTermwiseSingleMap {W T : Scheme.{v}} (t : T ⟶ W) (M : W.Modules) :
     (derivedPullback t).obj ((DerivedCategory.singleFunctor
       (SheafOfModules.{v} (moduleRings W.toRingedSpace)) 0).obj M) ⟶
@@ -163,8 +165,7 @@ attribute [local irreducible] picardTermwiseCounit picardTermwiseSingleMap
 set_option cleanup.letToHave false in
 -- The pinned counit and composition choices have large dependent types.
 /-- The canonical maps on arbitrary singles satisfy the composition counit equation.
-No flatness, invertibility, or choice of a comparison family is asserted here.
-Source: Stacks Project, Tags 06YJ and 0D5S. -/
+No flatness, invertibility, or choice of a comparison family is asserted here. -/
 theorem picardTermwiseSingleMap_composition
     {W T T' : Scheme.{v}} (i : T' ⟶ T) (t : T ⟶ W) (t' : T' ⟶ W)
     (ht : i ≫ t = t') (M : W.Modules) :

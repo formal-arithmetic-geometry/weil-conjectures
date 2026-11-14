@@ -18,7 +18,10 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.RegularLocalSurfaceDepthTwoFl
 /-!
 # A finite flat model in regular local dimension two
 
-Source: Stacks Project, Tag 0BMA, dimension-two paragraph.
+## References
+
+* Stacks Project, Tag 0BMA, dimension-two paragraph
+* Stacks Project, Tag 0BMA, dimension-two case, and Tag 0BM9
 -/
 
 @[expose] public section
@@ -58,9 +61,7 @@ private theorem depth_two_of_regular_local (R : Type u) [CommRing R]
     exact WithBot.coe_le_coe.mp hdim
   exact htwo.trans hdepth
 
-/-- A punctured finite etale cover has a finite flat model with depth-two boundary stalks.
-
-Source: Stacks Project, Tag 0BMA, dimension-two case, and Tag 0BM9. -/
+/-- A punctured finite etale cover has a finite flat model with depth-two boundary stalks. -/
 theorem exists_finite_flat_model_of_regular_local_dimension_two
     (A : Type u) [CommRing A] [IsRegularLocalRing A]
     (hdim : ringKrullDim A = 2)

@@ -14,7 +14,9 @@ set_option linter.privateModule false
 
 /-! # Ordinary pullback and the actual completion augmentation
 
-Source: Stacks 099M.
+## References
+
+* Stacks 099M
 -/
 
 @[expose] public noncomputable section

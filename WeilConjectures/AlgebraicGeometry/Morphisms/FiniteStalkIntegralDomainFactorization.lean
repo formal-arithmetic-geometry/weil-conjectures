@@ -14,6 +14,10 @@ import Mathlib.RingTheory.Unramified.Finite
 
 /-!
 # Integral domain factorization of a finite stalk map
+
+## References
+
+* Stacks Project, Tag 00GI (integral ring maps) and the localization description of affine stalks
 -/
 
 @[expose] public section
@@ -25,8 +29,6 @@ namespace AlgebraicGeometry.Scheme
 /-- A finite map factors at any domain source stalk through an integral domain
 algebra over the target stalk, followed by a flat map.
 
-Source: Stacks Project, Tag 00GI (integral ring maps) and the localization description of affine
-stalks.
 The shorter image-algebra argument uses Mathlib's
 `Algebra.FormallyUnramified.flat_of_restrictScalars` (Iversen, I.2.7). -/
 theorem finite_stalk_integral_domain_factorization {X Y : Scheme.{u}}

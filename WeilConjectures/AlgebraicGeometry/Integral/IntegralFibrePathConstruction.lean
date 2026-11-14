@@ -35,7 +35,9 @@ import Mathlib.RingTheory.Finiteness.Quotient
 
 /-! # Integral fibre paths from finite level evaluation
 
-Source: Weil II (1.1.1) b), p.146.
+## References
+
+* Weil II (1.1.1) b), p.146
 -/
 
 @[expose] public noncomputable section

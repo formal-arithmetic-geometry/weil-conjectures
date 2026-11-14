@@ -910,7 +910,9 @@ assembles the comparison from it. The assembled theorem has exactly the statemen
 `IntegralModelsStacks.integral_models_stacks`; it replaces that proof once the stated inputs
 are proved.
 
-Source: Stacks Tag 09C1
+## References
+
+* Stacks Tag 09C1
 -/
 
 @[expose] public noncomputable section

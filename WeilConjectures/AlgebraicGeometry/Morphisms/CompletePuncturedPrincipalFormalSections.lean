@@ -15,7 +15,11 @@ import WeilConjectures.RingTheory.CompleteLocalSubideal
 
 /-! # Scalar formal comparison on a complete local puncture
 
-Source: Stacks Project, Tags 0EII, 0AVY and 0BK0.
+## References
+
+* Stacks Project, Tags 0EII, 0AVY and 0BK0
+* Stacks Project, Tag 0EII (Lemma 52.12.7), with M = R and a = m
+* Tags 0AVY and 0BK0
 -/
 
 @[expose] public section
@@ -24,9 +28,7 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
-/-- Compatible scalar sections on all principal thickenings algebraize uniquely.
-
-Source: Stacks Project, Tag 0EII (Lemma 52.12.7), with M = R and a = m; Tags 0AVY and 0BK0 -/
+/-- Compatible scalar sections on all principal thickenings algebraize uniquely. -/
 theorem complete_punctured_principal_formal_sections
     (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R]
     [IsAdicComplete (IsLocalRing.maximalIdeal R) R]

@@ -16,7 +16,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedSectionIn
 /-!
 # Full faithfulness on the punctured zero section of a power-series open
 
-Source: Stacks Project, Tag 0EY9 (Lemma 58.26.1).
+## References
+
+* Stacks Project, Tag 0EY9 (Lemma 58.26.1)
+* Stacks Project, Tag 0EY9
+* its proof uses Tags 0BK0, 0EKP and 0EL8
 -/
 
 @[expose] public section
@@ -28,9 +32,7 @@ namespace AlgebraicGeometry.Scheme
 /-- Restricting finite etale covers to the punctured zero section is fully faithful.
 The hypothesis on V says exactly that its intersection with the zero section is
 Spec A minus its closed point. Bijectivity on every morphism set expresses full
-faithfulness of the actual finite-etale pullback functor, without choosing lifts.
-
-Source: Stacks Project, Tag 0EY9; its proof uses Tags 0BK0, 0EKP and 0EL8 -/
+faithfulness of the actual finite-etale pullback functor, without choosing lifts. -/
 theorem finiteEtale_powerSeries_punctured_section_fully_faithful
     (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]
     (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth (R := A) A)

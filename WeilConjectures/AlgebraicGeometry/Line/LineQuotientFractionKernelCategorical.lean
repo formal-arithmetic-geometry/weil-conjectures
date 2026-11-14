@@ -7,10 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 
-/-! # Categorical sectionwise zero criterion
-
-Source: elementary module-sheaf extensionality.
--/
+/-! # Categorical sectionwise zero criterion -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -19,9 +16,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- A composite of module-sheaf morphisms is zero exactly when it vanishes on every section.
-Source: elementary extensionality for sheaves of modules.
--/
+/-- A composite of module-sheaf morphisms is zero exactly when it vanishes on every section. -/
 theorem comp_zero_iff_forall_section_zero {X : Scheme.{u}} {M N P : X.Modules}
     (f : M ⟶ N) (g : N ⟶ P) :
     f ≫ g = 0 ↔ ∀ (U : X.Opens) (x : Γ(M, U)), g.app U (f.app U x) = 0 := by

@@ -12,7 +12,12 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Ringed.ProEtaleRingedOp
 
 /-! # Finite qcqs open-closed trees and their actual branch functors
 
-Source: Stacks Project, Tag 09AH.
+## References
+
+* Stacks Project, Tag 09AH
+* Stacks Tag 09AH, iterated
+* finite-tree argument over Tag 09AH
+* Stacks Tag 09AH
 -/
 
 @[expose] public noncomputable section
@@ -28,8 +33,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- A finite rooted binary scheme tree. Each split has complementary open and closed
 children; both edges are quasi-compact, and each vertex is qcqs. The inductive type
-includes one-vertex trees and empty schemes.
-Source: Stacks Tag 09AH, iterated. -/
+includes one-vertex trees and empty schemes. -/
 inductive QcqsOpenClosedTree : Scheme.{u} → Type (u + 1)
   | leaf (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] :
       QcqsOpenClosedTree X
@@ -42,8 +46,7 @@ inductive QcqsOpenClosedTree : Scheme.{u} → Type (u + 1)
 
 namespace QcqsOpenClosedTree
 
-/-- A vertex with its unique path to the root, retaining the actual scheme morphisms.
-Source: finite-tree argument over Tag 09AH. -/
+/-- A vertex with its unique path to the root, retaining the actual scheme morphisms. -/
 inductive Path : {X : Scheme.{u}} → QcqsOpenClosedTree X → Scheme.{u} → Type (u + 1)
   | root {X : Scheme.{u}} (t : QcqsOpenClosedTree X) : Path t X
   | openBranch {X U Z W : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
@@ -59,16 +62,14 @@ inductive Path : {X : Scheme.{u}} → QcqsOpenClosedTree X → Scheme.{u} → Ty
       (a : QcqsOpenClosedTree U) (b : QcqsOpenClosedTree Z) (p : Path b W) :
       Path (.split j i h a b) W
 
-/-- The scheme morphism along a path, composed in the direction towards the root.
-Source: finite-tree argument over Tag 09AH. -/
+/-- The scheme morphism along a path, composed in the direction towards the root. -/
 def Path.toRoot {X W : Scheme.{u}} {t : QcqsOpenClosedTree X} (p : Path t W) : W ⟶ X :=
   match X, t, W, p with
   | _, _, _, .root _ => 𝟙 _
   | _, _, _, @Path.openBranch _ _ _ _ _ _ j i _ _ _ _ _ _ _ p => p.toRoot ≫ j
   | _, _, _, @Path.closedBranch _ _ _ _ _ _ j i _ _ _ _ _ _ _ p => p.toRoot ≫ i
 
-/-- A path ends at a leaf precisely when its terminal subtree is a one-vertex tree.
-Source: finite-tree argument over Tag 09AH. -/
+/-- A path ends at a leaf precisely when its terminal subtree is a one-vertex tree. -/
 def Path.IsLeaf {X W : Scheme.{u}} {t : QcqsOpenClosedTree X} (p : Path t W) : Prop :=
   match X, t, W, p with
   | _, _, _, @Path.root _ (@QcqsOpenClosedTree.leaf _ _ _) => True
@@ -77,8 +78,7 @@ def Path.IsLeaf {X W : Scheme.{u}} {t : QcqsOpenClosedTree X} (p : Path t W) : P
   | _, _, _, @Path.closedBranch _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ p => p.IsLeaf
 
 /-- The path functor is the actual composite of open extension by zero and closed
-module direct image. At the root it is the identity, with no choice of functors.
-Source: Stacks Tag 09AH. -/
+module direct image. At the root it is the identity, with no choice of functors. -/
 def Path.extension
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     {X W : Scheme.{u}} {t : QcqsOpenClosedTree X} (p : Path t W) :

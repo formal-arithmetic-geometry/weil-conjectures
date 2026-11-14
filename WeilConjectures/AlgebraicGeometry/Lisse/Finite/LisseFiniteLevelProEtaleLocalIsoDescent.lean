@@ -19,7 +19,10 @@ import WeilConjectures.ConstructibleSheaf.InternalHom
 
 /-! # Geometric descent of a local fixed-realization isomorphism
 
-Source: Stacks Project, Tags 099Y, 099Z, 09B1 and 09BV; Tag 094G.
+## References
+
+* Stacks Project, Tags 099Y, 099Z, 09B1 and 09BV
+* Tag 094G
 -/
 
 @[expose] public noncomputable section
@@ -186,10 +189,7 @@ private theorem sliceIsoOfPullback
     Functor.mapDerivedCategoryNatIso (overRestrictionIso B V)
   exact ⟨F.mapDerivedCategory.preimageIso ((h.app K) ≪≫ e ≪≫ (h.app D).symm)⟩
 
-/-- Bounded finite-lisse local models descend to actual etale local isomorphisms.
-
-Source: Stacks Project, Tags 099Y, 099Z, 09B1 and 09BV; Tag 094G.
--/
+/-- Bounded finite-lisse local models descend to actual etale local isomorphisms. -/
 theorem exists_etale_local_iso_of_fixed_realization_local_model
     (X Y : Scheme.{u}) (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
@@ -262,8 +262,6 @@ Statement repair: the former signature omitted boundedness and finite local cons
 of D. These are essential and were already hypotheses of its caller. For example,
 independent quadratic local systems in infinitely many degrees over Spec Q become
 constant on a pro-etale cover but have no common etale trivializing neighbourhood.
-
-Source: Stacks Project, Tags 099Y, 099Z, 09B1 and 09BV; Tag 094G.
 -/
 theorem exists_proetale_local_iso_section_of_fixed_realization_local_model
     (X Y : Scheme.{u}) (g : Y ⟶ X)

@@ -18,7 +18,9 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.GradedChartComparison
 /-!
 # Associated sheaves of homogeneous bases on polynomial Proj
 
-Source: Stacks Project, Constructions, Definitions 01M6, 01MN and Lemma 01M7.
+## References
+
+* Stacks Project, Constructions, Definitions 01M6, 01MN and Lemma 01M7
 -/
 
 @[expose] public section
@@ -32,8 +34,7 @@ namespace AlgebraicGeometry.Proj
 
 attribute [local instance] MvPolynomial.gradedAlgebra
 
-/-- A homogeneous basis identifies its associated sheaf with the coproduct of Proj twists.
-Source: Stacks Project, Constructions, Definitions 01M6, 01MN and Lemma 01M7. -/
+/-- A homogeneous basis identifies its associated sheaf with the coproduct of Proj twists. -/
 theorem homogeneous_basis_proj_coproduct (k : Type u) [Field k]
     (M : ModuleCat.{u} (MvPolynomial (Fin 2) k))
     (𝓜 : ℤ → AddSubgroup M) (h𝓜 : DirectSum.IsInternal 𝓜)

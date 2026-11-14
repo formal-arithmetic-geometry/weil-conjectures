@@ -23,7 +23,11 @@ import Mathlib.RingTheory.Polynomial.UniqueFactorization
 /-!
 # Degrees of invertible modules on projective-bundle fibres
 
-Source: Stacks Project, Tag 0BXJ; EGA II, Remark 4.2.7
+## References
+
+* Stacks Project, Tag 0BXJ
+* EGA II, Remark 4.2.7
+* EGA II, Remark 4.2.7, field calculation
 -/
 
 @[expose] public section
@@ -205,9 +209,7 @@ private theorem line_power_to_twist {X : Scheme.{u}} (k : Type u) [Field k]
       natPower e.obj (-1) dualIso (n + 1)
 
 /-- A line has a unique integer degree on each residue-field fibre. This assertion
-only concerns modules on the fibre, and asserts no extension to a neighbourhood.
-
-Source: Stacks Project, Tag 0BXJ; EGA II, Remark 4.2.7, field calculation. -/
+only concerns modules on the fibre, and asserts no extension to a neighbourhood. -/
 theorem projective_bundle_fiber_degree (S : Scheme.{u}) (E : S.Modules)
     [E.IsQuasicoherent] (r : ℕ)
     [SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u} E r] (hr : 2 ≤ r)

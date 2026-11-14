@@ -17,9 +17,14 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-!
 # Site transport of the open projection formula
-Source: Stacks Project, Tag 09AF, Tag 0GL1.
 The derived statement and its K-flat normalization follow the blueprint item
 `lem-pur-open-projection-site-transport`.
+
+## References
+
+* Stacks Project, Tag 09AF, Tag 0GL1
+* Stacks Project, Tag 09AF
+* Tag 0GL1
 -/
 
 @[expose] public section
@@ -37,8 +42,7 @@ namespace AlgebraicGeometry.ProEtale
 /-- The comparison square for the canonical open projection maps, for arbitrary
 unbounded derived objects. The two displayed composites use the fixed adjoint-normalized
 extension comparison, the tensor comparison of exact comparison pullback, and the
-exact-to-left-derived restriction comparisons.
-Source: Stacks Project, Tag 09AF; Tag 0GL1. -/
+exact-to-left-derived restriction comparisons. -/
 theorem openProjectionTransport_projection_square
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {U X : Scheme.{u}}
     (j : U ⟶ X) [IsOpenImmersion j]

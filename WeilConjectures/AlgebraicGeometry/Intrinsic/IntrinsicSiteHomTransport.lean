@@ -73,7 +73,9 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Hom
 
 /-! # Internal Hom in the intrinsic finite-coefficient presentation
 
-Source: Stacks Project, Tags 00YV, 08J7 and 0A95.
+## References
+
+* Stacks Project, Tags 00YV, 08J7 and 0A95
 -/
 
 @[expose] public section
@@ -85,9 +87,7 @@ open CategoryTheory Opposite AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace AlgebraicGeometry.ProEtale
 
 /-- Constant-scalar realization identifies the two ambient derived internal Homs.
-There are no geometric finiteness or constructibility hypotheses.
-
-Source: Stacks Project, Tags 00YV, 08J7 and 0A95. -/
+There are no geometric finiteness or constructibility hypotheses. -/
 theorem intrinsicSiteHom_transport (X : Scheme.{u}) (A : Type u)
     [CommRing A] [Finite A]
     (K L : DerivedCategory

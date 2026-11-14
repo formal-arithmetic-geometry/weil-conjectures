@@ -13,7 +13,9 @@ import Mathlib.RingTheory.Etale.StandardEtale
 /-!
 # Etaleness of the punctured root cover
 
-Source: Stacks Project, Tag 0EYG, off-divisor branch.
+## References
+
+* Stacks Project, Tag 0EYG, off-divisor branch
 -/
 
 @[expose] public section
@@ -21,9 +23,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- The punctured root cover is etale over the original affine base.
-Source: Stacks Project, Tag 0EYG, off-divisor branch.
--/
+/-- The punctured root cover is etale over the original affine base. -/
 theorem root_split_away_cover_etale
     (R : CommRingCat.{u}) (g : R) (n : ℕ) (hn : 0 < n ∧ IsUnit (n : R)) :
     let A := AdjoinRoot ((Polynomial.X : Polynomial R) ^ n - Polynomial.C g)

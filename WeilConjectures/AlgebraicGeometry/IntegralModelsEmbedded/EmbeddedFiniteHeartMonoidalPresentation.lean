@@ -73,7 +73,9 @@ import WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal
 
 /-! # Monoidal comparison of the finite-coefficient hearts
 
-Source: Stacks Tags 03ET, 00YV and 03CY.
+## References
+
+* Stacks Tags 03ET, 00YV and 03CY
 -/
 
 @[expose] public noncomputable section
@@ -187,8 +189,7 @@ private theorem fixedScalars_equivalence (X : Scheme.{u}) (A : Type) [CommRing A
 set_option backward.isDefEq.respectTransparency.types false in
 attribute [-instance] integralModel_coefficientMonObj in
 /-- Compare the specified heart realization with the coefficient-sized module category.
-There is no derived-category or constructibility assertion here.
-Source: Stacks Tags 03ET, 00YV and 03CY. -/
+There is no derived-category or constructibility assertion here. -/
 theorem finiteHeartMonoidalPresentation
     (X : Scheme.{u}) (A : Type) [CommRing A]
     [TopologicalSpace A] [IsTopologicalRing A] [Finite A] [DiscreteTopology A] :

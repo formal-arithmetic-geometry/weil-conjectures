@@ -35,9 +35,15 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUn
 /-!
 Shared definitions for the normalized inverse-image comparison.
 
-Source: Stacks Project, Tags 03EK, 03CY and 03D2; Tag 09A5.
 These are the five original conventions of
 `lem-pur-isomorphism-inverse-image-tensor-hom`, relocated without changing their bodies.
+
+## References
+
+* Stacks Project, Tags 03EK, 03CY and 03D2
+* Tag 09A5
+* Stacks Tag 03EK
+* Stacks Tags 03D2 and 09A5
 -/
 
 @[expose] public section
@@ -52,8 +58,7 @@ open scoped ChangeOfRings
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Extension of scalars after inverse image, for the coefficient-extension clause. Source: Stacks
-Tag 03EK. -/
+/-- Extension of scalars after inverse image, for the coefficient-extension clause. -/
 noncomputable abbrev inverseImageScalarExtension
     {X Y : AlgebraicGeometry.Scheme.{u}} (g : X ⟶ Y)
     (O O' : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) (α : O ⟶ O')
@@ -66,7 +71,7 @@ noncomputable abbrev inverseImageScalarExtension
     ((proEtaleSheafInverseImage g CommRingCat.{u + 1}).map α)
     ((proEtaleModuleInverseImage g O).obj F)
 
-/-- A pure tensor followed by module sheafification. Source: Stacks Tag 03EK. -/
+/-- A pure tensor followed by module sheafification. -/
 noncomputable def purTensorSection {X : AlgebraicGeometry.Scheme.{u}}
     (O : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
     (F G : SheafOfModules.{u + 1} ((sheafCompose (ProEt.topology X)
@@ -80,8 +85,7 @@ noncomputable def purTensorSection {X : AlgebraicGeometry.Scheme.{u}}
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The actual module inverse-image unit on sections, using the recorded small model.
-Source: Stacks Tags 03D2 and 09A5. -/
+/-- The actual module inverse-image unit on sections, using the recorded small model. -/
 noncomputable def purInverseImageSection {X Y : AlgebraicGeometry.Scheme.{u}}
     (g : X ⟶ Y) (O : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
     (F : SheafOfModules.{u + 1} ((sheafCompose (ProEt.topology Y)
@@ -96,8 +100,7 @@ noncomputable def purInverseImageSection {X Y : AlgebraicGeometry.Scheme.{u}}
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Pure scalar-extension sections, in the recorded mixed-universe construction.
-Source: Stacks Tag 03EK. -/
+/-- Pure scalar-extension sections, in the recorded mixed-universe construction. -/
 noncomputable def purScalarSection {X : AlgebraicGeometry.Scheme.{u}}
     (O O' : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) (α : O ⟶ O')
     (F : SheafOfModules.{u + 1} ((sheafCompose (ProEt.topology X)

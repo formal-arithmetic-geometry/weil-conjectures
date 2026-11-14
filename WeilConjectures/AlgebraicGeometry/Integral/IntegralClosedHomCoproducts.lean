@@ -79,7 +79,10 @@ import all WeilConjectures.SecSmoothPurity.CochainCoefficientArrowsSupplement
 
 /-! # Closed support preserves bounded internal-Hom coproduct continuity
 
-Source: Bhatt--Scholze, Lemma 6.3.14(4); Stacks Tag 09BM.
+## References
+
+* Bhatt--Scholze, Lemma 6.3.14(4)
+* Stacks Tag 09BM
 -/
 
 @[expose] public noncomputable section
@@ -91,8 +94,7 @@ namespace AlgebraicGeometry.Scheme
 -- The unbounded derived comparisons require elaborating several functor structures.
 set_option synthInstance.maxSize 4096 in
 /-- Closed direct image carries a source whose internal Hom preserves colimits to a
-source whose internal Hom preserves uniformly bounded-below sums.
-Source: Bhatt--Scholze, Lemma 6.3.14(4); Stacks Tag 09BM. -/
+source whose internal Hom preserves uniformly bounded-below sums. -/
 theorem integralClosed_homPreservesCoproduct
     {T Z : Scheme.{u}} [TopologicalSpace.NoetherianSpace T]
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)

@@ -40,8 +40,7 @@ noncomputable def sfbConstantRing (X : Scheme.{u}) :
     RingCat.{u + 1} ⥤ Mon (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) :=
   RingCat.toMonAb ⋙ (constantSheaf (Scheme.ProEt.topology X) Ab.{u + 1}).mapMon
 
-/-- The same constant-ring construction on the pro-étale point.
-Source: the finite quotients in the comparison proposition. -/
+/-- The same constant-ring construction on the pro-étale point. -/
 noncomputable def sfbPointConstantRing :
     RingCat.{u + 1} ⥤ Mon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) :=
   RingCat.toMonAb ⋙ (constantSheaf (coherentTopology Profinite.{u}) Ab.{u + 1}).mapMon
@@ -57,8 +56,7 @@ noncomputable def sfbCoefficientQuotientTower (R : Type) [CommRing R] (I : Ideal
         ULift.ringEquiv.toRingHom)))
 
 /-- Constant sections of a topological ring, mapped into its condensed abelian sheaf.
-This is the adjoint of the map sending a scalar to its constant continuous function.
-Source: normalization of the reduction maps in the comparison proposition. -/
+This is the adjoint of the map sending a scalar to its constant continuous function. -/
 noncomputable def sfbConstantToContinuous (R : Type) [CommRing R] [TopologicalSpace R]
     [IsTopologicalRing R] :
     (constantSheaf (coherentTopology Profinite.{u}) Ab.{u + 1}).obj
@@ -83,7 +81,7 @@ noncomputable def sfbCoefficientInclusion (R K : Type) [CommRing R] [Topological
         (Profinite.continuousMapRingSheafMap φ hφ)))
 
 /-- The coefficient field as a module over the pulled-back integers, using their actual
-inclusion. Source: the sequential module colimit in the comparison proposition. -/
+inclusion. -/
 noncomputable def sfbRationalCoefficientModule (R K : Type) [CommRing R]
     [TopologicalSpace R] [IsTopologicalRing R] [CommRing K] [TopologicalSpace K]
     [IsTopologicalRing K]

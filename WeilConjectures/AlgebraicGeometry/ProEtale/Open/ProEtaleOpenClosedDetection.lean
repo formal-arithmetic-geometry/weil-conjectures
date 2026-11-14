@@ -12,7 +12,10 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSuppleme
 /-!
 # Detection by open and closed pro-etale restrictions
 
-Source: Stacks Project, Tag 09AH.
+## References
+
+* Stacks Project, Tag 09AH
+* Stacks, Modules on Sites
 -/
 
 @[expose] public section
@@ -25,8 +28,7 @@ namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Extension along the coefficient isomorphism reflects vanishing, by its existing
-scalar-transport equivalence and tensor-extension adjunction.
-Source: Stacks, Modules on Sites. -/
+scalar-transport equivalence and tensor-extension adjunction. -/
 private theorem inverseImage_isZero_of_pullback
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
@@ -46,9 +48,7 @@ private theorem inverseImage_isZero_of_pullback
 
 /-- A module over arbitrary commutative ring-sheaf coefficients is zero if its pullbacks
 along a closed immersion and its complementary quasi-compact open immersion are zero.
-The coefficient isomorphisms are specified, and pullback uses the recorded tensor extension.
-
-Source: Stacks Project, Tag 09AH. -/
+The coefficient isomorphisms are specified, and pullback uses the recorded tensor extension. -/
 theorem proEtaleRingModule_isZero_of_open_closed
     {X Z U : Scheme.{u}} (i : Z ⟶ X) (j : U ⟶ X)
     [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j]

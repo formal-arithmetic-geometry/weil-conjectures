@@ -71,7 +71,12 @@ import Mathlib.CategoryTheory.Monoidal.Ring
 import Mathlib.CategoryTheory.Adjunction.Limits
 import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
 
-/-! Module inverse-image units on weakly contractible specialization neighbourhoods. -/
+/-! Module inverse-image units on weakly contractible specialization neighbourhoods.
+
+## References
+
+* Stacks Project, Tags 09AC and 03D2
+-/
 
 @[expose] public section
 universe u
@@ -214,8 +219,7 @@ private noncomputable def proEtaleModuleModelEquivalence (X : Scheme.{u})
     (by ext U; dsimp [AsSmall.equiv]; erw [B.obj.map_id]; rfl)
     (by ext U; dsimp [AsSmall.equiv]; erw [A.obj.map_id]; rfl)
 
-/-- The module inverse-image unit is bijective on specialization-neighbourhood sections.
-Source: Stacks Project, Tags 09AC and 03D2. -/
+/-- The module inverse-image unit is bijective on specialization-neighbourhood sections. -/
 theorem proEtale_module_unit_bijective_of_specialization
     {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
     (V : X.ProEt) [IsAffine V.left]

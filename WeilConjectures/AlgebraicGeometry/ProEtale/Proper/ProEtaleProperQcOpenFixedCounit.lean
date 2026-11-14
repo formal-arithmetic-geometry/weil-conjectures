@@ -20,7 +20,10 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.M
 /-!
 # Proper direct image preserves quasi-compact open support
 
-Source: Stacks Project, Tags 096V, 09AG and 09AH.
+## References
+
+* Stacks Project, Tags 096V, 09AG and 09AH
+* Stacks, Tags 09AG and 09AH
 -/
 
 @[expose] public section
@@ -196,7 +199,7 @@ private theorem proper_shriek_specialization_zero
   exact fixed_shriek_specialization_zero_general A U iV hd R hsR M
 
 /-- Proper direct image preserves support in a quasi-compact open, with fixed scalar
-coefficients. Source: Stacks, Tags 09AG and 09AH. -/
+coefficients. -/
 theorem sfFixedProperQcOpenCounit_isIso
     {V T W : Scheme.{u}} (p : V ⟶ T) [IsProper p]
     (j : W ⟶ T) [IsOpenImmersion j] [QuasiCompact j]

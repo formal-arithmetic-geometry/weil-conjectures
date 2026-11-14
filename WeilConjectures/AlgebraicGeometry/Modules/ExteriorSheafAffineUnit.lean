@@ -15,7 +15,10 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # The exterior sheafification unit on an affine open
 
-Source: Stacks Project, Tag 01I6, Lemmas 26.7.2(2) and 26.7.4. -/
+## References
+
+* Stacks Project, Tag 01I6, Lemmas 26.7.2(2) and 26.7.4
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -25,8 +28,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The canonical exterior sheafification unit is bijective on affine sections of a
-quasi-coherent module.
-Source: Stacks Project, Tag 01I6, Lemmas 26.7.2(2) and 26.7.4. -/
+quasi-coherent module. -/
 theorem exteriorSheaf_affine_unit_bijective {X : Scheme.{u}} (M : X.Modules)
     [M.IsQuasicoherent] (n : ℕ) (U : X.affineOpens) :
     Function.Bijective

@@ -13,7 +13,10 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsCanonicalAdj
 /-!
 # Pullback and restriction to constant scalars
 
-Source: Stacks Project, Tags 093I and 03D3.
+## References
+
+* Stacks Project, Tags 093I and 03D3
+* Stacks Project, Tags 093I, 03D3 and 098T(2)
 -/
 
 @[expose] public section
@@ -86,8 +89,7 @@ private noncomputable def directImageComparison
     rfl
 
 /-- Restriction to constant scalars commutes with canonical module pullback when the
-canonical coefficient inverse-image map is invertible.
-Source: Stacks Project, Tags 093I and 03D3. -/
+canonical coefficient inverse-image map is invertible. -/
 theorem proEtaleModuleRestriction_pullback_of_isIso
     [IsIso (proEtaleCoefficientInverseImageMap f B)]
     (F : proEtaleRingModules Y (proEtaleConstantRing Y B)) :
@@ -111,8 +113,7 @@ theorem proEtaleModuleRestriction_pullback_of_isIso
     (proEtaleConstantRing X B) (coefficientIso f B)).leftAdjointUniq adj'
   exact ⟨EX.functor.mapIso (e.app F) ≪≫ EX.counitIso.app (L.obj (EY.functor.obj F))⟩
 
-/-- Restriction to constant scalars commutes with canonical pullback for finite rings.
-Source: Stacks Project, Tags 093I, 03D3 and 098T(2). -/
+/-- Restriction to constant scalars commutes with canonical pullback for finite rings. -/
 theorem proEtaleModuleRestriction_pullback [Finite B]
     (F : proEtaleRingModules Y (proEtaleConstantRing Y B)) :
     Nonempty ((proEtaleModuleRestriction X B).obj (proEtaleConstantModulePullback f B F) ≅

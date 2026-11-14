@@ -11,7 +11,10 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 
 /-! # The complex-unit normalization of fixed-scalar restriction and direct image
 
-Source: Stacks Tags 0D6E and 07A6, the factorization of the derived adjunction mate.
+## References
+
+* Stacks Tags 0D6E and 07A6, the factorization of the derived adjunction mate
+* Stacks Tags 0D6E and 07A6
 -/
 
 @[expose] public noncomputable section
@@ -43,8 +46,7 @@ theorem fixedScalarRestrictionDirectImageUnderived_eq
   rfl
 
 /-- The inverse fixed-scalar direct-image comparison is normalized by the canonical
-right-derived units on all complexes.
-Source: Stacks Tags 0D6E and 07A6; fixedScalarRestrictionDirectImageMap_factors. -/
+right-derived units on all complexes. -/
 theorem fixedScalarRestrictionDirectImage_unitQ_factors
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y)

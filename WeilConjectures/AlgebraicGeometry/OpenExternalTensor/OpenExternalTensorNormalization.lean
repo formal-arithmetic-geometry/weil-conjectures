@@ -17,10 +17,14 @@ import WeilConjectures.Algebra.Homology.SiteDerivedTensorDescentIndependentCoeff
 /-!
 # Normalized open external tensor comparison
 
-Source: Stacks Project, Tags 0GL1, 03S6, 0B65.
-
 The auxiliary constructions use ordinary unbounded finite-coefficient categories.
 All comparisons are the canonical adjunction, base-change and projection maps.
+
+## References
+
+* Stacks Project, Tags 0GL1, 03S6, 0B65
+* Stacks 03DI
+* proof steps 3 and 4, Stacks 03S6 and 0GL1
 -/
 
 @[expose] public noncomputable section
@@ -41,7 +45,7 @@ open WeilConjectures
 
 variable (A : Type (u + 1)) [CommRing A] [Finite A]
 
-/-- Transport open extension along equality of its geometric map. Source: Stacks 03DI. -/
+/-- Transport open extension along equality of its geometric map. -/
 def shriekCongr {U V : Scheme.{u}} {f g : U ⟶ V}
     [IsOpenImmersion f] [IsOpenImmersion g] (h : f = g) :
     finiteShriek A f ≅ finiteShriek A g :=
@@ -135,8 +139,7 @@ def inside (d : Diagram j k T Tb) (K : FiniteD A X) (L : FiniteD A Y) : FiniteD 
 
 /-- The prescribed first-factor construction: beta for j, gamma for j₁, beta for k,
 then signed symmetry, gamma for k₁, signed symmetry inside k₁!, and the normalized
-composition comparison. All equalities are transported by pullback composition.
-Source: proof steps 3 and 4, Stacks 03S6 and 0GL1. -/
+composition comparison. All equalities are transported by pullback composition. -/
 def comparison (d : Diagram j k T Tb) (K : FiniteD A X) (L : FiniteD A Y) :=
   FiniteOpenProduct.tensorMap A Tb
       ((ProEtale.ordinaryOpenExtensionBaseChangeIso A

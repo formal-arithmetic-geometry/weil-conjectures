@@ -18,8 +18,10 @@ with the ringed inverse images along `b` and `a`, compatibly with the scalar fac
 ringed inverse images compose to the ringed inverse image along the composite,
 compatibly with the restriction/pullback comparisons.
 
-Source: Stacks Project, Modules on Sites, Tags 03CY, 03D2, 03D3 and 03DA;
-Cohomology on Sites, Tag 0D6D.
+## References
+
+* Stacks Project, Modules on Sites, Tags 03CY, 03D2, 03D3 and 03DA
+* Cohomology on Sites, Tag 0D6D
 -/
 
 public noncomputable section

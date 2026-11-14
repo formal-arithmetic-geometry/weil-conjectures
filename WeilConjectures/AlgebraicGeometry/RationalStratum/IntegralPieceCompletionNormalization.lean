@@ -36,12 +36,20 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Ringed.ProEtaleRingedOpenClose
 
 /-! # Completion and normalized rationalization of integral open/closed pieces
 
-Source: Bhatt--Scholze, Lemma 6.8.2(2), Definition 6.8.10, Proposition 6.8.11(3), Lemma 6.8.13 and
-Remark 6.8.15, pp. 59--62.
-
 The completed-membership predicate and pure-tensor and open/closed generators are
 reused from `RationalStratumIntegralModelBasic`. All comparison maps below are fixed on
 fractions, including the separate open and closed maps.
+
+## References
+
+* Bhatt--Scholze, Lemma 6.8.2(2), Definition 6.8.10, Proposition 6.8.11(3), Lemma 6.8.13 and Remark
+  6.8.15, pp. 59--62
+* Stacks Tag 03EK
+* Bhatt--Scholze, Lemma 6.8.2(2)
+* Stacks Tags 00CM, 03CY and 03EK
+* Bhatt--Scholze, Lemma 6.8.2(2) and Remark 6.8.15
+* Stacks Tag 03DJ
+* Stacks Tag 03DI
 -/
 
 @[expose] public noncomputable section
@@ -58,8 +66,7 @@ namespace AlgebraicGeometry.ProEtale.RationalStratum
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The map on ordinary rationalizations is sheafification of `1 ⊗ f`.
-Source: Stacks Tag 03EK; Bhatt--Scholze, Lemma 6.8.2(2). -/
+/-- The map on ordinary rationalizations is sheafification of `1 ⊗ f`. -/
 def integralPieceLocalizationMap (T : Scheme.{u})
     {H K : SheafOfModules.{u + 1} (latticeModuleRing T (latticeCoefficientIntegers l E))}
     (f : H ⟶ K) : integralModelRationalize l E T H ⟶ integralModelRationalize l E T K :=
@@ -68,8 +75,7 @@ def integralPieceLocalizationMap (T : Scheme.{u})
 /-- The sequential localization colimit, with its transition and every leg specified
 on sections. The coefficient restriction is the actual one along the integral inclusion.
 The comparison to the cocone point is fixed by all fraction maps, rather than chosen
-as an unspecified module isomorphism.
-Source: Bhatt--Scholze, Lemma 6.8.2(2); Stacks Tags 00CM, 03CY and 03EK. -/
+as an unspecified module isomorphism. -/
 def HasNormalizedIntegralLocalization (T : Scheme.{u})
     (H : SheafOfModules.{u + 1} (latticeModuleRing T (latticeCoefficientIntegers l E))) :
     Prop :=
@@ -89,8 +95,7 @@ def HasNormalizedIntegralLocalization (T : Scheme.{u})
           tensorSection l E T H W ((uniformizer l E)⁻¹ ^ n) h
 
 /-- The separate closed comparison on all localization fractions. Closed direct image
-is evaluated on the actual base change.
-Source: Bhatt--Scholze, Lemma 6.8.2(2) and Remark 6.8.15; Stacks Tag 03DJ. -/
+is evaluated on the actual base change. -/
 def IsNormalizedClosedComparison {V S : Scheme.{u}} (t : S ⟶ V)
     (N : SheafOfModules.{u + 1} (latticeModuleRing S (latticeCoefficientIntegers l E)))
     (d : integralModelRationalize l E V
@@ -107,8 +112,7 @@ def IsNormalizedClosedComparison {V S : Scheme.{u}} (t : S ⟶ V)
         ((uniformizer l E)⁻¹ ^ n) h
 
 open Classical in
-/-- The separate open comparison on every fraction of each presheaf extension generator.
-Source: Stacks Tag 03DI; Bhatt--Scholze, Lemma 6.8.2(2) and Remark 6.8.15. -/
+/-- The separate open comparison on every fraction of each presheaf extension generator. -/
 def IsNormalizedOpenComparison {X : Scheme.{u}} (U : X.ProEt)
     (P : SheafOfModules.{u + 1}
       (latticeModuleRing U.left (latticeCoefficientIntegers l E)))
@@ -144,9 +148,7 @@ def IsNormalizedOpenComparison {X : Scheme.{u}} (U : X.ProEt)
 /-- Integral open/closed pieces are constructible completed degree-zero objects, and
 ordinary rationalization commutes with both operations through the fraction-normalized
 comparisons. Their composite is natural and transports a specified lattice isomorphism
-by the displayed composite, with the same formula on every localization leg.
-Source: Bhatt--Scholze, Lemma 6.8.2(2), Definition 6.8.10, Proposition 6.8.11(3), Lemma 6.8.13 and
-Remark 6.8.15, pp. 59--62. -/
+by the displayed composite, with the same formula on every localization leg. -/
 theorem integralPieceCompletionNormalization
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

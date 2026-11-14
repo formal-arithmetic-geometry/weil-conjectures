@@ -19,10 +19,13 @@ import WeilConjectures.AlgebraicGeometry.Picard.Derived.PicardDerivedFibreNatura
 
 /-! # Affine residue data for the chosen geometric maps
 
-Source: Stacks Project, Tags 0B91, 0BF2, 01IB and 08CR.
-
 This intermediate statement packages affine residue data with the geometric fibre comparisons.
-The enclosing theorem only composes additive equivalences. -/
+The enclosing theorem only composes additive equivalences.
+
+## References
+
+* Stacks Project, Tags 0B91, 0BF2, 01IB and 08CR
+-/
 
 @[expose] public section
 set_option autoImplicit false

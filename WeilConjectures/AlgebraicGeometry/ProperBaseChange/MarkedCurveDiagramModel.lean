@@ -23,7 +23,11 @@ import WeilConjectures.AlgebraicGeometry.Finite.FiniteClosedImmersionLocus
 /-!
 # Descent of a marked finite curve diagram before the final shrinking
 
-Source: Stacks Project, Tag 0GK7, diagram descent and marked-open paragraphs.
+## References
+
+* Stacks Project, Tag 0GK7, diagram descent and marked-open paragraphs
+* Stacks Project, Tag 0GK7, the paragraphs from reduction of the base through descent of the marked
+  closed immersion
 -/
 
 @[expose] public section
@@ -35,9 +39,6 @@ namespace AlgebraicGeometry
 /-- Descend the supplied marked diagram, with the required fibre conditions only at
 points above the specified component generic point. The global fibre conditions and
 surjectivity of the marked opens are deliberately left to a subsequent shrinking.
-
-Source: Stacks Project, Tag 0GK7, the paragraphs from reduction of the base through descent of the
-marked closed immersion.
 -/
 theorem exists_marked_curve_diagram_model
     {X S : Scheme.{u}} (f : X ⟶ S) [IsSeparated f]

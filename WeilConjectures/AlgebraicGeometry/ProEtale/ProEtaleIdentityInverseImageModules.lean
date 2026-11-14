@@ -12,7 +12,9 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSuppleme
 
 /-! # Identity inverse image with its actual inverse-image coefficient sheaf
 
-Source: Stacks Project, Tags 09A5 and 03D2.
+## References
+
+* Stacks Project, Tags 09A5 and 03D2
 -/
 
 @[expose] public noncomputable section
@@ -47,8 +49,7 @@ private def inverseIdentityIso (X : Scheme.{u}) (R : Rings X) :
 
 /-- The raw identity pullback differs from the identity only by restriction of scalars
 along the canonical identity ring isomorphism. This retains exactly the coefficient
-sheaf appearing in integral local models.
-Source: Stacks Project, Tags 09A5 and 03D2. -/
+sheaf appearing in integral local models. -/
 theorem proEtaleRawIdentityPullback_comparison (X : Scheme.{u}) (R : Rings X) :
     Nonempty (proEtaleRingModulePullback (𝟙 X) R (inverseRing (𝟙 X) R) (Iso.refl _) ≅
       AlgebraicGeometry.ProEtaleTensorComparison.restrict (ringId R).hom) := by

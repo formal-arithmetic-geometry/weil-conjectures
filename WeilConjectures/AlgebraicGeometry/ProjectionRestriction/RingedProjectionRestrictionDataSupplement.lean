@@ -44,9 +44,6 @@ public import WeilConjectures.AlgebraicGeometry.RingedProjectionRestrictionData
 /-!
 # Canonical localization comparisons for the projection mate
 
-Source: Stacks Project, Cohomology on Sites, Tags 08FI, 0FN5, 07A4 and 0B56; Modules on Sites, Tag
-04J0.
-
 All model functors below carry natural representative comparisons. Ordinary operations
 are Mathlib's module pullback and pushforward for the specified ring map. Tensor
 comparisons are normalized on pure tensors and signed total complexes; derived
@@ -63,6 +60,28 @@ The assembly theorem `ringedProjectionRestriction` is in
 `WeilConjectures.AlgebraicGeometry.Ringed.RingedProjectionRestriction`.
 This module contains its unchanged data
 interfaces so the construction lemmas can be imported without a cycle.
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 08FI, 0FN5, 07A4 and 0B56
+* Modules on Sites, Tag 04J0
+* Stacks 05RU
+* Stacks 03EK
+* Stacks 06YN
+* Stacks 06YS
+* Stacks 06YU
+* Stacks 07A4, Mathlib BifunctorShift
+* Stacks 0735
+* Stacks 03D7
+* Stacks 04J0
+* Stacks 07A5
+* Stacks 07A6
+* Stacks 03EL
+* Stacks 07A4
+* Stacks 03DJ
+* Stacks 07A4 and 07A6
+* Stacks 04J0, 08FI and 0FN5
+* Stacks 0B56
 -/
 
 @[expose] public noncomputable section
@@ -84,30 +103,25 @@ variable {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]
   [EssentiallySmall.{u + 1} C] [EssentiallySmall.{u + 1} D]
   {J : GrothendieckTopology C} {K : GrothendieckTopology D}
 
-/-- Ordinary unbounded localization of module complexes, without completion.
-Source: Stacks 05RU. -/
+/-- Ordinary unbounded localization of module complexes, without completion. -/
 abbrev Der (R : Sheaf J CommRingCat.{u + 1}) := DerivedCategory (Mod R)
 
-/-- The existing sheaf tensor, in its curried presentation.
-Source: Stacks 03EK. -/
+/-- The existing sheaf tensor, in its curried presentation. -/
 abbrev tensor (R : Sheaf J CommRingCat.{u + 1}) : Mod R ⥤ Mod R ⥤ Mod R :=
   @curriedTensor (Mod R) _ (SheafOfModules.monoidalCategory R)
 
-/-- The direct-sum total tensor, with Mathlib's sign on its second differential.
-Source: Stacks 06YN. -/
+/-- The direct-sum total tensor, with Mathlib's sign on its second differential. -/
 abbrev total (R : Sheaf J CommRingCat.{u + 1}) :
     CochainComplex (Mod R) ℤ × CochainComplex (Mod R) ℤ ⥤ CochainComplex (Mod R) ℤ :=
   Functor.uncurry.obj ((tensor R).map₂HomologicalComplex (.up ℤ) (.up ℤ) (.up ℤ))
 
-/-- The resolving full subcategory uses exactly the recorded K-flat and flat-term predicates.
-Source: Stacks 06YS. -/
+/-- The resolving full subcategory uses exactly the recorded K-flat and flat-term predicates. -/
 def resolving (R : Sheaf J CommRingCat.{u + 1}) : ObjectProperty (CochainComplex (Mod R) ℤ) :=
   fun P ↦ CochainComplex.IsAcyclicTensorKFlat (R := R) P ∧
     ∀ n : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1} (J := J) (R := R) (P.X n)
 
 /-- A model of derived tensor, identified naturally on the resolving subcategory.
-The identification makes the functor the localization of the existing total tensor.
-Source: Stacks 06YU. -/
+The identification makes the functor the localization of the existing total tensor. -/
 structure TensorModel (R : Sheaf J CommRingCat.{u + 1}) where
   preadditive : @MonoidalPreadditive (Mod R) _ _ (SheafOfModules.monoidalCategory R)
   functor : Der R × Der R ⥤ Der R
@@ -120,8 +134,7 @@ structure TensorModel (R : Sheaf J CommRingCat.{u + 1}) where
       (((resolving R).ι ⋙ DerivedCategory.Q).prod
         ((resolving R).ι ⋙ DerivedCategory.Q)) t)
 
-/-- The first normalized tensor shift on flat K-flat representatives.
-Source: Stacks 07A4, Mathlib BifunctorShift. -/
+/-- The first normalized tensor shift on flat K-flat representatives. -/
 def tensorShiftFirst {R : Sheaf J CommRingCat.{u + 1}} (a : TensorModel R)
     [(Functor.curry.obj a.functor).CommShift₂Int] [(tensor R).Additive]
     [∀ M : Mod R, ((tensor R).obj M).Additive] : Prop :=
@@ -137,8 +150,7 @@ def tensorShiftFirst {R : Sheaf J CommRingCat.{u + 1}} (a : TensorModel R)
       DerivedCategory.Q.map (CochainComplex.mapBifunctorShift₁Iso P Q (tensor R) n).hom ≫
         (DerivedCategory.Q.commShiftIso n).hom.app ((total R).obj (P, Q))
 
-/-- The second normalized tensor shift, with the total-complex Koszul sign.
-Source: Stacks 07A4, Mathlib BifunctorShift. -/
+/-- The second normalized tensor shift, with the total-complex Koszul sign. -/
 def tensorShiftSecond {R : Sheaf J CommRingCat.{u + 1}} (a : TensorModel R)
     [(Functor.curry.obj a.functor).CommShift₂Int] [(tensor R).Additive]
     [∀ M : Mod R, ((tensor R).obj M).Additive] : Prop :=
@@ -155,8 +167,7 @@ def tensorShiftSecond {R : Sheaf J CommRingCat.{u + 1}} (a : TensorModel R)
         (DerivedCategory.Q.commShiftIso n).hom.app ((total R).obj (P, Q))
 
 /-- The two canonical tensor shifts, including the Koszul sign in the second variable.
-Their normalization is stated on the existing total-complex shift maps.
-Source: Stacks 07A4, Mathlib BifunctorShift. -/
+Their normalization is stated on the existing total-complex shift maps. -/
 class TensorShifts {R : Sheaf J CommRingCat.{u + 1}} (a : TensorModel R) where
   [shifts : (Functor.curry.obj a.functor).CommShift₂Int]
   [tensorAdditive : (tensor R).Additive]
@@ -164,8 +175,7 @@ class TensorShifts {R : Sheaf J CommRingCat.{u + 1}} (a : TensorModel R) where
   first : tensorShiftFirst a
   second : tensorShiftSecond a
 
-/-- A pure tensor section, using the actual presheaf tensor and sheafification unit.
-Source: Stacks 03EK. -/
+/-- A pure tensor section, using the actual presheaf tensor and sheafification unit. -/
 def pure (R : Sheaf J CommRingCat.{u + 1}) (M N : Mod R) (W : Cᵒᵖ)
     (x : M.val.obj W) (y : N.val.obj W) : ((tensor R).obj M |>.obj N).val.obj W :=
   (SheafOfModules.tensorObjIsoSheafification M N).inv.val.app W
@@ -173,8 +183,7 @@ def pure (R : Sheaf J CommRingCat.{u + 1}) (M N : Mod R) (W : Cᵒᵖ)
       (M.val ⊗ N.val)).app W (x ⊗ₜ[R.obj.obj W] y))
 
 /-- An exact derived functor is specified on every complex and every cochain map.
-This is the localization universal property, not an arbitrary functor of the right type.
-Source: Stacks 0735. -/
+This is the localization universal property, not an arbitrary functor of the right type. -/
 structure ExactModel {R : Sheaf J CommRingCat.{u + 1}}
     {S : Sheaf K CommRingCat.{u + 1}} (L : Mod R ⥤ Mod S) where
   additive : L.Additive
@@ -192,77 +201,64 @@ namespace Operation
 variable {F : C ⥤ D} {R : Sheaf J CommRingCat.{u + 1}}
   {S : Sheaf K CommRingCat.{u + 1}} (o : Operation F R S)
 
-/-- The canonical module left adjoint, constructed by module Kan extension and sheafification.
-Source: Stacks 03D7. -/
+/-- The canonical module left adjoint, constructed by module Kan extension and sheafification. -/
 abbrev pullback : Mod R ⥤ Mod S :=
   letI := o.continuous
   SheafOfModules.pullback.{u + 1} o.coefficient
 
-/-- Sectionwise direct image with the specified scalar action.
-Source: Stacks 04J0. -/
+/-- Sectionwise direct image with the specified scalar action. -/
 abbrev pushforward : Mod S ⥤ Mod R :=
   letI := o.continuous
   SheafOfModules.pushforward.{u + 1} o.coefficient
 
-/-- Exact termwise pullback descended through localization.
-Source: Stacks 0735. -/
+/-- Exact termwise pullback descended through localization. -/
 def left : Der R ⥤ Der S := o.pullback.mapDerivedCategory
 
-/-- The ordinary uncompleted K-injective right derived functor.
-Source: Stacks 07A5. -/
+/-- The ordinary uncompleted K-injective right derived functor. -/
 def right : Der S ⥤ Der R :=
   letI := o.kInjectives
   o.pushforward.rightDerivedFunctor
 
-/-- The standard exact-functor shift on the constructed derived pullback.
-Source: Stacks 0735. -/
+/-- The standard exact-functor shift on the constructed derived pullback. -/
 instance leftShift : o.left.CommShift ℤ :=
   inferInstanceAs (o.pullback.mapDerivedCategory.CommShift ℤ)
 
-/-- Its actual termwise pullback comparison.
-Source: Stacks 0735. -/
+/-- Its actual termwise pullback comparison. -/
 abbrev leftModel : ExactModel o.pullback where
   additive := o.pullbackAdditive
   functor := o.left
   factors := o.pullback.mapDerivedCategoryFactors
 
-/-- The fixed exact-pullback shift on the constructed representative model.
-Source: Stacks 0735. -/
+/-- The fixed exact-pullback shift on the constructed representative model. -/
 instance leftModelShift : o.leftModel.functor.CommShift ℤ :=
   inferInstanceAs (o.left.CommShift ℤ)
 
-/-- The standard K-injective shift structure, without a further choice.
-Source: Stacks 07A5. -/
+/-- The standard K-injective shift structure, without a further choice. -/
 instance rightShift : o.right.CommShift ℤ :=
   letI := o.kInjectives
   inferInstanceAs (o.pushforward.rightDerivedFunctor.CommShift ℤ)
 
-/-- The existing right-derived unit, expressed on complexes.
-Source: Stacks 07A5. -/
+/-- The existing right-derived unit, expressed on complexes. -/
 def rightComparison (I : CochainComplex (Mod S) ℤ) :
     DerivedCategory.Q.obj ((o.pushforward.mapHomologicalComplex (.up ℤ)).obj I) ⟶
       o.right.obj (DerivedCategory.Q.obj I) :=
   letI := o.kInjectives
   derivedPushforwardComplexComparison o.pushforward o.right o.pushforward.rightDerivedFunctorUnit I
 
-/-- The constructed module adjunction, with its canonical unit and counit.
-Source: Stacks 03D7. -/
+/-- The constructed module adjunction, with its canonical unit and counit. -/
 def moduleAdjunction : o.pullback ⊣ o.pushforward :=
   letI := o.continuous
   SheafOfModules.pullbackPushforwardAdjunction o.coefficient
 
-/-- The canonical derived adjunction is induced from the constructed module adjunction.
-Source: Stacks 07A6. -/
+/-- The canonical derived adjunction is induced from the constructed module adjunction. -/
 def derivedAdjunction : o.left ⊣ o.right :=
   letI := o.kInjectives
   o.moduleAdjunction.mapDerivedCategoryRightDerivedAdjunction
 
-/-- The counit of the actual derived adjunction, exposed with its fixed functor type.
-Source: Stacks 07A6. -/
+/-- The counit of the actual derived adjunction, exposed with its fixed functor type. -/
 def derivedCounit : o.right ⋙ o.left ⟶ 𝟭 (Der S) := o.derivedAdjunction.counit
 
-/-- Proofs identifying the constructed derived counit on K-injective representatives.
-Source: Stacks 07A6. -/
+/-- Proofs identifying the constructed derived counit on K-injective representatives. -/
 structure DerivedAdjunction : Prop where
   counit_shift : NatTrans.CommShift o.derivedCounit ℤ
   counit : ∀ (I : CochainComplex (Mod S) ℤ), I.IsKInjective →
@@ -275,8 +271,7 @@ structure DerivedAdjunction : Prop where
 end Operation
 
 namespace Operation
-/-- Canonical pullback/tensor comparison, fixed on pure sections.
-Source: Stacks 03EL. -/
+/-- Canonical pullback/tensor comparison, fixed on pure sections. -/
 structure OrdinaryTensor {R : Sheaf J CommRingCat.{u + 1}} {S : Sheaf K CommRingCat.{u + 1}}
     {F : C ⥤ D} (o : Operation F R S) where
   iso : ∀ M N : Mod R, o.pullback.obj (((tensor R).obj M).obj N) ≅
@@ -291,8 +286,7 @@ structure OrdinaryTensor {R : Sheaf J CommRingCat.{u + 1}} {S : Sheaf K CommRing
 
 end Operation
 
-/-- Canonical signed total-tensor map on representatives.
-Source: Stacks 07A4. -/
+/-- Canonical signed total-tensor map on representatives. -/
 noncomputable def totalComponent {R : Sheaf J CommRingCat.{u + 1}} {S : Sheaf K CommRingCat.{u + 1}}
     (a : TensorModel R) (b : TensorModel S) (L : Mod R ⥤ Mod S) [L.Additive]
     (mu : ∀ M N : Mod R, L.obj (((tensor R).obj M).obj N) ≅
@@ -306,8 +300,7 @@ noncomputable def totalComponent {R : Sheaf J CommRingCat.{u + 1}} {S : Sheaf K 
   letI := b.preadditive
   tensorPullbackTotalComponent L mu P Q n
 
-/-- The signed degree maps assemble to the canonical chain comparison.
-Source: Stacks 07A4. -/
+/-- The signed degree maps assemble to the canonical chain comparison. -/
 def totalMap {R : Sheaf J CommRingCat.{u + 1}} {S : Sheaf K CommRingCat.{u + 1}}
     (a : TensorModel R) (b : TensorModel S) (L : Mod R ⥤ Mod S) [L.Additive]
     (mu : ∀ M N : Mod R, L.obj (((tensor R).obj M).obj N) ≅
@@ -324,8 +317,7 @@ def totalMap {R : Sheaf J CommRingCat.{u + 1}} {S : Sheaf K CommRingCat.{u + 1}}
   f := totalComponent a b L mu P Q
   comm' := fun n m _ ↦ comm P Q n m
 
-/-- A derived comparison agrees with the signed total map on every resolving pair.
-Source: Stacks 07A4. -/
+/-- A derived comparison agrees with the signed total map on every resolving pair. -/
 structure TensorComparisonCore {R : Sheaf J CommRingCat.{u + 1}} {S : Sheaf K CommRingCat.{u + 1}}
     (L : Mod R ⥤ Mod S) [L.Additive] (d : ExactModel L)
     (a : TensorModel R) (b : TensorModel S)
@@ -338,8 +330,7 @@ structure TensorComparisonCore {R : Sheaf J CommRingCat.{u + 1}} {S : Sheaf K Co
       ((total S).obj ((L.mapHomologicalComplex (.up ℤ)).obj P,
         (L.mapHomologicalComplex (.up ℤ)).obj Q)).d n m ≫ totalComponent a b L mu P Q m
 
-/-- Equality with the signed total comparison on every flat K-flat representative.
-Source: Stacks 07A4. -/
+/-- Equality with the signed total comparison on every flat K-flat representative. -/
 def TensorComparisonCore.Representative {R : Sheaf J CommRingCat.{u + 1}}
     {S : Sheaf K CommRingCat.{u + 1}}
     {L : Mod R ⥤ Mod S} [L.Additive] {d : ExactModel L}
@@ -358,8 +349,7 @@ def TensorComparisonCore.Representative {R : Sheaf J CommRingCat.{u + 1}}
       DerivedCategory.Q.map (totalMap a b L mu t.comm P Q) =
       d.factors.hom.app ((total R).obj (P, Q))
 
-/-- A canonical derived tensor comparison, determined on all resolving pairs.
-Source: Stacks 07A4. -/
+/-- A canonical derived tensor comparison, determined on all resolving pairs. -/
 structure TensorComparison {R : Sheaf J CommRingCat.{u + 1}} {S : Sheaf K CommRingCat.{u + 1}}
     (L : Mod R ⥤ Mod S) [L.Additive] (d : ExactModel L)
     (a : TensorModel R) (b : TensorModel S)
@@ -367,8 +357,7 @@ structure TensorComparison {R : Sheaf J CommRingCat.{u + 1}} {S : Sheaf K CommRi
       ((tensor S).obj (L.obj M)).obj (L.obj N)) extends TensorComparisonCore L d a b mu where
   representative : toTensorComparisonCore.Representative
 
-/-- The two tensor-comparison squares for the normalized integer shifts.
-Source: Stacks 07A4. -/
+/-- The two tensor-comparison squares for the normalized integer shifts. -/
 structure TensorComparisonShifts {R : Sheaf J CommRingCat.{u + 1}}
     {S : Sheaf K CommRingCat.{u + 1}} {L : Mod R ⥤ Mod S} [L.Additive]
     {d : ExactModel L} {a : TensorModel R} {b : TensorModel S}
@@ -395,8 +384,7 @@ structure TensorComparisonShifts {R : Sheaf J CommRingCat.{u + 1}}
       (d.functor.commShiftIso n).hom.app (a.functor.obj (M, N)) ≫
       (shiftFunctor (Der S) n).map (t.comparison.hom.app (M, N))
 
-/-- Exact localization restriction, using Mathlib's `overFunctor`.
-Source: Stacks 03DJ. -/
+/-- Exact localization restriction, using Mathlib's `overFunctor`. -/
 structure Restriction (R : Sheaf J CommRingCat.{u + 1}) (V : C) where
   [limits : PreservesFiniteLimits (SheafOfModules.overFunctor.{u + 1}
     ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R) V)]
@@ -415,8 +403,7 @@ structure Restriction (R : Sheaf J CommRingCat.{u + 1}) (V : C) where
       pure (R.over V) (M.over V) (N.over V) W x y
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Actual exact descent of restriction, with its fixed localization comparison.
-Source: Stacks 0735. -/
+/-- Actual exact descent of restriction, with its fixed localization comparison. -/
 abbrev Restriction.model {R : Sheaf J CommRingCat.{u + 1}} {V : C} (r : Restriction R V)
     : ExactModel (R := R) (S := R.over V)
       (SheafOfModules.overFunctor.{u + 1}
@@ -432,8 +419,7 @@ abbrev Restriction.model {R : Sheaf J CommRingCat.{u + 1}} {V : C} (r : Restrict
     }
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The fixed termwise-restriction shift on its exact derived model.
-Source: Stacks 0735. -/
+/-- The fixed termwise-restriction shift on its exact derived model. -/
 instance Restriction.modelShift {R : Sheaf J CommRingCat.{u + 1}} {V : C}
     (r : Restriction R V) : r.model.functor.CommShift ℤ :=
   letI := r.additive
@@ -451,8 +437,7 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y)
   (R_X : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
   (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R_Y ≅ R_X)
 
-/-- Canonically normalized operations and tensor on the original sites.
-Source: Stacks 07A4 and 07A6. -/
+/-- Canonically normalized operations and tensor on the original sites. -/
 structure Global where
   operation : Operation (proEtaleBaseChange f) R_Y R_X
   coefficient_eq : operation.coefficient =
@@ -471,8 +456,7 @@ structure Global where
     (sa := tensorYShifts) (sb := tensorXShifts) (sd := inferInstance)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The actual slice restrictions and their normalized derived comparisons.
-Source: Stacks 04J0, 08FI and 0FN5. -/
+/-- The actual slice restrictions and their normalized derived comparisons. -/
 structure Local (g : Global f R_Y R_X c) (V : Y.ProEt) where
   [restrictionYAdditive : (SheafOfModules.overFunctor.{u + 1}
     ((sheafCompose (ProEt.topology Y)
@@ -562,8 +546,7 @@ structure Local (g : Global f R_Y R_X c) (V : Y.ProEt) where
       restrictionX.model.functor.map (g.operation.derivedCounit.app E)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The source identification is tensor restriction followed by direct-image restriction.
-Source: Stacks 0B56. -/
+/-- The source identification is tensor restriction followed by direct-image restriction. -/
 def Local.sourceIso {f : X ⟶ Y}
     {R_Y : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}}
     {R_X : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
@@ -581,8 +564,7 @@ def Local.sourceIso {f : X ⟶ Y}
     l.tensorY.functor.mapIso (CategoryTheory.Iso.prod (l.directImage.app E) (Iso.refl _))
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The target identification is direct-image restriction, tensor restriction and pullback.
-Source: Stacks 0B56. -/
+/-- The target identification is direct-image restriction, tensor restriction and pullback. -/
 def Local.targetIso {f : X ⟶ Y}
     {R_Y : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}}
     {R_X : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
@@ -603,8 +585,7 @@ def Local.targetIso {f : X ⟶ Y}
           (CategoryTheory.Iso.prod (Iso.refl _) (l.pullback.app P)))
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Restriction of the actual adjoint-of-counit projection mate, under the constructed isos.
-Source: Stacks 0B56. -/
+/-- Restriction of the actual adjoint-of-counit projection mate, under the constructed isos. -/
 def Local.ProjectionCompatible {f : X ⟶ Y} {R_Y : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}}
     {R_X : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
     {c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R_Y ≅ R_X}

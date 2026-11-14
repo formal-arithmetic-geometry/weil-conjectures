@@ -15,7 +15,10 @@ import WeilConjectures.AlgebraicGeometry.PerfectHomCochainCounit
 
 /-! # Single-module coefficients in an open square
 
-Source: Stacks Project, Tags 06YJ, 0D5S and 01JR.
+## References
+
+* Stacks Project, Tags 06YJ, 0D5S and 01JR
+* Stacks Project, Tags 06YJ and 0D5S
 -/
 
 @[expose] public section
@@ -275,8 +278,7 @@ private theorem tensor_single_composition {X Y Z : Scheme.{u}}
 end
 
 /-- Normalized single-module coefficient comparisons commute with an open square.
-This is an equality of coefficient maps, before any direct image or base-change mate.
-Source: Stacks Project, Tags 06YJ and 0D5S. -/
+This is an equality of coefficient maps, before any direct image or base-change mate. -/
 theorem single_open_tensor_coefficient_coherence
     {W Z X' P J J' : Scheme.{u}}
     (z : Z ⟶ W) (q : X' ⟶ W) (t : P ⟶ Z)

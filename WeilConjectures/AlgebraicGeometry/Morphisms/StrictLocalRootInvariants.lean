@@ -17,7 +17,12 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.RootPowerMapInvariants
 
 /-! # Fixed rings of a strict local root algebra
 
-Source: Stacks Project, Tags 0EYG and 09EV, intermediate-root calculation.
+## References
+
+* Stacks Project, Tags 0EYG and 09EV, intermediate-root calculation
+* Stacks Project, Tag 09EV, cyclic intermediate-root calculation
+* Stacks Project, Tag 09EV, intermediate subextensions
+* Stacks Project, Tag 0EYG, final intermediate-field paragraph, and Tag 09EV
 -/
 
 @[expose] public section
@@ -28,8 +33,7 @@ set_option autoImplicit false
 namespace AlgebraicGeometry.Scheme
 
 /-- The endomorphism of a root algebra sending its root to `zeta * root`.
-Its construction is polynomial evaluation, with no choice of algebra data.
-Source: Stacks Project, Tag 09EV, cyclic intermediate-root calculation. -/
+Its construction is polynomial evaluation, with no choice of algebra data. -/
 noncomputable def rootRotation (H : Type u) [CommRing H] (h : H) (n : ℕ)
     (ζ : rootsOfUnity n H) :
     AdjoinRoot ((Polynomial.X : Polynomial H) ^ n - Polynomial.C h) →ₐ[H]
@@ -46,16 +50,13 @@ noncomputable def rootRotation (H : Type u) [CommRing H] (h : H) (n : ℕ)
         Polynomial.eval₂_C, mul_pow, ← map_pow, hz, map_one, one_mul, ht']
       exact sub_self _)
 
-/-- The actual fixed subalgebra for a subgroup of the root rotations.
-Source: Stacks Project, Tag 09EV, intermediate subextensions. -/
+/-- The actual fixed subalgebra for a subgroup of the root rotations. -/
 noncomputable def rootFixedAlgebra (H : Type u) [CommRing H] (h : H) (n : ℕ)
     (K : Subgroup (rootsOfUnity n H)) :
     Subalgebra H (AdjoinRoot ((Polynomial.X : Polynomial H) ^ n - Polynomial.C h)) :=
   ⨅ ζ : K, AlgHom.equalizer (rootRotation H h n ζ.val) (AlgHom.id H _)
 
-/-- A subgroup of the root rotations has an intermediate root algebra as its fixed ring.
-
-Source: Stacks Project, Tag 0EYG, final intermediate-field paragraph, and Tag 09EV. -/
+/-- A subgroup of the root rotations has an intermediate root algebra as its fixed ring. -/
 theorem strict_local_root_invariants
     (H : Type u) [CommRing H] [IsStrictlyHenselianLocalRing H]
     (h : H) (n : ℕ) (hn : 0 < n ∧ IsUnit (n : H))

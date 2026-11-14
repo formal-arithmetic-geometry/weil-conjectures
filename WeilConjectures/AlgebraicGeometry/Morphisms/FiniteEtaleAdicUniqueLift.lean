@@ -13,7 +13,10 @@ import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.FullyF
 /-!
 # Unique finite étale morphism lifts to quotient-power thickenings
 
-Source: Stacks Project, Tags 0EL8 and 0BQB.
+## References
+
+* Stacks Project, Tags 0EL8 and 0BQB
+* Stacks Project, Tag 0BQB (invariance under a thickening), as used in Tag 0EL8
 -/
 
 @[expose] public section
@@ -135,9 +138,7 @@ private theorem etaleUniversalHomeomorphismLift
 
 
 /-- A map of finite étale covers on a quotient section lifts uniquely to each
-quotient-power thickening.
-
-Source: Stacks Project, Tag 0BQB (invariance under a thickening), as used in Tag 0EL8 -/
+quotient-power thickening. -/
 theorem finiteEtale_adic_unique_lift
     {R S : Type u} [CommRing R] [CommRing S] (f : R →+* S)
     (hf : Function.Surjective f) (V : (Spec (.of R)).Opens)

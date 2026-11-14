@@ -10,7 +10,11 @@ import WeilConjectures.AlgebraicGeometry.ProjectionRestriction.RingedProjectionL
 
 /-! # Normalized operations on a localized pro-etale site
 
-Source: Stacks Project, Tags 04J0, 08FI, 0FN5 and 07A4.
+## References
+
+* Stacks Project, Tags 04J0, 08FI, 0FN5 and 07A4
+* Stacks Project, Modules on Sites, Tag 04J0
+* Cohomology on Sites, Tags 08FI, 0FN5 and 07A4
 -/
 
 @[expose] public noncomputable section
@@ -21,9 +25,7 @@ open CategoryTheory AlgebraicGeometry
 
 namespace AlgebraicGeometry.Scheme.ProjectionRestriction
 
-/-- The localized operation and tensor comparisons exist before considering projection maps.
-Source: Stacks Project, Modules on Sites, Tag 04J0; Cohomology on Sites, Tags 08FI, 0FN5 and 07A4.
--/
+/-- The localized operation and tensor comparisons exist before considering projection maps. -/
 theorem localData_exists
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R_Y : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})

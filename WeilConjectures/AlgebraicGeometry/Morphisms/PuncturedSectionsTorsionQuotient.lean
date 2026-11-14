@@ -14,7 +14,12 @@ import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 
 /-! # The punctured sections complex is the torsion quotient
 
-Source: Stacks Project, Tags 0BK0, 0A6T, and 09T2.
+## References
+
+* Stacks Project, Tags 0BK0, 0A6T, and 09T2
+* Stacks Project, Tag 0BK0, Lemma 51.8.2
+* Tag 0A6T, Lemma 51.2.1
+* and Tag 09T2, Lemma 36.8.1
 -/
 
 @[expose] public section
@@ -26,7 +31,6 @@ namespace AlgebraicGeometry.Scheme
 set_option backward.isDefEq.respectTransparency false in
 /-- On the complement of the closed point, the complex of sections of associated
 injective modules is the categorical quotient by maximal-ideal-power torsion.
-Source: Stacks Project, Tag 0BK0, Lemma 51.8.2; Tag 0A6T, Lemma 51.2.1; and Tag 09T2, Lemma 36.8.1.
 -/
 theorem nonempty_injective_quotient_iso_punctured_sections
     (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R]

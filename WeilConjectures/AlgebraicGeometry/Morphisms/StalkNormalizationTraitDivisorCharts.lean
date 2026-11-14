@@ -26,7 +26,11 @@ import WeilConjectures.RingTheory.RegularRingSmoothAscent
 import Mathlib.RingTheory.TensorProduct.Quotient
 
 /-! Tame charts with the trait divisor equation.
-Source: Stacks Project, Tags 0EYH, 0EYI and 0EYJ.
+
+## References
+
+* Stacks Project, Tags 0EYH, 0EYI and 0EYJ
+* Stacks Project, Tags 0EYJ (trait reduction), 0EYG and 0EYH
 -/
 
 @[expose] public section
@@ -175,9 +179,7 @@ private theorem smooth_trait_affine_generic_open_over
 
 set_option maxHeartbeats 1000000 in
 -- Elaborating the nested pullbacks and product root algebras exceeds the default budget.
-/-- A tame affine chart using the pullback of an actual trait uniformizer.
-
-Source: Stacks Project, Tags 0EYJ (trait reduction), 0EYG and 0EYH. -/
+/-- A tame affine chart using the pullback of an actual trait uniformizer. -/
 theorem GaloisCover.stalk_normalization_trait_divisor_charts {S C : Scheme.{u}}
     [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]

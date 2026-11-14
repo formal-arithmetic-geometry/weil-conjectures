@@ -19,7 +19,11 @@ import Mathlib.RingTheory.Ideal.GoingUp
 /-!
 # Étale splitting of an integral morphism with finite fibre
 
-Source: Stacks Project, More on Morphisms, Tag 0BSR, with finite residue extensions.
+## References
+
+* Stacks Project, More on Morphisms, Tag 0BSR, with finite residue extensions
+* Stacks Project, Tag 0BSR, first proof
+* Stacks Project, More on Morphisms, Tag 0BSR
 -/
 
 @[expose] public section
@@ -178,7 +182,7 @@ private theorem exists_etale_clopen_singleton_fibre_affine
 /-- A finite intermediate algebra separates the selected prime from the other primes in
 its fibre. Apply the elementary finite-neighbourhood theorem to this finite model, and
 pull its clopen neighbourhood back to the original integral scheme. Affine shrinking
-handles a non-affine base. Source: Stacks Project, Tag 0BSR, first proof. -/
+handles a non-affine base. -/
 private theorem exists_etale_clopen_singleton_fibre
     {X S : Scheme.{u}} (f : X ⟶ S) [IsIntegralHom f] (s : S)
     (hfibre : Set.Finite {z : X | f z = s}) (x : X) (hx : f x = s) :
@@ -234,8 +238,7 @@ private theorem exists_etale_clopen_singleton_fibre
 
 /-- Separate the finitely many fibre points successively. At each step take a common
 pointed affine étale refinement and remove the new clopen from all previous clopens.
-The restriction to the marked fibre is unchanged because the listed points are distinct.
-Source: Stacks Project, Tag 0BSR, first proof. -/
+The restriction to the marked fibre is unchanged because the listed points are distinct. -/
 private theorem exists_etale_clopen_fibre_separation
     {X S : Scheme.{u}} (f : X ⟶ S) [IsIntegralHom f]
     (s : S) (n : ℕ) (x : Fin n → X) (hx : Function.Injective x)
@@ -586,8 +589,6 @@ private theorem purelyInseparable_residue_square
 splits after a pointed affine étale base change into clopen affine pieces with singleton,
 purely inseparable fibres. The base field in the last clause is written at the image of `v`;
 the preceding equality identifies that image with `u`. The number of pieces may be zero.
-
-Source: Stacks Project, More on Morphisms, Tag 0BSR.
 -/
 theorem exists_integral_fibre_etale_splitting
     {T S : Scheme.{u}} [IsAffine T] [IsAffine S] (π : T ⟶ S) [IsIntegralHom π]

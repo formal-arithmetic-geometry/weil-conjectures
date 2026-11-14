@@ -16,8 +16,11 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 /-!
 # Degree-zero constant coefficients under connected fibres
 
-Source: Stacks Project, Tag 0A3H, applied over every etale base object;
-Tag 0GKV, case (b), degree zero.
+## References
+
+* Stacks Project, Tag 0A3H, applied over every etale base object
+* Tag 0GKV, case (b), degree zero
+* Stacks Project, Tags 0A3H and 0GKV, case (b), degree zero
 -/
 
 @[expose] public section
@@ -82,8 +85,7 @@ private theorem constant_finiteLocallyConstant
   exact {}
 
 /-- Degree-zero direct image of finite constant coefficients is constructible under
-a flat quasi-compact morphism with geometrically connected nonempty fibres.
-Source: Stacks Project, Tags 0A3H and 0GKV, case (b), degree zero. -/
+a flat quasi-compact morphism with geometrically connected nonempty fibres. -/
 theorem higherDirectImage_zero_constant_constructible
     {X S : Scheme.{u}} {R : Type (u + 1)} [CommRing R]
     (f : X ⟶ S) [Flat f] [QuasiCompact f] [GeometricallyConnected f]

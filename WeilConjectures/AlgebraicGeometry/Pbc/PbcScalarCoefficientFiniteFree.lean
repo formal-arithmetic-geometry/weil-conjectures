@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.IntegralCoefficientCompletenessTranspor
 
 /-! # Finite freeness of the completed scalar coefficient inclusion
 
-Source: Bhatt--Scholze, Lemma 6.8.2(1)
+## References
+
+* Bhatt--Scholze, Lemma 6.8.2(1)
 -/
 
 @[expose] public noncomputable section
@@ -35,8 +37,7 @@ variable (l : ℕ) [Fact l.Prime]
     (E F : Type u) [Field E] [Field F] [Algebra ℚ_[l] E] [Algebra ℚ_[l] F]
     [FiniteDimensional ℚ_[l] E] [FiniteDimensional ℚ_[l] F] (i : E →ₐ[ℚ_[l]] F)
 
-/-- The completed target integral coefficients are finite free over the source ones.
-Source: Bhatt--Scholze, Lemma 6.8.2(1). -/
+/-- The completed target integral coefficients are finite free over the source ones. -/
 theorem pbcScalarCoefficient_finiteFree (T : Scheme.{u}) :
     ∃ d : ℕ, Nonempty ((proEtaleRingRestrictScalars (pbcScalarCoefficientMap l E F i T)).obj
         (SheafOfModules.unit ((sheafCompose (ProEt.topology T)

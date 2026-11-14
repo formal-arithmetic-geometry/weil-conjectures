@@ -13,7 +13,10 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal
 /-!
 # Local bases of the integral Tate module
 
-Source: Bhatt–Scholze, The pro-étale topology for schemes, Section 6.8.
+## References
+
+* Bhatt–Scholze, The pro-étale topology for schemes, Section 6.8
+* Bhatt–Scholze, Section 6.8
 -/
 
 @[expose] public section
@@ -43,9 +46,7 @@ private theorem weaklyEtale_preservesLimits {X Y : Scheme.{u}} (f : Y ⟶ X) [We
     reflectsLimitsOfShape_of_reflectsIsomorphisms
   exact preservesLimitsOfShape_of_reflects_of_preserves (F.mapMod R) (Mod.forget (F.obj R))
 
-/-- The integral Tate module has a pro-étale local basis.
-
-Source: Bhatt–Scholze, Section 6.8. -/
+/-- The integral Tate module has a pro-étale local basis. -/
 theorem tateModule_locally_trivial
     (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : IsUnit (ℓ : Γ(X, ⊤)))
     : ∃ 𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ i : 𝒰.I₀,

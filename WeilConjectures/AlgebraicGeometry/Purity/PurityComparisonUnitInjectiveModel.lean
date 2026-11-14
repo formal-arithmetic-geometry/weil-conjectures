@@ -14,7 +14,9 @@ set_option autoImplicit false
 /-!
 # Injective-resolution representative of the comparison unit
 
-Source: Lemma Tags 0DVC and 09T5.
+## References
+
+* Lemma Tags 0DVC and 09T5
 -/
 
 @[expose] public section

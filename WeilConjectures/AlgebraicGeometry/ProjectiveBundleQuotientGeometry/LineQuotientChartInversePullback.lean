@@ -16,7 +16,10 @@ import Mathlib.CategoryTheory.Functor.EpiMono
 
 /-! # Inverse quotient charts and arbitrary pullback
 
-Source: Stacks Project, Constructions, Tags 01OA and 01O4.
+## References
+
+* Stacks Project, Constructions, Tags 01OA and 01O4
+* Stacks, Constructions, Tags 01OA and 01O4
 -/
 
 @[expose] public section
@@ -411,9 +414,7 @@ private theorem fractionNaturality_of_coefficients {S T T' : Scheme.{u}}
 
 /-- Both inverse identities for an arbitrary normalized tautological datum, their chart
 normalizations, invariance under quotient isomorphisms, and arbitrary pullback compatibility.
-The existing fraction-map theorem provides the maps quantified over below, uniquely.
-
-Source: Stacks, Constructions, Tags 01OA and 01O4. -/
+The existing fraction-map theorem provides the maps quantified over below, uniquely. -/
 theorem line_quotient_chart_inverse_pullback {S : Scheme.{u}} (E : S.Modules)
     [E.IsQuasicoherent] (D : TautologicalQuotient E) :
     (∀ (T : Scheme.{u}) (h : T ⟶ S)

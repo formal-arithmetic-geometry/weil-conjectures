@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConsta
 /-!
 # Composition of pro-etale module inverse images with constant coefficients
 
-Source: Tag 03D8.
+## References
+
+* Tag 03D8
 -/
 
 @[expose] public section
@@ -138,8 +140,6 @@ module inverse image for the composite is canonically isomorphic to the successi
 images. The canonical comparison is the conjugate of the fibre-product direct-image
 identification, with the normalized module adjunctions and the prescribed constant-section
 actions.
-
-Source: Tag 03D8.
 -/
 theorem proEtaleConstantRingModulePullbackComposition
     {X Y Z : Scheme.{u}} (g : Z ⟶ X) (f : X ⟶ Y)

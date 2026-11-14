@@ -19,7 +19,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.ExtensionByZeroUnitStalks
 /-!
 # Extension by zero of modules on an open subscheme
 
-Source: Stacks Project, Definition 00A4 and Lemma 00A7.
+## References
+
+* Stacks Project, Definition 00A4 and Lemma 00A7
 -/
 
 @[expose] public section
@@ -33,7 +35,7 @@ noncomputable section
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Extension by zero is additive, left adjoint to restriction, and has the stated stalk properties.
-Source: Stacks Project, Definition 00A4 and Lemma 00A7. -/
+-/
 theorem module_extensionByZero_adjunction (X : Scheme.{u}) (U : X.Opens) :
     let R := X.ringCatSheaf
     let P := SheafOfModules.extensionByZeroPresheaf.{u} R U

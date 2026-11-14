@@ -16,8 +16,11 @@ import WeilConjectures.Mathlib.CategoryTheory.Shift.Adjunction
 
 /-! # Counit-normalized ambient scalar shift
 
-Source: Milne, Section 19.
 Existing declarations extracted from `PbcScalarExtension` to bound compilation cost.
+
+## References
+
+* Milne, Section 19
 -/
 
 @[expose] public noncomputable section

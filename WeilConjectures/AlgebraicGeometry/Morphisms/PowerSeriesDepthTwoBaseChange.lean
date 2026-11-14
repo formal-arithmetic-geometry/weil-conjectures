@@ -19,7 +19,12 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedFiniteMod
 /-!
 # Descent of the finite depth-two power-series extension as a finite scheme
 
-Source: Stacks Project, Tag 0EYA, identification C = C0 tensor B; Tags 0EY9 and 0EY6
+## References
+
+* Stacks Project, Tag 0EYA, identification C = C0 tensor B
+* Tags 0EY9 and 0EY6
+* Stacks Project, Tag 0EYA, construction of the isomorphism Psi
+* 0EY6(2),(a),(b)
 -/
 
 @[expose] public section
@@ -59,9 +64,7 @@ private theorem depth_at_closed_point
   exact hdepth.trans le_self_add
 
 /-- A finite depth-two extension on a proper power-series open comes by base change
-from a finite scheme over the coefficient ring. No etaleness of that scheme is asserted.
-
-Source: Stacks Project, Tag 0EYA, construction of the isomorphism Psi; 0EY6(2),(a),(b). -/
+from a finite scheme over the coefficient ring. No etaleness of that scheme is asserted. -/
 theorem exists_finite_base_of_power_series_depth_two
     (B : Type u) [CommRing B] [IsLocalRing B] [IsNoetherianRing B]
     (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth (R := B) B)

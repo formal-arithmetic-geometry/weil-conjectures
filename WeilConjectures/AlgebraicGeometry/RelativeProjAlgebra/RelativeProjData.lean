@@ -19,15 +19,18 @@ import Mathlib.CategoryTheory.Sites.Abelian
 
 /-! # Relative Proj construction data
 
-Source: Nagata compactification, sketch data, Relative Proj; Stacks Project, Constructions, Tag
-01LH.
-
 The input records the underlying quasi-coherent algebra and its homogeneous sheaves,
 with the direct-sum identification and its multiplication and unit equations. On affine
 opens the sections of this sum are the sum of sections. The local schemes are ordinary
 Proj schemes. Relative gluing over the basis of all affine opens records overlaps by
 pullback squares; intersections need not be affine. The output includes every affine
 restriction identification. No existence of the output is asserted here.
+
+## References
+
+* Nagata compactification, sketch data, Relative Proj
+* Stacks Project, Constructions, Tag 01LH
+* Stacks, Tag 01LH
 -/
 
 @[expose] public section
@@ -353,8 +356,7 @@ inverse and triple-overlap cocycle laws on affine refinements. `localIso`, `loca
 and `local_transition` specify the local models, their degree-zero structural maps and
 the restriction-induced overlap maps. The glued scheme and morphism are `gluing.glued`
 and `gluing.toBase`. `restrictionIso` and its equations are the universal affine
-restriction identifications and their compatibility. No existence is assumed or asserted.
-Source: Stacks, Tag 01LH. -/
+restriction identifications and their compatibility. No existence is assumed or asserted. -/
 structure RelativeProjData {X : Scheme.{u}} (A : RelativeProjAlgebra X) where
   gluing : Scheme.Cover.RelativeGluingData X.directedAffineCover
   localIso : ∀ V : X.affineOpens, gluing.functor.obj V ≅ A.localProj V

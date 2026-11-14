@@ -15,7 +15,9 @@ set_option linter.privateModule false
 
 /-! # Ambient pro-etale adjunction for the actual constant coefficient sheaf
 
-Source: Stacks Project, Tags 09BM and 09AH.
+## References
+
+* Stacks Project, Tags 09BM and 09AH
 -/
 
 @[expose] public section

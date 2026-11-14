@@ -16,7 +16,10 @@ import WeilConjectures.RingTheory.PowerSeriesCombinedIdealCoefficients
 /-!
 # Compatible sections of punctured power-series thickenings
 
-Source: Stacks Project, Tag 0EY9, first displayed inverse-limit calculation.
+## References
+
+* Stacks Project, Tag 0EY9, first displayed inverse-limit calculation
+* Stacks Project, Tag 0EY9, first displayed calculation, using depth-two Hartogs (Tag 0BK0)
 -/
 
 @[expose] public section
@@ -26,10 +29,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- Compatible sections on the quotient-power thickenings of the punctured zero
-section determine a unique power series, by their monomial coefficients.
-
-Source: Stacks Project, Tag 0EY9, first displayed calculation, using depth-two
-Hartogs (Tag 0BK0). -/
+section determine a unique power series, by their monomial coefficients. -/
 theorem existsUnique_powerSeries_punctured_thickening_sections
     (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]
     (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth (R := A) A)

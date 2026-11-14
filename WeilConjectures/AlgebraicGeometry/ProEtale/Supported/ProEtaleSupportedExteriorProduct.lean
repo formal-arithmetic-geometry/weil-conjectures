@@ -61,6 +61,10 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Closed.ProEtaleClosedPushforwa
 Supported coefficients are closed direct images of constant modules. The ordinary
 adjunction is normalized by the quotient from constant coefficients. Its derived
 adjunction and the coefficient tensor comparison specify the supported pairing.
+
+## References
+
+* Stacks Tag 09BM
 -/
 
 @[expose] public section
@@ -718,8 +722,7 @@ noncomputable def supportedCoefficientAdjunction
     supportedCoefficients A i ⊣ supportSections i A :=
   (exists_unique_supportedCoefficientAdjunction A i).choose
 
-/-- Exactness of closed supported coefficients.
-Source: Stacks Tag 09BM. -/
+/-- Exactness of closed supported coefficients. -/
 theorem supportedCoefficients_exact (A : Type (u + 1)) [CommRing A] [Finite A]
     {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] [IsLocallyNoetherian X] :
     PreservesFiniteLimits (supportedCoefficients A i) ∧

@@ -6,15 +6,19 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.PrincipalTorsorComparisons.PrincipalTorsorSignTypes
 import WeilConjectures.AlgebraicGeometry.Principal.PrincipalTorsorSignedRepresentatives
-/-! Independent comparison result for the principal torsor sign calculation. -/
+/-! Independent comparison result for the principal torsor sign calculation.
+
+## References
+
+* Stacks 03AJ, 0G78
+-/
 @[expose] public section
 set_option autoImplicit false
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Abelian Opposite HomologicalComplex
 namespace AlgebraicGeometry.Etale
 /-- Cocycle-normalized supported-Hom comparisons are natural in coefficient lifts and
-etale restriction.
-Source: Stacks 03AJ, 0G78. -/
+etale restriction. -/
 theorem principalTorsorNormalizedNatural
     (C : PrincipalTorsorComparisons.{u}) (hC : C.Normalized) : C.Natural := by
   refine ⟨?_, ?_⟩

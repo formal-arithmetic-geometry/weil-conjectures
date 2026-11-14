@@ -27,7 +27,10 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 
 /-! # Exact constant-coefficient pullback in independent universes
 
-Source: Stacks Project, Tags 00YV, 03D2, and 04JC. -/
+## References
+
+* Stacks Project, Tags 00YV, 03D2, and 04JC
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -219,8 +222,7 @@ private theorem modelPullback_exact {X Y : Scheme.{t}} (f : X ⟶ Y)
     preservesFiniteColimits_of_reflects_of_preserves M U⟩
 
 /-- Constant-coefficient module pullback is exact, with no relation imposed between
-site and coefficient universes.
-Source: Stacks Project, Tags 00YV, 03D2, and 04JC. -/
+site and coefficient universes. -/
 theorem coefficientProEtaleModulePullback_exact {X Y : Scheme.{t}} (f : X ⟶ Y)
     (A : CommRingCat.{max r (t + 1)}) :
     PreservesFiniteLimits (coefficientProEtaleModulePullback.{t,r} f A) ∧

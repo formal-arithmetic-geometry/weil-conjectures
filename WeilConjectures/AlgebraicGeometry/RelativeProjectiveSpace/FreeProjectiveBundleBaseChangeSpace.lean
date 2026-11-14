@@ -13,8 +13,6 @@ import WeilConjectures.AlgebraicGeometry.RelativeProj.Universal
 
 /-! # Free projective bundles and base-change projective space
 
-Source: Stacks Project, Constructions, Tags 01NF and 01O3; Morphisms, Tag 087S.
-
 The local normalization uses the recorded polynomial equivalence for the symmetric
 algebra, followed by coefficient extension from the integral polynomial ring. Equality
 with `Proj.map` specifies the entire local Proj comparison, including its homogeneous
@@ -27,6 +25,13 @@ polynomial identifications and the local scheme maps.
 * `IsIntegralProjComparison`: equality with its canonical Proj map.
 * `affineToIntegral`: the integral projection of an affine restriction.
 * `existsUnique_freeProjectiveBundleBaseChangeSpace`: the normalized global isomorphism.
+
+## References
+
+* Stacks Project, Constructions, Tags 01NF and 01O3
+* Morphisms, Tag 087S
+* Stacks Project, Tags 01NF and 01O3
+* Stacks Project, Tags 01NF, 01O3 and 01N2
 -/
 
 @[expose] public section
@@ -44,8 +49,7 @@ namespace AlgebraicGeometry.RelativeProjectiveSpace
 
 /-- The integral polynomial map on an affine base: extend coefficients, fix the ordered
 variables, and apply the inverse of the symmetric-algebra polynomial identification.
-Thus `T_i` maps to `j_F(e_i)` and integers map by the structural unit.
-Source: Stacks Project, Tags 01NF and 01O3. -/
+Thus `T_i` maps to `j_F(e_i)` and integers map by the structural unit. -/
 def integralPolynomialMap (S : Scheme.{u}) (r : ℕ) (V : S.affineOpens) :
     MvPolynomial (ULift.{u} (Fin (r + 1))) (ULift.{u} ℤ) →+* (algebra S r).sections V :=
   (affinePolynomialEquiv S r V).toRingHom.comp
@@ -57,8 +61,7 @@ def integralPolynomialMap (S : Scheme.{u}) (r : ℕ) (V : S.affineOpens) :
 /-- The local map to the integral Proj specified by the coefficient extension and the
 ordered symmetric generators. The irrelevant-ideal condition is an existential witness
 for the prescribed map, not an extra hypothesis on the base. `Proj.map` carries exactly
-the standard degree-zero homogeneous-localization formulas.
-Source: Stacks Project, Tags 01NF, 01O3 and 01N2. -/
+the standard degree-zero homogeneous-localization formulas. -/
 def IsIntegralProjComparison (S : Scheme.{u}) (r : ℕ) (V : S.affineOpens)
     (f : (algebra S r).localProj V ⟶
       Proj.projectiveSpaceOverAffine (ULift.{u} (Fin (r + 1))) (ULift.{u} ℤ)) : Prop :=
@@ -74,8 +77,7 @@ def IsIntegralProjComparison (S : Scheme.{u}) (r : ℕ) (V : S.affineOpens)
 
 /-- Restrict a global comparison to the affine relative-Proj model and project to the
 integral Proj. Together with the structural map to `V`, this determines its map to the
-base-change projective space over `V` by the fibre-product universal property.
-Source: Stacks Project, Tags 01NF and 01O3. -/
+base-change projective space over `V` by the fibre-product universal property. -/
 def affineToIntegral (S : Scheme.{u}) (r : ℕ)
     (θ : scheme S r ≅ ProjectiveSpace (ULift.{u} (Fin (r + 1))) S)
     (V : S.affineOpens) :
@@ -426,8 +428,7 @@ private theorem local_comparison_eq (S : Scheme.{u}) (r : ℕ)
 
 /-- The symmetric-algebra relative projective space is canonically the base change of
 integral projective space. On every affine open it is the Proj map of the standard
-symmetric-algebra polynomial equivalence, compatibly with base restriction.
-Source: Stacks Project, Constructions, Tags 01NF and 01O3; Morphisms, Tag 087S. -/
+symmetric-algebra polynomial equivalence, compatibly with base restriction. -/
 theorem existsUnique_freeProjectiveBundleBaseChangeSpace (S : Scheme.{u}) (r : ℕ) :
     ∃! θ : scheme S r ≅ ProjectiveSpace (ULift.{u} (Fin (r + 1))) S,
       (θ.hom ≫ ProjectiveSpace (ULift.{u} (Fin (r + 1))) S ↘ S = π S r) ∧

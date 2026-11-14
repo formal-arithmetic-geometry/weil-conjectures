@@ -27,7 +27,11 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Projection
 /-!
 # Etale-origin comparison of compact-support projection maps
 
-Source: Stacks Tags 0E48, 09AF and 0GL1.
+## References
+
+* Stacks Tags 0E48, 09AF and 0GL1
+* Stacks Tag 099R
+* Stacks Tags 07A4 and 099R
 -/
 
 @[expose] public noncomputable section
@@ -42,8 +46,7 @@ open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale
 
-/-- The derived pullback comparison used in the target transport.
-Source: Stacks Tag 099R. -/
+/-- The derived pullback comparison used in the target transport. -/
 noncomputable def projectionComparisonPullbackIso (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory ⋙
@@ -63,8 +66,7 @@ noncomputable def projectionComparisonPullbackIso (A : Type (u + 1)) [CommRing A
       (Etale.upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor
       (comparisonUpperStar (ModuleCat.{u + 1} A) X).leftDerivedFunctorIsoMapDerivedCategory
 
-/-- The canonical target transport from the comparison of pullback and tensor.
-Source: Stacks Tags 07A4 and 099R. -/
+/-- The canonical target transport from the comparison of pullback and tensor. -/
 noncomputable def projectionComparisonTargetIso (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (M : Etale.DerivedCategoryModule A X) (H : Etale.DerivedCategoryModule A Y) :

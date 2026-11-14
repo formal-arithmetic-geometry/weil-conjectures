@@ -14,7 +14,10 @@ import WeilConjectures.RingTheory.SmoothPushoutFilteredColimitStage
 /-!
 # Smoothness of an affine model over an affine inverse system
 
-Source: Stacks Project, Tags 0C0C, 0CAQ and 01ZM(2)-(3).
+## References
+
+* Stacks Project, Tags 0C0C, 0CAQ and 01ZM(2)-(3)
+* Stacks Project, Tag 0C0C, affine case, using Tags 0CAQ and 01ZM(2)-(3)
 -/
 
 @[expose] public section
@@ -25,9 +28,7 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Smoothness of a fixed finitely presented affine model descends along an affine system.
-
-Source: Stacks Project, Tag 0C0C, affine case, using Tags 0CAQ and 01ZM(2)-(3). -/
+/-- Smoothness of a fixed finitely presented affine model descends along an affine system. -/
 theorem exists_smooth_stage_of_affine_diagram {I : Type u} [SmallCategory I]
     [IsCofiltered I] (D : I ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)
     (hD : ∀ j, IsAffine (D.obj j))

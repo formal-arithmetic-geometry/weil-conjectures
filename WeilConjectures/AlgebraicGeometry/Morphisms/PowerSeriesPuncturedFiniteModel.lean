@@ -19,7 +19,12 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedSectionFu
 /-!
 # A coefficient model on the punctured power-series base
 
-Source: Stacks Project, Tag 0EYA, the construction preceding Psi; Tags 0EY9 and 0EY6
+## References
+
+* Stacks Project, Tag 0EYA, the construction preceding Psi
+* Tags 0EY9 and 0EY6
+* Stacks Project, Tag 0EYA, paragraphs defining W0 and C0 and their comparison on U times_X Y
+* Tags 0EY9 and 0EY6(1), (2)
 -/
 
 @[expose] public section
@@ -30,10 +35,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Over the inverse image of the punctured coefficient spectrum, a finite etale
 power-series cover has a finite coefficient model of depth two at the closed fibre.
-No comparison on the whole power-series spectrum is asserted.
-
-Source: Stacks Project, Tag 0EYA, paragraphs defining W0 and C0 and their comparison on U times_X Y;
-Tags 0EY9 and 0EY6(1), (2). -/
+No comparison on the whole power-series spectrum is asserted. -/
 theorem exists_power_series_punctured_finite_model
     (B : Type u) [CommRing B] [IsLocalRing B] [IsNoetherianRing B]
     (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth (R := B) B)

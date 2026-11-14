@@ -20,11 +20,13 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
 /-!
 # A specified scalar presentation after extension to coefficient sheaves
 
-Source: Stacks, Modules on Sites, Tags 03CY, 03CZ, 0GMW and Section 03EK.
-
 The coefficient functor and scalar matrix are the existing local-model constructions.
 Matrix entries are maps from the integer tensor unit, equivalently elements of Λ(*).
 Their first index is the source column and their second index is the target row.
+
+## References
+
+* Stacks, Modules on Sites, Tags 03CY, 03CZ, 0GMW and Section 03EK
 -/
 
 @[expose] public section
@@ -42,8 +44,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- A specified finite scalar presentation remains a cokernel diagram after taking
 constant module sheaves and extending scalars to Λ_U. The free comparisons send
-`1 ⊗ e_j` to `e_j`; the final cokernel comparison commutes with the specified quotient.
-Source: Stacks, Modules on Sites, Tags 03CY, 03CZ, 0GMW and Section 03EK. -/
+`1 ⊗ e_j` to `e_j`; the final cokernel comparison commutes with the specified quotient. -/
 theorem scalar_presentation_cokernel
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     (U : Scheme.{u}) (m n : ℕ)

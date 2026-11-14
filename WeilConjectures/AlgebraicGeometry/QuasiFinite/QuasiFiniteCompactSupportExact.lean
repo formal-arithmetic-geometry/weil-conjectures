@@ -126,7 +126,10 @@ import WeilConjectures.SixFunctors.Finite.Exact
 /-!
 # Quasi-finite compact support is exact
 
-Source: Stacks Project, More on Étale Cohomology, Tag 0GKM, with Tags 0F4Y, 0F50, 0F7J and 0F5F.
+## References
+
+* Stacks Project, More on Étale Cohomology, Tag 0GKM, with Tags 0F4Y, 0F50, 0F7J and 0F5F
+* Stacks Project, More on Étale Cohomology, Tags 0GKM, 0F4Y, 0F50, 0F7J and 0F5F
 -/
 
 @[expose] public section
@@ -140,7 +143,6 @@ namespace AlgebraicGeometry.Etale
 agrees on all unbounded complexes with every compactification construction. The comparison
 family is compatible with canonical compactification changes, composition, étale sum extension,
 and identity normalization.
-Source: Stacks Project, More on Étale Cohomology, Tags 0GKM, 0F4Y, 0F50, 0F7J and 0F5F.
 
 Identity comparisons are shared with the three comparison families whenever their
 compactifications coincide. Coincidence means equality of the compactification together

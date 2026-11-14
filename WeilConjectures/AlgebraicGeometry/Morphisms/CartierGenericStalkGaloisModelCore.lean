@@ -16,14 +16,16 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.StalkProductResidueComparison
 
 /-! # Geometric factor and residue square at a Cartier DVR stalk
 
-Source: Stacks Project, Tags 0307 and 09EB. -/
+## References
+
+* Stacks Project, Tags 0307 and 09EB
+-/
 
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
-/-- Geometric local model with compatible residue-field isomorphisms.
-Source: Stacks Project, Tags 0307 and 09EB. -/
+/-- Geometric local model with compatible residue-field isomorphisms. -/
 theorem cartier_generic_stalk_galois_model_core
     {N U P : Scheme.{u}} [IsLocallyNoetherian N]
     (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)

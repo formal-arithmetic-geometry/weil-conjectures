@@ -11,7 +11,11 @@ public import Mathlib.AlgebraicGeometry.Limits
 
 /-! # Open base change of the direct image of the structure module
 
-Source: Stacks Project, Tags 008C and 0094, and the open-base-change calculation used in Tag 0EY6
+## References
+
+* Stacks Project, Tags 008C and 0094, and the open-base-change calculation used in Tag 0EY6
+* Stacks Project, Tags 008C and 0094
+* Tag 0EY6, base-change identification
 -/
 
 @[expose] public section
@@ -21,9 +25,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme.Modules
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Restriction to an open chart commutes with the structure-module direct image.
-
-Source: Stacks Project, Tags 008C and 0094; Tag 0EY6, base-change identification. -/
+/-- Restriction to an open chart commutes with the structure-module direct image. -/
 theorem nonempty_open_base_change_structure_module_iso
     {Y L : Scheme.{u}} (j : Y ⟶ L) [IsOpenImmersion j]
     (U : L.Opens) {X : Scheme.{u}} (f : X ⟶ U.toScheme) :

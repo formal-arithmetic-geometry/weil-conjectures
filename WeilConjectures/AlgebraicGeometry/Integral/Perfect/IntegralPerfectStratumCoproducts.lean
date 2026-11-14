@@ -19,7 +19,10 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Coproduct continuity for one locally perfect support piece
 
-Source: Bhatt--Scholze, Lemma 6.3.14(1)--(4), including its closed-stratum argument.
+## References
+
+* Bhatt--Scholze, Lemma 6.3.14(1)--(4), including its closed-stratum argument
+* Bhatt--Scholze, Lemma 6.3.14(1)--(4), final paragraph
 -/
 
 @[expose] public noncomputable section
@@ -77,8 +80,7 @@ namespace AlgebraicGeometry.Scheme
 
 -- The unbounded derived comparisons require elaborating several functor structures.
 /-- Internal Hom from one locally perfect support piece commutes with uniformly
-bounded-below derived coproducts. The support is one closed subscheme of one open subscheme.
-Source: Bhatt--Scholze, Lemma 6.3.14(1)--(4), final paragraph. -/
+bounded-below derived coproducts. The support is one closed subscheme of one open subscheme. -/
 theorem integralPerfectStratumPiece_coproductContinuous
     (T : Scheme.{u}) [IsNoetherian T]
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)

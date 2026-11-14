@@ -9,7 +9,11 @@ public import WeilConjectures.AlgebraicGeometry.PicardTermwiseModels
 public import WeilConjectures.AlgebraicGeometry.Picard.Termwise.PicardTermwiseSingleMapComposition
 
 /-! # Coherence of the termwise source single
-Source: Stacks Project, Tags 06YJ and 0D5S. -/
+
+## References
+
+* Stacks Project, Tags 06YJ and 0D5S
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -48,8 +52,7 @@ theorem picardTermwiseSourceIso_hom {W T : Scheme.{v}} (t : T ⟶ W) :
 
 /-- The canonical counit comparison `picardTermwiseSourceIso` for the source singles
 commutes with successive pullback. This assertion concerns only the source, with no local
-perfect model.
-Source: Stacks Project, Tags 06YJ and 0D5S. -/
+perfect model. -/
 theorem picard_termwise_source_coherence {W T T' : Scheme.{v}} (i : T' ⟶ T) (t : T ⟶ W)
     (t' : T' ⟶ W) (ht : i ≫ t = t') :
     let c := (Classical.choose (Classical.choose_spec (Classical.choose_spec

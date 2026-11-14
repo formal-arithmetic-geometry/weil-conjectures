@@ -19,7 +19,11 @@ import WeilConjectures.RingTheory.FiniteFreeMapResidueLocalization
 import Mathlib.LinearAlgebra.TensorProduct.Pi
 
 /-! # Local lifting of arbitrary marked-fibre sections
-Source: Stacks Project, Tag 0BF2, the degree-zero differential argument.
+
+## References
+
+* Stacks Project, Tag 0BF2, the degree-zero differential argument
+* Stacks Project, Tag 0BF2, the perfect-complex argument through d = 0
 -/
 
 @[expose] public section
@@ -29,8 +33,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- Every marked-fibre section lifts after shrinking the base around the marked point.
-This asserts surjectivity of restriction, not existence of a generating section.
-Source: Stacks Project, Tag 0BF2, the perfect-complex argument through d = 0 -/
+This asserts surjectivity of restriction, not existence of a generating section. -/
 theorem picard_h1_base_descent_section_lifting {X S : Scheme.{v}} (f : X ⟶ S) {n : ℕ}
     (Xi : Fin n → Scheme.{v}) (fi : ∀ i, Xi i ⟶ S)
     [Flat f] [IsProper f] [LocallyOfFinitePresentation f]

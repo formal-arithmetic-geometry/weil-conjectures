@@ -13,7 +13,11 @@ import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
 /-!
 # Comparing module specialization with strict-local abelian specialization
 
-Source: Stacks Project, Tags 0GJ2 and 0GKD, the geometric-germ construction.
+## References
+
+* Stacks Project, Tags 0GJ2 and 0GKD, the geometric-germ construction
+* Stacks Project, Tags 0GJ2 and 0GKD
+* Tag 0GKV, case (a), coefficient comparison
 -/
 
 @[expose] public section
@@ -121,8 +125,7 @@ private theorem strictLocal_germ
   exact pullback_germ g t G U v
 
 /-- An abelian identification transports invertible strict-local specialization to
-bijective specialization on module stalks.
-Source: Stacks Project, Tags 0GJ2 and 0GKD; Tag 0GKV, case (a), coefficient comparison. -/
+bijective specialization on module stalks. -/
 theorem Etale.bijective_moduleSpecialization_of_abelianIso
     {S : Scheme.{u}} {R : Type (u + 1)} [CommRing R]
     (M : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} R))

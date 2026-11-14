@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Projective.ProjectiveImpliesProper
 /-!
 # Properness of projective-bundle morphisms
 
-Source: Stacks Project, Morphisms.
+## References
+
+* Stacks Project, Morphisms
 -/
 
 @[expose] public section
@@ -27,9 +29,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- A morphism presented as a closed subscheme of the relative projective bundle of a
-finite-type quasi-coherent module is proper.
-
-Source: Stacks Project, Morphisms. -/
+finite-type quasi-coherent module is proper. -/
 theorem projectiveBundle_proper {X S : Scheme.{u}} (f : X ⟶ S)
     (hf : IsProjectiveBundle f) : IsProper f := by
   obtain ⟨E, hE, hEfin, i, hi, hcomp⟩ := hf

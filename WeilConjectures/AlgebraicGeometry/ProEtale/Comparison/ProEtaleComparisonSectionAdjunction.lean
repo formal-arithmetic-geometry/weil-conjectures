@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.ProEtaleComparisonS
 
 /-! # The adjunction for the section-valued comparison sheaf
 
-Source: Stacks Project, Tag 0GLZ.
+## References
+
+* Stacks Project, Tag 0GLZ
 -/
 
 @[expose] public section

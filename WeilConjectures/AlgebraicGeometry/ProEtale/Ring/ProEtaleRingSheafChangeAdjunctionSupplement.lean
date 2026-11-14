@@ -171,7 +171,13 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunctio
 /-!
 # Compatible changes of ring sheaves and derived adjunctions
 
-Source: Stacks Project, Cohomology on Sites, Tags 0D6D, 0D6E and 07A6.
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 0D6D, 0D6E and 07A6
+* Stacks, Tag 0D6D
+* Stacks, Tag 07A5
+* Stacks, Tag 0D6E
+* Stacks, Tags 05RT, 0D6D, 0D6E and 07A6
 -/
 
 @[expose] public section
@@ -765,8 +771,7 @@ private theorem restrictionPullback_mate :
   simp only [Category.id_comp]
   exact congrArg (fun h ↦ _ ≫ _ ≫ h) (Category.comp_id _).symm
 
-/-- The termwise descended identified-coefficient inverse-image comparison `b`.
-Source: Stacks, Tag 0D6D. -/
+/-- The termwise descended identified-coefficient inverse-image comparison `b`. -/
 noncomputable def proEtaleRingRestrictionDerivedPullback :
     proEtaleRingDerivedPullback f SV SU cS ⋙ (proEtaleRingRestrictScalars aU).mapDerivedCategory ≅
       (proEtaleRingRestrictScalars aV).mapDerivedCategory ⋙
@@ -778,8 +783,7 @@ noncomputable def proEtaleRingRestrictionDerivedPullback :
     (Functor.mapDerivedCategoryCompIso (proEtaleRingRestrictScalars aV)
       (proEtaleRingModulePullback f RV RU cR)).symm
 
-/-- The right-derived unit on complexes, including the canonical quotient identifications.
-Source: Stacks, Tag 07A5. -/
+/-- The right-derived unit on complexes, including the canonical quotient identifications. -/
 noncomputable def proEtaleRingDirectImageDerivedUnit
     (K : CochainComplex (proEtaleRingModules U RU) ℤ) :
     DerivedCategory.Q.obj
@@ -1098,8 +1102,7 @@ private theorem derivedDirectImageComparison_unique
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Existence of the normalized derived direct-image comparison.
-Source: Stacks, Tag 0D6E. -/
+/-- Existence of the normalized derived direct-image comparison. -/
 theorem proEtaleRingRestrictionDerivedDirectImage_exists :
     ∃ d : proEtaleRingDerivedDirectImage f SV SU cS ⋙
         (proEtaleRingRestrictScalars aV).mapDerivedCategory ≅
@@ -1173,8 +1176,7 @@ theorem proEtaleRingRestrictionDerivedDirectImage_exists :
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The direct-image comparison is the unique comparison compatible with the derived
-units and the identity-on-sections underived comparison.
-Source: Stacks, Tag 0D6E. -/
+units and the identity-on-sections underived comparison. -/
 theorem proEtaleRingRestrictionDerivedDirectImage_existsUnique :
     ∃! d : proEtaleRingDerivedDirectImage f SV SU cS ⋙
         (proEtaleRingRestrictScalars aV).mapDerivedCategory ≅
@@ -1201,8 +1203,7 @@ theorem proEtaleRingRestrictionDerivedDirectImage_existsUnique :
   exact (derivedDirectImageComparison_unique f RV SV RU SU aV aU cR cS comm
     (d := d) (d' := d') hd hd').symm
 
-/-- The canonical derived direct-image comparison `d`, determined by its unit normalization.
-Source: Stacks, Tag 0D6E. -/
+/-- The canonical derived direct-image comparison `d`, determined by its unit normalization. -/
 noncomputable def proEtaleRingRestrictionDerivedDirectImage :
     proEtaleRingDerivedDirectImage f SV SU cS ⋙
         (proEtaleRingRestrictScalars aV).mapDerivedCategory ≅
@@ -1215,8 +1216,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option linter.style.haveILetI false in
 /-- Exact restriction reflects derived isomorphisms, and the canonical coefficient
-comparisons intertwine the canonical derived adjunctions.
-Source: Stacks, Tags 05RT, 0D6D, 0D6E and 07A6. -/
+comparisons intertwine the canonical derived adjunctions. -/
 theorem proEtaleRingSheafChangeAdjunction :
     (proEtaleRingRestrictScalars aU).mapDerivedCategory.ReflectsIsomorphisms ∧
     (proEtaleRingRestrictScalars aV).mapDerivedCategory.ReflectsIsomorphisms ∧

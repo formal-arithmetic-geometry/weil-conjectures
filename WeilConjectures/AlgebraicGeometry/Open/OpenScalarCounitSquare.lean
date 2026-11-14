@@ -77,12 +77,15 @@ import WeilConjectures.CategoryTheory.Normalized.NormalizedAdjunctionComposition
 
 /-! # Open extension preserves the normalized scalar counit
 
-Source: Stacks Project, Tag 0E8I; Tag 07A6.
-
 All categories are ordinary uncompleted unbounded constant-ring module derived categories.
 The open extension, scalar restriction square and tensor square are the published ones.
 Unit equations express identity comparisons on the open without identifying distinct
 functors by definitional equality. Naturality is retained at the natural-transformation level.
+
+## References
+
+* Stacks Project, Tag 0E8I
+* Tag 07A6
 -/
 
 -- After pruning, this module only keeps private declarations.

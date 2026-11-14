@@ -11,7 +11,10 @@ import Mathlib.CategoryTheory.Whiskering
 /-!
 # Naturality of the explicit relative torsor classification
 
-Source: Stacks Project, Tag 03AJ, relative refinement, steps 7 and 8.
+## References
+
+* Stacks Project, Tag 03AJ, relative refinement, steps 7 and 8
+* Tag 0G78
 -/
 
 @[expose] public section
@@ -22,8 +25,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
-/-- An equivariant map of pointed torsors gives the coefficient map on relative H1.
-Source: Stacks Project, Tag 03AJ, relative refinement, steps 7 and 8. -/
+/-- An equivariant map of pointed torsors gives the coefficient map on relative H1. -/
 theorem relativeTorsorEquiv_coefficient
     (T : Scheme.{u}) (U : T.Etale)
     {G G' : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}} (f : G ⟶ G')
@@ -90,8 +92,7 @@ theorem relativeTorsorEquiv_coefficient
   apply relativeFrameClass_map_eq T U I U J _ _ h _ _ x hd
   exact (hr (op U) P.2)
 
-/-- Pullback of a pointed torsor gives the transfer on relative H1.
-Source: Stacks Project, Tag 03AJ, relative refinement, steps 7 and 8; Tag 0G78. -/
+/-- Pullback of a pointed torsor gives the transfer on relative H1. -/
 theorem relativeTorsorEquiv_transfer
     {T T' : Scheme.{u}} (h : T' ⟶ T) (W : T.Opens)
     {G : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}}

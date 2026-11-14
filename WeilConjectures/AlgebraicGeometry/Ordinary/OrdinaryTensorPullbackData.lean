@@ -108,7 +108,12 @@ public import WeilConjectures.Algebra.Homology.SixFunctors.TensorSection
 
 /-! # Ordinary tensor comparison data with independent coefficient size
 
-Source: Stacks 03EK, 03EL and 0G7E.
+## References
+
+* Stacks 03EK, 03EL and 0G7E
+* Stacks 03EK
+* Stacks 03EL
+* Stacks 03EL and 0G7E
 -/
 
 @[expose] public noncomputable section
@@ -121,8 +126,7 @@ universe c v r
 open CategoryTheory CategoryTheory.Limits Opposite CategoryTheory.MonoidalCategory
 namespace WeilConjectures.SemilinearSections
 
-/-- The usual sheafified pure tensor, at an independent coefficient size.
-Source: Stacks 03EK. -/
+/-- The usual sheafified pure tensor, at an independent coefficient size. -/
 abbrev tensorSectionAtSize {C : Type c} [Category.{v} C] [EssentiallySmall.{r} C]
     (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{r})
     (M N : Mod.{c, v, r} J R) (V : Cᵒᵖ)
@@ -146,8 +150,7 @@ local instance (M : Mod.{c, v, r} K S) {X Y : Dᵒᵖ} (f : X ⟶ Y) :
       ((ModuleCat.restrictScalars ((ring K S).obj.map f).hom).obj (M.val.obj Y)) :=
   inferInstanceAs (Module (S.obj.obj Y) (M.val.obj Y))
 
-/-- The scalar-generator formula and two-variable naturality.
-Source: Stacks 03EL. -/
+/-- The scalar-generator formula and two-variable naturality. -/
 def OrdinaryTensorNormalized
     (e : ∀ M N : Mod.{c, v, r} J R,
       F.obj ((SheafOfModules.monoidalCategory R).tensorObj M N) ≅
@@ -166,8 +169,7 @@ def OrdinaryTensorNormalized
       (e M N).hom ≫ (SheafOfModules.monoidalCategory S).tensorHom (F.map a) (F.map b)
 
 /-- The ordinary tensor comparison and preservation of flat-term representatives.
-All remaining fields are propositions; normalization determines the ordinary isomorphisms.
-Source: Stacks 03EL and 0G7E. -/
+All remaining fields are propositions; normalization determines the ordinary isomorphisms. -/
 structure OrdinaryTensorPullbackData where
   /-- The comparison on ordinary sheaf modules. -/
   ordinary : ∀ M N : Mod.{c, v, r} J R,

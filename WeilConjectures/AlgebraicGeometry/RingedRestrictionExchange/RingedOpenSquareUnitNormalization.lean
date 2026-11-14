@@ -10,7 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleOpenRestriction.ProEtale
 
 /-! # Unit normalization of the actual-ring open square
 
-Source: Stacks Project, Sites Tag 03CB and Modules on Sites Tag 03D3.
+## References
+
+* Stacks Project, Sites Tag 03CB and Modules on Sites Tag 03D3
+* Stacks 09A5
 -/
 
 @[expose] public noncomputable section
@@ -24,7 +27,7 @@ attribute [local instance 30000]
   AlgebraicGeometry.Scheme.proEtaleRingModules_hasDerivedCategory
 namespace AlgebraicGeometry.Scheme.RingedRestrictionExchange
 
-/-- The canonical chosen fibre-product square. Source: Stacks 09A5. -/
+/-- The canonical chosen fibre-product square. -/
 def cartesian {P T T' : Scheme.{u}} (p : P ⟶ T) (h : T' ⟶ T) :
     ChosenCartesianSquare (pullback.fst p h) (pullback.snd p h) p h where
   w := pullback.condition

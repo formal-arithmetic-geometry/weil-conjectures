@@ -158,6 +158,19 @@ of strict systems, before evaluating. Restriction retains the completed coeffici
   corner structures and their completed source and target reductions.
 - `QuotientFrobenius.finite_formulas` and `QuotientFrobenius.towerTheta_evaluation`:
   the finite blueprint formulas and their compatibility with ambient scalar restriction.
+
+## References
+
+* Stacks 09A5
+* Stacks 098T
+* Stacks 03D3
+* Stacks 03D8
+* Stacks 06YY
+* Stacks 03CZ
+* Stacks 0D6E
+* Stacks 0D6D
+* Zheng 4.1
+* Stacks 07A7
 -/
 
 @[expose] public noncomputable section
@@ -225,8 +238,7 @@ abbrev evaluation (T : Scheme.{t}) (n : ℕ) :=
 abbrev siteMap {U V : Scheme.{t}} (u : U ⟶ V) :=
   (𝟭 ℕ).prod (proEtaleBaseChange u)
 
-/-- Vertical covers are preserved by base change.
-Source: Stacks 09A5. -/
+/-- Vertical covers are preserved by base change. -/
 theorem siteMap_continuous {U V : Scheme.{t}} (u : U ⟶ V) :
     (siteMap u).IsContinuous (coefficientSequenceTopology (ProEt.topology V))
       (coefficientSequenceTopology (ProEt.topology U)) := by
@@ -255,8 +267,7 @@ def coefficientComponent {U V : Scheme.{t}} (u : U ⟶ V) (W : (ℕ × V.ProEt)�
       (d.finiteRing U W.unop.1) (d.finiteRingIso u W.unop.1)).hom.app (op W.unop.2) ≫
     eqToHom (coefficientTarget_obj d u W)
 
-/-- Constant-section coefficient maps commute with horizontal quotient restrictions.
-Source: Stacks 098T. -/
+/-- Constant-section coefficient maps commute with horizontal quotient restrictions. -/
 theorem coefficient_naturality {U V : Scheme.{t}} (u : U ⟶ V)
     {M N : (ℕ × V.ProEt)ᵒᵖ} (a : M ⟶ N) :
     (quotientRing d V).obj.map a ≫ coefficientComponent d u N =
@@ -287,8 +298,7 @@ theorem modulePush_additive {U V : Scheme.{t}} (u : U ⟶ V) :
 
 attribute [instance] modulePush_additive
 
-/-- The tensor-formula module pullback exists on the small quotient diagram sites.
-Source: Stacks 03D3. -/
+/-- The tensor-formula module pullback exists on the small quotient diagram sites. -/
 theorem modulePush_isRightAdjoint {U V : Scheme.{t}} (u : U ⟶ V) :
     (modulePush d u).IsRightAdjoint := by
   sorry
@@ -299,13 +309,11 @@ attribute [instance] modulePush_isRightAdjoint
 abbrev modulePull {U V : Scheme.{t}} (u : U ⟶ V) : modules d V ⥤ modules d U :=
   (modulePush d u).leftAdjoint
 
-/-- The actual module adjunction, with the ordinary direct image fixed on sections.
-Source: Stacks 03D3. -/
+/-- The actual module adjunction, with the ordinary direct image fixed on sections. -/
 def moduleAdjunction {U V : Scheme.{t}} (u : U ⟶ V) : modulePull d u ⊣ modulePush d u :=
   Adjunction.ofIsRightAdjoint (modulePush d u)
 
-/-- Identified-coefficient inverse image is exact on the strict quotient diagram.
-Source: Stacks 03D3. -/
+/-- Identified-coefficient inverse image is exact on the strict quotient diagram. -/
 theorem modulePull_exact {U V : Scheme.{t}} (u : U ⟶ V) :
     (modulePull d u).Additive ∧ PreservesFiniteLimits (modulePull d u) ∧
       PreservesFiniteColimits (modulePull d u) := by
@@ -342,8 +350,7 @@ abbrev push {U V : Scheme.{t}} (u : U ⟶ V) : derived d U ⥤ derived d V :=
 def adjunction {U V : Scheme.{t}} (u : U ⟶ V) : pull d u ⊣ push d u :=
   (moduleAdjunction d u).mapDerivedCategoryRightDerivedAdjunction
 
-/-- Direct-image composition is fixed by fibre-product pasting at every index and section.
-Source: Stacks 03D8. -/
+/-- Direct-image composition is fixed by fibre-product pasting at every index and section. -/
 theorem modulePushComp_exists {U V W : Scheme.{t}} (u : U ⟶ V) (v : V ⟶ W) :
     ∃! e : modulePush d u ⋙ modulePush d v ≅ modulePush d (u ≫ v),
       ∀ (N : modules d U) (n : ℕ) (Z : W.ProEt)
@@ -450,14 +457,12 @@ instance diagonal_colimits (T : Scheme.{t}) : PreservesFiniteColimits (diagonal 
   (diagonal_exact d T).2
 
 /-- The universal K-flat scalar-extension pair for Delta A_T to Q_T. Its ordinary
-functor is the sheafified tensor and its derived pair is fixed by the universal counit.
-Source: Stacks 06YY. -/
+functor is the sheafified tensor and its derived pair is fixed by the universal counit. -/
 def scalarModel (T : Scheme.{t}) :=
   (SheafOfModules.nonempty_derivedChangeOfRingsCochainModel.{t + 1, t, t + 1, t + 2, t + 2}
     (diagonalProjection d T)).some
 
-/-- Additivity of the fixed ordinary scalar-extension functor in the universal pair.
-Source: Stacks 06YY. -/
+/-- Additivity of the fixed ordinary scalar-extension functor in the universal pair. -/
 instance scalarModel_additive (T : Scheme.{t}) : (scalarModel d T).E.Additive :=
   (scalarModel d T).additive
 
@@ -465,8 +470,7 @@ instance scalarModel_additive (T : Scheme.{t}) : (scalarModel d T).E.Additive :=
 abbrev reduction (T : Scheme.{t}) : d.derived T ⥤ derived d T :=
   (diagonal d T).mapDerivedCategory ⋙ (scalarModel d T).T
 
-/-- Restriction along Delta A_T to Q_T, followed by the normalized diagram realization.
-Source: Stacks 03CZ. -/
+/-- Restriction along Delta A_T to Q_T, followed by the normalized diagram realization. -/
 theorem moduleRestriction_exists (T : Scheme.{t}) :
     ∃! R : modules d T ⥤ d.towers T,
       (∀ (M : modules d T) (n : ℕ),
@@ -486,8 +490,7 @@ theorem moduleRestriction_exists (T : Scheme.{t}) :
 def moduleRestriction (T : Scheme.{t}) : modules d T ⥤ d.towers T :=
   (moduleRestriction_exists d T).exists.choose
 
-/-- Scalar restriction is additive and exact on the strict system category.
-Source: Stacks 03CZ. -/
+/-- Scalar restriction is additive and exact on the strict system category. -/
 theorem moduleRestriction_exact (T : Scheme.{t}) :
     (moduleRestriction d T).Additive ∧ PreservesFiniteLimits (moduleRestriction d T) ∧
       PreservesFiniteColimits (moduleRestriction d T) := by
@@ -509,8 +512,7 @@ instance moduleRestriction_colimits (T : Scheme.{t}) :
 abbrev restriction (T : Scheme.{t}) : derived d T ⥤ DerivedCategory (d.towers T) :=
   (moduleRestriction d T).mapDerivedCategory
 
-/-- Ordinary restriction/direct-image comparison is identity on every section and index.
-Source: Stacks 0D6E. -/
+/-- Ordinary restriction/direct-image comparison is identity on every section and index. -/
 theorem moduleRestrictionPush_exists {U V : Scheme.{t}} (u : U ⟶ V) :
     ∃! e : modulePush d u ⋙ moduleRestriction d V ≅
         moduleRestriction d U ⋙ d.towerModulePush u,
@@ -523,8 +525,7 @@ theorem moduleRestrictionPush_exists {U V : Scheme.{t}} (u : U ⟶ V) :
 def moduleRestrictionPush {U V : Scheme.{t}} (u : U ⟶ V) :=
   (moduleRestrictionPush_exists d u).exists.choose
 
-/-- Restriction/pullback comparison fixed by the unit of the actual module adjunction.
-Source: Stacks 0D6D. -/
+/-- Restriction/pullback comparison fixed by the unit of the actual module adjunction. -/
 theorem moduleRestrictionPull_exists {U V : Scheme.{t}} (u : U ⟶ V) :
     ∃! e : modulePull d u ⋙ moduleRestriction d U ≅
         moduleRestriction d V ⋙ d.towerModulePull u,
@@ -543,8 +544,7 @@ def restrictionPull {U V : Scheme.{t}} (u : U ⟶ V) :
     Functor.mapDerivedCategoryNatIso (moduleRestrictionPull_exists d u).exists.choose ≪≫
     (Functor.mapDerivedCategoryCompIso _ _).symm
 
-/-- Comparison of quotient and ambient derived direct image, normalized by universal units.
-Source: Stacks 0D6E. -/
+/-- Comparison of quotient and ambient derived direct image, normalized by universal units. -/
 theorem restrictionPush_exists {U V : Scheme.{t}} (u : U ⟶ V) :
     ∃! e : push d u ⋙ restriction d V ≅ restriction d U ⋙ d.towerPush u,
       ∀ C : CochainComplex (modules d U) ℤ,
@@ -579,8 +579,7 @@ def reductionCounit (T : Scheme.{t}) (P : CochainComplex (proEtaleRingModules T
   (scalarModel d T).T.map ((diagonal d T).mapDerivedCategoryFactors.hom.app P) ≫
     (scalarModel d T).ε.app (((diagonal d T).mapHomologicalComplex (.up ℤ)).obj P)
 
-/-- Underived evaluation on the strict quotient module category.
-Source: Zheng 4.1. -/
+/-- Underived evaluation on the strict quotient module category. -/
 abbrev moduleEvaluation (T : Scheme.{t}) (n : ℕ) :=
   @SemilinearSections.evaluation.{t + 1, t, t + 1} T.ProEt _
     (essentiallySmallSelf.{0} T.ProEt) (ProEt.topology T)
@@ -645,8 +644,7 @@ abbrev ambientEvaluation (T : Scheme.{t}) (n : ℕ) :=
 abbrev finiteRestriction (T : Scheme.{t}) (n : ℕ) :=
   reductionDerivedRestrict T (d.projection T n)
 
-/-- Restriction and evaluation commute by the identity on the original section carriers.
-Source: Stacks 03CZ. -/
+/-- Restriction and evaluation commute by the identity on the original section carriers. -/
 theorem moduleRestrictionEvaluation_exists (T : Scheme.{t}) (n : ℕ) :
     ∃! e : moduleRestriction d T ⋙ ambientModuleEvaluation d T n ≅
         moduleEvaluation d T n ⋙ reductionRestrict T (d.projection T n),
@@ -696,8 +694,7 @@ def face {U V : Scheme.{t}} (u : U ⟶ V) (FU : U ≅ U) (FV : V ≅ V)
   hom_fst := (face_isPullback u FU FV comm).isoPullback_hom_fst
   hom_snd := (face_isPullback u FU FV comm).isoPullback_hom_snd
 
-/-- Integral beta is exactly the canonical ambient ringed exchange of the Frobenius face.
-Source: Stacks 07A7. -/
+/-- Integral beta is exactly the canonical ambient ringed exchange of the Frobenius face. -/
 abbrev integralBeta {U V : Scheme.{t}} (u : U ⟶ V) (FU : U ≅ U) (FV : V ≅ V)
     (comm : FU.hom ≫ u = u ≫ FV.hom) :=
   d.integralExchange (face u FU FV comm)

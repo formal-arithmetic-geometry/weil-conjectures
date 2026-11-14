@@ -9,7 +9,13 @@ public import WeilConjectures.AlgebraicGeometry.Relative.RelativeFiniteCoefficie
 
 import WeilConjectures.CategoryTheory.Native.NativeRingedRestrictionSlicesSupplement
 
-/-! # Slice equivalence for the explicit relative coefficient transport -/
+/-! # Slice equivalence for the explicit relative coefficient transport
+
+## References
+
+* Stacks Project, Sites, Tag 03A0
+* Modules on Sites, Tag 03CY
+-/
 
 @[expose] public noncomputable section
 
@@ -52,8 +58,6 @@ private theorem isoRestriction_isEquivalence
 
 /-- The explicit coefficient transport carries isomorphisms on the corresponding
 small and pro-etale slices in both directions.
-
-Source: Stacks Project, Sites, Tag 03A0; Modules on Sites, Tag 03CY.
 
 The statement is the slice-equivalence part of the proof: precomposition with
 `AsSmall.down` and `AsSmall.up` are inverse equivalences, and pushforward of

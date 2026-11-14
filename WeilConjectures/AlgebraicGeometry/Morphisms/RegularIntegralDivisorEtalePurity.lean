@@ -17,7 +17,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.RegularCodimensionTwoEtaleExt
 /-!
 # Purity across a regular integral effective Cartier divisor
 
-Source: Stacks Project, Tag 0EYE; Tag 0EYJ, second paragraph.
+## References
+
+* Stacks Project, Tag 0EYE
+* Tag 0EYJ, second paragraph
+* Stacks Project, Tag 0EYE (Lemma 58.31.3), applied as in Tag 0EYJ
 -/
 
 @[expose] public section
@@ -91,9 +95,7 @@ private theorem restrict_over_iso {L N E : Scheme.{u}} (n : N ⟶ L) (p : E ⟶ 
   simpa only [Category.assoc] using congrArg (fun f ↦ f ≫ n) ha
 
 /-- A finite cover, etale off a regular integral Cartier divisor and near its
-unique generic point, has a finite etale extension of its restriction.
-
-Source: Stacks Project, Tag 0EYE (Lemma 58.31.3), applied as in Tag 0EYJ. -/
+unique generic point, has a finite etale extension of its restriction. -/
 theorem exists_finite_etale_extension_of_regular_integral_divisor
     {L D N : Scheme.{u}} [IsLocallyNoetherian L] [IsRegular D] [IsIntegral D]
     (i : D ⟶ L) (hi : IsEffectiveCartierCenter i)

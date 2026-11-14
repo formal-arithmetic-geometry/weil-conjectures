@@ -40,7 +40,9 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # The coefficient-resolution tensor square on a fixed flat K-flat complex
 
-Source: Stacks Project, Tags 03EL, 06YY and 0D6D.
+## References
+
+* Stacks Project, Tags 03EL, 06YY and 0D6D
 -/
 
 @[expose] public noncomputable section

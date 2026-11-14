@@ -10,7 +10,12 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleObjectInverseIm
 
 /-! # Scalar extension and restriction to a pro-etale slice
 
-Source: Stacks Project, Modules on Sites, Tag 03EL; Cohomology on Sites, Tags 06YS, 0G7E and 06YY.
+## References
+
+* Stacks Project, Modules on Sites, Tag 03EL
+* Cohomology on Sites, Tags 06YS, 0G7E and 06YY
+* Stacks 00XZ and 03EL
+* Stacks 00XZ, 03EL and 03CZ
 -/
 
 @[expose] public noncomputable section
@@ -20,8 +25,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
-/-- Literal restriction of module sheaves to a pro-etale site object.
-Source: Stacks 00XZ and 03EL. -/
+/-- Literal restriction of module sheaves to a pro-etale site object. -/
 abbrev proEtaleSliceModules {X : Scheme.{u}} (U : X.ProEt)
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :
     pbcModules X R ⥤ pbcModules U.left
@@ -58,8 +62,7 @@ private theorem exact_moduleRestriction
   ext V m
   rfl
 
-/-- Exactness of literal restriction, including nonnoetherian U.
-Source: Stacks 00XZ, 03EL and 03CZ. -/
+/-- Exactness of literal restriction, including nonnoetherian U. -/
 theorem proEtaleSliceModules_exact {X : Scheme.{u}} (U : X.ProEt)
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :
     (proEtaleSliceModules U R).Additive ∧ PreservesFiniteLimits (proEtaleSliceModules U R) ∧

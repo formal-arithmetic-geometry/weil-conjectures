@@ -13,7 +13,9 @@ import all WeilConjectures.CategoryTheory.SmoothPurity.CanonicalRightDerivedAdju
 
 /-! # Right realization shifts determined by the specified relative Hom chain
 
-Source: Zheng, Proposition 2.23.
+## References
+
+* Zheng, Proposition 2.23
 -/
 
 @[expose] public noncomputable section
@@ -378,9 +380,7 @@ private theorem relativeRealization_shift
 
 /-- A normalized relative adjunction transports the specified exceptional shifts.
 Only compatibility of the right realization is asserted: the restricted adjunction,
-left shifts, left comparison, boundedness and origins are inputs.
-
-Source: Zheng, Proposition 2.23. -/
+left shifts, left comparison, boundedness and origins are inputs. -/
 theorem specifiedExceptionalRealization_shift
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Y : Scheme.{u}} {f : X ⟶ Y} [QuasiCompact f] [CompactSpace Y]

@@ -11,7 +11,10 @@ import WeilConjectures.AlgebraicGeometry.Integral.Models.IntegralModelsEmbeddedC
 
 /-! # Section presentation of the embedded first residue maps
 
-Source: Stacks Project, Tag 093M, and the integral-models proof, paragraph (1).
+## References
+
+* Stacks Project, Tag 093M, and the integral-models proof, paragraph (1)
+* Stacks Project
 -/
 
 @[expose] public noncomputable section
@@ -220,8 +223,6 @@ end Transport
 attribute [-instance] integralModel_coefficientMonObj in
 /-- The first residue maps have their common finite quotient and principal section
 kernels, with the actual constant-to-continuous scalar map in the comparison square.
-
-Source: Stacks Project.
 -/
 theorem integralModelsEmbeddedResidueSections
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)

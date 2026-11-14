@@ -17,7 +17,13 @@ public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 
 /-! # The global cocycle square for an ordinary coefficient map
 
-Source: Stacks Project, Tags 01E4 and 01FB.
+## References
+
+* Stacks Project, Tags 01E4 and 01FB
+* Stacks Project, Tag 0096
+* Stacks Project, Tag 01F2
+* Stacks Project, Tags 01FB and 08HY
+* Stacks Project, Tag 01E4, and Tag 01FB
 -/
 
 @[expose] public section
@@ -70,8 +76,7 @@ namespace AlgebraicGeometry
 open Scheme.Modules
 attribute [local instance] Scheme.Modules.enoughInjectives
 
-/-- The native abelian structure, cached once for the shared Leray constructions.
-Source: Stacks Project, Tag 0096. -/
+/-- The native abelian structure, cached once for the shared Leray constructions. -/
 @[reducible] local instance (priority := 3000) globalLerayModuleAbelian (S : Scheme.{u}) :
     Abelian (SheafOfModules.{u} (moduleRings S.toRingedSpace)) := inferInstance
 
@@ -214,15 +219,13 @@ attribute [local irreducible] moduleCohomologyFMap moduleCohomologyRestriction
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
-/-- The common derived image of a module, kept as a shared object in the global square.
-Source: Stacks Project, Tag 01F2; derived direct image of a degree-zero module. -/
+/-- The common derived image of a module, kept as a shared object in the global square. -/
 def globalLerayImage {X S : Scheme.{u}} (f : X ⟶ S) (F : X.Modules) :
     schemeDerivedCategory.{u, w} S :=
   (schemeDerivedDirectImage f).obj ((DerivedCategory.singleFunctor
     (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj F)
 
-/-- The ordinary coefficient unit map with its shared image objects fixed in the type.
-Source: Stacks Project, Tags 01FB and 08HY. -/
+/-- The ordinary coefficient unit map with its shared image objects fixed in the type. -/
 def globalLerayUnitMap {X S Y T : Scheme.{u}}
     (f : X ⟶ S) (q : Y ⟶ T) (g : T ⟶ S) (p : Y ⟶ X)
     (hs : p ≫ f = q ≫ g) (F : X.Modules) (M : Y.Modules)
@@ -236,8 +239,7 @@ set_option allowUnsafeReducibility true in
 attribute [local reducible] globalLerayImage globalLerayUnitMap
 
 /-- The canonical total/classical comparison with native module categories and the
-supplied derived-category family fixed in its type.
-Source: Stacks Project, Tag 01F2. -/
+supplied derived-category family fixed in its type. -/
 def globalLerayComparison {X S : Scheme.{u}} (f : X ⟶ S) (F : X.Modules) (n : ℕ) :
     (DerivedCategory.homologyFunctor.{w, u, u + 1}
       (SheafOfModules.{u} (moduleRings S.toRingedSpace)) (n : ℤ)).obj
@@ -250,7 +252,6 @@ attribute [local irreducible] globalLerayComparison
 /-- Specialization of the local cocycle square to the whole open, expressed using
 classical Leray edges and their canonical total-derived comparisons. The coefficient
 is an arbitrary ordinary h-map. There is no derived pullback or cohomological bound.
-Source: Stacks Project, Tag 01E4, and Tag 01FB.
 -/
 theorem globalLeray_unitSquare
     {X S Y T : Scheme.{u}} (f : X ⟶ S) (q : Y ⟶ T) (g : T ⟶ S) (p : Y ⟶ X)

@@ -18,7 +18,10 @@ import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 
 /-! # Completeness of the derived strict integral quotient limit
 
-Source: Stacks Project, Tag 099M.
+## References
+
+* Stacks Project, Tag 099M
+* Stacks Project, Tag 099M, and the principal orthogonality argument of Tags 091Q and 0999
 -/
 
 @[expose] public noncomputable section
@@ -118,9 +121,7 @@ private theorem integral_reduction_level_annihilated (ℓ : ℕ) (W : Scheme.{u}
   exact NatTrans.congr_app hnat K
 
 /-- The strict derived quotient limit is derived complete after identifying coefficients.
-This is only the assertion about its values; it specifies no augmentation or reflector.
-
-Source: Stacks Project, Tag 099M, and the principal orthogonality argument of Tags 091Q and 0999. -/
+This is only the assertion about its values; it specifies no augmentation or reflector. -/
 theorem integral_strict_limit_complete (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     [HasDerivedCategory.{u + 1} (DiagonalAb W)]
     [HasDerivedCategory.{u + 1} (ℕᵒᵖ ⥤ DiagonalAb W)]

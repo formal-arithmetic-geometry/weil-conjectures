@@ -14,7 +14,11 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 /-!
 # The special fibre of a flat DVR family is an effective Cartier divisor
 
-Source: Stacks Project, Tag 0EYJ, first paragraph; Tag 02OO (flat pullback).
+## References
+
+* Stacks Project, Tag 0EYJ, first paragraph
+* Tag 02OO (flat pullback)
+* Stacks Project, Tag 0EYJ, first paragraph, and Tag 02OO
 -/
 
 @[expose] public section
@@ -23,9 +27,7 @@ universe u
 open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- Flatness preserves the nonzerodivisor defining the closed point of a DVR.
-
-Source: Stacks Project, Tag 0EYJ, first paragraph, and Tag 02OO. -/
+/-- Flatness preserves the nonzerodivisor defining the closed point of a DVR. -/
 theorem isEffectiveCartierCenter_specialFiber_of_flat
     (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A]
     {L : Scheme.{u}} (q : L ⟶ Spec (.of A)) [Flat q] :

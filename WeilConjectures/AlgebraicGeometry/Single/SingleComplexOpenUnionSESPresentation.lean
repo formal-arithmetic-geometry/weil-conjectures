@@ -15,7 +15,13 @@ import WeilConjectures.AlgebraicGeometry.Single.SingleComplexOpenUnionSESCompati
 
 /-! # Chain-level comparison on a compact source-open union
 
-Source: Stacks Project, Cohomology, Tags 08HZ and 08HY; Tag 0DJ9.
+## References
+
+* Stacks Project, Cohomology, Tags 08HZ and 08HY
+* Tag 0DJ9
+* Stacks Project, Tags 08HZ (relative Mayer--Vietoris), 08HY (the counit base-change construction),
+  0DJ9 (the source-open induction diagram), and 013N--013O (the cylinder replacement and its
+  homotopy equivalence)
 -/
 
 @[expose] public section
@@ -25,11 +31,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- A short-exact-complex presentation of the comparison diagram on a union.
-This is a construction before forming connecting maps or distinguished triangles.
-
-Source: Stacks Project, Tags 08HZ (relative Mayer--Vietoris), 08HY (the counit
-base-change construction), 0DJ9 (the source-open induction diagram), and
-013N--013O (the cylinder replacement and its homotopy equivalence). -/
+This is a construction before forming connecting maps or distinguished triangles. -/
 theorem singleComplexOpenComparison_union_ses_presentation
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

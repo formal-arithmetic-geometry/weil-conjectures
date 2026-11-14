@@ -13,7 +13,12 @@ import WeilConjectures.Algebra.Homology.System.SystemEvaluationTopos
 
 /-! # Projection formula for cartesian semilinear systems
 
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 06YS, 07A4 and 08J9.
+## References
+
+* Zheng Construction 4.1 and Lemma 4.10
+* Stacks 06YS, 07A4 and 08J9
+* Zheng Construction 4.1, printed p.21, and Proposition 4.17(a), printed pp.25-26
+* Stacks 07A4 and 08J9, step 2
 -/
 
 @[expose] public noncomputable section
@@ -107,9 +112,7 @@ private theorem singleton_above
   exact (SheafOfModules.systemSingleDerivedAbove S T R q n hq P).of_iso i
 
 /-- The unit-defined projection for derived extension from one coefficient level is
-invertible for a cartesian system. No internal-Hom comparison is assumed.
-Source: Zheng Construction 4.1, printed p.21, and Proposition 4.17(a), printed pp.25-26; Stacks 07A4
-and 08J9, step 2. -/
+invertible for a cartesian system. No internal-Hom comparison is assumed. -/
 theorem semilinearCartesianProjection
     (scalar : ∀ {m n : ℕ} (h : n ≤ m),
       ScalarData.{c, v, max c v r} (coefficientMap.{c, v, max c v r} J B τ h))

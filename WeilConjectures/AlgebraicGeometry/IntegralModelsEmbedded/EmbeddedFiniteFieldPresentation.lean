@@ -74,7 +74,10 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantModul
 
 /-! # Heart comparison for embedded finite-field coefficients
 
-Source: Stacks Tags 03ET, 00YV and 06YQ.
+## References
+
+* Stacks Tags 03ET, 00YV and 06YQ
+* Stacks Tags 099L, 03ET, 00YV, 06YQ and 09AL
 -/
 
 @[expose] public noncomputable section
@@ -94,9 +97,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 attribute [-instance] integralModel_coefficientMonObj in
 /-- The embedded finite-field presentation and the intrinsic presentation have a common
 coefficient-sized section-module encoding. The embedded encoding is strong monoidal;
-the specified derived realization is the induced functor under these encodings.
-
-Source: Stacks Tags 099L, 03ET, 00YV, 06YQ and 09AL. -/
+the specified derived realization is the induced functor under these encodings. -/
 theorem finiteFieldPresentation
     (X : Scheme.{u}) [IsNoetherian X] (A : Type) [Field A]
     [TopologicalSpace A] [IsTopologicalRing A] [Finite A] [DiscreteTopology A] :

@@ -11,7 +11,11 @@ import WeilConjectures.AlgebraicGeometry.Projective.ProjectiveBundleRealizationP
 set_option linter.privateModule false
 
 /-! # Quotient-line comparison along normalized projective-bundle base change
-Source: Stacks Project, Constructions, Tag 01O3. -/
+
+## References
+
+* Stacks Project, Constructions, Tag 01O3
+-/
 
 @[expose] public section
 set_option autoImplicit false

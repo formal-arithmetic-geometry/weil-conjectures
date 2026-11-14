@@ -19,7 +19,12 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.GaloisCoverBaseChange
 import WeilConjectures.RingTheory.RegularPrincipalPrimeLocalizationDvr
 import WeilConjectures.AlgebraicGeometry.Morphisms.RootNormalizationLocalizationComparison
 
-/-! # Localization of the root normalization to a DVR model -/
+/-! # Localization of the root normalization to a DVR model
+
+## References
+
+* Stacks Project, Tag 0307
+-/
 
 @[expose] public section
 universe u
@@ -106,9 +111,7 @@ private theorem root_span_comap {H : Type u} [CommRing H]
     exact Ideal.mul_mem_left _ _ (Ideal.subset_span (Set.mem_singleton t))
 
 set_option linter.unusedVariables false in
-/-- The stalk of a root normalization is identified with the corresponding DVR model.
-
-Source: Stacks Project, Tag 0307. -/
+/-- The stalk of a root normalization is identified with the corresponding DVR model. -/
 theorem root_normalization_dvr_comparison
     {L U : Scheme.{u}} (i : U ⟶ L)
     (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)

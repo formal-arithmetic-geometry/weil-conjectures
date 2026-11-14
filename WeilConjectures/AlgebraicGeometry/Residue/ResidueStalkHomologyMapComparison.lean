@@ -17,7 +17,11 @@ import WeilConjectures.AlgebraicGeometry.Localized.LocalizedStrictPerfectResidue
 
 /-! # Naturality of residue derived homology in a local perfect representative
 
-Source: Stacks Project, Tags 0E62, 06YJ and 0D5S.
+## References
+
+* Stacks Project, Tags 0E62, 06YJ and 0D5S
+* Stacks Project, Tag 0E62, residue-field argument
+* Tags 06YJ and 0D5S
 -/
 
 @[expose] public section
@@ -52,8 +56,7 @@ private theorem strictlyPerfect_single_restricted_unit (S : Scheme.{u}) (U : S.O
         HomologicalComplex.isZero_single_obj_X _ _ _ _ hn
       exact ⟨0, 0, 0, by simpa using (hz.eq_of_src (0 : A.X n ⟶ A.X n) (𝟙 _))⟩
 
-/-- The representing chain arrow induces an isomorphism on residue stalk H⁰.
-Source: Stacks Project, Tag 0E62, residue-field argument; Tags 06YJ and 0D5S. -/
+/-- The representing chain arrow induces an isomorphism on residue stalk H⁰. -/
 theorem isIso_residue_stalk_homologyMap (S : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
     [∀ U : S.Opens,

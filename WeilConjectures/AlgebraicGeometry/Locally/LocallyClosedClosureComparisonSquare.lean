@@ -34,13 +34,16 @@ import WeilConjectures.AlgebraicGeometry.Derived.DerivedImmersionComparisonNorma
 
 /-! # The normalized locally closed closure comparison square
 
-Source: Stacks Tags 0GJ1, 04CA, 09AF, 099R and 0B65.
-
 All composites below use the specified open comparison and the specified derived
 closed counit mate. Normalized closure identifications are expressed in derived
 coordinates: their restriction is the identity under the actual open units, closed
 counits and pullback compositors. This normalization also characterizes the
 termwise identifications uniquely, so it does not permit a different choice of map.
+
+## References
+
+* Stacks Tags 0GJ1, 04CA, 09AF, 099R and 0B65
+* Stacks 0GJ1 and 0B65
 -/
 
 @[expose] public noncomputable section
@@ -53,22 +56,19 @@ universe u uC uD vC vD
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 
 namespace AlgebraicGeometry.ProEtale
-/-- The closed-then-open extension F_e on the bounded below derived category.
-Source: Stacks 0GJ1 and 0B65. -/
+/-- The closed-then-open extension F_e on the bounded below derived category. -/
 abbrev closureSquareEtaleFactor (A : Type (u + 1)) [CommRing A]
     {S V T : Scheme.{u}} (c : S ⟶ V) (v : V ⟶ T) [IsOpenImmersion v] :=
   (Etale.lowerStar (ModuleCat.{u + 1} A) c).rightDerivedFunctorPlus ⋙
     (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} A) v).mapDerivedCategoryPlus
 
-/-- The closed-then-open extension F_p on the bounded below derived category.
-Source: Stacks 0GJ1 and 0B65. -/
+/-- The closed-then-open extension F_p on the bounded below derived category. -/
 abbrev closureSquareProEtaleFactor (A : Type (u + 1)) [CommRing A]
     {S V T : Scheme.{u}} (c : S ⟶ V) (v : V ⟶ T) [IsOpenImmersion v] :=
   (lowerStar (ModuleCat.{u + 1} A) c).rightDerivedFunctorPlus ⋙
     (openImmersionLowerShriek (ModuleCat.{u + 1} A) v).mapDerivedCategoryPlus
 
-/-- The termwise canonical open comparison o_j, with its direction fixed.
-Source: Stacks 0GJ1 and 0B65. -/
+/-- The termwise canonical open comparison o_j, with its direction fixed. -/
 def closureSquareOpenComparison (A : Type (u + 1)) [CommRing A]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapDerivedCategoryPlus ⋙
@@ -80,8 +80,7 @@ def closureSquareOpenComparison (A : Type (u + 1)) [CommRing A]
       (openImmersionLowerShriekComparisonUpperStarIso (ModuleCat.{u + 1} A) j) ≪≫
     Functor.mapDerivedCategoryPlusCompIso _ _
 
-/-- The canonical pullback compositor for a specified factorization of s.
-Source: Stacks 0GJ1 and 0B65. -/
+/-- The canonical pullback compositor for a specified factorization of s. -/
 def closureSquareEtalePullComp (A : Type (u + 1)) [CommRing A]
     {S V T : Scheme.{u}} (f : S ⟶ V) (g : V ⟶ T) (s : S ⟶ T)
     (h : f ≫ g = s) :
@@ -90,8 +89,7 @@ def closureSquareEtalePullComp (A : Type (u + 1)) [CommRing A]
         (Etale.upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategoryPlus :=
   Etale.upperStarCompDerivedPlus (ModuleCat.{u + 1} A) f g s h.symm
 
-/-- The inverse open unit on D+, descended termwise from the sheaf unit.
-Source: Stacks 0GJ1 and 0B65. -/
+/-- The inverse open unit on D+, descended termwise from the sheaf unit. -/
 def closureSquareProEtaleOpenRestriction (A : Type (u + 1)) [CommRing A]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapDerivedCategoryPlus ⋙
@@ -102,8 +100,7 @@ def closureSquareProEtaleOpenRestriction (A : Type (u + 1)) [CommRing A]
         (ModuleCat.{u + 1} A) j).unit).symm ≪≫
     Functor.mapDerivedCategoryPlusIdIso _
 
-/-- The canonical pullback compositor for a specified factorization of s.
-Source: Stacks 0GJ1 and 0B65. -/
+/-- The canonical pullback compositor for a specified factorization of s. -/
 def closureSquareProEtalePullComp (A : Type (u + 1)) [CommRing A]
     {S V T : Scheme.{u}} (f : S ⟶ V) (g : V ⟶ T) (s : S ⟶ T)
     (h : f ≫ g = s) :

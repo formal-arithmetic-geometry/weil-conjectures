@@ -192,12 +192,15 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteOp
 /-!
 # Integral open direct image preserves constructibility
 
-Source: Stacks Tags 099L, 09A6 and 09C1.
-
 The residue comparison is specified by its adjunction equation, rather than by an
 unconstrained isomorphism of objects. The coefficient-change pullback square used in that
 equation is defined for the nonflat residue quotient. All derived categories below are
 ordinary derived categories of internal modules over the continuous condensed coefficients.
+
+## References
+
+* Stacks Tags 099L, 09A6 and 09C1
+* Stacks Tags 099L, 09A6, 09C1
 -/
 
 @[expose] public noncomputable section
@@ -333,8 +336,7 @@ private theorem residue_open_image
 /-- Integral open direct image is derived complete, commutes canonically with residue
 reduction, and is bounded constructible; integral Dbc equals its finite-Tor subcategory.
 The unique comparison is characterized by the usual pullback/reduction square and the
-two geometric counits. This is the canonical coefficient-change (projection-formula) map.
-Source: Stacks Tags 099L, 09A6, 09C1. -/
+two geometric counits. This is the canonical coefficient-change (projection-formula) map. -/
 theorem integral_open_direct_image
     (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ l)]
     [U.Over (Spec (.of k))] [X.Over (Spec (.of k))]

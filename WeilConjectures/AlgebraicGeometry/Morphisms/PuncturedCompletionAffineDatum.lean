@@ -12,7 +12,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionAffineCoor
 
 /-! # Affine section presentation of the local compatibility equations
 
-Source: Stacks Project, Tags 0BLH and 05EL.
+## References
+
+* Stacks Project, Tags 0BLH and 05EL
+* Stacks Project, Tag 0BLH, first two proof paragraphs
+* Tag 05EL, H0
 -/
 
 @[expose] public section
@@ -45,9 +49,7 @@ private theorem punctured_chart_cover
   exact (hU ((q ≫ U.ι) y)).mp (q y).property he
 
 /-- The affine datum identifies its ambient coordinates with actual chart sections;
-its compatibility equations are precisely local sheaf compatibility and local overlap agreement.
-
-Source: Stacks Project, Tag 0BLH, first two proof paragraphs; Tag 05EL, H0. -/
+its compatibility equations are precisely local sheaf compatibility and local overlap agreement. -/
 theorem exists_formalGlueingData_affine_datum
     {A : Type u} [CommRing A] [IsLocalRing A]
     {U : (Spec (.of A)).Opens}

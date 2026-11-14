@@ -12,7 +12,9 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 /-!
 # Projective morphisms are proper
 
-Source: Stacks Project, Tag 01WC.
+## References
+
+* Stacks Project, Tag 01WC
 -/
 
 @[expose] public section
@@ -26,9 +28,7 @@ namespace AlgebraicGeometry
 /-- Every projective morphism in the blueprint's finite projective-space embedding convention
 is proper. The other conjuncts record the three properness facts in the parenthetical clause:
 projective-space projections are proper, closed immersions are proper, and proper morphisms
-are closed under composition.
-
-Source: Stacks Project, Tag 01WC. -/
+are closed under composition. -/
 theorem hProjective_properness :
     (∀ {X Y : Scheme.{u}} (f : X ⟶ Y), IsHProjective f → IsProper f) ∧
     (∀ (N : ℕ) (Y : Scheme.{u}),

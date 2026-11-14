@@ -45,9 +45,6 @@ private noncomputable def nativeOpenAdjunction
 
 /-- Direct-image composition and identities, and exact open extension with its bounded
 constructibility and composition comparisons, in the native equivariant derived categories.
-
-Source: LowerStarComp.lean, `lowerStarCompIso`; LowerStarId.lean, `lowerStarIdIso`;
-OpenImmersion.lean, exactness instances and `isAdicConstructibleSheaf_extensionByZero`.
 -/
 theorem nativeWeilBasicComparisons (k₀ : Type u) [Field k₀] [Finite k₀]
     (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] :

@@ -11,12 +11,15 @@ import WeilConjectures.AlgebraicGeometry.IsomorphismScalarTensor.IsomorphismScal
 
 /-! # Preservation of completed flat-term K-flat models
 
-Source: Stacks Project, Tags 03EL and 06YY; Bhatt--Scholze, Section 6.5, Lemma 6.5.9(4).
-
 The proof applies the isomorphism-of-sites ringed-topos pullback theorem to the
 transported inverse image, then applies the identity and completed scalar
 extension instances to the three complexes in PreservesModels. The argument is
 termwise and remains valid for unbounded, zero, and empty-site complexes.
+
+## References
+
+* Stacks Project, Tags 03EL and 06YY
+* Bhatt--Scholze, Section 6.5, Lemma 6.5.9(4)
 -/
 
 @[expose] public noncomputable section
@@ -35,10 +38,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (ι : E →ₐ[ℚ_[l]] L) {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]
 
-/-- Preservation of the three completed flat-term K-flat model clauses.
-
-Source: Stacks Project, Tags 03EL and 06YY; Bhatt--Scholze, Section 6.5, Lemma 6.5.9(4).
--/
+/-- Preservation of the three completed flat-term K-flat model clauses. -/
 theorem scalar_completed_preserves_models
     (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x))
     (_hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) :

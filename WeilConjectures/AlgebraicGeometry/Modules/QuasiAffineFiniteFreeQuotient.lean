@@ -12,7 +12,11 @@ import WeilConjectures.AlgebraicGeometry.Modules.LocalFiniteFreeGlobalMaps
 
 /-! # Finite free quotients on Noetherian quasi-affine opens
 
-Source: Stacks Project, Tag 0EKP, the global-generation step of (2) to (3).
+## References
+
+* Stacks Project, Tag 0EKP, the global-generation step of (2) to (3)
+* Stacks Project, Tag 0EKP, the global-generation step of (2) to (3), with the ample invertible
+  module the structure sheaf
 -/
 
 @[expose] public section
@@ -24,10 +28,7 @@ open CategoryTheory Limits SheafOfModules
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- A finite locally free module on an open of a Noetherian affine scheme is
-an epimorphic image of a finite free module.
-
-Source: Stacks Project, Tag 0EKP, the global-generation step of (2) to (3),
-with the ample invertible module the structure sheaf. -/
+an epimorphic image of a finite free module. -/
 theorem exists_epi_free_of_isFiniteLocallyFree
     {R : Type u} [CommRing R] [IsNoetherianRing R]
     (V : (Spec (.of R)).Opens) (N : V.toScheme.Modules) [N.IsFiniteLocallyFree] :

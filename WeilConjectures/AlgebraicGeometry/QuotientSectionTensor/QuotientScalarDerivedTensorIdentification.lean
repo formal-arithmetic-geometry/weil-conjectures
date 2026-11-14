@@ -65,8 +65,7 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
 
 open ModuleRingedComparison
 
-/-- The derived oplax tensorator is the canonical normalized tensorator.
-Source: the definition of the generic derived oplax structure. -/
+/-- The derived oplax tensorator is the canonical normalized tensorator. -/
 theorem scalarDerivedOplax_δ (T : Scheme.{u})
     (M N : DerivedCategory (Modules Λ T)) :
     letI := scalarDerivedOplax a T

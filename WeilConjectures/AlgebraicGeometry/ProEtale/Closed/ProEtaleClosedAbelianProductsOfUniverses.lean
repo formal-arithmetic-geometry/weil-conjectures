@@ -35,7 +35,10 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleImmersionAlgebraicLimi
 
 /-! # Closed inverse image and countable products in independent universes
 
-Source: Stacks Project, Tag 09AA.
+## References
+
+* Stacks Project, Tag 09AA
+* Stacks Project, assertion (1)
 -/
 
 @[expose] public section
@@ -48,9 +51,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- Closed inverse image preserves countable products of abelian sheaves, with
-independent universes for schemes and sections.
-
-Source: Stacks Project, assertion (1). -/
+independent universes for schemes and sections. -/
 theorem proEtaleClosedAbelianProductsOfUniverses
     {X Z : Scheme.{t}} (i : Z ⟶ X) [IsClosedImmersion i] :
     PreservesLimitsOfShape (Discrete ℕ)

@@ -63,8 +63,7 @@ open scoped CategoryTheory.Obj CategoryTheory.MonObj
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- Postcomposition by a continuous ring homomorphism, in the coefficient universe.
-Source: pulled-back coefficients. -/
+/-- Postcomposition by a continuous ring homomorphism, in the coefficient universe. -/
 def twistContinuousRingMap {A B : Type u} [CommRing A] [CommRing B]
     [TopologicalSpace A] [TopologicalSpace B] [IsTopologicalRing A] [IsTopologicalRing B]
     (f : A →+* B) (hf : Continuous f) :
@@ -75,16 +74,14 @@ def twistContinuousRingMap {A B : Type u} [CommRing A] [CommRing B]
           ((f.compLeftContinuous T.unop hf).comp ULift.ringEquiv.toRingHom))
      naturality := fun _ _ _ ↦ rfl }⟩
 
-/-- The same continuous coefficient map on abelian ring objects.
-Source: pulled-back coefficients. -/
+/-- The same continuous coefficient map on abelian ring objects. -/
 abbrev twistContinuousMap {A B : Type u} [CommRing A] [CommRing B]
     [TopologicalSpace A] [TopologicalSpace B] [IsTopologicalRing A] [IsTopologicalRing B]
     (f : A →+* B) (hf : Continuous f) :=
   (sheafCompose (coherentTopology Profinite.{u})
     (forget₂ RingCat.{u + 1} Ab.{u + 1})).map (twistContinuousRingMap f hf)
 
-/-- A continuous ring map preserves the pulled-back ring operations.
-Source: pulled-back coefficients. -/
+/-- A continuous ring map preserves the pulled-back ring operations. -/
 instance twistContinuousMap_isMonHom {A B : Type u} [CommRing A] [CommRing B]
     [TopologicalSpace A] [TopologicalSpace B] [IsTopologicalRing A] [IsTopologicalRing B]
     (f : A →+* B) (hf : Continuous f) : IsMonHom (twistContinuousMap f hf) := by
@@ -110,8 +107,7 @@ abbrev twistFiniteRing (n : ℕ) : Sheaf (coherentTopology Profinite.{u}) Ab.{u 
   letI : DiscreteTopology (Padic.coefficientExtensionRing l E (n + 1)) := ⟨rfl⟩
   Profinite.continuousCoefficientRingObj (Padic.coefficientExtensionRing l E (n + 1))
 
-/-- The quotient is continuous because uniformizer cosets are neighbourhoods.
-Source: integral coefficient topology. -/
+/-- The quotient is continuous because uniformizer cosets are neighbourhoods. -/
 theorem twistReduction_continuous (n : ℕ) :
     letI := spectralNorm.normedField ℚ_[l] E
     letI : TopologicalSpace (Padic.coefficientExtensionRing l E (n + 1)) := ⊥
@@ -132,8 +128,7 @@ def twistReduction (n : ℕ) : twistIntegralRing l E ⟶ twistFiniteRing l E n :
   twistContinuousMap (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1)))
     (twistReduction_continuous l E n)
 
-/-- The specified coefficient morphism preserves the ring structure.
-Source: coefficient maps. -/
+/-- The specified coefficient morphism preserves the ring structure. -/
 instance twistReduction_isMonHom (n : ℕ) : IsMonHom (twistReduction l E n) := by
   unfold twistReduction
   infer_instance
@@ -147,8 +142,7 @@ def twistFiniteReduction (n : ℕ) : twistFiniteRing l E (n + 1) ⟶ twistFinite
   twistContinuousMap (Padic.coefficientExtensionTransition l E (n + 1))
     continuous_of_discreteTopology
 
-/-- The specified coefficient morphism preserves the ring structure.
-Source: coefficient maps. -/
+/-- The specified coefficient morphism preserves the ring structure. -/
 instance twistFiniteReduction_isMonHom (n : ℕ) : IsMonHom (twistFiniteReduction l E n) := by
   unfold twistFiniteReduction
   infer_instance
@@ -158,8 +152,7 @@ def twistIntegralToRational : twistIntegralRing l E ⟶ twistRationalRing l E :=
   letI := spectralNorm.normedField ℚ_[l] E
   twistContinuousMap (Padic.coefficientExtensionIntegers l E).subtype continuous_subtype_val
 
-/-- The specified coefficient morphism preserves the ring structure.
-Source: coefficient maps. -/
+/-- The specified coefficient morphism preserves the ring structure. -/
 instance twistIntegralToRational_isMonHom : IsMonHom (twistIntegralToRational l E) := by
   unfold twistIntegralToRational
   infer_instance
@@ -173,8 +166,7 @@ def coefficientFiniteRootLine (n r : ℕ) :
       (condensedRingObj (twistFiniteRing l E n) X) :=
   (Mod.freeFunctor _).obj (rootsOfUnitySheaf X (l ^ (r + 1)))
 
-/-- The canonical comparison sends u tensor a to u^(l^k) tensor a.
-Source: comparison L_n,r' -> L_n,r. -/
+/-- The canonical comparison sends u tensor a to u^(l^k) tensor a. -/
 def coefficientFiniteRootComparison (n r k : ℕ) :
     coefficientFiniteRootLine l E X n (r + k) ⟶ coefficientFiniteRootLine l E X n r :=
   (Mod.freeFunctor _).map
@@ -193,8 +185,7 @@ def coefficientIntegralTwistLevel (n : ℕ) :
   (Mod.comap (coefficientMap (twistReduction l E n) X)).obj
     (coefficientFiniteTwistOne l E X n)
 
-/-- The reduction coefficient square commutes before and after pullback.
-Source: integral limit transitions. -/
+/-- The reduction coefficient square commutes before and after pullback. -/
 theorem twistReduction_comp (n : ℕ) :
     coefficientMap (twistReduction l E (n + 1)) X ≫
       coefficientMap (twistFiniteReduction l E n) X =

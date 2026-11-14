@@ -23,8 +23,11 @@ import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 
 /-! # Realizing scalar cycles of a fixed perfect direct-image model
 
-Source: Stacks Project, Tag 0BF2, the lifting of a degree-zero cycle through the
-base-change comparison.
+## References
+
+* Stacks Project, Tag 0BF2, the lifting of a degree-zero cycle through the base-change comparison
+* Stacks Project, Tag 0BF2, the paragraph after the chain-map calculation, with the arbitrary
+  base-change comparison of Tag 0B91
 -/
 
 @[expose] public section
@@ -35,9 +38,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- A connective strictly perfect model with a scalar degree-zero basis realizes its
 scalar cycles as sections, compatibly with restriction to the marked residue fibre.
-This fixes a model; it constructs no degree-one map and assumes no H¹ injectivity.
-Source: Stacks Project, Tag 0BF2, the paragraph after the chain-map calculation, with the arbitrary
-base-change comparison of Tag 0B91 -/
+This fixes a model; it constructs no degree-one map and assumes no H¹ injectivity. -/
 theorem picard_scalar_model_cycles_realization
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

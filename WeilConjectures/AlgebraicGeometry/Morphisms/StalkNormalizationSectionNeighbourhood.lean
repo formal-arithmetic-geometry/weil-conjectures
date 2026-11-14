@@ -21,7 +21,13 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.StalkNormalizationDepthTwoSec
 /-!
 # Etaleness near the local section of a normalization
 
-Source: Stacks Project, Tag 0EYJ, local computation; Tags 0EYI and 0EY9
+## References
+
+* Stacks Project, Tag 0EYJ, local computation
+* Tags 0EYI and 0EY9
+* Stacks Project, formal section calculation
+* Tag 0EYI (split-section trait test), Tag 0EY9 (power series full faithfulness), and Tag 0EY6 (flat
+  base change for the depth-two extension)
 -/
 
 @[expose] public section
@@ -74,10 +80,7 @@ private theorem etale_shrink_of_fibre_source_opens {X Y : Scheme.{u}}
     exact TopologicalSpace.Opens.mem_iSup.mpr ⟨x, hxV x⟩
   exact ⟨W, hy, IsZariskiLocalAtSource.of_iSup_eq_top V htop hV⟩
 
-/-- The section meets an open over which the finite local normalization is etale.
-
-Source: Stacks Project, formal section calculation; Tag 0EYI (split-section trait test), Tag 0EY9
-(power series full faithfulness), and Tag 0EY6 (flat base change for the depth-two extension). -/
+/-- The section meets an open over which the finite local normalization is etale. -/
 theorem GaloisCover.stalk_normalization_section_neighbourhood {S C : Scheme.{u}} [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]
     (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))

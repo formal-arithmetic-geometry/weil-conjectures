@@ -15,7 +15,10 @@ import Mathlib.Algebra.Homology.HomologySequence
 
 /-! # The puncture localization sequence for derived torsion
 
-Source: Stacks Project, Tags 0BK0, 0A6T, and 09T2.
+## References
+
+* Stacks Project, Tags 0BK0, 0A6T, and 09T2
+* Stacks Project, Tag 0BK0, Lemma 51.8.2(2), and Tag 0A6T, Lemma 51.2.1
 -/
 
 @[expose] public section
@@ -26,7 +29,6 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- The localization boundary identifies H¹ of the puncture with derived torsion in degree two.
-Source: Stacks Project, Tag 0BK0, Lemma 51.8.2(2), and Tag 0A6T, Lemma 51.2.1.
 The flasqueness input is Tag 09T2, Lemma 36.8.1. -/
 theorem nonempty_punctured_h_one_addEquiv_derived_torsion
     (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R]

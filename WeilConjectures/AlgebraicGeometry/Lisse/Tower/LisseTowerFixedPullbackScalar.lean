@@ -19,7 +19,9 @@ The fixed sheaf realization commutes with inverse image through the mate of the
 identity on sections of direct images. This comparison is compatible with the
 section-normalized consecutive scalar squares and the restriction/pullback mates.
 
-Source: Stacks Project, Modules on Sites, Tags 03CY, 03D8 and 03DA.
+## References
+
+* Stacks Project, Modules on Sites, Tags 03CY, 03D8 and 03DA
 -/
 
 public noncomputable section

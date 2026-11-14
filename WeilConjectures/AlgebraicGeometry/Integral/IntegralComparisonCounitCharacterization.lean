@@ -14,12 +14,14 @@ import WeilConjectures.CategoryTheory.SignedCoconeShift.SignedMappingCoconeShift
 /-!
 # Whole-tower characterization of the specified integral comparison
 
-Source: Stacks Project, Derived Categories, Tags 0FND and 0DVC, and Cohomology on Sites, Tag 0941.
-
 The first statement includes arbitrary unbounded derived variables, normalization on
 every simultaneous K-injective resolution, and hence independence of the resolution.
 The second uses the actual quotient tower and the actual zero-homotopy Roos lift.
 The index n denotes the positive exponent n+1 throughout.
+
+## References
+
+* Stacks Project, Derived Categories, Tags 0FND and 0DVC, and Cohomology on Sites, Tag 0941
 -/
 
 @[expose] public noncomputable section

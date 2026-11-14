@@ -17,7 +17,11 @@ import WeilConjectures.AlgebraicGeometry.Proper.Flat.ProperFlatStructureSheafSta
 /-!
 # A single-fibre criterion for the structure-sheaf unit on a stalk
 
-Source: Stacks Project, Tag 0E62, proof of `perfect-lemma-proper-flat-h0`, localized at one point.
+## References
+
+* Stacks Project, Tag 0E62, proof of `perfect-lemma-proper-flat-h0`, localized at one point
+* Stacks Project, Tag 0E62, proof of `perfect-lemma-proper-flat-h0`
+* the local finite free model used in that proof is Tag 0BCD, `lift-perfect-from-residue-field`
 -/
 
 @[expose] public section
@@ -31,8 +35,6 @@ namespace AlgebraicGeometry
 /-- If the canonical functions map on one fibre is an isomorphism, the ordinary module
 adjunction unit is bijective at that point of the base. No hypothesis on the functions
 of the other fibres, and no assertion about arbitrary base change, is made here.
-Source: Stacks Project, Tag 0E62, proof of `perfect-lemma-proper-flat-h0`; the local
-finite free model used in that proof is Tag 0BCD, `lift-perfect-from-residue-field`.
 -/
 theorem bijective_structureSheafMap_stalk_of_proper_flat_fiber
     {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f] [Flat f]

@@ -10,11 +10,15 @@ import WeilConjectures.AlgebraicGeometry.IsomorphismScalarTensor.IsomorphismScal
 
 /-! # Completed pure-tensor comparison
 
-Source: Stacks Project, Tag 03EL; Tag 0G7E; Bhatt--Scholze, Section 6.5, Lemma 6.5.9(4).
-
 The proof applies the normalized comparison of completed-coefficient module
 sheaves degreewise, then restricts the resulting natural isomorphism of complexes
 to the good-complex subcategory. Its local tensor rule is exactly CompletedFormula.
+
+## References
+
+* Stacks Project, Tag 03EL
+* Tag 0G7E
+* Bhatt--Scholze, Section 6.5, Lemma 6.5.9(4)
 -/
 
 @[expose] public noncomputable section
@@ -35,8 +39,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- Existence of the completed chain isomorphism with its normalized pure-tensor
 formula. This is the comparison component of the completed model statement.
-
-Source: Stacks Project, Tag 03EL; Tag 0G7E; Bhatt--Scholze, Section 6.5, Lemma 6.5.9(4).
 -/
 theorem scalar_completed_formula
     (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x))

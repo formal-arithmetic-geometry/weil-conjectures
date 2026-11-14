@@ -30,8 +30,6 @@ public import WeilConjectures.AlgebraicGeometry.Complete.CompleteCompactSupportP
 
 /-! # Normalized coefficient-family data
 
-Source: Stacks Tag 0E8I for the open tensor factor.
-
 ## Main definitions
 
 * `cbcScalarCompactSupportInverse`: the actual open/proper scalar mate composite.
@@ -39,6 +37,10 @@ Source: Stacks Tag 0E8I for the open tensor factor.
   integral, shift and scalar normalization.
 * `CbcCompletedPullCoefficientFamily`: completed pullback families with their
   ordinary-balancing and completion-unit normalization.
+
+## References
+
+* Stacks Tag 0E8I for the open tensor factor
 -/
 
 @[expose] public noncomputable section

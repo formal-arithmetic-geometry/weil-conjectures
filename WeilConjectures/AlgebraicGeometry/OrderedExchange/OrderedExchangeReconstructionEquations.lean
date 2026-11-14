@@ -11,7 +11,15 @@ import WeilConjectures.AlgebraicGeometry.Stratum.StratumCompletionUnitRestrictio
 import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedDirectImageLimits
 import WeilConjectures.AlgebraicGeometry.OrderedExchange.OrderedExchangeLambdaDirectImage
 
-/-! # reconstructionCoefficientEquations -/
+/-! # reconstructionCoefficientEquations
+
+## References
+
+* Stacks 099N
+* Stacks 099M, 099N
+* Stacks 099M, 0A07
+* Stacks Tags 099M, 099N, 0A07 and 0E48
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -28,8 +36,7 @@ section Helpers
 variable {U V : Scheme.{t}} (u : U ⟶ V)
 
 /-- The ordinary-to-completed comparison followed by the reduction/pullback reconstruction
-is the completion unit of the ordinary pullback.
-Source: Stacks 099N. -/
+is the completion unit of the ordinary pullback. -/
 theorem ordinaryToCompleted_reconstruction (M : d.derived V) :
     d.ordinaryToCompleted u M ≫
         (completedRlim U (d.completedRing U)).map ((d.reductionTowerPullbackIso u).hom.app M) =
@@ -44,8 +51,7 @@ theorem ordinaryToCompleted_reconstruction (M : d.derived V) :
   rw [Category.assoc, ← Functor.map_comp, Category.assoc, ha, Iso.inv_hom_id_app_assoc]
 
 /-- The explicit completed pullback/scalar comparison, built from the reconstruction of
-completed pullback, `lambda`, `rho` and `alpha`.
-Source: Stacks 099M, 099N. -/
+completed pullback, `lambda`, `rho` and `alpha`. -/
 def completedPullResIso :
     inclusion d V ⋙ d.completedPull u ⋙ res d U ≅
       inclusion d V ⋙ res d V ⋙ completePull d u :=
@@ -70,8 +76,7 @@ def completedPullResIso :
       simp only [Functor.map_comp, Category.assoc]
       rfl)
 
-/-- The explicit comparison satisfies the completion-unit equation characterizing `phi`.
-Source: Stacks 099M, 099N. -/
+/-- The explicit comparison satisfies the completion-unit equation characterizing `phi`. -/
 theorem completedPullResIso_unit (M : AComplete d V) :
     (res d U).map (d.ordinaryToCompleted u M.obj) ≫ (completedPullResIso d u).hom.app M =
       (alpha d u).hom.app M.obj ≫
@@ -82,8 +87,7 @@ theorem completedPullResIso_unit (M : AComplete d V) :
     reassoc_of% (rho_unit_second d U ((d.pull u).obj M.obj))]
   exact ((unit d U).naturality ((alpha d u).hom.app M.obj)).symm
 
-/-- `phi` is the explicit comparison `completedPullResIso`.
-Source: Stacks 099N. -/
+/-- `phi` is the explicit comparison `completedPullResIso`. -/
 theorem phi_eq_completedPullResIso : phi d u = completedPullResIso d u :=
   (phi_existsUnique d u).unique (phi_existsUnique d u).exists.choose_spec
     (completedPullResIso_unit d u)
@@ -93,8 +97,7 @@ end Helpers
 variable {X' X Y' Y : Scheme.{t}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
   {f : X ⟶ Y} {g : Y' ⟶ Y}
 
-/-- The source reconstruction equation.
-Source: Stacks 099M, 099N. -/
+/-- The source reconstruction equation. -/
 theorem sourceReconstruction_iotaS (K : d.derived X) (hK : d.TowerComplete X K) :
     (res d Y').map (sourceReconstruction (f := f) (g := g) d K).hom ≫
         (lambda d Y').hom.app
@@ -106,8 +109,7 @@ theorem sourceReconstruction_iotaS (K : d.derived X) (hK : d.TowerComplete X K) 
     Functor.map_comp, Category.assoc]
   rfl
 
-/-- The target reconstruction equation.
-Source: Stacks 099M, 099N. -/
+/-- The target reconstruction equation. -/
 theorem lambda_rhoPull (K : d.derived X) (hK : d.TowerComplete X K) :
     (lambda d X').hom.app ((d.towerPull g').obj ((completedReductionTower X d).obj K)) ≫
         (rlim (A := A) X').map (rhoPull (g' := g') d K).hom =
@@ -131,8 +133,7 @@ theorem lambda_rhoPull (K : d.derived X) (hK : d.TowerComplete X K) :
   rw [← Functor.map_comp, hP']
   simp only [Functor.map_comp]
 
-/-- The source equation for `sourceA`.
-Source: Stacks 099M, 0A07. -/
+/-- The source equation for `sourceA`. -/
 theorem sourceA_beta (K : d.derived X) (hK : d.TowerComplete X K) :
     (res d Y').map (sourceA (f := f) (f' := f') (g := g) (g' := g') d K).hom ≫
         (lambda d Y').hom.app
@@ -159,8 +160,7 @@ theorem sourceA_beta (K : d.derived X) (hK : d.TowerComplete X K) :
   rw [← Functor.map_comp_assoc (exchangeTowerRes d Y'), Iso.hom_inv_id_app]
   erw [CategoryTheory.Functor.map_id, Category.id_comp]
 
-/-- The target equation for `targetA`.
-Source: Stacks 099M, 0A07. -/
+/-- The target equation for `targetA`. -/
 theorem targetA_delta (K : d.derived X) (hK : d.TowerComplete X K) :
     (res d Y').map (targetA (g' := g') (f' := f') d K).hom ≫
         (lambda d Y').hom.app
@@ -194,8 +194,7 @@ theorem targetA_delta (K : d.derived X) (hK : d.TowerComplete X K) :
   erw [CategoryTheory.Functor.map_id, Category.id_comp]
 
 set_option linter.unusedVariables false in
-/-- reconstructionCoefficientEquations: the indicated part of the ordered comparison argument.
-Source: Stacks Tags 099M, 099N, 0A07 and 0E48. -/
+/-- reconstructionCoefficientEquations: the indicated part of the ordered comparison argument. -/
 theorem reconstructionCoefficientEquations (sq : ChosenCartesianSquare g' f' f g) :
     ∀ (K : d.derived X) (hK : d.TowerComplete X K),
       ((res d Y').map (sourceReconstruction (f := f) (g := g) d K).hom ≫

@@ -12,6 +12,10 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleAmbientRingedEx
 A direct kernel check of `mateEquiv_counit` against `proEtaleAmbientRingedExchange`
 times out. Going through the generic counit lemma for an arbitrary comparison and the
 equation lemma of the definition (combined by `rw`) is cheap.
+
+## References
+
+* Stacks 07A7
 -/
 
 @[expose] public section
@@ -84,8 +88,7 @@ theorem proEtaleAmbientRingedExchange_eq_mate (sq : ChosenCartesianSquare g' f' 
   proEtaleAmbientRingedExchange.eq_1 _ _ _ _ _ _ _ _ _ _
 
 omit θ in
-/-- The ambient exchange is the mate of the pullback comparison: its counit form.
-Source: Stacks 07A7. -/
+/-- The ambient exchange is the mate of the pullback comparison: its counit form. -/
 theorem proEtaleAmbientRingedExchange_counit (sq : ChosenCartesianSquare g' f' f g)
     (hcoeff : HEq
       (proEtaleRingCompositeCoefficients g' f R_Y R_X R_X' c_f c_g')

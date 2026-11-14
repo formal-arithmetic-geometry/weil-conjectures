@@ -9,7 +9,12 @@ public import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSe
 public import Mathlib.Algebra.Homology.Localization
 import all Mathlib.Algebra.Homology.Localization
 
-/-! Derived counit normalization for a fixed sectionwise scalar model. -/
+/-! Derived counit normalization for a fixed sectionwise scalar model.
+
+## References
+
+* Stacks 06YY and 07A6
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -93,8 +98,7 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
 variable [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ T)]
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ' T)]
 
-/-- A fixed sectionwise model admits a derived comparison normalized by its counit.
-Source: Stacks 06YY and 07A6. -/
+/-- A fixed sectionwise model admits a derived comparison normalized by its counit. -/
 theorem scalar_section_derived_comparison_exists (T : Scheme.{u})
     (model : SectionModel a T)
     (ordinary : QuotientChange.extension a T ⋙

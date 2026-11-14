@@ -13,7 +13,11 @@ import WeilConjectures.AlgebraicGeometry.Lisse.Coefficient.LisseCoefficientRestr
 /-!
 # Endomorphisms of geometric fibres under coefficient extension
 
-Source: Deligne, Weil II (1.1.1) b)-d), pp. 146-147.
+## References
+
+* Deligne, Weil II (1.1.1) b)-d), pp. 146-147
+* Deligne, Weil II (1.1.1) b)-d), pp. 146-147 (restriction and extension of coefficients)
+* Stacks Project, Algebra, finite separable case (the diagonal summand of the scalar tensor product)
 -/
 
 @[expose] public section
@@ -30,9 +34,6 @@ variable (l : ℕ) [Fact l.Prime] (Y : Scheme.{d})
 
 /-- Extension from the least coefficient field detects and uniquely extends natural
 endomorphisms of the geometric fibre with algebraically closed coefficients.
-
-Source: Deligne, Weil II (1.1.1) b)-d), pp. 146-147 (restriction and extension of coefficients);
-Stacks Project, Algebra, finite separable case (the diagonal summand of the scalar tensor product).
 -/
 theorem lisseCoefficientFiberEndomorphisms_whisker_bijective
     (S : ∀ E₀ : Padic.FiniteCoefficientFields l K,

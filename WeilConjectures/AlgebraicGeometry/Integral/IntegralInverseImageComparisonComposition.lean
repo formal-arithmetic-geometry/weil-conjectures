@@ -17,11 +17,13 @@ set_option linter.privateModule false
 /-!
 # Composition of the integral inverse-image comparison
 
-Source: Stacks Project, Tags 03D6, 0D6D and 0941.
-
 The auxiliary compositor is fixed on sections, then applied termwise and localized.
 The pullback compositor is exactly the recorded normalized realization, and kappa
 is the recorded cone comparison evaluated on a derived object.
+
+## References
+
+* Stacks Project, Tags 03D6, 0D6D and 0941
 -/
 
 @[expose] public noncomputable section

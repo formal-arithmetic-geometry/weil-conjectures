@@ -37,12 +37,14 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleRootsOfUnityInverseImage
 
 /-! # Inverse-image comparison for pro-etale roots of unity
 
-Source: Stacks Project, Tag 03PK.
-
 ## Main definitions
 
 - `proEtaleRootsOfUnityDirectImageMap`: pullback of roots along the projection.
 - `proEtaleRootsOfUnityInverseImageMap`: its inverse-image adjunct.
+
+## References
+
+* Stacks Project, Tag 03PK
 -/
 
 @[expose] public section
@@ -78,7 +80,6 @@ private theorem sections_map (S : Scheme.{u}) (N : ℕ) {U V : S.ProEtᵒᵖ}
   exact congrArg (fun y ↦ y.down.toMul) h
 
 /-- Naturality of the sectionwise projection formula.
-Source: Stacks Project, Tag 03PK.
 The pullback projection square commutes, and global sections turn this commutative
 square into the equality of ring maps used below. -/
 private theorem proEtaleRootsOfUnityDirectImageNaturality {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -136,8 +137,7 @@ private theorem proEtaleRootsOfUnityDirectImageNaturality {X Y : Scheme.{u}} (f 
         (restrictRootsOfUnity a'.unop.left.appTop.hom N (Additive.toMul y)))
         ((eX U).apply_symm_apply (r U (eY U x)))).symm.trans h.symm)
 
-/-- The comparison `c` is the adjoint of `β`, using the recorded inverse-image adjunction.
-Source: Stacks Project, Tag 03PK. -/
+/-- The comparison `c` is the adjoint of `β`, using the recorded inverse-image adjunction. -/
 noncomputable def proEtaleRootsOfUnityInverseImageMap {X Y : Scheme.{u}} (f : X ⟶ Y)
     (N : ℕ) :
     (proEtaleSheafInverseImage f AddCommGrpCat.{u + 1}).obj

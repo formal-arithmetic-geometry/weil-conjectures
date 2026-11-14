@@ -100,7 +100,11 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionIn
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 
 /-! Ordinary localized pullback and preservation of resolving complexes.
-Source: Stacks Project, Modules on Sites, Tag 04J0; Cohomology on Sites, Tags 0G7E and 07A4.
+
+## References
+
+* Stacks Project, Modules on Sites, Tag 04J0
+* Cohomology on Sites, Tags 0G7E and 07A4
 -/
 
 @[expose] public noncomputable section
@@ -336,8 +340,7 @@ private theorem operationOfPresentation
 end FromPresentation
 
 set_option linter.unusedVariables false in
-/-- Localization of the ordinary exact module pullback preserves resolving complexes.
-Source: Stacks Project, Modules on Sites, Tag 04J0; Cohomology on Sites, Tags 0G7E and 07A4. -/
+/-- Localization of the ordinary exact module pullback preserves resolving complexes. -/
 theorem localOrdinaryResolving_exists {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R_Y : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
     (R_X : Sheaf (ProEt.topology X) CommRingCat.{u + 1})

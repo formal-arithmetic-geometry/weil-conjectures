@@ -10,7 +10,11 @@ public import Mathlib.AlgebraicGeometry.Stalk
 import WeilConjectures.AlgebraicGeometry.Morphisms.NormalizationStalkBaseChange
 
 /-! # Normalization of a finite field coproduct over a stalk
-Source: Stacks Project, Tags 0307 and 035I. -/
+
+## References
+
+* Stacks Project, Tags 0307 and 035I
+-/
 
 @[expose] public section
 universe u
@@ -241,9 +245,7 @@ private theorem isIso_sigmaSpec_fin
   infer_instance
 
 /-- A field-coproduct presentation over a stalk induces the integral-closure
-coproduct presentation of relative normalization over that stalk.
-
-Source: Stacks Project, Tags 0307 and 035I. -/
+coproduct presentation of relative normalization over that stalk. -/
 theorem normalization_stalk_field_coproduct
     {N P : Scheme.{u}} (a : P ⟶ N) [QuasiCompact a] [QuasiSeparated a]
     (s : N) (n : ℕ) (E : Fin n → Type u) [∀ i, Field (E i)]

@@ -16,7 +16,9 @@ import Mathlib.RingTheory.Localization.Module
 /-!
 # Finite restriction detectors at the boundary of an open subscheme
 
-Source: Stacks Project, Tag 0AVN, finite basic-open restriction argument.
+## References
+
+* Stacks Project, Tag 0AVN, finite basic-open restriction argument
 -/
 
 @[expose] public section
@@ -84,9 +86,7 @@ private lemma localized_smul_injective {R : Type u} [CommRing R]
   rwa [he] at hinj
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Finite localized restriction maps detect sections of a boundary submodule.
-
-Source: Stacks Project, Tag 0AVN, finite basic-open restriction argument. -/
+/-- Finite localized restriction maps detect sections of a boundary submodule. -/
 theorem boundary_localized_finite_detector
     {L : Scheme.{u}} [IsLocallyNoetherian L] (U : L.Opens) (N : L.Modules)
     (hqc : N.IsQuasicoherent) (V : L.Opens) (hV : IsAffineOpen V)

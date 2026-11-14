@@ -38,11 +38,18 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 /-!
 # The canonical inverse-image map for finite pro-etale coefficients
 
-Source: Stacks Project, Tags 04B3, 0H7J and 09A5.
-
 The coefficient objects are the recorded sheafifications of continuous functions on
 connected components. The direct-image map is constructed on these functions by
 precomposition with the fibre-product projection and then extended by sheafification.
+
+## References
+
+* Stacks Project, Tags 04B3, 0H7J and 09A5
+* Stacks Tag 09A5
+* Stacks Tags 0H7J and 09A5
+* Stacks Tag 0H7J
+* Stacks Tags 04B3 and 0H7J
+* Stacks Tags 04B3, 0H7J and 09A5
 -/
 
 @[expose] public section
@@ -61,8 +68,7 @@ variable {U V : Scheme.{u}} (f : U ⟶ V) (Λ : Type (u + 1))
   [Ring Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ]
 
 /-- Pull a continuous function back to the fibre product and take its sheafified section.
-This sends a constant `a` to its constant scalar section on the fibre product.
-Source: Stacks Tag 09A5. -/
+This sends a constant `a` to its constant scalar section on the fibre product. -/
 noncomputable def finiteCoefficientDirectImageApp (W : V.ProEtᵒᵖ) :
     (finiteCoefficientPresheaf V Λ).obj W ⟶
       ((Scheme.proEtaleSheafDirectImage f RingCat.{u + 1}).obj
@@ -78,8 +84,7 @@ noncomputable def finiteCoefficientDirectImageApp (W : V.ProEtᵒᵖ) :
     (toSheafify (Scheme.ProEt.topology U) (finiteCoefficientPresheaf U Λ)).app
       ((Scheme.proEtaleBaseChange f).op.obj W)
 
-/-- The fibre-product section maps commute with restriction.
-Source: Stacks Tag 09A5. -/
+/-- The fibre-product section maps commute with restriction. -/
 theorem finiteCoefficientDirectImageApp_naturality
     {W W' : V.ProEtᵒᵖ} (a : W ⟶ W') :
     (finiteCoefficientPresheaf V Λ).map a ≫ finiteCoefficientDirectImageApp f Λ W' =
@@ -131,8 +136,7 @@ theorem finiteCoefficientDirectImageApp_naturality
 
 /-- The presheaf map underlying rho: pull functions back along the first projection.
 On each open fibre it is the specified constant section, so its value is precisely
-what the open-fibre gluing construction gives.
-Source: Stacks Tags 0H7J and 09A5. -/
+what the open-fibre gluing construction gives. -/
 noncomputable def finiteCoefficientDirectImagePresheafMap :
     finiteCoefficientPresheaf V Λ ⟶
       ((Scheme.proEtaleSheafDirectImage f RingCat.{u + 1}).obj
@@ -140,8 +144,7 @@ noncomputable def finiteCoefficientDirectImagePresheafMap :
   app := finiteCoefficientDirectImageApp f Λ
   naturality _ _ a := finiteCoefficientDirectImageApp_naturality f Λ a
 
-/-- The ring-sheaf map rho, obtained by the sheafification universal property.
-Source: Stacks Tags 0H7J and 09A5. -/
+/-- The ring-sheaf map rho, obtained by the sheafification universal property. -/
 noncomputable def finiteCoefficientDirectImageMap :
     finiteCoefficientRingSheaf V Λ ⟶
       (Scheme.proEtaleSheafDirectImage f RingCat.{u + 1}).obj
@@ -149,24 +152,21 @@ noncomputable def finiteCoefficientDirectImageMap :
   ((sheafificationAdjunction (Scheme.ProEt.topology V) RingCat.{u + 1}).homEquiv _ _).symm
     (finiteCoefficientDirectImagePresheafMap f Λ)
 
-/-- The canonical map c_f is the ring-sheaf adjunct of rho.
-Source: Stacks Tag 09A5. -/
+/-- The canonical map c_f is the ring-sheaf adjunct of rho. -/
 noncomputable def finiteCoefficientInverseImageMap :
     (Scheme.proEtaleSheafInverseImage f RingCat.{u + 1}).obj
       (finiteCoefficientRingSheaf V Λ) ⟶ finiteCoefficientRingSheaf U Λ :=
   ((Scheme.proEtaleSheafAdjunction f RingCat.{u + 1}).homEquiv _ _).symm
     (finiteCoefficientDirectImageMap f Λ)
 
-/-- The canonical comparison from constant-presheaf sheafification preserves constants.
-Source: Stacks Tag 0H7J. -/
+/-- The canonical comparison from constant-presheaf sheafification preserves constants. -/
 noncomputable def finiteCoefficientConstantComparison (T : Scheme.{u}) :
     (constantSheaf (Scheme.ProEt.topology T) RingCat.{u + 1}).obj (RingCat.of Λ) ⟶
       finiteCoefficientRingSheaf T Λ :=
   ((sheafificationAdjunction (Scheme.ProEt.topology T) RingCat.{u + 1}).homEquiv _ _).symm
     (finiteCoefficientScalarMap T Λ)
 
-/-- Constant sections give the unique constant-sheaf identification.
-Source: Stacks Tags 04B3 and 0H7J. -/
+/-- Constant sections give the unique constant-sheaf identification. -/
 theorem finiteCoefficientConstantComparison_isIso (T : Scheme.{u}) :
     IsIso (finiteCoefficientConstantComparison Λ T) ∧
       ∀ e : (constantSheaf (Scheme.ProEt.topology T) RingCat.{u + 1}).obj (RingCat.of Λ) ⟶
@@ -295,8 +295,7 @@ private theorem constantInverseImageMap_isIso (A : RingCat.{u + 1}) :
   infer_instance
 
 /-- The canonical coefficient inverse-image map is an isomorphism, for finite rings
-without a commutativity hypothesis and for arbitrary scheme morphisms.
-Source: Stacks Tags 04B3, 0H7J and 09A5. -/
+without a commutativity hypothesis and for arbitrary scheme morphisms. -/
 theorem finiteCoefficientInverseImageMap_isIso :
     IsIso (finiteCoefficientInverseImageMap f Λ) := by
   have := (finiteCoefficientConstantComparison_isIso Λ V).1
@@ -317,8 +316,7 @@ namespace ProEtale
 
 /-- For commutative coefficients the constant-preserving identifications carry c_f
 exactly to the structure map of the recorded pro-etale inverse-image construction.
-The equality is written as a commuting square, avoiding any arbitrary choice of inverse.
-Source: Stacks Tags 0H7J and 09A5. -/
+The equality is written as a commuting square, avoiding any arbitrary choice of inverse. -/
 theorem finiteCoefficientInverseImageMap_constant
     {U V : Scheme.{u}} (f : U ⟶ V) (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] :

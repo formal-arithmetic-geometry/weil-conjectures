@@ -23,6 +23,15 @@ import WeilConjectures.CategoryTheory.Exact.ExactLocalizationInverseMate
 
 This part of the intrinsic coefficient API is separated to keep each file within
 the compilation limit. The original constructions and their properties are retained.
+
+## References
+
+* Zheng 4.1 and 4.10
+* Stacks 03CZ and 03D7
+* Stacks 03EK
+* Zheng 4.10
+* Stacks 03DI and the ring-sheaf change adjunction
+* Stacks 03DI
 -/
 
 @[expose] public noncomputable section
@@ -50,8 +59,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- Evaluation at n followed by the actual constant strict diagram. This construction
-retains the input module, without choices of maps or coefficient lifts.
-Source: Zheng 4.1 and 4.10. -/
+retains the input module, without choices of maps or coefficient lifts. -/
 abbrev levelTower (n : ℕ) (X : Scheme.{u}) :
     Modules C τ X ⥤ StrictTower.Towers (C n) X :=
   SemilinearSections.evaluation.{u + 1, u, u + 1}
@@ -59,8 +67,7 @@ abbrev levelTower (n : ℕ) (X : Scheme.{u}) :
       Functor.const ℕᵒᵖ
 
 /-- Exact localization of evaluation followed by a constant diagram. Evaluation at
-any tower index recovers the actual n-th module, with its C_n action.
-Source: Zheng 4.1 and 4.10. -/
+any tower index recovers the actual n-th module, with its C_n action. -/
 abbrev E (n : ℕ) (X : Scheme.{u}) := (levelTower C τ n X).mapDerivedCategory
 section Evaluation
 set_option backward.isDefEq.respectTransparency true
@@ -147,8 +154,7 @@ private theorem eval_constant_diagram_eq {X Y : Scheme.{u}} (f : X ⟶ Y)
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 -- The uniqueness proof compares the section carriers of both composite functors.
-/-- Direct image and evaluation commute by the identity on component sections.
-Source: the ring-sheaf change adjunction; Stacks 03CZ and 03D7. -/
+/-- Direct image and evaluation commute by the identity on component sections. -/
 theorem evalPushOrdinary_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃! e : levelTower C τ n X ⋙ StrictTower.towerDirectImage (C n) f ≅
       push C τ f ⋙ levelTower C τ n Y,
@@ -170,7 +176,7 @@ theorem evalPushOrdinary_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
     exact eval_constant_diagram_eq C τ n f (push C τ f) d hd e' he'
 
 /-- The ordinary inverse-image scalar comparison is the transpose of the uniquely
-section-normalized direct-image comparison. Source: the ring-sheaf change adjunction. -/
+section-normalized direct-image comparison. -/
 def evalPullInv {X Y : Scheme.{u}} (f : X ⟶ Y) :
     levelTower C τ n Y ⋙ StrictTower.towerPullback (C n) f ⟶
       pull C τ f ⋙ levelTower C τ n X :=
@@ -259,16 +265,14 @@ private theorem eval_pull_mate_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     (VaryingRing.eval C τ X n) (VaryingRing.eval C τ Y n)
     (StrictTower.modulePullback (C n) f) (VaryingRing.moduleEvalG C τ f n)).isIso_inv
 
-/-- The identified-coefficient inverse-image scalar comparison is invertible.
-Source: the ring-sheaf change adjunction; Stacks 03EK. -/
+/-- The identified-coefficient inverse-image scalar comparison is invertible. -/
 theorem evalPullInv_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     IsIso (evalPullInv C τ n f) := by
   exact eval_pull_mate_isIso C τ n f (push C τ f) (push_eq C τ f)
     (evalPushOrdinary_existsUnique C τ n f).choose
     (evalPushOrdinary_existsUnique C τ n f).choose_spec.1
 
-/-- The canonical evaluation inverse-image comparison after exact localization.
-Source: the ring-sheaf change adjunction. -/
+/-- The canonical evaluation inverse-image comparison after exact localization. -/
 def evalP {X Y : Scheme.{u}} (f : X ⟶ Y) :
     P C τ f ⋙ E C τ n X ≅ E C τ n Y ⋙ StrictTower.G (C n) f :=
   Functor.mapDerivedCategoryCompIso _ _ ≪≫
@@ -276,8 +280,7 @@ def evalP {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (@asIso _ _ _ _ (evalPullInv C τ n f) (evalPullInv_isIso C τ n f)).symm ≪≫
   (Functor.mapDerivedCategoryCompIso _ _).symm
 
-/-- The direct-image comparison is the actual derived mate of evalP inverse.
-Source: the ring-sheaf change adjunction. -/
+/-- The direct-image comparison is the actual derived mate of evalP inverse. -/
 def evalR {X Y : Scheme.{u}} (f : X ⟶ Y) :
     R C τ f ⋙ E C τ n Y ⟶ E C τ n X ⋙ StrictTower.R (C n) f :=
   mateEquiv (adj C τ f) (StrictTower.adj (C n) f) (evalP C τ n f).inv
@@ -588,8 +591,7 @@ private theorem eval_open_mate_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) [IsOpenImm
       (VaryingRing.eval C τ X n) (VaryingRing.eval C τ Y n)
       (StrictTower.modulePullback (C n) f) (VaryingRing.moduleEvalG C τ f n))
 
-/-- The specified derived direct-image mate is invertible.
-Source: the ring-sheaf change adjunction; Zheng 4.10. -/
+/-- The specified derived direct-image mate is invertible. -/
 theorem evalR_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     IsIso (evalR C τ n f) := by
   let s := @asIso _ _ _ _ (evalPullInv C τ n f) (evalPullInv_isIso C τ n f)
@@ -602,14 +604,12 @@ theorem evalR_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (evalPushOrdinary_existsUnique C τ n f).choose
     (evalPushOrdinary_existsUnique C τ n f).choose_spec.1 s rfl
 
-/-- The open scalar comparison is fixed by the open-adjunction transpose of evalP.
-Source: Stacks 03DI and the ring-sheaf change adjunction. -/
+/-- The open scalar comparison is fixed by the open-adjunction transpose of evalP. -/
 def evalJInv {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     E C τ n U ⋙ StrictTower.J (C n) j ⟶ J C τ j ⋙ E C τ n X :=
   (mateEquiv (jAdj C τ j) (StrictTower.jAdj (C n) j)).symm (evalP C τ n j).hom
 
-/-- Open extension commutes with evaluation under its ordinary section units.
-Source: Stacks 03DI. -/
+/-- Open extension commutes with evaluation under its ordinary section units. -/
 theorem evalJInv_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     IsIso (evalJInv C τ n j) := by
   let s := @asIso _ _ _ _ (evalPullInv C τ n j) (evalPullInv_isIso C τ n j)
@@ -625,8 +625,7 @@ theorem evalJInv_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (evalPushOrdinary_existsUnique C τ n j).choose
     (evalPushOrdinary_existsUnique C τ n j).choose_spec.1 s rfl
 
-/-- The invertible, open-unit-normalized evaluation comparison.
-Source: Stacks 03DI. -/
+/-- The invertible, open-unit-normalized evaluation comparison. -/
 def evalJ {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     J C τ j ⋙ E C τ n X ≅ E C τ n U ⋙ StrictTower.J (C n) j :=
   (@asIso _ _ _ _ (evalJInv C τ n j) (evalJInv_isIso C τ n j)).symm

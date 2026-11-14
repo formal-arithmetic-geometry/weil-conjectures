@@ -10,7 +10,10 @@ import WeilConjectures.AlgebraicGeometry.ProjectionRestriction.ExactTensor.Proje
 import WeilConjectures.AlgebraicGeometry.ProjectionRestriction.ExactTensor.ProjectionExactTensorSecondShift
 
 /-! Exact tensor functors on resolving representatives.
-Source: Stacks Project, Tags 06YU, 07A4 and 0FNH.
+
+## References
+
+* Stacks Project, Tags 06YU, 07A4 and 0FNH
 -/
 
 @[expose] public noncomputable section
@@ -30,8 +33,7 @@ variable {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]
 namespace ExactTensor
 
 /-- An exact tensor functor preserving coproducts and resolving complexes descends
-with its representative normalization and both signed shift squares.
-Source: Stacks Project, Tags 06YU, 07A4 and 0FNH. -/
+with its representative normalization and both signed shift squares. -/
 theorem exactTensorComparison_exists (L : Mod R ⥤ Mod S) [L.Additive]
     [PreservesFiniteLimits L] [PreservesFiniteColimits L]
     [PreservesColimitsOfSize.{0, 0} L]

@@ -18,7 +18,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDer
 
 /-! # Transport of a localized affine structure-image model
 
-Source: Stacks Project, Tags 08FE and 06Z0.
+## References
+
+* Stacks Project, Tags 08FE and 06Z0
 -/
 
 @[expose] public section
@@ -85,8 +87,7 @@ private theorem open_single_image
     ((A.mapDerivedCategorySingleFunctor 0).app N ≪≫
       (DerivedCategory.singleFunctor _ 0).mapIso (coeff.app N))⟩
 
-/-- Transport the localized representation to the spectrum of the affine coordinate ring.
-Source: Stacks Project, Tags 08FE and 06Z0. -/
+/-- Transport the localized representation to the spectrum of the affine coordinate ring. -/
 theorem picard_affine_structure_model_transport
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

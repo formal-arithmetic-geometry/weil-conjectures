@@ -15,7 +15,10 @@ Transport the native derived pullback tensor comparison's homotopy counit equati
 through the quotient comparison isomorphisms. No flatness of the input complexes
 is required for this equation.
 
-Source: Stacks Project, Tags 07A4 and 0G7E.
+## References
+
+* Stacks Project, Tags 07A4 and 0G7E
+* Stacks Project 07A4 and 0G7E
 -/
 
 @[expose] public noncomputable section
@@ -135,8 +138,7 @@ private theorem cochain_tensor_counit
     MonoidalCategory.curriedTensor_obj_obj] at ht ⊢
   simpa only [Category.assoc] using ht
 
-/-- The derived geometric tensor comparison commutes with the specified cochain counits.
-Source: Stacks Project 07A4 and 0G7E. -/
+/-- The derived geometric tensor comparison commutes with the specified cochain counits. -/
 theorem pull_tensor_counit {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P Q : CochainComplex (Modules R Y) ℤ) :
     (L R f).map (Functor.LaxMonoidal.μ DerivedCategory.Q P Q) ≫

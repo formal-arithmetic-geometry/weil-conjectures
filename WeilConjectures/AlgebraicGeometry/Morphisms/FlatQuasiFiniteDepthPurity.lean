@@ -16,7 +16,10 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.QuasiFiniteFlatCodimOneEtaleN
 /-!
 # Flat quasi-finite purity across a depth-two source boundary
 
-Source: Stacks Project, Tag 0BJH, as used in Tag 0EY6(3).
+## References
+
+* Stacks Project, Tag 0BJH, as used in Tag 0EY6(3)
+* Stacks Project, Lemma 58.21.2 (Tag 0BJH), and the proof of Tag 0EY6(3)
 -/
 
 @[expose] public section
@@ -26,9 +29,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- A flat, locally quasi-finite morphism is etale if it is etale on a source open
-whose complement has stalk depth at least two.
-
-Source: Stacks Project, Lemma 58.21.2 (Tag 0BJH), and the proof of Tag 0EY6(3). -/
+whose complement has stalk depth at least two. -/
 theorem etale_of_flat_quasiFinite_depth_two_boundary
     {X Y : Scheme.{u}} [IsLocallyNoetherian X] [IsLocallyNoetherian Y]
     (f : X ⟶ Y) [LocallyOfFiniteType f] [LocallyQuasiFinite f] [Flat f]

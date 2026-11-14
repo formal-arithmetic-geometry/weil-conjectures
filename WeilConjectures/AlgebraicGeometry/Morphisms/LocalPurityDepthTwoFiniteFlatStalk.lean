@@ -17,7 +17,10 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedLocalPurityFiniteFla
 /-!
 # Flatness of a supplied depth-two extension under local purity
 
-Source: Stacks Project, Tags 0EY7 and 0EY6(2).
+## References
+
+* Stacks Project, Tags 0EY7 and 0EY6(2)
+* Stacks Project, Tag 0EY7, and Tag 0EY6(2), (3)
 -/
 
 @[expose] public section
@@ -54,9 +57,7 @@ private theorem exists_minimal_boundary (S : Scheme.{u}) (U : S.Opens) (hU : U �
   exact congrArg Subtype.val ((isGenericPoint_closure (x := t')).eq
     (heq ▸ isGenericPoint_closure (x := s.1)))
 
-/-- Local purity makes a supplied finite depth-two extension flat.
-
-Source: Stacks Project, Tag 0EY7, and Tag 0EY6(2), (3). -/
+/-- Local purity makes a supplied finite depth-two extension flat. -/
 theorem flat_of_local_purity_depth_two_finite_extension
     {L E : Scheme.{u}} [IsLocallyNoetherian L] (V : L.Opens)
     (hdepth : ∀ y : L, y ∉ V →

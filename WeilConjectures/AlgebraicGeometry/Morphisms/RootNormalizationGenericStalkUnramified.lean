@@ -22,7 +22,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.RootNormalizationGenericResid
 
 /-! # Tame unramifiedness after the group-order root extension
 
-Source: Stacks Project, Tags 09EB, 0BRM and 0EYG. -/
+## References
+
+* Stacks Project, Tags 09EB, 0BRM and 0EYG
+* Stacks Project, Tags 09EB, 0BRM and 0EYG, the root-extension calculation
+-/
 
 @[expose] public section
 universe u
@@ -51,9 +55,7 @@ private theorem formallyUnramified_stalkMap_of_maximalIdeal_and_residue
   have := hs'
   exact Algebra.FormallyUnramified.of_map_maximalIdeal hm
 
-/-- The group-order root extension kills ramification on normalization stalks.
-
-Source: Stacks Project, Tags 09EB, 0BRM and 0EYG, the root-extension calculation. -/
+/-- The group-order root extension kills ramification on normalization stalks. -/
 theorem root_normalization_generic_stalk_unramified
     {L U : Scheme.{u}} (i : U ⟶ L)
     (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)

@@ -10,9 +10,14 @@ public import WeilConjectures.AlgebraicGeometry.CohomologyPullbackDerivedUnit
 /-!
 # Named canonical Leray and derived restriction arrows
 
-Source: Stacks Project, Tags 01EZ, 01F8 and 08J6.
 The original representative and comparison theorems are publicly imported. These
 names expose precisely the right-hand composite of its derived-unit formula.
+
+## References
+
+* Stacks Project, Tags 01EZ, 01F8 and 08J6
+* Stacks Project, Tag 01EZ
+* Stacks Project, Tags 01F8 and 0GJV
 -/
 
 @[expose] public section
@@ -21,8 +26,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
-/-- Canonical Leray identification on bounded below derived global sections.
-Source: Stacks Project, Tag 01EZ. -/
+/-- Canonical Leray identification on bounded below derived global sections. -/
 noncomputable def etaleLerayPlus {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (lowerStar AddCommGrpCat.{u + 1} f).rightDerivedFunctorPlus ⋙
       (Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{u + 1}).rightDerivedFunctorPlus ≅
@@ -34,8 +38,7 @@ noncomputable def etaleLerayPlus {X Y : Scheme.{u}} (f : X ⟶ Y) :
       (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f))
     (lowerStarCompGlobalSectionsIso AddCommGrpCat.{u + 1} f)
 
-/-- Pullback of derived global sections, the derived unit followed by Leray.
-Source: Stacks Project, Tags 01F8 and 0GJV. -/
+/-- Pullback of derived global sections, the derived unit followed by Leray. -/
 noncomputable def etaleDerivedRestriction {X Y : Scheme.{u}} (f : X ⟶ Y)
     (K : _root_.DerivedCategory.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})) :
     (Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{u + 1}).rightDerivedFunctorPlus.obj K ⟶

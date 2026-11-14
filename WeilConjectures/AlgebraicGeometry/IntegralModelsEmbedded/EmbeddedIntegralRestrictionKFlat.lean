@@ -145,7 +145,12 @@ import all Mathlib.Algebra.Category.Grp.Abelian
 import all Mathlib.CategoryTheory.Sites.Abelian
 import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 
-/-! # K-flat restriction of integral scalars -/
+/-! # K-flat restriction of integral scalars
+
+## References
+
+* Stacks Tags 06YN, 06YY and 03ER
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -191,9 +196,7 @@ private theorem flat_from_small (X : Scheme.{u})
     exact hlocal (a.obj V) (a.map f) hg
 
 attribute [-instance] integralModel_coefficientMonObj in
-/-- Restriction of embedded integral scalars preserves K-flat cochain complexes.
-
-Source: Stacks Tags 06YN, 06YY and 03ER. -/
+/-- Restriction of embedded integral scalars preserves K-flat cochain complexes. -/
 theorem embeddedIntegralRestrictionKFlat
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (π : PadicAlgCl.integers ℓ E.1)

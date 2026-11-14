@@ -13,7 +13,11 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 /-!
 # Ordinary coefficient comparison for normalized rational realization
 
-Source: Bhatt--Scholze, Lemma 6.8.12 and Proposition 6.8.14(2), pp. 61--62.
+## References
+
+* Bhatt--Scholze, Lemma 6.8.12 and Proposition 6.8.14(2), pp. 61--62
+* Bhatt--Scholze, Proposition 6.8.14(2)
+* Bhatt--Scholze, Proposition 6.8.14(2), pp. 61--62
 -/
 
 @[expose] public noncomputable section
@@ -26,8 +30,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- The standard localization action, with the scheme module abbreviation in its type.
-This is the existing constant-section action, with no change of scalar structure.
-Source: Bhatt--Scholze, Proposition 6.8.14(2). -/
+This is the existing constant-section action, with no change of scalar structure. -/
 @[instance_reducible]
 def rationalLocalizationModulesLinear (Y : Scheme.{u})
     (A : Type (u + 1)) [CommRing A]
@@ -109,9 +112,7 @@ variable (X : Scheme.{u}) [IsNoetherian X]
   [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))]
 
 /-- The ordinary coefficient presentation agrees with standard sheaf localization.
-This assertion concerns module sheaves and ordinary tensor extension only.
-
-Source: Bhatt--Scholze, Proposition 6.8.14(2), pp. 61--62. -/
+This assertion concerns module sheaves and ordinary tensor extension only. -/
 theorem rationalRealizationOrdinaryLocalization (R : RationalModuleRealization l E X) :
     let B := pbcAdicCompletion X (pbcIntegralDatum l E)
     let a := pbcCompletedScalarSections X (pbcIntegralDatum l E)

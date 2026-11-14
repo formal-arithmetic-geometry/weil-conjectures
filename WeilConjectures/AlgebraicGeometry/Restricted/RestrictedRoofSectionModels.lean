@@ -12,7 +12,10 @@ import all WeilConjectures.AlgebraicGeometry.RestrictionResolutionLiftSections
 
 /-! # Restriction and direct-image section models for injective roofs
 
-Source: Stacks Project, Cohomology, Tags 01E4 and 01FB.
+## References
+
+* Stacks Project, Cohomology, Tags 01E4 and 01FB
+* Stacks Project, Cohomology, Tag 01E4
 -/
 
 @[expose] public section
@@ -26,8 +29,7 @@ noncomputable section
 namespace AlgebraicGeometry
 open Scheme.Modules
 
-/-- Sections on an open are global sections after restricting the sheaf.
-Source: Stacks Project, Cohomology, Tag 01E4. -/
+/-- Sections on an open are global sections after restricting the sheaf. -/
 def restrictionSectionsIso {X : Scheme.{u}} (U : X.Opens) :
     restrictFunctor U.ι ⋙ RingedSpace.globalSectionsFunctor U.toScheme.toRingedSpace ⋙
       forget₂ _ AddCommGrpCat.{u} ≅ RingedSpace.openModuleSections X.toRingedSpace U :=

@@ -9,7 +9,13 @@ public import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSc
 import all WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientScalarTensorCanonical
 import WeilConjectures.AlgebraicGeometry.IntegralResidueDerivedMonoidal
 
-/-! # Uniqueness of normalized scalar tensors -/
+/-! # Uniqueness of normalized scalar tensors
+
+## References
+
+* Stacks 07A4 and 06YS
+* Stacks 07A4, 06YS
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -75,8 +81,7 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
 
 open ModuleRingedComparison
 
-/-- The fixed scalar localization comparison is invertible on K-flat complexes.
-Source: localization counit computation on K-flat objects. -/
+/-- The fixed scalar localization comparison is invertible on K-flat complexes. -/
 theorem scalar_compute_isIso (T : Scheme.{u}) (A : CochainComplex (Modules Λ T) ℤ)
     (hA : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat A) :
     IsIso (compute a T A) := by
@@ -97,8 +102,7 @@ theorem scalar_compute_isIso (T : Scheme.{u}) (A : CochainComplex (Modules Λ T)
       · exact Functor.map_isIso _ _
       · infer_instance
 
-/-- Flat-term K-flat normalization determines the tensor comparison uniquely.
-Source: Stacks 07A4 and 06YS. -/
+/-- Flat-term K-flat normalization determines the tensor comparison uniquely. -/
 theorem normalized_tensor_eq_canonical (T : Scheme.{u}) (b : TensorIso a T)
     (hb : TensorNormalized a T b) : b = canonicalTensor a T := by
   let := scalarModuleFlat Λ T
@@ -154,8 +158,7 @@ theorem normalized_tensor_eq_canonical (T : Scheme.{u}) (b : TensorIso a T)
   have h'' := congrArg (fun q ↦ q ≫ e.inv) h'
   simpa only [Category.assoc, e.hom_inv_id, Category.comp_id] using h''
 
-/-- The normalized scalar tensorator exists uniquely, pointwise in the scheme.
-Source: Stacks 07A4, 06YS. -/
+/-- The normalized scalar tensorator exists uniquely, pointwise in the scheme. -/
 theorem scalar_tensor_exists_unique (T : Scheme.{u}) :
     ∃! b : TensorIso a T, TensorNormalized a T b :=
   ⟨canonicalTensor a T, canonicalTensor_normalized a T,

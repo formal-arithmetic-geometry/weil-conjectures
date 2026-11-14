@@ -11,7 +11,10 @@ import Mathlib.CategoryTheory.Filtered.Final
 
 /-! # Descent of a map to a finitely presented scheme at a fixed stage
 
-Source: Stacks Project, Tag 01ZM.
+## References
+
+* Stacks Project, Tag 01ZM
+* Stacks Project, Tag 01ZM, morphism descent
 -/
 
 @[expose] public section
@@ -22,9 +25,7 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- A map to a finitely presented scheme over one stage descends after refining that stage.
-
-Source: Stacks Project, Tag 01ZM, morphism descent. -/
+/-- A map to a finitely presented scheme over one stage descends after refining that stage. -/
 theorem exists_map_at_refinement_of_affine_limit
     {I : Type u} [SmallCategory I] [IsCofiltered I] (K : I ⥤ Scheme.{u})
     (hKqc : ∀ i, CompactSpace (K.obj i)) (hKqs : ∀ i, QuasiSeparatedSpace (K.obj i))

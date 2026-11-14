@@ -11,7 +11,12 @@ import WeilConjectures.AlgebraicGeometry.IntegralFiniteScalar.FiniteFreeScalarDe
 import WeilConjectures.AlgebraicGeometry.IntegralFiniteScalar.FiniteFreeScalarDerivedComparisonBeta
 import WeilConjectures.AlgebraicGeometry.IntegralFiniteScalar.FiniteFreeScalarProjectionTriangle
 
-/-!  # Derived assertions and projection for a specified finite free resolution -/
+/-!  # Derived assertions and projection for a specified finite free resolution
+
+## References
+
+* Stacks Tag 0944
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -64,8 +69,7 @@ theorem derivedAssertions_of_finite_integral_resolution
     finiteFreeScalarDerivedComparison_beta D a S t hS r e₁ e₂⟩
 
 /-- Projection is invertible on the pulled-back cone of a map between finite free
-point modules. No exactness of the map or condition on its cokernel is needed.
-Source: Stacks Tag 0944. -/
+point modules. No exactness of the map or condition on its cokernel is needed. -/
 theorem finiteFreeScalarProjection (Λ : ScalarSixRing.{u})
     (S : ShortComplex (PointModules Λ)) (r : ℕ)
     (e₁ : S.X₁ ≅ biproduct (fun _ : Fin r ↦ Mod.regular Λ.X))

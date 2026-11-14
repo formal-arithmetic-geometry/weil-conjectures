@@ -13,7 +13,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionAffineChar
 /-!
 # Realizing formal glueing data on affine principal charts
 
-Source: Stacks Project, Tag 0BLH, first two proof paragraphs; Tag 05EL.
+## References
+
+* Stacks Project, Tag 0BLH, first two proof paragraphs
+* Tag 05EL
+* Tag 05EL, item (1)
 -/
 
 @[expose] public section
@@ -52,8 +56,6 @@ private theorem empty_chart_transitions
 /-- Realize the localization and scalar-extension maps as actual restrictions on
 principal affine charts. This statement concerns arbitrary chart and prime elements;
 it neither constructs an H0 family nor asserts that the charts cover.
-
-Source: Stacks Project, Tag 0BLH, first two proof paragraphs; Tag 05EL, item (1).
 -/
 theorem exists_affine_chart_realization
     {A : Type u} [CommRing A] [IsLocalRing A]

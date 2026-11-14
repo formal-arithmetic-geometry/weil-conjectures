@@ -8,7 +8,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionTensorData
 import WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionConstraintCoherence
 
-/-! # Ordinary normalization of the quotient section tensor comparison -/
+/-! # Ordinary normalization of the quotient section tensor comparison
+
+## References
+
+* Stacks 03EK, 03EL and 07A4
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -57,8 +62,7 @@ private theorem pure_cast (T : Scheme.{u})
   subst M' N'
   simp
 
-/-- The underlying section comparison has the prescribed pure-tensor formula.
-Source: Stacks 03EK, 03EL and 07A4. -/
+/-- The underlying section comparison has the prescribed pure-tensor formula. -/
 theorem section_tensor_transport_normalized_pure (T : Scheme.{u})
     (c : ScalarSectionData a T) (hc : ScalarSectionNormalized a T c)
     (b : TensorIso a T) (hb : TensorNormalized a T b)

@@ -11,7 +11,13 @@ import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearTensorReduction
 
 /-! # Tensor coherence for derived systems
 
-Source: Zheng, Construction 4.1 and Proposition 4.17; Stacks Tags 06YY, 07A4, 07A6 and 08J9.
+## References
+
+* Zheng, Construction 4.1 and Proposition 4.17
+* Stacks Tags 06YY, 07A4, 07A6 and 08J9
+* Zheng Construction 4.1
+* Stacks 07A4 and 07A6
+* Stacks 07A4, 07A6 and 08J9
 -/
 
 @[expose] public noncomputable section
@@ -31,8 +37,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
 
 variable (S : SystemScalarCoherence.{c, v, r} J B τ)
 
-/-- Tensor constructions and comparison models, including reduction compatibility.
-Source: Zheng Construction 4.1; Stacks 07A4 and 07A6. -/
+/-- Tensor constructions and comparison models, including reduction compatibility. -/
 structure SystemTensorCoherence where
   /-- System tensor is covariant in both variables and closed against the recorded Hom. -/
   closed : Closed.{c, v, r} (coefficientSequenceTopology J) (systemRing.{c, v, max c v r} J B τ)
@@ -91,8 +96,7 @@ structure SystemTensorCoherence where
       reduction.{c, v, max c v r} J B τ h (S.scalar h) (closed.tensor.obj (M, N)) ≫
         (tensorEvaluation n).hom.app (M, N)
 
-/-- Representative-normalized tensor structures on the sequence site and its levels.
-Source: Zheng Construction 4.1; Stacks 07A4, 07A6 and 08J9. -/
+/-- Representative-normalized tensor structures on the sequence site and its levels. -/
 theorem systemTensorCoherence_nonempty :
     Nonempty (SystemTensorCoherence.{c, v, r} J B τ S) := by
   obtain ⟨A⟩ := systemTensorBase_nonempty.{c, v, r} J B τ

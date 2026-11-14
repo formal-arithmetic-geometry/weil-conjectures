@@ -36,7 +36,12 @@ public import WeilConjectures.Algebra.Homology.SmoothPurity.ClosedSupportHom
 public import WeilConjectures.AlgebraicGeometry.Etale.EtaleSupportedSections
 public import WeilConjectures.SixFunctors.OpenClosed.Exact
 
-/-! The signed torsor formula from normalized comparisons and Yoneda compatibility. -/
+/-! The signed torsor formula from normalized comparisons and Yoneda compatibility.
+
+## References
+
+* Stacks Tags 03AJ and 06XU
+-/
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option backward.defeqAttrib.useBackward true
@@ -89,8 +94,7 @@ private theorem principal_torsor_yoneda_sign_formula
 
 /-- A globally framed relative torsor is the inverse-section localization pushout;
 its coefficient Yoneda splice is minus the supported localization boundary.
-All identifications are supplied with their cocycle normalization and naturality.
-Source: Stacks Tags 03AJ and 06XU. -/
+All identifications are supplied with their cocycle normalization and naturality. -/
 theorem principal_torsor_yoneda_sign :
     ∃ C : PrincipalTorsorComparisons.{u}, C.Normalized ∧ C.Natural ∧ C.Formula := by
   obtain ⟨C, hC⟩ := principalTorsorNormalizedComparison.{u}

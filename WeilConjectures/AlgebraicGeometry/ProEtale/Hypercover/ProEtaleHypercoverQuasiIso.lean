@@ -21,7 +21,10 @@ import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 /-!
 # Hypercover totalization preserves bounded-below quasi-isomorphisms
 
-Source: Stacks Project, Tag 09A2, second proof paragraph, and Tag 0946 (1).
+## References
+
+* Stacks Project, Tag 09A2, second proof paragraph, and Tag 0946 (1)
+* Stacks Project, Tags 09A2 and 0946 (1)
 -/
 
 @[expose] public section
@@ -121,8 +124,7 @@ set_option maxHeartbeats 600000 in
 -- Comparing section-column maps unfolds the section and extension functor compositions.
 set_option backward.isDefEq.respectTransparency false in
 /-- Weakly contractible terms suffice for bounded-below quasi-isomorphism invariance;
-no covering or matching-map hypotheses are needed for this comparison.
-Source: Stacks Project, Tags 09A2 and 0946 (1). -/
+no covering or matching-map hypotheses are needed for this comparison. -/
 theorem hypercoverTotal_map_quasiIso_of_weaklyContractible
     (hweak : ∀ (p : ℕ) (F G : Sheaf (topology X) (Type (u + 1))) (f : F ⟶ G),
       Epi f → Function.Surjective (f.hom.app (op (U _⦋p⦌).left)))

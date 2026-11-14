@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.Picard.CanonicalDirectImageH0Unit
 
 /-! # The single-module description of the derived transpose
 
-Source: Stacks Project, Tags 08HY, 079W and 0D5S.
+## References
+
+* Stacks Project, Tags 08HY, 079W and 0D5S
 -/
 
 @[expose] public section
@@ -93,8 +95,7 @@ private theorem transposeFromHomology
 
 /-- Taking degree zero and transposing ordinarily recovers the same morphism
 as derived transposition, after the canonical single-pullback comparison.
-This is a comparison at one test scheme, with no restriction morphism.
-Source: Stacks Project, Tags 08HY, 079W and 0D5S. -/
+This is a comparison at one test scheme, with no restriction morphism. -/
 theorem picardDirectImageDerivedTranspose_single
     {X S : Scheme.{v}} (f : X ⟶ S)
     (L : X.Modules) (W : Scheme.{v}) (k : W ⟶ S)

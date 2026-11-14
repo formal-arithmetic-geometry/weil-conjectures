@@ -18,7 +18,11 @@ import Mathlib.Algebra.Homology.HomotopyCategory.ShortExact
 
 /-! # Compatible strict chain models for a source-open union
 
-Source: Stacks Project, Tags 08HZ, 08HY, 0DJ9 and 013N--013O.
+## References
+
+* Stacks Project, Tags 08HZ, 08HY, 0DJ9 and 013N--013O
+* Stacks Project, Tags 08HZ, 08HY and 0DJ9
+* Tags 013N--013O for strictification of the resolved diagram
 -/
 
 @[expose] public section
@@ -226,10 +230,7 @@ private theorem unionChain_of_rows
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Compatible chain models before the short exact cylinder construction.
-
-Source: Stacks Project, Tags 08HZ, 08HY and 0DJ9; Tags 013N--013O for
-strictification of the resolved diagram. -/
+/-- Compatible chain models before the short exact cylinder construction. -/
 theorem singleComplexOpenComparison_union_compatible_chain_data
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

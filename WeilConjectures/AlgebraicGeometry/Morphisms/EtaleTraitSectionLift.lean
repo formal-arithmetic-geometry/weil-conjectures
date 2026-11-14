@@ -12,7 +12,13 @@ public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTraitStalk
 import Mathlib.AlgebraicGeometry.PullbackCarrier
 
-/-! Etale local trait lifts of sections. -/
+/-! Etale local trait lifts of sections.
+
+## References
+
+* Stacks Project, Tag 0EYI, preliminary paragraph
+* Tag 0AP2 (15.45.4)
+-/
 
 @[expose] public section
 
@@ -20,9 +26,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- A pointed etale neighbourhood of a trait section supplies an unramified trait lift.
-
-Source: Stacks Project, Tag 0EYI, preliminary paragraph; Tag 0AP2 (15.45.4). -/
+/-- A pointed etale neighbourhood of a trait section supplies an unramified trait lift. -/
 theorem etale_trait_section_lift (R : CommRingCat.{u})
     [IsDomain R] [IsDiscreteValuationRing R]
     {L : Scheme.{u}} (p : L ⟶ Spec R) (τ : Spec R ⟶ L) (hτ : τ ≫ p = 𝟙 _)

@@ -20,7 +20,12 @@ import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 
-/-! # Negative fibre cohomology of a flat line-bundle direct image -/
+/-! # Negative fibre cohomology of a flat line-bundle direct image
+
+## References
+
+* Stacks Project, Tag 0B91(2), and Tag 0BF2, the displayed fibre comparison
+-/
 
 @[expose] public section
 
@@ -44,8 +49,7 @@ private theorem finiteLocallyFree_isFlatOver {X S : Scheme.{v}}
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Negative residue cohomology of a proper flat line-bundle direct image vanishes.
-Source: Stacks Project, Tag 0B91(2), and Tag 0BF2, the displayed fibre comparison. -/
+/-- Negative residue cohomology of a proper flat line-bundle direct image vanishes. -/
 theorem picard_directImage_fibre_cohomology_negative
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

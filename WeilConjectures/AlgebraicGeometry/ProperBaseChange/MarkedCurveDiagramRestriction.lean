@@ -20,7 +20,10 @@ import WeilConjectures.AlgebraicGeometry.Curve.GenericModelAux
 /-!
 # Final shrinking of an existing marked curve diagram
 
-Source: Stacks Project, Tag 0GK7, final shrinking paragraphs.
+## References
+
+* Stacks Project, Tag 0GK7, final shrinking paragraphs
+* Stacks Project, Tag 0GK7, the base restrictions in the final paragraphs
 -/
 
 @[expose] public section
@@ -58,8 +61,6 @@ private theorem restriction_fiber_properties {A B A' B' : Scheme.{u}}
 /-- Restrict a marked curve diagram to a specified base open on which all its
 fibres and marks already have the desired properties. The conclusion records the
 cartesian comparisons needed to retain an independently supplied generic diagram.
-
-Source: Stacks Project, Tag 0GK7, the base restrictions in the final paragraphs.
 -/
 theorem exists_marked_curve_diagram_restriction
     {X S V Z : Scheme.{u}} (f : X ⟶ S) (U : S.Opens) (η : S) (hη : η ∈ U)

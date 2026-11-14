@@ -17,7 +17,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.FlatBaseChangeClosedFiberGene
 /-!
 # Generic image of the extended maximal ideal under a flat power-series chart
 
-Source: Stacks Project, Tag 0EYB, the image of the extended maximal ideal.
+## References
+
+* Stacks Project, Tag 0EYB, the image of the extended maximal ideal
+* Stacks Project, Tag 0EYB, the sentence about the image of the extended maximal ideal, with
+  flatness of completion supplied by Tag 00MB
 -/
 
 @[expose] public section
@@ -27,10 +31,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- The extended maximal ideal in a flat power-series chart maps to a generic point
-of a component in an affine neighbourhood of the original closed fibre.
-
-Source: Stacks Project, Tag 0EYB, the sentence about the image of the extended
-maximal ideal, with flatness of completion supplied by Tag 00MB. -/
+of a component in an affine neighbourhood of the original closed fibre. -/
 theorem exists_flat_power_series_chart_generic_image
     (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]
     {L : Scheme.{u}} (q : L ⟶ Spec (.of A)) [Smooth q]

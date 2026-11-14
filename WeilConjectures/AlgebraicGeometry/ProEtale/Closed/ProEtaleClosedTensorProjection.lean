@@ -79,6 +79,10 @@ import WeilConjectures.SecSmoothPurity.CochainCoefficientArrowsSupplement
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 
 /-! # The closed-support projection formula
+
+## References
+
+* Stacks Tags 03EL, 07A4 and 09BM
 -/
 
 @[expose] public noncomputable section
@@ -194,8 +198,7 @@ end AlgebraicGeometry.Scheme
 namespace AlgebraicGeometry.Scheme
 
 /-- Closed direct image commutes with derived tensor against ambient complexes.
-No exceptional functor or dualizing object occurs in this assertion.
-Source: Stacks Tags 03EL, 07A4 and 09BM. -/
+No exceptional functor or dualizing object occurs in this assertion. -/
 theorem proEtaleClosedTensorProjection
     {T Z U : Scheme.{u}} (i : Z ⟶ T) [IsClosedImmersion i]
     (j : U ⟶ T) [IsOpenImmersion j] [QuasiCompact j]

@@ -545,7 +545,12 @@ public import WeilConjectures.AlgebraicGeometry.IntegralContinuousEncodingConstr
 
 /-! # Constructibility under continuous integral section encoding
 
-Source: Bhatt--Scholze, Definition 6.8.10; Stacks Project, Tag 00YV.
+## References
+
+* Bhatt--Scholze, Definition 6.8.10
+* Stacks Project, Tag 00YV
+* Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(3)
+* Stacks 00YV
 -/
 
 @[expose] public section
@@ -710,8 +715,6 @@ coefficient-ring isomorphism. No rationalization or lattice-existence assertion 
 involved. The coefficient isomorphism need not preserve chosen scalar coordinates:
 a finite presentation is invariant under arbitrary coefficient isomorphisms, and
 the integral finite-local-presentation criterion supplies scalar local models.
-
-Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(3); Stacks 00YV.
 
 Proof in words. Identify the two condensed integral point rings by postcomposing
 continuous functions with the WithAbs valuation-ring equivalence. Transport M to

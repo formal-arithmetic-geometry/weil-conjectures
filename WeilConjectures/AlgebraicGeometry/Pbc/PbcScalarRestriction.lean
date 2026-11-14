@@ -11,8 +11,11 @@ import WeilConjectures.Mathlib.CategoryTheory.Linear.LinearFunctor
 
 /-! # Constructible restriction and rationalization of scalar comparisons
 
-Source: Milne, Section 19.
 Existing declarations extracted from `PbcScalarExtension` to bound compilation cost.
+
+## References
+
+* Milne, Section 19
 -/
 
 @[expose] public noncomputable section

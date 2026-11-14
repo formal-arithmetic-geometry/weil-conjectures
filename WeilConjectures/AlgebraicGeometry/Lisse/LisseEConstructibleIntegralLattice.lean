@@ -523,8 +523,12 @@ import WeilConjectures.AlgebraicGeometry.Integral.IntegralContinuousEncodingCons
 /-!
 # A lisse finite-extension sheaf has a constructible integral lattice
 
-Source: Bhatt--Scholze, The pro-etale topology for schemes, Lemma 6.8.13, Definitions 6.8.1, 6.8.3
-and 6.8.10; Lemma 6.8.2(1).
+## References
+
+* Bhatt--Scholze, The pro-etale topology for schemes, Lemma 6.8.13, Definitions 6.8.1, 6.8.3 and
+  6.8.10
+* Lemma 6.8.2(1)
+* Bhatt--Scholze, Lemma 6.8.13
 -/
 
 @[expose] public section
@@ -579,8 +583,7 @@ private theorem internal_lisse_model
 
 /-- A lisse rational sheaf has a constructible integral model, with no global freeness
 requirement on that model. `WithAbs` equips the field with its canonical absolute-value
-topology and transports its valuation ring; `ULift` changes only the coefficient size.
-Source: Bhatt--Scholze, Lemma 6.8.13. -/
+topology and transports its valuation ring; `ULift` changes only the coefficient size. -/
 theorem exists_constructible_integral_lattice
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

@@ -62,7 +62,12 @@ import WeilConjectures.CategoryTheory.InternalSectionModuleFlat
 import WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 
-/-! # Scalar section tensor transport formulas -/
+/-! # Scalar section tensor transport formulas
+
+## References
+
+* Stacks, Cohomology on Sites, Tags 06YY and 07A4
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -101,7 +106,6 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ' T)]
 
 /-- The normalized scalar localization square without its identity comparison.
-Source: Stacks, Cohomology on Sites, Tags 06YY and 07A4.
 Expand the termwise functor comparison in ScalarSectionNormalized. The comparison
 for the identity is the identity cochain map; localization preserves its identity.
 Remove that final identity and identify the mapped ordinary comparison components. -/

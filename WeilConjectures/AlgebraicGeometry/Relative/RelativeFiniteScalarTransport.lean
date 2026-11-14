@@ -282,7 +282,13 @@ import all WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedPointwiseKa
 import all WeilConjectures.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy
 import all Mathlib.CategoryTheory.Functor.Derived.PointwiseRightDerived
 
-/-! # Scalar extension commutes with explicit small-site coefficient transport -/
+/-! # Scalar extension commutes with explicit small-site coefficient transport
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 06YY
+* Modules on Sites, Tags 03CY and 03D1
+-/
 
 @[expose] public noncomputable section
 
@@ -359,9 +365,7 @@ attribute [-instance] WeilConjectures.integralCoefficientAbSheafify
   WeilConjectures.integralCoefficientAbLocallyBijective
   WeilConjectures.integralCoefficientRingSheafify in
 /-- Transport and inverse image commute with derived scalar extension, without any
-assumption on cohomology, finite generation, or the coefficient homomorphism.
-
-Source: Stacks Project, Cohomology on Sites, Tag 06YY; Modules on Sites, Tags 03CY and 03D1 -/
+assumption on cohomology, finite generation, or the coefficient homomorphism. -/
 theorem relativeFiniteScalarTransport {X Y : Scheme.{u}} (g : Y ⟶ X)
     {B R : Type (u + 1)} [CommRing B] [CommRing R] (f : B →+* R) :
     Nonempty ((pbcDerivedExtend ((constantSheaf (ProEt.topology X)

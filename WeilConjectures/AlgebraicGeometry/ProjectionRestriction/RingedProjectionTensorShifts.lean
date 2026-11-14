@@ -52,7 +52,11 @@ import WeilConjectures.Mathlib.Algebra.Homology.BifunctorShift
 
 /-! # Signed shifts of a representative-normalized tensor comparison
 
-Source: Stacks Project, Cohomology on Sites, Tag 07A4; More on Algebra, Tag 0FNH.
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 07A4
+* More on Algebra, Tag 0FNH
+* Stacks Project, Tags 07A4 and 0FNH, item-shift-tensor
 -/
 
 @[expose] public noncomputable section
@@ -625,8 +629,7 @@ private theorem fixedSecond_global (o : Operation F R S)
   rw [ht]
   infer_instance
 
-/-- A tensor comparison already normalized on resolving pairs respects both tensor shifts.
-Source: Stacks Project, Tags 07A4 and 0FNH, item-shift-tensor. -/
+/-- A tensor comparison already normalized on resolving pairs respects both tensor shifts. -/
 theorem tensorComparison_shifts
     {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]
     [EssentiallySmall.{u + 1} C] [EssentiallySmall.{u + 1} D]

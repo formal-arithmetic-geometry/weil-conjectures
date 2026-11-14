@@ -24,7 +24,12 @@ import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
 import WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 
-/-! # Derived-side scalar tensor evaluation -/
+/-! # Derived-side scalar tensor evaluation
+
+## References
+
+* Stacks Project, Tags 06YY and 07A4
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -45,8 +50,7 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ T)]
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ' T)]
 
-/-- Evaluate the derived tensor side on internal resolving complexes.
-Source: Stacks Project, Tags 06YY and 07A4. -/
+/-- Evaluate the derived tensor side on internal resolving complexes. -/
 private theorem kflat_from_acyclic_test_local
     {C : Type u₁} [Category.{v₁} C] [Abelian C] [IsGrothendieckAbelian.{v₁} C]
     [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [SymmetricCategory C]

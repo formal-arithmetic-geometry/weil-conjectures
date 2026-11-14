@@ -157,7 +157,9 @@ import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
 
 /-! # The multiplication difference on a pro-etale slice
 
-Source: Stacks Project, Tag 0997, Tag 099Q.
+## References
+
+* Stacks Project, Tag 0997, Tag 099Q
 -/
 
 -- After pruning, this module only keeps private declarations.

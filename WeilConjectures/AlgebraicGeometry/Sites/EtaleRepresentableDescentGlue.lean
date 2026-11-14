@@ -14,7 +14,11 @@ public import Mathlib.CategoryTheory.Sites.SubcanonicalOver
 /-!
 # Gluing a representation after effective descent
 
-Source: Stacks Project, Tags 03RV and 02W5, gluing the represented sheaf.
+## References
+
+* Stacks Project, Tags 03RV and 02W5, gluing the represented sheaf
+* Stacks Project, Tag 03RV, final identification of the descended representation
+* Tag 02W5, descent from a representable sheaf
 -/
 
 @[expose] public section
@@ -86,10 +90,7 @@ private theorem iso_of_over_compatible
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- A local representation respecting transport identifies E with the sheaf of sections
-of any effective realization of the datum. Finiteness is not needed in this gluing step.
-
-Source: Stacks Project, Tag 03RV, final identification of the descended representation;
-Tag 02W5, descent from a representable sheaf. -/
+of any effective realization of the datum. Finiteness is not needed in this gluing step. -/
 theorem etaleRepresentable_descentGlue
     (T : Scheme.{u}) (E : Sheaf T.smallEtaleTopology (Type (u + 1)))
     (U : T.Etale) [Surjective U.hom]

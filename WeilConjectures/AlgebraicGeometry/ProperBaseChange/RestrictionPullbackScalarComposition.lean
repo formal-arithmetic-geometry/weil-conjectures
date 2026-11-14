@@ -11,7 +11,10 @@ import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 
 /-! # Coherence of restriction and pullback for successive coefficient maps
 
-Source: Stacks Project, Tags 03EL and 06YY.
+## References
+
+* Stacks Project, Tags 03EL and 06YY
+* Stacks Project, Tags 03EL, 03DA and 06YY
 -/
 
 -- After pruning, this module only keeps private declarations.
@@ -87,8 +90,7 @@ variable {X Y : Scheme.{u}} (f : Y ⟶ X)
     (hc : eR.hom ≫ cY =
       (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map cX ≫ eT.hom)
 
-/-- Pullback commutes coherently with successive exact scalar restrictions.
-Source: Stacks Project, Tags 03EL, 03DA and 06YY. -/
+/-- Pullback commutes coherently with successive exact scalar restrictions. -/
 theorem proEtaleRestrictionPullback_scalarComposition
     (M : reductionDerivedCategory X TX) :
     (proEtaleRingRestrictionDerivedPullback f RX TX RY TY cX cY eR eT hc).inv.app M ≫

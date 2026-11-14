@@ -20,7 +20,12 @@ import Mathlib.AlgebraicGeometry.Normalization
 /-!
 # Extension over a stalk before spreading
 
-Source: Stacks Project, Tag 0EYJ, proof of the local claim.
+## References
+
+* Stacks Project, Tag 0EYJ, proof of the local claim
+* Stacks Project, Tags 004W and 004X, maximal components and generic points
+* Stacks Project, local claim
+* Tags 0BQM, 0EYG, 0EYH, 0EYI, 0EYE, 0EY6, 0EY9, and 0EYB
 -/
 
 @[expose] public section
@@ -31,8 +36,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- A generic point of a boundary component has no proper boundary generalization.
-Source: Stacks Project, Tags 004W and 004X, maximal components and generic points. -/
+/-- A generic point of a boundary component has no proper boundary generalization. -/
 private theorem exists_minimal_boundary (S : Scheme.{u}) (U : S.Opens) (hU : U ≠ ⊤) :
     ∃ s : S, s ∉ U ∧ ∀ t : S, t ⤳ s → t ∉ U → t = s := by
   classical
@@ -61,9 +65,7 @@ private theorem exists_minimal_boundary (S : Scheme.{u}) (U : S.Opens) (hU : U �
   exact congrArg Subtype.val ((isGenericPoint_closure (x := t')).eq
     (heq ▸ isGenericPoint_closure (x := s.1)))
 
-/-- The cover on the open extends after base change to a suitable stalk.
-
-Source: Stacks Project, local claim; Tags 0BQM, 0EYG, 0EYH, 0EYI, 0EYE, 0EY6, 0EY9, and 0EYB. -/
+/-- The cover on the open extends after base change to a suitable stalk. -/
 theorem GaloisCover.exists_stalk_finiteEtale_model {S C : Scheme.{u}} [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]
     (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))

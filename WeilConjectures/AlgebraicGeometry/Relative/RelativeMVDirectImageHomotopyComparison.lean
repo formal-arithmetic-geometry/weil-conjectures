@@ -10,7 +10,12 @@ public import WeilConjectures.AlgebraicGeometry.MayerVietorisImageChainData
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 import WeilConjectures.AlgebraicGeometry.Relative.RelativeMVDirectImageRows
 
-/-! # Relative comparison before tensor pullback -/
+/-! # Relative comparison before tensor pullback
+
+## References
+
+* Stacks Project, Cohomology, Tags 08BV, 08HZ, 08FE and 08HY
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -78,8 +83,7 @@ private theorem cone_mate_quotient
 /-- The resolved comparison before performing tensor pullback on chain models.
 The source complexes live on S, the target complexes on S', and the square is
 formed with the underived direct-image functor of g. No chain model for derived
-pullback, and no strict square on S', is asserted.
-Source: Stacks Project, Cohomology, Tags 08BV, 08HZ, 08FE and 08HY. -/
+pullback, and no strict square on S', is asserted. -/
 theorem relativeMV_direct_image_homotopy_comparison
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

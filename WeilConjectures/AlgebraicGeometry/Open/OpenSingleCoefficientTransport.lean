@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.IsomorphismPullbackCounit
 
 /-! # Coefficient transport along an isomorphic apex over an open subscheme
 
-Source: Stacks Project, Tags 06YJ and 0D5S.
+## References
+
+* Stacks Project, Tags 06YJ and 0D5S
 -/
 
 @[expose] public section
@@ -352,8 +354,7 @@ private theorem q_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) [IsIso f] (M : Y.Module
 
 set_option cleanup.letToHave false in
 -- The selected counits have large dependent types; keep their data abstract.
-/-- The single-complex coefficient square for restriction and an isomorphic apex.
-Source: Stacks Project, Tags 06YJ and 0D5S. -/
+/-- The single-complex coefficient square for restriction and an isomorphic apex. -/
 theorem exists_openSingle_coefficient_transport
     {Y P P' : Scheme.{u}} (U : Y.Opens) (M : Y.Modules)
     (r : P ⟶ Y) (r' : P' ⟶ U.toScheme) (k : P' ≅ P)

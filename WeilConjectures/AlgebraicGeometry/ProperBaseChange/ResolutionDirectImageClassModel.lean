@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinaryLocalClassCycles
 
 /-! # The derived local class on the fixed direct-image model
 
-Source: Stacks Project, Tags 0BKJ, 0D5X and 079W.
+## References
+
+* Stacks Project, Tags 0BKJ, 0D5X and 079W
 -/
 
 @[expose] public section
@@ -172,7 +174,7 @@ variable [∀ X : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
 
 /-- The derived local class becomes the ordinary section edge on the fixed direct-image
-complex. Source: Stacks Project, Tags 0BKJ, 0D5X and 079W. -/
+complex. -/
 theorem resolutionDirectImageClassModel {T S : Scheme.{u}} (g : T ⟶ S) (q : ℤ)
     (K : schemeDerivedCategory T) :
     let f := g.toLRSHom.toShHom

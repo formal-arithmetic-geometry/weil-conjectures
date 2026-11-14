@@ -24,7 +24,11 @@ import Mathlib.CategoryTheory.Limits.Shapes.Opposites.Products
 /-!
 # Coproducts and the right adjoint to closed direct image
 
-Source: Bhatt--Scholze, *Pro-étale topology*, Section 6.4, printed pp. 48--49.
+## References
+
+* Bhatt--Scholze, *Pro-étale topology*, Section 6.4, printed pp. 48--49
+* Bhatt--Scholze, Pro-étale topology, Section 6.4, Lemma 6.4.4 and the last paragraph of Proposition
+  6.4.8
 -/
 
 set_option autoImplicit false
@@ -183,10 +187,7 @@ private theorem preservesCoproducts_of_triangle
 namespace AlgebraicGeometry.Etale
 
 /-- The right adjoint to closed derived direct image preserves arbitrary coproducts
-when the ambient scheme is finite type over an algebraically closed field.
-
-Source: Bhatt--Scholze, Pro-étale topology, Section 6.4, Lemma 6.4.4 and the last paragraph of
-Proposition 6.4.8. -/
+when the ambient scheme is finite type over an algebraically closed field. -/
 theorem preservesCoproducts_closedRightAdjoint
     {k : Type u} [Field k] [IsAlgClosed k]
     (C : Type (u + 1)) [CommRing C] [Finite C]

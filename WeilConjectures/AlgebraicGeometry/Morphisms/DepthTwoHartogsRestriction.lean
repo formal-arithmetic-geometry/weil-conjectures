@@ -19,7 +19,10 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # Restriction and direct image of a depth-two module
 
-Source: Stacks Project, Tag 0E9I.
+## References
+
+* Stacks Project, Tag 0E9I
+* Stacks Project, Lemma 31.5.11, Tag 0E9I
 -/
 
 @[expose] public section
@@ -28,9 +31,7 @@ universe u
 open CategoryTheory Opposite TopCat.Presheaf
 namespace AlgebraicGeometry.Scheme
 
-/-- Restriction followed by direct image recovers a coherent depth-two module.
-
-Source: Stacks Project, Lemma 31.5.11, Tag 0E9I. -/
+/-- Restriction followed by direct image recovers a coherent depth-two module. -/
 theorem isIso_restrictAdjunction_unit_of_depth_two
     {L : Scheme.{u}} [IsLocallyNoetherian L] (U : L.Opens)
     (N : L.Modules)

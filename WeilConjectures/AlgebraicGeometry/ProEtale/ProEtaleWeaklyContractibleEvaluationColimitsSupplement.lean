@@ -19,7 +19,10 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleWeaklyContractibleEvalua
 /-!
 # Evaluation at affine weakly contractible pro-etale objects
 
-Source: Stacks Project, Tags 0946 (1), 03DA and 0935 (2).
+## References
+
+* Stacks Project, Tags 0946 (1), 03DA and 0935 (2)
+* Stacks Project, Tags 0946 (1), 03DA, 0935 (2), and 002F
 -/
 
 @[expose] public section
@@ -228,9 +231,7 @@ private theorem affine_evaluation_preserves_coproducts
 /-- Evaluation of module sheaves at an affine weakly contractible object is exact
 and preserves all small colimits. The filtered-colimit comparison is invertible
 and natural in diagrams. Commutativity is forgotten only to use Mathlib's ringed-site
-module category. Smallness is relative to the universe of section modules.
-
-Source: Stacks Project, Tags 0946 (1), 03DA, 0935 (2), and 002F. -/
+module category. Smallness is relative to the universe of section modules. -/
 theorem affine_weaklyContractible_evaluation_colimits
     (X : Scheme.{u}) (R : Sheaf (topology X) CommRingCat.{u + 1})
     (W : X.ProEt) [IsAffine W.left]

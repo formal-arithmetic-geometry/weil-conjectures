@@ -18,8 +18,12 @@ import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-! # The connected torsor properties of a strict local root cover
 
-Source: Stacks Project, Tag 0EYG, the strictly local root-algebra paragraph;
-Tag 09EV, the roots of unity calculation.
+## References
+
+* Stacks Project, Tag 0EYG, the strictly local root-algebra paragraph
+* Tag 09EV, the roots of unity calculation
+* Stacks Project, Tag 0EYG, the paragraph forming A[x]/(x^e-f), and Tag 09EV, roots of unity and the
+  Kummer subextension calculation
 -/
 
 @[expose] public section
@@ -29,10 +33,7 @@ set_option autoImplicit false
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
-/-- The puncture of the regular root algebra is a connected etale rotation torsor.
-
-Source: Stacks Project, Tag 0EYG, the paragraph forming A[x]/(x^e-f), and
-Tag 09EV, roots of unity and the Kummer subextension calculation. -/
+/-- The puncture of the regular root algebra is a connected etale rotation torsor. -/
 theorem strict_local_root_torsor_properties
     (H : Type u) [CommRing H] [IsStrictlyHenselianLocalRing H]
     [IsRegularLocalRing H] (h : H)

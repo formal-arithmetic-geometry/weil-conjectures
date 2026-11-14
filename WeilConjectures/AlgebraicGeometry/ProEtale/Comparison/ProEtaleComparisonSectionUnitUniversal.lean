@@ -12,7 +12,10 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageKanRepresentative
 
 /-! # The concrete diagonal unit and its unique-extension property
 
-Source: Stacks Project, Tag 0GLZ.
+## References
+
+* Stacks Project, Tag 0GLZ
+* Stacks Project, Tag 0GLZ, the sectionwise transpose and verification of its two inverse composites
 -/
 
 @[expose] public section
@@ -44,7 +47,7 @@ local notation:max "δ[" X "," F "," U "]" s:max =>
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The comparison unit is constructed section by section, by pulling back
-along the diagonal and decoding with e. Source: Stacks Project, Tag 0GLZ.
+along the diagonal and decoding with e.
 Naturality in site objects follows from diagonal-section naturality and hres;
 naturality in coefficients follows from hfun and naturality of the inverse-image unit. -/
 noncomputable def proEtaleComparisonSectionUnit (X : Scheme.{u})
@@ -737,10 +740,7 @@ private lemma local_diagonal_representatives {X : Scheme.{u}}
 
 /-- Precomposition with the concrete diagonal unit is bijective on morphisms.
 This is a unique-extension statement about an already constructed map, without
-asserting an adjunction or any natural hom-set equivalence.
-
-Source: Stacks Project, Tag 0GLZ, the sectionwise transpose and verification of
-its two inverse composites. -/
+asserting an adjunction or any natural hom-set equivalence. -/
 theorem proEtaleComparisonSectionUnit_bijective (X : Scheme.{u})
     (A : Sheaf X.smallEtaleTopology (Type (u + 1)) ⥤
       Sheaf (Scheme.ProEt.topology X) (Type (u + 1)))

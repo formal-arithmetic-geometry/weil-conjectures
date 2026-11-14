@@ -40,7 +40,13 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Replete
 
 /-! # Abelian specialization with independently sized coefficients
 
-Source: Stacks Project, Tag 09AC.
+## References
+
+* Stacks Project, Tag 09AC
+* Stacks Project, Tag 09AC, first reduction, and Tag 01IH for closed immersions into affine schemes
+* Stacks Project, Tag 09AC, with the fully faithful adjunction of Tag 09BK
+* Stacks Project, Tag 09BL, (2), and Tag 09AC, localization and unit identification
+* Stacks Project, Tag 09AC, and Tag 09BL (1), (2)
 -/
 
 @[expose] public section
@@ -181,8 +187,7 @@ private theorem quotient_specialization {T Y : Scheme.{t}} [IsAffine Y]
 specialization condition. The ideal is the actual kernel of the global-sections
 map of the closed base change, rather than an ideal selected from existence.
 
-Source: Stacks Project, Tag 09AC, first reduction, and Tag 01IH for closed
-immersions into affine schemes. The single-cover lifting criterion is
+The single-cover lifting criterion is
 `AffineProEt.isLocallySurjective_iff_of_isSheaf` in the source library.
 
 Proof. An epimorphism of sheaves on the affine basis lifts any given section
@@ -415,8 +420,6 @@ private theorem precomposition_unit_surjective {S T : Scheme.{t}}
 
 /-- The affine closed-site counit is invertible at a weakly contractible object
 whose points specialize into the closed fibre.
-
-Source: Stacks Project, Tag 09AC, with the fully faithful adjunction of Tag 09BK.
 
 Proof. Full faithfulness makes the base change of the counit invertible. Hence
 its image contains the closed fibre. Its underlying morphism is weakly etale,
@@ -894,8 +897,6 @@ private theorem affine_closed_square {X Z : Scheme.{t}}
 projective evaluation gives the actual inverse-image unit isomorphism on V.
 No specialization assumption is made in this comparison lemma.
 
-Source: Stacks Project, Tag 09BL, (2), and Tag 09AC, localization and unit identification.
-
 Proof. First transfer projective evaluation from B to r(B). A locally surjective
 map admits a lift over a single affine surjective cover of r(B). The lift functor
 v sends this cover to a covering of v(r(B)), which is isomorphic to B by the
@@ -960,9 +961,7 @@ private theorem isIso_proEtaleUnit_sections_of_closedSiteCounit
 end IndependentSpecialization
 
 /-- The actual abelian inverse-image unit is bijective on an affine specialization
-neighbourhood, for any chosen left adjoint and independently sized coefficients.
-
-Source: Stacks Project, Tag 09AC, and Tag 09BL (1), (2). -/
+neighbourhood, for any chosen left adjoint and independently sized coefficients. -/
 theorem proEtale_abelian_unit_bijective_of_specialization
     {X Z : Scheme.{t}} (i : Z ⟶ X) [IsClosedImmersion i]
     (V : X.ProEt) [IsAffine V.left]

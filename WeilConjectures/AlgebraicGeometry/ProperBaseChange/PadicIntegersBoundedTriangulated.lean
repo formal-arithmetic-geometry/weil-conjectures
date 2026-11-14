@@ -201,9 +201,12 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
 
 /-! # Triangulation for bounded constructible integral p-adic coefficients
 
-Source: Bhatt--Scholze, Section 6.8, Definition 6.8.10 and Proposition 6.8.11(1), (3), as
-implemented by the integral constructible Serre theorem; the generic homology-property triangulation
-theorem supplies the derived conclusion.
+## References
+
+* Bhatt--Scholze, Section 6.8, Definition 6.8.10 and Proposition 6.8.11(1), (3), as implemented by
+  the integral constructible Serre theorem
+* Bhatt--Scholze, Section 6.8, as implemented by `CondensedRing.integralConstructible_serre` and the
+  conditional homology-property theorem
 -/
 
 @[expose] public section
@@ -219,10 +222,7 @@ variable (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]
   (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
 
 /-- The integral coefficient ring of a finite p-adic subfield has a triangulated
-bounded constructible category.
-
-Source: Bhatt--Scholze, Section 6.8, as implemented by
-`CondensedRing.integralConstructible_serre` and the conditional homology-property theorem. -/
+bounded constructible category. -/
 instance isTriangulated_boundedConstructible_padicIntegers :
     (boundedConstructible
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)).IsTriangulated := by

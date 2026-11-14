@@ -11,6 +11,10 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible
 
 /-!
 # Projectivity of representables on the pro-étale site
+
+## References
+
+* Stacks Project, Tags 00WN and 098F
 -/
 
 @[expose] public section
@@ -25,8 +29,6 @@ namespace AlgebraicGeometry.Scheme
 
 /-- If `D` is w-contractible and `Spec D → X` is weakly étale, the represented sheaf
 is projective and sections over it preserve epimorphisms.
-
-Source: Stacks Project, Tags 00WN and 098F.
 -/
 theorem proetale_wContractible_projective
     (X : Scheme.{u}) (D : Type u) [CommRing D] [IsWContractibleRing D]

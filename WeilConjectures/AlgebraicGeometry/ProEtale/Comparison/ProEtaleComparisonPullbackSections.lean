@@ -14,7 +14,13 @@ import WeilConjectures.AlgebraicGeometry.EtaleSetTerminalRestriction
 /-!
 # Sections of the etale-to-pro-etale inverse image
 
-Source: Stacks Project, Tag 0GLZ, and Tag 099R.
+## References
+
+* Stacks Project, Tag 0GLZ, and Tag 099R
+* Stacks Project, Tag 0GLZ
+* Sites, Tags 03CB and 03CC
+* Stacks Project, Tag 0GLZ, paragraph `F = epsilon_* a(F)`
+* Tag 099R
 -/
 
 @[expose] public section
@@ -26,8 +32,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- The restriction in the sections formula: the inverse-image unit at the identity
-etale object followed by the canonical composition and terminal-object transport.
-Source: Stacks Project, Tag 0GLZ; Sites, Tags 03CB and 03CC. -/
+etale object followed by the canonical composition and terminal-object transport. -/
 noncomputable def proEtaleComparisonSectionRestriction {X : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology (Type (u + 1))) {Y Z : X.ProEt} (g : Z ⟶ Y) :
     ((Scheme.etaleSetPullback Y.hom).obj F).obj.obj (op (Scheme.Etale.mk (𝟙 Y.left))) →
@@ -41,8 +46,7 @@ noncomputable def proEtaleComparisonSectionRestriction {X : Scheme.{u}}
     (etaleSetTerminalTransport Y.hom g.left Z.hom g.w F).inv
 
 /-- The usual identification at an etale object, written as a map before asserting
-bijectivity: pull a section back by the unit and restrict along the diagonal.
-Source: Stacks Project, Tag 0GLZ, paragraph `F = epsilon_* a(F)`. -/
+bijectivity: pull a section back by the unit and restrict along the diagonal. -/
 noncomputable def proEtaleComparisonEtaleSection {X : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology (Type (u + 1))) (U : X.Etale) :
     F.obj.obj (op U) →
@@ -101,7 +105,7 @@ private lemma comparisonEtaleSection_eq
   apply MorphismProperty.Over.Hom.ext
   simp [d, MorphismProperty.Over.mapPullbackAdj]
 
-/-- Source: Stacks Project, Tag 0GLZ; Tag 099R.
+/--
 The sheaf functor `A` realizes the prescribed section values through `e`. The first
 identity specifies its restrictions, and the second specifies its action on sheaves.
 Thus the prescribed presheaf is a sheaf, not merely its sheafification. The natural

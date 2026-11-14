@@ -17,7 +17,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.Slicing
 /-!
 # A flat local base change carrying a prescribed smooth-fibre point
 
-Source: Stacks Project, Tag 0EYB, residue extension and étale slice; Tags 07NE and 057G.
+## References
+
+* Stacks Project, Tag 0EYB, residue extension and étale slice
+* Tags 07NE and 057G
+* Stacks Project, Tag 0EYB, the two base changes before completion
 -/
 
 @[expose] public section
@@ -27,9 +31,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- A closed point in a smooth closed fibre is reached by a flat local base change whose
-closed fibre has only one point.
-
-Source: Stacks Project, Tag 0EYB, the two base changes before completion; Tags 07NE and 057G. -/
+closed fibre has only one point. -/
 theorem exists_smooth_closed_point_local_section
     (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]
     {L : Scheme.{u}} (q : L ⟶ Spec (.of A)) [Smooth q]

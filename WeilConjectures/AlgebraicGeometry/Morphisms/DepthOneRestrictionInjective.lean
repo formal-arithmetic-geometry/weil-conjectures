@@ -18,7 +18,12 @@ public import Mathlib.RingTheory.Nakayama
 
 /-! # Uniqueness of restriction across a depth-positive boundary
 
-Source: Stacks Project, Tags 0B3M and 05AR.
+## References
+
+* Stacks Project, Tags 0B3M and 05AR
+* Stacks Project, Tags 0B3M (restriction avoiding weakly associated points), 05AR (associated and
+  weakly associated points on a locally Noetherian scheme), and 00LL (depth zero and associated
+  primes)
 -/
 
 @[expose] public section
@@ -54,11 +59,7 @@ private theorem depth_zero_of_maximal_associated
     exact False.elim (hunion hxreg)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Sections are determined by restriction away from a depth-positive boundary.
-
-Source: Stacks Project, Tags 0B3M (restriction avoiding weakly associated points),
-05AR (associated and weakly associated points on a locally Noetherian scheme),
-and 00LL (depth zero and associated primes). -/
+/-- Sections are determined by restriction away from a depth-positive boundary. -/
 theorem injective_restrictAdjunction_unit_app_of_depth_one
     {L : Scheme.{u}} [IsLocallyNoetherian L] (U : L.Opens)
     (N : L.Modules)

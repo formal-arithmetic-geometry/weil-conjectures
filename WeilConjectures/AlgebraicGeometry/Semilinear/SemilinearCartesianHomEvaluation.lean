@@ -13,7 +13,12 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Cartesian internal Hom evaluation
 
-Source: Zheng, Construction 4.1 and Proposition 4.17; Stacks Tags 06YY, 07A4, 07A6 and 08J9.
+## References
+
+* Zheng, Construction 4.1 and Proposition 4.17
+* Stacks Tags 06YY, 07A4, 07A6 and 08J9
+* Zheng Proposition 4.17
+* Stacks 08J9
 -/
 
 @[expose] public noncomputable section
@@ -112,8 +117,7 @@ private theorem closed_evaluation_of_projection
 variable (S : SystemScalarCoherence.{c, v, r} J B τ)
   (T : SystemTensorCoherence.{c, v, r} J B τ S)
 
-/-- The cartesian comparison with its evaluation normalization, without a transition law.
-Source: Zheng Proposition 4.17; Stacks 08J9. -/
+/-- The cartesian comparison with its evaluation normalization, without a transition law. -/
 structure SystemCartesianHomEvaluation where
   /-- The cartesian-input internal-Hom comparison, natural in the second input. -/
   homEvaluation : ∀ (M : DS.{c, v, max c v r} J B τ)
@@ -137,8 +141,7 @@ structure SystemCartesianHomEvaluation where
           (systemRing.{c, v, max c v r} J B τ)).obj (op M, N), M) ≫
         (e.{c, v, max c v r} J B τ n).map (T.closed.evaluation M N)
 
-/-- Internal Hom evaluates on a cartesian first input, preserving its actual evaluation.
-Source: Zheng Construction 4.1 and Proposition 4.17; Stacks 08J9. -/
+/-- Internal Hom evaluates on a cartesian first input, preserving its actual evaluation. -/
 theorem systemCartesianHomEvaluation_nonempty :
     Nonempty (SystemCartesianHomEvaluation.{c, v, r} J B τ S T) := by
   classical

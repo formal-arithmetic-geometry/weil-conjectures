@@ -14,7 +14,12 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedSectionsTorsionQuoti
 
 /-! # Computing puncture cohomology by the quotient of an injective resolution
 
-Source: Stacks Project, Tags 0BK0, 0A6T, and 09T2.
+## References
+
+* Stacks Project, Tags 0BK0, 0A6T, and 09T2
+* Stacks Project, Tag 0BK0, Lemma 51.8.2
+* Tag 0A6T, Lemma 51.2.1
+* and Tag 09T2, Lemma 36.8.1
 -/
 
 @[expose] public section
@@ -26,7 +31,6 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The quotient of a module injective resolution by its maximal-ideal-power torsion
 subcomplex computes cohomology on the puncture, in every degree.
-Source: Stacks Project, Tag 0BK0, Lemma 51.8.2; Tag 0A6T, Lemma 51.2.1; and Tag 09T2, Lemma 36.8.1.
 -/
 theorem nonempty_punctured_h_addEquiv_injective_quotient
     (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R]

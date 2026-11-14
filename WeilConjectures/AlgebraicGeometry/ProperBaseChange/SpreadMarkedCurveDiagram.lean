@@ -23,8 +23,13 @@ import WeilConjectures.AlgebraicGeometry.ProperBaseChange.MarkedCurveDiagramRefi
 /-!
 # Spreading a marked curve diagram from a generic fibre
 
-Source: Stacks Project, Tag 0GK7, the radicial-extension, spreading and final
-shrinking paragraphs. This is the descent argument with its field diagram supplied.
+This is the descent argument with its field diagram supplied.
+
+## References
+
+* Stacks Project, Tag 0GK7, the radicial-extension, spreading and final shrinking paragraphs
+* Stacks Project, Tag 0GK7, from the paragraph reducing the inseparable extension through the last
+  paragraph
 -/
 
 @[expose] public section
@@ -54,9 +59,6 @@ set_option backward.isDefEq.respectTransparency false in
 component's generic residue field. The supplied open marks a thickening locus that meets
 each normalized component densely. The output keeps the supplied number of components
 and identifies their generic fibres with the supplied diagram by cartesian squares.
-
-Source: Stacks Project, Tag 0GK7, from the paragraph reducing the inseparable extension through the
-last paragraph.
 -/
 theorem exists_spread_marked_curve_diagram
     {X S : Scheme.{u}} (f : X ⟶ S) [IsSeparated f]

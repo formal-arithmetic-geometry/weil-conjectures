@@ -11,7 +11,11 @@ public import Mathlib.AlgebraicGeometry.Limits
 
 /-! # FiniteAffineNormalizationCoproduct
 
-Source: Stacks Project and Mathlib. -/
+## References
+
+* Stacks Project and Mathlib
+* Stacks Project, Tag 035I
+-/
 
 @[expose] public section
 
@@ -61,9 +65,7 @@ private theorem integral_fin_sigma_desc (r : ℕ) (Z : Fin r → Scheme.{u})
     infer_instance
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Relative normalization of a finite affine coproduct.
-
-Source: Stacks Project, Tag 035I. -/
+/-- Relative normalization of a finite affine coproduct. -/
 theorem finite_affine_normalization_coproduct
     (A : CommRingCat.{u}) (r : ℕ) (D : Fin r → Type u)
     [∀ i, CommRing (D i)] [∀ i, Algebra A (D i)]

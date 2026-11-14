@@ -14,7 +14,10 @@ import WeilConjectures.Mathlib.RingTheory.Flat.Localization
 /-!
 # The target flat locus of a finite morphism
 
-Source: Stacks Project, Tags 00RC and 01WM.
+## References
+
+* Stacks Project, Tags 00RC and 01WM
+* Stacks Project, Tag 00RC (openness of flatness) and Tag 01WM (finite morphisms are closed)
 -/
 
 @[expose] public section
@@ -93,10 +96,7 @@ private theorem isOpen_finite_flat_source_locus
     exact (RingHom.Flat.respectsIso.arrow_mk_iso_iff
       (morphismRestrictStalkMap p V ⟨z, hpz⟩)).mpr hz
 
-/-- The points over which every source stalk is flat form an open subset.
-
-Source: Stacks Project, Tag 00RC (openness of flatness) and Tag 01WM
-(finite morphisms are closed). -/
+/-- The points over which every source stalk is flat form an open subset. -/
 theorem isOpen_setOf_finite_flat_stalks
     {E L : Scheme.{u}} (p : E ⟶ L) [IsFinite p] [IsLocallyNoetherian L] :
     IsOpen {y : L | ∀ z : E, p z = y → (p.stalkMap z).hom.Flat} := by

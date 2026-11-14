@@ -12,7 +12,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedPrincipalEventualSca
 
 /-! # Finite-level scalar lifts of compatible punctured principal sections
 
-Source: Stacks Project, Tags 0BLD, 0H3E, 0BK0 and 0AVY.
+## References
+
+* Stacks Project, Tags 0BLD, 0H3E, 0BK0 and 0AVY
+* Stacks Project, Tags 0H3E (the pro-isomorphism of cones with ordinary quotients), 0BLD (degree
+  zero), 0BK0 and 0AVY
 -/
 
 @[expose] public section
@@ -21,10 +25,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- Each member of a compatible formal section family has an ambient scalar lift.
-
-Source: Stacks Project, Tags 0H3E (the pro-isomorphism of cones with ordinary
-quotients), 0BLD (degree zero), 0BK0 and 0AVY. -/
+/-- Each member of a compatible formal section family has an ambient scalar lift. -/
 theorem punctured_principal_finite_level_lift
     (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R]
     (g : R) (hg : g ∈ IsLocalRing.maximalIdeal R)

@@ -18,7 +18,11 @@ import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
 /-!
 # A finite flat model for depth-three punctured lifting
 
-Source: Stacks Project, Tags 0BLS, 0BLL, 0BLH, 0BM6 and 09ZL.
+## References
+
+* Stacks Project, Tags 0BLS, 0BLL, 0BLH, 0BM6 and 09ZL
+* Stacks Project, proof of Tag 0BLS through Tags 0BLL, 0BLH, 0BM6 and 09ZL
+* depth and local cohomology are related by Tag 0AVY
 -/
 
 @[expose] public section
@@ -27,10 +31,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- Construct a compatible finite flat model with etale principal quotient.
-
-Source: Stacks Project, proof of Tag 0BLS through Tags 0BLL, 0BLH, 0BM6 and 09ZL;
-depth and local cohomology are related by Tag 0AVY. -/
+/-- Construct a compatible finite flat model with etale principal quotient. -/
 theorem exists_finite_flat_model_of_depth_three_of_quotient_extension
     (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A]
     (f : A) (hf : f ∈ IsLocalRing.maximalIdeal A)

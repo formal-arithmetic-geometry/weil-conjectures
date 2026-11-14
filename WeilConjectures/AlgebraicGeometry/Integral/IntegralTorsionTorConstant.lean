@@ -26,7 +26,9 @@ For a perfect complex `C` over the valuation ring `A`, the degree-`q` cohomology
 the constant sheaf of the module-level Tor. A torsion summand `N₀` of `H^q(C)` is a retract
 of `M`, which gives the surjection onto `N₀/πN₀`.
 
-Source: Bhatt--Scholze, Proposition 6.6.11.
+## References
+
+* Bhatt--Scholze, Proposition 6.6.11
 -/
 
 @[expose] public noncomputable section

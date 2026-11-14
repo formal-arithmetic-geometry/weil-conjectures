@@ -12,7 +12,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDo
 /-!
 # Lifting dominant maps through absolute normalization
 
-Source: Stacks Project, Tag 035Q, part (4).
+## References
+
+* Stacks Project, Tag 035Q, part (4)
 -/
 
 @[expose] public section
@@ -63,9 +65,7 @@ private theorem normalization_generic_iso (Z : Scheme.{u}) [IsIntegral Z] :
     exact hφ
   exact key _ _ hself (Z.exists_iso_toNormalization_normalizationIn Z.functionField)
 
-/-- A dominant map from a normal integral scheme has a unique dominant lift to normalization.
-
-Source: Stacks Project, Tag 035Q, part (4). -/
+/-- A dominant map from a normal integral scheme has a unique dominant lift to normalization. -/
 theorem existsUnique_lift_normalization_of_dominant {Y Z : Scheme.{u}}
     [IsIntegral Y] [IsIntegral Z]
     (hY : ∀ y : Y, IsIntegrallyClosed (Y.presheaf.stalk y))

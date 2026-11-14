@@ -130,7 +130,9 @@ import WeilConjectures.Algebra.Homology.SmoothPurity.ChangeOfRingsTensorCancella
 
 /-! # Tensor compatibility of derived coefficient extension
 
-Source: Stacks 03EK, 06YY, 07A4 and 07A6.
+## References
+
+* Stacks 03EK, 06YY, 07A4 and 07A6
 -/
 
 @[expose] public noncomputable section
@@ -311,8 +313,7 @@ private theorem reverseTensorSquare {K : Type*} [Category* K]
   rw [hd]
   simp
 
-/-- Scalar extension commutes with the tensor of the actual K-flat models.
-Source: Stacks 03EK, 06YY, 07A4 and 07A6. -/
+/-- Scalar extension commutes with the tensor of the actual K-flat models. -/
 theorem semilinearScalarTensor
     (R S : Sheaf J CommRingCat.{max c v r}) (φ : R ⟶ S)
     (scalar : ScalarData.{c, v, max c v r} φ)

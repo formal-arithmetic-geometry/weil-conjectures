@@ -105,7 +105,12 @@ import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 import WeilConjectures.SixFunctors.OpenClosed.Exact
 import WeilConjectures.SixFunctors.BaseChange.Pasting
 
-/-! # The proper-first support map on sheaves -/
+/-! # The proper-first support map on sheaves
+
+## References
+
+* Stacks Project, Tags 0F7B and 0F4L
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -115,8 +120,7 @@ namespace AlgebraicGeometry.Etale
 attribute [local irreducible] lowerStar etaleLowerShriek openImmersionLowerShriek
 
 /-- Proper support constructs a sheaf map from proper pushforward followed by etale sum
-extension to any compactification, normalized by the inclusion in ordinary direct image.
-Source: Stacks Project, Tags 0F7B and 0F4L. -/
+extension to any compactification, normalized by the inclusion in ordinary direct image. -/
 theorem properEtaleSheafSupportMap_exists
     (A : Type (u + 1)) [CommRing A]
     {W V Y : Scheme.{u}}

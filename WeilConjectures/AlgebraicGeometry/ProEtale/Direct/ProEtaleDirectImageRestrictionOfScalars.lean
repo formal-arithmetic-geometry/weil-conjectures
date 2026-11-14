@@ -14,7 +14,13 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantRingO
 /-!
 # Derived pro-etale direct image and restriction of scalars
 
-Source: Stacks Project, Tags 0D6E, 0D6J and 015F.
+## References
+
+* Stacks Project, Tags 0D6E, 0D6J and 015F
+* Stacks Tags 03DA and 015F
+* Stacks Tag 015F
+* Stacks Tag 0D6E
+* Stacks Tags 0D6E, 0D6J, 015F
 -/
 
 @[expose] public section
@@ -30,8 +36,7 @@ namespace AlgebraicGeometry.Scheme
 /-- Restriction along the induced map of constant ring sheaves, using Mathlib's
 unchanged-underlying-abelian-sheaf restriction functor. Its exactness is the instance
 `proEtaleRingRestrictScalars_preservesFiniteLimits/Colimits`; its derived functor is
-therefore the termwise `mapDerivedCategory`.
-Source: Stacks Tags 03DA and 015F. -/
+therefore the termwise `mapDerivedCategory`. -/
 noncomputable abbrev proEtaleCoefficientRestrictScalars (X : Scheme.{u})
     {A B : Type u} [CommRing A] [CommRing B] (φ : A →+* B) :
     proEtaleRingModules X (proEtaleConstantRing X B) ⥤
@@ -40,7 +45,7 @@ noncomputable abbrev proEtaleCoefficientRestrictScalars (X : Scheme.{u})
     ((constantSheaf (ProEt.topology X) CommRingCat.{u + 1}).map
       (CommRingCat.ofHom φ.ulift))
 
-/-- Exact restriction preserves finite limits. Source: Stacks Tag 015F. -/
+/-- Exact restriction preserves finite limits. -/
 noncomputable instance proEtaleCoefficientRestrictScalars_preservesFiniteLimits
     (X : Scheme.{u}) {A B : Type u} [CommRing A] [CommRing B] (φ : A →+* B) :
     PreservesFiniteLimits (proEtaleCoefficientRestrictScalars X φ) :=
@@ -48,7 +53,7 @@ noncomputable instance proEtaleCoefficientRestrictScalars_preservesFiniteLimits
     ((constantSheaf (ProEt.topology X) CommRingCat.{u + 1}).map
       (CommRingCat.ofHom φ.ulift))).1
 
-/-- Exact restriction preserves finite colimits. Source: Stacks Tag 015F. -/
+/-- Exact restriction preserves finite colimits. -/
 noncomputable instance proEtaleCoefficientRestrictScalars_preservesFiniteColimits
     (X : Scheme.{u}) {A B : Type u} [CommRing A] [CommRing B] (φ : A →+* B) :
     PreservesFiniteColimits (proEtaleCoefficientRestrictScalars X φ) :=
@@ -160,7 +165,7 @@ private theorem coefficientComparisonForMaps_existsUnique
     (coefficientInverseImage_naturality f φ)
 
 /-- The underived coefficient square has the uniquely normalized identity-on-sections
-comparison. Source: Stacks Tag 0D6E. -/
+comparison. -/
 theorem proEtaleCoefficientDirectImageComparison_existsUnique
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) :
@@ -173,8 +178,7 @@ theorem proEtaleCoefficientDirectImageComparison_existsUnique
     (proEtaleCoefficientDirectImageMap f A) (proEtaleCoefficientDirectImageMap f B)
     (coefficientRingDirectImage_eq f A).symm (coefficientRingDirectImage_eq f B).symm
 
-/-- The actual identity-on-sections comparison, selected by its unique characterization.
-Source: Stacks Tag 0D6E. -/
+/-- The actual identity-on-sections comparison, selected by its unique characterization. -/
 noncomputable def proEtaleCoefficientDirectImageComparison
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) :
@@ -346,8 +350,7 @@ private theorem coefficientDerivedComparison_exists
 /-- Derived direct image commutes with restriction of finite commutative coefficients.
 The displayed equality says that the comparison is the inverse of f_*(j), after the
 canonical termwise-localization and K-injective resolution identifications. In particular
-restriction of scalars is not assumed to preserve K-injectivity.
-Source: Stacks Tags 0D6E, 0D6J, 015F. -/
+restriction of scalars is not assumed to preserve K-injectivity. -/
 theorem proEtaleDerivedDirectImage_restrictScalars
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) :

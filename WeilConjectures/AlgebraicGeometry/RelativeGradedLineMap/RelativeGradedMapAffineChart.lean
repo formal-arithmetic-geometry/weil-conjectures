@@ -11,7 +11,10 @@ public import WeilConjectures.AlgebraicGeometry.Ample
 
 /-! # Affine restriction of a relative graded canonical map
 
-Source: Stacks Project, Constructions, Tag 01O9, part (3).
+## References
+
+* Stacks Project, Constructions, Tag 01O9, part (3)
+* Stacks Project, Constructions, Tag 01O9, characterization (3), and Tag 01NK
 -/
 
 @[expose] public section
@@ -27,8 +30,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- On an affine base chart, a normalized graded section map whose positive-degree
 images generate has the basic-open and fraction formulas of its canonical relative map.
 No immersion or quasi-compactness assumption is required.
-
-Source: Stacks Project, Constructions, Tag 01O9, characterization (3), and Tag 01NK.
 -/
 theorem RelativeGradedLineMap.affine_chart_formulas
     {Z S : Scheme.{u}} {h : Z ⟶ S} {L : Z.Modules} [L.IsInvertible]

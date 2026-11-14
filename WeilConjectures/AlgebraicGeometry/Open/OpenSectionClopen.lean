@@ -14,7 +14,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.Separated
 /-!
 # An open section of a separated morphism is clopen
 
-Source: Stacks Project, Tag 01KT.
+## References
+
+* Stacks Project, Tag 01KT
 -/
 
 @[expose] public section
@@ -26,9 +28,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- An open section of a separated morphism has clopen image, and the source together
-with the complementary open subscheme is a coproduct decomposition of the target.
-
-Source: Stacks Project, Tag 01KT. -/
+with the complementary open subscheme is a coproduct decomposition of the target. -/
 theorem open_section_clopen {V S : Scheme.{u}} (p : V ⟶ S) (s : S ⟶ V)
     [IsSeparated p] [IsOpenImmersion s] (hs : s ≫ p = 𝟙 S) :
     IsClopen (Set.range s) ∧

@@ -20,7 +20,10 @@ isomorphism of a datum isomorphism are identified, compatibly with the transitio
 derived-limit presentation therefore transports, and with the Roos triangle of the
 completion reflector it gives intrinsic completeness.
 
-Source: Stacks Tags 099M and 099N.
+## References
+
+* Stacks Tags 099M and 099N
+* Bhatt--Scholze, Proposition 6.6.11
 -/
 
 @[expose] public noncomputable section
@@ -304,8 +307,7 @@ private theorem complete_of_reduction_derivedLimit {B : Type (u + 1)} [CommRing 
   exact complete_of_iso' e (asIso a).symm
     ((ObjectProperty.ι (PbcIsIntrinsicallyComplete T e)).leftAdjoint.obj K).property
 
-/-- Intrinsic completeness transports along an isomorphism of coefficient data.
-Source: Stacks Tags 099M and 099N. -/
+/-- Intrinsic completeness transports along an isomorphism of coefficient data. -/
 theorem AdicCoefficientDatum.transport_intrinsicallyComplete (K : PbcCompletedDerived T d)
     (hK : PbcIsIntrinsicallyComplete T d K) :
     PbcIsIntrinsicallyComplete T d' ((d.transportDerived d' φ hφ T).obj K) := by
@@ -351,8 +353,7 @@ theorem AdicCoefficientDatum.transport_intrinsicallyComplete (K : PbcCompletedDe
 end Complete
 
 /-- The implication "intrinsically complete with a uniform reduction profile implies
-stratified perfect" is invariant under isomorphisms of adic coefficient data.
-Source: Bhatt--Scholze, Proposition 6.6.11. -/
+stratified perfect" is invariant under isomorphisms of adic coefficient data. -/
 theorem isIntegralStratifiedPerfect_of_ringEquiv (T : Scheme.{u})
     {A A' : Type (u + 1)} [CommRing A] [CommRing A']
     (d : AdicCoefficientDatum A) (d' : AdicCoefficientDatum A')

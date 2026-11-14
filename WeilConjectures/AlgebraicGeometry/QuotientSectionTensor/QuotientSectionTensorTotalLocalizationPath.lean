@@ -10,7 +10,12 @@ import WeilConjectures.AlgebraicGeometry.IntegralResidueDerivedMonoidal
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.CoefficientTensorLocalization
 import all WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionTensorTransportFormulas
 
-/-! # Localizing the total scalar section tensor square -/
+/-! # Localizing the total scalar section tensor square
+
+## References
+
+* Stacks, Cohomology on Sites, Tags 06YY and 07A4
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -59,7 +64,6 @@ attribute [local irreducible] ModuleRingedComparison.tensor tensorComparison qTe
 
 -- Retain the large total tensor maps while pasting the localization faces.
 /-- The total scalar square, localized and pasted with scalar normalization.
-Source: Stacks, Cohomology on Sites, Tags 06YY and 07A4.
 Map the given ordinary total square to the derived category. Paste the fixed
 tensor localization normalization with scalar normalization on the total tensor,
 counit naturality, naturality of the derived scalar comparison on the internal

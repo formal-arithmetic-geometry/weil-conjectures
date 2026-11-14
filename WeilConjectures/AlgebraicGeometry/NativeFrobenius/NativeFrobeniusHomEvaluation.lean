@@ -10,7 +10,9 @@ public import WeilConjectures.CategoryTheory.TwistedActionRingedSite.TwistedActi
 
 /-! # Evaluation of the fixed native small-site Hom comparison
 
-Source: Stacks 03D6 and 03EO
+## References
+
+* Stacks 03D6 and 03EO
 -/
 
 @[expose] public section
@@ -22,8 +24,7 @@ open CategoryTheory.TwistedActionRingedSite
 open WeilConjectures.WeilFrobeniusAction
 namespace AlgebraicGeometry.ProEtale.NativeFrobenius
 
-/-- The section counit for the specified small-site-to-native equivalence.
-Source: Stacks 03D6 and 03EO. -/
+/-- The section counit for the specified small-site-to-native equivalence. -/
 noncomputable def sectionCounit (Y : Scheme.{u}) (l : ℕ) [Fact l.Prime] :
     (equivalence Y l).functor ⋙ (adicSectionModuleEquivalence l Y).functor ≅
       SheafOfModules.SmallSite.restriction (Scheme.ProEt.topology Y) (comparisonRing l Y) :=
@@ -106,9 +107,7 @@ private theorem homComparison_map (Y : Scheme.{u}) (l : ℕ) [Fact l.Prime]
 
 end
 
-/-- The fixed Hom comparison is normalized by evaluation on the identity slice.
-
-Source: Stacks 03D6 and 03EO -/
+/-- The fixed Hom comparison is normalized by evaluation on the identity slice. -/
 theorem comparison_evaluation (Y : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (H : AdicModuleHomComparisonCore l Y) (M N : Modules (ring Y l))
     (V : Y.ProEtᵒᵖ)

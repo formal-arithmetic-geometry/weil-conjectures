@@ -26,11 +26,20 @@ import WeilConjectures.SixFunctors.ProEtale.Comparison.Flat
 /-!
 # Compatibility of normalized towers with retained étale origins
 
-Source: Stacks Tags 09C9, 09C2, 06YY and 07A4.
-
 All finite coefficient categories use their canonical fixed-ring presentation. The
 coefficient realization in definition-small-pro-etale-site--1 identifies them with modules
 over the continuous-function coefficient sheaf. All outputs are ambient derived objects.
+
+## References
+
+* Stacks Tags 09C9, 09C2, 06YY and 07A4
+* Stacks 099L
+* Stacks 06YY and 06XN
+* Stacks 06YY
+* Stacks 03D2
+* Stacks 03D2 and 06YY
+* Stacks 07A4
+* Stacks 07A4 and 0G7E
 -/
 
 @[expose] public section
@@ -685,34 +694,32 @@ private theorem derived_mate_isIso_of_flat
 -- Elaborate the shared site instances sequentially.
 set_option Elab.async false
 
-/-- The positive quotient at exponent n+1, as a discrete coefficient type.
-Source: Stacks 099L. -/
+/-- The positive quotient at exponent n+1, as a discrete coefficient type. -/
 def PbcQuotient {A : Type (u + 1)} [CommRing A]
     (d : Scheme.AdicCoefficientDatum A) (n : ℕ) :=
   A ⧸ d.ideal ^ (n + 1)
 
-/-- The actual quotient ring structure. Source: Stacks 099L. -/
+/-- The actual quotient ring structure. -/
 instance {A : Type (u + 1)} [CommRing A]
     (d : Scheme.AdicCoefficientDatum A) (n : ℕ) :
     CommRing (PbcQuotient d n) := inferInstanceAs (CommRing (A ⧸ d.ideal ^ (n + 1)))
 
-/-- Finiteness of the quotient coefficient set. Source: Stacks 099L. -/
+/-- Finiteness of the quotient coefficient set. -/
 instance {A : Type (u + 1)} [CommRing A]
     (d : Scheme.AdicCoefficientDatum A) (n : ℕ) :
     Finite (PbcQuotient d n) := d.quotientFinite n
 
-/-- Each quotient coefficient ring has the discrete topology. Source: Stacks 099L. -/
+/-- Each quotient coefficient ring has the discrete topology. -/
 instance {A : Type (u + 1)} [CommRing A]
     (d : Scheme.AdicCoefficientDatum A) (n : ℕ) :
     TopologicalSpace (PbcQuotient d n) := ⊥
 
-/-- Discreteness of the quotient topology. Source: Stacks 099L. -/
+/-- Discreteness of the quotient topology. -/
 instance {A : Type (u + 1)} [CommRing A]
     (d : Scheme.AdicCoefficientDatum A) (n : ℕ) :
     DiscreteTopology (PbcQuotient d n) := ⟨rfl⟩
 
-/-- The published canonical quotient homomorphism at positive coefficient levels.
-Source: Stacks 099L. -/
+/-- The published canonical quotient homomorphism at positive coefficient levels. -/
 noncomputable def pbcWitnessQuotientMap {A : Type (u + 1)} [CommRing A]
     (d : Scheme.AdicCoefficientDatum A) (b a : ℕ) (h : a ≤ b) :
     PbcQuotient d b →+* PbcQuotient d a :=
@@ -832,15 +839,13 @@ private noncomputable def scalarDerivedAdjunction {R S : Type (u + 1)}
 -- Keep the scalar adjunction data folded when elaborating the chosen left adjoints.
 attribute [local irreducible] scalarDerivedAdjunction scalarExtension scalarAdjunction
 
-/-- Derived restriction of scalars has a left adjoint for an arbitrary coefficient map.
-Source: Stacks 06YY and 06XN. -/
+/-- Derived restriction of scalars has a left adjoint for an arbitrary coefficient map. -/
 @[instance] theorem pbcRestriction_isRightAdjoint {R S : Type (u + 1)}
     [CommRing R] [CommRing S] (φ : R →+* S) :
     (Sheaf.derivedRestrictScalars J φ).IsRightAdjoint := by
   exact (scalarDerivedAdjunction J φ).isRightAdjoint
 
-/-- Derived scalar extension, fixed by the adjunction to actual restriction of scalars.
-Source: Stacks 06YY. -/
+/-- Derived scalar extension, fixed by the adjunction to actual restriction of scalars. -/
 noncomputable def pbcFixedScalarExtension {R S : Type (u + 1)} [CommRing R] [CommRing S]
     (φ : R →+* S) :
     DerivedCategory (Sheaf J (ModuleCat.{u + 1} R)) ⥤
@@ -848,8 +853,7 @@ noncomputable def pbcFixedScalarExtension {R S : Type (u + 1)} [CommRing R] [Com
   (Sheaf.derivedRestrictScalars J φ).leftAdjoint
 
 /-- The canonical composition comparison of derived scalar extensions, obtained by
-conjugating the actual composition identification for restrictions of scalars.
-Source: Stacks 06YY. -/
+conjugating the actual composition identification for restrictions of scalars. -/
 noncomputable def pbcFixedScalarExtensionComp {R S V : Type (u + 1)}
     [CommRing R] [CommRing S] [CommRing V]
     (φ : R →+* S) (ψ : S →+* V) (χ : R →+* V) (h : χ = ψ.comp φ) :
@@ -869,8 +873,7 @@ private instance comparison_integerColimits (R : Type (u + 1)) [CommRing R] :
   infer_instance
 
 /-- Restriction commutes with comparison inverse image. This is the conjugate of the
-sectionwise commutation of comparison restriction with coextension of scalars.
-Source: Stacks 03D2. -/
+sectionwise commutation of comparison restriction with coextension of scalars. -/
 noncomputable def pbcComparisonRestrict (φ : R →+* S) :
     comparisonUpperStar (ModuleCat.{u + 1} S) T ⋙
         Sheaf.restrictScalars (Scheme.ProEt.topology T) φ ≅
@@ -882,8 +885,7 @@ noncomputable def pbcComparisonRestrict (φ : R →+* S) :
     ((Sheaf.restrictCoextendScalarsAdj T.smallEtaleTopology φ).comp
       (comparisonAdjunction (ModuleCat.{u + 1} R) T))).symm (Iso.refl _)).symm
 
-/-- Exact descent of the preceding canonical restriction comparison.
-Source: Stacks 03D2 and 06YY. -/
+/-- Exact descent of the preceding canonical restriction comparison. -/
 noncomputable def pbcDerivedComparisonRestrict (φ : R →+* S) :
     (comparisonUpperStar (ModuleCat.{u + 1} S) T).mapDerivedCategory ⋙
         Sheaf.derivedRestrictScalars (Scheme.ProEt.topology T) φ ≅
@@ -901,8 +903,7 @@ noncomputable def pbcDerivedComparisonRestrict (φ : R →+* S) :
       (Functor.mapDerivedCategoryCompIso (Sheaf.restrictScalars T.smallEtaleTopology φ)
         (comparisonUpperStar (ModuleCat.{u + 1} R) T)).symm
 
-/-- The canonical scalar-extension comparison is the mate of the restriction comparison.
-Source: Stacks 07A4. -/
+/-- The canonical scalar-extension comparison is the mate of the restriction comparison. -/
 noncomputable def pbcComparisonReductionMap (φ : R →+* S) :
     (comparisonUpperStar (ModuleCat.{u + 1} R) T).mapDerivedCategory ⋙
         pbcFixedScalarExtension (Scheme.ProEt.topology T) φ ⟶
@@ -998,8 +999,7 @@ private theorem computed_comparison_mate_isIso (φ : R →+* S) :
     (comparisonUpperStar (ModuleCat.{u + 1} S) T)
     (pbcComparisonRestrict T φ)
 
-/-- The canonical mate is invertible, with no flatness condition on the ring map.
-Source: Stacks 07A4 and 0G7E. -/
+/-- The canonical mate is invertible, with no flatness condition on the ring map. -/
 theorem pbcComparisonReductionMap_isIso (φ : R →+* S) :
     IsIso (pbcComparisonReductionMap T φ) := by
   have := computed_comparison_mate_isIso T φ
@@ -1013,8 +1013,7 @@ theorem pbcComparisonReductionMap_isIso (φ : R →+* S) :
     (scalarDerivedAdjunctionData (Scheme.ProEt.topology T) φ).adjunction
     (pbcDerivedComparisonRestrict T φ).inv
 
-/-- The source identification in the witness compatibility equation.
-Source: Stacks 07A4. -/
+/-- The source identification in the witness compatibility equation. -/
 noncomputable def pbcComparisonReduction (φ : R →+* S) :
     (comparisonUpperStar (ModuleCat.{u + 1} R) T).mapDerivedCategory ⋙
         pbcFixedScalarExtension (Scheme.ProEt.topology T) φ ≅

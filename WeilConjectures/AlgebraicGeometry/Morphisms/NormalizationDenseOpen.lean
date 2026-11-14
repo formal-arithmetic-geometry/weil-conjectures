@@ -15,7 +15,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.NormalDenseOpenIntegralSectio
 /-!
 # Relative normalization in a dense open of a normal scheme
 
-Source: Stacks Project, Tags 0357, 035I and 0AB1
+## References
+
+* Stacks Project, Tags 0357, 035I and 0AB1
+* Stacks Project, Tags 0357 (normal components), 035I (relative normalization), and 0AB1 (integral
+  birational maps to normal schemes)
 -/
 
 @[expose] public section
@@ -24,10 +28,7 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
-/-- A locally Noetherian normal scheme is its own relative normalization in a dense open.
-
-Source: Stacks Project, Tags 0357 (normal components), 035I (relative normalization),
-and 0AB1 (integral birational maps to normal schemes). -/
+/-- A locally Noetherian normal scheme is its own relative normalization in a dense open. -/
 theorem isIso_fromNormalization_denseOpen
     {X : Scheme.{u}} [IsLocallyNoetherian X]
     (hnormal : ∀ z : X, IsDomain (X.presheaf.stalk z) ∧

@@ -14,7 +14,10 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedThickenin
 
 /-! # Finite-order approximation on the punctured zero section
 
-Source: Stacks Project, Tag 0EY9, first displayed calculation at a fixed index.
+## References
+
+* Stacks Project, Tag 0EY9, first displayed calculation at a fixed index
+* Stacks Project, the first displayed calculation, at a fixed index before taking inverse limits
 -/
 
 @[expose] public section
@@ -24,10 +27,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- A section can be represented by a power series to any fixed finite order
-along the punctured zero section.
-
-Source: Stacks Project, the first displayed calculation, at a fixed index before taking inverse
-limits. -/
+along the punctured zero section. -/
 theorem exists_powerSeries_punctured_finite_order_approximation
     (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]
     (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth (R := A) A)

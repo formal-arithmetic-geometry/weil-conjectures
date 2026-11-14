@@ -15,7 +15,11 @@ import WeilConjectures.RingTheory.PowerSeriesCombinedIdealCoefficients
 
 /-! # Detection of variable-ideal powers on the punctured zero section
 
-Source: Stacks Project, Tag 0EY9, first displayed calculation at a fixed index.
+## References
+
+* Stacks Project, Tag 0EY9, first displayed calculation at a fixed index
+* Stacks Project, the first displayed calculation at a fixed index, and the subsequent ring
+  comparison
 -/
 
 @[expose] public section
@@ -25,10 +29,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- Membership in a fixed power of the variables ideal is detected by germs
-of the corresponding global section along the punctured zero section.
-
-Source: Stacks Project, the first displayed calculation at a fixed index, and the subsequent ring
-comparison. -/
+of the corresponding global section along the punctured zero section. -/
 theorem powerSeries_mem_variables_pow_of_punctured_germs
     (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]
     (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth (R := A) A)

@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.RationalP1.DerivedCalculationInstances
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 /-! # Composition of shifted rational Tate-line comparisons
 
-Source: Cartesian coefficients and twists, followed by the canonical degree-zero
-and shift comparisons. This is the composition calculation used by the rational
+This is the composition calculation used by the rational
 projective-line square, separated to keep individual file checking bounded.
 -/
 
@@ -102,9 +101,7 @@ private theorem single_line_comp
 /-- The canonical comparison for a composite equals the two successive comparisons,
 after the canonical derived compositor. Lift the prescribed underived composition
 law by the degree-zero single functor and its exact comparison, then apply naturality
-of the canonical shift comparison at shift 2.
-Source: Cartesian coefficients and twists; canonical-map compatibilities in the
-second rational projective-line triangle. -/
+of the canonical shift comparison at shift 2. -/
 theorem shifted_line_comparison_comp
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)

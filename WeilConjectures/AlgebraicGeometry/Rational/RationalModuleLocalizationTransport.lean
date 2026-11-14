@@ -19,6 +19,10 @@ import WeilConjectures.Mathlib.CategoryTheory.Linear.LinearFunctor
 /-! # Transport of rational module localization
 
 The completed presentation is compared with the continuous coefficient presentation.
+
+## References
+
+* Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2)
 -/
 
 @[expose] public noncomputable section
@@ -302,8 +306,7 @@ private theorem completedFractionDescent (X : Scheme.{u}) [IsNoetherian X]
             (transportFractionFunctor_integral t
               (pbcRationalCoefficientEquiv l E).toRingHom H hH K L f)))
 
-/-- Exact derived localization and fraction descent in the completed presentation.
-Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2). -/
+/-- Exact derived localization and fraction descent in the completed presentation. -/
 theorem rationalModuleLocalizationTransport (X : Scheme.{u}) [IsNoetherian X]
     [Fact (∃ n : ℕ, topologicalKrullDim X ≤ n)]
     [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))]

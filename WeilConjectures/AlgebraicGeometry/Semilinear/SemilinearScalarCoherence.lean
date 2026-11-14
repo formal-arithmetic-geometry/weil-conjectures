@@ -12,7 +12,12 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # Scalar coherence for derived systems
 
-Source: Zheng, Construction 4.1 and Proposition 4.17; Stacks Tags 06YY, 07A4, 07A6 and 08J9.
+## References
+
+* Zheng, Construction 4.1 and Proposition 4.17
+* Stacks Tags 06YY, 07A4, 07A6 and 08J9
+* Zheng Construction 4.1
+* Stacks 06YY and 07A6
 -/
 
 @[expose] public noncomputable section
@@ -36,8 +41,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   (B : ℕ → Sheaf J CommRingCat.{max c v r})
   (τ : ∀ n : ℕ, B (n + 1) ⟶ B n)
 
-/-- The scalar adjunctions and their two composition compatibilities.
-Source: Zheng Construction 4.1; Stacks 06YY and 07A6. -/
+/-- The scalar adjunctions and their two composition compatibilities. -/
 structure SystemScalarCoherence where
   /-- Actual derived scalar extension for every composite coefficient homomorphism. -/
   scalar : ∀ {m n : ℕ} (h : n ≤ m),
@@ -267,8 +271,7 @@ private theorem derived_cocycle {l m n : ℕ} (h : n ≤ m) (k : m ≤ l)
   exact (Iso.eq_comp_inv ((restrictionComposition J B τ h k).app
     ((e J B τ n).obj M))).2 (by simpa only [Iso.app_hom, Category.assoc] using hh)
 
-/-- Normalized scalar adjunctions and the reduction cocycle, without tensor or Hom data.
-Source: Zheng Construction 4.1; Stacks 06YY and 07A6. -/
+/-- Normalized scalar adjunctions and the reduction cocycle, without tensor or Hom data. -/
 theorem systemScalarCoherence_nonempty :
     Nonempty (SystemScalarCoherence.{c, v, r} J B τ) := by
   classical

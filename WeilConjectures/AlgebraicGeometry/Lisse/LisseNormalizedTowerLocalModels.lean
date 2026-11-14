@@ -16,7 +16,11 @@ import WeilConjectures.RingTheory.AdicCompletionNoetherian
 
 /-! # Reconstruction of a lisse normalized tower
 
-Source: Stacks Tags 09BV, 09AV, and bounded finite truncations.
+## References
+
+* Stacks Tags 09BV, 09AV, and bounded finite truncations
+* Stacks, Tag 09BV
+* Tags 09AV and 066E
 -/
 
 @[expose] public noncomputable section
@@ -59,9 +63,7 @@ private theorem reduction_transition_naturality (X : Scheme.{u})
   exact (pbcDerivedRestrictComp φ ψ χ h).inv.naturality ((pbcDerivedExtend χ).map f)
 
 /-- On an immersed lisse stratum a normalized tower has a single bounded local
-completed-coefficient model, with every forward quotient square.
-
-Source: Stacks, Tag 09BV; Tags 09AV and 066E. -/
+completed-coefficient model, with every forward quotient square. -/
 theorem lisseNormalizedTower_local_models
     (X Y : Scheme.{u}) [IsNoetherian X] (g : Y ⟶ X) [IsImmersion g]
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (M : AdicTower X d)

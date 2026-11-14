@@ -14,7 +14,9 @@ import Mathlib.Algebra.Category.Grp.Zero
 /-!
 # Vanishing of pro-etale shriek sections near a disjoint closed subset
 
-Source: Stacks Project, Tag 09AG.
+## References
+
+* Stacks Project, Tag 09AG
 -/
 
 @[expose] public section

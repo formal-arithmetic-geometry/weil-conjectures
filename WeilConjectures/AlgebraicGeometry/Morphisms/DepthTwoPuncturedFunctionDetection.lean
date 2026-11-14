@@ -14,7 +14,11 @@ public import Mathlib.RingTheory.Nakayama
 
 /-! # Detecting functions on the punctured spectrum of a depth-two local ring
 
-Source: Stacks Project, Tags 0311 and 00LL.
+## References
+
+* Stacks Project, Tags 0311 and 00LL
+* Stacks Project, Tags 0311 and 00LL, detection at associated primes and regular elements avoiding
+  associated primes
 -/
 
 @[expose] public section
@@ -50,10 +54,7 @@ private theorem depth_zero_of_maximal_associated
     exact False.elim (hunion hxreg)
 
 /-- A function on a depth-two local affine scheme is detected by its germs away
-from the closed point.
-
-Source: Stacks Project, Tags 0311 and 00LL, detection at associated primes
-and regular elements avoiding associated primes. -/
+from the closed point. -/
 theorem eq_zero_of_depth_two_punctured_germs
     (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]
     (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth (R := A) A)

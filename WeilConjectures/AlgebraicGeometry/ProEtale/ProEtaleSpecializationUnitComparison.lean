@@ -74,6 +74,10 @@ The affine argument uses the sheafification helpers of
 adapts the site calculation of
 `WeilConjectures.SixFunctors.ProEtale.BaseChange.WeaklyEtale` to the finite-coefficient
 API, avoiding its incompatible duplicate upper/lower-star imports.
+
+## References
+
+* Stacks Project, Tag 09BL, (2), and Tag 09AC, localization and unit identification
 -/
 
 @[expose] public section
@@ -491,8 +495,6 @@ private theorem affine_closed_square {X Z : Scheme.{u}}
 /-- Once the affine lift's counit at the identity object is invertible,
 projective evaluation gives the actual inverse-image unit isomorphism on V.
 No specialization assumption is made in this comparison lemma.
-
-Source: Stacks Project, Tag 09BL, (2), and Tag 09AC, localization and unit identification.
 
 Proof. First transfer projective evaluation from B to r(B). A locally surjective
 map admits a lift over a single affine surjective cover of r(B). The lift functor

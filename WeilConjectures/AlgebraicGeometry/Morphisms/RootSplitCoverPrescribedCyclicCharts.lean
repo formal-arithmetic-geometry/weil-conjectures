@@ -17,8 +17,12 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleRegularDivisorBaseChange
 /-!
 # Cyclic orbit charts for a cover split by a root extension
 
-Source: Stacks Project, Tag 0EYG, final paragraph on intermediate root extensions,
-and finite etale descent (Tags 02LA and 02VN).
+## References
+
+* Stacks Project, Tag 0EYG, final paragraph on intermediate root extensions, and finite etale
+  descent (Tags 02LA and 02VN)
+* Stacks Project, Tag 0EYG, intermediate-root and descent paragraphs
+* Tags 02LA and 02VN for faithfully flat descent
 -/
 
 @[expose] public section
@@ -27,10 +31,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- Classification of a root-split cover retaining the specified equation.
-
-Source: Stacks Project, Tag 0EYG, intermediate-root and descent paragraphs;
-Tags 02LA and 02VN for faithfully flat descent. -/
+/-- Classification of a root-split cover retaining the specified equation. -/
 theorem root_split_cover_prescribed_cyclic_charts
     (R : CommRingCat.{u}) (g : R) (n : ℕ) (hn : 0 < n ∧ IsUnit (n : R))
     [IsRegularRing R] (hg : IsSMulRegular R g)

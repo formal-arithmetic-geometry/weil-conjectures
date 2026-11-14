@@ -24,11 +24,13 @@ public import WeilConjectures.AlgebraicGeometry.RelativeKummerExchangeGenerators
 /-!
 # Exchange on normalized global generators
 
-Source: Stacks Tags 0736 and 072W.
-
 Global classes are derived morphisms out of the constant free rank-one module sheaf.
 Sections are sheaf morphisms out of that same sheaf, equivalently their value on 1.
 All comparisons below are the canonical single, constant, shift and adjunction comparisons.
+
+## References
+
+* Stacks Tags 0736 and 072W
 -/
 
 -- After pruning, this module only keeps private declarations.

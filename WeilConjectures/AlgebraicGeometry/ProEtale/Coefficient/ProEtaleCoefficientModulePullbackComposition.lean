@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Coefficient.ProEtaleCoe
 
 /-! # Adjunction-normalized composition with independent coefficient universes
 
-Source: Stacks Project, Tag 03D8.
+## References
+
+* Stacks Project, Tag 03D8
 -/
 
 -- After pruning, this module only keeps private declarations.

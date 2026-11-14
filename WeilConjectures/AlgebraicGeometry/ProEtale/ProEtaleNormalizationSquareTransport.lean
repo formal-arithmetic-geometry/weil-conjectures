@@ -11,8 +11,13 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictSc
 
 /-! # Localization transports pro-etale coefficient-normalization squares
 
-Source: Stacks Tags 03DA and 098K. All coefficient and localization comparisons
+All coefficient and localization comparisons
 are the canonical derived mates.
+
+## References
+
+* Stacks Tags 03DA and 098K
+* Stacks Tags 03DA and 098K, pasting coefficient and localization mates
 -/
 
 @[expose] public noncomputable section
@@ -24,7 +29,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 variable (X : Scheme.{u}) (B B' : Type (u + 1)) [CommRing B] [CommRing B']
 /-- Restrict the comparison image of a normalization arrow to a slice and use the
-canonical coefficient comparison. Source: Stacks Tags 03DA and 098K. -/
+canonical coefficient comparison. -/
 noncomputable def sliceComparisonNormalizationArrow (φ : B →+* B')
     {A : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B))}
     {A' : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B'))}
@@ -343,7 +348,7 @@ end TransportHelpers
 namespace AlgebraicGeometry.Scheme
 
 /-- A coefficient-normalization square on the pro-etale slice transports to the
-source scheme. Source: Stacks Tags 03DA and 098K, pasting coefficient and localization mates. -/
+source scheme. -/
 theorem sourceSliceNormalization_transport
     (X : Scheme.{u}) {R S : Type (u + 1)} [CommRing R] [CommRing S] (q : R →+* S)
     (A D : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)))

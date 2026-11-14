@@ -36,6 +36,10 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 
 /-!
 # Pro-etale restriction preserves injectives
+
+## References
+
+* Stacks Project, small-site localization and derived sections
 -/
 
 @[expose] public section
@@ -51,8 +55,7 @@ namespace AlgebraicGeometry
 
 /-- The sectionwise comparison evaluates restriction at the identity of `W`.
 Its components are the sheaf maps along the canonical identity-underlying-scheme
-isomorphism from `W` to the image of that terminal object under composition with `W.hom`.
-Source: Stacks Project, small-site localization and derived sections. -/
+isomorphism from `W` to the image of that terminal object under composition with `W.hom`. -/
 noncomputable def proEtaleLocalizationSectionsIso {X : Scheme.{u}} (W : X.ProEt)
     (Λ : Type (u + 1)) [Ring Λ] :
     ProEtale.sectionsFunctor (ModuleCat.{u + 1} Λ) W ≅

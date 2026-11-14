@@ -14,7 +14,10 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PrincipalThickeningSectionsLi
 
 /-! # Eventual scalar image on punctured principal thickenings
 
-Source: Stacks Project, Tags 0H3E, 0BK0 and 0AVY.
+## References
+
+* Stacks Project, Tags 0H3E, 0BK0 and 0AVY
+* Stacks Project, Tags 0H3E (Example 20.39.3), 0BK0 (Lemma 51.8.2) and 0AVY (Lemma 47.11.1)
 -/
 
 @[expose] public section
@@ -23,9 +26,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- Restriction across `k` consecutive thickenings, constructed by composition.
-
-Source: the transition maps of `FiniteEtale.Adic.openThickening`. -/
+/-- Restriction across `k` consecutive thickenings, constructed by composition. -/
 noncomputable def puncturedPrincipalSectionRestriction
     {R S : Type u} [CommRing R] [CommRing S] (f : R →+* S)
     (W : (Spec (.of R)).Opens) (n : ℕ) :
@@ -55,10 +56,7 @@ private theorem scalar_power_torsion_bound
   · have h : j ≤ c := by omega
     exact K.monotone h hs
 
-/-- At any fixed level, sufficiently late sections restrict into the scalar image.
-
-Source: Stacks Project, Tags 0H3E (Example 20.39.3), 0BK0 (Lemma 51.8.2)
-and 0AVY (Lemma 47.11.1). -/
+/-- At any fixed level, sufficiently late sections restrict into the scalar image. -/
 theorem punctured_principal_eventual_scalar_image
     (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R]
     (g : R) (hg : g ∈ IsLocalRing.maximalIdeal R)

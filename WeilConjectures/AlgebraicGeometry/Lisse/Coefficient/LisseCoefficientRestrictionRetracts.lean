@@ -9,7 +9,13 @@ public import WeilConjectures.AlgebraicGeometry.Lisse.LisseAdicSheaves
 public import Mathlib.CategoryTheory.Retract
 import WeilConjectures.AlgebraicGeometry.Lisse.Coefficient.LisseCoefficientRestrictionSeparability
 
-/-! Finite coefficient descent of lisse rational sheaves. -/
+/-! Finite coefficient descent of lisse rational sheaves.
+
+## References
+
+* Deligne, Weil II (1.1.1) b)-d), pp. 146-147
+* Stacks Project, Algebra, finite separable case
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -39,7 +45,6 @@ private theorem lisseRational_retract_of_integral_multiple
 set_option linter.unusedSectionVars false in
 /-- Every finite-coefficient rational sheaf is a retract of an extension from the
 least coefficient field.
-Source: Deligne, Weil II (1.1.1) b)-d), pp. 146-147; Stacks Project, Algebra, finite separable case.
 -/
 theorem lisseCoefficientRestriction_retracts
     (E₀ : Padic.FiniteCoefficientFields l K) :

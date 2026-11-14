@@ -73,9 +73,6 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
 
 /-! # Normalized tensors on the existing pro-etale module functors
 
-Source: Stacks Project, Sites, Tag 00YV; Modules on Sites, Tags 03EK, 03EL, 03D7, 03DI and 03DJ;
-Cohomology on Sites, Tags 07A4, 07A6 and 0B56.
-
 ## Main definitions
 
 - `coefficientMap`: the structural section-ring map adjunct to the condensed coefficient map.
@@ -83,6 +80,13 @@ Cohomology on Sites, Tags 07A4, 07A6 and 0B56.
 - `ordinaryTensorComparison`, `totalComparison`: uniquely normalized tensor comparisons.
 - `pushforwardComposition`, `pullbackComposition`: geometric pasting and its adjunction mate.
 - `extension`, `openAdjunction`: the actual open extension and restriction adjunction.
+
+## References
+
+* Stacks Project, Sites, Tag 00YV
+* Modules on Sites, Tags 03EK, 03EL, 03D7, 03DI and 03DJ
+* Cohomology on Sites, Tags 07A4, 07A6 and 0B56
+* Stacks 03DJ
 -/
 
 @[expose] public noncomputable section
@@ -811,21 +815,18 @@ attribute [local instance 4000] total_preserves
 
 set_option backward.isDefEq.respectTransparency true in
 -- The concrete total tensors carry large category and universe instances.
-/-- Extension by zero is additive, since all its three specified factors are additive.
-Source: Stacks 03DJ. -/
+/-- Extension by zero is additive, since all its three specified factors are additive. -/
 @[instance] theorem extension_additive {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] : (extension Λ j).Additive := by
   exact (openAdjunction Λ j).left_adjoint_additive
 
-/-- Extension by zero preserves finite limits.
-Source: Stacks 03DJ. -/
+/-- Extension by zero preserves finite limits. -/
 @[instance] theorem extension_preservesFiniteLimits {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] : PreservesFiniteLimits (extension Λ j) := by
   exact ((InternalModuleOperations.internal_module_operations_transport Λ).2.2.2.2.1 j).1.mp
     (inferInstance : PreservesFiniteLimits (CondensedRing.openImmersionLowerShriek Λ j))
 
-/-- Extension by zero preserves finite colimits.
-Source: Stacks 03DJ. -/
+/-- Extension by zero preserves finite colimits. -/
 @[instance] theorem extension_preservesFiniteColimits {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] : PreservesFiniteColimits (extension Λ j) := by
   let := (openAdjunction Λ j).isLeftAdjoint

@@ -8,7 +8,13 @@ module
 public import WeilConjectures.AlgebraicGeometry.Relative.RelativeFiniteCoefficientTransport
 import all WeilConjectures.AlgebraicGeometry.Pbc.PbcFinitePullbackConstructibility
 
-/-! # Identification of the transported constant coefficient model -/
+/-! # Identification of the transported constant coefficient model
+
+## References
+
+* Stacks Project, Modules on Sites, Tag 03CY
+* Sites, Tag 03A0
+-/
 
 @[expose] public noncomputable section
 
@@ -250,8 +256,6 @@ private def restrictionTransportIso {X Y : Scheme.{u}} (g : Y ⟶ X)
 
 /-- The explicit relative transport identifies the inverse-image constant module
 with the constant coefficient module on every small-site slice.
-
-Source: Stacks Project, Modules on Sites, Tag 03CY; Sites, Tag 03A0
 
 This is the universal-property comparison of the two sheafifications. It records
 that the scalar action is transported along the canonical coefficient isomorphism,

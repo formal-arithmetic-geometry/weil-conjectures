@@ -220,8 +220,7 @@ scoped elab "coefficient_finish " h:ident : tactic => withMainContext do
     goal.assign (← mkAppM ``eq_of_heq #[h])
     return []
 
-/-- The coefficient/exchange rectangle, with its category and functor instances fixed.
-Source: coefficient changes (2)--(3), the counit mate rectangle. -/
+/-- The coefficient/exchange rectangle, with its category and functor instances fixed. -/
 def CoefficientExchangeSquare
     {C₁ C₂ C₃ C₄ D₁ D₂ D₃ D₄ : Type w}
     [Category.{v} C₁] [Category.{v} C₂] [Category.{v} C₃] [Category.{v} C₄]
@@ -235,8 +234,7 @@ def CoefficientExchangeSquare
     αG.app (R.obj K) ≫ Ge.map (δ.app K) ≫ Be.app (T₂.obj K) =
       T₃.map (B.app K) ≫ δ'.app (H.obj K) ≫ Se.map (αH.app K)
 
-/-- A naturality square for an arrow, with its functors fixed before taking components.
-Source: coefficient changes (2)--(3), naturality of pullback comparisons. -/
+/-- A naturality square for an arrow, with its functors fixed before taking components. -/
 def PullArrowSquare
     {C D C' D' : Type w} [Category.{v} C] [Category.{v} D]
     [Category.{v} C'] [Category.{v} D']
@@ -246,8 +244,7 @@ def PullArrowSquare
     (n : U.obj W ⟶ W') : Prop :=
   α.hom.app V ≫ F'.map m ≫ β' = U.map β ≫ n
 
-/-- A scalar endpoint square, keeping the pullback and scalar functors fixed.
-Source: coefficient changes (2)--(3), Cartesian endpoint comparisons. -/
+/-- A scalar endpoint square, keeping the pullback and scalar functors fixed. -/
 def PullEndpointSquare
     {C D C' D' : Type w} [Category.{v} C] [Category.{v} D]
     [Category.{v} C'] [Category.{v} D']
@@ -257,8 +254,7 @@ def PullEndpointSquare
     (cW : U.obj W ⟶ W') : Prop :=
   α.app K ≫ He.map cK ≫ e' = U.map e ≫ cW
 
-/-- Postcompose the native exchange rectangle with compatible line endpoints.
-Source: coefficient changes (2)--(3), pasting and naturality. -/
+/-- Postcompose the native exchange rectangle with compatible line endpoints. -/
 theorem coefficient_exchange_line
     {C₁ C₂ C₃ C₄ D₁ D₂ D₃ D₄ : Type w}
     [Category.{v} C₁] [Category.{v} C₂] [Category.{v} C₃] [Category.{v} C₄]
@@ -284,8 +280,7 @@ theorem coefficient_exchange_line
   rw [he, Se.map_comp]
   rw [← reassoc_of% (δ'.naturality e)]
 
-/-- Paste the unit and exchange squares through arbitrary right-derived model isomorphisms.
-Source: coefficient changes (2)--(3), naturality on the input adjunct. -/
+/-- Paste the unit and exchange squares through arbitrary right-derived model isomorphisms. -/
 theorem transport_scalar_models
     {C D C' D' : Type w} [Category.{v} C] [Category.{v} D]
     [Category.{v} C'] [Category.{v} D']

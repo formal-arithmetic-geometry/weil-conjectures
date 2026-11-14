@@ -617,8 +617,7 @@ variable {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
   [iY : Fact (∀ t : Y, IsUnit (l : Y.presheaf.stalk t))]
 
 /-- The actual rationalized direct-image operations form a coherent exact family,
-with the prescribed normalized scalar comparisons at every pair of stages.
-Source: rational transport and finite scalar extension. -/
+with the prescribed normalized scalar comparisons at every pair of stages. -/
 theorem pbcDirectImageCoherentFamily (f : X ⟶ Y)
     (pres : ∀ (E : Padic.FiniteCoefficientFields l Ω)
       (K : pbcIntegralStage l Ω X E),

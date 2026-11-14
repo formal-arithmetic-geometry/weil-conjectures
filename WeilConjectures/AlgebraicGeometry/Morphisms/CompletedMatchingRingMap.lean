@@ -10,7 +10,11 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionMat
 
 /-! # The completed matching-ring comparison
 
-Source: Stacks Project, Tags 05ER and 05EU.
+## References
+
+* Stacks Project, Tags 05ER and 05EU
+* Stacks Project, Tag 05ER, definition of the comparison
+* Stacks Project, Tags 05ER (the comparison Ψ) and 05EU (algebra structure)
 -/
 
 @[expose] public section
@@ -25,8 +29,7 @@ variable {E : Scheme.{u}} {s : E ⟶ Spec
   (.of (AdicCompletion (IsLocalRing.maximalIdeal A) A))}
 variable (D : CompletionGluingData A U q E s)
 
-/-- The second matching projection and the completed structural map agree over A.
-Source: Stacks Project, Tag 05ER, definition of the comparison. -/
+/-- The second matching projection and the completed structural map agree over A. -/
 theorem completedRingMap_condition :
     D.baseMap ≫ pullback.snd
       (pullback.fst q (completionSpecMap A ∣_ U)).appTop D.toCompleted.appTop =
@@ -38,8 +41,7 @@ theorem completedRingMap_condition :
 
 /-- The canonical scalar-extension map from matching sections to completed sections.
 The ring pushout is the tensor product over A; its maps are the second matching
-projection and the structural map C → Γ(E).
-Source: Stacks Project, Tags 05ER (the comparison Ψ) and 05EU (algebra structure). -/
+projection and the structural map C → Γ(E). -/
 noncomputable def completedRingMap :
     pushout D.baseMap (CommRingCat.ofHom
       (algebraMap A (AdicCompletion (IsLocalRing.maximalIdeal A) A))) ⟶ Γ(E, ⊤) :=

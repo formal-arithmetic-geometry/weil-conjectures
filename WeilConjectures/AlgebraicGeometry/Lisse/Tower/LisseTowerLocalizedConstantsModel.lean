@@ -14,11 +14,14 @@ import WeilConjectures.SixFunctors.ProEtale.Comparison.ConstantSheaf
 
 /-! # Constant models for localized fixed realization
 
-Source: Stacks Project, Modules on Sites, Tags 03CY and 03DA; Sites, Tag 0H7J;
-Cohomology on Sites, Tag 06YY.
-
 This is the model-existence part of
 `lem-weil-pbc-lisse-tower-localized-constants`.
+
+## References
+
+* Stacks Project, Modules on Sites, Tags 03CY and 03DA
+* Sites, Tag 0H7J
+* Cohomology on Sites, Tag 06YY
 -/
 
 @[expose] public noncomputable section
@@ -400,8 +403,7 @@ private def derivedComparisonConstantIso (S : Scheme.{u})
 /-- Constant complexes admit the localized fixed-realization models used in the
 constant part of the proper-base-change amplification.
 
-Source: Stacks Project, Modules on Sites, Tags 03CY and 03DA; Sites, Tag 0H7J;
-Cohomology on Sites, Tag 06YY.  The proof constructs the ordinary constant-sheaf
+The proof constructs the ordinary constant-sheaf
 comparison by the constant-sheaf and inverse-image adjunctions, transports scalars
 through the finite coefficient comparison, applies the resulting exact comparison
 termwise to complexes, and localizes.  The construction is natural in every

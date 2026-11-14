@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineTwist
 /-!
 # Transport of a polynomial Proj twist to the projective line
 
-Source: Stacks Project, Constructions, Definitions 01M6, 01MN and Lemma 01M7.
+## References
+
+* Stacks Project, Constructions, Definitions 01M6, 01MN and Lemma 01M7
 -/
 
 @[expose] public section
@@ -28,8 +30,7 @@ namespace AlgebraicGeometry.Proj
 
 attribute [local instance] MvPolynomial.gradedAlgebra
 
-/-- Any chart-compatible comparison transports the Proj twist to the projective-space twist.
-Source: Stacks Project, Constructions, Definitions 01M6, 01MN and Lemma 01M7. -/
+/-- Any chart-compatible comparison transports the Proj twist to the projective-space twist. -/
 theorem proj_twist_inverse_transport (k : Type u) [Field k]
     (C : ProjectiveLine.ProjChartIsomorphism k) (d : ℤ) :
     Nonempty ((Scheme.Modules.pullback C.iso.inv).obj

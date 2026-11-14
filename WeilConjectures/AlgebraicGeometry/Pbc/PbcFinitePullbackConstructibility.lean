@@ -25,7 +25,10 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import Mathlib.CategoryTheory.Sites.CoverLifting
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 /-! # Constructible finite-coefficient module pullback
-Source: Stacks Tags 09AI and 09AL.
+
+## References
+
+* Stacks Tags 09AI and 09AL
 -/
 
 @[expose] public noncomputable section
@@ -420,8 +423,7 @@ private theorem fixedConstructible_pullback {X Y : Scheme.{u}} (g : Y ⟶ X)
       (asIso (completedFiniteCoefficientMap g d n)) hc)
 
 /-- Exact finite-coefficient module inverse image preserves intrinsic constructibility.
-No completed complex, derived category, completeness, or support interval is involved.
-Source: Stacks Tags 09AI and 09AL. -/
+No completed complex, derived category, completeness, or support interval is involved. -/
 theorem pbc_finite_pullback_constructibility
     {S T : Scheme.{u}} [IsNoetherian S] [IsNoetherian T] (g : S ⟶ T)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ)

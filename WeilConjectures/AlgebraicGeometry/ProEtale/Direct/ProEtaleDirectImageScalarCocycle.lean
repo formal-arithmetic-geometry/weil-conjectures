@@ -17,7 +17,9 @@ import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Coefficient cocycle for the ambient direct-image mate
 
-Source: Stacks Tags 07A7 and 0E47.
+## References
+
+* Stacks Tags 07A7 and 0E47
 -/
 
 @[expose] public section

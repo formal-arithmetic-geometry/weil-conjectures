@@ -12,7 +12,12 @@ import WeilConjectures.AlgebraicGeometry.Compactification.CompactificationRawUni
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 import all WeilConjectures.AlgebraicGeometry.Normalized.NormalizedDerivedUnitPasting
 
-/-! # The raw unit for a proper compactification -/
+/-! # The raw unit for a proper compactification
+
+## References
+
+* Stacks Project, Tags 0F7I and 0D6E
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -105,8 +110,7 @@ private theorem identity_mixed_unit
     Functor.leftUnitor_inv_app, Functor.whiskerRight_app, Category.id_comp]
 
 /-- The chosen proper comparison agrees with every normalized sheaf comparison after
-precomposition with the raw right-derived unit.
-Source: Stacks Project, Tags 0F7I and 0D6E. -/
+precomposition with the raw right-derived unit. -/
 theorem properCompactification_raw_unit
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]

@@ -46,14 +46,18 @@ import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 /-!
 # Flatness on an open--closed decomposition
 
-Source: Tag 09AH, Tag 095L, Tag 03ER.
-
 The two declarations below spell out the ordinary module-sheaf assertion on the
 small étale and small pro-étale sites. Étale flatness is detected on geometric
 fibers. On the pro-étale site, the intrinsic constant-ring realization transfers
 flatness to fixed-scalar sheaves, where complementary pullbacks detect the kernel
 of each tensored monomorphism. The open unit, closed counit and disjoint-range
 vanishing prove preservation by extension by zero and closed direct image.
+
+## References
+
+* Tag 09AH, Tag 095L, Tag 03ER
+* Stacks Tags 095L, 03ER and 05VD
+* Stacks Tags 09AH, 03DI and 05VD
 -/
 
 @[expose] public noncomputable section
@@ -69,7 +73,6 @@ namespace AlgebraicGeometry
 
 /-- Flatness is detected on the two members of a complementary pair on the
 small étale site; extension by zero and closed direct image preserve flatness.
-Source: Stacks Tags 095L, 03ER and 05VD.
 -/
 theorem openClosedFlatness_etale
     (A : Type (u + 1)) [CommRing A] [Finite A]
@@ -231,7 +234,6 @@ private theorem fixed_flat_detect
       ((isZero_kernel_of_mono _).of_iso (PreservesKernel.iso _ _)))
 
 /-- The same assertion for ordinary module sheaves on the small pro-étale site.
-Source: Stacks Tags 09AH, 03DI and 05VD.
 
 The coefficient is the constant finite ring sheaf.  The open object is the
 canonical pro-étale object associated to `j`; its extension by zero and the

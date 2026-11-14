@@ -21,7 +21,10 @@ import WeilConjectures.AlgebraicGeometry.Picard.PicardScalarModelCyclesRealizati
 
 /-! # A degree-zero cycle presentation for the Picard H¹ argument
 
-Source: Stacks Project, Tag 0BF2, the finite-free complexes and their chain maps.
+## References
+
+* Stacks Project, Tag 0BF2, the finite-free complexes and their chain maps
+* Stacks Project, Tag 0BF2, from the perfect models through the joint degree-one map
 -/
 
 @[expose] public section
@@ -34,8 +37,7 @@ namespace AlgebraicGeometry.Scheme
 outgoing differential vector `d`, and a joint degree-one map `b` with injective residue map,
 annihilating `d`. Degree-zero cycles on every smaller open give sections compatibly
 with restriction to the marked fibre. The assertion stops before localizing `b`,
-proving `d = 0`, or lifting scalars.
-Source: Stacks Project, Tag 0BF2, from the perfect models through the joint degree-one map. -/
+proving `d = 0`, or lifting scalars. -/
 theorem picard_h1_base_descent_cycle_presentation {X S : Scheme.{v}} (f : X ⟶ S) {n : ℕ}
     (Xi : Fin n → Scheme.{v}) (fi : ∀ i, Xi i ⟶ S)
     [Flat f] [IsProper f] [LocallyOfFinitePresentation f]

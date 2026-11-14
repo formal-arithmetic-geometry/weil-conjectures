@@ -269,7 +269,10 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Canonical.ProEtaleCanonicalTen
 /-!
 # Finite local constancy of a restricted derived tensor
 
-Source: Stacks Project, Cohomology on Sites, Tags 094H and 07A4.
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 094H and 07A4
+* Stacks Project, Cohomology on Sites, Tag 094H, and Tag 07A4
 -/
 
 @[expose] public section
@@ -921,9 +924,7 @@ private theorem intrinsic_tensor (X : Scheme.{u}) (A : Type u) [CommRing A] [Fin
 /-- A bounded-above tensor is finite locally constant after restriction whenever
 its input cohomology sheaves are finite locally constant there. Zero input cohomology
 sheaves need no local-model hypothesis. The coefficient ring is any finite commutative
-ring, and the restricting morphism is arbitrary.
-
-Source: Stacks Project, Cohomology on Sites, Tag 094H, and Tag 07A4. -/
+ring, and the restricting morphism is arbitrary. -/
 theorem proEtale_restrictedTensor_finiteLocalConstancy
     {T X : Scheme.{u}} (a : X ⟶ T) (A : Type u) [CommRing A] [Finite A]
     (K L P : CochainComplex (proEtaleRingModules T (proEtaleConstantRing T A)) ℤ)

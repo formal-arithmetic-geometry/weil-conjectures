@@ -13,7 +13,10 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 /-!
 # Exactness and the coefficient-unit normalization of the pro-etale mate
 
-Source: Stacks, Cohomology on Sites, Tags 06YU, 07A4, 07A6 and 0B56.
+## References
+
+* Stacks, Cohomology on Sites, Tags 06YU, 07A4, 07A6 and 0B56
+* Stacks Project, Tags 06YU, 07A4, 07A6 and 0B56
 -/
 
 @[expose] public noncomputable section
@@ -31,8 +34,7 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y)
   (E : DerivedCategory (proEtaleRingModules X S))
 
 /-- The two coefficient functors of the actual pro-etale projection mate are exact,
-and its natural transformation respects shifts and is invertible at the ring.
-Source: Stacks Project, Tags 06YU, 07A4, 07A6 and 0B56. -/
+and its natural transformation respects shifts and is invertible at the ring. -/
 theorem proEtaleProjectionMateExact :
     ∃ (sF : ((Functor.curryObj a.tensor).obj
         ((proEtaleRingDerivedDirectImage f R S c).obj E)).CommShift ℤ)

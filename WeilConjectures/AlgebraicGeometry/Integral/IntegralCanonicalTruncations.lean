@@ -83,9 +83,14 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ScalarTensorComparisonOf
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUniverses
 /-! # Integral canonical truncations and their conditional tower computation
 
-Source: Stacks Tags 0118 and 08J5.
 The Roos-limit formulation retains the actual quotient transitions and makes no
 choice of an unspecified derived-limit object.
+
+## References
+
+* Stacks Tags 0118 and 08J5
+* Bhatt--Scholze 4.2.8
+* Tag 07KC
 -/
 
 @[expose] public noncomputable section
@@ -526,8 +531,7 @@ theorem pbc_torCompatible_iff_flat_cohomology
   · exact pbc_flat_cohomology_torCompatible T (pbcIntegralDatum l E) K.obj
 
 omit hNoeth hDim hInv in
-/-- Exact countable products for modules over the actual completed coefficient sheaf.
-Source: Bhatt--Scholze 4.2.8. -/
+/-- Exact countable products for modules over the actual completed coefficient sheaf. -/
 theorem pbcCompletedCountableAB4Star : CountableAB4Star
     (pbcModules T (pbcAdicCompletion T d)) := by
   let : HasSheafify (ProEt.topology T) AddCommGrpCat.{u + 1} :=
@@ -556,8 +560,7 @@ theorem pbcCompletedCountableAB4Star : CountableAB4Star
     (pbcModules T (pbcAdicCompletion T d)) (Discrete ℕ)
   exact CountableAB4Star.of_hasExactLimitsOfShape_nat _
 
-/-- Countable products in the ambient derived category, fixed by their limit property.
-Source: Tag 07KC. -/
+/-- Countable products in the ambient derived category, fixed by their limit property. -/
 instance pbcCompletedDerivedCountableProducts : HasCountableProducts
     (PbcCompletedDerived T d) :=
   letI := pbcCompletedCountableAB4Star T d

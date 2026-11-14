@@ -51,6 +51,13 @@ public import WeilConjectures.AlgebraicGeometry.EffectiveCartier
 
 These are definitions of an arrow space and a compatibility predicate, with no
 existence assertion for a Kummer class and no chosen map or resolution.
+
+## References
+
+* Stacks 03D0
+* Stacks 07A6
+* Stacks 0A45 and 09A5
+* the canonical supported constant sheaf, Stacks 09A5
 -/
 
 @[expose] public noncomputable section
@@ -67,14 +74,12 @@ namespace AlgebraicGeometry.Etale
 
 open Scheme
 
-/-- Name the existing abelian structure to share its elaboration across Ext expressions.
-Source: Stacks 03D0. -/
+/-- Name the existing abelian structure to share its elaboration across Ext expressions. -/
 instance cartierAbelianPro (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) :
     Abelian (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} A)) :=
   inferInstance
 
-/-- Cache the existing small Ext instance without changing its universe or category.
-Source: Stacks 07A6. -/
+/-- Cache the existing small Ext instance without changing its universe or category. -/
 instance cartierHasExtPro (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) :
     HasExt.{u + 1} (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} A)) :=
   inferInstance
@@ -82,8 +87,7 @@ instance cartierHasExtPro (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) :
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The actual closed-support source, in fixed constant scalars.
-Source: Stacks 0A45 and 09A5. -/
+/-- The actual closed-support source, in fixed constant scalars. -/
 @[irreducible]
 def cartierSupported (n : ℕ) {D T : Scheme.{u}} (i : D ⟶ T) :
     Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (finiteTateCoefficient l E n)) :=
@@ -92,8 +96,7 @@ def cartierSupported (n : ℕ) {D T : Scheme.{u}} (i : D ⟶ T) :
       (ModuleCat.{u + 1} (finiteTateCoefficient l E n))).obj
         (ModuleCat.of (finiteTateCoefficient l E n) (finiteTateCoefficient l E n)))
 
-/-- The constant generator on the base change of a pro-etale object to the divisor.
-Source: the canonical supported constant sheaf, Stacks 09A5. -/
+/-- The constant generator on the base change of a pro-etale object to the divisor. -/
 def cartierSupportedGenerator (n : ℕ) {D T : Scheme.{u}} (i : D ⟶ T)
     (U : T.ProEtᵒᵖ) (a : finiteTateCoefficient l E n) :
     (cartierSupported l E n i).obj.obj U := by
@@ -103,8 +106,7 @@ def cartierSupportedGenerator (n : ℕ) {D T : Scheme.{u}} (i : D ⟶ T)
       (ModuleCat.of (finiteTateCoefficient l E n) (finiteTateCoefficient l E n)))).app
         ((Scheme.proEtaleBaseChange i).op.obj U) a
 
-/-- The supported restriction A_T to i_* A_D is the constant-section map.
-Source: Stacks 0A45 and 09A5. -/
+/-- The supported restriction A_T to i_* A_D is the constant-section map. -/
 @[irreducible]
 def cartierSupportedUnit (n : ℕ) {D T : Scheme.{u}} (i : D ⟶ T) :
     (constantSheaf (Scheme.ProEt.topology T)
@@ -129,8 +131,7 @@ def cartierCoefficientReduction (a b : ℕ) (h : a ≤ b) :
       ULift.ringEquiv.toRingHom)
 
 /-- A derived coefficient unit on the pro-etale site, characterized on all unbounded
-objects. This spells out tensor extension without assuming quotient flatness.
-Source: Stacks 07A6. -/
+objects. This spells out tensor extension without assuming quotient flatness. -/
 @[irreducible]
 def IsCartierDerivedScalarUnit {R S : Type (u + 1)} [CommRing R] [CommRing S]
     (φ : R →+* S) (T : Scheme.{u})

@@ -18,7 +18,11 @@ import Mathlib.AlgebraicGeometry.PullbackCarrier
 
 /-! # Images of single stabilizer components
 
-Source: Stacks Project, Tag 03SF. -/
+## References
+
+* Stacks Project, Tag 03SF
+* Stacks Project, Tag 03SF, stabilizer quotients of Galois covers
+-/
 
 @[expose] public section
 universe u
@@ -134,9 +138,7 @@ private theorem orbit_deck_cover
   simp
 
 set_option linter.unusedVariables false in
-/-- Membership in one descended component is exactly membership in its label orbit.
-
-Source: Stacks Project, Tag 03SF, stabilizer quotients of Galois covers. -/
+/-- Membership in one descended component is exactly membership in its label orbit. -/
 theorem affine_torsor_component_image_orbit
     (R H : CommRingCat.{u}) (g : R) (ι : R →+* H)
     (C : Type u) [CommRing C] [Algebra H C] [IsDomain C]

@@ -19,8 +19,11 @@ import WeilConjectures.RingTheory.ProperBaseChange.NormalRingFieldExtensionDesce
 /-!
 # Testing geometric normality over a perfect purely inseparable extension
 
-Source: Stacks Project, Varieties, Tag 038O, equivalence (2) and (6), and Algebra, Tag 046W,
-uniqueness of the perfect closure.
+## References
+
+* Stacks Project, Varieties, Tag 038O, equivalence (2) and (6), and Algebra, Tag 046W, uniqueness of
+  the perfect closure
+* Stacks Project, Varieties, Tag 038O, (2) iff (6), and Algebra, Tag 046W
 -/
 
 @[expose] public section
@@ -134,9 +137,7 @@ private theorem normal_spec_iff (A : Type u) [CommRing A] :
 set_option linter.unusedVariables false in
 /-- A scheme becomes normal over a perfect purely inseparable extension exactly when it
 becomes normal over every field extension. Normality means that every stalk is an
-integrally closed domain; the scheme need not be integral or nonempty.
-
-Source: Stacks Project, Varieties, Tag 038O, (2) iff (6), and Algebra, Tag 046W. -/
+integrally closed domain; the scheme need not be integral or nonempty. -/
 theorem normal_stalks_perfectClosure_iff
     (k K : Type u) [Field k] [Field K] [Algebra k K] [PerfectField K]
     (hpower : ∀ a : K, ∃ n : ℕ, ∃ b : k, algebraMap k K b = a ^ (ringExpChar k ^ n))

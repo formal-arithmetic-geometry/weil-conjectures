@@ -17,8 +17,6 @@ import all WeilConjectures.SmoothPurity.Integral.Reduction.IntegralReductionTowe
 /-!
 # Inverse image to finite and completed derived pullback
 
-Source: Stacks Project, Tags 03D6 and 08TC; Bhatt--Scholze, Section 6.5.
-
 Inverse image is expressed in its canonical sectionwise model for an isomorphism.
 All coefficient sheaves, finite reductions, pullbacks, transitions, and the Roos
 complex are the recorded constructions. A map chosen below has a unique prescribed
@@ -34,6 +32,23 @@ the good representative and resolution used to evaluate the recorded completed p
 - `inverseImagePullbackComparisonFiniteIntrinsic`: its recorded intrinsic presentation.
 - `inverseImageRoosComparisonComplex`: the compatible reductions with zero homotopy.
 - `inverseImagePullbackComparison`: the integral map for the chosen resolution.
+
+## References
+
+* Stacks Project, Tags 03D6 and 08TC
+* Bhatt--Scholze, Section 6.5
+* Stacks Tags 03D2 and 00YV
+* Stacks Tag 03D6
+* Stacks Tags 03CO and 03D6
+* Stacks Tags 03CO and 0H7J
+* Stacks Tag 03CO
+* Stacks Tags 09A5, 00WX and 03CO
+* Stacks Tag 05RU
+* Stacks Tags 03D6 and 04JC
+* Stacks Tag 04JC
+* Stacks Tags 03D6 and 00YV
+* Stacks Tags 03D6 and 08TC
+* Stacks Tag 08TC
 -/
 
 @[expose] public noncomputable section
@@ -53,8 +68,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The coefficient-sized pullback is the recorded intrinsic finite pullback,
 with the canonical unit-preserving identification of left adjoints. This comparison
-uses the same constant-section direct image on both sides.
-Source: Stacks Tags 03D2 and 00YV. -/
+uses the same constant-section direct image on both sides. -/
 def inverseImageFiniteIntrinsicPullbackComparison {S T : Scheme.{t}} (f : S ⟶ T)
     (A : Type t) [CommRing A] [Finite A] :
     coefficientProEtaleModulePullback.{t, t} f (CommRingCat.of (ULift.{t + 1, t} A)) ≅
@@ -63,15 +77,13 @@ def inverseImageFiniteIntrinsicPullbackComparison {S T : Scheme.{t}} (f : S ⟶ 
     (CommRingCat.of (ULift.{t + 1, t} A))).leftAdjointUniq
       (sfIntrinsicConstantModuleAdjunction f A)
 
-/-- The finite constant coefficient structure map, in the sectionwise inverse-image model.
-Source: Stacks Tag 03D6. -/
+/-- The finite constant coefficient structure map, in the sectionwise inverse-image model. -/
 abbrev inverseImageFiniteCoefficientMap (n : ℕ) :=
   isoSectionwiseConstantMap g
     (CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionRing l E (n + 1))))
 
 /-- The prescribed components of the completed structure map are inverse images of
-limit projections followed by the constant-section comparison.
-Source: Stacks Tags 03CO and 03D6. -/
+limit projections followed by the constant-section comparison. -/
 def inverseImageCompletedCoefficientComponent (n : ℕ) :=
   (isoSectionwiseInverseImage g RingCat.{max u (t + 1)}).map
       (limit.π (integralCoefficientSheafSystem l E Y) (op n)) ≫
@@ -121,8 +133,7 @@ private def coefficientDiagramMap :
           ((Padic.coefficientExtensionTransition l E (n + 1)).comp
             (ULift.ringEquiv : ULift.{t + 1} _ ≃+* _).toRingHom))))
 
-/-- The prescribed components commute with every coefficient reduction.
-Source: Stacks Tags 03CO and 0H7J. -/
+/-- The prescribed components commute with every coefficient reduction. -/
 theorem inverseImageCompletedCoefficientComponent_naturality {a b : ℕᵒᵖ} (f : a ⟶ b) :
     inverseImageCompletedCoefficientComponent l E g a.unop ≫
         (integralCoefficientSheafSystem l E X).map f =
@@ -137,8 +148,7 @@ theorem inverseImageCompletedCoefficientComponent_naturality {a b : ℕᵒᵖ} (
   rw [← (coefficientDiagramMap l E g).naturality f, ← Category.assoc,
     Functor.comp_map, ← Functor.map_comp, limit.w]
 
-/-- The completed structure map is the actual limit lift of its finite components.
-Source: Stacks Tag 03CO; Bhatt--Scholze, Section 6.5. -/
+/-- The completed structure map is the actual limit lift of its finite components. -/
 def inverseImageCompletedCoefficientMap :
     (isoSectionwiseInverseImage g RingCat.{max u (t + 1)}).obj
       (completedIntegralCoefficientSheafUnrestricted l E Y) ⟶
@@ -151,8 +161,7 @@ def inverseImageCompletedCoefficientMap :
                (inverseImageCompletedCoefficientComponent_naturality l E g f).symm } }
 
 /-- The completed coefficient map is an isomorphism, without a completeness
-hypothesis on any module.
-Source: Stacks Tags 09A5, 00WX and 03CO. -/
+hypothesis on any module. -/
 @[instance] theorem inverseImageCompletedCoefficientMap_isIso :
     IsIso (inverseImageCompletedCoefficientMap l E g) := by
   let F := isoSectionwiseInverseImage g RingCat.{max u (t + 1)}
@@ -173,44 +182,37 @@ Source: Stacks Tags 09A5, 00WX and 03CO. -/
   rw [he]
   infer_instance
 
-/-- Finite inverse image, with action a acting through c_A inverse(a).
-Source: Stacks Tag 03D6. -/
+/-- Finite inverse image, with action a acting through c_A inverse(a). -/
 abbrev inverseImageFiniteModules (n : ℕ) :
     integralOperationsFiniteModules l E Y n ⥤ integralOperationsFiniteModules l E X n :=
   isoSectionwiseModuleInverseImage g (inverseImageFiniteCoefficientMap l E g n)
 
 /-- Completed-coefficient inverse image, with the action transported through the
-inverse of the constructed limit coefficient map.
-Source: Stacks Tag 03D6. -/
+inverse of the constructed limit coefficient map. -/
 abbrev inverseImageIntegralModules : integralTowerModules l E Y ⥤ integralTowerModules l E X :=
   isoSectionwiseModuleInverseImage g (inverseImageCompletedCoefficientMap l E g)
 
-/-- Exact inverse image descends termwise to the unbounded finite derived category.
-Source: Stacks Tag 05RU. -/
+/-- Exact inverse image descends termwise to the unbounded finite derived category. -/
 abbrev inverseImageFiniteDerived (n : ℕ) :=
   (inverseImageFiniteModules l E g n).mapDerivedCategory
 
 /-- Exact inverse image descends termwise to the entire completed-coefficient derived
-category; no derived-completeness or constructibility condition is imposed.
-Source: Stacks Tag 05RU. -/
+category; no derived-completeness or constructibility condition is imposed. -/
 abbrev inverseImageIntegralDerived := (inverseImageIntegralModules l E g).mapDerivedCategory
 
-/-- The finite pullback is exact in the canonical coefficient-sized presentation.
-Source: Stacks Tags 03D6 and 04JC. -/
+/-- The finite pullback is exact in the canonical coefficient-sized presentation. -/
 theorem inverseImageFinitePullback_exact (n : ℕ) :
     PreservesFiniteLimits (integralOperationsLevelPullback l E g n) ∧
       PreservesFiniteColimits (integralOperationsLevelPullback l E g n) := by
   exact coefficientProEtaleModulePullback_exact (asIso g).hom
     (CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionRing l E (n + 1))))
 
-/-- Left exactness of the recorded finite tensor pullback.
-Source: Stacks Tag 04JC. -/
+/-- Left exactness of the recorded finite tensor pullback. -/
 instance inverseImageFinitePullback_limits (n : ℕ) :
     PreservesFiniteLimits (integralOperationsLevelPullback l E g n) :=
   (inverseImageFinitePullback_exact l E g n).1
 
-/-- Right exactness of the recorded finite tensor pullback.
-Source: Stacks Tag 04JC. -/
+/-- Right exactness of the recorded finite tensor pullback. -/
 instance inverseImageFinitePullback_colimits (n : ℕ) :
     PreservesFiniteColimits (integralOperationsLevelPullback l E g n) :=
   (inverseImageFinitePullback_exact l E g n).2
@@ -303,8 +305,7 @@ private def finiteModuleComparison (n : ℕ) :
 
 /-- The finite comparison is uniquely specified on every inverse-image section.
 The adjunction unit is the sheafified generator x tensor 1; restriction along the
-canonical comma arrow evaluates that generator at U.
-Source: Stacks Tag 03D6. -/
+canonical comma arrow evaluates that generator at U. -/
 theorem inverseImageFiniteComparison_existsUnique (n : ℕ)
     (K : CochainComplex (integralOperationsFiniteModules l E Y n) ℤ) :
     ∃! f : ((inverseImageFiniteModules l E g n).mapHomologicalComplex (.up ℤ)).obj K ⟶
@@ -325,15 +326,13 @@ theorem inverseImageFiniteComparison_existsUnique (n : ℕ)
     ext i U x
     exact (hh i U.unop x).trans (by rfl)
 
-/-- The actual finite comparison chain map, uniquely fixed on every section.
-Source: Stacks Tag 03D6. -/
+/-- The actual finite comparison chain map, uniquely fixed on every section. -/
 def inverseImageFiniteComparisonComplex (n : ℕ)
     (K : CochainComplex (integralOperationsFiniteModules l E Y n) ℤ) :=
   (inverseImageFiniteComparison_existsUnique l E g n K).exists.choose
 
 /-- The finite-level derived category, on the unfolded constant-coefficient presentation
-used as the source and target of `integralOperationsLevelPullback`.
-Source: Stacks Tag 05RU. -/
+used as the source and target of `integralOperationsLevelPullback`. -/
 @[instance_reducible]
 noncomputable def levelPullbackHasDerivedCategory
     (W : Scheme.{t}) (R : Sheaf (ProEt.topology W) RingCat.{max u (t + 1)}) :
@@ -343,8 +342,7 @@ noncomputable def levelPullbackHasDerivedCategory
 attribute [local instance] levelPullbackHasDerivedCategory
 
 /-- Finite comparison in the derived category: the class of the sheafified tensor-unit
-chain map, with the canonical exact-functor localization comparisons on both sides.
-Source: Stacks Tag 03D6. -/
+chain map, with the canonical exact-functor localization comparisons on both sides. -/
 def inverseImagePullbackComparisonFinite
     (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x))
     (_hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) (n : ℕ)
@@ -357,8 +355,7 @@ def inverseImagePullbackComparisonFinite
       (integralOperationsLevelPullback l E g n).mapDerivedCategoryFactors.inv.app K
 
 /-- In the recorded finite intrinsic presentation, the same comparison has exactly
-finiteDerivedPullback as its target. The adjunction comparison preserves x tensor 1.
-Source: Stacks Tags 03D6 and 00YV. -/
+finiteDerivedPullback as its target. The adjunction comparison preserves x tensor 1. -/
 def inverseImagePullbackComparisonFiniteIntrinsic
     (F : Type t) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
     (hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x))
@@ -492,8 +489,7 @@ private def integralModuleComparison (n : ℕ) :
 
 /-- The compatible integral-to-finite maps are uniquely specified on every section:
 reduce x to 1 tensor x, apply the finite pullback unit, and restrict along the
-canonical comma arrow. The target is exactly the recorded restricted finite pullback.
-Source: Stacks Tags 03D6 and 08TC; Bhatt--Scholze, Section 6.5. -/
+canonical comma arrow. The target is exactly the recorded restricted finite pullback. -/
 theorem inverseImageReductionTheta_existsUnique (n : ℕ)
     (P : CochainComplex (integralTowerModules l E Y) ℤ) :
     ∃! f : ((inverseImageIntegralModules l E g).mapHomologicalComplex (.up ℤ)).obj P ⟶
@@ -517,14 +513,12 @@ theorem inverseImageReductionTheta_existsUnique (n : ℕ)
     ext i U x
     exact (hh i U.unop x).trans (by rfl)
 
-/-- The canonical theta_n, fixed by reduction and the finite pullback unit.
-Source: Stacks Tags 03D6 and 08TC. -/
+/-- The canonical theta_n, fixed by reduction and the finite pullback unit. -/
 def inverseImageReductionTheta (n : ℕ)
     (P : CochainComplex (integralTowerModules l E Y) ℤ) :=
   (inverseImageReductionTheta_existsUnique l E g n P).exists.choose
 
-/-- The theta maps commute strictly with every consecutive reduction.
-Source: Stacks Tags 03D6 and 08TC. -/
+/-- The theta maps commute strictly with every consecutive reduction. -/
 theorem inverseImageReductionTheta_compatible (n : ℕ)
     (P : CochainComplex (integralTowerModules l E Y) ℤ) :
     inverseImageReductionTheta l E g (n + 1) P ≫
@@ -557,13 +551,11 @@ theorem inverseImageReductionTheta_compatible (n : ℕ)
         (integralOperationsPullbackGenerator l E g n
           (((unrestrictedIntegralFiniteComplex l E Y n).obj P).X i) V) hy')))
 
-/-- The product of the actual theta maps.
-Source: Stacks Tag 08TC. -/
+/-- The product of the actual theta maps. -/
 def inverseImageReductionProduct (P : CochainComplex (integralTowerModules l E Y) ℤ) :=
   Pi.lift (fun n ↦ inverseImageReductionTheta l E g n P)
 
-/-- Strict compatibility gives the zero-homotopy equation for the Roos lift.
-Source: Stacks Tag 08TC. -/
+/-- Strict compatibility gives the zero-homotopy equation for the Roos lift. -/
 theorem inverseImageReductionProduct_lift_condition
     (P : CochainComplex (integralTowerModules l E Y) ℤ) :
     CochainComplex.HomComplex.δ (-1) 0
@@ -595,8 +587,7 @@ theorem inverseImageReductionProduct_lift_condition
   simp
 
 /-- The concrete shifted-cone map z to (0, (theta_n(z))_n), using zero homotopy.
-Its target is the existing strict Roos complex, with its actual differential.
-Source: Stacks Tag 08TC. -/
+Its target is the existing strict Roos complex, with its actual differential. -/
 def inverseImageRoosComparisonComplex
     (P : CochainComplex (integralTowerModules l E Y) ℤ) :
     ((inverseImageIntegralModules l E g).mapHomologicalComplex (.up ℤ)).obj P ⟶
@@ -607,8 +598,7 @@ def inverseImageRoosComparisonComplex
 attribute [local irreducible] constantSheaf completedIntegralCoefficientSheafUnrestricted
   DerivedCategory.Q
 
-/-- The inverse-image resolution is invertible after localization.
-Source: Stacks Tag 05RU. -/
+/-- The inverse-image resolution is invertible after localization. -/
 @[instance] theorem inverseImageResolution_isIso
     (K : CochainComplex (integralTowerModules l E Y) ℤ)
     (P : (integralOperationsGoodComplex l E Y).FullSubcategory)
@@ -621,8 +611,7 @@ Source: Stacks Tag 05RU. -/
 Compose the inverse of inverse-image(q), the explicit zero-homotopy Roos lift,
 and the recorded representative identification with completed derived pullback.
 This defines the map on the entire ambient category. Naturality, independence of
-resolution and invertibility on constructible complete objects are separate assertions.
-Source: Stacks Tags 03D6 and 08TC; Bhatt--Scholze, Section 6.5. -/
+resolution and invertibility on constructible complete objects are separate assertions. -/
 def inverseImagePullbackComparison
     (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x))
     (_hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y))

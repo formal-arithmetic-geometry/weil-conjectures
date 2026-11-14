@@ -86,7 +86,18 @@ import WeilConjectures.AlgebraicGeometry.DerivedScalarMate.DerivedScalarMateThic
 
 /-! # Normalized pro-etale scalar mate identifications
 
-Source: Stacks Project, Tag 0B56.
+## References
+
+* Stacks Project, Tag 0B56
+* Stacks 03EK
+* Stacks 0B56
+* Stacks 03EK, 06YY
+* Stacks 0D6E
+* Stacks 06YY
+* Stacks 06YY, 07A4
+* Stacks 03EL
+* Stacks 03EL, 0D6D
+* Stacks 07A4
 -/
 
 @[expose] public section
@@ -103,36 +114,31 @@ open AlgebraicGeometry AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- The actual scalar restriction, with unchanged underlying abelian sheaf.
-Source: Stacks 03EK. -/
+/-- The actual scalar restriction, with unchanged underlying abelian sheaf. -/
 noncomputable abbrev scalarMateRestriction {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B) (W : Scheme.{u}) :=
   Scheme.proEtaleRingRestrictScalars (Scheme.proEtaleConstantRingMap (T := W) φ)
 
-/-- The coefficient B_W with its A_W action, without deriving or resolving B.
-Source: Stacks 0B56. -/
+/-- The coefficient B_W with its A_W action, without deriving or resolving B. -/
 noncomputable abbrev scalarMateCoefficient {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B) (W : Scheme.{u}) :=
   (scalarMateRestriction φ W).obj (SheafOfModules.unit
     ((sheafCompose (Scheme.ProEt.topology W)
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (Scheme.proEtaleConstantRing W B)))
 
-/-- The degree-zero coefficient complex B_W, as an A_W-module complex.
-Source: Stacks 0B56. -/
+/-- The degree-zero coefficient complex B_W, as an A_W-module complex. -/
 noncomputable abbrev scalarMateCoefficientComplex {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B) (W : Scheme.{u}) :=
   (CochainComplex.singleFunctor (Scheme.proEtaleRingModules W
     (Scheme.proEtaleConstantRing W A)) (0 : ℤ)).obj (scalarMateCoefficient φ W)
 
-/-- The existing ordinary tensor with B as its last factor.
-Source: Stacks 03EK. -/
+/-- The existing ordinary tensor with B as its last factor. -/
 noncomputable abbrev scalarMateOrdinaryTensor {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B) (W : Scheme.{u}) :=
   (Scheme.proEtaleOrdinaryTensor W (Scheme.proEtaleConstantRing W A)).flip.obj
     (scalarMateCoefficient φ W)
 
-/-- The original sheafification image of b tensor m in scalar extension.
-Source: Stacks 03EK. -/
+/-- The original sheafification image of b tensor m in scalar extension. -/
 noncomputable def scalarMateTensorSection {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B) (W : Scheme.{u})
     (M : Scheme.proEtaleRingModules W (Scheme.proEtaleConstantRing W A))
@@ -147,8 +153,7 @@ noncomputable def scalarMateTensorSection {A B : Type u} [CommRing A] [CommRing 
             (Scheme.proEtaleConstantRingMap (T := W) φ) M)).app U)
     (b ⊗ₜ[_, ((Scheme.proEtaleConstantRingMap (T := W) φ).hom.app U).hom] m)
 
-/-- The normalization on all sectionwise pure tensors, including nonconstant local scalars.
-Source: Stacks 03EK. -/
+/-- The normalization on all sectionwise pure tensors, including nonconstant local scalars. -/
 def IsScalarMateOrdinaryTensor {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B) (W : Scheme.{u})
     (e : Scheme.proEtaleRingExtension (Scheme.proEtaleConstantRingMap (T := W) φ) ⋙
@@ -163,8 +168,7 @@ def IsScalarMateOrdinaryTensor {A B : Type u} [CommRing A] [CommRing B]
         Scheme.proEtaleTensorPair W (Scheme.proEtaleConstantRing W A) M
           (scalarMateCoefficient φ W) U m b
 
-/-- The canonical ordinary identification, uniquely fixed by balanced pure tensors.
-Source: Stacks 03EK, 06YY. -/
+/-- The canonical ordinary identification, uniquely fixed by balanced pure tensors. -/
 theorem scalarMateOrdinaryTensorIso_existsUnique
     {A B : Type u} [CommRing A] [CommRing B] (φ : A →+* B) (W : Scheme.{u}) :
     ∃! e : Scheme.proEtaleRingExtension (Scheme.proEtaleConstantRingMap (T := W) φ) ⋙
@@ -173,14 +177,12 @@ theorem scalarMateOrdinaryTensorIso_existsUnique
   exact Scheme.DerivedScalarMate.ordinaryTensorIso_existsUnique
     (Scheme.proEtaleConstantRingMap (T := W) φ)
 
-/-- The uniquely normalized ordinary identification; its data are determined by the formula.
-Source: Stacks 03EK. -/
+/-- The uniquely normalized ordinary identification; its data are determined by the formula. -/
 noncomputable def scalarMateOrdinaryTensorIso
     {A B : Type u} [CommRing A] [CommRing B] (φ : A →+* B) (W : Scheme.{u}) :=
   Classical.choose (scalarMateOrdinaryTensorIso_existsUnique φ W).exists
 
-/-- The canonical restriction/direct-image comparison of the recorded ring-sheaf adjunction.
-Source: Stacks 0D6E. -/
+/-- The canonical restriction/direct-image comparison of the recorded ring-sheaf adjunction. -/
 noncomputable def scalarMateRestrictionPush
     {A B : Type u} [CommRing A] [CommRing B] (φ : A →+* B)
     {T V : Scheme.{u}} (f : T ⟶ V) :=
@@ -194,8 +196,7 @@ noncomputable def scalarMateRestrictionPush
       (CommRingCat.ofHom (RingHom.ulift φ))).symm
 
 /-- On complexes, reverse the balanced tensors degreewise and use the degree-zero
-single-factor identification. This is an actual chain isomorphism.
-Source: Stacks 06YY. -/
+single-factor identification. This is an actual chain isomorphism. -/
 noncomputable def scalarMateOrdinaryComplexIso
     {A B : Type u} [CommRing A] [CommRing B] (φ : A →+* B) (W : Scheme.{u})
     (P : CochainComplex (Scheme.proEtaleRingModules W (Scheme.proEtaleConstantRing W A)) ℤ) :=
@@ -206,8 +207,7 @@ noncomputable def scalarMateOrdinaryComplexIso
         (scalarMateCoefficient φ W) P).symm
 
 /-- The full normalization of h on two flat K-flat representatives, resolving B too.
-The equation uses Q → B[0] only after tensoring with the K-flat first factor.
-Source: Stacks 06YY, 07A4. -/
+The equation uses Q → B[0] only after tensoring with the K-flat first factor. -/
 def IsScalarMateDerivedTensor {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B) (W : Scheme.{u})
     (a : Scheme.ProEtaleTensorModel W (Scheme.proEtaleConstantRing W A))
@@ -235,8 +235,7 @@ def IsScalarMateDerivedTensor {A B : Type u} [CommRing A] [CommRing B]
         (Scheme.proEtaleOrdinaryTensor W (Scheme.proEtaleConstantRing W A))
         (ComplexShape.up ℤ) ≫ (scalarMateOrdinaryComplexIso φ W P).inv))
 
-/-- The restricted extension is the derived tensor with B, with its full normalization.
-Source: Stacks 06YY, 07A4. -/
+/-- The restricted extension is the derived tensor with B, with its full normalization. -/
 theorem scalarMateDerivedTensorIso_existsUnique
     {A B : Type u} [CommRing A] [CommRing B] (φ : A →+* B) (W : Scheme.{u})
     (a : Scheme.ProEtaleTensorModel W (Scheme.proEtaleConstantRing W A)) :
@@ -247,29 +246,25 @@ theorem scalarMateDerivedTensorIso_existsUnique
   exact Scheme.DerivedScalarMate.derivedTensorIso_existsUnique
     (Scheme.proEtaleConstantRingMap (T := W) φ) a
 
-/-- The comparison h selected by its unique representative normalization.
-Source: Stacks 06YY. -/
+/-- The comparison h selected by its unique representative normalization. -/
 noncomputable def scalarMateDerivedTensorIso
     {A B : Type u} [CommRing A] [CommRing B] (φ : A →+* B) (W : Scheme.{u})
     (a : Scheme.ProEtaleTensorModel W (Scheme.proEtaleConstantRing W A)) :=
   Classical.choose (scalarMateDerivedTensorIso_existsUnique φ W a).exists
 
-/-- The tensor unit in the existing constant-ring module category.
-Source: Stacks 03EK. -/
+/-- The tensor unit in the existing constant-ring module category. -/
 noncomputable abbrev scalarMateUnit (B : Type u) [CommRing B] (W : Scheme.{u}) :=
   SheafOfModules.unit ((sheafCompose (Scheme.ProEt.topology W)
     (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (Scheme.proEtaleConstantRing W B))
 
-/-- The normalized ordinary B-unit pullback, supplied by the projection-arrow interface.
-Source: Stacks 03EL. -/
+/-- The normalized ordinary B-unit pullback, supplied by the projection-arrow interface. -/
 noncomputable def scalarMateUnitPullback (B : Type u) [CommRing B]
     {T V : Scheme.{u}} (f : T ⟶ V) :=
   Classical.choose (Scheme.proEtaleProjectionUnit_existsUnique f
     (Scheme.proEtaleConstantRing V B) (Scheme.proEtaleConstantRing T B)
     (Scheme.proEtaleConstantRingComparison f B)).exists
 
-/-- The ordinary identification u_A^*(B_V)=B_T, using scalar restriction and unit pullback.
-Source: Stacks 03EL, 0D6D. -/
+/-- The ordinary identification u_A^*(B_V)=B_T, using scalar restriction and unit pullback. -/
 noncomputable def scalarMateCoefficientPullback
     {A B : Type u} [CommRing A] [CommRing B] (φ : A →+* B)
     {T V : Scheme.{u}} (f : T ⟶ V) :=
@@ -291,8 +286,7 @@ noncomputable def scalarMateCoefficientPullback
       (CommRingCat.ofHom (RingHom.ulift φ))).symm)).app (scalarMateUnit B V) ≪≫
     (scalarMateRestriction φ T).mapIso (scalarMateUnitPullback B f)
 
-/-- The coefficient identification on degree-zero complexes, with exact pullback factors.
-Source: Stacks 07A4. -/
+/-- The coefficient identification on degree-zero complexes, with exact pullback factors. -/
 noncomputable def scalarMateDerivedCoefficientPullback
     {A B : Type u} [CommRing A] [CommRing B] (φ : A →+* B)
     {T V : Scheme.{u}} (f : T ⟶ V) :=

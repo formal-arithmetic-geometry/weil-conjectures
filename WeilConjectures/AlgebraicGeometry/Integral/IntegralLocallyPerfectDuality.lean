@@ -16,7 +16,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Integral local models are perfect on the ringed site
 
-Source: Bhatt--Scholze, Proposition 6.6.11 and Lemma 6.3.14(1).
+## References
+
+* Bhatt--Scholze, Proposition 6.6.11 and Lemma 6.3.14(1)
 -/
 
 @[expose] public noncomputable section
@@ -94,8 +96,7 @@ private theorem identityLocalModel (X : Scheme.{u}) (R : Rings X) (U : X.ProEt)
   exact ⟨E.functor.mapDerivedCategory.preimageIso ((α K).symm ≪≫ e ≪≫ α L)⟩
 
 /-- The completed constant local-model condition gives actual perfectness on the
-ringed site with its independent coefficient universe.
-Source: Bhatt--Scholze, Proposition 6.6.11 and Lemma 6.3.14(1). -/
+ringed site with its independent coefficient universe. -/
 theorem integralLocallyPerfect_sitePerfect
     (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (L : DerivedCategory (pbcModules X (pbcAdicCompletion X d)))

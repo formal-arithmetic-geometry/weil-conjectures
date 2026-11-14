@@ -12,6 +12,10 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Scalar.ScalarPr
 public import WeilConjectures.SixFunctors.Supporting.ModCondensedCachedInstances
 
 /-! The distinguished-triangle package for the finite-free scalar projection.
+
+## References
+
+* Stacks Tag 0944
 -/
 
 @[expose] public noncomputable section
@@ -126,7 +130,6 @@ private def pointSingleDerivedUnit
       (ModuleRingedComparison.internalModules Λ.X Y)
 
 /--
-Source: Stacks Tag 0944.
 
 The finite-free point-module identifications make the coefficient projection
 transformation additive on the two degree-zero finite biproduct terms.  Exactness

@@ -11,7 +11,10 @@ import WeilConjectures.AlgebraicGeometry.Proj.ProjTwistPullbackFractionPresentat
 import WeilConjectures.AlgebraicGeometry.ProjBasicOpenLocalizationDetection
 
 /-! The injective half of the complete standard-chart scalar-extension comparison.
-Source: Stacks Project, Tags 01MY and 01N2.
+
+## References
+
+* Stacks Project, Tags 01MY and 01N2
 -/
 
 @[expose] public section

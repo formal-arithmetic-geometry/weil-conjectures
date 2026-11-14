@@ -24,7 +24,10 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.TraitGenericNormalizationChar
 /-!
 # Standard tame charts for normalization over a local trait
 
-Source: Stacks Project, Tags 0EYJ, 0EYG and 0EYH.
+## References
+
+* Stacks Project, Tags 0EYJ, 0EYG and 0EYH
+* Stacks Project, Tags 0EYJ (trait paragraph), 0EYG and 0EYH
 -/
 
 @[expose] public section
@@ -34,9 +37,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- The concrete local normalization admits jointly surjective affine etale charts on which
-it is a finite product of standard tame monic extensions.
-
-Source: Stacks Project, Tags 0EYJ (trait paragraph), 0EYG and 0EYH. -/
+it is a finite product of standard tame monic extensions. -/
 theorem GaloisCover.stalk_normalization_trait_charts {S C : Scheme.{u}}
     [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]

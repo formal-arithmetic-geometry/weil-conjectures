@@ -11,7 +11,9 @@ import all WeilConjectures.AlgebraicGeometry.RawModuleScalarCoefficientUnshifted
 
 /-! # Derived canonical scalar pullback comparison
 
-Source: the derived exact-functor composition and natural-isomorphism comparisons.
+## References
+
+* Stacks Project, Tags 03D3 and 03D7, the inverse-image adjunction
 -/
 
 @[expose] public section
@@ -40,8 +42,7 @@ instance forget_preservesFiniteLimits (Λ : Type (u + 1)) [CommRing Λ] (X : Sch
 instance forget_preservesFiniteColimits (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.{u}) :
     PreservesFiniteColimits (forget Λ X) := moduleAbelianForget_preservesFiniteColimits Λ X
 
-/-- The scalar pullback comparison has the forgotten module unit as its adjoint.
-Source: Stacks Project, Tags 03D3 and 03D7, the inverse-image adjunction. -/
+/-- The scalar pullback comparison has the forgotten module unit as its adjoint. -/
 theorem pullback_unit (Λ : Type (u + 1)) [CommRing Λ]
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :

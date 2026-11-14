@@ -20,11 +20,13 @@ import WeilConjectures.AlgebraicGeometry.RelativeProj.Functoriality
 /-!
 # Affine presentations of a finite-type projective bundle
 
-Source: Stacks Project, Morphisms, Tags 01WB and 087S, proofs; Sheaves of Modules, Tags 01B5 and
-01AM.
-
 The local projective dimensions depend on the affine open. Neither the covering nor
 these dimensions have a finite uniform bound.
+
+## References
+
+* Stacks Project, Morphisms, Tags 01WB and 087S, proofs
+* Sheaves of Modules, Tags 01B5 and 01AM
 -/
 
 @[expose] public section
@@ -302,9 +304,7 @@ private theorem projectiveBundle_embedding_of_generators (X : Scheme.{u}) (E : X
 
 /-- A finite-type quasi-coherent module admits an affine open covering with finite
 nonempty generating families and closed embeddings of its restricted projective bundles
-into projective spaces of the corresponding dimensions, over the affine base.
-Source: Stacks Project, Morphisms, Tags 01WB and 087S, proofs; Sheaves of Modules, Tags 01B5 and
-01AM. -/
+into projective spaces of the corresponding dimensions, over the affine base. -/
 theorem exists_affine_projectiveBundle_presentations (S : Scheme.{u}) (E : S.Modules)
     (hE : E.IsQuasiCoherentFiniteType) :
     ∃ (I : Type u) (U : I → S.Opens) (n : I → ℕ),

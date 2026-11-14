@@ -19,7 +19,10 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSuppleme
 /-!
 # Essential image of closed direct image on pro-etale module sheaves
 
-Source: Stacks Project, Pro-etale Cohomology, Tag 09AH.
+## References
+
+* Stacks Project, Pro-etale Cohomology, Tag 09AH
+* Stacks Project, Tag 09AH
 -/
 
 -- After pruning, this module only keeps private declarations.
@@ -78,9 +81,7 @@ private theorem pullback_isZero_iff_inverseImage
 /-- Closed direct image has precisely the module sheaves with zero open restriction as
 its essential image. On these sheaves the canonical module adjunction unit is invertible.
 The arbitrary commutative coefficient sheaves and their inverse-image identifications are
-fixed explicitly; the unit is that of the tensor-unit-normalized adjunction.
-
-Source: Stacks Project, Tag 09AH. -/
+fixed explicitly; the unit is that of the tensor-unit-normalized adjunction. -/
 theorem proEtaleRingModule_closed_essImage_iff_and_unit_isIso
     {X Z U : Scheme.{u}} (i : Z ⟶ X) (j : U ⟶ X)
     [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j]

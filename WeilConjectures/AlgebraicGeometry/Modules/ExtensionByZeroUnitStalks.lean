@@ -14,7 +14,12 @@ import WeilConjectures.AlgebraicGeometry.Modules.ExtensionByZeroOutside
 import WeilConjectures.AlgebraicGeometry.Modules.ExtensionByZeroInside
 
 /-! # A component of extension by zero for modules
-Source: Stacks Project, Sheaves, Lemma 00A7. -/
+
+## References
+
+* Stacks Project, Sheaves, Lemma 00A7
+* Stacks Project, Sheaves, Lemma 00A7 (3), after Lemma 00A3
+-/
 
 @[expose] public section
 
@@ -26,8 +31,7 @@ noncomputable section
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- The unit of any extension-by-zero adjunction gives the stalk identifications.
-Source: Stacks Project, Sheaves, Lemma 00A7 (3), after Lemma 00A3. -/
+/-- The unit of any extension-by-zero adjunction gives the stalk identifications. -/
 theorem module_extensionByZero_unit_stalks (X : Scheme.{u}) (U : X.Opens) :
     let R := X.ringCatSheaf
     let P := SheafOfModules.extensionByZeroPresheaf.{u} R U

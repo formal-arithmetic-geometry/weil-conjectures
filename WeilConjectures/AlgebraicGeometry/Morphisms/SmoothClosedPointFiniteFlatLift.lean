@@ -18,7 +18,11 @@ import WeilConjectures.RingTheory.FiniteFreeLocalFieldFactorization
 /-!
 # Finite flat rationalization of a smooth closed-fibre point
 
-Source: Stacks Project, Tag 0EYB, the residue extension base change; Tag 07NE.
+## References
+
+* Stacks Project, Tag 0EYB, the residue extension base change
+* Tag 07NE
+* Stacks Project, Tag 0EYB, the first base change
 -/
 
 @[expose] public section
@@ -37,9 +41,7 @@ private theorem residueFieldMap_surjective_of_surjectiveOnStalks
   have h := congrArg (fun g ↦ g.hom c) (residue_residueFieldMap f x)
   simpa only [CommRingCat.hom_comp, RingHom.comp_apply, hc, hb] using h
 
-/-- A finite flat local base change makes the prescribed closed-fibre point separable.
-
-Source: Stacks Project, Tag 0EYB, the first base change; Tag 07NE. -/
+/-- A finite flat local base change makes the prescribed closed-fibre point separable. -/
 theorem exists_smooth_closed_point_finite_flat_lift
     (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]
     {L : Scheme.{u}} (q : L ⟶ Spec (.of A)) [Smooth q]

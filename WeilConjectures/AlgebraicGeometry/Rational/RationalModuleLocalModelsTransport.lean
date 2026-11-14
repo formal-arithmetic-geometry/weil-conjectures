@@ -88,6 +88,10 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Ringed.ProEtaleRingedOpenClose
 /-! # Ordinary rational module models under coefficient transport
 
 The completed presentation is compared with the continuous coefficient presentation.
+
+## References
+
+* Bhatt--Scholze, Lemma 6.8.2, Definition 6.8.10 and Proposition 6.8.14(2)
 -/
 
 @[expose] public noncomputable section
@@ -286,8 +290,7 @@ private def extendInverseOverIso {X Z : Scheme.{u}} (f : Z ⟶ X)
     SheafOfModules.scalarOverIso.{u + 1, u, u + 1}
       ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).map a) _ U
 
-/-- Ordinary localization of the completed finitely presented local models.
-Source: Bhatt--Scholze, Lemma 6.8.2, Definition 6.8.10 and Proposition 6.8.14(2). -/
+/-- Ordinary localization of the completed finitely presented local models. -/
 theorem rationalModuleLocalModelsTransport (X : Scheme.{u}) [IsNoetherian X]
     (i : pbcAdicCompletion X (pbcIntegralDatum l E) ≅ integralCoefficientSheaf l X E)
     (_hi : pbcCompletedScalar X (pbcIntegralDatum l E) ≫ i.hom =

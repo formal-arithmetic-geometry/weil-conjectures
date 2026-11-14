@@ -16,7 +16,10 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedIdealDete
 /-!
 # Formal approximation of sections along the punctured zero section
 
-Source: Stacks Project, Tag 0EY9, the first displayed inverse-limit calculation.
+## References
+
+* Stacks Project, Tag 0EY9, the first displayed inverse-limit calculation
+* Stacks Project, Tag 0EY9, first displayed calculation and the following comparison of rings
 -/
 
 @[expose] public section
@@ -74,10 +77,7 @@ private lemma powerSeries_variables_pow_germs
   exact (le_trans (pow_le_pow_left' hI n) (Ideal.le_comap_pow g n)) hb
 
 /-- Every section has a unique power series with the same restrictions to all
-infinitesimal neighbourhoods of the punctured zero section.
-
-Source: Stacks Project, Tag 0EY9, first displayed calculation and the following
-comparison of rings. -/
+infinitesimal neighbourhoods of the punctured zero section. -/
 theorem existsUnique_powerSeries_punctured_formal_approximation
     (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]
     (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth (R := A) A)

@@ -18,7 +18,10 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.PerfectRingComplexG
 
 /-! # Descending perfect coefficient towers to the scalar universe
 
-Source: Stacks Tags 064Z and 09C6
+## References
+
+* Stacks Tags 064Z and 09C6
+* Stacks Tag 064Z
 -/
 
 @[expose] public noncomputable section
@@ -388,8 +391,7 @@ private theorem universal_arrow_of_isos
   simpa only [Function.comp_def, Iso.homFromEquiv_apply, Iso.symm_inv,
     Functor.map_comp, Category.assoc] using h
 
-/-- The actual scalar homomorphism on the lifted rings.
-Source: Stacks Tag 064Z. -/
+/-- The actual scalar homomorphism on the lifted rings. -/
 def uliftRingMap {A B : Type u} [CommRing A] [CommRing B] (q : A →+* B) :
     ULift.{u + 1} A →+* ULift.{u + 1} B :=
   ULift.ringEquiv.symm.toRingHom.comp (q.comp ULift.ringEquiv.toRingHom)
@@ -485,8 +487,7 @@ private theorem small_universal_arrow
     (fun Z ↦ ulift_perfect_map_bijective B N Z hN) hη''
   exact ⟨ξ, hξ⟩
 
-/-- Perfect coefficient levels and their universal quotient arrows descend to small modules.
-Source: Stacks Tags 064Z and 09C6. -/
+/-- Perfect coefficient levels and their universal quotient arrows descend to small modules. -/
 theorem smallPerfect_tower
     (A : ℕ → Type u) [∀ n, CommRing (A n)]
     (q : ∀ n, A (n + 1) →+* A n)

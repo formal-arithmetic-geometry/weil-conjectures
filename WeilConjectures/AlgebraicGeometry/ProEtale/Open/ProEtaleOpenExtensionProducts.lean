@@ -27,8 +27,6 @@ set_option linter.privateModule false
 /-!
 # Products and sequential derived limits of open extensions
 
-Source: Stacks Project, Tags 09BN, 0152, 070I and 08TC.
-
 The ring sheaf is an arbitrary monoid object in abelian sheaves. The module functors
 are the recorded open-closed module-object functors, without commutative or constant
 coefficient hypotheses. Derived categories use the standard localization universe.
@@ -46,6 +44,10 @@ localization on the closed stratum is needed.
 
 * `proEtale_openExtension_products_derivedLimits`: the natural triangle, preservation of
   derived products and sequential Roos limits, and preservation of sheaf products.
+
+## References
+
+* Stacks Project, Tags 09BN, 0152, 070I and 08TC
 -/
 
 @[expose] public noncomputable section

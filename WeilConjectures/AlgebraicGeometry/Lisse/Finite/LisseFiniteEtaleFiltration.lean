@@ -26,8 +26,10 @@ import WeilConjectures.RepresentationTheory.PrimaryPGroupFiltration
 /-!
 # Prime-to-primary finite étale filtration covers
 
-Source: Stacks Project, Tags 0GJ0 and 0DV5 (3), with componentwise assembly on an affine Noetherian
-base.
+## References
+
+* Stacks Project, Tags 0GJ0 and 0DV5 (3), with componentwise assembly on an affine Noetherian base
+* Stacks Project, Tags 0GJ0, 0DV5 (3), 0DV6 and 0GIZ
 -/
 
 @[expose] public section
@@ -640,8 +642,7 @@ private theorem connected_sylow_sheaf_data
 
 /-- A finite local system of modules over a finite ring, killed by a positive prime power,
 admits a finite étale surjection of constant prime-to-primary degree, and on a finite affine
-clopen decomposition of its source the pullback has constant finite-module graded pieces.
-Source: Stacks Project, Tags 0GJ0, 0DV5 (3), 0DV6 and 0GIZ. -/
+clopen decomposition of its source the pullback has constant finite-module graded pieces. -/
 theorem exists_lisse_finiteEtale_filtration
     (A : Type u) [CommRing A] [IsNoetherianRing A]
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]

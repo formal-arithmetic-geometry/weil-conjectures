@@ -13,7 +13,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.NormalFiniteStageUniversal
 /-!
 # Finite normal replacements of the stages of a Noetherian approximation
 
-Source: Stacks Project, Tag 0EZJ, normal approximation paragraph.
+## References
+
+* Stacks Project, Tag 0EZJ, normal approximation paragraph
+* Stacks Project, Tag 0EZJ, the paragraph constructing the normal integral stages
+* Tags 035E, 035N and 035L, and finiteness of normalization over the integers
 -/
 
 @[expose] public section
@@ -26,10 +30,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The scheme-theoretic images of the projections, normalized in their own function
 fields, form a compatible finite normal replacement diagram. This assertion constructs
-only a diagram and a cone; it does not assert that the cone is limiting.
-
-Source: Stacks Project, Tag 0EZJ, the paragraph constructing the normal integral stages;
-Tags 035E, 035N and 035L, and finiteness of normalization over the integers. -/
+only a diagram and a cone; it does not assert that the cone is limiting. -/
 theorem exists_normal_finite_stage_diagram {S : Scheme.{u}} [CompactSpace S]
     [QuasiSeparatedSpace S] [IsIntegral S]
     (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))

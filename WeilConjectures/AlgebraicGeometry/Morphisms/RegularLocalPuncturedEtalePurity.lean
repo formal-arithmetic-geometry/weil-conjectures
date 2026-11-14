@@ -18,7 +18,10 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.DepthThreePuncturedEtaleLifti
 /-!
 # Purity for the punctured spectrum of a regular local ring
 
-Source: Stacks Project, Tag 0BMA.
+## References
+
+* Stacks Project, Tag 0BMA
+* Stacks Project, Tag 0BMA, assertion (1)
 -/
 
 @[expose] public section
@@ -113,9 +116,7 @@ private theorem extension_by_dimension (d : ℕ) :
       A f hf hdepth U hU q hsmall
 
 /-- Finite etale covers of the punctured spectrum of a regular local ring of dimension
-at least two extend to the whole local spectrum.
-
-Source: Stacks Project, Tag 0BMA, assertion (1). -/
+at least two extend to the whole local spectrum. -/
 theorem exists_finite_etale_extension_of_regular_local_punctured_spectrum
     (A : Type u) [CommRing A] [IsRegularLocalRing A]
     (hdim : (2 : WithBot ℕ∞) ≤ ringKrullDim A)

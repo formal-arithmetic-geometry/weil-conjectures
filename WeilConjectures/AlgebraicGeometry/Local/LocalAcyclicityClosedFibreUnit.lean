@@ -17,7 +17,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 /-!
 # Local acyclicity and the closed-fibre restriction of the derived unit
 
-Source: Stacks Project, Tag 0GJU, specialized to `G[0]`.
+## References
+
+* Stacks Project, Tag 0GJU, specialized to `G[0]`
 -/
 
 @[expose] public section
@@ -58,7 +60,6 @@ private theorem isZero_exact_homology
 /-- For a locally acyclic morphism relative to an abelian étale sheaf, the derived
 unit for any geometric fibre over the strict local base becomes an isomorphism
 on the closed geometric fibre. No properness or torsion assumption is needed.
-Source: Stacks Project, Tag 0GJU, specialized to `G[0]`.
 -/
 theorem isIso_closedFibre_derivedUnit_of_isLocallyAcyclicRelative
     {X S : Scheme.{u}} (f : X ⟶ S)

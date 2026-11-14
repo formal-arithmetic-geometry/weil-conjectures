@@ -93,7 +93,10 @@ import WeilConjectures.AlgebraicGeometry.TensorPullbackRepresentativeDescent
 
 /-! # Evaluation of the K-flat tensor model
 
-Source: Zheng Construction 4.1; Stacks 03EK, 06YS and 07A4.
+## References
+
+* Zheng Construction 4.1
+* Stacks 03EK, 06YS and 07A4
 -/
 
 @[expose] public noncomputable section
@@ -373,8 +376,7 @@ private theorem evaluation_tensor_natural (n : ℕ)
     evaluation_map_section.{c, v, r} J B τ n,
     evaluation_map_section.{c, v, r} J B τ n]
 
-/-- Evaluation of total tensors, with both representative and section normalization.
-Source: Zheng Construction 4.1; Stacks 03EK, 06YS and 07A4. -/
+/-- Evaluation of total tensors, with both representative and section normalization. -/
 theorem semilinearTensorEvaluation (n : ℕ)
     (closed : Closed.{c, v, r} (coefficientSequenceTopology J)
       (systemRing.{c, v, max c v r} J B τ))

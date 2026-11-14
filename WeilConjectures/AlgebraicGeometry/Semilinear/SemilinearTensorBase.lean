@@ -9,7 +9,12 @@ public import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearDerivedCalc
 public import WeilConjectures.CategoryTheory.Ringed.Site.RingedSiteDualityMaps
 
 /-! # Base tensor models for semilinear systems
-Source: Zheng Construction 4.1 and Stacks 06YS, 07A4
+
+## References
+
+* Zheng Construction 4.1 and Stacks 06YS, 07A4
+* Stacks 06YN, 08JD and 0A97
+* Zheng Construction 4.1
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -21,8 +26,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   [EssentiallySmall.{max c v r} C]
   (B : ℕ → Sheaf J CommRingCat.{max c v r})
   (τ : ∀ n : ℕ, B (n + 1) ⟶ B n)
-/-- The normalized model uses the same explicit sheafification and derived universes as Closed.
-Source: Stacks 06YN, 08JD and 0A97. -/
+/-- The normalized model uses the same explicit sheafification and derived universes as Closed. -/
 abbrev NormalizedTensorModel (R : Sheaf J CommRingCat.{max c v r}) :=
   @RingedSiteDualityModel.{c, v, r, (max c v r) + 1} C _ J
     (abelianSheafify.{c, v, max c v r} J) (locallyBijective.{c, v, max c v r} J) R
@@ -41,8 +45,7 @@ structure SystemTensorBase where
   levelClosed : ∀ n : ℕ, Closed.{c, v, r} J (B n)
   levelTensorModels : ∀ n : ℕ, Models.{c, v, r} J (B n) (levelClosed n)
 /-- Proof: choose the closed structure and K-flat model from the ringed-site
-derived tensor construction.
-Source: Zheng Construction 4.1; the representative K-flat descent construction. -/
+derived tensor construction. -/
 theorem systemTensorBase_nonempty :
     Nonempty (SystemTensorBase.{c, v, r} J B τ) := by
   classical

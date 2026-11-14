@@ -11,7 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConsta
 /-!
 # Compatibility of the two canonical finite-coefficient realizations
 
-Source: Stacks Project, Modules on Sites, Tag 03EI.
+## References
+
+* Stacks Project, Modules on Sites, Tag 03EI
 -/
 
 @[expose] public section
@@ -53,8 +55,7 @@ private theorem realizationRestrictionUnit_isIso
     ((sheafCompose (Scheme.ProEt.topology T)
       (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) AddCommGrpCat.{u + 1})).obj M).property
 
-/-- Restricting the canonical associated module sheaf recovers the original module sheaf.
-Source: Stacks Project, Modules on Sites, Tag 03EI. -/
+/-- Restricting the canonical associated module sheaf recovers the original module sheaf. -/
 theorem intrinsicRealization_restriction
     (T : Scheme.{u}) (B : Type u) [CommRing B] [Finite B] :
     Nonempty (finiteCoefficientIntrinsicRealization T B ⋙

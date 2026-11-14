@@ -13,7 +13,10 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 
 /-! # Global lifting in an affine extension
 
-Source: Stacks Project, Schemes, Lemma 01IE, ideal and principal-open lifting argument.
+## References
+
+* Stacks Project, Schemes, Lemma 01IE, ideal and principal-open lifting argument
+* Stacks Project, Schemes, from "Pick m" to the end of its proof
 -/
 
 @[expose] public section
@@ -26,7 +29,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- The quotient map of an affine extension with quasi-coherent ends is surjective on
  global sections.
-Source: Stacks Project, Schemes, from "Pick m" to the end of its proof.
 -/
 theorem epi_globalSections_of_shortExact {R : CommRingCat.{u}}
     (S : ShortComplex (Spec R).Modules) (hS : S.ShortExact)

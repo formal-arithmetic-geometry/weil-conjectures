@@ -10,7 +10,10 @@ import WeilConjectures.AlgebraicGeometry.Derived.DerivedBaseChangeSourceTranspor
 
 /-! # PicardDerivedResidueIndexedNormalization
 
-Source: Stacks Project, Tags 0096, 06YJ, 0A1D, 08HY, 0D5S and 01F7.
+## References
+
+* Stacks Project, Tags 0096, 06YJ, 0A1D, 08HY, 0D5S and 01F7
+* Stacks Project, Tags 08HY, 0D5S and 01F7
 -/
 
 @[expose] public section
@@ -45,8 +48,7 @@ private theorem baseChange_transport
   subst p'
   simp
 
-/-- The explicit normalization maps respect coefficient arrows.
-Source: Stacks Project, Tags 08HY, 0D5S and 01F7 -/
+/-- The explicit normalization maps respect coefficient arrows. -/
 theorem picardResidueNormalizationMap_naturality_of_coefficientSquare
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

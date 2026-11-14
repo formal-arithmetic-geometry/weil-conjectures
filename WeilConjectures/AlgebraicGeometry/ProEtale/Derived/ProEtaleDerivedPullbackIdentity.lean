@@ -15,11 +15,18 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleTensorComparison.ProEtaleInvers
 /-!
 # Identity normalization of ordinary pro-etale derived pullback
 
-Source: Stacks Project, Tag 09A5, identity specialization of `section-morphism`.
-
 The coprojection formula fixes the module comparison before scalar extension.
 The tensor formulas fix its scalar-transport identification. The final equality
 fixes the derived comparison on every cochain representative.
+
+## References
+
+* Stacks Project, Tag 09A5, identity specialization of `section-morphism`
+* Stacks, Tags 09A5 and 03D2
+* Stacks, Tags 09A5 and 00WX
+* Stacks, Tag 03EK
+* Stacks, Tag 05RU
+* Stacks, Tag 09A5
 -/
 
 @[expose] public noncomputable section
@@ -34,7 +41,7 @@ open scoped ChangeOfRings
 namespace AlgebraicGeometry.Scheme
 
 /-- The inverse-image module with its action transported by the inverse of the specified
-constant-ring comparison. Source: Stacks, Tags 09A5 and 03D2. -/
+constant-ring comparison. -/
 abbrev proEtaleIdentityTransportedInverseImage (X : Scheme.{u})
     (A : Type u) [CommRing A] :=
   proEtaleModuleInverseImage (𝟙 X) (proEtaleConstantRing X A) ⋙
@@ -45,7 +52,7 @@ abbrev proEtaleIdentityTransportedInverseImage (X : Scheme.{u})
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The distinguished identity coprojection, followed by restriction along
 `U → U ×[X] X`. This is the inverse of the objectwise identity comparison before
-extension of scalars. Source: Stacks, Tags 09A5 and 00WX. -/
+extension of scalars. -/
 def proEtaleIdentityModuleCoprojection (X : Scheme.{u}) (A : Type u) [CommRing A]
     (M : proEtaleRingModules X (proEtaleConstantRing X A)) (U : X.ProEt)
     (m : M.val.obj (op U)) :
@@ -61,7 +68,7 @@ def proEtaleIdentityModuleCoprojection (X : Scheme.{u}) (A : Type u) [CommRing A
               (AsSmall.up.op.obj (op U)) m)
 
 /-- The sheafification-unit image of `m ⊗ a` in the specified tensor pullback.
-The published construction writes the scalar factor first. Source: Stacks, Tag 03EK. -/
+The published construction writes the scalar factor first. -/
 def proEtaleIdentityPullbackTmul (X : Scheme.{u}) (A : Type u) [CommRing A]
     (M : proEtaleRingModules X (proEtaleConstantRing X A)) (U : X.ProEtᵒᵖ)
     (m : ((proEtaleModuleInverseImage (𝟙 X) (proEtaleConstantRing X A)).obj M).val.obj U)
@@ -89,7 +96,7 @@ def proEtaleIdentityPullbackTmul (X : Scheme.{u}) (A : Type u) [CommRing A]
 
 /-- The existing unbounded localization in the precise coefficient universes of the
 published pro-etale operations. Only existing sheafification instances are instantiated;
-the functor is Mathlib's Q. Source: Stacks, Tag 05RU. -/
+the functor is Mathlib's Q. -/
 abbrev proEtaleIdentityLocalization (X : Scheme.{u}) (A : Type u) [CommRing A] :
     CochainComplex (proEtaleRingModules X (proEtaleConstantRing X A)) ℤ ⥤
       proEtaleDerivedCategory X A :=
@@ -292,8 +299,7 @@ private theorem identityModule_exists (X : Scheme.{u}) (A : Type u) [CommRing A]
 -- Scalar transport and the small-site model require additional elaboration steps.
 set_option backward.isDefEq.respectTransparency false in
 /-- The specified identity comparison equals the canonical coefficient map, is linear
-after scalar transport, and descends termwise to ordinary unbounded derived pullback.
-Source: Stacks, Tag 09A5. -/
+after scalar transport, and descends termwise to ordinary unbounded derived pullback. -/
 theorem proEtaleDerivedPullback_identity (X : Scheme.{u}) (A : Type u)
     [CommRing A] [Finite A] :
     ∃ e : proEtaleSheafInverseImage (𝟙 X) CommRingCat.{u + 1} ≅

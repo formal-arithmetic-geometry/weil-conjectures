@@ -39,8 +39,7 @@ set_option allowUnsafeReducibility true in
 attribute [local semireducible] derivedScalars moduleObjectDerivedPullback
   moduleObjectDerivedPushforward
 
-/-- The actual projective-line coefficient square, with fixed derived functors.
-Source: coefficient changes (2)--(3), the shifted root-line exchange rectangle. -/
+/-- The actual projective-line coefficient square, with fixed derived functors. -/
 @[irreducible]
 def LineExchangeSquare
     (l : ℕ) [Fact l.Prime] (E : PadicAlgCl.FiniteIntermediateField l)

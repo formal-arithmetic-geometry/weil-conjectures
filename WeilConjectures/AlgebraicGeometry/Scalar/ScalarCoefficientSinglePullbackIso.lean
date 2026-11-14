@@ -9,7 +9,11 @@ public import WeilConjectures.AlgebraicGeometry.Upper.UpperStarSingleTensorDefin
 
 /-!
 # The scalar coefficient comparison as a single-sheaf comparison
-Source: Stacks Project, Tag 07A4.
+
+## References
+
+* Stacks Project, Tag 07A4
+* Stacks 07A4
 -/
 
 @[expose] public noncomputable section
@@ -24,7 +28,7 @@ attribute [local irreducible] Functor.leftAdjoint Functor.rightAdjoint
   Functor.leftDerivedFunctor Functor.mapDerivedCategory upperStar lowerStar
 
 /-- The scalar coefficient comparison is the single-sheaf comparison for its
-ordinary coefficient iso. Source: Stacks 07A4. -/
+ordinary coefficient iso. -/
 theorem scalarCoefficientSinglePullbackIso_eq
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {Z W : Scheme.{u}} (f : Z ⟶ W) :

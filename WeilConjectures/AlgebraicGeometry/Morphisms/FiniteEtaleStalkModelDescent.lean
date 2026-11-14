@@ -19,7 +19,12 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseLimitDescent
 /-!
 # Descent of a finite etale cover from a stalk family
 
-Source: Stacks Project, Tags 0BQ5 and 0EY3, object descent in their proofs.
+## References
+
+* Stacks Project, Tags 0BQ5 and 0EY3, object descent in their proofs
+* Stacks Project, Tag 0BQ5 (limits-lemma-glueing-near-point), the paragraph expressing the stalk
+  spectrum as a limit, and Tag 0EY3 (limits-lemma-glueing-near-point-properties), property descent,
+  relative to `C`
 -/
 
 @[expose] public section
@@ -111,11 +116,7 @@ private theorem exists_finiteEtale_refinement
   exact ⟨r, hj.trans hjr, Limits.pullback p q, Limits.pullback.snd p q, hfin',
     het', t, H'⟩
 
-/-- A finite etale cover of the stalk family has a model on an open neighbourhood.
-
-Source: Stacks Project, Tag 0BQ5 (limits-lemma-glueing-near-point), the paragraph
-expressing the stalk spectrum as a limit, and Tag 0EY3
-(limits-lemma-glueing-near-point-properties), property descent, relative to `C`. -/
+/-- A finite etale cover of the stalk family has a model on an open neighbourhood. -/
 theorem FiniteEtale.exists_stalk_neighbourhood_model {S C : Scheme.{u}}
     [IsNoetherian S] [QuasiSeparatedSpace S]
     (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [LocallyOfFinitePresentation c]

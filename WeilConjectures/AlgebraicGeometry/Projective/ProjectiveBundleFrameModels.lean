@@ -21,7 +21,11 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 
 /-! # Projective bundles on frame charts
 
-Source: Stacks Project, Tags 01OB, 01O3, 01OE.
+## References
+
+* Stacks Project, Tags 01OB, 01O3, 01OE
+* Stacks Project, Tags 01OB and 01OE
+* Stacks Project, Constructions, Tags 01OB, 01OE, 01NR, 01MN and 01MS
 -/
 
 @[expose] public section
@@ -41,8 +45,7 @@ attribute [local irreducible] Scheme.Modules.tensorPullback
   projectiveBundlePullbackSection
 
 /-- A symmetric-algebra projective bundle with its normalized quotient and charts for
-all frames. Properness, invertibility, and base-change coherence are separate consequences.
-Source: Stacks Project, Tags 01OB and 01OE. -/
+all frames. Properness, invertibility, and base-change coherence are separate consequences. -/
 structure ProjectiveBundleFrameModels (n : ℕ) where
   bundle : ∀ (B : Scheme.{u}) (F : B.Modules)
     (_hF : projectiveBundleRank B n F), ProjectiveBundleRealization B F
@@ -50,8 +53,7 @@ structure ProjectiveBundleFrameModels (n : ℕ) where
     (U : B.Opens) (e : B.ModuleFrame F U (n + 1)),
       ProjectiveBundleFrameChart (bundle B F hF) n U e
 
-/-- Existence of the frame models, without the properness or coherence conclusions.
-Source: Stacks Project, Constructions, Tags 01OB, 01OE, 01NR, 01MN and 01MS. -/
+/-- Existence of the frame models, without the properness or coherence conclusions. -/
 theorem exists_projectiveBundleFrameModels (n : ℕ) :
     Nonempty (ProjectiveBundleFrameModels.{u} n) := by
   sorry

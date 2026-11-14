@@ -12,7 +12,9 @@ import WeilConjectures.CategoryTheory.ModuleObjects.ChangeOfScalarsSquare
 
 /-! # Restriction of native modules after coefficient transport
 
-Source: direct-image coefficient naturality and conjugation under the inverse-image adjunctions.
+## References
+
+* Stacks Project, Tag 03EK, and the naturality clause of the coefficient-ring realization
 -/
 
 @[expose] public section
@@ -93,7 +95,6 @@ private noncomputable def nativePushforwardComparison (ℓ : ℕ) [Fact ℓ.Prim
   exact ((locallyFiniteCoefficientRing_realization ℓ).choose_spec.2.2 S T h).symm
 
 /-- The normalized abelian presentation of a native module commutes with restriction.
-Source: Stacks Project, Tag 03EK, and the naturality clause of the coefficient-ring realization.
 
 Let theta denote the normalized coefficient-ring realization. Native direct image
 commutes strictly and monoidally with forgetting ambient scalars. The naturality

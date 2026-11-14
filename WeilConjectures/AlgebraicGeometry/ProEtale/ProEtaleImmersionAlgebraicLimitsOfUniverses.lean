@@ -78,8 +78,11 @@ import Mathlib.CategoryTheory.Functor.ReflectsIso.Limits
 
 /-! # Immersion inverse image with independently sized algebraic coefficients
 
-Source: Stacks Tags 09AA and 09BL, including Zariski localization and the
-finite-operation descriptions of rings and abelian groups (Tag 00YV).
+## References
+
+* Stacks Tags 09AA and 09BL, including Zariski localization and the finite-operation descriptions of
+  rings and abelian groups (Tag 00YV)
+* Tag 09AA, and Tag 09BL
 -/
 
 @[expose] public section
@@ -538,9 +541,7 @@ private theorem abelianLimits
   exact preservesLimits_of_reflects_of_preserves L (sheafCompose K U)
 
 /-- Ring and abelian inverse image along an immersion preserve small limits,
-regardless of the independent coefficient universe or the choice of left adjoint.
-
-Source: Tag 09AA, and Tag 09BL. -/
+regardless of the independent coefficient universe or the choice of left adjoint. -/
 theorem proEtale_immersion_algebraicInverse_limits
     {X Y : Scheme.{t}} (i : X ⟶ Y) [IsImmersion i]
     (L : Sheaf (ProEt.topology Y) RingCat.{max u (t + 1)} ⥤

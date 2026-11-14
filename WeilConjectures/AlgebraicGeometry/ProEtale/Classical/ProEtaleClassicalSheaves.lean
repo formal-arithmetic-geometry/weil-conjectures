@@ -45,7 +45,9 @@ import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 
 /-! # Recognizing the classical part
 
-Source: Stacks Project, Tag 099T.
+## References
+
+* Stacks Project, Tag 099T
 -/
 
 @[expose] public section
@@ -87,8 +89,6 @@ private theorem classicalModuleFor_iff (X : Scheme.{u})
 /-- The comparison inverse image is fully faithful and its essential image is the
 classical sheaves; the same comparison is an exact equivalence onto classical module
 sheaves for every discrete commutative coefficient ring.
-
-Source: Stacks Project, Tag 099T.
 -/
 theorem proEtaleClassicalSheaves (X : Scheme.{u}) :
     Nonempty

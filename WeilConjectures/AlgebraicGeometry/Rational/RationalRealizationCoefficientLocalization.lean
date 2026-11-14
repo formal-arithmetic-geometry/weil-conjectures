@@ -40,7 +40,9 @@ import WeilConjectures.Mathlib.RingTheory.OrderOfVanishing.Noetherian
 
 /-! # Normalized localization of the completed coefficient ring
 
-Source: Bhatt--Scholze, Lemma 6.8.2, pp. 58--59, and Proposition 6.8.14(2), p. 62.
+## References
+
+* Bhatt--Scholze, Lemma 6.8.2, pp. 58--59, and Proposition 6.8.14(2), p. 62
 -/
 
 @[expose] public noncomputable section
@@ -53,8 +55,7 @@ namespace AlgebraicGeometry.Scheme
 attribute [local irreducible] pbcIntegralDatum pbcRationalCoefficientEquiv
 
 /-- The completed ring localizes to the rational continuous coefficient ring,
-with its specified unit and constant sections.
-Source: Bhatt--Scholze, Lemma 6.8.2, pp. 58--59, and Proposition 6.8.14(2), p. 62. -/
+with its specified unit and constant sections. -/
 theorem rationalRealizationCoefficientLocalization
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

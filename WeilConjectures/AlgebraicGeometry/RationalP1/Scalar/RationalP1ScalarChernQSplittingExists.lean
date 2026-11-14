@@ -26,10 +26,7 @@ open DiagonalCoefficients CondensedRing
 
 attribute [local irreducible] derivedScalars Functor.mapDerivedCategory RestrictionSquare.mate
 
-/-- The q Chern arrow admits a complementary shifted line component.
-
-Source: the normalized completed q splitting, followed by realization, scalar extension, and the
-canonical q pushforward comparison. -/
+/-- The q Chern arrow admits a complementary shifted line component. -/
 theorem scalar_q_chern_splitting_exists
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (Y : Scheme.{u}) [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)]

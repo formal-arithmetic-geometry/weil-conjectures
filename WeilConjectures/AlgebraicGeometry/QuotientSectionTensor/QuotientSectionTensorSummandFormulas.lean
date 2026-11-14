@@ -9,7 +9,12 @@ public import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSe
 import WeilConjectures.AlgebraicGeometry.IntegralResidueDerivedMonoidal
 import WeilConjectures.AlgebraicGeometry.ModuleRingedComparison.ProEtaleSectionModuleFunctors
 
-/-! # Tensor comparison summand formulas -/
+/-! # Tensor comparison summand formulas
+
+## References
+
+* Stacks, Cohomology on Sites, Tag 07A4
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -100,7 +105,6 @@ private theorem summand_naturality (T : Scheme.{u})
   rfl
 
 /-- The specified total tensor comparison on each direct-sum summand.
-Source: Stacks, Cohomology on Sites, Tag 07A4.
 This is the defining summand property of totalComparison, selected by its unique
 normalized universal property. The private helpers express termwise tensor
 naturality and elementary pasting without expanding the concrete tensor data. -/

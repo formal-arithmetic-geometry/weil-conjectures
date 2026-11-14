@@ -65,10 +65,6 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 
 /-! # Constructible adic hearts, pullback, and geometric coefficient fibres
 
-Source: Bhatt--Scholze, The pro-etale topology for schemes, Section 6.8, Lemmas 6.8.2 and 6.8.7,
-Definitions 6.8.3, 6.8.6, 6.8.8 and 6.8.10, Propositions 6.8.4, 6.8.11 and 6.8.14, and Remark
-6.8.15.
-
 The finite-stage categories are the recorded raw localizations, and the algebraic
 coefficient category is the recorded common-stage pair category. The fibres below
 are normalized by completed geometric pullback, degree-zero cohomology, evaluation
@@ -83,6 +79,23 @@ at the final pro-etale object, and inversion of the uniformizer.
 ## Main statement
 
 * `adicHeartPullbackFibres`: all standard-heart, scalar, pullback and geometric-fibre clauses.
+
+## References
+
+* Bhatt--Scholze, The pro-etale topology for schemes, Section 6.8, Lemmas 6.8.2 and 6.8.7,
+  Definitions 6.8.3, 6.8.6, 6.8.8 and 6.8.10, Propositions 6.8.4, 6.8.11 and 6.8.14, and Remark
+  6.8.15
+* BBD 1.3.3
+* BBD 1.3.1
+* Stacks Tag 06YY
+* BS 6.8.2(1)
+* BS 6.8, geometric hypotheses
+* BS 6.8.11 and 6.8.14
+* BS 6.8
+* BS 6.8.11
+* BS 6.8.14
+* BS 6.8.14, common finite stages
+* BS 6.8.2(1) and 6.8.14
 -/
 
 @[expose] public noncomputable section
@@ -100,8 +113,7 @@ variable {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
   [Pretriangulated C] [Pretriangulated D]
 
 /-- If `Q` is essentially surjective, maps the aisle of `t` into that of `t'` and commutes
-with the truncations, then the aisle of `t'` is the essential image of the aisle of `t`.
-Source: BBD 1.3.3. -/
+with the truncations, then the aisle of `t'` is the essential image of the aisle of `t`. -/
 lemma le_iff_exists_of_truncLE (t : TStructure C) (t' : TStructure D) (Q : C ⥤ D) (n : ℤ)
     (hQ : ∀ X : D, ∃ K : C, Nonempty (X ≅ Q.obj K))
     (htr : Nonempty (Q ⋙ t'.truncLE n ≅ t.truncLE n ⋙ Q))
@@ -116,7 +128,7 @@ lemma le_iff_exists_of_truncLE (t : TStructure C) (t' : TStructure D) (Q : C ⥤
 
 /-- If `Q` is essentially surjective, maps the coaisle of `t` into that of `t'` and
 commutes with the truncations, then the coaisle of `t'` is the essential image of the
-coaisle of `t`. Source: BBD 1.3.3. -/
+coaisle of `t`. -/
 lemma ge_iff_exists_of_truncGE (t : TStructure C) (t' : TStructure D) (Q : C ⥤ D) (n : ℤ)
     (hQ : ∀ X : D, ∃ K : C, Nonempty (X ≅ Q.obj K))
     (htr : Nonempty (Q ⋙ t'.truncGE n ≅ t.truncGE n ⋙ Q))
@@ -129,8 +141,7 @@ lemma ge_iff_exists_of_truncGE (t : TStructure C) (t' : TStructure D) (Q : C ⥤
   exact ⟨(t.truncGE n).obj K, (t.isGE_truncGE_obj K n n le_rfl).ge,
     ⟨e ≪≫ asIso ((t'.truncGEπ n).app (Q.obj K)) ≪≫ e'.app K⟩⟩
 
-/-- A t-structure is determined by its aisles and coaisles.
-Source: BBD 1.3.1. -/
+/-- A t-structure is determined by its aisles and coaisles. -/
 lemma ext_of_le_ge {t₁ t₂ : TStructure C} (hle : t₁.le = t₂.le) (hge : t₁.ge = t₂.ge) :
     t₁ = t₂ := by
   cases t₁
@@ -148,8 +159,7 @@ section ExactScalarExtension
 variable {X : Scheme.{u}} {R S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}} (f : R ⟶ S)
   [PreservesFiniteLimits (pbcExtend f)] [PreservesFiniteColimits (pbcExtend f)]
 
-/-- An exact ordinary scalar extension computes its universal derived functor.
-Source: Stacks Tag 06YY. -/
+/-- An exact ordinary scalar extension computes its universal derived functor. -/
 theorem pbcDerivedExtend_iso_mapDerivedCategory :
     Nonempty (pbcDerivedExtend f ≅ (pbcExtend f).mapDerivedCategory) := by
   have : (pbcDerivedExtend f).IsLeftDerivedFunctor (pbcExtensionCounit f)
@@ -162,8 +172,7 @@ theorem pbcDerivedExtend_iso_mapDerivedCategory :
     (pbcExtend f).mapDerivedCategoryFactorsh.hom
     (HomotopyCategory.quasiIso (pbcModules X R) (.up ℤ)) (Iso.refl _)⟩
 
-/-- An exact scalar extension preserves the standard aisles.
-Source: BS 6.8.2(1). -/
+/-- An exact scalar extension preserves the standard aisles. -/
 theorem pbcDerivedExtend_le (K : DerivedCategory (pbcModules X R)) (n : ℤ)
     (hK : DerivedCategory.TStructure.t.le n K) :
     DerivedCategory.TStructure.t.le n ((pbcDerivedExtend f).obj K) := by
@@ -172,8 +181,7 @@ theorem pbcDerivedExtend_le (K : DerivedCategory (pbcModules X R)) (n : ℤ)
   have := (pbcExtend f).isLE_mapDerivedCategory_obj K n
   exact (DerivedCategory.TStructure.t.isLE_of_iso (e.app K).symm n).le
 
-/-- An exact scalar extension preserves the standard coaisles.
-Source: BS 6.8.2(1). -/
+/-- An exact scalar extension preserves the standard coaisles. -/
 theorem pbcDerivedExtend_ge (K : DerivedCategory (pbcModules X R)) (n : ℤ)
     (hK : DerivedCategory.TStructure.t.ge n K) :
     DerivedCategory.TStructure.t.ge n ((pbcDerivedExtend f).obj K) := by
@@ -190,15 +198,13 @@ variable (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω
   [IsAlgClosure (Padic l) Ω]
   (T : Scheme.{u}) {E F : Padic.FiniteCoefficientFields l Ω}
 
-/-- Ordinary finite coefficient extension between stages preserves finite limits.
-Source: BS 6.8.2(1). -/
+/-- Ordinary finite coefficient extension between stages preserves finite limits. -/
 theorem pbcExtend_completedScalarMap_preservesFiniteLimits (h : E ≤ F) :
     PreservesFiniteLimits (pbcExtend (pbcCompletedScalarMap l Ω T h)) := by
   rw [pbcStageCoefficientMap_eq l Ω T h]
   exact (WeilConjectures.scalarExtension_exact l _ _ _ T).1
 
-/-- Ordinary finite coefficient extension between stages preserves finite colimits.
-Source: BS 6.8.2(1). -/
+/-- Ordinary finite coefficient extension between stages preserves finite colimits. -/
 theorem pbcExtend_completedScalarMap_preservesFiniteColimits (h : E ≤ F) :
     PreservesFiniteColimits (pbcExtend (pbcCompletedScalarMap l Ω T h)) := by
   rw [pbcStageCoefficientMap_eq l Ω T h]
@@ -210,8 +216,7 @@ end AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry.Scheme.PerAdic
 
-/-- A separated finite-type k-scheme; no geometric connectedness or nonemptiness is imposed.
-Source: BS 6.8, geometric hypotheses. -/
+/-- A separated finite-type k-scheme; no geometric connectedness or nonemptiness is imposed. -/
 structure Base (k : Type u) [Field k] where
   scheme : Scheme.{u}
   [isOver : scheme.Over (Spec (.of k))]
@@ -225,8 +230,7 @@ variable {k : Type u} [Field k] (l : ℕ) [Fact l.Prime] [hl : Fact (IsUnit (l :
 
 set_option linter.unusedSectionVars false in
 include hl in
-/-- Finite type over a field gives exactly the hypotheses of the recorded adic categories.
-Source: BS 6.8.11 and 6.8.14. -/
+/-- Finite type over a field gives exactly the hypotheses of the recorded adic categories. -/
 theorem base_properties (W : Base k) :
     IsNoetherian W.scheme ∧ (∃ n : ℕ, topologicalKrullDim W.scheme ≤ n) ∧
       (∀ x : W.scheme, IsUnit (l : W.scheme.presheaf.stalk x)) := by
@@ -240,8 +244,7 @@ theorem base_properties (W : Base k) :
     (((Scheme.ΓSpecIso (.of k)).inv ≫ (W.scheme ↘ Spec (.of k)).appTop) ≫
       W.scheme.presheaf.germ ⊤ x trivial).hom
 
-/-- The two geometric finiteness properties do not depend on the coefficient prime.
-Source: BS 6.8. -/
+/-- The two geometric finiteness properties do not depend on the coefficient prime. -/
 theorem base_geometric_properties (W : Base k) :
     IsNoetherian W.scheme ∧ (∃ n : ℕ, topologicalKrullDim W.scheme ≤ n) := by
   have hloc : IsLocallyNoetherian W.scheme :=
@@ -250,26 +253,22 @@ theorem base_geometric_properties (W : Base k) :
     QuasiCompact.compactSpace_of_compactSpace (W.scheme ↘ Spec (.of k))
   exact ⟨⟨⟩, exists_topologicalKrullDim_le (W.scheme ↘ Spec (.of k))⟩
 
-/-- The noetherian structure supplied by the finite-type hypothesis.
-Source: BS 6.8. -/
+/-- The noetherian structure supplied by the finite-type hypothesis. -/
 instance baseNoetherian (W : Base k) : IsNoetherian W.scheme :=
   (base_geometric_properties W).1
 
-/-- The finite dimension bound supplied by the finite-type hypothesis.
-Source: BS 6.8. -/
+/-- The finite dimension bound supplied by the finite-type hypothesis. -/
 instance baseDimension (W : Base k) : Fact (∃ n : ℕ, topologicalKrullDim W.scheme ≤ n) :=
   ⟨(base_geometric_properties W).2⟩
 
-/-- Invertibility of the coefficient prime on every local ring.
-Source: BS 6.8. -/
+/-- Invertibility of the coefficient prime on every local ring. -/
 instance basePrimeUnit (W : Base k) : Fact (∀ x : W.scheme,
     IsUnit (l : W.scheme.presheaf.stalk x)) :=
   ⟨(base_properties l W).2.2⟩
 
 variable (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The recorded localized standard t-structure; its classes are fixed by integral images.
-Source: BS 6.8.11 and 6.8.14. -/
+/-- The recorded localized standard t-structure; its classes are fixed by integral images. -/
 @[irreducible]
 def rationalT (W : Base k) :
     Triangulated.TStructure
@@ -279,20 +278,18 @@ def rationalT (W : Base k) :
     (hInv := basePrimeUnit l W))
 
 /-- The recorded finite-stage aisle, exposed as an object predicate independently
-of competing stage shift instances. Source: BS 6.8.11. -/
+of competing stage shift instances. -/
 abbrev rationalLE (W : Base k) (n : ℤ) :
     ObjectProperty (PbcRationalCategory W.scheme (pbcIntegralDatum l E)
       (pbcUniformizer l E)) := (rationalT l E W).le n
 
-/-- The recorded finite-stage coaisle, exposed as an object predicate.
-Source: BS 6.8.11. -/
+/-- The recorded finite-stage coaisle, exposed as an object predicate. -/
 abbrev rationalGE (W : Base k) (n : ℤ) :
     ObjectProperty (PbcRationalCategory W.scheme (pbcIntegralDatum l E)
       (pbcUniformizer l E)) := (rationalT l E W).ge n
 
 /-- The aisles of the recorded localized t-structure consist of the images of integral
-objects in the corresponding integral aisles.
-Source: BS 6.8.11. -/
+objects in the corresponding integral aisles. -/
 theorem rationalLE_iff (W : Base k) (n : ℤ)
     (X : PbcRationalCategory W.scheme (pbcIntegralDatum l E) (pbcUniformizer l E)) :
     rationalLE l E W n X ↔
@@ -307,8 +304,7 @@ theorem rationalLE_iff (W : Base k) (n : ℤ)
     (fun X ↦ ⟨X.obj, ⟨Iso.refl _⟩⟩) (h.2.2.2.1 n).1 (fun K ↦ (h.2.2.1 K n).1) X
 
 /-- The coaisles of the recorded localized t-structure consist of the images of integral
-objects in the corresponding integral coaisles.
-Source: BS 6.8.11. -/
+objects in the corresponding integral coaisles. -/
 theorem rationalGE_iff (W : Base k) (n : ℤ)
     (X : PbcRationalCategory W.scheme (pbcIntegralDatum l E) (pbcUniformizer l E)) :
     rationalGE l E W n X ↔
@@ -322,35 +318,32 @@ theorem rationalGE_iff (W : Base k) (n : ℤ)
   exact Triangulated.TStructure.ge_iff_exists_of_truncGE _ _ _ n
     (fun X ↦ ⟨X.obj, ⟨Iso.refl _⟩⟩) (h.2.2.2.1 n).2 (fun K ↦ (h.2.2.1 K n).2) X
 
-/-- The recorded localized t-structure is bounded.
-Source: BS 6.8.11. -/
+/-- The recorded localized t-structure is bounded. -/
 theorem rationalT_bounded (W : Base k) : (rationalT l E W).bounded = ⊤ := by
   unfold rationalT
   exact (Classical.choose_spec (pbc_localized_tstructure W.scheme l E
     (hNoeth := baseNoetherian W) (hDim := baseDimension W)
     (hInv := basePrimeUnit l W))).2.1
 
-/-- Orthogonality of the recorded localized aisle and shifted coaisle.
-Source: BS 6.8.11. -/
+/-- Orthogonality of the recorded localized aisle and shifted coaisle. -/
 theorem rational_hom_eq_zero (W : Base k)
     {X Y : PbcRationalCategory W.scheme (pbcIntegralDatum l E) (pbcUniformizer l E)}
     (f : X ⟶ Y) (hX : rationalLE l E W 0 X) (hY : rationalGE l E W 1 Y) : f = 0 :=
   (rationalT l E W).zero' f hX hY
 
-/-- The recorded localized aisles increase. Source: BS 6.8.11. -/
+/-- The recorded localized aisles increase. -/
 theorem rationalLE_zero_one (W : Base k)
     (X : PbcRationalCategory W.scheme (pbcIntegralDatum l E) (pbcUniformizer l E))
     (hX : rationalLE l E W 0 X) : rationalLE l E W 1 X :=
   (rationalT l E W).le_zero_le X hX
 
-/-- The recorded localized coaisles decrease. Source: BS 6.8.11. -/
+/-- The recorded localized coaisles decrease. -/
 theorem rationalGE_one_zero (W : Base k)
     (X : PbcRationalCategory W.scheme (pbcIntegralDatum l E) (pbcUniformizer l E))
     (hX : rationalGE l E W 1 X) : rationalGE l E W 0 X :=
   (rationalT l E W).ge_one_le X hX
 
-/-- Every object is bounded for the recorded localized t-structure.
-Source: BS 6.8.11. -/
+/-- Every object is bounded for the recorded localized t-structure. -/
 theorem rational_exists_bounds (W : Base k)
     (X : PbcRationalCategory W.scheme (pbcIntegralDatum l E) (pbcUniformizer l E)) :
     (∃ a : ℤ, rationalGE l E W a X) ∧ ∃ b : ℤ, rationalLE l E W b X := by
@@ -363,18 +356,15 @@ theorem rational_exists_bounds (W : Base k)
 variable (Qbar : Type v) [Field Qbar] [Algebra (Padic l) Qbar]
   [IsAlgClosure (Padic l) Qbar]
 
-/-- The recorded coherent scalar system at a separated finite-type base.
-Source: BS 6.8.14. -/
+/-- The recorded coherent scalar system at a separated finite-type base. -/
 abbrev stages (W : Base k) :=
   pbcScalarSystem l Qbar W.scheme (baseDimension W).out (basePrimeUnit l W).out
 
-/-- The existing inclusion of a finite coefficient field in the raw common-stage category.
-Source: BS 6.8.14, common finite stages. -/
+/-- The existing inclusion of a finite coefficient field in the raw common-stage category. -/
 abbrev inclusion (W : Base k) (L : Padic.FiniteCoefficientFields l Qbar) :=
   (stages l Qbar W).ι L
 
-/-- Common-stage classes are precisely the isomorphism closures of finite-stage classes.
-Source: BS 6.8.14, common finite stages. -/
+/-- Common-stage classes are precisely the isomorphism closures of finite-stage classes. -/
 @[irreducible]
 def commonClass (W : Base k) (nonpositive : Bool) (n : ℤ) :
     ObjectProperty (pbcQbarCategory l Qbar W.scheme) :=
@@ -384,8 +374,7 @@ def commonClass (W : Base k) (nonpositive : Bool) (n : ℤ) :
       else rationalGE l (pbcFiniteField.{u} l Qbar L) W n M) ∧
       Nonempty (K ≅ (inclusion l Qbar W L).obj M)
 
-/-- The nonpositive common-stage classes, unfolded.
-Source: BS 6.8.14. -/
+/-- The nonpositive common-stage classes, unfolded. -/
 theorem commonClass_true_iff (W : Base k) (n : ℤ) (K : pbcQbarCategory l Qbar W.scheme) :
     commonClass l Qbar W true n K ↔ ∃ (L : Padic.FiniteCoefficientFields l Qbar)
       (M : pbcStageCategory l Qbar W.scheme L),
@@ -394,8 +383,7 @@ theorem commonClass_true_iff (W : Base k) (n : ℤ) (K : pbcQbarCategory l Qbar 
   unfold commonClass
   exact Iff.rfl
 
-/-- The nonnegative common-stage classes, unfolded.
-Source: BS 6.8.14. -/
+/-- The nonnegative common-stage classes, unfolded. -/
 theorem commonClass_false_iff (W : Base k) (n : ℤ) (K : pbcQbarCategory l Qbar W.scheme) :
     commonClass l Qbar W false n K ↔ ∃ (L : Padic.FiniteCoefficientFields l Qbar)
       (M : pbcStageCategory l Qbar W.scheme L),
@@ -404,8 +392,7 @@ theorem commonClass_false_iff (W : Base k) (n : ℤ) (K : pbcQbarCategory l Qbar
   unfold commonClass
   exact Iff.rfl
 
-/-- Finite scalar extension between stages preserves the finite-stage aisles.
-Source: BS 6.8.2(1) and 6.8.14. -/
+/-- Finite scalar extension between stages preserves the finite-stage aisles. -/
 theorem rationalLE_stageExtension (W : Base k) {L L' : Padic.FiniteCoefficientFields l Qbar}
     (h : L ≤ L') (n : ℤ) (M : pbcStageCategory l Qbar W.scheme L)
     (hM : rationalLE l (pbcFiniteField.{u} l Qbar L) W n M) :
@@ -420,8 +407,7 @@ theorem rationalLE_stageExtension (W : Base k) {L L' : Padic.FiniteCoefficientFi
       ⟨((stages l Qbar W).T h).mapIso e ≪≫ (pbcScalarIntegralComparison l Qbar W.scheme
         (baseDimension W).out (basePrimeUnit l W).out h).app K⟩⟩
 
-/-- Finite scalar extension between stages preserves the finite-stage coaisles.
-Source: BS 6.8.2(1) and 6.8.14. -/
+/-- Finite scalar extension between stages preserves the finite-stage coaisles. -/
 theorem rationalGE_stageExtension (W : Base k) {L L' : Padic.FiniteCoefficientFields l Qbar}
     (h : L ≤ L') (n : ℤ) (M : pbcStageCategory l Qbar W.scheme L)
     (hM : rationalGE l (pbcFiniteField.{u} l Qbar L) W n M) :
@@ -436,8 +422,7 @@ theorem rationalGE_stageExtension (W : Base k) {L L' : Padic.FiniteCoefficientFi
       ⟨((stages l Qbar W).T h).mapIso e ≪≫ (pbcScalarIntegralComparison l Qbar W.scheme
         (baseDimension W).out (basePrimeUnit l W).out h).app K⟩⟩
 
-/-- The finite-stage aisles are stable under the normalized stage shift.
-Source: BS 6.8.11. -/
+/-- The finite-stage aisles are stable under the normalized stage shift. -/
 theorem rationalLE_shift (W : Base k) (L : Padic.FiniteCoefficientFields l Qbar)
     (n a n' : ℤ) (hn : a + n' = n) (M : pbcStageCategory l Qbar W.scheme L)
     (hM : rationalLE l (pbcFiniteField.{u} l Qbar L) W n M) :
@@ -451,8 +436,7 @@ theorem rationalLE_shift (W : Base k) (L : Padic.FiniteCoefficientFields l Qbar)
         (pbcRationalHasShift l Qbar W.scheme L) a).mapIso e ≪≫
       ((pbcStageLocalization l Qbar W.scheme L).commShiftIso a).symm.app K⟩⟩
 
-/-- The finite-stage coaisles are stable under the normalized stage shift.
-Source: BS 6.8.11. -/
+/-- The finite-stage coaisles are stable under the normalized stage shift. -/
 theorem rationalGE_shift (W : Base k) (L : Padic.FiniteCoefficientFields l Qbar)
     (n a n' : ℤ) (hn : a + n' = n) (M : pbcStageCategory l Qbar W.scheme L)
     (hM : rationalGE l (pbcFiniteField.{u} l Qbar L) W n M) :
@@ -466,8 +450,7 @@ theorem rationalGE_shift (W : Base k) (L : Padic.FiniteCoefficientFields l Qbar)
         (pbcRationalHasShift l Qbar W.scheme L) a).mapIso e ≪≫
       ((pbcStageLocalization l Qbar W.scheme L).commShiftIso a).symm.app K⟩⟩
 
-/-- The common-stage classes are closed under isomorphisms.
-Source: BS 6.8.14. -/
+/-- The common-stage classes are closed under isomorphisms. -/
 theorem commonClass_of_iso (W : Base k) (b : Bool) (n : ℤ)
     {X Y : pbcQbarCategory l Qbar W.scheme} (e : X ≅ Y) (hX : commonClass l Qbar W b n X) :
     commonClass l Qbar W b n Y := by
@@ -475,8 +458,7 @@ theorem commonClass_of_iso (W : Base k) (b : Bool) (n : ℤ)
   obtain ⟨L, M, hM, ⟨e'⟩⟩ := hX
   exact ⟨L, M, hM, ⟨e.symm ≪≫ e'⟩⟩
 
-/-- The nonpositive common-stage classes are stable under shifts.
-Source: BS 6.8.14. -/
+/-- The nonpositive common-stage classes are stable under shifts. -/
 theorem commonClass_true_shift (W : Base k) (n a n' : ℤ) (hn : a + n' = n)
     (X : pbcQbarCategory l Qbar W.scheme) (hX : commonClass l Qbar W true n X) :
     commonClass l Qbar W true n' (X⟦a⟧) := by
@@ -485,8 +467,7 @@ theorem commonClass_true_shift (W : Base k) (n a n' : ℤ) (hn : a + n' = n)
     rationalLE_shift l Qbar W L n a n' hn M hM,
     ⟨(shiftFunctor _ a).mapIso e ≪≫ ((inclusion l Qbar W L).commShiftIso a).symm.app M⟩⟩
 
-/-- The nonnegative common-stage classes are stable under shifts.
-Source: BS 6.8.14. -/
+/-- The nonnegative common-stage classes are stable under shifts. -/
 theorem commonClass_false_shift (W : Base k) (n a n' : ℤ) (hn : a + n' = n)
     (X : pbcQbarCategory l Qbar W.scheme) (hX : commonClass l Qbar W false n X) :
     commonClass l Qbar W false n' (X⟦a⟧) := by
@@ -495,8 +476,7 @@ theorem commonClass_false_shift (W : Base k) (n a n' : ℤ) (hn : a + n' = n)
     rationalGE_shift l Qbar W L n a n' hn M hM,
     ⟨(shiftFunctor _ a).mapIso e ≪≫ ((inclusion l Qbar W L).commShiftIso a).symm.app M⟩⟩
 
-/-- Orthogonality of the common-stage classes, checked at a common field.
-Source: BS 6.8.14. -/
+/-- Orthogonality of the common-stage classes, checked at a common field. -/
 theorem commonClass_hom_eq_zero (W : Base k) {X Y : pbcQbarCategory l Qbar W.scheme}
     (f : X ⟶ Y) (hX : commonClass l Qbar W true 0 X) (hY : commonClass l Qbar W false 1 Y) :
     f = 0 := by
@@ -510,8 +490,7 @@ theorem commonClass_hom_eq_zero (W : Base k) {X Y : pbcQbarCategory l Qbar W.sch
     (rationalGE_stageExtension l Qbar W hL' 1 N hN)]
   exact ((stages l Qbar W).pairPreadditive_exists.exists.choose_spec _ _ P hL hL' 0 0).2
 
-/-- The finite-stage truncation triangle gives the common-stage decomposition.
-Source: BS 6.8.14. -/
+/-- The finite-stage truncation triangle gives the common-stage decomposition. -/
 theorem commonClass_exists_triangle (W : Base k) (A : pbcQbarCategory l Qbar W.scheme) :
     ∃ (X Y : pbcQbarCategory l Qbar W.scheme) (_ : commonClass l Qbar W true 0 X)
       (_ : commonClass l Qbar W false 1 Y) (f : X ⟶ A) (g : A ⟶ Y)
@@ -528,8 +507,7 @@ theorem commonClass_exists_triangle (W : Base k) (A : pbcQbarCategory l Qbar W.s
       (rationalGE_iff l _ W 1 _).2 ⟨_, (t.isGE_truncGE_obj _ 1 1 le_rfl).ge, ⟨Iso.refl _⟩⟩,
       ⟨Iso.refl _⟩⟩, _, _, _, hD⟩
 
-/-- Every common-stage object is bounded for the common-stage classes.
-Source: BS 6.8.14. -/
+/-- Every common-stage object is bounded for the common-stage classes. -/
 theorem commonClass_exists_bounds (W : Base k) (A : pbcQbarCategory l Qbar W.scheme) :
     (∃ a : ℤ, commonClass l Qbar W false a A) ∧
       ∃ b : ℤ, commonClass l Qbar W true b A := by
@@ -538,22 +516,19 @@ theorem commonClass_exists_bounds (W : Base k) (A : pbcQbarCategory l Qbar W.sch
       ⟨A.stage, A.obj, ha, ⟨Iso.refl _⟩⟩⟩,
     ⟨b, (commonClass_true_iff l Qbar W b A).2 ⟨A.stage, A.obj, hb, ⟨Iso.refl _⟩⟩⟩⟩
 
-/-- The nonpositive common-stage classes increase.
-Source: BS 6.8.14. -/
+/-- The nonpositive common-stage classes increase. -/
 theorem commonClass_true_zero_one (W : Base k) (X : pbcQbarCategory l Qbar W.scheme)
     (hX : commonClass l Qbar W true 0 X) : commonClass l Qbar W true 1 X := by
   obtain ⟨L, M, hM, e⟩ := (commonClass_true_iff l Qbar W 0 X).1 hX
   exact (commonClass_true_iff l Qbar W 1 X).2 ⟨L, M, rationalLE_zero_one l _ W M hM, e⟩
 
-/-- The nonnegative common-stage classes decrease.
-Source: BS 6.8.14. -/
+/-- The nonnegative common-stage classes decrease. -/
 theorem commonClass_false_one_zero (W : Base k) (X : pbcQbarCategory l Qbar W.scheme)
     (hX : commonClass l Qbar W false 1 X) : commonClass l Qbar W false 0 X := by
   obtain ⟨L, M, hM, e⟩ := (commonClass_false_iff l Qbar W 1 X).1 hX
   exact (commonClass_false_iff l Qbar W 0 X).2 ⟨L, M, rationalGE_one_zero l _ W M hM, e⟩
 
-/-- The t-structure on the common-stage category with the prescribed classes.
-Source: BS 6.8.14. -/
+/-- The t-structure on the common-stage category with the prescribed classes. -/
 def commonTStructure (W : Base k) :
     Triangulated.TStructure (pbcQbarCategory l Qbar W.scheme) where
   le := commonClass l Qbar W true
@@ -567,15 +542,13 @@ def commonTStructure (W : Base k) :
   ge_one_le := commonClass_false_one_zero l Qbar W
   exists_triangle_zero_one := commonClass_exists_triangle l Qbar W
 
-/-- The common-stage t-structure is bounded.
-Source: BS 6.8.14. -/
+/-- The common-stage t-structure is bounded. -/
 theorem commonTStructure_bounded (W : Base k) : (commonTStructure l Qbar W).bounded = ⊤ := by
   refine le_antisymm le_top fun A _ ↦ ?_
   obtain ⟨⟨a, ha⟩, ⟨b, hb⟩⟩ := commonClass_exists_bounds l Qbar W A
   exact ⟨⟨a, ⟨ha⟩⟩, ⟨b, ⟨hb⟩⟩⟩
 
-/-- The common-stage t-structure is fixed by its two finite-stage image classes.
-Source: BS 6.8.14. -/
+/-- The common-stage t-structure is fixed by its two finite-stage image classes. -/
 theorem commonT_existsUnique (W : Base k) :
     ∃! t : Triangulated.TStructure (pbcQbarCategory l Qbar W.scheme),
       (∀ n : ℤ, t.le n = commonClass l Qbar W true n ∧
@@ -586,8 +559,7 @@ theorem commonT_existsUnique (W : Base k) :
   exact Triangulated.TStructure.ext_of_le_ge (funext fun n ↦ (h' n).1)
     (funext fun n ↦ (h' n).2)
 
-/-- The bounded common-stage t-structure, determined by its specified classes.
-Source: BS 6.8.14. -/
+/-- The bounded common-stage t-structure, determined by its specified classes. -/
 @[irreducible]
 def commonT (W : Base k) :
     Triangulated.TStructure (pbcQbarCategory l Qbar W.scheme) :=

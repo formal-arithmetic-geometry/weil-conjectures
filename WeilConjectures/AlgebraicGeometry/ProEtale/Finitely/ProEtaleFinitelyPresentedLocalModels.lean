@@ -12,7 +12,9 @@ import Mathlib.Algebra.Module.FinitePresentation
 
 /-! # Finitely presented local constant models on the pro-etale site
 
-Source: Stacks Project, Tags 09AJ and 093U.
+## References
+
+* Stacks Project, Tags 09AJ and 093U
 -/
 
 @[expose] public section
@@ -23,7 +25,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- On every site object there is a covering sieve with finitely presented constant
 module models on its members. This is the local clause of affine constructibility,
-without choosing a scheme stratification. Source: Stacks Project, Tags 09AJ and 093U. -/
+without choosing a scheme stratification. -/
 def IsFinitelyPresentedLocallyConstantProEtaleModule {X : Scheme.{u}} {R : Type u} [CommRing R]
     (F : proEtaleRingModules X (proEtaleConstantRing X R)) : Prop :=
   ∀ V : X.ProEt, ∃ T : Sieve V, T ∈ ProEt.topology X V ∧

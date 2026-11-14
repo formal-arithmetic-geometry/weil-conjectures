@@ -11,13 +11,16 @@ public import WeilConjectures.AlgebraicGeometry.Bounded.BoundedConstructibleTowe
 /-!
 # Intrinsic constructibility in the site coefficient universe
 
-Source: Stacks Tags 09AI and 09AJ.
-
 The existing small-coefficient predicate is re-exported. This interface permits finite
 coefficients in Type (u+1), as required by the recorded adic tower. Finite stalks of a
 locally constant sheaf are equivalently expressed by finite constant modules on a
 refinement of its trivializing covering. Restrictions retain their actual inverse-image
 coefficient sheaves and are linear over those sheaves.
+
+## References
+
+* Stacks Tags 09AI and 09AJ
+* Stacks 09AJ
 -/
 
 @[expose] public noncomputable section
@@ -33,8 +36,7 @@ namespace AlgebraicGeometry.Scheme
 /-- Intrinsic finite-stratification constructibility for a finite coefficient ring in the
 site object universe. Each restricted sheaf is locally a finite constant module; this is
 local constancy with finite geometric stalks. The positive number of strata includes the
-empty scheme by a single empty stratum. No etale-origin condition is part of this notion.
-Source: Stacks 09AJ. -/
+empty scheme by a single empty stratum. No etale-origin condition is part of this notion. -/
 def IsConstructibleProEtaleCoefficientModuleSheaf
     (Y : Scheme.{u}) (A : Type (u + 1)) [CommRing A] [Finite A]
     (F : pbcModules Y (adicLisseConstantRing Y A)) : Prop :=

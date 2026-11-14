@@ -20,7 +20,10 @@ import WeilConjectures.AlgebraicGeometry.ProjStandardOpenProperties
 /-!
 # Exact maps on fixed associated graded-module sheaves
 
-Source: Stacks Project, Tag 01M7, final paragraph.
+## References
+
+* Stacks Project, Tag 01M7, final paragraph
+* Stacks Project, Constructions, Tag 01M7, final paragraph
 -/
 
 @[expose] public section
@@ -112,8 +115,7 @@ private theorem basis_chain_exact
   · exact ComposableArrows.exact₂_mk _ hc₂ he₂
   · exact ComposableArrows.exact₂_mk _ hc₁ he₁
 
-/-- Fixed associated sheaves of an exact graded chain admit an exact chain of maps.
-Source: Stacks Project, Constructions, Tag 01M7, final paragraph. -/
+/-- Fixed associated sheaves of an exact graded chain admit an exact chain of maps. -/
 theorem graded_chain_maps_exact (k : Type u) [Field k]
     (M : ModuleCat.{u} (MvPolynomial (Fin 2) k))
     (𝓜 : ℤ → AddSubgroup M) (h𝓜 : DirectSum.IsInternal 𝓜)

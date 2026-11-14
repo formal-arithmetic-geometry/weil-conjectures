@@ -17,6 +17,10 @@ import Mathlib.CategoryTheory.Sites.Pullback
 import WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
 
 /-! # Inverse image preserves the native integral Tate tower limit
+
+## References
+
+* Stacks Project, Sites, Tag 03CF
 -/
 
 @[expose] public noncomputable section
@@ -116,9 +120,7 @@ private noncomputable def abelianForgetInverseImageIso
     (Scheme.proEtaleBaseChange f) (forget AddCommGrpCat.{u + 1})
 
 /-- The particular inverse limit defining the integral Tate line is preserved by
-inverse image. This asserts preservation of this tower, rather than arbitrary limits.
-
-Source: Stacks Project, Sites, Tag 03CF. -/
+inverse image. This asserts preservation of this tower, rather than arbitrary limits. -/
 theorem spIntegralTwist_inverseImage_isLimit
     {X Y : Scheme.{u}} (f : X ⟶ Y) (ℓ : ℕ) [Fact ℓ.Prime]
     [∀ x : X, Invertible (ℓ : X.residueField x)]

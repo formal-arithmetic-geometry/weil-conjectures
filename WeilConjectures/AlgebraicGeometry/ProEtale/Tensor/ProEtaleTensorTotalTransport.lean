@@ -11,7 +11,9 @@ import all WeilConjectures.Algebra.Homology.CanonicalTensorPullbackOfUniverses.R
 
 /-! # Transport of the total tensor comparison
 
-Source: Stacks Project, Cohomology on Sites, Tag 07A4.
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 07A4
 -/
 
 @[expose] public noncomputable section
@@ -28,8 +30,7 @@ attribute [local irreducible] CategoryTheory.Functor.leftAdjoint
   CategoryTheory.presheafToSheaf SheafOfModules.monoidalCategory
   proEtaleOrdinaryTensorPullback
 
-/-- Transport a normalized ordinary tensor comparison to its signed total complexes.
-Source: Stacks Project, Cohomology on Sites, Tag 07A4. -/
+/-- Transport a normalized ordinary tensor comparison to its signed total complexes. -/
 theorem proEtaleTensorTotalTransport
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})

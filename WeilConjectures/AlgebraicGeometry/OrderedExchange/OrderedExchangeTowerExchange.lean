@@ -14,6 +14,14 @@ comparison `rho`, to the ambient-level equation `restriction_strictExchange` bel
 equation splits into the compatibility of scalar restriction with the ambient exchange
 (`res_integralExchange`) and the constant-coefficient strict realization of the ambient
 exchange (`constantExchange_reduction`).
+
+## References
+
+* Stacks 07A7
+* Stacks 0B56
+* Stacks 07A7, 0D6D, 0E48
+* Stacks 07A7, 0B56, 099M
+* Stacks 099M, 0E48
 -/
 
 @[expose] public noncomputable section
@@ -28,8 +36,7 @@ variable {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 variable {X' X Y' Y : Scheme.{t}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
   {f : X ⟶ Y} {g : Y' ⟶ Y}
 
-/-- The ambient exchange with constant coefficients.
-Source: Stacks 07A7. -/
+/-- The ambient exchange with constant coefficients. -/
 abbrev constantExchange (sq : ChosenCartesianSquare g' f' f g) :
     push (A := A) f ⋙ pull (A := A) g ⟶ pull (A := A) g' ⋙ push (A := A) f' :=
   proEtaleAmbientRingedExchange sq (exchangeConstantRing X A) (exchangeConstantRing Y A)
@@ -37,8 +44,7 @@ abbrev constantExchange (sq : ChosenCartesianSquare g' f' f g) :
     (exchangeConstantIso g A) (exchangeConstantIso g' A) (exchangeConstantIso f' A)
     (exchangeConstant_coherent sq)
 
-/-- The strict projection is natural in the ambient input.
-Source: Stacks 0B56. -/
+/-- The strict projection is natural in the ambient input. -/
 theorem projection_naturality {U V : Scheme.{t}} (u : U ⟶ V) {M N : D (A := A) U}
     (a : M ⟶ N) :
     (reduction d V).map ((push (A := A) u).map a) ≫ projection d u N =
@@ -61,7 +67,6 @@ theorem projection_naturality {U V : Scheme.{t}} (u : U ⟶ V) {M N : D (A := A)
 
 /-- Scalar restriction carries the completed ambient exchange to the constant one,
 conjugated by `alpha` and `chi`.
-Source: Stacks 07A7, 0D6D, 0E48.
 Both exchanges are mates of the canonical pullback-composition comparisons
 (`proEtaleCanonicalDerivedPullbackComparison`, transported along the square), `chi` is the
 mate of the inverse of `alpha`, so by pasting of mates this reduces to the compatibility of
@@ -81,7 +86,6 @@ theorem res_integralExchange (sq : ChosenCartesianSquare g' f' f g) (K : d.deriv
 
 /-- The constant strict tower mate realizes the reduction of the constant ambient exchange
 through the reduction/pullback comparisons and the strict projections.
-Source: Stacks 07A7, 0B56, 099M.
 Transposing under the constant tower adjunction for `f'`, the projections become
 `reductionPullIso` followed by the ambient counits and the constant mate becomes the strict
 pullback square; the equation then reduces to the compatibility of `reductionPullIso` with
@@ -96,8 +100,7 @@ theorem constantExchange_reduction (sq : ChosenCartesianSquare g' f' f g) (N : D
         (exchangeConstantSquare (A := A) sq).exchangeTowerMate.app ((reduction d X).obj N) := by
   sorry
 
-/-- The ambient form of the third strict coefficient equation.
-Source: Stacks 099M, 0E48. -/
+/-- The ambient form of the third strict coefficient equation. -/
 theorem restriction_strictExchange (sq : ChosenCartesianSquare g' f' f g) (K : d.derived X) :
     (reduction d Y').map ((res d Y').map ((d.integralExchange sq).app K)) ≫
         (reduction d Y').map ((chi d f').hom.app ((d.pull g').obj K)) ≫

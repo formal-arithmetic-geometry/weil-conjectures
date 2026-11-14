@@ -149,6 +149,10 @@ import all WeilConjectures.Mathlib.LinearAlgebra.Matrix.Rank
 import all WeilConjectures.Mathlib.LinearAlgebra.Matrix.SchurComplement
 
 /-! # Lisse integral lattices on an ordered stratification
+
+## References
+
+* Bhatt--Scholze, Lemma 6.8.13, first paragraph
 -/
 
 @[expose] public noncomputable section
@@ -735,8 +739,6 @@ attribute [local irreducible] CondensedRing.upperStar Mod.extendRestrictAdjuncti
   Mod.comap Padic.coefficientExtensionIntegers
 
 /-- A lisse spectral-coefficient module has integral lattices on strata with open prefixes.
-
-Source: Bhatt--Scholze, Lemma 6.8.13, first paragraph.
 
 Proof. Choose a small model of the finite dimensional Q_l-algebra E and transport its
 spectral norm, valuation ring, continuous functions and module objects along the induced

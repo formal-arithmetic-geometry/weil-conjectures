@@ -13,11 +13,13 @@ import WeilConjectures.AlgebraicGeometry.Completed.Koszul.CompletedKoszulQuotien
 
 /-! # Presentation witnesses imply canonical actual completeness
 
-Source: Stacks Tags 0A0E and 099M.
-
 The hypothesis is the published existential presentation witness. The conclusions
 use the actual completed ring, every generating tuple and representative, the
 reflector's canonical representative, and the specified strict quotient-tower unit.
+
+## References
+
+* Stacks Tags 0A0E and 099M
 -/
 
 @[expose] public noncomputable section
@@ -27,8 +29,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- An intrinsic presentation witness makes every actual Koszul unit and the canonical
-strict quotient-tower unit invertible.
-Source: Stacks Tags 0A0E and 099M. -/
+strict quotient-tower unit invertible. -/
 theorem sfConstructibleCanonicalCompleteness
     (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (M : PbcCompletedDerived X d) (hM : PbcIsIntrinsicallyComplete X d M) :

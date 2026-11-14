@@ -14,7 +14,10 @@ import Mathlib.AlgebraicGeometry.PullbackCarrier
 
 /-! # Residue comparison for affine product models over a stalk
 
-Source: Stacks Project, Tag 0307. -/
+## References
+
+* Stacks Project, Tag 0307
+-/
 
 @[expose] public section
 universe u
@@ -67,9 +70,7 @@ private theorem spec_residue_naturality (R S : CommRingCat.{u}) (alg : Algebra R
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
-/-- A product presentation over the actual base stalk identifies residue extensions.
-
-Source: Stacks Project, Tag 0307. -/
+/-- A product presentation over the actual base stalk identifies residue extensions. -/
 theorem stalk_product_residue_comparison
     {N X : Scheme.{u}} (f : X ⟶ N) (s : N)
     (I : Type) (S : I → CommRingCat.{u})

@@ -18,7 +18,11 @@ import WeilConjectures.AlgebraicGeometry.Geometric.GeometricFibreConnectedPreima
 /-!
 # An étale clopen partition adapted to a proper geometric fibre
 
-Source: Stacks Project, More on Morphisms, Tag 0BUI, Stein splitting paragraph.
+## References
+
+* Stacks Project, More on Morphisms, Tag 0BUI, Stein splitting paragraph
+* Stacks Project, More on Morphisms, Tag 0BUI, from the Stein factorization through the sentence
+  identifying its purely inseparable fibre pieces
 -/
 
 @[expose] public section
@@ -34,9 +38,6 @@ namespace AlgebraicGeometry
 /-- A proper family admits, étale locally at a marked base point, a finite clopen
 partition whose pieces meet the marked geometric fibre in connected nonempty subsets.
 There is no assertion about other fibres and no flatness hypothesis.
-
-Source: Stacks Project, More on Morphisms, Tag 0BUI, from the Stein factorization through the
-sentence identifying its purely inseparable fibre pieces.
 -/
 theorem Scheme.Hom.exists_etale_geometricFibre_clopen_partition
     {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f] (s : S) :

@@ -11,7 +11,11 @@ public import WeilConjectures.SixFunctors.WeilFrobeniusAction.WeilFrobeniusActio
 
 /-! # Explicit ordinary small model for native Frobenius
 
-Source: Stacks 03D6 and 03EO.
+## References
+
+* Stacks 03D6 and 03EO
+* Stacks 03D6
+* Stacks 03EO
 -/
 
 @[expose] public noncomputable section
@@ -23,13 +27,11 @@ open WeilConjectures.WeilFrobeniusAction
 
 variable (Y : Scheme.{u}) (l : ℕ) [Fact l.Prime]
 
-/-- The actual locally finite coefficient functions, restricted to the lifted site.
-Source: Stacks 03D6. -/
+/-- The actual locally finite coefficient functions, restricted to the lifted site. -/
 abbrev ring : Sheaf (topology Y) CommRingCat.{u + 1} :=
   SheafOfModules.SmallSite.coefficient (Scheme.ProEt.topology Y) (comparisonRing l Y)
 
-/-- The ordinary equivalence first un-lifts the site, then reverses native section encoding.
-Source: Stacks 03D6 and 03EO. -/
+/-- The ordinary equivalence first un-lifts the site, then reverses native section encoding. -/
 def equivalence : TwistedActionRingedSite.Modules (ring Y l) ≌ AdicSheaf l Y :=
   ((SheafOfModules.SmallSite.equivalence (Scheme.ProEt.topology Y)
     (comparisonRing l Y)).trans (adicSectionModuleEquivalence l Y).symm).changeFunctor
@@ -39,8 +41,7 @@ def equivalence : TwistedActionRingedSite.Modules (ring Y l) ≌ AdicSheaf l Y :
         (Scheme.ProEt.topology Y) (comparisonRing l Y)))
           (adicSectionModuleEquivalence l Y).inverse)
 
-/-- The equivalence retains addition of actual section maps.
-Source: Stacks 03EO. -/
+/-- The equivalence retains addition of actual section maps. -/
 instance equivalence_additive : (equivalence Y l).functor.Additive := by
   have : (comparisonModuleFunctor l Y).Additive :=
     { map_add := by intros; ext V x; rfl }

@@ -20,7 +20,12 @@ import WeilConjectures.CategoryTheory.Ringed.RingedDerivedRestrictionGeneralSupp
 
 /-! # Input comparison for residue lifting on one stratum
 
-Source: Bhatt--Scholze, Lemma 6.5.8 and Proposition 6.6.11.
+## References
+
+* Bhatt--Scholze, Lemma 6.5.8 and Proposition 6.6.11
+* Bhatt--Scholze, Lemma 6.5.8(1), Definition 6.5.1
+* Bhatt--Scholze, Lemma 6.5.8(1)
+* Bhatt--Scholze, Lemmas 6.5.8(1), (2), 6.6.8 and Proposition 6.6.11
 -/
 
 @[expose] public noncomputable section
@@ -64,8 +69,7 @@ private noncomputable def inputSliceIso
 
 /-- The completed coefficient comparison on the fixed stratum. Each factor is
 projection-normalized: inverse image of the quotient limit, the integral coefficient
-presentation, and the DVR coefficient model.
-Source: Bhatt--Scholze, Lemma 6.5.8(1), Definition 6.5.1. -/
+presentation, and the DVR coefficient model. -/
 def integralResidueStratumCoefficient
     (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -78,8 +82,7 @@ def integralResidueStratumCoefficient
     WeilConjectures.purCoefficientIso l E S ≪≫ c.completed.symm
 
 /-- The actual stratum inverse image followed by scalar restriction along the
-normalized coefficient comparison. The coefficient universe is unchanged.
-Source: Bhatt--Scholze, Lemma 6.5.8(1). -/
+normalized coefficient comparison. The coefficient universe is unchanged. -/
 def integralResidueStratumPull
     (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -92,8 +95,7 @@ def integralResidueStratumPull
 
 set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 /-- Normalized coefficient transport supplies the two inputs of residue perfect lifting.
-It asserts neither the existence of integral perfect models nor any covering refinement.
-Source: Bhatt--Scholze, Lemmas 6.5.8(1), (2), 6.6.8 and Proposition 6.6.11. -/
+It asserts neither the existence of integral perfect models nor any covering refinement. -/
 theorem integralResidueStratum_input
     (T : Scheme.{u}) [IsNoetherian T] (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

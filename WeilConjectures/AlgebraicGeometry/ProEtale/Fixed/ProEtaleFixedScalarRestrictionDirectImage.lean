@@ -17,8 +17,14 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantExact
 /-!
 # Direct image and finite coefficient restriction in the fixed scalar presentation
 
-Source: Stacks, Tags 0D6E and 07A6.
 The comparison is the actual adjunction mate of the canonical inverse-image comparison.
+
+## References
+
+* Stacks, Tags 0D6E and 07A6
+* Stacks Tag 03D6
+* Stacks Tag 07A6
+* Stacks Tag 0D6E
 -/
 
 @[expose] public section
@@ -141,8 +147,7 @@ private theorem restriction_underived_mate
     ((ModuleCat.restrictCoextendScalarsAdj.{u + 1, u + 1, u + 1} φ).right_triangle_components
       (M.obj.obj (Opposite.op ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).obj U)))).symm
 
-/-- The sectionwise coefficient square, cached with its two explicit composite functor types.
-Source: Stacks Tag 03D6. -/
+/-- The sectionwise coefficient square, cached with its two explicit composite functor types. -/
 @[no_expose] noncomputable def fixedScalarRestrictionDirectImageUnderived
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -152,15 +157,13 @@ Source: Stacks Tag 03D6. -/
 
 attribute [local irreducible] upperStar
 
-/-- The canonical inverse-image/restriction square, with its published normalization.
-Source: Stacks Tag 07A6. -/
+/-- The canonical inverse-image/restriction square, with its published normalization. -/
 noncomputable abbrev fixedScalarRestrictionPullback
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   leftDerivedUpperStarRestrictScalarsIso φ f
 
-/-- The inverse-direction direct-image comparison is the mate of the canonical square.
-Source: Stacks Tags 0D6E and 07A6. -/
+/-- The inverse-direction direct-image comparison is the mate of the canonical square. -/
 @[no_expose] noncomputable def fixedScalarRestrictionDirectImageMap
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -285,8 +288,7 @@ set_option backward.isDefEq.respectTransparency.types false
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The coefficient mate intertwines the canonical chain-level right-derived units.
-Source: Stacks Tags 0D6E and 07A6. -/
+/-- The coefficient mate intertwines the canonical chain-level right-derived units. -/
 theorem fixedScalarRestrictionDirectImageMap_factors
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -659,8 +661,7 @@ attribute [local irreducible] fixedScalarRestrictionDirectImageMap
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Restriction of finite coefficients commutes with the unbounded derived direct image.
-The map is fixed by its adjunction-mate definition, rather than an arbitrary isomorphism.
-Source: Stacks Tags 0D6E and 07A6. -/
+The map is fixed by its adjunction-mate definition, rather than an arbitrary isomorphism. -/
 theorem fixedScalarRestrictionDirectImageMap_isIso
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -677,7 +678,7 @@ theorem fixedScalarRestrictionDirectImageMap_isIso
   exact fixedRestriction_resolution_quasiIso φ f I J j
 
 /-- The forward-direction canonical comparison, with the K-injective normalization
-inherited from the named mate theorem. Source: Stacks Tag 0D6E. -/
+inherited from the named mate theorem. -/
 @[no_expose] noncomputable def fixedScalarRestrictionDirectImage
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -688,8 +689,7 @@ inherited from the named mate theorem. Source: Stacks Tag 0D6E. -/
   letI := fixedScalarRestrictionDirectImageMap_isIso φ f
   (asIso (fixedScalarRestrictionDirectImageMap φ f)).symm
 
-/-- The inverse of the forward coefficient comparison is the published derived mate.
-Source: Stacks Tag 0D6E. -/
+/-- The inverse of the forward coefficient comparison is the published derived mate. -/
 theorem fixedScalarRestrictionDirectImage_inv
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y) :

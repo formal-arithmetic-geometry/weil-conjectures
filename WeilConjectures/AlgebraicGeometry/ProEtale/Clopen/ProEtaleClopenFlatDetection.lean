@@ -27,12 +27,16 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! Flatness detection for finite clopen pro-etale partitions.
-Source: Stacks Project, Tag 03ER (3).
 
 Tensoring already preserves finite colimits. Zero insertion, its adjunction with
 restriction, and the tensor comparison transport finite-limit preservation to each
 component. The gluing equivalence detects the converse componentwise. Reindexing
 the finite partition by `Fin n` keeps the prescribed module universe unchanged.
+
+## References
+
+* Stacks Project, Tag 03ER (3)
+* Tag 03ER (3)
 -/
 
 @[expose] public noncomputable section
@@ -178,7 +182,7 @@ private theorem clopen_flat_detection_small
 open-and-closed covering. The tensor comparison and zero-insertion adjunction
 transport finite-limit preservation to each component. Conversely, the gluing
 equivalence detects finite limits componentwise. Tensoring always preserves finite
-colimits. Source: Tag 03ER (3). -/
+colimits. -/
 theorem clopen_flat_detection
     (X : Scheme.{t}) (I : Type w) [Finite I] (Y : I → Scheme.{t})
     (j : ∀ i, Y i ⟶ X) [∀ i, IsOpenImmersion (j i)] [∀ i, IsClosedImmersion (j i)]

@@ -15,7 +15,11 @@ import Mathlib.RingTheory.Regular.Flat
 
 /-! # Boundary depth transferred from a finite structure algebra
 
-Source: Stacks Project, Tag 0AUK, applied as in the proof of Tag 0EY6(2).
+## References
+
+* Stacks Project, Tag 0AUK, applied as in the proof of Tag 0EY6(2)
+* Stacks Project, Tag 0AUK
+* Tag 0EY6, proof of (2)
 -/
 
 @[expose] public section
@@ -182,9 +186,7 @@ private theorem pushforward_stalk_localization
     exact ⟨(IsLocalization.algEquiv q.primeCompl (Localization.AtPrime q) T).toRingEquiv⟩
 
 /-- Depth two of the stalks of a finite direct image algebra implies depth two
-at the points of its relative spectrum above those stalks.
-
-Source: Stacks Project, Tag 0AUK; Tag 0EY6, proof of (2). -/
+at the points of its relative spectrum above those stalks. -/
 theorem depth_two_of_finite_structure_algebra
     {L : Scheme.{u}} [IsLocallyNoetherian L] (U : L.Opens)
     (A : L.CommAlgebraSheaf)

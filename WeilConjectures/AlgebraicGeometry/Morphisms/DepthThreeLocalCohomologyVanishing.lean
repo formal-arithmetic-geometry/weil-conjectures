@@ -14,7 +14,10 @@ public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 
 /-! # DepthThreeLocalCohomologyVanishing
 
-Source: Stacks Project, Tags 0AVY and 0BK0.
+## References
+
+* Stacks Project, Tags 0AVY and 0BK0
+* Stacks Project, Tag 0AVY, Lemma 47.11.1
 -/
 
 @[expose] public section
@@ -43,9 +46,7 @@ private theorem old_ext_two_isZero {R : Type u} [CommRing R]
     (h.elim _ 0)
   exact ⟨g, hg⟩
 
-/-- Algebraic vanishing of second local cohomology under depth at least three.
-
-Source: Stacks Project, Tag 0AVY, Lemma 47.11.1 -/
+/-- Algebraic vanishing of second local cohomology under depth at least three. -/
 theorem depth_three_local_cohomology_vanishing
     (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R]
     (hdepth : (3 : ℕ∞) ≤ IsLocalRing.depth (R := R) R) :

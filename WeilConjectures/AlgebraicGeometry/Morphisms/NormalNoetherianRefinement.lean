@@ -15,7 +15,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.DominantFiniteRefinementLimit
 /-!
 # Normal refinement of an absolute Noetherian approximation
 
-Source: Stacks Project, Tag 0EZJ, normal approximation paragraph.
+## References
+
+* Stacks Project, Tag 0EZJ, normal approximation paragraph
+* Stacks Project, Tag 0EZJ, first two approximation paragraphs
+* Tags 01ZA, 035E, 035N and 035L for approximation and normalization
 -/
 
 @[expose] public section
@@ -28,10 +32,7 @@ namespace AlgebraicGeometry.Scheme
 
 set_option linter.unusedVariables false in
 /-- An ordinary Noetherian approximation of a normal integral scheme admits a normal
-integral refinement with dominant projections.
-
-Source: Stacks Project, Tag 0EZJ, first two approximation paragraphs; Tags 01ZA,
-035E, 035N and 035L for approximation and normalization. -/
+integral refinement with dominant projections. -/
 theorem exists_normal_noetherian_refinement {S : Scheme.{u}} [CompactSpace S]
     [QuasiSeparatedSpace S] [IsIntegral S]
     (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))

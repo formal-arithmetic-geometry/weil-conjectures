@@ -28,7 +28,12 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
-/-! # Derived total normalization of the quotient section tensor comparison -/
+/-! # Derived total normalization of the quotient section tensor comparison
+
+## References
+
+* Stacks 06YS, 07A4 and 0G7D
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -135,8 +140,7 @@ attribute [local irreducible] CochainComplex.IsKFlatIndependentCoefficients
 -- STATEMENT-DISPUTED (old signature): an arbitrary barB need not satisfy the counit
 -- equation. The repaired statement requires its tensor-section conjugation square.
 /-- The pure section comparison extends to the normalized signed total on K-flat pairs
-for the section conjugate of the given internal tensorator.
-Source: Stacks 06YS, 07A4 and 0G7D. -/
+for the section conjugate of the given internal tensorator. -/
 theorem section_tensor_transport_normalized_total (T : Scheme.{u})
     (c : ScalarSectionData a T) (hc : ScalarSectionNormalized a T c)
     (b : TensorIso a T) (hb : TensorNormalized a T b)

@@ -12,7 +12,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedMatchingChartRestric
 
 /-! # Vanishing of a localized matching numerator
 
-Source: Stacks Project, Tags 0BLH and 05ER.
+## References
+
+* Stacks Project, Tags 0BLH and 05ER
+* Stacks Project, Tag 0BLH, proof (construction of the chart algebras), and Tag 05ER, proof
+  (localized first-projection comparison)
 -/
 
 @[expose] public section
@@ -22,10 +26,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.CompletionGluingData
 
 /-- A matching-ring numerator whose punctured chart section vanishes has zero
-section on the corresponding principal open of the affine candidate.
-
-Source: Stacks Project, Tag 0BLH, proof (construction of the chart algebras),
-and Tag 05ER, proof (localized first-projection comparison). -/
+section on the corresponding principal open of the affine candidate. -/
 theorem puncturedMatching_chart_section_injective
     {A : Type u} [CommRing A] [IsNoetherianRing A] [IsLocalRing A]
     {U : (Spec (.of A)).Opens}

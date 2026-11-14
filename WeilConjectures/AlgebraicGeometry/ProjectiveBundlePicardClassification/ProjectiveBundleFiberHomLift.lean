@@ -20,7 +20,9 @@ import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
 /-!
 # Lifting a fibre isomorphism as a morphism near the base point
 
-Source: Stacks Project.
+## References
+
+* Stacks Project
 -/
 
 @[expose] public section
@@ -102,7 +104,6 @@ private noncomputable def cancelLine {X : Scheme.{u}} (M N : X.Modules)
 /-- A fibre isomorphism of lines lifts as a sheaf morphism above some base open,
 whose pullback to the fibre is invertible.
 
-Source: Stacks Project.
 EGA II, Remark 4.2.7 announces the projective-bundle classification.
 -/
 theorem projective_bundle_fiber_hom_lift (S : Scheme.{u}) (E : S.Modules)

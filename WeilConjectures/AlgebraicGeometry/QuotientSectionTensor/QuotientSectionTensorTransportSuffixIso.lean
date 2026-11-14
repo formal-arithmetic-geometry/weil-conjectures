@@ -11,7 +11,12 @@ import all WeilConjectures.AlgebraicGeometry.ModuleRingedComparison.SectionDeriv
 import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionTensorTotalSquare
 import all WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionTensorTransportFormulas
 
-/-! # Invertibility of the common transport comparison map -/
+/-! # Invertibility of the common transport comparison map
+
+## References
+
+* Stacks, Cohomology on Sites, Tags 06YY and 07A4
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -59,7 +64,6 @@ attribute [local irreducible] ModuleRingedComparison.tensor tensorComparison qTe
 -- Check the scalar counits and tensor localization factors separately.
 /-- The section scalar tensor comparison's final map is invertible on flat-term
 K-flat representatives.
-Source: Stacks, Cohomology on Sites, Tags 06YY and 07A4.
 The ordinary total square makes the normalized total map invertible. Scalar
 computation on the K-flat tensor, scalar normalization, and counit naturality
 make its scalar counit invertible. The section representative equation then

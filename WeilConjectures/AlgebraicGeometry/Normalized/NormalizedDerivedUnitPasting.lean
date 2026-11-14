@@ -10,7 +10,9 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryM
 
 /-! # Pasting normalized derived units
 
-Source: Stacks Project, Tags 0F7B, 0F7J and 0D6E.
+## References
+
+* Stacks Project, Tags 0F7B, 0F7J and 0D6E
 -/
 
 @[expose] public section
@@ -111,8 +113,7 @@ unit identity. Precompose by the fully faithful homotopy localization, expand th
 normalized units, and move the input maps through the factors by naturality. Apply the
 mixed unit identity and the right-derived composition unit formula. Cancel the exact
 open-composition factors. The remaining homotopy identity is checked on complexes,
-degree by degree, using naturality of the second ordinary input map.
-Source: Stacks Project, Tags 0F7B, 0F7J and 0D6E. -/
+degree by degree, using naturality of the second ordinary input map. -/
 theorem normalizedDerivedUnitPasting
     {C U Y X Z B : Type*}
   [Category C] [Category U] [Category Y] [Category X] [Category Z] [Category B]

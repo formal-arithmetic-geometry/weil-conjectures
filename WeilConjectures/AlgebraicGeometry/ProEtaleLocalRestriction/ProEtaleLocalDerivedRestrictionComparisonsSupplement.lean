@@ -82,13 +82,18 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleLocalDerivedRestrictionC
 /-!
 # Exact inverse image and local derived restriction
 
-Source: Stacks Project, Tag 015F; Tags 03D2, 03DA, 04IX; Bhatt--Scholze, Proposition 6.8.11(3).
-
 ## Main declarations
 
 * `inverseImage_exact`: exactness over the actual inverse-image ring.
 * `comparison`: the prescribed localization-representative comparison.
 * `comparisons`: its functorial cohomology and shifted-single normalizations.
+
+## References
+
+* Stacks Project, Tag 015F
+* Tags 03D2, 03DA, 04IX
+* Bhatt--Scholze, Proposition 6.8.11(3)
+* Stacks, Tag 015F
 -/
 
 @[expose] public noncomputable section
@@ -108,8 +113,7 @@ variable {S T : Scheme.{u}} (g : S ⟶ T)
   [HasDerivedCategory.{wU} (SheafOfModules.{u + 1} ((inverseRing g R).over U))]
 
 /-- The specified representative-normalized comparison: first apply derived restriction
-of the inverse representative isomorphism, then the exact localization factor.
-Source: Stacks, Tag 015F. -/
+of the inverse representative isomorphism, then the exact localization factor. -/
 def comparison (K : DerivedCategory (SheafOfModules.{u + 1} (ring R))) :
     (restriction g R U).mapDerivedCategory.obj
         ((proEtaleModuleInverseImage g R).mapDerivedCategory.obj K) ≅
@@ -122,8 +126,7 @@ def comparison (K : DerivedCategory (SheafOfModules.{u + 1} (ring R))) :
       (DerivedCategory.Q.objPreimage
         ((proEtaleModuleInverseImage g R).mapDerivedCategory.obj K))
 
-/-- Functorial local restriction with normalized cohomology and shifted-single comparisons.
-Source: Stacks, Tag 015F; Bhatt--Scholze, Proposition 6.8.11(3). -/
+/-- Functorial local restriction with normalized cohomology and shifted-single comparisons. -/
 theorem comparisons :
     ∃ (L : DerivedCategory (SheafOfModules.{u + 1} (ring R)) ⥤
         DerivedCategory (SheafOfModules.{u + 1} ((inverseRing g R).over U)))

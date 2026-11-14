@@ -12,13 +12,16 @@ public import WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicCompletionCom
 /-!
 # Transport of the published intrinsic completion
 
-Source: Stacks Tags 099M and 091Z.
-
 The published Koszul fiber is reused through the canonical comparison between
 its completed quotient-ring presentation and the continuous-functions presentation.
 Both rings are inverse limits of the finite quotient sheaves. Neither is identified
 with the constant sheaf associated to A. The transport preserves the prescribed
 fiber differential, positive-power transitions and the completion unit (u,0).
+
+## References
+
+* Stacks Tags 099M and 091Z
+* Stacks Tag 03DA
 -/
 
 @[expose] public noncomputable section
@@ -46,8 +49,7 @@ abbrev intrinsicPresentationModulesBack : adicDatumModules T (intrinsicPresentat
   pbcRestrict (pbcCompletedComparison T d).inv
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The round trip is uniquely fixed by identity on underlying sections.
-Source: Stacks Tag 03DA. -/
+/-- The round trip is uniquely fixed by identity on underlying sections. -/
 theorem intrinsicPresentationRoundTrip_exists :
     ∃! e : 𝟭 (pbcModules T (pbcAdicCompletion T d)) ≅
         intrinsicPresentationModules T d ⋙ intrinsicPresentationModulesBack T d,

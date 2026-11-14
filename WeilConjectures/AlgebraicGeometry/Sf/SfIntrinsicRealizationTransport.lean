@@ -15,7 +15,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortE
 /-!
 # Canonical realization and constant-coefficient direct image
 
-Source: Stacks Project, Tags 00YV and 03D1.
 The normalization on the scalar-unit sections fixes the comparison, including its direction.
 
 ## Main definitions
@@ -25,6 +24,17 @@ The normalization on the scalar-unit sections fixes the comparison, including it
   the comparisons uniquely normalized on sections and K-injective representatives.
 - `sfIntrinsicConstantModuleAdjunction`: the transported inverse-image adjunction.
 - `AlgebraicGeometry.ProEtale.sfFixedDerivedPullback`: exact termwise inverse image.
+
+## References
+
+* Stacks Project, Tags 00YV and 03D1
+* Stacks Tag 00YV
+* Stacks Tags 00YV and 03D1
+* Stacks Tag 03D1
+* Stacks Tags 00YV and 07A5
+* Stacks Tag 07A5
+* Stacks Tags 00YV and 03D3
+* Stacks Tag 04JC
 -/
 
 @[expose] public section
@@ -243,16 +253,14 @@ end
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The derived equivalence induced by the recorded canonical coefficient realization.
-Source: Stacks Tag 00YV. -/
+/-- The derived equivalence induced by the recorded canonical coefficient realization. -/
 noncomputable def sfIntrinsicDerivedEquivalence (T : Scheme.{u})
     (A : Type u) [CommRing A] [Finite A] :
     DerivedCategory (Sheaf (ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1, u} A))) ≌
       proEtaleDerivedCategory T A :=
   (sfIntrinsicModuleEquivalence T A).mapDerivedCategory
 
-/-- The scalar-unit section of the canonical associated module sheaf.
-Source: Stacks Tag 00YV. -/
+/-- The scalar-unit section of the canonical associated module sheaf. -/
 noncomputable def sfIntrinsicRealizationUnit (T : Scheme.{u})
     (A : Type u) [CommRing A] [Finite A]
     (M : Sheaf (ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1, u} A)))
@@ -345,7 +353,7 @@ private noncomputable def intrinsicRestrictionDirectImageIso
     rfl
 
 /-- The unique section-normalized comparison of direct images in the two coefficient
-presentations. Source: Stacks Tags 00YV and 03D1. -/
+presentations. -/
 theorem sfIntrinsicDirectImageComparison_existsUnique
     {X Y : Scheme.{u}} (f : X ⟶ Y) (A : Type u) [CommRing A] [Finite A] :
     ∃! e : (sfIntrinsicModuleEquivalence X A).functor ⋙
@@ -424,14 +432,12 @@ theorem sfIntrinsicDirectImageComparison_existsUnique
   rw [hη] at h
   exact h
 
-/-- The actual comparison, selected by its unique scalar-section normalization.
-Source: Stacks Tag 03D1. -/
+/-- The actual comparison, selected by its unique scalar-section normalization. -/
 noncomputable def sfIntrinsicDirectImageComparison
     {X Y : Scheme.{u}} (f : X ⟶ Y) (A : Type u) [CommRing A] [Finite A] :=
   (sfIntrinsicDirectImageComparison_existsUnique f A).exists.choose
 
-/-- The uniquely normalized derived direct-image comparison.
-Source: Stacks Tags 00YV and 07A5. -/
+/-- The uniquely normalized derived direct-image comparison. -/
 theorem sfIntrinsicDerivedDirectImageComparison_existsUnique
     {X Y : Scheme.{u}} (f : X ⟶ Y) (A : Type u) [CommRing A] [Finite A] :
     ∃! e : (sfIntrinsicDerivedEquivalence X A).functor ⋙
@@ -461,15 +467,13 @@ theorem sfIntrinsicDerivedDirectImageComparison_existsUnique
     (ProEtale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) f)
     (proEtaleConstantModuleDirectImage f A) (sfIntrinsicDirectImageComparison f A)
 
-/-- The actual derived comparison determined on K-injective representatives.
-Source: Stacks Tag 07A5. -/
+/-- The actual derived comparison determined on K-injective representatives. -/
 noncomputable def sfIntrinsicDerivedDirectImageComparison
     {X Y : Scheme.{u}} (f : X ⟶ Y) (A : Type u) [CommRing A] [Finite A] :=
   (sfIntrinsicDerivedDirectImageComparison_existsUnique f A).exists.choose
 
 /-- The actual inverse-image/direct-image adjunction, conjugated through the canonical
-section-normalized comparison. This fixes the units and counits of inverse image.
-Source: Stacks Tags 00YV and 03D3. -/
+section-normalized comparison. This fixes the units and counits of inverse image. -/
 noncomputable def sfIntrinsicConstantModuleAdjunction
     {X Y : Scheme.{u}} (f : X ⟶ Y) (A : Type u) [CommRing A] [Finite A] :
     sfIntrinsicPullback A f ⊣ proEtaleConstantModuleDirectImage f A :=
@@ -486,8 +490,7 @@ end AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- Exact termwise inverse image, in fixed-scalar coordinates.
-Source: Stacks Tag 04JC. -/
+/-- Exact termwise inverse image, in fixed-scalar coordinates. -/
 noncomputable abbrev sfFixedDerivedPullback (A : Type u) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   (upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) f).mapDerivedCategory

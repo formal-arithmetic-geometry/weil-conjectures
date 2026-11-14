@@ -14,7 +14,11 @@ import all WeilConjectures.AlgebraicGeometry.EtaleRestrictScalarsAdjunctionIdent
 /-!
 # Ordinary scalar balancing commutes with pullback
 
-Source: Stacks Project, Tags 07A4 and 07A7.
+## References
+
+* Stacks Project, Tags 07A4 and 07A7
+* Stacks 03EK
+* Stacks 07A4
 -/
 
 @[expose] public noncomputable section
@@ -54,8 +58,7 @@ private noncomputable instance extensionMonoidal
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B) (T : Scheme.{u}) :
     (ProEtale.etaleSheafExtendScalars φ T).Monoidal := .ofOplaxMonoidal _
 
-/-- The balancing map is an isomorphism without a flatness hypothesis.
-Source: Stacks 03EK. -/
+/-- The balancing map is an isomorphism without a flatness hypothesis. -/
 theorem scalarSheafTensorMap_isIso
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B) (T : Scheme.{u})
     (M : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) :
@@ -67,8 +70,7 @@ theorem scalarSheafTensorMap_isIso
   exact isIso_sheafAdjunction_unitProjection T.smallEtaleTopology
     (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1} (algebraMap A B)) M
 
-/-- The ordinary coefficient iso used in the derived coefficient identification.
-Source: Stacks 07A4. -/
+/-- The ordinary coefficient iso used in the derived coefficient identification. -/
 def scalarCoefficientSheafPullbackIso
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {Z W : Scheme.{u}} (f : Z ⟶ W) :
@@ -138,8 +140,7 @@ private instance scalarPullbackMonoidal
   unfold scalarSheafPullbackIso
   exact isMonoidal_conjugateEquiv_symm _ _ _
 
-/-- The scalar balancing square before localization.
-Source: Stacks Project, Tags 07A4 and 07A7. -/
+/-- The scalar balancing square before localization. -/
 theorem scalarSheafTensorPullback_square
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {Z W : Scheme.{u}} (f : Z ⟶ W)

@@ -34,8 +34,12 @@ import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Coproducts
 /-!
 # Compactness of a lisse sheaf extended from a locally closed stratum
 
-Source: Bhatt--Scholze, *Pro-étale topology*, Section 6.4, Example 6.4.1, Lemmas 6.4.4 and 6.4.6,
-and the last paragraph of Proposition 6.4.8, printed pp. 48--49.
+## References
+
+* Bhatt--Scholze, *Pro-étale topology*, Section 6.4, Example 6.4.1, Lemmas 6.4.4 and 6.4.6, and the
+  last paragraph of Proposition 6.4.8, printed pp. 48--49
+* Bhatt--Scholze, *Pro-étale topology*, Section 6.4, Example 6.4.1, Lemmas 6.4.4 and 6.4.6, and the
+  last paragraph of the proof of Proposition 6.4.8, printed pp. 48--49
 -/
 
 @[expose] public section
@@ -197,10 +201,7 @@ and the closed counit
    `Hom_X(g_* j_! L, K) ≅ Hom_V(L, j^* Rg^! K) ≅ H^0 RΓ(V, H_L(B K))`. `B`, `H_L` and
    `RΓ(V, -)` preserve coproducts by steps 4, 6 and 3, and `H^0` commutes with direct sums
    of complexes of `C`-modules. Hence the
-   comparison of `def-pc-compact-object` is bijective, including for an empty family.
-
-Source: Bhatt--Scholze, *Pro-étale topology*, Section 6.4, Example 6.4.1, Lemmas 6.4.4 and 6.4.6,
-and the last paragraph of the proof of Proposition 6.4.8, printed pp. 48--49. -/
+   comparison of `def-pc-compact-object` is bijective, including for an empty family. -/
 theorem isCompactObject_lowerStar_openImmersionLowerShriek_of_isFiniteLocallyConstantSheaf
     {k : Type u} [Field k] [IsAlgClosed k]
     (ell : ℕ) (hell : Nat.Prime ell) (hellk : IsUnit (ell : k))

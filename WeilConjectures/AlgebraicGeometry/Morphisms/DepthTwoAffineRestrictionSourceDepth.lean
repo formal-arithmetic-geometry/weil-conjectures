@@ -26,7 +26,11 @@ public import Mathlib.RingTheory.Nakayama
 
 /-! # Affine comparison for the restriction source
 
-Source: Stacks Project, Tags 0AV8, 0AVN and 0E9I.
+## References
+
+* Stacks Project, Tags 0AV8, 0AVN and 0E9I
+* Stacks Project, Tags 01LC, 01HV and 008C
+* Stacks Project, Tags 0AV8, 0AVN, 0E9I, 01LC, 05AM and 00LL
 -/
 
 @[expose] public section
@@ -180,9 +184,7 @@ private theorem localization_surjective_of_stalk_surjective
     f g (l := (η.val.app (op V)).hom)).mp (by rw [hh]; exact hhs)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The restriction unit is surjective after localization at an interior prime.
-
-Source: Stacks Project, Tags 01LC, 01HV and 008C. -/
+/-- The restriction unit is surjective after localization at an interior prime. -/
 private theorem localized_restriction_unit_surjective
     {L : Scheme.{u}} [IsLocallyNoetherian L] (U : L.Opens)
     (N : L.Modules) (hqc : N.IsQuasicoherent)
@@ -202,9 +204,7 @@ private theorem localized_restriction_unit_surjective
 
 -- The nested subtype and stalk comparisons elaborate several scalar structures.
 set_option backward.isDefEq.respectTransparency false in
-/-- Affine comparison for the restriction source.
-
-Source: Stacks Project, Tags 0AV8, 0AVN, 0E9I, 01LC, 05AM and 00LL. -/
+/-- Affine comparison for the restriction source. -/
 theorem affine_restriction_source_depth_comparison
     {L : Scheme.{u}} [IsLocallyNoetherian L] (U : L.Opens)
     (N : L.Modules)

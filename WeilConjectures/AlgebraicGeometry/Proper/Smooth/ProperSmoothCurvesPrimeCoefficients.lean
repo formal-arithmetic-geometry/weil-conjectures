@@ -31,7 +31,10 @@ import WeilConjectures.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparis
 /-!
 # Prime coefficients in proper smooth curve families
 
-Source: Stacks Project, Tag 0GKV, the Noetherian case.
+## References
+
+* Stacks Project, Tag 0GKV, the Noetherian case
+* Stacks Project, Tag 0GKV, for a prime invertible on the base, the case Tag 0GL0 uses
 -/
 
 @[expose] public section
@@ -109,8 +112,6 @@ higher direct image of the constant prime-field module sheaf is constructible.
 `GeometricallyConnected f` includes nonemptiness. Dimension is measured on residue-field
 fibres; field extension preserves their dimension, so this is the geometric fibre condition.
 The lift of `ZMod ell` places the same finite prime field in the coefficient universe.
-
-Source: Stacks Project, Tag 0GKV, for a prime invertible on the base, the case Tag 0GL0 uses.
 -/
 theorem properSmoothCurves_prime_higherDirectImage_constructible
     {C S : Scheme.{u}} [IsLocallyNoetherian S] [CompactSpace S]

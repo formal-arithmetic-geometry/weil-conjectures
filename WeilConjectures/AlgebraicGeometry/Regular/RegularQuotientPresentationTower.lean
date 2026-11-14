@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Regular.RegularPrincipalQuotientTower
 
 /-! # Transport of regular quotient presentations
 
-Source: Stacks Project, Tag 099M.
+## References
+
+* Stacks Project, Tag 099M
 -/
 
 @[expose] public section
@@ -222,9 +224,7 @@ private theorem principal_quotient_tower_nat
     simpa only [hs n] using hT n
   exact regular_principal_quotient_tower J (ℓ : Λ) hr R Y p hz' hT' hp K g
 
-/-- An ordinary quotient presentation is transported to the positive derived quotient tower.
-
-Source: Stacks Project, Tag 099M. -/
+/-- An ordinary quotient presentation is transported to the positive derived quotient tower. -/
 theorem regular_quotient_presentation_tower
     {A : Type v} [Category.{w} A] [Abelian A] [HasDerivedCategory.{u + 1} A]
     {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]

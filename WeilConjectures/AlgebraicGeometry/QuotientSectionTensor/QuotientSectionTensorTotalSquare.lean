@@ -11,7 +11,12 @@ import WeilConjectures.AlgebraicGeometry.ModuleRingedComparison.ProEtaleSectionM
 import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionTensorOrdinarySquare
 import all WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionTensorSummandFormulas
 
-/-! # Signed total scalar section tensor square -/
+/-! # Signed total scalar section tensor square
+
+## References
+
+* Stacks, Cohomology on Sites, Tags 06YY and 07A4
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -56,7 +61,6 @@ attribute [local irreducible] HomologicalComplex₂.total Mod.inducingFunctorDat
 
 -- Check all summands without expanding the derived tensor structures.
 /-- Totalization of the ordinary scalar section tensor square.
-Source: Stacks, Cohomology on Sites, Tags 06YY and 07A4.
 Check every summand of the unbounded direct-sum total. The ordinary scalar square,
 the defining total comparison formulas and the assumed summand formula for g give
 the same composite, by naturality of the termwise scalar comparison. -/

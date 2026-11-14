@@ -95,7 +95,6 @@ public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 /-!
 # Reconstruction of a uniform local tower
 
-Source: Stacks Tags 099M, 099L, 09C7, 09C0.
 The auxiliary constructions keep the actual inverse-image coefficients on local models.
 
 ## Main statements
@@ -103,6 +102,10 @@ The auxiliary constructions keep the actual inverse-image coefficients on local 
 - `uniformTowerRlim`: the actual total right derived inverse limit.
 - `UniformLocalEquipment`: a coherent lift of the specified local level maps.
 - `reconstructionUniformTower`: reconstruction with projections, completeness and naturality.
+
+## References
+
+* Stacks Tags 099M, 099L, 09C7, 09C0
 -/
 
 @[expose] public noncomputable section
@@ -977,7 +980,6 @@ abbrev UniformReconstructionFamily (X : Scheme.{u})
 
 /-- Uniform reconstruction, including the actual projections, quotient-linear counits,
 normalization, cohomological window, and naturality for equipped models.
-Source: Stacks Tags 099M, 099L, 09C7, 09C0.
 -/
 theorem reconstructionUniformTower {k : Type u} [Field k] (X : Scheme.{u})
     (fX : X ⟶ Spec (.of k)) (_hX : LocallyOfFiniteType fX ∧ QuasiCompact fX)

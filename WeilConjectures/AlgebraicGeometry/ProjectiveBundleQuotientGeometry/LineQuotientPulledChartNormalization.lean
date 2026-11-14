@@ -10,7 +10,11 @@ import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
 
 /-! # Normalized coefficients on a pulled tautological generator chart
 
-Source: Stacks Project, Constructions, Tags 01OA and 01O4.
+## References
+
+* Stacks Project, Constructions, Tags 01OA and 01O4
+* Stacks Project, Constructions, Tags 01OA and 01O4, the normalized tautological quotient on a
+  standard affine chart and its compatibility with pullback
 -/
 
 @[expose] public section
@@ -493,10 +497,7 @@ private theorem chart_scalar {S T : Scheme.{u}} (h : T ⟶ S)
   exact H''
 
 /-- The tautological generator is a frame on one pulled standard chart, and the
-coefficient of a quotient generator v is the pullback of iota(v)/iota(m).
-
-Source: Stacks Project, Constructions, Tags 01OA and 01O4, the normalized tautological
-quotient on a standard affine chart and its compatibility with pullback. -/
+coefficient of a quotient generator v is the pullback of iota(v)/iota(m). -/
 theorem lineQuotient_pulled_chart_normalization {S T : Scheme.{u}} (h : T ⟶ S)
     (E : S.Modules) [E.IsQuasicoherent] (D : TautologicalQuotient E)
     (a : T ⟶ (SymmetricAlgebraSheaf.gradedAlgebraData E).relProj)

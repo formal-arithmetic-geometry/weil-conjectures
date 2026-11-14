@@ -17,11 +17,13 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleMixedProjectionMate
 
 /-! # Normalized signed projection formula on chosen resolutions
 
-Source: Stacks Tag 0B56.
-
 The source and target comparisons are the specified mixed tensor comparisons,
 with arbitrary derived isomorphisms to the chosen representatives. All operations
 are on the original small pro-etale sites and ordinary uncompleted derived categories.
+
+## References
+
+* Stacks Tag 0B56
 -/
 
 @[expose] public noncomputable section
@@ -226,8 +228,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- On every chosen K-injective and bounded strict-perfect representative, the canonical
 counit mate is T^{-1} Q_Y(t) S, and S^{-1} Q_Y(s) T is its two-sided inverse.
-No boundedness of K or I, and no chain-map condition on the splittings, is imposed.
-Source: Stacks Tag 0B56. -/
+No boundedness of K or I, and no chain-map condition on the splittings, is imposed. -/
 theorem normalization :
     derivedProjectionFormulaMate (proEtaleRingDerivedPullback f R S c)
       (proEtaleRingDerivedDirectImage f R S c) (proEtaleRingDerivedAdjunction f R S c)

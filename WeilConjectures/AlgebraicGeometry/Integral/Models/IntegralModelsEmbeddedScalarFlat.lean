@@ -397,7 +397,10 @@ import WeilConjectures.AlgebraicGeometry.Integral.Constant.IntegralConstantModel
 
 /-! # Flatness of the embedded constant-to-continuous scalar map
 
-Source: Stacks Project, Tag 093M, and the integral-models proof, paragraph (1).
+## References
+
+* Stacks Project, Tag 093M, and the integral-models proof, paragraph (1)
+* Stacks Project
 -/
 
 @[expose] public noncomputable section
@@ -502,10 +505,7 @@ private def smallRingIso (X : Scheme.{u})
       ((Mon.forget _).mapIso e).inv_hom_id
 
 attribute [-instance] integralModel_coefficientMonObj in
-/-- The actual embedded integral scalar map is flat.
-
-Source: Stacks Project.
--/
+/-- The actual embedded integral scalar map is flat. -/
 theorem integralModelsEmbeddedScalarFlat
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (π : PadicAlgCl.integers ℓ E.1)

@@ -12,7 +12,11 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Tensor.ProEtaleTensorPullbackD
 
 /-! # Transport of representative-normalized tensor comparisons
 
-Source: Stacks Project, Cohomology on Sites, Tag 07A4.
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 07A4
+* Stacks Project, Cohomology on Sites, Tag 07A4, passage from flat K-flat representatives to derived
+  tensor by localization
 -/
 
 @[expose] public noncomputable section
@@ -67,9 +71,7 @@ attribute [local irreducible] CategoryTheory.Functor.leftAdjoint
   CategoryTheory.presheafToSheaf SheafOfModules.monoidalCategory
   proEtaleOrdinaryTensorPullback
 
-/-- Normalized total comparisons determine the derived tensor transport square.
-Source: Stacks Project, Cohomology on Sites, Tag 07A4, passage from flat K-flat
-representatives to derived tensor by localization. -/
+/-- Normalized total comparisons determine the derived tensor transport square. -/
 theorem proEtaleTensorComparisonTransport
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})

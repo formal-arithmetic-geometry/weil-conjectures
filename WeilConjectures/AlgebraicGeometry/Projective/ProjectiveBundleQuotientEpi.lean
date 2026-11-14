@@ -14,9 +14,13 @@ import WeilConjectures.AlgebraicGeometry.RelativeProj.Functoriality
 set_option linter.privateModule false
 
 /-! # Epimorphy of the quotient of an arbitrary normalized projective-bundle realization
-Source: Stacks Project, Constructions, Tags 01OB and 01O4.
 The local argument follows SymmetricProjNormalizedQuotientEpi, transporting its generators
-by the realization section equivalence. -/
+by the realization section equivalence.
+
+## References
+
+* Stacks Project, Constructions, Tags 01OB and 01O4
+-/
 
 @[expose] public section
 set_option autoImplicit false

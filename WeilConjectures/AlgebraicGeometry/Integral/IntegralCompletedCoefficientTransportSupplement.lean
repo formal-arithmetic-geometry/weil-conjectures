@@ -13,7 +13,11 @@ public import WeilConjectures.AlgebraicGeometry.IntegralCompletedCoefficientTran
 
 The projection-normalized coefficient constructions are independent of the
 stratified-perfect theorem and its geometric hypotheses.
-Source: Bhatt--Scholze, Section 6.5.
+
+## References
+
+* Bhatt--Scholze, Section 6.5
+* Bhatt--Scholze, Definition 6.5.1
 -/
 
 @[expose] public noncomputable section
@@ -27,8 +31,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Transport the detailed category along the canonical coefficient isomorphism.
 The valuation ring is lifted to the small site's coefficient universe u+1. The
-finite extension E itself retains the recorded coefficient convention E: Type u.
-Source: Bhatt--Scholze, Definition 6.5.1. -/
+finite extension E itself retains the recorded coefficient convention E: Type u. -/
 def integralDetailedTransport
     (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :

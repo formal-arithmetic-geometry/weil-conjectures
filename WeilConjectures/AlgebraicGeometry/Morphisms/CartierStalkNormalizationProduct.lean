@@ -19,15 +19,17 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.NormalizationStalkFieldCoprod
 
 /-! # Integral-closure product after localizing a Cartier torsor
 
-Source: Stacks Project, Tags 0307 and 09EB. -/
+## References
+
+* Stacks Project, Tags 0307 and 09EB
+* Stacks Project, Tags 0307, 09EB, 03SF and 03QR
+-/
 
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
-/-- Product model of the entire normalization over the Cartier DVR stalk.
-
-Source: Stacks Project, Tags 0307, 09EB, 03SF and 03QR. -/
+/-- Product model of the entire normalization over the Cartier DVR stalk. -/
 theorem cartier_stalk_normalization_product
     {N U P : Scheme.{u}} [IsLocallyNoetherian N]
     (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)

@@ -14,7 +14,11 @@ import WeilConjectures.AlgebraicGeometry.Regular.RegularQuotientPresentationTowe
 /-! # Regular ordinary quotients as the positive principal derived quotient tower
 
 The comparison is natural in the tower index and preserves the specified augmentation.
-Source: Stacks Project, Tag 099M.
+
+## References
+
+* Stacks Project, Tag 099M
+* Stacks Project, Tag 099M, the two-term free resolution of the principal coefficients
 -/
 
 @[expose] public section
@@ -25,9 +29,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- Regular ordinary quotients agree with the positive tail of the principal derived
 quotient tower, compatibly with the specified quotient projections. This statement
-contains no inverse limit, derived-limit comparison, or Milnor triangle.
-
-Source: Stacks Project, Tag 099M, the two-term free resolution of the principal coefficients. -/
+contains no inverse limit, derived-limit comparison, or Milnor triangle. -/
 theorem integral_regular_quotient_tower (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     [HasDerivedCategory.{u + 1} (DiagonalAb W)]
     [HasDerivedCategory.{u + 1} (ℕᵒᵖ ⥤ DiagonalAb W)]

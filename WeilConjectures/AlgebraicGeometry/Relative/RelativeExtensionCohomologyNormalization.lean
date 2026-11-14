@@ -46,11 +46,17 @@ import WeilConjectures.SixFunctors.Finite.BaseChange
 
 /-! # Relative torsor extensions and normalized supported cohomology
 
-Source: Stacks Project, Tags 03AJ, 06XR, 06XV and 0A45, relative refinement.
-
 The comparison is uniquely specified on every resolution cocycle by evaluation at one
 and the inclusion into the signed cone with zero open coordinate. The relative torsor
 class is the negative of the existing raw lifting-cocycle equivalence.
+
+## References
+
+* Stacks Project, Tags 03AJ, 06XR, 06XV and 0A45, relative refinement
+* Stacks Tag 03AJ, relative refinement using Tag 0A45
+* Stacks Tags 03AJ and 0A45
+* Stacks Tag 0A45, closed base change
+* Stacks Tag 03AJ, pullback of framed torsors
 -/
 
 @[expose] public noncomputable section
@@ -146,8 +152,7 @@ private theorem framedQuotient_shortExact
 
 attribute [local irreducible] relativeFiberMap relativeTorsorEquiv
 
-/-- The relative extension characterization, including its equivariant framed lift.
-Source: Stacks Tag 03AJ, relative refinement using Tag 0A45. -/
+/-- The relative extension characterization, including its equivariant framed lift. -/
 def RelativeExtensionRepresents {T Z : Scheme.{u}}
     [HasExt.{u + 1} (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})]
     (i : Z ⟶ T) [IsClosedImmersion i]
@@ -169,8 +174,7 @@ def RelativeExtensionRepresents {T Z : Scheme.{u}}
     @id (E.obj.obj (op (Scheme.Etale.mk i.openComplement.ι)))
       (f.app (op (Scheme.Etale.mk i.openComplement.ι)) P.2) = 0 ∧ β = hE.extClass
 
-/-- Existence and uniqueness of the framed supported extension class.
-Source: Stacks Tags 03AJ and 0A45. -/
+/-- Existence and uniqueness of the framed supported extension class. -/
 theorem relativeExtension_existsUnique {T Z : Scheme.{u}}
     [HasExt.{u + 1} (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})] (i : Z ⟶ T)
     [IsClosedImmersion i] {G : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}}
@@ -183,8 +187,7 @@ theorem relativeExtension_existsUnique {T Z : Scheme.{u}}
     (Scheme.Etale.mk i.openComplement.ι) P.2 t (supportedIntegralUnit i)
     ht hT η hη hηt
 
-/-- The class determined uniquely by the relative extension characterization.
-Source: Stacks Tags 03AJ and 0A45. -/
+/-- The class determined uniquely by the relative extension characterization. -/
 def relativeExtension {T Z : Scheme.{u}}
     [HasExt.{u + 1} (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})]
     (i : Z ⟶ T) [IsClosedImmersion i]
@@ -355,8 +358,7 @@ private lemma integerSectionEquiv_restrict (T : Scheme.{u})
   rw [hn'] at h
   exact h
 
-/-- Canonical closed exchange on integral coefficients, with the constant comparison.
-Source: Stacks Tag 0A45, closed base change. -/
+/-- Canonical closed exchange on integral coefficients, with the constant comparison. -/
 def relativeExtensionExchange {T Z T' Z' : Scheme.{u}} (i : Z ⟶ T) (i' : Z' ⟶ T')
     (h : T' ⟶ T) (w : Z' ⟶ Z) (sq : CommSq w i' i h) :
     (upperStar AddCommGrpCat.{u + 1} h).obj
@@ -367,8 +369,7 @@ def relativeExtensionExchange {T Z T' Z' : Scheme.{u}} (i : Z ⟶ T) (i' : Z' �
       ((Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1} w).app
         (AddCommGrpCat.of (ULift.{u + 1} ℤ))).hom
 
-/-- The pulled frame, including the identification of the two complementary opens.
-Source: Stacks Tag 03AJ, pullback of framed torsors. -/
+/-- The pulled frame, including the identification of the two complementary opens. -/
 def relativeExtensionPulledFrame {T Z T' Z' : Scheme.{u}}
     (i : Z ⟶ T) [IsClosedImmersion i] (i' : Z' ⟶ T') [IsClosedImmersion i']
     (h : T' ⟶ T) (hW : i'.openComplement = h ⁻¹ᵁ i.openComplement)

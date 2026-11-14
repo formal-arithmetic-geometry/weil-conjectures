@@ -13,7 +13,10 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Localization
 
 /-! # Restriction of localized constant module sheaves
 
-Source: Stacks Project, Sites Tag 00XR and Modules on Sites Tag 04IY.
+## References
+
+* Stacks Project, Sites Tag 00XR and Modules on Sites Tag 04IY
+* Stacks Project, Sites Tag 00XR, and Modules on Sites Tag 04IY, lemma-relocalize
 -/
 
 @[expose] public section
@@ -26,8 +29,7 @@ namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- A local constant model remains the same model on every smaller slice.
-Source: Stacks Project, Sites Tag 00XR, and Modules on Sites Tag 04IY, lemma-relocalize. -/
+/-- A local constant model remains the same model on every smaller slice. -/
 theorem proEtaleConstantModule_restrict (X : Scheme.{t}) (Λ : Type u) [CommRing Λ]
     (F : SheafOfModules.{max u (t + 1)}
       ((sheafCompose (ProEt.topology X)

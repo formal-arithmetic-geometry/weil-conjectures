@@ -28,10 +28,13 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Fla
 
 /-! # Restriction of the evaluation-transpose double-dual morphism
 
-Source: Stacks Project, Tags 08J9 and 08JB.
-
 The comparisons below are normalized by evaluation and by the compact-support counit.
 All categories are ordinary unbounded categories of constant-ring module sheaves.
+
+## References
+
+* Stacks Project, Tags 08J9 and 08JB
+* Stacks 08J9
 -/
 
 @[expose] public noncomputable section
@@ -46,8 +49,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposi
 
 namespace CategoryTheory
 
-/-- Evaluation with the factors in the order DK tensor K.
-Source: Stacks 08J9. -/
+/-- Evaluation with the factors in the order DK tensor K. -/
 def restrictionDualEvaluation {C : Type z} [Category.{v} C]
     (T : C ⥤ C ⥤ C) (H : Cᵒᵖ ⥤ C ⥤ C)
     (adj : ∀ K : C, T.obj K ⊣ H.obj (op K))
@@ -55,8 +57,7 @@ def restrictionDualEvaluation {C : Type z} [Category.{v} C]
     (T.obj ((H.obj (op K)).obj Ω)).obj K ⟶ Ω :=
   (b _ _).hom ≫ (adj K).counit.app Ω
 
-/-- The double-dual arrow is the actual transpose of evaluation.
-Source: Stacks 08J9. -/
+/-- The double-dual arrow is the actual transpose of evaluation. -/
 def restrictionDualDelta {C : Type z} [Category.{v} C]
     (T : C ⥤ C ⥤ C) (H : Cᵒᵖ ⥤ C ⥤ C)
     (adj : ∀ K : C, T.obj K ⊣ H.obj (op K))

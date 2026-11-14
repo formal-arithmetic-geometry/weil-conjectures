@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.GradedModuleChartData
 /-!
 # Exactness of an associated graded chain on the projective line
 
-Source: Stacks Project, Constructions, Tag 01M7, final paragraph.
+## References
+
+* Stacks Project, Constructions, Tag 01M7, final paragraph
 -/
 
 @[expose] public section
@@ -31,8 +33,7 @@ namespace AlgebraicGeometry.Proj
 attribute [local instance] MvPolynomial.gradedAlgebra
 
 /-- Sheafification and inverse transport of a given exact graded chain. The terms need not
-be free or finitely generated; the conclusion supplies their associated sheaf chart data.
-Source: Stacks Project, Constructions, Tag 01M7, final paragraph. -/
+be free or finitely generated; the conclusion supplies their associated sheaf chart data. -/
 theorem sheafify_graded_chain (k : Type u) [Field k]
     (C : ProjectiveLine.ProjChartIsomorphism k)
     (M : ModuleCat.{u} (MvPolynomial (Fin 2) k))

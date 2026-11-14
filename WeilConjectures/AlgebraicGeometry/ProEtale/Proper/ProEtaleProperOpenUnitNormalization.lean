@@ -13,7 +13,13 @@ import all WeilConjectures.AlgebraicGeometry.Proper.Open.ProperOpenCoefficientRe
 import WeilConjectures.AlgebraicGeometry.Proper.Open.ProperOpenIdentificationNormalization
 import all WeilConjectures.AlgebraicGeometry.UnboundedDirectImageBoundedBelow
 
-/-! # Open-unit normalization before finite coefficient realization -/
+/-! # Open-unit normalization before finite coefficient realization
+
+## References
+
+* Stacks 03D6, 0F7B
+* Stacks 03DI, 03D6, 0F7B
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -68,8 +74,7 @@ private theorem transport_normalization
     Category.comp_id]
 
 /-- Restriction along an open triangle is inverse-image composition followed by
-restriction of the proper counit. This construction does not require properness.
-Source: Stacks 03D6, 0F7B. -/
+restriction of the proper counit. This construction does not require properness. -/
 def properOpenRestriction (A : Type (u + 1)) [CommRing A]
     {X T₁ T₂ : Scheme.{u}} (r : T₁ ⟶ T₂)
     (j₁ : X ⟶ T₁) (j₂ : X ⟶ T₂) (h : j₁ ≫ r = j₂) :
@@ -277,8 +282,7 @@ private theorem open_unit_inclusion
   rfl
 
 /-- The transported proper/open map has the open-unit normalization on its original
-bounded-below etale input, before coefficient realization or witness conjugation.
-Source: Stacks 03DI, 03D6, 0F7B. -/
+bounded-below etale input, before coefficient realization or witness conjugation. -/
 theorem properOpenProEtaleIso_unit
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X T₁ T₂ : Scheme.{u}} (r : T₁ ⟶ T₂) [IsProper r]

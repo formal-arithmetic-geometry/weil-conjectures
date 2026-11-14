@@ -161,7 +161,9 @@ import WeilConjectures.SixFunctors.ProEtale.Adic.ExtensionByZero
 /-!
 # Constructibility under the native adic encoding
 
-Source: Bhatt--Scholze, Definitions 6.8.3 and 6.8.8
+## References
+
+* Bhatt--Scholze, Definitions 6.8.3 and 6.8.8
 -/
 
 @[expose] public section
@@ -278,10 +280,7 @@ private theorem encoding_lisse_iff {T : Scheme.{u}}
         (encoding_free (C.X i) r).symm)⟩⟩
 
 /-- The normalized native encoding preserves and detects constructibility on a Noetherian
-scheme.
-
-Source: Bhatt--Scholze, Definitions 6.8.3 and 6.8.8; the finite-presentation
-characterization in `condensedQbar_lfp_locally_free`. -/
+scheme. -/
 theorem encoding_constructible_iff {T : Scheme.{u}} [IsNoetherian T]
     (M : AdicSheaf l T) :
     IsAdicConstructibleSheaf M ↔

@@ -41,12 +41,18 @@ meta import Mathlib.Util.TermReduce
 /-!
 # Perfect projection formula for completed coefficient reductions
 
-Source: Stacks Project, Cohomology on Sites, Tags 0B56 and 0944, and More on Algebra, Tag 0657.
-
 The completed ring is presented as the limit of constant finite quotient sheaves.
 The recorded finite-coefficient comparisons identify this presentation with the
 continuous-functions presentation, including its quotient maps. Tensors and derived
 categories are ordinary and uncompleted. Natural numbers index positive exponents n+1.
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 0B56 and 0944, and More on Algebra, Tag 0657
+* Stacks 098T
+* Stacks 0B56
+* Stacks 0944
+* Stacks 0944 and 093M
 -/
 
 @[expose] public noncomputable section
@@ -109,8 +115,7 @@ abbrev quotient (T : Scheme.{u}) (n : ℕ) : derived d T :=
 variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 set_option linter.flexible false in
-/-- The projectionwise constant-ring comparison is a cone, including all tower arrows.
-Source: Stacks 098T. -/
+/-- The projectionwise constant-ring comparison is a cone, including all tower arrows. -/
 theorem coefficientCone_naturality {n m : ℕᵒᵖ} (a : n ⟶ m) :
     𝟙 ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj (ring d Y)) ≫
       (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map
@@ -149,8 +154,7 @@ def coefficientMap :
              naturality := fun _ _ a ↦ coefficientCone_naturality d f a } }
 
 set_option linter.flexible false in
-/-- The specified comparison is invertible for the finite quotient tower.
-Source: Stacks 098T. -/
+/-- The specified comparison is invertible for the finite quotient tower. -/
 theorem coefficientMap_isIso : IsIso (coefficientMap d f) := by
   let Q : ℕᵒᵖ ⥤ CommRingCat.{u + 1} :=
     Functor.ofOpSequence (X := fun n ↦ CommRingCat.of (A ⧸ d.ideal ^ (n + 1)))
@@ -208,8 +212,7 @@ variable (aY : ProEtaleTensorModel Y (ring d Y))
   (K : derived d X)
 
 set_option linter.flexible false in
-/-- The existing canonical projection mate, with the completed coefficients specialized.
-Source: Stacks 0B56. -/
+/-- The existing canonical projection mate, with the completed coefficients specialized. -/
 abbrev projection (P : derived d Y) :=
   proEtaleProjectionFormulaMate f (ring d Y) (ring d X)
     (coefficients d f) aY aX K P
@@ -252,8 +255,7 @@ private theorem strictPerfect_mem
 set_option linter.flexible false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Thick closure, the finite-free base case (including rank zero), and site-perfectness.
-Source: Stacks 0944. -/
+/-- Thick closure, the finite-free base case (including rank zero), and site-perfectness. -/
 theorem perfect_projection_formula :
     (locus d f aY aX K).IsTriangulated ∧
     (locus d f aY aX K).IsStableUnderRetracts ∧
@@ -588,8 +590,7 @@ theorem resolution_exists (n : ℕ) : Nonempty (Resolution d (X := X) (Y := Y) K
   exact ⟨⟨I, hI, eI, C, ⟨a, b, hbounded⟩, pkg, eq⟩⟩
 
 set_option linter.flexible false in
-/-- Every positive quotient is site-perfect and its canonical projection map is invertible.
-Source: Stacks 0944 and 093M. -/
+/-- Every positive quotient is site-perfect and its canonical projection map is invertible. -/
 theorem reductionMap_isIso (n : ℕ) :
     SheafOfModules.IsPerfectOnSmallRingedSite (ring d Y) (quotient d Y n) ∧
       IsIso (reductionMap d f aY aX K n) := by

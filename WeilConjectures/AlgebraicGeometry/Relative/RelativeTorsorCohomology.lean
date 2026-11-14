@@ -19,8 +19,22 @@ import WeilConjectures.CategoryTheory.Abelian.HorseshoeResolutions
 /-!
 # Relative first cohomology and torsors with an open section
 
-Source: Stacks Project, Cohomology on Sites, Tag 03AJ, relative refinement in the DAG proof; compare
-Cohomology Tags 0G71 and 0G78.
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 03AJ, relative refinement in the DAG proof
+* compare Cohomology Tags 0G71 and 0G78
+* Stacks Project, Tag 03AJ, relative refinement
+* Tag 0G78
+* Stacks Project, Tag 0G78
+* Stacks Project, Tag 03AJ, canonical extension class
+* Stacks Project, Tag 03AJ, relative cone construction
+* Stacks Project, Tag 013T and the relative refinement of Tag 03AJ
+* Stacks Project, Tag 013T
+* relative refinement of Tag 03AJ
+* Stacks Project, Tag 013T and Tag 03AJ, relative refinement
+* Stacks Project, Tags 0G71 and 0G78
+* Tag 013T
+* Tag 03AJ, relative refinement
 -/
 
 @[expose] public section
@@ -31,8 +45,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
-/-- The restriction square for a morphism of sheaf complexes commutes.
-Source: Stacks Project, Tag 03AJ, relative refinement. -/
+/-- The restriction square for a morphism of sheaf complexes commutes. -/
 theorem relativeSectionMap_square (T : Scheme.{u}) (U : T.Etale)
     {I J : CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) ℕ}
     (f : I ⟶ J) :
@@ -51,8 +64,7 @@ theorem relativeSectionMap_square (T : Scheme.{u}) (U : T.Etale)
     (I.X n).obj.map _ ≫ (f.f n).hom.app _
   exact ((f.f n).hom.naturality _).symm
 
-/-- The map of actual relative complexes induced by a coefficient-complex map.
-Source: Stacks Project, Tag 03AJ, relative refinement; Tag 0G78. -/
+/-- The map of actual relative complexes induced by a coefficient-complex map. -/
 noncomputable def relativeSectionMap (T : Scheme.{u}) (U : T.Etale)
     {I J : CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) ℕ}
     (f : I ⟶ J) : relativeSectionComplex T U I ⟶ relativeSectionComplex T U J :=
@@ -63,8 +75,7 @@ noncomputable def relativeSectionMap (T : Scheme.{u}) (U : T.Etale)
     (HomologicalComplex.extendMap (((etaleSectionFunctor U).mapHomologicalComplex _).map f)
       ComplexShape.embeddingUpNat) (relativeSectionMap_square T U f)
 
-/-- The restriction square for scheme pullback, followed by a coefficient map.
-Source: Stacks Project, Tag 0G78. -/
+/-- The restriction square for scheme pullback, followed by a coefficient map. -/
 theorem relativeTransfer_square {T T' : Scheme.{u}} (h : T' ⟶ T) (W : T.Opens)
     (I : CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) ℕ)
     (J : CochainComplex (Sheaf T'.smallEtaleTopology AddCommGrpCat.{u + 1}) ℕ)
@@ -89,8 +100,7 @@ theorem relativeTransfer_square {T T' : Scheme.{u}} (h : T' ⟶ T) (W : T.Opens)
   exact (resolutionSectionTransfer_naturality h I J a _ _ _ _
     (terminalSectionPullback_naturality h W)).symm
 
-/-- Pullback on the shifted restriction cone, computed on a resolution comparison.
-Source: Stacks Project, Tag 0G78. -/
+/-- Pullback on the shifted restriction cone, computed on a resolution comparison. -/
 noncomputable def relativeTransfer {T T' : Scheme.{u}} (h : T' ⟶ T) (W : T.Opens)
     (I : CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) ℕ)
     (J : CochainComplex (Sheaf T'.smallEtaleTopology AddCommGrpCat.{u + 1}) ℕ)
@@ -103,8 +113,7 @@ noncomputable def relativeTransfer {T T' : Scheme.{u}} (h : T' ⟶ T) (W : T.Ope
     (HomologicalComplex.extendMap (openResolutionSectionTransfer h I J a W)
       ComplexShape.embeddingUpNat) (relativeTransfer_square h W I J a)
 
-/-- Forgetting the specified open section, with the normalized ordinary H1 comparison.
-Source: Stacks Project, Tag 03AJ, canonical extension class. -/
+/-- Forgetting the specified open section, with the normalized ordinary H1 comparison. -/
 noncomputable def relativeForgetH1 (T : Scheme.{u}) (W : T.Opens)
     (G : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) (I : InjectiveResolution G)
     (c : ResolutionSectionCanonicalComparison G I) :
@@ -160,8 +169,7 @@ private lemma fiberMap_comp_zero
   rw [hc]
   exact Functor.map_zero _ _ _
 
-/-- Relative complex maps preserve a zero composite.
-Source: Stacks Project, Tag 03AJ, relative cone construction. -/
+/-- Relative complex maps preserve a zero composite. -/
 theorem relativeSectionMap_comp_zero (T : Scheme.{u}) (U : T.Etale)
     {I J K : CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) ℕ}
     (a : I ⟶ J) (b : J ⟶ K) (hab : a ≫ b = 0) :
@@ -170,8 +178,7 @@ theorem relativeSectionMap_comp_zero (T : Scheme.{u}) (U : T.Etale)
     simp only [← HomologicalComplex.extendMap_comp, ← Functor.map_comp, hab,
       Functor.map_zero, HomologicalComplex.extendMap_zero]
 
-/-- Apply the relative shifted-cone construction to a short complex of resolutions.
-Source: Stacks Project, Tag 013T and the relative refinement of Tag 03AJ. -/
+/-- Apply the relative shifted-cone construction to a short complex of resolutions. -/
 noncomputable def relativeShortComplex (T : Scheme.{u}) (U : T.Etale)
     (S : ShortComplex
       (CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) ℕ)) :
@@ -247,8 +254,7 @@ private noncomputable def sumRowSplitting (S R : ShortComplex AddCommGrpCat.{u +
     apply biprod.hom_ext' <;> apply biprod.hom_ext <;>
       simp [sumRow, biprod.map, Category.assoc, s.id, t.id]
 
-/-- Split horseshoe rows remain short exact after relative sections.
-Source: Stacks Project, Tag 013T; relative refinement of Tag 03AJ. -/
+/-- Split horseshoe rows remain short exact after relative sections. -/
 theorem relativeShortComplex_shortExact (T : Scheme.{u}) (U : T.Etale)
     (S : ShortComplex
       (CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) ℕ))
@@ -277,8 +283,7 @@ theorem relativeShortComplex_shortExact (T : Scheme.{u}) (U : T.Etale)
       (extendedSections_split T U S hs (n + -1)).some).shortExact
 
 /-- The canonical relative connecting map in any split horseshoe model.
-Its sign is the homology-sequence sign, not an independently chosen homomorphism.
-Source: Stacks Project, Tag 013T and Tag 03AJ, relative refinement. -/
+Its sign is the homology-sequence sign, not an independently chosen homomorphism. -/
 noncomputable def relativeConnecting (T : Scheme.{u}) (U : T.Etale)
     (S : ShortComplex
       (CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) ℕ))
@@ -363,8 +368,7 @@ private lemma transfer_comp_square {T T' : Scheme.{u}} (h : T' ⟶ T) (W : T.Ope
       (resolutionTransfer_comp_square h f f' a b comm _ _ _)
 
 /-- Relative connecting maps are natural under scheme pullback and coefficient maps.
-This includes identity scheme pullback, and hence independence of horseshoe choices.
-Source: Stacks Project, Tags 0G71 and 0G78; Tag 013T. -/
+This includes identity scheme pullback, and hence independence of horseshoe choices. -/
 theorem relativeConnecting_pullback_naturality {T T' : Scheme.{u}} (h : T' ⟶ T)
     (W : T.Opens)
     (S : ShortComplex
@@ -390,8 +394,7 @@ theorem relativeConnecting_pullback_naturality {T T' : Scheme.{u}} (h : T' ⟶ T
     (relativeShortComplex_shortExact T (Scheme.Etale.mk W.ι) S hs)
     (relativeShortComplex_shortExact T' (Scheme.Etale.mk (h ⁻¹ᵁ W).ι) S' hs') q (q + 1) rfl
 
-/-- The relative boundary is natural for coefficient-sequence comparison maps.
-Source: Stacks Project, Tag 013T; Tag 03AJ, relative refinement. -/
+/-- The relative boundary is natural for coefficient-sequence comparison maps. -/
 theorem relativeConnecting_coefficient_naturality (T : Scheme.{u}) (U : T.Etale)
     (S S' : ShortComplex
       (CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) ℕ))

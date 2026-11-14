@@ -10,7 +10,12 @@ import WeilConjectures.AlgebraicGeometry.IntegralResidueDerivedMonoidal
 import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientScalarSectionModelExistence
 import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientScalarSectionComparisonExistence
 
-/-! # A step of the normalized quotient section comparison -/
+/-! # A step of the normalized quotient section comparison
+
+## References
+
+* Stacks 03EK, 03EL, 06YY
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -50,8 +55,7 @@ open ModuleRingedComparison
 variable [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ T)]
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ' T)]
 
-/-- The actual section change-of-rings model admits the normalized internal comparison.
-Source: Stacks 03EK, 03EL, 06YY. -/
+/-- The actual section change-of-rings model admits the normalized internal comparison. -/
 theorem scalar_section_exists (T : Scheme.{u}) :
     ∃ c : ScalarSectionData a T, ScalarSectionNormalized a T c := by
   obtain ⟨model⟩ := scalar_section_model_exists a T

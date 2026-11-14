@@ -38,7 +38,11 @@ import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
 /-! # The unit map on closed-fibre stalks
 
-Source: Stacks Project, Tag 0GJU.
+## References
+
+* Stacks Project, Tag 0GJU
+* Stacks Project, Tag 0GJU, ordinary germ calculation
+* Tag 0GJP
 -/
 
 @[expose] public section
@@ -223,8 +227,7 @@ attribute [local irreducible] restriction localAcyclicityStrictMap
 attribute [local irreducible] squareUpperStarIso upperStarComp baseChangeMap
 attribute [local irreducible] Sheaf.Γ upperStarCompSheafFiberIso localAcyclicityAlpha
 
-/-- The ordinary adjunction unit on a closed-fibre stalk is the local-acyclicity map.
-Source: Stacks Project, Tag 0GJU, ordinary germ calculation; Tag 0GJP. -/
+/-- The ordinary adjunction unit on a closed-fibre stalk is the local-acyclicity map. -/
 theorem closedFibre_unit_stalk_comparison
     {X S : Scheme.{u}} (f : X ⟶ S)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

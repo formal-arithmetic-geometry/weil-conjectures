@@ -44,7 +44,10 @@ import Mathlib.Algebra.Homology.SingleHomology
 /-!
 # Derived sections over a w-contractible affine pro-etale object
 
-Source: Stacks Project, Tags 079P, 070K and 070Y.
+## References
+
+* Stacks Project, Tags 079P, 070K and 070Y
+* Stacks Project, Modules on Sites
 -/
 
 @[expose] public section
@@ -58,7 +61,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme.ProEt
 
 /-- Evaluation is the composite of the existing additive forgetful and presheaf
-evaluation functors. Source: Stacks Project, Modules on Sites. -/
+evaluation functors. -/
 instance moduleEvaluation_additive (X : Scheme.{t})
     (R : Sheaf (topology X) RingCat.{u}) (U : X.ProEt) :
     (SheafOfModules.evaluation.{max u v (t + 1)} R (op U)).Additive :=

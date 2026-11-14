@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.NativeFrobenius.NativeHomBifunct
 
 /-! # Pointwise Hom transport to the native small model
 
-Source: Stacks 03D6 and 03EO.
+## References
+
+* Stacks 03D6 and 03EO
 -/
 
 @[expose] public noncomputable section
@@ -23,8 +25,7 @@ variable (Y : Scheme.{u}) (l : ℕ) [Fact l.Prime]
 attribute [local irreducible] comparisonRing nativeHom adicSectionModuleEquivalence
   inverseNativeHomComparison SheafOfModules.homObjMap
 
-/-- Unlift slice maps and reverse the normalized native section-Hom comparison.
-Source: Stacks 03D6 and 03EO. -/
+/-- Unlift slice maps and reverse the normalized native section-Hom comparison. -/
 def homComparison (H : AdicModuleHomComparisonCore l Y)
     (M N : TwistedActionRingedSite.Modules (ring Y l)) :
     (equivalence Y l).functor.obj (SheafOfModules.homObj (R := ring Y l) M N) ≅

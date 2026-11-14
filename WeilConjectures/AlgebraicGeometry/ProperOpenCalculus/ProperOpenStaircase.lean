@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.ProperOpenCalculus.ProperOpenCal
 /-!
 # Coherence on a supplied proper/open staircase
 
-Source: Stacks Project, Tag 0F7K.
+## References
+
+* Stacks Project, Tag 0F7K
 -/
 
 @[expose] public section
@@ -24,8 +26,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.ProperOpenCalculus
 
-/-- The two compositions on one supplied staircase agree.
-Source: Stacks Project, Tag 0F7K. -/
+/-- The two compositions on one supplied staircase agree. -/
 theorem properOpen_staircase {A : Scheme.{u} → Prop}
     (F : ProperOpenCalculus.{u, v, w} A)
     (X Y Z W : {X : Scheme.{u} // A X})

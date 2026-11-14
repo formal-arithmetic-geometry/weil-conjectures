@@ -294,7 +294,10 @@ import all WeilConjectures.AlgebraicGeometry.EtaleGraphFromOpenBaseChange
 
 /-! # Cartesian exchange of the graph comparison between compactifications
 
-Source: Stacks Project, Tag 0F7F, the product-graph base-change calculation.
+## References
+
+* Stacks Project, Tag 0F7F, the product-graph base-change calculation
+* Stacks Project, Tag 0F7F
 -/
 
 @[expose] public section
@@ -350,8 +353,7 @@ private theorem cartesian_exchange_transport
     CategoryTheory.Functor.map_id, Category.comp_id]
   rfl
 
-/-- The graph factor alone commutes with Cartesian compactification exchange.
-Source: Stacks Project, Tag 0F7F; `etaleGraphFromOpen_baseChange`. -/
+/-- The graph factor alone commutes with Cartesian compactification exchange. -/
 theorem openRestrictionGraphIso_cartesianExchange
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}

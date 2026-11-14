@@ -11,7 +11,12 @@ public import WeilConjectures.Algebra.Homology.SmoothPurity.LocalizedModuleExact
 import all WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSupplement
 import WeilConjectures.AlgebraicGeometry.ProEtale.Ringed.ProEtaleRingedOpenComparison
 
-/-! # The slice presentation of extension by zero on the small pro-etale site -/
+/-! # The slice presentation of extension by zero on the small pro-etale site
+
+## References
+
+* Stacks Project, Tags 09BN, 00XZ, 03DI and 03DJ
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -23,9 +28,7 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 namespace AlgebraicGeometry.Scheme
 
 /-- Actual extension by zero is an equivalence followed by literal slice extension.
-There is no quasi-compactness hypothesis and the coefficient ring sheaves are arbitrary.
-
-Source: Stacks Project, Tags 09BN, 00XZ, 03DI and 03DJ. -/
+There is no quasi-compactness hypothesis and the coefficient ring sheaves are arbitrary. -/
 theorem proEtaleOpen_slicePresentation {U V : Scheme.{u}} (j : U ⟶ V)
     [IsOpenImmersion j]
     (RV : Sheaf (ProEt.topology V) CommRingCat.{u + 1})

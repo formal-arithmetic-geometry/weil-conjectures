@@ -29,7 +29,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.TraitDivisorChartSectionGener
 /-!
 # Localized tame root chart and its transverse generic factor
 
-Source: Stacks Project, Tags 0EYH and 0EYI, proof before parts (1) and (2).
+## References
+
+* Stacks Project, Tags 0EYH and 0EYI, proof before parts (1) and (2)
+* Stacks Project, Tags 0EYH and 0EYI, proof before parts (1) and (2), and Tag 0EYJ, the trait
+  reduction
 -/
 
 @[expose] public section
@@ -40,10 +44,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The geometric chart construction, retaining the localization at the chosen root point.
 It does not identify that localization with the whole root algebra or assert that the
-canonical map into the whole root algebra is local.
-
-Source: Stacks Project, Tags 0EYH and 0EYI, proof before parts (1) and (2),
-and Tag 0EYJ, the trait reduction. -/
+canonical map into the whole root algebra is local. -/
 theorem GaloisCover.stalk_normalization_trait_section_localized_root_chart {S C : Scheme.{u}}
     [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]

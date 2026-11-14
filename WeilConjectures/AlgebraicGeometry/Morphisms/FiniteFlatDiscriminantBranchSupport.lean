@@ -16,7 +16,10 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.TraceDiscriminantFibreEtaleCr
 /-!
 # The locally principal branch locus of a finite flat morphism
 
-Source: Stacks Project, Tag 0BVH.
+## References
+
+* Stacks Project, Tag 0BVH
+* Stacks Project, Tag 0BVH (discriminant-lemma-discriminant)
 -/
 
 @[expose] public section
@@ -25,9 +28,7 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
-/-- The discriminant ideal cuts out exactly the image of the non-etale locus.
-
-Source: Stacks Project, Tag 0BVH (discriminant-lemma-discriminant). -/
+/-- The discriminant ideal cuts out exactly the image of the non-etale locus. -/
 theorem exists_locallyPrincipal_branch_ideal_of_finite_flat
     {X Y : Scheme.{u}} [IsLocallyNoetherian Y]
     (f : X ⟶ Y) [IsFinite f] [Flat f] :

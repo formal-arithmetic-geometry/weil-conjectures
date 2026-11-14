@@ -23,7 +23,10 @@ import WeilConjectures.AlgebraicGeometry.Proper.ProperFibreDimensionUpperSemicon
 /-!
 # Final shrinking of an existing marked curve diagram
 
-Source: Stacks Project, Tag 0GK7, final shrinking paragraphs.
+## References
+
+* Stacks Project, Tag 0GK7, final shrinking paragraphs
+* Stacks Project, Tag 0GK7, the proper-smooth fibre and marked-open shrinking paragraphs
 -/
 
 @[expose] public section
@@ -37,9 +40,6 @@ set_option backward.isDefEq.respectTransparency false in
 be restricted to a base neighbourhood where those conditions hold everywhere.
 The output includes the cartesian comparisons with the original diagram and lifts a
 specified map whose image lies over the point. No generic diagram is constructed here.
-
-Source: Stacks Project, Tag 0GK7, the proper-smooth fibre and marked-open shrinking
-paragraphs; finite closed images descend shrinkings through the radicial cover.
 -/
 theorem exists_marked_curve_diagram_refinement
     {X S V Z : Scheme.{u}} (f : X ⟶ S) (U : S.Opens) (η : S) (hη : η ∈ U)

@@ -42,9 +42,6 @@ public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 /-! # Module-object and ringed-topos derived comparison
 
-Source: Stacks Project, Sites, Tag 00YV; Modules on Sites, Tags 03EK, 03EL, 03D7, 03DI and 03DJ;
-Cohomology on Sites, Tags 07A4, 07A6 and 0B56.
-
 ## Main definitions and statements
 
 - `ordinary_exact_flat_kflat`, `ordinary_monoidal`: the ordinary equivalence clauses.
@@ -52,6 +49,14 @@ Cohomology on Sites, Tags 07A4, 07A6 and 0B56.
 - `tensorPullComparison`, `delta_comparison`, `mu_comparison`: specified tensor maps.
 - `composition_comparison`, `projection_comparison`: composition and the proper mate.
 - `open_homEquiv`, `openProjection_comparison`: open adjunction and its unit mate.
+
+## References
+
+* Stacks Project, Sites, Tag 00YV
+* Modules on Sites, Tags 03EK, 03EL, 03D7, 03DI and 03DJ
+* Cohomology on Sites, Tags 07A4, 07A6 and 0B56
+* Stacks 03DJ and 0B56
+* Stacks 03D7 and 07A6
 -/
 
 @[expose] public noncomputable section
@@ -230,8 +235,7 @@ variable [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)]
 
 -- The comparison instances contain large sheaf tensor constraints.
 -- Comparing the two localized mate squares elaborates the section-module constraints.
-/-- The ringed adjoint-of-unit open projection arrow, using inverse canonical delta.
-Source: Stacks 03DJ and 0B56. -/
+/-- The ringed adjoint-of-unit open projection arrow, using inverse canonical delta. -/
 def openProjection {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (K : DerivedCategory (modules Λ U)) (L : DerivedCategory (modules Λ X)) :
     (derivedExtension Λ j).obj ((tensor Λ U).obj (K, (derivedPullback Λ j).obj L)) ⟶
@@ -242,8 +246,7 @@ def openProjection {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
       (tensorPullComparison Λ j).inv.app ((derivedExtension Λ j).obj K, L))
 
 -- The curried tensor and derived adjunction interfaces have large instance arguments.
-/-- Pullback composition is identified with the canonical ringed pasting comparison.
-Source: Stacks 03D7 and 07A6. -/
+/-- Pullback composition is identified with the canonical ringed pasting comparison. -/
 theorem composition_comparison {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     ∀ M : DerivedCategory (internalModules Λ Z),
         (derivedPullComparison Λ (f ≫ g)).hom.app M ≫

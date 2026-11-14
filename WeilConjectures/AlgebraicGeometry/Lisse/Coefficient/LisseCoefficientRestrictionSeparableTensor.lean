@@ -13,7 +13,13 @@ import Mathlib.LinearAlgebra.TensorProduct.Free
 import Mathlib.RingTheory.Unramified.Field
 import Mathlib.RingTheory.Unramified.Finite
 
-/-! An integral multiple of the finite separability tensor. -/
+/-! An integral multiple of the finite separability tensor.
+
+## References
+
+* Deligne, Weil II (1.1.1) d), pp. 146-147
+* Stacks Project, Algebra, finite separable diagonal
+-/
 
 @[expose] public section
 noncomputable section
@@ -26,9 +32,7 @@ variable (l : ℕ) [Fact l.Prime]
   [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (ι : E →ₐ[ℚ_[l]] L)
 
-/-- The integer tensor square contains a central tensor with nonzero multiplication.
-Source: Deligne, Weil II (1.1.1) d), pp. 146-147; Stacks Project, Algebra, finite separable
-diagonal. -/
+/-- The integer tensor square contains a central tensor with nonzero multiplication. -/
 theorem lisseIntegerInclusion_separability_tensor :
     let R := Padic.coefficientExtensionIntegers l E
     let S := Padic.coefficientExtensionIntegers l L

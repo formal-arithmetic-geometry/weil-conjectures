@@ -33,8 +33,11 @@ import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
 /-!
 # Constructibility for lisse coefficients on an open relative affine line
 
-Source: Stacks Project, Tag 0GKY, specialized to finite coefficient rings and affine finite-type
-integer bases.
+## References
+
+* Stacks Project, Tag 0GKY, specialized to finite coefficient rings and affine finite-type integer
+  bases
+* Stacks Project, Tag 0GKY
 -/
 
 @[expose] public section
@@ -897,8 +900,7 @@ end StableInstances
 
 /-- Lisse sheaves with finite module values on an open relative affine line over a
 finite-type integer base, on which the additive orders of the coefficients are invertible,
-have constructible compactly supported cohomology sheaves.
-Source: Stacks Project, Tag 0GKY. -/
+have constructible compactly supported cohomology sheaves. -/
 theorem isConstructibleEtaleModuleSheaf_lisse_openRelativeLine_shriek
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     (R : Type u) [CommRing R] [Algebra.FiniteType ℤ R]

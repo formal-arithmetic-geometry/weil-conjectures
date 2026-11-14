@@ -17,12 +17,16 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChangeAdjunctionSupplement
 /-!
 # Four finite-level proper base-change corners
-Source: Stacks Tags 099N, 09C9, 0B56 and 0944.
 The finite constant coefficient presentation and its inverse limit are the recorded
 completed-coefficient datum. Its normalized comparison identifies finite coefficients
 with sheafified continuous component functions and respects quotient transitions.
 The reduction/pullback comparison is characterized on K-flat representatives by
 the mate of sectionwise restriction/direct-image commutation, fixing its tensor map.
+
+## References
+
+* Stacks Tags 099N, 09C9, 0B56 and 0944
+* Stacks 098T
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -66,8 +70,7 @@ def fourCornerCoefficientTowerIso (T : Scheme.{t}) (d : ProEtaleAdicCoefficientD
   NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun h ↦ (Category.comp_id _).trans
       ((fourCornerCoefficientTowerNaturality T d h).trans (Category.id_comp _).symm))
 
-/-- The specified profinite inverse-image comparison at the actual completed ring.
-Source: Stacks 098T. -/
+/-- The specified profinite inverse-image comparison at the actual completed ring. -/
 def fourCornerCoefficientIso {U V : Scheme.{t}} (f : U ⟶ V)
     (d : ProEtaleAdicCoefficientDatum A) :
     (proEtaleSheafInverseImage f CommRingCat.{t + 1}).obj (adicDatumRing V d) ≅
@@ -78,8 +81,7 @@ def fourCornerCoefficientIso {U V : Scheme.{t}} (f : U ⟶ V)
       ((proEtale_profinite_coefficient_inverse_image (fourCornerRingTower d.ideal)).2.1 U V f) ≪≫
     lim.mapIso (fourCornerCoefficientTowerIso U d)
 
-/-- The specified finite coefficient comparison, normalized by constant sections.
-Source: Stacks 098T. -/
+/-- The specified finite coefficient comparison, normalized by constant sections. -/
 def fourCornerFiniteIso {U V : Scheme.{t}} (f : U ⟶ V)
     (d : ProEtaleAdicCoefficientDatum A) (n : ℕ) :
     (proEtaleSheafInverseImage f CommRingCat.{t + 1}).obj
@@ -89,8 +91,7 @@ def fourCornerFiniteIso {U V : Scheme.{t}} (f : U ⟶ V)
     ((fourCornerRingTower d.ideal).obj (op n)))
       ((proEtale_profinite_coefficient_inverse_image (fourCornerRingTower d.ideal)).1 U V f (op n))
 
-/-- The completed and finite comparisons commute with their actual limit projections.
-Source: Stacks 098T. -/
+/-- The completed and finite comparisons commute with their actual limit projections. -/
 theorem fourCornerProjectionComm {U V : Scheme.{t}} (f : U ⟶ V)
     (d : ProEtaleAdicCoefficientDatum A) (n : ℕ) :
     (fourCornerCoefficientIso f d).hom ≫ adicDatumProjection U d n =

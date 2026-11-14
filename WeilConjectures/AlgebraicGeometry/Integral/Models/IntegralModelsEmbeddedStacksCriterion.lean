@@ -173,7 +173,10 @@ import WeilConjectures.AlgebraicGeometry.Embedded.EmbeddedIntegralResidueTranspo
 
 /-! # Stacks criterion for embedded coefficients
 
-Source: the integral-models Stacks criterion, Stacks Project Tag 09C1.
+## References
+
+* the integral-models Stacks criterion, Stacks Project Tag 09C1
+* Stacks Project Tag 09C1
 -/
 
 @[expose] public noncomputable section
@@ -195,8 +198,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 attribute [-instance] integralModel_coefficientMonObj in
 /-- The Stacks integral constructibility criterion in the independent-universe embedded
 coefficient presentation.
-
-Source: integral-models-stacks detail of the integral-models unit; Stacks Project Tag 09C1.
 -/
 theorem integralModelsEmbeddedStacksCriterion
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)

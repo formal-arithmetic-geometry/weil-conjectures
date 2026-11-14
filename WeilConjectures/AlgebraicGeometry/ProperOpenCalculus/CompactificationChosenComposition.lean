@@ -10,7 +10,11 @@ import WeilConjectures.AlgebraicGeometry.ProperOpenCalculus.CompactificationRefi
 
 /-! # Composition for arbitrary chosen compactifications
 
-Source: Stacks 0F7J--0F7K, independence of a common refining tower.
+## References
+
+* Stacks 0F7J--0F7K, independence of a common refining tower
+* Stacks 0F7J
+* Stacks 0F7K
 -/
 
 @[expose] public noncomputable section
@@ -21,8 +25,7 @@ namespace AlgebraicGeometry.ProperOpenCalculus
 
 variable {A : Scheme.{u} → Prop} (F : ProperOpenCalculus.{u, v, w} A) (G : Geometry A)
 
-/-- The comparison is independent of the chosen common refinement by cofilteredness.
-Source: Stacks 0F7J. -/
+/-- The comparison is independent of the chosen common refinement by cofilteredness. -/
 def comparison (X Y : {X : Scheme.{u} // A X}) (f : X.val ⟶ Y.val)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
     (c d : Compactification f) (hc : A c.Z) (hd : A d.Z) :
@@ -34,8 +37,7 @@ def comparison (X Y : {X : Scheme.{u} // A X}) (f : X.val ⟶ Y.val)
   let s := (G.common X Y f d c hd hc).choose_spec.2.2.some
   exact F.compare X Y hd hc he r s
 
-/-- Computing the comparison on any supplied common refinement gives the same map.
-Source: Stacks 0F7J. -/
+/-- Computing the comparison on any supplied common refinement gives the same map. -/
 theorem comparison_eq (X Y : {X : Scheme.{u} // A X}) (f : X.val ⟶ Y.val)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
     (c d e : Compactification f) (hc : A c.Z) (hd : A d.Z) (he : A e.Z)
@@ -72,8 +74,7 @@ theorem binary_exists (X Y Z : {X : Scheme.{u} // A X})
   obtain ⟨T, hT, _⟩ := G.compatible X Y Z f g d c hd hc
   exact ⟨T, hT⟩
 
-/-- A chosen binary tower. All resulting maps are independent of this choice.
-Source: Stacks 0F7J. -/
+/-- A chosen binary tower. All resulting maps are independent of this choice. -/
 def binaryTower (X Y Z : {X : Scheme.{u} // A X})
     (f : X.val ⟶ Y.val) (g : Y.val ⟶ Z.val)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
@@ -81,8 +82,7 @@ def binaryTower (X Y Z : {X : Scheme.{u} // A X})
     {T : Compactification.Triangle f g // TriangleObjects (A := A) T} :=
   ⟨(binary_exists G X Y Z f g).choose, (binary_exists G X Y Z f g).choose_spec⟩
 
-/-- The composition word evaluated on a supplied binary tower.
-Source: Stacks 0F7J. -/
+/-- The composition word evaluated on a supplied binary tower. -/
 def binaryOn (X Y Z : {X : Scheme.{u} // A X})
     (f : X.val ⟶ Y.val) (g : Y.val ⟶ Z.val)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
@@ -95,8 +95,7 @@ def binaryOn (X Y Z : {X : Scheme.{u} // A X})
       (comparison F G Y Z g d T.cg hd hT.2.1) ≪≫
     F.towerIso X Y Z T hT ≪≫ comparison F G X Z (f ≫ g) T.cfg e hT.2.2 he
 
-/-- Independence of the binary-tower choice, as an equality before any evaluation.
-Source: Stacks 0F7J. -/
+/-- Independence of the binary-tower choice, as an equality before any evaluation. -/
 theorem binaryOn_independent (X Y Z : {X : Scheme.{u} // A X})
     (f : X.val ⟶ Y.val) (g : Y.val ⟶ Z.val)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
@@ -127,8 +126,7 @@ theorem binaryOn_independent (X Y Z : {X : Scheme.{u} // A X})
       (comparison F G Y Z g d T.cg hd hT.2.1).hom ≫ a ≫
         (comparison F G X Z (f ≫ g) S.cfg e hS.2.2 he).hom) ht
 
-/-- Composition between arbitrary compactification models.
-Source: Stacks 0F7J. -/
+/-- Composition between arbitrary compactification models. -/
 def binary (X Y Z : {X : Scheme.{u} // A X})
     (f : X.val ⟶ Y.val) (g : Y.val ⟶ Z.val)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
@@ -139,8 +137,7 @@ def binary (X Y Z : {X : Scheme.{u} // A X})
   binaryOn F G X Y Z f g c d e hc hd he (binaryTower G X Y Z f g).val
     (binaryTower G X Y Z f g).property
 
-/-- The chosen binary composition can be computed on any supplied tower.
-Source: Stacks 0F7J. -/
+/-- The chosen binary composition can be computed on any supplied tower. -/
 theorem binary_eq (X Y Z : {X : Scheme.{u} // A X})
     (f : X.val ⟶ Y.val) (g : Y.val ⟶ Z.val)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
@@ -152,8 +149,7 @@ theorem binary_eq (X Y Z : {X : Scheme.{u} // A X})
       binaryOn F G X Y Z f g c d e hc hd he T hT :=
   binaryOn_independent F G X Y Z f g c d e hc hd he _ T _ hT
 
-/-- On a compatible tower its binary composition is exactly the specified tower word.
-Source: Stacks 0F7J. -/
+/-- On a compatible tower its binary composition is exactly the specified tower word. -/
 theorem binary_tower (X Y Z : {X : Scheme.{u} // A X})
     (f : X.val ⟶ Y.val) (g : Y.val ⟶ Z.val)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
@@ -166,8 +162,7 @@ theorem binary_tower (X Y Z : {X : Scheme.{u} // A X})
   ext M
   simp [binaryOn, comparison_refl, NatIso.hcomp]
 
-/-- Simultaneous change of all three compactifications commutes with composition.
-Source: Stacks 0F7J. -/
+/-- Simultaneous change of all three compactifications commutes with composition. -/
 theorem binary_refinement (X Y Z : {X : Scheme.{u} // A X})
     (f : X.val ⟶ Y.val) (g : Y.val ⟶ Z.val)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
@@ -191,16 +186,14 @@ theorem binary_refinement (X Y Z : {X : Scheme.{u} // A X})
   simp only [Iso.trans_hom, Category.assoc]
   rw [ht]
 
-/-- The identity comparison is obtained from the trivial proper compactification.
-Source: Stacks 0F7K. -/
+/-- The identity comparison is obtained from the trivial proper compactification. -/
 def chosenIdentity (X : {X : Scheme.{u} // A X})
     (c : Compactification (𝟙 X.val)) (hc : A c.Z) :
     F.H X X c hc ≅ 𝟭 (F.obj X) :=
   comparison F G X X (𝟙 X.val) c (Compactification.ofIsProper (𝟙 X.val)) hc X.property ≪≫
     F.identityIso X
 
-/-- The left identity law for an arbitrary identity compactification.
-Source: Stacks 0F7K. -/
+/-- The left identity law for an arbitrary identity compactification. -/
 theorem binary_left (X Y : {X : Scheme.{u} // A X}) (f : X.val ⟶ Y.val)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
     (c : Compactification f) (hc : A c.Z)
@@ -218,8 +211,7 @@ theorem binary_left (X Y : {X : Scheme.{u} // A X}) (f : X.val ⟶ Y.val)
   dsimp only [Compactification.Triangle.unitLeft, H, Compactification.copy]
   simp [comparison_refl, chosenIdentity, H, Category.assoc]
 
-/-- The right identity law for an arbitrary identity compactification.
-Source: Stacks 0F7K. -/
+/-- The right identity law for an arbitrary identity compactification. -/
 theorem binary_right (X Y : {X : Scheme.{u} // A X}) (f : X.val ⟶ Y.val)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
     (c : Compactification f) (hc : A c.Z)
@@ -284,8 +276,7 @@ private theorem associativity_transfer
 
 end AssociativityTransfer
 
-/-- Composition with a named composite, retaining the original compactification data.
-Source: Stacks 0F7J. -/
+/-- Composition with a named composite, retaining the original compactification data. -/
 def namedBinary (X Y Z : {X : Scheme.{u} // A X})
     (f : X.val ⟶ Y.val) (g : Y.val ⟶ Z.val) (fg : X.val ⟶ Z.val) (wfg : f ≫ g = fg)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
@@ -295,8 +286,7 @@ def namedBinary (X Y Z : {X : Scheme.{u} // A X})
     F.H X Y c hc ⋙ F.H Y Z d hd ≅ F.H X Z e he :=
   binary F G X Y Z f g c d (e.copy wfg) hc hd he
 
-/-- A reflexively named composite gives the original binary word.
-Source: equality transport. -/
+/-- A reflexively named composite gives the original binary word. -/
 @[simp] theorem namedBinary_rfl (X Y Z : {X : Scheme.{u} // A X})
     (f : X.val ⟶ Y.val) (g : Y.val ⟶ Z.val)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
@@ -307,8 +297,7 @@ Source: equality transport. -/
       binary F G X Y Z f g c d e hc hd he := by
   rfl
 
-/-- The named left unit word uses exactly the given compactification of f.
-Source: Stacks 0F7K. -/
+/-- The named left unit word uses exactly the given compactification of f. -/
 theorem namedBinary_left (X Y : {X : Scheme.{u} // A X}) (f : X.val ⟶ Y.val)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
     (c : Compactification f) (hc : A c.Z)
@@ -321,8 +310,7 @@ theorem namedBinary_left (X Y : {X : Scheme.{u} // A X}) (f : X.val ⟶ Y.val)
     (Compactification.Triangle.unitLeft c) ⟨X.property, hc, hc⟩]
   exact binary_left F G X Y f c hc i hi
 
-/-- The named right unit word uses exactly the given compactification of f.
-Source: Stacks 0F7K. -/
+/-- The named right unit word uses exactly the given compactification of f. -/
 theorem namedBinary_right (X Y : {X : Scheme.{u} // A X}) (f : X.val ⟶ Y.val)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
     (c : Compactification f) (hc : A c.Z)
@@ -335,8 +323,7 @@ theorem namedBinary_right (X Y : {X : Scheme.{u} // A X}) (f : X.val ⟶ Y.val)
     (Compactification.Triangle.unitRight c) ⟨hc, Y.property, hc⟩]
   exact binary_right F G X Y f c hc i hi
 
-/-- Copying the arrow equality does not change a comparison word.
-Source: Stacks 0F7J. -/
+/-- Copying the arrow equality does not change a comparison word. -/
 theorem comparison_copy (X Y : {X : Scheme.{u} // A X})
     {f f' : X.val ⟶ Y.val} (wff : f' = f)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
@@ -347,8 +334,7 @@ theorem comparison_copy (X Y : {X : Scheme.{u} // A X})
   subst f'
   rfl
 
-/-- Refinement compatibility also holds with a named composite.
-Source: Stacks 0F7J. -/
+/-- Refinement compatibility also holds with a named composite. -/
 theorem namedBinary_refinement (X Y Z : {X : Scheme.{u} // A X})
     (f : X.val ⟶ Y.val) (g : Y.val ⟶ Z.val) (fg : X.val ⟶ Z.val) (wfg : f ≫ g = fg)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
@@ -366,8 +352,7 @@ theorem namedBinary_refinement (X Y Z : {X : Scheme.{u} // A X})
   subst fg
   exact binary_refinement F G X Y Z f g c c' d d' e e' hc hc' hd hd' he he'
 
-/-- Associativity for arbitrary compactifications, obtained by a common staircase.
-Source: Stacks 0F7K. -/
+/-- Associativity for arbitrary compactifications, obtained by a common staircase. -/
 theorem namedBinary_associativity (X Y Z W : {X : Scheme.{u} // A X})
     (f : X.val ⟶ Y.val) (g : Y.val ⟶ Z.val) (h : Z.val ⟶ W.val)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]

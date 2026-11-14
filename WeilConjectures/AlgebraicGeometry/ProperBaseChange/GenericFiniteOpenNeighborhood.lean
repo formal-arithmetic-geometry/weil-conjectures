@@ -26,8 +26,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.ProperQuasiFinite
 /-!
 # Finiteness over an open containing all component generic points
 
-Source: Stacks Project, Morphisms of Schemes, Tag 02NW, equivalence (1) and (4), applied to every
-component generic point.
+## References
+
+* Stacks Project, Morphisms of Schemes, Tag 02NW, equivalence (1) and (4), applied to every
+  component generic point
+* Stacks Project, Tag 02NW, (1) implies (4), followed by union over component generic points
 -/
 
 @[expose] public section
@@ -204,8 +207,6 @@ private theorem generic_finite_neighborhood
 /-- A quasi-compact, quasi-separated, locally finite type morphism to a Noetherian scheme
 with finite set-theoretic fibres at component generic points is finite over a dense open
 containing all component generic points.
-
-Source: Stacks Project, Tag 02NW, (1) implies (4), followed by union over component generic points.
 -/
 theorem Scheme.Hom.exists_dense_open_isFinite_of_finite_generic_fibers
     {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]

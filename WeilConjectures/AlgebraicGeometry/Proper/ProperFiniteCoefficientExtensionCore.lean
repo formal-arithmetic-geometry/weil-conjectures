@@ -22,8 +22,6 @@ import all WeilConjectures.AlgebraicGeometry.Etale.Proper.EtaleProperCoefficient
 
 /-! # Proper finite coefficient extension core
 
-Source: Stacks Project, Tag 0GL6.
-
 This intermediate theorem packages the isomorphism and restriction/projection clauses of
 proper finite coefficient extension; the parent adds the independently verified mate
 normalization clause. The proof chooses K-flat resolutions with flat terms,
@@ -33,6 +31,10 @@ scalars. The resulting restricted morphism is invertible, so conservativity give
 invertibility of the scalar mate; the same calculation gives the ordered projection
 identity. The construction descends through quasi-isomorphisms to the entire
 derived category.
+
+## References
+
+* Stacks Project, Tag 0GL6
 -/
 
 @[expose] public section
@@ -59,8 +61,6 @@ private theorem cancel_scalar_comparisons
   simp [← Functor.map_comp]
 
 /-- The unbounded isomorphism and restricted projection clauses used by the parent theorem.
-
-Source: Stacks Project, Tag 0GL6.
 
 The proof is the proper projection formula after exact conservative restriction of scalars,
 with the canonical scalar/tensor and pullback comparisons and the derived direct-image mate.

@@ -37,7 +37,14 @@ import WeilConjectures.AlgebraicGeometry.Graded.GradedLineHomogeneousFractionAtl
 /-!
 # A line quotient and its homogeneous fraction morphism
 
-Source: Stacks Project, Constructions, Tags 01OA and 01O9.
+## References
+
+* Stacks Project, Constructions, Tags 01OA and 01O9
+* Stacks, Constructions, Tag 01OA
+* Stacks, Constructions, Tags 01OA and 01O9
+* Stacks, Constructions, Tags 01O9 and 01OA
+* Stacks, Constructions, Tags 01NA and 01O9
+* Stacks, Constructions, Tags 01NA, 01O9 and 01OA
 -/
 
 @[expose] public section
@@ -53,16 +60,14 @@ open scoped DirectSum TensorProduct
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- Tensor powers of a local frame, with the structural unit in degree zero.
-Source: Stacks, Constructions, Tag 01OA. -/
+/-- Tensor powers of a local frame, with the structural unit in degree zero. -/
 noncomputable def quotientFramePower {T : Scheme.{u}} {L : T.Modules} {W : T.Opens}
     (l : Γ(L, W)) : (n : ℕ) → Γ(L.tensorPow n, W)
   | 0 => unitSectionsEquiv W 1
   | n + 1 => tmulSection l (quotientFramePower l n)
 
 /-- The coefficient of a homogeneous image relative to a frame power. On a frame the
-scalar multiplication function is bijective, so its inverse is uniquely determined.
-Source: Stacks, Constructions, Tags 01OA and 01O9. -/
+scalar multiplication function is bijective, so its inverse is uniquely determined. -/
 noncomputable def RelativeGradedLineMap.quotientCoefficient
     {S T : Scheme.{u}} {h : T ⟶ S} {A : S.GradedAlgebraData} {L : T.Modules}
     (ψ : RelativeGradedLineMap h A L) (U : S.affineOpens) (W : T.affineOpens)
@@ -70,8 +75,7 @@ noncomputable def RelativeGradedLineMap.quotientCoefficient
   Function.invFun (fun b : Γ(T, W.1) ↦ b • quotientFramePower l d)
     ((L.tensorPow d).val.map (homOfLE hWU).op (ψ.component U d a))
 
-/-- The coefficient of the quotient image of a degree-one module section.
-Source: Stacks, Constructions, Tag 01OA. -/
+/-- The coefficient of the quotient image of a degree-one module section. -/
 noncomputable def quotientGeneratorCoefficient {S T : Scheme.{u}} (h : T ⟶ S)
     (E : S.Modules) (L : T.Modules) (q : (tensorPullback h).obj E ⟶ L)
     (U : S.affineOpens) (W : T.affineOpens) (hWU : W.1 ≤ h ⁻¹ᵁ U.1)
@@ -80,8 +84,7 @@ noncomputable def quotientGeneratorCoefficient {S T : Scheme.{u}} (h : T ⟶ S)
     (q.app W.1 (((tensorPullback h).obj E).val.map (homOfLE hWU).op
       (tensorPullbackSection h E U.1 m)))
 
-/-- The generator inclusion, with its degree-one membership proof.
-Source: Stacks, Constructions, Tag 01OA. -/
+/-- The generator inclusion, with its degree-one membership proof. -/
 noncomputable def quotientSymmetricGenerator {S : Scheme.{u}} (E : S.Modules)
     [E.IsQuasicoherent] (U : S.affineOpens) (m : Γ(E, U.1)) :
     (SymmetricAlgebraSheaf.gradedAlgebraData E).grading U 1 :=
@@ -91,8 +94,7 @@ noncomputable def quotientSymmetricGenerator {S : Scheme.{u}} (E : S.Modules)
     rw [pow_one]
     exact ⟨m, rfl⟩⟩
 
-/-- The degree-one component is exactly the specified quotient, in adjoint section form.
-Source: Stacks, Constructions, Tag 01OA. -/
+/-- The degree-one component is exactly the specified quotient, in adjoint section form. -/
 def RelativeGradedLineMap.ExtendsLineQuotient {S T : Scheme.{u}} (h : T ⟶ S)
     (E : S.Modules) [E.IsQuasicoherent] (L : T.Modules)
     (q : (tensorPullback h).obj E ⟶ L)
@@ -101,23 +103,20 @@ def RelativeGradedLineMap.ExtendsLineQuotient {S T : Scheme.{u}} (h : T ⟶ S)
     (ρ_ L).hom.app (h ⁻¹ᵁ U.1) (ψ.component U 1 (quotientSymmetricGenerator E U m)) =
       q.app (h ⁻¹ᵁ U.1) (tensorPullbackSection h E U.1 m)
 
-/-- The affine source of a fraction chart, canonically mapped into `T`.
-Source: Stacks, Constructions, Tags 01O9 and 01OA. -/
+/-- The affine source of a fraction chart, canonically mapped into `T`. -/
 noncomputable def quotientFractionSource {T : Scheme.{u}} (W : T.affineOpens)
     (b : Γ(T, W.1)) : Spec (.of (Localization.Away b)) ⟶ T :=
   Spec.map (CommRingCat.ofHom (algebraMap Γ(T, W.1) (Localization.Away b))) ≫
     W.2.isoSpec.inv ≫ W.1.ι
 
-/-- The fraction a/e^d for a degree-one denominator and degree-d numerator.
-Source: Stacks, Constructions, Tags 01NA and 01O9. -/
+/-- The fraction a/e^d for a degree-one denominator and degree-d numerator. -/
 def degreeOneQuotientFraction {S : Scheme.{u}} (A : S.GradedAlgebraData)
     (U : S.affineOpens) (e : A.grading U 1) (d : ℕ) (a : A.grading U d) :
     HomogeneousLocalization.Away (A.grading U) e.val :=
   HomogeneousLocalization.Away.mk (A.grading U) e.property d a.val
     (by simpa only [smul_eq_mul, mul_one] using a.property)
 
-/-- The scalar r/1 in the homogeneous localization; this specifies its R-algebra structure.
-Source: Stacks, Constructions, Tags 01NA and 01O9. -/
+/-- The scalar r/1 in the homogeneous localization; this specifies its R-algebra structure. -/
 def quotientFractionScalar {S : Scheme.{u}} (A : S.GradedAlgebraData)
     (U : S.affineOpens) (e : A.obj U) (r : Γ(S, U.1)) :
     HomogeneousLocalization.Away (A.grading U) e :=
@@ -126,8 +125,7 @@ def quotientFractionScalar {S : Scheme.{u}} (A : S.GradedAlgebraData)
 
 /-- A chart homomorphism is specified by all its homogeneous fraction values, its scalar
 map, and its spectrum map into the fixed global morphism. The scalar equation says precisely
-that the ring homomorphism is an R-algebra homomorphism, without a file-local instance.
-Source: Stacks, Constructions, Tags 01NA, 01O9 and 01OA. -/
+that the ring homomorphism is an R-algebra homomorphism, without a file-local instance. -/
 def RelativeGradedLineMap.IsQuotientFractionChart {S T : Scheme.{u}} (h : T ⟶ S)
     (E : S.Modules) [E.IsQuasicoherent] (L : T.Modules)
     (q : (tensorPullback h).obj E ⟶ L)
@@ -172,8 +170,7 @@ def RelativeGradedLineMap.IsQuotientFractionChart {S T : Scheme.{u}} (h : T ⟶ 
 /-- All affine line charts, including coefficient normalization, the generator cover,
 frame change, source restriction, and affine base restriction. The chart equation with F
 expresses agreement on every overlap, including those above distinct base opens, and
-identifies the glued map independently of any choices.
-Source: Stacks, Constructions, Tags 01OA and 01O9. -/
+identifies the glued map independently of any choices. -/
 def RelativeGradedLineMap.HasQuotientFractionCharts {S T : Scheme.{u}} (h : T ⟶ S)
     (E : S.Modules) [E.IsQuasicoherent] (L : T.Modules)
     (q : (tensorPullback h).obj E ⟶ L)
@@ -212,8 +209,7 @@ def RelativeGradedLineMap.HasQuotientFractionCharts {S T : Scheme.{u}} (h : T �
         ψ.quotientCoefficient U W hWU l d a)
 
 /-- Independence under a change of frame, expressed after any common scalar-preserving
-transport of the two localizations. This includes their canonical localization isomorphism.
-Source: Stacks, Constructions, Tags 01OA and 01O9. -/
+transport of the two localizations. This includes their canonical localization isomorphism. -/
 def RelativeGradedLineMap.QuotientFrameIndependent {S T : Scheme.{u}} (h : T ⟶ S)
     (E : S.Modules) [E.IsQuasicoherent] (L : T.Modules)
     (q : (tensorPullback h).obj E ⟶ L)
@@ -971,9 +967,7 @@ private theorem quotient_frame_independent
   exact quotientChart_transport_eq h E L q ψ F U W hWU l _ m ρ ρ' hρ hρ' C β β' hβ
 
 /-- The unique graded extension of an arbitrary quasi-coherent line quotient, and its
-unique morphism to the canonical relative Proj with all homogeneous fraction formulas.
-
-Source: Stacks, Constructions, Tags 01OA and 01O9. -/
+unique morphism to the canonical relative Proj with all homogeneous fraction formulas. -/
 theorem line_quotient_homogeneous_fraction_map {S T : Scheme.{u}} (h : T ⟶ S)
     (E : S.Modules) [E.IsQuasicoherent] (L : T.Modules) [L.IsInvertible]
     (q : (tensorPullback h).obj E ⟶ L) [Epi q] :

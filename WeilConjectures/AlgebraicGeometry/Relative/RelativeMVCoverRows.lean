@@ -12,7 +12,11 @@ import WeilConjectures.AlgebraicGeometry.Picard.ConeDiagramFullSESPresentation
 
 /-! # Short exact rows for an unrestricted relative cover comparison
 
-Source: Stacks Project, Cohomology, Tags 08BV, 08HZ, 08FE and 08HY.
+## References
+
+* Stacks Project, Cohomology, Tags 08BV, 08HZ, 08FE and 08HY
+* Stacks Project, Cohomology, Tags 08BV and 08HZ (the restriction rows), 08FE (open direct-image
+  comparison), and 08HY (the base-change mate)
 -/
 
 @[expose] public section
@@ -22,9 +26,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Resolve the relative cover comparison as a map of short exact rows, before
-passing from their quotients to mapping cones.
-Source: Stacks Project, Cohomology, Tags 08BV and 08HZ (the restriction rows),
-08FE (open direct-image comparison), and 08HY (the base-change mate). -/
+passing from their quotients to mapping cones. -/
 theorem relativeMV_cover_rows
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

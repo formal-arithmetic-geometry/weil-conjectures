@@ -27,7 +27,10 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 
 /-! # Local scalar models and degree-one comparison for Picard descent
 
-Source: Stacks Project, Tag 0BF2, the finite-free complexes and the representing chain maps.
+## References
+
+* Stacks Project, Tag 0BF2, the finite-free complexes and the representing chain maps
+* Stacks Project, Tag 0BF2, through the displayed chain maps, using Tags 0B91, 0BCD and 08CR
 -/
 
 @[expose] public section
@@ -38,9 +41,7 @@ open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme
 
 /-- Construct the local finite-free model and its degree-one comparison square, without
-assuming injectivity on H¹ and without realizing degree-zero cycles as sections.
-Source: Stacks Project, Tag 0BF2, through the displayed chain maps, using Tags 0B91,
-0BCD and 08CR. -/
+assuming injectivity on H¹ and without realizing degree-zero cycles as sections. -/
 theorem picard_h1_base_descent_local_model
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

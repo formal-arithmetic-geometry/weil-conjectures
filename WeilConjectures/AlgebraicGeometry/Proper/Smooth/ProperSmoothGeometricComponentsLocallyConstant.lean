@@ -21,7 +21,10 @@ import WeilConjectures.AlgebraicGeometry.Proper.ProperReducedGlobalSectionsProdu
 /-!
 # Geometric component counts in proper smooth families
 
-Source: Stacks Project, Tag 0E0N, specialized to smooth morphisms.
+## References
+
+* Stacks Project, Tag 0E0N, specialized to smooth morphisms
+* Stacks Project, Tag 0E0N
 -/
 
 @[expose] public section
@@ -120,7 +123,7 @@ private theorem hFiber_unit_eq_card_geometric_components
 
 /-- In a proper smooth family the geometric connected component count is finite and locally
 constant, vanishes for empty fibres, and geometric connectedness persists near any point where
-it holds. Source: Stacks Project, Tag 0E0N. -/
+it holds. -/
 theorem proper_smooth_geometric_components_locally_constant
     {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f] [Smooth f] :
     (∀ s : S, Finite (ConnectedComponents ↥(pullback f

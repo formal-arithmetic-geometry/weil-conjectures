@@ -14,11 +14,15 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # Native ordinary derived Weil induction and compact supports
 
-Source: Stacks Tags 079P, 08BJ, 070Y.
-
 All functors below are on ordinary unbounded derived categories. The localized structure
 map is a natural transformation out of derived forgetting; no equivalence between derived
 Weil objects and fixed pairs in the ordinary derived category is asserted.
+
+## References
+
+* Stacks Tags 079P, 08BJ, 070Y
+* native framework and comparison proof step 4, Stacks Tags 079P and 08BJ
+* comparison proof step 4, Stacks Tags 079P, 08BJ and 070Y
 -/
 
 @[expose] public noncomputable section
@@ -107,8 +111,7 @@ end ExactComparisons
 variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)]
 
-/-- The specified ordinary derived Frobenius pullback. Source: native framework,
-`WeilSheaf.frobeniusPullback`. -/
+/-- The specified ordinary derived Frobenius pullback. -/
 abbrev frobenius (T : Scheme.{u}) [T.Over (Spec (.of k₀))] :=
   (WeilSheaf.frobeniusPullback k₀ l T).mapDerivedCategory
 
@@ -150,8 +153,7 @@ abbrev ordinaryImage :=
   (ProEtale.adicLowerStar l
     (Scheme.Hom.geometricFiberMap c.g (comp_over c.g (Spec (.of k₀))))).rightDerivedFunctor
 
-/-- The proper comparison is the canonical right-derived lifted-functor comparison.
-Source: native framework and comparison proof step 4, Stacks Tags 079P and 08BJ. -/
+/-- The proper comparison is the canonical right-derived lifted-functor comparison. -/
 def properComparison :
     (ProEtaleWeilSheaf.lowerStar k₀ l c.g).rightDerivedFunctor ⋙ forget k₀ l Y ≅
       forget k₀ l c.Z ⋙ (ProEtale.adicLowerStar l
@@ -227,8 +229,7 @@ def HeartProperties (T : Scheme.{u}) [T.Over (Spec (.of k₀))] : Prop :=
         ((forget k₀ l T).obj ((induction k₀ l T).obj A)) (inclusion k₀ l T A)))
 
 /-- Identity on the common proper K-injective model, expressed with the actual units
-and localization factors. The underlying sheaf square is literally equal on maps too.
-Source: comparison proof step 4, Stacks Tags 079P, 08BJ and 070Y. -/
+and localization factors. The underlying sheaf square is literally equal on maps too. -/
 def ProperNormalization : Prop :=
   ∀ J : CochainComplex (ProEtaleWeilSheaf k₀ l c.Z) ℤ, J.IsKInjective →
     (forget k₀ l Y).map

@@ -11,7 +11,12 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.Comparison
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusBaseChangeNaturality
 
-/-! # The derived adjunction-unit equation for a normalized open triangle -/
+/-! # The derived adjunction-unit equation for a normalized open triangle
+
+## References
+
+* Stacks Project, More on Etale Cohomology, Tag 0F7B, specialized to a triangle fixing the open
+-/
 
 @[expose] public section
 
@@ -415,10 +420,7 @@ private theorem coefficient_unit_normalization
   · exact homotopy_triangle J₁ U₁ J₂ U₂ L R a a₁ a₂ g σ ho
 
 /-- A normalized ordinary open triangle satisfies the derived unit/counit equation.
-No properness, finiteness, or invertibility of the ordinary transformation is required.
-
-Source: Stacks Project, More on Etale Cohomology, Tag 0F7B, specialized to a triangle fixing the
-open. -/
+No properness, finiteness, or invertibility of the ordinary transformation is required. -/
 theorem properOpenDerivedUnitNormalization
     (Λ : Type (u + 1)) [CommRing Λ] {T₁ T₂ X : Scheme.{u}}
     (p : T₁ ⟶ T₂) (j₁ : X ⟶ T₁) (j₂ : X ⟶ T₂)

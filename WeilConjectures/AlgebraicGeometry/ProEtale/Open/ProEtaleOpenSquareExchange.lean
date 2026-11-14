@@ -17,11 +17,20 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.F
 /-!
 # Canonical open-square exchange on the small pro-etale site
 
-Source: Stacks Project, Tags 03S6 and 04J0.
-
 All functors act on the published intrinsic constant-ring module categories.
 The comparison is fixed as the inverse of the open-adjunction mate; the data below
 include restriction normalization, both identity laws and both pasting laws.
+
+## References
+
+* Stacks Project, Tags 03S6 and 04J0
+* Stacks, Tags 03DI and 00YV
+* Stacks, Tag 03DI
+* Stacks, Tag 04J0
+* Stacks, Tag 03S6
+* Stacks, Tag 05RU
+* Stacks, Section 0735
+* Stacks, Tags 03S6 and 04J0
 -/
 
 @[expose] public section
@@ -41,8 +50,7 @@ variable (A : Type u) [CommRing A] [Finite A]
 -- Use the equivalence API without expanding the concrete realization equivalence.
 attribute [local irreducible] sfIntrinsicModuleEquivalence
 
-/-- The open adjunction transported through the canonical realization equivalences.
-Source: Stacks, Tags 03DI and 00YV. -/
+/-- The open adjunction transported through the canonical realization equivalences. -/
 noncomputable def sfIntrinsicOpenAdjunction {U Y : Scheme.{u}} (j : U ⟶ Y)
     [IsOpenImmersion j] : sfIntrinsicExtensionByZero j A ⊣ sfIntrinsicPullback A j :=
   ((sfIntrinsicModuleEquivalence U A).symm.toAdjunction.comp
@@ -50,8 +58,7 @@ noncomputable def sfIntrinsicOpenAdjunction {U Y : Scheme.{u}} (j : U ⟶ Y)
       (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) j)).comp
     (sfIntrinsicModuleEquivalence Y A).toAdjunction
 
-/-- Composition of open extensions is the unique comparison respecting composite units.
-Source: Stacks, Tag 03DI. -/
+/-- Composition of open extensions is the unique comparison respecting composite units. -/
 noncomputable def sfIntrinsicOpenComp {V U Y : Scheme.{u}} (i : V ⟶ U) (j : U ⟶ Y)
     [IsOpenImmersion i] [IsOpenImmersion j] :
     sfIntrinsicExtensionByZero (i ≫ j) A ≅
@@ -60,15 +67,13 @@ noncomputable def sfIntrinsicOpenComp {V U Y : Scheme.{u}} (i : V ⟶ U) (j : U 
     (sfIntrinsicPullbackComp A i j).symm).leftAdjointUniq
       (sfIntrinsicOpenAdjunction A (i ≫ j)) |>.symm
 
-/-- Identity open extension, normalized by its adjunction unit.
-Source: Stacks, Tag 03DI. -/
+/-- Identity open extension, normalized by its adjunction unit. -/
 noncomputable def sfIntrinsicOpenId (Y : Scheme.{u}) :
     sfIntrinsicExtensionByZero (𝟙 Y) A ≅ 𝟭 _ :=
   ((sfIntrinsicOpenAdjunction A (𝟙 Y)).ofNatIsoRight
     (sfIntrinsicPullbackId A Y)).leftAdjointUniq Adjunction.id
 
-/-- Commuting pullbacks for a commutative square, with the canonical coefficient action.
-Source: Stacks, Tag 04J0. -/
+/-- Commuting pullbacks for a commutative square, with the canonical coefficient action. -/
 noncomputable def sfIntrinsicSquarePullback {U' U Y' Y : Scheme.{u}}
     (gU : U' ⟶ U) (j' : U' ⟶ Y') (j : U ⟶ Y) (g : Y' ⟶ Y)
     (w : gU ≫ j = j' ≫ g) :
@@ -79,8 +84,7 @@ noncomputable def sfIntrinsicSquarePullback {U' U Y' Y : Scheme.{u}}
 
 /-- The reverse exchange map is the mate of the pullback square. Explicitly it applies
 `j'_!` to `g_U^*` of the open unit, then the pullback-square comparison, and finally the
-open counit. Thus it is a specified map, rather than a freely chosen isomorphism.
-Source: Stacks, Tag 03S6. -/
+open counit. Thus it is a specified map, rather than a freely chosen isomorphism. -/
 noncomputable def sfIntrinsicOpenMate {U' U Y' Y : Scheme.{u}}
     (gU : U' ⟶ U) (j' : U' ⟶ Y') (j : U ⟶ Y) (g : Y' ⟶ Y)
     [IsOpenImmersion j] [IsOpenImmersion j'] (w : gU ≫ j = j' ≫ g) :
@@ -98,8 +102,7 @@ noncomputable abbrev sfIntrinsicDerivedOpen {U Y : Scheme.{u}} (j : U ⟶ Y)
     [IsOpenImmersion j] : proEtaleDerivedCategory U A ⥤ proEtaleDerivedCategory Y A :=
   (sfIntrinsicExtensionByZero j A).mapDerivedCategory
 
-/-- Descend an actual natural transformation of exact intrinsic functors termwise.
-Source: Stacks, Tag 05RU. -/
+/-- Descend an actual natural transformation of exact intrinsic functors termwise. -/
 noncomputable def sfIntrinsicDeriveMap {X Y : Scheme.{u}}
     {F G : proEtaleRingModules X (proEtaleConstantRing X A) ⥤
       proEtaleRingModules Y (proEtaleConstantRing Y A)}
@@ -113,8 +116,7 @@ noncomputable def sfIntrinsicDeriveMap {X Y : Scheme.{u}}
     F.mapDerivedCategory G.mapDerivedCategory
     (whiskerRight (NatTrans.mapHomologicalComplex a (ComplexShape.up ℤ)) DerivedCategory.Q)
 
-/-- The specified derived reverse exchange is the exact termwise descent of the open mate.
-Source: Stacks, Tag 03S6. -/
+/-- The specified derived reverse exchange is the exact termwise descent of the open mate. -/
 noncomputable def sfIntrinsicDerivedOpenMate {U' U Y' Y : Scheme.{u}}
     (gU : U' ⟶ U) (j' : U' ⟶ Y') (j : U ⟶ Y) (g : Y' ⟶ Y)
     [IsOpenImmersion j] [IsOpenImmersion j'] (w : gU ≫ j = j' ≫ g) :
@@ -126,8 +128,7 @@ noncomputable def sfIntrinsicDerivedOpenMate {U' U Y' Y : Scheme.{u}}
   (mapDerivedCategoryCompIso (sfIntrinsicExtensionByZero j A)
     (sfIntrinsicPullback A g)).inv
 
-/-- The derived open unit, with the localization identity and composition comparisons.
-Source: Stacks, Tag 05RU. -/
+/-- The derived open unit, with the localization identity and composition comparisons. -/
 noncomputable def sfIntrinsicDerivedOpenUnit {U Y : Scheme.{u}} (j : U ⟶ Y)
     [IsOpenImmersion j] : 𝟭 (proEtaleDerivedCategory U A) ⟶
       sfIntrinsicDerivedOpen A j ⋙ sfIntrinsicDerivedPullback A j :=
@@ -136,8 +137,7 @@ noncomputable def sfIntrinsicDerivedOpenUnit {U Y : Scheme.{u}} (j : U ⟶ Y)
     (mapDerivedCategoryCompIso (sfIntrinsicExtensionByZero j A)
       (sfIntrinsicPullback A j)).inv
 
-/-- Pullback composition on unbounded derived categories.
-Source: Stacks, Section 0735. -/
+/-- Pullback composition on unbounded derived categories. -/
 noncomputable def sfIntrinsicDerivedPullbackComp {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z) :
     sfIntrinsicDerivedPullback A (f ≫ g) ≅
@@ -153,8 +153,7 @@ noncomputable def sfIntrinsicDerivedOpenComp {V U Y : Scheme.{u}} (i : V ⟶ U) 
     (mapDerivedCategoryCompIso (sfIntrinsicExtensionByZero i A)
       (sfIntrinsicExtensionByZero j A)).symm
 
-/-- Identity pullback on the unbounded derived category.
-Source: Stacks, Section 0735. -/
+/-- Identity pullback on the unbounded derived category. -/
 noncomputable def sfIntrinsicDerivedPullbackId (Y : Scheme.{u}) :
     sfIntrinsicDerivedPullback A (𝟙 Y) ≅ 𝟭 _ :=
   mapDerivedCategoryNatIso (sfIntrinsicPullbackId A Y) ≪≫ mapDerivedCategoryIdIso _
@@ -164,8 +163,7 @@ noncomputable def sfIntrinsicDerivedOpenId (Y : Scheme.{u}) :
     sfIntrinsicDerivedOpen A (𝟙 Y) ≅ 𝟭 _ :=
   mapDerivedCategoryNatIso (sfIntrinsicOpenId A Y) ≪≫ mapDerivedCategoryIdIso _
 
-/-- The derived pullback identification used to restrict the exchange to the open.
-Source: Stacks, Tag 04J0. -/
+/-- The derived pullback identification used to restrict the exchange to the open. -/
 noncomputable def sfIntrinsicDerivedSquarePullback {U' U Y' Y : Scheme.{u}}
     (gU : U' ⟶ U) (j' : U' ⟶ Y') (j : U ⟶ Y) (g : Y' ⟶ Y)
     (w : gU ≫ j = j' ≫ g) :
@@ -178,8 +176,7 @@ noncomputable def sfIntrinsicDerivedSquarePullback {U' U Y' Y : Scheme.{u}}
 /-- A coherent family of the canonical exchange isomorphisms. The `canonical` field fixes
 its inverse to the specified mate, so none of its isomorphisms is arbitrary. The restriction
 field is precisely the identity after the two open units and the pullback identification.
-The last four fields express horizontal/vertical identity and pasting, respectively.
-Source: Stacks, Tags 03S6 and 04J0. -/
+The last four fields express horizontal/vertical identity and pasting, respectively. -/
 structure SfOpenSquareExchangeData where
   exchange : ∀ {U' U Y' Y : Scheme.{u}} (gU : U' ⟶ U) (j' : U' ⟶ Y')
     (j : U ⟶ Y) (g : Y' ⟶ Y) [IsOpenImmersion j] [IsOpenImmersion j']
@@ -1657,8 +1654,7 @@ private noncomputable def sfExchangeData : SfOpenSquareExchangeData A where
       isoWhiskerLeft_inv, isoWhiskerRight_inv, Iso.symm_hom, Iso.symm_inv] using
       sfDerivedMate_vertical A i i' j j' gV gU g sq sq' outer
 
-/-- Canonical open-square exchange with finite coefficient ring `A_{E,n}`.
-Source: Stacks, Tags 03S6 and 04J0. -/
+/-- Canonical open-square exchange with finite coefficient ring `A_{E,n}`. -/
 theorem proEtale_openSquareExchange (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (n : ℕ) (hn : 1 ≤ n) :

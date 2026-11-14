@@ -12,8 +12,12 @@ import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.Bidual
 
 /-! # Evaluation of the internal dual on a finite-free open
 
-Source: the coordinate expansion of determinant inversion in Stacks Project, Tag 0BRT, steps 1 and
 3.
+
+## References
+
+* the coordinate expansion of determinant inversion in Stacks Project, Tag 0BRT, steps 1 and
+* expanding Stacks Project, determinant inversion
 -/
 
 @[expose] public section
@@ -90,8 +94,7 @@ private theorem evaluation_bijective_of_generators (X : Scheme.{u}) (M : X.Modul
       _ = l x := congrArg l hx.symm
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Evaluation identifies the internal dual with the dual of sections on a finite-free open.
-Source: expanding Stacks Project, determinant inversion. -/
+/-- Evaluation identifies the internal dual with the dual of sections on a finite-free open. -/
 theorem dual_local_evaluation_equiv (X : Scheme.{u}) (M : X.Modules)
     (U : X.Opens) (I : Type u) [Finite I]
     (e : M.over U ≅ SheafOfModules.free I) (V : X.Opens) (g : V ⟶ U) :

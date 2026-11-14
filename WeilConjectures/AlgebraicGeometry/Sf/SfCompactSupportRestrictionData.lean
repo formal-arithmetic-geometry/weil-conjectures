@@ -17,12 +17,24 @@ import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RestrictScalars
 /-!
 # Normalized finite coefficient comparison data
 
-Source: Bhatt--Scholze, Sections 6.5 and 6.7; Stacks Tags 03DI, 0D6E and 0D6J.
-
 All comparisons are normalized before choosing them: realization preserves sections,
 extension by zero uses the adjunction unit, and derived direct image uses its
 K-injective comparison. Thus the compactification and coefficient map enter the actual
 functors and maps.
+
+## References
+
+* Bhatt--Scholze, Sections 6.5 and 6.7
+* Stacks Tags 03DI, 0D6E and 0D6J
+* Stacks Tag 03DA
+* Stacks Tags 00YV and 03DA
+* Stacks Tag 00YV
+* Stacks Tag 03DI
+* Stacks Tags 03DI and 00YV
+* Stacks Tags 0D6E and 0D6J
+* Bhatt--Scholze, Lemma 6.7.7
+* Stacks Tags 03DI and 0D6E
+* Stacks Tag 015F
 -/
 
 @[expose] public section
@@ -35,13 +47,13 @@ namespace AlgebraicGeometry.Scheme
 variable {A B C : Type u} [CommRing A] [CommRing B] [CommRing C]
   [Finite A] [Finite B] [Finite C]
 
-/-- Fixed scalar restriction on the pro-etale site. Source: Stacks Tag 03DA. -/
+/-- Fixed scalar restriction on the pro-etale site. -/
 noncomputable abbrev sfFixedRestriction (T : Scheme.{u}) (φ : A →+* B) :=
   sheafCompose (ProEt.topology T) (ModuleCat.restrictScalars.{u + 1} φ.ulift)
 
 /-- Realization commutes with restriction of scalars, for a general pair of locally bijective
 constant-scalar maps `α`, `α'` and ring-sheaf map `δ` compatible with `φ`: there is a unique
-natural isomorphism which is the identity on sections. Source: Stacks Tags 00YV and 03DA. -/
+natural isomorphism which is the identity on sections. -/
 private theorem realization_restrict_existsUnique {C : Type (u + 1)} [Category.{u} C]
     (J : GrothendieckTopology C) {Λ Λ' : Type (u + 1)} [Ring Λ] [Ring Λ']
     (R R' : Sheaf J RingCat.{u + 1})
@@ -122,7 +134,7 @@ private theorem realization_restrict_existsUnique {C : Type (u + 1)} [Category.{
 
 
 /-- Realization commutes with scalar restriction by the identity on the sheafified
-underlying abelian presheaf. Source: Stacks Tags 00YV and 03DA. -/
+underlying abelian presheaf. -/
 theorem sfRealizationRestriction_existsUnique (T : Scheme.{u}) (φ : A →+* B) :
     ∃! e : (sfIntrinsicModuleEquivalence T B).functor ⋙
         proEtaleCoefficientRestrictScalars T φ ≅
@@ -144,12 +156,12 @@ theorem sfRealizationRestriction_existsUnique (T : Scheme.{u}) (φ : A →+* B) 
       (toSheafify_naturality (ProEt.topology T)
         ((Functor.const T.ProEtᵒᵖ).map (CommRingCat.ofHom φ')))).symm
 
-/-- The sectionwise normalized realization comparison. Source: Stacks Tag 00YV. -/
+/-- The sectionwise normalized realization comparison. -/
 noncomputable def sfRealizationRestriction (T : Scheme.{u}) (φ : A →+* B) :=
   (sfRealizationRestriction_existsUnique T φ).exists.choose
 
 /-- The inverse-equivalence coefficient square, obtained by unit and counit from the
-normalized realization square. Source: Stacks Tag 00YV. -/
+normalized realization square. -/
 noncomputable def sfInverseRealizationRestriction (T : Scheme.{u}) (φ : A →+* B) :
     proEtaleCoefficientRestrictScalars T φ ⋙ (sfIntrinsicModuleEquivalence T A).inverse ≅
       (sfIntrinsicModuleEquivalence T B).inverse ⋙ sfFixedRestriction T φ :=
@@ -164,8 +176,7 @@ noncomputable def sfInverseRealizationRestriction (T : Scheme.{u}) (φ : A →+*
 
 /-- Fixed-scalar extension by zero commutes with restriction: both sides are left
 adjoint to the same objectwise composite of open restriction and coextension.
-The left-adjoint uniqueness map is normalized by the adjunction units.
-Source: Stacks Tag 03DI. -/
+The left-adjoint uniqueness map is normalized by the adjunction units. -/
 noncomputable def sfFixedOpenRestriction {X Z : Scheme.{u}} (j : X ⟶ Z)
     [IsOpenImmersion j] (φ : A →+* B) :
     sfFixedRestriction X φ ⋙
@@ -180,7 +191,7 @@ noncomputable def sfFixedOpenRestriction {X Z : Scheme.{u}} (j : X ⟶ Z)
       (Sheaf.restrictCoextendScalarsAdj (ProEt.topology Z) φ.ulift))
 
 /-- The intrinsic extension-by-zero coefficient square, transported by the canonical
-realization equivalences. Source: Stacks Tags 03DI and 00YV. -/
+realization equivalences. -/
 noncomputable def sfOpenRestriction {X Z : Scheme.{u}} (j : X ⟶ Z)
     [IsOpenImmersion j] (φ : A →+* B) :
     proEtaleCoefficientRestrictScalars X φ ⋙ sfIntrinsicExtensionByZero j A ≅
@@ -198,8 +209,7 @@ noncomputable def sfOpenRestriction {X Z : Scheme.{u}} (j : X ⟶ Z)
 
 /-- Derived direct-image coefficient comparison selected with the full K-injective
 normalization of the recorded direct-image theorem. That normalization determines the
-natural isomorphism on every K-injective representative and hence after localization.
-Source: Stacks Tags 0D6E and 0D6J. -/
+natural isomorphism on every K-injective representative and hence after localization. -/
 noncomputable def sfDerivedImageRestriction {Z Y : Scheme.{u}} (g : Z ⟶ Y)
     (φ : A →+* B) :
     (proEtaleCoefficientRestrictScalars Z φ).mapDerivedCategory ⋙
@@ -209,8 +219,7 @@ noncomputable def sfDerivedImageRestriction {Z Y : Scheme.{u}} (g : Z ⟶ Y)
   (proEtaleDerivedDirectImage_restrictScalars g φ).choose
 
 /-- The specified compact-support comparison is the extension-by-zero square followed
-by the direct-image square, with no change of compactification. Source: Bhatt--Scholze, Lemma 6.7.7;
-Stacks Tags 03DI and 0D6E. -/
+by the direct-image square, with no change of compactification. -/
 noncomputable def sfCompactSupportRestriction {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f) (φ : A →+* B) :
     (proEtaleCoefficientRestrictScalars X φ).mapDerivedCategory ⋙
@@ -223,7 +232,7 @@ noncomputable def sfCompactSupportRestriction {X Y : Scheme.{u}} {f : X ⟶ Y}
       (sfDerivedImageRestriction c.g φ)
 
 /-- The normalized scalar-restriction composition map, using the shared sectionwise
-identity comparison for commutative ring sheaves. Source: Stacks Tag 03DA. -/
+identity comparison for commutative ring sheaves. -/
 noncomputable def sfCoefficientRestrictionComp (T : Scheme.{u})
     (φ : A →+* B) (ψ : B →+* C) :
     proEtaleCoefficientRestrictScalars T ψ ⋙ proEtaleCoefficientRestrictScalars T φ ≅
@@ -237,7 +246,7 @@ noncomputable def sfCoefficientRestrictionComp (T : Scheme.{u})
       (CommRingCat.ofHom (ψ.comp φ).ulift))
     ((constantSheaf (ProEt.topology T) CommRingCat.{u + 1}).map_comp _ _).symm
 
-/-- The termwise derived scalar composition map. Source: Stacks Tag 015F. -/
+/-- The termwise derived scalar composition map. -/
 noncomputable def sfDerivedCoefficientRestrictionComp (T : Scheme.{u})
     (φ : A →+* B) (ψ : B →+* C) :=
   Functor.mapDerivedCategoryCompIso _ _ ≪≫

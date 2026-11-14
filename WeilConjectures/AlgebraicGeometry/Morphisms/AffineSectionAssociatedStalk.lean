@@ -17,7 +17,10 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.AffineModuleGermLocalization
 
 /-! # Detecting an affine section at an associated stalk
 
-Source: Stacks Project, Tags 0B3M and 05AR.
+## References
+
+* Stacks Project, Tags 0B3M and 05AR
+* Stacks Project, Tag 0B3M, the cyclic image argument, and Tag 05AR
 -/
 
 @[expose] public section
@@ -26,9 +29,7 @@ universe u
 open CategoryTheory Opposite TopCat.Presheaf
 namespace AlgebraicGeometry.Scheme
 
-/-- Unequal sections on an affine open differ at an associated stalk.
-
-Source: Stacks Project, Tag 0B3M, the cyclic image argument, and Tag 05AR. -/
+/-- Unequal sections on an affine open differ at an associated stalk. -/
 theorem exists_associated_stalk_germ_ne_of_isAffineOpen
     {L : Scheme.{u}} [IsLocallyNoetherian L] (N : L.Modules)
     (hqc : N.IsQuasicoherent) (V : L.Opens) (hV : IsAffineOpen V)

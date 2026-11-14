@@ -19,9 +19,15 @@ import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # Canonical geometric pullback comparison under etale localization
 
-Source: Stacks Project, Tags 03CE, 03CF and 04J0; the normalized geometric comparison in
-SupportComparisonPullbackCoherence and the finite constant-coefficient transport in
-FiniteConstantCoefficientTransport.
+## References
+
+* Stacks Project, Tags 03CE, 03CF and 04J0
+* Stacks, Tag 04J0, localized inverse-image square
+* Stacks, Tags 03CF and 04J0
+* Stacks, Tag 03CE, explicit localization adjunction
+* Stacks, Tags 03CE and 04J0
+* Stacks, Tags 03CE, 03CF and 04J0
+* Stacks, Tags 03CE, 03CF
 -/
 
 @[expose] public noncomputable section
@@ -41,8 +47,7 @@ variable (A : Type (u + 1)) [CommRing A] [Finite A]
 variable {U T : Scheme.{u}} (e : U ⟶ T) [Etale e]
 
 /-- The specified chi: first undo etale restriction, then use the geometric comparison,
-then pass to pro-etale restriction. No comparison is chosen arbitrarily.
-Source: Stacks, Tag 04J0, localized inverse-image square. -/
+then pass to pro-etale restriction. No comparison is chosen arbitrarily. -/
 def chi :
     Etale.localizationRestriction (ModuleCat.{u + 1} A) e inferInstance ⋙
         comparisonUpperStar (ModuleCat.{u + 1} A) U ≅
@@ -56,8 +61,7 @@ def chi :
         (upperStarIsoLocalizationRestriction (ModuleCat.{u + 1} A) e inferInstance)
 
 /-- The sectionwise identity beta: both restrictions evaluate at the same composite
-object W over T, with identical scalar actions and restriction maps.
-Source: Stacks, Tags 03CF and 04J0. -/
+object W over T, with identical scalar actions and restriction maps. -/
 def beta :
     comparisonLowerStar (ModuleCat.{u + 1} A) T ⋙
         Etale.localizationRestriction (ModuleCat.{u + 1} A) e inferInstance ≅
@@ -66,8 +70,7 @@ def beta :
   Iso.refl _
 
 /-- Projection/graph normalization and uniqueness for the etale comparison.
-The counit of the site adjunction is the first projection, and its unit is the graph.
-Source: Stacks, Tag 03CE, explicit localization adjunction. -/
+The counit of the site adjunction is the first projection, and its unit is the graph. -/
 def EtaleNormalized
     (ρ : Etale.upperStar (ModuleCat.{u + 1} A) e ≅
       Etale.localizationRestriction (ModuleCat.{u + 1} A) e inferInstance) : Prop :=
@@ -90,8 +93,7 @@ def EtaleNormalized
             (ModuleCat.{u + 1} A) e inferInstance).unit.app F) → ρ' = ρ)
 
 /-- Projection/graph normalization and uniqueness for the pro-etale comparison.
-This uses weak etaleness of e and does not require e to be a monomorphism.
-Source: Stacks, Tags 03CE and 04J0. -/
+This uses weak etaleness of e and does not require e to be a monomorphism. -/
 def ProEtaleNormalized
     (ρ : upperStar (ModuleCat.{u + 1} A) e ≅
       localizationRestriction (ModuleCat.{u + 1} A) e inferInstance) : Prop :=
@@ -116,7 +118,7 @@ def ProEtaleNormalized
 local notation "D" => ModuleCat A
 
 omit [Finite A] in
-/-- The unit-normalized etale restriction comparison. Source: Stacks, Tags 03CE, 03CF and 04J0. -/
+/-- The unit-normalized etale restriction comparison. -/
 private theorem normalized_etale :
     EtaleNormalized A e (Etale.upperStarIsoLocalizationRestriction D e inferInstance) := by
   let a := Etale.upperStarLowerStarAdjunction D e
@@ -137,8 +139,7 @@ private theorem normalized_etale :
     exact (h F).trans (a.homEquiv_leftAdjointUniq_hom_app r F).symm
 
 omit [Finite A] in
-/-- The unit-normalized pro-etale restriction comparison. Source: Stacks, Tags 03CE, 03CF and 04J0.
--/
+/-- The unit-normalized pro-etale restriction comparison. -/
 private theorem normalized_proEtale :
     ProEtaleNormalized A e (upperStarIsoLocalizationRestriction D e inferInstance) := by
   let b := upperStarLowerStarAdjunction D e
@@ -158,8 +159,7 @@ private theorem normalized_proEtale :
     apply (b.homEquiv _ _).injective
     exact (h F).trans (b.homEquiv_leftAdjointUniq_hom_app s F).symm
 
-/-- Conjugating the specified chi gives the sectionwise direct-image comparison. Source: Stacks,
-Tags 03CE, 03CF and 04J0. -/
+/-- Conjugating the specified chi gives the sectionwise direct-image comparison. -/
 private theorem chi_conjugate :
     conjugateEquiv
       ((Scheme.proEtaleSiteComparisonModules T A).comp
@@ -191,8 +191,7 @@ private theorem chi_conjugate :
   exact hc
 
 omit [Finite A] in
-/-- The second mate of beta is the direct-image identity, by the site right triangle. Source:
-Stacks, Tags 03CE, 03CF and 04J0. -/
+/-- The second mate of beta is the direct-image identity, by the site right triangle. -/
 private theorem beta_mate :
     (mateEquiv (localizationRestrictionLowerStarAdjunction D e inferInstance)
       (Etale.localizationRestrictionLowerStarAdjunction D e inferInstance)
@@ -222,8 +221,7 @@ private theorem beta_mate :
   rw [t.right_triangle_components]
   rfl
 
-/-- Injectivity of the second mate identifies the first mate of chi. Source: Stacks, Tags 03CE, 03CF
-and 04J0. -/
+/-- Injectivity of the second mate identifies the first mate of chi. -/
 private theorem chi_mate :
     (mateEquiv (Scheme.proEtaleSiteComparisonModules T A)
       (Scheme.proEtaleSiteComparisonModules U A)
@@ -238,8 +236,7 @@ private theorem chi_mate :
       ((chi_conjugate A e).trans (beta_mate A e).symm)
 
 /-- Cancellation for an invertible horizontal paste. The calculation takes place in arbitrary
-functor categories, so no geometric functor is unfolded.
-Source: horizontal composition of natural transformations. -/
+functor categories, so no geometric functor is unfolded. -/
 private theorem inverse_horizontal_paste
     {C₁ C₂ C₃ C₄ C₅ C₆ : Type*}
     [Category C₁] [Category C₂] [Category C₃] [Category C₄] [Category C₅] [Category C₆]
@@ -256,8 +253,7 @@ private theorem inverse_horizontal_paste
   simp [TwoSquare.hComp, Category.assoc, ← Functor.map_comp]
 
 omit [Etale e] in
-/-- Horizontal mate pasting identifies the specified coefficient inverse comparison. Source: Stacks,
-Tags 03CE, 03CF and 04J0. -/
+/-- Horizontal mate pasting identifies the specified coefficient inverse comparison. -/
 private theorem coefficient_comparison [TopologicalSpace A] [DiscreteTopology A] :
     ∃ j : StrictTower.C A T A (RingHom.id A) ⋙ StrictTower.modulePullback A e ≅
         upperStar (ModuleCat.{u + 1} A) e ⋙ StrictTower.C A U A (RingHom.id A),
@@ -314,10 +310,7 @@ constant-section-preserving coefficient transport, including phi = id.
 The last existential supplies the canonical scalar pullback comparison j as the
 inverse mate of cDirect. The equality with inv(hPullbackInv) is the transport-back
 identity: composing that inverse with j gives c, and conjugating by the two rhos
-therefore gives precisely chi, as the final equality records.
-
-Source: Stacks, Tags 03CE, 03CF; normalized comparisons in SupportComparisonPullbackCoherence and
-FiniteConstantCoefficientTransport. -/
+therefore gives precisely chi, as the final equality records. -/
 theorem normalization [TopologicalSpace A] [DiscreteTopology A] :
     EtaleNormalized A e
       (Etale.upperStarIsoLocalizationRestriction (ModuleCat.{u + 1} A) e inferInstance) ∧

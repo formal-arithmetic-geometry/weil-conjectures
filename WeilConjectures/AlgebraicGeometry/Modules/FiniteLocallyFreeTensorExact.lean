@@ -15,7 +15,10 @@ import WeilConjectures.AlgebraicGeometry.Modules.HomTensor.LocallyFree
 /-!
 # Exactness of tensoring by a finite locally free module
 
-Source: Stacks Project, Tags 01C6 and 05NE.
+## References
+
+* Stacks Project, Tags 01C6 and 05NE
+* Stacks Project, Tags 01C6, 01CB, 01AG and 05NE
 -/
 
 @[expose] public section
@@ -28,9 +31,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Tensoring on the left by a finite locally free module is exact: it preserves finite
 limits and finite colimits, equivalently short exact sequences in the abelian module category.
-The local finite ranks may vary across the scheme.
-
-Source: Stacks Project, Tags 01C6, 01CB, 01AG and 05NE. -/
+The local finite ranks may vary across the scheme. -/
 theorem finiteLocallyFree_tensorLeft_exact {X : Scheme.{u}} (P : X.Modules)
     [P.IsFiniteLocallyFree] :
     PreservesFiniteLimits (tensorLeft P) ∧ PreservesFiniteColimits (tensorLeft P) := by

@@ -10,7 +10,10 @@ import WeilConjectures.AlgebraicGeometry.Strict.StrictBaseClosedPointLocalizatio
 
 /-! # Comparing the strict-local fibre above a closed geometric point
 
-Source: Stacks Project, Tag 0GJU.
+## References
+
+* Stacks Project, Tag 0GJU
+* Stacks Project, Tag 0GJU, first two paragraphs of the proof
 -/
 
 @[expose] public section
@@ -57,8 +60,7 @@ private theorem strict_congr_point
 /-- The strict-local fibre over a closed point of the strict-base change is a variety
 of vanishing cycles for the original morphism, compatibly with its map to the original
 scheme. The canonical map on the strict localization of the source is invertible.
-The fibre comparison commutes with its first projection.
-Source: Stacks Project, Tag 0GJU, first two paragraphs of the proof. -/
+The fibre comparison commutes with its first projection. -/
 theorem localAcyclicity_strict_fibre_comparison
     {X S X' : Scheme.{u}} (f : X ⟶ S)
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)

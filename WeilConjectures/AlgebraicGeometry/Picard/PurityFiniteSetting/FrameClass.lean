@@ -28,8 +28,7 @@ open scoped CategoryTheory.Functor
 namespace WeilConjectures.PurityFiniteSetting
 
 /-- Direct image along an isomorphism of schemes is an equivalence, with inverse the direct
-image along the inverse isomorphism.
-Source: functoriality of direct image. -/
+image along the inverse isomorphism. -/
 def frameLowerStarEquivalence (A : Type*) [Category.{u + 1} A] {D D' : Scheme.{u}}
     (e : D ≅ D') : Sheaf (Scheme.ProEt.topology D) A ≌ Sheaf (Scheme.ProEt.topology D') A :=
   CategoryTheory.Equivalence.mk (lowerStar A e.hom) (lowerStar A e.inv)
@@ -54,8 +53,7 @@ def finiteFrameClosedCoefficientIso (P : PurityFiniteSetting.{u}) {D D' X : Sche
 /-- The supported unit for the zero ideal. Its closed immersion is an isomorphism:
 the inverse is the universal lift of the identity through the empty zero locus.
 Pushforward composition, the identity comparison, and the constant-unit comparison
-then give precisely 1 in H^0(X,A_X), including for an empty scheme.
-Source: c=0, empty supported product. -/
+then give precisely 1 in H^0(X,A_X), including for an empty scheme. -/
 def finiteFrameEmptyClass (P : PurityFiniteSetting.{u})
     (h : P.ramificationIndex ∣ P.level) (X : Scheme.{u})
     (f : Fin 0 → Γ(X, ⊤)) :

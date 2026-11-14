@@ -15,9 +15,16 @@ import WeilConjectures.AlgebraicGeometry.Pbc.PbcUniformReductionCriterion
 
 /-! # Completed pullback on the actual common-stage Qbar category
 
-Source: Stacks Tag 099N (2), (5); Bhatt--Scholze, Section 6.8, Remark 6.8.15.
 The published strict-tower pullback is retained. Its integral restriction and the
 normalized completed scalar comparisons descend it to the existing pair category.
+
+## References
+
+* Stacks Tag 099N (2), (5)
+* Bhatt--Scholze, Section 6.8, Remark 6.8.15
+* BS 6.8.2 and Remark 6.8.15
+* Stacks 099N
+* BS Remark 6.8.15
 -/
 
 @[expose] public noncomputable section
@@ -37,8 +44,7 @@ variable (l : ℕ) [Fact l.Prime] (Ω : Type w) [Field Ω]
   (f : X ⟶ Y)
 
 set_option linter.unusedSectionVars false in
-/-- Restriction of the actual completed pullback to the integral constructible objects.
-Source: BS 6.8.2 and Remark 6.8.15; Stacks 099N. -/
+/-- Restriction of the actual completed pullback to the integral constructible objects. -/
 theorem pbcQbarIntegralPull_mem (E : Padic.FiniteCoefficientFields l Ω)
     (K : pbcIntegralStage l Ω Y E) :
     PbcIsBoundedConstructibleComplete X (pbcStageDatum.{u} l Ω E)
@@ -80,8 +86,7 @@ theorem pbcQbarIntegralPull_mem (E : Padic.FiniteCoefficientFields l Ω)
   exact ObjectProperty.prop_of_iso _ e hstrict
 
 /-- The coherent pullback family is fixed by the actual integral pullback and the
-normalized scalar comparison; in particular no arbitrary natural isomorphism is chosen.
-Source: BS Remark 6.8.15; Stacks 099N. -/
+normalized scalar comparison; in particular no arbitrary natural isomorphism is chosen. -/
 theorem pbcQbarPullFamily_existsUnique :
     ∃! F : StageSystem.Morphism
         (pbcScalarSystem l Ω Y dY.out iY.out) (pbcScalarSystem l Ω X dX.out iX.out),
@@ -146,15 +151,13 @@ theorem pbcQbarPullFamily_existsUnique :
   intro G hG
   exact hunique h hG ⟨hLg, hβLg⟩
 
-/-- The unique normalized common-stage family of actual completed pullbacks.
-Source: BS Remark 6.8.15. -/
+/-- The unique normalized common-stage family of actual completed pullbacks. -/
 def pbcQbarPullFamily : StageSystem.Morphism
     (pbcScalarSystem l Ω Y dY.out iY.out) (pbcScalarSystem l Ω X dX.out iX.out) :=
   (pbcQbarPullFamily_existsUnique l Ω f).exists.choose
 
 /-- The pair-category pullback: (E,K) goes to (E,Lf*K), and a common-stage arrow
-is mapped by the normalized beta, actual pullback, inverse beta formula.
-Source: BS Remark 6.8.15. -/
+is mapped by the normalized beta, actual pullback, inverse beta formula. -/
 def pbcQbarCompletedPull : pbcQbarCategory l Ω Y ⥤ pbcQbarCategory l Ω X :=
   (pbcQbarPullFamily l Ω f).functor
 

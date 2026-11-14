@@ -13,7 +13,13 @@ import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.ProEtaleSheafificatio
 import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Coinduce
 
-/-! # Total tensor and intrinsic coefficient realization -/
+/-! # Total tensor and intrinsic coefficient realization
+
+## References
+
+* Stacks Project, Modules on Sites, Tag 0GMW
+* Cohomology on Sites, Tag 06YN
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -109,9 +115,7 @@ private theorem tensorComplexTransportAux
   have (X Y : C) : IsIso ((τ.app X).app Y) := (e.app (X, Y)).isIso_hom
   exact ⟨asIso (HomologicalComplex.mapBifunctorComparison τ (.up ℤ) V W)⟩
 
-/-- Canonical coefficient realization commutes with ordinary total tensor complexes.
-Source: Stacks Project, Modules on Sites, Tag 0GMW; Cohomology on Sites, Tag 06YN.
--/
+/-- Canonical coefficient realization commutes with ordinary total tensor complexes. -/
 theorem intrinsic_realization_tensor_complex_iso
     (A : Type u) [CommRing A] [Finite A] (T : Scheme.{u})
     (V W : CochainComplex

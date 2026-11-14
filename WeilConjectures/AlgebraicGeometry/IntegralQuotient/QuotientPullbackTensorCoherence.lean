@@ -12,11 +12,15 @@ import WeilConjectures.AlgebraicGeometry.IntegralQuotient.QuotientPullbackTensor
 
 /-! # Tensor coherence of the normalized quotient pullback comparison
 
-Source: Stacks Project, Tags 0D6D and 07A4.
-
 The positive exponent is n + 1, including the residue-field quotient at n = 0.
 The section comparison is specified by its ordinary ringed-square balancing map
 and localization counits, rather than by an arbitrary isomorphism of functors.
+
+## References
+
+* Stacks Project, Tags 0D6D and 07A4
+* Stacks 07A4
+* Tags 0D6D and 07A4
 -/
 
 @[expose] public noncomputable section
@@ -84,8 +88,7 @@ namespace AlgebraicGeometry.ProEtale.IntegralQuotient
 open QuotientChange QuotientSectionTensor
 
 /-- The existing tensor comparison with the recorded pullback functor type exposed.
-This only shares the structural arguments of leftDerivedUpperStarTensor.
-Source: Stacks 07A4. -/
+This only shares the structural arguments of leftDerivedUpperStarTensor. -/
 @[irreducible] def quotientTensorPull
     (B : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj B] [IsCommMonObj B] {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -103,9 +106,7 @@ The section composition comparison is characterized by SectionPullNormalized:
 its ordinary map is the conjugate of the actual pullIso, and its derived map is
 fixed by the two composite localization counits on every flat-term K-flat model.
 Thus the comparison in the first conclusion and the tensor equation is the given
-lam, with the normalization used in integral_quotient_direct_image_comparison.
-
-Source: Tags 0D6D and 07A4. -/
+lam, with the normalization used in integral_quotient_direct_image_comparison. -/
 theorem quotient_pullback_tensor_coherence
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ)

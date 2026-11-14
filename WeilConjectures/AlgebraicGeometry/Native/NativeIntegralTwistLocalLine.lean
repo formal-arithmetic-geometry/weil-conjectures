@@ -11,9 +11,7 @@ import WeilConjectures.CategoryTheory.Monoidal.Mod.Tensor
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.MonoidalModule
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.InternalHom
 
-/-! # Compatible local bases of the native integral root tower
-Source: coefficient twists, integral limit.
--/
+/-! # Compatible local bases of the native integral root tower -/
 
 -- After pruning, this module only keeps private declarations.
 set_option linter.privateModule false

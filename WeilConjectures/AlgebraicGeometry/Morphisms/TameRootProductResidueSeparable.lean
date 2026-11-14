@@ -14,7 +14,9 @@ import Mathlib.FieldTheory.SeparableClosure
 /-!
 # Separable residue extensions of standard tame root charts
 
-Source: Stacks Project, Tag 0EYH, displayed local normal form.
+## References
+
+* Stacks Project, Tag 0EYH, displayed local normal form
 -/
 
 @[expose] public section
@@ -80,9 +82,7 @@ private theorem residue_mem_of_coefficients_mem (R : CommRingCat.{u}) (x : Spec 
   rw [(eq_div_iff hb).mpr heq]
   exact S.div_mem (hquot a) (hquot b)
 
-/-- Finite products of standard root charts have separable residue extensions.
-
-Source: Stacks Project, Tag 0EYH, displayed local normal form. -/
+/-- Finite products of standard root charts have separable residue extensions. -/
 theorem tameRootProduct_residue_separable (R : CommRingCat.{u})
     (m : ℕ) (f : R) (e : Fin m → ℕ)
     (he : ∀ k, 0 < e k ∧ IsUnit (e k : R)) :

@@ -18,6 +18,10 @@ import Mathlib.RingTheory.Ideal.Quotient.Operations
 /-! # Propagation of lissity along a normalized adic tower
 
 This is the nilpotent propagation step used by the common-strata theorem.
+
+## References
+
+* Stacks Project, Tag 094I
 -/
 
 @[expose] public noncomputable section
@@ -31,8 +35,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 /-- A finite native constant model on a covering sieve.
-
-Source: Stacks Project, Tag 094I
 
 The predicate records the local finite constant models after transporting to the
 native coefficient ring. It is the fixed-level input for nilpotent propagation.
@@ -133,10 +135,7 @@ private noncomputable def pulledCoefficientHomologyIso {X Y : Scheme.{u}} (g : Y
 
 end LissePropagationProof
 
-/-- Level-zero native finite models propagate through every normalized quotient.
-
-Source: Stacks Project, Tag 094I
--/
+/-- Level-zero native finite models propagate through every normalized quotient. -/
 theorem normalizedTower_lisse_of_native_strata
     (X : Scheme.{u}) [IsNoetherian X] {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (M : AdicTower X d)

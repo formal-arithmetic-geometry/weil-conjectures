@@ -108,8 +108,11 @@ import all WeilConjectures.SmoothPurity.Derived.DerivedScalarExtensionRestrictio
 
 /-! # Tensor comparison for evaluated scalar extension
 
-Source: Stacks Project, Modules on Sites, Section 03EK and Tag 03CY,
-applied to the vertical sequence topology.
+## References
+
+* Stacks Project, Modules on Sites, Section 03EK and Tag 03CY, applied to the vertical sequence
+  topology
+* Stacks Project, Section 03EK, restriction of pure tensors
 -/
 
 @[expose] public noncomputable section
@@ -171,8 +174,7 @@ private theorem evaluatedTensorRestriction_left
           ⊗ₜ[(systemRing.{c, v, max c v r} J B τ).obj.obj (op (n, V.unop)),
             (φ.hom.app (op (n, V.unop))).hom] y) hm)
 
-/-- The left composite in tensor evaluation naturality has its generator value.
-Source: Stacks Project, Section 03EK, restriction of pure tensors. -/
+/-- The left composite in tensor evaluation naturality has its generator value. -/
 theorem scalarExtension_evaluation_restriction_left
     {U V : Cᵒᵖ} (f : U ⟶ V)
     (x : ((evaluation.{c, v, max c v r} J B τ n).obj M).val.obj U) :

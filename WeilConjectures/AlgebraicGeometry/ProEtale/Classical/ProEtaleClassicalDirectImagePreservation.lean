@@ -23,7 +23,9 @@ public import Mathlib.CategoryTheory.Functor.ReflectsIso.Balanced
 /-!
 # Classicality of bounded-below direct images
 
-Source: Stacks Tag 09A6.
+## References
+
+* Stacks Tag 09A6
 -/
 
 -- After pruning, this module only keeps private declarations.

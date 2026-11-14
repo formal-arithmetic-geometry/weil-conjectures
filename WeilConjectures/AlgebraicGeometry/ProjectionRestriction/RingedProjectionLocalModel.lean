@@ -11,7 +11,11 @@ import WeilConjectures.AlgebraicGeometry.ProjectionRestriction.RingedProjectionL
 
 /-! # Canonical projection-formula models
 
-Source: Stacks Project, Cohomology on Sites, Tags 07A4 and 07A6.
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 07A4 and 07A6
+* Stacks 0B56
+* Stacks Project, Tags 04J0, 08FI, 0FN5, 07A4 and 0B56
 -/
 
 @[expose] public noncomputable section
@@ -22,8 +26,7 @@ open CategoryTheory AlgebraicGeometry
 
 namespace AlgebraicGeometry.Scheme.ProjectionRestriction
 
-/-- The uncurried projection map is the adjunct of tensor comparison and counit.
-Source: Stacks 0B56. -/
+/-- The uncurried projection map is the adjunct of tensor comparison and counit. -/
 private theorem projection_eq
     {A B : Type*} [Category A] [Category B]
     (L : A ⥤ B) (R : B ⥤ A) (adj : L ⊣ R)
@@ -34,8 +37,7 @@ private theorem projection_eq
         U.map (CategoryTheory.Prod.mkHom (adj.counit.app E) (𝟙 (L.obj P)))) := by
   simp [derivedProjectionFormulaMate, Adjunction.rightAdjointProjectionMap_app_app]
 
-/-- The counit mate equation and a tensor square imply projection compatibility.
-Source: Stacks 0B56. -/
+/-- The counit mate equation and a tensor square imply projection compatibility. -/
 private theorem projection_square
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
     {F : A ⥤ B} {R : B ⥤ A} {G : A ⥤ C} {H : B ⥤ D} {K : C ⥤ D} {S : D ⥤ C}
@@ -95,8 +97,7 @@ private theorem projection_square
   · simpa using (hb E).symm
   · simp
 
-/-- A normalized global projection package admits compatible localization at any object.
-Source: Stacks Project, Tags 04J0, 08FI, 0FN5, 07A4 and 0B56. -/
+/-- A normalized global projection package admits compatible localization at any object. -/
 theorem localModel_exists {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R_Y : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
     (R_X : Sheaf (ProEt.topology X) CommRingCat.{u + 1})

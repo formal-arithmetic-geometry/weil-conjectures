@@ -10,7 +10,12 @@ public import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # A component of extension by zero for modules
-Source: Stacks Project, Sheaves, Lemma 00A7. -/
+
+## References
+
+* Stacks Project, Sheaves, Lemma 00A7
+* Stacks Project, Sheaves, Definition 00A4 and Lemma 00A7 (2)
+-/
 
 @[expose] public section
 
@@ -209,8 +214,7 @@ private noncomputable def extensionSheafAdjunction
     ext X x
     rfl
 
-/-- The canonical adjunction has the stated formula on each direct-sum injection.
-Source: Stacks Project, Sheaves, Definition 00A4 and Lemma 00A7 (2). -/
+/-- The canonical adjunction has the stated formula on each direct-sum injection. -/
 theorem module_extensionByZero_hom_formula (X : Scheme.{u}) (U : X.Opens) :
     let R := X.ringCatSheaf
     let P := SheafOfModules.extensionByZeroPresheaf.{u} R U

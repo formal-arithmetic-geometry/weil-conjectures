@@ -85,7 +85,10 @@ import Mathlib.CategoryTheory.Shift.Adjunction
 
 /-! # Canonical projection-formula models
 
-Source: Stacks Project, Cohomology on Sites, Tags 07A4 and 07A6.
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 07A4 and 07A6
+* Stacks Project, Tags 03D7, 06YS, 06YU, 07A4 and 07A6
 -/
 
 @[expose] public noncomputable section
@@ -398,8 +401,7 @@ private def globalOrdinaryTensor {X Y : Scheme.{u}} (f : X ⟶ Y)
   rw [hinv, hinv] at ht
   exact ht
 
-/-- The canonically normalized global operations, tensor models and their shifts exist.
-Source: Stacks Project, Tags 03D7, 06YS, 06YU, 07A4 and 07A6. -/
+/-- The canonically normalized global operations, tensor models and their shifts exist. -/
 theorem globalModel_exists {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R_Y : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
     (R_X : Sheaf (ProEt.topology X) CommRingCat.{u + 1})

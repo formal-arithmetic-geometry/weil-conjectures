@@ -17,7 +17,10 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 /-!
 # The local ramification criterion for a finite flat morphism
 
-Source: Stacks Project, Tag 0BJH.
+## References
+
+* Stacks Project, Tag 0BJH
+* Stacks Project
 -/
 
 @[expose] public section
@@ -27,9 +30,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- A finite flat morphism is etale near a nongeneric point if it is unramified
-at all dimension-one generalizations of that point.
-
-Source: Stacks Project. -/
+at all dimension-one generalizations of that point. -/
 theorem exists_etale_neighbourhood_of_finite_flat_of_codimension_one
     {X Y : Scheme.{u}} [IsLocallyNoetherian X] [IsLocallyNoetherian Y]
     (f : X ⟶ Y) [IsFinite f] [Flat f] (x : X)

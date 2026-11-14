@@ -22,7 +22,10 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 /-!
 # Exact evaluation at weakly contractible objects
 
-Source: Stacks Project, Tags 0946, 03DA, 03CN and 00WN.
+## References
+
+* Stacks Project, Tags 0946, 03DA, 03CN and 00WN
+* Stacks Project, Tag 0946 (1), with the module sheaf epimorphism criterion 03DA
 -/
 
 @[expose] public section
@@ -39,8 +42,7 @@ local instance (X : Scheme.{u}) (R : Sheaf (topology X) RingCat.{u + 1}) (W : X.
   inferInstanceAs ((SheafOfModules.forget R ⋙
     PresheafOfModules.evaluation R.obj (op W)).Additive)
 
-/-- Evaluation at a weakly contractible object preserves homology of module complexes.
-Source: Stacks Project, Tag 0946 (1), with the module sheaf epimorphism criterion 03DA. -/
+/-- Evaluation at a weakly contractible object preserves homology of module complexes. -/
 theorem weaklyContractible_evaluation_preservesHomology
     (X : Scheme.{u}) (R : Sheaf (topology X) CommRingCat.{u + 1}) (W : X.ProEt)
     (hW : ∀ (F G : Sheaf (topology X) (Type (u + 1))) (f : F ⟶ G),

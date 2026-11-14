@@ -10,7 +10,11 @@ public import Mathlib.AlgebraicGeometry.Limits
 
 /-! # FiniteAffineTensorBaseChange
 
-Source: Stacks Project and Mathlib. -/
+## References
+
+* Stacks Project and Mathlib
+* Stacks Project, Tag 01JO
+-/
 
 @[expose] public section
 
@@ -20,9 +24,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Finite affine coproducts commute with tensor base change.
-
-Source: Stacks Project, Tag 01JO. -/
+/-- Finite affine coproducts commute with tensor base change. -/
 theorem finite_affine_tensor_base_change
     (B A : CommRingCat.{u}) [Algebra B A]
     (r : ℕ) (E : Fin r → Type u) [∀ i, CommRing (E i)] [∀ i, Algebra B (E i)]

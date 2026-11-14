@@ -9,7 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.RelativeProj.RelativeProjTwistCh
 
 /-! # Reading sections across relative Proj twist charts
 
-Source: Stacks Project, Constructions, Tag 01NR.
+## References
+
+* Stacks Project, Constructions, Tag 01NR
 -/
 
 @[expose] public section
@@ -94,7 +96,6 @@ variable {S : Scheme.{u}} (A : S.GradedAlgebraData)
 
 /-- The normalized transition induced by a compatible chart square intertwines reading maps.
 
-Source: Stacks Project, Constructions, Tag 01NR.
 The proof expands the section-normalized pullback adjunction, uses naturality of its unit,
 and evaluates the displayed chart square on a section.  The first map in the square is
 transported across the equality of the two chart preimages, and the remaining composition

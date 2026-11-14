@@ -11,7 +11,12 @@ import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionTe
 import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionTensorTransportExtension
 import WeilConjectures.AlgebraicGeometry.SectionTensorNormalizationTransport
 
-/-! # Conjugation condition for quotient section tensor transport -/
+/-! # Conjugation condition for quotient section tensor transport
+
+## References
+
+* Stacks 06YY, 07A4 and 07A6
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -51,8 +56,7 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
 
 /-- A normalized section tensor comparison is the image of the prescribed
 internal tensorator.  This is the final conjugation step after the ordinary and
-derived section computations have been normalized.
-Source: Stacks 06YY, 07A4 and 07A6. -/
+derived section computations have been normalized. -/
 theorem section_tensor_transport_condition (T : Scheme.{u})
     (c : ScalarSectionData a T) (hc : ScalarSectionNormalized a T c)
     (b : TensorIso a T) (hb : TensorNormalized a T b)

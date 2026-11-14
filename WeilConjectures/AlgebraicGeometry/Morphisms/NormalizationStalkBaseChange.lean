@@ -12,10 +12,15 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Flat
 
 /-! # Relative normalization under stalk base change
 
-Source: Stacks Project, Tags 0307, 035I and 02KH.
 The affine comparison proof adapts the smooth-base-change proof in
 Mathlib.AlgebraicGeometry.Normalization, replacing smooth integral-closure base change
 with TensorProduct.toIntegralClosure_bijective_of_isLocalization.
+
+## References
+
+* Stacks Project, Tags 0307, 035I and 02KH
+* Stacks Project, Tag 0307 (localization of integral closure), Tag 035I, and Tag 02KH (flat base
+  change of sections, degree zero)
 -/
 
 @[expose] public section
@@ -110,10 +115,7 @@ private theorem normalizationPullback_affine_localization {X C Y : Scheme.{u}}
       Category.comp_id]
     exact congr(CommRingCat.ofHom $(ψ.comp_algebraMap.symm))
 
-/-- Relative normalization commutes with base change from a base scheme to one of its stalks.
-
-Source: Stacks Project, Tag 0307 (localization of integral closure), Tag 035I,
-and Tag 02KH (flat base change of sections, degree zero). -/
+/-- Relative normalization commutes with base change from a base scheme to one of its stalks. -/
 theorem Hom.isIso_normalizationPullback_stalk {S C P : Scheme.{u}}
     (c : C ⟶ S) (f : P ⟶ C) [QuasiCompact f] [QuasiSeparated f] (s : S) :
     IsIso (f.normalizationPullback (pullback.fst c (S.fromSpecStalk s))) := by

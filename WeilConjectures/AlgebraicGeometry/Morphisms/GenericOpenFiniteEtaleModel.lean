@@ -19,7 +19,11 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseLimitDescent
 /-!
 # Spreading a generic finite étale cover to an open
 
-Source: Stacks Project, Tags 0EYJ, 01ZM, 01ZO, and 07RP.
+## References
+
+* Stacks Project, Tags 0EYJ, 01ZM, 01ZO, and 07RP
+* Stacks Project, Tag 0EYJ (choice of an initial open), Tag 01ZM (descending finite presentation),
+  Tag 01ZO (finiteness), and Tag 07RP (étaleness)
 -/
 
 @[expose] public section
@@ -121,10 +125,7 @@ private theorem exists_finiteEtale_limit_stage
     het', t, H'⟩
 
 /-- A finite étale torsor on the generic fibre spreads over an open containing the generic
-point. No normality, section, or invertibility assumption is needed for this step.
-
-Source: Stacks Project, Tag 0EYJ (choice of an initial open), Tag 01ZM
-(descending finite presentation), Tag 01ZO (finiteness), and Tag 07RP (étaleness). -/
+point. No normality, section, or invertibility assumption is needed for this step. -/
 theorem GaloisCover.exists_generic_open_finiteEtale_model {S C : Scheme.{u}}
     [IsNoetherian S] [QuasiSeparatedSpace S] [IsIntegral S]
     (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [Smooth c]

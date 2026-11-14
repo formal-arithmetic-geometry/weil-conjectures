@@ -32,7 +32,12 @@ import WeilConjectures.CategoryTheory.Sites.Categorical.CategoricalInjectiveCech
 import WeilConjectures.CategoryTheory.DerivedCategory.DegreewiseLimits
 import Mathlib.Algebra.Homology.HomologicalComplexLimits
 
-/-! # Coproducts of Grothendieck-valued pro-etale sheaf sections on qcqs objects -/
+/-! # Coproducts of Grothendieck-valued pro-etale sheaf sections on qcqs objects
+
+## References
+
+* Stacks Project, Tag 0738 and the qcqs subsite in the proof of Tag 09A1
+-/
 
 -- After pruning, this module only keeps private declarations.
 set_option linter.privateModule false
@@ -178,8 +183,7 @@ private instance qcqs_finiteHypercovers (X : Scheme.{u}) :
       exact hg
 
 /-- Sections on a qcqs pro-etale object commute with coproducts with coefficients in
-any Grothendieck abelian category. Source: Stacks Project, Tag 0738 and the qcqs
-subsite in the proof of Tag 09A1. -/
+any Grothendieck abelian category. -/
 private theorem qcqs_evaluation_preservesCoproducts
     (A : Type u') [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A]

@@ -12,7 +12,12 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionChartGener
 /-!
 # Coherence of affine chart section transitions
 
-Source: Stacks Project, Tag 0BLH, first two proof paragraphs; Tag 05EL, item (1).
+## References
+
+* Stacks Project, Tag 0BLH, first two proof paragraphs
+* Tag 05EL, item (1)
+* Stacks Project, Tag 0BLH, second proof paragraph (the object check)
+* Tag 05EL, item (1), its square and cocycle clauses
 -/
 
 @[expose] public section
@@ -111,9 +116,6 @@ namespace AlgebraicGeometry.Scheme.CompletionGluingData
 
 /-- The section transition maps satisfy the two coherence equations of formal glueing.
 This checks maps already supplied; it constructs no section module or equivalence.
-
-Source: Stacks Project, Tag 0BLH, second proof paragraph (the object check);
-Tag 05EL, item (1), its square and cocycle clauses.
 -/
 theorem affine_chart_transition_coherence
     {A : Type u} [CommRing A] [IsLocalRing A]

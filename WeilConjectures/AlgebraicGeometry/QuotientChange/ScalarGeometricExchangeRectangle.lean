@@ -17,11 +17,13 @@ public import WeilConjectures.AlgebraicGeometry.ScalarGeometricExchangeRectangle
 
 /-! # Scalar extension and geometric exchange
 
-Source: Stacks Project, Tags 07A7 and 0E47.
-
 All functors are the existing ordinary unbounded internal-module derived functors.
 The balancing maps are specified by their universal computation-counit normalization.
 The direct-image maps are their actual mates, without an invertibility assumption.
+
+## References
+
+* Stacks Project, Tags 07A7 and 0E47
 -/
 
 @[expose] public noncomputable section
@@ -798,9 +800,7 @@ attribute [local irreducible] rho SectionPullNormalized SectionScalarNormalized
 conjunct supplies normalized section scalar and pullback comparisons, identifies
 each realized route with its section route after conjugating by the fixed source
 and target comparisons, and asserts equality of the actual section routes. Their
-rho and exchange are mates under the independently specified section adjunctions.
-
-Source: Stacks Project, Tags 07A7 and 0E47. -/
+rho and exchange are mates under the independently specified section adjunctions. -/
 theorem scalar_geometric_exchange_rectangle (φ : Λ ⟶ Λ') [IsMonHom φ]
     {X' X C Y : Scheme.{u}} {a : X' ⟶ X} {c : C ⟶ Y}
     {f : X ⟶ Y} {f' : X' ⟶ C} (sq : ChosenCartesianSquare a f' f c)

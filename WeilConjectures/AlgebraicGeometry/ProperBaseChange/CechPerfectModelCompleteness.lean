@@ -167,7 +167,12 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChan
 import all WeilConjectures.AlgebraicGeometry.Integral.IntegralCriterionReductionsSupplement
 import WeilConjectures.AlgebraicGeometry.Completed.Koszul.CompletedKoszulConstantTransport
 
-/-! # Perfect constant complexes in the intrinsic coefficient presentation -/
+/-! # Perfect constant complexes in the intrinsic coefficient presentation
+
+## References
+
+* Bhatt--Scholze, Proposition 6.6.11, reverse implication and Lemma 6.5.8
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -262,8 +267,7 @@ end CechPerfectModel
 attribute [local instance] HasDerivedCategory.standard
 
 /-- A perfect scalar complex has an invertible intrinsic completion unit after
-completed constant realization.
-Source: Bhatt--Scholze, Proposition 6.6.11, reverse implication and Lemma 6.5.8. -/
+completed constant realization. -/
 theorem cechPerfectModel_intrinsicComplete (T : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A]
     (d : AdicCoefficientDatum A)

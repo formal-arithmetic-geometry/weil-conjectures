@@ -107,7 +107,10 @@ import WeilConjectures.AlgebraicGeometry.Lisse.Finite.LisseFiniteLevelEtaleStalk
 
 /-! # Descent of one separately marked finite level
 
-Source: Stacks Tags 099Y, 099Z, 09B1 and 09BV.
+## References
+
+* Stacks Tags 099Y, 099Z, 09B1 and 09BV
+* Stacks Project, Tags 099Y, 099Z, 09B1 and 09BV
 -/
 
 @[expose] public noncomputable section
@@ -128,9 +131,7 @@ attribute [local irreducible] HasDerivedCategory.standard
 
 /-- A single finite-coefficient level with local bounded finite algebraic markings
 has an etale model. Its comparison uses the explicitly constructed fixed realization.
-This statement contains no tower, transition, normalization or coefficient-square data.
-
-Source: Stacks Project, Tags 099Y, 099Z, 09B1 and 09BV. -/
+This statement contains no tower, transition, normalization or coefficient-square data. -/
 theorem lisse_finite_level_etale_descent
     (X Y : Scheme.{u}) (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)

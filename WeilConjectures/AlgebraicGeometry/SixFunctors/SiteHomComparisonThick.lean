@@ -32,8 +32,6 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMapProjection
 
 /-! # Exactness and thick locus of the specified site Hom comparison
 
-Source: Stacks Project, Tags 08J9, 08JB and 08JC.
-
 The map is the recorded evaluation transpose. The shift structures below are normalized
 by the adjunction mate of total-tensor shifts and the signed opposite-category convention.
 ## Main declarations
@@ -44,6 +42,13 @@ by the adjunction mate of total-tensor shifts and the signed opposite-category c
 
 Restrictions are exact inverse image along an etale object, canonically identified with
 slice restriction. Every comparison is constructed from the existing adjunctions.
+
+## References
+
+* Stacks Project, Tags 08J9, 08JB and 08JC
+* Stacks 07A4
+* Stacks 08JC
+* Stacks 08J9, 08JC
 -/
 
 @[expose] public noncomputable section
@@ -62,8 +67,7 @@ namespace AlgebraicGeometry.ProEtale
 attribute [local irreducible] Functor.mapDerivedCategory
 
 /-- Derive the ordinary tensor comparison and transport it to the exact termwise
-functor. This packages the existing construction without selecting new tensor data.
-Source: Stacks 07A4. -/
+functor. This packages the existing construction without selecting new tensor data. -/
 @[irreducible] def siteHomExactDerivedMonoidal
     {C : Type d} [Category.{u + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C]
@@ -80,7 +84,7 @@ Source: Stacks 07A4. -/
 
 /-- The complete exactness and thick-locus assertion for a specified closed-category
 comparison. This is a transparent proposition, not an extra hypothesis or chosen map.
-It uses the canonical signed source shifts on both rows. Source: Stacks 08JC. -/
+It uses the canonical signed source shifts on both rows. -/
 @[irreducible] def siteHomExactThickAssertion
     {C : Type d} [Category.{v} C] [Preadditive C] [HasZeroObject C] [HasShift C ℤ]
     [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
@@ -279,8 +283,7 @@ def siteHomComparisonLocus (M : Etale.DerivedCategoryModule A X) :
   fun K ↦ IsIso (siteComparisonEvaluationHom (ModuleCat.{u + 1} A) X K M)
 
 /-- Exactness, signed shift compatibility, the full reversed triangle morphism and thick
-closure for the specified evaluation comparison, for each arbitrary fixed target M.
-Source: Stacks 08J9, 08JC. -/
+closure for the specified evaluation comparison, for each arbitrary fixed target M. -/
 theorem siteHomComparison_exact_thick (M : Etale.DerivedCategoryModule A X) :
     siteHomSiteExactThick (ModuleCat.{u + 1} A) X M := by
   exact siteHomExactThick_generic (ModuleCat.{u + 1} A) X M

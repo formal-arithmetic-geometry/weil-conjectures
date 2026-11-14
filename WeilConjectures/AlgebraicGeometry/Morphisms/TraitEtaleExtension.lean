@@ -19,7 +19,10 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.DvrPuncturedCoverPurity
 /-!
 # Extending a punctured cover over a smooth trait
 
-Source: Stacks Project, Tags 0EYE and 0EYJ, trait paragraph.
+## References
+
+* Stacks Project, Tags 0EYE and 0EYJ, trait paragraph
+* Tag 033C for normality
 -/
 
 @[expose] public section
@@ -90,9 +93,7 @@ private theorem trait_isDVR (A : Type u) [CommRing A] [IsLocalRing A]
 
 /-- A punctured finite etale cover that has an etale model near a point of the
 special fibre extends to a finite etale cover. No normality or density assumption
-on the given model N is needed for this existence assertion.
-
-Source: Stacks Project, Tags 0EYE and 0EYJ, trait paragraph; Tag 033C for normality. -/
+on the given model N is needed for this existence assertion. -/
 theorem exists_finite_etale_extension_of_trait_neighbourhood
     (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]
     [IsDomain A] [IsIntegrallyClosed A]

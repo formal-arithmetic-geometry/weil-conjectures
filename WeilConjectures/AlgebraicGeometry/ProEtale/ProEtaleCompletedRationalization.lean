@@ -46,8 +46,6 @@ import WeilConjectures.CategoryTheory.SitePullbackAbelianUnderlying
 
 /-!
 # Rational coefficient comparison from fraction maps
-
-Source: the scalar sequence and ring structure in the completed coefficient comparison.
 -/
 
 @[expose] public section

@@ -15,7 +15,10 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteUnramifiedPrincipalQuot
 /-!
 # Lifting a punctured finite etale cover from a principal quotient
 
-Source: Stacks Project, Tag 0BLM.
+## References
+
+* Stacks Project, Tag 0BLM
+* Stacks Project, Tag 0BLM, Lemma 58.20.7, and its proof through Tag 0BLS
 -/
 
 @[expose] public section
@@ -24,9 +27,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- At depth at least three, extending the actual quotient restriction suffices.
-
-Source: Stacks Project, Tag 0BLM, Lemma 58.20.7, and its proof through Tag 0BLS. -/
+/-- At depth at least three, extending the actual quotient restriction suffices. -/
 theorem exists_finite_etale_extension_of_depth_three_of_quotient_extension
     (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A]
     (f : A) (hf : f ∈ IsLocalRing.maximalIdeal A)

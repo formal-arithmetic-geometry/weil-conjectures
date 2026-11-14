@@ -13,7 +13,10 @@ import WeilConjectures.CategoryTheory.DerivedCategory.SixFunctors.PrincipalMilno
 
 /-! # Reduction of the ordinary strict quotient augmentation
 
-Source: Stacks Project, Tag 099M.
+## References
+
+* Stacks Project, Tag 099M
+* Stacks Project, Tag 099M, the principal Koszul proof of derived completion
 -/
 
 @[expose] public section
@@ -37,9 +40,7 @@ private theorem integral_prime_regular (ℓ : ℕ) [Fact ℓ.Prime] :
 /-- On a complex with injective positive prime-power multiplications, the ordinary
 strict quotient augmentation is invertible after derived reduction modulo the prime.
 There is no left-derived reduction functor in this statement, and no natural
-transformation on the derived category has to be constructed.
-
-Source: Stacks Project, Tag 099M, the principal Koszul proof of derived completion. -/
+transformation on the derived category has to be constructed. -/
 theorem integral_ordinary_augmentation_reduction (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     [HasDerivedCategory.{u + 1} (DiagonalAb W)]
     [HasDerivedCategory.{u + 1} (ℕᵒᵖ ⥤ DiagonalAb W)]

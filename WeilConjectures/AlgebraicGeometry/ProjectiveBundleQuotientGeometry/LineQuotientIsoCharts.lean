@@ -9,7 +9,10 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveBundleQuotientGeometry
 
 /-! # LineQuotientIsoCharts
 
-Source: Stacks Project, Constructions, Tags 01OA and 01O4.
+## References
+
+* Stacks Project, Constructions, Tags 01OA and 01O4
+* Stacks Project, Constructions, Tag 01OA, isomorphism classes of quotients
 -/
 
 @[expose] public section
@@ -220,8 +223,7 @@ private def fractionChartData {S T : Scheme.{u}} (h : T ⟶ S)
           (quotientSymmetricGenerator E U m) 1 (quotientSymmetricGenerator E U n))))
 
 /-- Isomorphic quotient lines have identical coefficient maps in corresponding frames,
-and hence the same fraction charts.
-Source: Stacks Project, Constructions, Tag 01OA, isomorphism classes of quotients. -/
+and hence the same fraction charts. -/
 theorem lineQuotient_iso_charts {S T : Scheme.{u}} (h : T ⟶ S)
     (E : S.Modules) [E.IsQuasicoherent] (L : T.Modules) [L.IsInvertible]
     (q : (tensorPullback h).obj E ⟶ L) [Epi q]

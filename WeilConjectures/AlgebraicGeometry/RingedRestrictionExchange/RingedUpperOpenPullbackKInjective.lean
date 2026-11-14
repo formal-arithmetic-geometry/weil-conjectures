@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.RingedRestrictionExchange.ProEta
 
 /-! # K-injective preservation along the upper side of an open square
 
-Source: Stacks Project, Tags 08FI and 09A5.
+## References
+
+* Stacks Project, Tags 08FI and 09A5
 -/
 
 @[expose] public noncomputable section
@@ -26,8 +28,7 @@ attribute [local irreducible] proEtaleRingModulePullback
 variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
   {f : X ⟶ Y} {g : Y' ⟶ Y} {sq : ChosenCartesianSquare g' f' f g}
 
-/-- Upper pullback in a Cartesian square over an open immersion preserves K-injectives.
-Source: Stacks Project, Tags 08FI and 09A5. -/
+/-- Upper pullback in a Cartesian square over an open immersion preserves K-injectives. -/
 @[instance] theorem upper_pull_preservesKInjectiveComplexes
     (r : StrictTowerRingedSquare sq) [IsOpenImmersion g] :
     (upperPull r).PreservesKInjectiveComplexes := by

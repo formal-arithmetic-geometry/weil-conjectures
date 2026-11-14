@@ -15,7 +15,9 @@ import Mathlib.CategoryTheory.Sites.LocalProperties
 
 /-! # Open covers detect derived isomorphisms with inverse-image coefficients
 
-Source: Stacks Project, Tags 00XZ and 0EYZ.
+## References
+
+* Stacks Project, Tags 00XZ and 0EYZ
 -/
 
 @[expose] public noncomputable section

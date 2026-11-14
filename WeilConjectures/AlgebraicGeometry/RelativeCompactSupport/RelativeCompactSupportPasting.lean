@@ -25,8 +25,10 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Canonical.ProEtaleCanonicalAdj
 /-!
 # Horizontal pasting for compactification-relative exchange
 
-Source: Stacks Project, Tag 0E47, and the compactification-relative strict-tower argument in the
-DAG.
+## References
+
+* Stacks Project, Tag 0E47, and the compactification-relative strict-tower argument in the DAG
+* Stacks, Tags 0E47 and 09AE
 -/
 
 @[expose] public section
@@ -52,8 +54,7 @@ variable (B : Type (u + 1)) [CommRing B]
 noncomputable abbrev ordinaryG {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   (modulePullback B f).mapDerivedCategory
 
-/-- The source pullback compositor, with its K-flat and ordinary-unit normalization.
-Source: Stacks, Tags 0E47 and 09AE. -/
+/-- The source pullback compositor, with its K-flat and ordinary-unit normalization. -/
 noncomputable def sourceGComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     ordinaryG B (f ≫ g) ≅ ordinaryG B g ⋙ ordinaryG B f :=
   eqToIso (congrArg
@@ -63,8 +64,7 @@ noncomputable def sourceGComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
       (coefficients B Z) (coefficients B Y) (coefficients B X)
       (constantRingIso B g) (constantRingIso B f)
 
-/-- The source square built from the specified derived pullback compositors.
-Source: Stacks, Tags 0E47 and 09AE. -/
+/-- The source square built from the specified derived pullback compositors. -/
 noncomputable def sourceSquare {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) (h : k ≫ p = r ≫ i) :
     ordinaryG B i ⋙ ordinaryG B r ≅ ordinaryG B p ⋙ ordinaryG B k :=
@@ -106,31 +106,26 @@ open StrictTower ConstantCompactificationExchange
 
 variable (B : Type (u + 1)) [CommRing B]
 
-/-- Ordinary total right derived direct image, with its recorded module action.
-Source: Stacks, Tags 0E47 and 09AE. -/
+/-- Ordinary total right derived direct image, with its recorded module action. -/
 noncomputable abbrev ordinaryR {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   (moduleDirectImage B f).rightDerivedFunctor
 
-/-- Ordinary exact extension by zero from the recorded open adjunction.
-Source: Stacks, Tags 0E47 and 09AE. -/
+/-- Ordinary exact extension by zero from the recorded open adjunction. -/
 noncomputable abbrev ordinaryJ {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] :=
   (moduleJ B j).mapDerivedCategory
 
-/-- The ordinary derived adjunction induced by the specified module adjunction.
-Source: Stacks, Tags 0E47 and 09AE. -/
+/-- The ordinary derived adjunction induced by the specified module adjunction. -/
 noncomputable abbrev ordinaryAdj {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   (Scheme.proEtaleRingModuleAdjunction f (coefficients B Y)
     (coefficients B X) (constantRingIso B f)).mapDerivedCategoryRightDerivedAdjunction
 
-/-- The ordinary compositor descends the section-normalized module compositor.
-Source: Stacks, Tags 0E47 and 09AE. -/
+/-- The ordinary compositor descends the section-normalized module compositor. -/
 noncomputable def ordinaryGComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     ordinaryG B (f ≫ g) ≅ ordinaryG B g ⋙ ordinaryG B f :=
   Functor.mapDerivedCategoryNatIso (moduleGComp B f g) ≪≫
     (Functor.mapDerivedCategoryCompIso (modulePullback B g) (modulePullback B f)).symm
 
-/-- The ordinary exchange is the unit--square--counit mate of the specified square.
-Source: Stacks, Tags 0E47 and 09AE. -/
+/-- The ordinary exchange is the unit--square--counit mate of the specified square. -/
 noncomputable def ordinaryE {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) (h : k ≫ p = r ≫ i) :
     ordinaryR B p ⋙ ordinaryG B i ⟶ ordinaryG B k ⋙ ordinaryR B r :=
@@ -155,8 +150,7 @@ private theorem moduleOpenUnit_isIso {U X : Scheme.{u}} (j : U ⟶ X)
     (moduleJAdj B j) (fixedRestriction B U) (fixedRestriction B X)
     (openImmersionLowerShriek A j) (fixedOpen B j)
 
-/-- The specified ordinary inverse open comparison is invertible for arbitrary rings.
-Source: Stacks, Tags 0E47 and 09AE. -/
+/-- The specified ordinary inverse open comparison is invertible for arbitrary rings. -/
 theorem ordinaryBetaInv_isIso {U' U X' X : Scheme.{u}}
     (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (sq : IsPullback a j' j g) :
@@ -177,8 +171,7 @@ theorem ordinaryBetaInv_isIso {U' U X' X : Scheme.{u}}
     infer_instance
   exact NatIso.isIso_of_isIso_app _
 
-/-- Ordinary open base change, descending the existing open-unit transpose.
-Source: Stacks, Tags 0E47 and 09AE. -/
+/-- Ordinary open base change, descending the existing open-unit transpose. -/
 noncomputable def ordinaryBeta {U' U X' X : Scheme.{u}}
     (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (sq : IsPullback a j' j g) :
@@ -187,8 +180,7 @@ noncomputable def ordinaryBeta {U' U X' X : Scheme.{u}}
     (@asIso _ _ _ _ (singleBetaInv B a j' j g sq.w)
       (ordinaryBetaInv_isIso B a j' j g sq))).symm
 
-/-- The tower compactification-relative exchange, with the two specified factors.
-Source: Stacks, Tags 0E47 and 09AE. -/
+/-- The tower compactification-relative exchange, with the two specified factors. -/
 noncomputable def towerH {X X' Y Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}
     (c : Compactification f) (c' : Compactification f')
     (a : Y' ⟶ Y) (x : X' ⟶ X) (z : c'.Z ⟶ c.Z)
@@ -202,8 +194,7 @@ noncomputable def towerH {X X' Y Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}
     Functor.whiskerRight (beta B x c'.i c.i z sj.w sj).hom (R B c'.g) ≫
     (Functor.associator _ _ _).hom
 
-/-- The ordinary compactification-relative exchange, with the two specified factors.
-Source: Stacks, Tags 0E47 and 09AE. -/
+/-- The ordinary compactification-relative exchange, with the two specified factors. -/
 noncomputable def ordinaryH
     {X X' Y Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}
     (c : Compactification f) (c' : Compactification f')
@@ -220,8 +211,7 @@ noncomputable def ordinaryH
     Functor.whiskerRight (ordinaryBeta B x c'.i c.i z sj).hom (ordinaryR B c'.g) ≫
     (Functor.associator _ _ _).hom
 
-/-- Pasting two specified transformations, inserting the supplied pullback compositors.
-Source: Stacks, Tags 0E47 and 09AE. -/
+/-- Pasting two specified transformations, inserting the supplied pullback compositors. -/
 def paste
     {C₀ C₁ C₂ D₀ D₁ D₂ : Type w}
     [Category.{v} C₀] [Category.{v} C₁] [Category.{v} C₂]
@@ -563,8 +553,7 @@ private theorem ordinaryBeta_comp {U U₁ U₂ X X₁ X₂ : Scheme.{u}}
   erw [(ordinaryG B h).map_id]
   erw [Category.id_comp, Iso.inv_hom_id_app_assoc, Iso.inv_hom_id_app, Category.comp_id]
 
-/-- The three horizontal-pasting equalities in the ordinary derived categories.
-Source: Stacks, Tags 0E47 and 09AE. -/
+/-- The three horizontal-pasting equalities in the ordinary derived categories. -/
 theorem ordinaryPasting {X₀ X₁ X₂ Y₀ Y₁ Y₂ : Scheme.{u}}
     {f₀ : X₀ ⟶ Y₀} {f₁ : X₁ ⟶ Y₁} {f₂ : X₂ ⟶ Y₂}
     (c₀ : Compactification f₀) (c₁ : Compactification f₁) (c₂ : Compactification f₂)
@@ -638,8 +627,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- The evaluation comparison for the specified compact-support composite.
-Source: Stacks, Tags 0E47 and 09AE. -/
+/-- The evaluation comparison for the specified compact-support composite. -/
 noncomputable def supportEval {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f) (n : ℕ) :
     (J B c.i ⋙ R B c.g) ⋙ ev B Y n ≅
@@ -712,8 +700,7 @@ private theorem evaluation_exchange {V W S T : Scheme.{u}}
     (mateEquiv_counit (adj B p) (ordinaryAdj B p) (evalG B p n).inv)
     (mateEquiv_counit (adj B r) (ordinaryAdj B r) (evalG B r n).inv) hc N
 
-/-- Finite evaluation carries E, beta and H to the ordinary specified maps.
-Source: Stacks, Tags 0E47 and 09AE. -/
+/-- Finite evaluation carries E, beta and H to the ordinary specified maps. -/
 theorem finiteEvaluation [Finite B] {X X' Y Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}
     (c : Compactification f) (c' : Compactification f')
     (a : Y' ⟶ Y) (x : X' ⟶ X) (z : c'.Z ⟶ c.Z)

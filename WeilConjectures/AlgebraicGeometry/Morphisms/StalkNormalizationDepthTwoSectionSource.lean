@@ -23,7 +23,11 @@ import WeilConjectures.RingTheory.NormalLocalDepthTwo
 /-!
 # Source etaleness over the local section in dimension at least two
 
-Source: Stacks Project, Tags 0EYJ, 0EY6 and 0EY9.
+## References
+
+* Stacks Project, Tags 0EYJ, 0EY6 and 0EY9
+* Stacks Project, Tag 0EYJ, final local computation
+* Tags 0EY6 and 0EY9
 -/
 
 @[expose] public section
@@ -34,9 +38,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Every point of the finite local normalization above the closed section point
 has a source open neighbourhood on which the normalization map is etale,
-when the local base has dimension at least two.
-
-Source: Stacks Project, Tag 0EYJ, final local computation; Tags 0EY6 and 0EY9 -/
+when the local base has dimension at least two. -/
 theorem GaloisCover.stalk_normalization_depth_two_section_source {S C : Scheme.{u}}
     [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]

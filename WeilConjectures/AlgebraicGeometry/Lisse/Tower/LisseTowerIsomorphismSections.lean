@@ -17,7 +17,11 @@ import WeilConjectures.AlgebraicGeometry.Finite.Ring.FiniteRingDerivedLocalConst
 
 /-! # Finite Isom sheaves for supplied algebraic adic levels
 
-Source: Stacks Project, Tags 09BV and 09C6, finite-level isomorphism sheaves.
+## References
+
+* Stacks Project, Tags 09BV and 09C6, finite-level isomorphism sheaves
+* Stacks Project, Tag 09BV, the construction of I_n and its reduction maps, and Tag 09C6,
+  compatibility of finite reductions
 -/
 
 @[expose] public noncomputable section
@@ -97,10 +101,7 @@ private theorem conjugate_square
   rw [← F.map_comp_assoc, ← he, F.map_comp, Category.assoc, ha]
 
 /-- The finite Isom sheaves, their reduction and evaluation on contractible objects.
-This constructs neither a covering nor a compatible family of markings.
-
-Source: Stacks Project, Tag 09BV, the construction of I_n and its reduction maps, and Tag 09C6,
-compatibility of finite reductions. -/
+This constructs neither a covering nor a compatible family of markings. -/
 theorem lisse_tower_isomorphism_sections
     (X Y : Scheme.{u}) (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (M : AdicTower X d)

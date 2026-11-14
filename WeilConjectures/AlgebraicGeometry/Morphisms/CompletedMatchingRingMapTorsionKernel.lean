@@ -14,7 +14,11 @@ import Mathlib.RingTheory.AdicCompletion.LocalRing
 
 /-! # CompletedMatchingRingMapTorsionKernel
 
-Source: Stacks Project, Tags 0BLH, 05ER and 05EU.
+## References
+
+* Stacks Project, Tags 0BLH, 05ER and 05EU
+* the localization argument in Stacks Project, Tag 05ER
+* Stacks Project, Tag 05ER, torsion-submodule base-change kernel argument
 -/
 
 @[expose] public section
@@ -65,7 +69,6 @@ private theorem pushout_torsion_descends
     exact congrArg Subtype.val hb
 
 /-- A maximal-ideal-power torsion section on a scheme over the punctured spectrum is zero.
-Source: the localization argument in Stacks Project, Tag 05ER.
 At every point the image prime is strictly below the maximal ideal. Choose an element
 of the maximal ideal outside that prime. Its image is invertible in the stalk, while
 its nth power annihilates the section. Thus the section has zero germ everywhere,
@@ -99,8 +102,7 @@ private theorem punctured_torsion_section_zero
   change t ^ n * b = 0
   simpa only [map_pow] using hb (a ^ n) (Ideal.pow_mem_pow ha n)
 
-/-- The comparison kills no nonzero maximal-ideal-power torsion element.
-Source: Stacks Project, Tag 05ER, torsion-submodule base-change kernel argument. -/
+/-- The comparison kills no nonzero maximal-ideal-power torsion element. -/
 theorem completedRingMap_torsion_kernel_zero
     {A : Type u} [CommRing A] [IsNoetherianRing A] [IsLocalRing A]
     {U : (Spec (.of A)).Opens}

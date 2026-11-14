@@ -19,7 +19,10 @@ import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 
 /-! # Picard affine structure projective homology
 
-Source: Stacks Project, Tags 0BF2, 0B91, 08EB and 06Z0.
+## References
+
+* Stacks Project, Tags 0BF2, 0B91, 08EB and 06Z0
+* Stacks Project, Tags 0B91(2), 06Z0 and the structure-image argument in 0BF2
 -/
 
 @[expose] public section
@@ -28,8 +31,7 @@ universe v
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- A representing bounded projective model has the required universal low homology.
-Source: Stacks Project, Tags 0B91(2), 06Z0 and the structure-image argument in 0BF2. -/
+/-- A representing bounded projective model has the required universal low homology. -/
 theorem picard_affine_structure_projective_homology
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

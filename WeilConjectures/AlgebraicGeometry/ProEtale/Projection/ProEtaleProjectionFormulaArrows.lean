@@ -45,7 +45,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 /-!
 # Projection arrows on the original small pro-etale sites
 
-Source: proper base change, definition 1264.
 This repairs only the site-universe interface and reexports the existing general arrows.
 The inverse is the localization of the specified finite-total chain inverse.
 -/
@@ -160,8 +159,7 @@ attribute [local irreducible] proEtaleRingModuleAdjunction
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Unit normalization of the canonical ordinary comparison on the original site.
-Source: definition 1264, ordinary finite-free identification. -/
+/-- Unit normalization of the canonical ordinary comparison on the original site. -/
 theorem proEtaleProjectionUnit_existsUnique :
     ∃! j : (proEtaleRingModulePullback f R S c).obj
         (SheafOfModules.unit ((sheafCompose (ProEt.topology Y)
@@ -269,8 +267,7 @@ theorem proEtaleProjectionUnit_existsUnique :
 end ProjectionUnitProof
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Bounded split-free coefficients are flat and K-flat on the original site.
-Source: definition 1264, representatives C and J. -/
+/-- Bounded split-free coefficients are flat and K-flat on the original site. -/
 theorem proEtaleStrictPerfect_flat
     (F : CochainComplex (proEtaleRingModules Y R) ℤ)
     (P : SheafOfModules.StrictPerfectCoefficientPackageOnSite
@@ -490,8 +487,7 @@ theorem proEtaleMixedTensor_existsUnique (a : ProEtaleTensorModel Y R)
     rw [e.hom_inv_id_assoc]
     rfl
 
-/-- The unique mixed tensor comparison with the specified resolution normalization.
-Source: definition 1264. -/
+/-- The unique mixed tensor comparison with the specified resolution normalization. -/
 def proEtaleMixedTensor (a : ProEtaleTensorModel Y R)
     (A F : CochainComplex (proEtaleRingModules Y R) ℤ)
     (hf : proEtaleFlatRepresentatives Y R F) :=

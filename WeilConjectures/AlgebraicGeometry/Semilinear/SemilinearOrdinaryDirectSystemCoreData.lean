@@ -12,7 +12,11 @@ import WeilConjectures.AlgebraicGeometry.OrdinarySource.SemilinearOrdinarySource
 
 /-! # Reassembly of the ordinary direct image
 
-Source: Zheng Construction 4.1; Stacks 03D2 and 03DA.
+## References
+
+* Zheng Construction 4.1
+* Stacks 03D2 and 03DA
+* Stacks 03D7
 -/
 
 @[expose] public noncomputable section
@@ -40,7 +44,6 @@ variable (V : ∀ n, Mod.{c, v, max c v r} J' (F n) ⥤ Mod.{c, v, max c v r} J 
   (a : ∀ n, (I n).modules ⊣ V n)
 
 /-- The componentwise data of a direct-system core, before the mate condition.
-Source: Zheng Construction 4.1; Stacks 03D7.
 
 This records only the functor and its levelwise component identifications.  The
 transition mate law is stated separately, since it is a local assertion about
@@ -60,8 +63,7 @@ structure OrdinaryDirectSystemCoreData
     (x : ((evaluation.{c, v, max c v r} J B τ n).obj (push.obj M)).val.obj U),
     HEq ((((component n).hom.app M).val.app U) x) x
 
-/-- The horizontal maps of a component datum are the supplied set-sheaf direct images.
-Source: Zheng Construction 4.1; Stacks 03D7. -/
+/-- The horizontal maps of a component datum are the supplied set-sheaf direct images. -/
 def OrdinaryDirectSystemCoreNormalized
     (D : OrdinaryDirectSystemCoreData.{c, v, r} (J := J) (B := B) (τ := τ)
       (J' := J') (F := F) (σ := σ) (V := V))
@@ -330,8 +332,7 @@ end NormalizationProof
 
 attribute [local irreducible] transition directStrictTransition
 
-/-- Reassemble the componentwise direct-image datum.
-Source: Zheng Construction 4.1; Stacks 03D7. -/
+/-- Reassemble the componentwise direct-image datum. -/
 theorem ordinaryDirectSystem_core_data_exists [PreservesFiniteLimits uInv]
     (hI : ∀ n,
       uInv.map ((sheafCompose J (CategoryTheory.forget CommRingCat.{max c v r})).map (τ n)) ≫

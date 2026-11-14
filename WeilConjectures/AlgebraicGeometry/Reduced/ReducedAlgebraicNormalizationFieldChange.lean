@@ -23,7 +23,13 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.NormalizationDominantLift
 /-!
 # Geometry and separable field change of reduced algebraic normalization
 
-Source: Stacks Project, Varieties, Tags 0BXR and 0C3N; Morphisms, Tags 035Q, 035K, 0CDV.
+## References
+
+* Stacks Project, Varieties, Tags 0BXR and 0C3N
+* Morphisms, Tags 035Q, 035K, 0CDV
+* Stacks Project, Tag 035S
+* Stacks Project, Tag 035Q
+* Stacks Project, Tag 035Q, applied componentwise
 -/
 
 @[expose] public section
@@ -34,8 +40,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- Componentwise normalization of a finite-type scheme over a field is finite.
-Source: Stacks Project, Tag 035S. -/
+/-- Componentwise normalization of a finite-type scheme over a field is finite. -/
 theorem finite_normalization {k : Type u} [Field k]
     (X : Scheme.{u}) (q : X ⟶ Spec (.of k))
     [LocallyOfFiniteType q] [QuasiCompact q] :
@@ -76,8 +81,7 @@ private theorem surjective_normalization (X : Scheme.{u}) :
     (X.reducedNormalizationComponent Z).normalization) Z) z) = x
   rw [← Scheme.Hom.comp_apply, Sigma.ι_comp_desc, Scheme.Hom.comp_apply]
   exact (congrArg I.subschemeι hz).trans hy
-/-- The stalks of the componentwise normalization are integrally closed domains.
-Source: Stacks Project, Tag 035Q. -/
+/-- The stalks of the componentwise normalization are integrally closed domains. -/
 theorem normal_normalization (X : Scheme.{u}) (z : X.reducedNormalization) :
     IsDomain (X.reducedNormalization.presheaf.stalk z) ∧
       IsIntegrallyClosed (X.reducedNormalization.presheaf.stalk z) := by
@@ -259,8 +263,7 @@ theorem component_meets_dense_open (X : Scheme.{u})
   exact ⟨x, hcl ▸ subset_closure hxV, hxU⟩
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The inverse image of a dense open under componentwise normalization is dense.
-Source: Stacks Project, Tag 035Q, applied componentwise. -/
+/-- The inverse image of a dense open under componentwise normalization is dense. -/
 theorem dense_preimage_normalization {k : Type u} [Field k]
     (X : Scheme.{u}) (q : X ⟶ Spec (.of k))
     [LocallyOfFiniteType q] [QuasiCompact q]
@@ -685,7 +688,6 @@ namespace AlgebraicGeometry
 /-- Componentwise normalization is finite, surjective, an isomorphism over the dense open
 normal locus, compatible with restriction to opens, and compatible with separable field change.
 The comparison is characterized over the base by its projection equations.
-Source: Stacks Project, Varieties, Tags 0BXR and 0C3N; Morphisms, Tags 035Q, 035K, 0CDV.
 
 Source proof (the original affine route):
 1. Finite type over a field makes X Noetherian

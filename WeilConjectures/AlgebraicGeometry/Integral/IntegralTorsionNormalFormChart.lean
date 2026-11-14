@@ -23,7 +23,9 @@ complex over the valuation ring, its cohomology splits as a finite free sheaf an
 nilpotent-uniformizer torsion sheaf, and the cokernel of the uniformizer on the torsion
 part is a quotient of the consecutive-quotient Tor sheaf.
 
-Source: Bhatt--Scholze, Proposition 6.6.11.
+## References
+
+* Bhatt--Scholze, Proposition 6.6.11
 -/
 
 @[expose] public noncomputable section
@@ -120,8 +122,7 @@ def chartHomologyIso (T : Scheme.{u}) {S : Scheme.{u}} (g : S ⟶ T)
       ).mapDerivedCategoryHomologyFunctorIso q).app C).symm
 
 /-- The inverse image of the realization of a finite free module is a finite free module
-sheaf: it has a basis on every object.
-Source: Bhatt--Scholze, Proposition 6.6.11. -/
+sheaf: it has a basis on every object. -/
 theorem chart_free_sheaf (T : Scheme.{u}) {S : Scheme.{u}} (g : S ⟶ T) (r : ℕ) :
     ∃ F : pbcModules S ((adicTowerInverseImage g).obj
         (pbcAdicCompletion T (pbcIntegralDatum l E))),
@@ -135,8 +136,7 @@ theorem chart_free_sheaf (T : Scheme.{u}) {S : Scheme.{u}} (g : S ⟶ T) (r : �
 
 /-- On the base, the consecutive-quotient Tor sheaf of the realization of a perfect complex
 surjects, after restriction of scalars, onto the cokernel of the uniformizer on the
-realization of the torsion summand of its degree-`q` cohomology.
-Source: Bhatt--Scholze, Proposition 6.6.11. -/
+realization of the torsion summand of its degree-`q` cohomology. -/
 theorem tor_const_epi (T : Scheme.{u}) (q : ℤ)
     (C : completedConstantDerived (ModuleCat.{u + 1} (PbcIntegralRing l E)))
     (hC : @DerivedCategory.IsPerfectRingComplex _ _ (HasDerivedCategory.standard _) C)
@@ -212,8 +212,7 @@ theorem tor_const_epi (T : Scheme.{u}) (q : ℤ)
   exact epi_comp _ _
 
 /-- On a perfect chart, the consecutive-quotient Tor sheaf surjects onto the cokernel of
-the uniformizer on the realization of the torsion summand of its cohomology module.
-Source: Bhatt--Scholze, Proposition 6.6.11. -/
+the uniformizer on the realization of the torsion summand of its cohomology module. -/
 theorem chart_tor_epi (T : Scheme.{u}) {S : Scheme.{u}} (g : S ⟶ T)
     (K : DerivedCategory (pbcModules T (pbcAdicCompletion T (pbcIntegralDatum l E))))
     (q : ℤ) (C : completedConstantDerived (ModuleCat.{u + 1} (PbcIntegralRing l E)))
@@ -261,8 +260,7 @@ theorem chart_tor_epi (T : Scheme.{u}) {S : Scheme.{u}} (g : S ⟶ T)
 
 end Helpers
 
-/-- The torsion normal form on one perfect chart.
-Source: Bhatt--Scholze, Proposition 6.6.11. -/
+/-- The torsion normal form on one perfect chart. -/
 theorem torsion_normal_form_chart (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {S : Scheme.{u}} (g : S ⟶ T)

@@ -15,10 +15,14 @@ import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Unique
 /-!
 # Comparison of extension by zero on the etale and pro-etale sites
 
-Source: Stacks Project.
-
 The comparison is the existing adjunction mate
 `openImmersionLowerShriekComparisonUpperStarIso`, not a chosen isomorphism.
+
+## References
+
+* Stacks Project
+* Stacks Project, Tags 09AE and 03EH
+* Stacks Project, Tag 09AF
 -/
 
 @[expose] public section
@@ -181,8 +185,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- Canonical composition of pro-etale extension by zero, oriented from composite
 extension to iterated extension. It is the unique left-adjoint comparison for the
-canonical composition of inverse images, exactly as on the etale site.
-Source: Stacks Project, Tags 09AE and 03EH. -/
+canonical composition of inverse images, exactly as on the etale site. -/
 noncomputable def proEtaleOpenExtensionComp (Λ : Type (u + 1)) [CommRing Λ]
     {V U X : Scheme.{u}} (k : V ⟶ U) (j : U ⟶ X)
     [IsOpenImmersion k] [IsOpenImmersion j] :
@@ -531,8 +534,7 @@ private lemma comparison_identity (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.
 
 /-- The canonical comparison `ν_X^* j_! F ⟶ j_! ν_U^* F` is invertible and commutes
 with composition and identity open immersions. Naturality in `F` is built into the
-existing natural isomorphism `openImmersionLowerShriekComparisonUpperStarIso`.
-Source: Stacks Project, Tag 09AF. -/
+existing natural isomorphism `openImmersionLowerShriekComparisonUpperStarIso`. -/
 theorem openImmersionLowerShriekComparison_coherence
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] :
     (∀ {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]

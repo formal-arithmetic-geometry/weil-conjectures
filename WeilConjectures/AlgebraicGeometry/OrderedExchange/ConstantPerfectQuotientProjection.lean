@@ -15,7 +15,16 @@ import WeilConjectures.AlgebraicGeometry.SignedProjectionResolution.SignedProjec
 
 /-! # Perfect projection for one constant quotient
 
-Source: Stacks Tags 0944, 06YY and 099M.
+## References
+
+* Stacks Tags 0944, 06YY and 099M
+* Stacks 0941
+* Stacks 0B56, 099M
+* Stacks 0B56, 0944
+* Stacks 06YY
+* Stacks 0944, reduction from finite-projective to finite-free coefficients
+* Stacks 06YY and the strict-perfect coefficient step of Stacks 0944
+* Stacks Tag 0944, and Tag 06YY
 -/
 
 @[expose] public noncomputable section
@@ -28,24 +37,20 @@ namespace AlgebraicGeometry.Scheme.OrderedExchange
 variable {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 variable {U V : Scheme.{t}} (f : U ⟶ V)
 
-/-- Exact derived evaluation of a strict quotient diagram.
-Source: Stacks 0941. -/
+/-- Exact derived evaluation of a strict quotient diagram. -/
 abbrev quotientEvaluation (T : Scheme.{t}) (n : ℕᵒᵖ) : TD (A := A) T ⥤ D (A := A) T :=
   ((CategoryTheory.evaluation ℕᵒᵖ
     (reductionModules T (exchangeConstantRing T A))).obj n).mapDerivedCategory
 
-/-- The canonical comparison of evaluation and pullback.
-Source: Stacks 0941. -/
+/-- The canonical comparison of evaluation and pullback. -/
 abbrev quotientEvaluationPull (n : ℕᵒᵖ) :=
   AlgebraicGeometry.ProEtale.StrictTower.evalG A f n.unop
 
-/-- The mate of the inverse pullback/evaluation comparison.
-Source: Stacks 0941. -/
+/-- The mate of the inverse pullback/evaluation comparison. -/
 abbrev quotientEvaluationPush (n : ℕᵒᵖ) :=
   AlgebraicGeometry.ProEtale.StrictTower.evalR A f n.unop
 
-/-- The normalized reduction/pullback square at one fixed quotient.
-Source: Stacks 0B56, 099M. -/
+/-- The normalized reduction/pullback square at one fixed quotient. -/
 def quotientTensorPull (n : ℕᵒᵖ) :
     (reduction d V ⋙ quotientEvaluation (A := A) V n) ⋙ pull (A := A) f ≅
       pull (A := A) f ⋙ (reduction d U ⋙ quotientEvaluation (A := A) U n) :=
@@ -56,8 +61,7 @@ def quotientTensorPull (n : ℕᵒᵖ) :
         Functor.isoWhiskerRight (reductionPullIso d f) (quotientEvaluation U n) ≪≫
           Functor.associator _ _ _
 
-/-- The finite projection is the counit mate of the specified normalized square.
-Source: Stacks 0B56, 0944. -/
+/-- The finite projection is the counit mate of the specified normalized square. -/
 def quotientProjection (n : ℕᵒᵖ) :
     push (A := A) f ⋙ (reduction d V ⋙ quotientEvaluation V n) ⟶
       (reduction d U ⋙ quotientEvaluation U n) ⋙ push (A := A) f :=
@@ -68,7 +72,7 @@ def quotientProjection (n : ℕᵒᵖ) :
       (exchangeConstantIso f A)) (quotientTensorPull d f n).hom
 
 /-- A perfect quotient has an actual bounded finite-projective augmentation.
-Source: Stacks 06YY. The K-projective lifting lemma realizes the given derived isomorphism. -/
+The K-projective lifting lemma realizes the given derived isomorphism. -/
 private theorem scalarResolution (n : ℕ) :
     ∃ (F : CochainComplex (ModuleCat.{t + 1} A) ℤ) (a b : ℤ)
       (q : F ⟶ (CochainComplex.singleFunctor _ 0).obj
@@ -108,8 +112,7 @@ private def constantUnit (T : Scheme.{t}) :
   let e : completedAdicChange T φ ≅ 𝟭 _ := a.leftAdjointUniq Adjunction.id
   exact (e.app _).symm ≪≫ CompletedConstantReduction.constantChange_unit T φ
 
-/-- Exact constant realization preserves the chosen finite-free splitting.
-Source: Stacks 0944, reduction from finite-projective to finite-free coefficients. -/
+/-- Exact constant realization preserves the chosen finite-free splitting. -/
 private theorem constantFiniteRetract (T : Scheme.{t})
     (N : ModuleCat.{t + 1} A) [Module.Finite A N] [Module.Projective A N] :
     ∃ r : ℕ,
@@ -141,8 +144,7 @@ private theorem constantFiniteRetract (T : Scheme.{t})
   rw [h, G.map_id]
 
 /-- Realize the scalar resolution on the original site, including its actual augmentation,
-finite-free retractions, finite support, and the flat K-flat property.
-Source: Stacks 06YY and the strict-perfect coefficient step of Stacks 0944. -/
+finite-free retractions, finite support, and the flat K-flat property. -/
 private theorem constantResolution (T : Scheme.{t}) (n : ℕ) :
     ∃ (F : CochainComplex (reductionModules T (exchangeConstantRing T A)) ℤ)
       (a b : ℤ)
@@ -215,8 +217,7 @@ private theorem projection_transport
   exact congrArg (fun z ↦ theta.hom.app (R.obj K) ≫ z)
     (eJ.hom.naturality (adj.counit.app K)).symm
 
-/-- The finite counit projection is invertible for a perfect quotient.
-Source: Stacks Tag 0944, and Tag 06YY. -/
+/-- The finite counit projection is invertible for a perfect quotient. -/
 theorem quotientProjection_isIso (n : ℕᵒᵖ) (K : D (A := A) U) :
     IsIso ((quotientProjection d f n).app K) := by
   obtain ⟨F, lo, hi, q, hq, ⟨package⟩, hb, hF⟩ := constantResolution d V n.unop

@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.FiniteGaloisTensorDecomposition
 /-!
 # Finite Galois descent for sections of an etale sheaf
 
-Source: Stacks Project, Etale Cohomology, Tag 04JM, finite Galois descent argument.
+## References
+
+* Stacks Project, Etale Cohomology, Tag 04JM, finite Galois descent argument
 -/
 
 @[expose] public section

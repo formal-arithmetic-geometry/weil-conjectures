@@ -119,7 +119,10 @@ import Mathlib.CategoryTheory.Localization.CalculusOfFractions
 
 /-! # Representative-normalized tensor comparison for pro-etale pullback
 
-Source: Stacks Project, Cohomology on Sites, Tag 07A4.
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 07A4
+* Stacks Project, Tag 07A4, using the total-complex construction of Tag 06YN
 -/
 
 @[expose] public noncomputable section
@@ -289,8 +292,7 @@ private theorem preserves_resolving {X Y : Scheme.{u}} (f : X ⟶ Y)
     have hf' := (exactFunctor _ _).prop_of_iso ((tensor S).flip.mapIso en.symm) hf
     exact (exactFunctor _ _).prop_of_iso (SheafOfModules.siteSheafTensorRightIso S _).symm hf'
 
-/-- The canonical ordinary tensor comparison descends with the signed shift squares.
-Source: Stacks Project, Tag 07A4, using the total-complex construction of Tag 06YN. -/
+/-- The canonical ordinary tensor comparison descends with the signed shift squares. -/
 theorem globalTensorComparison_exists {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
     (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})

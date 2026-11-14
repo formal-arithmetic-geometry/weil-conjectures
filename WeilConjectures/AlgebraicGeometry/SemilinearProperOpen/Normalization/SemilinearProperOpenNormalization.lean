@@ -14,7 +14,13 @@ import all WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperations
 import WeilConjectures.AlgebraicGeometry.VaryingRing.SemilinearAlphaPullback
 import WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingProperOpenPasting
 
-/-! # Normalization of the intrinsic semilinear proper/open mate -/
+/-! # Normalization of the intrinsic semilinear proper/open mate
+
+## References
+
+* Stacks Project, Tags 015F, 07A7 and 0F7B
+* Stacks Project, Tags 0F7B and 07A7
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -229,7 +235,7 @@ private theorem intrinsic_beta_inverse_mate
     (SemilinearProperOpen.jAdj.{u} C τ b)
     (TwoSquare.mk _ _ _ _ (SemilinearProperOpen.squareP.{u} C τ a b i p h).inv) M
 
-/-- Ambient SystemBetaLocalization. Source: Stacks Project, Tags 015F, 07A7 and 0F7B. -/
+/-- Ambient SystemBetaLocalization. -/
 private theorem system_beta_localized
     (C : ℕ → CommRingCat.{u + 1}) (τ : ∀ n : ℕ, C (n + 1) ⟶ C n)
     {U' U X' X : Scheme.{u}} (a : U' ⟶ U) (b : U' ⟶ X')
@@ -543,7 +549,7 @@ private theorem system_pull_cell_localized
     Functor.isoWhiskerRight_inv] at he
   convert he using 1; rfl
 
-/-- Ambient SystemClopenLocalization. Source: Stacks Project, Tags 015F, 07A7 and 0F7B. -/
+/-- Ambient SystemClopenLocalization. -/
 private theorem system_alpha_localized
     (C : ℕ → CommRingCat.{u + 1}) (τ : ∀ n : ℕ, C (n + 1) ⟶ C n)
     {U V W Z : Scheme.{u}} (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)
@@ -647,8 +653,7 @@ private theorem adj_heq {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (cLp := VaryingRing.pullColimits.{u} C τ f)
     (aRp := VaryingRing.push_additive.{u} C τ f)
 
-/-- The intrinsic proper/open mate agrees with the varying-ring mate before evaluation.
-Source: Stacks Project, Tags 0F7B and 07A7. -/
+/-- The intrinsic proper/open mate agrees with the varying-ring mate before evaluation. -/
 theorem gamma_normalization {V W S T : Scheme.{u}}
     (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
     [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]

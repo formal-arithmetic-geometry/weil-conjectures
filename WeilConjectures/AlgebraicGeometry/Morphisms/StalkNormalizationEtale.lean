@@ -21,7 +21,12 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.StalkNormalizationFibrePurity
 /-!
 # Etaleness of the finite normalization over a stalk
 
-Source: Stacks Project, Tag 0EYJ, proof of the local claim.
+## References
+
+* Stacks Project, Tag 0EYJ, proof of the local claim
+* Stacks Project, Tag 0EYJ, local claim
+* Stacks Project, local claim
+* Tags 0EYI, 0EYE, 0EY9 and 0EYB
 -/
 
 @[expose] public section
@@ -61,7 +66,7 @@ private theorem normalization_etale_restrict {P X : Scheme.{u}} (V : X.Opens)
 
 /-- Local affine-chart form of the stalk normalization claim.
 
-Source: Stacks Project, Tag 0EYJ, local claim.  The missing argument is the
+The missing argument is the
 identification of the normalization with the split extension on every affine
 chart of the stalk; once that identification is available, the `Etale`
 structure is obtained by checking its defining affine ring maps.
@@ -121,9 +126,7 @@ theorem GaloisCover.stalk_normalization_etale_local_charts {S C : Scheme.{u}} [I
   intro V hV W hW e
   exact n.etale_appLE hV hW e
 
-/-- Etaleness of the finite normalization at a generic boundary point.
-
-Source: Stacks Project, local claim; Tags 0EYI, 0EYE, 0EY9 and 0EYB. -/
+/-- Etaleness of the finite normalization at a generic boundary point. -/
 theorem GaloisCover.stalk_normalization_etale {S C : Scheme.{u}} [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]
     (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))

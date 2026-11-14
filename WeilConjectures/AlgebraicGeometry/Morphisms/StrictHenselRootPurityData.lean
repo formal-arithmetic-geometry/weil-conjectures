@@ -24,7 +24,12 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.StrictHenselizationStructural
 import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! # A normalization model ready for purity after the group-order root extension
-Source: Stacks Project, Tags 09EB, 0BRM, 0EYG and 0EYH.
+
+## References
+
+* Stacks Project, Tags 09EB, 0BRM, 0EYG and 0EYH
+* Stacks Project, Tags 09EB, 0BRM, 0EYG and 0EYH, through the construction of B' and tame
+  normalization
 -/
 
 @[expose] public section
@@ -90,9 +95,7 @@ private noncomputable def root_quotient_equiv (R : Type u) [CommRing R]
       rw [map_zero, map_zero]
 
 
-/-- A finite normalization model is etale at the generic point of the root divisor.
-Source: Stacks Project, Tags 09EB, 0BRM, 0EYG and 0EYH, through the construction
-of B' and tame normalization. -/
+/-- A finite normalization model is etale at the generic point of the root divisor. -/
 theorem GaloisCover.strict_hensel_root_purity_data
     {L U : Scheme.{u}} (i : U ⟶ L)
     (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)

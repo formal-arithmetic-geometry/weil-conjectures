@@ -71,7 +71,12 @@ import Mathlib.Algebra.Category.Ring.Limits
 import WeilConjectures.CategoryTheory.ModuleInverseImageActionOfPresentations
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModuleAdjunction
 
-/-! Ringed pro-etale localization: a geometric step of the open-closed argument. -/
+/-! Ringed pro-etale localization: a geometric step of the open-closed argument.
+
+## References
+
+* Stacks Project
+-/
 
 @[expose] public section
 
@@ -84,9 +89,7 @@ namespace AlgebraicGeometry.Scheme
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The closed inverse-image/direct-image adjunction is a reflection for arbitrary
-ring-sheaf coefficients. The adjunction is specified on the concrete functors.
-
-Source: Stacks Project. -/
+ring-sheaf coefficients. The adjunction is specified on the concrete functors. -/
 theorem proEtale_ringed_closed_counit {X Z : Scheme.{u}} (i : Z ⟶ X)
     [IsClosedImmersion i] (A : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
     (ai : proEtaleModuleInverseImage i A ⊣

@@ -14,11 +14,13 @@ set_option linter.privateModule false
 
 /-! # Inverse-limit coefficient transport and scalar chain comparison
 
-Source: Stacks Project, Tag 03EL.
-
 The sectionwise inverse image is the recorded canonical model for an isomorphism.
 The index `op n` represents level `m = n + 1` of each inverse system.
 Scalar extension uses the existing sheafified balanced tensor with the scalar first.
+
+## References
+
+* Stacks Project, Tag 03EL
 -/
 
 @[expose] public noncomputable section

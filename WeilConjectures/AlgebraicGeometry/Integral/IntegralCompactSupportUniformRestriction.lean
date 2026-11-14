@@ -47,10 +47,14 @@ import Mathlib.Algebra.Homology.DerivedCategory.Linear
 /-!
 # Integral compact support preserves the compatible uniform constructible category
 
-Source: Stacks Tags 0GL0 and 095U; Bhatt--Scholze, Lemmas 6.7.2 and 6.7.7.
-
 The three functor properties below are tested on the full compatible uniform subcategory.
 Fullness gives the restricted functor, and its triangles and shifts are inherited.
+
+## References
+
+* Stacks Tags 0GL0 and 095U
+* Bhatt--Scholze, Lemmas 6.7.2 and 6.7.7
+* Stacks 098T
 -/
 
 @[expose] public noncomputable section
@@ -63,8 +67,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 namespace AlgebraicGeometry.Scheme
 
 /-- Canonical completed-coefficient inverse image, reusing the published finite-quotient
-comparison and the constant-section-normalized presentation of the completed ring.
-Source: Stacks 098T. -/
+comparison and the constant-section-normalized presentation of the completed ring. -/
 noncomputable def cbcCompletedCoefficientIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) :
     (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj (pbcAdicCompletion Y d) ≅

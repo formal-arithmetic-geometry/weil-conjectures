@@ -14,7 +14,10 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # Quasi-coherence of exterior sheaves on affine schemes
 
-Source: Stacks Project, Section 26.7, Lemmas 26.7.1 and 26.7.2(2), Tag 01I6.
+## References
+
+* Stacks Project, Section 26.7, Lemmas 26.7.1 and 26.7.2(2), Tag 01I6
+* Stacks Project, Section 26.7, Lemmas 26.7.1, 26.7.2(2), and 26.7.4, Tag 01I6
 -/
 
 @[expose] public section
@@ -23,10 +26,7 @@ universe u
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- Exterior powers of a quasi-coherent module on an affine scheme are quasi-coherent.
-
-Source: Stacks Project, Section 26.7, Lemmas 26.7.1, 26.7.2(2), and 26.7.4, Tag 01I6.
--/
+/-- Exterior powers of a quasi-coherent module on an affine scheme are quasi-coherent. -/
 theorem isQuasicoherent_exteriorSheaf_of_isAffine {X : Scheme.{u}} [IsAffine X]
     (M : X.Modules) [M.IsQuasicoherent] (n : ℕ) :
     (exteriorPower M n).IsQuasicoherent := open CategoryTheory Opposite in by

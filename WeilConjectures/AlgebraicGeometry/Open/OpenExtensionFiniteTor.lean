@@ -26,6 +26,10 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 The cohomological interval and the Tor interval are independent. The functor on
 derived categories is the termwise descent of the recorded exact extension by zero.
+
+## References
+
+* Stacks, Tag 03DJ
 -/
 
 @[expose] public section
@@ -40,8 +44,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Termwise extension by zero at a positive finite coefficient stage, descended
 along quasi-isomorphisms using its recorded exactness. The coefficient ring is the
-recorded quotient by the chosen uniformizer, with its canonical finiteness witness.
-Source: Stacks, Tag 03DJ. -/
+recorded quotient by the chosen uniformizer, with its canonical finiteness witness. -/
 noncomputable def finiteStageDerivedExtensionByZero
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n)

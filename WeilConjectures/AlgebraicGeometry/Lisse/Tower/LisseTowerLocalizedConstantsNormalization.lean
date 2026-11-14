@@ -9,11 +9,20 @@ public import WeilConjectures.AlgebraicGeometry.Lisse.Tower.LisseTowerPulledScal
 
 /-! # Normalized transition equation for localized constant models
 
-Source: Stacks Project, Modules on Sites, Tags 03CY and 03DA; Sites, Tag 0H7J;
-Cohomology on Sites, Tag 06YY.
-
 This is the normalized-arrow part of
 `lem-weil-pbc-lisse-tower-localized-constants`.
+
+## References
+
+* Stacks Project, Modules on Sites, Tags 03CY and 03DA
+* Sites, Tag 0H7J
+* Cohomology on Sites, Tag 06YY
+* Stacks Tags 03CY and 0H7J
+* functor associativity, Stacks Categories, Section 4.2
+* Stacks Tags 03DA and 06YY
+* Stacks Tag 06YY
+* Stacks Categories, Section 4.27
+* Tags 03DA and 06YY (coefficient restriction)
 -/
 
 @[expose] public noncomputable section
@@ -27,8 +36,7 @@ attribute [local irreducible] HasDerivedCategory.standard pbcDerivedRestrict
   constantAdicQuotientRightIso constantAdicFiniteProjection
   localProEtaleNormalization normalizationConstantArrow lisseTowerAlgebraArrow
 
-/-- Constants, comparison, and the two inverse images, before finite restriction.
-Source: Stacks Tags 03CY and 0H7J. -/
+/-- Constants, comparison, and the two inverse images, before finite restriction. -/
 def lisseTowerConstantInput {X Z T S : Scheme.{u}}
     (g : Z ⟶ X) (a : T ⟶ S) (b : Z ⟶ T)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) :=
@@ -38,8 +46,7 @@ def lisseTowerConstantInput {X Z T S : Scheme.{u}}
         lisseTowerFixedRealization g d n
 
 /-- Paste the constant, site-comparison, and final scalar squares with explicit
-associators. Keeping this construction abstract avoids unfolding coefficient sheaves.
-Source: functor associativity, Stacks Categories, Section 4.2. -/
+associators. Keeping this construction abstract avoids unfolding coefficient sheaves. -/
 def lisseTowerPasteConstantScalar
     {A₀ A₁ B₀ B₁ C₀ C₁ D₀ D₁ E : Type*}
     [Category A₀] [Category A₁] [Category B₀] [Category B₁]
@@ -63,8 +70,7 @@ def lisseTowerPasteConstantScalar
         Functor.associator G₀ T (L₁ ⋙ H₁) ≪≫ Functor.isoWhiskerLeft G₀ h) ≪≫
     (Functor.associator F₀ (G₀ ⋙ L₀) H₀).symm
 
-/-- The constant coefficient square, with its specified scalar comparisons.
-Source: Stacks Tags 03DA and 06YY. -/
+/-- The constant coefficient square, with its specified scalar comparisons. -/
 def lisseTowerConstantScalarIso {X Z T S : Scheme.{u}}
     (g : Z ⟶ X) (a : T ⟶ S) (b : Z ⟶ T)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) :
@@ -93,8 +99,7 @@ def lisseTowerConstantScalarIso {X Z T S : Scheme.{u}}
     (localProEtaleComparisonCoefficients a (lisseTowerEtaleQuotient d n))
     (lisseTowerPulledScalarIso g b d n)
 
-/-- Consecutive algebraic restrictions compose to the fixed restriction.
-Source: Stacks Tag 06YY. -/
+/-- Consecutive algebraic restrictions compose to the fixed restriction. -/
 def lisseTowerAlgebraRestrictIso {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (n : ℕ) :
     normalizationModuleRestrict (lisseTowerEtaleQuotient d n) ⋙
@@ -112,8 +117,7 @@ def lisseTowerAlgebraRestrictIso {A : Type (u + 1)} [CommRing A]
         (algebraMap A (AdicCompletion d.ideal A))) ^ (n + 1)))
       (Ideal.Quotient.factor_comp_mk _).symm)).symm
 
-/-- A natural constant model, transported to completion coefficients.
-Source: Stacks Tags 03DA and 06YY. -/
+/-- A natural constant model, transported to completion coefficients. -/
 def lisseTowerConstantModelIso {X Z T S : Scheme.{u}}
     (g : Z ⟶ X) (a : T ⟶ S) (b : Z ⟶ T)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ)
@@ -124,9 +128,7 @@ def lisseTowerConstantModelIso {X Z T S : Scheme.{u}}
   Functor.isoWhiskerRight model (pbcDerivedRestrict (constantAdicFiniteProjection g d n)) ≪≫
     (constantAdicQuotientRightIso g d n).symm
 
-/-- Compatibility on represented complexes suffices for every derived semilinear arrow.
-
-Source: Stacks Categories, Section 4.27; Tags 03DA and 06YY (coefficient restriction). -/
+/-- Compatibility on represented complexes suffices for every derived semilinear arrow. -/
 theorem lisseTower_localized_constants_normalization
     {X Z T S : Scheme.{u}} (g : Z ⟶ X) (a : T ⟶ S) (b : Z ⟶ T)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)

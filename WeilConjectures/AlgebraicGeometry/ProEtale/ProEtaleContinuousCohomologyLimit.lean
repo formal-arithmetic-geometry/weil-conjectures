@@ -30,12 +30,14 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleProductsDerived
 /-!
 # Derived sections of epimorphic inverse limits on the pro-etale site
 
-Source: Bhatt--Scholze, Propositions 3.1.9 and 3.1.10.
-
 Abelian sheaves are represented by modules over the constant integer ring sheaf.
 The abbreviations below specialize the recorded constant-sheaf, module-sheaf and
 K-injective derived-sections constructions. No coefficient action is supplied as
 an additional hypothesis: the integer action on an abelian sheaf is unique.
+
+## References
+
+* Bhatt--Scholze, Propositions 3.1.9 and 3.1.10
 -/
 
 @[expose] public section

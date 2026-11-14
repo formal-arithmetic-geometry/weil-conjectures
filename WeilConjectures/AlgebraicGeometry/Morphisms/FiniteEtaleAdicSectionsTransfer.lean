@@ -13,7 +13,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteEtaleAdicSectionsKernel
 /-!
 # Transfer of adic section comparison to finite étale covers
 
-Source: Stacks Project, Tag 0EKP, implication (1) to (3).
+## References
+
+* Stacks Project, Tag 0EKP, implication (1) to (3)
+* Stacks Project, Tag 0EKP, implication (1) to (3), and finite affine base change for the direct
+  image of the structure sheaf
 -/
 
 @[expose] public section
@@ -48,10 +52,7 @@ end AlgebraicGeometry.Scheme.FiniteEtale.Adic
 namespace AlgebraicGeometry.Scheme
 
 /-- Structure-sheaf comparison on an open of a Noetherian affine scheme implies
-section comparison for every finite étale cover of that open.
-
-Source: Stacks Project, Tag 0EKP, implication (1) to (3), and finite affine
-base change for the direct image of the structure sheaf. -/
+section comparison for every finite étale cover of that open. -/
 theorem finiteEtale_adic_sections_comparison_of_structureSheaf
     {R S : Type u} [CommRing R] [CommRing S] [IsNoetherianRing R]
     (f : R →+* S) (V : (Spec (.of R)).Opens)

@@ -14,7 +14,10 @@ import Mathlib.CategoryTheory.Functor.EpiMono
 
 /-! # LineQuotientPullbackCharts
 
-Source: Stacks Project, Constructions, Tags 01OA and 01O4.
+## References
+
+* Stacks Project, Constructions, Tags 01OA and 01O4
+* Stacks Project, Constructions, Tags 01OA and 01O4, functoriality
 -/
 
 @[expose] public section
@@ -371,8 +374,7 @@ private theorem pullback_map_eq {S T T' : Scheme.{u}} (h : T ⟶ S)
     simpa only [← Category.assoc, Scheme.Hom.isoOpensRange_hom_ι] using hmaps
 
 /-- The coefficientwise pullback of a fraction-chart morphism satisfies the fraction
-charts of the pulled quotient and preserves all homogeneous and generator coefficients.
-Source: Stacks Project, Constructions, Tags 01OA and 01O4, functoriality. -/
+charts of the pulled quotient and preserves all homogeneous and generator coefficients. -/
 theorem lineQuotient_pullback_charts {S T T' : Scheme.{u}} (h : T ⟶ S)
     (u : T' ⟶ T) (E : S.Modules) [E.IsQuasicoherent]
     (L : T.Modules) [L.IsInvertible] (q : (tensorPullback h).obj E ⟶ L) [Epi q]

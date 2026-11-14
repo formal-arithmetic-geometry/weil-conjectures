@@ -12,7 +12,11 @@ import Mathlib.AlgebraicGeometry.Morphisms.Flat
 /-!
 # Completed localization and affine pullback section identifications
 
-Source: Stacks Project, Tags 0BLH and 05EL.
+## References
+
+* Stacks Project, Tags 0BLH and 05EL
+* Stacks Project, Tag 0BLH, first two proof paragraphs
+* Tag 05EL, item (1)
 -/
 
 @[expose] public section
@@ -254,9 +258,7 @@ private theorem exists_chart_completed_localization
   · intro z m
     exact d.map_smul z m
 
-/-- Completed pullback sections identify scalar extension with localized completed sections.
-Source: Stacks Project, Tag 0BLH, first two proof paragraphs; Tag 05EL, item (1).
--/
+/-- Completed pullback sections identify scalar extension with localized completed sections. -/
 theorem exists_chart_completed_localizations
     {A : Type u} [CommRing A] [IsLocalRing A]
     {U : (Spec (.of A)).Opens} {Y : Scheme.{u}} {q : Y ⟶ U.toScheme}

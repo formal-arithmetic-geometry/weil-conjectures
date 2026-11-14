@@ -18,7 +18,11 @@ import WeilConjectures.AlgebraicGeometry.Geometric.GeometricRegularitySmoothFiel
 /-!
 # Geometrically normal schemes of dimension at most one
 
-Source: Stacks Project, Tags 0BX2, 038X, 00P3, 033M, and the proof of Tag 0GK5.
+## References
+
+* Stacks Project, Tags 0BX2, 038X, 00P3, 033M, and the proof of Tag 0GK5
+* Stacks Project, Tags 0BX2, 038X, 00P3, 033M
+* proof of Tag 0GK5
 -/
 
 @[expose] public section
@@ -31,7 +35,6 @@ namespace AlgebraicGeometry
 
 /-- A geometrically normal finite type scheme of dimension at most one over a field is
 smooth and geometrically reduced; any connected nonempty field base change is irreducible.
-Source: Stacks Project, Tags 0BX2, 038X, 00P3, 033M; proof of Tag 0GK5.
 -/
 theorem smooth_and_geometricallyReduced_of_geonormal_dim_le_one
     (k : Type u) [Field k] (Z : Scheme.{u}) [Z.Over (Spec (CommRingCat.of k))]

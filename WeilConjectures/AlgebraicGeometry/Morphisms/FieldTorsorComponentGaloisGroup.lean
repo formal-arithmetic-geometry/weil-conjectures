@@ -15,7 +15,10 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Limits
 
 /-! # The Galois group of one field component of a finite torsor
 
-Source: Stacks Project, Tags 03SF and 03QR. -/
+## References
+
+* Stacks Project, Tags 03SF and 03QR
+-/
 
 @[expose] public section
 
@@ -105,9 +108,7 @@ private theorem component_embedding_factors
   exact congrArg (fun φ ↦ φ.hom t) (Spec.map_injective he)
 
 /-- A field component of a finite group torsor is Galois, with automorphism group isomorphic
- to a subgroup of the torsor group.
-
-Source: Stacks Project, Tags 03SF and 03QR. -/
+ to a subgroup of the torsor group. -/
 theorem field_torsor_component_galois_group
     (K : Type u) [Field K]
     (G : Type (u + 1)) [Group G] [Finite G]

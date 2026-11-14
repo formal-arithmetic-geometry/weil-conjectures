@@ -12,7 +12,9 @@ public import Mathlib.RingTheory.Discriminant
 /-!
 # An explicit family of local discriminant ideals
 
-Source: Stacks Project, Tag 0BVH, construction before Lemma 49.3.1.
+## References
+
+* Stacks Project, Tag 0BVH, construction before Lemma 49.3.1
 -/
 
 @[expose] public section
@@ -24,8 +26,7 @@ namespace AlgebraicGeometry.Scheme
 /-- Sections belonging to every discriminant ideal on every free affine subchart.
 
 This is an intersection of inverse-image ideals, with no chosen local bases. The
-construction makes sense before its restriction and local-value properties are proved.
-Source: Stacks Project, Tag 0BVH, construction before Lemma 49.3.1 -/
+construction makes sense before its restriction and local-value properties are proved. -/
 noncomputable def traceDiscriminantSectionIdeal {X Y : Scheme.{u}} (f : X ⟶ Y)
     (U : Y.affineOpens) : Ideal Γ(Y, U.1) :=
   ⨅ (V : Y.affineOpens) (h : V.1 ≤ U.1),

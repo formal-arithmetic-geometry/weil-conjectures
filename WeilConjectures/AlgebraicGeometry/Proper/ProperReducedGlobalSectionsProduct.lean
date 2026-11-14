@@ -17,7 +17,9 @@ import WeilConjectures.Mathlib.Topology.NoetherianSpace
 /-!
 # Global functions on a proper reduced scheme over an algebraically closed field
 
-Source: Stacks Project, Varieties, Tag 0BUG, clauses (1)--(3).
+## References
+
+* Stacks Project, Varieties, Tag 0BUG, clauses (1)--(3)
 -/
 
 @[expose] public section
@@ -29,7 +31,6 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- Global functions are the product of the scalars indexed by connected components.
-Source: Stacks Project, Varieties, Tag 0BUG, clauses (1)--(3).
 The ring equivalence commutes with the actual scalar structure map, making it a
 `k`-algebra equivalence. Its germ formula specifies the canonical constant-on-components map. -/
 theorem proper_reduced_globalSections_product

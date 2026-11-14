@@ -49,7 +49,12 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 import Mathlib.CategoryTheory.Adjunction.Triple
 import WeilConjectures.AlgebraicGeometry.ProEtale.Module.ProEtaleModuleSpecializationUnit
 
-/-! Ringed pro-etale localization: a geometric step of the open-closed argument. -/
+/-! Ringed pro-etale localization: a geometric step of the open-closed argument.
+
+## References
+
+* Stacks Project, Tag 09AH, 098H, 09AC and 09AG
+-/
 
 @[expose] public section
 
@@ -451,9 +456,7 @@ set_option backward.isDefEq.respectTransparency.types false
 
 /-- The actual counit and unit form the open-closed short exact sequence with
 arbitrary module coefficients. This is the local geometric step, without the
-formal exactness consequences or the filtered-colimit assertion.
-
-Source: Stacks Project, Tag 09AH, 098H, 09AC and 09AG. -/
+formal exactness consequences or the filtered-colimit assertion. -/
 theorem proEtale_ringed_localization_sequence {X Z : Scheme.{u}} (i : Z ⟶ X)
     [IsClosedImmersion i] (U : X.ProEt) [IsOpenImmersion U.hom] [QuasiCompact U.hom]
     (hU : Set.range U.hom = (Set.range i)ᶜ)

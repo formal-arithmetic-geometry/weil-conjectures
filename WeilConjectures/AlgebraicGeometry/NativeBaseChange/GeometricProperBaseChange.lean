@@ -55,8 +55,7 @@ variable {Z' Z T' T : Scheme.{u}}
   [p.IsOver (Spec (CommRingCat.of k₀))] [g.IsOver (Spec (CommRingCat.of k₀))]
 
 omit [Finite k₀] in
-/-- The commutative geometric square, without imposing Cartesian hypotheses.
-Source: functoriality of geometricFiberMap. -/
+/-- The commutative geometric square, without imposing Cartesian hypotheses. -/
 theorem geometricSquare (sq : CommSq v p' p g) :
     CommSq (geometricMap k₀ v) (geometricMap k₀ p')
       (geometricMap k₀ p) (geometricMap k₀ g) := by

@@ -20,12 +20,15 @@ import WeilConjectures.AlgebraicGeometry.Structure.StructureDerivedImageCohomolo
 
 /-! Geometric compatibility for fixed residue models.
 
-Source: Stacks Project, Tags 01IB, 064K, 06YJ and 0B91
-
 Proof: Normalize the derived coefficient arrows by proper-flat base change and the
 common fibre trivialization. Apply the affine-base Leray comparison to the resulting
 structure-module arrows. Compose these equivalences with the supplied affine residue
 comparisons.
+
+## References
+
+* Stacks Project, Tags 01IB, 064K, 06YJ and 0B91
+* Stacks Project, Tags 0B91, 0BF2 and 01XK
 -/
 
 @[expose] public section
@@ -110,8 +113,7 @@ private theorem transport_square_family_of_exists
     e (ei j i) (g i) (hg j i)
 
 /-- Degree-one derived fibre cohomology of the coefficient direct images is identified with
-structure-sheaf cohomology of the fibres, compatibly with the coefficient arrows.
-Source: Stacks Project, Tags 0B91, 0BF2 and 01XK. -/
+structure-sheaf cohomology of the fibres, compatibly with the coefficient arrows. -/
 theorem picard_derived_fibre_residue_geometric_compatibility
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

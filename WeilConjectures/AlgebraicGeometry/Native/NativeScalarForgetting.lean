@@ -18,7 +18,9 @@ import Mathlib.CategoryTheory.Monoidal.Internal.Module
 
 /-! # Forgetting ambient scalars in native module sheaves
 
-Source: Stacks Project, Tags 03CW, 03CY and 03EK.
+## References
+
+* Stacks Project, Tags 03CW, 03CY and 03EK
 -/
 
 @[expose] public section
@@ -426,7 +428,6 @@ end CategoryTheory.ScalarForgetting
 namespace AlgebraicGeometry.ProEtale
 
 /-- Forgetting the ambient vector-space structure of a native module loses no data.
-Source: Stacks Project, Tags 03CW, 03CY and 03EK.
 
 An internal module over the underlying abelian ring sheaf acquires its scalar action
 by restricting the ring action to constant scalar sections. Its action is bilinear for

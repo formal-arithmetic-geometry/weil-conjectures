@@ -391,8 +391,7 @@ theorem scalar_unit_pull_naturality
       cY.iso.hom (scalarUnitPullIso Λ Y).hom (scalarUnitPullIso Λ' Y).hom cP.iso.hom :=
   scalar_unit_pull_naturality_aux a Y cY cP
 
-/-- The unit square in native functor notation.
-Source: diagonal coefficient changes (2)--(3). -/
+/-- The unit square in native functor notation. -/
 theorem scalar_unit_pull_naturality_explicit
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']

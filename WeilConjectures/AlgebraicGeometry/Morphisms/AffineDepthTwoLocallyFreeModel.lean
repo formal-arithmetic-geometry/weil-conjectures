@@ -20,8 +20,11 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # A coherent depth-two model of a finite locally free module on an affine open
 
-Source: Stacks Project, Tags 0G41(2), 0EY6 proof of (1), and the kernel
-calculation for double duals underlying Tags 0EBI and 0EBJ.
+## References
+
+* Stacks Project, Tags 0G41(2), 0EY6 proof of (1), and the kernel calculation for double duals
+  underlying Tags 0EBI and 0EBJ
+* Stacks Project, Tag 0G41(2), Tag 0EY6 proof of (1), steps 2--3
 -/
 
 @[expose] public section
@@ -30,9 +33,7 @@ universe u
 open CategoryTheory Opposite TopCat.Presheaf
 namespace AlgebraicGeometry.Scheme
 
-/-- Construct a coherent depth-two module before making any Hartogs comparison.
-
-Source: Stacks Project, Tag 0G41(2), Tag 0EY6 proof of (1), steps 2--3 -/
+/-- Construct a coherent depth-two module before making any Hartogs comparison. -/
 theorem exists_affine_depth_two_locally_free_model
     (A : CommRingCat.{u}) [IsNoetherianRing A] (W : (Spec A).Opens)
     (hboundary : ∀ x : Spec A, x ∉ W →

@@ -35,7 +35,10 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 /-!
 # Tensor comparison for the intrinsic constant-ring realization
 
-Source: Stacks Project, Modules on Sites, Tags 03EK and 03EL, and Tag 00YV.
+## References
+
+* Stacks Project, Modules on Sites, Tags 03EK and 03EL, and Tag 00YV
+* Stacks Project, Tags 03EK, 03EL and 00YV
 -/
 
 @[expose] public section
@@ -103,8 +106,7 @@ attribute [local irreducible] SheafOfModules.monoidalCategory
   PresheafOfModules.sheafification
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The canonical realization over the constant ring respects right tensoring.
-Source: Stacks Project, Tags 03EK, 03EL and 00YV. -/
+/-- The canonical realization over the constant ring respects right tensoring. -/
 theorem proEtale_intrinsic_tensorRight_comparison
     (T : Scheme.{u}) (A : Type u) [CommRing A] [Finite A]
     (N : Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1, u} A))) :

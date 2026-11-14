@@ -59,10 +59,13 @@ import WeilConjectures.Algebra.Homology.QuasiIsoSaturatedTriangulated
 /-!
 # Existence of normalized finite completed-ring comparisons
 
-Source: Stacks 099N, 03DI and 06XN.
-
 The source and target comparisons are specified by their counit equations on
 K-flat representatives. Uniqueness is proved separately in the parent module.
+
+## References
+
+* Stacks 099N, 03DI and 06XN
+* Stacks 099N, 03DI, 06XN
 -/
 
 @[expose] public noncomputable section
@@ -643,8 +646,7 @@ attribute [local irreducible] finiteReductionCounitNT reductionCounitNT pullback
   cbcSourceModelMap cbcTargetModelMap
   cbcFiniteSourceModelMap cbcFiniteTargetModelMap cbcFiniteReductionModelMap cbcReductionModelMap
 
-/-- Existence of the normalized finite source and target comparisons.
-Source: Stacks 099N, 03DI, 06XN. -/
+/-- Existence of the normalized finite source and target comparisons. -/
 theorem cbcNormalizedFiniteComparison_exists (n : ℕ) :
     (∃ e : completedReductionTower U d ⋙ cbcStrictOpen d j sq.isOpenImmersion ⋙
           completedTowerPullback g d ⋙ pbcTowerEvaluation X' (pbcAdicCompletion X' d) n ≅

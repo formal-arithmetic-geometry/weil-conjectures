@@ -23,6 +23,10 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleSiteComparisonFiniteLe
 
 The map is the transport of the specified etale map through the canonical
 extension-by-zero mate and direct-image comparison. No unspecified isomorphism is chosen.
+
+## References
+
+* Stacks Tag 09AF
 -/
 
 @[expose] public noncomputable section
@@ -35,8 +39,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- Extend the canonical sheaf extension-by-zero mate termwise to bounded below complexes.
-Source: Stacks Tag 09AF. -/
+/-- Extend the canonical sheaf extension-by-zero mate termwise to bounded below complexes. -/
 def properOpenSiteExtensionIso (Λ : Type (u + 1)) [CommRing Λ]
     {X T : Scheme.{u}} (j : X ⟶ T) [IsOpenImmersion j] :
     (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j).mapDerivedCategoryPlus ⋙

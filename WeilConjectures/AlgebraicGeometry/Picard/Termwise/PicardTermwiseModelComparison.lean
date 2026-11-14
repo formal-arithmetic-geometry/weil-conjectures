@@ -14,7 +14,10 @@ import WeilConjectures.AlgebraicGeometry.Picard.Termwise.PicardTermwiseTargetCoh
 
 /-! # Termwise model comparisons before imposing connectivity
 
-Source: Stacks Project, Tags 06YJ and 0D5S.
+## References
+
+* Stacks Project, Tags 06YJ and 0D5S
+* open restriction via Tag 08DW
 -/
 
 @[expose] public section
@@ -59,8 +62,7 @@ private theorem picard_comparison_transport
 restriction of a localized chain map is represented by a chain map whose zeroth
 component is ordinary tensor restriction. No connectivity is assumed: this theorem
 computes objects and the restriction of already given chain maps, not all derived
-morphisms. The degree-zero source identification is included explicitly.
-Source: Stacks Project, Tags 06YJ and 0D5S; open restriction via Tag 08DW. -/
+morphisms. The degree-zero source identification is included explicitly. -/
 theorem picard_termwise_model_comparison
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

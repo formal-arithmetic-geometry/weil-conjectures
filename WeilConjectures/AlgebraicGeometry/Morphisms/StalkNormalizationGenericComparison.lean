@@ -21,7 +21,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.StalkGenericOpenPullback
 /-!
 # Comparison of stalk normalization with normalization of the local generic torsor
 
-Source: Stacks Project, Tags 0EYJ, 0307 and 035I.
+## References
+
+* Stacks Project, Tags 0EYJ, 0307 and 035I
+* Stacks Project, Tag 0EYJ, local reduction
+* Tag 0307, localization of integral closure
 -/
 
 @[expose] public section
@@ -53,9 +57,7 @@ private theorem normalization_iso_of_iso_over {X Y T : Scheme.{u}}
   exact ⟨⟨a, b, hab, hba⟩, by simp [a]⟩
 
 /-- The concrete stalk pullback is the normalization of a generic Galois cover of the
-smooth local total space, with the comparison commuting with the maps to that space.
-
-Source: Stacks Project, Tag 0EYJ, local reduction; Tag 0307, localization of integral closure. -/
+smooth local total space, with the comparison commuting with the maps to that space. -/
 theorem GaloisCover.stalk_normalization_generic_comparison {S C : Scheme.{u}}
     [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]

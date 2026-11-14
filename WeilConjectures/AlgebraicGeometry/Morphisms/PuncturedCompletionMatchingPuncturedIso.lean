@@ -11,7 +11,10 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionMatchingAf
 
 /-! # The punctured comparison for matching sections
 
-Source: Stacks Project, Tags 0BLH, 05ER and 05EU.
+## References
+
+* Stacks Project, Tags 0BLH, 05ER and 05EU
+* Stacks Project, Tag 0BLH, via Tags 05ER and 05EU
 -/
 
 @[expose] public section
@@ -20,9 +23,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.CompletionGluingData
 
-/-- The punctured comparison for matching sections.
-
-Source: Stacks Project, Tag 0BLH, via Tags 05ER and 05EU. -/
+/-- The punctured comparison for matching sections. -/
 theorem puncturedMap_isIso
     {A : Type u} [CommRing A] [IsNoetherianRing A] [IsLocalRing A]
     {U : (Spec (.of A)).Opens}

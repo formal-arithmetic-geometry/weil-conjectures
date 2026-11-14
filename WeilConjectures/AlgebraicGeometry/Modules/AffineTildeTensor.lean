@@ -14,7 +14,10 @@ import WeilConjectures.AlgebraicGeometry.Modules.AffineTildeTensorStalk
 /-!
 # Tensor products of tilde modules on an affine scheme
 
-Source: Stacks Project, Schemes, Tags 01I7 and 01I8(1), second proof.
+## References
+
+* Stacks Project, Schemes, Tags 01I7 and 01I8(1), second proof
+* Stacks Project, Schemes, Tags 01I7 and 01I8(1)
 -/
 
 @[expose] public section
@@ -28,7 +31,7 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The canonical global tensor map is linear and bijective, and extends uniquely to an
-isomorphism of sheaves. Source: Stacks Project, Schemes, Tags 01I7 and 01I8(1). -/
+isomorphism of sheaves. -/
 theorem affine_tilde_tensor (R : CommRingCat.{u}) (M N : ModuleCat.{u} R) :
     ∃ β : M ⊗[R] N →ₗ[R] Γ(tilde M ⊗ tilde N, ⊤),
       (∀ (m : M) (n : N), β (m ⊗ₜ[R] n) =

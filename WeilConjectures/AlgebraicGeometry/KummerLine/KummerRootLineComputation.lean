@@ -21,6 +21,10 @@ import Mathlib.RingTheory.KrullDimension.Polynomial
 
 /-!
 # Roots-of-unity computation on the two lines
+
+## References
+
+* Stacks, Tag 03PK
 -/
 
 @[expose] public noncomputable section
@@ -33,8 +37,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Roots-of-unity cohomology is killed by `m`, hence has its unique `ZMod m` action.
-Source: Stacks, Tag 03PK. -/
+/-- Roots-of-unity cohomology is killed by `m`, hence has its unique `ZMod m` action. -/
 theorem kummerRootCohomology_annihilated (X : Scheme.{u}) (m q : ℕ)
     (x : Sheaf.H (X.rootsOfUnitySheaf m) q) : m • x = 0 := by
   have h : m • 𝟙 (X.rootsOfUnitySheaf m) = 0 := by
@@ -47,8 +50,7 @@ theorem kummerRootCohomology_annihilated (X : Scheme.{u}) (m q : ℕ)
     Abelian.Ext.mk₀_zero, Abelian.Ext.comp_zero] at hx
   exact hx
 
-/-- The unique residue-ring action on roots-of-unity cohomology.
-Source: Stacks, Tag 03PK. -/
+/-- The unique residue-ring action on roots-of-unity cohomology. -/
 instance kummerRootCohomologyModule (X : Scheme.{u}) (m q : ℕ) :
     Module (ULift.{u + 1} (ZMod m)) (Sheaf.H (X.rootsOfUnitySheaf m) q) :=
   letI := AddCommGroup.zmodModule (kummerRootCohomology_annihilated X m q)

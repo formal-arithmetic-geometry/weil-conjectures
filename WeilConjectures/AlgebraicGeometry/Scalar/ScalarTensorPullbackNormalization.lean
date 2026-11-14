@@ -15,7 +15,10 @@ import all WeilConjectures.AlgebraicGeometry.Scalar.ScalarPullbackRepresentative
 /-!
 # Tensor normalization of a scalar/pullback comparison
 
-Source: Stacks Project, Tags 07A4, 0G7E and 07A7; Tag 0GL6.
+## References
+
+* Stacks Project, Tags 07A4, 0G7E and 07A7
+* Tag 0GL6
 -/
 
 @[expose] public noncomputable section
@@ -43,9 +46,7 @@ attribute [local irreducible] scalarTensorIso scalarGeometricRepresentative
 
 /-- Forgetting the coefficients in a representative-normalized scalar/pullback
 comparison gives the specified monoidal pullback comparison, with the coefficient
-object identified by exact inverse image and its monoidal unit.
-
-Source: Stacks Project, Tags 07A4, 0G7E and 07A7; Tag 0GL6. -/
+object identified by exact inverse image and its monoidal unit. -/
 theorem scalarTensorPullback_normalization_kFlat
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {Z W : Scheme.{u}} (f : Z ⟶ W)

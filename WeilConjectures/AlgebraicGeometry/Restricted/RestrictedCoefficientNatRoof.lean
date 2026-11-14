@@ -15,7 +15,10 @@ import WeilConjectures.AlgebraicGeometry.ModuleOpenRestrictionInjectives
 
 /-! # Natural indexed restricted coefficient roof
 
-Source: Stacks Project, Cohomology, Tags 01E4 and 01FB.
+## References
+
+* Stacks Project, Cohomology, Tags 01E4 and 01FB
+* Stacks Project, Tags 01E4 and 01FB
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -131,8 +134,7 @@ private theorem coefficientData_roof_formula {X Y : Scheme.{u}} {v : X ⟶ Y}
       (H.map (D.a.hom ≫ Γ.map D.lambda)) (hmu := D.invertible q))
 
 -- Compare the explicit scheme-restriction and section-functor presentations.
-/-- Restricting an augmented injective roof computes the classical coefficient map.
-Source: Stacks Project, Tags 01E4 and 01FB. -/
+/-- Restricting an augmented injective roof computes the classical coefficient map. -/
 theorem restrictedCoefficient_natRoof {X Z : Scheme.{u}} (v : Z ⟶ X)
     (F : X.Modules) (G : Z.Modules) (φ : F ⟶ (pushforward v).obj G)
     (I : InjectiveResolution F) (J : InjectiveResolution G)

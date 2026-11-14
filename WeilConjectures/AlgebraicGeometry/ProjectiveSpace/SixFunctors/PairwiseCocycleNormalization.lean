@@ -11,7 +11,10 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineDifferentials
 
 /-! # Cocycle comparison for pairwise Laurent expansions
 
-Source: Stacks Project, Tag 0BXJ.
+## References
+
+* Stacks Project, Tag 0BXJ
+* Stacks Project, Tag 0BXJ, the triple-overlap calculation
 -/
 
 @[expose] public section
@@ -175,8 +178,6 @@ private lemma restrict_constUnit (k : Type u) [Field k] (r : ℕ)
 set_option linter.unusedVariables false in
 /-- The cocycle equation makes the exponents in pairwise Laurent expansions
 constant and the scalar coefficients a chart coboundary.
-
-Source: Stacks Project, Tag 0BXJ, the triple-overlap calculation.
 -/
 theorem exists_standardUnitCocycle_normalization_of_pairwise_laurent
     (k : Type u) [Field k] (r : ℕ) (hr : 3 ≤ r)

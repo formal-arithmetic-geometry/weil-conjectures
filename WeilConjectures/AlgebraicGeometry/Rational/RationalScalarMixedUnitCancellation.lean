@@ -49,13 +49,24 @@ import WeilConjectures.AlgebraicGeometry.Constructible.ConstructibleRationalHomC
 
 /-! # Cancellation in the specified mixed rational realization square
 
-Source: Bhatt--Scholze, Remark 6.8.15, pp. 61--62; Stacks Tags 0G7E, 0D6D and 07A4.
-
 Theta and D below are rationalBalancedTheta and extension along
 rationalBalancedCoefficient. The completed comparison is rationalScalarStrictBeta.
 The pullback alpha is the supplied, generator-normalized dependency record's alpha.
 The ordinary zeta is normalized on tensor generators and derived computation counits.
 No declarations from the downstream parent scalar-coherence module are imported.
+
+## References
+
+* Bhatt--Scholze, Remark 6.8.15, pp. 61--62
+* Stacks Tags 0G7E, 0D6D and 07A4
+* BS 6.8.15
+* Stacks 0A0E, 099N
+* Stacks 0D6D, 0A0E and 0A0G
+* BS Remark 6.8.15, pp. 61--62
+* Stacks 0G7E, 0D6D, 07A4
+* Stacks 0D6D, 099N
+* BS 6.8.15, pp. 61--62
+* Stacks 0G7E, 0D6D and 07A4
 -/
 
 @[expose] public noncomputable section
@@ -83,8 +94,7 @@ variable {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
   [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))]
   [Fact (∀ y : Y, IsUnit (l : Y.presheaf.stalk y))]
 
-/-- The specified strict beta, restricted and rationalized, on every unchanged raw object.
-Source: BS 6.8.15; Stacks 0A0E, 099N. -/
+/-- The specified strict beta, restricted and rationalized, on every unchanged raw object. -/
 def rationalMixedBetaComponent (g : X ⟶ Y)
     (sXE : RationalModuleRealization l E X) (sYE : RationalModuleRealization l E Y)
     (sXF : RationalModuleRealization l F X) (sYF : RationalModuleRealization l F Y)
@@ -107,8 +117,7 @@ def rationalMixedBetaComponent (g : X ⟶ Y)
 
 /-- The mixed square for the specific alpha and the specified scalar/pullback comparison.
 The ordinary comparison is fixed on tensor units and on derived computation counits;
-its section formula determines the balanced map, including all coefficient factors.
-Source: BS 6.8.15; Stacks 0D6D, 0A0E and 0A0G. -/
+its section formula determines the balanced map, including all coefficient factors. -/
 structure RationalScalarMixedUnitCancellation (g : X ⟶ Y)
     (sXE : RationalModuleRealization l E X) (sYE : RationalModuleRealization l E Y)
     (sXF : RationalModuleRealization l F X) (sYF : RationalModuleRealization l F Y)
@@ -194,8 +203,7 @@ variable (g : X ⟶ Y)
   (aE : RationalRealizationPullbackComparison l E g sXE sYE)
   (aF : RationalRealizationPullbackComparison l F g sXF sYF)
 
-/-- The mixed equation uses exactly the owning dependencies' theta, D, strict beta and alpha.
-Source: BS Remark 6.8.15, pp. 61--62; Stacks 0G7E, 0D6D, 07A4. -/
+/-- The mixed equation uses exactly the owning dependencies' theta, D, strict beta and alpha. -/
 theorem rationalScalarMixedUnitCancellation :
     Nonempty (RationalScalarMixedUnitCancellation l E F i g sXE sYE sXF sYF aE aF) := by
   sorry
@@ -210,8 +218,7 @@ variable (h : Z ⟶ X) (sZE : RationalModuleRealization l E Z)
 
 /-- The ambient compositor extracted from the full normalized dependency theorem.
 Its tensor-generator, inverse-image-pasting, computation-counit and strict-unit equations
-fix its maps; this does not select from an unnormalized endpoint-isomorphism existence.
-Source: BS 6.8.15; Stacks 0D6D, 099N. -/
+fix its maps; this does not select from an unnormalized endpoint-isomorphism existence. -/
 def rationalMixedGeometricCompositor :
     rationalPullDerived l E g aE.rationalCoefficient ⋙
       rationalPullDerived l E h ahE.rationalCoefficient ≅
@@ -241,8 +248,7 @@ variable (h : Z ⟶ X) (sZE : RationalModuleRealization l E Z)
   (mh : RationalScalarMixedUnitCancellation l E F i h sZE sXE sZF sXF ahE ahF)
   (mc : RationalScalarMixedUnitCancellation l E F i (h ≫ g) sZE sYE sZF sYF acE acF)
 
-/-- The same zeta comparisons commute with geometric composition.
-Source: BS 6.8.15, pp. 61--62; Stacks 0G7E, 0D6D and 07A4. -/
+/-- The same zeta comparisons commute with geometric composition. -/
 theorem rationalMixedGeometricComposition
     (K : DerivedCategory (pbcModules Y (rationalCoefficientSheaf l Y E))) :
     mh.zeta.hom.app ((rationalPullDerived l E g aE.rationalCoefficient).obj K) ≫
@@ -266,8 +272,7 @@ variable (G : Type u) [Field G] [Algebra ℚ_[l] G] [FiniteDimensional ℚ_[l] G
   (mEG : RationalScalarMixedUnitCancellation l E G (j.comp i) g
     sXE sYE sXG sYG aE aG)
 
-/-- The same zeta comparisons respect the specified coefficient associators.
-Source: BS 6.8.15, pp. 61--62; Stacks 0G7E, 0D6D and 07A4. -/
+/-- The same zeta comparisons respect the specified coefficient associators. -/
 theorem rationalMixedCoefficientTower
     (K : DerivedCategory (pbcModules Y (rationalCoefficientSheaf l Y E))) :
     (pbcDerivedExtend (rationalBalancedCoefficient l F G j X)).map (mEF.zeta.hom.app K) ≫

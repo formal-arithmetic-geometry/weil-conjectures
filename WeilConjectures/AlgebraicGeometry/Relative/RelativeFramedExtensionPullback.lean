@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Sites.GmPicardPullback
 
 /-! # Arbitrary inverse image of a relative framed torsor extension
 
-Source: Stacks 03AJ and 0A45; naturality of short-exact extension classes.
+## References
+
+* Stacks 03AJ and 0A45
 -/
 
 @[expose] public noncomputable section
@@ -154,8 +156,7 @@ attribute [local irreducible] Scheme.Modules.framePullbackMap
 set_option maxRecDepth 2000 in
 /-- An equivariant map of framed torsors gives the naturality square for their
 relative integral extension classes under any scheme map. Only the exchange map
-is required, not its inverse.
-Source: Stacks 03AJ and 0A45. -/
+is required, not its inverse. -/
 theorem relative_extension_pullback_square {T Z T' Z' : Scheme.{u}}
     (i : Z ⟶ T) [IsClosedImmersion i] (i' : Z' ⟶ T') [IsClosedImmersion i']
     (h : T' ⟶ T) (w : Z' ⟶ Z) (sq : IsPullback w i' i h)

@@ -10,7 +10,9 @@ import WeilConjectures.AlgebraicGeometry.PicardAdjunctionSectionEvaluation
 
 /-! # Evaluation of the canonical unit morphism
 
-Source: Stacks Project, Tag 08HY; adjunction and naturality on opens.
+## References
+
+* Stacks Project, Tag 08HY
 -/
 
 @[expose] public section
@@ -25,8 +27,7 @@ namespace AlgebraicGeometry.Scheme
 variable [∀ Y : Scheme.{v},
   HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]
 
-/-- Evaluation of the unit morphism gives exactly the previously fixed section map.
-Source: Stacks Project, Tag 08HY; adjunction and naturality on opens. -/
+/-- Evaluation of the unit morphism gives exactly the previously fixed section map. -/
 theorem picardDirectImageUnitMorphism_evaluation
     {X S : Scheme.{v}} (f : X ⟶ S) (L : X.Modules) (W : Scheme.{v}) (k : W ⟶ S)
     {T : Scheme.{v}} (t : T ⟶ W)

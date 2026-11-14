@@ -159,12 +159,21 @@ import WeilConjectures.CategoryTheory.ModuleObjects.SixFunctors.ExtensionIsoQuot
 
 /-! # Normalized constant-to-integral coefficient pullback
 
-Source: first paragraph and Comparison with the Stacks Project; Stacks Tags 093M and 0G7E.
-
 Constant coefficients are represented by their canonical pullback from the point;
 constantSchemeIso identifies them with ordinary constant sheaves. All complexes are
 integer-indexed and unrestricted. The quotient clause is the pushout description
 R tensor_C (C/pi^n) = R/pi^n, including the prescribed quotient projection.
+
+## References
+
+* first paragraph and Comparison with the Stacks Project
+* Stacks Tags 093M and 0G7E
+* Stacks 093J
+* Stacks 03CS
+* Stacks 06YN
+* Stacks 06YN and 03ER
+* Stacks 093M
+* Stacks 093M and 0G7E
 -/
 
 @[expose] public noncomputable section
@@ -181,8 +190,7 @@ namespace AlgebraicGeometry.ProEtale.IntegralCoefficientSquare
 
 variable (A : Type u) [CommRing A] [TopologicalSpace A] [IsTopologicalRing A]
 
-/-- The discrete constant ring on the point, with its existing monoidal ring structure.
-Source: Stacks 093J. -/
+/-- The discrete constant ring on the point, with its existing monoidal ring structure. -/
 abbrev constantPoint :=
   (constantSheaf (coherentTopology Profinite.{u}) Ab.{u + 1}).obj
     (AddCommGrpCat.of (ULift.{u + 1} A))
@@ -195,14 +203,12 @@ abbrev Modules (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj 
 /-- The constant-to-continuous map pulled back from the point; no completion choice. -/
 abbrev scalar (T : Scheme.{u}) := AdmissibleScalarRealization.scalarMap A T
 
-/-- Restriction along the specified constant-function map, on all modules.
-Source: Stacks 03CS. -/
+/-- Restriction along the specified constant-function map, on all modules. -/
 abbrev restriction (T : Scheme.{u}) :
     Modules (Profinite.continuousCoefficientRingObj A) T ⥤ Modules (constantPoint A) T :=
   Mod.comap (scalar A T)
 
-/-- Termwise restriction, retaining the original differential.
-Source: Stacks 06YN. -/
+/-- Termwise restriction, retaining the original differential. -/
 abbrev restrictComplex (T : Scheme.{u}) :=
   (restriction A T).mapHomologicalComplex (.up ℤ)
 
@@ -233,8 +239,7 @@ def GeneratorNormalization (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 
       (((upperStar Ab.{u + 1} g).mapMod _).obj M)
 
 /-- K-flatness and flat terms in the existing section-module presentation.
-This uses the recorded predicates, rather than another definition of K-flatness or flatness.
-Source: Stacks 06YN and 03ER. -/
+This uses the recorded predicates, rather than another definition of K-flatness or flatness. -/
 def FlatKFlat (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (T : Scheme.{u})
     (P : CochainComplex (Modules Λ T) ℤ) : Prop :=
@@ -246,8 +251,7 @@ def FlatKFlat (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
       (condensedRingObj Λ T)).functor.obj (P.X q))
 
 /-- The actual completed ring, identified by its constant scalar projections, with its
-normalized quotient squares. The pushout is precisely the ring quotient by pi^(n+1).
-Source: Stacks 093M. -/
+normalized quotient squares. The pushout is precisely the ring quotient by pi^(n+1). -/
 def RingAssertions (p : A) (T : Scheme.{u}) : Prop :=
   ∃ e : InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}
       (Scheme.ProEt.topology T)
@@ -279,8 +283,7 @@ def RingAssertions (p : A) (T : Scheme.{u}) : Prop :=
 
 /-- All clauses for the actual coefficient ring, square, chain comparison and flat K-flat
 pullbacks. The natural isomorphism is on whole cochain complexes, with normalization in
-all integer degrees; there is no boundedness, completeness or constructibility condition.
-Source: Stacks 093M and 0G7E. -/
+all integer degrees; there is no boundedness, completeness or constructibility condition. -/
 def Assertions (p : A) {X Y : Scheme.{u}} (g : X ⟶ Y) : Prop :=
   RingAssertions A p X ∧ RingAssertions A p Y ∧
   (∀ T : Scheme.{u}, T = X ∨ T = Y → SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1}

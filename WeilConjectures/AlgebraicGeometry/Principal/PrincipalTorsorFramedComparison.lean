@@ -8,7 +8,12 @@ public import WeilConjectures.AlgebraicGeometry.PrincipalTorsorComparisons.Princ
 import WeilConjectures.AlgebraicGeometry.Principal.PrincipalTorsorSignedRepresentatives
 import WeilConjectures.AlgebraicGeometry.Principal.PrincipalTorsorLocalizationSections
 import WeilConjectures.CategoryTheory.Abelian.FirstResolutionExtensionClass
-/-! Independent comparison result for the principal torsor sign calculation. -/
+/-! Independent comparison result for the principal torsor sign calculation.
+
+## References
+
+* Stacks 03AJ, 06XU
+-/
 @[expose] public section
 set_option autoImplicit false
 universe u
@@ -44,8 +49,7 @@ theorem InjectiveResolution.extMk_eq_neg_extClass {T : Scheme.{u}}
   rw [he, ← R.mk₀_comp_extMk _ _ _ (by simp), hfirst, Ext.comp_neg]
   exact congrArg Neg.neg hnat.symm
 /-- A framed extension is the inverse-section localization pushout and its normalized
-relative class is minus the class of (0,aug(g)).
-Source: Stacks 03AJ, 06XU. -/
+relative class is minus the class of (0,aug(g)). -/
 theorem principalTorsorFramedComparison
     (C : PrincipalTorsorComparisons.{u}) (hC : C.Normalized) :
   ∀ (T Z : Scheme.{u}) (i : Z ⟶ T) [IsClosedImmersion i]

@@ -38,9 +38,7 @@ private theorem remove_endpoint_isos
 /-- The geometric closure-coefficient exchange produces a normalized pair of
 completed Chern lifts.  The lifts are existential here; their uniqueness is a
 separate statement, so this is the concrete geometric exchange obligation
-below the arbitrary-input theorem.
-
-Source: diagonal-tower coefficients (2)-(3), second rational P1 triangle. -/
+below the arbitrary-input theorem. -/
 theorem scalar_chern_base_change_chern_none_canonical
     (l : ℕ) [Fact l.Prime]
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

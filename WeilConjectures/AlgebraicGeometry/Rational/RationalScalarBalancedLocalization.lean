@@ -141,10 +141,17 @@ import WeilConjectures.AlgebraicGeometry.Continuous.ContinuousCoefficientGeneral
 
 /-! # Balanced localization of finite coefficient extensions
 
-Source: Stacks Project, Tags 0G7E and 0D6D; Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2).
-
 The coefficient map is postcomposition, not a chosen ring map. Tensor comparisons
 are the existing unit-normalized comparisons. Raw fractions retain integral Hom torsion.
+
+## References
+
+* Stacks Project, Tags 0G7E and 0D6D
+* Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2)
+* BS 6.8.2
+* Stacks 0D6D
+* BS 6.8.14(2)
+* Stacks 00CO and 0D6D
 -/
 
 @[expose] public noncomputable section
@@ -163,8 +170,7 @@ variable (E F : Type u) [Field E] [Field F]
   [FiniteDimensional ℚ_[l] E] [FiniteDimensional ℚ_[l] F]
 variable (i : E →ₐ[ℚ_[l]] F)
 
-/-- A finite coefficient embedding is continuous for the specified spectral topologies.
-Source: BS 6.8.2; uniqueness of the extended absolute value. -/
+/-- A finite coefficient embedding is continuous for the specified spectral topologies. -/
 theorem rationalBalancedEmbedding_continuous :
     @Continuous E F
       ((coefficientExtensionNormedField l E).toMetricSpace.toPseudoMetricSpace.toUniformSpace
@@ -179,8 +185,7 @@ theorem rationalBalancedEmbedding_continuous :
     exact WeilConjectures.integralScalar_absoluteValue l E F i x
   exact hi.continuous
 
-/-- Postcompose continuous field-valued functions by the actual coefficient embedding.
-Source: BS 6.8.2. -/
+/-- Postcompose continuous field-valued functions by the actual coefficient embedding. -/
 def rationalBalancedCoefficient (X : Scheme.{u}) :
     rationalCoefficientSheaf l X E ⟶ rationalCoefficientSheaf l X F := by
   letI := coefficientExtensionNormedField l E
@@ -213,8 +218,7 @@ private theorem rationalBalancedConstant_value (X : Scheme.{u}) (U : X.ProEtᵒ�
   exact congrArg (fun b ↦ rationalCoefficientValue l E X U b x) hv
 
 /-- The localized map has the pointwise inclusion formula and preserves reciprocals.
-The unit and inverse equations include empty site objects.
-Source: BS 6.8.2. -/
+The unit and inverse equations include empty site objects. -/
 theorem rationalBalancedCoefficient_sections (X : Scheme.{u}) :
     (∀ (U : X.ProEtᵒᵖ) (b : (rationalCoefficientSheaf l X E).obj.obj U)
       (x : U.unop.left),
@@ -401,8 +405,7 @@ private theorem rationalBalancedFiniteScalarChart (W : Scheme.{u}) [IsNoetherian
   conv_rhs => erw [← Category.assoc, ← Functor.map_comp]
   erw [hm]
 
-/-- Integral coefficient inclusion is postcomposition under the specified realizations.
-Source: BS 6.8.2. -/
+/-- Integral coefficient inclusion is postcomposition under the specified realizations. -/
 theorem rationalBalancedIntegralNormalization
     (U : X.ProEtᵒᵖ) (b : (integralCoefficientSheaf l X E).obj.obj U) (x : U.unop.left) :
     (integralCoefficientValue l F X U
@@ -476,8 +479,7 @@ theorem rationalBalancedIntegralNormalization
     exact hres n
   exact congrArg Subtype.val h
 
-/-- The specific completed integral map localizes to continuous postcomposition.
-Source: BS 6.8.2. -/
+/-- The specific completed integral map localizes to continuous postcomposition. -/
 theorem rationalBalancedCoefficient_square :
     pbcScalarCoefficientMap l E F i X ≫ (sF.integralIso.hom ≫ sF.inclusion) =
       (sE.integralIso.hom ≫ sE.inclusion) ≫ rationalBalancedCoefficient l E F i X := by
@@ -496,23 +498,20 @@ theorem rationalBalancedCoefficient_square :
     ((rationalBalancedIntegralNormalization l E F i X sE sF U b x).trans
       (congrArg i (sE.inclusion_normalization U.unop b x)).symm)
 
-/-- The s comparison, with common target F_X tensor over B_E,X.
-Source: Stacks 0D6D. -/
+/-- The s comparison, with common target F_X tensor over B_E,X. -/
 def rationalBalancedS (K : PbcCompletedDerived X (pbcIntegralDatum l E)) :=
   pbcReductionNormalization (pbcScalarCoefficientMap l E F i X)
     (sF.integralIso.hom ≫ sF.inclusion)
     ((sE.integralIso.hom ≫ sE.inclusion) ≫ rationalBalancedCoefficient l E F i X)
     (rationalBalancedCoefficient_square l E F i X sE sF) K
 
-/-- The t comparison to the same single derived tensor.
-Source: Stacks 0D6D. -/
+/-- The t comparison to the same single derived tensor. -/
 def rationalBalancedT (K : PbcCompletedDerived X (pbcIntegralDatum l E)) :=
   pbcReductionNormalization (sE.integralIso.hom ≫ sE.inclusion)
     (rationalBalancedCoefficient l E F i X)
     ((sE.integralIso.hom ≫ sE.inclusion) ≫ rationalBalancedCoefficient l E F i X) rfl K
 
-/-- The component s followed by t inverse, transported by the recorded J object equations.
-Source: BS 6.8.14(2); Stacks 0D6D. -/
+/-- The component s followed by t inverse, transported by the recorded J object equations. -/
 def rationalBalancedComponent
     (K : PbcRationalDerivedCategory l E X Fact.out Fact.out) :
     sF.J.obj ((pbcRationalScalarExtension l E F i X Fact.out Fact.out).obj K) ≅
@@ -523,8 +522,7 @@ def rationalBalancedComponent
     (pbcDerivedExtend (rationalBalancedCoefficient l E F i X)).mapIso
       (eqToIso (sE.objects K.obj)).symm
 
-/-- The specified components are natural for every raw fraction morphism.
-Source: BS 6.8.14(2); Stacks 00CO and 0D6D. -/
+/-- The specified components are natural for every raw fraction morphism. -/
 theorem rationalBalancedComponent_naturality
     {K L : PbcRationalDerivedCategory l E X Fact.out Fact.out} (f : K ⟶ L) :
     (pbcRationalScalarExtension l E F i X Fact.out Fact.out ⋙ sF.J).map f ≫
@@ -533,8 +531,7 @@ theorem rationalBalancedComponent_naturality
         (sE.J ⋙ pbcDerivedExtend (rationalBalancedCoefficient l E F i X)).map f := by
   sorry
 
-/-- The natural isomorphism on raw rationalizations, with its actual inverse components.
-Source: BS 6.8.14(2). -/
+/-- The natural isomorphism on raw rationalizations, with its actual inverse components. -/
 def rationalBalancedTheta :
     pbcRationalScalarExtension l E F i X Fact.out Fact.out ⋙ sF.J ≅
       sE.J ⋙ pbcDerivedExtend (rationalBalancedCoefficient l E F i X) :=
@@ -552,8 +549,7 @@ variable (G : Type u) [Field G] [Algebra ℚ_[l] G] [FiniteDimensional ℚ_[l] G
   (j : F →ₐ[ℚ_[l]] G) (sG : RationalModuleRealization l G X)
 
 set_option linter.unusedSectionVars false in
-/-- Continuous postcomposition composes as the given field embeddings do.
-Source: BS 6.8.2. -/
+/-- Continuous postcomposition composes as the given field embeddings do. -/
 theorem rationalBalancedCoefficient_comp :
     rationalBalancedCoefficient l E F i X ≫ rationalBalancedCoefficient l F G j X =
       rationalBalancedCoefficient l E G (j.comp i) X := by
@@ -561,8 +557,7 @@ theorem rationalBalancedCoefficient_comp :
   rfl
 
 /-- Successive theta comparisons agree with the specified direct raw associator.
-This is an equation on the raw categories, so includes every fractional arrow.
-Source: Stacks 0D6D; BS 6.8.14(2). -/
+This is an equation on the raw categories, so includes every fractional arrow. -/
 theorem rationalBalancedTower
     (K : PbcRationalDerivedCategory l E X Fact.out Fact.out) :
     sG.J.map ((pbcRationalScalarComp l E F G i j X Fact.out Fact.out).hom.app K) ≫
@@ -582,8 +577,7 @@ variable (H : Type u) [Field H] [Algebra ℚ_[l] H] [FiniteDimensional ℚ_[l] H
 
 attribute [-instance] ULift.module in
 /-- Equality coefficients have the multiplication unitor, with its cochain computation.
-Conjugation by the published raw tensor unit makes the raw source functor literally id.
-Source: BS 6.8.14(2); Stacks 0D6D. -/
+Conjugation by the published raw tensor unit makes the raw source functor literally id. -/
 theorem rationalBalancedIdentity :
     rationalBalancedCoefficient l E E (AlgHom.id ℚ_[l] E) X = 𝟙 _ ∧
     ∃ (o : pbcExtend (rationalBalancedCoefficient l E E (AlgHom.id ℚ_[l] E) X) ≅ 𝟭 _)
@@ -614,8 +608,7 @@ variable [IsNoetherian Y] [IsNoetherian Z]
 
 end GeometricCoefficients
 
-/-- The s and t composition comparisons are natural on the entire derived category.
-Source: Stacks 0D6D. -/
+/-- The s and t composition comparisons are natural on the entire derived category. -/
 theorem rationalBalancedDerivedNaturality {W : Scheme.{u}}
     {R S B : Sheaf (ProEt.topology W) CommRingCat.{u + 1}}
     (a : R ⟶ S) (b : S ⟶ B) (c : R ⟶ B) (h : a ≫ b = c)

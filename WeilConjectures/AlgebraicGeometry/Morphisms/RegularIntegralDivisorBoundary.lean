@@ -15,7 +15,13 @@ import WeilConjectures.RingTheory.RegularRingOfQuotientAway
 /-!
 # The boundary after adjoining the generic point of a regular integral divisor
 
-Source: Stacks Project, Tags 00NU, 0EYE and 0EYJ.
+## References
+
+* Stacks Project, Tags 00NU, 0EYE and 0EYJ
+* Stacks Project, Tag 01WS (local principal nonzerodivisor description)
+* Stacks Project, Tag 0EYE, proof
+* Tag 00NU
+* Tag 0EYJ, trait paragraph
 -/
 
 @[expose] public section
@@ -26,9 +32,7 @@ namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency.types false in
 /-- At a point on an effective Cartier centre, the stalk map has kernel generated
-by a nonzerodivisor in the ambient maximal ideal.
-
-Source: Stacks Project, Tag 01WS (local principal nonzerodivisor description). -/
+by a nonzerodivisor in the ambient maximal ideal. -/
 private theorem exists_stalk_equation
     {L D : Scheme.{u}} {i : D ⟶ L} (hi : IsEffectiveCartierCenter i) (d : D) :
     ∃ f : L.presheaf.stalk (i d), f ∈ IsLocalRing.maximalIdeal _ ∧
@@ -87,9 +91,7 @@ private theorem exists_stalk_equation
     exact hregA.of_flat
 
 /-- Removing an open neighbourhood of the generic point leaves a regular boundary
-of local dimension at least two.
-
-Source: Stacks Project, Tag 0EYE, proof; Tag 00NU; Tag 0EYJ, trait paragraph. -/
+of local dimension at least two. -/
 theorem regular_dim_ge_two_outside_divisor_generic_neighbourhood
     {L D : Scheme.{u}} [IsLocallyNoetherian L] [IsRegular D] [IsIntegral D]
     (i : D ⟶ L) (hi : IsEffectiveCartierCenter i)

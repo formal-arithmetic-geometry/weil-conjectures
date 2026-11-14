@@ -13,7 +13,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 
 /-! # Finite operation tables give localized pro-étale module models
 
-Source: Stacks Project, Modules on Sites, Tag 093S.
+## References
+
+* Stacks Project, Modules on Sites, Tag 093S
 -/
 
 @[expose] public section
@@ -71,9 +73,7 @@ private theorem constantModule_over_comparison (X : Scheme.{u})
     (J.over V) A (R.over V) aV).preimageIso e⟩
 
 /-- A finite constant coefficient action on a sheaf with finite locally constant
-underlying sets admits finite module models on localized ringed sites.
-
-Source: Stacks Project, Modules on Sites, Tag 093S. -/
+underlying sets admits finite module models on localized ringed sites. -/
 theorem proEtale_finiteLocalModels_of_finiteUnderlying
     (X : Scheme.{u}) (B : Type u) [CommRing B] [Finite B]
     (F : proEtaleRingModules X (proEtaleConstantRing X B))

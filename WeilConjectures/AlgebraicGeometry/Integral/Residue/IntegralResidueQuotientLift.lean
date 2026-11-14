@@ -11,7 +11,10 @@ public import Mathlib.Algebra.Category.ModuleCat.Ulift
 
 /-! # The normalized finite quotient lift
 
-Source: Bhatt--Scholze, Section 6.5, coefficient conventions.
+## References
+
+* Bhatt--Scholze, Section 6.5, coefficient conventions
+* Bhatt--Scholze, Section 6.5
 -/
 
 @[expose] public noncomputable section
@@ -20,8 +23,7 @@ universe u
 open CategoryTheory AlgebraicGeometry.ProEtale
 namespace AlgebraicGeometry.Scheme
 
-/-- The finite quotient ring equivalence induced by the recorded uniformizer.
-Source: Bhatt--Scholze, Section 6.5. -/
+/-- The finite quotient ring equivalence induced by the recorded uniformizer. -/
 def integralResidueQuotientEquiv
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E]
@@ -33,8 +35,7 @@ def integralResidueQuotientEquiv
     (ULift.ringEquiv.trans (Ideal.quotEquivOfEq (by
       rw [hd]; rfl)))
 
-/-- On residue representatives the normalized equivalence is exactly ULift.down.
-Source: Bhatt--Scholze, Section 6.5. -/
+/-- On residue representatives the normalized equivalence is exactly ULift.down. -/
 theorem integralResidueQuotientEquiv_mk
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E]
@@ -52,8 +53,7 @@ theorem integralResidueQuotientEquiv_mk
   rw [hq]
   rfl
 
-/-- Lift a small quotient module and transport its scalars to the large quotient.
-Source: Bhatt--Scholze, Section 6.5. -/
+/-- Lift a small quotient module and transport its scalars to the large quotient. -/
 abbrev integralResidueQuotientLift
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E]

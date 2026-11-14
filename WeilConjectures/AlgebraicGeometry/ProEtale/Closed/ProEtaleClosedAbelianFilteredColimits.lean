@@ -49,7 +49,12 @@ import Mathlib.Algebra.Category.Grp.AB
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
 
-/-! Filtered-colimit comparison for abelian pro-etale closed direct image. -/
+/-! Filtered-colimit comparison for abelian pro-etale closed direct image.
+
+## References
+
+* Stacks Project, Tags 0738 (4) and 098D
+-/
 
 @[expose] public section
 
@@ -113,8 +118,7 @@ private theorem evaluation_preserves_filteredColimits
   exact preservesColimitsOfShape_of_natIso h
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Abelian closed direct image commutes with filtered colimits on a qcqs base.
-Source: Stacks Project, Tags 0738 (4) and 098D. -/
+/-- Abelian closed direct image commutes with filtered colimits on a qcqs base. -/
 theorem proEtale_closed_abelian_filteredColimits {X Z : Scheme.{u}} (i : Z ⟶ X)
     [IsClosedImmersion i] [CompactSpace X] [QuasiSeparatedSpace X]
     (I : Type (u + 1)) [SmallCategory I] [IsFiltered I] :

@@ -12,7 +12,10 @@ import WeilConjectures.CategoryTheory.MapExtendHomology
 
 /-! # Restricted coefficient maps on the cohomology of an injective roof
 
-Source: Stacks Project, Cohomology, Tags 01E4 and 01FB.
+## References
+
+* Stacks Project, Cohomology, Tags 01E4 and 01FB
+* Stacks Project, Tag 01FB (Remark explain-arrow), Tag 01E4 (restriction of an injective resolution)
 -/
 
 @[expose] public section
@@ -251,9 +254,7 @@ private theorem squareResolutionCohomologyIso_hom {X : Scheme.{u}} {F : X.Module
 
 -- The proof transports the natural-indexed section equation through fixed integer models.
 /-- Restriction of an augmented roof computes the classical h-map on an arbitrary open.
-There is one scheme morphism, no direct-image square, and no total derived functor.
-Source: Stacks Project, Tag 01FB (Remark explain-arrow), Tag 01E4 (restriction of an injective
-resolution). -/
+There is one scheme morphism, no direct-image square, and no total derived functor. -/
 theorem restrictedCoefficient_roof {X Z : Scheme.{u}} (v : Z ⟶ X)
     (F : X.Modules) (G : Z.Modules) (φ : F ⟶ (pushforward v).obj G)
     (I : InjectiveResolution F) (J : InjectiveResolution G)

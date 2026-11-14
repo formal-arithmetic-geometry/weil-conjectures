@@ -14,7 +14,10 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 /-!
 # Localization of the normalized pro-etale composition comparison
 
-Source: Stacks Project, Tags 0D6D and 0E47, coefficient inverse-image comparisons.
+## References
+
+* Stacks Project, Tags 0D6D and 0E47, coefficient inverse-image comparisons
+* Stacks Tag 0D6D
 -/
 
 @[expose] public noncomputable section
@@ -116,8 +119,7 @@ private theorem ambientData_transport
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The specified derived composition is the localization of the conjugate
-of a section-normalized ordinary direct-image compositor.
-Source: Stacks Tag 0D6D. -/
+of a section-normalized ordinary direct-image compositor. -/
 theorem proEtaleCanonicalDerivedPullback_normalization
     {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V)
     (RV : Sheaf (ProEt.topology V) CommRingCat.{u + 1})

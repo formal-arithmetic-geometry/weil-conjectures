@@ -14,7 +14,10 @@ import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 /-!
 # Etale descent from a flat base change near a closed fibre
 
-Source: Stacks Project, Tag 0EYA, final omitted detail; Tag 02VN.
+## References
+
+* Stacks Project, Tag 0EYA, final omitted detail
+* Tag 02VN
 -/
 
 @[expose] public section
@@ -24,9 +27,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- Etaleness descends from a flat Noetherian base change when it holds over
-an open containing a point above the closed point of the local base.
-
-Source: Stacks Project, Tag 0EYA, final omitted detail; Tag 02VN. -/
+an open containing a point above the closed point of the local base. -/
 theorem etale_of_flat_base_change_near_closed_point
     (B : Type u) [CommRing B] [IsLocalRing B]
     {Y T E : Scheme.{u}} [IsNoetherian T] (g : Y ⟶ Spec (.of B))

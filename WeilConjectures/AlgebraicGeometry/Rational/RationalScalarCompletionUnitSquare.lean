@@ -52,11 +52,17 @@ import WeilConjectures.Algebra.Homology.System.SystemScalarCoherence
 
 /-! # Finite scalar change and completed pullback with the actual units
 
-Source: Stacks Project, Tags 0A0E and 0A0G.
 The coefficient maps, derived tensors, raw categories and quotient-tower units are
 those of the imported dependency nodes. Comparison arrows below only orient the
 published canonical comparisons and transport them through the unit-normalized
 ambient quotient comparison.
+
+## References
+
+* Stacks Project, Tags 0A0E and 0A0G
+* Stacks 099M and 099N (2), (5)
+* Stacks 0A0E and 0A0G
+* Stacks 099M, 099N, 0A0E and 0A0G
 -/
 
 @[expose] public noncomputable section
@@ -86,8 +92,7 @@ private def scalarUnitIso {W : Scheme.{u}}
         exact ConcreteCategory.congr_hom (e.hom.hom.naturality f) x))
 
 /-- The quotient-tower construction is ordinary pullback followed by reflection,
-including the actual augmentation, on arbitrary ambient complexes.
-Source: Stacks 099M and 099N (2), (5). -/
+including the actual augmentation, on arbitrary ambient complexes. -/
 theorem pbcActualAmbientCompletedPullback_tower
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     {X Y : Scheme.{u}} (g : X ⟶ Y) :
@@ -156,8 +161,7 @@ theorem pbcActualAmbientCompletedPullback_tower
   rw [← Category.assoc, ← Category.assoc, hi, he']
   exact (hb K).symm
 
-/-- The uniquely augmentation-normalized ambient comparison; no unrelated map is chosen.
-Source: Stacks 099M and 099N (2), (5). -/
+/-- The uniquely augmentation-normalized ambient comparison; no unrelated map is chosen. -/
 def pbcActualAmbientCompletedPullbackIso
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     {X Y : Scheme.{u}} (g : X ⟶ Y) :
@@ -168,15 +172,13 @@ variable (l : ℕ) [Fact l.Prime] (E L : Type u) [Field E] [Field L]
   [Algebra ℚ_[l] E] [Algebra ℚ_[l] L]
   [FiniteDimensional ℚ_[l] E] [FiniteDimensional ℚ_[l] L] (i : E →ₐ[ℚ_[l]] L)
 
-/-- The inverse reflected coefficient-square comparison, with the published normalization.
-Source: Stacks 0A0E and 0A0G. -/
+/-- The inverse reflected coefficient-square comparison, with the published normalization. -/
 def rationalScalarReflectedBeta {X Y : Scheme.{u}} (g : X ⟶ Y) :
     pbcActualCompletedPull g (pbcIntegralDatum l E) ⋙ pbcEmbeddingAmbientTensor l E L i X ≅
       pbcEmbeddingAmbientTensor l E L i Y ⋙ pbcActualCompletedPull g (pbcIntegralDatum l L) :=
   (pbcScalarCompletedPullIso l E L i g).symm
 
-/-- The same comparison on the actual quotient-tower functors, retaining both units.
-Source: Stacks 099M, 099N, 0A0E and 0A0G. -/
+/-- The same comparison on the actual quotient-tower functors, retaining both units. -/
 def rationalScalarStrictBeta {X Y : Scheme.{u}} (g : X ⟶ Y) :
     pbcActualStrictCompletedPull (pbcIntegralDatum l E) g ⋙
         pbcEmbeddingAmbientTensor l E L i X ≅

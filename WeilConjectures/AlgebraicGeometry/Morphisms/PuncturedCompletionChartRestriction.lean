@@ -10,7 +10,11 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionMat
 
 /-! # Restriction to a punctured principal chart
 
-Source: Stacks Project, Tag 05ER, the natural comparison map on sections.
+## References
+
+* Stacks Project, Tag 05ER, the natural comparison map on sections
+* Stacks Project, Tag 05ER, the natural comparison Psi
+* Tag 0BLH, affine charts
 -/
 
 @[expose] public section
@@ -21,9 +25,7 @@ namespace AlgebraicGeometry.Scheme.CompletionGluingData
 
 /-- The inverse image of a principal chart under the punctured comparison is the
 original principal chart, and the induced map on matching sections is restriction
-of their first projection.
-
-Source: Stacks Project, Tag 05ER, the natural comparison Psi; Tag 0BLH, affine charts. -/
+of their first projection. -/
 theorem exists_matching_chart_restriction
     {A : Type u} [CommRing A] [IsLocalRing A]
     {U : (Spec (.of A)).Opens}

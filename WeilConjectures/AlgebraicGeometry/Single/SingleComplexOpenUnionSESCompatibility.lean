@@ -10,7 +10,9 @@ public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 
 /-! # Compatible mapping-cylinder presentations
 
-Source: Stacks Project, Tags 013N, 014G and 013O.
+## References
+
+* Stacks Project, Tags 013N, 014G and 013O
 -/
 
 @[expose] public section
@@ -158,9 +160,7 @@ private def cylRowMap (t : A ⟶ B) (t' : A' ⟶ B') (α : A ⟶ A') (β : B ⟶
 end
 
 /-- A strict square with compatible localized vertices has a short exact
-mapping-cylinder presentation with all three localized components prescribed.
-
-Source: Stacks Project, Tags 013N, 014G and 013O. -/
+mapping-cylinder presentation with all three localized components prescribed. -/
 theorem singleComplexOpenComparison_union_ses_compatibility
     {C : Type u} [Category C] [Abelian C] [HasDerivedCategory.{w} C]
     (A B A' B' : CochainComplex C ℤ)

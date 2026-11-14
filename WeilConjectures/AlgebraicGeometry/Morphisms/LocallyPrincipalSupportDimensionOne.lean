@@ -13,7 +13,10 @@ import Mathlib.RingTheory.Spectrum.Prime.LTSeries
 /-!
 # Dimension-one detection in a locally principal closed set
 
-Source: Stacks Project, Tag 0BJG.
+## References
+
+* Stacks Project, Tag 0BJG
+* Stacks Project, with the passage from local rings to schemes in Tag 0BJH
 -/
 
 @[expose] public section
@@ -22,9 +25,7 @@ universe u
 namespace AlgebraicGeometry.Scheme
 
 /-- Every positive-dimensional point of a locally principal closed set has a
-local-dimension-one generalization in that closed set.
-
-Source: Stacks Project, with the passage from local rings to schemes in Tag 0BJH. -/
+local-dimension-one generalization in that closed set. -/
 theorem exists_dimension_one_generalization_in_locallyPrincipal_support
     {Y : Scheme.{u}} [IsLocallyNoetherian Y] (J : Y.IdealSheafData)
     (hJ : J.IsLocallyPrincipal) (y : Y) (hy : y ∈ J.support)

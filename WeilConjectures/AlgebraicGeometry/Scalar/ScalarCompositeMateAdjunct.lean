@@ -136,12 +136,15 @@ import WeilConjectures.AlgebraicGeometry.Scalar.ScalarPullbackComposition
 
 /-! # The adjunct of the transported scalar composite mate
 
-Source: Stacks Project, Tag 0E46, with the normalized comparisons of Tags 07A7, 0D6D and 0D6E.
-
 The direct-image compositors are the universal right-derived comparisons computed
 on K-injective resolutions. The scalar/pullback comparisons are transported from
 left derived pullback to the exact termwise inverse image. The inverse composite
 Hom equivalence is precisely the two-counit formula for Adj_B in the node.
+
+## References
+
+* Stacks Project, Tag 0E46, with the normalized comparisons of Tags 07A7, 0D6D and 0D6E
+* Stacks Project, Tag 0E46
 -/
 
 @[expose] public section
@@ -224,8 +227,7 @@ private theorem composite_mate_calculation
   rw [reassoc_of% hn]
   rw [← T.map_comp, ha, T.map_comp, ← reassoc_of% hl]
 
-/-- The transported composite scalar mate has the prescribed two-counit adjunct.
-Source: Stacks Project, Tag 0E46. -/
+/-- The transported composite scalar mate has the prescribed two-counit adjunct. -/
 theorem scalarMate_comp_homEquiv_symm
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {X Y Z : Scheme.{u}} (r : X ⟶ Y) (s : Y ⟶ Z)

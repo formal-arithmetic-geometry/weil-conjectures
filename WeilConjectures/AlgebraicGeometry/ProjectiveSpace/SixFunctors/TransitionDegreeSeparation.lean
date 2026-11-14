@@ -11,7 +11,11 @@ import Mathlib.Algebra.Polynomial.FieldDivision
 
 /-! # Transition exponents are invariant under changes of chart frames
 
-Source: Stacks Project, Tag 0BXJ, proof of divisors-lemma-Pic-projective-space-UFD.
+## References
+
+* Stacks Project, Tag 0BXJ, proof of divisors-lemma-Pic-projective-space-UFD
+* Stacks Project, Tag 0BXJ, divisors-lemma-Pic-projective-space-UFD, uniqueness in its Picard
+  classification, specialized to dimension one over a field
 -/
 
 @[expose] public section
@@ -51,10 +55,7 @@ private theorem chart_unit_constant (k : Type u) [Field k]
     (homOfLE (chart_singleton k i).le)]
   exact (presheaf_map_chartConst k (chart_singleton k i).le c).symm
 
-/-- Standard transitions of different degrees are not related by chart units.
-
-Source: Stacks Project, Tag 0BXJ, divisors-lemma-Pic-projective-space-UFD,
-uniqueness in its Picard classification, specialized to dimension one over a field. -/
+/-- Standard transitions of different degrees are not related by chart units. -/
 theorem eq_degree_of_chart_units (k : Type u) [Field k] (d e : ℤ)
     (a : Γ(ProjectiveLine (Spec (.of k)),
       standardOpen _ (Spec (.of k)) (⟨0⟩ : ULift.{u} (Fin 2)))ˣ)

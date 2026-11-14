@@ -18,7 +18,9 @@ import WeilConjectures.SixFunctors.ProEtale.BaseChange.WeaklyEtale
 /-!
 # Finite support diagrams for the open counit
 
-Source: Stacks Project, Tags 00WK and 09AE.
+## References
+
+* Stacks Project, Tags 00WK and 09AE
 -/
 
 @[expose] public section
@@ -41,9 +43,7 @@ coming from a quasi-compact open in the affine test object. The maps `a` and `b`
 homomorphisms of section groups and intertwine the two specified open counits.
 Properness is not assumed: quasi-compactness and quasi-separatedness suffice for
 this finite-representative step, which makes no surjectivity assertion about either
-counit.
-
-Source: Stacks Project, Tags 00WK and 09AE. -/
+counit. -/
 theorem sfOpenCounit_finiteSupportDiagram {V W T : Scheme.{u}} (p : V ⟶ T)
     [QuasiCompact p] [QuasiSeparated p] (i : W ⟶ T) [IsOpenImmersion i]
     (M : proEtaleRingModules (pullback p i)

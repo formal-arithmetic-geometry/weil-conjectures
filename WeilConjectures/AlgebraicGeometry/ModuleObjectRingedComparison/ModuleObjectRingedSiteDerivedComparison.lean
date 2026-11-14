@@ -123,11 +123,16 @@ import WeilConjectures.CategoryTheory.ClosedScalarHom.ClosedScalarHomComparison
 
 /-! # Internal-module and ringed-site derived Hom
 
-Source: Stacks Project, Tags 08J9, 08JA and 08JB.
-
 ## Main statements
 
 * `moduleObject_ringedSite_derived_comparison`: naturality, evaluation and slices.
+
+## References
+
+* Stacks Project, Tags 08J9, 08JA and 08JB
+* Stacks 06YS
+* Stacks 06YL
+* Stacks Project, Tags 08J9, 08JA, 08JB
 -/
 
 @[expose] public noncomputable section
@@ -417,16 +422,14 @@ private theorem globalNativeMonoidal_eq_localization
         (HomotopyCategory.quasiIso C (.up ℤ)) := by
   rfl
 
-/-- The native derived tensor uses the K-flat localization monoidal structure.
-Source: Stacks 06YS. -/
+/-- The native derived tensor uses the K-flat localization monoidal structure. -/
 theorem internalMonoidal_eq_localization :
     (inferInstance : MonoidalCategory (DerivedCategory (Internal Λ X))) =
       DerivedMonoidal.instMonoidalCategory DerivedCategory.Qh
         (HomotopyCategory.quasiIso (Internal Λ X) (.up ℤ)) := by
   exact globalNativeMonoidal_eq_localization (Internal Λ X)
 
-/-- The actual derived Koszul braiding, transported along the preceding equality.
-Source: Stacks 06YL. -/
+/-- The actual derived Koszul braiding, transported along the preceding equality. -/
 instance internalBraiding : BraidedCategory (DerivedCategory (Internal Λ X)) :=
   Eq.mp (congrArg (fun m ↦ @BraidedCategory (DerivedCategory (Internal Λ X)) _ m)
     (internalMonoidal_eq_localization Λ X).symm)
@@ -534,9 +537,7 @@ private theorem sliceHom
   exact ⟨⟨θU, hθU, z, hz⟩⟩
 
 /-- Comparison of the module-object right adjoint with the K-injective sheaf-Hom
-model, including its evaluation and all localized-site comparisons.
-
-Source: Stacks Project, Tags 08J9, 08JA, 08JB. -/
+model, including its evaluation and all localized-site comparisons. -/
 theorem moduleObject_ringedSite_derived_comparison :
     ∃ (S : CoefficientClosedStructure (hom Λ X))
       (T : CoefficientTensorModels.{u, u + 1, u, u + 1}

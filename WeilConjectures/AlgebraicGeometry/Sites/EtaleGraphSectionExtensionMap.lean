@@ -11,10 +11,12 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Sections over graphs extend by zero
 
-Source: Stacks Project, Tag 0F4L, first paragraph of the proof, and Tag 01KT.
-
 The sum presheaf is the left Kan extension used by `Etale.etaleLowerShriek` before
 sheafification. Its Kan-extension unit is the inclusion of the graph-indexed summand.
+
+## References
+
+* Stacks Project, Tag 0F4L, first paragraph of the proof, and Tag 01KT
 -/
 
 @[expose] public section

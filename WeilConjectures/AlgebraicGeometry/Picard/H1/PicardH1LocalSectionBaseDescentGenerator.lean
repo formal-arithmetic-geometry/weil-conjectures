@@ -20,7 +20,11 @@ import WeilConjectures.AlgebraicGeometry.TensorPullbackGeneratorReflection
 import WeilConjectures.AlgebraicGeometry.Modules.InvertiblePullbackTensor
 
 /-! # Combining fibre triviality and local section lifting
-Source: Stacks Project, Tag 0BF2.
+
+## References
+
+* Stacks Project, Tag 0BF2
+* Stacks Project, Tag 0BF2, fibre triviality and degree-zero differential argument
 -/
 
 @[expose] public section
@@ -29,8 +33,7 @@ universe v
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- Lift a marked-fibre generator, then reflect its generation along the fibre inclusion.
-Source: Stacks Project, Tag 0BF2, fibre triviality and degree-zero differential argument. -/
+/-- Lift a marked-fibre generator, then reflect its generation along the fibre inclusion. -/
 theorem picard_h1_local_section_of_base_descent_generator {X S : Scheme.{v}} (f : X ⟶ S) {n : ℕ}
     (Xi : Fin n → Scheme.{v}) (fi : ∀ i, Xi i ⟶ S)
     [Flat f] [IsProper f] [LocallyOfFinitePresentation f]

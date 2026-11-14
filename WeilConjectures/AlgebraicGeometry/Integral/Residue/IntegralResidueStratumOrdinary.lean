@@ -12,7 +12,11 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSuppleme
 
 /-! # Ordinary constant modules under normalized stratum coefficient transport
 
-Source: Bhatt--Scholze, Lemma 6.5.8(1) and Proposition 6.6.11.
+## References
+
+* Bhatt--Scholze, Lemma 6.5.8(1) and Proposition 6.6.11
+* Bhatt--Scholze, Lemma 6.5.8(1), Proposition 6.6.11, and the normalized coefficient presentations
+  in Definition 6.5.1
 -/
 
 @[expose] public noncomputable section
@@ -105,10 +109,7 @@ end IntegralResidueOrdinaryProof
 attribute [local irreducible] integralConstantModule completedAdicChange
 
 /-- The ordinary constant-module realization commutes with normalized coefficient
-transport and inverse image. This concerns modules, without complexes or perfectness.
-
-Source: Bhatt--Scholze, Lemma 6.5.8(1), Proposition 6.6.11, and the normalized coefficient
-presentations in Definition 6.5.1. -/
+transport and inverse image. This concerns modules, without complexes or perfectness. -/
 theorem integralResidueStratum_ordinary
     (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

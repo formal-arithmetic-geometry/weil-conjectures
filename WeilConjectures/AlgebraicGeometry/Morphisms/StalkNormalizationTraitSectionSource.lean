@@ -23,7 +23,10 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.StalkNormalizationTraitSectio
 /-!
 # Source etaleness over the local section in the trait case
 
-Source: Stacks Project, Tags 0EYJ, 0EYG, 0EYH and 0EYI.
+## References
+
+* Stacks Project, Tags 0EYJ, 0EYG, 0EYH and 0EYI
+* Stacks Project, Tag 0EYJ, trait paragraph, and Tag 0EYI(2)
 -/
 
 @[expose] public section
@@ -61,9 +64,7 @@ private theorem stalk_dvr {S : Scheme.{u}} [IsNoetherian S] [IsIntegral S]
 
 /-- Every point of the finite local normalization above the closed section point
 has a source open neighbourhood on which the normalization map is etale,
-when the local base has dimension less than two.
-
-Source: Stacks Project, Tag 0EYJ, trait paragraph, and Tag 0EYI(2). -/
+when the local base has dimension less than two. -/
 theorem GaloisCover.stalk_normalization_trait_section_source {S C : Scheme.{u}}
     [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]

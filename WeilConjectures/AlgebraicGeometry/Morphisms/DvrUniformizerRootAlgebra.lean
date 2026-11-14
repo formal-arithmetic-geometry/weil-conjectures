@@ -15,7 +15,10 @@ import WeilConjectures.Mathlib.RingTheory.DiscreteValuationRing.TFAE
 
 /-! # The DVR obtained by adjoining a root of a uniformizer
 
-Source: Stacks Project, Tags 09EV and 00PD.
+## References
+
+* Stacks Project, Tags 09EV and 00PD
+* Stacks Project, Tag 09EV (and evaluation for n = 1)
 -/
 
 @[expose] public section
@@ -23,9 +26,7 @@ universe u
 namespace AlgebraicGeometry.Scheme
 
 /-- Adjoining a positive-order root of a DVR uniformizer gives a DVR with that root
-as uniformizer.
-
-Source: Stacks Project, Tag 09EV (and evaluation for n = 1). -/
+as uniformizer. -/
 theorem dvr_uniformizer_root_algebra
     (B : Type u) [CommRing B] [IsDomain B] [IsDiscreteValuationRing B]
     (pi : B) (hpi : Irreducible pi) (n : ℕ) (hn : 0 < n) :

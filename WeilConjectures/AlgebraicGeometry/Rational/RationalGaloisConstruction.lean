@@ -28,7 +28,10 @@ import Mathlib.Analysis.SpecificLimits.Basic
 
 /-! # Rational reconstruction from integral Galois modules
 
-Source: Weil II (1.1.1), (1.1.6); Stanford Weil II seminar L19, Proposition 1.1.9.
+## References
+
+* Weil II (1.1.1), (1.1.6)
+* Stanford Weil II seminar L19, Proposition 1.1.9
 -/
 
 @[expose] public section

@@ -18,7 +18,10 @@ import Mathlib.AlgebraicGeometry.Morphisms.Separated
 /-!
 # Full faithfulness of generic-fibre restriction for finite étale covers
 
-Source: Stacks Project, Tag 0BQM.
+## References
+
+* Stacks Project, Tag 0BQM
+* Stacks Project, Tag 0BQM, proof (full faithfulness over the generic point)
 -/
 
 @[expose] public section
@@ -30,9 +33,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- Restriction to the generic fibre is fully faithful on finite étale covers of a
-smooth family with geometrically connected fibres over an integral normal base.
-
-Source: Stacks Project, Tag 0BQM, proof (full faithfulness over the generic point). -/
+smooth family with geometrically connected fibres over an integral normal base. -/
 theorem finiteEtale_genericFibre_hom_extension {S C : Scheme.{u}}
     [IsIntegral S] (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))
     (c : C ⟶ S) [Smooth c] [GeometricallyConnected c]

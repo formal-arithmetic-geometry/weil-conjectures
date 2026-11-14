@@ -22,10 +22,20 @@ import WeilConjectures.AlgebraicGeometry.Rational.RationalCompletedPullbackIdent
 
 /-! # Composition and identity of normalized rational pullback
 
-Source: Bhatt--Scholze, Remark 6.8.15, p. 62; Stacks Tags 03CB, 0D6D, 07A4 and 099N.
 The ordinary maps are fixed on sheafified tensor generators and derived computation
 counits. Completed maps retain the published strict quotient-tower units; their raw
 rationalizations retain all fraction arrows.
+
+## References
+
+* Bhatt--Scholze, Remark 6.8.15, p. 62
+* Stacks Tags 03CB, 0D6D, 07A4 and 099N
+* BS Remark 6.8.15
+* Stacks 03D2
+* Stacks 03CB, 0D6D, 07A4, 099N
+* Stacks 0D6D, 099N
+* BS Remark 6.8.15, p. 62
+* Stacks 03CB, 0D6D, 07A4 and 099N
 -/
 
 @[expose] public noncomputable section
@@ -42,8 +52,7 @@ attribute [local irreducible] Functor.sheafPullbackConstruction.sheafPullback
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The tensor-unit section of ordinary rational pullback on a pulled-back chart.
-Source: BS Remark 6.8.15; Stacks 03D2. -/
+/-- The tensor-unit section of ordinary rational pullback on a pulled-back chart. -/
 def rationalCoherenceUnit {S T : Scheme.{u}} (g : S ⟶ T)
     (c : (proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj
       (rationalCoefficientSheaf l T E) ⟶ rationalCoefficientSheaf l S E)
@@ -60,8 +69,7 @@ def rationalCoherenceUnit {S T : Scheme.{u}} (g : S ⟶ T)
       ((proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj
         (rationalCoefficientSheaf l T E)) (Iso.refl _) M V m)
 
-/-- Pull a rational coefficient section through the ring adjunction unit and structure map.
-Source: BS Remark 6.8.15; Stacks 03D2. -/
+/-- Pull a rational coefficient section through the ring adjunction unit and structure map. -/
 def rationalCoherenceScalar {S T : Scheme.{u}} (g : S ⟶ T)
     (c : (proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj
       (rationalCoefficientSheaf l T E) ⟶ rationalCoefficientSheaf l S E)
@@ -91,8 +99,7 @@ set_option maxHeartbeats 700000 in
 -- Tensor-generator coordinates unfold nested inverse-image and scalar-extension sections.
 /-- The composition equation with all specified ordinary, completed and raw maps.
 The module formula uses generators on base-changed charts; sheafification and balancing
-extend it to local tensors. Derived normalization fixes the ambient comparison itself.
-Source: BS Remark 6.8.15; Stacks 03CB, 0D6D, 07A4, 099N. -/
+extend it to local tensors. Derived normalization fixes the ambient comparison itself. -/
 def HasRationalPullbackCompositionCoherence (g : Y ⟶ X) (h : Z ⟶ Y)
     (sX : RationalModuleRealization l E X) (sY : RationalModuleRealization l E Y)
     (sZ : RationalModuleRealization l E Z)
@@ -187,8 +194,7 @@ def HasRationalPullbackCompositionCoherence (g : Y ⟶ X) (h : Z ⟶ Y)
     whiskerRight ag.alpha.hom (rationalPullDerived l E h ah.rationalCoefficient) ≫
     whiskerLeft sX.J ambientComp.hom)
 
-/-- Identity normalization, including the ordinary tensor formula and the raw natural equation.
-Source: BS Remark 6.8.15; Stacks 0D6D, 099N. -/
+/-- Identity normalization, including the ordinary tensor formula and the raw natural equation. -/
 def HasRationalPullbackIdentityCoherence (sX : RationalModuleRealization l E X)
     (a : RationalRealizationPullbackComparison l E (𝟙 X) sX sX) : Prop :=
   (∀ n : ℕ,
@@ -236,8 +242,7 @@ def HasRationalPullbackIdentityCoherence (sX : RationalModuleRealization l E X)
 attribute [irreducible] HasRationalPullbackCompositionCoherence
   HasRationalPullbackIdentityCoherence
 
-/-- The specified realization comparisons commute with composition of scheme morphisms.
-Source: BS Remark 6.8.15, p. 62; Stacks 03CB, 0D6D, 07A4 and 099N. -/
+/-- The specified realization comparisons commute with composition of scheme morphisms. -/
 theorem rationalPullbackCompositionCoherence (g : Y ⟶ X) (h : Z ⟶ Y)
     (sX : RationalModuleRealization l E X) (sY : RationalModuleRealization l E Y)
     (sZ : RationalModuleRealization l E Z)

@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.Scalar.ScalarCoefficientEquivalence
 
 /-! # Constants under the normalized finite coefficient comparison
 
-Source: Bhatt--Scholze, Lemma 6.5.8(1), (2) and Proposition 6.6.11.
+## References
+
+* Bhatt--Scholze, Lemma 6.5.8(1), (2) and Proposition 6.6.11
 -/
 
 @[expose] public noncomputable section
@@ -360,8 +362,7 @@ private def ordinaryConstants (S : Scheme.{u}) (l : ℕ) [Fact l.Prime]
 attribute [local irreducible] ordinaryConstants
 
 /-- Normalized coefficient transport identifies the two constant complex realizations.
-This is global on S; there is no morphism, chart, or perfectness hypothesis.
-Source: Bhatt--Scholze, Lemma 6.5.8(1), (2) and Proposition 6.6.11. -/
+This is global on S; there is no morphism, chart, or perfectness hypothesis. -/
 theorem integralResidueFiniteConstants
     (S : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

@@ -17,7 +17,13 @@ import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
 /-!
 # Descent of local twists on projective bundles
 
-Source: EGA II, Remark 4.2.7; Stacks, Tags 00AL, 00AM, 04TN and 01XS.
+## References
+
+* EGA II, Remark 4.2.7
+* Stacks, Tags 00AL, 00AM, 04TN and 01XS
+* Stacks, Tags 00AL, 00AM and 04TN
+* Tag 01XS
+* Tag 0BXJ
 -/
 
 @[expose] public section
@@ -103,9 +109,7 @@ private theorem decomposition_local_integer {S P : Scheme.{u}} (p : P ⟶ S)
 
 /-- Local integer twists descend to a unique locally constant degree and coefficient
 line. The hypothesis gives local normal forms; this theorem only performs descent
-and proves uniqueness, without asserting that every line has such normal forms.
-
-Source: EGA II, Remark 4.2.7; Stacks, Tags 00AL, 00AM and 04TN; Tag 01XS; Tag 0BXJ. -/
+and proves uniqueness, without asserting that every line has such normal forms. -/
 theorem projective_bundle_local_twist_descent (S : Scheme.{u}) (E : S.Modules)
     [E.IsQuasicoherent] (r : ℕ)
     [SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u} E r] (hr : 2 ≤ r)

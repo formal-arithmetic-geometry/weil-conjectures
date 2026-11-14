@@ -11,7 +11,11 @@ import WeilConjectures.AlgebraicGeometry.QuotientBaseChangeIdeal
 
 /-! # Local division in the kernel of a principal thickening
 
-Source: Stacks Project, Tags 01QQ and 0H3E.
+## References
+
+* Stacks Project, Tags 01QQ and 0H3E
+* Stacks Project, Tag 01QQ (affine closed subschemes), and Tag 0H3E (the ordinary quotient sheaf in
+  the comparison)
 -/
 
 @[expose] public section
@@ -21,10 +25,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency false in
-/-- A section killed on a principal thickening is locally a multiple of its defining power.
-
-Source: Stacks Project, Tag 01QQ (affine closed subschemes), and Tag 0H3E
-(the ordinary quotient sheaf in the comparison). -/
+/-- A section killed on a principal thickening is locally a multiple of its defining power. -/
 theorem principal_thickening_local_division
     (R : Type u) [CommRing R] (g : R) (W : (Spec (.of R)).Opens)
     (k : ℕ) (a : Γ(W.toScheme, ⊤))

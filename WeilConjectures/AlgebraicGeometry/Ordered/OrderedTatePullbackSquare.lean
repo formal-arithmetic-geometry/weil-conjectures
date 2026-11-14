@@ -8,7 +8,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.Vector.VectorBundleIntegrationCharts
 import WeilConjectures.AlgebraicGeometry.Ordered.OrderedTateCoefficientComposition
 
-/-! # The ordered Tate comparison around a commutative square -/
+/-! # The ordered Tate comparison around a commutative square
+
+## References
+
+* Tate pullback and transposition paragraph
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -16,9 +21,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 namespace AlgebraicGeometry.Etale
 
-/-- The ordered finite Tate comparisons commute around any square of scheme maps.
-Source: Tate pullback and transposition paragraph.
--/
+/-- The ordered finite Tate comparisons commute around any square of scheme maps. -/
 theorem orderedTatePullbackSquare (A : Type (u + 1)) [CommRing A]
     (N : ℕ) (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     {X Y X' Y' : Scheme.{u}} (s : Y ⟶ X) (s' : Y' ⟶ X')

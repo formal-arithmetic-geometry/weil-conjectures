@@ -9,7 +9,12 @@ module
 public import Mathlib.Algebra.Algebra.Pi
 public import Mathlib.Algebra.Algebra.Subalgebra.Lattice
 
-/-! # The algebra of equivariant functions on the split components -/
+/-! # The algebra of equivariant functions on the split components
+
+## References
+
+* Stacks Project, Tag 03SF, finite group actions on split covers
+-/
 
 @[expose] public section
 universe u
@@ -17,7 +22,6 @@ set_option autoImplicit false
 namespace AlgebraicGeometry.Scheme
 
 /-- Equivariant functions, realized as an intersection of algebra equalizers.
-Source: Stacks Project, Tag 03SF, finite group actions on split covers.
 The condition is `ρ a (f i) = f (α a i)`; thus no choice of orbit data enters this algebra. -/
 def affineTorsorEquivariantAlgebra
     (H C : Type u) [CommRing H] [CommRing C] [Algebra H C]

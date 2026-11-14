@@ -54,7 +54,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 
 /-! # Open pro-etale pullback preserves K-injective complexes
 
-Source: Stacks Project, Tags 08FI and 09A5.
+## References
+
+* Stacks Project, Tags 08FI and 09A5
 -/
 
 @[expose] public noncomputable section
@@ -71,8 +73,7 @@ attribute [local instance 30000]
   SheafOfModules.wEqualsLocallyBijective_coefficientUniverse
 attribute [local irreducible] proEtaleRingModulePullback
 
-/-- Open pullback preserves K-injectives, including transported coefficient rings.
-Source: Stacks Project, Tags 08FI and 09A5. -/
+/-- Open pullback preserves K-injectives, including transported coefficient rings. -/
 @[instance] theorem open_pullback_preservesKInjectiveComplexes {S Z : Scheme.{u}}
     (j : S ⟶ Z) [IsOpenImmersion j]
     (R : Sheaf (ProEt.topology Z) CommRingCat.{u + 1})

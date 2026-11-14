@@ -91,7 +91,11 @@ import all WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearSystemsExisten
 
 /-! # K-flatness for ordinary inverse systems
 
-Source: Zheng Construction 4.1; Stacks.
+## References
+
+* Zheng Construction 4.1
+* Stacks
+* Stacks sites-cohomology
 -/
 
 @[expose] public noncomputable section
@@ -140,8 +144,7 @@ private theorem finite_kflat (n : ℕ) [(I n).modules.Additive]
     ((NatIso.mapHomologicalComplex e (.up ℤ)).app P) ht.1
 
 include uPush adj in
-/-- An ordinary inverse system carries flat-term K-flat complexes to K-flat complexes.
-Source: Zheng Construction 4.1; Stacks sites-cohomology. -/
+/-- An ordinary inverse system carries flat-term K-flat complexes to K-flat complexes. -/
 theorem ordinaryInverseSystem_kflat [∀ n, (I n).modules.Additive]
     (P : OrdinaryInverseSystem.{c, v, r} J B τ J' uInv F σ I) [P.pull.Additive]
     (K : CochainComplex (Systems.{c, v, max c v r} J B τ) ℤ)

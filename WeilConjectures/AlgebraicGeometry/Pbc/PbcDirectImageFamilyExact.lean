@@ -41,8 +41,7 @@ variable {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
   [iY : Fact (∀ t : Y, IsUnit (l : Y.presheaf.stalk t))]
 
 /-- The fixed actual direct-image family admits the compatible exact structures.
-The input family, including its scalar coherence, is supplied independently.
-Source: orders 1306 and 1307, rational exact transport and scalar shift equations. -/
+The input family, including its scalar coherence, is supplied independently. -/
 theorem pbcDirectImageFamilyExact (f : X ⟶ Y)
     (pres : ∀ (E : Padic.FiniteCoefficientFields l Ω)
       (K : pbcIntegralStage l Ω X E),

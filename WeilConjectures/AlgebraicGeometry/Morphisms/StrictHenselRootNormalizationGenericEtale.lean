@@ -27,7 +27,12 @@ import WeilConjectures.RingTheory.RootAlgebraRegularAtRoot
 import WeilConjectures.AlgebraicGeometry.Morphisms.RootNormalizationGenericSourceEtale
 
 /-! # Properties of the explicit root-cover normalization
-Source: Stacks Project, Tags 09EB, 0BRM, 0EYG and 0EYH. -/
+
+## References
+
+* Stacks Project, Tags 09EB, 0BRM, 0EYG and 0EYH
+* Stacks Project, Tags 09EB, 0BRM and 0EYG, root-extension paragraph
+-/
 
 @[expose] public section
 universe u
@@ -79,8 +84,7 @@ private theorem etale_shrink_of_fibre_source_opens {X Y : Scheme.{u}}
   exact ⟨W, hy, IsZariskiLocalAtSource.of_iSup_eq_top V htop hV⟩
 
 /-- Abhyankar's lemma gives an etale neighborhood of the divisor generic point
-for the already finite, explicitly constructed relative normalization.
-Source: Stacks Project, Tags 09EB, 0BRM and 0EYG, root-extension paragraph. -/
+for the already finite, explicitly constructed relative normalization. -/
 theorem GaloisCover.strict_hensel_root_normalization_generic_etale
     {L U : Scheme.{u}} (i : U ⟶ L)
     (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)

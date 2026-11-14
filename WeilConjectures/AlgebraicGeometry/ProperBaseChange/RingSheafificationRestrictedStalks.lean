@@ -14,7 +14,9 @@ import Mathlib.CategoryTheory.Limits.Final
 
 /-! # Restricted ring sheafification units on abelian stalks
 
-Source: Stacks Project, Sheaves, Lemmas 007Z and 0087; restriction to an open subspace.
+## References
+
+* Stacks Project, Sheaves, Lemmas 007Z and 0087
 -/
 
 @[expose] public section
@@ -55,8 +57,7 @@ private theorem restrict_stalk_map_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
   exact IsIso.of_isIso_comp_right _ q
 
 /-- The ring sheafification unit remains bijective on underlying abelian stalks after
-restriction to an open subscheme.
-Source: Stacks Project, Sheaves, Lemmas 007Z and 0087; restriction to an open subspace. -/
+restriction to an open subscheme. -/
 theorem ringSheafification_restricted_stalk_bijective {X Y : Scheme.{u}}
     (f : X ⟶ Y) [IsOpenImmersion f] (P : Y.Opensᵒᵖ ⥤ CommRingCat.{u}) (x : X) :
     Function.Bijective ((TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x).map

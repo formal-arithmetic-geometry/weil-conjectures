@@ -13,7 +13,11 @@ import WeilConjectures.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale
 
 Transport the upstream affine-chart theorem along the canonical comparison of the small
 representative colimit with the full affine pointed-neighbourhood colimit.
-Source: Stacks Project, Tags 04HX and 04GW.
+
+## References
+
+* Stacks Project, Tags 04HX and 04GW
+* Stacks Project, Tag 04HX, with independence of the neighbourhood presentation from Tag 04GW
 -/
 
 @[expose] public section
@@ -62,9 +66,7 @@ private theorem smallStrictHenselization_base_compatibility
   rw [← hbig]
   simpa only [Category.assoc] using hh.trans hsmall
 
-/-- The upstream ind-etale chart theorem also holds for the small representative model.
-Source: Stacks Project, Tag 04HX, with independence of the neighbourhood presentation from Tag 04GW.
--/
+/-- The upstream ind-etale chart theorem also holds for the small representative model. -/
 theorem smallStrictHenselization_indEtale_of_affine_chart
     {S : Scheme.{u}} {Ω A : Type u} [Field Ω] [IsAlgClosed Ω] [CommRing A]
     (s : Spec (.of Ω) ⟶ S) (R : CommRingCat.{u})

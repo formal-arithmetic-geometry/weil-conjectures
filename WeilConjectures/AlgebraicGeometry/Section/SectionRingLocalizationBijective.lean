@@ -14,8 +14,11 @@ import WeilConjectures.AlgebraicGeometry.NonvanishingSectionTrivializes
 
 /-! # The section-ring localization comparison
 
-Source: Stacks Project, Properties, Lemma 01PW, and Cohomology of Schemes, Lemma 09MR in degree
-zero.
+## References
+
+* Stacks Project, Properties, Lemma 01PW, and Cohomology of Schemes, Lemma 09MR in degree zero
+* Stacks Project, Properties, Lemma 01PW(2), used in Lemma 01Q1
+* Cohomology of Schemes, Lemma 09MR, degree zero
 -/
 
 @[expose] public section
@@ -82,8 +85,6 @@ private theorem veroneseIso_power {X : Scheme.{u}} (L : X.Modules) [L.IsInvertib
 
 /-- A ring map satisfying the restriction-and-division formula on a nonvanishing open
 is bijective. No affineness or ampleness hypothesis is needed.
-Source: Stacks Project, Properties, Lemma 01PW(2), used in Lemma 01Q1;
-Cohomology of Schemes, Lemma 09MR, degree zero.
 
 Apply `invertS_cohomology` with the invertible module `L.tensorPow d`, the structure
 module, and cohomological degree zero. Identify degree-zero module cohomology with

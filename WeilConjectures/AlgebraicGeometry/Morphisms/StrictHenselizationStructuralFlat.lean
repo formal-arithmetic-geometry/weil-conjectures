@@ -15,7 +15,11 @@ import WeilConjectures.RingTheory.ProEtale.FaithfullyFlat
 import Mathlib.AlgebraicGeometry.Morphisms.Etale
 
 /-! # Flatness of the canonical affine strict henselization map
-Source: Stacks Project, Tags 04HX and 07QM; Tag 0EYG, first reduction paragraph.
+
+## References
+
+* Stacks Project, Tags 04HX and 07QM
+* Tag 0EYG, first reduction paragraph
 -/
 
 @[expose] public section
@@ -25,8 +29,7 @@ namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The ring map inducing the canonical strict henselization structural map is flat.
-Source: Stacks Project, Tags 04HX and 07QM; Tag 0EYG, first reduction paragraph. -/
+/-- The ring map inducing the canonical strict henselization structural map is flat. -/
 theorem strictHenselization_structural_ringHom_flat
     (R : CommRingCat.{u})
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (barY : Spec (.of Ω) ⟶ Spec R)

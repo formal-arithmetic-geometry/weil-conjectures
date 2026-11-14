@@ -19,8 +19,24 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategorySquareIs
 
 /-! # Ambient operation comparisons for finite scalar extension
 
-Source: Milne, Section 19.
 Existing declarations extracted from `PbcScalarExtension` to bound compilation cost.
+
+## References
+
+* Milne, Section 19
+* Stacks Tag 0D6E
+* Stacks Tag 0D6D
+* Stacks Tag 06YY
+* Stacks Tag 03ER
+* Stacks Tags 06YY and 0943
+* Stacks Tag 03EK
+* Stacks Tag 03EL
+* Stacks Tags 06YY and 0D6D
+* Stacks Tags 03EK and 03EL
+* Stacks Tags 03EK, 06YY and 07A6
+* Stacks Tags 03EK, 06YY, 0D6D and 07A6
+* Stacks Tags 0D6D and 0D6E
+* Stacks Tags 03EL, 0D6D, 0D6E and 07A6
 -/
 
 @[expose] public noncomputable section
@@ -206,8 +222,7 @@ theorem pbcScalarCoefficientInverseSquare :
     (scalarFiniteCoefficientMap_naturality g dE dF n.unop
       (pbcScalarQuotientMap l E F i n.unop))
 
-/-- The canonical derived restriction/direct-image comparison for the scalar inclusion.
-Source: Stacks Tag 0D6E. -/
+/-- The canonical derived restriction/direct-image comparison for the scalar inclusion. -/
 abbrev pbcScalarRestrictionDirectImage :=
   proEtaleRingRestrictionDerivedDirectImage g
     (pbcAdicCompletion Y (pbcIntegralDatum l E)) (pbcAdicCompletion Y (pbcIntegralDatum l F))
@@ -218,8 +233,7 @@ abbrev pbcScalarRestrictionDirectImage :=
     (pbcScalarCoefficientInverseSquare l E F i g)
 
 /-- The canonical comparison from termwise pullback to the published derived pullback,
-obtained by conjugating the identity of the common derived direct image.
-Source: Stacks Tag 0D6D. -/
+obtained by conjugating the identity of the common derived direct image. -/
 def pbcPullComparison {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) :
     proEtaleRingDerivedPullback g (pbcAdicCompletion Y d) (pbcAdicCompletion X d)
         (pbcCompletedCoefficientIso g d) ⟶ pbcActualDerivedPull g d :=
@@ -227,8 +241,7 @@ def pbcPullComparison {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum 
     (proEtaleRingDerivedAdjunction g (pbcAdicCompletion Y d) (pbcAdicCompletion X d)
       (pbcCompletedCoefficientIso g d))).symm (𝟙 _)
 
-/-- The canonical termwise restriction/pullback comparison for the scalar inclusion.
-Source: Stacks Tag 0D6D. -/
+/-- The canonical termwise restriction/pullback comparison for the scalar inclusion. -/
 abbrev pbcScalarRestrictionPullback :=
   proEtaleRingRestrictionDerivedPullback g
     (pbcAdicCompletion Y (pbcIntegralDatum l E)) (pbcAdicCompletion Y (pbcIntegralDatum l F))
@@ -239,8 +252,7 @@ abbrev pbcScalarRestrictionPullback :=
     (pbcScalarCoefficientInverseSquare l E F i g)
 
 /-- Flat-term K-flat complexes over the completed coefficients, the resolving class on
-which the derived scalar and pullback functors are computed termwise.
-Source: Stacks Tag 06YY. -/
+which the derived scalar and pullback functors are computed termwise. -/
 def PbcFlatKFlat (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (K : CochainComplex (pbcModules T (pbcAdicCompletion T d)) ℤ) : Prop :=
   CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}
@@ -248,8 +260,7 @@ def PbcFlatKFlat (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoeff
     ∀ n : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1}
       (R := pbcAdicCompletion T d) (K.X n)
 
-/-- Every complex has a flat-term K-flat resolution.
-Source: Stacks Tag 06YY. -/
+/-- Every complex has a flat-term K-flat resolution. -/
 theorem pbcFlatKFlat_resolution (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (K : CochainComplex (pbcModules T (pbcAdicCompletion T d)) ℤ) :
     ∃ (L : CochainComplex (pbcModules T (pbcAdicCompletion T d)) ℤ) (s : L ⟶ K),
@@ -309,8 +320,7 @@ private theorem finBiproductPow_exact {C : Type*} [Category C] [Preadditive C]
   exact ⟨preservesFiniteLimits_of_natIso eL.symm, preservesFiniteColimits_of_natIso eC.symm⟩
 
 open MonoidalCategory in
-/-- The completed target integral coefficients are flat over the source ones.
-Source: Stacks Tag 03ER. -/
+/-- The completed target integral coefficients are flat over the source ones. -/
 theorem pbcScalarCoefficient_flat (T : Scheme.{u}) :
     SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1}
       (R := pbcAdicCompletion T (pbcIntegralDatum l E))
@@ -352,8 +362,7 @@ theorem pbcScalarCoefficient_flat (T : Scheme.{u}) :
   exact (exactFunctor _ _).prop_of_iso (SheafOfModules.siteSheafTensorRightIso R M ≪≫ e₂).symm
     ((exactFunctor_iff _).2 ⟨h₁, h₂⟩)
 
-/-- Restriction along the completed scalar inclusion preserves flat-term K-flat complexes.
-Source: Stacks Tags 06YY and 0943. -/
+/-- Restriction along the completed scalar inclusion preserves flat-term K-flat complexes. -/
 theorem pbcScalarRestrict_flatKFlat (T : Scheme.{u})
     (K : CochainComplex (pbcModules T (pbcAdicCompletion T (pbcIntegralDatum l F))) ℤ)
     (hK : PbcFlatKFlat T (pbcIntegralDatum l F) K) :
@@ -365,8 +374,7 @@ theorem pbcScalarRestrict_flatKFlat (T : Scheme.{u})
     (pbcScalarCoefficient_flat l E F i T) K hK.1
   exact ⟨h.1, h.2 hK.2⟩
 
-/-- The termwise pullback is the published module pullback.
-Source: Stacks Tag 03EK. -/
+/-- The termwise pullback is the published module pullback. -/
 theorem pbcModulePull_eq {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) :
     proEtaleRingModulePullback g (pbcAdicCompletion Y d) (pbcAdicCompletion X d)
         (pbcCompletedCoefficientIso g d) = pbcActualModulePull g d := by
@@ -380,15 +388,13 @@ theorem pbcModulePull_eq {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDat
   exact (completedAdicChangeData X (completedCoefficientMap g d)).choose_spec.choose_spec.choose
     ((proEtaleModuleInverseImage g (pbcAdicCompletion Y d)).map f)
 
-/-- The ordinary identification of the two module pullbacks.
-Source: Stacks Tag 03EK. -/
+/-- The ordinary identification of the two module pullbacks. -/
 def pbcModulePullIso {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) :
     proEtaleRingModulePullback g (pbcAdicCompletion Y d) (pbcAdicCompletion X d)
         (pbcCompletedCoefficientIso g d) ≅ pbcActualModulePull g d :=
   eqToIso (pbcModulePull_eq g d)
 
-/-- The published pullback counit is invertible on K-flat complexes.
-Source: Stacks Tag 06YY. -/
+/-- The published pullback counit is invertible on K-flat complexes. -/
 theorem pbcActualPullComplexCounit_isIso {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A)
     (P : CochainComplex (pbcModules Y (pbcAdicCompletion Y d)) ℤ)
@@ -400,8 +406,7 @@ theorem pbcActualPullComplexCounit_isIso {A : Type (u + 1)} [CommRing A]
   dsimp only [pbcActualPullComplexCounit]
   infer_instance
 
-/-- The ordinary scalar mate of the inverse ordinary pullback comparison.
-Source: Stacks Tag 03EL. -/
+/-- The ordinary scalar mate of the inverse ordinary pullback comparison. -/
 def pbcScalarOrdinaryRestrictionPull :
     pbcRestrict (pbcScalarCoefficientMap l E F i Y) ⋙ pbcActualModulePull g (pbcIntegralDatum l E) ⟶
       pbcActualModulePull g (pbcIntegralDatum l F) ⋙
@@ -519,8 +524,7 @@ private theorem derivedConjugate_transport {C₁ C₂ : Type*} [Category C₁] [
 
 set_option linter.unusedVariables false in
 /-- The canonical pullback comparison is the localized termwise identification on
-flat-term K-flat complexes.
-Source: Stacks Tags 06YY and 0D6D. -/
+flat-term K-flat complexes. -/
 theorem pbcPullComparison_app {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (P : CochainComplex (pbcModules Y (pbcAdicCompletion Y d)) ℤ)
     (hp : PbcFlatKFlat Y d P) :
@@ -540,8 +544,7 @@ theorem pbcPullComparison_app {A : Type (u + 1)} [CommRing A] (d : AdicCoefficie
     (fun X ↦ Adjunction.derivedη_fac_app _ (HomotopyCategory.quasiIso _ _) _ _ X)
     (fun X ↦ Adjunction.derivedη_fac_app _ (HomotopyCategory.quasiIso _ _) _ _ X) P
 
-/-- The ordinary scalar mate is the identity-on-sections restriction/pullback comparison.
-Source: Stacks Tags 03EK and 03EL. -/
+/-- The ordinary scalar mate is the identity-on-sections restriction/pullback comparison. -/
 theorem pbcScalarOrdinaryRestrictionPull_eq :
     whiskerLeft (pbcRestrict (pbcScalarCoefficientMap l E F i Y))
         (pbcModulePullIso g (pbcIntegralDatum l E)).hom ≫
@@ -724,8 +727,7 @@ set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The derived scalar mate is the localized ordinary scalar mate on flat-term K-flat
-complexes with flat-term K-flat restriction.
-Source: Stacks Tags 03EK, 06YY and 07A6. -/
+complexes with flat-term K-flat restriction. -/
 theorem pbcScalarPullMate_app
     (K : CochainComplex (pbcModules Y (pbcAdicCompletion Y (pbcIntegralDatum l F))) ℤ)
     (hK : PbcFlatKFlat Y (pbcIntegralDatum l F) K)
@@ -827,8 +829,7 @@ private theorem scalarRestrictionPullback_chase {C : Type*} [Category C]
     _ = ci ≫ ch ≫ fy ≫ φE ≫ qp := by rw [← hC]; simp only [Category.assoc]
     _ = fy ≫ φE ≫ qp := by rw [← Category.assoc ci, hci, Category.id_comp]
 
-/-- The termwise restriction/pullback comparison is the localized ordinary comparison.
-Source: Stacks Tag 06YY. -/
+/-- The termwise restriction/pullback comparison is the localized ordinary comparison. -/
 theorem pbcScalarRestrictionPullback_app
     (K : CochainComplex (pbcModules Y (pbcAdicCompletion Y (pbcIntegralDatum l F))) ℤ) :
     (pbcScalarRestrictionPullback l E F i g).inv.app (DerivedCategory.Q.obj K) ≫
@@ -906,8 +907,7 @@ private theorem scalarPullMate_chase {C : Type*} [Category C]
       rw [Category.assoc, ← Category.assoc b, hF, Category.assoc]
 
 /-- The restriction/pullback mate identity on a flat-term K-flat representative whose
-restriction is again flat-term K-flat.
-Source: Stacks Tags 03EK, 06YY, 0D6D and 07A6. -/
+restriction is again flat-term K-flat. -/
 theorem pbcScalarPullMate_restriction_app
     (K : CochainComplex (pbcModules Y (pbcAdicCompletion Y (pbcIntegralDatum l F))) ℤ)
     (hK : PbcFlatKFlat Y (pbcIntegralDatum l F) K)
@@ -995,8 +995,7 @@ private theorem scalarNatTrans_ext_of_resolutions {C D : Type*} [Category C] [Ab
   rw [← cancel_epi (G.map e.hom), f.naturality, f'.naturality, hK]
 
 /-- The scalar mate of the inverse normalized pullback comparison is the termwise
-restriction/pullback comparison, after the canonical pullback comparisons.
-Source: Stacks Tags 03EK, 06YY, 0D6D and 07A6. -/
+restriction/pullback comparison, after the canonical pullback comparisons. -/
 theorem pbcScalarPullMate_restriction :
     whiskerLeft (pbcDerivedRestrict (pbcScalarCoefficientMap l E F i Y))
         (pbcPullComparison g (pbcIntegralDatum l E)) ≫
@@ -1050,8 +1049,7 @@ private theorem scalarMate_adjunct
   rw [← hn, ← Category.assoc, ← G.map_comp]
 
 /-- The canonical restriction/direct-image comparison is the pullback mate of the
-inverse termwise restriction/pullback comparison.
-Source: Stacks Tags 0D6D and 0D6E. -/
+inverse termwise restriction/pullback comparison. -/
 theorem pbcScalarRestrictionDirectImage_mate :
     (mateEquiv (proEtaleRingDerivedAdjunction g (pbcAdicCompletion Y (pbcIntegralDatum l F))
         (pbcAdicCompletion X (pbcIntegralDatum l F))
@@ -1083,8 +1081,7 @@ theorem pbcScalarRestrictionDirectImage_mate :
   exact hma.symm.trans hcl
 
 /-- The normalized derived pullback comparison is the conjugate of the canonical
-inverse restriction/direct-image comparison.
-Source: Stacks Tags 03EL, 0D6D, 0D6E and 07A6. -/
+inverse restriction/direct-image comparison. -/
 theorem pbcScalarOrdinaryPullIso_conjugate :
     conjugateEquiv ((pbcActualDerivedAdjunction g (pbcIntegralDatum l E)).comp
         (pbcDerivedScalarAdjunction (pbcScalarCoefficientMap l E F i X)))
@@ -1120,8 +1117,7 @@ theorem pbcScalarOrdinaryPullIso_conjugate :
   exact hcomp.trans δ.inv_hom_id.symm
 
 /-- The scalar mate of the direct-image comparison is the canonical inverse
-restriction/direct-image comparison.
-Source: Stacks Tags 03EL, 0D6D, 0D6E and 07A6. -/
+restriction/direct-image comparison. -/
 theorem pbcScalarDirectImageMap_scalarMate :
     (mateEquiv (pbcDerivedScalarAdjunction (pbcScalarCoefficientMap l E F i X))
         (pbcDerivedScalarAdjunction (pbcScalarCoefficientMap l E F i Y))

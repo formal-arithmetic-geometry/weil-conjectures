@@ -12,7 +12,10 @@ import WeilConjectures.AlgebraicGeometry.Etale.EtaleInverseImageCompositionModul
 /-!
 # Linearity of the composition comparisons on constant-ring etale modules
 
-Source: Stacks Project, Modules on Sites, Tags 03D8 and 03D7.
+## References
+
+* Stacks Project, Modules on Sites, Tags 03D8 and 03D7
+* Stacks Project, Tags 03D8 and 03D7
 -/
 
 @[expose] public section
@@ -49,7 +52,7 @@ private theorem exists_comparison_with_unique_unit
 
 set_option backward.defeqAttrib.useBackward true in
 /-- The abelian composition comparisons lift to module isomorphisms, uniquely for inverse
-image with the specified unit equation. Source: Stacks Project, Tags 03D8 and 03D7.
+image with the specified unit equation.
 
 The lambda-bound ring sheaves, forgetful functors and module direct images below are
 immediately applied to their actual definitions. The gamma maps are characterized by

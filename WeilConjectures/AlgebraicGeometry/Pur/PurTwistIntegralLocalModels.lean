@@ -15,6 +15,10 @@ import all Mathlib.CategoryTheory.Limits.HasLimits
 import Mathlib.RingTheory.AdicCompletion.Completeness
 
 /-! # Integral and finite local models of the scalar-extended root line
+
+## References
+
+* Stacks Project, Tags 03EK, 03PK and 03RV
 -/
 
 @[expose] public section
@@ -981,9 +985,7 @@ private theorem finiteLocalModel_nonzero
     ((e.hom.val.app W).hom.map_zero))
 
 /-- Scalar extension of the completed root line has local bases and ordinary
-finite quotients with finite étale local models.
-
-Source: Stacks Project, Tags 03EK, 03PK and 03RV. -/
+finite quotients with finite étale local models. -/
 theorem purTwistIntegralLocalModels
     (S : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

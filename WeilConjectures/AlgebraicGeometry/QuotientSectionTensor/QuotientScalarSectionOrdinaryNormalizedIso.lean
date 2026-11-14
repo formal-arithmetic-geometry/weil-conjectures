@@ -9,7 +9,12 @@ public import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSe
 import WeilConjectures.CategoryTheory.SixFunctors.InternalSectionScalarAdjunctionSupplement
 import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsUnit
 
-/-! Invertibility of the normalized sectionwise scalar map. -/
+/-! Invertibility of the normalized sectionwise scalar map.
+
+## References
+
+* Stacks 03EK and 06YY
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -125,8 +130,7 @@ private theorem canonical_section_extension (T : Scheme.{u}) (M : Modules Λ T) 
 variable [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ T)]
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ' T)]
 
-/-- A normalized scalar-extension transformation is objectwise invertible.
-Source: Stacks 03EK and 06YY; scalar-extension generators detect isomorphisms. -/
+/-- A normalized scalar-extension transformation is objectwise invertible. -/
 theorem scalar_section_ordinary_normalized_isIso (T : Scheme.{u})
     (model : SectionModel a T)
     (ordinary : QuotientChange.extension a T ⋙

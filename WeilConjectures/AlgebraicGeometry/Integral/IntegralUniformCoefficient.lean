@@ -21,6 +21,10 @@ The category is the published PbcIsBoundedConstructibleComplete, specialized to 
 actual unlifted valuation ring in Type (u+1). Its completion, uniform reductions and
 compatible origins are reused without redefining them. The published finite-extension
 convenience abbreviation instead takes E in Type u and lifts its valuation ring.
+
+## References
+
+* Serre, Local Fields, Chapter II, §2
 -/
 
 @[expose] public noncomputable section
@@ -36,7 +40,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 /-- The finite-extension valuation ring has the coefficient properties required by
-this definition. Source: Serre, Local Fields, Chapter II, §2. -/
+this definition. -/
 theorem pbcPadicCoefficientFacts (l : ℕ) [Fact l.Prime]
     (E : Type (u + 1)) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :
     IsNoetherianRing (Padic.coefficientExtensionIntegers l E) ∧

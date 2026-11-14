@@ -9,9 +9,16 @@ public import WeilConjectures.AlgebraicGeometry.Lisse.Tower.LisseTowerScalarRest
 
 /-! # The coefficient square after a further fixed-coefficient inverse image
 
-Source: Stacks Project, Tags 03CY, 03DA and 06YY. The square is built from the
+The square is built from the
 section-normalized ordinary coefficient square, the exact inverse-image coefficient
 mate, and the specified restriction-of-scalars compositor.
+
+## References
+
+* Stacks Project, Tags 03CY, 03DA and 06YY
+* Stacks Tags 03CY and 03DA
+* Stacks Tags 03DA and 05RU
+* Stacks Tags 03DA and 06YY
 -/
 
 @[expose] public noncomputable section
@@ -24,22 +31,19 @@ attribute [local irreducible] HasDerivedCategory.standard pbcDerivedRestrict
   lisseTowerFixedRealization constantAdicFiniteProjection
 
 /-- The uniquely specified ordinary coefficient square at the final scheme.
-Its defining property determines the square on all underlying abelian sections.
-Source: Stacks Tags 03CY and 03DA. -/
+Its defining property determines the square on all underlying abelian sections. -/
 def lisseTowerNormalizedScalarSquare {X Z : Scheme.{u}} (g : Z ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) :
     LisseTowerScalarSquare g d n :=
   (lisseTower_scalar_restriction g d n).exists.choose
 
-/-- The chosen square has the section normalization, independent of any tower.
-Source: Stacks Tags 03CY and 03DA. -/
+/-- The chosen square has the section normalization, independent of any tower. -/
 theorem lisseTowerNormalizedScalarSquare_sections {X Z : Scheme.{u}} (g : Z ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) :
     LisseTowerScalarSquareSections g d n (lisseTowerNormalizedScalarSquare g d n) :=
   (lisseTower_scalar_restriction g d n).exists.choose_spec.1
 
-/-- Localize the fixed-realization square without an etale comparison functor.
-Source: Stacks Tags 03DA and 05RU. -/
+/-- Localize the fixed-realization square without an etale comparison functor. -/
 def lisseTowerFixedScalarIso {X Z : Scheme.{u}} (g : Z ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ)
     (c : LisseTowerScalarSquare g d n) :
@@ -59,8 +63,7 @@ def lisseTowerFixedScalarIso {X Z : Scheme.{u}} (g : Z ⟶ X)
 
 /-- The scalar comparison for inverse image followed by fixed realization, after
 restriction to the actual inverse image of the constant completion ring.
-This is a paste of specified comparisons, with no choice of a local tower or arrow.
-Source: Stacks Tags 03DA and 06YY. -/
+This is a paste of specified comparisons, with no choice of a local tower or arrow. -/
 def lisseTowerPulledScalarIso {X Z T : Scheme.{u}} (g : Z ⟶ X) (h : Z ⟶ T)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) :
     normalizationRestrict (ProEt.topology T) (lisseTowerEtaleQuotient d n) ⋙

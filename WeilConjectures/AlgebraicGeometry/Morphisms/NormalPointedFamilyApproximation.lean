@@ -17,7 +17,10 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 /-!
 # Normal Noetherian approximation of a pointed smooth family
 
-Source: Stacks Project, Tag 0EZJ, normal approximation and family descent.
+## References
+
+* Stacks Project, Tag 0EZJ, normal approximation and family descent
+* Stacks Project, Tag 0EZJ, the limit reduction up to the choice of generic points
 -/
 
 @[expose] public section
@@ -30,9 +33,7 @@ namespace AlgebraicGeometry.Scheme
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
-/-- Descend the base, family, section, and an invertible integer simultaneously.
-
-Source: Stacks Project, Tag 0EZJ, the limit reduction up to the choice of generic points. -/
+/-- Descend the base, family, section, and an invertible integer simultaneously. -/
 theorem exists_normal_pointed_family_approximation {S C : Scheme.{u}} [CompactSpace S]
     [QuasiSeparatedSpace S] [IsIntegral S]
     (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))

@@ -12,7 +12,11 @@ import WeilConjectures.CategoryTheory.Adjunction.Derived.DerivedAdjunctionSingle
 
 /-! # The unit map on closed-fibre stalks
 
-Source: Stacks Project, Tag 0GJU.
+## References
+
+* Stacks Project, Tag 0GJU
+* Stacks Project, Tag 0GJU, identification with alpha following the stalk calculation
+* Tag 0GJP
 -/
 
 @[expose] public section
@@ -55,9 +59,7 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- On zeroth cohomology, the closed-fibre stalk of the derived adjunction unit is
-conjugate to the canonical map defining local acyclicity. No local acyclicity is assumed.
-Source: Stacks Project, Tag 0GJU, identification with alpha following the stalk calculation; Tag
-0GJP. -/
+conjugate to the canonical map defining local acyclicity. No local acyclicity is assumed. -/
 theorem closedFibre_derivedUnit_zero_stalk_comparison
     {X S : Scheme.{u}} (f : X ⟶ S)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

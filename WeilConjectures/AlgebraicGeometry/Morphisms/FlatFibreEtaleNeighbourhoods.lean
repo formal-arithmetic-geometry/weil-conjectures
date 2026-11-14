@@ -16,7 +16,11 @@ import WeilConjectures.AlgebraicGeometry.EtaleOpenOfSmoothZeroFibreDimension
 /-!
 # Etale fibres of a flat morphism of finite presentation
 
-Source: Stacks Project, Tags 02GM, 02G8, and 02GK, and their pointwise algebra arguments.
+## References
+
+* Stacks Project, Tags 02GM, 02G8, and 02GK, and their pointwise algebra arguments
+* Stacks Project, Tag 02GM, morphisms-lemma-etale-flat-etale-fibres, together with Tags 02G8 and
+  02GK for unramifiedness and the pointwise etale criterion
 -/
 
 @[expose] public section
@@ -26,10 +30,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- For a flat morphism locally of finite presentation, an etale fibre is equivalent to
-etale source neighbourhoods at all points over the chosen target point.
-
-Source: Stacks Project, Tag 02GM, morphisms-lemma-etale-flat-etale-fibres, together with Tags
-02G8 and 02GK for unramifiedness and the pointwise etale criterion. -/
+etale source neighbourhoods at all points over the chosen target point. -/
 theorem etale_fibre_iff_forall_etale_neighbourhood
     {X Y : Scheme.{u}} (f : X ⟶ Y) [Flat f] [LocallyOfFinitePresentation f] (y : Y) :
     Etale (f.fiberToSpecResidueField y) ↔

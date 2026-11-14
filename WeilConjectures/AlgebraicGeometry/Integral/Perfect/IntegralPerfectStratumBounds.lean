@@ -15,7 +15,12 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDer
 
 /-! # Upper bounds for one locally perfect support piece
 
-Source: Bhatt--Scholze, Lemma 6.3.14, exact open and closed extensions.
+## References
+
+* Bhatt--Scholze, Lemma 6.3.14, exact open and closed extensions
+* Bhatt--Scholze, Lemma 6.3.14 and Lemma 6.5.8
+* Bhatt--Scholze, Lemma 6.3.14
+* Stacks Tag 08JA
 -/
 
 @[expose] public noncomputable section
@@ -28,8 +33,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- A support piece is bounded above.
-Source: Bhatt--Scholze, Lemma 6.3.14 and Lemma 6.5.8. -/
+/-- A support piece is bounded above. -/
 theorem integralPerfectStratumPiece_boundedAbove
     (T : Scheme.{u}) [IsNoetherian T]
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
@@ -66,8 +70,7 @@ theorem integralPerfectStratumPiece_boundedAbove
     (cbcOpenShriek d j hj).isLE_mapDerivedCategory_obj _ b
   exact ⟨b, DerivedCategory.TStructure.t.isLE_of_iso e.symm b⟩
 
-/-- One support piece supplies the uniform target-variable lower-bound offset.
-Source: Bhatt--Scholze, Lemma 6.3.14; Stacks Tag 08JA. -/
+/-- One support piece supplies the uniform target-variable lower-bound offset. -/
 theorem integralPerfectStratumPiece_hom_lowerBound
     (T : Scheme.{u}) [IsNoetherian T]
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)

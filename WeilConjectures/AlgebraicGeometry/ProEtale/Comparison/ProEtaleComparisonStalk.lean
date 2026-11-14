@@ -28,7 +28,10 @@ set_option linter.privateModule false
 /-!
 # Etale-to-pro-etale comparison on geometric stalks
 
-Source: Stacks Project, Pro-etale Cohomology, Tags 0GLZ and 0993; Sites, Tag 05V1.
+## References
+
+* Stacks Project, Pro-etale Cohomology, Tags 0GLZ and 0993
+* Sites, Tag 05V1
 -/
 
 @[expose] public section

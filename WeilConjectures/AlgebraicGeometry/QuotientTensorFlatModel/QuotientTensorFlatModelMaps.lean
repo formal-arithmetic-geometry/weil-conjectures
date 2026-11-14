@@ -12,10 +12,21 @@ import all WeilConjectures.CategoryTheory.Derived.DerivedTensorRightExact
 
 /-! # Ordinary signed-total maps for the quotient tensor square
 
-Source: Stacks Project, Tags 03EL, 07A4 and 0G7E.
-
 The source and target computation maps are actual localization counits. The two
 ordinary paths retain the canonical balancing isomorphism and signed tensorators.
+
+## References
+
+* Stacks Project, Tags 03EL, 07A4 and 0G7E
+* Stacks 0G7E
+* Stacks 06YY
+* Stacks 07A4
+* Stacks 03EL
+* Stacks 03EL and 07A4
+* Stacks 06YY and 0G7E
+* Stacks 06YY and 07A4
+* Stacks 06YY, 0G7E
+* Stacks 06YY, 07A4 and 0G7E
 -/
 
 @[expose] public noncomputable section
@@ -49,18 +60,15 @@ variable {R S : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [MonObj R] [IsCommMonObj R] [MonObj S] [IsCommMonObj S]
   (a : R ⟶ S) [IsMonHom a] {X Y : Scheme.{u}} (f : X ⟶ Y)
 
-/-- Termwise geometric pullback of a complex.
-Source: Stacks 0G7E. -/
+/-- Termwise geometric pullback of a complex. -/
 abbrev pullComplex (B : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj B] [IsCommMonObj B] :=
   (CondensedRing.upperStar B f).mapHomologicalComplex (.up ℤ)
 
-/-- Termwise coefficient extension of a complex.
-Source: Stacks 06YY. -/
+/-- Termwise coefficient extension of a complex. -/
 abbrev scalarComplex (T : Scheme.{u}) := (extension a T).mapHomologicalComplex (.up ℤ)
 
-/-- The signed-total ordinary pullback tensorator.
-Source: Stacks 07A4. -/
+/-- The signed-total ordinary pullback tensorator. -/
 def totalPull (B : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj B] [IsCommMonObj B] (P Q : CochainComplex (Modules B Y) ℤ) :
     (pullComplex f B).obj (P ⊗ Q) ⟶
@@ -70,15 +78,13 @@ def totalPull (B : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   ((Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans (.up ℤ)
     (CondensedRing.upperStar B f)).app P).app Q
 
-/-- The ordinary balancing comparison prolonged to complexes.
-Source: Stacks 03EL. -/
+/-- The ordinary balancing comparison prolonged to complexes. -/
 def totalBalance (P : CochainComplex (Modules R Y) ℤ) :
     (pullComplex f S).obj ((scalarComplex a Y).obj P) ⟶
       (scalarComplex a X).obj ((pullComplex f R).obj P) :=
   (NatTrans.mapHomologicalComplex (CondensedRing.pullIso a f).inv (.up ℤ)).app P
 
-/-- The ordinary path that balances before taking the two tensorators.
-Source: Stacks 07A4. -/
+/-- The ordinary path that balances before taking the two tensorators. -/
 def ordinaryLeft (P Q : CochainComplex (Modules R Y) ℤ) :
     (pullComplex f S).obj ((scalarComplex a Y).obj (P ⊗ Q)) ⟶
       (scalarComplex a X).obj ((pullComplex f R).obj P) ⊗
@@ -87,8 +93,7 @@ def ordinaryLeft (P Q : CochainComplex (Modules R Y) ℤ) :
     (scalarComplex a X).map (totalPull f R P Q) ≫
     totalScalar a X ((pullComplex f R).obj P) ((pullComplex f R).obj Q)
 
-/-- The ordinary path that takes the tensorators before balancing the factors.
-Source: Stacks 07A4. -/
+/-- The ordinary path that takes the tensorators before balancing the factors. -/
 def ordinaryRight (P Q : CochainComplex (Modules R Y) ℤ) :
     (pullComplex f S).obj ((scalarComplex a Y).obj (P ⊗ Q)) ⟶
       (scalarComplex a X).obj ((pullComplex f R).obj P) ⊗
@@ -134,8 +139,7 @@ private theorem signed_square
     Functor.mapHomologicalComplexδNatTrans_comp] at h
   exact h.trans (Category.assoc _ _ _)
 
-/-- The ordinary balancing square, including all signed-total summands.
-Source: Stacks 03EL and 07A4. -/
+/-- The ordinary balancing square, including all signed-total summands. -/
 theorem ordinary_square (P Q : CochainComplex (Modules R Y) ℤ) :
     ordinaryLeft a f P Q = ordinaryRight a f P Q := by
   let := CondensedRing.internalScalarMonoidal a X
@@ -150,20 +154,17 @@ theorem ordinary_square (P Q : CochainComplex (Modules R Y) ℤ) :
   set_option backward.isDefEq.respectTransparency true in
     exact h
 
-/-- Compute the scalar/geometric composite on one factor.
-Source: Stacks 06YY and 0G7E. -/
+/-- Compute the scalar/geometric composite on one factor. -/
 def factorCompute (P : CochainComplex (Modules R Y) ℤ) :
     (D a X).obj ((L R f).obj (DerivedCategory.Q.obj P)) ⟶
       DerivedCategory.Q.obj ((scalarComplex a X).obj ((pullComplex f R).obj P)) :=
   (D a X).map (computePull f P) ≫ compute a X ((pullComplex f R).obj P)
 
-/-- The common target comparison, without cancelling a tensor localization map.
-Source: Stacks 06YY and 07A4. -/
+/-- The common target comparison, without cancelling a tensor localization map. -/
 def targetCompute (P Q : CochainComplex (Modules R Y) ℤ) :=
   factorCompute a f P ⊗ₘ factorCompute a f Q
 
-/-- Compute the source by scalar extension followed by geometric pullback.
-Source: Stacks 06YY and 0G7E. -/
+/-- Compute the source by scalar extension followed by geometric pullback. -/
 def sourceCompute (P Q : CochainComplex (Modules R Y) ℤ) :
     (L S f).obj ((D a Y).obj (DerivedCategory.Q.obj P ⊗ DerivedCategory.Q.obj Q)) ⟶
       DerivedCategory.Q.obj ((pullComplex f S).obj ((scalarComplex a Y).obj (P ⊗ Q))) :=
@@ -171,15 +172,13 @@ def sourceCompute (P Q : CochainComplex (Modules R Y) ℤ) :
     (L S f).map (compute a Y (P ⊗ Q)) ≫
     computePull f ((scalarComplex a Y).obj (P ⊗ Q))
 
-/-- The localization tensorator on the common target complexes.
-Source: Stacks 07A4. -/
+/-- The localization tensorator on the common target complexes. -/
 abbrev targetLocalization (P Q : CochainComplex (Modules R Y) ℤ) :=
   Functor.LaxMonoidal.μ DerivedCategory.Q
     ((scalarComplex a X).obj ((pullComplex f R).obj P))
     ((scalarComplex a X).obj ((pullComplex f R).obj Q))
 
-/-- Convert a localized ordinary tensor to the tensor of the localized factors.
-Source: Stacks 07A4. -/
+/-- Convert a localized ordinary tensor to the tensor of the localized factors. -/
 def targetTensor (P Q : CochainComplex (Modules R Y) ℤ)
     [IsIso (targetLocalization a f P Q)] :=
   inv (targetLocalization a f P Q)
@@ -207,8 +206,7 @@ variable [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules S T)]
 
 omit [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules S T)] in
-/-- The common target computation is invertible on K-flat factors.
-Source: Stacks 06YY, 0G7E. -/
+/-- The common target computation is invertible on K-flat factors. -/
 theorem targetCompute_isIso (P Q : CochainComplex (Modules R Y) ℤ)
     (hP : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat P)
     (hQ : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat Q) :
@@ -223,8 +221,7 @@ theorem targetCompute_isIso (P Q : CochainComplex (Modules R Y) ℤ)
   infer_instance
 
 omit [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules S T)] in
-/-- Tensor normalization makes the target localization tensorator invertible.
-Source: Stacks 06YY, 07A4 and 0G7E. -/
+/-- Tensor normalization makes the target localization tensorator invertible. -/
 theorem targetLocalization_isIso
     (bX : TensorIso a X) (hbX : QuotientSectionTensor.TensorNormalized a X bX)
     (P Q : CochainComplex (Modules R Y) ℤ)

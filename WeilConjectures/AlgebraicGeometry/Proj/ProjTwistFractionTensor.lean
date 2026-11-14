@@ -12,7 +12,12 @@ import Mathlib.Tactic.Ring
 
 /-! # Scalar extension of one homogeneous fraction piece
 
-Source: Stacks Project, Tags 01MY and 01N2, standard-open calculation.
+## References
+
+* Stacks Project, Tags 01MY and 01N2, standard-open calculation
+* Stacks, Tags 01MY and 01N2
+* Stacks, Tag 01MY
+* Stacks, Tag 01N2, standard-open zero criterion
 -/
 
 @[expose] public section
@@ -24,8 +29,7 @@ open TensorProduct
 
 namespace AlgebraicGeometry.Proj
 
-/-- The degree-j fraction piece in A_f, constructed as a span of homogeneous fractions.
-Source: Stacks, Tags 01MY and 01N2. -/
+/-- The degree-j fraction piece in A_f, constructed as a span of homogeneous fractions. -/
 def twistChartFractionSubmodule
     {R A : Type u} [CommRing R] [CommRing A] [Algebra R A]
     (𝒜 : ℕ → Submodule R A) (n : ℕ) (f : A) (j : ℤ) :
@@ -80,7 +84,7 @@ private lemma nonnegative_offset : 0 ≤ j + (j.natAbs : ℤ) * n := by
 
 include hf hn in
 /-- Every element of the span is a single homogeneous fraction. Common denominators
-preserve its degree. Source: Stacks, Tag 01MY. -/
+preserve its degree. -/
 theorem twistChartFraction_representative
     (z : twistChartFractionSubmodule 𝒜 n f j) :
     ∃ (m i : ℕ) (a : A), (i : ℤ) = j + (m : ℤ) * n ∧ a ∈ 𝒜 i ∧
@@ -175,8 +179,7 @@ private lemma tensor_representative {S : Type u} [CommRing S] [Algebra R S]
 end Fractions
 
 /-- Scalar extension of the inclusion of a homogeneous fraction piece is injective.
-The map is normalized as coefficient multiplication followed by the localization of ψ.
-Source: Stacks, Tag 01N2, standard-open zero criterion. -/
+The map is normalized as coefficient multiplication followed by the localization of ψ. -/
 theorem exists_twistChartFraction_tensor_embedding
     {R S A B : Type u} [CommRing R] [CommRing S] [CommRing A] [CommRing B]
     [Algebra R S] [Algebra R A] [Algebra S B]

@@ -10,7 +10,9 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 
 /-! # Unit normalization of a mixed derived mate
 
-Source: Stacks Project, Tags 0F7B and 0D6E.
+## References
+
+* Stacks Project, Tags 0F7B and 0D6E
 -/
 
 @[expose] public section
@@ -63,8 +65,7 @@ private lemma square_factors
 /-- The mate of an exact derived square carries the source right-derived unit to the
 ordinary homotopy mate followed by the target unit. Expand the derived mate as unit,
 square and counit; use their factorization identities and naturality. On complex
-representatives the remaining equality is the ordinary mate formula degree by degree.
-Source: Stacks Project, Tags 0F7B and 0D6E. -/
+representatives the remaining equality is the ordinary mate formula degree by degree. -/
 theorem mixedDerivedMateUnit
     {C D E V : Type*} [Category C] [Category D] [Category E] [Category V]
     [Abelian C] [Abelian D] [Abelian E] [Abelian V]

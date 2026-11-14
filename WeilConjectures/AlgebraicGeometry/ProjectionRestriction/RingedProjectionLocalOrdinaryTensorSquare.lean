@@ -47,7 +47,11 @@ import all Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 
 /-! # Ordinary tensor coherence for the localized adjunction mate
 
-Source: Stacks Project, Tags 04J0 and 07A4.
+## References
+
+* Stacks Project, Tags 04J0 and 07A4
+* Stacks Project, Modules on Sites, Tag 04J0
+* Cohomology on Sites, Tag 07A4
 -/
 
 @[expose] public noncomputable section
@@ -83,9 +87,7 @@ attribute [local irreducible] SheafOfModules.monoidalCategory
 
 -- The four section formulas involve the global and slice module adjunction presentations.
 /-- The ordinary inverse mate commutes with the two pullback and two restriction
-comparisons on module sheaves, without derived categories or resolving complexes.
-
-Source: Stacks Project, Modules on Sites, Tag 04J0; Cohomology on Sites, Tag 07A4. -/
+comparisons on module sheaves, without derived categories or resolving complexes. -/
 theorem localOrdinaryTensorSquare
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R_Y : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})

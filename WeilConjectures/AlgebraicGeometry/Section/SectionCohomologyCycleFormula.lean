@@ -9,7 +9,10 @@ public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeOpenChoices
 
 /-! # The section cohomology comparison on cycles
 
-Source: Stacks Project, Tags 01E4, 01F4 and 01FB.
+## References
+
+* Stacks Project, Tags 01E4, 01F4 and 01FB
+* Stacks Project, Tag 01E4
 -/
 
 @[expose] public section
@@ -90,7 +93,6 @@ attribute [local instance] enoughInjectives
 -- The adjunction comparison crosses sheaf, presheaf, and evaluation homology objects.
 /-- Evaluation of theta sends the homology class of a cycle to its sheaf cohomology class.
 The cycle section is pinned by the inverse kernel comparison and exact evaluation.
-Source: Stacks Project, Tag 01E4.
 -/
 theorem section_comparison_cycles {Y : Scheme.{u}}
     (K : CochainComplex (SheafOfModules.{u} Y.ringCatSheaf) ℕ)

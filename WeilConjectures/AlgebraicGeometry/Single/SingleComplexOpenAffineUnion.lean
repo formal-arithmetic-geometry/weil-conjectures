@@ -12,7 +12,10 @@ import WeilConjectures.AlgebraicGeometry.Single.SingleComplexOpenUnionTriangles
 
 /-! # The affine-adjoining step of single-complex source-open induction
 
-Source: Stacks Project, Tag 0DJ9, induction step.
+## References
+
+* Stacks Project, Tag 0DJ9, induction step
+* Stacks Project, Tag 0DJ9, induction step, applied inside `U ⊔ V`
 -/
 
 @[expose] public section
@@ -22,9 +25,7 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-/-- Gluing the comparison after adjoining one affine open.
-
-Source: Stacks Project, Tag 0DJ9, induction step, applied inside `U ⊔ V`. -/
+/-- Gluing the comparison after adjoining one affine open. -/
 theorem singleComplexOpenComparison_affine_union
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

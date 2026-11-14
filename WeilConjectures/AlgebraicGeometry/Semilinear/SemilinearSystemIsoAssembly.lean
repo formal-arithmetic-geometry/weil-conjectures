@@ -108,7 +108,10 @@ import Mathlib.CategoryTheory.Functor.ReflectsIso.Jointly
 
 /-! # Assembly of compatible coefficient-level isomorphisms
 
-Source: Zheng Construction 4.1, module sheaves on the ringed sequence site.
+## References
+
+* Zheng Construction 4.1, module sheaves on the ringed sequence site
+* Zheng Construction 4.1, the actual module sheaves on the product site
 -/
 
 @[expose] public noncomputable section
@@ -284,8 +287,7 @@ private theorem assemble_iso_evaluation
 
 end Assembly
 
-/-- Compatible isomorphisms on every coefficient level assemble to a system isomorphism.
-Source: Zheng Construction 4.1, the actual module sheaves on the product site. -/
+/-- Compatible isomorphisms on every coefficient level assemble to a system isomorphism. -/
 theorem systemIsoOfEvaluation_exists
     {M N : Systems.{c, v, max c v r} J B τ}
     (δ : ∀ n : ℕ, (evaluation.{c, v, max c v r} J B τ n).obj M ≅

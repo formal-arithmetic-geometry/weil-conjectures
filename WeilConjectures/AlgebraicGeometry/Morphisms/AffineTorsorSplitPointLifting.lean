@@ -15,7 +15,10 @@ import Mathlib.AlgebraicGeometry.PullbackCarrier
 
 /-! # Point lifting along a split faithfully flat puncture cover
 
-Source: Stacks Project, Tag 03SF. -/
+## References
+
+* Stacks Project, Tag 03SF
+-/
 
 @[expose] public section
 universe u
@@ -24,7 +27,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- Compatibility of the explicit split section with a second base.
-Source: Stacks Project, Tag 03SF. Substitute the section's structural-map equation
+Substitute the section's structural-map equation
 and then the supplied equality of the two maps to S. -/
 theorem fixedSplitSectionOver_compat {Y S T V W : Scheme.{u}}
     (p : Y ⟶ S) (t : T ⟶ S) (k : V ⟶ T) (v : V ⟶ W) (w : W ⟶ S)
@@ -34,8 +37,7 @@ theorem fixedSplitSectionOver_compat {Y S T V W : Scheme.{u}}
   rw [fixedSplitSection_base p t k d δ hδ, hk]
 
 /-- The split section, retaining its structural map to a second base.
-This is a pullback lift of two explicit morphisms; no witness is chosen.
-Source: Stacks Project, Tag 03SF. -/
+This is a pullback lift of two explicit morphisms; no witness is chosen. -/
 noncomputable def fixedSplitSectionOver {Y S T V W : Scheme.{u}}
     (p : Y ⟶ S) (t : T ⟶ S) (k : V ⟶ T) (v : V ⟶ W) (w : W ⟶ S)
     (hk : k ≫ t = v ≫ w) (d : ℕ) (δ : pullback p t ≅ ∐ fun _ : Fin d ↦ T)
@@ -44,9 +46,7 @@ noncomputable def fixedSplitSectionOver {Y S T V W : Scheme.{u}}
   pullback.lift (fixedSplitSection p t k d δ x) v
     (fixedSplitSectionOver_compat p t k v w hk d δ hδ x)
 
-/-- Every point above H lifts to one of the explicit split sections above C.
-
-Source: Stacks Project, Tag 03SF; faithful flatness and base change. -/
+/-- Every point above H lifts to one of the explicit split sections above C. -/
 theorem affine_torsor_split_point_lifting
     (R H : CommRingCat.{u}) (g : R) (ι : R →+* H)
     (C : Type u) [CommRing C] [Algebra H C] [Module.FaithfullyFlat H C]

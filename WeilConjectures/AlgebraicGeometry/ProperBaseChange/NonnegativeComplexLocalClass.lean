@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinaryLocalClassCycles
 
 /-! # Ordinary local classes and extension by zero
 
-Source: Stacks Project, Cohomology, Tag 01E4.
+## References
+
+* Stacks Project, Cohomology, Tag 01E4
 -/
 
 @[expose] public section
@@ -76,8 +78,7 @@ private theorem localClass_of_cycles {C : Type*} [Category C]
 -- Transport cycles through extension and the two section forgetful functors.
 /-- The module cocycle class map is the abelian sheafification class map, compatibly
 with extension by zero and exact evaluation. No derived category or acyclicity
-hypothesis is used.
-Source: Stacks Project, Cohomology, Tag 01E4. -/
+hypothesis is used. -/
 theorem nonnegativeComplex_localClass {X Y : Scheme.{u}}
     (D : SheafOfModules.{u} (moduleRings X.toRingedSpace) ⥤
       SheafOfModules.{u} (moduleRings Y.toRingedSpace)) [D.Additive]

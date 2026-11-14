@@ -19,7 +19,10 @@ import Mathlib.CategoryTheory.Localization.Equivalence
 
 /-! # Perfection of the direct image of a relatively flat single module
 
-Source: Stacks Project, Tag 0B91(2), via the proof of Tag 0A1H.
+## References
+
+* Stacks Project, Tag 0B91(2), via the proof of Tag 0A1H
+* Stacks Project, Tag 0B91(2), using Tag 0A1H
 -/
 
 @[expose] public section
@@ -78,8 +81,7 @@ private noncomputable def restrictIsoEquivalence {Y Z : Scheme.{u}} (s : Y ≅ Z
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Proper direct image of a finitely presented, relatively flat module is perfect.
-This statement has no Čech cover, specified section model or base-change conclusion.
-Source: Stacks Project, Tag 0B91(2), using Tag 0A1H. -/
+This statement has no Čech cover, specified section model or base-change conclusion. -/
 theorem properFlat_single_derivedDirectImage_perfect
     {X S : Scheme.{u}} (f : X ⟶ S)
     [IsProper f] [LocallyOfFinitePresentation f] [QuasiCompact f]

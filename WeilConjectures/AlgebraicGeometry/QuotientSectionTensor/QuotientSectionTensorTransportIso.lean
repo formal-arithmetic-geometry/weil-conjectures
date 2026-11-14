@@ -8,7 +8,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionTensorData
 import WeilConjectures.AlgebraicGeometry.IntegralResidueDerivedMonoidal
 
-/-! # Transport of one quotient tensor equation along representative isomorphisms -/
+/-! # Transport of one quotient tensor equation along representative isomorphisms
+
+## References
+
+* Stacks 06YS and 06YU
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -44,8 +49,7 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ T)]
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ' T)]
 
-/-- Transport a single representative tensor equation to a fixed derived pair.
-Source: Stacks 06YS and 06YU. -/
+/-- Transport a single representative tensor equation to a fixed derived pair. -/
 theorem tensor_section_condition_transport_iso
     (T : Scheme.{u}) (c : ScalarSectionData a T) (b : TensorIso a T)
     (barB : tensor Λ T ⋙ c.model.T ≅

@@ -8,7 +8,13 @@ module
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Clopen.ProEtaleClopenStructuralComparisonPrefix
 
 /-! Split structural comparison data for finite clopen restriction.
-Source: Stacks Project, Tag 0GMW; Tag 0FPQ. -/
+
+## References
+
+* Stacks Project, Tag 0GMW
+* Tag 0FPQ
+* Stacks Project, Tag 0FPQ
+-/
 
 @[expose] public noncomputable section
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
@@ -25,11 +31,9 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposi
 open WeilConjectures
 namespace AlgebraicGeometry.Scheme.ProEt
 
-/-! Symmetry completion for the clopen structural comparison.
-Source: Stacks Project, Tag 0FPQ. -/
+/-! Symmetry completion for the clopen structural comparison. -/
 
 /-- The signed Koszul symmetry clause follows from the normalized prefix comparison.
-Source: Stacks Project, Tag 0FPQ.
 
 The proof compares the two total-tensor routes on each summand; braided coherence gives the
 Koszul sign and the prefix equations identify both routes with the chosen comparison. -/

@@ -14,12 +14,15 @@ import WeilConjectures.AlgebraicGeometry.Modules.InverseImageStalkScalarTranspor
 /-!
 # Stalks and germs of the tensor pullback of modules
 
-Source: Stacks Project, Sheaves, Lemma 6.26.4 (Tag 0098).
-
 Stalks of module sheaves are taken with the recorded stalk functor
 `RingedSpace.moduleStalkFunctor`. Mathlib writes extension of
 scalars as `O_{X,x} ⊗ G_{f(x)}`. This is the tensor product in the node via its canonical
 symmetry; the corresponding pure tensor is `1 ⊗ s_{f(x)}`.
+
+## References
+
+* Stacks Project, Sheaves, Lemma 6.26.4 (Tag 0098)
+* Stacks Project, Tag 0098
 -/
 
 @[expose] public section
@@ -38,8 +41,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- The stalk of tensor pullback is naturally the extension of scalars of the original
-stalk along `f.stalkMap x`; a pulled-back section has germ `1 ⊗ s_{f(x)}`.
-Source: Stacks Project, Tag 0098. -/
+stalk along `f.stalkMap x`; a pulled-back section has germ `1 ⊗ s_{f(x)}`. -/
 theorem exists_tensorPullback_stalk_iso {X Y : Scheme.{u}} (f : X ⟶ Y) (x : X) :
     ∃ e : tensorPullback f ⋙ RingedSpace.moduleStalkFunctor X.toRingedSpace x ≅
         RingedSpace.moduleStalkFunctor Y.toRingedSpace (f x) ⋙

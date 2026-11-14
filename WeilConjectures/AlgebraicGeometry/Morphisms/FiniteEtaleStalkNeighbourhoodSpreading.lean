@@ -17,7 +17,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteEtaleStalkComparisonDes
 /-!
 # Spreading a finite etale stalk model and its comparison
 
-Source: Stacks Project, Tags 0BQ5 and 0EY3
+## References
+
+* Stacks Project, Tags 0BQ5 and 0EY3
+* Stacks Project, Tags 0BQ5 (limits-lemma-glueing-near-point) and 0EY3
+  (limits-lemma-glueing-near-point-properties), applied relative to C
 -/
 
 @[expose] public section
@@ -28,10 +32,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- A finite etale model over a stalk with a comparison on an open spreads locally.
-
-Source: Stacks Project, Tags 0BQ5 (limits-lemma-glueing-near-point) and
-0EY3 (limits-lemma-glueing-near-point-properties), applied relative to C. -/
+/-- A finite etale model over a stalk with a comparison on an open spreads locally. -/
 theorem FiniteEtale.exists_neighbourhood_model_of_stalk {S C : Scheme.{u}}
     [IsNoetherian S] [QuasiSeparatedSpace S]
     (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [LocallyOfFinitePresentation c]

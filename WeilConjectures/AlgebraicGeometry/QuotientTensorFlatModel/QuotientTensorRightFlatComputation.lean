@@ -14,7 +14,10 @@ import WeilConjectures.CategoryTheory.SixFunctors.Monoidal
 
 /-! # The right quotient tensor path on flat models
 
-Source: Stacks Project, Tags 03EL, 06YY, 07A4 and 0G7E.
+## References
+
+* Stacks Project, Tags 03EL, 06YY, 07A4 and 0G7E
+* Stacks 03EL, 06YY, 07A4 and 0G7E
 -/
 
 @[expose] public noncomputable section
@@ -219,8 +222,7 @@ private theorem pull_tensor_computation
     CondensedRing.leftDerivedUpperStarTensorLeft, Functor.leftDerivedDerivedTensor] using h
 
 /-- Compute the path that takes the two tensorators before balancing the factors.
-Only the scalar tensor normalization at Y enters this statement.
-Source: Stacks 03EL, 06YY, 07A4 and 0G7E. -/
+Only the scalar tensor normalization at Y enters this statement. -/
 theorem right_flat_computation
     [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules R T)]
     [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules S T)]

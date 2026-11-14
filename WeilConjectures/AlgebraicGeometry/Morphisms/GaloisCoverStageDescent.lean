@@ -17,7 +17,14 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-! # Descent of an unpointed finite Galois torsor
 
-Source: Stacks Project, Tags 0BTV and 01ZM, used in the last paragraph of Tag 0EZJ.
+## References
+
+* Stacks Project, Tags 0BTV and 01ZM, used in the last paragraph of Tag 0EZJ
+* Stacks Project, Tag 01ZM, parts (2) and (3), and Tag 0BTV, the equivalence of finite étale
+  categories
+* applied in Tag 0EZJ, final paragraph
+* Stacks Project, Tags 0BTV and 01ZM
+* Tag 0EZJ, final paragraph
 -/
 
 @[expose] public section
@@ -514,10 +521,7 @@ private theorem comparison_isIso_iff
     (Arrow.isoMk hSigma.isoPullback hR.isoPullback hcomm)).symm
 
 /-- The comparison of a finite étale model with a genuine group action is invertible
-at a later stage if its pullback is equivariantly a torsor.
-
-Source: Stacks Project, Tag 01ZM, parts (2) and (3), and Tag 0BTV, the equivalence
-of finite étale categories; applied in Tag 0EZJ, final paragraph. -/
+at a later stage if its pullback is equivariantly a torsor. -/
 private theorem GaloisCover.exists_comparison_stage_on_action_model
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})
@@ -587,10 +591,7 @@ private theorem GaloisCover.exists_comparison_stage_on_action_model
     (IsPullback.of_hasPullback p q) s hs sj hsj hcompat).mp hiso
 
 
-/-- An unpointed finite torsor descends along affine inverse limits.
-
-Source: Stacks Project, Tags 0BTV and 01ZM; Tag 0EZJ, final paragraph.
--/
+/-- An unpointed finite torsor descends along affine inverse limits. -/
 theorem GaloisCover.exists_stage_of_affine_limits
     {I : Type u} [SmallCategory I] [IsCofiltered I] (D : I ⥤ Scheme.{u})
     (hDqc : ∀ i, CompactSpace (D.obj i)) (hDqs : ∀ i, QuasiSeparatedSpace (D.obj i))

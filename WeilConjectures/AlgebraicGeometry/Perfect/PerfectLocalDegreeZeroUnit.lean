@@ -13,7 +13,10 @@ import WeilConjectures.AlgebraicGeometry.AbelianVariety.ConnectiveRankOneModelSt
 
 /-! # A local degree-zero unit criterion for perfect complexes
 
-Source: Stacks Project, Tags 0E62 and 0BCD.
+## References
+
+* Stacks Project, Tags 0E62 and 0BCD
+* Stacks Project, Tag 0E62, local argument, and Tag 0BCD
 -/
 
 @[expose] public section
@@ -25,8 +28,7 @@ namespace AlgebraicGeometry
 
 /-- A map from the structure sheaf in degree zero to a perfect complex is surjective
 on degree-zero cohomology at a point if its derived residue map is invertible and the
-negative cohomology of that derived fibre vanishes.
-Source: Stacks Project, Tag 0E62, local argument, and Tag 0BCD. -/
+negative cohomology of that derived fibre vanishes. -/
 theorem surjective_stalk_homology_of_perfect_local_unit (S : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
     [∀ U : S.Opens,

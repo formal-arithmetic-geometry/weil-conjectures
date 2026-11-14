@@ -10,7 +10,13 @@ public import WeilConjectures.AlgebraicGeometry.TensorCoefficientComparison
 
 /-! # PicardResidueNormalizationMap
 
-Source: Stacks Project, Tags 0096, 06YJ, 0A1D, 08HY, 0D5S and 01F7.
+## References
+
+* Stacks Project, Tags 0096, 06YJ, 0A1D, 08HY, 0D5S and 01F7
+* Stacks Project, Tags 0096 and 01F7
+* Stacks Project, Tags 0096 and 0D5S
+* Stacks Project, Tags 0096 and 06YJ
+* Stacks Project, Tags 08HY, 0A1D and 0096
 -/
 
 @[expose] public section
@@ -20,7 +26,6 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- The ordinary coefficient comparison for an arrow over a base.
-Source: Stacks Project, Tags 0096 and 01F7
 Construction: compare tensor and ordinary pullback, compose ordinary pullbacks,
 use the first projection identity, and undo the two tensor comparisons. -/
 noncomputable def picardResidueCoefficientIso
@@ -46,7 +51,6 @@ noncomputable def picardResidueCoefficientIso
     ((t _ _ (pullback.fst f' k)).app ((Modules.tensorPullback u).obj L)).symm
 
 /-- The ordinary-pullback form of a tensor coefficient triangle.
-Source: Stacks Project, Tags 0096 and 0D5S.
 Construction: convert the tensor pullback on the source to ordinary pullback,
 compose ordinary pullbacks, transport the arrow equality, then convert back. -/
 noncomputable def picardOrdinaryCoefficientTriangle
@@ -63,7 +67,6 @@ noncomputable def picardOrdinaryCoefficientTriangle
     ((t _ _ q').app L).symm
 
 /-- The coefficient part of the explicit residue normalization.
-Source: Stacks Project, Tags 0096 and 06YJ.
 Construction: compose the canonical single-pullback map with the single image
 of the coefficient triangle isomorphism followed by the given trivialization. -/
 noncomputable def picardResidueNormalizationCoefficient
@@ -97,7 +100,6 @@ noncomputable def picardResidueNormalizationCoefficient
     (DerivedCategory.singleFunctor _ 0).map c.hom
 
 /-- The explicit normalization morphism, without an invertibility assertion.
-Source: Stacks Project, Tags 08HY, 0A1D and 0096
 Construction: use the identified fibre as the apex of the base-change square.
 Compose its base-change mate, the canonical single map, the tensor coefficient
 comparison for the first projection, and the single image of the trivialization.

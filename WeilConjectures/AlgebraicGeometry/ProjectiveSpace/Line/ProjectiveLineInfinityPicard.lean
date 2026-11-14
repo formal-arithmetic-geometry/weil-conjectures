@@ -19,7 +19,10 @@ import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
 
 /-! # The divisor line of the infinity section
 
-Source: the standard projective-line charts and Stacks Tag 01X0.
+## References
+
+* the standard projective-line charts and Stacks Tag 01X0
+* the equation T1 = 0 on P1, and Stacks Tag 01X0
 -/
 
 @[expose] public noncomputable section
@@ -85,9 +88,7 @@ private lemma infinity_ideal (S : Scheme.{u}) [IsNoetherian S] (i : ULift.{u} (F
     rw [ProjectiveSpace.pull_ratio_mul (h ≫ infinity S) i ⟨0⟩ ⟨1⟩ hgi
       (infinity_chart h), infinity_ratio, pairSections_one, zero_mul]
 
-/-- The line bundle of the infinity divisor is O(1), over a Noetherian base.
-Source: the equation T1 = 0 on P1, and Stacks Tag 01X0.
--/
+/-- The line bundle of the infinity divisor is O(1), over a Noetherian base. -/
 theorem infinity_picard (S : Scheme.{u}) [IsNoetherian S]
     (hI : (infinity S).ker.IsInvertible) :
     letI := hI.isInvertible_dual_toModules

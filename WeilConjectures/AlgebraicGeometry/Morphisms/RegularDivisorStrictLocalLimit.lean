@@ -18,7 +18,11 @@ import WeilConjectures.RingTheory.ProEtale.IndWeaklyEtale
 
 /-! # Strict local limits of regular divisors
 
-Source: Stacks Project, Tag 0EYG, strict henselization paragraph; Tags 04GP, 04HX, 06LN and 05WS.
+## References
+
+* Stacks Project, Tag 0EYG, strict henselization paragraph
+* Tags 04GP, 04HX, 06LN and 05WS
+* Tags 04GP, 04HX, 06LN and 05WS for strict henselization and passage to the quotient
 -/
 
 @[expose] public section
@@ -29,10 +33,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 -- Preserve the original existential instance binder name `hH`.
-/-- A regular divisor has a pointed regular strict local ind-etale limit.
-
-Source: Stacks Project, Tag 0EYG, strict henselization paragraph; Tags 04GP,
-04HX, 06LN and 05WS for strict henselization and passage to the quotient. -/
+/-- A regular divisor has a pointed regular strict local ind-etale limit. -/
 theorem regular_divisor_strict_local_limit
     (R : CommRingCat.{u}) (g : R) [IsRegularRing R]
     (hg : IsSMulRegular R g) [IsRegularRing (R ⧸ Ideal.span {g})]

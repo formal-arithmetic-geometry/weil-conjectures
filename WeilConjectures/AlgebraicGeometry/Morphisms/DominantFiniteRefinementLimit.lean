@@ -13,7 +13,12 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PointedSectionStageDescent
 /-!
 # The limit of a dominant finite refinement
 
-Source: Stacks Project, Tag 0EZJ, normal-stage limit claim; Tag 01ZM for morphism descent.
+## References
+
+* Stacks Project, Tag 0EZJ, normal-stage limit claim
+* Tag 01ZM for morphism descent
+* Stacks Project, Tag 0EZJ, the claim that the normal replacement diagram still has limit S
+* Tag 01ZM for finite-presentation morphism descent
 -/
 
 @[expose] public section
@@ -26,10 +31,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- A finite refinement with integral stages and dominant projections has the same
 limit as the supplied Noetherian approximation. No normality of the stages or of S
-is needed for this comparison, and no affine-transition hypothesis on X is needed.
-
-Source: Stacks Project, Tag 0EZJ, the claim that the normal replacement diagram still
-has limit S; Tag 01ZM for finite-presentation morphism descent. -/
+is needed for this comparison, and no affine-transition hypothesis on X is needed. -/
 theorem isLimit_of_dominant_finite_refinement {S : Scheme.{u}}
     (N : S.NoetherianApproximation)
     (X : N.I ⥤ Scheme.{u}) (α : (Functor.const N.I).obj S ⟶ X) (p : X ⟶ N.D)

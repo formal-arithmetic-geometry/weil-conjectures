@@ -27,7 +27,10 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Existence of the ordinary semilinear system calculus
 
-Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks 079P, 06YS, 06YY, 07A4 and 08J7--08JB.
+## References
+
+* Zheng, Construction 4.1 and Lemma 4.10
+* Stacks 079P, 06YS, 06YY, 07A4 and 08J7--08JB
 -/
 
 @[expose] public noncomputable section
@@ -45,8 +48,7 @@ variable {C₀ : Type c} [Category.{v} C₀] (J₀ : GrothendieckTopology C₀)
   (B₀ : ℕ → Sheaf J₀ CommRingCat.{max c v r})
   (τ₀ : ∀ n : ℕ, B₀ (n + 1) ⟶ B₀ n)
 
-/-- The ordinary system calculus and its cartesian internal-Hom transition law.
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 079P, 06YS, 06YY, 07A4 and 08J7--08JB. -/
+/-- The ordinary system calculus and its cartesian internal-Hom transition law. -/
 structure SemilinearSystemData where
   systems : Data.{c, v, r} J₀ B₀ τ₀
   homTransition : systems.HomReductionFormula J₀ B₀ τ₀
@@ -265,8 +267,7 @@ private theorem homReductionFormula
     a ((A.levelClosed m).evaluation (Em.obj M) (Em.obj N))
     (R H ≫ b) d (R N) hw
 
-/-- Ordinary semilinear system calculus and cartesian internal Hom.
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 079P, 06YS, 06YY, 07A4 and 08J7--08JB. -/
+/-- Ordinary semilinear system calculus and cartesian internal Hom. -/
 theorem semilinearSystemData : Nonempty (SemilinearSystemData.{c, v, r} J₀ B₀ τ₀) := by
   obtain ⟨S⟩ := systemScalarCoherence_nonempty.{c, v, r} J₀ B₀ τ₀
   obtain ⟨T⟩ := systemTensorCoherence_nonempty.{c, v, r} J₀ B₀ τ₀ S

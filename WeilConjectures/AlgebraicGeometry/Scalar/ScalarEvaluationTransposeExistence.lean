@@ -32,7 +32,11 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # Evaluation and transpose for normalized scalar data
 
-Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks 07A4 and 07A6
+## References
+
+* Zheng, Construction 4.1 and Lemma 4.10
+* Stacks 07A4 and 07A6
+* Stacks 0FND and 09T5
 -/
 
 @[expose] public noncomputable section
@@ -115,7 +119,7 @@ variable {A : Type a} [Category.{av} A] {B : Type b} [Category.{bv} B]
   {QA : A ⥤ AD} {QB : B ⥤ BD} {QC : C ⥤ CD} {QD : D ⥤ DD}
 
 /-- A derived mate is computed by the ordinary mate and the normalized derived
-comparisons. Source: Stacks 0FND and 09T5. -/
+comparisons. -/
 private theorem mate_comparison_at
     (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂) (ad₁ : LD₁ ⊣ RD₁) (ad₂ : LD₂ ⊣ RD₂)
     (ε₁ : QA ⋙ LD₁ ⟶ L₁ ⋙ QB) (ε₂ : QC ⋙ LD₂ ⟶ L₂ ⋙ QD)
@@ -194,8 +198,7 @@ private theorem evaluation_preservesKFlat (n : ℕ)
   simpa only [he] using (SheafOfModules.systemSequenceEvaluation_preservesKFlat
     (rings.{c, v, max c v r} J B τ) n P hP hf).1
 
-/-- The evaluation comparison and its normalized adjunction transpose.
-Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks 07A4 and 07A6. -/
+/-- The evaluation comparison and its normalized adjunction transpose. -/
 structure ScalarEvaluationData
     (F : ℕ → Sheaf J CommRingCat.{max c v r})
     (σ : ∀ n : ℕ, F (n + 1) ⟶ F n) (α : ∀ n : ℕ, B n ⟶ F n)
@@ -215,8 +218,7 @@ structure ScalarEvaluationData
 
 -- Matching the normalized mate equations compares several large derived-functor types.
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-/-- Existence of the level evaluation comparison normalized by the restriction mate.
-Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks 07A4 and 07A6. -/
+/-- Existence of the level evaluation comparison normalized by the restriction mate. -/
 theorem semilinearScalarEvaluationTranspose
     (F : ℕ → Sheaf J CommRingCat.{max c v r})
     (σ : ∀ n : ℕ, F (n + 1) ⟶ F n) (α : ∀ n : ℕ, B n ⟶ F n)

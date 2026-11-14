@@ -48,8 +48,9 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 
 /-! # Chain-level data for the completed scalar formula
 
-Source: Stacks Project, Tag 03EL; the completed coefficient square and normalized ordinary scalar
-adjunction.
+## References
+
+* Stacks Project, Tag 03EL
 -/
 
 @[expose] public noncomputable section
@@ -372,9 +373,7 @@ private theorem completedTensor_smul (W : Scheme.{t})
     tensorSection_smul W (completedCoefficientMap l E L ι W) M _
       ((completedScalarChangeData l E L ι W).choose_spec.choose M) U a x
 
-/-- The completed tensor comparison on sheaves, normalized on every pure tensor.
-
-Source: Stacks Project, Tag 03EL. -/
+/-- The completed tensor comparison on sheaves, normalized on every pure tensor. -/
 theorem completed_formula_chain_data :
     ∃ b : inverseImageIntegralModules l E g ⋙ completedOrdinaryScalarExtension l E L ι X ≅
         completedOrdinaryScalarExtension l E L ι Y ⋙ inverseImageIntegralModules l L g,

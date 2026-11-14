@@ -13,7 +13,9 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal
 /-!
 # Compatible finite-level bases for the integral root tower
 
-Source: Bhatt--Scholze, Section 6.8
+## References
+
+* Bhatt--Scholze, Section 6.8
 -/
 
 @[expose] public section

@@ -24,6 +24,10 @@ import WeilConjectures.AlgebraicGeometry.FrobeniusLinearVectorBundleKernelConstr
 # Prime coefficients in proper smooth curve families in characteristic `p`
 
 This is case (b) of Stacks Project, Tag 0GKV: the coefficient prime `p` vanishes on the base.
+
+## References
+
+* Stacks Project, Tag 0GKV, case (b)
 -/
 
 @[expose] public section
@@ -36,9 +40,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- In a proper smooth family of curves with geometrically connected one-dimensional fibres
 over a Noetherian base on which the prime `p` vanishes, the higher direct images of the
-constant sheaf `ℤ/p` are constructible.
-
-Source: Stacks Project, Tag 0GKV, case (b). -/
+constant sheaf `ℤ/p` are constructible. -/
 theorem properSmoothCurves_charP_higherDirectImage_constructible
     {C S : Scheme.{u}} [IsNoetherian S]
     (f : C ⟶ S) [IsProper f] [Smooth f] [GeometricallyConnected f]

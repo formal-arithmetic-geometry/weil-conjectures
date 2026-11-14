@@ -61,12 +61,16 @@ import all WeilConjectures.AlgebraicGeometry.IsomorphismScalarKFlatDescent.Isomo
 
 /-! # Coefficient-compatible K-flat tensor models under a scheme isomorphism
 
-Source: Bhatt--Scholze, Section 6.5, Lemma 6.5.9(4), and the agent calculation with the specified
-quotient towers.
-
 The index n means positive exponent n+1. Inverse image is the recorded sectionwise
 model, with its action transported by the completed or finite structure map.
 Scalar tensors use the existing sheafified tensor, with scalar written first.
+
+## References
+
+* Bhatt--Scholze, Section 6.5, Lemma 6.5.9(4), and the agent calculation with the specified quotient
+  towers
+* Bhatt--Scholze, Section 6.5, Lemma 6.5.9(4) for completed pullback
+* not a quoted assertion of Bhatt--Scholze
 -/
 
 @[expose] public noncomputable section
@@ -217,10 +221,7 @@ private theorem descend_model
 end DerivedDescent
 
 /-- The completed and finite tensor comparisons, their quotient/transition squares,
-and their normalized descent to the ordinary unbounded derived categories.
-
-Source: Bhatt--Scholze, Section 6.5, Lemma 6.5.9(4) for completed pullback; not a quoted assertion
-of Bhatt--Scholze. -/
+and their normalized descent to the ordinary unbounded derived categories. -/
 theorem isomorphism_scalar_tensor_kflat_model
     (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x))
     (_hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) :

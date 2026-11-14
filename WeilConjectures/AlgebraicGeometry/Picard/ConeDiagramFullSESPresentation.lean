@@ -9,7 +9,13 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
-/-! # Functorial short exact presentations of mapping cones -/
+/-! # Functorial short exact presentations of mapping cones
+
+## References
+
+* Stacks Project, Derived Categories, Tags 013N, 014G and 013O (the cylinder factorization and its
+  homotopy equivalence), applied functorially to a square
+-/
 
 @[expose] public section
 universe u w
@@ -174,9 +180,7 @@ private def cylRowMap (t : A ⟶ B) (t' : A' ⟶ B') (α : A ⟶ A') (β : B ⟶
   comm₂₃ := cylMap_second t t' α β hc
 
 /-- A strict square of chain maps has functorial short exact mapping-cylinder
-presentations, with all three prescribed components after localization.
-Source: Stacks Project, Derived Categories, Tags 013N, 014G and 013O (the cylinder
-factorization and its homotopy equivalence), applied functorially to a square. -/
+presentations, with all three prescribed components after localization. -/
 theorem cone_diagram_full_ses_presentation
     {C : Type u} [Category C] [Abelian C] [HasDerivedCategory.{w} C]
     (A B A' B' : CochainComplex C ℤ)

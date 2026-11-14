@@ -9,7 +9,12 @@ public import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSe
 import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientScalarSectionOrdinaryNormalizedMap
 import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientScalarSectionOrdinaryNormalizedIso
 
-/-! Ordinary generator normalization for a fixed sectionwise scalar model. -/
+/-! Ordinary generator normalization for a fixed sectionwise scalar model.
+
+## References
+
+* Stacks 03EK and 06YY
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -33,8 +38,7 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
 variable [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ T)]
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ' T)]
 
-/-- A fixed sectionwise model admits the ordinary comparison normalized on generators.
-Source: Stacks 03EK and 06YY. -/
+/-- A fixed sectionwise model admits the ordinary comparison normalized on generators. -/
 theorem scalar_section_ordinary_comparison_exists (T : Scheme.{u})
     (model : SectionModel a T) :
     ∃ ordinary : QuotientChange.extension a T ⋙

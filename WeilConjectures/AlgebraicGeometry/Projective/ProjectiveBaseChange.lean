@@ -11,7 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.Projective
 /-!
 # Projective morphisms are stable under base change
 
-Source: Stacks Project, Morphisms of Schemes, Lemmas 01WF and 01K5.
+## References
+
+* Stacks Project, Morphisms of Schemes, Lemmas 01WF and 01K5
 -/
 
 @[expose] public section
@@ -22,10 +24,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- Projectivity of a morphism is preserved by arbitrary base change.
-
-Source: Stacks Project, Morphisms of Schemes, Lemmas 01WF and 01K5.
--/
+/-- Projectivity of a morphism is preserved by arbitrary base change. -/
 theorem projective_base_change {X S S' : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S)
     [IsProjective f] : IsProjective (pullback.snd f g) := by
   obtain ⟨n, hn, i, hi, hif⟩ := IsHProjective.exists_isClosedImmersion (f := f)

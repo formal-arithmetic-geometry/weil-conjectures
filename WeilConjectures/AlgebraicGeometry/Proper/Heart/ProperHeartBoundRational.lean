@@ -677,9 +677,7 @@ private theorem qbar_scalar_preserves_vanishing
   exact he.of_iso ((DerivedCategory.homologyFunctor _ q).mapIso
     (ep ≪≫ F.mapIso es))
 
-/-- The rational proper direct-image bound over a Noetherian source, with no base field.
-Source: the base field of `isZero_higherDirectImage_rational_of_isProper` only makes the source
-Noetherian. -/
+/-- The rational proper direct-image bound over a Noetherian source, with no base field. -/
 theorem isZero_higherDirectImage_rational_of_isProper_of_isNoetherian
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     {X Y : Scheme.{u}} [IsNoetherian X] (p : X ⟶ Y) [IsProper p] (d : ℤ)
@@ -768,7 +766,7 @@ theorem isZero_higherDirectImage_rational_of_isProper
   exact isZero_higherDirectImage_rational_of_isProper_of_isNoetherian ℓ E p d hd M hM q hq
 
 /-- The algebraic-closure proper direct-image bound over a Noetherian source, with no base
-field. Source: the base field only made the source Noetherian. -/
+field. -/
 theorem isZero_higherDirectImage_padicAlgCl_of_isProper_of_isNoetherian
     (ℓ : ℕ) [Fact ℓ.Prime]
     {X Y : Scheme.{u}} [IsNoetherian X] (p : X ⟶ Y) [IsProper p] (d : ℤ)

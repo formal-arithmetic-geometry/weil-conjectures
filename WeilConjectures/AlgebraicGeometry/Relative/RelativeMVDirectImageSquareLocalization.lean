@@ -10,7 +10,12 @@ public import WeilConjectures.AlgebraicGeometry.DirectImageSquareUnitTransport
 public import Mathlib.Algebra.Homology.Localization
 import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.DerivedDirectImageSquareMate
-/-! # Complex localization of the normalized direct-image square -/
+/-! # Complex localization of the normalized direct-image square
+
+## References
+
+* Stacks Project, Tags 08HY and 0D5T
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -115,8 +120,7 @@ set_option linter.all false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Localization of an ordinary direct-image square gives the square mate of
-pinned derived pullbacks on every complex. Source: Stacks Project, Tags 08HY
-and 0D5T. -/
+pinned derived pullbacks on every complex. -/
 theorem relativeMV_direct_image_square_localization
     {X S X' S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)

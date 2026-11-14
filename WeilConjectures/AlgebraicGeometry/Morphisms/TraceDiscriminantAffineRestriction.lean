@@ -13,7 +13,9 @@ import Mathlib.RingTheory.Localization.NormTrace
 /-!
 # Discriminant ideals under affine restriction
 
-Source: Stacks Project, Tag 0BVH, construction before Lemma 49.3.1.
+## References
+
+* Stacks Project, Tag 0BVH, construction before Lemma 49.3.1
 -/
 
 @[expose] public section
@@ -99,9 +101,7 @@ private theorem discr_span_map_eq_basicOpen
   subst W
   exact fun n b ↦ discr_span_map_basicOpen f U n b r
 
-/-- Restriction between two free affine charts preserves the discriminant ideal.
-
-Source: Stacks Project, Tag 0BVH, construction before Lemma 49.3.1 -/
+/-- Restriction between two free affine charts preserves the discriminant ideal. -/
 theorem trace_discriminant_span_map_affine_restriction
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsFinite f]
     (U V : Y.affineOpens) (h : V.1 ≤ U.1) :

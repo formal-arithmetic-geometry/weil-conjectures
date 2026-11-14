@@ -130,8 +130,11 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Glo
 
 /-! # Cohomology of the inverse finite scalar realization
 
-Source: Stacks Project, Modules on Sites, exactness of inverse image and constants (Tags 03DC and
-093J); locally constant comparison (Tag 099Y).
+## References
+
+* Stacks Project, Modules on Sites, exactness of inverse image and constants (Tags 03DC and 093J)
+* locally constant comparison (Tag 099Y)
+* Stacks Project
 -/
 
 @[expose] public noncomputable section
@@ -152,9 +155,7 @@ attribute [local irreducible] HasDerivedCategory.standard
 
 /-- The inverse fixed realization of the actual pullback has the bounds of its local
 algebraic models and lisse pro-etale cohomology. This is a cohomology assertion only;
-no etale derived model or comparison of derived objects is asserted.
-
-Source: Stacks Project. -/
+no etale derived model or comparison of derived objects is asserted. -/
 theorem lisse_finite_level_inverse_realization_cohomology
     (X Y : Scheme.{u}) (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)

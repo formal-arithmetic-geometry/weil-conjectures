@@ -16,8 +16,16 @@ import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
 /-!
 # Picard classification on projective bundles over arbitrary schemes
 
-Source: EGA II, Remark 4.2.7, printed p.75; arbitrary-base extension by Stacks, Tag 0B8W, with the
-field normalization of Tag 0BXJ.
+## References
+
+* EGA II, Remark 4.2.7, printed p.75
+* arbitrary-base extension by Stacks, Tag 0B8W, with the field normalization of Tag 0BXJ
+* EGA II, Remark 4.2.7
+* Stacks, Tag 0B8W
+* Stacks, Tags 0B8W and 0BXJ
+* EGA II, Remarks 4.2.7 and 4.2.10
+* Stacks, Tag 0096
+* Stacks, Tags 0B8W, 0BXJ and 07VK
 -/
 
 @[expose] public section
@@ -33,8 +41,7 @@ namespace AlgebraicGeometry.ProjectiveBundlePicardClassification
 
 open Scheme.Modules ProjectiveBundleQuotientGeometry
 
-/-- The decomposition with degree d and coefficient line N, using the concrete glued twist.
-Source: EGA II, Remark 4.2.7; Stacks, Tag 0B8W. -/
+/-- The decomposition with degree d and coefficient line N, using the concrete glued twist. -/
 def Decomposes {S P : Scheme.{u}} (p : P ⟶ S) (A : P.Modules)
     (hA : A.IsInvertible) (L : P.Modules) (d : LocallyConstant S ℤ)
     (N : S.Modules) : Prop :=
@@ -42,8 +49,7 @@ def Decomposes {S P : Scheme.{u}} (p : P ⟶ S) (A : P.Modules)
     locallyConstantLineTwist A hA (d.comap p.base.hom) ⊗ (tensorPullback p).obj N)
 
 /-- The equivalent local formulation: a neighbourhood of each base point supports
-an integer twist, with no coefficient line left after shrinking.
-Source: EGA II, Remark 4.2.7; Stacks, Tags 0B8W and 0BXJ. -/
+an integer twist, with no coefficient line left after shrinking. -/
 def IsLocallyTwist {S P : Scheme.{u}} (p : P ⟶ S) (A : P.Modules)
     (hA : A.IsInvertible) (L : P.Modules) : Prop :=
   ∀ s : S, ∃ U : S.Opens, s ∈ U ∧ ∃ m : ℤ,
@@ -52,8 +58,7 @@ def IsLocallyTwist {S P : Scheme.{u}} (p : P ⟶ S) (A : P.Modules)
 
 /-- All clauses of the classification, for a fixed projection and tautological line.
 Base change is expressed on any pullback square, hence includes the canonical
-projective bundle of the pulled-back E by quotient geometry.
-Source: EGA II, Remarks 4.2.7 and 4.2.10; Stacks, Tags 0B8W and 0BXJ. -/
+projective bundle of the pulled-back E by quotient geometry. -/
 structure HasPicardClassification {S P : Scheme.{u}} (p : P ⟶ S)
     (A : P.Modules) (hA : A.IsInvertible) : Prop where
   /-- The glued twist has the specified restriction on each disjoint open stratum. -/
@@ -90,7 +95,7 @@ structure HasPicardClassification {S P : Scheme.{u}} (p : P ⟶ S)
     ∃! m : ℤ, Nonempty (L ≅ integerLinePower A hA m)
 
 /-- The explicit tensor pullback preserves local triviality, by uniqueness of left
-adjoints and the ordinary module pullback. Source: Stacks, Tag 0096. -/
+adjoints and the ordinary module pullback. -/
 private theorem invertible_tensorPullback {X Y : Scheme.{u}} (f : X ⟶ Y)
     (M : Y.Modules) (hM : M.IsInvertible) : ((tensorPullback f).obj M).IsInvertible := by
   have : M.IsInvertible := hM
@@ -101,9 +106,7 @@ private theorem invertible_tensorPullback {X Y : Scheme.{u}} (f : X ⟶ Y)
 /-- Invertible modules on a projective bundle of constant rank at least two have the
 unique degree/coefficient decomposition, its local form, tensor law and arbitrary
 base-change compatibility. The existential quasi-coherence proof is a consequence
-of finite local freeness, so it adds no hypothesis.
-
-Source: EGA II, Remark 4.2.7, printed p.75; Stacks, Tags 0B8W, 0BXJ and 07VK. -/
+of finite local freeness, so it adds no hypothesis. -/
 theorem projective_bundle_picard_classification (S : Scheme.{u}) (E : S.Modules)
     (r : ℕ) [SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u} E r] (hr : 2 ≤ r) :
     ∃ hE : E.IsQuasicoherent,

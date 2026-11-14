@@ -9,7 +9,14 @@ module
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 
-/-! # The complex of sections of associated module sheaves on an open -/
+/-! # The complex of sections of associated module sheaves on an open
+
+## References
+
+* Stacks Project, Tag 09T2
+* Stacks Project, Tags 0A6T and 09T2
+* Stacks Project, Tag 0A6T
+-/
 
 @[expose] public noncomputable section
 
@@ -17,8 +24,7 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
-/-- Associate a sheaf to an R-module and take sections on W.
-Source: Stacks Project, Tag 09T2. -/
+/-- Associate a sheaf to an R-module and take sections on W. -/
 def puncturedSectionsFunctor (R : Type u) [CommRing R] (W : (Spec (.of R)).Opens) :
     ModuleCat.{u} R ⥤ ModuleCat.{u} R :=
   tilde.functor (.of R) ⋙ modulesSpecToSheaf ⋙ TopCat.Sheaf.forget _ _ ⋙
@@ -34,15 +40,13 @@ instance puncturedSectionsFunctor_preservesZeroMorphisms
     rw [tilde.map_zero]
     rfl
 
-/-- Apply the associated-sheaf sections functor degreewise to a cochain complex.
-Source: Stacks Project, Tags 0A6T and 09T2. -/
+/-- Apply the associated-sheaf sections functor degreewise to a cochain complex. -/
 def puncturedSectionsComplex (R : Type u) [CommRing R] (W : (Spec (.of R)).Opens)
     (K : CochainComplex (ModuleCat.{u} R) ℕ) : CochainComplex (ModuleCat.{u} R) ℕ :=
   ((puncturedSectionsFunctor R W).mapHomologicalComplex (ComplexShape.up ℕ)).obj K
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Restrict a complex of modules to sections of its associated sheaves on W.
-Source: Stacks Project, Tag 0A6T. -/
+/-- Restrict a complex of modules to sections of its associated sheaves on W. -/
 def puncturedSectionsRestriction (R : Type u) [CommRing R] (W : (Spec (.of R)).Opens)
     (K : CochainComplex (ModuleCat.{u} R) ℕ) :
     K ⟶ puncturedSectionsComplex R W K where

@@ -21,7 +21,11 @@ import WeilConjectures.RingTheory.FlatLocalDepthFormula
 /-!
 # Formal flatness at a closed boundary point of the closed fibre
 
-Source: Stacks Project, Tag 0EYB, closed-point formal-completion calculation.
+## References
+
+* Stacks Project, Tag 0EYB, closed-point formal-completion calculation
+* Stacks Project, Tag 0EYB, from the choice of a closed point through the completion argument
+* Tags 0EY6(2), (a), (b), 07NE, 057G, 05D5, 00MB, and 0EYA
 -/
 
 @[expose] public section
@@ -105,10 +109,7 @@ private theorem depth_two_pullback {E L T : Scheme.{u}} [IsLocallyNoetherian L]
   rw [hd]
   exact (hboundary _ hw').trans le_self_add
 
-/-- Formal completion gives flatness at source points over a closed boundary point.
-
-Source: Stacks Project, Tag 0EYB, from the choice of a closed point through the completion argument;
-Tags 0EY6(2), (a), (b), 07NE, 057G, 05D5, 00MB, and 0EYA. -/
+/-- Formal completion gives flatness at source points over a closed boundary point. -/
 theorem flat_stalk_of_smooth_local_depth_two_closed_fiber
     (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]
     {L : Scheme.{u}} (q : L ⟶ Spec (.of A)) [Smooth q]

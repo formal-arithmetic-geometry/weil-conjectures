@@ -15,7 +15,11 @@ import Mathlib.Algebra.Category.ModuleCat.Monoidal.Adjunction
 /-!
 # Invertibility of the tensor-pullback comparison
 
-Source: Stacks Project, Modules, Tag 01CD; Sheaves, Tag 0098; Modules, Tag 01CB.
+## References
+
+* Stacks Project, Modules, Tag 01CD
+* Sheaves, Tag 0098
+* Modules, Tag 01CB
 -/
 
 @[expose] public section
@@ -33,9 +37,7 @@ set_option backward.isDefEq.respectTransparency.types false
 
 -- The stalk tensor transports involve several nested sheaf and scalar-change functors.
 /-- A comparison carrying pulled-back pure tensors to tensors of pulled-back sections
-is an isomorphism. No naturality of the comparison is assumed.
-
-Source: Stacks Project, Modules, Tag 01CD; Sheaves, Tag 0098; Modules, Tag 01CB. -/
+is an isomorphism. No naturality of the comparison is assumed. -/
 theorem isIso_tensorPullback_of_tmul {X Y : Scheme.{v}} (f : X ⟶ Y)
     (M N : Y.Modules)
     (α : (tensorPullback f).obj (M ⊗ N) ⟶

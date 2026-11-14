@@ -160,7 +160,9 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 /-!
 # The selected canonical composition comparison
 
-Source: Stacks Project, Tag 0D6D.
+## References
+
+* Stacks Project, Tag 0D6D
 -/
 
 @[expose] public noncomputable section
@@ -222,8 +224,7 @@ private theorem derivedTransformation_ext
 
 -- The original-site coefficient transports require the same budget as the source theorem.
 /-- The unique derived comparison with exactly the original theorem's ordinary,
-termwise and K-flat normalization, with the derived comparison returned first.
-Source: Stacks Project, Tag 0D6D. -/
+termwise and K-flat normalization, with the derived comparison returned first. -/
 theorem proEtaleCanonicalPullbackComposition_existsUnique
     {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V)
     (R_V : Sheaf (ProEt.topology V) CommRingCat.{u + 1})
@@ -331,8 +332,7 @@ theorem proEtaleCanonicalPullbackComposition_existsUnique
 
 /-- Select the comparison characterized by the normalized ordinary adjunctions,
 fibre-product pasting, and the termwise K-flat comparison. Each witness in the existing
-theorem is determined by those requirements, up to the equality used here.
-Source: Stacks Project, Tag 0D6D. -/
+theorem is determined by those requirements, up to the equality used here. -/
 def proEtaleCanonicalPullbackComposition
     {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V)
     (RV : Sheaf (ProEt.topology V) CommRingCat.{u + 1})

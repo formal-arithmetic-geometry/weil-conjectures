@@ -19,7 +19,9 @@ public import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # Lifting invertible modules along closed immersions in dimension at most one
 
-Source: Stacks Project, Varieties, Lemma 09NY.
+## References
+
+* Stacks Project, Varieties, Lemma 09NY
 -/
 
 @[expose] public section
@@ -33,7 +35,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Every invertible module on a closed subscheme of a Noetherian scheme of dimension at most one
 lifts to an invertible module on the ambient scheme.
-Source: Stacks Project, Varieties, Lemma 09NY.
 -/
 theorem exists_isInvertible_tensorPullback_iso_of_isClosedImmersion
     {X Z : Scheme.{u}} [NoetherianSpace X] (i : Z ⟶ X) [IsClosedImmersion i]

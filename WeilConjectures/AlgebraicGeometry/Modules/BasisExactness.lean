@@ -13,7 +13,9 @@ import WeilConjectures.Algebra.Homology.RingedSpaceModuleExactnessLocalLifting
 /-!
 # Exactness of module sheaves from sections on a basis
 
-Source: Stacks Project, Modules, Section 01AF and Lemma 01AG.
+## References
+
+* Stacks Project, Modules, Section 01AF and Lemma 01AG
 -/
 
 @[expose] public section
@@ -26,8 +28,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Sectionwise short exactness on a basis gives a complex, monicity, epicity and
 exactness of the corresponding module sheaves.
-
-Source: Stacks Project, Modules, Section 01AF and Lemma 01AG.
 -/
 theorem exactness_of_basis_sections
     (X : Scheme.{u}) (B : Set X.Opens) (hB : Opens.IsBasis B)

@@ -9,12 +9,20 @@ public import WeilConjectures.AlgebraicGeometry.Rational.RationalModuleRealizati
 
 /-! # Finite integral cone models for rational realization
 
-Source: Bhatt--Scholze, Proposition 6.8.14(2), pp. 61--62, expanded using Lemma 6.8.13 and Stacks
-Tags 0145, 014A, 0152, 08J5.
-
 The finite lists below use only zero, the supplied integral quotient models, shifts,
 and distinguished cones. No closure under retracts is included. Full faithfulness and
 filtration models are assumptions throughout the essential-surjectivity construction.
+
+## References
+
+* Bhatt--Scholze, Proposition 6.8.14(2), pp. 61--62, expanded using Lemma 6.8.13 and Stacks Tags
+  0145, 014A, 0152, 08J5
+* BS 6.8.14(2)
+* the finite-filtration and truncation expansion of BS 6.8.14(2)
+* BS 6.8.13 and 6.8.14(2)
+* Stacks 0145, 014A
+* Stacks 0152
+* Stacks 08J5
 -/
 
 @[expose] public noncomputable section
@@ -31,30 +39,24 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Fact (∃ n : ℕ, topologicalKrullDim X ≤ n)]
   [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))]
 
-/-- The existing compatible completed integral category, with unchanged morphisms.
-Source: BS 6.8.14(2). -/
+/-- The existing compatible completed integral category, with unchanged morphisms. -/
 abbrev Integral := PbcBoundedConstructibleComplete X (pbcIntegralDatum l E)
 
-/-- The existing continuous rational module category, in the coefficient universe of the site.
-Source: BS 6.8.14(2). -/
+/-- The existing continuous rational module category, in the coefficient universe of the site. -/
 abbrev Modules := pbcModules X (rationalCoefficientSheaf l X E)
 
-/-- The existing ambient derived category of rational module sheaves.
-Source: BS 6.8.14(2). -/
+/-- The existing ambient derived category of rational module sheaves. -/
 abbrev Ambient := DerivedCategory (Modules l E X)
 
-/-- The prescribed realization on integral objects and arrows, through the raw Q.
-Source: BS 6.8.14(2). -/
+/-- The prescribed realization on integral objects and arrows, through the raw Q. -/
 abbrev realize (s : RationalModuleRealization l E X) :=
   pbcRationalization X (pbcIntegralDatum l E) (pbcUniformizer l E) ⋙ s.J
 
-/-- The given integer-shift comparison of J, exposed without choosing a new comparison.
-Source: BS 6.8.14(2). -/
+/-- The given integer-shift comparison of J, exposed without choosing a new comparison. -/
 instance realizationShift (s : RationalModuleRealization l E X) : s.J.CommShift ℤ := s.shift
 
 /-- A finite integral construction. Every entry is zero, a supplied generator up to shift
-and isomorphism, or a shifted distinguished cone between strictly earlier entries.
-Source: the finite-filtration and truncation expansion of BS 6.8.14(2). -/
+and isomorphism, or a shifted distinguished cone between strictly earlier entries. -/
 def FiniteConstruction (G : Integral l E X → Prop) (K : Integral l E X) : Prop :=
   ∃ (n : ℕ) (W : Fin (n + 1) → Integral l E X), W (Fin.last n) = K ∧
     ∀ r : Fin (n + 1), IsZero (W r).obj ∨
@@ -67,8 +69,7 @@ def FiniteConstruction (G : Integral l E X → Prop) (K : Integral l E X) : Prop
 
 /-- A supplied finite sheaf filtration together with its integral degree-zero quotient models.
 The stratum-model theorem supplies these data after its normalized scalar comparisons;
-the filtration is retained rather than replaced by a mere assertion of essential image.
-Source: BS 6.8.13 and 6.8.14(2). -/
+the filtration is retained rather than replaced by a mere assertion of essential image. -/
 structure Filtration (s : RationalModuleRealization l E X) (F : Modules l E X) where
   /-- Length, including zero. -/
   length : ℕ
@@ -172,8 +173,7 @@ private theorem realize_exact (s : RationalModuleRealization l E X) :
 
 /-- The unique lifted extension arrow has an integral fraction representative. The
 integral cone and its negative shift realize the middle vertex. The triangle morphism
-records the rescaling square explicitly; only the lifted arrow is unique.
-Source: BS 6.8.14(2); Stacks 0145, 014A. -/
+records the rescaling square explicitly; only the lifted arrow is unique. -/
 theorem extension_cone (s : RationalModuleRealization l E X)
     (_full : s.J.Full) (_faithful : s.J.Faithful)
     (K₁ K₂ : Integral l E X) (C : Ambient l E X)
@@ -437,8 +437,7 @@ private theorem filtration_step (s : RationalModuleRealization l E X)
     (finite_construction_shift_one l E X _ A hA) f g h hd' eB
 
 /-- Every supplied finite filtration is modeled by a finite integral construction using
-exactly its supplied quotient models.
-Source: BS 6.8.13 and 6.8.14(2); Stacks 0152. -/
+exactly its supplied quotient models. -/
 theorem filtration_model (s : RationalModuleRealization l E X)
     (_full : s.J.Full) (_faithful : s.J.Faithful)
     (F : Modules l E X) (t : Filtration l E X s F) :
@@ -610,8 +609,7 @@ private theorem truncation_step (C : Ambient l E X) (r : ℤ) :
 
 /-- Bounded constructible cohomology is realized by the finite standard truncation tower,
 using only integral models of its finitely many filtration quotients and integral cones.
-The supplied interval may contain zero cohomology groups, or even be empty.
-Source: BS 6.8.14(2); Stacks 08J5. -/
+The supplied interval may contain zero cohomology groups, or even be empty. -/
 theorem bounded_model (s : RationalModuleRealization l E X)
     (_full : s.J.Full) (_faithful : s.J.Faithful)
     (_models : ∀ F : Modules l E X,

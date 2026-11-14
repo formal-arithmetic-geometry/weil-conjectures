@@ -10,7 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.Upper.UpperStarSingleTensorRepre
 /-!
 # Scalar tensor representatives with their specified derived endpoints
 
-Source: Stacks Project, Tags 06YY, 07A4 and 0FPH.
+## References
+
+* Stacks Project, Tags 06YY, 07A4 and 0FPH
+* Stacks 06YY
 -/
 
 @[expose] public noncomputable section
@@ -99,8 +102,7 @@ private theorem normalized_tensor_representative
   erw [Category.comp_id] at h
   simpa only [tensorSingleRepresentative, Category.assoc] using h
 
-/-- The localization tensor representative with the scalar tensor functor's endpoint.
-Source: Stacks 06YY. -/
+/-- The localization tensor representative with the scalar tensor functor's endpoint. -/
 def scalarTensorRepresentative
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B) (T : Scheme.{u})
     (P : CochainComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) :
@@ -111,8 +113,7 @@ def scalarTensorRepresentative
   (eqToIso (scalarTensorFunctor_eq φ T)).hom.app (DerivedCategory.Q.obj P) ≫
     tensorSingleRepresentative (scalarCoefficientSheaf φ T) P
 
-/-- The scalar/tensor normalization with the functor transport kept explicit.
-Source: Stacks 06YY. -/
+/-- The scalar/tensor normalization with the functor transport kept explicit. -/
 theorem scalarTensorIso_representative
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B) (T : Scheme.{u})
     (P : CochainComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) :
@@ -132,8 +133,7 @@ theorem scalarTensorIso_representative
   simpa only [scalarTensorRepresentative, Iso.trans_hom, NatTrans.comp_app,
     Category.assoc] using h
 
-/-- The scalar tensor representative is invertible on a K-flat first factor.
-Source: Stacks 06YY. -/
+/-- The scalar tensor representative is invertible on a K-flat first factor. -/
 theorem scalarTensorRepresentative_isIso
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B) (T : Scheme.{u})
     (P : CochainComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ)

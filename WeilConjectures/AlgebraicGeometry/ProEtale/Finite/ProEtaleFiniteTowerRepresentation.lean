@@ -57,7 +57,12 @@ public import Mathlib.Basic.Finite.Prod
 public import Mathlib.Basic.Finite.Sigma
 public import Mathlib.Data.Fintype.Shrink
 
-/-! # Geometric representation of finite coefficient towers -/
+/-! # Geometric representation of finite coefficient towers
+
+## References
+
+* Stacks Project, Tags 0H7J, 03YW, 098T and 097D
+-/
 
 @[expose] public section
 
@@ -200,8 +205,7 @@ private noncomputable def finiteRingTowerModelIso
       rfl)
 
 /-- A finite constant ring tower has a representing diagram and a limit cone which
-remains limiting after scheme base change.
-Source: Stacks Project, Tags 0H7J, 03YW, 098T and 097D. -/
+remains limiting after scheme base change. -/
 theorem proEtaleFiniteTower_representableLimit
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (Q : ℕᵒᵖ ⥤ CommRingCat.{u + 1}) [∀ n : ℕᵒᵖ, Finite (Q.obj n)] :

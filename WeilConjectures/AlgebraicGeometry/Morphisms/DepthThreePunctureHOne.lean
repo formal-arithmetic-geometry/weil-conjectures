@@ -13,7 +13,10 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedHOneLocalCohomologyC
 
 /-! # First cohomology of the structure sheaf on a depth-three puncture
 
-Source: Stacks Project, Tags 0BK0 and 0AVY.
+## References
+
+* Stacks Project, Tags 0BK0 and 0AVY
+* Stacks Project, Tag 0BK0 (Lemma 51.8.2) and Tag 0AVY (Lemma 47.11.1)
 -/
 
 @[expose] public section
@@ -21,9 +24,7 @@ Source: Stacks Project, Tags 0BK0 and 0AVY.
 universe u
 namespace AlgebraicGeometry.Scheme
 
-/-- The first structure-sheaf cohomology of a depth-three puncture vanishes.
-
-Source: Stacks Project, Tag 0BK0 (Lemma 51.8.2) and Tag 0AVY (Lemma 47.11.1). -/
+/-- The first structure-sheaf cohomology of a depth-three puncture vanishes. -/
 theorem depth_three_puncture_h_one
     (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R]
     (hdepth : (3 : ℕ∞) ≤ IsLocalRing.depth (R := R) R)

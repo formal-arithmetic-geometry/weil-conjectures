@@ -11,7 +11,11 @@ public import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearTensorEvalu
 import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearScalarTensor
 
 /-! # Evaluation and scalar tensor comparisons for semilinear systems
-Source: Zheng Construction 4.1 and Stacks 06YY, 07A4
+
+## References
+
+* Zheng Construction 4.1 and Stacks 06YY, 07A4
+* Zheng Construction 4.1
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -53,7 +57,6 @@ system and level models, retaining its ordinary normalization. Apply
 `semilinearScalarTensor` to each composite coefficient map and its given scalar
 data, using the same level models. Choose these comparisons together with their
 dependent models and assemble the five fields.
-Source: Zheng Construction 4.1; sectionwise pure-tensor normalization and scalar descent.
 (blueprint: lem-coef-semilinear-tensor-comparisons) -/
 theorem systemTensorComparisons_nonempty (A : SystemTensorBase.{c, v, r} J B τ) :
     Nonempty (SystemTensorComparisons.{c, v, r} J B τ S A) := by

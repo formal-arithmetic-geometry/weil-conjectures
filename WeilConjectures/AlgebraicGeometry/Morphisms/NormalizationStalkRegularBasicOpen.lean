@@ -11,16 +11,19 @@ public import Mathlib.Algebra.Regular.Basic
 import Mathlib.Algebra.Ring.NonZeroDivisors
 import Mathlib.RingTheory.Localization.Defs
 
-/-! # A function inverted on the source stays regular in relative normalization -/
+/-! # A function inverted on the source stays regular in relative normalization
+
+## References
+
+* Stacks Project, Tag 0307
+-/
 
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- A function inverted on the source is a nonzerodivisor on its relative normalization.
-
-Source: Stacks Project, Tag 0307 -/
+/-- A function inverted on the source is a nonzerodivisor on its relative normalization. -/
 theorem normalization_stalk_regular_basicOpen
     (A : CommRingCat.{u}) (r : A) {P : Scheme.{u}}
     (p : P ⟶ Scheme.Opens.toScheme (X := Spec A) (PrimeSpectrum.basicOpen r))

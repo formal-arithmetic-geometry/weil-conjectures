@@ -14,7 +14,9 @@ import Mathlib.LinearAlgebra.TensorProduct.Tower
 
 /-! # Nonzero residue coefficient detected by derived homology
 
-Source: Stacks Project, Tag 0E62, residue-field argument, with Tag 0BCD.
+## References
+
+* Stacks Project, Tag 0E62, residue-field argument, with Tag 0BCD
 -/
 
 @[expose] public section
@@ -79,8 +81,7 @@ private theorem residue_coefficient_ne_zero_of_mono
   simp at he
 
 /-- In linear coordinates on the source and target stalks, the degree-zero
-coefficient of a connective perfect chain representative has nonzero residue.
-Source: Stacks Project, Tag 0E62, residue-field argument, with Tag 0BCD. -/
+coefficient of a connective perfect chain representative has nonzero residue. -/
 theorem residue_ne_zero_rankOne_stalk_coefficient (S : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
     [∀ U : S.Opens,

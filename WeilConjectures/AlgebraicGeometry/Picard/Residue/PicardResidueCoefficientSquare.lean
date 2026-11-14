@@ -13,7 +13,10 @@ import WeilConjectures.AlgebraicGeometry.Picard.PicardOrdinaryResidueCoefficient
 
 /-! # PicardResidueCoefficientSquare
 
-Source: Stacks Project, Tags 0096, 06YJ, 0A1D, 08HY, 0D5S and 01F7.
+## References
+
+* Stacks Project, Tags 0096, 06YJ, 0A1D, 08HY, 0D5S and 01F7
+* Stacks Project, Tags 06YJ, 0D5S and 01F7
 -/
 
 @[expose] public section
@@ -39,8 +42,7 @@ end Modules
 
 -- Normalizing the fixed derived single-functor comparisons expands the fibre objects.
 set_option maxRecDepth 2048 in
-/-- The single-module coefficient square before direct image.
-Source: Stacks Project, Tags 06YJ, 0D5S and 01F7 -/
+/-- The single-module coefficient square before direct image. -/
 theorem picardResidueCoefficientSquare
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

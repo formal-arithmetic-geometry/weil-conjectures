@@ -12,7 +12,13 @@ import all WeilConjectures.AlgebraicGeometry.Sf.SfCbcExtensionModel
 /-!
 # Extension on the small model preserves flat K-flat complexes
 
-Source: Stacks Project Tags 06YS, 03DI and 0E8I.
+## References
+
+* Stacks Project Tags 06YS, 03DI and 0E8I
+* Stacks Project, Categories, Tag 001J
+* Stacks Project, Modules on Sites, Tags 03D1 and 03EL
+* Stacks Project, Modules on Sites, Tags 03D1 and 06YN
+* Stacks Tags 06YS, 03DI and 0E8I
 -/
 
 @[expose] public noncomputable section
@@ -30,8 +36,7 @@ namespace CategoryTheory.Functor
 open MonoidalCategory
 
 /-- The inverse of an equivalence compatible with tensor products is compatible with
-tensor products.
-Source: Stacks Project, Categories, Tag 001J. -/
+tensor products. -/
 theorem nonempty_tensor_comp_inv_iso {C D : Type*} [Category C] [Category D]
     [MonoidalCategory C] [MonoidalCategory D] (F : C ⥤ D) [F.IsEquivalence]
     (e : tensor C ⋙ F ≅ F.prod F ⋙ tensor D) :
@@ -46,8 +51,7 @@ end CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The small-model transport of module sheaves preserves the sheaf tensor product.
-Source: Stacks Project, Modules on Sites, Tags 03D1 and 03EL. -/
+/-- The small-model transport of module sheaves preserves the sheaf tensor product. -/
 theorem sfCbcModelModules_tensor (X : Scheme.{t}) (A : Type t) [CommRing A] :
     letI := SheafOfModules.isMonoidal_W_independentCoefficients (adicConstantRing X A)
     letI := SheafOfModules.isMonoidal_W_independentCoefficients (sfCbcModelRing X A)
@@ -69,8 +73,7 @@ theorem sfCbcModelModules_tensor (X : Scheme.{t}) (A : Type t) [CommRing A] :
   unfold sfCbcModelModules
   exact this
 
-/-- Small-model transport sends flat-term K-flat complexes to flat-term K-flat complexes.
-Source: Stacks Project, Modules on Sites, Tags 03D1 and 06YN. -/
+/-- Small-model transport sends flat-term K-flat complexes to flat-term K-flat complexes. -/
 theorem sfCbcModelModules_flat_kFlat (X : Scheme.{t}) (A : Type t) [CommRing A]
     (C : CochainComplex (SheafOfModules.{t + 1} (adicModuleRing X A)) ℤ)
     (hC : CochainComplex.IsAcyclicTensorKFlat (R := adicConstantRing X A) C)
@@ -96,7 +99,7 @@ theorem sfCbcModelModules_flat_kFlat (X : Scheme.{t}) (A : Type t) [CommRing A]
   exact sfCbcFlatTransport (sfCbcModelModules X A) q (C.X i) (hCf i)
 
 /-- The inverse small-model transport sends flat-term K-flat complexes to flat-term K-flat
-complexes. Source: Stacks Project, Modules on Sites, Tags 03D1 and 06YN. -/
+complexes. -/
 theorem sfCbcModelModules_inverse_flat_kFlat (X : Scheme.{t}) (A : Type t) [CommRing A]
     (P : ConstantCompletion.Cx (sfCbcModelRing X A)) (hP : P.IsKFlatTensor)
     (hf : ∀ q : ℤ, SheafOfModules.IsFlat (P.X q)) :
@@ -124,8 +127,7 @@ theorem sfCbcModelModules_inverse_flat_kFlat (X : Scheme.{t}) (A : Type t) [Comm
   refine ⟨sfCbcKFlatTransport G q' P hP, fun i ↦ ?_⟩
   exact sfCbcFlatTransport G q' (P.X i) (hf i)
 
-/-- Ordinary extension preserves flat-term K-flat complexes.
-Source: Stacks Tags 06YS, 03DI and 0E8I. -/
+/-- Ordinary extension preserves flat-term K-flat complexes. -/
 theorem sfCbcOpenExtension_flat_kFlat {U X : Scheme.{t}} (j : U ⟶ X)
     [IsOpenImmersion j] (A : Type t) [CommRing A]
     (C : CochainComplex (SheafOfModules.{t + 1} (adicModuleRing U A)) ℤ)
@@ -164,8 +166,7 @@ theorem sfCbcOpenExtension_flat_kFlat {U X : Scheme.{t}} (j : U ⟶ X)
   exact (CategoryTheory.exactFunctor _ _).prop_of_iso
     (SheafOfModules.siteSheafTensorRightIso (adicConstantRing X A) (T.X i)) (hf P hflat i)
 
-/-- Termwise extension on the small model preserves flat-term K-flat complexes.
-Source: Stacks Tags 06YS, 03DI and 0E8I. -/
+/-- Termwise extension on the small model preserves flat-term K-flat complexes. -/
 theorem sfCbcModelExtension_flat_kFlat {U X : Scheme.{t}} (j : U ⟶ X)
     [IsOpenImmersion j] (A : Type t) [CommRing A]
     (P : ConstantCompletion.Cx (sfCbcModelRing U A)) (hP : P.IsKFlatTensor)

@@ -12,7 +12,11 @@ import WeilConjectures.NumberTheory.Padics.AdicLimitFiniteModulesSupplement
 
 /-! # Integral scalar extension commutes with geometric fibres
 
-Source: Deligne, Weil II (1.1.1) b), d), pp. 146-147.
+## References
+
+* Deligne, Weil II (1.1.1) b), d), pp. 146-147
+* Weil II (1.1.1) b), d), pp. 146-147
+* the finite-module reconstruction of Stacks Tag 09B8 and right exactness of scalar extension
 -/
 
 @[expose] public section
@@ -97,10 +101,7 @@ variable (Y : Scheme.{d}) {Ω : Type d} [Field Ω] [IsAlgClosed Ω]
   (L : Type (d + 1)) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (ι : E →ₐ[ℚ_[l]] L)
 
-/-- The constructed integral scalar comparison is invertible.
-
-Source: Weil II (1.1.1) b), d), pp. 146-147; the finite-module reconstruction
-of Stacks Tag 09B8 and right exactness of scalar extension. -/
+/-- The constructed integral scalar comparison is invertible. -/
 theorem lisseIntegralScalarFiberComparison_isIso (F : LisseIntegralSheaf l E Y) :
     IsIso (lisseIntegralScalarFiberComparison Y y l E L ι F) := by
   let S := Padic.coefficientExtensionIntegers l L

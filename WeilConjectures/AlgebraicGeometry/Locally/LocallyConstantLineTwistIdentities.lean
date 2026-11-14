@@ -13,7 +13,12 @@ import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
 /-!
 # Restriction, tensor and pullback for glued integer powers
 
-Source: Stacks, Tags 00AL, 00AM, 01CD and 01CR; EGA II, Remark 4.2.7
+## References
+
+* Stacks, Tags 00AL, 00AM, 01CD and 01CR
+* EGA II, Remark 4.2.7
+* Stacks, Tags 00AL and 00AM
+* Tags 01CD and 01CR
 -/
 
 @[expose] public section
@@ -34,9 +39,7 @@ private theorem degree_disjoint {X : Scheme.{u}} (d : LocallyConstant X ℤ)
 
 /-- On an open where the degree is constantly `m`, the locally constant line twist restricts
 to the `m`-th integer line power: the projection from the defining product to its `m`-th
-factor, via `disjointOpenProductRestrictIso`.
-
-Source: Stacks, Tags 00AL and 00AM. -/
+factor, via `disjointOpenProductRestrictIso`. -/
 noncomputable def locallyConstantLineTwistRestrictIso {X : Scheme.{u}} (A : X.Modules)
     (hA : A.IsInvertible) (d : LocallyConstant X ℤ) (m : ℤ) (U : X.Opens)
     (hU : ∀ x : X, x ∈ U → d x = m) :
@@ -80,9 +83,7 @@ private theorem restriction_of_eq {X Y : Scheme.{u}} {g h : Y ⟶ X}
 
 /-- The tensor and pullback calculus of the concrete disjoint-stratum model of integer line
 powers (the restriction identity is `locallyConstantLineTwistRestrictIso`).
-These statements hold for any invertible module, independently of projective geometry.
-
-Source: Stacks, Tags 00AL and 00AM; Tags 01CD and 01CR; EGA II, Remark 4.2.7 -/
+These statements hold for any invertible module, independently of projective geometry. -/
 theorem locallyConstantLineTwist_identities {X : Scheme.{u}} (A : X.Modules)
     (hA : A.IsInvertible) :
     (∀ d e : LocallyConstant X ℤ,

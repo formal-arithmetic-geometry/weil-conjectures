@@ -14,10 +14,14 @@ import WeilConjectures.CategoryTheory.Normalized.NormalizedAdjunctionComposition
 
 /-! # Successive internal scalar mates and normalized units
 
-Source: Stacks Project, Tags 0D6D, 0G7E and 07A6.
-
 All functors are the specified ordinary unbounded internal-module functors.
 The scalar associator is normalized by its universal computation counits.
+
+## References
+
+* Stacks Project, Tags 0D6D, 0G7E and 07A6
+* Stacks 07A6
+* Stacks 0D6D, 0G7E, 07A6
 -/
 
 @[expose] public noncomputable section
@@ -46,8 +50,7 @@ variable {Λ₀ Λ₁ Λ₂ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [MonObj Λ₂] [IsCommMonObj Λ₂]
 
 /-- The canonical comparison for successive exact scalar restrictions. It comes from
-ordinary restriction, whose underlying module maps are identities, and localization.
-Source: Stacks 07A6. -/
+ordinary restriction, whose underlying module maps are identities, and localization. -/
 def scalarRestrictionComp (a : Λ₀ ⟶ Λ₁) [IsMonHom a]
     (b : Λ₁ ⟶ Λ₂) [IsMonHom b] (T : Scheme.{u}) :
     V b T ⋙ V a T ≅ V (a ≫ b) T :=
@@ -1119,9 +1122,7 @@ private theorem scalar_mate_pasting
 pullback and direct-image pastings. The comparison `SuccessiveNormalized` includes
 both representative formulas by the ordinary balanced scalar-composition isomorphism.
 The three balancing isomorphisms are arbitrary normalized ones, so these identities
-hold for the specified comparisons independently of representative choices.
-
-Source: Stacks 0D6D, 0G7E, 07A6. -/
+hold for the specified comparisons independently of representative choices. -/
 theorem internal_scalar_mate_transitivity
     (a : Λ₀ ⟶ Λ₁) [IsMonHom a] (b : Λ₁ ⟶ Λ₂) [IsMonHom b]
     {X Y : Scheme.{u}} (f : X ⟶ Y)

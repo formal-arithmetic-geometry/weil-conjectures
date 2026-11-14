@@ -13,7 +13,9 @@ import all WeilConjectures.AlgebraicGeometry.SixFunctors.InverseImagePullbackCom
 This is the scalar-linearity step extending the normalized unit calculation to
 all middle finite coefficients.
 
-Source: Stacks Project, Tags 03EK and 03EL, Step 4.
+## References
+
+* Stacks Project, Tags 03EK and 03EL, Step 4
 -/
 
 @[expose] public noncomputable section

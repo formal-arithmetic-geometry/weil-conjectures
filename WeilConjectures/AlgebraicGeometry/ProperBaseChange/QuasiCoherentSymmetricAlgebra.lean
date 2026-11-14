@@ -15,11 +15,14 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # The symmetric algebra of a quasi-coherent module
 
-Source: Stacks Project, Modules, Section 01CF and Lemmas 01CG, 01CL.
-
 The algebra is a commutative ring sheaf under the structure sheaf. The affine comparison
 is a ring equivalence commuting with the structure homomorphism and the degree-one map;
 this is precisely the canonical algebra isomorphism, without choosing algebra instances.
+
+## References
+
+* Stacks Project, Modules, Section 01CF and Lemmas 01CG, 01CL
+* Stacks Project, Modules, Section 01CF, Lemmas 01CG, 01CL
 -/
 
 @[expose] public section
@@ -31,8 +34,7 @@ open CategoryTheory Opposite
 namespace AlgebraicGeometry
 
 /-- The symmetric algebra of a quasi-coherent module is a quasi-coherent algebra sheaf,
-with its universal degree-one map and the canonical affine-section algebra isomorphisms.
-Source: Stacks Project, Modules, Section 01CF, Lemmas 01CG, 01CL. -/
+with its universal degree-one map and the canonical affine-section algebra isomorphisms. -/
 theorem exists_quasiCoherentSymmetricAlgebra
     (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent] :
     ∃ (S : X.CommAlgebraSheaf) (j : F ⟶ S.toModule),

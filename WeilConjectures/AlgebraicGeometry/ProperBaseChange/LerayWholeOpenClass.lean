@@ -12,7 +12,10 @@ import WeilConjectures.AlgebraicGeometry.Section.SectionCohomologyCycleFormula
 
 /-! # The cocycle Leray edge on a restricted resolution
 
-Source: Stacks Project, Tags 01E4, 01F4 and 01FB.
+## References
+
+* Stacks Project, Tags 01E4, 01F4 and 01FB
+* Stacks Project, Tags 01E4 and 01F4
 -/
 
 @[expose] public section
@@ -130,9 +133,7 @@ private theorem sectionClass_top_cycle {X Y : Scheme.{u}} (f : X ⟶ Y)
       (hclass.trans (congrArg (Hom.app (K.homologyπ n) ⊤) hc))
 
 -- The edge formula and the resolution comparison use definitionally equal section functors.
-/-- The whole-open resolution section class is the cocycle-defined Leray edge.
-Source: Stacks Project, Tags 01E4 and 01F4.
--/
+/-- The whole-open resolution section class is the cocycle-defined Leray edge. -/
 theorem whole_open_leray_edge {X Y : Scheme.{u}} (f : X ⟶ Y)
     (F : X.Modules) (I : InjectiveResolution F) (n : ℕ) :
     let := RingedSpace.globalSectionsFunctor_additive X.toRingedSpace

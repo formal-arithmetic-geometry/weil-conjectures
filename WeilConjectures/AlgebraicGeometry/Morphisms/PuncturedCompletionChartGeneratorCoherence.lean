@@ -13,7 +13,16 @@ import Mathlib.AlgebraicGeometry.Morphisms.Flat
 /-!
 # Coherence on original elements of the affine section modules
 
-Source: Stacks Project, Tag 0BLH, first two proof paragraphs; Tag 05EL, item (1).
+## References
+
+* Stacks Project, Tag 0BLH, first two proof paragraphs
+* Tag 05EL, item (1)
+* Stacks Project, Tag 0BLH
+* Stacks Project, Tag 0BLH, second proof paragraph
+* Tag 01I6, sections of a principal open in an affine scheme
+* Tag 01I6, affine section modules and base change
+* Stacks Project, Tag 0BLH, second proof paragraph (the object check)
+* Tag 05EL, item (1), its square and cocycle clauses
 -/
 
 @[expose] public section
@@ -24,15 +33,13 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.CompletionGluingData
 
 
-/-- Sections with the structural action of the affine base.
-Source: Stacks Project, Tag 0BLH. -/
+/-- Sections with the structural action of the affine base. -/
 private noncomputable def chartSections {R : Type u} [CommRing R]
     {Z : Scheme.{u}} (h : Z ⟶ Spec (.of R)) (W : Z.Opens) : ModuleCat R :=
   letI := Module.compHom Γ(Z, W) (chartScalarMap h W)
   ModuleCat.of R Γ(Z, W)
 
-/-- Restriction of sections is linear for the structural actions.
-Source: Stacks Project, Tag 0BLH. -/
+/-- Restriction of sections is linear for the structural actions. -/
 private noncomputable def chartRestriction {R : Type u} [CommRing R]
     {Z : Scheme.{u}} (h : Z ⟶ Spec (.of R)) {W V : Z.Opens} (hVW : V ≤ W) :
     chartSections h W →ₗ[R] chartSections h V where
@@ -95,9 +102,6 @@ private theorem chart_localization {R : Type u} [CommRing R]
 /-- Localizing the supplied double-intersection equivalence gives the actual sections
 on a triple intersection. The equivalence is specified on the original double sections;
 no transition or cocycle equality is assumed or asserted.
-
-Source: Stacks Project, Tag 0BLH, second proof paragraph; Tag 01I6, sections of a
-principal open in an affine scheme.
 -/
 private theorem exists_chart_section_localization
     {A : Type u} [CommRing A] [IsLocalRing A]
@@ -225,9 +229,6 @@ private theorem chart_completed_tensor
 /-- Base-changing the supplied double-section equivalence gives actual sections on the
 completed double intersection, with the usual formula on pure tensors. No transition
 map, completed-model comparison, square equation, or d_i map occurs in the conclusion.
-
-Source: Stacks Project, Tag 0BLH, first two proof paragraphs; Tag 01I6, affine section
-modules and base change.
 -/
 private theorem exists_chart_tensor_restriction
     {A : Type u} [CommRing A] [IsLocalRing A]
@@ -419,9 +420,6 @@ private theorem chart_tensor_naturality
 
 /-- The square and cocycle paths agree on the images of original module elements.
 This checks maps already supplied; it constructs no section module or equivalence.
-
-Source: Stacks Project, Tag 0BLH, second proof paragraph (the object check);
-Tag 05EL, item (1), its square and cocycle clauses.
 -/
 theorem affine_chart_transition_generator_coherence
     {A : Type u} [CommRing A] [IsLocalRing A]

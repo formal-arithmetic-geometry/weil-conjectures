@@ -24,7 +24,10 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.GaloisCoverOpenFactorRational
 /-!
 # Cyclic local chart data along a split trait section
 
-Source: Stacks Project, Tags 0EYH and 0EYI(2).
+## References
+
+* Stacks Project, Tags 0EYH and 0EYI(2)
+* Stacks Project, Tags 0EYH and 0EYI(2), trait paragraph of 0EYJ
 -/
 
 @[expose] public section
@@ -35,9 +38,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- A tame chart at a point over the trait section has one ramification coordinate,
 and the split generic section supplies a root of its uniformizer in an unramified
-trait fraction field.
-
-Source: Stacks Project, Tags 0EYH and 0EYI(2), trait paragraph of 0EYJ. -/
+trait fraction field. -/
 theorem GaloisCover.stalk_normalization_trait_section_cyclic_data {S C : Scheme.{u}}
     [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]

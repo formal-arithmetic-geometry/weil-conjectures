@@ -16,13 +16,24 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictSc
 /-!
 # Coherent scalar restriction for open extension by zero
 
-Source: Stacks Project, Tags 03DI and 03CY; Tag 015F; Tag 04VG.
-
 The comparisons are the published `sfOpenRestriction` and its exact termwise
 localization. Normalization is expressed on the open adjunction unit: on each
 nonzero summand of the defining extension presheaf it is the identity; maps from
 all remaining values, which are zero, are unique. Thus this unit equation is
 precisely the pre-sheafification normalization, without a choice of stalks.
+
+## References
+
+* Stacks Project, Tags 03DI and 03CY
+* Tag 015F
+* Tag 04VG
+* Stacks Tag 00YV
+* Stacks Tag 03DA
+* Stacks Tags 00YV and 03DA
+* Stacks Tags 03DI and 03CY
+* Stacks Tags 03DI and 03DA
+* Stacks Tags 03DI and 00YV
+* Stacks Tag 015F
 -/
 
 @[expose] public noncomputable section
@@ -40,16 +51,14 @@ namespace AlgebraicGeometry.Scheme
 variable {A B C : Type u} [CommRing A] [CommRing B] [CommRing C]
   [Finite A] [Finite B] [Finite C]
 
-/-- The normalized realization comparison is the identity on sections.
-Source: Stacks Tag 00YV. -/
+/-- The normalized realization comparison is the identity on sections. -/
 private theorem realization_hom_apply (T : Scheme.{u}) (φ : A →+* B)
     (M : Sheaf (ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1, u} B)))
     (V : T.ProEtᵒᵖ) (x : ((sfIntrinsicModuleEquivalence T B).functor.obj M).val.obj V) :
     ((sfRealizationRestriction T φ).hom.app M).val.app V x = x :=
   (sfRealizationRestriction_existsUnique T φ).exists.choose_spec M V x
 
-/-- The inverse normalized realization comparison is the identity on sections.
-Source: Stacks Tag 00YV. -/
+/-- The inverse normalized realization comparison is the identity on sections. -/
 private theorem realization_inv_apply (T : Scheme.{u}) (φ : A →+* B)
     (M : Sheaf (ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1, u} B)))
     (V : T.ProEtᵒᵖ)
@@ -65,8 +74,7 @@ private theorem realization_inv_apply (T : Scheme.{u}) (φ : A →+* B)
   exact hh
 
 omit [Finite A] [Finite B] in
-/-- Restriction to an open commutes strictly with fixed scalar restriction on maps.
-Source: Stacks Tag 03DA. -/
+/-- Restriction to an open commutes strictly with fixed scalar restriction on maps. -/
 private theorem restriction_fixed_map {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]
     (φ : A →+* B) {P Q : Sheaf (ProEt.topology Z) (ModuleCat.{u + 1} (ULift.{u + 1, u} B))}
     (f : P ⟶ Q) :
@@ -77,8 +85,7 @@ private theorem restriction_fixed_map {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenIm
   rfl
 
 omit [Finite A] [Finite B] [Finite C] in
-/-- The scalar compositor is the identity on sections.
-Source: Stacks Tag 03DA. -/
+/-- The scalar compositor is the identity on sections. -/
 private theorem coefficientComp_hom_apply (T : Scheme.{u}) (φ : A →+* B) (ψ : B →+* C)
     (M : proEtaleRingModules T (proEtaleConstantRing T C)) (V : T.ProEtᵒᵖ)
     (x : M.val.obj V) :
@@ -87,8 +94,7 @@ private theorem coefficientComp_hom_apply (T : Scheme.{u}) (φ : A →+* B) (ψ 
     ((constantSheaf (ProEt.topology T) CommRingCat.{u + 1}).map_comp _ _).symm).exists.choose_spec
       M V x
 
-/-- Composition law for the inverse normalized realization comparisons.
-Source: Stacks Tags 00YV and 03DA. -/
+/-- Composition law for the inverse normalized realization comparisons. -/
 private theorem realization_inv_comp (T : Scheme.{u}) (φ : A →+* B) (ψ : B →+* C)
     (N : Sheaf (ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1, u} C))) :
     (sfRealizationRestriction T φ).inv.app ((sfFixedRestriction T ψ).obj N) ≫
@@ -109,7 +115,7 @@ attribute [local irreducible] sfIntrinsicModuleEquivalence
 omit [Finite A] [Finite B] in
 /-- Unit normalization of the fixed-scalar open comparison: after the open
 adjunction unit, its restriction to the open is restriction of scalars of the
-open adjunction unit. Source: Stacks Tags 03DI and 03CY. -/
+open adjunction unit. -/
 private theorem fixed_normalized {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]
     (φ : A →+* B) (N : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1, u} B))) :
     (ProEtale.openImmersionLowerShriekAdjunction
@@ -134,8 +140,7 @@ private theorem fixed_normalized {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersi
   rfl
 
 omit [Finite A] [Finite B] [Finite C] in
-/-- Cocycle for the fixed-scalar open comparisons.
-Source: Stacks Tags 03DI and 03DA. -/
+/-- Cocycle for the fixed-scalar open comparisons. -/
 private theorem fixed_open_comp {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]
     (φ : A →+* B) (ψ : B →+* C)
     (N : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1, u} C))) :
@@ -149,8 +154,7 @@ private theorem fixed_open_comp {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersio
   rw [restriction_fixed_map, ← Functor.map_comp, fixed_normalized j ψ N]
   rfl
 
-/-- Composition law for the normalized realization comparisons.
-Source: Stacks Tags 00YV and 03DA. -/
+/-- Composition law for the normalized realization comparisons. -/
 private theorem realization_hom_comp (T : Scheme.{u}) (φ : A →+* B) (ψ : B →+* C)
     (N : Sheaf (ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1, u} C))) :
     (sfCoefficientRestrictionComp T φ ψ).hom.app
@@ -169,8 +173,7 @@ private theorem realization_hom_comp (T : Scheme.{u}) (φ : A →+* B) (ψ : B �
   rfl
 
 /-- The realization of the inverse realization comparison, expressed by the
-realization comparison and the counits of the realization equivalences.
-Source: Stacks Tag 00YV. -/
+realization comparison and the counits of the realization equivalences. -/
 private theorem inverseRealization_functor_map (T : Scheme.{u}) (φ : A →+* B)
     (M : proEtaleRingModules T (proEtaleConstantRing T B)) :
     (sfIntrinsicModuleEquivalence T A).functor.map
@@ -188,8 +191,7 @@ private theorem inverseRealization_functor_map (T : Scheme.{u}) (φ : A →+* B)
     ← Functor.map_comp, Equivalence.counit_naturality]
   rfl
 
-/-- Composition law for the inverse realization comparisons.
-Source: Stacks Tags 00YV and 03DA. -/
+/-- Composition law for the inverse realization comparisons. -/
 private theorem inverse_realization_comp (T : Scheme.{u}) (φ : A →+* B) (ψ : B →+* C)
     (M : proEtaleRingModules T (proEtaleConstantRing T C)) :
     (sfIntrinsicModuleEquivalence T A).inverse.map
@@ -214,8 +216,7 @@ private theorem inverse_realization_comp (T : Scheme.{u}) (φ : A →+* B) (ψ :
   rfl
 
 /-- Realization of the fixed-scalar identity restriction comparison is the identity:
-that comparison is the identity on every section.
-Source: Stacks Tag 03DA. -/
+that comparison is the identity on every section. -/
 private theorem fixedRestrictionId_realization (T : Scheme.{u}) (R : Type u) [CommRing R]
     [Finite R] (N : Sheaf (ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1, u} R))) :
     (sfIntrinsicModuleEquivalence T R).functor.map ((sfOpenFixedRestrictionId T R).hom.app N) =
@@ -224,8 +225,7 @@ private theorem fixedRestrictionId_realization (T : Scheme.{u}) (R : Type u) [Co
   erw [this]
   exact CategoryTheory.Functor.map_id _ _
 
-/-- The canonical identity coefficient comparison is the identity on sections.
-Source: Stacks Tags 00YV and 03DA. -/
+/-- The canonical identity coefficient comparison is the identity on sections. -/
 private theorem coefficientRestrictionId_apply (T : Scheme.{u}) (R : Type u) [CommRing R]
     [Finite R] (M : proEtaleRingModules T (proEtaleConstantRing T R)) (V : T.ProEtᵒᵖ)
     (x : M.val.obj V) :
@@ -247,7 +247,7 @@ private theorem coefficientRestrictionId_apply (T : Scheme.{u}) (R : Type u) [Co
     ((sfIntrinsicModuleEquivalence T R).counitIso.inv_hom_id_app M)
 
 /-- The identity scalar compositor is scalar restriction of the canonical identity
-comparison. Source: Stacks Tag 03DA. -/
+comparison. -/
 private theorem restriction_id_comp (T : Scheme.{u}) (R : Type u) [CommRing R] [Finite R]
     (M : proEtaleRingModules T (proEtaleConstantRing T R)) :
     (sfCoefficientRestrictionComp T (RingHom.id R) (RingHom.id R)).hom.app M =
@@ -258,7 +258,7 @@ private theorem restriction_id_comp (T : Scheme.{u}) (R : Type u) [CommRing R] [
   exact (coefficientRestrictionId_apply T R M V x).symm
 
 /-- The inverse realization comparison is the mate of the inverse realization
-comparison along the realization units. Source: Stacks Tag 00YV. -/
+comparison along the realization units. -/
 private theorem realization_unit_inverse (T : Scheme.{u}) (φ : A →+* B)
     (X : Sheaf (ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1, u} B))) :
     (sfIntrinsicModuleEquivalence T A).unitIso.hom.app ((sfFixedRestriction T φ).obj X) ≫
@@ -275,8 +275,7 @@ private theorem realization_unit_inverse (T : Scheme.{u}) (φ : A →+* B)
   rfl
 
 /-- The open comparison in fixed-scalar coordinates: after the realization unit
-and the inverse realization comparison, it is the fixed-scalar open comparison.
-Source: Stacks Tags 03DI and 00YV. -/
+and the inverse realization comparison, it is the fixed-scalar open comparison. -/
 private theorem open_inverse {U Z : Scheme.{u}} (j : U ⟶ Z) [IsOpenImmersion j]
     (φ : A →+* B) (M : proEtaleRingModules U (proEtaleConstantRing U B)) :
     (sfIntrinsicModuleEquivalence Z A).unitIso.hom.app
@@ -300,8 +299,7 @@ private theorem open_inverse {U Z : Scheme.{u}} (j : U ⟶ Z) [IsOpenImmersion j
 
 omit [Finite A] in
 /-- The unit of the intrinsic extension-by-zero adjunction, in terms of the
-fixed-scalar open adjunction unit and the realization unit and counit.
-Source: Stacks Tags 03DI and 00YV. -/
+fixed-scalar open adjunction unit and the realization unit and counit. -/
 private theorem intrinsic_unit {U Z : Scheme.{u}} (j : U ⟶ Z) [IsOpenImmersion j]
     (R : Type u) [CommRing R] [Finite R]
     (N : proEtaleRingModules U (proEtaleConstantRing U R)) :
@@ -320,8 +318,7 @@ private theorem intrinsic_unit {U Z : Scheme.{u}} (j : U ⟶ Z) [IsOpenImmersion
     Equivalence.toAdjunction_unit, Functor.map_comp, Category.assoc]
   rfl
 
-/-- The open comparison is normalized by the open adjunction units.
-Source: Stacks Tags 03DI and 03CY. -/
+/-- The open comparison is normalized by the open adjunction units. -/
 private theorem open_normalized {U Z : Scheme.{u}} (j : U ⟶ Z) [IsOpenImmersion j]
     (φ : A →+* B) : SfOpenRestrictionNormalized j φ (sfOpenRestriction j φ) := by
   intro M
@@ -376,8 +373,7 @@ private theorem open_normalized {U Z : Scheme.{u}} (j : U ⟶ Z) [IsOpenImmersio
   erw [n2, reassoc_of% n1, Iso.hom_inv_id_app_assoc]
 
 /-- The published comparison is the unique comparison inducing identity on the
-extension presheaves, equivalently satisfying the displayed open-unit equation.
-Source: Stacks Tags 03DI and 03CY. -/
+extension presheaves, equivalently satisfying the displayed open-unit equation. -/
 theorem sfOpenRestriction_normalized_unique {U Z : Scheme.{u}} (j : U ⟶ Z)
     [IsOpenImmersion j] (φ : A →+* B) :
     SfOpenRestrictionNormalized j φ (sfOpenRestriction j φ) ∧
@@ -395,8 +391,7 @@ theorem sfOpenRestriction_normalized_unique {U Z : Scheme.{u}} (j : U ⟶ Z)
     ((sfIntrinsicExtensionByZero j B).obj M))).mp
   simpa only [Category.assoc] using (he M).trans ((open_normalized j φ) M).symm
 
-/-- The sheaf comparison cocycle, including both canonical scalar associators.
-Source: Stacks Tags 03DI and 03CY. -/
+/-- The sheaf comparison cocycle, including both canonical scalar associators. -/
 theorem sfOpenRestriction_coefficient_comp {U Z : Scheme.{u}} (j : U ⟶ Z)
     [IsOpenImmersion j] (φ : A →+* B) (ψ : B →+* C)
     (M : proEtaleRingModules U (proEtaleConstantRing U C)) :
@@ -435,8 +430,7 @@ theorem sfOpenRestriction_coefficient_comp {U Z : Scheme.{u}} (j : U ⟶ Z)
   simp only [← Functor.map_comp_assoc]
   rw [inverse_realization_comp]
 
-/-- The identity coefficient law on module sheaves, with canonical identifications.
-Source: Stacks Tags 03DI and 03CY. -/
+/-- The identity coefficient law on module sheaves, with canonical identifications. -/
 theorem sfOpenRestriction_coefficient_id {U Z : Scheme.{u}} (j : U ⟶ Z)
     [IsOpenImmersion j] (R : Type u) [CommRing R] [Finite R]
     (M : proEtaleRingModules U (proEtaleConstantRing U R)) :
@@ -473,8 +467,7 @@ def sfOpenRestrictionDerived {U Z : Scheme.{u}} (j : U ⟶ Z)
   Functor.mapDerivedCategorySquareIso (sfOpenRestriction j φ)
 
 /-- Canonical identification of derived identity coefficient restriction with the
-identity functor, localized from the sectionwise identity comparison.
-Source: Stacks Tag 015F. -/
+identity functor, localized from the sectionwise identity comparison. -/
 def sfOpenDerivedCoefficientRestrictionId (T : Scheme.{u}) (R : Type u)
     [CommRing R] [Finite R] :
     (proEtaleCoefficientRestrictScalars T (RingHom.id R)).mapDerivedCategory ≅ 𝟭 _ :=

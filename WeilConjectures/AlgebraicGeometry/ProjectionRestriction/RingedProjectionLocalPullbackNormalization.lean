@@ -11,7 +11,12 @@ import WeilConjectures.CategoryTheory.Derived.DerivedAdjunctionCochainUnit
 
 /-! # Normalization of the localized pullback on complexes
 
-Source: Stacks Project, Tags 04J0, 07A6 and 08FI.
+## References
+
+* Stacks Project, Tags 04J0, 07A6 and 08FI
+* Stacks Project, Tag 04J0 and Categories, the mates correspondence
+* Stacks Project, Modules on Sites, Tag 04J0
+* Cohomology on Sites, Tags 07A6 and 08FI
 -/
 
 @[expose] public noncomputable section
@@ -24,8 +29,7 @@ namespace AlgebraicGeometry.Scheme.ProjectionRestriction
 
 /-- The ordinary inverse adjunction mate of the specified direct-image square.
 This constructs a natural transformation by the mates equivalence, without
-choosing an inverse or assuming a tensor equation.
-Source: Stacks Project, Tag 04J0 and Categories, the mates correspondence. -/
+choosing an inverse or assuming a tensor equation. -/
 def localOrdinaryPullbackSquare
     {X Y : Scheme.{u}} {f : X ⟶ Y}
     {R_Y : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}}
@@ -217,10 +221,7 @@ private theorem normalize
   simp only [Category.assoc, ← QAv.map_comp, hlam, Functor.id_obj]
 
 /-- The derived square, conjugated by the exact localization comparisons, is
-localization of the ordinary inverse mate on every complex.
-
-Source: Stacks Project, Modules on Sites, Tag 04J0; Cohomology on Sites,
-Tags 07A6 and 08FI. -/
+localization of the ordinary inverse mate on every complex. -/
 theorem localPullbackNormalization
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R_Y : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})

@@ -13,7 +13,10 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Terminal
 
 /-! # Scalar restriction preserves open support of semilinear systems
 
-Source: Stacks Project, Modules on Sites, Tags 03DI and 03DJ.
+## References
+
+* Stacks Project, Modules on Sites, Tags 03DI and 03DJ
+* Stacks Project, Tags 03DI and 03DJ
 -/
 
 @[expose] public noncomputable section
@@ -323,9 +326,7 @@ private theorem ordinary_extension_eq {U X : Scheme.{u}} (j : U ⟶ X)
 end OrdinaryOpenComparison
 
 /-- Restricting the coefficient action preserves the essential image of ordinary
-extension by zero. This specifies no comparison map or adjunction mate.
-
-Source: Stacks Project, Tags 03DI and 03DJ. -/
+extension by zero. This specifies no comparison map or adjunction mate. -/
 theorem scalarRestriction_ordinaryOpenSupported
     (C D : ℕ → CommRingCat.{u + 1})
     (τ : ∀ n, C (n + 1) ⟶ C n) (σ : ∀ n, D (n + 1) ⟶ D n)

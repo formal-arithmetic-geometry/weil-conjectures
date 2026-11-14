@@ -19,7 +19,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.AffineFpIsoIndEtaleDescent
 
 /-! # Finite-stage descent of punctured root charts
 
-Source: Stacks Project, Tags 0EYG and 05N9
+## References
+
+* Stacks Project, Tags 0EYG and 05N9
+* Stacks Project, Tag 0EYG, the finite-presentation descent paragraph
+* Tag 05N9 (2), (3) for descent of morphisms and their identities
 -/
 
 @[expose] public section
@@ -29,10 +33,7 @@ set_option autoImplicit false
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- A finite collection of punctured root charts descends from an ind-etale algebra.
-
-Source: Stacks Project, Tag 0EYG, the finite-presentation descent paragraph;
-Tag 05N9 (2), (3) for descent of morphisms and their identities. -/
+/-- A finite collection of punctured root charts descends from an ind-etale algebra. -/
 theorem punctured_root_charts_descend_indEtale
     (R H : CommRingCat.{u}) (g : R) (ι : R →+* H) (hι : ι.IndEtale)
     {Y : Scheme.{u}} (p : Y ⟶ Spec R)

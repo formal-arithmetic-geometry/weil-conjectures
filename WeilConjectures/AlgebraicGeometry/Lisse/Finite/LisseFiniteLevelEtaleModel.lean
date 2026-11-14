@@ -11,7 +11,10 @@ import WeilConjectures.AlgebraicGeometry.Lisse.Finite.LisseFiniteLevelEtaleModel
 
 /-! # Bounded finite-lisse model at one coefficient level
 
-Source: Stacks Tags 099Y, 099Z and 09B1.
+## References
+
+* Stacks Tags 099Y, 099Z and 09B1
+* Stacks Project, Tags 099Y, 099Z and 09B1
 -/
 
 @[expose] public noncomputable section
@@ -35,8 +38,6 @@ For a bounded finite level with local constant models, construct the bounded
 finite-locally-constant etale complex and its fixed-realization comparison.
 This is the model-and-comparison part of
 `lisse_finite_level_etale_descent`; geometric Isom stalks are handled separately.
-
-Source: Stacks Project, Tags 099Y, 099Z and 09B1.
 -/
 theorem lisse_finite_level_etale_model
     (X Y : Scheme.{u}) (g : Y ⟶ X)

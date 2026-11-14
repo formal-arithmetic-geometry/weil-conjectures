@@ -11,7 +11,12 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleRepresentableEpiLocalLifting
 import Mathlib.AlgebraicGeometry.Sites.Proetale
 import WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible
 
-/-! Representable epimorphisms are singleton covers under the qcqs hypotheses. -/
+/-! Representable epimorphisms are singleton covers under the qcqs hypotheses.
+
+## References
+
+* Stacks Project, Tag 00WN and pro-etale covering definition Tag 098K
+-/
 @[expose] public section
 set_option autoImplicit false
 universe u
@@ -20,9 +25,7 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 namespace AlgebraicGeometry.Scheme.ProEt
 
 set_option backward.isDefEq.respectTransparency false in
-/-- A represented epimorphism with quasi-compact source and quasi-separated target covers.
-Source: Stacks Project, Tag 00WN and pro-etale covering definition Tag 098K.
--/
+/-- A represented epimorphism with quasi-compact source and quasi-separated target covers. -/
 theorem singleton_cover_of_representable_epi (X : Scheme.{u}) {A B : X.ProEt}
     (μ : A ⟶ B) [CompactSpace A.left] [QuasiSeparatedSpace B.left]
     (hμ : Epi ((topology X).yoneda.map μ)) :

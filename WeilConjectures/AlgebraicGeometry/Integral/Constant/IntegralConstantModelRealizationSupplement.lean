@@ -165,8 +165,10 @@ public import WeilConjectures.AlgebraicGeometry.IntegralConstantModelRealization
 
 /-! # Canonical integral constant-model realization
 
-Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(3), and the
-projection-normalized integral coefficient comparison.
+## References
+
+* Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(3), and the projection-normalized
+  integral coefficient comparison
 -/
 
 @[expose] public noncomputable section

@@ -131,10 +131,14 @@ import WeilConjectures.CategoryTheory.Sites.MonObj
 
 /-! # Integral quotient scalar comparison for unbounded direct image
 
-Source: Stacks Project, Tags 093M, 0D6D, 0D6E, 07A6 and 0944.
-
 Positive quotient levels are indexed by n + 1. All categories are ordinary unbounded
 derived categories of the recorded internal module objects. No completion is applied.
+
+## References
+
+* Stacks Project, Tags 093M, 0D6D, 0D6E, 07A6 and 0944
+* Stacks 06YY
+* Stacks 07A6
 -/
 
 @[expose] public noncomputable section
@@ -193,8 +197,7 @@ instance finite_comm (n : ℕ) : IsCommMonObj (finite l E n) :=
   Profinite.isCommMonObj_continuousMapRingObjOfUniverse
     (Padic.coefficientExtensionRing l E (n + 1))
 
-/-- Continuity of the actual quotient, rather than a choice of a finite projection.
-Source: the uniformizer coset basis of the integer topology. -/
+/-- Continuity of the actual quotient, rather than a choice of a finite projection. -/
 theorem reduction_continuous (n : ℕ) :
     @Continuous _ _ (Padic.coefficientExtensionIntegersTopology l E)
       (quotientTopology l E n)
@@ -221,13 +224,11 @@ instance reductionMonHom (n : ℕ) : IsMonHom (reduction l E n) := by
       (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1)))
       (reduction_continuous l E n))
 
-/-- The scalar-extension functor in the quotient coefficient category.
-Source: Stacks 06YY. -/
+/-- The scalar-extension functor in the quotient coefficient category. -/
 def scalar (T : Scheme.{u}) (n : ℕ) :=
   (Mod.extendScalars (coefficientMap (reduction l E n) T)).leftDerivedFunctor
 
-/-- Exact scalar restriction, descended termwise to the unbounded derived category.
-Source: Stacks 07A6. -/
+/-- Exact scalar restriction, descended termwise to the unbounded derived category. -/
 def restrict (T : Scheme.{u}) (n : ℕ) :
     DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
       (condensedRingObj (finite l E n) T)) ⥤
@@ -236,8 +237,7 @@ def restrict (T : Scheme.{u}) (n : ℕ) :
   (Mod.comap (C := Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
     (coefficientMap (reduction l E n) T)).mapDerivedCategory
 
-/-- The specified derived extension/restriction adjunction.
-Source: Stacks 07A6. -/
+/-- The specified derived extension/restriction adjunction. -/
 def scalarAdjunction (T : Scheme.{u}) (n : ℕ) :
     scalar l E T n ⊣ restrict l E T n :=
   Mod.derivedExtendMapDerivedCategoryAdjunction _

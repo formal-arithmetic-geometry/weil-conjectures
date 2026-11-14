@@ -14,7 +14,10 @@ import WeilConjectures.AlgebraicGeometry.Picard.Termwise.PicardTermwiseModelComp
 
 /-! # Derived test sections and ordinary connective cycles
 
-Source: Stacks Project, Tags 06YJ and 0D5S.
+## References
+
+* Stacks Project, Tags 06YJ and 0D5S
+* Tag 05RR, truncation calculus of fractions
 -/
 
 @[expose] public section
@@ -63,8 +66,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- For a fixed connective strictly perfect model, test sections are ordinary
 cycles on every scheme mapping through its open domain. The comparison is natural
 for the canonical composition maps. No affine, scalar-basis or residue hypothesis
-is used.
-Source: Stacks Project, Tags 06YJ and 0D5S; Tag 05RR, truncation calculus of fractions. -/
+is used. -/
 theorem picard_connective_model_comparison
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

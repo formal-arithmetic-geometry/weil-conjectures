@@ -7,7 +7,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinaryFiniteP1KummerSupplement
 import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 import Mathlib.CategoryTheory.Adjunction.FullyFaithful
-/-! # The residue root map is an isomorphism. -/
+/-! # The residue root map is an isomorphism.
+
+## References
+
+* Stacks 0152, 06YY and 0GLZ
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -20,8 +25,7 @@ private theorem cachedModSheafify (Z : Scheme.{u}) (A : Type (u + 1)) [CommRing 
 attribute [local instance] cachedModSheafify
 
 /-- For a scheme Z, n≥0 and R=ULift(Z/n), the ordinary finite root tensor map μ_n→forget(R_Z(1)) is
-an isomorphism [def-asd-ordinary-finite-p1-kummer-class, def-asd-finite-etale-tate-sheaf].
-Source: Stacks 0152, 06YY and 0GLZ. -/
+an isomorphism [def-asd-ordinary-finite-p1-kummer-class, def-asd-finite-etale-tate-sheaf]. -/
 theorem residueFiniteRootMap_isIso (Z : Scheme.{u}) (n : ℕ)
     (hR : (n : ULift.{u + 1} (ZMod n)) = 0) :
     IsIso (ordinaryFiniteRootMap (ULift.{u + 1} (ZMod n)) n hR Z) := by

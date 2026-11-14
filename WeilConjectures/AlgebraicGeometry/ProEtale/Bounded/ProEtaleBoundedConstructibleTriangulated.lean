@@ -26,7 +26,10 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 /-!
 # Bounded constructible pro-etale complexes form a triangulated subcategory
 
-Source: Stacks Project, Tags 09AL, 09B5 and 06UQ.
+## References
+
+* Stacks Project, Tags 09AL, 09B5 and 06UQ
+* Stacks Project, Tag 0H7J, uniqueness of the constant-sheaf adjunction
 -/
 
 @[expose] public section
@@ -37,8 +40,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The canonical constant-coefficient inverse-image comparison is invertible.
-Source: Stacks Project, Tag 0H7J, uniqueness of the constant-sheaf adjunction. -/
+/-- The canonical constant-coefficient inverse-image comparison is invertible. -/
 theorem constantComparison_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     (A : Type u) [CommRing A] : IsIso (proEtaleCoefficientInverseImageMap f A) :=
   proEtaleConstantRingComparison_isIso.{u} f A
@@ -175,7 +177,7 @@ private theorem finite_homology_support_iff_bounded
       ⟨b, fun i hi ↦ le_of_not_gt fun h ↦ hi ((DerivedCategory.isLE_iff K b).1 hb i h)⟩⟩
 
 /-- Bounded globally constructible cohomology is invariant under isomorphisms and
-cuts out a full triangulated subcategory. Source: Stacks Project, Tags 09AL, 09B5 and 06UQ. -/
+cuts out a full triangulated subcategory. -/
 theorem proEtale_bounded_constructible_isTriangulated
     (Y : Scheme.{u}) (A : Type u) [CommRing A] [Finite A] :
     ObjectProperty.IsClosedUnderIsomorphisms (fun K : proEtaleDerivedCategory Y A ↦

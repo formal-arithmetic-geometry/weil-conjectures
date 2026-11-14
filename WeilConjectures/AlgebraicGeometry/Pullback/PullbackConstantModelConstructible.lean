@@ -18,11 +18,18 @@ import all WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedLocalizingPullba
 /-!
 # Pullback of constructible modules with finite constant scalar models
 
-Source: Stacks Project, Tag 054I; Bhatt--Scholze
 The pro-etale topology for schemes, proof of Lemma 6.3.8.
 
 The assertion retains each given scalar module and the whole given covering family.
 The pulled-back stratification and covers are the existing canonical constructions.
+
+## References
+
+* Stacks Project, Tag 054I
+* Bhatt--Scholze
+* "Constructible complexes", and Stacks 054I
+* Stacks 054I
+* Bhatt--Scholze, proof of Lemma 6.3.8
 -/
 
 @[expose] public noncomputable section
@@ -41,8 +48,7 @@ structures. The input uses the recorded finite locally closed stratification int
 constructibility is supplied separately. The output includes constructibility, local
 closedness, disjointness and the covering property, and has the same finite index set.
 Its domains are `pullback (S.immersion a) g`, its immersions are `pullback.snd`, and its
-stratum subsets are `g ⁻¹' S.stratum a`.
-Source: "Constructible complexes", and Stacks 054I. -/
+stratum subsets are `g ⁻¹' S.stratum a`. -/
 def constantModelPullbackStratification {Y Y' : Scheme.{u}}
     (S : Y.FiniteLocallyClosedStratification)
     (hS : ∀ a : Fin S.n, Topology.IsConstructible (S.stratum a)) (g : Y' ⟶ Y) :
@@ -209,9 +215,7 @@ private theorem constantModelPullback
 /-- Inverse image preserves constructible modules and their specified constant models, for
 every commutative condensed coefficient ring (in particular for all the admissible
 coefficients of the node: finite discrete rings, the ℓ-adic integers and numbers, their
-finite extensions, and the condensed algebraic closure).
-
-Source: Stacks 054I; Bhatt--Scholze, proof of Lemma 6.3.8. -/
+finite extensions, and the condensed algebraic closure). -/
 theorem pullback_constantModelConstructible
     (L : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})
     [IsCommMonObj ((sheafCompose (coherentTopology Profinite.{u})

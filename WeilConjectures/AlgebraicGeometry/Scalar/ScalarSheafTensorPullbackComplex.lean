@@ -10,7 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.Upper.UpperStarSingleTensorRepre
 /-!
 # The ordinary scalar tensor pullback square on complexes
 
-Source: Stacks Project, Tag 07A4.
+## References
+
+* Stacks Project, Tag 07A4
+* Stacks 07A4
 -/
 
 @[expose] public noncomputable section
@@ -53,8 +56,7 @@ private theorem lift_complex_square
     (t.hom.app (P.X i) ≫ 𝟙 _) ≫ σ.app (F.obj (P.X i))
   simpa only [Category.comp_id] using h (P.X i)
 
-/-- The ordinary balancing/pullback square applied degreewise to a complex.
-Source: Stacks 07A4. -/
+/-- The ordinary balancing/pullback square applied degreewise to a complex. -/
 theorem scalarSheafTensorPullbackComplex_square
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {Z W : Scheme.{u}} (f : Z ⟶ W)

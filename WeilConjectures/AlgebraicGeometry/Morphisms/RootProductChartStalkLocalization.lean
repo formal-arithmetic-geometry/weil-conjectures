@@ -16,7 +16,12 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
 import WeilConjectures.AlgebraicGeometry.Morphisms.RootProductChartCore
 
 /-! Stalk localization of a root product chart.
-Source: Stacks Project, Tags 0EYH, 0EYI and 0EYJ.
+
+## References
+
+* Stacks Project, Tags 0EYH, 0EYI and 0EYJ
+* Stacks Project, Tag 0EYH, its etale local description
+* Tag 0EYI, the choice of a pointed etale neighbourhood
 -/
 
 @[expose] public section
@@ -34,10 +39,7 @@ private theorem maximalIdeal_stalkMap_comp {X Y Z : Scheme.{u}}
   rw [Scheme.Hom.stalkMap_comp, CommRingCat.hom_comp, Ideal.map_map]
   rfl
 
-/-- Extract a localized root factor from an affine etale product chart.
-
-Source: Stacks Project, Tag 0EYH, its etale local description; Tag 0EYI,
-the choice of a pointed etale neighbourhood. -/
+/-- Extract a localized root factor from an affine etale product chart. -/
 theorem rootProductChart_stalk_localization {L N : Scheme.{u}} (n : N ⟶ L)
     (R : CommRingCat.{u}) (φ : Spec R ⟶ L) (y : Spec R) (hφ : Etale φ)
     (x : N) (hy : φ y = n x) (f : R) (hf : f ∈ y.asIdeal)

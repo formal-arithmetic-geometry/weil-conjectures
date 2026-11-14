@@ -13,7 +13,10 @@ import WeilConjectures.AlgebraicGeometry.QuasicoherentOpenSectionIdealExtension
 
 /-! # Flasqueness of the sheaf associated to an injective module
 
-Source: Stacks Project, Tag 09T2, Lemma 36.8.1
+## References
+
+* Stacks Project, Tag 09T2, Lemma 36.8.1
+* Stacks Project, Tags 01YB and 09T2
 -/
 
 @[expose] public section
@@ -26,7 +29,6 @@ noncomputable section
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Affine module coordinates for the ideal-power section extension of Tag 01YB.
-Source: Stacks Project, Tags 01YB and 09T2.
 
 Apply `quasicoherent_open_section_ideal_extension` to the vanishing ideal of
 Spec R minus U. For the resulting power K, transport K's global ideal along
@@ -138,8 +140,7 @@ private theorem affine_section_ideal_presentation
         congrArg (fun c : Γ(X, U) ↦ c • sE) hi'
       _ = (a : R) • sE := (Modules.smul_Spec_def (M := E) (a : R) sE).symm
 
-/-- The associated sheaf of an injective module over a Noetherian ring is flasque.
-Source: Stacks Project, Tag 09T2, Lemma 36.8.1 -/
+/-- The associated sheaf of an injective module over a Noetherian ring is flasque. -/
 theorem injective_tilde_isFlasque
     (R : Type u) [CommRing R] [IsNoetherianRing R]
     (M : ModuleCat.{u} R) [Injective M] :

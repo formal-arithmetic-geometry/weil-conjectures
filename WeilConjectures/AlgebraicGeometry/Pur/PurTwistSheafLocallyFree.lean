@@ -29,6 +29,10 @@ import WeilConjectures.AlgebraicGeometry.Constructible.ConstructibleSingleSuppor
 import WeilConjectures.AlgebraicGeometry.Finite.FiniteLocallyFreeLineModels
 
 /-! # Local freeness and derived completeness of the Tate line
+
+## References
+
+* Stacks Project, Tag 03PK and Lemma 03RV
 -/
 
 @[expose] public section
@@ -56,8 +60,7 @@ private theorem rank_one_of_cover
   exact (SheafOfModules.isInvertible_iff_isFiniteLocallyFreeOfRank_one M).mp
     (SheafOfModules.isInvertible_of_forall_over_unit (M := M) U hU ht)
 
-/-- All four properties of the concrete Tate lines, including the empty-scheme case.
-Source: Stacks Project, Tag 03PK and Lemma 03RV. -/
+/-- All four properties of the concrete Tate lines, including the empty-scheme case. -/
 theorem pur_twist_sheaf_locally_free
     (S : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

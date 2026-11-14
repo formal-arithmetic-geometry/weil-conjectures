@@ -21,7 +21,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.RootNormalizationGenericResid
 
 /-! # RootNormalizationGenericStalkResidueSeparable
 
-Source: Stacks Project, Tags 09EB, 0BRM and 0EYG. -/
+## References
+
+* Stacks Project, Tags 09EB, 0BRM and 0EYG
+* Stacks Project, 0BRM (lemma-abhyankar), 0307, and 09E7
+-/
 
 @[expose] public section
 universe u
@@ -49,9 +53,7 @@ private theorem sep_of_degree_dvd {K E : Type*} [Field K] [Field E] [Algebra K E
       exact False.elim (hu.ne_zero ((CharP.cast_eq_zero_iff K q n).mpr hdiv))
 
 /-- The residue-field extension at a normalization point above the root divisor
-generic point is separable.
-
-Source: Stacks Project, 0BRM (lemma-abhyankar), 0307, and 09E7. -/
+generic point is separable. -/
 theorem root_normalization_generic_stalk_residue_separable
     {L U : Scheme.{u}} (i : U ⟶ L)
     (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)

@@ -18,7 +18,12 @@ public import WeilConjectures.AlgebraicGeometry.LocallyClosedModuleExtensionCohe
 public import WeilConjectures.AlgebraicGeometry.Locally.LocallyClosedModuleExtensionData
 import WeilConjectures.AlgebraicGeometry.LocallyClosedCoefficientImmersion.LocallyClosedModuleExtensionModel
 
-/-! Normalized locally closed module extension: assembly from the fixed model. -/
+/-! Normalized locally closed module extension: assembly from the fixed model.
+
+## References
+
+* Stacks, Tags 02V0 and 09AH
+-/
 
 @[expose] public noncomputable section
 
@@ -35,8 +40,7 @@ namespace LocallyClosedExtensionData
 
 /-- Normalized comparison laws on module sheaves. The two factorization orders follow
 by composing `gamma` with `closedComparison` and the open adjunction; normalization
-and the Hom bijection make the comparison between any two factorizations unique.
-Source: Stacks, Tags 02V0 and 09AH. -/
+and the Hom bijection make the comparison between any two factorizations unique. -/
 structure Coherent (E : LocallyClosedExtensionData.{u}) : Prop where
   full : ∀ {S X : LocallyClosedCoefficients.{u}} (a : LocallyClosedCoefficientImmersion S X),
     (E.extension a).Full

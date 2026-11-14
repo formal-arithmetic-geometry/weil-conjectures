@@ -19,7 +19,11 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjec
 /-!
 # Derived Hom on finite disjoint unions of pro-etale objects
 
-Source: Stacks Project, Tags 04TS, 015F and 0F63
+## References
+
+* Stacks Project, Tags 04TS, 015F and 0F63
+* Stacks Project, Tags 04TS (gluing sheaves), 015F (exact derived functors), and 0F63 (finite
+  disjoint union criterion)
 -/
 
 @[expose] public section
@@ -620,10 +624,7 @@ end CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- Local derived Hom carries a finite disjoint union, detected by its set sheaves,
-to a product, including the empty union.
-
-Source: Stacks Project, Tags 04TS (gluing sheaves), 015F (exact derived functors),
-and 0F63 (finite disjoint union criterion). -/
+to a product, including the empty union. -/
 theorem proEtaleDerivedHom_finiteProducts (X : Scheme.{u})
     (B : Type (u + 1)) [CommRing B]
     (I : Type (u + 1)) [Finite I] (W : I → X.ProEt) (c : Cofan W)

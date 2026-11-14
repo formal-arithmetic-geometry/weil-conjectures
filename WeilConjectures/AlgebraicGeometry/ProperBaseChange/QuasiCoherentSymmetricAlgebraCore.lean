@@ -9,7 +9,10 @@ public import WeilConjectures.AlgebraicGeometry.SymmetricAlgebraSheaf.SymmetricA
 
 /-! # Core universal property for the symmetric algebra sheaf
 
-Source: Stacks Project, Modules, Lemmas 01CG and 01CL.
+## References
+
+* Stacks Project, Modules, Lemmas 01CG and 01CL
+* Stacks Project, Modules, Section 00DM
 -/
 
 @[expose] public section
@@ -91,8 +94,7 @@ private noncomputable def liftAlgebra : algebra F ⟶ B :=
 
 end SymmetricAlgebraSheaf
 
-/-- The sheafification has the symmetric-algebra universal property for its degree-one map.
-Source: Stacks Project, Modules, Section 00DM. -/
+/-- The sheafification has the symmetric-algebra universal property for its degree-one map. -/
 theorem exists_quasiCoherentSymmetricAlgebra_core
     (X : Scheme.{u}) (F : X.Modules)
     (B : X.CommAlgebraSheaf) (f : F ⟶ B.toModule) :

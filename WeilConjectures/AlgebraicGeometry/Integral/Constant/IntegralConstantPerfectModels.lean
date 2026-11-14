@@ -12,7 +12,10 @@ import Mathlib.Algebra.Category.ModuleCat.Products
 
 /-! # Strict perfect models of completed constant realization
 
-Source: Bhatt--Scholze, Proposition 6.6.11 and the finite-projective step in Lemma 6.3.14.
+## References
+
+* Bhatt--Scholze, Proposition 6.6.11 and the finite-projective step in Lemma 6.3.14
+* Bhatt--Scholze, Proposition 6.6.11, and Lemma 6.3.14(1)
 -/
 
 @[expose] public noncomputable section
@@ -87,8 +90,7 @@ private def finiteProjectivePackage
         rfl }
 
 /-- A completed constant perfect scalar object has a bounded finite-free-retract
-complex over the completed coefficient sheaf.
-Source: Bhatt--Scholze, Proposition 6.6.11, and Lemma 6.3.14(1). -/
+complex over the completed coefficient sheaf. -/
 theorem integralConstantDerived_strictPerfectModel
     (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (P : completedConstantDerived (ModuleCat.{u + 1} A))

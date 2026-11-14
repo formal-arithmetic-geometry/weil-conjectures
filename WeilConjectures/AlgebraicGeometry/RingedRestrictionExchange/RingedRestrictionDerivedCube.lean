@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.StrictTowerRingedSquare.ProEtaleRingedS
 
 /-! # The derived exchange equation of a ringed restriction cube
 
-Source: Stacks Project, Tags 03CB, 09A5, 05S7 and 0E47.
+## References
+
+* Stacks Project, Tags 03CB, 09A5, 05S7 and 0E47
 -/
 
 @[expose] public noncomputable section
@@ -373,8 +375,7 @@ private theorem cube_data_exchange_comm (r : StrictTowerRingedSquare sq)
     (cube_data_global_mate r C) (cube_data_local_mate r C)
     (cube_data_source_mate r C) (cube_data_target_mate r C) K
 
-/-- The six-face inverse-image cube yields the equation of derived exchange mates.
-Source: Stacks Project, Tags 03CB, 09A5, 05S7 and 0E47. -/
+/-- The six-face inverse-image cube yields the equation of derived exchange mates. -/
 theorem restriction_exchange_cube (r : StrictTowerRingedSquare sq)
     (C : OpenCube r j)
     (K : DerivedCategory (proEtaleRingModules X r.RX)) :

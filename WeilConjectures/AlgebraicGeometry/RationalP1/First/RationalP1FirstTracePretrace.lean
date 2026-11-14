@@ -28,9 +28,7 @@ attribute [local irreducible] moduleObjectDerivedPullback moduleObjectDerivedPus
 attribute [local irreducible] firstProjection secondProjection square
 attribute [local irreducible] condensedAmbientPullbackComparison
 
-/-- The trace-free Kunneth comparison, with the q projection cancelled.
-
-Source: the two Kunneth factorizations stated by ringedKunnethFactorizations. -/
+/-- The trace-free Kunneth comparison, with the q projection cancelled. -/
 theorem first_trace_pretrace
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

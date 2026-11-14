@@ -17,8 +17,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Unique
 /-!
 # Unit normalization of the open etale/pro-etale comparison
 
-Source: Stacks Project, Tag 09AF, common-right-adjoint proof.
-
 ## Main definitions
 
 - `openComparisonRestrictionIso`: the canonical inverse-image comparison in restriction form.
@@ -27,6 +25,12 @@ Source: Stacks Project, Tag 09AF, common-right-adjoint proof.
 ## Main statements
 
 - `openComparison_unit_normalization`: the Hom formula and the open-unit equation.
+
+## References
+
+* Stacks Project, Tag 09AF, common-right-adjoint proof
+* Stacks Project, Tags 099R and 09AF
+* Stacks Project, Tag 09AF
 -/
 
 @[expose] public section
@@ -59,8 +63,7 @@ namespace AlgebraicGeometry.ProEtale
 /-- The canonical pullback comparison, expressed using localization restriction on both
 sites. The first factor converts etale restriction to inverse image; the middle factor
 is the recorded canonical comparison, and the last converts pro-etale inverse image to
-restriction. No independent comparison is chosen.
-Source: Stacks Project, Tags 099R and 09AF. -/
+restriction. No independent comparison is chosen. -/
 noncomputable def openComparisonRestrictionIso (A : Type (u + 1)) [CommRing A]
     [Finite A] {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     Etale.openImmersionRestriction (ModuleCat.{u + 1} A) j ⋙
@@ -76,8 +79,7 @@ noncomputable def openComparisonRestrictionIso (A : Type (u + 1)) [CommRing A]
 /-- The displayed Hom chain of Tag 09AF: the comparison adjunction, the etale open
 adjunction, postcomposition with the sectionwise identity `r R_X ≅ R_U s`, and the
 inverses of the comparison and pro-etale open adjunctions. Every factor is a natural
-bijection, so their composite is natural in the two sheaves.
-Source: Stacks Project, Tag 09AF. -/
+bijection, so their composite is natural in the two sheaves. -/
 noncomputable def openComparisonHomEquiv (A : Type (u + 1)) [CommRing A]
     [Finite A] {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A))
@@ -171,8 +173,7 @@ private lemma openComparisonRestriction_directImage_mate
   rfl
 
 /-- The natural Hom chain sends `h` to `c_F⁻¹ ≫ h`, and the specified comparison `c`
-intertwines the two open units via the canonical restriction comparison `a`.
-Source: Stacks Project, Tag 09AF, common-right-adjoint proof. -/
+intertwines the two open units via the canonical restriction comparison `a`. -/
 theorem openComparison_unit_normalization (A : Type (u + 1)) [CommRing A]
     [Finite A] {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (∀ (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A))

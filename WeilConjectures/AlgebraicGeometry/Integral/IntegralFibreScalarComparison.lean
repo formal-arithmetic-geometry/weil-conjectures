@@ -31,7 +31,9 @@ public import WeilConjectures.AlgebraicGeometry.Integral.IntegralFibrePathConstr
 
 /-! # The prescribed integral fibre scalar comparison
 
-Source: Deligne, Weil II (1.1.1) b), d), pp.146-147.
+## References
+
+* Deligne, Weil II (1.1.1) b), d), pp.146-147
 -/
 
 @[expose] public noncomputable section

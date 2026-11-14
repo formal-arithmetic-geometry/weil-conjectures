@@ -10,9 +10,13 @@ public import WeilConjectures.ConstructibleSheaf.TorsorAssociatedModule
 /-!
 # The associated module sheaf with general commutative coefficients
 
-Source: Stacks Project, Tags 0DV5 (3), 0DV6, 04TR and 04TS.
 The existing prime-coefficient construction stays unchanged. This variant uses the
 same equivariant locally constant formulas directly over the specified coefficient ring.
+
+## References
+
+* Stacks Project, Tags 0DV5 (3), 0DV6, 04TR and 04TS
+* Stacks Project, Tags 0DV5 (3), 04TR and 04TS
 -/
 
 @[expose] public section
@@ -119,8 +123,7 @@ section LargeRing
 
 variable (R : Type (u + 1)) [CommRing R]
 
-/-- The associated sheaf functor for an arbitrary commutative coefficient ring.
-Source: Stacks Project, Tags 0DV5 (3), 04TR and 04TS. -/
+/-- The associated sheaf functor for an arbitrary commutative coefficient ring. -/
 noncomputable def associatedModuleFunctorOver :
     Rep.{u + 1} R P ⥤ Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} R) :=
   c.equivariantModulePresheafFunctorOver R ⋙ presheafToSheaf V.smallEtaleTopology _

@@ -14,7 +14,9 @@ This is the finite comparison component of the finite scalar model.  It is
 split from the full construction so that the balanced finite comparison can be
 proved independently of the quotient and transition maps.
 
-Source: Stacks Project, Tags 03EK and 03EL.
+## References
+
+* Stacks Project, Tags 03EK and 03EL
 -/
 
 @[expose] public noncomputable section

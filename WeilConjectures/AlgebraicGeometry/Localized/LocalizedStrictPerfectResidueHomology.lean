@@ -20,7 +20,9 @@ import WeilConjectures.AlgebraicGeometry.ResiduePullbackGlobalSections
 
 /-! # Natural residue homology comparison for localized strictly perfect complexes
 
-Source: Stacks Project, Tags 06YJ and 0098.
+## References
+
+* Stacks Project, Tags 06YJ and 0098
 -/
 
 @[expose] public section
@@ -150,8 +152,7 @@ private theorem exists_homology_comparison_of_counit
 
 /-- Termwise residue stalk homology of strictly perfect localized complexes agrees
 naturally with localized derived residue homology. The comparisons are simultaneous
-for all strictly perfect complexes and all their chain maps.
-Source: Stacks Project, Tags 06YJ and 0098. -/
+for all strictly perfect complexes and all their chain maps. -/
 theorem exists_localizedStrictPerfectResidueHomology_iso (S : Scheme.{u}) (U : S.Opens)
     [HasDerivedCategory.{w}
       (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U))]

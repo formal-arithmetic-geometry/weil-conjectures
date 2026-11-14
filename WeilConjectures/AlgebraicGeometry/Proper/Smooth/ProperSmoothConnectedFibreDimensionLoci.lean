@@ -21,8 +21,12 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Fiber
 /-!
 # Clopen dimension loci in proper smooth connected families
 
-Source: Stacks Project, Morphisms, Tags 02G1, 02G2, 02NK, 01W1, 01W4, 01TH;
-Varieties, Tags 0387 and 06LH. Agent-formulated consequence.
+Agent-formulated consequence.
+
+## References
+
+* Stacks Project, Morphisms, Tags 02G1, 02G2, 02NK, 01W1, 01W4, 01TH
+* Varieties, Tags 0387 and 06LH
 -/
 
 @[expose] public section
@@ -104,9 +108,7 @@ private theorem smooth_connected_isPureDimension
 
 /-- The geometric fibre dimension partitions the base of a proper smooth family with
 nonempty connected geometric fibres into clopen loci. On each locus the geometric fibres
-have the indicated pure dimension, and the dimension-zero family is quasi-finite.
-Source: Stacks Project, Morphisms, Tags 02G1, 02G2, 02NK, 01W1, 01W4, 01TH;
-Varieties, Tags 0387 and 06LH. -/
+have the indicated pure dimension, and the dimension-zero family is quasi-finite. -/
 theorem proper_smooth_connected_fibre_dimension_loci
     {X S : Scheme.{u}} [IsNoetherian S] (f : X ⟶ S) [IsProper f] [Smooth f]
     (d : ℕ)

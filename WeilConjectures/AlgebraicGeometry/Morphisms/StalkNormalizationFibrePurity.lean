@@ -22,7 +22,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteNormalDepthTwoPurity
 /-!
 # Propagating etaleness across the local special fibre
 
-Source: Stacks Project, Tags 0EYE and 0EYB, as used in Tag 0EYJ.
+## References
+
+* Stacks Project, Tags 0EYE and 0EYB, as used in Tag 0EYJ
+* Stacks Project, Tag 0EYE (purity across a regular Cartier divisor), Tag 0EYB (fibrewise dense
+  etale open), and Tag 0EY6 (depth-two extension)
 -/
 
 @[expose] public section
@@ -46,10 +50,7 @@ private theorem etale_pullback_restrict {X Y T : Scheme.{u}}
   exact MorphismProperty.of_isPullback hp hf
 
 /-- A finite normalization etale on the punctured open and on an open meeting
-its missing fibre is etale everywhere on the local total space.
-
-Source: Stacks Project, Tag 0EYE (purity across a regular Cartier divisor),
-Tag 0EYB (fibrewise dense etale open), and Tag 0EY6 (depth-two extension). -/
+its missing fibre is etale everywhere on the local total space. -/
 theorem stalk_normalization_etale_of_fibre_neighbourhood {S C : Scheme.{u}}
     [IsNoetherian S] [QuasiSeparatedSpace S] [IsIntegral S]
     (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))

@@ -16,7 +16,11 @@ import Mathlib.RingTheory.Smooth.Flat
 /-!
 # Regular divisors under etale base change
 
-Source: Stacks Project, Tag 07NF and flat base change.
+## References
+
+* Stacks Project, Tag 07NF and flat base change
+* Stacks Project, Tags 07NF (regularity under smooth maps), 00TA (smooth flatness), 02GO (etale base
+  change), and 039P (etale morphisms are smooth)
 -/
 
 @[expose] public section
@@ -24,10 +28,7 @@ Source: Stacks Project, Tag 07NF and flat base change.
 universe u
 namespace AlgebraicGeometry.Scheme
 
-/-- Etale change of base preserves a regular ring and its regular divisor.
-
-Source: Stacks Project, Tags 07NF (regularity under smooth maps), 00TA (smooth flatness),
-02GO (etale base change), and 039P (etale morphisms are smooth). -/
+/-- Etale change of base preserves a regular ring and its regular divisor. -/
 theorem etale_regular_divisor_base_change
     (R S : CommRingCat.{u}) (φ : R →+* S)
     [IsRegularRing R] (g : R) (hg : IsSMulRegular R g)

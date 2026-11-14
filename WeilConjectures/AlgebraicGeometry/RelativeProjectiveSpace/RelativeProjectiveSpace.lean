@@ -20,8 +20,6 @@ import WeilConjectures.AlgebraicGeometry.ProperBaseChange.QuasiCoherentSymmetric
 
 /-! # Relative projective space with its relative-Proj charts
 
-Source: Nagata compactification, Conrad sketch.
-
 The algebra is the constructed symmetric algebra of the free module. Its grading is fixed
 by the monomial inclusions. Only uniquely specified algebra data and the universal relative
 Proj realization are selected; no chart isomorphisms are selected separately.
@@ -32,6 +30,10 @@ Proj realization are selected; no chart isomorphisms are selected separately.
 * `RelativeProjectiveSpace.construction`: its relative-Proj realization.
 * `RelativeProjectiveSpace.scheme`, `RelativeProjectiveSpace.π`: the scheme over the base.
 * `RelativeProjectiveSpace.standardOpen`: its standard homogeneous-coordinate opens.
+
+## References
+
+* Nagata compactification, Conrad sketch
 -/
 
 @[expose] public section

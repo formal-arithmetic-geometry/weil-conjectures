@@ -171,6 +171,15 @@ The underlying functor is the canonical K-flat derived extension of scalars alon
 map of constant coefficient rings.  The accompanying statements record its exactness,
 finite constructibility and Tor-amplitude preservation, Tate-line scalar extension,
 and the canonical associativity comparisons.
+
+## References
+
+* Stacks Tags 06YY and 06YS
+* Stacks 06YY
+* Stacks 06YS, 06YY
+* Stacks 094H, 06YY
+* Stacks 06YQ
+* Stacks 0G7E, 06YY
 -/
 
 @[expose] public noncomputable section
@@ -189,7 +198,6 @@ open AlgebraicGeometry.Scheme
 namespace AlgebraicGeometry.ProEtale
 
 /-- Derived extension of scalars on the ordinary constant-ring pro-etale categories.
-Source: Stacks Tags 06YY and 06YS.
 
 The functor is computed by a K-flat representative, and the target category carries
 its action through the right tensor factor.  Its construction is the published
@@ -200,15 +208,13 @@ noncomputable def scalarExtensionFunctor {A B : Type u} [CommRing A] [CommRing B
     Scheme.proEtaleDerivedCategory T A ⥤ Scheme.proEtaleDerivedCategory T B :=
   scalarExtension f T
 
-/-- The actual universal counit on a complex, rather than a chosen model comparison.
-Source: Stacks 06YY. -/
+/-- The actual universal counit on a complex, rather than a chosen model comparison. -/
 def scalarExtensionFunctorCounit
     {A B : Type u} [CommRing A] [CommRing B] (f : A →+* B) (T : Scheme.{u})
     (P : CochainComplex (proEtaleRingModules T (proEtaleConstantRing T A)) ℤ) :=
   reductionScalarComplexCounit T (proEtaleConstantRingMap (T := T) f) P
 
-/-- K-flat computation, including the functor and its target-ring tensor action.
-Source: Stacks 06YS, 06YY. -/
+/-- K-flat computation, including the functor and its target-ring tensor action. -/
 theorem scalarExtensionFunctor_kflat_representation
     {A B : Type u} [CommRing A] [CommRing B] (f : A →+* B) (T : Scheme.{u})
     (P : CochainComplex (proEtaleRingModules T (proEtaleConstantRing T A)) ℤ)
@@ -217,8 +223,7 @@ theorem scalarExtensionFunctor_kflat_representation
     IsIso (scalarExtensionFunctorCounit f T P) := by
   exact scalarCounit_isIso T (proEtaleConstantRingMap (T := T) f) P hP
 
-/-- The canonical formula S_f(Q(P)) ≅ Q(P tensor B), on every K-flat representative.
-Source: Stacks 06YY. -/
+/-- The canonical formula S_f(Q(P)) ≅ Q(P tensor B), on every K-flat representative. -/
 def scalarExtensionFunctorKFlatIso
     {A B : Type u} [CommRing A] [CommRing B] (f : A →+* B) (T : Scheme.{u})
     (P : CochainComplex (proEtaleRingModules T (proEtaleConstantRing T A)) ℤ)
@@ -574,8 +579,7 @@ end ConstructibilityProof
 attribute [local instance] scalarExtensionSmall
 
 /-- Constructibility, boundedness and the identical Tor interval survive arbitrary
-finite coefficient extension, including non-flat maps.
-Source: Stacks 094H, 06YY. -/
+finite coefficient extension, including non-flat maps. -/
 theorem scalarExtensionFunctor_preserves_constructible_tor
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (ℓ : ℕ) [Fact ℓ.Prime]
@@ -602,8 +606,7 @@ theorem scalarExtensionFunctor_preserves_constructible_tor
   exact ⟨scalarExtension_bounded_of_tor T B _ a b ht,
     scalarExtension_constructible f T K hbounded hconstructible, ht⟩
 
-/-- A line extends by ordinary tensor and remains locally free of rank one.
-Source: Stacks 06YQ. -/
+/-- A line extends by ordinary tensor and remains locally free of rank one. -/
 theorem scalarExtensionFunctor_line
     {A B : Type u} [CommRing A] [CommRing B] (f : A →+* B) (T : Scheme.{u})
     (L : proEtaleRingModules T (proEtaleConstantRing T A))
@@ -694,8 +697,7 @@ theorem scalarExtensionFunctor_ringMap_comp
   rw [← Functor.map_comp]
   rfl
 
-/-- The unique composition comparison fixed by balanced tensor on K-flat models.
-Source: Stacks 0G7E, 06YY. -/
+/-- The unique composition comparison fixed by balanced tensor on K-flat models. -/
 theorem scalarExtensionFunctor_composition_existsUnique
     {A B C : Type u} [CommRing A] [CommRing B] [CommRing C]
     (f : A →+* B) (g : B →+* C) (T : Scheme.{u}) :

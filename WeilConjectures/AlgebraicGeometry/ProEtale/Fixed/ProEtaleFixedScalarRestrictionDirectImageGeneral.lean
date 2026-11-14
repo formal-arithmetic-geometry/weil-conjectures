@@ -13,8 +13,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantExact
 /-!
 # Direct image and restriction of scalars for arbitrary coefficient rings
 
-Source: Stacks, Tags 0D6E and 07A6.
-
 The derived direct image commutes with restriction of scalars along an arbitrary morphism of
 commutative rings `φ: A →+* B`: the canonical comparison
 `AlgebraicGeometry.ProEtale.fixedScalarRestrictionDirectImageMap` is invertible without any
@@ -23,6 +21,12 @@ finiteness assumption on `A` and `B`
 the finite-coefficient proof using finiteness is the identification of the inverse image of a
 constant ring sheaf with the constant ring sheaf, which holds for every ring
 (`AlgebraicGeometry.ProEtale.isIso_proEtaleConstantInverseImageMap_commRing`).
+
+## References
+
+* Stacks, Tags 0D6E and 07A6
+* Stacks Tags 0H7J and 09A5
+* Stacks Tag 03D2
 -/
 
 @[expose] public section
@@ -38,8 +42,7 @@ namespace AlgebraicGeometry.ProEtale
 
 attribute [local irreducible] upperStar
 
-/-- The direct-image comparison is the mate of the canonical inverse-image comparison.
-Source: Stacks Tags 0D6E and 07A6. -/
+/-- The direct-image comparison is the mate of the canonical inverse-image comparison. -/
 theorem fixedScalarRestrictionDirectImageMap_eq
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -51,8 +54,7 @@ theorem fixedScalarRestrictionDirectImageMap_eq
 
 /-- The inverse image of a constant sheaf of commutative rings is the constant sheaf, for an
 arbitrary ring: both are left adjoint to the global sections, as the base change of the
-terminal object is terminal.
-Source: Stacks Tags 0H7J and 09A5. -/
+terminal object is terminal. -/
 theorem isIso_proEtaleConstantInverseImageMap_commRing {U V : Scheme.{u}} (f : U ⟶ V)
     (Λ : Type (u + 1)) [CommRing Λ] :
     IsIso (Scheme.proEtaleConstantInverseImageMap f CommRingCat.{u + 1}
@@ -93,8 +95,7 @@ section ScalarModels
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- The inverse image of the constant ring sheaf is the constant ring sheaf.
-Source: Stacks Tag 03D2. -/
+/-- The inverse image of the constant ring sheaf is the constant ring sheaf. -/
 private noncomputable def scalarPullbackIso' {X Y : Scheme.{u}} (f : X ⟶ Y)
     (A : Type (u + 1)) [CommRing A] :
     (Scheme.proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj
@@ -190,8 +191,7 @@ end ScalarModels
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Restriction of scalars along an arbitrary morphism of commutative rings commutes with the
-unbounded derived direct image: the canonical mate comparison is invertible.
-Source: Stacks Tags 0D6E and 07A6. -/
+unbounded derived direct image: the canonical mate comparison is invertible. -/
 theorem isIso_fixedScalarRestrictionDirectImageMap
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y) :

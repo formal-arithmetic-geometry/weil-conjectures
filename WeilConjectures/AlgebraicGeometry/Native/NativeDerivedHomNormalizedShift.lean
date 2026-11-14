@@ -12,7 +12,12 @@ public import WeilConjectures.CategoryTheory.SixFunctors.HomShiftEvaluationNorma
 import WeilConjectures.AlgebraicGeometry.Native.NativeDerivedHomSignedExact
 import WeilConjectures.AlgebraicGeometry.Etale.Hom.EtaleHomMateEvaluation
 
-/-! # Evaluation-normalized native derived internal Hom -/
+/-! # Evaluation-normalized native derived internal Hom
+
+## References
+
+* Stacks Project, Tags 08JC and 08J9
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -22,8 +27,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated Monoida
 open CategoryTheory.Pretriangulated.Opposite Opposite
 namespace AlgebraicGeometry.Etale
 
-/-- The native signed exact shift also satisfies the tensor-Hom evaluation identity.
-Source: Stacks Project, Tags 08JC and 08J9. -/
+/-- The native signed exact shift also satisfies the tensor-Hom evaluation identity. -/
 theorem derivedHom_normalizedShift_exists
     {C : Type d} [Category.{u + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C] [MonoidalPreadditive C]

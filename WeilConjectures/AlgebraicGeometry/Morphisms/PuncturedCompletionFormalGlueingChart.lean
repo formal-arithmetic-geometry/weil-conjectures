@@ -13,8 +13,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionChartRestr
 
 /-! # Geometric realization of a formal glueing chart
 
-Source: Stacks Project, Tag 0BLH, first two proof paragraphs; Tag 05EL,
-the definition of compatible sections.
+## References
+
+* Stacks Project, Tag 0BLH, first two proof paragraphs
+* Tag 05EL, the definition of compatible sections
+* Stacks Project, Tag 0BLH, first two proof paragraphs, and Tag 05EL, the displayed definition of H0
 -/
 
 @[expose] public section
@@ -26,10 +29,7 @@ namespace AlgebraicGeometry.Scheme.CompletionGluingData
 set_option maxHeartbeats 800000 in
 -- The dependent section modules and two pullback presentations require extra elaboration steps.
 /-- The sheaf equalizer identifies matching sections with compatible tuples,
-with the selected coordinate equal to restriction to the corresponding chart.
-
-Source: Stacks Project, Tag 0BLH, first two proof paragraphs, and Tag 05EL,
-the displayed definition of H0. -/
+with the selected coordinate equal to restriction to the corresponding chart. -/
 theorem exists_formalGlueingData_matching_chart
     {A : Type u} [CommRing A] [IsLocalRing A]
     {U : (Spec (.of A)).Opens}

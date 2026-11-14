@@ -13,7 +13,11 @@ import WeilConjectures.AlgebraicGeometry.Modules.ExtendLocalFreeMap
 
 /-! # Extending a local basis on a quasi-affine open
 
-Source: Stacks Project, Tag 0EKP, proof of (2) to (3), via denominator clearing.
+## References
+
+* Stacks Project, Tag 0EKP, proof of (2) to (3), via denominator clearing
+* Stacks Project, Tag 0EKP, proof of (2) to (3), and the section-clearing theorem
+  `exists_tensorPowSection_eq_restrict`
 -/
 
 @[expose] public section
@@ -23,10 +27,7 @@ set_option autoImplicit false
 open CategoryTheory Limits SheafOfModules
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- Around any one point, a local basis extends to a global map from a finite free module.
-
-Source: Stacks Project, Tag 0EKP, proof of (2) to (3), and the section-clearing theorem
-`exists_tensorPowSection_eq_restrict`. -/
+/-- Around any one point, a local basis extends to a global map from a finite free module. -/
 theorem exists_free_map_isIso_near_of_isFiniteLocallyFree
     {R : Type u} [CommRing R] [IsNoetherianRing R]
     (V : (Spec (.of R)).Opens) (N : V.toScheme.Modules) [N.IsFiniteLocallyFree]

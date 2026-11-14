@@ -16,7 +16,11 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # The module germ map on an affine open is a localization
 
-Source: Stacks Project, Tags 01IB and 01HV.
+## References
+
+* Stacks Project, Tags 01IB and 01HV
+* Stacks Project, Tag 01IB (quasi-coherent modules on an affine scheme) and Tag 01HV (stalk of the
+  associated sheaf)
 -/
 
 @[expose] public section
@@ -29,10 +33,7 @@ namespace AlgebraicGeometry.Scheme
 open Modules
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The affine section-to-stalk map of a quasi-coherent module is a localization.
-
-Source: Stacks Project, Tag 01IB (quasi-coherent modules on an affine scheme) and
-Tag 01HV (stalk of the associated sheaf). -/
+/-- The affine section-to-stalk map of a quasi-coherent module is a localization. -/
 theorem isLocalizedModule_affine_germ
     {L : Scheme.{u}} (N : L.Modules) (hqc : N.IsQuasicoherent)
     (V : L.Opens) (hV : IsAffineOpen V) (y : V) :

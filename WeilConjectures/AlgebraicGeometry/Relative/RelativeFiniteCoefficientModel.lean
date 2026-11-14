@@ -286,7 +286,13 @@ import WeilConjectures.AlgebraicGeometry.Relative.RelativeFiniteConstantSliceCom
 import WeilConjectures.AlgebraicGeometry.Relative.RelativeFiniteScalarTransport
 import Mathlib.RingTheory.Finiteness.Cardinality
 
-/-! # Relative finite coefficients on the equivalent small site -/
+/-! # Relative finite coefficients on the equivalent small site
+
+## References
+
+* Stacks Project, Modules on Sites, Tags 03CY and 03A0
+* Cohomology on Sites, Tags 06YY and 094I
+-/
 
 @[expose] public noncomputable section
 
@@ -362,10 +368,7 @@ private theorem relativeFiniteLisse_iff {X Y : Scheme.{u}} (g : Y ⟶ X)
 attribute [-instance] WeilConjectures.integralCoefficientAbSheafify
   WeilConjectures.integralCoefficientAbLocallyBijective
   WeilConjectures.integralCoefficientRingSheafify in
-/-- Exact small-site models preserve relative finite lissity and coefficient extension.
-
-Source: Stacks Project, Modules on Sites, Tags 03CY and 03A0; Cohomology on Sites,
-Tags 06YY and 094I. -/
+/-- Exact small-site models preserve relative finite lissity and coefficient extension. -/
 theorem exists_relative_finite_coefficient_model {X Y : Scheme.{u}} (g : Y ⟶ X)
     {B R : Type (u + 1)} [CommRing B] [CommRing R] [Finite B] [Finite R]
     (f : B →+* R)

@@ -17,7 +17,10 @@ import WeilConjectures.AlgebraicGeometry.Sites.FiniteGaloisInvariantGermDescent
 /-!
 # A section representing an invariant geometric germ
 
-Source: Stacks Project, Tag 04JM, direct proof, applied over a finite separable field.
+## References
+
+* Stacks Project, Tag 04JM, direct proof, applied over a finite separable field
+* Stacks Project, the direct proof of Lemma 59.56.5, applied after restricting the sheaf to `Spec L`
 -/
 
 @[expose] public section
@@ -30,8 +33,7 @@ namespace AlgebraicGeometry.Scheme
 
 attribute [local instance] Algebra.Etale.of_finite_of_isSeparable
 
-/-- Source: Stacks Project, the direct proof of Lemma 59.56.5, applied after restricting the sheaf
-to `Spec L`.
+/--
 
 An invariant germ has a section representative at the specified finite separable field.
 The action is supplied as an argument and characterized on germs; this theorem neither

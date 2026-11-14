@@ -9,7 +9,11 @@ public import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearDerivedCalc
 
 /-! # Evaluation of restriction to an open slice
 
-Source: Stacks Project, Tags 03DI and 03DJ. -/
+## References
+
+* Stacks Project, Tags 03DI and 03DJ
+* Stacks 03DJ
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -59,8 +63,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   (τ : ∀ n : ℕ, B (n + 1) ⟶ B n)
 attribute [local irreducible] systemRing ringPresheaf rings
 
-/-- Evaluation commutes with open restriction by the identity on sections.
-Source: Stacks 03DJ. -/
+/-- Evaluation commutes with open restriction by the identity on sections. -/
 theorem openRestrictionEvaluationSections (U : C) (n : ℕ) :
     ∃ δ : openRestriction.{c, v, r} J B τ U ⋙
       evaluation.{max c v, v, max c v r} (J.over U)

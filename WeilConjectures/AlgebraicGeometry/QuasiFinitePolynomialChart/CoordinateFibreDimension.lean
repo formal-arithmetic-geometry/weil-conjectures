@@ -13,7 +13,10 @@ public import WeilConjectures.Mathlib.Topology.KrullDimension
 /-!
 # Comparing affine fibre dimensions
 
-Source: Stacks Project, Tag 01I4 and Remark 00E6
+## References
+
+* Stacks Project, Tag 01I4 and Remark 00E6
+* Stacks Project, Tag 01I4 (affine fibre products), Remark 00E6 (topology of the ring fibre)
 -/
 
 @[expose] public section
@@ -37,10 +40,7 @@ private theorem dimensionAt_homeomorph {A B : Type*}
   apply le_antisymm (dimensionAt_inducing_le e.isEmbedding.toIsInducing a)
   simpa using dimensionAt_inducing_le e.symm.isEmbedding.toIsInducing (e a)
 
-/-- The local dimension of an affine scheme fibre equals that of the coordinate-ring fibre.
-
-Source: Stacks Project, Tag 01I4 (affine fibre products), Remark 00E6 (topology of the ring fibre).
--/
+/-- The local dimension of an affine scheme fibre equals that of the coordinate-ring fibre. -/
 theorem affine_coordinate_fibre_dimension_eq
     {X T : Scheme.{u}} [IsAffine X] [IsAffine T] (f : X ⟶ T) (y : X) :
     let : Algebra Γ(T, ⊤) Γ(X, ⊤) := f.appTop.hom.toAlgebra

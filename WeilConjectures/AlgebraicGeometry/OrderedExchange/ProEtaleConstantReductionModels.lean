@@ -142,10 +142,21 @@ import WeilConjectures.Algebra.Homology.BoundedFlatIndependentCoefficients
 import Mathlib.CategoryTheory.Monoidal.Preadditive
 /-! # Models for constant-coefficient strict reduction on the original pro-etale site
 
-Source: Stacks Tags 099M, 099N and 0E48.
-
 This is the original-site specialization of the existing strict quotient-tower construction.
 The site retains object universe t+1 and morphism universe t.
+
+## References
+
+* Stacks Tags 099M, 099N and 0E48
+* Stacks 099M
+* Stacks 0941
+* Stacks 099M, 06YY
+* Stacks 06YY
+* Stacks Tag 06YY
+* Stacks 099N
+* Stacks 06YY and 0D6D
+* Stacks 03EL and 06YY
+* Stacks 0B56, 099M
 -/
 
 @[expose] public noncomputable section
@@ -159,8 +170,7 @@ attribute [local irreducible] completedAdicChangeData
 
 variable {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 
-/-- The quotient maps commute with canonical inverse image of the coefficients.
-Source: Stacks 099M. -/
+/-- The quotient maps commute with canonical inverse image of the coefficients. -/
 theorem quotient_comm {U V : Scheme.{t}} (f : U ⟶ V) (n : ℕ) :
     (exchangeConstantIso.{t} f A).hom ≫
         (exchangeScalar.{t} d U ≫ AdicCoefficientDatum.projection.{t} d U n) =
@@ -170,21 +180,17 @@ theorem quotient_comm {U V : Scheme.{t}} (f : U ⟶ V) (n : ℕ) :
   rw [← Category.assoc, exchangeScalar_comm, Category.assoc, d.projection_comm]
   rw [← Category.assoc, ← Functor.map_comp]
 
-/-- The existing ambient constant-coefficient derived category.
-Source: Stacks 099M. -/
+/-- The existing ambient constant-coefficient derived category. -/
 abbrev D (T : Scheme.{t}) := reductionDerivedCategory T (exchangeConstantRing T A)
 
-/-- The existing derived category of strict constant-coefficient towers.
-Source: Stacks 0941. -/
+/-- The existing derived category of strict constant-coefficient towers. -/
 abbrev TD (T : Scheme.{t}) := DerivedCategory (exchangeTowers T (exchangeConstantRing T A))
 
-/-- The quotient map from constant coefficients to the given finite coefficient sheaf.
-Source: Stacks 099M. -/
+/-- The quotient map from constant coefficients to the given finite coefficient sheaf. -/
 def quotient (T : Scheme.{t}) (n : ℕ) :
     exchangeConstantRing T A ⟶ d.finiteRing T n := exchangeScalar d T ≫ d.projection T n
 
-/-- Ordinary tensor with the quotient, retaining the original constant scalar action.
-Source: Stacks 099M. -/
+/-- Ordinary tensor with the quotient, retaining the original constant scalar action. -/
 def level (T : Scheme.{t}) (n : ℕ) :
     reductionModules T (exchangeConstantRing T A) ⥤
       reductionModules T (exchangeConstantRing T A) :=
@@ -239,8 +245,7 @@ private theorem quotientStep_comp (T : Scheme.{t}) (n : ℕ) :
   rw [Category.assoc, completedReductionProjection_comp]
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The strict quotient transition is determined on sheafified pure tensors.
-Source: Stacks 099M, 06YY. -/
+/-- The strict quotient transition is determined on sheafified pure tensors. -/
 theorem step_existsUnique (T : Scheme.{t}) (n : ℕ) :
     ∃! τ : level d T (n + 1) ⟶ level d T n,
       ∀ (M : reductionModules T (exchangeConstantRing T A)) (U : T.ProEtᵒᵖ)
@@ -279,19 +284,16 @@ theorem step_existsUnique (T : Scheme.{t}) (n : ℕ) :
     intro U s x
     exact (hτ' M U s x).trans (hb M U s x).symm
 
-/-- The actual quotient transition, with its tensor formula retained.
-Source: Stacks 099M. -/
+/-- The actual quotient transition, with its tensor formula retained. -/
 def step (T : Scheme.{t}) (n : ℕ) : level d T (n + 1) ⟶ level d T n :=
   (step_existsUnique d T n).exists.choose
 
-/-- The single strict quotient diagram, functorial on ordinary modules.
-Source: Stacks 099M. -/
+/-- The single strict quotient diagram, functorial on ordinary modules. -/
 def reductionModule (T : Scheme.{t}) :
     reductionModules T (exchangeConstantRing T A) ⥤
       exchangeTowers T (exchangeConstantRing T A) := (Functor.ofOpSequence (step d T)).flip
 
-/-- Tensor and restriction are additive at every level of this strict diagram.
-Source: Stacks 06YY. -/
+/-- Tensor and restriction are additive at every level of this strict diagram. -/
 @[instance]
 theorem reductionModule_additive (T : Scheme.{t}) : (reductionModule d T).Additive := by
   constructor
@@ -303,8 +305,7 @@ theorem reductionModule_additive (T : Scheme.{t}) : (reductionModule d T).Additi
     infer_instance
   exact (level d T n.unop).map_add
 
-/-- The homotopy functor of the actual strict quotient construction.
-Source: Stacks 06YY. -/
+/-- The homotopy functor of the actual strict quotient construction. -/
 def reductionHomotopy (T : Scheme.{t}) :=
   (reductionModule d T).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh
 
@@ -364,8 +365,7 @@ private theorem leftDerivedModels
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- The reduction functor is specified by its universal derived counit and K-flat models.
-Source: Stacks 099M, 06YY. -/
+/-- The reduction functor is specified by its universal derived counit and K-flat models. -/
 theorem reductionData_exists (T : Scheme.{t}) :
     Nonempty (DerivedReductionModelData (reductionModule d T)
       (CochainComplex.IsKFlatIndependentCoefficients
@@ -385,16 +385,14 @@ theorem reductionData_exists (T : Scheme.{t}) :
       (((reductionChange T φ).mapHomologicalComplex (.up ℤ)).map s))
     infer_instance
 
-/-- The chosen universal reduction pair and its computation law.
-Source: Stacks 06YY. -/
+/-- The chosen universal reduction pair and its computation law. -/
 def reductionData (T : Scheme.{t}) :
     DerivedReductionModelData (reductionModule d T)
       (CochainComplex.IsKFlatIndependentCoefficients
         (R := exchangeConstantRing T A)) :=
   Classical.choice (reductionData_exists d T)
 
-/-- The original existential interface, recovered from the universal model data.
-Source: Stacks 06YY. -/
+/-- The original existential interface, recovered from the universal model data. -/
 theorem reduction_exists (T : Scheme.{t}) :
     ∃ (R : D (A := A) T ⥤ TD (A := A) T)
       (ε : DerivedCategory.Qh ⋙ R ⟶ reductionHomotopy d T),
@@ -410,48 +408,40 @@ theorem reduction_exists (T : Scheme.{t}) :
 
 end CompactReduction
 
-/-- The canonical total left derived strict reduction, chosen with its universal counit.
-Source: Stacks 099M. -/
+/-- The canonical total left derived strict reduction, chosen with its universal counit. -/
 def reduction (T : Scheme.{t}) : D (A := A) T ⥤ TD (A := A) T :=
   (reductionData d T).reduction
 
-/-- The universal counit retained in the construction of reduction.
-Source: Stacks 06YY. -/
+/-- The universal counit retained in the construction of reduction. -/
 def reductionCounit (T : Scheme.{t}) :
     DerivedCategory.Qh ⋙ reduction d T ⟶ reductionHomotopy d T :=
   (reductionData d T).counit
 
-/-- The reduction counit at an actual cochain complex.
-Source: Stacks 06YY. -/
+/-- The reduction counit at an actual cochain complex. -/
 def reductionComplexCounit (T : Scheme.{t})
     (P : CochainComplex (reductionModules T (exchangeConstantRing T A)) ℤ) :
     (reduction d T).obj (DerivedCategory.Q.obj P) ⟶
       DerivedCategory.Q.obj (((reductionModule d T).mapHomologicalComplex (.up ℤ)).obj P) :=
   (reductionData d T).complexCounit P
 
-/-- The existing total right derived inverse limit on strict constant towers.
-Source: Stacks 0941. -/
+/-- The existing total right derived inverse limit on strict constant towers. -/
 abbrev rlim (T : Scheme.{t}) := completedRlim T (exchangeConstantRing T A)
 
-/-- Constant-coefficient quotient-tower completion.
-Source: Stacks 099M. -/
+/-- Constant-coefficient quotient-tower completion. -/
 def completion (T : Scheme.{t}) : D (A := A) T ⥤ D (A := A) T := reduction d T ⋙ rlim (A := A) T
 
-/-- The exact constant-diagram functor on the ambient derived category.
-Source: Stacks 0941. -/
+/-- The exact constant-diagram functor on the ambient derived category. -/
 abbrev diagonal (T : Scheme.{t}) :=
   (Functor.const ℕᵒᵖ : reductionModules T (exchangeConstantRing T A) ⥤
     exchangeTowers T (exchangeConstantRing T A)).mapDerivedCategory
 
-/-- The constant diagram/derived limit adjunction, with its ordinary unit.
-Source: Stacks 0941. -/
+/-- The constant diagram/derived limit adjunction, with its ordinary unit. -/
 def diagonalAdjunction (T : Scheme.{t}) : diagonal (A := A) T ⊣ rlim (A := A) T :=
   (constLimAdj : (Functor.const ℕᵒᵖ) ⊣
     completedTowerLimit T (exchangeConstantRing T A)).mapDerivedCategoryRightDerivedAdjunction
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The ordinary quotient augmentation is fixed on every section by x maps to 1 tensor x.
-Source: Stacks 099M. -/
+/-- The ordinary quotient augmentation is fixed on every section by x maps to 1 tensor x. -/
 theorem ordinaryAugmentation_existsUnique (T : Scheme.{t}) :
     ∃! η : (Functor.const ℕᵒᵖ : reductionModules T (exchangeConstantRing T A) ⥤
         exchangeTowers T (exchangeConstantRing T A)) ⟶ reductionModule d T,
@@ -494,8 +484,7 @@ theorem ordinaryAugmentation_existsUnique (T : Scheme.{t}) :
     ext U x
     exact (hη' M n.unop U x).trans (levelUnitMap_apply d T n.unop M U x).symm
 
-/-- The ordinary augmentation with its sectionwise normalization.
-Source: Stacks 099M. -/
+/-- The ordinary augmentation with its sectionwise normalization. -/
 def ordinaryAugmentation (T : Scheme.{t}) :
     (Functor.const ℕᵒᵖ : reductionModules T (exchangeConstantRing T A) ⥤
       exchangeTowers T (exchangeConstantRing T A)) ⟶ reductionModule d T :=
@@ -537,8 +526,7 @@ private theorem lift_complex_fac
   erw [Category.id_comp, Category.id_comp, Category.id_comp,
     Category.comp_id, Category.comp_id, Category.id_comp]
 
-/-- The universal derived lift of a transformation from an exact functor.
-Source: Stacks Tag 06YY. -/
+/-- The universal derived lift of a transformation from an exact functor. -/
 def canonicalModelAugmentation
     {B : Type*} [Category B] [Abelian B] [HasDerivedCategory B]
     {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
@@ -591,8 +579,7 @@ private theorem modelAugmentation_existsUnique
   erw [η'.naturality, η.naturality, heq]
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The derived quotient augmentation is uniquely fixed by the ordinary quotient unit.
-Source: Stacks 099M. -/
+/-- The derived quotient augmentation is uniquely fixed by the ordinary quotient unit. -/
 theorem augmentation_existsUnique (T : Scheme.{t}) :
     ∃! η : diagonal (A := A) T ⟶ reduction d T,
       ∀ P : CochainComplex (reductionModules T (exchangeConstantRing T A)) ℤ,
@@ -617,48 +604,40 @@ theorem augmentation_existsUnique (T : Scheme.{t}) :
   exact modelAugmentation_existsUnique E (reductionModule d T) (reductionData d T)
     (ordinaryAugmentation d T) hrep
 
-/-- The specified derived quotient augmentation.
-Source: Stacks 099M. -/
+/-- The specified derived quotient augmentation. -/
 def augmentation (T : Scheme.{t}) : diagonal (A := A) T ⟶ reduction d T :=
   canonicalModelAugmentation (Functor.const ℕᵒᵖ) (reductionModule d T)
     (reductionData d T) (ordinaryAugmentation d T)
 
-/-- The canonical quotient completion unit, from the diagonal/limit adjunction.
-Source: Stacks 099M. -/
+/-- The canonical quotient completion unit, from the diagonal/limit adjunction. -/
 def unit (T : Scheme.{t}) : 𝟭 (D (A := A) T) ⟶ completion d T :=
   (diagonalAdjunction (A := A) T).unit ≫
     Functor.whiskerRight (augmentation d T) (rlim (A := A) T)
 
-/-- Completeness means invertibility of this specific quotient completion unit.
-Source: Stacks 099M. -/
+/-- Completeness means invertibility of this specific quotient completion unit. -/
 def IsComplete (T : Scheme.{t}) (K : D (A := A) T) : Prop := IsIso ((unit d T).app K)
 
-/-- The full derived-complete category, with all ambient morphisms.
-Source: Stacks 099M. -/
+/-- The full derived-complete category, with all ambient morphisms. -/
 abbrev Complete (T : Scheme.{t}) := ObjectProperty.FullSubcategory (IsComplete d T)
 
-/-- Ordinary constant-coefficient derived pullback, in the recorded ringed presentation.
-Source: Stacks 099N. -/
+/-- Ordinary constant-coefficient derived pullback, in the recorded ringed presentation. -/
 abbrev pull {U V : Scheme.{t}} (f : U ⟶ V) :=
   proEtaleRingDerivedPullback f (exchangeConstantRing V A) (exchangeConstantRing U A)
     (exchangeConstantIso f A)
 
-/-- Ordinary constant-coefficient derived direct image, with its canonical derived unit.
-Source: Stacks 099N. -/
+/-- Ordinary constant-coefficient derived direct image, with its canonical derived unit. -/
 abbrev push {U V : Scheme.{t}} (f : U ⟶ V) :=
   proEtaleRingDerivedDirectImage f (exchangeConstantRing V A) (exchangeConstantRing U A)
     (exchangeConstantIso f A)
 
-/-- Completed pullback on ambient objects is ordinary pullback followed by completion.
-Source: Stacks 099N. -/
+/-- Completed pullback on ambient objects is ordinary pullback followed by completion. -/
 def completePull {U V : Scheme.{t}} (f : U ⟶ V) := pull (A := A) f ⋙ completion d U
 
 end CompactQuotient
 
 variable {U V : Scheme.{t}} (f : U ⟶ V)
 
-/-- The ordinary scalar/pullback mate, in the inverse direction of chi.
-Source: Stacks 06YY and 0D6D. -/
+/-- The ordinary scalar/pullback mate, in the inverse direction of chi. -/
 def ordinaryReductionPullInv (n : ℕ) :
     proEtaleRingModulePullback f (exchangeConstantRing V A) (exchangeConstantRing U A)
         (exchangeConstantIso f A) ⋙ proEtaleRingExtension (quotient d U n) ⟶
@@ -716,8 +695,7 @@ private theorem scalarPull_isIso {X Y : Scheme.{t}} (f : X ⟶ Y)
       (proEtaleRingExtensionAdjunction aU)) δ.hom
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The normalized ordinary mate is the invertible tensor balancing map.
-Source: Stacks 03EL and 06YY. -/
+/-- The normalized ordinary mate is the invertible tensor balancing map. -/
 theorem ordinaryReductionPullInv_isIso (n : ℕ) :
     IsIso (ordinaryReductionPullInv d f n) := by
   exact scalarPull_isIso f _ _ _ _ (quotient d V n) (quotient d U n)
@@ -1094,8 +1072,7 @@ variable {B C T U : Type*} [Category B] [Abelian B] [Category C] [Abelian C]
   (e : F ⋙ H ≅ P ⋙ G)
 
 set_option linter.defProp false in
-/-- Counit normalization for an exact square of derived models.
-Source: Stacks Tag 06YY. -/
+/-- Counit normalization for an exact square of derived models. -/
 def ModelPullNormalized
     (η : DF.reduction ⋙ H.mapDerivedCategory ≅ P.mapDerivedCategory ⋙ DG.reduction) : Prop :=
       ∀ K : CochainComplex B ℤ, M K →
@@ -1109,8 +1086,7 @@ def ModelPullNormalized
 end ModelPullNormalization
 
 set_option linter.defProp false in
-/-- The strict ordinary comparison and universal counits fix the derived comparison.
-Source: Stacks 06YY and 0D6D. -/
+/-- The strict ordinary comparison and universal counits fix the derived comparison. -/
 def ReductionPullNormalized
     (τ : reduction d V ⋙ exchangeConstantPull (A := A) f ≅
         pull (A := A) f ⋙ reduction d U) : Prop :=
@@ -1474,8 +1450,7 @@ private theorem pullback_kFlat {U V : Scheme.{t}} (f : U ⟶ V)
     (fun a ↦ hmap' _ hI a) P hP hflat).1
 
 /-- The canonical derived comparison is uniquely fixed on K-flat representatives by the
-strict ordinary comparison and the two universal derived counits.
-Source: Stacks 06YY and 0D6D. -/
+strict ordinary comparison and the two universal derived counits. -/
 theorem reductionPullIso_existsUnique :
     ∃! τ : reduction d V ⋙ exchangeConstantPull (A := A) f ≅
         pull (A := A) f ⋙ reduction d U,
@@ -1506,8 +1481,7 @@ def reductionPullIso :
       pull (A := A) f ⋙ reduction d U :=
   (reductionPullIso_existsUnique d f).choose
 
-/-- The strict projection is the adjunct of reduction of the ambient counit.
-Source: Stacks 0B56, 099M. -/
+/-- The strict projection is the adjunct of reduction of the ambient counit. -/
 def projection (K : D (A := A) U) :
     (reduction d V).obj ((push (A := A) f).obj K) ⟶
       (exchangeConstantPush (A := A) f).obj ((reduction d U).obj K) :=

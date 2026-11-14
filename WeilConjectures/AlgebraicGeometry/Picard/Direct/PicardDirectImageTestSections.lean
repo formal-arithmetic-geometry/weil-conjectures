@@ -19,7 +19,12 @@ import WeilConjectures.AlgebraicGeometry.Picard.Direct.PicardDirectImageSectionN
 
 /-! # Derived test sections of a base-changed direct image
 
-Source: Stacks Project, Tags 0B91 and 08HY.
+## References
+
+* Stacks Project, Tags 0B91 and 08HY
+* Stacks Project, Tag 0B91, arbitrary base change
+* Tag 08HY, canonical mate
+* Tag 01IQ, residue fibre image
 -/
 
 @[expose] public section
@@ -30,9 +35,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Arbitrary base change identifies derived test sections of the direct image with
 sections upstairs, and the identification respects the canonical fibre restriction.
-This assertion has no perfect model, scalar basis, differential, or cycle hypothesis.
-Source: Stacks Project, Tag 0B91, arbitrary base change; Tag 08HY, canonical mate;
-Tag 01IQ, residue fibre image. -/
+This assertion has no perfect model, scalar basis, differential, or cycle hypothesis. -/
 theorem picard_direct_image_test_sections
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

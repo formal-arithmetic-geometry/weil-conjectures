@@ -12,7 +12,11 @@ import WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicDirectCompositorCoor
 
 /-! # Coefficient realization of an ordinary direct-image compositor
 
-Source: Stacks 00YV, 03D3, 07A5 and 07A6.
+## References
+
+* Stacks 00YV, 03D3, 07A5 and 07A6
+* Stacks 00YV and 03D3 (transport of the module adjunction), 07A5 and 07A6 (K-injective direct image
+  and its adjunction)
 -/
 
 @[expose] public noncomputable section
@@ -28,9 +32,6 @@ attribute [local irreducible] HasDerivedCategory.standard Functor.mapDerivedCate
 /-- The section-normalized coefficient realization preserves the ordinary direct-image
 compositor. This is solely a comparison between the two presentations of one finite
 coefficient category: it involves no coefficient sequence, evaluation, or system operation.
-
-Source: Stacks 00YV and 03D3 (transport of the module adjunction), 07A5 and 07A6 (K-injective direct
-image and its adjunction).
 -/
 theorem sfIntrinsicDirectCompositorCoordinates_kInjective
     (A : Type u) [CommRing A] [Finite A]

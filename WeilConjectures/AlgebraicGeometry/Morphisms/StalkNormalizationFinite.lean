@@ -20,7 +20,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteEtaleOpenIntegralClosur
 /-!
 # Finiteness of the normalization over a stalk
 
-Source: Stacks Project, Tag 0EYJ, proof of the local claim.
+## References
+
+* Stacks Project, Tag 0EYJ, proof of the local claim
+* Stacks Project, local claim
+* Tags 0EYG, 0EYH (tame normalization) and 0EY6 (depth-two extension)
 -/
 
 @[expose] public section
@@ -32,10 +36,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Finiteness of the concrete normalization at a generic boundary point.
-
-Source: Stacks Project, local claim; Tags 0EYG, 0EYH (tame normalization) and 0EY6 (depth-two
-extension). -/
+/-- Finiteness of the concrete normalization at a generic boundary point. -/
 theorem stalk_normalization_finite {S C : Scheme.{u}} [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]
     (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))

@@ -14,9 +14,12 @@ public import WeilConjectures.AlgebraicGeometry.Derived.DerivedFiberCohomologyFu
 
 /-! # Choice of an affine residue representative
 
-Source: Stacks Project, Tags 08CR and 01IB.
+This is the per-index choice step in the geometric residue comparison.
 
-This is the per-index choice step in the geometric residue comparison. -/
+## References
+
+* Stacks Project, Tags 08CR and 01IB
+-/
 
 @[expose] public section
 set_option autoImplicit false

@@ -8,7 +8,13 @@ module
 public import WeilConjectures.AlgebraicGeometry.Relative.RelativeFiniteCoefficientTransport
 import WeilConjectures.AlgebraicGeometry.WeilSheaf.ProfiniteCoefficientInverseImageSupplement
 
-/-! # Ordinary scalar restriction and the constructed coefficient transport -/
+/-! # Ordinary scalar restriction and the constructed coefficient transport
+
+## References
+
+* Stacks Project, Modules on Sites, Tags 03CY and 03D8
+* Sites, Tag 03A0
+-/
 
 @[expose] public noncomputable section
 
@@ -51,9 +57,7 @@ private theorem coefficientNaturality {X Y : Scheme.{u}} (g : Y ⟶ X)
     Functor.comp_map, e, proEtaleConstantComparison] using β.hom.naturality (CommRingCat.ofHom f)
 
 /-- Ordinary restriction of scalars commutes with the constructed small-site
-transport. This comparison involves no derived functor or local model predicate.
-
-Source: Stacks Project, Modules on Sites, Tags 03CY and 03D8; Sites, Tag 03A0 -/
+transport. This comparison involves no derived functor or local model predicate. -/
 theorem relativeFiniteScalarRestriction {X Y : Scheme.{u}} (g : Y ⟶ X)
     {B R : Type (u + 1)} [CommRing B] [CommRing R] (f : B →+* R) :
     Nonempty ((pbcRestrict ((adicTowerInverseImage g).map

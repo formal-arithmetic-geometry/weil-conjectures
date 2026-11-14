@@ -92,7 +92,11 @@ import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 
 /-! # The complex-level setup for canonical tensor pullback
 
-Source: Stacks Project, Cohomology on Sites, Tags 07A4 and 0G7E; Categories, Tag 04VK.
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 07A4 and 0G7E
+* Categories, Tag 04VK
+* Stacks 07A4, 0G7E and Categories 04VK
 -/
 
 @[expose] public section
@@ -207,8 +211,7 @@ private theorem totalTensorPullbackIso_exists :
             using proEtaleOrdinaryTensorPullback_naturality f R S c _ _ _ _ v z) v.1 v.2)
   exact ⟨b0, fun _ _ ↦ rfl⟩
 
-/-- The complex-level inputs for tensor-comparison descent, with every component fixed.
-Source: Stacks 07A4, 0G7E and Categories 04VK. -/
+/-- The complex-level inputs for tensor-comparison descent, with every component fixed. -/
 theorem proEtaleTensorPullbackDescentData :
     (∀ (P : CochainComplex (proEtaleRingModules Y R) ℤ),
       proEtaleFlatRepresentatives Y R P →

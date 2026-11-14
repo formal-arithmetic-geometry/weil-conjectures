@@ -11,7 +11,11 @@ public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-!
 # Exactness of extension by zero in intrinsic coefficients
 
-Source: Stacks Project, Tags 03DI and 03DJ.
+## References
+
+* Stacks Project, Tags 03DI and 03DJ
+* Stacks, Tags 03DI and 03DJ
+* Stacks, Tag 03DJ
 -/
 
 @[expose] public section
@@ -24,8 +28,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Extension by zero is additive and preserves finite limits and colimits.
-Source: Stacks, Tags 03DI and 03DJ. -/
+/-- Extension by zero is additive and preserves finite limits and colimits. -/
 theorem sfIntrinsicExtensionByZero_exact {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] (A : Type u) [CommRing A] [Finite A] :
     (sfIntrinsicExtensionByZero j A).Additive ∧
@@ -38,20 +41,20 @@ theorem sfIntrinsicExtensionByZero_exact {U X : Scheme.{u}} (j : U ⟶ X)
   unfold sfIntrinsicExtensionByZero
   exact ⟨inferInstance, inferInstance, inferInstance⟩
 
-/-- Additivity from the exactness assertion. Source: Stacks, Tag 03DJ. -/
+/-- Additivity from the exactness assertion. -/
 noncomputable instance sfIntrinsicExtensionByZero_additive {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] (A : Type u) [CommRing A] [Finite A] :
     (sfIntrinsicExtensionByZero j A).Additive :=
   (sfIntrinsicExtensionByZero_exact j A).1
 
-/-- Left exactness from the exactness assertion. Source: Stacks, Tag 03DJ. -/
+/-- Left exactness from the exactness assertion. -/
 noncomputable instance sfIntrinsicExtensionByZero_preservesFiniteLimits
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (A : Type u) [CommRing A] [Finite A] :
     PreservesFiniteLimits (sfIntrinsicExtensionByZero j A) :=
   (sfIntrinsicExtensionByZero_exact j A).2.1
 
-/-- Right exactness from the exactness assertion. Source: Stacks, Tag 03DJ. -/
+/-- Right exactness from the exactness assertion. -/
 noncomputable instance sfIntrinsicExtensionByZero_preservesFiniteColimits
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (A : Type u) [CommRing A] [Finite A] :

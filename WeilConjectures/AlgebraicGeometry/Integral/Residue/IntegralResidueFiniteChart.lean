@@ -17,7 +17,10 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Finite perfect charts under normalized residue coefficients
 
-Source: Bhatt--Scholze, Lemma 6.5.8(1) and Proposition 6.6.11.
+## References
+
+* Bhatt--Scholze, Lemma 6.5.8(1) and Proposition 6.6.11
+* Bhatt--Scholze, Lemma 6.5.8(1), Proposition 6.6.11
 -/
 
 @[expose] public noncomputable section
@@ -233,8 +236,7 @@ private def residueSliceIso
   exact cmp M ≪≫ F.mapDerivedCategory.mapIso e ≪≫ (cmp N).symm
 
 /-- A single constant finite perfect chart stays constant after coefficient transport.
-No completed object, covering, or propagation to smaller slices is involved.
-Source: Bhatt--Scholze, Lemma 6.5.8(1), Proposition 6.6.11. -/
+No completed object, covering, or propagation to smaller slices is involved. -/
 theorem integralResidueFiniteChart
     (T S : Scheme.{u}) (g : S ⟶ T) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

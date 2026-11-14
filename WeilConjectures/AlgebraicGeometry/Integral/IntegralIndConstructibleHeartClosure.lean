@@ -274,7 +274,6 @@ private theorem integral_sheaf_ext_continuity_noetherian
   infer_instance
 
 /-- The integral ind-constructible heart closure over a Noetherian scheme, with no base field.
-Source: the base field of `integralIndConstructibleHeartClosure` only makes the scheme Noetherian.
 -/
 theorem integralIndConstructibleHeartClosure_of_isNoetherian
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)

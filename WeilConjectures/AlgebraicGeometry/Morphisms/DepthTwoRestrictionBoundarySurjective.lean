@@ -18,7 +18,10 @@ import Mathlib.RingTheory.Ideal.AssociatedPrime.Localization
 
 /-! # Existence of boundary germ extensions in depth two
 
-Source: Stacks Project, Tags 0AV8 and 0AVN, as used in Tag 0E9I.
+## References
+
+* Stacks Project, Tags 0AV8 and 0AVN, as used in Tag 0E9I
+* Stacks Project, proof of Tag 0E9I, with Tags 0AV8, 0AVN and 05AM
 -/
 
 @[expose] public section
@@ -70,9 +73,7 @@ private theorem subsingleton_of_positive_local_depth
   simp at hd
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Boundary germs of the direct image lift across a depth-two boundary.
-
-Source: Stacks Project, proof of Tag 0E9I, with Tags 0AV8, 0AVN and 05AM. -/
+/-- Boundary germs of the direct image lift across a depth-two boundary. -/
 theorem surjective_restrictAdjunction_unit_stalk_of_depth_two
     {L : Scheme.{u}} [IsLocallyNoetherian L] (U : L.Opens)
     (N : L.Modules)

@@ -9,7 +9,10 @@ public import WeilConjectures.AlgebraicGeometry.RelativeProj.Basic
 
 /-! # Coefficients in the structural map of a relative Proj chart
 
-Source: Stacks Project, Constructions, Tags 01ME and 01NQ.
+## References
+
+* Stacks Project, Constructions, Tags 01ME and 01NQ
+* Stacks, Tags 01ME and 01NQ, affine structural maps in relative Proj
 -/
 
 @[expose] public section
@@ -35,9 +38,7 @@ private theorem localization_map_constant (B : Type u) [CommRing B]
       (g := RingHom.id B) h a)
 
 /-- The structural map reads a base coefficient as its constant homogeneous fraction.
-This is a ring-section identity; it asserts no existence or descent of module sheaves.
-
-Source: Stacks, Tags 01ME and 01NQ, affine structural maps in relative Proj. -/
+This is a ring-section identity; it asserts no existence or descent of module sheaves. -/
 theorem chart_scalar_value {S : Scheme.{u}} (A : S.GradedAlgebraData)
     (U : S.affineOpens) (r : Γ(S, U.1))
     (x : A.relProjι U ⁻¹ᵁ (A.relProjHom ⁻¹ᵁ U.1)) :

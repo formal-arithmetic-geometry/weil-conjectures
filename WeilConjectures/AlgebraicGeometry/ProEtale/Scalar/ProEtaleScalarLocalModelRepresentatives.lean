@@ -42,6 +42,10 @@ constructed before applying the existing constant-module scalar-extension functo
 * `sfbScalarPresentationModule`: the actual quotient by a finite scalar matrix.
 * `sfbIntegralScalarPresentationModel`: its existing scalar-extension realization.
 * `proetale_scalar_local_model_representatives`: representatives and scalar matrix labels.
+
+## References
+
+* Stacks Tag 0518, finite presentations
 -/
 
 @[expose] public noncomputable section
@@ -56,8 +60,7 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
 /-- The actual scalar quotient `A^n / range q`, with a universe lift for the existing
-scalar-model functor. The labels `(m, n, q)` form `Σ m n: ℕ, Matrix (Fin n) (Fin m) A`.
-Source: Stacks Tag 0518, finite presentations. -/
+scalar-model functor. The labels `(m, n, q)` form `Σ m n: ℕ, Matrix (Fin n) (Fin m) A`. -/
 def sfbScalarPresentationModule (A : Type u) [CommRing A] (m n : ℕ)
     (q : Matrix (Fin n) (Fin m) A) : ModuleCat.{u + 1} A :=
   ModuleCat.of A (ULift.{u + 1} ((Fin n → A) ⧸ LinearMap.range q.mulVecLin))

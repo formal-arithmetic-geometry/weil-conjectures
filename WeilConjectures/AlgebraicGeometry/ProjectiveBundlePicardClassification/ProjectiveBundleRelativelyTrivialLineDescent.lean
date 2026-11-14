@@ -20,7 +20,15 @@ import WeilConjectures.Topology.SheafIsomorphismLocalOpenCover
 /-!
 # Descent of relatively trivial modules on projective bundles
 
-Source: EGA II, Remark 4.2.7; Stacks, Tags 00AL, 00AM, 01XS.
+## References
+
+* EGA II, Remark 4.2.7
+* Stacks, Tags 00AL, 00AM, 01XS
+* EGA II, Remark 4.2.7, printed p.75
+* Stacks Project, Lemma cohomology-projective-space-over-ring (Tag 01XS), degree zero, Lemma
+  glue-maps (Tag 04TN)
+* Stacks, Tags 00AL, 00AM, 04TN
+* Tag 01XS
 -/
 
 @[expose] public section
@@ -126,10 +134,7 @@ private theorem bundle_functions_on_affine (S : Scheme.{u}) (E : S.Modules)
     infer_instance
   exact isIso_app_of_isPullback _ V j _ hj
 
-/-- The canonical map on functions of every base open is bijective.
-
-Source: EGA II, Remark 4.2.7, printed p.75; Stacks Project, Lemma
-cohomology-projective-space-over-ring (Tag 01XS), degree zero, Lemma glue-maps (Tag 04TN). -/
+/-- The canonical map on functions of every base open is bijective. -/
 private theorem projective_bundle_base_functions (S : Scheme.{u}) (E : S.Modules)
     [E.IsQuasicoherent] (r : ℕ)
     [SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u} E r] (hr : 0 < r)
@@ -262,9 +267,7 @@ private theorem descent_isIso_of_open_cover {X : Scheme.{u}} {I : Type u}
   have := ho
   exact isIso_of_reflects_iso _ (overEquiv (U i)).functor
 
-/-- A module trivial above a base neighbourhood of every point descends to a base line.
-
-Source: EGA II, Remark 4.2.7, printed p.75; Stacks, Tags 00AL, 00AM, 04TN; Tag 01XS. -/
+/-- A module trivial above a base neighbourhood of every point descends to a base line. -/
 theorem projective_bundle_relatively_trivial_line_descent (S : Scheme.{u}) (E : S.Modules)
     [E.IsQuasicoherent] (r : ℕ)
     [SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u} E r] (hr : 0 < r)

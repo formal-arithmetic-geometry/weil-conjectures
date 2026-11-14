@@ -23,7 +23,9 @@ import WeilConjectures.AlgebraicGeometry.TorsionSheafCharacterizations
 /-!
 # Uniform dimension and torsion cohomology bounds for proper fibres
 
-Source: Stacks Project, Tags 0A3V, 00P3, 0F0V and 03QU.
+## References
+
+* Stacks Project, Tags 0A3V, 00P3, 0F0V and 03QU
 -/
 
 @[expose] public section
@@ -38,9 +40,7 @@ namespace AlgebraicGeometry
 
 /-- A proper morphism to a quasi-compact scheme has one nonnegative bound on every
 base-changed fibre dimension and twice that bound on torsion cohomology of its
-fibres over separably closed fields. Empty fibres are included.
-
-Source: Stacks Project, Tags 0A3V, 00P3, 0F0V and 03QU. -/
+fibres over separably closed fields. Empty fibres are included. -/
 theorem exists_uniform_geometric_fibre_dimension_and_torsion_cohomology_bound
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] [CompactSpace Y] :
     ∃ e : ℕ,

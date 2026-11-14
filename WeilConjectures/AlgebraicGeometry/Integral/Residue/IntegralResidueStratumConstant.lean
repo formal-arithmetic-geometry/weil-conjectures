@@ -59,7 +59,10 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Constant perfect complexes under the normalized stratum comparison
 
-Source: Bhatt--Scholze, Lemma 6.5.8(1) and Proposition 6.6.11.
+## References
+
+* Bhatt--Scholze, Lemma 6.5.8(1) and Proposition 6.6.11
+* Bhatt--Scholze, Lemma 6.5.8(1), Lemma 6.6.8, Proposition 6.6.11
 -/
 
 @[expose] public section
@@ -118,8 +121,7 @@ private theorem completedDerivedModel (S : Scheme.{u})
 attribute [local irreducible] completedAdicDerivedChange
 
 /-- The normalized coefficient comparison carries constant perfect realizations to
-constant perfect realizations. No complete input object or residue charts are involved.
-Source: Bhatt--Scholze, Lemma 6.5.8(1), Lemma 6.6.8, Proposition 6.6.11. -/
+constant perfect realizations. No complete input object or residue charts are involved. -/
 theorem integralResidueStratum_constant
     (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

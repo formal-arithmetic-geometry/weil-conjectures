@@ -10,7 +10,13 @@ public import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearOrdinaryDir
 
 /-! # Direct image and transposition on strict systems
 
-Source: Zheng Construction 4.1; Stacks 03D2 and 03DA.
+## References
+
+* Zheng Construction 4.1
+* Stacks 03D2 and 03DA
+* Stacks 03D7
+* Zheng Construction 4.1, paragraph before Lemma 4.10
+* Zheng Construction 4.1 and Stacks 03D7
 -/
 
 @[expose] public noncomputable section
@@ -183,8 +189,7 @@ variable (P : OrdinaryInverseSystem.{c, v, r} J B τ J' uInv F σ I)
   (V : ∀ n, Mod.{c, v, max c v r} J' (F n) ⥤ Mod.{c, v, max c v r} J (B n))
   (a : ∀ n, (I n).modules ⊣ V n)
 
-/-- The componentwise direct image and the restricted levelwise Hom bijection.
-Source: Zheng Construction 4.1; Stacks 03D7. -/
+/-- The componentwise direct image and the restricted levelwise Hom bijection. -/
 structure OrdinaryDirectSystem where
   push : Systems.{c, v, max c v r} J' F σ ⥤ Systems.{c, v, max c v r} J B τ
   component : ∀ n,
@@ -205,7 +210,7 @@ structure OrdinaryDirectSystem where
 /-- The functor and component identifications used by an ordinary direct system.
 The local mate condition specifies the horizontal maps: each two-component square
 commutes exactly when its transpose commutes. It does not assert a global Hom
-bijection or assembly of morphisms. Source: Zheng Construction 4.1; Stacks 03D7. -/
+bijection or assembly of morphisms. -/
 structure OrdinaryDirectSystemCore where
   push : Systems.{c, v, max c v r} J' F σ ⥤ Systems.{c, v, max c v r} J B τ
   component : ∀ n,
@@ -244,8 +249,7 @@ structure OrdinaryDirectSystemHomData
       (a n).homEquiv _ _ ((P.component n).inv.app M ≫
         (evaluation.{c, v, max c v r} J' F σ n).map f)
 
-/-- The componentwise reassembly of the direct image.
-Source: Zheng Construction 4.1, paragraph before Lemma 4.10; Stacks 03D7. -/
+/-- The componentwise reassembly of the direct image. -/
 theorem ordinaryDirectSystem_core_exists [PreservesFiniteLimits uInv]
     (hI : ∀ n,
       uInv.map ((sheafCompose J (CategoryTheory.forget CommRingCat.{max c v r})).map (τ n)) ≫
@@ -287,8 +291,7 @@ private def systemLevelHomEquiv
   left_inv f := by simp [Category.assoc]
   right_inv g := by simp [Category.assoc]
 
-/-- The component Hom bijection for an assembled ordinary direct image.
-Source: Zheng Construction 4.1 and Stacks 03D7. -/
+/-- The component Hom bijection for an assembled ordinary direct image. -/
 theorem ordinaryDirectSystem_homData_exists
     (K : OrdinaryDirectSystemCore.{c, v, r} J B τ J' uInv F σ I P V a) :
     Nonempty (OrdinaryDirectSystemHomData.{c, v, r} J B τ J' uInv F σ I P V a K) := by
@@ -345,8 +348,7 @@ theorem ordinaryDirectSystem_homData_exists
 
 /-- Assemble right adjoints on systems from the compatible inverse-image transitions.
 This asserts the system construction and its Hom bijection; its naturality, adjunction,
-additivity and unit equations are proved by the caller.
-Source: Zheng Construction 4.1, paragraph before Lemma 4.10; Stacks 03D7. -/
+additivity and unit equations are proved by the caller. -/
 theorem ordinaryDirectSystem_exists [PreservesFiniteLimits uInv]
     (hI : ∀ n,
       uInv.map ((sheafCompose J (CategoryTheory.forget CommRingCat.{max c v r})).map (τ n)) ≫

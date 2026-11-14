@@ -10,7 +10,11 @@ public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.RingTheory.AdjoinRoot
 
 /-! # Base change of a punctured root chart
-Source: Stacks Project, Tags 05N9 and 01YW -/
+
+## References
+
+* Stacks Project, Tags 05N9 and 01YW
+-/
 
 @[expose] public section
 
@@ -57,9 +61,7 @@ private theorem root_pushout (R S : CommRingCat.{u}) (b : R ⟶ S)
         congrArg (fun h : CommRingCat.of (AdjoinRoot p) ⟶ s.pt =>
           h.hom (AdjoinRoot.root p)) hr
 
-/-- A punctured root chart over S is the base change of the chart over R.
-
-Source: Stacks Project, Tags 05N9 and 01YW. -/
+/-- A punctured root chart over S is the base change of the chart over R. -/
 theorem punctured_root_base_change
     (R S : CommRingCat.{u}) (f : R) (n : ℕ) (b : R ⟶ S) :
     let A₀ := AdjoinRoot ((Polynomial.X : Polynomial R) ^ n - Polynomial.C f)

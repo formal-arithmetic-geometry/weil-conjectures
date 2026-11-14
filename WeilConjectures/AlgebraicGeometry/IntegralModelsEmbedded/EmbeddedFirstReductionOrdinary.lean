@@ -217,7 +217,12 @@ import all WeilConjectures.AlgebraicGeometry.Integral.Models.IntegralModelsEmbed
 import all WeilConjectures.CategoryTheory.SixFunctors.InternalSectionScalarAdjunctionSupplement
 import WeilConjectures.AlgebraicGeometry.IntegralModelsEmbedded.EmbeddedFiniteScalarIsIso
 
-/-! # Ordinary first reduction square -/
+/-! # Ordinary first reduction square
+
+## References
+
+* Stacks Tags 093M, 03ET and 00YV
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -463,9 +468,7 @@ private theorem first_reduction_square
     (((upperStarFromPoint X).congr_map hp).trans ((upperStarFromPoint X).map_comp _ _))
 
 attribute [-instance] integralModel_coefficientMonObj in
-/-- Ordinary reduction commutes with restriction of the actual embedded coefficient map.
-
-Source: Stacks Tags 093M, 03ET and 00YV. -/
+/-- Ordinary reduction commutes with restriction of the actual embedded coefficient map. -/
 theorem embeddedFirstReductionOrdinary
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (π : PadicAlgCl.integers ℓ E.1)

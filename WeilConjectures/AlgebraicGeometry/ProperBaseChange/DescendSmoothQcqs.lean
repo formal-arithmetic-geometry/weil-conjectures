@@ -14,8 +14,12 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 /-!
 # Smoothness descends along qcqs affine-transition limits
 
-Source: Stacks Project, Limits, Tag 0C0C, in Situation 081D; persistence at later stages by
-Morphisms, Tag 01VB.
+## References
+
+* Stacks Project, Limits, Tag 0C0C, in Situation 081D
+* persistence at later stages by Morphisms, Tag 01VB
+* Stacks Project, Limits, Tag 0C0C, Situation 081D
+* Morphisms, Tag 01VB
 -/
 
 @[expose] public section
@@ -219,9 +223,7 @@ private theorem exists_smooth_over_pullback {J : Type u} [SmallCategory J]
   exact htail
 
 /-- A locally finitely presented morphism between qcqs schemes over a qcqs stage is
-smooth at every sufficiently late stage if its limit base change is smooth.
-
-Source: Stacks Project, Limits, Tag 0C0C, Situation 081D; Morphisms, Tag 01VB. -/
+smooth at every sufficiently late stage if its limit base change is smooth. -/
 theorem exists_eventually_smooth_of_isLimit_qcqs
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

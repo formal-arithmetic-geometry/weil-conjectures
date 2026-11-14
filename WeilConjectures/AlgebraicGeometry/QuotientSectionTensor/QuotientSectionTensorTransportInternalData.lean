@@ -8,7 +8,13 @@ module
 public import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionTensorData
 import WeilConjectures.AlgebraicGeometry.IntegralResidueDerivedMonoidal
 
-/-! # Input and internal scalar-total path -/
+/-! # Input and internal scalar-total path
+
+## References
+
+* Stacks 06YY and 07A4
+* Stacks 03EL, 06YY and 07A4
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -29,8 +35,7 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ T)]
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ' T)]
 
-/-- The invertible input identification from internal derived tensors to section tensors.
-Source: Stacks 06YY and 07A4. -/
+/-- The invertible input identification from internal derived tensors to section tensors. -/
 def scalarTensorSectionInput (T : Scheme.{u}) (c : ScalarSectionData a T)
     (P Q : CochainComplex (Modules Λ T) ℤ) :
     (derivedFunctor Λ' T).obj
@@ -46,8 +51,7 @@ def scalarTensorSectionInput (T : Scheme.{u}) (c : ScalarSectionData a T)
     c.model.T.map ((tensor Λ T).map (Prod.mkHom
       (sectionLocalizationComparison Λ T P).hom (sectionLocalizationComparison Λ T Q).hom))
 
-/-- The concrete internal scalar-total path, followed by the ordinary section comparisons.
-Source: Stacks 03EL, 06YY and 07A4. -/
+/-- The concrete internal scalar-total path, followed by the ordinary section comparisons. -/
 def scalarTensorSectionPath (T : Scheme.{u}) (c : ScalarSectionData a T)
     (P Q : CochainComplex (Modules Λ T) ℤ) :
     (derivedFunctor Λ' T).obj

@@ -10,7 +10,12 @@ public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedPu
 public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSupplement
 import all WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSupplement
 
-/-! # Scalar normalization of ordinary integral pullback -/
+/-! # Scalar normalization of ordinary integral pullback
+
+## References
+
+* Stacks Tags 03D3 and 03D8, inverse image adjunction and composition
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -92,8 +97,7 @@ private def derivedPullbackScalarIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     Functor.mapDerivedCategoryNatIso ei
 
 
-/-- Derived pullback, after scalar normalization, is the raw inverse image.
-Source: Stacks Tags 03D3 and 03D8, inverse image adjunction and composition. -/
+/-- Derived pullback, after scalar normalization, is the raw inverse image. -/
 theorem proEtaleRingDerivedPullback_scalarComparison {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
     (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})

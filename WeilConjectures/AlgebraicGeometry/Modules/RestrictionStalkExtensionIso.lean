@@ -16,7 +16,10 @@ import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 
 /-! # Open restriction and extension of stalk scalars
 
-Source: Stacks Project, Sheaves, Tag 0098; Cohomology, Tag 06YB.
+## References
+
+* Stacks Project, Sheaves, Tag 0098
+* Cohomology, Tag 06YB
 -/
 
 @[expose] public section
@@ -123,8 +126,7 @@ private noncomputable def restrictionStalkLinearNatIso
     exact ConcreteCategory.congr_hom
       ((Scheme.Modules.restrictStalkNatIso j x).hom.naturality f) m)
 
-/-- Stalks of open restriction are extension of scalars of the original stalks.
-Source: Stacks Project, Sheaves, Tag 0098; Cohomology, Tag 06YB. -/
+/-- Stalks of open restriction are extension of scalars of the original stalks. -/
 theorem nonempty_restriction_stalk_extension_iso
     {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] (x : X)
     (K : CochainComplex Y.Modules ℤ) :

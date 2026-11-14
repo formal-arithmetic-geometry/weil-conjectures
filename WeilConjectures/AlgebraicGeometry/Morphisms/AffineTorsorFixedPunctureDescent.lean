@@ -16,8 +16,12 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.AffineTorsorFixedPunctureDesc
 
 /-! # Descent along a connected affine torsor on a principal open
 
-Source: Stacks Project, Tag 0EYG, normal-domain and intermediate-field paragraphs;
-Tag 03SF, Galois covers and their quotients.
+## References
+
+* Stacks Project, Tag 0EYG, normal-domain and intermediate-field paragraphs
+* Tag 03SF, Galois covers and their quotients
+* Stacks Project, Tag 03SF (quotients of Galois covers), and Tag 0EYG (normal-domain and
+  intermediate-field paragraphs)
 -/
 
 @[expose] public section
@@ -27,10 +31,7 @@ set_option autoImplicit false
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- A split cover descends along a connected affine torsor to fixed-ring punctures.
-
-Source: Stacks Project, Tag 03SF (quotients of Galois covers), and Tag 0EYG
-(normal-domain and intermediate-field paragraphs). -/
+/-- A split cover descends along a connected affine torsor to fixed-ring punctures. -/
 theorem affine_torsor_fixed_puncture_descent
     (R H : CommRingCat.{u}) (g : R) (ι : R →+* H)
     (C : Type u) [CommRing C] [Algebra H C] [IsDomain C]

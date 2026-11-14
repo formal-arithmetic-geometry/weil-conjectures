@@ -14,7 +14,10 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.InjectiveModuleTildeFlasque
 
 /-! # Restricting an injective module to the puncture
 
-Source: Stacks Project, Tags 09T2 and 0A6T.
+## References
+
+* Stacks Project, Tags 09T2 and 0A6T
+* Stacks Project, Tag 09T2, Lemma 36.8.1, and Tag 0A6T, Lemma 51.2.1
 -/
 
 @[expose] public section
@@ -25,8 +28,7 @@ namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Restriction of an injective module to the puncture is surjective, with kernel
-its maximal-ideal-power torsion submodule.
-Source: Stacks Project, Tag 09T2, Lemma 36.8.1, and Tag 0A6T, Lemma 51.2.1. -/
+its maximal-ideal-power torsion submodule. -/
 theorem injective_punctured_restriction_exact
     (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R]
     (W : (Spec (.of R)).Opens)

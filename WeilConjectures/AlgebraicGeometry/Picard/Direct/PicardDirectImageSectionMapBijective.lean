@@ -18,7 +18,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-! # Bijectivity of the fixed section comparison
 
-Source: Stacks Project, Tag 0B91, clause (2), and Tag 079W.
+## References
+
+* Stacks Project, Tag 0B91, clause (2), and Tag 079W
 -/
 
 @[expose] public section
@@ -27,8 +29,7 @@ universe v
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- The fixed degree-zero comparison is bijective after arbitrary base change.
-Source: Stacks Project, Tag 0B91, clause (2), and Tag 079W. -/
+/-- The fixed degree-zero comparison is bijective after arbitrary base change. -/
 theorem picardDirectImageSectionMap_bijective
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

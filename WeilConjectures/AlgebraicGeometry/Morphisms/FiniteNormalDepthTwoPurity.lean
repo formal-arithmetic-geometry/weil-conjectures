@@ -21,7 +21,9 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteNormalDenseOpenComparis
 /-!
 # FiniteNormalDepthTwoPurity
 
-Source: Stacks Project, Tags 0EYB, 0EY6 and 0EYJ (depth-two case).
+## References
+
+* Stacks Project, Tags 0EYB, 0EY6 and 0EYJ (depth-two case)
 -/
 
 @[expose] public section
@@ -58,9 +60,7 @@ private theorem etale_restrict_sup {L N : Scheme.{u}} (n : N ⟶ L)
     exact (MorphismProperty.arrow_mk_iso_iff @Etale
       (morphismRestrictRestrict n T (T.ι ⁻¹ᵁ J b))).mpr hEt
 
-/-- Purity for finite normal covers in the indicated local-base case.
-
-Source: Stacks Project, Tags 0EYB, 0EY6 and 0EYJ (depth-two case). -/
+/-- Purity for finite normal covers in the indicated local-base case. -/
 theorem finite_normal_etale_of_depth_two_neighbourhood
     (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]
     [IsDomain A] [IsIntegrallyClosed A]

@@ -15,7 +15,12 @@ import Mathlib.AlgebraicGeometry.Cover.MorphismProperty
 
 /-! # Separate local markings of the algebraic stalk tower
 
-Source: Stacks Project, Tags 09BV and 09C6
+## References
+
+* Stacks Project, Tags 09BV and 09C6
+* Stacks Project, the construction of the normalized algebraic stalk diagram, with the bounded
+  finite cohomology version of finite-ring local constancy
+* Tag 09BV (lemma-weird), first paragraph before the inverse system of isomorphism sheaves
 -/
 
 @[expose] public noncomputable section
@@ -108,11 +113,7 @@ private theorem connected_presentation_markings
 -- Preserve the original proof-binder names in the statement.
 set_option linter.unusedVariables false in
 /-- On a cover, one algebraic stalk tower models each level separately on a
-possibly level-dependent further cover. No compatible family of markings is asserted.
-
-Source: Stacks Project, the construction of the normalized algebraic stalk diagram, with the bounded
-finite cohomology version of finite-ring local constancy; Tag 09BV (lemma-weird), first paragraph
-before the inverse system of isomorphism sheaves. -/
+possibly level-dependent further cover. No compatible family of markings is asserted. -/
 theorem lisse_tower_stalk_level_models
     (X Y : Scheme.{u}) [IsNoetherian X] (g : Y ⟶ X) [IsImmersion g]
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (M : AdicTower X d)

@@ -14,8 +14,10 @@ import Mathlib.Algebra.Ring.GeomSum
 
 /-! # Prime-to-characteristic roots of unity in a strict local ring
 
-Source: Stacks Project, Tags 0EYG and 09EV, root-of-unity input to the
-intermediate-root calculation; Hensel lifting of simple roots.
+## References
+
+* Stacks Project, Tags 0EYG and 09EV, root-of-unity input to the intermediate-root calculation
+* Stacks Project, Tag 0EYG, final intermediate-field paragraph, and Tag 09EV, root-of-unity argument
 -/
 
 @[expose] public section
@@ -28,8 +30,7 @@ namespace AlgebraicGeometry.Scheme
 /-- The roots of unity of invertible positive order in a strict local ring form
 an order-n cyclic group, and a nonidentity root differs from one by a unit.
 
-Source: Stacks Project, Tag 0EYG, final intermediate-field paragraph, and
-Tag 09EV, root-of-unity argument. This is the Hensel-lifting input to the
+This is the Hensel-lifting input to the
 intermediate-root calculation, extended to arbitrary strict local rings. -/
 theorem strict_local_roots_of_unity
     (H : Type u) [CommRing H] [IsStrictlyHenselianLocalRing H]

@@ -13,7 +13,12 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # The kernel of restriction to the fibres of a projective line
 
-Source: EGA II, Remark 4.2.7; arbitrary-base descent in Stacks, Tag 0B8W.
+## References
+
+* EGA II, Remark 4.2.7
+* arbitrary-base descent in Stacks, Tag 0B8W
+* EGA II, Remark 4.2.7, degree-zero case of projective-bundle Picard classification
+* Stacks, Tag 0B8W, for descent to finite-presentation models
 -/
 
 @[expose] public noncomputable section
@@ -135,10 +140,7 @@ private theorem field_degree_zero (k : Type u) [Field k] (m : ℤ)
   obtain ⟨d, _, hd⟩ := hC.field k (Iso.refl _) (𝟙_ P.Modules) inferInstance
   exact (hd m ⟨a.symm⟩).trans (hd 0 ⟨Iso.refl _⟩).symm
 
-/-- An invertible class trivial on every residue-field fibre comes from the base.
-
-Source: EGA II, Remark 4.2.7, degree-zero case of projective-bundle Picard
-classification; Stacks, Tag 0B8W, for descent to finite-presentation models. -/
+/-- An invertible class trivial on every residue-field fibre comes from the base. -/
 theorem exists_base_class_of_fibrewise_trivial (S : Scheme.{u})
     (L : (ProjectiveLine S).Pic)
     (hL : ∀ s : S,

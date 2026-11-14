@@ -25,7 +25,9 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.StalkNormalizationTraitSectio
 /-!
 # Root-algebra presentation along a transverse trait section
 
-Source: Stacks Project, Tags 0EYH and 0EYI, proof preceding parts (1) and (2).
+## References
+
+* Stacks Project, Tags 0EYH and 0EYI, proof preceding parts (1) and (2)
 -/
 
 @[expose] public section
@@ -78,9 +80,7 @@ set_option maxHeartbeats 1000000 in
 -- The dependent normalization stalks and localization transport need this elaboration budget.
 /-- The geometric normal form, retaining the actual local root algebra and a uniformizer
 of the auxiliary section trait. No maximal-ideal formula for the root algebra and no
-integer-valued valuation are asserted here.
-
-Source: Stacks Project, Tags 0EYH and 0EYI, proof preceding parts (1) and (2). -/
+integer-valued valuation are asserted here. -/
 theorem GaloisCover.stalk_normalization_trait_section_root_presentation {S C : Scheme.{u}}
     [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]

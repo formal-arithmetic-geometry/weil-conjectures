@@ -13,10 +13,13 @@ import WeilConjectures.Topology.InverseImageStalk
 /-!
 # Scalar transport for inverse-image module stalks
 
-Source: Stacks Project, Sheaves, Tags 008H and 0098.
-
 This identifies two tensors of stalks before applying the stalk-of-change-of-rings
 isomorphism. No tensor sheaf or pullback-module stalk occurs in the conclusion.
+
+## References
+
+* Stacks Project, Sheaves, Tags 008H and 0098
+* Stacks Project, Sheaves, Tag 0098, proof using Tag 008H
 -/
 
 @[expose] public section
@@ -136,8 +139,7 @@ private theorem scalarTransport {A R S : Type u} [CommRing A] [CommRing R]
     change b (d ((1 : S) ⊗ₜ[R, ψ] n)) = (1 : S) ⊗ₜ[R, ψ] n
     rw [hd, hb, c.apply_symm_apply]
 
-/-- Scalar transport through the inverse-image stalk isomorphisms.
-Source: Stacks Project, Sheaves, Tag 0098, proof using Tag 008H. -/
+/-- Scalar transport through the inverse-image stalk isomorphisms. -/
 theorem exists_inverseImage_stalk_scalar_transport {X Y : Scheme.{u}}
     (f : X ⟶ Y) (x : X) :
     ∃ β : ∀ G : Y.Modules,

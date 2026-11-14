@@ -16,7 +16,11 @@ import Mathlib.RingTheory.Localization.Finiteness
 
 /-! # Localization of an affine finite double dual
 
-Source: Stacks Project, Tags 01HV and 0583, as used in Tag 0EY6.
+## References
+
+* Stacks Project, Tags 01HV and 0583, as used in Tag 0EY6
+* Stacks Project, Tags 01HV (associated sheaf stalks) and 0583 (localization of Hom for finite
+  presentations), used in Tag 0EY6
 -/
 
 @[expose] public section
@@ -57,9 +61,7 @@ private theorem dual_stalk_iso
     (StructureSheaf.toStalkₗ A (Module.Dual A M) x) h
   exact ⟨e.extendScalarsOfIsLocalization x.asIdeal.primeCompl R⟩
 
-/-- The stalk of the actual double dual is the double dual of the finite stalk.
-Source: Stacks Project, Tags 01HV (associated sheaf stalks) and 0583 (localization of Hom for finite
-presentations), used in Tag 0EY6 -/
+/-- The stalk of the actual double dual is the double dual of the finite stalk. -/
 theorem affine_double_dual_stalk
     (A : CommRingCat.{u}) [IsNoetherianRing A] (M : ModuleCat.{u} A)
     [Module.Finite A M] (x : Spec A) :

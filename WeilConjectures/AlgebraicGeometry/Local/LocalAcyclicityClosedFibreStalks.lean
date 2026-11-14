@@ -14,7 +14,10 @@ import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
 /-! # Stalk cohomology of the geometric-fibre pushforward
 
-Source: Stacks Project, Tag 0GJU.
+## References
+
+* Stacks Project, Tag 0GJU
+* Stacks Project, Tag 0GJU, displayed stalk calculation
 -/
 
 @[expose] public section
@@ -49,7 +52,7 @@ private theorem nonempty_cohomology_iso_of_iso_over
 
 /-- For an arbitrary coefficient sheaf, the nonnegative target stalks of the derived
 unit on the closed fibre are the cohomology of a variety of vanishing cycles. No local
-acyclicity is assumed. Source: Stacks Project, Tag 0GJU, displayed stalk calculation. -/
+acyclicity is assumed. -/
 theorem closedFibre_derivedUnit_target_stalks
     {X S : Scheme.{u}} (f : X ⟶ S)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

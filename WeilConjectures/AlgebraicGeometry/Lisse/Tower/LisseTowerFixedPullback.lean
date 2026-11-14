@@ -13,7 +13,9 @@ import WeilConjectures.CategoryTheory.Constant.ConstantScalarGeometricAdjunction
 
 /-! # Fixed finite realization and ordinary inverse image
 
-Source: Stacks Project, Modules on Sites, Tags 03CY, 03D8 and 03DA.
+## References
+
+* Stacks Project, Modules on Sites, Tags 03CY, 03D8 and 03DA
 -/
 
 @[expose] public noncomputable section
@@ -237,9 +239,7 @@ private def finiteSheafPullback
 
 /-- Ordinary fixed finite realization commutes with inverse image, retaining the
 canonical composite coefficient identification. No derived object, tower, etale
-comparison, or chosen marking occurs here.
-
-Source: Stacks Project, Modules on Sites, Tags 03CY, 03D8 and 03DA. -/
+comparison, or chosen marking occurs here. -/
 theorem lisseTower_fixed_sheaf_pullback
     {X T Z : Scheme.{u}} (a : Z ⟶ T) (b : T ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) :

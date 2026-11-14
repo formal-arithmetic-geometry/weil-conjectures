@@ -10,7 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSetTerminalTransport
 
 /-! # Transport of matching families to fpqc descent data
 
-Source: Stacks Project, Tag 0GLZ, first paragraph; Tag 09XN.
+## References
+
+* Stacks Project, Tag 0GLZ, first paragraph
+* Tag 09XN
 -/
 
 @[expose] public section

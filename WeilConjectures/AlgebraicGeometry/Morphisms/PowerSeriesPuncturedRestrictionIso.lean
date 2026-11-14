@@ -15,7 +15,9 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 /-! Categorical form of the finite thickening restriction comparison.
 
-Source: Stacks Project, Tag 0EY9
+## References
+
+* Stacks Project, Tag 0EY9
 -/
 
 @[expose] public section

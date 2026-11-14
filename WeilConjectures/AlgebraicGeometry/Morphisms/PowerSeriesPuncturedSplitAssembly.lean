@@ -9,7 +9,10 @@ module
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Functoriality
 
 /-! # Recovering an isomorphism from its punctured zero slice
-Source: Stacks Project, Tag 0EY9.
+
+## References
+
+* Stacks Project, Tag 0EY9
 -/
 
 @[expose] public section
@@ -21,8 +24,7 @@ set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
-/-- Full faithfulness, or an isomorphic base, lifts a splitting from a base change.
-Source: Stacks Project, Tag 0EY9; zero variables give an isomorphic base. -/
+/-- Full faithfulness, or an isomorphic base, lifts a splitting from a base change. -/
 theorem powerSeries_punctured_split_assembly
     {B W E F : Scheme.{u}} (z : W ⟶ B) (p : E ⟶ B) (r : F ⟶ B)
     [IsFinite p] [Etale p] [IsFinite r] [Etale r]

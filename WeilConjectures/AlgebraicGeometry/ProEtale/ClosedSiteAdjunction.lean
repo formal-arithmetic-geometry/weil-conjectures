@@ -12,7 +12,9 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 
 /-! # Adjunction for the closed-site lift
 
-Source: Stacks Project, Tags 09BK and 097P.
+## References
+
+* Stacks Project, Tags 09BK and 097P
 -/
 
 @[expose] public section
@@ -23,8 +25,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme.AffineProEt
 
-/-- The closed-site lift is left adjoint to base change, with invertible unit.
-Source: Stacks Project, Tags 09BK and 097P. -/
+/-- The closed-site lift is left adjoint to base change, with invertible unit. -/
 theorem exists_closedSiteAdjunction (A : Type u) [CommRing A] (I : Ideal A) :
     ∃ adj : closedSiteLift A I ⊣ closedSiteBaseChange A I, IsIso adj.unit := by
   obtain ⟨_, _, hfull, hfaithful, _, ⟨adj⟩, _, _⟩ :=

@@ -198,10 +198,12 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Biproducts
 /-!
 # Integral constant-model constructible heart closure
 
-Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(1), printed pp. 60--61.
-
 The theorem states closure under ambient kernels, cokernels, and short exact extensions
 for finite constant scalar models over the pulled-back condensed ring of integers.
+
+## References
+
+* Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(1), printed pp. 60--61
 -/
 
 @[expose] public section
@@ -409,10 +411,7 @@ private theorem integralCoefficientIso (ℓ : ℕ) [Fact ℓ.Prime]
   · apply Mon.Hom.ext
     exact eAb.inv_hom_id
 
-/-- Integral scalar-constant constructible module sheaves form a weak Serre subcategory.
-
-Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(1), printed pp. 60--61.
--/
+/-- Integral scalar-constant constructible module sheaves form a weak Serre subcategory. -/
 theorem isConstantModelConstructible_serre_padicIntegers
     (X : Scheme.{u}) [IsNoetherian X] (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)) :

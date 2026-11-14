@@ -16,6 +16,10 @@ import WeilConjectures.SixFunctors.OpenClosed.Exact
 
 Stacks Project, Tags 095L, 0152 and
 015F.
+
+## References
+
+* Stacks Project, Tags 095L, 0152 and 015F
 -/
 
 @[expose] public section
@@ -27,8 +31,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 namespace AlgebraicGeometry.Etale
 
 /-- The natural open-closed triangle on the bounded below derived category, with its
-specified counit and unit.
-Source: Stacks Project, Tags 095L, 0152 and 015F. -/
+specified counit and unit. -/
 theorem exists_functorial_distTriang_openClosed
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X U Z : Scheme.{u}} (j : U ⟶ X) (i : Z ⟶ X)

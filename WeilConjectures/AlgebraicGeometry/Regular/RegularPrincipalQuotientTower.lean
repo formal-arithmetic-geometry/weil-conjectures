@@ -11,7 +11,10 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Complete.AdicTower
 
 /-! # Regular principal quotient towers
 
-Source: Stacks Project, Tag 099M.
+## References
+
+* Stacks Project, Tag 099M
+* Stacks Project, Tag 099M, using the free two-term resolution of the principal coefficients
 -/
 
 @[expose] public section
@@ -84,10 +87,7 @@ private theorem quotient_tower_from_cones
     CochainComplex.mappingCone.inr_descShortComplex (T n)
   rw [← Category.assoc, ha, Category.assoc, ← DerivedCategory.Q.map_comp, hinc]
 
-/-- Degreewise regular scalar quotients identify with the positive derived quotient tower.
-
-Source: Stacks Project, Tag 099M, using the free two-term resolution of the principal coefficients.
--/
+/-- Degreewise regular scalar quotients identify with the positive derived quotient tower. -/
 theorem regular_principal_quotient_tower
     {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
     (J : GrothendieckTopology C) {Λ : Type (u + 1)} [CommRing Λ]

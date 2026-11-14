@@ -10,8 +10,10 @@ public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # Open restriction of the direct image under another open immersion
 
-Source: Stacks Project, Tag 008C (direct image on opens), and Tag 0094
-(restriction to an open subspace).
+## References
+
+* Stacks Project, Tag 008C (direct image on opens), and Tag 0094 (restriction to an open subspace)
+* Stacks Project, Tags 008C and 0094
 -/
 
 @[expose] public section
@@ -21,9 +23,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme.Modules
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The open-base-change comparison for an arbitrary module, without coherence hypotheses.
-
-Source: Stacks Project, Tags 008C and 0094. -/
+/-- The open-base-change comparison for an arbitrary module, without coherence hypotheses. -/
 theorem nonempty_restrict_pushforward_open_iso
     {Y L : Scheme.{u}} (j : Y ⟶ L) [IsOpenImmersion j]
     (U : L.Opens) (P : U.toScheme.Modules) :

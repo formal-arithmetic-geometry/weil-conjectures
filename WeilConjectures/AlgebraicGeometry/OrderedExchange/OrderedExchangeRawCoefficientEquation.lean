@@ -9,7 +9,12 @@ public import WeilConjectures.AlgebraicGeometry.OrderedExchange.OrderedExchangeC
 import WeilConjectures.AlgebraicGeometry.OrderedExchange.OrderedExchangeStrictCoefficientEquations
 import WeilConjectures.AlgebraicGeometry.OrderedExchange.OrderedExchangeReconstructionEquations
 
-/-! # rawCoefficientEquation -/
+/-! # rawCoefficientEquation
+
+## References
+
+* Stacks 0E48
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -23,8 +28,7 @@ variable {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 variable {X' X Y' Y : Scheme.{t}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
   {f : X ⟶ Y} {g : Y' ⟶ Y}
 
-/-- The final cancellation of the ordered comparison maps, at one complete input.
-Source: Stacks 0E48. -/
+/-- The final cancellation of the ordered comparison maps, at one complete input. -/
 theorem rawCoefficientEquation (sq : ChosenCartesianSquare g' f' f g)
     (K : AComplete d X) : rawComponent d sq K = constantComponent d sq K := by
   obtain ⟨-, -, hV⟩ := strictCoefficientEquations d sq K.obj K.property

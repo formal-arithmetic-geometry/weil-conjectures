@@ -217,7 +217,10 @@ import WeilConjectures.AlgebraicGeometry.Integral.Models.IntegralModelsEmbeddedR
 
 /-! # Underived embedded integral coefficient comparison
 
-Source: Stacks Project, Tags 099L and 099I.
+## References
+
+* Stacks Project, Tags 099L and 099I
+* Stacks Tags 093M, 099L, 099I and 0A07
 -/
 
 @[expose] public noncomputable section
@@ -333,9 +336,7 @@ private theorem residue_kernel_comparison (φ : R ⟶ B) (q : R ⟶ S) (p : B �
 end ResidueKernels
 
 /-- The embedded scalar map is flat and identifies the residue quotient, and extension
-of the constant residue kernel is exactly the completed residue kernel.
-
-Source: Stacks Tags 093M, 099L, 099I and 0A07. -/
+of the constant residue kernel is exactly the completed residue kernel. -/
 theorem integralModelsEmbeddedCoefficientKernels
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (π : PadicAlgCl.integers ℓ E.1)

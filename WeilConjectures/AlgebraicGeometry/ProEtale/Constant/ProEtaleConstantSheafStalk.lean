@@ -23,12 +23,18 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleSheafificationGeometri
 /-!
 # Stalks of constant module sheaves on the pro-etale site
 
-Source: Bhatt--Scholze, The pro-etale topology for schemes, Sections 6.5 and 6.8; Stacks Project,
-Tags 0F6B, 0F6C, 00Y8(3), and 03CY.
-
 The additive germ map is specified by the actual sheafification unit and the
 coprojection at `(Y,y)`. Scalar compatibility uses the constant-ring germ map;
 thus bijectivity expresses an isomorphism over the original coefficient ring.
+
+## References
+
+* Bhatt--Scholze, The pro-etale topology for schemes, Sections 6.5 and 6.8
+* Stacks Project, Tags 0F6B, 0F6C, 00Y8(3), and 03CY
+* Stacks Project, before Tag 0F6B
+* Stacks Project, Tags 00Y8(3), 03CY
+* Bhatt--Scholze, Sections 6.5, 6.8
+* Stacks Project, Tags 0F6B, 0F6C, 00Y8(3), 03CY
 -/
 
 @[expose] public section
@@ -41,13 +47,12 @@ namespace AlgebraicGeometry.Scheme
 
 variable {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
 
-/-- The pointed neighbourhood `(Y,y)`. Source: Stacks Project, before Tag 0F6B. -/
+/-- The pointed neighbourhood `(Y,y)`. -/
 noncomputable def proEtaleConstantGermNeighbourhood (y : Spec (.of Ω) ⟶ Y) :
     ProEtaleGeometricNeighbourhood y :=
   StructuredArrow.mk (Y := ProEt.mk (𝟙 Y)) (Over.homMk y (Category.comp_id y))
 
-/-- The coefficient homomorphism sending a scalar to its constant germ at `(Y,y)`.
-Source: Stacks Project, Tags 00Y8(3), 03CY. -/
+/-- The coefficient homomorphism sending a scalar to its constant germ at `(Y,y)`. -/
 noncomputable def proEtaleConstantRingGerm (y : Spec (.of Ω) ⟶ Y)
     (A : Type u) [CommRing A] :
     ULift.{u + 1, u} A →+* proEtaleGeometricStalkRing y
@@ -62,8 +67,7 @@ noncomputable def proEtaleConstantRingGerm (y : Spec (.of Ω) ⟶ Y)
         (op (ProEt.mk (𝟙 Y)))).hom)
 
 /-- The canonical additive germ map: sheafify a constant section, then take its
-class in the pointed-neighbourhood colimit at `(Y,y)`.
-Source: Stacks Project, Tags 00Y8(3), 03CY. -/
+class in the pointed-neighbourhood colimit at `(Y,y)`. -/
 noncomputable def proEtaleConstantModuleGerm (y : Spec (.of Ω) ⟶ Y)
     (A : Type u) [CommRing A] (M : ModuleCat.{u + 1} (ULift.{u + 1, u} A)) :
     M →+ proEtaleGeometricModuleStalk y
@@ -79,8 +83,7 @@ noncomputable def proEtaleConstantModuleGerm (y : Spec (.of Ω) ⟶ Y)
 
 /-- The canonical constant-section map is an isomorphism of coefficient modules:
 it is an additive bijection and respects scalars via the constant-ring germ map.
-Consequently its stalk is finite whenever the constant module is finite.
-Source: Bhatt--Scholze, Sections 6.5, 6.8; Stacks Project, Tags 0F6B, 0F6C, 00Y8(3), 03CY. -/
+Consequently its stalk is finite whenever the constant module is finite. -/
 theorem proEtaleConstantModuleGerm_bijective (y : Spec (.of Ω) ⟶ Y)
     (A : Type u) [CommRing A] (M : ModuleCat.{u + 1} (ULift.{u + 1, u} A)) :
     Function.Bijective (proEtaleConstantModuleGerm y A M) ∧

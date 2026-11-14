@@ -10,6 +10,10 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 
 /-! # Maps from reduced schemes through closed subschemes
+
+## References
+
+* Stacks Project, Schemes, Lemma 0356, lines 2268-2289
 -/
 
 @[expose] public section
@@ -21,8 +25,6 @@ namespace AlgebraicGeometry
 
 /-- A morphism from a reduced scheme factors through a closed subscheme exactly
 set-theoretically; every map factors through the reduction.
-
-Source: Stacks Project, Schemes, Lemma 0356, lines 2268-2289.
 -/
 theorem reduced_source_factors_through_closed_subscheme
     {X Y Z : Scheme.{u}} [IsReduced Y]

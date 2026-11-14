@@ -11,7 +11,10 @@ import Mathlib.Tactic.Ring
 
 /-! # Coherence laws for the signed source-Hom mates
 
-Source: Stacks Project, Tags 08J9 and 08JC.
+## References
+
+* Stacks Project, Tags 08J9 and 08JC
+* Stacks Project, Tags 08J9 and 08JC, signed total-tensor evaluation
 -/
 
 @[expose] public noncomputable section
@@ -275,8 +278,7 @@ variable {D : Type d} [Category.{v} D] [Preadditive D] [HasShift D ℤ]
   [∀ n : ℤ, (shiftFunctor D n).Additive] [(curriedTensor D).CommShift₂Int]
 
 /-- The signed mates have the correct zero component and satisfy addition
-coherence, stated before assembling a `CommShift` structure.
-Source: Stacks Project, Tags 08J9 and 08JC, signed total-tensor evaluation. -/
+coherence, stated before assembling a `CommShift` structure. -/
 theorem siteHom_signed_source_shift_laws [MonoidalPreadditive D] (M : D) :
     let H := MonoidalClosed.internalHom.flip.obj M
     (∀ X : Dᵒᵖ, siteHomSignedSourceComponent M 0 X =

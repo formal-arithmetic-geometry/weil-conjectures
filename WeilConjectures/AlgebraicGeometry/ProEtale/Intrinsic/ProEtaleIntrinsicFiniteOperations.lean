@@ -13,11 +13,18 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunc
 /-!
 # Canonical intrinsic finite-coefficient inverse image
 
-Source: Stacks Project, Modules on Sites.
-
 The existing arbitrary-ring and continuous-function interfaces are reexported.
 Here the canonical fixed-scalar inverse image is transported through the published
 intrinsic constant-ring realization, without choosing a coefficient identification.
+
+## References
+
+* Stacks Project, Modules on Sites
+* Stacks, Tag 00YV
+* Stacks
+* Stacks, Tag 04JC
+* Stacks, Modules on Sites
+* Stacks, Section 0735
 -/
 
 @[expose] public section
@@ -32,14 +39,12 @@ namespace AlgebraicGeometry.Scheme
 
 variable (A : Type u) [CommRing A] [Finite A]
 
-/-- The realization equivalence has its published additive functor.
-Source: Stacks, Tag 00YV. -/
+/-- The realization equivalence has its published additive functor. -/
 noncomputable instance sfIntrinsicModuleEquivalence_functor_additive (X : Scheme.{u}) :
     (sfIntrinsicModuleEquivalence X A).functor.Additive :=
   inferInstanceAs (ProEtale.finiteCoefficientIntrinsicRealization X A).Additive
 
-/-- Transport a fixed-scalar functor through the canonical realization equivalences.
-Source: Stacks, Tag 00YV. -/
+/-- Transport a fixed-scalar functor through the canonical realization equivalences. -/
 noncomputable def sfIntrinsicTransport {X Y : Scheme.{u}}
     (F : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) ⥤
       Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1, u} A))) :
@@ -48,8 +53,7 @@ noncomputable def sfIntrinsicTransport {X Y : Scheme.{u}}
   (sfIntrinsicModuleEquivalence X A).inverse ⋙ F ⋙
     (sfIntrinsicModuleEquivalence Y A).functor
 
-/-- Transport natural isomorphisms by the same coefficient realization.
-Source: Stacks, Tag 00YV. -/
+/-- Transport natural isomorphisms by the same coefficient realization. -/
 noncomputable def sfIntrinsicTransportIso {X Y : Scheme.{u}}
     {F G : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) ⥤
       Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1, u} A))} (e : F ≅ G) :
@@ -57,8 +61,7 @@ noncomputable def sfIntrinsicTransportIso {X Y : Scheme.{u}}
   isoWhiskerLeft (sfIntrinsicModuleEquivalence X A).inverse
     (isoWhiskerRight e (sfIntrinsicModuleEquivalence Y A).functor)
 
-/-- The composition comparison inserts the realization unit at the middle scheme.
-Source: Stacks, Tag 00YV. -/
+/-- The composition comparison inserts the realization unit at the middle scheme. -/
 noncomputable def sfIntrinsicTransportComp {X Y Z : Scheme.{u}}
     (F : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) ⥤
       Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1, u} A)))
@@ -70,52 +73,46 @@ noncomputable def sfIntrinsicTransportComp {X Y Z : Scheme.{u}}
       (isoWhiskerLeft F ((sfIntrinsicModuleEquivalence Y A).funInvIdAssoc G).symm)
       (sfIntrinsicModuleEquivalence Z A).functor)
 
-/-- Exact inverse image with the intrinsic constant scalar action.
-Source: Stacks. -/
+/-- Exact inverse image with the intrinsic constant scalar action. -/
 noncomputable def sfIntrinsicPullback {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   sfIntrinsicTransport A (ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) f)
 
-/-- Additivity of this canonical transport. Source: Stacks, Tag 04JC. -/
+/-- Additivity of this canonical transport. -/
 noncomputable instance sfIntrinsicPullback_additive {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (sfIntrinsicPullback A f).Additive :=
   inferInstanceAs ((sfIntrinsicModuleEquivalence Y A).inverse ⋙
     ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) f ⋙
     (sfIntrinsicModuleEquivalence X A).functor).Additive
 
-/-- Left exactness is preserved by the two realization equivalences.
-Source: Stacks, Tag 04JC. -/
+/-- Left exactness is preserved by the two realization equivalences. -/
 noncomputable instance sfIntrinsicPullback_preservesFiniteLimits {X Y : Scheme.{u}}
     (f : X ⟶ Y) : PreservesFiniteLimits (sfIntrinsicPullback A f) :=
   inferInstanceAs (PreservesFiniteLimits ((sfIntrinsicModuleEquivalence Y A).inverse ⋙
     ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) f ⋙
     (sfIntrinsicModuleEquivalence X A).functor))
 
-/-- Right exactness is preserved by the two realization equivalences.
-Source: Stacks, Tag 04JC. -/
+/-- Right exactness is preserved by the two realization equivalences. -/
 noncomputable instance sfIntrinsicPullback_preservesFiniteColimits {X Y : Scheme.{u}}
     (f : X ⟶ Y) : PreservesFiniteColimits (sfIntrinsicPullback A f) :=
   inferInstanceAs (PreservesFiniteColimits ((sfIntrinsicModuleEquivalence Y A).inverse ⋙
     ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) f ⋙
     (sfIntrinsicModuleEquivalence X A).functor))
 
-/-- Canonical pullback composition, with its actual coefficient transports.
-Source: Stacks, Modules on Sites. -/
+/-- Canonical pullback composition, with its actual coefficient transports. -/
 noncomputable def sfIntrinsicPullbackComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     sfIntrinsicPullback A (f ≫ g) ≅ sfIntrinsicPullback A g ⋙ sfIntrinsicPullback A f :=
   sfIntrinsicTransportIso A
     (ProEtale.upperStarComp (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) f g) ≪≫
     sfIntrinsicTransportComp A _ _
 
-/-- Identity pullback, using the realization counit.
-Source: Stacks, Modules on Sites. -/
+/-- Identity pullback, using the realization counit. -/
 noncomputable def sfIntrinsicPullbackId (X : Scheme.{u}) :
     sfIntrinsicPullback A (𝟙 X) ≅ 𝟭 _ :=
   sfIntrinsicTransportIso A
     (ProEtale.upperStarId (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X) ≪≫
     (sfIntrinsicModuleEquivalence X A).counitIso
 
-/-- The ordinary uncompleted unbounded derived inverse image, by exact termwise descent.
-Source: Stacks, Section 0735. -/
+/-- The ordinary uncompleted unbounded derived inverse image, by exact termwise descent. -/
 noncomputable abbrev sfIntrinsicDerivedPullback {X Y : Scheme.{u}} (f : X ⟶ Y) :
     proEtaleDerivedCategory Y A ⥤ proEtaleDerivedCategory X A :=
   (sfIntrinsicPullback A f).mapDerivedCategory

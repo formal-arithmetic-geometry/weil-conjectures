@@ -22,7 +22,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.RootSplitStrictLocalOrbits
 
 /-! # Cyclic root charts over the strict local limit
 
-Source: Stacks Project, Tag 0EYG.
+## References
+
+* Stacks Project, Tag 0EYG
+* Stacks Project, Tag 0EYG, strict henselization and intermediate-root paragraphs
+* Tags 02LA and 02VN for descent from the punctured root cover
 -/
 
 @[expose] public section
@@ -33,9 +37,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- The affine finite-presentation cover has a cyclic root model over an ind-etale local limit.
-
-Source: Stacks Project, Tag 0EYG, strict henselization and intermediate-root paragraphs;
-Tags 02LA and 02VN for descent from the punctured root cover. -/
+-/
 theorem root_split_cover_indEtale_charts
     (R : CommRingCat.{u}) (g : R) (n : ℕ) (hn : 0 < n ∧ IsUnit (n : R))
     [IsRegularRing R] (hg : IsSMulRegular R g)

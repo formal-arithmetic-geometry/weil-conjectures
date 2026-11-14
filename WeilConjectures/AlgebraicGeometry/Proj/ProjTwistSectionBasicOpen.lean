@@ -14,8 +14,6 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
 /-!
 # Homogeneous twist sections and standard opens on the invertibility locus
 
-Source: Stacks Project, Constructions, Tags 01MU, 01MV and 01MW (5)--(7).
-
 ## Main definitions
 
 * `AlgebraicGeometry.Proj.twistSectionOnOpen`: the canonical homogeneous section restricted
@@ -27,6 +25,10 @@ Source: Stacks Project, Constructions, Tags 01MU, 01MV and 01MW (5)--(7).
 
 * `AlgebraicGeometry.Proj.twistSectionBasicOpen`: equality of the section locus with the
   standard open, and the basis and affine basis assertions on every open in `W_d`.
+
+## References
+
+* Stacks Project, Constructions, Tags 01MU, 01MV and 01MW (5)--(7)
 -/
 
 @[expose] public section

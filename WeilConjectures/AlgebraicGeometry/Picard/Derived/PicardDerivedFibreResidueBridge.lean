@@ -26,7 +26,12 @@ public import WeilConjectures.AlgebraicGeometry.Affine.AffineResidueModelNatural
 
 This is the model-selection part of the proof of
 `picard_derived_fibre_naturality`; its output is deliberately stated before
-the geometric cohomology comparisons. -/
+the geometric cohomology comparisons.
+
+## References
+
+* Stacks Project, Tags 01IB, 064K, 06YJ and 0B91
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -36,8 +41,7 @@ namespace AlgebraicGeometry.Scheme
 
 set_option linter.unusedVariables false in
 set_option linter.style.haveILetI false in
-/-- Choose common affine residue models and representatives for the finite family.
-Source: Stacks Project, Tags 01IB, 064K, 06YJ and 0B91 -/
+/-- Choose common affine residue models and representatives for the finite family. -/
 theorem picard_derived_fibre_residue_bridge
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

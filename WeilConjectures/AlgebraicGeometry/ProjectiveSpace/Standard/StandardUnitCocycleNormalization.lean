@@ -12,7 +12,10 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Standard.StandardUnitCo
 /-!
 # Normalizing unit cocycles on the standard projective-space cover
 
-Source: Stacks Project, Tag 0BXJ.
+## References
+
+* Stacks Project, Tag 0BXJ
+* Stacks Project, Tag 0BXJ, the double- and triple-overlap calculations
 -/
 
 @[expose] public section
@@ -28,9 +31,7 @@ namespace AlgebraicGeometry.ProjectiveSpace
 
 /-- A cocycle of units on the standard cover, with at least three homogeneous
 coordinates, differs from a standard integer transition cocycle by chart units.
-This is a statement about functions, with no module sheaf or gluing conclusion.
-
-Source: Stacks Project, Tag 0BXJ, the double- and triple-overlap calculations. -/
+This is a statement about functions, with no module sheaf or gluing conclusion. -/
 theorem exists_standardUnitCocycle_normalization (k : Type u) [Field k]
     (r : ℕ) (hr : 3 ≤ r)
     (t : ∀ i j : ULift.{u} (Fin r),

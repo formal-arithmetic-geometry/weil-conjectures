@@ -18,8 +18,12 @@ import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank
 /-!
 # A standard model of a projective-bundle fibre with its tautological line
 
-Source: Stacks Project, Constructions, Tags 01OA and 01OE;
-EGA II, Remark 4.2.7, residue-field normalization.
+## References
+
+* Stacks Project, Constructions, Tags 01OA and 01OE
+* EGA II, Remark 4.2.7, residue-field normalization
+* EGA II, Remark 4.2.7, field normalization
+* the tensor-power convention is Tag 01CR
 -/
 
 @[expose] public section
@@ -68,10 +72,7 @@ private noncomputable def inverse_pullback_iso {X Y : Scheme.{u}} (e : X ≅ Y)
 
 /-- A basis of E at s identifies the scheme-theoretic fibre with standard
 projective space and the pulled-back normalized line with the standard degree-one
-twist. There is no assertion about arbitrary invertible modules or other powers.
-
-Source: Stacks Project, Constructions, Tags 01OA and 01OE; EGA II,
-Remark 4.2.7, field normalization; the tensor-power convention is Tag 01CR. -/
+twist. There is no assertion about arbitrary invertible modules or other powers. -/
 theorem exists_projective_bundle_fiber_twist_model (S : Scheme.{u}) (E : S.Modules)
     [E.IsQuasicoherent] (r : ℕ)
     [SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u} E r] (hr : 2 ≤ r)

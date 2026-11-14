@@ -22,7 +22,11 @@ import Mathlib.RingTheory.Nakayama
 
 /-! # RootNormalizationGenericStalkMaximalIdeal
 
-Source: Stacks Project, Tags 09EB, 0BRM and 0EYG. -/
+## References
+
+* Stacks Project, Tags 09EB, 0BRM and 0EYG
+* Stacks Project, 0BRM (lemma-abhyankar), 0307, and 09E7
+-/
 
 @[expose] public section
 universe u
@@ -30,9 +34,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- The root extension makes the base maximal ideal generate each normalization
-stalk maximal ideal above the divisor generic point.
-
-Source: Stacks Project, 0BRM (lemma-abhyankar), 0307, and 09E7. -/
+stalk maximal ideal above the divisor generic point. -/
 theorem root_normalization_generic_stalk_maximalIdeal
     {L U : Scheme.{u}} (i : U ⟶ L)
     (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)

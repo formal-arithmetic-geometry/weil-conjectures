@@ -9,7 +9,12 @@ public import WeilConjectures.AlgebraicGeometry.RelativeMVMaps
 public import WeilConjectures.AlgebraicGeometry.MayerVietorisImageChainData
 import WeilConjectures.AlgebraicGeometry.Relative.RelativeMVDirectImageRowsCore
 
-/-! # Resolved relative short exact rows before tensor pullback -/
+/-! # Resolved relative short exact rows before tensor pullback
+
+## References
+
+* Stacks Project, Cohomology, Tags 08BV, 08HZ, 08FE and 08HY
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -17,8 +22,7 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-/-- A resolved relative comparison of short exact rows, before the cone-to-quotient passage.
-Source: Stacks Project, Cohomology, Tags 08BV, 08HZ, 08FE and 08HY. -/
+/-- A resolved relative comparison of short exact rows, before the cone-to-quotient passage. -/
 theorem relativeMV_direct_image_rows
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

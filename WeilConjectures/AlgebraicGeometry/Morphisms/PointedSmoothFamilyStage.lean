@@ -18,7 +18,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PointedSectionStageDescent
 /-!
 # Descent of a pointed smooth family to one Noetherian stage
 
-Source: Stacks Project, Tag 0EZJ, pointed family descent paragraph.
+## References
+
+* Stacks Project, Tag 0EZJ, pointed family descent paragraph
+* Stacks Project, Tag 0EZJ, family descent paragraph
+* Tags 01ZM, 0C0C and 055R
 -/
 
 @[expose] public section
@@ -165,9 +169,7 @@ private theorem exists_pointed_model {I : Type u} [SmallCategory I]
   · rw [← Category.assoc, hσUfac, hσ₀]
 
 /-- Descend only a single family and section, together with an invertible integer.
-The inverse system and its normality are supplied as input, not constructed here.
-
-Source: Stacks Project, Tag 0EZJ, family descent paragraph; Tags 01ZM, 0C0C and 055R. -/
+The inverse system and its normality are supplied as input, not constructed here. -/
 theorem exists_pointed_smooth_family_stage {I : Type u} [SmallCategory I]
     [IsCofiltered I] {S C : Scheme.{u}}
     (X : I ⥤ Scheme.{u}) (α : (Functor.const I).obj S ⟶ X)

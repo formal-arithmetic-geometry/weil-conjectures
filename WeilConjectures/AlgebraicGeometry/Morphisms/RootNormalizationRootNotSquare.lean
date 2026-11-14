@@ -18,7 +18,12 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.RootNormalizationDvrCompariso
 import WeilConjectures.AlgebraicGeometry.Morphisms.NormalizationStalkRegularBasicOpen
 import Mathlib.RingTheory.LocalRing.RingHom.Basic
 
-/-! # The tame root has nonzero first-order class -/
+/-! # The tame root has nonzero first-order class
+
+## References
+
+* Stacks Project, Tags 09EB, 0BRM, 09E7 and 0307
+-/
 
 @[expose] public section
 universe u
@@ -44,9 +49,7 @@ private theorem maximalIdeal_eq_span_of_equiv
   rw [← IsLocalRing.map_ringEquiv_maximalIdeal e, hs, Ideal.map_span,
     Set.image_singleton, he]
 
-/-- The image of the root does not belong to the square of the normalized maximal ideal.
-
-Source: Stacks Project, Tags 09EB, 0BRM, 09E7 and 0307 -/
+/-- The image of the root does not belong to the square of the normalized maximal ideal. -/
 theorem root_normalization_root_not_square
     {L U : Scheme.{u}} (i : U ⟶ L)
     (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)

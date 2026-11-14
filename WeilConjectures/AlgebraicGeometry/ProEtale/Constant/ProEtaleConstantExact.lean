@@ -56,13 +56,19 @@ import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
 /-!
 # Exact pullback of finite constant pro-etale left modules
 
-Source: Stacks Project, Tags 00WJ, 03D2, and 04JC.
-
 The coefficient categories are the recorded continuous-function ringed module categories.
 The small-model module Kan extension gives inverse image over the inverse-image ring;
 restriction along the inverse of the canonical coefficient map transports the action.
 The commutative comparison uses the recorded tensor pullback, with the canonical
 constant-preserving coefficient identifications written explicitly.
+
+## References
+
+* Stacks Project, Tags 00WJ, 03D2, and 04JC
+* Stacks Tag 03D2
+* Stacks Tags 00YV and 03D2
+* Stacks Tags 00W1 and 00YV
+* Stacks Tags 0H7J and 09A5
 -/
 
 @[expose] public section
@@ -93,13 +99,11 @@ noncomputable instance finiteCoefficientInverseImageMap_invertible :
     IsIso (finiteCoefficientInverseImageMap f Λ) :=
   finiteCoefficientInverseImageMap_isIso.{u} f Λ
 
-/-- The inverse-image coefficient ring on the original small site.
-Source: Stacks Tag 03D2. -/
+/-- The inverse-image coefficient ring on the original small site. -/
 noncomputable abbrev finiteCoefficientInverseRing :=
   (Scheme.proEtaleSheafInverseImage f RingCat.{u + 1}).obj (finiteCoefficientRingSheaf V Λ)
 
-/-- The ring adjunction unit on the small site models. Only the Hom universe is enlarged.
-Source: Stacks Tags 00YV and 03D2. -/
+/-- The ring adjunction unit on the small site models. Only the Hom universe is enlarged. -/
 noncomputable def finiteCoefficientModelRingUnit :
     ((AsSmall.down : Scheme.proEtaleSiteModel V ⥤ V.ProEt).sheafPushforwardContinuous
       RingCat.{u + 1} (Scheme.proEtaleModelTopology V) (Scheme.ProEt.topology V)).obj
@@ -116,8 +120,7 @@ noncomputable def finiteCoefficientModelRingUnit :
 /-- Inverse image of left modules over the inverse-image ring. Mathlib's module pullback
 is the module Kan extension followed by sheafification, along the actual ring unit.
 Its action is the inverse image of the original action under the product comparison.
-Transport to and from the equivalent small model retains every original site object.
-Source: Stacks Tag 03D2. -/
+Transport to and from the equivalent small model retains every original site object. -/
 noncomputable def finiteCoefficientModuleInverseImage :
     FiniteCoefficientModules V Λ ⥤ SheafOfModules.{u + 1} (finiteCoefficientInverseRing f Λ) :=
   Scheme.proEtaleModuleToModel (finiteCoefficientRingSheaf V Λ) ⋙
@@ -126,8 +129,7 @@ noncomputable def finiteCoefficientModuleInverseImage :
 
 /-- The specified pullback: transport the inverse-image action by c_f inverse.
 Thus r acts as c_f inverse(r), and on underlying abelian maps the functor is inverse image.
-No tensor product or multiplicative commutativity is required here.
-Source: Stacks Tag 03D2. -/
+No tensor product or multiplicative commutativity is required here. -/
 noncomputable def finiteCoefficientModulePullback :
     FiniteCoefficientModules V Λ ⥤ FiniteCoefficientModules U Λ :=
   finiteCoefficientModuleInverseImage f Λ ⋙
@@ -151,8 +153,7 @@ variable {U V : Scheme.{u}} (f : U ⟶ V) (Λ : Type (u + 1))
   [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ]
 
 /-- Compatibility of the commutative presentation with ring sheafification.
-This supplies the construction obligation of the canonical coefficient comparison below.
-Source: Stacks Tags 00W1 and 00YV. -/
+This supplies the construction obligation of the canonical coefficient comparison below. -/
 theorem finiteCoefficientCommRing_preservesSheafification (T : Scheme.{u}) :
     (Scheme.ProEt.topology T).PreservesSheafification
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}) :=
@@ -161,8 +162,7 @@ theorem finiteCoefficientCommRing_preservesSheafification (T : Scheme.{u}) :
 attribute [instance] finiteCoefficientCommRing_preservesSheafification
 
 set_option linter.unusedSectionVars false in
-/-- The canonical commutative coefficient map is invertible too.
-Source: Stacks Tags 0H7J and 09A5. -/
+/-- The canonical commutative coefficient map is invertible too. -/
 theorem finiteCoefficientCommRingMap_isIso :
     IsIso (Scheme.proEtaleConstantInverseImageMap f CommRingCat.{u + 1}
       (CommRingCat.of Λ)) := by

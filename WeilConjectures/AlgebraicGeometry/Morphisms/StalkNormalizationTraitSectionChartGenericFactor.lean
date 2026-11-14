@@ -26,7 +26,10 @@ import WeilConjectures.Mathlib.RingTheory.OrderOfVanishing.Noetherian
 /-!
 # Tame local chart and its generic section factor
 
-Source: Stacks Project, Tags 0EYH and 0EYI(2).
+## References
+
+* Stacks Project, Tags 0EYH and 0EYI(2)
+* Stacks Project, Tag 0EYH, and the transverse section construction in 0EYI(2)
 -/
 
 @[expose] public section
@@ -84,9 +87,7 @@ private theorem root_maximalIdeal {R : Type u} [CommRing R] [IsLocalRing R]
 
 set_option maxHeartbeats 2400000 in
 -- The dependent normalization stalks and the root presentation need this elaboration budget.
-/-- The tame local chart, before using splitting of the generic section fibre.
-
-Source: Stacks Project, Tag 0EYH, and the transverse section construction in 0EYI(2). -/
+/-- The tame local chart, before using splitting of the generic section fibre. -/
 theorem GaloisCover.stalk_normalization_trait_section_chart_generic_factor {S C : Scheme.{u}}
     [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]

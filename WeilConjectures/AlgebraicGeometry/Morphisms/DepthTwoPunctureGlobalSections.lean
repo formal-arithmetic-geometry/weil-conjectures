@@ -15,7 +15,10 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 /-! # Global sections on a depth-two punctured local spectrum
 
-Source: Stacks Project, Tags 0E9I, 0BK0, 00LK and 00KW.
+## References
+
+* Stacks Project, Tags 0E9I, 0BK0, 00LK and 00KW
+* Stacks Project, Tags 0AVY, 0BK0 and 0E9I
 -/
 
 @[expose] public section
@@ -117,9 +120,7 @@ private theorem depth_le_of_ringEquiv {R S : Type u} [CommRing R] [CommRing S]
       (Ideal.mem_map_of_mem _ (hmem r hr))
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Restriction to the punctured spectrum is bijective at depth at least two.
-
-Source: Stacks Project, Tags 0AVY, 0BK0 and 0E9I. -/
+/-- Restriction to the punctured spectrum is bijective at depth at least two. -/
 theorem depth_two_puncture_globalSections_bijective
     (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R]
     (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth (R := R) R)

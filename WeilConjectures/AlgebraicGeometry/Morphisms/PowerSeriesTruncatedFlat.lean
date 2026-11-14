@@ -14,7 +14,10 @@ import WeilConjectures.RingTheory.PowerSeriesQuotientVariables
 
 /-! # Flatness of truncated power-series algebras
 
-Source: Stacks Project, Tag 0EY9, finite monomial calculation.
+## References
+
+* Stacks Project, Tag 0EY9, finite monomial calculation
+* Stacks Project, Tag 0EY9, first displayed calculation at a finite index
 -/
 
 @[expose] public section
@@ -22,9 +25,7 @@ Source: Stacks Project, Tag 0EY9, finite monomial calculation.
 universe u
 namespace MvPowerSeries
 
-/-- The constants map to a finite total-degree truncation is flat.
-
-Source: Stacks Project, Tag 0EY9, first displayed calculation at a finite index. -/
+/-- The constants map to a finite total-degree truncation is flat. -/
 theorem truncated_constants_flat (A : Type u) [CommRing A] (d n : ℕ) :
     ((Ideal.Quotient.mk
       ((RingHom.ker (constantCoeff (σ := Fin d) (R := A))) ^ (n + 1))).comp

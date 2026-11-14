@@ -15,7 +15,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PointedSectionStageDescent
 /-!
 # Descent of a pointed finite torsor along affine inverse limits
 
-Source: Stacks Project, Tags 0EZJ, 0BTV and 01ZM.
+## References
+
+* Stacks Project, Tags 0EZJ, 0BTV and 01ZM
+* Stacks Project, Tag 0EZJ, last paragraph of the limit reduction
+* Lemma 58.14.1 (Tag 0BTV) and finite-presentation descent (Tag 01ZM)
 -/
 
 @[expose] public section
@@ -27,10 +31,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- Descend a finite torsor and a point above a compatible section. The two inverse
-systems need only be qcqs with affine transitions, and need not be Noetherian or normal.
-
-Source: Stacks Project, Tag 0EZJ, last paragraph of the limit reduction; Lemma 58.14.1
-(Tag 0BTV) and finite-presentation descent (Tag 01ZM). -/
+systems need only be qcqs with affine transitions, and need not be Noetherian or normal. -/
 theorem GaloisCover.exists_pointed_stage_of_affine_limits
     {I : Type u} [SmallCategory I] [IsCofiltered I] (D K : I ⥤ Scheme.{u})
     (hDqc : ∀ i, CompactSpace (D.obj i)) (hDqs : ∀ i, QuasiSeparatedSpace (D.obj i))

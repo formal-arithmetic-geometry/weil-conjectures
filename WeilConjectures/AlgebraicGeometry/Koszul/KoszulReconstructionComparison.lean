@@ -18,7 +18,11 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortE
 The strict completed Koszul augmentation and the exact-products Roos comparison
 are assembled on K-flat complexes, then descended along localization. The unit
 calculation uses the independent characterization of the quotient completion unit.
-Source: Stacks Tags 091N, 0941 and 099M.
+
+## References
+
+* Stacks Tags 091N, 0941 and 099M
+* Stacks Tags 091N, 099M and 0941
 -/
 
 @[expose] public noncomputable section
@@ -171,8 +175,7 @@ attribute [local irreducible] completedAdicOrdinaryTower completedAdicReductionD
 variable (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
 /-- The strict comparison part of Koszul reconstruction: the completed Koszul derived
 functor is naturally isomorphic to the derived quotient limit, with the prescribed unit
- equality.
-Source: Stacks Tags 091N, 099M and 0941. -/
+ equality. -/
 theorem koszulReconstructionComparison (r : ℕ) (a : Fin r → A)
     (_ha : Ideal.span (Set.range a) = d.ideal) :
     ∃ c : reconstructionKoszulDerivedFunctor T d r a ≅

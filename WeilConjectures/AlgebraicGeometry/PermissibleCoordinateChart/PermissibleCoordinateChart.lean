@@ -24,12 +24,15 @@ import WeilConjectures.Blowup.Affine.Principalization
 /-!
 # Regularity and coordinate intersections on a permissible blowup chart
 
-Source: Illusie--Laszlo--Orgogozo, Travaux de Gabber, Expose VIII, Lemma 4.2.9, printed p. 121, and
-Remark 4.2.2(i), printed p. 118.
-
 The auxiliary definitions are the displayed presentation and its coordinate equations.
 Reduced unions are expressed by radical ideals. Strict transforms use the existing
 scheme-theoretic closure construction, rather than topological closures.
+
+## References
+
+* Illusie--Laszlo--Orgogozo, Travaux de Gabber, Expose VIII, Lemma 4.2.9, printed p. 121, and Remark
+  4.2.2(i), printed p. 118
+* ILO VIII, Lemma 4.2.9, p. 121
 -/
 
 @[expose] public section
@@ -46,13 +49,11 @@ namespace AlgebraicGeometry.PermissibleCoordinateChart
 
 variable {R : Type u} [CommRing R] {d : ℕ}
 
-/-- The exceptional hyperplane together with the strict transforms indexed by `I`.
-Source: ILO VIII, Lemma 4.2.9, p. 121. -/
+/-- The exceptional hyperplane together with the strict transforms indexed by `I`. -/
 def labels (I : Finset (Fin d)) (j : Fin d) : Finset (Option (Fin d)) :=
   insert none ((I.erase j).image some)
 
-/-- The closed immersion of a coordinate hyperplane in the base.
-Source: ILO VIII, Lemma 4.2.9, p. 121. -/
+/-- The closed immersion of a coordinate hyperplane in the base. -/
 def hyperplane (a : R) : Spec (.of (R ⧸ (Ideal.span {a} : Ideal R))) ⟶ Spec (.of R) :=
   Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (Ideal.span {a} : Ideal R)))
 

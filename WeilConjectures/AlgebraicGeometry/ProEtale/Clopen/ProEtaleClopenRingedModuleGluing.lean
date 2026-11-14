@@ -30,10 +30,15 @@ import Mathlib.Algebra.Category.Grp.FilteredColimits
 /-!
 # Module gluing on a finite clopen pro-etale partition
 
-Source: Stacks Project, Tags 04TQ, 04TR and 04TS, finite-disjoint module expansion.
-
 The restriction helpers below are the existing continuous pushforward constructions.
 The gluing theorem specifies its inverse on sections, morphisms and restriction maps.
+
+## References
+
+* Stacks Project, Tags 04TQ, 04TR and 04TS, finite-disjoint module expansion
+* Stacks Project, Tag 04TR
+* Stacks Project, Tag 04TS
+* Stacks Project, Tags 04TQ, 04TR, 04TS and 03DB
 -/
 
 @[expose] public noncomputable section
@@ -49,35 +54,30 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme.ProEt
 
-/-- Restriction of ring sheaves along composition into a weakly etale open subscheme.
-Source: Stacks Project, Tag 04TR. -/
+/-- Restriction of ring sheaves along composition into a weakly etale open subscheme. -/
 abbrev clopenRingRestriction {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j] :=
   (MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale j)).sheafPushforwardContinuous
     RingCat.{u} (topology Y) (topology X)
 
-/-- Restriction of module sheaves, with the unchanged sectionwise scalar actions.
-Source: Stacks Project, Tag 04TR. -/
+/-- Restriction of module sheaves, with the unchanged sectionwise scalar actions. -/
 abbrev clopenModuleRestriction {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology X) RingCat.{u}) :
     ringedSiteModules.{v} R ⥤ ringedSiteModules.{v} ((clopenRingRestriction j).obj R) :=
   SheafOfModules.pushforward (F := MorphismProperty.Over.map ⊤
     (inferInstance : WeaklyEtale j)) (𝟙 _)
 
-/-- The component of a test object, as an object of the component's own pro-etale site.
-Source: Stacks Project, Tag 04TR. -/
+/-- The component of a test object, as an object of the component's own pro-etale site. -/
 abbrev clopenTestPiece {X Y : Scheme.{t}} (j : Y ⟶ X) (U : X.ProEt) : Y.ProEt :=
   (MorphismProperty.Over.pullback @WeaklyEtale ⊤ j).obj U
 
-/-- The component projection into the ambient test object.
-Source: Stacks Project, Tag 04TR. -/
+/-- The component projection into the ambient test object. -/
 def clopenTestInclusion {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (U : X.ProEt) :
     (MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale j)).obj
       (clopenTestPiece j U) ⟶ U :=
   MorphismProperty.Over.homMk (pullback.fst U.hom j) pullback.condition
 
-/-- Additivity of restriction, used to form the component short complexes.
-Source: Stacks Project, Tag 04TR. -/
+/-- Additivity of restriction, used to form the component short complexes. -/
 theorem clopenModuleRestriction_additive {X Y : Scheme.{t}} (j : Y ⟶ X)
     [IsOpenImmersion j] (R : Sheaf (topology X) RingCat.{u}) :
     (clopenModuleRestriction.{t, u, v} j R).Additive := by
@@ -88,16 +88,14 @@ theorem clopenModuleRestriction_additive {X Y : Scheme.{t}} (j : Y ⟶ X)
 
 attribute [instance] clopenModuleRestriction_additive
 
-/-- Restriction to all members of a finite clopen family.
-Source: Stacks Project, Tag 04TS. -/
+/-- Restriction to all members of a finite clopen family. -/
 abbrev clopenRestriction {X : Scheme.{t}} {I : Type w} {Y : I → Scheme.{t}}
     (j : ∀ i, Y i ⟶ X) [∀ i, IsOpenImmersion (j i)]
     (R : Sheaf (topology X) RingCat.{u}) :=
   Functor.pi' (fun i ↦ clopenModuleRestriction.{t, u, v} (j i) R)
 
 /-- The diagonal identification of a component object with its own base change.
-This is the unit of the actual composition/base-change adjunction.
-Source: Stacks Project, Tag 04TS. -/
+This is the unit of the actual composition/base-change adjunction. -/
 abbrev clopenDiagonal {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (W : Y.ProEt) :=
   (MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ j
@@ -728,9 +726,7 @@ private theorem equivalenceCoordinateDecomposition
 The section equivalences specify the product formula for G, its componentwise maps,
 its scalar action, its restriction maps, the restriction unit and the projection counit.
 The functors e_i are characterized as G applied to a tuple supported in coordinate i.
-The bicone with vertex the identity is the natural direct-sum decomposition.
-
-Source: Stacks Project, Tags 04TQ, 04TR, 04TS and 03DB. -/
+The bicone with vertex the identity is the natural direct-sum decomposition. -/
 theorem clopen_ringed_module_gluing
     (X : Scheme.{t}) (I : Type w) [Finite I] (Y : I → Scheme.{t})
     (j : ∀ i, Y i ⟶ X) [∀ i, IsOpenImmersion (j i)] [∀ i, IsClosedImmersion (j i)]

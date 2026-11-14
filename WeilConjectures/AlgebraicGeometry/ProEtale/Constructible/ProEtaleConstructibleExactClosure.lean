@@ -13,7 +13,10 @@ import all WeilConjectures.AlgebraicGeometry.Constructible.ConstructibleCoeffici
 /-!
 # Exactness closure of globally constructible pro-etale sheaves
 
-Source: Stacks Project, Tags 09B5, 03RZ and 093U.
+## References
+
+* Stacks Project, Tags 09B5, 03RZ and 093U
+* Stacks Project, Tags 09B5 and 093U, with the common global partition argument of Tag 03RZ
 -/
 
 @[expose] public section
@@ -25,9 +28,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- Constructible module sheaves over a finite ring are closed under kernels,
-cokernels and extensions, for the global finite-partition convention.
-Source: Stacks Project, Tags 09B5 and 093U, with the common global partition
-argument of Tag 03RZ. -/
+cokernels and extensions, for the global finite-partition convention. -/
 theorem constructibleProEtale_exactClosure
     (Y : Scheme.{u}) (A : Type u) [CommRing A] [Finite A] :
     (∀ (F G : proEtaleRingModules Y (proEtaleConstantRing Y A)) (f : F ⟶ G),

@@ -12,7 +12,10 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.AffineTorsorSplitActio
 
 /-! # Invariant morphisms on an affine basic open
 
-Source: Stacks Project, Tag 03SF, affine stabilizer quotient calculation.
+## References
+
+* Stacks Project, Tag 03SF, affine stabilizer quotient calculation
+* Stacks Project, Tag 03SF, affine calculation for the stabilizer quotient
 -/
 
 @[expose] public section
@@ -21,9 +24,7 @@ set_option autoImplicit false
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- An invariant morphism to an affine scheme factors uniquely through the fixed subring.
-
-Source: Stacks Project, Tag 03SF, affine calculation for the stabilizer quotient. -/
+/-- An invariant morphism to an affine scheme factors uniquely through the fixed subring. -/
 theorem affine_invariant_basic_open_descent
     (H : CommRingCat.{u}) (C : Type u) [CommRing C] [Algebra H C] [IsDomain C]
     (h : H) (hne : algebraMap H C h ≠ 0)

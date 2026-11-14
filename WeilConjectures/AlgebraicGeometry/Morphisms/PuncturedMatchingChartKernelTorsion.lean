@@ -11,7 +11,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedMatchingChartSection
 
 /-! # Kernel torsion for the punctured matching projection
 
-Source: Stacks Project, Tags 0BLH and 05ER, localized chart comparison.
+## References
+
+* Stacks Project, Tags 0BLH and 05ER, localized chart comparison
+* Stacks Project, Tag 05ER, the localized chart comparison in its proof, using 05EP and 05EQ
+* the geometric charts are those of Tag 0BLH
 -/
 
 @[expose] public section
@@ -60,10 +64,7 @@ private theorem principalOpen_image
     inf_eq_right.mpr hf]
   exact SpecMap_preimage_basicOpen D.baseMap f
 
-/-- A matching section vanishing on the f-chart is killed by a power of f.
-
-Source: Stacks Project, Tag 05ER, the localized chart comparison in its proof,
-using 05EP and 05EQ; the geometric charts are those of Tag 0BLH. -/
+/-- A matching section vanishing on the f-chart is killed by a power of f. -/
 theorem puncturedMatching_chart_kernel_torsion
     {A : Type u} [CommRing A] [IsNoetherianRing A] [IsLocalRing A]
     {U : (Spec (.of A)).Opens}

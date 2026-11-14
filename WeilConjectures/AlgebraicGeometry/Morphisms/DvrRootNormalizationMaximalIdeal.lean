@@ -18,7 +18,12 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.DvrGaloisComponentsRootCotang
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.RingTheory.Nakayama
 
-/-! # The index-one part of the DVR root calculation -/
+/-! # The index-one part of the DVR root calculation
+
+## References
+
+* Stacks Project, Tags 09EV, 09EB, 0BRM, 09E7, and 0307
+-/
 
 @[expose] public section
 universe u
@@ -26,9 +31,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 set_option linter.unusedVariables false in
-/-- Adjoining a group-order root of a DVR uniformizer kills the ramification of a torsor.
-
-Source: Stacks Project, Tags 09EV, 09EB, 0BRM, 09E7, and 0307 -/
+/-- Adjoining a group-order root of a DVR uniformizer kills the ramification of a torsor. -/
 theorem dvr_root_normalization_maximalIdeal
     (B : CommRingCat.{u}) [IsDomain B] [IsDiscreteValuationRing B]
     (pi : B) (hpi : Irreducible pi)

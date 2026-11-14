@@ -14,8 +14,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Ringed.ProEtaleRingedOpenCompa
 
 /-!
 # Compact-support image on ringed pro-etale sites
-
-Source: proper base change, definition 1268.
 -/
 
 @[expose] public noncomputable section
@@ -70,20 +68,17 @@ private theorem openRestriction_exactLeftAdjoint :
   exact ⟨_, ⟨ap⟩, inferInstance⟩
 
 /-- Restriction along an open immersion has extension by zero as its left adjoint.
-This universal property determines extension by zero up to its unique adjoint isomorphism.
-Source: proper base change, definition 1268. -/
+This universal property determines extension by zero up to its unique adjoint isomorphism. -/
 @[instance] theorem proEtaleOpenRestriction_isRightAdjoint :
     (proEtaleRingModulePullback j R S c).IsRightAdjoint := by
   obtain ⟨L, ⟨a⟩, _⟩ := openRestriction_exactLeftAdjoint j R S c
   exact a.isRightAdjoint
 
-/-- Extension by zero, specified by its adjoint universal property to actual restriction.
-Source: proper base change, definition 1268. -/
+/-- Extension by zero, specified by its adjoint universal property to actual restriction. -/
 def proEtaleRingOpenExtension : proEtaleRingModules X S ⥤ proEtaleRingModules Z R :=
   (proEtaleRingModulePullback j R S c).leftAdjoint
 
-/-- Extension by zero is additive and exact.
-Source: proper base change, definition 1268. -/
+/-- Extension by zero is additive and exact. -/
 theorem proEtaleRingOpenExtension_exact :
     (proEtaleRingOpenExtension j R S c).Additive ∧
       PreservesFiniteLimits (proEtaleRingOpenExtension j R S c) ∧
@@ -97,29 +92,27 @@ theorem proEtaleRingOpenExtension_exact :
     a.leftAdjoint_preservesColimits
   exact ⟨a.left_adjoint_additive, hlim, inferInstance⟩
 
-/-- Additivity of extension by zero. Source: proper base change, definition 1268. -/
+/-- Additivity of extension by zero. -/
 instance proEtaleRingOpenExtension_additive :
     (proEtaleRingOpenExtension j R S c).Additive :=
   (proEtaleRingOpenExtension_exact j R S c).1
 
-/-- Left exactness of extension by zero. Source: proper base change, definition 1268. -/
+/-- Left exactness of extension by zero. -/
 instance proEtaleRingOpenExtension_limits :
     PreservesFiniteLimits (proEtaleRingOpenExtension j R S c) :=
   (proEtaleRingOpenExtension_exact j R S c).2.1
 
-/-- Right exactness of extension by zero. Source: proper base change, definition 1268. -/
+/-- Right exactness of extension by zero. -/
 instance proEtaleRingOpenExtension_colimits :
     PreservesFiniteColimits (proEtaleRingOpenExtension j R S c) :=
   (proEtaleRingOpenExtension_exact j R S c).2.2
 
-/-- Exact termwise extension by zero on the full unbounded derived category.
-Source: proper base change, definition 1268. -/
+/-- Exact termwise extension by zero on the full unbounded derived category. -/
 abbrev proEtaleRingDerivedOpenExtension :=
   (proEtaleRingOpenExtension j R S c).mapDerivedCategory
 
 /-- Compact-support image for the chosen quasi-compact open / proper factorization.
-For proper f, Compactification.ofIsProper f is its identity compactification.
-Source: proper base change, definition 1268. -/
+For proper f, Compactification.ofIsProper f is its identity compactification. -/
 def proEtaleRingCompactSupportImage {Y : Scheme.{u}} {f : X ⟶ Y}
     (d : Compactification f) [QuasiCompact d.i]
     (RY : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})

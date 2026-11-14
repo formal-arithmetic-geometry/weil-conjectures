@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.ProEtaleComparisonS
 
 /-! # The section-valued comparison sheaf functor
 
-Source: Stacks Project, Tag 0GLZ.
+## References
+
+* Stacks Project, Tag 0GLZ
 -/
 
 @[expose] public section

@@ -10,7 +10,10 @@ public import Mathlib.CategoryTheory.Whiskering
 
 /-! # Transport of compactification words through fixed realizations
 
-Source: Stacks 0F7J--0F7K, conjugation by the fixed realization equivalences.
+## References
+
+* Stacks 0F7J--0F7K, conjugation by the fixed realization equivalences
+* Stacks 0F7K
 -/
 
 @[expose] public noncomputable section
@@ -137,8 +140,7 @@ theorem support_map (X Y : {X : Scheme.{u} // A X}) {f : X.val ⟶ Y.val}
   rw [← Category.assoc, ← h]
   simp
 
-/-- Left identity for native composition.
-Source: Stacks 0F7K. -/
+/-- Left identity for native composition. -/
 theorem composition_left (X Y : {X : Scheme.{u} // A X}) (f : X.val ⟶ Y.val)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
     (c : Compactification f) (hc : A c.Z)

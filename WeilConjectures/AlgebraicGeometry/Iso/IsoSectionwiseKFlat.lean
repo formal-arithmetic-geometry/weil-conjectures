@@ -226,7 +226,12 @@ import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
 
 /-! # K-flatness under sectionwise reindexing
 
-Source: Stacks Project, Tag 06YN.
+## References
+
+* Stacks Project, Tag 06YN
+* Stacks Project, Modules on Sites, Tag 03D2
+* Cohomology on Sites, Tag 0DEP
+* Stacks Project
 -/
 
 @[expose] public section
@@ -241,7 +246,6 @@ attribute [local instance 2000] SheafOfModules.hasSheafify_coefficientUniverse
 attribute [local instance 2000] SheafOfModules.wEqualsLocallyBijective_coefficientUniverse
 
 /-- The explicit algebraic presentation of sectionwise inverse image.
-Source: Stacks Project, Modules on Sites, Tag 03D2; Cohomology on Sites, Tag 0DEP.
 The ring identification is induced by `c`, and the underlying module identification
 is the identity. The scalar graph follows by cancelling `c` with its inverse. -/
 private noncomputable def sectionwiseAlgebraicLift
@@ -315,9 +319,7 @@ private noncomputable def sectionwiseAlgebraicLift
     exact h _ x
 
 /-- Sectionwise inverse image with an invertible coefficient identification preserves
-K-flat complexes for the independent-coefficient tensor predicate.
-
-Source: Stacks Project. -/
+K-flat complexes for the independent-coefficient tensor predicate. -/
 theorem isoSectionwiseModuleInverseImage_preservesKFlat
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [EssentiallySmall.{u + 1} X.ProEt] [EssentiallySmall.{u + 1} Y.ProEt]

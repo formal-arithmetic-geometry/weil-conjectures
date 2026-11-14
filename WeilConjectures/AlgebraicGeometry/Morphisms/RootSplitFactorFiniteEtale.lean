@@ -17,8 +17,11 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
 
 /-! # Finite etale descent along the punctured root cover
 
-Source: Stacks Project, Tags 02LA and 02VN, finite and etale fpqc descent applied to the punctured
-root cover in Tag 0EYG.
+## References
+
+* Stacks Project, Tags 02LA and 02VN, finite and etale fpqc descent applied to the punctured root
+  cover in Tag 0EYG
+* Stacks Project, Tags 02LA and 02VN, applied to the punctured cover in Tag 0EYG
 -/
 
 @[expose] public section
@@ -28,10 +31,7 @@ set_option autoImplicit false
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- Finiteness and etaleness descend from a splitting over a punctured root cover.
-
-Source: Stacks Project, Tags 02LA and 02VN, applied to the punctured cover in
-Tag 0EYG. -/
+/-- Finiteness and etaleness descend from a splitting over a punctured root cover. -/
 theorem root_split_factor_finite_etale
     (R : CommRingCat.{u}) (g : R) (n : ℕ) (hn : 0 < n ∧ IsUnit (n : R))
     {Y : Scheme.{u}} (p : Y ⟶ Spec R)

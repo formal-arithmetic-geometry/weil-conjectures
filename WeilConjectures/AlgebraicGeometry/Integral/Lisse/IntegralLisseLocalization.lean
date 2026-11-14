@@ -16,7 +16,9 @@ import Mathlib.CategoryTheory.Sites.EpiMono
 /-!
 # The canonical localization cocone
 
-Source: Bhatt--Scholze, Lemma 6.8.2(2), p. 59.
+## References
+
+* Bhatt--Scholze, Lemma 6.8.2(2), p. 59
 -/
 
 @[expose] public noncomputable section

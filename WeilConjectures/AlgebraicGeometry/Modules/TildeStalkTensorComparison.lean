@@ -16,7 +16,11 @@ import Mathlib.RingTheory.Localization.BaseChange
 /-!
 # Tensor comparison for affine tilde stalk modules
 
-Source: Stacks Project, Schemes, Tag 01HV, and More on Algebra, Tag 06Y1.
+## References
+
+* Stacks Project, Schemes, Tag 01HV, and More on Algebra, Tag 06Y1
+* Stacks Project, Schemes, Tag 01HV, item (7), and More on Algebra, Tag 06Y1, as used in Perfect
+  Complexes, Tag 08DV
 -/
 
 @[expose] public section
@@ -101,9 +105,7 @@ private theorem stalk_map_toStalk (A : Type u) [CommRing A]
 
 /-- The tensor comparison
 for individual associated-sheaf stalks is natural in both modules. No acyclicity
-or K-flatness assumption is needed.
-Source: Stacks Project, Schemes, Tag 01HV, item (7), and More on Algebra, Tag 06Y1, as used in
-Perfect Complexes, Tag 08DV. -/
+or K-flatness assumption is needed. -/
 theorem nonempty_restrictScalars_tensor_tildeStalkNatIso
     (A : Type u) [CommRing A] (x : Spec (.of A)) :
     let S := tilde.functor (.of A) ⋙

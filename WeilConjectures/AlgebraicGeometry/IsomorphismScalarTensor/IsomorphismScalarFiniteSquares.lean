@@ -12,7 +12,9 @@ import all WeilConjectures.AlgebraicGeometry.Iso.IsoSectionwiseInverseImage
 
 /-! # Commutative squares for the finite scalar model
 
-Source: Stacks Project, Tags 03EK and 03EL.
+## References
+
+* Stacks Project, Tags 03EK and 03EL
 -/
 
 @[expose] public noncomputable section

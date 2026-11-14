@@ -19,7 +19,13 @@ import WeilConjectures.RingTheory.RegularRingNormal
 import WeilConjectures.RingTheory.FiniteProductNormal
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 
-/-! Normality of full root algebras along a regular divisor. -/
+/-! Normality of full root algebras along a regular divisor.
+
+## References
+
+* Stacks Project, Tag 0EYH, local ring verification in its proof
+* Tag 0EYG, the full root algebra in the strictly henselian calculation
+-/
 
 @[expose] public section
 
@@ -81,10 +87,7 @@ private theorem regular_root_localization_of_derivative_not_mem
     (IsLocalization.algEquiv q.primeCompl (L ⧸ I.map a)
       (Localization.AtPrime q)).toRingEquiv
 
-/-- Full root models of a regular divisor have normal domain stalks.
-
-Source: Stacks Project, Tag 0EYH, local ring verification in its proof;
-Tag 0EYG, the full root algebra in the strictly henselian calculation. -/
+/-- Full root models of a regular divisor have normal domain stalks. -/
 theorem regular_divisor_root_model_normal
     (R : CommRingCat.{u}) [IsRegularRing R] (m : ℕ) (f : R)
     (hf : IsSMulRegular R f) [IsRegularRing (R ⧸ Ideal.span {f})]

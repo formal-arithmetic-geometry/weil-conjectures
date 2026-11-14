@@ -16,10 +16,13 @@ import WeilConjectures.CategoryTheory.FiniteOpenMixedTensorRepresentativeCounitT
 /-!
 # The forward cochain tensor counit square for general coefficients
 
-Source: Stacks Project, Tag 07A4, tensor pullback comparison.
 This is the coefficient-generic form of
 `AlgebraicGeometry.ProEtale.MixedRepForward.forward_transport`; stating it for an
 abstract coefficient category keeps elaboration and kernel checking cheap.
+
+## References
+
+* Stacks Project, Tag 07A4, tensor pullback comparison
 -/
 
 @[expose] public section

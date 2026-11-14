@@ -16,7 +16,10 @@ import Mathlib.AlgebraicGeometry.Limits
 
 /-! # Sections of covers of finite algebras over a strictly henselian ring
 
-Source: Stacks Project, Tags 04GH and 04GK.
+## References
+
+* Stacks Project, Tags 04GH and 04GK
+* Stacks Project, Tags 04GH, 04GK and 0EYG
 -/
 
 @[expose] public section
@@ -27,9 +30,7 @@ namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A surjective étale morphism to a finite algebra over a strictly henselian local
-ring admits a section.
-
-Source: Stacks Project, Tags 04GH, 04GK and 0EYG. -/
+ring admits a section. -/
 theorem finite_strict_henselian_algebra_etale_section
     (H A : Type u) [CommRing H] [IsStrictlyHenselianLocalRing H]
     [CommRing A] [Algebra H A] [Module.Finite H A]

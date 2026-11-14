@@ -40,8 +40,7 @@ attribute [local reducible] derivedScalars moduleObjectDerivedPullback
   moduleObjectDerivedPushforward
 
 /-- The second trace exchange is the native exchange followed by the direct
-image of its line comparison.
-Source: the defining exchange in the second rational P1 triangle. -/
+image of its line comparison. -/
 theorem secondTraceExchange_eq_native
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

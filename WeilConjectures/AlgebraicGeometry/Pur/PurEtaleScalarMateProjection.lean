@@ -19,7 +19,13 @@ import WeilConjectures.AlgebraicGeometry.Scalar.ScalarPullbackIsoUniqueness
 /-!
 # Restriction of the derived coefficient mate equals the projection morphism
 
-Source: Stacks Project, Tag 0GL6, Tags 07A4, 0G7E and 07A7.
+## References
+
+* Stacks Project, Tag 0GL6, Tags 07A4, 0G7E and 07A7
+* Stacks 07A4, 0G7E and 07A7
+* Stacks 07A4 and 0G7E
+* Stacks 0GL6
+* sites-cohomology.tex 07A4, 0G7E and 07A7
 -/
 
 @[expose] public noncomputable section
@@ -117,8 +123,7 @@ private theorem scalar_natTrans_ext
   apply (cancel_epi (F.map (_root_.DerivedCategory.Q.map π))).1
   rw [α.naturality, β.naturality, h P hP]
 
-/-- The canonical scalar/pullback comparison is uniquely normalized on K-flat models.
-Source: Stacks 07A4, 0G7E and 07A7. -/
+/-- The canonical scalar/pullback comparison is uniquely normalized on K-flat models. -/
 theorem scalarPullbackIso_existsUnique
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {Z W : Scheme.{u}} (f : Z ⟶ W) :
@@ -139,8 +144,7 @@ theorem scalarPullbackIso_existsUnique
   intro d hd
   exact (scalarPullbackIso_unique φ f (c := c) (d := d) hc hd).symm
 
-/-- The uniquely normalized derived scalar/pullback isomorphism.
-Source: Stacks 07A4 and 0G7E. -/
+/-- The uniquely normalized derived scalar/pullback isomorphism. -/
 def scalarPullbackIso
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {Z W : Scheme.{u}} (f : Z ⟶ W) :
@@ -149,8 +153,7 @@ def scalarPullbackIso
   (scalarPullbackIso_existsUnique φ f).choose
 
 /-- The B-linear scalar-change mate; its components are precisely the transposes
-of the scalar extension of the A-geometric counit after scalarPullbackIso.
-Source: Stacks 0GL6. -/
+of the scalar extension of the A-geometric counit after scalarPullbackIso. -/
 def scalarMate
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {Z W : Scheme.{u}} (f : Z ⟶ W) :
@@ -214,8 +217,7 @@ private theorem scalar_tensor_pullback_square
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- After canonical scalar/tensor and restriction/direct-image identifications,
-the coefficient mate is the specified projection morphism, naturally in J.
-Source: sites-cohomology.tex 07A4, 0G7E and 07A7. -/
+the coefficient mate is the specified projection morphism, naturally in J. -/
 theorem scalarMate_restrict_eq_projection
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {Z W : Scheme.{u}} (f : Z ⟶ W)

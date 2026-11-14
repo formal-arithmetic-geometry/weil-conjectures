@@ -20,7 +20,13 @@ open CategoryTheory Opposite
 namespace AlgebraicGeometry.Scheme
 
 /-! The algebraic core: a module with no nonzero element annihilated by the
-maximal ideal has no maximal associated prime. -/
+maximal ideal has no maximal associated prime.
+
+## References
+
+* Stacks Project, Tag 0AVN, finite basic-open cover argument
+* Tags 01LC and 05AM
+-/
 private theorem no_maximal_associated_of_annihilator_zero
     {R M : Type u} [CommRing R] [IsNoetherianRing R] [IsLocalRing R]
     [AddCommGroup M] [Module R M]
@@ -35,9 +41,7 @@ private theorem no_maximal_associated_of_annihilator_zero
   exact hp.ne_top (he.trans (by simp))
 
 /-- The maximal ideal is not associated to a boundary localization of a submodule
-of restriction sections.
-
-Source: Stacks Project, Tag 0AVN, finite basic-open cover argument; Tags 01LC and 05AM. -/
+of restriction sections. -/
 theorem boundary_maximal_not_associated
     {L : Scheme.{u}} [IsLocallyNoetherian L] (U : L.Opens) (N : L.Modules)
     (hqc : N.IsQuasicoherent) (V : L.Opens) (hV : IsAffineOpen V)

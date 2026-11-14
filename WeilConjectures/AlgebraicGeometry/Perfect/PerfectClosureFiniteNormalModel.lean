@@ -24,7 +24,10 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
 /-!
 # A finite normal model over a finite part of a perfect closure
 
-Source: Stacks Project, Varieties, Tag 0BXT, proof through the dense-open descent.
+## References
+
+* Stacks Project, Varieties, Tag 0BXT, proof through the dense-open descent
+* Stacks Project, Varieties, Tag 0BXT, proof, and Limits, Tags 01ZM, 01ZO, 01Z4 and 01ZP
 -/
 
 @[expose] public section
@@ -75,10 +78,7 @@ private theorem restrict_pullback {Z Y ZL YL : Scheme.{u}} {a : ZL ⟶ Z}
       Category.assoc, H.w]
 
 /-- A finite normal model of perfect-closure normalization, with a dense closed-immersion
-locus on both source and target.
-
-Source: Stacks Project, Varieties, Tag 0BXT, proof, and Limits, Tags 01ZM, 01ZO,
-01Z4 and 01ZP. -/
+locus on both source and target. -/
 theorem exists_perfectClosure_finite_normal_model
     (k K : Type u) [Field k] [Field K] [Algebra k K]
     [IsPurelyInseparable k K] [PerfectField K]

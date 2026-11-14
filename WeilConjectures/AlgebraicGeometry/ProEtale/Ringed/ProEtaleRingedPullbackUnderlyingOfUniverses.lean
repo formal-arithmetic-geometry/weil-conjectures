@@ -47,7 +47,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModuleAdjunction
 
 /-! # Underlying abelian sheaf of ringed pro-etale pullback
 
-Source: Tags 03D2 and 03D3.
+## References
+
+* Tags 03D2 and 03D3
 -/
 
 @[expose] public section

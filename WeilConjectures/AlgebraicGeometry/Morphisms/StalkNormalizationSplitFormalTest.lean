@@ -25,8 +25,12 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.StalkNormalizationFormalSplit
 /-!
 # A split formal test for the local normalization
 
-Source: Stacks Project, Tag 0EYJ, the completion and splitting paragraphs; Tags 05D5, 00MB, 0EY9 and
-0EY6
+## References
+
+* Stacks Project, Tag 0EYJ, the completion and splitting paragraphs
+* Tags 05D5, 00MB, 0EY9 and 0EY6
+* Stacks Project, Tag 0EYJ, last three paragraphs
+* Tags 05D5, 00MB, 0EY9 and 0EY6(2), (a), (b)
 -/
 
 @[expose] public section
@@ -38,10 +42,7 @@ namespace AlgebraicGeometry.Scheme
 /-- The section-ideal completion is a flat power-series test on which the finite
 normalization is the coproduct of G copies of the test. This is the formal
 calculation, before flatness descent
-or construction of a target neighbourhood.
-
-Source: Stacks Project, Tag 0EYJ, last three paragraphs; Tags 05D5, 00MB, 0EY9 and 0EY6(2), (a),
-(b). -/
+or construction of a target neighbourhood. -/
 theorem GaloisCover.exists_stalk_normalization_split_formal_test {S C : Scheme.{u}}
     [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]

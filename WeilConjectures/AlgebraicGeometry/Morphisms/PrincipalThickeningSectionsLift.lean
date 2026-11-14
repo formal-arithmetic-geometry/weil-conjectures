@@ -12,7 +12,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PrincipalThickeningSingleLift
 
 /-! # Lifting sections across a bounded gap of principal thickenings
 
-Source: Stacks Project, Tags 0H3D and 0H3E (Lemma 20.39.2 and Example 20.39.3).
+## References
+
+* Stacks Project, Tags 0H3D and 0H3E (Lemma 20.39.2 and Example 20.39.3)
+* Stacks Project, Tags 0H3D and 0H3E (Lemma 20.39.2 and Example 20.39.3, the pro-isomorphism of
+  multiplication complexes with quotients)
 -/
 
 @[expose] public section
@@ -22,10 +26,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- Vanishing of H^1 and a uniform power-torsion bound give eventual lifting
-from principal thickenings to the ambient open.
-
-Source: Stacks Project, Tags 0H3D and 0H3E (Lemma 20.39.2 and
-Example 20.39.3, the pro-isomorphism of multiplication complexes with quotients). -/
+from principal thickenings to the ambient open. -/
 theorem principal_thickening_sections_lift
     (R : Type u) [CommRing R] (g : R) (W : (Spec (.of R)).Opens)
     (hH : Subsingleton (Modules.H (X := W.toScheme)

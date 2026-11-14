@@ -14,8 +14,7 @@ import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 /-! # The shifted rational Tate-line square
 
-Source: the canonical-map compatibilities in the second rational projective-line
-triangle, together with Cartesian coefficients and twists. The proof lifts the
+The proof lifts the
 prescribed underived composition equation through degree zero and the canonical shift.
 -/
 

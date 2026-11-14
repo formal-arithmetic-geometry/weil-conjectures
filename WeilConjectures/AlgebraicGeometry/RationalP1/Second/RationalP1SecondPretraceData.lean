@@ -167,8 +167,7 @@ def secondPretraceExchangeMap (M : DerivedCategory (Modules Λ (ProjectiveLine Y
   unfold moduleObjectDerivedPullback moduleObjectDerivedPushforward
   exact (condensedAmbientExchange Λ (square Y)).app M
 
-/-- Transfer invertibility of the native exchange to its literal fixed-endpoint wrapper.
-Source: definition of the native exchange wrapper. -/
+/-- Transfer invertibility of the native exchange to its literal fixed-endpoint wrapper. -/
 theorem secondPretraceExchangeMap_isIso
     (M : DerivedCategory (Modules Λ (ProjectiveLine Y)))
     (hb : IsIso ((condensedAmbientExchange Λ (square Y)).app M)) :
@@ -177,8 +176,7 @@ theorem secondPretraceExchangeMap_isIso
   unfold moduleObjectDerivedPullback moduleObjectDerivedPushforward
   exact hb
 
-/-- The fixed ambient inverse is the inverse of the literal exchange wrapper.
-Source: definitions of the native exchange wrapper and ambient inverse. -/
+/-- The fixed ambient inverse is the inverse of the literal exchange wrapper. -/
 theorem secondPretraceExchangeMap_inverse
     (M : DerivedCategory (Modules Λ (ProjectiveLine Y)))
     (hb : IsIso ((condensedAmbientExchange Λ (square Y)).app M)) :

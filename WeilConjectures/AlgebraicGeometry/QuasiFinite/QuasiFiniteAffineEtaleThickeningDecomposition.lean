@@ -27,7 +27,10 @@ import WeilConjectures.Mathlib.Algebra.Category.Ring.FinitePresentation
 /-!
 # Finite etale thickenings after surjective affine base change
 
-Source: Stacks Project, Etale Cohomology, Tag 095K, part (1).
+## References
+
+* Stacks Project, Etale Cohomology, Tag 095K, part (1)
+* Stacks Project, Tag 095K (1)
 -/
 
 @[expose] public section
@@ -400,7 +403,6 @@ private theorem finite_affine_thickening
 
 /-- A quasi-finite finitely presented morphism of affine schemes admits a surjective affine
 base change on which the source has a finite etale closed subscheme with the same points.
-Source: Stacks Project, Tag 095K (1).
 -/
 theorem exists_affine_surjective_finite_etale_thickening_of_isQuasiFinite
     {V U : Scheme.{u}} [IsAffine V] [IsAffine U] (h : V ⟶ U)

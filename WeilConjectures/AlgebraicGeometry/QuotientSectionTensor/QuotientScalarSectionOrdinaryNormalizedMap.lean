@@ -8,7 +8,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionTensorData
 public import WeilConjectures.CategoryTheory.SixFunctors.InternalSectionScalarAdjunctionSupplement
 
-/-! A normalized natural transformation for sectionwise scalar extension. -/
+/-! A normalized natural transformation for sectionwise scalar extension.
+
+## References
+
+* Stacks 03EK and 06YY
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -30,8 +35,7 @@ variable [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ T)]
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ' T)]
 
 -- The explicit generator calculation needs the larger elaboration budget.
-/-- The sectionwise scalar extension admits a natural transformation normalized on generators.
-Source: Stacks 03EK and 06YY; this is the map part of the fixed-model comparison. -/
+/-- The sectionwise scalar extension admits a natural transformation normalized on generators. -/
 theorem scalar_section_ordinary_normalized_map (T : Scheme.{u})
     (model : SectionModel a T) :
     ∃ ordinary : QuotientChange.extension a T ⋙

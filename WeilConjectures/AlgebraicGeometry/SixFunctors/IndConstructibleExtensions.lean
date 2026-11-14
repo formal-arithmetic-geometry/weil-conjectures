@@ -26,6 +26,10 @@ The two coefficient cases use the existing finite constant-model constructibilit
 IndCons is `ObjectProperty.ind.{u + 1}` in the internal-module category itself, with small
 filtered presentations and closure under isomorphisms. No abstract ind-category replaces
 this ambient category.
+
+## References
+
+* Stacks Project, Homology, Tag 010I and Categories, Tag 002V
 -/
 
 @[expose] public section
@@ -105,7 +109,6 @@ private theorem ind_pushout_extension
   exact P.prop_X₂_of_shortExact hE (hp j.right) hC
 
 /-- Filtered-colimit closures of finitely presentable extension-closed objects are extension closed.
-Source: Stacks Project, Homology, Tag 010I and Categories, Tag 002V.
 The proof uses the stated degree-one Ext descent hypothesis. It presents the quotient
 and pulls back the short exact sequence; degree-one Ext
 continuity descends each pullback extension to a finitely presentable stage, and exact

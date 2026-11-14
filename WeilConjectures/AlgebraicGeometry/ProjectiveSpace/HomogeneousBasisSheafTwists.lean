@@ -18,7 +18,9 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 /-!
 # Homogeneous bases give finite sums of twists
 
-Source: Stacks Project, Constructions, Definitions 01M6, 01MN and Lemma 01M7.
+## References
+
+* Stacks Project, Constructions, Definitions 01M6, 01MN and Lemma 01M7
 -/
 
 @[expose] public section
@@ -33,8 +35,7 @@ namespace AlgebraicGeometry.Proj
 attribute [local instance] MvPolynomial.gradedAlgebra
 
 /-- The inverse transport of an associated sheaf of a finite graded free module is the
-finite sum of twists with the prescribed basis degrees. No resolution or exactness is assumed.
-Source: Stacks Project, Constructions, Definitions 01M6, 01MN and Lemma 01M7. -/
+finite sum of twists with the prescribed basis degrees. No resolution or exactness is assumed. -/
 theorem homogeneous_basis_sheaf_twists (k : Type u) [Field k]
     (C : ProjectiveLine.ProjChartIsomorphism k)
     (M : ModuleCat.{u} (MvPolynomial (Fin 2) k))

@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.IsomorphismScalarTensor.IsomorphismScal
 
 /-! # Finite scalar tensor comparisons in the specified cochain presentations
 
-Source: Stacks Project, Tags 03EK and 03EL.
+## References
+
+* Stacks Project, Tags 03EK and 03EL
 -/
 
 @[expose] public noncomputable section
@@ -30,9 +32,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (ι : E →ₐ[ℚ_[l]] L) {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]
 
 /-- The finite comparisons, canonical quotient maps and adjacent transition maps
-for a supplied normalized completed chain comparison.
-
-Source: Stacks Project, Tags 03EK and 03EL. -/
+for a supplied normalized completed chain comparison. -/
 theorem scalar_finite_model
     (b : (integralOperationsGoodComplex l E Y).ι ⋙ leftComplex l E L ι g ≅
       (integralOperationsGoodComplex l E Y).ι ⋙ rightComplex l E L ι g)

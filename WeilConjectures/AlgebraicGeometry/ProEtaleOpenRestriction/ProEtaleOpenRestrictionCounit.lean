@@ -35,8 +35,15 @@ import Mathlib.CategoryTheory.Monoidal.Ring
 import Mathlib.CategoryTheory.Adjunction.Limits
 import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
 /-! # Open restriction and the direct-image counit.
-Source: Stacks Project, pro-etale functoriality (09A5), Sites (00XZ, 03CB, 03CF), and Modules on
-Sites (03D3, 04J0).
+
+## References
+
+* Stacks Project, pro-etale functoriality (09A5), Sites (00XZ, 03CB, 03CF), and Modules on Sites
+  (03D3, 04J0)
+* Tag 09A5
+* Stacks Sites, Tag 03CB
+* Stacks Sites, Tag 00XZ
+* Stacks Sites, Tag 03CF
 -/
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
@@ -46,29 +53,27 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open AlgebraicGeometry
 namespace AlgebraicGeometry.Scheme.ProEtaleOpenRestriction
 
-/-- The inverse-image coefficient ring on X. Source: Tag 09A5. -/
+/-- The inverse-image coefficient ring on X. -/
 noncomputable abbrev RX {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) :=
   (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R
 
-/-- The inverse-image coefficient ring on W. Source: Tag 09A5. -/
+/-- The inverse-image coefficient ring on W. -/
 noncomputable abbrev RW {Y W : Scheme.{u}} (h : W ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) :=
   (proEtaleSheafInverseImage h CommRingCat.{u + 1}).obj R
 
-/-- The inverse-image coefficient ring on the fibre product X_W. Source: Stacks Sites, Tag 03CB. -/
+/-- The inverse-image coefficient ring on the fibre product X_W. -/
 noncomputable abbrev RXW {X Y W : Scheme.{u}} (f : X ⟶ Y) (h : W ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) :=
   (proEtaleSheafInverseImage (pullback.fst f h) CommRingCat.{u + 1}).obj (RX f R)
 
-/-- The type of coefficient comparisons; `coefficientIso` fixes the canonical one.
-Source: Stacks Sites, Tag 03CB. -/
+/-- The type of coefficient comparisons; `coefficientIso` fixes the canonical one. -/
 noncomputable abbrev CoeffCmp {X Y W : Scheme.{u}} (f : X ⟶ Y) (h : W ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) :=
   RW (pullback.snd f h) (RW h R) ≅ RXW f h R
 
-/-- Base-change associativity around the cartesian square, with its canonical projections.
-Source: Stacks Sites, Tag 03CB. -/
+/-- Base-change associativity around the cartesian square, with its canonical projections. -/
 noncomputable def squareSiteIso {X Y W : Scheme.{u}} (f : X ⟶ Y) (h : W ⟶ Y) :
     proEtaleBaseChange f ⋙ proEtaleBaseChange (pullback.fst f h) ≅
       proEtaleBaseChange h ⋙ proEtaleBaseChange (pullback.snd f h) :=
@@ -77,8 +82,7 @@ noncomputable def squareSiteIso {X Y W : Scheme.{u}} (f : X ⟶ Y) (h : W ⟶ Y)
   eqToIso (congrArg (fun k ↦ proEtaleBaseChange k) (pullback.condition (f := f) (g := h))) ≪≫
   MorphismProperty.Over.pullbackComp (P := @WeaklyEtale) (Q := ⊤) (pullback.snd f h) h
 
-/-- The inverse-image comparison is the mate of the projection-preserving site isomorphism.
-Source: Stacks Sites, Tag 03CB. -/
+/-- The inverse-image comparison is the mate of the projection-preserving site isomorphism. -/
 noncomputable def ringSquareIso {X Y W : Scheme.{u}} (f : X ⟶ Y) (h : W ⟶ Y) :
     proEtaleSheafInverseImage f CommRingCat.{u + 1} ⋙
         proEtaleSheafInverseImage (pullback.fst f h) CommRingCat.{u + 1} ≅
@@ -100,21 +104,18 @@ noncomputable def ringSquareIso {X Y W : Scheme.{u}} (f : X ⟶ Y) (h : W ⟶ Y)
           (ProEt.topology Y) (ProEt.topology W)
             (ProEt.topology (pullback f h))).symm)).symm
 
-/-- The coefficient comparison is fixed, not an existentially supplied automorphism.
-Source: Stacks Sites, Tag 03CB. -/
+/-- The coefficient comparison is fixed, not an existentially supplied automorphism. -/
 noncomputable def coefficientIso {X Y W : Scheme.{u}} (f : X ⟶ Y) (h : W ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) : CoeffCmp f h R :=
   (ringSquareIso f h).symm.app R
 
-/-- Composition sends an object over the source of a weakly etale map to the target site.
-Source: Stacks Sites, Tag 00XZ. -/
+/-- Composition sends an object over the source of a weakly etale map to the target site. -/
 abbrev objectComposition {X Y : Scheme.{u}} (h : X ⟶ Y) [WeaklyEtale h] : X.ProEt ⥤ Y.ProEt :=
   MorphismProperty.Over.map (f := h) ⊤ (inferInstance : WeaklyEtale h)
 
 /-- The canonical fibre-product arrow `(E ×[W] X_W → X) → (E ×[Y] X → X)`.
 The map is the identity on E and the first projection on X_W; thus it is the specified
-fibre-product identification, rather than a freely supplied section equivalence.
-Source: Stacks Sites, Tag 03CF. -/
+fibre-product identification, rather than a freely supplied section equivalence. -/
 noncomputable def sectionArrow {X Y W : Scheme.{u}} (f : X ⟶ Y) (h : W ⟶ Y)
     [IsOpenImmersion h] (E : W.ProEt) :
     (objectComposition (pullback.fst f h)).obj

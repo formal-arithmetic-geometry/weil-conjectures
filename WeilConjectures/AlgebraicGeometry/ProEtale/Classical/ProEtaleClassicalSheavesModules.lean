@@ -45,13 +45,15 @@ import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 /-!
 # Classical pro-étale sheaves of modules
 
-Source: Stacks Project, Tags 099T, 04JC and 03DA.
-
 We use the fixed-coefficient `ModuleCat` encoding explicitly allowed by
 `def-weil-pbc-etale-sheaves`. The constant-ring action is the unique extension of
 its discrete scalar actions through sheafification; comparison carries those scalar
 actions along the same inclusion of sites. Classicality is the existing predicate
 on the underlying sheaf of sets, as in clause 3 of the continuity-map node.
+
+## References
+
+* Stacks Project, Tags 099T, 04JC and 03DA
 -/
 
 @[expose] public noncomputable section
@@ -128,8 +130,7 @@ private theorem comparisonForgetIso_counit (X : Scheme.{u})
 
 /-- Comparison inverse image is exact and fully faithful on modules over any discrete
 commutative ring, with essential image the classical module sheaves and restriction
-as quasi-inverse.
-Source: Stacks Project, Tags 099T, 04JC and 03DA. -/
+as quasi-inverse. -/
 theorem proEtaleClassicalSheavesModules (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] :
     ∃ (adj :
         comparisonUpperStar (ModuleCat.{u + 1} Λ) X ⊣

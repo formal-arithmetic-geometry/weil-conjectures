@@ -15,7 +15,12 @@ import all Mathlib.Logic.Small.Defs
 import WeilConjectures.AlgebraicGeometry.IntegralResidueDerivedMonoidal
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MonoidalStructure
 
-/-! # Canonical normalized scalar tensor -/
+/-! # Canonical normalized scalar tensor
+
+## References
+
+* Stacks 07A4
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -146,8 +151,7 @@ attribute [local implicit_reducible]
   AlgebraicGeometry.ProEtale.sheafSymmetricCategory
   CategoryTheory.Sheaf.symmetricCategory CategoryTheory.Sheaf.braidedCategory
 
-/-- The existing sheaf symmetry with its native braiding retained explicitly.
-Source: sheaf symmetric tensor. -/
+/-- The existing sheaf symmetry with its native braiding retained explicitly. -/
 @[instance_reducible] def AlgebraicGeometry.ProEtale.QuotientSectionTensor.scalarSheafSymmetric
     (T : AlgebraicGeometry.Scheme.{u}) :
     SymmetricCategory (Sheaf (AlgebraicGeometry.Scheme.ProEt.topology T) Ab.{u + 1}) :=
@@ -158,30 +162,26 @@ Source: sheaf symmetric tensor. -/
 attribute [local instance 21000]
   AlgebraicGeometry.ProEtale.QuotientSectionTensor.scalarSheafSymmetric
 
-/-- The existing closed structure on internal modules, with structural arguments shared.
-Source: the relative module tensor. -/
+/-- The existing closed structure on internal modules, with structural arguments shared. -/
 @[instance_reducible] def AlgebraicGeometry.ProEtale.QuotientSectionTensor.scalarModuleClosed
     (B : CategoryTheory.Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj B] [IsCommMonObj B] (T : AlgebraicGeometry.Scheme.{u}) :
     MonoidalClosed (AlgebraicGeometry.ProEtale.QuotientChange.Modules B T) := inferInstance
 
-/-- The existing braiding on internal modules, with the ambient sheaf structure shared.
-Source: the symmetric module tensor. -/
+/-- The existing braiding on internal modules, with the ambient sheaf structure shared. -/
 @[instance_reducible] def AlgebraicGeometry.ProEtale.QuotientSectionTensor.scalarModuleBraided
     (B : CategoryTheory.Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj B] [IsCommMonObj B] (T : AlgebraicGeometry.Scheme.{u}) :
     BraidedCategory (AlgebraicGeometry.ProEtale.QuotientChange.Modules B T) := inferInstance
 
-/-- The existing functorial flat resolutions of internal modules.
-Source: the module flat resolution. -/
+/-- The existing functorial flat resolutions of internal modules. -/
 theorem AlgebraicGeometry.ProEtale.QuotientSectionTensor.scalarModuleFlat
     (B : CategoryTheory.Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj B] [IsCommMonObj B] (T : AlgebraicGeometry.Scheme.{u}) :
     Abelian.HasFunctorialFlatResolution
       (AlgebraicGeometry.ProEtale.QuotientChange.Modules B T) := inferInstance
 
-/-- Scalar extension preserves quasi-isomorphisms between K-flat complexes.
-Source: derived scalar extension. -/
+/-- Scalar extension preserves quasi-isomorphisms between K-flat complexes. -/
 theorem AlgebraicGeometry.ProEtale.QuotientSectionTensor.scalarPreservesKFlat
     {B B' : CategoryTheory.Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj B] [IsCommMonObj B] [MonObj B'] [IsCommMonObj B']
@@ -277,8 +277,7 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
 
 open ModuleRingedComparison
 
-/-- Uncurry a tensor comparison isomorphism without changing any components.
-Source: functor naturality. -/
+/-- Uncurry a tensor comparison isomorphism without changing any components. -/
 def uncurryTensorIso
     {C₁ C₂ : Type*} [Category* C₁] [Category* C₂]
     (G : C₁ ⥤ C₂) (T₁ : C₁ ⥤ C₁ ⥤ C₁) (T₂ : C₂ ⥤ C₂ ⥤ C₂)
@@ -292,8 +291,7 @@ def uncurryTensorIso
     dsimp at h₁ h₂ ⊢
     rw [Functor.map_comp, Category.assoc, h₂, reassoc_of% h₁])
 
-/-- The actual bifunctor-derived scalar tensorator, uncurried to pairs.
-Source: Stacks 07A4. -/
+/-- The actual bifunctor-derived scalar tensorator, uncurried to pairs. -/
 @[irreducible] def canonicalTensor (T : Scheme.{u}) : TensorIso a T := by
   let := scalarModuleClosed Λ T
   let := scalarModuleClosed Λ' T
@@ -309,8 +307,7 @@ Source: Stacks 07A4. -/
   have hδ : IsIso δ := (extension a T).isIso_leftDerivedTensorComparison
   exact uncurryTensorIso _ _ _ (@asIso _ _ _ _ δ hδ)
 
-/-- The canonical derived scalar tensorator has the specified cochain counit square.
-Source: Stacks 07A4. -/
+/-- The canonical derived scalar tensorator has the specified cochain counit square. -/
 theorem canonicalTensor_normalized (T : Scheme.{u}) :
     TensorNormalized a T (canonicalTensor a T) := by
   intro P Q _ _ _ _

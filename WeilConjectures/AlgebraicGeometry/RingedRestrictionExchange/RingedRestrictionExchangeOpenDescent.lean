@@ -25,8 +25,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortE
 /-!
 # Normalized ringed restriction exchange and open descent
 
-Source: Stacks Project, Tags 08FI, 09T5, 09A5 and 00XZ.
-
 ## Main statements
 
 * `resolution_formula`: the two-resolution formula and its choice independence.
@@ -42,6 +40,18 @@ no arbitrary exchange transformation is an input. Every pullback here is exact.
 The tensor presentation in the published module pullback is extension only along an
 isomorphism: its contraction is s ⊗ m ↦ c⁻¹(s)m, so it is precisely inverse image
 with transported action. No coefficient extension or finiteness condition is imposed.
+
+## References
+
+* Stacks Project, Tags 08FI, 09T5, 09A5 and 00XZ
+* Stacks 09T5
+* Stacks 070I and 070K
+* Stacks 08FI, 09A5 and 00XZ
+* Stacks 08FI, 09T5, 09A5, 03CB and 00XZ
+* Stacks 09A5 and 00XZ
+* Stacks 09A5
+* Stacks 03CB and 09A5
+* Stacks 09A5 and 09T5
 -/
 
 @[expose] public noncomputable section
@@ -96,7 +106,7 @@ attribute [local irreducible] proEtaleRingModulePullback proEtaleRingModuleDirec
 variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
   {f : X ⟶ Y} {g : Y' ⟶ Y} {sq : ChosenCartesianSquare g' f' f g}
 
-/-- Exact localization of the canonical inverse-image square. Source: Stacks 09T5. -/
+/-- Exact localization of the canonical inverse-image square. -/
 abbrev pullSquare (r : StrictTowerRingedSquare sq) :
     (basePull r).mapDerivedCategory ⋙ (targetPull r).mapDerivedCategory ≅
       (verticalPull r).mapDerivedCategory ⋙ (upperPull r).mapDerivedCategory :=
@@ -104,7 +114,7 @@ abbrev pullSquare (r : StrictTowerRingedSquare sq) :
     r.cf r.cg r.cg' r.cf' r.coherent
 
 /-- The canonical quasi-isomorphism-independent resolution comparison; it does not require
-that the resolution map be monic. Source: Stacks 070I and 070K. -/
+that the resolution map be monic. -/
 def resolutionIso (r : StrictTowerRingedSquare sq)
     {K I : CochainComplex (proEtaleRingModules X r.RX) ℤ}
     [I.IsKInjective] (a : K ⟶ I) [QuasiIso a] :
@@ -339,8 +349,7 @@ private theorem scheme_derived_iso_of_chain (e : F ⋙ G ⟶ H ⋙ J) [IsIso e]
   exact derived_iso_of_chain F G H J e δ hδ
 end SchemeOpenComparisonTransfer
 
-/-- The open comparison is the specified derived mate and is an isomorphism.
-Source: Stacks 08FI, 09A5 and 00XZ. -/
+/-- The open comparison is the specified derived mate and is an isomorphism. -/
 theorem open_comparison (r : StrictTowerRingedSquare sq) [IsOpenImmersion g] :
     IsIso (ordinary r) ∧ IsIso (exchange r) := by
   have ho : IsIso (ordinary r) := ordinary_open_isIso r
@@ -355,8 +364,7 @@ end OpenSectionwise
 variable {U : Scheme.{u}} {j : U ⟶ Y}
 
 /-- Restricting the global exchange equals the exchange of the restricted square,
-through the specified open comparisons and canonical pullback-composition maps.
-Source: Stacks 08FI, 09T5, 09A5, 03CB and 00XZ. -/
+through the specified open comparisons and canonical pullback-composition maps. -/
 theorem open_restriction (r : StrictTowerRingedSquare sq) [IsOpenImmersion j]
     (C : OpenCube r j)
     (K : DerivedCategory (proEtaleRingModules X r.RX)) :
@@ -370,7 +378,7 @@ theorem open_restriction (r : StrictTowerRingedSquare sq) [IsOpenImmersion j]
   simpa only [pullSquare] using restriction_exchange_cube r C K
 
 /-- The identity direct-image comparison is uniquely fixed on every section by the
-actual identity fibre-product map. Source: Stacks 09A5 and 00XZ. -/
+actual identity fibre-product map. -/
 theorem identityDirect_existsUnique (Z : Scheme.{u})
     (R : Sheaf (ProEt.topology Z) CommRingCat.{u + 1}) :
     ∃! e : proEtaleRingModuleDirectImage (𝟙 Z) R R
@@ -421,14 +429,14 @@ theorem identityDirect_existsUnique (Z : Scheme.{u})
   ext M V m
   exact (hd' M V.unop m).trans (hd M V.unop m).symm
 
-/-- The section-normalized identity direct image. Source: Stacks 09A5. -/
+/-- The section-normalized identity direct image. -/
 def identityDirect (Z : Scheme.{u}) (R : Sheaf (ProEt.topology Z) CommRingCat.{u + 1}) :
     proEtaleRingModuleDirectImage (𝟙 Z) R R
       (AlgebraicGeometry.ProEtaleTensorComparison.ringId R) ≅ 𝟭 _ :=
   (identityDirect_existsUnique Z R).exists.choose
 
 /-- The identity inverse-image comparison is its adjunction conjugate, so has no
-freely chosen natural automorphism. Source: Stacks 09A5. -/
+freely chosen natural automorphism. -/
 def identityPull (Z : Scheme.{u}) (R : Sheaf (ProEt.topology Z) CommRingCat.{u + 1}) :
     proEtaleRingModulePullback (𝟙 Z) R R
       (AlgebraicGeometry.ProEtaleTensorComparison.ringId R) ≅ 𝟭 _ :=
@@ -436,15 +444,14 @@ def identityPull (Z : Scheme.{u}) (R : Sheaf (ProEt.topology Z) CommRingCat.{u +
     (AlgebraicGeometry.ProEtaleTensorComparison.ringId R)).ofNatIsoRight
       (identityDirect Z R)).leftAdjointUniq Adjunction.id
 
-/-- Exact localization of the normalized module identity. Source: Stacks 09T5. -/
+/-- Exact localization of the normalized module identity. -/
 def identityDerivedPull (Z : Scheme.{u})
     (R : Sheaf (ProEt.topology Z) CommRingCat.{u + 1}) :
     (proEtaleRingModulePullback (𝟙 Z) R R
       (AlgebraicGeometry.ProEtaleTensorComparison.ringId R)).mapDerivedCategory ≅ 𝟭 _ :=
   Functor.mapDerivedCategoryNatIso (identityPull Z R) ≪≫ Functor.mapDerivedCategoryIdIso _
 
-/-- Canonical coefficient identities commute with any inverse-image coefficient map.
-Source: Stacks 03CB and 09A5. -/
+/-- Canonical coefficient identities commute with any inverse-image coefficient map. -/
 theorem identityCoefficients_coherent {P T : Scheme.{u}} (p : P ⟶ T)
     (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1})
     (S : Sheaf (ProEt.topology P) CommRingCat.{u + 1})
@@ -479,7 +486,7 @@ theorem identityCoefficients_coherent {P T : Scheme.{u}} (p : P ⟶ T)
       (Category.id_comp c.hom)).symm
 
 /-- The coefficient presentation of the identity square, with the actual identity
-ring comparisons. Source: Stacks 09A5. -/
+ring comparisons. -/
 def identityRings {P T : Scheme.{u}} (p : P ⟶ T)
     (s : ChosenCartesianSquare (𝟙 P) p p (𝟙 T))
     (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1})
@@ -903,7 +910,7 @@ private theorem identity_square {P T : Scheme.{u}} (p : P ⟶ T)
 set_option backward.defeqAttrib.useBackward false in
 -- Compare the concrete derived functors with the localized ordinary identity square.
 /-- For the identity base change exchange is the identity under the canonical
-identity and resolution comparisons. Source: Stacks 09A5 and 09T5. -/
+identity and resolution comparisons. -/
 theorem identity_normalization {P T : Scheme.{u}} (p : P ⟶ T)
     (s : ChosenCartesianSquare (𝟙 P) p p (𝟙 T))
     (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1})

@@ -13,7 +13,13 @@ import all WeilConjectures.AlgebraicGeometry.Compactification.CompactificationPr
 The theorem is an intermediate result: it identifies the two canonical routes
 from a derived tensor through two successive inverse images. Its proof uses the
 monoidal comparison of the left-derived inverse image, naturality, and the
-composition coherence of derived inverse-image functors. -/
+composition coherence of derived inverse-image functors.
+
+## References
+
+* Stacks 07A4 and 03EL
+* the monoidal composition square used in the tensor refinement of Stacks 0F7B
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -112,9 +118,7 @@ private theorem pullTensor_hom_eq
   rw [leftDerivedUpperStarTensorIso_hom,
     leftDerivedUpperStarTensorComparison_eq_leftDerivedTensorComparison]
 
-/-- Canonical derived inverse-image composition preserves the tensor comparison.
-Source: Stacks 07A4 and 03EL; the monoidal composition square used in the tensor refinement of
-Stacks 0F7B. -/
+/-- Canonical derived inverse-image composition preserves the tensor comparison. -/
 theorem properOpenPullTensorComposition
     (V₀ : Type*) [Category.{u + 1} V₀] [Abelian V₀]
     [IsGrothendieckAbelian.{u + 1} V₀] [MonoidalCategory V₀]

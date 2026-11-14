@@ -11,7 +11,10 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.F
 /-!
 # Restriction of pro-etale extension by zero
 
-Source: Stacks Project, Tags 03DI and 09AE.
+## References
+
+* Stacks Project, Tags 03DI and 09AE
+* Stacks, Tags 03DI and 09AE
 -/
 
 @[expose] public section
@@ -25,8 +28,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- The unit `M → j^* j_! M` is an isomorphism for the canonical open extension adjunction
-on pro-etale module sheaves, in the intrinsic constant-coefficient presentation.
-Source: Stacks, Tags 03DI and 09AE. -/
+on pro-etale module sheaves, in the intrinsic constant-coefficient presentation. -/
 theorem sfIntrinsicOpenUnit_isIso {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] (A : Type u) [CommRing A] [Finite A]
     (M : proEtaleRingModules U (proEtaleConstantRing U A)) :

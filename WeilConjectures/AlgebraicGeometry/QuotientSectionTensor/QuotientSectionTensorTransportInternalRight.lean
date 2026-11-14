@@ -11,7 +11,13 @@ import WeilConjectures.AlgebraicGeometry.IntegralResidueDerivedMonoidal
 import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionTensorTotalSquare
 import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionTensorTotalLocalizationPath
 
-/-! # Ordinary-side scalar tensor evaluation -/
+/-! # Ordinary-side scalar tensor evaluation
+
+## References
+
+* Stacks Project, Tag 03EL, extension of scalars and pure sections
+* Tags 06YY and 07A4, signed total constituents
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -74,9 +80,7 @@ private theorem internal_right_total_tensor_map
   exact (MonoidalCategory.tensorHom_def f g).symm
 
 -- Retain large derived tensor terms while identifying the localized path wrappers.
-/-- Evaluate the ordinary scalar-total side on all internal complexes.
-Source: Stacks Project, Tag 03EL, extension of scalars and pure sections; Tags 06YY and 07A4, signed
-total constituents. -/
+/-- Evaluate the ordinary scalar-total side on all internal complexes. -/
 theorem section_tensor_transport_internal_right (T : Scheme.{u})
     (c : ScalarSectionData a T) (hc : ScalarSectionNormalized a T c)
     [PreservesColimitsOfSize.{0, 0} c.model.E]

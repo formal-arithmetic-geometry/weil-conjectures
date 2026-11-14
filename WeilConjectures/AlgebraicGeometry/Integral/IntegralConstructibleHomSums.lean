@@ -44,12 +44,15 @@ import Mathlib.Algebra.Category.Grp.Ulift
 
 /-! # Shifted Hom from integral constructible complexes and countable sums
 
-Source: Bhatt--Scholze, The pro-etale topology for schemes, Lemma 6.8.12.
-
 We use the completed coefficient presentation of the integral category. The scalar
 ring is its recorded `ULift` of the valuation ring, canonically ring-isomorphic to
 that valuation ring. A colimit cofan supplies the ambient derived coproduct and its
 coprojections without choosing a second coproduct object.
+
+## References
+
+* Bhatt--Scholze, The pro-etale topology for schemes, Lemma 6.8.12
+* Bhatt--Scholze, Lemma 6.8.12
 -/
 
 @[expose] public noncomputable section
@@ -175,9 +178,7 @@ and hence is an isomorphism of modules over the integral coefficient ring.
 Its component at `i` is postcomposition with the shifted coprojection `s.inj i`.
 The countable family may be empty and its common lower bound may be any integer.
 The source belongs to the recorded bounded constructible complete category, using
-the canonical continuous-coefficient/completed-coefficient identification.
-
-Source: Bhatt--Scholze, Lemma 6.8.12. -/
+the canonical continuous-coefficient/completed-coefficient identification. -/
 theorem integralConstructible_hom_sums
     (X : Scheme.{u}) [IsNoetherian X]
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Type u) [Field E]

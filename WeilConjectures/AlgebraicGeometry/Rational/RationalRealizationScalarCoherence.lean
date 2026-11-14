@@ -46,12 +46,17 @@ import WeilConjectures.AlgebraicGeometry.Rational.RationalPullbackFlatComputatio
 /-!
 # Finite coefficient extension and mixed rational-realization coherence
 
-Source: Bhatt--Scholze, Lemma 6.8.2, Proposition 6.8.14 and Remark 6.8.15; Stacks Tags 0G7E, 0D6D,
-0A0E and 0A0G.
-
 The comparisons use the actual raw rationalizations, coefficient inclusions and
 strict quotient-tower units. The scalar, tower and mixed records retain the
 normalizations that specify the comparisons, rather than just their isomorphism classes.
+
+## References
+
+* Bhatt--Scholze, Lemma 6.8.2, Proposition 6.8.14 and Remark 6.8.15
+* Stacks Tags 0G7E, 0D6D, 0A0E and 0A0G
+* BS 6.8.2, 6.8.14(2), 6.8.15
+* Stacks 0D6D
+* BS 6.8.14--6.8.15
 -/
 
 @[expose] public noncomputable section
@@ -81,8 +86,7 @@ variable (X : Scheme.{u}) [IsNoetherian X]
 /-- Finite-extension balancing with its actual continuous and completed coefficient maps.
 The component equation is the identification through `F_X ⊗^L_{B_E,X} K`.
 The existing `pbcReductionNormalization` is the adjunction-normalized flattening
-on K-flat representatives, with inverse inserting one.
-Source: BS 6.8.2, 6.8.14(2), 6.8.15; Stacks 0D6D. -/
+on K-flat representatives, with inverse inserting one. -/
 structure RationalRealizationScalarComparison
     (sE : RationalModuleRealization l E X) (sF : RationalModuleRealization l F X) where
   /-- Postcomposition of continuous functions by the field inclusion. -/
@@ -193,8 +197,7 @@ variable {Y : Scheme.{u}} [IsNoetherian Y]
 variable (G : Type u) [Field G] [Algebra ℚ_[l] G] [FiniteDimensional ℚ_[l] G]
 variable (j : F →ₐ[ℚ_[l]] G)
 
-/-- The successive-extension diagram with exactly the published raw tensor associators.
-Source: BS 6.8.14--6.8.15; Stacks 0D6D. -/
+/-- The successive-extension diagram with exactly the published raw tensor associators. -/
 structure RationalRealizationScalarTower
     (sE : RationalModuleRealization l E X) (sF : RationalModuleRealization l F X)
     (sG : RationalModuleRealization l G X)
@@ -213,8 +216,7 @@ structure RationalRealizationScalarTower
         (pbcReductionNormalization bEF.coefficient bFG.coefficient bEG.coefficient
           coefficient (sE.J.obj K)).hom
 
-/-- The successive-extension comparison is coherent, including repeated fields.
-Source: BS 6.8.14--6.8.15; Stacks 0D6D. -/
+/-- The successive-extension comparison is coherent, including repeated fields. -/
 theorem rationalRealizationScalarTower
     (sE : RationalModuleRealization l E X) (sF : RationalModuleRealization l F X)
     (sG : RationalModuleRealization l G X)
@@ -232,8 +234,7 @@ theorem rationalRealizationScalarTower
     rationalBalancedTower l E F i X sE sF G j sG⟩
 
 /-- Tensor multiplication is the identity-field comparison, on ordinary modules,
-complexes, derived objects and raw rationalizations.
-Source: BS 6.8.14--6.8.15; Stacks 0D6D. -/
+complexes, derived objects and raw rationalizations. -/
 structure RationalRealizationScalarUnit (s : RationalModuleRealization l E X)
     (b : RationalRealizationScalarComparison l E E (AlgHom.id ℚ_[l] E) X s s) where
   /-- Identity field inclusion induces the identity continuous coefficient map. -/
@@ -256,8 +257,7 @@ structure RationalRealizationScalarUnit (s : RationalModuleRealization l E X)
     b.theta.hom.app K ≫ ambient.hom.app (s.J.obj K) =
       s.J.map ((pbcRationalScalarUnit l E X Fact.out Fact.out).hom.app K)
 
-/-- Identity coefficients give the multiplication unitors.
-Source: BS 6.8.14--6.8.15; Stacks 0D6D. -/
+/-- Identity coefficients give the multiplication unitors. -/
 theorem rationalRealizationScalarUnit (s : RationalModuleRealization l E X)
     (b : RationalRealizationScalarComparison l E E (AlgHom.id ℚ_[l] E) X s s) :
     Nonempty (RationalRealizationScalarUnit l E s b) := by

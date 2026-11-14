@@ -12,7 +12,9 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
 /-!
 # Restriction and tensor products of modules
 
-Source: Stacks Project, Modules, Lemma 01CD.
+## References
+
+* Stacks Project, Modules, Lemma 01CD
 -/
 
 @[expose] public section
@@ -149,7 +151,7 @@ private theorem exists_inverseTensorHom {X Y : Scheme.{u}} (j : Y ⟶ X)
   exact ⟨b, fun U s t ↦ hb (Opposite.op U) s t⟩
 
 /-- Restriction along an open immersion commutes with the sheaf tensor product, compatibly
-with the canonical pure tensor sections. Source: Stacks Project, Modules, Lemma 01CD. -/
+with the canonical pure tensor sections. -/
 theorem exists_restriction_tensor_comparison {X Y : Scheme.{u}} (j : Y ⟶ X)
     [IsOpenImmersion j] (F G : X.Modules) :
     ∃ e : (F ⊗ G).restrict j ≅ F.restrict j ⊗ G.restrict j,

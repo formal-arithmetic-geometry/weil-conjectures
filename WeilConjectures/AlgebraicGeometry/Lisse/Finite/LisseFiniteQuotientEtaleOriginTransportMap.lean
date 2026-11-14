@@ -16,7 +16,11 @@ import WeilConjectures.SixFunctors.ProEtale.GaloisEvaluation
 
 /-! # The comparison morphism for finite quotient origin transport
 
-Source: Stacks Project, Tag 09C6.
+## References
+
+* Stacks Project, Tag 09C6
+* Stacks Project, Tags 09AL, 09B1 and 09C6, transporting `K_n = epsilon^(-1) L_n` along a supplied
+  local constant model
 -/
 
 @[expose] public noncomputable section
@@ -79,9 +83,6 @@ private def constantEncodingIso (X : Scheme.{u})
 
 /-- A constant model on an étale chart gives an isomorphism to the actual pullback
 of `K`, hence a morphism which is monic and epic.
-
-Source: Stacks Project, Tags 09AL, 09B1 and 09C6, transporting `K_n = epsilon^(-1) L_n` along a
-supplied local constant model.
 -/
 theorem lisse_finite_quotient_etale_origin_transport_map
     {X Y : Scheme.{u}} {g : Y ⟶ X}

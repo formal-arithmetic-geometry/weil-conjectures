@@ -48,8 +48,6 @@ import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
 /-!
 # Closed constant coefficient tensors on the small étale site
 
-Source: Tag 03Q1.
-
 ## Main definitions
 
 * `closedConstantTensorMap`: multiplication after restriction to the intersection.
@@ -61,6 +59,21 @@ Source: Tag 03Q1.
 
 * `closedConstantModule_flat`: geometric-stalk flatness for every closed support.
 * `closedConstantTensor`: invertibility and all ordinary and derived coherence clauses.
+
+## References
+
+* Tag 03Q1
+* Stacks Tag 03QP(1)
+* Stacks Tag 01JA
+* Tag 03Q1(3)
+* Stacks Tag 03EL
+* Tags 03EL and 03Q1
+* Stacks Tag 03Q1(3)
+* Stacks Tags 03Q1 and 03EL
+* Tag 03EL
+* Stacks Tags 03Q1 and 03PU
+* Stacks Tag 06YQ
+* Stacks Tags 06YQ and 03EL
 -/
 
 @[expose] public section
@@ -85,20 +98,17 @@ noncomputable abbrev constantModuleSheaf (A : Type (u + 1)) [CommRing A] (T : Sc
     Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A) :=
   𝟙_ (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))
 
-/-- The ordinary direct image of the constant module along a scheme map.
-Source: Stacks Tag 03QP(1). -/
+/-- The ordinary direct image of the constant module along a scheme map. -/
 noncomputable def closedConstantModule (A : Type (u + 1)) [CommRing A]
     {C X : Scheme.{u}} (i : C ⟶ X) :
     Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A) :=
   (lowerStar (ModuleCat.{u + 1} A) i).obj (constantModuleSheaf A C)
 
-/-- The support morphism of the scheme-theoretic intersection of two closed subschemes.
-Source: Stacks Tag 01JA. -/
+/-- The support morphism of the scheme-theoretic intersection of two closed subschemes. -/
 noncomputable def intersectionSupport {C D X : Scheme.{u}} (i : C ⟶ X) (j : D ⟶ X) :
     pullback i j ⟶ X := pullback.fst i j ≫ i
 
-/-- Scheme-theoretic intersections of closed immersions are closed immersions.
-Source: base-change stability of closed immersions. -/
+/-- Scheme-theoretic intersections of closed immersions are closed immersions. -/
 instance intersectionSupport_isClosedImmersion {C D X : Scheme.{u}}
     (i : C ⟶ X) (j : D ⟶ X) [IsClosedImmersion i] [IsClosedImmersion j] :
     IsClosedImmersion (intersectionSupport i j) := by
@@ -107,7 +117,7 @@ instance intersectionSupport_isClosedImmersion {C D X : Scheme.{u}}
 
 /-- Canonical restriction of constant sections to a closed intersection.
 It is the mate of the constant-sheaf comparison under the inverse-image/direct-image
-adjunction, with the pullback pasting comparison included. Source: Tag 03Q1(3). -/
+adjunction, with the pullback pasting comparison included. -/
 noncomputable def closedConstantRestriction (A : Type (u + 1)) [CommRing A]
     {C D X : Scheme.{u}} (i : C ⟶ X) (j : D ⟶ X)
     [IsClosedImmersion i] [IsClosedImmersion j] :
@@ -116,8 +126,7 @@ noncomputable def closedConstantRestriction (A : Type (u + 1)) [CommRing A]
     (pullback.fst i j) (by simp [intersectionSupport, pullback.condition,
       -pullback.fst_comp_eq_toBase, -pullback.snd_comp_eq_toBase])
 
-/-- The corresponding restriction from the second support to the same intersection.
-Source: Tag 03Q1(3). -/
+/-- The corresponding restriction from the second support to the same intersection. -/
 noncomputable def closedConstantRestriction₂ (A : Type (u + 1)) [CommRing A]
     {C D X : Scheme.{u}} (i : C ⟶ X) (j : D ⟶ X)
     [IsClosedImmersion i] [IsClosedImmersion j] :
@@ -127,14 +136,14 @@ noncomputable def closedConstantRestriction₂ (A : Type (u + 1)) [CommRing A]
       -pullback.fst_comp_eq_toBase, -pullback.snd_comp_eq_toBase])
 
 /-- Pointwise multiplication on the constant module, transported through the sheaf tensor
-unitors. Source: Stacks Tag 03EL. -/
+unitors. -/
 noncomputable def constantModuleMultiplication (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) :
     constantModuleSheaf A T ⊗ constantModuleSheaf A T ⟶ constantModuleSheaf A T :=
   (tensorIso (Iso.refl _) (Iso.refl _)).hom ≫ (λ_ _).hom
 
 /-- The canonical ordinary tensor map, obtained from the two restriction maps and the lax
 monoidal structure on direct image. This is the specified multiplication on local constants,
-not an arbitrary morphism. Source: Tags 03EL and 03Q1. -/
+not an arbitrary morphism. -/
 noncomputable def closedConstantTensorMap (A : Type (u + 1)) [CommRing A]
     {C D X : Scheme.{u}} (i : C ⟶ X) (j : D ⟶ X)
     [IsClosedImmersion i] [IsClosedImmersion j] :
@@ -147,7 +156,7 @@ noncomputable def closedConstantTensorMap (A : Type (u + 1)) [CommRing A]
       (constantModuleMultiplication A (pullback i j))
 
 /-- The pullback-section map before taking its adjoint. It is defined by precomposition on
-constant sections and the canonical lower-star composition comparison. Source: Tag 03Q1(3). -/
+constant sections and the canonical lower-star composition comparison. -/
 noncomputable def closedConstantPullbackMap (A : Type (u + 1)) [CommRing A]
     {C X X' : Scheme.{u}} (i : C ⟶ X) (v : X' ⟶ X) [IsClosedImmersion i] :
     closedConstantModule A i ⟶
@@ -161,7 +170,7 @@ noncomputable def closedConstantPullbackMap (A : Type (u + 1)) [CommRing A]
 
 /-- The canonical section map from the constant module on the base to a closed direct image.
 It is the recorded transition map for `𝟙 X` and `i`, hence carries the constant section to
-its restriction. Source: Stacks Tag 03Q1(3). -/
+its restriction. -/
 noncomputable def closedConstantSectionMap (A : Type (u + 1)) [CommRing A]
     {C X : Scheme.{u}} (i : C ⟶ X) [IsClosedImmersion i] :
     constantModuleSheaf A X ⟶ closedConstantModule A i :=
@@ -169,7 +178,7 @@ noncomputable def closedConstantSectionMap (A : Type (u + 1)) [CommRing A]
     constantModulePushforwardMap A (ModuleCat.of A A) (𝟙 X) i i (by simp)
 
 /-- The canonical adjoint pullback map, defined as the mate of
-`closedConstantPullbackMap`. Source: Tag 03Q1(3). -/
+`closedConstantPullbackMap`. -/
 noncomputable def closedConstantPullbackAdjoint (A : Type (u + 1)) [CommRing A]
     {C X X' : Scheme.{u}} (i : C ⟶ X) (v : X' ⟶ X) [IsClosedImmersion i] :
     (upperStar (ModuleCat.{u + 1} A) v).obj (closedConstantModule A i) ⟶
@@ -179,7 +188,7 @@ noncomputable def closedConstantPullbackAdjoint (A : Type (u + 1)) [CommRing A]
 
 /-- Compatibility of the specified pullback adjoint with the canonical constant section.
 The displayed constant-sheaf comparison is part of the equation, so this does not merely assert
-that some section map exists. Source: Stacks Tag 03Q1(3). -/
+that some section map exists. -/
 def closedConstantPullbackRestriction (A : Type (u + 1)) [CommRing A]
     {C X X' : Scheme.{u}} (i : C ⟶ X) (v : X' ⟶ X) [IsClosedImmersion i] : Prop :=
   (Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} A) v).hom.app (ModuleCat.of A A) ≫
@@ -187,22 +196,19 @@ def closedConstantPullbackRestriction (A : Type (u + 1)) [CommRing A]
     (upperStar (ModuleCat.{u + 1} A) v).map (closedConstantSectionMap A i) ≫
       closedConstantPullbackAdjoint A i v
 
-/-- Canonical change of support, contravariant in a morphism over the base.
-Source: Stacks Tag 03Q1(3). -/
+/-- Canonical change of support, contravariant in a morphism over the base. -/
 noncomputable def closedConstantSupportChange (A : Type (u + 1)) [CommRing A]
     {C D X : Scheme.{u}} (i : C ⟶ X) (j : D ⟶ X)
     (g : D ⟶ C) (h : g ≫ i = j) : closedConstantModule A i ⟶ closedConstantModule A j :=
   constantModulePushforwardMap A (ModuleCat.of A A) i j g h
 
-/-- The support identification for the identity pullback, induced by its universal lift.
-Source: Stacks Tag 03Q1(3). -/
+/-- The support identification for the identity pullback, induced by its universal lift. -/
 noncomputable def closedConstantIdentitySupportMap (A : Type (u + 1)) [CommRing A]
     {C X : Scheme.{u}} (i : C ⟶ X) :
     closedConstantModule A (pullback.fst (𝟙 X) i) ⟶ closedConstantModule A i :=
   closedConstantSupportChange A _ _ (pullback.lift i (𝟙 C) (by simp)) (by simp)
 
-/-- The canonical support comparison for successive base changes.
-Source: Stacks Tag 03Q1(3). -/
+/-- The canonical support comparison for successive base changes. -/
 noncomputable def closedConstantCompositionSupportMap (A : Type (u + 1)) [CommRing A]
     {C X X' X'' : Scheme.{u}} (i : C ⟶ X) (v : X' ⟶ X) (w : X'' ⟶ X') :
     closedConstantModule A (pullback.fst (w ≫ v) i) ⟶
@@ -215,8 +221,7 @@ noncomputable def closedConstantCompositionSupportMap (A : Type (u + 1)) [CommRi
           pullback.condition, Category.assoc]))
     (by simp)
 
-/-- The support interchange map induced by the canonical pullback symmetry.
-Source: Stacks Tag 03EL. -/
+/-- The support interchange map induced by the canonical pullback symmetry. -/
 noncomputable def closedConstantSymmetrySupportMap (A : Type (u + 1)) [CommRing A]
     {C D X : Scheme.{u}} (i : C ⟶ X) (j : D ⟶ X) :
     closedConstantModule A (intersectionSupport j i) ⟶
@@ -225,8 +230,7 @@ noncomputable def closedConstantSymmetrySupportMap (A : Type (u + 1)) [CommRing 
     (by simp [intersectionSupport, pullback.condition,
       -pullback.fst_comp_eq_toBase, -pullback.snd_comp_eq_toBase])
 
-/-- The reassociation of triple supports, given by the universal pullback lifts.
-Source: Stacks Tag 03EL. -/
+/-- The reassociation of triple supports, given by the universal pullback lifts. -/
 noncomputable def closedConstantAssociativitySupportMap (A : Type (u + 1)) [CommRing A]
     {C D E X : Scheme.{u}} (i : C ⟶ X) (j : D ⟶ X) (k : E ⟶ X) :
     closedConstantModule A (intersectionSupport (intersectionSupport i j) k) ⟶
@@ -255,8 +259,7 @@ noncomputable def closedConstantAssociativitySupportMap (A : Type (u + 1)) [Comm
     (by simp [q, g, a, intersectionSupport,
       -pullback.fst_comp_eq_toBase, -pullback.snd_comp_eq_toBase])
 
-/-- The base-change identification of an intersection, induced by the universal lifts.
-Source: Stacks Tags 03Q1 and 03EL. -/
+/-- The base-change identification of an intersection, induced by the universal lifts. -/
 noncomputable def closedConstantBaseChangeSupportMap (A : Type (u + 1)) [CommRing A]
     {C D X X' : Scheme.{u}} (i : C ⟶ X) (j : D ⟶ X) (v : X' ⟶ X) :
     closedConstantModule A (pullback.fst v (intersectionSupport i j)) ⟶
@@ -278,8 +281,7 @@ noncomputable def closedConstantBaseChangeSupportMap (A : Type (u + 1)) [CommRin
   exact closedConstantSupportChange A _ _ q
     (by simp [q, a, intersectionSupport])
 
-/-- Identity and composition laws with canonical changes of support explicitly composed.
-Source: Tag 03Q1(3). -/
+/-- Identity and composition laws with canonical changes of support explicitly composed. -/
 def closedConstantPullbackCoherence (A : Type (u + 1)) [CommRing A]
     {C X : Scheme.{u}} (i : C ⟶ X) [IsClosedImmersion i] : Prop :=
   closedConstantPullbackAdjoint A i (𝟙 X) ≫ closedConstantIdentitySupportMap A i =
@@ -291,8 +293,7 @@ def closedConstantPullbackCoherence (A : Type (u + 1)) [CommRing A]
         (upperStar (ModuleCat.{u + 1} A) w).map (closedConstantPullbackAdjoint A i v) ≫
         closedConstantPullbackAdjoint A (pullback.fst v i) w
 
-/-- The normalized tensor pullback square with its canonical support comparison.
-Source: Tag 03EL. -/
+/-- The normalized tensor pullback square with its canonical support comparison. -/
 def closedConstantTensorPullbackSquare (A : Type (u + 1)) [CommRing A]
     {C D X X' : Scheme.{u}} (i : C ⟶ X) (j : D ⟶ X) (v : X' ⟶ X)
     [IsClosedImmersion i] [IsClosedImmersion j] : Prop :=
@@ -303,8 +304,7 @@ def closedConstantTensorPullbackSquare (A : Type (u + 1)) [CommRing A]
       tensorHom (closedConstantPullbackAdjoint A i v) (closedConstantPullbackAdjoint A j v) ≫
       closedConstantTensorMap A (pullback.fst v i) (pullback.fst v j)
 
-/-- Ordinary associativity and symmetry with explicit canonical support changes.
-Source: Tags 03EL and 03Q1. -/
+/-- Ordinary associativity and symmetry with explicit canonical support changes. -/
 def closedConstantTensorCoherence (A : Type (u + 1)) [CommRing A]
     {C D E X : Scheme.{u}} (i : C ⟶ X) (j : D ⟶ X) (k : E ⟶ X)
     [IsClosedImmersion i] [IsClosedImmersion j] [IsClosedImmersion k] : Prop :=
@@ -759,8 +759,7 @@ private theorem tensor_iso (A : Type (u + 1)) [CommRing A]
 
 attribute [local irreducible] closedConstantModule
 
-/-- Closed constant direct images are flat, including empty supports and the zero ring.
-Source: Stacks Tags 03Q1 and 03PU. -/
+/-- Closed constant direct images are flat, including empty supports and the zero ring. -/
 theorem closedConstantModule_flat (A : Type (u + 1)) [CommRing A]
     {C X : Scheme.{u}} (i : C ⟶ X) [IsClosedImmersion i] :
     ObjectProperty.flat (closedConstantModule A i) := by
@@ -785,8 +784,7 @@ set_option backward.isDefEq.respectTransparency.types true
 set_option backward.defeqAttrib.useBackward false
 
 /-- Apply an ordinary pairing after the canonical flat degree-zero tensor computation.
-The coefficient category is left abstract while composing the two canonical arrows.
-Source: Stacks Tag 06YQ. -/
+The coefficient category is left abstract while composing the two canonical arrows. -/
 noncomputable def closedConstantFlatModelMap
     {B : Type uB} [Category.{u + 1} B] [Abelian B]
     [IsGrothendieckAbelian.{u + 1} B] [MonoidalCategory B] [MonoidalPreadditive B]
@@ -800,8 +798,7 @@ noncomputable def closedConstantFlatModelMap
 
 attribute [local irreducible] closedConstantFlatModelMap
 
-/-- The canonical derived multiplication on the specified flat degree-zero model.
-Source: Stacks Tag 06YQ. -/
+/-- The canonical derived multiplication on the specified flat degree-zero model. -/
 noncomputable def closedConstantDerivedTensorMap (A : Type (u + 1)) [CommRing A]
     {C D X : Scheme.{u}} (i : C ⟶ X) (j : D ⟶ X)
     [IsClosedImmersion i] [IsClosedImmersion j] :
@@ -818,8 +815,7 @@ noncomputable def closedConstantDerivedTensorMap (A : Type (u + 1)) [CommRing A]
 attribute [local irreducible] closedConstantDerivedTensorMap
 
 /-- The derived pullback map of the same supported constant sheaf, using the canonical
-commutation of exact inverse image with the single functor and the specified b map.
-Source: Stacks Tag 03Q1(3). -/
+commutation of exact inverse image with the single functor and the specified b map. -/
 noncomputable def closedConstantDerivedPullbackMap (A : Type (u + 1)) [CommRing A]
     {C X X' : Scheme.{u}} (i : C ⟶ X) (v : X' ⟶ X) [IsClosedImmersion i] :
     ((upperStar (ModuleCat.{u + 1} A) v).leftDerivedFunctor).obj
@@ -831,8 +827,7 @@ noncomputable def closedConstantDerivedPullbackMap (A : Type (u + 1)) [CommRing 
 attribute [local irreducible] closedConstantDerivedPullbackMap
 
 /-- Map two arrows with the actual derived tensor bifunctor, without synthesizing a
-second monoidal instance on the derived category.
-Source: Stacks Tag 06YQ. -/
+second monoidal instance on the derived category. -/
 noncomputable def closedConstantDerivedPairMap
     {B : Type uB} [Category.{u + 1} B] [Abelian B]
     [IsGrothendieckAbelian.{u + 1} B] [MonoidalCategory B] [MonoidalPreadditive B]
@@ -842,8 +837,7 @@ noncomputable def closedConstantDerivedPairMap
     ((derivedTensor B X).obj K).obj L ⟶ ((derivedTensor B X).obj K').obj L' :=
   derivedTensorPairMap X f g
 
-/-- Derived associativity and symmetry for the specified canonical multiplication.
-Source: Stacks Tags 06YQ and 03EL. -/
+/-- Derived associativity and symmetry for the specified canonical multiplication. -/
 structure ClosedConstantDerivedTensorCoherence (A : Type (u + 1)) [CommRing A]
     {C D E X : Scheme.{u}} (i : C ⟶ X) (j : D ⟶ X) (k : E ⟶ X)
     [IsClosedImmersion i] [IsClosedImmersion j] [IsClosedImmersion k] : Prop where
@@ -861,8 +855,7 @@ structure ClosedConstantDerivedTensorCoherence (A : Type (u + 1)) [CommRing A]
       (DerivedCategory.singleFunctor _ 0).map (closedConstantSymmetrySupportMap A i j) =
         closedConstantDerivedTensorMap A i j
 
-/-- Derived pullback compatibility for the specified multiplication and b maps.
-Source: Stacks Tags 06YQ and 03EL. -/
+/-- Derived pullback compatibility for the specified multiplication and b maps. -/
 structure ClosedConstantDerivedTensorPullbackSquare (A : Type (u + 1)) [CommRing A]
     {C D X X' : Scheme.{u}} (i : C ⟶ X) (j : D ⟶ X) (v : X' ⟶ X)
     [IsClosedImmersion i] [IsClosedImmersion j] : Prop where

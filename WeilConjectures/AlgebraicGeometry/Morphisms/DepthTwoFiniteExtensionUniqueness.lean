@@ -16,7 +16,11 @@ import WeilConjectures.AlgebraicGeometry.AffineMorphismRelativeSpec
 /-!
 # Uniqueness of finite extensions with depth two at the boundary
 
-Source: Stacks Project, Tag 0EY6, proof of assertion (2).
+## References
+
+* Stacks Project, Tag 0EY6, proof of assertion (2)
+* Stacks Project, Tag 0EY6, converse in the proof of (2)
+* Tags 0AUK and 0E9I
 -/
 
 @[expose] public section
@@ -26,9 +30,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- An isomorphism on an open extends between finite schemes of depth at least
-two above its complement. No etaleness or depth assumption on the base is needed.
-
-Source: Stacks Project, Tag 0EY6, converse in the proof of (2); Tags 0AUK and 0E9I. -/
+two above its complement. No etaleness or depth assumption on the base is needed. -/
 theorem iso_of_finite_depth_two_extensions
     {L : Scheme.{u}} [IsLocallyNoetherian L] (U : L.Opens)
     {F E : Scheme.{u}} (r : F ⟶ L) (p : E ⟶ L) [IsFinite r] [IsFinite p]

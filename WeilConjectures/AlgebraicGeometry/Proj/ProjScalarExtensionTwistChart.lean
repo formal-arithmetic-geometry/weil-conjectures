@@ -14,7 +14,12 @@ public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor
 
 /-! # The scalar-extension twist map on a single standard chart
 
-Source: Stacks Project, Tags 01MY and 01N2. -/
+## References
+
+* Stacks Project, Tags 01MY and 01N2
+* Stacks Project, Tag 01N2, clause (3), proof on standard opens
+* Tag 01MY, the map on localized graded modules
+-/
 
 @[expose] public section
 
@@ -29,10 +34,7 @@ open AlgebraicGeometry.Scheme.Modules
 namespace AlgebraicGeometry.Proj
 
 /-- A morphism with the prescribed pointwise fraction formula is bijective on every
-open inside a scalar-extended standard chart, for one fixed integer twist.
-
-Source: Stacks Project, Tag 01N2, clause (3), proof on standard opens; Tag 01MY, the map on
-localized graded modules. -/
+open inside a scalar-extended standard chart, for one fixed integer twist. -/
 theorem scalarExtension_twistMap_basicOpen_bijective
     {R S A B : Type u} [CommRing R] [CommRing S] [CommRing A] [CommRing B]
     [Algebra R S] [Algebra R A] [Algebra S B]

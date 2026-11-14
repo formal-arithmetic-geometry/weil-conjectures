@@ -14,7 +14,13 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionChartCompl
 /-!
 # Affine chart transitions before the square and cocycle checks
 
-Source: Stacks Project, Tag 0BLH, first two proof paragraphs; Tag 05EL, item (1).
+## References
+
+* Stacks Project, Tag 0BLH, first two proof paragraphs
+* Tag 05EL, item (1)
+* Stacks Project, Tag 0BLH (structural maps on affine charts)
+* Stacks Project, Tag 0BLH
+* Stacks Project, Tags 0BLH and 05EL, item (1)
 -/
 
 @[expose] public section
@@ -75,8 +81,7 @@ end FormalGlueing
 
 namespace AlgebraicGeometry.Scheme.CompletionGluingData
 
-/-- The structural ring homomorphism on sections of an arbitrary open.
-Source: Stacks Project, Tag 0BLH (structural maps on affine charts). -/
+/-- The structural ring homomorphism on sections of an arbitrary open. -/
 noncomputable abbrev chartScalarMap {R : Type u} [CommRing R]
     {Z : Scheme.{u}} (h : Z ⟶ Spec (.of R)) (W : Z.Opens) : R →+* Γ(Z, W) :=
   ((ΓSpecIso (.of R)).inv ≫ h.appTop ≫
@@ -91,15 +96,13 @@ variable {E : Scheme.{u}} {s : E ⟶ Spec
 local notation "C" => AdicCompletion (IsLocalRing.maximalIdeal A) A
 local notation "φ" => algebraMap A C
 
-/-- The concrete structural action on completed global sections.
-Source: Stacks Project, Tag 0BLH. -/
+/-- The concrete structural action on completed global sections. -/
 noncomputable abbrev completedChartModule (s : E ⟶ Spec (.of C)) : Module C Γ(E, ⊤) :=
   Module.compHom _ ((ΓSpecIso (.of C)).inv ≫ s.appTop).hom
 
 /-- Section identifications and generator formulas for transitions, without square or
 cocycle. The last two fields record the structural scalar actions, so the identifications
-can be localized without mistaking arbitrary additive maps for linear maps.
-Source: Stacks Project, Tags 0BLH and 05EL, item (1). -/
+can be localized without mistaking arbitrary additive maps for linear maps. -/
 structure AffineChartTransitions (D : CompletionGluingData A U q E s)
     (t : ℕ) (f : Fin t → A) where
   F : FormalGlueing.Transitions φ f
@@ -130,8 +133,6 @@ structure AffineChartTransitions (D : CompletionGluingData A U q E s)
 
 /-- Construct the affine section modules and the transition equivalences, postponing
 only the square and cocycle check.
-
-Source: Stacks Project, Tag 0BLH, first two proof paragraphs; Tag 05EL, item (1).
 -/
 theorem exists_affine_chart_transitions_succ
     {A : Type u} [CommRing A] [IsLocalRing A]

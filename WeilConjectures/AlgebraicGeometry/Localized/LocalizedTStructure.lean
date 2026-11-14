@@ -13,9 +13,12 @@ import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TStructure.SpectralOb
 
 /-! # The bounded rational t-structure
 
-Source: BBD 1.3.3--1.3.6.
 The category is the raw scalar localization of the completed integral category.
 The last, levelwise computation carries its explicit higher-Tor hypothesis.
+
+## References
+
+* BBD 1.3.3--1.3.6
 -/
 
 @[expose] public noncomputable section

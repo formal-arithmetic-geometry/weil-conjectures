@@ -12,7 +12,12 @@ import Mathlib.CategoryTheory.Sites.LocallySurjective
 
 /-! # Descent of local module exactness in independent universes
 
-Source: Stacks Project, Pro-etale Cohomology, Tag 09AH; Modules on Sites, Tag 03DA.
+## References
+
+* Stacks Project, Pro-etale Cohomology, Tag 09AH
+* Modules on Sites, Tag 03DA
+* Stacks Project, Pro-etale Cohomology, the final local exactness argument
+* Modules on Sites, Tag 03DA, local lifting and the underlying abelian sheaf
 -/
 
 @[expose] public noncomputable section
@@ -73,10 +78,7 @@ private theorem module_epi_of_local_kernel_lifts {X : Scheme.{t}}
   exact (congrArg (fun z : F ⟶ G ↦ z.val.app _ t) hk).trans ht
 
 /-- Sectionwise short exactness on a pro-etale covering implies categorical
-short exactness, with module universe independent of the scheme universe.
-
-Source: Stacks Project, Pro-etale Cohomology, the final local exactness argument; Modules on Sites,
-Tag 03DA, local lifting and the underlying abelian sheaf. -/
+short exactness, with module universe independent of the scheme universe. -/
 theorem proEtale_module_shortExact_of_local_sections_independent {X : Scheme.{t}}
     [HasSheafify (ProEt.topology X) AddCommGrpCat.{max u (t + 1)}]
     [(ProEt.topology X).WEqualsLocallyBijective AddCommGrpCat.{max u (t + 1)}]

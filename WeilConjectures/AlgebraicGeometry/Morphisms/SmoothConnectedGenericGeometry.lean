@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.SmoothConnectedGenericGeometr
 /-!
 # Geometry of a nonempty smooth geometrically connected family
 
-Source: Stacks Project, Tags 034F, 056T and 01UA.
+## References
+
+* Stacks Project, Tags 034F, 056T and 01UA
 -/
 
 @[expose] public section
@@ -25,9 +27,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- A nonempty smooth geometrically connected family over a normal integral base
-and its generic fibre are normal integral with the same function field.
-
-Source: Stacks Project, Tags 034F, 056T and 01UA. -/
+and its generic fibre are normal integral with the same function field. -/
 theorem smooth_connected_generic_geometry {S C : Scheme.{u}} [IsIntegral S]
     [Nonempty C] (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))
     (c : C ⟶ S) [Smooth c] [GeometricallyConnected c]

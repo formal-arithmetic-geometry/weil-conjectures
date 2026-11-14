@@ -9,7 +9,12 @@ public import WeilConjectures.AlgebraicGeometry.RelativeMVMaps
 public import WeilConjectures.AlgebraicGeometry.MayerVietorisImageChainData
 import WeilConjectures.AlgebraicGeometry.Relative.RelativeMVResolvedRowRoofComparisons
 
-/-! # A normalized roof between resolved Mayer--Vietoris rows -/
+/-! # A normalized roof between resolved Mayer--Vietoris rows
+
+## References
+
+* Stacks Project, Cohomology of Sheaves, Tags 08BV, 08HZ, 08FE and 08HY
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -42,8 +47,7 @@ private lemma mv_row_degreewise_split
     (HomologicalComplex.eval _ (.up ℤ) n)).splittingOfInjective⟩
 
 /-- A common resolved image row compares the source Mayer--Vietoris row with
-its target direct-image row before strictification. Source: Stacks Project,
-Cohomology of Sheaves, Tags 08BV, 08HZ, 08FE and 08HY. -/
+its target direct-image row before strictification. -/
 theorem relativeMV_direct_image_row_roof
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

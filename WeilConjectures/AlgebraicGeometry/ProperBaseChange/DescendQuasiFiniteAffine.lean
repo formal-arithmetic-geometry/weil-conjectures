@@ -17,11 +17,14 @@ import WeilConjectures.AlgebraicGeometry.Affine.Limit.AffineLimitFibreDimensionB
 /-!
 # Quasi-finiteness descends for a finitely presented affine model
 
-Source: Stacks Project, Limits, in Situation 081D, specialized to affine schemes.
-
 The tensor products are expressed as pushouts in `CommRingCat`. The canonical map
 from the left factor is `pushout.inl`; `CommRingCat.pushoutCoconeIsColimit` identifies
 this pushout and map with the algebra tensor product and its left inclusion.
+
+## References
+
+* Stacks Project, Limits, in Situation 081D, specialized to affine schemes
+* Stacks Project, Limits, Tag 094M in Situation 081D
 -/
 
 @[expose] public section
@@ -86,9 +89,7 @@ private theorem isQuasiFinite_of_fibre_dimension_le_zero
     .of_topologicalKrullDim_le_zero hd
   exact isOpen_discrete _
 
-/-- Quasi-finiteness of the limit affine base change descends to a stage at least `i₀`.
-Source: Stacks Project, Limits, Tag 094M in Situation 081D.
--/
+/-- Quasi-finiteness of the limit affine base change descends to a stage at least `i₀`. -/
 theorem descend_isQuasiFinite_affine
     {I : Type u} [PartialOrder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (A : I ⥤ CommRingCat.{u}) (c : Cocone A) (hc : IsColimit c)

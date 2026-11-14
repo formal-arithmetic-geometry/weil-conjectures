@@ -19,11 +19,16 @@ public import Mathlib.CategoryTheory.Monoidal.FunctorCategory
 /-!
 # Module coefficients for the Kummer sheaf
 
-Source: Stacks Project, Tags 03PK and 03EK.
-
 The twist is the sheafification of the sectionwise tensor of the existing roots-of-unity
 module presheaf with a constant module presheaf. This is the sheaf tensor product with the
 constant sheaf. Insertion of a coefficient is defined on sections before sheafification.
+
+## References
+
+* Stacks Project, Tags 03PK and 03EK
+* Stacks, Tag 03PK
+* Stacks, Tags 03PK and 03EK
+* Stacks, Tag 03EK
 -/
 
 @[expose] public noncomputable section
@@ -36,30 +41,26 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposi
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The existing root module presheaf with a universe lift of its coefficient ring.
-Source: Stacks, Tag 03PK. -/
+/-- The existing root module presheaf with a universe lift of its coefficient ring. -/
 def kummerRootModulePresheaf (X : Scheme.{u}) (m : ℕ) :
     X.Etaleᵒᵖ ⥤ ModuleCat.{u + 1} (ULift.{u + 1} (ZMod m)) :=
   finiteEtaleMuModulePresheaf X m ⋙ ModuleCat.restrictScalars ULift.ringEquiv.toRingHom
 
-/-- The coefficient functor `A ↦ μ_m ⊗ A_C`, by sectionwise tensor and sheafification.
-Source: Stacks, Tags 03PK and 03EK. -/
+/-- The coefficient functor `A ↦ μ_m ⊗ A_C`, by sectionwise tensor and sheafification. -/
 def kummerModuleTwist (X : Scheme.{u}) (m : ℕ) :
     ModuleCat.{u + 1} (ULift.{u + 1} (ZMod m)) ⥤
       Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod m))) :=
   Functor.const X.Etaleᵒᵖ ⋙ tensorLeft (kummerRootModulePresheaf X m) ⋙
     presheafToSheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod m)))
 
-/-- The underlying abelian coefficient functor.
-Source: Stacks, Tag 03PK. -/
+/-- The underlying abelian coefficient functor. -/
 def kummerAbelianTwist (X : Scheme.{u}) (m : ℕ) :
     ModuleCat.{u + 1} (ULift.{u + 1} (ZMod m)) ⥤ Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} :=
   kummerModuleTwist X m ⋙
     sheafCompose X.smallEtaleTopology
       (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod m))) AddCommGrpCat)
 
-/-- Insertion of a coefficient into a local pure tensor, followed by sheafification.
-Source: Stacks, Tag 03EK. -/
+/-- Insertion of a coefficient into a local pure tensor, followed by sheafification. -/
 def kummerCoefficientInsertionApp (X : Scheme.{u}) (m : ℕ)
     (A : ModuleCat.{u + 1} (ULift.{u + 1} (ZMod m))) (a : A) (U : X.Etaleᵒᵖ) :
     (X.rootsOfUnitySheaf m).obj.obj U →+
@@ -69,8 +70,7 @@ def kummerCoefficientInsertionApp (X : Scheme.{u}) (m : ℕ)
       ((TensorProduct.mk (ULift.{u + 1} (ZMod m))
         ((kummerRootModulePresheaf X m).obj U) A).flip a).toAddMonoidHom
 
-/-- The insertion maps commute with restrictions.
-Source: Stacks, Tag 03EK. -/
+/-- The insertion maps commute with restrictions. -/
 theorem kummerCoefficientInsertion_naturality (X : Scheme.{u}) (m : ℕ)
     (A : ModuleCat.{u + 1} (ULift.{u + 1} (ZMod m))) (a : A) (U V : X.Etaleᵒᵖ) (f : U ⟶ V) :
     (X.rootsOfUnitySheaf m).obj.map f ≫
@@ -93,8 +93,7 @@ theorem kummerCoefficientInsertion_naturality (X : Scheme.{u}) (m : ℕ)
   rw [hp] at h
   exact h
 
-/-- The canonical map `i_a: μ_m → μ_m ⊗ A_C`, `x ↦ x ⊗ a`.
-Source: Stacks, Tags 03PK and 03EK. -/
+/-- The canonical map `i_a: μ_m → μ_m ⊗ A_C`, `x ↦ x ⊗ a`. -/
 def kummerCoefficientInsertion (X : Scheme.{u}) (m : ℕ)
     (A : ModuleCat.{u + 1} (ULift.{u + 1} (ZMod m))) (a : A) :
     X.rootsOfUnitySheaf m ⟶ (kummerAbelianTwist X m).obj A :=

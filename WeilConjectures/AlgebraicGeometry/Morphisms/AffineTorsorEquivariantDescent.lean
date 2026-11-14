@@ -18,7 +18,12 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.AffineTorsorFixedPunct
 import WeilConjectures.AlgebraicGeometry.Morphisms.EquivariantOrbitModelCompatible
 import WeilConjectures.AlgebraicGeometry.Morphisms.FixedOrbitProductEquiv
 
-/-! # Descent of a split cover to its equivariant function algebra -/
+/-! # Descent of a split cover to its equivariant function algebra
+
+## References
+
+* Stacks Project, Tag 03SF (finite Galois covers)
+-/
 
 @[expose] public section
 universe u
@@ -29,9 +34,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- The equivariant function algebra is reconstructed from orbit representatives
-as the product of the corresponding stabilizer equalizers.
-
-Source: Stacks Project, Tag 03SF (finite Galois covers). -/
+as the product of the corresponding stabilizer equalizers. -/
 theorem affine_torsor_equivariant_descent_algebra
     (H C : Type u) [CommRing H] [CommRing C] [Algebra H C]
     (G : Type u) [Group G] (ρ : G → C →ₐ[H] C)

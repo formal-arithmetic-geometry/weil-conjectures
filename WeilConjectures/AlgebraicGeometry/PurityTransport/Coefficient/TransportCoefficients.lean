@@ -17,9 +17,13 @@ public import WeilConjectures.CategoryTheory.ProEtaleCoefficients.LocalizingAdmi
 
 /-! # Concrete coefficients and the root-tower Tate line
 
-Source: Bhatt--Scholze, Section 6.8.
 The index is presentation data for the existing six admissible coefficients.
 Every ring and every line below is constructed, not selected from an existence assertion.
+
+## References
+
+* Bhatt--Scholze, Section 6.8
+* root-tower construction of Tate twists
 -/
 
 @[expose] public noncomputable section
@@ -80,7 +84,7 @@ instance Coefficient.comm (c : Coefficient ell) : IsCommMonObj (c.obj.{u} ell) :
   | closure => exact Profinite.isCommMonObj_padicAlgClRingObj ell
 
 /-- The canonical integral coefficient map, including the quotient map at a
-finite coefficient ring. Source: root-tower construction of Tate twists. -/
+finite coefficient ring. -/
 def Coefficient.fromIntegers : (c : Coefficient ell) →
     Profinite.padicIntCondensedRing.{u} ell ⟶ c.ring ell
   | .finite A _ n h =>
@@ -98,14 +102,14 @@ def Coefficient.fromIntegers : (c : Coefficient ell) →
       Profinite.padicCondensedRingToPadicSubfieldCondensedRing ell E
   | .closure => Profinite.padicIntCondensedRingToPadicAlgCl ell
 
-/-- Its underlying internal ring homomorphism. Source: coefficient pullback. -/
+/-- Its underlying internal ring homomorphism. -/
 def Coefficient.integralMap (c : Coefficient ell) :
     Profinite.continuousMapRingObj.{u} ℤ_[ell] ⟶ c.obj ell :=
   (sheafCompose (coherentTopology Profinite.{u})
     (forget₂ RingCat.{u + 1} AddCommGrpCat.{u + 1})).map (c.fromIntegers ell)
 
 /-- The integral coefficient map is a morphism of ring objects, being induced by a morphism of
-ring sheaves. Source: coefficient pullback. -/
+ring sheaves. -/
 instance Coefficient.isMonHom_integralMap (c : Coefficient ell) :
     IsMonHom (c.integralMap.{u} ell) :=
   inferInstanceAs (IsMonHom ((sheafCompose (coherentTopology Profinite.{u})
@@ -133,8 +137,7 @@ identifying the integral coefficient with a discrete constant ring. -/
 abbrev Coefficient.ctf (c : Coefficient ell) (X : Scheme.{u}) :=
   ConstantModelConstructibleFiniteTor (c.obj ell) X
 
-/-- The root-tower line in its prescribed cohomological degree.
-Source: coefficient twists. -/
+/-- The root-tower line in its prescribed cohomological degree. -/
 def Coefficient.derivedLine (c : Coefficient ell) (X : Scheme.{u}) (d : ℕ) :
     c.derived ell X :=
   ((DerivedCategory.singleFunctor _ 0).obj (c.line ell X d)) ⟦2 * (d : ℤ)⟧
@@ -147,8 +150,7 @@ def Coefficient.smoothSource (c : Coefficient ell) {X Y : Scheme.{u}}
 
 /-- Every existing purity coefficient is an admissible localizing coefficient.
 This certificate only supplies the empty coefficient change; its ring and topology
-are the existing Coefficient.obj, independently of the site universe.
-Source: concrete coefficient list and its admissibility certificate. -/
+are the existing Coefficient.obj, independently of the site universe. -/
 abbrev coefficientAdmissible (ell : ℕ) [Fact ell.Prime] (c : PurityTransport.Coefficient ell) :
     IsLocalizingAdmissibleCoefficient ell (c.obj.{u} ell) := by
   cases c with

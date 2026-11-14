@@ -23,7 +23,10 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.ReducedArtinianTensorNormaliz
 
 /-! # Normalized Galois component stalks as integral-closure local factors
 
-Source: Stacks Project, Tags 09EV, 035H and 0307 -/
+## References
+
+* Stacks Project, Tags 09EV, 035H and 0307
+-/
 
 @[expose] public section
 
@@ -65,9 +68,7 @@ private theorem affine_chart_stalk_germs
     (RingHom.congr_fun hnat s).symm
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Identify the actual stalk and every structural germ with a generic field factor.
-
-Source: Stacks Project, Tags 09EV, 035H and 0307 -/
+/-- Identify the actual stalk and every structural germ with a generic field factor. -/
 theorem dvr_galois_components_stalk_factor
     (B : CommRingCat.{u}) [IsDomain B] [IsDiscreteValuationRing B]
     (pi : B) (hpi : Irreducible pi) (n : ℕ) (hnpos : 0 < n)

@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.Finite.Type.FiniteTypeFibreDimensionBou
 /-!
 # Openness of the bounded local fibre dimension locus
 
-Source: Stacks Project, Morphisms, Tag 02FZ.
+## References
+
+* Stacks Project, Morphisms, Tag 02FZ
 -/
 
 @[expose] public section
@@ -28,9 +30,7 @@ namespace AlgebraicGeometry
 /-- For a locally finite type morphism, the points with local fibre dimension at most `n`
 form an open subset of the source. The point `f.asFiber x` is the unique point of
 `f.fiber (f x)` mapping to `x`. No properness, quasi-compactness, Noetherian,
-finite-presentation, or flatness hypothesis is imposed.
-
-Source: Stacks Project, Morphisms, Tag 02FZ. -/
+finite-presentation, or flatness hypothesis is imposed. -/
 theorem isOpen_localFibreDimension_le {X S : Scheme.{u}} (f : X ⟶ S)
     [LocallyOfFiniteType f] (n : ℕ) :
     IsOpen {x : X | topologicalKrullDimAt (f.asFiber x) ≤ (n : WithBot ℕ∞)} := by

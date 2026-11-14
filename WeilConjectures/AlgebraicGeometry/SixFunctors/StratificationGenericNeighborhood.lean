@@ -18,7 +18,9 @@ public import Mathlib.Topology.Irreducible
 /-!
 # Generic neighborhoods in a finite scheme stratification
 
-Source: Stacks Project, Tags 0BA8, 01IS, 004V, 004W, 004X, 01JR, 01JY and 01IQ.
+## References
+
+* Stacks Project, Tags 0BA8, 01IS, 004V, 004W, 004X, 01JR, 01JY and 01IQ
 -/
 
 @[expose] public section
@@ -34,9 +36,7 @@ namespace AlgebraicGeometry.Scheme
 /-- A finite stratification has neighborhoods of all component generic points inside their
 stratum images. The actual pullback retains the stratum's scheme structure: its first
 projection is a surjective closed immersion, and its second projection is an open immersion.
-The union of the neighborhoods is a dense open containing all component generic points.
-
-Source: Stacks Project, Tags 0BA8, 01IS, 004V, 004W, 004X, 01JR, 01JY and 01IQ. -/
+The union of the neighborhoods is a dense open containing all component generic points. -/
 theorem exists_stratification_generic_neighborhoods
     (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X]
     (s : FiniteLocallyClosedStratification X) :

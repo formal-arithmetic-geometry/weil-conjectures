@@ -12,8 +12,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionFormalGlue
 
 /-! # Finite affine charts as module glueing data
 
-Source: Stacks Project, Lemma 0BLH, first two paragraphs of its proof, and Remark 05EL, the
-definition of H0
+## References
+
+* Stacks Project, Lemma 0BLH, first two paragraphs of its proof, and Remark 05EL, the definition of
+  H0
+* Stacks Project, Lemma 0BLH, first two paragraphs
 -/
 
 @[expose] public section
@@ -23,8 +26,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.CompletionGluingData
 
 /-- Affine chart sections give a module glueing datum and a map from compatible
-families to the explicit matching ring, preserving the completed coordinate.
-Source: Stacks Project, Lemma 0BLH, first two paragraphs -/
+families to the explicit matching ring, preserving the completed coordinate. -/
 theorem exists_formalGlueingData_matching_projection
     {A : Type u} [CommRing A] [IsLocalRing A]
     {U : (Spec (.of A)).Opens}

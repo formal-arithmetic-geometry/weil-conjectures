@@ -14,7 +14,11 @@ import WeilConjectures.AlgebraicGeometry.PrincipalSectionStableAnnihilator
 
 /-! # Eventual vanishing of scalar restriction kernels on principal punctures
 
-Source: Stacks Project, Tags 0H3E, 0BLD, 0BK0 and 0AVY.
+## References
+
+* Stacks Project, Tags 0H3E, 0BLD, 0BK0 and 0AVY
+* Stacks Project, Tag 0H3E (the pro-isomorphism preceding the displayed diagram), and Tags 0BLD,
+  0BK0 and 0AVY
 -/
 
 @[expose] public section
@@ -77,10 +81,7 @@ private theorem bounded_local_division_gluing
   simpa only [Nat.add_assoc, Nat.add_comm, Nat.add_left_comm] using hb x
 
 /-- A scalar vanishing on a sufficiently deep punctured thickening lies in a
-prescribed power of the principal ideal.
-
-Source: Stacks Project, Tag 0H3E (the pro-isomorphism preceding the displayed
-diagram), and Tags 0BLD, 0BK0 and 0AVY. -/
+prescribed power of the principal ideal. -/
 theorem punctured_principal_restriction_kernel
     (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R]
     (g : R) (hg : g ∈ IsLocalRing.maximalIdeal R)

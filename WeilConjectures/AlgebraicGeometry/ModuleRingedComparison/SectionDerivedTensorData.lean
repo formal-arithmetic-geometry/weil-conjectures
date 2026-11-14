@@ -82,9 +82,6 @@ public import WeilConjectures.AlgebraicGeometry.SectionDerivedTensorData
 
 /-! # Canonical derived section-module tensor data
 
-Source: Stacks Project, Sites, Tag 00YV; Modules on Sites, Tags 03EK, 03EL, 03D7, 03DI and 03DJ;
-Cohomology on Sites, Tags 07A4, 07A6 and 0B56.
-
 ## Main definitions
 
 - `derivedEquivalence`: localization of the fixed termwise section equivalence.
@@ -92,6 +89,15 @@ Cohomology on Sites, Tags 07A4, 07A6 and 0B56.
 - `tensor`, `tensorUnit`, `tensorComparison`: normalized conjugate K-flat tensor data.
 - `totalTensor`: the signed direct-sum total of the ordinary relative tensor.
 - `localizedTotalComparison`: the specified total comparison after localization.
+
+## References
+
+* Stacks Project, Sites, Tag 00YV
+* Modules on Sites, Tags 03EK, 03EL, 03D7, 03DI and 03DJ
+* Cohomology on Sites, Tags 07A4, 07A6 and 0B56
+* Stacks 07A4 and 06YU, fixed equivalence transport
+* Stacks 06YU, fixed equivalence transport
+* Stacks 06YN
 -/
 
 @[expose] public noncomputable section
@@ -115,29 +121,25 @@ namespace TensorFunctorTransport
 variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C]
   {D : Type u₂} [Category.{v₂} D]
 
-/-- The associator is the existing equivalence-transport associator.
-Source: Stacks 07A4 and 06YU, fixed equivalence transport. -/
+/-- The associator is the existing equivalence-transport associator. -/
 theorem associator_eq (e : C ≌ D) (X Y Z : D) :
     @MonoidalCategoryStruct.associator _ _ (struct e) X Y Z =
       @MonoidalCategoryStruct.associator _ _ (Monoidal.transportStruct e) X Y Z := by
   rfl
 
-/-- The left unitor is the existing equivalence-transport unitor.
-Source: Stacks 07A4 and 06YU, fixed equivalence transport. -/
+/-- The left unitor is the existing equivalence-transport unitor. -/
 theorem leftUnitor_eq (e : C ≌ D) (X : D) :
     @MonoidalCategoryStruct.leftUnitor _ _ (struct e) X =
       @MonoidalCategoryStruct.leftUnitor _ _ (Monoidal.transportStruct e) X := by
   rfl
 
-/-- The right unitor is the existing equivalence-transport unitor.
-Source: Stacks 07A4 and 06YU, fixed equivalence transport. -/
+/-- The right unitor is the existing equivalence-transport unitor. -/
 theorem rightUnitor_eq (e : C ≌ D) (X : D) :
     @MonoidalCategoryStruct.rightUnitor _ _ (struct e) X =
       @MonoidalCategoryStruct.rightUnitor _ _ (Monoidal.transportStruct e) X := by
   rfl
 
-/-- The tensor functor of the shared full structure is the shared conjugate functor.
-Source: Stacks 06YU, fixed equivalence transport. -/
+/-- The tensor functor of the shared full structure is the shared conjugate functor. -/
 theorem tensor_eq (e : C ≌ D) :
     @MonoidalCategory.tensor D _ (monoidal e) = tensorFunctor e := by
   rfl
@@ -159,8 +161,7 @@ variable [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)]
 
 attribute [local instance] SheafOfModules.monoidalCategory SheafOfModules.symmetricCategory
 
-/-- The functor-level signed tensor is the same object-level signed direct-sum total.
-Source: Stacks 06YN. -/
+/-- The functor-level signed tensor is the same object-level signed direct-sum total. -/
 theorem totalTensor_obj (X : Scheme.{u}) (P Q : CochainComplex (modules Λ X) ℤ) :
     (totalTensor Λ X).obj (P, Q) =
       CochainComplex.mapBifunctor P Q (curriedTensor (modules Λ X)) := by

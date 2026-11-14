@@ -14,7 +14,10 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineVanishing
 
 /-! # Quasi-coherence of the concrete twisting sheaf
 
-Source: Stacks Project, Constructions, Lemma 01MB and Definition 01MN.
+## References
+
+* Stacks Project, Constructions, Lemma 01MB and Definition 01MN
+* Stacks Project, definition-twist (Tag 01MN)
 -/
 
 @[expose] public section
@@ -308,9 +311,7 @@ private theorem regradeTwistMap_surjective
        subst y
        rfl)
 
-/-- Every integer twisting sheaf is quasi-coherent, without generation in degree one.
-
-Source: Stacks Project, definition-twist (Tag 01MN). -/
+/-- Every integer twisting sheaf is quasi-coherent, without generation in degree one. -/
 theorem isQuasicoherent_twist
     {A σ : Type u} [CommRing A] [SetLike σ A] [AddSubgroupClass σ A]
     (𝒜 : ℕ → σ) [GradedRing 𝒜] (j : ℤ) :

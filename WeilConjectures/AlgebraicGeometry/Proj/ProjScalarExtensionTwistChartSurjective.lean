@@ -11,7 +11,10 @@ import WeilConjectures.AlgebraicGeometry.ProjTwistFractionDescent
 import WeilConjectures.AlgebraicGeometry.ProjTwistFractionRealization
 
 /-! The surjective half of the complete standard-chart scalar-extension comparison.
-Source: Stacks Project, Tags 01MY and 01N2.
+
+## References
+
+* Stacks Project, Tags 01MY and 01N2
 -/
 
 @[expose] public section

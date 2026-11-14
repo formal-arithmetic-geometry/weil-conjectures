@@ -16,7 +16,11 @@ import WeilConjectures.AlgebraicGeometry.Tensor.TensorPullbackQuasiCoherent
 /-!
 # Trivialized coefficients of a symmetric graded line map
 
-Source: Stacks Project, Constructions, Tags 01OA and 01O9
+## References
+
+* Stacks Project, Constructions, Tags 01OA and 01O9
+* Stacks Project, Constructions, Tags 01OA and 01O9 (the induced graded algebra map into tensor
+  powers of an invertible sheaf, and its generation locus)
 -/
 
 @[expose] public section
@@ -373,10 +377,7 @@ private theorem coefficient_irrelevant_top {S T : Scheme.{u}} (h : T ⟶ S)
   exact isUnit_one
 
 /-- Trivializing a line quotient turns its graded extension into an ordinary ring map.
-This is an algebra statement about its coefficients and does not construct a Proj map.
-
-Source: Stacks Project, Constructions, Tags 01OA and 01O9 (the induced graded algebra
-map into tensor powers of an invertible sheaf, and its generation locus). -/
+This is an algebra statement about its coefficients and does not construct a Proj map. -/
 theorem line_quotient_trivialized_coefficients {S T : Scheme.{u}} (h : T ⟶ S)
     (E : S.Modules) [E.IsQuasicoherent] (L : T.Modules) [L.IsInvertible]
     (q : (tensorPullback h).obj E ⟶ L) [Epi q]

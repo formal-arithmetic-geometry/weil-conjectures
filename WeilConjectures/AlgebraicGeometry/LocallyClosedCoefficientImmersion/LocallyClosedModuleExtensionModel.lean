@@ -12,9 +12,16 @@ import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 /-!
 # A fixed closed-then-open model for locally closed extension
 
-Source: Stacks Project, Tags 01IO, 09AA, 09BN, 03DI and 03DJ.
 The functors here are composites of actual closed direct image and open extension.
 All choices below use proved existence results, never an unfinished existence claim.
+
+## References
+
+* Stacks Project, Tags 01IO, 09AA, 09BN, 03DI and 03DJ
+* Stacks, Tag 01IO
+* Stacks, Tags 03DI--03DJ
+* Stacks, Tag 03DI
+* Stacks, Tags 09AA, 09BN
 -/
 
 @[expose] public noncomputable section
@@ -29,8 +36,7 @@ namespace AlgebraicGeometry.Scheme
 
 namespace LocallyClosedCoefficientImmersion
 
-/-- A closed-then-open factorization retaining its actual coefficient identification.
-Source: Stacks, Tag 01IO. -/
+/-- A closed-then-open factorization retaining its actual coefficient identification. -/
 structure ExtensionFactorization {S X : LocallyClosedCoefficients.{u}}
     (a : LocallyClosedCoefficientImmersion S X) where
   middle : LocallyClosedCoefficients.{u}
@@ -44,8 +50,7 @@ structure ExtensionFactorization {S X : LocallyClosedCoefficients.{u}}
 
 attribute [instance] ExtensionFactorization.isClosed ExtensionFactorization.isOpen
 
-/-- Existence of a coefficient-compatible closed-then-open factorization.
-Source: Stacks, Tag 01IO. -/
+/-- Existence of a coefficient-compatible closed-then-open factorization. -/
 theorem factorization_nonempty {S X : LocallyClosedCoefficients.{u}}
     (a : LocallyClosedCoefficientImmersion S X) : Nonempty (ExtensionFactorization a) := by
   rcases a with ⟨f, hf, cf⟩
@@ -87,14 +92,12 @@ theorem factorization_nonempty {S X : LocallyClosedCoefficients.{u}}
   congr 1
   simp
 
-/-- Choose a geometric factorization using the proved immersion factorization theorem.
-Source: Stacks, Tag 01IO. -/
+/-- Choose a geometric factorization using the proved immersion factorization theorem. -/
 def extensionFactorization {S X : LocallyClosedCoefficients.{u}}
     (a : LocallyClosedCoefficientImmersion S X) : ExtensionFactorization a :=
   Classical.choice (factorization_nonempty a)
 
-/-- Existence of the exact open extension, with its actual invertible adjunction unit.
-Source: Stacks, Tags 03DI--03DJ. -/
+/-- Existence of the exact open extension, with its actual invertible adjunction unit. -/
 theorem open_extension_exists {S X : LocallyClosedCoefficients.{u}}
     (v : LocallyClosedCoefficientImmersion S X) (hv : IsOpenImmersion v.hom) :
     ∃ F : proEtaleRingModules S.scheme S.ring ⥤ proEtaleRingModules X.scheme X.ring,
@@ -118,14 +121,12 @@ theorem open_extension_exists {S X : LocallyClosedCoefficients.{u}}
       (Iso.refl _) v.coefficient
   exact ⟨F, ha, hl, hc, adj, hu⟩
 
-/-- The open factor chosen from the proved open-extension construction.
-Source: Stacks, Tags 03DI--03DJ. -/
+/-- The open factor chosen from the proved open-extension construction. -/
 def modelOpenExtension {S X : LocallyClosedCoefficients.{u}}
     (v : LocallyClosedCoefficientImmersion S X) (hv : IsOpenImmersion v.hom) :=
   (open_extension_exists v hv).choose
 
-/-- The actual adjunction used to construct the open factor.
-Source: Stacks, Tag 03DI. -/
+/-- The actual adjunction used to construct the open factor. -/
 def modelOpenAdjunction {S X : LocallyClosedCoefficients.{u}}
     (v : LocallyClosedCoefficientImmersion S X) (hv : IsOpenImmersion v.hom) :
     modelOpenExtension v hv ⊣ v.pull :=
@@ -159,36 +160,31 @@ instance modelClosed_counit_isIso {S X : LocallyClosedCoefficients.{u}}
   (closed_properties c hc).2.2
 
 /-- A presentation of the actual closed-then-open functor. The equality field fixes
-its data exactly, while its nominal type keeps kernel reduction of module objects small.
-Source: Stacks, Tags 09AA, 09BN. -/
+its data exactly, while its nominal type keeps kernel reduction of module objects small. -/
 structure ModelPresentation {S X : LocallyClosedCoefficients.{u}}
     (a : LocallyClosedCoefficientImmersion S X) where
   functor : proEtaleRingModules S.scheme S.ring ⥤ proEtaleRingModules X.scheme X.ring
   agreement : functor = a.extensionFactorization.closed.push ⋙
     modelOpenExtension a.extensionFactorization.openMap a.extensionFactorization.isOpen
 
-/-- The presentation has the explicitly constructed composite as a witness.
-Source: Stacks, Tags 09AA, 09BN. -/
+/-- The presentation has the explicitly constructed composite as a witness. -/
 theorem modelPresentation_nonempty {S X : LocallyClosedCoefficients.{u}}
     (a : LocallyClosedCoefficientImmersion S X) : Nonempty (ModelPresentation a) :=
   ⟨⟨_, rfl⟩⟩
 
-/-- Choose a presentation whose equality field determines its functor exactly.
-Source: Stacks, Tags 09AA, 09BN. -/
+/-- Choose a presentation whose equality field determines its functor exactly. -/
 @[irreducible] def modelPresentation {S X : LocallyClosedCoefficients.{u}}
     (a : LocallyClosedCoefficientImmersion S X) : ModelPresentation a :=
   Classical.choice (modelPresentation_nonempty a)
 
 /-- Closed direct image followed by the constructed open extension, with its
-specified presentation. No unfinished existence theorem supplies this data.
-Source: Stacks, Tags 09AA, 09BN. -/
+specified presentation. No unfinished existence theorem supplies this data. -/
 @[irreducible] def modelExtension {S X : LocallyClosedCoefficients.{u}}
     (a : LocallyClosedCoefficientImmersion S X) :
     proEtaleRingModules S.scheme S.ring ⥤ proEtaleRingModules X.scheme X.ring :=
   a.modelPresentation.functor
 
-/-- The model is equal to the actual composite, including its object and map data.
-Source: Stacks, Tags 09AA, 09BN. -/
+/-- The model is equal to the actual composite, including its object and map data. -/
 theorem modelExtension_eq {S X : LocallyClosedCoefficients.{u}}
     (a : LocallyClosedCoefficientImmersion S X) :
     a.modelExtension = a.extensionFactorization.closed.push ⋙
@@ -196,8 +192,7 @@ theorem modelExtension_eq {S X : LocallyClosedCoefficients.{u}}
   unfold modelExtension
   exact a.modelPresentation.agreement
 
-/-- Restriction for the chosen model, using exactly the open inverse unit and closed counit.
-Source: Stacks, Tags 09AA, 09BN. -/
+/-- Restriction for the chosen model, using exactly the open inverse unit and closed counit. -/
 @[irreducible] def modelRestriction {S X : LocallyClosedCoefficients.{u}}
     (a : LocallyClosedCoefficientImmersion S X) : a.modelExtension ⋙ a.pull ≅ 𝟭 _ := by
   rw [modelExtension_eq]

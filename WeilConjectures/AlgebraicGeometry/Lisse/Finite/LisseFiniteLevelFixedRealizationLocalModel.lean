@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Canonical.ProEtaleCanonicalPul
 
 /-! # Local fixed-realization comparison for a finite-level model
 
-Source: Stacks Project, Tags 099Y, 099Z, 09B1 and 09BV.
+## References
+
+* Stacks Project, Tags 099Y, 099Z, 09B1 and 09BV
 -/
 
 @[expose] public noncomputable section
@@ -34,8 +36,6 @@ attribute [local irreducible] HasDerivedCategory.standard
 
 /-- The fixed-realization images of the normalized constant model and the supplied etale
 complex are locally isomorphic on the model sieve.
-
-Source: Stacks Project, Tags 099Y, 099Z, 09B1 and 09BV.
 -/
 theorem lisse_finite_level_fixed_realization_local_model
     (X Y : Scheme.{u}) (g : Y ⟶ X)

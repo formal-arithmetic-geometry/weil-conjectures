@@ -15,7 +15,12 @@ import WeilConjectures.AlgebraicGeometry.Etale.Graph.EtaleGraphCompactificationU
 import all WeilConjectures.AlgebraicGeometry.SmoothPurity.RightDerivedRawUnitPasting
 import all WeilConjectures.AlgebraicGeometry.Exact.ExactCompactificationUnitTower
 
-/-! # Raw-unit normalization of proper-first compact-support composition -/
+/-! # Raw-unit normalization of proper-first compact-support composition
+
+## References
+
+* Stacks Project, Tags 0F7B, 0F7I, 0F7J and 0D6E
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -566,8 +571,7 @@ private theorem properEtaleCompositor_raw_unit_core
 
 /-- Proper-first compact-support composition carries the raw direct-image unit to the
 mixed compactification unit after the degreewise normalized support map. This statement
-has no graph transfer, base-change map, or adjunction transpose.
-Source: Stacks Project, Tags 0F7B, 0F7I, 0F7J and 0D6E. -/
+has no graph transfer, base-change map, or adjunction transpose. -/
 theorem properEtaleCompositor_raw_unit
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {W V Y : Scheme.{u}}

@@ -11,7 +11,13 @@ import Mathlib.CategoryTheory.Sites.PreservesLocallyBijective
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.PushforwardZeroMonoidal
 
 /-! Ordinary normalized braided tensor restriction along a clopen immersion.
-Source: Stacks Project, Tag 0GMW; Tag 0FPQ. -/
+
+## References
+
+* Stacks Project, Tag 0GMW
+* Tag 0FPQ
+* Stacks Project, Modules on Sites, Tags 03EL and 0GMW
+-/
 
 @[expose] public noncomputable section
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
@@ -220,8 +226,7 @@ namespace AlgebraicGeometry.Scheme.ProEt
 attribute [local irreducible] SheafOfModules.monoidalCategory
   SheafOfModules.symmetricCategory
 
-/-- Ordinary restriction admits its canonical normalized braided structure.
-Source: Stacks Project, Modules on Sites, Tags 03EL and 0GMW. -/
+/-- Ordinary restriction admits its canonical normalized braided structure. -/
 theorem clopen_ordinary_tensor_normalization
     {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j] [IsClosedImmersion j]
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)}) :

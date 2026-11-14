@@ -11,7 +11,9 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherenc
 
 /-! # Coherence of the normalized ordinary native encoding
 
-Source: compatibility of the coefficient comparison with inverse images and composition.
+## References
+
+* Stacks 03D7 and 0B65
 -/
 
 @[expose] public noncomputable section
@@ -178,8 +180,7 @@ isomorphism so localization can use its components without expanding adjunction 
     eqToIso (congrArg (CondensedRing.upperStar (Profinite.padicAlgClRingObj l)) sq.w.symm) ≪≫
       CondensedRing.upperStarComp (Profinite.padicAlgClRingObj l) v p
 
-/-- The ordinary inverse-image comparisons commute with the specified square compositors.
-Source: Stacks 03D7 and 0B65. -/
+/-- The ordinary inverse-image comparisons commute with the specified square compositors. -/
 theorem encoding_pullback_cube (l : ℕ) [Fact l.Prime]
     {X' X Y' Y : Scheme.{u}} {v : X' ⟶ X} {p' : X' ⟶ Y'}
     {p : X ⟶ Y} {g : Y' ⟶ Y} (sq : CommSq v p' p g)

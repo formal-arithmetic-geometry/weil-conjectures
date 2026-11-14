@@ -11,7 +11,12 @@ import WeilConjectures.AlgebraicGeometry.InternalScalarPullbackNormalizationData
 import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionPullTransportKFlatOrdinary
 import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionPullTransportKFlatDerived
 
-/-! # Flat-term part of normalized quotient section pull transport -/
+/-! # Flat-term part of normalized quotient section pull transport
+
+## References
+
+* Stacks 06YS, 06YY, 0D6D and 0G7E
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -118,7 +123,6 @@ private theorem sectionPullTransportDerived_realization (φ : Λ ⟶ Λ') [IsMon
 /-- The flat-term fragment of `SectionPullNormalized`. It retains the ordinary
 section square and requires the derived computation square only on the flat-term
 K-flat representatives used by localization descent.
-Source: Stacks 06YS, 06YY, 0D6D and 0G7E.
 -/
 def SectionPullNormalizedOnKFlat {X Y : Scheme.{u}} (f : X ⟶ Y)
     (cX : ScalarSectionData a X) (cY : ScalarSectionData a Y)

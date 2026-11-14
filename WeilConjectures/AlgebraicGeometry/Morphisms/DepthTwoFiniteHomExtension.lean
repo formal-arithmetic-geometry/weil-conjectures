@@ -15,7 +15,11 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 /-! # Extension of morphisms from finite depth-two schemes
 
-Source: Stacks Project, Tags 0EY6, 0AUK and 0E9I.
+## References
+
+* Stacks Project, Tags 0EY6, 0AUK and 0E9I
+* Stacks Project, Tag 0EY6, converse in the proof of (2), using Tags 0AUK and 0E9I
+* affine structure algebras, Tag 01SA
 -/
 
 @[expose] public section
@@ -295,10 +299,7 @@ private theorem isIso_inclusion_c_of_depth_two
 end PrivateHelpers
 
 /-- Morphisms over an open into an affine L-scheme extend from a finite source
-with boundary depth at least two.
-
-Source: Stacks Project, Tag 0EY6, converse in the proof of (2), using
-Tags 0AUK and 0E9I; affine structure algebras, Tag 01SA. -/
+with boundary depth at least two. -/
 theorem exists_hom_of_finite_depth_two
     {L : Scheme.{u}} [IsLocallyNoetherian L] (U : L.Opens)
     {F E : Scheme.{u}} (r : F ⟶ L) (p : E ⟶ L) [IsFinite r] [IsAffineHom p]

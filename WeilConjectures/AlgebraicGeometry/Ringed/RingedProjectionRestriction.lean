@@ -12,7 +12,10 @@ import WeilConjectures.Algebra.Homology.Ringed.RingedRestrictionLocalIso
 
 /-! # Canonical localization comparisons for the projection mate
 
-Source: Stacks Project, Tags 04J0, 08FI, 07A4, 0B56 and 0944.
+## References
+
+* Stacks Project, Tags 04J0, 08FI, 07A4, 0B56 and 0944
+* Stacks 04J0, 08FI, 0FN5, 07A4, 0B56 and 0944
 -/
 
 @[expose] public noncomputable section
@@ -25,8 +28,7 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 
 namespace AlgebraicGeometry.Scheme
 open ProjectionRestriction
-/-- Canonical localization comparisons for the projection mate on ringed pro-etale sites.
-Source: Stacks 04J0, 08FI, 0FN5, 07A4, 0B56 and 0944. -/
+/-- Canonical localization comparisons for the projection mate on ringed pro-etale sites. -/
 theorem ringedProjectionRestriction
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R_Y : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})

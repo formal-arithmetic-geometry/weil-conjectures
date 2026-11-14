@@ -34,7 +34,12 @@ public import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
 import WeilConjectures.AlgebraicGeometry.ProEtale.Closed.ProEtaleClosedAbelianFilteredColimits
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 
-/-! Ringed pro-etale localization: a geometric step of the open-closed argument. -/
+/-! Ringed pro-etale localization: a geometric step of the open-closed argument.
+
+## References
+
+* Stacks Project, Tags 0738 (4) and 098D
+-/
 
 @[expose] public section
 
@@ -45,9 +50,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 /-- Closed direct image with arbitrary inverse-image-ring coefficients commutes
-with filtered colimits on a quasi-compact quasi-separated base.
-
-Source: Stacks Project, Tags 0738 (4) and 098D. -/
+with filtered colimits on a quasi-compact quasi-separated base. -/
 theorem proEtale_ringed_filtered_colimits {X Z : Scheme.{u}} (i : Z ⟶ X)
     [IsClosedImmersion i] (A : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
     [CompactSpace X] [QuasiSeparatedSpace X]

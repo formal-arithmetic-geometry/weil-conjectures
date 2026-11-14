@@ -15,8 +15,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.FlatPowerSeriesChartGenericIm
 /-!
 # Completion of a smooth section and its closed-fibre generic point
 
-Source: Stacks Project, Tag 0EYB, completion and the image of the extended maximal ideal;
-Tags 05D5 and 00MB.
+## References
+
+* Stacks Project, Tag 0EYB, completion and the image of the extended maximal ideal
+* Tags 05D5 and 00MB
+* Stacks Project, Tag 0EYB, the completion paragraph
 -/
 
 @[expose] public section
@@ -27,9 +30,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Completing a smooth chart along a section produces a flat power-series chart. Its
 extended maximal ideal maps to a point generic on a nonempty open of the original fibre.
-The number of variables is allowed to be zero.
-
-Source: Stacks Project, Tag 0EYB, the completion paragraph; Tags 05D5 and 00MB. -/
+The number of variables is allowed to be zero. -/
 theorem exists_smooth_section_power_series_chart
     (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]
     {L : Scheme.{u}} (q : L ⟶ Spec (.of A)) [Smooth q]

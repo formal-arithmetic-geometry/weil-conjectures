@@ -224,7 +224,10 @@ import WeilConjectures.AlgebraicGeometry.Normalized.NormalizedTowerLissePropagat
 
 /-! # Common lisse strata for a normalized tower
 
-Source: Stacks Project and the local-effectivity argument in amplification (c).
+## References
+
+* Stacks Project and the local-effectivity argument in amplification (c)
+* Stacks Project, Tag 094I
 -/
 
 @[expose] public noncomputable section
@@ -820,9 +823,7 @@ private theorem native_common_strata
 end NormalizedTowerCoefficients
 
 /-- A stratification for the first quotient controls lissity at every normalized level.
-No common completed complex or normalization-compatible trivialization is asserted here.
-
-Source: Stacks Project, Tag 094I. -/
+No common completed complex or normalization-compatible trivialization is asserted here. -/
 theorem normalizedTower_common_lisse_strata
     (X : Scheme.{u}) [IsNoetherian X] {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (M : AdicTower X d)

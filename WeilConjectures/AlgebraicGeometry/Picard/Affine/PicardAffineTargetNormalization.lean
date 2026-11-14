@@ -19,7 +19,11 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # Fixed-affine models used in the Picard comparison
 
-Source: Stacks Project, Tag 0BF2
+## References
+
+* Stacks Project, Tag 0BF2
+* Stacks Project, Tag 0BF2, target complexes
+* Tags 08CR, 08EB and 0B91
 -/
 
 @[expose] public section
@@ -29,8 +33,7 @@ open CategoryTheory CategoryTheory.Limits
 open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme
 
-/-- A universally trivial structure H-zero gives a normalized target on the entire affine.
-Source: Stacks Project, Tag 0BF2, target complexes; Tags 08CR, 08EB and 0B91 -/
+/-- A universally trivial structure H-zero gives a normalized target on the entire affine. -/
 theorem picard_affine_target_normalization
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

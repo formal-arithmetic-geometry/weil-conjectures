@@ -36,7 +36,11 @@ import WeilConjectures.AlgebraicGeometry.StrictHenselizationMapExists
 /-!
 # Local acyclicity relative to an abelian étale sheaf
 
-Source: Stacks Project, Tag 0GJP.
+## References
+
+* Stacks Project, Tag 0GJP
+* Stacks Project, Tag 0GJP, preceding diagram
+* Tags 04GU and 04HX
 -/
 
 @[expose] public section
@@ -47,8 +51,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Etale
 
-/-- The pointed map of strict localizations is unique.
-Source: Stacks Project, Tag 0GJP, preceding diagram; Tags 04GU and 04HX. -/
+/-- The pointed map of strict localizations is unique. -/
 theorem existsUnique_localAcyclicityStrictMap
     {X S : Scheme.{u}} (f : X ⟶ S) {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (x : Spec (.of Ω) ⟶ X) :
@@ -60,16 +63,14 @@ theorem existsUnique_localAcyclicityStrictMap
           (Scheme.strictHenselizationRingPointEvaluation (x ≫ f))) :=
   Scheme.strictHenselizationMap_existsUnique f x
 
-/-- The canonical pointed strict-local map induced by pulling back neighbourhoods.
-Source: Stacks Project, Tag 0GJP, preceding diagram. -/
+/-- The canonical pointed strict-local map induced by pulling back neighbourhoods. -/
 noncomputable def localAcyclicityStrictMap
     {X S : Scheme.{u}} (f : X ⟶ S) {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (x : Spec (.of Ω) ⟶ X) :
     Scheme.strictHenselizationScheme x ⟶ Scheme.strictHenselizationScheme (x ≫ f) :=
   Classical.choose (existsUnique_localAcyclicityStrictMap f x)
 
-/-- The variety of vanishing cycles, with no algebraicity requirement on the test point.
-Source: Stacks Project, Tag 0GJP, preceding diagram. -/
+/-- The variety of vanishing cycles, with no algebraicity requirement on the test point. -/
 noncomputable def localAcyclicityFiber
     {X S : Scheme.{u}} (f : X ⟶ S) {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (x : Spec (.of Ω) ⟶ X) {Ω' : Type u} [Field Ω'] [IsAlgClosed Ω']
@@ -79,8 +80,7 @@ noncomputable def localAcyclicityFiber
 /-- The canonical map from the stalk to sections on the variety of vanishing cycles.
 The uniquely characterized strict-local restriction is the inverse of the germ
 isomorphism (Tags 03QO and 03Q1). It is followed by pullback of global sections and
-the composition comparison for inverse images.
-Source: Stacks Project, Tag 0GJP. -/
+the composition comparison for inverse images. -/
 noncomputable def localAcyclicityAlpha
     {X S : Scheme.{u}} (f : X ⟶ S) {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (x : Spec (.of Ω) ⟶ X) {Ω' : Type u} [Field Ω'] [IsAlgClosed Ω']
@@ -102,8 +102,7 @@ noncomputable def localAcyclicityAlpha
         (Scheme.strictHenselizationStructuralMap x)).inv.app G)
 
 /-- Local acyclicity at a geometric point relative to an abelian sheaf: the canonical
-map is an isomorphism in degree zero and all positive cohomology groups vanish.
-Source: Stacks Project, Tag 0GJP. -/
+map is an isomorphism in degree zero and all positive cohomology groups vanish. -/
 def IsLocallyAcyclicAtRelative
     {X S : Scheme.{u}} (f : X ⟶ S) {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (x : Spec (.of Ω) ⟶ X)
@@ -118,8 +117,7 @@ def IsLocallyAcyclicAtRelative
               (pullback.fst (localAcyclicityStrictMap f x) t ≫
                 Scheme.strictHenselizationStructuralMap x)).obj G)))
 
-/-- Local acyclicity relative to an abelian sheaf at every geometric point.
-Source: Stacks Project, Tag 0GJP. -/
+/-- Local acyclicity relative to an abelian sheaf at every geometric point. -/
 def IsLocallyAcyclicRelative
     {X S : Scheme.{u}} (f : X ⟶ S)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) : Prop :=
@@ -127,8 +125,7 @@ def IsLocallyAcyclicRelative
     IsLocallyAcyclicAtRelative f x G
 
 /-- Local acyclicity for all constant cyclic coefficients of positive order prime
-to the residue characteristic, including every positive order in characteristic zero.
-Source: Stacks Project, Tag 0GJP. -/
+to the residue characteristic, including every positive order in characteristic zero. -/
 def IsLocallyAcyclic
     {X S : Scheme.{u}} (f : X ⟶ S) : Prop :=
   ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X)
@@ -139,8 +136,7 @@ def IsLocallyAcyclic
       ((constantSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
         (AddCommGrpCat.of (ULift.{u + 1} (ZMod n))))
 
-/-- Universal local acyclicity: local acyclicity after every scheme base change.
-Source: Stacks Project, Tag 0GJP. -/
+/-- Universal local acyclicity: local acyclicity after every scheme base change. -/
 def IsUniversallyLocallyAcyclic
     {X S : Scheme.{u}} (f : X ⟶ S) : Prop :=
   ∀ (S' : Scheme.{u}) (g : S' ⟶ S), IsLocallyAcyclic (pullback.snd f g)

@@ -78,7 +78,11 @@ import Mathlib.LinearAlgebra.Basis.VectorSpace
 /-!
 # The field-module calculation for a principal residue quotient
 
-Source: the residue test, proof step 3, and Stacks Project Tags 0GMW and 03EI.
+## References
+
+* the residue test, proof step 3, and Stacks Project Tags 0GMW and 03EI
+* Stacks Project, Modules on Sites, Tags 0GMW (tensor and sheafification) and 03EI (exact
+  sheafification)
 -/
 
 @[expose] public section
@@ -254,10 +258,7 @@ set_option synthInstance.maxSize 2048 in
 /-- Tensor cohomology vanishing passes from the constant principal residue quotient to
 any sheaf annihilated by its generator. This concerns ordinary termwise tensor of an
 arbitrary, possibly unbounded, complex, in one degree. No K-flatness or nilpotence
-hypothesis is needed here.
-
-Source: Stacks Project, Modules on Sites, Tags 0GMW (tensor and sheafification) and 03EI (exact
-sheafification). -/
+hypothesis is needed here. -/
 theorem proEtale_residue_module_tensor_homology
     (T : Scheme.{u}) (A : Type u) [CommRing A] (r : A)
     (hr : (Ideal.span {r}).IsMaximal)

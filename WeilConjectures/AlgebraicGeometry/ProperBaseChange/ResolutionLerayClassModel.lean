@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.Direct.DirectImageResolutionNormalizati
 
 /-! # The Leray comparison on a supplied K-injective model
 
-Source: Stacks Project, Tags 0D5W, 0D5X and 079V.
+## References
+
+* Stacks Project, Tags 0D5W, 0D5X and 079V
 -/
 
 @[expose] public section
@@ -33,8 +35,7 @@ attribute [local irreducible] Functor.rightDerivedFunctor
 namespace AlgebraicGeometry
 
 /-- On a supplied K-injective model, the inverse composite-resolution comparison,
-Leray comparison, and direct-image comparison give the ordinary derived-section unit.
-Source: Stacks Project, Tags 0D5W, 0D5X and 079V. -/
+Leray comparison, and direct-image comparison give the ordinary derived-section unit. -/
 theorem resolutionLerayClassModel
     {X Y : RingedSpace.{u}}
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X))]

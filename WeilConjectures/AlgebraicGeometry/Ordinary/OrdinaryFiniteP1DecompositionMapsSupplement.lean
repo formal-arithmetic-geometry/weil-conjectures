@@ -165,6 +165,10 @@ public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1DecompositionMap
 
 The unit and Chern adjoint are explicit, independently of the proof of their splitting.
 The comparison and untwisting lemmas use this common interface.
+
+## References
+
+* Stacks Tag 03PK
 -/
 
 @[expose] public noncomputable section
@@ -183,8 +187,7 @@ attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint
   ModuleCat.hasColimitsOfShape ModuleCat.hasColimitsOfSize
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The normalized inverse product is the actual evaluation.
-Source: Stacks Tag 03PK. -/
+/-- The normalized inverse product is the actual evaluation. -/
 theorem p1DecompositionSheafProduct_hom (A : Type (u + 1)) [CommRing A]
     (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
     (T : Scheme.{u}) (hT : IsUnit (N : Γ(T, ⊤))) :
@@ -203,8 +206,7 @@ def p1DecompositionUnit (A : Type (u + 1)) [CommRing A] (S : Scheme.{u}) :
     (ProjectiveLine S ↘ S)).homEquiv _ _
       (ordinaryFiniteUnitPullback A (ProjectiveLine S ↘ S)).hom
 
-/-- Form a tensor-evaluation adjoint in arbitrary categories.
-Source: the tensor-Hom adjunction. -/
+/-- Form a tensor-evaluation adjoint in arbitrary categories. -/
 @[irreducible]
 def p1DecompositionTensorAdjoint {C D : Type*} [Category C] [Category D]
     (F : C ⥤ D) (G : D ⥤ C) (adj : F ⊣ G) (tensor : D ⥤ D ⥤ D)
@@ -249,8 +251,7 @@ def p1DecompositionMap (A : Type (u + 1)) [CommRing A]
         (ordinaryFiniteUnit A (ProjectiveLine S)) :=
   biprod.desc (p1DecompositionUnit A S) (p1DecompositionChernAdjoint A N hN hA S hS c)
 
-/-- Assemble two component comparisons on a pulled-back biproduct.
-Source: the universal property of the biproduct. -/
+/-- Assemble two component comparisons on a pulled-back biproduct. -/
 @[irreducible]
 def p1DecompositionBiprodMap {C D : Type*} [Category C] [Category D]
     [HasZeroMorphisms C] [HasZeroMorphisms D]

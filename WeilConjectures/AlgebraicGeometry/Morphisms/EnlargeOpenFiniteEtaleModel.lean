@@ -19,7 +19,10 @@ import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Gluing
 /-!
 # Enlarging an open carrying a generic finite étale cover
 
-Source: Stacks Project, Tag 0EYJ.
+## References
+
+* Stacks Project, Tag 0EYJ
+* Stacks Project, Tag 0EYJ, proof of Lemma 58.31.8, the local claim and its spreading
 -/
 
 @[expose] public section
@@ -31,9 +34,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- An extension over a proper open containing the generic point extends over a strictly
-larger open. This is the local extension step, before Noetherian induction.
-
-Source: Stacks Project, Tag 0EYJ, proof of Lemma 58.31.8, the local claim and its spreading. -/
+larger open. This is the local extension step, before Noetherian induction. -/
 theorem GaloisCover.exists_larger_open_finiteEtale_model {S C : Scheme.{u}} [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]
     (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))

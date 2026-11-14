@@ -90,11 +90,13 @@ import Mathlib.CategoryTheory.Limits.HasLimits
 /-!
 # Inverse image, tensor products, and internal Hom on the small pro-etale site
 
-Source: Stacks Project, Lemma 18.26.2 (Tag 03EL), Remark 0GMX, and Lemma 0GN2.
-
 The statement records the canonical tensor, internal-Hom, positive tensor-power,
 coefficient-extension, and inverse-limit comparisons for the explicitly constructed
 pro-etale module inverse image.
+
+## References
+
+* Stacks Project, Lemma 18.26.2 (Tag 03EL), Remark 0GMX, and Lemma 0GN2
 -/
 
 -- After pruning, this module only keeps private declarations.

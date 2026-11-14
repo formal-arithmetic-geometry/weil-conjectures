@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.FractionZeroTensorPower
 /-!
 # A power of a section kills a positive cohomology class
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 01XR.
+## References
+
+* Stacks Project, Cohomology of Schemes, Lemma 01XR
 -/
 
 @[expose] public section
@@ -29,9 +31,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- If the nonvanishing open of a section of an invertible module is affine, every positive
 cohomology class of a quasi-coherent module is killed by some tensor power of that section.
-The map is induced by `F ≅ F ⊗ 𝒪_X ⟶ F ⊗ L^{⊗ e}`, with second factor `s^{⊗ e}`.
-
-Source: Stacks Project, Cohomology of Schemes, Lemma 01XR. -/
+The map is induced by `F ≅ F ⊗ 𝒪_X ⟶ F ⊗ L^{⊗ e}`, with second factor `s^{⊗ e}`. -/
 theorem exists_tensorPowSection_cohomology_eq_zero
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
     (L : X.Modules) [L.IsInvertible] (s : Γ(L, ⊤))

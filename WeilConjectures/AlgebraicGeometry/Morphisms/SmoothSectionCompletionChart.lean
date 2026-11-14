@@ -14,7 +14,11 @@ import WeilConjectures.RingTheory.Smooth.AugmentationCompletionPowerSeries
 /-!
 # Flat completion chart for a smooth section over a local base
 
-Source: Stacks Project, Tags 0EYB, 05D5 and 00MB.
+## References
+
+* Stacks Project, Tags 0EYB, 05D5 and 00MB
+* Stacks Project, Tag 0EYB, the completion paragraph
+* Tags 05D5 and 00MB
 -/
 
 @[expose] public section
@@ -24,9 +28,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- A smooth section over a Noetherian local ring has a flat power-series chart,
-compatible with both its structure map and the entire section.
-
-Source: Stacks Project, Tag 0EYB, the completion paragraph; Tags 05D5 and 00MB. -/
+compatible with both its structure map and the entire section. -/
 theorem exists_smooth_section_completion_chart
     (B : Type u) [CommRing B] [IsLocalRing B] [IsNoetherianRing B]
     {X : Scheme.{u}} (p : X ⟶ Spec (.of B)) [Smooth p]

@@ -20,7 +20,12 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.DepthTwoFiniteExtensionUnique
 /-!
 # Flatness of a finite depth-two extension on a power-series spectrum
 
-Source: Stacks Project, Tag 0EYA and the last completion step of Tag 0EYB.
+## References
+
+* Stacks Project, Tag 0EYA and the last completion step of Tag 0EYB
+* Stacks Project, Tag 0EYA
+* Tag 0EY6(2), (a), (b)
+* Tag 0337
 -/
 
 @[expose] public section
@@ -29,9 +34,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- A finite depth-two extension on a power-series spectrum is flat.
-
-Source: Stacks Project, Tag 0EYA; Tag 0EY6(2), (a), (b); Tag 0337 -/
+/-- A finite depth-two extension on a power-series spectrum is flat. -/
 theorem flat_of_power_series_depth_two_finite_extension
     (B : Type u) [CommRing B] [IsLocalRing B] [IsNoetherianRing B]
     (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth (R := B) B)

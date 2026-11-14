@@ -64,7 +64,10 @@ import WeilConjectures.CategoryTheory.FiniteTypeRestrictionMapExact
 
 /-! # Finitely presented local constant models on the pro-etale site
 
-Source: Stacks Project, Tags 09AJ and 093U.
+## References
+
+* Stacks Project, Tags 09AJ and 093U
+* Stacks Project, Tag 093U (3)
 -/
 
 @[expose] public section
@@ -73,8 +76,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- Finitely presented constant local models satisfy the local weak Serre clauses.
-Source: Stacks Project, Tag 093U (3). -/
+/-- Finitely presented constant local models satisfy the local weak Serre clauses. -/
 theorem proEtale_fp_localModels_serre (X : Scheme.{u}) (R : Type u)
     [CommRing R] [IsNoetherianRing R] :
     (∀ (F G : proEtaleRingModules X (proEtaleConstantRing X R)) (f : F ⟶ G),

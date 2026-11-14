@@ -109,8 +109,11 @@ import all WeilConjectures.SmoothPurity.Derived.DerivedScalarExtensionRestrictio
 
 /-! # Evaluation of ordinary scalar extension
 
-Source: Stacks Project, Modules on Sites, Section 03EK and Tag 03CY,
-applied to the vertical sequence topology.
+## References
+
+* Stacks Project, Modules on Sites, Section 03EK and Tag 03CY, applied to the vertical sequence
+  topology
+* Stacks Project, Section 03EK and Tag 03CY
 -/
 
 @[expose] public noncomputable section
@@ -138,8 +141,7 @@ private theorem evaluation_smul
   rw [ObjectProperty.eqToHom_hom, eqToHom_app]
   rfl
 
-/-- Evaluation of an ordinary coefficient extension represents coefficient-linear maps.
-Source: Stacks Project, Section 03EK and Tag 03CY. -/
+/-- Evaluation of an ordinary coefficient extension represents coefficient-linear maps. -/
 theorem scalarExtension_evaluation
     {C : Type c} [Category.{v} C] [EssentiallySmall.{max c v r} C]
     (J : GrothendieckTopology C)

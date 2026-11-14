@@ -10,7 +10,10 @@ public import Mathlib.AlgebraicGeometry.Normalization
 
 /-! # Relative normalization under affine localization
 
-Source: Stacks Project, Tag 0307.
+## References
+
+* Stacks Project, Tag 0307
+* Stacks Project, together with flat base change of sections, Tag 02KH
 -/
 
 @[expose] public section
@@ -105,9 +108,7 @@ private theorem normalizationPullback_affine_localization {X C Y : Scheme.{u}}
     exact congr(CommRingCat.ofHom $(ψ.comp_algebraMap.symm))
 
 /-- Relative normalization commutes with a flat morphism of affine schemes whose
-map on global sections is a localization.
-
-Source: Stacks Project, together with flat base change of sections, Tag 02KH. -/
+map on global sections is a localization. -/
 theorem Hom.isIso_normalizationPullback_affine_localization
     {X C Y : Scheme.{u}} [IsAffine C] [IsAffine Y]
     (f : X ⟶ C) (g : Y ⟶ C) [QuasiCompact f] [QuasiSeparated f] [Flat g]

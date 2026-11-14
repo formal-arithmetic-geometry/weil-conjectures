@@ -676,7 +676,12 @@ import WeilConjectures.AlgebraicGeometry.AdicOrdinaryComparisonComposition
 import WeilConjectures.AlgebraicGeometry.NilpotentReductionLissity
 import WeilConjectures.AlgebraicGeometry.ConstantCoefficientScalarEquivalence
 
-/-! # Nilpotent reflection of relative finite lissity -/
+/-! # Nilpotent reflection of relative finite lissity
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 094I and Tag 094H
+-/
 
 @[expose] public noncomputable section
 
@@ -691,9 +696,7 @@ namespace AlgebraicGeometry.Scheme
 attribute [-instance] WeilConjectures.integralCoefficientAbSheafify
   WeilConjectures.integralCoefficientAbLocallyBijective
   WeilConjectures.integralCoefficientRingSheafify in
-/-- Relative finite lissity is reflected by a nilpotent surjection of finite coefficients.
-
-Source: Stacks Project, Cohomology on Sites, Tag 094I and Tag 094H. -/
+/-- Relative finite lissity is reflected by a nilpotent surjection of finite coefficients. -/
 theorem relative_finite_lisse_of_nilpotent_reduction {X Y : Scheme.{u}} (g : Y ⟶ X)
     {B R : Type (u + 1)} [CommRing B] [CommRing R] [Finite B] [Finite R]
     (f : B →+* R) (hf : Function.Surjective f) (hnil : IsNilpotent (RingHom.ker f))

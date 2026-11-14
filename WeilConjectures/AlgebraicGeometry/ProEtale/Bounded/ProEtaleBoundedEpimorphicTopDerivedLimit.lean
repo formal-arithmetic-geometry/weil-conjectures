@@ -89,12 +89,15 @@ import WeilConjectures.Algebra.Homology.KernelShiftedMappingCone
 /-!
 # Bounds for derived limits with epimorphic top cohomology
 
-Source: Stacks Project, Tag 0947, (5)-(7) and its proof, specialized to the small pro-etale site.
-
 The index `n: ℕ` denotes the positive level `n + 1` of the source tower.
 The coefficient sheaf is written as a sheaf of rings with sectionwise commutativity;
 this retains exactly the given ring and module structures. A derived limit is any
 object satisfying the existing Roos-triangle property, without a chosen cone model.
+
+## References
+
+* Stacks Project, Tag 0947, (5)-(7) and its proof, specialized to the small pro-etale site
+* Stacks Project, Tag 0947, (5)-(7) and its proof
 -/
 
 @[expose] public section
@@ -109,9 +112,7 @@ namespace AlgebraicGeometry.Scheme.ProEt
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- A strict tower with cohomology in `[a,b]` and epimorphic top-cohomology
-transitions has every derived limit cohomologically in the same interval.
-
-Source: Stacks Project, Tag 0947, (5)-(7) and its proof. -/
+transitions has every derived limit cohomologically in the same interval. -/
 theorem bounded_epimorphic_top_derivedLimit
     (X : Scheme.{t})
     (R : Sheaf (topology X) RingCat.{max u (t + 1)})

@@ -34,11 +34,13 @@ set_option linter.privateModule false
 /-!
 # Normalization on a compatible pro-etale compactification tower
 
-Source: Stacks Tags 0F7B and 0F7J.
-
 The two sides below are independently constructed: the canonical origin compositor,
 conjugated to the supplied candidates by canonical comparisons, and the open adjunct of
 inverse ordinary exchange followed by the direct-image and open-extension compositors.
+
+## References
+
+* Stacks Tags 0F7B and 0F7J
 -/
 
 @[expose] public noncomputable section

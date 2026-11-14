@@ -16,7 +16,10 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.CompletedPuncturedQuotientFul
 
 /-! # Lifting the quotient cover over the maximal-ideal completion
 
-Source: Stacks Project, Tags 0BLS, 0BM6, 09ZL and 0AVY.
+## References
+
+* Stacks Project, Tags 0BLS, 0BM6, 09ZL and 0AVY
+* Stacks Project, proof of Tag 0BLS, Tags 0BM6, 09ZL, 0AVY and 0A02
 -/
 
 @[expose] public section
@@ -25,9 +28,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- The prescribed quotient restriction lifts over the completion.
-
-Source: Stacks Project, proof of Tag 0BLS, Tags 0BM6, 09ZL, 0AVY and 0A02 -/
+/-- The prescribed quotient restriction lifts over the completion. -/
 theorem exists_completed_etale_extension_of_depth_three_of_quotient_extension
     (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A]
     (f : A) (hf : f ∈ IsLocalRing.maximalIdeal A)

@@ -15,7 +15,11 @@ import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-! # The generic stalk of a regular effective Cartier divisor
 
-Source: Stacks Project, Tags 0EYG and 00PD.
+## References
+
+* Stacks Project, Tags 0EYG and 00PD
+* Stacks Project, Tag 0EYG (the height-one divisor calculation), and Tag 00PD (the one-dimensional
+  regular local ring criterion)
 -/
 
 @[expose] public section
@@ -24,10 +28,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- At the generic point of an integral effective Cartier divisor, a regular ambient
-stalk is a discrete valuation ring.
-
-Source: Stacks Project, Tag 0EYG (the height-one divisor calculation), and Tag 00PD
-(the one-dimensional regular local ring criterion). -/
+stalk is a discrete valuation ring. -/
 theorem regular_cartier_generic_stalk_dvr
     {X D : Scheme.{u}} (j : D ⟶ X) (hD : IsIntegral D)
     (hj : IsEffectiveCartierCenter j) (η : D) (hη : IsGenericPoint η Set.univ)

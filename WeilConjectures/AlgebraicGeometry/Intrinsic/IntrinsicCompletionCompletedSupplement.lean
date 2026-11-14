@@ -106,8 +106,6 @@ public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 public import WeilConjectures.AlgebraicGeometry.IntrinsicCompletionCompleted
 /-! # Intrinsic completion over the completed coefficient sheaf
 
-Source: Stacks Tags 099M and 091Z.
-
 The ring and tensor product are those of Mod(A_T), with site object universe t+1
 and morphism universe t. The mapping cocone of minus (1-shift) has differential
 (dx, (1-shift)x-dy) after listing its degree-i terms as (x,y).
@@ -118,6 +116,11 @@ and morphism universe t. The mapping cocone of minus (1-shift) has differential
 * `completedKoszulFiber`: the explicit completion complex.
 * `completedIntrinsicCompletionMap`: its specified unit.
 * `IsCompletedIntrinsicallyDerivedComplete`: invertibility of that unit.
+
+## References
+
+* Stacks Tags 099M and 091Z
+* Tags 07KC and 05RU
 -/
 
 @[expose] public noncomputable section
@@ -843,8 +846,7 @@ private theorem completedLocalization (M : Type*) [Category* M] [Abelian M]
     Category.comp_id, Category.id_comp]
 
 /-- The explicit Koszul fiber and its unit descend through quasi-isomorphisms.
-No arbitrary representative is chosen to define the data of the fiber complex.
-Source: Tags 07KC and 05RU. -/
+No arbitrary representative is chosen to define the data of the fiber complex. -/
 theorem completedIntrinsicCompletion_descends (r : ℕ) (f : Fin r → A) :
     ∃ (F : adicDatumDerived X d ⥤ adicDatumDerived X d) (η : 𝟭 _ ⟶ F),
       ∀ C : CochainComplex (adicDatumModules X d) ℤ,

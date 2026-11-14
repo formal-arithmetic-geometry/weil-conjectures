@@ -12,12 +12,14 @@ import WeilConjectures.AlgebraicGeometry.ProperOpenCalculus.ProperOpenStaircase
 /-!
 # Refinement independence and staircase coherence
 
-Source: Stacks Project, Tags 0F7J and 0F7K, common-refinement and three-square calculations.
-
 This is a formal statement for the supplied proper/open calculus on any collection A
 of schemes. `Geometry A` supplies all geometric existence assumptions; no qcqs
 hypothesis is imposed. Existing `Compactification`, `Triangle` and `Tower` supply the
 geometric objects. Arbitrary refinements are retained, including noncartesian ones.
+
+## References
+
+* Stacks Project, Tags 0F7J and 0F7K, common-refinement and three-square calculations
 -/
 
 @[expose] public section

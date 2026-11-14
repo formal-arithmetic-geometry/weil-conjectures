@@ -70,8 +70,15 @@ import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 /-!
 # Underived projection for a closed pro-etale immersion
 
-Source: Stacks Project, Tags 09AA and 09AH, Section 03EK and Tag 03EL. The projection consequence is
+The projection consequence is
 agent-formulated.
+
+## References
+
+* Stacks Project, Tags 09AA and 09AH, Section 03EK and Tag 03EL
+* Stacks, Tags 03D2, 03D3 and 09AA
+* Stacks, Tags 03EL and 09AA
+* Stacks, Section 03EK
 -/
 
 @[expose] public section
@@ -91,8 +98,7 @@ namespace AlgebraicGeometry.ProEtaleClosedProjection
 
 /-- The actual module adjunction is uniquely characterized by its constructed unit
 on every section. This fixes adjunction data, rather than choosing an arbitrary
-adjunction between the functors.
-Source: Stacks, Tags 03D2, 03D3 and 09AA. -/
+adjunction between the functors. -/
 theorem adjunction_exists {X Z : Scheme.{u}} (i : Z ⟶ X) (R : Rings X) :
     ∃! ai : inverse i R ⊣ proEtaleRingedDirectImage i R,
       ∀ (F : Modules R) (V : X.ProEt) (s : F.val.obj (op V)),
@@ -107,15 +113,13 @@ theorem adjunction_exists {X Z : Scheme.{u}} (i : Z ⟶ X) (R : Rings X) :
       (AlgebraicGeometry.Scheme.canonicalUnit_sections i R F V s).symm
 
 /-- The canonical module adjunction, selected from the unique unit-normalized
-characterization. Its data are determined by the actual inverse-image section map.
-Source: Stacks, Tags 03D2, 03D3 and 09AA. -/
+characterization. Its data are determined by the actual inverse-image section map. -/
 noncomputable def adjunction {X Z : Scheme.{u}} (i : Z ⟶ X) (R : Rings X) :
     inverse i R ⊣ proEtaleRingedDirectImage i R :=
   Classical.choose (adjunction_exists i R)
 
 /-- The projection map is the specified adjunct of the normalized tensor comparison
-followed by the counit on the first factor. No isomorphism or arbitrary map is chosen.
-Source: Stacks, Tags 03EL and 09AA. -/
+followed by the counit on the first factor. No isomorphism or arbitrary map is chosen. -/
 noncomputable def projection {X Z : Scheme.{u}} (i : Z ⟶ X) (R : Rings X)
     (M : Modules (inverseRing i R)) (F : Modules R) :
     tensor ((proEtaleRingedDirectImage i R).obj M) F ⟶
@@ -124,8 +128,7 @@ noncomputable def projection {X Z : Scheme.{u}} (i : Z ⟶ X) (R : Rings X)
     (comparison i R ((proEtaleRingedDirectImage i R).obj M) F ≫
       tensorMap ((adjunction i R).counit.app M) (𝟙 ((inverse i R).obj F)))
 
-/-- The ring sheaf B regarded as an R-module through the given ring morphism.
-Source: Stacks, Section 03EK. -/
+/-- The ring sheaf B regarded as an R-module through the given ring morphism. -/
 noncomputable abbrev coefficientModule {X : Scheme.{u}} {R B : Rings X} (a : R ⟶ B) :
     Modules R :=
   (restrict a).obj (SheafOfModules.unit (proEtaleModuleCoefficients B))

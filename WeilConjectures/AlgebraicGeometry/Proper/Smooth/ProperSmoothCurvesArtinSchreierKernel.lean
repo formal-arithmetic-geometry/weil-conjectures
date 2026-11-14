@@ -35,7 +35,9 @@ For a proper smooth family `f: C ⟶ S` of curves with geometrically connected f
 Noetherian base on which the prime `p` vanishes, the underlying abelian sheaf of `Rᵠf_* ℤ/p` is
 the kernel of `F - 1` for a Frobenius-linear endomorphism `F` of a finite locally free module.
 
-Source: Stacks Project, Tag 0GKV, case (b).
+## References
+
+* Stacks Project, Tag 0GKV, case (b)
 -/
 
 @[expose] public section
@@ -94,9 +96,7 @@ private theorem epi_sheafCompose_uliftFunctor_map {S : Scheme.{u}}
 `f: C ⟶ S` with geometrically connected one-dimensional fibres over a Noetherian base on
 which the prime `p` vanishes, and every degree `q`, the underlying abelian sheaf of
 `Rᵠf_* ℤ/p` is the universe lift of the kernel of `F - 1`, for a Frobenius-linear endomorphism
-`F` of the étale sheaf of a finite locally free module.
-
-Source: Stacks Project, Tag 0GKV, case (b). -/
+`F` of the étale sheaf of a finite locally free module. -/
 theorem exists_forget₂_higherDirectImage_iso_frobeniusLinear_kernel
     {C S : Scheme.{u}} [IsNoetherian S]
     (f : C ⟶ S) [IsProper f] [Smooth f] [GeometricallyConnected f]

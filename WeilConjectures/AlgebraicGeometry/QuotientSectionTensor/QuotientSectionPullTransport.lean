@@ -24,7 +24,13 @@ import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionPu
 import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionPullTransportComputed
 public import WeilConjectures.SixFunctors.Supporting.ModCondensedCachedInstances
 
-/-! # A step of the normalized quotient section comparison -/
+/-! # A step of the normalized quotient section comparison
+
+## References
+
+* Stacks 03EL, 06YY, 0D6D and 0G7E
+* Stacks 06YY, 0D6D and 07A6
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -73,8 +79,7 @@ open ModuleRingedComparison
 variable [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ T)]
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ' T)]
 
-/-- The normalized section pullback comparison exists for the supplied endpoint models.
-Source: Stacks 03EL, 06YY, 0D6D and 0G7E. -/
+/-- The normalized section pullback comparison exists for the supplied endpoint models. -/
 theorem section_pull_transport_section_normalized {X Y : Scheme.{u}} (f : X ⟶ Y)
     (cX : ScalarSectionData a X) (cY : ScalarSectionData a Y)
     (hcX : ScalarSectionNormalized a X cX) (hcY : ScalarSectionNormalized a Y cY)
@@ -87,7 +92,7 @@ theorem section_pull_transport_section_normalized {X Y : Scheme.{u}} (f : X ⟶ 
 
 -- Reconcile the source module-object instances with the normalized section interfaces.
 /-- The derived section comparison satisfies the pull condition once its normalized
-counit square is fixed. Source: Stacks 06YY, 0D6D and 07A6. -/
+counit square is fixed. -/
 theorem section_pull_transport_condition_of_normalized {X Y : Scheme.{u}} (f : X ⟶ Y)
     (cX : ScalarSectionData a X) (cY : ScalarSectionData a Y)
     (hcX : ScalarSectionNormalized a X cX) (hcY : ScalarSectionNormalized a Y cY)
@@ -127,8 +132,7 @@ theorem section_pull_transport_condition_of_normalized {X Y : Scheme.{u}} (f : X
   apply (cancel_epi (source.map e.hom)).mp
   rw [θ₁.naturality, θ₂.naturality, hq]
 
-/-- The same normalized scalar models realize the specified scalar/pullback map.
-Source: Stacks 03EL, 06YY, 0D6D and 0G7E. -/
+/-- The same normalized scalar models realize the specified scalar/pullback map. -/
 theorem section_pull_transport {X Y : Scheme.{u}} (f : X ⟶ Y)
     (cX : ScalarSectionData a X) (cY : ScalarSectionData a Y)
     (hcX : ScalarSectionNormalized a X cX) (hcY : ScalarSectionNormalized a Y cY)

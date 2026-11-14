@@ -14,7 +14,9 @@ import Mathlib.Algebra.DirectSum.Decomposition
 /-!
 # Coordinates of a homogeneous basis
 
-Source: Stacks Project, Constructions, Tags 01M6 and 01MN.
+## References
+
+* Stacks Project, Constructions, Tags 01M6 and 01MN
 -/
 
 @[expose] public section
@@ -25,8 +27,7 @@ open MvPolynomial
 
 namespace AlgebraicGeometry.Proj
 
-/-- Coordinates of a homogeneous vector have the degrees prescribed by its basis.
-Source: Stacks Project, Constructions, Tags 01M6 and 01MN. -/
+/-- Coordinates of a homogeneous vector have the degrees prescribed by its basis. -/
 theorem homogeneous_basis_coordinates (k : Type u) [Field k]
     (M : ModuleCat.{u} (MvPolynomial (Fin 2) k))
     (𝓜 : ℤ → AddSubgroup M) (h𝓜 : DirectSum.IsInternal 𝓜)

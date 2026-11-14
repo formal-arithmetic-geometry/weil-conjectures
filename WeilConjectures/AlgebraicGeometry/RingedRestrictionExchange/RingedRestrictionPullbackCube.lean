@@ -12,7 +12,10 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Coh
 
 /-! # The ordinary inverse-image cube for restriction
 
-Source: Stacks Project
+## References
+
+* Stacks Project
+* Stacks Project, composition of morphisms of sites, morphisms of pro-etale sites
 -/
 
 @[expose] public noncomputable section
@@ -808,8 +811,7 @@ private def pointwiseFace6
     (M : proEtaleRingModules Y r.RY) :=
   pointwiseFace5 r C M (by cube_apps)
 
-/-- The six canonical module inverse-image squares commute around an open cube.
-Source: Stacks Project, composition of morphisms of sites, morphisms of pro-etale sites. -/
+/-- The six canonical module inverse-image squares commute around an open cube. -/
 theorem restriction_pullback_cube
     {X' X Y' Y U : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
     {f : X ⟶ Y} {g : Y' ⟶ Y} {sq : ChosenCartesianSquare g' f' f g}

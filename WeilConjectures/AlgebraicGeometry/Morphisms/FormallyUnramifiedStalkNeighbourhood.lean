@@ -11,7 +11,10 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
 /-!
 # An unramified stalk has an unramified neighbourhood
 
-Source: Stacks Project, Tag 02GF.
+## References
+
+* Stacks Project, Tag 02GF
+* Stacks Project, Tag 02GF, openness of the unramified locus
 -/
 
 @[expose] public section
@@ -49,9 +52,7 @@ private theorem isUnramifiedAt_appLE_of_stalkMap
 
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Formal unramifiedness of a stalk map spreads to a source neighbourhood for a
-morphism locally of finite type.
-
-Source: Stacks Project, Tag 02GF, openness of the unramified locus. -/
+morphism locally of finite type. -/
 theorem FormallyUnramified.exists_neighbourhood_of_stalkMap
     {X Y : Scheme.{u}} (f : X ⟶ Y) [LocallyOfFiniteType f] (x : X)
     (hx : (f.stalkMap x).hom.FormallyUnramified) :

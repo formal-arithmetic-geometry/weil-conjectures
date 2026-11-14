@@ -14,7 +14,9 @@ import all Mathlib.Algebra.Homology.Localization
 
 /-! # Identity normalization for ordinary open exchange
 
-Source: Stacks Project, Tags 03DI, 07A7 and 099N.
+## References
+
+* Stacks Project, Tags 03DI, 07A7 and 099N
 -/
 
 

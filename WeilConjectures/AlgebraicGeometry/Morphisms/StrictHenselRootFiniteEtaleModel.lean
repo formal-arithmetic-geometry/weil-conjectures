@@ -22,7 +22,10 @@ public import Mathlib.Algebra.Regular.SMul
 
 /-! # The finite étale model after adjoining the group-order root
 
-Source: Stacks Project, Tags 09EB, 0BRM, 0EYE and 0EYG.
+## References
+
+* Stacks Project, Tags 09EB, 0BRM, 0EYE and 0EYG
+* Stacks Project, Tags 09EB, 0BRM, 0EYE and 0EYG, construction of C
 -/
 
 @[expose] public section
@@ -69,9 +72,7 @@ private theorem cover_pullback_properties
   rw [he]
   exact ⟨inferInstance, inferInstance, inferInstance⟩
 
-/-- The punctured root pullback extends as a surjective finite étale cover.
-
-Source: Stacks Project, Tags 09EB, 0BRM, 0EYE and 0EYG, construction of C. -/
+/-- The punctured root pullback extends as a surjective finite étale cover. -/
 theorem GaloisCover.strict_hensel_root_finite_etale_model
     {L U : Scheme.{u}} (i : U ⟶ L)
     (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)

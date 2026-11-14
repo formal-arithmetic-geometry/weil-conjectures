@@ -17,7 +17,11 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 /-!
 # Descent of a comparison between two existing finite etale models
 
-Source: Stacks Project, Tag 0BQ5, comparison descent in its proof.
+## References
+
+* Stacks Project, Tag 0BQ5, comparison descent in its proof
+* Stacks Project, Tag 0BQ5 (limits-lemma-glueing-near-point), the last paragraph of the proof, using
+  the morphism and equality parts of Tag 01ZM
 -/
 
 @[expose] public section
@@ -342,10 +346,7 @@ private theorem overlap_transition_affine {S C : Scheme.{u}} (c : C ⟶ S)
     (@isAffineHom_of_isAffine _ _ _ V.1.2.1 T.1.2.1)
 
 /-- Two existing models with a comparison on the local overlap become isomorphic
-on an open overlap after shrinking the second neighbourhood.
-
-Source: Stacks Project, Tag 0BQ5 (limits-lemma-glueing-near-point), the last
-paragraph of the proof, using the morphism and equality parts of Tag 01ZM. -/
+on an open overlap after shrinking the second neighbourhood. -/
 theorem FiniteEtale.exists_neighbourhood_comparison_of_stalk {S C : Scheme.{u}}
     [IsNoetherian S] [QuasiSeparatedSpace S]
     (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [LocallyOfFinitePresentation c]

@@ -24,7 +24,9 @@ import WeilConjectures.AlgebraicGeometry.ProperBaseChange.NormalityPerfectClosur
 /-!
 # Geometrically normal normalization after purely inseparable extension
 
-Source: Stacks Project, Varieties, Tag 0BXT.
+## References
+
+* Stacks Project, Varieties, Tag 0BXT
 -/
 
 @[expose] public section
@@ -251,7 +253,7 @@ private theorem finite_component_normalization_presentation (T : Scheme.{u})
     simp [Scheme.fromReducedNormalization, C, a]
 
 /-- The componentwise normalization becomes geometrically normal after a finite purely
-inseparable extension. Source: Stacks Project, Varieties, Tag 0BXT.
+inseparable extension.
 
 The integral closed subschemes `C i` enumerate the reduced irreducible components of
 `X` after extension, without repetitions. Their normalization coproduct has its structure

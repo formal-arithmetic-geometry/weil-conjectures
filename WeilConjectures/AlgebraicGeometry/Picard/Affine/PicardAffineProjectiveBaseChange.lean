@@ -25,7 +25,10 @@ import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
 
 /-! # Base change for an affine K-flat direct-image model
 
-Source: Stacks Project, Tags 0A1D, 08DW(2) and 06Z0.
+## References
+
+* Stacks Project, Tags 0A1D, 08DW(2) and 06Z0
+* Stacks Project, Tags 0A1D, 08DW(2), 08FE and 06Z0
 -/
 
 @[expose] public section
@@ -97,8 +100,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 2048 in
 /-- Sheafified scalar extension of an affine K-flat model represents the structure
-sheaf's derived direct image after base change to the spectrum of the new ring.
-Source: Stacks Project, Tags 0A1D, 08DW(2), 08FE and 06Z0. -/
+sheaf's derived direct image after base change to the spectrum of the new ring. -/
 theorem picard_affine_projective_base_change
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

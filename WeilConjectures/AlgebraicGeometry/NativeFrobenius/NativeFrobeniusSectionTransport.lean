@@ -10,7 +10,10 @@ import WeilConjectures.CategoryTheory.Sites.PushforwardMonoidal
 
 /-! # Section normalization of native Frobenius transport
 
-Source: Stacks 03D6 and 03EO
+## References
+
+* Stacks 03D6 and 03EO
+* Stacks 03D6
 -/
 
 @[expose] public section
@@ -30,7 +33,6 @@ attribute [local irreducible] PresheafOfModules.sheafificationAdjunction
 
 /-- Pullback along the inverse isomorphism is postcomposition along the isomorphism.
 
-Source: Stacks 03D6.
 The first pullback projection is an isomorphism; its compatibility with the
 structure morphisms is the pullback square followed by `g.inv_hom_id`. -/
 noncomputable def pullbackPostcomposeIso (Y : Scheme.{u}) (g : Y ≅ Y) :
@@ -288,9 +290,7 @@ private theorem translationIso_sections (Y : Scheme.{u}) (l : ℕ) [Fact l.Prime
     (congrArg (fun k ↦ k.val.app V) ((sectionCounit Y l).app
       ((sigma (topology Y) (translation g) (ring Y l) (ringIso Y l g)).obj M)).inv_hom_id) _
 
-/-- The concrete native translation isomorphism, with its section normalization.
-
-Source: Stacks 03D6 and 03EO -/
+/-- The concrete native translation isomorphism, with its section normalization. -/
 theorem nativeFrobeniusSectionTransport (Y : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (g : Y ≅ Y) :
     let _ := (translation_continuous Y g).1

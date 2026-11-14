@@ -21,7 +21,10 @@ import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 
 /-! # Existence of operations on ordinary semilinear systems
 
-Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks 079P, 06YS, 06YY, 07A4 and 08J7--08JB.
+## References
+
+* Zheng, Construction 4.1 and Lemma 4.10
+* Stacks 079P, 06YS, 06YY, 07A4 and 08J7--08JB
 -/
 
 @[expose] public noncomputable section
@@ -38,8 +41,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   (τ : ∀ n : ℕ, B (n + 1) ⟶ B n)
 
 /-- The geometric, coefficient-extension, and open-localization operations,
-for a previously constructed ordinary system calculus.
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 079P, 06YS, 06YY, 07A4 and 08J7--08JB. -/
+for a previously constructed ordinary system calculus. -/
 structure SemilinearOperationsData (systems : Data.{c, v, r} J B τ) where
   geometric : ∀ {C' : Type c} [Category.{v} C'] [EssentiallySmall.{max c v r} C']
     (J' : GrothendieckTopology C')
@@ -221,8 +223,7 @@ private theorem operationOpenSystems (systems : Data.{c, v, r} J B τ) (U : C) :
   · intro P Q f
     exact operationExactTranspose adj P Q f
 
-/-- Geometric and coefficient operations on a fixed semilinear system calculus.
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 079P, 06YS, 06YY, 07A4 and 08J7--08JB. -/
+/-- Geometric and coefficient operations on a fixed semilinear system calculus. -/
 theorem semilinearOperationsData (systems : Data.{c, v, r} J B τ) :
     Nonempty (SemilinearOperationsData.{c, v, r} J B τ systems) := by
   classical

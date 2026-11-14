@@ -16,12 +16,17 @@ import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 /-!
 # The ordinary pro-etale unit--Leray chain formula
 
-Source: Stacks Project, Tags 07A6, 08J6 and 0D6E; Tags 070I, 08BJ and 0FND.
-
 The module and derived units are those of the recorded constant-ring adjunction.
 The terminal comparison uses its sectionwise direct image, identified with the canonical
 fixed-scalar realization by the published section-normalized comparison. Thus its final
 map is evaluation at the actual terminal base change, X times_Y Y = X.
+
+## References
+
+* Stacks Project, Tags 07A6, 08J6 and 0D6E
+* Tags 070I, 08BJ and 0FND
+* Stacks Tag 08J6
+* Stacks Tags 03D1 and 0H7J
 -/
 
 @[expose] public section
@@ -37,15 +42,13 @@ namespace AlgebraicGeometry.Scheme
 variable (A : Type u) [CommRing A] [Finite A]
 
 /-- Global sections, forgetting the locally constant scalar extension by the recorded
-realization inverse. The coefficient ring is the common lift of A to the site universe.
-Source: Stacks Tag 08J6. -/
+realization inverse. The coefficient ring is the common lift of A to the site universe. -/
 noncomputable def proEtaleUnitLeraySections (X : Scheme.{u}) :=
   (sfIntrinsicModuleEquivalence X A).inverse ⋙
     Sheaf.Γ (ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1, u} A))
 
 /-- The recorded direct image is the direct image through the constant-section ring map:
-the adjunct of the coefficient comparison is the original coefficient map, by adjunction.
-Source: Stacks Tags 03D1 and 0H7J. -/
+the adjunct of the coefficient comparison is the original coefficient map, by adjunction. -/
 noncomputable def proEtaleUnitLerayDirectImageIso {X Y : Scheme.{u}} (h : X ⟶ Y) :
     proEtaleConstantRingPushforward A h ≅ proEtaleConstantModuleDirectImage h A := by
   have he : proEtaleRingDirectImageMap h (proEtaleConstantRing Y A)
@@ -68,8 +71,7 @@ noncomputable def proEtaleUnitLerayDirectImageIso {X Y : Scheme.{u}} (h : X ⟶ 
               (proEtaleConstantRing X A)) from
         ⟨Functor.whiskerRight a.hom (forget₂ CommRingCat RingCat)⟩)) he)
 
-/-- Fixed-scalar terminal evaluation, using preservation of the terminal object by base change.
-Source: Stacks Tag 08J6. -/
+/-- Fixed-scalar terminal evaluation, using preservation of the terminal object by base change. -/
 noncomputable def proEtaleUnitLerayFixedTerminalIso {X Y : Scheme.{u}} (h : X ⟶ Y) :
     ProEtale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) h ⋙
         Sheaf.Γ (ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) ≅
@@ -83,8 +85,7 @@ noncomputable def proEtaleUnitLerayFixedTerminalIso {X Y : Scheme.{u}} (h : X �
 /-- Terminal-object identification for the recorded direct image. First identify its
 coefficient map with the constant-section map by adjunction. The published comparison
 is normalized on scalar-unit sections. Cancel the realization equivalences and evaluate
-base change at the terminal object, X times_Y Y = X.
-Source: Stacks Tag 08J6. -/
+base change at the terminal object, X times_Y Y = X. -/
 noncomputable def proEtaleUnitLerayTerminalIso {X Y : Scheme.{u}} (h : X ⟶ Y) :
     proEtaleConstantRingPushforward A h ⋙ proEtaleUnitLeraySections A Y ≅
       proEtaleUnitLeraySections A X :=

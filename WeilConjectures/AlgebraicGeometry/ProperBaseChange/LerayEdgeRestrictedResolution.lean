@@ -13,7 +13,11 @@ import WeilConjectures.AlgebraicGeometry.ProperBaseChange.LerayWholeOpenClass
 
 /-! # The cocycle Leray edge on a restricted resolution
 
-Source: Stacks Project, Tags 01E4, 01F4 and 01FB.
+## References
+
+* Stacks Project, Tags 01E4, 01F4 and 01FB
+* Stacks Project, Tag 01E4
+* Tag 01F4(2), and Tag 01FB
 -/
 
 @[expose] public section
@@ -161,7 +165,6 @@ private theorem restrictedResolution_sectionClass {Z Y : Scheme.{u}}
 /-- Restricting a global class and applying the restricted-resolution class map
 computes the restriction of its classical Leray edge. This concerns a single morphism,
 with no square, derived pullback, top-degree bound or derived adjunction.
-Source: Stacks Project, Tag 01E4; Tag 01F4(2), and Tag 01FB.
 -/
 theorem lerayEdge_restrictedResolution {X S : Scheme.{u}} (f : X ⟶ S)
     (F : X.Modules) (I : InjectiveResolution F) (n : ℕ) (V : S.Opens)

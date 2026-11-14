@@ -18,7 +18,9 @@ import Mathlib.CategoryTheory.Sites.EpiMono
 
 /-! # Exact point sections with independent coefficient universes
 
-Source: Stacks 03CW, 0946.
+## References
+
+* Stacks 03CW, 0946
 -/
 
 @[expose] public noncomputable section

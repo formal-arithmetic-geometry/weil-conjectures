@@ -18,7 +18,10 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Pullback from a supplied local K-flat model
 
-Source: Stacks Project, Tags 08DW and 06YJ.
+## References
+
+* Stacks Project, Tags 08DW and 06YJ
+* Stacks Project, Tag 08DW, compatibility with open restriction, and Tag 06YJ
 -/
 
 @[expose] public section
@@ -35,8 +38,7 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
 -- The restriction comparison uses independent localization universes.
-/-- A K-flat model on an open computes pullback along a morphism factoring through it.
-Source: Stacks Project, Tag 08DW, compatibility with open restriction, and Tag 06YJ. -/
+/-- A K-flat model on an open computes pullback along a morphism factoring through it. -/
 theorem derivedPullback_local_kFlat_model {T X : Scheme.{u}} (f : T ⟶ X)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings T.toRingedSpace))]

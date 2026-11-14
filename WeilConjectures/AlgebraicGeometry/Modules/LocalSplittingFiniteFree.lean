@@ -16,6 +16,11 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-!
 # Local splitting of short exact sequences of finite locally free modules
+
+## References
+
+* Stacks Project, Schemes, Tag 01IE, affine extension lifting, together with the proved affine
+  finite locally free section criterion in `LocallyFreeRank`
 -/
 
 @[expose] public section
@@ -29,9 +34,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 set_option backward.isDefEq.respectTransparency false in
 /-- On an affine spectrum, lift the identity of the projective module of quotient
 sections through the quotient map on global sections. The tilde--Gamma counit and its
-naturality turn this lift into a right inverse of the sheaf quotient map.
-Source: Stacks Project, Schemes, Tag 01IE, affine extension lifting, together with the
-proved affine finite locally free section criterion in `LocallyFreeRank`. -/
+naturality turn this lift into a right inverse of the sheaf quotient map. -/
 private theorem exists_section_spec {R : CommRingCat.{u}}
     (T : ShortComplex (Spec R).Modules) (hT : T.ShortExact) (r : ℕ)
     [T.X₁.IsQuasicoherent] [T.X₃.IsFiniteLocallyFreeOfRank r] :

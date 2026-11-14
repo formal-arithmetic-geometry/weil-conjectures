@@ -12,7 +12,11 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Affine comparison for the symmetric algebra sheaf
 
-Source: Stacks Project, Schemes, Lemma 01I8 and Modules, Lemma 01CG.
+## References
+
+* Stacks Project, Schemes, Lemma 01I8 and Modules, Lemma 01CG
+* Stacks Project, Modules, Lemmas 01CG, 01CH, 01CL and Schemes, Lemma 01I8
+* Algebra, Lemma 0C6F
 -/
 
 @[expose] public section
@@ -40,8 +44,7 @@ private theorem affineComparison_isIso (X : Scheme.{u}) (F : X.Modules)
     (fun x _ ↦ SymmetricAlgebraSheaf.affineComparison_stalk_bijective F hW x)
 
 /-- The ring sheafification of the sectionwise symmetric algebra is quasi-coherent and its
-unit is bijective on affine sections. Source: Stacks Project, Modules, Lemmas 01CG, 01CH,
-01CL and Schemes, Lemma 01I8; Algebra, Lemma 0C6F. -/
+unit is bijective on affine sections. -/
 theorem quasiCoherentSymmetricAlgebra_affine_comparison
     (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent] :
     (SymmetricAlgebraSheaf.algebra F).toModule.IsQuasicoherent ∧

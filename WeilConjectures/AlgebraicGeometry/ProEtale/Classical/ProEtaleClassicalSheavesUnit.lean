@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.ProEtaleComparisonP
 /-!
 # The comparison unit for sheaves of sets
 
-Source: Stacks Project, Tag 099T.
+## References
+
+* Stacks Project, Tag 099T
 -/
 
 @[expose] public section
@@ -23,8 +25,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- The comparison unit is invertible for every etale sheaf of sets, and comparison
-inverse image induces a bijection on every Hom set.
-Source: Stacks Project, Tag 099T. -/
+inverse image induces a bijection on every Hom set. -/
 theorem proEtaleClassicalSheavesUnit (X : Scheme.{u}) :
     (∀ F : Sheaf X.smallEtaleTopology (Type (u + 1)),
       IsIso ((proEtaleSiteComparison X).unit.app F)) ∧

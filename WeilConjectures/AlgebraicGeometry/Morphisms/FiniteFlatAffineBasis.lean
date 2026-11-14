@@ -14,7 +14,12 @@ import Mathlib.RingTheory.Spectrum.Prime.FreeLocus
 /-!
 # Free affine neighbourhoods for a finite flat morphism
 
-Source: Stacks Project, Tags 02K9 and 00NX; Tag 0BVH.
+## References
+
+* Stacks Project, Tags 02K9 and 00NX
+* Tag 0BVH
+* Stacks Project, Tag 0BVH, construction before Lemma 49.3.1
+* Tags 02K9 and 00NX
 -/
 
 @[expose] public section
@@ -23,9 +28,7 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
-/-- A finite flat section algebra has a finite basis near every target point.
-
-Source: Stacks Project, Tag 0BVH, construction before Lemma 49.3.1; Tags 02K9 and 00NX. -/
+/-- A finite flat section algebra has a finite basis near every target point. -/
 theorem exists_affine_basis_of_finite_flat
     {X Y : Scheme.{u}} [IsLocallyNoetherian Y]
     (f : X ⟶ Y) [IsFinite f] [Flat f] (y : Y) :

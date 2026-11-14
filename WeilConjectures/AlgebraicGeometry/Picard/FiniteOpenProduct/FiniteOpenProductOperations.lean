@@ -27,8 +27,6 @@ import WeilConjectures.Algebra.Homology.SiteDerivedTensorDescentIndependentCoeff
 
 /-! # Canonical finite open product operations
 
-Source: Stacks 0GL1.
-
 We use the fixed-scalar presentation `FiniteD` of the ordinary constant-coefficient
 module derived category, with its canonical intrinsic realization from the open
 normalization dependency. Exact inverse image is localized termwise and identified
@@ -43,6 +41,14 @@ The theorem about these operations is in `FiniteOpenProductSwap`.
 
 `product` names Mathlib's chosen pullback without unfolding its construction during
 kernel checking. Its two projections and swap are the existing Mathlib morphisms.
+
+## References
+
+* Stacks 0GL1
+* Stacks 06YS
+* Stacks 07A4
+* Stacks 03DI
+* Stacks 03S6
 -/
 
 @[expose] public noncomputable section
@@ -77,8 +83,7 @@ def swap {T U B : Scheme.{u}} (a : T ⟶ B) (b : U ⟶ B) : product a b ≅ prod
   unfold product
   exact pullbackSymmetry a b
 
-/-- Evaluate the canonical K-flat Koszul braiding on a pro-etale coefficient category.
-Source: signed tensor conventions. -/
+/-- Evaluate the canonical K-flat Koszul braiding on a pro-etale coefficient category. -/
 def proetSigma (V : Type v) [Category.{u + 1} V] [Abelian V]
     [IsGrothendieckAbelian.{u + 1} V] [MonoidalCategory V] [MonoidalClosed V]
     [MonoidalPreadditive V] [SymmetricCategory V] [Abelian.HasFunctorialFlatResolution V]
@@ -89,32 +94,27 @@ def proetSigma (V : Type v) [Category.{u + 1} V] [Abelian V]
 
 variable (A : Type (u + 1)) [CommRing A] [Finite A]
 
-/-- The published derived tensor, with its coefficient specialization named.
-Source: Stacks 06YS. -/
+/-- The published derived tensor, with its coefficient specialization named. -/
 abbrev tensor (Y : Scheme.{u}) (M N : FiniteD A Y) : FiniteD A Y :=
   ((ProEtale.derivedTensor (ModuleCat.{u + 1} A) Y).obj M).obj N
 
-/-- Map both arguments of the published derived tensor bifunctor.
-Source: Stacks 06YS. -/
+/-- Map both arguments of the published derived tensor bifunctor. -/
 def tensorMap (Y : Scheme.{u}) {M M' N N' : FiniteD A Y}
     (f : M ⟶ M') (g : N ⟶ N') : tensor A Y M N ⟶ tensor A Y M' N' :=
   ((ProEtale.derivedTensor (ModuleCat.{u + 1} A) Y).map f).app N ≫
     ((ProEtale.derivedTensor (ModuleCat.{u + 1} A) Y).obj M').map g
 
-/-- Map two isomorphisms under the same published derived tensor bifunctor.
-Source: Stacks 06YS. -/
+/-- Map two isomorphisms under the same published derived tensor bifunctor. -/
 def tensorIsoMap (Y : Scheme.{u}) {M M' N N' : FiniteD A Y}
     (f : M ≅ M') (g : N ≅ N') : tensor A Y M N ≅ tensor A Y M' N' :=
   ((ProEtale.derivedTensor (ModuleCat.{u + 1} A) Y).mapIso f).app N ≪≫
     ((ProEtale.derivedTensor (ModuleCat.{u + 1} A) Y).obj M').mapIso g
 
-/-- Exact inverse image on complexes, with its canonical K-flat derived identification.
-Source: Stacks 07A4. -/
+/-- Exact inverse image on complexes, with its canonical K-flat derived identification. -/
 def pull {X Y : Scheme.{u}} (f : X ⟶ Y) : FiniteD A Y ⥤ FiniteD A X :=
   (ProEtale.upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategory
 
-/-- Tensor comparison for exact inverse image, with its canonical derived identification.
-Source: Stacks 07A4. -/
+/-- Tensor comparison for exact inverse image, with its canonical derived identification. -/
 def tensorPullIso {T U : Scheme.{u}} (f : T ⟶ U) (M N : FiniteD A U) :=
   (ProEtale.leftDerivedUpperStarIsoMapDerivedCategory
       (ModuleCat.{u + 1} A) f).symm.app (tensor A U M N) ≪≫
@@ -125,26 +125,22 @@ def tensorPullIso {T U : Scheme.{u}} (f : T ⟶ U) (M N : FiniteD A U) :=
         ((ProEtale.leftDerivedUpperStarIsoMapDerivedCategory
           (ModuleCat.{u + 1} A) f).app N)
 
-/-- The open adjunction, using the canonical exact/left-derived identification.
-Source: Stacks 03DI. -/
+/-- The open adjunction, using the canonical exact/left-derived identification. -/
 def adj {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     finiteShriek A j ⊣ pull A j :=
   ProEtale.derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) j
 
-/-- Composition for exact pullback, induced termwise before localization.
-Source: Stacks 07A4. -/
+/-- Composition for exact pullback, induced termwise before localization. -/
 def pullComp {T U X : Scheme.{u}} (i : T ⟶ U) (j : U ⟶ X) :
     pull A (i ≫ j) ≅ pull A j ⋙ pull A i :=
   Functor.mapDerivedCategoryNatIso (ProEtale.upperStarComp (ModuleCat.{u + 1} A) i j) ≪≫
     (Functor.mapDerivedCategoryCompIso _ _).symm
 
-/-- Geometric equality induces equality of the exact pullback functors.
-Source: Stacks 07A4. -/
+/-- Geometric equality induces equality of the exact pullback functors. -/
 def pullCongr {T X : Scheme.{u}} {f g : T ⟶ X} (w : f = g) : pull A f ≅ pull A g :=
   w ▸ Iso.refl _
 
-/-- Unit-compatible composition of exact open extensions, descended termwise.
-Source: Stacks 03DI; the canonical open compositor. -/
+/-- Unit-compatible composition of exact open extensions, descended termwise. -/
 def comp {V U X : Scheme.{u}} (i : V ⟶ U) (j : U ⟶ X)
     [IsOpenImmersion i] [IsOpenImmersion j] :
     finiteShriek A i ⋙ finiteShriek A j ≅ finiteShriek A (i ≫ j) :=
@@ -152,8 +148,7 @@ def comp {V U X : Scheme.{u}} (i : V ⟶ U) (j : U ⟶ X)
     (pullComp A i j).symm).leftAdjointUniq
       (adj A (i ≫ j))
 
-/-- Canonical pullback composition along an equality of geometric composites.
-Source: Stacks 07A4. -/
+/-- Canonical pullback composition along an equality of geometric composites. -/
 def square {T X Y Z : Scheme.{u}} (f : T ⟶ X) (g : X ⟶ Z)
     (h : T ⟶ Y) (i : Y ⟶ Z) (w : f ≫ g = h ≫ i) :
     pull A g ⋙ pull A f ≅ pull A i ⋙ pull A h :=
@@ -161,24 +156,21 @@ def square {T X Y Z : Scheme.{u}} (f : T ⟶ X) (g : X ⟶ Z)
     pullCongr A w ≪≫
       pullComp A h i
 
-/-- Compose the canonical pullback comparison with a geometric projection equality.
-Source: Stacks 07A4. -/
+/-- Compose the canonical pullback comparison with a geometric projection equality. -/
 def composeEq {T X Y : Scheme.{u}} (f : T ⟶ X) (g : X ⟶ Y)
     (h : T ⟶ Y) (w : f ≫ g = h) : pull A g ⋙ pull A f ≅ pull A h :=
   (pullComp A f g).symm ≪≫
     pullCongr A w
 
 /-- Open base change with the exact/left-derived comparisons made explicit.
-Its inverse is the normalized open-unit mate, as in the normalization dependency.
-Source: Stacks 03S6. -/
+Its inverse is the normalized open-unit mate, as in the normalization dependency. -/
 def beta {U' U X' X : Scheme.{u}} (gU : U' ⟶ U) (j' : U' ⟶ X')
     (j : U ⟶ X) (g : X' ⟶ X) [IsOpenImmersion j] [IsOpenImmersion j']
     (s : IsPullback gU j' j g) :
     finiteShriek A j ⋙ pull A g ≅ pull A gU ⋙ finiteShriek A j' :=
   ProEtale.ordinaryOpenExtensionBaseChangeIso A gU j' j g s
 
-/-- The actual normalized open tensor comparison, in extension-first order.
-Source: Stacks 0GL1. -/
+/-- The actual normalized open tensor comparison, in extension-first order. -/
 def gamma {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (M : FiniteD A U) (N : FiniteD A X) :=
   finiteGamma A j M N ≫
@@ -187,15 +179,13 @@ def gamma {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
         ((ProEtale.leftDerivedUpperStarIsoMapDerivedCategory
           (ModuleCat.{u + 1} A) j).hom.app N))
 
-/-- The canonical Koszul braiding descended from the homotopy category.
-Source: signed tensor conventions. -/
+/-- The canonical Koszul braiding descended from the homotopy category. -/
 def sigma (Y : Scheme.{u}) (M N : FiniteD A Y) :
     ((ProEtale.derivedTensor (ModuleCat.{u + 1} A) Y).obj M).obj N ⟶
       ((ProEtale.derivedTensor (ModuleCat.{u + 1} A) Y).obj N).obj M :=
   proetSigma (ModuleCat.{u + 1} A) Y M N
 
-/-- Right-extension order uses both signed symmetries, rather than an unsigned flip.
-Source: Stacks 0GL1. -/
+/-- Right-extension order uses both signed symmetries, rather than an unsigned flip. -/
 def rho {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (M : FiniteD A X) (N : FiniteD A U) :=
   sigma A _ M ((finiteShriek A j).obj N) ≫ gamma A j N M ≫

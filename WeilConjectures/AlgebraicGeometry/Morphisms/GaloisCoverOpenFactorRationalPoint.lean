@@ -11,7 +11,10 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 /-!
 # Nonempty affine open factors of split Galois fibres
 
-Source: Stacks Project, Tag 0EYI(2), generic fibre splitting argument.
+## References
+
+* Stacks Project, Tag 0EYI(2), generic fibre splitting argument
+* Stacks Project, Tag 0EYI(2), and the simply transitive torsor identity
 -/
 
 @[expose] public section
@@ -20,9 +23,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- A nonempty affine open part of a split Galois fibre has a rational point.
-
-Source: Stacks Project, Tag 0EYI(2), and the simply transitive torsor identity. -/
+/-- A nonempty affine open part of a split Galois fibre has a rational point. -/
 theorem GaloisCover.open_factor_rational_point
     {Y : Scheme.{u}} (G : Type (u + 1)) [Group G] [Finite G]
     (Z : GaloisCover G Y) (F : CommRingCat.{u}) [Field F]

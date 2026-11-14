@@ -12,7 +12,12 @@ public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor
 /-! # The scalar-extension twist map on a complete standard chart
 
 This is the complete-chart subproblem extracted from the arbitrary-open statement.
-Source: Stacks Project, Tags 01MY and 01N2.
+
+## References
+
+* Stacks Project, Tags 01MY and 01N2
+* Stacks Project, Tag 01N2, clause (3), standard-open proof
+* Tag 01MY, the map on localized graded modules
 -/
 
 @[expose] public section
@@ -31,10 +36,7 @@ namespace AlgebraicGeometry.Proj
 
 This is the chart-level part of the proof of
 `scalarExtension_twistMap_basicOpen_bijective`; arbitrary subopens require the
-sheaf restriction argument in the parent theorem.
-
-Source: Stacks Project, Tag 01N2, clause (3), standard-open proof; Tag 01MY, the map on localized
-graded modules. -/
+sheaf restriction argument in the parent theorem. -/
 theorem scalarExtension_twistMap_chart_bijective
     {R S A B : Type u} [CommRing R] [CommRing S] [CommRing A] [CommRing B]
     [Algebra R S] [Algebra R A] [Algebra S B]

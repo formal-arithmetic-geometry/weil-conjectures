@@ -18,7 +18,9 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.TraceDiscriminantSectionLocal
 /-!
 # Gluing local trace discriminants
 
-Source: Stacks Project, Tag 0BVH, construction preceding Lemma 49.3.1
+## References
+
+* Stacks Project, Tag 0BVH, construction preceding Lemma 49.3.1
 -/
 
 @[expose] public section
@@ -45,9 +47,7 @@ private theorem traceDiscriminantSectionIdeal_eq_span
     rw [← Ideal.map_le_iff_le_comap]
     exact (trace_discriminant_span_map_affine_restriction f U V h n m b c).le
 
-/-- Local trace determinants glue to a quasi-coherent ideal.
-
-Source: Stacks Project, Tag 0BVH, construction preceding Lemma 49.3.1 -/
+/-- Local trace determinants glue to a quasi-coherent ideal. -/
 theorem exists_ideal_locally_eq_trace_discriminant_of_finite_flat
     {X Y : Scheme.{u}} [IsLocallyNoetherian Y]
     (f : X ⟶ Y) [IsFinite f] [Flat f] :

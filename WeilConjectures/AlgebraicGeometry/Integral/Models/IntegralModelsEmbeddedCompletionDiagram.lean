@@ -15,7 +15,13 @@ import WeilConjectures.NumberTheory.Padics.IntegersAlgebra
 
 /-! # The embedded coefficient diagram in the constant completion presentation
 
-Source: Stacks Tags 099L and 093M.
+## References
+
+* Stacks Tags 099L and 093M
+* Stacks Tag 099L
+* Stacks Tag 093M
+* integral-models proof paragraph (1), the integral coefficient limit comparison, and Stacks Tags
+  099L and 093M
 -/
 
 @[expose] public noncomputable section
@@ -1022,8 +1028,7 @@ finite constant comparisons `residueSmallIso`. -/
 
 attribute [-instance] integralModel_coefficientMonObj in
 /-- The embedded first residue ring is the constant sheaf on the first quotient: the
-discrete comparison followed by the quotient-lift ring isomorphism.
-Source: Stacks Tag 099L. -/
+discrete comparison followed by the quotient-lift ring isomorphism. -/
 @[no_expose] def integralModelsEmbeddedResidueIso
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (π : PadicAlgCl.integers ℓ E.1) (X : Scheme.{u}) :
@@ -1037,8 +1042,7 @@ Source: Stacks Tag 099L. -/
 
 attribute [-instance] integralModel_coefficientMonObj in
 /-- The completed first residue ring is the constant sheaf on the first quotient: the
-finite constant comparison `residueSmallIso` at level zero.
-Source: Stacks Tag 093M. -/
+finite constant comparison `residueSmallIso` at level zero. -/
 @[no_expose] def integralModelsEmbeddedReductionIso
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (π : PadicAlgCl.integers ℓ E.1)
@@ -1070,10 +1074,7 @@ attribute [-instance] integralModel_coefficientMonObj in
 /-- The scalar square of the embedded completion diagram: the prescribed embedded scalar
 and residue maps identify with the canonical constant
 completion diagram. This assertion identifies coefficient rings and maps only; it contains
-no assertion about kernels, generators, surjectivity, flatness, or module categories.
-
-Source: integral-models proof paragraph (1), the integral coefficient limit comparison, and Stacks
-Tags 099L and 093M. -/
+no assertion about kernels, generators, surjectivity, flatness, or module categories. -/
 theorem integralModelsEmbedded_scalar_square
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (π : PadicAlgCl.integers ℓ E.1)
@@ -1107,8 +1108,7 @@ theorem integralModelsEmbedded_scalar_square
         ((congrArg (a.hom ≫ ·) hp.symm).trans (Category.assoc _ _ _).symm)))
 
 attribute [-instance] integralModel_coefficientMonObj in
-/-- The residue square of the embedded completion diagram.
-Source: Stacks Tag 099L. -/
+/-- The residue square of the embedded completion diagram. -/
 theorem integralModelsEmbedded_residue_square
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (π : PadicAlgCl.integers ℓ E.1) (X : Scheme.{u}) :
@@ -1121,8 +1121,7 @@ theorem integralModelsEmbedded_residue_square
 
 attribute [-instance] integralModel_coefficientMonObj in
 /-- The reduction square of the embedded completion diagram: level zero of the projection
-equations of `integralModelsEmbeddedCompletedIso`.
-Source: Stacks Tag 093M. -/
+equations of `integralModelsEmbeddedCompletedIso`. -/
 theorem integralModelsEmbedded_reduction_square
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (π : PadicAlgCl.integers ℓ E.1)

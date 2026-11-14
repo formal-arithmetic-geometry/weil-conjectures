@@ -20,8 +20,6 @@ public import WeilConjectures.AlgebraicGeometry.PurTwistSheaves
 
 /-! # The integral Tate line on the pro-etale site
 
-Source: Stacks Project, Tag 03PK.
-
 The auxiliary constructions retain the root tower, constant scalar extension and completed
 scalar action. All choices below have a uniqueness specification. The tensor of commutative
 ring sheaves is their pushout, so the coefficient comparison is a morphism of ring sheaves.
@@ -36,6 +34,12 @@ The coefficient rings and their comparison are reexported from
 `WeilConjectures.AlgebraicGeometry.Pur.PurTwistCoefficientRingsSupplement`.
 Local freeness and derived completeness
 are proved in `WeilConjectures.AlgebraicGeometry.Pur.PurTwistSheafLocallyFree`.
+
+## References
+
+* Stacks Project, Tag 03PK
+* Stacks Tag 03PK
+* Stacks Tag 03EK
 -/
 
 @[expose] public section
@@ -51,8 +55,7 @@ namespace AlgebraicGeometry.Scheme
 
 variable (S : Scheme.{u}) (l : ℕ) [Fact l.Prime]
 
-/-- The original root tower's inverse limit, with no replacement of its underlying groups.
-Source: Stacks Tag 03PK. -/
+/-- The original root tower's inverse limit, with no replacement of its underlying groups. -/
 noncomputable def purTwistZlOne :=
   limit (proEtaleRootsOfUnityTower S l (Fact.out : l.Prime))
 
@@ -293,8 +296,7 @@ theorem purTwistZlAction_existsUnique :
 @[instance_reducible]
 noncomputable def purTwistZlAction := (purTwistZlAction_existsUnique S l).exists.choose
 
-/-- The action commutes with restriction.
-Source: Stacks Tag 03PK. -/
+/-- The action commutes with restriction. -/
 theorem purTwistZlAction_restriction ⦃U V : S.ProEtᵒᵖ⦄ (f : U ⟶ V)
     (a : (purTwistZlCompletion S l).obj.obj U) (x : (purTwistZlOne S l).obj.obj U) :
     (purTwistZlOne S l).obj.map f
@@ -303,8 +305,7 @@ theorem purTwistZlAction_restriction ⦃U V : S.ProEtᵒᵖ⦄ (f : U ⟶ V)
       ((purTwistZlCompletion S l).obj.map f a) ((purTwistZlOne S l).obj.map f x) := by
   exact (purTwistZlAction_existsUnique S l).exists.choose_spec.1 f a x
 
-/-- `Z_l(1)` as a module over the completed coefficient sheaf, with unchanged root limit.
-Source: Stacks Tag 03PK. -/
+/-- `Z_l(1)` as a module over the completed coefficient sheaf, with unchanged root limit. -/
 noncomputable def purTwistZlModule :
     SheafOfModules.{u + 1} (purTwistRing S (purTwistZlCompletion S l)) :=
   letI : ∀ U : S.ProEtᵒᵖ,
@@ -325,8 +326,7 @@ noncomputable def purTwistIntegralOne :
       ((sheafCompose (ProEt.topology S) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
         (purTwistZlCompletionMap S l))).obj (purTwistZlModule S l))
 
-/-- A pure tensor in the prescribed integral line, after sheafification.
-Source: Stacks Tag 03EK. -/
+/-- A pure tensor in the prescribed integral line, after sheafification. -/
 noncomputable def purTwistIntegralTensor (U : S.ProEtᵒᵖ)
     (b : (purTwistIntegralConstant S l E).obj.obj U)
     (x : (purTwistZlModule S l).val.obj U) :
@@ -386,8 +386,7 @@ theorem purTwistIntegralAction_existsUnique :
 noncomputable def purTwistIntegralAction :=
   (purTwistIntegralAction_existsUnique S l E).exists.choose
 
-/-- The integral action commutes with restriction.
-Source: Stacks Tag 03EK. -/
+/-- The integral action commutes with restriction. -/
 theorem purTwistIntegralAction_restriction ⦃U V : S.ProEtᵒᵖ⦄ (f : U ⟶ V)
     (a : (WeilConjectures.completedIntegralCoefficientSheafUnrestricted l E S).obj.obj U)
     (x : (purTwistIntegralOne S l E).val.obj U) :

@@ -11,7 +11,12 @@ import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionTe
 import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionTensorTransportNormalizedPure
 import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientSectionTensorTransportNormalizedTotal
 
-/-! # Normalized section tensor comparison for quotient coefficients -/
+/-! # Normalized section tensor comparison for quotient coefficients
+
+## References
+
+* Stacks 03EK, 03EL, 06YS, 07A4 and 0G7D
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -51,8 +56,7 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
 
 /-- The section tensor comparison can be chosen with its complete balancing and
 derived-total normalization.  This is the presheaf balancing, sheafification,
-K-flat totalization, and resolving-class descent part of the transport proof.
-Source: Stacks 03EK, 03EL, 06YS, 07A4 and 0G7D. -/
+K-flat totalization, and resolving-class descent part of the transport proof. -/
 theorem section_tensor_transport_normalized (T : Scheme.{u})
     (c : ScalarSectionData a T) (hc : ScalarSectionNormalized a T c)
     (b : TensorIso a T) (hb : TensorNormalized a T b) :

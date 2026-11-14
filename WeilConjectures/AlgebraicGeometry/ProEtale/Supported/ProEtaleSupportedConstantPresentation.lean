@@ -53,9 +53,22 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
 /-!
 # Cokernel presentation of the supported constant pro-etale module
 
-Source: Milne, Lectures on Etale Cohomology, Section 9, proof of Theorem 9.4, p. 67;
-Stacks Project, Tag 09AH is the quasi-compact-open model only. The finite-coefficient
+The finite-coefficient
 argument below does not require a quasi-compact open complement.
+
+## References
+
+* Milne, Lectures on Etale Cohomology, Section 9, proof of Theorem 9.4, p. 67
+* Stacks Project, Tag 09AH is the quasi-compact-open model only
+* Milne, Section 9
+* Stacks, Tag 09AE
+* Stacks, Tags 09AE and 00YV
+* Stacks, Tags 09A5 and 03D1
+* Bhatt--Scholze, Lemma 4.2.12
+* Stacks, Tag 09AH
+* Milne Section 9 and Stacks Tag 09AH
+* Milne, Section 9, proof of Theorem 9.4, p. 67
+* finite pro-etale adaptation of Stacks, Tag 09AH
 -/
 
 @[expose] public section
@@ -65,8 +78,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 /-- Constant sections restrict to the same constants on the open localization.
-This is the sheafification extension of the scalar-preserving presheaf map.
-Source: Milne, Section 9; Stacks, Tag 09AE. -/
+This is the sheafification extension of the scalar-preserving presheaf map. -/
 noncomputable def proEtaleFixedOpenConstantMap {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] (A : Type u) [CommRing A] :
     proEtaleFixedConstantModule U A ⟶
@@ -83,8 +95,7 @@ noncomputable def proEtaleFixedOpenConstantMap {U X : Scheme.{u}} (j : U ⟶ X)
 
 /-- The open adjunction counit at the constant module. The realization unit identifies
 its open coefficient with the same constant module, and the uniquely normalized rank-one
-comparisons identify both coefficients with their constant ring sheaves.
-Source: Milne, Section 9; Stacks, Tags 09AE and 00YV. -/
+comparisons identify both coefficients with their constant ring sheaves. -/
 noncomputable def proEtaleOpenConstantCounit {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] (A : Type u) [CommRing A] [Finite A] :
     (sfIntrinsicExtensionByZero j A).obj (proEtaleConstantModule U A) ⟶
@@ -105,7 +116,7 @@ noncomputable def proEtaleOpenConstantCounit {U X : Scheme.{u}} (j : U ⟶ X)
 The fixed-scalar arrow extends a ↦ a on the base-changed object. The direct-image
 comparison is normalized on scalar-unit sections, and the rank-one comparisons also
 preserve constants. Thus its component sends each constant a to that same constant on
-W ×[X] Z. Source: Milne, Section 9; Stacks, Tags 09A5 and 03D1. -/
+W ×[X] Z. -/
 noncomputable def proEtaleClosedConstantRestriction {Z X : Scheme.{u}} (i : Z ⟶ X)
     (A : Type u) [CommRing A] [Finite A] :
     proEtaleConstantModule X A ⟶
@@ -200,7 +211,6 @@ private theorem toSheafify_constantToFunctions :
   toSheafify_sheafifyLift _ _ _
 
 /-- The constant fixed-scalar module sheaf is the sheaf of continuous functions.
-Source: Bhatt--Scholze, Lemma 4.2.12.
 Continuous functions to a discrete ring are constant on their open fibres, giving local
 surjectivity. Equal constants are equal on every nonempty object, and the empty cover
 treats empty objects, giving local injectivity. The associated map of sheaves is thus
@@ -360,7 +370,6 @@ end ProEt
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The open counit and closed restriction compose to zero.
-Source: Milne, Section 9; Stacks, Tag 09AH.
 The adjunction identifies any map from the open extension to the closed direct image
 with a map into its zero open restriction. Transport through coefficient realization
 and the rank-one comparisons preserves the resulting zero composite. -/
@@ -389,7 +398,6 @@ private theorem proEtale_supported_constant_presentation_zero (A : Type u) [Comm
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The restriction from the constant module on X to the closed direct image is epic.
-Source: Milne, Section 9; Stacks, Tag 09AH.
 Identify constant modules with continuous functions. A function on a closed subspace
 lifts to a constant on an ambient neighbourhood of each of its points, and zero lifts
 it on the complement. These open neighbourhoods form a Zariski cover, so restriction
@@ -550,8 +558,7 @@ private theorem fixedKernel_locallySurjective (A : Type u) [CommRing A]
         (congrArg (fun f ↦ f.hom.app (op W)) hk) q
       exact hkq.trans (hq.trans hnat.symm)
 
-/-- The open counit is the kernel inclusion of the closed restriction.
-Source: Milne Section 9 and Stacks Tag 09AH. -/
+/-- The open counit is the kernel inclusion of the closed restriction. -/
 private theorem proEtale_open_constant_counit_is_kernel (A : Type u) [CommRing A] [Finite A]
     {Z X : Scheme.{u}} (i : Z ⟶ X)
     [IsClosedImmersion i]
@@ -596,9 +603,7 @@ private theorem proEtale_open_constant_counit_is_kernel (A : Type u) [CommRing A
     rfl
 
 /-- The constant restriction is the cokernel of the open constant counit, with no
-quasi-compactness assumption on the open complement and no finiteness condition on X.
-Source: Milne, Section 9, proof of Theorem 9.4, p. 67; finite pro-etale adaptation of Stacks, Tag
-09AH. -/
+quasi-compactness assumption on the open complement and no finiteness condition on X. -/
 theorem proEtale_supported_constant_presentation (A : Type u) [CommRing A] [Finite A]
     {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] :
     ∃ h : proEtaleOpenConstantCounit i.openComplement.ι A ≫

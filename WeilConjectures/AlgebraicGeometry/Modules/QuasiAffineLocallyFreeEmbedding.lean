@@ -13,7 +13,11 @@ import WeilConjectures.AlgebraicGeometry.Modules.DualFiniteFreeQuotientEmbedding
 
 /-! # Universal finite free embeddings on Noetherian affine opens
 
-Source: Stacks Project, Tag 0EKP, the dual-surjection construction in (2) to (3).
+## References
+
+* Stacks Project, Tag 0EKP, the dual-surjection construction in (2) to (3)
+* Stacks Project, Tag 0EKP, first dual-surjection construction in (2) to (3), with the ample
+  invertible module equal to the structure sheaf
 -/
 
 @[expose] public section
@@ -26,10 +30,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- A finite locally free module on an open of a Noetherian affine scheme embeds into
 finite free with finite locally free cokernel, and this embedding remains mono after
-arbitrary scheme pullback.
-
-Source: Stacks Project, Tag 0EKP, first dual-surjection construction in (2) to (3),
-with the ample invertible module equal to the structure sheaf. -/
+arbitrary scheme pullback. -/
 theorem exists_universally_mono_free
     {R : Type u} [CommRing R] [IsNoetherianRing R]
     (V : (Spec (.of R)).Opens) (M : V.toScheme.Modules) [M.IsFiniteLocallyFree] :

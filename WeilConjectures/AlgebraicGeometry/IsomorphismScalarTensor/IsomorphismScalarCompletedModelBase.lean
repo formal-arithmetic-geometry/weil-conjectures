@@ -57,12 +57,21 @@ public import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 
 /-! # Vocabulary for completed scalar tensor models under a scheme isomorphism
 
-Source: Bhatt--Scholze, Section 6.5, Lemma 6.5.9(4), and the agent calculation with the specified
-quotient towers.
-
 The index n means positive exponent n+1. Inverse image is the recorded sectionwise
 model, with its action transported by the completed or finite structure map.
 Scalar tensors use the existing sheafified tensor, with scalar written first.
+
+## References
+
+* Bhatt--Scholze, Section 6.5, Lemma 6.5.9(4), and the agent calculation with the specified quotient
+  towers
+* Stacks 03EK and 06YY
+* Stacks 03EK
+* Stacks 03D6
+* Stacks 03EL
+* Stacks 03EK and 03EL
+* Stacks 03D2
+* Stacks 03EK, 03EL and 06YY
 -/
 
 @[expose] public noncomputable section
@@ -82,19 +91,17 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (ι : E →ₐ[ℚ_[l]] L) {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]
 
 /-- The existing ordinary extension at a finite level, supplied with its universal
-counit. Its objects and maps are fixed by the sheafified balanced tensor.
-Source: Stacks 03EK and 06YY. -/
+counit. Its objects and maps are fixed by the sheafified balanced tensor. -/
 def finiteChangeData (W : Scheme.{t}) (n : ℕ) :=
   Classical.choice (SheafOfModules.nonempty_derivedChangeOfRingsCochainModel
     (integralScalarQuotientSheafMap l E L ι W n))
 
-/-- Ordinary extension from E's finite coefficient ring to L's, with the same index.
-Source: Stacks 03EK. -/
+/-- Ordinary extension from E's finite coefficient ring to L's, with the same index. -/
 abbrev finiteExtension (W : Scheme.{t}) (n : ℕ) :=
   (finiteChangeData l E L ι W n).E
 
 /-- The actual balanced pure tensor in finite extension, including the witness's
-object identification. Source: Stacks 03EK. -/
+object identification. -/
 def finitePure (W : Scheme.{t}) (n : ℕ)
     (M : integralOperationsFiniteModules l E W n) (U : W.ProEtᵒᵖ)
     (s : (integralCoefficientCommRingSheaf l L W n).obj.obj U) (x : M.val.obj U) :
@@ -106,44 +113,38 @@ def finitePure (W : Scheme.{t}) (n : ℕ)
       (s ⊗ₜ[(integralCoefficientCommRingSheaf l E W n).obj.obj U,
         ((integralScalarQuotientSheafMap l E L ι W n).hom.app U).hom] x))
 
-/-- Completed-coefficient inverse image on complexes.
-Source: Stacks 03D6. -/
+/-- Completed-coefficient inverse image on complexes. -/
 abbrev inverseComplex :=
   (inverseImageIntegralModules l E g).mapHomologicalComplex (.up ℤ)
 
-/-- Z as a functor of P. Source: Stacks 03EL. -/
+/-- Z as a functor of P. -/
 abbrev leftComplex :=
   inverseComplex l E g ⋙ completedOrdinaryScalarComplex l E L ι X
 
-/-- G_L Q as a functor of P. Source: Stacks 03EL. -/
+/-- G_L Q as a functor of P. -/
 abbrev rightComplex :=
   completedOrdinaryScalarComplex l E L ι Y ⋙ inverseComplex l L g
 
-/-- The lower left: reduce over E, transport its finite action, then extend to L.
-Source: Stacks 03EK and 03EL. -/
+/-- The lower left: reduce over E, transport its finite action, then extend to L. -/
 abbrev finiteLeft (n : ℕ) :=
   unrestrictedIntegralFiniteComplex l E Y n ⋙
     (inverseImageFiniteModules l E g n).mapHomologicalComplex (.up ℤ) ⋙
       (finiteExtension l E L ι X n).mapHomologicalComplex (.up ℤ)
 
-/-- The lower right: extend directly to L's finite coefficients, then inverse image.
-Source: Stacks 03EK and 03EL. -/
+/-- The lower right: extend directly to L's finite coefficients, then inverse image. -/
 abbrev finiteRight (n : ℕ) :=
   integralScalarFiniteComplex l E L ι Y n ⋙
     (inverseImageFiniteModules l L g n).mapHomologicalComplex (.up ℤ)
 
-/-- Lower-left complex with its completed L action, for quotient and transition maps.
-Source: Stacks 03D2. -/
+/-- Lower-left complex with its completed L action, for quotient and transition maps. -/
 abbrev restrictedLeft (n : ℕ) :=
   finiteLeft l E L ι g n ⋙ integralOperationsRestrict l L X n
 
-/-- Lower-right complex with its completed L action, for quotient and transition maps.
-Source: Stacks 03D2. -/
+/-- Lower-right complex with its completed L action, for quotient and transition maps. -/
 abbrev restrictedRight (n : ℕ) :=
   finiteRight l E L ι g n ⋙ integralOperationsRestrict l L X n
 
-/-- A double tensor in the lower-left complex, in the canonical sectionwise model.
-Source: Stacks 03EK and 03EL. -/
+/-- A double tensor in the lower-left complex, in the canonical sectionwise model. -/
 def doublePure (n : ℕ) (P : CochainComplex (integralTowerModules l E Y) ℤ)
     (i : ℤ) (U : X.ProEt)
     (s : (integralCoefficientCommRingSheaf l L X n).obj.obj (op U))
@@ -164,8 +165,7 @@ attribute [local irreducible] completedScalarChangeData completedOrdinaryScalarE
   unrestrictedIntegralTensorSection inverseImageCompletedCoefficientMap finiteChangeData
   finitePure doublePure
 
-/-- K-flatness and flat terms for inverse image, Q and Z.
-Source: Stacks 03EK, 03EL and 06YY. -/
+/-- K-flatness and flat terms for inverse image, Q and Z. -/
 def PreservesModels : Prop :=
     ∀ P : (integralOperationsGoodComplex l E Y).FullSubcategory,
       integralOperationsGoodComplex l E X ((inverseComplex l E g).obj P.obj) ∧
@@ -173,8 +173,7 @@ def PreservesModels : Prop :=
         ((completedOrdinaryScalarComplex l E L ι Y).obj P.obj) ∧
       integralOperationsGoodComplex l L X ((leftComplex l E L ι g).obj P.obj)
 
-/-- The local formula for the completed tensor isomorphism.
-Source: Stacks 03EK, 03EL and 06YY. -/
+/-- The local formula for the completed tensor isomorphism. -/
 def CompletedFormula
     (b : (integralOperationsGoodComplex l E Y).ι ⋙ leftComplex l E L ι g ≅
         (integralOperationsGoodComplex l E Y).ι ⋙ rightComplex l E L ι g) : Prop :=
@@ -189,8 +188,7 @@ def CompletedFormula
         completedScalarTensorSection l E L ι Y (P.obj.X i)
           (op ((proEtaleIsoPostcompose g).obj U)) s x
 
-/-- The finite comparison on double pure tensors.
-Source: Stacks 03EK, 03EL and 06YY. -/
+/-- The finite comparison on double pure tensors. -/
 def FiniteFormula
     (bfin : ∀ n : ℕ,
         (integralOperationsGoodComplex l E Y).ι ⋙ finiteLeft l E L ι g n ≅
@@ -211,8 +209,7 @@ def FiniteFormula
           (integralScalarQuotientSheafMap l E L ι Y n).hom.app
             (op ((proEtaleIsoPostcompose g).obj U)) a) x
 
-/-- The canonical quotient from Z on pure tensors.
-Source: Stacks 03EK, 03EL and 06YY. -/
+/-- The canonical quotient from Z on pure tensors. -/
 def LeftQuotientFormula
     (vleft : ∀ n : ℕ,
         (integralOperationsGoodComplex l E Y).ι ⋙ leftComplex l E L ι g ⟶
@@ -230,8 +227,7 @@ def LeftQuotientFormula
         ((completedIntegralCommRingProjectionUnrestricted l L X n).hom.app (op U)
           ((inverseImageCompletedCoefficientMap l L g).hom.app (op U) s)) 1 x
 
-/-- The inverse image of the coefficient quotient from Q.
-Source: Stacks 03EK, 03EL and 06YY. -/
+/-- The inverse image of the coefficient quotient from Q. -/
 def RightQuotientFormula
     (vright : ∀ n : ℕ,
         (integralOperationsGoodComplex l E Y).ι ⋙ rightComplex l E L ι g ⟶
@@ -249,8 +245,7 @@ def RightQuotientFormula
         ((completedIntegralCommRingProjectionUnrestricted l L Y n).hom.app
           (op ((proEtaleIsoPostcompose g).obj U)) s) x
 
-/-- The specified completed-to-finite square.
-Source: Stacks 03EK, 03EL and 06YY. -/
+/-- The specified completed-to-finite square. -/
 def QuotientSquare
     (b : (integralOperationsGoodComplex l E Y).ι ⋙ leftComplex l E L ι g ≅
         (integralOperationsGoodComplex l E Y).ι ⋙ rightComplex l E L ι g)
@@ -267,8 +262,7 @@ def QuotientSquare
       b.hom.app P ≫ (vright n).app P =
         (vleft n).app P ≫ (integralOperationsRestrict l L X n).map ((bfin n).hom.app P)
 
-/-- The quotient transition on the two scalar factors on the left.
-Source: Stacks 03EK, 03EL and 06YY. -/
+/-- The quotient transition on the two scalar factors on the left. -/
 def LeftTransitionFormula
     (tleft : ∀ n : ℕ,
         (integralOperationsGoodComplex l E Y).ι ⋙ restrictedLeft l E L ι g (n + 1) ⟶
@@ -286,8 +280,7 @@ def LeftTransitionFormula
         ((integralCoefficientSheafTransition l E Y n).hom.app
           (op ((proEtaleIsoPostcompose g).obj U)) a) x
 
-/-- The quotient transition on the final scalar factor on the right.
-Source: Stacks 03EK, 03EL and 06YY. -/
+/-- The quotient transition on the final scalar factor on the right. -/
 def RightTransitionFormula
     (tright : ∀ n : ℕ,
         (integralOperationsGoodComplex l E Y).ι ⋙ restrictedRight l E L ι g (n + 1) ⟶
@@ -305,8 +298,7 @@ def RightTransitionFormula
         ((integralCoefficientSheafTransition l L Y n).hom.app
           (op ((proEtaleIsoPostcompose g).obj U)) s) x
 
-/-- The specified finite comparison commutes with quotient transitions.
-Source: Stacks 03EK, 03EL and 06YY. -/
+/-- The specified finite comparison commutes with quotient transitions. -/
 def TransitionSquare
     (bfin : ∀ n : ℕ,
         (integralOperationsGoodComplex l E Y).ι ⋙ finiteLeft l E L ι g n ≅
@@ -322,8 +314,7 @@ def TransitionSquare
           (tright n).app P =
         (tleft n).app P ≫ (integralOperationsRestrict l L X n).map ((bfin n).hom.app P)
 
-/-- Canonical K-flat computations and descent of the same chain comparison.
-Source: Stacks 03EK, 03EL and 06YY. -/
+/-- Canonical K-flat computations and descent of the same chain comparison. -/
 def DerivedModel
     (b : (integralOperationsGoodComplex l E Y).ι ⋙ leftComplex l E L ι g ≅
         (integralOperationsGoodComplex l E Y).ι ⋙ rightComplex l E L ι g)

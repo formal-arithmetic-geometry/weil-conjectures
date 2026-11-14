@@ -35,7 +35,9 @@ import WeilConjectures.CategoryTheory.Sites.FlatLocalRelations
 /-!
 # Flatness in the intrinsic finite-coefficient presentation
 
-Source: Stacks Project, Modules on Sites, Tags 03EL, 03ER and 08FC
+## References
+
+* Stacks Project, Modules on Sites, Tags 03EL, 03ER and 08FC
 -/
 
 @[expose] public section
@@ -90,8 +92,7 @@ private def relationSieve
     · intro j
       simp only [op_comp, Functor.map_comp_apply, ← map_mul, ← map_sum, ha, map_zero]
 
-/-- The associated-module-sheaf realization preserves flat fixed-coefficient sheaves.
-Source: Stacks Project, Modules on Sites, Tags 03EL, 03ER and 08FC. -/
+/-- The associated-module-sheaf realization preserves flat fixed-coefficient sheaves. -/
 theorem intrinsicRealization_flat
     (T : Scheme.{u}) (B : Type u) [CommRing B] [Finite B]
     (M : Sheaf (Scheme.ProEt.topology T)

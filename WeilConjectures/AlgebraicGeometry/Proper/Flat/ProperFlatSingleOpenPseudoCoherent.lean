@@ -35,7 +35,12 @@ import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 
 /-! # Pseudo-coherence of open restrictions of a proper relatively flat direct image
 
-Source: Stacks Project, Tag 0A1H, Noetherian approximation paragraph; Tag 08E7.
+## References
+
+* Stacks Project, Tag 0A1H, Noetherian approximation paragraph
+* Tag 08E7
+* Stacks Project, Tag 0A1H, approximation paragraph, with E=O_X and G=F[0]
+* Tags 02O5, 08E7, 08E5
 -/
 
 @[expose] public section
@@ -46,10 +51,7 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The open restriction of the direct image is pseudo-coherent, without a Tor bound.
-Source: Stacks Project, Tag 0A1H, approximation paragraph, with E=O_X and G=F[0]; Tags 02O5, 08E7,
-08E5.
--/
+/-- The open restriction of the direct image is pseudo-coherent, without a Tor bound. -/
 theorem properFlat_single_open_isPseudoCoherent
     {X S : Scheme.{u}} (f : X ⟶ S)
     [IsProper f] [LocallyOfFinitePresentation f] [QuasiCompact f]

@@ -16,7 +16,11 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Finite
 /-!
 # Detecting the torsor identity on the generic fibre
 
-Source: Stacks Project, Tag 0BQM and Tag 0EYJ, proof.
+## References
+
+* Stacks Project, Tag 0BQM and Tag 0EYJ, proof
+* Stacks Project, Tag 0BQM, proof
+* Tag 0EYJ, proof (extended action)
 -/
 
 @[expose] public section
@@ -68,9 +72,7 @@ private theorem genericFibre_isIso {S C : Scheme.{u}}
   exact ⟨⟨b, hfb, hbf⟩⟩
 
 /-- Any family of endomorphisms over C compatible with the generic torsor action
-has an invertible canonical torsor map. No action laws are assumed here.
-
-Source: Stacks Project, Tag 0BQM, proof; Tag 0EYJ, proof (extended action). -/
+has an invertible canonical torsor map. No action laws are assumed here. -/
 theorem GaloisCover.isIso_sigmaDesc_of_genericFibre {S C : Scheme.{u}}
     [IsIntegral S] (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))
     (c : C ⟶ S) [Smooth c] [GeometricallyConnected c]

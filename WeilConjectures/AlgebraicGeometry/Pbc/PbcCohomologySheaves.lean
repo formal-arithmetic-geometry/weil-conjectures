@@ -14,10 +14,13 @@ public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 
 /-! # Cohomology sheaves and geometric fibres at a PBC coefficient stage
 
-Source: Bhatt--Scholze, Section 6.8.
 The cohomology is the recorded Mathlib homology functor. Rationalization changes
 its Hom groups, not its integral representative. Fibres use completed geometric
 pullback and exact point sections before extension to the algebraic closure.
+
+## References
+
+* Bhatt--Scholze, Section 6.8
 -/
 
 @[expose] public noncomputable section

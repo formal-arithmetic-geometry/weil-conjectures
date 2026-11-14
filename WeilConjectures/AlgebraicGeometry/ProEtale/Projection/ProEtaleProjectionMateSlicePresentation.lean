@@ -16,7 +16,12 @@ import Mathlib.CategoryTheory.Triangulated.Adjunction
 /-!
 # The actual projection mate on a pro-etale slice
 
-Source: Stacks, Modules on Sites, Tag 04IF; Cohomology on Sites, Tags 08FI and 0B56.
+## References
+
+* Stacks, Modules on Sites, Tag 04IF
+* Cohomology on Sites, Tags 08FI and 0B56
+* Stacks Project, Tags 04IF, 08FI and 0B56
+* Stacks Project, Tags 04IF, 08FI, 07A4 and 0B56
 -/
 
 @[expose] public noncomputable section
@@ -34,8 +39,7 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y)
   (E : DerivedCategory (proEtaleRingModules X S))
 
 /-- A slice presentation of the actual mate, without a perfectness hypothesis.
-The two functors and their comparisons are ordinary derived functors on the slice.
-Source: Stacks Project, Tags 04IF, 08FI and 0B56. -/
+The two functors and their comparisons are ordinary derived functors on the slice. -/
 structure ProEtaleProjectionMateSlicePresentation (U : Y.ProEt) where
   source : DerivedCategory (SheafOfModules.{u + 1}
       (((sheafCompose (ProEt.topology Y)
@@ -198,8 +202,7 @@ private theorem operationMate_commShift
       (Functor.associator o.left ((Functor.curry.obj b'.functor).obj E') o.right).hom) ℤ
   infer_instance
 
-/-- The projection mate has an exact presentation on every ordinary slice.
-Source: Stacks Project, Tags 04IF, 08FI, 07A4 and 0B56. -/
+/-- The projection mate has an exact presentation on every ordinary slice. -/
 theorem proEtaleProjectionMateSlicePresentation (U : Y.ProEt) :
     Nonempty (ProEtaleProjectionMateSlicePresentation f R S c a b E U) := by
   classical

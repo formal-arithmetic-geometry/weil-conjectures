@@ -128,7 +128,12 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConsta
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsCanonicalAdjunctionSupplement
 
-/-! The tensor-unit normalization of the constructed pro-etale module adjunction. -/
+/-! The tensor-unit normalization of the constructed pro-etale module adjunction.
+
+## References
+
+* Stacks 03D2 and 03D7
+-/
 
 @[expose] public section
 
@@ -145,8 +150,7 @@ namespace AlgebraicGeometry.Scheme
 attribute [local irreducible] proEtaleRingModulePullback
   proEtaleRingDirectImageMap proEtaleRingModuleUnitSection
 
-/-- The constructed Hom adjunction has the prescribed sectionwise tensor unit.
-Source: Stacks 03D2 and 03D7. -/
+/-- The constructed Hom adjunction has the prescribed sectionwise tensor unit. -/
 theorem proEtaleRingModuleAdjunction_normalized
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})

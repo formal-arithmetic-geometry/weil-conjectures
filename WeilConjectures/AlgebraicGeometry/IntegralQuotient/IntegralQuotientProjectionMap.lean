@@ -16,6 +16,13 @@ public import WeilConjectures.AlgebraicGeometry.ModuleObjectProjectionMap
 
 The mate is formed with the actual derived adjunctions. Quotient levels are indexed by
 n + 1 and every tensor product is the ordinary, uncompleted derived tensor product.
+
+## References
+
+* Stacks 0D6D, cartesian coefficients
+* Stacks 0G7E
+* Stacks 0D6D
+* Stacks 0944, 0B56
 -/
 
 @[expose] public noncomputable section
@@ -34,8 +41,7 @@ namespace AlgebraicGeometry.ProEtale.IntegralQuotient
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The actual ordinary cartesian identification of the restricted quotient coefficient.
-Source: Stacks 0D6D, cartesian coefficients. -/
+/-- The actual ordinary cartesian identification of the restricted quotient coefficient. -/
 def coefficientPull₀ {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     (CondensedRing.upperStar (integral l E) f).obj (B₀ (reduction l E n) Y) ≅
       B₀ (reduction l E n) X :=
@@ -43,8 +49,7 @@ def coefficientPull₀ {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     (V₀ (reduction l E n) X).mapIso
       (Functor.Monoidal.εIso (CondensedRing.upperStar (finite l E n) f)).symm
 
-/-- The canonical inverse-image computation at a cochain representative.
-Source: Stacks 0G7E. -/
+/-- The canonical inverse-image computation at a cochain representative. -/
 def computePull {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : CochainComplex (Modules Λ Y) ℤ) :
@@ -58,8 +63,7 @@ def computePull {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     (DerivedCategory.quotientCompQhIso (Modules Λ X)).hom.app
       (((CondensedRing.upperStar Λ f).mapHomologicalComplex (.up ℤ)).obj P)
 
-/-- The specified coefficient pullback arrow in the derived category.
-Source: Stacks 0D6D. -/
+/-- The specified coefficient pullback arrow in the derived category. -/
 def coefficientPull {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     (L (integral l E) f).obj (B (reduction l E n) Y) ⟶ B (reduction l E n) X :=
   computePull f ((CochainComplex.singleFunctor _ 0).obj (B₀ (reduction l E n) Y)) ≫
@@ -71,8 +75,7 @@ def coefficientPull {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
 /-- The perfect-coefficient projection arrow: the recorded module-object projection map
 (the counit transpose of the specified derived tensor-pullback comparison followed by the
 integral counit), followed by the direct image of the actual cartesian pullback of the
-quotient coefficient.
-Source: Stacks 0944, 0B56. -/
+quotient coefficient. -/
 @[irreducible] def projectionMap {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (K : DerivedCategory (Modules (integral l E) X)) :
     (F (integral l E) f).obj K ⊗ B (reduction l E n) Y ⟶

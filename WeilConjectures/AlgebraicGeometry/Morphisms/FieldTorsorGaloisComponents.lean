@@ -15,7 +15,10 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.FieldTorsorComponentGaloisGro
 
 /-! # Galois field components of a finite torsor
 
-Source: Stacks Project, Tags 03SF and 03QR. -/
+## References
+
+* Stacks Project, Tags 03SF and 03QR
+-/
 
 @[expose] public section
 universe u
@@ -23,8 +26,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- The field components of a finite group torsor are Galois of degree dividing the group order.
-
-Source: Stacks Project, Tags 03SF and 03QR. -/
+-/
 theorem field_torsor_galois_components
     (K : Type u) [Field K]
     (G : Type (u + 1)) [Group G] [Finite G] (T : GaloisCover G (Spec (CommRingCat.of K))) :

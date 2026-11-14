@@ -14,7 +14,12 @@ import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
 import Mathlib.AlgebraicGeometry.Noetherian
 
-/-! Local rings of etale schemes over a trait. -/
+/-! Local rings of etale schemes over a trait.
+
+## References
+
+* Stacks Project, Tags 0AP2 (15.45.4) and 0EYI, preliminary paragraph
+-/
 
 @[expose] public section
 
@@ -23,9 +28,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- The canonical local ring of an etale scheme at a point over the closed point
-of a trait is a DVR with the same uniformizer.
-
-Source: Stacks Project, Tags 0AP2 (15.45.4) and 0EYI, preliminary paragraph. -/
+of a trait is a DVR with the same uniformizer. -/
 theorem etale_trait_stalk (R : CommRingCat.{u})
     [IsDomain R] [IsDiscreteValuationRing R]
     {X : Scheme.{u}} (f : X ⟶ Spec R) [Etale f] (x : X)

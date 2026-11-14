@@ -14,7 +14,10 @@ import all WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearTensorEvaluati
 
 /-! # Generalized unit sections of the ordinary tensor comparison
 
-Source: Stacks 03EL; Zheng Construction 4.1.
+## References
+
+* Stacks 03EL
+* Zheng Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -46,8 +49,7 @@ variable {C : Type c} [Category.{v} C] [EssentiallySmall.{max c v r} C]
     (O : GeometryOrdinary.{c, v, r} J B τ J' L P a)
     (T : GeometryOrdinaryTensor.{c, v, r} J B τ J' L P a O)
 
-/-- Evaluation of a system tensor comparison is its specified geometric component.
-Source: Zheng Construction 4.1. -/
+/-- Evaluation of a system tensor comparison is its specified geometric component. -/
 theorem tensorComparison_evaluation (n : ℕ) (M N : Systems.{c, v, max c v r} J B τ) :
     (evaluation.{c, v, max c v r} J' O.coefficients O.coefficientTransition n).map
         (T.system M N).hom =

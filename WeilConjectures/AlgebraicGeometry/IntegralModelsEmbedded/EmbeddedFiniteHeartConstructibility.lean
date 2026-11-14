@@ -16,7 +16,9 @@ import Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # Constructibility for the specified finite-coefficient heart realization
 
-Source: Stacks Tags 03ET, 09AJ and 099Y.
+## References
+
+* Stacks Tags 03ET, 09AJ and 099Y
 -/
 
 @[expose] public noncomputable section
@@ -102,8 +104,7 @@ private instance liftedScalarPointMap_isIso (A : Type) [CommRing A]
 
 set_option backward.isDefEq.respectTransparency.types false in
 attribute [-instance] integralModel_coefficientMonObj in
-/-- Constructibility is unchanged by the specified heart realization, on a single sheaf.
-Source: Stacks Tags 03ET, 09AJ and 099Y. -/
+/-- Constructibility is unchanged by the specified heart realization, on a single sheaf. -/
 theorem finiteHeartConstructibility
     (X : Scheme.{u}) [IsNoetherian X] (A : Type) [Field A]
     [TopologicalSpace A] [IsTopologicalRing A] [Finite A] [DiscreteTopology A]

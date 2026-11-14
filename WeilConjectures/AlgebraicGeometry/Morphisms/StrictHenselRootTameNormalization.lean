@@ -23,7 +23,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.StrictHenselRootNormalization
 import WeilConjectures.AlgebraicGeometry.Morphisms.StrictHenselRootNormalizationGenericEtale
 
 /-! # Tame normalization after the group-order root extension
-Source: Stacks Project, Tags 09EB, 0BRM, 0EYG and 0EYH.
+
+## References
+
+* Stacks Project, Tags 09EB, 0BRM, 0EYG and 0EYH
+* Stacks Project, Tag 0EYG, root-extension paragraph, Tag 09EB and Tag 0BRM (lemma-abhyankar)
 -/
 
 @[expose] public section
@@ -105,9 +109,7 @@ private theorem normalization_restrict_iso_hom_comp
     Scheme.Hom.pullbackFromNormalizationIso_hom_comp]
   rfl
 
-/-- The pulled-back cover has a finite normalization etale near the divisor generic point.
-Source: Stacks Project, Tag 0EYG, root-extension paragraph, Tag 09EB and Tag 0BRM (lemma-abhyankar).
--/
+/-- The pulled-back cover has a finite normalization etale near the divisor generic point. -/
 theorem GaloisCover.strict_hensel_root_tame_normalization
     {L U : Scheme.{u}} (i : U ⟶ L)
     (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)

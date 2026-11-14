@@ -18,7 +18,10 @@ unit used by completed exchange. We specialize the library's unit-normalized
 strict/intrinsic completed-pullback comparison to the identity morphism.
 The remaining argument is categorical: constant towers are fully faithful on
 derived categories, and pullback along the identity is isomorphic to identity.
-Source: Stacks Tag 099N.
+
+## References
+
+* Stacks Tag 099N
 -/
 
 @[expose] public noncomputable section
@@ -130,8 +133,7 @@ private theorem towerComplete_of_identityComparison
 
 end
 
-/-- Intrinsic Koszul completeness implies the canonical quotient-tower unit is invertible.
-Source: Stacks Tag 099N. -/
+/-- Intrinsic Koszul completeness implies the canonical quotient-tower unit is invertible. -/
 theorem pbcIntrinsicComplete_towerComplete
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (T : Scheme.{u}) (K : PbcCompletedDerived T d) :

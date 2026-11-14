@@ -24,8 +24,11 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-!
 # Open extension preserves finite constructibility and cohomological intervals
 
-Source: Bhatt--Scholze, The pro-etale topology for schemes, Lemma 6.7.7, open factor; Stacks
-Project, Tags 09AH and 09BN.
+## References
+
+* Bhatt--Scholze, The pro-etale topology for schemes, Lemma 6.7.7, open factor
+* Stacks Project, Tags 09AH and 09BN
+* Bhatt--Scholze, Lemma 6.7.7, preservation by the open factor
 -/
 
 @[expose] public section
@@ -188,10 +191,7 @@ Every given witnessing stratification extends by the reduced closed complement, 
 its immersed strata over the ambient scheme and finite locally constant restrictions.
 An arbitrary collection of empty strata may be omitted. The immediately applied instance
 lambda supplies the proved finite-ring witness and the existing small-site sheafification
-transport at its fixed coefficient size; it introduces no additional hypothesis or definition.
-
-Source: Bhatt--Scholze, Lemma 6.7.7, preservation by the open factor; Stacks Project, Tags 09AH and
-09BN. -/
+transport at its fixed coefficient size; it introduces no additional hypothesis or definition. -/
 theorem open_finite_constructibility_interval
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n)

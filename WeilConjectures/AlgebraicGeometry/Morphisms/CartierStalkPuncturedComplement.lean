@@ -12,7 +12,11 @@ public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Flat
 
 /-! # The Cartier complement over its generic DVR stalk
-Source: Stacks Project, Tag 01WQ. -/
+
+## References
+
+* Stacks Project, Tag 01WQ
+-/
 
 @[expose] public section
 universe u
@@ -90,9 +94,7 @@ private theorem cartier_preimage_closedPoint
     apply hmem.mp
     simpa only [fromSpecStalk_closedPoint] using hz
 
-/-- The Cartier complement at its generic DVR stalk is the fraction-field spectrum.
-
-Source: Stacks Project, Tag 01WQ. -/
+/-- The Cartier complement at its generic DVR stalk is the fraction-field spectrum. -/
 theorem cartier_stalk_punctured_complement
     {N : Scheme.{u}} [IsLocallyNoetherian N] (V : N.Opens)
     (D : Scheme.{u}) (j : D ⟶ N) (hD : IsIntegral D)

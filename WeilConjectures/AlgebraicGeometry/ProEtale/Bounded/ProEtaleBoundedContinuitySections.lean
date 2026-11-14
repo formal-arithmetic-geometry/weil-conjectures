@@ -79,6 +79,11 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible
 
 - `ringHypercohomology_transport_preservesZeroMorphisms`: transport acts on complexes.
 - `isIso_ringHypercohomology_colimitPost`: the canonical bounded-below continuity map is invertible.
+
+## References
+
+* Tag 03D1
+* Stacks Project, Tags 079P and 09A2
 -/
 
 @[expose] public section
@@ -92,7 +97,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme.ProEt
 
 /-- The published sectionwise transport preserves zero maps, as needed to apply it
-termwise to complexes. Source: Tag 03D1. -/
+termwise to complexes. -/
 theorem ringHypercohomology_transport_preservesZeroMorphisms (X : Scheme.{u})
     (R : Sheaf (topology X) RingCat.{u + 1}) :
     (proEtaleModuleToModel R).PreservesZeroMorphisms := by
@@ -109,9 +114,7 @@ then take the published functorial K-injective resolution, evaluate its underlyi
 section complex, and take its integer-degree homology. On bounded-below complexes this is
 canonically the evaluation of a bounded-below injective resolution: both compute the right
 derived evaluation functor, and comparison with a K-injective resolution is unique up to
-homotopy. This construction retains all original site objects and the original coefficients.
-
-Source: Stacks Project, Tags 079P and 09A2. -/
+homotopy. This construction retains all original site objects and the original coefficients. -/
 noncomputable def ringHypercohomology (X : Scheme.{u})
     (R : Sheaf (topology X) RingCat.{u + 1}) (U : X.ProEt) (q : ℤ) :
     CochainComplex (ringedSiteModules.{u + 1} R) ℤ ⥤ AddCommGrpCat.{u + 1} :=

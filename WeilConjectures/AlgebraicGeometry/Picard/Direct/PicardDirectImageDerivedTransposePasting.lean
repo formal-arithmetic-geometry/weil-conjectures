@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.Picard.Direct.PicardDirectImageDerivedT
 
 /-! # Successive base change before fibre-unit normalization
 
-Source: Stacks Project, Tags 08HY and 0D5S.
+## References
+
+* Stacks Project, Tags 08HY and 0D5S
 -/
 
 @[expose] public section
@@ -65,8 +67,7 @@ variable [∀ Y : Scheme.{v},
 
 -- Keep categorical comparison choices folded during naturality rewriting.
 /-- The derived adjoint of a test morphism respects successive base change.
-The source is a twice-derived pullback of O_T[0], not a module on the fibre.
-Source: Stacks Project, Tags 08HY and 0D5S. -/
+The source is a twice-derived pullback of O_T[0], not a module on the fibre. -/
 theorem picardDirectImageDerivedTranspose_pasting
     {X S : Scheme.{v}} (f : X ⟶ S)
     (L : X.Modules) (W : Scheme.{v}) (k : W ⟶ S)

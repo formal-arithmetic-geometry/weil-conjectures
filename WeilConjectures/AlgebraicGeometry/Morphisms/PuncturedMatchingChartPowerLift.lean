@@ -14,7 +14,11 @@ import Mathlib.Data.Fin.Tuple.Basic
 
 /-! # Denominator lifting for punctured matching sections
 
-Source: Stacks Project, Tags 0BLH and 05ER, localized chart comparison.
+## References
+
+* Stacks Project, Tags 0BLH and 05ER, localized chart comparison
+* Stacks Project, Tag 05ER, the localized chart comparison in its proof, using 05EP and 05EQ
+* the geometric charts are those of Tag 0BLH
 -/
 
 @[expose] public section
@@ -26,10 +30,7 @@ namespace AlgebraicGeometry.Scheme.CompletionGluingData
 set_option maxHeartbeats 600000 in
 -- Comparing the geometric chart restrictions with the formal datum needs extra elaboration.
 set_option backward.isDefEq.respectTransparency false in
-/-- Every chart section lifts to a matching section after clearing a power of `f`.
-
-Source: Stacks Project, Tag 05ER, the localized chart comparison in its proof,
-using 05EP and 05EQ; the geometric charts are those of Tag 0BLH. -/
+/-- Every chart section lifts to a matching section after clearing a power of `f`. -/
 theorem puncturedMatching_chart_power_lift
     {A : Type u} [CommRing A] [IsNoetherianRing A] [IsLocalRing A]
     {U : (Spec (.of A)).Opens}

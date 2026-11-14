@@ -18,7 +18,10 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.ReducedArtinianAffineNormaliz
 
 /-! # Integral-closure charts for reduced Artinian tensor algebras
 
-Source: Stacks Project, Tags 035H and 0307; reduced Artinian ring decomposition. -/
+## References
+
+* Stacks Project, Tags 035H and 0307
+-/
 
 @[expose] public section
 
@@ -28,9 +31,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- A finite affine coproduct with reduced Artinian base changes has normalization
-charts given by integral closures in its residue fields.
-
-Source: Stacks Project, Tags 035H and 0307; reduced Artinian ring decomposition. -/
+charts given by integral closures in its residue fields. -/
 theorem reduced_artinian_tensor_normalization_charts
     (B A : CommRingCat.{u}) [Algebra B A]
     (r : ℕ) (E : Fin r → Type u) [∀ i, CommRing (E i)] [∀ i, Algebra B (E i)]
