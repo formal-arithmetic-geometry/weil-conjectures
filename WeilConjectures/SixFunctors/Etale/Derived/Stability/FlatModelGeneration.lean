@@ -250,6 +250,7 @@ theorem constructibleFiniteTor_of_ctfGenerators [IsNoetherian X]
     (constructibleFiniteTor_rightDerivedLowerStar_openImmersionLowerShriek Λ j g L hL).2.2.2
 
 variable (Λ) in
+omit [Finite Λ] in
 /-- Blueprint `lemma-flat-models-generators--2`, part (2): a flat constructible sheaf `F` on a
 Noetherian `X` is an iterated extension of the sheaves `a_! L` of its strata, in the form: every
 triangulated property of objects of `D(X_ét, Λ)`, closed under isomorphisms and holding for the
