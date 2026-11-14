@@ -38,10 +38,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
-/--
-A separated finitely presented family with generic fibre of dimension at most one admits a good
-curve diagram after a finite radicial base cover.
--/
+/-- A separated finitely presented family with generic fibre of dimension at most one admits a
+good curve diagram after a finite radicial base cover. -/
 theorem exists_good_curves_generic_diagram
     {X S : Scheme.{u}} (f : X ⟶ S) [IsSeparated f]
     [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f]
