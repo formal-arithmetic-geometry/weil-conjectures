@@ -122,11 +122,56 @@ private def liftContinuousEquiv (T : Type u) [CommRing T] [TopologicalSpace T]
   map_add' _ _ := rfl
   map_mul' _ _ := rfl
 
-private theorem integral_exact (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
-    [IsCommMonObj (abRing l X)]
+end WeilConjectures.LocallyFiniteAdicRealization
+
+namespace AlgebraicGeometry.Scheme
+
+/-- Ordinary scalar extension of pro-étale module sheaves along a ring-sheaf map whose
+section maps are flat preserves finite limits.
+
+Source: Bhatt--Scholze, proof of Proposition 6.8.14(2)
+(blueprint: lem-sf-native-integral-coefficient-flat).
+
+Proof: sectionwise extension along flat ring maps is exact, and so is sheafification.
+The scalar adjunction identifies this sheafified extension with `pbcExtend φ`. -/
+theorem pbcExtend_preservesFiniteLimits_of_flat {X : Scheme.{u}}
+    {R S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}} (φ : R ⟶ S)
+    (hf : ∀ U : X.ProEtᵒᵖ, (φ.hom.app U).hom.Flat) :
+    PreservesFiniteLimits (pbcExtend φ) := by
+  have : PreservesFiniteLimits (SfScalarExtension.F.{u + 1, u, u + 1} φ) :=
+    SfScalarExtension.preserves.{u + 1, u, u + 1} φ hf
+  have : (SfScalarExtension.F.{u + 1, u, u + 1} φ).Additive :=
+    Functor.additive_of_preserves_binary_products _
+  obtain ⟨_, _, hadj⟩ := SheafOfModules.sheafRingCoefficientOrdinaryAdjunction φ
+  have hobj (M : pbcModules X R) :
+      (SfScalarExtension.F.{u + 1, u, u + 1} φ).obj M =
+        SheafOfModules.changeOfRings φ M := by
+    unfold SfScalarExtension.F
+    rfl
+  have hmap {M N : pbcModules X R} (f : M ⟶ N) :
+      (SfScalarExtension.F.{u + 1, u, u + 1} φ).map f =
+        eqToHom (hobj M) ≫ SheafOfModules.changeOfRingsHom φ M f ≫
+          eqToHom (hobj N).symm := by
+    unfold SfScalarExtension.F at hobj ⊢
+    rfl
+  obtain ⟨adj, _⟩ := hadj (SfScalarExtension.F.{u + 1, u, u + 1} φ) hobj hmap
+  exact preservesFiniteLimits_of_natIso (adj.leftAdjointUniq (pbcScalarAdjunction _))
+
+/-- The section maps of a normalized inclusion of the integral continuous coefficients
+into the rational ones are flat.
+
+Source: Bhatt--Scholze, Lemma 6.8.2 (blueprint: lem-sf-native-integral-coefficient-flat).
+
+Proof: by the normalization, the section map over `U` is the inclusion of continuous
+integral-valued functions into continuous field-valued functions, up to universe lifts.
+The clopen partition according as the norm is at most one or greater than one supplies
+an integral nowhere-zero denominator for every continuous field-valued function, so this
+inclusion is a localization, hence flat. -/
+theorem integralRationalCoefficient_flat (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
-    (i : E →ₐ[Padic l] PadicAlgCl l) (C : CoefficientPresentation l X E i) :
-    PreservesFiniteLimits (pbcExtend C.integralInclusion) := by
+    {ι : integralCoefficientSheaf l X E ⟶ rationalCoefficientSheaf l X E}
+    (hι : integralRationalCoefficientNormalized l E X ι) (U : X.ProEtᵒᵖ) :
+    (ι.hom.app U).hom.Flat := by
   let := coefficientExtensionNormedField l E
   let A := Padic.coefficientExtensionIntegers l E
   have hA : ∀ x : E, x ∈ A ↔ ‖x‖ ≤ 1 :=
@@ -134,45 +179,31 @@ private theorem integral_exact (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
   have : IsUltrametricDist E :=
     IsUltrametricDist.isUltrametricDist_of_isNonarchimedean_norm
       (isNonarchimedean_spectralNorm (K := ℚ_[l]) (L := E))
-  have hf (U : X.ProEtᵒᵖ) : (C.integralInclusion.hom.app U).hom.Flat := by
-    let eA := liftContinuousEquiv A U.unop.left
-    let eE := liftContinuousEquiv E U.unop.left
-    let f := A.subtype.compLeftContinuous U.unop.left continuous_subtype_val
-    have h : (C.integralInclusion.hom.app U).hom =
-        eE.toRingHom.comp (f.comp eA.symm.toRingHom) := by
-      apply RingHom.ext
-      intro s
-      apply ContinuousMap.ext
-      intro x
-      apply ULift.ext
-      exact C.integralInclusion_normalized U.unop s x
-    rw [h]
-    exact ((RingHom.Flat.of_bijective eA.symm.bijective).comp
-      (AlgebraicGeometry.Scheme.continuous_flat A hA (X := U.unop.left))).comp
-        (RingHom.Flat.of_bijective eE.bijective)
-  have : PreservesFiniteLimits
-      (SfScalarExtension.F.{u + 1, u, u + 1} C.integralInclusion) :=
-    SfScalarExtension.preserves.{u + 1, u, u + 1} C.integralInclusion hf
-  have : (SfScalarExtension.F.{u + 1, u, u + 1} C.integralInclusion).Additive :=
-    Functor.additive_of_preserves_binary_products _
-  obtain ⟨_, _, hadj⟩ :=
-    SheafOfModules.sheafRingCoefficientOrdinaryAdjunction C.integralInclusion
-  have hobj (M : pbcModules X (AlgebraicGeometry.Scheme.integralCoefficientSheaf l X E)) :
-      (SfScalarExtension.F.{u + 1, u, u + 1} C.integralInclusion).obj M =
-        SheafOfModules.changeOfRings C.integralInclusion M := by
-    unfold SfScalarExtension.F
-    rfl
-  have hmap {M N : pbcModules X (AlgebraicGeometry.Scheme.integralCoefficientSheaf l X E)}
-      (f : M ⟶ N) :
-      (SfScalarExtension.F.{u + 1, u, u + 1} C.integralInclusion).map f =
-        eqToHom (hobj M) ≫ SheafOfModules.changeOfRingsHom C.integralInclusion M f ≫
-          eqToHom (hobj N).symm := by
-    unfold SfScalarExtension.F at hobj ⊢
-    rfl
-  obtain ⟨adj, _⟩ := hadj (SfScalarExtension.F.{u + 1, u, u + 1} C.integralInclusion)
-    hobj hmap
-  exact preservesFiniteLimits_of_natIso
-    (adj.leftAdjointUniq (pbcScalarAdjunction _))
+  let eA := WeilConjectures.LocallyFiniteAdicRealization.liftContinuousEquiv A U.unop.left
+  let eE := WeilConjectures.LocallyFiniteAdicRealization.liftContinuousEquiv E U.unop.left
+  let f := A.subtype.compLeftContinuous U.unop.left continuous_subtype_val
+  have h : (ι.hom.app U).hom = eE.toRingHom.comp (f.comp eA.symm.toRingHom) := by
+    apply RingHom.ext
+    intro s
+    apply ContinuousMap.ext
+    intro x
+    apply ULift.ext
+    exact hι U.unop s x
+  rw [h]
+  exact ((RingHom.Flat.of_bijective eA.symm.bijective).comp
+    (continuous_flat A hA (X := U.unop.left))).comp (RingHom.Flat.of_bijective eE.bijective)
+
+end AlgebraicGeometry.Scheme
+
+namespace WeilConjectures.LocallyFiniteAdicRealization
+
+private theorem integral_exact (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
+    [IsCommMonObj (abRing l X)]
+    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+    (i : E →ₐ[Padic l] PadicAlgCl l) (C : CoefficientPresentation l X E i) :
+    PreservesFiniteLimits (pbcExtend C.integralInclusion) :=
+  pbcExtend_preservesFiniteLimits_of_flat _
+    (integralRationalCoefficient_flat l X E C.integralInclusion_normalized)
 
 private def rationalRangeIso (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

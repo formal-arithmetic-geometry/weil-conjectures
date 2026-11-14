@@ -397,7 +397,18 @@ private theorem constantInterchange_fac (J : CochainComplex (AdicCompletion.Modu
   exact (e1.trans e2).trans ((reassoc_of% e3) _)
 
 set_option backward.isDefEq.respectTransparency false in
-private theorem constant_coherence_Q (n : ℕ)
+/-- On a complex `J`, the level-`n` identification of the constant tower commutes with
+pullback along `f`:
+```
+f^* J ─── f^*(c_n⁻¹) ───> f^*(ev_n (const J))
+  │ c_n⁻¹                          │ (pullEvaluation n)⁻¹
+  v                                v
+ev_n (const (f^* J)) ── ev_n(interchange) ──> ev_n (f^* (const J))
+```
+Source: coherence of exact localization, used in proof (1) of
+prop-weil-pbc-direct-image-limits
+(blueprint: lem-pbc-direct-image-roos-projection-compatibility). -/
+theorem constant_coherence_Q (n : ℕ)
     (J : CochainComplex (AdicCompletion.Modules l E Y) ℤ) :
     (dpullModule l E f).map
         ((constantEvaluationIso l E Y n).inv.app (DerivedCategory.Q.obj J)) ≫
