@@ -546,10 +546,67 @@ end ChosenTriangle
 
 section AnyTriangle
 
+/-- The inverse composition maps of two triangles agree after comparison with a common
+compactification. Keeping both triangles arbitrary avoids unfolding chosen compactifications
+in the common-refinement argument. -/
+private lemma compIso_triangleShriekTriangle_inv_comparison
+    [QuasiCompact f.left] [QuasiCompact g.left] [QuasiCompact (f.left ≫ g.left)]
+    (c : Compactification (f ≫ g).left)
+    (T₀ T : Compactification.Triangle f.left g.left) :
+    haveI := isIso_baseChange_triangleShriekTriangle ℓ T₀
+    haveI := isIso_exchange_triangleShriekTriangle ℓ T₀
+    haveI := isIso_baseChange_triangleShriekTriangle ℓ T
+    haveI := isIso_exchange_triangleShriekTriangle ℓ T
+    (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ
+        c (Compactification.Triangle.overCfg T₀)).hom ≫
+        ((𝔽).compIso (triangleShriekTriangle T₀)).inv =
+      (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ
+          c (Compactification.Triangle.overCfg T)).hom ≫
+        ((𝔽).compIso (triangleShriekTriangle T)).inv ≫
+        NatTrans.hcomp (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ
+          T.cf T₀.cf).hom
+          (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T.cg T₀.cg).hom := by
+  have := isIso_baseChange_triangleShriekTriangle ℓ T
+  have := isIso_exchange_triangleShriekTriangle ℓ T
+  obtain ⟨T'', ⟨φ₁⟩, ⟨φ₂⟩⟩ : ∃ T'' : AlgebraicGeometry.Compactification.Triangle f.left g.left,
+      Nonempty (T''.Hom T₀) ∧ Nonempty (T''.Hom T) :=
+    ⟨T₀.inf T, ⟨T₀.infFst T⟩, ⟨T₀.infSnd T⟩⟩
+  have := isIso_baseChange_triangleShriekTriangle ℓ T₀
+  have := isIso_exchange_triangleShriekTriangle ℓ T₀
+  have := isIso_baseChange_triangleShriekTriangle ℓ T''
+  have := isIso_exchange_triangleShriekTriangle ℓ T''
+  have n₁ := compIso_triangleShriekTriangle_naturality ℓ φ₁
+  have n₂ := compIso_triangleShriekTriangle_naturality ℓ φ₂
+  refine Iso.trans_symm_eq_of_comm ((𝔽).compIso (triangleShriekTriangle T₀))
+    ((𝔽).compIso (triangleShriekTriangle T)) ((𝔽).compIso (triangleShriekTriangle T''))
+    (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ
+      (Compactification.Triangle.overCfg T₀) (Compactification.Triangle.overCfg T''))
+    (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ
+      (Compactification.Triangle.overCfg T) (Compactification.Triangle.overCfg T''))
+    (NatIso.hcomp (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T₀.cf
+      T''.cf) (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T₀.cg
+      T''.cg))
+    (NatIso.hcomp (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T.cf
+      T''.cf) (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T.cg
+      T''.cg))
+    (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ
+      c (Compactification.Triangle.overCfg T₀))
+    (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ
+      c (Compactification.Triangle.overCfg T))
+    (NatIso.hcomp (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T.cf
+      T₀.cf) (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T.cg
+      T₀.cg)) n₁ n₂ ?_ ?_
+  · exact congrArg Iso.hom
+      ((boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans ℓ _ _ _).trans
+        (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans ℓ _ _ _).symm)
+  · exact (NatTrans.exchange _ _ _ _).symm.trans (congrArg₂ NatTrans.hcomp
+      (congrArg Iso.hom (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans ℓ
+        _ _ _))
+      (congrArg Iso.hom (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans ℓ
+        _ _ _)))
+
 variable (f g)
 
-set_option maxHeartbeats 1000000 in
--- the comparison through a common refinement unfolds the composition isomorphisms
 /-- **The composition isomorphism of the lower shriek is computed by any triangle of
 compactifications** `T` of `f` and `g`: it is the comparison with the compactification
 `T.cfg` of `f ≫ g`, followed by the inverse of the composition isomorphism of `T` and the
@@ -592,42 +649,8 @@ theorem boundedConstructibleLowerShriekComp_padicAlgCl_hom_eq_triangle
     boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl_eq']
   let T₀ := triangleOfCompactifications (compactificationOverField f) (compactificationOverField g)
     _ hd
-  obtain ⟨T'', ⟨φ₁⟩, ⟨φ₂⟩⟩ : ∃ T'' : AlgebraicGeometry.Compactification.Triangle f.left g.left,
-      Nonempty (T''.Hom T₀) ∧ Nonempty (T''.Hom T) :=
-    ⟨T₀.inf T, ⟨T₀.infFst T⟩, ⟨T₀.infSnd T⟩⟩
-  have := isIso_baseChange_triangleShriekTriangle ℓ T₀
-  have := isIso_exchange_triangleShriekTriangle ℓ T₀
-  have := isIso_baseChange_triangleShriekTriangle ℓ T''
-  have := isIso_exchange_triangleShriekTriangle ℓ T''
-  have n₁ := compIso_triangleShriekTriangle_naturality ℓ φ₁
-  have n₂ := compIso_triangleShriekTriangle_naturality ℓ φ₂
-  refine Iso.trans_symm_eq_of_comm ((𝔽).compIso (triangleShriekTriangle T₀))
-    ((𝔽).compIso (triangleShriekTriangle T)) ((𝔽).compIso (triangleShriekTriangle T''))
-    (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ
-      (Compactification.Triangle.overCfg T₀) (Compactification.Triangle.overCfg T''))
-    (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ
-      (Compactification.Triangle.overCfg T) (Compactification.Triangle.overCfg T''))
-    (NatIso.hcomp (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T₀.cf
-      T''.cf) (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T₀.cg
-      T''.cg))
-    (NatIso.hcomp (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T.cf
-      T''.cf) (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T.cg
-      T''.cg))
-    (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ
-      (compactificationOverField (f ≫ g)) (Compactification.Triangle.overCfg T₀))
-    (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ
-      (compactificationOverField (f ≫ g)) (Compactification.Triangle.overCfg T))
-    (NatIso.hcomp (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T.cf
-      T₀.cf) (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T.cg
-      T₀.cg)) n₁ n₂ ?_ ?_
-  · exact congrArg Iso.hom
-      ((boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans ℓ _ _ _).trans
-        (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans ℓ _ _ _).symm)
-  · exact (NatTrans.exchange _ _ _ _).symm.trans (congrArg₂ NatTrans.hcomp
-      (congrArg Iso.hom (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans ℓ
-        _ _ _))
-      (congrArg Iso.hom (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans ℓ
-        _ _ _)))
+  exact compIso_triangleShriekTriangle_inv_comparison ℓ
+    (compactificationOverField (f ≫ g)) T₀ T
 
 end AnyTriangle
 

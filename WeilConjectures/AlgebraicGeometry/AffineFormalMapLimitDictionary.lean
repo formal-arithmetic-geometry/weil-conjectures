@@ -65,8 +65,48 @@ private theorem finite_presentation_module
     moduleSpecΓFunctor.mapIso e
   exact Module.Finite.equiv eP.toLinearEquiv.symm
 
-set_option maxHeartbeats 1000000 in
--- The affine equivalence and two natural comparisons require extra elaboration heartbeats.
+/-- A full faithful realization transports a morphism across an equivalence, compatibly
+with a second natural comparison. -/
+private theorem affine_comparison_factorization
+    {M N V W : Type*} [Category M] [Category N] [Category V] [Category W]
+    (E : M ≌ N) (ι : N ⥤ V) [ι.Full] [ι.Faithful]
+    (R : M ⥤ W) (C : W ⥤ V) (D : V ⥤ W)
+    (β : E.functor ⋙ ι ≅ R ⋙ C) (γ : R ≅ E.functor ⋙ ι ⋙ D)
+    (B : M) {N₀ H : N} (δ : N₀ ⟶ H) (τ : C.obj (R.obj B) ≅ ι.obj H) :
+    ∃ (Q : M) (ψ : Q ⟶ B) (ρ : ι.obj N₀ ≅ C.obj (R.obj Q))
+      (a : R.obj Q ≅ D.obj (ι.obj N₀)) (b : R.obj B ≅ D.obj (ι.obj H)),
+      ι.map δ = ρ.hom ≫ C.map (R.map ψ) ≫ τ.hom ∧
+        R.map ψ ≫ b.hom = a.hom ≫ D.map (ι.map δ) := by
+  let Q := E.inverse.obj N₀
+  let c := E.counitIso.app N₀
+  let t : ι.obj (E.functor.obj B) ≅ ι.obj H := β.app B ≪≫ τ
+  let t' : E.functor.obj B ≅ H := ι.preimageIso t
+  let f : E.functor.obj Q ⟶ E.functor.obj B := c.hom ≫ δ ≫ t'.inv
+  let ψ : Q ⟶ B := E.functor.preimage f
+  have hψt : ι.map (E.functor.map ψ) ≫ t.hom = ι.map c.hom ≫ ι.map δ := by
+    dsimp only [ψ]
+    rw [E.functor.map_preimage]
+    dsimp only [f]
+    simp only [Functor.map_comp, t', Functor.preimageIso_inv, Functor.map_preimage,
+      Category.assoc, Iso.inv_hom_id, Category.comp_id]
+  refine ⟨Q, ψ, ι.mapIso c.symm ≪≫ β.app Q,
+    γ.app Q ≪≫ D.mapIso (ι.mapIso c), γ.app B ≪≫ D.mapIso t, ?_, ?_⟩
+  · have hβ := β.hom.naturality ψ
+    change ι.map (E.functor.map ψ) ≫ (β.app B).hom =
+      (β.app Q).hom ≫ C.map (R.map ψ) at hβ
+    change ι.map δ = (ι.map c.inv ≫ (β.app Q).hom) ≫ C.map (R.map ψ) ≫ τ.hom
+    rw [Category.assoc, ← Category.assoc (β.app Q).hom, ← hβ,
+      Category.assoc]
+    change ι.map δ = ι.map c.inv ≫ ι.map (E.functor.map ψ) ≫ t.hom
+    rw [hψt, ← ι.map_comp_assoc, c.inv_hom_id, ι.map_id, Category.id_comp]
+  · have hγ := γ.hom.naturality ψ
+    change R.map ψ ≫ (γ.app B).hom =
+      (γ.app Q).hom ≫ D.map (ι.map (E.functor.map ψ)) at hγ
+    change R.map ψ ≫ ((γ.app B).hom ≫ D.map t.hom) =
+      ((γ.app Q).hom ≫ D.map (ι.map c.hom)) ≫ D.map (ι.map δ)
+    rw [← Category.assoc, hγ, Category.assoc, ← D.map_comp, hψt,
+      D.map_comp, Category.assoc]
+
 /-- The affine dictionary identifies a formal morphism with a completed linear map,
 and identifies that map with the actual inverse limit of its section maps.
 No torsion hypothesis or annihilator conclusion is involved.
@@ -123,13 +163,7 @@ theorem affine_formal_map_limit_dictionary
           (lim.map (Functor.whiskerRight δ.hom
             (SheafOfModules.evaluation X.ringCatSheaf (op ⊤)))).hom (a x) := by
   classical
-  dsimp only
-  intro P ε η
-  let A := Γ(X, ⊤)
-  let I := J.ideal ⟨⊤, isAffineOpen_top X⟩
-  let S := AdicCompletion I A
-  let L := tilde.functor A ⋙ Scheme.Modules.pullback X.isoSpec.hom
-  let C := L ⋙ formalCompletionFunctor J
+  intro A I S L C P ε η
   let R := ObjectProperty.ι (fun Q : ModuleCat.{u} S ↦ Module.Finite S Q) ⋙
     ModuleCat.restrictScalars (algebraMap A S)
   let ι := (IsCoherentFormalModule J).ι
@@ -139,52 +173,16 @@ theorem affine_formal_map_limit_dictionary
   have : Module.Finite A P := finite_presentation_module H P ε
   have : Module.Finite S (S ⊗[A] P) := inferInstance
   obtain ⟨E, ⟨β⟩, ⟨γ⟩⟩ := coherentFormalModules_affine_global_comparison X J
-  let Q := E.inverse.obj N
-  let := Module.restrictScalars A S Q.obj
-  let := IsScalarTower.restrictScalars A S Q.obj
   let B : ObjectProperty.FullSubcategory
       (fun Q : ModuleCat.{u} S ↦ Module.Finite S Q) :=
     ⟨ModuleCat.of S (S ⊗[A] P), inferInstance⟩
-  let c := E.counitIso.app N
-  let t : (E.functor.obj B).obj ≅ ((completion X J).obj H).obj :=
-    β.app B ≪≫ η.symm ≪≫ (formalCompletionFunctor J).mapIso ε
-  let t' : E.functor.obj B ≅ (completion X J).obj H := ι.preimageIso t
-  let f : E.functor.obj Q ⟶ E.functor.obj B := c.hom ≫ δ ≫ t'.inv
-  let ψ : Q ⟶ B := E.functor.preimage f
-  have hψ : E.functor.map ψ = f := E.functor.map_preimage f
-  have hψt : ι.map (E.functor.map ψ) ≫ t.hom = ι.map c.hom ≫ δ.hom := by
-    rw [hψ]
-    change (ι.map c.hom ≫ δ.hom ≫ ι.map t'.inv) ≫ t.hom = _
-    have ht : ι.map t'.inv = t.inv := by simp [t', Functor.preimageIso]
-    rw [ht]
-    simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
-  let ρ : N.obj ≅ C.obj (ModuleCat.of A Q.obj) :=
-    ι.mapIso c.symm ≪≫ β.app Q
-  let a : Q.obj ≃ₗ[A] ↥(limit (N.obj ⋙
-      SheafOfModules.evaluation X.ringCatSheaf (op ⊤)) : ModuleCat A) :=
-    (γ.app Q ≪≫ D.mapIso (ι.mapIso c)).toLinearEquiv
-  let b : (S ⊗[A] P) ≃ₗ[A] ↥(limit (((completion X J).obj H).obj ⋙
-      SheafOfModules.evaluation X.ringCatSheaf (op ⊤)) : ModuleCat A) :=
-    (γ.app B ≪≫ D.mapIso t).toLinearEquiv
-  refine ⟨Q.obj, ψ.hom.hom, ρ, a, b, ?_, ?_⟩
-  · symm
-    have hβ := β.hom.naturality ψ
-    change ι.map (E.functor.map ψ) ≫ (β.app B).hom =
-      (β.app Q).hom ≫ C.map (R.map ψ) at hβ
-    change (ι.map c.inv ≫ (β.app Q).hom) ≫ C.map (R.map ψ) ≫
-      η.inv ≫ (formalCompletionFunctor J).map ε.hom = δ.hom
-    rw [Category.assoc, ← Category.assoc (β.app Q).hom (C.map (R.map ψ)), ← hβ]
-    change ι.map c.inv ≫ ι.map (E.functor.map ψ) ≫ t.hom = δ.hom
-    rw [hψt, ← ι.map_comp_assoc, c.inv_hom_id]
-    simp
-  · have hγ := γ.hom.naturality ψ
-    change R.map ψ ≫ (γ.app B).hom =
-      (γ.app Q).hom ≫ D.map (ι.map (E.functor.map ψ)) at hγ
-    have hs : R.map ψ ≫ ((γ.app B).hom ≫ D.map t.hom) =
-        ((γ.app Q).hom ≫ D.map (ι.map c.hom)) ≫ D.map δ.hom := by
-      rw [← Category.assoc, hγ, Category.assoc, ← D.map_comp, hψt,
-        D.map_comp, Category.assoc]
-    intro x
+  obtain ⟨Q, ψ, ρ, a, b, hδ, hs⟩ := affine_comparison_factorization
+    E ι R C D β γ B δ (η.symm ≪≫ (formalCompletionFunctor J).mapIso ε)
+  let := Module.restrictScalars A S Q.obj
+  let := IsScalarTower.restrictScalars A S Q.obj
+  refine ⟨Q.obj, ψ.hom.hom, ρ, a.toLinearEquiv, b.toLinearEquiv, ?_, ?_⟩
+  · exact hδ
+  · intro x
     exact congrArg (fun g ↦ g x) hs
 
 end AlgebraicGeometry

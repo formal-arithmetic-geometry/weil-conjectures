@@ -55,8 +55,6 @@ def normalizedTensorHomCochains (X : Scheme.{u})
   exact (normalizedHomGlobalCochains X.sheaf P H k).symm.trans
     (b.trans (normalizedHomGlobalCochains X.sheaf T I k))
 
-set_option maxHeartbeats 400000 in
--- Elaborating the composite sheaf and tensor comparisons exceeds the default heartbeat limit.
 /-- The uncurrying equivalence commutes with the ordinary cochain differential.
 Source: Stacks Project, sites-cohomology.tex, Tag 0A90 (lemma-compose).
 (blueprint: lem-pc-normalized-tensor-hom-cochains).
@@ -77,15 +75,33 @@ theorem normalizedTensorHomCochains_comm (X : Scheme.{u})
   have hs : (normalizedHomGlobalCochains X.sheaf P H m).symm (δ k m c) =
       (normalizedHomGlobalCochains X.sheaf P H k).symm c ≫
         (homComplex (R := X.sheaf) P H).d k m := by
-    apply (normalizedHomGlobalCochains X.sheaf P H m).injective
-    rw [AddEquiv.apply_symm_apply, normalizedHomGlobalCochains_comm,
-      AddEquiv.apply_symm_apply]
+    apply (normalizedHomGlobalCochains X.sheaf P H m).symm_apply_eq.mpr
+    exact ((normalizedHomGlobalCochains_comm X.sheaf P H k m
+      ((normalizedHomGlobalCochains X.sheaf P H k).symm c)).trans
+      (congrArg (δ k m) ((normalizedHomGlobalCochains X.sheaf P H k).apply_symm_apply c))).symm
   change normalizedHomGlobalCochains X.sheaf T I m
       ((normalizedHomGlobalCochains X.sheaf P H m).symm (δ k m c) ≫
-        homTensorDegreewiseMap X.sheaf P L I m) = _
-  rw [hs, Category.assoc, ← homTensorDegreewiseMap_comm, ← Category.assoc]
-  exact normalizedHomGlobalCochains_comm X.sheaf T I k m
-    ((normalizedHomGlobalCochains X.sheaf P H k).symm c ≫
-      homTensorDegreewiseMap X.sheaf P L I k)
+        homTensorDegreewiseMap X.sheaf P L I m) =
+    δ k m (normalizedHomGlobalCochains X.sheaf T I k
+      ((normalizedHomGlobalCochains X.sheaf P H k).symm c ≫
+        homTensorDegreewiseMap X.sheaf P L I k))
+  refine (congrArg (normalizedHomGlobalCochains X.sheaf T I m) ?_).trans
+    (normalizedHomGlobalCochains_comm X.sheaf T I k m
+      ((normalizedHomGlobalCochains X.sheaf P H k).symm c ≫
+        homTensorDegreewiseMap X.sheaf P L I k))
+  calc
+    _ = ((normalizedHomGlobalCochains X.sheaf P H k).symm c ≫
+        (homComplex (R := X.sheaf) P H).d k m) ≫
+          homTensorDegreewiseMap X.sheaf P L I m :=
+      congrArg (fun s ↦ s ≫ homTensorDegreewiseMap X.sheaf P L I m) hs
+    _ = (normalizedHomGlobalCochains X.sheaf P H k).symm c ≫
+        ((homComplex (R := X.sheaf) P H).d k m ≫
+          homTensorDegreewiseMap X.sheaf P L I m) := Category.assoc _ _ _
+    _ = (normalizedHomGlobalCochains X.sheaf P H k).symm c ≫
+        (homTensorDegreewiseMap X.sheaf P L I k ≫
+          (homComplex (R := X.sheaf) T I).d k m) :=
+      congrArg (fun f ↦ (normalizedHomGlobalCochains X.sheaf P H k).symm c ≫ f)
+        (homTensorDegreewiseMap_comm X.sheaf P L I k m).symm
+    _ = _ := (Category.assoc _ _ _).symm
 
 end AlgebraicGeometry
