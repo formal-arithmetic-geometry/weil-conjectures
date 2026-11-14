@@ -42,7 +42,8 @@ open CategoryTheory
 namespace AlgebraicGeometry.ProEtale
 
 /-- **The localizing closures agree** (blueprint `definition-localizing-subcategory`,
-`proposition-ctf-equals-bc`): for an `ℓ`-adic coefficient ring `Λ` and a compact, locally noetherian,
+`proposition-ctf-equals-bc`): for an `ℓ`-adic coefficient ring `Λ` and a compact, locally
+noetherian,
 quasi-separated scheme `X`, the localizing closure of `Dctf(X, Λ)` of the notes
 (`AlgebraicGeometry.ProEtale.localizingClosureProEtale`) is the localizing closure of `Dᵇc(X)⟦Λ⟧`
 used by the six operations
