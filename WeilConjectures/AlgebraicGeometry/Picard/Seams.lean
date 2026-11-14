@@ -24,6 +24,15 @@ Strand A statements, each in the form in which its Strand B consumer uses it.
 ## Main statements
 
 - `AlgebraicGeometry.picard_seams`: the four seams `S₁`–`S₄`.
+
+## Implementation details
+
+The seams are used as follows: `S₁` (`Scheme.isAmple_of_degree_pos`,
+`Scheme.isAffine_compl_of_isAmple`) in the hypothesis check of the Hilbert theorem; `S₂`
+(`Scheme.degree_eq_genus`) in the zero-scheme dictionary, whose codomain is `Hilb^g`; `S₃`
+(`Scheme.Modules.exists_opens_range_subset_iff_isFiniteLocallyFreeInDegree`, with `i = 0`,
+`r = 1`) in the openness of `F`; `S₄` (`Scheme.exists_isInvertible_twist`) in the generation
+condition of the representability criterion.
 -/
 
 @[expose] public section
@@ -38,25 +47,15 @@ namespace AlgebraicGeometry
 
 open Scheme
 
-/-- **The four seams between Strand A and Strand B.** The representability of the Picard
-functor (Strand B) uses the coherent cohomology of curves and of families (Strand A) at exactly
-four places, and nowhere else; conversely Strand B never feeds Strand A. The statement is the
-conjunction of these four inputs, each stated as its consumer uses it.
+/-- **The four seams between Strand A and Strand B.** The conjunction of the four cohomological
+inputs to the representability of the Picard functor:
 
-* `S₁`, into the hypothesis check of the Hilbert theorem: the Riemann–Roch consequences
-  (G) *positive degree implies ample* (`AlgebraicGeometry.Scheme.isAmple_of_degree_pos`) and
-  (H) *the complement of an effective divisor with ample line bundle is affine*
-  (`AlgebraicGeometry.Scheme.isAffine_compl_of_isAmple`), which give affine opens containing
-  finitely many given points.
-* `S₂`, into the zero-scheme dictionary: `deg Z(s) = deg ℒ_t = g` for a line bundle `ℒ_t` on
-  `X_K` with `h⁰ = 1` and no higher cohomology (`AlgebraicGeometry.Scheme.degree_eq_genus`), so
-  the codomain of the dictionary is `Hilb^g` for the genus `g`.
-* `S₃`, into the openness of `F`: the locus of the base over which `Rf_* ℱ` is finite locally
-  free of rank `r` in degree `i` is open and detected by base change
-  (`AlgebraicGeometry.Scheme.Modules.exists_opens_range_subset_iff_isFiniteLocallyFreeInDegree`,
-  the perfect-locus theorem), used with `i = 0`, `r = 1`.
-* `S₄`, into the generation condition (2)(c) of the representability criterion: the twist lemma
-  (`AlgebraicGeometry.Scheme.exists_isInvertible_twist`). -/
+* `S₁`: positive degree implies ample, and the complement of an effective divisor with ample
+  line bundle is affine;
+* `S₂`: `deg ℒ_t = g` for a line bundle `ℒ_t` on `X_K` with `h⁰ = 1` and no higher cohomology;
+* `S₃`: the locus of the base over which `Rf_* ℱ` is finite locally free of rank `r` in degree
+  `i` is open and detected by base change;
+* `S₄`: the twist lemma. -/
 theorem picard_seams :
     -- `S₁` (G): positive degree implies ample
     (∀ (k : Type u) [Field k] (X : Scheme.{u}) [X.Over (Spec (.of k))]

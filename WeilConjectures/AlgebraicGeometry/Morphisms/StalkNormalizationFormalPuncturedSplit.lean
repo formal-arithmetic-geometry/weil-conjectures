@@ -25,7 +25,13 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedSplitAsse
 import Mathlib.RingTheory.MvPowerSeries.Equiv
 import WeilConjectures.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedSectionFullyFaithful
 
-/-! # Formal test: PuncturedSplit -/
+/-!
+# Splitting of the stalk normalization over the punctured formal chart
+
+## References
+
+* Stacks Project, Tag 0EYJ; Tags 0EY6, 0EY9, 0337 and 031S
+-/
 
 @[expose] public section
 
@@ -33,7 +39,9 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- Source: Stacks Project, Tag 0EYJ; Tags 0EY6, 0EY9, 0337 and 031S. -/
+/-- Over a flat power-series chart through the section at a boundary point `s` of depth at
+least `2`, the pulled-back finite normalization is isomorphic to the trivial `G`-cover over the
+preimage of `U`. -/
 theorem GaloisCover.exists_stalk_normalization_formal_punctured_split {S C : Scheme.{u}}
     [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]

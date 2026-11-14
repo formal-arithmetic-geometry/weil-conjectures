@@ -26,8 +26,8 @@ universe u
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Compare degree-two vanishing for the two Ext implementations by computing both
-with a projective resolution (`isoExt` and `extMk_eq_zero_iff`). -/
+/-- If `Abelian.Ext N M 2` vanishes, then so does the degree-two `Ext` computed by the derived
+functor `Ext R (ModuleCat R) 2`. -/
 private theorem old_ext_two_isZero {R : Type u} [CommRing R]
     (N M : ModuleCat.{u} R)
     (h : Subsingleton (CategoryTheory.Abelian.Ext N M 2)) :

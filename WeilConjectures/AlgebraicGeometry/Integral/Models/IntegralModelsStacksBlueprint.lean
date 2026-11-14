@@ -899,16 +899,12 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.AlgebraicGeometry.IntegralConstantModelCriterion
 public import WeilConjectures.AlgebraicGeometry.IntegralModelsStacks
 
-/-! # Integral models and Stacks adic constructibility along the current blueprint
+/-! # Integral models and Stacks adic constructibility
 
-The current blueprint proves `lemma-integral-models--2` by restriction of scalars along
-the map from the constant coefficient ring, using the integral constructibility criterion
-`proposition-integral-constructibility-criterion`, the constant-coefficient criterion
-`lemma-integral-models--1` and the pro-etale/etale comparison of
-constructible complexes. This file states the criterion in the internal presentation and
-assembles the comparison from it. The assembled theorem has exactly the statement of
-`IntegralModelsStacks.integral_models_stacks`; it replaces that proof once the stated inputs
-are proved.
+Auxiliary results comparing integral constructible complexes with Stacks-style adic
+constructible complexes via restriction of scalars along the map from the constant coefficient
+ring, using the integral constructibility criterion in the internal presentation, the
+constant-coefficient criterion and the pro-étale/étale comparison of constructible complexes.
 
 ## References
 
@@ -990,7 +986,7 @@ private theorem bp_reverse_bounded
     ⟨min a b, b, hlevels.2.1⟩
 
 /-- Exact homology comparisons turn finite free point-complex models into finite
-constant cohomology models. This is the local step of the reverse integral criterion. -/
+constant cohomology models. -/
 private theorem bp_local_structure_constructible
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj R] [IsCommMonObj R]

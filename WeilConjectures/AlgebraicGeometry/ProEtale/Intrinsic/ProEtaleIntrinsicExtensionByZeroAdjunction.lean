@@ -59,13 +59,9 @@ noncomputable def sfIntrinsicOpenRestriction {U X : Scheme.{u}} (j : U ⟶ X)
     ProEtale.openImmersionRestriction (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) j ⋙
       (sfIntrinsicModuleEquivalence U A).functor
 
-/-- The canonical extension-by-zero adjunction for intrinsic constant coefficients.
-Its Hom equivalence restricts to the given component over each object factoring through
-`U`, and inserts the unique map from zero on every other object; sheafification supplies
-its inverse on sheaves. Naturality and the two inverse laws hold sectionwise. This is
-exactly the fixed-scalar localization adjunction, composed with the canonical coefficient
-realization adjunctions. In particular its unit is the sectionwise identity over `U`,
-transported by those equivalences. -/
+/-- The canonical extension-by-zero adjunction for intrinsic constant coefficients: the
+fixed-scalar extension-by-zero adjunction composed with the coefficient realization
+equivalences. -/
 noncomputable def sfIntrinsicExtensionByZeroAdjunction {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] (A : Type u) [CommRing A] [Finite A] :
     sfIntrinsicExtensionByZero j A ⊣ sfIntrinsicOpenRestriction j A :=

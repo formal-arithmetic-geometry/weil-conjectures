@@ -22,8 +22,8 @@ closed subscheme `Z` of `B` of dimension at most `a` satisfies `cd_tor(Z) ≤ a`
 (`AlgebraicGeometry.Etale.subsingleton_H_of_isZero_upperStar_of_lt_residueFieldTrdeg`).
 
 Indeed `N` is the directed union of its subsheaves `N_Z` of sections supported in closed subsets
-`Z` of dimension at most `a` (`AlgebraicGeometry.Etale.exists_covering_supportedIn`, blueprint
-`lemma-uniform-bounds-pro-etale-affines`), étale cohomology of the quasi-compact quasi-separated `B`
+`Z` of dimension at most `a` (`AlgebraicGeometry.Etale.exists_covering_supportedIn`), étale
+cohomology of the quasi-compact quasi-separated `B`
 commutes with directed unions (`AlgebraicGeometry.Scheme.H_map_of_directed_of_locally`), and
 `N_Z = i_* i^* N_Z` for the closed immersion `i` of the reduced closed subscheme on `Z`, whose
 cohomology is that of `i^* N_Z` on `Z` (`AlgebraicGeometry.Etale.bijective_edgeMap_of_isFinite`).

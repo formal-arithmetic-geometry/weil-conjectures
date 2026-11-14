@@ -39,14 +39,8 @@ private theorem signedSource_coefficient_naturality
     Preadditive.zsmul_comp, Units.smul_def, Functor.comp_map] using
     congrArg (fun z ↦ (n * (n + 1) / 2).negOnePow • z) h
 
-/-- Naturality transports the K-injective cone boundary to any coefficient.
-
-For an isomorphism from the localization of a K-injective complex to a derived
-object, naturality of the evaluation comparison and of the signed source mate
-identifies the model triangle with the triangle formed using that object.  The
-statement records only this triangle isomorphism; distinguishedness is supplied
-by the model theorem and the main cone-boundary theorem.
--/
+/-- An isomorphism `e` from the localization of a K-injective complex `I` to `M` induces an
+isomorphism between the internal-Hom cone triangles of `f` with coefficients in `I` and in `M`. -/
 theorem nativeHom_localized_cone_boundary_transport
     {C : Type d} [Category.{u + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C]

@@ -134,12 +134,7 @@ noncomputable def comparisonUpperStarConstantSheafIsoAddCommGrpCat :
 
 /-- **Pro-étale cohomology with finite coefficients in high degrees.** Let `S` be a scheme of
 finite type and of dimension at most `d` over a separably closed field `K`, and `A` a finite
-discrete abelian group. Then `Hᵠ(S_proét, A) = 0` for `q > 2d`.
-
-The sheaf `U ↦ C(U, A)` is the constant pro-étale sheaf `A`, which is `ν^*` of the constant
-étale sheaf `A`. Since `RΓ(S_proét, ν^* M) ≅ RΓ(S_ét, M)`, its cohomology is the étale cohomology
-of the constant sheaf `A`, which vanishes above `2d` as this sheaf is torsion
-(`AlgebraicGeometry.Scheme.subsingleton_H_of_two_mul_lt_of_isSepClosed`). -/
+discrete abelian group. Then `Hᵠ(S_proét, A) = 0` for `q > 2d`. -/
 theorem subsingleton_H_continuousSheaf_of_two_mul_lt
     {K : Type u} [Field K] [IsSepClosed K] {S : Scheme.{u}} (a : S ⟶ Spec (.of K))
     [LocallyOfFiniteType a] [QuasiCompact a] (d : ℕ)

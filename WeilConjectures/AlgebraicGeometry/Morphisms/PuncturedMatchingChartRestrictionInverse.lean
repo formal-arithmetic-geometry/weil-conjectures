@@ -9,6 +9,13 @@ module
 public import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionMatchingSections
 import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedMatchingChartRestrictionRingEquiv
 
+/-! # A left inverse to the principal-chart comparison
+
+## References
+
+* Stacks Project, Tags 0BLH and 05ER
+-/
+
 @[expose] public section
 
 universe u
@@ -16,10 +23,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.CompletionGluingData
 
 /-- The principal-chart comparison on the image of the matching ring admits a
-ring-theoretic left inverse.  This is the localized affine comparison in the
-proof of Stacks Project, Tags 0BLH and 05ER: the formal-gluing localization
-identifies the matching numerator with the corresponding punctured chart
-section.  The left inverse is induced by that identification. -/
+ring-theoretic left inverse. -/
 theorem puncturedMatching_chart_restriction_leftInverse
     {A : Type u} [CommRing A] [IsNoetherianRing A] [IsLocalRing A]
     {U : (Spec (.of A)).Opens}

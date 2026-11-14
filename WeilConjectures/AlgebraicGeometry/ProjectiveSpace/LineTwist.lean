@@ -152,9 +152,7 @@ in the sense of `AlgebraicGeometry.ProjectiveLine.TwistData` (generators `g₀` 
 `U₁`, glued by `g₀ = t^{-d} g₁`) exists, namely the twisting sheaf
 `AlgebraicGeometry.ProjectiveSpace.twist` (`AlgebraicGeometry.ProjectiveLine.twistData`); it is
 an invertible module; and it is unique up to unique isomorphism compatible with the generators
-(`AlgebraicGeometry.ProjectiveLine.TwistData.existsUnique_iso`).
-
-The blueprint states this for `S = Spec k`, `k` a field. -/
+(`AlgebraicGeometry.ProjectiveLine.TwistData.existsUnique_iso`). -/
 theorem nonempty_twistData (d : ℤ) :
     Nonempty (TwistData S d (twist T₂ S d)) ∧ (twist T₂ S d).IsInvertible ∧
       ∀ {𝓛 𝓛' : (ProjectiveLine S).Modules} (D : TwistData S d 𝓛) (D' : TwistData S d 𝓛'),

@@ -113,7 +113,7 @@ noncomputable def openCover : S.OpenCover :=
 instance (a : G.ι) : IsAffine (G.openCover.X a) :=
   (G.U a).2
 
-/-- Blueprint `theorem-nagata-s-compactification-theorem--1` (the index set): a *valid finite
+/-- A *valid finite
 coefficient refinement* of the presentation `G`.
 
 A family of finitely generated subrings `Aₐ ⊆ Γ(S, Uₐ)` containing all basic-open elements, such
@@ -316,14 +316,14 @@ lemma basicOpen_g_le_inf (a b : G.ι) (r : G.κ a b) :
 lemma isCompact_U (a : G.ι) : IsCompact (G.U a : Set S) :=
   (G.U a).2.isCompact
 
-/-- Part of blueprint `theorem-nagata-s-compactification-theorem--1`: the overlaps of the
+/-- The overlaps of the
 charts are quasi-compact. -/
 lemma isCompact_inf (a b : G.ι) : IsCompact (((G.U a : S.Opens) ⊓ G.U b : S.Opens) : Set S) := by
   rw [← G.iSup_basicOpen_f, TopologicalSpace.Opens.coe_iSup]
   exact isCompact_iUnion fun r ↦ ((G.U a).2.basicOpen _).isCompact
 
 include G in
-/-- Part of blueprint `theorem-nagata-s-compactification-theorem--1`: a scheme with a finite
+/-- A scheme with a finite
 affine gluing presentation is quasi-compact. -/
 theorem compactSpace : CompactSpace S := by
   refine ⟨?_⟩
@@ -333,7 +333,7 @@ theorem compactSpace : CompactSpace S := by
   exact isCompact_iUnion G.isCompact_U
 
 include G in
-/-- Part of blueprint `theorem-nagata-s-compactification-theorem--1`: a scheme with a finite
+/-- A scheme with a finite
 affine gluing presentation is quasi-separated. -/
 theorem quasiSeparatedSpace : QuasiSeparatedSpace S :=
   Scheme.quasiSeparatedSpace_of_isOpenCover (fun a ↦ (G.U a : S.Opens)) G.iSup_U
@@ -505,7 +505,7 @@ instance : PartialOrder G.Stage := PartialOrder.lift _ (Stage.A_injective G)
 
 lemma Stage.le_iff {l₁ l₂ : G.Stage} : l₁ ≤ l₂ ↔ ∀ a, l₁.A a ≤ l₂.A a := Iff.rfl
 
-/-- Part of blueprint `theorem-nagata-s-compactification-theorem--1`: the stages form a
+/-- The stages form a
 join-semilattice under inclusion, the join being the componentwise supremum. -/
 instance : SemilatticeSup G.Stage :=
   { (inferInstance : PartialOrder G.Stage) with
@@ -580,10 +580,10 @@ theorem exists_stage_superset (T : ∀ a, Set Γ(S, G.U a)) (hT : ∀ a, (T a).F
   rw [hl a]
   exact Set.subset_union_left.trans (hsub a)
 
-/-- Part of blueprint `theorem-nagata-s-compactification-theorem--1`: valid stages are directed. -/
+/-- Valid stages are directed. -/
 instance : IsDirected G.Stage (· ≤ ·) := ⟨fun l l' ↦ ⟨l ⊔ l', le_sup_left, le_sup_right⟩⟩
 
-/-- Part of blueprint `theorem-nagata-s-compactification-theorem--1`: valid stages exist. -/
+/-- Valid stages exist. -/
 instance : Nonempty G.Stage :=
   ⟨(G.exists_stage_superset (fun _ ↦ ∅) fun _ ↦ Set.finite_empty).choose⟩
 

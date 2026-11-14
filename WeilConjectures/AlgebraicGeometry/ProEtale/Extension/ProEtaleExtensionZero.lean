@@ -77,9 +77,8 @@ instance openExtensionScalarRestriction_additive {A B : Type (u + 1)}
   sheafCompose_additive.{u, u + 1, u + 1, u + 1, u + 2, u + 2}
     (Scheme.ProEt.topology X) (ModuleCat.restrictScalars.{u + 1} φ)
 
-/-- The identity-on-sections scalar square, transposed along the two recorded
-extension/restriction adjunctions. This is the canonical map
-`j_!^A Res_U ⟶ Res_X j_!^B`; invertibility supplies the comparison in the node's direction. -/
+/-- The canonical map `j_!^A Res_U ⟶ Res_X j_!^B`, the mate of the identity-on-sections
+scalar square along the two extension/restriction adjunctions. -/
 def openExtensionScalarMap {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     sheafCompose (Scheme.ProEt.topology U) (ModuleCat.restrictScalars.{u + 1} φ) ⋙

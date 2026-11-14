@@ -18,8 +18,6 @@ transition maps and limit `X`, the comparison maps `AlgebraicGeometry.Etale.unit
 exhibit the sections of the pullback of an abelian étale sheaf `G` on `R` over `W ×_R X` as the
 colimit of the sections over the `W ×_R Dⱼ`, for `W` quasi-compact and quasi-separated étale
 over a quasi-separated `R` (`AlgebraicGeometry.Etale.unitComparison_app_isColimit_of_isLimit`).
-This is blueprint `proposition-comparison-morphism-inverse-image--3`, which belongs to the
-subsection `lem-sc-second-kummer-divisors`.
 
 ## Main statements
 
@@ -29,7 +27,7 @@ subsection `lem-sc-second-kummer-divisors`.
   `W ×_R X` comes from some `W ×_R Dⱼ`.
 - `AlgebraicGeometry.Etale.unitComparison_app_isColimit_of_isLimit`: both together.
 
-## Implementation notes
+## Implementation details
 
 *Injectivity.* A section `s` over a quasi-compact étale `Dⱼ`-scheme `V` whose restriction to
 `V ×_{Dⱼ} X` vanishes, vanishes étale locally near the image of `V ×_{Dⱼ} X`; this is an open
@@ -40,9 +38,9 @@ limit `V ×_{Dⱼ} X`, the open already contains the image of some `V ×_{Dⱼ} 
 
 *Surjectivity.* A section `t` over `W ×_R X` is, on finitely many affine étale pieces `Vₐ`
 covering `W ×_R X`, the pullback `φₐ^* gₐ` of sections of `G`. Each `Vₐ` descends to an affine
-étale scheme over some stage (`AlgebraicGeometry.Scheme.exists_isPullback_of_etale_of_isAffineOpen`,
-part of blueprint `lemma-acyclicity-pulled-back-injectives`), together with `φₐ` and the map to
-`W` (`AlgebraicGeometry.Scheme.exists_isPullbackLift_comp_eq`). The pulled back sections at a
+étale scheme over some stage
+(`AlgebraicGeometry.Scheme.exists_isPullback_of_etale_of_isAffineOpen`), together with `φₐ` and
+the map to `W` (`AlgebraicGeometry.Scheme.exists_isPullbackLift_comp_eq`). The pulled back sections at a
 common stage agree on the overlaps after passing to a later stage, by injectivity, the descended
 pieces cover `W ×_R Dⱼ` at a later stage, and they glue to the required section.
 -/
@@ -502,15 +500,10 @@ theorem exists_unitComparison_app_eq_zero_of_isLimit [∀ j, CompactSpace (D.obj
 /-- **Continuity of sections at an inverse limit.** Let `(Dⱼ)` be a cofiltered system of
 quasi-compact quasi-separated schemes over `R` with affine transition maps, with limit `X`, let
 `G` be an abelian étale sheaf on `R` and `W` a quasi-compact quasi-separated étale `R`-scheme,
-where `R` is quasi-separated, so that all the `W ×_R Dⱼ` are quasi-compact and quasi-separated
-(as for the étale objects of finite presentation of the blueprint; without it the statement
-fails).
-Then the sections of the pullback of `G` over `W ×_R X` are the filtered colimit of the sections
-of the pullbacks of `G` over the `W ×_R Dⱼ`: every section over `W ×_R X` comes from some
-`W ×_R Dⱼ`, and a section over `W ×_R Dⱼ` which vanishes on `W ×_R X` already vanishes on some
-`W ×_R Dⱼ'`, `j' ⟶ j`. The sections of the pullback of `G` over `W ×_R Dⱼ` are written as the
-sections of `πⱼ_* πⱼ^* G` over `W`, and the transition maps are
-`AlgebraicGeometry.Etale.unitComparison`. -/
+where `R` is quasi-separated. Then the sections of the pullback of `G` over `W ×_R X` are the
+filtered colimit of the sections of the pullbacks of `G` over the `W ×_R Dⱼ`, written as the
+sections of `πⱼ_* πⱼ^* G` over `W`, with transition maps `AlgebraicGeometry.Etale.unitComparison`.
+-/
 theorem unitComparison_app_isColimit_of_isLimit [∀ j, CompactSpace (D.obj j)]
     [∀ j, QuasiSeparatedSpace (D.obj j)] [∀ {j k : J} (f : j ⟶ k), IsAffineHom (D.map f)]
     [QuasiSeparatedSpace R] (hc : IsLimit c)

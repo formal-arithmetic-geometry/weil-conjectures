@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedMatchingChartKernelT
 ## References
 
 * Stacks Project, Tags 0BLH, 05ER and 05EU
-* Stacks Project, Tag 05ER, with the algebra compatibility of Tag 05EU
 -/
 
 @[expose] public section
@@ -64,17 +63,8 @@ private theorem principalOpen_image
     inf_eq_right.mpr hf]
   exact SpecMap_preimage_basicOpen D.baseMap f
 
-/-- The localized first projection is the underlying ring map of an equivalence.
-
-The finite principal-open affine charts of the finite morphism `q` form the
-formal-gluing datum of Tag 05ER.  Its degree-zero compatible sections are the
-explicit pullback `D.matchingRing`; localizing at `f` identifies degree zero
-with the section ring on the corresponding chart.  Under the sheaf
-identification of sections on an affine scheme, this localized projection is
-exactly the `appTop` map displayed below.  The compatibility with addition and
-multiplication is the algebra compatibility in Tag 05EU, so the localized
-isomorphism is a `RingEquiv`.
--/
+/-- For `D(f) ≤ U`, the map on global sections induced by `D.puncturedMap` over the chart
+above `D(f)` is the underlying map of a ring isomorphism. -/
 theorem exists_puncturedMap_basicOpen_appTop_ringEquiv
     {A : Type u} [CommRing A] [IsNoetherianRing A] [IsLocalRing A]
     {U : (Spec (.of A)).Opens}

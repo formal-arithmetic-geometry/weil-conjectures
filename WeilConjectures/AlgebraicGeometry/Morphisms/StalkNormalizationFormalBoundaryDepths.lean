@@ -23,7 +23,13 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.StalkNormalizationNormalPart
 import WeilConjectures.RingTheory.FlatLocalDepthFormula
 import WeilConjectures.RingTheory.NormalLocalDepthTwo
 
-/-! # Formal test: BoundaryDepths -/
+/-!
+# Boundary depths in the formal test for the stalk normalization
+
+## References
+
+* Stacks Project, Tag 0EYJ; Tags 0EY6, 0EY9, 0337 and 031S
+-/
 
 @[expose] public section
 
@@ -41,7 +47,9 @@ private theorem depth_le_of_flat_stalk {X Y : Scheme.{u}}
   rw [hd]
   exact le_self_add
 
-/-- Source: Stacks Project, Tag 0EYJ; Tags 0EY6, 0EY9, 0337 and 031S. -/
+/-- Over a flat power-series chart at a boundary point `s` of depth at least `2`, the pulled-back
+finite normalization and the trivial `G`-cover have depth at least `2` at all points lying
+outside the preimage of `U`. -/
 theorem GaloisCover.stalk_normalization_formal_boundary_depths {S C : Scheme.{u}}
     [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]

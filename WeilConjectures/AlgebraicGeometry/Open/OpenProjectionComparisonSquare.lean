@@ -17,8 +17,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-!
 # Site transport of the open projection formula
-The derived statement and its K-flat normalization follow the blueprint item
-`lem-pur-open-projection-site-transport`.
 
 ## References
 

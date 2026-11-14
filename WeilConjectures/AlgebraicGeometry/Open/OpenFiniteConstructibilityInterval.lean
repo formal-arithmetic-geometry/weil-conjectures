@@ -186,12 +186,7 @@ private theorem extend_stratification {U V Z : Scheme.{u}} [IsNoetherian V]
 
 set_option linter.unusedVariables false in
 /-- Open extension preserves bounded finite-torsion constructibility and each supplied
-cohomological interval. Cohomology commutes with the canonical exact extension by zero.
-Every given witnessing stratification extends by the reduced closed complement, retaining
-its immersed strata over the ambient scheme and finite locally constant restrictions.
-An arbitrary collection of empty strata may be omitted. The immediately applied instance
-lambda supplies the proved finite-ring witness and the existing small-site sheafification
-transport at its fixed coefficient size; it introduces no additional hypothesis or definition. -/
+cohomological interval. -/
 theorem open_finite_constructibility_interval
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n)

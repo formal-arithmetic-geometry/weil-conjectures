@@ -29,6 +29,17 @@ is the form in which quasi-projectivity is phrased here.
 - `AlgebraicGeometry.exists_isImmersion_projectiveSpace_of_pullback`: if the base change `X_K`
   of a `k`-scheme `X` to a field extension `K / k` is quasi-projective over `K`, then `X` is
   quasi-projective over `k` (Stacks 0BDE).
+
+## Implementation details
+
+The descent follows Stacks 0BDE. The pullback of `𝒪(1)` along the immersion is ample; the
+resulting morphism to projective space with affine preimages of the standard opens is defined
+over a finite extension `k'` of `k`, and taking norms along `X_{k'} ⟶ X` gives an ample
+coordinate cover of `X`, hence an immersion into projective space.
+
+## References
+
+* Stacks Project, Tags 0BDE, 01ZY
 -/
 
 @[expose] public section
@@ -53,21 +64,7 @@ def IsQuasiProjective {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) : Prop :=
 extension and let `X` be a scheme over `k`. If the base change `X_K` admits an immersion over
 `Spec K` into a projective space `ℙ(α; Spec K)` with finitely many homogeneous coordinates, then
 `X` admits an immersion over `Spec k` into a projective space `ℙ(β; Spec k)` with finitely many
-homogeneous coordinates.
-
-The proof follows Stacks 0BDE. The pullback of `𝒪(1)` along the immersion is ample: there is a
-morphism `X_K ⟶ ℙ(γ; K)` with affine preimages of the standard opens
-(`AlgebraicGeometry.exists_isAffineOpen_preimage_of_isImmersion`). Such a morphism is defined
-over a finite extension `k'` of `k`
-(`AlgebraicGeometry.exists_finite_isAffineOpen_preimage_standardOpen`); taking norms along
-`X_{k'} ⟶ X` gives an ample coordinate cover of `X`
-(`AlgebraicGeometry.exists_coordinateCover_of_isPullback`), and an ample coordinate cover of a
-scheme of finite type gives an immersion into projective space
-(`AlgebraicGeometry.Scheme.CoordinateCover.exists_isImmersion`).
-
-This is an input to the proof of Stacks 0BF7 (`AlgebraicGeometry.GrpObj.exists_isImmersion_
-projectiveSpace`), used for blueprint `lemma-symmetric-ample-sheaf--1` and the subsection
-`lemma-symmetric-ample-sheaf--1`. -/
+homogeneous coordinates. -/
 @[stacks 0BDE]
 theorem exists_isImmersion_projectiveSpace_of_pullback {X : Scheme.{u}} (f : X ⟶ Spec (.of k))
     {α : Type u} [Finite α]
@@ -114,12 +111,7 @@ theorem exists_isImmersion_projectiveSpace_of_pullback {X : Scheme.{u}} (f : X �
 attribute [local instance] MvPolynomial.gradedAlgebra in
 /-- **Finite sets of points of a projective scheme lie in an affine open.** Let `X` be a scheme
 with a closed immersion `i : X ⟶ ℙ(α; Spec k)` into a projective space. Then every finite set of
-points of `X` is contained in an affine open subscheme: by graded prime avoidance
-(`ProjectiveSpectrum.exists_homogeneous_notMem_of_finset`) there is a form `f` of positive degree
-over `ℤ` not vanishing at the images of the points, and the preimage in `X` of the affine
-`D₊(f) ⊆ ℙⁿ_ℤ` is affine, `X ⟶ ℙⁿ_ℤ` being an affine morphism.
-
-(Stacks 01ZY, for projective schemes) -/
+points of `X` is contained in an affine open subscheme (Stacks 01ZY, for projective schemes). -/
 @[stacks 01ZY]
 theorem exists_isAffineOpen_superset_of_isClosedImmersion {X : Scheme.{u}} {α : Type u}
     (i : X ⟶ ℙ(α; Spec (.of k))) [IsClosedImmersion i] (s : Set X) (hs : s.Finite) :

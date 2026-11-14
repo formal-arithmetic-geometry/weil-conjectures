@@ -18,15 +18,21 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.RootSplitAwayCoverEtale
 import WeilConjectures.RingTheory.RegularLocalLocalization
 import Mathlib.RingTheory.Ideal.GoingUp
 
+/-!
+# The strict local root algebra is a domain with etale puncture
+
+## References
+
+* Stacks Project, Tags 0EYG and 09EV
+-/
+
 @[expose] public section
 universe u
 set_option autoImplicit false
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
-/-- The root algebra is a domain and its puncture is etale.
-
-Source: Stacks Project, Tags 0EYG and 09EV. -/
+/-- The root algebra is a domain and its puncture is etale. -/
 theorem strict_local_root_domain_etale
     (H : Type u) [CommRing H] [IsStrictlyHenselianLocalRing H]
     [IsRegularLocalRing H] (h : H)

@@ -129,17 +129,9 @@ private def pointSingleDerivedUnit
     DerivedCategory.singleFunctorObjUnitIso
       (ModuleRingedComparison.internalModules Λ.X Y)
 
-/--
-
-The finite-free point-module identifications make the coefficient projection
-transformation additive on the two degree-zero finite biproduct terms.  Exactness
-of the tensor/direct-image composite makes it send the mapping-cone triangle of
-`S.f` to a distinguished triangle.  The first two components are the finite
-biproduct maps and are isomorphisms, while the third component is the displayed
-`projection` after the specified `modelPull` identification.  This theorem
-records precisely that triangle package; the final isomorphism follows by the
-triangle two-out-of-three lemma.
--/
+/-- The coefficient projection sends the mapping-cone triangle of `S.f` to a distinguished
+triangle whose first two components are isomorphisms and whose third component is
+`projection` after the `modelPull` identification. -/
 theorem finiteFreeScalarProjection_triangle
     (Λ : ScalarSixRing.{u}) (S : ShortComplex (PointModules Λ)) (r : ℕ)
     (e₁ : S.X₁ ≅ biproduct (fun _ : Fin r ↦ Mod.regular Λ.X))

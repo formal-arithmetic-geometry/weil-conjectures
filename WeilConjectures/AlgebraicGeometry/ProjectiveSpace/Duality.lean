@@ -50,6 +50,9 @@ Let `k` be a field, `ℙ¹_k = ProjectiveLine (Spec k)` and `ω = Ω¹_{ℙ¹_k/
 Coherence is spelled as `AlgebraicGeometry.Scheme.Modules.isCoherent`. The `𝒪_{ℙ¹}`-module
 `Hom(𝒢, ω)` of global homomorphisms is written as `H⁰(ℙ¹, Hom(𝒢, ω))`, the global sections of the
 internal hom, so that it is a functor to `k`-vector spaces.
+
+The resolutions by twists come from Castelnuovo–Mumford regularity
+(`exists_shortExact_sigma_twist`), which gives them with `ℰ₂ = 0`.
 -/
 
 @[expose] public section
@@ -159,13 +162,7 @@ noncomputable def extLinearFunctor (n : ℕ) : X.Modulesᵒᵖ ⥤ ModuleCat.{u}
 /-- **`H⁰`-duality from a resolution.** Let `0 → 𝒦 → ℰ → 𝒢 → 0` be a short exact sequence of
 `𝒪_X`-modules with `H⁰(ℰ) = 0` and `Ext¹(ℰ, ω) = 0`, such that the duality pairing
 `Hom(-, ω) → H¹(X, -)^∨` is bijective on `𝒦` and surjective on `ℰ`. Then the Yoneda pairing
-`Ext¹(𝒢, ω) → H⁰(X, 𝒢)^∨` is bijective.
-
-Both sides are cokernels of `Hom(ℰ, ω) ⟶ Hom(𝒦, ω)`: the `Ext` side by the long exact `Ext`
-sequence, and the `H⁰` side because `δ : H⁰(𝒢) ⟶ H¹(𝒦)` is the kernel of `H¹(𝒦) ⟶ H¹(ℰ)`, so
-that `H⁰(𝒢)^∨` is the cokernel of `H¹(ℰ)^∨ ⟶ H¹(𝒦)^∨`. The Yoneda pairing is compatible with
-the two maps from `Hom(𝒦, ω)`: for `φ : 𝒦 ⟶ ω`, the Yoneda product of `s ∈ H⁰(𝒢)` with the image
-`φ ∘ e ∈ Ext¹(𝒢, ω)` of `φ` under the extension class `e` of the sequence is `H¹(φ)(δ s)`. -/
+`Ext¹(𝒢, ω) → H⁰(X, 𝒢)^∨` is bijective. -/
 theorem bijective_yonedaDualMap_of_shortExact {S : ShortComplex X.Modules}
     (hS : S.ShortExact) [Subsingleton (S.X₂.H 0)] [Subsingleton (Ext S.X₂ ω 1)]
     (h₁ : Function.Bijective (dualPairing t S.X₁))
@@ -284,10 +281,7 @@ namespace ProjectiveLine
 variable (k : Type u) [Field k]
 
 /-- **Resolutions by twists on `ℙ¹_k`.** Every coherent `𝒪_{ℙ¹_k}`-module `𝒢` has a resolution
-`0 → ℰ₂ → ℰ₁ → ℰ₀ → 𝒢 → 0` in which each `ℰᵢ` is a finite direct sum of twists `𝒪(d)`. In
-fact `ℰ₂ = 0` can be taken: `exists_shortExact_sigma_twist` gives a resolution
-`0 → 𝒪(-N - 1)^a → 𝒪(-N)^b → 𝒢 → 0` by Castelnuovo–Mumford regularity, replacing the graded
-Hilbert syzygy theorem of the blueprint. -/
+`0 → ℰ₂ → ℰ₁ → ℰ₀ → 𝒢 → 0` in which each `ℰᵢ` is a finite direct sum of twists `𝒪(d)`. -/
 theorem exists_exact_sigma_twist (𝒢 : (ProjectiveLine (Spec (.of k))).Modules)
     [SheafOfModules.IsQuasicoherent (R := (ProjectiveLine (Spec (.of k))).ringCatSheaf) 𝒢]
     [SheafOfModules.IsFinitePresentation (R := (ProjectiveLine (Spec (.of k))).ringCatSheaf) 𝒢] :
@@ -448,11 +442,7 @@ lemma surjective_dualPairing_twist_neg_two (t : Module.Dual k ((ω).H 1)) (ht : 
   exact ⟨_, rfl⟩
 
 /-- **Duality on the projective line for the twists.** For every `a`, the duality pairing
-`Hom(𝒪(a), Ω¹) → H¹(ℙ¹_k, 𝒪(a))^∨` is bijective. For `a ≥ -1` both sides vanish. For `a ≤ -2`
-we argue by descending induction from `a = -2`: the Koszul sequence
-`0 → 𝒪(a) → 𝒪(a + 1)² → 𝒪(a + 2) → 0` and `H⁰(𝒪(a + 2)) = 0` show that `H¹(𝒪(a)) → H¹(𝒪(a + 1)²)`
-is injective, which transports surjectivity from `𝒪(a + 1)²` to `𝒪(a)`, and the dimension count
-gives bijectivity. -/
+`Hom(𝒪(a), Ω¹) → H¹(ℙ¹_k, 𝒪(a))^∨` is bijective. -/
 theorem bijective_dualPairing_twist (t : Module.Dual k ((ω).H 1)) (ht : t ≠ 0) (a : ℤ) :
     Function.Bijective (dualPairing t (𝒪(a))) := by
   refine bijective_dualPairing_twist_of_surjective k t a ?_
@@ -480,10 +470,7 @@ theorem bijective_dualPairing_twist (t : Module.Dual k ((ω).H 1)) (ht : t ≠ 0
         (bijective_dualPairing_biprod t _ _ hb hb).2
 
 /-- **Duality on the projective line for coherent modules.** For a coherent `𝒪_{ℙ¹_k}`-module
-`𝒢`, the duality pairing `Hom(𝒢, Ω¹) → H¹(ℙ¹_k, 𝒢)^∨` is bijective. Write `𝒢` as a cokernel of a
-map `ℰ₁ ⟶ ℰ₀` of finite sums of twists (`ProjectiveSpace.exists_epi_sigma_twist`, applied twice);
-both sides are left exact in `𝒢` (for `H¹(-)^∨` because `H²` vanishes on `ℙ¹_k`), and the
-pairing is bijective on `ℰ₀` and `ℰ₁` by `bijective_dualPairing_twist`. -/
+`𝒢`, the duality pairing `Hom(𝒢, Ω¹) → H¹(ℙ¹_k, 𝒢)^∨` is bijective. -/
 theorem bijective_dualPairing_of_isCoherent (t : Module.Dual k ((ω).H 1)) (ht : t ≠ 0)
     (G : (ProjectiveLine (Spec (.of k))).Modules)
     [SheafOfModules.IsQuasicoherent (R := (ProjectiveLine (Spec (.of k))).ringCatSheaf) G]
@@ -501,13 +488,7 @@ theorem bijective_dualPairing_of_isCoherent (t : Module.Dual k ((ω).H 1)) (ht :
     (H.surjective_map_g (S := ShortComplex.mk (kernel.ι φ₀) φ₀ (kernel.condition φ₀)) hS 1)
 
 /-- **Duality on the projective line, `H¹`.** For coherent `𝒪_{ℙ¹_k}`-modules `𝒢`, there is an
-isomorphism `H¹(ℙ¹_k, 𝒢)^∨ ≅ Hom(𝒢, Ω¹_{ℙ¹_k/k})`, natural in `𝒢`.
-
-The isomorphism is the inverse of the duality pairing `φ ↦ t ∘ H¹(φ)` for a nonzero linear form
-`t` on `H¹(ℙ¹_k, Ω¹) ≅ k` (`Scheme.Modules.dualPairingH`). It is bijective on the twists
-(`bijective_dualPairing_twist`, by descending induction along the Koszul sequences and a
-dimension count), hence on finite sums of twists, hence on every coherent `𝒢` by left exactness
-of both sides and a presentation by sums of twists (`bijective_dualPairing_of_isCoherent`). -/
+isomorphism `H¹(ℙ¹_k, 𝒢)^∨ ≅ Hom(𝒢, Ω¹_{ℙ¹_k/k})`, natural in `𝒢`. -/
 theorem nonempty_dual_H_one_iso :
     Nonempty ((Scheme.Modules.isCoherent (ProjectiveLine (Spec (.of k)))).ι.op ⋙
         (Scheme.Modules.cohomologyFunctor k 1).op ⋙ ModuleCat.dualFunctor k ≅
@@ -543,15 +524,7 @@ theorem nonempty_dual_H_one_iso :
 
 /-- **The Yoneda pairing on `ℙ¹_k` is bijective.** For a coherent `𝒪_{ℙ¹_k}`-module `𝒢` and a
 nonzero linear form `t` on `H¹(ℙ¹_k, Ω¹) ≅ k`, the Yoneda pairing
-`Ext¹(𝒢, Ω¹) → H⁰(ℙ¹_k, 𝒢)^∨`, `ξ ↦ (s ↦ t (s ∘ ξ))`, is bijective.
-
-Choose an epimorphism `ℰ = ⨁ 𝒪(-dⱼ) ⟶ 𝒢` with all `dⱼ ≥ 1`: one from a sum of twists
-`𝒪(-eⱼ)`, `eⱼ ≥ 0` (`ProjectiveSpace.exists_epi_sigma_twist`), precomposed with the Koszul
-surjections `𝒪(-eⱼ - 1)² ⟶ 𝒪(-eⱼ)`. Its kernel `𝒦` is coherent, `H⁰(ℰ) = 0`, and
-`Ext¹(𝒪(-d), ω) ≅ H¹(ℙ¹_k, 𝒪(d) ⊗ ω) = H¹(ℙ¹_k, 𝒪(d - 2)) = 0` for `d ≥ 1`
-(`Scheme.Modules.nonempty_ext_addEquiv_H`). The `H¹`-duality on `𝒦` and `ℰ`
-(`bijective_dualPairing_of_isCoherent`) then gives the bijectivity on `𝒢`
-(`Scheme.Modules.bijective_yonedaDualMap_of_shortExact`). -/
+`Ext¹(𝒢, Ω¹) → H⁰(ℙ¹_k, 𝒢)^∨`, `ξ ↦ (s ↦ t (s ∘ ξ))`, is bijective. -/
 theorem bijective_yonedaDualMap [HasExt.{u} (ProjectiveLine (Spec (.of k))).Modules]
     (t : Module.Dual k ((ω).H 1)) (ht : t ≠ 0) (𝒢 : (ProjectiveLine (Spec (.of k))).Modules)
     [SheafOfModules.IsQuasicoherent (R := (ProjectiveLine (Spec (.of k))).ringCatSheaf) 𝒢]
@@ -658,13 +631,7 @@ lemma extIsoDualHZero_hom_app [HasExt.{u} (ProjectiveLine (Spec (.of k))).Module
   rfl
 
 /-- **Duality on the projective line, `H⁰`.** For coherent `𝒪_{ℙ¹_k}`-modules `𝒢`, there is an
-isomorphism `H⁰(ℙ¹_k, 𝒢)^∨ ≅ Ext¹(𝒢, Ω¹_{ℙ¹_k/k})`, natural in `𝒢`.
-
-The isomorphism is the inverse of the Yoneda pairing
-`Ext¹(𝒢, ω) × Hom(𝒪, 𝒢) → Ext¹(𝒪, ω) ≅ H¹(ℙ¹_k, ω) → k` for a nonzero linear form `t` on
-`H¹(ℙ¹_k, Ω¹) ≅ k` (`extIsoDualHZero`), the same `t` as for the `H¹`-duality
-`nonempty_dual_H_one_iso`. Bijectivity comes from a resolution `0 → 𝒦 → ℰ → 𝒢 → 0` by twists
-and the `H¹`-duality on `𝒦` and `ℰ` (`bijective_yonedaDualMap`). -/
+isomorphism `H⁰(ℙ¹_k, 𝒢)^∨ ≅ Ext¹(𝒢, Ω¹_{ℙ¹_k/k})`, natural in `𝒢`. -/
 theorem nonempty_dual_H_zero_iso_ext [HasExt.{u} (ProjectiveLine (Spec (.of k))).Modules] :
     Nonempty ((Scheme.Modules.isCoherent (ProjectiveLine (Spec (.of k)))).ι.op ⋙
         (Scheme.Modules.cohomologyFunctor k 0).op ⋙ ModuleCat.dualFunctor k ≅

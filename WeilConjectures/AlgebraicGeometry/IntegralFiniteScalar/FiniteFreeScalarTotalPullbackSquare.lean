@@ -14,14 +14,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.IntegralFiniteScalar
 /-- A total tensor comparison commutes with an oplax functor whenever the
-coefficient square commutes on its invertible degree-zero summands.
-
-Proof. In each degree the composite of the (0,n) tensor inclusion with tauY is
-invertible by its prescribed formula. The inclusion is therefore invertible.
-Cancel its image under F. The tensor comparison and tensor-hom summand formulas
-reduce the claim to the ordinary coefficient square ho. Oplax naturality in the
-first variable and ht identify its remaining coefficient map. The proof needs
-no nonzero assumption on the coefficient object or the complex. -/
+coefficient square commutes on its invertible degree-zero summands. -/
 theorem finiteFreeScalar_totalPullbackSquare
     {A B : Type*} [Category.{u + 1} A] [Category.{u + 1} B]
     [Abelian A] [Abelian B]

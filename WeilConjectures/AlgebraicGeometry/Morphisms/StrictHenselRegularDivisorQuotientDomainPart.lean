@@ -18,14 +18,21 @@ import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationLocal
 import WeilConjectures.Mathlib.RingTheory.Henselian
 import WeilConjectures.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotientRegularPart
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
+
+/-!
+# The divisor quotient of the strict henselization is a domain
+
+## References
+
+* Stacks Project, Tag 00NP
+-/
+
 @[expose] public section
 universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
-/-- The divisor quotient of the canonical strict henselization is a domain.
-Source: Stacks Project, Tag 00NP.
--/
+/-- The divisor quotient of the canonical strict henselization is a domain. -/
 theorem strictHenselizationRing_divisor_quotient_domain_part
     (R : CommRingCat.{u}) [IsRegularRing R] (f : R)
     [IsRegularRing (R ⧸ Ideal.span {f})]

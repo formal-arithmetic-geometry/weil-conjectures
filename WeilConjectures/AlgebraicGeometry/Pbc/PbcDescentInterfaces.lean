@@ -12,8 +12,13 @@ public import WeilConjectures.CategoryTheory.StageSystem.PbcQbarCategory
 
 /-! # Interfaces for scalar-compatible proper-base-change operations
 
-These are the unchanged operation interfaces of the descent proposition. Keeping
-these definitions separate lets its finite-stage inputs avoid importing descent.
+These are the operation interfaces used by proper-base-change descent.
+
+## Implementation details
+
+Keeping these definitions separate lets the finite-stage inputs of descent avoid importing it.
+On the normalized PBC stage systems, the unit equation of a `CoherentExactMorphism` follows from
+associator coherence at repeated stages.
 -/
 
 @[expose] public noncomputable section
@@ -24,13 +29,9 @@ universe w u v u' v'
 open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory.StageSystem
-/-- A family of exact finite-stage functors with scalar-extension comparisons.
-The `base` field contains the stage functors `Φ_E`, comparisons `β_{F/E}`, and
-their associator coherence.  The remaining fields record additivity,
-compatibility with shifts of the stage functors and comparisons, and
-preservation of distinguished triangles at every stage. On the normalized PBC
-stage systems, the unit equation follows from associator coherence at repeated
-stages: the resulting idempotent isomorphism component is the identity. -/
+/-- A family of exact finite-stage functors `Φ_E` with scalar-extension comparisons `β_{F/E}`
+satisfying associator coherence, which are additive, compatible with shifts and preserve
+distinguished triangles at every stage. -/
 structure CoherentExactMorphism {I : Type w} [Preorder I]
     {C : I → Type u} [∀ i, Category.{v} (C i)]
     {D : I → Type u'} [∀ i, Category.{v'} (D i)]

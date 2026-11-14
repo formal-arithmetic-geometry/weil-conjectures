@@ -30,11 +30,6 @@ is all that Chow's lemma consumes.
   `ℙ(n; S) ⨯ ℙ(m; S) ⟶ ℙ(n × m; S)` of the binary product in `Over S`.
 * `AlgebraicGeometry.ProjectiveSpace.exists_isClosedImmersion_pi`: a finite product of
   projective spaces over `S` admits a closed immersion into some `ℙ(N; S)` over `S`.
-
-## Blueprint
-
-`exists_isClosedImmersion_pi` is the second half of `lem:chow-segre`, whose first half is
-`AlgebraicGeometry.ProjectiveSpace.isClosedImmersion_segre`.
 -/
 
 @[expose] public section

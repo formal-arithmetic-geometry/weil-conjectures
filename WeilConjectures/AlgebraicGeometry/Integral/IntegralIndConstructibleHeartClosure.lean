@@ -174,7 +174,8 @@ private lemma constantModelConstructible_single
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-/-- The cofinality argument for a filtered presentation by finitely presentable objects. -/
+/-- For a filtered presentation by finitely presentable objects, the associated functor to the
+costructured arrow category is final. -/
 private theorem final_constructiblePresentation
     {C : Type*} [Category.{u + 1} C] (P : ObjectProperty C)
     (hP : ∀ A : P.FullSubcategory, IsFinitelyPresentable.{u + 1} A.obj)

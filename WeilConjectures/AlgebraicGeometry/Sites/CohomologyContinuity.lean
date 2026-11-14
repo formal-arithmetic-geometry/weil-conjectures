@@ -22,21 +22,26 @@ import WeilConjectures.CategoryTheory.Sites.SheafCohomologyRightDerived
 
 Let `(Xᵢ)` be a cofiltered system of quasi-compact quasi-separated schemes over a scheme `S`, with
 affine transition maps and limit `X`, and let `F` be an étale sheaf on `S`. Then
-`H^q(X, F|_X) = colimᵢ H^q(Xᵢ, F|_{Xᵢ})` ([Stacks, Tag 09YQ]). This is blueprint
-`corollary-cohomology-pro-etale-affine`, which belongs to the subsection
-`lem-sc-second-kummer-divisors`. For abelian sheaves it is proved here in elementwise form
-(`cohomologyMap_isColimit_of_isLimit`), by specialising
-`nonempty_isColimit_cofiltered_fixed_base_cohomology`, and its vanishing form follows
-(`isZero_rightDerived_sectionsFunctor_upperStar_of_isLimit_addCommGrpCat`). The vanishing form for a
-general Grothendieck abelian coefficient category
-(`isZero_rightDerived_sectionsFunctor_upperStar_of_isLimit`), which goes beyond the abelian sheaves
-of [Stacks, Tag 09YQ], is proved through finite split étale hypercovers: the derived
-functors of sections are computed by hypercover cohomology, which commutes with the limit.
+`H^q(X, F|_X) = colimᵢ H^q(Xᵢ, F|_{Xᵢ})` ([Stacks, Tag 09YQ]). For abelian sheaves this is
+`cohomologyMap_isColimit_of_isLimit`, in elementwise form, with vanishing form
+`isZero_rightDerived_sectionsFunctor_upperStar_of_isLimit_addCommGrpCat`. The vanishing form for a
+general Grothendieck abelian coefficient category is
+`isZero_rightDerived_sectionsFunctor_upperStar_of_isLimit`.
 
 ## Main definitions
 
 - `AlgebraicGeometry.Etale.sectionsFunctor`: the global sections functor of the small étale
   site, the sections over the terminal object.
+
+## Implementation details
+
+The elementwise form specialises `nonempty_isColimit_cofiltered_fixed_base_cohomology`. The
+vanishing form for general coefficients is proved through finite split étale hypercovers: the
+derived functors of sections are computed by hypercover cohomology, which commutes with the limit.
+
+## References
+
+* [Stacks, Tag 09YQ]
 -/
 
 @[expose] public section
@@ -55,16 +60,10 @@ noncomputable abbrev sectionsFunctor (X : Scheme.{u}) : Sheaf X.smallEtaleTopolo
   sheafToPresheaf _ A ⋙
     (evaluation _ A).obj (op (MorphismProperty.Over.mk ⊤ (𝟙 X) (MorphismProperty.id_mem _ X)))
 
-/-- Etale cohomology continuity.
-
-Let `(Dᵢ)` be a cofiltered system of quasi-compact quasi-separated schemes over `S` with affine
-transition maps, with limit `X = c.pt`, and let `F` be an étale sheaf on `S`. Then
-`H^q(X, F|_X) = colimᵢ H^q(Dᵢ, F|_{Dᵢ})`; in particular `H^q(X, F|_X)` vanishes as soon as all
-the `H^q(Dᵢ, F|_{Dᵢ})` do.
-
-This is stated for a general Grothendieck abelian coefficient category `A`, beyond the abelian
-sheaves of [Stacks, Tag 09YQ]; for `A = AddCommGrpCat` it is proved as
-`isZero_rightDerived_sectionsFunctor_upperStar_of_isLimit_addCommGrpCat`. -/
+/-- Étale cohomology continuity, vanishing form: let `(Dᵢ)` be a cofiltered system of
+quasi-compact quasi-separated schemes over `S` with affine transition maps and limit `X = c.pt`,
+and let `F` be an étale sheaf on `S` with values in a Grothendieck abelian category `A`. If all
+the `H^q(Dᵢ, F|_{Dᵢ})` vanish, then so does `H^q(X, F|_X)`. -/
 theorem isZero_rightDerived_sectionsFunctor_upperStar_of_isLimit {S : Scheme.{u}}
     (F : Sheaf S.smallEtaleTopology A) {I : Type u} [SmallCategory I] [IsCofiltered I]
     (D : I ⥤ Over S) [∀ i, CompactSpace (D.obj i).left]
@@ -108,10 +107,8 @@ theorem isZero_rightDerived_sectionsFunctor_upperStar_of_isLimit {S : Scheme.{u}
     exact (hstage j).eq_of_src _ _
   exact hlimit.of_iso e.symm
 
-/-- Etale cohomology continuity, in the
-form of an elementwise colimit statement for the pullback maps.
-
-Let `(Dᵢ)` be a cofiltered system of quasi-compact quasi-separated schemes over `S` with affine
+/-- Étale cohomology continuity, in the form of an elementwise colimit statement for the
+pullback maps. Let `(Dᵢ)` be a cofiltered system of quasi-compact quasi-separated schemes over `S` with affine
 transition maps, with limit `X = c.pt`, and let `F` be an abelian étale sheaf on `S`. Then
 `Hᵠ(X, F|_X) = colimᵢ Hᵠ(Dᵢ, F|_{Dᵢ})` along the pullback maps
 `AlgebraicGeometry.Etale.cohomologyMap`: every class on `X` comes from some `Dᵢ` (up to the
@@ -214,13 +211,10 @@ theorem cohomologyMap_isColimit_of_isLimit {S : Scheme.{u}}
     change Sheaf.H.map _ q (H.map f y) = 0
     rw [hfg, map_zero]
 
-/-- Etale cohomology continuity, vanishing
-form for abelian sheaves.
-
-Let `(Dᵢ)` be a cofiltered system of quasi-compact quasi-separated schemes over `S` with affine
-transition maps, with limit `X = c.pt`, and let `F` be an abelian étale sheaf on `S`. If all the
-`H^q(Dᵢ, F|_{Dᵢ})` vanish, then so does `H^q(X, F|_X)`: every class on `X` comes from some `Dᵢ`
-(`cohomologyMap_isColimit_of_isLimit`). -/
+/-- Étale cohomology continuity, vanishing form for abelian sheaves: let `(Dᵢ)` be a cofiltered
+system of quasi-compact quasi-separated schemes over `S` with affine transition maps and limit
+`X = c.pt`, and let `F` be an abelian étale sheaf on `S`. If all the `H^q(Dᵢ, F|_{Dᵢ})` vanish,
+then so does `H^q(X, F|_X)`. -/
 theorem isZero_rightDerived_sectionsFunctor_upperStar_of_isLimit_addCommGrpCat {S : Scheme.{u}}
     (F : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}) {I : Type u} [SmallCategory I]
     [IsCofiltered I] (D : I ⥤ Over S) [∀ i, CompactSpace (D.obj i).left]

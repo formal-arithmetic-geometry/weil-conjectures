@@ -20,7 +20,7 @@ develops, for the pro-étale cohomology of the extensions by zero
 `WeilConjectures.AlgebraicGeometry.ProEtale.IntegralAdicCohomology` develops for the constant
 sheaves. When `T` is proper over an algebraically closed field these are the compactly
 supported cohomology groups of `U`; the results feed the `ℚ̄_ℓ` stage of the compactly
-supported case of blueprint `corollary-degreewise-duality-over-fields--1`.
+supported case of degreewise duality over fields.
 
 * the **Bockstein sequence**: the extension by zero `j_!` is exact, so it maps the Bockstein
   sequence `0 ⟶ ℤ_p --pᵐ--> ℤ_p ⟶ ℤ/pᵐ ⟶ 0` to a short exact sequence, whence
@@ -31,6 +31,8 @@ supported case of blueprint `corollary-degreewise-duality-over-fields--1`.
   `AlgebraicGeometry.ProEtale.module_finite_compactIntegralAdicH`), from the fact that
   `j_! C(-, ℤ_p)` is the limit of the tower `j_! C(-, ℤ/pᵐ)`, for `j` quasi-compact;
 * **compatible lifts** (`AlgebraicGeometry.ProEtale.exists_compactReduction_eq`).
+
+## Implementation details
 
 The limit statement is an instance of a general fact: the extension by zero along a
 quasi-compact open immersion preserves sequential limits of abelian pro-étale sheaves
@@ -782,8 +784,7 @@ noncomputable def isLimitCompactContinuousSheafCone :
 variable (j p) in
 /-- **Separation.** For a quasi-compact open immersion `j : U ⟶ T`, if the groups
 `Hⁿ⁻¹(T, j_! ℤ/pᵐ)` are finite (no condition for `n = 0`), a class of `Hⁿ(T, j_! ℤ_p)` whose
-reductions modulo all `pᵐ` vanish is zero. This feeds the `ℚ̄_ℓ` stage of the compactly supported
-case of blueprint `corollary-degreewise-duality-over-fields--1`. -/
+reductions modulo all `pᵐ` vanish is zero. -/
 theorem eq_zero_of_forall_compactReduction_eq_zero (n : ℕ)
     (hfin : ∀ m k, k + 1 = n → Finite (CompactFiniteAdicH j p m k))
     (x : CompactIntegralAdicH j p n) (hx : ∀ m, compactReduction j p m n x = 0) : x = 0 :=
@@ -793,8 +794,7 @@ theorem eq_zero_of_forall_compactReduction_eq_zero (n : ℕ)
 variable (j p) in
 /-- **Finite generation of compactly supported `ℓ`-adic cohomology.** For a quasi-compact open
 immersion `j : U ⟶ T`, if the groups `Hⁿ⁻¹(T, j_! ℤ/pᵐ)` and `Hⁿ(T, j_! ℤ/p)` are finite, then
-`Hⁿ(T, j_! ℤ_p)` is a finitely generated `ℤ_p`-module. This feeds the `ℚ̄_ℓ` stage of the
-compactly supported case of blueprint `corollary-degreewise-duality-over-fields--1`. -/
+`Hⁿ(T, j_! ℤ_p)` is a finitely generated `ℤ_p`-module. -/
 theorem module_finite_compactIntegralAdicH (n : ℕ)
     (hfin : ∀ m k, k + 1 = n → Finite (CompactFiniteAdicH j p m k))
     [Finite (CompactFiniteAdicH j p 1 n)] :

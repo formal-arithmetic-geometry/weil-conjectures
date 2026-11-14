@@ -738,20 +738,7 @@ private theorem ordered_lattices_of_coefficient_square
 attribute [local irreducible] CondensedRing.upperStar Mod.extendRestrictAdjunction
   Mod.comap Padic.coefficientExtensionIntegers
 
-/-- A lisse spectral-coefficient module has integral lattices on strata with open prefixes.
-
-Proof. Choose a small model of the finite dimensional Q_l-algebra E and transport its
-spectral norm, valuation ring, continuous functions and module objects along the induced
-coefficient isomorphisms. Apply the stratified lisse integral lattice theorem to this
-small model and transport its lattice inclusions and their adjoints back to E.
-Refine the resulting finite partition by Noetherian induction so its prefixes are open.
-Realize the refined pieces by fibre products with the original scheme strata, so each
-refinement immersion actually factors through its original stratum, even when those
-strata carry nonreduced structures. Pull back its lattice inclusion. Exact inverse image
-preserves monicity, local free bases pull back, and the coefficient pullback comparison
-identifies the scalar-extension adjoint with the pulled-back rationalization isomorphism.
-This proves every lattice clause on the ordered refinement. Empty schemes permit no
-strata; empty pieces and zero ranks require no strictness or positive-rank assumption. -/
+/-- A lisse spectral-coefficient module has integral lattices on strata with open prefixes. -/
 theorem exists_orderedSpectralLattices (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
     (p : ℕ) [Fact p.Prime] (k : Type u) [Field k] [CharP k p] (_hpℓ : p ≠ ℓ)

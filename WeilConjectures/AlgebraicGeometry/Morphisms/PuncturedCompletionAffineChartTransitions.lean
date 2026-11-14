@@ -17,10 +17,12 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionChartCompl
 ## References
 
 * Stacks Project, Tag 0BLH, first two proof paragraphs
-* Tag 05EL, item (1)
-* Stacks Project, Tag 0BLH (structural maps on affine charts)
-* Stacks Project, Tag 0BLH
-* Stacks Project, Tags 0BLH and 05EL, item (1)
+* Stacks Project, Tag 05EL, item (1)
+
+## Implementation details
+
+The fields `b_scalar` and `d_scalar` of `AffineChartTransitions` record the structural scalar
+actions, so that the additive identifications can be localized as linear maps.
 -/
 
 @[expose] public section
@@ -31,7 +33,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace FormalGlueing
 
 /-- The modules and transition equivalences of Tag 05EL, item (1), before checking
-its two coherence equations. No data are selected from an existence theorem. -/
+its two coherence equations. -/
 structure Transitions {R S : Type u} [CommRing R] [CommRing S]
     (φ : R →+* S) {t : ℕ} (f : Fin t → R) where
   M' : ModuleCat.{u} S
@@ -101,8 +103,7 @@ noncomputable abbrev completedChartModule (s : E ⟶ Spec (.of C)) : Module C Γ
   Module.compHom _ ((ΓSpecIso (.of C)).inv ≫ s.appTop).hom
 
 /-- Section identifications and generator formulas for transitions, without square or
-cocycle. The last two fields record the structural scalar actions, so the identifications
-can be localized without mistaking arbitrary additive maps for linear maps. -/
+cocycle, together with the structural scalar actions. -/
 structure AffineChartTransitions (D : CompletionGluingData A U q E s)
     (t : ℕ) (f : Fin t → A) where
   F : FormalGlueing.Transitions φ f
@@ -198,7 +199,8 @@ private theorem empty_chart_transitions
     b_scalar := fun i ↦ Fin.elim0 i
     d_scalar := fun i ↦ Fin.elim0 i }⟩
 
-/-- (blueprint: lem-sbc-punctured-completion-affine-chart-transitions) -/
+/-- For a finite family of elements `f i` with `D(f i) ≤ U` and affine preimages in `Y`, the
+affine section modules and transition equivalences of the completion gluing data exist. -/
 theorem exists_affine_chart_transitions
     {A : Type u} [CommRing A] [IsLocalRing A]
     {U : (Spec (.of A)).Opens}

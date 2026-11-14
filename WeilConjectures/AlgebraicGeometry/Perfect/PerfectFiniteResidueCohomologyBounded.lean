@@ -11,6 +11,14 @@ import WeilConjectures.AlgebraicGeometry.DerivedPullbackOpenRestrictionUniverses
 import WeilConjectures.AlgebraicGeometry.FlatComplexDerivedPullback
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 
+/-! # Bounded residue fibre cohomology of a strictly perfect neighbourhood
+
+## References
+
+* Stacks Project, More on Algebra, Tag 0BCD
+* Stacks Project, Cohomology of Sheaves, Tag 08C4 (strictly perfect complexes)
+-/
+
 @[expose] public section
 
 universe u w
@@ -36,9 +44,7 @@ private theorem flat_of_finiteFree_retract (Y : Scheme.{u})
   exact (ObjectProperty.flat_of_retract ⟨ι, π, h⟩ hf).2
 
 /-- A strictly perfect neighbourhood gives common finite support bounds for
-residue-fibre Betti numbers.
-Source: Stacks Project, More on Algebra, Tag 0BCD, first paragraph of the proof;
-Cohomology of Sheaves, Tag 08C4 (strictly perfect complexes). -/
+residue-fibre Betti numbers. -/
 theorem finiteFiberCohomologyBounded
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

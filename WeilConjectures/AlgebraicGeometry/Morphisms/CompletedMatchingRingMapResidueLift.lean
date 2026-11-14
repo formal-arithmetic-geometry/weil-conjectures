@@ -8,6 +8,14 @@ module
 public import WeilConjectures.AlgebraicGeometry.Morphisms.CompletedMatchingRingMap
 public import Mathlib.RingTheory.AdicCompletion.LocalRing
 import WeilConjectures.AlgebraicGeometry.Morphisms.CompletedMatchingResidueQuotientSurjective
+
+/-! # Residue lifts for the completed comparison
+
+## References
+
+* Stacks Project, Tags 0BLH and 05ER
+-/
+
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits
@@ -25,8 +33,7 @@ private theorem residue_lift_of_quotient_surjective
   rw [map_sub]
   exact sub_eq_zero.mpr ha
 
-/-- Every completed section lifts modulo the extended maximal ideal.
-Source: Stacks Project, Tags 0BLH and 05ER, applied to the residue quotient. -/
+/-- Every completed section lifts modulo the extended maximal ideal. -/
 theorem completedRingMap_residue_lift
     {A : Type u} [CommRing A] [IsNoetherianRing A] [IsLocalRing A]
     {U : (Spec (.of A)).Opens}

@@ -20,12 +20,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- The comparison between the restricted exterior sheaf and the exterior sheaf of the
-restricted module has mutually inverse morphisms.
-The construction is by sheafifying the
-sectionwise map carrying a pure wedge to the wedge of the corresponding restricted sections;
-the inverse is obtained from the opposite sectionwise identification. The two composites are
-checked on pure wedges, which generate exterior powers, and hence descend through sheafification.
--/
+restricted module has mutually inverse morphisms. -/
 theorem exteriorSheaf_restrict_hom_data {X : Scheme.{v}} (M : X.Modules) (n : ℕ)
     (U : X.Opens) : ∃ (e : (exteriorPower M n).restrict U.ι ⟶ exteriorPower (M.restrict U.ι) n),
       ∃ f : exteriorPower (M.restrict U.ι) n ⟶ (exteriorPower M n).restrict U.ι,

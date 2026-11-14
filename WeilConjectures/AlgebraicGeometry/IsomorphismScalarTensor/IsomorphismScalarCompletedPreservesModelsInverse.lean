@@ -214,10 +214,12 @@ import Mathlib.CategoryTheory.Sites.CoverPreserving
 
 /-! Inverse-image preservation of good completed integral models.
 
-The source is the inverse-image part of the proof of
-`scalar_completed_preserves_models`.  The statement is
-separate because the independent site and coefficient universes require the
-ringed-topos K-flat pullback argument for the sectionwise inverse-image model.
+This is the inverse-image part of `scalar_completed_preserves_models`.
+
+## Implementation details
+
+The independent site and coefficient universes require a ringed-topos K-flat pullback argument
+for the sectionwise inverse-image model.
 
 ## References
 
@@ -454,11 +456,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]
 
-/-- The sectionwise inverse image sends every good representative to a good one.
-The proof
-transports the K-flat independent-coefficient condition and each flat term along the exact
-equivalence; the coefficient map is the prescribed completed limit isomorphism, so no
-arbitrary module or coefficient object is selected. -/
+/-- The sectionwise inverse image sends every good representative to a good one. -/
 theorem inverseImageIntegralModules_preserves_good
     (P : (integralOperationsGoodComplex l E Y).FullSubcategory) :
     integralOperationsGoodComplex l E X

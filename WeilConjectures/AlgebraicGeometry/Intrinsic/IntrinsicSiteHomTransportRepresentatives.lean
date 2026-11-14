@@ -88,10 +88,8 @@ namespace AlgebraicGeometry.ProEtale
 
 set_option linter.style.haveILetI false
 
-/-- Representative-level coefficient transport.  The source and target derived objects
-are fixed representatives, with the second representative K-injective.  The arbitrary
-object statement is obtained by the usual representative and localization argument.
--/
+/-- Representative-level coefficient transport, for fixed representatives `Lc` and `Ic` of the
+source and target derived objects with `Ic` K-injective. -/
 theorem intrinsicSiteHom_transport_representatives (X : Scheme.{u}) (A : Type u)
     [CommRing A] [Finite A]
     (Lc Ic : CochainComplex

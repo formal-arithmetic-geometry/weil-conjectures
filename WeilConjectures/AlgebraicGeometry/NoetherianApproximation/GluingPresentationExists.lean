@@ -26,7 +26,7 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Part of blueprint `theorem-nagata-s-compactification-theorem--1`: every quasi-compact
+/-- Every quasi-compact
 quasi-separated scheme admits a finite affine gluing presentation.
 
 Quasi-compactness gives a finite affine open cover `S = ⋃ₐ Uₐ`; quasi-separatedness makes each
@@ -73,7 +73,7 @@ theorem nonempty_finiteAffineGluingPresentation (S : Scheme.{u}) [CompactSpace S
       · obtain ⟨p, hp, hxp⟩ := Set.mem_iUnion₂.mp (hs a b hx)
         exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨p, hp⟩, hxp⟩ }⟩
 
-/-- Part of blueprint `theorem-nagata-s-compactification-theorem--1`: the selected finite affine
+/-- The selected finite affine
 gluing presentation `G_S` of a quasi-compact quasi-separated scheme `S`. -/
 noncomputable def finiteAffineGluingPresentation (S : Scheme.{u}) [CompactSpace S]
     [QuasiSeparatedSpace S] : S.FiniteAffineGluingPresentation :=

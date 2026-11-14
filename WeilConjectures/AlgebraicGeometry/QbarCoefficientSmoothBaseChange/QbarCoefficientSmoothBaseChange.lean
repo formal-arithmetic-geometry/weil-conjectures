@@ -35,7 +35,7 @@ No constructible landing of the ambient direct images is included.
 
 ## Main definitions
 
-* `IntegralComparisons`: scalar comparisons fixed by the published tensor maps.
+* `IntegralComparisons`: scalar comparisons fixed by the tensor maps.
 * `Presentation`: the completed composites and canonical compatible exchange.
 * `Presentation.exchange`: descent through the ambient pair and Karoubi categories.
 
@@ -127,9 +127,8 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
       (pbcAdicCompletion U (pbcIntegralDatum l E)) (sbcCoefficientIso l E q))
     (pbcActualDerivedAdjunction q (pbcIntegralDatum l E)) (sbcOrdinaryDerivedIso l E q)
 
-/-- Transport the existing strict-tower/reflector comparison through reassociation.
-Its unit normalization is exactly pbcActualCompletedPullback_tower: the strict
-quotient augmentation is preserved, rather than an arbitrary completion isomorphism. -/
+/-- The completed pullback comparison, obtained from the strict-tower/reflector comparison
+`pbcActualCompletedPullback_tower` by reassociation. -/
 @[irreducible] def pullModel :
     sbcPull l E q ⋙ ObjectProperty.ι (IsPbcComplete l E U) ≅
       ObjectProperty.ι (IsPbcComplete l E V) ⋙
@@ -167,7 +166,7 @@ private theorem levelComparison_hom (W : Scheme.{u})
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The two recorded coefficient maps have the same finite projections, hence agree. -/
+/-- The ambient scalar extension agrees with the embedding tensor along `E ≤ M`. -/
 theorem tensorModel_eq (W : Scheme.{u}) :
     pbcAmbientScalarExtension l Ω W a =
       pbcEmbeddingAmbientTensor l (pbcFiniteField.{u} l Ω E)
@@ -234,8 +233,7 @@ theorem tensorModel_eq (W : Scheme.{u}) :
             pbcAmbientCompleteTensor_preserves l Ω V a K⟩))
 
 /-- The canonical integral comparisons, specified by the published scalar mate and
-unit-normalized completed tensor comparison. Their underlying equations determine
-both isomorphisms uniquely. This packages the construction in proof step 1. -/
+unit-normalized completed tensor comparison. -/
 structure IntegralComparisons where
   push : sbcPush l (pbcFiniteField.{u} l Ω E) q ⋙
       pbcAmbientCompleteIntegralTransition l Ω V a ≅
@@ -313,12 +311,9 @@ variable (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω]
           ((ch a).push.hom.app ((sbcPull l (pbcFiniteField.{u} l Ω E) e).obj K) ≫
             (sbcPush l (pbcFiniteField.{u} l Ω M) h).map ((ce a).pull.hom.app K))
 
-/-- A presentation of the specified ambient exchange and its scalar descent.
-The integral comparisons are fixed by the actual scalar mate and completion units.
-The raw comparison equations localize precisely their composites, also when E=M:
-the published integral/raw comparisons retain the tensor unit in that case.
-The stage operations and transformation are exactly their Karoubi extensions.
-These are witnesses supplied by the theorem, not extra assumptions on K. -/
+/-- A presentation of the specified ambient exchange and its scalar descent: integral
+comparisons fixed by the scalar mate and completion units, raw comparisons localizing their
+composites, and stage operations given by their Karoubi extensions. -/
 structure Presentation where
   cf : ∀ {E M : Padic.FiniteCoefficientFields l Ω} (a : E ≤ M),
     IntegralComparisons l Ω f a
@@ -354,14 +349,13 @@ structure Presentation where
 namespace Presentation
 variable (P : Presentation l Ω sq)
 
-/-- Extend the descended exchange to the ambient outer Karoubi envelope.
-The Mathlib extension sandwiches components by both images of the outer projector. -/
+/-- Extend the descended exchange to the ambient outer Karoubi envelope. -/
 def ambientExchange :
     (Idempotents.functorExtension₂ _ _).obj P.F.functor ⟶
       (Idempotents.functorExtension₂ _ _).obj P.G.functor :=
   (Idempotents.functorExtension₂ _ _).map (StageSystem.Morphism.descNatTrans P.alpha)
 
-/-- The exchange on the recorded raw Qbar category, using its published inclusion
+/-- The exchange on the raw Qbar category, restricted along its inclusion
 through the finite-stage and outer identity projectors. -/
 def exchange :=
   Functor.whiskerLeft

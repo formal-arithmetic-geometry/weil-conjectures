@@ -30,15 +30,6 @@ The étale cohomology of the spectrum of a field `K` is the Galois cohomology of
 - in every positive degree, `Hⁿ(Spec k_ét, ℤ) = 0` for `k` separably closed, since then the
   Galois group is trivial.
 
-For `k` separably closed we do not go through Galois cohomology: every étale covering of
-`Spec k` has a section, so the global sections functor is exact and the constant sheaf `ℤ`,
-which corepresents it, is a projective sheaf.
-
-In degree `1` and for an arbitrary field `K` we do not go through Galois cohomology either: a
-`ℤ`-torsor is trivialised over `Spec L` for a finite separable extension `L` of `K`, and the
-descent datum is a function on the finite set of points of `Spec (L ⊗_K L)` whose set of values
-is closed under addition, hence zero.
-
 Along the way we record that for `k` separably closed an étale sheaf on `Spec k` is determined
 by its global sections, since every étale `k`-scheme is covered by its `k`-points.
 
@@ -60,11 +51,14 @@ by its global sections, since every étale `k`-scheme is covered by its `k`-poin
   `AlgebraicGeometry.Scheme.subsingleton_H_one_constantSheaf_of_isField`:
   `H¹(Spec K_ét, ℤ) = 0` for every field `K`.
 
-## Blueprint references
+## Implementation details
 
-The labels quoted below are labels of the *sketch* blueprint, which lives in the separate
-repository `formal-arithmetic-geometry/weil-conjectures-blueprint`, not of `blueprint/src` in
-this repository.
+We do not go through Galois cohomology. For `k` separably closed, every étale covering of
+`Spec k` has a section, so the global sections functor is exact and the constant sheaf `ℤ`,
+which corepresents it, is a projective sheaf. In degree `1` and for an arbitrary field `K`, a
+`ℤ`-torsor is trivialised over `Spec L` for a finite separable extension `L` of `K`, and the
+descent datum is a function on the finite set of points of `Spec (L ⊗_K L)` whose set of values
+is closed under addition, hence zero.
 -/
 
 @[expose] public section
@@ -97,8 +91,7 @@ section IsSepClosed
 variable (k : Type u) [Field k] [IsSepClosed k]
 
 /-- Let `X` be a scheme isomorphic to `Spec k` for a separably closed field `k`. Every covering
-sieve of the terminal object `X` of the small étale site of `X` contains the identity: some
-member of an étale covering is nonempty, and a nonempty étale `X`-scheme has an `X`-point. -/
+sieve of the terminal object `X` of the small étale site of `X` contains the identity. -/
 lemma id_mem_of_mem_smallEtaleTopology_of_iso {k} [Field k] [IsSepClosed k] {X : Scheme.{u}}
     (e : X ≅ Spec (.of k)) {R : Sieve (Etale.mk (𝟙 X))} (hR : R ∈ X.smallEtaleTopology _) :
     R.arrows (𝟙 _) := by
@@ -179,7 +172,7 @@ instance preservesEpimorphisms_sheafSections_moduleCat_of_isSepClosed (Λ : Type
   preservesEpimorphisms_sheafSections_of_iso (Iso.refl _)
 
 /-- Over a separably closed field `k`, the constant sheaf `ℤ` on the small étale site of
-`Spec k` is projective: it corepresents the global sections functor, which is exact. -/
+`Spec k` is projective. -/
 instance projective_constantSheaf_of_isSepClosed :
     Projective ((constantSheaf (Spec (.of k)).smallEtaleTopology AddCommGrpCat.{u + 1}).obj
       (AddCommGrpCat.of (ULift ℤ))) :=
@@ -187,8 +180,7 @@ instance projective_constantSheaf_of_isSepClosed :
     (preservesEpimorphisms_sheafSections_of_isSepClosed k) _ AddCommGrpCat.projective_of_uliftInt
 
 /-- Let `X` be a scheme isomorphic to `Spec k` for a separably closed field `k`, and let `Λ` be
-a ring. The constant sheaf `Λ` on the small étale site of `X` is projective: it corepresents
-the functor of sections over `X`, which is exact. -/
+a ring. The constant sheaf `Λ` on the small étale site of `X` is projective. -/
 lemma projective_constantSheaf_moduleCat_of_iso {k} [Field k] [IsSepClosed k]
     {X : Scheme.{u}} (e : X ≅ Spec (.of k)) (Λ : Type (u + 1)) [Ring Λ] :
     Projective ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
@@ -199,10 +191,7 @@ lemma projective_constantSheaf_moduleCat_of_iso {k} [Field k] [IsSepClosed k]
     (ModuleCat.projective_of_categoryTheory_projective (ModuleCat.of Λ Λ))
 
 /-- **Cohomology of `ℤ` on a geometric point.** For a separably closed field `k` (in
-particular an algebraically closed one), `H^q(Spec k_ét, ℤ) = 0` for all `q ≥ 1`. The
-blueprint argues via the equivalence of étale sheaves on `Spec k` with discrete Galois modules,
-the Galois group being trivial; we use directly that the constant sheaf `ℤ` is projective
-(`AlgebraicGeometry.Scheme.projective_constantSheaf_of_isSepClosed`). -/
+particular an algebraically closed one), `H^q(Spec k_ét, ℤ) = 0` for all `q ≥ 1`. -/
 theorem subsingleton_H_constantSheaf_of_isSepClosed (q : ℕ) :
     Subsingleton (Sheaf.H ((constantSheaf (Spec (.of k)).smallEtaleTopology
       AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of (ULift ℤ))) (q + 1)) :=
@@ -222,8 +211,7 @@ variable {A : Type*} [Category A] {FA : A → A → Type*} {CA : A → Type*}
 
 /-- Over a separably closed field `k`, two sections of an étale sheaf on `Spec k` over an étale
 `k`-scheme `U` are equal as soon as they agree after restriction along every morphism
-`V ⟶ U` from an étale `k`-scheme `V ≅ Spec k`: the `k`-points of `U` form an étale covering of
-`U`. -/
+`V ⟶ U` from an étale `k`-scheme `V ≅ Spec k`. -/
 theorem eq_of_forall_restrict_eq_of_isSepClosed (F : Sheaf (Spec (.of k)).smallEtaleTopology A)
     {U : (Spec (.of k)).Etale} {x y : ToType (F.obj.obj (op U))}
     (h : ∀ (V : (Spec (.of k)).Etale) (_ : IsIso V.hom) (f : V ⟶ U),
@@ -333,16 +321,7 @@ private lemma eq_zero_of_finite_of_add_mem {S : Set (ULift.{u + 1} ℤ)} (hS : S
 open Algebra.TensorProduct TensorProduct in
 /-- **Every `ℤ`-torsor on `Spec K` is trivial.** For a short exact sequence
 `0 → ℤ → E → Q → 0` of abelian sheaves on the small étale site of the spectrum of a field `K`,
-every global section of `Q` lifts to `E`.
-
-A global section `q` of `Q` lifts to a section `e` of `E` over `Spec L` for a finite separable
-extension `L` of `K`. The difference of the two pullbacks of `e` to
-`Spec (L ⊗_K L) = Spec L ×_{Spec K} Spec L` is a section `c` of `ℤ`, that is, a function on the
-finite set of points of `Spec (L ⊗_K L)`, since every étale `K`-scheme is discrete
-(`AlgebraicGeometry.Scheme.isIso_constantSheafToPointFunctionSheaf`). The cocycle identity shows
-that the finite set of values of `c` is closed under addition, so `c = 0`: this is the
-vanishing of `Hom(Gal(L/K), ℤ)` for the finite Galois group, without naming the group. Hence `e`
-descends to `Spec K` (`AlgebraicGeometry.Scheme.exists_app_eq_of_compatible`). -/
+every global section of `Q` lifts to `E`. -/
 theorem surjective_app_of_shortExact_constantSheaf_int
     {E Q : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1}}
     (ι : (constantSheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1}).obj
@@ -434,11 +413,7 @@ theorem surjective_app_of_shortExact_constantSheaf_int
 
 variable (K) in
 /-- **`H¹` of `ℤ` on the spectrum of a field vanishes.** For every field `K`,
-`H¹(Spec K_ét, ℤ) = Hom_cont(Gal(Kˢᵉᵖ/K), ℤ) = 0`, since a continuous homomorphism from the
-profinite group `Gal(Kˢᵉᵖ/K)` to the discrete group `ℤ` has finite image, hence is trivial.
-Here the comparison with Galois cohomology is bypassed: every `ℤ`-torsor on `Spec K` is
-trivial by descent along a finite separable extension
-(`AlgebraicGeometry.Scheme.surjective_app_of_shortExact_constantSheaf_int`). -/
+`H¹(Spec K_ét, ℤ) = 0`. -/
 theorem subsingleton_H_one_constantSheaf_of_field :
     Subsingleton (Sheaf.H ((constantSheaf (Spec (.of K)).smallEtaleTopology
       AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of (ULift ℤ))) 1) :=
@@ -449,10 +424,9 @@ theorem subsingleton_H_one_constantSheaf_of_field :
 end Field
 
 /-- **`H¹` of `ℤ` on the spectrum of a field vanishes.** For every field `K`,
-`H¹(Spec K_ét, ℤ) = Hom_cont(Gal(Kˢᵉᵖ/K), ℤ) = 0`: étale cohomology of `Spec K` is Galois
-cohomology, and a continuous homomorphism from the profinite group `Gal(Kˢᵉᵖ/K)` to the
-discrete group `ℤ` has finite image, hence is trivial. This is the version for a commutative
-ring which is a field, see `AlgebraicGeometry.Scheme.subsingleton_H_one_constantSheaf_of_field`. -/
+`H¹(Spec K_ét, ℤ) = 0`; version of
+`AlgebraicGeometry.Scheme.subsingleton_H_one_constantSheaf_of_field` for a commutative ring
+which is a field. -/
 theorem subsingleton_H_one_constantSheaf_of_isField (K : CommRingCat.{u}) (hK : IsField K) :
     Subsingleton (Sheaf.H ((constantSheaf (Spec K).smallEtaleTopology
       AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of (ULift ℤ))) 1) := by

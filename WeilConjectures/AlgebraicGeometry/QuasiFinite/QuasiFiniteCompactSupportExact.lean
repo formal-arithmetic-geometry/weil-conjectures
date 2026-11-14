@@ -142,14 +142,8 @@ namespace AlgebraicGeometry.Etale
 /-- Proper-support direct image for a separated quasi-finite finite-type map is exact and
 agrees on all unbounded complexes with every compactification construction. The comparison
 family is compatible with canonical compactification changes, composition, étale sum extension,
-and identity normalization.
-
-Identity comparisons are shared with the three comparison families whenever their
-compactifications coincide. Coincidence means equality of the compactification together
-with its target scheme
-and
-morphism, packaged in a dependent sum. This includes the index equalities needed to
-transport the comparison; at an identity the conclusion is ordinary equality.
+and identity normalization. Identity comparisons agree with the three comparison families
+whenever their compactifications (with target scheme and morphism) coincide.
 -/
 theorem quasifiniteCompactSupportExact
     (A : Type (u + 1)) [CommRing A] [Finite A]

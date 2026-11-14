@@ -15,6 +15,14 @@ public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 import WeilConjectures.AlgebraicGeometry.Morphisms.AffineTorsorEquivariantDescent
 import WeilConjectures.AlgebraicGeometry.Morphisms.AffineTorsorEquivariantOrbitProduct
 
+/-! # Fixed-orbit descent for affine torsors
+
+## References
+
+* Stacks Project, Tag 03SF
+* Stacks Project, Tag 023R (affine descent)
+-/
+
 @[expose] public section
 universe u
 set_option autoImplicit false
@@ -30,9 +38,7 @@ theorem affine_torsor_orbit_data (d : ℕ) :
   refine ⟨0, fun i => ⊥, Nat.zero_le d, by simp⟩
 
 
-/-- Choose the actual orbit stabilizers and descend to their fixed-ring punctures.
-
-Source: Stacks Project, Tag 03SF and affine descent, Tag 023R. -/
+/-- Choose the actual orbit stabilizers and descend to their fixed-ring punctures. -/
 theorem affine_torsor_fixed_orbits
     (R H : CommRingCat.{u}) (g : R) (ι : R →+* H)
     (C : Type u) [CommRing C] [Algebra H C] [IsDomain C]
@@ -108,7 +114,8 @@ theorem affine_torsor_fixed_orbits
   rw [hb]
   exact Over.w e.hom
 
-/-- Certified evidence for the dispute, using only Mathlib, not the theorem above. -/
+/-- No nonempty scheme is isomorphic to the puncture of the spectrum of the empty product of
+fixed rings over `ℚ`. -/
 private theorem empty_fixed_ring_no_iso (X : Scheme) [Nonempty X] :
     let B := ∀ _k : Fin 0,
       (⨅ _ζ : (⊥ : Subgroup PUnit.{1}),
@@ -158,8 +165,8 @@ private theorem trivial_torsor_split_data
       simp [e]
     refine ⟨asIso (pullback.snd U.ι U.ι) ≪≫ e.symm, ?_⟩
     simp [← he]
-/-- The arbitrary-orbit tail of the former core is false for the trivial torsor
-and the identity finite etale cover of D(1). No disputed theorem is used here. -/
+/-- Fixed-orbit descent with arbitrary orbit data fails for the trivial torsor and the identity
+finite étale cover of `D(1)`. -/
 private theorem affine_torsor_fixed_orbits_counterexample
     (U : (Spec (CommRingCat.of ℚ)).Opens) (hU : U = ⊤) :
     ¬ (∀ (m : ℕ) (K : Fin m → Subgroup PUnit.{1}) (d : ℕ), m ≤ d →

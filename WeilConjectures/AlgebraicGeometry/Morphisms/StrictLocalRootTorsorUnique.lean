@@ -12,14 +12,20 @@ public import Mathlib.Algebra.Regular.SMul
 
 import WeilConjectures.AlgebraicGeometry.Morphisms.StrictLocalRootsOfUnity
 
+/-!
+# Uniqueness of rotations between points of the punctured root algebra
+
+## References
+
+* Stacks Project, Tags 0EYG and 09EV
+-/
+
 @[expose] public section
 universe u
 set_option autoImplicit false
 namespace AlgebraicGeometry.Scheme
 
-/-- Field valued points of the punctured root algebra differ by a unique rotation.
-
-Source: Stacks Project, Tags 0EYG and 09EV. -/
+/-- Field valued points of the punctured root algebra differ by a unique rotation. -/
 theorem strict_local_root_torsor_unique
     (H : Type u) [CommRing H] [IsStrictlyHenselianLocalRing H]
     [IsRegularLocalRing H] (h : H)

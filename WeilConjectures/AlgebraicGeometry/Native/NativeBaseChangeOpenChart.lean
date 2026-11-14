@@ -148,7 +148,8 @@ private theorem factor_congr_left (l : ℕ) [Fact l.Prime] {P Q Z : Scheme.{u}}
   simp only [adicUpperStarCongr, eqToIso_refl, Iso.refl_hom, NatTrans.id_app]
   exact Category.comp_id ((factor l e M).hom)
 
-/-- The common normalization used to compare the two routes around the pullback cube. -/
+/-- The isomorphism between pullback along `m` and iterated pullback along `c`, `b` and `a`,
+for a factorization `a ≫ (b ≫ c) = m`. -/
 @[irreducible] private def triple (l : ℕ) [Fact l.Prime] {P Q R Z : Scheme.{u}}
     (a : P ⟶ Q) (b : Q ⟶ R) (c : R ⟶ Z) {m : P ⟶ Z}
     (e : a ≫ (b ≫ c) = m) (M : AdicSheaf l Z) :

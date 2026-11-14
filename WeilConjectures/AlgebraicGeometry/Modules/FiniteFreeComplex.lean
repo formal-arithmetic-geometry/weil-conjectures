@@ -24,6 +24,12 @@ module of rank `r` placed in degree `i`
   modules.
 - `AlgebraicGeometry.Scheme.Modules.IsFiniteLocallyFreeInDegree`: a family of modules is that of
   a finite locally free module of rank `r` placed in degree `i`.
+
+## Implementation details
+
+There is no derived category of `X.Modules` with derived pullback and pushforward available, so
+`IsFiniteLocallyFreeInDegree` is stated on the cohomology sheaves. For an object represented by a
+complex this is the same as being isomorphic to `ℰ[-i]` with `ℰ` finite locally free of rank `r`.
 -/
 
 @[expose] public section
@@ -48,14 +54,7 @@ structure IsFiniteFreeComplex (P : CochainComplex X.Modules ℤ) (d : ℕ) : Pro
 /-- `IsFiniteLocallyFreeInDegree M i r` says that the family `M = (M q)_{q: ℕ}` of `𝒪_X`-modules,
 thought of as the cohomology sheaves `H^q(E)` of an object `E` of the derived category of
 `𝒪_X`-modules, is that of a **finite locally free module of rank `r` placed in degree `i`**:
-`M q = 0` for `q ≠ i`, and `M i` is finite locally free of rank `r`.
-
-For an object `E` represented by a complex this is the same as `E ≅ ℰ[-i]` with `ℰ` finite
-locally free of rank `r`: a complex whose cohomology is concentrated in degree `i` is
-quasi-isomorphic to its `i`-th cohomology placed in degree `i`. There is no derived category of
-`X.Modules` with derived pushforward available, so the condition is stated on the cohomology
-sheaves. The case `i = 0`, `r = 1` is an *invertible module placed in degree `0`*
-(`isFiniteLocallyFreeInDegree_zero_one_iff`). -/
+`M q = 0` for `q ≠ i`, and `M i` is finite locally free of rank `r`. -/
 structure IsFiniteLocallyFreeInDegree (M : ℕ → X.Modules) (i r : ℕ) : Prop where
   isZero (q : ℕ) (hq : q ≠ i) : IsZero (M q)
   isFiniteLocallyFreeOfRank : (M i).IsFiniteLocallyFreeOfRank r
@@ -96,13 +95,7 @@ lemma IsFiniteFreeComplex.exists_iso_free_of_rank_eq_zero {P : CochainComplex X.
 of finite free `𝒪_Y`-modules, representing a perfect object `E` of the derived category of `Y`, and
 fix `i r: ℕ`. There is an open subscheme `U` of `Y` such that a morphism `g: Y' ⟶ Y` factors
 through `U` if and only if `L g^* E = g^* P` is a finite locally free module of rank `r` placed in
-degree `i` (`AlgebraicGeometry.Scheme.Modules.IsFiniteLocallyFreeInDegree`).
-
-The pullback `g^* P` computes `L g^* E` because the terms of `P` are free. The proof splits
-contractible summands off `P` over the local rings of `Y`, until every differential has entries in
-the maximal ideal; the remaining complex is then `𝒪^r[-i]` near every point whose derived fibre has
-cohomology `κ(y)^r` concentrated in degree `i`, and `U` is the set of such points. The converse
-direction uses that extension of fields is faithfully flat. -/
+degree `i` (`AlgebraicGeometry.Scheme.Modules.IsFiniteLocallyFreeInDegree`). -/
 theorem IsFiniteFreeComplex.exists_opens_range_subset_iff {Y : Scheme.{u}}
     {P : CochainComplex Y.Modules ℤ} {d : ℕ} (hP : IsFiniteFreeComplex P d) (i r : ℕ) :
     ∃ U : Y.Opens, ∀ {Y' : Scheme.{u}} (g : Y' ⟶ Y), Set.range g.base ⊆ U ↔

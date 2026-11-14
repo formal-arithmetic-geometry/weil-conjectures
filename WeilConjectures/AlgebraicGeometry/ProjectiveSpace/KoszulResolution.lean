@@ -16,10 +16,9 @@ import Mathlib.RingTheory.MvPolynomial.Ideal
 # The graded Koszul resolution on two polynomial variables
 
 `S = MvPolynomial (Fin 2) k` is graded by total degree through Mathlib's
-`homogeneousSubmodule`, extended by zero in negative degrees, as in the landed
+`homogeneousSubmodule`, extended by zero in negative degrees, as in
 `MvPolynomial.exists_graded_free_resolution_two`.
-The underlying modules of `S(-2)` and `S(-1)` are `S`; by
-`def-weil-pbc-proj-twisting-sheaf` (2), `S(d)_n = S_{d+n}`, so the degree `n + 2`
+The underlying modules of `S(-2)` and `S(-1)` are `S`; since `S(d)_n = S_{d+n}`, the degree `n + 2`
 part of `S(-2)` is `S_n` and the degree `n + 1` part of `S(-1)` is `S_n`; all lower
 parts are zero. The quotient `k = S/(x₀,x₁)` has the quotient grading, concentrated
 in degree zero.
@@ -39,10 +38,8 @@ open MvPolynomial
 
 /-- The exact graded Koszul resolution `0 → S(-2) → S(-1)² → S → S/(x₀,x₁) → 0`.
 
-The maps are `a ↦ (a x₁, -a x₀)`, `(a, b) ↦ a x₀ + b x₁` and the quotient map.
-Degree zero: since negative-degree parts vanish, `f` sends `S(-2)_{n+2} = S_n` into
-`S(-1)²_{n+2} = S_{n+1}²`, `g` sends `S(-1)²_{n+1} = S_n²` into `S_{n+1}`, and `q`
-kills `S_{n+1}` (the quotient is concentrated in degree zero), for every `n: ℕ`. -/
+The maps are `a ↦ (a x₁, -a x₀)`, `(a, b) ↦ a x₀ + b x₁` and the quotient map, all of
+degree zero. -/
 theorem koszul_resolution {k : Type u} [Field k] :
     ∃ (f : MvPolynomial (Fin 2) k →ₗ[MvPolynomial (Fin 2) k]
           MvPolynomial (Fin 2) k × MvPolynomial (Fin 2) k)

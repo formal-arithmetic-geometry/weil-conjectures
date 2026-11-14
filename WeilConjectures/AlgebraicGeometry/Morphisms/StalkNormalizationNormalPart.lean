@@ -17,6 +17,15 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Flat
 import WeilConjectures.AlgebraicGeometry.Morphisms.RelativeNormalizationNormalStalks
 
+/-!
+# Normality of the localized relative normalization
+
+## References
+
+* Stacks Project, Tags 033C (smooth ascent of normality), 035L (relative normalization in a
+  normal source), and 0307 (localization of integral closure)
+-/
+
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits
@@ -63,10 +72,8 @@ private theorem normal_stalks_of_flat_preimmersion {X Y : Scheme.{u}}
       g.stalkMap_surjective x⟩
   exact ⟨e.symm.injective.isDomain e.symm, IsIntegrallyClosed.of_equiv e⟩
 
-/-- Normality of the localized relative normalization.
-
-Source: Stacks Project, Tags 033C (smooth ascent of normality), 035L
-(relative normalization in a normal source), and 0307 (localization of integral closure). -/
+/-- The stalks of the relative normalization, base changed to the stalk of `S` at `s`, are
+normal domains. -/
 theorem stalk_normalization_normal_part {S C : Scheme.{u}}
     [IsNoetherian S] [QuasiSeparatedSpace S] [IsIntegral S]
     (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))

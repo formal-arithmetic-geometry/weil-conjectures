@@ -452,9 +452,8 @@ def nearbyCycles {T B : Scheme.{u}} (f : T ⟶ B) (Λ : Type v) [CommRing Λ] :
     EtaleDerived T Λ ⥤ VanishingDerived f Λ :=
   (psiModules f).push (Coeff.{u, v} Λ)
 
-/-- The specified derived identification `ψ_f'^* v^* ≅ h^* ψ_f^*`: the existing
-generator-normalized derived square of `lem-sp-completion-mate-comparison`, applied to
-the inverse-image mate of `squarePsi`. -/
+/-- The specified derived identification `ψ_f'^* v^* ≅ h^* ψ_f^*`: the generator-normalized
+derived square applied to the inverse-image mate of `squarePsi`. -/
 def nearbySquare {T' B' T B : Scheme.{u}} (f : T ⟶ B) (f' : T' ⟶ B')
     (h : T' ⟶ T) (g : B' ⟶ B) (comm : h ≫ f = f' ≫ g)
     (Λ : Type v) [CommRing Λ] :

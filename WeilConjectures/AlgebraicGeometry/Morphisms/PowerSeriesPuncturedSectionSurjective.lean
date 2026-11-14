@@ -27,11 +27,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- Surjectivity of restriction on morphisms of finite étale covers in the
-power-series punctured-section situation.  This is the lifting part of
-Stacks Project, Tag 0EY9, using formal étaleness and the completion comparison.
-The proof constructs compatible lifts on all infinitesimal thickenings, compares
-finite locally free Hom modules, and descends the resulting algebra map by
-relative Spec. -/
+power-series punctured-section situation (the lifting part of Stacks Project, Tag 0EY9). -/
 theorem finiteEtale_powerSeries_punctured_section_restriction_surjective
     (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]
     (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth (R := A) A)

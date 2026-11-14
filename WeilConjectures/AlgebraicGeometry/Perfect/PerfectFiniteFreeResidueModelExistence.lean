@@ -11,16 +11,23 @@ import WeilConjectures.AlgebraicGeometry.Strict.StrictPerfectStalkFiberData
 import WeilConjectures.AlgebraicGeometry.BoundedFreeStalkModelSpread
 import WeilConjectures.RingTheory.MinimalFreeModel
 
+/-! # Existence of minimal finite free models near a point
+
+## References
+
+* Stacks Project, More on Algebra, Tags 0BCD, 0BCC, 0BC7
+* Stacks Project, Derived Categories of Schemes, Tags 08EB and 09RE
+-/
+
 @[expose] public section
 universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 noncomputable section
 
-/-- Spread a minimal finite free model from the local ring of a strictly perfect
-neighbourhood, using the already known finite residue cohomology and its bounded support.
-Source: Stacks Project, More on Algebra, Tags 0BCD, 0BCC, 0BC7; Derived Categories of
-Schemes, Tags 08EB and 09RE. -/
+/-- If `E` is strictly perfect near `x` with finite and bounded residue fibre cohomology, then
+on an affine neighbourhood of `x` it is represented by a bounded complex of finite free modules
+whose ranks are the fibre Betti numbers at `x`. -/
 theorem finiteFreeModel_of_fiberData
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

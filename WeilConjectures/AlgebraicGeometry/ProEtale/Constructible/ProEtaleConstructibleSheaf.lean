@@ -23,13 +23,17 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleLocallyConstant
 /-!
 # Constructible finite-coefficient module sheaves on the pro-etale site
 
-The global finite partition convention is retained, including a positive number of strata.
-The coefficient pullback is the existing tensor extension along the canonical
-constant-section comparison, with no independently chosen coefficient identification.
-
 ## References
 
 * compare Stacks Tag 09AJ, whose affine-local convention differs from this global one
+
+## Implementation details
+
+We use global finite partitions with a positive number of strata. The restriction to a stratum
+is `proEtaleConstantModulePullback`: inverse image followed by tensor extension along the
+canonical comparison `proEtaleCoefficientInverseImageMap` of constant ring sheaves. Finiteness
+is imposed on the underlying set of the module stalk, equivalently finite generation since the
+coefficient ring is finite. The zero ring and the empty scheme are allowed.
 -/
 
 @[expose] public section
@@ -42,12 +46,8 @@ namespace AlgebraicGeometry.Scheme
 
 /-- A sheaf of modules over a finite commutative constant ring is constructible if
 some finite partition into locally closed constructible immersed subschemes has
-locally constant restrictions with finite geometric stalks. The restriction is
-`proEtaleConstantModulePullback`: inverse image followed by tensor extension along
-`proEtaleCoefficientInverseImageMap`, the canonical comparison of constant ring sheaves.
-Finiteness is imposed on the underlying set of the module stalk, equivalently finite
-module generation since the coefficient ring is finite. The coefficient ring itself
-may be the zero ring, and the empty scheme is allowed. -/
+locally constant restrictions (via `proEtaleConstantModulePullback`) with finite geometric
+stalks. -/
 noncomputable def IsConstructibleProEtaleModuleSheaf
     (Y : Scheme.{u}) (A : Type u) [CommRing A] [Finite A]
     (F : proEtaleRingModules Y (proEtaleConstantRing Y A)) : Prop :=

@@ -373,7 +373,7 @@ lemma transition_preimage_opensRange_ι (a : G.ι) :
   rw [← Scheme.Hom.comp_preimage, ι_transition, Scheme.Hom.comp_preimage, preimage_opensRange_ι,
     SpecMap_incl_preimage_overlap, preimage_opensRange_ι]
 
-/-- Part of blueprint `theorem-nagata-s-compactification-theorem--1`: the transition morphisms are
+/-- The transition morphisms are
 affine. -/
 instance isAffineHom_transition : IsAffineHom (transition hll) := by
   refine isAffineHom_of_forall_exists_isAffineOpen _ fun x ↦ ?_
@@ -384,13 +384,13 @@ instance isAffineHom_transition : IsAffineHom (transition hll) := by
   rw [transition_preimage_opensRange_ι]
   exact isAffineOpen_opensRange _
 
-/-- Part of blueprint `theorem-nagata-s-compactification-theorem--1`: the transition morphisms
+/-- The transition morphisms
 satisfy the identity law. -/
 lemma transition_refl : transition (le_refl l) = 𝟙 _ :=
   l.hom_ext fun a ↦ by
     rw [ι_transition, Category.comp_id, incl_refl, Spec.map_id, Category.id_comp]
 
-/-- Part of blueprint `theorem-nagata-s-compactification-theorem--1`: the transition morphisms
+/-- The transition morphisms
 satisfy the composition law. -/
 lemma transition_trans {l'' : G.Stage} (hll' : l' ≤ l'') :
     transition (hll.trans hll') = transition hll' ≫ transition hll :=

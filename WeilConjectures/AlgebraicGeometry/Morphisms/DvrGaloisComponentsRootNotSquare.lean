@@ -16,6 +16,13 @@ public import Mathlib.AlgebraicGeometry.Limits
 import WeilConjectures.AlgebraicGeometry.Morphisms.DvrGaloisComponentsStalkFactor
 import WeilConjectures.RingTheory.DvrGaloisRootFactorUniformizer
 
+/-! # The tame root germ is not in the square of the maximal ideal
+
+## References
+
+* Stacks Project, Tags 09EV, 09EB, 0BRM, 09E7 and 0307
+-/
+
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits
@@ -102,9 +109,7 @@ private theorem generator_not_mem_square_of_equiv
   exact (IsLocalRing.maximalIdeal.isMaximal C).ne_top
     ((IsLocalRing.maximalIdeal C).eq_top_of_isUnit_mem (hz1 ▸ hz) isUnit_one)
 
-/-- The tame root germ has nonzero class modulo the normalized maximal-ideal square.
-
-Source: Stacks Project, Tags 09EV, 09EB, 0BRM, 09E7 and 0307 -/
+/-- The tame root germ has nonzero class modulo the normalized maximal-ideal square. -/
 theorem dvr_galois_components_root_not_mem_square
     (B : CommRingCat.{u}) [IsDomain B] [IsDiscreteValuationRing B]
     (pi : B) (hpi : Irreducible pi) (n : ℕ) (hnpos : 0 < n)

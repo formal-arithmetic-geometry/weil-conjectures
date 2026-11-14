@@ -38,6 +38,11 @@ Comparison data and their defining section and representative equations.
 * Stacks 03CE, 07A4, 08J9, 08JB and 0FPT
 * Stacks 03CE, 07A4, 0FPT
 * Stacks 03CE, 07A4, 08J9 and 08JB
+
+## Implementation details
+
+The normalization equations `Normalized` are kept out of the data record `Data` so that Lean
+does not expand them in every generated projection and constructor.
 -/
 
 @[expose] public noncomputable section
@@ -176,9 +181,8 @@ def ProEtaleSliceTensorModel {X Y : Scheme.{u}}
         DerivedCategory.Q.map (chain P Q).hom ≫
         (TB.iso (ProEt.topology Y) B SB _ _ (kflat P hP) (kflat Q hQ)).hom
 
-/-- A tensor comparison with its exact localization square retained. The following
-section formulas will specify `chain`, and hence `rho`, uniquely; these fields do
-not replace the ordinary tensor with a new bifunctor. -/
+/-- A tensor comparison together with the chain-level comparison `chain` and its exact
+localization square. -/
 structure ProEtaleSliceTensorDescent {X Y : Scheme.{u}}
     (O : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
     (B : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
@@ -380,9 +384,7 @@ def TensorNormalized (d : TensorData U O B c delta S SR SB T TR TB)
       (proEtaleDerivedCoefficientUnit (e U O B c delta) d.scalarUnit).hom =
     (proEtaleDerivedCoefficientUnit (f U O B c) d.pullbackUnit).hom) ∧ tail
 
-/-- The section, tensor, unit and closed normalizations of the comparison data.
-These are the equations in the node, factored out of the data record so Lean does
-not expand them in every generated projection and constructor. -/
+/-- The section, tensor, unit and closed normalizations of the comparison data. -/
 def Normalized (d : Data U O B c delta S SR SB T TR TB) : Prop :=
   -- scalar_equivalence
   ((e U O B c delta).IsEquivalence) ∧

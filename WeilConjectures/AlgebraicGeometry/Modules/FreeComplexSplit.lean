@@ -233,14 +233,7 @@ lemma rank_splitIdempotent_map {R K : Type*} [CommRing R] [Field K] {a b c : Typ
 be a cochain complex of `𝒪_Y`-modules on a reduced scheme `Y` with `P^n ≅ 𝒪^{r_n}`, and suppose
 that on an open `N` the matrices of the differentials into and out of degree `q` have constant
 ranks `ρ₁` and `ρ₂` at every point. Then every point `y ∈ N` lies in the image of an open
-immersion `j : Z ⟶ Y` with `H^q(j^* P) ≅ 𝒪_Z^{r_q - ρ₁ - ρ₂}`.
-
-Near `y` both matrices have split rank factorisations
-(`AlgebraicGeometry.Scheme.Modules.exists_split_factorization`); the idempotent
-`ε = (1 - L₁ L₁') (1 - M₂' M₂)` then has rank `r_q - ρ₁ - ρ₂` at every point
-(`AlgebraicGeometry.Scheme.Modules.rank_splitIdempotent_map`), so it has itself a split rank
-factorisation `ε = L₃ M₃` near `y`, and `L₃`, `M₃` split off `𝒪^{r_q - ρ₁ - ρ₂}` as the cohomology
-(`AlgebraicGeometry.Scheme.Modules.nonempty_homology_iso_free_of_split`). -/
+immersion `j : Z ⟶ Y` with `H^q(j^* P) ≅ 𝒪_Z^{r_q - ρ₁ - ρ₂}`. -/
 theorem exists_isOpenImmersion_homology_pullback_iso_free [IsReduced Y]
     (P : CochainComplex Y.Modules ℤ) {r : ℤ → ℕ}
     (e : ∀ n, P.X n ≅ free (R := Y.ringCatSheaf) (ULift.{u} (Fin (r n)))) (q : ℤ) {ρ₁ ρ₂ : ℕ}

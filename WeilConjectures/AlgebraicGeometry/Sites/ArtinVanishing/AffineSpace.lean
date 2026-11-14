@@ -18,8 +18,9 @@ dimensions `≤ c` (`AlgebraicGeometry.Scheme.ArtinBound`). Then the affine spac
 `𝔸ᶜ⁺¹_K = 𝔸¹_B`, `B = 𝔸ᶜ_K`, has torsion cohomological dimension at most `c + 1`
 (`AlgebraicGeometry.Scheme.hasTorsionCohomologicalDimensionLE_affineLine_mvPolynomial`).
 
-This is the inductive step of the blueprint proof of `lemma-uniform-bounds-pro-etale-affines`. For a
-sheaf `M` killed by an integer, the Leray spectral sequence of `f : 𝔸¹_B ⟶ B` reduces the claim to
+## Implementation details
+
+This is the inductive step of the affine Artin vanishing theorem. For a sheaf `M` killed by an integer, the Leray spectral sequence of `f : 𝔸¹_B ⟶ B` reduces the claim to
 `Hᵖ(B, Rᵠf_* M) = 0` for `p + q > c + 1`. For `q ≤ 1` this is the bound on `B`. For `q ≥ 2` the
 geometric stalks of `Rᵠf_* M` vanish at points of transcendence degree `> c + 1 - q`: for
 `q = 2` by the computation at the generic point

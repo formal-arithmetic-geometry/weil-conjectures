@@ -13,16 +13,19 @@ public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 public import Mathlib.Algebra.Module.Torsion.Free
 import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedDvrNormalizationStalkDomain
 import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedDvrNormalizationStalkMapInjective
+
+/-! # Torsion-freeness of normalization stalks over a punctured DVR
+
+## References
+
+* Stacks Project, Tags 0307, 035I and 0539
+-/
+
 @[expose] public section
 universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
-/-- The normalization stalk over a punctured DVR is torsion-free.
-
-Source: Stacks Project, Tags 0307, 035I and 0539.
-Apply `Module.isTorsionFree_iff_algebraMap_injective` to the injectivity of the
-normalization stalk map established by the affine localization argument.
--/
+/-- The normalization stalk over a punctured DVR is torsion-free. -/
 theorem punctured_dvr_normalization_stalk_torsionFree
     {X : Scheme.{u}} [IsLocallyNoetherian X] (U : X.Opens)
     {P : Scheme.{u}} (p : P ⟶ U.toScheme) [IsFinite p] (hetale : Etale p)

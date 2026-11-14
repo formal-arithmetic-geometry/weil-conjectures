@@ -18,8 +18,8 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 Let `k` be a field. Every coherent module `𝒢` on `ℙ¹_k` has a resolution
 `0 → ⨁ 𝒪(-N - 1) → ⨁ 𝒪(-N) → 𝒢 → 0` by finite direct sums of twists.
 
-This replaces the graded Hilbert syzygy theorem of the blueprint by the Castelnuovo–Mumford
-regularity argument on `ℙ¹`. Call `ℱ` *`0`-regular* if `H¹(ℱ(-1)) = 0`.
+Instead of the graded Hilbert syzygy theorem, this uses the Castelnuovo–Mumford regularity
+argument on `ℙ¹`. Call `ℱ` *`0`-regular* if `H¹(ℱ(-1)) = 0`.
 
 - If `ℱ` is `0`-regular, then a morphism `φ : ℰ ⟶ ℱ` which is surjective on `H⁰` is an
   epimorphism: tensoring the Koszul sequences `0 → 𝒪(a) → 𝒪(a + 1)² → 𝒪(a + 2) → 0` with `ℱ`

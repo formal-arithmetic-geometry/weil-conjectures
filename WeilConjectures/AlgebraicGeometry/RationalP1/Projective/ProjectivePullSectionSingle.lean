@@ -23,8 +23,6 @@ attribute [local irreducible] CondensedRing.upperStar CondensedRing.lowerStar
 /--
 The single-complex component of the derived pullback section is the ordinary
 section map conjugated by the two left-derived single comparisons.
-The proof expands the left-derived composition and identity comparison
-naturality squares, then uses `mapDerivedCategoryIdIso_factorsh`.
 -/
 theorem projective_pull_section_single (Y : Scheme.{u})
     (f : diagonalSurface Y ⟶ ProjectiveLine Y)

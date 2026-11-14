@@ -26,12 +26,8 @@ import Mathlib.Data.Nat.Prime.Infinite
 
 /-! # Intrinsic coefficient twists without an auxiliary finite field
 
-The condensed coefficient constructions below implement the current blueprint.
-The legacy signed lines, exact tensor, rational tensor and common-stage tensor are
-retained for compatibility with existing consumers. These interfaces remove only
-the unused finite-field proof parameters from the completed line and its field images.
-The previously recorded interfaces of this node (the intrinsic, fixed finite positive and PBC
-coordinate twists) remain publicly imported.
+This file defines the Tate twists of the condensed coefficient rings, without finite-field
+parameters on the completed line and its field images.
 
 The primary coefficient interface uses continuous-function condensed rings for
 O_E and E and the discrete finite quotient ring at exponent n+1. Finite lines use

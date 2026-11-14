@@ -11,15 +11,19 @@ public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 import all WeilConjectures.AlgebraicGeometry.PerfectNoetherianCohomology
 import WeilConjectures.AlgebraicGeometry.ModuleFinitePresentationExtension
 import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
+
+/-! # Affine locally free models
+
+## References
+
+* Stacks Project, Tags 0G41(2), 0EY6
+-/
+
 @[expose] public section
 universe u
 open CategoryTheory Opposite TopCat.Presheaf
 namespace AlgebraicGeometry.Scheme
-/-- Finite locally free data extends across an affine open with finite affine sections.
-Source: Stacks Project, Tags 0G41(2), 0EY6
-The extension theorem is obtained by finite-presentation extension and affine
-identification; the restriction isomorphism is transported across the
-finite locally free module on the open. -/
+/-- Finite locally free data extends across an affine open with finite affine sections. -/
 theorem exists_affine_locally_free_model_core
     (A : CommRingCat.{u}) [IsNoetherianRing A] (W : (Spec A).Opens)
     (P : W.toScheme.Modules) [P.IsFiniteLocallyFree] :

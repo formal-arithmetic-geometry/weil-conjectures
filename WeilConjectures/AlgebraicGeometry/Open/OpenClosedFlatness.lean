@@ -233,13 +233,9 @@ private theorem fixed_flat_detect
       ((isZero_kernel_of_mono _).of_iso (PreservesKernel.iso _ _))
       ((isZero_kernel_of_mono _).of_iso (PreservesKernel.iso _ _)))
 
-/-- The same assertion for ordinary module sheaves on the small pro-étale site.
-
-The coefficient is the constant finite ring sheaf.  The open object is the
-canonical pro-étale object associated to `j`; its extension by zero and the
-closed direct image are the ringed-site constructions used in the localization
-sequence.
--/
+/-- Flatness of module sheaves over the constant finite ring sheaf on the small pro-étale site
+is detected on the two members of a complementary pair; extension by zero and closed direct
+image preserve flatness. -/
 theorem openClosedFlatness_proEtale
     (A : Type u) [CommRing A] [Finite A]
     {X U Z : Scheme.{u}} (j : U ⟶ X) (i : Z ⟶ X)

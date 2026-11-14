@@ -13,6 +13,14 @@ import Mathlib.RingTheory.LocalRing.Module
 import Mathlib.RingTheory.TensorProduct.Finite
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 
+/-! # Finite residue fibre cohomology of a strictly perfect neighbourhood
+
+## References
+
+* Stacks Project, More on Algebra, Tag 0BCD
+* Stacks Project, Cohomology of Sheaves, Tag 08C4 (strictly perfect complexes)
+-/
+
 @[expose] public section
 
 universe u w
@@ -20,9 +28,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 noncomputable section
 
-/-- A strictly perfect neighbourhood has finite residue-field fibre cohomology in every degree.
-Source: Stacks Project, More on Algebra, Tag 0BCD, first paragraph of the proof;
-Cohomology of Sheaves, Tag 08C4 (strictly perfect complexes). -/
+/-- A strictly perfect neighbourhood has finite residue-field fibre cohomology in every degree. -/
 theorem finiteFiberCohomology
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

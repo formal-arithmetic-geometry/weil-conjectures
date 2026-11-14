@@ -12,8 +12,7 @@ import WeilConjectures.AlgebraicGeometry.IntegralFiniteScalar.FiniteFreeScalarDe
 
 /-! Flatness and augmentation part of the finite-free derived comparison.
 
-This is the first, strictly smaller conjunct of
-`derivedAssertions_of_finite_integral_resolution`.
+This is the first conjunct of `derivedAssertions_of_finite_integral_resolution`.
 -/
 
 @[expose] public noncomputable section
@@ -29,13 +28,8 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.IntegralFiniteScalar
 open CondensedRing
 
-/--
-The point pullback of the specified short exact finite-free resolution is exact.
-The internal section tensor equivalence and the finite-free mono-cokernel theorem
-then give the displayed quasi-isomorphism, K-flatness, and native tensor comparison.
-The proof is split out here so the main comparison theorem only combines its
-independent conjuncts.
--/
+/-- For a short exact finite-free resolution, the augmentation is a quasi-isomorphism, the
+pulled-back complex is K-flat, and the native tensor comparison with it is an isomorphism. -/
 theorem finiteFreeScalarDerivedComparison_flatness
     (D : ScalarSixPullbackData.{u}) {Λ Λ' : ScalarSixRing.{u}}
     (a : Λ ⟶ Λ') (S : ShortComplex (PointModules Λ))

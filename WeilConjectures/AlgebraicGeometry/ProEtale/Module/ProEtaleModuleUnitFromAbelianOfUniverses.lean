@@ -194,19 +194,7 @@ private noncomputable def modelModuleEquivalence (Z : Scheme.{t})
 
 -- Comparing the module adjunctions expands the coefficient-sized site transports.
 /-- An invertible inverse-image coefficient map transfers sectionwise bijectivity
-of the actual abelian unit to the actual module unit, for independent universes.
-
-Proof. Reindex the actual ring, abelian and module direct images to small sites
-in the coefficient universe. Restrict the supplied ring and abelian adjunctions;
-their units become their sectionwise reindexings. The inverse of the invertible
-coefficient adjunct, followed by uniqueness of ring left adjoints, presents the
-coefficient map as the ring inverse-image unit. The forgetful comparison preserves
-that unit. The module inverse-image comparison therefore identifies the module
-unit with the abelian unit followed by an invertible map. Evaluate and cancel that
-map. Compose with the two equivalences back to the original module sites: their
-units are invertible, and the middle unit is bijective on sections. Direct images
-agree with their coefficient actions. Finally compare with the supplied module
-adjunction using the unit equation for uniqueness of left adjoints. -/
+of the actual abelian unit to the actual module unit, for independent universes. -/
 theorem proEtale_module_unit_bijective_of_abelian
     {X Z : Scheme.{t}} (i : Z ⟶ X) (V : X.ProEt)
     (R : Sheaf (ProEt.topology X) RingCat.{max u (t + 1)})

@@ -10,13 +10,15 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionFram
 
 /-! # The finite class of an étale frame
 
-Step 1 uses `coordinateKummer` over Spec k, retaining its standing hypothesis e | n,
-and pulls it back along the actual unit-defined map to G_m with the cartesian twist map.
-Step 2 applies the individual closed-open support boundary. Step 3 forms the ordered
-supported cup using the published finite Tate sheaves and their tensor comparison.
-Step 4 identifies the common zero support with Z times_V U. The empty product is the
-unit, and the singleton is its own boundary. All coefficient and boundary maps have
-real data; this module adds no postponed proof.
+We define the class `finiteFrameClass` of a scheme-theoretic étale frame in a fixed finite
+purity setting, as the ordered supported cup product of the support boundaries of the
+pulled-back affine-line coordinate Kummer classes.
+
+## Implementation details
+
+The coordinate Kummer class over `Spec k` (with its standing hypothesis `e ∣ n`) is pulled
+back along the unit-defined map to `G_m`. The empty product is the unit and the singleton is
+its own boundary. The common zero support is identified with `Z ×_V U`.
 -/
 
 @[expose] public noncomputable section
@@ -170,13 +172,10 @@ def finiteFrameBoundaryProduct (P : PurityFiniteSetting.{u})
   | c + 2, f => P.finiteFrameCupNext h X a (c + 1) f
       (P.finiteFrameBoundaryProduct h X a (c + 1) (fun k ↦ f k.castSucc))
 
-/-- The class of a scheme-theoretic étale frame in the fixed finite purity setting.
-The affine-line datum's standing divisibility hypothesis is retained explicitly.
-The frame's pullback square identifies its common zero support with Z times_V U;
-e is any étale morphism, with no open-immersion requirement. The pointwise stalk
-Krull-dimension condition expresses pure codimension c. Each factor is the
-individual support boundary of the affine-line coordinate Kummer class;
-the result has degree 2c and the recorded coefficient twist of order c on the pro-étale site. -/
+/-- The class of an étale frame of pure codimension `c` (expressed by the stalk Krull-dimension
+condition) in the fixed finite purity setting: the product of the support boundaries of the
+affine-line coordinate Kummer classes, a class supported on the common zero locus, of degree
+`2c` and coefficient twist of order `c`. -/
 def finiteFrameClass (P : PurityFiniteSetting.{u})
     (h : P.ramificationIndex ∣ P.level) {B V Z : Scheme.{u}}
     (b : B ⟶ Spec (.of P.field.k)) (v : V ⟶ B)

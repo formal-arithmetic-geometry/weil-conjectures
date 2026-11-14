@@ -205,13 +205,7 @@ theorem finite_moduleSpecΓFunctor_obj_homology_pullback {P : CochainComplex Y.M
 /-- **Upper semicontinuity of the fibre cohomology of a complex of finite free modules.** Let `P`
 be a complex of `𝒪_Y`-modules whose terms are free of finite rank, and `g: Spec R ⟶ Y` a point
 with values in a field. There is an open neighbourhood `V` of the point such that at every point
-`g': Spec R' ⟶ Y` in `V`, `dim_{R'} H^q(g'^* P) ≤ dim_R H^q(g^* P)`.
-
-Take for `V` the non-vanishing locus of a maximal nonvanishing minor at `g` of each of the two
-differentials around degree `q`: on `V` their ranks can only be larger
-(`AlgebraicGeometry.Scheme.Modules.le_rank_map_appTop_iff`), so the dimension of the cohomology
-can only be smaller
-(`AlgebraicGeometry.Scheme.Modules.finrank_homology_pullback_add_rank_add_rank`). -/
+`g': Spec R' ⟶ Y` in `V`, `dim_{R'} H^q(g'^* P) ≤ dim_R H^q(g^* P)`. -/
 theorem exists_finrank_homology_pullback_le {P : CochainComplex Y.Modules ℤ}
     (hP : ∀ n, ∃ r : ℕ, Nonempty (P.X n ≅ free (R := Y.ringCatSheaf) (ULift.{u} (Fin r))))
     (q : ℤ) {R : CommRingCat.{u}} (hR : IsField R) (g : Spec R ⟶ Y) :

@@ -66,8 +66,6 @@ set_option linter.unusedSectionVars false in
 /--
 The inverse support isomorphism is the normalized lower-star composite,
 congruence, and identity comparison on the regular module.
-The proof applies the underlying sheaf normalization and faithfulness of
-module morphisms.
 -/
 theorem projective_supported_normalization (Y : Scheme.{u})
     (L : ∀ X : Scheme.{u}, Modules Λ X) (d : Diagram Λ Y L) :

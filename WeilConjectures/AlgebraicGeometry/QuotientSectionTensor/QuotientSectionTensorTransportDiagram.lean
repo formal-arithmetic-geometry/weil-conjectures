@@ -64,12 +64,7 @@ attribute [local irreducible] ModuleRingedComparison.tensor tensorComparison qTe
 
 -- Paste the remaining tensor naturality and representative faces.
 /-- The scalar tensor localization diagram commutes before its common final map
-is cancelled.
-Transport the representative tests under the section equivalence. The ordinary
-scalar square gives the signed total square. Paste scalar normalization on the
-total tensor, counit naturality, tensor localization and hb. The two factor scalar
-normalizations identify one path; the section representative equation and
-naturality identify the other. Both paths have the same specified final map. -/
+is cancelled. -/
 theorem section_tensor_transport_diagram (T : Scheme.{u})
     (c : ScalarSectionData a T) (hc : ScalarSectionNormalized a T c)
     (b : TensorIso a T) (hb : TensorNormalized a T b)

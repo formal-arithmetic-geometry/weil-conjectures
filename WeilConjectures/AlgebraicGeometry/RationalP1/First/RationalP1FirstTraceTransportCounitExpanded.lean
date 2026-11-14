@@ -39,7 +39,6 @@ attribute [local irreducible] condensedAmbientExchange
 
 -- Keep the fixed geometric coefficient and derived interfaces folded during elaboration.
 /-- Expand the normalized counit into its projection and trace factors.
-This is the counit-expansion step of the terminal first-trace transport proof.
 This core equation has source Rq_*Rp₂*(p₁*M tensor T_W), rather than Rq_*M, and contains
 neither a diagonal class insertion nor a unit component. -/
 theorem rationalP1_first_trace_transport_counit_expanded

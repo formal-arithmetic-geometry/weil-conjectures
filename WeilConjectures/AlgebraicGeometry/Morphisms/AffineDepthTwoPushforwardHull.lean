@@ -32,6 +32,11 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.OpenBaseChangeStructureModule
 * Stacks Project, Tags 0EY6, 0G41 and 0E9I
 * the double-dual kernel calculation underlying Tags 0EBI and 0EBJ
 * Stacks Project, Tag 0EY6 proof of (1), Tag 0G41(2), and Tag 0E9I
+
+## Implementation details
+
+The local kernel argument in `affine_depth_two_pushforward_hull` expands the depth calculation
+of Tag 0EBI and does not require the integrality hypotheses of Tags 0EBI and 0EBJ.
 -/
 
 @[expose] public section
@@ -40,8 +45,7 @@ universe u
 open CategoryTheory Opposite TopCat.Presheaf
 namespace AlgebraicGeometry.Scheme
 
-/-- Depth is invariant under a semilinear equivalence of finite modules.
-The one-sided regular-sequence transport is applied in both directions. -/
+/-- Depth is invariant under a semilinear equivalence of finite modules. -/
 private theorem depth_eq_of_semilinear_equiv
     {R S M P : Type u} [CommRing R] [CommRing S] [IsLocalRing R] [IsLocalRing S]
     [AddCommGroup M] [AddCommGroup P] [Module R M] [Module S P]
@@ -98,10 +102,7 @@ private noncomputable def direct_image_algebra_module_iso {L X : Scheme.{u}} (g 
   exact Iso.refl _
 
 set_option backward.isDefEq.respectTransparency false in
-/-- On an affine chart the actual pushforward is the coherent depth-two hull.
-
-The local kernel argument expands the depth calculation of Tag 0EBI and does
-not require the integrality hypotheses of Tags 0EBI and 0EBJ. -/
+/-- On an affine chart the actual pushforward is the coherent depth-two hull. -/
 theorem affine_depth_two_pushforward_hull
     {L : Scheme.{u}} [IsLocallyNoetherian L] (U : L.Opens)
     (hboundary : ∀ y : L, y ∉ U →

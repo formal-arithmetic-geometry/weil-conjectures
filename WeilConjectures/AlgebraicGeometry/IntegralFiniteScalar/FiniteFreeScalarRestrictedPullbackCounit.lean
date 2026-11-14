@@ -72,14 +72,7 @@ private theorem restrictedCounit_paste
 
 -- Compute the scalar mate before using any K-flat invertibility.
 /-- Restricted scalar counits commute with exact geometric pullback and the normalized
-scalar mate.
-
-Proof. The normalized scalar-mate counit equation gives the square before restriction.
-Map it through exact restriction. The inverse derived comap comparison is natural for
-that scalar counit. The exact-square factorization identifies its component on the
-ordinary extension complex with the localization of the ordinary comap square.
-Naturality of restriction's localization comparison moves the remaining ordinary
-pullback isomorphism through Q. Compose these equations and reassociate. -/
+scalar mate. -/
 theorem finiteFreeScalar_restrictedCounit_pullback
     (D : ScalarSixPullbackData.{u}) {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ')
     {X Y : Scheme.{u}} (f : X ⟶ Y)

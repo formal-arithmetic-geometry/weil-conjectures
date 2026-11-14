@@ -18,7 +18,7 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Coefficient
 public import WeilConjectures.AlgebraicGeometry.RationalP1.Projective.ProjectiveDiagonalComposition
 public import WeilConjectures.AlgebraicGeometry.RationalP1.Projective.ProjectiveDiagonalPullback
 
-/-! # The actual ambient diagonal unit and trace counit
+/-! # The ambient diagonal unit and trace counit
 -/
 
 @[expose] public noncomputable section
@@ -102,8 +102,7 @@ def counitComponent (Y : Scheme.{u}) (L : ∀ X : Scheme.{u}, Modules Λ X)
         (L (ProjectiveLine Y))) ⟦(2 : ℤ)⟧)) ≫
     (K ◁ trace Λ Y L d) ≫ (K ◁ (singleUnitIso Λ Y).hom) ≫ (ρ_ K).hom
 
-/-- Componentwise agreement with the entire specified ambient unit formula.
-The quantified witnesses supply only invertibility proofs; the formula fixes all map data. -/
+/-- Componentwise agreement with the entire specified ambient unit formula. -/
 def UnitComponentNormalized (Y : Scheme.{u}) (L : ∀ X : Scheme.{u}, Modules Λ X)
     (d : Diagram Λ Y L)
     (e : (moduleObjectDerivedPullback Λ (secondProjection Y)).obj
@@ -118,8 +117,7 @@ def UnitComponentNormalized (Y : Scheme.{u}) (L : ∀ X : Scheme.{u}, Modules Λ
       ((moduleObjectDerivedPullback Λ (firstProjection Y)).obj M))),
     HEq f (unitComponent Λ Y L d e M hb hp)
 
-/-- Componentwise agreement with the entire specified ambient counit formula.
-Only invertibility of the fixed projection is existential, and its proof is irrelevant. -/
+/-- Componentwise agreement with the entire specified ambient counit formula. -/
 def CounitComponentNormalized (Y : Scheme.{u}) (L : ∀ X : Scheme.{u}, Modules Λ X)
     (d : Diagram Λ Y L) (K : DerivedCategory (Modules Λ Y)) {α : Type (u + 1)} (f : α) : Prop :=
   ∃ hp : IsIso (projectionMap Λ (ProjectiveLine Y ↘ Y) K

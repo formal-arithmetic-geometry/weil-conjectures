@@ -23,6 +23,11 @@ This is the algebra behind cohomology and base change in top degree for families
 isomorphisms `H⁰(P|_W) ≅ 𝒪_W` over the opens `W` of `Y` produce, near every point, a global
 cycle of degree `0` with a unit coordinate. Adding it as a differential in degree `-1` makes the
 fibres exact in degrees `≤ 0`, and the complex splits near the point with free `H¹`.
+
+## References
+
+* [R. Hartshorne, *Algebraic Geometry*, III.12.11]
+* [Stacks: Tag 0BDJ](https://stacks.math.columbia.edu/tag/0BDJ)
 -/
 
 @[expose] public section
@@ -39,10 +44,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- **A cycle with a unit coordinate.** Let `Q` be a complex of free `𝒪_W`-modules with
 `Q^{-1} = 0`, `Q^0 ≅ 𝒪^{ι₀}`, `Q^1 ≅ 𝒪^{ι₁}`, whose cohomology `H⁰(Q)` is isomorphic to `𝒪_W`.
 If the matrix `B` of `d⁰` has an invertible minor of size `|ι₀| - 1`, then there is a vector
-`w ∈ Γ(W, 𝒪)^{ι₀}` with `B w = 0` and a coordinate equal to `1`.
-
-The image of `1` under `𝒪_W ≅ H⁰(Q) ↪ Q^0` is a cycle `u` with `c • u = 0 → c = 0`, and
-`Matrix.exists_mulVec_eq_zero_and_eq_one_of_isUnit_det_submatrix` applies. -/
+`w ∈ Γ(W, 𝒪)^{ι₀}` with `B w = 0` and a coordinate equal to `1`. -/
 theorem exists_mulVec_eq_zero_and_eq_one_of_homology_iso_unit {W : Scheme.{u}}
     (Q : CochainComplex W.Modules ℤ) {ι₀ ι₁ : Type u} [Fintype ι₀]
     [DecidableEq ι₁] (hQ : IsZero (Q.X (-1)))
@@ -87,16 +89,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- **The first cohomology of a finite free complex is finite locally free.** Let `P` be a
 bounded complex of finite free `𝒪_Y`-modules in degrees `[0, d]` such that `H⁰(g^* P) ≅ 𝒪_Z` for
 every morphism `g : Z ⟶ Y`, and whose fibres `P ⊗ κ(y)` are exact in degrees `q ≥ 2`. Then
-`H¹(P)` is finite locally free.
-
-Near a point `y`, the fibre condition in degree `0` gives an invertible minor of size
-`rank P⁰ - 1` of the matrix of `d⁰`; on its basic open `W`, the isomorphism `H⁰(P|_W) ≅ 𝒪_W`
-produces a cycle `w` of degree `0` with a unit coordinate
-(`AlgebraicGeometry.Scheme.Modules.exists_mulVec_eq_zero_and_eq_one_of_homology_iso_unit`).
-Taking `w` as a differential in degree `-1`, the fibre at `y` is exact in degrees `0` and `2`,
-and the complex splits near `y` with free `H¹`
-(`AlgebraicGeometry.Scheme.exists_opens_hasSplitHomology_of_rank_add_eq`).
-See [Hartshorne, III.12.11] and [Stacks, Tag 0BDJ]. -/
+`H¹(P)` is finite locally free. -/
 @[stacks 0BDJ]
 theorem IsFiniteFreeComplex.isFiniteLocallyFree_homology_one {P : CochainComplex Y.Modules ℤ}
     {d : ℕ} (hP : IsFiniteFreeComplex P d)

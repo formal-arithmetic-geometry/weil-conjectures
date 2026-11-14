@@ -10,21 +10,21 @@ public import Mathlib.RingTheory.AdicCompletion.LocalRing
 import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
 import WeilConjectures.RingTheory.FormalGlueingH0PrimeSpan
 import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionFormalGlueingData
+
+/-! # Surjectivity of the completed comparison on residue quotients
+
+## References
+
+* Stacks Project, Tags 0BLH and 05ER
+-/
+
 @[expose] public section
 noncomputable section
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.CompletionGluingData
 
-/-- The completed comparison is onto after passage to the residue quotient.
-Source: Stacks Project, Tags 0BLH and 05ER.
-
-The formal gluing comparison identifies the scalar extension of matching sections
-with the completed finite algebra. Reducing this comparison modulo the image of the
-maximal ideal gives the asserted surjectivity. This is the residue-quotient part of
-the canonical H0 comparison; the remaining algebraic extraction of a lift is proved
-in `residue_lift_of_quotient_surjective`.
--/
+/-- The completed comparison is onto after passage to the residue quotient. -/
 theorem completedRingMap_residue_quotient_surjective
     {A : Type u} [CommRing A] [IsNoetherianRing A] [IsLocalRing A]
     {U : (Spec (.of A)).Opens}

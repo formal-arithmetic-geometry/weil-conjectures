@@ -243,12 +243,7 @@ scheme, separated over an affine scheme `S`, let `ℒ` be an invertible `𝒪_X`
 and `u ∈ Γ(X, ℱ ⊗ ℒ^{⊗ m})` with `u|_{X_s} = t ⊗ s^m`.
 
 Here `t ⊗ s^m` is the image of `t` under `ℱ ≅ ℱ ⊗ 𝒪_X ⟶ ℱ ⊗ ℒ^{⊗ m}`, the second map being
-`ℱ ◁ s^{⊗ m}`.
-
-On a finite affine cover `Vⱼ` of `X` on which `ℒ` has a basis `eⱼ`, with `s = fⱼ eⱼ`, one has
-`X_s ∩ Vⱼ = D(fⱼ)`, so `fⱼ^a t` lifts to `tⱼ ∈ Γ(Vⱼ, ℱ)` for one `a`. The sections
-`tⱼ ⊗ eⱼ^a` agree on `X_s ∩ Vⱼ ∩ Vₖ`; the overlaps `Vⱼ ∩ Vₖ` being affine, a further power
-`s^b` makes them agree on the whole overlaps, and they glue to `u` with `m = a + b`. -/
+`ℱ ◁ s^{⊗ m}`. -/
 @[stacks 01PW]
 theorem exists_tensorPowSection_eq_restrict {S : Scheme.{u}} (f : X ⟶ S) [IsSeparated f]
     [IsAffine S] [CompactSpace X] (L : X.Modules) [SheafOfModules.IsInvertible.{u, u, u} L]

@@ -14,7 +14,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.ProEtaleComparisonM
 
 ## References
 
-* Stacks Project, Tag 0GLZ, first paragraph
+* Stacks Project, Tag 0GLZ, first (proof) paragraph
 * Tag 09XN
 -/
 
@@ -46,7 +46,8 @@ private lemma terminalLift_isIso {S T : Scheme.{u}} (f : T ⟶ S) :
   infer_instance
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Source: Stacks Project, Tag 0GLZ, first proof paragraph; Tag 09XN. -/
+/-- A presheaf `P` on the pro-étale site whose sections over `Y` are compatibly identified with
+the terminal sections of the étale pullback of `F` to `Y` is a sheaf. -/
 theorem proEtaleComparisonSectionDescent
     (X : Scheme.{u}) (F : Sheaf X.smallEtaleTopology (Type (u + 1)))
     (P : X.ProEtᵒᵖ ⥤ Type (u + 1))

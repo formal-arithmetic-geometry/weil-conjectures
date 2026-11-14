@@ -19,14 +19,20 @@ import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationLocal
 import WeilConjectures.Mathlib.RingTheory.Henselian
 set_option linter.style.haveILetI false
 set_option linter.unnecessarySimpa false
+
+/-!
+# Noetherianity of the strict henselization of a regular ring
+
+## References
+
+* Stacks Project, Tag 06LJ
+-/
+
 @[expose] public section
 universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
-/-- Noetherianity of the canonical strict henselization over a regular affine ring.
-Source: Stacks Project, Tag 06LJ, applied to the local ring at the geometric point.
-The proof identifies the coordinate-ring colimit with the ring strict henselization.
--/
+/-- Noetherianity of the canonical strict henselization over a regular affine ring. -/
 theorem strictHenselizationRing_noetherian_of_regular
     (R : CommRingCat.{u}) [IsRegularRing R]
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω]

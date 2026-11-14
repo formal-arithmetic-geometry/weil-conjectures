@@ -63,12 +63,7 @@ attribute [local irreducible] ModuleRingedComparison.tensor tensorComparison qTe
 
 -- Check the scalar counits and tensor localization factors separately.
 /-- The section scalar tensor comparison's final map is invertible on flat-term
-K-flat representatives.
-The ordinary total square makes the normalized total map invertible. Scalar
-computation on the K-flat tensor, scalar normalization, and counit naturality
-make its scalar counit invertible. The section representative equation then
-makes the target qTensor invertible. Both factor counits compute on the K-flat
-section complexes, so every factor of the final map is invertible. -/
+K-flat representatives. -/
 theorem section_tensor_transport_suffix_isIso (T : Scheme.{u})
     (c : ScalarSectionData a T) (hc : ScalarSectionNormalized a T c)
     (barB : tensor Λ T ⋙ c.model.T ≅

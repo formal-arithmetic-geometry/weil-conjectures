@@ -49,6 +49,12 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantModul
 
 * Stacks Project, Tags 093I, 09AJ and 099Y, using global finite partitions
 * Stacks Project, Tags 093I, 09AJ and 099Y
+
+## Implementation details
+
+The intrinsic constructibility predicate requires a positive number of strata; a
+fixed-coefficient partition with zero strata (which forces the scheme to be empty) is replaced
+by the one-stratum identity partition.
 -/
 
 @[expose] public section
@@ -283,24 +289,7 @@ private theorem positive_stratification (T : Scheme.{u}) (A : Type (u + 1)) [Com
     fun i ↦ empty_finiteLocal T A _⟩
 
 /-- The intrinsic and fixed-coefficient constructibility predicates agree under
-restriction to constant scalars.
-
-Proof in words. Restriction to constant scalars leaves additive sections and their
-restriction maps unchanged. On a slice site use the restricted constant-section
-map, which is still locally bijective. Its module sheafification and restriction
-are inverse equivalences; they identify a constant module with the sheafification
-of the constant module-valued presheaf. Thus local constancy is identical in both
-encodings. Their geometric stalks have the same additive colimit, so finiteness is
-identical. For a scheme morphism, constant-ring module direct image restricts to
-precomposition on fixed modules: the coefficient structure map extends precisely
-the constant-section map. Uniqueness of left adjoints therefore identifies the two
-inverse images. Apply these identifications to each immersion of the given finite
-constructible locally closed partition. The same partition works in both directions.
-If the fixed-module partition has zero strata, its covering condition makes the
-scheme empty. Replace it by the one-stratum identity partition; the empty cover
-trivializes its restriction and there are no geometric points. This enforces the
-intrinsic convention that the number of strata is positive without excluding the
-empty scheme. No descent from pro-etale sheaves to etale sheaves is used here. -/
+restriction to constant scalars. -/
 theorem proEtaleModuleRestriction_constructible_iff (T : Scheme.{u})
     (B : Type u) [CommRing B] [Finite B]
     (F : proEtaleRingModules T (proEtaleConstantRing T B)) :

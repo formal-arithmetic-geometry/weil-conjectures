@@ -12,15 +12,21 @@ public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 import WeilConjectures.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotientRegularPart
 import WeilConjectures.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotientDomainPart
+
+/-!
+# Regularity of the divisor quotient of the strict henselization
+
+## References
+
+* Stacks Project, Tags 05WS and 06LN
+-/
+
 @[expose] public section
 universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
-/-- Regularity and integrality of the divisor quotient in the canonical strict henselization.
-Source: Stacks Project, Tags 05WS and 06LN, using the local structure at the geometric point.
-The quotient is identified with the strict henselization of the regular local divisor ring.
--/
+/-- Regularity and integrality of the divisor quotient in the canonical strict henselization. -/
 theorem strictHenselizationRing_regular_divisor_quotient
     (R : CommRingCat.{u}) [IsRegularRing R] (f : R)
     [IsRegularRing (R ⧸ Ideal.span {f})]

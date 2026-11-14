@@ -53,7 +53,6 @@ Theta and D below are rationalBalancedTheta and extension along
 rationalBalancedCoefficient. The completed comparison is rationalScalarStrictBeta.
 The pullback alpha is the supplied, generator-normalized dependency record's alpha.
 The ordinary zeta is normalized on tensor generators and derived computation counits.
-No declarations from the downstream parent scalar-coherence module are imported.
 
 ## References
 
@@ -180,13 +179,13 @@ structure RationalScalarMixedUnitCancellation (g : X ⟶ Y)
           (((pbcExtend (rationalBalancedCoefficient l E F i Y)).mapHomologicalComplex (.up ℤ)).obj
       P) ≫
         DerivedCategory.Q.map ((NatIso.mapHomologicalComplex ordinary (.up ℤ)).hom.app P)
-  /-- The raw comparison is the actual rationalScalarStrictBeta, with no new choice. -/
+  /-- The raw comparison, given by `rationalScalarStrictBeta`. -/
   beta : aE.rawPull ⋙ pbcRationalScalarExtension l E F i X Fact.out Fact.out ≅
     pbcRationalScalarExtension l E F i Y Fact.out Fact.out ⋙ aF.rawPull
   /-- All components, not just their endpoint isomorphism classes, are fixed. -/
   beta_normalization : ∀ K : PbcRationalDerivedCategory l E Y Fact.out Fact.out,
     beta.app K = rationalMixedBetaComponent l E F i g sXE sYE sXF sYF aE aF K
-  /-- The displayed equation, in the node's orientation, for every raw rational object. -/
+  /-- The mixed realization square commutes on every raw rational object. -/
   compatibility : ∀ K : PbcRationalDerivedCategory l E Y Fact.out Fact.out,
     (rationalBalancedTheta l E F i X sXE sXF).hom.app (aE.rawPull.obj K) ≫
         (pbcDerivedExtend (rationalBalancedCoefficient l E F i X)).map

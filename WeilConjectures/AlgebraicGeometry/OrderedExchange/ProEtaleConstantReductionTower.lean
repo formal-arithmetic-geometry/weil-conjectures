@@ -166,8 +166,8 @@ end AlgebraicGeometry.Scheme.OrderedExchange
 
 namespace CategoryTheory.AdicSites.OrderedExchangeInterface
 
-/-- Reexport the existing whole-diagram mate comparison, including invertibility and
-the two finite coefficient normalization clauses. No second postponed proof is introduced. -/
+/-- The whole-diagram mate comparison is invertible on complete objects and satisfies the two
+finite coefficient normalization clauses. -/
 abbrev completionMateComparison
     {Y X Y' X' : Site.{u}}
     {f : Morphism Y X} {g : Morphism Y Y'} {h : Morphism X X'} {k : Morphism Y' X'}

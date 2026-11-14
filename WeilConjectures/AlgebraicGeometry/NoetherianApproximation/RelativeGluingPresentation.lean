@@ -35,15 +35,9 @@ namespace AlgebraicGeometry
 
 variable {I : Type u} [Category.{u} I] {D : I ⥤ Scheme.{u}} (c : Cone D)
 
-/-- Selected finite relative affine
-presentation `R_X` of `g: X ⟶ lim Dⱼ`.
-
-It consists of a stage `i₀`, a finite index type `J`, affine opens `base a` of `D_{i₀}` (whose
-preimages in `lim Dⱼ` have rings that are filtered colimits of stage rings) and affine opens
-`chart a` of `X` covering `X`, with `chart a` mapping into `base a`. The overlaps, both
-directions of the overlap isomorphisms and their identity, inverse and cocycle equations are
-`AlgebraicGeometry.RelativeAffinePresentation.glueData`; the quasi-compactness of the overlaps
-is `AlgebraicGeometry.RelativeAffinePresentation.isCompact_overlap`. -/
+/-- A finite relative affine presentation `R_X` of `g : X ⟶ lim Dⱼ`: a stage `i₀`, finitely
+many affine opens `base a` of `D_{i₀}` and affine opens `chart a` covering `X`, with `chart a`
+mapping into `base a`. -/
 structure RelativeAffinePresentation {X : Scheme.{u}} (g : X ⟶ c.pt) where
   /-- The stage `i₀` over which the base charts are chosen. -/
   stage : I

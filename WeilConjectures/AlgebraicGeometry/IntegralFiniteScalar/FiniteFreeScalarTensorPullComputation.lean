@@ -73,15 +73,7 @@ private theorem exactTensorComparison
 
 -- Elaborating the two monoidal presentations requires the exact pullback instances.
 /-- The specified derived tensor pullback comparison computes the termwise oplax
-comparison after the canonical localization factors.
-
-Proof. Exact inverse image preserves flat modules: ordinary inverse image does so,
-and extension along its coefficient isomorphism is a monoidal equivalence. The
-exact-derived comparison and its computation counit identify the derived tensor
-comparison with the localization of the cochain oplax comparison. Naturality of the
-exact localization factor cancels its inverse comparison. Finally identify the
-internal and canonical geometric oplax structures, retaining the explicitly chosen
-native monoidal structure in the tensorPull definition. -/
+comparison after the canonical localization factors. -/
 theorem finiteFreeScalar_tensorPull_computes (Λ : ScalarSixRing.{u})
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (A C : CochainComplex (ModuleRingedComparison.internalModules Λ.X Y) ℤ) :

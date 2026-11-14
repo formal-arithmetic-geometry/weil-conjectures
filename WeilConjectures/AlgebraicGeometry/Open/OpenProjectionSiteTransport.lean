@@ -26,9 +26,6 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 /-!
 # Site transport of the open projection formula
 
-The derived statement and its K-flat normalization follow the blueprint item
-`lem-pur-open-projection-site-transport`.
-
 ## References
 
 * Stacks Project, Tag 09AF, Tag 0GL1

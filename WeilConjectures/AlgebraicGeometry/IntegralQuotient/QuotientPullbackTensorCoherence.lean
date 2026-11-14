@@ -21,6 +21,13 @@ and localization counits, rather than by an arbitrary isomorphism of functors.
 * Stacks Project, Tags 0D6D and 07A4
 * Stacks 07A4
 * Tags 0D6D and 07A4
+
+## Implementation details
+
+In `quotient_pullback_tensor_coherence` the section composition comparison is characterized by
+`SectionPullNormalized`: its ordinary map is the conjugate of `pullIso`, and its derived map is
+fixed by the two composite localization counits on every flat-term K-flat model. This is the
+normalization used in `integral_quotient_direct_image_comparison`.
 -/
 
 @[expose] public noncomputable section
@@ -87,8 +94,8 @@ namespace AlgebraicGeometry.ProEtale.IntegralQuotient
 
 open QuotientChange QuotientSectionTensor
 
-/-- The existing tensor comparison with the recorded pullback functor type exposed.
-This only shares the structural arguments of leftDerivedUpperStarTensor. -/
+/-- The derived tensor comparison `leftDerivedUpperStarTensor` for the pullback functor
+`L B f`. -/
 @[irreducible] def quotientTensorPull
     (B : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj B] [IsCommMonObj B] {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -100,13 +107,7 @@ This only shares the structural arguments of leftDerivedUpperStarTensor. -/
 
 /-- The actual quotient coefficient square commutes, its normalized pullback
 comparison realizes the ringed-square composition comparison, and that same
-comparison intertwines the two composite tensorators on all unbounded inputs.
-
-The section composition comparison is characterized by SectionPullNormalized:
-its ordinary map is the conjugate of the actual pullIso, and its derived map is
-fixed by the two composite localization counits on every flat-term K-flat model.
-Thus the comparison in the first conclusion and the tensor equation is the given
-lam, with the normalization used in integral_quotient_direct_image_comparison. -/
+comparison intertwines the two composite tensorators on all unbounded inputs. -/
 theorem quotient_pullback_tensor_coherence
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ)

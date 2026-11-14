@@ -43,12 +43,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- **`H²(Spec E, ℤ/ℓ) = 0` for a `C₁` field `E`.** Let `E` be a quasi-algebraically closed
 field and `ℓ` a prime such that `E` contains a primitive `ℓ`-th root of unity if `ℓ ≠ char E`.
-Then `H²(Spec(E)_ét, ℤ/ℓ) = 0`.
-
-For `ℓ = char E` this is Artin–Schreier
-(`AlgebraicGeometry.Scheme.subsingleton_sheafH_constantZMod_of_isAffine`). Otherwise `ℤ/ℓ ≅ μ_ℓ`
-and the Kummer sequence sandwiches `H²(μ_ℓ)` between `H¹(𝔾ₘ)/ℓ = 0` (Hilbert 90) and
-`H²(𝔾ₘ)[ℓ] = 0` (`IsQuasiAlgClosed.subsingleton_cohomologicalBrauerGroup`). -/
+Then `H²(Spec(E)_ét, ℤ/ℓ) = 0`. -/
 theorem subsingleton_sheafH_two_constantZMod_of_isQuasiAlgClosed
     (E : Type u) [Field E] [IsQuasiAlgClosed E] (ℓ : ℕ) [Fact ℓ.Prime]
     (hζ : (ℓ : E) ≠ 0 → ∃ ζ : E, IsPrimitiveRoot ζ ℓ) :
@@ -72,9 +67,7 @@ theorem subsingleton_sheafH_two_constantZMod_of_isQuasiAlgClosed
 
 /-- **`H²(Spec E, ℤ/ℓ) = 0` for a `C₁` field over an algebraically closed field.** Let `E` be a
 quasi-algebraically closed field containing an algebraically closed field `k` and `ℓ` a prime.
-Then `H²(Spec(E)_ét, ℤ/ℓ) = 0`: if `ℓ ≠ char E`, the image of a primitive `ℓ`-th root of unity
-of `k` (`IsSepClosed.exists_isPrimitiveRoot`) is one of `E`, and
-`AlgebraicGeometry.Scheme.subsingleton_sheafH_two_constantZMod_of_isQuasiAlgClosed` applies. -/
+Then `H²(Spec(E)_ét, ℤ/ℓ) = 0`. -/
 theorem subsingleton_sheafH_two_constantZMod_of_isAlgClosed_subfield (k E : Type u) [Field k]
     [IsAlgClosed k] [Field E] [Algebra k E] [IsQuasiAlgClosed E] (ℓ : ℕ) [Fact ℓ.Prime] :
     Subsingleton (Sheaf.H ((Spec (.of E)).constantZMod ℓ) 2) := by

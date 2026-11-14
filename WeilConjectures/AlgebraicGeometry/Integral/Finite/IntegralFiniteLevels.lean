@@ -75,24 +75,10 @@ private theorem expandIntegralStrata
       ((AdicCompletion.derivedReduction l E X 0).obj K) hS
   exact hs S i hbase n q
 
-/-- Bounds and constructibility for all finite reductions of a complete integral complex.
-
-Proof, following the node and the current blueprint, in the native internal coefficient
-presentation:
-
-1. `lemma-bounds-finite-reductions` (from the residue reduction, by induction along
-   the quotient-linear uniformizer filtration triangles) gives bounded constructibility of
-   every finite reduction and, on every specified stratum, finite constant local models of
-   all cohomology sheaves of every reduction.
-2. For each n, `lemma-bounds-finite-reductions` identifies the derived residue
-   extension of the n-th reduction with the first reduction; transport the given vanishing
-   outside [a,b] through it and apply the finite-coefficient residue Tor criterion
-   `lemma-bounds-finite-reductions` to get Tor amplitude in [a,b].
-3. `lemma-bounds-finite-reductions` (Nakayama triangles and the long exact sequence)
-   puts every integral level in [a,b] and makes the top cohomology transitions epic;
-   `lemma-bounds-finite-reductions` (completeness, the Roos limit triangle and
-   repleteness) then puts K in [a,b], including the vanishing in degree b+1.
--/
+/-- Bounds and constructibility for all finite reductions of a complete integral complex: if the
+first reduction of `K` is bounded constructible with cohomology in `[a, b]`, then every finite
+reduction is bounded constructible with Tor amplitude in `[a, b]`, `K` has cohomology in
+`[a, b]`, and finite constant local models on strata propagate to all reductions. -/
 theorem integral_finite_levels
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

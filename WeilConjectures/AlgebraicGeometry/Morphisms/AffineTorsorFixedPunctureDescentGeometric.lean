@@ -16,6 +16,13 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteProductPrincipalOpen
 import Mathlib.Data.Fintype.EquivFin
 import Mathlib.GroupTheory.GroupAction.Defs
 
+/-! # Geometric fixed-orbit descent for affine torsors
+
+## References
+
+* Stacks Project, Tags 03SF and 0EYG
+-/
+
 @[expose] public section
 universe u
 set_option autoImplicit false
@@ -35,11 +42,7 @@ structure FixedOrbitData (G : Type u) [Group G] (d : ℕ) where
   distinct : ∀ i j, rel (representative i) (representative j) → i = j
   stabilizer_spec : ∀ i g, g ∈ stabilizer i ↔ action g (representative i) = representative i
 
-/-- Canonical quotient orbit data exists for every finite permutation action.
-
-Source: the finite orbit decomposition of a finite permutation action (Stacks 03SF).
-The construction takes the quotient of `Fin d` by the orbit relation, chooses its
-finitely many classes as representatives, and uses stabilizer preimages. -/
+/-- Canonical quotient orbit data exists for every finite permutation action. -/
 theorem fixedOrbitData_of_action
     (G : Type u) [Group G] [Finite G] (d : ℕ) (A : G →* Equiv.Perm (Fin d)) :
     ∃ D : FixedOrbitData G d, D.action = A := by
@@ -71,18 +74,10 @@ theorem fixedOrbitData_of_action
     have hq := Quotient.sound h
     simpa only [r, Quotient.out_eq] using hq
 
-/-- Geometric fixed-orbit descent for the action induced by the pulled-back splitting.
-
-Source: Stacks Project, Tags 03SF and 0EYG. The action is the explicit permutation
-action obtained by evaluating the deck transformations on the chosen splitting.
-The etale and unique-rotation hypotheses make the nonempty connected puncture
-a G-torsor over D(iota(g)). The supplied orbit data is required to have exactly this
-action; the quotient
-components then descend to the stabilizer fixed subalgebras, and invariants commute
-with localization at the nonzero puncture element. This is the geometric descent
-construction, with the projection compatibility supplied by the resulting affine
-identification. The two-component trivial-group splitting yields two singleton
-orbits, so an empty index cannot satisfy the corrected hypotheses. -/
+/-- Geometric fixed-orbit descent: if the orbit data `D` has the permutation action induced by
+the pulled-back splitting `δ`, then the base change of `p` along `Spec H ⟶ Spec R` is isomorphic
+over `Spec H` to the puncture `D(ι g)` of the spectrum of the product of the stabilizer fixed
+subalgebras of `C`. -/
 theorem affine_torsor_fixed_orbits_geometric
     (R H : CommRingCat.{u}) (g : R) (ι : R →+* H)
     (C : Type u) [CommRing C] [Algebra H C] [IsDomain C]

@@ -51,7 +51,10 @@ theorem affine_torsor_equivariant_descent_algebra
   obtain ⟨eA⟩ := eA
   exact ⟨eA.trans eD⟩
 
-/-- (blueprint: lem-sbc-affine-torsor-equivariant-descent) -/
+/-- A finite étale cover `p` of `D(g)` that splits into `d` copies after base change along `t`
+descends: for some permutation action `α` of `G` on `Fin d`, the base change of `p` along
+`Spec H ⟶ Spec R` is isomorphic over `Spec H` to the puncture `D(ι g)` of the spectrum of the
+equivariant function algebra `affineTorsorEquivariantAlgebra H C G ρ d α`. -/
 theorem affine_torsor_equivariant_descent
     (R H : CommRingCat.{u}) (g : R) (ι : R →+* H)
     (C : Type u) [CommRing C] [Algebra H C] [IsDomain C]

@@ -40,12 +40,10 @@ over a finite field `F` with `q` elements.
   `AlgebraicGeometry.ProjectiveLine.infinityChart_comp_eq_of_isFrobenius`: the `q`-power
   Frobenius acts by `t ↦ t ^ q` and `z ↦ z ^ q` on the charts `Spec F[t]` and `Spec F[z]`.
 
-## Blueprint
+## Implementation details
 
-Together with `AlgebraicGeometry.ProjectiveLine.affineChart` and `AlgebraicGeometry.affineLine`,
-this file implements the remark `d-lines` of the blueprint subsection `sk-d-lines`. The
-blueprint defines `ℙ¹_F` by gluing `Spec F[t]` and `Spec F[z]` along `F[t, t⁻¹] = F[z, z⁻¹]`;
-here `ℙ¹_F` is defined as `ℙ(ULift (Fin 2); Spec F)`, and the gluing description is the theorem
+Here `ℙ¹_F` is defined as `ℙ(ULift (Fin 2); Spec F)` rather than by gluing `Spec F[t]` and
+`Spec F[z]` along `F[t, t⁻¹] = F[z, z⁻¹]`; the gluing description is the theorem
 `isPullback_affineChart_infinityChart` together with the covering statement.
 -/
 

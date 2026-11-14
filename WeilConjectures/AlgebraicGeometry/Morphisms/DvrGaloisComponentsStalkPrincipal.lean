@@ -18,13 +18,18 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.DvrGenericGaloisNormalization
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 import Mathlib.RingTheory.DedekindDomain.Dvr
 
+/-! # Principality of the maximal ideal of a normalized Galois component stalk
+
+## References
+
+* Stacks Project, Tags 09EV, 09E8, 00PD and 0307
+-/
+
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
-/-- The maximal ideal of a normalized finite Galois component stalk is principal.
-
-Source: Stacks Project, Tags 09EV, 09E8, 00PD and 0307 -/
+/-- The maximal ideal of a normalized finite Galois component stalk is principal. -/
 theorem dvr_galois_components_normalization_maximalIdeal_isPrincipal
     (B : CommRingCat.{u}) [IsDomain B] [IsDiscreteValuationRing B]
     (pi : B) (hpi : Irreducible pi) (n : ℕ) (hnpos : 0 < n)

@@ -271,10 +271,7 @@ lemma bidual_naturality {M M' : SheafOfModules.{u} X.ringCatSheaf} (f : M ⟶ M'
   rw [PresheafOfModules.naturality_apply]
 
 /-- **Biduality twisted by an invertible module.** For an invertible `ω`, `ℱ ≅ (ℱᵛ ⊗ ω)ᵛ ⊗ ω`,
-naturally in finite locally free `ℱ`: the biduality morphism `ℱ ⟶ ℱᵛᵛ` is an isomorphism
-(`SheafOfModules.isIso_bidual`), and twisting by `ω` cancels in internal homs,
-`(A ⊗ ω)ᵛ ⊗ ω ≅ Aᵛ` naturally in `A`, as `ω` has the tensor inverse `ωᵛ`
-(`MonoidalClosed.ihomTensorObjWhiskerRightIso`). -/
+naturally in finite locally free `ℱ`. -/
 theorem nonempty_iso_dual_tensorObj_dual_tensorObj (ω : X.Modules)
     [SheafOfModules.IsInvertible (R := X.ringCatSheaf) ω] :
     Nonempty ((SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι ≅
@@ -319,10 +316,7 @@ lemma IsInvertible.of_tensorObj_iso_unit (M N : X.Modules) [M.IsInvertible]
 instance IsInvertible.dual (M : X.Modules) [M.IsInvertible] : (Mᵛ).IsInvertible :=
   .of_tensorObj_iso_unit M _ (nonempty_tensorObj_dual_iso_unit M).some
 
-/-- **An invertible module is its own double dual.** For an invertible `M`, `M ≅ Mᵛᵛ`:
-`M ≅ M ⊗ (Mᵛ ⊗ Mᵛᵛ) ≅ (M ⊗ Mᵛ) ⊗ Mᵛᵛ ≅ Mᵛᵛ`. With `IsInvertible.dual`,
-`IsInvertible.tensorObj` and `nonempty_tensorObj_dual_iso_unit` this is blueprint
-`lem-pc-tensor-dual-invertible`. -/
+/-- **An invertible module is its own double dual.** For an invertible `M`, `M ≅ Mᵛᵛ`. -/
 theorem nonempty_iso_dual_dual (M : X.Modules) [M.IsInvertible] : Nonempty (M ≅ Mᵛᵛ) := by
   obtain ⟨d⟩ := nonempty_tensorObj_dual_iso_unit M
   obtain ⟨d'⟩ := nonempty_tensorObj_dual_iso_unit Mᵛ

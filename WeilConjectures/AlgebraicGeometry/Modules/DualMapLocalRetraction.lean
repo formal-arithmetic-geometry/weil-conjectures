@@ -10,6 +10,17 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 import WeilConjectures.AlgebraicGeometry.Modules.LocalSectionOfEpi
 import WeilConjectures.AlgebraicGeometry.Modules.DualRetractionOfLocalSection
 
+/-!
+# Local splitting of the transpose of an epimorphism
+
+The transpose `Qᵛ ⟶ Pᵛ` of an epimorphism `P ⟶ Q` onto a finite locally free module is locally
+a split monomorphism.
+
+## References
+
+* [Stacks: Tag 0EKP](https://stacks.math.columbia.edu/tag/0EKP)
+-/
+
 @[expose] public section
 
 universe u
@@ -17,10 +28,7 @@ set_option autoImplicit false
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- The transpose of an epimorphism onto a finite locally free module is locally split.
-
-Source: Stacks Project, Tag 0EKP, proof of (2) to (3), local splitting of the quotient.
--/
+/-- The transpose of an epimorphism onto a finite locally free module is locally split. -/
 theorem exists_local_retraction_dualMap_of_epi
     {X : Scheme.{u}} {P Q : X.Modules} (f : P ⟶ Q) [Epi f] [Q.IsFiniteLocallyFree] :
     ∀ x : X, ∃ U : X.Opens, x ∈ U ∧

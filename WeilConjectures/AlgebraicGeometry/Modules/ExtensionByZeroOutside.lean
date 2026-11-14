@@ -16,7 +16,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 noncomputable section
 namespace AlgebraicGeometry.Scheme.Modules
-/-- (blueprint: new-extension-by-zero-outside-stalk) -/
+/-- The extension by zero of a sheaf of modules on `U` has zero stalks at points outside `U`. -/
 theorem module_extensionByZero_outside_stalk (X : Scheme.{u}) (U : X.Opens) :
     let R := X.ringCatSheaf
     let P := SheafOfModules.extensionByZeroPresheaf.{u} R U

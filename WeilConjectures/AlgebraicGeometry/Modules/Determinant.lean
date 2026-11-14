@@ -147,8 +147,7 @@ lemma isInvertible_of_forall_exists_isFreeGenerator
   exact IsInvertible.of_sheafOfModules M
 
 /-- **The determinant of a finite locally free module is invertible.** For a finite locally free
-`𝒪_X`-module `M` of rank `r`, the top exterior power `⋀ʳ M` is invertible: the wedge product of a
-local frame is a free generator (`AlgebraicGeometry.Scheme.Modules.isFreeGenerator_wedge`). -/
+`𝒪_X`-module `M` of rank `r`, the top exterior power `⋀ʳ M` is invertible. -/
 instance isInvertible_exteriorPower (M : X.Modules) {r : ℕ} [M.IsFiniteLocallyFreeOfRank r] :
     (M.exteriorPower r).IsInvertible := by
   refine isInvertible_of_forall_exists_isFreeGenerator fun x ↦ ?_
@@ -287,12 +286,7 @@ lemma exists_transition_adapted (hS : S.ShortExact) {r : ℕ} {U U' W : X.Opens}
 
 /-- **Determinants are multiplicative in short exact sequences.** For a short exact sequence
 `0 → L → E → E' → 0` of `𝒪_X`-modules with `L` invertible (finite locally free of rank one) and
-`E'` finite locally free of rank `r`, `⋀^{r+1} E ≅ L ⊗ ⋀ʳ E'`.
-
-Both sides are invertible, with free generators `l ∧ t₁ ∧ ⋯ ∧ t_r` and `l ⊗ (t̄₁ ∧ ⋯ ∧ t̄_r)` on
-the opens of adapted frames (`AlgebraicGeometry.Scheme.Modules.exists_adapted_frame`), and these
-have the same transition functions
-(`AlgebraicGeometry.Scheme.Modules.exists_transition_adapted`). -/
+`E'` finite locally free of rank `r`, `⋀^{r+1} E ≅ L ⊗ ⋀ʳ E'`. -/
 theorem nonempty_exteriorPower_iso_tensorObj (hS : S.ShortExact) {r : ℕ}
     [S.X₁.IsFiniteLocallyFreeOfRank 1] [S.X₃.IsFiniteLocallyFreeOfRank r] :
     Nonempty (S.X₂.exteriorPower (r + 1) ≅ S.X₁ ⊗ S.X₃.exteriorPower r) := by

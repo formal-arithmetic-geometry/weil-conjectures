@@ -37,9 +37,7 @@ private theorem adjunction_counit_factor
   exact adj.counit.naturality b
 
 /-- A map into a localized sheaf induces a commuting diagram of open counits
-whenever the smaller open maps into the larger one. On the smaller open the larger
-counit is invertible. Transpose the restriction of the map followed by this inverse
-under the smaller-open adjunction. Counit naturality proves the commuting square. -/
+whenever the smaller open maps into the larger one. -/
 theorem openCounit_localization_diagram (R : Type (u + 1)) [Ring R]
     {W T : Scheme.{u}} (i : W ⟶ T) [IsOpenImmersion i]
     (F : Sheaf (ProEt.topology T) (ModuleCat.{u + 1} R)) (Q : T.ProEt)

@@ -24,6 +24,13 @@ public import Mathlib.CategoryTheory.Preadditive.FunctorCategory
 ## References
 
 * Stacks Project, Tag 09A2
+
+## Implementation details
+
+`hypercoverTotal` forms section rows for each coefficient degree, flips the bicomplex so that
+simplicial degree is first, and takes Mathlib's (coproduct) signed total complex. For
+coefficients supported in degrees at least `N`, only `0 ≤ p ≤ r - N` contribute in total
+degree `r`, so every effective diagonal is finite.
 -/
 
 @[expose] public section
@@ -98,13 +105,8 @@ theorem hypercoverSectionRows_additive (X : Scheme.{u})
 
 attribute [instance] hypercoverSectionRows_additive
 
-/-- The total section functor with differential `delta + (-1)^p d`.
-First form section rows for each coefficient degree, then flip the bicomplex so
-simplicial degree is first, and use Mathlib's signed total. Terms of negative
-simplicial degree are zero. For coefficients supported in degrees at least `N`,
-only `0 ≤ p ≤ r - N` can contribute in total degree `r`; thus every effective
-diagonal is finite. This definition also makes sense for unbounded coefficients
-using the coproduct total, without claiming descent in that case. -/
+/-- The total section functor with differential `delta + (-1)^p d`: the signed total
+complex of the section bicomplex, with simplicial degree first. -/
 noncomputable def hypercoverTotal (X : Scheme.{u})
     (R : Sheaf (topology X) CommRingCat.{u + 1}) (W : X.ProEt)
     (U : SimplicialObject (Over W)) :=

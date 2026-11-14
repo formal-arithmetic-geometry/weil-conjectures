@@ -22,6 +22,16 @@ exchange (`constantExchange_reduction`).
 * Stacks 07A7, 0D6D, 0E48
 * Stacks 07A7, 0B56, 099M
 * Stacks 099M, 0E48
+
+## Implementation details
+
+`res_integralExchange` and `constantExchange_reduction` are not yet formalized. For the first,
+both exchanges are mates of the canonical pullback-composition comparisons and `chi` is the mate
+of the inverse of `alpha`, so pasting of mates reduces it to an ordinary identity-component cube
+on K-flat flat-term models (compare `Functor.mapDerivedCategory_cube`). For the second,
+transposing under the constant tower adjunction for `f'` reduces it to the compatibility of
+`reductionPullIso` with the composition of pullbacks around the square, checked on K-flat
+flat-term models.
 -/
 
 @[expose] public noncomputable section
@@ -66,15 +76,7 @@ theorem projection_naturality {U V : Scheme.{t}} (u : U ⟶ V) {M N : D (A := A)
   exact pi0.naturality a
 
 /-- Scalar restriction carries the completed ambient exchange to the constant one,
-conjugated by `alpha` and `chi`.
-Both exchanges are mates of the canonical pullback-composition comparisons
-(`proEtaleCanonicalDerivedPullbackComparison`, transported along the square), `chi` is the
-mate of the inverse of `alpha`, so by pasting of mates this reduces to the compatibility of
-`alpha` with the two pullback-composition comparisons. Those comparisons are exact descents
-of the ordinary composition isomorphisms on K-flat flat-term models, and `alpha` is the
-exact descent of the ordinary restriction/pullback identity, so the remaining equation is
-an ordinary identity-component cube (compare `Functor.mapDerivedCategory_cube`). Not yet
-formalized. -/
+conjugated by `alpha` and `chi`. -/
 theorem res_integralExchange (sq : ChosenCartesianSquare g' f' f g) (K : d.derived X) :
     (res d Y').map ((d.integralExchange sq).app K) ≫
         (chi d f').hom.app ((d.pull g').obj K) ≫
@@ -85,12 +87,7 @@ theorem res_integralExchange (sq : ChosenCartesianSquare g' f' f g) (K : d.deriv
   sorry
 
 /-- The constant strict tower mate realizes the reduction of the constant ambient exchange
-through the reduction/pullback comparisons and the strict projections.
-Transposing under the constant tower adjunction for `f'`, the projections become
-`reductionPullIso` followed by the ambient counits and the constant mate becomes the strict
-pullback square; the equation then reduces to the compatibility of `reductionPullIso` with
-the composition of pullbacks around the square, checked on K-flat flat-term models where
-`reductionPullIso` is the ordinary strict tensor/pullback isomorphism. Not yet formalized. -/
+through the reduction/pullback comparisons and the strict projections. -/
 theorem constantExchange_reduction (sq : ChosenCartesianSquare g' f' f g) (N : D (A := A) X) :
     (reduction d Y').map ((constantExchange (A := A) sq).app N) ≫
         projection d f' ((pull (A := A) g').obj N) ≫

@@ -9,14 +9,19 @@ module
 public import WeilConjectures.AlgebraicGeometry.Morphisms.AffineTorsorEquivariantAlgebra
 public import WeilConjectures.AlgebraicGeometry.Morphisms.AffineTorsorFixedPunctureDescentGeometric
 
+/-! # Orbit models compatible with fixed orbit data
+
+## References
+
+* Stacks Project, Tag 03SF (finite group actions on split covers)
+-/
+
 @[expose] public section
 universe u
 set_option autoImplicit false
 namespace AlgebraicGeometry.Scheme
 
-/-- An orbit model using the representatives of the supplied fixed orbit datum.
-
-Source: Stacks Project, Tag 03SF, finite group actions on split covers. -/
+/-- An orbit model using the representatives of the supplied fixed orbit datum. -/
 theorem equivariant_orbit_model_compatible
     (H C : Type u) [CommRing H] [CommRing C] [Algebra H C]
     (G : Type u) [Group G] (ρ : G → C →ₐ[H] C)

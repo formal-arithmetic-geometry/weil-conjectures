@@ -18,10 +18,10 @@ import WeilConjectures.AlgebraicGeometry.Tensor.TensorPullbackSquare
 /-! Scalar extension respects the open base-change comparison.
 
 All objects are in the constant-ring module coordinates `proEtaleConstantRing T A`
-(`A` lifted to the site's coefficient universe) of prose-03-02.
-The open base-change map is the recorded `StrictTower.singleBeta` of
-proposition-extension-zero-restriction-closed-subscheme--11, at the lifted coefficient ring; its
-constant coefficients, module pullback and open extension are definitionally the ones below.
+(`A` lifted to the site's coefficient universe).
+The open base-change map is the recorded `StrictTower.singleBeta`, at the lifted coefficient
+ring; its constant coefficients, module pullback and open extension are definitionally the ones
+below.
 
 ## References
 
@@ -101,7 +101,7 @@ noncomputable def tensorPullbackIso {A B : Type u} [CommRing A] [CommRing B]
 
 /-- The scalar/open comparison `β_j: S_X j_!^A ≅ j_!^B S_U`, the unique isomorphism of
 left adjoints whose right-adjoint comparison is the identification
-`j_A^{-1} Res_X = Res_U j_B^{-1}` of lem-weil-pbc-ring-sheaf-change-adjunction. -/
+`j_A^{-1} Res_X = Res_U j_B^{-1}`. -/
 noncomputable def openScalarIso {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     openExtension j ⋙ scalarExtension φ X ≅

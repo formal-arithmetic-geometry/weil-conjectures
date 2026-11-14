@@ -127,8 +127,7 @@ lemma constantZModToGmSheaf_comp_nsmul (ζ : Γ(X, ⊤)ˣ) (hζ : ζ ^ n = 1) :
 /-- **The trivialization associated to `ζ`.** For a global unit `ζ` of `X` with `ζ ^ n = 1`,
 the map of étale sheaves `θ_ζ: ℤ/n ⟶ μₙ`, `a ↦ ζ ^ a`. It is an isomorphism when `X` lives over
 a field `k` and `ζ` comes from a primitive `n`-th root of unity of `k`
-(`AlgebraicGeometry.Scheme.isIso_constantZModToRootsOfUnitySheaf`); the isomorphism is
-`AlgebraicGeometry.Scheme.constantZModIsoRootsOfUnitySheaf`. -/
+(`AlgebraicGeometry.Scheme.isIso_constantZModToRootsOfUnitySheaf`). -/
 noncomputable def constantZModToRootsOfUnitySheaf (ζ : Γ(X, ⊤)ˣ) (hζ : ζ ^ n = 1) :
     X.constantZMod n ⟶ X.rootsOfUnitySheaf n :=
   kernel.lift _ (X.constantZModToGmSheaf n ζ hζ) (X.constantZModToGmSheaf_comp_nsmul n ζ hζ)
@@ -137,11 +136,7 @@ variable {k : Type u} [Field k]
 
 /-- **Local surjectivity of `a ↦ ζ ^ a` onto `μₙ`.** Let `X` be a scheme over a field `k`, `ζ₀`
 a primitive `n`-th root of unity of `k` and `ζ` its image on `X`. Every section `x` of `𝔾ₘ` with
-`xⁿ = 1` is, locally on `X_ét`, of the form `ζ ^ a`.
-
-Put `y_r = ∏_{s ≠ r} (x - s)` for the `n`-th roots of unity `r ∈ k`. Then `x = r` on the basic
-open set `D(y_r)`, as `y_r (x - r) = xⁿ - 1 = 0`, and these open sets cover, as the `y_r`
-generate the unit ideal by Lagrange interpolation. -/
+`xⁿ = 1` is, locally on `X_ét`, of the form `ζ ^ a`. -/
 lemma imageSieve_zmodToGmPresheaf_mem [NeZero n] (f : X ⟶ Spec (.of k)) {ζ₀ : k}
     (hζ₀ : IsPrimitiveRoot ζ₀ n) (ζ : Γ(X, ⊤)ˣ) (hζ : ζ ^ n = 1)
     (h : (ζ : Γ(X, ⊤)) = ((ΓSpecIso (.of k)).inv ≫ f.appTop) ζ₀) {U : X.Etale}
@@ -201,8 +196,8 @@ lemma imageSieve_zmodToGmPresheaf_mem [NeZero n] (f : X ⟶ Spec (.of k)) {ζ₀
     exact hpr
 
 /-- **Local injectivity of `a ↦ ζ ^ a`.** If `ζ` comes from a primitive `n`-th root of unity
-`ζ₀` of a field `k` over which `X` lives, then `ζ ^ a = ζ ^ b` on a nonempty `U` forces `a = b`,
-since `ζ₀ ^ a - ζ₀ ^ b` is then a unit of `k` vanishing on `U`. -/
+`ζ₀` of a field `k` over which `X` lives, then `ζ ^ a = ζ ^ b` on a nonempty `U` forces
+`a = b`. -/
 lemma isLocallyInjective_zmodToGmPresheaf [NeZero n] (f : X ⟶ Spec (.of k)) {ζ₀ : k}
     (hζ₀ : IsPrimitiveRoot ζ₀ n) (ζ : Γ(X, ⊤)ˣ) (hζ : ζ ^ n = 1)
     (h : (ζ : Γ(X, ⊤)) = ((ΓSpecIso (.of k)).inv ≫ f.appTop) ζ₀) :
@@ -236,8 +231,8 @@ lemma isLocallyInjective_zmodToGmPresheaf [NeZero n] (f : X ⟶ Spec (.of k)) {�
     rintro _ _ ⟨_, _, _, ⟨i⟩, -⟩
     exact i.elim
 
-/-- The forgetful functor from abelian groups to sets preserves sheaves on the small étale site:
-it preserves the limits that the sheaf condition involves. -/
+/-- The forgetful functor from abelian groups to sets preserves sheaves on the small étale
+site. -/
 instance : X.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget AddCommGrpCat.{u + 1}) :=
   have : PreservesLimitsOfSize.{u, u + 1} (CategoryTheory.forget AddCommGrpCat.{u + 1}) :=
     preservesLimitsOfSize_shrink.{u + 1, u + 1, u, u + 1} _
@@ -253,9 +248,7 @@ lemma injective_kernelι_app (U : X.Etaleᵒᵖ) :
 
 /-- **`θ_ζ` is an isomorphism.** Let `X` be a scheme over a field `k`, `ζ₀ ∈ k` a primitive
 `n`-th root of unity and `ζ` its image on `X`. Then `θ_ζ: ℤ/n ⟶ μₙ`, `a ↦ ζ ^ a`, is an
-isomorphism of étale sheaves: it is locally injective
-(`AlgebraicGeometry.Scheme.isLocallyInjective_zmodToGmPresheaf`) and locally surjective
-(`AlgebraicGeometry.Scheme.imageSieve_zmodToGmPresheaf_mem`). -/
+isomorphism of étale sheaves. -/
 theorem isIso_constantZModToRootsOfUnitySheaf [NeZero n] (f : X ⟶ Spec (.of k)) {ζ₀ : k}
     (hζ₀ : IsPrimitiveRoot ζ₀ n) (ζ : Γ(X, ⊤)ˣ) (hζ : ζ ^ n = 1)
     (h : (ζ : Γ(X, ⊤)) = ((ΓSpecIso (.of k)).inv ≫ f.appTop) ζ₀) :

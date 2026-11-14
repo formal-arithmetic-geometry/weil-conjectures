@@ -409,7 +409,7 @@ noncomputable def purTwistIntegralModule :
     (purTwistIntegralOne S l E).val.presheaf
     (purTwistIntegralAction_restriction S l E), (purTwistIntegralOne S l E).isSheaf⟩
 
-/-- The finite Tate line, exactly the ordinary constant-coefficient tensor in the node. -/
+/-- The finite Tate line, the ordinary constant-coefficient tensor reduction at level `n`. -/
 noncomputable def purTwistFiniteOne (n : ℕ) :
     SheafOfModules.{u + 1} (WeilConjectures.integralCoefficientSheaf l E S n) :=
   SheafOfModules.changeOfRingsOfUniverses.{u, u + 1, u + 1, u + 1}

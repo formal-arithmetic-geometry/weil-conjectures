@@ -8,12 +8,20 @@ module
 public import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionMatchingSections
 public import WeilConjectures.RingTheory.FormalGlueingH0
 import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionAffineChartRealization
+
+/-! # Formal glueing data from finite affine charts
+
+## References
+
+* Stacks Project, Tag 0BLH, first two proof paragraphs
+* Stacks Project, Tag 05EL (the module `H⁰`)
+-/
+
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.CompletionGluingData
-/-- Finite affine chart sections give local matching families for formal glueing data.
-Source: Stacks Project, Tag 0BLH, first two proof paragraphs; Tag 05EL, H0 -/
+/-- Finite affine chart sections give local matching families for formal glueing data. -/
 theorem exists_formalGlueingData_prime
     {A : Type u} [CommRing A] [IsLocalRing A]
     {U : (Spec (.of A)).Opens}

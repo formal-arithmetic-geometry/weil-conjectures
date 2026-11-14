@@ -8,6 +8,14 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
 
+/-!
+# The first exterior power of a sheaf of modules
+
+## References
+
+* [Stacks: Tag 0BRT](https://stacks.math.columbia.edu/tag/0BRT)
+-/
+
 @[expose] public section
 
 universe u
@@ -17,9 +25,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme.Modules
 
 -- Naturality elaborates restrictions across the scheme and ring-sheaf module interfaces.
-/-- The first exterior sheaf is canonically isomorphic to the original sheaf.
-Source: Stacks Project, Tag 0BRT, degree-one specialization.
--/
+/-- The first exterior power `⋀¹ M` of a sheaf of modules `M` is isomorphic to `M`. -/
 theorem exteriorSheaf_one_iso {X : Scheme.{u}} (M : X.Modules) :
     Nonempty (exteriorPower M 1 ≅ M) := by
   let e : (_root_.PresheafOfModules.exteriorPower (R := _) M.val 1) ≅ M.val :=

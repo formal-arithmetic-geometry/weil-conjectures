@@ -38,10 +38,7 @@ namespace AlgebraicGeometry
 /-- **The homogeneous coordinate model**: an integral closed subscheme `X` of `ℙ(n; Spec k)`
 is, over `k`, isomorphic to `Proj S` for a standard graded `k`-algebra `S` which is a domain,
 and `i` is the closed immersion `Proj S ⟶ ℙ(n; Spec k)` given by linear forms `l_j ∈ S₁`
-(`AlgebraicGeometry.Proj.linearProjection`) which generate `S`. Thus
-`k[x_j]_{j ∈ n} ⟶ S`, `x_j ↦ l_j`, is a surjection of graded `k`-algebras, `S ≅ k[x_j] / I` for
-its kernel `I`, a homogeneous prime ideal since `S` is a domain, and `i` identifies `X` with
-`Proj (k[x_j] / I)`. -/
+(`AlgebraicGeometry.Proj.linearProjection`) which generate `S`. -/
 theorem exists_isStandard_iso_proj {k : Type u} [Field k] {n : Type u} [Finite n]
     (X : Scheme.{u}) [X.Over (Spec (.of k))] [IsIntegral X] (i : X ⟶ ℙ(n; Spec (.of k)))
     [IsClosedImmersion i] [i.IsOver (Spec (.of k))] :

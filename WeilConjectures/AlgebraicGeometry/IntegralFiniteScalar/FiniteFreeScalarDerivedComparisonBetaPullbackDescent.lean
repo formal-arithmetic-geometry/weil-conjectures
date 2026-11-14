@@ -34,13 +34,8 @@ private theorem app_eq_of_iso {C D : Type*} [Category* C] [Category* D]
   apply (cancel_epi (F.map i.hom)).1
   rw [α.naturality, ρ.naturality, h]
 
-/--
-Equality of the two displayed morphisms is determined by K-flat
-representatives. Given the representative equation, choose a K-flat model of an
-arbitrary derived object and use naturality of beta, the scalar restriction square,
-and the tensor pullback comparison to transport the equality across the model
-isomorphism.
--/
+/-- If the two displayed morphisms agree on all K-flat representatives, then they agree on
+every derived object. -/
 theorem finiteFreeScalarDerivedComparison_beta_pullback_of_kflat
     (D : ScalarSixPullbackData.{u}) {Λ Λ' : ScalarSixRing.{u}}
     (a : Λ ⟶ Λ') (S : ShortComplex (PointModules Λ))

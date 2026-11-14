@@ -38,9 +38,7 @@ variable {C : Type u} [Category.{v} C] [Abelian C]
 
 /-- **Uniqueness of K-injective resolutions.** If `s : K ⟶ I` and `t : K ⟶ J` are two
 K-injective resolutions of the same cochain complex `K`, there is a homotopy equivalence
-`e : I ≃ J` with `s ≫ e` homotopic to `t`: the isomorphism `Q(I) ≅ Q(K) ≅ Q(J)` of the derived
-category lifts to the homotopy category, since `Qh` is bijective on morphisms with K-injective
-target. -/
+`e : I ≃ J` with `s ≫ e` homotopic to `t`. -/
 theorem exists_homotopyEquiv {K I J : CochainComplex C ℤ} (s : K ⟶ I) (t : K ⟶ J)
     [QuasiIso s] [QuasiIso t] [I.IsKInjective] [J.IsKInjective] :
     ∃ e : HomotopyEquiv I J, Nonempty (Homotopy (s ≫ e.hom) t) := by
@@ -73,16 +71,13 @@ namespace AlgebraicGeometry.Scheme
 
 open CochainComplex
 
-/-- **existence of K-injective
-resolutions.** Let `T` be a scheme and `R` a commutative ring. In the category of complexes of
-sheaves of `R`-modules on the small étale site of `T`:
+/-- **Existence of K-injective resolutions.** Let `T` be a scheme and `R` a commutative ring.
+In the category of complexes of sheaves of `R`-modules on the small étale site of `T`:
 1. every complex `K` admits a K-injective resolution `K ⟶ I K`, functorially in `K`
    (`CochainComplex.kInjectiveResolutionFunctor`, `CochainComplex.toKInjectiveResolution`);
 2. two K-injective resolutions `s: K ⟶ I`, `t: K ⟶ J` of the same complex are homotopy
    equivalent, by a homotopy equivalence `e` with `s ≫ e` homotopic to `t`;
-3. a bounded below complex of injective objects is K-injective.
-The category of étale sheaves of modules is Grothendieck abelian, so the first statement is
-`CategoryTheory.Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian`. -/
+3. a bounded below complex of injective objects is K-injective. -/
 theorem kInjectiveResolutions_smallEtale (T : Scheme.{u}) (R : Type (u + 1)) [CommRing R] :
     (∀ K : CochainComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} R)) ℤ,
       ((kInjectiveResolutionFunctor.{u + 1} _).obj K).IsKInjective ∧

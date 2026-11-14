@@ -16,16 +16,23 @@ import WeilConjectures.AlgebraicGeometry.QuasiFiniteOverPolynomialAlgebra
 import WeilConjectures.AlgebraicGeometry.QuasiFinitePolynomialChart.CoordinateFibreDimension
 import WeilConjectures.AlgebraicGeometry.QuasiFinitePolynomialChart.LocalizedChart
 
+/-!
+# Quasi-finite polynomial charts
+
+The polynomial chart produced by the affine quasi-finite theorem.
+
+## References
+
+* Stacks Project, Tag 00QE and its affine translation in Tag 00RH
+-/
+
 @[expose] public section
 
 universe u
 open CategoryTheory
 namespace AlgebraicGeometry
 
-/- The polynomial chart produced by the affine quasi-finite theorem. -/
-/-- A prescribed natural fibre dimension yields a quasi-finite polynomial chart.
-
-Source: Stacks Project Tag 00QE and its affine translation in Tag 00RH. -/
+/-- A prescribed natural fibre dimension yields a quasi-finite polynomial chart. -/
 theorem exists_quasiFinite_polynomial_chart_data
     {X T : Scheme.{u}} [IsAffine X] [IsAffine T]
     (f : X ⟶ T) [LocallyOfFinitePresentation f] (y : X) (n : ℕ)

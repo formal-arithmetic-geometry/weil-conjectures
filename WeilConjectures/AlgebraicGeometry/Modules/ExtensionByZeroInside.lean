@@ -12,6 +12,14 @@ public import Mathlib.Algebra.Category.ModuleCat.Stalk
 import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 import WeilConjectures.Algebra.Homology.ModuleExtensionByZeroUnitIsIso
 
+/-!
+# Stalks of the extension by zero at points of the open
+
+## References
+
+* [Stacks: Tag 00A7](https://stacks.math.columbia.edu/tag/00A7)
+-/
+
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
@@ -19,13 +27,9 @@ noncomputable section
 namespace AlgebraicGeometry.Scheme.Modules
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The unit identifies inside-U stalks, linearly and naturally.
-Source: Stacks Project, Sheaves, Lemma 00A7 (3).
-
-Neighbourhoods contained in the open are cofinal at a point of the open, so the
-stalk of the extension is the input stalk.  The unit and restriction stalk
-isomorphism therefore give an isomorphism; the construction is semilinear and
-natural in the input sheaf. -/
+/-- For a point `x` of the open `U`, the unit of the extension-by-zero adjunction induces an
+isomorphism from the stalk of a sheaf `F` on `U` at `x` to the stalk of its extension by zero,
+linear over the stalk of the structure sheaf and natural in `F`. -/
 theorem module_extensionByZero_inside_stalk (X : Scheme.{u}) (U : X.Opens) :
     let R := X.ringCatSheaf
     let P := SheafOfModules.extensionByZeroPresheaf.{u} R U

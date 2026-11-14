@@ -9,14 +9,21 @@ module
 public import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionChartSectionModules
 import Mathlib.Algebra.Module.LocalizedModule.IsLocalization
 
+/-! # Localization of affine chart sections
+
+## References
+
+* Stacks Project, Tag 0BLH, first two proof paragraphs
+* Stacks Project, Tag 05EL, item (1)
+-/
+
 @[expose] public section
 
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.CompletionGluingData
 
-/-- Localization of one affine chart identifies its sections with overlap sections.
-Source: Stacks Project, Tag 0BLH, first two proof paragraphs; Tag 05EL, item (1). -/
+/-- Localization of one affine chart identifies its sections with overlap sections. -/
 theorem exists_chart_section_localization
     {A : Type u} [CommRing A] {Y : Scheme.{u}} (h : Y ⟶ Spec (.of A))
     (a g : A) (hV : IsAffineOpen (h ⁻¹ᵁ PrimeSpectrum.basicOpen g))

@@ -156,8 +156,7 @@ instance : HasPullbacks (AffineProEt S) := by
   · exact inferInstanceAs ((proAffineEtale.overObj (X := S)).IsClosedUnderLimitsOfShape _)
 
 set_option backward.defeqAttrib.useBackward true in
-/-- The affine pro-étale site embeds densely in the pro-étale site. The key ingredient
-of the proof is the commutative algebra lemma `RingHom.WeaklyEtale.exists_indEtale_comp`. -/
+/-- The affine pro-étale site embeds densely in the pro-étale site. -/
 instance isCoverDense_toProEt : (toProEt S).IsCoverDense (ProEt.topology S) := by
   wlog hS : ∃ R, S = Spec R generalizing S
   · let X (i : S.affineCover.I₀) : S.AffineProEt := .ofEtale (S.affineCover.f i)

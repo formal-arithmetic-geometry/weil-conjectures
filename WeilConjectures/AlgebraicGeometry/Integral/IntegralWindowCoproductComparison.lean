@@ -20,8 +20,11 @@ import Mathlib.CategoryTheory.Limits.Preserves.Limits
 import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 
-/-! Integral compactness: an intermediate argument from blueprint main-20261015,
-sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-compact.proof.md. -/
+/-! # Truncations and coproducts for integral compactness
+
+Auxiliary results for integral compactness: constant-model constructibility is invariant under
+isomorphism, and canonical truncations of a derived category preserve coproducts when the
+homology functors do. -/
 
 @[expose] public noncomputable section
 

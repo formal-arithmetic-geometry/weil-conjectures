@@ -17,6 +17,11 @@ Let `U ⊆ 𝔸¹` be a nonempty open over a finite field `k₀`. There is a mor
 is finite and étale over an open `W ∋ ∞` of `ℙ¹` with finite complement
 (`AlgebraicGeometry.exists_toProjectiveLine_isFinite_etale_near_infinity`): it is
 `x ↦ [1 : P(x)]` for a monic irreducible polynomial `P` whose zeros lie in `U`.
+
+## Implementation details
+
+This replaces a homography `τ` with `τ(s) = ∞` for a rational point `s`, and needs no constant
+field extension: a closed point of `U` is sent to `∞` by a finite map which is étale near `∞`.
 -/
 
 @[expose] public section
@@ -33,16 +38,7 @@ open of the affine line over a finite field `k`, given by an open immersion
 `j: U ⟶ 𝔸¹_k` over `k`. There are a morphism `H: U ⟶ ℙ¹_k` over `k` which is separated,
 locally quasi-finite, locally of finite type and quasi-compact, and an open `W` of `ℙ¹_k`
 containing `∞` (that is, `W` and the affine chart cover `ℙ¹_k`) with finite complement such that
-`H` is finite and étale over `W`.
-
-One takes `H = x ↦ [1: P(x)]`, where `P` is a monic irreducible polynomial whose zeros lie in
-`U`, so that `H` sends these closed points of `U` to `∞`
-(`AlgebraicGeometry.affineLine.exists_isFinite_polynomialMap_etale`).
-
-This replaces the homography `τ` with `τ(s) = ∞` of the proof of
-`lemma-finite-extension-base-field-moving`, and needs no constant field extension: instead of a
-rational point `s` sent isomorphically to `∞`, a closed point of `U` is sent to `∞` by a finite map
-which is étale near `∞`. -/
+`H` is finite and étale over `W`. -/
 theorem exists_toProjectiveLine_isFinite_etale_near_infinity {k : Type u} [Field k] [Finite k]
     {U : Scheme.{u}} [U.Over (Spec (.of k))] [Nonempty U] (j : U ⟶ affineLine k)
     [IsOpenImmersion j] [j.IsOver (Spec (.of k))] :

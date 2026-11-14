@@ -29,10 +29,7 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ' T)]
 
 /-- The normalized ordinary section square is obtained by conjugating the
-internal pullback scalar square through the two chosen ordinary section models.
-The proof is the ordinary-generator calculation: the endpoint normalization
-identities turn the conjugated map into the balanced section map, and naturality
-of `pullComparison` supplies the displayed equation. -/
+internal pullback scalar square through the two chosen ordinary section models. -/
 theorem section_pull_transport_kflat_ordinary {X Y : Scheme.{u}} (f : X ⟶ Y)
     (cX : ScalarSectionData a X) (cY : ScalarSectionData a Y)
     (hcX : ScalarSectionNormalized a X cX) (hcY : ScalarSectionNormalized a Y cY) :

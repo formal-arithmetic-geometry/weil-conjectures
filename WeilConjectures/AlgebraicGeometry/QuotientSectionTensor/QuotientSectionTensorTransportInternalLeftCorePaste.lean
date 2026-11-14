@@ -77,10 +77,8 @@ set_option linter.unusedVariables false in
 set_option maxHeartbeats 900000 in
 -- Elaborating the derived comparison components requires the cached module structures.
 /--
-The algebraic paste after the three normalization equations have been supplied.
-The proof is the categorical reassociation and cancellation in the proof of the
-internal-left transport lemma; the three displayed equations are its independent
-inputs.
+The algebraic paste for internal-left scalar tensor transport, given the three normalization
+equations as hypotheses.
 -/
  theorem section_tensor_transport_internal_left_paste (T : Scheme.{u})
     (c : ScalarSectionData a T) (hc : ScalarSectionNormalized a T c)

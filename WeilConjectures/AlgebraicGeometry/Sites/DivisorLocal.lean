@@ -324,10 +324,7 @@ omit [IsLocallyNoetherian X] in
 /-- **Local algebraic Hartogs at a point.** Let `X` be an integral regular locally noetherian
 scheme, `V` an étale `X`-scheme and `f` a unit on the generic fibre of `V` whose order vanishes
 at every generalisation of `y`. Then `f` maps to a unit of `𝒪_{V,y}` in the local generic ring
-at `y`. Write the image of `f` as a reduced fraction `a / b` in the fraction field of the unique
-factorisation domain `𝒪_{V,y}`; a prime factor `p` of `a` or `b` defines a generalisation `w` of
-`y` of codimension one at which `f` has order zero, so `a` and `b` have the same image in the
-residue field of `𝒪_{V,w}`, and `p` divides both. -/
+at `y`. -/
 lemma exists_toLocalGenericRing_eq_of_ord_eq_zero (V : X.Etale) (y : V.left)
     (f : Γ(pullback V.hom X.fromSpecFunctionField, ⊤)ˣ) (hf : ∀ w, w ⤳ y → ord V w f = 0) :
     ∃ r : (V.left.presheaf.stalk y)ˣ,
@@ -402,12 +399,7 @@ lemma _root_.AlgebraicGeometry.Scheme.genericPoint_mem_basicOpen {S : Scheme.{u}
 
 /-- **Local finiteness of divisors.** Let `X` be an integral regular locally noetherian scheme,
 `V` an étale `X`-scheme and `f` a unit on the generic fibre of `V`. Near every point `y` of `V`,
-`f` has nonzero order at only finitely many points. Write the image of `f` in the fraction field
-of `𝒪_{V,y}` as a quotient `a / b`; on an affine irreducible neighbourhood `U` of `y` on which
-`a` and `b` are defined, `f b = a` on the generic fibre
-(`AlgebraicGeometry.Scheme.Etale.injective_toLocalGenericRing`), so the points of `U` at which `f`
-has nonzero order are points of codimension one of the proper closed subset where `a` or `b`
-vanishes, which are generic points of its finitely many irreducible components. -/
+`f` has nonzero order at only finitely many points. -/
 lemma exists_opens_finite_ord_ne_zero (V : X.Etale) (y : V.left)
     (f : Γ(pullback V.hom X.fromSpecFunctionField, ⊤)ˣ) :
     ∃ U : V.left.Opens, y ∈ U ∧ {y' | y' ∈ U ∧ ord V y' f ≠ 0}.Finite := by
@@ -706,13 +698,7 @@ lemma finite_setOf_hom_eq (V : X.Etale) (U : V.left.Opens) (hU : IsAffineOpen U)
 /-- **Weil divisors supported over a codimension one point are locally principal.** Let `X` be an
 integral regular locally noetherian scheme, `x` a point of `X` of codimension one, `V` an étale
 `X`-scheme and `e` an integer-valued function on the points of `V` vanishing outside the fibre
-over `x`. Near every point `y` of `V` there is a unit on the generic fibre whose order is `e`.
-
-Near `y`, the points over `x` generalise `y` and are finitely many
-(`AlgebraicGeometry.Scheme.Etale.exists_opens_specializes_of_hom_eq`,
-`AlgebraicGeometry.Scheme.Etale.finite_setOf_hom_eq`); each of them is defined by a prime
-element `ρ_w` of the unique factorisation domain `𝒪_{V,y}`, which near `y` vanishes only at the
-specialisations of `w` and is a uniformiser at `w`. The product `∏_w ρ_w ^ e(w)` works. -/
+over `x`. Near every point `y` of `V` there is a unit on the generic fibre whose order is `e`. -/
 lemma exists_ord_eq_of_forall_ne (V : X.Etale) (y : V.left) {x : X} (hx : coheight x = 1)
     (e : V.left → ℤ) (he : ∀ z, V.hom z ≠ x → e z = 0) :
     ∃ (U : V.left.Opens) (_ : y ∈ U)

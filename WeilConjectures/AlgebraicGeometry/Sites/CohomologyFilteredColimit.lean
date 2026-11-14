@@ -331,10 +331,7 @@ lemma comp_cokernel_π_eq_zero {A B F : Sheaf X.smallEtaleTopology AddCommGrpCat
 quasi-separated, and let `m i : A i ⟶ F` be a directed family of subsheaves of an abelian étale
 sheaf `F`, indexed by a type of arbitrary size, such that every section of `F` is locally a
 section of some `A i`. Then every class in `Hᵠ(X, F)` comes from some `A i`, and a class on
-`A i` which vanishes on `F` vanishes on some larger `A i'`.
-
-The subsheaves are reindexed by their (`u + 1`-small) families of sections, so that this
-follows from `AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered_small`. -/
+`A i` which vanishes on `F` vanishes on some larger `A i'`. -/
 theorem H_map_of_directed_of_locally (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
     {F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} {ι : Type*} [Nonempty ι]
     {A : ι → Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} (m : ∀ i, A i ⟶ F)
@@ -442,15 +439,8 @@ lemma H_map_zero_apply {A B : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} 
   rw [Sheaf.H.map_apply, Abelian.Ext.mk₀_zero, Abelian.Ext.comp_zero]
 
 /-- **Étale cohomology commutes with filtered colimits on a qcqs scheme**, for filtered
-categories of arbitrary size.
-
-The images `I j` of the legs `D j ⟶ c.pt` form a directed family of subsheaves of `c.pt` whose
-sections locally exhaust those of `c.pt`, and the kernels of the transition maps `D j ⟶ D j'`
-form a directed family of subsheaves of the kernel `K j` of `D j ⟶ c.pt` whose sections locally
-exhaust those of `K j`; both facts are checked on stalks at geometric points, the stalk
-functors commuting with colimits. By `AlgebraicGeometry.Scheme.H_map_of_directed_of_locally`
-cohomology commutes with both directed unions, and we conclude by a diagram chase in the long
-exact sequences of `0 → K j → D j → I j → 0`. -/
+categories of arbitrary size: every class on `c.pt` comes from some `D j`, and a class on `D j`
+which dies on `c.pt` already dies on some `D j'`, `j ⟶ j'`. -/
 theorem H_map_isColimit_of_isFiltered_of_large (X : Scheme.{u}) [CompactSpace X]
     [QuasiSeparatedSpace X] {J : Type w₁} [Category.{w₂} J] [IsFiltered J]
     {D : J ⥤ Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} {c : Cocone D}
@@ -585,11 +575,7 @@ quasi-compact and quasi-separated and let `c` be a colimit cocone of a filtered 
 abelian étale sheaves on `X`. Then for every `q` the canonical map
 `colim_λ Hᵠ(X, D_λ) ⟶ Hᵠ(X, colim_λ D_λ)` is bijective; this is spelled out elementwise:
 every class on the colimit comes from some `D_λ`, and a class on `D_λ` which dies on the colimit
-already dies on some `D_μ`, `λ ⟶ μ`. The compatibility with the pullback along a field
-extension is the naturality `AlgebraicGeometry.Etale.cohomologyMap_map` of the pullback maps.
-The statement holds for arbitrary (not only torsion) abelian sheaves and small filtered
-categories.
--/
+already dies on some `D_μ`, `λ ⟶ μ`. -/
 @[stacks 03Q6]
 theorem Scheme.H_map_isColimit_of_isFiltered (X : Scheme.{u}) [CompactSpace X]
     [QuasiSeparatedSpace X] {J : Type w} [Category.{w'} J] [IsFiltered J]

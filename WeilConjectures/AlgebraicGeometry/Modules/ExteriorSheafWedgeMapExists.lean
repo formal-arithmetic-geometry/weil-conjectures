@@ -117,16 +117,8 @@ private theorem wedge_bilinear_naturality {X : Scheme.{v}} {A B : X.Modules}
 
 -- Comparing the scheme and ring-sheaf scalar structures requires additional elaboration.
 set_option backward.isDefEq.respectTransparency false in
-/-- Wedge the image of the first tuple with the second tuple, without choosing quotient lifts.
-For each open, the concatenated wedge is alternating and multilinear separately in the two
-blocks. Linearize each block through the exterior-power universal property and then through
-the tensor-product universal property. These maps commute with restriction: on generating
-wedges this follows from naturality of `f` and the exterior-power restrictions. First compose
-with the target's sheafification unit. Extend to the sheafifications of both source factors
-using local representatives; equality on overlaps follows from separatedness of the target.
-The tensor sheaf universal property gives the asserted sheaf morphism. Its pure-wedge formula
-follows from the defining sectionwise maps. This construction works for arbitrary `f`; it uses
-neither exactness nor a rank bound. Empty blocks give multiplication by the degree-zero scalar. -/
+/-- For `f : A ⟶ B` and `t = r + s`, there is a morphism `⋀ʳ A ⊗ ⋀ˢ B ⟶ ⋀ᵗ B` sending
+`(a₁ ∧ ⋯ ∧ a_r) ⊗ (c₁ ∧ ⋯ ∧ c_s)` to `f(a₁) ∧ ⋯ ∧ f(a_r) ∧ c₁ ∧ ⋯ ∧ c_s` on sections. -/
 theorem exteriorSheaf_wedgeMap_exists {X : Scheme.{v}} {A B : X.Modules}
     (f : A ⟶ B) (r s t : ℕ) (ht : t = r + s) :
     ∃ ψ : exteriorPower A r ⊗ exteriorPower B s ⟶ exteriorPower B t,

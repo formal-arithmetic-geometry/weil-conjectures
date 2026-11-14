@@ -25,9 +25,9 @@ universe v
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- The ordinary coefficient comparison for an arrow over a base.
-Construction: compare tensor and ordinary pullback, compose ordinary pullbacks,
-use the first projection identity, and undo the two tensor comparisons. -/
+/-- The ordinary coefficient comparison for an arrow `u` over a base: the pullback along the
+base change of `u` of the tensor pullback of `L` to `X ×_S W` is the tensor pullback to
+`X' ×_S W` of the tensor pullback of `L` along `u`. -/
 noncomputable def picardResidueCoefficientIso
     {X X' S : Scheme.{v}} (f : X ⟶ S) (f' : X' ⟶ S)
     (u : X' ⟶ X) (hu : u ≫ f = f') (L : X.Modules)
@@ -50,9 +50,7 @@ noncomputable def picardResidueCoefficientIso
     (Modules.pullback (pullback.fst f' k)).mapIso ((t _ _ u).app L).symm ≪≫
     ((t _ _ (pullback.fst f' k)).app ((Modules.tensorPullback u).obj L)).symm
 
-/-- The ordinary-pullback form of a tensor coefficient triangle.
-Construction: convert the tensor pullback on the source to ordinary pullback,
-compose ordinary pullbacks, transport the arrow equality, then convert back. -/
+/-- The ordinary-pullback form of a tensor coefficient triangle. -/
 noncomputable def picardOrdinaryCoefficientTriangle
     {A B X : Scheme.{v}} (q : A ⟶ X) (q' : B ⟶ X) (b : B ⟶ A)
     (hb : b ≫ q = q') (L : X.Modules) :
@@ -66,9 +64,9 @@ noncomputable def picardOrdinaryCoefficientTriangle
     (Modules.pullbackComp b q).app L ≪≫ (Modules.pullbackCongr hb).app L ≪≫
     ((t _ _ q').app L).symm
 
-/-- The coefficient part of the explicit residue normalization.
-Construction: compose the canonical single-pullback map with the single image
-of the coefficient triangle isomorphism followed by the given trivialization. -/
+/-- The coefficient part of the explicit residue normalization: the canonical single-pullback
+map followed by the single image of the coefficient triangle isomorphism composed with the
+given trivialization. -/
 noncomputable def picardResidueNormalizationCoefficient
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]
@@ -99,11 +97,9 @@ noncomputable def picardResidueNormalizationCoefficient
       ((Modules.tensorPullback (pullback.fst f k)).obj L) ≫
     (DerivedCategory.singleFunctor _ 0).map c.hom
 
-/-- The explicit normalization morphism, without an invertibility assertion.
-Construction: use the identified fibre as the apex of the base-change square.
-Compose its base-change mate, the canonical single map, the tensor coefficient
-comparison for the first projection, and the single image of the trivialization.
-No existence theorem is used to choose data. -/
+/-- The explicit residue normalization morphism: the composite of the base-change mate of the
+square with the identified fibre as apex, the canonical single map, the tensor coefficient
+comparison for the first projection, and the single image of the trivialization. -/
 noncomputable def picardResidueNormalizationMap
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

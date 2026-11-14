@@ -19,12 +19,13 @@ import WeilConjectures.RingTheory.RegularRingNormal
 import WeilConjectures.RingTheory.FiniteProductNormal
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 
-/-! Normality of full root algebras along a regular divisor.
+/-! # Normality of full root algebras along a regular divisor
 
 ## References
 
 * Stacks Project, Tag 0EYH, local ring verification in its proof
-* Tag 0EYG, the full root algebra in the strictly henselian calculation
+* Stacks Project, Tag 0EYG, the full root algebra in the strictly henselian calculation
+* Stacks Project, Tag 07PF (Jacobian criterion)
 -/
 
 @[expose] public section
@@ -33,8 +34,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- The local Jacobian argument of Stacks Tag 07PF: a unit derivative prevents
-an equation from lying in the square of the maximal ideal. -/
+/-- If `R` is regular and the derivative of `P` is not in the prime `q` of `R[X] / (P)`, then
+the localization at `q` is a regular local ring. -/
 private theorem regular_root_localization_of_derivative_not_mem
     (R : Type u) [CommRing R] [IsRegularRing R] (P : Polynomial R)
     (q : Ideal (Polynomial R ⧸ Ideal.span {P})) [q.IsPrime]

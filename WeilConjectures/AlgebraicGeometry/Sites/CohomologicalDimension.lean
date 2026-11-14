@@ -19,14 +19,13 @@ abelian sheaf `F` on `X_ét` and every `q > 2d + c`
 take `c = 0` (`AlgebraicGeometry.Scheme.subsingleton_H_of_isSepClosed`), so that `H^q(X_ét, F) = 0`
 for `q > 2d` (`AlgebraicGeometry.Scheme.subsingleton_H_of_two_mul_lt_of_isSepClosed`).
 
-This is the cohomological-dimension bound of the blueprint statement `sk-prop-sf-finiteness`;
-it is the node `lemma-uniform-bounds-pro-etale-affines` of the blueprint subsection
-`sk-prop-sf-cbc`. The proof follows the blueprint: the Leray spectral sequence
-`Hᵖ(X_Zar, Rᵠε_* F) ⟹ Hᵖ⁺ᵠ(X_ét, F)` for the comparison `ε_*` of the étale with the Zariski site has
-`Hᵖ = 0` for `p > d` by Grothendieck vanishing, and `Rᵠε_* F = 0` for `q > d + c` since `Rᵠε_* F` is
-the sheafification of `V ↦ Hᵠ(V_ét, F|_V)`, which vanishes on affine opens `V` by the affine bound
-`AlgebraicGeometry.Scheme.hasTorsionCohomologicalDimensionLE_of_isAffine`
-; see
+## Implementation details
+
+The Leray spectral sequence `Hᵖ(X_Zar, Rᵠε_* F) ⟹ Hᵖ⁺ᵠ(X_ét, F)` for the comparison `ε_*` of the
+étale with the Zariski site has `Hᵖ = 0` for `p > d` by Grothendieck vanishing, and
+`Rᵠε_* F = 0` for `q > d + c` since `Rᵠε_* F` is the sheafification of `V ↦ Hᵠ(V_ét, F|_V)`,
+which vanishes on affine opens `V` by the affine bound
+`AlgebraicGeometry.Scheme.hasTorsionCohomologicalDimensionLE_of_isAffine`; see
 `WeilConjectures.AlgebraicGeometry.Sites.EtaleZariskiComparison`.
 -/
 
@@ -38,19 +37,9 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Torsion cohomological dimension of a
-finite-type scheme.
-
-Let `K` be a field with `cd_tor(K) ≤ c` and let `X` be a finite-type `K`-scheme of dimension at
-most `d`. Then `cd_tor(X) ≤ 2d + c`: `H^q(X_ét, F) = 0` for every torsion abelian étale sheaf `F`
-on `X` and every `q > 2d + c`. This is the cohomological-dimension bound of the blueprint
-statement `sk-prop-sf-finiteness`; it is a node of the blueprint subsection `sk-prop-sf-cbc`.
-
-The Leray spectral sequence for the comparison `ε_*` of the étale with the Zariski site
-(`AlgebraicGeometry.Scheme.subsingleton_H_of_isZero_rightDerived_etaleToZariski`) reduces the
-bound to Grothendieck vanishing on `X_Zar` and to `Rᵠε_* F = 0` for `q > d + c`; the latter holds
-since `Hᵠ(V_ét, F|_V) = 0` for `q > d + c` on every affine open `V` of `X` by the affine bound
-`AlgebraicGeometry.Scheme.hasTorsionCohomologicalDimensionLE_of_isAffine` -/
+/-- Torsion cohomological dimension of a finite-type scheme: if `cd_tor(K) ≤ c` and `X` is a
+finite-type `K`-scheme of dimension at most `d`, then `cd_tor(X) ≤ 2d + c`, i.e.
+`H^q(X_ét, F) = 0` for every torsion abelian étale sheaf `F` on `X` and every `q > 2d + c`. -/
 theorem subsingleton_H_of_two_mul_add_lt {K : Type u} [Field K] (c d : ℕ)
     (hK : ∀ F : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1}, F.IsTorsion →
       ∀ q : ℕ, c < q → Subsingleton (Sheaf.H F q))
@@ -69,16 +58,9 @@ theorem subsingleton_H_of_two_mul_add_lt {K : Type u} [Field K] (c d : ℕ)
     ((topologicalKrullDim_subspace_le X U).trans hX) _
     (Etale.isTorsion_upperStar U.ι hF) p hp
 
-/-- Finiteness and constructibility, the
-cohomological-dimension bound over a separably closed field.
-
-Let `K` be a separably closed field and let `X` be a finite-type `K`-scheme of dimension at most
-`d`. Then `cd_tor(X) ≤ 2d`: `H^q(X_ét, F) = 0` for every torsion abelian étale sheaf `F` on `X`
-and every `q > 2d`. This is the bound `cd_tor(X) ≤ 2d + c` of
-`AlgebraicGeometry.Scheme.subsingleton_H_of_two_mul_add_lt`
- with `c = 0`, which is allowed since `cd_tor(Spec K) = 0`
-(`AlgebraicGeometry.Scheme.subsingleton_H_of_isSepClosed`,
-`lemma-cohomological-dimension-base-field--1`). -/
+/-- The cohomological-dimension bound over a separably closed field: if `K` is separably closed
+and `X` is a finite-type `K`-scheme of dimension at most `d`, then `cd_tor(X) ≤ 2d`, i.e.
+`H^q(X_ét, F) = 0` for every torsion abelian étale sheaf `F` on `X` and every `q > 2d`. -/
 theorem subsingleton_H_of_two_mul_lt_of_isSepClosed {K : Type u} [Field K] [IsSepClosed K]
     (d : ℕ) {X : Scheme.{u}} (a : X ⟶ Spec (.of K)) [LocallyOfFiniteType a] [QuasiCompact a]
     (hX : topologicalKrullDim X ≤ (d : WithBot ℕ∞))

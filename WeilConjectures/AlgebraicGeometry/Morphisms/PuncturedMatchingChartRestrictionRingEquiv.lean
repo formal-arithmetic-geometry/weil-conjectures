@@ -12,6 +12,13 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedMatchingChartPowerLi
 import WeilConjectures.RingTheory.FormalGlueingH0Localization
 import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
 
+/-! # The localized formal-gluing comparison on a principal chart
+
+## References
+
+* Stacks Project, Tags 0BLH and 05ER (localized affine chart comparison)
+-/
+
 @[expose] public section
 
 universe u
@@ -138,12 +145,7 @@ private theorem matching_chart_kernel
   exact hb
 
 /-- The localized formal-gluing comparison is a ring equivalence on the
-principal chart, compatible with the matching numerator.
-
-Source: Stacks Project, Tags 0BLH and 05ER, localized affine chart comparison.
-The proof identifies the matching ring with the formal-gluing `H⁰` module,
-applies the localization comparison, and transports its inverse through the
-affine section identifications. -/
+principal chart, compatible with the matching numerator. -/
 theorem puncturedMatching_chart_restriction_ringEquiv
     {A : Type u} [CommRing A] [IsNoetherianRing A] [IsLocalRing A]
     {U : (Spec (.of A)).Opens}

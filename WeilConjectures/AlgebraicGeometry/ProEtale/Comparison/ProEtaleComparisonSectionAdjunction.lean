@@ -13,7 +13,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.ProEtaleComparisonS
 
 ## References
 
-* Stacks Project, Tag 0GLZ
+* Stacks Project, Tag 0GLZ (the adjunction construction and final paragraph)
 -/
 
 @[expose] public section
@@ -22,7 +22,9 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Tag 0GLZ, the adjunction construction and final paragraph. -/
+/-- A functor `A` whose sections over `Y` are naturally the terminal sections of the étale
+pullback of `F` to `Y` is left adjoint to restriction along `toProEt X`, with unit given on
+étale `U` by the diagonal section. -/
 theorem proEtaleComparisonSectionAdjunction (X : Scheme.{u})
     (A : Sheaf X.smallEtaleTopology (Type (u + 1)) ⥤
       Sheaf (Scheme.ProEt.topology X) (Type (u + 1)))

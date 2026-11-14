@@ -63,13 +63,8 @@ attribute [local irreducible] ModuleRingedComparison.tensor tensorComparison qTe
   InternalAbelianSheafModule.sectionModuleEquivalence SheafOfModules.monoidalCategory
 
 -- Retain the large total tensor maps while pasting the localization faces.
-/-- The total scalar square, localized and pasted with scalar normalization.
-Map the given ordinary total square to the derived category. Paste the fixed
-tensor localization normalization with scalar normalization on the total tensor,
-counit naturality, naturality of the derived scalar comparison on the internal
-localization tensor map, and naturality of the section localization comparison.
-This gives the normalized total path, before applying TensorNormalized or the
-section tensor representative equation. -/
+/-- The total scalar square, localized to the derived category and pasted with scalar
+normalization, gives the normalized total path. -/
 theorem section_tensor_total_localization_path (T : Scheme.{u})
     (c : ScalarSectionData a T) (hc : ScalarSectionNormalized a T c)
     (P Q : CochainComplex (Modules Λ T) ℤ)

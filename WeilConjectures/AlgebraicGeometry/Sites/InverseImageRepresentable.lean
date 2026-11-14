@@ -15,7 +15,11 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 ## References
 
 * Stacks Project, Étale Cohomology, Tag 03Q1, part (4), and Sites, Tag 04D3
-* Stacks Project, Tag 03Q1 (4), and Tag 04D3
+
+## Implementation details
+
+The representable presheaves are packaged as sheaves by the subcanonical instance;
+`uliftYoneda` only raises the universe of the sets of morphisms.
 -/
 
 @[expose] public section
@@ -27,14 +31,8 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- Inverse image carries the representable sheaf of an étale `Y`-scheme to the
-representable sheaf of its base change, naturally in the étale `Y`-scheme.
-
-Here `f.Etale` sends `V` to `V ×_Y X` with projection to `X`; symmetry of the
-scheme fibre product identifies this with `X ×_Y V` with its first projection.
-The existing subcanonical instance packages the representable presheaves as sheaves,
-as asserted by `lem-weil-pbc-small-etale-representable-presheaf-sheaf`.
-`uliftYoneda` only raises the universe of the sets of morphisms.
--/
+representable sheaf of its base change, naturally in the étale `Y`-scheme. Here `f.Etale`
+sends `V` to `V ×_Y X` with its projection to `X`. -/
 theorem nonempty_inverseImage_representable_iso
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (L : Sheaf Y.smallEtaleTopology (Type (max u v)) ⥤

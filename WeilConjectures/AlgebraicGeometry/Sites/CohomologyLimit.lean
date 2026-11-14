@@ -12,27 +12,28 @@ public import WeilConjectures.AlgebraicGeometry.Sites.HypercoverDescent
 
 Let `(Xᵢ)` be a cofiltered system of quasi-compact quasi-separated schemes over a scheme `S`, with
 affine transition maps and limit `X`, and let `F` be an étale sheaf of `Λ`-modules on `S`. Then
-`Hᵠ(X, F|_X) = colimᵢ Hᵠ(Xᵢ, F|_{Xᵢ})` ([Stacks, Tag 09YQ], blueprint
-`corollary-cohomology-pro-etale-affine`). For `Λ = ℤ` these are abelian étale sheaves; no
-torsion hypothesis is needed.
+`Hᵠ(X, F|_X) = colimᵢ Hᵠ(Xᵢ, F|_{Xᵢ})` ([Stacks, Tag 09YQ]). For `Λ = ℤ` these are abelian
+étale sheaves; no torsion hypothesis is needed.
 
 The statement is spelled out elementwise
 (`AlgebraicGeometry.Etale.exists_cohomologyRestrictOver_eq_of_isLimit`,
 `AlgebraicGeometry.Etale.exists_cohomologyRestrictOver_eq_zero_of_isLimit`): every class on `X`
 comes from some `Xᵢ`, and a class on `Xᵢ` which dies on `X` dies on some `Xⱼ`.
 
-The proof follows the blueprint: a class on `X` is the class of a cocycle on a qcqs hypercover of
+## Main definitions
+
+- `AlgebraicGeometry.Etale.cohomologyRestrictOver`: for a morphism `f: Y ⟶ Z` of schemes over
+  `S`, the restriction map `Hᵠ(Z, F|_Z) ⟶ Hᵠ(Y, F|_Y)`.
+
+## Implementation details
+
+A class on `X` is the class of a cocycle on a qcqs hypercover of
 `X` (`AlgebraicGeometry.Scheme.exists_cohomologyClass_eq_of_isQcqsHypercover`); the truncation of
 the hypercover in degrees `≤ q + 1` descends to some `Xᵢ`, and so do the cocycle and the cocycle
 condition by continuity of sections.
 For injectivity one descends in the same way a refinement on which the cocycle becomes a coboundary
 (`AlgebraicGeometry.Scheme.exists_isCoboundary_of_isQcqsHypercover`), the refinement map and the
 primitive.
-
-## Main definitions
-
-- `AlgebraicGeometry.Etale.cohomologyRestrictOver`: for a morphism `f: Y ⟶ Z` of schemes over
-  `S`, the restriction map `Hᵠ(Z, F|_Z) ⟶ Hᵠ(Y, F|_Y)`.
 -/
 
 @[expose] public section

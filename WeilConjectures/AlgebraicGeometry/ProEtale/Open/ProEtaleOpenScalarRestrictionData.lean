@@ -12,7 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Intrinsic.ProEtaleIntri
 /-!
 # Data for scalar restriction and open adjunction normalization
 
-The comparisons are the published `sfOpenRestriction` and its exact termwise
+The comparisons are `sfOpenRestriction` and its exact termwise
 localization. Normalization is expressed on the open adjunction unit: on each
 nonzero summand of the defining extension presheaf it is the identity; maps from
 all remaining values, which are zero, are unique. Thus this unit equation is
@@ -43,10 +43,8 @@ namespace AlgebraicGeometry.Scheme
 variable {A B C : Type u} [CommRing A] [CommRing B] [CommRing C]
   [Finite A] [Finite B] [Finite C]
 
-/-- The sectionwise coefficient square for restriction to an open, transported by
-exactly the canonical realization equivalences used to define extension by zero.
-Its fixed-scalar middle square is the identity: precomposition with the open site
-functor commutes with restriction of scalars. -/
+/-- The sectionwise coefficient square for restriction to an open, transported by the
+canonical realization equivalences; its fixed-scalar middle square is the identity. -/
 def sfOpenRestrictionCoefficientSquare {U Z : Scheme.{u}} (j : U ⟶ Z)
     [IsOpenImmersion j] (φ : A →+* B) :
     proEtaleCoefficientRestrictScalars Z φ ⋙ sfIntrinsicOpenRestriction j A ≅

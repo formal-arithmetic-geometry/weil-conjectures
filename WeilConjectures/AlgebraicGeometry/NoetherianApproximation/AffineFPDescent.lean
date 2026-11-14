@@ -84,12 +84,11 @@ lemma exists_lift_relations :
   choose r' hr' using fun l ↦ hj (r l) (Finset.mem_image_of_mem r (Finset.mem_univ l))
   exact ⟨j, r', hr'⟩
 
-/-- Part of blueprint `theorem-nagata-s-compactification-theorem--1`: the selected stage `λ_B` to
-which the coefficients of the relations `r` of `B = c.pt[x_σ] ⧸ (r_l)` lift. -/
+/-- The selected stage `λ_B` to which the coefficients of the relations `r` of
+`B = c.pt[x_σ] ⧸ (r_l)` lift. -/
 noncomputable def fpDescentStage : J := (exists_lift_relations hc r).choose
 
-/-- Part of blueprint `theorem-nagata-s-compactification-theorem--1`: the lifted relations
-`r_{l,λ_B}` over the selected stage `λ_B = fpDescentStage hc r`. -/
+/-- The lifted relations `r_{l,λ_B}` over the selected stage `λ_B = fpDescentStage hc r`. -/
 noncomputable def fpDescentRelations : ι → MvPolynomial σ (F.obj (fpDescentStage hc r)) :=
   (exists_lift_relations hc r).choose_spec.choose
 
@@ -98,25 +97,20 @@ lemma map_fpDescentRelations (l : ι) :
     MvPolynomial.map (c.ι.app (fpDescentStage hc r)).hom (fpDescentRelations hc r l) = r l :=
   (exists_lift_relations hc r).choose_spec.choose_spec l
 
-/-- Finite-stage model of a finitely
-presented affine algebra.
-
-For `B = c.pt[x_σ] ⧸ (r_l)_{l ∈ ι}` over the colimit `c.pt` of a filtered diagram of rings, the
-finite-stage model is `B_{λ_B} = A_{λ_B}[x_σ] ⧸ (r_{l,λ_B})`, where `λ_B = fpDescentStage hc r`
-is the selected stage and `r_{l,λ_B} = fpDescentRelations hc r l` are the lifted relations. The
-comparison map `β_B` is `CommRingCat.fpDescentEquiv`. -/
+/-- Finite-stage model of a finitely presented affine algebra: for
+`B = c.pt[x_σ] ⧸ (r_l)_{l ∈ ι}` over the colimit `c.pt` of a filtered diagram of rings, this is
+`B_{λ_B} = A_{λ_B}[x_σ] ⧸ (r_{l,λ_B})`, where `λ_B = fpDescentStage hc r` is the selected stage
+and `r_{l,λ_B} = fpDescentRelations hc r l` are the lifted relations. -/
 abbrev FPDescent :=
   MvPolynomial σ (F.obj (fpDescentStage hc r)) ⧸ Ideal.span (Set.range (fpDescentRelations hc r))
 
-/-- Blueprint `theorem-nagata-s-compactification-theorem--1` (first part): the finite-stage model
-`B_{λ_B}` is finitely presented over `A_{λ_B}`. -/
+/-- The finite-stage model `B_{λ_B}` is finitely presented over `A_{λ_B}`. -/
 instance finitePresentation_fpDescent [Finite σ] :
     Algebra.FinitePresentation (F.obj (fpDescentStage hc r)) (FPDescent hc r) :=
   Algebra.FinitePresentation.quotient (Submodule.fg_span (Set.finite_range _))
 
-/-- Part of blueprint `theorem-nagata-s-compactification-theorem--1`: the comparison map
-`β_B : A ⊗_{A_{λ_B}} B_{λ_B} → B`, where `A_{λ_B} → A` is the colimit map `c.ι.app λ_B`.
-Blueprint `theorem-nagata-s-compactification-theorem--1` (second part): `β_B` is an isomorphism. -/
+/-- The comparison isomorphism `β_B : A ⊗_{A_{λ_B}} B_{λ_B} ≃ B`, where `A_{λ_B} → A` is the
+colimit map `c.ι.app λ_B`. -/
 noncomputable def fpDescentEquiv :
     letI : Algebra (F.obj (fpDescentStage hc r)) c.pt :=
       (c.ι.app (fpDescentStage hc r)).hom.toAlgebra

@@ -52,7 +52,7 @@ abbrev Ambient := DerivedCategory (Modules l E X)
 abbrev realize (s : RationalModuleRealization l E X) :=
   pbcRationalization X (pbcIntegralDatum l E) (pbcUniformizer l E) ⋙ s.J
 
-/-- The given integer-shift comparison of J, exposed without choosing a new comparison. -/
+/-- The given integer-shift comparison of J. -/
 instance realizationShift (s : RationalModuleRealization l E X) : s.J.CommShift ℤ := s.shift
 
 /-- A finite integral construction. Every entry is zero, a supplied generator up to shift
@@ -67,9 +67,7 @@ def FiniteConstruction (G : Integral l E X → Prop) (K : Integral l E X) : Prop
           (h : (W r).obj⟦k⟧ ⟶ (W i).obj⟦(1 : ℤ)⟧),
           Triangle.mk f g h ∈ distTriang (PbcCompletedDerived X (pbcIntegralDatum l E)))
 
-/-- A supplied finite sheaf filtration together with its integral degree-zero quotient models.
-The stratum-model theorem supplies these data after its normalized scalar comparisons;
-the filtration is retained rather than replaced by a mere assertion of essential image. -/
+/-- A supplied finite sheaf filtration together with its integral degree-zero quotient models. -/
 structure Filtration (s : RationalModuleRealization l E X) (F : Modules l E X) where
   /-- Length, including zero. -/
   length : ℕ

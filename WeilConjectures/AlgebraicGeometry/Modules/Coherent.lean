@@ -38,11 +38,7 @@ namespace AlgebraicGeometry
 
 variable (X : Scheme.{u}) in
 /-- The coherent `𝒪_X`-modules, i.e. the quasi-coherent `𝒪_X`-modules of finite presentation, as
-a property of objects of `X.Modules`.
-
-This is coherence in the sense of Stacks `01BV` only when `X` is locally noetherian; on a general
-scheme it is the weaker notion "quasi-coherent of finite presentation" (see the implementation
-notes of this file). -/
+a property of objects of `X.Modules`. -/
 abbrev Scheme.Modules.isCoherent : ObjectProperty X.Modules :=
   fun ℱ ↦ SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ ∧
     SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) ℱ

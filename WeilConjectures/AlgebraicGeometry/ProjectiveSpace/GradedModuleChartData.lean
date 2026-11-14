@@ -54,14 +54,7 @@ private theorem range_chart_inclusion {R N B : Type u} [Semiring R]
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Push charts forward along the identity graded ring map between the two polynomial
-presentations.
-
-The identity ring map preserves homogeneous elements and sends the irrelevant ideal
-onto the irrelevant ideal, so Mathlib's Proj.map supplies the required scheme morphism.
-Its inverse images of standard opens are definitionally the corresponding standard opens.
-Pushforward therefore preserves the chart groups and restrictions. The ring scalar law
-follows from awayToSection_comp_appLE; the map of homogeneous localizations preserves
-ordinary fractions, which is checked on a fraction representative. -/
+presentations. -/
 private theorem graded_module_chart_regrading
     (k : Type u) [Field k] (A : ModuleCat.{u} (MvPolynomial (Fin 2) k))
     (H : ℕ → AddSubgroup (MvPolynomial (Fin 2) k)) [GradedRing H]

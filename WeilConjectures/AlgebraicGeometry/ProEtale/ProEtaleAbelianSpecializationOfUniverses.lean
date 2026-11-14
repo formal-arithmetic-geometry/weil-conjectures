@@ -185,26 +185,7 @@ private theorem quotient_specialization {T Y : Scheme.{t}} [IsAffine Y]
 
 /-- Affine coordinates transport projectivity of evaluation and the closed-fibre
 specialization condition. The ideal is the actual kernel of the global-sections
-map of the closed base change, rather than an ideal selected from existence.
-
-The single-cover lifting criterion is
-`AffineProEt.isLocallySurjective_iff_of_isSheaf` in the source library.
-
-Proof. An epimorphism of sheaves on the affine basis lifts any given section
-along a single surjective affine cover. Compose that cover with the affine
-coordinate isomorphism and the structure map to X. Subcanonical Yoneda sends
-this cover to an epimorphism of set sheaves on X.ProEt: maps agreeing after
-the cover agree by separatedness. The hypothesis at V lifts the identity
-section to a section of the cover. Transport it to affine coordinates and
-restrict the local lift along it. Naturality and the section equation give
-a preimage of the original section.
-The closed base change has a surjective global-sections map. Its quotient by
-the displayed kernel maps to the coordinate ring by the first isomorphism
-theorem. Composing its spectrum map with the canonical toSpecΓ map gives a
-map from the closed fibre to the quotient spectrum, commuting with the
-projection by naturality. Push the assumed specialization forward along
-V.left.isoSpec.hom and lift its closed endpoint to the pullback along the
-identity. All constructions include empty schemes and the zero ring. -/
+map of the closed base change. -/
 private theorem specialization_affine_coordinates
     {X Z : Scheme.{t}} (i : Z ⟶ X) [IsClosedImmersion i]
     (V : X.ProEt) [IsAffine V.left]
@@ -419,19 +400,7 @@ private theorem precomposition_unit_surjective {S T : Scheme.{t}}
     ((congrArg (fun a ↦ G.obj.map a.op s) hσ).trans (G.obj.map_id_apply _ s))
 
 /-- The affine closed-site counit is invertible at a weakly contractible object
-whose points specialize into the closed fibre.
-
-Proof. Full faithfulness makes the base change of the counit invertible. Hence
-its image contains the closed fibre. Its underlying morphism is weakly etale,
-therefore flat; lifting generalizations shows that its image contains every point
-by the specialization hypothesis. This surjective affine morphism is a cover.
-Subcanonical Yoneda takes it to an epimorphism of set sheaves: separatedness
-cancels maps agreeing after that cover. Weak contractibility lifts the identity
-to a section. Base change takes that section to the inverse of the base-changed
-counit. The adjunction Hom bijection then identifies the other composite with
-the identity. Thus the section is a two-sided inverse. Empty schemes and the
-zero ring require no exception: surjectivity is vacuous and the same Yoneda
-argument applies. -/
+whose points specialize into the closed fibre. -/
 private theorem isIso_closedSiteCounit_of_specialization
     (A : Type t) [CommRing A] (I : Ideal A)
     (adj : closedSiteLift A I ⊣ closedSiteBaseChange A I)

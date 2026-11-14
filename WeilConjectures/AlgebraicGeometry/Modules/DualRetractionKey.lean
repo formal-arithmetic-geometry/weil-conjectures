@@ -8,6 +8,14 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 
+/-!
+# A cancellation lemma for local retractions of transposes
+
+## References
+
+* [Stacks: Tag 0EKP](https://stacks.math.columbia.edu/tag/0EKP)
+-/
+
 @[expose] public section
 
 universe u
@@ -16,13 +24,9 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme.Modules
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Categorical cancellation for the local transpose retraction.
-Source: Stacks Project, Tag 0EKP, transpose compatibility.
-
-The naturality hypothesis rewrites the restricted transpose as local precomposition.
-Contravariant functoriality of `homObjMap` combines this with precomposition by `s`.
-The section equation `hs` makes that map the identity; the isomorphism cancels.
-Naturality is essential: arbitrary unrelated isomorphisms do not satisfy this equation. -/
+/-- Let `s` be a section of `f` over `U` and `e` an isomorphism between restrictions of internal
+homs and internal homs of restrictions, natural in both variables. Then the restricted transpose
+of `f`, followed by precomposition with `s` conjugated by `e`, is the identity. -/
 theorem dual_retraction_key
     {X : Scheme.{u}} {P Q : X.Modules} (f : P ⟶ Q) (U : X.Opens)
     (s : (restrictFunctor U.ι).obj Q ⟶ (restrictFunctor U.ι).obj P)

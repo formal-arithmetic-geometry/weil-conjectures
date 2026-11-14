@@ -222,7 +222,7 @@ noncomputable def isLimitStageCone (G : S.FiniteAffineGluingPresentation) :
     (fun a ↦ G.chartOpen (op G.glueStage) a) G.glueStage.iSup_opensRange_ι
     fun a ↦ G.isLimitOpensConeChart (op G.glueStage) a
 
-/-- Blueprint `theorem-nagata-s-compactification-theorem--1` (constructive form): the Noetherian
+/-- The Noetherian
 approximation of a scheme `S` with a finite affine gluing presentation `G`, given by the glued
 finite-type stages `S_l` (`Stage.scheme`), indexed by the opposite of the directed set of valid
 stages, with the affine transition morphisms `S_{l'} ⟶ S_l` (`Stage.transition`) and the

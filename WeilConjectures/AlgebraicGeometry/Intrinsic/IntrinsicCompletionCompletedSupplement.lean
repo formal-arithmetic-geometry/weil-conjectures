@@ -406,7 +406,7 @@ def completedKoszulOneSubShift (r : ℕ) (f : Fin r → A)
   𝟙 _ - Pi.lift (fun n ↦ Pi.π (completedKoszulTensor X d r f C) (n + 1) ≫
     completedKoszulTensorTransition X d r f C n)
 
-/-- Explicit mapping fiber with differential (dx,(1-s)x-dy), in the node's order. -/
+/-- Explicit mapping fiber with differential (dx,(1-s)x-dy). -/
 def completedKoszulFiber (r : ℕ) (f : Fin r → A)
     (C : CochainComplex (adicDatumModules X d) ℤ) :=
   CochainComplex.mappingCocone (- completedKoszulOneSubShift X d r f C)

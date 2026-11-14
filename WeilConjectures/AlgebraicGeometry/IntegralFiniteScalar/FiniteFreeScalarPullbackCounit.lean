@@ -42,13 +42,7 @@ attribute [local irreducible] betaTotalNatIso betaOrdinary betaTargetIso
 
 -- Compare the normalized derived mate with its ordinary unit square.
 /-- The normalized scalar-pullback mate commutes with the exact representative factors
-and the derived-to-ordinary scalar counits, on every cochain complex.
-
-Proof. Apply the generic mate computation to the extension/restriction adjunctions.
-Their computation counits satisfy the adjunction-unit equation. The ordinary square
-is the scalar-unit pullback square, degree by degree. Naturality of the exact
-localization factors and exact-square normalization transport it to the derived
-square. The prescribed theta normalization identifies its mate with theta. -/
+and the derived-to-ordinary scalar counits, on every cochain complex. -/
 theorem finiteFreeScalar_pullback_scalarCounit
     (D : ScalarSixPullbackData.{u}) {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ')
     {X Y : Scheme.{u}} (f : X ⟶ Y)

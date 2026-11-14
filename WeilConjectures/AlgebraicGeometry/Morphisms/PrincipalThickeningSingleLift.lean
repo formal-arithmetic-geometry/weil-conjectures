@@ -10,6 +10,13 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteEtaleAdicSection
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 import WeilConjectures.AlgebraicGeometry.Morphisms.PrincipalThickeningIdealFactor
 
+/-! # Lifting sections across a bounded principal thickening gap
+
+## References
+
+* Stacks Project, Tags 0H3D and 0H3E
+-/
+
 @[expose] public section
 universe u
 open CategoryTheory
@@ -76,16 +83,9 @@ private theorem thickeningGap_appTop
       rw [Scheme.Hom.comp_appTop, CommRingCat.comp_apply]
       exact ih _
 
-/-- The canonical quotient restriction across a bounded principal thickening gap.
-
-Source: Stacks Project, Tags 0H3D and 0H3E. This is the geometric lifting step:
-vanishing of `H^1(W,O_W)` together with the uniform annihilation hypothesis implies
-that every section on the `(n+c)`-th principal thickening is the restriction of an
-ambient section at level `n`. The proof factors the transition of image ideals
-through O_W and applies
-the natural section boundary sequence, expressing the factorization in Tag 0H3D.
-It is recorded as a separate node so the elementary recursion argument
-in the parent theorem can be checked independently. -/
+/-- If `H^1(W, O_W)` vanishes and `g`-power torsion of `R` is killed by `g ^ c`, then the
+canonical image at level `n` of every section on the `(n + c)`-th principal thickening of `W`
+is the restriction of a section of `W`. -/
 theorem principal_thickening_single_lift
     (R : Type u) [CommRing R] (g : R) (W : (Spec (.of R)).Opens)
     (hH : Subsingleton (Modules.H (X := W.toScheme)

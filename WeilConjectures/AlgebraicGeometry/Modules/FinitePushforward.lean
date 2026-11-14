@@ -51,9 +51,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 variable {X Y : Scheme.{u}}
 
 /-- **The pushforward of the structure sheaf along a finite morphism is coherent.** If
-`g : X ⟶ Y` is finite and `Y` is locally noetherian, then `g_* 𝒪_X` is of finite presentation:
-over an affine open `Spec A` of `Y` it is the `𝒪`-module associated with the finite, hence
-finitely presented, `A`-module `Γ(X, g ⁻¹ᵁ Spec A)`. -/
+`g : X ⟶ Y` is finite and `Y` is locally noetherian, then `g_* 𝒪_X` is of finite presentation. -/
 theorem isFinitePresentation_pushforward_unit [IsLocallyNoetherian Y] (g : X ⟶ Y) [IsFinite g] :
     ((pushforward g).obj (𝟙_ X.Modules)).IsFinitePresentation := by
   have := SheafOfModules.isQuasicoherent_unit (R := X.ringCatSheaf)
@@ -82,14 +80,7 @@ theorem isFinitePresentation_pushforward_unit [IsLocallyNoetherian Y] (g : X ⟶
 
 /-- **The pushforward of the structure sheaf along a finite morphism is generically free.** If
 `g : X ⟶ Y` is finite and `Y` is integral, then `g_* 𝒪_X` is free of rank
-`d = g.finrank (genericPoint Y)` on a nonempty open subset of `Y`. Over a nonempty affine open
-`Spec A` of `Y`, with `A` a domain of fraction field `k(Y)`, the finite `A`-module
-`B = Γ(X, g ⁻¹ᵁ Spec A)` has `B ⊗_A k(Y)` of dimension `d`; a basis of it taken in `B` gives an
-`A`-linear map `A^d ⟶ B` which is injective with torsion cokernel, so becomes an isomorphism
-after inverting a suitable nonzero `a ∈ A`
-(`Module.Finite.exists_free_localizedModule_powers_of_isDomain`). We work over the affine chart
-`Spec A ⟶ Y` used to define `g.finrank` at the generic point, where `g.finrank` is the rank of `B`
-at the generic point `(0)` of `Spec A`. -/
+`d = g.finrank (genericPoint Y)` on a nonempty open subset of `Y`. -/
 theorem exists_pullback_pushforward_unit_iso_free [IsIntegral Y] (g : X ⟶ Y) [IsFinite g] :
     ∃ U : Y.Opens, (U : Set Y).Nonempty ∧
       Nonempty ((Modules.pullback U.ι).obj ((pushforward g).obj (𝟙_ X.Modules)) ≅
@@ -208,10 +199,7 @@ theorem exists_pullback_pushforward_unit_iso_free [IsIntegral Y] (g : X ⟶ Y) [
 
 /-- **Pushforward of finite locally free modules along finite flat morphisms.** If `g : X ⟶ Y`
 is finite, flat and locally of finite presentation and `ℱ` is a finite locally free
-`𝒪_X`-module, then `g_* ℱ` is a finite locally free `𝒪_Y`-module. Over an affine open `Spec A`
-of `Y` with preimage `Spec B`, the `B`-module `M = Γ(ℱ, Spec B)` is finitely generated
-projective, and `B` is a finitely generated projective `A`-module, so `M` is a finitely
-generated projective `A`-module. -/
+`𝒪_X`-module, then `g_* ℱ` is a finite locally free `𝒪_Y`-module. -/
 theorem isFiniteLocallyFree_pushforward (g : X ⟶ Y) [IsFinite g] [Flat g]
     [LocallyOfFinitePresentation g] (ℱ : X.Modules)
     [SheafOfModules.IsFiniteLocallyFree (R := X.ringCatSheaf) ℱ] :
@@ -244,13 +232,7 @@ theorem isFiniteLocallyFree_pushforward (g : X ⟶ Y) [IsFinite g] [Flat g]
 
 /-- **The pushforward of the structure sheaf along a finite locally free morphism.** If
 `g: X ⟶ Y` is finite locally free of degree `d`, then `g_* 𝒪_X` is a finite locally free
-`𝒪_Y`-module of rank `d`. Over an affine open `Spec A` of `Y` it is the `𝒪`-module associated with
-the finite, flat and finitely presented, hence projective, `A`-module `B = Γ(X, g ⁻¹ᵁ Spec A)`, and
-its rank at a point `y` is the dimension `d` of the fibre `B ⊗_A κ(y) = Γ(X_y, 𝒪_{X_y})`.
-
-This is the first half of `lem-pc-flf-properties` (the second half, on the fibres, is
-`AlgebraicGeometry.Scheme.Hom.exists_ringEquiv_tensorProduct_fiber`), and the pointer remark to
-the properties of finite locally free morphisms. -/
+`𝒪_Y`-module of rank `d`. -/
 theorem isFiniteLocallyFreeOfRank_pushforward_unit (g : X ⟶ Y) (d : ℕ)
     [g.IsFiniteLocallyFreeOfDegree d] :
     ((pushforward g).obj (𝟙_ X.Modules)).IsFiniteLocallyFreeOfRank d := by

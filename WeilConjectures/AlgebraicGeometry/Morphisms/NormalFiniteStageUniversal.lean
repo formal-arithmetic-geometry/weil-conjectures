@@ -12,6 +12,13 @@ import WeilConjectures.RingTheory.FiniteTypeZDomainNormalizationFinite
 import WeilConjectures.AlgebraicGeometry.Morphisms.NormalizationDominantLift
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 
+/-! # Normal finite replacement of an approximation stage
+
+## References
+
+* Stacks Project, Tag 0EZJ (normal approximation paragraph), and Tags 035E, 035N, 035L, 0335
+-/
+
 @[expose] public section
 
 universe u
@@ -73,10 +80,7 @@ private theorem integral_image {S T : Scheme.{u}} [IsIntegral S]
   exact isIntegral_of_irreducibleSpace_of_isReduced _
 
 /-- A single approximation stage has a finite normal replacement with its universal
-property among normal integral factorizations dominated by `S`.
-
-Source: Stacks Project, Tag 0EZJ, normal approximation paragraph, and Tags 035E, 035N, 035L and 0335
--/
+property among normal integral factorizations dominated by `S`. -/
 theorem exists_normal_finite_stage_universal {S : Scheme.{u}} [CompactSpace S]
     [QuasiSeparatedSpace S] [IsIntegral S]
     (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))

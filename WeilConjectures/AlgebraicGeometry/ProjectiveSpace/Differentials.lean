@@ -69,14 +69,7 @@ theorem smoothOfRelativeDimension {d : ℕ} (hn : Nat.card n = d + 1) :
 
 /-- **The differentials of projective space are locally free of rank `d`.** For `n` with
 `Nat.card n = d + 1`, the sheaf of relative differentials `Ω¹_{ℙ(n; S)/S}` is finite locally
-free of rank `d`: on the standard open `Uᵢ`, the affine space `𝔸({k // k ≠ i}; S)`, it is free
-on the differentials `d(x_k / xᵢ)`, since Kähler differentials of a polynomial ring are free on
-the differentials of the variables and commute with localization. Here this follows from the
-smoothness of `ℙ(n; S) ⟶ S` of relative dimension `d`.
-
-This is the first assertion of the blueprint lemma; the main assertion, the canonical module
-`ω_ℙ = Λᵈ Ω¹_{ℙ/A}` and the isomorphism `ω_ℙ ≅ 𝒪(-d-1)` over `S = Spec A`, is
-`AlgebraicGeometry.ProjectiveSpace.canonicalModuleIsoTwist`. -/
+free of rank `d`: on the standard open `Uᵢ` it is free on the differentials `d(x_k / xᵢ)`. -/
 theorem isFiniteLocallyFreeOfRank_relativeDifferentials {d : ℕ} (hn : Nat.card n = d + 1) :
     (ℙ(n; S) ↘ S).relativeDifferentials.IsFiniteLocallyFreeOfRank d :=
   have := smoothOfRelativeDimension n S hn

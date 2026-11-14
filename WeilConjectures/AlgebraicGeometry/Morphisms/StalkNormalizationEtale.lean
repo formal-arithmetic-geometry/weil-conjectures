@@ -64,13 +64,9 @@ private theorem normalization_etale_restrict {P X : Scheme.{u}} (V : X.Opens)
     pullbackRestrictIsoRestrict_hom_morphismRestrict]
   exact hp
 
-/-- Local affine-chart form of the stalk normalization claim.
-
-The missing argument is the
-identification of the normalization with the split extension on every affine
-chart of the stalk; once that identification is available, the `Etale`
-structure is obtained by checking its defining affine ring maps.
--/
+/-- Local affine-chart form of the stalk normalization claim: if the normalization over the
+stalk at a generic boundary point `s` is finite, then its ring maps on all affine charts are
+étale. -/
 theorem GaloisCover.stalk_normalization_etale_local_charts {S C : Scheme.{u}} [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]
     (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))

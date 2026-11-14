@@ -11,18 +11,24 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 
+/-!
+# Local dimension of affine finite-type fibres
+
+The affine finite-type fibre has finite local dimension.
+
+## References
+
+* Stacks Project, Tag 00QE
+-/
+
 @[expose] public section
 
 universe u
 open CategoryTheory
 namespace AlgebraicGeometry
 
-/- The affine finite-type fibre has finite local dimension. -/
 /-- The local dimension of a fibre of an affine locally finitely presented morphism is
-represented by a natural number.
-
-Source: the finite-type fibre argument in Stacks Project Tag 00QE;
-`AlgebraicGeometry.topologicalKrullDim_ne_top_of_compactSpace` in the upstream library. -/
+represented by a natural number. -/
 theorem exists_fiber_dimension_nat
     {X T : Scheme.{u}} [IsAffine X] [IsAffine T]
     (f : X ⟶ T) [LocallyOfFinitePresentation f] (y : X) :

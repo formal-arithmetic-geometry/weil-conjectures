@@ -18,8 +18,7 @@ import Mathlib.RingTheory.TensorProduct.Pi
 ## References
 
 * Stacks Project, Tag 0EYG, descent paragraph
-* Tag 05N9
-* Stacks Project, Tag 0EYG
+* Stacks Project, Tag 05N9
 -/
 
 @[expose] public section
@@ -31,7 +30,7 @@ set_option autoImplicit false
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- The explicit finite product of root algebras in the descent argument. -/
+/-- The finite product of the root algebras `R[X] / (X ^ e k - g)`. -/
 abbrev puncturedRootProductRing (R : CommRingCat.{u}) (g : R) (m : ℕ)
     (e : Fin m → ℕ) :=
   ∀ k : Fin m, AdjoinRoot ((Polynomial.X : Polynomial R) ^ e k - Polynomial.C g)

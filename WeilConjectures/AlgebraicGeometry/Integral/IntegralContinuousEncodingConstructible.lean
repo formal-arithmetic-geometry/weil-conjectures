@@ -551,6 +551,12 @@ public import WeilConjectures.AlgebraicGeometry.IntegralContinuousEncodingConstr
 * Stacks Project, Tag 00YV
 * Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(3)
 * Stacks 00YV
+
+## Implementation details
+
+In `integralContinuousEncoding_constructible` the coefficient isomorphism need not preserve
+chosen scalar coordinates: finite presentations are invariant under arbitrary coefficient
+isomorphisms, and the integral finite-local-presentation criterion supplies scalar local models.
 -/
 
 @[expose] public section
@@ -711,27 +717,7 @@ private noncomputable def transport_chain_iso
     rfl
 
 /-- Integral constructibility is preserved by section-action reconstruction and a
-coefficient-ring isomorphism. No rationalization or lattice-existence assertion is
-involved. The coefficient isomorphism need not preserve chosen scalar coordinates:
-a finite presentation is invariant under arbitrary coefficient isomorphisms, and
-the integral finite-local-presentation criterion supplies scalar local models.
-
-Proof in words. Identify the two condensed integral point rings by postcomposing
-continuous functions with the WithAbs valuation-ring equivalence. Transport M to
-the derived integer coefficient ring by the normalized completed section-ring
-comparison, the detailed completed coefficient comparison, c and the chart
-comparison. Constructibility is invariant under this coefficient isomorphism.
-The integral local-finite-presentation/constant-model theorem gives constant local
-models, and integralSectionLocalModels transports them to completed sectionwise
-models. Compare this sectionwise module with the continuous encoding in the
-statement: sectionModuleComapIso supplies the two section-action comparisons;
-the intervening map is identity on sections, and its linearity is the normalized
-coefficient identity with the inverse coefficient maps cancelled. Transport the
-stratified completed models along that isomorphism. On each stratum,
-continuousIntegralSliceModelComparison gives the continuous scalar models;
-replace the covering sieve by its generating covering family. Keep the finite
-stratification. Empty covers and zero presentations give the empty and rank-zero
-cases. -/
+coefficient-ring isomorphism. -/
 theorem integralContinuousEncoding_constructible
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

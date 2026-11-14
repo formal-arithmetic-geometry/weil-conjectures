@@ -22,15 +22,7 @@ attribute [local irreducible] Functor.mapDerivedCategory Functor.leftDerivedFunc
   AlgebraicGeometry.ProEtale.upperStarFromPoint
 -- Compare the two total tensors using their invertible coefficient summands.
 /-- Augmentation normalization computes beta using any ordinary and total comparisons
-with the prescribed underlying maps and degree-zero summands.
-
-Proof. Faithfulness of the forgetful functor identifies the ordinary comparisons.
-In degree n the (0,n) inclusion becomes invertible after the supplied total
-isomorphism, since its composite is the tensor of the coefficient isomorphism
-followed by the ordinary isomorphism. Cancel that inclusion to identify the total
-comparison chosen in the normalization with the supplied one. Substitute these
-equalities into the normalization equation. Zero coefficients and zero complexes
-are covered by the same isomorphism and cancellation argument. -/
+with the prescribed underlying maps and degree-zero summands. -/
 theorem finiteFreeScalar_normalizedBeta_computes
     {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ')
     (S : ShortComplex (PointModules Λ))

@@ -16,7 +16,12 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.AffineInvariantBasicOpenDesce
 import Mathlib.Topology.Connected.Clopen
 import Mathlib.AlgebraicGeometry.Properties
 
-/-! # Stabilizer components of a split affine torsor cover -/
+/-! # Stabilizer components of a split affine torsor cover
+
+## References
+
+* Stacks Project, Tag 03SF (finite Galois covers and permutation sets)
+-/
 
 @[expose] public section
 universe u
@@ -71,26 +76,9 @@ private theorem descent_section_reconstruction {Y S T V : Scheme.{u}} [Connected
 
 -- The shorter affine argument does not need every torsor hypothesis in this fixed interface.
 set_option linter.unusedVariables false
-/- The selected split section descends to a map from the stabilizer quotient.
-
-Source: Stacks Project, Tag 03SF, finite Galois covers and permutation sets.
-Proof: put V = D(h) and B = D(ι g). Finite faithful flatness makes V -> B
-surjective and finite, and hEt makes it etale. The domain assumption makes V
-connected. The unique rotation hypothesis makes it a Galois cover with deck group G.
-Pull delta back to V. The selected section is fixed by K: deck precomposition
-has the label given by fixedPunctureDescentAction, and a section on the connected
-nonempty V is determined by that label. The Galois equivalence descends this
-K-invariant section to V/K, giving a map to Y over Spec R. The quotient is affine,
-with coordinate ring C[1/h]^K. This is (C^K)[1/h]: the denominator h is fixed;
-invariance of a/h^n implies invariance of a because localization of the domain C
-at nonzero h is injective. Thus V/K is the displayed basic open of Spec F and its
-quotient map is q. The descent factorization gives q followed by s equal to the
-selected section; descent over B gives the displayed base equation.
-This assertion constructs a factorization only; openness is a separate step. -/
--- STATEMENT-DISPUTED: Arbitrary f may select a component different from x; take the trivial
--- torsor over ℚ and the two-point split cover. The former universal assertion is replaced
--- below by existence of a factorization of the selected section.
-/-- (blueprint: lem-sbc-affine-torsor-single-stabilizer-component-section) -/
+/-- The split section labelled `x` descends to the stabilizer quotient: if `K` is the stabilizer
+of `x`, there is a morphism `s` over `Spec R` from the puncture `D(ι g)` of `Spec C^K` to `Y`
+whose composite with the quotient map `q` is the split section labelled `x`. -/
 theorem affine_torsor_single_stabilizer_component_section
     (R H : CommRingCat.{u}) (g : R) (ι : R →+* H)
     (C : Type u) [CommRing C] [Algebra H C] [IsDomain C]

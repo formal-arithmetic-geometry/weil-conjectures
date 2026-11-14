@@ -30,14 +30,15 @@ finite `S`-scheme can be chosen of finite presentation (Stacks Project Tag 0F2N)
   a quasi-compact open of a limit of finite `S`-schemes is open in a closed subscheme of some
   stage.
 - `AlgebraicGeometry.Scheme.Hom.exists_isOpenImmersion_isFinite_of_locallyQuasiFinite`:
-  **Zariski's Main Theorem**, finite factorization (Stacks Project Tag 05K0; blueprint
-  `thm-pqf-zmt-factorization`).
+  **Zariski's Main Theorem**, finite factorization (Stacks Project Tag 05K0).
 - `AlgebraicGeometry.Scheme.Hom.exists_isOpenImmersion_isFinite_locallyOfFinitePresentation`:
   the finitely presented refinement (Stacks Project Tag 0F2N).
 
-## Blueprint
+## References
 
-This file formalises part (i) of `lemma-nagata-zmt-open-immersion-affine-factorization`.
+* Stacks Project, Tags 05K0 and 0F2N
+* Stacks Project, Tags 01Z4, 081B and 01QV (descent of the immersion to a finite stage)
+* Stacks Project, Tags 09YZ, 09ZQ and 01PF (finite and finitely presented approximation)
 -/
 
 @[expose] public section
@@ -53,11 +54,7 @@ Let `ν: N ⟶ S` be presented as a cofiltered limit of finite `S`-schemes `T_λ
 quasi-compact and quasi-separated, and let `ι: X ⟶ N` be a quasi-compact open immersion with
 `X` locally of finite type over `S`. Then there are an index `λ₀` and a factorization
 `X ⟶ T ⟶ T_{λ₀}` of `X ⟶ N ⟶ T_{λ₀}` into a quasi-compact open immersion followed by a closed
-immersion. If `S` is locally Noetherian, `T_{λ₀}` is moreover of finite presentation over `S`.
-
-The image of `X` descends to a quasi-compact open `U` of some stage (Stacks Project Tag 01Z4),
-`X ⟶ U` is a closed immersion from some stage on (Tag 081B), and the quasi-compact immersion
-`X ⟶ U ⟶ T_{λ₀}` factors through its scheme-theoretic image (Tag 01QV). -/
+immersion. If `S` is locally Noetherian, `T_{λ₀}` is moreover of finite presentation over `S`. -/
 theorem Scheme.Hom.FiniteApproximation.exists_isOpenImmersion_isClosedImmersion
     {X N S : Scheme.{u}} {ν : N ⟶ S} (F : ν.FiniteApproximation) [CompactSpace S]
     [QuasiSeparatedSpace S] (ι : X ⟶ N) [IsOpenImmersion ι] [QuasiCompact ι]
@@ -80,16 +77,10 @@ theorem Scheme.Hom.FiniteApproximation.exists_isOpenImmersion_isClosedImmersion
   rw [Scheme.Hom.toImage_imageι]
   exact hgU
 
-/-- **Zariski's Main Theorem, finite factorization** (Stacks Project Tag 05K0; blueprint
-`thm-pqf-zmt-factorization`, statement (i) of blueprint
-`proposition-relative-form-zariski-s-main--1`). A separated, quasi-compact, locally
+/-- **Zariski's Main Theorem, finite factorization**. A separated, quasi-compact, locally
 quasi-finite morphism `f : X ⟶ S` locally of finite type to a quasi-compact quasi-separated scheme
 factors as a quasi-compact open immersion `j : X ⟶ T` followed by a finite morphism `p : T ⟶ S`.
-
-By Grothendieck's form of Zariski's Main Theorem, `X` is a quasi-compact open of the relative
-normalization of `S` in `X`, which is integral over `S` and hence a limit of finite
-`S`-schemes (finite approximation, Tag 09YZ); the immersion descends to a finite stage
-(`Scheme.Hom.FiniteApproximation.exists_isOpenImmersion_isClosedImmersion`). -/
+-/
 @[stacks 05K0]
 theorem Scheme.Hom.exists_isOpenImmersion_isFinite_of_locallyQuasiFinite {X S : Scheme.{u}}
     (f : X ⟶ S) [LocallyQuasiFinite f] [LocallyOfFiniteType f] [IsSeparated f]
@@ -104,19 +95,10 @@ theorem Scheme.Hom.exists_isOpenImmersion_isFinite_of_locallyQuasiFinite {X S : 
   refine ⟨T, j, k ≫ F.p i, hj, hjc, inferInstance, ?_⟩
   rw [reassoc_of% hjk, F.π_p, f.toNormalization_fromNormalization]
 
-/-- **Zariski's Main Theorem, finitely presented finite factorization** (Stacks Project
-Tag 0F2N; the corrected finite-presentation clause of blueprint `thm-pqf-immersion-descent`). A
-separated, quasi-compact, locally quasi-finite morphism `f : X ⟶ S` locally of finite
-presentation to a quasi-compact quasi-separated scheme factors as a quasi-compact open immersion
-`j : X ⟶ T` followed by a finite morphism `p : T ⟶ S` of finite presentation.
-
-Factor `f` through a finite `S`-scheme `T₀` (Stacks Project Tag 05K0) and write `T₀` as the limit
-of `S`-schemes of finite presentation with closed immersions as transition morphisms (Stacks
-Project Tag 09ZQ); some stage `Y` is finite over `S`. Then `X` is a closed subscheme of a
-quasi-compact open `U ⊆ Y`, cut out by an ideal sheaf of finite type since `X` is of finite
-presentation over `S`. Extending this ideal sheaf to a finite-type ideal sheaf `J` on `Y`
-(Stacks Project Tag 01PF), `X` is an open subscheme of the finite, finitely presented
-`S`-scheme `V(J)`. -/
+/-- **Zariski's Main Theorem, finitely presented finite factorization**. A separated,
+quasi-compact, locally quasi-finite morphism `f : X ⟶ S` locally of finite presentation to a
+quasi-compact quasi-separated scheme factors as a quasi-compact open immersion `j : X ⟶ T`
+followed by a finite morphism `p : T ⟶ S` of finite presentation. -/
 @[stacks 0F2N]
 theorem Scheme.Hom.exists_isOpenImmersion_isFinite_locallyOfFinitePresentation
     {X S : Scheme.{u}} (f : X ⟶ S) [LocallyQuasiFinite f] [LocallyOfFinitePresentation f]

@@ -84,14 +84,10 @@ namespace AlgebraicGeometry.Scheme.ProEt
 set_option backward.isDefEq.respectTransparency false in
 /-- A weakly contractible hypercover computes bounded-below derived evaluation.
 
-The first conjunct gives a comparison for every bounded-below complex and every
-bounded-below termwise-injective chain resolution. Its target is precisely the
-resolution definition of derived evaluation in the node. The comparisons are
-natural under coefficient chain maps and resolution maps commuting up to homotopy.
-Taking an identity coefficient map gives independence of the resolution. The
-second conjunct is invariance of total sections under bounded-below quasi-isomorphisms.
-`CochainComplex.Plus` imposes strict boundedness of terms, not just of cohomology.
-No affineness or qcqs hypothesis is imposed on the given hypercover or its base. -/
+The first conjunct gives, for every bounded-below complex and every bounded-below
+termwise-injective resolution, a comparison with the derived evaluation computed by that
+resolution, natural in coefficient chain maps and resolution maps commuting up to homotopy.
+The second conjunct is invariance of total sections under bounded-below quasi-isomorphisms. -/
 theorem hypercover_computes_boundedBelow_complex (X : Scheme.{u})
     (R : Sheaf (topology X) CommRingCat.{u + 1}) (W : X.ProEt)
     (U : SimplicialObject (Over W))

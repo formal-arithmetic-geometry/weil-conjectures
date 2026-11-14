@@ -194,7 +194,8 @@ theorem targetA_delta (K : d.derived X) (hK : d.TowerComplete X K) :
   erw [CategoryTheory.Functor.map_id, Category.id_comp]
 
 set_option linter.unusedVariables false in
-/-- reconstructionCoefficientEquations: the indicated part of the ordered comparison argument. -/
+/-- For tower-complete `K`, the reconstruction isomorphisms `iotaS`, `iotaT` and `phi` are
+compatible with `rhoM`, `rhoPull`, `beta` and `delta` after applying `lambda` and `rlim`. -/
 theorem reconstructionCoefficientEquations (sq : ChosenCartesianSquare g' f' f g) :
     ∀ (K : d.derived X) (hK : d.TowerComplete X K),
       ((res d Y').map (sourceReconstruction (f := f) (g := g) d K).hom ≫

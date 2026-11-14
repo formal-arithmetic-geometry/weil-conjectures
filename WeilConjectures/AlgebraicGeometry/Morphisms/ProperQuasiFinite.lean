@@ -13,8 +13,8 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.ZariskisMainTheorem
 
 A morphism of schemes which is proper and locally quasi-finite is finite
 (`AlgebraicGeometry.IsFinite.of_isProper_of_locallyQuasiFinite`, Stacks 02LS, a consequence of
-Zariski's main theorem). This file records the elementary facts around this statement used in
-the blueprint, and the variant with finite fibres.
+Zariski's main theorem). This file records elementary facts around this statement and the
+variant with finite fibres.
 
 ## Main statements
 
@@ -25,6 +25,12 @@ the blueprint, and the variant with finite fibres.
   quasi-finite morphisms are the morphisms of finite type with finite fibres.
 - `AlgebraicGeometry.IsFinite.iff_isProper_and_finite_preimage_singleton`: a morphism is finite
   if and only if it is proper with finite fibres.
+
+## Implementation details
+
+Mathlib's `LocallyQuasiFinite` (quasi-finite stalk maps) does not include finite type:
+`Spec ℚ ⟶ Spec ℤ` is locally quasi-finite and quasi-compact. Hence finite type appears on both
+sides of `locallyQuasiFinite_and_quasiCompact_iff_finite_preimage_singleton`.
 -/
 
 @[expose] public section
@@ -55,10 +61,7 @@ theorem IsFinite.locallyQuasiFinite_and_quasiCompact [IsFinite f] :
 
 /-- **Quasi-finite morphisms have finite fibres.** A morphism is locally quasi-finite and
 quasi-compact if and only if it is locally of finite type, quasi-compact and has finite fibres.
-
-Here "locally quasi-finite" is Mathlib's `LocallyQuasiFinite` (quasi-finite stalk maps, which
-does not include finite type: `Spec ℚ ⟶ Spec ℤ` is locally quasi-finite and quasi-compact), so
-the finite type hypothesis appears on both sides. -/
+-/
 theorem locallyQuasiFinite_and_quasiCompact_iff_finite_preimage_singleton :
     (LocallyOfFiniteType f ∧ LocallyQuasiFinite f ∧ QuasiCompact f) ↔
       (LocallyOfFiniteType f ∧ QuasiCompact f ∧ ∀ s : S, (f ⁻¹' {s}).Finite) :=
@@ -78,10 +81,7 @@ theorem Scheme.Hom.discreteTopology_fiber_and_quasiFiniteAt [LocallyOfFiniteType
   exact Scheme.Hom.quasiFiniteAt_iff_isOpen_singleton_asFiber.mpr (isOpen_discrete _)
 
 /-- **Finite = proper with finite fibres.** A morphism of schemes is finite if and only if it is
-proper with finite fibres. The blueprint assumes the target locally noetherian and argues with
-Serre's criterion for affineness; the statement holds without this assumption, and is proved
-here through Zariski's main theorem
-(`AlgebraicGeometry.IsFinite.iff_isProper_and_locallyQuasiFinite`). -/
+proper with finite fibres. -/
 theorem IsFinite.iff_isProper_and_finite_preimage_singleton :
     IsFinite f ↔ IsProper f ∧ ∀ s : S, (f ⁻¹' {s}).Finite := by
   rw [IsFinite.iff_isProper_and_locallyQuasiFinite]

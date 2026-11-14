@@ -86,13 +86,7 @@ include hS
 
 /-- **Hilbert 90 over a one-point étale `K`-scheme.** For a short exact sequence
 `0 → 𝔾ₘ → E → Q → 0` of abelian sheaves on the small étale site of `Spec K` and an étale
-`K`-scheme `W` with exactly one point, every section of `Q` over `W` lifts to `E`.
-
-The ring `L = Γ(W, 𝒪)` is a field (`AlgebraicGeometry.Scheme.isField_of_etale_of_subsingleton`)
-and `W ≅ Spec L`. Restricting the sequence along the étale morphism `Spec L ⟶ Spec K` gives a
-short exact sequence `0 → 𝔾ₘ → E|_W → Q|_W → 0` on the small étale site of `Spec L`, whose
-global sections are the sections over `W`, and Hilbert 90 for `Spec L` applies
-(`AlgebraicGeometry.Scheme.surjective_app_of_shortExact_gmSheaf`). -/
+`K`-scheme `W` with exactly one point, every section of `Q` over `W` lifts to `E`. -/
 theorem surjective_app_of_shortExact_gmSheaf_of_subsingleton (W : (Spec (.of K)).Etale)
     [Subsingleton W.left] [Nonempty W.left] : Function.Surjective (π.hom.app (op W)) := by
   let := (isField_of_etale_of_subsingleton W).toField
@@ -134,10 +128,7 @@ theorem surjective_app_of_shortExact_gmSheaf_of_subsingleton (W : (Spec (.of K))
 /-- **Hilbert 90 over a quasi-compact étale `K`-scheme.** For a short exact sequence
 `0 → 𝔾ₘ → E → Q → 0` of abelian sheaves on the small étale site of `Spec K` and an étale
 `K`-scheme `W` whose underlying space is quasi-compact, every section of `Q` over `W` lifts to
-`E`. The space of `W` is finite and discrete, so `W` is the disjoint union of its points, over
-each of which the section lifts by
-`AlgebraicGeometry.Scheme.surjective_app_of_shortExact_gmSheaf_of_subsingleton`; the lifts glue
-since the pieces are disjoint. -/
+`E`. -/
 theorem surjective_app_of_shortExact_gmSheaf_of_compactSpace (W : (Spec (.of K)).Etale)
     [CompactSpace W.left] : Function.Surjective (π.hom.app (op W)) := by
   have := discreteTopology_of_etale_of_unique W

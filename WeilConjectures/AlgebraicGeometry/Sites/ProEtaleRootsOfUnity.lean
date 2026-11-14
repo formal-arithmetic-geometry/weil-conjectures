@@ -64,21 +64,12 @@ lemma structurePresheaf_map {U V : S.ProEt} (h : V ⟶ U) :
     (structurePresheaf S).map h.op = h.left.appTop :=
   rfl
 
-/-- The structure presheaf is a sheaf for the pro-étale topology: `Γ` is a sheaf for the big
-pro-étale topology, which is subcanonical (`AlgebraicGeometry.Scheme.isSheaf_Γ`), and the
-forgetful functor from the small pro-étale site is continuous. -/
+/-- The structure presheaf is a sheaf for the pro-étale topology. -/
 theorem isSheaf_structurePresheaf : Presheaf.IsSheaf (ProEt.topology S) (structurePresheaf S) :=
   Functor.op_comp_isSheaf_of_isSheaf _ _ _ _ (isSheaf_Γ proetaleTopology)
 
-/-- The structure sheaf of rings on the small
-pro-etale site.
-
-The structure sheaf `𝒪_S` on the small pro-étale site `S_proét`: the sheaf of commutative rings
-`U ↦ Γ(U, 𝒪_U)` (`AlgebraicGeometry.Scheme.ProEt.structurePresheaf_obj`), whose restriction
-along `h: V ⟶ U` is `h^♯` on global sections
-(`AlgebraicGeometry.Scheme.ProEt.structurePresheaf_map`). It is a sheaf because `Γ` is
-representable on schemes, hence a sheaf for the subcanonical big pro-étale topology, whose
-coverings are fpqc coverings (`AlgebraicGeometry.Scheme.ProEt.isSheaf_structurePresheaf`). -/
+/-- The structure sheaf `𝒪_S` on the small pro-étale site `S_proét`: the sheaf of commutative
+rings `U ↦ Γ(U, 𝒪_U)`, whose restriction along `h: V ⟶ U` is `h^♯` on global sections. -/
 noncomputable def structureSheaf : Sheaf (ProEt.topology S) CommRingCat.{u} :=
   ⟨structurePresheaf S, isSheaf_structurePresheaf S⟩
 
@@ -97,32 +88,19 @@ lemma gmPresheaf_map_apply {U V : S.ProEt} (h : V ⟶ U) (x : (gmPresheaf S).obj
       h.left.appTop ((Additive.toMul x.down : Γ(U.left, ⊤)ˣ) : Γ(U.left, ⊤)) :=
   rfl
 
-/-- The multiplicative group sheaf G_m on the small
-pro-etale site.
-
-The multiplicative group `𝔾_{m,S} = 𝒪_S^×` on `S_proét`: `U ↦ Γ(U, 𝒪_U)ˣ`
-(`AlgebraicGeometry.Scheme.ProEt.gmPresheaf_obj`) with the restriction maps of `𝒪_S`
-(`AlgebraicGeometry.Scheme.ProEt.gmPresheaf_map_apply`), a sheaf of abelian groups. The group
-of units is written additively, as `Additive Γ(U, 𝒪_U)ˣ`, and lifted to the universe of the
-pro-étale sheaves of abelian groups. It is a sheaf because the functor of units preserves
-limits (units of a glued section are glued from the units) and `𝒪_S` is a sheaf. -/
+/-- The multiplicative group `𝔾_{m,S} = 𝒪_S^×` on `S_proét`: the sheaf of abelian groups
+`U ↦ Γ(U, 𝒪_U)ˣ` with the restriction maps of `𝒪_S`. The group of units is written
+additively, as `Additive Γ(U, 𝒪_U)ˣ`, and lifted to the universe of the pro-étale sheaves of
+abelian groups. -/
 noncomputable def gmSheaf : Sheaf (ProEt.topology S) AddCommGrpCat.{u + 1} :=
   ⟨gmPresheaf S, Presheaf.isSheaf_comp_of_isSheaf _ _ _ (isSheaf_structurePresheaf S)⟩
 
 variable (N : ℕ)
 
-/-- The pro-etale sheaf of roots of unity.
-
-The sheaf `μ_{N,S}` of `N`-th roots of unity on the small pro-étale site: the kernel of the
+/-- The sheaf `μ_{N,S}` of `N`-th roots of unity on the small pro-étale site: the kernel of the
 `N`-th power map `[N] = N • 𝟙: 𝔾_{m,S} ⟶ 𝔾_{m,S}` (written additively). Its sections over `U`
 are the `N`-th roots of unity of `Γ(U, 𝒪_U)`
-(`AlgebraicGeometry.Scheme.ProEt.rootsOfUnitySheafSectionsEquiv`). It is killed by `N`
-(`AlgebraicGeometry.Scheme.ProEt.nsmul_id_rootsOfUnitySheaf`), so it is a sheaf of
-`(ℤ/N)_S`-modules (`AlgebraicGeometry.Scheme.ProEt.rootsOfUnityModule`). For `N ∣ N'` the
-transition map `u ↦ u ^ (N' / N)` is `AlgebraicGeometry.Scheme.ProEt.rootsOfUnityTransition`,
-a morphism of sheaves of `(ℤ/N')_S`-modules
-(`AlgebraicGeometry.Scheme.ProEt.rootsOfUnityModuleTransition`), and for a prime `ℓ` the
-`μ_{ℓ^r}` form the inverse system `AlgebraicGeometry.Scheme.ProEt.rootsOfUnityTower`. -/
+(`AlgebraicGeometry.Scheme.ProEt.rootsOfUnitySheafSectionsEquiv`). -/
 noncomputable def rootsOfUnitySheaf : Sheaf (ProEt.topology S) AddCommGrpCat.{u + 1} :=
   kernel (N • 𝟙 (gmSheaf S))
 
@@ -206,8 +184,8 @@ lemma rootsOfUnitySheafSectionsEquiv_apply (x : (rootsOfUnitySheaf S N).obj.obj 
 
 end Sections
 
-/-- The `N`-th roots of unity form a sheaf of `(ℤ/M)_S`-modules for every multiple `M` of `N`:
-the sheaf `μ_N` is killed by `M` (`CategoryTheory.Sheaf.torsionSheaf_constantModule`). -/
+/-- The `N`-th roots of unity form a sheaf of `(ℤ/M)_S`-modules for every multiple `M` of
+`N`. -/
 noncomputable def rootsOfUnityModule (M : ℕ) (h : N ∣ M) :
     SheafOfModules.{u + 1} (Sheaf.constantZModSheaf.{u + 1} (ProEt.topology S) M) :=
   Sheaf.constantZModModuleOfNsmul (rootsOfUnitySheaf S N) fun U x ↦ by
@@ -250,9 +228,7 @@ lemma rootsOfUnityTransition_apply (d : ℕ) (U : S.ProEt)
     (congrArg (fun f ↦ f.hom.app (op U)) (rootsOfUnityTransition_ι S N d)) x
   exact (congrArg (fun y ↦ (Additive.toMul (ULift.down y) : Γ(U.left, ⊤)ˣ)) h).trans rfl
 
-/-- The transition map `μ_{N d} ⟶ μ_N` as a morphism of sheaves of `(ℤ/(N d))_S`-modules: every
-morphism of abelian sheaves between sheaves killed by `N d` is `(ℤ/(N d))_S`-linear
-(`CategoryTheory.Sheaf.torsionSheaf_constantModule` (2)). -/
+/-- The transition map `μ_{N d} ⟶ μ_N` as a morphism of sheaves of `(ℤ/(N d))_S`-modules. -/
 noncomputable def rootsOfUnityModuleTransition (d : ℕ) [NeZero (N * d)] :
     rootsOfUnityModule S (N * d) (N * d) dvd_rfl ⟶
       rootsOfUnityModule S N (N * d) (dvd_mul_right N d) :=

@@ -150,9 +150,9 @@ private theorem integral_upper_from_heart
         fun _ _ ↦ trivial⟩) L hL hlower
   exact (coefficient_unbounded Λ p S Q htrunc c hbounded K hK).2.2.2 b hb
 
-/-- The heart estimates and bounded-above amplitude needed before the truncation-window
-argument. This does not assert a window isomorphism, preservation of coproducts, or
-preservation of a localizing closure. -/
+/-- Cohomological bounds for derived proper pushforward along `p` with fibres of dimension
+at most `d`: it preserves (ind-)constructibility on the heart and bounded constructibility,
+and has cohomological amplitude at most `2d + 1`. -/
 theorem integralProperCohomologicalBounds
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (k : Type u) [Field k] (p₀ : ℕ) [CharP k p₀] (hp₀ : 0 < p₀) (hpℓ : p₀ ≠ ℓ)

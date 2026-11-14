@@ -79,6 +79,7 @@ For an `A`-algebra `B`, apply these to `φ = CommRingCat.ofHom (algebraMap A B)`
   which is the inverse image used in the Stacks project.
 - Deduce that `Ω¹_{X/S}` is quasi-coherent, combining `relativeDifferentialsRestrictIso`,
   `relativeDifferentialsCompIso` and `relativeDifferentialsSpecIso` on affine charts.
+- Identify `Ω¹_{X/S}` with `Δ^*(𝓘/𝓘²)` for the ideal sheaf `𝓘` of the diagonal.
 
 ## References
 
@@ -101,12 +102,7 @@ namespace AlgebraicGeometry.Scheme.Hom
 variable {X S : Scheme.{u}} (f : X ⟶ S)
 
 /-- The sheaf of relative Kähler differentials `Ω¹_{X/S}` of a morphism of schemes `f: X ⟶ S`:
-the sheafification of the presheaf `U ↦ Ω_{𝒪_X(U) / (f⁻¹𝒪_S)(U)}`.
-
-For a smooth curve `C` over a field `k`, `Ω¹_{C/k}` is the sheaf of Kähler differentials and
-`ω_C = Ω¹_{C/k}` the canonical sheaf. On an affine open `Spec B ⊆ C` it is `Ω_{B/k}^~`
-(`AlgebraicGeometry.Scheme.Hom.relativeDifferentialsRestrictFromSpecIso`); the blueprint also
-describes it as `Δ^*(𝓘/𝓘²)` for the ideal sheaf `𝓘` of the diagonal, which is not formalised. -/
+the sheafification of the presheaf `U ↦ Ω_{𝒪_X(U) / (f⁻¹𝒪_S)(U)}`. -/
 @[stacks 01UM]
 noncomputable def relativeDifferentials : X.Modules :=
   (sheafification (𝟙 X.ringCatSheaf.obj)).obj
@@ -654,10 +650,7 @@ variable {X S : Scheme.{u}} (f : X ⟶ S)
 /-- **The affine description of `Ω¹_{X/S}`.** Let `U ⊆ S` and `V ⊆ X` be affine opens with
 `f(V) ⊆ U`, and write `A = Γ(S, U)`, `B = Γ(X, V)`. Then the restriction of `Ω¹_{X/S}` to
 `V = Spec B` is the sheaf `Ω_{B/A}^~` associated with the `B`-module of Kähler differentials of
-the `A`-algebra `B` (for the algebra structure given by `f.appLE U V e`).
-
-For a curve `C` over a field `k`, with `S = Spec k` and `U = ⊤`, this is the standard affine
-description `Ω¹_{C/k}|_{Spec B} = Ω_{B/k}^~` of the sheaf of Kähler differentials of `C`. -/
+the `A`-algebra `B` (for the algebra structure given by `f.appLE U V e`). -/
 noncomputable def relativeDifferentialsRestrictFromSpecIso {U : S.Opens} (hU : IsAffineOpen U)
     {V : X.Opens} (hV : IsAffineOpen V) (e : V ≤ f ⁻¹ᵁ U) :
     f.relativeDifferentials.restrict hV.fromSpec ≅
@@ -667,8 +660,7 @@ noncomputable def relativeDifferentialsRestrictFromSpecIso {U : S.Opens} (hU : I
     relativeDifferentialsCompIso _ _ ≪≫ relativeDifferentialsSpecIso _
 
 /-- If `f` is smooth of relative dimension one, then every point of `X` has an open
-neighbourhood `V` on which `Ω¹_{X/S}` is trivial: on an affine chart where `f` is standard
-smooth, `Ω¹_{X/S}|_V ≅ Ω_{𝒪(V)/𝒪(U)}^~ ≅ 𝒪_V`. -/
+neighbourhood `V` on which `Ω¹_{X/S}` is trivial. -/
 lemma nonempty_restrict_relativeDifferentials_iso_unit [SmoothOfRelativeDimension 1 f] (x : X) :
     ∃ V : X.Opens, x ∈ V ∧
       Nonempty (f.relativeDifferentials.restrict V.ι ≅

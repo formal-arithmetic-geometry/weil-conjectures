@@ -22,6 +22,13 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.WeaklyEtale
 In this file we define the class of pro-affine-étale morphisms of schemes:
 These are the morphisms of the form `lim Xᵢ ⟶ S` where each `Xᵢ` is absolutely affine
 and étale over `X`.
+
+## Implementation details
+
+Stability under composition is proved directly: the general
+`MorphismProperty.IsStableUnderComposition.pro_of_le_isFinitelyPresentable` needs
+`P.IsStableUnderBaseChange` and `P.op ≤ isFinitelyPresentable Schemeᵒᵖ`, which are not
+available for `Etale ⊓ ofObjectProperty (IsAffine ·) ⊤`.
 -/
 
 @[expose] public section
@@ -186,12 +193,7 @@ instance : proAffineEtale.RespectsIso := by
 set_option backward.defeqAttrib.useBackward true in
 /-- For any `MorphismProperty Scheme` `P` coming from a ring-hom property `Q` via
 `HasRingHomProperty`, a morphism `Spec.map f` between affine schemes lies in
-`pro (P ⊓ isAffine)` if and only if `f` lies in `ind (RingHom.toMorphismProperty Q)`.
-
-The forward direction reflects a pro-affine cone of `Spec.map f` along the `Γ ⊣ Spec`
-adjunction (an equivalence on affine objects) to a colimit cocone of ring maps; the
-backward direction applies `Scheme.Spec` to such a colimit and packages the result
-as a pro-cone. -/
+`pro (P ⊓ isAffine)` if and only if `f` lies in `ind (RingHom.toMorphismProperty Q)`. -/
 lemma pro_inf_isAffine_Spec_iff (P : MorphismProperty Scheme.{u})
     {Q : ∀ {R S : Type u} [CommRing R] [CommRing S], (R →+* S) → Prop}
     [HasRingHomProperty P Q] {R S : CommRingCat.{u}} (f : R ⟶ S) :
@@ -454,12 +456,6 @@ instance : proAffineEtale.HasOfPostcompProperty proAffineEtale where
     rw [Scheme.Hom.comp_appTop, CommRingCat.hom_comp] at hfπ
     exact RingHom.IndEtale.of_comp hπ hfπ
 
-
-/- TODO: this previously followed from a (sorried, mathematically unjustified) global
-instance `IsStableUnderComposition (pro P)`. The corrected statement
-`MorphismProperty.IsStableUnderComposition.pro_of_le_isFinitelyPresentable` additionally
-requires `P.IsStableUnderBaseChange` and `P.op ≤ isFinitelyPresentable Schemeᵒᵖ`,
-which are not available for `Etale ⊓ ofObjectProperty (IsAffine ·) ⊤`. -/
 instance : proAffineEtale.IsStableUnderComposition where
   comp_mem {X Y Z} f g hf hg := by
     have hX : IsAffine X := hf.isAffine

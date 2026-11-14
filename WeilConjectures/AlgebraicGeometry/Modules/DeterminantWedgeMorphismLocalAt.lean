@@ -21,11 +21,10 @@ open CategoryTheory Opposite MonoidalCategory
 namespace AlgebraicGeometry.Scheme.Modules
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The local wedge construction on a fixed open, as in the determinant paragraph.
-The construction chooses local lifts, proves independence by finite locally free basis
-expansion and alternation, and descends the resulting alternating multilinear map through
-exterior powers and tensor products.
--/
+/-- For a short exact sequence `0 → S.X₁ → S.X₂ → S.X₃ → 0` with `S.X₁` finite locally free of
+rank `r₁` and an open `U`, there is a morphism `⋀^{r₁} S.X₁ ⊗ ⋀^{r₃} S.X₃ ⟶ ⋀^{r₂} S.X₂` sending
+`(a₁ ∧ ⋯ ∧ a_{r₁}) ⊗ (b₁ ∧ ⋯ ∧ b_{r₃})` over `U` to `f(a₁) ∧ ⋯ ∧ f(a_{r₁}) ∧ c₁ ∧ ⋯ ∧ c_{r₃}`
+for any lifts `c` of `b` along `S.g`. -/
 theorem determinant_wedgeMorphism_local_data_at {X : Scheme.{v}}
     (S : ShortComplex X.Modules) (hS : S.ShortExact) (r₁ r₂ r₃ : ℕ) (hr : r₂ = r₁ + r₃)
     [S.X₁.IsFiniteLocallyFreeOfRank r₁] (U : X.Opens) :

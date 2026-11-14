@@ -15,7 +15,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.ProEtaleComparisonS
 
 ## References
 
-* Stacks Project, Tag 0GLZ
+* Stacks Project, Tag 0GLZ (first proof paragraph)
 -/
 
 @[expose] public section
@@ -180,7 +180,9 @@ private lemma rawEquiv_restriction {X : Scheme.{u}}
         ((sectionIso (X := X) (Y := Y.left) Y.hom F).inv s)
   convert ConcreteCategory.congr_hom hh' s using 1 <;> rfl
 
-/-- Source: Stacks Project, Tag 0GLZ, first proof paragraph. -/
+/-- There is a functor `A` from étale sheaves to pro-étale sheaves whose sections over `Y` are
+the terminal sections of the étale pullback of `F` to `Y`, compatibly with restriction and
+with morphisms of sheaves. -/
 theorem proEtaleComparisonSectionFunctor (X : Scheme.{u}) :
     ∃ A : Sheaf X.smallEtaleTopology (Type (u + 1)) ⥤
         Sheaf (Scheme.ProEt.topology X) (Type (u + 1)),

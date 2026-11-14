@@ -10,6 +10,14 @@ public import WeilConjectures.AlgebraicGeometry.DerivedFiberBetti
 import WeilConjectures.AlgebraicGeometry.Perfect.PerfectFiniteResidueCohomologyFinite
 import WeilConjectures.AlgebraicGeometry.Perfect.PerfectFiniteResidueCohomologyBounded
 
+/-! # Finite fibre data of a strictly perfect neighbourhood
+
+## References
+
+* Stacks Project, More on Algebra, Tag 0BCD
+* Stacks Project, Cohomology of Sheaves, Tag 08C4 (strictly perfect complexes)
+-/
+
 @[expose] public section
 
 universe u w
@@ -18,9 +26,7 @@ namespace AlgebraicGeometry.Scheme
 noncomputable section
 
 /-- A strictly perfect neighbourhood of a point gives finite-dimensional derived fibre
-cohomology, supported in a bounded interval.
-Source: Stacks Project, More on Algebra, Tag 0BCD, first paragraph of the proof;
-Cohomology of Sheaves, Tag 08C4 (strictly perfect complexes). -/
+cohomology, supported in a bounded interval. -/
 theorem finiteFiberData
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

@@ -29,28 +29,21 @@ canonical morphism `∐_{m ∈ M} P ⟶ P ×_Y P` sending the `m`-th summand by 
 isomorphism, which is available because `M` is finite, hence `Small.{u}`.
 
 Isomorphism of torsors is an equivalence relation
-(`AlgebraicGeometry.Scheme.EtaleTorsor.setoid`), and the proposition of the blueprint
-subsection `sk-prop-input-torsors` is that the quotient by it is in canonical bijection with
-`H^1(Y_ét, M)`, the first sheaf cohomology of the constant sheaf with value `M`. The
-statement below records that bijection together with the one further property of it that the
-smooth base change proof uses: a torsor has class `0` exactly when its structure morphism
-admits a section.
+(`AlgebraicGeometry.Scheme.EtaleTorsor.setoid`), and the quotient by it is in canonical
+bijection with `H^1(Y_ét, M)`, the first sheaf cohomology of the constant sheaf with value `M`.
+A torsor has class `0` exactly when its structure morphism admits a section.
 
 ## Implementation notes
 
-Two refinements of Stacks `02NE` recorded in the sketch are not part of the statement.
+Naturality of the bijection in `Y` is stated, in terms of the pullback map
+`AlgebraicGeometry.Etale.cohomologyMap` on sheaf cohomology, as
+`AlgebraicGeometry.Scheme.EtaleTorsor.exists_forall_cohomologyMap_eq_zero_iff`. The criterion
+that, for `Y` connected and `M = ℤ/dℤ`, the torsor attached to a class is connected exactly when
+the corresponding homomorphism out of the étale fundamental group is surjective is not
+formalized, since Mathlib has no étale fundamental group.
 
-The first is the naturality of the bijection in the pair `(Y, M)`. The proof of the vanishing
-theorem `proposition-base-change-larger-algebraically-closed--1` uses naturality in `Y`: it pulls a
-torsor back along a morphism `Y' ⟶ Y` and concludes that its class dies. This is stated, in terms of
-the pullback map `AlgebraicGeometry.Etale.cohomologyMap` on sheaf cohomology, as
-`AlgebraicGeometry.Scheme.EtaleTorsor.exists_forall_cohomologyMap_eq_zero_iff`.
-
-The second is the criterion, for `Y` connected and `M = ℤ/dℤ`, that the torsor attached to a
-class be connected — a Galois cover with group `ℤ/dℤ`, which is the input of
-`proposition-base-change-larger-algebraically-closed` — exactly when the corresponding homomorphism
-out of the étale fundamental group is surjective. Mathlib has no étale fundamental group, so this is
-left to the prose.
+A `AlgebraicGeometry.Scheme.GaloisCover` is not required to have connected total space; the
+quotient `P / G ≅ Y` is a consequence of the torsor condition and is not recorded.
 
 ## Main definitions
 
@@ -98,17 +91,7 @@ variable (M : Type (u + 1)) [AddCommGroup M] [Finite M]
 transitive action of the finite abelian group `M`.
 
 Simple transitivity is expressed by the isomorphism `M × P ≅ P ×_Y P`, in the form that the
-morphism `∐_{m ∈ M} P ⟶ P ×_Y P` whose `m`-th component is `(m +ᵥ -, id)` is an isomorphism:
-
-```
-∐_{m ∈ M} P --≅--> P ×_Y P --pr₁--> P
-                                    |
-                                    π
-                                    v
-                                    Y
-```
-
-The coproduct exists because `M` is finite, hence small. -/
+morphism `∐_{m ∈ M} P ⟶ P ×_Y P` whose `m`-th component is `(m +ᵥ -, id)` is an isomorphism. -/
 structure Scheme.EtaleTorsor (Y : Scheme.{u}) where
   /-- the total space of the torsor -/
   P : Scheme.{u}
@@ -363,8 +346,7 @@ lemma toSheafTorsorContinuousMap_equiv_of_isIsomorphic {t₁ t₂ : EtaleTorsor 
   refine ⟨⟨Y.smallEtaleTopology.uliftYoneda.{u + 1}.mapIso Φ, fun U f x ↦ ULift.ext ?_⟩⟩
   exact t₁.smulHom_comp t₂ f x.down Φ.hom hv
 
-/-- Torsors with isomorphic sheaf torsors are isomorphic: by the Yoneda lemma, an isomorphism of
-the functors of points is induced by an isomorphism of the total spaces. -/
+/-- Torsors with isomorphic sheaf torsors are isomorphic. -/
 lemma isIsomorphic_of_toSheafTorsorContinuousMap_equiv {t₁ t₂ : EtaleTorsor M Y}
     (h : t₁.toSheafTorsorContinuousMap ≈ t₂.toSheafTorsorContinuousMap) : t₁.IsIsomorphic t₂ := by
   obtain ⟨e⟩ := h
@@ -442,8 +424,7 @@ lemma toSheafTorsor_sheaf (t : EtaleTorsor M Y) :
   rfl
 
 /-- **Full faithfulness on isomorphism classes.** Two `M`-torsors are isomorphic if and only if
-their sheaf torsors are: an isomorphism of the functors of points is induced by an isomorphism
-of the total spaces, by the Yoneda lemma. -/
+their sheaf torsors are. -/
 theorem toSheafTorsor_equiv_toSheafTorsor_iff {t₁ t₂ : EtaleTorsor M Y} :
     t₁.toSheafTorsor ≈ t₂.toSheafTorsor ↔ t₁ ≈ t₂ := by
   let _ : TopologicalSpace M := ⊥
@@ -483,9 +464,7 @@ variable (M Y) in
 /-- **The class of an `M`-torsor in `H¹(Y_ét, M)`.** The canonical map from isomorphism classes
 of `M`-torsors over `Y` to the first étale cohomology of the constant sheaf `M`: the class of
 `P ⟶ Y` is the class (`CategoryTheory.Sheaf.Torsor.classH1`) of its sheaf torsor of points
-(`AlgebraicGeometry.Scheme.EtaleTorsor.toSheafTorsor`). It is injective
-(`AlgebraicGeometry.Scheme.EtaleTorsor.injective_classH1`), and bijective by effective étale
-descent of finite étale morphisms (`AlgebraicGeometry.Scheme.EtaleTorsor.bijective_classH1`). -/
+(`AlgebraicGeometry.Scheme.EtaleTorsor.toSheafTorsor`). -/
 noncomputable def classH1 :
     Quotient (EtaleTorsor.setoid M Y) → Sheaf.H
       ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of M)) 1 :=
@@ -515,14 +494,7 @@ variable (G : Type (u + 1)) [Group G] [Finite G]
 /-- A finite étale Galois cover of a scheme `Y` with group `G`: a finite étale surjective
 `Y`-scheme `P` on which the finite group `G` acts on the left over `Y`, simply transitively,
 that is, such that the morphism `∐_{g ∈ G} P ⟶ P ×_Y P` whose `g`-th component is
-`(g • -, id)` is an isomorphism. In other words, `P` is a finite étale `G`-torsor over `Y`.
-
-This is the notion of a Galois cover with group `G` of the blueprint definition
-`def-sbc-normal-dominant-galois`; as there, the total space is not required to be connected.
-The quotient `P / G ≅ Y` of that definition is a consequence of the torsor condition and is
-not recorded. For an abelian group written additively this is
-`AlgebraicGeometry.Scheme.EtaleTorsor`, see `AlgebraicGeometry.Scheme.EtaleTorsor.toGaloisCover`
-and `AlgebraicGeometry.Scheme.GaloisCover.toEtaleTorsor`. -/
+`(g • -, id)` is an isomorphism. In other words, `P` is a finite étale `G`-torsor over `Y`. -/
 structure Scheme.GaloisCover (Y : Scheme.{u}) where
   /-- the total space of the cover -/
   P : Scheme.{u}

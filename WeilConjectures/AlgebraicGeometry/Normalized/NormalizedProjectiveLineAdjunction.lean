@@ -13,6 +13,12 @@ public import WeilConjectures.AlgebraicGeometry.Finite.FiniteP1AdjunctionOfInteg
 /-! # The projective-line adjunction for a normalized twist datum
 
 The projective-line geometric input to the affine-space induction.
+
+## Implementation details
+
+The finite-root splitting (`exists_arbitraryBaseFiniteP1Integrals`) and the Tate line comparison
+(`nonempty_normalizedTateLineComparison`) are chosen, as the base results only assert their
+existence.
 -/
 
 @[expose] public section
@@ -105,12 +111,8 @@ theorem normalizedProjectiveLineAdjunctionOfIntegrals_counit_app
   rfl
 
 /-- **The projective-line adjunction** `Rq_* ⊣ Lq^*(1)[2]` for a normalized Tate twist: the
-adjunction `normalizedProjectiveLineAdjunctionOfIntegrals` for an exponent `N` of `Λ` invertible
-on `S`, the arbitrary-base finite-root splitting of `exists_arbitraryBaseFiniteP1Integrals` and
-its diagonal class `finiteP1DiagonalClass` and the comparison
-`nonempty_normalizedTateLineComparison`; these are chosen, as the base results
-only assert their existence. Its counit is built from the trace
-(`normalizedProjectiveLineAdjunctionOfIntegrals_counit_app`). -/
+adjunction `normalizedProjectiveLineAdjunctionOfIntegrals` for chosen finite-root splitting
+data, diagonal class and Tate line comparison. -/
 noncomputable def normalizedProjectiveLineAdjunction
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ]
     [HasTateTwist.IsNormalized Λ] (S : Scheme.{u}) [HasInvertibleExponent Λ S] :

@@ -24,6 +24,12 @@ import WeilConjectures.AlgebraicGeometry.OrderedExchange.OrderedExchangeTowerExc
 * Stacks 099M, 0D6D, 0D6E
 * Stacks 099M, 0E48
 * Stacks Tags 099M, 099N, 0A07 and 0E48
+
+## Implementation details
+
+`rho_pull_generic` is stated for abstract exact functors and derived reduction models, and
+`rho_reductionTowerPullbackIso` is its instance at the strict pro-étale towers, so that the
+kernel never unfolds the concrete derived-category instances.
 -/
 
 @[expose] public noncomputable section
@@ -307,9 +313,7 @@ def GenRhoNorm {B C T TC : Type*} [Category B] [Category C] [Category T] [Catego
 
 set_option linter.unusedVariables false in
 /-- The compatibility of a reduction comparison with pullback, for abstract exact functors
-and derived reduction models. The concrete statement `rho_reductionTowerPullbackIso` is
-its instance at the strict pro-étale towers. Its proof is checked generically, so the
-kernel never unfolds the concrete derived-category instances here. -/
+and derived reduction models. -/
 theorem rho_pull_generic
     {BV BU CV CU TBV TBU TCV TCU : Type*}
     {iBV : Category BV} {iBU : Category BU} {iCV : Category CV} {iCU : Category CU}
@@ -819,7 +823,8 @@ theorem towerV'_delta (sq : ChosenCartesianSquare g' f' f g) (K : d.derived X) :
   exact towerV'_delta_expanded d sq K
 
 set_option linter.unusedVariables false in
-/-- strictCoefficientEquations: the indicated part of the ordered comparison argument. -/
+/-- The tower map `towerV'` is the integral exchange conjugated by the realization isomorphisms
+`H` and `H'`, and it is compatible with `rhoM`, `beta`, `delta` and the tower mate. -/
 theorem strictCoefficientEquations (sq : ChosenCartesianSquare g' f' f g) :
     ∀ (K : d.derived X) (hK : d.TowerComplete X K),
       (d.towerV' sq K =

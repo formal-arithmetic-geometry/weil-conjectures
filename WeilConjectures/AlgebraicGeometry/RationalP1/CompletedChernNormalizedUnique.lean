@@ -95,13 +95,7 @@ private theorem completed_line_complete
   ext U x
   exact Scheme.proEtaleRootsOfUnity_nsmul X (l ^ (n.unop + 1)) U x
 
-/-- A normalized completed Chern adjunct is unique because the presentation's
-source comparison is an isomorphism.
-
-The normalization equation is an equality after postcomposition with
-`p.sourceMap`.  That map is the canonical shifted derived comparison and is
-invertible by its construction, so cancellation identifies any two normalized
-adjuncts. -/
+/-- A normalized completed Chern adjunct is unique. -/
 theorem completedChernNormalized_unique
     (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}
     [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]

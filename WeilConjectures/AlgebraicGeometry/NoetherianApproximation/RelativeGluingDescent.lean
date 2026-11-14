@@ -85,7 +85,7 @@ namespace RelativeAffinePresentation
 
 variable {X : Scheme.{u}} {g : X ⟶ c.pt} (R : RelativeAffinePresentation c g)
 
-/-- Part of blueprint `theorem-nagata-s-compactification-theorem--1`: models of the charts of `R`
+/-- Models of the charts of `R`
 over a common stage `D_i`: affine schemes `Yₐ` of finite presentation over `D_i` whose base
 change to the limit is the chart `Wₐ`. These are the descended chart algebras of
 `lemma-nagata-affine-fp-descends`. -/
@@ -201,12 +201,12 @@ lemma limitOverlapMap_snd (a b : R.J) :
 
 variable [QuasiSeparatedSpace X]
 
-/-- Part of blueprint `theorem-nagata-s-compactification-theorem--1`: the stage `μ_{ab}` to which
+/-- The stage `μ_{ab}` to which
 the overlap `Lₐ ∩ ℓₐ⁻¹(L_b)` descends. -/
 noncomputable def overlapStage (a b : R.J) : Over M.stage :=
   baseChangeQcOpenDescentStage hc (M.p a) (M.limitOverlap a b) (M.isCompact_limitOverlap a b)
 
-/-- Part of blueprint `theorem-nagata-s-compactification-theorem--1`: the descended overlap, a
+/-- The descended overlap, a
 quasi-compact open of `Yₐ ×_{D_i} D_{μ_{ab}}`. -/
 noncomputable def overlapOpen (a b : R.J) :
     (pullback (M.p a) (D.map (M.overlapStage hc a b).hom)).Opens :=
@@ -248,12 +248,12 @@ lemma exists_overlapMap (a b : R.J) :
     (baseChangeDiagramStructure D (M.p a)) (M.isCompact_overlapOpen hc a b) (M.p b)
     (M.limitOverlapMapFst hc a b) (M.limitOverlapMapFst_comp hc a b)
 
-/-- Part of blueprint `theorem-nagata-s-compactification-theorem--1`: the stage `ν_{ab} ≥ μ_{ab}` to
+/-- The stage `ν_{ab} ≥ μ_{ab}` to
 which the overlap map descends. -/
 noncomputable def overlapMapStage (a b : R.J) : Over (M.overlapStage hc a b) :=
   (M.exists_overlapMap hc a b).choose
 
-/-- Part of blueprint `theorem-nagata-s-compactification-theorem--1`: the descended overlap map,
+/-- The descended overlap map,
 from the descended overlap at the stage `ν_{ab}` to `Y_b`. -/
 noncomputable def overlapMapDescent (a b : R.J) :
     ((baseChangeDiagram D (M.p a)).map (M.overlapMapStage hc a b).hom ⁻¹ᵁ
@@ -279,7 +279,7 @@ lemma exists_rawStage :
     fun x : R.J × R.J ↦ (M.overlapMapStage hc x.1 x.2).left
   exact ⟨l, fun a b ↦ hl (a, b)⟩
 
-/-- Blueprint `theorem-nagata-s-compactification-theorem--1` (stage): the stage `λ_raw`, a selected
+/-- The stage `λ_raw`, a selected
 common upper bound of the stages `ν_{ab}` of the descended overlap maps (and hence of the stages
 of the descended overlaps and of the chart stage). -/
 noncomputable def rawStage : Over M.stage := (M.exists_rawStage hc).choose

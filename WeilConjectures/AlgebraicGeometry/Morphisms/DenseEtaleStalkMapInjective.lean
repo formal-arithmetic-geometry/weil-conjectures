@@ -18,8 +18,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 ## References
 
 * Stacks Project, Tags 0357 and 01UA
-* Stacks Project, Tag 0357 (open integral normal components), and
-  new-finite-normal-dense-etale-stalk-going-down, steps 1 and 2
+* Stacks Project, Tag 0357 (open integral normal components)
 -/
 
 @[expose] public section
@@ -61,10 +60,7 @@ private theorem stalkMap_injective_of_integral_dense_flat {X Y : Scheme.{u}}
   simp [hs]
 
 /-- If the target has domain stalks and is locally Noetherian, a morphism
-that is etale over an open with dense source preimage has injective stalk maps.
-
-The germ argument
-uses flatness of etale stalk maps and injectivity of germs on integral schemes. -/
+that is etale over an open with dense source preimage has injective stalk maps. -/
 theorem dense_etale_stalkMap_injective_of_domain_stalks {X Y : Scheme.{u}}
     [IsLocallyNoetherian Y] (f : X ⟶ Y)
     (hY : ∀ y : Y, IsDomain (Y.presheaf.stalk y))

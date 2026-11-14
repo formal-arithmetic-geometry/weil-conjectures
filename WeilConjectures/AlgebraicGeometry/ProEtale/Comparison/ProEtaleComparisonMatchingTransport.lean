@@ -14,6 +14,7 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSetTerminalTransport
 
 * Stacks Project, Tag 0GLZ, first paragraph
 * Tag 09XN
+* Stacks Project, Tag 0GLZ (first proof paragraph); Tags 03CB and 03CC
 -/
 
 @[expose] public section
@@ -150,7 +151,9 @@ private lemma tr_eq {R S T : Scheme.{u}} (e : S ⟶ R)
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 -- The overlap equation has several nested inverse-image functors and dependent equality casts.
-/-- Source: Stacks Project, Tag 0GLZ, first proof paragraph; Sites, Tags 03CB and 03CC. -/
+/-- A compatible family of sections of `P`, identified via `e` with sections of the étale
+pullbacks of `F`, transports to a family of sections of the iterated pullbacks of `F` that
+agree on the overlaps, i.e. to descent data. -/
 theorem proEtaleComparisonMatchingTransport
     (X : Scheme.{u}) (F : Sheaf X.smallEtaleTopology (Type (u + 1)))
     (P : X.ProEtᵒᵖ ⥤ Type (u + 1))

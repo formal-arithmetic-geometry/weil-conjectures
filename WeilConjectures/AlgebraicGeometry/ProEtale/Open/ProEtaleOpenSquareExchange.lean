@@ -17,7 +17,7 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.F
 /-!
 # Canonical open-square exchange on the small pro-etale site
 
-All functors act on the published intrinsic constant-ring module categories.
+All functors act on the intrinsic constant-ring module categories.
 The comparison is fixed as the inverse of the open-adjunction mate; the data below
 include restriction normalization, both identity laws and both pasting laws.
 
@@ -173,10 +173,9 @@ noncomputable def sfIntrinsicDerivedSquarePullback {U' U Y' Y : Scheme.{u}}
     mapDerivedCategoryNatIso (sfIntrinsicSquarePullback A gU j' j g w) ≪≫
     (mapDerivedCategoryCompIso (sfIntrinsicPullback A g) (sfIntrinsicPullback A j')).symm
 
-/-- A coherent family of the canonical exchange isomorphisms. The `canonical` field fixes
-its inverse to the specified mate, so none of its isomorphisms is arbitrary. The restriction
-field is precisely the identity after the two open units and the pullback identification.
-The last four fields express horizontal/vertical identity and pasting, respectively. -/
+/-- A coherent family of the canonical exchange isomorphisms, whose inverses are the
+open-adjunction mates, satisfying restriction normalization and the identity and pasting laws.
+-/
 structure SfOpenSquareExchangeData where
   exchange : ∀ {U' U Y' Y : Scheme.{u}} (gU : U' ⟶ U) (j' : U' ⟶ Y')
     (j : U ⟶ Y) (g : Y' ⟶ Y) [IsOpenImmersion j] [IsOpenImmersion j']

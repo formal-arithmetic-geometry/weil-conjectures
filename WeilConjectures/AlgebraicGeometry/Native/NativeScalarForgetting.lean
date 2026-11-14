@@ -21,6 +21,13 @@ import Mathlib.CategoryTheory.Monoidal.Internal.Module
 ## References
 
 * Stacks Project, Tags 03CW, 03CY and 03EK
+
+## Implementation details
+
+The inverse equips an internal module over the underlying abelian ring sheaf with the scalar
+action obtained by restricting the ring action to the (central) constant scalar sections; the
+sectionwise action then factors through the tensor product over the scalar field, and the
+native action is obtained by sheafification.
 -/
 
 @[expose] public section
@@ -427,20 +434,8 @@ end CategoryTheory.ScalarForgetting
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- Forgetting the ambient vector-space structure of a native module loses no data.
-
-An internal module over the underlying abelian ring sheaf acquires its scalar action
-by restricting the ring action to constant scalar sections. Its action is bilinear for
-these scalars, since the constants are central in the native coefficient algebra.
-Thus the sectionwise action factors uniquely through the tensor product over the
-scalar field. Sheafifying this factorization constructs the native action. The unit
-and associativity diagrams follow by testing on elementary tensors, then using the
-sheafification adjunction. Conversely the native unit diagram says that restriction
-to constant scalars recovers the original vector-space structure. An abelian sheaf
-map commuting with the ring action consequently commutes with these scalars and is
-scalar linear. Testing the action maps on elementary tensors proves that these
-constructions are inverse on objects and morphisms. They also work over the empty
-scheme and for the zero module. -/
+/-- Forgetting the ambient vector-space structure of a native module loses no data: the
+forgetful functor `AdicSheaf.forgetAb ℓ T` is an equivalence. -/
 theorem nativeScalarForgetting_isEquivalence (ℓ : ℕ) [Fact ℓ.Prime] (T : Scheme.{u}) :
     (AdicSheaf.forgetAb ℓ T).IsEquivalence := by
   exact CategoryTheory.ScalarForgetting.forgetting_isEquivalence

@@ -13,10 +13,9 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 # The coordinate sections `Tᵢ` of `𝒪(1)` on projective space
 
 The homogeneous coordinate `Tᵢ` is a global section of the twisting sheaf `𝒪(1)` on
-`ℙ(n; S)`, the section `xᵢ` of `𝒪_P(1)` of the blueprint. We construct it as the pullback along
-`toProjInt : ℙ(n; S) ⟶ Proj ℤ[Tᵢ]` of multiplication by `Tᵢ` from `𝒪 ≅ 𝒪(0)` to `𝒪(1)` on the
-integral model, and show that its non-vanishing locus, the complement of its zero scheme, is
-the standard open `D₊(Tᵢ)`.
+`ℙ(n; S)`. We construct it as the pullback along `toProjInt : ℙ(n; S) ⟶ Proj ℤ[Tᵢ]` of
+multiplication by `Tᵢ` from `𝒪 ≅ 𝒪(0)` to `𝒪(1)` on the integral model, and show that its
+non-vanishing locus, the complement of its zero scheme, is the standard open `D₊(Tᵢ)`.
 
 ## Main definitions
 
@@ -103,8 +102,7 @@ instance sheafOfModules_isInvertible_twist (m : ℤ) :
 
 /-- **The coordinate section `Tᵢ` of `𝒪(1)`** on `ℙ(n; S)`: the pullback along
 `toProjInt: ℙ(n; S) ⟶ Proj ℤ[Tᵢ]` of the global section `Tᵢ` of `𝒪(1)` on the integral model,
-i.e. of multiplication by `Tᵢ` from `𝒪 ≅ 𝒪(0)` to `𝒪(1)`. This is the section `xᵢ` of
-`𝒪_P(1)` of the blueprint. -/
+i.e. of multiplication by `Tᵢ` from `𝒪 ≅ 𝒪(0)` to `𝒪(1)`. -/
 def coordinateSection (i : n) : 𝟙_ (ℙ(n; S)).Modules ⟶ twist n S 1 :=
   (Scheme.Modules.pullbackObjUnitIso (toProjInt n S)).inv ≫
     (Scheme.Modules.pullback (toProjInt n S)).map

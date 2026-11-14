@@ -126,7 +126,7 @@ private noncomputable def ringTransportInverseWedge
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-/-- Extend the new wedge and use the inverse ring map to prove linearity over `S`. -/
+/-- The `S`-linear map from the old exterior power to the new one extending the new wedge. -/
 private noncomputable def ringTransportInverse
     (R S : CommRingCat.{v}) (e : R ≅ S) (A : ModuleCat.{v} R) (n : ℕ) :
     (ModuleCat.restrictScalars e.inv.hom).obj (ModuleCat.of R (⋀[R]^n A)) ⟶
@@ -162,7 +162,7 @@ private theorem ringTransportInverse_wedge
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-/-- Both transports are inverse because their composites fix all pure wedges. -/
+/-- The isomorphism of `S`-modules between the old and the new exterior power. -/
 private noncomputable def ringTransportIso
     (R S : CommRingCat.{v}) (e : R ≅ S) (A : ModuleCat.{v} R) (n : ℕ) :
     (ModuleCat.restrictScalars e.inv.hom).obj (ModuleCat.of R (⋀[R]^n A)) ≅
@@ -216,8 +216,7 @@ private local instance restrictedSectionModule {X : Scheme.{v}}
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- The presheaf analogue of Mathlib's `restrictAdjunction`: its unit is restriction to
-`f ᵁ (f ⁻¹ᵁ V)`, and its counit restricts along `f ⁻¹ᵁ (f ᵁ V) = V`. Naturality
-and both triangle identities follow from the presheaf composition and identity laws. -/
+`f ᵁ (f ⁻¹ᵁ V)`, and its counit restricts along `f ⁻¹ᵁ (f ᵁ V) = V`. -/
 private noncomputable def openPresheafRestrictionAdjunction {X Y : Scheme.{v}}
     (f : X ⟶ Y) [IsOpenImmersion f] :
     openPresheafRestriction f ⊣ PresheafOfModules.pushforward.{v} f.toRingCatSheafHom.hom where
@@ -358,13 +357,8 @@ private theorem openExteriorComponent_wedge {X : Scheme.{v}} (M : X.Modules)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-/-- Component isomorphisms and their naturality for the exterior presheaf pullback.
-
-The component map sends a pure wedge to the wedge of the corresponding restricted
-sections, using the canonical ring isomorphism on sections.  Its inverse uses the
-inverse ring isomorphism.  The exterior-power universal property proves that these
-maps are linear and inverse, while the defining restriction formula proves naturality.
--/
+/-- For an open `U ⊆ X`, the presheaf pullback of `⋀ⁿ M` along `U.ι` and `⋀ⁿ (M|_U)` have
+isomorphic sections over every open, compatibly with restriction. -/
 theorem exteriorPresheaf_open_pullback_data {X : Scheme.{v}} (M : X.Modules) (n : ℕ)
     (U : X.Opens) :
     ∃ (app : ∀ V : U.toScheme.Opensᵒᵖ,

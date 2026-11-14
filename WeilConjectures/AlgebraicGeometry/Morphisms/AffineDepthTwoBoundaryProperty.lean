@@ -15,6 +15,14 @@ public import Mathlib.LinearAlgebra.Dual.Defs
 import Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.RingTheory.DualDepthTwo
 import WeilConjectures.AlgebraicGeometry.Morphisms.AffineDoubleDualStalk
+
+/-! # Depth two of the finite double dual at boundary points
+
+## References
+
+* Stacks Project, Tags 0EY6, 0583 and the local Hom-depth bound 0AV5(2)
+-/
+
 @[expose] public section
 universe u v w
 open CategoryTheory Opposite TopCat.Presheaf
@@ -45,8 +53,7 @@ private theorem ideal_depth_le_of_equiv_of_le {R : Type u} [CommRing R]
     exact ⟨rs, (e.isRegular_congr rs).mp hreg,
       fun x hx => hIJ (hmem x hx), rfl⟩
 
-/-- The sheaf of the actual finite double dual has depth two at boundary points.
-Source: Stacks Project, Tags 0EY6, 0583 and the local Hom-depth bound 0AV5(2). -/
+/-- The sheaf of the actual finite double dual has depth two at boundary points. -/
 theorem affine_depth_two_boundary_property
     (A : CommRingCat.{u}) [IsNoetherianRing A] (W : (Spec A).Opens)
     (hboundary : ∀ x : Spec A, x ∉ W →

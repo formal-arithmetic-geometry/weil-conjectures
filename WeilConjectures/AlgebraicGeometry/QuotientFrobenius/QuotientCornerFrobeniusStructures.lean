@@ -157,7 +157,7 @@ of strict systems, before evaluating. Restriction retains the completed coeffici
 - `QuotientFrobenius.quotientCornerFrobeniusStructures`: all finite, strict and completed
   corner structures and their completed source and target reductions.
 - `QuotientFrobenius.finite_formulas` and `QuotientFrobenius.towerTheta_evaluation`:
-  the finite blueprint formulas and their compatibility with ambient scalar restriction.
+  the finite formulas and their compatibility with ambient scalar restriction.
 
 ## References
 
@@ -667,9 +667,8 @@ def restrictionEvaluation (T : Scheme.{t}) (n : ℕ) :
 variable {X' X Y' Y : Scheme.{t}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
   {f : X ⟶ Y} {g : Y' ⟶ Y}
 
-/-- Automorphisms of the four schemes commuting with all four edges. Their commutation
-identifications form the cube: in the scheme category higher coherence is equality of
-proofs, and the Cartesian faces are supplied by `face_isPullback` below. -/
+/-- Automorphisms of the four schemes of a Cartesian square commuting with all four edges,
+forming a cube. -/
 structure Cube (_sq : ChosenCartesianSquare g' f' f g) where
   FX : X ≅ X
   FY : Y ≅ Y

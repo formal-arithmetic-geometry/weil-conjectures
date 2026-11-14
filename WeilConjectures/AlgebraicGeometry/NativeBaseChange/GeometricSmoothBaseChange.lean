@@ -33,9 +33,11 @@ base-change morphism `ḡ^* Rp̄_* ⟶ Rp̄'_* v̄^*` of the geometric square (t
 algebraic closure of `k₀`) is invertible on bounded complexes with constructible cohomology
 (`AlgebraicGeometry.NativeBaseChange.geometric_smooth_baseChange_isIso`).
 
-The proof follows `AlgebraicGeometry.NativeBaseChange.geometric_proper_baseChange_isIso`: by
-the joint conservativity of restriction to an affine Zariski cover of the target, the claim
-reduces to affine charts
+## Implementation details
+
+As for `AlgebraicGeometry.NativeBaseChange.geometric_proper_baseChange_isIso`, by the joint
+conservativity of restriction to an affine Zariski cover of the target, the claim reduces to
+affine charts
 (`AlgebraicGeometry.ProEtale.adicDerivedBaseChange_isIso_of_affine_of_smooth`),
 where the encoded native mate is identified with the condensed base-change morphism of bounded
 constructible `ℚ̄_ℓ`-complexes, which is invertible by smooth base change
@@ -120,7 +122,7 @@ private theorem reflect_native_iso (l : ℕ) [Fact l.Prime]
     (nativeExchangeEncodingAt l Λ hΛ Y).mapDerivedCategory hf inferInstance
 
 /-- The base-change morphism attached to the rational `ℚ̄_ℓ`-preservation proof is the standard
-`ℚ̄_ℓ`-coefficient base-change morphism: both have the same functor data. -/
+`ℚ̄_ℓ`-coefficient base-change morphism. -/
 private theorem baseChange_restriction_eq (l : ℕ) [Fact l.Prime] {k : Type u} [Field k]
     [Fact (ringChar k).Prime] [Fact (ringChar k ≠ l)]
     {X Y X' Y' : Over (Spec (.of k))}
@@ -238,11 +240,7 @@ Y' --g--> Y
 ```
 of `k`-schemes with `Y`, `Y'` affine of finite type over `k`, `g` smooth and `p` separated,
 quasi-compact and locally of finite type, the native derived base-change morphism is invertible
-on bounded complexes with constructible cohomology.
-
-All four schemes are separated of finite type over `k`, so the encoded complex is bounded
-constructible, the native mate is identified with the condensed base-change morphism, and the
-latter is invertible by smooth base change. -/
+on bounded complexes with constructible cohomology. -/
 theorem adicDerivedBaseChange_isIso_of_affine_of_smooth
     (k₀ k : Type u) [Field k₀] [Finite k₀] [Field k] [Algebra k₀ k]
     [IsAlgClosure k₀ k] (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
@@ -323,8 +321,7 @@ private theorem isPullback_geometricSquare (sq : IsPullback v p' p g) :
 
 /-- Smooth base change for the native derived base-change morphism of a cartesian square over
 an algebraically closed field `k`, with `g` smooth and `p` separated, quasi-compact and locally of
-finite type: by the joint conservativity of restriction along an affine Zariski cover, it reduces
-to `AlgebraicGeometry.ProEtale.adicDerivedBaseChange_isIso_of_affine_of_smooth`. -/
+finite type. -/
 private theorem affineChart_descent_of_smooth
     (k : Type u) [Field k] [Algebra k₀ k] [IsAlgClosure k₀ k]
     [Fact (ringChar k₀ ≠ l)]

@@ -25,9 +25,8 @@ polynomial ring `A[xᵢ, x_j⁻¹ : j ∈ J]`: the free `A`-module on the Lauren
 `∑ eᵢ = m` and `eᵢ ≥ 0` for `i ∉ J`, and the restriction maps are the inclusions.
 
 This file defines the resulting (ordered) Čech complex `monomialCechComplex n A m` of the
-standard covering, as a purely algebraic object, and computes its cohomology following the
-blueprint proof of `lem-pc-projective-space-twist-cohomology`. Writing `d + 1` for the number
-of coordinates:
+standard covering, as a purely algebraic object, and computes its cohomology. Writing `d + 1`
+for the number of coordinates:
 
 * `H⁰` is the degree-`m` part `A[xᵢ]ₘ` of the polynomial ring
   (`monomialCechComplexHomologyZeroLinearEquiv`), which vanishes for `m < 0` if `d ≥ 1`
@@ -40,8 +39,7 @@ of coordinates:
   (`monomialCechComplexHomologyTopLinearEquivDual`);
 * for `d ≥ 1` the last isomorphism is the one induced by the perfect pairing
   `A[xᵢ]_{-m-d-1} × Hᵈ(𝒪(m)) → Hᵈ(𝒪(-d-1)) ≅ A` given by multiplication
-  (`monomialCechPairing`, `monomialCechComplexHomologyTopLinearEquivDual_apply`), following
-  the blueprint proof of `theorem-riemann-roch-coherent-serre-duality--2`.
+  (`monomialCechPairing`, `monomialCechComplexHomologyTopLinearEquivDual_apply`).
 
 ## Implementation notes
 
@@ -868,8 +866,7 @@ def negativeExponentsEquiv {d : ℕ} (hn : Fintype.card n = d + 1) (hm : m ≤ -
 variable (n A m) in
 /-- **The top cohomology of the monomial Čech complex as a dual**: with `d + 1` coordinates,
 `Hᵈ ≅ (A[xᵢ]_{-m-d-1})^∨` for `m ≤ -d - 1`. In the monomial bases, the class of the cocycle
-`x^{-f-1}` on `E` is the dual basis vector of the monomial `x^f`; this is the perfect pairing of
-`theorem-riemann-roch-coherent-serre-duality--2`. -/
+`x^{-f-1}` on `E` is the dual basis vector of the monomial `x^f`. -/
 def monomialCechComplexHomologyTopLinearEquivDual {d : ℕ} (hn : Fintype.card n = d + 1)
     (hm : m ≤ -(d : ℤ) - 1) :
     (monomialCechComplex n A m).homology d ≃ₗ[A]

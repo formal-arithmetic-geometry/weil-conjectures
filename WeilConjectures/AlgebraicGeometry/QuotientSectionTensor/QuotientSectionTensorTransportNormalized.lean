@@ -55,8 +55,7 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ' T)]
 
 /-- The section tensor comparison can be chosen with its complete balancing and
-derived-total normalization.  This is the presheaf balancing, sheafification,
-K-flat totalization, and resolving-class descent part of the transport proof. -/
+derived-total normalization. -/
 theorem section_tensor_transport_normalized (T : Scheme.{u})
     (c : ScalarSectionData a T) (hc : ScalarSectionNormalized a T c)
     (b : TensorIso a T) (hb : TensorNormalized a T b) :
