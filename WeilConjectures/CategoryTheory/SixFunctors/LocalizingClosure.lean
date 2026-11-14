@@ -105,7 +105,7 @@ variable {C : Type u} [Category.{v, u} C] [Preadditive C]
 /-- The nonzero summands of an existing direct sum inject into the endomorphisms of its vertex
 (the composite of the projection onto a summand and its inclusion): their index set is `v`-small,
 `v` the universe of the morphisms. -/
-theorem coproduct_small_support {I : Type w} (K : I → C) (c : Cofan K) (hc : IsColimit c) :
+theorem coproduct_small_nonzero_support {I : Type w} (K : I → C) (c : Cofan K) (hc : IsColimit c) :
     Small.{v} {i // ¬ IsZero (K i)} := by
   classical
   let p (i : I) : c.pt ⟶ K i := hc.desc (Cofan.mk (K i) (Pi.single i (𝟙 (K i))))
@@ -126,7 +126,7 @@ theorem coproduct_small_support {I : Type w} (K : I → C) (c : Cofan K) (hc : I
 
 /-- A property closed under isomorphisms and under the `v`-small direct sums that exist is closed
 under every direct sum that exists, whatever the universe of its index: an existing direct sum
-has `v`-small nonzero support (`coproduct_small_support`) and is the direct sum of its nonzero
+has `v`-small nonzero support (`coproduct_small_nonzero_support`) and is the direct sum of its nonzero
 summands. -/
 theorem ObjectProperty.isClosedUnderColimitsOfShape_discrete_of_small
     (P : ObjectProperty C) [P.IsClosedUnderIsomorphisms]
@@ -142,7 +142,7 @@ theorem ObjectProperty.isClosedUnderColimitsOfShape_discrete_of_small
     apply IsColimit.ofIsoColimit
       ((IsColimit.precomposeHomEquiv e (colimit.cocone F)).symm (colimit.isColimit F))
     exact Cocone.ext (Iso.refl _) (fun i ↦ by simp [e, c])
-  have : Small.{v} {i // ¬ IsZero (K i)} := coproduct_small_support K c hc
+  have : Small.{v} {i // ¬ IsZero (K i)} := coproduct_small_nonzero_support K c hc
   let J := {i // ¬ IsZero (K i)}
   let r : Cofan (fun i : J ↦ K i.val) := Cofan.mk c.pt (fun i ↦ c.inj i.val)
   have hr : IsColimit r := by

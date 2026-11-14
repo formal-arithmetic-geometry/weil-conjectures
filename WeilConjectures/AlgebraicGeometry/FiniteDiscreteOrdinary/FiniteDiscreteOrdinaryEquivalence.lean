@@ -74,7 +74,7 @@ variable {C D : Type w} [Category.{v₁} C] [Category.{v₂} D]
 
 private theorem inverseImageLocalizing (P : ObjectProperty D) (F : C ⥤ D)
     [F.CommShift ℤ] [F.IsTriangulated]
-    [∀ I : Type w, PreservesColimitsOfShape (Discrete I) F]
+    [∀ I : Type v₁, PreservesColimitsOfShape (Discrete I) F]
     (hP : IsLocalizingSubcategory P) :
     IsLocalizingSubcategory (P.inverseImage F) := by
   let := hP.1
@@ -88,7 +88,7 @@ private theorem inverseImageLocalizing (P : ObjectProperty D) (F : C ⥤ D)
 
 private theorem localizing_forward (S : ObjectProperty C) (T : ObjectProperty D)
     (F : C ⥤ D) [F.CommShift ℤ] [F.IsTriangulated]
-    [∀ I : Type w, PreservesColimitsOfShape (Discrete I) F]
+    [∀ I : Type v₁, PreservesColimitsOfShape (Discrete I) F]
     (hST : ∀ K, S K → T (F.obj K)) {K : C} (hK : localizingClosure S K) :
     localizingClosure T (F.obj K) := by
   intro P hP hT
