@@ -236,6 +236,7 @@ theorem projectiveLineHyperplaneClass_baseChange :
     Preadditive.neg_comp, neg_inj] at this ⊢
   exact this
 
+variable (Λ) in
 /-- **Base change of the decomposition map** (blueprint `lemma-cohomology-projective-line-trace`
 (1)). Let `g' : ℙ¹_{S'} ⟶ ℙ¹_S` be the base change of `g : S' ⟶ S`. The pullback along `g` of the
 decomposition map `(1, h) : Λ_S(1)[2] ⊕ Λ_S ⟶ Rq_*(Λ_{ℙ¹_S}(1)[2])`
