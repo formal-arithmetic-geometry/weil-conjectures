@@ -55,11 +55,8 @@ That these are exactly the complete group varieties is
 class IsAbelianVariety (A : Over (Spec (.of K))) : Prop
     extends IsProper A.hom, Smooth A.hom, ConnectedSpace A.left
 
-/-- The dimension of an abelian
-variety, that is, the Krull dimension of its underlying topological space, as a natural number.
-
-`AlgebraicGeometry.IsAbelianVariety.topologicalKrullDim_eq` says that this really is the Krull
-dimension: an abelian variety is nonempty and finite-dimensional. -/
+/-- The dimension of an abelian variety, that is, the Krull dimension of its underlying
+topological space, as a natural number. -/
 noncomputable def IsAbelianVariety.dim (A : Over (Spec (.of K))) [IsAbelianVariety A] : ℕ :=
   ((topologicalKrullDim A.left).unbotD 0).toNat
 

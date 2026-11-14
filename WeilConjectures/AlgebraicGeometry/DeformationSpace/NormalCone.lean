@@ -52,9 +52,8 @@ instance [QuasiCompact g] : QuasiCompact (normalConeProj g s) := by
 
 variable {g s}
 
-/-- The normal cone of a closed section of a morphism smooth of
-relative dimension `d` is smooth of relative dimension `d` over the base, being the fibre of the
-smooth deformation `g̃` over `t = 0`. -/
+/-- The normal cone of a closed section of a morphism smooth of relative dimension `d` is smooth
+of relative dimension `d` over the base. -/
 theorem smoothOfRelativeDimension_normalConeProj (d : ℕ) [SmoothOfRelativeDimension d g]
     [IsClosedImmersion s] (hs : s ≫ g = 𝟙 B) :
     SmoothOfRelativeDimension d (normalConeProj g s) :=

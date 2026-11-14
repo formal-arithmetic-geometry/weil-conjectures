@@ -137,10 +137,7 @@ variable [TopologicalSpace M] [DiscreteTopology M] [TopologicalSpace M'] [Discre
   (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
   [CompactSpace G] [∀ P, MulAction G ((fiber s).obj P)] [IsFundamentalGroup (fiber s) G]
 
-/-- Abelian case: torsors, characters and H^1,
-naturality in the coefficients.
-
-Under the identification `H¹(Y_ét, M) ≃ Hom_cont(π₁(Y, s), M)`
+/-- Under the identification `H¹(Y_ét, M) ≃ Hom_cont(π₁(Y, s), M)`
 (`AlgebraicGeometry.Scheme.EtaleTorsor.sheafHEquivContinuousMonoidHom`), the map induced by a
 homomorphism `φ : M →+ M'` on the constant sheaves is the composition with `φ`. -/
 theorem sheafHEquivContinuousMonoidHom_map (φ : M →+ M')
@@ -161,10 +158,7 @@ theorem sheafHEquivContinuousMonoidHom_map (φ : M →+ M')
   rfl
 
 variable (M) in
-/-- Finite constant torsors and the etale
-fundamental group, additivity.
-
-The identification `H¹(Y_ét, M) ≃ Hom_cont(π₁(Y, s), M)` turns the sum of classes into the
+/-- The identification `H¹(Y_ét, M) ≃ Hom_cont(π₁(Y, s), M)` turns the sum of classes into the
 pointwise sum of characters. -/
 theorem sheafHEquivContinuousMonoidHom_add
     (x y : Sheaf.H ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
@@ -198,10 +192,7 @@ theorem sheafHEquivContinuousMonoidHom_add
   rfl
 
 variable (M) in
-/-- Finite constant torsors and the etale
-fundamental group.
-
-The group isomorphism `H¹(Y_ét, M) ≃+ Hom_cont(π₁(Y, s), M)` underlying the bijection
+/-- The group isomorphism `H¹(Y_ét, M) ≃+ Hom_cont(π₁(Y, s), M)` underlying the bijection
 `AlgebraicGeometry.Scheme.EtaleTorsor.sheafHEquivContinuousMonoidHom`: the class of a torsor is
 sent to its monodromy character, and sums of classes to products of characters
 (`AlgebraicGeometry.Scheme.EtaleTorsor.sheafHEquivContinuousMonoidHom_add`). -/

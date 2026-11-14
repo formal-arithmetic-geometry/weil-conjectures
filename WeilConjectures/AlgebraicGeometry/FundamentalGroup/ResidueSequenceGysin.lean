@@ -308,11 +308,10 @@ lemma toPic_boundaryDivisor (c : ↥(Set.range j.base)ᶜ → ℤ) :
 variable [IsAlgClosed k]
 
 variable (k) in
-/-- The **Gysin map**
-`H⁰(D, ℤ / N (-1)) → H²(C, ℤ / N)` of the residue sequence (5.1). A family `(a_z)_{z ∈ D}` of
-homomorphisms `a_z : μ_N(k) → ℤ / N` indexed by the boundary `D = C ∖ U` is sent to
-`∑_z H²(a_z)(c₁(𝒪(z)))`, where `c₁ : Pic(C) → H²(C, μ_N)` is the Kummer map and `H²(a_z)` is
-induced by the map of sheaves `μ_N → ℤ / N` given by `a_z`
+/-- The **Gysin map** `H⁰(D, ℤ / N (-1)) → H²(C, ℤ / N)` of the residue sequence. A family
+`(a_z)_{z ∈ D}` of homomorphisms `a_z : μ_N(k) → ℤ / N` indexed by the boundary `D = C ∖ U` is
+sent to `∑_z H²(a_z)(c₁(𝒪(z)))`, where `c₁ : Pic(C) → H²(C, μ_N)` is the Kummer map and
+`H²(a_z)` is induced by the map of sheaves `μ_N → ℤ / N` given by `a_z`
 (`AlgebraicGeometry.Scheme.rootsOfUnitySheafHom`). -/
 noncomputable def gysinH2 (N : ℕ) [NeZero N] [NeZero (N : k)] :
     ((z : ↥(Set.range j.base)ᶜ) → Additive (rootsOfUnity N k) →+ ZMod N) →+
@@ -383,7 +382,7 @@ theorem gysinH2_eq_zero_iff (N : ℕ) [NeZero N] [NeZero (N : k)]
 
 variable [IsLocallyNoetherian C] [ConnectedSpace U]
 
-/-- Exactness of the residue sequence (5.1)
+/-- Exactness of the residue sequence
 
 `0 → H¹(C, ℤ / N) → H¹(U, ℤ / N) → H⁰(D, ℤ / N (-1)) → H²(C, ℤ / N)`
 
@@ -508,7 +507,7 @@ theorem range_residueH1_eq_ker_gysinH2 (N : ℕ) [NeZero N] [NeZero (N : k)] :
       boundaryDivisor_apply_boundaryClosedPoint]
     simp [c, ξ]
 
-/-- The **residue sequence** (5.1)
+/-- The **residue sequence**
 
 `0 → H¹(C, ℤ / N) → H¹(U, ℤ / N) → H⁰(D, ℤ / N (-1)) → H²(C, ℤ / N)`
 

@@ -161,10 +161,8 @@ theorem isFinite_npow_id (A : Over (Spec (.of K))) [GrpObj A] [IsAbelianVariety 
   have := LocallyQuasiFinite.of_isPullback_of_surjective hsq
   exact IsFinite.of_isProper_of_locallyQuasiFinite _
 
-/-- Finiteness of the fibres of the multiplication map.
-
-The kernel `A[n] = ker [n]` of multiplication by `0 < n` on an abelian variety is a finite
-group scheme: it is the base change of the finite morphism `[n]` along the unit section. -/
+/-- The kernel `A[n] = ker [n]` of multiplication by `0 < n` on an abelian variety is a finite
+group scheme. -/
 theorem isFinite_torsionSubgroupScheme (A : Over (Spec (.of K))) [GrpObj A] [IsAbelianVariety A]
     (n : ℕ) (hn : 0 < n) :
     IsFinite (torsionSubgroupScheme A n).hom :=
@@ -195,10 +193,7 @@ theorem surjective_npow_id (A : Over (Spec (.of K))) [GrpObj A] [IsAbelianVariet
     rw [Scheme.Hom.comp_base, TopCat.coe_comp]; exact hι.comp hsurj.surj⟩
   rwa [f.toImage_imageι] at this
 
-/-- Surjectivity of the multiplication map.
-
-The `n`-torsion of an abelian variety is zero-dimensional for `0 < n`: it is finite over `K`
-(`AlgebraicGeometry.isFinite_torsionSubgroupScheme`), so its underlying space is discrete. -/
+/-- The `n`-torsion of an abelian variety is zero-dimensional for `0 < n`. -/
 theorem topologicalKrullDim_torsionSubgroupScheme (A : Over (Spec (.of K))) [GrpObj A]
     [IsAbelianVariety A] (n : ℕ) (hn : 0 < n) :
     topologicalKrullDim (torsionSubgroupScheme A n).left = 0 := by
@@ -261,11 +256,7 @@ theorem IsIsogeny.fiberDegree_eq (f : A ⟶ B) [IsIsogeny f] [IsAffineHom f.left
 variable [IsAbelianVariety A] [IsAbelianVariety B]
 
 omit [IsAbelianVariety B] in
-/-- The degree of an isogeny is the degree of the
-kernel.
-
-An isogeny of abelian varieties is a finite morphism: it is proper, `A` being proper, and has
-finite fibres (`AlgebraicGeometry.IsIsogeny.finite_preimage_singleton`). -/
+/-- An isogeny of abelian varieties is a finite morphism. -/
 theorem IsIsogeny.isFinite (f : A ⟶ B) [IsIsogeny f] : IsFinite f.left := by
   have : IsProper (f.left ≫ B.hom) := by rw [Over.w f]; infer_instance
   have : IsProper f.left := .of_comp f.left B.hom
@@ -273,23 +264,16 @@ theorem IsIsogeny.isFinite (f : A ⟶ B) [IsIsogeny f] : IsFinite f.left := by
     (IsIsogeny.finite_preimage_singleton f)
   exact IsFinite.of_isProper_of_locallyQuasiFinite f.left
 
-/-- The degree of an isogeny is the degree of the
-kernel.
-
-An isogeny of abelian varieties is a flat morphism: it is finite onto the reduced scheme `B`
-with all fibres of the same degree (`AlgebraicGeometry.Scheme.Hom.flat_of_fiberDegree_eq`). -/
+/-- An isogeny of abelian varieties is a flat morphism. -/
 theorem IsIsogeny.flat (f : A ⟶ B) [IsIsogeny f] : Flat f.left := by
   have := IsIsogeny.isFinite f
   have : IsReduced B.left := GeometricallyReduced.isReduced_of_flat_of_isLocallyNoetherian B.hom
   have := LocallyOfFiniteType.isLocallyNoetherian B.hom
   exact f.left.flat_of_fiberDegree_eq (IsIsogeny.fiberDegree_eq f)
 
-/-- The degree of an isogeny is the degree of the
-kernel.
-
-For an isogeny `f : A ⟶ B` of abelian varieties with kernel of order `d`, the sheaf `f_* 𝒪_A` is
-locally free of rank `d`: the degree of the finite flat morphism `f` equals the order of its
-kernel. -/
+/-- The degree of an isogeny is the order of its kernel: for an isogeny `f : A ⟶ B` of abelian
+varieties with kernel of order `d`, the sheaf `f_* 𝒪_A` is locally free of rank `d` at every
+point of `B`. -/
 theorem IsIsogeny.finrank_eq (f : A ⟶ B) [IsIsogeny f] (y : B.left) :
     f.left.finrank y = isogenyDegree f := by
   have := IsIsogeny.isFinite f
@@ -340,17 +324,12 @@ theorem isogenyDegree_npow_id (n : ℕ) (hn : 0 < n) :
   exact_mod_cast (mul_right_cancel₀ hpos.ne' hpull).symm
 
 omit [IsAbelianVariety A] in
-/-- The multiplication-by-`n` isogeny.
-
-The `n`-torsion of an abelian variety is flat over the base field for `0 < n`: every scheme over
-a field is flat over it. -/
+/-- The `n`-torsion of an abelian variety is flat over the base field for `0 < n`. -/
 theorem flat_torsionSubgroupScheme (n : ℕ) (_hn : 0 < n) :
     Flat (torsionSubgroupScheme A n).hom :=
   inferInstance
 
-/-- The multiplication-by-`n` isogeny.
-
-The `n`-torsion of an abelian variety of dimension `g` has order `n ^ (2 * g)` for `0 < n`. -/
+/-- The `n`-torsion of an abelian variety of dimension `g` has order `n ^ (2 * g)` for `0 < n`. -/
 theorem finrankΓ_torsionSubgroupScheme (n : ℕ) (hn : 0 < n) :
     (torsionSubgroupScheme A n).hom.finrankΓ = n ^ (2 * IsAbelianVariety.dim A) :=
   isogenyDegree_npow_id n hn
@@ -363,19 +342,14 @@ theorem finrank_npow_id (n : ℕ) (hn : 0 < n) (y : A.left) :
   have := isIsogeny_npow_id (A := A) n hn
   rw [IsIsogeny.finrank_eq, isogenyDegree_npow_id n hn]
 
-/-- Multiplication by `n` is finite flat of degree
-`n ^ (2 * g)`.
-
-Multiplication by `0 < n` on an abelian variety of dimension `g` is finite locally free of
-degree `n ^ (2 * g)`: it is an isogeny of that degree (`AlgebraicGeometry.isogenyDegree_npow_id`),
-hence `AlgebraicGeometry.IsIsogeny.isFiniteLocallyFreeOfDegree` applies. -/
+/-- Multiplication by `0 < n` on an abelian variety of dimension `g` is finite locally free of
+degree `n ^ (2 * g)`. -/
 theorem isFiniteLocallyFreeOfDegree_npow_id (n : ℕ) (hn : 0 < n) :
     (𝟙 A ^ n).left.IsFiniteLocallyFreeOfDegree (n ^ (2 * IsAbelianVariety.dim A)) := by
   have := isIsogeny_npow_id (A := A) n hn
   exact isogenyDegree_npow_id (A := A) n hn ▸ IsIsogeny.isFiniteLocallyFreeOfDegree (𝟙 A ^ n)
 
-/-- Multiplication by `0 < n` on an abelian variety is an fppf covering: it is flat, locally of
-finite presentation and surjective. -/
+/-- Multiplication by `0 < n` on an abelian variety is an fppf covering. -/
 theorem singleton_mem_fppfPrecoverage_npow_id (n : ℕ) (hn : 0 < n) :
     Presieve.singleton (𝟙 A ^ n).left ∈ Scheme.fppfPrecoverage A.left := by
   have := isFiniteLocallyFreeOfDegree_npow_id (A := A) n hn

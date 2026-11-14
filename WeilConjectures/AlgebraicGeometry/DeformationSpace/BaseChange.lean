@@ -462,15 +462,10 @@ theorem exists_isPullback_deformationSpace_baseChange_of_isOpenImmersion [IsOpen
   exact ⟨⟨U, hU⟩, _, _, hx, IdealSheafData.isPushout_extendedReesPullbackData_imageSite _ _ _ _
     (ker_baseChangeSection g s hs b) _⟩
 
-/-- **Base change in `B`**: for `g : V ⟶ B` smooth of relative
-dimension `d` with a closed section `s`, and any `b : B' ⟶ B`, the deformation space of the
-base-changed section `s'` of `g' : V ×_B B' ⟶ B'` is the base change of the deformation space
-of `s`,
-
-`D_{s'} V' = D_s V ×_{𝔸¹_B} 𝔸¹_{B'}`,
-
-compatibly with the sections `s̃' = b ×s̃`. For the standard pair this is
-`AlgebraicGeometry.Scheme.Hom.isPullback_deformationSpaceMap`. -/
+/-- **Base change in `B`**: for `g : V ⟶ B` smooth of relative dimension `d` with a closed
+section `s`, and any `b : B' ⟶ B`, the deformation space of the base-changed section `s'` of
+`g' : V ×_B B' ⟶ B'` is the base change `D_{s'} V' = D_s V ×_{𝔸¹_B} 𝔸¹_{B'}`, compatibly
+with the sections `s̃' = b × s̃`. -/
 theorem exists_isPullback_deformationSpace_baseChange (d : ℕ) [SmoothOfRelativeDimension d g]
     [IsClosedImmersion s] :
     ∃ φ : (baseChangeSection g s hs b).ker.deformationSpace ⟶ s.ker.deformationSpace,

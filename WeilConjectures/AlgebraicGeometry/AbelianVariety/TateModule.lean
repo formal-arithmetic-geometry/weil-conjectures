@@ -152,14 +152,11 @@ noncomputable instance rationalTateModule.instModule : Module ℚ_[ℓ] (rationa
   inferInstanceAs (Module ℚ_[ℓ]
     (AddCommGroup.rationalTateModule ℓ (Additive (Scheme.specAlgebraicClosure K ⟶ A))))
 
-/-- The Tate module used in the curve argument.
-
-The Tate module `T_ℓ A` is the inverse limit `lim_n A[ℓ ^ n](K̄)` of the geometric points of the
-`ℓ ^ n`-torsion subgroup schemes `A[ℓ ^ n] = AlgebraicGeometry.torsionSubgroupScheme A (ℓ ^ n)`,
-the transition map from level `n + 1` to level `n` being multiplication by `ℓ`
-(`AlgebraicGeometry.torsionSubgroupSchemeMul`). Its elements are thus the compatible systems
-`(x n)_n` of points `x n : Spec K̄ ⟶ A[ℓ ^ n]`, matched with the elements of `T_ℓ (A(K̄))` by
-`AlgebraicGeometry.torsionByPointsEquiv`. -/
+/-- The elements of the Tate module `T_ℓ A` correspond to the compatible systems `(x n)_n` of
+geometric points `x n : Spec K̄ ⟶ A[ℓ ^ n]` of the torsion subgroup schemes
+`A[ℓ ^ n] = AlgebraicGeometry.torsionSubgroupScheme A (ℓ ^ n)`, the transition map from level
+`n + 1` to level `n` being multiplication by `ℓ`
+(`AlgebraicGeometry.torsionSubgroupSchemeMul`). -/
 noncomputable def tateModuleEquivTorsionPoints :
     tateModule ℓ A ≃ {x : ∀ n : ℕ, Scheme.specAlgebraicClosure K ⟶ torsionSubgroupScheme A (ℓ ^ n)
       // ∀ n, x (n + 1) ≫ torsionSubgroupSchemeMul A ℓ (pow_succ' ℓ n) = x n} where

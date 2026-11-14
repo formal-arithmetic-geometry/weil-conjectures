@@ -113,20 +113,13 @@ lemma exists_mem_connectedComponent_range_of_preimage {T : Scheme.{u}} (p : T �
     rw [← hp, Set.mem_preimage, h]
     exact mem_connectedComponent, p x, rfl⟩
 
-/-- The connected components of the affine line over a
-base.
-
-(2), first half: every connected component of `𝔸(n; B)` meets the image of the unit section. -/
+/-- Every connected component of `𝔸(n; B)` meets the image of the unit section. -/
 theorem exists_mem_connectedComponent_range_oneSection (x : 𝔸(n; B)) :
     (connectedComponent x ∩ Set.range (oneSection n B)).Nonempty :=
   exists_mem_connectedComponent_range_of_preimage _ _ (oneSection_comp_over n B)
     preimage_connectedComponent_over x
 
-/-- The connected components of the affine line over a
-base.
-
-(2), second half: every connected component of `𝔸(n; B)` meets the complement `G` of the zero
-section. -/
+/-- Every connected component of `𝔸(n; B)` meets the complement `G` of the zero section. -/
 theorem exists_mem_connectedComponent_range_of_range_eq [Nonempty n] {G : Scheme.{u}}
     {j : G ⟶ 𝔸(n; B)}
     (hj : Set.range j = (Set.range (zeroSection n B))ᶜ) (x : 𝔸(n; B)) :
@@ -134,11 +127,8 @@ theorem exists_mem_connectedComponent_range_of_range_eq [Nonempty n] {G : Scheme
   obtain ⟨_, hx, y, rfl⟩ := exists_mem_connectedComponent_range_oneSection x
   exact ⟨_, hx, oneSection_mem_range_of_range_eq hj y⟩
 
-/-- The connected components of the affine line over a
-base.
-
-(3): every connected component of the complement `G` of the zero section meets the image of
-the unit section `i₁ : B ⟶ G`. -/
+/-- Every connected component of the complement `G` of the zero section meets the image of the
+unit section `i₁ : B ⟶ G`. -/
 theorem exists_mem_connectedComponent_range_of_comp_eq_oneSection [Nonempty n]
     {G : Scheme.{u}}
     (j : G ⟶ 𝔸(n; B)) [IsOpenImmersion j] (hj : Set.range j = (Set.range (zeroSection n B))ᶜ)

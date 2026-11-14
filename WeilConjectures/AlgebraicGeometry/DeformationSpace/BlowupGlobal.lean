@@ -138,8 +138,7 @@ lemma isInvertible_comap_deformationSpaceToPolynomialSpec :
       rw [← comap_comp]
       exact I.isInvertible_comap_chart U
 
-/-- Deformation space of a closed section,
-comparison morphism from the Rees model to the blow-up model. The morphism
+/-- The comparison morphism from the Rees model to the blow-up model: the morphism
 `D_I X = Spec_X 𝒪_X[t, I t⁻¹] ⟶ Bl_{V(I) × 0} (Spec_X 𝒪_X[t])` lifting
 `D_I X ⟶ Spec_X 𝒪_X[t]`, given by the universal property of blowing up. -/
 noncomputable def deformationSpaceToBlowup :
@@ -237,9 +236,8 @@ lemma preimage_deformationSpaceToBlowup_chart (U : X.AffineZariskiSite) :
     polynomialSpecChartOpen, ← Scheme.Hom.comp_preimage, deformationSpaceToPolynomialSpec,
     relativeGluingMap_toBase _ _ _ I.toPolynomialPresheaf_comp_polynomialToRees]
 
-/-- Deformation space of a closed section. The
-comparison morphism `D_I X ⟶ Bl_{V(I) × 0} (Spec_X 𝒪_X[t])` from the Rees model to the blow-up
-model is an open immersion. -/
+/-- The comparison morphism `D_I X ⟶ Bl_{V(I) × 0} (Spec_X 𝒪_X[t])` from the Rees model to the
+blow-up model is an open immersion. -/
 instance isOpenImmersion_deformationSpaceToBlowup : IsOpenImmersion I.deformationSpaceToBlowup := by
   refine IsZariskiLocalAtTarget.of_iSup_eq_top (P := @IsOpenImmersion)
     (fun U : X.AffineZariskiSite ↦

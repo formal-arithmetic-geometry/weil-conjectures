@@ -107,9 +107,7 @@ lemma finite_fiber (P : Y.FiniteEtale) : Finite ((pointSmallEtale s).fiber.obj P
     ((h.overHomEquivAlgHom Ω).injective hxy)
   exact Over.OverMorphism.ext (by simpa [φ] using this)
 
-/-- The fibre functor.
-
-The fibre functor `F_s : FÉt(Y) ⥤ FintypeCat` at a geometric point `s : Spec Ω ⟶ Y`, sending a
+/-- The fibre functor `F_s : FÉt(Y) ⥤ FintypeCat` at a geometric point `s : Spec Ω ⟶ Y`, sending a
 finite étale `P ⟶ Y` to the finite set of `Y`-morphisms `Spec Ω ⟶ P`. -/
 noncomputable def fiber : Y.FiniteEtale ⥤ FintypeCat.{u} :=
   ObjectProperty.lift _ (ObjectProperty.ι _ ⋙ (pointSmallEtale s).fiber) (finite_fiber s)

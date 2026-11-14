@@ -924,9 +924,9 @@ theorem genus_eq_arithmeticGenus [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k
     (X ↘ Spec (.of k)).genus = arithmeticGenus k X := by
   rw [Hom.genus_eq_finrankH_zero, finrankH_relativeDifferentials_zero_eq_arithmeticGenus]
 
-/-- **The genus of a curve is finite.** For a smooth proper curve `X` over `k`, `H⁰(X, Ω¹_{X/k})`,
-whose dimension is the genus (`AlgebraicGeometry.Scheme.Hom.genus_eq_finrankH_zero`), is a
-finite-dimensional `k`-vector space. -/
+/-- On a smooth proper curve `X` over `k`, every cohomology group `H^q(X, Ω¹_{X/k})` is a
+finite-dimensional `k`-vector space. In particular the genus, the dimension of
+`H⁰(X, Ω¹_{X/k})`, is finite. -/
 theorem finiteDimensional_H_relativeDifferentials
     [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))] (q : ℕ) :
     FiniteDimensional k ((X ↘ Spec (.of k)).relativeDifferentials.H q) :=

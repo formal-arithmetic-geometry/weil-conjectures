@@ -54,16 +54,12 @@ namespace AlgebraicGeometry.Scheme
 
 variable (X : Scheme.{u})
 
-/-- Divisors, principal divisors, class group
-
-A *divisor* on a curve `X` is a finite formal sum `D = ∑_P n_P [P]` of closed points `P` of `X`
-with integer coefficients: `Div(X)` is the free abelian group on the closed points of `X`. -/
+/-- A *divisor* on a curve `X` is a finite formal sum `D = ∑_P n_P [P]` of closed points `P` of
+`X` with integer coefficients: `Div(X)` is the free abelian group on the closed points of `X`. -/
 abbrev Divisor : Type u :=
   closedPoints X →₀ ℤ
 
-/-- Divisors, principal divisors, class group
-
-The *degree* `deg D = ∑_P n_P` of a divisor `D = ∑_P n_P [P]`. Over an algebraically closed
+/-- The *degree* `deg D = ∑_P n_P` of a divisor `D = ∑_P n_P [P]`. Over an algebraically closed
 field, where every closed point is rational, this is the usual degree. -/
 noncomputable def Divisor.degree : X.Divisor →+ ℤ :=
   Finsupp.liftAddHom fun _ ↦ AddMonoidHom.id ℤ
@@ -152,9 +148,8 @@ lemma ord_one (x : X) : X.ord 1 x = 0 := by
 variable (X) in
 /-- The *divisor* `div f = ∑_P v_P(f) [P]` of a nonzero rational function `f ∈ k(X)ˣ` on a
 Noetherian integral scheme `X`, where `v_P` is the order of vanishing
-`AlgebraicGeometry.Scheme.ord` at the closed point `P`. Its support is finite by
-`AlgebraicGeometry.Scheme.finite_setOf_ord_ne_zero`. On a smooth curve, `v_P` is the normalized
-valuation of the discrete valuation ring `𝒪_{X,P}`. -/
+`AlgebraicGeometry.Scheme.ord` at the closed point `P`. On a smooth curve, `v_P` is the
+normalized valuation of the discrete valuation ring `𝒪_{X,P}`. -/
 noncomputable def div : Additive X.functionFieldˣ →+ X.Divisor where
   toFun f := Finsupp.ofSupportFinite (fun P : closedPoints X ↦ X.ord (f.toMul : X.functionField) P)
     ((finite_setOf_ord_ne_zero f.toMul.ne_zero).preimage Subtype.val_injective.injOn)
@@ -173,16 +168,12 @@ lemma div_apply (f : Additive X.functionFieldˣ) (P : closedPoints X) :
   rfl
 
 variable (X) in
-/-- Divisors, principal divisors, class group
-
-The subgroup of *principal divisors* `div f`, for `f ∈ k(X)ˣ`. -/
+/-- The subgroup of *principal divisors* `div f`, for `f ∈ k(X)ˣ`. -/
 noncomputable def principalDivisors : AddSubgroup X.Divisor :=
   X.div.range
 
 variable (X) in
-/-- Divisors, principal divisors, class group
-
-The *divisor class group* `Cl(X) = Div(X) / {div f : f ∈ k(X)ˣ}`. -/
+/-- The *divisor class group* `Cl(X) = Div(X) / {div f : f ∈ k(X)ˣ}`. -/
 abbrev DivisorClassGroup : Type u :=
   X.Divisor ⧸ X.principalDivisors
 

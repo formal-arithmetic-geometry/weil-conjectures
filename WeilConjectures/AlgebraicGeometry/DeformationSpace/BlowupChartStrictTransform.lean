@@ -363,13 +363,10 @@ lemma quasiCompact_strictTransformOpen_ι (hI : I.FG) :
   exact quasiCompact_strictTransformOpen_ι_of_isCompact _ _ _
     (PrimeSpectrum.isCompact_isOpen_iff_ideal.mpr ⟨_, deformationCenter_fg hI, rfl⟩).1
 
-/-- Deformation space of a closed section,
-affine-local form. For a finitely generated ideal `I ⊆ R` (the ideal of the section `s(B) = V(I)` in
-`V = Spec R`), the Rees model `Spec R[t, I t⁻¹]` of the deformation to the normal cone is, via
-`deformationChart`, the open complement in `Bl_{V(I) × 0} (Spec R[t])` of the strict transform of
-the zero fibre `V × {0} = Spec R`. The chart lies over `Spec R[t]`
-(`deformationChart_toSpec`), so `g̃` and the section `s̃` (`deformationChart_section`) of the
-two models agree. -/
+/-- Affine-local form of the deformation space of a closed section: for a finitely generated
+ideal `I ⊆ R` (the ideal of the section `s(B) = V(I)` in `V = Spec R`), the image of the chart
+`deformationChart` of the Rees model `Spec R[t, I t⁻¹]` is the open complement in
+`Bl_{V(I) × 0} (Spec R[t])` of the strict transform of the zero fibre `V × {0} = Spec R`. -/
 theorem opensRange_deformationChart_eq_compl_strictTransform (hI : I.FG) :
     ((deformationChart I).opensRange : Set (AffineBlowup (deformationCenter I))) =
       (Set.range (strictTransformMap (zeroFibre R) (toSpec (deformationCenter I))
@@ -394,8 +391,8 @@ noncomputable def strictTransformCompl : (AffineBlowup (deformationCenter I)).Op
       (centerCompl I)))ᶜ,
     (strictTransformMap _ _ _).isClosedEmbedding.isClosed_range.isOpen_compl⟩
 
-/-- Deformation space of a closed section,
-affine-local form as an isomorphism of schemes: for finitely generated `I`,
+/-- Affine-local form of the deformation space of a closed section, as an isomorphism of
+schemes: for finitely generated `I`,
 `Spec R[t, I t⁻¹] ≅ Bl_{V(I) × 0} (Spec R[t]) ∖ (strict transform of Spec R × 0)`. -/
 noncomputable def extendedReesSpecIsoStrictTransformCompl (hI : I.FG) :
     Spec (.of I.extendedReesAlgebra) ≅ (strictTransformCompl I).toScheme :=

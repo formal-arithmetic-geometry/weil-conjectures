@@ -117,16 +117,12 @@ lemma map_constantZModPowReduction_eq_iff (n : ℕ) (y : Sheaf.H (constantZModPo
       (pow_dvd_pow l (Nat.le_add_right n 1)) (ZMod (l ^ n))).toAddMonoidHom.uliftMap y g)).trans
         (h g)
 
-/-- Continuous `ℤ_ℓ`-characters are compatible
-finite-level classes.
-
-For a connected scheme `Y` with geometric point `s`, `G = π₁(Y, s)` and a prime `ℓ`, the
-bijection `Hom_cont(π₁(Y, s), ℤ_ℓ) ≃ lim_n H¹(Y_ét, ℤ/ℓⁿ)`: a continuous homomorphism is sent to
-the family of classes of its reductions modulo `ℓⁿ` under
-`H¹(Y_ét, ℤ/ℓⁿ) ≃ Hom_cont(π₁(Y, s), ℤ/ℓⁿ)`
+/-- **Continuous `ℤ_ℓ`-characters as compatible finite-level classes.** For a connected scheme
+`Y` with geometric point `s`, `G = π₁(Y, s)` and a prime `ℓ`, the bijection
+`Hom_cont(π₁(Y, s), ℤ_ℓ) ≃ lim_n H¹(Y_ét, ℤ/ℓⁿ)`: a continuous homomorphism is sent to the
+family of classes of its reductions modulo `ℓⁿ` under `H¹(Y_ét, ℤ/ℓⁿ) ≃ Hom_cont(π₁(Y, s), ℤ/ℓⁿ)`
 (`AlgebraicGeometry.Scheme.EtaleTorsor.sheafHEquivContinuousMonoidHom`), and the transition maps
-of the inverse limit are induced by the reductions `ℤ/ℓⁿ⁺¹ → ℤ/ℓⁿ`. It is equivariant for the
-Frobenius (`AlgebraicGeometry.Scheme.EtaleTorsor.continuousMonoidHomPadicEquiv_comp`). -/
+of the inverse limit are induced by the reductions `ℤ/ℓⁿ⁺¹ → ℤ/ℓⁿ`. -/
 noncomputable def continuousMonoidHomPadicEquiv :
     (G →ₜ* Multiplicative ℤ_[l]) ≃ sheafHOneLimit Y l :=
   (PadicInt.continuousMonoidHomEquiv l G).trans (Equiv.subtypeEquiv
@@ -169,13 +165,8 @@ lemma continuousMonoidHomPadicEquiv_mul (b b' : G →ₜ* Multiplicative ℤ_[l]
   rw [ContinuousMonoidHom.mul_apply, toAdd_mul, map_add]
   exact hadd.symm
 
-/-- Continuous `ℤ_ℓ`-characters are compatible
-finite-level classes.
-
-The group isomorphism `Hom_cont(π₁(Y, s), ℤ_ℓ) ≃+ lim_n H¹(Y_ét, ℤ/ℓⁿ)` underlying the
-bijection `AlgebraicGeometry.Scheme.EtaleTorsor.continuousMonoidHomPadicEquiv`; it is
-equivariant for the Frobenius
-(`AlgebraicGeometry.Scheme.EtaleTorsor.continuousMonoidHomPadicEquiv_comp`). -/
+/-- The group isomorphism `Hom_cont(π₁(Y, s), ℤ_ℓ) ≃+ lim_n H¹(Y_ét, ℤ/ℓⁿ)` underlying the
+bijection `AlgebraicGeometry.Scheme.EtaleTorsor.continuousMonoidHomPadicEquiv`. -/
 noncomputable def continuousMonoidHomPadicAddEquiv :
     Additive (G →ₜ* Multiplicative ℤ_[l]) ≃+ sheafHOneLimit Y l where
   toEquiv := Additive.toMul.trans (continuousMonoidHomPadicEquiv l s G)
@@ -205,15 +196,11 @@ lemma mapIsoH1_classH1 {M : Type (u + 1)} [AddCommGroup M] [Finite M] (e : Y ≅
   rw [mapIsoH1, ← classH1Equiv_apply, Equiv.symm_apply_apply]
   rfl
 
-/-- Continuous `ℤ_ℓ`-characters are compatible
-finite-level classes, the Frobenius equivariance.
-
-Let `e` be an automorphism of `Y`, `τ : F_s ∘ e_* ≅ F_s` a transport of the fibre functor and
-`σ : π₁(Y, s) → π₁(Y, s)` the induced continuous homomorphism, `τ (g • x) = σ g • τ x`. Then the
-bijection `Hom_cont(π₁(Y, s), ℤ_ℓ) ≃ lim_n H¹(Y_ét, ℤ/ℓⁿ)` sends `b ∘ σ` to the transport along
-`e` of the family attached to `b`. For the Frobenius of a curve over a finite field and a lift
-`s` of Frobenius to the Weil group, `σ` is conjugation `g ↦ s⁻¹ g s` (up to the convention for
-`s`), which is the Frobenius action `f ↦ [g ↦ f (s⁻¹ g s)]`. -/
+/-- Frobenius equivariance of `continuousMonoidHomPadicEquiv`. Let `e` be an automorphism of `Y`,
+`τ : F_s ∘ e_* ≅ F_s` a transport of the fibre functor and `σ : π₁(Y, s) → π₁(Y, s)` the induced
+continuous homomorphism, `τ (g • x) = σ g • τ x`. Then the bijection
+`Hom_cont(π₁(Y, s), ℤ_ℓ) ≃ lim_n H¹(Y_ét, ℤ/ℓⁿ)` sends `b ∘ σ` to the transport along `e` of the
+family attached to `b`. -/
 theorem continuousMonoidHomPadicEquiv_comp (e : Y ≅ Y)
     (τ : FiniteEtale.mapIso e ⋙ fiber s ≅ fiber s) (σ : G →ₜ* G)
     (hσ : ∀ P (g : G) (x : (fiber s).obj ((FiniteEtale.mapIso e).obj P)),

@@ -76,12 +76,7 @@ theorem IsAbelianVariety.exists_isClosedImmersion_projectiveSpace (A : Over (Spe
   have : IsProper (j ≫ ℙ(α; Spec (.of K)) ↘ Spec (.of K)) := hjA ▸ inferInstance
   exact IsClosedImmersion.of_comp_of_isSeparated j (ℙ(α; Spec (.of K)) ↘ Spec (.of K))
 
-/-- Abelian
-varieties are projective.
-
-Being projective, an abelian variety carries an ample invertible `𝒪_A`-module, namely the
-pullback `j^* 𝒪(1)` of the twisting sheaf along a closed immersion `j` into a projective space:
-it is very ample, and equal to its first tensor power. -/
+/-- An abelian variety carries an ample invertible `𝒪_A`-module. -/
 theorem IsAbelianVariety.exists_isAmple (A : Over (Spec (.of K))) [GrpObj A]
     [IsAbelianVariety A] :
     ∃ M : A.left.Modules, IsAmple A.hom M := by

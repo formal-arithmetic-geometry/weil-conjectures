@@ -104,9 +104,7 @@ variable {k : Type u} [Field k] [IsAlgClosed k] {C U : Scheme.{u}} {p : C ⟶ Sp
 local notation "Ω" => SeparableClosure (Scheme.functionField C)
 
 omit [ConnectedSpace U] in
-/-- A torsor on `U` has vanishing residue at
-every closed point `y` of `U`, since it extends over `y`: compare with the restriction of the torsor
-to `U ∖ {y}`. -/
+/-- A torsor on `U` has vanishing residue at every closed point `y` of `U`. -/
 theorem residue_eq_zero_of_mem_range {N : ℕ} [NeZero N] [NeZero (N : k)]
     (T : EtaleTorsor (ULift.{u + 1} (ZMod N)) U) {y : C} (hy : y ∈ Set.range j.base)
     (hyc : IsClosed ({y} : Set C)) : T.residue j p y = 0 := by

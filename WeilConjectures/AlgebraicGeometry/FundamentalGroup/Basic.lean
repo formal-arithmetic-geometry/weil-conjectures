@@ -75,9 +75,7 @@ namespace FiniteEtale
 variable {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y)
 
 variable (Y) in
-/-- The finite etale category is a Galois category.
-
-The finite étale `Y`-schemes form a pre-Galois category: they have a terminal object,
+/-- The finite étale `Y`-schemes form a pre-Galois category: they have a terminal object,
 fibre products, finite coproducts and quotients by finite groups, and a monomorphism is the
 inclusion of a direct summand. -/
 theorem preGaloisCategory : PreGaloisCategory Y.FiniteEtale where
@@ -86,9 +84,7 @@ theorem preGaloisCategory : PreGaloisCategory Y.FiniteEtale where
 
 attribute [instance] preGaloisCategory
 
-/-- The finite etale category is a Galois category.
-
-For connected `Y` the geometric fibre at a geometric point is a fibre functor on the
+/-- For connected `Y` the geometric fibre at a geometric point is a fibre functor on the
 finite étale `Y`-schemes. -/
 theorem fiberFunctor [ConnectedSpace Y] : FiberFunctor (fiber s) where
   preservesQuotientsByFiniteGroups _ _ _ := inferInstance
@@ -97,9 +93,7 @@ theorem fiberFunctor [ConnectedSpace Y] : FiberFunctor (fiber s) where
 attribute [instance] fiberFunctor
 
 variable (Y) in
-/-- The finite etale category is a Galois category.
-
-For connected `Y` the finite étale `Y`-schemes form a Galois category: a geometric point
+/-- For connected `Y` the finite étale `Y`-schemes form a Galois category: a geometric point
 `Spec κ(y)^alg ⟶ Y` at any point `y` gives a fibre functor. -/
 theorem galoisCategory [ConnectedSpace Y] : GaloisCategory Y.FiniteEtale := by
   obtain ⟨y⟩ := (inferInstance : Nonempty Y)
@@ -135,9 +129,7 @@ variable [ConnectedSpace Y]
 
 open scoped FintypeCatDiscrete
 
-/-- Aut of fibre functor is profinite.
-
-The fibre functor at a geometric point of a connected scheme has a fundamental group in the
+/-- The fibre functor at a geometric point of a connected scheme has a fundamental group in the
 universe of the scheme: a profinite group `G` acting naturally and continuously on the
 geometric fibres, transitively on those of Galois objects, and faithfully. This `G` is the
 étale fundamental group `π₁(Y, s)`, unique up to unique isomorphism. -/
@@ -224,34 +216,26 @@ theorem isGalois_iff (P : Y.FiniteEtale) :
 variable (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G]
   [∀ P, MulAction G ((fiber s).obj P)] [IsFundamentalGroup (fiber s) G]
 
-/-- The fibre functor is an equivalence.
-
-For a connected scheme `Y` with geometric point `s` and a fundamental group `G` of the fibre
+/-- For a connected scheme `Y` with geometric point `s` and a fundamental group `G` of the fibre
 functor, the fibre functor induces an equivalence between finite étale `Y`-schemes and finite
 sets with a continuous `G`-action. -/
 noncomputable def equivalenceContAction : Y.FiniteEtale ≌ ContAction FintypeCat.{u} G :=
   (functorToContAction (fiber s)).asEquivalence.trans
     (ContAction.resEquiv _ (toAutContinuousMulEquiv (fiber s) G))
 
-/-- The fibre functor is an equivalence.
-
-The underlying finite set of the `G`-set attached to a finite étale `Y`-scheme `P` is its
+/-- The underlying finite set of the `G`-set attached to a finite étale `Y`-scheme `P` is its
 geometric fibre. -/
 @[simp]
 lemma equivalenceContAction_functor_obj_obj_V (P : Y.FiniteEtale) :
     ((equivalenceContAction s G).functor.obj P).obj.V = (fiber s).obj P := rfl
 
-/-- The fibre functor is an equivalence.
-
-The action of `G` on the `G`-set attached to a finite étale `Y`-scheme `P` is the given action
+/-- The action of `G` on the `G`-set attached to a finite étale `Y`-scheme `P` is the given action
 of `G` on the geometric fibre of `P`. -/
 lemma equivalenceContAction_functor_obj_obj_ρ_apply (P : Y.FiniteEtale) (g : G)
     (x : (fiber s).obj P) :
     (((equivalenceContAction s G).functor.obj P).obj.ρ g).asHom.hom x = g • x := rfl
 
-/-- The fibre functor is an equivalence.
-
-The map of `G`-sets attached to a morphism of finite étale `Y`-schemes is the induced map on
+/-- The map of `G`-sets attached to a morphism of finite étale `Y`-schemes is the induced map on
 geometric fibres. -/
 lemma equivalenceContAction_functor_map_hom_hom {P Q : Y.FiniteEtale} (f : P ⟶ Q) :
     ((equivalenceContAction s G).functor.map f).hom.hom = (fiber s).map f := rfl

@@ -78,12 +78,9 @@ lemma IsCurveCoefficientPair.subsingleton_sheafH {f : C ⟶ Spec (.of k)}
 
 variable [IsAlgClosed k]
 
-/-- **cohomological dimension of a smooth curve.**
-For a smooth separated connected curve `C` over an algebraically closed field and any torsion
-étale sheaf `F` on `C`, `Hᵠ(C, F) = 0` for `q > 2`. A smooth connected curve is integral, and
-the argument at the generic point of
-`AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_of_isIntegral` applies; smoothness is
-not needed for it. -/
+/-- **Cohomological dimension of a smooth curve.** For a smooth separated connected curve `C` over
+an algebraically closed field and any torsion étale sheaf `F` on `C`, `Hᵠ(C, F) = 0` for
+`q > 2`. -/
 theorem IsConnectedCurve.subsingleton_sheafH_of_two_lt_of_smooth (f : C ⟶ Spec (.of k))
     [IsConnectedCurve f] [Smooth f] (F : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1})
     (hF : F.IsTorsion) (q : ℕ) (hq : 2 < q) : Subsingleton (Sheaf.H F q) := by

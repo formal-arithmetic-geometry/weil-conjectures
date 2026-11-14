@@ -72,9 +72,7 @@ theorem exists_hopfAlgebra_iso (G : Over (Spec (.of K))) [GrpObj G] [IsFinite G.
         Iso.inv_hom_id_assoc])]
     exact Scheme.Hom.finrankΓ_SpecMap K H.unop
 
-/-- Connected finite group schemes have `p`-power order
-
-Let `G` be a finite group scheme over a field `K` of characteristic `p > 0`. If `G` is
+/-- Let `G` be a finite group scheme over a field `K` of characteristic `p > 0`. If `G` is
 connected, then its order `|G| = dim_K Γ(G, 𝒪_G)` is a power of `p`. -/
 theorem exists_finrankΓ_eq_pow (p : ℕ) [Fact p.Prime] [CharP K p]
     (G : Over (Spec (.of K))) [GrpObj G] [IsFinite G.hom] [ConnectedSpace G.left] :
@@ -92,9 +90,7 @@ theorem exists_finrankΓ_eq_pow (p : ℕ) [Fact p.Prime] [CharP K p]
   rw [hfin]
   exact Bialgebra.exists_finrank_eq_pow K H p
 
-/-- Group schemes of order prime to `p` are étale
-
-Let `G` be a finite group scheme over a field `K` of characteristic `p`, of order `m`. If
+/-- Let `G` be a finite group scheme over a field `K` of characteristic `p`, of order `m`. If
 `p ∤ m` — which for `p = 0` just says `m ≠ 0` — then `G` is étale over `K`. -/
 theorem etale_of_not_dvd_finrankΓ (p : ℕ) [CharP K p] (G : Over (Spec (.of K))) [GrpObj G]
     [IsFinite G.hom] (hp : ¬ p ∣ G.hom.finrankΓ) :
@@ -122,10 +118,8 @@ noncomputable def pointsEquivAlgHom (G : Over (Spec (.of K))) [IsAffine G.left] 
     (𝟙_ (Over (Spec (.of K))) ⟶ G) ≃ (Γ(G.left, ⊤) →ₐ[K] K) :=
   specAlgebraMapSelfIso.symm.homCongr (Iso.refl G) |>.trans (G.hom.overHomEquivAlgHom K)
 
-/-- Points of finite étale group schemes
-
-A finite étale group scheme `G` of order `m` over an algebraically closed field `K` has exactly
-`m` points with values in `K`. -/
+/-- A finite étale group scheme `G` of order `m` over an algebraically closed field `K` has
+exactly `m` points with values in `K`. -/
 theorem card_points_eq_finrankΓ [IsAlgClosed K] (G : Over (Spec (.of K))) [GrpObj G]
     [IsFinite G.hom] [Etale G.hom] :
     Nat.card (𝟙_ (Over (Spec (.of K))) ⟶ G) = G.hom.finrankΓ := by
@@ -135,9 +129,7 @@ theorem card_points_eq_finrankΓ [IsAlgClosed K] (G : Over (Spec (.of K))) [GrpO
   rw [Nat.card_congr (pointsEquivAlgHom G), Algebra.Etale.natCard_algHom_eq_finrank]
   rfl
 
-/-- Points of finite étale group schemes
-
-Let `G` be a finite étale group scheme over an algebraically closed field `K` and let `K'` be an
+/-- Let `G` be a finite étale group scheme over an algebraically closed field `K` and let `K'` be an
 algebraically closed extension of `K`. Then base change along `K ⊆ K'`, that is precomposition
 with the structure morphism of `Spec K'` over `K`, is a bijection `G(K) ≃ G(K')`. -/
 theorem bijective_toUnit_comp [IsAlgClosed K] {K' : Type u} [Field K'] [Algebra K K']

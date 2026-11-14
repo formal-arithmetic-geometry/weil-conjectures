@@ -181,10 +181,7 @@ theorem exists_smooth_properCompactification_of_perfectField [PerfectField K]
 Every smooth geometrically connected curve `U₀` over a finite field `K` admits a smooth proper
 completion: a compactification `c : Compactification p` of the structure morphism
 `p : U₀ ⟶ Spec K` whose ambient scheme `c.Z = C₀` is again a smooth geometrically connected
-curve over `K`, and whose boundary `C₀ \ U₀` is a finite set of closed points of `C₀`.
-
-The open immersion `U₀ ⟶ C₀` and the properness of `C₀ ⟶ Spec K` are part of the data of a
-`Compactification`, so they do not appear among the conclusions. -/
+curve over `K`, and whose boundary `C₀ \ U₀` is a finite set of closed points of `C₀`. -/
 theorem exists_smooth_properCompactification
     {K : Type u} [Field K] [Finite K] {U : Scheme.{u}} (p : U ⟶ Spec (.of K)) [IsCurve p]
     [SmoothOfRelativeDimension 1 p] [GeometricallyConnected p] :
@@ -194,15 +191,13 @@ theorem exists_smooth_properCompactification
   obtain ⟨c, -, h₁, h₂, h₃, -, h₄, h₅⟩ := exists_smooth_properCompactification_of_perfectField p
   exact ⟨c, h₁, h₂, h₃, h₄, h₅⟩
 
-/-- Smooth proper compactification of a
-normal finite-field curve.
+/-- Smooth projective compactification of a normal curve over a perfect field.
 
 Let `U` be a normal geometrically connected curve of pure dimension one over a perfect field `K`
-(for instance a finite field): its local rings are integrally closed domains and
-`dim U = 1`. Then `U` is smooth over `K`, and there is a compactification `c` of `U` whose
-ambient scheme `c.Z` is a smooth geometrically connected curve over `K` which is *projective*,
-i.e. admits a closed immersion into a projective space over `K`, in which `U` is a dense open
-subscheme with finite complement. -/
+(for instance a finite field). Then `U` is smooth over `K`, and there is a compactification `c`
+of `U` whose ambient scheme `c.Z` is a smooth geometrically connected curve over `K` which is
+*projective*, i.e. admits a closed immersion into a projective space over `K`, in which `U` is a
+dense open subscheme with finite complement. -/
 theorem exists_smooth_projectiveCompactification [PerfectField K] (p : U ⟶ Spec (.of K))
     [IsCurve p] [GeometricallyConnected p]
     (hU : ∀ x : U, IsDomain (U.presheaf.stalk x) ∧ IsIntegrallyClosed (U.presheaf.stalk x))

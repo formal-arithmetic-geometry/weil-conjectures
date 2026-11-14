@@ -104,12 +104,10 @@ lemma residue_eq_add_of_galoisCharacter_eq_add {T T₁ T₂ : EtaleTorsor (ULift
     show T.galoisCharacter j = T₁.galoisCharacter j + T₂.galoisCharacter j from funext h]
   exact kummerResidue_add z hξΩ hx₁ hf₁ hχ₁ hx₂ hf₂ hχ₂
 
-/-- The residues are compatible with the
-reduction of coefficients `ℤ / N d → ℤ / N`.
-
-If the Galois character of a `ℤ / N`-torsor `T'` is the reduction of that of a
-`ℤ / N d`-torsor `T`, then the residues of `T'` are the reductions of those of `T`, along the
-transition map `Hom(μ_{N d}, ℤ / N d) → Hom(μ_N, ℤ / N)` induced by `ξ ↦ ξ ^ d`. -/
+/-- The residues are compatible with the reduction of coefficients `ℤ / N d → ℤ / N`: if the
+Galois character of a `ℤ / N`-torsor `T'` is the reduction of that of a `ℤ / N d`-torsor `T`,
+then the residues of `T'` are the reductions of those of `T`, along the transition map
+`Hom(μ_{N d}, ℤ / N d) → Hom(μ_N, ℤ / N)` induced by `ξ ↦ ξ ^ d`. -/
 theorem residue_eq_castHom_of_galoisCharacter {d : ℕ} [NeZero (N * d)]
     [NeZero ((N * d : ℕ) : k)] [HasEnoughRootsOfUnity k (N * d)]
     {T : EtaleTorsor (ULift.{u + 1} (ZMod (N * d))) U} {T' : EtaleTorsor (ULift.{u + 1} (ZMod N)) U}
@@ -298,10 +296,7 @@ local notation "Ω" => SeparableClosure (Scheme.functionField C)
 
 
 -- instance search through `SeparableClosure` and its integral closures is slow
-/-- Exactness of the residue sequence at one
-boundary point.
-
-Let `U ⊆ C` be a nonempty open of a smooth connected curve over an algebraically closed field
+/-- Let `U ⊆ C` be a nonempty open of a smooth connected curve over an algebraically closed field
 `k`, `V ⊆ C` an open with `V ∖ U = {z}`, and `N` invertible in `k`. The residue at `z` of a
 `ℤ / N`-torsor `T` on `U` vanishes if and only if the monodromy of `T` is trivial on the kernel
 of `π₁(U) → π₁(V)`, i.e. if and only if `T` extends over `z`. -/
@@ -536,7 +531,7 @@ theorem injective_restrictH1 [IsRegular C] {M : Type (u + 1)} [AddCommGroup M] [
   rw [restrictH1_classH1, restrictH1_classH1, classH1_eq_classH1_iff] at h
   exact classH1_eq_classH1_iff.2 (isIsomorphic_of_isIsomorphic_pullback_of_isRegular h)
 
-/-- Exactness of the residue sequence (5.1)
+/-- Exactness of the residue sequence
 
 `0 → H¹(C, ℤ / N) → H¹(U, ℤ / N) → ⊕_{z ∈ C ∖ U} ℤ / N (-1)`
 

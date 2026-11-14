@@ -90,10 +90,7 @@ open FiniteEtale
 
 variable {K : Type u} [Field K] [Finite K]
 
-/-- The Frobenius acts on the boundary module
-`ℤ / N (-1)` at a boundary point `z` through `Q = q ^ m`, for a power `Φ ^ m` fixing `z`.
-
-Let `U₀ ⊆ C₀` be a smooth curve over `K = 𝔽_q` in a compactification `c` by a smooth curve,
+/-- Let `U₀ ⊆ C₀` be a smooth curve over `K = 𝔽_q` in a compactification `c` by a smooth curve,
 with geometric fibres `U ⊆ C`, and let `V ⊆ C` be an open containing `U` with `V ∖ U = {z}`.
 There is `m ≥ 1` such that for every `ℤ / N`-torsor `T` on `U`, `N` invertible in `K`, which is
 fixed by `Φ ^ m` (through `ψ`), `q ^ m - 1` kills the monodromy of `T` on the kernel of

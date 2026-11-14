@@ -58,12 +58,8 @@ namespace AlgebraicGeometry
 
 variable {K : Type u} [Field K]
 
-/-- The `n`-fold sum is a homomorphism.
-
-Let `G` be a commutative group scheme over `K`. Then the `n`-fold sum map `[n] : G ⟶ G` is a
-homomorphism of group schemes: it is the `n`-th power of the homomorphism `𝟙 G` in the
-commutative monoid `G ⟶ G`, and such powers are homomorphisms
-(`CategoryTheory.MonObj.isMonHom_pow`). -/
+/-- For a commutative group scheme `G` over `K`, the `n`-fold sum map `[n] = 𝟙 G ^ n : G ⟶ G` is
+a homomorphism of group schemes. -/
 instance isMonHom_npow_id (G : Over (Spec (.of K))) [GrpObj G] [IsCommMonObj G] (n : ℕ) :
     IsMonHom (𝟙 G ^ n) :=
   MonObj.isMonHom_pow _ n
@@ -111,11 +107,8 @@ section Kernel
 
 variable {A B : Over (Spec (.of K))} [GrpObj B]
 
-/-- The kernel `ker f ⟶ A` of a morphism `f : A ⟶ B` to a
-group scheme over `K` is a closed immersion.
-
-The unit section `Spec K ⟶ B` is a closed immersion, being a section of `B ⟶ Spec K` with
-target a point (no separatedness is needed), and `ker f ⟶ A` is its base change along `f`. -/
+/-- The kernel `ker f ⟶ A` of a morphism `f : A ⟶ B` to a group scheme over `K` is a closed
+immersion. -/
 theorem isClosedImmersion_kerι (f : A ⟶ B) : IsClosedImmersion (GrpObj.kerι f).left :=
   MorphismProperty.of_isPullback ((GrpObj.isPullback_kerι f).map (Over.forget _)).flip
     (inferInstanceAs (IsClosedImmersion η[B].left))
@@ -176,11 +169,8 @@ theorem Scheme.Hom.etale_iff_etale_ΓAlgebra_of_isFinite {X : Scheme.{u}}
 
 end Etale
 
-/-- Multiplication by `n` and `n`-torsion.
-
-
-The `n`-torsion subgroup scheme `G[n]` of a group scheme `G` over `K` is the kernel of the
-`n`-th power map `𝟙 G ^ n`, which on points is `a ↦ a + ⋯ + a`:
+/-- The `n`-torsion subgroup scheme `G[n]` of a group scheme `G` over `K`: the kernel of the
+`n`-th power map `𝟙 G ^ n`, which on points is `a ↦ a + ⋯ + a`.
 
 ```
   G[n] ──────────────▶ 𝟙_ (Over (Spec (.of K)))
@@ -215,10 +205,8 @@ theorem torsionSubgroupScheme.ι_pow (G : Over (Spec (.of K))) [GrpObj G] (n : �
   simp only [comp_pow, Category.comp_id] at h
   exact h
 
-/-- The `n`-torsion subgroup scheme `G[n]` of a
-commutative group scheme is a closed subgroup scheme of `G`, being the kernel of the homomorphism
-`[n] = 𝟙 G ^ n` (`AlgebraicGeometry.isMonHom_npow_id`,
-`AlgebraicGeometry.isClosedSubgroupScheme_kerι`). -/
+/-- The `n`-torsion subgroup scheme `G[n]` of a commutative group scheme `G` is a closed subgroup
+scheme of `G`. -/
 instance isClosedSubgroupScheme_torsionSubgroupScheme_ι (G : Over (Spec (.of K))) [GrpObj G]
     [IsCommMonObj G] (n : ℕ) : IsClosedSubgroupScheme (torsionSubgroupScheme.ι G n) :=
   isClosedSubgroupScheme_kerι _
@@ -277,9 +265,7 @@ theorem torsionSubgroupSchemeMul_ι (G : Over (Spec (.of K))) [GrpObj G] {m n : 
       torsionSubgroupScheme.ι G m ^ k :=
   GrpObj.kerLift_kerι _ _ _
 
-/-- Isogenies and their degree.
-
-An *isogeny* `f : A ⟶ B` of group schemes over `K` is a surjective homomorphism with finite
+/-- An *isogeny* `f : A ⟶ B` of group schemes over `K` is a surjective homomorphism with finite
 kernel. The definition makes sense for arbitrary group schemes, but it is only for abelian
 varieties that `AlgebraicGeometry.isogenyDegree` is the degree of `f` as a finite flat morphism
 (see `AlgebraicGeometry.IsIsogeny.finrank_eq`). -/

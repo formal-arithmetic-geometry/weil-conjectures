@@ -42,13 +42,8 @@ namespace AlgebraicGeometry.Scheme
 variable {Y : Scheme.{u}}
 
 variable (Y) in
-/-- Finite etale covers and finite locally constant sheaves.
-
-The category `FLC(Y)` of finite locally constant sheaves of sets on the small étale site of
-`Y`, with morphisms of sheaves; the category `FÉt(Y)` of finite étale `Y`-schemes is
-`AlgebraicGeometry.Scheme.FiniteEtale`. The small étale site `Y_ét` is Mathlib's
-`AlgebraicGeometry.Scheme.smallEtaleTopology`, and finite
-torsors are `CategoryTheory.Sheaf.Torsor`. -/
+/-- The category `FLC(Y)` of finite locally constant sheaves of sets on the small étale site of
+`Y`, with morphisms of sheaves. -/
 protected abbrev FiniteLocallyConstant : Type (u + 2) :=
   ObjectProperty.FullSubcategory fun F : Sheaf Y.smallEtaleTopology (Type (u + 1)) ↦
     IsFiniteLocallyConstantSheafOfTypes F
