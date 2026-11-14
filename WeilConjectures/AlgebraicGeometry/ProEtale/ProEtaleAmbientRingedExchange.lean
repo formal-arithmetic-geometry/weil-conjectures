@@ -136,7 +136,7 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 
 Source: literature/blueprint/master/blueprint/sec-proper-base-change/
 sk-thm-properbasechange/def-weil-pbc-ambient-ringed-exchange.md
-(blueprint: def-weil-pbc-ambient-ringed-exchange).
+(blueprint: definition-pro-etale-base-change-map--1).
 
 ## Main definitions
 
@@ -156,7 +156,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- Canonical derived pullback comparison extracted from the composition interface.
-Source: Stacks Project, Lemma 0D6D (blueprint: def-weil-pbc-ambient-ringed-exchange).
+Source: Stacks Project, Lemma 0D6D (blueprint: definition-pro-etale-base-change-map--1).
 The recorded composition theorem supplies this comparison together with its K-flat
 normalization; this definition retains that characterization when selecting the comparison.
 The adjunctions are fixed by their tensor units, the ordinary direct-image comparison
@@ -232,7 +232,7 @@ noncomputable def proEtaleCanonicalDerivedPullbackComparison
   exact hex.choose
 
 /-- The canonical pullback comparison around the coefficient-compatible square.
-Source: Stacks Tags 07A7 and 0D6D (blueprint: def-weil-pbc-ambient-ringed-exchange).
+Source: Stacks Tags 07A7 and 0D6D (blueprint: definition-pro-etale-base-change-map--1).
 This exposes the exact comparison whose mate defines ambient exchange. -/
 noncomputable def proEtaleAmbientRingedPullbackComparison
     {X' X Y' Y : Scheme.{u}}
@@ -290,7 +290,7 @@ The resulting exchange is the mate of that comparison under the two derived
 pullback/direct image adjunctions.  Explicitly, its transpose is the comparison
 followed by `Lg'^*` of the counit of `Lf^* ⊣ Rf_*`; the mate construction inserts
 the unit of `Lf'^* ⊣ Rf'_*`.  This is the construction in Stacks, Remark 07A7
-(blueprint: def-weil-pbc-ambient-ringed-exchange), before completeness or
+(blueprint: definition-pro-etale-base-change-map--1), before completeness or
 constructibility conditions.
 -/
 noncomputable def proEtaleAmbientRingedExchange
@@ -317,6 +317,6 @@ noncomputable def proEtaleAmbientRingedExchange
     (proEtaleRingDerivedAdjunction f' R_Y' R_X' c_f')
     (TwoSquare.mk _ _ _ _
       (proEtaleAmbientRingedPullbackComparison sq R_X R_Y R_X' R_Y'
-        c_f c_g c_g' c_f' hcoeff).hom)).natTrans
+        c_f c_g c_g' c_f' hcoeff).hom))
 
 end AlgebraicGeometry.Scheme

@@ -15,7 +15,7 @@ import WeilConjectures.Mathlib.FieldTheory.IsAlgClosed.Basic
 # Artin–Schreier map over an algebraically closed field
 
 Source: blueprint sec-abelian-varieties/lem-sc-lang-steinberg/lem-sc-artin-schreier-k.md
-(blueprint: lem-sc-artin-schreier-k)
+(blueprint: proposition-p-torsion-smooth-proper-curve--2)
 -/
 
 @[expose] public section
@@ -26,7 +26,7 @@ namespace IsAlgClosed
 
 Source: blueprint sec-abelian-varieties/lem-sc-lang-steinberg/lem-sc-artin-schreier-k.md,
 Proof; Stacks Project, Tag 0A3J, opening Artin–Schreier sequence
-(blueprint: lem-sc-artin-schreier-k).
+(blueprint: proposition-p-torsion-smooth-proper-curve--2).
 
 Proof:
 1. Positive field characteristic is prime: if `p = m * n` with both factors strictly between

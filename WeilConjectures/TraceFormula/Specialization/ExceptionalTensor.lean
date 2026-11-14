@@ -18,7 +18,7 @@ the pullback exchange `α_f : f_s^* S_W ⟶ S_V f^*`, the compact-support exchan
 `β_f : S_V Rf^! ⟶ Rf_s^! S_W`. Write `π : Rf_!(f^* N ⊗ X) ≅ N ⊗ Rf_! X` for the projection
 formula and `t_f : f^* N ⊗ Rf^! M ⟶ Rf^!(N ⊗ M)` for its mate with the exceptional counit.
 
-Blueprint `det-nearby-exceptional-tensor` (2) is the identity
+Blueprint `lemma-compatibilities-base-change-maps` (2) is the identity
 
 `β_f S_V(t_f) μ_V(α_f ⊗ 1) = f_s^! μ_W t_{f_s}(1 ⊗ β_f)`
 
@@ -40,7 +40,7 @@ variable {V V' W W' : Type*} [Category V] [Category V'] [Category W] [Category W
   {F : V ⥤ W} {G : W ⥤ V} {F' : V' ⥤ W'} {G' : W' ⥤ V'} {Lp : W ⥤ V} {Lp' : W' ⥤ V'}
 
 /-- **The exceptional exchange and the projection formula** (blueprint
-`det-nearby-exceptional-tensor`, (1) ⇒ (2)): let `β` be the mate of `ν` for the adjunctions
+`lemma-compatibilities-base-change-maps`, (1) ⇒ (2)): let `β` be the mate of `ν` for the adjunctions
 `F ⊣ G` and `F' ⊣ G'`, `t` and `t'` the maps adjoint to `π ≫ (1 ◁ ε)` for projection-formula
 maps `π`, `π'`, natural in the second variable along `β`. If `ν` is compatible with the projection
 formula (`h₁`), then

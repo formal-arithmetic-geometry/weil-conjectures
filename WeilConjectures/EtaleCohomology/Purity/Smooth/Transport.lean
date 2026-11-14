@@ -30,9 +30,9 @@ reductions) and `AlgebraicGeometry.Etale.NormalizedTower.exists_iso_of_isHomotop
 realization at the `𝒪_E` stage of a levelwise isomorphism of normalized systems); the smooth
 traces are in
 `WeilConjectures.EtaleCohomology.Purity.Smooth.Trace`. The purity isomorphism cannot be read
-off `sk-thm-smooth-purity` at `Λ = 𝒪_E`: in the étale model `Lf^* K` of a derived complete
-`K` need not be derived complete (the constant sheaf `𝒪_E` on `𝔾_m` over an algebraically
-closed field is not), whereas `Rf^! K` is.
+off `proposition-smooth-purity-finite-coefficients` at `Λ = 𝒪_E`: in the étale model `Lf^* K` of a
+derived complete `K` need not be derived complete (the constant sheaf `𝒪_E` on `𝔾_m` over an
+algebraically closed field is not), whereas `Rf^! K` is.
 
 ## Main statements
 
@@ -74,7 +74,8 @@ local instance localInstance_Transport_1 (X : Scheme.{u}) : EssentiallySmall.{u 
   essentiallySmall_of_small_of_locallySmall _
 
 omit [IsSeparated f] in
-/-- Blueprint `sk-thm-purity-transport`: Smooth purity over `𝒪_E`, `E` and `ℚ̄_ℓ`
+/-- Blueprint `theorem-smooth-purity-all-admissible-coefficients`: Smooth purity over `𝒪_E`, `E` and
+`ℚ̄_ℓ`
 
 **`Rf^!` preserves derived completeness.** Let `f : X ⟶ Y` be smooth separated of pure
 relative dimension `d` and let `Λ = 𝒪_E` be the integral coefficient stage. Then `Rf^!`

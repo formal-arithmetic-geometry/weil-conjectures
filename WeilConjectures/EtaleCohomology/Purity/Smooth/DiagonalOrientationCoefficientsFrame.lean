@@ -15,9 +15,9 @@ Let `Ψ : D(X_ét, Λ) ⥤ D(X_ét, Λ')` be a change of coefficients with its c
 `Ri_!` and `Ri^!` (`AlgebraicGeometry.Etale.SupportedCoefficientChange`). The compatibility of
 the fundamental class, of the purity isomorphism of a section and of the canonical orientation
 with `Ψ` (`SupportedCoefficientChange.mapSupportedClass_thomFundamentalClass` and its
-consequences, blueprint `det-sp-purity-coefficient-change`) assume the hypothesis `hframe`: `Ψ`
-carries the frame class `∂κ(f₁) ∪ ⋯ ∪ ∂κ(f_c)` over `Λ` (`AlgebraicGeometry.Etale.frameClass`)
-of every frame to the frame class over `Λ'`.
+consequences, blueprint `proposition-compatibility-purity-change-coefficients`) assume the
+hypothesis `hframe`: `Ψ` carries the frame class `∂κ(f₁) ∪ ⋯ ∪ ∂κ(f_c)` over `Λ`
+(`AlgebraicGeometry.Etale.frameClass`) of every frame to the frame class over `Λ'`.
 
 This file reduces `hframe` to compatibilities of `Ψ` with the three operations out of which the
 frame classes are built (`AlgebraicGeometry.Etale.kummerBoundaryProduct`):
@@ -260,7 +260,8 @@ section FrameClass
 variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [Finite Λ] [CommRing Λ'] [Finite Λ']
   [HasKummerClass Λ] [HasKummerClass Λ'] (Φ : SupportedCoefficientChange Λ Λ')
 
-/-- Blueprint `det-sp-purity-coefficient-change`: change of coefficients in purity
+/-- Blueprint `proposition-compatibility-purity-change-coefficients`: change of coefficients in
+purity
 
 A change of coefficients *preserves Kummer boundaries* if it is compatible with the three
 constituents of the iterated cup products of Kummer boundaries
@@ -320,7 +321,8 @@ theorem mapSupportedClass_kummerBoundaryProduct (hΦ : Φ.PreservesKummerBoundar
       (by rw [Nat.cast_succ, add_comm (1 : ℤ)]), hΦ.mapSupportedClass_cupWithSupportsTateObject,
       hΦ.mapSupportedClass_kummerBoundary, ih]
 
-/-- Blueprint `det-sp-purity-coefficient-change`: change of coefficients in purity
+/-- Blueprint `proposition-compatibility-purity-change-coefficients`: change of coefficients in
+purity
 
 **A change of coefficients preserving Kummer boundaries carries frame classes to frame
 classes**: for every frame `(e : U ⟶ X, f₁, …, f_c)` of a closed immersion, the change of
@@ -480,7 +482,8 @@ variable {U Z₁ Z₂ Z : Scheme.{u}} (i₁ : Z₁ ⟶ U) (i₂ : Z₂ ⟶ U) (i
   [IsClosedImmersion i₁] [IsClosedImmersion i₂] [IsClosedImmersion i]
   (h : Set.range i.base = Set.range i₁.base ∩ Set.range i₂.base)
 
-/-- Blueprint `det-sp-purity-coefficient-change`: change of coefficients in purity
+/-- Blueprint `proposition-compatibility-purity-change-coefficients`: change of coefficients in
+purity
 
 **A monoidal change of coefficients commutes with the cup product with supports**
 (`AlgebraicGeometry.Etale.cupWithSupportsTateObject`), provided it is compatible with
@@ -519,7 +522,8 @@ theorem mapSupportedClass_cupWithSupportsTateObject [HasInvertibleExponent Λ U]
     ← SupportedCoefficientChange.constantComplexIso_hom_comp_mapSupportedClass,
     ← tensorMap_comp_derivedTensorHom_assoc, reassoc_of% hΔ]
 
-/-- Blueprint `det-sp-purity-coefficient-change`: change of coefficients in purity
+/-- Blueprint `proposition-compatibility-purity-change-coefficients`: change of coefficients in
+purity
 
 **A monoidal change of coefficients preserves Kummer boundaries**
 (`AlgebraicGeometry.Etale.SupportedCoefficientChange.PreservesKummerBoundaries`), hence carries
@@ -572,7 +576,8 @@ section Orientation
 variable [HasKummerClass Λ] [HasKummerClass.IsNormalized Λ] [HasKummerClass Λ']
   [HasKummerClass.IsNormalized Λ'] (Φ : MonoidalSupportedCoefficientChange Λ Λ')
 
-/-- Blueprint `thm-pur-diagonal-dualizing-object`, `det-sp-purity-coefficient-change`
+/-- Blueprint `proposition-relative-dualizing-complex--1`,
+`proposition-compatibility-purity-change-coefficients`
 
 **The canonical orientation `ω_f ≅ Λ_X(d)[2d]` is compatible with a monoidal change of
 coefficients preserving Kummer boundaries**, as soon as the smooth base change identifications

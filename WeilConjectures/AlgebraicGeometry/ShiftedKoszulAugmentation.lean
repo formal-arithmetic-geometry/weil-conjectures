@@ -92,7 +92,7 @@ def shiftedKoszulAugmentation (A : Type u) [CommRing A] (r : ℕ) (f : Fin r →
 /-- The derived augmentation, obtained by associated sheaves then localization.
 Its source is `I` and its target is the structure sheaf in degree zero. Associated
 sheaves are Mathlib's `tilde.functor` applied termwise, in the form of the landed
-lem-pc-koszul-affine-detection and def-pc-perfect-complex citers.
+lem-pc-koszul-affine-detection and lemma-coherent-base-change-invertible-sheaves--1 citers.
 Source: Stacks, Tag 08CX; Tag 01I6 (blueprint: def-pc-shifted-koszul-augmentation). -/
 def affineKoszulAugmentation (A : Type u) [CommRing A]
     [HasDerivedCategory.{w}

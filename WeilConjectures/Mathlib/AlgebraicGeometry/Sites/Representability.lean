@@ -595,7 +595,7 @@ namespace AlgebraicGeometry
 `x ∈ P(T)` there is an open `U ⊆ T` such that a morphism `a : W ⟶ T` factors through `U` if
 and only if `a^* x ∈ F(W)` (Stacks, Definition 01JI).
 
-(blueprint: `def-pc-open-subfunctor`) -/
+(blueprint: `lemma-representability-picard-functor`) -/
 lemma exists_opens_of_relative_isOpenImmersion {S : Scheme.{u}}
     {P : (Over S)ᵒᵖ ⥤ Type (max w u)} {F : Subfunctor P}
     (hF : (IsOpenImmersion.inverseImage (Over.forget S)).relative uliftYoneda.{w} F.ι)
@@ -633,7 +633,7 @@ only if `a^* x ∈ F(W)`, then the inclusion `F ⊆ P` is representable by open 
 pullback of `F` along `x : h_T ⟶ P` is represented by the open subscheme `U` of `T`
 (Stacks, Definition 01JI).
 
-(blueprint: `def-pc-open-subfunctor`) -/
+(blueprint: `lemma-representability-picard-functor`) -/
 lemma relative_isOpenImmersion_of_exists_opens {S : Scheme.{u}}
     {P : (Over S)ᵒᵖ ⥤ Type (max w u)} {F : Subfunctor P}
     (hF : ∀ (T : Over S) (x : P.obj (op T)), ∃ U : T.left.Opens, ∀ (W : Over S) (a : W ⟶ T),
@@ -672,7 +672,7 @@ lemma relative_isOpenImmersion_of_exists_opens {S : Scheme.{u}}
 *covers* `P` if every element `x ∈ P(T)` lies locally on `T` in one of the `F i`: every point of
 `T` has an open neighbourhood `U` with `x|_U ∈ F i (U)` for some `i` (Stacks, Definition 01JI).
 
-(blueprint: `def-pc-cover`) -/
+(blueprint: `lemma-representability-picard-functor`) -/
 def ZariskiCovers {S : Scheme.{u}} {P : (Over S)ᵒᵖ ⥤ Type w} {ι : Sort*}
     (F : ι → Subfunctor P) : Prop :=
   ∀ (T : Over S) (x : P.obj (op T)) (t : T.left), ∃ (i : ι) (U : T.left.Opens), t ∈ U ∧
@@ -691,12 +691,12 @@ of sets on `Sch/S`, with `u`-small values, such that
 Then `P` is representable by a scheme over `S`. Subfunctors (blueprint `def-pc-subfunctor`) are
 `CategoryTheory.Subfunctor`, the Zariski sheaf property (blueprint
 `def-pc-zariski-sheaf-property`) is `Presheaf.IsSheaf` for `zariskiTopology.over S`, and
-representability by open immersions (blueprint `def-pc-open-subfunctor`) is
+representability by open immersions (blueprint `lemma-representability-picard-functor`) is
 `MorphismProperty.relative` for `uliftYoneda`. The proof reduces to
 `AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable_of_isSheaf_over`, applied to the
 universal elements of the `F i`.
 
-(blueprint: `det-prop-picard-schemes-criterion`, `lem-pc-schemes-criterion`) -/
+(blueprint: `lemma-representability-picard-functor`) -/
 theorem isRepresentable_of_isSheaf_of_zariskiCovers {S : Scheme.{u}}
     {P : (Over S)ᵒᵖ ⥤ Type (max w u)} [∀ T, Small.{u} (P.obj T)]
     (hP : Presheaf.IsSheaf (Scheme.zariskiTopology.over S) P) {ι : Type u}

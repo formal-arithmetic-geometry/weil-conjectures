@@ -23,7 +23,7 @@ Each step of it stays short exact after `j_*` (exactness of the middle extension
 pure weight), the long exact sequence of compactly supported cohomology gives an exact triple
 in degree one, and the middle term inherits a common upper weight bound from its outer terms.
 Hence the bound `w + 1` for `H_c^1(𝔸¹, j_*F)` follows from the same bound for the graded pieces.
-This is Step 3 of the blueprint proof of `thm-a1-line-middle-extension-upper`.
+This is Step 3 of the blueprint proof of `theorem-weight-bound-affine-line`.
 
 ## Main statements
 
@@ -84,9 +84,8 @@ def withSheaf (D : LisseOnDenseOpen k₀ l) (G : WeilSheaf k₀ l D.U) (hG : G.I
 
 variable (ι : PadicAlgCl l →+* ℂ)
 
-set_option maxHeartbeats 400000 in
 -- Instance search for the structures over `Spec k₀` of the affine line is slow.
-/-- **Reduction to irreducible factors** (Step 3 of `thm-a1-line-middle-extension-upper`). Let
+/-- **Reduction to irreducible factors** (Step 3 of `theorem-weight-bound-affine-line`). Let
 `F = D.sheaf` be punctually `ι`-pure of weight `w` on the dense open `U₀` of the affine line,
 and let `F ≅ j'^* G` for a lisse Weil sheaf `G` on a `k₀`-scheme `W` with irreducible geometric
 fiber. If `H_c^1(𝔸¹, j_*(j'^* M))` has weights at most `w + 1` for every irreducible lisse sheaf

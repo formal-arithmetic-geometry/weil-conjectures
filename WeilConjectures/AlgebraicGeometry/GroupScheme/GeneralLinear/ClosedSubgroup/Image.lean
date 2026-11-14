@@ -31,7 +31,8 @@ that every `k`-point of `T` lies in `r(G°(k))`. Then `S` is the finite union of
 
 ## Blueprint
 
-- `lem-ag-homomorphism-image-closed`: the image of a regular homomorphism is closed.
+- `lemma-connected-components-images-homomorphisms--2`: the image of a regular homomorphism is
+closed.
 -/
 
 @[expose] public section
@@ -345,7 +346,7 @@ The image of `G°` is constructible with irreducible closure `T`, hence contains
 `U ∩ T`; for a `k`-point `x` of `T`, the open subsets `U ∩ T` and `x (U ∩ T)⁻¹` of `T` meet in a
 `k`-point `z`, so that `x = z (z⁻¹ x) ∈ r(G°(k))`. Then `S` is the finite union of the translates
 of `T` by `r` of coset representatives of `G°(k)` in `G(k)`.
-(blueprint: `lem-ag-homomorphism-image-closed`) -/
+(blueprint: `lemma-connected-components-images-homomorphisms--2`) -/
 theorem mem_range_points_iff {x : GL m k} :
     x ∈ (r.points k).range ↔
       ∀ a ∈ vanishingIdeal ((r.points k).range : Set (GL m k)), evalAlgHom x a = 0 := by

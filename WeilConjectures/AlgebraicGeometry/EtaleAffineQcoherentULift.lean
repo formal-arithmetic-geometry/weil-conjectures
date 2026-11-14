@@ -15,12 +15,13 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoeffic
 import WeilConjectures.AlgebraicGeometry.EtaleCechVanishingCriterion
 import WeilConjectures.AlgebraicGeometry.EtaleAffineTensorCechVanishing
 import WeilConjectures.CategoryTheory.Sites.CohomologyDerivedEvaluation
+public import Mathlib.Algebra.Category.Grp.Zero
 
 /-!
 # Affine quasi-coherent acyclicity with lifted coefficients
 
 Source: Stacks Project, Tag 03P2, affine case
-(blueprint: lem-sc-etale-affine-qcoherent).
+(blueprint: lemma-p-torsion-affine-curve-characteristic--4).
 -/
 
 @[expose] public section
@@ -33,7 +34,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- Affine acyclicity holds for the universe lift of the associated quasi-coherent sheaf.
 Source: Stacks Project, Tag 03P2, affine case, and its Čech proof using Tag 03F9
-(blueprint: lem-sc-etale-affine-qcoherent).
+(blueprint: lemma-p-torsion-affine-curve-characteristic--4).
 
 Proof: Use the affine basis of the small étale site. A covering of an affine admits a
 finite affine refinement; its finite disjoint union is a faithfully flat affine cover.

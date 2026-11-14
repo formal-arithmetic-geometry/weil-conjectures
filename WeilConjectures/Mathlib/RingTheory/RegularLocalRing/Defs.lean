@@ -17,6 +17,7 @@ public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.Smooth.Flat
 public import Mathlib.RingTheory.Unramified.LocalRing
 public import Mathlib.RingTheory.Spectrum.Prime.Noetherian
+public import Mathlib.RingTheory.KrullDimension.Field
 
 /-!
 # Regular local rings are domains
@@ -51,7 +52,8 @@ they are open and closed, and they are the connected components.
 
 - `det-i-geometry`: regular local rings are domains.
 - `lem-sc-regular-local-domain`: regular local rings are domains.
-- `lem-wf-smooth-components-disjoint`: irreducible components of a smooth variety do not meet.
+- `lemma-connected-components-images-homomorphisms--1`: irreducible components of a smooth variety
+do not meet.
 -/
 
 @[expose] public section
@@ -219,7 +221,7 @@ instance IsRegularLocalRing.isDomain (R : Type*) [CommRing R] [IsRegularLocalRin
 
 /-- An integrally closed noetherian local domain of Krull dimension at most one is a regular
 local ring: it is a field or, by Stacks `00PD`, a discrete valuation ring.
-(blueprint: `lem-sc-normal-dim1-dvr`) -/
+(blueprint: `lemma-proper-smooth-model--1`) -/
 theorem IsRegularLocalRing.of_isIntegrallyClosed (R : Type*) [CommRing R] [IsLocalRing R]
     [IsNoetherianRing R] [IsDomain R] [IsIntegrallyClosed R] (h : ringKrullDim R ≤ 1) :
     IsRegularLocalRing R := by
@@ -303,9 +305,9 @@ namespace PrimeSpectrum
 
 variable {A : Type*} [CommRing A]
 
-/-- Blueprint `lem-wf-smooth-components-disjoint`: if the localization of `A` at every maximal
-ideal is a regular local ring (for instance `A` the coordinate ring of a smooth affine variety),
-then distinct irreducible components of `Spec A` are disjoint.
+/-- Blueprint `lemma-connected-components-images-homomorphisms--1`: if the localization of `A` at
+every maximal ideal is a regular local ring (for instance `A` the coordinate ring of a smooth affine
+variety), then distinct irreducible components of `Spec A` are disjoint.
 
 A component is `V(p)` for a minimal prime `p`. If `x ∈ V(p₁) ∩ V(p₂)` and `𝔪 ⊇ x` is maximal, the
 domain `A_𝔪` forces every minimal prime inside `𝔪` to equal the kernel of `A → A_𝔪`, so
@@ -337,9 +339,10 @@ theorem disjoint_of_mem_irreducibleComponents
   rw [← hc₁, ← hc₂, ← zeroLocus_vanishingIdeal_eq_closure, ← zeroLocus_vanishingIdeal_eq_closure,
     key _ hp₁ (hle _ hx₁), key _ hp₂ (hle _ hx₂)]
 
-/-- Blueprint `lem-wf-smooth-components-disjoint`, consequence: for a finitely generated algebra `A`
-over a field whose local rings at maximal ideals are regular, each irreducible component of
-`Spec A` is open and closed, its complement being the finite union of the other components. -/
+/-- Blueprint `lemma-connected-components-images-homomorphisms--1`, consequence: for a finitely
+generated algebra `A` over a field whose local rings at maximal ideals are regular, each irreducible
+component of `Spec A` is open and closed, its complement being the finite union of the other
+components. -/
 theorem isClopen_of_mem_irreducibleComponents (k : Type*) [Field k] [Algebra k A]
     [Algebra.FiniteType k A]
     (h : ∀ (m : Ideal A) [m.IsMaximal], IsRegularLocalRing (Localization.AtPrime m))
@@ -361,9 +364,9 @@ theorem isClopen_of_mem_irreducibleComponents (k : Type*) [Field k] [Algebra k A
   rw [← isClosed_compl_iff, hc, Set.sUnion_eq_biUnion]
   exact (hfin.sdiff).isClosed_biUnion fun W hW ↦ isClosed_of_mem_irreducibleComponents _ hW.1
 
-/-- Blueprint `lem-wf-smooth-components-disjoint`, consequence: for a finitely generated algebra `A`
-over a field whose local rings at maximal ideals are regular, the irreducible components of
-`Spec A` are its connected components. -/
+/-- Blueprint `lemma-connected-components-images-homomorphisms--1`, consequence: for a finitely
+generated algebra `A` over a field whose local rings at maximal ideals are regular, the irreducible
+components of `Spec A` are its connected components. -/
 theorem connectedComponent_eq_of_mem_irreducibleComponents (k : Type*) [Field k] [Algebra k A]
     [Algebra.FiniteType k A]
     (h : ∀ (m : Ideal A) [m.IsMaximal], IsRegularLocalRing (Localization.AtPrime m))

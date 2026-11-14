@@ -57,8 +57,6 @@ private noncomputable def mixedTensorHomCore (S : Scheme.{u}) (K : schemeDerived
           Category.id_comp, Equiv.apply_symm_apply] using
           (he.1 A A K K L L' (𝟙 A) (𝟙 K) c ((e A K L).symm h)).symm }
 
-set_option maxHeartbeats 1100000 in
--- Elaborating the shared derived tensor instances requires additional heartbeats.
 /-- The evaluation-mate map on sheaf internal Hom is invertible for perfect M.
 It uses no global sections or scalar extension and assumes no flatness or qcqs.
 Source: Stacks Project, cohomology.tex, Remark 08I3 and Example 0FPC.
@@ -95,16 +93,20 @@ theorem mixedPerfect_internalHom_pullback_isIso
               ((derivedInternalHom (Opens.grothendieckTopology X) X.sheaf).obj (op M, N))
               M N (𝟙 _)))) := by
   classical
-  obtain ⟨adj, _, adj', hadj, _, _, hadj'⟩ := scheme_derivedInternalHom_adjunction X
+  have hadj := (scheme_derivedInternalHom_adjunction X).choose_spec.choose_spec.choose_spec
   let P : schemeDerivedQCohCategory X :=
     ⟨M, schemeDerivedQCohProperty_of_isPerfect X M hM⟩
-  obtain ⟨D, _, _, _, _, _, _, _, _, _, _, _, _, _, _, ⟨p, _, _⟩, _⟩ :=
-    perfect_rhom_tensor_comparison X P P hM adj hadj adj' hadj'
-  let := p
+  have hdual := perfect_rhom_tensor_comparison X P P hM _ hadj.1 _ hadj.2.2.2
+  let D := hdual.choose
+  let p := hdual.choose_spec.choose_spec.choose_spec.2.2.choose_spec.2.2.2.choose_spec.2.2
+    |>.choose_spec.2.2.1.choose
+  let : ExactPairing M D.obj := p
   let t := mixedHomTensorPullbackIso g
   have ht : IsCanonicalPullbackTensorComparison g (fun A B ↦ t.hom.app (A, B)) :=
     Classical.choose_spec (exists_mixedHomTensorPullbackIso g)
-  obtain ⟨m, hm⟩ := canonicalPullbackTensor_monoidal_realization g _ ht
+  have hm' := canonicalPullbackTensor_monoidal_realization g _ ht
+  let m := hm'.choose
+  have hm := hm'.choose_spec
   let := m.toMonoidal
   have htensor (A B : schemeDerivedCategory X) :
       t.inv.app (A, B) = Functor.LaxMonoidal.μ (derivedPullback g) A B := by

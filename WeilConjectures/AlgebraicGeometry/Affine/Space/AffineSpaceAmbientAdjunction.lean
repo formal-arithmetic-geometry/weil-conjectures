@@ -183,7 +183,7 @@ import WeilConjectures.AlgebraicGeometry.Affine.Space.AffineSpaceAmbientAdjuncti
 # Affine-space ambient adjunction
 
 Source: blueprint sec-smooth-purity/sk-prop-sf-cbc/cor-amb-affine-space-adjunction.md
-(blueprint: cor-amb-affine-space-adjunction).
+(blueprint: lemma-affine-space-etale-localization--1).
 
 Both functors act on the entire ordinary unbounded small-etale derived categories.
 The compactification instance comes from the existing relative projective compactification.
@@ -202,7 +202,7 @@ namespace AlgebraicGeometry.Etale
 /-- Ordinary compact supports for affine `d`-space are left adjoint to exact inverse image,
 followed by the finite torsion Tate twist `(d)` and cohomological shift `[2d]`.
 Source: blueprint sec-smooth-purity/sk-prop-sf-cbc/cor-amb-affine-space-adjunction.md
-(blueprint: cor-amb-affine-space-adjunction).
+(blueprint: lemma-affine-space-etale-localization--1).
 
 Proof:
 1. Factor affine `r`-space over `S` into the successive affine-line projections, using
@@ -215,21 +215,22 @@ Proof:
    (`def-asd-compactifiable`) with Noetherian ambient schemes.
 2. The affine-line chart `j` is etale (`lem-weil-pbc-open-immersion-etale`), separated, and
    finite type: on either projective chart its inverse image is the whole chart or a
-   principal open. Thus `lem-amb-etale-adjoint-locality` gives `Dj_!` left adjoint to `j^*`
-   on the entire unbounded categories. Its extension is ordinary open extension by zero
-   by `def-weil-pbc-etale-sum-extension`.
+   principal open. Thus `lemma-affine-space-etale-localization--4` gives `Dj_!` left adjoint to
+   `j^*` on the entire unbounded categories. Its extension is ordinary open extension by zero
+   by `lemma-acyclicity-pulled-back-injectives`.
 3. For the projective-line projection `q`, compact supports are `Rq_* Dj_!`
-   (`def-amb-etale-compact-support`, `lem-amb-unbounded-compact-support-comparisons`).
-   Apply `thm-amb-p1-adjunction` and the preceding open adjunction to obtain natural Hom
-   bijections with target `j^*(q^*K(1)[2])`. Move the twist through inverse image by
+   (`proposition-construction-independence-rf-shriek`,
+   `lem-amb-unbounded-compact-support-comparisons`). Apply
+   `proposition-adjunction-projective-line--1` and the preceding open adjunction to obtain natural
+   Hom bijections with target `j^*(q^*K(1)[2])`. Move the twist through inverse image by
    `lem-asd-etale-finite-twist-pullback`; inverse-image composition and exactness
-   (`lem-weil-pbc-inverse-image-composition-module-linear`,
-   `prop-weil-pbc-inverse-image-modules-exact`) identify this with `p_1^*K(1)[2]`.
-   These are the composite adjunction bijections of `def-weil-pbc-composite-adjunction`.
+   (`lem-weil-pbc-inverse-image-composition-module-linear`, `situation-conventions`) identify this
+   with `p_1^*K(1)[2]`. These are the composite adjunction bijections of
+   `def-weil-pbc-composite-adjunction`.
 4. Each nonnegative Tate sheaf is flat (`lem-asd-finite-etale-twist-line`), so tensoring
    a K-flat resolution with it computes ordinary termwise tensor as well as derived
-   tensor (`def-kun-derived-tensor`). Regroup the degree-zero Tate factors using
-   `def-asd-finite-etale-tate-twist`, with the scalar unit when the exponent is zero.
+   tensor (`proposition-open-direct-image-preserves-finite`). Regroup the degree-zero Tate factors
+   using `def-asd-finite-etale-tate-twist`, with the scalar unit when the exponent is zero.
    These chain isomorphisms are natural. Even shifts have sign one and add, giving
    `(K(r)[2r])(1)[2]` naturally isomorphic to `K(r+1)[2r+2]`, without boundedness.
 5. In dimension zero the affine projection is canonically the identity. Compactification

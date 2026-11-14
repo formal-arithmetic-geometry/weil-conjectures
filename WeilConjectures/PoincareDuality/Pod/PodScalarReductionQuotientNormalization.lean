@@ -137,11 +137,9 @@ private theorem scalar_quotient_unit_ext (W : Scheme.{u})
   erw [sequenceScalarAdjunction_unit]
   exact h n U x
 
-set_option maxHeartbeats 800000 in
--- Elaborating the three coefficient adjunctions requires additional heartbeats.
 /-- The scalar counit on a good complex is the ordinary balanced quotient comparison.
 Source: Stacks 06YY, 0941, and the scalar-normalization step of the blueprint
-prop-pod-dual-tate-data-compatibility, Steps 1 and 5.
+theorem-poincare-duality-frobenius--2, Steps 1 and 5.
 (blueprint: lem-pod-scalar-reduction-quotient-normalization).
 
 Proof: the derived model DE gives a coherent presentation of P by its ordinary

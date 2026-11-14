@@ -38,7 +38,7 @@ attribute [local irreducible] HasDerivedCategory.ofIsGrothendieckAbelian
 namespace AlgebraicGeometry.Etale.AffineLineNormalizedDescent
 
 /-- The canonical comparison q* a* C ≅ a_T* b* C for the affine-line base-change square.
-Source: sk-thm-dnc, Gluing, base change to an etale cover
+Source: lemma-section-normal-bundle, Gluing, base change to an etale cover
 (blueprint: lem-trf-etale-shifted-line-normalized-descent). -/
 def lineBaseChange (A : Type (u + 1)) [CommRing A] {T S : Scheme.{u}}
     (b : T ⟶ S) (C : DerivedCategoryModule A S) :
@@ -57,7 +57,7 @@ def lineBaseChange (A : Type (u + 1)) [CommRing A] {T S : Scheme.{u}}
     (AffineSpace.map_over b)).app C
 
 /-- Normalization at the unit section, using the specified section compositor.
-Source: sk-thm-dnc, Gluing, identity at t=1
+Source: lemma-section-normal-bundle, Gluing, identity at t=1
 (blueprint: lem-trf-etale-shifted-line-normalized-descent). -/
 def Normalized (A : Type (u + 1)) [CommRing A] (S : Scheme.{u})
     {F : DerivedCategoryModule A (AffineSpace (ULift.{u} (Fin 1)) S)}
@@ -77,7 +77,8 @@ def Normalized (A : Type (u + 1)) [CommRing A] (S : Scheme.{u})
 The existing sectionRestrictionIso includes both the section-square compositor and
 cancellation of a_T* along its section, so equality to the identity expresses precisely
 this normalization, without choosing identifications.
-Source: sk-thm-dnc, Gluing (blueprint: lem-trf-etale-shifted-line-normalized-descent). -/
+Source: lemma-section-normal-bundle, Gluing (blueprint:
+lem-trf-etale-shifted-line-normalized-descent). -/
 def LocallyNormalized (A : Type (u + 1)) [CommRing A] {T S : Scheme.{u}} (b : T ⟶ S)
     {F : DerivedCategoryModule A (AffineSpace (ULift.{u} (Fin 1)) S)}
     {C : DerivedCategoryModule A S}
@@ -95,7 +96,8 @@ def LocallyNormalized (A : Type (u + 1)) [CommRing A] {T S : Scheme.{u}} (b : T 
 
 /-- Restrict a local comparison to a further object, identifying both endpoints by
 inverse-image compositors. This is used on the actual fibre-product overlaps.
-Source: sk-thm-dnc, Gluing (blueprint: lem-trf-etale-shifted-line-normalized-descent). -/
+Source: lemma-section-normal-bundle, Gluing (blueprint:
+lem-trf-etale-shifted-line-normalized-descent). -/
 def comparisonRestriction (A : Type (u + 1)) [CommRing A]
     {W U X : Scheme.{u}} (f : U ⟶ X) (g : W ⟶ U) (h : W ⟶ X) (hh : h = g ≫ f)
     {F G : DerivedCategoryModule A X}

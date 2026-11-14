@@ -21,7 +21,7 @@ Let `T : D` be an object with `π_{T, N}` invertible for all `N` (the projection
 `t : G T ⟶ 𝟙_ C` a *trace*. The *trace counit* is
 `ε_N : G (T ⊗ F N) ≅ G T ⊗ N ⟶ 𝟙_ C ⊗ N ≅ N`
 (`CategoryTheory.Adjunction.traceCounit`); for `q : ℙ¹_S ⟶ S`, `T = Λ(1)[2]` and the trace of
-`q`, it is the counit of blueprint `sk-prop-geo-p1-adjunction` (G7).
+`q`, it is the counit of blueprint `proposition-adjunction-projective-line` (G7).
 
 We show that `ε` is the counit of an adjunction `G ⊣ T ⊗ F (-)` as soon as there is a unit
 candidate `η_M : M ⟶ T ⊗ F G M` which is
@@ -32,9 +32,10 @@ candidate `η_M : M ⟶ T ⊗ F G M` which is
   `T ≅ T ⊗ 𝟙 ⟵ T ⊗ F 𝟙 ⟵ T ⊗ F G T ⟵ T` (`t` after `η_T`) is the identity
   (`CategoryTheory.Adjunction.ofTraceCounit`).
 
-These are the two "integrals" of blueprint `sk-prop-geo-p1-adjunction` (G5): for the unit built
-from the cycle class `δ` of the diagonal, `G η_𝟙` and `η_T` are the integrals of `δ` along the two
-projections, and linearity reduces the triangle identities to them, as in (G8) and (G9).
+These are the two "integrals" of blueprint `proposition-adjunction-projective-line` (G5): for the
+unit built from the cycle class `δ` of the diagonal, `G η_𝟙` and `η_T` are the integrals of `δ`
+along the two projections, and linearity reduces the triangle identities to them, as in (G8) and
+(G9).
 
 The first triangle identity is checked on the objects `𝟙 ⊗ F N`, which is enough since
 `G (𝟙 ⊗ F G M) ⟶ G M` is a split epimorphism

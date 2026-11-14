@@ -20,7 +20,7 @@ geometric fibres `U ⊆ C`, and let `V ⊆ C` be an open with `V ∖ U = {z}`. A
 roots of unity of `𝔽̄_q` through `Q = q ^ m`. Hence `Q - 1` kills the local monodromy at `z` of a
 `ℤ / N`-torsor on `U` which is fixed by `Φ ^ m`
 (`AlgebraicGeometry.Scheme.EtaleTorsor.exists_natCast_sub_one_mul_monodromy_eq_zero`). This is
-the Frobenius action on the boundary module of blueprint `lem-wf-open-curve-residue-sequence`.
+the Frobenius action on the boundary module of blueprint `proposition-no-fixed-class-degree-one--1`.
 -/
 
 @[expose] public section
@@ -45,12 +45,12 @@ theorem ZMod.exists_natCast_pow_mul_eq_zero_of_natCast_sub_one_mul_eq_zero {l Q 
 /-- If an automorphism `ψ` of `X` lies over an automorphism `E` of `Y` along `π`, then so do
 their powers. -/
 theorem CategoryTheory.Aut.pow_hom_comp_eq_comp_pow_hom {C : Type*} [Category C] {X Y : C}
-    (π : X ⟶ Y) (ψ : Aut X) (E : Aut Y) (h : ψ.hom ≫ π = π ≫ E.hom) (m : ℕ) :
-    (ψ ^ m).hom ≫ π = π ≫ (E ^ m).hom := by
+    (π : X ⟶ Y) (ψ : Aut X) (E : Aut Y) (h : ψ.asIso.hom ≫ π = π ≫ E.asIso.hom) (m : ℕ) :
+    (ψ ^ m).asIso.hom ≫ π = π ≫ (E ^ m).asIso.hom := by
   induction m with
   | zero => exact (Category.id_comp _).trans (Category.comp_id _).symm
   | succ m ih =>
-    rw [pow_succ, pow_succ, Aut.Aut_mul_def, Aut.Aut_mul_def, Iso.trans_hom, Iso.trans_hom,
+    rw [pow_succ, pow_succ, Aut.mul_asIso, Aut.mul_asIso, Iso.trans_hom, Iso.trans_hom,
       Category.assoc, ih, reassoc_of% h]
 
 namespace AlgebraicGeometry.Scheme.Hom
@@ -62,7 +62,7 @@ is fixed by a positive power of the geometric Galois Frobenius: it lies over a c
 finite residue field. -/
 theorem exists_geometricGaloisFrobenius_pow_apply_eq [Finite k] [LocallyOfFiniteType f]
     (z : f.geometricFiber) (hz : IsClosed ({z} : Set f.geometricFiber)) :
-    ∃ m : ℕ, 1 ≤ m ∧ (f.geometricGaloisFrobenius ^ m).hom z = z := by
+    ∃ m : ℕ, 1 ≤ m ∧ (f.geometricGaloisFrobenius ^ m).asIso.hom z = z := by
   obtain ⟨s, hs⟩ := f.geometricFiberToAlgebraicClosure.exists_spec_base_eq_of_isClosed z hz
   have hsz : (s ≫ f.geometricFiberProj).base (IsLocalRing.closedPoint _) =
       f.geometricFiberProj z := by
@@ -90,7 +90,7 @@ open FiniteEtale
 
 variable {K : Type u} [Field K] [Finite K]
 
-/-- Blueprint `lem-wf-open-curve-residue-sequence`: the Frobenius acts on the boundary module
+/-- Blueprint `proposition-no-fixed-class-degree-one--1`: the Frobenius acts on the boundary module
 `ℤ / N (-1)` at a boundary point `z` through `Q = q ^ m`, for a power `Φ ^ m` fixing `z`.
 
 Let `U₀ ⊆ C₀` be a smooth curve over `K = 𝔽_q` in a compactification `c` by a smooth curve,
@@ -111,7 +111,7 @@ theorem exists_natCast_sub_one_mul_monodromy_eq_zero {U : Scheme.{u}}
       {z}) :
     ∃ m : ℕ, 1 ≤ m ∧ ∀ {N : ℕ} [NeZero N], (N : AlgebraicClosure K) ≠ 0 →
       ∀ (T : EtaleTorsor (ULift.{u + 1} (ZMod N)) p.geometricFiber) (ψ : T.P ≅ T.P),
-        ψ.hom ≫ T.π = T.π ≫ (p.geometricGaloisFrobenius ^ m).hom →
+        ψ.hom ≫ T.π = T.π ≫ (p.geometricGaloisFrobenius ^ m).asIso.hom →
         (∀ a, T.vadd a ≫ ψ.hom = ψ.hom ≫ T.vadd a) →
         ∀ g ∈ fixingSubgroup s (IsOpenImmersion.lift V.ι (p.geometricFiberMap c.i c.comm.symm)
             (by rwa [Scheme.Opens.range_ι])) G,
@@ -139,7 +139,7 @@ theorem exists_natCast_sub_one_mul_monodromy_eq_zero {U : Scheme.{u}}
   refine ⟨m, hm, fun {N} _ hN T ψ hψπ hψv g hg ↦ ?_⟩
   -- the power `Φ ^ m` is semilinear over `σ₀ = φ ^ m`, with `σ₀ x ^ (q ^ m) = x`
   set φ := FiniteField.geometricFrobeniusAlgEquivOfAlgebraic K (AlgebraicClosure K)
-  have hσ₀ : (c.g.geometricGaloisFrobenius ^ m).hom ≫ q =
+  have hσ₀ : (c.g.geometricGaloisFrobenius ^ m).asIso.hom ≫ q =
       q ≫ Spec.map (CommRingCat.ofHom ((φ ^ m).toRingEquiv : AlgebraicClosure K →+* _)) := by
     rw [Scheme.Hom.geometricGaloisFrobenius_pow_hom_comp_geometricFiberToAlgebraicClosure,
       specGeometricFrobenius_pow_hom]
@@ -153,7 +153,7 @@ theorem exists_natCast_sub_one_mul_monodromy_eq_zero {U : Scheme.{u}}
     rw [← AlgEquiv.coe_pow, hφ, inv_pow,
       AlgEquiv.aut_inv, AlgEquiv.apply_symm_apply]
   exact natCast_sub_one_mul_monodromy_eq_zero (p := q) (j := j) V hV z hz
-    (c.g.geometricGaloisFrobenius ^ m) (p.geometricGaloisFrobenius ^ m)
+    (c.g.geometricGaloisFrobenius ^ m).asIso (p.geometricGaloisFrobenius ^ m).asIso
     (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_pow c.i c.comm.symm m).symm hmz
     (φ ^ m).toRingEquiv hσ₀ _ hQ s G hN T ψ hψπ hψv g hg
 

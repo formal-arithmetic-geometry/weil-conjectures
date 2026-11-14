@@ -15,7 +15,7 @@ the `r`-th power of that of `X̄` makes the induced equivalence
 `Hⁱ(Y ⊗ k̄', ℚ̄_ℓ) ≃ Hⁱ(X ⊗ k̄, ℚ̄_ℓ)` intertwine the Frobenius of the source with the `r`-th power
 of the Frobenius of the target
 (`AlgebraicGeometry.WeilSheaf.cohomologyLinearEquivOfGeometricFiberIso_map_frobenius`). This is
-the transport-of-structure part of the base-change clause of `thm-weil-poincare-duality`.
+the transport-of-structure part of the base-change clause of `theorem-poincare-duality-frobenius`.
 -/
 
 @[expose] public section
@@ -38,21 +38,21 @@ lemma cohomologyCarrierIso_inv_derivedGlobalSectionsUnitIso_pow (i : ℤ) (n : �
       (ProEtale.derivedGlobalSectionsUnit l (X ↘ Spec (.of k)).geometricFiber)) :
     (cohomologyCarrierIso k l X i).inv.hom (((DerivedCategory.homologyFunctor _ i).map
         (ProEtale.derivedGlobalSectionsUnitIso l
-          ((X ↘ Spec (.of k)).geometricGaloisFrobenius ^ n).symm).hom).hom z) =
+          ((X ↘ Spec (.of k)).geometricGaloisFrobenius ^ n).asIso.symm).hom).hom z) =
       (((adicConstant k l X).cohomology i).frobeniusEnd ^ n)
         ((cohomologyCarrierIso k l X i).inv.hom z) := by
   have hF : (DerivedCategory.homologyFunctor _ i).map (ProEtale.derivedGlobalSectionsUnitIso l
-        (X ↘ Spec (.of k)).geometricGaloisFrobenius.symm).hom ≫
+        (X ↘ Spec (.of k)).geometricGaloisFrobenius.asIso.symm).hom ≫
         (cohomologyCarrierIso k l X i).inv =
       (cohomologyCarrierIso k l X i).inv ≫
         (IsoAlgebra.forgetCompIsoOfIso (ProEtale.adicLowerStarCompGlobalSectionsIso l
-          (Spec (.of k) ↘ Spec (.of k)).geometricGaloisFrobenius.inv)).hom.app
+          (Spec (.of k) ↘ Spec (.of k)).geometricGaloisFrobenius.asIso.inv)).hom.app
           ((DerivedCategory.homologyFunctor _ i).obj (derivedLowerStarAdicConstant k l X)) := by
     rw [Iso.comp_inv_eq, Category.assoc, cohomologyCarrierIso_hom_frobenius,
       Iso.inv_hom_id_assoc]
   have hF' : ∀ w, (cohomologyCarrierIso k l X i).inv.hom
       (((DerivedCategory.homologyFunctor _ i).map (ProEtale.derivedGlobalSectionsUnitIso l
-        (X ↘ Spec (.of k)).geometricGaloisFrobenius.symm).hom).hom w) =
+        (X ↘ Spec (.of k)).geometricGaloisFrobenius.asIso.symm).hom).hom w) =
       ((adicConstant k l X).cohomology i).frobenius
         ((cohomologyCarrierIso k l X i).inv.hom w) := by
     intro w
@@ -60,41 +60,40 @@ lemma cohomologyCarrierIso_inv_derivedGlobalSectionsUnitIso_pow (i : ℤ) (n : �
     exact congrArg (fun f ↦ f.hom w) hF
   induction n generalizing z with
   | zero =>
-    rw [pow_zero, pow_zero,
-      show (1 : Aut (X ↘ Spec (.of k)).geometricFiber) = Iso.refl _ from rfl,
+    rw [pow_zero, pow_zero, Aut.one_asIso,
       Iso.refl_symm, ProEtale.derivedGlobalSectionsUnitIso_refl, Iso.refl_hom,
       CategoryTheory.Functor.map_id]
     rfl
   | succ n ih =>
-    have hσ : ((X ↘ Spec (.of k)).geometricGaloisFrobenius ^ (n + 1)).symm =
-        ((X ↘ Spec (.of k)).geometricGaloisFrobenius ^ n).symm ≪≫
-          (X ↘ Spec (.of k)).geometricGaloisFrobenius.symm := by
-      rw [pow_succ, Aut.Aut_mul_def, Iso.trans_symm]
+    have hσ : ((X ↘ Spec (.of k)).geometricGaloisFrobenius ^ (n + 1)).asIso.symm =
+        ((X ↘ Spec (.of k)).geometricGaloisFrobenius ^ n).asIso.symm ≪≫
+          (X ↘ Spec (.of k)).geometricGaloisFrobenius.asIso.symm := by
+      rw [pow_succ, Aut.mul_asIso, Iso.trans_symm]
     have hD : ProEtale.derivedGlobalSectionsUnitIso l
-        ((X ↘ Spec (.of k)).geometricGaloisFrobenius ^ (n + 1)).symm =
+        ((X ↘ Spec (.of k)).geometricGaloisFrobenius ^ (n + 1)).asIso.symm =
         ProEtale.derivedGlobalSectionsUnitIso l
-          ((X ↘ Spec (.of k)).geometricGaloisFrobenius ^ n).symm ≪≫
+          ((X ↘ Spec (.of k)).geometricGaloisFrobenius ^ n).asIso.symm ≪≫
         ProEtale.derivedGlobalSectionsUnitIso l
-          (X ↘ Spec (.of k)).geometricGaloisFrobenius.symm := by
+          (X ↘ Spec (.of k)).geometricGaloisFrobenius.asIso.symm := by
       rw [hσ, ProEtale.derivedGlobalSectionsUnitIso_trans]
     have hmor : (DerivedCategory.homologyFunctor (WeilCoefficients.{u} l) i).map
         (ProEtale.derivedGlobalSectionsUnitIso l
-          ((X ↘ Spec (.of k)).geometricGaloisFrobenius ^ (n + 1)).symm).hom =
+          ((X ↘ Spec (.of k)).geometricGaloisFrobenius ^ (n + 1)).asIso.symm).hom =
         (DerivedCategory.homologyFunctor _ i).map (ProEtale.derivedGlobalSectionsUnitIso l
-          ((X ↘ Spec (.of k)).geometricGaloisFrobenius ^ n).symm).hom ≫
+          ((X ↘ Spec (.of k)).geometricGaloisFrobenius ^ n).asIso.symm).hom ≫
         (DerivedCategory.homologyFunctor _ i).map (ProEtale.derivedGlobalSectionsUnitIso l
-          (X ↘ Spec (.of k)).geometricGaloisFrobenius.symm).hom := by
+          (X ↘ Spec (.of k)).geometricGaloisFrobenius.asIso.symm).hom := by
       rw [hD, Iso.trans_hom, Functor.map_comp]
     calc _ = (cohomologyCarrierIso k l X i).inv.hom
           (((DerivedCategory.homologyFunctor _ i).map (ProEtale.derivedGlobalSectionsUnitIso l
-            (X ↘ Spec (.of k)).geometricGaloisFrobenius.symm).hom).hom
+            (X ↘ Spec (.of k)).geometricGaloisFrobenius.asIso.symm).hom).hom
           (((DerivedCategory.homologyFunctor _ i).map (ProEtale.derivedGlobalSectionsUnitIso l
-            ((X ↘ Spec (.of k)).geometricGaloisFrobenius ^ n).symm).hom).hom z)) :=
+            ((X ↘ Spec (.of k)).geometricGaloisFrobenius ^ n).asIso.symm).hom).hom z)) :=
           congrArg (fun f ↦ (cohomologyCarrierIso k l X i).inv.hom (f.hom z)) hmor
       _ = ((adicConstant k l X).cohomology i).frobenius
           ((cohomologyCarrierIso k l X i).inv.hom
             (((DerivedCategory.homologyFunctor _ i).map (ProEtale.derivedGlobalSectionsUnitIso l
-              ((X ↘ Spec (.of k)).geometricGaloisFrobenius ^ n).symm).hom).hom z)) := hF' _
+              ((X ↘ Spec (.of k)).geometricGaloisFrobenius ^ n).asIso.symm).hom).hom z)) := hF' _
       _ = ((adicConstant k l X).cohomology i).frobenius
           ((((adicConstant k l X).cohomology i).frobeniusEnd ^ n)
             ((cohomologyCarrierIso k l X i).inv.hom z)) :=
@@ -112,8 +111,8 @@ lemma cohomologyCarrierIso_inv_derivedGlobalSectionsUnitIso_pow (i : ℤ) (n : �
 /-- An isomorphism of geometric fibers conjugating one geometric Frobenius to a power of the other
 makes the cohomology equivalence
 `AlgebraicGeometry.WeilSheaf.cohomologyLinearEquivOfGeometricFiberIso` intertwine those
-operators. This is an ingredient of the base-change clause of `thm-weil-poincare-duality`, with
-the transport convention of `def-weil-global-geometric-frobenius`.
+operators. This is an ingredient of the base-change clause of `theorem-poincare-duality-frobenius`,
+with the transport convention of `definition-frobenius-operator--1`.
 
 Proof: under the identification of the carriers with `Hⁱ RΓ(-, ℚ̄_ℓ)`, the Frobenius is the
 transport along the inverse of the geometric Frobenius
@@ -130,15 +129,15 @@ theorem cohomologyLinearEquivOfGeometricFiberIso_map_frobenius
     [QuasiCompact (Y ↘ Spec (.of k'))] [QuasiSeparated (Y ↘ Spec (.of k'))]
     [LocallyOfFiniteType (Y ↘ Spec (.of k'))]
     (r : ℕ) (e : (Y ↘ Spec (.of k')).geometricFiber ≅ (X ↘ Spec (.of k)).geometricFiber)
-    (he : (Y ↘ Spec (.of k')).geometricGaloisFrobenius.hom ≫ e.hom =
-      e.hom ≫ ((X ↘ Spec (.of k)).geometricGaloisFrobenius ^ r).hom) (i : ℤ)
+    (he : (Y ↘ Spec (.of k')).geometricGaloisFrobenius.asIso.hom ≫ e.hom =
+      e.hom ≫ ((X ↘ Spec (.of k)).geometricGaloisFrobenius ^ r).asIso.hom) (i : ℤ)
     (x : ((adicConstant k' l Y).cohomology i).carrier) :
     cohomologyLinearEquivOfGeometricFiberIso k k' l X Y e i
         (((adicConstant k' l Y).cohomology i).frobenius x) =
       (((adicConstant k l X).cohomology i).frobeniusEnd ^ r)
         (cohomologyLinearEquivOfGeometricFiberIso k k' l X Y e i x) := by
-  have he' : (Y ↘ Spec (.of k')).geometricGaloisFrobenius.symm ≪≫ e =
-      e ≪≫ ((X ↘ Spec (.of k)).geometricGaloisFrobenius ^ r).symm := by
+  have he' : (Y ↘ Spec (.of k')).geometricGaloisFrobenius.asIso.symm ≪≫ e =
+      e ≪≫ ((X ↘ Spec (.of k)).geometricGaloisFrobenius ^ r).asIso.symm := by
     refine Iso.ext ?_
     simp only [Iso.trans_hom, Iso.symm_hom]
     rw [Iso.inv_comp_eq, ← Category.assoc]
@@ -146,11 +145,11 @@ theorem cohomologyLinearEquivOfGeometricFiberIso_map_frobenius
     rw [Category.assoc, Iso.hom_inv_id, Category.comp_id]
   have hD : (DerivedCategory.homologyFunctor (WeilCoefficients.{u} l) i).map
         (ProEtale.derivedGlobalSectionsUnitIso l
-          (Y ↘ Spec (.of k')).geometricGaloisFrobenius.symm).hom ≫
+          (Y ↘ Spec (.of k')).geometricGaloisFrobenius.asIso.symm).hom ≫
         (DerivedCategory.homologyFunctor _ i).map (ProEtale.derivedGlobalSectionsUnitIso l e).hom =
       (DerivedCategory.homologyFunctor _ i).map (ProEtale.derivedGlobalSectionsUnitIso l e).hom ≫
         (DerivedCategory.homologyFunctor _ i).map (ProEtale.derivedGlobalSectionsUnitIso l
-          ((X ↘ Spec (.of k)).geometricGaloisFrobenius ^ r).symm).hom := by
+          ((X ↘ Spec (.of k)).geometricGaloisFrobenius ^ r).asIso.symm).hom := by
     have := congrArg (fun φ ↦ (DerivedCategory.homologyFunctor (WeilCoefficients.{u} l) i).map
       (ProEtale.derivedGlobalSectionsUnitIso l φ).hom) he'
     simpa only [ProEtale.derivedGlobalSectionsUnitIso_trans, Iso.trans_hom,
@@ -158,7 +157,7 @@ theorem cohomologyLinearEquivOfGeometricFiberIso_map_frobenius
   have hY : ∀ y, (cohomologyCarrierIso k' l Y i).hom.hom
       (((adicConstant k' l Y).cohomology i).frobenius y) =
       ((DerivedCategory.homologyFunctor _ i).map (ProEtale.derivedGlobalSectionsUnitIso l
-        (Y ↘ Spec (.of k')).geometricGaloisFrobenius.symm).hom).hom
+        (Y ↘ Spec (.of k')).geometricGaloisFrobenius.asIso.symm).hom).hom
         ((cohomologyCarrierIso k' l Y i).hom.hom y) := fun y ↦ by
     rw [cohomology_adicConstant_frobenius]
     exact congrArg (fun f ↦ f.hom y) (cohomologyCarrierIso_hom_frobenius k' l Y i)

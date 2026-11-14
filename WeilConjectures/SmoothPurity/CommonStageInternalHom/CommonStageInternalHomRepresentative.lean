@@ -10,7 +10,7 @@ import WeilConjectures.SmoothPurity.CommonStageInternalHom.CommonStageInternalHo
 
 /-! # Independence of common-stage internal Hom representatives
 
-Source: the common-stage internal-Hom paragraph of def-weil-derived-pullback-tensor-hom,
+Source: the common-stage internal-Hom paragraph of prose-03-02,
 using the normalized comparisons of lem-pur-integral-operations-scalar-extension.
 (blueprint: lem-weil-common-stage-internal-hom-representative).
 -/
@@ -146,7 +146,7 @@ private theorem output_transport (M : Index l Ω) (k : L ≤ M) :
   exact StageSystem.PairCategory.mkHom_tr k _
 
 /-- Equal input classes give equal conjugated Hom classes, even at different stages.
-Source: def-weil-derived-pullback-tensor-hom, common-stage internal-Hom paragraph;
+Source: prose-03-02, common-stage internal-Hom paragraph;
 lem-pur-integral-operations-scalar-extension, naturality and coefficient tower laws.
 (blueprint: lem-weil-common-stage-internal-hom-representative).
 

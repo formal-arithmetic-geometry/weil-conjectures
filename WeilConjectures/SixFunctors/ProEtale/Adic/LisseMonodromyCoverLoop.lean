@@ -57,8 +57,8 @@ lemma exists_graph_loop (q : (pullback (U.proj t) (U.proj t) : Scheme.{u})) :
 
 /-- The graph of the trivial loop is the diagonal. -/
 lemma graph_one : graph (U := U) t 1 = pullback.diagonal (U.proj t) := by
-  have h : (U.transport (1 : Aut (fiber t))).hom = 𝟙 _ := by
-    rw [show (1 : Aut (fiber t)) = Iso.refl _ from rfl, U.transport_refl]
+  have h : (U.transport (1 : Aut (fiber t)).asIso).hom = 𝟙 _ := by
+    rw [Aut.one_asIso, U.transport_refl]
     rfl
   refine pullback.hom_ext ?_ ?_
   · rw [graph_fst, pullback.diagonal_fst]
@@ -71,8 +71,8 @@ lemma loop_diagonal (x : U.cover t) : U.loop t ((pullback.diagonal (U.proj t)).b
 /-- The graphs of the transports along `g` and `h` compose to the graph of the transport along
 `h * g`. -/
 lemma transport_mul_hom (g h : Aut (fiber t)) :
-    (U.transport (h * g)).hom = (U.transport g).hom ≫ (U.transport h).hom := by
-  rw [Aut.Aut_mul_def, U.transport_trans]
+    (U.transport (h * g).asIso).hom = (U.transport g.asIso).hom ≫ (U.transport h.asIso).hom := by
+  rw [Aut.mul_asIso, U.transport_trans]
   rfl
 
 /-- The first projection `(Ỹ ×_Y Ỹ) ×_Ỹ (Ỹ ×_Y Ỹ) ⟶ Ỹ ×_Y Ỹ` of the triple product. -/
@@ -94,15 +94,15 @@ lemma loop_tripleProj₁₃ (τ : tripleProduct (U.proj t)) :
   obtain ⟨x, hx⟩ := exists_graph_loop t ((q₁₂).base τ)
   obtain ⟨ρ₁, hρ₁, -⟩ := Scheme.Pullback.exists_preimage_pullback (f := q₁₂)
     (g := graph (U := U) t g) τ x hx.symm
-  have hgs : graph (U := U) t g ≫ pullback.snd (U.proj t) (U.proj t) = (U.transport g).hom :=
+  have hgs : graph (U := U) t g ≫ pullback.snd (U.proj t) (U.proj t) = (U.transport g.asIso).hom :=
     graph_snd t g
-  let m₁ : pullback ((U.transport g).hom) (pullback.fst (U.proj t) (U.proj t)) ⟶
+  let m₁ : pullback ((U.transport g.asIso).hom) (pullback.fst (U.proj t) (U.proj t)) ⟶
       tripleProduct (U.proj t) :=
     pullback.map _ _ _ _ (graph (U := U) t g) (𝟙 _) (𝟙 _) (by rw [Category.comp_id, hgs])
       (by simp)
   have c₁ := pullback.condition (f := q₁₂) (g := graph (U := U) t g)
   let L₁ : pullback q₁₂ (graph (U := U) t g) ⟶
-      pullback ((U.transport g).hom) (pullback.fst (U.proj t) (U.proj t)) :=
+      pullback ((U.transport g.asIso).hom) (pullback.fst (U.proj t) (U.proj t)) :=
     pullback.lift (pullback.snd _ _) (pullback.fst _ _ ≫ q₂₃) (by
       simp only [Category.assoc]
       rw [← hgs, ← reassoc_of% c₁, pullback.condition (f := pullback.snd (U.proj t) (U.proj t))
@@ -115,27 +115,28 @@ lemma loop_tripleProj₁₃ (τ : tripleProduct (U.proj t)) :
   set w := L₁.base ρ₁
   have hτ : m₁.base w = τ := by rw [← Scheme.Hom.comp_apply, hL₁, hρ₁]
   -- the second coordinate lies on the graph of `h`
-  have hsw : (pullback.snd ((U.transport g).hom) (pullback.fst (U.proj t) (U.proj t))).base w =
-      (q₂₃).base τ := by
+  have hsw :
+      (pullback.snd ((U.transport g.asIso).hom) (pullback.fst (U.proj t) (U.proj t))).base w =
+        (q₂₃).base τ := by
     have e := congrArg (q₂₃).base hτ
     rw [← Scheme.Hom.comp_apply, pullback.lift_snd, Category.comp_id] at e
     exact e
   obtain ⟨x', hx'⟩ := exists_graph_loop t
-    ((pullback.snd ((U.transport g).hom) (pullback.fst (U.proj t) (U.proj t))).base w)
+    ((pullback.snd ((U.transport g.asIso).hom) (pullback.fst (U.proj t) (U.proj t))).base w)
   rw [hsw] at hx'
   obtain ⟨ρ₂, hρ₂, -⟩ := Scheme.Pullback.exists_preimage_pullback
-    (f := pullback.snd ((U.transport g).hom) (pullback.fst (U.proj t) (U.proj t)))
+    (f := pullback.snd ((U.transport g.asIso).hom) (pullback.fst (U.proj t) (U.proj t)))
     (g := graph (U := U) t h) w x' (hx'.trans hsw.symm).symm
   have hhf : graph (U := U) t h ≫ pullback.fst (U.proj t) (U.proj t) = 𝟙 _ := graph_fst t h
-  let m₂ : pullback ((U.transport g).hom) (𝟙 (U.cover t)) ⟶
-      pullback ((U.transport g).hom) (pullback.fst (U.proj t) (U.proj t)) :=
+  let m₂ : pullback ((U.transport g.asIso).hom) (𝟙 (U.cover t)) ⟶
+      pullback ((U.transport g.asIso).hom) (pullback.fst (U.proj t) (U.proj t)) :=
     pullback.map _ _ _ _ (𝟙 _) (graph (U := U) t h) (𝟙 _) (by simp)
       (by rw [Category.comp_id, hhf])
   have c₂ := pullback.condition
-    (f := pullback.snd ((U.transport g).hom) (pullback.fst (U.proj t) (U.proj t)))
+    (f := pullback.snd ((U.transport g.asIso).hom) (pullback.fst (U.proj t) (U.proj t)))
     (g := graph (U := U) t h)
-  let L₂ : pullback (pullback.snd ((U.transport g).hom) (pullback.fst (U.proj t) (U.proj t)))
-      (graph (U := U) t h) ⟶ pullback ((U.transport g).hom) (𝟙 (U.cover t)) :=
+  let L₂ : pullback (pullback.snd ((U.transport g.asIso).hom) (pullback.fst (U.proj t) (U.proj t)))
+      (graph (U := U) t h) ⟶ pullback ((U.transport g.asIso).hom) (𝟙 (U.cover t)) :=
     pullback.lift (pullback.fst _ _ ≫ pullback.fst _ _) (pullback.snd _ _) (by
       rw [Category.assoc, pullback.condition, Category.comp_id, ← Category.assoc, c₂,
         Category.assoc, hhf, Category.comp_id])
@@ -145,8 +146,8 @@ lemma loop_tripleProj₁₃ (τ : tripleProduct (U.proj t)) :
     · simp only [m₂, L₂, Category.assoc, pullback.lift_snd, pullback.lift_snd_assoc]
       exact c₂.symm
   -- the composite is the graph of `h * g`
-  have hc : pullback.snd ((U.transport g).hom) (𝟙 (U.cover t)) =
-      pullback.fst ((U.transport g).hom) (𝟙 (U.cover t)) ≫ (U.transport g).hom := by
+  have hc : pullback.snd ((U.transport g.asIso).hom) (𝟙 (U.cover t)) =
+      pullback.fst ((U.transport g.asIso).hom) (𝟙 (U.cover t)) ≫ (U.transport g.asIso).hom := by
     rw [← Category.comp_id (pullback.snd _ _), ← pullback.condition]
   have key : m₂ ≫ m₁ ≫ tripleProj₁₃ (U.proj t) =
       pullback.fst _ _ ≫ graph (U := U) t (h * g) := by

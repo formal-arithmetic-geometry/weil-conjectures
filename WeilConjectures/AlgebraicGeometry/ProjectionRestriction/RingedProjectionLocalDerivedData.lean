@@ -216,16 +216,16 @@ theorem localDerivedData_exists {X Y : Scheme.{u}} (f : X ⟶ Y)
   let := b.operation.kInjectives
   have := localOrdinaryInverseMate_isIso g V b ordinary hsections
   let theta := asIso (((mateEquiv g.operation.moduleAdjunction
-    b.operation.moduleAdjunction).symm (TwoSquare.mk _ _ _ _ ordinary.hom)).natTrans)
+    b.operation.moduleAdjunction).symm (TwoSquare.mk _ _ _ _ ordinary.hom)))
   have htheta : (mateEquiv g.operation.moduleAdjunction b.operation.moduleAdjunction
-      (TwoSquare.mk _ _ _ _ theta.hom)).natTrans = ordinary.hom := by
-    exact congrArg TwoSquare.natTrans
+      (TwoSquare.mk _ _ _ _ theta.hom)) = ordinary.hom := by
+    exact
       ((mateEquiv g.operation.moduleAdjunction b.operation.moduleAdjunction).apply_symm_apply
         (TwoSquare.mk _ _ _ _ ordinary.hom))
   let thetaD := CategoryTheory.UnboundedExactTower.localizedSquare
     g.operation.pullback b.operation.pullback r t theta
   let beta := (mateEquiv g.operation.derivedAdjunction b.operation.derivedAdjunction
-    (TwoSquare.mk _ _ _ _ thetaD.hom)).natTrans
+    (TwoSquare.mk _ _ _ _ thetaD.hom))
   have hnormal (I : CochainComplex (Mod R_X) ℤ) :
       r.mapDerivedCategoryFactors.inv.app
           ((g.operation.pushforward.mapHomologicalComplex (.up ℤ)).obj I) ≫

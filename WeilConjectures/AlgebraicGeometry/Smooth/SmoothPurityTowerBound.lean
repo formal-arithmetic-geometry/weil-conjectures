@@ -20,7 +20,7 @@ import WeilConjectures.AlgebraicGeometry.Compact.CompactSupportUniformTorBound
 # Compactly supported direct image preserves constructible towers
 
 Source: blueprint main-20261015, sec-smooth-purity/sk-lem-sp-tower-bound,
-statement and proof (blueprint: sk-lem-sp-tower-bound).
+statement and proof (blueprint: prose-09-23).
 
 The sequence-site presentation is transported along its section-normalized equivalence
 with the recorded coefficient towers. All natural indices denote the positive exponent n+1.
@@ -46,7 +46,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The ordinary derived equivalence induced by the section-normalized presentation.
 Source: blueprint, coefficient towers and compactification composite
-(blueprint: sk-lem-sp-tower-bound). -/
+(blueprint: prose-09-23). -/
 def spTowerShriekRealization (b : SpTowerShriek.Base l E) (T : Scheme.{u})
     (D : SpCoefficientTowersAbelian l E T) :
     spDerivedCoefficientTowers l E T D ≌ SpTowerShriek.D l E T :=

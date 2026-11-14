@@ -24,7 +24,7 @@ Indeed, `S_(s)` is the limit of the affine pointed étale neighbourhoods `(V, v)
 a strictly henselian local scheme lifts uniquely through each of them
 (`exists_lift_comp_eq_of_isStrictlyHenselianLocalRing`, `lift_ext_of_comp_eq`).
 
-(blueprint: `det-tf-restriction-zero-covers`)
+(blueprint: `lemma-tangent-cones-on-cover`)
 
 ## References
 
@@ -132,7 +132,7 @@ variable {B : Type u} [CommRing B]
 `Spec B` to the strict localization `S_(s)` which agree over `S` and after composition with a
 morphism `p₀` hitting the closed point are equal.
 
-(blueprint: `det-tf-restriction-zero-covers`) -/
+(blueprint: `lemma-tangent-cones-on-cover`) -/
 lemma hom_strictLocalization_ext {R : CommRingCat.{u}} [IsLocalRing R]
     {ℓ₁ ℓ₂ : Spec R ⟶ strictLocalization s}
     (h : ℓ₁ ≫ strictLocalizationToBase s = ℓ₂ ≫ strictLocalizationToBase s)
@@ -170,7 +170,7 @@ noncomputable def strictlyHenselianCone (a : Spec (.of B) ⟶ S) (p₀ : Spec (.
 `Spec B` over `S` with a geometric point `p₀` over `s` and over the closed point maps to the
 strict localization `S_(s)` over `S`, carrying `p₀` to the canonical geometric point.
 
-(blueprint: `det-tf-restriction-zero-covers`) -/
+(blueprint: `lemma-tangent-cones-on-cover`) -/
 theorem exists_hom_strictLocalization_of_isStrictlyHenselianLocalRing (a : Spec (.of B) ⟶ S)
     (p₀ : Spec (.of Ω) ⟶ Spec (.of B))
     (hp₀ : p₀ (IsLocalRing.closedPoint Ω) = IsLocalRing.closedPoint B) (ha : p₀ ≫ a = s) :

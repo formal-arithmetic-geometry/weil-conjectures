@@ -14,7 +14,7 @@ import WeilConjectures.CategoryTheory.ModuleObjects.RegularEndBijective
 /-! Local lisse and regular-model clauses for the condensed Artin--Schreier sheaf.
 
 Source: current blueprint, sec-fourier-transform/sk-lem-as-properties/lem-fd-as-lisse.md
-(blueprint: lem-fd-as-lisse).
+(blueprint: lemma-artin-schreier-character-sheaf--2).
 
 The remaining proof requires the trace-model comparison and the local rank-one
 argument for the recorded projector model.  Those are independent of the tensor
@@ -34,12 +34,12 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- The lisse and regular local-model part of the Artin--Schreier assertion.
 
-Proof source: lem-fd-as-lisse, proof paragraph 1.  The argument must compare the
-recorded degree-q projector with the prime-degree trace summand and then transport
+Proof source: lemma-artin-schreier-character-sheaf--2, proof paragraph 1.  The argument must compare
+the recorded degree-q projector with the prime-degree trace summand and then transport
 the locally free rank-one model.  The currently available comparison theorem uses
 a distinct `condensedSheafOf` definition, so this comparison is left as a named
 strict sub-obligation for a later worker.
-(blueprint: lem-fd-as-lisse).
+(blueprint: lemma-artin-schreier-character-sheaf--2).
 -/
 theorem condensedArtinSchreierSheafOf_lisse_local_model
     (k₀ : Type u) [Field k₀] [Fintype k₀] (ℓ : ℕ) [Fact ℓ.Prime]

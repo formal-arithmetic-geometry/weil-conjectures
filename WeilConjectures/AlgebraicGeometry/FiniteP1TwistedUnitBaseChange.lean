@@ -9,7 +9,7 @@ import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteTwistTransportUniqueness
 
 /-! # Exchange for the twisted projective-line unit
 
-Source: blueprint thm-amb-p1-decomposition, base-change paragraph; the mate-unit
+Source: blueprint lemma-cohomology-projective-line-trace, base-change paragraph; the mate-unit
 calculation in lem-sp-finite-p1-kummer-naturality, step 3.
 -/
 
@@ -383,10 +383,10 @@ private theorem mate_twisted_unit
     (d : L₂.obj K' ⟶ P')
     (hc : s.app K ≫ H.map a ≫ c = L₂.map b ≫ d) :
     G.map (a₁.unit.app K ≫ R₁.map a) ≫
-        (mateEquiv a₁ a₂ (TwoSquare.mk _ _ _ _ s)).natTrans.app P ≫ R₂.map c =
+        (mateEquiv a₁ a₂ (TwoSquare.mk _ _ _ _ s)).app P ≫ R₂.map c =
       b ≫ a₂.unit.app K' ≫ R₂.map d := by
   simp only [Functor.map_comp, Category.assoc]
-  erw [((mateEquiv a₁ a₂ (TwoSquare.mk _ _ _ _ s)).natTrans.naturality_assoc a)]
+  erw [((mateEquiv a₁ a₂ (TwoSquare.mk _ _ _ _ s)).naturality_assoc a)]
   erw [reassoc_of% unit_mateEquiv a₁ a₂ (TwoSquare.mk _ _ _ _ s) K]
   change a₂.unit.app (G.obj K) ≫ R₂.map (s.app K) ≫ R₂.map (H.map a) ≫ R₂.map c = _
   simp only [← Functor.map_comp, hc]
@@ -426,7 +426,7 @@ private theorem p1Unit_eq (A : Type (u + 1)) [CommRing A] (N : ℕ)
   rfl
 
 /-- The twisted unit commutes with projective-line exchange over arbitrary bases.
-Source: blueprint thm-amb-p1-decomposition, base-change paragraph, and
+Source: blueprint lemma-cohomology-projective-line-trace, base-change paragraph, and
 lem-sp-finite-p1-kummer-naturality, step 3.
 (auxiliary; not a blueprint node).
 

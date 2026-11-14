@@ -51,7 +51,6 @@ attribute [local irreducible] coefficientInternalScalarComplex
   coefficientSectionScalarTotal SheafOfModules.scalarPairComplexComparison
   internalScalarTensorComparison
 
-set_option maxHeartbeats 800000 in
 -- Check the normalized comparison diagram without unfolding its functors.
 /-- Paste the scalar comparison equations on two complexes and their tensor.
 Source: Stacks Project, Cohomology on Sites, Tag 07A4.

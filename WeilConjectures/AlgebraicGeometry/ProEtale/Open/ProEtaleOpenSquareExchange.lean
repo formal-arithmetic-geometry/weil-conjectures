@@ -18,7 +18,7 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.F
 # Canonical open-square exchange on the small pro-etale site
 
 Source: Weil blueprint, trace formula, order 2367; Stacks Project, Tags 03S6 and 04J0
-(blueprint: lem-trf-open-square-exchange).
+(blueprint: proposition-composition-base-change-rf-shriek--4).
 
 All functors act on the published intrinsic constant-ring module categories.
 The comparison is fixed as the inverse of the open-adjunction mate; the data below
@@ -43,7 +43,7 @@ variable (A : Type u) [CommRing A] [Finite A]
 attribute [local irreducible] sfIntrinsicModuleEquivalence
 
 /-- The open adjunction transported through the canonical realization equivalences.
-Source: Stacks, Tags 03DI and 00YV (blueprint: lem-trf-open-square-exchange). -/
+Source: Stacks, Tags 03DI and 00YV (blueprint: proposition-composition-base-change-rf-shriek--4). -/
 noncomputable def sfIntrinsicOpenAdjunction {U Y : Scheme.{u}} (j : U ⟶ Y)
     [IsOpenImmersion j] : sfIntrinsicExtensionByZero j A ⊣ sfIntrinsicPullback A j :=
   ((sfIntrinsicModuleEquivalence U A).symm.toAdjunction.comp
@@ -52,7 +52,7 @@ noncomputable def sfIntrinsicOpenAdjunction {U Y : Scheme.{u}} (j : U ⟶ Y)
     (sfIntrinsicModuleEquivalence Y A).toAdjunction
 
 /-- Composition of open extensions is the unique comparison respecting composite units.
-Source: Stacks, Tag 03DI (blueprint: lem-trf-open-square-exchange). -/
+Source: Stacks, Tag 03DI (blueprint: proposition-composition-base-change-rf-shriek--4). -/
 noncomputable def sfIntrinsicOpenComp {V U Y : Scheme.{u}} (i : V ⟶ U) (j : U ⟶ Y)
     [IsOpenImmersion i] [IsOpenImmersion j] :
     sfIntrinsicExtensionByZero (i ≫ j) A ≅
@@ -62,14 +62,14 @@ noncomputable def sfIntrinsicOpenComp {V U Y : Scheme.{u}} (i : V ⟶ U) (j : U 
       (sfIntrinsicOpenAdjunction A (i ≫ j)) |>.symm
 
 /-- Identity open extension, normalized by its adjunction unit.
-Source: Stacks, Tag 03DI (blueprint: lem-trf-open-square-exchange). -/
+Source: Stacks, Tag 03DI (blueprint: proposition-composition-base-change-rf-shriek--4). -/
 noncomputable def sfIntrinsicOpenId (Y : Scheme.{u}) :
     sfIntrinsicExtensionByZero (𝟙 Y) A ≅ 𝟭 _ :=
   ((sfIntrinsicOpenAdjunction A (𝟙 Y)).ofNatIsoRight
     (sfIntrinsicPullbackId A Y)).leftAdjointUniq Adjunction.id
 
 /-- Commuting pullbacks for a commutative square, with the canonical coefficient action.
-Source: Stacks, Tag 04J0 (blueprint: lem-trf-open-square-exchange). -/
+Source: Stacks, Tag 04J0 (blueprint: proposition-composition-base-change-rf-shriek--4). -/
 noncomputable def sfIntrinsicSquarePullback {U' U Y' Y : Scheme.{u}}
     (gU : U' ⟶ U) (j' : U' ⟶ Y') (j : U ⟶ Y) (g : Y' ⟶ Y)
     (w : gU ≫ j = j' ≫ g) :
@@ -81,7 +81,7 @@ noncomputable def sfIntrinsicSquarePullback {U' U Y' Y : Scheme.{u}}
 /-- The reverse exchange map is the mate of the pullback square. Explicitly it applies
 `j'_!` to `g_U^*` of the open unit, then the pullback-square comparison, and finally the
 open counit. Thus it is a specified map, rather than a freely chosen isomorphism.
-Source: Stacks, Tag 03S6 (blueprint: lem-trf-open-square-exchange). -/
+Source: Stacks, Tag 03S6 (blueprint: proposition-composition-base-change-rf-shriek--4). -/
 noncomputable def sfIntrinsicOpenMate {U' U Y' Y : Scheme.{u}}
     (gU : U' ⟶ U) (j' : U' ⟶ Y') (j : U ⟶ Y) (g : Y' ⟶ Y)
     [IsOpenImmersion j] [IsOpenImmersion j'] (w : gU ≫ j = j' ≫ g) :
@@ -95,13 +95,14 @@ noncomputable def sfIntrinsicOpenMate {U' U Y' Y : Scheme.{u}}
     (sfIntrinsicOpenAdjunction A j').counit
 
 /-- Exact extension by zero on the full, unbounded intrinsic derived category.
-Source: blueprint order 2367, termwise derivation (blueprint: lem-trf-open-square-exchange). -/
+Source: blueprint order 2367, termwise derivation (blueprint:
+proposition-composition-base-change-rf-shriek--4). -/
 noncomputable abbrev sfIntrinsicDerivedOpen {U Y : Scheme.{u}} (j : U ⟶ Y)
     [IsOpenImmersion j] : proEtaleDerivedCategory U A ⥤ proEtaleDerivedCategory Y A :=
   (sfIntrinsicExtensionByZero j A).mapDerivedCategory
 
 /-- Descend an actual natural transformation of exact intrinsic functors termwise.
-Source: Stacks, Tag 05RU (blueprint: lem-trf-open-square-exchange). -/
+Source: Stacks, Tag 05RU (blueprint: proposition-composition-base-change-rf-shriek--4). -/
 noncomputable def sfIntrinsicDeriveMap {X Y : Scheme.{u}}
     {F G : proEtaleRingModules X (proEtaleConstantRing X A) ⥤
       proEtaleRingModules Y (proEtaleConstantRing Y A)}
@@ -116,7 +117,8 @@ noncomputable def sfIntrinsicDeriveMap {X Y : Scheme.{u}}
     (whiskerRight (NatTrans.mapHomologicalComplex a (ComplexShape.up ℤ)) DerivedCategory.Q)
 
 /-- The specified derived reverse exchange is the exact termwise descent of the open mate.
-Source: blueprint order 2367; Stacks, Tag 03S6 (blueprint: lem-trf-open-square-exchange). -/
+Source: blueprint order 2367; Stacks, Tag 03S6 (blueprint:
+proposition-composition-base-change-rf-shriek--4). -/
 noncomputable def sfIntrinsicDerivedOpenMate {U' U Y' Y : Scheme.{u}}
     (gU : U' ⟶ U) (j' : U' ⟶ Y') (j : U ⟶ Y) (g : Y' ⟶ Y)
     [IsOpenImmersion j] [IsOpenImmersion j'] (w : gU ≫ j = j' ≫ g) :
@@ -129,7 +131,7 @@ noncomputable def sfIntrinsicDerivedOpenMate {U' U Y' Y : Scheme.{u}}
     (sfIntrinsicPullback A g)).inv
 
 /-- The derived open unit, with the localization identity and composition comparisons.
-Source: Stacks, Tag 05RU (blueprint: lem-trf-open-square-exchange). -/
+Source: Stacks, Tag 05RU (blueprint: proposition-composition-base-change-rf-shriek--4). -/
 noncomputable def sfIntrinsicDerivedOpenUnit {U Y : Scheme.{u}} (j : U ⟶ Y)
     [IsOpenImmersion j] : 𝟭 (proEtaleDerivedCategory U A) ⟶
       sfIntrinsicDerivedOpen A j ⋙ sfIntrinsicDerivedPullback A j :=
@@ -139,7 +141,7 @@ noncomputable def sfIntrinsicDerivedOpenUnit {U Y : Scheme.{u}} (j : U ⟶ Y)
       (sfIntrinsicPullback A j)).inv
 
 /-- Pullback composition on unbounded derived categories.
-Source: Stacks, Section 0735 (blueprint: lem-trf-open-square-exchange). -/
+Source: Stacks, Section 0735 (blueprint: proposition-composition-base-change-rf-shriek--4). -/
 noncomputable def sfIntrinsicDerivedPullbackComp {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z) :
     sfIntrinsicDerivedPullback A (f ≫ g) ≅
@@ -148,7 +150,7 @@ noncomputable def sfIntrinsicDerivedPullbackComp {X Y Z : Scheme.{u}}
     (mapDerivedCategoryCompIso (sfIntrinsicPullback A g) (sfIntrinsicPullback A f)).symm
 
 /-- Open-extension composition on unbounded derived categories.
-Source: blueprint order 2367 (blueprint: lem-trf-open-square-exchange). -/
+Source: blueprint order 2367 (blueprint: proposition-composition-base-change-rf-shriek--4). -/
 noncomputable def sfIntrinsicDerivedOpenComp {V U Y : Scheme.{u}} (i : V ⟶ U) (j : U ⟶ Y)
     [IsOpenImmersion i] [IsOpenImmersion j] :
     sfIntrinsicDerivedOpen A (i ≫ j) ≅ sfIntrinsicDerivedOpen A i ⋙ sfIntrinsicDerivedOpen A j :=
@@ -157,19 +159,19 @@ noncomputable def sfIntrinsicDerivedOpenComp {V U Y : Scheme.{u}} (i : V ⟶ U) 
       (sfIntrinsicExtensionByZero j A)).symm
 
 /-- Identity pullback on the unbounded derived category.
-Source: Stacks, Section 0735 (blueprint: lem-trf-open-square-exchange). -/
+Source: Stacks, Section 0735 (blueprint: proposition-composition-base-change-rf-shriek--4). -/
 noncomputable def sfIntrinsicDerivedPullbackId (Y : Scheme.{u}) :
     sfIntrinsicDerivedPullback A (𝟙 Y) ≅ 𝟭 _ :=
   mapDerivedCategoryNatIso (sfIntrinsicPullbackId A Y) ≪≫ mapDerivedCategoryIdIso _
 
 /-- Identity open extension on the unbounded derived category.
-Source: blueprint order 2367 (blueprint: lem-trf-open-square-exchange). -/
+Source: blueprint order 2367 (blueprint: proposition-composition-base-change-rf-shriek--4). -/
 noncomputable def sfIntrinsicDerivedOpenId (Y : Scheme.{u}) :
     sfIntrinsicDerivedOpen A (𝟙 Y) ≅ 𝟭 _ :=
   mapDerivedCategoryNatIso (sfIntrinsicOpenId A Y) ≪≫ mapDerivedCategoryIdIso _
 
 /-- The derived pullback identification used to restrict the exchange to the open.
-Source: Stacks, Tag 04J0 (blueprint: lem-trf-open-square-exchange). -/
+Source: Stacks, Tag 04J0 (blueprint: proposition-composition-base-change-rf-shriek--4). -/
 noncomputable def sfIntrinsicDerivedSquarePullback {U' U Y' Y : Scheme.{u}}
     (gU : U' ⟶ U) (j' : U' ⟶ Y') (j : U ⟶ Y) (g : Y' ⟶ Y)
     (w : gU ≫ j = j' ≫ g) :
@@ -184,7 +186,7 @@ its inverse to the specified mate, so none of its isomorphisms is arbitrary. The
 field is precisely the identity after the two open units and the pullback identification.
 The last four fields express horizontal/vertical identity and pasting, respectively.
 Source: blueprint order 2367; Stacks, Tags 03S6 and 04J0
-(blueprint: lem-trf-open-square-exchange). -/
+(blueprint: proposition-composition-base-change-rf-shriek--4). -/
 structure SfOpenSquareExchangeData where
   exchange : ∀ {U' U Y' Y : Scheme.{u}} (gU : U' ⟶ U) (j' : U' ⟶ Y')
     (j : U ⟶ Y) (g : Y' ⟶ Y) [IsOpenImmersion j] [IsOpenImmersion j']
@@ -302,7 +304,7 @@ private theorem rawMate_eq
     {L₁ : C₁ ⥤ C₂} {R₁ : C₂ ⥤ C₁} {L₂ : C₃ ⥤ C₄} {R₂ : C₄ ⥤ C₃}
     (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (G : C₁ ⥤ C₃) (H : C₂ ⥤ C₄)
     (a : R₁ ⋙ G ⟶ H ⋙ R₂) :
-    ((mateEquiv adj₁ adj₂).symm (TwoSquare.mk _ _ _ _ a)).natTrans =
+    ((mateEquiv adj₁ adj₂).symm (TwoSquare.mk _ _ _ _ a)) =
       whiskerRight (whiskerRight adj₁.unit G) L₂ ≫
         whiskerRight (whiskerLeft L₁ a) L₂ ≫ whiskerLeft (L₁ ⋙ H) adj₂.counit := by
   apply NatTrans.ext
@@ -319,9 +321,9 @@ private theorem trMate (e₁ : C₁ ≌ D₁) (e₂ : C₂ ≌ D₂)
     (a : R₁ ⋙ G ⟶ H ⋙ R₂) :
     ((mateEquiv (trAdj e₁ e₂ adj₁) (trAdj e₃ e₄ adj₂)).symm
       (TwoSquare.mk _ _ _ _ ((trComp e₂ e₁ e₃ R₁ G).inv ≫ trNat e₂ e₃ a ≫
-        (trComp e₂ e₄ e₃ H R₂).hom))).natTrans =
+        (trComp e₂ e₄ e₃ H R₂).hom))) =
       (trComp e₁ e₃ e₄ G L₂).inv ≫
-        trNat e₁ e₄ ((mateEquiv adj₁ adj₂).symm (TwoSquare.mk _ _ _ _ a)).natTrans ≫
+        trNat e₁ e₄ ((mateEquiv adj₁ adj₂).symm (TwoSquare.mk _ _ _ _ a)) ≫
         (trComp e₁ e₂ e₄ L₁ H).hom := by
   apply NatTrans.ext
   funext X
@@ -503,10 +505,10 @@ private theorem mateHorizontal
     (e : K ≅ G ⋙ I) (f : T ≅ H ⋙ J)
     (hc : ∀ X, e.hom.app (R₁.obj X) ≫ I.map (a.hom.app X) ≫
       b.hom.app (H.obj X) = c.hom.app X ≫ R₃.map (f.hom.app X)) :
-    ((mateEquiv adj₁ adj₃).symm (TwoSquare.mk _ _ _ _ c.hom)).natTrans =
+    ((mateEquiv adj₁ adj₃).symm (TwoSquare.mk _ _ _ _ c.hom)) =
       whiskerRight e.hom L₃ ≫
-      whiskerLeft G ((mateEquiv adj₂ adj₃).symm (TwoSquare.mk _ _ _ _ b.hom)).natTrans ≫
-      whiskerRight ((mateEquiv adj₁ adj₂).symm (TwoSquare.mk _ _ _ _ a.hom)).natTrans J ≫
+      whiskerLeft G ((mateEquiv adj₂ adj₃).symm (TwoSquare.mk _ _ _ _ b.hom)) ≫
+      whiskerRight ((mateEquiv adj₁ adj₂).symm (TwoSquare.mk _ _ _ _ a.hom)) J ≫
       whiskerLeft L₁ f.inv := by
   have hs : (mateEquiv adj₁ adj₃).symm c.hom =
       ((((mateEquiv adj₁ adj₂).symm (TwoSquare.mk _ _ _ _ a.hom)).hComp
@@ -515,20 +517,19 @@ private theorem mateHorizontal
     apply (mateEquiv adj₁ adj₃).injective
     erw [Equiv.apply_symm_apply, mateEquiv_whiskerTop_whiskerBottom, mateEquiv_vcomp,
       Equiv.apply_symm_apply, Equiv.apply_symm_apply]
-    apply TwoSquare.ext
-    intro X
-    simp only [TwoSquare.natTrans, TwoSquare.mk, TwoSquare.whiskerLeft_app,
+    refine NatTrans.ext (funext fun X ↦ ?_)
+    simp only [TwoSquare.mk, TwoSquare.whiskerLeft_app,
       TwoSquare.whiskerRight_app]
     rw [← cancel_mono (R₃.map (f.hom.app X))]
     simp only [Category.assoc, ← R₃.map_comp, Iso.inv_hom_id_app]
     erw [R₃.map_id, Category.comp_id]
-    simpa only [TwoSquare.vComp, TwoSquare.mk, TwoSquare.natTrans,
+    simpa only [TwoSquare.vComp, TwoSquare.mk,
       NatTrans.comp_app, whiskerLeft_app, whiskerRight_app, associator_hom_app,
       associator_inv_app, Category.id_comp, Category.comp_id] using (hc X).symm
   apply NatTrans.ext
   funext X
   have ht := congr_app hs X
-  try dsimp only [TwoSquare.natTrans, TwoSquare.mk] at ht
+  try dsimp only [TwoSquare.mk] at ht
   simpa only [TwoSquare.whiskerTop_app, TwoSquare.whiskerBottom_app, TwoSquare.hComp_app,
     NatTrans.comp_app, whiskerLeft_app, whiskerRight_app, Category.assoc] using ht
 
@@ -546,10 +547,10 @@ private theorem mateVertical
     (he' : conjugateIsoEquiv (adj₁'.comp adj₂') adj' e' = c'.symm)
     (hq : ∀ M, G.map (c.hom.app M) ≫ a.hom.app (R₂.obj M) ≫
       R₁'.map (b.hom.app M) = t.hom.app M ≫ c'.hom.app (K.obj M)) :
-    ((mateEquiv adj adj').symm (TwoSquare.mk _ _ _ _ t.hom)).natTrans =
+    ((mateEquiv adj adj').symm (TwoSquare.mk _ _ _ _ t.hom)) =
       whiskerLeft G e'.hom ≫
-      whiskerRight ((mateEquiv adj₁ adj₁').symm (TwoSquare.mk _ _ _ _ a.hom)).natTrans L₂' ≫
-      whiskerLeft L₁ ((mateEquiv adj₂ adj₂').symm (TwoSquare.mk _ _ _ _ b.hom)).natTrans ≫
+      whiskerRight ((mateEquiv adj₁ adj₁').symm (TwoSquare.mk _ _ _ _ a.hom)) L₂' ≫
+      whiskerLeft L₁ ((mateEquiv adj₂ adj₂').symm (TwoSquare.mk _ _ _ _ b.hom)) ≫
       whiskerRight e.inv K := by
   have hs : (mateEquiv adj adj').symm (TwoSquare.mk _ _ _ _ t.hom) =
       ((((mateEquiv adj₁ adj₁').symm (TwoSquare.mk _ _ _ _ a.hom)).vComp
@@ -569,13 +570,12 @@ private theorem mateVertical
     change conjugateEquiv _ _ e'.hom =
       c'.inv at hc'
     rw [hc, hc']
-    apply TwoSquare.ext
-    intro M
-    simp only [TwoSquare.natTrans, TwoSquare.mk, TwoSquare.whiskerTop_app,
+    refine NatTrans.ext (funext fun M ↦ ?_)
+    simp only [TwoSquare.mk, TwoSquare.whiskerTop_app,
       TwoSquare.whiskerBottom_app]
     rw [← cancel_mono (c'.hom.app
       (K.obj M))]
-    simpa only [TwoSquare.hComp, TwoSquare.mk, TwoSquare.natTrans,
+    simpa only [TwoSquare.hComp, TwoSquare.mk,
       NatTrans.comp_app, whiskerLeft_app, whiskerRight_app, associator_hom_app,
       associator_inv_app, Category.id_comp, Category.assoc, Iso.inv_hom_id_app,
       Category.comp_id] using
@@ -585,7 +585,7 @@ private theorem mateVertical
   have ht := congr_app hs X
   simpa only [TwoSquare.whiskerLeft, TwoSquare.whiskerLeft_app, TwoSquare.whiskerRight,
     TwoSquare.whiskerRight_app, TwoSquare.vComp_app,
-    TwoSquare.vComp, TwoSquare.mk, TwoSquare.natTrans, NatTrans.comp_app,
+    TwoSquare.vComp, TwoSquare.mk, NatTrans.comp_app,
     whiskerLeft_app, whiskerRight_app, associator_hom_app, associator_inv_app,
     Category.id_comp, Category.comp_id, Category.assoc] using ht
 
@@ -594,7 +594,7 @@ private theorem mateHorizontalIdentity
     (G : C₁ ⥤ C₁) (H : C₂ ⥤ C₂) (a : R ⋙ G ≅ H ⋙ R)
     (e : G ≅ 𝟭 C₁) (f : H ≅ 𝟭 C₂)
     (hq : ∀ M, a.hom.app M ≫ R.map (f.hom.app M) = e.hom.app (R.obj M)) :
-    ((mateEquiv adj adj).symm (TwoSquare.mk _ _ _ _ a.hom)).natTrans =
+    ((mateEquiv adj adj).symm (TwoSquare.mk _ _ _ _ a.hom)) =
       whiskerRight e.hom L ≫ whiskerLeft L f.inv := by
   have hs : (mateEquiv adj adj).symm (TwoSquare.mk _ _ _ _ a.hom) =
       ((TwoSquare.hId (L)).whiskerTop
@@ -604,9 +604,8 @@ private theorem mateHorizontalIdentity
       adj).injective
     rw [Equiv.apply_symm_apply, mateEquiv_whiskerTop_whiskerBottom, TwoSquare.hId,
       mateEquiv_unitors]
-    apply TwoSquare.ext
-    intro M
-    dsimp only [TwoSquare.natTrans, TwoSquare.mk]
+    refine NatTrans.ext (funext fun M ↦ ?_)
+    dsimp only [TwoSquare.mk]
     simp only [TwoSquare.whiskerLeft, TwoSquare.whiskerRight,
     NatTrans.comp_app, whiskerLeft_app, whiskerRight_app,
       rightUnitor_hom_app, leftUnitor_inv_app,
@@ -622,7 +621,7 @@ private theorem mateHorizontalIdentity
   funext K
   simpa only [Functor.id_obj, Functor.comp_obj, TwoSquare.whiskerLeft, TwoSquare.whiskerRight,
     TwoSquare.mk,
-    TwoSquare.natTrans, TwoSquare.vId, TwoSquare.hId,
+    TwoSquare.vId, TwoSquare.hId,
     TwoSquare.whiskerTop, TwoSquare.whiskerBottom, NatTrans.comp_app,
     whiskerLeft_app, whiskerRight_app, leftUnitor_hom_app, rightUnitor_inv_app,
     rightUnitor_hom_app, leftUnitor_inv_app, Category.id_comp, Category.comp_id,
@@ -635,7 +634,7 @@ private theorem mateVerticalIdentity
     (he : conjugateIsoEquiv Adjunction.id adj e = c.symm)
     (he' : conjugateIsoEquiv Adjunction.id adj' e' = c'.symm)
     (hq : ∀ M, a.inv.app M ≫ G.map (c.hom.app M) = c'.hom.app (G.obj M)) :
-    ((mateEquiv adj adj').symm (TwoSquare.mk _ _ _ _ a.hom)).natTrans =
+    ((mateEquiv adj adj').symm (TwoSquare.mk _ _ _ _ a.hom)) =
       whiskerLeft G e'.hom ≫ whiskerRight e.inv G := by
   have hs : (mateEquiv adj adj').symm (TwoSquare.mk _ _ _ _ a.hom) =
       ((TwoSquare.vId G).whiskerRight
@@ -652,14 +651,13 @@ private theorem mateVerticalIdentity
     change conjugateEquiv _ _ e'.hom =
       c'.inv at hc'
     rw [hc, hc']
-    apply TwoSquare.ext
-    intro M
-    dsimp only [TwoSquare.natTrans, TwoSquare.mk]
+    refine NatTrans.ext (funext fun M ↦ ?_)
+    dsimp only [TwoSquare.mk]
     simp only [TwoSquare.whiskerTop_app]
     rw [← cancel_epi (a.inv.app M)]
     simp only [Iso.inv_hom_id_app]
     rw [reassoc_of% (hq M)]
-    simp only [TwoSquare.whiskerBottom, TwoSquare.mk, TwoSquare.natTrans,
+    simp only [TwoSquare.whiskerBottom,
       NatTrans.comp_app, whiskerLeft_app, leftUnitor_hom_app,
       rightUnitor_inv_app, Category.comp_id]
     erw [Category.id_comp, Iso.hom_inv_id_app]
@@ -669,7 +667,7 @@ private theorem mateVerticalIdentity
   have ht := congr_app hs K
   dsimp only [TwoSquare.whiskerLeft, TwoSquare.whiskerRight,
     TwoSquare.mk,
-    TwoSquare.natTrans, TwoSquare.vId, NatTrans.comp_app,
+    TwoSquare.vId, NatTrans.comp_app,
     whiskerLeft_app, whiskerRight_app, Functor.id_obj, Functor.comp_obj] at ht
   erw [Category.id_comp] at ht
   simpa only [leftUnitor_inv_app, Category.comp_id, NatTrans.comp_app,
@@ -1204,9 +1202,9 @@ private theorem sfOpenMate_transport {U' U Y' Y : Scheme.{u}}
   let M := ModuleCat.{u + 1} (ULift.{u + 1, u} A)
   have hm : ((mateEquiv (ProEtale.openImmersionLowerShriekUpperStarAdjunction M j)
       (ProEtale.openImmersionLowerShriekUpperStarAdjunction M j')).symm
-      (ProEtale.upperStarCompIso M w).hom).natTrans =
+      (ProEtale.upperStarCompIso M w).hom) =
       ProEtale.openImmersionLowerShriekBaseChangeMap M ⟨w⟩ := by
-    exact congrArg TwoSquare.natTrans
+    exact
       ((mateEquiv _ _).symm_apply_apply
         (ProEtale.openImmersionLowerShriekBaseChangeMap M ⟨w⟩) |>.symm.trans
         (congrArg (mateEquiv _ _).symm
@@ -1229,7 +1227,7 @@ private theorem sfOpenMate_eq_mate {U' U Y' Y : Scheme.{u}}
     sfIntrinsicOpenMate A gU j' j g w =
       ((mateEquiv (sfIntrinsicOpenAdjunction A j) (sfIntrinsicOpenAdjunction A j')).symm
         (TwoSquare.mk _ _ _ _
-          (sfIntrinsicSquarePullback A gU j' j g w).hom)).natTrans := by
+          (sfIntrinsicSquarePullback A gU j' j g w).hom)) := by
   exact (rawMate_eq (sfIntrinsicOpenAdjunction A j) (sfIntrinsicOpenAdjunction A j')
     (sfIntrinsicPullback A gU) (sfIntrinsicPullback A g)
     (sfIntrinsicSquarePullback A gU j' j g w).hom).symm
@@ -1668,7 +1666,7 @@ private noncomputable def sfExchangeData : SfOpenSquareExchangeData A where
 
 /-- Canonical open-square exchange with finite coefficient ring `A_{E,n}`.
 Source: Weil blueprint, trace formula, order 2367; Stacks, Tags 03S6 and 04J0
-(blueprint: lem-trf-open-square-exchange).
+(blueprint: proposition-composition-base-change-rf-shriek--4).
 
 Proof: first work with all sheaves over the constant ring. The localization equivalence
 identifies restriction with open pullback. Evaluate both `j^* g_*` and `g_{U*} j'^*` on

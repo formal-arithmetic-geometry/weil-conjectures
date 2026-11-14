@@ -17,7 +17,8 @@ scheme `X` of finite type over a field, and `g` an automorphism of `X`. Derived 
 `Ψ = - ⊗ᴸ_R S` preserves `Dctf` (`AlgebraicGeometry.ProEtale.
 constructibleFiniteTor_leftDerivedSheafExtendScalars`), so it sends a strict Weil complex
 `(K, φ : Lg^* K ≅ K)` over `R` to the strict Weil complex `(Ψ K, φ_S)` over `S`, with
-`φ_S : Lg^* Ψ K ≅ Ψ Lg^* K --Ψ φ--> Ψ K` (blueprint `thm-trf-finite-coefficient-map`).
+`φ_S : Lg^* Ψ K ≅ Ψ Lg^* K --Ψ φ--> Ψ K` (blueprint
+`theorem-grothendieck-lefschetz-trace-formula--7`).
 
 ## Main definitions
 
@@ -43,9 +44,9 @@ variable {R : Type (u + 1)} (S : Type (u + 1)) [CommRing R] [CommRing S] [Algebr
   [Finite S] {k : Type u} [Field k] {X : Scheme.{u}} (aX : X ⟶ Spec (.of k))
   [LocallyOfFiniteType aX] [QuasiCompact aX] [HasInvertibleExponent R X] {g : X ≅ X}
 
-/-- Blueprint `thm-trf-finite-coefficient-map`: the scalar extension `(K_S, φ_S)` of a strict
-Weil complex `(K, φ)` over a finite ring `R` along `R → S`: `K_S = K ⊗ᴸ_R S` lies in `Dctf`
-(`AlgebraicGeometry.ProEtale.constructibleFiniteTor_leftDerivedSheafExtendScalars`), and its
+/-- Blueprint `theorem-grothendieck-lefschetz-trace-formula--7`: the scalar extension `(K_S, φ_S)`
+of a strict Weil complex `(K, φ)` over a finite ring `R` along `R → S`: `K_S = K ⊗ᴸ_R S` lies in
+`Dctf` (`AlgebraicGeometry.ProEtale.constructibleFiniteTor_leftDerivedSheafExtendScalars`), and its
 Weil structure is `φ_S : Lg^* K_S ≅ (Lg^* K) ⊗ᴸ_R S --φ ⊗ S--> K_S`, whose underlying morphism
 is `AlgebraicGeometry.ProEtale.extendScalarsWeilDatum` of that of `φ`. -/
 noncomputable def extendScalars (W : StrictWeilComplex (ModuleCat.{u + 1} R) g) :

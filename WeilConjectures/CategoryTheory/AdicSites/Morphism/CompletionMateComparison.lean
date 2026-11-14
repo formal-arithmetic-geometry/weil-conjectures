@@ -369,7 +369,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 /-!
 # Strict quotient towers and the completed-adjunction mate
 
-Source: smooth-purity blueprint, `fix-lem-exchanges`, Proof Step 4;
+Source: smooth-purity blueprint, `proposition-composition-base-change-rf-shriek`, Proof Step 4;
 Stacks Project, Tags 099M, 099N, 0E48 and 0941
 (blueprint: lem-sp-completion-mate-comparison).
 
@@ -923,7 +923,7 @@ def towerExchange {f : Morphism Y X} {g : Morphism Y Y'}
     (sq : Square f g h k) (A : Type u) [CommRing A] :
     f.towerPush A ⋙ g.towerPull A ⟶ h.towerPull A ⋙ k.towerPush A :=
   (mateEquiv (f.towerAdjunction A) (k.towerAdjunction A)
-    (TwoSquare.mk _ _ _ _ (towerSquare sq A).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (towerSquare sq A).hom))
 
 /-- The ordinary coefficient exchange for any commutative coefficient ring.
 Source: Stacks 0E48 (blueprint: lem-sp-completion-mate-comparison). -/
@@ -932,7 +932,7 @@ def ordinaryExchange {f : Morphism Y X} {g : Morphism Y Y'}
     (sq : Square f g h k) (A : Type u) [CommRing A] :
     f.push A ⋙ g.pull A ⟶ h.pull A ⋙ k.push A :=
   (mateEquiv (f.adj A) (k.adj A)
-    (TwoSquare.mk _ _ _ _ (derivedSquare sq A).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (derivedSquare sq A).hom))
 
 /-- The right-adjoint square is the adjunction conjugate of the canonical left square.
 Source: Stacks 0E48 (blueprint: lem-sp-completion-mate-comparison). -/
@@ -975,7 +975,7 @@ def completeExchange {f : Morphism Y X} {g : Morphism Y Y'}
     f.completePush A I ⋙ g.completePull A I ⟶
       h.completePull A I ⋙ k.completePush A I :=
   (mateEquiv (f.completeAdjunction A I) (k.completeAdjunction A I)
-    (TwoSquare.mk _ _ _ _ (completeSquare sq A I).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (completeSquare sq A I).hom))
 
 /-- Exact derived constant towers, used only to normalize the strict-limit adjunction.
 Source: Stacks 0941 (blueprint: lem-sp-completion-mate-comparison). -/
@@ -1103,7 +1103,7 @@ def Morphism.directLimitIso {V U : Site.{u}} (f : Morphism V U)
     ((V.deltaAdjunction A).comp (f.towerAdjunction A)) (f.constantPullIso A)
 
 /-- The finite quotient ring and its original coefficient action.
-Source: smooth-purity blueprint, fix-lem-exchanges Step 4
+Source: smooth-purity blueprint, proposition-composition-base-change-rf-shriek Step 4
 (blueprint: lem-sp-completion-mate-comparison). -/
 abbrev quotientRing (A : Type u) [CommRing A] (I : Ideal A) (n : ℕ) :=
   A ⧸ I ^ (n + 1)
@@ -1733,7 +1733,7 @@ def projectionComparison {f : Morphism Y X} {g : Morphism Y Y'}
     (g.towerPull A).map (f.towerProjection A I K)
 
 /-- Each positive quotient is perfect as an A-complex: bounded finite projectives.
-Source: smooth-purity blueprint, fix-lem-exchanges Step 4
+Source: smooth-purity blueprint, proposition-composition-base-change-rf-shriek Step 4
 (blueprint: lem-sp-completion-mate-comparison). -/
 def PerfectQuotients (A : Type u) [CommRing A] (I : Ideal A) : Prop :=
   letI := HasDerivedCategory.standard (ModuleCat.{u} A)
@@ -2374,7 +2374,7 @@ theorem comparisonS_naturality {f : Morphism Y X} {g : Morphism Y Y'}
         (ObjectProperty.ι (X.IsComplete A I) ⋙ X.reduction A I ⋙
           f.towerPush A ⋙ g.towerPull A ⋙ Y'.rlim A).map a := by
   let p := (mateEquiv (f.adj A) (f.towerAdjunction A)
-    (TwoSquare.mk _ _ _ _ (f.reductionPullIso A I).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (f.reductionPullIso A I).hom))
   have hp (M : X.derived A) : p.app M = f.towerProjection A I M := by
     simp [p, Morphism.towerProjection, Adjunction.homEquiv_unit,
       Functor.map_comp]
@@ -2441,8 +2441,8 @@ def comparisonT {h : Morphism X X'} {k : Morphism Y' X'}
 /-- The whole-diagram mate comparison, including invertibility and the two finite
 coefficient normalization clauses.
 
-Source: smooth-purity blueprint, fix-lem-exchanges Proof Step 4; ingredient sources
-Stacks 099M, 099N, 0E48, 0941, 0B56, 0944
+Source: smooth-purity blueprint, proposition-composition-base-change-rf-shriek Proof Step 4;
+ingredient sources Stacks 099M, 099N, 0E48, 0941, 0B56, 0944
 (blueprint: lem-sp-completion-mate-comparison).
 
 Proof, following the ten steps of the DAG node:

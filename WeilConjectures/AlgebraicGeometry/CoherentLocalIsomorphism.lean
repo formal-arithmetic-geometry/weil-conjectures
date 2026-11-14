@@ -75,7 +75,7 @@ Source: Stacks Project, Cohomology of Schemes, Lemma 01Y3
 Proof:
 1. By `pqf-def-coherent`, both modules are of finite type, in the sense of
    `def-weil-pbc-module-finite-type-presentation`. The kernel of `φ` is computed
-   sectionwise (`def-weil-sheaf-of-modules-category`), so its restriction vanishes
+   sectionwise (`situation-conventions`), so its restriction vanishes
    exactly when every section map of `φ` on that neighbourhood is injective.
    The locally Noetherian hypothesis is retained from the source but is unused.
 2. For (3), apply `lem-weil-pbc-module-finite-type-surjective-on-stalk` (Modules,

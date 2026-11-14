@@ -191,12 +191,12 @@ Proof:
 lem-weil-valued-dvr-finite-quotients. The open coset basis of
 lem-sfb-integers-coset-basis makes their quotient topology discrete. The constant
 integral sheaf maps flatly to B, with quotient k_n, by
-det-prop-integral-criterion-constant-coefficients and
-det-prop-sfb-qlbar-colimit-x-integral-limit. Use
+lemma-integral-models--1 and
+lemma-comparison-completed-coefficients--1. Use
 lem-sf-module-object-ordinary-coefficient-equivalence for the finite encoding.
 2. For stratum and cover restrictions, sk-def-sfb-pullback-from-point-comp identifies
 the coefficient rings and their actual quotient maps. Exactness follows from
-sk-prop-sfb-cartesian-coefficients and lem-sfb-internal-module-operations-transport.
+lemma-inverse-image-coefficient-sheaves and lem-sfb-internal-module-operations-transport.
 A flat-term K-flat resolution (lem-pc-kflat-resolution) remains such after pullback
 (lem-weil-pbc-ringed-topos-kflat-pullback). The balanced comparisons of
 lem-sfb-scalar-inverse-image-tower-diagram and lem-pur-derived-change-of-rings
@@ -218,7 +218,7 @@ relations. Rank zero and the zero module are included.
 lem-sfb-proetale-object-inverse-image-restriction and lem-sfb-sheaf-cover-local-isomorphism
 to descend from covers. Use lem-fix-constructible-open-closed-refinement to refine the
 finite constructible partition to a finite open/closed tree. Induct upward using
-lem-exc-open-closed-detection. Thus the interval [-1,0] is uniform in n.
+proposition-extension-zero-restriction-closed-subscheme. Thus the interval [-1,0] is uniform in n.
 7. Keep the original strata and covers. The finite kernel and cokernel models are
 internal finite scalar models by lem-pe-finite-discrete-scalar-constant-models and
 lem-pe-finite-discrete-encoding-pullback-fixed. They are ordinary locally constant

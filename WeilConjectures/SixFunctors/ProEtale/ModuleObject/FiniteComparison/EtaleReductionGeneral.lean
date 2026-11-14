@@ -41,12 +41,12 @@ theorem hasEtaleReductionLowerShriekIso_of_isProper (f : X ⟶ Y) [IsProper f.le
     HasEtaleReductionLowerShriekIso ℓ E n f :=
   exists_etaleReductionLowerShriekIso ℓ E n f
 
-/-- Blueprint `det-prop-scalar-six-exceptional` (with the compact-support comparison `γ^!` of
-`det-prop-scalar-six-compact-support`), for the coefficient map `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, read on the
-étale site (`sk-def-sf-categories`). **Reduction modulo `ℓⁿ` commutes with `Rf_!` and with
-`Rf^!`** for every morphism `f` of separated `k`-schemes of finite type: there is an
-isomorphism `γ : Rf_! ⋙ red_Y ≅ red_X ⋙ Rf_!` whose transpose under `Rf_! ⊣ Rf^!` is an
-isomorphism.
+/-- Blueprint `lemma-change-coefficients-exceptional-inverse-image` (with the compact-support
+comparison `γ^!` of `lemma-change-coefficients-compact-support`), for the coefficient map
+`𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, read on the étale site (`definition-constructible-sheaves`). **Reduction modulo
+`ℓⁿ` commutes with `Rf_!` and with `Rf^!`** for every morphism `f` of separated `k`-schemes of
+finite type: there is an isomorphism `γ : Rf_! ⋙ red_Y ≅ red_X ⋙ Rf_!` whose transpose under
+`Rf_! ⊣ Rf^!` is an isomorphism.
 
 Factor `f` through a compactification `X ⟶[i] P ⟶[p] Y`, with `i` an open immersion and `p`
 proper (`AlgebraicGeometry.Compactification.overI_overG`), and compose the comparisons for `i`

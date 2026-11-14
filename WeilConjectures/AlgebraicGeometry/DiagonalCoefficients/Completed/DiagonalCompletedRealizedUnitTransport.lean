@@ -177,7 +177,6 @@ private theorem realization_unit_square_comp
 
 end RealizationSingleSquare
 
-set_option maxHeartbeats 500000 in
 -- The ordinary unit comparison uses concrete sheaf and module instances.
 private theorem completed_ordinary_unit_general
     (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}} (f : X ⟶ S)

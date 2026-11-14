@@ -16,7 +16,7 @@ import Mathlib.RingTheory.RingHom.Flat
 
 /-! # Bounded flat terms in the affine alternating Čech model
 
-Source: blueprint `lem-pc-rf-base-change-flat-module`, Steps 2--3; Stacks Tag 0A1D.
+Source: blueprint `lemma-coherent-base-change-invertible-sheaves--2`, Steps 2--3; Stacks Tag 0A1D.
 -/
 
 @[expose] public section
@@ -27,7 +27,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry
 
 /-- Relative flatness gives flat sections with the specified A-action.
-Source: blueprint `lem-pc-rf-base-change-flat-module`, flatness of the Čech terms.
+Source: blueprint `lemma-coherent-base-change-invertible-sheaves--2`, flatness of the Čech terms.
 Evaluate relative flatness on V and the top affine open of Spec A, then restrict
 scalars along the ring isomorphism ΓSpecIso and use transitivity of flatness. -/
 private theorem flat_affine_sections
@@ -53,7 +53,7 @@ private theorem flat_affine_sections
   · congr 1
 
 /-- The natural-degree section terms are finite products of flat A-modules.
-Source: blueprint `lem-pc-rf-base-change-flat-module`, flatness of the Čech terms.
+Source: blueprint `lemma-coherent-base-change-invertible-sheaves--2`, flatness of the Čech terms.
 Separatedness makes the nonempty finite intersections affine. Apply the section
 calculation to each tuple and identify the finite product with a dependent direct sum. -/
 private theorem flat_alternating_sections
@@ -81,7 +81,7 @@ private theorem flat_alternating_sections
 
 /-- The explicit finite alternating model is termwise flat over
 its affine base. This is about the ordinary complex, without any derived map.
-Source: blueprint `lem-pc-rf-base-change-flat-module`, Steps 2--3; Stacks Tag 0A1D.
+Source: blueprint `lemma-coherent-base-change-invertible-sheaves--2`, Steps 2--3; Stacks Tag 0A1D.
 (blueprint: lem-pc-affine-alternating-cech-model-flat).
 
 Proof: Separatedness over an affine scheme makes all finite intersections of affine

@@ -314,7 +314,6 @@ def UnitTransportHomotopyCompatible {X Y Y' : Scheme.{u}} (s : Y' ⟶ Y) (g : Y 
         _).app K ≫
       (Functor.mapHomotopyCategoryCompIso (Iso.refl ((s ≫ g)^*⟦Λ⟧ ⋙ (s ≫ g)_*⟦Λ⟧)) _).inv.app K
 
-set_option maxHeartbeats 1000000 in
 -- the instances of the general lemmas are found for each of the categories of module objects
 /-- **The derived unit transport is the derived functor of the unit transport** of module
 objects, for finite morphisms (whose pushforwards are exact). -/

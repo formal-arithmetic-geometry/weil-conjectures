@@ -8,6 +8,7 @@ module
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 public import WeilConjectures.CategoryTheory.RingedSiteModules
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.Algebra.Category.Grp.Zero
 public import WeilConjectures.AlgebraicGeometry.CompletedIntegralConstantMapOfUniverses
 public import WeilConjectures.SmoothPurity.Completed.CompletedIntegralCoefficientGerm
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion

@@ -21,7 +21,7 @@ namespace AlgebraicGeometry.ProEtale
 /-- The explicit inverse candidate: apply the inverse f and g Hom bijections to the
 identity at f!g!L, precompose with alpha inverse, then transpose through gf.
 Source: the inverse-transpose argument in the exceptional-composition clause of
-thm-pur-composition-coherence; no inverse is chosen from an existence theorem.
+proposition-compatibility-purity-composition--1; no inverse is chosen from an existence theorem.
 (blueprint: def-pur-standing-composition-inverse). -/
 def standingExceptionalCompositionInverse (P : WeilConjectures.PurityFiniteSetting.{u})
     {X Y S : Scheme.{u}}

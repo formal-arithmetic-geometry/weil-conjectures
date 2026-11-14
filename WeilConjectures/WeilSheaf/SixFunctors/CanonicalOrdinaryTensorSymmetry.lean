@@ -67,7 +67,6 @@ variable {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
 attribute [local instance] SheafOfModules.isMonoidal_W_independentCoefficients
   SheafOfModules.monoidalCategory SheafOfModules.symmetricCategory
 
-set_option maxHeartbeats 1600000 in
 -- Compare the explicit sheaf and module category presentations.
 private theorem left_uncurry_pure
     (P Q I : SheafOfModules.{u}
@@ -90,7 +89,6 @@ private theorem left_uncurry_pure
   rw [Adjunction.homEquiv_unit] at he'
   exact congrArg (fun k ↦ k.app V (x ⊗ₜ[R.obj.obj V] y)) he'
 
-set_option maxHeartbeats 1600000 in
 -- Compare the explicit sheaf and module category presentations.
 private theorem right_uncurry_pure
     (P Q I : SheafOfModules.{u}
@@ -242,7 +240,6 @@ private theorem canonical_inverseHom_evaluation
         (op (Over.mk (𝟙 (AsSmall.up.obj V.unop))))) x at he
   exact he.symm
 
-set_option maxHeartbeats 1600000 in
 -- Compare the explicit sheaf and module category presentations.
 private theorem canonical_inverse_tensor_pure
     (H : AdicModuleHomComparisonCore l Y)
@@ -332,7 +329,6 @@ private theorem pure_tensor_ext
   intro x y
   exact h V x y
 
-set_option maxHeartbeats 1600000 in
 -- Compare the explicit canonical functors and tensor instances.
 /-- The normalized canonical inverse comparison preserves the actual balanced swap.
 Source: Stacks 03EK and 03EO; evaluation on the identity slice and pure tensors.

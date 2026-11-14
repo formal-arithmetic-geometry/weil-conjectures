@@ -41,11 +41,11 @@ of the criterion are:
   curve (blueprint `rem-pc-conventions`).
 - `AlgebraicGeometry.isRepresentable_picardFunctor`: the Picard functor of a smooth projective
   curve over a separably closed field is representable by a group scheme whose group law is the
-  tensor product of invertible modules (blueprint `sk-thm-picard-main`,
-  `thm-pc-picard-representable`).
+  tensor product of invertible modules (blueprint `theorem-picard-scheme-jacobian-over-separably`,
+  `theorem-picard-scheme-jacobian-over-separably--1`).
 - `AlgebraicGeometry.smoothOfRelativeDimension_of_representableBy_picardFunctor`: the Picard
   scheme is smooth of dimension `g`, being covered by translates of an open subscheme of
-  `Hilb^g_{X/k}` (blueprint `thm-sc-theorem-of-the-base`).
+  `Hilb^g_{X/k}` (blueprint `theorem-picard-scheme-jacobian-over-separably`).
 -/
 
 @[expose] public section
@@ -100,7 +100,7 @@ finite-dimensional, hence zero, since `X_K` is proper, and over the affine base 
 quasi-coherent module `R^q f_{K,*} ℒ` is determined by its global sections `H^q(X_K, ℒ)`.
 
 This is the last step of condition (2)(c) in the proof of blueprint
-`thm-pc-picard-representable`. -/
+`theorem-picard-scheme-jacobian-over-separably--1`. -/
 theorem isInvertibleDirectImage_of_finrankH_eq (K : Type u) [Field K] [Algebra k K]
     [∀ T : Over (Spec (.of k)),
       HasInjectiveResolutions (pullback (X ↘ Spec (.of k)) T.hom).Modules]
@@ -270,7 +270,7 @@ smooth of dimension `g`
 and the translates of `F` by `k`-points cover `A` by open subschemes isomorphic to `W`
 (`AlgebraicGeometry.exists_isOpenImmersion_of_representable_open_subfunctor`).
 
-(blueprint: `thm-sc-theorem-of-the-base`, smoothness) -/
+(blueprint: `theorem-picard-scheme-jacobian-over-separably`, smoothness) -/
 theorem smoothOfRelativeDimension_of_representableBy_picardFunctor [IsSepClosed k]
     (A : Over (Spec (.of k))) (e : (picardFunctor (X ↘ Spec (.of k))).obj.RepresentableBy A) :
     SmoothOfRelativeDimension (arithmeticGenus k X) A.hom := by
@@ -304,9 +304,10 @@ projective curve.  Then the Picard functor `Pic_{X/k} = AlgebraicGeometry.picard
 represented by a group scheme `A` over `k`, i.e. by an object of `Over (Spec k)` carrying a
 `CategoryTheory.GrpObj` structure, and the representation respects the group laws
 (`AlgebraicGeometry.IsPicardMul`): the group law of `A` is the tensor product of invertible
-modules (blueprint `rem-pc-group-structure`).
+modules (blueprint `theorem-picard-scheme-jacobian-over-separably--1`).
 
-(blueprint: `sk-thm-picard-main`, `thm-pc-picard-representable`) -/
+(blueprint: `theorem-picard-scheme-jacobian-over-separably`,
+`theorem-picard-scheme-jacobian-over-separably--1`) -/
 theorem isRepresentable_picardFunctor [IsSepClosed k] (f : X ⟶ Spec (.of k))
     [SmoothOfRelativeDimension 1 f] [IsProper f] [GeometricallyIntegral f] :
     ∃ (A : Over (Spec (.of k))) (_ : GrpObj A) (e : (picardFunctor f).obj.RepresentableBy A),

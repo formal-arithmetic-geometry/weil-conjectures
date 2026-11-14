@@ -29,9 +29,9 @@ coefficient field of the rational points.
 
 ## Blueprint
 
-These are the properties of the trace function (blueprint `def-fd-trace-function`,
-`def-weil-local-frobenius-trace`) used in the proof of the Fourier trace formula
-(sketch blueprint `thm-fd-fourier-trace`).
+These are the properties of the trace function (blueprint `definition-trace-function`,
+`definition-trace-function`) used in the proof of the Fourier trace formula
+(sketch blueprint `sec-The-Plancherel-formula`).
 -/
 
 @[expose] public section
@@ -104,10 +104,10 @@ omit [Y.Over (Spec (CommRingCat.of k₀))] in
 theorem trace_frobeniusEnd_stalkAt_eq_of_eq (F : WeilSheaf k₀ l X)
     {s s' : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber}
     (h : s = s') (m : ℕ)
-    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s)
-    (hs' : s' ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s') :
+    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
+      (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ s)
+    (hs' : s' ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
+      (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ s') :
     LinearMap.trace (PadicAlgCl l) _ (F.stalkAt s m hs).frobeniusEnd =
       LinearMap.trace (PadicAlgCl l) _ (F.stalkAt s' m hs').frobeniusEnd := by
   subst h
@@ -131,11 +131,11 @@ traces of the Frobenius agree. -/
 theorem trace_frobeniusEnd_stalkAt_upperStar (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))]
     (F : WeilSheaf k₀ l Y)
     (t : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-    (m : ℕ) (ht : t ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ t)
+    (m : ℕ) (ht : t ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
+      (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ t)
     (ht' : (t ≫ Scheme.Hom.geometricFiberMap φ (comp_over φ (Spec (CommRingCat.of k₀)))) ≫
-      ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫
+      ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
+      (specGeometricFrobenius k₀ ^ m).asIso.hom ≫
         (t ≫ Scheme.Hom.geometricFiberMap φ (comp_over φ (Spec (CommRingCat.of k₀))))) :
     LinearMap.trace (PadicAlgCl l) _ (((upperStar φ).obj F).stalkAt t m ht).frobeniusEnd =
       LinearMap.trace (PadicAlgCl l) _ (F.stalkAt _ m ht').frobeniusEnd := by

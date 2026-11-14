@@ -96,7 +96,7 @@ public import WeilConjectures.Algebra.Homology.SixFunctors.LocalizedSiteTensorRe
 /-! # Slice restriction of evaluation, transpose and Koszul symmetry
 
 Source: Stacks Project, Tags 07A4, 08J9, 08JB, 08FI and 03EL;
-main-20261015 blueprint, `lem-weil-delta-restriction`, final paragraph
+main-20261015 blueprint, `corollary-verdier-exchange-formulas--5`, final paragraph
 (blueprint: lem-weil-pbc-ringed-slice-evaluation-transpose).
 
 The comparison data below retain their representative characterizations. In particular,
@@ -210,7 +210,6 @@ def RingedSliceFlatRestriction (U : C) : Prop :=
       A.over U)
       (((ringedSliceComplexRestriction.{c, v, u} J A U).obj P).X n)
 
-set_option maxHeartbeats 600000 in
 -- The two-variable representative squares have long dependent endpoint types.
 /-- Categorical data for the slice comparisons, normalized by the following predicates.
 The tensor comparisons are identity on sheafified pure-tensor summands. The Hom
@@ -252,7 +251,6 @@ structure RingedSliceEvaluationComparisons
   /-- Preservation of the specified resolving class. -/
   kflat : K
 
-set_option maxHeartbeats 600000 in
 -- Elaborate the dependent representative square without changing the file time limit.
 /-- Canonical pure-tensor normalization of rho, including its localization square.
 Source: Stacks 07A4, 08J9 and 08JB
@@ -308,7 +306,6 @@ def RingedSliceTensorModel (U : C)
           ((ringedSliceComplexRestriction.{c, v, u} J A U).obj Q)
           (d.kflat P hP fP).1 (d.kflat Q hQ fQ).1).hom
 
-set_option maxHeartbeats 600000 in
 -- Elaborate the dependent representative square without changing the file time limit.
 /-- Canonical local-family normalization of eta, including the fixed K-injective comparisons.
 Source: Stacks 07A4, 08J9 and 08JB
@@ -365,7 +362,6 @@ def RingedSliceHomModel (U : C)
           (((ringedSliceLocalizationIso.{c, v, u, w, w'} J A U).inv.app L).op,
             (ringedSliceLocalizationIso.{c, v, u, w, w'} J A U).hom.app I) ≫ κU.hom
 
-set_option maxHeartbeats 600000 in
 -- Elaborate the dependent representative square without changing the file time limit.
 /-- Koszul normalization of the source symmetry on total-tensor representatives.
 Source: Stacks 07A4, 08J9 and 08JB
@@ -398,7 +394,6 @@ def RingedSliceKoszulModel (U : C)
         (d.sigma (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj Q)).hom =
       DerivedCategory.Q.map β.hom ≫ (T.iso J A S Q P hQ hP).hom
 
-set_option maxHeartbeats 600000 in
 -- Elaborate the dependent representative square without changing the file time limit.
 /-- Koszul normalization of the slice symmetry on total-tensor representatives.
 Source: Stacks 07A4, 08J9 and 08JB

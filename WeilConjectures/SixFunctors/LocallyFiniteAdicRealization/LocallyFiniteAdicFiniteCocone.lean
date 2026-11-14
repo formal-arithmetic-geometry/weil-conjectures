@@ -176,7 +176,6 @@ private theorem sixfold_reassoc
 
 -- Keep the named equivalence available when elaborating its shift data.
 set_option cleanup.letToHave false in
-set_option maxHeartbeats 600000 in
 /-- The finite-field tensor realizations form a normalized coherent cocone.
 
 Source: Bhatt--Scholze, Proposition 6.8.11(3), Proposition 6.8.14(2) and Remark 6.8.15;
@@ -267,26 +266,12 @@ theorem finiteCocone_exists
         rationalTensorTransition_inv_tower l X C h k K]
     integral := fun E ↦ nativeIntegralIso (stageLocalization l X E)
       (rationalTensor l X C E) e (rationalTensorIntegral l X C E) }
-  have ih (E : Index l (PadicAlgCl l))
-      (K : sfIntegralConstructibleCategory l (Coefficient.{u} l (PadicAlgCl l) E) X) :
-      (A.integral E).hom.app K =
-        e.counitIso.hom.app ((rationalTensor l X C E).obj
-          ((stageLocalization l X E).obj K)) ≫ (rationalTensorIntegral l X C E).hom.app K := by
-    with_unfolding_all exact nativeIntegralIso_hom _ _ _ _ K
-  have ii (E : Index l (PadicAlgCl l))
-      (K : sfIntegralConstructibleCategory l (Coefficient.{u} l (PadicAlgCl l) E) X) :
-      (A.integral E).inv.app K = (rationalTensorIntegral l X C E).inv.app K ≫
-        e.counitIso.inv.app ((rationalTensor l X C E).obj
-          ((stageLocalization l X E).obj K)) := by
-    with_unfolding_all exact nativeIntegralIso_inv _ _ _ _ K
-  have ti {E L : Index l (PadicAlgCl l)} (h : E ≤ L)
-      (K : GeneralAlgebraicallyClosedCoefficients.Stage l (PadicAlgCl l) X E) :
-      (A.ι h).inv.app K = e.inverse.map ((rationalTensorTransition l X C h).hom.app K) := by
-    with_unfolding_all exact nativeTransitionIso_inv _ _ _ K
   refine ⟨{ toFiniteCoconeData := A, normalization := ?_ }⟩
   unfold FiniteCoconeData.normalized
   intro E L h K
-  with_unfolding_all rw [ti, ih, ii]
+  -- Reduce the cocone projections directly before simplifying their components.
+  with_unfolding_all simp only [A, nativeTransitionIso_inv,
+    nativeIntegralIso_hom, nativeIntegralIso_inv]
   with_unfolding_all
     change HEq
       (e.functor.map (e.inverse.map
@@ -294,7 +279,7 @@ theorem finiteCocone_exists
   have hn := rationalTensorTransition_native_normalization l X C e h K
   have hb := congrArg Iso.inv (integralTensorBalancing_app l X C h K.obj)
   change (integralTensorBalancing l X C h).inv.app K.obj = _ at hb
-  with_unfolding_all rw [integralTensorComparison_app l X C h K, hb] at hn
+  with_unfolding_all simp only [integralTensorComparison_app l X C h K, hb] at hn
   with_unfolding_all refine HEq.trans hn (heq_of_eq ?_)
   with_unfolding_all exact sixfold_reassoc _ _ _ _ _ _
 

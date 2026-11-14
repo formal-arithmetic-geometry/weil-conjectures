@@ -13,7 +13,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.Der
 /-!
 # Proper exchange along a commuting triangle
 
-Source: blueprint det-sf-comp-composition-base-change, proof (3), proper mate pasting.
+Source: blueprint proposition-composition-base-change-rf-shriek--4, proof (3), proper mate pasting.
 -/
 
 @[expose] public noncomputable section
@@ -43,7 +43,7 @@ end CategoryTheory
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- Direct-image composition followed by the specified equality of scheme maps.
-Source: blueprint det-sf-comp-composition-base-change, proof (3).
+Source: blueprint proposition-composition-base-change-rf-shriek--4, proof (3).
 (blueprint: lem-sfb-compact-support-proper-triangle). -/
 def compactSupportPushforwardTriangle
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -55,7 +55,7 @@ def compactSupportPushforwardTriangle
     Functor.rightDerivedFunctorNatIso (lowerStarCongr Λ e)
 
 /-- Pull back a morphism of triangles to the two literal fibre products.
-Source: blueprint det-sf-comp-composition-base-change, proof (3).
+Source: blueprint proposition-composition-base-change-rf-shriek--4, proof (3).
 (blueprint: lem-sfb-compact-support-proper-triangle). -/
 def compactSupportTrianglePullback
     {A B Y Y' : Scheme.{u}} (a : A ⟶ B) (p : B ⟶ Y) (q : A ⟶ Y)
@@ -136,7 +136,6 @@ private theorem pull_eq_exact {X Y : Scheme.{u}} {f g : X ⟶ Y} (h : f = g) :
         eqToIso (congrArg (exactUpper Λ) h) := by
   cases h
   simp
-set_option maxHeartbeats 1000000 in
 -- Derived-functor instance synthesis and kernel conversion need a higher limit.
 private theorem square_exact {X' X Y' Y : Scheme.{u}}
     {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
@@ -163,17 +162,11 @@ private theorem square_exact {X' X Y' Y : Scheme.{u}}
   rw [pull_eq_exact Λ sq.toCommSq.w.symm]
   simp only [exactSquare, Iso.trans_assoc,
     Iso.symm_self_id_assoc]
-set_option maxHeartbeats 1000000 in
 -- Derived-functor instance synthesis and kernel conversion need a higher limit.
-set_option maxHeartbeats 1000000 in
 -- Derived-functor instance synthesis and kernel conversion need a higher limit.
-set_option maxHeartbeats 1000000 in
 -- Derived-functor instance synthesis and kernel conversion need a higher limit.
-set_option maxHeartbeats 1000000 in
 -- Derived-functor instance synthesis and kernel conversion need a higher limit.
-set_option maxHeartbeats 1000000 in
 -- Derived-functor instance synthesis and kernel conversion need a higher limit.
-set_option maxHeartbeats 1000000 in
 -- Derived-functor instance synthesis and kernel conversion need a higher limit.
 private theorem triangle_assoc {A B C D : Scheme.{u}}
     (s : A ⟶ B) (a : B ⟶ C) (p : C ⟶ D) (q : B ⟶ D)

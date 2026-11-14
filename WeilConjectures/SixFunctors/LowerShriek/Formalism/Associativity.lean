@@ -17,7 +17,7 @@ For a tower of compactifications `𝒯` of composable morphisms `f`, `g`, `h`
 triangles of `𝒯` agree (`compIso_tower`): this is a pasting identity for the exchange maps of
 the squares of the tower. Combined with the independence of the triangles, it gives the
 associativity of the canonical composition isomorphism `F.lowerShriekCompIso`
-(`lowerShriekCompIso_assoc`, blueprint `sk-thm-sf-comp-composition`).
+(`lowerShriekCompIso_assoc`, blueprint `proposition-composition-base-change-rf-shriek--1`).
 -/
 
 @[expose] public section
@@ -41,9 +41,9 @@ theorem compIso_tower (𝒯 : Compactification.Tower f g h) :
   have := HasBaseChange.isIso_baseChange (F := F) 𝒯.isPullback_fg
   have := HasBaseChange.isIso_baseChange (F := F) 𝒯.isPullback_gh
   have := HasBaseChange.isIso_baseChange (F := F) 𝒯.isPullback_mid
-  have : IsIso (F.baseChange 𝒯.cf.g (𝒯.q ≫ 𝒯.q') 𝒯.cgh.i 𝒯.p₁ 𝒯.f_gh.isPullback.w).natTrans :=
+  have : IsIso (F.baseChange 𝒯.cf.g (𝒯.q ≫ 𝒯.q') 𝒯.cgh.i 𝒯.p₁ 𝒯.f_gh.isPullback.w) :=
     HasBaseChange.isIso_baseChange (F := F) 𝒯.f_gh.isPullback
-  have : IsIso (F.baseChange 𝒯.cfg.g 𝒯.q' 𝒯.ch.i (𝒯.p₁ ≫ 𝒯.p₂) 𝒯.fg_h.isPullback.w).natTrans :=
+  have : IsIso (F.baseChange 𝒯.cfg.g 𝒯.q' 𝒯.ch.i (𝒯.p₁ ≫ 𝒯.p₂) 𝒯.fg_h.isPullback.w) :=
     HasBaseChange.isIso_baseChange (F := F) 𝒯.fg_h.isPullback
   ext K
   have hV := congr_app (F.exchange_paste_vert 𝒯.cf.g 𝒯.p 𝒯.p₁ 𝒯.q 𝒯.cg.i 𝒯.q' 𝒯.q₂
@@ -66,10 +66,10 @@ theorem compIso_tower (𝒯 : Compactification.Tower f g h) :
   have hSC := F.shComp'_assoc_inv_app 𝒯.cf.i 𝒯.q 𝒯.q' 𝒯.cfg.i (𝒯.q ≫ 𝒯.q') 𝒯.cfgh.i 𝒯.i_q rfl
     𝒯.i_q' 𝒯.f_gh.i_q K
   -- naturality
-  have hεgh := (F.exchange 𝒯.cg.g 𝒯.q₂ 𝒯.ch.i 𝒯.p₂ 𝒯.isPullback_gh.w).natTrans.naturality
-    ((F.exchange 𝒯.cf.g 𝒯.q 𝒯.cg.i 𝒯.p 𝒯.isPullback_fg.w).natTrans.app ((F.sh 𝒯.cf.i).obj K) ≫
+  have hεgh := (F.exchange 𝒯.cg.g 𝒯.q₂ 𝒯.ch.i 𝒯.p₂ 𝒯.isPullback_gh.w).naturality
+    ((F.exchange 𝒯.cf.g 𝒯.q 𝒯.cg.i 𝒯.p 𝒯.isPullback_fg.w).app ((F.sh 𝒯.cf.i).obj K) ≫
       (F.pf 𝒯.p).map ((F.shComp' 𝒯.cf.i 𝒯.q 𝒯.cfg.i 𝒯.i_q).inv.app K))
-  have hεR := (F.exchange 𝒯.p 𝒯.q' 𝒯.q₂ 𝒯.p₁ 𝒯.isPullback_mid.w).natTrans.naturality
+  have hεR := (F.exchange 𝒯.p 𝒯.q' 𝒯.q₂ 𝒯.p₁ 𝒯.isPullback_mid.w).naturality
     ((F.shComp' 𝒯.cf.i 𝒯.q 𝒯.cfg.i 𝒯.i_q).inv.app K)
   have hP := (F.pfComp' 𝒯.p₁ 𝒯.p₂ (𝒯.p₁ ≫ 𝒯.p₂) rfl).inv.naturality
     ((F.shComp' 𝒯.cfg.i 𝒯.q' 𝒯.cfgh.i 𝒯.i_q').inv.app K)
@@ -147,7 +147,7 @@ lemma shriekIso_copy_trans_congr {u u' : X ⟶ Y} [HasCompactification u]
 
 /-- **Associativity of the composition isomorphism**: for composable `f`, `g`, `h`, the two
 isomorphisms `Rf_! ⋙ Rg_! ⋙ Rh_! ≅ R(f ≫ g ≫ h)_!` agree.
-(blueprint: `sk-thm-sf-comp-composition`) -/
+(blueprint: `proposition-composition-base-change-rf-shriek--1`) -/
 theorem lowerShriekCompIso_assoc (f : X ⟶ Y) (g : Y ⟶ S) (h : S ⟶ T) [HasCompactification f]
     [HasCompactification g] [HasCompactification h] [HasCompactification (f ≫ g)]
     [HasCompactification (g ≫ h)] [HasCompactification ((f ≫ g) ≫ h)]

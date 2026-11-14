@@ -35,7 +35,7 @@ coproducts indexed by types in `Type v`.
 
 These are the ingredients of the proof of Brown representability, Stacks Tag 0F5Y (via Stacks
 Lemma 13.38.1 for the derived category of a ring), used in the blueprint node
-`thm-amb-etale-exceptional-adjoint`.
+`theorem-existence-exceptional-inverse-image--1`.
 -/
 
 @[expose] public section

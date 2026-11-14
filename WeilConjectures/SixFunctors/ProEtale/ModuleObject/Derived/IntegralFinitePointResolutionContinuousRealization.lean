@@ -209,10 +209,35 @@ local instance (ell : ℕ) [Fact ell.Prime] (E : PadicAlgCl.FiniteIntermediateFi
   ContinuousSMul.induced
     (ULift.moduleEquiv : ULift.{u + 1} (PadicAlgCl.integers ell E.1) ≃ₗ[_] _)
 
+-- Exactness under a change of coordinates is independent of the concrete section types.
+private lemma resolution_conjugate_exact
+    {X Y X' Y' : Type*} [AddCommGroup X] [AddCommGroup Y]
+    [AddCommGroup X'] [AddCommGroup Y'] (e : X ≃+ X') (d : Y ≃+ Y')
+    (F : X' →+ X') (G : X' →+ Y') (h : Function.Exact F G) :
+    Function.Exact (fun b ↦ e.symm (F (e b))) (fun b ↦ d.symm (G (e b))) := by
+  intro b
+  constructor
+  · intro hb
+    have hb' : G (e b) = 0 := by
+      apply d.symm.injective
+      simpa only [map_zero] using hb
+    obtain ⟨c, hc⟩ := (h _).1 hb'
+    refine ⟨e.symm c, ?_⟩
+    change e.symm (F (e (e.symm c))) = b
+    rw [AddEquiv.apply_symm_apply, hc, AddEquiv.symm_apply_apply]
+  · rintro ⟨c, rfl⟩
+    change d.symm (G (e (e.symm (F (e c))))) = 0
+    rw [AddEquiv.apply_symm_apply, (h _).2 ⟨e c, rfl⟩, map_zero]
+
+private lemma resolution_conjugate_zero
+    {X Y X' Y' : Type*} [AddCommGroup X] [AddCommGroup Y]
+    [AddCommGroup X'] [AddCommGroup Y'] (e : X ≃+ X') (d : Y ≃+ Y')
+    (F : X' →+ X') (G : X' →+ Y') (h : Function.Exact F G) (b : X) :
+    d.symm (G (e (e.symm (F (e b))))) = 0 :=
+  (resolution_conjugate_exact e d F G h _).2 ⟨b, rfl⟩
+
 set_option linter.unusedVariables false in
 -- The supplied section family subsumes the retained scalar-continuity hypothesis.
-set_option maxHeartbeats 2000000 in
--- Elaborating the mixed-universe module maps and their action comparisons needs this budget.
 /-- Realize a sectionwise exact lifted resolution as a short exact point-module complex.
 
 Source: the sectionwise short-exact criterion, finite-coordinate biproduct comparison, and
@@ -314,8 +339,9 @@ theorem integralFinitePointResolution_continuous_realization
         change ((F Q.unop (e Q.unop (ULift.up
           (b.down.comp q.unop.hom.hom)))).down x i).down =
           ((F P.unop (e P.unop b)).down (q.unop.hom.hom x) i).down
-        rw [hF, hF]
-        rfl }⟩
+        exact congrArg (fun v ↦ (v i).down)
+          ((hF Q.unop (e Q.unop (ULift.up (b.down.comp q.unop.hom.hom))) x).trans
+            (hF P.unop (e P.unop b) (q.unop.hom.hom x)).symm) }⟩
   let GG : resolutionAb S ⟶ resolutionAb T :=
     ⟨{ app P := AddCommGrpCat.ofHom
         ((d P.unop).symm.toAddMonoidHom.comp ((G P.unop).comp
@@ -327,8 +353,9 @@ theorem integralFinitePointResolution_continuous_realization
         change ((G Q.unop (e Q.unop (ULift.up
           (b.down.comp q.unop.hom.hom)))).down x).down =
           ((G P.unop (e P.unop b)).down (q.unop.hom.hom x)).down
-        rw [hG, hG]
-        rfl }⟩
+        exact congrArg ULift.down
+          ((hG Q.unop (e Q.unop (ULift.up (b.down.comp q.unop.hom.hom))) x).trans
+            (hG P.unop (e P.unop b) (q.unop.hom.hom x)).symm) }⟩
   let FM : M ⟶ M := resolutionModMap R S S (resolutionDiagonal O r)
     (resolutionDiagonal O r) FF (by
       intro P c b
@@ -351,11 +378,8 @@ theorem integralFinitePointResolution_continuous_realization
   have hzero : FM ≫ GM = 0 := by
     apply Mod.hom_ext
     ext P b
-    apply (d P.unop).injective
-    change G P.unop ((e P.unop) ((e P.unop).symm
-      (F P.unop (e P.unop b)))) = d P.unop 0
-    rw [AddEquiv.apply_symm_apply, map_zero]
-    exact (hEx P.unop _).2 ⟨e P.unop b, rfl⟩
+    exact resolution_conjugate_zero (e P.unop) (d P.unop)
+      (F P.unop) (G P.unop) (hEx P.unop) b
   let C := ShortComplex.mk FM GM hzero
   have hC : C.ShortExact := by
     let U := Mod.forget (D := Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -368,24 +392,9 @@ theorem integralFinitePointResolution_continuous_realization
         (e P.unop).symm.injective.comp ((hFi P.unop).comp (e P.unop).injective)
       have hu : Function.Surjective (B.g.app P) :=
         (d P.unop).symm.surjective.comp ((hGu P.unop).comp (e P.unop).surjective)
-      have hx : Function.Exact (B.f.app P) (B.g.app P) := by
-        intro b
-        constructor
-        · intro hb
-          have hb' : G P.unop (e P.unop b) = 0 := by
-            apply (d P.unop).symm.injective
-            change (d P.unop).symm (G P.unop (e P.unop b)) = 0 at hb
-            simpa only [map_zero] using hb
-          obtain ⟨c, hc⟩ := (hEx P.unop _).1 hb'
-          refine ⟨(e P.unop).symm c, ?_⟩
-          change (e P.unop).symm (F P.unop
-            (e P.unop ((e P.unop).symm c))) = b
-          rw [AddEquiv.apply_symm_apply, hc, AddEquiv.symm_apply_apply]
-        · rintro ⟨c, rfl⟩
-          change (d P.unop).symm (G P.unop (e P.unop
-            ((e P.unop).symm (F P.unop (e P.unop c))))) = 0
-          rw [AddEquiv.apply_symm_apply, (hEx P.unop _).2 ⟨e P.unop c, rfl⟩,
-            map_zero]
+      have hx : Function.Exact (B.f.app P) (B.g.app P) :=
+        resolution_conjugate_exact (e P.unop) (d P.unop)
+          (F P.unop) (G P.unop) (hEx P.unop)
       exact ShortComplex.ShortExact.mk' ((ShortComplex.ab_exact_iff_function_exact _).2 hx)
         ((AddCommGrpCat.mono_iff_injective _).2 hi)
         ((AddCommGrpCat.epi_iff_surjective _).2 hu)

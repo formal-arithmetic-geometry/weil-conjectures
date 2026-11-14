@@ -88,11 +88,11 @@ instance isIso_mateEquiv_condensedRealizationUpperStarIso :
     IsIso (mateEquiv (upperStarLowerStarAdjunction k₀ l g)
       (CondensedRing.upperStarLowerStarAdjunction (Profinite.padicAlgClRingObj l)
         (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))))
-      (condensedRealizationUpperStarIso k₀ l g).hom).natTrans := by
+      (condensedRealizationUpperStarIso k₀ l g).hom) := by
   have h₁ : IsIso (mateEquiv (upperStarLowerStarAdjunction k₀ l g)
       (adicUpperStarLowerStarAdjunction l
         (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))))
-      (IsoAlgebra.mapOfNatIsoCompForgetIso _).symm.hom).natTrans :=
+      (IsoAlgebra.mapOfNatIsoCompForgetIso _).symm.hom) :=
     IsoAlgebra.isIso_mateEquiv_mapOfNatIsoCompForgetIso_inv _ _ _ _
   have h₂ : IsIso (mateEquiv (adicUpperStarLowerStarAdjunction l
         (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))))
@@ -100,7 +100,7 @@ instance isIso_mateEquiv_condensedRealizationUpperStarIso :
         (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))))
       (adicUpperStarCompCondensedModIso l
         (Scheme.Hom.geometricFiberMap g
-          (comp_over g (Spec (CommRingCat.of k₀))))).symm.hom).natTrans := by
+          (comp_over g (Spec (CommRingCat.of k₀))))).symm.hom) := by
     rw [NatTrans.isIso_iff_isIso_app]
     intro M
     exact Adjunction.isIso_mateEquiv_app_of_isIso _ _ _
@@ -131,7 +131,7 @@ instance isIso_mateEquiv_derivedCondensedRealizationUpperStarIso :
     IsIso (mateEquiv (derivedUpperStarLowerStarAdjunction k₀ l g)
       (CondensedRing.derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj l)
         (Scheme.Hom.geometricFiberMap g (comp_over g (Spec (CommRingCat.of k₀)))))
-      (derivedCondensedRealizationUpperStarIso k₀ l g).hom).natTrans :=
+      (derivedCondensedRealizationUpperStarIso k₀ l g).hom) :=
   Adjunction.isIso_mateEquiv_derivedAdjunction_leftDerivedFunctorSquareIso
     (upperStarLowerStarAdjunction k₀ l g)
     (CondensedRing.upperStarLowerStarAdjunction (Profinite.padicAlgClRingObj l)

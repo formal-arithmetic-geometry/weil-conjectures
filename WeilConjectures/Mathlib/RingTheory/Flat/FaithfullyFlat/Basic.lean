@@ -7,6 +7,7 @@ module
 
 public import Mathlib.RingTheory.AdjoinRoot
 public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
+public import Mathlib.LinearAlgebra.TensorProduct.Quotient
 
 /-!
 # Adjoining a root of a monic polynomial is faithfully flat
@@ -52,7 +53,7 @@ namespace Module.Flat
 /-- **Flatness descends along faithfully flat algebras.** If `C` is faithfully flat over `B` and
 flat over `A`, then `B` is flat over `A`: for an injection `N ⟶ P` of `A`-modules, the map
 `B ⊗ N ⟶ B ⊗ P` becomes, after `C ⊗_B -`, the injective map `C ⊗ N ⟶ C ⊗ P`.
-(blueprint: `lem-weil-pbc-flat-algebra-faithfully-flat-descent`) -/
+(blueprint: `theorem-finite-etale-covers-proper-henselian--2`) -/
 theorem of_flat_of_faithfullyFlat {A B C : Type*} [CommRing A] [CommRing B]
     [CommRing C] [Algebra A B] [Algebra B C] [Algebra A C] [IsScalarTower A B C]
     [Module.FaithfullyFlat B C] [Module.Flat A C] : Module.Flat A B := by
@@ -91,5 +92,5 @@ lemma Module.FaithfullyFlat.of_nontrivial_tensor_quotient
     Module.FaithfullyFlat R M where
   submodule_ne_top m hm := by
     rw [ne_eq, ← Submodule.Quotient.subsingleton_iff, not_subsingleton_iff_nontrivial,
-      (TensorProduct.quotTensorEquivQuotSMul M m).symm.nontrivial_congr]
+      (TensorProduct.quotTensorEquivQuotSMul M m).symm.toEquiv.nontrivial_congr]
     exact H m hm

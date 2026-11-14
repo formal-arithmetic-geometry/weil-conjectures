@@ -19,6 +19,7 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
 import WeilConjectures.Algebra.Homology.KFlatPullback
 import WeilConjectures.Algebra.Homology.KFlatResolution
 import WeilConjectures.Algebra.Homology.KFlatTelescopeClosure
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # The relative Tor bound on a strictly perfect chart
 

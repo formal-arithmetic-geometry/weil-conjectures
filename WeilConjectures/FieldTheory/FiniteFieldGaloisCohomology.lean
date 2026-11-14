@@ -26,7 +26,7 @@ image of `ker χ` in `Gal(E/k)` lies in `Gal(E/k_{ℓ ^ b})`, of order `n'`.
 
 Hence `(G, χ, φ)` is an `ℓ`-adic procyclic quotient (`DiscreteModule.IsEllAdicQuotient`), and
 `Hᵠ(G, M) = 0` for `q ≥ 2` and every `ℓ`-primary discrete `G`-module `M`, for every prime `ℓ`
-(blueprint `sk-lem-base-field-cd`).
+(blueprint `lemma-cohomological-dimension-base-field`).
 
 ## Main statements
 
@@ -231,9 +231,9 @@ theorem exists_isEllAdicQuotient [IsAlgClosed Ω] [Algebra.IsAlgebraic k Ω] (�
   exact Nat.pow_succ_factorization_not_dvd hn0 (Fact.out : ℓ.Prime) h4
 
 omit [Fintype k] in
-/-- Blueprint `sk-lem-base-field-cd` (Galois cohomology form): the absolute Galois group of a
-finite field has `ℓ`-cohomological dimension one, for every prime `ℓ`: `Hᵠ(Gal(Ω/k), M) = 0` for
-`q > 1` and every `ℓ`-primary discrete `Gal(Ω/k)`-module `M`. -/
+/-- Blueprint `lemma-cohomological-dimension-base-field` (Galois cohomology form): the absolute
+Galois group of a finite field has `ℓ`-cohomological dimension one, for every prime `ℓ`:
+`Hᵠ(Gal(Ω/k), M) = 0` for `q > 1` and every `ℓ`-primary discrete `Gal(Ω/k)`-module `M`. -/
 theorem subsingleton_H_galois [Finite k] [IsAlgClosed Ω] [Algebra.IsAlgebraic k Ω] (ℓ : ℕ)
     [Fact ℓ.Prime] (M : DiscreteModule.{w} Gal(Ω/k)) (hM : DiscreteModule.IsPrimary ℓ M) {q : ℕ}
     (hq : 1 < q) : Subsingleton (DiscreteModule.H Gal(Ω/k) M q) := by

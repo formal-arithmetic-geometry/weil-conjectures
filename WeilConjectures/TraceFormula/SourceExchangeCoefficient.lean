@@ -16,7 +16,8 @@ For `g ≫ b = c ≫ q`, `q ≫ p₁ = p₁' ≫ f` and `q ≫ p₂ = p₂' ≫ 
 maps `Rp₁_! Rb_! Lb^* Lp₂^* Rf_* K ⟶ Rf_! Rc₁_! Lc₂^* K` built from the unit of `g`, the counit
 of `f` and the composition isomorphisms agree
 (`ProEtale.CondensedRing.lowerShriek_pushforwardCoeff_coherence`). This is the coherence part of
-the class of the coefficient pushforward (blueprint `lem-trf-trace-source-exchange`, Step 2).
+the class of the coefficient pushforward (blueprint
+`theorem-proper-pushforward-lefschetz-verdier--1`, Step 2).
 
 -/
 
@@ -186,8 +187,6 @@ lemma map_unit_comp_lowerShriekIsoLowerStar_inv (g : C ⟶ D) [IsProper g.left]
   rewrite [reassoc_of% h₁, ← (boundedConstructibleLowerStar ℓ g).map_comp_assoc, h₂]
   simp only [Functor.map_comp, Category.assoc]
 
-set_option maxHeartbeats 4000000 in
--- the compactly supported direct images are unfolded in the defeq checks
 /-- The coherence part of the class of the coefficient pushforward: for `g ≫ b = c ≫ q`,
 `q ≫ p₁ = p₁' ≫ f`, `q ≫ p₂ = p₂' ≫ f` with `g`, `f` proper, the two maps
 `Rp₁_! Rb_! Lb^* Lp₂^* Rf_* K ⟶ Rf_! Rc₁_! Lc₂^* K` agree. -/
@@ -291,7 +290,7 @@ theorem lowerShriek_pushforwardCoeff_coherence (g : C ⟶ D) [IsProper g.left] (
           (boundedConstructibleLowerShriek ℓ c₁).obj
               ((boundedConstructibleUpperStar _ ℓ c₂).obj K))) := by
   subst hb₁ hb₂ hc₁ hc₂
-  rewrite [eqToHom_refl ((boundedConstructibleUpperStar _ ℓ (b ≫ p₂)).obj
+  simp only [eqToHom_refl ((boundedConstructibleUpperStar _ ℓ (b ≫ p₂)).obj
       ((boundedConstructibleLowerStar ℓ f).obj K)),
     eqToHom_refl ((boundedConstructibleLowerShriek ℓ (b ≫ p₁)).obj
       ((boundedConstructibleUpperStar _ ℓ (b ≫ p₂)).obj
@@ -300,10 +299,10 @@ theorem lowerShriek_pushforwardCoeff_coherence (g : C ⟶ D) [IsProper g.left] (
     eqToHom_refl ((boundedConstructibleLowerShriek ℓ (c ≫ p₁')).obj
       ((boundedConstructibleUpperStar _ ℓ (c ≫ p₂')).obj K))]
   simp only [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
-  rewrite [lowerShriekComp_inv_app_naturality_assoc ℓ b p₁
+  simp only [lowerShriekComp_inv_app_naturality_assoc ℓ b p₁
     ((boundedConstructibleUpperStarComp _ ℓ b p₂).inv.app
         ((boundedConstructibleLowerStar ℓ f).obj K))]
-  rewrite [map_unit_comp_lowerShriekIsoLowerStar_inv ℓ g
+  simp only [map_unit_comp_lowerShriekIsoLowerStar_inv ℓ g
     (E := (boundedConstructibleUpperStar _ ℓ (c ≫ p₂')).obj K)
     ((boundedConstructibleUpperStarComp _ ℓ b p₂).inv.app
         ((boundedConstructibleLowerStar ℓ f).obj K))
@@ -316,29 +315,29 @@ theorem lowerShriek_pushforwardCoeff_coherence (g : C ⟶ D) [IsProper g.left] (
         ((boundedConstructibleUpperStarLowerStarAdjunction ℓ f).counit.app K))
     (boundedConstructibleLowerShriek ℓ (b ≫ p₁))]
   dsimp only [Functor.comp_obj]
-  rewrite [lowerShriekComp_inv_app_naturality_assoc ℓ g (b ≫
+  simp only [lowerShriekComp_inv_app_naturality_assoc ℓ g (b ≫
       p₁), lowerShriek_map_comp_eqToHom'_assoc ℓ w₁,
     lowerShriekComp_hom_app_naturality ℓ (c ≫ p₁') f]
   dsimp only [Functor.comp_obj]
-  rewrite [← lowerShriekComp_inv_app_naturality_assoc ℓ b p₁
+  simp only [← lowerShriekComp_inv_app_naturality_assoc ℓ b p₁
       (M := (boundedConstructibleUpperStar _ ℓ b).obj ((boundedConstructibleUpperStar _ ℓ p₂).obj
         ((boundedConstructibleLowerStar ℓ f).obj K)))
       ((boundedConstructibleUpperStarLowerStarAdjunction ℓ g).unit.app
         ((boundedConstructibleUpperStar _ ℓ b).obj ((boundedConstructibleUpperStar _ ℓ p₂).obj
           ((boundedConstructibleLowerStar ℓ f).obj K))))]
   dsimp only [Functor.comp_obj]
-  rewrite [← lowerShriekComp_inv_app_naturality_assoc ℓ b p₁
+  simp only [← lowerShriekComp_inv_app_naturality_assoc ℓ b p₁
       ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ g).inv.app
         ((boundedConstructibleUpperStar _ ℓ g).obj ((boundedConstructibleUpperStar _ ℓ b).obj
           ((boundedConstructibleUpperStar _ ℓ p₂).obj
               ((boundedConstructibleLowerStar ℓ f).obj K)))))]
-  rewrite [lowerShriekComp_pushforwardSquare_assoc ℓ g b c q p₁ p₁' f hgq hq₁ w₁]
+  simp only [lowerShriekComp_pushforwardSquare_assoc ℓ g b c q p₁ p₁' f hgq hq₁ w₁]
   refine whisker_eq _ (whisker_eq _ ?_)
-  rewrite [map_lowerShriekComp_inv_app_naturality_assoc ℓ g b _
+  simp only [map_lowerShriekComp_inv_app_naturality_assoc ℓ g b _
       (boundedConstructibleLowerShriek ℓ p₁)]
-  rewrite [map_lowerShriek_map_comp_eqToHom_comp_lowerShriekComp_hom_app ℓ c q hgq]
-  rewrite [lowerShriekSquareIso_hom_app_naturality_assoc ℓ hq₁]
-  rewrite [map_lowerShriek_map₄_comp_lowerShriekComp_inv_app ℓ c p₁']
+  simp only [map_lowerShriek_map_comp_eqToHom_comp_lowerShriekComp_hom_app ℓ c q hgq]
+  simp only [lowerShriekSquareIso_hom_app_naturality_assoc ℓ hq₁]
+  simp only [map_lowerShriek_map₄_comp_lowerShriekComp_inv_app ℓ c p₁']
   refine whisker_eq _ (whisker_eq _ (whisker_eq _ (whisker_eq _ (whisker_eq _ ?_))))
   refine congrArg (fun t ↦ (boundedConstructibleLowerShriek ℓ f).map
     ((boundedConstructibleLowerShriek ℓ (c ≫ p₁')).map t)) ?_
@@ -348,11 +347,11 @@ theorem lowerShriek_pushforwardCoeff_coherence (g : C ⟶ D) [IsProper g.left] (
     ((boundedConstructibleUpperStarLowerStarAdjunction ℓ f).counit.app K)
   simp only [Functor.comp_map] at hε
   dsimp only [Functor.id_obj] at hε
-  rewrite [eqToHom_upperStar_tensor ℓ hgq]
+  simp only [eqToHom_upperStar_tensor ℓ hgq]
   simp only [Category.assoc, ← comp_whiskerRight_assoc, ← comp_whiskerRight]
-  rewrite [MonoidalCategory.rightUnitor_inv_comp_whiskerRight_comp_hom_assoc]
+  simp only [MonoidalCategory.rightUnitor_inv_comp_whiskerRight_comp_hom_assoc]
   simp only [prodUpperStarCounit, Functor.map_comp, Category.assoc]
-  rewrite [hε, reassoc_of% hs]
+  simp only [hε, reassoc_of% hs]
   simp only [Functor.map_comp, Category.assoc]
   dsimp only [Functor.comp_obj]
 

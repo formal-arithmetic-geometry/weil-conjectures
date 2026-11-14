@@ -232,7 +232,6 @@ abbrev Hom.toGeneric {f : X ⟶ Y} {f' : X' ⟶ Y'} (φ : M.Hom N f f') :
 
 variable {f₁ : Z ⟶ X} {f₁' : Z' ⟶ X'} {f₂ : Z ⟶ Y} {f₂' : Z' ⟶ Y'}
 
-set_option maxHeartbeats 800000 in
 -- the instantiation unfolds the pullback exchanges and nearby cycles of the four models
 /-- **Reduction to the geometric generic fibres**: after any functor `F`, the Künneth map
 `Π_{A,B}` of the models `M`, `N`, `P` is an isomorphism if and only if the Künneth map
@@ -251,10 +250,10 @@ lemma isIso_map_kunnethMap_iff_toGeneric (φ₁ : P.Hom M f₁ f₁') (φ₂ : P
     (pullbackSquareComparison Λ φ₁.commSq_i).hom (pullbackSquareComparison Λ φ₂.commSq_i).hom
     (mateEquiv (derivedUpperStarLowerStarAdjunction Λ M.j)
       (derivedUpperStarLowerStarAdjunction Λ P.j)
-      (pullbackSquareComparison Λ φ₁.commSq_j).hom).natTrans
+      (pullbackSquareComparison Λ φ₁.commSq_j).hom)
     (mateEquiv (derivedUpperStarLowerStarAdjunction Λ N.j)
       (derivedUpperStarLowerStarAdjunction Λ P.j)
-      (pullbackSquareComparison Λ φ₂.commSq_j).hom).natTrans
+      (pullbackSquareComparison Λ φ₂.commSq_j).hom)
     (pullbackSquareComparison Λ φ₁.commSq_ε).hom (pullbackSquareComparison Λ φ₂.commSq_ε).hom
     (pullbackSquareComparison Λ φ₁.toGeneric.commSq_ε).hom
     (pullbackSquareComparison Λ φ₂.toGeneric.commSq_ε).hom

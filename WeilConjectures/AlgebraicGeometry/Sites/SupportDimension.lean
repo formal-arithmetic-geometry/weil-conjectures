@@ -15,6 +15,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.TorsionSheaf
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import WeilConjectures.Mathlib.RingTheory.NoetherNormalization
 public import WeilConjectures.Mathlib.Topology.KrullDimension
+public import Mathlib.Algebra.Category.Grp.Zero
 
 /-!
 # Étale sheaves supported in low dimension
@@ -24,7 +25,7 @@ whose geometric stalks vanish at every point `y` with `trdeg_K κ(y) > a`. For a
 `Z ⊆ B` with open complement `j_Z : B ∖ Z ⟶ B`, let `N_Z = ker(N ⟶ j_Z* j_Z^* N)` be the
 subsheaf of sections supported in `Z`. Then `N` is the filtered union of the `N_Z` over the
 closed `Z` of dimension at most `a` (`AlgebraicGeometry.Etale.exists_covering_supportedIn`,
-blueprint `lem-sc-support-dimension-union`).
+blueprint `lemma-uniform-bounds-pro-etale-affines`).
 -/
 
 @[expose] public section
@@ -290,8 +291,8 @@ lemma exists_supportedIn_of_forall_residueFieldTrdeg_le {K : Type u} [Field K]
     Scheme.topologicalKrullDim_closure_singleton_le_of_residueFieldTrdeg_le b _ a
       (hs ξ (hGS hξG))⟩
 
-/-- Blueprint `lem-sc-support-dimension-union`: A sheaf supported in low dimension is a filtered
-union.
+/-- Blueprint `lemma-uniform-bounds-pro-etale-affines`: A sheaf supported in low dimension is a
+filtered union.
 
 Let `B` be a scheme of finite type over a field `K` (structure morphism `b`), `a ≥ 0`, and `N` a
 torsion abelian étale sheaf on `B` with zero geometric stalk at every point `y` with

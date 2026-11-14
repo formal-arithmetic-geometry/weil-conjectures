@@ -79,7 +79,7 @@ public import Mathlib.RingTheory.Ideal.Quotient.Index
 /-!
 # Exchange and projection transformations
 
-Source: Weil blueprint, sec-smooth-purity, sk-def-sf-operations,
+Source: Weil blueprint, chap-Smooth-purity, sk-def-sf-operations,
 node def-exchange-projection, order 1487 (blueprint: def-exchange-projection).
 
 The finite maps are the existing pro-etale derived exchange, compactification exchange,
@@ -139,7 +139,7 @@ noncomputable def compactificationExchangeFromData
     (J ⋙ R) ⋙ G ⟶ H ⋙ (J' ⋙ R') :=
   (Functor.associator J R G).hom ≫
     Functor.whiskerLeft J
-      (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ theta.hom)).natTrans ≫
+      (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ theta.hom)) ≫
     (Functor.associator J B R').inv ≫
     Functor.whiskerRight beta.hom R' ≫
     (Functor.associator H J' R').hom
@@ -219,7 +219,7 @@ Source: blueprint, node def-exchange-projection, direct-image formula
 (blueprint: def-exchange-projection). -/
 noncomputable def exchange : d.push ⋙ d.horizontal ⟶ d.horizontal' ⋙ d.push' :=
   (mateEquiv d.adjunction d.adjunction'
-    (TwoSquare.mk _ _ _ _ d.pullbackComparison.hom)).natTrans
+    (TwoSquare.mk _ _ _ _ d.pullbackComparison.hom))
 
 /-- Chosen-compactification exchange, transported by the supplied identifications with
 proper image after open extension. The formula retains the choice of compactification.

@@ -19,7 +19,7 @@ neighbourhood `(V ×_S S', (v, s'))` of `s'`. Hence the legs of the limit cone o
 the morphism `strictLocalizationMap g s' : S'_(s') ⟶ S_(s' ≫ g)` over `g`, compatible with the
 canonical geometric points.
 
-(blueprint: `det-tf-restriction-zero-covers`)
+(blueprint: `lemma-tangent-cones-on-cover`)
 
 ## Main definitions
 
@@ -151,7 +151,7 @@ noncomputable def strictLocalizationMapCone : Cone (affineNeighborhoodDiagram (s
 /-- **Functoriality of the strict localization**: the morphism `S'_(s') ⟶ S_(s' ≫ g)` induced
 by `g : S' ⟶ S`, given by the base change of pointed étale neighbourhoods along `g`.
 
-(blueprint: `det-tf-restriction-zero-covers`) -/
+(blueprint: `lemma-tangent-cones-on-cover`) -/
 noncomputable def strictLocalizationMap : strictLocalization s' ⟶ strictLocalization (s' ≫ g) :=
   (isLimitStrictLocalizationCone (s' ≫ g)).lift (strictLocalizationMapCone g s')
 
@@ -166,7 +166,7 @@ lemma strictLocalizationMap_comp_strictLocalizationCone_π_app
 
 /-- The morphism `strictLocalizationMap g s'` lies over `g`.
 
-(blueprint: `det-tf-restriction-zero-covers`) -/
+(blueprint: `lemma-tangent-cones-on-cover`) -/
 @[reassoc (attr := simp)]
 lemma strictLocalizationMap_comp_strictLocalizationToBase :
     strictLocalizationMap g s' ≫ strictLocalizationToBase (s' ≫ g) =
@@ -182,7 +182,7 @@ lemma strictLocalizationMap_comp_strictLocalizationToBase :
 /-- The morphism `strictLocalizationMap g s'` carries the canonical geometric point of `S'_(s')`
 to the canonical geometric point of `S_(s' ≫ g)`.
 
-(blueprint: `det-tf-restriction-zero-covers`) -/
+(blueprint: `lemma-tangent-cones-on-cover`) -/
 @[reassoc (attr := simp)]
 lemma spec_map_strictHenselizationEval_comp_strictLocalizationMap :
     Spec.map (strictHenselizationEval s') ≫ strictLocalizationMap g s' =

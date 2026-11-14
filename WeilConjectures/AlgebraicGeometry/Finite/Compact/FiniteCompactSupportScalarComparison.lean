@@ -93,7 +93,7 @@ Only invertibility is asserted here: constructibility and interval bounds are su
 independently by finite compact-support finiteness.
 
 Source: Stacks Tags 0F0G, 0GL1 and 0GL6; blueprint
-prop-finite-compact-support-constructibility, Steps 7--10
+theorem-results-from-etale-theory--3, Steps 7--10
 (blueprint: lem-finite-compact-support-scalar-comparison).
 
 Proof: descend K to a bounded constructible etale complex G by finite-ring

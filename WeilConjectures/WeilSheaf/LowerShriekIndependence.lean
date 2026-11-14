@@ -31,9 +31,9 @@ counit `i_! i^* E ⟶ E` is an isomorphism, `i^*` and the pullback to the comple
 detecting isomorphisms; and `i^* E ≅ Rq_* K` by proper base change along `i`, since `X'` is open
 and closed in `b⁻¹(Y')`, on which `q` factors.
 
-This is the comparison of the blueprint (`prop-compactification-coherence-detailed`,
-`thm-sf-comp-composition`) behind the compatibilities of `Rf₀! = Rḡ_* ∘ ī_!`
-(`AlgebraicGeometry.WeilComplex.derivedLowerShriek`):
+This is the comparison of the blueprint (`proposition-construction-independence-rf-shriek`,
+`proposition-composition-base-change-rf-shriek--1`) behind the compatibilities of
+`Rf₀! = Rḡ_* ∘ ī_!` (`AlgebraicGeometry.WeilComplex.derivedLowerShriek`):
 
 - for a refinement `c' ⟶ c` of compactifications of `f`, `R^{c'} f_! ≅ R^c f_!`, hence the
   independence of the compactification
@@ -215,7 +215,7 @@ lemma ProEtaleWeilSheaf.isIso_counit_app_rightDerivedLowerStar_obj_extensionByZe
 
 variable (k₀ l) in
 /-- **The proper direct image of an extension by zero** (blueprint
-`prop-compactification-coherence-detailed`): for a commutative square `a ≫ b = q ≫ i` of
+`proposition-construction-independence-rf-shriek`): for a commutative square `a ≫ b = q ≫ i` of
 `k₀`-schemes with `a`, `i` quasi-compact open immersions and `b`, `q` proper,
 `Rb_* ∘ a_! ≅ i_! ∘ Rq_*` on Weil complexes. With `W' = W ×_Z Y'`, the counit
 `i_! i^* E ⟶ E` is an isomorphism for `E = Rb_* a_! K`, `i^* Rb_* ≅ Rb'_* k^*` by proper base
@@ -329,7 +329,7 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
 variable (k₀ l) in
 /-- **The direct image with compact support does not change under refinement of the
-compactification** (blueprint `prop-compactification-coherence-detailed`): for a refinement
+compactification** (blueprint `proposition-construction-independence-rf-shriek`): for a refinement
 `r : c ⟶ d` of compactifications of `f`, `R^c f_! ≅ R^d f_!` on Weil complexes, since
 `Rr_* ∘ c.i_! ≅ d.i_!`
 (`AlgebraicGeometry.ProEtaleWeilSheaf.rightDerivedLowerStarExtensionByZeroIso`
@@ -366,10 +366,10 @@ noncomputable def ProEtaleWeilSheaf.rightDerivedLowerShriekIsoOfRefinement
       Functor.leftUnitor _)) _ ≪≫ Functor.associator _ _ _
 
 variable (k₀ l) in
-/-- **Independence of the compactification** (blueprint `prop-compactification-coherence-detailed`,
-`prop-functor-package` clause 2): for two compactifications `c`, `d` of `f`,
-`R^c f_! ≅ R^d f_!` on Weil complexes, through their common refinement
-(`AlgebraicGeometry.Compactification.inf`). -/
+/-- **Independence of the compactification** (blueprint
+`proposition-construction-independence-rf-shriek`, `prop-functor-package` clause 2): for two
+compactifications `c`, `d` of `f`, `R^c f_! ≅ R^d f_!` on Weil complexes, through their common
+refinement (`AlgebraicGeometry.Compactification.inf`). -/
 noncomputable def ProEtaleWeilSheaf.rightDerivedLowerShriekIsoOfCompactification
     (c d : Compactification f) :
     (WeilComplex.objectProperty k₀ l X).ι ⋙ ProEtaleWeilSheaf.rightDerivedLowerShriek k₀ l f c ≅

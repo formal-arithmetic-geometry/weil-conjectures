@@ -23,8 +23,8 @@ and the Milnor sequence of the homotopy limit
 ```
   0 ⟶ R¹lim Rⁱf_* Tₙ ⟶ Rʲf_* (lim Tₙ) ⟶ lim Rʲf_* Tₙ ⟶ 0
 ```
-(blueprint `sk-prop-pe-milnor`, `det-pe-milnor-sequence`, Stacks 0CQD). If the tower
-`(Rⁱf_* Tₙ)ₙ` is Mittag-Leffler, the `R¹lim` term vanishes
+(blueprint `proposition-milnor-sequence`, `proposition-milnor-sequence--2`, Stacks 0CQD). If the
+tower `(Rⁱf_* Tₙ)ₙ` is Mittag-Leffler, the `R¹lim` term vanishes
 (`CategoryTheory.GrothendieckTopology.epi_one_sub_of_mittagLeffler_imageSubobject`) and
 `Rʲf_* (lim Tₙ) ≅ lim Rʲf_* Tₙ`.
 
@@ -52,10 +52,10 @@ open scoped CategoryTheory.Functor
 variable {Λ : Type (u + 1)} [CommRing Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 /-- **The Milnor sequence for `Rf_*` of a tower of pro-étale sheaves** (blueprint
-`sk-prop-pe-milnor`, Stacks 0CQD). Let `T` be a tower of complexes of sheaves of `Λ`-modules
-on `X_proét` with degreewise epimorphic transitions and limit cone `c`, let `i + 1 = j`, let `P`
-be a product of the `Rⁱf_* Tₙ` with its transition endomorphism `t` and let `d` be a limit cone
-over `n ↦ Rʲf_* Tₙ`. Then there is a short exact sequence of sheaves on `Y_proét`
+`proposition-milnor-sequence`, Stacks 0CQD). Let `T` be a tower of complexes of sheaves of
+`Λ`-modules on `X_proét` with degreewise epimorphic transitions and limit cone `c`, let `i + 1 = j`,
+let `P` be a product of the `Rⁱf_* Tₙ` with its transition endomorphism `t` and let `d` be a limit
+cone over `n ↦ Rʲf_* Tₙ`. Then there is a short exact sequence of sheaves on `Y_proét`
 `0 ⟶ coker (1 - t) ⟶ Rʲf_* (lim Tₙ) ⟶ d.pt ⟶ 0`, i.e.
 `0 ⟶ R¹lim Rⁱf_* Tₙ ⟶ Rʲf_* (lim Tₙ) ⟶ lim Rʲf_* Tₙ ⟶ 0`, whose second map is induced by the
 projections `lim Tₙ ⟶ Tₙ`. -/
@@ -112,7 +112,7 @@ theorem isIso_lift_homology_rightDerivedLowerStar_of_mittagLeffler
       (F := F) (productIsProduct _) t ht hML) hd
 
 /-- **Mittag-Leffler on weakly contractible sections kills the `R¹lim` term** (blueprint
-`sk-prop-pe-milnor`, last paragraph): in the situation of
+`proposition-milnor-sequence`, last paragraph): in the situation of
 `AlgebraicGeometry.ProEtale.shortExact_milnor_rightDerivedLowerStar`, if over every affine
 weakly contractible `W` of `Y_proét` the tower of section modules `(Rⁱf_* Tₙ)(W)` is
 Mittag-Leffler, then `Rʲf_* (lim Tₙ) ⟶ lim Rʲf_* Tₙ` is an isomorphism. -/
@@ -158,8 +158,8 @@ lemma epi_single_map_f {C : Type*} [Category* C] [Limits.HasZeroMorphisms C] [Ha
   · exact (HomologicalComplex.isZero_single_obj_X _ j B i h).epi _
 
 /-- **The Milnor sequence for `Rf_*` of a tower of pro-étale sheaves with epimorphic
-transitions** (blueprint `sk-prop-pe-milnor`): for a tower `G` of sheaves of `Λ`-modules on
-`X_proét` with epimorphic transitions (e.g. an `ℓ`-adic tower `G_{n+1}/ℓⁿ ≅ Gₙ`), and
+transitions** (blueprint `proposition-milnor-sequence`): for a tower `G` of sheaves of `Λ`-modules
+on `X_proét` with epimorphic transitions (e.g. an `ℓ`-adic tower `G_{n+1}/ℓⁿ ≅ Gₙ`), and
 `i + 1 = j`, there is a short exact sequence
 `0 ⟶ R¹lim Rⁱf_* Gₙ ⟶ Rʲf_* (lim Gₙ) ⟶ lim Rʲf_* Gₙ ⟶ 0` of sheaves on `Y_proét`, where
 `R¹lim` is the cokernel of `1 - t` on a product `P` of the `Rⁱf_* Gₙ`. -/

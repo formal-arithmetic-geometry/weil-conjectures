@@ -16,6 +16,8 @@ public import Mathlib.CategoryTheory.Limits.Over
 
 import Mathlib.Topology.Category.Profinite.CofilteredLimit
 import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstant
+public import Mathlib.CategoryTheory.Sites.Subcanonical
+public import Mathlib.CategoryTheory.Sites.SubcanonicalOver
 
 /-!
 # Relative profinite test schemes
@@ -248,8 +250,8 @@ Proof plan (the ten steps of the node):
    evaluation, with inverse given by constants. Hence the induced stalk maps are flat
    (`def-weil-flat-morphism`).
 8. Apply the finite-limit formula to the diagonal. Step 7 makes it flat, so the
-   maps are weakly etale (`def-weil-weakly-etale-morphism`) and lie in the recorded
-   small pro-etale site (`def-weil-pbc-proetale-site`).
+   maps are weakly etale (`definition-ind-etale-pro-etale-weakly--3`) and lie in the recorded
+   small pro-etale site (`definition-small-pro-etale-site--1`).
 9. Finite jointly surjective families remain jointly surjective on the points `(s,p)`.
    Their arrows are affine (`pqf-def-affine-morphism`, `pqf-lem-affine-local-target`,
    and `lem-weil-pbc-morphism-affine-schemes-affine`) and flat, so their affine

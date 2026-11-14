@@ -12,10 +12,10 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.SepClosedPoin
 /-!
 # Compactly supported cohomology of torsion complexes is perfect
 
-The finite stage of `sk-prop-sf-trace-perfectness` for a complex of sheaves of modules over a
-Noetherian ring `Λ` which is killed by an integer `N` invertible on the base. This is the form in
-which the finite stages `A_{E,n} = 𝒪_E/𝔪_Eⁿ` occur at the integral stage `Λ = 𝒪_E`: an object of
-`D(X_ét, A_{E,n})` is recorded through its restriction of scalars to `𝒪_E`, as in
+The finite stage of `lemma-perfect-complexes-geometric-point` for a complex of sheaves of modules
+over a Noetherian ring `Λ` which is killed by an integer `N` invertible on the base. This is the
+form in which the finite stages `A_{E,n} = 𝒪_E/𝔪_Eⁿ` occur at the integral stage `Λ = 𝒪_E`: an
+object of `D(X_ét, A_{E,n})` is recorded through its restriction of scalars to `𝒪_E`, as in
 `AlgebraicGeometry.Etale.DerivedCategory.boundedConstructibleIntegral`.
 -/
 
@@ -31,7 +31,7 @@ namespace AlgebraicGeometry.Etale
 
 open Scheme
 
-/-- Blueprint `sk-prop-sf-trace-perfectness`: Perfectness of compact cohomology and of
+/-- Blueprint `lemma-perfect-complexes-geometric-point`: Perfectness of compact cohomology and of
 geometric stalks.
 
 **Compactly supported cohomology of a torsion complex is perfect.** Let `Λ` be a Noetherian ring,

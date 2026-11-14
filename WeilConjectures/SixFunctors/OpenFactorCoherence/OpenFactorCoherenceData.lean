@@ -31,7 +31,7 @@ public import WeilConjectures.SixFunctors.OpenFactorCoherence.OpenFactorTensorMo
 
 /-! # Fixed open-factor operations and normalized comparison data
 
-Source: blueprint sk-prop-sf-pf-coherence, open-factor paragraph;
+Source: blueprint proposition-composition-base-change-rf-shriek--1, open-factor paragraph;
 Bhatt--Scholze 3.4.10 and 6.5.8; Stacks 099N, 09BN, 0GL1.
 (blueprint: def-sf-open-factor-fixed-data).
 

@@ -20,7 +20,7 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineTwist
 /-!
 # Shifted free graded modules and the glued twists on the projective line
 
-Source: blueprint `lem-sc-p1-graded-resolution`, final clause; Stacks Project,
+Source: blueprint `theorem-riemann-roch-coherent-serre-duality`, final clause; Stacks Project,
 Constructions, Definitions 01M6, 01MN and Lemma 01M7.
 (blueprint: lem-sc-p1-proj-shifted-free-twist)
 
@@ -53,8 +53,8 @@ Proof:
    making `xᵢᵈ` a generator on every subopen. The standard charts of
    def-sc-p1-standard identify polynomial Proj with the glued projective line.
 2. On the overlap, `x₀ᵈ = (x₀/x₁)ᵈ x₁ᵈ = t⁻ᵈ x₁ᵈ`. Hence these trivializations
-   give precisely TwistData. By lem-sc-p1-twist-exists the chart identifications
-   glue to the isomorphism with the transported glued twist.
+   give precisely TwistData. By theorem-riemann-roch-coherent-serre-duality the chart
+   identifications glue to the isomorphism with the transported glued twist.
 3. Localization and taking the degree-zero part commute with finite direct sums.
    The associated-sheaf description of def-weil-pbc-proj-twisting-sheaf therefore
    identifies the sheaf of the sum with the coproduct of the individual sheaves.

@@ -47,8 +47,61 @@ private theorem frobenius_expansion
   intro j _
   rw [hf, map_smul, Pi.smul_apply, smul_eq_mul, mul_comm]
 
-set_option maxHeartbeats 600000 in
--- Checking the tensor-section coercions requires a larger kernel budget.
+private theorem frobenius_expansion_natural
+    {R T M N : Type u} [CommRing R] [CommRing T]
+    [AddCommGroup M] [Module R M] [AddCommGroup N] [Module T N]
+    (n p : ℕ) (eM : M ≃ₗ[R] (Fin n → R)) (eN : N ≃ₗ[T] (Fin n → T))
+    (r : R →+* T) (g : M →+ N) (fM : M →+ M) (fN : N →+ N)
+    (hg : ∀ m i, eN (g m) i = r (eM m i))
+    (hf : ∀ m, fN (g m) = g (fM m))
+    (hs : ∀ (c : T) (m : N), fN (c • m) = c ^ p • fN m) (m : N) (i : Fin n) :
+    eN (fN m) i = ∑ j, r (eM (fM (eM.symm (Pi.single j 1))) i) * (eN m j) ^ p := by
+  classical
+  have hv (j : Fin n) : g (eM.symm (Pi.single j 1)) = eN.symm (Pi.single j 1) := by
+    apply eN.injective
+    funext k
+    rw [hg]
+    simp only [LinearEquiv.apply_symm_apply, Pi.single_apply]
+    split_ifs <;> simp only [map_one, map_zero]
+  rw [frobenius_expansion n p eN fN hs]
+  apply Finset.sum_congr rfl
+  intro j _
+  rw [← hv, hf, hg]
+
+private theorem frobenius_coordinates_of_linear_coordinates
+    (p : ℕ) (S : Scheme.{u}) (G : S.Etaleᵒᵖ ⥤ AddCommGrpCat.{u})
+    [instModules : ∀ W : S.Etale, Module Γ(W.left, ⊤) (G.obj (op W))]
+    (F : G ⟶ G)
+    (hF : ∀ (W : S.Etale) (a : Γ(W.left, ⊤)) (m : G.obj (op W)),
+      F.app (op W) (a • m) = a ^ p • F.app (op W) m)
+    (V : S.Etale) (n : ℕ)
+    (e : ∀ (W : S.Etale), (W ⟶ V) →
+      G.obj (op W) ≃ₗ[Γ(W.left, ⊤)] (Fin n → Γ(W.left, ⊤)))
+    (henat : ∀ (W : S.Etale) (h : W ⟶ V) (m : G.obj (op V)) (i : Fin n),
+      e W h (G.map h.op m) i = h.left.appTop (e V (𝟙 V) m i)) :
+  ∃ (e : ∀ (W : S.Etale), (W ⟶ V) →
+        G.obj (op W) ≃+ (Fin n → Γ(W.left, ⊤)))
+      (a : Fin n → Fin n → Γ(V.left, ⊤)),
+      (∀ (W : S.Etale) (h : W ⟶ V)
+        (m : G.obj (op V)) (i : Fin n),
+        e W h (G.map h.op m) i =
+          h.left.appTop (e V (𝟙 V) m i)) ∧
+      (∀ (W : S.Etale) (h : W ⟶ V)
+        (m : G.obj (op W)) (i : Fin n),
+        e W h (F.app (op W) m) i =
+          ∑ j, h.left.appTop (a i j) * (e W h m j) ^ p) := by
+  classical
+  let v : Fin n → G.obj (op V) :=
+    fun j ↦ (e V (𝟙 V)).symm (Pi.single j 1)
+  let a : Fin n → Fin n → Γ(V.left, ⊤) :=
+    fun i j ↦ e V (𝟙 V) (F.app (op V) (v j)) i
+  refine ⟨fun W h ↦ (e W h).toAddEquiv, a, henat, ?_⟩
+  intro W h m i
+  exact frobenius_expansion_natural n p (e V (𝟙 V)) (e W h) h.left.appTop.hom
+    (G.map h.op).hom
+    (F.app (op V)).hom (F.app (op W)).hom (henat W h)
+    (fun s ↦ congrArg (fun f ↦ f s) (F.naturality h.op)) (hF W) m i
+
 /-- A specified finite free frame gives a natural Frobenius matrix on the etale slice.
 
 Source: Stacks Project, Tag 0GKU, proof of lemma-frobenius-linear-on-vb,
@@ -77,8 +130,8 @@ theorem frobenius_linear_free_frame_coordinates
     (hF : ∀ (U : S.Etale) (a : Γ(U.left, ⊤))
       (e : Γ((Modules.tensorPullback U.hom).obj E, ⊤)),
       F.hom.app (op U)
-          ((((Modules.tensorPullback U.hom).obj E).smul a).hom e) =
-        (((Modules.tensorPullback U.hom).obj E).smul (a ^ p)).hom
+          ((((Modules.tensorPullback U.hom).obj E).smul a).asHom.hom e) =
+        (((Modules.tensorPullback U.hom).obj E).smul (a ^ p)).asHom.hom
           (F.hom.app (op U) e))
     (V : S.Etale) (n : ℕ)
     (α : (Modules.tensorPullback V.hom).obj E ≅
@@ -94,39 +147,11 @@ theorem frobenius_linear_free_frame_coordinates
         (m : Γ((Modules.tensorPullback W.hom).obj E, ⊤)) (i : Fin n),
         e W h (F.hom.app (op W) m) i =
           ∑ j, h.left.appTop (a i j) * (e W h m j) ^ p) := by
-  classical
   obtain ⟨e, henat⟩ := exists_natural_tensor_free_frame_coordinates S E V n α
-  let v : Fin n → Γ((Modules.tensorPullback V.hom).obj E, ⊤) :=
-    fun j ↦ (e V (𝟙 V)).symm (Pi.single j 1)
-  let a : Fin n → Fin n → Γ(V.left, ⊤) :=
-    fun i j ↦ e V (𝟙 V) (F.hom.app (op V) (v j)) i
-  refine ⟨fun W h ↦ (e W h).toAddEquiv, a, henat, ?_⟩
-  intro W h m i
-  let w : Fin n → Γ((Modules.tensorPullback W.hom).obj E, ⊤) :=
-    fun j ↦ (e W h).symm (Pi.single j 1)
-  have hv (j : Fin n) : (Modules.etaleTensorSectionsSheaf E).obj.map h.op (v j) = w j := by
-    apply (e W h).injective
-    funext k
-    rw [henat]
-    simp only [v, w, LinearEquiv.apply_symm_apply, Pi.single_apply]
-    split_ifs <;> simp
-  have hwF (j : Fin n) :
-      e W h (F.hom.app (op W) (w j)) i = h.left.appTop (a i j) := by
-    have hn := congrArg (fun f ↦ f (v j)) (F.hom.naturality h.op)
-    simp only [AddCommGrpCat.comp_apply, hv] at hn
-    rw [hn, henat]
-  let FW : Γ((Modules.tensorPullback W.hom).obj E, ⊤) →+
-      Γ((Modules.tensorPullback W.hom).obj E, ⊤) := (F.hom.app (op W)).hom
-  have hs : ∀ (c : Γ(W.left, ⊤))
-      (s : Γ((Modules.tensorPullback W.hom).obj E, ⊤)),
-      FW (c • s) = c ^ p • FW s := by
-    intro c s
-    exact hF W c s
-  change e W h (FW m) i = ∑ j, h.left.appTop (a i j) * (e W h m j) ^ p
-  rw [frobenius_expansion n p (e W h) FW hs]
-  apply Finset.sum_congr rfl
-  intro j _
-  change e W h (F.hom.app (op W) (w j)) i * (e W h m j) ^ p = _
-  rw [hwF]
+  exact frobenius_coordinates_of_linear_coordinates p S
+    (Modules.etaleTensorSectionsSheaf E).obj
+    (instModules := fun W ↦ (inferInstance :
+      Module Γ(W.left, ⊤) Γ((Modules.tensorPullback W.hom).obj E, ⊤)))
+    F.hom hF V n e henat
 
 end AlgebraicGeometry.Scheme

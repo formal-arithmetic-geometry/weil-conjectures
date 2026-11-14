@@ -18,7 +18,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Reduct
 Let `k` be a separably closed field, `a : X ⟶ Spec k` a morphism admitting a compactification
 for which `Ra_!` has a right adjoint, `γ : T[2d] ≅ Ra^! Λ` a purity isomorphism (`T = Λ_X(d)`)
 and `K ∈ D(X_ét, Λ)` perfect over `Λ_X`. This file proves blueprint
-`thm-pod-derived-poincare-duality` in the form the repository can express.
+`theorem-poincare-duality--6` in the form the repository can express.
 
 * The adjoint `β_K^♯ : RΓ(X, K^∨(d))[2d] ⟶ RΓ_c(X, K)^∨` of the derived Poincaré pairing
   (`AlgebraicGeometry.Etale.poincareAdjoint`) is an isomorphism over every coefficient ring
@@ -137,7 +137,7 @@ variable {k : Type u} [Field k] [IsSepClosed k] {Λ : Type (u + 1)} [CommRing Λ
 noncomputable abbrev poincareSecondVariable : DerivedCategoryModule Λ X :=
   ((derivedTensor _ X).obj ((DerivedCategory.coefficientDual _ X).obj (op K))).obj T
 
-/-- Blueprint `thm-pod-derived-poincare-duality`: the adjoint
+/-- Blueprint `theorem-poincare-duality--6`: the adjoint
 
 `β_K^♯ : RΓ(X, K^∨(d))[2d] ⟶ RΓ_c(X, K)^∨ = RHom(RΓ_c(X, K), Λ)`
 
@@ -148,7 +148,7 @@ noncomputable def poincareAdjoint :=
 
 variable {K}
 
-/-- Blueprint `thm-pod-derived-poincare-duality`: Adic reconstruction and
+/-- Blueprint `theorem-poincare-duality--6`: Adic reconstruction and
 scalar extension (perfectness over every coefficient ring).
 
 For `K` perfect over `Λ_X`, the adjoint `β_K^♯` of the derived Poincaré pairing is an
@@ -159,7 +159,7 @@ theorem isIso_poincareAdjoint (hKd : IsDualizable K) : IsIso (poincareAdjoint a 
   (isPerfectPairing_poincarePairing_of_isSepClosed_of_isDualizable a adj γ hKd).isIso_pairingAdjoint
 
 include adj γ in
-/-- Blueprint `thm-pod-derived-poincare-duality`: Adic reconstruction and
+/-- Blueprint `theorem-poincare-duality--6`: Adic reconstruction and
 scalar extension (the duality isomorphism in `D(Λ)`).
 
 For `K` perfect over `Λ_X`, there is an isomorphism of complexes of `Λ`-modules
@@ -182,7 +182,7 @@ theorem nonempty_iso_ihom_compactlySupportedGlobalSections (hKd : IsDualizable K
 
 variable {ϖ : Λ} (hϖ : ϖ ∈ nonZeroDivisors Λ)
 
-/-- Blueprint `thm-pod-derived-poincare-duality`: Adic reconstruction and
+/-- Blueprint `theorem-poincare-duality--6`: Adic reconstruction and
 scalar extension (the finite-level dualities are the reductions of `β_K^♯`).
 
 Let `ϖ` be a nonzerodivisor of `Λ` (a uniformizer of `𝒪_E`) and `A_n = Λ/(ϖ)ⁿ`, read through
@@ -199,7 +199,7 @@ theorem isIso_reductionModIdeal_map_poincareAdjoint (hKd : IsDualizable K) (J : 
   infer_instance
 
 omit [IsSepClosed k] in
-/-- Blueprint `thm-pod-derived-poincare-duality`: the reductions of `β_K^♯`
+/-- Blueprint `theorem-poincare-duality--6`: the reductions of `β_K^♯`
 along the finite stages form a morphism of towers: for `J ≤ J'` (for example
 `(ϖ)ᵐ ≤ (ϖ)ⁿ` for `n ≤ m`) they commute with the transitions `Λ/J ⟶ Λ/J'`. -/
 theorem poincareAdjoint_reduction_naturality {J J' : Ideal Λ} (h : J ≤ J') :
@@ -211,7 +211,7 @@ theorem poincareAdjoint_reduction_naturality {J J' : Ideal Λ} (h : J ≤ J') :
 
 include hϖ in
 omit [IsSepClosed k] [HasCompactification a] in
-/-- Blueprint `thm-pod-derived-poincare-duality`: the source of the reduction
+/-- Blueprint `theorem-poincare-duality--6`: the source of the reduction
 of `β_K^♯` is `RΓ(X, K^∨(d)_n)[2d]`. -/
 theorem nonempty_iso_reductionModIdeal_poincareAdjoint_source (n : ℕ) :
     Nonempty ((reductionModIdeal Λ (Spec (.of k)) (Ideal.span {ϖ} ^ n)).obj
@@ -225,7 +225,7 @@ theorem nonempty_iso_reductionModIdeal_poincareAdjoint_source (n : ℕ) :
 
 include hϖ in
 omit [IsSepClosed k] in
-/-- Blueprint `thm-pod-derived-poincare-duality`: the target of the reduction
+/-- Blueprint `theorem-poincare-duality--6`: the target of the reduction
 of `β_K^♯` is `RHom(RΓ_c(X, K), A_n)`, and `RΓ_c(X, K_n) ≅ RΓ_c(X, K) ⊗ᴸ A_n`. -/
 theorem nonempty_iso_reductionModIdeal_poincareAdjoint_target (n : ℕ) :
     Nonempty ((reductionModIdeal Λ (Spec (.of k)) (Ideal.span {ϖ} ^ n)).obj
@@ -262,7 +262,7 @@ variable {k : Type u} [Field k] [IsSepClosed k] {X : Scheme.{u}} (a : X ⟶ Spec
   {G : DerivedCategoryModule Λ (Spec (.of k)) ⥤ DerivedCategoryModule Λ X}
   (adj : R(a)_![ModuleCat.{u + 1} Λ] ⊣ G) {d : ℕ}
 
-/-- Blueprint `thm-pod-derived-poincare-duality`: Adic reconstruction and scalar
+/-- Blueprint `theorem-poincare-duality--6`: Adic reconstruction and scalar
 extension (perfectness of the integral pairing and of its finite levels).
 
 Let `k` be separably closed, `Λ = 𝒪_E` (any commutative ring), `ϖ` a nonzerodivisor of `Λ`,
@@ -333,7 +333,7 @@ variable (l : ℕ) [Fact l.Prime] (E L : Type w) [Field E] [Field L]
   (γ : T⟦(2 * d : ℤ)⟧ ≅ G.obj (𝟙_ _))
   {K : DerivedCategoryModule (Shrink.{u + 1} (PadicAlgCl.integers l E)) X}
 
-/-- Blueprint `thm-pod-derived-poincare-duality`: Adic reconstruction and
+/-- Blueprint `theorem-poincare-duality--6`: Adic reconstruction and
 scalar extension (the integral stage and the scalar extension).
 
 Let `E` be a finite extension of `ℚ_ℓ` inside `ℚ̄_ℓ`, `𝒪_E` its ring of integers, `L ⊇ E` a

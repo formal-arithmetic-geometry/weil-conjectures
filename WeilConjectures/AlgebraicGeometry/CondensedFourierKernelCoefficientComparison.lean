@@ -48,48 +48,70 @@ private theorem unitUnderlying
     (𝟙_ (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X))).X = condensedRingObj Λ X := rfl
 
-set_option maxHeartbeats 400000 in
+-- Keep the coefficient calculation independent of the affine-space constructions.
+private theorem translationCoefficient_naturality
+    {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
+    [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
+    (a : Λ ⟶ Λ') [IsMonHom a] {X Y : Scheme.{u}}
+    (t : X ⟶ X) (f : X ⟶ Y) (h : t ≫ f = f) :
+    ((CondensedRing.lowerStar Λ f).map
+        (((CondensedRing.upperStarLowerStarAdjunction Λ t).homEquiv _ _)
+          (Functor.Monoidal.εIso (CondensedRing.upperStar Λ t)).inv) ≫
+      (CondensedRing.lowerStarComp Λ t f).hom.app _ ≫
+      eqToHom (congrArg (fun g ↦ (CondensedRing.lowerStar Λ g).obj
+        (Mod.regular (condensedRingObj Λ X))) h)).hom ≫
+        (ProEtale.lowerStar Ab.{u + 1} f).map (coefficientMap a X) =
+    (ProEtale.lowerStar Ab.{u + 1} f).map (coefficientMap a X) ≫
+      ((CondensedRing.lowerStar Λ' f).map
+        (((CondensedRing.upperStarLowerStarAdjunction Λ' t).homEquiv _ _)
+          (Functor.Monoidal.εIso (CondensedRing.upperStar Λ' t)).inv) ≫
+      (CondensedRing.lowerStarComp Λ' t f).hom.app _ ≫
+      eqToHom (congrArg (fun g ↦ (CondensedRing.lowerStar Λ' g).obj
+        (Mod.regular (condensedRingObj Λ' X))) h)).hom := by
+  simp only [Mod.comp_hom', CondensedRing.lowerStar_map_hom, Category.assoc]
+  erw [CondensedRing.homEquiv_εIso_inv_hom Λ t,
+    CondensedRing.homEquiv_εIso_inv_hom Λ' t]
+  rw [coefficientCongr a h]
+  rw [CondensedRing.lowerStarComp_hom_app_hom,
+    CondensedRing.lowerStarComp_hom_app_hom]
+  rw [← NatTrans.naturality_assoc]
+  simp only [Functor.comp_map]
+  rw [← Functor.map_comp_assoc,
+    condensedPushforwardHom_comp_map_coefficientMap a t, Functor.map_comp]
+  simp only [Category.assoc, unitUnderlying]
+
 -- Explicit coefficient and module-object coercions require additional elaboration.
 private theorem translationCoefficient
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
     (a : Λ ⟶ Λ') [IsMonHom a] (k : Type u) [Field k] [Fintype k] (c : k) :
-    (condensedArtinSchreierTranslationAction Λ k c).hom ≫
+    (condensedArtinSchreierTranslationAction Λ k c).asHom.hom ≫
         (ProEtale.lowerStar Ab.{u + 1}
           (AffineSpace.artinSchreierMap PUnit (Spec (.of k)) (Fintype.card k))).map
             (coefficientMap a (AffineSpace PUnit (Spec (.of k)))) =
       (ProEtale.lowerStar Ab.{u + 1}
         (AffineSpace.artinSchreierMap PUnit (Spec (.of k)) (Fintype.card k))).map
           (coefficientMap a (AffineSpace PUnit (Spec (.of k)))) ≫
-        (condensedArtinSchreierTranslationAction Λ' k c).hom := by
+        (condensedArtinSchreierTranslationAction Λ' k c).asHom.hom := by
   unfold condensedArtinSchreierTranslationAction
-  simp only [Mod.comp_hom', CondensedRing.lowerStar_map_hom, Category.assoc]
-  erw [CondensedRing.homEquiv_εIso_inv_hom Λ (Etale.artinSchreierTranslation k c),
-    CondensedRing.homEquiv_εIso_inv_hom Λ' (Etale.artinSchreierTranslation k c)]
-  rw [coefficientCongr a (Etale.artinSchreierTranslation_comp_artinSchreierMap k c)]
-  rw [CondensedRing.lowerStarComp_hom_app_hom,
-    CondensedRing.lowerStarComp_hom_app_hom]
-  rw [← NatTrans.naturality_assoc]
-  simp only [Functor.comp_map]
-  rw [← Functor.map_comp_assoc,
-    condensedPushforwardHom_comp_map_coefficientMap a (Etale.artinSchreierTranslation k c),
-    Functor.map_comp]
-  simp only [Category.assoc, unitUnderlying]
+  exact translationCoefficient_naturality a (Etale.artinSchreierTranslation k c)
+    (AffineSpace.artinSchreierMap PUnit (Spec (.of k)) (Fintype.card k))
+    (Etale.artinSchreierTranslation_comp_artinSchreierMap k c)
 
 private theorem regularCoefficient
     {C : Type*} [Category* C] [MonoidalCategory C] [Preadditive C]
     [MonoidalPreadditive C] [BraidedCategory C]
     {R S : C} [MonObj R] [IsCommMonObj R] [MonObj S] [IsCommMonObj S]
     (a : R ⟶ S) [IsMonHom a] (s : MonObj.Γ R) :
-    (Mod.regularEndRingHom s).hom ≫ a =
-      a ≫ (Mod.regularEndRingHom (MonObj.Γ.map a s)).hom := by
-  have h : Mod.regularEndRingHom s ≫ Mod.regularHomComap a =
+    (Mod.regularEndRingHom s).asHom.hom ≫ a =
+      a ≫ (Mod.regularEndRingHom (MonObj.Γ.map a s)).asHom.hom := by
+  have h : (Mod.regularEndRingHom s).asHom ≫ Mod.regularHomComap a =
       Mod.regularHomComap a ≫ (Mod.comap a).map
-        (Mod.regularEndRingHom (MonObj.Γ.map a s)) := by
+        (Mod.regularEndRingHom (MonObj.Γ.map a s)).asHom := by
     apply Mod.regular_hom_ext
-    change (MonObj.one : 𝟙_ C ⟶ R) ≫ ((Mod.regularEndRingHom s).hom ≫ a) =
+    change (MonObj.one : 𝟙_ C ⟶ R) ≫ ((Mod.regularEndRingHom s).asHom.hom ≫ a) =
       (MonObj.one : 𝟙_ C ⟶ R) ≫
-        (a ≫ (Mod.regularEndRingHom (MonObj.Γ.map a s)).hom)
+        (a ≫ (Mod.regularEndRingHom (MonObj.Γ.map a s)).asHom.hom)
     rw [← Category.assoc, ← Category.assoc, IsMonHom.one_hom (f := a)]
     erw [Mod.regularEndRingHom_apply, Mod.one_comp_regularLift_regular,
       Mod.regularEndRingHom_apply, Mod.one_comp_regularLift_regular]
@@ -177,9 +199,9 @@ private theorem characterImageScalar (ℓ : ℕ) [Fact ℓ.Prime]
   let : PreservesFiniteColimits F := by infer_instance
   let : PreservesFiniteLimits F :=
     CondensedRing.preservesFiniteLimits_extendScalars_padicSubfieldRingObjToPadicAlgCl ℓ A E
-  let P := condensedArtinSchreierProjector (Profinite.continuousMapRingObj E.1) k ψ
-  let Q := condensedArtinSchreierProjector (Profinite.padicAlgClRingObj ℓ) k
-    ((MonObj.Γ.map a).toMonoidHom.compAddChar ψ)
+  let P := (condensedArtinSchreierProjector (Profinite.continuousMapRingObj E.1) k ψ).asHom
+  let Q := (condensedArtinSchreierProjector (Profinite.padicAlgClRingObj ℓ) k
+    ((MonObj.Γ.map a).toMonoidHom.compAddChar ψ)).asHom
   let e := pushScalar ℓ E f
   have h : F.map P ≫ e.hom = e.hom ≫ Q := by
     apply Mod.extendScalarsObj_hom_ext'
@@ -198,7 +220,6 @@ private theorem characterImageScalar (ℓ : ℕ) [Fact ℓ.Prime]
 set_option allowUnsafeReducibility true in
 attribute [local semireducible] Mod.extendScalars
 
--- The explicit coefficient-change comparison needs additional elaboration heartbeats.
 private theorem artinFunctionScalar
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (k₀ : Type u) [Field k₀] [Fintype k₀]
@@ -257,7 +278,7 @@ private theorem ordinaryArtinScalar
 function `b` is isomorphic to the Artin–Schreier sheaf of the induced `Q̄_ℓ`-character, also for
 a trivial character.
 
-Source: latest blueprint, lem-fd-first-formula proof, coefficient paragraph
+Source: latest blueprint, lemma-fourier-transform-constant-sheaf proof, coefficient paragraph
 (blueprint: lem-fd-unit-punctured-kernel-coefficient-comparison).
 Proof. `#k₀` is a unit in `E`, and a ring map preserves `Ring.inverse` of a unit; the
 constant-section ring maps commute with `E → Q̄_ℓ`. The regular Push comparison along the

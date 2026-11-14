@@ -355,7 +355,7 @@ lemma exists_openImmersionRestrictionLowerStarAdjunction_unit_app_hom_app_eq
   exact ConcreteCategory.congr_hom (congrArg (fun f ↦ f.hom.app (op P')) e.hom_inv_id) σ'
 
 /-- **Locally constant sheaves extend uniquely over a dense open** (blueprint
-`lem-wf-dense-open-pi1-surjective`, part (3)). Let `X` be a locally noetherian scheme such that
+`theorem-purity-real-sheaves-curves`, part (3)). Let `X` be a locally noetherian scheme such that
 the local rings of all étale `X`-schemes are integral domains (for instance a regular scheme),
 `j : U ⟶ X` an open immersion with dense image and `G` a locally constant sheaf of modules on
 the small étale site of `X`. Then the unit `G ⟶ j_* j^* G` is an isomorphism. -/

@@ -142,8 +142,9 @@ import WeilConjectures.Algebra.Homology.BoundedFlatIndependentCoefficients
 import Mathlib.CategoryTheory.Monoidal.Preadditive
 /-! # Models for constant-coefficient strict reduction on the original pro-etale site
 
-Source: Stacks Tags 099M, 099N and 0E48; smooth-purity blueprint, fix-lem-exchanges,
-Step 4 (blueprint: lem-sp-completion-mate-comparison).
+Source: Stacks Tags 099M, 099N and 0E48; smooth-purity blueprint,
+proposition-composition-base-change-rf-shriek, Step 4 (blueprint:
+lem-sp-completion-mate-comparison).
 
 This is the original-site specialization of the existing strict quotient-tower construction.
 The site retains object universe t+1 and morphism universe t.
@@ -708,12 +709,12 @@ private theorem scalarPull_isIso {X Y : Scheme.{t}} (f : X ⟶ Y)
       (proEtaleSheafInverseImage f CommRingCat.{t + 1}).map aV ≫ cS.hom) :
     IsIso ((mateEquiv (proEtaleRingExtensionAdjunction aV)
       (proEtaleRingExtensionAdjunction aU)).symm
-        (proEtaleRingRestrictionPullbackInv f RV SV RU SU aV aU cR cS comm)).natTrans := by
+        (proEtaleRingRestrictionPullbackInv f RV SV RU SU aV aU cR cS comm)) := by
   let δ := proEtaleRingRestrictionDirectImage f RV SV RU SU aV aU cR cS comm
   have hm : (mateEquiv (proEtaleRingModuleAdjunction f SV SU cS)
       (proEtaleRingModuleAdjunction f RV RU cR)
       (TwoSquare.mk _ _ _ _
-        (proEtaleRingRestrictionPullbackInv f RV SV RU SU aV aU cR cS comm))).natTrans =
+        (proEtaleRingRestrictionPullbackInv f RV SV RU SU aV aU cR cS comm))) =
       δ.hom := by
     exact restrictionPullback_mate f RV SV RU SU aV aU cR cS comm
   have hi : TwoSquare.mk _ _ _ _
@@ -724,13 +725,12 @@ private theorem scalarPull_isIso {X Y : Scheme.{t}} (f : X ⟶ Y)
     apply (mateEquiv (proEtaleRingModuleAdjunction f SV SU cS)
       (proEtaleRingModuleAdjunction f RV RU cR)).injective
     rw [Equiv.apply_symm_apply]
-    apply TwoSquare.ext
-    intro M
+    refine NatTrans.ext (funext fun M ↦ ?_)
     exact congr_app hm M
   change IsIso ((mateEquiv (proEtaleRingExtensionAdjunction aV)
     (proEtaleRingExtensionAdjunction aU)).symm
       (TwoSquare.mk _ _ _ _
-        (proEtaleRingRestrictionPullbackInv f RV SV RU SU aV aU cR cS comm))).natTrans
+        (proEtaleRingRestrictionPullbackInv f RV SV RU SU aV aU cR cS comm)))
   rw [hi, iterated_mateEquiv_conjugateEquiv_symm]
   exact conjugateEquiv_symm_iso
     ((proEtaleRingExtensionAdjunction aV).comp
@@ -851,7 +851,7 @@ private theorem restrictionPullback_unit
       ((proEtaleRingModuleAdjunction f SV SU cS).unit.app N) ≫
         (mateEquiv (proEtaleRingModuleAdjunction f SV SU cS)
           (proEtaleRingModuleAdjunction f RV RU cR)
-          (TwoSquare.mk _ _ _ _ σ)).natTrans.app _ = _ at h
+          (TwoSquare.mk _ _ _ _ σ)).app _ = _ at h
   rw [hm] at h
   have hz := congrArg (fun k ↦ k.val.app W z) h
   change (δ.hom.app ((proEtaleRingModulePullback f SV SU cS).obj N)).val.app W
@@ -1436,7 +1436,7 @@ private theorem modelPull_normalized_iff
     H.mapDerivedCategory.map_id, DF.reduction.map_id,
     (DerivedCategory.Qh (C := T)).map_id]
   erw [DG.reduction.map_id, H.mapDerivedCategory.map_id]
-  repeat' first | erw [Category.id_comp] | erw [Category.comp_id] | erw [Functor.map_id]
+  repeat' first | erw [Category.id_comp] | erw [Category.comp_id]
   erw [(DerivedCategory.Qh (C := U)).map_id, H.mapDerivedCategory.map_id]
   repeat' first | erw [Category.id_comp] | erw [Category.comp_id]
   rfl

@@ -421,7 +421,7 @@ after scalar extension. Thus B tensor_R P has a two-term finite free model.
 models. Step 2 and (b) implies (a) of lem-sfb-adic-stratified-perfect show that a
 constructible module in degree zero satisfies the right hand side.
 4. For bounded K, choose cohomological bounds u <= v. Starting with tau_{<=u-1}K = 0,
-apply lem-weil-pbc-truncation-triangle successively for q = u,...,v. Each third term
+apply theorem-pbc-injective-acyclicity successively for q = u,...,v. Each third term
 H^q(K)[-q] satisfies (a) by step 3 and shift closure. The triangulated closure of
 lem-sfb-adic-stratified-perfect gives (a) for tau_{<=v}K, hence for K.
 5. Conversely that lemma gives boundedness and stratified perfect R-complex models.

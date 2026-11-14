@@ -15,7 +15,7 @@ import WeilConjectures.AlgebraicGeometry.Torsion.TorsionAbelianDirectImageVanish
 /-!
 # Higher direct image bounds from affine etale objects
 
-Source: main-20261015, det-pe-unbounded-classical-bounds, step 10; Stacks 072W.
+Source: main-20261015, lemma-uniform-bounds-pro-etale-affines, step 10; Stacks 072W.
 (blueprint: lem-sfb-higher-direct-image-affine-etale-bound)
 -/
 
@@ -47,7 +47,7 @@ private theorem module_vanishing {X Y : Scheme.{u}} (g : X ⟶ Y) (c : ℕ)
     (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})
   let N := Φ.obj ((Etale.upperStar (ModuleCat.{u + 1} Λ) V.hom).obj M)
   have hN : N.IsTorsion := Sheaf.IsTorsion.of_iso
-    (asIso ((Etale.upperStarForget₂ Λ V.hom).natTrans.app M))
+    (asIso ((Etale.upperStarForget₂ Λ V.hom).app M))
     (Etale.isTorsion_upperStar V.hom hM)
   have hsub := hc W.hom N hN (n + 1) (by omega)
   obtain ⟨e⟩ := Scheme.nonempty_sheafH_extDerivedIso V.left (n + 1)
@@ -66,7 +66,7 @@ private theorem module_vanishing {X Y : Scheme.{u}} (g : X ⟶ Y) (c : ℕ)
 
 /-- A bound on the absolute torsion cohomology of inverse images of affine etale objects
 bounds higher direct images. No finiteness assumption on the morphism is needed.
-Source: main-20261015, det-pe-unbounded-classical-bounds, step 10; Stacks 072W.
+Source: main-20261015, lemma-uniform-bounds-pro-etale-affines, step 10; Stacks 072W.
 (blueprint: lem-sfb-higher-direct-image-affine-etale-bound)
 
 Proof: Compute the higher direct image by the sheafification of the cohomology presheaf

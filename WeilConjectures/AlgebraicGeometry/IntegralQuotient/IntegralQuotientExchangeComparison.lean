@@ -90,7 +90,7 @@ interfaces. Source: Stacks 07A7
 def ambient (sq : ChosenCartesianSquare h f' f g) :
     F Λ f ⋙ L Λ g ⟶ L Λ h ⋙ F Λ f' :=
   (mateEquiv (adj Λ f) (adj Λ f')
-    (TwoSquare.mk _ _ _ _ (scalarPullbackSquare Λ sq).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (scalarPullbackSquare Λ sq).hom))
 
 variable [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules Λ T)]
 
@@ -119,7 +119,7 @@ def sectionExchange (sq : ChosenCartesianSquare h f' f g) :
         ModuleRingedComparison.derivedPushforward Λ f' :=
   (mateEquiv (ModuleRingedComparison.derivedAdjunction Λ f)
     (ModuleRingedComparison.derivedAdjunction Λ f')
-    (TwoSquare.mk _ _ _ _ (sectionSquare Λ sq).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (sectionSquare Λ sq).hom))
 
 /-- The existing normalized pullback comparison, with its internal endpoint made explicit.
 Source: Stacks 07A6 (blueprint: lem-sfb-integral-quotient-exchange-comparison). -/
@@ -255,7 +255,7 @@ def sectionScalarProjection
       (q U).derived ⋙ ModuleRingedComparison.derivedPushforward S u :=
   (mateEquiv (ModuleRingedComparison.derivedAdjunction R u)
     (ModuleRingedComparison.derivedAdjunction S u)
-    (TwoSquare.mk _ _ _ _ χ.hom)).natTrans
+    (TwoSquare.mk _ _ _ _ χ.hom))
 
 attribute [local irreducible] ScalarComparisonRealized sectionScalarProjection
   SectionScalarNormalized SectionPullNormalized rho scalarExchangeLeft scalarExchangeRight

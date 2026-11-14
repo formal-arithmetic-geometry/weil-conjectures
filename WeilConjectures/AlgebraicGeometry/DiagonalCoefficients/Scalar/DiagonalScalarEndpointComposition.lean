@@ -103,8 +103,8 @@ private theorem conjugate_symm_commShift
     (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂) [a₁.CommShift ℤ] [a₂.CommShift ℤ]
     (α : R₁ ⟶ R₂) [NatTrans.CommShift α ℤ] :
     NatTrans.CommShift ((conjugateEquiv a₁ a₂).symm α) ℤ := by
-  dsimp [conjugateEquiv, mateEquiv, Iso.homCongr, TwoSquare.equivNatTrans,
-    TwoSquare.natTrans, TwoSquare.mk]
+  dsimp [conjugateEquiv, mateEquiv, Iso.homCongr,
+    TwoSquare.mk]
   infer_instance
 
 private theorem shifted_comp

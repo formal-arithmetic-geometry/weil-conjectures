@@ -13,7 +13,7 @@ public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
 
 /-! # PointFiniteCohomologyComplexes
 
-Source: Weil blueprint, `def-weil-finite-coefficient-point`, order 1509
+Source: Weil blueprint, `lemma-perfect-complexes-geometric-point`, order 1509
 (blueprint: def-weil-point-finite-cohomology-complexes).
 -/
 

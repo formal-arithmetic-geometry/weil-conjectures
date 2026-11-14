@@ -24,7 +24,8 @@ RHom(A, B) ⊗ᴸ 𝒪_E ⧸ ℓⁿ ⟶ RHom(A ⊗ᴸ 𝒪_E ⧸ ℓⁿ, B ⊗�
 ```
 (`CategoryTheory.Functor.LaxMonoidal.ihomComparison`) is an isomorphism
 (`ProEtale.CondensedRing.isIso_ihomComparison_leftDerivedIntegersModPowReduction`; blueprint
-`lem-coef-integral-hom-reduction`, `det-prop-scalar-six-tensor-hom` (2) for `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`).
+`proposition-six-operations-change-coefficients--7`,
+`proposition-six-operations-change-coefficients` (2) for `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`).
 
 Since `0 ⟶ 𝒪_{E,X} --ℓⁿ--> 𝒪_{E,X} ⟶ (𝒪_E ⧸ ℓⁿ)_X ⟶ 0` is short exact
 (`ProEtale.shortExact_integersModPowReduction`), this is an instance of
@@ -49,7 +50,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E] [Algebra E (PadicAlgC
   (X : Scheme.{u})
 
 /-- **Reduction modulo `ℓⁿ` commutes with internal homs** (blueprint
-`lem-coef-integral-hom-reduction`): for `A, B ∈ D(Mod_{𝒪_{E,X}})`, the comparison
+`proposition-six-operations-change-coefficients--7`): for `A, B ∈ D(Mod_{𝒪_{E,X}})`, the comparison
 `RHom(A, B) ⊗ᴸ 𝒪_E ⧸ ℓⁿ ⟶ RHom(A ⊗ᴸ 𝒪_E ⧸ ℓⁿ, B ⊗ᴸ 𝒪_E ⧸ ℓⁿ)` of the derived reduction, monoidal
 through `Functor.leftDerivedFunctorMonoidal`, is an isomorphism. -/
 theorem isIso_ihomComparison_leftDerivedIntegersModPowReduction
@@ -58,7 +59,7 @@ theorem isIso_ihomComparison_leftDerivedIntegersModPowReduction
     letI := Mod.extendScalarsMonoidal (integersModPowReduction X ℓ E n)
     letI := (Mod.extendScalars (integersModPowReduction X ℓ E n)).leftDerivedFunctorMonoidal
     IsIso ((Functor.LaxMonoidal.ihomComparison
-      L(Mod.extendScalars (integersModPowReduction X ℓ E n)) A).natTrans.app B) :=
+      L(Mod.extendScalars (integersModPowReduction X ℓ E n)) A).app B) :=
   Mod.isIso_ihomComparison_leftDerivedExtendScalars _ _
     (zsmul_id_comp_integersModPowReduction X ℓ E n) (shortExact_integersModPowReduction X ℓ E n)
     A B
@@ -77,7 +78,7 @@ theorem isIso_ihomComparison_leftDerivedIntegersModPowReduction_of_eq
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))) :
     letI := inst
     IsIso ((Functor.LaxMonoidal.ihomComparison
-      L(Mod.extendScalars (integersModPowReduction X ℓ E n)) A).natTrans.app B) := by
+      L(Mod.extendScalars (integersModPowReduction X ℓ E n)) A).app B) := by
   subst h
   exact isIso_ihomComparison_leftDerivedIntegersModPowReduction ℓ E n X A B
 

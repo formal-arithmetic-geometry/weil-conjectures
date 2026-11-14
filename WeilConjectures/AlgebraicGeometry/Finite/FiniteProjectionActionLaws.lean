@@ -28,7 +28,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionMonoidal
 /-!
 # Tensor-action and open-counit identities for finite-level projection maps
 
-Source: blueprint sec-smooth-purity, lem-pur-projection-purity-agreement, expanded Step 6;
+Source: blueprint chap-Smooth-purity, prose-09-16, expanded Step 6;
 Stacks Project Tags 0B56, 0E8I and 0GL1
 (blueprint: lem-pur-finite-projection-action-laws).
 

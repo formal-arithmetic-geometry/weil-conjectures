@@ -34,7 +34,7 @@ abstract coefficient categories keeps the kernel from unfolding the concrete pul
 pushforward functors.
 
 This is the change of coefficients in the proof of the proper base change theorem (blueprint
-`sk-thm-reduction`).
+`proposition-proper-base-change-etale-site--1`).
 -/
 
 @[expose] public section
@@ -303,8 +303,8 @@ lemma mapHomotopyCategoryPlus_baseChangeMap_restrictScalars (sq : CommSq g' f' f
     (NatTrans.mapHomotopyCategoryPlus (baseChangeMap (ModuleCat.{u + 1} Λ) sq)).app
         ((Sheaf.restrictScalars X.smallEtaleTopology φ).mapHomotopyCategoryPlus.obj K) ≫
       ((f')_*[ModuleCat.{u + 1} Λ]).mapHomotopyCategoryPlus.map
-        ((NatTrans.mapHomotopyCategoryPlus (upperStarRestrictScalars φ g').natTrans).app K) =
-    (NatTrans.mapHomotopyCategoryPlus (upperStarRestrictScalars φ g).natTrans).app
+        ((NatTrans.mapHomotopyCategoryPlus (upperStarRestrictScalars φ g')).app K) =
+    (NatTrans.mapHomotopyCategoryPlus (upperStarRestrictScalars φ g)).app
         (((f)_*[ModuleCat.{u + 1} Λ']).mapHomotopyCategoryPlus.obj K) ≫
       (Sheaf.restrictScalars Y'.smallEtaleTopology φ).mapHomotopyCategoryPlus.map
         ((NatTrans.mapHomotopyCategoryPlus (baseChangeMap (ModuleCat.{u + 1} Λ') sq)).app K) := by

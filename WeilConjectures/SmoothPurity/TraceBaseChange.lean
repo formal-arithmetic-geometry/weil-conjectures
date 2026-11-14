@@ -28,14 +28,14 @@ change `Lg^* Rf_! ≅ Rf'_! Lg'^*`, it is the trace of `f'`, up to the identific
 The smooth trace is the composite `Tr_f ∘ Rf_!(γ_f)` of the orientation and the counit of
 `Rf_! ⊣ Rf^!` (`AlgebraicGeometry.ProEtale.CondensedRing.smoothTrace_eq`), so the compatibility
 (`AlgebraicGeometry.ProEtale.CondensedRing.exists_iso_smoothTrace_baseChange`, blueprint
-`sk-prop-sp-purity-bc`, trace form) follows from two facts:
+`proposition-compatibility-purity-base-change`, trace form) follows from two facts:
 
 - the counit of `Rf_! ⊣ Rf^!` commutes with base change, through the exceptional base change
   map, which is its mate
   (`AlgebraicGeometry.ProEtale.CondensedRing.homEquiv_symm_map_comp_upperShriekBaseChange`);
 - the orientation `γ_f` commutes with base change
   (`AlgebraicGeometry.ProEtale.CondensedRing.smoothOrientation_baseChange`, blueprint
-  `sk-prop-sp-purity-bc` at the unit, owed by the smooth purity section).
+  `proposition-compatibility-purity-base-change` at the unit, owed by the smooth purity section).
 
 -/
 
@@ -88,9 +88,9 @@ lemma homEquiv_symm_map_comp_upperShriekBaseChange (sq : IsPullback g' f' f g)
   rw [Adjunction.homEquiv_naturality_left_symm, upperShriekBaseChange, Equiv.symm_apply_apply,
     ← Category.assoc, ← hβ, Category.assoc, ← Functor.map_comp]
 
-/-- Blueprint `sk-prop-sp-purity-bc`, trace form (owed by the smooth purity section,
-`sec-smooth-purity`): **the smooth trace is compatible with base change** (SGA 4, Exposé XVIII,
-Théorème 2.9 (Var 4)), deduced from the compatibility of the orientation
+/-- Blueprint `proposition-compatibility-purity-base-change`, trace form (owed by the smooth purity
+section, `chap-Smooth-purity`): **the smooth trace is compatible with base change** (SGA 4, Exposé
+XVIII, Théorème 2.9 (Var 4)), deduced from the compatibility of the orientation
 (`smoothOrientation_baseChange`) and of the counit with base change. For a cartesian square
 with `f` (hence `f'`) smooth of pure relative dimension `d`, the trace of `f'` is, up to an
 isomorphism `Lg'^* ℚ̄_ℓ,X(d)[2d] ≅ ℚ̄_ℓ,X'(d)[2d]` of the Tate twists, the pullback of the trace

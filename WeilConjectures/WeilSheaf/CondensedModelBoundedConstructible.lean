@@ -77,8 +77,8 @@ variable (s) in
 lemma geometricFiberProjLowerStarFrobeniusIso_eq :
     geometricFiberProjLowerStarFrobeniusIso Λ s =
       Functor.isoWhiskerLeft (s.geometricFiberProj)^*⟦Λ⟧
-          (upperStarIsoLowerStarInv Λ s.geometricGaloisFrobenius).symm ≪≫
-        (upperStarComp Λ s.geometricGaloisFrobenius.hom s.geometricFiberProj).symm ≪≫
+          (upperStarIsoLowerStarInv Λ s.geometricGaloisFrobenius.asIso).symm ≪≫
+        (upperStarComp Λ s.geometricGaloisFrobenius.asIso.hom s.geometricFiberProj).symm ≪≫
         upperStarCongr Λ (Scheme.Hom.geometricGaloisFrobenius_hom_comp_geometricFiberProj s) :=
   rfl
 
@@ -117,7 +117,8 @@ theorem upperStarWeilCompatible : UpperStarWeilCompatible Λ φ h := fun N ↦ b
     upperStarGeometricFiberMapCompFrobeniusIso_eq, geometricFiberProjLowerStarFrobeniusIso_eq,
     geometricFiberProjLowerStarFrobeniusIso_eq]
   exact upperStarSquareComparison_inv_app_frobenius Λ s.geometricFiberProj t.geometricFiberProj φ
-    (Scheme.Hom.geometricFiberMap φ h) s.geometricGaloisFrobenius t.geometricGaloisFrobenius
+    (Scheme.Hom.geometricFiberMap φ h) s.geometricGaloisFrobenius.asIso
+    t.geometricGaloisFrobenius.asIso
     s.geometricGaloisFrobenius_hom_comp_geometricFiberProj
     t.geometricGaloisFrobenius_hom_comp_geometricFiberProj
     (Scheme.Hom.isPullback_geometricFiberMap φ h).flip.toCommSq

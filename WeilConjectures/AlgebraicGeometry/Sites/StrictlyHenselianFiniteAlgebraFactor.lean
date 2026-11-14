@@ -18,7 +18,7 @@ field finite over the separably closed residue field of `A`, hence strictly hens
 every prime `q` of `B` there is an idempotent `e` of `B` with `e ∉ q` such that
 `B ⧸ (1 - e) ≅ B[1/e]` is a strictly henselian local ring: the local factor of `B` through `q`.
 
-(blueprint: `det-tf-restriction-zero-covers`)
+(blueprint: `lemma-tangent-cones-on-cover`)
 
 ## References
 
@@ -36,7 +36,7 @@ namespace IsStrictlyHenselianLocalRing
 finite `A`-algebra. For every prime `q` of `B` there is an idempotent `e` of `B` with
 `1 - e ∈ q` such that `B ⧸ (1 - e)` is a strictly henselian local ring.
 
-(blueprint: `det-tf-restriction-zero-covers`) -/
+(blueprint: `lemma-tangent-cones-on-cover`) -/
 theorem exists_isIdempotentElem_quotient (A : Type u) (B : Type v) [CommRing A] [CommRing B]
     [IsStrictlyHenselianLocalRing A] [Algebra A B] [Module.Finite A B] (q : Ideal B)
     [q.IsPrime] :

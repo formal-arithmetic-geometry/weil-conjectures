@@ -14,7 +14,7 @@ public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroCoverDatum
 
 # The surface `T'` of a cover datum
 
-For a cover datum `p : C ⟶ X`, `c` of blueprint `det-tf-restriction-zero-covers`, let
+For a cover datum `p : C ⟶ X`, `c` of blueprint `lemma-tangent-cones-on-cover`, let
 `S' = C ×_k C`, `s' = (c, c)` and `T'` the strict localization of `S'` at `s'`
 (`AlgebraicGeometry.Etale.CurveLocalModel.CoverDatum.T'`), with the morphism `π : T' ⟶ T` induced
 by `p × p` (`AlgebraicGeometry.Etale.CurveLocalModel.CoverDatum.π`). The curves `D' = G' ∪ V'`,

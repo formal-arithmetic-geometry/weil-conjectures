@@ -24,17 +24,17 @@ and `β_{c₁} = c_s^! b ∘ β_c` (the composition laws of the exchanges). The 
 isomorphism of `c` is `λ_{c,K} = τ_c ∘ c^! λ_K` for the exceptional internal hom exchange
 `τ_c : c^! RHom(A, B) ⟶ RHom(c^* A, c^! B)`, the mate of `c^!(ev) ∘ t_c`.
 
-Blueprint `det-tf-sp-kernel-pullback` states
+Blueprint `lemma-section-specialized-correspondence` states
 
 `𝔥_c S_C(λ_{c_η,K}) = λ_{c_s,K'} c_s^! ρ β_c(P_X)`,
 
-given the first identity `𝔥 S(λ_K) = λ_{K'} ρ` of blueprint `det-tf-sp-universal-kernel`, and
-deduces the section `k_{u_s}` of the specialized coefficient `u_s = β_{c₁} S_C(u) α_{c₂}`.
+given the first identity `𝔥 S(λ_K) = λ_{K'} ρ` of blueprint `lemma-nearby-cycles-universal-kernel`,
+and deduces the section `k_{u_s}` of the specialized coefficient `u_s = β_{c₁} S_C(u) α_{c₂}`.
 This file proves both for abstract monoidal categories and lax monoidal functors:
 
 * `CategoryTheory.map_comp_exchangeHom_eq`: the exchange `τ` commutes with `𝔥` and `𝔥_c`,
   `S_C(τ_c) ≫ 𝔥_c = β_c ≫ c_s^!(𝔥) ≫ τ_{c_s}`, from the compatibility of `β_c` with the
-  projection formula (blueprint `det-nearby-exceptional-tensor` (2));
+  projection formula (blueprint `lemma-compatibilities-base-change-maps` (2));
 * `CategoryTheory.map_externalDuality_comp_eq`: the displayed identity;
 * `CategoryTheory.curry_comp_eq_of_section`: the section of the specialized coefficient.
 
@@ -57,12 +57,12 @@ variable {CP CP' CC CC' : Type*} [Category CP] [Category CP'] [Category CC] [Cat
   {U L : CP ⥤ CC} {U' L' : CP' ⥤ CC'}
 
 /-- **The exceptional internal hom exchange commutes with `𝔥`** (the core of blueprint
-`det-tf-sp-kernel-pullback`): let `ev : A ⊗ H ⟶ B` and `ev' : A' ⊗ H' ⟶ B'` be evaluations,
-`h : S_P H ⟶ H'` the map adjoint to `(a ⊗ 1) ≫ μ ≫ S_P(ev) ≫ b`, `τ : U H ⟶ H_c` a map adjoint
-to `t ≫ U(ev)` for `t : L A ⊗ U H ⟶ U (A ⊗ H)`, `τ'` the map adjoint to `t' ≫ U'(ev')`, and `h_c`
-the map adjoint to `((L' a ≫ α) ⊗ 1) ≫ μ ≫ S_C(ev_c) ≫ β ≫ U'(b)`. If `β` is compatible with
-the projection-formula maps `t`, `t'` (blueprint `det-nearby-exceptional-tensor` (2)) and `t'` is
-natural, then `S_C(τ) ≫ h_c = β ≫ U'(h) ≫ τ'`. -/
+`lemma-section-specialized-correspondence`): let `ev : A ⊗ H ⟶ B` and `ev' : A' ⊗ H' ⟶ B'` be
+evaluations, `h : S_P H ⟶ H'` the map adjoint to `(a ⊗ 1) ≫ μ ≫ S_P(ev) ≫ b`, `τ : U H ⟶ H_c` a map
+adjoint to `t ≫ U(ev)` for `t : L A ⊗ U H ⟶ U (A ⊗ H)`, `τ'` the map adjoint to `t' ≫ U'(ev')`, and
+`h_c` the map adjoint to `((L' a ≫ α) ⊗ 1) ≫ μ ≫ S_C(ev_c) ≫ β ≫ U'(b)`. If `β` is compatible with
+the projection-formula maps `t`, `t'` (blueprint `lemma-compatibilities-base-change-maps` (2)) and
+`t'` is natural, then `S_C(τ) ≫ h_c = β ≫ U'(h) ≫ τ'`. -/
 theorem map_comp_exchangeHom_eq [MonoidalClosed CC']
     (α : SP ⋙ L' ⟶ L ⋙ SC) (β : U ⋙ SC ⟶ SP ⋙ U')
     {A B H : CP} {A' B' H' : CP'} (ev : A ⊗ H ⟶ B) (ev' : A' ⊗ H' ⟶ B') (a : A' ⟶ SP.obj A)
@@ -109,10 +109,10 @@ theorem map_comp_exchangeHom_eq [MonoidalClosed CC']
 
 omit [MonoidalCategory CP] [MonoidalCategory CP'] [MonoidalCategory CC] [MonoidalCategory CC']
   [SP.LaxMonoidal] [SC.LaxMonoidal] in
-/-- **The specialized external duality** (blueprint `det-tf-sp-kernel-pullback`, the displayed
-identity `𝔥_c S_C(λ_{c_η,K}) = λ_{c_s,K'} c_s^! ρ β_c(P_X)`): if `λ_c = τ ∘ U(λ_K)` and
+/-- **The specialized external duality** (blueprint `lemma-section-specialized-correspondence`, the
+displayed identity `𝔥_c S_C(λ_{c_η,K}) = λ_{c_s,K'} c_s^! ρ β_c(P_X)`): if `λ_c = τ ∘ U(λ_K)` and
 `λ_{c_s} = τ' ∘ U'(λ_{K'})`, the exchange `τ` commutes with `𝔥` (`map_comp_exchangeHom_eq`) and
-`𝔥 S(λ_K) = λ_{K'} ρ` (blueprint `det-tf-sp-universal-kernel`, first identity), then
+`𝔥 S(λ_K) = λ_{K'} ρ` (blueprint `lemma-nearby-cycles-universal-kernel`, first identity), then
 `S_C(λ_c) ≫ 𝔥_c = β ≫ U'(ρ) ≫ λ_{c_s}`. -/
 theorem map_externalDuality_comp_eq (β : U ⋙ SC ⟶ SP ⋙ U') {P H : CP} {P' H' : CP'} {Hc : CC}
     {Hc' : CC'} (h : SP.obj H ⟶ H') (τ : U.obj H ⟶ Hc) (τ' : U'.obj H' ⟶ Hc')
@@ -143,10 +143,11 @@ theorem unit_comp_map_curry_comp_eq [MonoidalClosed CC] [MonoidalClosed CC'] {F 
     rightUnitor_naturality_assoc]
 
 omit [MonoidalCategory CP] [MonoidalCategory CP'] [SP.LaxMonoidal] in
-/-- **The section of the specialized coefficient** (blueprint `det-tf-sp-kernel-pullback`, second
-part): if `u : c₂^* K ⟶ c₁^! K` corresponds to the section `k_u : 𝟙 ⟶ c^! P_X` (its name is
-`λ_c ∘ k_u`), then the specialized coefficient `u_s = β_{c₁} ∘ S_C(u) ∘ α_{c₂}` corresponds to
-`c_s^! ρ ∘ β_c ∘ S_C(k_u) ∘ σ_C`, for the unit `σ_C = ε` of `S_C`. -/
+/-- **The section of the specialized coefficient** (blueprint
+`lemma-section-specialized-correspondence`, second part): if `u : c₂^* K ⟶ c₁^! K` corresponds to
+the section `k_u : 𝟙 ⟶ c^! P_X` (its name is `λ_c ∘ k_u`), then the specialized coefficient
+`u_s = β_{c₁} ∘ S_C(u) ∘ α_{c₂}` corresponds to `c_s^! ρ ∘ β_c ∘ S_C(k_u) ∘ σ_C`, for the unit
+`σ_C = ε` of `S_C`. -/
 theorem curry_comp_eq_of_section [MonoidalClosed CC] [MonoidalClosed CC']
     (β : U ⋙ SC ⟶ SP ⋙ U') {P H : CP} {P' H' : CP'} {X Y : CC} {X' Y' : CC'}
     (h : SP.obj H ⟶ H') (τ : U.obj H ⟶ (ihom X).obj Y) (τ' : U'.obj H' ⟶ (ihom X').obj Y')
@@ -175,7 +176,7 @@ variable {C D : Type*} [Category C] [MonoidalCategory C] [Category D] [MonoidalC
 
 /-- The map `t : F M ⊗ S N ⟶ S (M ⊗ N)`, i.e. `c^* M ⊗ c^! N ⟶ c^!(M ⊗ N)`, the mate of the
 inverse projection formula followed by the exceptional counit (blueprint
-`det-nearby-exceptional-tensor`). -/
+`lemma-compatibilities-base-change-maps`). -/
 noncomputable def exceptionalTensorMap (M N : D) [IsIso (leftProjection pf M (S.obj N))] :
     F.obj M ⊗ S.obj N ⟶ S.obj (M ⊗ N) :=
   adj'.homEquiv _ _ (inv (leftProjection pf M (S.obj N)) ≫ M ◁ adj'.counit.app N)
@@ -231,7 +232,7 @@ theorem uncurry_inv_exceptionalHomMap (M N : D) [∀ T, IsIso ((pf.app T).app M)
 `τ = (exceptionalHomMap)⁻¹` and the maps `t = exceptionalTensorMap` of two adjunctions
 `P ⊣ S` (`Rc_! ⊣ Rc^!`) and `P₂ ⊣ S₂` (`Rc_{s!} ⊣ Rc_s^!`): `map_comp_exchangeHom_eq` with all
 hypotheses but the compatibility `hβ` of `β` with `t` (blueprint
-`det-nearby-exceptional-tensor` (2)) discharged. -/
+`lemma-compatibilities-base-change-maps` (2)) discharged. -/
 theorem map_inv_exceptionalHomMap_comp_eq {C₂ D₂ : Type*} [Category C₂] [MonoidalCategory C₂]
     [Category D₂] [MonoidalCategory D₂] [BraidedCategory C₂] [BraidedCategory D₂]
     [MonoidalClosed C₂] [MonoidalClosed D₂] {F₂ : D₂ ⥤ C₂} {P₂ : C₂ ⥤ D₂} {S₂ : D₂ ⥤ C₂}

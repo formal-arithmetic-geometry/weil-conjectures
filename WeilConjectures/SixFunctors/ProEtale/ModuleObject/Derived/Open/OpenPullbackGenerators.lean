@@ -13,8 +13,8 @@ public import WeilConjectures.CategoryTheory.SixFunctors.Monoidal
 /-!
 # Open inverse image preserves the constructible finite-Tor generators
 
-Source: blueprint main-20261015, det-sf-mate-open-restriction, proof step 3;
-sk-prop-proper-base-change-unbounded-pullback, proof steps 1--5.
+Source: blueprint main-20261015, proposition-composition-open-restriction-compactifications-f, proof
+step 3; sk-prop-proper-base-change-unbounded-pullback, proof steps 1--5.
 (blueprint: lem-sfb-open-pullback-generators)
 -/
 
@@ -157,8 +157,8 @@ private theorem constructible_of_iso
 /-- The exact termwise open pullback preserves the bounded constructible finite-Tor
 generators for every admissible condensed coefficient, including coefficients given up to
 ring-object isomorphism.
-Source: blueprint det-sf-mate-open-restriction, proof step 3; the inverse-image localizing
-argument of sk-prop-proper-base-change-unbounded-pullback.
+Source: blueprint proposition-composition-open-restriction-compactifications-f, proof step 3; the
+inverse-image localizing argument of sk-prop-proper-base-change-unbounded-pullback.
 (blueprint: lem-sfb-open-pullback-generators).
 
 Proof: Give U its structure morphism j followed by the structure morphism of X. These

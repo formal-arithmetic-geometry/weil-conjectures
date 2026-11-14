@@ -17,7 +17,7 @@ import WeilConjectures.AlgebraicGeometry.IntegralResidueDerivedMonoidal
 
 /-! # The evaluation-defined site comparison
 
-Source: Weil blueprint, lem-sf-hom-comparison-finite-free, evaluation paragraph;
+Source: Weil blueprint, proposition-six-operations-dctf--15, evaluation paragraph;
 Stacks Tags 03EO, 03EL, 08J7 (blueprint: def-sf-evaluation-hom-site-comparison).
 The tensor comparison below uses only the comparison-site adjunction, avoiding
 unrelated scheme-pullback coherence modules.
@@ -181,6 +181,6 @@ noncomputable def siteComparisonEvaluationHom
           ((comparisonUpperStar A X).mapDerivedCategory.obj M) :=
   let F := (comparisonUpperStar A X).mapDerivedCategory
   let : F.Monoidal := siteComparisonDerivedMonoidal A X
-  (Functor.LaxMonoidal.ihomComparison F K).natTrans.app M
+  (Functor.LaxMonoidal.ihomComparison F K).app M
 
 end AlgebraicGeometry.ProEtale

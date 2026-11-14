@@ -251,7 +251,6 @@ end AlgebraicGeometry.Scheme.ConstantTensorAux
 
 namespace AlgebraicGeometry.Scheme
 
-set_option maxHeartbeats 800000 in
 -- The tensor comparisons require elaborating several large sheafification functor composites.
 /-- The constant-scalar tensor comparison is natural in both factors.
 Source: Stacks Project, Modules on Sites, Tag 0GMW
@@ -297,7 +296,6 @@ theorem etaleConstantModule_tensor_comparison (T : Scheme.{u})
       (ConstantTensorAux.realizeSheafificationIso T A) ≪≫
     Functor.isoWhiskerRight k E⟩
 
-set_option maxHeartbeats 800000 in
 -- The tensor comparisons require elaborating several large sheafification functor composites.
 /-- Realizing constant coefficients commutes naturally with right tensor.
 Source: Stacks Project, Modules on Sites, Sections 03EK, 093I and 03CV

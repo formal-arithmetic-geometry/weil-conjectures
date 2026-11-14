@@ -34,7 +34,7 @@ saturated versions), and Tag 0754, `lemma-characterize-weak-serre-subcategory`.
 (blueprint: lem-sfb-weak-serre-bounded-thick)
 
 Proof:
-1. By def-weil-pbc-bounded-derived-subcategories, boundedness is finite cohomological
+1. By situation-conventions, boundedness is finite cohomological
    support, equivalently vanishing outside an integer interval. The empty support is
    bounded by [0, 0]. Thus the object property is homologyProperty P intersected with
    the bounded property of the standard t-structure.

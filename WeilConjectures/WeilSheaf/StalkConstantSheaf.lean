@@ -182,9 +182,9 @@ variable (k₀ l X) in
 `Fr^* ℚ̄_ℓ ⟶ ℚ̄_ℓ`. -/
 lemma frobeniusStr_adicConstant :
     (adicConstant k₀ l X).frobeniusStr = ProEtale.upperStarAdicConstantSheafHom l
-      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom :=
+      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom :=
   ProEtale.upperStarIsoLowerStarInv_hom_app_comp_adicConstantSheafLowerStarIso_hom l
-    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
+    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso
 
 
 omit [Finite k₀] [Fact (ringChar k₀ ≠ l)] in
@@ -203,18 +203,18 @@ canonical morphisms `(Frᵐ)^* ℚ̄_ℓ ⟶ ℚ̄_ℓ`, by the cocycle conditio
 `AlgebraicGeometry.ProEtale.upperStarAdicConstantSheafHom_comp`. -/
 lemma frobeniusPowStr_adicConstant (m : ℕ) (hm : 1 ≤ m) :
     (adicConstant k₀ l X).frobeniusPowStr m = ProEtale.upperStarAdicConstantSheafHom l
-      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom := by
+      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom := by
   induction m, hm using Nat.le_induction with
   | base =>
-    rw [frobeniusPowStr_one _ (congrArg Iso.hom
+    rw [frobeniusPowStr_one _ (congrArg (fun e ↦ e.asIso.hom)
       (pow_one (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius)),
       frobeniusStr_adicConstant]
     exact ProEtale.upperStarCongr_hom_app_comp_upperStarAdicConstantSheafHom _
   | succ m hm ih =>
-    have e : (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom ≫
-        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-          ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (m + 1)).hom := by
-      rw [pow_succ, Aut.Aut_mul_def, Iso.trans_hom]
+    have e : (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom ≫
+        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
+          ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (m + 1)).asIso.hom := by
+      rw [pow_succ, Aut.mul_asIso, Iso.trans_hom]
     rw [← upperStarFactor_hom_app_comp_frobeniusPowStr_succ _ m e, ih, frobeniusStr_adicConstant,
       ProEtale.upperStarFactor, Iso.trans_hom, NatTrans.comp_app, Category.assoc]
     exact (congrArg (_ ≫ ·) (ProEtale.upperStarAdicConstantSheafHom_comp l _ _)).trans
@@ -223,10 +223,11 @@ lemma frobeniusPowStr_adicConstant (m : ℕ) (hm : 1 ≤ m) :
 
 /-- The Weil structures `Fr^* F ⟶ F` on underlying sheaves are natural in `F`. -/
 lemma frobeniusStr_naturality {F G : WeilSheaf k₀ l X} (f : F ⟶ G) :
-    ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom)^*[WeilCoefficients.{u} l].map
+    ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom)^*[
+      WeilCoefficients.{u} l].map
         f.hom.hom.f.hom ≫ G.frobeniusStr = F.frobeniusStr ≫ f.hom.hom.f.hom := by
   have n := (ProEtale.upperStarIsoLowerStarInv (WeilCoefficients.{u} l)
-    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius).hom.naturality f.hom.hom.f.hom
+    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso).hom.naturality f.hom.hom.f.hom
   rw [frobeniusStr, frobeniusStr, ← Category.assoc, n, Category.assoc, Category.assoc]
   congr 1
   have h := congrArg (fun g ↦ g.hom) f.hom.hom.h

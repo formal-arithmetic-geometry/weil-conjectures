@@ -233,8 +233,6 @@ private theorem ordinary_restriction_exists {X Y : Scheme.{u}} (f : X ⟶ Y) (n 
   exact ⟨(proEtaleCoefficientDirectImageComparison f
     (Padic.coefficientExtensionTransition l E (n + 1))).symm, HEq.rfl⟩
 
-set_option maxHeartbeats 400000 in
--- Comparing the concrete localization factors and adjunction mates needs extra heartbeats.
 /-- Pullback evaluation respects adjacent quotient transitions, with the scalar
 comparison obtained by transposing the published restricted direct-image map.
 Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 0941 and 07A7
@@ -297,9 +295,9 @@ theorem integralPullEvaluation_quotientSquare {X Y : Scheme.{u}} (f : X ⟶ Y)
   let δ₀ := ((mateEquiv
     (sfIntrinsicConstantModuleAdjunction f (finiteCoefficientRing l E (n + 1)))
     (sfIntrinsicConstantModuleAdjunction f (finiteCoefficientRing l E (n + 2)))).symm
-      (TwoSquare.mk _ _ _ _ r₀.inv)).natTrans
+      (TwoSquare.mk _ _ _ _ r₀.inv))
   let δ := ((mateEquiv (finiteAdj l E f n) (finiteAdj l E f (n + 1))).symm
-    (TwoSquare.mk _ _ _ _ r.inv)).natTrans
+    (TwoSquare.mk _ _ _ _ r.inv))
   let α (k : ℕ) : I.mapDerivedCategory ⋙ (V X k).mapDerivedCategory ⟶
       (V Y k).mapDerivedCategory ⋙ (F k).mapDerivedCategory :=
     (pullbackTensorDerivedEvaluation l E f k).hom

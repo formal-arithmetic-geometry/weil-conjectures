@@ -34,12 +34,13 @@ of `Kˣ`, so the cyclotomic Tate module is literally the Tate module of the addi
 
 ## Blueprint
 
-`cyclotomicTateModule` implements `det-d-ab-cyclotomic`;
-`AddCommGroup.eq_zero_of_mem_tateModule_of_forall_fixed` implements `sk-p-tate`; together with
+`cyclotomicTateModule` implements `definition-tate-twists--8`;
+`AddCommGroup.eq_zero_of_mem_tateModule_of_forall_fixed` implements
+`proposition-no-frobenius-fixed-vector`; together with
 `AddCommGroup.eq_zero_of_mem_tateModule_of_forall_symm_fixed`,
 `AddCommGroup.rationalTateModule.eq_zero_of_map_eq_self` and
 `AddCommGroup.rationalTateModule.eq_zero_of_map_symm_eq_self` it implements
-`lem-tate-module-no-fixed`.
+`proposition-no-frobenius-fixed-vector`.
 -/
 
 @[expose] public section
@@ -60,10 +61,10 @@ vectors, so the arithmetic and the geometric Frobenius give the same statement. 
 `M = A₀(k)` with `σ` the arithmetic Frobenius, the hypothesis `hfin` says that the fixed subgroup
 `A^σ = A₀(k₀)` is finite, which is the only input the geometric proof uses.
 
-Proof (blueprint `lem-tate-module-no-fixed`): all `t n` lie in the finite group `M^σ`, of order
-`N` say; the order of `t (n + N)` is a power `ℓ ^ j` of `ℓ` dividing `N`, so `j ≤ N` and
+Proof (blueprint `proposition-no-frobenius-fixed-vector`): all `t n` lie in the finite group `M^σ`,
+of order `N` say; the order of `t (n + N)` is a power `ℓ ^ j` of `ℓ` dividing `N`, so `j ≤ N` and
 `t n = ℓ ^ N • t (n + N) = 0`.
-(blueprint: `sk-p-tate`, `lem-tate-module-no-fixed`) -/
+(blueprint: `proposition-no-frobenius-fixed-vector`) -/
 theorem eq_zero_of_mem_tateModule_of_forall_fixed {l : ℕ} [Fact l.Prime] {M : Type*}
     [AddCommGroup M] (s : M ≃+ M) (hfin : {x : M | s x = x}.Finite) {t : ℕ → M}
     (ht : t ∈ tateModule l M) (hst : ∀ n, s (t n) = t n) : t = 0 := by
@@ -93,8 +94,8 @@ theorem eq_zero_of_mem_tateModule_of_forall_fixed {l : ℕ} [Fact l.Prime] {M : 
   calc t n = (l : ℤ) ^ N • t (n + N) := (tateModule.pow_zsmul_coe_add t' n N).symm
     _ = 0 := by exact_mod_cast hkill
 
-/-- Blueprint `lem-tate-module-no-fixed`, the same statement for the inverse automorphism:
-`σ⁻¹` has the same fixed points as `σ`. -/
+/-- Blueprint `proposition-no-frobenius-fixed-vector`, the same statement for the inverse
+automorphism: `σ⁻¹` has the same fixed points as `σ`. -/
 theorem eq_zero_of_mem_tateModule_of_forall_symm_fixed {l : ℕ} [Fact l.Prime] {M : Type*}
     [AddCommGroup M] (s : M ≃+ M) (hfin : {x : M | s x = x}.Finite) {t : ℕ → M}
     (ht : t ∈ tateModule l M) (hst : ∀ n, s.symm (t n) = t n) : t = 0 :=
@@ -103,8 +104,8 @@ theorem eq_zero_of_mem_tateModule_of_forall_symm_fixed {l : ℕ} [Fact l.Prime] 
 
 namespace rationalTateModule
 
-/-- Blueprint `lem-tate-module-no-fixed`: an automorphism `σ` of an abelian group `M` whose fixed
-subgroup is finite fixes no nonzero vector of the rational Tate module `V_ℓ M`.
+/-- Blueprint `proposition-no-frobenius-fixed-vector`: an automorphism `σ` of an abelian group `M`
+whose fixed subgroup is finite fixes no nonzero vector of the rational Tate module `V_ℓ M`.
 
 Write `v = ℓ ^ {-b} t` with `t ∈ T_ℓ M`; since `T_ℓ M → V_ℓ M` is injective, `σ t = t`, so
 `t = 0` by `AddCommGroup.eq_zero_of_mem_tateModule_of_forall_fixed`. -/
@@ -129,7 +130,8 @@ theorem eq_zero_of_map_eq_self {l : ℕ} [Fact l.Prime] {M : Type*} [AddCommGrou
   exact (smul_eq_zero.mp hcv).resolve_left
     (IsFractionRing.to_map_ne_zero_of_mem_nonZeroDivisors c.2)
 
-/-- Blueprint `lem-tate-module-no-fixed`, the same statement for the inverse automorphism. -/
+/-- Blueprint `proposition-no-frobenius-fixed-vector`, the same statement for the inverse
+automorphism. -/
 theorem eq_zero_of_map_symm_eq_self {l : ℕ} [Fact l.Prime] {M : Type*} [AddCommGroup M]
     (s : M ≃+ M) (hfin : {x : M | s x = x}.Finite) {v : rationalTateModule l M}
     (hv : map s.symm.toAddMonoidHom v = v) : v = 0 :=
@@ -146,7 +148,7 @@ the `ℓ`-th power maps, and `ℤ_ℓ(1)` is the group of compatible systems `(u
 `u n ∈ μ_{ℓ^n}(K)` and `u (n + 1) ^ ℓ = u n`: that is, the Tate module of the abelian group
 `Kˣ`, written additively. The rational cyclotomic Tate module `ℚ_ℓ(1)` is the localisation
 `ℤ_ℓ(1)[1/ℓ]`; it is not defined separately here.
-(blueprint: `det-d-ab-cyclotomic`) -/
+(blueprint: `definition-tate-twists--8`) -/
 def cyclotomicTateModule (K : Type*) [CommMonoid K] (l : ℕ) [Fact l.Prime] :
     AddSubgroup (ℕ → Additive Kˣ) :=
   AddCommGroup.tateModule l (Additive Kˣ)

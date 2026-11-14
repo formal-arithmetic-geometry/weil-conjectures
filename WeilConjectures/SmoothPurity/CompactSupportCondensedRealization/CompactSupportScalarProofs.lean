@@ -19,7 +19,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortE
 /-! # Generic support, resolution, and derived-mate proofs
 
 Proved categorical subarguments for compact-support coefficient transport.
-Sources: Stacks 03EK and 0D6E; blueprint sk-thm-purity-transport, Step 10.
+Sources: Stacks 03EK and 0D6E; blueprint theorem-smooth-purity-all-admissible-coefficients, Step 10.
 -/
 
 @[expose] public noncomputable section
@@ -80,7 +80,7 @@ private theorem chosen_unit_isIso_congr
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- An inverse mate is invertible when its unit and relevant counits are invertible.
-Source: Stacks 03EK and 0D6E; blueprint sk-thm-purity-transport, Step 10.
+Source: Stacks 03EK and 0D6E; blueprint theorem-smooth-purity-all-admissible-coefficients, Step 10.
 (blueprint: lem-pur-inverse-mate-supported-counit).
 Proof: Expand the inverse mate through its unit and counit. Each factor is an isomorphism, so
 every component and hence the natural transformation is invertible. -/
@@ -90,9 +90,9 @@ theorem inverse_mate_isIso_of_support
     (a : L ⊣ R) (b : l ⊣ r) (F : A ⥤ D) (G : B ⥤ E)
     (e : R ⋙ F ≅ G ⋙ r) [IsIso a.unit]
     (hc : ∀ M, IsIso (b.counit.app (G.obj (L.obj M)))) :
-    IsIso ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ e.hom)).natTrans := by
+    IsIso ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ e.hom)) := by
   have hi (M : A) : IsIso
-      (((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ e.hom)).natTrans.app M) := by
+      (((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ e.hom)).app M) := by
     have : IsIso (a.unit.app M) := inferInstance
     have : IsIso (b.counit.app (G.obj (L.obj M))) := hc M
     change IsIso (𝟙 _ ≫ l.map (F.map (a.unit.app M)) ≫
@@ -149,7 +149,7 @@ end ExactSupport
 
 attribute [-instance] WeilConjectures.completedOrdinaryScalarExtension_additive in
 /-- Scalar restriction preserves the derived essential image of open extension.
-Source: Stacks 03EK and 0D6E; blueprint sk-thm-purity-transport, Step 10.
+Source: Stacks 03EK and 0D6E; blueprint theorem-smooth-purity-all-admissible-coefficients, Step 10.
 (blueprint: lem-pur-derived-scalar-open-support).
 Proof: The ordinary open unit is invertible. The ordinary support theorem makes its counit
 invertible on scalar-restricted extensions. Transport that counit through exact derived functors
@@ -250,7 +250,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- A continuous flat site direct image preserves the scalar-restricted injective resolution used
 for coefficient transport.
-Source: Stacks 03EK and 0D6E; blueprint sk-thm-purity-transport, Step 10.
+Source: Stacks 03EK and 0D6E; blueprint theorem-smooth-purity-all-admissible-coefficients, Step 10.
 (blueprint: lem-pur-continuous-scalar-resolution).
 Proof: Pass both sites to their small equivalent models. Construct the ringed direct-image models
 and the sectionwise identity comparison isomorphisms. Equivalences are exact and preserve
@@ -426,17 +426,17 @@ private theorem resolved_derived_mate_isIso
     [PreservesFiniteLimits G] [PreservesFiniteColimits G]
     [PreservesFiniteLimits H] [PreservesFiniteColimits H]
     (adj : L ⊣ R) (adj' : L' ⊣ R') (s : G ⋙ L' ≅ L ⋙ H)
-    [IsIso (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)).natTrans]
+    [IsIso (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom))]
     (hres : ∀ I : CochainComplex B ℤ, I.IsKInjective →
       ∀ J : CochainComplex D ℤ, J.IsKInjective →
       ∀ j : (H.mapHomologicalComplex (.up ℤ)).obj I ⟶ J,
         QuasiIso j → QuasiIso ((R'.mapHomologicalComplex (.up ℤ)).map j)) :
     IsIso (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
       adj'.mapDerivedCategoryRightDerivedAdjunction
-      (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso s).hom)).natTrans := by
+      (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso s).hom)) := by
   let m := (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
     adj'.mapDerivedCategoryRightDerivedAdjunction
-    (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso s).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso s).hom))
   change IsIso m
   have hI (I : CochainComplex B ℤ) [I.IsKInjective] :
       IsIso (m.app (_root_.DerivedCategory.Q.obj I)) := by
@@ -450,9 +450,9 @@ private theorem resolved_derived_mate_isIso
       chainDerivedUnit_isIso_of_resolution R' _ J j
     have hinjective : IsIso (chainDerivedUnit R I) := chainDerivedUnit_isIso R I
     have hchainmate : IsIso ((NatTrans.mapHomologicalComplex
-        (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)).natTrans (.up ℤ)).app I) := by
+        (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)) (.up ℤ)).app I) := by
       change IsIso (((NatIso.mapHomologicalComplex
-        (asIso (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)).natTrans)
+        (asIso (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)))
         (.up ℤ)).app I).hom)
       infer_instance
     have hi : G.mapDerivedCategory.map (chainDerivedUnit R I) ≫
@@ -465,7 +465,7 @@ private theorem resolved_derived_mate_isIso
       rw [hi]
       exact (G.mapDerivedCategoryFactors.app ((R.mapHomologicalComplex (.up ℤ)).obj I) ≪≫
         (DerivedCategory.Q (C := C)).mapIso (@asIso _ _ _ _ ((NatTrans.mapHomologicalComplex
-          (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)).natTrans (.up ℤ)).app I)
+          (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)) (.up ℤ)).app I)
             hchainmate) ≪≫
         @asIso _ _ _ _ (chainDerivedUnit R' ((H.mapHomologicalComplex (.up ℤ)).obj I))
           hrestricted).isIso_hom
@@ -493,7 +493,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- A derived mate is invertible when the ordinary mate is invertible and restricted resolutions
 remain quasi-isomorphisms.
-Source: Stacks 03EK and 0D6E; blueprint sk-thm-purity-transport, Step 10.
+Source: Stacks 03EK and 0D6E; blueprint theorem-smooth-purity-all-admissible-coefficients, Step 10.
 (blueprint: lem-pur-derived-mate-resolution-criterion).
 Proof: Resolve the scalar-restricted image of each K-injective complex. The resolution condition
 makes the target derived unit invertible, and the source unit is invertible on K-injectives. The
@@ -514,7 +514,7 @@ theorem derived_mate_isIso_of_resolution
     [PreservesFiniteLimits G] [PreservesFiniteColimits G]
     [PreservesFiniteLimits H] [PreservesFiniteColimits H]
     (adj : L ⊣ R) (adj' : L' ⊣ R') (s : G ⋙ L' ≅ L ⋙ H)
-    [IsIso (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)).natTrans]
+    [IsIso (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom))]
     (hres : ∀ (I : CochainComplex B ℤ), I.IsKInjective →
       ∀ (J : CochainComplex D ℤ), J.IsKInjective →
       ∀ j : (H.mapHomologicalComplex (.up ℤ)).obj I ⟶ J,
@@ -522,7 +522,7 @@ theorem derived_mate_isIso_of_resolution
     IsIso (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
       adj'.mapDerivedCategoryRightDerivedAdjunction
       (TwoSquare.mk _ _ _ _
-        (Functor.mapDerivedCategorySquareIso s.symm).inv)).natTrans := by
+        (Functor.mapDerivedCategorySquareIso s.symm).inv)) := by
   rw [← derived_square_symm_hom s.symm]
   exact resolved_derived_mate_isIso adj adj' s hres
 

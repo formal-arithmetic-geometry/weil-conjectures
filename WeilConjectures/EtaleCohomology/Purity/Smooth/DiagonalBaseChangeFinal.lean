@@ -13,8 +13,8 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 /-!
 # Base change of the canonical orientation along an isomorphism of squares
 
-Blueprint `sk-prop-sp-purity-bc` at the unit, for an isomorphism of cartesian squares of
-noetherian schemes (the Frobenius square): the statement of
+Blueprint `proposition-compatibility-purity-base-change` at the unit, for an isomorphism of
+cartesian squares of noetherian schemes (the Frobenius square): the statement of
 `AlgebraicGeometry.Etale.dualizingComplexTwistShiftIso_baseChange` follows from the reduction
 `AlgebraicGeometry.Etale.dualizingComplexTwistShiftIso_baseChange_of_isIso_of_laws` and the three
 laws of the compactly supported direct image:
@@ -49,10 +49,11 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasKummerClass Λ]
   [LocallyOfFiniteType aY'] [QuasiSeparatedSpace Y] [QuasiSeparatedSpace Y'] [QuasiCompact f]
   [QuasiCompact f'] [IsNoetherian X] [IsNoetherian X']
 
-/-- Blueprint `sk-prop-sp-purity-bc` at the unit, for an isomorphism of squares of noetherian
-schemes (the Frobenius square): the canonical orientations `θ_f`, `θ_{f'}` are compatible with
-the exceptional base change and the pullback of the twist-and-shift. This is the statement of
-`AlgebraicGeometry.Etale.dualizingComplexTwistShiftIso_baseChange` for `g`, `g'` isomorphisms. -/
+/-- Blueprint `proposition-compatibility-purity-base-change` at the unit, for an isomorphism of
+squares of noetherian schemes (the Frobenius square): the canonical orientations `θ_f`, `θ_{f'}` are
+compatible with the exceptional base change and the pullback of the twist-and-shift. This is the
+statement of `AlgebraicGeometry.Etale.dualizingComplexTwistShiftIso_baseChange` for `g`, `g'`
+isomorphisms. -/
 theorem dualizingComplexTwistShiftIso_baseChange_of_isIso_of_isNoetherian :
     (upperShriekBaseChangeMap Λ sq).app (constantComplex Λ Y) ≫
         (R(f')^![Λ]).map (leftDerivedUpperStarUnitIso _ g).hom ≫

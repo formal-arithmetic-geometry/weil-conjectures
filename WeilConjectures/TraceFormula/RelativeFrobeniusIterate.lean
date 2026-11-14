@@ -17,8 +17,8 @@ universal homeomorphisms with `Φ_X ≫ f = f ≫ Φ_Y`, for instance the model 
 of models over a finite field. For every `m` put `X'_m = Y ×_{Φ_Y^m, Y, f} X`, with projections
 `f'_m : X'_m ⟶ Y`, `p_m : X'_m ⟶ X`, and let `r_m = (f, Φ_X^m) : X ⟶ X'_m` be the relative
 Frobenius (`AlgebraicGeometry.relativeFrobenius`), a finite universal homeomorphism with
-`p_m r_m = Φ_X^m` and `f'_m r_m = f` (blueprint `sk-d-relative-frob`). This file proves blueprint
-lemma `sk-i-relative-frob`:
+`p_m r_m = Φ_X^m` and `f'_m r_m = f` (blueprint `lemma-comparison-via-relative-frobenius--text-1`).
+This file proves blueprint lemma `lemma-comparison-via-relative-frobenius`:
 
 1. The Frobenius comparison in degree `m`
    (`ProEtale.CondensedRing.lowerShriekFrobeniusComparison`)
@@ -65,14 +65,14 @@ omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] 
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] [IsFinite ΦY.left]
   [IsUniversalHomeomorphism ΦY.left] in
 /-- The cartesian square `p_m ≫ f = f'_m ≫ Φ_Y^m` defining `X'_m = Y ×_{Φ_Y^m, Y, f} X`
-(blueprint `sk-d-relative-frob`). -/
+(blueprint `lemma-comparison-via-relative-frobenius--text-1`). -/
 lemma isPullback_frobeniusIterate (m : ℕ) :
     IsPullback (pullback.snd (frobeniusIterate ΦY m) f) (pullback.fst (frobeniusIterate ΦY m) f)
       f (frobeniusIterate ΦY m) :=
   (IsPullback.of_hasPullback _ _).flip
 
-/-- **The Frobenius comparison in degree `m`** (blueprint `sk-i-relative-frob` (1),
-`def-trf-weil-shriek-pushforward` (1)): the natural isomorphism
+/-- **The Frobenius comparison in degree `m`** (blueprint `lemma-comparison-via-relative-frobenius`
+(1), `lemma-comparison-via-relative-frobenius` (1)): the natural isomorphism
 ```
 θ_{f,m} : LΦ_Y^{m*} Rf_! ≅ Rf'_{m!} Lp_m^* ≅ Rf'_{m!} Rr_{m*} Lr_m^* Lp_m^* ≅ Rf_! LΦ_X^{m*}
 ```
@@ -91,8 +91,8 @@ noncomputable def lowerShriekFrobeniusComparison (m : ℕ) :
     (relativeFrobenius_snd ..) (relativeFrobenius_fst ..)
 
 /-- **Compatibility of the Frobenius comparisons with iteration** (blueprint
-`sk-i-relative-frob` (1), `lem-trf-weil-shriek-iterates` (1)): after the composition
-isomorphisms `LΦ^{(m+n)*} ≅ LΦ^{n*} LΦ^{m*}` on `X` and on `Y`,
+`lemma-comparison-via-relative-frobenius` (1), `lemma-comparison-via-relative-frobenius--2` (1)):
+after the composition isomorphisms `LΦ^{(m+n)*} ≅ LΦ^{n*} LΦ^{m*}` on `X` and on `Y`,
 `θ_{f,m+n} = θ_{f,n}(LΦ_X^{m*} -) ∘ LΦ_Y^{n*} θ_{f,m}`. -/
 theorem lowerShriekFrobeniusComparison_add (m n : ℕ)
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
@@ -154,9 +154,10 @@ private lemma frobeniusCoefficient_iterate_aux {D E : Type*}
   simp only [Category.assoc, reassoc_of% h₁, reassoc_of% h₂]
 
 /-- The *pushforward* `ψ' = Rf_! ψ ∘ θ_{f,1} : LΦ_Y^* Rf_! K ⟶ Rf_! K` of a Frobenius
-coefficient morphism `ψ : LΦ_X^* K ⟶ K` along `f` (blueprint `sk-i-relative-frob` (2),
-`def-trf-weil-shriek-pushforward` (2)). For the structure isomorphism of a Weil object it is the
-structure of the lower shriek of Weil objects `ProEtale.CondensedRing.weilLowerShriekOfFrobenius`.
+coefficient morphism `ψ : LΦ_X^* K ⟶ K` along `f` (blueprint
+`lemma-comparison-via-relative-frobenius` (2), `lemma-comparison-via-relative-frobenius` (2)). For
+the structure isomorphism of a Weil object it is the structure of the lower shriek of Weil objects
+`ProEtale.CondensedRing.weilLowerShriekOfFrobenius`.
 -/
 noncomputable def lowerShriekFrobeniusCoefficient
     {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
@@ -191,11 +192,10 @@ lemma weilLowerShriekFrobeniusComparison_hom_app_congr {aX aX' : X ⟶ X} {aY aY
   subst eX eY
   simp
 
-set_option maxHeartbeats 1000000 in
 -- the instances of the categories of sheaves make the unification slow
-/-- **The iterates of the pushforward** (blueprint `sk-i-relative-frob` (2),
-`lem-trf-weil-shriek-iterates` (2)): for a Frobenius coefficient morphism `ψ : LΦ_X^* K ⟶ K`
-(not necessarily invertible) and `m ≥ 1`, the iterates of its pushforward
+/-- **The iterates of the pushforward** (blueprint `lemma-comparison-via-relative-frobenius` (2),
+`lemma-comparison-via-relative-frobenius--2` (2)): for a Frobenius coefficient morphism
+`ψ : LΦ_X^* K ⟶ K` (not necessarily invertible) and `m ≥ 1`, the iterates of its pushforward
 `ψ' = Rf_! ψ ∘ θ_{f,1}` are `ψ'_m = Rf_! ψ_m ∘ θ_{f,m}`. -/
 theorem frobeniusCoefficientIterate_lowerShriekFrobeniusCoefficient
     {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
@@ -246,8 +246,8 @@ theorem frobeniusCoefficientIterate_lowerShriekFrobeniusCoefficient
 
 /-! ### The global operators -/
 
-/-- **The global operators of the pushforward** (blueprint `sk-i-relative-frob` (3),
-`lem-trf-weil-shriek-operator-fibres` (1)): the composition isomorphism
+/-- **The global operators of the pushforward** (blueprint `lemma-comparison-via-relative-frobenius`
+(3), `lemma-comparison-via-relative-frobenius--4` (1)): the composition isomorphism
 `c_f : RΓ_c(Y, Rf_! K) ≅ RΓ_c(X, K)` intertwines the global operators `F_{c,m}(ψ')` of the
 pushforward `ψ' = Rf_! ψ ∘ θ_{f,1}` and `F_{c,m}(ψ)` of the Frobenius coefficient morphism `ψ`,
 for every `m`. -/
@@ -279,13 +279,12 @@ section Stalk
 variable {Z : Over (Spec (.of k))} [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom]
   [IsSeparated Z.hom]
 
-set_option maxHeartbeats 1000000 in
 -- the defeq of the carriers of the lower shriek with `Rf_! K` is slow
 omit [IsFinite ΦX.left] [IsUniversalHomeomorphism ΦX.left] [IsFinite ΦY.left]
   [IsUniversalHomeomorphism ΦY.left] in
 /-- The stalk of the pushforward of a Frobenius coefficient morphism at a fixed point, for an
 arbitrary cartesian square and relative Frobenius (blueprint
-`lem-trf-weil-shriek-operator-fibres` (2)): for `y` fixed by `Φ_Y` with fibre `Z = X ×_Y y`
+`lemma-comparison-via-relative-frobenius--4` (2)): for `y` fixed by `Φ_Y` with fibre `Z = X ×_Y y`
 carrying a Frobenius `Φ_Z` compatible with `Φ_X`, proper base change
 `β : (Rf_! K)_ȳ ≅ RΓ_c(Z, K|_Z)` carries the stalk map of `Rf_! v ∘ θ_f` to the degree-one global
 operator of the restriction `v|_Z` of `v`. -/
@@ -328,11 +327,11 @@ lemma stalk_weilLowerShriekFrobeniusComparison_comp {X' : Over (Spec (.of k))}
   rw [hn]
   exact baseChange_comp_weilLowerShriekFrobeniusComparison_stalk_assoc ℓ sq hy hZ hL hT hi K _
 
-/-- **The stalks of the pushforward at fixed points** (blueprint `sk-i-relative-frob` (4),
-`lem-trf-weil-shriek-operator-fibres` (2)): let `m ≥ 1`, let `y` be a rational point of `Y`
-fixed by `Φ_Y^m`, and let `Z = X ×_Y y` be its fibre, with `i : Z ⟶ X`, carrying the
-restriction `Φ_Z` of `Φ_X^m` (for model Frobenii, `Z` is the base change of a scheme over
-`𝔽_{q^m}` with `Φ_Z` its `q^m`-power Frobenius:
+/-- **The stalks of the pushforward at fixed points** (blueprint
+`lemma-comparison-via-relative-frobenius` (4), `lemma-comparison-via-relative-frobenius--4` (2)):
+let `m ≥ 1`, let `y` be a rational point of `Y` fixed by `Φ_Y^m`, and let `Z = X ×_Y y` be its
+fibre, with `i : Z ⟶ X`, carrying the restriction `Φ_Z` of `Φ_X^m` (for model Frobenii, `Z` is the
+base change of a scheme over `𝔽_{q^m}` with `Φ_Z` its `q^m`-power Frobenius:
 `ProEtale.CondensedRing.IsModelFrobenius.isModelFrobenius_fibreFrobenius`). Then proper base
 change `β : (Rf_! K)_ȳ ≅ RΓ_c(Z, K|_Z)` identifies the stalk map of the iterate `ψ'_m` of the
 pushforward with the degree-one global operator `F_{c,1}(ψ_m|_Z)` of the restriction of `ψ_m`. -/

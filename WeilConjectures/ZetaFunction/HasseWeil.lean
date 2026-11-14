@@ -38,8 +38,8 @@ roots `α` of the `P i`, the shadow of the Lefschetz trace formula.
 ## Main statements
 
 - `AlgebraicGeometry.Scheme.abs_pointCount_sub_le_sum_finrank`: the Hasse–Weil bound with the
-  Betti numbers `dim Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` (`cor-zl-hasse-weil-general-bound`), using the endpoint
-  cohomology of `prop-endpoints`
+  Betti numbers `dim Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` (`corollary-point-count-estimates--1`), using the endpoint
+  cohomology of `theorem-weil-conjectures-smooth-proper-schemes`
   (`AlgebraicGeometry.Scheme.endpoints_of_isIntegralFrobeniusFactor`).
 - `AlgebraicGeometry.Scheme.Hom.pointCount_eq_sum_roots`: `N n = ∑ (-1) ^ i ∑ αⁿ`.
 - `AlgebraicGeometry.Scheme.Hom.abs_pointCount_sub_le`: the Hasse–Weil bound over the degree `n`
@@ -74,7 +74,7 @@ the number of points of `X` over the degree `n` extension of `k` is
 `N n = ∑ i, (-1) ^ i ∑_α αⁿ`, where `α` runs over the reciprocal roots `z⁻¹` of `P i`.
 
 This is the trace formula `N n = ∑ (-1) ^ i tr (Fⁿ | V i)` of Step 1 of the blueprint proof of
-`cor-zl-hasse-weil-general-bound`, read off from the factorization of the zeta function by
+`corollary-point-count-estimates--1`, read off from the factorization of the zeta function by
 comparing logarithmic derivatives. -/
 theorem Hom.pointCount_eq_sum_roots (f : X.Hom (Spec (.of k))) {q d : ℕ}
     {P : Fin (2 * d + 1) → Polynomial ℤ} (hfact : IsWeilFactorization q d f.zetaSeries P)
@@ -144,10 +144,10 @@ factors `P i` satisfying the Riemann hypothesis, `d ≥ 1`, then for every `n �
 `|N n - (q ^ (d n) + 1)| ≤ ∑_{0 < i < 2d} deg (P i) · q ^ (i n / 2)`.
 
 The two endpoint factors `P 0 = 1 - T` and `P (2 * d) = 1 - qᵈ T` (the content of the blueprint
-node `prop-endpoints`, recorded in `AlgebraicGeometry.IsWeilFactorization`) contribute `1` and
-`q ^ (d n)`, and each of the `deg (P i)` reciprocal roots in degree `i` has absolute value
-`q ^ (i / 2)`.
-(blueprint: `cor-zl-hasse-weil-general-bound`) -/
+node `theorem-weil-conjectures-smooth-proper-schemes`, recorded in
+`AlgebraicGeometry.IsWeilFactorization`) contribute `1` and `q ^ (d n)`, and each of the `deg (P i)`
+reciprocal roots in degree `i` has absolute value `q ^ (i / 2)`.
+(blueprint: `corollary-point-count-estimates--1`) -/
 theorem Hom.abs_pointCount_sub_le (f : X.Hom (Spec (.of k))) {q d : ℕ}
     (hq : q = Nat.card k) (hd : 1 ≤ d) {P : Fin (2 * d + 1) → Polynomial ℤ}
     (hfact : IsWeilFactorization q d f.zetaSeries P)
@@ -221,7 +221,7 @@ theorem Hom.abs_pointCount_sub_le (f : X.Hom (Spec (.of k))) {q d : ℕ}
 /-- **The Hasse–Weil bound.** If the zeta function of `X` has integral Frobenius factors `P i`
 satisfying the Riemann hypothesis, then the number `N₁` of `k`-rational points of `X` differs
 from `qᵈ + 1` by at most `∑_{0 < i < 2d} deg (P i) · q^{i/2}`.
-(blueprint: `sk-cor-hasse`) -/
+(blueprint: `corollary-point-count-estimates`) -/
 theorem Hom.abs_pointCount_one_sub_le (f : X.Hom (Spec (.of k))) {q d : ℕ}
     (hq : q = Nat.card k) (hd : 1 ≤ d) {P : Fin (2 * d + 1) → Polynomial ℤ}
     (hfact : IsWeilFactorization q d f.zetaSeries P)
@@ -235,11 +235,11 @@ theorem Hom.abs_pointCount_one_sub_le (f : X.Hom (Spec (.of k))) {q d : ℕ}
 geometrically integral curve over a finite field, the factor `P 1` in the factorization
 `Z = P 1 / ((1 - T) (1 - q T))` of its zeta function has degree `2 g`.
 
-This is the zeta-function form of Step 4 of the blueprint proof of `cor-zl-hasse-bound`,
-`dim H¹(C ⊗ k̄, ℚ̄_ℓ) = 2 g`. It is proved here without `ℓ`-adic cohomology, by F. K. Schmidt's
-argument: Riemann–Roch counts the effective divisors of large degree, which are the coefficients
-of the zeta function, and together with the Riemann hypothesis for `P 1` this forces
-`deg P 1 = 2 g`
+This is the zeta-function form of Step 4 of the blueprint proof of
+`corollary-point-count-estimates--2`, `dim H¹(C ⊗ k̄, ℚ̄_ℓ) = 2 g`. It is proved here without
+`ℓ`-adic cohomology, by F. K. Schmidt's argument: Riemann–Roch counts the effective divisors of
+large degree, which are the coefficients of the zeta function, and together with the Riemann
+hypothesis for `P 1` this forces `deg P 1 = 2 g`
 (`AlgebraicGeometry.Scheme.natDegree_eq_two_mul_arithmeticGenus_of_isWeilFactorization`). The
 genus `dim_k Γ(C, Ω¹)` is the arithmetic genus by
 `AlgebraicGeometry.Scheme.genus_eq_arithmeticGenus`. -/
@@ -265,7 +265,7 @@ theorem Hom.natDegree_eq_two_mul_genus_of_isWeilFactorization
 /-- **The Hasse–Weil bound for curves.** Let `C` be a smooth proper geometrically integral curve
 of genus `g` over a finite field `k` with `q` elements. Then for every `n ≥ 1`,
 `|#C(𝔽_{qⁿ}) - (qⁿ + 1)| ≤ 2 g q^{n/2}`.
-(blueprint: `cor-zl-hasse-bound`) -/
+(blueprint: `corollary-point-count-estimates--2`) -/
 theorem Hom.abs_pointCount_sub_le_two_mul_genus (f : X ⟶ Spec (.of k))
     [SmoothOfRelativeDimension 1 f] [IsProper f] [GeometricallyIntegral f] {n : ℕ}
     (hn : n ≠ 0) :
@@ -295,7 +295,7 @@ variable (d : ℕ) [IsProper (X ↘ Spec (CommRingCat.of k₀))]
   [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))]
   [GeometricallyConnected (X ↘ Spec (CommRingCat.of k₀))]
 
-/-- Blueprint `cor-zl-hasse-weil-general-bound` (Hasse–Weil bound in every dimension), in its
+/-- Blueprint `corollary-point-count-estimates--1` (Hasse–Weil bound in every dimension), in its
 cohomological form: for `X₀` smooth, proper and geometrically connected of pure dimension
 `d ≥ 1` over `k₀ = 𝔽_q` and every prime `ℓ ≠ p`, the number `N n = #X₀(𝔽_{qⁿ})` satisfies
 `|N n - (q^{dn} + 1)| ≤ ∑_{0 < i < 2d} bᵢ q^{in/2}` with the Betti numbers

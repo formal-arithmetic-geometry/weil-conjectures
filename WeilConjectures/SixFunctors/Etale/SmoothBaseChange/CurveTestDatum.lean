@@ -183,7 +183,7 @@ lemma Etale.isIso_baseChangeHomologyMap_congr {T Y : Scheme.{u}} {e : Y ⟶ T} {
   rfl
 
 /-- The reduction of the coefficients to a constant sheaf `Λ/dΛ` in the proof of blueprint
-`sbc-lem-bc-universal-test`.
+`lemma-reduction-curve-over-normal-base--1`.
 
 Let `K` be algebraically closed, `e : Y ⟶ Spec K` and `h : Y ⟶ X` with `h` quasi-compact and
 quasi-separated, and let `n ≠ 0` annihilate `Λ`. If `R^q h_* e⁻¹ F` is nonzero for a sheaf `F`
@@ -208,7 +208,7 @@ theorem Etale.exists_not_isZero_higherDirectImage_constantModSheaf {K : Type u} 
   exact hnonzero
     (Etale.isZero_prime_cyclic_higherDirectImage_of_quotient Λ h q r hr hunit hzero)
 
-/-- Blueprint `sbc-lem-bc-universal-test`: Universal curve-test datum for a failure.
+/-- Blueprint `lemma-reduction-curve-over-normal-base--1`: Universal curve-test datum for a failure.
 
 Let `n` be invertible on `S` with `n = 0` in `Λ`, and let `q ≥ 1`. If `BC(p, Λ, q')` holds
 universally for all `q' < q` but `BC(p, Λ, q)` does not hold universally, there is a base
@@ -294,7 +294,7 @@ theorem Etale.exists_isPullback_not_isZero_higherDirectImage (n : ℕ)
   exact ⟨S'', _, π ≫ F.a, _, _, hpb, inferInstance, inferInstance, hnorm, inferInstance, K,
     inferInstance, inferInstance, i, _, _, _, sq'', d, hd, hne⟩
 
-/-- Blueprint `sk-lem-universal-datum`: Universal curve-test datum for a failure.
+/-- Blueprint `lemma-reduction-curve-over-normal-base`: Universal curve-test datum for a failure.
 
 Let `p : X ⟶ S` be an affine smooth relative curve with `X` affine, and let `n` be invertible
 on `S` and annihilate `Λ`. If `BC(p, Λ, q')` holds universally for all `q' < q` but

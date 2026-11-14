@@ -26,7 +26,7 @@ orientation `ω_f ≅ Λ_X(d)[2d]` is compatible with `Ψ` as soon as the frame 
 diagonal (`hframe`), the composition isomorphisms `RΔ^! ω_{p₁} ≅ Λ_X` (`hε`) and the section
 invariant construction (`hL`) are
 (`AlgebraicGeometry.Etale.map_dualizingComplexTwistShiftIso_reduction`, blueprint
-`det-sp-purity-coefficient-change`).
+`proposition-compatibility-purity-change-coefficients`).
 -/
 
 @[expose] public section
@@ -95,7 +95,8 @@ theorem map_sectionInvariantDiagonalIso_hom_comp
 variable [HasKummerClass Λ] [HasKummerClass.IsNormalized Λ] [HasKummerClass Λ']
   [HasKummerClass.IsNormalized Λ'] (τ : DerivedExtendScalarsTateShiftData Λ Λ' hρ ha)
 
-/-- Blueprint `thm-pur-diagonal-dualizing-object`, `det-sp-purity-coefficient-change`
+/-- Blueprint `proposition-relative-dualizing-complex--1`,
+`proposition-compatibility-purity-change-coefficients`
 
 **The canonical orientation `ω_f ≅ Λ_X(d)[2d]` is compatible with the reduction of
 coefficients.** Let `f : X ⟶ Y` be smooth separated of relative dimension `d`, `Y` separated and

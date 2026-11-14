@@ -129,7 +129,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 
 /-! # Exact principal completion and its canonical triangle map
 
-Source: blueprint main-20261015, sec-proetale-coefficients,
+Source: blueprint main-20261015, chap-The-pro-etale-site,
 `sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md`,
 Cones paragraph and shifts sentence; Stacks Tag 05RU
 (blueprint: lem-pe-completion-triangle-comparison).
@@ -282,6 +282,7 @@ private theorem quotientUnit_eq (n : ℕ) :
 private theorem scalar_eq (data : PrincipalReduction.PrincipalReductionConeData l E X)
     (hdata : data.IsCanonical l E X) : data.d = uniformizerEnd l E := by
   let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
+  apply End.ext
   apply Mod.Hom.ext
   apply (sheafToPresheaf _ _).map_injective
   apply NatTrans.ext
@@ -297,9 +298,9 @@ private theorem coefficient_ses (n : ℕ) :
         𝟙 (𝟙_ (Modules l E X))) ≫ finiteUnit l E X n = 0,
       (ShortComplex.mk _ _ w).ShortExact := by
   let e := regularPullbackIso l E X
-  let d := (pullback l E X).map (uniformizerEnd l E ^ (n + 1))
+  let d := (pullback l E X).map (uniformizerEnd l E ^ (n + 1)).asHom
   let p := (pullback l E X).map (reductionHom l E (n + 1))
-  let S := (ShortComplex.mk (uniformizerEnd l E ^ (n + 1)) (reductionHom l E (n + 1))
+  let S := (ShortComplex.mk (uniformizerEnd l E ^ (n + 1)).asHom (reductionHom l E (n + 1))
     (reduction_zero l E (n + 1))).map (pullback l E X)
   have hs : S.ShortExact := (pointResolution l E (n + 1)).map_of_exact (pullback l E X)
   have hscalar : unitEndOnX l E X (uniformizerEnd l E ^ (n + 1)) •
@@ -1458,7 +1459,6 @@ private def roosTriangleIso
   let := cs
   exact TowerCalculus.coneTriangleIso roosF f (Φ f) (hc.2 f).1 (hc.2 f).2
 
-set_option maxHeartbeats 400000 in
 -- The final cone-triangle transport elaborates large mapping-cone triangle isomorphisms.
 /-- Principal completion descends with its specified augmentation, coherent shifts,
 and morphism of distinguished triangles.
@@ -1479,7 +1479,7 @@ Proof, following the nine steps of the updated DAG node:
    Descend both shifts and augmentation compatibility through the localization.
 5. Work in the actual internal-module category of the completion definition. Its adopted
    flat K-flat resolution supplies flat representatives without changing coefficient encoding.
-6. Pull back the exact coefficient sequence of det-pe-derived-nakayama-resolution and
+6. Pull back the exact coefficient sequence of lemma-reduction-derived-nakayama--1 and
    identify its scalar with the canonical principal scalar. Tensor exactness and the
    cone-to-quotient theorem give the cone-to-tensor quasi-isomorphism for flat complexes.
    Transfer this result to arbitrary K-flat complexes along a flat K-flat resolution,

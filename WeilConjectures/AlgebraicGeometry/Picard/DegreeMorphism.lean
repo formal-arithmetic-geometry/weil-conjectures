@@ -20,9 +20,9 @@ degree-`d` part `Pic^d_{X/k}` with the classes of `Pic_{X/k}` of degree `d`.
 
 - `AlgebraicGeometry.locallyConstantIntPresheaf`: the presheaf `T ↦ {locally constant T → ℤ}`
   on `Over S`, and `AlgebraicGeometry.locallyConstantIntSheaf`: the same presheaf as an fppf
-  sheaf, the constant sheaf `ℤ` (blueprint `def-pd-degree-morphism`).
+  sheaf, the constant sheaf `ℤ` (blueprint `theorem-picard-scheme-jacobian-over-separably--1`).
 - `AlgebraicGeometry.picardDegreeMorphism`: the degree morphism `Pic_{X/S} ⟶ ℤ`
-  (blueprint `def-pd-degree-morphism`).
+  (blueprint `theorem-picard-scheme-jacobian-over-separably--1`).
 - `AlgebraicGeometry.picardDegreeSubfunctor`: the subfunctor of `Pic_{X/S}` of the classes of
   degree `d`; for `d = 0` this is `ker(deg) = Pic⁰_{X/S}`.
 - `AlgebraicGeometry.picardFunctorDegreeι`: the canonical morphism `Pic^d_{X/k} ⟶ Pic_{X/k}`,
@@ -55,7 +55,7 @@ variable (S : Scheme.{u})
 on `T` is the group of locally constant functions `T → ℤ`, and pullback along `T' ⟶ T` is
 composition. It is lifted to `Type (u + 1)` to match the values of the relative Picard functor.
 
-(blueprint: `def-pd-degree-morphism`) -/
+(blueprint: `theorem-picard-scheme-jacobian-over-separably--1`) -/
 noncomputable def locallyConstantIntPresheaf : (Over S)ᵒᵖ ⥤ Type (u + 1) where
   obj T := ULift.{u + 1} (LocallyConstant T.unop.left ℤ)
   map g := ↾fun s ↦ ⟨(ULift.down s).comap g.unop.left.base.hom⟩
@@ -128,7 +128,7 @@ variable (S) in
 /-- The **constant sheaf `ℤ`** on the big fppf site of `S`: the sheaf of locally constant
 integer-valued functions.
 
-(blueprint: `def-pd-degree-morphism`) -/
+(blueprint: `theorem-picard-scheme-jacobian-over-separably--1`) -/
 noncomputable def locallyConstantIntSheaf : Sheaf (fppfTopology.over S) (Type (u + 1)) :=
   ⟨locallyConstantIntPresheaf S, isSheaf_locallyConstantIntPresheaf S⟩
 
@@ -142,7 +142,7 @@ variable {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f] [LocallyOfFinitePresentat
 constant sheaf `ℤ`, for `f` proper, flat and locally of finite presentation: a section `x` over
 `T` goes to the locally constant function `AlgebraicGeometry.picardDegree f x : T → ℤ`.
 
-(blueprint: `def-pd-degree-morphism`) -/
+(blueprint: `theorem-picard-scheme-jacobian-over-separably--1`) -/
 noncomputable def picardDegreeMorphism [Flat f] : picardFunctor f ⟶ locallyConstantIntSheaf S :=
   ObjectProperty.homMk
     { app T := ↾fun x ↦ ULift.up ⟨picardDegree f x, isLocallyConstant_picardDegree f x⟩
@@ -161,7 +161,7 @@ lemma picardDegreeMorphism_hom_app_apply [Flat f] {T : Over S}
 the sections whose degree function is identically `d`. For `d = 0` it is the kernel
 `Pic⁰_{X/S} = ker(deg)` of the degree morphism.
 
-(blueprint: `def-pd-degree-morphism`) -/
+(blueprint: `theorem-picard-scheme-jacobian-over-separably--1`) -/
 noncomputable def picardDegreeSubfunctor (d : ℤ) : Subfunctor (picardFunctor f).obj where
   obj T := {x | ∀ t, picardDegree f x t = d}
   map g x hx t := by
@@ -199,7 +199,7 @@ variable [IsProper f] [LocallyOfFinitePresentation f]
 `Pic^d_{X/k} ⟶ Pic_{X/k}` consists exactly of the classes whose degree function is identically
 `d`. In particular `Pic⁰_{X/k} = ker(deg)`.
 
-(blueprint: `def-pd-degree-morphism`) -/
+(blueprint: `theorem-picard-scheme-jacobian-over-separably--1`) -/
 theorem range_picardFunctorDegreeι (d : ℤ) :
     Subfunctor.range (picardFunctorDegreeι f d).hom = picardDegreeSubfunctor f d := by
   have hF := (isSheaf_iff_isSheaf_of_type _ _).1 (picardFunctor f).property
@@ -245,7 +245,7 @@ instance (d : ℤ) : IsIso (Subfunctor.lift (picardFunctorDegreeι f d).hom
 through the canonical morphism `Pic^d_{X/k} ⟶ Pic_{X/k}`; for `d = 0` this identifies
 `Pic⁰_{X/k}` with `ker(deg)`.
 
-(blueprint: `def-pd-degree-morphism`) -/
+(blueprint: `theorem-picard-scheme-jacobian-over-separably--1`) -/
 noncomputable def picardFunctorDegreeIsoSubfunctor (d : ℤ) :
     (picardFunctorDegree f d).obj ≅ (picardDegreeSubfunctor f d).toFunctor :=
   asIso (Subfunctor.lift (picardFunctorDegreeι f d).hom (range_picardFunctorDegreeι f d).le)

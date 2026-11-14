@@ -39,7 +39,7 @@ it is moreover finite over `k` by finiteness of coherent cohomology
 extension of `k`. Part (2) of the blueprint node is
 `AlgebraicGeometry.Scheme.GlobalSectionsBijective.of_geometricallyIntegral`.
 
-(blueprint: `lem-pc-h0-proper-variety`) -/
+(blueprint: `prose-C-04`) -/
 theorem isField_globalSections_of_universallyClosed [UniversallyClosed (X ↘ Spec (.of k))]
     [IsIntegral X] : IsField Γ(X, ⊤) := by
   let : Algebra k Γ(X, ⊤) := (globalSectionsRingHom k (X := X)).toAlgebra

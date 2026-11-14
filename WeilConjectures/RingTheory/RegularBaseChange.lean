@@ -44,7 +44,8 @@ Proof (the six steps of the node, following Stacks 07C1):
 3. Put A = κ(p) ⊗[R] Λ. Tensor symmetry and two applications of
    lem-weil-pbc-tensor-cancel-base-change identify the new fibre with κ(p') ⊗[κ(p)] A.
    The two R-algebra structures on κ(p') agree by step 2.
-4. Regularity of φ makes A Noetherian and geometrically regular (def-weil-pbc-g-ring).
+4. Regularity of φ makes A Noetherian and geometrically regular
+(theorem-finite-etale-covers-proper-henselian--2).
    Apply lem-weil-pbc-geometrically-regular-finitely-generated-extensions to κ(p')/κ(p).
    The fibre is Noetherian by step 3 and def-weil-pbc-noetherian-ring.
 5. For any finite purely inseparable extension k''/κ(p')
@@ -53,9 +54,9 @@ Proof (the six steps of the node, following Stacks 07C1):
    compose the essentially finite type residue-field extension with the finite extension.
    Apply lem-weil-pbc-geometrically-regular-finitely-generated-extensions again.
    Ring isomorphisms preserve regularity (def-weil-regular-scheme), so the new fibre
-   is geometrically regular by def-weil-pbc-g-ring.
+   is geometrically regular by theorem-finite-etale-covers-proper-henselian--2.
 6. Flatness and the Noetherian, geometrically regular fibres give regularity of the
-   second-factor map by def-weil-pbc-g-ring.
+   second-factor map by theorem-finite-etale-covers-proper-henselian--2.
 -/
 theorem regular_base_change
     {R : Type u} {Λ : Type v} {R' : Type w}

@@ -46,9 +46,10 @@ characteristic-zero Lie algebra with central radical.
 ## Blueprint
 
 `LieAlgebra.hasCentralRadical_of_isFaithful` and `LieAlgebra.center_sup_derivedSeries_eq_top`
-implement `sk-p-lie`. The first also implements `lem-ag-faithful-semisimple-lie-central-radical`;
+implement `proposition-lie-algebras-faithful-semisimple-representation`. The first also implements
+`proposition-lie-algebras-faithful-semisimple-representation--1`;
 `LieAlgebra.hasTrivialRadical_quotient_center` together with the second implements
-`lem-ag-central-radical-quotient`.
+`proposition-lie-algebras-faithful-semisimple-representation--2`.
 -/
 
 @[expose] public section
@@ -69,7 +70,7 @@ variable (k L M : Type*) [Field k] [CharZero k] [LieRing L] [LieAlgebra k L] [Mo
 /-- On an irreducible finite-dimensional module `M` over a field of characteristic zero on which
 `L` acts triangularizably, the radical of `L` acts by scalars, so every bracket `⁅x, y⁆` with
 `y ∈ radical k L` acts as zero. The module need not be faithful.
-(blueprint: part of `lem-ag-faithful-semisimple-lie-central-radical`) -/
+(blueprint: part of `proposition-lie-algebras-faithful-semisimple-representation--1`) -/
 lemma toEnd_lie_eq_zero_of_mem_radical [IsIrreducible k L M] [IsTriangularizable k L M] (x : L)
     {y : L} (hy : y ∈ LieAlgebra.radical k L) :
     toEnd k L M ⁅x, y⁆ = 0 := by
@@ -97,7 +98,8 @@ namespace LieAlgebra
 /-- A finite-dimensional Lie algebra over a field of characteristic zero admitting a faithful
 semisimple finite-dimensional representation `M` has central radical: on each irreducible
 summand of `M` the bracket `⁅L, rad L⁆` acts as zero, so it vanishes by faithfulness.
-(blueprint: `sk-p-lie`, `lem-ag-faithful-semisimple-lie-central-radical`) -/
+(blueprint: `proposition-lie-algebras-faithful-semisimple-representation`,
+`proposition-lie-algebras-faithful-semisimple-representation--1`) -/
 theorem hasCentralRadical_of_isFaithful (k L M : Type*) [Field k] [CharZero k]
     [LieRing L] [LieAlgebra k L] [Module.Finite k L]
     [AddCommGroup M] [Module k M] [LieRingModule L M] [LieModule k L M] [Module.Finite k M]
@@ -137,7 +139,7 @@ private lemma mkCenter_eq_zero_iff {k L : Type*} [CommRing k] [LieRing L] [LieAl
 /-- If the radical of a finite-dimensional Lie algebra `L` over a field is central, then the
 quotient `L ⧸ Z(L)` has trivial radical: the inverse image of an abelian ideal of the quotient is
 solvable, hence contained in `rad L = Z(L)`.
-(blueprint: part of `lem-ag-central-radical-quotient`) -/
+(blueprint: part of `proposition-lie-algebras-faithful-semisimple-representation--2`) -/
 theorem hasTrivialRadical_quotient_center (k L : Type*) [Field k] [LieRing L] [LieAlgebra k L]
     [Module.Finite k L] [HasCentralRadical k L] :
     HasTrivialRadical k (L ⧸ center k L) := by
@@ -170,7 +172,8 @@ theorem hasTrivialRadical_quotient_center (k L : Type*) [Field k] [LieRing L] [L
 is *reductive*: it is the sum of its centre `Z(L)` and its derived subalgebra `[L, L]`.
 The quotient `L ⧸ Z(L)` has trivial radical, so its Killing form is non-degenerate and it is
 perfect; lifting brackets gives the decomposition.
-(blueprint: `sk-p-lie`, `lem-ag-central-radical-quotient`) -/
+(blueprint: `proposition-lie-algebras-faithful-semisimple-representation`,
+`proposition-lie-algebras-faithful-semisimple-representation--2`) -/
 theorem center_sup_derivedSeries_eq_top (k L : Type*) [Field k] [CharZero k]
     [LieRing L] [LieAlgebra k L] [Module.Finite k L] [HasCentralRadical k L] :
     center k L ⊔ derivedSeries k L 1 = ⊤ := by

@@ -232,7 +232,7 @@ integral limit cone, including its normalization and its preservation under sche
 Source: literature/blueprint/latest/blueprint/sec-proetale-coefficients/
 sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-integral-limit.proof.md,
 Steps 1--4, and the integral paragraph of the pullback proof
-(blueprint: lem-pe-normalized-integral-quotient-cone).
+(blueprint: lemma-comparison-completed-coefficients--1).
 
 Proof: The continuous reductions embed R into the product of its finite quotients.
 Their joint injectivity makes this an embedding, since R is compact and the product

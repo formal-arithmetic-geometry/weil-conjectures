@@ -43,7 +43,8 @@ theorem extFrobenius_eq_adicConstantHPullback
     (x : Ext (constantIntSheaf _) ((forgetAb k₀ l Y).obj (ProEtaleWeilSheaf.adicConstant k₀ l Y))
       r) :
     extFrobenius I r x =
-      adicConstantHPullback l (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius r x := by
+      adicConstantHPullback l
+        (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso r x := by
   rw [extFrobenius_eq_extFrobeniusOfResolution, extFrobeniusOfResolution_eq,
     adicConstantHPullback_apply, Ext.mk₀CompMk₀,
     ← constantIntSheafToLowerStar_eq_constantIntIsoLowerStar_hom]
@@ -65,7 +66,8 @@ constant Weil sheaf corresponding to the pullback `Fr^*` along the geometric Gal
 theorem exists_linearEquiv_adicConstantH_cohomology_adicConstantHPullback (r : ℕ) :
     ∃ Θ : AdicConstantH l (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber r ≃ₗ[PadicAlgCl l]
         ((WeilSheaf.adicConstant k₀ l Y).cohomology r).carrier,
-      ∀ x, Θ (adicConstantHPullback l (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius r x) =
+      ∀ x, Θ (adicConstantHPullback l
+        (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso r x) =
         ((WeilSheaf.adicConstant k₀ l Y).cohomology r).frobenius (Θ x) := by
   obtain ⟨Θ, hΘ⟩ := exists_linearEquiv_adicConstantH_cohomology
     (injectiveResolution (WeilSheaf.adicConstant k₀ l Y).obj) r
@@ -75,7 +77,7 @@ theorem exists_linearEquiv_adicConstantH_cohomology_adicConstantHPullback (r : �
   exact hΘ x
 
 /-- **Frobenius-equivariant Poincaré duality for `Hʳ(Y ⊗ k̄, ℚ̄_ℓ)` from finite-level dualities**
-(the transport step of blueprint `thm-pod-derived-poincare-duality`, for the constant Weil
+(the transport step of blueprint `theorem-poincare-duality--6`, for the constant Weil
 sheaf). Let the geometric fiber `Ȳ` be connected, with finite cohomology groups
 `Hᵏ(Ȳ, ℤ/ℓᵐ)`. If for every `m` there is a pairing `Hⁱ(Ȳ, ℤ/ℓᵐ) × Hʲ(Ȳ, ℤ/ℓᵐ) ⟶ ℤ/ℓᵐ` in
 `D(Ȳ_ét, ℤ/ℓᵐ)`, nondegenerate on both sides and a `c`-similitude for the étale Frobenius
@@ -100,14 +102,14 @@ theorem exists_isPerfPair_cohomology_adicConstant_of_unitPairing
       ULift.{u + 1} (ZMod (l ^ m)))
     (hPl : ∀ m x, (∀ y, P m x y = 0) → x = 0) (hPr : ∀ m y, (∀ x, P m x y = 0) → y = 0)
     (hPF : ∀ m x y, P m
-      (Etale.frobeniusOperator (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom
-        (Etale.shiftWeilDatum (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom
+      (Etale.frobeniusOperator (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom
+        (Etale.shiftWeilDatum (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom
           (Etale.leftDerivedUpperStarUnitIso _
-            (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom).hom i) x)
-      (Etale.frobeniusOperator (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom
-        (Etale.shiftWeilDatum (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom
+            (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom).hom i) x)
+      (Etale.frobeniusOperator (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom
+        (Etale.shiftWeilDatum (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom
           (Etale.leftDerivedUpperStarUnitIso _
-            (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom).hom j) y) =
+            (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom).hom j) y) =
         c • P m x y) :
     ∃ P' : ((WeilSheaf.adicConstant k₀ l Y).cohomology i).carrier →ₗ[PadicAlgCl l]
         ((WeilSheaf.adicConstant k₀ l Y).cohomology j).carrier →ₗ[PadicAlgCl l] PadicAlgCl l,
@@ -115,7 +117,7 @@ theorem exists_isPerfPair_cohomology_adicConstant_of_unitPairing
         (((WeilSheaf.adicConstant k₀ l Y).cohomology j).frobenius y) =
           algebraMap ℤ_[l] (PadicAlgCl l) c * P' x y := by
   obtain ⟨P₀, hP₀, hP₀F⟩ := exists_isPerfPair_adicConstantH_adicConstantHPullback l _
-    (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius hfin i j c P hPl hPr hPF
+    (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso hfin i j c P hPl hPr hPF
   obtain ⟨Θi, hΘi⟩ := exists_linearEquiv_adicConstantH_cohomology_adicConstantHPullback
     (k₀ := k₀) (l := l) (Y := Y) i
   obtain ⟨Θj, hΘj⟩ := exists_linearEquiv_adicConstantH_cohomology_adicConstantHPullback

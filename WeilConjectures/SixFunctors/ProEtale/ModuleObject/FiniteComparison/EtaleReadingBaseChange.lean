@@ -41,7 +41,7 @@ base change map `Ex_*` of bounded constructible condensed `𝒪_E ⧸ ℓⁿ`-co
 base change map `Etale.derivedBaseChangeMap`
 (`ProEtale.CondensedRing.finiteEtaleReading_map_baseChange`). This is the `ρ`-part of the
 compatibility of reduction modulo `ℓⁿ` with proper base change (blueprint
-`det-sp-mixed-base-change`).
+`proposition-compatibility-purity-base-change`).
 -/
 
 @[expose] public section
@@ -92,7 +92,7 @@ theorem mateEquiv_leftDerivedUpperStarFiniteCoefficientDerivedEquivalenceIso_inv
     (mateEquiv
         (CondensedRing.derivedUpperStarLowerStarAdjunction (Profinite.continuousMapRingObj T) f)
         (ProEtale.derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} (ULift.{u + 1} T)) f)
-        (leftDerivedUpperStarFiniteCoefficientDerivedEquivalenceIso f T).inv).natTrans =
+        (leftDerivedUpperStarFiniteCoefficientDerivedEquivalenceIso f T).inv) =
       (finiteCoefficientDerivedLowerStarIso T f).inv := by
   have h := Adjunction.mateEquiv_derivedAdjunction_restrict
     (ProEtale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} (ULift.{u + 1} T)) f)
@@ -117,7 +117,7 @@ theorem mateEquiv_leftDerivedUpperStarFiniteCoefficientDerivedEquivalenceIso_inv
       ProEtale.leftDerivedUpperStarIsoMapDerivedCategory]
     rfl
   rw [hX]
-  exact congrArg TwoSquare.natTrans h
+  exact h
 
 end FiniteCoefficient
 
@@ -144,14 +144,14 @@ theorem mateEquiv_finiteEtaleReadingUpperStarIso_inv (p : X ⟶ Y) :
     (mateEquiv (IntegersModPowRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E n p)
         (Etale.derivedUpperStarLowerStarAdjunction
           (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) p.left)
-        (finiteEtaleReadingUpperStarIso ℓ E n p).inv).natTrans =
+        (finiteEtaleReadingUpperStarIso ℓ E n p).inv) =
       (finiteEtaleReadingLowerStarIso ℓ E n p).hom := by
   have h₁ : (mateEquiv (IntegersModPowRingObj.boundedConstructibleUpperStarLowerStarAdjunction
       ℓ E n p) (derivedUpperStarLowerStarAdjunction (Profinite.integersModPowRingObj ℓ E n) p.left)
       (boundedConstructibleUpperStarCompatibility (Profinite.integersModPowRingObj ℓ E n) ℓ
-        p).inv).natTrans =
+        p).inv) =
       (IntegersModPowRingObj.boundedConstructibleLowerStarCompatibility ℓ E n p).hom :=
-    congrArg TwoSquare.natTrans (mateEquiv_restrictFullyFaithful
+    (mateEquiv_restrictFullyFaithful
       (derivedUpperStarLowerStarAdjunction (Profinite.integersModPowRingObj ℓ E n) p.left)
       (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _)
       (boundedConstructibleUpperStarCompatibility (Profinite.integersModPowRingObj ℓ E n) ℓ
@@ -204,7 +204,7 @@ theorem finiteEtaleReading_map_baseChange (sq : CommSq g' f' f g)
         ((mateEquiv (IntegersModPowRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E n f)
           (IntegersModPowRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E n f')
           (boundedConstructiblePullbackSquareComparison (Profinite.integersModPowRingObj ℓ E n) ℓ
-            sq).hom).natTrans.app K) ≫
+            sq).hom).app K) ≫
       (finiteEtaleReadingLowerStarIso ℓ E n f').hom.app
         ((boundedConstructibleUpperStar (Profinite.integersModPowRingObj ℓ E n) ℓ g').obj K) =
     L(Etale.upperStar (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) g.left).map

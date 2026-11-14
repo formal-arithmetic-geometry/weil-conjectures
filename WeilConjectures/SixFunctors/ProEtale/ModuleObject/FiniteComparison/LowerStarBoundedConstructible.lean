@@ -32,7 +32,7 @@ Deligne's finiteness theorem on the étale site, through the comparison of the c
   bounded constructible (`ProEtale.CondensedRing.boundedConstructible_inverse_obj_of_etale`, in
   `WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.ConstructibleReading`).
 
-This is the torsion step of blueprint `lem-sfb-dc-lower-star-preserves`.
+This is the torsion step of blueprint `proposition-six-operations-dctf--5`.
 -/
 
 @[expose] public section
@@ -54,7 +54,7 @@ variable (T : Type) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] [Dis
 discrete commutative ring `T` killed by an integer `N` invertible in the field `k`, a `k`-scheme
 `Y` of finite type and a separated morphism `f : X ⟶ Y` of finite type, the derived pushforward
 on module objects over `p_X^* T̲` preserves bounded constructible complexes. This is the torsion
-step of blueprint `lem-sfb-dc-lower-star-preserves`, read on the étale site through the
+step of blueprint `proposition-six-operations-dctf--5`, read on the étale site through the
 comparison of the condensed and étale finite coefficient categories. -/
 theorem boundedConstructible_rightDerivedLowerStar_obj_of_finite {k : Type u} [Field k] (N : ℕ)
     (hN : (N : k) ≠ 0) (hT : (N : T) = 0) {X Y : Scheme.{u}} (s : Y ⟶ Spec (.of k))

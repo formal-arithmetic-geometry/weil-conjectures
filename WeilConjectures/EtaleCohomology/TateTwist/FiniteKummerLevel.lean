@@ -253,7 +253,7 @@ Then `A = A_{E,n} = 𝒪_E / ϖ^n` has characteristic `ℓ^N` (`ϖ^n 𝒪_E = �
 smallest exponent with `ℓ^N A = 0`; this is
 `IsDiscreteValuationRing.ringChar_quotient_span_pow`), and on every scheme `T` on which `ℓ` is
 invertible the finite-level twist `A(1)_T` (`AlgebraicGeometry.Etale.tateTwistSheaf`, the Tate
-sheaf `μ_{ℓ^N} ⊗_ℤ A` of `def-coefficient-twists-detailed`) is canonically
+sheaf `μ_{ℓ^N} ⊗_ℤ A` of `definition-tate-twists`) is canonically
 
 `A(1)_T ≅ μ_{ℓ^N,T} ⊗_{ℤ/ℓ^N} A`
 

@@ -286,11 +286,11 @@ Source: Stacks Project, Tags 05V1, 0F4F, 0F6B, 0F6C and 0993
 Proof:
 1. Put `P = u_{f,p} F`. A lift of `x ≫ f` to `V` pairs uniquely with `x` to
    give a lift to `u_f(V)`, by `def-pc-fibre-product`. These correspondences respect
-   pointed arrows. All diagrams are small by `def-weil-size-convention`.
+   pointed arrows. All diagrams are small by `prose-01-10`.
 2. A cover of a pointed neighbourhood lifts the fixed field point to a member.
    Base change the fpqc cover (`lem-galois-fpqc-covering-base-change`); choose a
    nonempty affine fibre. Weakly etale base change and source locality reduce to
-   `lem-weil-pbc-weak-etale-field`, using `def-weil-pbc-ind-etale-algebra`.
+   `theorem-pro-etale-refinements-weakly-etale`, using `definition-ind-etale-pro-etale-weakly`.
    Its residue field embeds back into the algebraically closed field by
    `lem-weil-pbc-separable-extension-embeds-separably-closed`. Transport to a skeleton.
 3. In sets, local representation and local equality of sheafified sections

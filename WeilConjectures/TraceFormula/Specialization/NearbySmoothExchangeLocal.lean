@@ -56,8 +56,6 @@ section Paste
 variable {X Y X' Y' X'' Y'' : Scheme.{u}} {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'}
   {g' : X' ⟶ X} {h : Y'' ⟶ Y'} {h' : X'' ⟶ X'} {f'' : X'' ⟶ Y''}
 
-set_option maxHeartbeats 1000000 in
--- unifying objects of the derived categories given by composites of derived pullbacks is slow
 /-- **Pointwise pasting of base change morphisms**: for two horizontally pasted squares
 ```
 X'' --h'--> X' --g'--> X
@@ -72,9 +70,9 @@ theorem isIso_baseChangeMap_app_paste_iff (sq₁ : CommSq g' f' f g) (sq₂ : Co
     (sq : CommSq (h' ≫ g') f'' f (h ≫ g)) [IsIso (baseChangeMap Λ sq₂)] (M : 𝔻(X)) :
     IsIso ((baseChangeMap Λ sq).app M) ↔
       IsIso ((L((h)^*⟦Λ⟧)).map ((baseChangeMap Λ sq₁).app M)) := by
-  have key := Adjunction.isIso_exchangeRight_app_paste_iff (G := L((h ≫ g)^*⟦Λ⟧))
-    (G' := L((h' ≫ g')^*⟦Λ⟧)) (G₁ := L((g)^*⟦Λ⟧)) (G₁' := L((g')^*⟦Λ⟧))
-    (G₂ := L((h)^*⟦Λ⟧)) (G₂' := L((h')^*⟦Λ⟧)) (derivedUpperStarLowerStarAdjunction Λ f)
+  -- Infer horizontal functors from the comparisons to avoid repeated instance synthesis.
+  have key := Adjunction.isIso_exchangeRight_app_paste_iff
+    (derivedUpperStarLowerStarAdjunction Λ f)
     (derivedUpperStarLowerStarAdjunction Λ f') (derivedUpperStarLowerStarAdjunction Λ f'')
     (pullbackSquareComparison Λ sq₁) (pullbackSquareComparison Λ sq₂)
     (pullbackSquareComparison Λ sq) (leftDerivedUpperStarComp Λ h g)
@@ -222,7 +220,7 @@ theorem isIso_pullbackExchange_app_of_isIso_baseChangeMap_app (K : 𝔻(Y))
   isIso_pullbackExchange_app_aux (pullbackSquareComparison Λ φ.commSq_i).hom
     (mateEquiv (derivedUpperStarLowerStarAdjunction Λ N.j)
       (derivedUpperStarLowerStarAdjunction Λ M.j)
-      (pullbackSquareComparison Λ φ.commSq_j).hom).natTrans
+      (pullbackSquareComparison Λ φ.commSq_j).hom)
     (baseChangeMap Λ φ.commSq_j) (φ.baseChangeMap_commSq_j_eq_mateEquiv Λ)
     (pullbackSquareComparison Λ φ.commSq_ε).hom (φ.pullbackExchange Λ) rfl K hK
 

@@ -175,7 +175,6 @@ theorem chainIso_natural (P P' L L' M M' : K)
   exact (homTensorDegreewiseMap_natural R P P' L L' M M' f g h n).trans
     (Category.assoc _ _ _).symm
 
-set_option maxHeartbeats 400000 in
 -- Descent combines large tensor and localization comparison terms.
 set_option backward.isDefEq.respectTransparency true in
 /-- The chain-representative comparison before descent in the target variable.

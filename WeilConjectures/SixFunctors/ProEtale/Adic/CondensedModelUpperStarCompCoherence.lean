@@ -32,7 +32,7 @@ variable {l : ℕ} [Fact l.Prime] {X Y : Scheme.{u}}
 theorem mateEquiv_adicUpperStarCompCondensedModIso_inv_eq_hom (f : Y ⟶ X) :
     (mateEquiv (adicUpperStarLowerStarAdjunction l f)
       (CondensedRing.upperStarLowerStarAdjunction (Profinite.padicAlgClRingObj l) f)
-      (adicUpperStarCompCondensedModIso l f).inv).natTrans =
+      (adicUpperStarCompCondensedModIso l f).inv) =
       (adicLowerStarCompCondensedModIso l f).hom :=
   mateEquiv_eq_of_unit _ _ _ _ (fun a ↦
     (unit_app_comp_map_conjugateIsoEquiv_symm_inv_app _ _ _ _ _ _ (fun b ↦ by

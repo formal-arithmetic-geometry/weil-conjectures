@@ -83,7 +83,6 @@ variable {X Y U Z : Over (Spec (.of k))}
   [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType U.hom] [QuasiCompact U.hom]
   [IsSeparated U.hom] [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom]
 
-set_option maxHeartbeats 1000000 in
 -- the instantiation of the abstract lemmas involves large terms
 /-- **Left projection morphisms along `𝟙 × j` and proper pushforward in the first factor**: for
 a proper `g : Z ⟶ X`, if the left projection morphism of `L(𝟙_Z × j)^* ⊣ R(𝟙_Z × j)_*` at

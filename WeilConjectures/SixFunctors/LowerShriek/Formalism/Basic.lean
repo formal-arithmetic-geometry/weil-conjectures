@@ -29,7 +29,7 @@ hypotheses used in the theory:
   `j_! g'_* ≅ g''_* j'_!` for cartesian squares with proper bottom map.
 
 The concrete instance, on the bounded below derived categories of étale sheaves, is used to
-prove the composition law of blueprint `sk-thm-sf-comp-composition`.
+prove the composition law of blueprint `proposition-composition-base-change-rf-shriek--1`.
 -/
 
 @[expose] public section
@@ -62,7 +62,7 @@ isomorphism. -/
 class HasBaseChange : Prop where
   isIso_baseChange {U' U Z' Z : Scheme.{u}} {t : U' ⟶ U} {l : U' ⟶ Z'} {r : U ⟶ Z}
     {b : Z' ⟶ Z} [IsOpenImmersion l] [IsOpenImmersion r] (h : IsPullback t l r b) :
-    IsIso (F.baseChange t l r b h.w).natTrans
+    IsIso (F.baseChange t l r b h.w)
 
 /-- Proper base change in the form needed for compactly supported direct images: the exchange
 map of a cartesian square whose bottom map is proper is an isomorphism. -/
@@ -70,7 +70,7 @@ class HasProperExchange extends F.HasBaseChange where
   isIso_exchange {U' U Z' Z : Scheme.{u}} {t : U' ⟶ U} {l : U' ⟶ Z'} {r : U ⟶ Z}
     {b : Z' ⟶ Z} [IsOpenImmersion l] [IsOpenImmersion r] [IsProper b] (h : IsPullback t l r b) :
     haveI := isIso_baseChange h
-    IsIso (F.exchange t l r b h.w).natTrans
+    IsIso (F.exchange t l r b h.w)
 
 end CompactSupportFormalism
 

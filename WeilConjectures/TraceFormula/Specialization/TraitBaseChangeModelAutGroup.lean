@@ -18,11 +18,12 @@ The automorphisms `τ` of the geometric generic point `Spec Ω_K` of the trait `
 `Spec K⟦t⟧` and over the geometric generic point `Spec Ω` of `S = Spec k'⟦t⟧`
 (`NearbyCyclesModel.GenericAut`) form a group under composition: the kernel `P'` of the map of
 inertia groups of the generic-slicing step of Gabber's Künneth formula (blueprint
-`sk-prop-tf-nearby-external-kunneth`, "Facts about traits"). Its action on the nearby cycles of a
-base change model (`NearbyCyclesModel.baseChangeAut`, `NearbyCyclesModel.Hom.autAction`) is an
-anti-homomorphism (`NearbyCyclesModel.autAction_baseChangeAut_mul`) sending `1` to the identity
-(`NearbyCyclesModel.autAction_baseChangeAut_one`). Hence, if a subgroup `V` acts trivially, the
-sum of the actions over representatives of `P' ⧸ U` for `U ≤ V` is `[V : U]` times the sum over
+`proposition-external-kunneth-formula-nearby-cycles`, "Facts about traits"). Its action on the
+nearby cycles of a base change model (`NearbyCyclesModel.baseChangeAut`,
+`NearbyCyclesModel.Hom.autAction`) is an anti-homomorphism
+(`NearbyCyclesModel.autAction_baseChangeAut_mul`) sending `1` to the identity
+(`NearbyCyclesModel.autAction_baseChangeAut_one`). Hence, if a subgroup `V` acts trivially, the sum
+of the actions over representatives of `P' ⧸ U` for `U ≤ V` is `[V : U]` times the sum over
 representatives of `P' ⧸ V` (`NearbyCyclesModel.sum_autAction_baseChangeAut_eq_relIndex_nsmul`).
 
 -/

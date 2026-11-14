@@ -357,7 +357,7 @@ private def comparisonRestrictionIso {Y X : Scheme.{u}} (f : Y ⟶ X) [Etale f]
 private theorem comparisonRestrictionMate_isIso {Y X : Scheme.{u}} (f : Y ⟶ X) [Etale f]
     (A : Type (max v (u + 1))) [CommRing A] :
     IsIso ((mateEquiv (comparisonAdj.{u, v} X A) (comparisonAdj.{u, v} Y A)).symm
-      (comparisonRestrictionIso.{u, v} f A).hom).natTrans := by
+      (comparisonRestrictionIso.{u, v} f A).hom) := by
   let p := (proLocAdj.{u, v} f).sheafPushforwardContinuous
     (E := ModuleCat.{max v (u + 1)} A)
     (Scheme.coefficientProEtaleModelTopology.{u, v} Y)
@@ -367,12 +367,12 @@ private theorem comparisonRestrictionMate_isIso {Y X : Scheme.{u}} (f : Y ⟶ X)
     (Scheme.smallModelComparisonEtaleTopology.{u, v} Y)
     (Scheme.smallModelComparisonEtaleTopology.{u, v} X)
   let q := (comparisonRestrictionIso.{u, v} f A).hom
-  have h : IsIso ((mateEquiv p e) q).natTrans := by
+  have h : IsIso ((mateEquiv p e) q) := by
     rw [NatTrans.isIso_iff_isIso_app]
     intro F
     rw [← ObjectProperty.isIso_hom_iff, NatTrans.isIso_iff_isIso_app]
     intro V
-    have heq : (((mateEquiv p e) q).natTrans.app F).hom.app V = 𝟙 _ := by
+    have heq : (((mateEquiv p e) q).app F).hom.app V = 𝟙 _ := by
       let c := (etLocAdj.{u, v} f).counit.app V.unop
       let n := (proLocAdj.{u, v} f).unit.app
         ((Scheme.smallModelComparisonInclusion.{u, v} Y).obj
@@ -428,12 +428,12 @@ private theorem comparisonRestrictionMate_isIso {Y X : Scheme.{u}} (f : Y ⟶ X)
     (comparisonAdj.{u, v} X A) (comparisonAdj.{u, v} Y A) e p b
   rw [Equiv.apply_symm_apply] at hi
   have : IsIso (conjugateEquiv ((comparisonAdj.{u, v} X A).comp p)
-      (e.comp (comparisonAdj.{u, v} Y A)) b.natTrans) := by
+      (e.comp (comparisonAdj.{u, v} Y A)) b) := by
     rw [← hi]
     exact h
-  change IsIso b.natTrans
+  change IsIso b
   exact conjugateEquiv_of_iso ((comparisonAdj.{u, v} X A).comp p)
-    (e.comp (comparisonAdj.{u, v} Y A)) b.natTrans
+    (e.comp (comparisonAdj.{u, v} Y A)) b
 
 private def proPullbackRestrictionIso {Y X : Scheme.{u}} (f : Y ⟶ X) [WeaklyEtale f]
     (A : Type (max v (u + 1))) [CommRing A] :
@@ -461,7 +461,7 @@ private theorem restrictedCounit_isIso {Y X : Scheme.{u}} (f : Y ⟶ X) [Etale f
     ((comparisonAdj.{u, v} Y A).isIso_counit_app_iff_mem_essImage).mpr hF
   let q := (comparisonRestrictionIso.{u, v} f A).hom
   let b := (mateEquiv (comparisonAdj.{u, v} X A) (comparisonAdj.{u, v} Y A)).symm q
-  have : IsIso b.natTrans := comparisonRestrictionMate_isIso.{u, v} f A
+  have : IsIso b := comparisonRestrictionMate_isIso.{u, v} f A
   have hb := mateEquiv_counit_symm (comparisonAdj.{u, v} X A)
     (comparisonAdj.{u, v} Y A) q F
   have : IsIso (b.app ((comparisonRight.{u, v} X A).obj F) ≫

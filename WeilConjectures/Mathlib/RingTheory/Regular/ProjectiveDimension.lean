@@ -553,7 +553,7 @@ theorem of_hasProjectiveDimensionLE_residueField {R : Type u} [CommRing R] [IsLo
 homomorphism of noetherian local rings and `S` is regular, then so is `R`: the residue field `κ`
 of `R` has finite projective dimension, since `S ⊗[R] κ` has finite projective dimension over
 the regular ring `S` and projective dimension descends along the faithfully flat map `R → S`.
-(blueprint: `lem-weil-pbc-flat-under-regular`) -/
+(blueprint: `theorem-finite-etale-covers-proper-henselian--2`) -/
 @[stacks 00OF]
 theorem of_flat {R S : Type u} [CommRing R] [CommRing S] [IsLocalRing R] [IsNoetherianRing R]
     [IsRegularLocalRing S] [Algebra R S] [IsLocalHom (algebraMap R S)] [Module.Flat R S] :

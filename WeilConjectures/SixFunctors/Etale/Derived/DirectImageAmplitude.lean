@@ -15,8 +15,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.CohomologicalDim
 Let `k` be a field, `f : X ⟶ Y` a morphism of `k`-schemes of finite type with `dim X ≤ d`, and
 `Λ` a torsion ring. The higher direct images `R^q f_*` of étale sheaves of `Λ`-modules vanish for
 `q > 2d` (`AlgebraicGeometry.Etale.isZero_higherDirectImage_of_forall_topologicalKrullDim_le`,
-blueprint `thm-sc-finite-type-torsion-cd` and `lem-sf-etale-direct-image-vanishing`), so the
-unbounded derived direct image `Rf_*` sends `D^{≤ n}` into `D^{≤ n + 2d}`
+blueprint `lemma-uniform-bounds-pro-etale-affines` and `theorem-results-from-etale-theory--4`), so
+the unbounded derived direct image `Rf_*` sends `D^{≤ n}` into `D^{≤ n + 2d}`
 (`AlgebraicGeometry.Etale.isLE_rightDerivedLowerStar_obj`), and being left t-exact it sends
 `D^{≥ n}` into `D^{≥ n}` (`AlgebraicGeometry.Etale.isGE_rightDerivedLowerStar_obj`).
 -/
@@ -38,7 +38,7 @@ namespace Etale
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
 /-- **Vanishing of the higher direct images above twice the dimension, over an arbitrary
-field** (blueprint `lem-sf-etale-direct-image-vanishing` without the separably closed
+field** (blueprint `theorem-results-from-etale-theory--4` without the separably closed
 hypothesis).
 
 Let `k` be a field, `f : X ⟶ Y` a morphism of `k`-schemes of finite type with `dim X ≤ d`, and

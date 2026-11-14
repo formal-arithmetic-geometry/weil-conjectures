@@ -13,7 +13,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.LisseFieldDual
 # Duals of bounded finite locally constant complexes over a prime field
 
 Source: blueprint sec-smooth-purity/sk-prop-sf-cbc/lem-fin-lisse-field-dual.md
-(blueprint: lem-fin-lisse-field-dual).
+(blueprint: lemma-smooth-morphisms-locally-constant-sheaves).
 
 The existing etale `derivedHom` is the K-injective derived internal Hom in the
 `ModuleCat` encoding. Its construction derives the homotopy-category Hom functor
@@ -37,8 +37,8 @@ variable {A : Type*} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u 
 
 /-- The internal-Hom comparison followed by an isomorphism in the second variable.
 It is the transpose of pulled-back evaluation, as recorded by the identity below.
-Source: blueprint lem-fin-lisse-field-dual, proof step 5
-(blueprint: lem-fin-lisse-field-dual). -/
+Source: blueprint lemma-smooth-morphisms-locally-constant-sheaves, proof step 5
+(blueprint: lemma-smooth-morphisms-locally-constant-sheaves). -/
 noncomputable def derivedHomPullbackAlongIsoComparison
     {T T' : Scheme.{u}} (v : T' ⟶ T)
     (C M : _root_.DerivedCategory (Sheaf T.smallEtaleTopology A))
@@ -53,8 +53,9 @@ end General
 
 /-- The canonical map from the pullback of the coefficient dual to the dual of the
 pullback: transpose the pulled-back evaluation using the strong monoidal pullback
-and its unit comparison. Source: blueprint lem-fin-lisse-field-dual, proof step 5;
-Stacks, Sites Cohomology, Section 08J7 (blueprint: lem-fin-lisse-field-dual). -/
+and its unit comparison. Source: blueprint lemma-smooth-morphisms-locally-constant-sheaves, proof
+step 5; Stacks, Sites Cohomology, Section 08J7 (blueprint:
+lemma-smooth-morphisms-locally-constant-sheaves). -/
 noncomputable def finiteLisseDualPullbackComparison
     {Λ : Type (u + 1)} [CommRing Λ] {T T' : Scheme.{u}} (v : T' ⟶ T)
     (C : DerivedCategoryModule Λ T) :=
@@ -65,7 +66,7 @@ noncomputable def finiteLisseDualPullbackComparison
 constancy of cohomology is preserved, cohomology is the degree-reversed sheaf dual,
 and the canonical comparison commutes with every scheme pullback.
 Source: blueprint sec-smooth-purity/sk-prop-sf-cbc/lem-fin-lisse-field-dual.md
-(blueprint: lem-fin-lisse-field-dual).
+(blueprint: lemma-smooth-morphisms-locally-constant-sheaves).
 
 Proof: the global vanishing bounds give `C.IsGE a` and `C.IsLE b`, and the coefficient
 ring `ULift (ZMod ℓ)` is a field. The truncation devissage of

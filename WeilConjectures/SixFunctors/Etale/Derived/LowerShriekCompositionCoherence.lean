@@ -20,11 +20,13 @@ blueprint nodes of the six-functor chapters:
 
 * the projection map `PF : Rf_!M ⊗ᴸ N ⟶ Rf_!(M ⊗ᴸ Lf^*N)` is compatible with the associativity
   of the derived tensor product
-  (`AlgebraicGeometry.Etale.projectionMapAssociativity`, `sk-prop-sf-pf-coherence`);
-* there is a composition law `Rh_! ≅ Rf_! ⋙ Rg_!` for `h = f ≫ g` (`sk-thm-sf-comp-composition`)
-  compatible with the projection maps (`sk-prop-sf-pf-coherence`) and with the compactly
-  supported base change maps `Ex_!` of pasted cartesian squares (`sk-thm-sf-package` (2))
-  (`AlgebraicGeometry.Etale.exists_rightDerivedLowerShriekCompIso`).
+  (`AlgebraicGeometry.Etale.projectionMapAssociativity`,
+  `proposition-composition-base-change-rf-shriek--1`);
+* there is a composition law `Rh_! ≅ Rf_! ⋙ Rg_!` for `h = f ≫ g`
+(`proposition-composition-base-change-rf-shriek--1`)
+  compatible with the projection maps (`proposition-composition-base-change-rf-shriek--1`) and with
+  the compactly supported base change maps `Ex_!` of pasted cartesian squares (`sk-thm-sf-package`
+  (2)) (`AlgebraicGeometry.Etale.exists_rightDerivedLowerShriekCompIso`).
 
 Together with the commutation of the derived pullback along an étale morphism with the derived
 internal hom (`AlgebraicGeometry.Etale.isIso_ihomComparison_leftDerivedUpperStar_of_etale`, in
@@ -142,7 +144,8 @@ private theorem projectionMapAssociativity_generic (A : Type*) [Category.{u + 1}
 end ProjectionAssociativityProof
 
 omit [Finite Λ] in
-/-- Blueprint `sk-prop-sf-pf-coherence`: Coherence of the projection formula.
+/-- Blueprint `proposition-composition-base-change-rf-shriek--1`: Coherence of the projection
+formula.
 
 The projection map `PF : Rf_!M ⊗ᴸ N ⟶ Rf_!(M ⊗ᴸ Lf^*N)` is compatible with the associativity of
 the derived tensor product: the two maps
@@ -175,13 +178,15 @@ private theorem graphCompIso_projection
   subst h
   exact sfGraphCompactSupportCompIso_projection Λ f g
 
-/-- Blueprints `sk-prop-sf-pf-coherence` and `sk-thm-sf-package` (clause (2)): the coherence of
-the composition law for `Rf_!` with the projection formula and with base change.
+/-- Blueprints `proposition-composition-base-change-rf-shriek--1` and `sk-thm-sf-package` (clause
+(2)): the coherence of the composition law for `Rf_!` with the projection formula and with base
+change.
 
 There is a composition isomorphism `E f g h w : Rh_! ≅ Rf_! ⋙ Rg_!` for all `f`, `g` and
 `h = f ≫ g` admitting compactifications (the composition law itself is
 `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp`) such that
-1. (`sk-prop-sf-pf-coherence`, the pentagon for composable `f`, `g`, compatible with the
+1. (`proposition-composition-base-change-rf-shriek--1`, the pentagon for composable `f`, `g`,
+compatible with the
    composition law) the projection maps compose: for `M` on `X` and `N` on `Z`,
    ```
    Rh_!M ⊗ᴸ N ──E ▷ N──▶ Rg_!Rf_!M ⊗ᴸ N ──PF_g──▶ Rg_!(Rf_!M ⊗ᴸ Lg^*N)

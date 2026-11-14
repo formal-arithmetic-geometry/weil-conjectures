@@ -18,7 +18,7 @@ The direct image `j_*M` of a lisse Weil sheaf on a dense open has no nonzero pun
 every morphism from a punctual sheaf to it vanishes
 (`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.eq_zero_of_support_finite`). This is Step 0 of
 the description of the perverse t-structure on a smooth curve (blueprint
-`thm-a1-curve-perverse-heart`).
+`lemma-perverse-sheaves-curve`).
 -/
 
 @[expose] public section
@@ -58,7 +58,7 @@ vanishes on `Ū ∩ V̄₀`, and every point of `Ū` specializes from a point of
 the generic point of the irreducible geometric line, which lies over `V₀` since the affine line
 is not a single closed point. A morphism into the lisse `M` vanishing there vanishes
 (`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.eq_zero_of_adicUpperStar_map_eq_zero`).
-(blueprint: `thm-a1-curve-perverse-heart`, Step 0) -/
+(blueprint: `lemma-perverse-sheaves-curve`, Step 0) -/
 theorem LisseOnDenseOpen.eq_zero_of_support_finite (D : LisseOnDenseOpen k₀ l)
     {G : WeilSheaf k₀ l (affineLine k₀)} (hG : G.support.Finite) (i : G ⟶ D.directImage) :
     i = 0 := by

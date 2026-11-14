@@ -20,9 +20,9 @@ import Mathlib.CategoryTheory.Yoneda
 /-!
 # Closed exceptional inverse image and sections with support
 
-Source: blueprint main-20261015, sec-six-functors-basics,
+Source: blueprint main-20261015, chap-Construction-of-f,
 sk-prop-closed-adjoint-constructible/sk-prop-closed-adjoint-constructible-yoneda.md
-(blueprint: det-prop-closed-adjoint-constructible-yoneda).
+(blueprint: theorem-f-shriek-ell-adic-coefficients).
 
 The comparison lives in the full localizing category, and its counit equation is written
 in the ambient derived category using the specified closed-immersion normalization.
@@ -135,7 +135,6 @@ private theorem support_preserved_of_coefficientIso
   exact (constantModelBoundedConstructible Λ Z).prop_of_iso (t.app K)
     (hpres _ ((bounded_comap_iff a X K).mpr hK))
 
-set_option maxHeartbeats 800000 in
 -- The proof compares two Hom equivalences in full derived subcategories.
 /-- On bounded constructible inputs the exceptional right adjoint is naturally isomorphic
 to derived sections with support, compatibly with their counits. The witnesses `hK` and
@@ -144,12 +143,12 @@ have exactly the ambient objects and maps. The isomorphism `closed` is the stipu
 normalization Ri_! = i_*, and `support` specifies the normalized support adjunction.
 
 Source: blueprint main-20261015, sk-prop-closed-adjoint-constructible-yoneda, statement
-and proof (blueprint: det-prop-closed-adjoint-constructible-yoneda).
+and proof (blueprint: theorem-f-shriek-ell-adic-coefficients).
 
 Proof:
 1. The equality Dctf = Dbc from det-def-localizing-closure-ctf-equals-bc and the intersection
-   sk-def-localizing-closure put every input K in C_X. The adjunction of
-   sk-prop-sf-existence puts i^!K in C_Z. By
+   definition-localizing-subcategory put every input K in C_X. The adjunction of
+   theorem-existence-exceptional-inverse-image puts i^!K in C_Z. By
    lem-sfb-rational-closed-support-constructible, RΓ_Z K is Dbc, hence belongs to C_Z.
    Exact coefficient equivalences transport this assertion to the given ring isomorphism.
    Both localizing categories are full in the ambient derived categories.

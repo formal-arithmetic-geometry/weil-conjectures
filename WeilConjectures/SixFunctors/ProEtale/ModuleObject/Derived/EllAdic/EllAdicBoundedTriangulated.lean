@@ -21,7 +21,7 @@ public import WeilConjectures.AlgebraicGeometry.Finite.FiniteDiscreteCoefficient
 Stated per coefficient ring (`𝒪̲_E`, `E̲`, `ℚ̲̄_ℓ`, unit ball `O̲`). The field cases use local
 finite freeness. The integral cases use the integral Serre
 criterion. These are exactly the heart-closure inputs in the last step of blueprint
-`lem-sfb-dc-tensor-preserves`.
+`proposition-six-operations-dctf--14`.
 -/
 
 @[expose] public section
@@ -41,7 +41,7 @@ variable (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X] (ℓ : ℕ) [Fact
 case of the ell-adic finiteness coefficients, by the integral constructible Serre theorem.
 Applying homology to distinguished triangles gives triangulated closure.
 Source: Bhatt--Scholze, Proposition 6.8.11(1),(3), and the heart-closure inputs in
-`lem-sfb-dc-tensor-preserves`, step 10.
+`proposition-six-operations-dctf--14`, step 10.
 (blueprint: lem-sfb-dc-ell-adic-triangulated) -/
 theorem isTriangulated_boundedConstructible_ellAdic_padicIntegers (E : Type) [Field E]
     [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)]

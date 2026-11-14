@@ -43,7 +43,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- Construct the reduction comparison compatible with the supplied full-limit map.
 
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5.
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5.
 STATEMENT-DISPUTED (old statement, repaired): independent raw reduction and limit
 isomorphisms need not satisfy Unit; negating only the reduction changes its left side.
 Keep the given limit, including its full Roos normalization, and take its left mate

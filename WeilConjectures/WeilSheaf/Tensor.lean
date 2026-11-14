@@ -82,7 +82,7 @@ of `F` with the geometrically constant Weil line `𝓑_b` on which the geometric
 by `b`. It is the underlying sheaf of `F` with the Weil structure `b • φ`, so that at a point with
 values in `𝔽_{qᵐ}` its local Frobenius is `bᵐ` times that of `F`, and every eigenvalue `α` of
 the local Frobenius of `F` at a closed point of degree `m` becomes `bᵐ α`.
-(blueprint: `def-wf-constant-weil-twist`) -/
+(blueprint: `proposition-twisting-weight-zero-adding-dual--2`) -/
 noncomputable def constantTwist (F : WeilSheaf k₀ l X) (b : (PadicAlgCl l)ˣ) :
     WeilSheaf k₀ l X where
   obj := .mk F.obj.carrier (F.obj.str ≪≫ WeilCoefficients.smulIso b F.obj.carrier)

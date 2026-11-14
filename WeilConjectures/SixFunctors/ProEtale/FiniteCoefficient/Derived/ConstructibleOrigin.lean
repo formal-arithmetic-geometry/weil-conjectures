@@ -15,7 +15,7 @@ Let `Λ` be a finite commutative ring and `X` a scheme. A bounded complex of pro
 `Λ`-modules with constructible cohomology sheaves (in the intrinsic sense of
 `AlgebraicGeometry.ProEtale.IsConstructible`) is of étale origin: it is `D(ν^*) K'` for a bounded
 complex `K'` of étale sheaves with constructible cohomology sheaves. This is clause (ii) of
-blueprint `lem-sf-proetale-constructible-origin`, deduced from its clause (i)
+blueprint `theorem-comparison-constructible-sheaves`, deduced from its clause (i)
 (`AlgebraicGeometry.ProEtale.exists_isConstructibleSheaf_iso_comparisonUpperStar_obj`) by
 dévissage along the truncation triangles
 (`AlgebraicGeometry.ProEtale.DerivedCategory.plusEtaleOrigin_of_etaleOriginHomology`) and the
@@ -43,7 +43,7 @@ open Scheme
 
 variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] {X : Scheme.{u}}
 
-/-- Blueprint `lem-sf-proetale-constructible-origin`, clause (ii): at a finite coefficient ring,
+/-- Blueprint `theorem-comparison-constructible-sheaves`, clause (ii): at a finite coefficient ring,
 a bounded pro-étale complex with constructible cohomology sheaves is of étale origin. By clause
 (i) its cohomology sheaves are `ν^*` of constructible étale sheaves, so it is `D(ν^*) K'` for a
 bounded below étale complex `K'` (dévissage along the truncation triangles); `K'` is bounded with
@@ -69,7 +69,7 @@ theorem DerivedCategory.boundedConstructible_of_boundedConstructibleIntrinsic
     exact IsConstructibleSheaf.of_iso ((ν^*(X)[ModuleCat.{u + 1} Λ]).preimageIso f).symm
 
 variable (Λ X) in
-/-- Blueprint `lem-sf-proetale-constructible-origin`, clause (ii): at a finite coefficient ring,
+/-- Blueprint `theorem-comparison-constructible-sheaves`, clause (ii): at a finite coefficient ring,
 the intrinsic and the étale-origin readings of `Dᵇc(X_proét, Λ)` agree. -/
 theorem DerivedCategory.boundedConstructibleIntrinsic_eq :
     DerivedCategory.boundedConstructibleIntrinsic Λ X =

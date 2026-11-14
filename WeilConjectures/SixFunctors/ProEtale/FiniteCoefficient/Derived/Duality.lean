@@ -31,7 +31,7 @@ compactly supported ones.
 ## Implementation notes
 
 The exceptional inverse image `Ra^!` is the constructible one of blueprint
-`det-def-sf-operations` (vi), `ν_X^* ∘ a^× ∘ Rν_{Y,*}` (see
+`theorem-f-shriek-ell-adic-coefficients--4` (vi), `ν_X^* ∘ a^× ∘ Rν_{Y,*}` (see
 `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperShriek`), which needs no
 hypothesis on `a` beyond a compactification: the ambient right adjoint of the pro-étale `Ra_!` does
 not exist in general.
@@ -68,7 +68,8 @@ namespace ProEtale
 
 variable (X : Scheme.{u})
 
-/-- Blueprint `sk-def-ops`: The six operations, the dualizing complex, the duals.
+/-- Blueprint `definition-verdier-dual-evaluation`: The six operations, the dualizing complex, the
+duals.
 
 The naive dual `K ↦ K^∨ = RHom_{Λ_X}(K, Λ_X)` on `D(X_proét)`, the internal hom into the
 constant sheaf `Λ_X = 𝟙_ D(X_proét)`. -/
@@ -77,7 +78,8 @@ noncomputable def derivedDual :
       DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) :=
   (RHom(X)[A]).flip.obj (𝟙_ _)
 
-/-- Blueprint `sk-def-ops`: The six operations, the dualizing complex, the duals.
+/-- Blueprint `definition-verdier-dual-evaluation`: The six operations, the dualizing complex, the
+duals.
 
 The ordinary cohomology `H^i(X, K) = H^i(RΓ(X, K))`, the companion of the compactly
 supported `AlgebraicGeometry.ProEtale.compactlySupportedCohomology`. -/
@@ -91,7 +93,8 @@ scoped notation "H(" X ")[" A "](" i ")" => cohomology A X i
 variable {X} {Y : Scheme.{u}} (a : X ⟶ Y) [HasCompactification a]
   [CompactSpace Y]
 
-/-- Blueprint `sk-def-ops`: The six operations, the dualizing complex, the duals.
+/-- Blueprint `definition-verdier-dual-evaluation`: The six operations, the dualizing complex, the
+duals.
 
 The dualizing complex `ω_{X,Λ} = Ra_X^! Λ` of a scheme `X` with structure morphism
 `a_X : X ⟶ Y`, the exceptional inverse image of the constant sheaf `Λ_Y = 𝟙_ D(Y_proét)`. -/
@@ -99,7 +102,8 @@ noncomputable def dualizingComplex : DerivedCategory (Sheaf (Scheme.ProEt.topolo
     + 1} Λ)) :=
   (R(a)^![Λ]).obj (𝟙_ _)
 
-/-- Blueprint `sk-def-ops`: The six operations, the dualizing complex, the duals.
+/-- Blueprint `definition-verdier-dual-evaluation`: The six operations, the dualizing complex, the
+duals.
 
 The Verdier dual `𝔻_X K = RHom_{Λ_X}(K, ω_{X,Λ})` on `D(X_proét)`. -/
 noncomputable def verdierDual :

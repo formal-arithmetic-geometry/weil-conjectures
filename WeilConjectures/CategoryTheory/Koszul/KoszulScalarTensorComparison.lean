@@ -62,25 +62,24 @@ instance scalarExtensionAdditive (φ : R ⟶ B) : (extension φ).Additive where
       PresheafOfModules.add_app, ModuleCat.hom_add, LinearMap.add_apply]
     exact SheafOfModules.scalarExtensionSection_add φ N U s _ _
 
-set_option maxHeartbeats 800000 in
 -- Elaborate the tensor and Hom comparison through their explicit site instances.
 private theorem scalar_intertwines (φ : R ⟶ B)
     (s : (R.obj ⋙ forget CommRingCat).sections) :
-    (extension φ).map (ringedKoszulScalar R s) ≫
+    (extension φ).map (ringedKoszulScalar R s).asHom ≫
         (SheafOfModules.scalarExtensionUnitIso φ).hom =
       (SheafOfModules.scalarExtensionUnitIso φ).hom ≫
-        ringedKoszulScalar B (imageSections φ (fun _ : Fin 1 ↦ s) 0) := by
+        (ringedKoszulScalar B (imageSections φ (fun _ : Fin 1 ↦ s) 0)).asHom := by
   apply SheafOfModules.scalarExtension_hom_ext φ (one R)
   intro U b x
   change (SheafOfModules.scalarExtensionUnitIso φ).hom.val.app U
       ((SheafOfModules.changeOfRingsHomOfUniverses.{u, u, u, u} φ _
-        (ringedKoszulScalar R s)).val.app U
+        (ringedKoszulScalar R s).asHom).val.app U
         (SheafOfModules.scalarExtensionSection.{u, u, u, u} φ _ U b x)) = _
   simp only [SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply]
   erw [SheafOfModules.scalarExtension_map_tmul.{u, u, u, u} φ
-    (ringedKoszulScalar R s) U b x]
+    (ringedKoszulScalar R s).asHom U b x]
   erw [SheafOfModules.scalarExtensionUnitIso_tmul φ U b
-    ((ringedKoszulScalar R s).val.app U x),
+    ((ringedKoszulScalar R s).asHom.val.app U x),
     SheafOfModules.scalarExtensionUnitIso_tmul φ U b x]
   change R.obj.obj U at x
   let sv : R.obj.obj U := s.val U
@@ -167,7 +166,6 @@ private theorem tensorUnitTransport {D : Type*} [Category D] [MonoidalCategory D
     ← hj, reassoc_of% hu]
   exact hf
 
-set_option maxHeartbeats 2000000 in
 -- Transport the two tensor constructions and their unit constraints.
 private theorem extensionTensorIso_unit (φ : R ⟶ B) (M : Modules R) :
     let := SheafOfModules.monoidalCategory R

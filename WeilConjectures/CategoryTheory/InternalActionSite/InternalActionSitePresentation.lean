@@ -307,21 +307,21 @@ theorem presentation [HasFiniteLimits C] (J : Precoverage C)
     PresheafOfModules.sheafificationAdjunction (𝟙 (twistedRing K J hJ S).obj)
   let beta := TwoSquare.mk _ _ _ _ under.hom
   let alpha := (mateEquiv adj sadj).symm beta
-  have halpha : IsIso alpha.natTrans := by
+  have halpha : IsIso alpha := by
     let gamma := mateEquiv es.toAdjunction e.toAdjunction beta
-    have : IsIso gamma.natTrans := by
+    have : IsIso gamma := by
       dsimp [gamma, mateEquiv]
       infer_instance
     have he := iterated_mateEquiv_conjugateEquiv_symm adj sadj
       e.toAdjunction es.toAdjunction gamma
     have hi : IsIso (((mateEquiv adj sadj).symm
-        ((mateEquiv es.toAdjunction e.toAdjunction).symm gamma)).natTrans) := by
+        ((mateEquiv es.toAdjunction e.toAdjunction).symm gamma))) := by
       rw [he]
       change IsIso ((conjugateEquiv (adj.comp es.toAdjunction)
-        (e.toAdjunction.comp sadj)).symm gamma.natTrans)
+        (e.toAdjunction.comp sadj)).symm gamma)
       infer_instance
     simpa only [gamma, Equiv.symm_apply_apply] using hi
-  let sc := asIso alpha.natTrans
+  let sc := asIso alpha
   refine ⟨{
     presheafEquivalence := e
     presheaf_additive := hea

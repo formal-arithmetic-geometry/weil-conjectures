@@ -39,7 +39,7 @@ public import Mathlib.Algebra.BigOperators.Ring.Finset
 
 /-! # Projection-normalized reindexing of completion and completed tensor
 
-Source: blueprint, prop-pod-dual-tate-data-compatibility, proof Steps 1 and 5;
+Source: blueprint, theorem-poincare-duality-frobenius--2, proof Steps 1 and 5;
 Stacks Tags 03EL, 07A4 and 0941
 (blueprint: def-pod-completion-reindex-models).
 

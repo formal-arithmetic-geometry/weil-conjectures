@@ -13,7 +13,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompAssoc
 /-!
 # Unit normalization of the proper/open restriction identification
 
-Source: blueprint thm-cbc-finite-torsion, refinement comparison argument;
+Source: blueprint proposition-composition-base-change-rf-shriek, refinement comparison argument;
 Stacks Project, More on Etale Cohomology, Tags 0F7B and 0F7I
 (blueprint: lem-weil-pbc-proper-open-identification-unit).
 -/
@@ -631,7 +631,7 @@ private theorem mate_transpose
     {L : C ⥤ D} {R : D ⥤ C} {L' : E ⥤ F} {R' : F ⥤ E}
     (a : L ⊣ R) (b : L' ⊣ R') {G : C ⥤ E} {H : D ⥤ F}
     (α : TwoSquare G L L' H) (M : D) :
-    (b.homEquiv _ _).symm ((mateEquiv a b α).natTrans.app M) =
+    (b.homEquiv _ _).symm ((mateEquiv a b α).app M) =
       α.app (R.obj M) ≫ H.map (a.counit.app M) := by
   rw [Adjunction.homEquiv_counit]
   exact mateEquiv_counit a b α M
@@ -641,7 +641,7 @@ private theorem mate_transpose_eq
     {L : C ⥤ D} {R : D ⥤ C} {L' : E ⥤ F} {R' : F ⥤ E}
     (a : L ⊣ R) (b : L' ⊣ R') {G : C ⥤ E} {H : D ⥤ F}
     (α : TwoSquare G L L' H) (M : D) (r : G.obj (R.obj M) ⟶ R'.obj (H.obj M))
-    (hr : r = (mateEquiv a b α).natTrans.app M) :
+    (hr : r = (mateEquiv a b α).app M) :
     (b.homEquiv _ _).symm r = α.app (R.obj M) ≫ H.map (a.counit.app M) := by
   rw [hr]
   exact mate_transpose a b α M
@@ -722,8 +722,8 @@ private theorem geometric_restriction (A : Type (u + 2)) [Category.{u + 1} A]
 
 /-- The specified proper/open restriction identification is the canonical restriction map,
 after identifying `K` with `j₁^* j₁! K` by the extension-by-zero unit.
-Source: blueprint thm-cbc-finite-torsion, proof step 5; Stacks Project, Tags 0F7B and 0F7I
-(blueprint: lem-weil-pbc-proper-open-identification-unit).
+Source: blueprint proposition-composition-base-change-rf-shriek, proof step 5; Stacks Project, Tags
+0F7B and 0F7I (blueprint: lem-weil-pbc-proper-open-identification-unit).
 
 Proof:
 1. Put `V = T₁ ×[T₂] X`, with projections `b : V → T₁` and `p : V → X`, and let

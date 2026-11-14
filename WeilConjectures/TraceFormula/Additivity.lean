@@ -20,8 +20,8 @@ import WeilConjectures.CategoryTheory.Monoidal.Rigid.BraidedTrace
 Let `Φ` be a finite universal homeomorphism of `X`, `j : U ⟶ X` an open immersion and
 `i : Z ⟶ X` a closed immersion onto the complement, both stable under `Φ`. For a Weil object
 `(K, φ)` the trace of the compactly supported Frobenius on `RΓ_c(X, K)` is the sum of the traces
-on `RΓ_c(U, K|_U)` and `RΓ_c(Z, K|_Z)` (blueprint `prop-trf-trace-additivity-open-closed`,
-`sk-i-global-additivity`).
+on `RΓ_c(U, K|_U)` and `RΓ_c(Z, K|_Z)` (blueprint `lemma-additivity-open-subscheme-complement`,
+`lemma-additivity-open-subscheme-complement`).
 
 -/
 
@@ -119,9 +119,9 @@ lemma exists_distTriang_openImmersionLowerShriek_openClosed
 
 variable (ℓ) in
 /-- **The open–closed localization triangle** (blueprint
-`prop-sf-open-closed-triangle-all-stages`): for an open immersion `j : U ⟶ X` and a closed
-immersion `i : Z ⟶ X` onto its complement, the counit `Rj_! Lj^* K ⟶ K` of `Rj_! ⊣ Lj^*` and the
-unit `K ⟶ Ri_* Li^* K` of `Li^* ⊣ Ri_*` extend to a distinguished triangle
+`proposition-extension-zero-restriction-closed-subscheme--8`): for an open immersion `j : U ⟶ X` and
+a closed immersion `i : Z ⟶ X` onto its complement, the counit `Rj_! Lj^* K ⟶ K` of `Rj_! ⊣ Lj^*`
+and the unit `K ⟶ Ri_* Li^* K` of `Li^* ⊣ Ri_*` extend to a distinguished triangle
 `Rj_! Lj^* K ⟶ K ⟶ Ri_* Li^* K ⟶ Rj_! Lj^* K[1]` of the ambient derived category
 `D(Mod_{ℚ̲̄_ℓ,X})`. Through `Rj_! ≅ j_!`, this is
 `exists_distTriang_openImmersionLowerShriek_openClosed`. -/
@@ -386,10 +386,10 @@ variable {X U Z : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact
   {Φ : X ⟶ X} {ΦU : U ⟶ U} [IsUniversalHomeomorphism Φ.left] [IsUniversalHomeomorphism ΦU.left]
 
 variable (ℓ) in
-/-- No nonzero maps `(LΦ^* Rj_! N)[1] ⟶ Ri_* M` (blueprint `prop-trf-trace-additivity-open-closed`,
-Step 2(c)): by the base change `LΦ^* Rj_! ≅ Rj_! LΦ_U^*` along the cartesian square
-`Φ_U ≫ j = j ≫ Φ` and `Rj_! ≅ j_!`, the source is a shifted extension by zero, and the range of
-`i` misses that of `j`. -/
+/-- No nonzero maps `(LΦ^* Rj_! N)[1] ⟶ Ri_* M` (blueprint
+`lemma-additivity-open-subscheme-complement`, Step 2(c)): by the base change
+`LΦ^* Rj_! ≅ Rj_! LΦ_U^*` along the cartesian square `Φ_U ≫ j = j ≫ Φ` and `Rj_! ≅ j_!`, the source
+is a shifted extension by zero, and the range of `i` misses that of `j`. -/
 lemma eq_zero_of_shift_upperStar_lowerShriek_to_lowerStar
     (hcompl : IsCompl (Set.range j.left.base) (Set.range i.left.base)) (hj : ΦU ≫ j = j ≫ Φ)
     (N : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
@@ -414,11 +414,10 @@ lemma eq_zero_of_shift_upperStar_lowerShriek_to_lowerStar
         e.inv)), zero_comp, comp_zero]
   exact eq_zero_of_shift_openImmersionLowerShriek_to_lowerStar _ ℓ j i hcompl.disjoint _ _ _ _
 
-set_option maxHeartbeats 1000000 in
 -- the triangles are compared through the inclusions of the bounded constructible categories
 variable (ℓ) in
 /-- **The Frobenius endomorphisms of the localization triangle commute with its connecting
-morphism on `X`** (blueprint `prop-trf-trace-additivity-open-closed`, Step 2(c)): let
+morphism on `X`** (blueprint `lemma-additivity-open-subscheme-complement`, Step 2(c)): let
 `ψ_U : LΦ^* Rj_! Lj^* K ⟶ Rj_! Lj^* K`, `φ : LΦ^* K ⟶ K` and `ψ_Z : LΦ^* Ri_* Li^* K ⟶ Ri_* Li^* K`
 be compatible with the counit `ε` and the unit `η` of a localization triangle with connecting
 morphism `δ`. Then `δ ∘ ψ_Z = ψ_U[1] ∘ LΦ^* δ`, where `LΦ^* δ` is formed through the ambient
@@ -500,7 +499,7 @@ end ConnectingSquare
 
 attribute [local instance] boundedConstructibleBraiding
 
-/-- **Triangle additivity of the trace** (blueprint `prop-trf-trace-formal-laws`, item (2)): for
+/-- **Triangle additivity of the trace** (blueprint `proposition-properties-trace`, item (2)): for
 a distinguished triangle `P₁ ⟶ P₂ ⟶ P₃ ⟶ P₁[1]` of dualizable objects of `Dᵇc(s)⟦ℚ̲̄_ℓ⟧` (through
 the inclusion into `D(Mod_{ℚ̲̄_ℓ,s})`) and an endomorphism `(v₁, v₂, v₃)` of it,
 `tr v₂ = tr v₁ + tr v₃`. Over the field `ℚ̄_ℓ` the filtered origin required in item (2) is
@@ -537,15 +536,21 @@ theorem trace_eq_trace_add_trace_of_distTriang [IsSepClosed k]
   let : HasRightDual (ι.obj P₃) :=
     @HasRightDual.mk _ _ _ _ (ι.obj (P₃ᘁ)) (ExactPairing.map ι P₃ (P₃ᘁ))
   have key {P : Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧} [HasRightDual P]
-      [HasRightDual (ι.obj P)] (v : P ⟶ P) : trace (ι.map v) = ι.unitEndRingHom (trace v) :=
+      [HasRightDual (ι.obj P)] (v : P ⟶ P) :
+      trace (ι.map v) = (ι.unitEndRingHom (.of (trace v))).asHom :=
     ι.trace_eq_unitEndRingHom_trace v (ι.map v) (Iso.refl _) (by simp)
   have hinj : Function.Injective ι.unitEndRingHom := fun a b h ↦ by
     rw [Functor.unitEndRingHom_apply, Functor.unitEndRingHom_apply] at h
+    apply End.ext
     apply ι.map_injective
-    change 𝟙 _ ≫ ι.map a ≫ 𝟙 _ = 𝟙 _ ≫ ι.map b ≫ 𝟙 _ at h
+    have h := congrArg End.asHom h
+    change 𝟙 _ ≫ ι.map a.asHom ≫ 𝟙 _ = 𝟙 _ ≫ ι.map b.asHom ≫ 𝟙 _ at h
     simpa only [Category.id_comp, Category.comp_id] using h
+  suffices h : End.of (trace v₂) = End.of (trace v₁) + End.of (trace v₃) from
+    congrArg End.asHom h
   apply hinj
-  rw [RingHom.map_add, ← key, ← key, ← key]
+  apply End.ext
+  rw [RingHom.map_add, End.add_asHom, ← key, ← key, ← key]
   exact trace_eq_trace_add_trace_of_distTriang_of_shiftDecomposition ℓ k
     ((nonempty_shiftDecomposition_point ℓ k P₁).some.map ι)
     ((nonempty_shiftDecomposition_point ℓ k P₂).some.map ι)
@@ -577,7 +582,7 @@ lemma exists_eq_map_comp_commShiftIso {C D : Type*} [Category C] [Category D] [H
 variable (ℓ) in
 omit [IsUniversalHomeomorphism ΦZ.left] in
 /-- **The operators `E_Z`, `E_U` commute with the connecting morphism of the compactly supported
-localization triangle** (blueprint `prop-trf-trace-additivity-open-closed`, Step 3). Write
+localization triangle** (blueprint `lemma-additivity-open-subscheme-complement`, Step 3). Write
 `E_Z = RΓ_c(ψ_Z) ∘ Φ^♯` and `E_U = RΓ_c(ψ_U) ∘ Φ^♯` (`compactFrobeniusClosedPiece_eq`,
 `compactFrobeniusOpenPiece_eq`) with Frobenius coefficients `ψ_Z`, `ψ_U` compatible with the unit
 and counit of the localization triangle. By Hom vanishing these commute with the connecting
@@ -628,7 +633,7 @@ theorem compactFrobenius_connecting_compat
   exact map_comp_commShiftIso_of_comp_eq _ _ _ _ key₂
 
 /-- **Additivity of the compactly supported Frobenius along an open–closed decomposition**
-(blueprint `prop-trf-trace-additivity-open-closed`, `sk-i-global-additivity`): for an open
+(blueprint `lemma-additivity-open-subscheme-complement`): for an open
 immersion `j : U ⟶ X` with closed complement `i : Z ⟶ X`, both stable under the Frobenius,
 `tr(F_c | RΓ_c(X, K)) = tr(F_c | RΓ_c(U, K|_U)) + tr(F_c | RΓ_c(Z, K|_Z))`. -/
 theorem trace_compactFrobenius_eq_add_of_isCompl [IsSepClosed k]

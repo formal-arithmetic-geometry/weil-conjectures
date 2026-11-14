@@ -20,11 +20,11 @@ universal-kernel identity `𝔥 S(λ_K) = λ_{K'} ρ` discharged by
 `ProEtale.CondensedRing.map_kunnethVerdierMap_comp_eq`, for the exceptional exchange
 `β_{p₁}` of `ν_{p₁}` and the specialization `𝔥` of the internal hom
 (`ProEtale.CondensedRing.homSpecialization`). The remaining hypotheses are the compatibility
-`hκ` of `β_{p₁}` with the exceptional Künneth maps (blueprint `det-nearby-structural-product`) and
-the compatibility `hβ` of `β_c` with the projection formula (blueprint
-`det-nearby-exceptional-tensor` (2)). The section of the specialized coefficient is written with
-the specialization unit `σ_C` of the support, as in the blueprint:
-`k_{u_s} = c_s^! ρ β_c Ψ_C(k_u) σ_C`.
+`hκ` of `β_{p₁}` with the exceptional Künneth maps (blueprint
+`lemma-base-change-maps-external-duality--1`) and the compatibility `hβ` of `β_c` with the
+projection formula (blueprint `lemma-compatibilities-base-change-maps` (2)). The section of the
+specialized coefficient is written with the specialization unit `σ_C` of the support, as in the
+blueprint: `k_{u_s} = c_s^! ρ β_c Ψ_C(k_u) σ_C`.
 
 ## Main results
 
@@ -61,10 +61,10 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k'] [IsSepClosed k']
   {x : RationalPoint X}
 
 /-- **Nearby cycles of the universal kernel**, first identity (blueprint
-`det-tf-sp-universal-kernel`), for the specialization `𝔥` of the internal hom built from the
-exceptional exchange `β_{p₁}` of a compact-support exchange `ν_{p₁}`: `𝔥 Sp(λ_K) = λ_{K'} ρ`, given
-the compatibility `hκ` of `β_{p₁}` with the exceptional Künneth maps (blueprint
-`det-nearby-structural-product`). -/
+`lemma-nearby-cycles-universal-kernel`), for the specialization `𝔥` of the internal hom built from
+the exceptional exchange `β_{p₁}` of a compact-support exchange `ν_{p₁}`: `𝔥 Sp(λ_K) = λ_{K'} ρ`,
+given the compatibility `hκ` of `β_{p₁}` with the exceptional Künneth maps (blueprint
+`lemma-base-change-maps-external-duality--1`). -/
 theorem map_kunnethVerdierMap_comp_homSpecialization
     (νp : ProdFstCompactSupportExchange (ℓ := ℓ) k' x)
     (D : NearbyCyclesModel.NearbyDualizingData k k' ℓ)

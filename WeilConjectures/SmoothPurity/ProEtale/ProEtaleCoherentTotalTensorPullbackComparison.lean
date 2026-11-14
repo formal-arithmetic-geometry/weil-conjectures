@@ -57,7 +57,6 @@ private theorem inverse_assoc {B : Type b} [Category.{vb} B] [MonoidalCategory B
   erw [id_tensorHom, tensorHom_id] at h
   exact h
 
-set_option maxHeartbeats 800000 in
 -- Totalization identifies the two standard tensor functor presentations.
 /-- The natural total comparison retains its component normalization and associativity.
 Source: Stacks 03EL, 07A4 and 06YN

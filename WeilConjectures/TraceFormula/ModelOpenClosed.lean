@@ -15,8 +15,9 @@ public import WeilConjectures.TraceFormula.FibreModel
 Let `Φ` be the model Frobenius of a model `X₀` of `X = X₀ ×_{k₀} k` over a finite field `k₀`.
 For an affine open `U₀ ⊆ X₀` with reduced closed complement `Z₀`, the base changes `U` and `Z`
 of `U₀` and `Z₀` are an open subscheme of `X` and its closed complement, both stable under `Φ`,
-with the model Frobenii of `U₀` and `Z₀` (blueprint `thm-trf-coefficient-morphism-trace-formula`,
-Step 5). The complement `Z₀` is covered by one affine open fewer than `X₀`.
+with the model Frobenii of `U₀` and `Z₀` (blueprint
+`theorem-trace-formula-frobenius-correspondence--1`, Step 5). The complement `Z₀` is covered by one
+affine open fewer than `X₀`.
 
 ## Main results
 
@@ -159,7 +160,7 @@ theorem isProper_hom_of_card_eq_zero (p : X.left ⟶ X₀)
   infer_instance
 
 /-- **Open–closed decomposition along an affine open of the model** (blueprint
-`thm-trf-coefficient-morphism-trace-formula`, Step 5): if the model `X₀` is covered by the
+`theorem-trace-formula-frobenius-correspondence--1`, Step 5): if the model `X₀` is covered by the
 affine opens of a finite set `s` of `n + 1` elements, there are an open immersion `j : U ⟶ X` and
 a closed immersion `i : Z ⟶ X` with complementary images, endomorphisms `Φ_U`, `Φ_Z` with
 `Φ_U ≫ j = j ≫ Φ` and `Φ_Z ≫ i = i ≫ Φ` which are model Frobenii over `k₀`, the model of `U`

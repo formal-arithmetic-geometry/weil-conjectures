@@ -307,7 +307,6 @@ lemma comps_homEquiv_regularBiproductTriv (hγ : IsIntegralCocycle f γ) (U : V.
     padicIntSheafToAdicConstantSheaf_eq]
   rfl
 
-set_option maxHeartbeats 1000000 in
 -- The defeq checks unfold the sections of composites of sheaf morphisms.
 /-- **The coordinates of the trivialisation modulo `ℓᵏ`**: for a section `s` of the lattice over
 `T'`, the `j`-th coordinate of its pullback to `T' ×_T V` is, modulo `ℓᵏ`, the `j`-th coordinate
@@ -381,7 +380,6 @@ lemma adicLowerStarRestrictPadicIntIso_inv_app_hom_app_apply (B : AdicSheaf l V)
   rfl
 
 set_option maxRecDepth 20000 in
-set_option synthInstance.maxHeartbeats 200000 in
 -- The sections of composites of sheaf morphisms are unfolded.
 /-- The adjoint of the trivialisation, restricted to `ℤ_ℓ`-modules, as a morphism of abelian
 sheaves. -/
@@ -442,7 +440,8 @@ lemma homEquiv_comp_descentMap_hom (hγ : IsIntegralCocycle f γ) :
   have := congrArg (padicIntToPadicAlgCl l) key
   rw [map_sum] at this
   simp only [RingHom.map_mul] at this
-  rw [map_sum (locallyFiniteFunctionsEval w)]
+  -- Pass the additive hom explicitly to avoid searching for a homomorphism class.
+  refine (map_sum (locallyFiniteFunctionsEval (l := l) w).toAddMonoidHom _ _).trans ?_
   exact this
 
 /-- **The rationalised lattice of an integral cocycle is a descent**: `ℚ̄_ℓ ⊗ M` is the descent

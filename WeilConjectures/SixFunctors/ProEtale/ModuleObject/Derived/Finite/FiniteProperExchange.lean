@@ -71,7 +71,7 @@ Source: blueprint proper-base-change-finite, clause (2), and the canonical mate 
     (H := (upperStar Λ g').leftDerivedFunctor)
     (derivedUpperStarLowerStarAdjunction Λ p)
     (derivedUpperStarLowerStarAdjunction Λ p')
-    (TwoSquare.mk _ _ _ _ (finitePullbackSquare Λ sq).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (finitePullbackSquare Λ sq).hom))
 
 /-- The canonical exchange is its defining mate, without exposing the construction.
 Source: the definition of the unit-square-counit exchange
@@ -82,7 +82,7 @@ theorem finiteProperExchange_eq_mate
     finiteProperExchange Λ sq =
       (mateEquiv (derivedUpperStarLowerStarAdjunction Λ p)
         (derivedUpperStarLowerStarAdjunction Λ p')
-        (TwoSquare.mk _ _ _ _ (finitePullbackSquare Λ sq).hom)).natTrans := by
+        (TwoSquare.mk _ _ _ _ (finitePullbackSquare Λ sq).hom)) := by
   rfl
 
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -17,7 +17,7 @@ import WeilConjectures.Tactic.TransportExact
 
 This file proves the twist equation of the generic slice
 (`NearbyCyclesModel.IsTraitModelOfGenericBase.TwistEquation`, blueprint
-`det-tf-nearby-duality-slice`, the twist (1) and "the map `θ`") for the opens used in the
+`lemma-nearby-duality-slice--1`, the twist (1) and "the map `θ`") for the opens used in the
 induction of Gabber's theorem: opens `V` of the total space of a proper trait model `M_c` over
 a generic base which embed into an affine space over the trait `S`
 (`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_iso_map_θ_eq_twist_restrictOpen_of_immersion`).
@@ -255,7 +255,7 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k'] [IsSepClosed k']
   [IsSeparated (baseChangeSpecial b (traitSlice (traitSliceCoord k'))).hom]
 
 /-- **The twist equation for a quasi-projective model over `(η, X₁, 𝟙)`** (blueprint
-`det-tf-nearby-duality-slice`, "the map `θ`"): let `M` be a trait model over the generic base
+`lemma-nearby-duality-slice--1`, "the map `θ`"): let `M` be a trait model over the generic base
 `(η, X₁, 𝟙)` with full generic fibre, whose total space is quasi-projective over `S`
 (an immersion `e : 𝒳 ⟶ ℙ(n; S)` over `S`), and `b` a coordinate of `M`. Then the twist equation
 (`NearbyCyclesModel.IsTraitModelOfGenericBase.TwistEquation`) holds for `M` and `b`.
@@ -334,7 +334,7 @@ variable {F : Type u} [Field F] {k' : Type u} [Field k']
   [IsSeparated (baseChangeSpecial b (traitSlice (traitSliceCoord k'))).hom]
 
 /-- **The twist equation for the opens of the induction** (blueprint
-`det-tf-nearby-duality-slice`, "the twist (1)" and "the map `θ`"): let `M_c` be a proper trait
+`lemma-nearby-duality-slice--1`, "the twist (1)" and "the map `θ`"): let `M_c` be a proper trait
 model over the generic base `(F, X_c, ι)` with proper `X_c`, `X_c'` and full generic fibre, `V`
 an open of its total space with quasi-compact inclusion which embeds into an affine space over
 the trait (an immersion `c_V : V ⟶ 𝔸(ι_V; S)` over `S`), and `b : V ⟶ 𝔸¹_S` a coordinate. Then

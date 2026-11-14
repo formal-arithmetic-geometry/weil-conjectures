@@ -26,8 +26,8 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- A given pair of chain maps over the stalk lifts, without imposing inverse identities.
 
-Source: blueprint lem-pc-perfect-locus, finite matrix extension argument, as expanded
-in lem-pc-finite-free-stalk-homotopy-spread, steps 1 and 2.
+Source: blueprint lemma-coherent-base-change-invertible-sheaves--3, finite matrix extension
+argument, as expanded in lem-pc-finite-free-stalk-homotopy-spread, steps 1 and 2.
 (blueprint: lem-pc-finite-free-stalk-chain-map-pair-lift).
 
 Proof: Choose an affine neighbourhood and bases in every nonzero term. The source

@@ -17,8 +17,9 @@ import WeilConjectures.RingTheory.GradedNakayamaGeneration
 /-!
 # Existence of minimal finite graded free presentations
 
-Source: blueprint `lem-sc-p1-graded-resolution`, graded Nakayama construction of a minimal
-presentation, expanded from the blueprint (blueprint: lem-sc-p1-minimal-graded-presentation-exists).
+Source: blueprint `theorem-riemann-roch-coherent-serre-duality`, graded Nakayama construction of a
+minimal presentation, expanded from the blueprint (blueprint:
+lem-sc-p1-minimal-graded-presentation-exists).
 -/
 
 @[expose] public section
@@ -130,8 +131,8 @@ private theorem exists_homogeneous_quotient_basis {k : Type u} [Field k]
 
 /-- Every finite homogeneous spanning set admits a minimal finite graded free presentation.
 Source: step 1 of blueprint node `lem-sc-p1-graded-nakayama-free`, refining the graded Hilbert
-syzygy argument cited in blueprint `lem-sc-p1-graded-resolution`. The construction below is the
-standard explicit expansion of that step, rather than a quoted blueprint proof.
+syzygy argument cited in blueprint `theorem-riemann-roch-coherent-serre-duality`. The construction
+below is the standard explicit expansion of that step, rather than a quoted blueprint proof.
 (blueprint: lem-sc-p1-minimal-graded-presentation-exists)
 
 Proof: restrict scalars along the constant-polynomial embedding to give `N` its `k`-module

@@ -17,7 +17,7 @@ Let `K` be an algebraically closed field of characteristic different from `ℓ`,
 locally of finite type over `K` and `f : X ⟶ Y` a quasi-compact, quasi-separated morphism
 locally of finite type. The *finiteness theorem* (SGA 4½, *Th. finitude*, Th. 1.1, with
 `ℓ`-adic coefficients as in Bhatt–Scholze, *The pro-étale topology for schemes*, §6.8; blueprint
-`det-thm-sf-ctf-stability-direct-images` (3), the `ℚ̄_ℓ` stage of `sk-prop-sf-finiteness`)
+`proposition-six-operations-dctf` (3), the `ℚ̄_ℓ` stage of `sk-prop-sf-finiteness`)
 asserts that for a constructible `ℓ`-adic sheaf `F` on `X_proét`:
 
 - the pushforward `f_* F` is constructible
@@ -70,7 +70,7 @@ set_option linter.unusedSectionVars false in
 derived pushforward `Rg_* F` of a constructible `ℓ`-adic sheaf along a morphism `g` locally of
 finite type between affine schemes, with target of finite type, is bounded with constructible
 cohomology sheaves `Rⁿg_* F`. This is the affine `ℚ̄_ℓ` case of clause (3) of blueprint
-`det-thm-sf-ctf-stability-direct-images` (subsection `sk-thm-sf-ctf-stability`: `Rf_*`
+`proposition-six-operations-dctf` (subsection `proposition-six-operations-dctf`: `Rf_*`
 preserves `Dᵇc(-, ℚ̄_ℓ)`); blueprint `sk-prop-sf-finiteness` is the finite-coefficient case. -/
 theorem finiteLowerStar_singleFunctor_of_isAffine (hK : ringChar K ≠ l) [LocallyOfFiniteType s]
     [IsAffine Y] {T : Scheme.{u}} [IsAffine T] (g : T ⟶ Y) [LocallyOfFiniteType g]

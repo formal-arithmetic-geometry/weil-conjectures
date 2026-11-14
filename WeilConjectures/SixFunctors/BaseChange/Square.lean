@@ -49,8 +49,8 @@ The pasting laws for the base change maps of horizontally or vertically composed
 follow from `CategoryTheory.mateEquiv_vcomp` and `CategoryTheory.mateEquiv_hcomp` together
 with the coherence of `AlgebraicGeometry.Etale.upperStarComp`; they are left to a later
 file.
-(blueprint: `def:weil-pbc-cartesian-square`, `def-weil-pbc-underived-exchange`,
-`lemma-weil-pbc-underived-exchange-naturality`)
+(blueprint: `def:weil-pbc-cartesian-square`, `definition-underived-base-change-map--1`,
+`prose-04-05`)
 
 -/
 
@@ -71,7 +71,7 @@ section Square
 
 variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
 
-/-- Blueprint `def-weil-pbc-cartesian-square`: Cartesian square and chosen pullback
+/-- Blueprint `definition-underived-base-change-map`: Cartesian square and chosen pullback
 identification, the square isomorphism.
 
 The square isomorphism `g^* ⋙ f'^* ≅ f^* ⋙ g'^*` attached to a commutative square
@@ -91,13 +91,13 @@ transformation `f_* ⋙ g^* ⟶ g'^* ⋙ f'_*`: the mate of the square isomorphi
 `f'^* ⊣ f'_*`. A local section of `g^* f_* F` cannot in general be represented by a section
 on `V ×_{Y'} Y`, the square supplying no morphism `Y ⟶ Y'`; this is why the map is defined
 categorically, through unit, square isomorphism and counit, and not by a sectionwise rule.
-(blueprint: `def-weil-pbc-underived-exchange`,
+(blueprint: `definition-underived-base-change-map--1`,
 `s0.-comparison-data-and-injective-acyclicity--warning-1`) -/
 noncomputable def Etale.baseChangeMap (sq : CommSq g' f' f g) :
     (f)_*[A] ⋙ (g)^*[A] ⟶ (g')^*[A] ⋙ (f')_*[A] :=
   (mateEquiv (Etale.upperStarLowerStarAdjunction A f)
     (Etale.upperStarLowerStarAdjunction A f')
-    (TwoSquare.mk _ _ _ _ (Etale.squareUpperStarIso A sq).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (Etale.squareUpperStarIso A sq).hom))
 
 /-- The base change map as a `TwoSquare`, for the mate calculus. -/
 noncomputable abbrev Etale.baseChangeSquare (sq : CommSq g' f' f g) :
@@ -110,7 +110,7 @@ omit [HasSmallSiteSheafify A] in
 /-- **The adjoint of the base change map** is the square isomorphism followed by the counit:
 for a sheaf `F` on `X`,
 `f'^* (baseChangeMap F) ≫ ε_{f'} = squareUpperStarIso (f_* F) ≫ g'^* (ε_f F)`.
-(blueprint: `def-weil-pbc-underived-exchange`) -/
+(blueprint: `definition-underived-base-change-map--1`) -/
 lemma Etale.upperStar_map_baseChangeMap_app_counit (sq : CommSq g' f' f g)
     (F : Sheaf X.smallEtaleTopology A) :
     ((f')^*[A]).map ((Etale.baseChangeMap A sq).app F) ≫
@@ -132,7 +132,7 @@ lemma Etale.map_unit_baseChangeMap_app (sq : CommSq g' f' f g)
 
 omit [HasSmallSiteSheafify A] in
 /-- **Naturality of the base change map** in the sheaf.
-(blueprint: `lemma-weil-pbc-underived-exchange-naturality`) -/
+(blueprint: `prose-04-05`) -/
 lemma Etale.baseChangeMap_naturality (sq : CommSq g' f' f g)
     {F F' : Sheaf X.smallEtaleTopology A} (u : F ⟶ F') :
     ((g)^*[A]).map (((f)_*[A]).map u) ≫ (Etale.baseChangeMap A sq).app F' =
@@ -153,7 +153,7 @@ square isomorphism `AlgebraicGeometry.Etale.squareLowerStarIso` along the horizo
 adjunctions, which is the usual description of the base change map. -/
 lemma Etale.mateEquiv_baseChangeSquare (sq : CommSq g' f' f g) :
     (mateEquiv (Etale.upperStarLowerStarAdjunction A g') (Etale.upperStarLowerStarAdjunction A g)
-      (Etale.baseChangeSquare A sq)).natTrans = (Etale.squareLowerStarIso A sq).hom := by
+      (Etale.baseChangeSquare A sq)) = (Etale.squareLowerStarIso A sq).hom := by
   rw [Etale.baseChangeSquare, iterated_mateEquiv_conjugateEquiv]
   change conjugateEquiv _ _ ((Etale.upperStarComp A f' g (g' ≫ f) sq.w).inv ≫
     (Etale.upperStarComp A g' f).hom) = (Etale.lowerStarComp A g' f).hom ≫
@@ -228,7 +228,7 @@ instance Etale.isIso_baseChangeMap_of_isUniversalHomeomorphism (sq : CommSq g' f
   have h₂ := Etale.isEquivalence_lowerStar A g
   have : IsIso (Etale.upperStarLowerStarAdjunction A g').unit := inferInstance
   have : IsIso (Etale.upperStarLowerStarAdjunction A g).counit := inferInstance
-  change IsIso (Etale.baseChangeSquare A sq).natTrans
+  change IsIso (Etale.baseChangeSquare A sq)
   rw [Etale.baseChangeSquare_eq_mateEquiv_symm]
   unfold mateEquiv
   dsimp only [Equiv.coe_fn_symm_mk]
@@ -243,7 +243,7 @@ instance Etale.isIso_baseChangeMap_of_isIso (sq : CommSq g' f' f g) [IsIso g] [I
     IsIso (Etale.baseChangeMap A sq) := by
   have : IsIso (Etale.upperStarLowerStarAdjunction A g').unit := inferInstance
   have : IsIso (Etale.upperStarLowerStarAdjunction A g).counit := inferInstance
-  change IsIso (Etale.baseChangeSquare A sq).natTrans
+  change IsIso (Etale.baseChangeSquare A sq)
   rw [Etale.baseChangeSquare_eq_mateEquiv_symm]
   unfold mateEquiv
   dsimp only [Equiv.coe_fn_symm_mk]

@@ -30,7 +30,7 @@ asks for a uniform *Tor amplitude* of the reductions instead of a uniform cohomo
 Tor amplitude in `[a, b]` bounds the support by `[a, b]`, so it is contained in the blueprint's
 category (`AlgebraicGeometry.Etale.DerivedCategory.boundedConstructibleIntegral_le`); the
 converse is the residue-field argument of the blueprint's remark in
-`def-weil-finite-tor-amplitude`.
+`definition-constructible-sheaves`.
 
 ## Main definitions
 

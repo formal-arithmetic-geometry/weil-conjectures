@@ -5,7 +5,6 @@ Authors: Claude
 -/
 module
 
--- Must come first: it restores the instance order needed to avoid a heartbeat timeout below.
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityLocal -- shake: keep
 public import WeilConjectures.TraceFormula.ContractingClosedPiece
 public import WeilConjectures.TraceFormula.Specialization.ComponentExchangeFactor
@@ -46,12 +45,6 @@ identity `ν_X(T) ≫ w = Ra_{X'!}(χ) ≫ v`
 (`TraceSpecialization.fixedLocusToPointCompactSupportExchange_app_comp_eq_of_eq`): this is the
 form of fact (II) of `ComponentClassReduction` for `M = Rj_! ℚ̄_ℓ`, `T = R(dj)_* ℚ̄_ℓ`, `χ` the
 pushforward exchange of `𝒟_B ⟶ 𝒳` and `u` built from that of `𝒟_B ⟶ 𝒞`.
-
-## Implementation notes
-
-The two concrete statements involving both fixed squares need a raised heartbeat limit: unifying
-the base change identity of `F'` (resp. the two hypotheses) with the hand-written statement takes
-about 300k heartbeats.
 
 -/
 
@@ -306,7 +299,6 @@ theorem fixedSquareExchange_app_comp_eq (M : Dᵇc(F.F.left)⟦Profinite.padicAl
     (lowerStarLowerShriekCompIso ℓ F.isPullback.w) F.lowerShriekBaseChangeIso_hom_app_eq M g t ht
   exact h
 
-set_option maxHeartbeats 400000 in
 -- elaborating the base change identity of `F'` against the expected hypothesis is slow
 /-- **The exchange of the fixed square on pushforwards from the fixed locus, both sides**: if
 `ν_c(Rι_* M) ≫ Ψ_{X×X}(Ξ(M)) ≫ χ_Δ(Rd_! M) ≫ RΔ'_*(g) = Rc'_!(u) ≫ Ξ'(M') ≫ RΔ'_*(g')` for
@@ -375,7 +367,6 @@ theorem fixedLocusToPointCompactSupportExchange_app_comp_map
   rw [fixedLocusToPointCompactSupportExchange_app]
   exact comp_map_comp_app_comp_map_eq _ _ νX _ _ κ (Iso.inv_hom_id_app _ _)
 
-set_option maxHeartbeats 500000 in
 -- unifying the hypotheses with the hand-written statement is slow
 /-- **`ν_F` on pushforwards from the fixed locus**: let `κ : Rd_! N ⟶ T`, `χ : Ψ_X T ⟶ G'`,
 `u : Ψ_C Rι_* N ⟶ Rι'_* M'` and `g' : Rd'_! M' ⟶ G'` satisfy the support identity

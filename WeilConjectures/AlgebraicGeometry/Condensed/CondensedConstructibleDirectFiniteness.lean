@@ -97,7 +97,7 @@ private theorem finiteFree_direct_finiteness
     exact mul_eq_one_comm.mp hm
   apply biproduct_fin_hom_ext
   intro i j
-  exact congrFun (congrFun hm' i) j
+  exact congrArg End.asHom (congrFun (congrFun hm' i) j)
 
 private theorem isIso_of_iso_finiteFree
     {C : Type*} [Category C] [Preadditive C] [MonoidalCategory C]
@@ -262,10 +262,10 @@ Proof (the six steps of the DAG):
 1. For each integer q apply the homology functor: u = H^q(a), v = H^q(b) satisfy u ≫ v = 1
 on M = H^q(K). The constructibility part of `hK` gives `IsConstantModelConstructible`
 for M; X is Noetherian and quasi-separated
-(`lem-weil-pbc-locally-noetherian-quasi-separated`), so `sk-def-sfb-constructible` gives
+(`lem-weil-pbc-locally-noetherian-quasi-separated`), so `definition-constructible-sheaves` gives
 a finite stratification by immersions with Noetherian, quasi-compactly immersed strata.
 2. On each stratum `HasFiniteConstantLocalModel.isLocallyFinitelyPresented`
-(`det-def-sfb-constructible-local-model`) and `condensedQbar_lfp_locally_free`
+(`definition-constructible-sheaves--1`) and `condensedQbar_lfp_locally_free`
 (`lem-weil-pbc-condensed-qbar-lfp-local-triviality`) give a pro-etale cover on which the
 pulled-back module is isomorphic to a finite biproduct of the unit (regular) module.
 3. Conjugated by such an isomorphism, the endomorphisms are square matrices over the

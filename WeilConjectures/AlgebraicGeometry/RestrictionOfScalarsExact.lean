@@ -10,7 +10,7 @@ import WeilConjectures.AlgebraicGeometry.DerivedScalarExtensionRestrictionAdjunc
 /-!
 # Exactness of restriction from finite to completed integral coefficients
 
-Source: Weil conjectures blueprint, `sec-smooth-purity`, `sk-def-sf-operations`, order 1456;
+Source: Weil conjectures blueprint, `chap-Smooth-purity`, `sk-def-sf-operations`, order 1456;
 Stacks Project, Tag 03DA (blueprint: lem-weil-restriction-of-scalars-exact).
 
 The index `n : ℕ` denotes the positive exponent `n + 1`, following the coefficient
@@ -36,10 +36,10 @@ Source: blueprint order 1456; Stacks Project, Tag 03DA
 
 Proof:
 1. On the small pro-etale site, abelian sheafification is exact
-(`lem-weil-pbc-sheafification-exact`). The coefficient construction supplies the limit
+(`situation-conventions`). The coefficient construction supplies the limit
 projection. Restriction along it keeps all underlying abelian sheaves and morphisms,
 changing only the scalar action by precomposition with that projection; it is additive.
-2. For both ring sheaves, `lem-weil-pbc-module-sheaves-colimits-forgetful` says that
+2. For both ring sheaves, `situation-conventions` says that
 forgetting to abelian sheaves is faithful and preserves kernels and cokernels, hence
 images. A short exact sequence therefore has a short exact underlying abelian sequence.
 Cokernels here are sheaf cokernels, obtained by sheafifying sectionwise cokernels;

@@ -195,7 +195,6 @@ attribute [local irreducible] SheafOfModules.monoidalCategory
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-set_option maxHeartbeats 400000 in
 -- The existential packaging of the normalized adjunction unfolds large site-module terms.
 /-- The linear adjunction to the supplied sectionwise pushforward, retaining the
 underlying set-sheaf hom equivalence. The scalar insertion is the image of `1 ⊗ m`.

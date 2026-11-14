@@ -61,7 +61,7 @@ monomorphisms and cokernels. This is independent of the existence of a Sylow cov
 
 Source: Stacks Project, `etale-cohomology.tex`, Lemma 0A3R
 (`lemma-pullback-filtered`), the representation-filtration step.
-(blueprint: lem-weil-pbc-invariant-flag-categorical-filtration)
+(blueprint: lemma-reduction-unipotent-local-system--1)
 
 Proof: Put n = dim M and replace F i by F (min i n). These spaces are stable,
 since their indices are at most n. Equip each with the restricted representation.
@@ -101,7 +101,7 @@ theorem exists_categorical_filtration_of_invariant_flag
   let ι (i : ℕ) : W i ⟶ W (i + 1) :=
     Rep.ofHom ⟨Submodule.inclusion (hle i), fun _ ↦ rfl⟩
   have hzero : IsZero (W 0) := by
-    apply (Rep.isZero_iff (ZMod ℓ) P (W 0)).mpr
+    apply (Rep.isZero_iff (W 0)).mpr
     change Subsingleton (B 0)
     have : B 0 = ⊥ := by simpa [B] using h0
     rw [this]

@@ -17,13 +17,13 @@ import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvr
 # Ordinary Künneth at a finite coefficient ring
 
 Source: Weil blueprint (snapshot slopmaster2-20261029-2300), sec-smooth-purity/sk-prop-an,
-node lem-pur-ordinary-kunneth-finite-ring, order 3254; Stacks Project, Tag 0F1P
-(blueprint: lem-pur-ordinary-kunneth-finite-ring).
+node proposition-ordinary-external-kunneth, order 3254; Stacks Project, Tag 0F1P
+(blueprint: proposition-ordinary-external-kunneth).
 
 The exterior-product map is the recorded canonical Künneth map
-`kunnethGlobalSectionsMap` of def-kun-kunneth-map, on the unbounded derived categories
+`kunnethGlobalSectionsMap` of definition-kunneth-map--1, on the unbounded derived categories
 `DerivedCategoryModule` of def-weil-pbc-derived-categories, with the ordinary derived tensor
-`derivedTensor` of def-kun-derived-tensor, at the coefficient ring
+`derivedTensor` of proposition-open-direct-image-preserves-finite, at the coefficient ring
 `Padic.coefficientExtensionRing l E n = 𝒪_E / ϖ_E ^ n` of
 def-weil-l-adic-coefficient-extension.
 
@@ -52,9 +52,9 @@ field of the finite-field datum `D`, let `X, Y` be separated finite-type `k`-sch
 `K ∈ D(X_ét, A)` and `M ∈ D(Y_ét, A)`, the exterior-product map
 `RΓ(X, K) ⊗ᴸ_A RΓ(Y, M) ⟶ RΓ(X ×_k Y, p_X^* K ⊗ᴸ_A p_Y^* M)` is an isomorphism.
 
-Source: blueprint order 3254, node lem-pur-ordinary-kunneth-finite-ring
+Source: blueprint order 3254, node proposition-ordinary-external-kunneth
 (sec-smooth-purity/sk-prop-an); Stacks Project, Tag 0F1P
-(blueprint: lem-pur-ordinary-kunneth-finite-ring).
+(blueprint: proposition-ordinary-external-kunneth).
 
 The separable closedness of `D.k` used to form the map comes from its specified algebraic
 closure structure (a proposition; any proof gives the same map).
@@ -70,7 +70,7 @@ Proof:
    `X, Y` are of finite type over `k`, so for the finite ring `Λ` the native relative Künneth
    map `Ra_* K ⊗ᴸ_Λ Rb_* M ⟶ R(a ∘ p_X)_*(p_X^* K ⊗ᴸ_Λ p_Y^* M)` over the point is an
    isomorphism, for arbitrary unbounded `K, M`.
-4. (def-kun-kunneth-map) By definition the exterior-product map is the composite of the
+4. (definition-kunneth-map--1) By definition the exterior-product map is the composite of the
    inverses of the comparisons `RΓ(Spec k, Ra_* -) ≅ RΓ(X, -)` (and for `b`), the point
    tensor comparison `RΓ(Spec k, -) ⊗ RΓ(Spec k, -) ≅ RΓ(Spec k, - ⊗ᴸ -)`, `RΓ(Spec k, -)`
    applied to the map of step 3, and the comparison for `a ∘ p_X`. Every factor is an

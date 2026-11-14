@@ -60,8 +60,8 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 # Sections with closed support for condensed module sheaves
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-formal-closed-support,
-node det-lem-formal-closed-support-sheaves
-(blueprint: det-lem-formal-closed-support-sheaves); Stacks Project, Tags 09AA and 09AH.
+node lemma-sections-support-closed-subscheme--1
+(blueprint: lemma-sections-support-closed-subscheme--1); Stacks Project, Tags 09AA and 09AH.
 -/
 
 @[expose] public noncomputable section
@@ -281,23 +281,23 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 
 /-- The kernel of the open restriction unit, formed in the functor category, so that
 its maps are precisely the induced kernel maps.
-Source: blueprint det-lem-formal-closed-support-sheaves, definition of the supported kernel
-(blueprint: det-lem-formal-closed-support-sheaves). -/
+Source: blueprint lemma-sections-support-closed-subscheme--1, definition of the supported kernel
+(blueprint: lemma-sections-support-closed-subscheme--1). -/
 noncomputable def moduleSectionsWithSupport {X V : Scheme.{u}} (j : V ⟶ X) :
     pulledBackModuleObjects Λ X ⥤ pulledBackModuleObjects Λ X :=
   kernel (upperStarLowerStarAdjunction Λ j).unit
 
 /-- The sheaf on the closed subscheme: `i^* ker(M ⟶ j_* j^* M)`.
-Source: blueprint det-lem-formal-closed-support-sheaves, displayed definition
-(blueprint: det-lem-formal-closed-support-sheaves). -/
+Source: blueprint lemma-sections-support-closed-subscheme--1, displayed definition
+(blueprint: lemma-sections-support-closed-subscheme--1). -/
 noncomputable def closedModuleSectionsWithSupport {X Z V : Scheme.{u}}
     (i : Z ⟶ X) (j : V ⟶ X) :
     pulledBackModuleObjects Λ X ⥤ pulledBackModuleObjects Λ Z :=
   moduleSectionsWithSupport Λ j ⋙ upperStar Λ i
 
 /-- Sections with closed support give the right adjoint to the exact closed direct image.
-Source: blueprint main-20261015, det-lem-formal-closed-support-sheaves, clauses (1)--(3);
-Stacks Project, Tags 09AA and 09AH (blueprint: det-lem-formal-closed-support-sheaves).
+Source: blueprint main-20261015, lemma-sections-support-closed-subscheme--1, clauses (1)--(3);
+Stacks Project, Tags 09AA and 09AH (blueprint: lemma-sections-support-closed-subscheme--1).
 
 Proof plan:
 1. The standing scheme is Noetherian by finite type over the field
@@ -319,7 +319,7 @@ Proof plan:
    inverse sends this map through the inverse closed unit and the kernel inclusion.
    Kernel uniqueness proves the inverse identities and naturality, giving the adjunction.
 5. Kernel-map uniqueness gives additivity. Right adjoints preserve small limits
-   (lem-weil-pbc-right-adjoint-preserves-limits); in particular this gives left exactness.
+   (situation-conventions); in particular this gives left exactness.
 6. Exact closed direct image preserves monomorphisms. Apply the generic
    lem-exc-rg-right-adjoint-preserves-injectives to obtain the injective-module assertion.
 7. Lift the additive adjunction termwise and to homotopy categories using
@@ -329,7 +329,7 @@ Proof plan:
    K-injective complex with zero homotopy classes. This proves K-injectivity, including
    unbounded complexes, by def-pur-kinjective-complex.
 
-The admissible coefficients are the recorded predicate of sk-def-localizing-closure.
+The admissible coefficients are the recorded predicate of definition-localizing-subcategory.
 The first conjunct is the canonical natural identification of clause (1).
 The existential additive instance only makes the termwise functor on complexes available.
 -/

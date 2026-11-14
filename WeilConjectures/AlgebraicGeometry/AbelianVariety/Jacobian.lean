@@ -54,7 +54,7 @@ namespace AlgebraicGeometry
 
 variable {K : Type u} [Field K] {C : Scheme.{u}}
 
-/-- Blueprint `def-sc-jacobian`: The Jacobian
+/-- Blueprint `theorem-picard-scheme-jacobian-over-separably--3`: The Jacobian
 
 Let `C` be a smooth projective geometrically integral curve over a field `K`, of genus `g`. A
 *Jacobian of `C`* is a pair `(J, φ)` consisting of an abelian variety `J` over `K` of dimension
@@ -76,7 +76,7 @@ since it is a connected curve (`AlgebraicGeometry.IsIntegralCurve.isConnectedCur
 (`AlgebraicGeometry.IsHProjective.isProper`). The genus is `f.genus = dim_K Γ(C, Ω¹_{C/K})`,
 which agrees with `dim_K H¹(C, 𝒪_C)` (`AlgebraicGeometry.Scheme.genus_eq_arithmeticGenus`).
 
-(blueprint: `def-sc-jacobian`) -/
+(blueprint: `theorem-picard-scheme-jacobian-over-separably--3`) -/
 class IsJacobian (f : C ⟶ Spec (.of K)) [IsCurve f] [Smooth f] [IsProper f]
     [GeometricallyIntegral f] (J : Over (Spec (.of K))) [GrpObj J] : Prop
     extends IsAbelianVariety J where
@@ -100,7 +100,7 @@ instance IsCurve.of_smoothOfRelativeDimension_one (f : C ⟶ Spec (.of K))
 geometrically integral group scheme `J`, smooth of relative dimension the genus of `C`, which
 respects the group laws.
 
-(blueprint: `def-sc-jacobian`) -/
+(blueprint: `theorem-picard-scheme-jacobian-over-separably--3`) -/
 theorem IsJacobian.of_representableBy (f : C ⟶ Spec (.of K)) [IsCurve f] [Smooth f]
     [IsProper f] [GeometricallyIntegral f]
     (J : Over (Spec (.of K))) [GrpObj J] [IsProper J.hom] [GeometricallyIntegral J.hom]
@@ -117,13 +117,14 @@ theorem IsJacobian.of_representableBy (f : C ⟶ Spec (.of K)) [IsCurve f] [Smoo
   · rwa [Iso.symm_symm_eq, Equiv.symm_apply_apply]
 
 /-- **The Jacobian is a Jacobian.** A smooth projective geometrically integral curve `C` over a
-separably closed field `K` has a Jacobian in the sense of blueprint `def-sc-jacobian`: an
-abelian variety of dimension the genus of `C` representing `Pic⁰_{C/K}` as a group-valued
-functor. This repackages `AlgebraicGeometry.exists_jacobian`, the genus
-`dim_K Γ(C, Ω¹_{C/K})` being the arithmetic genus `dim_K H¹(C, 𝒪_C)` by
-`AlgebraicGeometry.Scheme.genus_eq_arithmeticGenus`.
+separably closed field `K` has a Jacobian in the sense of blueprint
+`theorem-picard-scheme-jacobian-over-separably--3`: an abelian variety of dimension the genus of `C`
+representing `Pic⁰_{C/K}` as a group-valued functor. This repackages
+`AlgebraicGeometry.exists_jacobian`, the genus `dim_K Γ(C, Ω¹_{C/K})` being the arithmetic genus
+`dim_K H¹(C, 𝒪_C)` by `AlgebraicGeometry.Scheme.genus_eq_arithmeticGenus`.
 
-(blueprint: `sk-thm-picard-main`, `def-sc-jacobian`) -/
+(blueprint: `theorem-picard-scheme-jacobian-over-separably`,
+`theorem-picard-scheme-jacobian-over-separably--3`) -/
 theorem exists_isJacobian [IsSepClosed K] [C.Over (Spec (.of K))]
     [SmoothOfRelativeDimension 1 (C ↘ Spec (.of K))] [IsProper (C ↘ Spec (.of K))]
     [GeometricallyIntegral (C ↘ Spec (.of K))] [Smooth (C ↘ Spec (.of K))] :

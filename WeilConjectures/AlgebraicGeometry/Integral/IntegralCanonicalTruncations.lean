@@ -543,7 +543,7 @@ theorem pbc_torCompatible_iff_flat_cohomology
     obtain ⟨r, F, N, hfree, ⟨e⟩, f, hf, n, t, ht⟩ := h a j
     have hz := hTor n q (-1) (by omega)
     have : Epi t := ht
-    have hc : IsZero (cokernel f) := by
+    have hc : IsZero (cokernel f.asHom) := by
       apply IsZero.of_epi t
       apply Functor.map_isZero
       apply Functor.map_isZero

@@ -52,13 +52,13 @@ pullback assertion at the start of “The stratum”.
 
 Proof: fix L and let P be the class of K for which K tensor L is bounded constructible.
 Native K-flat tensor is exact, and the integral bounded constructible subcategory is
-triangulated by sk-lem-int-integral-heart. Thus P is isomorphism invariant, shift invariant
-and extension closed. Apply det-lem-int-tensor-shriek (2) to reduce to K = a_! M, where
-M is bounded constructible on the locally closed stratum S with the displayed scalar
+triangulated by lemma-structure-integral-constructible-complexes. Thus P is isomorphism invariant,
+shift invariant and extension closed. Apply lemma-inverse-image-tensor-product (2) to reduce to K =
+a_! M, where M is bounded constructible on the locally closed stratum S with the displayed scalar
 chart complexes. The separated finite type hypotheses pass to S. The projection
-formula det-lem-int-tensor-projection gives (a_! M) tensor L = a_!(M tensor a^*L).
-By det-lem-int-tensor-pullback, a^*L is bounded constructible. The supplied stratum
-assertion applies to M and a^*L. Finally det-lem-int-tensor-shriek (1) carries this
+formula lemma-inverse-image-tensor-product--2 gives (a_! M) tensor L = a_!(M tensor a^*L).
+By lemma-inverse-image-tensor-product, a^*L is bounded constructible. The supplied stratum
+assertion applies to M and a^*L. Finally lemma-inverse-image-tensor-product (1) carries this
 bounded constructible tensor back to X. Transport the coefficient presentation by the
 canonical equality of continuous integer-ring objects; no arbitrary tensor comparison
 or independent closure theorem is used. Empty strata and zero local complexes are

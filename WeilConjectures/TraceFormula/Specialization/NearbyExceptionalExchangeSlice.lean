@@ -28,7 +28,7 @@ Write `α_M : p_M^* Ψ_M ⟶ Ψ_{M''} c_M^*` and `α_N` for the pullback exchang
 (the slice exchanges, `NearbyCyclesModel.IsTraitModelOfGenericBase.genericSliceExchange`).
 
 This file proves that the exchanges of `φ` and of `φ''` are compatible with `α_M` and `α_N`
-(blueprint `det-tf-nearby-duality-slice`, "the map `θ`"):
+(blueprint `lemma-nearby-duality-slice--1`, "the map `θ`"):
 
 * the **pushforward exchanges** `χ_φ : Ψ_M Ri₁_* ⟶ Ri₂_* Ψ_N` and `χ_{φ''}`, through the base
   change morphisms of `Ri₁_*` and `Ri₂_*`
@@ -118,10 +118,10 @@ lemma mateEquiv_app_cube_of_eq (af : Lf ⊣ Rf) (af' : Lf' ⊣ Rf') (bf : Mf ⊣
     (αg : PY ⋙ Gs ⟶ Gr ⋙ PY') (αg' : PX ⋙ Hs ⟶ Hr ⋙ PX')
     (h : ∀ M, Mf'.map (αg.app M) ≫ αf'.app (Gr.obj M) ≫ PX'.map (σr.app M) =
       σs.app (PY.obj M) ≫ Hs.map (αf.app M) ≫ αg'.app (Lf.obj M))
-    (βr : Rf ⋙ Gr ⟶ Hr ⋙ Rf') (hβr : βr = (mateEquiv af af' σr).natTrans)
-    (βs : Sf ⋙ Gs ⟶ Hs ⋙ Sf') (hβs : βs = (mateEquiv bf bf' σs).natTrans)
-    (χ : Rf ⋙ PY ⟶ PX ⋙ Sf) (hχ : χ = (mateEquiv af bf αf).natTrans)
-    (χ' : Rf' ⋙ PY' ⟶ PX' ⋙ Sf') (hχ' : χ' = (mateEquiv af' bf' αf').natTrans) (K : DX) :
+    (βr : Rf ⋙ Gr ⟶ Hr ⋙ Rf') (hβr : βr = (mateEquiv af af' σr))
+    (βs : Sf ⋙ Gs ⟶ Hs ⋙ Sf') (hβs : βs = (mateEquiv bf bf' σs))
+    (χ : Rf ⋙ PY ⟶ PX ⋙ Sf) (hχ : χ = (mateEquiv af bf αf))
+    (χ' : Rf' ⋙ PY' ⟶ PX' ⋙ Sf') (hχ' : χ' = (mateEquiv af' bf' αf')) (K : DX) :
     αg.app (Rf.obj K) ≫ PY'.map (βr.app K) ≫ χ'.app (Hr.obj K) =
       Gs.map (χ.app K) ≫ βs.app (PX.obj K) ≫ Sf'.map (αg'.app K) := by
   subst hβr hβs hχ hχ'
@@ -183,12 +183,12 @@ lemma Hom.pushforwardExchange_slice_app (φ : N.Hom M i₁ i₂) (φ'' : N''.Hom
   have hr : baseChangeMap Λ (⟨hb⟩ : CommSq cN i₁'' i₁ cM) =
       (mateEquiv (derivedUpperStarLowerStarAdjunction Λ i₁)
         (derivedUpperStarLowerStarAdjunction Λ i₁'')
-        (pullbackSquareComparison Λ (⟨hb⟩ : CommSq cN i₁'' i₁ cM)).hom).natTrans :=
+        (pullbackSquareComparison Λ (⟨hb⟩ : CommSq cN i₁'' i₁ cM)).hom) :=
     Adjunction.exchangeRight_eq_mateEquiv _ _ _
   have hs' : baseChangeMap Λ (⟨hs⟩ : CommSq pN i₂'' i₂ pM) =
       (mateEquiv (derivedUpperStarLowerStarAdjunction Λ i₂)
         (derivedUpperStarLowerStarAdjunction Λ i₂'')
-        (pullbackSquareComparison Λ (⟨hs⟩ : CommSq pN i₂'' i₂ pM)).hom).natTrans :=
+        (pullbackSquareComparison Λ (⟨hs⟩ : CommSq pN i₂'' i₂ pM)).hom) :=
     Adjunction.exchangeRight_eq_mateEquiv _ _ _
   have h := mateEquiv_app_cube_of_eq (derivedUpperStarLowerStarAdjunction Λ i₁)
     (derivedUpperStarLowerStarAdjunction Λ i₁'') (derivedUpperStarLowerStarAdjunction Λ i₂)
@@ -299,7 +299,7 @@ private lemma boundedConstructiblePushforwardExchange_slice_app_aux
   transport_exact key K.obj
 
 include htot hgen hαM hαN in
-/-- **The pushforward exchanges and slicing** (blueprint `det-tf-nearby-duality-slice`, "the map
+/-- **The pushforward exchanges and slicing** (blueprint `lemma-nearby-duality-slice--1`, "the map
 `θ`"): for morphisms of models `φ : N ⟶ M`, `φ'' : N'' ⟶ M''`, `s_M : M'' ⟶ M` and
 `s_N : N'' ⟶ N` with `s_N ≫ φ = φ'' ≫ s_M`, and the pullback exchanges `α_M`, `α_N` of `s_M`,
 `s_N` on bounded constructible complexes,
@@ -380,7 +380,7 @@ lemma exceptionalExchange_app_eq_mateEquiv_inv
   simp
 
 include htot hgen hαM hαN in
-/-- **The exceptional exchanges and slicing** (blueprint `det-tf-nearby-duality-slice`, "the map
+/-- **The exceptional exchanges and slicing** (blueprint `lemma-nearby-duality-slice--1`, "the map
 `θ`"): in the situation of
 `NearbyCyclesModel.Hom.boundedConstructiblePushforwardExchange_slice_app`, for proper
 `i₁, i₂, i₁'', i₂''`, cartesian squares of bases and of special fibres, invertible proper

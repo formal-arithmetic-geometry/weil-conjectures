@@ -19,8 +19,8 @@ constructible complex of `𝔽_E`-module objects on `X ∖ Z`. The restriction `
 nearby cycles of the deformation to the normal cone to the zero section vanishes over a
 neighbourhood of `ζ`
 (`ProEtale.CondensedRing.exists_isZero_upperStar_nearbyCycles_lowerShriek_residueField`). This is
-blueprint `det-sp-generic-divisor` for finite coefficients and complexes `L = j_! F` with
-`Li^* L = 0`.
+blueprint `lemma-vanishing-generic-points-principal-divisor--1` for finite coefficients and
+complexes `L = j_! F` with `Li^* L = 0`.
 
 ## Proof
 
@@ -56,11 +56,11 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 
 /-- **Generic vanishing along a divisor for finite coefficients** (blueprint
-`det-sp-generic-divisor` with coefficients `𝔽_E`, for extensions by zero from the complement of
-the divisor): let `X` be normal, `Z = V(h)` for a nonzero global function `h`,
-`j : X ∖ Z ⟶ X` the complement, `ζ` a generic point of an irreducible component of `Z`, and `F` a
-bounded constructible complex of `𝔽_E`-module objects on `X ∖ Z`. Then `Le^* Ψ_X(j_! F)` vanishes
-over a neighbourhood of `ζ`. -/
+`lemma-vanishing-generic-points-principal-divisor--1` with coefficients `𝔽_E`, for extensions by
+zero from the complement of the divisor): let `X` be normal, `Z = V(h)` for a nonzero global
+function `h`, `j : X ∖ Z ⟶ X` the complement, `ζ` a generic point of an irreducible component of
+`Z`, and `F` a bounded constructible complex of `𝔽_E`-module objects on `X ∖ Z`. Then
+`Le^* Ψ_X(j_! F)` vanishes over a neighbourhood of `ζ`. -/
 theorem exists_isZero_upperStar_nearbyCycles_lowerShriek_residueField
     [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
     (hX : IsNormalScheme X.left) {h : Γ(X.left, ⊤)} (hh : h ≠ 0) {I : X.left.IdealSheafData}

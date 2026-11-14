@@ -60,7 +60,7 @@ theorem localPolynomial_stalk_biprod_constantTwist_dual {F : WeilSheaf k₀ l X}
 weight `w`, and `ι c = q ^ w`, then `F ⊕ (F^∨ ⊗ 𝓑_c)` is `ι`-real: at a closed point of degree
 `m`, with `q_x = qᵐ`, the stalk of `F` is pure of weight `w` relative to `q_x` and
 `ι (cᵐ) = q_x ^ w`, so `FrobeniusModule.IsPureOfWeight.isReal_prod_rescale_dual` applies.
-(blueprint: `lem-wf-pure-realizable`) -/
+(blueprint: `proposition-twisting-weight-zero-adding-dual`) -/
 theorem IsPunctuallyPureOfWeight.isReal_biprod_constantTwist_dual {ι : PadicAlgCl l →+* ℂ}
     {F : WeilSheaf k₀ l X} (hF : F.IsLisse) {w : ℝ} (h : F.IsPunctuallyPureOfWeight ι w)
     {c : (PadicAlgCl l)ˣ} (hc : ι c = (((Nat.card k₀ : ℝ) ^ w : ℝ) : ℂ)) :
@@ -77,7 +77,7 @@ theorem IsPunctuallyPureOfWeight.isReal_biprod_constantTwist_dual {ι : PadicAlg
 
 /-- **A pure lisse sheaf is realizable.** A lisse Weil sheaf `F` which is punctually `ι`-pure of
 weight `w` is a direct summand of the `ι`-real lisse sheaf `F ⊕ (F^∨ ⊗ 𝓑_c)`, for any `c` with
-`ι c = q ^ w`. (blueprint: `lem-wf-pure-realizable`) -/
+`ι c = q ^ w`. (blueprint: `proposition-twisting-weight-zero-adding-dual`) -/
 theorem IsPunctuallyPureOfWeight.isRealizable {ι : PadicAlgCl l →+* ℂ} {F : WeilSheaf k₀ l X}
     (hF : F.IsLisse) {w : ℝ} (h : F.IsPunctuallyPureOfWeight ι w) {c : (PadicAlgCl l)ˣ}
     (hc : ι c = (((Nat.card k₀ : ℝ) ^ w : ℝ) : ℂ)) :

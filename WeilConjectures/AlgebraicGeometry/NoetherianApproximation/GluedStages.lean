@@ -259,7 +259,7 @@ noncomputable def glueData : Scheme.OpensGlueData.{u} where
   t_mem := l.trans_mem
   cocycle a b c := l.cocycle a b c _
 
-/-- Blueprint `def-nagata-noetherian-stage`: Finite-type Noetherian stage.
+/-- Blueprint `theorem-nagata-s-compactification-theorem--1`: Finite-type Noetherian stage.
 
 For a valid stage `l` of the finite affine gluing presentation `G` (with coefficient subrings
 `Aₐ ⊆ Γ(S, Uₐ)`), the scheme `S_l` obtained by gluing the charts `Spec Aₐ` along the overlaps
@@ -373,7 +373,7 @@ lemma transition_preimage_opensRange_ι (a : G.ι) :
   rw [← Scheme.Hom.comp_preimage, ι_transition, Scheme.Hom.comp_preimage, preimage_opensRange_ι,
     SpecMap_incl_preimage_overlap, preimage_opensRange_ι]
 
-/-- Part of blueprint `lemma-nagata-glue-noetherian-stage`: the transition morphisms are
+/-- Part of blueprint `theorem-nagata-s-compactification-theorem--1`: the transition morphisms are
 affine. -/
 instance isAffineHom_transition : IsAffineHom (transition hll) := by
   refine isAffineHom_of_forall_exists_isAffineOpen _ fun x ↦ ?_
@@ -384,14 +384,14 @@ instance isAffineHom_transition : IsAffineHom (transition hll) := by
   rw [transition_preimage_opensRange_ι]
   exact isAffineOpen_opensRange _
 
-/-- Part of blueprint `lemma-nagata-valid-refinements-directed`: the transition morphisms satisfy
-the identity law. -/
+/-- Part of blueprint `theorem-nagata-s-compactification-theorem--1`: the transition morphisms
+satisfy the identity law. -/
 lemma transition_refl : transition (le_refl l) = 𝟙 _ :=
   l.hom_ext fun a ↦ by
     rw [ι_transition, Category.comp_id, incl_refl, Spec.map_id, Category.id_comp]
 
-/-- Part of blueprint `lemma-nagata-valid-refinements-directed`: the transition morphisms satisfy
-the composition law. -/
+/-- Part of blueprint `theorem-nagata-s-compactification-theorem--1`: the transition morphisms
+satisfy the composition law. -/
 lemma transition_trans {l'' : G.Stage} (hll' : l' ≤ l'') :
     transition (hll.trans hll') = transition hll' ≫ transition hll :=
   l''.hom_ext fun a ↦ by
@@ -416,7 +416,7 @@ lemma stageDiagram_obj (l : (G.Stage)ᵒᵖ) : G.stageDiagram.obj l = l.unop.sch
 lemma stageDiagram_map {l l' : (G.Stage)ᵒᵖ} (f : l ⟶ l') :
     G.stageDiagram.map f = Stage.transition (leOfHom f.unop) := rfl
 
-/-- Blueprint `lemma-nagata-glue-noetherian-stage`: Properties of the finite-type stages.
+/-- Blueprint `theorem-nagata-s-compactification-theorem--1`: Properties of the finite-type stages.
 
 Every glued stage `S_l` is of finite type over `ℤ` (it is quasi-compact and locally of finite type
 over `ℤ`, being covered by the finitely many spectra `Spec Aₐ` of finitely generated rings), and

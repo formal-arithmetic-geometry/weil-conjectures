@@ -12,7 +12,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 
 /-!
 # Open counit compatibility for the standard affine-line exchange
-Source: blueprint sk-prop-an, Step 5(b), detailed trace proof step 8.
+Source: blueprint proposition-purity-vector-bundles, Step 5(b), detailed trace proof step 8.
 -/
 
 @[expose] public noncomputable section
@@ -80,10 +80,10 @@ private lemma line_open_baseChange (A : Type (u + 1)) [CommRing A]
     {U U' X X' : Scheme.{u}} {t : U' ⟶ U} {j' : U' ⟶ X'}
     {j : U ⟶ X} {b : X' ⟶ X} [IsOpenImmersion j] [IsOpenImmersion j']
     (sq : IsPullback t j' j b) :
-    ((lineFormalism A).baseChange t j' j b sq.w).natTrans =
+    ((lineFormalism A).baseChange t j' j b sq.w) =
       (derivedOpenImmersionLowerShriekBaseChangeIso (ModuleCat.{u + 1} A) sq).hom := by
   rw [ExchangeFormalism.baseChange, line_square A sq.toCommSq]
-  exact congrArg TwoSquare.natTrans
+  exact
     ((mateEquiv _ _).symm_apply_eq.mpr
       (mateEquiv_derivedOpenImmersionLowerShriekBaseChangeIso A sq).symm)
 
@@ -102,7 +102,7 @@ private local instance line_has_properExchange (A : Type (u + 1)) [CommRing A] [
     let := CompactSupportFormalism.HasBaseChange.isIso_baseChange
       (F := F) sq
     let α := F.exchange t l r b sq.w
-    have (K : DerivedCategoryModule A U') : IsIso (α.natTrans.app K) := by
+    have (K : DerivedCategoryModule A U') : IsIso (α.app K) := by
       apply isIso_of_isIso_mapDerivedCategoryUpperStar_map B r r.closedComplement
         r.range_closedComplement
       · apply (NatIso.isIso_map_iff
@@ -113,7 +113,7 @@ private local instance line_has_properExchange (A : Type (u + 1)) [CommRing A] [
           isIso_derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction_unit A l
         exact isIso_map_mateEquiv_app_of_isIso (F.adj t) (F.adj b)
           (F.shAdj r) (F.shAdj l)
-          (TwoSquare.mk _ _ _ _ (inv (F.baseChange t l r b sq.w).natTrans)) K
+          (TwoSquare.mk _ _ _ _ (inv (F.baseChange t l r b sq.w))) K
       · have hdisj : Disjoint (Set.range r.closedComplement.base) (Set.range r.base) := by
           rw [r.range_closedComplement]
           exact disjoint_compl_left
@@ -146,14 +146,13 @@ set_option backward.isDefEq.respectTransparency false in
 private lemma line_refinement_baseChange (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} {c d : Compactification f}
     (r : c.Refinement d) (hr : IsPullback c.i (𝟙 X) r.hom d.i) :
-    ((lineFormalism A).baseChange (𝟙 X) c.i d.i r.hom hr.flip.w).natTrans =
+    ((lineFormalism A).baseChange (𝟙 X) c.i d.i r.hom hr.flip.w) =
       Functor.whiskerRight ((lineFormalism A).pbId X).hom
           ((lineFormalism A).sh c.i) ≫
         (Functor.leftUnitor _).hom ≫
           (refinementLowerShriekBaseChangeLeftDerivedIso (ModuleCat.{u + 1} A) r hr).hom := by
   let B := ModuleCat.{u + 1} A
   let F := lineFormalism A
-  apply congrArg TwoSquare.natTrans
   apply (mateEquiv (F.shAdj d.i) (F.shAdj c.i)).injective
   rw [ExchangeFormalism.baseChange, Equiv.apply_symm_apply]
   apply (mateEquiv_eq_of_unit (F.shAdj d.i) (F.shAdj c.i) _ _ _).symm
@@ -220,8 +219,8 @@ private lemma mate_ofNatIsoLeft
     {G : C ⥤ E} {H : D ⥤ F}
     (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (e₁ : L₁ ≅ L₁') (e₂ : L₂ ≅ L₂')
     (α : TwoSquare G L₁' L₂' H) :
-    (mateEquiv (adj₁.ofNatIsoLeft e₁) (adj₂.ofNatIsoLeft e₂) α).natTrans =
-      (mateEquiv adj₁ adj₂ ((α.whiskerRight e₂.hom).whiskerLeft e₁.inv)).natTrans := by
+    (mateEquiv (adj₁.ofNatIsoLeft e₁) (adj₂.ofNatIsoLeft e₂) α) =
+      (mateEquiv adj₁ adj₂ ((α.whiskerRight e₂.hom).whiskerLeft e₁.inv)) := by
   ext K
   simp [mateEquiv_apply, Adjunction.ofNatIsoLeft_unit,
     Adjunction.ofNatIsoLeft_counit, Category.assoc, ← Functor.map_comp]
@@ -315,12 +314,12 @@ private lemma line_shriek_exchange (A : Type (u + 1)) [CommRing A]
     {g : Y' ⟶ Y} {g' : X' ⟶ X}
     (c : Compactification f) (c' : Compactification f') (h : c'.Z ⟶ c.Z)
     (hi : IsPullback g' c'.i c.i h) (hp : IsPullback h c'.g c.g g) :
-    ((lineFormalism A).shriekBaseChange c c' h hi hp).natTrans =
+    ((lineFormalism A).shriekBaseChange c c' h hi hp) =
       rightDerivedLowerShriekOfCompactificationBaseChangeMap'
         (ModuleCat.{u + 1} A) c c' h hi hp.toCommSq := by
   have := CompactSupportFormalism.HasBaseChange.isIso_baseChange
     (F := lineFormalism A) hi
-  have hbc : inv ((lineFormalism A).baseChange g' c'.i c.i h hi.w).natTrans =
+  have hbc : inv ((lineFormalism A).baseChange g' c'.i c.i h hi.w) =
       (derivedOpenImmersionLowerShriekBaseChangeIso (ModuleCat.{u + 1} A) hi).inv := by
     apply IsIso.inv_eq_of_hom_inv_id
     rw [line_open_baseChange]
@@ -369,8 +368,8 @@ private lemma shriekBaseChange_arbitrary
     [QuasiCompact f'] (c : Compactification f) (c' : Compactification f')
     (h : c'.Z ⟶ c.Z) (hi : IsPullback g' c'.i c.i h)
     (hp : IsPullback h c'.g c.g g) :
-    (F.shriekBaseChange c c' h hi hp).natTrans =
-      (F.shriekBaseChangeOfIsPullback sq c).natTrans ≫
+    (F.shriekBaseChange c c' h hi hp) =
+      (F.shriekBaseChangeOfIsPullback sq c) ≫
         Functor.whiskerLeft (F.pb g') (F.shriekIso (c.ofIsPullback sq) c').hom := by
   let r := pullbackRefinement sq c c' h hi hp
   have hr := pullbackRefinement_cartesian sq c c' h hi hp
@@ -432,7 +431,7 @@ private lemma line_square_standard (A : Type (u + 1)) [CommRing A]
 
 /-- The standard compact-support exchange respects the open counit before the
 projective trace is applied.
-Source: blueprint lem-amb-affine-space-top-trace, proof step 8
+Source: blueprint lemma-integral-linear-character--1, proof step 8
 (blueprint: lem-amb-affine-trace-line-open-counit-base-change).
 
 Proof: first work with the pulled-back projective compactification. Expand its

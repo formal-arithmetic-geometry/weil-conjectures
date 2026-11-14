@@ -15,7 +15,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
 /-!
 # Extension of the maximal ideal at a rational point
 
-Source: blueprint thm-sc-constant-invariance, affine-case unit quotient paragraph;
+Source: blueprint proposition-cohomology-smooth-affine-curve, affine-case unit quotient paragraph;
 Stacks Algebra, Tag 00E6.
 (blueprint: lem-sc-rational-point-base-change-maximal-ideal).
 -/
@@ -44,7 +44,7 @@ private theorem ker_stalkMap_field (F : Type u) [Field F] {Z : Scheme.{u}}
 
 set_option backward.isDefEq.respectTransparency false in
 /-- At a rational point, scalar extension extends the maximal ideal of the stalk exactly.
-Source: blueprint thm-sc-constant-invariance, affine-case unit quotient paragraph;
+Source: blueprint proposition-cohomology-smooth-affine-curve, affine-case unit quotient paragraph;
 Stacks Algebra, Tag 00E6
 (blueprint: lem-sc-rational-point-base-change-maximal-ideal).
 

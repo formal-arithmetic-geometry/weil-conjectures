@@ -35,7 +35,7 @@ morphism `BC_sq^Λ'` at `T^X K` are isomorphic arrows: on the ambient derived ca
 bounded constructible derived categories
 (`ProEtale.CondensedRing.nonempty_arrowIso_boundedConstructibleBaseChange_extendScalars`).
 
-This is the formal part of blueprint `sk-lem-sbc-exchange-compatibility`: by the cube law of
+This is the formal part of blueprint `lemma-naturality-pasting-comparison`: by the cube law of
 mates (`CategoryTheory.mateEquiv_app_cube`), the compatibility of `derivedPullIso` with the
 pullback square comparisons transposes to the compatibility of the base-change morphisms with
 `derivedPullIso` and `derivedPushHom`, the latter being the mate of the former
@@ -116,7 +116,6 @@ private lemma cube_aux {C : Type*} [Category* C] {O₁ O₂ O₃ O₄ O₅ O₆ 
 
 variable {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
-set_option maxHeartbeats 1000000 in
 -- unifying objects of the derived categories given by composites of derived pullbacks is slow
 /-- The cube condition of `CategoryTheory.mateEquiv_app_cube` for the derived pullbacks with
 coefficients `Λ` and `Λ'` along a commutative square, their pullback square comparisons and the

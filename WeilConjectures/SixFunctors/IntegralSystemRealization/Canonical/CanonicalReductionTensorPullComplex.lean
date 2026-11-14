@@ -11,7 +11,7 @@ import WeilConjectures.SixFunctors.IntegralSystemRealization.Canonical.Canonical
 
 /-! # Ordinary reduction and the total tensor pullback square
 
-Source: Stacks 07A4, 07A6 and 0941; lem-fix-operation-reduction, first paragraph.
+Source: Stacks 07A4, 07A6 and 0941; proposition-six-operations-change-coefficients, first paragraph.
 -/
 
 @[expose] public section
@@ -28,7 +28,7 @@ attribute [local irreducible] pullbackTensorCalculus
   HasDerivedCategory.standard SheafOfModules.monoidalCategory
 
 /-- The ordinary reduction/pullback mate preserves the signed total tensor map.
-Source: Stacks 07A4, 07A6 and 0941; lem-fix-operation-reduction, first paragraph.
+Source: Stacks 07A4, 07A6 and 0941; proposition-six-operations-change-coefficients, first paragraph.
 (blueprint: lem-sf-canonical-reduction-tensor-pull-complex).
 
 Proof: the limit comparison is identity on the projected sections by

@@ -13,7 +13,7 @@ import WeilConjectures.CategoryTheory.RingObjects.Condensed.PadicAlgClGlobalSect
 
 /-! Inverse and inverse-character clauses for the condensed Artin--Schreier sheaf.
 Source: current blueprint, sec-fourier-transform/sk-lem-as-properties/lem-fd-as-lisse.md
-(blueprint: lem-fd-as-lisse). -/
+(blueprint: lemma-artin-schreier-character-sheaf--2). -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -33,7 +33,7 @@ open AlgebraicGeometry.ArtinSchreierTrace
 The comparison bridge reduces to the qlbar trace model, where
 `qlbar_artinSchreier_trace_tensor_properties` gives both tensor orders and the
 inverse-character map.  The only postponed input is the bridge itself.
-(blueprint: lem-fd-as-lisse). -/
+(blueprint: lemma-artin-schreier-character-sheaf--2). -/
 theorem condensedArtinSchreierSheafOf_inverse
     (k₀ : Type u) [Field k₀] [Fintype k₀] (ℓ : ℕ) [Fact ℓ.Prime]
     [Fact (ringChar k₀ ≠ ℓ)] (X₀ : Scheme.{u})

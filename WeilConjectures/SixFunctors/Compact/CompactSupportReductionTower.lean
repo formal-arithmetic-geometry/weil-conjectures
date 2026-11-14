@@ -190,7 +190,6 @@ private theorem compactSupportEvaluationRingCast (W : Scheme.{u}) (n : ℕ)
   rw [eqToHom_map, eqToHom_app]
   rfl
 
-set_option maxHeartbeats 400000 in
 -- Transport across normalized coefficient carriers requires additional elaboration steps.
 private theorem compactSupportSequenceRestrictionLinear (W : Scheme.{u}) :
     letI := compactSupportSequenceLinear l E W
@@ -402,7 +401,6 @@ private theorem compactSupportSystemScalarMap {X Y : Scheme.{u}} (f : X ⟶ Y)
     (ULift.up (Ideal.Quotient.mk
       (Padic.coefficientExtensionIdeal l E (V.unop.1 + 1)) a))).symm
 
-set_option maxHeartbeats 400000 in
 -- Transport across normalized coefficient carriers requires additional elaboration steps.
 -- The native module pushforward changes only the scalar action on sections.
 private theorem compactSupportSystemPushLinear {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -490,7 +488,7 @@ lem-coef-semilinear-derived-sections identify its evaluations with Rp_* j_!,
 including on all derived morphisms. They apply to arbitrary semilinear sections.
 4. Restrict every level along B_Y to A_n. The projection compatibility makes the
 transitions B_Y-linear. Exact restriction descends to the derived strict-tower
-category by lem-weil-pbc-exact-functor-derived-factorization.
+category by situation-conventions.
 5. Each factor is triangulated; use lem-pc-right-derived-functor-triangulated and
 lem-weil-pbc-triangulated-functor-composite to obtain the composite shift structure.
 6. Evaluation of the coherent system gives precisely the displayed transition:

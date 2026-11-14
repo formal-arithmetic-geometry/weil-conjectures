@@ -237,8 +237,6 @@ attribute [local irreducible] structureSheafAb structureSheafCohomologyPullback
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option linter.unusedVariables false in
-set_option maxHeartbeats 400000 in
--- The dependent geometric comparisons require additional elaboration heartbeats.
 /-- On an affine with trivial target bundles, construct the joint degree-one map
 out of a supplied minimal source complex and identify its residue map geometrically.
 Source: Stacks Project, Tag 0BF2, displayed chain maps; Tags 08CR and 0B91.
@@ -354,21 +352,19 @@ theorem picard_h1_fixed_model_comparison
                       (ui i) (hui i))).left) 1 (α z) := by
   set_option backward.isDefEq.respectTransparency true in
     classical
-    obtain ⟨C, hC⟩ := Classical.axiomOfChoice fun i ↦
+    -- Share the types of the geometric data before eliminating the existentials.
+    have htargets := Classical.axiomOfChoice fun i ↦
       picard_affine_target_normalization (fi i) (hOi i)
         ((Modules.tensorPullback (ui i)).obj L) W k U hU (htrivial i)
+    obtain ⟨C, hC⟩ := htargets
     let p := RingHom.ker (W.evaluation U w hwU).hom
     let : p.IsPrime := RingHom.ker_isPrime (W.evaluation U w hwU).hom
     let τ := Classical.choice (picard_descended_fibre_coefficient_trivial f hO L s hLs)
-    obtain ⟨φ, e, ei, hmaps⟩ := picard_residue_homology_chosen_geometric_maps
+    have hcompare := picard_residue_homology_chosen_geometric_maps
       f Xi fi ui hui L W k w s hw τ U hwU hU p rfl K hK hE.some C
       (fun i ↦ (hC i).1) (fun i ↦ (hC i).2.2.2.some)
-    have hreszero := affine_betti_model_residue_minimality W
-      ((schemeDerivedDirectImage (pullback.snd f k)).obj
-        ((DerivedCategory.singleFunctor
-          (SheafOfModules.{v} (moduleRings (pullback f k).toRingedSpace)) 0).obj
-            ((Modules.tensorPullback (pullback.fst f k)).obj L)))
-      w U hwU hU K hK.1 hrank hE
+    obtain ⟨φ, e, ei, hmaps⟩ := hcompare
+    have hreszero := affine_betti_model_residue_minimality W _ w U hwU hU K hK.1 hrank hE
     let B := Sheaf.H (structureSheafAb (pullback f (S.fromSpecResidueField s))) 1
     let D := fun i ↦ Sheaf.H
       (structureSheafAb (pullback (fi i) (S.fromSpecResidueField s))) 1

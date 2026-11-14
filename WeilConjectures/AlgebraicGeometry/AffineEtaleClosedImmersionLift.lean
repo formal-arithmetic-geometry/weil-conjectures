@@ -69,7 +69,7 @@ private theorem lift_spec_quotient (R : CommRingCat.{u}) (I : Ideal R)
 
 /-- Source: Stacks Project, Étale Cohomology, Lemma 59.80.6 (Tag 09ZA),
 first sentence of its proof, using Algebra Tag 04D1
-(blueprint: lem-weil-pbc-affine-etale-closed-immersion-lift).
+(blueprint: theorem-gabber-affine-proper-base-change).
 
 Proof: A closed subscheme of `X = Spec R` is affine, and its ring of global
 sections is a quotient `R/I`. Write `V = Spec B`; the morphism `p` corresponds

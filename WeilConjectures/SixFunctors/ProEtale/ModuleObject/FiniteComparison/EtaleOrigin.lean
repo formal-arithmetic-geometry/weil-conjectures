@@ -20,8 +20,8 @@ bounded constructible complex `K` of module objects over `Λ_X = p_X^* T̲` on t
 `T`-modules (`ProEtale.isEtaleOrigin_of_isConstructible`).
 
 This is the reading on the étale site of the finite coefficient categories of blueprint
-`sk-def-sf-categories`, in the form needed for blueprint `det-prop-scalar-six-pullback` (1) for
-`𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, read on the étale site.
+`definition-constructible-sheaves`, in the form needed for blueprint
+`proposition-six-operations-change-coefficients` (1) for `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, read on the étale site.
 
 The proof: the cohomology sheaves of `K` are constructible module objects, so the corresponding
 sheaves of `T`-modules are constructible in the intrinsic sense
@@ -56,8 +56,8 @@ discrete commutative ring `T`, a bounded constructible complex `K` of module obj
 complex of étale origin: `D(ν^*) K'` for a bounded constructible complex `K'` of étale sheaves of
 `T`-modules.
 
-This is blueprint `lem-sf-proetale-constructible-origin` (section `sec-proetale-coefficients`,
-`sk-prop-sf-comparison`); Bhatt–Scholze, *The pro-étale topology for schemes*,
+This is blueprint `theorem-comparison-constructible-sheaves` (section `chap-The-pro-etale-site`,
+`theorem-bounded-below-cohomology-comparison`); Bhatt–Scholze, *The pro-étale topology for schemes*,
 Corollary 5.1.6 and Section 6.8. -/
 theorem isEtaleOrigin_of_isConstructible
     {K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})

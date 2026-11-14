@@ -15,10 +15,10 @@ public import WeilConjectures.WeilSheaf.Defs
 
 This file fixes the conventions of the Deligne–Laumon affine-line estimate
 (`WeilConjectures.DeligneLaumon.AffineLine.Upper`) and of its auxiliary statements, following
-the blueprint subsection `rem-dl-a1-conventions`. The `ℓ`-adic formalism they are phrased against is
-the provisional interface of `WeilConjectures.WeilSheaf.Defs`; what this block owns is the two
-conditions on a lisse Weil sheaf on a dense open of the affine line, and the bundling of that
-situation.
+the blueprint subsection `lemma-unramified-at-infinity-no-linear-characters--1`. The `ℓ`-adic
+formalism they are phrased against is the provisional interface of `WeilConjectures.WeilSheaf.Defs`;
+what this block owns is the two conditions on a lisse Weil sheaf on a dense open of the affine line,
+and the bundling of that situation.
 
 The affine line `A₀ = 𝔸¹_{k₀}` is `AlgebraicGeometry.affineLine k₀`, and the dual affine line
 `A'₀` of the Fourier transform is another copy of it. It sits in `ℙ¹_{k₀}` through the standard
@@ -68,7 +68,7 @@ components of `Ū` are open, for instance when `U` is of finite type over `k₀`
 `F` is constant on each connected component of `Ū`. For `Ū` connected, as for `U` an open of
 `𝔸¹_{k₀}`, it is the constancy of `F` on `Ū`, which motivates the definition: the geometric
 fundamental group `π₁(Ū)` acts trivially on the stalks of `F`.
-(blueprint: `rem-dl-a1-conventions`) -/
+(blueprint: `lemma-unramified-at-infinity-no-linear-characters--1`) -/
 def IsGeometricallyConstant (F : WeilSheaf k₀ l U) : Prop :=
   ∀ V : (U ↘ Spec (CommRingCat.of k₀)).geometricFiber.Opens, ConnectedSpace V →
     ∃ n : ℕ, Nonempty ((V.ι)^*ᵃ[l].obj F.obj.carrier ≅
@@ -90,7 +90,7 @@ the point `∞`, and the extension is a lisse Weil sheaf `G` on an open `W ⊆ �
 The choice of chart does not matter: two open immersions `𝔸¹ ↪ ℙ¹` of `k₀`-schemes differ by
 a `k₀`-automorphism of `ℙ¹`. This condition is equivalent to the inertia group at `∞` acting
 trivially on the geometric generic fiber of `F`.
-(blueprint: `rem-dl-a1-conventions`) -/
+(blueprint: `lemma-unramified-at-infinity-no-linear-characters--1`) -/
 def IsUnramifiedAtInfinity (F : WeilSheaf k₀ l U) (j : U ⟶ affineLine k₀) [IsOpenImmersion j]
     [j.IsOver (Spec (CommRingCat.of k₀))] : Prop :=
   let ι := ProjectiveLine.affineChart (Spec (CommRingCat.of k₀))

@@ -219,8 +219,8 @@ private theorem finiteStratifications_family
 
 /-- A finite family of constructible module sheaves has a common ordered reduced
 stratification on which every restriction has a finite constant local model.
-Source: blueprint det-lem-int-ext-formula, proof steps 1--5; Stacks Tags 09Y5, 01J3 and 01J4.
-(blueprint: lem-finite-constant-models-common-reduced-stratification).
+Source: blueprint lemma-sections-support-closed-subscheme--3, proof steps 1--5; Stacks Tags 09Y5,
+01J3 and 01J4. (blueprint: lem-finite-constant-models-common-reduced-stratification).
 
 Proof: choose an adapted finite stratification for each sheaf. Intersections indexed
 by tuples of old stratum indices form a finite locally closed cover. Apply Noetherian

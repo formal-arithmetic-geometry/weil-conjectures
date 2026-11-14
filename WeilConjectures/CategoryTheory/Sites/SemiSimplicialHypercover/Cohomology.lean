@@ -24,7 +24,7 @@ cocycle `z ∈ F(U_q)` of the cochain complex `C^•(U, F)` corresponds to a mor
 
 These classes vanish on coboundaries, are natural in `F`, compatible with refinements
 `V ⟶ U` of hypercovers and with connecting homomorphisms. The main result is the computation of
-sheaf cohomology by hypercovers (blueprint `thm-weil-pbc-hypercover-cohomology`, [Stacks,
+sheaf cohomology by hypercovers (blueprint `corollary-cohomology-pro-etale-affine`, [Stacks,
 Tag 01H0]) in an elementwise form, for any class `𝒰` of hypercovers which is nonempty and in
 which local lifting requirements can be met after refinement
 (`CategoryTheory.SemiSimplicialObject.exists_cohomologyClass_eq` and
@@ -379,7 +379,7 @@ lemma exists_cohomologyClass_eq_succ (𝒰 : SemiSimplicialObject C → Prop)
 
 variable [EnoughInjectives (Sheaf J (ModuleCat.{max u v} R))] in
 /-- **Every cohomology class is computed on a hypercover** (blueprint
-`thm-weil-pbc-hypercover-cohomology`). Let `𝒰` be a nonempty class of hypercovers in which local
+`corollary-cohomology-pro-etale-affine`). Let `𝒰` be a nonempty class of hypercovers in which local
 lifts of sections through epimorphisms of sheaves can be obtained after refinement. Then every
 class in `Ext^q(R, F)` is the class of a cocycle on some hypercover of `𝒰`. -/
 theorem exists_cohomologyClass_eq (𝒰 : SemiSimplicialObject C → Prop)
@@ -453,7 +453,7 @@ lemma exists_isCoboundary_succ (𝒰 : SemiSimplicialObject C → Prop)
 
 variable [EnoughInjectives (Sheaf J (ModuleCat.{max u v} R))] in
 /-- **A cocycle with vanishing class is a coboundary after refinement** (blueprint
-`thm-weil-pbc-hypercover-cohomology`). Under the assumptions of
+`corollary-cohomology-pro-etale-affine`). Under the assumptions of
 `CategoryTheory.SemiSimplicialObject.exists_cohomologyClass_eq`, if the class of a cocycle `z`
 on a hypercover `U ∈ 𝒰` vanishes, then its restriction to some refinement `V ⟶ U` in `𝒰` is a
 coboundary. -/

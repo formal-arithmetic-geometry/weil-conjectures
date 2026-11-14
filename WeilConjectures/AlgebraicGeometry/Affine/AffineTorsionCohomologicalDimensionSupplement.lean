@@ -17,8 +17,8 @@ import WeilConjectures.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimensi
 # Affine torsion cohomological dimension bound
 
 Source: literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/
-`thm-sc-affine-torsion-cd`, affine part of the proof of
-`thm-sc-finite-type-torsion-cd` (blueprint: thm-sc-affine-torsion-cd).
+`lemma-uniform-bounds-pro-etale-affines`, affine part of the proof of
+`lemma-uniform-bounds-pro-etale-affines` (blueprint: lemma-uniform-bounds-pro-etale-affines).
 -/
 
 @[expose] public section
@@ -31,7 +31,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The affine finite-type step in the torsion cohomological-dimension bound.
 
-Source: the affine bound `thm-sc-affine-torsion-cd` in the blueprint subsection
+Source: the affine bound `lemma-uniform-bounds-pro-etale-affines` in the blueprint subsection
 `sec-smooth-purity/sk-prop-sf-cbc`, with its proof by induction on dimension; also
 Stacks Project, Tag 0F0V (https://stacks.math.columbia.edu/tag/0F0V).
 

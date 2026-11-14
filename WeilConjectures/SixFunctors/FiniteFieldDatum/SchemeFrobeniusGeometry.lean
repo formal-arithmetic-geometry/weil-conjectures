@@ -13,8 +13,8 @@ public import WeilConjectures.AlgebraicGeometry.AbsoluteFrobeniusNatural
 /-!
 # Coefficient independent scheme Frobenius geometry
 
-Source: latest blueprint, def-pur-scheme-geometric-frobenius, the explicit factorization
-and the two commuting squares (blueprint: def-pur-scheme-geometric-frobenius).
+Source: latest blueprint, sec-Weil-complexes, the explicit factorization
+and the two commuting squares (blueprint: sec-Weil-complexes).
 The original finite coefficient comparison remains publicly imported. These interfaces
 expose its scheme data without requiring an unrelated finite coefficient setting.
 
@@ -39,19 +39,19 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Sc
 namespace WeilConjectures.FiniteFieldDatum
 
 /-- The existing scalar extension, for an arbitrary model over the finite base.
-Source: explicit base change (blueprint: def-pur-scheme-geometric-frobenius). -/
+Source: explicit base change (blueprint: sec-Weil-complexes). -/
 abbrev purityFrobeniusFiber (D : FiniteFieldDatum.{u})
     (T₀ : Over (Spec (CommRingCat.of D.k₀))) :=
   (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).obj T₀
 
 /-- The existing base change on model morphisms, without a coefficient parameter.
-Source: the two squares (blueprint: def-pur-scheme-geometric-frobenius). -/
+Source: the two squares (blueprint: sec-Weil-complexes). -/
 abbrev purityFrobeniusMap (D : FiniteFieldDatum.{u})
     {S₀ T₀ : Over (Spec (CommRingCat.of D.k₀))} (h₀ : S₀ ⟶ T₀) :=
   ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).map h₀).left
 
 /-- The existing semilinear geometric Galois map, independently of coefficients.
-Source: geometric Galois automorphisms (blueprint: def-pur-scheme-geometric-frobenius). -/
+Source: geometric Galois automorphisms (blueprint: sec-Weil-complexes). -/
 abbrev purityGaloisMap (D : FiniteFieldDatum.{u})
     (T₀ : Over (Spec (CommRingCat.of D.k₀))) :=
   D.galoisMap T₀.hom
@@ -59,7 +59,7 @@ abbrev purityGaloisMap (D : FiniteFieldDatum.{u})
       (Fintype.ofFinite D.k₀) _ _ _)
 
 /-- The base change of the model's absolute q-power Frobenius.
-Source: definition of Phi (blueprint: def-pur-scheme-geometric-frobenius). -/
+Source: definition of Phi (blueprint: sec-Weil-complexes). -/
 def puritySchemeFrobenius (D : FiniteFieldDatum.{u})
     (T₀ : Over (Spec (CommRingCat.of D.k₀))) :
     (D.purityFrobeniusFiber T₀).left ⟶ (D.purityFrobeniusFiber T₀).left :=
@@ -69,7 +69,7 @@ def puritySchemeFrobenius (D : FiniteFieldDatum.{u})
 
 /-- Absolute q-power Frobenius on the geometric fibre, with its canonical characteristic
 proof from the model structure map. Source: absolute factor
-(blueprint: def-pur-scheme-geometric-frobenius). -/
+(blueprint: sec-Weil-complexes). -/
 def purityAbsoluteFrobenius (D : FiniteFieldDatum.{u})
     (T₀ : Over (Spec (CommRingCat.of D.k₀))) :
     (D.purityFrobeniusFiber T₀).left ⟶ (D.purityFrobeniusFiber T₀).left :=
@@ -80,7 +80,7 @@ def purityAbsoluteFrobenius (D : FiniteFieldDatum.{u})
 /-- The coefficient independent factorization and the two commuting scheme squares.
 There is no Cartesian hypothesis on the scheme Frobenius square.
 Source: explicit factorization and the displayed squares
-(blueprint: def-pur-scheme-geometric-frobenius).
+(blueprint: sec-Weil-complexes).
 
 Proof: on a base changed affine chart, absolute Frobenius sends b tensor c to
 b^q tensor c^q. The arithmetic Galois map sends b tensor c to b tensor c^q,

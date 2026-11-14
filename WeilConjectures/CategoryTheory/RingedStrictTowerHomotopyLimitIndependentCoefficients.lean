@@ -180,17 +180,17 @@ private lemma proZero_transition_iso
     (fun n : ℕ ↦ K.map (homOfLE (Nat.le_succ n)).op)
   have hs (n : ℕ) : s ≫ Pi.π X n =
       Pi.π X (n + 1) ≫ K.map (homOfLE (Nat.le_succ n)).op := Pi.lift_comp_π _ _
-  have hp (k n : ℕ) : (End.of s ^ k) ≫ Pi.π X n =
+  have hp (k n : ℕ) : ((End.of s ^ k).asHom) ≫ Pi.π X n =
       Pi.π X (n + k) ≫ K.map (homOfLE (Nat.le_add_right n k)).op := by
     induction k generalizing n with
     | zero =>
-      rw [pow_zero, End.one_def, Category.id_comp]
+      rw [pow_zero, End.one_asHom, Category.id_comp]
       exact (Category.comp_id _).symm.trans (by congr 1; exact (K.map_id _).symm)
     | succ k ih =>
-      rw [pow_succ, End.mul_def, Category.assoc, ih, ← Category.assoc, hs]
+      rw [pow_succ, End.mul_asHom, Category.assoc, ih, ← Category.assoc, hs]
       rw [Category.assoc, ← K.map_comp]
       rfl
-  have hn (n : ℕ) : ∃ k : ℕ, (End.of s ^ k) ≫ Pi.π X n = 0 := by
+  have hn (n : ℕ) : ∃ k : ℕ, (End.of s ^ k).asHom ≫ Pi.π X n = 0 := by
     obtain ⟨m, h, hm⟩ := hz n
     obtain ⟨k, rfl⟩ := Nat.exists_eq_add_of_le h
     refine ⟨k, ?_⟩
@@ -202,9 +202,9 @@ private lemma proZero_transition_iso
     | zero => exact le_rfl
     | succ n => exact le_max_right _ _
   have hkk (n : ℕ) : k n ≤ k (n + 1) := le_max_left _ _
-  have hv (n i : ℕ) (hi : b n ≤ i) : (End.of s ^ i) ≫ Pi.π X n = 0 := by
+  have hv (n i : ℕ) (hi : b n ≤ i) : (End.of s ^ i).asHom ≫ Pi.π X n = 0 := by
     obtain ⟨j, rfl⟩ := Nat.exists_eq_add_of_le hi
-    rw [pow_add, End.mul_def, Category.assoc, hb, comp_zero]
+    rw [pow_add, End.mul_asHom, Category.assoc, hb, comp_zero]
   let g (l : ℕ) : P ⟶ P := ∑ i ∈ Finset.range l, End.asHom (End.of s ^ i)
   have hg (l : ℕ) : g l ≫ (𝟙 P - s) = 𝟙 P - End.asHom (End.of s ^ l) := by
     induction l with
@@ -212,10 +212,9 @@ private lemma proZero_transition_iso
     | succ l ih =>
       simp only [g, Finset.sum_range_succ] at *
       rw [Preadditive.add_comp, ih, Preadditive.comp_sub, Category.comp_id]
-      have hpow : (End.of s ^ l) ≫ s = End.of s ^ (l + 1) := by
-        rw [pow_succ', End.mul_def]
+      have hpow : (End.of s ^ l).asHom ≫ s = (End.of s ^ (l + 1)).asHom := by
+        rw [pow_succ', End.mul_asHom]
       rw [hpow]
-      dsimp only [End.asHom, End.of]
       simp only [sub_add_sub_cancel]
   have hg' (l : ℕ) : (𝟙 P - s) ≫ g l = 𝟙 P - End.asHom (End.of s ^ l) := by
     induction l with
@@ -223,10 +222,9 @@ private lemma proZero_transition_iso
     | succ l ih =>
       simp only [g, Finset.sum_range_succ] at *
       rw [Preadditive.comp_add, ih, Preadditive.sub_comp, Category.id_comp]
-      have hpow : s ≫ (End.of s ^ l) = End.of s ^ (l + 1) := by
-        rw [pow_succ, End.mul_def]
+      have hpow : s ≫ (End.of s ^ l).asHom = (End.of s ^ (l + 1)).asHom := by
+        rw [pow_succ, End.mul_asHom]
       rw [hpow]
-      dsimp only [End.asHom, End.of]
       simp only [sub_add_sub_cancel]
   have hstable (n l l' : ℕ) (hl : b n ≤ l) (hll : l ≤ l') :
       g l ≫ Pi.π X n = g l' ≫ Pi.π X n := by

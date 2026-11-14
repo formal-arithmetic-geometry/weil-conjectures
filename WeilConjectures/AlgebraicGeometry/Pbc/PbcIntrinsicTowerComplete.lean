@@ -135,7 +135,7 @@ end
 /-- Intrinsic Koszul completeness implies the canonical quotient-tower unit is invertible.
 Source: Stacks Tag 099N, using the unit-normalized comparison of
 `def-weil-pbc-completed-pullback` and identity coherence from
-`def-weil-pbc-ambient-ringed-exchange`.
+`definition-pro-etale-base-change-map--1`.
 (blueprint: lem-weil-pbc-intrinsic-to-tower-complete)
 Proof: on an intrinsically complete object, completed pullback by the identity
 has invertible unit. The strict/intrinsic comparison and its unit equation,

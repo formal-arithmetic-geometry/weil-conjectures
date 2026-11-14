@@ -14,7 +14,7 @@ public import WeilConjectures.AlgebraicGeometry.Smooth.SmoothDualityBaseChangeCo
 /-! # Arbitrary base change for smooth ambient duality
 
 Source: blueprint sec-smooth-purity/sk-prop-sf-cbc/prop-asd-smooth-base-change.md
-(blueprint: prop-asd-smooth-base-change).
+(blueprint: proposition-exceptional-inverse-image-smooth-morphism--6).
 
 The exceptional comparison is the transpose of the inverse compact-support exchange
 followed by the pulled-back counit. The coefficient-unit and tensor comparisons below
@@ -38,9 +38,9 @@ attribute [local instance high] CategoryTheory.SymmetricCategory.toBraidedCatego
 /-- The canonical exceptional base-change morphism, obtained by transposing the pulled-back
 counit through the inverse compact-support exchange. Source: blueprint
 sec-smooth-purity/sk-prop-sf-cbc/prop-asd-smooth-base-change.md, first proof paragraph
-(blueprint: prop-asd-smooth-base-change). All functors act on ordinary unbounded categories.
-The occurrence of the left derived inverse image is canonically identified with the
-exact degreewise inverse image by `leftDerivedUpperStarIsoMapDerivedCategory`. -/
+(blueprint: proposition-exceptional-inverse-image-smooth-morphism--6). All functors act on ordinary
+unbounded categories. The occurrence of the left derived inverse image is canonically identified
+with the exact degreewise inverse image by `leftDerivedUpperStarIsoMapDerivedCategory`. -/
 noncomputable def smoothExceptionalBaseChangeMap
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X S S' : Scheme.{u}} (f : X ⟶ S) [HasCompactification f] [QuasiCompact f]
@@ -60,7 +60,7 @@ noncomputable def smoothExceptionalBaseChangeMap
 /-- The base-change morphism on relative dualizing complexes: the exceptional comparison at
 the coefficient unit, followed by the canonical inverse-image identification of that unit.
 Source: blueprint sec-smooth-purity/sk-prop-sf-cbc/prop-asd-smooth-base-change.md,
-clause at `K = A_S` (blueprint: prop-asd-smooth-base-change). -/
+clause at `K = A_S` (blueprint: proposition-exceptional-inverse-image-smooth-morphism--6). -/
 noncomputable def smoothDualizingBaseChangeMap
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X S S' : Scheme.{u}} (f : X ⟶ S) [HasCompactification f] [QuasiCompact f]
@@ -75,7 +75,8 @@ noncomputable def smoothDualizingBaseChangeMap
 /-- The canonical identification `g'^* f^* K ≅ f'^* g^* K`, formed from the inverse-image
 composition isomorphisms and the equality of the two maps around the pullback square.
 Source: blueprint sec-smooth-purity/sk-prop-sf-cbc/prop-asd-smooth-base-change.md,
-tensor-compatibility identification (blueprint: prop-asd-smooth-base-change). -/
+tensor-compatibility identification (blueprint:
+proposition-exceptional-inverse-image-smooth-morphism--6). -/
 noncomputable def smoothSquarePullbackIso
     (A : Type (u + 1)) [CommRing A]
     {X S S' : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S)
@@ -91,7 +92,7 @@ noncomputable def smoothSquarePullbackIso
 /-- The tensor-domain identification in the smooth-duality square. Its first factor is the
 canonical K-flat derived tensor-pullback comparison; the second is inverse-image composition.
 Source: blueprint sec-smooth-purity/sk-prop-sf-cbc/prop-asd-smooth-base-change.md,
-last sentence (blueprint: prop-asd-smooth-base-change). -/
+last sentence (blueprint: proposition-exceptional-inverse-image-smooth-morphism--6). -/
 noncomputable def smoothDualityTensorBaseChangeIso
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X S S' : Scheme.{u}} (f : X ⟶ S) [HasCompactification f]
@@ -148,8 +149,8 @@ private lemma mate_app_eq
     {L : C ⥤ D} {R : D ⥤ C} {L' : C' ⥤ D'} {R' : D' ⥤ C'}
     (adj : L ⊣ R) (adj' : L' ⊣ R') {G : C ⥤ C'} {H : D ⥤ D'}
     (ξ : TwoSquare G L L' H) (M : D) :
-    (mateEquiv adj adj' ξ).natTrans.app M =
-      (adj'.homEquiv _ _) (ξ.natTrans.app (R.obj M) ≫ H.map (adj.counit.app M)) := by
+    (mateEquiv adj adj' ξ).app M =
+      (adj'.homEquiv _ _) (ξ.app (R.obj M) ≫ H.map (adj.counit.app M)) := by
   apply (adj'.homEquiv _ _).symm.injective
   dsimp only [Functor.comp_obj, Functor.id_obj]
   rw [Equiv.symm_apply_apply, Adjunction.homEquiv_counit]
@@ -297,32 +298,32 @@ private lemma dualizing_tensor_base_change
 /-- Arbitrary base change for smooth ambient duality on ordinary unbounded etale
 module derived categories, including the dualizing-complex and tensor compatibilities.
 Source: blueprint sec-smooth-purity/sk-prop-sf-cbc/prop-asd-smooth-base-change.md
-(blueprint: prop-asd-smooth-base-change).
+(blueprint: proposition-exceptional-inverse-image-smooth-morphism--6).
 
 Proof:
 1. First supply the missing unbounded refinement argument, rather than invoke the bounded-below
 compactification-comparison lemma, whose source explicitly proves only the bounded-below case.
 Work throughout with the fixed finite torsion ring $A$ and the unbounded candidates of
-[def-amb-etale-compact-support]. First derive ordinary direct-image composition without an
-invertible-prime assumption. The derived adjunctions of [def-kun-unbounded-exchange] give, for
-composable $a,b$, natural bijections $ \operatorname{Hom}(L,Rb_*Ra_*K)=
-\operatorname{Hom}(b^*L,Ra_*K)= \operatorname{Hom}(a^*b^*L,K)= \operatorname{Hom}((ba)^*L,K)=
-\operatorname{Hom}(L,R(ba)_*K)$, using the canonical inverse-image composition comparison.
-Yoneda gives the counit-preserving isomorphism $Rb_*Ra_* \cong R(ba)_*$. For three maps both
-hom-bijection composites apply the three adjunctions in the same order; associativity of
-inverse-image composition makes them equal. Identity maps give the identity bijection. These
-composition comparisons require no invertibility condition and are the ones used in this proof.
-For a proper refinement $u:T_1 \to T_2$ with $uj_1=j_2$, let $V=T_1 \times_{T_2}X$, $b:V
+[proposition-construction-independence-rf-shriek]. First derive ordinary direct-image composition
+without an invertible-prime assumption. The derived adjunctions of
+[definition-derived-base-change-map] give, for composable $a,b$, natural bijections $
+\operatorname{Hom}(L,Rb_*Ra_*K)= \operatorname{Hom}(b^*L,Ra_*K)= \operatorname{Hom}(a^*b^*L,K)=
+\operatorname{Hom}((ba)^*L,K)= \operatorname{Hom}(L,R(ba)_*K)$, using the canonical inverse-image
+composition comparison. Yoneda gives the counit-preserving isomorphism $Rb_*Ra_* \cong R(ba)_*$. For
+three maps both hom-bijection composites apply the three adjunctions in the same order;
+associativity of inverse-image composition makes them equal. Identity maps give the identity
+bijection. These composition comparisons require no invertibility condition and are the ones used in
+this proof. For a proper refinement $u:T_1 \to T_2$ with $uj_1=j_2$, let $V=T_1 \times_{T_2}X$, $b:V
 \hookrightarrow T_1$, $p:V \to X$, and $s:X \hookrightarrow V$. By
-[lem-weil-pbc-proper-open-section], $s$ identifies $X$ with an open-and-closed subscheme of $V$
-and $ps=1$. Thus $s_!=s_*$ on sheaves (both are the original sheaf on that component and zero on
-its complement) and this functor is exact. Extension by zero for nested opens composes
-degreewise: inside $X$ both stalks are the stalk of $K$, and elsewhere both are zero. Open base
-change from [lem-weil-pbc-etale-shriek-base-change-modules] consequently gives
+[proposition-construction-independence-rf-shriek--7], $s$ identifies $X$ with an open-and-closed
+subscheme of $V$ and $ps=1$. Thus $s_!=s_*$ on sheaves (both are the original sheaf on that
+component and zero on its complement) and this functor is exact. Extension by zero for nested opens
+composes degreewise: inside $X$ both stalks are the stalk of $K$, and elsewhere both are zero. Open
+base change from [lem-weil-pbc-etale-shriek-base-change-modules] consequently gives
 $b^*j_{1!}K=s_!K$. Proper base change [lem-kun-proper-base-change-torsion-ring] and the
 direct-image composition just derived, give the canonical isomorphism $j_2^*Ru_*j_{1!}K \cong
 Rp_*s_!K \cong K$ for every unbounded $K$. Define $ \alpha_{u,K}:j_{2!}K \to Ru_*j_{1!}K$ by the
-open adjunction of [lem-amb-etale-adjoint-locality], transposing the inverse of this
+open adjunction of [lemma-affine-space-etale-localization--4], transposing the inverse of this
 isomorphism. Over $X$ it is the identity under the displayed comparison. At a geometric point of
 $T_2 \setminus X$, proper base change identifies the target with derived direct image on the
 fibre of the pullback of $j_{1!}K$. That pullback is zero: the fibre does not meet $j_1(X)$, so
@@ -343,18 +344,19 @@ with $z_2^{-1}$ and transpose under $j'_{2!} \dashv j_2'{}^*$. The restriction o
 is the inverse open restriction of proper exchange for $u'$: the extra exchange for $u$ cancels
 its inverse in the definition of $ \alpha_u$, by proper-exchange pasting. This is the
 restriction defining the right side. The mate-pasting statement and the adjunction bijection
-prove the equation. Finally [prop-nagata-compactification-category] supplies common refinements
+prove the equation. Finally [remark-base-change-compactification--1] supplies common refinements
 and equalizers over an arbitrary Noetherian base (not just over a field), and preserves
 refinements under arbitrary base change. Apply $Rr_{2*}$ to $ \alpha_u$ and the same
 direct-image composition to compare $Rr_{1*}j_{1!}$ with $Rr_{2*}j_{2!}$. The identity and
 composition equations just proved, followed by a common equalizing refinement, make comparisons
 independent of choices and give the cocycle law. These are the unbounded, base-change-compatible
-comparisons used below. Uses: def-amb-etale-compact-support, lem-weil-pbc-proper-open-section,
-lem-weil-pbc-etale-shriek-base-change-modules, lem-kun-proper-base-change-torsion-ring,
-lem-amb-etale-adjoint-locality, lem-weil-pbc-extension-by-zero-stalks,
-prop-weil-pbc-inverse-image-modules-exact, lem-weil-pbc-geometric-point-pullback-stalk,
-lemma-weil-pbc-geometric-stalk-conservative, lem-weil-pbc-unbounded-derived-iso-cohomology,
-lem-weil-pbc-mate-pasting, prop-nagata-compactification-category, def-kun-unbounded-exchange.
+comparisons used below. Uses: proposition-construction-independence-rf-shriek,
+proposition-construction-independence-rf-shriek--7, lem-weil-pbc-etale-shriek-base-change-modules,
+lem-kun-proper-base-change-torsion-ring, lemma-affine-space-etale-localization--4,
+lem-weil-pbc-extension-by-zero-stalks, situation-conventions,
+lem-weil-pbc-geometric-point-pullback-stalk, lemma-weil-pbc-geometric-stalk-conservative,
+lem-weil-pbc-unbounded-derived-iso-cohomology, lem-weil-pbc-mate-pasting,
+remark-base-change-compactification--1, definition-derived-base-change-map.
 
 2. Next prove unbounded composition on the same candidates. In a Cartesian square with proper
 $p: \overline X \to \overline Y$ and open $v:Y \hookrightarrow \overline Y$, write $V= \overline
@@ -368,20 +370,20 @@ since the fibre misses $V$ and the pulled-back extension is zero by
 show $ \lambda$ is invertible for arbitrary $N$, without any truncation. For $X \xrightarrow{f}Y
 \xrightarrow{h}S$, choose a compactification $Y \xrightarrow{v} \overline Y \xrightarrow{ \bar
 h}S$, and compactify $vf$ as $X \xrightarrow{a} \overline X \xrightarrow{p} \overline Y$, using
-[thm-nagata-compactification]. The factorization $X \hookrightarrow V \xrightarrow{p_Y}Y$ is a
-compactification of $f$. Substitute $N=(X \hookrightarrow V)_!M$ into $ \lambda$ and apply $R
-\bar h_*$; nested open extensions compose degreewise and the adjunction-based direct-image
-composition in Step 1 identifies the proper factors. This constructs $Rh_!Rf_! \cong R(hf)_!$.
-The interchanger $ \lambda$ is the mate, under the open adjunctions, of the inverse
+[theorem-nagata-s-compactification-theorem--1]. The factorization $X \hookrightarrow V
+\xrightarrow{p_Y}Y$ is a compactification of $f$. Substitute $N=(X \hookrightarrow V)_!M$ into $
+\lambda$ and apply $R \bar h_*$; nested open extensions compose degreewise and the adjunction-based
+direct-image composition in Step 1 identifies the proper factors. This constructs $Rh_!Rf_! \cong
+R(hf)_!$. The interchanger $ \lambda$ is the mate, under the open adjunctions, of the inverse
 proper-exchange isomorphism just displayed. Therefore its equations for consecutive proper maps,
 consecutive open maps, and change of base are respectively the two pasting equations and the
 change-of-adjunction equation of [lem-weil-pbc-mate-pasting]; proper-exchange pasting itself
 follows by applying that statement to the inverse-image composition comparison of
-[def-kun-unbounded-exchange]. This verifies coherence of the actual maps: after transposition,
-each equation is the equality of the pasted inverse-image comparison with the comparison for the
-outer rectangle, rather than an inference from invertibility or stalkwise equality. Explicitly,
-for consecutive proper maps $P \xrightarrow{p}Q \xrightarrow{q}R$ and an open $v:W
-\hookrightarrow R$, write $b_Q:Q_W \hookrightarrow Q$ and $b_P:P_W \hookrightarrow P$ for the
+[definition-derived-base-change-map]. This verifies coherence of the actual maps: after
+transposition, each equation is the equality of the pasted inverse-image comparison with the
+comparison for the outer rectangle, rather than an inference from invertibility or stalkwise
+equality. Explicitly, for consecutive proper maps $P \xrightarrow{p}Q \xrightarrow{q}R$ and an open
+$v:W \hookrightarrow R$, write $b_Q:Q_W \hookrightarrow Q$ and $b_P:P_W \hookrightarrow P$ for the
 pulled-back opens, and $p_W,q_W$ for the proper restrictions. Under direct-image composition the
 interchanger identity is $ \lambda_{qp,v,N}=Rq_* \lambda_{p,b_Q,N} \circ
 \lambda_{q,v,Rp_{W*}N}$. For consecutive opens $U \xrightarrow{w}W \xrightarrow{v}R$ and a
@@ -401,11 +403,11 @@ degreewise identities. Hence both parenthesizations give the same composition ma
 compactifications gives the same map by the refinement equation and common refinements of Step
 1. This proves the composition and base-change coherence on the unbounded category needed in
 Steps 3, 6 and 7, without citing the bounded-below compactification-comparison assertion. Uses:
-lem-amb-etale-adjoint-locality, lem-kun-proper-base-change-torsion-ring,
+lemma-affine-space-etale-localization--4, lem-kun-proper-base-change-torsion-ring,
 lem-weil-pbc-extension-by-zero-stalks, lem-weil-pbc-geometric-point-pullback-stalk,
-prop-weil-pbc-inverse-image-modules-exact, lemma-weil-pbc-geometric-stalk-conservative,
-lem-weil-pbc-unbounded-derived-iso-cohomology, thm-nagata-compactification,
-lem-weil-pbc-mate-pasting, def-kun-unbounded-exchange, lem-weil-pbc-proper-fp-permanence.
+situation-conventions, lemma-weil-pbc-geometric-stalk-conservative,
+lem-weil-pbc-unbounded-derived-iso-cohomology, theorem-nagata-s-compactification-theorem--1,
+lem-weil-pbc-mate-pasting, definition-derived-base-change-map, lem-weil-pbc-proper-fp-permanence.
 
 3. Choose a compactification $f=rj$. Its pullback $f'=r'j'$ is again a compactification. Put
 $C_{f,g}:g^*Rf_! \to Rf'_!g'^*$ equal to proper exchange for $r$, followed by $Rr'_*$ of the
@@ -428,14 +430,14 @@ comparisons of Step 1 and the composition construction of Step 2; this gives
 $C_{hv,g}=C_{h,g}Rv_!$ followed by $Rh'_!C_{v,g_h}$, with the pullback composition
 identifications inserted. Horizontal pasting gives $C_{f,gh}=C_{f',h} \circ h^*C_{f,g}$, again
 with the inverse-image composition inserted. These are equalities of the canonical comparisons,
-not deductions from their invertibility. Uses: def-amb-etale-compact-support,
+not deductions from their invertibility. Uses: proposition-construction-independence-rf-shriek,
 lem-kun-proper-base-change-torsion-ring, lem-weil-pbc-etale-shriek-base-change-modules,
-lem-weil-pbc-etale-restriction-injectives, thm-amb-etale-exceptional-adjoint,
-prop-weil-pbc-inverse-image-modules-exact, lem-weil-pbc-mate-pasting,
-def-weil-pbc-etale-shriek-base-change-map, def-kun-unbounded-exchange,
-prop-nagata-compactification-category.
+lemma-acyclicity-pulled-back-injectives, theorem-existence-exceptional-inverse-image--1,
+situation-conventions, lem-weil-pbc-mate-pasting,
+def-weil-pbc-etale-shriek-base-change-map, definition-derived-base-change-map,
+remark-base-change-compactification--1.
 
-4. Apply the current statement of [lem-amb-proper-coproducts-projection] with its coefficient
+4. Apply the current statement of [lemma-cohomology-projective-line-trace] with its coefficient
 ring equal to the given finite commutative ring $A$, $V= \overline X$, $T=S$, $L=j_!M$ and
 $K=N$. The compactification has $r$ proper of finite type; its source is Noetherian because it
 is finite type over the Noetherian base $S$. Both $M$ and $N$ are arbitrary unbounded ordinary
@@ -448,10 +450,10 @@ the tensor-map counit in Steps 5 and 9. The open comparison can equivalently be 
 \otimes^Lj^*N) \cong j_!M \otimes^LN$, with $N$ here a complex on the ambient scheme; the two
 orders are related by the signed tensor symmetries specified in the cited proper projection
 statement. The underived comparison $j_!(M \otimes j^*N) \to j_!M \otimes N$ is defined by the
-open adjunction [lem-amb-etale-adjoint-locality]: its restriction is the identity on $M \otimes
-j^*N$. Applying it termwise gives the tensor-complex comparison. For its derived form use flat
-K-flat representatives [lem-pc-kflat-resolution]; by [lem-weil-pbc-extension-by-zero-stalks], at
-a geometric stalk inside the open it is identity on the total tensor complex, and outside it
+open adjunction [lemma-affine-space-etale-localization--4]: its restriction is the identity on $M
+\otimes j^*N$. Applying it termwise gives the tensor-complex comparison. For its derived form use
+flat K-flat representatives [lem-pc-kflat-resolution]; by [lem-weil-pbc-extension-by-zero-stalks],
+at a geometric stalk inside the open it is identity on the total tensor complex, and outside it
 both sides are zero. The stalk tensor isomorphism [lem-pod-etale-stalk-tensor-scalar] and
 exactness of geometric stalks [lem-weil-pbc-geometric-point-pullback-stalk] show that these
 degreewise identifications give the derived comparison; [lem-kun-inverse-image-monoidal]
@@ -470,18 +472,18 @@ stalk functors on derived morphisms is asserted. For $r$,
 [lem-weil-pbc-ringed-exchange-tensor-coherence], applied to constant $A$-ringed etale topoi,
 gives the projection/base-change square for $ \mathrm{PF}_r(j_!M,N)$ in the order $(j_!M,N)$.
 Conjugating this square by the two canonical tensor symmetries gives the square for the ordered
-map of [lem-amb-proper-coproducts-projection]. Indeed on K-flat tensor complexes each symmetry
+map of [lemma-cohomology-projective-line-trace]. Indeed on K-flat tensor complexes each symmetry
 sends a homogeneous tensor of degrees $(p,q)$ to $(-1)^{pq}$ times the swapped tensor. Exact
 pullback preserves those degrees and that scalar, so its tensor comparison commutes with the
 signed swaps as a chain-map equality. Naturality of symmetry with respect to the exchange map
 gives the other side of the conjugated square. Pasting this square with the open one proves that
 the compact-support projection formula commutes with $C_{f,g}$, on arbitrary complexes. Uses:
-lem-amb-proper-coproducts-projection, lem-pc-kflat-resolution,
+lemma-cohomology-projective-line-trace, lem-pc-kflat-resolution,
 lem-pod-etale-stalk-tensor-scalar, lem-kun-inverse-image-monoidal,
-lem-weil-pbc-etale-restriction-injectives, lem-weil-pbc-ringed-exchange-tensor-coherence,
+lemma-acyclicity-pulled-back-injectives, lem-weil-pbc-ringed-exchange-tensor-coherence,
 lemma-weil-pbc-geometric-stalk-conservative, lem-weil-pbc-extension-by-zero-stalks,
 lem-weil-pbc-geometric-point-pullback-stalk, lem-weil-pbc-ringed-topoi-derived-tensor-pullback,
-lem-amb-etale-adjoint-locality.
+lemma-affine-space-etale-localization--4.
 
 5. For $q: \mathbf P^1_S \to S$, apply [lem-asd-ordinary-finite-p1-adjunction] with the given
 finite commutative ring $A$ and integer $N$: $NA=0$ and $N$ is invertible on $S$. This input
@@ -507,7 +509,7 @@ coefficient-trace equality identifies the last factors, giving $ \epsilon_{q',g^
 adjunction bijection identifies $a$ with $ \beta_{q,g,K}$ under the counit-preserving
 right-adjoint comparisons. Consequently this canonical mate is invertible. Uses:
 lem-asd-ordinary-finite-p1-adjunction, lem-asd-etale-finite-twist-pullback,
-thm-amb-etale-exceptional-adjoint.
+theorem-existence-exceptional-inverse-image--1.
 
 6. Use the exact etale compact-support and exchange normalization of
 [lem-asd-etale-compact-support-normalization]. Let $j: \mathbf A^1_S \hookrightarrow \mathbf
@@ -522,11 +524,11 @@ adjoint, and the same mate-pasting identity identifies its exchange with the com
 already invertible exchanges. The twist/pullback and tensor identifications of
 [lem-asd-etale-finite-twist-pullback] give $p_{d+1}^*(d+1)[2d+2]$. This induction uses the
 explicit composite adjunction, and compares its right adjoint directly with the ambient right
-adjoint of [thm-amb-etale-exceptional-adjoint] by the unique counit-preserving comparison. The
-imported affine-space adjunction with its pro-etale twist dependency is not used. Uses:
-lem-amb-etale-adjoint-locality, def-weil-pbc-etale-shriek-base-change-map,
+adjoint of [theorem-existence-exceptional-inverse-image--1] by the unique counit-preserving
+comparison. The imported affine-space adjunction with its pro-etale twist dependency is not used.
+Uses: lemma-affine-space-etale-localization--4, def-weil-pbc-etale-shriek-base-change-map,
 lem-weil-pbc-mate-pasting, lem-asd-etale-finite-twist-pullback,
-thm-amb-etale-exceptional-adjoint, lem-asd-etale-compact-support-normalization.
+theorem-existence-exceptional-inverse-image--1, lem-asd-etale-compact-support-normalization.
 
 7. Fix the etale normalization before applying locality. Apply
 [lem-asd-etale-compact-support-normalization] to every separated finite-type etale map $u$. It
@@ -537,7 +539,7 @@ etale realization $C_{u,g}$ is the inverse of the sheaf comparison of
 [def-weil-pbc-etale-shriek-base-change-map], including the normalization of the map, not just
 its endpoints. Transport the adjunctions by their counit-preserving comparisons. For a separated
 finite-type etale map $u:U \to X$, the exact adjunction $u_! \dashv u^*$ in
-[lem-amb-etale-adjoint-locality] and the comparison
+[lemma-affine-space-etale-localization--4] and the comparison
 [lem-weil-pbc-etale-shriek-base-change-modules] have mate the canonical inverse-image
 composition isomorphism. Indeed the comparison is defined by conjugating the ordinary
 inverse-image/direct-image exchange [def-weil-pbc-etale-shriek-base-change-map]; its defining
@@ -558,31 +560,31 @@ and also $C_{f,ag_0}=C_{f_0,g_0}\,g_0^*C_{f,a}$. Since $ga'=ag_0$, apply part (1
 mate-pasting lemma to their inverses. The first mate is the etale restriction comparison
 composed with $a'_X{}^* \beta_{f,g,K}$; the second is $ \beta_{f_0,g_0,a^*K}$ composed with the
 unprimed restriction comparison. Their equality identifies the restricted canonical map with the
-chart map, as required. Uses: lem-amb-etale-adjoint-locality,
+chart map, as required. Uses: lemma-affine-space-etale-localization--4,
 lem-weil-pbc-etale-shriek-base-change-modules, def-weil-pbc-etale-shriek-base-change-map,
 lem-weil-pbc-mate-pasting, lem-asd-etale-compact-support-normalization.
 
-8. Apply [sbc-thm-etale-local-normal-form] at each point of $X$. After an affine open
-restriction in the base, choose an affine open $U \subseteq X$ and an etale $e:U \to \mathbf
-A^d_{S_0}$ with $fu=p_de$. The relative dimension is $d$, since the etale factor has relative
-dimension zero and $f$ has pure relative dimension $d$. The chart inclusion $u$ is separated and
-of finite type: it is an open immersion, and it is quasi-compact because $X$ is Noetherian. The
-map $e$ is separated since $U$ and $ \mathbf A^d_{S_0}$ are affine: on rings its diagonal is
-given by the surjection $B \otimes_R B \to B$, $b \otimes b' \mapsto bb'$. It is locally of
-finite presentation since it is etale, and quasi-compact by
+8. Apply [proposition-exceptional-inverse-image-smooth-morphism] at each point of $X$. After an
+affine open restriction in the base, choose an affine open $U \subseteq X$ and an etale $e:U \to
+\mathbf A^d_{S_0}$ with $fu=p_de$. The relative dimension is $d$, since the etale factor has
+relative dimension zero and $f$ has pure relative dimension $d$. The chart inclusion $u$ is
+separated and of finite type: it is an open immersion, and it is quasi-compact because $X$ is
+Noetherian. The map $e$ is separated since $U$ and $ \mathbf A^d_{S_0}$ are affine: on rings its
+diagonal is given by the surjection $B \otimes_R B \to B$, $b \otimes b' \mapsto bb'$. It is locally
+of finite presentation since it is etale, and quasi-compact by
 [lem-weil-pbc-qcqs-morphism-permanence](1), since $U$ is affine and $ \mathbf A^d_{S_0}$ is
 quasi-separated. Hence $e$ is of finite type. They are compactifiable, as are their composites,
-by [thm-nagata-compactification]. After arbitrary base change the corresponding charts still
-cover $X'$. Steps 6 and 7 identify the restriction of $ \beta_{f,g,K}$ on each chart with etale
-inverse image of the affine-space isomorphism. Thus it is an isomorphism on every chart. Exact
-inverse image [prop-weil-pbc-inverse-image-modules-exact] commutes with cohomology; the kernel
+by [theorem-nagata-s-compactification-theorem--1]. After arbitrary base change the corresponding
+charts still cover $X'$. Steps 6 and 7 identify the restriction of $ \beta_{f,g,K}$ on each chart
+with etale inverse image of the affine-space isomorphism. Thus it is an isomorphism on every chart.
+Exact inverse image [situation-conventions] commutes with cohomology; the kernel
 and cokernel of each cohomology map vanish on that etale covering, so their sections vanish by
 the sheaf axiom. Equivalently this is [lem-weil-pbc-etale-cover-detects-iso] applied to the
 underlying abelian cohomology sheaves. Hence every cohomology map is invertible globally, and
 [lem-weil-pbc-unbounded-derived-iso-cohomology] proves that $ \beta_{f,g,K}$ is invertible in
-the unbounded derived category. Uses: sbc-thm-etale-local-normal-form,
-thm-nagata-compactification, lem-amb-etale-adjoint-locality,
-lem-weil-pbc-unbounded-derived-iso-cohomology, prop-weil-pbc-inverse-image-modules-exact,
+the unbounded derived category. Uses: proposition-exceptional-inverse-image-smooth-morphism,
+theorem-nagata-s-compactification-theorem--1, lemma-affine-space-etale-localization--4,
+lem-weil-pbc-unbounded-derived-iso-cohomology, situation-conventions,
 lem-weil-pbc-etale-cover-detects-iso, lem-weil-pbc-qcqs-morphism-permanence.
 
 9. At $K=A_S$, exact inverse image preserves the constant coefficient unit, so Step 8 gives
@@ -596,9 +598,10 @@ Step 4 identifies their projection-formula factors; the defining equation of $b$
 identifies their final factors, since $ \epsilon_{f',A}Rf'_!b=g^* \epsilon_{f,A}C^{-1}$.
 Naturality of $C$ and tensor lets these substitutions be made in the composite. The transposes
 are equal, so the adjunction bijection proves the displayed tensor compatibility.
-[thm-asd-smooth-tensor] ensures these canonical tensor maps are the claimed isomorphisms. Uses:
-thm-asd-smooth-tensor, thm-amb-etale-exceptional-adjoint, lem-kun-inverse-image-monoidal,
-prop-weil-pbc-inverse-image-modules-exact.
+[proposition-exceptional-inverse-image-smooth-morphism] ensures these canonical tensor maps are the
+claimed isomorphisms. Uses: proposition-exceptional-inverse-image-smooth-morphism,
+theorem-existence-exceptional-inverse-image--1, lem-kun-inverse-image-monoidal,
+situation-conventions.
 -/
 theorem smooth_exceptional_base_change
     (A : Type (u + 1)) [CommRing A] [Finite A]
@@ -636,7 +639,7 @@ theorem smooth_exceptional_base_change
         (rightDerivedUpperShriekBaseChangeMap A (IsPullback.of_hasPullback f g)).app K := by
     symm
     simpa only [smoothExceptionalBaseChangeMap, rightDerivedUpperShriekBaseChangeMap,
-      NatIso.isIso_inv_app, Functor.id_obj, Functor.comp_obj, TwoSquare.natTrans] using
+      NatIso.isIso_inv_app, Functor.id_obj, Functor.comp_obj] using
       mate_app_eq
       (rightDerivedUpperShriekAdjunction A f)
       (rightDerivedUpperShriekAdjunction A (pullback.snd f g))

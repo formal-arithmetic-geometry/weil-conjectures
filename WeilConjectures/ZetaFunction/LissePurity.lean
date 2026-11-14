@@ -17,7 +17,7 @@ punctually `ι`-pure of weight `w`. Then `Hⁱ(X₀ ⊗ k̄, F)` is `ι`-pure of
 Deligne–Laumon estimate bounds the weights of `H_c^i = Hⁱ` by `w + i`, and Poincaré duality
 `H_c^i(F) × H^{2d-i}(F^∨(d)) ⟶ ℚ̄_ℓ`, with `F^∨(d)` lisse and punctually pure of weight
 `-w - 2d`, turns the same estimate in degree `2d - i` into the lower bound. This is the absolute
-case `Y₀ = Spec k₀` of `prop-zl-smooth-proper-relative-purity`.
+case `Y₀ = Spec k₀` of `theorem-purity-higher-direct-images-under`.
 
 ## Main statements
 
@@ -49,7 +49,7 @@ variable [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
 
 /-- The Deligne–Laumon estimate for compactly supported cohomology: for a separated `k₀`-scheme
 `X₀` of finite type and a Weil sheaf `F` mixed of weights at most `w`, `H_c^i(X₀ ⊗ k̄, F)` has
-weights at most `w + i` over `k₀` (blueprint `cor-zl-rfshriek-sheaf` for the structure
+weights at most `w + i` over `k₀` (blueprint `theorem-direct-image-mixed-sheaf--1` for the structure
 morphism). -/
 theorem hasWeightsAtMostOver_compactlySupportedCohomology {F : WeilSheaf k₀ l X} {w : ℝ}
     (hF : F.IsMixedOfWeightsAtMost ι w) (i : ℤ) :
@@ -60,7 +60,7 @@ theorem hasWeightsAtMostOver_compactlySupportedCohomology {F : WeilSheaf k₀ l 
 
 /-- The Tate twist `(d)` multiplies the local Frobenius at a closed point `x` by `q_x⁻ᵈ`, so it
 lowers the weights by `2d`: the constant twist by `χ_ℓ(σ)ᵈ = q⁻ᵈ` has
-`2 log_q |ι (q⁻ᵈ)| = -2d` (blueprint `lem-wf-tate-twist-frobenius`). -/
+`2 log_q |ι (q⁻ᵈ)| = -2d` (blueprint `proposition-weights-under-usual-operations--13`). -/
 theorem two_mul_logb_norm_cyclotomicUnit_pow_eq (d : ℕ) :
     2 * Real.logb (Nat.card k₀) ‖ι ((cyclotomicUnit k₀ l ^ d : (PadicAlgCl l)ˣ) : PadicAlgCl l)‖ =
       -(2 * d) := by
@@ -72,7 +72,7 @@ theorem two_mul_logb_norm_cyclotomicUnit_pow_eq (d : ℕ) :
 end
 
 /-- **Purity for lisse coefficients** (the absolute case of
-`prop-zl-smooth-proper-relative-purity`): for `X₀` smooth and proper of pure dimension `d` over
+`theorem-purity-higher-direct-images-under`): for `X₀` smooth and proper of pure dimension `d` over
 `k₀` and `F` a lisse Weil sheaf on `X₀`, punctually `ι`-pure of weight `w`, the Frobenius module
 `Hⁱ(X₀ ⊗ k̄, F)` is `ι`-pure of weight `w + i` over `k₀`. -/
 theorem isPureOfWeightOver_cohomology_of_isLisse (d : ℕ) [IsProper (X ↘ Spec (CommRingCat.of k₀))]

@@ -33,7 +33,8 @@ complexes of `T̲`-modules (`ProEtale.CondensedRing.isIso_baseChangeMap_app_of_s
 
 Consequently, the vanishing of the defect of the unit is stable under smooth pullback
 (`ProEtale.CondensedRing.isZero_specializationDefect_unit_of_smooth_finiteCoefficient`), the
-smooth exchange step of blueprint `det-sp-generic-divisor-constant` with finite coefficients.
+smooth exchange step of blueprint `lemma-vanishing-generic-points-principal-divisor` with finite
+coefficients.
 
 ## Main results
 
@@ -134,7 +135,7 @@ theorem isIso_baseChangeMap_affineSpace_deformationModel_app_finiteCoefficient
     (isUnit_natCast_deformationTotal k' Y I) hT E hE
 
 /-- **The smooth exchange of nearby cycles with finite coefficients** (blueprint
-`det-sp-nearby-cycles-exchanges` (1), smooth case, for a finite coefficient ring `T` killed by a
+`prose-E-03` (1), smooth case, for a finite coefficient ring `T` killed by a
 prime `ℓ ≠ char k'`): for a morphism `φ : 𝒟_J X ⟶ 𝒟_I Y` of deformation models whose morphism of
 total spaces is smooth and whose square of geometric generic fibres is cartesian, the pullback
 exchange `α_φ : Lg_s^* Ψ_Y ⟶ Ψ_X Lg^*` is invertible at every `K` such that `Lε^* K` is bounded
@@ -187,10 +188,10 @@ lemma boundedConstructible_leftDerivedUpperStar_obj_leftDerivedUpperStar_obj_uni
     (boundedConstructible_leftDerivedUpperStar_obj_unit Λ f)
 
 /-- **Smooth pullback of the vanishing of the defect of the unit, with finite coefficients** (the
-smooth exchange step of blueprint `det-sp-generic-divisor-constant`): let `f : X ⟶ X₀` be smooth,
-`Z₀ = V(I₀) ⊆ X₀` and `Z = f⁻¹ Z₀`. If `C_{X₀,Z₀}(T̲) = 0`, then `C_{X,Z}(T̲) = 0`, for a finite
-coefficient ring `T` killed by `ℓ ≠ char k'`. The smooth exchanges of the deformations of `f` and
-of `f_Z` are invertible at the unit
+smooth exchange step of blueprint `lemma-vanishing-generic-points-principal-divisor`): let
+`f : X ⟶ X₀` be smooth, `Z₀ = V(I₀) ⊆ X₀` and `Z = f⁻¹ Z₀`. If `C_{X₀,Z₀}(T̲) = 0`, then
+`C_{X,Z}(T̲) = 0`, for a finite coefficient ring `T` killed by `ℓ ≠ char k'`. The smooth exchanges
+of the deformations of `f` and of `f_Z` are invertible at the unit
 (`isIso_pullbackExchange_deformationModel_app_of_smooth_finiteCoefficient`), so that
 `C_{X,Z}(Lf^* T̲) ≅ Lf_Z^* C_{X₀,Z₀}(T̲)`. -/
 theorem isZero_specializationDefect_unit_of_smooth_finiteCoefficient [IsSepClosed k']

@@ -313,7 +313,7 @@ private lemma exchange_inclusion
     exact (derivedOpenImmersionLowerShriekBaseChangeIso_hom_comp_toLowerStar B sq N).symm
   have hm : (mateEquiv (derivedUpperStarLowerStarAdjunction B q)
       (derivedUpperStarLowerStarAdjunction B p)
-      (derivedBaseChangeSquare B sq.toCommSq)).natTrans = sigma.hom := by
+      (derivedBaseChangeSquare B sq.toCommSq)) = sigma.hom := by
     rw [derivedBaseChangeSquare, iterated_mateEquiv_conjugateEquiv]
     change conjugateEquiv _ _
       ((leftDerivedUpperStarComp B b p (q ≫ i) sq.w).inv ≫

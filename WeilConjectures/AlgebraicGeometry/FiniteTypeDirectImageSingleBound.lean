@@ -149,7 +149,7 @@ name in the namespaces `ContinuousMapRingObj`, `PadicIntegersRingObj`, `UnitBall
 `FiniteDiscreteRingObj`.
 
 Source: Deligne, SGA 4½, Th. finitude 1.1; Bhatt--Scholze, Sections 6.7--6.8;
-blueprint `lem-sfb-dc-lower-star-preserves`, coefficient-reduction argument.
+blueprint `proposition-six-operations-dctf--5`, coefficient-reduction argument.
 (auxiliary; not a blueprint node)
 
 Proof: finite type over a field makes both schemes noetherian of finite dimension and

@@ -8,8 +8,8 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Com
 
 /-! # The comparison unit in fixed-coefficient module sheaves
 
-Source: the blueprint, sec-proper-base-change, thm-weil-pbc-site-comparison;
-Stacks Project, Tag 099V (blueprint: thm-weil-pbc-site-comparison).
+Source: the blueprint, chap-Proper-base-change, theorem-bounded-below-cohomology-comparison;
+Stacks Project, Tag 099V (blueprint: theorem-bounded-below-cohomology-comparison).
 
 This exposes the canonical unit in the fixed-ring presentation used by compact support.
 The recorded coefficient realization identifies this presentation with constant-ring
@@ -29,7 +29,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- The actual bounded below comparison-adjunction unit is invertible on all objects.
 Source: Stacks, Tag 099V; blueprint site-comparison theorem
-(blueprint: thm-weil-pbc-site-comparison).
+(blueprint: theorem-bounded-below-cohomology-comparison).
 
 Proof: resolve a bounded below complex by a bounded below complex of injectives.
 The ordinary comparison unit is invertible termwise, and comparison inverse image

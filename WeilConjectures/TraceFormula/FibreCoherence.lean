@@ -16,7 +16,7 @@ public import WeilConjectures.WeilObject.BoundedConstructible.UpperLowerStar
 For the relative Frobenius `r : X ⟶ X'` of `f = r ≫ f'` and the fibre `Z` of `f` over a point
 `y` fixed by `Φ_Y`, the base change of `Rf'_!(η_r)` to `Z` is the pullback `Φ_Z^♯` on compactly
 supported cohomology (`ProEtale.CondensedRing.baseChange_comp_relativeFrobenius_stalk`). This is
-the core of the proof of `lem-trf-weil-shriek-operator-fibres`, item (2).
+the core of the proof of `lemma-comparison-via-relative-frobenius--4`, item (2).
 
 -/
 
@@ -122,7 +122,7 @@ lemma pullbackSquareComparison_hom_app_comp_map_upperStarComp_inv_app {ΦZ : Z �
 set_option maxHeartbeats 1000000 in
 -- the instances of the categories of sheaves make the rewriting slow
 /-- The relative Frobenius part of `θ_f` at a fibre (blueprint
-`lem-trf-weil-shriek-operator-fibres`, proof of (2)): under the base change to the fibre `Z`
+`lemma-comparison-via-relative-frobenius--4`, proof of (2)): under the base change to the fibre `Z`
 of `y`, `Rf'_!(η_r)` followed by the composition isomorphisms becomes the pullback `Φ_Z^♯`. -/
 lemma baseChange_comp_relativeFrobenius_stalk {p : X' ⟶ X} {f' : X' ⟶ Y}
     {r : X ⟶ X'} {ΦZ : Z ⟶ Z} {j : Z ⟶ X'} {y : RationalPoint Y} [IsProper r.left]

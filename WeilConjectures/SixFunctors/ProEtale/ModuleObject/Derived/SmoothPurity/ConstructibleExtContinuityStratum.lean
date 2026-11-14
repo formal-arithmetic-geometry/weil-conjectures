@@ -108,7 +108,7 @@ import all Mathlib.CategoryTheory.Sites.Grothendieck
 import all Mathlib.CategoryTheory.Sites.Limits
 import all Mathlib.CategoryTheory.Sites.Sheaf
 import all Mathlib.Combinatorics.Quiver.ReflQuiver
-import all Mathlib.Data.Int.ConditionallyCompleteOrder
+import all Mathlib.Order.Int.ConditionallyCompleteOrder
 import all Mathlib.Geometry.RingedSpace.LocallyRingedSpace
 import all Mathlib.Geometry.RingedSpace.PresheafedSpace
 import all Mathlib.Geometry.RingedSpace.SheafedSpace
@@ -184,7 +184,7 @@ import all Mathlib.Algebra.Homology.HomologicalComplexAbelian
 
 Source: blueprint main-20261015, sec-smooth-purity/sk-prop-sf-localization,
 sk-lem-constructible-ext-continuity-stratum.md and its proof
-(blueprint: det-lem-constructible-ext-continuity-stratum).
+(blueprint: lemma-continuity-ext-out-constructible-complex--1).
 
 The colimit is taken in complexes of coefficient modules, hence degreewise. Derived Hom
 is taken in the ordinary unbounded derived category, using the same extension i_* u_! L
@@ -703,9 +703,6 @@ private theorem qcqsFiniteFreeHomContinuity
   apply (colimit.isColimit _).nonempty_isColimit_iff_isIso_desc.1
   exact ⟨IsColimit.mapCoconeEquiv e.symm hcomp⟩
 
-set_option maxHeartbeats 800000 in
--- Derived module functors require additional elaboration heartbeats.
-set_option synthInstance.maxHeartbeats 100000 in
 set_option synthInstance.maxSize 4096 in
 private theorem freeComap {X : Scheme.{u}}
     {R S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}}
@@ -757,7 +754,7 @@ is invertible, equivalently bijective, for every integer q and every diagram wit
 common strict lower bound. Here a!L is i_*u_!L placed in degree zero.
 
 Source: blueprint stratum continuity lemma and its proof
-(blueprint: det-lem-constructible-ext-continuity-stratum).
+(blueprint: lemma-continuity-ext-out-constructible-complex--1).
 Proof for stage 3, following the updated node:
 1. Closed i and the quasi-compact open uS make Z and S qcqs. The complementary
    open j is already quasi-compact by hypothesis.

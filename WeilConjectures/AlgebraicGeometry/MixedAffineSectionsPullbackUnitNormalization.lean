@@ -116,7 +116,6 @@ private theorem mixedSectionsComplexUnit_isIso_of_iso (X : Scheme.{u})
   rw [he]
   infer_instance
 
-set_option maxHeartbeats 350000 in
 -- The affine chart and localization factors require larger definitional-equality searches.
 /-- The pullback counit and affine sections comparison normalize the target unit.
 Source: Stacks Project, Tags 06Z0, 08DW(2), 0D5T.

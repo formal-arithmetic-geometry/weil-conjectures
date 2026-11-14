@@ -173,8 +173,9 @@ Proof:
    the morphism f and that line. It gives flat constructible terms, K-flatness,
    and support [a-s,b-s]. The chain-shift comparison of
    lem-weil-pbc-total-tensor-integer-shifts and localization identify the represented
-   object with the shift of the whole derived tensor, as in def-kun-derived-tensor.
-   In degree j the term comes from P in degree j+s, fixing the endpoint signs.
+   object with the shift of the whole derived tensor, as in
+   proposition-open-direct-image-preserves-finite. In degree j the term comes from P in degree j+s,
+   fixing the endpoint signs.
 4. The line-model theorem gives constructible cohomology and vanishing after
    tensor with every degree-zero module outside [a-s,b-s]. These are precisely
    constructibility and def-kun-tor-amplitude; finite support gives boundedness.

@@ -22,7 +22,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Coproducts
 Source: literature/blueprint/latest/blueprint/part-six-operations/sec-six-functors-basics/
 sec-compactness/sec-ind-constructible-sheaves/sk-cor-ind-heart-ii/sk-cor-ind-heart-ii-sums.md
 and its proof
-(blueprint: det-ind-heart-ii-sums).
+(blueprint: corollary-ind-heart-b--2).
 
 The Noetherian scope is the accepted correction recorded in the node's stage-1 report.
 Both coefficient choices are condensed rings pulled back to the small pro-etale site.
@@ -40,7 +40,6 @@ open scoped CategoryTheory.Obj DirectSum
 
 namespace AlgebraicGeometry.ProEtale
 
-set_option maxHeartbeats 400000 in
 -- Elaborating the summand comparison unfolds the direct-sum model of the heart.
 /-- Ext from a constructible sheaf commutes with arbitrary small sums of
 ind-constructible sheaves, in every integer degree. The displayed additive homomorphism
@@ -50,7 +49,7 @@ coprojection. Bijectivity is equivalent to its being an isomorphism of abelian g
 Source: literature/blueprint/latest/blueprint/part-six-operations/sec-six-functors-basics/
 sec-compactness/sec-ind-constructible-sheaves/sk-cor-ind-heart-ii/sk-cor-ind-heart-ii-sums.md
 and its proof
-(blueprint: det-ind-heart-ii-sums).
+(blueprint: corollary-ind-heart-b--2).
 
 Proof: first the degree-zero embedding, the shift, and additive Hom from C preserve
 finite sums, including the empty sum. Express the ambient sum as the filtered colimit

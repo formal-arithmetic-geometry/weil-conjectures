@@ -21,8 +21,8 @@ Let `E ⊆ ℚ̄_ℓ` be a finite subextension of `ℚ_ℓ` with ring of integer
 dimension `≤ d`. This file proves that for every constructible `𝒪_{E,Z}`-module object `N`, the
 pro-étale direct image `Rp_* N` lies in degrees `≤ 2d`
 (`ProEtale.CondensedRing.isLE_rightDerivedLowerStar_singleFunctor_padicIntegers_of_isProper`,
-blueprint `det-prop-int-compactness-direct-sums` (1), `det-proper-heart-bound-torsion`), given
-that `Rp_*` preserves `Dᵇc(-, 𝔽_E)`.
+blueprint `proposition-compactness-proper-direct-image--2` (1),
+`lemma-uniform-bound-proper-direct-image--1`), given that `Rp_*` preserves `Dᵇc(-, 𝔽_E)`.
 
 The proof reduces to the residue field: `Rp_* N` is bounded constructible, so it suffices that its
 first derived reduction lies in degrees `≤ 2d`
@@ -114,10 +114,10 @@ lemma isLE_derivedReduction_singleFunctor_obj {X : Scheme.{u}}
   exact (residueFieldModuleSheaf X ℓ E).isLE_mapDerivedCategory_obj _ 0
 
 variable (ℓ E) in
-/-- Blueprint `det-prop-int-compactness-direct-sums` (1), `det-proper-heart-bound-torsion`: for a
-proper morphism `p : Z ⟶ Y` of noetherian schemes whose geometric fibres have dimension `≤ d`, if
-`Rp_*` preserves `Dᵇc(-, 𝔽_E)`, then `Rp_* N` lies in degrees `≤ 2d` for every constructible
-`𝒪_{E,Z}`-module object `N`. -/
+/-- Blueprint `proposition-compactness-proper-direct-image--2` (1),
+`lemma-uniform-bound-proper-direct-image--1`: for a proper morphism `p : Z ⟶ Y` of noetherian
+schemes whose geometric fibres have dimension `≤ d`, if `Rp_*` preserves `Dᵇc(-, 𝔽_E)`, then
+`Rp_* N` lies in degrees `≤ 2d` for every constructible `𝒪_{E,Z}`-module object `N`. -/
 theorem isLE_rightDerivedLowerStar_singleFunctor_padicIntegers_of_isProper
     {Z Y : Scheme.{u}} [IsNoetherian Z] [IsNoetherian Y] (p : Z ⟶ Y) [IsProper p] (d : ℕ)
     (hd : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y),

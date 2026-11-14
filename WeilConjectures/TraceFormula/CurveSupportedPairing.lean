@@ -15,18 +15,20 @@ public import WeilConjectures.TraceFormula.SupportedRestriction
 Let `Φ` be the model Frobenius of `X = X₀ ×_{k₀} k` for a model `X₀` over a finite field `k₀`,
 `m ≥ 1`, `v : LΦ_m^* K ⟶ K` an arbitrary map, and `c = (𝟙, Φ_m)` the graph correspondence with
 coefficient `v`. Its fixed locus is a finite disjoint union of reduced points (blueprint
-`sk-lem-tf-fixed-points`), so an open and closed subscheme `B` of the fixed locus with underlying
-set a fixed point `y` is a copy of the base point (`Correspondence.FixedLocus.isoPointOfRangeEq`),
-and the restriction of the supported restriction `ρ_P`, `P = K ⊠ D_X K`, to `B` is its stalk at
-`y`: the supported restriction `RΓ_a(T, P) ⟶ RΓ_y(X, LΔ^* P)` on the strict localization `T` of
-`X × X` at `(y, y)` of blueprint `sk-lem-tf-curve-supported-pairing`.
+`lemma-frobenius-fixed-scheme`), so an open and closed subscheme `B` of the fixed locus with
+underlying set a fixed point `y` is a copy of the base point
+(`Correspondence.FixedLocus.isoPointOfRangeEq`), and the restriction of the supported restriction
+`ρ_P`, `P = K ⊠ D_X K`, to `B` is its stalk at `y`: the supported restriction
+`RΓ_a(T, P) ⟶ RΓ_y(X, LΔ^* P)` on the strict localization `T` of `X × X` at `(y, y)` of blueprint
+`lemma-local-term-restriction-map`.
 
 ## Main statements
 
 - `Correspondence.localTerm_traceClass_frobeniusGraph_eq_zero_of_supportedRestriction`:
   if the stalk at `y` of the supported restriction vanishes, so does the local term `LT_y(v)`
-  (blueprint `sk-lem-tf-curve-supported-pairing`, `sk-i-curve-zero`, proof). By blueprint
-  `sk-lem-tf-curve-restriction-zero`, this applies on a smooth curve when `K_y = 0`.
+  (blueprint `lemma-local-term-restriction-map`, `lemma-vanishing-local-term-zero-stalk--2`, proof).
+  By blueprint `lemma-vanishing-local-term-zero-stalk`, this applies on a smooth curve when
+  `K_y = 0`.
 
 The identity between the local term and the integral of the composite of the supported class,
 the supported restriction and the evaluation holds for every correspondence
@@ -53,14 +55,14 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 namespace Correspondence
 
 /-- **Vanishing of the Frobenius local term through the supported restriction** (blueprint
-`sk-lem-tf-curve-supported-pairing` and the proof of `sk-i-curve-zero`): let `Φ` be the model
-Frobenius of a model over a finite field, `m ≥ 1`, `v : LΦ_m^* K ⟶ K` an arbitrary map, `z` a
-rational point of the fixed locus of the graph correspondence `(𝟙, Φ_m)`, and `B` an open and
-closed subscheme of the fixed locus, proper over `s`, with underlying set `{z}`. If the stalk at
+`lemma-local-term-restriction-map` and the proof of `lemma-vanishing-local-term-zero-stalk--2`): let
+`Φ` be the model Frobenius of a model over a finite field, `m ≥ 1`, `v : LΦ_m^* K ⟶ K` an arbitrary
+map, `z` a rational point of the fixed locus of the graph correspondence `(𝟙, Φ_m)`, and `B` an open
+and closed subscheme of the fixed locus, proper over `s`, with underlying set `{z}`. If the stalk at
 `z` of the supported restriction `ρ_P : Lι^* Rc^! P ⟶ Rd^! LΔ^* P`, `P = K ⊠ D_X K`, is zero,
 then the local term `LT_B(v)` is zero.
 
-The fixed locus is a disjoint union of reduced points (blueprint `sk-lem-tf-fixed-points`), so
+The fixed locus is a disjoint union of reduced points (blueprint `lemma-frobenius-fixed-scheme`), so
 `B ≅ s` with `s ≅ B ⟶ Fix(c)` the point `z`, and the restriction of `ρ_P` to `B` vanishes; the
 local term is the integral of a composite through this restriction
 (`localTerm_traceClass_eq_integral_supportedRestriction`). -/

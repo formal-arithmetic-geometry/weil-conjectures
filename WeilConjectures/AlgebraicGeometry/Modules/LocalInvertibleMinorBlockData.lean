@@ -115,7 +115,7 @@ private theorem minor_indices_injective {X : Scheme.{u}} {a m n : ℕ}
 /-- Local coordinate decompositions identify the leading determinant with the
 restriction of the selected minor, and that restriction is a unit.
 
-Source: `thm-pc-semicontinuity-base-change`, proof (3), pivot-minor step;
+Source: `lemma-triviality-fibres--2`, proof (3), pivot-minor step;
 see the source argument retained in `exists_local_invertible_minor_block`.
 (blueprint: lem-pc-local-invertible-minor-block-data)
 

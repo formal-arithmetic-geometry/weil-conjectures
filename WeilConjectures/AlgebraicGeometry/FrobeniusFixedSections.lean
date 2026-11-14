@@ -17,8 +17,8 @@ import WeilConjectures.RingTheory.ArtinSchreierKernel
 # Frobenius-fixed global sections of arbitrary schemes
 
 Source: Stacks Project, Etale Cohomology, Tag 0A3J, `section-artin-schreier`, opening
-Artin–Schreier exact sequence; the current blueprint, `lem-fd-as-cover`, automorphism paragraph
-(blueprint: lem-fd-frobenius-fixed-sections).
+Artin–Schreier exact sequence; the current blueprint, `lemma-artin-schreier-character-sheaf`,
+automorphism paragraph (blueprint: lem-fd-frobenius-fixed-sections).
 
 ## Main statements
 
@@ -252,7 +252,7 @@ restriction clause specifies the canonical gluing map, rather than an arbitrary 
 The scalar `a.val` denotes the canonical constant `a · 1`, including in the zero section ring.
 Source: Stacks Project, Etale Cohomology, Tag 0A3J, `section-artin-schreier`,
 opening exact sequence;
-blueprint `lem-fd-as-cover`, automorphism paragraph.
+blueprint `lemma-artin-schreier-character-sheaf`, automorphism paragraph.
 (blueprint: lem-fd-frobenius-fixed-sections)
 
 Proof:

@@ -37,10 +37,10 @@ Proof: (1) For n ≥ 2 the kernel of R/m^n → R/m^(n-1) is square-zero. In resi
 characteristic zero the quotients are Q-algebras; in characteristic p > 0, R/m^n is a
 Z/p^n-algebra. (2) In characteristic zero, lift the identity of the residue field successively
 through these square-zero kernels using formal smoothness over Q
-(lem-weil-pbc-char-zero-field-extension-formally-smooth and def-weil-pbc-formally-smooth-adic).
-(3) Pass to the inverse limit using def-weil-pbc-adic-completion and
-def-weil-pbc-adically-complete-ring. The resulting section has image a field with zero
-intersection with m, and its reduction is an isomorphism.
+(lem-weil-pbc-char-zero-field-extension-formally-smooth and
+theorem-finite-etale-covers-proper-henselian--2). (3) Pass to the inverse limit using
+def-weil-pbc-adic-completion and def-weil-pbc-adically-complete-ring. The resulting section has
+image a field with zero intersection with m, and its reduction is an isomorphism.
 (4) In positive characteristic choose a Cohen ring with the prescribed residue field
 (lem-weil-pbc-cohen-rings-exist). Lift its maps modulo p^n successively using
 lem-weil-pbc-cohen-ring-mod-pn-formally-smooth. (5) Completeness of R gives a map from

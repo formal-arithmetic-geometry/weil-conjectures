@@ -28,7 +28,7 @@ import all WeilConjectures.SmoothPurity.Coefficient.CoefficientComplexRationaliz
 /-!
 # Finite-stage point fibres and their common-stage representative
 
-Source: Weil blueprint, `def-weil-finite-coefficient-point`, order 1509
+Source: Weil blueprint, `lemma-perfect-complexes-geometric-point`, order 1509
 (blueprint: def-weil-point-fibre-stage-constructions).
 
 Evaluation is the recorded final-object sections functor. Integral coefficients act
@@ -159,13 +159,13 @@ private theorem pointFd_of_iso {F : Type (u + 1)} [Field F]
 
 /-- The chosen geometric base field is algebraically closed.
 Source: blueprint global finite-field datum, order 411
-(blueprint: def-weil-finite-coefficient-point). -/
+(blueprint: lemma-perfect-complexes-geometric-point). -/
 noncomputable instance pointFibreBaseIsAlgClosed : IsAlgClosed D.k :=
   IsAlgClosure.isAlgClosed D.k₀
 
 /-- The fully faithful change of coefficient and module size, with the same scalar action.
 Source: blueprint order 1509, point targets
-(blueprint: def-weil-finite-coefficient-point). -/
+(blueprint: lemma-perfect-complexes-geometric-point). -/
 noncomputable abbrev pointFibreModuleLift (F : Type u) [Field F] :
     ModuleCat.{u} F ⥤ ModuleCat.{u + 1} (ULift.{u + 1, u} F) :=
   ModuleCat.uliftFunctor.{u + 1, u} F ⋙
@@ -173,7 +173,7 @@ noncomputable abbrev pointFibreModuleLift (F : Type u) [Field F] :
       (ULift.ringEquiv : ULift.{u + 1, u} F ≃+* F).toRingHom
 
 /-- Exactness and additivity of the carrier lift with its coefficient transport.
-Source: blueprint order 1509 (blueprint: def-weil-finite-coefficient-point).
+Source: blueprint order 1509 (blueprint: lemma-perfect-complexes-geometric-point).
 Proof: carrier lift preserves kernels and cokernels by the module equivalence on
 underlying elements. Restriction along the coefficient ring equivalence preserves
 all limits and colimits; both operations add morphisms pointwise. -/
@@ -192,23 +192,23 @@ theorem pointFibreModuleLift_exact (F : Type u) [Field F] :
   exact ⟨inferInstance, inferInstance, inferInstance⟩
 
 /-- Additivity of the explicit universe lift.
-Source: blueprint order 1509 (blueprint: def-weil-finite-coefficient-point). -/
+Source: blueprint order 1509 (blueprint: lemma-perfect-complexes-geometric-point). -/
 noncomputable instance pointFibreModuleLiftAdditive (F : Type u) [Field F] :
     (pointFibreModuleLift F).Additive := (pointFibreModuleLift_exact F).1
 
 /-- Preservation of kernels by the explicit universe lift.
-Source: blueprint order 1509 (blueprint: def-weil-finite-coefficient-point). -/
+Source: blueprint order 1509 (blueprint: lemma-perfect-complexes-geometric-point). -/
 noncomputable instance pointFibreModuleLiftLimits (F : Type u) [Field F] :
     PreservesFiniteLimits (pointFibreModuleLift F) := (pointFibreModuleLift_exact F).2.1
 
 /-- Preservation of cokernels by the explicit universe lift.
-Source: blueprint order 1509 (blueprint: def-weil-finite-coefficient-point). -/
+Source: blueprint order 1509 (blueprint: lemma-perfect-complexes-geometric-point). -/
 noncomputable instance pointFibreModuleLiftColimits (F : Type u) [Field F] :
     PreservesFiniteColimits (pointFibreModuleLift F) := (pointFibreModuleLift_exact F).2.2
 
 /-- Universe lift preserves the bounded finite-dimensional predicate.
 Source: blueprint order 1509, target categories
-(blueprint: def-weil-finite-coefficient-point).
+(blueprint: lemma-perfect-complexes-geometric-point).
 Proof: exact universe lift commutes with homology. Its module equivalence identifies
 cohomology spaces and preserves their dimensions and the same finite support. -/
 theorem pointFibreModuleLift_mem (F : Type u) [Field F]
@@ -235,7 +235,7 @@ theorem pointFibreModuleLift_mem (F : Type u) [Field F]
     exact (Module.Finite.equiv_iff (e i).toLinearEquiv).mp hfin
 
 /-- The actual universe lift on the point's bounded finite-dimensional target.
-Source: blueprint order 1509 (blueprint: def-weil-finite-coefficient-point). -/
+Source: blueprint order 1509 (blueprint: lemma-perfect-complexes-geometric-point). -/
 noncomputable def pointFibreSizeLift (F : Type u) [Field F] :
     (DerivedCategory.pointFiniteDimensional F).FullSubcategory ⥤
       (DerivedCategory.pointFiniteDimensional (ULift.{u + 1, u} F)).FullSubcategory :=
@@ -245,7 +245,7 @@ noncomputable def pointFibreSizeLift (F : Type u) [Field F] :
 
 /-- The restricted universe lift is an equivalence, rather than an extra size assumption.
 Source: blueprint order 1509, work in a universe containing the point categories
-(blueprint: def-weil-finite-coefficient-point).
+(blueprint: lemma-perfect-complexes-geometric-point).
 Proof: over a field every complex is isomorphic in the derived category to its graded
 cohomology with zero differential. Bounded finite-dimensional cohomology therefore has
 a bounded representative of finite-dimensional spaces, all of which are small. This
@@ -361,7 +361,7 @@ theorem pointFibreSizeLift_equivalence (F : Type u) [Field F] :
   exact ⟨faithful, full, ess⟩
 
 /-- The inverse of the specified universe lift, determined by its equivalence counit.
-Source: blueprint order 1509 (blueprint: def-weil-finite-coefficient-point). -/
+Source: blueprint order 1509 (blueprint: lemma-perfect-complexes-geometric-point). -/
 noncomputable def pointFibreSizeDescent (F : Type u) [Field F] :
     (DerivedCategory.pointFiniteDimensional (ULift.{u + 1, u} F)).FullSubcategory ⥤
       (DerivedCategory.pointFiniteDimensional F).FullSubcategory :=
@@ -413,7 +413,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Exactness of evaluation after restriction along constant sections.
 Source: blueprint order 1509, evaluation paragraph
-(blueprint: def-weil-finite-coefficient-point).
+(blueprint: lemma-perfect-complexes-geometric-point).
 Proof: point_proEtale_sections_exact makes evaluation at the final object exact.
 Restriction of scalars preserves kernels and cokernels on underlying groups, hence
 the composite preserves finite limits and finite colimits. -/
@@ -438,13 +438,13 @@ theorem pointFibreFinite_exact (A : Type u) [CommRing A] :
   exact ⟨inferInstance, inferInstance⟩
 
 /-- Kernel preservation for exact point sections.
-Source: blueprint order 1509 (blueprint: def-weil-finite-coefficient-point). -/
+Source: blueprint order 1509 (blueprint: lemma-perfect-complexes-geometric-point). -/
 noncomputable instance pointFibreFiniteLimits (A : Type u) [CommRing A] :
     PreservesFiniteLimits (pointFiniteSections D.k A) :=
   (pointFibreFinite_exact D A).1
 
 /-- Cokernel preservation for exact point sections.
-Source: blueprint order 1509 (blueprint: def-weil-finite-coefficient-point). -/
+Source: blueprint order 1509 (blueprint: lemma-perfect-complexes-geometric-point). -/
 noncomputable instance pointFibreFiniteColimits (A : Type u) [CommRing A] :
     PreservesFiniteColimits (pointFiniteSections D.k A) :=
   (pointFibreFinite_exact D A).2
@@ -452,7 +452,7 @@ noncomputable instance pointFibreFiniteColimits (A : Type u) [CommRing A] :
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Exact integral evaluation and flat fraction-field tensor in the recorded lift.
-Source: blueprint order 1509 (blueprint: def-weil-finite-coefficient-point).
+Source: blueprint order 1509 (blueprint: lemma-perfect-complexes-geometric-point).
 Proof: evaluation is exact by point_proEtale_sections_exact; restriction along the
 constant-section map is exact on underlying groups. The coefficient field is the
 localization of its integer ring at the uniformizer, hence flat. ULift transports
@@ -476,7 +476,7 @@ theorem pointFibreIntegral_exact :
   exact ⟨inferInstance, inferInstance⟩
 
 /-- Flatness of the lifted fraction-field coefficient map.
-Source: blueprint order 1509 (blueprint: def-weil-finite-coefficient-point).
+Source: blueprint order 1509 (blueprint: lemma-perfect-complexes-geometric-point).
 Proof: E is the localization of O_E at its uniformizer. Localization is flat,
 so tensor preserves kernels; its adjunction preserves cokernels. -/
 theorem pointFibreFraction_exact :
@@ -502,38 +502,38 @@ theorem pointFibreFraction_exact :
   infer_instance
 
 /-- Kernel preservation for completed-coefficient evaluation.
-Source: blueprint order 1509 (blueprint: def-weil-finite-coefficient-point). -/
+Source: blueprint order 1509 (blueprint: lemma-perfect-complexes-geometric-point). -/
 noncomputable instance pointFibreIntegralLimits :
     PreservesFiniteLimits (pointIntegralSections l E D.k) :=
   (pointFibreIntegral_exact D l E).1
 
 /-- Cokernel preservation for completed-coefficient evaluation.
-Source: blueprint order 1509 (blueprint: def-weil-finite-coefficient-point). -/
+Source: blueprint order 1509 (blueprint: lemma-perfect-complexes-geometric-point). -/
 noncomputable instance pointFibreIntegralColimits :
     PreservesFiniteColimits (pointIntegralSections l E D.k) :=
   (pointFibreIntegral_exact D l E).2
 
 /-- Kernel preservation for the fraction-field tensor.
-Source: blueprint order 1509 (blueprint: def-weil-finite-coefficient-point). -/
+Source: blueprint order 1509 (blueprint: lemma-perfect-complexes-geometric-point). -/
 noncomputable instance pointFibreFractionLimits :
     PreservesFiniteLimits (ModuleCat.extendScalars.{u + 1, u + 1, u + 1}
       (pointIntegralToField l E)) := (pointFibreFraction_exact l E).1
 
 /-- Cokernel preservation for the fraction-field tensor.
-Source: blueprint order 1509 (blueprint: def-weil-finite-coefficient-point). -/
+Source: blueprint order 1509 (blueprint: lemma-perfect-complexes-geometric-point). -/
 noncomputable instance pointFibreFractionColimits :
     PreservesFiniteColimits (ModuleCat.extendScalars.{u + 1, u + 1, u + 1}
       (pointIntegralToField l E)) := (pointFibreFraction_exact l E).2
 
 /-- Integral derived sections with the recorded canonical coefficient action.
 Source: blueprint order 1509, clause 2
-(blueprint: def-weil-finite-coefficient-point). -/
+(blueprint: lemma-perfect-complexes-geometric-point). -/
 noncomputable abbrev pointFibreIntegralAmbient :=
   (pointIntegralSections l E D.k).mapDerivedCategory
 
 /-- Rational derived sections, tensoring with E after exact integral evaluation.
 Source: blueprint order 1509, clause 3
-(blueprint: def-weil-finite-coefficient-point). -/
+(blueprint: lemma-perfect-complexes-geometric-point). -/
 noncomputable abbrev pointFibreRationalAmbient :
     DerivedCategory (scalarReductionSource.{u, u} l E (Spec (.of D.k))) ⥤
       DerivedCategory (ModuleCat.{u + 1} (ULift.{u + 1, u} E)) :=
@@ -544,7 +544,7 @@ noncomputable abbrev pointFibreRationalAmbient :
 include hl in
 /-- The three section functors land in the recorded point targets.
 Source: blueprint order 1509, clauses 1--3
-(blueprint: def-weil-finite-coefficient-point).
+(blueprint: lemma-perfect-complexes-geometric-point).
 Proof: represent the derived object by a cochain complex. Exact evaluation and flat
 fraction-field tensor have the mapDerivedCategoryFactors comparison with termwise
 sections. Apply all three clauses of lem-weil-point-sections-finiteness. Transport
@@ -595,7 +595,7 @@ theorem pointFibre_sections_mem (n : ℕ) (hn : 1 ≤ n) :
         (pointIntegralToField l E)).mapDerivedCategory.mapIso eI
 
 /-- Clause 2: sections of completed integral modules, with their actual O_E action.
-Source: blueprint order 1509 (blueprint: def-weil-finite-coefficient-point). -/
+Source: blueprint order 1509 (blueprint: lemma-perfect-complexes-geometric-point). -/
 noncomputable def pointIntegralFibre :
     sfIntegralConstructibleCategory l E (Spec (.of D.k)) ⥤
       (DerivedCategory.pointFgComplete
@@ -608,7 +608,7 @@ noncomputable def pointIntegralFibre :
       (fun K ↦ ((pointFibre_sections_mem D l hl E 1 (by decide)).2 K).1)
 
 /-- O_E-linearity of the integral fibre on every derived morphism.
-Source: blueprint order 1509, clause 2 (blueprint: def-weil-finite-coefficient-point).
+Source: blueprint order 1509, clause 2 (blueprint: lemma-perfect-complexes-geometric-point).
 Proof: the constant-to-completion map defines the source and section-module actions.
 Evaluation is linear on chain maps. The equality survives localization on roofs, since
 composition and inversion of quasi-isomorphisms commute with the coefficient action. -/
@@ -664,7 +664,7 @@ theorem pointIntegralFibre_linear
 
 /-- Integral sections tensored with E, followed by the canonical descent of module size.
 Source: blueprint order 1509, clause 3
-(blueprint: def-weil-finite-coefficient-point). -/
+(blueprint: lemma-perfect-complexes-geometric-point). -/
 noncomputable def pointIntegralRationalFibre :
     sfIntegralConstructibleCategory l E (Spec (.of D.k)) ⥤
       (DerivedCategory.pointFiniteDimensional E).FullSubcategory :=
@@ -825,7 +825,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The unique extension to the raw rational Hom tensor groups, fixed on all pure tensors.
 Source: blueprint order 1509, clause 3
-(blueprint: def-weil-finite-coefficient-point).
+(blueprint: lemma-perfect-complexes-geometric-point).
 Proof: exact sections are O_E-linear, and tensor with E converts integral scalar action
 into multiplication in E. Extend each Hom map by the tensor universal property, using
 the canonical localization-field equivalence. Identities and composition hold on pure
@@ -857,7 +857,7 @@ theorem pointRationalFibre_existsUnique :
     exact hJ.2 K M f a
 
 /-- Clause 3: the rational point fibre, with the specified tensor-Hom action.
-Source: blueprint order 1509 (blueprint: def-weil-finite-coefficient-point). -/
+Source: blueprint order 1509 (blueprint: lemma-perfect-complexes-geometric-point). -/
 noncomputable def pointRationalFibre :
     sfRationalConstructibleCategory l E (Spec (.of D.k)) ⥤
       (DerivedCategory.pointFiniteDimensional E).FullSubcategory :=
@@ -866,14 +866,14 @@ noncomputable def pointRationalFibre :
 end PointRationalConstruction
 
 /-- The inverse coefficient-ring identification, without changing the module carrier.
-Source: blueprint order 1509 (blueprint: def-weil-finite-coefficient-point). -/
+Source: blueprint order 1509 (blueprint: lemma-perfect-complexes-geometric-point). -/
 noncomputable abbrev pointFibreCoefficientDown (F : Type u) [Field F] :
     ModuleCat.{u + 1} (ULift.{u + 1, u} F) ⥤ ModuleCat.{u + 1} F :=
   ModuleCat.restrictScalars.{u + 1, u, u + 1}
     (ULift.ringEquiv : ULift.{u + 1, u} F ≃+* F).symm.toRingHom
 
 /-- Coefficient identification is exact.
-Source: blueprint order 1509 (blueprint: def-weil-finite-coefficient-point).
+Source: blueprint order 1509 (blueprint: lemma-perfect-complexes-geometric-point).
 Proof: the inverse coefficient identification is an equivalence, acting identically
 on underlying additive groups and on maps. It preserves kernels and cokernels. -/
 theorem pointFibreCoefficientDown_exact (F : Type u) [Field F] :
@@ -882,19 +882,19 @@ theorem pointFibreCoefficientDown_exact (F : Type u) [Field F] :
   exact ⟨inferInstance, inferInstance⟩
 
 /-- Exactness at kernels for coefficient identification.
-Source: blueprint order 1509 (blueprint: def-weil-finite-coefficient-point). -/
+Source: blueprint order 1509 (blueprint: lemma-perfect-complexes-geometric-point). -/
 noncomputable instance pointFibreCoefficientDownLimits (F : Type u) [Field F] :
     PreservesFiniteLimits (pointFibreCoefficientDown F) :=
   (pointFibreCoefficientDown_exact F).1
 
 /-- Exactness at cokernels for coefficient identification.
-Source: blueprint order 1509 (blueprint: def-weil-finite-coefficient-point). -/
+Source: blueprint order 1509 (blueprint: lemma-perfect-complexes-geometric-point). -/
 noncomputable instance pointFibreCoefficientDownColimits (F : Type u) [Field F] :
     PreservesFiniteColimits (pointFibreCoefficientDown F) :=
   (pointFibreCoefficientDown_exact F).2
 
 /-- Cancelling the coefficient lift is uniquely fixed on every module element.
-Source: blueprint order 1509 (blueprint: def-weil-finite-coefficient-point).
+Source: blueprint order 1509 (blueprint: lemma-perfect-complexes-geometric-point).
 Proof: both carriers are ULift M. Send up x to up x; the two coefficient actions
 are equal since the inverse ring identifications cancel. This is a linear
 bijection natural in M. Every carrier element is up x, giving uniqueness. -/
@@ -924,7 +924,7 @@ theorem pointFibreLiftDown_existsUnique (F : Type u) [Field F] :
     exact he' M x
 
 /-- The normalized cancellation of the two coefficient identifications in D(F).
-Source: blueprint order 1509 (blueprint: def-weil-finite-coefficient-point). -/
+Source: blueprint order 1509 (blueprint: lemma-perfect-complexes-geometric-point). -/
 noncomputable def pointFibreLiftDownIso (F : Type u) [Field F] :
     (pointFibreModuleLift F).mapDerivedCategory ⋙
         (pointFibreCoefficientDown F).mapDerivedCategory ≅
@@ -954,7 +954,7 @@ private theorem tensorMap_smul
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The rational coefficient transport is fixed by its formula on all pure tensors.
-Source: blueprint order 1509, clause 3 (blueprint: def-weil-finite-coefficient-point).
+Source: blueprint order 1509, clause 3 (blueprint: lemma-perfect-complexes-geometric-point).
 Proof: the underlying integral section module is the same in both encodings.
 The balanced map sends up a tensor n to a tensor n, and its inverse lifts a.
 These formulas respect balancing because both constant coefficient maps are the
@@ -1030,7 +1030,7 @@ theorem pointFibreRationalDown_existsUnique :
   | add x y hx hy => simp only [map_add, hx, hy]
 
 /-- The canonical identification of the two rational section encodings.
-Source: blueprint order 1509 (blueprint: def-weil-finite-coefficient-point). -/
+Source: blueprint order 1509 (blueprint: lemma-perfect-complexes-geometric-point). -/
 noncomputable def pointFibreRationalDownIso :
     pointFibreRationalAmbient D l E ⋙
         (pointFibreCoefficientDown E).mapDerivedCategory ≅
@@ -1050,7 +1050,7 @@ noncomputable def pointFibreRationalDownIso :
     (CategoryTheory.Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The common-lift rational object before descending its size.
-Source: blueprint order 1509 (blueprint: def-weil-finite-coefficient-point). -/
+Source: blueprint order 1509 (blueprint: lemma-perfect-complexes-geometric-point). -/
 noncomputable def pointFibreRationalLarge
     (K : sfIntegralConstructibleCategory l E (Spec (.of D.k))) :
     (DerivedCategory.pointFiniteDimensional (ULift.{u + 1, u} E)).FullSubcategory :=
@@ -1058,7 +1058,7 @@ noncomputable def pointFibreRationalLarge
     ((pointFibre_sections_mem D l hl E 1 (by decide)).2 K).2⟩
 
 /-- The specified size-descent counit identifies the small fibre with actual sections.
-Source: blueprint order 1509 (blueprint: def-weil-finite-coefficient-point). -/
+Source: blueprint order 1509 (blueprint: lemma-perfect-complexes-geometric-point). -/
 noncomputable def pointIntegralRationalNormalization
     (K : sfIntegralConstructibleCategory l E (Spec (.of D.k))) :
     (ModuleCat.uliftFunctor.{u + 1, u} E).mapDerivedCategory.obj
@@ -1074,14 +1074,14 @@ noncomputable def pointIntegralRationalNormalization
     (pointFibreRationalDownIso D l E).app K.obj
 
 /-- The object identity fixed by rationalization's defining universal property.
-Source: blueprint order 1509 (blueprint: def-weil-finite-coefficient-point). -/
+Source: blueprint order 1509 (blueprint: lemma-perfect-complexes-geometric-point). -/
 noncomputable def pointRationalFibreObjIso
     (K : sfRationalConstructibleCategory l E (Spec (.of D.k))) :
     (pointRationalFibre D l hl E).obj K ≅ (pointIntegralRationalFibre D l hl E).obj K.obj :=
   eqToIso ((pointRationalFibre_existsUnique D l hl E).exists.choose_spec.1 K)
 
 /-- Rational normalization with the specified raw-localization object equality inserted.
-Source: blueprint order 1509 (blueprint: def-weil-finite-coefficient-point). -/
+Source: blueprint order 1509 (blueprint: lemma-perfect-complexes-geometric-point). -/
 noncomputable def pointRationalNormalization
     (K : sfRationalConstructibleCategory l E (Spec (.of D.k))) :
     (ModuleCat.uliftFunctor.{u + 1, u} E).mapDerivedCategory.obj
@@ -1099,7 +1099,7 @@ set_option linter.unusedSectionVars false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Scalar tensor commutes with carrier lift by the prescribed pure-tensor map.
-Source: blueprint order 1509, clause 4 (blueprint: def-weil-finite-coefficient-point).
+Source: blueprint order 1509, clause 4 (blueprint: lemma-perfect-complexes-geometric-point).
 Proof: send up (a tensor x) to a tensor up x. Balancing is unchanged and the
 inverse sends a tensor up x to up (a tensor x). The formulas commute with all
 module maps. Pure tensors generate, giving uniqueness. -/
@@ -1152,7 +1152,7 @@ theorem pointFibreTensorLift_existsUnique :
         simp only [map_add, hx, hy]
 
 /-- The canonical tensor/lift comparison descended through localization.
-Source: blueprint order 1509 (blueprint: def-weil-finite-coefficient-point). -/
+Source: blueprint order 1509 (blueprint: lemma-perfect-complexes-geometric-point). -/
 noncomputable def pointFibreTensorLiftIso :
     DerivedCategory.fieldDerivedScalarExtension ι.toRingHom ⋙
         (ModuleCat.uliftFunctor.{u + 1, u} L).mapDerivedCategory ≅
@@ -1306,7 +1306,7 @@ set_option backward.isDefEq.respectTransparency.types false in
       (pointFibreTensorLiftIso l E L ι).symm
 
 /-- The rational scalar comparison is uniquely fixed by the recorded sections comparison.
-Source: blueprint order 1509, clause 4 (blueprint: def-weil-finite-coefficient-point).
+Source: blueprint order 1509, clause 4 (blueprint: lemma-perfect-complexes-geometric-point).
 Proof: identify the carrier-only lift with the fully faithful size lift followed by
 coefficient restriction. On integral objects, compose the normalized sections scalar
 comparison with the size-descent counits and the tensor/lift comparison. Cancel the
@@ -1411,12 +1411,12 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types true
 
 /-- The normalized rational scalar comparison used on common-stage representatives.
-Source: blueprint order 1509 (blueprint: def-weil-finite-coefficient-point). -/
+Source: blueprint order 1509 (blueprint: lemma-perfect-complexes-geometric-point). -/
 noncomputable def pointRationalFibreScalarIso :=
   (pointRationalFibreScalar_existsUnique D l hl E L ι).exists.choose
 
 /-- The tensor tower comparison restricted to the recorded finite-dimensional targets.
-Source: blueprint order 1509 (blueprint: def-weil-finite-coefficient-point). -/
+Source: blueprint order 1509 (blueprint: lemma-perfect-complexes-geometric-point). -/
 noncomputable def pointFibreFdTensorTower {F G H : Type u}
     [Field F] [Field G] [Field H] (f : F →+* G) (g : G →+* H) :
     DerivedCategory.pointFdScalarExtension f ⋙ DerivedCategory.pointFdScalarExtension g ≅
@@ -1428,7 +1428,7 @@ noncomputable def pointFibreFdTensorTower {F G H : Type u}
 variable (Ω : Type u) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
 
 /-- The point fibre at a finite stage, with the recorded Shrink coefficient identification.
-Source: blueprint order 1509, clause 4 (blueprint: def-weil-finite-coefficient-point). -/
+Source: blueprint order 1509, clause 4 (blueprint: lemma-perfect-complexes-geometric-point). -/
 noncomputable def pointStageFibre (F : Padic.FiniteCoefficientFields l Ω) :
     GeneralAlgebraicallyClosedCoefficients.Stage l Ω (Spec (.of D.k)) F ⥤
       (DerivedCategory.pointFiniteDimensional F.val).FullSubcategory :=
@@ -1436,7 +1436,7 @@ noncomputable def pointStageFibre (F : Padic.FiniteCoefficientFields l Ω) :
     DerivedCategory.pointFdScalarExtension (Shrink.algEquiv ℚ_[l] F.val).toRingHom
 
 /-- The small coefficient models give the same inclusion square as the actual subfields.
-Source: blueprint order 1509 (blueprint: def-weil-finite-coefficient-point).
+Source: blueprint order 1509 (blueprint: lemma-perfect-complexes-geometric-point).
 Proof: coefficientInclusion is defined by conjugating the actual inclusion with the
 Shrink algebra equivalences. Cancelling the equivalence with its inverse gives the
 equality of ring maps, including repeated fields and identity inclusions. -/
@@ -1450,7 +1450,7 @@ theorem pointStageCoefficientSquare (F G : Padic.FiniteCoefficientFields l Ω) (
   simp [AlgebraicallyClosedCoefficients.coefficientInclusion]
 
 /-- The coefficient-square comparison, made from the canonical tensor tower isomorphisms.
-Source: blueprint order 1509 (blueprint: def-weil-finite-coefficient-point). -/
+Source: blueprint order 1509 (blueprint: lemma-perfect-complexes-geometric-point). -/
 noncomputable def pointStageTensorSquare
     (F G : Padic.FiniteCoefficientFields l Ω) (h : F ≤ G) :
     DerivedCategory.pointFdScalarExtension
@@ -1470,7 +1470,7 @@ attribute [local irreducible] pointStageTensorSquare
 
 /-- The finite-stage sections comparison with both recorded coefficient transports.
 Its inverse is the beta used to send common-stage representatives to the target.
-Source: blueprint order 1509, clause 4 (blueprint: def-weil-finite-coefficient-point). -/
+Source: blueprint order 1509, clause 4 (blueprint: lemma-perfect-complexes-geometric-point). -/
 noncomputable def pointStageFibreScalarIso
     (F G : Padic.FiniteCoefficientFields l Ω) (h : F ≤ G) :
     GeneralAlgebraicallyClosedCoefficients.stageTransition l Ω (Spec (.of D.k)) F G h ⋙
@@ -1505,7 +1505,7 @@ noncomputable def pointStageFibreScalarIso
 end PointStageScalarConstruction
 
 /-- The algebraically closed fibre keeps the finite coefficient stage of its object.
-Source: blueprint order 1509, clause 4 (blueprint: def-weil-finite-coefficient-point). -/
+Source: blueprint order 1509, clause 4 (blueprint: lemma-perfect-complexes-geometric-point). -/
 noncomputable def pointQbarFibreObj
     (A : generalAlgebraicallyClosedConstructibleCategory l Ω (Spec (.of D.k))) :
     DerivedCategory.PointFdQbar l Ω :=

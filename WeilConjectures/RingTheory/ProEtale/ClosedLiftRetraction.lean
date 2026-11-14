@@ -15,7 +15,8 @@ For an ind-étale `A ⧸ I`-algebra `C̄`, the lift `H_A(C̄)` of `Algebra.Close
 coreflection of `C̄` into ind-étale `A`-algebras: for every ind-étale `A`-algebra `D`, composition
 with `H_A(C̄) ⟶ C̄` is a bijection `Hom_A(D, H_A(C̄)) ≃ Hom_A(D, C̄)`
 (`Algebra.ClosedLift.homEquiv`, a reformulation of the adjunction
-`Algebra.ClosedLift.exists_natural_homEquiv`, blueprint `lem-exc-closed-lift-adjunction`).
+`Algebra.ClosedLift.exists_natural_homEquiv`, blueprint
+`proposition-extension-zero-restriction-closed-subscheme`).
 
 Consequences: retractions of faithfully flat ind-étale covers of `C̄` lift to `H_A(C̄)`
 (`Algebra.ClosedLift.exists_retraction`), and every nonempty clopen subset of `Spec H_A(C̄)` meets

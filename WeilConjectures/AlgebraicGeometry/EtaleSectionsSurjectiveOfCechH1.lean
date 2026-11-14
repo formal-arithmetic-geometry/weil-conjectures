@@ -83,7 +83,7 @@ Source: Stacks Project, Lemma 03F8 (lemma-ses-cech-h1).
 (blueprint: lem-weil-pbc-ses-cech-h1-surjective)
 
 Proof (the node's six steps). (1) Short exactness makes `S.g` an epimorphism and `S.f`
-its kernel inclusion. By lem-weil-pbc-sheafification-exact, kernels are computed
+its kernel inclusion. By situation-conventions, kernels are computed
 sectionwise, so the section map of `S.f` is injective with image the kernel of `S.g`.
 (2) Fix a section `h` of `S.X₃` over `U`. The epimorphism is locally surjective by
 lem-weil-pbc-abelian-sheaf-epi-locally-surjective, so `h` has local lifts on a covering.

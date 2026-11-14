@@ -18,7 +18,7 @@ Let `ψ : C[X₁, …, X_d] ⟶ A` be flat and `I = (ψ(X₁), …, ψ(X_d))`, s
 section in étale coordinates. For a ring map `a : A ⟶ A'` compatible with a flat
 `ψ' : C'[X₁, …, X_d] ⟶ A'` over some `C ⟶ C'`, the extended Rees algebra commutes with base
 change: `A'[t, (I A') t⁻¹] = A' ⊗_A A[t, I t⁻¹]`, although `a` need not be flat. This is the
-ring-theoretic input of blueprint `sk-lem-geometry` (5). The proof pastes flat base change of
+ring-theoretic input of blueprint `prose-09-12` (5). The proof pastes flat base change of
 extended Rees algebras with the base change of the origin chart `C[X][t, (X) t⁻¹] ≅ C[t][U]`.
 
 ## Main statements

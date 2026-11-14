@@ -17,6 +17,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
 public import WeilConjectures.Mathlib.RingTheory.Flat.LocallyFree
 public import WeilConjectures.Mathlib.RingTheory.Etale.Field
 public import WeilConjectures.Mathlib.RingTheory.Etale.FiberDegree
+public import Mathlib.RingTheory.Finiteness.ModuleFinitePresentation
 
 /-!
 # The degree of the fibre of an affine morphism at a point
@@ -689,7 +690,7 @@ lemma Scheme.Hom.apply_genericPoint_of_isDominant [IrreducibleSpace X] [Irreduci
   have := (genericPoint_spec X).image f.continuous
   rwa [Set.image_univ, f.denseRange.closure_range] at this
 
-/-- Blueprint `lem-sc-finite-constant-length-flat`: Finite morphisms with constant fibre length
+/-- Blueprint `proposition-multiplication-n--1`: Finite morphisms with constant fibre length
 are flat (degree part).
 
 If a finite morphism `f : X ⟶ Y` from an integral scheme has all fibres of degree `n`, then
@@ -751,7 +752,7 @@ private lemma Scheme.Hom.flat_and_finrank_of_fiberDegree_eq_of_affine {R : CommR
 
 variable (f : X ⟶ Y) [IsFinite f] [LocallyOfFinitePresentation f] [IsReduced Y] {n : ℕ}
 
-/-- Blueprint `lem-sc-finite-constant-length-flat`: Finite morphisms with constant fibre length
+/-- Blueprint `proposition-multiplication-n--1`: Finite morphisms with constant fibre length
 are flat.
 
 A finite morphism `f : X ⟶ Y` of finite presentation to a reduced scheme, all of whose fibres
@@ -766,7 +767,7 @@ theorem Scheme.Hom.flat_of_fiberDegree_eq (h : ∀ y, f.fiberDegree y = n) : Fla
   exact (flat_and_finrank_of_fiberDegree_eq_of_affine (pullback.snd f (Y.affineCover.f i))
     fun y ↦ (Scheme.Hom.fiberDegree_of_isPullback f (.of_hasPullback _ _) y).trans (h _)).1
 
-/-- Blueprint `lem-sc-finite-constant-length-flat`: Finite morphisms with constant fibre length
+/-- Blueprint `proposition-multiplication-n--1`: Finite morphisms with constant fibre length
 are flat.
 
 A finite morphism `f : X ⟶ Y` of finite presentation to a reduced scheme, all of whose fibres
@@ -848,7 +849,7 @@ theorem Scheme.Hom.fiberDegree_eq_of_forall_isClosed
 
 variable [LocallyOfFinitePresentation f] [IsReduced Y]
 
-/-- Blueprint `lem-sc-finite-constant-length-flat`: Finite morphisms with constant fibre length
+/-- Blueprint `proposition-multiplication-n--1`: Finite morphisms with constant fibre length
 are flat.
 
 A finite morphism `f : X ⟶ Y` of finite presentation to a reduced Jacobson scheme (for example
@@ -858,7 +859,7 @@ theorem Scheme.Hom.flat_of_fiberDegree_eq_of_isClosed
     (h : ∀ y : Y, IsClosed {y} → f.fiberDegree y = n) : Flat f :=
   f.flat_of_fiberDegree_eq (f.fiberDegree_eq_of_forall_isClosed h)
 
-/-- Blueprint `lem-sc-finite-constant-length-flat`: Finite morphisms with constant fibre length
+/-- Blueprint `proposition-multiplication-n--1`: Finite morphisms with constant fibre length
 are flat.
 
 A finite morphism `f : X ⟶ Y` of finite presentation to a reduced Jacobson scheme, whose fibres
@@ -869,7 +870,7 @@ theorem Scheme.Hom.finrank_eq_of_fiberDegree_eq_of_isClosed
   f.finrank_eq_of_fiberDegree_eq (f.fiberDegree_eq_of_forall_isClosed h) y
 
 omit [LocallyOfFinitePresentation f] [IsReduced Y] in
-/-- Blueprint `lem-sc-finite-constant-length-flat`: Finite morphisms with constant fibre length
+/-- Blueprint `proposition-multiplication-n--1`: Finite morphisms with constant fibre length
 are flat (degree part).
 
 If a finite morphism `f : X ⟶ Y` from an integral scheme to a Jacobson scheme has all fibres

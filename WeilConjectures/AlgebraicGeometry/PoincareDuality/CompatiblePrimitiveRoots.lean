@@ -473,8 +473,8 @@ private noncomputable def residuesRestrictionIso
 
 /-- Compatible primitive roots identify the abelian root and constant residue diagrams.
 
-Source: clause 1 of `det-def-sp-tate-twist-locally-free` in the current blueprint,
-used in the local rank-one construction of `sk-def-sp-tate-twist`.
+Source: clause 1 of `definition-tate-twists` in the current blueprint,
+used in the local rank-one construction of `definition-tate-twists`.
 
 Proof: cover X by affine opens, then by spectra of same-universe faithfully flat
 ind-etale w-contractible algebras. Over such a ring, every surjective affine weakly

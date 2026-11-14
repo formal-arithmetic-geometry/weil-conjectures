@@ -52,7 +52,7 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
 /-- **Integral smooth base change along affine spaces for the geometric generic fibre** (the
 `𝒪_E`-coefficient special case, for the projection `π : 𝔸ⁿ_𝒴 ⟶ 𝒴`, of smooth base change; the
-blueprint node `sbc-thm-bounded-derived-smooth-base-change` is the torsion étale statement): for
+blueprint node `theorem-smooth-base-change-all-admissible--1` is the torsion étale statement): for
 the inclusion `j : 𝒴_Ω ⟶ 𝒴` of the geometric generic fibre of the deformation
 model `𝒴 = 𝒟_I Y` and the cartesian square of `j` along `π`, the base change morphism
 `Lπ^* Rj_* ⟶ Rj'_* Lπ'^*` with coefficients `𝒪_E` is invertible at `Lε^* K₀` for every bounded

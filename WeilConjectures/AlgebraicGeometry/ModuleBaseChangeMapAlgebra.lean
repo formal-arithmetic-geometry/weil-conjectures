@@ -148,7 +148,6 @@ private theorem tensor_hom_ext {S : Scheme.{v}} {M N P : S.Modules}
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 250000 in
 -- The adjunction and tensor comparisons require elaborating several sheafification types.
 /-- The canonical base change map on structure sheaves has adjoint `f_*(g'^sharp)`
 and preserves multiplication and units. The multiplications are characterized on pure

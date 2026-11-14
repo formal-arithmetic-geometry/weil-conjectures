@@ -56,7 +56,6 @@ end
 
 variable {Λ : Type (u + 1)} [CommRing Λ] [IsNoetherianRing Λ] {X : Scheme.{u}}
 
-set_option synthInstance.maxHeartbeats 400000 in
 -- the instances `WEqualsLocallyBijective` and `HasSheafCompose` on the small étale site take
 -- long to synthesize
 /-- Blueprint `lem-sf-reduction-flat-model`: Reduction of the flat model.

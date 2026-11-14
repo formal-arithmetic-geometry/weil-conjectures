@@ -85,7 +85,7 @@ import WeilConjectures.CategoryTheory.ProductShift.ProductCommShift
 
 /-! # Strict Roos cone calculus
 
-Source: blueprint main-20261015, sec-proetale-coefficients,
+Source: blueprint main-20261015, chap-The-pro-etale-site,
 sk-lem-pe-derived-nakayama-first-reduction, Cones paragraph; Stacks Tags 08TC,
 07KC, 014E and 011G (blueprint: lem-pe-roos-cone-calculus).
 
@@ -1513,7 +1513,7 @@ set_option backward.isDefEq.respectTransparency.types true in
 Roos derived limits, and has the specified natural cone and coherent shift comparisons,
 including compatibility with the actual zero-second-coordinate augmentations.
 
-Source: blueprint main-20261015, sec-proetale-coefficients,
+Source: blueprint main-20261015, chap-The-pro-etale-site,
 sk-lem-pe-derived-nakayama-first-reduction, Cones paragraph; Stacks 08TC, 07KC,
 014E and 011G (blueprint: lem-pe-roos-cone-calculus).
 
@@ -1523,10 +1523,10 @@ Proof plan:
    The existing roosF of def-weil-strict-roos-model is Cone(1-T)[-1]; expanding its
    coordinates gives (dv,-du-(1-T)v). Projectionwise verification gives additivity,
    the diagonal map formula and naturality of the zero-second-coordinate augmentation.
-2. By det-pe-products-derived, the product of levelwise quasi-isomorphisms is a
+2. By proposition-exact-products--2, the product of levelwise quasi-isomorphisms is a
    quasi-isomorphism. Apply lem-pe-roos-coordinates-quasi-iso with endomorphism -(1-T)
    to get the same result for the diagonal Roos map; no boundedness is required.
-3. The actual localized product cone is limiting by det-pe-products-derived. Thus Q(1-T)
+3. The actual localized product cone is limiting by proposition-exact-products--2. Thus Q(1-T)
    is the derived transition endomorphism. Inverse rotation of the cone triangle using
    def-weil-triangulated-category gives the localized mapping-cocone triangle, with
    projection v and last map w↦(0,w). This is def-weil-derived-limit's Roos triangle;

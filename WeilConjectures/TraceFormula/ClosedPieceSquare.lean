@@ -14,7 +14,8 @@ public import WeilConjectures.TraceFormula.SourceExchangeKunnethAux
 
 Let `h : X ⟶ X`, `v : Lh^* K ⟶ K` and `x` a rational point fixed by `h`. The closed piece
 coefficient `u^Z = [x, x]_! v_x` on `K^Z = Rx_* Lx^* K` is compatible with `v` along the unit
-`η : K ⟶ Rx_* Lx^* K` (blueprint `prop-trf-trace-class-additivity`, proof of item 2, step (b)):
+`η : K ⟶ Rx_* Lx^* K` (blueprint `proposition-additivity-trace-classes--2`, proof of item 2, step
+(b)):
 ```
 u^Z ∘ Lh^* η = η ∘ v        (up to R(𝟙)^! ≅ 𝟭),
 ```
@@ -138,8 +139,8 @@ variable (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) {h : X ⟶ X}
   {x : RationalPoint X} (hx : x ≫ h = x)
 
 /-- **The closed piece coefficient is compatible with the unit** (blueprint
-`prop-trf-trace-class-additivity`, proof of item 2, step (b)): for `x` fixed by `h`, the closed
-piece coefficient `u^Z = [x, x]_! v_x` satisfies `u^Z ∘ Lh^* η = η ∘ v` for the unit
+`proposition-additivity-trace-classes--2`, proof of item 2, step (b)): for `x` fixed by `h`, the
+closed piece coefficient `u^Z = [x, x]_! v_x` satisfies `u^Z ∘ Lh^* η = η ∘ v` for the unit
 `η : K ⟶ Rx_* Lx^* K`, up to `R(𝟙)^! ≅ 𝟭`. -/
 theorem upperStar_map_unit_comp_graphClosedPieceCoeff :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ h).map

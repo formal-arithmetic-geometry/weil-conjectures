@@ -33,7 +33,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Blueprint `lem-pur-dnc-section-geometry` (2), the coordinates.
+/-- Blueprint `prose-09-12` (2), the coordinates.
 
 **Étale charts along a closed section.** Let `g : V ⟶ B` be smooth of relative dimension `c`
 with a closed section `s`. Every point `b` of `B` has an affine open neighbourhood `W`, and

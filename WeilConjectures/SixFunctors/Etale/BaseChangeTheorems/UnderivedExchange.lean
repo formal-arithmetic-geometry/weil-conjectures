@@ -139,7 +139,7 @@ sections of `F` over the closed geometric fibre `X_ȳ = X'_ȳ'`, by the stalk fo
 strict henselisation and the degree-zero comparison
 `AlgebraicGeometry.Etale.isIso_globalSectionsUpperStarMap_geometricFibre`, and the induced
 map of stalks is the identity; geometric stalks are conservative.
-(blueprint: `lemma-weil-pbc-proper-underived-exchange`) -/
+(blueprint: `proposition-proper-base-change-degree-zero`) -/
 @[stacks 0A3T]
 theorem Etale.isIso_baseChangeMap_of_isProper {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X}
     {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : IsPullback g' f' f g) [IsProper f] :

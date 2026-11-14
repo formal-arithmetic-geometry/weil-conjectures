@@ -45,7 +45,7 @@ theorem tprod_ne_zero {v : ∀ i, V i} (hv : ∀ i, v i ≠ 0) : (⨂ₜ[K] i, v
   exact Finset.prod_ne_zero_iff.2 (fun i _ ↦ hφ i) this
 
 /-- If `α` is an eigenvalue of `f`, then `αⁿ` is an eigenvalue of the tensor power
-`f^{⊗n} = ⨂_{i < n} f`. (blueprint: `p-linear-spectra`) -/
+`f^{⊗n} = ⨂_{i < n} f`. (blueprint: `lemma-filtrations-spectra`) -/
 theorem hasEigenvalue_map_pow {W : Type*} [AddCommGroup W] [Module K W] {f : Module.End K W}
     {α : K} (hα : f.HasEigenvalue α) (n : ℕ) :
     Module.End.HasEigenvalue (map fun _ : Fin n ↦ f) (α ^ n) := by

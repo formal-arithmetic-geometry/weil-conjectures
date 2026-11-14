@@ -14,7 +14,7 @@ Let `R` be a commutative ring, `B` a sheaf of `R`-algebras on `X_proét`, `j : U
 quasi-compact open immersion and `i : Z ⟶ X` a closed immersion onto its complement. This file
 proves, for the operations on `B`-module sheaves of
 `WeilConjectures.SixFunctors.ProEtale.RingSheaf.Defs`, the assertions (1)–(3) of blueprint
-`det-sf-open-closed-sequence-ring-sheaf`:
+`proposition-extension-zero-restriction-closed-subscheme`:
 
 * `j^*`, `j_!`, `i^*` are exact, `i_*` is exact
   (`ProEtale.RingSheaf.preservesFiniteColimits_lowerStar_of_isCompl`);
@@ -77,8 +77,8 @@ instance preservesFiniteColimits_openImmersionLowerShriek :
     ).isLeftAdjoint
   inferInstance
 
-/-- Blueprint `det-sf-open-closed-sequence-ring-sheaf`, part (1): the extension by zero on
-module sheaves is left exact, since it is so on underlying sheaves. -/
+/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme`, part (1): the extension by
+zero on module sheaves is left exact, since it is so on underlying sheaves. -/
 instance preservesFiniteLimits_openImmersionLowerShriek :
     PreservesFiniteLimits (openImmersionLowerShriek B i j hij) := by
   have : PreservesFiniteLimits (openImmersionLowerShriek B i j hij ⋙ Mod.forget B) :=
@@ -86,9 +86,9 @@ instance preservesFiniteLimits_openImmersionLowerShriek :
   exact preservesFiniteLimits_of_reflects_of_preserves _ (Mod.forget B)
 
 include j hij in
-/-- Blueprint `det-sf-open-closed-sequence-ring-sheaf`, part (2), and blueprint
-`lem-exc-proetale-closed-exact` for module sheaves: the pushforward `i_*` along a closed
-immersion with quasi-compact open complement is exact on module sheaves. -/
+/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme`, part (2), and blueprint
+`proposition-extension-zero-restriction-closed-subscheme--4` for module sheaves: the pushforward
+`i_*` along a closed immersion with quasi-compact open complement is exact on module sheaves. -/
 theorem preservesFiniteColimits_lowerStar_of_isCompl :
     PreservesFiniteColimits (lowerStar B i) := by
   have := ProEtale.preservesFiniteColimits_lowerStar_of_isCompl (R := R) i j hij
@@ -98,8 +98,8 @@ theorem preservesFiniteColimits_lowerStar_of_isCompl :
 
 /-! ### Units, counits and vanishing -/
 
-/-- Blueprint `det-sf-open-closed-sequence-ring-sheaf`, part (2): the counit `i^* i_* G ⟶ G`
-on module sheaves is an isomorphism. -/
+/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme`, part (2): the counit
+`i^* i_* G ⟶ G` on module sheaves is an isomorphism. -/
 instance isIso_upperStarLowerStarAdjunction_counit :
     IsIso (upperStarLowerStarAdjunction B i).counit := by
   have (N : Mod (Sheaf (ProEt.topology Z) (ModuleCat.{u + 1} R))
@@ -111,8 +111,8 @@ instance isIso_upperStarLowerStarAdjunction_counit :
     exact isIso_of_reflects_iso _ (Mod.forget _)
   exact NatIso.isIso_of_isIso_app _
 
-/-- Blueprint `det-sf-open-closed-sequence-ring-sheaf`, part (2): the pushforward along a
-closed immersion is fully faithful on module sheaves. -/
+/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme`, part (2): the pushforward
+along a closed immersion is fully faithful on module sheaves. -/
 noncomputable def fullyFaithfulLowerStar : (lowerStar B i).FullyFaithful :=
   (upperStarLowerStarAdjunction B i).fullyFaithfulROfIsIsoCounit
 
@@ -120,8 +120,8 @@ instance : (lowerStar B i).Full := (fullyFaithfulLowerStar B i).full
 
 instance : (lowerStar B i).Faithful := (fullyFaithfulLowerStar B i).faithful
 
-/-- Blueprint `det-sf-open-closed-sequence-ring-sheaf`, part (1): the unit `N ⟶ j^* j_! N` on
-module sheaves is an isomorphism. -/
+/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme`, part (1): the unit
+`N ⟶ j^* j_! N` on module sheaves is an isomorphism. -/
 instance isIso_openImmersionLowerShriekUpperStarAdjunction_unit :
     IsIso (openImmersionLowerShriekUpperStarAdjunction B i j hij).unit := by
   have (N : Mod (Sheaf (ProEt.topology U) (ModuleCat.{u + 1} R))
@@ -141,8 +141,8 @@ noncomputable def fullyFaithfulOpenImmersionLowerShriek :
 
 omit [IsClosedImmersion i] [QuasiCompact j] in
 include hij in
-/-- Blueprint `det-sf-open-closed-sequence-ring-sheaf`, part (2): `j^* i_* = 0` on module
-sheaves. -/
+/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme`, part (2): `j^* i_* = 0` on
+module sheaves. -/
 lemma isZero_upperStar_obj_lowerStar_obj
     (N : Mod (Sheaf (ProEt.topology Z) (ModuleCat.{u + 1} R))
       ((i)^*[ModuleCat.{u + 1} R].obj B)) :
@@ -179,11 +179,11 @@ noncomputable def openClosedShortComplexMapForgetIso
       simp only [Iso.refl_hom, Category.id_comp, Category.comp_id]
       exact (upperStarLowerStarAdjunction_unit_app_hom B i M).symm)
 
-/-- Blueprint `det-sf-open-closed-sequence-ring-sheaf`, part (3), and the exact sequence of
-blueprint `sk-prop-sf-open-closed-triangle`: let `i : Z ⟶ X` be a closed immersion with
-quasi-compact open complement `j : U ⟶ X` and `B` a sheaf of `R`-algebras on `X_proét`. For
-every `B`-module sheaf `M` the sequence `0 ⟶ j_! j^* M ⟶ M ⟶ i_* i^* M ⟶ 0`, formed by the
-counit of `j_! ⊣ j^*` and the unit of `i^* ⊣ i_*`, is exact. It is so on underlying sheaves
+/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme`, part (3), and the exact
+sequence of blueprint `proposition-extension-zero-restriction-closed-subscheme`: let `i : Z ⟶ X` be
+a closed immersion with quasi-compact open complement `j : U ⟶ X` and `B` a sheaf of `R`-algebras on
+`X_proét`. For every `B`-module sheaf `M` the sequence `0 ⟶ j_! j^* M ⟶ M ⟶ i_* i^* M ⟶ 0`, formed
+by the counit of `j_! ⊣ j^*` and the unit of `i^* ⊣ i_*`, is exact. It is so on underlying sheaves
 (`AlgebraicGeometry.ProEtale.shortExact_openClosedShortComplex`), and the forgetful functor
 reflects short exactness. -/
 theorem shortExact_openClosedShortComplex

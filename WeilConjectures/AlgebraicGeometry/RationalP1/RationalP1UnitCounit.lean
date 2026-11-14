@@ -46,7 +46,7 @@ set_option linter.unusedVariables false
 /-! # The specified rational projective-line unit and counit
 
 Source: blueprint main-20261015, rational projective-line adjunction, clauses 1--3
-(blueprint: det-prop-p1-adjunction-rational-unit-counit).
+(blueprint: proposition-projective-line-rational-coefficients--1).
 -/
 
 @[expose] public noncomputable section
@@ -209,14 +209,11 @@ variable (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateFiel
   [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
   [IsSeparated (Y ↘ Spec (.of k))]
 
-set_option linter.style.maxHeartbeats false in
-set_option maxHeartbeats 800000 in
--- The explicit restriction witnesses require extra elaboration heartbeats.
 -- Keep fixed site and derived comparisons folded during elaboration.
 include k p hpl in
 /-- The actual two functors preserve Loc of finite-constant-model Dbc.
 Source: blueprint unit/counit proof steps 1--5 and 11
-(blueprint: det-prop-p1-adjunction-rational-unit-counit).
+(blueprint: proposition-projective-line-rational-coefficients--1).
 Proof: proper direct image preserves bounded constructibility; pullback and the invertible
 Tate line preserve bounded constructibility. These exact functors preserve arbitrary
 coproducts on the rational localizing categories. The universal property of the localizing
@@ -235,10 +232,9 @@ theorem localizingPreservation :
   have h := localizingPreservationChecks l c k p hpl Y
   exact ⟨h.pushQ.preserves, h.twistedPullQ.preserves⟩
 
-set_option maxHeartbeats 800000 in
 -- Keep fixed site and derived comparisons folded during elaboration.
 /-- The restriction of the actual direct image, with the inherited full Hom sets.
-Source: blueprint unit/counit (blueprint: det-prop-p1-adjunction-rational-unit-counit). -/
+Source: blueprint unit/counit (blueprint: proposition-projective-line-rational-coefficients--1). -/
 def push : rationalLocalizingCategory (coefficient l c).X (ProjectiveLine Y) ⥤
     rationalLocalizingCategory (coefficient l c).X Y :=
   (CategoryTheory.localizingClosure
@@ -247,10 +243,9 @@ def push : rationalLocalizingCategory (coefficient l c).X (ProjectiveLine Y) ⥤
       moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y))
     (fun M ↦ (localizingPreservation l c k p hpl Y).1 M.obj M.property)
 
-set_option maxHeartbeats 800000 in
 -- Keep fixed site and derived comparisons folded during elaboration.
 /-- Pullback followed by the positive Tate twist and shift two, restricted to Loc(Dbc).
-Source: blueprint unit/counit (blueprint: det-prop-p1-adjunction-rational-unit-counit). -/
+Source: blueprint unit/counit (blueprint: proposition-projective-line-rational-coefficients--1). -/
 def exceptional : rationalLocalizingCategory (coefficient l c).X Y ⥤
     rationalLocalizingCategory (coefficient l c).X (ProjectiveLine Y) :=
   (CategoryTheory.localizingClosure
@@ -260,11 +255,10 @@ def exceptional : rationalLocalizingCategory (coefficient l c).X Y ⥤
         twist (coefficient l c).X (ProjectiveLine Y) (line l c (ProjectiveLine Y)))
     (fun K ↦ (localizingPreservation l c k p hpl Y).2 K.obj K.property)
 
-set_option maxHeartbeats 800000 in
 -- Keep fixed site and derived comparisons folded during elaboration.
 /-- The type of the two natural transformations, before asserting any triangles.
 Source: blueprint unit/counit clauses 2--3
-(blueprint: det-prop-p1-adjunction-rational-unit-counit). -/
+(blueprint: proposition-projective-line-rational-coefficients--1). -/
 def UnitCounitType : Type (u + 2) :=
   (𝟭 _ ⟶ push l c k p hpl Y ⋙ exceptional l c k p hpl Y) ×
     (exceptional l c k p hpl Y ⋙ push l c k p hpl Y ⟶ 𝟭 _)
@@ -361,11 +355,10 @@ private theorem unit_mate_isIso
   exact selected_projection_isIso l c k p hpl (secondProjection Y) _ _
     (h.pullFirst.preserves M.obj M.property) hline
 
-set_option maxHeartbeats 800000 in
 -- Keep fixed site and derived comparisons folded during elaboration.
 /-- Invertibility of precisely the exchange and twisted projection in the unit formula.
 Source: blueprint unit/counit proof steps 9--11
-(blueprint: det-prop-p1-adjunction-rational-unit-counit).
+(blueprint: proposition-projective-line-rational-coefficients--1).
 Proof: the projection is a relative projective line and is proper. Proper base change
 on the rational localizing categories makes its canonical exchange invertible. The
 proper projection formula and the normalized Cartesian Tate comparison make the twisted
@@ -377,12 +370,11 @@ theorem unitInversions (M : rationalLocalizingCategory (coefficient l c).X (Proj
     (unit_exchange_isIso l c k p hpl Y M) (unit_mate_isIso l c k p hpl Y M)
     (secondLineComparison l c k p hpl Y)
 
-set_option maxHeartbeats 800000 in
 -- Keep fixed site and derived comparisons folded during elaboration.
 include k p hpl in
 /-- Invertibility of precisely the projection appearing in the counit.
 Source: blueprint unit/counit proof step 11
-(blueprint: det-prop-p1-adjunction-rational-unit-counit).
+(blueprint: proposition-projective-line-rational-coefficients--1).
 Proof: apply the proper rational projection formula to q, with factors K and the shifted
 positive Tate line. Both belong to the localizing constructible category. -/
 theorem counitInversion (K : rationalLocalizingCategory (coefficient l c).X Y) :
@@ -403,11 +395,10 @@ theorem counitInversion (K : rationalLocalizingCategory (coefficient l c).X Y) :
   exact projectionMap_isIso_localizing l c k p hpl (ProjectiveLine Y ↘ Y)
     K.obj _ K.property hL
 
-set_option maxHeartbeats 800000 in
 -- Keep fixed site and derived comparisons folded during elaboration.
 /-- Componentwise normalization by the actual canonical ambient formulas.
 Source: blueprint unit/counit clauses 2--3
-(blueprint: det-prop-p1-adjunction-rational-unit-counit). -/
+(blueprint: proposition-projective-line-rational-coefficients--1). -/
 def UnitCounitNormalized (family : Family l Y) (a : UnitCounitType l c k p hpl Y) : Prop :=
   (∀ M : rationalLocalizingCategory (coefficient l c).X (ProjectiveLine Y),
     UnitComponentNormalized (coefficient l c).X Y (line l c) (diagram l c Y family)
@@ -416,11 +407,10 @@ def UnitCounitNormalized (family : Family l Y) (a : UnitCounitType l c k p hpl Y
     CounitComponentNormalized (coefficient l c).X Y (line l c) (diagram l c Y family)
       K.obj (a.2.app K).hom)
 
-set_option maxHeartbeats 800000 in
 -- Keep fixed site and derived comparisons folded during elaboration.
 /-- The fixed formulas form a unique pair of natural transformations.
 Source: blueprint unit/counit proof steps 6--12
-(blueprint: det-prop-p1-adjunction-rational-unit-counit).
+(blueprint: proposition-projective-line-rational-coefficients--1).
 Proof: use the canonical diagonal tensor identification, tensor the fixed class, invert
 the proper exchange and twisted projection, and restrict to the full subcategories.
 For the counit invert the projection and contract the trace. Naturality of all the
@@ -436,11 +426,10 @@ theorem unitCounit_existsUnique (family : Family l Y) :
     (push l c k p hpl Y) (exceptional l c k p hpl Y)
     (by unfold push; rfl) (by unfold exceptional; rfl)
 
-set_option maxHeartbeats 800000 in
 -- Keep fixed site and derived comparisons folded during elaboration.
 /-- The uniquely normalized diagonal unit and trace counit; no adjunction is assumed.
 Source: blueprint unit/counit clauses 2--3
-(blueprint: det-prop-p1-adjunction-rational-unit-counit). -/
+(blueprint: proposition-projective-line-rational-coefficients--1). -/
 def unitCounit (family : Family l Y) : UnitCounitType l c k p hpl Y :=
   (unitCounit_existsUnique l c k p hpl Y family).exists.choose
 

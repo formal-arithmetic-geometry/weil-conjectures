@@ -35,7 +35,8 @@ public import Mathlib.Order.CompletePartialOrder
 # Thick and essentially small constructible finite-Tor complexes
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-brown-hypotheses,
-node det-brown-hypotheses-small (blueprint: det-brown-hypotheses-small).
+node lemma-hypotheses-brown-representability--5 (blueprint:
+lemma-hypotheses-brown-representability--5).
 -/
 
 @[expose] public section
@@ -269,7 +270,8 @@ The alternatives in `_hΛ` are finite discrete `A` killed by an `l`-power, `ℤ_
 `𝒪_E`, `ℚ_[l]`, `E`, and the finite-subextension-valued condensed `ℚ̄_l`.
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-brown-hypotheses,
-node det-brown-hypotheses-small (blueprint: det-brown-hypotheses-small).
+node lemma-hypotheses-brown-representability--5 (blueprint:
+lemma-hypotheses-brown-representability--5).
 
 Proof: finite discrete coefficients are transported through the normalized ordinary
 encoding. The ordinary constructible heart is a weak Serre class, so its bounded

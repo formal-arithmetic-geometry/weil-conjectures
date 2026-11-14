@@ -582,7 +582,7 @@ Proof:
 1. Finite freeness of completed coefficients (lem-weil-finite-free-completed-scalar-
    comparison) and lem-sfb-finite-free-scalar-coordinates express underlying scalar
    extension as a finite sum. Kernels and sheafified cokernels are preserved
-   (def-weil-sheaf-of-modules-category). Thus scalar extension is exact, as is
+   (situation-conventions). Thus scalar extension is exact, as is
    inverse image (lem-weil-proetale-isomorphism-inverse-image). The exact-functor
    derived-factorization and derived-functor nodes compute them termwise on every
    complex, without flatness assumptions on K.

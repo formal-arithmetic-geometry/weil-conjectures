@@ -17,7 +17,8 @@ import WeilConjectures.AlgebraicGeometry.ArtinSchreierDataConstruction
 # The Artin–Schreier sequence
 
 Source: `literature/blueprint/master/blueprint/sec-curve-estimates/lem-sc-second-kummer-divisors/
-lem-sc-as-sequence.md`, node `lem-sc-as-sequence` (blueprint: lem-sc-as-sequence).
+lem-sc-as-sequence.md`, node `lemma-p-torsion-affine-curve-characteristic--3` (blueprint:
+lemma-p-torsion-affine-curve-characteristic--3).
 -/
 
 @[expose] public section
@@ -54,7 +55,8 @@ field of characteristic `p`, with its sectionwise maps specified. It is the sequ
 `Scheme.artinSchreierSequence` of `AlgebraicGeometry.Sites.ArtinSchreier`, with `G = 𝔾ₐ`
 (`Scheme.gaSheaf`), `wp = ℘` (`Scheme.gaArtinSchreier`) and `iota = Scheme.constantZModToGaSheaf`.
 Source: Stacks Project, Étale Cohomology, Section 0A3J, and blueprint
-`lem-sc-as-sequence` (blueprint: lem-sc-as-sequence).
+`lemma-p-torsion-affine-curve-characteristic--3` (blueprint:
+lemma-p-torsion-affine-curve-characteristic--3).
 
 The isomorphism identifies `G` with the universe lift of the recorded étale
 structure-module sheaf. The natural additive equivalences `a` identify its

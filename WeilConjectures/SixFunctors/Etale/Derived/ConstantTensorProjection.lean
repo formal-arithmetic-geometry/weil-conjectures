@@ -20,7 +20,7 @@ every finitely generated `Λ`-module `N`, the projection map
 
 is an isomorphism
 (`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_app_app_constantSingle_of_nat`,
-blueprint `lem-exc-constant-tensor`).
+blueprint `proposition-open-direct-image-preserves-finite`).
 
 As a functor of `N ∈ D(Λ)`, through the constant complex functor `D(Λ) ⥤ D(T_ét, Λ)`
 (`AlgebraicGeometry.Etale.constantFunctor`), the projection map is a natural transformation
@@ -63,7 +63,8 @@ instance preservesColimitsOfShape_constantFunctor (X : Scheme.{u}) (J : Type*) :
     (isTerminalEtaleTerminal X)).mapDerivedCategoryRightDerivedAdjunction
       ).leftAdjoint_preservesColimits.preservesColimitsOfShape
 
-/-- Blueprint `lem-exc-constant-tensor`: Constant coefficient tensor comparison.
+/-- Blueprint `proposition-open-direct-image-preserves-finite`: Constant coefficient tensor
+comparison.
 
 Let `Λ` be a noetherian ring (in the blueprint: a finite ring) and `j : U ⟶ T` a morphism of
 schemes (in the blueprint: an open immersion) such that `Rj_*` on the unbounded derived categories

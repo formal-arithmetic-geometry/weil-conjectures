@@ -10,7 +10,8 @@ import WeilConjectures.SmoothPurity.FrobeniusExchange.CompactSupportScalarEvalua
 
 /-! # Finite evaluation of the compact-support scalar mate
 
-Source: lem-fix-operation-reduction, compact-support paragraph; Stacks 0GL6 and 09AL.
+Source: proposition-six-operations-change-coefficients, compact-support paragraph; Stacks 0GL6 and
+09AL.
 -/
 
 @[expose] public noncomputable section
@@ -27,8 +28,8 @@ namespace WeilConjectures.FrobeniusExchange
 when both the input evaluation and its scalar extension are bounded constructible.
 There is no completeness, cartesian-system, uniform-interval or limit hypothesis.
 
-Source: lem-fix-operation-reduction, compact-support paragraph; Stacks 0GL6, 09AL;
-Zheng, Construction 4.1 and Lemma 4.10.
+Source: proposition-six-operations-change-coefficients, compact-support paragraph; Stacks 0GL6,
+09AL; Zheng, Construction 4.1 and Lemma 4.10.
 (blueprint: lem-sf-compact-support-system-scalar-finite-invertible).
 
 Proof: put A = O_E/(pi_E^(n+1)) and B = O_L/(pi_L^(n+1)), with the recorded

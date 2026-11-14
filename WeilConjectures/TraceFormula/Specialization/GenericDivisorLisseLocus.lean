@@ -85,6 +85,22 @@ theorem Stratification.isFiniteLocallyConstantSheaf_upperStar_interiorUnion
       (Etale.upperStarComp A (S.interiorUnionCover.f i) S.interiorUnion.ι).app F
   exact IsFiniteLocallyConstantSheaf.of_openCover S.interiorUnionCover _
 
+/-- Pulling a complex back into the interiors of its lisse strata gives lisse homology. -/
+private theorem Stratification.isFiniteLocallyConstantSheaf_homology_mapDerivedCategory_upperStar
+    (S : Stratification X) {Y : Scheme.{u}} (g : Y ⟶ X)
+    (hg : Set.range g.base ⊆ Set.range S.interiorUnion.ι.base)
+    (F : DerivedCategory (Sheaf X.smallEtaleTopology A)) (n : ℤ)
+    (hS : ∀ i, IsFiniteLocallyConstantSheaf ((Etale.upperStar A (S.immersion i)).obj
+      ((DerivedCategory.homologyFunctor _ n).obj F))) :
+    IsFiniteLocallyConstantSheaf ((DerivedCategory.homologyFunctor _ n).obj
+      (D(Etale.upperStar A g).obj F)) := by
+  have := S.isFiniteLocallyConstantSheaf_upperStar_interiorUnion _ hS
+  have := IsFiniteLocallyConstantSheaf.upperStar_of_range_subset g S.interiorUnion.ι hg
+    ((DerivedCategory.homologyFunctor _ n).obj F)
+  exact IsFiniteLocallyConstantSheaf.of_iso
+    (F := (Etale.upperStar A g).obj ((DerivedCategory.homologyFunctor _ n).obj F))
+    ((Functor.mapDerivedCategoryHomologyFunctorIso (Etale.upperStar A g) n).app F)
+
 end AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
@@ -149,6 +165,50 @@ theorem exists_opens_inter_subset_image (hX : IsNormalScheme X.left) {h : Γ(X.l
     by_contra hyS
     exact hyR (subset_closure ⟨hyO, hyS⟩)
 
+/-- A dense open in the divisor complement contains the complement in a neighbourhood of
+its generic point, together with the cartesian comparison of the two complements. -/
+private lemma exists_opens_pullback_range_subset (hX : IsNormalScheme X.left) {h : Γ(X.left, ⊤)}
+    (hh : h ≠ 0) {I : X.left.IdealSheafData}
+    (hI : I = IdealSheafData.ofIdealTop (Ideal.span {h})) (ζ : (centre X I).left)
+    (hζ : closure {ζ} ∈ irreducibleComponents (centre X I).left)
+    (D : (overRestrict X I.support.compl).left.Opens)
+    (hD : Dense (D : Set (overRestrict X I.support.compl).left)) :
+    ∃ (V : X.left.Opens)
+      (ζV : (centre (overRestrict X V) (I.comap (overRestrictι X V).left)).left)
+      (w : overRestrict (overRestrict X V) (I.comap (overRestrictι X V).left).support.compl ⟶
+        overRestrict X I.support.compl),
+      (centreMap (overRestrictι X V) I).left ζV = ζ ∧
+      IsPullback w
+        (overRestrictι (overRestrict X V) (I.comap (overRestrictι X V).left).support.compl)
+        (overRestrictι X I.support.compl) (overRestrictι X V) ∧
+      Set.range w.left.base ⊆ Set.range D.ι.base := by
+  have hV := exists_opens_inter_subset_image hX hh hI ζ hζ D hD
+  obtain ⟨V, hζV, hVD⟩ := hV
+  have hζ' : ζ ∈ Set.range (centreMap (overRestrictι X V) I).left := by
+    rw [range_centreMap, Set.mem_preimage, range_overRestrictι]
+    exact hζV
+  obtain ⟨ζV, rfl⟩ := hζ'
+  have hsq := exists_isPullback_overRestrictι_comap I V
+  obtain ⟨w, sq⟩ := hsq
+  have hw : Set.range w.left.base ⊆ Set.range D.ι.base := by
+    rintro _ ⟨x, rfl⟩
+    have hx := congrArg (fun f ↦ f.left.base x) sq.w
+    simp only [Over.comp_left, Scheme.Hom.comp_base, TopCat.hom_comp,
+      ContinuousMap.comp_apply] at hx
+    have hmem : (overRestrictι X I.support.compl).left.base (w.left.base x) ∈
+        (V : Set X.left) ∩ (I.support.compl : Set X.left) := by
+      refine ⟨?_, ?_⟩
+      · rw [hx, ← range_overRestrictι X V]
+        exact ⟨_, rfl⟩
+      · rw [← range_overRestrictι X I.support.compl]
+        exact ⟨_, rfl⟩
+    have hd := hVD hmem
+    obtain ⟨d, hd, hdx⟩ := hd
+    rw [Scheme.Opens.range_ι,
+      ← (overRestrictι X I.support.compl).left.isOpenEmbedding.injective hdx]
+    exact hd
+  exact ⟨V, ζV, w, rfl, sq, hw⟩
+
 end Geometry
 
 open PadicAlgCl
@@ -157,16 +217,13 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [Fact (ringChar k ≠ ℓ)] (k' : Type u) [Field k'] [Algebra k k']
   {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 
-set_option maxHeartbeats 400000 in
--- The elaboration of the derived functors with coefficients `𝔽_E` on the nested open subschemes
--- is expensive.
 /-- **Reduction of the generic vanishing along a divisor to the lisse case** (the shrinking step
-of blueprint `det-sp-generic-divisor`): let `X` be normal, `Z = V(h)`, `j : X ∖ Z ⟶ X`, `ζ` a
-generic point of `Z` and `F` a bounded constructible complex of `𝔽_E`-module objects on `X ∖ Z`.
-There is an open neighbourhood `V` of `ζ` in `X`, with `Z ∩ V = V(h|_V)` and `ζ` corresponding to
-a generic point `ζ_V` of `Z ∩ V`, such that the restriction `K` of `F` to `V ∖ Z` comes from a
-bounded étale complex `F'` with finite locally constant homology sheaves, and the vanishing of
-`Le^* Ψ_V(j_{V!} K)` near `ζ_V` implies that of `Le^* Ψ_X(j_! F)` near `ζ`. -/
+of blueprint `lemma-vanishing-generic-points-principal-divisor--1`): let `X` be normal, `Z = V(h)`,
+`j : X ∖ Z ⟶ X`, `ζ` a generic point of `Z` and `F` a bounded constructible complex of `𝔽_E`-module
+objects on `X ∖ Z`. There is an open neighbourhood `V` of `ζ` in `X`, with `Z ∩ V = V(h|_V)` and `ζ`
+corresponding to a generic point `ζ_V` of `Z ∩ V`, such that the restriction `K` of `F` to `V ∖ Z`
+comes from a bounded étale complex `F'` with finite locally constant homology sheaves, and the
+vanishing of `Le^* Ψ_V(j_{V!} K)` near `ζ_V` implies that of `Le^* Ψ_X(j_! F)` near `ζ`. -/
 theorem exists_opens_lisse_reduction (hX : IsNormalScheme X.left) {h : Γ(X.left, ⊤)}
     (hh : h ≠ 0) {I : X.left.IdealSheafData}
     (hI : I = IdealSheafData.ofIdealTop (Ideal.span {h}))
@@ -209,67 +266,42 @@ theorem exists_opens_lisse_reduction (hX : IsNormalScheme X.left) {h : Γ(X.left
               Profinite.continuousMapRingObj (integersResidueField ℓ E.1)⟧).obj F)) := by
   have := hX.1
   -- the étale model of `F` and a stratification on which its homology is lisse
-  obtain ⟨F₀, hF₀, ⟨e₀⟩⟩ := (DerivedCategory.boundedConstructible_iff _ _ _).1
-    (isEtaleOrigin_of_isConstructible _ hF)
+  refine ((DerivedCategory.boundedConstructible_iff _ _ _).1
+    (isEtaleOrigin_of_isConstructible _ hF)).elim fun F₀ hmodel ↦ ?_
+  have hF₀ := hmodel.1
+  refine hmodel.2.elim fun e₀ ↦ ?_
   have key := exists_stratification_isFiniteLocallyConstantSheaf_upperStar_homology
     (A := ModuleCat.{u + 1} (ULift.{u + 1} (integersResidueField ℓ E.1))) F₀
     (by exact_mod_proofs hF₀)
-  obtain ⟨R, hR⟩ := key
-  -- shrinking `X` around `ζ`
-  have hV := exists_opens_inter_subset_image hX hh hI ζ hζ R.interiorUnion R.dense_interiorUnion
-  obtain ⟨V, hζV, hVD⟩ := hV
-  have hζ' : ζ ∈ Set.range (centreMap (overRestrictι X V) I).left := by
-    rw [range_centreMap, Set.mem_preimage, range_overRestrictι]
-    exact hζV
-  obtain ⟨ζV, rfl⟩ := hζ'
+  refine key.elim fun R hR ↦ ?_
+  refine (exists_opens_pullback_range_subset hX hh hI ζ hζ
+    R.interiorUnion R.dense_interiorUnion).elim fun V hV ↦ ?_
+  refine hV.elim fun ζV hζV ↦ ?_
+  refine hζV.elim fun w hw ↦ ?_
+  have hζeq := hw.1
+  have sq := hw.2.1
+  have hw := hw.2.2
   have : Nonempty (overRestrict X V).left :=
     ⟨(centreι (overRestrict X V) (I.comap (overRestrictι X V).left)).left ζV⟩
-  have hsq := exists_isPullback_overRestrictι_comap I V
-  obtain ⟨w, sq⟩ := hsq
-  have hw : Set.range w.left.base ⊆ Set.range R.interiorUnion.ι.base := by
-    rintro _ ⟨x, rfl⟩
-    have hx := congrArg (fun f ↦ f.left.base x) sq.w
-    simp only [Over.comp_left, Scheme.Hom.comp_base, TopCat.hom_comp,
-      ContinuousMap.comp_apply] at hx
-    have hmem : (overRestrictι X I.support.compl).left.base (w.left.base x) ∈
-        (V : Set X.left) ∩ (I.support.compl : Set X.left) := by
-      refine ⟨?_, ?_⟩
-      · rw [hx, ← range_overRestrictι X V]
-        exact ⟨_, rfl⟩
-      · rw [← range_overRestrictι X I.support.compl]
-        exact ⟨_, rfl⟩
-    have hd := hVD hmem
-    obtain ⟨d, hd, hdx⟩ := hd
-    rw [Scheme.Opens.range_ι,
-      ← (overRestrictι X I.support.compl).left.isOpenEmbedding.injective hdx]
-    exact hd
-  refine ⟨V, ζV, rfl, hX.of_isOpenImmersion (overRestrictι X V).left,
+  let K := (boundedConstructibleUpperStar
+    (Profinite.continuousMapRingObj (integersResidueField ℓ E.1)) ℓ w).obj ⟨F, hF⟩
+  refine ⟨V, ζV, hζeq, hX.of_isOpenImmersion (overRestrictι X V).left,
     (overRestrictι X V).left.appTop_ne_zero_of_isOpenImmersion hh, ?_,
-    closure_singleton_mem_irreducibleComponents_of_centreMap (overRestrictι X V) I rfl hζ,
-    L((w.left)^*⟦Profinite.continuousMapRingObj (integersResidueField ℓ E.1)⟧).obj F,
+    closure_singleton_mem_irreducibleComponents_of_centreMap (overRestrictι X V) I hζeq hζ,
+    K.obj,
     D(Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} (integersResidueField ℓ E.1)))
       w.left).obj F₀,
-    boundedConstructible_leftDerivedUpperStar_obj _ ℓ w ⟨F, hF⟩, ?_, fun n ↦ ?_,
+    K.property, ?_, fun n ↦ ?_,
     ⟨finiteCoefficientDerivedEquivalenceLeftDerivedUpperStarIso _ w.left e₀.symm⟩, fun hK ↦ ?_⟩
   · rw [hI, IdealSheafData.comap_ofIdealTop, Ideal.map_span, Set.image_singleton]
   · obtain ⟨⟨a, ha⟩, ⟨b, hb⟩⟩ :=
       (Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} (integersResidueField ℓ E.1)))
         w.left).bounded_mapDerivedCategory_obj hF₀.1
     exact ⟨a, b, ha, hb⟩
-  · have := R.isFiniteLocallyConstantSheaf_upperStar_interiorUnion _ (hR n)
-    have h₁ := IsFiniteLocallyConstantSheaf.upperStar_of_range_subset w.left R.interiorUnion.ι hw
-      ((DerivedCategory.homologyFunctor _ n).obj F₀)
-    have h₂ : IsFiniteLocallyConstantSheaf
-        ((Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} (integersResidueField ℓ E.1)))
-          w.left).obj ((DerivedCategory.homologyFunctor _ n).obj F₀)) := by
-      exact_mod_proofs h₁
-    exact IsFiniteLocallyConstantSheaf.of_iso
-      (F := (Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} (integersResidueField ℓ E.1)))
-          w.left).obj ((DerivedCategory.homologyFunctor _ n).obj F₀))
-      ((Functor.mapDerivedCategoryHomologyFunctorIso
-        (Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} (integersResidueField ℓ E.1))) w.left)
-        n).app F₀)
-  · exact nearbyCyclesVanishNear_of_isOpenImmersion (overRestrictι X V) I k' _ _ ζV
+  · exact R.isFiniteLocallyConstantSheaf_homology_mapDerivedCategory_upperStar
+      w.left hw F₀ n (hR n)
+  · rw [← hζeq]
+    exact nearbyCyclesVanishNear_of_isOpenImmersion (overRestrictι X V) I k' _ _ ζV
       ((nearbyCyclesVanishNear _ _ k' _ ζV).prop_of_iso
         ((boundedConstructible _).ι.mapIso
           ((boundedConstructibleOpenImmersionLowerShriekBaseChangeIso' _ ℓ sq).app

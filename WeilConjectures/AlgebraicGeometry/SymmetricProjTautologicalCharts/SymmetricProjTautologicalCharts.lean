@@ -412,7 +412,7 @@ quasi-coherent (def-sc-invertible-module, pqf-def-coherent). Its normalization i
 def-per-projective-bundle-quotient-data.
 9. For any open V the same affine models identify the restricted relative Proj with
 the relative Proj over V by the unique chart-compatible isomorphism of
-lemma-nagata-relative-proj-exists and prop-nagata-relative-proj-functoriality.
+lemma-nagata-relative-proj-exists and definition-admissible-blow-up--1.
 The inverse-image open satisfies def-pc-fibre-product. Identity on each frame compares
 both lines and their quotients.
 10. The ordered free basis identifies Sym with the polynomial ring by

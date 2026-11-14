@@ -32,14 +32,15 @@ canonical maps
 
 are isomorphisms for all `N` and `M` (`AlgebraicGeometry.Etale.isExceptionalKunneth`). Together
 they identify `Rh^!(N ⊠ M)` with `Rg^! N ⊠ M`, the exceptional Künneth formula
-(`prop-trf-exceptional-kunneth`).
+(`proposition-exceptional-external-kunneth--1`).
 
 Following the blueprint proof, the property (`AlgebraicGeometry.Etale.IsExceptionalKunneth`)
-holds for smooth morphisms, by smooth duality (`thm-asd-smooth-tensor`) and its base change
-(`prop-asd-smooth-base-change`), and for closed immersions, by localization
-(`WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Exceptional.ClosedImmersion`); it is stable
-under composition, by the composition laws of the canonical maps, and local on the source for
-open covers, by the étale locality of the canonical maps. Locally on the source, every `g`
+holds for smooth morphisms, by smooth duality
+(`proposition-exceptional-inverse-image-smooth-morphism`) and its base change
+(`proposition-exceptional-inverse-image-smooth-morphism--6`), and for closed immersions, by
+localization (`WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Exceptional.ClosedImmersion`); it
+is stable under composition, by the composition laws of the canonical maps, and local on the source
+for open covers, by the étale locality of the canonical maps. Locally on the source, every `g`
 factors as a closed immersion into an affine space over an affine open of `S`, followed by the
 projection and the open immersion.
 
@@ -190,7 +191,7 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] (d : ℕ)
 
 include d in
 /-- For a smooth `f` of relative dimension `d`, the canonical map `θ_f` is an isomorphism at every
-object (`thm-asd-smooth-tensor`). -/
+object (`proposition-exceptional-inverse-image-smooth-morphism`). -/
 lemma isIso_dualizingComplexTensorMapOfIsIso_of_smoothOfRelativeDimension
     (P : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     IsIso (dualizingComplexTensorMap Λ f P) := by
@@ -199,7 +200,7 @@ lemma isIso_dualizingComplexTensorMapOfIsIso_of_smoothOfRelativeDimension
 
 include d in
 /-- For a smooth `f` of relative dimension `d`, the dualizing complex `ω_f` is invertible
-(`thm-asd-smooth-tensor`). -/
+(`proposition-exceptional-inverse-image-smooth-morphism`). -/
 lemma isInvertible_dualizingComplex_of_smoothOfRelativeDimension :
     DerivedCategory.isInvertible Λ X (dualizingComplex Λ f) := by
   obtain ⟨L, hL₁, hL, ⟨e⟩, -⟩ := exists_dualizingComplex_iso_and_tensor Λ f d
@@ -236,8 +237,9 @@ lemma IsExceptionalKunneth.of_eq {T S : Scheme.{u}} {g g' : T ⟶ S} [HasCompact
 variable (Λ k) [HasInvertibleExponent Λ (Spec (.of k))]
 
 /-- **Smooth morphisms** satisfy the exceptional Künneth formula: the base change map is invertible
-by `prop-asd-smooth-base-change`, and the tensor maps of the smooth base change `h` are
-invertible since `θ_h` is (`thm-asd-smooth-tensor`). The base `S` is quasi-separated, as in
+by `proposition-exceptional-inverse-image-smooth-morphism--6`, and the tensor maps of the smooth
+base change `h` are invertible since `θ_h` is
+(`proposition-exceptional-inverse-image-smooth-morphism`). The base `S` is quasi-separated, as in
 `AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension`
 (it is of finite type over `k` in the blueprint). -/
 theorem isExceptionalKunneth_of_smoothOfRelativeDimension {T S : Scheme.{u}}

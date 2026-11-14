@@ -59,7 +59,7 @@ The assertions concern only restriction to representatives, the source localizat
 map, and the ordinary chain comparison; they supply no derived tensor comparison.
 
 Source: Stacks Project, Cohomology on Sites, Tags 06YN and 07A4, and the final
-site-transport paragraph of blueprint thm-coef-finite-hom
+site-transport paragraph of blueprint lemma-change-coefficients-internal-hom--1
 (blueprint: lem-sf-finite-coefficient-site-tensor-presentation).
 
 Proof: Write inverse image as the ordinary etale-to-pro-etale inverse image followed

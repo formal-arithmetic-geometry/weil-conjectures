@@ -447,7 +447,7 @@ preserve cohomology and constructibility. For a shift by m,
 `lem-sp-derived-cohomology-shift` translates a uniform interval [r,s] to
 [r-m,s-m]. `lem-weil-proetale-dbc-triangulated` supplies finite-level zero,
 isomorphism and shift closure. Its constructibility agrees with
-`def-weil-finite-torsion-constructibility` and
+`definition-constructible-sheaves` and
 `def-weil-proetale-constructible-sheaf`: finite locally closed constructible
 partitions, locally constant restrictions with finite stalks, and bounded
 cohomology. Combine this with step 3 and

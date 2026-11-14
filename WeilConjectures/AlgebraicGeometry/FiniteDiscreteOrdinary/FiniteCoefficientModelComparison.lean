@@ -47,7 +47,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Finite constant models and finite-stalk constructibility
 
-Source: blueprint main-20261015, sec-proetale-coefficients,
+Source: blueprint main-20261015, chap-The-pro-etale-site,
 sk-prop-integral-criterion-reductions.proof.md, second paragraph; Stacks Tags 099Y and 09AJ
 (blueprint: lem-pe-finite-coefficient-model-comparison).
 
@@ -99,7 +99,7 @@ def ordinaryFiniteCoverModels (T : Scheme.{u}) (F : Ordinary A T)
 /-- Bounded constructibility in the intrinsic ordinary constant-ring module category:
 standard bounded cohomology and the existing finite-stalk constructibility predicate in
 every degree. This is the ordinary target of the comparison, with no Tor restriction.
-Source: blueprint sk-def-sfb-constructible, final paragraph; Stacks Tag 09AL
+Source: blueprint definition-constructible-sheaves, final paragraph; Stacks Tag 09AL
 (blueprint: lem-pe-finite-coefficient-model-comparison). -/
 def ordinaryIntrinsicBoundedConstructible [Finite A] (T : Scheme.{u}) :
     ObjectProperty (Scheme.proEtaleDerivedCategory T A) :=
@@ -574,7 +574,7 @@ private theorem derived_boundedEquivalence [Finite A] (X : Scheme.{u}) (e : Enco
 finite-stalk constructibility, retaining strata, covers after deletion of empty objects, and
 all cohomological vanishing intervals under the induced bounded-constructible equivalence.
 
-Source: blueprint main-20261015, sec-proetale-coefficients,
+Source: blueprint main-20261015, chap-The-pro-etale-site,
 sk-prop-integral-criterion-reductions.proof.md, second paragraph
 (blueprint: lem-pe-finite-coefficient-model-comparison).
 

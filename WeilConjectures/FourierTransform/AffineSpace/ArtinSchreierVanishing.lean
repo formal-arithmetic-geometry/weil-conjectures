@@ -49,8 +49,9 @@ statement over `T` follows by compact-support base change along `T ⟶ Spec 𝔽
 
 ## Blueprint
 
-This is the vanishing `H^*_c(𝔸¹, ℒ_ψ) = 0` used in the proofs of `lem-fd-first-formula` and
-`lem-fd-convolution-kernel` (blueprint `lem-fd-first-formula`, `lem-fd-convolution-kernel`).
+This is the vanishing `H^*_c(𝔸¹, ℒ_ψ) = 0` used in the proofs of
+`lemma-fourier-transform-constant-sheaf` and `proposition-fourier-inversion` (blueprint
+`lemma-fourier-transform-constant-sheaf`, `proposition-fourier-inversion`).
 -/
 
 @[expose] public section
@@ -328,7 +329,7 @@ scheme `T` of characteristic `p`, a finite coefficient ring `Λ` whose exponent 
 `T`, and an additive character `Ψ` of `𝔽_p` with `Ψ(1) - 1` a unit of `Λ`, the compactly
 supported direct image of the Artin–Schreier sheaf `ℒ_{Ψ, x}` of the coordinate along
 `π : 𝔸¹_T ⟶ T` vanishes.
-(sketch blueprint: `lem-fd-first-formula`, proof) -/
+(sketch blueprint: `lemma-fourier-transform-constant-sheaf`, proof) -/
 theorem isZero_rightDerivedLowerShriek_artinSchreierSheafZMod_coord [Finite Λ] [HasTateTwist Λ]
     [HasTateTwist.IsNormalized Λ] (T : Scheme.{u}) [HasInvertibleExponent Λ T]
     [CharP Γ(𝔸(PUnit.{u + 1}; T), ⊤) p] (Ψ : AddChar (ZMod p) Λ) (hΨ : IsUnit (Ψ 1 - 1)) :

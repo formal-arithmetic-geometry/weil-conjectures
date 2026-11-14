@@ -67,8 +67,6 @@ private theorem conjugate_map
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 800000 in
--- Nested restriction comparisons require additional elaboration heartbeats.
 /-- A degreewise family already defined near x becomes a chain map after shrinking
 if its stalk commutes with the differentials. The second conclusion records the
 stalks of the restricted components in the original comparison coordinates.
@@ -167,35 +165,11 @@ theorem exists_affine_perfect_open_stalk_degreewise_shrink
   let hVW := hVZ.trans hZW
   let hVU := hVW.trans hWU
   let B := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE hVW)
-  let D := NatIso.mapHomologicalComplex
-    (restriction_comp_iso X U W V hWU hVW) (.up ℤ)
+  obtain ⟨c₀, c, _hc₀, hc⟩ := exists_openStalk_restriction_transport X U x hxU W hxW hWU
+    (openModuleStalkRestrictionComparison X U W hWU x hxU hxW) V hxV hVW hVU
+  let D := NatIso.mapHomologicalComplex c₀ (.up ℤ)
   let C := D.symm
   let k := fun n : ℤ ↦ (C.app P).hom.f n ≫ B.map (g n) ≫ (C.app Q).inv.f n
-  obtain ⟨c₀, c, hc₀, hc⟩ := exists_openStalk_restriction_transport X U x hxU W hxW hWU
-    (openModuleStalkRestrictionComparison X U W hWU x hxU hxW) V hxV hVW hVU
-  let c' := NatIso.mapHomologicalComplex c (.up ℤ)
-  let S := (openModuleStalkFunctor X V ⟨x, hxV⟩).mapHomologicalComplex (.up ℤ)
-  let eV := Functor.isoWhiskerRight C S ≪≫
-    Functor.associator R (B.mapHomologicalComplex (.up ℤ)) S ≪≫
-    Functor.isoWhiskerLeft R c' ≪≫ e
-  have heV : eV = Functor.mapHomologicalComplexCompIso
-      (openModuleStalkRestrictionComparison X U V hVU x hxU hxV) (.up ℤ) := by
-    apply Iso.ext
-    apply NatTrans.ext
-    funext M
-    apply HomologicalComplex.hom_ext
-    intro n
-    simp only [eV, c', C, D, e, S, Iso.trans_hom, NatTrans.comp_app, HomologicalComplex.comp_f,
-      Functor.isoWhiskerRight_hom, Functor.whiskerRight_app, Functor.isoWhiskerLeft_hom,
-      Functor.whiskerLeft_app, Functor.associator_hom_app, Iso.symm_hom,
-      Functor.mapHomologicalComplexCompIso_hom_app_f, NatIso.mapHomologicalComplex_hom_app_f,
-      NatIso.mapHomologicalComplex_inv_app_f, Functor.mapHomologicalComplex_map_f,
-      restriction_comp_iso, NatIso.ofComponents_inv_app, Iso.refl_inv]
-    erw [CategoryTheory.Functor.map_id, Category.id_comp, HomologicalComplex.id_f, Category.id_comp]
-    have h := hc (M.X n)
-    rw [hc₀] at h
-    erw [CategoryTheory.Functor.map_id, Category.id_comp] at h
-    exact h.symm
   refine ⟨V, hxV, hV, hVW, hVU, k, ?_, ?_⟩
   · intro n
     by_cases hn : n ∈ Finset.Icc a b
@@ -220,19 +194,26 @@ theorem exists_affine_perfect_open_stalk_degreewise_shrink
       exact ((SheafOfModules.overMap (moduleRings X.toRingedSpace)
         (homOfLE hVU)).map_isZero hz).eq_of_src _ _
   · intro n
-    let ev := HomologicalComplex.eval
-      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V)) (.up ℤ) n
-    let eu := HomologicalComplex.eval (ModuleCat.{u} (X.presheaf.stalk x)) (.up ℤ) n
-    have hc := conjugate_map B (openModuleStalkFunctor X V ⟨x, hxV⟩)
-      (openModuleStalkFunctor X W ⟨x, hxW⟩) c
-      (ev.mapIso (C.app P)) (ev.mapIso (C.app Q)) (g n)
-      (eu.mapIso (e.app P)) (eu.mapIso (e.app Q))
-    dsimp [ev, eu] at hc
-    rw [← heV]
-    dsimp [eV, c', R, k]
-    simp only [Category.assoc] at hc ⊢
-    erw [Category.id_comp, Category.id_comp]
-    exact hc
+    let SV := openModuleStalkFunctor X V ⟨x, hxV⟩
+    let SW := openModuleStalkFunctor X W ⟨x, hxW⟩
+    let eW := openModuleStalkRestrictionComparison X U W hWU x hxU hxW
+    let eV := openModuleStalkRestrictionComparison X U V hVU x hxU hxV
+    let d := fun M ↦ (SV.mapIso (c₀.app M)).symm ≪≫ c.app (A.obj M) ≪≫ eW.app M
+    have hd (M : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) :
+        d M = eV.app M := by
+      apply Iso.ext
+      apply (cancel_epi (SV.map (c₀.hom.app M))).1
+      change SV.map (c₀.hom.app M) ≫
+          (SV.map (c₀.inv.app M) ≫ c.hom.app (A.obj M) ≫ eW.hom.app M) =
+        SV.map (c₀.hom.app M) ≫ eV.hom.app M
+      rw [← Category.assoc, ← SV.map_comp, Iso.hom_inv_id_app, SV.map_id, Category.id_comp]
+      exact (hc M).symm
+    have h := conjugate_map B SV SW c (c₀.app (P.X n)).symm (c₀.app (Q.X n)).symm
+      (g n) (eW.app (P.X n)) (eW.app (Q.X n))
+    change SV.map (k n) = (d (P.X n)).hom ≫ eW.inv.app (P.X n) ≫
+      SW.map (g n) ≫ eW.hom.app (Q.X n) ≫ (d (Q.X n)).inv at h
+    rw [hd (P.X n), hd (Q.X n)] at h
+    exact h
 
 end
 end AlgebraicGeometry.Scheme

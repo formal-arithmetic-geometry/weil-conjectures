@@ -19,7 +19,7 @@ namespace WeilConjectures.CondensedWeil
 
 /-- Apply the coefficient inverse image and its specified Frobenius-square comparison.
 Source: latest blueprint, restriction to open and closed constant-field components
-in the second proof paragraph of lem-zl-affine-curve-hc2-purity
+in the second proof paragraph of theorem-pure-lisse-sheaves-over-relative
 (blueprint: def-zl-condensed-weil-pullback-object). -/
 @[irreducible] def pullbackWeilObject
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

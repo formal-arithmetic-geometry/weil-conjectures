@@ -15,7 +15,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleTateTwistConstructions
 
 /-! # Coefficient extension maps, the field colimit and signed Tate twists
 
-Source: blueprint `sk-def-sp-tate-twist`. The finite levels and integral and
+Source: blueprint `definition-tate-twists`. The finite levels and integral and
 rational objects are re-exported from `ProEtaleTateTwistLevels`.
 -/
 
@@ -276,7 +276,7 @@ private theorem spRationalTwistMap_spec {E F : PadicAlgCl.FiniteIntermediateFiel
 attribute [local irreducible] spRationalTwistMap
 
 /-- The identity inclusion induces the identity transition.
-Source: blueprint field-extension transitions (blueprint: sk-def-sp-tate-twist).
+Source: blueprint field-extension transitions (blueprint: definition-tate-twists).
 Proof: identity maps have the required finite projections and localization formula.
 Apply uniqueness first to the integral limits and then to the rational tensor quotient. -/
 theorem spRationalTwistMap_id (E : PadicAlgCl.FiniteIntermediateField ℓ) :
@@ -316,7 +316,7 @@ private theorem spTensorNormalization_comp
     tensorHom_comp_tensorHom]
 
 /-- Field-extension transitions compose.
-Source: blueprint field-extension transitions (blueprint: sk-def-sp-tate-twist).
+Source: blueprint field-extension transitions (blueprint: definition-tate-twists).
 Proof: the two composites have the same maps on finite root tensors because the
 coefficient inclusions compose. Joint injectivity of limit projections gives the
 integral identity. The localization pure-tensor formula then gives the rational
@@ -410,7 +410,7 @@ private theorem spExtend_semilinear
       rw [hf]
 
 /-- The specified rational transitions are semilinear for the coefficient inclusions.
-Source: blueprint scalar-action paragraph (blueprint: sk-def-sp-tate-twist).
+Source: blueprint scalar-action paragraph (blueprint: definition-tate-twists).
 Proof: each finite-level transition tensors a coefficient homomorphism with the
 identity on roots, hence is semilinear. The integral limit projections jointly
 reflect equality, so the integral map is semilinear. Apply the localization
@@ -429,7 +429,7 @@ theorem spRationalTwistMap_semilinear {E F : PadicAlgCl.FiniteIntermediateField 
     (spRationalTwistMap_spec X ℓ h)
 
 /-- The specified diagram of rational twists on the small directed poset of finite fields.
-Source: blueprint algebraic-closure colimit (blueprint: sk-def-sp-tate-twist). -/
+Source: blueprint algebraic-closure colimit (blueprint: definition-tate-twists). -/
 def spRationalTwistDiagram : PadicAlgCl.FiniteIntermediateField ℓ ⥤
     Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1} where
   obj E := (spRationalTwist X ℓ E).X
@@ -439,7 +439,7 @@ def spRationalTwistDiagram : PadicAlgCl.FiniteIntermediateField ℓ ⥤
 
 /-- The underlying algebraic-closure twist is the sheafified abelian colimit, not a
 sectionwise union without sheafification.
-Source: blueprint algebraic-closure colimit (blueprint: sk-def-sp-tate-twist). -/
+Source: blueprint algebraic-closure colimit (blueprint: definition-tate-twists). -/
 def spQbarTwistAb : Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1} :=
   colimit (C := Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1})
     (spRationalTwistDiagram X ℓ)
@@ -526,7 +526,7 @@ private theorem spColimitModule
   exact (ha' i).trans (ha i).symm
 
 /-- The colimit's action is uniquely determined by multiplying at a common finite field.
-Source: blueprint scalar-action paragraph (blueprint: sk-def-sp-tate-twist).
+Source: blueprint scalar-action paragraph (blueprint: definition-tate-twists).
 Proof: on sectionwise presheaf colimits choose a common finite extension H of E and F.
 Multiply the two images there. The tensor normalization of the rational transitions
 makes them semilinear, so further extension preserves this product. Any two common
@@ -598,7 +598,7 @@ theorem spQbarTwistAction_existsUnique :
       hb E E E (le_refl E) (le_refl E)
 
 /-- Qbar_X(1), with the uniquely specified action on its sheafified colimit.
-Source: blueprint algebraic-closure colimit and action (blueprint: sk-def-sp-tate-twist). -/
+Source: blueprint algebraic-closure colimit and action (blueprint: definition-tate-twists). -/
 def spQbarTwist : Mod (Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1})
     (condensedRingObj.{u} (Profinite.padicAlgClRingObj.{u} ℓ) X) :=
   { X := spQbarTwistAb X ℓ
@@ -606,8 +606,8 @@ def spQbarTwist : Mod (Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1})
 
 /-- The canonical Kummer identification for finite coefficients is fixed on pure tensors.
 Source: blueprint finite-coefficient independence paragraph
-(blueprint: sk-def-sp-tate-twist).
-Proof: clause 2 of det-def-sp-tate-twist-locally-free supplies the map with this
+(blueprint: definition-tate-twists).
+Proof: clause 2 of definition-tate-twists supplies the map with this
 formula and says that it is an isomorphism. On a cover with compatible root
 generators it is the identity of A. Pure tensors locally generate the sheafified
 scalar extension, so the formula determines the morphism uniquely. This includes
@@ -654,7 +654,7 @@ theorem spFiniteKummer_existsUnique
 
 /-- The actual finite-coefficient Kummer identification, uniquely specified on pure tensors.
 The unital quotient homomorphism a is unique, so it adds no coefficient choice.
-Source: blueprint finite-coefficient independence (blueprint: sk-def-sp-tate-twist). -/
+Source: blueprint finite-coefficient independence (blueprint: definition-tate-twists). -/
 def spFiniteKummer
     [∀ x : X, Invertible (ℓ : X.residueField x)]
     (A : Type (u + 1)) [CommRing A] [Finite A] (r n : ℕ) (hrn : r ≤ n)
@@ -667,7 +667,7 @@ def spFiniteKummer
 /-- All signed powers of an internal coefficient line, in the sectionwise module encoding.
 Zero is the coefficient unit; positive degrees use tensor powers and negative
 degrees use sheaf Hom into the unit. The equivalence keeps the underlying sheaf.
-Source: blueprint signed twists (blueprint: sk-def-sp-tate-twist). -/
+Source: blueprint signed twists (blueprint: definition-tate-twists). -/
 def spSignedTwist (R : Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1})
     [MonObj R] [IsCommMonObj R]
     (L : Mod (Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1}) R) (d : ℤ) :=

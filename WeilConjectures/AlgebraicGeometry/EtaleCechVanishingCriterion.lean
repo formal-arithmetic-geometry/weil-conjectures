@@ -62,7 +62,7 @@ def-sp-injective-resolutions; let `Q` be the cokernel (Step 2). Injective sheave
 higher Čech cohomology by lem-weil-pbc-injective-sheaf-cech-acyclic, Stacks 03AW (Step 3).
 The cofinality hypothesis and lem-weil-pbc-ses-cech-h1-surjective, Stacks 03F8, give
 surjectivity of `I(U) → Q(U)` for `U ∈ B`. Left exact evaluation, or the beginning of
-lem-weil-pbc-derived-functor-long-exact and lem-sp-derived-well-defined, gives exactness
+lem-weil-pbc-derived-functor-long-exact and lemma-acyclic-resolutions, gives exactness
 of the whole section sequence (Step 4). All intersections belong to `B`, so products of
 these short exact sequences give a degreewise short exact sequence of Čech complexes,
 using def-weil-pbc-cech-complex and lem-weil-pbc-cochain-complexes-degreewise-exact (Step 5).

@@ -44,14 +44,14 @@ variable {k : Type u} [Field k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) (k' : 
   [Algebra k k']
 
 /-- The base change `C_{k'} ⟶ Spec k'` of a `k`-scheme `C` along a field extension `k ⊆ k'`.
-(blueprint: `def-sc-field-extension`) -/
+(blueprint: `theorem-cohomology-curves--6`) -/
 noncomputable abbrev Scheme.Hom.baseChangeField :
     pullback f (Spec.map (CommRingCat.ofHom (algebraMap k k'))) ⟶ Spec (.of k') :=
   pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k k')))
 
 /-- The pullback map `ρᵠ : Hᵠ(C_ét, F) ⟶ Hᵠ((C_{k'})_ét, F_{k'})` along the projection
 `π_{k'} : C_{k'} ⟶ C`, where `F_{k'} = π_{k'}^* F`.
-(blueprint: `def-sc-field-extension`) -/
+(blueprint: `theorem-cohomology-curves--6`) -/
 noncomputable abbrev Scheme.Hom.fieldExtensionCohomologyMap
     (F : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) :=
   Etale.cohomologyMap (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k k')))) F q
@@ -99,8 +99,9 @@ theorem IsConnectedCurve.baseChangeField [IsAlgClosed k] [IsConnectedCurve f] [S
 /-- **The genus is invariant under base change.** For a smooth proper curve `C` over `k` and a
 field extension `k'`, `g(C_{k'}) = g(C)`: both genera are arithmetic genera
 (`AlgebraicGeometry.Scheme.genus_eq_arithmeticGenus`), and `H¹(C_{k'}, 𝒪) = H¹(C, 𝒪) ⊗_k k'`.
-This is the genus part of blueprint `lem-sc-genus-invariant`; its compatibility of the Jacobian
-with base change, `J_{C_{k'}} ≅ (J_C)_{k'}`, is not formalised here. -/
+This is the genus part of blueprint `proposition-cohomology-smooth-affine-curve--4`; its
+compatibility of the Jacobian with base change, `J_{C_{k'}} ≅ (J_C)_{k'}`, is not formalised
+here. -/
 theorem Scheme.Hom.genus_baseChangeField [SmoothOfRelativeDimension 1 f] [IsProper f] :
     (f.baseChangeField k').genus = f.genus := by
   let : C.Over (Spec (.of k)) := ⟨f⟩
@@ -165,7 +166,7 @@ pullback `Hᵠ(C, ℤ/n) ⟶ Hᵠ(C_{k'}, ℤ/n)` is bijective for every `q`: it
 finite of the same order by the curve estimate
 (`AlgebraicGeometry.IsConnectedCurve.sheafH_constantZMod_of_isProper`), since `C_{k'}` is again a
 smooth proper connected curve of the same genus.
-(blueprint: `thm-sc-constant-invariance`, proper case) -/
+(blueprint: `proposition-cohomology-smooth-affine-curve`, proper case) -/
 theorem IsConnectedCurve.bijective_fieldExtensionCohomologyMap_of_isProper [IsAlgClosed k]
     [IsConnectedCurve f] [Smooth f] [IsProper f] [IsAlgClosed k'] (n : ℕ) (hn : (n : k) ≠ 0)
     (q : ℕ) : Function.Bijective (f.fieldExtensionCohomologyMap k' (C.constantZMod n) q) := by

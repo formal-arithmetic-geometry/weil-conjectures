@@ -102,7 +102,6 @@ private theorem identity_presheaf_square (T : Scheme.{v}) (M : T.Modules)
     (Functor.leftUnitor P).hom ≫ θ
   rfl
 
-set_option maxHeartbeats 400000 in
 -- Sheafification comparisons cross several presentations of the module category.
 /-- Over an identity base the truncated top-edge counit is invertible. -/
 instance isIso_topEdgeTruncatedCounit_id
@@ -280,8 +279,6 @@ noncomputable def affineLerayTargetEquiv
     ((H₁ ⋙ Γ).mapIso ψ.symm ≪≫ Γ.mapIso edgeIso)).addCommGroupIsoToAddEquiv).trans
       (affineLerayEquiv qY).symm
 
-set_option maxHeartbeats 700000 in
--- The large comparison square needs extra heartbeats for category transports.
 /-- The affine Leray module equivalences `(affineLerayEquiv q).symm` and
 `affineLerayTargetEquiv q j hj` are natural for a map `j` of proper total spaces.
 Source: Stacks Project, Tags 01XK (affine higher-image vanishing), 01FB (h-maps),
@@ -361,32 +358,38 @@ theorem structure_derived_image_module_naturality
   change affineLerayEquiv qY ((affineLerayEquiv qY).symm
       (θ (H.map b z))) = affineLerayEquiv qY
     (Modules.moduleCohomologyFMap j φ 1 ((affineLerayEquiv q).symm z))
-  rw [AddEquiv.apply_symm_apply]
+  simp only [AddEquiv.apply_symm_apply]
   have hg := globalLeray_unitSquare q qY (𝟙 T) j hs
     (SheafOfModules.unit X.ringCatSheaf) (SheafOfModules.unit Y.ringCatSheaf)
     φ 1 (topEdgeTruncatedCounit (𝟙 T) 1
       (globalLerayImage qY (SheafOfModules.unit Y.ringCatSheaf)))
     (topEdgeTruncatedCounit_localClass (𝟙 T) 1 _) ((affineLerayEquiv q).symm z)
-  rw [← affineLerayEquiv_apply qY, ← affineLerayEquiv_apply q] at hg
+  simp only [← affineLerayEquiv_apply qY, ← affineLerayEquiv_apply q] at hg
   have hg' : affineLerayEquiv qY
       (Modules.moduleCohomologyFMap j φ 1 ((affineLerayEquiv q).symm z)) =
-      Γ.map edge (H.map α (affineLerayEquiv q ((affineLerayEquiv q).symm z))) := by
-    with_unfolding_all refine hg.trans ?_
-    with_unfolding_all simp only [Scheme.Hom.id_base, eqToHom_refl,
+      Γ.map edge (H.map α z) := by
+    with_reducible refine hg.trans ?_
+    with_reducible simp only [Scheme.Hom.id_base, eqToHom_refl,
+      AddEquiv.apply_symm_apply,
       edge, H, H₁, Γ, globalLerayUnitMap, globalLerayImage,
       RingedSpace.globalSectionsFunctor, Modules.Hom.comp_app,
       Functor.comp_map, Functor.map_comp,
       ConcreteCategory.comp_apply, evaluation_map_apply,
       Modules.pushforwardId_hom_app_app]
-    let y := Modules.Hom.app (topEdgeTruncatedCounit (𝟙 T) 1 K) ⊤
-      (Modules.Hom.app (H₁.map α) ⊤ (affineLerayEquiv q ((affineLerayEquiv q).symm z)))
+    let y : (H₁.obj K).val.presheaf.obj (op ⊤) :=
+      Modules.Hom.app (topEdgeTruncatedCounit (𝟙 T) 1 K) ⊤
+      (Modules.Hom.app (H₁.map α) ⊤ z)
     with_unfolding_all change (H₁.obj K).val.presheaf.map (𝟙 (op ⊤)) y = y
     with_unfolding_all exact
       ConcreteCategory.congr_hom ((H₁.obj K).val.presheaf.map_id (op ⊤)) y
-  rw [AddEquiv.apply_symm_apply] at hg'
-  rw [hg', hb, H.map_comp]
-  change Γ.map edge (H.map ψ.inv (H.map ψ.hom (H.map α z))) = _
-  have hh := ConcreteCategory.congr_hom (H.mapIso ψ).hom_inv_id (H.map α z)
-  exact congrArg (fun x ↦ Γ.map edge x) hh
+  calc
+    θ (H.map b z) = Γ.map edge (H.map α z) := by
+      dsimp only [θ, θiso]
+      rw [hb, H.map_comp]
+      change Γ.map edge (H.map ψ.inv (H.map ψ.hom (H.map α z))) = _
+      have hh := ConcreteCategory.congr_hom (H.mapIso ψ).hom_inv_id (H.map α z)
+      exact congrArg (fun x ↦ Γ.map edge x) hh
+    _ = affineLerayEquiv qY
+        (Modules.moduleCohomologyFMap j φ 1 ((affineLerayEquiv q).symm z)) := hg'.symm
 
 end AlgebraicGeometry.Scheme

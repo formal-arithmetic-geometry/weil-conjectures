@@ -18,7 +18,7 @@ Let `p : Z ⟶ Y` be a proper morphism to a `k`-scheme of finite type, `ℓ` inv
 `d` a bound for the dimensions of the geometric fibres of `p`. For the `ℓ`-adic coefficient rings
 `Λ = 𝒪_E, E, ℚ̄_ℓ` (`E ⊆ ℚ̄_ℓ` a finite subextension), `Rp_*` sends every constructible
 `Λ_Z`-module, placed in degree `0`, into degrees `≤ 2d`, with `d` independent of `E` (blueprints
-`det-proper-heart-bound-torsion`, `det-proper-heart-bound-rational`):
+`lemma-uniform-bound-proper-direct-image--1`):
 
 * `exists_isLE_rightDerivedLowerStar_singleFunctor_padicIntegers`: for `𝒪_E`, from
   `isLE_rightDerivedLowerStar_singleFunctor_padicIntegers_of_isProper` (reduction modulo a
@@ -49,8 +49,8 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k �
 /-! ### The uniform bound on constructible sheaves -/
 
 include aY in
-/-- Blueprint `det-proper-heart-bound-torsion`, integral form: there is `d` such that for every
-finite subextension `E ⊆ ℚ̄_ℓ`, `Rp_*` sends the constructible `𝒪_E`-modules into degrees
+/-- Blueprint `lemma-uniform-bound-proper-direct-image--1`, integral form: there is `d` such that
+for every finite subextension `E ⊆ ℚ̄_ℓ`, `Rp_*` sends the constructible `𝒪_E`-modules into degrees
 `≤ 2d`. -/
 lemma exists_isLE_rightDerivedLowerStar_singleFunctor_padicIntegers :
     ∃ d : ℕ, ∀ (E : FiniteIntermediateField ℓ)
@@ -68,8 +68,9 @@ lemma exists_isLE_rightDerivedLowerStar_singleFunctor_padicIntegers :
   exact_mod_cast this
 
 include aY in
-/-- Blueprint `det-proper-heart-bound-rational` for the finite subextensions `E ⊆ ℚ̄_ℓ`: there is
-`d` such that `Rp_*` sends the constructible `E`-modules into degrees `≤ d`, for every `E`. -/
+/-- Blueprint `lemma-uniform-bound-proper-direct-image--1` for the finite subextensions `E ⊆ ℚ̄_ℓ`:
+there is `d` such that `Rp_*` sends the constructible `E`-modules into degrees `≤ d`, for every
+`E`. -/
 lemma exists_isLE_rightDerivedLowerStar_singleFunctor_continuousMapRingObj :
     ∃ d : ℤ, ∀ (E : FiniteIntermediateField ℓ)
       (N : Mod (Sheaf (ProEt.topology Z) Ab.{u + 1})
@@ -91,8 +92,8 @@ lemma exists_isLE_rightDerivedLowerStar_singleFunctor_continuousMapRingObj :
     K₀.property ((boundedConstructible _).ι.mapIso e)
 
 include aY in
-/-- Blueprint `det-proper-heart-bound-rational` for `ℚ̄_ℓ`: there is `d` such that `Rp_*` sends
-the constructible `ℚ̄_ℓ`-modules into degrees `≤ d`. -/
+/-- Blueprint `lemma-uniform-bound-proper-direct-image--1` for `ℚ̄_ℓ`: there is `d` such that `Rp_*`
+sends the constructible `ℚ̄_ℓ`-modules into degrees `≤ d`. -/
 lemma exists_isLE_rightDerivedLowerStar_singleFunctor_padicAlgClRingObj :
     ∃ d : ℤ, ∀ (N : Mod (Sheaf (ProEt.topology Z) Ab.{u + 1})
         (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z)),

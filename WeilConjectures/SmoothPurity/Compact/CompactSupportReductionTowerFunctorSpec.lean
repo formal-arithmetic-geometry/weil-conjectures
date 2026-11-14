@@ -11,7 +11,7 @@ public import WeilConjectures.SmoothPurity.Compact.CompactSupportNativeTowerPres
 
 Naming the proposition keeps repeated dependent choice predicates small.
 Source: the coherent compact-support tower construction and its canonical
-coefficient comparisons, blueprint `lem-coef-integral-compact-support`.
+coefficient comparisons, blueprint `lemma-change-coefficients-compact-support`.
 (blueprint: def-weil-compact-support-reduction-tower-functor-spec).
 -/
 
@@ -29,7 +29,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The linearity, exactness, canonical evaluations, quotient transitions, and
 native presentation of one compact-support reduction tower.
-Source: blueprint `lem-coef-integral-compact-support`, canonical coefficient comparisons.
+Source: blueprint `lemma-change-coefficients-compact-support`, canonical coefficient comparisons.
 (blueprint: def-weil-compact-support-reduction-tower-functor-spec). -/
 def CompactSupportReductionTowerFunctorSpec
     (T : DerivedCategory (scalarReductionSource l E X) ⥤

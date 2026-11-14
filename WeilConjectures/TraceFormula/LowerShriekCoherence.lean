@@ -25,7 +25,7 @@ categories `Dᵇc(-)⟦ℚ̲̄_ℓ⟧` (SGA 4, Exposé XVII, §5), stated for th
 `prop-sf-pf-coherence` stated in `WeilConjectures.PoincareDuality.ProjectionFormulaCoherence`.
 
 The companion coherence of compact-support base change with the pasting of cartesian squares
-(blueprint `fix-lem-exchanges`, clause (2)) is
+(blueprint `proposition-composition-base-change-rf-shriek`, clause (2)) is
 `ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_vert`
 (`WeilConjectures.TraceFormula.BaseChangeCoherence`).
 

@@ -93,7 +93,7 @@ sheaf and its unit with abelian sheafification, with the sheafified scalar actio
 (2) The opposite pointed-neighbourhood category is nonempty and filtered, hence
 connected (`def-weil-proetale-geometric-stalk`). Its constant diagram has colimit M;
 the coprojection at `(Y,y)` is an isomorphism
-(`lem-weil-pbc-colimit-constant-connected-diagram`).
+(`definition-torsion-sheaves--3`).
 (3) Sheafification preserves this geometric stalk, by lifting geometric points to
 covers (0F6C) and compatibility with fibre products, then 00Y8(3)
 (`lem-cbc-proetale-sheafification-geometric-stalk`). Composing the constant-diagram

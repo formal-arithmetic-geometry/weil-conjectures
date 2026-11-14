@@ -26,8 +26,8 @@ where the number of classes is `h = #Pic⁰(C)` if `n` lies in the subgroup `δ 
 line bundles and `0` otherwise. With the Riemann hypothesis for the middle factor `P₁` of a Weil
 factorization `Z = P₁ / ((1 - T) (1 - q T))` this forces `deg P₁ = 2 g`
 (`AlgebraicGeometry.IsWeilFactorization.natDegree_eq_two_mul_of_coeff`). This is
-F. K. Schmidt's argument; it gives Step 4 of the blueprint proof of `cor-zl-hasse-bound`,
-`dim H¹(C ⊗ k̄, ℚ̄_ℓ) = 2 g`, without `ℓ`-adic cohomology.
+F. K. Schmidt's argument; it gives Step 4 of the blueprint proof of
+`corollary-point-count-estimates--2`, `dim H¹(C ⊗ k̄, ℚ̄_ℓ) = 2 g`, without `ℓ`-adic cohomology.
 
 ## Main statements
 
@@ -261,11 +261,11 @@ theorem natDegree_eq_two_mul_arithmeticGenus_of_isWeilFactorization
       neg_mem' := by
         rintro _ ⟨c, hc⟩
         exact ⟨c⁻¹, by rw [map_inv, hc]; rfl⟩ }
-  obtain ⟨a, ha⟩ := Int.subgroup_cyclic H
+  obtain ⟨a, ha⟩ := H.isAddCyclic_iff_exists_zmultiples_eq_top.mp H.isAddCyclic
   set δ := a.natAbs
   have hmem (m : ℤ) : (∃ c : C.Pic, picDegreeHom k C c = .ofAdd m) ↔ (δ : ℤ) ∣ m := by
     change m ∈ H ↔ _
-    rw [ha, ← AddSubgroup.zmultiples_eq_closure, Int.mem_zmultiples_iff, Int.natAbs_dvd]
+    rw [← ha, Int.mem_zmultiples_iff, Int.natAbs_dvd]
   -- `δ > 0`: a closed point has positive degree
   have hδ : 0 < δ := by
     obtain ⟨x, hx⟩ := (C ↘ Spec (.of k)).exists_mem_finitePoints

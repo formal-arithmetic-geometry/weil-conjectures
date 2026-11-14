@@ -93,7 +93,8 @@ theorem isIso_supportedClassMap_kummerBoundaryProduct_cons_coord_of_hasInvertibl
     ← Functor.map_comp, ← Functor.map_comp]
   exact isIso_supportedClassMap_comp_map Λ _ _ _ hcup
 
-/-- Blueprint `sk-prop-an`: `𝔸¹ ⇒ 𝔸ⁿ`: the model purity, clause (i), over any base.
+/-- Blueprint `proposition-purity-vector-bundles`: `𝔸¹ ⇒ 𝔸ⁿ`: the model purity, clause (i), over any
+base.
 
 For any scheme `B` on which the exponent of `Λ` is invertible and the zero section
 `z : B ↪ 𝔸^c_B`, cut out by the coordinates `t₁, …, t_c`, the adjoint `Λ_B ⟶ Rz^! (Λ(c)[2c])`

@@ -14,7 +14,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.Abelian
 
 Source: current blueprint, sec-fourier-transform/sk-lem-as-properties/
 def-fd-artin-schreier-sheaf.md, condensed-coefficients paragraph
-(blueprint: def-fd-artin-schreier-sheaf).
+(blueprint: lemma-artin-schreier-character-sheaf--1).
 
 These are the image projector and ordinary module pullback on the pro-etale site.
 The scalar ring is the ring of global sections of the condensed coefficient ring.
@@ -36,7 +36,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 
 /-- The pushforward of the regular coefficient module along the degree-cardinality
 Artin–Schreier map. Source: current blueprint, def-fd-artin-schreier-sheaf.md,
-condensed-coefficients paragraph (blueprint: def-fd-artin-schreier-sheaf). -/
+condensed-coefficients paragraph (blueprint: lemma-artin-schreier-character-sheaf--1). -/
 def condensedArtinSchreierPushforward :=
   (CondensedRing.lowerStar Λ
     (AffineSpace.artinSchreierMap PUnit (Spec (.of k)) (Fintype.card k))).obj
@@ -45,10 +45,10 @@ def condensedArtinSchreierPushforward :=
 /-- Pullback of sections by a deck translation, defined by the adjunction unit,
 identification of the pulled-back regular module, and composition of pushforwards.
 Source: current blueprint, def-fd-artin-schreier-sheaf.md, translation action
-(blueprint: def-fd-artin-schreier-sheaf). -/
+(blueprint: lemma-artin-schreier-character-sheaf--1). -/
 def condensedArtinSchreierTranslationAction (a : k) :
     End (condensedArtinSchreierPushforward Λ k) :=
-  (CondensedRing.lowerStar Λ
+  End.of <| (CondensedRing.lowerStar Λ
     (AffineSpace.artinSchreierMap PUnit (Spec (.of k)) (Fintype.card k))).map
       (((CondensedRing.upperStarLowerStarAdjunction Λ
         (Etale.artinSchreierTranslation k a)).homEquiv _ _)
@@ -64,28 +64,28 @@ def condensedArtinSchreierTranslationAction (a : k) :
 `Ring.inverse q` is the inverse of the unit `q` in the coefficient ring, as required
 in the source; the expression itself is also defined without invertibility.
 Source: current blueprint, def-fd-artin-schreier-sheaf.md, displayed projector
-(blueprint: def-fd-artin-schreier-sheaf). -/
+(blueprint: lemma-artin-schreier-character-sheaf--1). -/
 def condensedArtinSchreierProjector (ψ : AddChar k (MonObj.Γ Λ)) :
     End (condensedArtinSchreierPushforward Λ k) :=
-  ∑ a : k, condensedArtinSchreierTranslationAction Λ k a ≫
+  ∑ a : k, End.of ((condensedArtinSchreierTranslationAction Λ k a).asHom ≫
     (CondensedRing.lowerStar Λ
       (AffineSpace.artinSchreierMap PUnit (Spec (.of k)) (Fintype.card k))).map
         (Mod.regularEndRingHom
           (MonObj.Γ.mapFunctorMonoidHom
             (upperStarFromPoint (AffineSpace PUnit (Spec (.of k))))
-            (Ring.inverse (Fintype.card k : MonObj.Γ Λ) * ψ (-a))))
+            (Ring.inverse (Fintype.card k : MonObj.Γ Λ) * ψ (-a)))).asHom)
 
 /-- The condensed Artin–Schreier sheaf is the actual image of its character projector.
 Source: current blueprint, def-fd-artin-schreier-sheaf.md, condensed-coefficients paragraph
-(blueprint: def-fd-artin-schreier-sheaf). -/
+(blueprint: lemma-artin-schreier-character-sheaf--1). -/
 def condensedArtinSchreierSheaf (ψ : AddChar k (MonObj.Γ Λ)) :=
-  image (condensedArtinSchreierProjector Λ k ψ)
+  image ((condensedArtinSchreierProjector Λ k ψ)).asHom
 
 /-- The Artin–Schreier sheaf of a global function is the ordinary pullback of the
 character image along the morphism defined by that function. This is a module over
 `p_X^* Λ`, including for the empty scheme.
 Source: current blueprint, def-fd-artin-schreier-sheaf.md, definition of L_{psi,f}
-(blueprint: def-fd-artin-schreier-sheaf). -/
+(blueprint: lemma-artin-schreier-character-sheaf--1). -/
 def condensedArtinSchreierSheafOf (X : Scheme.{u}) [X.Over (Spec (.of k))]
     (ψ : AddChar k (MonObj.Γ Λ)) (f : Γ(X, ⊤)) :=
   (CondensedRing.upperStar Λ

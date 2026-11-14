@@ -19,8 +19,8 @@ Let `ℓ` be a prime, `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ`, and 
 for the extension of scalars `ℚ̄_ℓ,X ⊗ᴸ_{E_X} -` on bounded constructible complexes
 (`ProEtale.CondensedRing.boundedConstructibleToPadicAlgCl`, the functor
 `ProEtale.constructibleToPadicAlgCl` typed on the categories `Dᵇc(X)⟦Λ⟧`). This file gives the
-coefficient comparisons of blueprint `sk-prop-scalar-six` for `E ⟶ ℚ̄_ℓ` that do not involve
-`f^!`:
+coefficient comparisons of blueprint `proposition-six-operations-change-coefficients` for `E ⟶ ℚ̄_ℓ`
+that do not involve `f^!`:
 
 * **(Pull)** on bounded constructible complexes:
   `Lf^*_E ⋙ T_X ≅ T_Y ⋙ Lf^*_{ℚ̄_ℓ}`
@@ -60,9 +60,9 @@ at `d`, the mate is the unit of `L₂ ⊣ R₂`, then `R₂` of the isomorphism,
 counit `ε_d` of `L₁ ⊣ R₁`; and `R₂ H ε_d ≅ G R₁ ε_d` (by `e`) is an isomorphism, `R₁ ε_d` being
 the inverse of a unit. -/
 theorem isIso_mateEquiv_of_isIso_unit [IsIso adj₁.unit] [IsIso adj₂.unit]
-    (α : TwoSquare G L₁ L₂ H) [IsIso α.natTrans] (e : H ⋙ R₂ ≅ R₁ ⋙ G) :
-    IsIso (mateEquiv adj₁ adj₂ α).natTrans := by
-  have (d : B) : IsIso ((mateEquiv adj₁ adj₂ α).natTrans.app d) := by
+    (α : TwoSquare G L₁ L₂ H) [IsIso α] (e : H ⋙ R₂ ≅ R₁ ⋙ G) :
+    IsIso (mateEquiv adj₁ adj₂ α) := by
+  have (d : B) : IsIso ((mateEquiv adj₁ adj₂ α).app d) := by
     have : IsIso (R₁.map (adj₁.counit.app d)) := by
       have : IsIso (adj₁.unit.app (R₁.obj d) ≫ R₁.map (adj₁.counit.app d)) := by
         rw [adj₁.right_triangle_components]
@@ -76,7 +76,7 @@ theorem isIso_mateEquiv_of_isIso_unit [IsIso adj₁.unit] [IsIso adj₂.unit]
       Functor.comp_map]
     dsimp only [Functor.comp_obj]
     simp only [Category.id_comp]
-    have : IsIso (α.natTrans.app (R₁.obj d)) := inferInstance
+    have : IsIso (α.app (R₁.obj d)) := inferInstance
     have : IsIso (𝟙 (R₂.obj (H.obj d))) := inferInstance
     exact IsIso.comp_isIso
   exact NatIso.isIso_of_isIso_app _

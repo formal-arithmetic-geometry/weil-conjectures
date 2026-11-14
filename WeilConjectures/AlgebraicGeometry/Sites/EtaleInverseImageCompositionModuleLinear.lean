@@ -24,8 +24,30 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 800000 in
--- The dependent core application exceeds the default heartbeat limit.
+/-- The unit equation uniquely determines an isomorphism of left adjoints. -/
+private theorem exists_comparison_with_unique_unit
+    {C D : Type*} [Category C] [Category D]
+    {L L' : C ⥤ D} {P P' : D ⥤ C} (a : L ⊣ P) (a' : L' ⊣ P')
+    (p : (P' ≅ P) → Prop) (q : (L ≅ L') → Prop)
+    (h : ∃ (d : P' ≅ P) (c : L ≅ L'), p d ∧ q c ∧
+      ∀ G, a.unit.app G ≫ P.map (c.hom.app G) =
+        a'.unit.app G ≫ d.hom.app (L'.obj G)) :
+    ∃ (d : P' ≅ P) (c : L ≅ L'), p d ∧ q c ∧
+      (∀ G, a.unit.app G ≫ P.map (c.hom.app G) =
+        a'.unit.app G ≫ d.hom.app (L'.obj G)) ∧
+      (∀ c' : L ≅ L',
+        (∀ G, a.unit.app G ≫ P.map (c'.hom.app G) =
+          a'.unit.app G ≫ d.hom.app (L'.obj G)) → c' = c) := by
+  obtain ⟨d, c, hd, hc, hu⟩ := h
+  refine ⟨d, c, hd, hc, hu, ?_⟩
+  intro c' hc'
+  apply Iso.ext
+  apply NatTrans.ext
+  funext G
+  apply (a.homEquiv G (L'.obj G)).injective
+  rw [Adjunction.homEquiv_apply, Adjunction.homEquiv_apply]
+  exact (hc' G).trans (hu G).symm
+
 set_option backward.defeqAttrib.useBackward true in
 /-- The abelian composition comparisons lift to module isomorphisms, uniquely for inverse
 image with the specified unit equation. Source: Stacks Project, Tags 03D8 and 03D7
@@ -41,11 +63,11 @@ Proof:
 1. The constant-section characterization of gamma and the universal property of the
 constant sheaf show that gamma for the composite agrees with successive gamma maps,
 after the abelian direct-image composition comparison. This uses
-lem-weil-pbc-constant-sheaf-maps-global-sections.
+situation-conventions.
 2. The direct-image comparison is restriction along the pullback-pasting isomorphism.
 Restrictions are semilinear, so step 1 makes this comparison linear over the target ring.
 3. The two module hom-equivalences restrict the abelian ones, by
-prop-weil-pbc-inverse-image-modules-exact. Their composite takes linear maps to linear maps.
+situation-conventions. Their composite takes linear maps to linear maps.
 4. The abelian inverse-image comparison is adjoint to the direct-image comparison after
 the composite-map unit, by lem-weil-pbc-inverse-image-composition. Steps 2 and 3 make it linear.
 5. Inverses of linear bijections are linear; abelian naturality gives module naturality.
@@ -190,18 +212,9 @@ theorem etaleInverseImageCompositionModuleLinear
       (toSheafify (Y.smallGrothendieckTopology @Etale) ((Functor.const Y.Etaleᵒᵖ).obj R))
       (toSheafify (Z.smallGrothendieckTopology @Etale) ((Functor.const Z.Etaleᵒᵖ).obj R))
  := by
-  dsimp
   intros gammaU gammaV gammaUV hU hV hUV LU eU aU hLU LV eV aV hLV LUV eUV aUV hLUV
-  obtain ⟨d, c, hd, hc, hu⟩ :=
-    etaleInverseImageCompositionModuleLinearCore X Y Z uMap vMap R
-      gammaU gammaV gammaUV hU hV hUV LU eU aU hLU LV eV aV hLV LUV eUV aUV hLUV
-  refine ⟨d, c, hd, hc, hu, ?_⟩
-  intro c' hc'
-  apply Iso.ext
-  apply NatTrans.ext
-  funext G
-  apply ((aU.comp aV).homEquiv G (LUV.obj G)).injective
-  rw [Adjunction.homEquiv_apply, Adjunction.homEquiv_apply]
-  exact (hc' G).trans (hu G).symm
+  exact exists_comparison_with_unique_unit (aU.comp aV) aUV _ _
+    (etaleInverseImageCompositionModuleLinearCore X Y Z uMap vMap R
+      gammaU gammaV gammaUV hU hV hUV LU eU aU hLU LV eV aV hLV LUV eUV aUV hLUV)
 
 end AlgebraicGeometry

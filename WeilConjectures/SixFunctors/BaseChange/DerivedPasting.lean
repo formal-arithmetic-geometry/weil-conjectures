@@ -45,12 +45,12 @@ satisfy `AlgebraicGeometry.Etale.IsBaseChangeIso`, so does `f ≫ e`
 (`AlgebraicGeometry.Etale.IsBaseChangeIso.comp`), since every cartesian square on `f ≫ e`
 is the vertical pasting of cartesian squares on `e` and on `f`
 (`CategoryTheory.IsPullback.paste_vert`).
-(blueprint: `lemma-weil-pbc-derived-exchange-coherence`, vertical pasting;
+(blueprint: `lemma-identity-pasting`, vertical pasting;
 `lemma:weil-pbc-composition`, formal part)
 
 For the identity square on `f` the derived base change map is the identity, modulo the identity
 isomorphisms of the derived pullbacks (`AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_id`);
-with the horizontal pasting law this is blueprint `sbc-lem-identity-and-base-change-composition`.
+with the horizontal pasting law this is blueprint `lemma-identity-pasting--1`.
 
 The vertical pasting law and the composition of `IsBaseChangeIso` are in
 `WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Vertical`, the horizontal one in

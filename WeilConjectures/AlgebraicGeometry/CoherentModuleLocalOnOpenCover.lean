@@ -16,7 +16,7 @@ import WeilConjectures.AlgebraicGeometry.CoherentModuleFiniteTypeLocalCore
 /-! # Coherence of a module is local on an open covering
 
 Source: Stacks Project, Modules, Definitions 01BV and 01B5; locality used in
-Cohomology of Schemes, Lemma 0CYJ (blueprint: lem-weil-pbc-coherent-module-local-on-open-cover).
+Cohomology of Schemes, Lemma 0CYJ (blueprint: lemma-coherent-base-change-invertible-sheaves--1).
 -/
 
 @[expose] public section
@@ -33,13 +33,13 @@ namespace AlgebraicGeometry
 `Scheme.Modules.restrictFunctor` along the open immersion `W.ι`, coherence the project's
 `RingedSpace.IsCoherent` (pqf-def-coherent).
 Source: Stacks Project, Modules, Definitions 01BV and 01B5; the locality is used in
-Cohomology of Schemes, Lemma 0CYJ (blueprint: lem-weil-pbc-coherent-module-local-on-open-cover).
+Cohomology of Schemes, Lemma 0CYJ (blueprint: lemma-coherent-base-change-invertible-sheaves--1).
 
 Proof:
 1. Restriction facts for opens `V ⊆ W ⊆ X`: `𝒪_X|_W = 𝒪_W` and `(G|_W)|_V = G|_V`
    (lem-weil-pbc-module-restriction-open-immersion-colimits); restriction is a left adjoint,
    so it preserves `𝒪^{⊕ n}` and epimorphisms; kernels are sectionwise, so restriction commutes
-   with kernels (def-weil-sheaf-of-modules-category); finite type is invariant under isomorphism.
+   with kernels (situation-conventions); finite type is invariant under isomorphism.
 2. Finite type restricts: restrict a local surjection `𝒪_U^{⊕ n} → G|_U` to `U ∩ W`.
 3. Part (1): `F|_W` is of finite type by 2; a map `𝒪_{W'}^{⊕ n} → (F|_W)|_{W'} = F|_{W'}`
    has kernel of finite type by the kernel condition for `F`, `W'` being open in `X`.

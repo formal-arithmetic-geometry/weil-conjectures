@@ -65,7 +65,7 @@ theorem nonempty_equiv_globalSections_dual (H : WeilSheaf k₀ l (Spec (CommRing
     Scheme.Hom.degreeOver_eq_one_of_comp_eq_id _ (𝟙 _) (Category.id_comp _) _
   set s := (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)).geometricFiberPointOfFinitePoint y
   have hs₁ : s ≫ ((Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^
-      1).hom = (specGeometricFrobenius k₀ ^ 1).hom ≫ s :=
+      1).asIso.hom = (specGeometricFrobenius k₀ ^ 1).asIso.hom ≫ s :=
     hdy ▸ Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow _ y
   have : IsIso s := by
     have : IsIso (pullback.snd (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀))
@@ -153,8 +153,8 @@ theorem nonempty_homologySheaf_derivedLowerStar_dual_iso (d : ℕ)
 
 
 /-- **Poincaré duality for a lisse Weil sheaf, as an isomorphism of Frobenius modules**
-(blueprint `thm-pod-degreewise-perfectness-over-a-field`, with the Frobenius equivariance of
-`thm-pod-equivariance-of-the-twisted-pairing`): for `X₀` smooth, separated, of finite type and
+(blueprint `corollary-degreewise-duality-over-fields--1`, with the Frobenius equivariance of
+`theorem-poincare-duality-frobenius--3`): for `X₀` smooth, separated, of finite type and
 pure dimension `d` over `k₀`, `F` lisse and `i + j = 2d`,
 `H^j(X₀ ⊗ k̄, F^∨(d)) ≅ H_c^i(X₀ ⊗ k̄, F)^∨`, the dual carrying the inverse transpose of the
 Frobenius. Here `F^∨(d)` is the constant twist of `F^∨` by `χ_ℓ(σ)ᵈ`. -/

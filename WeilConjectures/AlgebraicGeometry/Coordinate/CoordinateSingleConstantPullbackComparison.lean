@@ -190,8 +190,8 @@ private theorem isoWhiskerLeft_app_eq
   rfl
 
 /-- The cached ordinary constant pullback is the canonical derived comparison.
-Source: sk-thm-dnc, Local construction, canonical constant-coefficient identifications
-(blueprint: lem-trf-coordinate-single-constant-pullback-comparison).
+Source: lemma-section-normal-bundle, Local construction, canonical constant-coefficient
+identifications (blueprint: lem-trf-coordinate-single-constant-pullback-comparison).
 
 Proof: Use the published factorization of ordinaryFiniteUnitPullback through the
 single-degree comparison and the pullback of the constant sheaf. The published

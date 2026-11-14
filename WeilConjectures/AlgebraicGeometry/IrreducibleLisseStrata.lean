@@ -13,7 +13,7 @@ import WeilConjectures.AlgebraicGeometry.IrreducibleLisseRefinement
 /-!
 # Irreducible lisse strata
 
-Source: the Weil conjectures blueprint, chapter `sec-smooth-purity`, unit `sk-prop-sf-cbc`,
+Source: the Weil conjectures blueprint, chapter `chap-Smooth-purity`, unit `sk-prop-sf-cbc`,
 order 1602 (blueprint: lem-weil-pbc-irreducible-lisse-strata).
 -/
 
@@ -42,7 +42,7 @@ Proof:
    each difference is nonempty and irreducible. The differences are disjoint, cover the
    original part, and are locally closed in X. Give them their reduced induced scheme
    structures (Tag 01J4); their composite immersions into X are immersions (Tag 02V0),
-   as required by `def-weil-pbc-scheme-conventions`.
+   as required by `definition-ind-etale-pro-etale-weakly--3`.
 3. Apply `lem-weil-pbc-pullback-finite-locally-constant` to the immersion of each difference
    into its original part and that part's immersion into X. Pullback preserves finite
    local constancy and composes, so all the resulting restrictions are lisse. Combining

@@ -38,13 +38,13 @@ imports; downstream files may import this module or just the pieces they need.
 
 - `AlgebraicGeometry.Etale.DerivedCategoryFiniteTor.leftDerivedUpperStar`,
   `…rightDerivedLowerStar`, `…rightDerivedLowerShriek`, `…rightDerivedUpperShriek`,
-  `…verdierDual` (`sk-thm-sf-ctf-stability`): the descended functors between the small
+  `…verdierDual` (`proposition-six-operations-dctf`): the descended functors between the small
   categories `Dctf`.
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.constructibleTorAmplitudeIn_rightDerivedLowerShriek`
-  (`sk-lem-sf-open-ctf`).
+  (`proposition-proper-direct-image-extension-zero--8`).
 - `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar`,
   `AlgebraicGeometry.Etale.torAmplitudeIn_rightDerivedLowerStar`
   (`sk-thm-sf-direct-image-tor-amplitude`).
@@ -52,24 +52,24 @@ imports; downstream files may import this module or just the pieces they need.
   `AlgebraicGeometry.Etale.torAmplitudeIn_derivedHom`,
   `AlgebraicGeometry.Etale.torAmplitudeIn_derivedHom_of_isDualizable` (`sk-thm-sf-hom-ctf`),
   `AlgebraicGeometry.Etale.boundedConstructible_derivedHom_of_isDualizable`
-  (`lem-sf-ext-sheaf-constructible`).
+  (`proposition-six-operations-dctf--15`).
 - `AlgebraicGeometry.Etale.constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_isOpenImmersion`,
   `…_of_isFinite_of_etale`, `…_of_isClosedImmersion`, `…_of_smoothOfRelativeDimension`,
   `AlgebraicGeometry.Etale.exists_shift_constructibleTorAmplitudeIn_rightDerivedUpperShriek`
-  (`sk-prop-sf-rf-shriek-preservation`, clauses (i)–(iv)).
+  (`theorem-f-shriek-finite-coefficients`, clauses (i)–(iv)).
 - `exists_constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_topologicalKrullDim_le`, in
-  the namespace `AlgebraicGeometry.Etale` (`sk-prop-sf-rf-shriek-preservation`, clause (iv)
+  the namespace `AlgebraicGeometry.Etale` (`theorem-f-shriek-finite-coefficients`, clause (iv)
   with its constants).
 - `AlgebraicGeometry.Etale.constructibleFiniteTor_leftDerivedUpperStar`,
   `AlgebraicGeometry.Etale.constructibleFiniteTor_tensor`,
   `AlgebraicGeometry.Etale.constructibleFiniteTor_rightDerivedLowerStar`,
   `AlgebraicGeometry.Etale.constructibleFiniteTor_rightDerivedLowerShriek`,
   `AlgebraicGeometry.Etale.constructibleFiniteTor_rightDerivedUpperShriek`
-  (`sk-thm-sf-ctf-stability`, clauses (i)–(v)).
+  (`proposition-six-operations-dctf`, clauses (i)–(v)).
 - `AlgebraicGeometry.Etale.ctf_generated_by_rightDerivedLowerStar_rightDerivedLowerShriek`
-  (`sk-lem-sf-flat-model`, complement).
+  (`lemma-flat-models-generators`, complement).
 - `AlgebraicGeometry.Etale.constructibleFiniteTor_eq_triangEnvelope_ctfGenerators`
-  (`lem-trf-devissage-generation`): `Dctf(X, Λ)` is the thick envelope of the generators
+  (`lemma-flat-models-generators--3`): `Dctf(X, Λ)` is the thick envelope of the generators
   `AlgebraicGeometry.Etale.ctfGenerators`; it is a thick subcategory by
   `AlgebraicGeometry.Etale.DerivedCategory.constructibleFiniteTor_isTriangulated` and
   `AlgebraicGeometry.Etale.DerivedCategory.constructibleFiniteTor_isStableUnderRetracts`.
@@ -86,39 +86,41 @@ imports; downstream files may import this module or just the pieces they need.
   independent of the compactification
   (`AlgebraicGeometry.Etale.rightDerivedLowerShriekIso`, proved for a finite ring and a
   quasi-compact `j`).
-* Clause (iv) of `sk-thm-sf-ctf-stability`, that `Rf_!` preserves `Dctf`, is stated in the
+* Clause (iv) of `proposition-six-operations-dctf`, that `Rf_!` preserves `Dctf`, is stated in the
   torsion setting of the blueprint: a finite `Λ` whose exponent is invertible on `Y`, and `Y`
   of finite type over a field `k`. Over an arbitrary base it is false: for the proper morphism
   `f : ⊔ₙ ℙⁿ_ℂ ⟶ ⊔ₙ Spec ℂ`, `Rf_! Λ` has `H²ⁿ ≠ 0` on the `n`-th point and is not bounded.
-* The smooth case of `sk-prop-sf-rf-shriek-preservation` is derived from
-  `AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor` (`thm-asd-smooth-tensor`)
-  instead of smooth purity: only the shape of `ω_f`, a locally constant free rank-one sheaf in
-  degree `-2d`, matters, and this needs neither a base field nor a Tate twist.
-* The whole of `thm-sf-ctf-stability` (`sk-thm-sf-ctf-stability`), clauses (i)–(vii), is bundled
+* The smooth case of `theorem-f-shriek-finite-coefficients` is derived from
+  `AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor`
+  (`proposition-exceptional-inverse-image-smooth-morphism`) instead of smooth purity: only the shape
+  of `ω_f`, a locally constant free rank-one sheaf in degree `-2d`, matters, and this needs neither
+  a base field nor a Tate twist.
+* The whole of `proposition-six-operations-dctf` (`proposition-six-operations-dctf`), clauses
+(i)–(vii), is bundled
   in `AlgebraicGeometry.Etale.constructibleFiniteTor_stability` and
   `AlgebraicGeometry.Etale.boundedConstructibleIntegral_stability` of
   `WeilConjectures.SixFunctors.Etale.Derived.Stability.CtfStability`, which cannot be imported
   here (it depends on modules importing this one).
-* Clause (vi) of `sk-thm-sf-ctf-stability` — that `𝔻_X` preserves `Dctf(X, A)` and is an
+* Clause (vi) of `proposition-six-operations-dctf` — that `𝔻_X` preserves `Dctf(X, A)` and is an
   anti-equivalence of it — is
   `AlgebraicGeometry.Etale.constructibleFiniteTor_verdierDual` and
   `AlgebraicGeometry.Etale.nonempty_iso_verdierDual_verdierDual` of
   `WeilConjectures.SixFunctors.Etale.Derived.Dualizing`. Only the descended functor
   `DerivedCategoryFiniteTor.verdierDual` is built here, out of those.
-* Clause (i) of `sk-thm-sf-ctf-stability` assumes that pullbacks preserve flat sheaves
+* Clause (i) of `proposition-six-operations-dctf` assumes that pullbacks preserve flat sheaves
   (`AlgebraicGeometry.Etale.UpperStarPreservesFlat A`, an instance for `A = ModuleCat Λ`, where
   flatness is checked on stalks). For a general coefficient category `A` this is not known, and
   it is the special case of the Tor amplitude statement for a flat sheaf in degree `0`. The
   proof represents a complex of Tor amplitude in `[a, b]` by a complex of flat sheaves in
   degrees `[a, b]` (`DerivedCategory.exists_iso_Q_obj_flat_of_torAmplitudeIn`) and pulls it
   back termwise.
-* Clause (vii) of `sk-thm-sf-ctf-stability` is stated in
+* Clause (vii) of `proposition-six-operations-dctf` is stated in
   `WeilConjectures.SixFunctors.Etale.Derived.Stability.CtfStability` for the finite and integral
   stages, coefficient reduction being `AlgebraicGeometry.Etale.reductionModIdeal`; the field
   stages `E`, `ℚ̄_ℓ` are not available as coefficient categories.
-* The internal-Hom half of clause (ii) of `sk-thm-sf-ctf-stability` is not restated: it *is*
+* The internal-Hom half of clause (ii) of `proposition-six-operations-dctf` is not restated: it *is*
   `torAmplitudeIn_derivedHom` below, with the same shifts.
-* The generation statement (the complement of `sk-lem-sf-flat-model`) is stated for
+* The generation statement (the complement of `lemma-flat-models-generators`) is stated for
   `A = ModuleCat Λ` with `Λ` finite, because its proof uses flat constructible models
   (`hasTorAmplitudeIn_iff_exists_flatConstructibleModel`), which
   need finite stalks, and the `π₁(U)`-composition factors of the stalks; this is what the
@@ -129,12 +131,13 @@ imports; downstream files may import this module or just the pieces they need.
 * "Thick subcategory" in the generation statement is spelled as an `ObjectProperty` that is
   `ObjectProperty.IsTriangulated`, `ObjectProperty.IsStableUnderRetracts` and
   `ObjectProperty.IsClosedUnderIsomorphisms`; generation is the statement that any such property
-  containing the generators contains all of `Dctf(X, A)`. In `lem-trf-devissage-generation` the
+  containing the generators contains all of `Dctf(X, A)`. In `lemma-flat-models-generators--3` the
   thick subcategory generated by the generators is Mathlib's `ObjectProperty.triangEnvelope`.
 * The counterexample of `sk-thm-sf-hom-ctf` (the origin in `𝔸¹`, showing that the sharper
   interval fails without dualizability) is
-  `AlgebraicGeometry.Etale.not_forall_torAmplitudeIn_derivedHom` (`rem-sf-proetale-hom-status`);
-  it uses the normalisation of the Tate twist, so it assumes a normalized Tate twist datum.
+  `AlgebraicGeometry.Etale.not_forall_torAmplitudeIn_derivedHom`
+  (`example-internal-hom-affine-line`); it uses the normalisation of the Tate twist, so it assumes a
+  normalized Tate twist datum.
 * A dimension bound `dim X ≤ d` is `topologicalKrullDim X ≤ (d : WithBot ℕ∞)`. What Lean needs
   to form `Rf_!` and `Rf^!` is that `f` admits a compactification, `HasCompactification f`,
   taken as an
@@ -164,15 +167,16 @@ imports; downstream files may import this module or just the pieces they need.
   `H³(ℙ¹, ℤ) ≅ H²(ℙ¹, ℚ/ℤ)` contains `ℚ_ℓ/ℤ_ℓ`, so `Rf_*ℤ` is not constructible for
   `f : ℙ¹ ⟶ Spec k`. The `ℓ`-adic coefficient stages are reached through the pro-étale formalism
   instead.
-* The clause (iv) statements of `sk-prop-sf-rf-shriek-preservation` and clause (v) of
-  `sk-thm-sf-ctf-stability` assume `Y` Noetherian (`[IsNoetherian Y]`). Quasi-compactness of
+* The clause (iv) statements of `theorem-f-shriek-finite-coefficients` and clause (v) of
+  `proposition-six-operations-dctf` assume `Y` Noetherian (`[IsNoetherian Y]`). Quasi-compactness of
   `Y` is needed for a uniform shift, since `f` must be covered by finitely many affine charts:
   for `f : ⊔ₙ 𝔸ⁿ_k ⟶ ⊔ₙ Spec k` the complex `Rf^!Λ` sits in degree `-2n` on the `n`-th
   component. Noetherianity gives `dim 𝔸ⁿ_V = dim V + n`, which fails for general rings.
 
 ## Remarks of the blueprint recorded here
 
-* `sk-rem-sf-typing` (typing table: ambient definition, small-category theorem). Each operation
+* `proposition-six-operations-dctf` (typing table: ambient definition, small-category theorem). Each
+operation
   is defined on the ambient derived category and proved to descend to the small categories:
   `Lf^*` by `constructibleFiniteTor_leftDerivedUpperStar` (and `boundedConstructible_*` for
   `Dᵇc`); `⊗ᴸ` by `constructibleFiniteTor_tensor` and `torAmplitudeIn_tensor`
@@ -186,7 +190,7 @@ imports; downstream files may import this module or just the pieces they need.
   `ProEtale.boundedConstructible_and_torAmplitudeIn_rightDerivedLowerStar`; `Rf_!` by
   `constructibleFiniteTor_rightDerivedLowerShriek`; `Rf^!` (the étale adjoint of `Rf_!`, which
   exists unconditionally) by `constructibleFiniteTor_rightDerivedUpperShriek` and the shifted
-  forms of `sk-prop-sf-rf-shriek-preservation`; `𝔻_X` by `constructibleFiniteTor_verdierDual`
+  forms of `theorem-f-shriek-finite-coefficients`; `𝔻_X` by `constructibleFiniteTor_verdierDual`
   and `verdierDualEquivalence`. The descended functors are the `DerivedCategoryFiniteTor.*`
   functors. The ambient pro-étale adjoint `Rf^×` is hypothetical and is used nowhere.
 * `sk-rem-sf-ledger` (what is unconditional, conditional, open). Expository. In this library

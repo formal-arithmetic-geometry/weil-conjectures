@@ -35,7 +35,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- Compare the two left adjoints to restriction along `ZMod N → A`, using the
 unique `ZMod N`-linearity of additive homomorphisms. No basis or root is chosen.
-Source: finite-coefficient identification for sk-thm-regular, Steps 1 and 4(iii)
+Source: finite-coefficient identification for lemma-class-of-point--1, Steps 1 and 4(iii)
 (blueprint: def-pur-finite-root-scalar-extension-comparison). -/
 noncomputable def zmodScalarExtensionIso
     (N : ℕ) (A : Type (u + 1)) [CommRing A] (hA : (N : A) = 0) :
@@ -74,7 +74,7 @@ noncomputable def zmodScalarExtensionIso
 /-- Sheafify the scalar-extension comparison on the finite roots-of-unity presheaf.
 This is the canonical identification of the finite Tate line with extension of its
 underlying abelian sheaf, natural in every object of the small étale site.
-Source: finite-coefficient identification for sk-thm-regular, Steps 1 and 4(iii)
+Source: finite-coefficient identification for lemma-class-of-point--1, Steps 1 and 4(iii)
 (blueprint: def-pur-finite-root-scalar-extension-comparison). -/
 noncomputable def finiteEtaleLineAbIso
     (T : Scheme.{u}) (N : ℕ) (A : Type (u + 1)) [CommRing A] (hA : (N : A) = 0) :

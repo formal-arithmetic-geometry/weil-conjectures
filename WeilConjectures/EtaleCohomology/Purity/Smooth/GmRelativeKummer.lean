@@ -33,7 +33,7 @@ Kummer classes (`AlgebraicGeometry.Etale.hasKummerClass`) this file proves bluep
 
 It also proves the global orientation `thm-pur-affine-line-orientation`
 (`AlgebraicGeometry.Etale.isIso_supportedClassMap_kummerBoundary_coord_of_isAlgClosed`), the
-rank-one local calculation `thm-pur-rank-one-local-calculation`, with the `Λ`-linear isomorphism
+rank-one local calculation `example-closed-support`, with the `Λ`-linear isomorphism
 `H²_Z(𝔸¹_Ω, Λ(1)) ≅ Λ` sending `∂κ(t)` to `1`
 (`AlgebraicGeometry.Etale.supportCohomologyAffineLineLinearEquiv`), and the structure of the
 exceptional inverse image of the zero section `lem-pur-gysin-structure`, with the `Λ`-linear
@@ -210,7 +210,7 @@ lemma connectedSpace_zeroLocusSubscheme_coord (S : Scheme.{u}) [ConnectedSpace S
     (AffineSpace.zeroSectionIsoZeroLocusSubscheme (ULift.{u} (Fin 1)) S
       (s := {AffineSpace.coord S (ULift.up 0)}) Set.range_unique))).1 inferInstance
 
-/-- Blueprint `thm-pur-rank-one-local-calculation`: Rank-one local calculation (the
+/-- Blueprint `example-closed-support`: Rank-one local calculation (the
 normalized isomorphism).
 
 For an algebraically closed field `Ω` and the origin `Z = V(t) ⊂ 𝔸¹_Ω`, the `Λ`-linear
@@ -240,7 +240,7 @@ noncomputable def supportCohomologyAffineLineLinearEquiv :
         {AffineSpace.coord (Spec (.of Ω)) (ULift.up 0)}))))
       (by exact bijective_smul_id_constantComplex Λ)).symm
 
-/-- Blueprint `thm-pur-rank-one-local-calculation`: Rank-one local calculation (the
+/-- Blueprint `example-closed-support`: Rank-one local calculation (the
 normalization).
 
 The isomorphism `AlgebraicGeometry.Etale.supportCohomologyAffineLineLinearEquiv` sends the
@@ -255,7 +255,7 @@ theorem supportCohomologyAffineLineLinearEquiv_kummerBoundary :
           (kummerBoundary Λ (AffineSpace.coord (Spec (.of Ω)) (ULift.up 0)))))) = 1 := by
   simp [supportCohomologyAffineLineLinearEquiv, LinearEquiv.symm_apply_eq, Linear.homCongr_apply]
 
-/-- Blueprint `thm-pur-rank-one-local-calculation`: Rank-one local calculation
+/-- Blueprint `example-closed-support`: Rank-one local calculation
 
 Let `Ω` be an algebraically closed field (the residue field of a geometric point), `Λ` a finite
 ring whose exponent is invertible in `Ω`, `Z = V(t) ⊂ 𝔸¹_Ω` the origin and
@@ -519,7 +519,6 @@ theorem isIso_derivedBaseChangeMap_app_constantComplex_affineLine :
   exact (NatTrans.isIso_app_iff_of_iso BC (leftDerivedUpperStarConstantComplexIso Λ p)).1 h₁
 
 set_option maxRecDepth 20000 in
-set_option maxHeartbeats 1000000 in
 -- the composites of derived functors between the derived categories of the two bases are large
 include aY aY' in
 /-- Blueprint `prop-pur-gm-relative-kummer`: The affine line and the punctured line over a base

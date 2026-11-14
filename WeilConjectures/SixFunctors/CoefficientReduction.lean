@@ -31,8 +31,8 @@ Let `Λ` be a commutative ring and `ϖ` a nonzerodivisor of `Λ`, the intended c
 `Λ = 𝒪_E` with a uniformizer `ϖ`, so that `Λ ⧸ (ϖ)ⁿ = A_{E,n}`. The reduction of a complex `K`
 of sheaves of `Λ`-modules is its derived base change `K_n = K ⊗ᴸ_Λ Λ ⧸ (ϖ)ⁿ`, characterised by
 its universal property (`CategoryTheory.Sheaf.IsDerivedBaseChange`) and read in `D(Λ)` through
-restriction of scalars. Blueprint `lem-fix-operation-reduction` states that this reduction
-commutes with the basic operations, compatibly with the units and counits out of which the
+restriction of scalars. Blueprint `proposition-six-operations-change-coefficients` states that this
+reduction commutes with the basic operations, compatibly with the units and counits out of which the
 projection and exchange transformations are built.
 
 The compatibilities are recorded as propositions: reduction `Λ → Λ ⧸ (ϖ)ⁿ` for the étale and for
@@ -59,7 +59,8 @@ common-stage scalar extension `𝒪_E → 𝒪_{E'}` with its rationalization. T
 
 ## Main statements
 
-- `AlgebraicGeometry.coefficientChangeCompatibility` (`lem-fix-operation-reduction`).
+- `AlgebraicGeometry.coefficientChangeCompatibility`
+(`proposition-six-operations-change-coefficients`).
 - `AlgebraicGeometry.Etale.exists_isDerivedBaseChange_arrowIso_reductionModIdeal_projectionMap`:
   the reduction of `PF_{f, K, L}` modulo `(ϖ)ⁿ` is isomorphic, as an arrow, to the restriction
   of scalars of `PF_{f, K_n, L_n}`.
@@ -149,10 +150,10 @@ local notation "𝐑𝐞𝐬[" X ", " I ", " n "]" =>
   derivedRestrictScalars (Ideal.Quotient.mk (I ^ n)) X
 
 /-- The compatibility of the reduction `Λ → Λ ⧸ Iⁿ` with the basic operations of the étale
-derived categories (the étale part of blueprint `lem-fix-operation-reduction`): every object
-has a reduction (a derived base change along `Λ → Λ ⧸ Iⁿ`); the derived pullback, the derived
-tensor product, the derived direct image, the compact-support direct image and the internal Hom
-of reductions are reductions of the corresponding operations; and the reduction of the
+derived categories (the étale part of blueprint `proposition-six-operations-change-coefficients`):
+every object has a reduction (a derived base change along `Λ → Λ ⧸ Iⁿ`); the derived pullback, the
+derived tensor product, the derived direct image, the compact-support direct image and the internal
+Hom of reductions are reductions of the corresponding operations; and the reduction of the
 projection map `PF_{f, K, L}` (its image under `- ⊗ᴸ (Λ ⧸ Iⁿ)_Y`) is isomorphic as an arrow to the
 restriction of scalars of the projection map `PF_{f, K_n, L_n}` over `Λ ⧸ Iⁿ`, which expresses
 that the comparisons preserve the units, counits and associativity maps out of which the
@@ -323,7 +324,7 @@ local notation "𝐃𝐎(" X ", " E ")" =>
 
 /-- The compatibility of the scalar extension `𝒪_E → 𝒪_{E'}` between two finite extensions
 `E ⊆ E'` of `ℚ_ℓ` inside `ℚ̄_ℓ` (the common-stage scalar extension of
-`def-sfb-rationalization-quotient`) with the basic operations: derived pullback, derived tensor
+`proposition-inverting-ell--2`) with the basic operations: derived pullback, derived tensor
 product, derived direct image, compact-support direct image and the projection map commute with
 the derived base change along `𝒪_E → 𝒪_{E'}`; and after rationalization, the scalar extension
 `- ⊗_E E' : D_comp(Y_ét, E) ⥤ D_comp(Y_ét, E')` of the projection map over `E` is, as an arrow,
@@ -373,11 +374,11 @@ local notation "𝐑𝐞𝐬[" X ", " I ", " n "]" =>
   Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X) (Ideal.Quotient.mk (I ^ n))
 
 /-- The compatibility of the reduction `Λ → Λ ⧸ Iⁿ` with the basic operations of the pro-étale
-derived categories (the pro-étale part of blueprint `lem-fix-operation-reduction`): every
-object has a reduction (a derived base change along `Λ → Λ ⧸ Iⁿ`); the derived pullback, the
-derived tensor product, the derived direct image, the compact-support direct image, the internal
-Hom (with arbitrary first variable) and the exceptional inverse image of reductions are
-reductions of the corresponding operations; and
+derived categories (the pro-étale part of blueprint
+`proposition-six-operations-change-coefficients`): every object has a reduction (a derived base
+change along `Λ → Λ ⧸ Iⁿ`); the derived pullback, the derived tensor product, the derived direct
+image, the compact-support direct image, the internal Hom (with arbitrary first variable) and the
+exceptional inverse image of reductions are reductions of the corresponding operations; and
 the reduction of the compact-support exchange map `Ex_!(c) : Lg^* Rf_!(c) ⟶ Rf'_!(c') Lg'^*`
 at `K` (its image under `- ⊗ᴸ (Λ ⧸ Iⁿ)_{Y'}`) is isomorphic as an arrow to the restriction of
 scalars of the exchange map over `Λ ⧸ Iⁿ` at `K_n`, which expresses that the comparisons
@@ -537,7 +538,8 @@ structure ScalarExtensionCompatibility (l : ℕ) [Fact l.Prime] (E E' : Type) [F
 
 end ProEtale
 
-/-- The statement of blueprint `lem-fix-operation-reduction`, assembled from its parts:
+/-- The statement of blueprint `proposition-six-operations-change-coefficients`, assembled from its
+parts:
 
 * `reduction`, `proEtaleReduction`: for a nonzerodivisor `ϖ` of `Λ` (for `Λ = 𝒪_E` a
   uniformizer, so that `Λ → Λ ⧸ (ϖ)ⁿ` is `𝒪_E → A_{E,n}`), reduction modulo `(ϖ)ⁿ` commutes with
@@ -831,7 +833,8 @@ attribute [local irreducible] ProEtale.pbcFixedScalarExtension Etale.projectionM
 
 end CoefficientProofs
 
-/-- Blueprint `lem-fix-operation-reduction`: Basic operations and coefficient reduction.
+/-- Blueprint `proposition-six-operations-change-coefficients`: Basic operations and coefficient
+reduction.
 
 For the derived-complete coefficient categories, reduction `𝒪_E → A_{E,n}` commutes with derived
 pullback, tensor, ordinary direct image and compact-support direct image; finite reduction
@@ -852,7 +855,7 @@ invokes the coefficient comparisons that the admissibility hypothesis
 unconditionally on the unbounded categories and are stated (`Rf^!` and the unit and counit of
 `Rf_! ⊣ Rf^!`), while for the finite reductions and scalar extensions they remain part of that
 hypothesis. Rationalization is stated in the étale model, where the rational categories of
-`def-sfb-rationalization-quotient` are formalised. -/
+`proposition-inverting-ell--2` are formalised. -/
 theorem coefficientChangeCompatibility : CoefficientChangeCompatibility.{u} :=
   sorry
 
@@ -865,17 +868,17 @@ local notation "𝐃(" X ", " Λ ")" =>
 
 variable {Λ : Type (u + 1)} [CommRing Λ] {ϖ : Λ} {X Y : Scheme.{u}}
 
-/-- Blueprint `lem-fix-operation-reduction`: Basic operations and coefficient reduction; the
-compatibility of the reduction `Λ → Λ ⧸ (ϖ)ⁿ` (for `Λ = 𝒪_E`, the reduction `𝒪_E → A_{E,n}`) with
-the projection transformation.
+/-- Blueprint `proposition-six-operations-change-coefficients`: Basic operations and coefficient
+reduction; the compatibility of the reduction `Λ → Λ ⧸ (ϖ)ⁿ` (for `Λ = 𝒪_E`, the reduction
+`𝒪_E → A_{E,n}`) with the projection transformation.
 
 For a nonzerodivisor `ϖ` of `Λ`, `f : X ⟶ Y` admitting a compactification, `K ∈ D(X_ét, Λ)` and
 `L ∈ D(Y_ét, Λ)`, there are reductions `K_n = K ⊗ᴸ_Λ Λ ⧸ (ϖ)ⁿ` and `L_n = L ⊗ᴸ_Λ Λ ⧸ (ϖ)ⁿ`
 (derived base changes, `AlgebraicGeometry.Etale.IsDerivedBaseChange`) such that the reduction
 `ρ(PF_{f, K, L})` of the projection map, its image under `- ⊗ᴸ (Λ ⧸ (ϖ)ⁿ)_Y`, is isomorphic as an
 arrow to the restriction of scalars of the projection map `PF_{f, K_n, L_n}` over `Λ ⧸ (ϖ)ⁿ`.
-It is the reduction square that Step 1 of `sk-thm-sf-pf-adic` cites from
-`sk-prop-sf-pf-reduction`, a consequence of
+It is the reduction square that Step 1 of `lemma-projection-formula-integral-coefficients` cites
+from `sk-prop-sf-pf-reduction`, a consequence of
 `AlgebraicGeometry.coefficientChangeCompatibility`. -/
 theorem exists_isDerivedBaseChange_arrowIso_reductionModIdeal_projectionMap
     (hϖ : ϖ ∈ nonZeroDivisors Λ) (n : ℕ) (f : X ⟶ Y) [HasCompactification f]
@@ -910,8 +913,8 @@ variable {Λ : Type (u + 1)} [CommRing Λ] {I : Ideal Λ}
 local notation "𝐑𝐞𝐬[" X ", " n "]" =>
   Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X) (Ideal.Quotient.mk (I ^ n))
 
-/-- Blueprint `lem-fix-operation-reduction`: Basic operations and coefficient reduction; the
-compatibility of the reduction `Λ → Λ/Iⁿ` (for `Λ = 𝒪_E` and `I = 𝔪_E`, the reduction
+/-- Blueprint `proposition-six-operations-change-coefficients`: Basic operations and coefficient
+reduction; the compatibility of the reduction `Λ → Λ/Iⁿ` (for `Λ = 𝒪_E` and `I = 𝔪_E`, the reduction
 `𝒪_E → A_{E,n}`) with the compact-support exchange transformation.
 
 For an ideal `I` of `Λ` generated by a nonzerodivisor, a cartesian square `g' ≫ f = f' ≫ g`, a

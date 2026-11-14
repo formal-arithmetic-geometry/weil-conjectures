@@ -219,8 +219,8 @@ theorem projectiveLineHyperplaneClass_baseChange :
     restrictSupportedClass_comp_counit]
 
 variable (Λ) in
-/-- **Base change of the decomposition map** (blueprint `det-sp-p1-trace` (1)). Let
-`g' : ℙ¹_{S'} ⟶ ℙ¹_S` be the base change of `g : S' ⟶ S`. The pullback along `g` of the
+/-- **Base change of the decomposition map** (blueprint `lemma-cohomology-projective-line-trace`
+(1)). Let `g' : ℙ¹_{S'} ⟶ ℙ¹_S` be the base change of `g : S' ⟶ S`. The pullback along `g` of the
 decomposition map `(1, h) : Λ_S(1)[2] ⊕ Λ_S ⟶ Rq_*(Λ_{ℙ¹_S}(1)[2])`
 (`AlgebraicGeometry.Etale.projectiveLineDecompositionMap`), followed by the proper base change
 map `Lg^* Rq_* ⟶ Rq'_* Lg'^*` and `Lg'^*(Λ(1)[2]) ≅ Λ(1)[2]`, is the decomposition map of
@@ -268,8 +268,8 @@ theorem projectiveLineDecompositionMap_baseChange :
   simp only [Preadditive.comp_add, biprod.lift_fst_assoc, biprod.lift_snd_assoc, Category.assoc]
 
 variable (Λ) in
-/-- **Base change of the trace** (blueprint `det-sp-p1-trace` (2)). For `g : S' ⟶ S` with
-base change `g' : ℙ¹_{S'} ⟶ ℙ¹_S`, the pullback along `g` of the trace
+/-- **Base change of the trace** (blueprint `lemma-cohomology-projective-line-trace` (2)). For
+`g : S' ⟶ S` with base change `g' : ℙ¹_{S'} ⟶ ℙ¹_S`, the pullback along `g` of the trace
 `Tr_q : Rq_*(Λ_{ℙ¹_S}(1)[2]) ⟶ Λ_S` (`AlgebraicGeometry.Etale.projectiveLineTrace`) is the
 proper base change map `Lg^* Rq_* ⟶ Rq'_* Lg'^*`, followed by `Lg'^*(Λ(1)[2]) ≅ Λ(1)[2]`, the
 trace of `ℙ¹_{S'}` and `Λ_{S'} ≅ Lg^* Λ_S`. -/

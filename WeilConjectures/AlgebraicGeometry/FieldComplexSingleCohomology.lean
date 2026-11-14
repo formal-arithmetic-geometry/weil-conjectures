@@ -17,7 +17,8 @@ import WeilConjectures.CategoryTheory.SplitCategoryNullHomotopy
 
 /-! # Contraction of a field complex onto its single cohomology
 
-Source: blueprint lem-pc-perfect-locus, proof step 4, vector-space splitting argument.
+Source: blueprint lemma-coherent-base-change-invertible-sheaves--3, proof step 4, vector-space
+splitting argument.
 -/
 
 @[expose] public section
@@ -46,7 +47,7 @@ private theorem injective_of_field {R : CommRingCat.{u}} (hR : IsField R)
 
 /-- A complex of module sheaves on a field spectrum contracts onto its sole cohomology.
 
-Source: blueprint lem-pc-perfect-locus, proof step 4, as recorded in
+Source: blueprint lemma-coherent-base-change-invertible-sheaves--3, proof step 4, as recorded in
 `lem-pc-finite-free-single-field-fibre`, proof step 2.
 (blueprint: new-field-complex-single-cohomology).
 

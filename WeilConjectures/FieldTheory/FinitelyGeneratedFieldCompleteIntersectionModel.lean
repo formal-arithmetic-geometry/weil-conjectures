@@ -14,12 +14,13 @@ public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.Algebra.Module.LocalizedModule.Basic
 import WeilConjectures.FieldTheory.TriangularFieldModelPresentation
 import WeilConjectures.FieldTheory.TriangularFieldModelWeakRegularity
+public import Mathlib.Algebra.Ring.Hom.InjSurj
 
 /-!
 # Complete-intersection models of finitely generated fields
 
 Source: Stacks Project, Algebra, proof of Tag 07BV, and More on Algebra, proof of Tag 07E1
-(blueprint: lem-weil-pbc-finitely-generated-field-complete-intersection-model).
+(blueprint: theorem-finite-etale-covers-proper-henselian--2).
 -/
 
 @[expose] public section
@@ -31,7 +32,7 @@ namespace FieldTheory
 /-- A finitely generated extension with a transcendence basis of size `d` is the fraction
 field of a quotient of a polynomial ring in `n` variables by a regular sequence of length
 `c`, with `n - c = d`. Source: Stacks Project, proof of Tag 07BV, as used in Tag 07E1
-(blueprint: lem-weil-pbc-finitely-generated-field-complete-intersection-model).
+(blueprint: theorem-finite-etale-covers-proper-henselian--2).
 
 Proof:
 1. `exists_triangularFieldModel_presentation` carries out the tower-of-minimal-polynomials

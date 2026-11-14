@@ -21,7 +21,7 @@ filtered colimit of abelian sheaves on `X` is computed sectionwise
 (`TopCat.Sheaf.isColimitSheafSectionsMapCocone`), a filtered colimit of flasque sheaves is
 flasque (`TopCat.Sheaf.isFlasque_of_isColimit`), and sheaf cohomology `Hⁿ(X, -)` commutes with
 filtered colimits (`TopCat.Sheaf.preservesColimitsOfShape_functorH`, blueprint
-`lem-sc-zariski-filtered-cohomology`). The last statement follows by dimension shifting along
+`lemma-uniform-bounds-pro-etale-affines`). The last statement follows by dimension shifting along
 the functorial embedding of a sheaf into its Godement sheaf, which is flasque.
 -/
 
@@ -379,7 +379,7 @@ theorem hColimitProp (n : ℕ) (D : J ⥤ TopCat.Sheaf AddCommGrpCat.{u} X) : HC
       (ShortComplex.ShortExact.mk' (ShortComplex.exact_cokernel _) inferInstance inferInstance)
       fun j ↦ (inferInstance : Presheaf.IsFlasque (godementFunctor.obj (D.obj j)).obj)
 
-/-- Blueprint `lem-sc-zariski-filtered-cohomology`: Filtered colimits on a Noetherian Zariski
+/-- Blueprint `lemma-uniform-bounds-pro-etale-affines`: Filtered colimits on a Noetherian Zariski
 site.
 
 On a noetherian topological space `X` (for instance the underlying space of a noetherian

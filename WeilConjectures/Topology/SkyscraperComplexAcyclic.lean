@@ -11,6 +11,7 @@ public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 
 import Mathlib.CategoryTheory.Abelian.FunctorCategory
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 @[expose] public section
 

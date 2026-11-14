@@ -40,7 +40,7 @@ open CategoryTheory Limits Opposite Presheaf AlgebraicGeometry Scheme
 
 /-- **The Brauer group of a `C₁` field vanishes.** The cohomological Brauer group
 `H²(Spec(K)_ét, 𝔾ₘ)` of a quasi-algebraically closed field `K` vanishes.
-(blueprint: `lem-sc-c1-brauer-trivial`, `lem-sc-tsen`) -/
+(blueprint: `lemma-cohomology-multiplicative-group--7`) -/
 theorem IsQuasiAlgClosed.subsingleton_cohomologicalBrauerGroup (K : Type u) [Field K]
     [IsQuasiAlgClosed K] : Subsingleton (Spec (.of K)).CohomologicalBrauerGroup := by
   refine Sheaf.subsingleton_H_two_of_exactAt_cechComplex GaloisCech.isTerminal

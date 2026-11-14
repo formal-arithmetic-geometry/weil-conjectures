@@ -28,7 +28,7 @@ import WeilConjectures.Algebra.Homology.SixFunctors.LocalizedSiteTensorRestricti
 
 /-! # Signed powers of a line give inverse tensor functors
 
-Source: prop-weil-twist-preserves, proof steps 1--2.
+Source: definition-tate-twists--10, proof steps 1--2.
 (blueprint: lem-weil-signed-line-tensor-equivalence).
 -/
 
@@ -393,7 +393,7 @@ private theorem lineSignedRank (S : Scheme.{u})
   exact ⟨lineSignedOverUnit S R L (U i) e m⟩
 
 /-- Signed tensor powers remain lines, and opposite powers give inverse sheaf tensor functors.
-Source: blueprint prop-weil-twist-preserves, proof steps 1--2
+Source: blueprint definition-tate-twists--10, proof steps 1--2
 (blueprint: lem-weil-signed-line-tensor-equivalence).
 
 Proof: choose a cover on which L is the coefficient unit. Tensor powers restrict to

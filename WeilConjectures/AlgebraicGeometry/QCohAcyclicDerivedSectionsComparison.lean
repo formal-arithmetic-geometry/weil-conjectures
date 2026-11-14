@@ -43,8 +43,8 @@ quasi-coherent module. Sections preserve countable products.
 (2) Shift to degree zero. Apply lem-pc-unbounded-derived-functor-cohomological-bound
 with N = 1 to the negative truncation: its derived sections vanish in degrees ≥ 0.
 The truncation triangle therefore removes the unbounded negative tail.
-(3) Apply thm-sp-truncation-e2 to the bounded-below positive truncation. Its positive
-columns vanish by (1), leaving only sections of the cohomology sheaf. All maps are
+(3) Apply lemma-uniform-bound-proper-direct-image--1 to the bounded-below positive truncation. Its
+positive columns vanish by (1), leaving only sections of the cohomology sheaf. All maps are
 functorial, both in the derived object and in affine-open restriction; they produce
 the first natural isomorphism of module presheaves on the full affine-open category.
 (4) Compute using a K-injective representative I. The presheaf is the sectionwise

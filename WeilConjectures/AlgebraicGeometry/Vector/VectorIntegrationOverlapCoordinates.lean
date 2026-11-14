@@ -303,7 +303,7 @@ private theorem restrict_chart
 This statement concerns scheme maps only and has no coefficient ring or exchange map.
 Source: blueprint sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md,
 identification on overlaps by linear changes of frame, and the coordinate convention
-of def-asd-vector-bundle-zero-section.
+of proposition-purity-vector-bundles.
 (blueprint: lem-amb-vector-integration-overlap-coordinates).
 
 Proof: restrict each module frame along U into its frame open, using restrictFunctorComp

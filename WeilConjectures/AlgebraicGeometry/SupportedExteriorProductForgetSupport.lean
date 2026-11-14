@@ -12,7 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.SupportedExteriorProductNaturali
 
 Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/
 sec-smooth-purity/sec-the-trace-map-of-affine-space/sk-prop-an/
-def-pur-supported-exterior-product.md (blueprint: def-pur-supported-exterior-product).
+def-pur-supported-exterior-product.md (blueprint: proposition-purity-vector-bundles).
 
 We totalize the ordinary pullback and tensor of global sections to a chain map
 `exteriorSectionsComplex`, and show that the resolution pairing of supported sections

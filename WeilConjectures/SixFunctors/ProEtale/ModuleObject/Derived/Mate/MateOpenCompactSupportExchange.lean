@@ -17,8 +17,8 @@ import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Compactific
 
 /-! # The normalized compact-support comparison for an open square
 
-Source: blueprint det-sf-mate-open-restriction, proof (2), and
- det-sf-comp-composition-interchange, proof (2)--(3).
+Source: blueprint proposition-composition-open-restriction-compactifications-f, proof (2), and
+ proposition-composition-base-change-rf-shriek--1, proof (2)--(3).
 -/
 
 @[expose] public noncomputable section
@@ -41,8 +41,8 @@ private theorem mate_component
     {L : A ⥤ B} {R : B ⥤ A} {L' : C ⥤ D} {R' : D ⥤ C}
     {H : A ⥤ C} {H' : B ⥤ D} (a : L ⊣ R) (b : L' ⊣ R')
     (θ : TwoSquare H L L' H') (M : B) :
-    (mateEquiv a b θ).natTrans.app M =
-      b.homEquiv _ _ (θ.natTrans.app (R.obj M) ≫ H'.map (a.counit.app M)) := by
+    (mateEquiv a b θ).app M =
+      b.homEquiv _ _ (θ.app (R.obj M) ≫ H'.map (a.counit.app M)) := by
   simp [mateEquiv, Adjunction.homEquiv_unit]
 
 private theorem supported_open_counit

@@ -16,7 +16,7 @@ Let `X = lim Dᵢ` be a cofiltered limit of quasi-compact quasi-separated scheme
 transition maps, and let `U` be a qcqs hypercover of `X` (a semi-simplicial object of the small
 étale site of `X` with quasi-compact quasi-separated terms). We show that the truncation of `U`
 in degrees `≤ N` descends to some stage `Dₖ` (blueprint
-`lemma-weil-pbc-finite-hypercover-descent`):
+`corollary-cohomology-pro-etale-affine`):
 
 - `AlgebraicGeometry.TruncatedDescent`: an `N`-truncated semi-simplicial object `T` of the small
   étale site of `Dₖ` with quasi-compact quasi-separated terms, together with identifications
@@ -36,7 +36,7 @@ Morphisms between truncated hypercovers descend as well
 The main inputs are the descent of quasi-compact quasi-separated étale schemes, of morphisms, of
 equalities of morphisms and of surjectivity to a finite stage
 (`AlgebraicGeometry.etale_finite_data_descent_of_isLimit`, blueprint
-`lem-weil-pbc-etale-finite-data-descent`), and the fact that matching objects are finite limits,
+`lemma-acyclicity-pulled-back-injectives`), and the fact that matching objects are finite limits,
 so that their formation commutes with base change and preserves quasi-compactness and
 quasi-separatedness.
 -/
@@ -566,7 +566,7 @@ open SemiSimplicialObject
 
 variable (c) in
 /-- **Descent datum of a truncated étale hypercover** (blueprint
-`lemma-weil-pbc-finite-hypercover-descent`): for a semi-simplicial object `U` of the small étale
+`corollary-cohomology-pro-etale-affine`): for a semi-simplicial object `U` of the small étale
 site of the limit `X = lim Dᵢ`, an `N`-truncated semi-simplicial object `T` of the small étale
 site of the stage `Dₖ`, with quasi-compact quasi-separated terms, together with pullback squares
 `U_n ≅ T_n ×_{Dₖ} X` for `n ≤ N`, compatible with the face maps. -/
@@ -644,7 +644,7 @@ variable [IsCofiltered I] [∀ i, CompactSpace (D.obj i)] [∀ i, QuasiSeparated
   [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)]
 
 /-- **Descended truncated hypercovers are hypercovers at late stages** (blueprint
-`lemma-weil-pbc-finite-hypercover-descent`): if `U` is a hypercover of `X`, then for every late
+`corollary-cohomology-pro-etale-affine`): if `U` is a hypercover of `X`, then for every late
 enough stage `Dₖ'`, the coskeletal extension of the base change to `Dₖ'` of the descended
 truncation is a hypercover of `Dₖ'`. -/
 theorem exists_isHypercover (hc : IsLimit c) (hU : U.IsHypercover c.pt.smallEtaleTopology) :
@@ -719,7 +719,7 @@ variable [IsCofiltered I] [∀ i, CompactSpace (D.obj i)] [∀ i, QuasiSeparated
   [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)]
 
 /-- **Truncations of semi-simplicial qcqs étale schemes descend** to a stage (blueprint
-`lemma-weil-pbc-finite-hypercover-descent`): if all terms of `U` are quasi-compact and
+`corollary-cohomology-pro-etale-affine`): if all terms of `U` are quasi-compact and
 quasi-separated, its truncation in degrees `≤ N` is the base change of an `N`-truncated
 semi-simplicial object of the small étale site of some stage `Dₖ`. The finitely many terms, face
 maps and simplicial identities descend by `AlgebraicGeometry.exists_isPullback_etale`,
@@ -901,7 +901,7 @@ variable [IsCofiltered I] [∀ i, CompactSpace (D.obj i)] [∀ i, QuasiSeparated
 
 include d in
 /-- **Morphisms descend along a descent datum** (blueprint
-`lemma-weil-pbc-finite-hypercover-descent`): at a late enough stage, every morphism
+`corollary-cohomology-pro-etale-affine`): at a late enough stage, every morphism
 `f : U ⟶ W ×_{Dₖ} X` has a descent along the base change of `d`. -/
 theorem exists_hom (hc : IsLimit c) (W : SemiSimplicialObject (D.obj k).Etale)
     (f : U ⟶ W.baseChange (c.π.app k)) :

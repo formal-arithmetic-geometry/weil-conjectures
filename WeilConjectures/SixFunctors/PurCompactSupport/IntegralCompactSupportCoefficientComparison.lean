@@ -215,7 +215,7 @@ import WeilConjectures.CategoryTheory.Constant.ConstantSpecifiedBasis
 
 /-! # Integral compact-support coefficient comparison
 
-Source: Weil blueprint, sk-thm-purity-transport, Step 3; Bhatt--Scholze,
+Source: Weil blueprint, theorem-smooth-purity-all-admissible-coefficients, Step 3; Bhatt--Scholze,
 Definition 6.7.6 and Lemmas 6.7.7, 6.8.2(1)
 (blueprint: lem-pur-compact-support-integral-coefficient-comparison).
 
@@ -309,14 +309,14 @@ private theorem inverse_mate_shift
     [G.CommShift ℤ] [H.CommShift ℤ] [L₁.CommShift ℤ] [R₁.CommShift ℤ]
     [L₂.CommShift ℤ] [R₂.CommShift ℤ]
     (a : L₁ ⊣ R₁) (b : L₂ ⊣ R₂) [a.CommShift ℤ] [b.CommShift ℤ]
-    (t : TwoSquare R₁ H G R₂) [NatTrans.CommShift t.natTrans ℤ] :
-    NatTrans.CommShift ((mateEquiv a b).symm t).natTrans ℤ := by
+    (t : TwoSquare R₁ H G R₂) [NatTrans.CommShift t ℤ] :
+    NatTrans.CommShift ((mateEquiv a b).symm t) ℤ := by
   change NatTrans.CommShift
     ((Functor.leftUnitor _).inv ≫
       Functor.whiskerRight a.unit (G ⋙ L₂) ≫
       (Functor.associator _ _ _).inv ≫
       Functor.whiskerRight (Functor.associator _ _ _).hom _ ≫
-      Functor.whiskerRight (Functor.whiskerLeft L₁ t.natTrans) L₂ ≫
+      Functor.whiskerRight (Functor.whiskerLeft L₁ t) L₂ ≫
       Functor.whiskerRight (Functor.associator _ _ _).inv _ ≫
       (Functor.associator _ _ _).hom ≫
       Functor.whiskerLeft (L₁ ⋙ H) b.counit ≫
@@ -583,7 +583,7 @@ private theorem identity_inverseMate_isIso
     (a : L₁ ⊣ R₁) (b : L₂ ⊣ R₂)
     (eL : L₁ ≅ 𝟭 C) (eR : R₂ ≅ 𝟭 D)
     (t : R₁ ⋙ G ≅ G ⋙ R₂) :
-    IsIso (((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ t.hom)).natTrans) := by
+    IsIso (((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ t.hom))) := by
   letI : L₁.Full := Functor.Full.of_iso eL.symm
   letI : L₁.Faithful := Functor.Faithful.of_iso eL.symm
   letI : R₂.Full := Functor.Full.of_iso eR.symm
@@ -734,7 +734,7 @@ def properComparison {R S : Coefficients.{u}} (a : Change R S)
       (TwoSquare.mk _ _ _ _
         (proEtaleRingRestrictionDerivedDirectImage g
           (R.ring V) (S.ring V) (R.ring U) (S.ring U)
-          (a.map V) (a.map U) (R.pull g) (S.pull g) (a.square g)).inv)).natTrans
+          (a.map V) (a.map U) (R.pull g) (S.pull g) (a.square g)).inv))
 
 /-- The open coefficient arrow is the mate of the open-unit normalized restriction square.
 Source: Stacks Tag 0E8I
@@ -745,7 +745,7 @@ def openComparison {R S : Coefficients.{u}} (a : Change R S)
       pbcDerivedExtend (a.map U) ⋙ (openExtension S j).mapDerivedCategory :=
   ((mateEquiv (pbcDerivedScalarAdjunction (a.map U))
     (pbcDerivedScalarAdjunction (a.map V))).symm
-      (TwoSquare.mk _ _ _ _ (openRestriction a j).hom)).natTrans
+      (TwoSquare.mk _ _ _ _ (openRestriction a j).hom))
 
 private theorem doubleInverseMate_isIso
     {C D E F : Type*} [Category C] [Category D] [Category E] [Category F]
@@ -754,8 +754,8 @@ private theorem doubleInverseMate_isIso
     (a : LA ⊣ JA) (b : LB ⊣ JB) (x : SX ⊣ RX) (u : SU ⊣ RU)
     (q : JB ⋙ RU ≅ RX ⋙ JA) :
     IsIso ((mateEquiv a b).symm
-      ((mateEquiv x u).symm (TwoSquare.mk _ _ _ _ q.inv))).natTrans := by
-  have h := congrArg TwoSquare.natTrans
+      ((mateEquiv x u).symm (TwoSquare.mk _ _ _ _ q.inv))) := by
+  have h := 
     (iterated_mateEquiv_conjugateEquiv_symm a b u x (TwoSquare.mk _ _ _ _ q.inv))
   rw [h]
   change IsIso ((conjugateEquiv (a.comp x) (u.comp b)).symm q.inv)
@@ -782,13 +782,13 @@ theorem openComparison_isIso {R S : Coefficients.{u}} (a : Change R S)
       (a.map V) (a.map U) (R.pull j) (S.pull j) (a.square j)
   let q := (asIso φ).symm
   have : IsIso ((mateEquiv (openAdjunction S j) (openAdjunction R j)).symm
-      (TwoSquare.mk _ _ _ _ q.hom)).natTrans := by
+      (TwoSquare.mk _ _ _ _ q.hom)) := by
     change IsIso (openRestrictionMap a j)
     infer_instance
   have h := (exact_localization_inverse_mate
     (openAdjunction S j) (openAdjunction R j) q).2.1
   have h' : ((mateEquiv (openDerivedAdjunction S j) (openDerivedAdjunction R j)).symm
-      (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso q).hom)).natTrans =
+      (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso q).hom)) =
         (openRestriction a j).hom := h
   unfold openComparison
   rw [← h']
@@ -823,7 +823,7 @@ theorem comparison_factorization {R S : Coefficients.{u}} (a : Change R S)
   let adjY := pbcDerivedScalarAdjunction (a.map Y)
   have hv : TwoSquare.vComp α β = (restriction a c).hom := by
     ext K
-    simp only [TwoSquare.vComp, α, β, restriction, TwoSquare.mk, TwoSquare.natTrans,
+    simp only [TwoSquare.vComp, α, β, restriction, TwoSquare.mk,
       Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerRight_hom,
       Functor.isoWhiskerLeft_hom, NatTrans.comp_app, Functor.associator_inv_app,
       Functor.associator_hom_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
@@ -834,7 +834,7 @@ theorem comparison_factorization {R S : Coefficients.{u}} (a : Change R S)
   have h' := congrArg (fun t ↦ ((mateEquiv adjX adjY).symm t).app K) h
   simpa only [Equiv.symm_apply_apply, α, β, adjX, adjZ, adjY,
     comparison, image, properComparison, openComparison, TwoSquare.hComp, TwoSquare.mk,
-    TwoSquare.natTrans, NatTrans.comp_app, Functor.associator_inv_app,
+    NatTrans.comp_app, Functor.associator_inv_app,
     Functor.associator_hom_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
     Category.id_comp, Category.comp_id] using h'.symm
 
@@ -1041,7 +1041,7 @@ def tensorSquare {W : Scheme.{u}}
   tensorComposition a s (a ≫ s) rfl ≪≫ (tensorComposition r b (a ≫ s) h.symm).symm
 
 /-- Source of the specified finite coefficient comparison, at the positive exponent n+1.
-Source: blueprint sk-thm-purity-transport Step 3
+Source: blueprint theorem-smooth-purity-all-admissible-coefficients Step 3
 (blueprint: lem-pur-compact-support-integral-coefficient-comparison). -/
 def finiteTensorSource (e : ℕ) (he : Ramification l E F i e) (hepos : 1 ≤ e)
     (n : ℕ) {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
@@ -1052,7 +1052,7 @@ def finiteTensorSource (e : ℕ) (he : Ramification l E F i e) (hepos : 1 ≤ e)
         ((pbcDerivedExtend (projection l E (n + 1) (Nat.le_add_left 1 n) X)).obj M))
 
 /-- Target of the same finite comparison, before any total inverse limit.
-Source: blueprint sk-thm-purity-transport Step 3
+Source: blueprint theorem-smooth-purity-all-admissible-coefficients Step 3
 (blueprint: lem-pur-compact-support-integral-coefficient-comparison). -/
 def finiteTensorTarget (e : ℕ) (he : Ramification l E F i e) (hepos : 1 ≤ e)
     (n : ℕ) {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
@@ -1064,8 +1064,8 @@ def finiteTensorTarget (e : ℕ) (he : Ramification l E F i e) (hepos : 1 ≤ e)
 
 /-- The finite map itself is the ordered proper mate followed by proper image of the
 open coefficient identification. This definition contains both arrows explicitly.
-Source: Stacks Tags 07A6, 0B56, 0E8I; blueprint sk-thm-purity-transport Step 3
-(blueprint: lem-pur-compact-support-integral-coefficient-comparison). -/
+Source: Stacks Tags 07A6, 0B56, 0E8I; blueprint theorem-smooth-purity-all-admissible-coefficients
+Step 3 (blueprint: lem-pur-compact-support-integral-coefficient-comparison). -/
 def finiteTensorMap (e : ℕ) (he : Ramification l E F i e) (hepos : 1 ≤ e)
     (n : ℕ) {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (M : DerivedCategory (scalarReductionSource l E X)) :
@@ -1249,7 +1249,7 @@ is invertible, and its actual source and target are constructible complete objec
 The map is ordinary derived tensor, defined above by the normalized scalar adjunction.
 The last clause identifies the ambient proper/open realization with the recorded
 integral compact-support value, without selecting a new arbitrary limit vertex.
-Source: blueprint sk-thm-purity-transport, Step 3; Bhatt--Scholze,
+Source: blueprint theorem-smooth-purity-all-admissible-coefficients, Step 3; Bhatt--Scholze,
 Definition 6.7.6 and Lemmas 6.7.7, 6.8.2(1)
 (blueprint: lem-pur-compact-support-integral-coefficient-comparison).
 

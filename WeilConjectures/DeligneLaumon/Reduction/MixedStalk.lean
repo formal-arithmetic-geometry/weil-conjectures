@@ -45,8 +45,8 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 at `s` of weights at most `w`, every `G i` has stalk at `s` of weights at most `w`. -/
 theorem stalkAt_hasWeightsAtMost_of_filtration {ι : PadicAlgCl l →+* ℂ} {q : ℕ} {w : ℝ}
     (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s)
+    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
+      (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ s)
     {n : ℕ} (G : Fin (n + 1) → WeilSheaf k₀ l X) (φ : ∀ i : Fin n, G i.castSucc ⟶ G i.succ)
     (h0 : IsZero (G 0)) (hmono : ∀ i, Mono (φ i))
     (h : ∀ i : Fin n, ((cokernel (φ i)).stalkAt s m hs).HasWeightsAtMost ι q w) :
@@ -73,7 +73,7 @@ theorem stalkAt_hasWeightsAtMost_of_filtration {ι : PadicAlgCl l →+* ℂ} {q 
 /-- A Weil sheaf which is `ι`-mixed of weights at most `w` has weights at most `w`: at every
 closed point `x`, every eigenvalue `α` of the local Frobenius satisfies `|ι α| ≤ q_x ^ (w / 2)`.
 The stalk functors being exact, this follows by induction along the filtration from the bounds
-for its punctually pure quotients (blueprint: `sk-d-real-weights`). -/
+for its punctually pure quotients (blueprint: `definition-weights`). -/
 theorem IsMixedOfWeightsAtMost.hasWeightsAtMost {ι : PadicAlgCl l →+* ℂ} {F : WeilSheaf k₀ l X}
     {w : ℝ} (h : F.IsMixedOfWeightsAtMost ι w) : F.HasWeightsAtMost ι w := by
   intro x

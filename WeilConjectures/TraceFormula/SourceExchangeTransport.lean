@@ -15,8 +15,9 @@ For a proper morphism `f : X ⟶ Y`, `q = f × f` and `K' = Rf_* K`, the *transp
 `Rp₁'_! (Lp₂'^* K' ⊗ Rq_* Z) ⟶ Rf_* Rp₁_! (Lp₂^* K ⊗ Z)`, natural in `Z`
 (`ProEtale.CondensedRing.classTransport`), defines the transport map
 `Φ : Rq_* RHom(Lp₂^* K, Rp₁^! K) ⟶ RHom(Lp₂'^* K', Rp₁'^! K')`
-(`ProEtale.CondensedRing.classTransportMap`, blueprint `lem-trf-trace-source-exchange`, Step 1).
-Its test maps are computed by `ProEtale.CondensedRing.classTest_map_comp_classTransportMap`.
+(`ProEtale.CondensedRing.classTransportMap`, blueprint
+`theorem-proper-pushforward-lefschetz-verdier--1`, Step 1). Its test maps are computed by
+`ProEtale.CondensedRing.classTest_map_comp_classTransportMap`.
 
 -/
 
@@ -86,7 +87,7 @@ noncomputable def classTransport :
     (Functor.associator _ _ _).hom
 
 /-- The *transport map* `Φ : Rq_* RHom(Lp₂^* K, Rp₁^! K) ⟶ RHom(Lp₂'^* K', Rp₁'^! K')`
-(blueprint `lem-trf-trace-source-exchange`, Step 1). -/
+(blueprint `theorem-proper-pushforward-lefschetz-verdier--1`, Step 1). -/
 noncomputable def classTransportMap :
     (boundedConstructibleLowerStar ℓ (prod.map f f)).obj
         ((ihom ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ X ⟶ X)).obj K)).obj
@@ -99,10 +100,10 @@ noncomputable def classTransportMap :
     ((classTransport ℓ f K).app _ ≫ (boundedConstructibleLowerStar ℓ f).map (classTest ℓ K
         (𝟙 _))))
 
-set_option maxHeartbeats 1000000 in
 -- the compactly supported direct images are unfolded in the defeq checks
-/-- **The test maps of the transport map** (blueprint `lem-trf-trace-source-exchange`, Step 1):
-`test(Rq_* ψ ≫ Φ) = Rf_* test(ψ)` read through the transport. -/
+/-- **The test maps of the transport map** (blueprint
+`theorem-proper-pushforward-lefschetz-verdier--1`, Step 1): `test(Rq_* ψ ≫ Φ) = Rf_* test(ψ)` read
+through the transport. -/
 lemma classTest_map_comp_classTransportMap {Z : Dᵇc((X ⨯ X).left)⟦Profinite.padicAlgClRingObj ℓ⟧}
     (ψ : Z ⟶ (ihom ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ X ⟶ X)).obj K)).obj
       ((boundedConstructibleUpperShriek ℓ (prod.fst : X ⨯ X ⟶ X)).obj K)) :
@@ -116,7 +117,9 @@ lemma classTest_map_comp_classTransportMap {Z : Dᵇc((X ⨯ X).left)⟦Profinit
       (classTransport ℓ f K).app _ ≫
         (boundedConstructibleLowerStar ℓ f).map (classTest ℓ K (𝟙 _)) :=
     by simp only [classTest, classTransportMap, uncurry_curry, Equiv.symm_apply_apply]
-  rw [classTest_comp, hΦ, hψ, Functor.map_comp]
+  rw [classTest_comp]
+  rw [hΦ]
+  conv_rhs => rw [hψ, Functor.map_comp]
   exact (classTransport ℓ f K).naturality_assoc ψ _
 
 end AlgebraicGeometry.ProEtale.CondensedRing

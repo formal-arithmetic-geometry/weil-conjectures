@@ -18,7 +18,7 @@ Let `ρ : Λ →+* Λ'` be a surjective morphism of commutative rings with princ
 case being the reduction `A_{E,n+1} → A_{E,n}`, and write `Ψ_X : D(X_ét, Λ) ⥤ D(X_ét, Λ')` for the
 derived extension of scalars `K ↦ K ⊗ᴸ_Λ Λ'` (`AlgebraicGeometry.Etale.derivedExtendScalars`),
 left adjoint to the restriction of scalars `Res`. This file shows that `Ψ` commutes with the
-derived pullbacks (blueprint `det-sp-purity-coefficient-change`):
+derived pullbacks (blueprint `proposition-compatibility-purity-change-coefficients`):
 
 * `Lf^*` carries derived base changes to derived base changes
   (`AlgebraicGeometry.Etale.isDerivedBaseChange_leftDerivedUpperStar_map_comp'`): this is checked
@@ -125,7 +125,7 @@ noncomputable def derivedExtendScalarsPullbackMap :
       derivedExtendScalars hρ ha X ⋙ L((e)^*[ModuleCat.{u + 1} Λ']) :=
   ((mateEquiv (derivedExtendScalarsAdjunction hρ ha X)
     (derivedExtendScalarsAdjunction hρ ha U)).symm
-      (leftDerivedUpperStarRestrictScalarsIso ρ e).hom).natTrans
+      (leftDerivedUpperStarRestrictScalarsIso ρ e).hom)
 
 /-- The defining property of `derivedExtendScalarsPullbackMap`: its transpose is
 `Le^*(K ⟶ Res Ψ K) ≫ (Le^* Res ≅ Res Le^*)`. -/

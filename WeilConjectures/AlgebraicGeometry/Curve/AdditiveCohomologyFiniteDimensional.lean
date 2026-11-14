@@ -30,7 +30,7 @@ namespace AlgebraicGeometry
 /-- A scalar action on first additive étale cohomology induced by multiplication
 on sections is finite-dimensional.
 Source: Stacks 0A3N, proof, with 03P2 and 02O6; blueprint
-`lem-sc-artin-schreier-dimension`, steps 3--6.
+`proposition-p-torsion-smooth-proper-curve--3`, steps 3--6.
 (blueprint: lem-sc-additive-cohomology-finite-dimensional)
 
 Proof: The natural section equivalences identify G with the universe lift of

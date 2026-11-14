@@ -13,7 +13,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
 # Finite-stage étale Verdier biduality: the closed-point step
 
 This file contains the closing argument of the proof of blueprint
-`thm-weil-etale-geometric-biduality`. Let `δ : K ⟶ 𝔻𝔻K` be completed to a distinguished triangle
+`theorem-verdier-biduality--1`. Let `δ : K ⟶ 𝔻𝔻K` be completed to a distinguished triangle
 `K ⟶ 𝔻𝔻K ⟶ Δ ⟶ K[1]`. If the cohomology sheaves of the bounded constructible `Δ` vanish at every
 non-closed point, then `Δ` is supported on a finite set of closed points
 (`AlgebraicGeometry.Etale.exists_isFinite_isZero_upperStar_of_boundedConstructible`); if moreover
@@ -37,7 +37,7 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- Blueprint `thm-weil-etale-geometric-biduality`, the closed-point step: let
+/-- Blueprint `theorem-verdier-biduality--1`, the closed-point step: let
 `a : X ⟶ Spec k` be locally of finite type with `X` quasi-compact, and let `T` be a distinguished
 triangle in `D(X_ét, Λ)` whose third term is bounded constructible with cohomology sheaves
 vanishing at every non-closed point. If `Ra_*` carries the first morphism of `T` to an

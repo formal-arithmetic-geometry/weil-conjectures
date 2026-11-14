@@ -39,7 +39,7 @@ which preserves coproducts is a left adjoint
   `X ⟶ X ⊞ Y ⟶ X'` is an isomorphism, which gives a preimage of `y`.
 
 This is the abstract input for Stacks Tag 0F5Y, used in the blueprint node
-`thm-amb-etale-exceptional-adjoint`.
+`theorem-existence-exceptional-inverse-image--1`.
 -/
 
 @[expose] public section
@@ -276,7 +276,7 @@ lemma isCohomological_comp_preadditiveYoneda (F : C ⥤ D) [F.CommShift ℤ] [F.
   exact ⟨y, hy.symm⟩
 
 /-- **Brown representability, adjoint functor form** (Stacks Tag 0F5Y, abstract form; blueprint
-`thm-amb-etale-exceptional-adjoint`): if `C` has a family of compact generators, every
+`theorem-existence-exceptional-inverse-image--1`): if `C` has a family of compact generators, every
 triangulated functor `F : C ⥤ D` which preserves coproducts is a left adjoint. -/
 theorem isLeftAdjoint_of_compactGenerators [HasCoproducts.{v} C] {ι : Type v} {S : ι → C}
     (hS : CompactGenerators S) (F : C ⥤ D) [F.CommShift ℤ] [F.IsTriangulated]

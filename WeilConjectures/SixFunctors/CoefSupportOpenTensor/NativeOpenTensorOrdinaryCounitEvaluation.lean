@@ -138,7 +138,7 @@ private theorem evaluatedCounit
     {L : A ⥤ B} {R : B ⥤ A} {L' : C ⥤ D} {R' : D ⥤ C}
     (a : L ⊣ R) (b : L' ⊣ R') {E : A ⥤ C} {H : B ⥤ D}
     (q : R ⋙ E ≅ H ⋙ R')
-    [IsIso ((mateEquiv a b).symm q.hom).natTrans]
+    [IsIso ((mateEquiv a b).symm q.hom)]
     (T : B) [IsIso (b.counit.app (H.obj T))] : IsIso (H.map (a.counit.app T)) := by
   have h := mateEquiv_counit_symm a b q.hom T
   have : IsIso (((mateEquiv a b).symm q.hom).app (R.obj T) ≫
@@ -178,7 +178,7 @@ theorem nativeOpenTensor_ordinary_counit_evaluation_isIso
   let eX := ProEtale.VaryingRing.eval R φ X n
   let eZ := ProEtale.VaryingRing.eval R φ Z n
   let q := ProEtale.VaryingRing.moduleEvalG R φ j n
-  let δ := ((mateEquiv a b).symm q.hom).natTrans
+  let δ := ((mateEquiv a b).symm q.hom)
   have hδ : IsIso δ := ProEtale.VaryingRing.ordinaryOpenMateIso R φ j n
   let T := ordinaryTensor.{u + 1, u, u}
     (coefficientSequenceTopology (ProEt.topology Z))

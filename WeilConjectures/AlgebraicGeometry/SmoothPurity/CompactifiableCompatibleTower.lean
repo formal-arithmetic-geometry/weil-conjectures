@@ -42,7 +42,7 @@ construction in upstream `Compactification/Comp.lean` and `Triangle.lean`.
 Proof plan:
 1. Embed `X` in `W ×_Z Ybar` by `(a₀, f ≫ i)`. The projection to `W` is separated;
    quasi-compact immersion cancellation (`lem-cbc-qc-immersion-cancellation`) applies.
-2. Take its scheme-theoretic image, using `def-nagata-immersion-compactification` and
+2. Take its scheme-theoretic image, using `lemma-schematic-closure-uniqueness--1` and
    `lemma-nagata-immersion-into-proper`. The closed image inclusion and proper projections
    make both ambient maps proper (`lem-pc-proper-base-change`,
    `lem-weil-pbc-closed-immersion-proper`, `lem-weil-pbc-proper-composition`).

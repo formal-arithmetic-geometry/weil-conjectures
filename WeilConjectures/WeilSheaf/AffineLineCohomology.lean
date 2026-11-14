@@ -92,7 +92,8 @@ theorem subsingleton_compactlySupportedCohomology_adicConstant_affineLine {r : �
 /-- **Constant cohomology of the affine line.** `Hʳ(𝔸¹_k̄, ℚ̄_ℓ) = 0` for `r ≠ 0`: by Poincaré
 duality on the smooth curve `𝔸¹`, `Hʳ(𝔸¹_k̄, ℚ̄_ℓ(1))`, which is `Hʳ(𝔸¹_k̄, ℚ̄_ℓ)` up to the
 Frobenius, is dual to `H_c^{2-r}(𝔸¹_k̄, ℚ̄_ℓ)`, which vanishes since `2 - r ≠ 2`.
-(blueprint: `lem-fd-affine-line-constant-cohomology`, subsection `sk-lem-as-properties`) -/
+(blueprint: `lemma-integral-linear-character--2`, subsection
+`lemma-artin-schreier-character-sheaf`) -/
 theorem subsingleton_cohomology_adicConstant_affineLine {r : ℤ} (hr : r ≠ 0) :
     Subsingleton ((adicConstant k₀ l (affineLine k₀)).cohomology r).carrier := by
   obtain ⟨P, hP, -⟩ := exists_isPerfPair_compactlySupportedCohomology_adicConstant k₀ l

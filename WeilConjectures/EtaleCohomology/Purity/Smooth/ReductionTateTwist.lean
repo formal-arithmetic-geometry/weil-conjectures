@@ -31,7 +31,7 @@ Let `ρ : Λ →+* Λ'` be a surjective morphism of commutative rings of positiv
 
 Pulled back from the universal base `Spec ℤ[1/n]`, these identifications form the Tate shift
 datum of `Ψ` (`AlgebraicGeometry.Etale.reductionTateShiftData`, blueprint
-`det-sp-purity-coefficient-change`).
+`proposition-compatibility-purity-change-coefficients`).
 -/
 
 @[expose] public section
@@ -160,7 +160,7 @@ noncomputable def derivedExtendScalarsTateShiftIso (m : ℤ) :
   ((derivedExtendScalars hρ ha X).commShiftIso (2 * m)).app _ ≪≫
     (shiftFunctor _ (2 * m)).mapIso (derivedExtendScalarsTateObjectIso hρ ha X m)
 
-/-- Blueprint `det-sp-purity-coefficient-change`
+/-- Blueprint `proposition-compatibility-purity-change-coefficients`
 
 **The Tate shift datum of the reduction of coefficients.** For a surjective morphism
 `ρ : Λ →+* Λ'` of rings of positive characteristics with principal kernel (for instance

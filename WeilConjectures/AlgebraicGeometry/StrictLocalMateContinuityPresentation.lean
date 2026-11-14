@@ -73,7 +73,7 @@ theorem nonempty_strictLocalBaseChange_continuityPresentation
             (TwoSquare.mk _ _ _ _ (pullbackSquareComparison AddCommGrpCat.{v + 1}
               (IsPullback.of_hasPullback f
                 (Scheme.strictLocalizationToBase s)).toCommSq).hom))
-                |>.natTrans.app K)))) := by
+                |>.app K)))) := by
   classical
   obtain ⟨Q⟩ := nonempty_strictLocalNeighbourhoodGeometry f s
   obtain ⟨E⟩ := nonempty_strictLocalMateProjectionData f s K n Q

@@ -49,8 +49,8 @@ Proof:
    limit `V = V₀ ×_{X₀} X` (`lem-weil-pbc-scheme-over-limit`,
    `lem-weil-pbc-affine-morphism-permanence`).
 2. Module inverse images and their units are those of the underlying abelian sheaves
-   (`prop-weil-pbc-inverse-image-modules-exact`); the composition isomorphisms are
-   `Λ`-linear by uniqueness of adjoints (`lem-weil-pbc-conjugate-iso-unit-equation`).
+   (`situation-conventions`); the composition isomorphisms are
+   `Λ`-linear by uniqueness of adjoints (`situation-conventions`).
 3. The sheaves `F_i = w_i^{-1} G` on `V_i` with the composition isomorphisms form a system
    with colimit `w^{-1} G` on `V` (constant connected diagram).
 4. Theorem 09YQ in degree 0 (`lem-weil-pbc-etale-cohomology-limit-of-schemes`), translated to

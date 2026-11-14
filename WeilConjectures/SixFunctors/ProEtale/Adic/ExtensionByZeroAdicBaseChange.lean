@@ -26,7 +26,7 @@ This is the compactly supported counterpart of
 extension by zero is a left adjoint, so `j_! ℚ̄_ℓ,U` is the filtered colimit of the sheaves
 `j_! C(-, Λ)` over the compact lattices `Λ` of `ℚ̄_ℓ`, and `j_!` commutes with the decomposition
 of `C(-, Λ)` along a basis of `Λ`. It feeds the `ℚ̄_ℓ` stage of the compactly supported case
-of blueprint `thm-pod-degreewise-perfectness-over-a-field`.
+of blueprint `corollary-degreewise-duality-over-fields--1`.
 -/
 
 @[expose] public section
@@ -78,14 +78,14 @@ noncomputable def integralToCompactAdicConstantH (n : ℕ) :
     x (Ext.mk₀ (integralToCompactAdicConstantSheaf l j)) (add_zero n)
   map_add' x y := Ext.add_comp _ _ _ _
   map_smul' c x := by
-    change (Ext.comp x (Ext.mk₀ (compactIntegralSmulRingHom j l c)) (add_zero n)).comp
+    change (Ext.comp x (Ext.mk₀ (compactIntegralSmulRingHom j l c).asHom) (add_zero n)).comp
         (Ext.mk₀ (integralToCompactAdicConstantSheaf l j)) (add_zero n) =
       (Ext.comp x (Ext.mk₀ (integralToCompactAdicConstantSheaf l j)) (add_zero n)).comp
-        (Ext.mk₀ (compactAdicScalarRingHom l j (algebraMap ℤ_[l] (PadicAlgCl l) c)))
+        (Ext.mk₀ (compactAdicScalarRingHom l j (algebraMap ℤ_[l] (PadicAlgCl l) c)).asHom)
           (add_zero n)
     rw [Ext.comp_assoc_of_third_deg_zero, Ext.comp_assoc_of_third_deg_zero, Ext.mk₀_comp_mk₀,
       Ext.mk₀_comp_mk₀]
-    simp only [Functor.mapRingHom_apply, ← Functor.map_comp,
+    simp only [Functor.mapRingHom_apply_asHom, ← Functor.map_comp,
       integralSmulRingHom_comp_continuousSheafToAdicConstantSheaf]
 
 lemma integralToCompactAdicConstantH_apply (n : ℕ) (x : CompactIntegralAdicH j l n) :
@@ -128,7 +128,7 @@ end Decomposition
 one.** For an open immersion `j : U ⟶ T` into a quasi-compact quasi-separated scheme, the map
 `ι : Hⁿ(T, j_! ℤ_ℓ) ⟶ Hⁿ(T, j_! ℚ̄_ℓ)` induced by `C(-, ℤ_ℓ) ⊆ ℚ̄_ℓ,U` identifies
 `Hⁿ(T, j_! ℚ̄_ℓ)` with `ℚ̄_ℓ ⊗_{ℤ_ℓ} Hⁿ(T, j_! ℤ_ℓ)`. This is the `ℚ̄_ℓ` stage of the compactly
-supported case of blueprint `thm-pod-degreewise-perfectness-over-a-field`. -/
+supported case of blueprint `corollary-degreewise-duality-over-fields--1`. -/
 theorem isBaseChange_integralToCompactAdicConstantH [CompactSpace T] [QuasiSeparatedSpace T]
     (n : ℕ) : IsBaseChange (PadicAlgCl l) (integralToCompactAdicConstantH l j n) := by
   classical
@@ -206,7 +206,7 @@ theorem isBaseChange_integralToCompactAdicConstantH [CompactSpace T] [QuasiSepar
       refine Finset.sum_congr rfl fun i _ ↦ ?_
       have e : continuousSheafMap U (Λ.mulHom (Λ.basis i) (Λ.basis i).2) ≫
           (compactLatticeDiagram l U).map a ≫ continuousSheafMap U (Λ'.coordHom k) =
-          integralSmulRingHom U l (Λ'.coord k ⟨Λ.basis i, hΛΛ' (Λ.basis i).2⟩) := by
+          (integralSmulRingHom U l (Λ'.coord k ⟨Λ.basis i, hΛΛ' (Λ.basis i).2⟩)).asHom := by
         have e1 : (compactLatticeDiagram l U).map a ≫ continuousSheafMap U (Λ'.coordHom k) =
             continuousSheafMap U ((Λ'.coordHom k).comp
               ⟨AddSubgroup.inclusion hΛΛ', continuous_subtype_val.subtype_mk _⟩) :=
@@ -217,7 +217,7 @@ theorem isBaseChange_integralToCompactAdicConstantH [CompactSpace T] [QuasiSepar
       have e' : E.map (continuousSheafMap U (Λ.mulHom (Λ.basis i) (Λ.basis i).2)) ≫
           (compactLatticeDiagram l U ⋙ E).map a ≫
             E.map (continuousSheafMap U (Λ'.coordHom k)) =
-          compactIntegralSmulRingHom j l (Λ'.coord k ⟨Λ.basis i, hΛΛ' (Λ.basis i).2⟩) := by
+          (compactIntegralSmulRingHom j l (Λ'.coord k ⟨Λ.basis i, hΛΛ' (Λ.basis i).2⟩)).asHom := by
         rw [Functor.comp_map, ← E.map_comp, ← E.map_comp, e]
         rfl
       rw [Ext.comp_assoc_of_third_deg_zero, Ext.comp_assoc_of_third_deg_zero, Ext.mk₀_comp_mk₀,

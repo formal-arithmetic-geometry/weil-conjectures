@@ -15,7 +15,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.ScalarExtension
 
 The `ℚ̄_ℓ`-coefficient category `Dᵇc(Y, ℚ̄_ℓ)` is the filtered 2-colimit over the finite
 subextensions `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` of the rational stages `Dᵇc(Y, E)`, along the scalar extensions
-`- ⊗_E F`, and blueprint `def-weil-finite-coefficient-point` defines
+`- ⊗_E F`, and blueprint `lemma-perfect-complexes-geometric-point` defines
 `Dᵇ_fd(ℚ̄_ℓ) = 2-colim_E Dᵇ_fd(E)`. The evaluation at the geometric point of `s = Spec k`,
 `Fib_s : Dᵇc(s, ℚ̄_ℓ) ⥤ Dᵇ_fd(ℚ̄_ℓ)`, is obtained stagewise from the equivalences
 `Fib_s : Dᵇc(s, E) ≌ Dᵇ_fd(E)` (`AlgebraicGeometry.Etale.pointFiberRationalEquivalence`), which are
@@ -280,7 +280,7 @@ lemma integralStageTransition_map_smul (r : StageInt.{u} l E) {X Y} (f : X ⟶ Y
   ObjectProperty.hom_ext _ (derivedBaseChange_map_smul _ _ _ r f.hom)
 
 /-- The scalar extension `- ⊗_E F : Dᵇc(s, E) ⥤ Dᵇc(s, F)` of blueprint
-`def-sfb-rationalization-quotient` over `s = Spec k`: the functor induced on the
+`proposition-inverting-ell--2` over `s = Spec k`: the functor induced on the
 rationalizations by the derived base change along `𝒪_E ⟶ 𝒪_F`. -/
 noncomputable def rationalStageTransition : RationalPointStage l k E ⥤ RationalPointStage l k F :=
   Rationalization.mapOfRingHom (R := StageInt.{u} l E) (R' := StageInt.{u} l F)
@@ -408,7 +408,7 @@ noncomputable def pointFiberCocone :
   (fdCocone l).transport (fun h ↦ rationalStageTransition k h)
     (fun E ↦ (pointFiberStageEquivalence l k E).functor) (fun h ↦ pointFiberStageTransitionIso k h)
 
-/-- Blueprint `def-weil-finite-coefficient-point`: Finite coefficient categories over a point
+/-- Blueprint `lemma-perfect-complexes-geometric-point`: Finite coefficient categories over a point
 (stage `ℚ̄_ℓ`).
 
 At the algebraically closed coefficient `ℚ̄_ℓ`, `Dᵇc(s, ℚ̄_ℓ)` is the filtered 2-colimit

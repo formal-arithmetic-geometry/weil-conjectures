@@ -19,7 +19,7 @@ import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
 # Étale sections with closed support
 
 Source: the blueprint, sec-smooth-purity/sk-prop-a1-kummer,
-lem-pur-support-restriction-triangle, definition of supported sections and proof step 1;
+proposition-purity-vector-bundles, definition of supported sections and proof step 1;
 Stacks Project, Cohomology, Tag 0G6Y.
 (blueprint: def-pur-etale-derived-supported-sections).
 
@@ -38,7 +38,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 /-- Sections supported on the closed complement of `W`, as the kernel of restriction.
-Source: blueprint lem-pur-support-restriction-triangle, proof step 1; Stacks Tag 0G6Y.
+Source: blueprint proposition-purity-vector-bundles, proof step 1; Stacks Tag 0G6Y.
 (blueprint: def-pur-etale-derived-supported-sections). -/
 noncomputable def supportedEtaleSections (R : Type (u + 1)) [CommRing R]
     (X : Scheme.{u}) (W : X.Opens) :
@@ -47,7 +47,7 @@ noncomputable def supportedEtaleSections (R : Type (u + 1)) [CommRing R]
     (op (Scheme.Etale.mk W.ι)))
 
 /-- Inclusion of supported sections into global sections.
-Source: blueprint lem-pur-support-restriction-triangle, proof step 1.
+Source: blueprint proposition-purity-vector-bundles, proof step 1.
 (blueprint: def-pur-etale-derived-supported-sections). -/
 noncomputable def supportedEtaleSectionsι (R : Type (u + 1)) [CommRing R]
     (X : Scheme.{u}) (W : X.Opens) :
@@ -55,7 +55,7 @@ noncomputable def supportedEtaleSectionsι (R : Type (u + 1)) [CommRing R]
   kernel.ι _
 
 /-- The kernel section functor is additive.
-Source: blueprint lem-pur-support-restriction-triangle, proof step 1; Stacks Tag 0G6Y.
+Source: blueprint proposition-purity-vector-bundles, proof step 1; Stacks Tag 0G6Y.
 (blueprint: def-pur-etale-derived-supported-sections).
 
 Proof: the global section functor is additive. The kernel inclusion is a monomorphism

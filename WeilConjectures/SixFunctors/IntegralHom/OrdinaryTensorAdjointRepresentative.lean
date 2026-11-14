@@ -123,7 +123,61 @@ private theorem derived_map_surjective
   exact ⟨q,
     (CategoryTheory.RingedDerivedNative.GenericDerived.qHomEquiv_map P I q).symm.trans hg⟩
 
-set_option maxHeartbeats 1600000 in
+/-- Signed and unsigned evaluations agree after the prescribed tensor exchange. -/
+private theorem signed_evaluation_comp_exchange
+    (P Q I : CochainComplex (Modules.{t, u} Y R) ℤ)
+    (s : (coefficientTotalTensor.{u, t + 1, t}
+        (AlgebraicGeometry.Scheme.ProEt.topology Y) R).obj (P, Q) ⟶
+      (coefficientTotalTensor.{u, t + 1, t}
+        (AlgebraicGeometry.Scheme.ProEt.topology Y) R).obj (Q, P))
+    (hs : ∀ (i j k : ℤ) (h : i + j = k) (h' : j + i = k)
+        (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)
+        (x : (P.X i).val.obj U) (y : (Q.X j).val.obj U),
+        (s.f k).val.app U
+          (coefficientTensorGenerator.{u, t + 1, t}
+            (AlgebraicGeometry.Scheme.ProEt.topology Y) R P Q i j k h U x y) =
+          (i * j).negOnePow • coefficientTensorGenerator.{u, t + 1, t}
+            (AlgebraicGeometry.Scheme.ProEt.topology Y) R Q P j i k h' U y x)
+    (q : Q ⟶ homComplex (R := R) P I)
+    (b : (coefficientTotalTensor.{u, t + 1, t}
+      (AlgebraicGeometry.Scheme.ProEt.topology Y) R).obj (P, Q) ⟶ I)
+    (hb : ∀ (i j : ℤ) (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)
+        (x : (P.X i).val.obj U) (y : (Q.X j).val.obj U),
+      (b.f (i + j)).val.app U (totalPair.{t, u} Y R P Q i j U x y) =
+        (i * j).negOnePow • evaluate Y R P I j i U ((q.f j).val.app U y) x)
+    (v : (coefficientTotalTensor.{u, t + 1, t}
+      (AlgebraicGeometry.Scheme.ProEt.topology Y) R).obj (Q, P) ⟶ I)
+    (hv : ∀ (j i k : ℤ) (h : j + i = k) (h' : i + j = k)
+        (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)
+        (y : (Q.X j).val.obj U) (x : (P.X i).val.obj U),
+      (v.f k).val.app U (coefficientTensorGenerator.{u, t + 1, t}
+        (AlgebraicGeometry.Scheme.ProEt.topology Y) R Q P j i k h U y x) =
+        (((q.f j ≫ homComplexπ P I j i k h').val.app U y).app
+          (op (Over.mk (𝟙 U.unop)))) x) :
+    b = s ≫ v := by
+  let J := AlgebraicGeometry.Scheme.ProEt.topology Y
+  refine total_generator_ext Y R P Q I (f := b) (g := s ≫ v) ?_
+  intro i j k hij U x y
+  subst k
+  have hpair : totalPair.{t, u} Y R P Q i j U x y =
+      coefficientTensorGenerator.{u, t + 1, t} J R P Q i j (i + j) rfl U x y := by
+    simp only [totalPair, pair, ordinaryTensor, coefficientTensorGenerator,
+      CochainComplex.ιMapBifunctor]
+    rfl
+  change (b.f (i + j)).val.app U _ =
+    (v.f (i + j)).val.app U ((s.f (i + j)).val.app U _)
+  calc
+    _ = (i * j).negOnePow • evaluate Y R P I j i U ((q.f j).val.app U y) x := by
+      simpa only [hpair] using hb i j U x y
+    _ = (v.f (i + j)).val.app U ((i * j).negOnePow •
+        coefficientTensorGenerator.{u, t + 1, t} J R Q P j i (i + j)
+          (add_comm j i) U y x) := by
+      simp only [Units.smul_def, map_zsmul]
+      congr 1
+      simpa only [evaluate, projection, SheafOfModules.comp_val, PresheafOfModules.comp_app,
+        ModuleCat.comp_apply] using (hv j i (i + j) (add_comm j i) rfl U y x).symm
+    _ = _ := by rw [hs i j (i + j) rfl (add_comm j i) U x y]
+
 -- Comparing the universe-polymorphic Hom and tensor models needs extra elaboration work.
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
@@ -158,7 +212,6 @@ private theorem representative_square_after_injective
         (S.adjunction (DerivedCategory.Q.obj P))).hom.app (DerivedCategory.Q.obj Q)) ≫ f =
       (DerivedCategory.Q.map s ≫ T.comparison.hom.app (⟨Q, hQ⟩, ⟨P, hP⟩)) ≫ f := by
   classical
-  let J := AlgebraicGeometry.Scheme.ProEt.topology Y
   have : I.IsKInjective := hI
   have : (homComplex (R := R) P I).IsKInjective :=
     CochainComplex.isKInjective_homComplex_of_isKFlatOfUniverses.{u, t + 1, t} P I hP
@@ -180,28 +233,8 @@ private theorem representative_square_after_injective
   let v := hvex.choose
   have hv := hvex.choose_spec.1
   have hvs := hvex.choose_spec.2
-  have hbv : b = s ≫ v := by
-    apply total_generator_ext Y R P Q I
-    intro i j k hij U x y
-    subst k
-    have hpair : totalPair.{t, u} Y R P Q i j U x y =
-        coefficientTensorGenerator.{u, t + 1, t} J R P Q i j (i + j) rfl U x y := by
-      simp only [totalPair, pair, ordinaryTensor, coefficientTensorGenerator,
-        CochainComplex.ιMapBifunctor]
-      rfl
-    change (b.f (i + j)).val.app U _ =
-      (v.f (i + j)).val.app U ((s.f (i + j)).val.app U _)
-    calc
-      _ = (i * j).negOnePow • evaluate Y R P I j i U ((q.f j).val.app U y) x := by
-        simpa only [hpair] using hb i j U x y
-      _ = (v.f (i + j)).val.app U ((i * j).negOnePow •
-          coefficientTensorGenerator.{u, t + 1, t} J R Q P j i (i + j)
-            (add_comm j i) U y x) := by
-        simp only [Units.smul_def, map_zsmul]
-        congr 1
-        simpa only [evaluate, projection, SheafOfModules.comp_val, PresheafOfModules.comp_app,
-          ModuleCat.comp_apply] using (hv j i (i + j) (add_comm j i) rfl U y x).symm
-      _ = _ := by rw [hs i j (i + j) rfl (add_comm j i) U x y]
+  have hbv : b = s ≫ v :=
+    signed_evaluation_comp_exchange Y R P Q I s hs q b hb v hv
   have hba' : a.representative.hom.app (⟨P, hP⟩, ⟨Q, hQ⟩) ≫
       ((a.adjunction (DerivedCategory.Q.obj P)).homEquiv _ _).symm ξ =
         DerivedCategory.Q.map b := by
@@ -236,11 +269,10 @@ private theorem representative_square_after_injective
       rw [hξ] at hc
       exact hc
     _ = DerivedCategory.Q.map b := hba'
-    _ = DerivedCategory.Q.map s ≫ DerivedCategory.Q.map v := by
-      rw [hbv, Functor.map_comp]
+    _ = DerivedCategory.Q.map s ≫ DerivedCategory.Q.map v :=
+      (congrArg DerivedCategory.Q.map hbv).trans (DerivedCategory.Q.map_comp s v)
     _ = _ := by rw [Category.assoc, hvs']
 
-set_option maxHeartbeats 1600000 in
 -- Comparing the universe-polymorphic Hom and tensor models needs extra elaboration work.
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
@@ -249,7 +281,7 @@ attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- The normalized comparison of left adjoints is the signed total-tensor exchange
 on K-flat representatives.
 
-Source: Stacks 07A4, 08J9; blueprint thm-coef-rational-verdier, paragraph 1.
+Source: Stacks 07A4, 08J9; blueprint theorem-verdier-biduality--3, paragraph 1.
 Proof: take the existing Koszul exchange of total complexes. To identify its
 localization with the comparison of adjoints, postcompose with an injective
 resolution of the target. Every curried morphism into the resulting derived Hom

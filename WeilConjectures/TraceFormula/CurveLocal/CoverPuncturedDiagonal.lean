@@ -14,7 +14,7 @@ public import WeilConjectures.TraceFormula.CurveLocal.CoverPuncturedFactors
 
 # The punctured diagonal of `T'`
 
-For a cover datum (blueprint `det-tf-restriction-zero-covers` (ii)), the punctured diagonal
+For a cover datum (blueprint `lemma-tangent-cones-on-cover` (ii)), the punctured diagonal
 `B' ∖ y'` is finite étale of degree `e²` over `B ∖ y`
 (`AlgebraicGeometry.Etale.CurveLocalModel.CoverDatum.exists_puncturedDiagonal_finite_etale'`):
 
@@ -218,7 +218,7 @@ instance isIso_α : IsIso D.α := by
       simp only [Category.assoc, Category.id_comp, α_snd_assoc, πUo_ι_assoc, πB_b]
       rw [reassoc_of% hβ, pullback.condition]
 
-/-- **The punctured diagonal** (blueprint `det-tf-restriction-zero-covers` (ii)): `B' ∖ y'` is
+/-- **The punctured diagonal** (blueprint `lemma-tangent-cones-on-cover` (ii)): `B' ∖ y'` is
 finite étale of degree `e²` over `B ∖ y`, compatibly with the inclusions into `T' ∖ D'` and
 `T ∖ (G ∪ V)`. -/
 theorem exists_puncturedDiagonal_finite_etale' :

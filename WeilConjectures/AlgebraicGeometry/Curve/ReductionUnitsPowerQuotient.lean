@@ -14,7 +14,7 @@ import WeilConjectures.AlgebraicGeometry.Curve.ReductionUnitsPowerCokernel
 
 /-! # Successive quotients of the nilpotent-units sheaves
 
-Source: blueprint `lem-sc-brauer-zero-all-curves`, Proof, Step 1 and its Claim.
+Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1 and its Claim.
 (blueprint: lem-sc-reduction-units-power-quotient)
 -/
 
@@ -29,7 +29,7 @@ namespace AlgebraicGeometry.Scheme
 /-- Consecutive nilpotent-units sheaves have an additive quasi-coherent quotient.
 This single-step statement needs neither a global nilpotence exponent nor a
 Noetherian hypothesis, and concerns only sheaves on X, before reduction pullback.
-Source: blueprint `lem-sc-brauer-zero-all-curves`, Proof, Step 1 and its Claim.
+Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1 and its Claim.
 (blueprint: lem-sc-reduction-units-power-quotient)
 
 Proof: Let N be the nilradical ideal sheaf and set F=N^(j+1)/N^(j+2). Ideal powers

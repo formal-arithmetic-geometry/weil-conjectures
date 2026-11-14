@@ -23,14 +23,14 @@ Let `ℓ` be a prime and `S` a quasi-compact quasi-separated scheme. Every lisse
 free) `ℚ̄_ℓ,S`-module `L` is the extension of scalars `ℚ̄_ℓ,S ⊗_{E_S} L_E` of a lisse
 `E_S`-module `L_E`, for some finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`
 (`ProEtale.exists_isLocallyFree_extendScalars_iso`, blueprint
-`det-lem-coefficient-finite-descent-lisse` (1)).
+`lemma-descent-lisse-qbar-sheaves-finite--1` (1)).
 
 The proof: `S` being quasi-compact, `L` is trivialised on a finite pro-étale cover by affine
 schemes `V_k` (`ProEtale.CondensedRing.exists_finite_affine_cover_isFree_upperStar`). The fibre
 products `V_j ×_S V_k` are quasi-compact and quasi-separated, so the global sections of
 `ℚ̄_ℓ = colim_E E` over them are the filtered colimit of those of the `E`
 (`ProEtale.exists_subfieldToPadicAlgClSection_eq`, blueprint
-`det-lem-coefficient-finite-descent-sections` (2)): the finitely many entries of the transition
+`lemma-descent-lisse-qbar-sheaves-finite--1` (2)): the finitely many entries of the transition
 matrices and of their inverses come from a common `E_{V_j ×_S V_k}`
 (`ProEtale.exists_forall_le_isDefinedOver`). The lattices spanned by the bases then glue to a
 lisse `E_S`-module
@@ -82,7 +82,7 @@ lemma exists_forall_le_isDefinedOver {P V V' : Scheme.{u}} [CompactSpace P]
       (p')^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj (Mod.finiteFree (padicAlgClRingObj V' ℓ) m)) :
     ∃ E₀ : FiniteIntermediateField ℓ, ∀ E, E₀ ≤ E →
       CondensedRing.IsDefinedOver (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) p p' Y := by
-  choose s hs using fun i j ↦ Mod.regularEndRingHom_bijective.2
+  choose s hs using fun i j ↦ Mod.regularEndRingHom_bijective.2 <| .of
     ((CondensedRing.upperStarObjRegularIso _ p).inv ≫
       (p)^*⟦Profinite.padicAlgClRingObj ℓ⟧.map
         (biproduct.ι (fun _ : Fin n ↦ Mod.regular (padicAlgClRingObj V ℓ)) i) ≫ Y ≫
@@ -95,7 +95,7 @@ lemma exists_forall_le_isDefinedOver {P V V' : Scheme.{u}} [CompactSpace P]
   refine ⟨F, fun E hE i j ↦ ?_⟩
   obtain ⟨t, ht⟩ := hE₀ (i, j) E ((hF (i, j)).trans hE)
   refine ⟨t, ?_⟩
-  rw [← hs i j, ← ht]
+  simpa only [← ht] using (congrArg End.asHom (hs i j)).symm
 
 variable {ℓ} in
 /-- The unit `M ⟶ ℚ̄_ℓ,X ⊗_{E_X} M` is a monomorphism: it has the retraction induced by the
@@ -116,7 +116,7 @@ lemma mono_extendRestrictAdjunction_unit_app_padicSubfieldRingObjToPadicAlgCl
         ℓ E))
   (SplitMono.mk _ (by simpa using NatTrans.congr_app h M)).mono
 
-/-- Blueprint `det-lem-coefficient-finite-descent-lisse` (1): for a quasi-compact
+/-- Blueprint `lemma-descent-lisse-qbar-sheaves-finite--1` (1): for a quasi-compact
 quasi-separated scheme `S` and a lisse `ℚ̄_ℓ,S`-module `L`, there are a finite subextension
 `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and a lisse `E_S`-module `L_E` with `ℚ̄_ℓ,S ⊗_{E_S} L_E ≅ L`. See the
 module docstring. -/

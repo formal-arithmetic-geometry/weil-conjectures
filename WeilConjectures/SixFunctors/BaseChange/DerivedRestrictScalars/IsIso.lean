@@ -63,7 +63,7 @@ lemma isIso_restrictScalars_map_comp_rightDerivedFunctorPlusUnit_iff (sq : CommS
   isIso_map_comp_iff_isIso_map_comp _ _ _ _ _ _ _
     (mapHomotopyCategoryPlus_baseChangeMap_restrictScalars φ sq K) _
     (((f')_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnith.naturality
-      ((NatTrans.mapHomotopyCategoryPlus (upperStarRestrictScalars φ g').natTrans).app K))
+      ((NatTrans.mapHomotopyCategoryPlus (upperStarRestrictScalars φ g')).app K))
 
 /-- The restriction of scalars of the base change map over `Λ'` at `K`, followed by the unit of
 `R⁺f'_*` over `Λ`, is an isomorphism if and only if the underived part

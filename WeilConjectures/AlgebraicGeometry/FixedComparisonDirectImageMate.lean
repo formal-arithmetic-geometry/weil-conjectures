@@ -12,7 +12,7 @@ import WeilConjectures.SixFunctors.ProEtale.BaseChange.ComparisonCounit
 /-!
 # Canonical direct-image mate in fixed coefficients
 
-Source: blueprint, prop-weil-pbc-comparison-direct-image, first proof paragraph;
+Source: blueprint, theorem-comparison-direct-images--1, first proof paragraph;
 Stacks Project, Tags 099R and 0B65
 (auxiliary; not a blueprint node).
 
@@ -132,7 +132,7 @@ theorem fixedComparisonDirectImageMatePlus_counit (Λ : Type (u + 1)) [CommRing 
       (comparisonUpperStar (ModuleCat.{u + 1} Λ) U)
   have hb : fixedComparisonDirectImageMatePlus Λ f =
       (mateEquiv (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f).derivedPlus
-        (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f).derivedPlus θ.hom).natTrans := by
+        (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f).derivedPlus θ.hom) := by
     unfold fixedComparisonDirectImageMatePlus
     rw [ComparisonCore.underived_comparison_mate,
       Adjunction.rightDerivedFunctorPlusBaseChange_mateEquiv]

@@ -27,7 +27,7 @@ geometric Frobenius of `k̄` acts on roots of unity. The local Frobenius of the 
 ## Blueprint
 
 `AlgebraicGeometry.WeilSheaf.stalk_frobenius_tateTwistSheaf` implements
-`lem-wf-tate-twist-frobenius`.
+`proposition-weights-under-usual-operations--13`.
 -/
 
 @[expose] public section
@@ -43,8 +43,8 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
 
 variable (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-  (n : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ n).hom =
-    (specGeometricFrobenius k₀ ^ n).hom ≫ s)
+  (n : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ n).asIso.hom =
+    (specGeometricFrobenius k₀ ^ n).asIso.hom ≫ s)
 
 omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
 /-- The Frobenius of the stalk of the constant twist `ℚ̄_ℓ ⊗ 𝓑_b` relative to `𝔽_{qⁿ}` is
@@ -72,7 +72,7 @@ theorem stalkAt_frobenius_tateTwistSheaf (m : ℤ)
 
 /-- **Frobenius on the stalk of a twist.** For every `m ∈ ℤ` and every closed point `x`, the
 geometric Frobenius of the stalk of `ℚ̄_ℓ(m)` at `x` is multiplication by `Q_x⁻ᵐ`, where
-`Q_x = #κ(x)`. (blueprint: `lem-wf-tate-twist-frobenius`) -/
+`Q_x = #κ(x)`. (blueprint: `proposition-weights-under-usual-operations--13`) -/
 theorem stalk_frobenius_tateTwistSheaf (m : ℤ) (x : X.finitePoints)
     (v : ((tateTwistSheaf k₀ l X m).stalk x).carrier) :
     ((tateTwistSheaf k₀ l X m).stalk x).frobenius v =

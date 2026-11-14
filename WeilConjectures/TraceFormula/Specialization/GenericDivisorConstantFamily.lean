@@ -15,7 +15,7 @@ public import WeilConjectures.TraceFormula.Specialization.PointModel
 For a `k`-scheme `Y`, the constant family `Y × S` over the strictly henselian trait
 `S = Spec k'⟦t⟧` is the deformation of the zero ideal of `Y`
 (`ProEtale.CondensedRing.deformationModel Y ⊥ k'`). Blueprint
-`det-sp-constant-family-vanishing` asserts that its specialization unit
+`lemma-nearby-cycles-constant-family--1` asserts that its specialization unit
 `σ_Y : Λ_{Y'} ⟶ Ψ_{Y × S}(Λ)` is an isomorphism.
 
 The projection `Y × S ⟶ S` is a morphism of models from the constant family to the trait
@@ -51,7 +51,7 @@ open Scheme
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
 
-/-- **The point case** of blueprint `det-sp-constant-family-vanishing`, for any commutative
+/-- **The point case** of blueprint `lemma-nearby-cycles-constant-family--1`, for any commutative
 condensed ring `Λ`: the specialization unit `σ_s : Λ ⟶ Ψ_s Λ` of the strictly henselian trait is an
 isomorphism. -/
 theorem isIso_traitModel_unit (k : Type u) [Field k] (k' : Type u) [Field k'] [Algebra k k']
@@ -89,7 +89,7 @@ lemma constantFamilyModelHom_generic :
   rfl
 
 /-- **Reduction of the constant family case to smooth base change** (blueprint
-`det-sp-constant-family-vanishing`): if the pullback exchange
+`lemma-nearby-cycles-constant-family--1`): if the pullback exchange
 `L(Y' ⟶ Spec k')^* Ψ_s(Λ) ⟶ Ψ_{Y × S}(L(Y ⟶ Spec k)^* Λ)` of the projection `Y × S ⟶ S` is an
 isomorphism at the unit, then the specialization unit of the constant family `Y × S` is an
 isomorphism. This follows from the unit law of the pullback exchange and the point case
@@ -122,7 +122,7 @@ instance [IsIso Y.hom] : IsIso (deformationSpaceToAffineLine Y ⊥) := by
 instance [IsIso Y.hom] : IsIso (deformationTotalToTrait Y ⊥ k') :=
   inferInstanceAs (IsIso (pullback.snd _ _))
 
-/-- **The constant family of a point** (blueprint `det-sp-constant-family-vanishing`, the case
+/-- **The constant family of a point** (blueprint `lemma-nearby-cycles-constant-family--1`, the case
 `Y ≅ Spec k`): if the structure morphism of `Y` is an isomorphism, the specialization unit of the
 constant family `Y × S` is an isomorphism. The projection `Y × S ⟶ S` is then an isomorphism of
 models, so its pullback exchange is invertible

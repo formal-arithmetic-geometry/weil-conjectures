@@ -80,7 +80,7 @@ closed field, `Hᵠ(C_ét, 𝔾ₐ) = 0` for `q ≥ 2`, since `𝔾ₐ` is acycl
 (`AlgebraicGeometry.Scheme.subsingleton_sheafH_gaSheaf_of_isAffine`). Neither smoothness nor
 connectedness is needed. The identification `Hᵠ(C_ét, 𝔾ₐ) ≅ Hᵠ(C, 𝒪_C)` with Zariski cohomology
 in the blueprint statement is not formalised here.
-(blueprint: `lem-sc-ga-cohomology`, vanishing in degrees `≥ 2`) -/
+(blueprint: `proposition-p-torsion-smooth-proper-curve--3`, vanishing in degrees `≥ 2`) -/
 theorem subsingleton_sheafH_gaSheaf (f : C ⟶ Spec (.of k)) [IsCurve f] (n : ℕ) :
     Subsingleton (Sheaf.H C.gaSheaf (n + 2)) :=
   subsingleton_sheafH_add_two_of_forall_isAffine f _ (fun W w _ _ q ↦
@@ -96,7 +96,7 @@ the Artin–Schreier map `℘ = F - 1` is surjective on `H¹(C, 𝔾ₐ)`: in th
 (`AlgebraicGeometry.IsCurve.subsingleton_sheafH_gaSheaf`). For a proper smooth curve the
 surjectivity of `℘` on the finite-dimensional `H¹(C, 𝒪_C)` is Lang–Steinberg; this part of the
 blueprint statement, which needs the comparison with Zariski cohomology, is not formalised here.
-(blueprint: `lem-sc-artin-schreier-dimension`, reduction to `℘` on `H¹(C, 𝔾ₐ)`) -/
+(blueprint: `proposition-p-torsion-smooth-proper-curve--3`, reduction to `℘` on `H¹(C, 𝔾ₐ)`) -/
 theorem subsingleton_sheafH_constantZMod (f : C ⟶ Spec (.of k)) [IsCurve f] (p : ℕ)
     [Fact p.Prime] (hp : (p : Γ(C, ⊤)) = 0) (q : ℕ) (hq : 2 ≤ q)
     (h℘ : q = 2 → Function.Surjective (Sheaf.H.map (C.gaArtinSchreier p hp) 1)) :

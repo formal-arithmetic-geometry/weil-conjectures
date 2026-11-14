@@ -26,7 +26,7 @@ import WeilConjectures.CategoryTheory.ScalarLocalization.SemilinearScalarLocaliz
 
 Source: `literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/
 sk-def-sp-tate-twist-locally-free.md`, clauses (1)--(3)
-(blueprint: det-def-sp-tate-twist-locally-free).
+(blueprint: definition-tate-twists).
 
 The helpers specialize the recorded constant sheaf, root module, scalar extension,
 signed line and tensor functors. All positive root levels are indexed by `n + 1`.
@@ -207,7 +207,7 @@ is a line, with positive and negative twist functors inverse on the specified ca
 
 Source: `literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/
 sk-def-sp-tate-twist-locally-free.md`, all three clauses
-(blueprint: det-def-sp-tate-twist-locally-free).
+(blueprint: definition-tate-twists).
 
 Proof:
 1. The compatible root-tower local model supplies one pro-etale cover, compatible

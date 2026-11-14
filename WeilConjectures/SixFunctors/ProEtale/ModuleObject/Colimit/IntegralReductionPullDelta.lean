@@ -216,7 +216,6 @@ noncomputable def reductionShortComplexUpperStarIso
       erw [Category.comp_id]
       rfl)
 
-set_option maxHeartbeats 4000000 in -- large composites of derived functors on sheaf categories
 set_option maxRecDepth 20000 in -- deep defeq checks between homotopy category objects
 /-- The comparison of `derivedComapLeftDerivedUpperStarIso_hom_app_comp_map_...` on the image of a
 complex `P` is the image of `upperStarExtendComapComplexIso`. -/

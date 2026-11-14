@@ -195,8 +195,8 @@ private theorem unit_cancel
   simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
 
 /-- The ordinary constant-coefficient pullback comparison agrees with derived units.
-Source: sk-thm-dnc, Local construction, canonical constant-coefficient identifications
-(blueprint: lem-trf-coordinate-coefficient-unit-base-change).
+Source: lemma-section-normal-bundle, Local construction, canonical constant-coefficient
+identifications (blueprint: lem-trf-coordinate-coefficient-unit-base-change).
 
 Proof: Expanding the ordinary constant pullback comparison and using the recorded
 single/exact-pullback comparison identifies it with the derived single-constant-sheaf

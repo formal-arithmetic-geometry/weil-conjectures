@@ -50,7 +50,6 @@ private theorem perfect_stalk_isKProjective
     (fun n hn ↦ S.map_isZero (hab n (Or.inr hn)))
   exact CochainComplex.isKProjective_of_projective L b
 
-set_option maxHeartbeats 400000 in
 -- Comparing the localized stalk functors with the derived factorization unfolds nested functors.
 set_option backward.isDefEq.respectTransparency false in
 /-- A derived morphism between the open stalks of two strictly perfect complexes descends

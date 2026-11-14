@@ -32,7 +32,7 @@ private theorem sum_mate_unit
     (a : L ⊣ R) (b : P ⊣ S) (c : Q ⊣ T) (d : V ⊣ W)
     (x : S ⋙ R ≅ W ⋙ T) (M : F) :
     let e := (((a.comp b).ofNatIsoRight x).leftAdjointUniq (c.comp d)).hom
-    let θ := (mateEquiv c b (TwoSquare.mk _ _ _ _ e)).natTrans
+    let θ := (mateEquiv c b (TwoSquare.mk _ _ _ _ e))
     a.unit.app (T.obj M) ≫ R.map (θ.app M) ≫ x.hom.app (V.obj M) =
       T.map (d.unit.app M) := by
   dsimp only
@@ -248,7 +248,7 @@ theorem cartesian_sum_mate_sheaf_normalization
     let θ := (mateEquiv
       (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) q)
       (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) p)
-      (TwoSquare.mk _ _ _ _ (etaleLowerShriekBaseChangeIso A sq).hom)).natTrans
+      (TwoSquare.mk _ _ _ _ (etaleLowerShriekBaseChangeIso A sq).hom))
     (∀ F : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} A),
       θ.app F ≫
           (lowerStar (ModuleCat.{u + 1} A) p).map
@@ -267,7 +267,7 @@ theorem cartesian_sum_mate_sheaf_normalization
   have hx : IsIso x := NatIso.isIso_of_isIso_app x
   let θ := (mateEquiv (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) q)
     (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) p)
-    (TwoSquare.mk _ _ _ _ (etaleLowerShriekBaseChangeIso A sq).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (etaleLowerShriekBaseChangeIso A sq).hom))
   have hu : a.unit.app ((lowerStar (ModuleCat.{u + 1} A) q).obj F) ≫
       (upperStar (ModuleCat.{u + 1} A) v).map (θ.app F) ≫
       x.app ((etaleLowerShriek (ModuleCat.{u + 1} A) b inferInstance).obj F) =

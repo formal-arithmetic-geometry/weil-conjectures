@@ -537,8 +537,8 @@ theorem DerivedCategory.IsSitePerfect.isDualizable
   exact isIso_leftDerivedUpperStar_map_ihomUnitTensorToIhom_of_trivialization (𝒰.f i) K P a b
     ha hb hP e
 
-/-- Blueprint `lem-fix-operation-reduction`: Basic operations and coefficient reduction; the
-internal hom between finite levels.
+/-- Blueprint `proposition-six-operations-change-coefficients`: Basic operations and coefficient
+reduction; the internal hom between finite levels.
 
 If the first variable `K` is perfect on the coefficient site, the internal hom commutes with
 the reduction of the coefficients along `Λ ⟶ Λ/J`, for any ideal `J`:

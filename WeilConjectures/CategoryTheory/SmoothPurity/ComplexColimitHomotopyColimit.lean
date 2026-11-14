@@ -25,9 +25,9 @@ import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 /-!
 # Sequential colimits of complexes represent homotopy colimits
 
-Source: blueprint sec-smooth-purity, sk-prop-sf-kunneth-ordinary, order 1719;
+Source: blueprint chap-Smooth-purity, proposition-ordinary-external-kunneth--1, order 1719;
 Stacks Project, Derived Categories, Tags 093W, 0949, 0A5L and 090Z
-(blueprint: lem-kun-complex-colimit-hocolim).
+(blueprint: proposition-open-direct-image-preserves-finite).
 
 The two statements cover abelian sheaves and sheaves of modules over a commutative
 ring sheaf. Arbitrary coproduct and colimit cocones are used, so the statements apply
@@ -171,7 +171,7 @@ private theorem telescope_shortExact
 /-- The canonical cone and localized telescope triangle of a short exact sequence.
 The specified coprojections are used in both homotopy-colimit assertions.
 Source: Stacks Project, Derived Categories, Tags 0949 and 0A5L
-(blueprint: lem-kun-complex-colimit-hocolim). -/
+(blueprint: proposition-open-direct-image-preserves-finite). -/
 private theorem complex_colimit_homotopyColimit_of_shortExact
     {A : Type u} [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]
     [HasCountableCoproducts A] [CountableAB4 A]
@@ -253,7 +253,7 @@ private theorem complex_colimit_homotopyColimit_of_shortExact
 /-- The telescope comparison in any abelian category with exact sequential colimits.
 This is the site-independent form of the two preceding specializations.
 Source: Stacks Project, Derived Categories, Tags 093W, 0949 and 0A5L
-(blueprint: lem-kun-complex-colimit-hocolim).
+(blueprint: proposition-open-direct-image-preserves-finite).
 Proof: the cocone is the cokernel of the injective telescope map, giving a short
 exact sequence; apply the cone comparison and preservation of countable sums. -/
 theorem complex_colimit_homotopyColimit

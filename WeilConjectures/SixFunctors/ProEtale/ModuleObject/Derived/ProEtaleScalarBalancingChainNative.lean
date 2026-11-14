@@ -15,7 +15,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PullIsoMonoidal
 
 /-! # Condensed scalar balancing and its unbounded chain normalization
 
-Source: det-sp-reduction-direct-image, proof Step 1, ordinary pullback/tensor comparison
+Source: lemma-sp-reduction--1, proof Step 1, ordinary pullback/tensor comparison
 (blueprint: lem-sp-proetale-scalar-balancing-chain).
 
 The scalar-last tensor is the recorded relative tensor with the restricted regular coefficient
@@ -39,19 +39,19 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   (a : Λ ⟶ Λ') [IsMonHom a]
 
 /-- The coefficient `r_Z S_Z`, with its canonical restricted regular action.
-Source: det-sp-reduction-direct-image, Step 1
+Source: lemma-sp-reduction--1, Step 1
 (blueprint: lem-sp-proetale-scalar-balancing-chain). -/
 abbrev balancingCoefficient (Z : Scheme.{u}) :
     Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z) :=
   (Mod.comap (coefficientMap a Z)).obj (Mod.regular (condensedRingObj Λ' Z))
 
 /-- The ordinary scalar-last tensor, using the existing relative tensor functor.
-Source: det-sp-reduction-direct-image, Step 1
+Source: lemma-sp-reduction--1, Step 1
 (blueprint: lem-sp-proetale-scalar-balancing-chain). -/
 abbrev balancingTensor (Z : Scheme.{u}) := tensorRight (balancingCoefficient a Z)
 
 /-- The scalar-last to scalar-first presentation, with the scalar action on the scalar factor.
-Source: det-sp-reduction-direct-image, Step 1
+Source: lemma-sp-reduction--1, Step 1
 (blueprint: lem-sp-proetale-scalar-balancing-chain). -/
 def balancingExtensionIso (Z : Scheme.{u})
     (M : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) :
@@ -68,7 +68,7 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 /-- The full pairing equation for the inverse-image unit-section formula. Applying the sheaf
 inverse-image adjunction and then evaluating pure local tensors gives exactly
 `f⁻¹(x ⊗ s) ↦ f⁻¹x ⊗ α_S(f⁻¹s)`; this equation also covers tensors which are only locally pure.
-Source: det-sp-reduction-direct-image, Step 1
+Source: lemma-sp-reduction--1, Step 1
 (blueprint: lem-sp-proetale-scalar-balancing-chain). -/
 def IsCondensedScalarBalancing
     (t : balancingTensor a Y ⋙ upperStar Λ f ≅ upperStar Λ f ⋙ balancingTensor a X) : Prop :=
@@ -103,7 +103,6 @@ private def balancingCoefficientIso :
         Category.assoc, hs]
       rw [whisker_exchange_assoc])
 
-set_option maxHeartbeats 600000 in
 -- Avoid repeatedly expanding the concrete coefficient transports during elaboration.
 omit [IsCommMonObj Λ'] in
 private lemma balancingCoefficientIso_unit :
@@ -133,7 +132,6 @@ private def balancingIso :
         rw [← Functor.OplaxMonoidal.δ_natural_left_assoc,
           Category.assoc, whisker_exchange])
 
-set_option maxHeartbeats 600000 in
 -- Avoid repeatedly expanding the concrete coefficient transports during elaboration.
 omit [IsCommMonObj Λ'] in
 private lemma balancingIso_pairing : IsCondensedScalarBalancing a f (balancingIso a f) := by
@@ -147,6 +145,13 @@ private lemma balancingIso_pairing : IsCondensedScalarBalancing a f (balancingIs
     (balancingCoefficientIso a f).hom.hom ≫ _ = _
   erw [tensorHom_comp_whiskerLeft_assoc, balancingCoefficientIso_unit a f]
   rfl
+
+omit [IsCommMonObj Λ'] in
+private lemma balancingIso_hom_eq :
+    (balancingIso a f).hom =
+      Functor.OplaxMonoidal.δRightNatTrans (upperStar Λ f) (balancingCoefficient a Y) ≫
+        Functor.whiskerLeft (upperStar Λ f)
+          ((curriedTensor _).flip.map (balancingCoefficientIso a f).hom) := rfl
 
 attribute [local irreducible] balancingIso
 
@@ -173,7 +178,6 @@ private lemma balancingExtensionIso_pairing (Z : Scheme.{u})
   exact congrArg ((β_ M.X (condensedRingObj Λ' Z)).hom ≫ ·)
     (Mod.tensorObjπ_unit_projectionHom_hom_leftUnitor_hom (coefficientMap a Z) M)
 
-set_option maxHeartbeats 600000 in
 -- Avoid repeatedly expanding the concrete coefficient transports during elaboration.
 private lemma balancingPull_unit
     (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) :
@@ -224,7 +228,39 @@ private lemma balancingPull_projection
   rw [balancingPull_unit, whiskerLeft_comp_assoc, Mod.whiskerLeft_extendUnitHom_smul']
   rw [MonoidalCategory.tensorHom_def, Category.assoc]
 
-set_option maxHeartbeats 600000 in
+private lemma balancingIso_scalar_projection
+    (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) :
+    (upperStar Λ f).map (balancingExtensionIso a Y M).hom ≫
+      (comapUpperStarIso a f).inv.app _ ≫
+        (Mod.comap (coefficientMap a X)).map ((pullIso a f).inv.app M) =
+    (balancingIso a f).hom.app M ≫
+      (balancingExtensionIso a X ((upperStar Λ f).obj M)).hom := by
+  apply Mod.hom_ext
+  apply (cancel_epi ((f)^*[Ab.{u + 1}].map
+    (Mod.tensorObjπ M (balancingCoefficient a Y)) ≫
+      upperStarUnitHom Λ f (M ⊗ balancingCoefficient a Y))).1
+  simp only [Mod.comp_hom', Mod.comap_map_hom, Category.assoc]
+  rw [upperStarUnitHom_map_hom_assoc, ← Functor.map_comp_assoc,
+    balancingExtensionIso_pairing a Y M, Functor.map_comp]
+  have hb := congrArg (fun k ↦ k ≫ ((pullIso a f).inv.app M).hom)
+    (upperStarUnitHom_comapUpperStarIso_inv_app_hom a f
+      ((Mod.extendScalars (coefficientMap a Y)).obj M))
+  simp only [Category.assoc] at hb
+  trans ((f)^*[Ab.{u + 1}].map (β_ M.X (condensedRingObj Λ' Y)).hom ≫
+    (f)^*[Ab.{u + 1}].map (Mod.extendπ (coefficientMap a Y) M)) ≫
+      upperStarUnitHom Λ' f ((Mod.extendScalars (coefficientMap a Y)).obj M) ≫
+        ((pullIso a f).inv.app M).hom
+  · exact congrArg (((f)^*[Ab.{u + 1}].map
+      (β_ M.X (condensedRingObj Λ' Y)).hom ≫
+        (f)^*[Ab.{u + 1}].map (Mod.extendπ (coefficientMap a Y) M)) ≫ ·) hb
+  rw [Category.assoc]
+  erw [balancingPull_projection a f M]
+  conv_rhs =>
+    erw [reassoc_of% (balancingIso_pairing a f M),
+      balancingExtensionIso_pairing a X ((upperStar Λ f).obj M)]
+  rw [Functor.map_braiding, Category.assoc, Category.assoc,
+    Functor.Monoidal.μ_δ_assoc, BraidedCategory.braiding_naturality_assoc]
+
 -- Identify the scalar-first map on the entire tensor projection.
 private lemma balancingIso_scalar
     (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) :
@@ -235,35 +271,7 @@ private lemma balancingIso_scalar
           (upperStar Λ f).map (balancingExtensionIso a Y M).inv ≫
             (balancingIso a f).hom.app M ≫
               (balancingExtensionIso a X ((upperStar Λ f).obj M)).hom := by
-  have h : (upperStar Λ f).map (balancingExtensionIso a Y M).hom ≫
-      (comapUpperStarIso a f).inv.app _ ≫
-        (Mod.comap (coefficientMap a X)).map ((pullIso a f).inv.app M) =
-      (balancingIso a f).hom.app M ≫
-        (balancingExtensionIso a X ((upperStar Λ f).obj M)).hom := by
-    apply Mod.hom_ext
-    apply (cancel_epi ((f)^*[Ab.{u + 1}].map
-      (Mod.tensorObjπ M (balancingCoefficient a Y)) ≫
-        upperStarUnitHom Λ f (M ⊗ balancingCoefficient a Y))).1
-    simp only [Mod.comp_hom', Mod.comap_map_hom, Category.assoc]
-    rw [upperStarUnitHom_map_hom_assoc, ← Functor.map_comp_assoc,
-      balancingExtensionIso_pairing a Y M, Functor.map_comp]
-    have hb := congrArg (fun k ↦ k ≫ ((pullIso a f).inv.app M).hom)
-      (upperStarUnitHom_comapUpperStarIso_inv_app_hom a f
-        ((Mod.extendScalars (coefficientMap a Y)).obj M))
-    simp only [Category.assoc] at hb
-    trans ((f)^*[Ab.{u + 1}].map (β_ M.X (condensedRingObj Λ' Y)).hom ≫
-      (f)^*[Ab.{u + 1}].map (Mod.extendπ (coefficientMap a Y) M)) ≫
-        upperStarUnitHom Λ' f ((Mod.extendScalars (coefficientMap a Y)).obj M) ≫
-          ((pullIso a f).inv.app M).hom
-    · exact congrArg (((f)^*[Ab.{u + 1}].map
-        (β_ M.X (condensedRingObj Λ' Y)).hom ≫
-          (f)^*[Ab.{u + 1}].map (Mod.extendπ (coefficientMap a Y) M)) ≫ ·) hb
-    rw [Category.assoc]
-    erw [balancingPull_projection a f M]
-    erw [reassoc_of% (balancingIso_pairing a f M),
-      balancingExtensionIso_pairing a X ((upperStar Λ f).obj M)]
-    rw [Functor.map_braiding, Category.assoc, Category.assoc,
-      Functor.Monoidal.μ_δ_assoc, BraidedCategory.braiding_naturality_assoc]
+  have h := balancingIso_scalar_projection a f M
   refine ⟨(pullIso a f).symm.app M, ?_⟩
   have h' := congrArg (fun k ↦ (comapUpperStarIso a f).hom.app
     ((Mod.extendScalars (coefficientMap a Y)).obj M) ≫
@@ -273,10 +281,80 @@ private lemma balancingIso_scalar
     Iso.hom_inv_id_app_assoc (comapUpperStarIso a f)] at h'
   exact h'
 
-set_option maxHeartbeats 800000 in
+private lemma balancingChain_normalization
+    {C D : Type*} [Category* C] [Category* D] [Preadditive C] [Preadditive D]
+    [MonoidalCategory C] [MonoidalCategory D] [MonoidalPreadditive C] [MonoidalPreadditive D]
+    [HasZeroObject C] [HasZeroObject D]
+    (F : C ⥤ D) [F.Additive] [F.OplaxMonoidal]
+    [∀ j, PreservesColimitsOfShape
+      (Discrete (ComplexShape.π (.up ℤ) (.up ℤ) (.up ℤ) ⁻¹' {j})) F]
+    (M : C) (N : D) (c : F.obj M ≅ N)
+    (t : tensorRight M ⋙ F ≅ F ⋙ tensorRight N)
+    (ht : t.hom = Functor.OplaxMonoidal.δRightNatTrans F M ≫
+      Functor.whiskerLeft F ((curriedTensor D).flip.map c.hom))
+    (P : CochainComplex C ℤ) :
+    (F.mapHomologicalComplex (.up ℤ)).map
+        (CochainComplex.mapBifunctorSingle₂Iso (curriedTensor C) M P).hom ≫
+          (NatIso.mapHomologicalComplex t (.up ℤ)).hom.app P =
+      HomologicalComplex.mapBifunctorComparison
+          (Functor.OplaxMonoidal.δNatTrans F) (.up ℤ) P
+          ((HomologicalComplex.single C (.up ℤ) 0).obj M) ≫
+        HomologicalComplex.mapBifunctorMap
+          (𝟙 ((F.mapHomologicalComplex (.up ℤ)).obj P))
+          ((HomologicalComplex.singleMapHomologicalComplex F (.up ℤ) 0).hom.app M ≫
+            (HomologicalComplex.single D (.up ℤ) 0).map c.hom)
+          (curriedTensor D) (.up ℤ) ≫
+        (CochainComplex.mapBifunctorSingle₂Iso (curriedTensor D) N
+          ((F.mapHomologicalComplex (.up ℤ)).obj P)).hom := by
+  let K := (F.mapHomologicalComplex (.up ℤ)).obj P
+  let e := CochainComplex.mapBifunctorSingle₂Iso (curriedTensor _) (F.obj M) K
+  let e' := CochainComplex.mapBifunctorSingle₂Iso (curriedTensor _) N K
+  let d := HomologicalComplex.mapBifunctorComparison
+    (Functor.OplaxMonoidal.δNatTrans F) (.up ℤ) P
+      ((HomologicalComplex.single _ (.up ℤ) 0).obj M)
+  let q := (HomologicalComplex.singleMapHomologicalComplex F (.up ℤ) 0).hom.app M
+  let r := (HomologicalComplex.single _ (.up ℤ) 0).map c.hom
+  have h₁ : (F.mapHomologicalComplex (.up ℤ)).map
+      (CochainComplex.mapBifunctorSingle₂Iso (curriedTensor _) M P).inv ≫ d ≫
+        HomologicalComplex.mapBifunctorMap (𝟙 K) q (curriedTensor _) (.up ℤ) ≫ e.hom =
+      (NatTrans.mapHomologicalComplex
+        (Functor.OplaxMonoidal.δRightNatTrans F M) (.up ℤ)).app P :=
+    CochainComplex.mapBifunctorComparison_δNatTrans_single₂ F P M
+  have h₂ : (NatTrans.mapHomologicalComplex ((curriedTensor _).flip.map c.hom)
+      (.up ℤ)).app K ≫ e'.inv =
+      e.inv ≫ HomologicalComplex.mapBifunctorMap (𝟙 K) r (curriedTensor _) (.up ℤ) :=
+    CochainComplex.mapBifunctorSingle₂Iso_inv_naturality₂ (curriedTensor _) c.hom K
+  have h₂' : HomologicalComplex.mapBifunctorMap (𝟙 K) r (curriedTensor _) (.up ℤ) ≫
+      e'.hom = e.hom ≫
+        (NatTrans.mapHomologicalComplex ((curriedTensor _).flip.map c.hom) (.up ℤ)).app K := by
+    rw [← cancel_epi e.inv, ← reassoc_of% h₂, Iso.inv_hom_id, Category.comp_id,
+      Iso.inv_hom_id_assoc]
+  have h₃ : (NatIso.mapHomologicalComplex t (.up ℤ)).hom.app P =
+      (NatTrans.mapHomologicalComplex
+        (Functor.OplaxMonoidal.δRightNatTrans F M) (.up ℤ)).app P ≫
+      (NatTrans.mapHomologicalComplex ((curriedTensor _).flip.map c.hom) (.up ℤ)).app K := by
+    change (NatTrans.mapHomologicalComplex t.hom (.up ℤ)).app P = _
+    rw [ht]
+    rfl
+  have hcomp : HomologicalComplex.mapBifunctorMap (𝟙 K) (q ≫ r)
+      (curriedTensor _) (.up ℤ) =
+      HomologicalComplex.mapBifunctorMap (𝟙 K) q (curriedTensor _) (.up ℤ) ≫
+        HomologicalComplex.mapBifunctorMap (𝟙 K) r (curriedTensor _) (.up ℤ) := by
+    simp only [HomologicalComplex.mapBifunctorMap, CategoryTheory.Functor.map_id,
+      NatTrans.id_app, Category.id_comp, CategoryTheory.Functor.map_comp,
+      HomologicalComplex₂.total.map_comp]
+  change (F.mapHomologicalComplex (.up ℤ)).map
+    (CochainComplex.mapBifunctorSingle₂Iso (curriedTensor _) M P).hom ≫
+      (NatIso.mapHomologicalComplex t (.up ℤ)).hom.app P =
+    d ≫ HomologicalComplex.mapBifunctorMap (𝟙 K) (q ≫ r) (curriedTensor _) (.up ℤ) ≫ e'.hom
+  apply (cancel_epi ((F.mapHomologicalComplex (.up ℤ)).map
+    (CochainComplex.mapBifunctorSingle₂Iso (curriedTensor _) M P).inv)).1
+  rw [Iso.inv_hom_id_map_assoc, h₃, hcomp, Category.assoc, h₂']
+  rw [reassoc_of% h₁]
+
 -- The proof compares several presentations of the degree-zero coefficient total.
 /-- Ordinary condensed scalar balancing, its transported scalar action and chain normalization.
-Source: det-sp-reduction-direct-image, proof Step 1
+Source: lemma-sp-reduction--1, proof Step 1
 (blueprint: lem-sp-proetale-scalar-balancing-chain).
 
 Proof:
@@ -358,56 +436,7 @@ theorem condensedScalarBalancingChain :
     exact ⟨rfl, rfl⟩
   · intro P i j
     exact (balancingIso a f).hom.naturality (P.d i j)
-  · intro P
-    let F := upperStar Λ f
-    let C := balancingCoefficient a Y
-    let c := balancingCoefficientIso a f
-    let K := (F.mapHomologicalComplex (.up ℤ)).obj P
-    let e := CochainComplex.mapBifunctorSingle₂Iso (curriedTensor _) (F.obj C) K
-    let e' := CochainComplex.mapBifunctorSingle₂Iso (curriedTensor _)
-      (balancingCoefficient a X) K
-    let d := HomologicalComplex.mapBifunctorComparison
-      (Functor.OplaxMonoidal.δNatTrans F) (.up ℤ) P
-        ((HomologicalComplex.single _ (.up ℤ) 0).obj C)
-    let q := (HomologicalComplex.singleMapHomologicalComplex F (.up ℤ) 0).hom.app C
-    let r := (HomologicalComplex.single _ (.up ℤ) 0).map c.hom
-    have h₁ : (F.mapHomologicalComplex (.up ℤ)).map
-        (CochainComplex.mapBifunctorSingle₂Iso (curriedTensor _) C P).inv ≫ d ≫
-          HomologicalComplex.mapBifunctorMap (𝟙 K) q (curriedTensor _) (.up ℤ) ≫ e.hom =
-        (NatTrans.mapHomologicalComplex
-          (Functor.OplaxMonoidal.δRightNatTrans F C) (.up ℤ)).app P :=
-      CochainComplex.mapBifunctorComparison_δNatTrans_single₂ F P C
-    have h₂ : (NatTrans.mapHomologicalComplex ((curriedTensor _).flip.map c.hom)
-        (.up ℤ)).app K ≫ e'.inv =
-        e.inv ≫ HomologicalComplex.mapBifunctorMap (𝟙 K) r (curriedTensor _) (.up ℤ) :=
-      CochainComplex.mapBifunctorSingle₂Iso_inv_naturality₂ (curriedTensor _) c.hom K
-    have h₂' : HomologicalComplex.mapBifunctorMap (𝟙 K) r (curriedTensor _) (.up ℤ) ≫
-        e'.hom = e.hom ≫
-          (NatTrans.mapHomologicalComplex ((curriedTensor _).flip.map c.hom) (.up ℤ)).app K := by
-      rw [← cancel_epi e.inv, ← reassoc_of% h₂, Iso.inv_hom_id, Category.comp_id,
-        Iso.inv_hom_id_assoc]
-    have h₃ : (NatIso.mapHomologicalComplex (balancingIso a f) (.up ℤ)).hom.app P =
-        (NatTrans.mapHomologicalComplex
-          (Functor.OplaxMonoidal.δRightNatTrans F C) (.up ℤ)).app P ≫
-        (NatTrans.mapHomologicalComplex ((curriedTensor _).flip.map c.hom) (.up ℤ)).app K := by
-      unfold balancingIso
-      rfl
-    have hcomp : HomologicalComplex.mapBifunctorMap (𝟙 K) (q ≫ r)
-        (curriedTensor _) (.up ℤ) =
-        HomologicalComplex.mapBifunctorMap (𝟙 K) q (curriedTensor _) (.up ℤ) ≫
-          HomologicalComplex.mapBifunctorMap (𝟙 K) r (curriedTensor _) (.up ℤ) :=
-      by
-        simp only [HomologicalComplex.mapBifunctorMap, CategoryTheory.Functor.map_id,
-          NatTrans.id_app, Category.id_comp, CategoryTheory.Functor.map_comp,
-          HomologicalComplex₂.total.map_comp]
-    change (F.mapHomologicalComplex (.up ℤ)).map
-      (CochainComplex.mapBifunctorSingle₂Iso (curriedTensor _) C P).hom ≫
-        (NatIso.mapHomologicalComplex (balancingIso a f) (.up ℤ)).hom.app P =
-      d ≫ HomologicalComplex.mapBifunctorMap (𝟙 K) (q ≫ r) (curriedTensor _) (.up ℤ) ≫ e'.hom
-    apply (cancel_epi ((F.mapHomologicalComplex (.up ℤ)).map
-      (CochainComplex.mapBifunctorSingle₂Iso (curriedTensor _) C P).inv)).1
-    rw [Iso.inv_hom_id_map_assoc, h₃, hcomp, Category.assoc, h₂']
-    rw [reassoc_of% h₁]
-
-
+  · exact balancingChain_normalization (upperStar Λ f) (balancingCoefficient a Y)
+      (balancingCoefficient a X) (balancingCoefficientIso a f) (balancingIso a f)
+      (balancingIso_hom_eq a f)
 end AlgebraicGeometry.ProEtale.CondensedRing

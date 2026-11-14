@@ -29,7 +29,7 @@ lie in degrees `≤ B` for one bound `B`
 (`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_constantSheaf_of_isLE`). Under
 the uniform vanishing `UDV(f, Λ; N)` of the higher direct images this holds for every `K` of finite
 Tor amplitude (`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_constantSheaf`,
-blueprint `lem-sf-projection-finite-constant`).
+blueprint `proposition-open-direct-image-preserves-finite--1`).
 
 ## Proof
 
@@ -47,7 +47,7 @@ uniform bound `B` is what makes the induction start.
 
 - `AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_constantSheaf_of_isLE`
 - `AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_constantSheaf`
-  (`lem-sf-projection-finite-constant`).
+  (`proposition-open-direct-image-preserves-finite--1`).
 -/
 
 @[expose] public section
@@ -201,8 +201,8 @@ theorem isIso_rightDerivedLowerStarProjectionMap_constantSheaf_of_isLE [IsNoethe
   · have := hiso (B + 1 - n).toNat M
     rwa [show B + 1 - ((B + 1 - n).toNat : ℤ) = n by omega] at this
 
-/-- Blueprint `lem-sf-projection-finite-constant`: The projection formula with a finitely
-presented constant coefficient.
+/-- Blueprint `proposition-open-direct-image-preserves-finite--1`: The projection formula with a
+finitely presented constant coefficient.
 
 Let `f : X ⟶ Y` be a morphism of schemes, `Λ` a noetherian commutative ring, and assume
 `UDV(f, Λ; N)`: `Rᵠf_* F = 0` for every sheaf of `Λ`-modules `F` and every `q > N`. Let `K` be
@@ -213,7 +213,7 @@ is natural in `M`, being a component of the natural transformation
 `AlgebraicGeometry.Etale.rightDerivedLowerStarProjectionMap`.
 
 The blueprint allows any `K ∈ D^-(X_ét, Λ)`; here `K` has finite Tor amplitude, which is the case
-used in `thm-sf-direct-image-tor-amplitude` and makes all the complexes `K ⊗ᴸ Z_X` bounded, so
+used in `proposition-six-operations-dctf--2` and makes all the complexes `K ⊗ᴸ Z_X` bounded, so
 that `UDV(f, Λ; N)` bounds their direct images
 (`AlgebraicGeometry.Etale.isLE_rightDerivedLowerStar_obj_of_isZero_higherDirectImage`). The
 proof is `AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_constantSheaf_of_isLE`

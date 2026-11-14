@@ -832,7 +832,6 @@ private theorem tensorNatural_from_squares {D D' : Type*} [Category* D] [Categor
   rw [← Category.assoc, tensorHom_comp_tensorHom, ha, hb, ← tensorHom_comp_tensorHom,
     Category.assoc, Functor.LaxMonoidal.μ_natural, Category.assoc]
 
-set_option maxHeartbeats 500000 in
 -- Keep the inverse counit as a natural transformation throughout the tensor calculation.
 private theorem tensorSheafification_natural
     {T : Type c} [Category.{v} T] {K : GrothendieckTopology T}
@@ -946,7 +945,7 @@ Homology, Tags 012Z and 010N, and Cohomology on Sites, Tags 06YN and 06YS
 Proof:
 1. In each degree n use the extension/restriction adjunction
    (lem-pur-site-restriction-module-adjunction-exact) and preservation of colimits by
-   a left adjoint (lem-weil-pbc-left-adjoint-preserves-colimits) to commute extension
+   a left adjoint (situation-conventions) to commute extension
    with the sum over p+q=n. Compose the inverse coproduct comparison with the sum of
    the sheaf tensor isomorphisms (lem-weil-pbc-ringed-slice-extension-tensor). This
    gives precisely the displayed equation on each insertion of a tensor summand.

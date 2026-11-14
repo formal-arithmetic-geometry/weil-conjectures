@@ -19,8 +19,8 @@ public import WeilConjectures.RingTheory.RegularLocalRing.UniqueFactorization
 # The blow-up restriction vanishing
 
 This file states the geometric vanishing used by the curve route of the trace formula
-(blueprint `sk-lem-tf-blowup-restriction`, proved in its own subsection by blowing up the closed
-point, see `sk-rem-tf-curve-local-proof`):
+(blueprint `lemma-vanishing-restrictions-after-blowing-up--1`, proved in its own subsection by
+blowing up the closed point, see `remark-outline-local-computation`):
 
 Let `T` be the strict localization of a smooth surface over an algebraically closed field `k` at a
 closed point `t`, `H` a regular curve through `t` and `D`, `B` reduced closed curves through `t`
@@ -52,11 +52,11 @@ variable {k : Type u} [Field k] [IsAlgClosed k]
 noncomputable def specIdeal {R : CommRingCat.{u}} {D : Scheme.{u}} (d : D ⟶ Spec R) : Ideal R :=
   RingHom.ker ((Scheme.ΓSpecIso R).inv ≫ d.appTop).hom
 
-/-- **Blow-up restriction vanishing** (blueprint `sk-lem-tf-blowup-restriction`; SGA 5, III B,
-§§2–4). Let `T = Spec R` be the strict localization of a smooth surface `S` over the algebraically
-closed field `k` at a `k`-point `s`, `ℓ` a prime invertible in `k` and `Λ` a finite commutative
-`ℓ`-primary ring. Let `H` be a regular curve through the closed point `t` (its ring is a discrete
-valuation ring) and `D`, `B` reduced closed curves through `t` whose tangent cones satisfy
+/-- **Blow-up restriction vanishing** (blueprint `lemma-vanishing-restrictions-after-blowing-up--1`;
+SGA 5, III B, §§2–4). Let `T = Spec R` be the strict localization of a smooth surface `S` over the
+algebraically closed field `k` at a `k`-point `s`, `ℓ` a prime invertible in `k` and `Λ` a finite
+commutative `ℓ`-primary ring. Let `H` be a regular curve through the closed point `t` (its ring is a
+discrete valuation ring) and `D`, `B` reduced closed curves through `t` whose tangent cones satisfy
 `C_t D ∩ C_t B = {0}` and `C_t D ∩ T_t H = {0}`. Let `i : T ∖ (D ∪ H) ⟶ T ∖ D` and let `E` be a
 bounded complex on `T ∖ (D ∪ H)` whose cohomology sheaves are trivialized by a finite étale Galois
 cover with group a finite `ℓ`-group, with finite constant values (finite locally constant
@@ -64,8 +64,8 @@ cohomology with finite `ℓ`-group monodromy). Then the restriction
 `RΓ(T ∖ D, i_! E) ⟶ RΓ(B ∖ t, (i_! E)|_{B ∖ t})` is zero in `D(Λ)`; here `B ∖ t = B ∩ (T ∖ D)`,
 since the tangent cone condition forces `B ∩ D = {t}`.
 
-This is the statement of the blueprint node of the subsection `sk-lem-tf-blowup-restriction`,
-whose own task proves it. -/
+This is the statement of the blueprint node of the subsection
+`lemma-vanishing-restrictions-after-blowing-up--1`, whose own task proves it. -/
 theorem sectionsRestriction_app_eq_zero_of_tangentConesMeetAtOrigin
     {S : Scheme.{u}} (aS : S ⟶ Spec (.of k)) [SmoothOfRelativeDimension 2 aS]
     (s : Spec (.of k) ⟶ S) (hs : s ≫ aS = 𝟙 _) (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : (ℓ : k) ≠ 0)

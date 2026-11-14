@@ -16,7 +16,7 @@ public import WeilConjectures.TraceFormula.Specialization.DeformationModel
 
 The pullback exchange `α_f : Lf'^* Ψ_N ⟶ Ψ_M Lf^*` of a morphism of nearby cycles models whose
 morphism of total spaces is weakly étale and whose square of geometric generic fibres is cartesian
-is an isomorphism (blueprint `det-sp-nearby-cycles-exchanges` (1);
+is an isomorphism (blueprint `prose-E-03` (1);
 `NearbyCyclesModel.Hom.isIso_pullbackExchange_of_weaklyEtale`). This file records the open
 immersion case on bounded constructible complexes and applies it to the deformation to the normal
 cone: for an open immersion `f : X ⟶ Y` of `k`-schemes and `J = f⁻¹ I`, the morphism of models
@@ -123,7 +123,7 @@ lemma isOpenImmersion_deformationTotalMap [IsOpenImmersion f.left]
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
 
 /-- **The pullback exchange of the deformation to the normal cone along an open immersion**
-(blueprint `det-sp-nearby-cycles-exchanges` (1)): for an open immersion `f : X ⟶ Y` and
+(blueprint `prose-E-03` (1)): for an open immersion `f : X ⟶ Y` and
 `J = f⁻¹ I`, the pullback exchange of `deformationModelHom f hJ k'` is an isomorphism. -/
 theorem isIso_deformationModelHom_pullbackExchange [IsOpenImmersion f.left]
     (hJI : J = I.comap f.left) : IsIso ((deformationModelHom f hJ k').pullbackExchange Λ) := by

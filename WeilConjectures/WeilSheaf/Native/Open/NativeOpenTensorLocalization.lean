@@ -39,7 +39,6 @@ variable {U Z : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
   [QuasiCompact (Z ↘ Spec (CommRingCat.of k₀))]
   [IsSeparated (Z ↘ Spec (CommRingCat.of k₀))]
 
-set_option maxHeartbeats 1000000 in
 -- The dependent presentation fields require a larger elaboration budget.
 /-- Totalize the fixed sheaf maps and descend them, with the prescribed models,
 to the unbounded ambient derived categories.

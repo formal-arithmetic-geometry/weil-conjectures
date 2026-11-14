@@ -353,7 +353,7 @@ private theorem normedDiagram_localLattice
 
 /-- A lisse spectral-coefficient module admits an integral lattice on a qcqs etale cover.
 Source: Bhatt--Scholze, Proposition 6.8.4(6) and Lemma 6.8.13, first paragraph;
-blueprint main-20261015, sk-lem-stratified-lattice, "Sheaf of lattices".
+blueprint main-20261015, lemma-lattices-after-finite-stratification, "Sheaf of lattices".
 (blueprint: lem-sfb-spectral-etale-local-lattice).
 
 Proof. Equip E with its spectral norm and its original field and algebra structures.

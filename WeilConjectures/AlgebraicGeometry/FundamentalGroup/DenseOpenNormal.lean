@@ -18,7 +18,7 @@ of `X` has integrally closed local domains as local rings again
 irreducible, so its restriction to `U`, a nonempty open subscheme of `P`, is irreducible, hence
 connected. Consequently the map `π₁(U) → π₁(X)` is surjective (SGA 1, Exp. V, Prop. 8.2;
 Stacks `0BQM`).
-This is part (1) of the blueprint lemma `lem-wf-dense-open-pi1-surjective`; the regular case is
+This is part (1) of the blueprint lemma `theorem-purity-real-sheaves-curves`; the regular case is
 `WeilConjectures.AlgebraicGeometry.FundamentalGroup.DenseOpen`.
 
 ## Main statements
@@ -37,7 +37,7 @@ namespace AlgebraicGeometry.Scheme.FiniteEtale
 
 variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 
-/-- Blueprint `lem-wf-dense-open-pi1-surjective`, part (1), second formulation: a connected
+/-- Blueprint `theorem-purity-real-sheaves-curves`, part (1), second formulation: a connected
 finite étale cover of a connected locally noetherian normal scheme `X` stays connected over a
 nonempty open `U`. The cover is normal, being étale over `X`, hence irreducible, and its
 restriction to `U` is a nonempty open of it. -/
@@ -63,7 +63,7 @@ variable [ConnectedSpace U] [ConnectedSpace X] {Ω Ω' : Type u} [Field Ω] [IsS
   (GX : Type u) [Group GX] [TopologicalSpace GX] [IsTopologicalGroup GX] [CompactSpace GX]
   [∀ P, MulAction GX ((fiber t).obj P)] [IsFundamentalGroup (fiber t) GX]
 
-/-- Blueprint `lem-wf-dense-open-pi1-surjective`, part (1): **the fundamental group of a
+/-- Blueprint `theorem-purity-real-sheaves-curves`, part (1): **the fundamental group of a
 nonempty open of a connected normal scheme surjects onto that of the scheme.** For a connected
 locally noetherian scheme `X` whose local rings are integrally closed domains, an open immersion
 `j : U ⟶ X` with `U` nonempty and a path `τ` between the fibre functors, the map

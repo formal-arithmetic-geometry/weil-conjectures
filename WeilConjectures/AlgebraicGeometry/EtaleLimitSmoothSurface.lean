@@ -13,10 +13,11 @@ public import Mathlib.CategoryTheory.Filtered.Basic
 /-!
 # Étale limits of smooth surfaces
 
-The local calculation of the trace formula (blueprint `sk-lem-tf-transverse-boundary`,
-`sk-lem-tf-blowup-restriction`) works on schemes `Z` over a field `k` that are "a regular smooth
-surface over `k`, or an étale limit with affine transition maps of such surfaces", such as the
-strict localization of a smooth surface at a point, or an open subscheme of its blow-up.
+The local calculation of the trace formula (blueprint
+`lemma-cohomology-near-two-transverse-divisors`, `lemma-vanishing-restrictions-after-blowing-up--1`)
+works on schemes `Z` over a field `k` that are "a regular smooth surface over `k`, or an étale limit
+with affine transition maps of such surfaces", such as the strict localization of a smooth surface
+at a point, or an open subscheme of its blow-up.
 
 ## Main definitions
 
@@ -38,8 +39,9 @@ variable {k : Type u} [Field k]
 
 /-- A `k`-scheme `Z` is an *étale limit of smooth surfaces* if it is the limit of a cofiltered
 diagram of smooth `k`-schemes of relative dimension `2` with affine étale transition maps
-(blueprint `sk-lem-tf-transverse-boundary`: "a regular smooth surface over `k`, or an étale
-limit with affine transition maps of such surfaces"; smooth schemes over a field are regular). -/
+(blueprint `lemma-cohomology-near-two-transverse-divisors`: "a regular smooth surface over `k`, or
+an étale limit with affine transition maps of such surfaces"; smooth schemes over a field are
+regular). -/
 def IsEtaleLimitOfSmoothSurfaces (Z : Over (Spec (.of k))) : Prop :=
   ∃ (J : Type u) (_ : SmallCategory J) (_ : IsCofiltered J) (F : J ⥤ Over (Spec (.of k)))
     (c : Cone F), Nonempty (IsLimit c) ∧ Nonempty (c.pt ≅ Z) ∧

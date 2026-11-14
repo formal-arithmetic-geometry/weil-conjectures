@@ -65,7 +65,6 @@ structure TwoOpenTransportData
   hθU : θU = κU.app A ≪≫ LU.mapIso φU ≪≫ siteU.app E
   hθV : θV = κV.app B ≪≫ LV.mapIso φV ≪≫ siteV.app E
 
-set_option synthInstance.maxHeartbeats 400000 in
 -- Exact open restriction comparisons need this instance-search budget.
 /-- Real comparison data at every later stage, without an overlap transition.
 The final fields pin both local identifications to the supplied comparisons.
@@ -177,7 +176,6 @@ noncomputable def perfectOverlapComparisonDataType
         (derivedPullback (gj ∣_ U)) (derivedPullback (gj ∣_ V))
         LU LV PU PV RU RV A B E φU φV
 
-set_option synthInstance.maxHeartbeats 400000 in
 -- Exact open restriction comparisons need this instance-search budget.
 /-- The Hom-continuity proposition with dependent stage expressions kept behind an API.
 Source: Stacks Project, Tag 09RE.

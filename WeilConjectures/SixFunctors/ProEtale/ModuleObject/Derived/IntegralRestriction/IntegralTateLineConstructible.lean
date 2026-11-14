@@ -383,7 +383,7 @@ import all Mathlib.CategoryTheory.Sites.Grothendieck
 import all Mathlib.CategoryTheory.Sites.Limits
 import all Mathlib.CategoryTheory.Sites.Sheaf
 import all Mathlib.Combinatorics.Quiver.ReflQuiver
-import all Mathlib.Data.Int.ConditionallyCompleteOrder
+import all Mathlib.Order.Int.ConditionallyCompleteOrder
 import all Mathlib.Geometry.RingedSpace.LocallyRingedSpace
 import all Mathlib.Geometry.RingedSpace.PresheafedSpace
 import all Mathlib.Geometry.RingedSpace.SheafedSpace
@@ -514,7 +514,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Constructib
 /-! # Constructibility of the internal integral Tate line
 
 Source: current blueprint, sk-thm-int-restriction-line.proof.md, paragraph (3),
-and sk-def-sp-tate-twist, local-generator and signed-power paragraphs.
+and definition-tate-twists, local-generator and signed-power paragraphs.
 (blueprint: lem-sfb-integral-tate-line-constructible).
 -/
 
@@ -795,7 +795,7 @@ private theorem bounded_signed_of_cover (X : Scheme.{u})
 /-- The actual internal-module realization of every signed integral Tate line is
 constructible in degree zero.
 
-Source: sk-def-sp-tate-twist, local-generator and signed-power paragraphs;
+Source: definition-tate-twists, local-generator and signed-power paragraphs;
 sk-thm-int-restriction-line.proof.md, paragraph (3).
 (blueprint: lem-sfb-integral-tate-line-constructible).
 

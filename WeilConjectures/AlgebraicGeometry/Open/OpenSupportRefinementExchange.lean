@@ -11,7 +11,7 @@ import all WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedEtaleCompactSupp
 
 /-! # Proper/open exchange along one cartesian refinement
 
-Source: blueprint `prop-asd-smooth-base-change`, coherence (i).
+Source: blueprint `proposition-exceptional-inverse-image-smooth-morphism--6`, coherence (i).
 -/
 
 @[expose] public section
@@ -124,7 +124,7 @@ private lemma supportLeft_hom_app
       have := CompactSupportFormalism.HasBaseChange.isIso_baseChange (F := F)
         (c.isPullback_g_ofIsPullback sq)
       (F.exchange (c.ofIsPullback sq).g (pullback.fst c.g j) j c.g
-        (c.isPullback_g_ofIsPullback sq).w).natTrans.app
+        (c.isPullback_g_ofIsPullback sq).w).app
           ((F.sh (c.ofIsPullback sq).i).obj K) ≫
         (F.pf c.g).map ((F.shComp' (c.ofIsPullback sq).i (pullback.fst c.g j)
           (a ≫ c.i) (c.ofIsPullback_i_fst sq)).inv.app K) := by
@@ -141,7 +141,7 @@ private lemma supportLeft_hom_app
   have := CompactSupportFormalism.HasBaseChange.isIso_baseChange (F := F)
     (c.isPullback_g_ofIsPullback sq)
   let e := (F.exchange (c.ofIsPullback sq).g (pullback.fst c.g j) j c.g
-    (c.isPullback_g_ofIsPullback sq).w).natTrans.app
+    (c.isPullback_g_ofIsPullback sq).w).app
       ((F.sh (c.ofIsPullback sq).i).obj K) ≫
     (F.pf c.g).map ((F.shComp' (c.ofIsPullback sq).i (pullback.fst c.g j)
       (a ≫ c.i) (c.ofIsPullback_i_fst sq)).inv.app K)
@@ -288,7 +288,7 @@ private noncomputable def supportRaw
   exact Functor.associator _ _ _ ≪≫
     Functor.isoWhiskerLeft _
       (asIso (F.exchange (c.ofIsPullback sq).g (pullback.fst c.g j) j c.g
-        (c.isPullback_g_ofIsPullback sq).w).natTrans) ≪≫
+        (c.isPullback_g_ofIsPullback sq).w)) ≪≫
     (Functor.associator _ _ _).symm ≪≫
     Functor.isoWhiskerRight
       ((F.shComp' (c.ofIsPullback sq).i (pullback.fst c.g j)
@@ -327,7 +327,7 @@ private lemma supportPullback_eq_raw
   have := CompactSupportFormalism.HasProperExchange.isIso_exchange (F := F)
     (c.isPullback_g_ofIsPullback sq)
   have he : asIso (F.exchange (c.ofIsPullback sq).g (pullback.fst c.g j) j c.g
-      (c.isPullback_g_ofIsPullback sq).w).natTrans =
+      (c.isPullback_g_ofIsPullback sq).w) =
       openImmersionLowerShriekLowerStarExchangeIso Λ
         (c.isPullback_g_ofIsPullback sq) := by
     apply Iso.ext
@@ -354,9 +354,9 @@ private lemma supportPullback_factor
 
 /-- Proper/open exchange intertwines the comparison for one cartesian refinement
 with its literal pullback. No common-refinement choice or graph comparison occurs.
-Source: blueprint `prop-asd-smooth-base-change`, coherence (i), restriction of the
-compactification diagram; the unit formula in `LowerShriekIndependenceUnbounded.lean`.
-(blueprint: lem-asd-open-support-refinement-exchange)
+Source: blueprint `proposition-exceptional-inverse-image-smooth-morphism--6`, coherence (i),
+restriction of the compactification diagram; the unit formula in
+`LowerShriekIndependenceUnbounded.lean`. (blueprint: lem-asd-open-support-refinement-exchange)
 
 Proof: form two triangles of compactifications with common output c.precomp a:
 (p,j), using c.ofIsPullback sq and the trivial compactification of j; and (a,f),

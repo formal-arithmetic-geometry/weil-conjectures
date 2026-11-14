@@ -186,7 +186,7 @@ private theorem chosenScalarPull_mate_iso
 if it is so after an isomorphism of coefficients.
 
 Source: the coefficient-transport step in the proper base-change argument in
-blueprint `sk-thm-sf-comp-composition`, proof (2). Scalar extension along the
+blueprint `proposition-composition-base-change-rf-shriek--1`, proof (2). Scalar extension along the
 coefficient isomorphism is an equivalence and agrees with exact restriction along
 its inverse. It therefore preserves the constant-model constructible finite-Tor
 subcategory. Choose the normalized pullback comparisons; their right mates are

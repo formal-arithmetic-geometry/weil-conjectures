@@ -65,10 +65,10 @@ Source: Stacks Project, Tag 03PK and Lemma 03RV; coefficient-twist blueprint, or
 Proof:
 1. On affine opens the finite root scheme is etale, by
    lem-sbc-root-split-away-cover-etale. Use lem-asd-finite-etale-twist-line and the
-   representable calculation for def-weil-pbc-site-comparison-morphism to transfer its
+   representable calculation for proposition-comparison-morphism-inverse-image to transfer its
    trivializations to the pro-etale root sheaf. The comparison of constant finite
    coefficients in lem-sf-comparison-pullback-exact respects the scalar action.
-2. Apply lem-amb-kummer-any-base on each test scheme to lift roots through the power
+2. Apply lemma-cycle-class-cartier-divisor on each test scheme to lift roots through the power
    transitions locally. The sheaf local-surjectivity criterion makes them epimorphisms.
 3. Refine the level-one etale cover by
    lem-weil-pbc-proetale-affine-wcontractible-covering-family. On each weakly contractible

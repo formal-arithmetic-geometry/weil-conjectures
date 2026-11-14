@@ -36,7 +36,8 @@ of each differential is quasi-coherent by `lem-weil-pbc-quasi-coherent-module-ke
 Its quotient by the preceding differential's image is quasi-coherent by
 `lem-weil-pbc-quasi-coherent-module-cokernel-image`; this quotient is the cohomology sheaf.
 Quasi-coherence is local by `pqf-def-coherent`, so every cohomology sheaf of `E` is
-quasi-coherent. This is membership in `D_QCoh(𝒪_Y)` by `def-pc-derived-category`. -/
+quasi-coherent. This is membership in `D_QCoh(𝒪_Y)` by
+`lemma-coherent-base-change-invertible-sheaves`. -/
 theorem schemeDerivedQCohProperty_of_isPseudoCoherent (Y : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     [∀ U : Y.Opens,

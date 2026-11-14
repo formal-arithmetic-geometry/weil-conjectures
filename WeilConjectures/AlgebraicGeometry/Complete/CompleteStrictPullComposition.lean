@@ -21,8 +21,8 @@ The completed derived inverse-image compositor is the localization of a section-
 module compositor, and restriction to constant coefficients respects the module and derived
 inverse-image compositors.
 
-Source: Weil conjectures blueprint, node thm-cbc-complete-proetale, proof step 8;
-Stacks Tags 06YY and 0D6D (blueprint: thm-cbc-complete-proetale).
+Source: Weil conjectures blueprint, node proposition-composition-base-change-rf-shriek--4, proof
+step 8; Stacks Tags 06YY and 0D6D (blueprint: proposition-composition-base-change-rf-shriek--4).
 -/
 
 @[expose] public noncomputable section
@@ -95,15 +95,14 @@ theorem restrictionPullbackInv_mate :
       TwoSquare.mk _ _ _ _
         (proEtaleRingRestrictionDirectImage f RY SY RX SX aY aX cRf cSf commf).hom := by
   rw [← Equiv.eq_symm_apply]
-  apply TwoSquare.ext
-  intro M
+  refine NatTrans.ext (funext fun M ↦ ?_)
   simp only [mateEquiv_symm_apply, proEtaleRingRestrictionPullbackInv,
     proEtaleRingRestrictionPullbackApp, NatTrans.comp_app, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, Functor.associator_hom_app, Functor.associator_inv_app,
     Functor.leftUnitor_inv_app, Functor.rightUnitor_hom_app, Functor.comp_map,
     Category.id_comp]
   simp only [TwoSquare.mk, CategoryTheory.Functor.map_id]
-  dsimp only [TwoSquare.natTrans, Functor.comp_obj]
+  dsimp only [Functor.comp_obj]
   simp only [Category.id_comp]
   exact (Category.comp_id _).symm
 
@@ -127,7 +126,8 @@ private lemma mateSquare'
 include commf commg commfg in
 /-- Restriction of scalars respects the inverse-image compositors, when both compositors
 are conjugate to the fibre-product pasting maps on sections.
-Source: Stacks, Modules on Sites, Tags 03D8 and 03D7 (blueprint: thm-cbc-complete-proetale).
+Source: Stacks, Modules on Sites, Tags 03D8 and 03D7 (blueprint:
+proposition-composition-base-change-rf-shriek--4).
 -/
 theorem restrictionPullbackInv_comp
     (κR : proEtaleRingModulePullback (f ≫ g) RZ RX cRfg ≅
@@ -178,8 +178,7 @@ theorem restrictionPullbackInv_comp
     dsimp only [q]
     rw [mateEquiv_hcomp, restrictionPullbackInv_mate, restrictionPullbackInv_mate,
       restrictionPullbackInv_mate]
-    apply TwoSquare.ext
-    intro N
+    refine NatTrans.ext (funext fun N ↦ ?_)
     apply SheafOfModules.hom_ext
     apply PresheafOfModules.hom_ext
     intro W
@@ -188,7 +187,7 @@ theorem restrictionPullbackInv_comp
       TwoSquare.mk, NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
       Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
       Category.comp_id, SheafOfModules.comp_val, PresheafOfModules.comp_app]
-    simp only [ModuleCat.comp_apply, TwoSquare.natTrans]
+    simp only [ModuleCat.comp_apply]
     have dirApply {U V : Scheme.{u}} (q : U ⟶ V)
         (RV SV : Sheaf (ProEt.topology V) CommRingCat.{u + 1})
         (RU SU : Sheaf (ProEt.topology U) CommRingCat.{u + 1})
@@ -247,7 +246,7 @@ abbrev towerCompositor {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
 
 /-- The completed derived pullback compositor is the localization of an ordinary module
 compositor whose conjugate is the fibre-product pasting map on sections.
-Source: Stacks Tag 0D6D (blueprint: thm-cbc-complete-proetale). -/
+Source: Stacks Tag 0D6D (blueprint: proposition-composition-base-change-rf-shriek--4). -/
 theorem AdicCoefficientDatum.pullComp_eq_triangle {X Y Z : Scheme.{u}} (f : X ⟶ Y)
     (g : Y ⟶ Z) :
     ∃ κ : stratumModulePull d (f ≫ g) ≅ stratumModulePull d g ⋙ stratumModulePull d f,
@@ -281,7 +280,8 @@ theorem AdicCoefficientDatum.pullComp_eq_triangle {X Y Z : Scheme.{u}} (f : X �
     exact hdS N U m
 
 /-- Restriction to constant coefficients respects the inverse-image compositors on modules.
-Source: Stacks, Modules on Sites, Tags 03D8 and 03D7 (blueprint: thm-cbc-complete-proetale).
+Source: Stacks, Modules on Sites, Tags 03D8 and 03D7 (blueprint:
+proposition-composition-base-change-rf-shriek--4).
 -/
 theorem exchangeOrdinaryResPull_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (κ : stratumModulePull d (f ≫ g) ≅ stratumModulePull d g ⋙ stratumModulePull d f)
@@ -340,7 +340,8 @@ theorem exchangeOrdinaryResPull_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y �
 
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits in
 /-- Restriction to constant coefficients respects the derived inverse-image compositors.
-Source: Stacks, Modules on Sites, Tags 03D8 and 03D7 (blueprint: thm-cbc-complete-proetale).
+Source: Stacks, Modules on Sites, Tags 03D8 and 03D7 (blueprint:
+proposition-composition-base-change-rf-shriek--4).
 -/
 theorem exchangeResPull_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (κ : stratumModulePull d (f ≫ g) ≅ stratumModulePull d g ⋙ stratumModulePull d f)

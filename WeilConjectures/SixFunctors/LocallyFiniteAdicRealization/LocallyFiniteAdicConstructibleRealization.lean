@@ -82,7 +82,7 @@ modules with modules in abelian sheaves: the unit fixes that action and the tens
 action factors through the balanced quotient. Apply
  def-weil-pbc-internal-abelian-sheaf-module-equivalence and
 lem-weil-sheaf-scalar-extension-ring-iso, then
-lem-weil-pbc-exact-functor-derived-factorization. The two lfp-local-triviality lemmas
+situation-conventions. The two lfp-local-triviality lemmas
 identify constructibility. A finite open cover globalizes the local stratifications
 by partitioning into U_i minus the preceding opens and restricting the strata.
 4. At finite E, lem-per-continuous-rational-derived-realization supplies the normalized

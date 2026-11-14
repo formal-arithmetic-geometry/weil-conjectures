@@ -8,13 +8,14 @@ module
 public import WeilConjectures.AlgebraicGeometry.Cohomological.CohomologicalDimensionSupplement
 public import Mathlib.FieldTheory.IsSepClosed
 import WeilConjectures.AlgebraicGeometry.Sites.PointCohomology
+public import Mathlib.Algebra.Category.Grp.Zero
 
 /-!
 # Torsion cohomological dimension of a separably closed field
 
 Source: blueprint, sec-smooth-purity/sk-prop-sf-fullcd-etale-origin,
-lemma lem-sf-separably-closed-torsion-cd; Stacks Project, Tags 03QO, 04JQ and 04JM
-(blueprint: lem-sf-separably-closed-torsion-cd).
+lemma lemma-cohomological-dimension-base-field--1; Stacks Project, Tags 03QO, 04JQ and 04JM
+(blueprint: lemma-cohomological-dimension-base-field--1).
 -/
 
 @[expose] public section
@@ -25,8 +26,8 @@ namespace AlgebraicGeometry.Scheme
 
 /-- A separably closed field has torsion étale cohomological dimension at most zero.
 Source: blueprint, sec-smooth-purity/sk-prop-sf-fullcd-etale-origin,
-lemma lem-sf-separably-closed-torsion-cd; Stacks Project, Tags 03QO, 04JQ and 04JM
-(blueprint: lem-sf-separably-closed-torsion-cd).
+lemma lemma-cohomological-dimension-base-field--1; Stacks Project, Tags 03QO, 04JQ and 04JM
+(blueprint: lemma-cohomological-dimension-base-field--1).
 
 Proof:
 1. Evaluation at the terminal object preserves epimorphisms by

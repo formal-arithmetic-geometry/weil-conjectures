@@ -11,7 +11,7 @@ public import WeilConjectures.WeilSheaf.FieldCoefficientTransition
 /-!
 # `D^b_{c,W}(X, ℚ̄_ℓ)` as the `2`-colimit of the `E`-stages
 
-Blueprint `def-weil-weil-sheaf-complex` defines
+Blueprint `definition-weil-structure` defines
 
 `D^b_{c,W}(X, ℚ̄_ℓ) = 2-colim_E D^b_{c,W}(X, E)`
 
@@ -67,7 +67,7 @@ lemma fieldExtendScalarsCompIso_frobenius :
           (X ↘ Spec (CommRingCat.of k₀)).geometricFiber).hom := by
   refine NatTrans.ext (funext fun M ↦ ?_)
   have K := congr_app (fieldExtendScalarsCompIso_paste
-    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom he₁ he₂ hc₁ hc₂) M
+    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom he₁ he₂ hc₁ hc₂) M
   simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app] at K
   simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
     IsoAlgebra.compCommIso_hom_app, fieldExtendScalarsFrobeniusIso, Iso.trans_hom, Iso.symm_hom,
@@ -89,7 +89,7 @@ noncomputable def ProEtaleFieldWeilSheaf.extendScalarsCompIso :
       ProEtaleFieldWeilSheaf.extendScalars (e := e₂.comp e₁) (he₂.comp he₁) hc₁ k₀ X :=
   IsoAlgebra.mapOfNatIsoCompIsoOfIso _ (fieldExtendScalarsCompIso_frobenius he₁ he₂ hc₁ hc₂ k₀ X)
 
-/-- Blueprint `def-weil-weil-sheaf-complex`: the associativity constraint of the transition
+/-- Blueprint `definition-weil-structure`: the associativity constraint of the transition
 functors.
 
 Extending scalars from `D^b_{c,W}(X, Λ₁)` to `D^b_{c,W}(X, Λ₂)` and then to `D^b_{c,W}(X, Λ₃)` is
@@ -183,7 +183,7 @@ open PadicAlgCl
 variable {l : ℕ} [Fact l.Prime] (k₀ : Type u) [Field k₀] [Finite k₀] (X : Scheme.{u})
   [X.Over (Spec (CommRingCat.of k₀))]
 
-/-- Blueprint `def-weil-weil-sheaf-complex`: the stage system of the `E`-stages.
+/-- Blueprint `definition-weil-structure`: the stage system of the `E`-stages.
 
 The directed system `E ↦ D^b_{c,W}(X, E)` over the finite extensions `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, with
 the extensions of scalars `F ⊗_E -` as transition functors
@@ -207,7 +207,7 @@ noncomputable def FieldWeilComplex.stageSystem :
         (continuous_algebraMap_intermediateField _) (continuous_algebraMap_intermediateField _)
         (continuous_algebraMap_intermediateField _) k₀ X) K.obj)
 
-/-- Blueprint `def-weil-weil-sheaf-complex`: Weil sheaf and Weil complex, the stage `ℚ̄_ℓ`.
+/-- Blueprint `definition-weil-structure`: Weil sheaf and Weil complex, the stage `ℚ̄_ℓ`.
 
 `D^b_{c,W}(X, ℚ̄_ℓ) = 2-colim_E D^b_{c,W}(X, E)`, the `2`-colimit over the finite extensions
 `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` of the categories of `E`-Weil complexes (`AlgebraicGeometry.FieldWeilComplex`)
@@ -222,7 +222,7 @@ abbrev WeilComplexTwoColimit (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ
     [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))] :=
   (FieldWeilComplex.stageSystem (l := l) k₀ X).PairCategory
 
-/-- Blueprint `def-weil-weil-sheaf-complex`: `D^b_{c,W}(X, ℚ̄_ℓ)` is the filtered `2`-colimit of the
+/-- Blueprint `definition-weil-structure`: `D^b_{c,W}(X, ℚ̄_ℓ)` is the filtered `2`-colimit of the
 `E`-stages: with the stage inclusions `D^b_{c,W}(X, E) ⥤ D^b_{c,W}(X, ℚ̄_ℓ)`, it satisfies
 `CategoryTheory.CategoryCocone.IsFilteredTwoColimit` (every object and every morphism is defined
 at a finite stage, and equalities of morphisms hold at a finite stage). -/

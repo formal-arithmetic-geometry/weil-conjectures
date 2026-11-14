@@ -39,8 +39,8 @@ import Mathlib.LinearAlgebra.Finsupp.LinearCombination
 
 /-! # Ordinary direct image with the continuous-function finite coefficient sheaf
 
-Source: blueprint def-weil-pbc-proetale-operations, ordinary K-injective direct image;
-Stacks Project, Sections 07A5 and 0735 (blueprint: def-weil-pbc-proetale-operations).
+Source: blueprint prose-03-02, ordinary K-injective direct image;
+Stacks Project, Sections 07A5 and 0735 (blueprint: prose-03-02).
 
 This interface retains the actual finite coefficient ring sheaf. The coefficient map
 is induced by precomposition with the first projection of the scheme fibre product,
@@ -62,7 +62,7 @@ variable {S T : Scheme.{u}} (f : S ⟶ T) (Λ : Type (u + 1))
 
 /-- The coefficient map on an object, by precomposition on connected components with
 `U ×[T] S → U`. Source: blueprint ordinary operations; Stacks Section 0735
-(blueprint: def-weil-pbc-proetale-operations). -/
+(blueprint: prose-03-02). -/
 noncomputable def finiteCoefficientPullbackSections (U : T.ProEtᵒᵖ) :
     (finiteCoefficientPresheaf T Λ).obj U ⟶
       (finiteCoefficientPresheaf S Λ).obj ((Scheme.proEtaleBaseChange f).op.obj U) :=
@@ -76,7 +76,7 @@ noncomputable def finiteCoefficientPullbackSections (U : T.ProEtᵒᵖ) :
       map_add' := fun _ _ ↦ rfl }
 
 /-- The section maps commute with restriction. Source: blueprint ordinary operations;
-Stacks Section 0735 (blueprint: def-weil-pbc-proetale-operations).
+Stacks Section 0735 (blueprint: prose-03-02).
 
 Proof: the base-change map of a morphism of objects commutes with the first projections
 by the universal property of the fibre product. Passing to connected components
@@ -101,7 +101,7 @@ theorem finiteCoefficientPullbackSections_naturality
   rfl
 
 /-- The actual presheaf coefficient map. Source: blueprint ordinary operations;
-Stacks Section 0735 (blueprint: def-weil-pbc-proetale-operations). -/
+Stacks Section 0735 (blueprint: prose-03-02). -/
 noncomputable def finiteCoefficientPullbackPresheafMap :
     finiteCoefficientPresheaf T Λ ⟶
       (Scheme.proEtaleBaseChange f).op ⋙ finiteCoefficientPresheaf S Λ where
@@ -110,7 +110,7 @@ noncomputable def finiteCoefficientPullbackPresheafMap :
 
 /-- Extend the canonical section maps by ring sheafification, with no chosen
 coefficient identification. Source: blueprint ordinary operations; Stacks Section 0735
-(blueprint: def-weil-pbc-proetale-operations). -/
+(blueprint: prose-03-02). -/
 noncomputable def finiteCoefficientDirectImageRingMap :
     finiteCoefficientRingSheaf T Λ ⟶
       (Scheme.proEtaleSheafDirectImage f RingCat.{u + 1}).obj
@@ -122,7 +122,7 @@ noncomputable def finiteCoefficientDirectImageRingMap :
 
 /-- Ordinary module direct image, with its scalar action through the specified
 continuous-function coefficient map. Source: blueprint ordinary operations;
-Stacks Section 0735 (blueprint: def-weil-pbc-proetale-operations). -/
+Stacks Section 0735 (blueprint: prose-03-02). -/
 noncomputable def finiteCoefficientModuleDirectImage :
     FiniteCoefficientModules S Λ ⥤ FiniteCoefficientModules T Λ :=
   SheafOfModules.pushforward.{u + 1} (F := Scheme.proEtaleBaseChange f)
@@ -130,7 +130,7 @@ noncomputable def finiteCoefficientModuleDirectImage :
     (finiteCoefficientDirectImageRingMap f Λ)
 
 /-- Ordinary direct image is additive. Source: Stacks Section 0735
-(blueprint: def-weil-pbc-proetale-operations).
+(blueprint: prose-03-02).
 
 Proof: its maps are the original sectionwise linear maps after precomposition with
 base change. Addition of module-sheaf morphisms is sectionwise, so precomposition
@@ -145,7 +145,7 @@ attribute [instance] finiteCoefficientModuleDirectImage_additive
 
 /-- K-injective resolutions are taken in all finite-coefficient module sheaves,
 without any boundedness or constructibility restriction. Source: Stacks Section 07A5
-(blueprint: def-weil-pbc-proetale-operations).
+(blueprint: prose-03-02).
 
 Proof: transport the site to Scheme.proEtaleSiteModel, which raises only the Hom
 universe. Modules over a ring sheaf on this small site form a Grothendieck abelian
@@ -164,7 +164,7 @@ attribute [instance] finiteCoefficientModules_hasKInjectiveResolutions
 
 /-- The ordinary uncompleted derived direct image, using K-injective resolutions in
 all modules over the specified finite coefficient ring sheaf. Source: Stacks Section 07A5
-(blueprint: def-weil-pbc-proetale-operations). -/
+(blueprint: prose-03-02). -/
 noncomputable def finiteCoefficientDerivedDirectImage :
     FiniteCoefficientDerivedCategory S Λ ⥤ FiniteCoefficientDerivedCategory T Λ :=
   (finiteCoefficientModuleDirectImage f Λ).rightDerivedFunctor
@@ -178,7 +178,7 @@ variable (T : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 /-- Canonical realization is an equivalence, with inverse obtained by forgetting to
 fixed scalar sections. Source: Stacks, Modules on Sites, sheafification of modules
-(blueprint: def-weil-pbc-proetale-operations).
+(blueprint: prose-03-02).
 
 Proof: the constants-to-functions scalar map is locally bijective by
 `finiteCoefficientScalarMap_locallyBijective`. Restrict a module action along constant
@@ -195,27 +195,27 @@ attribute [instance] finiteCoefficientRealization_isEquivalence
 
 /-- The inverse of the canonical coefficient realization, rather than a new coefficient
 category. Source: Stacks, Modules on Sites, sheafification of modules
-(blueprint: def-weil-pbc-proetale-operations). -/
+(blueprint: prose-03-02). -/
 noncomputable def finiteCoefficientUnrealization :
     FiniteCoefficientModules T Λ ⥤ Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} Λ) :=
   (finiteCoefficientRealization T Λ).asEquivalence.inverse
 
 /-- The realization inverse is additive, being an inverse equivalence of additive
 categories. Source: Stacks, Modules on Sites
-(blueprint: def-weil-pbc-proetale-operations). -/
+(blueprint: prose-03-02). -/
 noncomputable instance finiteCoefficientUnrealization_additive :
     (finiteCoefficientUnrealization T Λ).Additive :=
   @Equivalence.inverse_additive _ _ _ _ _ _
     (finiteCoefficientRealization T Λ).asEquivalence (finiteCoefficientRealization_additive T Λ)
 
 /-- Its inverse preserves finite limits. Source: Stacks, Modules on Sites
-(blueprint: def-weil-pbc-proetale-operations). -/
+(blueprint: prose-03-02). -/
 noncomputable instance finiteCoefficientUnrealization_preservesFiniteLimits :
     PreservesFiniteLimits (finiteCoefficientUnrealization T Λ) :=
   inferInstanceAs (PreservesFiniteLimits (finiteCoefficientRealization T Λ).asEquivalence.inverse)
 
 /-- Its inverse preserves finite colimits. Source: Stacks, Modules on Sites
-(blueprint: def-weil-pbc-proetale-operations). -/
+(blueprint: prose-03-02). -/
 noncomputable instance finiteCoefficientUnrealization_preservesFiniteColimits :
     PreservesFiniteColimits (finiteCoefficientUnrealization T Λ) :=
   inferInstanceAs (PreservesFiniteColimits (finiteCoefficientRealization T Λ).asEquivalence.inverse)
@@ -225,35 +225,35 @@ variable {S : Scheme.{u}} (f : S ⟶ T)
 /-- Pullback in the specified coefficient-ring presentation. Its fixed-scalar version
 is the module-valued Kan extension and sheafification, so the coefficient identification
 is the one induced by constant scalar sections. Source: Stacks,
-lemma-adjoint-push-pull-modules (blueprint: def-weil-pbc-proetale-operations). -/
+lemma-adjoint-push-pull-modules (blueprint: prose-03-02). -/
 noncomputable def finiteCoefficientPullback :
     FiniteCoefficientModules T Λ ⥤ FiniteCoefficientModules S Λ :=
   finiteCoefficientUnrealization T Λ ⋙ upperStar (ModuleCat.{u + 1} Λ) f ⋙
     finiteCoefficientRealization S Λ
 
 /-- Additivity of pullback. Source: Stacks, Modules on Sites
-(blueprint: def-weil-pbc-proetale-operations). -/
+(blueprint: prose-03-02). -/
 noncomputable instance finiteCoefficientPullback_additive :
     (finiteCoefficientPullback T Λ f).Additive :=
   inferInstanceAs (finiteCoefficientUnrealization T Λ ⋙
     upperStar (ModuleCat.{u + 1} Λ) f ⋙ finiteCoefficientRealization S Λ).Additive
 
 /-- Exactness of pullback, on finite limits. Source: Stacks, Tag 04JC
-(blueprint: def-weil-pbc-proetale-operations). -/
+(blueprint: prose-03-02). -/
 noncomputable instance finiteCoefficientPullback_preservesFiniteLimits :
     PreservesFiniteLimits (finiteCoefficientPullback T Λ f) :=
   inferInstanceAs (PreservesFiniteLimits (finiteCoefficientUnrealization T Λ ⋙
     upperStar (ModuleCat.{u + 1} Λ) f ⋙ finiteCoefficientRealization S Λ))
 
 /-- Exactness of pullback, on finite colimits. Source: Stacks, Tag 04JC
-(blueprint: def-weil-pbc-proetale-operations). -/
+(blueprint: prose-03-02). -/
 noncomputable instance finiteCoefficientPullback_preservesFiniteColimits :
     PreservesFiniteColimits (finiteCoefficientPullback T Λ f) :=
   inferInstanceAs (PreservesFiniteColimits (finiteCoefficientUnrealization T Λ ⋙
     upperStar (ModuleCat.{u + 1} Λ) f ⋙ finiteCoefficientRealization S Λ))
 
 /-- Ordinary uncompleted derived pullback is exact termwise descent through localization.
-Source: Stacks, Section 0735 (blueprint: def-weil-pbc-proetale-operations). -/
+Source: Stacks, Section 0735 (blueprint: prose-03-02). -/
 noncomputable abbrev finiteCoefficientDerivedPullback :
     FiniteCoefficientDerivedCategory T Λ ⥤ FiniteCoefficientDerivedCategory S Λ :=
   (finiteCoefficientPullback T Λ f).mapDerivedCategory

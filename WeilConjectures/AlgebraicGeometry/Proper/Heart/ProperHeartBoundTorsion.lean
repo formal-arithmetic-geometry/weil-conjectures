@@ -177,7 +177,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 # Torsion reductions of locally closed integral lattices
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-proper-heart-bound,
-`sk-lem-proper-heart-bound-torsion.md` (blueprint: det-proper-heart-bound-torsion).
+`sk-lem-proper-heart-bound-torsion.md` (blueprint: lemma-uniform-bound-proper-direct-image--1).
 The ordinary relative tensor with the actual quotient module is the canonical quotient
 by the uniformizer power. The scalar equations in the origin predicate retain its module
 structure when comparing with fixed finite-coefficient sheaves.
@@ -203,32 +203,33 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type u) [Field E]
 
 /-- Multiplication by an actual integral scalar on the continuous condensed integer sheaf.
 Source: blueprint torsion reduction, coefficient convention
-(blueprint: det-proper-heart-bound-torsion). -/
+(blueprint: lemma-uniform-bound-proper-direct-image--1). -/
 def torsionIntegerMultiply (b : Padic.coefficientExtensionIntegers ℓ E) :
     End (DerivedNakayama.integerRing ℓ E) :=
   letI := (Padic.coefficientExtensionAbsoluteValue ℓ E).toNormedField
-  ⟨{
+  .of ⟨{
     app := fun S ↦ AddCommGrpCat.ofHom
       (AddMonoidHom.mulLeft (ULift.up (ContinuousMap.const S.unop b)))
     naturality := fun _ _ _ ↦ rfl }⟩
 
 /-- The underlying additive scalar endomorphism, using the pulled-back scalar and the
 specified internal module action. Source: blueprint torsion reduction, coefficient convention
-(blueprint: det-proper-heart-bound-torsion). -/
+(blueprint: lemma-uniform-bound-proper-direct-image--1). -/
 def torsionScalar {X : Scheme.{u}}
     (M : pulledBackModuleObjects (DerivedNakayama.integerRing ℓ E) X)
     (b : Padic.coefficientExtensionIntegers ℓ E) : End M.X :=
-  (λ_ M.X).inv ≫
+  .of ((λ_ M.X).inv ≫
     ((η[condensedRingObj (DerivedNakayama.integerRing ℓ E) X] ≫
-      (upperStarFromPoint X).map (torsionIntegerMultiply ℓ E b)) ▷ M.X) ≫ Mod.act M.X
+      (upperStarFromPoint X).map (torsionIntegerMultiply ℓ E b).asHom) ▷ M.X) ≫
+      Mod.act M.X)
 
 /-- Scalar multiplication on a fixed-coefficient module sheaf, with the given scalar action.
 Source: blueprint torsion statement, finite discrete coefficients
-(blueprint: det-proper-heart-bound-torsion). -/
+(blueprint: lemma-uniform-bound-proper-direct-image--1). -/
 def torsionFixedScalar {C : Type (u + 1)} [Category.{u} C]
     {J : GrothendieckTopology C} {B : Type (u + 1)} [CommRing B]
     (G : Sheaf J (ModuleCat.{u + 1} B)) (b : B) : End G :=
-  ⟨{
+  .of ⟨{
     app := fun U ↦ ModuleCat.ofHom (b • LinearMap.id)
     naturality := fun _ _ f ↦ by
       ext m
@@ -323,7 +324,7 @@ attribute [local irreducible] Mod.monoidalCategoryStruct Mod.monoidalClosed
 
 private theorem point_scalar_constant (n : ℕ)
     (b : Padic.coefficientExtensionIntegers ℓ E) :
-    η[DerivedNakayama.integerRing ℓ E] ≫ torsionIntegerMultiply ℓ E b ≫
+    η[DerivedNakayama.integerRing ℓ E] ≫ (torsionIntegerMultiply ℓ E b).asHom ≫
       DerivedNakayama.reductionRing ℓ E n =
     Functor.LaxMonoidal.ε (constantSheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) ≫
       (constantSheaf (coherentTopology Profinite.{u}) Ab.{u + 1}).map
@@ -342,7 +343,7 @@ private theorem point_scalar_constant (n : ℕ)
     (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal ℓ E n) b)
   apply ((sheafificationAdjunction J Ab.{u + 1}).homEquiv _ _).injective
   change Functor.LaxMonoidal.ε U ≫
-      U.map (η[DerivedNakayama.integerRing ℓ E] ≫ torsionIntegerMultiply ℓ E b ≫
+      U.map (η[DerivedNakayama.integerRing ℓ E] ≫ (torsionIntegerMultiply ℓ E b).asHom ≫
         DerivedNakayama.reductionRing ℓ E n) = _
   simp only [Functor.map_comp, ← Category.assoc]
   erw [Sheaf.ε_sheafToPresheaf_comp_map_one_sheafCompose]
@@ -372,7 +373,7 @@ attribute [local irreducible] upperStarFromPoint torsionIntegerMultiply
 private theorem scalar_constant (T : Scheme.{u}) (n : ℕ)
     (b : Padic.coefficientExtensionIntegers ℓ E) :
     η[condensedRingObj (DerivedNakayama.integerRing ℓ E) T] ≫
-      (upperStarFromPoint T).map (torsionIntegerMultiply ℓ E b) ≫
+      (upperStarFromPoint T).map (torsionIntegerMultiply ℓ E b).asHom ≫
       coefficientMap (DerivedNakayama.reductionRing ℓ E n) T =
     Functor.LaxMonoidal.ε (constantSheaf (Scheme.ProEt.topology T) Ab.{u + 1}) ≫
       (constantSheaf (Scheme.ProEt.topology T) Ab.{u + 1}).map
@@ -396,7 +397,7 @@ private theorem scalar_constant (T : Scheme.{u}) (n : ℕ)
   change Functor.LaxMonoidal.ε Q ≫ (constantSchemeIso T).hom.app _ =
     Functor.LaxMonoidal.ε F ≫ F.map (Functor.LaxMonoidal.ε P) at hu
   change Functor.LaxMonoidal.ε F ≫ F.map η[DerivedNakayama.integerRing ℓ E] ≫
-      F.map (torsionIntegerMultiply ℓ E b) ≫ F.map (DerivedNakayama.reductionRing ℓ E n) =
+      F.map (torsionIntegerMultiply ℓ E b).asHom ≫ F.map (DerivedNakayama.reductionRing ℓ E n) =
     Functor.LaxMonoidal.ε Q ≫ Q.map g ≫ (constantSchemeIso T).hom.app _ ≫ F.map ψ
   erw [reassoc_of% hnat, reassoc_of% hu]
   simp only [← F.map_comp]
@@ -407,7 +408,7 @@ private theorem constant_scalar_section (T : Scheme.{u}) (n : ℕ)
     (b : Padic.coefficientExtensionIntegers ℓ E) (V : T.ProEtᵒᵖ) :
     sfbRegularSection (Scheme.ProEt.topology T) _
       (η[condensedRingObj (DerivedNakayama.integerRing ℓ E) T] ≫
-        (upperStarFromPoint T).map (torsionIntegerMultiply ℓ E b) ≫
+        (upperStarFromPoint T).map (torsionIntegerMultiply ℓ E b).asHom ≫
         coefficientMap (DerivedNakayama.reductionRing ℓ E n) T) V =
       ((toSheafify (Scheme.ProEt.topology T)
         ((Functor.const T.ProEtᵒᵖ).obj
@@ -456,14 +457,14 @@ private theorem scalar_encoded (T : Scheme.{u}) (n : ℕ)
     (e : FiniteDiscreteOrdinary.Encoding (Padic.coefficientExtensionRing ℓ E n) T)
     (M : FiniteDiscreteOrdinary.Internal (Padic.coefficientExtensionRing ℓ E n) T)
     (b : Padic.coefficientExtensionIntegers ℓ E) :
-    torsionScalar ℓ E
-      ((Mod.comap (coefficientMap (DerivedNakayama.reductionRing ℓ E n) T)).obj M) b =
+    (torsionScalar ℓ E
+      ((Mod.comap (coefficientMap (DerivedNakayama.reductionRing ℓ E n) T)).obj M) b).asHom =
       (sheafCompose (Scheme.ProEt.topology T)
         (forget₂ (ModuleCat.{u + 1}
           (ULift.{u + 1} (Padic.coefficientExtensionRing ℓ E n))) Ab.{u + 1})).map
         (torsionFixedScalar ((FiniteDiscreteOrdinary.sectionEncoding _ T e.ringIso ⋙
           FiniteDiscreteOrdinary.fixedRestriction _ T).obj M)
-          (ULift.up (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal ℓ E n) b))) := by
+          (ULift.up (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal ℓ E n) b))).asHom := by
   apply Sheaf.hom_ext
   apply NatTrans.ext
   funext V
@@ -478,7 +479,7 @@ private theorem scalar_encoded (T : Scheme.{u}) (n : ℕ)
   rw [FiniteDiscreteOrdinary.encoding_smul]
   change (((λ_ M.X).inv ≫
     ((η[condensedRingObj (DerivedNakayama.integerRing ℓ E) T] ≫
-      (upperStarFromPoint T).map (torsionIntegerMultiply ℓ E b)) ▷ M.X) ≫
+      (upperStarFromPoint T).map (torsionIntegerMultiply ℓ E b).asHom) ▷ M.X) ≫
       (coefficientMap (DerivedNakayama.reductionRing ℓ E n) T ▷ M.X) ≫
       Mod.act M.X).hom.app V).hom m = _
   rw [← comp_whiskerRight_assoc]

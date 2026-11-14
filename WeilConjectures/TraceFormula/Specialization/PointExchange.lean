@@ -16,7 +16,7 @@ public import WeilConjectures.TraceFormula.Specialization.OpenExchange
 # The compact-support exchange of the structure map of a proper scheme
 
 For a proper `k`-scheme `X` with rational point `x`, the compact-support exchange
-`ν_X : Ra_{X'!} Ψ_X ⟶ Ψ_s Ra_{X!}` of blueprint `det-nearby-exchange-maps` (3)
+`ν_X : Ra_{X'!} Ψ_X ⟶ Ψ_s Ra_{X!}` of blueprint `prose-E-15` (3)
 (`ProEtale.CondensedRing.pointCompactSupportExchange`), for the compactification
 `X' ⊂ P_s ⟶ Spec k'` of the special fibre given by the compactified deformation model:
 `ν_X = χ_p⁻¹ ∘ Rp'_*(ν_h)` read through `Ra'_! ≅ Rp'_! h'_! ≅ Rp'_* h'_!` and `Ra_* ≅ Ra_!`, with
@@ -146,7 +146,7 @@ lemma isIsoOn_compactifiedToPointModelHom_pushforwardExchange :
       rw [← toPoint_left X] at h
       exact h) K.property
 
-/-- **The compact-support exchange `ν_X` of a proper `X`** (blueprint `det-nearby-exchange-maps`
+/-- **The compact-support exchange `ν_X` of a proper `X`** (blueprint `prose-E-15`
 (3)): `ν_X = χ_p⁻¹ ∘ Rp'_*(ν_h)`, through `Ra'_! ≅ Rp'_! h'_! ≅ Rp'_* h'_!` and `Ra_* ≅ Ra_!`. -/
 noncomputable def pointCompactSupportExchange :
     Correspondence.IsContractingAt.PointCompactSupportExchange (ℓ := ℓ) X k' x :=

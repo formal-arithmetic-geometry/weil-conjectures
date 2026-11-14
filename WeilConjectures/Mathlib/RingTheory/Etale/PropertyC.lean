@@ -75,7 +75,6 @@ variable {A B C : Type u} [CommRing A] [CommRing B] [CommRing C] [Algebra A B] [
 
 attribute [local instance] Algebra.TensorProduct.rightAlgebra
 
-set_option maxHeartbeats 800000 in
 -- the proof assembles many algebra structures on residue fields
 /-- **Trivialising the residue field extension.** Let `C` be an étale `B`-algebra and `q` a prime
 of `C` such that the residue field extension of `B/A` at `q ∩ B` is purely inseparable. Then
@@ -225,7 +224,6 @@ section RankOne
 
 variable {B C : Type u} [CommRing B] [CommRing C] [Algebra B C]
 
-set_option maxHeartbeats 800000 in
 -- instance search on fibres of étale algebras is expensive
 /-- **Rank one.** Let `C` be a finite étale `B`-algebra and `q` a prime of `C` which is the only
 prime lying over `𝔮 = q ∩ B` and has trivial residue field extension. Then `C` has rank one
@@ -285,7 +283,6 @@ section Main
 variable {A B C : Type u} [CommRing A] [CommRing B] [CommRing C] [Algebra A B] [Algebra B C]
   [Algebra A C] [IsScalarTower A B C]
 
-set_option maxHeartbeats 1600000 in
 -- long proof with many local algebra instances
 /-- **Property (C) for a prime with trivial residue field extension.** Let `A → B` be finite,
 `C` an étale `B`-algebra and `q` a prime of `C` whose residue field extension over `B` is
@@ -658,7 +655,6 @@ section PropertyC
 variable {A B C : Type u} [CommRing A] [CommRing B] [CommRing C] [Algebra A B] [Algebra B C]
   [Algebra A C] [IsScalarTower A B C]
 
-set_option maxHeartbeats 800000 in
 -- long proof with many local algebra instances
 /-- **Property (C) at the ring level**, [Stacks 04DW]. Let `A → B` be finite and universally
 injective on spectra with purely inseparable residue field extensions, `C` an étale

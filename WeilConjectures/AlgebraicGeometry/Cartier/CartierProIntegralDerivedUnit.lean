@@ -116,9 +116,9 @@ attribute [local irreducible] comparisonUpperStar cartierUnitsComparison
   CartierEtaleReductionSpec CartierProReductionSpec cartierResidueReducedPro
 
 /-- Let n>0, R=ULift(Z/n), A a commutative ring killed by n, i:D→Z a closed immersion and φ:R→A. If
-Cartier classes cR,cA satisfy GeoCartierScalarCompatibility [sk-lem-geo-cartier], then the pro-etale
-supported integral generator i_*Z_D→forget(i_*A_D) is a degree-zero unbounded scalar unit
-[def-sfb-cartier-reduction-data, def-sp-derived-scalar-ext-unit].
+Cartier classes cR,cA satisfy GeoCartierScalarCompatibility [lemma-cycle-class-cartier-divisor],
+then the pro-etale supported integral generator i_*Z_D→forget(i_*A_D) is a degree-zero unbounded
+scalar unit [def-sfb-cartier-reduction-data, def-sp-derived-scalar-ext-unit].
 Source: blueprint Cartier derived reduction and comparison paragraphs; Stacks 0152,
 06YY and 0GLZ (blueprint: lem-sp-cartier-pro-integral-derived-unit).
 Proof: Use the supported pro-etale residue quotient unit. Extract from coefficient compatibility the

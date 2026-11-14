@@ -26,7 +26,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.GeometricFrobenius
 Let `k₀` be a finite field with algebraic closure `k̄`, `X` a scheme over `k₀`,
 `X̄ = X ×_{k₀} k̄` its geometric fiber and `Fr_X = 𝟙 × σ : X̄ ≅ X̄` its geometric Galois Frobenius
 (`AlgebraicGeometry.Scheme.Hom.geometricGaloisFrobenius`). Following the blueprint
-(`def-weil-weil-sheaf-complex`, `sk-d-real-weil`):
+(`definition-weil-structure`, `definition-weil-representation--1`):
 
 - a *Weil sheaf* on `X` is a constructible `ℓ`-adic sheaf `F` on the small pro-étale site of
   `X̄` together with an isomorphism `φ : Fr_X^* F ≅ F`;
@@ -130,7 +130,7 @@ which is isomorphic to the pullback along `Fr_X`
 noncomputable abbrev WeilSheaf.frobeniusPullback :
     AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber ⥤
       AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
-  ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*ᵃ[l]
+  ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*ᵃ[l]
 
 /-- The Frobenius pullback is an equivalence, `Fr_X` being an automorphism. -/
 instance : (WeilSheaf.frobeniusPullback k₀ l X).IsEquivalence :=
@@ -160,7 +160,7 @@ noncomputable abbrev WeilComplex.objectProperty :
 
 end Frobenius
 
-/-- Blueprint `def-weil-weil-sheaf-complex`: Weil sheaf and Weil complex.
+/-- Blueprint `definition-weil-structure`: Weil sheaf and Weil complex.
 
 The category of constructible Weil `ℚ̄_ℓ`-sheaves on a `k₀`-scheme `X`: constructible
 `ℓ`-adic sheaves `F` on the pro-étale site of the geometric fiber `X̄` with an isomorphism
@@ -169,7 +169,7 @@ def WeilSheaf (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime
     [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))] :=
   (WeilSheaf.objectProperty k₀ l X).FullSubcategory
 
-/-- Blueprint `def-weil-weil-sheaf-complex`: Weil sheaf and Weil complex.
+/-- Blueprint `definition-weil-structure`: Weil sheaf and Weil complex.
 
 The triangulated category of Weil complexes on a `k₀`-scheme `X`: the objects of the derived
 category of pro-étale Weil sheaves on `X̄` which are bounded with constructible cohomology. -/
@@ -304,13 +304,13 @@ pullback along an automorphism `g` is the pushforward along `g⁻¹`. At a geome
 by `Fr_Xᵐ` up to reparametrisation it induces the Frobenius relative to `𝔽_{qᵐ}` on the
 stalk. -/
 noncomputable def frobeniusPowIso (F : WeilSheaf k₀ l X) (m : ℕ) :
-    (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).inv)_*ᵃ[l].obj
+    (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.inv)_*ᵃ[l].obj
         F.obj.carrier ≅
       F.obj.carrier :=
   match m with
   | 0 => (adicLowerStarCongr l (by rw [pow_zero]; rfl)).app _ ≪≫ (adicLowerStarId l _).app _
   | m + 1 =>
-    (adicLowerStarCongr l (by rw [pow_succ, Aut.Aut_mul_def, Iso.trans_inv])).app _ ≪≫
+    (adicLowerStarCongr l (by rw [pow_succ, Aut.mul_asIso, Iso.trans_inv])).app _ ≪≫
       (adicLowerStarComp l _ _).symm.app _ ≪≫
       (frobeniusPullback k₀ l X).mapIso (F.frobeniusPowIso m) ≪≫ F.obj.str
 
@@ -339,7 +339,8 @@ irreducible.
 
 This is weaker than simplicity in the category of all Weil sheaves: a nonzero lisse sheaf `M`
 on a curve `U₀` is never simple there, since for a closed point `x` the extension by zero of
-`M|_{U₀ ∖ x}` is a nonzero proper subsheaf. (blueprint: `rem-dl-a1-conventions`) -/
+`M|_{U₀ ∖ x}` is a nonzero proper subsheaf. (blueprint:
+`lemma-unramified-at-infinity-no-linear-characters--1`) -/
 def IsIrreducibleLisse (F : WeilSheaf k₀ l X) : Prop :=
   F.IsLisse ∧ ¬ IsZero F ∧
     ∀ (G : WeilSheaf k₀ l X) (i : G ⟶ F), Mono i → G.IsLisse → IsZero G ∨ IsIso i

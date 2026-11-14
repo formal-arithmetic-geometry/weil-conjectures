@@ -14,7 +14,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Bounded.ProEtaleBoundedConstru
 # Finite-stage constructible complexes of finite Tor amplitude
 
 Source: Stacks Project, Cohomology on Sites, Tag 08G2, lemma-cone-tor-amplitude (2),
-and the Weil blueprint, finite-stage paragraph of `def-weil-finite-tor-amplitude`
+and the Weil blueprint, finite-stage paragraph of `definition-constructible-sheaves`
 (blueprint: lem-weil-finite-ctf-triangulated).
 -/
 
@@ -148,7 +148,7 @@ bounds under shifts and extensions.
 
 Source: Stacks Project, Cohomology on Sites, Tag 08G2, lemma-cone-tor-amplitude (2),
 Tag 08FZ, definition-tor-amplitude; Weil blueprint, finite-stage paragraph of
-`def-weil-finite-tor-amplitude` (blueprint: lem-weil-finite-ctf-triangulated).
+`definition-constructible-sheaves` (blueprint: lem-weil-finite-ctf-triangulated).
 
 Proof:
 1. Apply `Padic.finite_coefficientExtensionRing` and the existing bounded-constructibility

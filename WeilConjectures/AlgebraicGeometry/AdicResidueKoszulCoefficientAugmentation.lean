@@ -83,20 +83,21 @@ private theorem scalarPower_quotientProjection (a : A) (ha : a ∈ J) (n : ℕ) 
       (ringedKoszulSliceSection
         (completed (coefficientProEtaleModelTopology.{u, v} X) A J)
         (algebraSection (coefficientMap (coefficientProEtaleModelTopology.{u, v} X) A J)
-          a) U)) ^ (n + 1)) ≫ quotientProjection X J U n = 0 := by
+          a) U)) ^ (n + 1)).asHom ≫ quotientProjection X J U n = 0 := by
   let O := (completed (coefficientProEtaleModelTopology.{u, v} X) A J).over U
   let b : (O.obj ⋙ CategoryTheory.forget CommRingCat).sections := ringedKoszulSliceSection
     (completed (coefficientProEtaleModelTopology.{u, v} X) A J)
     (algebraSection (coefficientMap (coefficientProEtaleModelTopology.{u, v} X) A J) a) U
   have hp (k : ℕ) (V : (Over U)ᵒᵖ) (x : O.obj.obj V) :
-      ((ringedKoszulScalar O b) ^ k).val.app V x = x * (show O.obj.obj V from b.val V) ^ k := by
+      ((ringedKoszulScalar O b) ^ k).asHom.val.app V x =
+        x * (show O.obj.obj V from b.val V) ^ k := by
     induction k with
     | zero => change x = x * _ ^ 0; simp
     | succ k ih =>
       rw [pow_succ']
-      change (ringedKoszulScalar O b).val.app V
-        (((ringedKoszulScalar O b) ^ k).val.app V x) = _
-      change (show O.obj.obj V from ((ringedKoszulScalar O b) ^ k).val.app V x) *
+      change (ringedKoszulScalar O b).asHom.val.app V
+        (((ringedKoszulScalar O b) ^ k).asHom.val.app V x) = _
+      change (show O.obj.obj V from ((ringedKoszulScalar O b) ^ k).asHom.val.app V x) *
         (show O.obj.obj V from b.val V) = _
       rw [ih, pow_succ, mul_assoc]
   apply SheafOfModules.hom_ext
@@ -106,7 +107,7 @@ private theorem scalarPower_quotientProjection (a : A) (ha : a ∈ J) (n : ℕ) 
   apply LinearMap.ext
   intro x
   change (adicResidueLocalProjection X J U n).hom.app V
-    (((ringedKoszulScalar O b) ^ (n + 1)).val.app V x) * 1 = 0
+    (((ringedKoszulScalar O b) ^ (n + 1)).asHom.val.app V x) * 1 = 0
   rw [hp, map_mul, completedScalar_quotient_zero X J U a ha n V, mul_zero, zero_mul]
 
 attribute [local irreducible] completed homComplexFunctor

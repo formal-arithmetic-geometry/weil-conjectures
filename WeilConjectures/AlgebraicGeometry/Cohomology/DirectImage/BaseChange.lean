@@ -50,7 +50,7 @@ and let `ℱ'` be the pullback of `ℱ` to `X'`. Then `h^q_{ℱ'}(t') = h^q_ℱ(
 `t'` of `T'`: the fibre `X'_{t'}` is the base change of `X_{g t'}` along the field extension
 `κ(g t') ⟶ κ(t')`, and cohomology commutes with flat base change.
 
-(blueprint: `sk-thm-picard-perfect`) -/
+(blueprint: `lemma-coherent-base-change-invertible-sheaves`) -/
 theorem hFiber_pullback_of_isPullback {T' X' : Scheme.{u}} (g : T' ⟶ T) (g' : X' ⟶ X)
     (f' : X' ⟶ T') (sq : IsPullback g' f' f g) (q : ℕ) (t' : T') :
     ((Modules.pullback g').obj ℱ).hFiber f' q t' = ℱ.hFiber f q (g.base t') := by
@@ -108,7 +108,7 @@ free modules of `AlgebraicGeometry.Scheme.Modules.exists_isFiniteFreeComplex_hig
 since the Euler characteristic of a bounded complex of finite-dimensional vector spaces is that
 of its cohomology.
 
-(blueprint: `sk-thm-picard-perfect`) -/
+(blueprint: `lemma-coherent-base-change-invertible-sheaves`) -/
 theorem isLocallyConstant_eulerCharFiber (hℱ : ℱ.IsFlatOver f) :
     IsLocallyConstant (ℱ.eulerCharFiber f) := by
   rw [IsLocallyConstant.iff_eventually_eq]
@@ -173,7 +173,7 @@ the fibre dimension `t ↦ dim_{κ(t)} H^i(X_t, ℱ_t)` is locally constant: the
 `(-1)^i` times the fibre Euler characteristic, which is locally constant by
 `AlgebraicGeometry.Scheme.Modules.isLocallyConstant_eulerCharFiber`.
 
-(blueprint: `sk-thm-picard-perfect`) -/
+(blueprint: `lemma-coherent-base-change-invertible-sheaves`) -/
 theorem isLocallyConstant_hFiber_restrict (hℱ : ℱ.IsFlatOver f) (i : ℕ) :
     IsLocallyConstant ((ℱ.perfectLocus f i).domRestrict (ℱ.hFiber f i)) := by
   have h : (ℱ.perfectLocus f i).domRestrict (ℱ.hFiber f i) =
@@ -189,7 +189,7 @@ theorem isLocallyConstant_hFiber_restrict (hℱ : ℱ.IsFlatOver f) (i : ℕ) :
 preimage of `{r}` under the fibre dimension, which is locally constant on the open set `U_i` by
 `AlgebraicGeometry.Scheme.Modules.isLocallyConstant_hFiber_restrict`.
 
-(blueprint: `sk-thm-picard-perfect`) -/
+(blueprint: `lemma-coherent-base-change-invertible-sheaves`) -/
 theorem isOpen_perfectLocusOfRank (hℱ : ℱ.IsFlatOver f) (i r : ℕ) :
     IsOpen (ℱ.perfectLocusOfRank f i r) := by
   convert (isOpen_perfectLocus f ℱ hℱ i).isOpenMap_subtype_val _
@@ -203,7 +203,7 @@ theorem isOpen_perfectLocusOfRank (hℱ : ℱ.IsFlatOver f) (i r : ℕ) :
 `H^q(X_t, ℱ_t)` vanishes for all `q ≠ i` and has dimension `r` in degree `i` is open in `T`. This
 is `AlgebraicGeometry.Scheme.Modules.isOpen_perfectLocusOfRank`.
 
-(blueprint: `sk-thm-picard-perfect`) -/
+(blueprint: `lemma-coherent-base-change-invertible-sheaves`) -/
 theorem isOpen_setOf_hFiber_eq (hℱ : ℱ.IsFlatOver f) (i r : ℕ) :
     IsOpen {t : T | (∀ q ≠ i, ℱ.hFiber f q t = 0) ∧ ℱ.hFiber f i t = r} :=
   isOpen_perfectLocusOfRank f ℱ hℱ i r

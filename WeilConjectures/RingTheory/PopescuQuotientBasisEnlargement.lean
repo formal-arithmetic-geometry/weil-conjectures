@@ -201,14 +201,14 @@ m}$. Its residue field $F\subseteq K$ is the image of $F_0(t)$, i.e. $F=F_0(\alp
 Writing $F=k(e_1,\dots,e_v)$, $F=W^{-1}k[e_1,\dots,e_v]$ with $W$ the nonzero elements of the domain
 $k[e_1,\dots,e_v]$, so $k\to F$ is essentially of finite type
 [def-weil-pbc-essentially-finite-type-algebra] [def-weil-pbc-finite-type-algebra], and by
-[lem-weil-pbc-artinian-local-essentially-finite-type-residue] $A$ is essentially of finite type over
+[theorem-finite-etale-covers-proper-henselian--2] $A$ is essentially of finite type over
 $k$. So $A$ is admissible, $A_0\subseteq A$, $\bar s\in A$; put $N=p$ (then $\bar s^N\in A$).
 Uses: lem-weil-pbc-criterion-flatness-fibre-noetherian, def-weil-pbc-flat-ring-map,
 lem-weil-pbc-flat-local-hom-faithfully-flat, lem-weil-pbc-faithfully-flat-ideal-contraction,
 def-weil-pbc-essentially-finite-type-algebra, def-weil-pbc-finite-type-algebra,
-lem-weil-pbc-artinian-local-essentially-finite-type-residue.
+theorem-finite-etale-covers-proper-henselian--2.
 
-9. *Case T: a basis of $\Omega_{F/k}$.* By [lem-weil-pbc-kahler-differentials-polynomial-extension]
+9. *Case T: a basis of $\Omega_{F/k}$.* By [theorem-finite-etale-covers-proper-henselian--2]
 ($R=k$, $A=F_0$, $e=1$) $\Omega_{F_0[t]/k}\cong(F_0[t]\otimes_{F_0}\Omega_{F_0/k})\oplus
 F_0[t]\,\mathrm dt$ via $b\otimes\mathrm dc\mapsto b\,\mathrm dc$; as $\mathrm dc_1,\dots,\mathrm
 dc_t$ is an $F_0$-basis of $\Omega_{F_0/k}$ (step 2), $\mathrm dc_1,\dots,\mathrm dc_t,\mathrm dt$
@@ -218,7 +218,7 @@ localization of $F_0[t]$ at its nonzero elements, so by
 $\Omega_{F_0[t]/k}$ and $\mathrm dc_1,\dots,\mathrm dc_t,\mathrm dt$ is an $F_0(t)$-basis of it.
 Transporting along the $k$-algebra isomorphism $F_0(t)\cong F$, $t\mapsto\alpha$, identity on $F_0$
 (step 8), $\mathrm dc_1,\dots,\mathrm dc_t,\mathrm d\alpha$ is an $F$-basis of $\Omega_{F/k}$.
-Uses: lem-weil-pbc-kahler-differentials-polynomial-extension, def-weil-pbc-kahler-differentials,
+Uses: theorem-finite-etale-covers-proper-henselian--2, def-weil-pbc-kahler-differentials,
 lem-weil-pbc-kahler-differentials-localization.
 
 10. *Case S: the field $F_1=F_0(\beta)$ (as in 07FI, case algebraic).* $\alpha$ is algebraic over
@@ -277,14 +277,14 @@ m_A\bar\Lambda=\mathfrak m_{A_0}\bar\Lambda=\bar{\mathfrak m}$ and residue field
 $F=F_1=F_0(\beta)\subseteq K$ (step 11), finitely generated over $k$; as in step 8, $k\to F$ is
 essentially of finite type [def-weil-pbc-essentially-finite-type-algebra]
 [def-weil-pbc-finite-type-algebra] and so is $k\to A$
-[lem-weil-pbc-artinian-local-essentially-finite-type-residue]. So $A$ is admissible and
+[theorem-finite-etale-covers-proper-henselian--2]. So $A$ is admissible and
 $A_0\subseteq A$. By the Claim (step 5) for $D_1=A$ (local with $\mathfrak m_A=A\cap\bar{\mathfrak
 m}$, step 1) and $x=\bar s^Q$, whose residue $\beta\in F$ is nonzero, $\bar s^{Qq'}\in A$ for a
 power $q'$ of $p$ with $q'\ge\max(n,p)$. Put $N=Qq'$, a power of $p$ with $N\ge p$.
 Uses: lem-weil-pbc-criterion-flatness-fibre-noetherian, def-weil-pbc-flat-ring-map,
 lem-weil-pbc-flat-local-hom-faithfully-flat, lem-weil-pbc-faithfully-flat-ideal-contraction,
 def-weil-pbc-essentially-finite-type-algebra, def-weil-pbc-finite-type-algebra,
-lem-weil-pbc-artinian-local-essentially-finite-type-residue.
+theorem-finite-etale-covers-proper-henselian--2.
 
 13. *Case S: a basis of $\Omega_{F/k}$.* $F/F_0$ is finite separable (step 10), so
 $\operatorname{Spec}F\to\operatorname{Spec}F_0$ is etale

@@ -310,11 +310,11 @@ on a nonempty open `O' ⊆ O` the Verdier dual of `P` is bounded constructible, 
 in `[-b - 2n, -a - 2n]`.
 
 On a finite étale surjection `p : V ⟶ O'` trivialising the terms of `P` and the sheaf `L` with
-`ω_O ≅ L[2n]` (`thm-asd-smooth-tensor`), `p^* = Rp^!` gives `p^* 𝔻 P ≅ RHom(p^* P, p^* ω)`. Here
-`p^* P` is a bounded complex of constant sheaves of finite projective modules, hence dualizable
-with dual the termwise dual complex, and `p^* ω ≅ Λ[2n]`, so that
-`RHom(p^* P, p^* ω) ≅ (p^* P)^∨[2n]`: it has Tor amplitude `[-b - 2n, -a - 2n]` and finite locally
-constant homology sheaves. Both properties descend along the surjection `p`. -/
+`ω_O ≅ L[2n]` (`proposition-exceptional-inverse-image-smooth-morphism`), `p^* = Rp^!` gives
+`p^* 𝔻 P ≅ RHom(p^* P, p^* ω)`. Here `p^* P` is a bounded complex of constant sheaves of finite
+projective modules, hence dualizable with dual the termwise dual complex, and `p^* ω ≅ Λ[2n]`, so
+that `RHom(p^* P, p^* ω) ≅ (p^* P)^∨[2n]`: it has Tor amplitude `[-b - 2n, -a - 2n]` and finite
+locally constant homology sheaves. Both properties descend along the surjection `p`. -/
 theorem exists_boundedConstructible_and_torAmplitudeIn_verdierDual {k : Type u} [Field k]
     [HasInvertibleExponent Λ (Spec (.of k))] {O : Scheme.{u}} [IrreducibleSpace O]
     (aO : O ⟶ Spec (.of k)) [IsSeparated aO] [LocallyOfFiniteType aO] [QuasiCompact aO]

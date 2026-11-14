@@ -40,7 +40,7 @@ theorem mateEquiv_pullbackComparison_counit :
     (proEtaleRingDerivedPullback f' R_Y' R_X' c_f').map
         ((mateEquiv (proEtaleRingDerivedAdjunction f R_Y R_X c_f)
           (proEtaleRingDerivedAdjunction f' R_Y' R_X' c_f')
-          (TwoSquare.mk _ _ _ _ θ.hom)).natTrans.app K) ≫
+          (TwoSquare.mk _ _ _ _ θ.hom)).app K) ≫
       (proEtaleRingDerivedAdjunction f' R_Y' R_X' c_f').counit.app
         ((proEtaleRingDerivedPullback g' R_X R_X' c_g').obj K) =
       θ.hom.app ((proEtaleRingDerivedDirectImage f R_Y R_X c_f).obj K) ≫
@@ -59,7 +59,7 @@ theorem proEtaleAmbientRingedPullbackComparison_mate_counit
         ((mateEquiv (proEtaleRingDerivedAdjunction f R_Y R_X c_f)
           (proEtaleRingDerivedAdjunction f' R_Y' R_X' c_f') (TwoSquare.mk _ _ _ _
             (proEtaleAmbientRingedPullbackComparison sq R_X R_Y R_X' R_Y'
-              c_f c_g c_g' c_f' hcoeff).hom)).natTrans.app K) ≫
+              c_f c_g c_g' c_f' hcoeff).hom)).app K) ≫
       (proEtaleRingDerivedAdjunction f' R_Y' R_X' c_f').counit.app
         ((proEtaleRingDerivedPullback g' R_X R_X' c_g').obj K) =
       (proEtaleAmbientRingedPullbackComparison sq R_X R_Y R_X' R_Y'
@@ -80,12 +80,12 @@ theorem proEtaleAmbientRingedExchange_eq_mate (sq : ChosenCartesianSquare g' f' 
       (mateEquiv (proEtaleRingDerivedAdjunction f R_Y R_X c_f)
           (proEtaleRingDerivedAdjunction f' R_Y' R_X' c_f') (TwoSquare.mk _ _ _ _
             (proEtaleAmbientRingedPullbackComparison sq R_X R_Y R_X' R_Y'
-              c_f c_g c_g' c_f' hcoeff).hom)).natTrans :=
+              c_f c_g c_g' c_f' hcoeff).hom)) :=
   proEtaleAmbientRingedExchange.eq_1 _ _ _ _ _ _ _ _ _ _
 
 omit θ in
 /-- The ambient exchange is the mate of the pullback comparison: its counit form.
-Source: Stacks 07A7 (blueprint: def-weil-pbc-ambient-ringed-exchange). -/
+Source: Stacks 07A7 (blueprint: definition-pro-etale-base-change-map--1). -/
 theorem proEtaleAmbientRingedExchange_counit (sq : ChosenCartesianSquare g' f' f g)
     (hcoeff : HEq
       (proEtaleRingCompositeCoefficients g' f R_Y R_X R_X' c_f c_g')

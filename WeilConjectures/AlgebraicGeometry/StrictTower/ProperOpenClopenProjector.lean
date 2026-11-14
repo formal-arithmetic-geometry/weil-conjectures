@@ -52,11 +52,11 @@ private theorem inverse_mate_isIso
     {L : A ⥤ D} {R : D ⥤ A} {L' : A' ⥤ D'} {R' : D' ⥤ A'}
     (a : L ⊣ R) (b : L' ⊣ R') (P : A ⥤ A') (Q : D ⥤ D')
     [P.IsEquivalence] [Q.IsEquivalence] (β : R ⋙ P ⟶ Q ⋙ R') [IsIso β] :
-    IsIso ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ β)).natTrans := by
+    IsIso ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ β)) := by
   let α := (mateEquiv a b).symm (TwoSquare.mk _ _ _ _ β)
   let γ : TwoSquare Q.op R.op R'.op P.op :=
     TwoSquare.mk _ _ _ _ (NatTrans.op β)
-  have : IsIso γ.natTrans := by dsimp [γ]; infer_instance
+  have : IsIso γ := by dsimp [γ]; infer_instance
   have ho := isIso_mateEquiv_of_isEquivalence a.op b.op γ
   have hi (M : A) : IsIso (α.app M) := by
     have he : (mateEquiv a.op b.op γ).app (op M) = (α.app M).op := by
@@ -272,12 +272,12 @@ theorem clopenModule_section_projector {U X C : Scheme.{u}}
     have : P.IsEquivalence := {}
     have : Q.IsEquivalence := {}
     let α := (mateEquiv a b).symm (TwoSquare.mk _ _ _ _ d.hom)
-    have : IsIso α.natTrans := inverse_mate_isIso a b P Q d.hom
+    have : IsIso α := inverse_mate_isIso a b P Q d.hom
     let V := Scheme.ProEt.clopenTestPiece s H
     let e₁ := ((PresheafOfModules.evaluation _ (op H)).mapIso
       ((SheafOfModules.forget _).mapIso
         ((asIso (clopenModuleToDirect B s)).app ((modulePullback B s).obj M))))
-    let e₂ := (asIso α.natTrans).symm.app M
+    let e₂ := (asIso α).symm.app M
     let e₂H := ((evaluation _ _).obj (op V)).mapIso
       ((sheafToPresheaf _ _).mapIso e₂)
     refine ⟨e₁.toLinearEquiv.toAddEquiv.trans e₂H.toLinearEquiv.toAddEquiv, ?_⟩

@@ -10,12 +10,14 @@ public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Mathlib.CategoryTheory.Sites.Point.Skyscraper
 public import Mathlib.Algebra.Homology.Additive
 import Mathlib.Algebra.Homology.HomologicalComplexAbelian
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Zero
+public import Mathlib.CategoryTheory.Sites.Point.Skyscraper
 
 /-!
 # Colimits and geometric stalks
 
 Source: Stacks Project, Tags 03PN and 04K1; blueprint node
-`lem-kun-stalks-commute-colimits` (blueprint: lem-kun-stalks-commute-colimits).
+`definition-torsion-sheaves--3` (blueprint: definition-torsion-sheaves--3).
 -/
 
 @[expose] public section
@@ -26,7 +28,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- (blueprint: lem-kun-stalks-commute-colimits) Let `T` be a scheme and `s` a geometric
+/-- (blueprint: definition-torsion-sheaves--3) Let `T` be a scheme and `s` a geometric
 point of `T`. The geometric stalk of sheaves of abelian groups on the small etale
 site of `T` commutes with arbitrary colimits. In each degree the same holds for
 complexes of abelian sheaves, whose colimits are computed termwise.

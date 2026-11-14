@@ -23,7 +23,7 @@ Let `Λ` be a commutative condensed ring and `g : W ⟶ X` a morphism of schemes
   `prop-constructible-pullback`): pull back the stratification;
 * bounded constructible complexes, for its left derived functor `Lg^*`
   (`ProEtale.CondensedRing.boundedConstructible_leftDerivedUpperStar_obj_of_scheme`, blueprint
-  `sk-thm-sf-ctf-stability`): `Lg^*` commutes with the homology functors.
+  `proposition-six-operations-dctf`): `Lg^*` commutes with the homology functors.
 -/
 
 @[expose] public section
@@ -112,10 +112,10 @@ theorem IsConstructibleModuleObject.upperStar {W X : Scheme.{u}} (g : W ⟶ X)
       (b := (S.pullback g).immersion i) pullback.condition
       ((isLocallyFinitelyPresented_mapMod_iff Λ _ _).1 (hS i)))
 
-/-- Blueprint `sk-thm-sf-ctf-stability` (pullback): the derived pullback `Lg^*` of module objects
-over `Λ` along any morphism of schemes `g : W ⟶ X` preserves bounded constructible complexes.
-The functor `g^*` being exact, `Lg^*` commutes with the homology functors, and `g^*` preserves
-zero objects and constructible module objects. -/
+/-- Blueprint `proposition-six-operations-dctf` (pullback): the derived pullback `Lg^*` of module
+objects over `Λ` along any morphism of schemes `g : W ⟶ X` preserves bounded constructible
+complexes. The functor `g^*` being exact, `Lg^*` commutes with the homology functors, and `g^*`
+preserves zero objects and constructible module objects. -/
 theorem boundedConstructible_leftDerivedUpperStar_obj_of_scheme {W X : Scheme.{u}} (g : W ⟶ X)
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X)))

@@ -519,7 +519,6 @@ variable (X : Scheme.{u})
   (B : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1})
   (ι : (Functor.const ℕᵒᵖ).obj R ⟶ B)
 
-set_option maxHeartbeats 500000 in
 -- Check the simultaneous normalization and all three representative equations together.
 private theorem reductionModels
     (T : Presentation.{u + 2, u + 1, u + 1} (SC (Scheme.ProEt.topology X) R))
@@ -766,7 +765,7 @@ theorem strictSectionQuotientTensorModels (X : Scheme.{u})
     (hdata : data.IsCanonical l E X)
     (hscalar : ∀ (M : Modules (DerivedNakayama.integerRing l E) X) (U : X.ProEtᵒᵖ)
       (x : M.val.obj U),
-      (T.scalar.app M).val.app U x = sectionScalarValue l E X data.d U • x)
+      (T.scalar.asHom.app M).val.app U x = sectionScalarValue l E X data.d U • x)
     (B : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1})
     (ι : (Functor.const ℕᵒᵖ).obj (ring (DerivedNakayama.integerRing l E) X) ⟶ B)
     (hB : ∀ n : ℕ, B.obj (op n) = sectionRingSheaf.{u + 1, u + 1, u} (Scheme.ProEt.topology X)

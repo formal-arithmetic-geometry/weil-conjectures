@@ -31,7 +31,7 @@ namespace AlgebraicGeometry.ProEtale
 /-- The canonical comparison between a constant commutative ring sheaf, regarded as
 an abelian sheaf, and the constant abelian sheaf of its additive group.
 Source: blueprint pullback clause 1, canonical finite constant-sheaf identifications
-(blueprint: det-prop-sfb-qlbar-colimit-x-pullback). -/
+(blueprint: lemma-comparison-completed-coefficients--4). -/
 def sfbConstantRingAbIso (X : Scheme.{u}) (A : CommRingCat.{u + 1}) :
     (sheafCompose (Scheme.ProEt.topology X) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj
         ((sheafCompose (Scheme.ProEt.topology X)

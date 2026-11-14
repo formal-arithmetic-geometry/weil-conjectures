@@ -45,9 +45,9 @@ import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 /-!
 # Classical pro-étale sheaves of modules
 
-Source: Weil conjectures blueprint, main-20261015, sec-proetale-coefficients,
+Source: Weil conjectures blueprint, main-20261015, chap-The-pro-etale-site,
 `sk-thm-pe-classical-sheaves-modules`; Stacks Project, Tags 099T, 04JC and 03DA
-(blueprint: det-pe-classical-sheaves-modules).
+(blueprint: theorem-classical-sheaves-essential-image--1).
 
 We use the fixed-coefficient `ModuleCat` encoding explicitly allowed by
 `def-weil-pbc-etale-sheaves`. The constant-ring action is the unique extension of
@@ -133,7 +133,7 @@ commutative ring, with essential image the classical module sheaves and restrict
 as quasi-inverse.
 Source: Weil conjectures blueprint, main-20261015,
 `sk-thm-pe-classical-sheaves-modules`; Stacks Project, Tags 099T, 04JC and 03DA
-(blueprint: det-pe-classical-sheaves-modules).
+(blueprint: theorem-classical-sheaves-essential-image--1).
 
 Proof:
 1. Use the existing comparison adjunction for Grothendieck abelian coefficients,

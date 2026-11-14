@@ -20,7 +20,7 @@ the ring of invariants `B_Q^{I_Q}` is strictly henselian
 (`Ideal.isStrictlyHenselianLocalRing_fixedPoints_atPrime`): for `R` the ring of an affine chart
 of a curve at a boundary point `z`, `Ω` a separable closure of the function field and
 `G = Gal(Ω / K)`, it is the strict henselization at `z` of blueprint
-`lem-wf-boundary-stalk-invariants`.
+`lemma-boundary-stalk--1`.
 
 For `Ω / K` Galois and `R` with fraction field `K`, the inertia group is closed in the Krull
 topology (`Ideal.isClosed_inertia_integralClosure`), so it is the Galois group of `Ω` over its
