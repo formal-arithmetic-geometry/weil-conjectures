@@ -236,12 +236,12 @@ theorem projectiveLineHyperplaneClass_baseChange :
   exact this
 
 variable (Λ) in
-/-- **Base change of the decomposition map** (blueprint `lemma-cohomology-projective-line-trace`
-(1)). Let `g' : ℙ¹_{S'} ⟶ ℙ¹_S` be the base change of `g : S' ⟶ S`. The pullback along `g` of the
-decomposition map `(1, h) : Λ_S(1)[2] ⊕ Λ_S ⟶ Rq_*(Λ_{ℙ¹_S}(1)[2])`
-(`AlgebraicGeometry.Etale.projectiveLineDecompositionMapAux`), followed by the proper base change
-map `Lg^* Rq_* ⟶ Rq'_* Lg'^*` and `Lg'^*(Λ(1)[2]) ≅ Λ(1)[2]`, is the decomposition map of
-`ℙ¹_{S'}`, preceded by the identification `Lg^*(Λ_S(1)[2] ⊕ Λ_S) ≅ Λ_{S'}(1)[2] ⊕ Λ_{S'}`. -/
+/-- **Base change of the auxiliary decomposition map**. Let `g' : ℙ¹_{S'} ⟶ ℙ¹_S` be the base
+change of `g : S' ⟶ S`. The pullback along `g` of the auxiliary decomposition map
+`(1, -h) : Λ_S(1)[2] ⊕ Λ_S ⟶ Rq_*(Λ_{ℙ¹_S}(1)[2])`
+(`AlgebraicGeometry.Etale.projectiveLineDecompositionMapAux`, with `-h = c₁(𝒪(-∞))`), followed by
+the proper base change map `Lg^* Rq_* ⟶ Rq'_* Lg'^*` and `Lg'^*(Λ(1)[2]) ≅ Λ(1)[2]`, is the
+decomposition map of `ℙ¹_{S'}`, preceded by the identification `Lg^*(Λ_S(1)[2] ⊕ Λ_S) ≅ Λ_{S'}(1)[2] ⊕ Λ_{S'}`. -/
 theorem projectiveLineDecompositionMapAux_baseChange :
     (L((g)^*[ModuleCat.{u + 1} Λ])).map (projectiveLineDecompositionMapAux Λ S) ≫
         (derivedBaseChangeMap (ModuleCat.{u + 1} Λ)
@@ -325,7 +325,7 @@ theorem projectiveLineTraceAux_baseChange [HasKummerClass.IsNormalized Λ] :
         (leftDerivedUpperStarConstantComplexIso Λ g).hom), reassoc_of% h₂]
 
 variable (Λ) in
-/-- **Base change of the trace** (blueprint `lemma-cohomology-projective-line-trace` (2)). For
+/-- **Base change of the trace**. For
 `g : S' ⟶ S` with base change `g' : ℙ¹_{S'} ⟶ ℙ¹_S`, the pullback along `g` of the trace
 `Tr_q : Rq_*(Λ_{ℙ¹_S}(1)[2]) ⟶ Λ_S` (`AlgebraicGeometry.Etale.projectiveLineTrace`) is the
 proper base change map `Lg^* Rq_* ⟶ Rq'_* Lg'^*`, followed by `Lg'^*(Λ(1)[2]) ≅ Λ(1)[2]`, the

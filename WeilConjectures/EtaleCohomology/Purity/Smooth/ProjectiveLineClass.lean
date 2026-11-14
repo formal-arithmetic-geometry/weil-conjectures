@@ -195,10 +195,10 @@ on `ℙ¹_S = ℙ(Option (ULift (Fin 1)); S)`, the class of the section at infin
 `s = T_∞ / T₀` of the chart `D₊(T₀)` at infinity, which is closed in `ℙ¹_S`, the complement of
 the standard chart `D₊(T_∞) ≅ 𝔸¹_S` (`AlgebraicGeometry.ProjectiveSpace.range_chartBoundaryι`).
 The sign comes from `AlgebraicGeometry.Etale.chartBoundaryClass`, which forgets supports to
-`c₁(𝒪(-Z))` (blueprint `lemma-cycle-class-cartier-divisor` (b)): this is `-c₁(𝒪(1))`, the
+`c₁(𝒪(-Z))` (the notes' cycle class of a Cartier divisor, clause (b)): this is `-c₁(𝒪(1))`, the
 auxiliary convention of the construction; the hyperplane class of the notes is its negative
-`AlgebraicGeometry.Etale.projectiveLineHyperplaneClass`. The decomposition
-`lemma-cohomology-projective-line-trace` holds for `h` and `-h` alike. -/
+`AlgebraicGeometry.Etale.projectiveLineHyperplaneClass`. The decomposition of the cohomology of
+the projective line holds for `h` and `-h` alike. -/
 noncomputable def projectiveLineHyperplaneClassAux :
     constantComplex Λ ℙ(Option (ULift.{u} (Fin 1)); S) ⟶
       (tateObject Λ ℙ(Option (ULift.{u} (Fin 1)); S) 1)⟦(2 : ℤ)⟧ :=
@@ -206,10 +206,9 @@ noncomputable def projectiveLineHyperplaneClassAux :
     (ProjectiveSpace.coordRatio (Option (ULift.{u} (Fin 1))) S (some ⟨0⟩) none)
 
 /-- The *hyperplane class* `h = c₁(𝒪(1)) : Λ_{ℙ¹_S} ⟶ Λ_{ℙ¹_S}(1)[2]` of the projective line, the
-class of the divisor at infinity with the sign of the notes (blueprint
-`lemma-cohomology-projective-line-trace`, `lemma-cycle-class-cartier-divisor`: `c_D` is the
-class of `𝒪(D)`): the negative of the boundary class `c₁(𝒪(-∞))` of the chart at infinity
-(`AlgebraicGeometry.Etale.projectiveLineHyperplaneClassAux`). -/
+class of the divisor at infinity with the sign of the notes (the cycle class `c_D` of a Cartier
+divisor `D` is the class of `𝒪(D)`): the negative of the boundary class `c₁(𝒪(-∞))` of the chart
+at infinity (`AlgebraicGeometry.Etale.projectiveLineHyperplaneClassAux`). -/
 noncomputable def projectiveLineHyperplaneClass :
     constantComplex Λ ℙ(Option (ULift.{u} (Fin 1)); S) ⟶
       (tateObject Λ ℙ(Option (ULift.{u} (Fin 1)); S) 1)⟦(2 : ℤ)⟧ :=

@@ -28,10 +28,14 @@ the purity hypothesis `AlgebraicGeometry.Etale.SupportedTatePure` for it, it has
 `p₁ : ℙ¹_P ⟶ P`) is the identity, and the same for `p₂`, through the automorphism of `W`
 exchanging the factors (`AlgebraicGeometry.Etale.projectiveLineDiagonalSwap`).
 
-*Signs.* Both `δ` and the hyperplane class `h` normalizing the trace
-(`AlgebraicGeometry.Etale.projectiveLineHyperplaneClass`) are built from Kummer boundaries
-`∂κ(f)` of local equations, which forget supports to `c₁(𝒪(-D))`; the sign conventions agree and
-the composite is the identity, not `-1`.
+*Signs.* The auxiliary classes `δ_aux` (`AlgebraicGeometry.Etale.cartierKummerCycleClassAux`) and
+`-h` (`AlgebraicGeometry.Etale.projectiveLineHyperplaneClassAux`) are built from Kummer boundaries
+`∂κ(f)` of local equations, which forget supports to `c₁(𝒪(-D))`; the classes of the notes
+`δ = c₁(𝒪(Δ))` (`AlgebraicGeometry.Etale.cartierKummerCycleClass`) and `h = c₁(𝒪(1))`
+(`AlgebraicGeometry.Etale.projectiveLineHyperplaneClass`) are their negatives, and the trace of the
+notes (`AlgebraicGeometry.Etale.projectiveLineTrace`) is the negative of the auxiliary trace
+normalized by `-h`. The two signs cancel: the diagonal integrals are `1` for the conventions of the
+notes as for the auxiliary ones.
 
 ## The argument
 
@@ -85,19 +89,20 @@ section CycleClass
 variable [HasKummerClass.IsNormalized Λ] {T D : Scheme.{u}} [HasInvertibleExponent Λ T]
   (i : D ⟶ T) [IsRegularImmersion 1 i]
 
-/-- The *cycle class* `δ : Λ_T ⟶ Λ_T(1)[2]` of an effective Cartier divisor `i : D ⟶ T`
-satisfying the purity hypothesis: the class `AlgebraicGeometry.Etale.cartierKummerClass` with
-supports forgotten. With the conventions of `AlgebraicGeometry.Etale.kummerBoundary` it is
-`c₁(𝒪_T(-D))`, the same convention as the hyperplane class
-`AlgebraicGeometry.Etale.projectiveLineHyperplaneClass`. -/
+/-- The *auxiliary cycle class* `δ_aux : Λ_T ⟶ Λ_T(1)[2]` of an effective Cartier divisor
+`i : D ⟶ T` satisfying the purity hypothesis: the class `AlgebraicGeometry.Etale.cartierKummerClass`
+with supports forgotten. With the conventions of `AlgebraicGeometry.Etale.kummerBoundary` it is
+`c₁(𝒪_T(-D))`, the same convention as the auxiliary hyperplane class
+`AlgebraicGeometry.Etale.projectiveLineHyperplaneClassAux`; the cycle class `δ = c₁(𝒪_T(D))` of
+the notes is its negative (`AlgebraicGeometry.Etale.cartierKummerCycleClass`). -/
 noncomputable def cartierKummerCycleClassAux (hP : SupportedTatePure Λ 1 i) :
     constantComplex Λ T ⟶ (tateObject Λ T 1)⟦(2 : ℤ)⟧ :=
   cartierKummerClass Λ i hP ≫
     (rightDerivedUpperShriekAdjunction Λ i).counit.app ((tateObject Λ T 1)⟦(2 : ℤ)⟧)
 
 /-- The *cycle class* `δ = c₁(𝒪_T(D)) : Λ_T ⟶ Λ_T(1)[2]` of an effective Cartier divisor
-`i : D ⟶ T` satisfying the purity hypothesis, with the sign of the notes (blueprint
-`lemma-class-diagonal-projective-line`, `lemma-cycle-class-cartier-divisor`): the negative of the
+`i : D ⟶ T` satisfying the purity hypothesis, with the sign of the notes (the class of `𝒪(D)`,
+as in the notes' cycle class of a Cartier divisor): the negative of the
 forgotten-supports Kummer class `AlgebraicGeometry.Etale.cartierKummerCycleClassAux`, which is
 `c₁(𝒪_T(-D))`. -/
 noncomputable def cartierKummerCycleClass (hP : SupportedTatePure Λ 1 i) :
@@ -359,8 +364,8 @@ theorem projectiveLineTraceAux_diagonal_swap
   exact projectiveLineTraceAux_diagonal Λ S hP
 
 /-- The trace of `ℙ¹_S` is normalized by `Tr_q ∘ h♭ = 1`, for the adjoint
-`h♭ : Λ_S ⟶ Rq_*(Λ_{ℙ¹_S}(1)[2])` of the hyperplane class `h = c₁(𝒪(1))` of the notes (blueprint
-`lemma-cohomology-projective-line-trace`): from the auxiliary normalisation by the two signs. -/
+`h♭ : Λ_S ⟶ Rq_*(Λ_{ℙ¹_S}(1)[2])` of the hyperplane class `h = c₁(𝒪(1))` of the notes: from the
+auxiliary normalisation by the two signs. -/
 lemma homEquiv_projectiveLineHyperplaneClass_comp_projectiveLineTrace :
     (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
         (ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S)).homEquiv _ _
@@ -372,7 +377,7 @@ lemma homEquiv_projectiveLineHyperplaneClass_comp_projectiveLineTrace :
     Adjunction.homEquiv_unit, Functor.map_neg, Preadditive.neg_comp, neg_neg] at this ⊢
   exact this
 
-/-- Blueprint `lemma-class-diagonal-projective-line`: *the first diagonal integral*, with the cycle
+/-- *The first diagonal integral*, with the cycle
 class `δ = c₁(𝒪(Δ))` and the trace of the notes: `Tr_p(δ) = 1`. From the auxiliary statement
 `AlgebraicGeometry.Etale.projectiveLineTraceAux_diagonal` by the two signs. -/
 theorem projectiveLineTrace_diagonal
@@ -391,7 +396,7 @@ theorem projectiveLineTrace_diagonal
     Functor.map_neg, Preadditive.comp_neg, Preadditive.neg_comp, neg_neg] at this ⊢
   exact this
 
-/-- Blueprint `lemma-class-diagonal-projective-line`: *the second diagonal integral* (the swapped
+/-- *The second diagonal integral* (the swapped
 factor), with the cycle class and the trace of the notes. From
 `AlgebraicGeometry.Etale.projectiveLineTraceAux_diagonal_swap` by the two signs. -/
 theorem projectiveLineTrace_diagonal_swap
