@@ -109,10 +109,27 @@ noncomputable def boundedConstructibleUpperShriekOfCompactificationToPadicAlgCl 
         boundedConstructibleToPadicAlgCl X.left ℓ E ⟶
       boundedConstructibleToPadicAlgCl Y.left ℓ E ⋙
         boundedConstructibleUpperShriekOfCompactification ℓ c :=
-  mateEquiv
-    (ContinuousMapRingObj.boundedConstructibleUpperShriekOfCompactificationAdjunction ℓ E c)
-    (boundedConstructibleUpperShriekOfCompactificationAdjunction ℓ c)
-    (boundedConstructibleLowerShriekOfCompactificationToPadicAlgClIso ℓ E c).inv
+  -- spelled on the general `Rg_*` (`@id` pins the implicit functors of the mate to the composites
+  -- `i_! ⋙ Rg_*` and `Rg^! ⋙ i^*`, as in `mateEquiv_hcomp`; the proper-only `Rg_*` of
+  -- `boundedConstructibleLowerShriekOfCompactification` is the same functor by `rfl`)
+  @id (((ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E c.overG).rightAdjoint ⋙
+        boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ c.overI) ⋙
+          boundedConstructibleToPadicAlgCl X.left ℓ E ⟶
+        boundedConstructibleToPadicAlgCl Y.left ℓ E ⋙
+          ((boundedConstructibleLowerStar ℓ c.overG).rightAdjoint ⋙
+            boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c.overI))
+    (mateEquiv
+      (@id (boundedConstructibleOpenImmersionLowerShriek (Profinite.continuousMapRingObj E) ℓ
+            c.overI ⋙ ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E c.overG ⊣
+          (ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E c.overG).rightAdjoint ⋙
+            boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ c.overI)
+        (ContinuousMapRingObj.boundedConstructibleUpperShriekOfCompactificationAdjunction ℓ E c))
+      (@id (boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ c.overI ⋙
+            boundedConstructibleLowerStar ℓ c.overG ⊣
+          (boundedConstructibleLowerStar ℓ c.overG).rightAdjoint ⋙
+            boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c.overI)
+        (boundedConstructibleUpperShriekOfCompactificationAdjunction ℓ c))
+      (boundedConstructibleLowerShriekOfCompactificationToPadicAlgClIso ℓ E c).inv)
 
 -- `mateEquiv_hcomp` is matched against the unfolded adjunction `Rf_!(c) ⊣ Rf^!(c)`.
 /-- The exchange for `f^!` along a compactification `c = (X ⟶[i] Z ⟶[g] Y)` is the horizontal
@@ -123,9 +140,17 @@ lemma boundedConstructibleUpperShriekOfCompactificationToPadicAlgCl_eq :
     boundedConstructibleUpperShriekOfCompactificationToPadicAlgCl ℓ E c =
       TwoSquare.hComp (boundedConstructibleProperUpperShriekToPadicAlgCl ℓ E c)
         (boundedConstructibleOpenImmersionUpperStarToPadicAlgCl ℓ E c.overI) := by
+  -- the vertical composite is spelled on the general `Rg_*` (its implicit functors as in `mateEquiv_hcomp`)
   have h : (boundedConstructibleLowerShriekOfCompactificationToPadicAlgClIso ℓ E c).inv =
-      TwoSquare.vComp (boundedConstructibleOpenImmersionLowerShriekToPadicAlgClIso ℓ E c.overI).inv
-        (boundedConstructibleLowerStarToPadicAlgClIso ℓ E c.overG).inv := by
+      (TwoSquare.vComp
+        (boundedConstructibleOpenImmersionLowerShriekToPadicAlgClIso ℓ E c.overI).inv
+        (boundedConstructibleLowerStarToPadicAlgClIso ℓ E c.overG).inv :
+        boundedConstructibleToPadicAlgCl X.left ℓ E ⋙
+            (boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ c.overI ⋙
+              boundedConstructibleLowerStar ℓ c.overG) ⟶
+          (boundedConstructibleOpenImmersionLowerShriek (Profinite.continuousMapRingObj E) ℓ
+              c.overI ⋙ ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E c.overG) ⋙
+            boundedConstructibleToPadicAlgCl Y.left ℓ E) := by
     ext K
     simp [boundedConstructibleLowerShriekOfCompactificationToPadicAlgClIso, TwoSquare.vComp]
   unfold boundedConstructibleUpperShriekOfCompactificationToPadicAlgCl
