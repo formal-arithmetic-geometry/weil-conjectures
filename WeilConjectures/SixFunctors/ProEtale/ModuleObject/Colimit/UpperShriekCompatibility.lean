@@ -129,7 +129,8 @@ lemma boundedConstructibleUpperShriekOfCompactificationToPadicAlgCl_eq :
     ext K
     simp [boundedConstructibleLowerShriekOfCompactificationToPadicAlgClIso, TwoSquare.vComp]
   unfold boundedConstructibleUpperShriekOfCompactificationToPadicAlgCl
-  rw [h]
+  -- `rewrite`, not `rw`: the closing `rfl` attempt of `rw` unfolds the adjunctions and times out
+  rewrite [h]
   exact mateEquiv_hcomp
     (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
       (Profinite.continuousMapRingObj E) ℓ c.overI)
