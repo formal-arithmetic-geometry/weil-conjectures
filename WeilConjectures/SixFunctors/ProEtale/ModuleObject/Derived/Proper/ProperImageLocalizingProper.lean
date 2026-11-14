@@ -246,7 +246,7 @@ def ProperLocalizingHypotheses
 
 /-- The sum-preservation hypothesis of `ProperLocalizingHypotheses` for a sum indexed by the
 universe of the morphisms: lift the index along `ULift`, the index categories being equivalent. -/
-private theorem preservesColimit_of_properLocalizingHypotheses
+theorem preservesColimit_of_properLocalizingHypotheses
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (p : X ⟶ Y)
     (h : ProperLocalizingHypotheses Λ p) (I : Type (u + 1))
