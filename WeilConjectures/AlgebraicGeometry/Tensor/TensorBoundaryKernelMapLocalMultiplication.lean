@@ -11,7 +11,7 @@ import WeilConjectures.AlgebraicGeometry.BoundaryPullbackTensorUnit
 
 /-! # Local tensor multiplication under the canonical kernel comparisons
 
-Source: Stacks Project, Tag 09MS, coherent-equation-ses and its ideal coefficient.
+Source: Stacks Project, Tag 09MS, the ideal short exact sequence and its ideal coefficient.
 -/
 
 @[expose] public section
@@ -53,7 +53,7 @@ private theorem whiskerLeft_section {Z : Scheme.{u}} (F N : Z.Modules)
 kernel map is ordinary tensor multiplication after the kernel inclusion.
 There is no graded presentation, ring action or degree projection in this statement.
 
-Source: Stacks Project, Tag 09MS, coherent-equation-ses and the identification of its ideal
+Source: Stacks Project, Tag 09MS, the ideal short exact sequence and the identification of its ideal
 coefficient over Z; Modules, Tag 08KS, the closed-immersion quotient. -/
 theorem tensorBoundaryKernelMap_local_multiplication {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)

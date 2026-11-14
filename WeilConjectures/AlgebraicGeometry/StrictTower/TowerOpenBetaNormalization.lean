@@ -55,7 +55,7 @@ namespace AlgebraicGeometry.ProEtale.StrictTower
 
 variable (B : Type (u + 1)) [CommRing B]
 
-/-- The specified module inverse-image/direct-image adjunction, without new choices.
+/-- The specified module inverse-image/direct-image adjunction.
 Source: Stacks, Tag 04J0. -/
 def openBetaModuleAdj {X Y : Scheme.{u}} (f : X ⟶ Y) :
     modulePullback B f ⊣ moduleDirectImage B f :=
@@ -63,7 +63,7 @@ def openBetaModuleAdj {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (constantRingIso B f)
 
 /-- The restriction/direct-image exchange transformation is the mate of the canonical
-inverse-image compositor square; its section normalization is asserted below.
+inverse-image compositor square.
 Source: Stacks, Tag 04J0. -/
 def openBetaRestriction {U' U X' X : Scheme.{u}}
     (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)

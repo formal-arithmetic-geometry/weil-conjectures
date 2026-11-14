@@ -17,8 +17,7 @@ import WeilConjectures.AlgebraicGeometry.Etale.EtaleSheafHomFamilyGluing
 The coefficient is expressed by the existing ordered tensor of shifted finite Tate lines:
 its pullback to E is A_E(d)[2d]. The local map is the actual compact-support exchange for
 the inverse frame, followed by the canonical Tate comparison and the existing affine trace.
-The unique-gluing theorem determines a unique morphism, so the final definition postpones
-only its construction's proof, without choosing an unconstrained map or orientation.
+The global map is the unique morphism obtained by gluing these local traces.
 
 ## Main definitions
 
@@ -137,8 +136,7 @@ theorem existsUnique_vectorIntegrationGluing (N : ℕ) (hN : 0 < N)
   exact existsUnique_normalized_sheaf_trace N hN A hA S hS d F α
 
 /-- The canonical truncation identification alpha_pi and the glued sheaf map lambda.
-The H^0 normalization determines alpha_pi, and all frame restrictions determine lambda.
-Thus the theorem used here specifies the pair uniquely, rather than asserting bare existence. -/
+The H^0 normalization determines alpha_pi, and all frame restrictions determine lambda. -/
 def vectorIntegrationGluing (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
     (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)
@@ -149,8 +147,7 @@ def vectorIntegrationGluing (N : ℕ) (hN : 0 < N)
   (existsUnique_vectorIntegrationGluing N hN A hA S hS d F).2.exists.choose
 
 /-- Integration t_pi, the unique map restricting on each linear trivialization to the
-specified affine-space trace. Its existence proof is precisely sheaf gluing followed by
-the canonical truncation roof; uniqueness determines the data in this definition. -/
+specified affine-space trace. -/
 def vectorBundleIntegration (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
     (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)

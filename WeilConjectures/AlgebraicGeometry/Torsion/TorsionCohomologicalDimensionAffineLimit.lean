@@ -19,6 +19,9 @@ import WeilConjectures.AlgebraicGeometry.Sites.TorsionSheaf
 
 /-!
 # Torsion cohomological dimension at an affine inverse limit
+
+A uniform torsion étale cohomological dimension bound passes to cofiltered limits with affine
+transition morphisms.
 -/
 
 @[expose] public section

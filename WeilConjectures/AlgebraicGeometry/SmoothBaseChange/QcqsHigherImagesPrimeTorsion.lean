@@ -49,10 +49,7 @@ private instance (P : Set ℕ) : PartialOrder (PrimeAnnihilator P) where
     exact Nat.dvd_antisymm hnm hmn
 
 /-- The restricted kernel union from Stacks Tags 0DDC and 0DDD, followed by an
-additive functor preserving small filtered colimits. The colimit map is mono by AB5.
-Its epimorphism property follows by lifting each geometric-stalk element through
-its annihilator kernel and using geometric-stalk joint faithfulness. A colimit
-representative then retains the kernel's allowed annihilator under the functor. -/
+additive functor preserving small filtered colimits. -/
 private theorem prime_torsion_of_filtered_functor
     {X : Scheme.{u}} (P : Set ℕ)
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
@@ -159,9 +156,7 @@ private theorem prime_torsion_of_filtered_functor
   change n.val • (H.map (α.app n)) z = 0
   rw [← map_nsmul, hz, map_zero]
 
-/-- Integer-module coefficients carry precisely the data of an abelian sheaf.
-Use Mathlib's ring-equivalence restriction of scalars and integer-module equivalence,
-then restrict the coefficient adjunction along the full sheaf subcategories. -/
+/-- Integer-module coefficients carry precisely the data of an abelian sheaf. -/
 private theorem integerSheafForget_isEquivalence (X : Scheme.{u}) :
     (moduleAbelianForget (ULift.{u + 1} ℤ) X).IsEquivalence := by
   let E := forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) AddCommGrpCat.{u + 1}

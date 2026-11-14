@@ -12,7 +12,7 @@ import all WeilConjectures.CategoryTheory.SmoothPurity.ProperOpenCompositeTransf
 
 /-! # Restriction of intrinsic proper/open alpha
 
-Source: Stacks Project, Tags 09BN and 0F7C, with the arbitrary-ring underived refinement.
+Source: Stacks Project, Tags 09BN and 0F7C.
 -/
 
 @[expose] public noncomputable section

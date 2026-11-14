@@ -10,8 +10,7 @@ import WeilConjectures.CategoryTheory.Diagram.DiagramSiteTopology
 
 /-! # The section-preserving base of strict ell-power coordinates
 
-Source: Zheng Construction 4.1; the coefficient-tower construction in the smooth-purity and Stacks
-07A4.
+Source: Zheng Construction 4.1; Stacks 07A4.
 -/
 
 @[expose] public noncomputable section

@@ -28,9 +28,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 -- Comparing the two section carriers traverses the fixed direct-image construction.
-/-- Sectionwise ordinary adjunction with its explicit target carrier.
-
-This is the recorded adjoint followed by that comparison, evaluated on a chart. -/
+/-- Sectionwise ordinary adjunction with its explicit target carrier, evaluated on a chart. -/
 def sectionAdjoint
     {b : SpTowerShriek.Base l E} {X Y : Scheme.{u}} {f : X ⟶ Y}
     (g : SpTowerShriek.Geometry l E b f)

@@ -22,9 +22,7 @@ namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 attribute [local instance 2000] Abelian.toPreadditive
   Preadditive.preadditiveHasZeroMorphisms
 
-/-- The actual Kummer complex, with the canonical abelian-category zero witness.
-The objects, inclusion, power map and zero-composite proof are the fields of k;
-only the definitionally equal zero-instance presentation is shared by name. -/
+/-- The actual Kummer complex, with the canonical abelian-category zero witness. -/
 def towerKummerComplex (l : ℕ) [Fact l.Prime] {T : Scheme.{u}} (k : Kummer l T) :
     ShortComplex (Ab T) :=
   ShortComplex.mk (X₁ := roots l T) (X₂ := powerUnits l T) (X₃ := units T)

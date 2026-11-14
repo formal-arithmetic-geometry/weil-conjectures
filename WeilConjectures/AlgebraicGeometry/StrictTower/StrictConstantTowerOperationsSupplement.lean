@@ -157,8 +157,7 @@ public import WeilConjectures.AlgebraicGeometry.StrictConstantTowerOperations
 /-!
 # Strict constant-coefficient tower operations
 
-Source: Stacks Project, Tags 0F7B, 0F7C, 0F7D, 0F7F, 07A7 and 09AE, and the explicit strict-tower
-refinement in the blueprint.
+Source: Stacks Project, Tags 0F7B, 0F7C, 0F7D, 0F7F, 07A7 and 09AE.
 
 The index `n : ℕ` denotes positive level `n+1`. All derived categories below localize
 complexes of strict towers, rather than forming towers in separate derived categories.
@@ -176,7 +175,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.ProEtale.StrictTower
 
--- These elementary factorization calculations follow the proved helpers of
+-- These elementary factorization calculations follow the helpers of
 -- ProEtaleRingSheafChangeAdjunction, without importing its unrelated comparisons.
 private theorem exactSquare_factorsh
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
@@ -623,7 +622,7 @@ private theorem evaluation_mate {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     (coefficients B X) (constantRingIso B f)).right_triangle_components _
 
 /-- This normalized mate is invertible, without a uniform lower bound.
-Source: and Stacks, Tag 08BJ. -/
+Source: Stacks, Tag 08BJ. -/
 theorem evalR_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     IsIso (evalR B f n) := by
   let L := towerPullback B f

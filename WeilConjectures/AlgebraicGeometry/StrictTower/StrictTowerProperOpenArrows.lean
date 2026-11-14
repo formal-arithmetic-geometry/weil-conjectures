@@ -17,8 +17,7 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.B
 /-!
 # Normalized proper/open calculus on strict pro-etale towers
 
-Source: Stacks Project, Tags 0F7B, 0F7C, 0F7D, 0F7F, 07A7 and 09AE, and the explicit strict-tower
-refinement in the blueprint.
+Source: Stacks Project, Tags 0F7B, 0F7C, 0F7D, 0F7F, 07A7 and 09AE.
 
 The index `n : ℕ` denotes positive level `n+1`. All derived categories below localize
 complexes of strict towers, rather than forming towers in separate derived categories.
@@ -881,7 +880,7 @@ private theorem squareG_lift {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
       (moduleJ B j') (moduleOpenSquare B gU j' j g hsq))
 
 /-- The unit-normalized comparison is invertible for a cartesian open square and
-arbitrary B. Source: Stacks, Tag 09AE and second proof step. -/
+arbitrary B. Source: Stacks, Tag 09AE. -/
 theorem betaInv_isIso {U' U X' X : Scheme.{u}}
     (gU : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : gU ≫ j = j' ≫ g)
@@ -997,8 +996,8 @@ private theorem evalG_eq {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     Iso.symm_hom, Category.id_comp]
 
 set_option backward.isDefEq.respectTransparency true in
-/-- Evaluation at finite constant coefficients gives exactly the dependency's
-unit-normalized open base change. Source: Stacks, Tag 09AE. -/
+/-- Evaluation at finite constant coefficients gives exactly the
+finite-coefficient unit-normalized open base change. Source: Stacks, Tag 09AE. -/
 theorem beta_evaluation [Finite B] {U' U X' X : Scheme.{u}}
     (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : a ≫ j = j' ≫ g)
@@ -1038,12 +1037,12 @@ theorem beta_evaluation [Finite B] {U' U X' X : Scheme.{u}}
 
 
 /-- The map of a proper/open commutative square into its canonical fibre product.
-Source: Stacks, Tag 0F7B and third proof step. -/
+Source: Stacks, Tag 0F7B. -/
 noncomputable abbrev squareLift {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) (h : k ≫ p = r ≫ i) := pullback.lift k r h
 
 /-- The induced lift is open and closed; no cartesian or identity-left assumption.
-Source: Stacks, Tags 01W6 and 01IQ, and third proof step. -/
+Source: Stacks, Tags 01W6 and 01IQ. -/
 theorem squareLift_clopen {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
@@ -1096,7 +1095,7 @@ noncomputable def openToR {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (towerDirectImage B j).rightDerivedFunctorIsoMapDerivedCategory.symm
 
 /-- For a clopen immersion the canonical open-to-direct-image comparison is invertible.
-Source: Stacks, Tag 09AE and fourth proof step. -/
+Source: Stacks, Tag 09AE. -/
 theorem openToR_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     [IsClosedImmersion j] : IsIso (openToR B j) := by
   let d := derivedClopenIso B j
@@ -1118,8 +1117,8 @@ theorem openToR_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     exact IsIso.comp_isIso' hu (IsIso.comp_isIso' hw (IsIso.id _))
   exact NatIso.isIso_of_isIso_app _
 
-/-- The intrinsic clopen component projection, with no arbitrary splitting choice.
-Source: Stacks, Tag 09AE and fourth proof step. -/
+/-- The intrinsic clopen component projection.
+Source: Stacks, Tag 09AE. -/
 noncomputable def pi {U X : Scheme.{u}} (s : U ⟶ X) [IsOpenImmersion s]
     [IsClosedImmersion s] : 𝟭 (Derived B X) ⟶ G B s ⋙ J B s :=
   (adj B s).unit ≫ Functor.whiskerLeft (G B s)

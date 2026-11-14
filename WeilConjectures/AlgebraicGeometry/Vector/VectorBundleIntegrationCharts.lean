@@ -177,14 +177,14 @@ open scoped CategoryTheory.Functor ZeroObject
 namespace AlgebraicGeometry.Etale
 
 /-- Reuse concrete sheafification on each Zariski slice when elaborating finite-rank
-module frames. This packages the existing Mathlib instance without a new assumption. -/
+module frames. -/
 instance vectorIntegrationZariskiWeakSheafify (S : Scheme.{u}) :
     ∀ V : S.Opens, HasWeakSheafify
       ((Opens.grothendieckTopology S).over V) AddCommGrpCat.{u} :=
   fun V ↦ sheafToPresheaf_isRightAdjoint ((Opens.grothendieckTopology S).over V)
     AddCommGrpCat.{u}
 
-/-- Reuse the existing local-bijection characterization of sheafification on each slice. -/
+/-- The local-bijection characterization of sheafification on each Zariski slice. -/
 instance vectorIntegrationZariskiLocallyBijective (S : Scheme.{u}) :
     ∀ V : S.Opens,
       ((Opens.grothendieckTopology S).over V).WEqualsLocallyBijective AddCommGrpCat.{u} :=
@@ -240,7 +240,7 @@ def vectorIntegrationBaseCoefficientPullback (A : Type (u + 1)) [CommRing A] (N 
 
 /-- A_E(d)[2d], written as inverse image of the existing ordered shifted Tate tensor.
 Each of the d factors is the concrete finite roots-of-unity Tate line shifted by two;
-the zero-fold tensor is the constant complex. This uses no additional twist definition. -/
+the zero-fold tensor is the constant complex. -/
 def vectorIntegrationCoefficient (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (S : Scheme.{u}) [IsNoetherian S] (d : ℕ)
     (F : SheafOfModules.{u} S.ringCatSheaf) [F.IsFiniteLocallyFreeOfRank d] :
@@ -248,8 +248,7 @@ def vectorIntegrationCoefficient (A : Type (u + 1)) [CommRing A] (N : ℕ)
   (ordinaryFinitePullback A (VectorBundleZeroSection.π S d F)).obj
     (affineLinearBaseCoefficient A N hA S d)
 
-/-- C_pi = R pi_! A_E(d)[2d], using the canonical chosen compactification. Nagata applies
-because the bundle is separated and finite type and the Noetherian base is qcqs. -/
+/-- C_pi = R pi_! A_E(d)[2d], using the canonical chosen compactification. -/
 def vectorIntegrationSource (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (S : Scheme.{u}) [IsNoetherian S] (d : ℕ)
     (F : SheafOfModules.{u} S.ringCatSheaf) [F.IsFiniteLocallyFreeOfRank d] :
@@ -269,7 +268,7 @@ def vectorIntegrationSheaf (A : Type (u + 1)) [CommRing A] (N : ℕ)
   (_root_.DerivedCategory.homologyFunctor _ 0).obj (vectorIntegrationSource A N hA S d F)
 
 /-- The inverse frame from the coordinate-tower affine space to the restricted bundle,
-followed by the actual open inclusion into E. No coordinate isomorphism is chosen. -/
+followed by the open inclusion into E. -/
 def vectorIntegrationChart (S : Scheme.{u}) [IsNoetherian S] (d : ℕ)
     (F : SheafOfModules.{u} S.ringCatSheaf) [F.IsFiniteLocallyFreeOfRank d] (V : S.Opens)
     (e : VectorBundleZeroSection.Trivialization S d F V) :
@@ -301,9 +300,7 @@ theorem vectorIntegrationChart_isPullback (S : Scheme.{u}) [IsNoetherian S] (d :
   simpa only [vectorIntegrationChart, Category.id_comp, Category.assoc] using
     hi.paste_horiz (isPullback_morphismRestrict (VectorBundleZeroSection.π S d F) V).flip
 
-/-- Canonical coefficient identification in the inverse-frame square. The equality of
-its two composites is used between the inverse-image composition comparisons; then the
-base Tate tensor is pulled back and the existing affine coefficient descent is inverted. -/
+/-- Canonical coefficient identification in the inverse-frame square. -/
 def vectorIntegrationChartCoefficient (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)

@@ -8,6 +8,11 @@ module
 public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassCoefficients
 
 /-! # Chern for canonical tower classes
+
+## Implementation details
+
+The normalization equations `ChernData.Normalized` are kept separate from the data record
+`ChernData` so that elaboration shares the already constructed categories.
 -/
 
 @[expose] public noncomputable section
@@ -57,8 +62,7 @@ abbrev Chern (T : Scheme.{u}) :=
   ChernData l T (Rrings l T) (Arings l E T) (coefficientSystemMap l E T)
 
 /-- Normalization of the integral quotient, positive Kummer boundary and unital scalar
-extension. These are concrete equalities of derived arrows, separated from the data
-record so that elaboration shares the already constructed categories. -/
+extension, as equalities of derived arrows. -/
 def ChernData.Normalized (T : Scheme.{u})
     (R A : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1})
     (φ : SemilinearSections.systemRing.{u + 1, u, u + 1} (Scheme.ProEt.topology T)
@@ -116,8 +120,8 @@ def lineComparison {T : Scheme.{u}} (c : Chern l E T) :
     (DerivedCategory.singleFunctorIsoCompQ (Systems T (Arings l E T)) 0).inv.app
       (lineModule l E c)
 
-/-- The inverse line is the internal sheaf Hom into the actual coefficient unit
-on the same ringed sequence site, not an unspecified inverse object. -/
+/-- The inverse line module: the internal sheaf Hom into the coefficient unit on the same
+ringed sequence site. -/
 def inverseLineModule {T : Scheme.{u}} (c : Chern l E T) : Systems T (Arings l E T) :=
   SheafOfModules.homObj (R := SemilinearSections.systemRing.{u + 1, u, u + 1}
     (Scheme.ProEt.topology T) (SpTowerShriek.B l E T) (SpTowerShriek.tau l E T))
@@ -128,9 +132,8 @@ def inverseLine {T : Scheme.{u}} (c : Chern l E T) : D T (Arings l E T) :=
   (DerivedCategory.singleFunctor (Systems T (Arings l E T)) 0).obj
     (inverseLineModule l E c)
 
-/-- The coefficient-linear first Chern morphism is the actual scalar extension
-of the integral reduction of the line-bundle class, followed by the universal
-K-flat target comparison. No free first-Chern arrow is part of the data. -/
+/-- The coefficient-linear first Chern morphism: the scalar extension of the integral
+reduction of the line-bundle class, followed by the universal K-flat target comparison. -/
 def firstChern {T : Scheme.{u}} (c : Chern l E T) (L : T.Pic) :
     unit T (Arings l E T) ⟶ (line l E c)⟦(2 : ℤ)⟧ :=
   c.scalarUnit.inv ≫ c.scalar.T.map (firstChernR l E c L) ≫

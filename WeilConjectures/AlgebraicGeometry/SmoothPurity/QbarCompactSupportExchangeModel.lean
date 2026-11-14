@@ -12,12 +12,19 @@ public import WeilConjectures.CategoryTheory.StageSystem.PbcQbarCategory
 /-!
 # Compact-support base change with algebraically closed l-adic coefficients
 
-Source: Weil conjectures six-functors basics/thm-cbc-qbar`, order 1992.
-
 The finite-stage endpoints are fixed by their composites with integral localization,
 and the exchange components by the specified completed compact-support exchange.
 The conclusion includes both the overfield representative and independence relative
 to an isomorphism from a representing pair to the fixed input object.
+
+## Implementation details
+
+In `CbcQbarExchangeModel`, `source` and `target` fix the rational functors on every integral
+object and map; localization then fixes them on every rational map. `normalized` fixes the
+exchange on every integral object, for every generating tuple of the adic ideal.
+`sourceBeta` and `targetBeta` fix both scalar comparisons by localization of the proper counit
+and open unit mates, and the completed pullback factors are fixed by `scalarPull.unit` and
+`scalarPull'.unit`.
 -/
 
 @[expose] public noncomputable section
@@ -44,9 +51,7 @@ def cbcScalarOrdinaryIso (l : ℕ) [Fact l.Prime]
       Functor.isoWhiskerRight (cbcDatumOrdinaryTransport (pbcIntegralDatum l E) g) _
 
 /-- A presentation of completed scalar/pullback comparison with its canonical unit
-normalization. Completion is a reflector and finite scalar extension preserves complete
-objects, so this equation determines the comparison uniquely. These are witnesses for
-that existing construction, with no choice from mere existence and no invertibility assumed. -/
+normalization. -/
 structure CbcCompletedScalarComparison (l : ℕ) [Fact l.Prime] (Ω : Type w)
     [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
     {U V : Scheme.{u}} (g : U ⟶ V) where
@@ -144,10 +149,8 @@ variable (l : ℕ) [Fact l.Prime] (Ω : Type w)
   [iY' : Fact (∀ y : Y', IsUnit (l : Y'.presheaf.stalk y))]
 
 /-- A scalar comparison is the localization of the specified ambient inverse map,
-conjugated by the integral/scalar and operation identifications. The existential
-witnesses are only membership proofs, so the specification is never conditional
-on extra constructibility assumptions or on a choice of coefficient comparison.
-Equal coefficient fields are included. -/
+conjugated by the integral/scalar and operation identifications, for all pairs of
+coefficient fields (including equal ones). -/
 def CbcScalarInverseBetaSpec
     (H : ∀ E : Padic.FiniteCoefficientFields l Ω,
       pbcAmbientStage l Ω X E ⥤ pbcAmbientStage l Ω Y' E)
@@ -184,17 +187,8 @@ def CbcScalarInverseBetaSpec
         ((pbcStageLocalization l Ω Y' F).map
           (ObjectProperty.homMk (X := ⟨_, hs⟩) (Y := ⟨_, ht⟩) (inverse h K.obj)))
 
-/-- Coherent descent data for the specified compact-support exchange. This is a
-presentation of the two composites, not an alternative coefficient category.
-`source` and `target` fix the rational functors on every integral object and map;
-localization then fixes them on every rational map. `normalized` fixes the exchange
-on every integral object, for every generating tuple of the adic ideal.
-`sourceBeta` and `targetBeta` fix both scalar comparisons by localization of the
-proper counit and open unit mates. The completed pullback factors are fixed by
-`scalarPull.unit` and `scalarPull'.unit`, retaining their quotient augmentations.
-The `CoherentExactMorphism` and `Hom` fields retain the associator, shift and
-exchange-compatibility equations required by the recorded descent proposition.
-No invertibility assumption is included. -/
+/-- Coherent descent data for the specified compact-support exchange. It presents the two
+composites with their localization, normalization and scalar-comparison equations. -/
 structure CbcQbarExchangeModel where
   scalarPull : CbcCompletedScalarComparison l Ω g
   scalarPull' : CbcCompletedScalarComparison l Ω g'

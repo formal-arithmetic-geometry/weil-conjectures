@@ -17,9 +17,9 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.I
 /-!
 # Localization for the ambient bounded-below exceptional inverse image
 
-The categories are all constant-coefficient module sheaves, as in
-`definition-local-cohomology`; there is no constructibility condition. The right derived
-functors below are the existing ordinary injective-derived functors on `D⁺`.
+The categories are all constant-coefficient module sheaves, as for local cohomology;
+there is no constructibility condition. The right derived functors below are the existing
+ordinary injective-derived functors on `D⁺`.
 -/
 
 @[expose] public section
@@ -107,8 +107,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
   [hs : IsClosedImmersion s] [hj : IsOpenImmersion j] [hqc : QuasiCompact j]
   (hPair : IsCompl (Set.range s) (Set.range j))
 
-/-- The termwise-induced closed direct image on D⁺, using its exactness, rather than
-an independently chosen functor. -/
+/-- The termwise-induced closed direct image on D⁺, using its exactness. -/
 noncomputable def supportClosedDerivedPlus :
     DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology Z) (ModuleCat.{u + 1} Λ)) ⥤
       DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) :=
@@ -144,7 +143,7 @@ theorem supportOpenModelKInjective (I : SupportComplex Λ X)
   exact CochainComplex.isKInjective_of_injective _ n
 
 /-- The canonical computation of Rs^! on the chosen model, normalized by the derived
-functor unit and by the bounded/unbounded comparison; no model isomorphism is chosen. -/
+functor unit and by the bounded/unbounded comparison. -/
 noncomputable def supportShriekModelComparison
     (I : SupportComplex Λ X) (hI : IsSupportInjectiveModel Λ I)
     (K : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)))

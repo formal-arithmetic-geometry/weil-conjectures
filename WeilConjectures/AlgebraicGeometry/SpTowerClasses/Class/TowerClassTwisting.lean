@@ -60,9 +60,8 @@ local instance coefficientSectionSMul {T : Scheme.{u}}
     SMul ((coefficient T (Arings l E T)).val.obj U) ((lineModule l E c).val.obj U) :=
   inferInstanceAs (SMul ((systemRing l E T).obj.obj U) ((lineModule l E c).val.obj U))
 
-/-- Line twisting is the actual tensor/Hom equivalence. The coevaluation and
- evaluation are fixed on local sections, including their signs. Neither an arbitrary
- equivalence nor a second, independently chosen inverse line occurs. -/
+/-- Line twisting is the tensor/Hom equivalence, with coevaluation and evaluation
+specified on local sections. -/
 structure Twisting {T : Scheme.{u}} (c : Chern l E T) where
   equivalence : Systems T (Arings l E T) ≌ Systems T (Arings l E T)
   forward : equivalence.functor = positive l E c
@@ -142,9 +141,8 @@ def Twisting.contract {T : Scheme.{u}} {c : Chern l E T} (t : Twisting l E c) :
     (Functor.mapDerivedCategoryIdIso (Systems T (Arings l E T))).app
       (unit T (Arings l E T))
 
-/-- Pullback of positive twisting is fixed before deriving: its adjoint sends a
-local pure tensor to the tensor of the two ordinary adjunction units. The second
-factor uses the normalized root/coefficient pullback, rather than a chosen scalar. -/
+/-- Pullback compatibility of positive twisting before deriving: its adjoint sends a
+local pure tensor to the tensor of the two ordinary adjunction units. -/
 structure PositivePullback {b : SpTowerShriek.Base l E} {X Y : Scheme.{u}}
     (f : X ⟶ Y) (g : SpTowerShriek.Geometry l E b f)
     {cY : Chern l E Y} {cX : Chern l E X}

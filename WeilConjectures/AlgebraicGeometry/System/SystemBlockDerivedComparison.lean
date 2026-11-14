@@ -155,9 +155,7 @@ import all WeilConjectures.AlgebraicGeometry.ModuleAbelianUnderivedExchange
 
 Source: Stacks Project, Tags 070I, 070Y, 08BJ and 09T5; Zheng Construction 4.1.
 
-This is the existing generic derived-comparison portion of SystemBlockRepetition,
-extracted after coefficient-transport abstraction to keep each file within the
-single-file compilation limit. All declarations and proofs retain their signatures.
+The generic derived comparisons of total right derived functors used for block repetition.
 -/
 
 @[expose] public noncomputable section
@@ -172,9 +170,8 @@ universe c v r u₁ u₂ u₃ u₄ v₁ v₂ v₃ v₄ w₁ w₂ w₃ w₄ u h w
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace WeilConjectures.SemilinearSections
 
--- Elementary mate identities, proved locally to avoid depending on the geometric
--- normalization node. These proofs are the existing private mate calculations
--- from SectionDerivedPushpullNormalization (SHEAF group N9).
+-- Elementary mate identities, proved locally; they repeat the private mate calculations
+-- from SectionDerivedPushpullNormalization.
 section DerivedComparison
 
 variable {X : Type u₁} {Y : Type u₂} {Xd : Type u₃} {Yd : Type u₄}
@@ -189,9 +186,8 @@ variable {X : Type u₁} {Y : Type u₂} {Xd : Type u₃} {Yd : Type u₄}
   [PreservesFiniteLimits RY] [PreservesFiniteColimits RY]
   [RX.PreservesKInjectiveComplexes]
 
-/-- The canonical comparison of total right derived functors, constructed from their
-universal properties. In the system application the supplied square is identity on
-sections, morphisms and transitions, so this is kappa_t of the node.
+/-- The canonical comparison of total right derived functors induced by a commuting square
+of the underived functors.
 Source: Zheng 4.1 and paragraph before 4.10; Stacks 070Y. -/
 def blockDerivedComparison (square : RX ⋙ GD ≅ G ⋙ RY) :
     RX.mapDerivedCategory ⋙ GD.rightDerivedFunctor ≅

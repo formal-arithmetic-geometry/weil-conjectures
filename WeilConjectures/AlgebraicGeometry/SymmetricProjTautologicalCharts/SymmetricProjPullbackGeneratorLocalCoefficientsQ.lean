@@ -29,12 +29,7 @@ attribute [local irreducible] Scheme.Modules.tensorPullback Scheme.Modules.tenso
 
 -- The fixed interface includes hypotheses used by the two-quotient comparison.
 set_option linter.unusedVariables false in
-/-- A local frame and coefficient formula for the first pulled quotient map.
-
-This is the local standard-open refinement and degree-one fraction calculation
-for `q`; the second quotient map is deliberately omitted. The proof is the
-corresponding first half of the chart argument in the cited Stacks tags.
--/
+/-- A local frame and coefficient formula for the first pulled quotient map `q`. -/
 theorem normalized_pullback_generator_local_coefficients_q
     {X S : Scheme.{u}} (g : X ⟶ S) (E : S.Modules) [E.IsQuasicoherent]
     [((Scheme.Modules.tensorPullback g).obj E).IsQuasicoherent]

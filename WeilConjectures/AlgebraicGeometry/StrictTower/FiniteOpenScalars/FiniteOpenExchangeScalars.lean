@@ -17,7 +17,7 @@ import all WeilConjectures.AlgebraicGeometry.Ordinary.OrdinaryRestrictionPullbac
 
 Source: Stacks Project, Tag 03DI, direct-sum adjunction construction.
 
-We use the recorded constant-ring module coordinates and the recorded inverse open-unit
+The constructions use the constant-ring module coordinates and the inverse open-unit
 transpose. All complex functors below are termwise, before derived localization.
 -/
 

@@ -34,8 +34,7 @@ Source: Stacks Project, Tags 098T, 099R, 00WX and 0B65.
 
 The auxiliary interfaces extend the existing Kan-extension constructions to sets as
 well as abelian groups and finite fixed-ring modules. Every comparison is the mate
-of the canonical base-change isomorphism on restriction functors. No arbitrary
-isomorphism is selected.
+of the canonical base-change isomorphism on restriction functors.
 -/
 
 @[expose] public section
@@ -188,12 +187,8 @@ noncomputable def supportSiteComparisonCoefficientPullbackIso {X Y : Scheme.{u}}
       (supportSiteProEtaleComparisonAdjunction D f))).symm
       (supportSiteComparisonCoefficientDirectImageIso D f).symm).symm
 
-/-- The identity, composition and chosen Cartesian-square equations for the
-canonical comparison. This reuses `ComparisonPullbackCoherent`: the support-site
-comparison maps above are definitionally the same canonical maps. Equations are
-componentwise on every sheaf, equivalently
-equalities of natural transformations. The square is the specified one, including
-its commutativity transport; it is not replaced by an arbitrary isomorphism.
+/-- The identity, composition and chosen Cartesian-square equations for the canonical
+support-site comparison, as equalities of natural transformations.
 Source: Stacks, Tags 00WX and 0B65. -/
 abbrev supportSiteComparisonPullbackCoherent : Prop :=
   ComparisonPullbackCoherent D

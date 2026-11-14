@@ -90,9 +90,9 @@ private theorem transpose_conjugate
   simp only [Iso.inv_hom_id_app, Category.comp_id]
 
 /-- Factoring the source open through another open inserts precisely its open
-adjunction counit in the inverse comparison. This requires neither properness nor
-cartesianness and concerns the specified transformations on the full derived category.
-Source: Stacks 03DI, 07A7 and 0F7B, the open-factorization calculation. -/
+adjunction counit in the inverse comparison, as transformations on the full derived
+category; no properness or cartesianness is assumed.
+Source: Stacks 03DI, 07A7 and 0F7B. -/
 theorem betaInv_source_factorization {V P W S T : Scheme.{u}}
     (s : V ⟶ P) (b : P ⟶ W) (q : P ⟶ S)
     (k : V ⟶ W) (r : V ⟶ S) (i : S ⟶ T) (p : W ⟶ T)

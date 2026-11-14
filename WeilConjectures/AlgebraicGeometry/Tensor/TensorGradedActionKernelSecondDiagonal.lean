@@ -30,8 +30,7 @@ noncomputable section
 canonical transported tensor-by-x map followed by the output inclusion.
 This statement concerns one summand only, before applying any degree projection.
 
-Source: Stacks Project, Tag 09MS, coherent-equation-ses and its direct sum; Tag 0B8S,
-cohomology-lemma-boundary-derivation-over-cup-product, first proof paragraph. -/
+Source: Stacks Project, Tag 09MS, the ideal short exact sequence and its direct sum; Tag 0B8S. -/
 theorem tensorGradedAction_kernel_second_diagonal {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)
     (n : ℕ) (T : TensorGradedPresentation j L) (D : TensorBoundaryComparisonData j L n)

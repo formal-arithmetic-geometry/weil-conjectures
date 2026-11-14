@@ -28,8 +28,7 @@ attribute [local irreducible] RingedSpace.moduleCohomology
   canonicalTensorBoundaryComparisons
 
 /-- The degreewise canonical boundaries, transported through the kernel and closed-immersion
-cohomology comparisons, satisfy the two-term Leibniz recurrence. This asserts only the
-recurrence; the closed power formula requires a separate induction.
+cohomology comparisons, satisfy the two-term Leibniz recurrence.
 
 Source: Stacks Project, Tag 09MS, equation (30.17.5.1) and the direct-sum exact sequence following
 it; Tag 0B8S, the Leibniz calculation for the connecting map. -/

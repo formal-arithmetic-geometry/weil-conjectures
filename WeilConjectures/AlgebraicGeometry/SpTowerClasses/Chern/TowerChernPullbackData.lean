@@ -9,6 +9,12 @@ public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassC
 public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Integral.TowerIntegralClassPullback
 
 /-! # The intermediate integral-coefficient inverse image
+
+## Implementation details
+
+The root comparison of `IntegralCoefficientPullback` is part of a morphism of the Kummer
+sequences whose last component is the pullback of units, so it cannot be chosen independently
+of the Kummer boundary.
 -/
 
 @[expose] public noncomputable section
@@ -28,11 +34,9 @@ namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The intermediate inverse image on the actual Z/ell-power module systems.
-The forgetful square is on whole abelian towers. Its unit is fixed by the integral
-generator, and its root comparison is part of a morphism of the actual Kummer
-sequences whose last component is pullback of full units. Thus a root comparison
-cannot be chosen independently of that boundary. -/
+/-- The intermediate inverse image on the `Z/l^n`-module systems, together with a comparison
+with the abelian pullback, normalized at the integral generator and compatible with the
+Kummer sequences. -/
 structure IntegralCoefficientPullback {X Y : Scheme.{u}} (f : X ⟶ Y)
     (cY : Chern l E Y) (cX : Chern l E X) where
   pull : Systems Y (Rrings l Y) ⥤ Systems X (Rrings l X)

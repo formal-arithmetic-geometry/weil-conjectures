@@ -191,7 +191,7 @@ private theorem geometry_evaluation_transport (b : Base l E)
     hs p q pg qg hp hq hdA' hu hc
 
 /-- The concrete section-model comparisons preserve the derived adjunction unit
-and counit. This involves no tensor, compactification, or constructibility test. -/
+and counit. -/
 theorem geometry_adjunction_evaluation (b : Base l E)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (g : Geometry l E b f) (n : ℕ) :
     (∀ M : D l E Y,

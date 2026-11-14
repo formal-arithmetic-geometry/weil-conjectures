@@ -165,11 +165,9 @@ import all WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedProperOpenCompos
 
 Source: Stacks Project, Tags 0F7H--0F7L and 0F7B, case (b).
 
-The candidates, common-refinement comparisons, and proper/open tower isomorphism are the
-existing ordinary etale constructions. The definitions below assemble the specified tower
-composition and transport the existing exchange to exact, termwise inverse image. The
-statements supply coherence and equality with the bounded-below maps, on actual natural
-transformations rather than just existence of unrelated isomorphisms.
+The tower composition of the ordinary étale compact-support comparisons and the transport of
+the exchange to exact, termwise inverse image, with their coherence and equality with the
+bounded-below maps.
 -/
 
 @[expose] public section
@@ -1081,8 +1079,6 @@ end UnboundedFormalism
 attribute [local instance] unbounded_has_base_change unbounded_has_proper_exchange
 
 /-- The graph-normalized comparison for the coarser open of a proper refinement.
-The two Noetherian structures on the ambient are consequences of properness over the
-Noetherian target, supplied explicitly rather than added as hypotheses.
 Source: Stacks Project, Tags 0F7I and 0F7B. -/
 noncomputable def unboundedEtaleRefinementOpenComparison
     (A : Type (u + 1)) [CommRing A]
@@ -1354,9 +1350,9 @@ private lemma identity_exchange_of_pasting
     d.hom.app (F.obj K) ≫ 𝟙 _
   simpa only [Category.comp_id] using hcd
 
-/-- The chosen-compactification exchange with exact inverse images. This extends the
-existing `exactCompactSupportExchange` from the chosen fibre product to an arbitrary
-specified cartesian square, using exactly the same canonical exact-functor transport.
+/-- The chosen-compactification exchange with exact inverse images, extending
+`exactCompactSupportExchange` from the chosen fibre product to an arbitrary specified
+cartesian square.
 Source: Stacks Project, Tag 0F7L. -/
 noncomputable def unboundedEtaleCompactSupportExchange
     (A : Type (u + 1)) [CommRing A]
@@ -1446,7 +1442,7 @@ theorem unboundedEtaleCompactSupport_tower_adjunct
 
 set_option backward.isDefEq.respectTransparency false in
 /-- `AlgebraicGeometry.Etale.unboundedEtaleCompactSupport_exchange_normalization` without the
-noetherianity and finiteness hypotheses, which its proof does not use. -/
+noetherianity and finiteness hypotheses. -/
 private theorem exchange_normalization_general
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X X' Y Y' : Scheme.{u}}

@@ -82,8 +82,7 @@ def pullWord (b : SpTowerShriek.Base l E) {X Y : Scheme.{u}} {f : X ⟶ Y}
     (proEtaleConstantRingDerivedPullback (SpTowerShriek.R l E n) f).map K.comparison ≫
     (g.pullEvaluation n).inv.app K.tower
 
-/-- Direct-image word, through the fixed canonical site mate and pushEvaluation.
-Its comparison is defined even before its bounded-domain invertibility is proved. -/
+/-- Direct-image word, through the fixed canonical site mate and pushEvaluation. -/
 def pushWord (b : SpTowerShriek.Base l E) {X Y : Scheme.{u}} {f : X ⟶ Y}
     (g : SpTowerShriek.Geometry l E b f) (c : GeometricCoordinates l E n f)
     (K : LevelWord l E n X) : LevelWord l E n Y where
@@ -113,8 +112,7 @@ def tensorWord (b : SpTowerShriek.Base l E) {T : Scheme.{u}}
     ((b.calculus T).tensorEvaluation n).inv.app (K.tower, L.tower)
 
 /-- Equality of the actual evaluated map with nu-star of its etale word, with the
-canonical endpoint comparisons invertible. This is a commuting square of arrows,
-not a repetition of an input geometry field. -/
+canonical endpoint comparisons invertible. -/
 def WordComparison {T : Scheme.{u}} (K L : LevelWord l E n T)
     (f : K.tower ⟶ L.tower) (g : K.etale ⟶ L.etale) : Prop :=
   IsIso K.comparison ∧ IsIso L.comparison ∧

@@ -250,8 +250,7 @@ private theorem comparison_of_normalized_sections {P X Y : Scheme.{u}}
   refine (congrArg (fun s ↦ qU.app O (sectionAt jU L WU O le_rfl s)) hs.symm).trans ?_
   exact (congrArg (qU.app O) (sectionAt_self jU L WU sU)).trans hgU
 
-/-- A normalized generator equation, stated over arbitrary schemes so that specialization
-keeps the pushforward section types abstract. -/
+/-- A normalized generator equation, stated over arbitrary schemes. -/
 private def moduleSectionEquation {S P X : Scheme.{u}} (p : P ⟶ S) (j : X ⟶ P)
     (E : S.Modules) (L : P.Modules) (N : X.Modules)
     (σ : E ⟶ (pushforward p).obj L)

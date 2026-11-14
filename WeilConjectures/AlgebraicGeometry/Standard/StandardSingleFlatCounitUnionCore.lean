@@ -17,8 +17,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- The Mayer--Vietoris construction supplies the bounded flat complex and its
-base direct-image identification. This is the construction part of the
-relative Mayer--Vietoris gluing argument (Stacks Project, Tag 0DJ9). -/
+base direct-image identification.
+Source: Stacks Project, Tag 0DJ9. -/
 theorem standardSingleFlatCounitUnionCore
     {Y B A : Scheme.{u}} (p : Y ⟶ B) [QuasiCompact p] [QuasiSeparated p]
     [IsAffine B] [IsAffine A] (g : A ⟶ B) (U V : Y.Opens)

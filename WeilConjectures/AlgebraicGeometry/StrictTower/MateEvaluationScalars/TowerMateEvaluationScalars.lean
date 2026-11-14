@@ -21,7 +21,7 @@ import all WeilConjectures.AlgebraicGeometry.StrictTower.FiniteConstantCoefficie
 /-! # Evaluation and scalar restriction of the clopen proper/open mate
 
 Source: Stacks Project, sites-cohomology.tex, Tags 07A7 and 0D6E; sites-modules.tex, Tags 03DI and
-03DJ, and the strict-tower refinement.
+03DJ.
 
 The single-level arrow is the exact descent of the existing ordinary clopen arrow.
 All comparison maps are constructed from the specified adjunctions. Index `n` means

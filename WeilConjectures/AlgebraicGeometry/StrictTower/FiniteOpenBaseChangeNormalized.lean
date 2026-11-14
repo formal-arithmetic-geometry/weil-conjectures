@@ -14,8 +14,7 @@ import WeilConjectures.SixFunctors.ProEtale.BaseChange.WeaklyEtale
 /-!
 # Normalized finite constant-coefficient open base change
 
-Source: Stacks Project, Tags 0F7B, 0F7C, 0F7D, 0F7F, 07A7 and 09AE, and the explicit strict-tower
-refinement in the blueprint.
+Source: Stacks Project, Tags 0F7B, 0F7C, 0F7D, 0F7F, 07A7 and 09AE.
 
 The index `n : ℕ` denotes positive level `n+1`. All derived categories below localize
 complexes of strict towers, rather than forming towers in separate derived categories.
@@ -283,8 +282,8 @@ theorem singleBetaInv_isIso [Finite B] {U' U X' X : Scheme.{u}}
     infer_instance
   exact NatIso.isIso_of_isIso_app _
 
-/-- The existing finite open-base-change comparison, in constant-ring module coordinates.
-Its inverse has the prescribed open-unit transpose; no new map is chosen.
+/-- The finite open-base-change comparison, in constant-ring module coordinates.
+Its inverse has the prescribed open-unit transpose.
 Source: Stacks, Tag 09AE. -/
 noncomputable def singleBeta [Finite B] {U' U X' X : Scheme.{u}}
     (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)

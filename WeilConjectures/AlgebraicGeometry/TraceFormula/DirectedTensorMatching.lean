@@ -195,7 +195,7 @@ def tensorMatchingDiagram : MulticospanIndex (tensorMatchingShape 𝒰) X.Module
     (𝒰.f a.val.1) (𝒰.trans_map a.property.some) (M a.val.2) (M a.val.1)
     (t a.property.some).hom
 
-/-- The actual module of matching sections, built by limits, without an existence theorem. -/
+/-- The module of matching sections, as a multiequalizer. -/
 def tensorMatchingModule : X.Modules := multiequalizer (tensorMatchingDiagram 𝒰 M t)
 
 /-- Projection of a matching family to a chart, before adjunction. -/

@@ -72,8 +72,7 @@ import Mathlib.CategoryTheory.Monoidal.Preadditive
 
 /-! # The periodic resolution for an exact square-zero divisor
 
-Source: Weil conjectures, chap-The-pro-etale-site.proof.md, "The examples", periodic resolution;
-Stacks Project, Tags 064K, 06YQ, 093J and 03CY.
+Source: Stacks Project, Tags 064K, 06YQ, 093J and 03CY.
 
 ## Main statements
 

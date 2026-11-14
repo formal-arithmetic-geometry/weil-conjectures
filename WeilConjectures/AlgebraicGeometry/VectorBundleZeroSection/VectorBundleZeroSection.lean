@@ -380,7 +380,7 @@ theorem affineChart_spec (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modu
   exact ⟨hi, heq.1, heq.2⟩
 
 /-- On an inclusion of affine opens, the chart change is the spectrum of the
-symmetric-algebra restriction, so these are exactly the affine pieces glued in the node.
+symmetric-algebra restriction.
 Source: Stacks Tag 01LX. -/
 theorem affineChart_naturality (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modules)
     [F.IsFiniteLocallyFreeOfRank d] (U V : S.affineOpens) (h : U.1 ≤ V.1) :
@@ -812,7 +812,7 @@ private theorem isIso_of_affineSpace_charts {T X : Scheme.{u}} (I : Type u)
   infer_instance
 
 /-- The frame induces an affine-space isomorphism over V with the zero section at the origin.
-Source: blueprint order 1968 and Stacks Tag 01M2. -/
+Source: Stacks Tag 01M2. -/
 theorem trivializationMap_spec (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modules)
     [F.IsFiniteLocallyFreeOfRank d] (V : S.Opens) (e : Trivialization S d F V) :
     IsIso (trivializationMap S d F V e) ∧

@@ -609,7 +609,7 @@ private theorem ordinaryRealization_jointlyFaithful {X : Scheme.{u}}
   exact congrArg (fun a ↦ a.val.app (op U.unop.2) x) (he U.unop.1)
 
 /-- Intrinsic moduleAlpha agrees with vertical pasting on every input.
-Source: Stacks, Tag 0F7C and fifth proof step. -/
+Source: Stacks, Tag 0F7C -/
 theorem moduleAlpha_vertical {A C E B₀ D F : Scheme.{u}}
     (k : A ⟶ B₀) (i : C ⟶ D) (j : E ⟶ F)
     (r₁ : A ⟶ C) (r₂ : C ⟶ E) (p₁ : B₀ ⟶ D) (p₂ : D ⟶ F)
@@ -652,7 +652,7 @@ theorem moduleAlpha_vertical {A C E B₀ D F : Scheme.{u}}
     (StrictTower.alpha_vertical (R n) k i j r₁ r₂ p₁ p₂ h₁ h₂ h) N
 
 /-- Intrinsic moduleAlpha agrees with horizontal pasting on every input.
-Source: Stacks, Tag 0F7D and fifth proof step. -/
+Source: Stacks, Tag 0F7D -/
 theorem moduleAlpha_horizontal {A C E B₀ D F : Scheme.{u}}
     (k : A ⟶ B₀) (l : B₀ ⟶ E) (i : C ⟶ D) (j : D ⟶ F)
     (r : A ⟶ C) (p : B₀ ⟶ D) (q : E ⟶ F)
@@ -697,7 +697,7 @@ theorem moduleAlpha_horizontal {A C E B₀ D F : Scheme.{u}}
 end OrdinaryPastingProofs
 
 /-- Intrinsic alpha agrees with vertical pasting on every input.
-Source: Stacks, Tag 0F7C and fifth proof step. -/
+Source: Stacks, Tag 0F7C -/
 theorem alpha_vertical {A C E B₀ D F : Scheme.{u}}
     (k : A ⟶ B₀) (i : C ⟶ D) (j : E ⟶ F)
     (r₁ : A ⟶ C) (r₂ : C ⟶ E) (p₁ : B₀ ⟶ D) (p₂ : D ⟶ F)
@@ -722,7 +722,7 @@ theorem alpha_vertical {A C E B₀ D F : Scheme.{u}}
       (fun X ↦ moduleAlpha_vertical R φ k i j r₁ r₂ p₁ p₂ h₁ h₂ h X) N
 
 /-- Intrinsic alpha agrees with horizontal pasting on every input.
-Source: Stacks, Tag 0F7D and fifth proof step. -/
+Source: Stacks, Tag 0F7D -/
 theorem alpha_horizontal {A C E B₀ D F : Scheme.{u}}
     (k : A ⟶ B₀) (l : B₀ ⟶ E) (i : C ⟶ D) (j : D ⟶ F)
     (r : A ⟶ C) (p : B₀ ⟶ D) (q : E ⟶ F)
@@ -747,39 +747,7 @@ theorem alpha_horizontal {A C E B₀ D F : Scheme.{u}}
       (fun X ↦ moduleAlpha_horizontal R φ k l i j r p q h₁ h₂ h X) N
 
 /-- Both normalized proper/open mate-pasting laws, as system transformations.
-Source: Stacks 0F7C, 0F7D and the varying-ring extension of the local-pairs argument.
-Proof (the node's eleven steps):
-1. Apply the constant-ring geometric calculus, with ring Z, to obtain the clopen
-   lift s=(k,r) into W ×_T S and its complementary open, without cartesianness.
-2. Inverse image and direct-sum extension act on the same underlying abelian
-   sheaves after restriction along φ. A semilinear transition sends [a,x] to
-   [a,t(x)], with t(cx)=φ(c)t(x); exactness is componentwise.
-3. Cartesian open comparison preserves the lift label under the fibre-product
-   bijection. It is the inverse open-unit transpose moduleBeta. Both routes past
-   a transition therefore send a generator to [a',t(x)]. Sheafify this equality.
-4. On the two clopen components the projection is (x,y) ↦ (x,0). It commutes with
-   every semilinear transition, restriction and differential. This is modulePi;
-   composition with moduleBeta and the compositors gives moduleAlpha.
-5. Inverse-image composition identifies iterated pullbacks, and open composition
-   combines lift labels without changing sections. The section-normalized
-   direct-image compositor and its conjugate fix these comparisons and units.
-6. Vertically, the projections retain nested components. On the final retained
-   component both composites are identity, and on every other component one
-   projection is zero. Sheaf uniqueness proves moduleAlpha_vertical.
-7. Horizontally the projections select l(W) and then lk(V) inside it. The same
-   identity/zero calculation and the open compositor give moduleAlpha_horizontal.
-8. Apply the simultaneous ordinary-derived section model. Localize these actual
-   degreewise maps of systems, obtaining alpha and its two pasting equations.
-   Equalities are not inferred from evaluation of arbitrary derived morphisms.
-9. Take the proper-adjunction mate. Its definition is precisely eta_p, alpha
-   whiskered by Rr, and Rp(k! epsilon_r), with the specified order.
-10. mateEquiv_hcomp applied to Step 6 proves the first displayed law, and
-    mateEquiv_vcomp applied to Step 7 proves the second. Conjugate comparisons
-    transport from composite adjunctions to the intrinsic proper compositors.
-11. Identity lift labels and projections give the identity mate via the triangle
-    laws. Evaluation preserves the constructed maps, units and counits, so the
-    evaluated mate is the arbitrary constant-R_n clopen-projection mate. This
-    uses neither finite-coefficient invertibility nor faithfulness of evaluation. -/
+Source: Stacks 0F7C and 0F7D. -/
 theorem properOpenPasting :
     (∀ {A C E B₀ D F : Scheme.{u}}
       (k : A ⟶ B₀) (i : C ⟶ D) (j : E ⟶ F)
@@ -1288,7 +1256,7 @@ theorem alpha_identities :
     exact alpha_second R φ p h M
 
 /-- Identity normalizations of gamma in both directions.
-Source: Stacks, Tags 0F7B and 07A7, steps 6 and 10. -/
+Source: Stacks, Tags 0F7B and 07A7. -/
 theorem gamma_identities :
     (∀ {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
       (h : j ≫ (𝟙 X) = (𝟙 U) ≫ j) (M : Derived R φ U),

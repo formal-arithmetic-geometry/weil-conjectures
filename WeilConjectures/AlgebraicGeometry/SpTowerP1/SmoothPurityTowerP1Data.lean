@@ -272,7 +272,7 @@ def rightRestricted {p : Presentation l E S hS} (d : Maps l E p) :
   ObjectProperty.lift _ ((domain l E p.classes.base S).ι ⋙ p.G l E) d.pull_closed
 
 /-- The exact displayed counit: inverse projection, symmetry, identity tensor trace,
-and the scalar-multiplication unitor. No arbitrary counit is selected. -/
+and the scalar-multiplication unitor. -/
 def epsilon {p : Presentation l E S hS} (d : Maps l E p)
     (K : C l E p.classes.base S) : (p.F l E).obj ((p.G l E).obj K.obj) ⟶ K.obj :=
   (p.F l E).map
@@ -336,7 +336,7 @@ def evaluation (b : SpTowerShriek.Base l E) (T : Scheme.{u}) (n : ℕ) :
       ⟨(Classical.choice (K.property.2 n)).realization⟩⟩)
 
 /-- Preservation of the finite domains, with the tensor/pullback evaluation specified
-componentwise by the recorded canonical comparisons. No free comparison map is used. -/
+componentwise by the recorded canonical comparisons. -/
 structure FiniteMaps (p : Presentation l E S hS) (n : ℕ) where
   push_closed : ∀ M : (finiteDomain l E (ProjectiveLine S) n).FullSubcategory,
     finiteDomain l E S n ((finiteF l E S n).obj M.obj)
@@ -363,8 +363,7 @@ def finiteLeft {p : Presentation l E S hS} {n : ℕ} (d : FiniteMaps l E p n) :=
 def finiteRight {p : Presentation l E S hS} {n : ℕ} (d : FiniteMaps l E p n) :=
   ObjectProperty.lift _ ((finiteDomain l E S n).ι ⋙ finiteG l E p n) d.pull_closed
 
-/-- Uniformly bounded constructible finite-Tor towers in the system coordinates.
-This is only transport of the recorded predicate, not a second definition of Dctf. -/
+/-- Uniformly bounded constructible finite-Tor towers in the system coordinates. -/
 def uniform (b : SpTowerShriek.Base l E) (T : Scheme.{u})
     (a : SpCoefficientTowersAbelian l E T) : ObjectProperty (SpTowerShriek.D l E T) :=
   fun K ↦ spConstructibleTorTowers l E T a

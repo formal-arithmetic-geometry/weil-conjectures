@@ -11,10 +11,8 @@ public import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearDerivedSect
 
 Source: Zheng, Construction 4.1 and its finite-block reindexing generalization.
 
-The existing block constructions, their ring identifications and ordinary
-composition, identity and coefficient coherence are extracted from
-SystemBlockRepetition to keep each file within the single-file compilation limit.
-Their public signatures, definition bodies and global attributes are retained.
+The block constructions, their ring identifications and ordinary composition,
+identity and coefficient coherence.
 -/
 
 @[expose] public noncomputable section

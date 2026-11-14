@@ -101,8 +101,7 @@ instance (priority := 4000) spReconstructionSiteSmall : EssentiallySmall.{u + 1}
   essentiallySmallSelf.{0, u, u + 1} _
 
 /-- The fixed-universe abelian structure used by the reconstruction interface.
-This specializes the ordinary module-sheaf structure without leaving the coefficient
-universe undetermined. Source: Stacks, Modules on Sites. -/
+Source: Stacks, Modules on Sites. -/
 instance (priority := 3000) spReconstructionModulesAbelian
     (R : Sheaf (Scheme.ProEt.topology T) RingCat.{u + 1}) :
     Abelian (SheafOfModules.{u + 1} R) := SheafOfModules.instAbelian R
@@ -213,8 +212,7 @@ theorem spCompletedTransition_existsUnique (n : ℕ) :
     ext M U x
     exact hσ M U x
 
-/-- The original transition with its restricted scalar action, selected only from
-its sectionwise unique characterization. -/
+/-- The original transition with its restricted scalar action. -/
 def spCompletedTransition (n : ℕ) :
     spCompletedEvaluation l E T D (n + 1) ⟶ spCompletedEvaluation l E T D n :=
   (spCompletedTransition_existsUnique l E T D n).exists.choose

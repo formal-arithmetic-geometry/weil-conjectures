@@ -122,8 +122,6 @@ public import Mathlib.RingTheory.Ideal.Quotient.Index
 public import WeilConjectures.ConstructibleSheaf.Defs
 /-! # Canonical data for the normalized stratum Hom comparison
 
-Source: Weil latest/sk-lem-sp-tower.proof.md, second paragraph.
-
 The two natural isomorphisms are specified by their inverse evaluation transposes.
 The ordinary direct-image comparison below is literally the recorded bounded-below
 mate, transported into the unbounded category by the canonical compatibility maps.

@@ -15,8 +15,7 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 /-!
 # Intrinsic proper/open arrows for varying rings
 
-Source: Stacks Project, Tags 0F7B, 03DI and 09AE, and the explicit lift/projection construction in
-the blueprint.
+Source: Stacks Project, Tags 0F7B, 03DI and 09AE.
 
 All intrinsic maps are first constructed on module systems, then localized termwise.
 Their derived proper/open comparison is the specified ordinary adjunction mate.
@@ -231,7 +230,7 @@ private theorem ordinary_open_image {U X : Scheme.{u}} (j : U ⟶ X)
     (DerivedCategory.singleFunctorCompHomologyFunctorIso (Modules R φ X) 0).app _⟩
 
 /-- The unit-normalized comparison is invertible for a cartesian open square and
-arbitrary rings. Source: Stacks, Tag 09AE and second proof step. -/
+arbitrary rings. Source: Stacks, Tag 09AE -/
 theorem moduleBetaInv_isIso {U' U X' X : Scheme.{u}}
     (gU : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : gU ≫ j = j' ≫ g)
@@ -377,7 +376,7 @@ private theorem ordinary_clopen_iso {U X : Scheme.{u}} (j : U ⟶ X)
       (Functor.isoWhiskerRight e H) ≪≫ h⟩
 
 /-- For a clopen immersion the canonical open-to-direct-image comparison is invertible.
-Source: Stacks, Tag 09AE and fourth proof step. -/
+Source: Stacks, Tag 09AE -/
 theorem moduleOpenToP_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     [IsClosedImmersion j] : IsIso (moduleOpenToP R φ j) := by
   obtain ⟨e⟩ := ordinary_clopen_iso R φ j
@@ -395,13 +394,13 @@ theorem moduleOpenToP_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
   exact NatIso.isIso_of_isIso_app _
 
 /-- The intrinsic clopen component projection, with no arbitrary splitting choice.
-Source: Stacks, Tag 09AE and fourth proof step. -/
+Source: Stacks, Tag 09AE -/
 noncomputable def modulePi {U X : Scheme.{u}} (s : U ⟶ X) [IsOpenImmersion s]
     [IsClosedImmersion s] : 𝟭 (Modules R φ X) ⟶ pull R φ s ⋙ extension R φ s :=
   (moduleAdj R φ s).unit ≫ Functor.whiskerLeft (pull R φ s)
     (@inv _ _ _ _ (moduleOpenToP R φ s) (moduleOpenToP_isIso R φ s))
 
-/-- Equality transport for open extension, independent of proof-irrelevant instances.
+/-- Equality transport for open extension.
 Source: Stacks 03DI. -/
 theorem moduleJ_congr {U X : Scheme.{u}} {f g : U ⟶ X}
     [IsOpenImmersion f] [IsOpenImmersion g] (h : f = g) :

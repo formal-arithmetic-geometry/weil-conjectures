@@ -47,16 +47,9 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.SmoothSectionCentredCoordinates
 
 /-- One centred affine chart, with the algebra and monomial conclusions, for the section.
-Here `T` and `U` are affine opens of the original schemes. The containment `mapsInto`
-identifies `U` with an open in the base change to `T`, and `sectionPreimage` says that
-its intersection with the section is exactly `T`. The Cartesian zero square specifies
-the scheme-theoretic zero fibre. The coordinate ring map is polynomial evaluation in
-the actual pullbacks of the standard affine-space coordinates.
-
-The conormal basis lives on `s ⁻¹ᵁ U`, which is the very same open as `T`. Products of its
-images under the symmetric-algebra inclusion are sent by the canonical comparison to
-the classes of the coordinate monomials. Those classes are sections of the fixed
-degree pieces, so the formulas commute with restrictions, including on overlaps.
+Here `T` and `U` are affine opens of the original schemes, `U` lies in the base change to
+`T` and meets the section exactly in `T`, and the conormal basis on `s ⁻¹ᵁ U` is sent by the
+canonical comparison to the classes of the coordinate monomials.
 Source: Stacks Tags 054L, 024T, 00LN, 0631--0633. -/
 structure Chart {V S : Scheme.{u}} (d : ℕ) (g : V ⟶ S)
     (s : S ⟶ V) [IsClosedImmersion s] where

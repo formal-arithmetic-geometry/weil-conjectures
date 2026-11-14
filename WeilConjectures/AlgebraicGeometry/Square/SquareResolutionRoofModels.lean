@@ -54,7 +54,7 @@ variable [∀ Y : Scheme.{u},
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- Local hypercohomology of a direct image, computed on the fixed injective resolution
-upstairs. This involves no restricted resolution or classical cohomology.
+upstairs.
 Source: Stacks Project, Tag 0D5X. -/
 @[irreducible] def squareInjectiveLocalComparison {X Y : Scheme.{u}} (f : X ⟶ Y)
     (F : X.Modules) (q : ℕ) (V : Y.Opens) (I : InjectiveResolution F)
@@ -120,7 +120,7 @@ attribute [local implicit_reducible] Scheme.Modules Scheme.Modules.Hom
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- The published comparison is the classical section comparison followed by the
+/-- The resolution comparison is the classical section comparison followed by the
 comparison computing total direct image on the same injective complex.
 Source: Stacks Project, Tags 01E4 and 0D5X. -/
 theorem squareLocalResolutionComparison_factor {X Y : Scheme.{u}} (f : X ⟶ Y)

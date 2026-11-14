@@ -14,7 +14,7 @@ import WeilConjectures.AlgebraicGeometry.ClosedImmersionUnitEpi
 
 /-! # Exactness and degree projections for a graded quotient
 
-Source: Stacks Project, Tag 09MS, direct sum of coherent-equation-ses.
+Source: Stacks Project, Tag 09MS, direct sum of the ideal short exact sequence.
 -/
 
 @[expose] public section
@@ -81,8 +81,7 @@ private def kernelCofan {C : Type u} [Category C] [Abelian C]
   exact (hv d).trans (kernel.lift_ι _ _ _).symm
 
 /-- The canonical kernel sequence of a graded algebra quotient, with its degree maps.
-The kernel object and its inclusion are fixed, rather than selected from existence.
-Source: Stacks Project, Tag 09MS, direct sum of coherent-equation-ses. -/
+Source: Stacks Project, Tag 09MS, direct sum of the ideal short exact sequence. -/
 structure TensorGradedDegreeData {X Z : Scheme.{u}} (j : Z ⟶ X)
     (L : X.Modules) (A : TensorGradedAlgebraData j L) where
   shortExact : (ShortComplex.kernelSequence (tensorGradedAlgebraMap A.p)).ShortExact
@@ -101,8 +100,8 @@ structure TensorGradedDegreeData {X Z : Scheme.{u}} (j : Z ⟶ X)
   k_orthogonal : ∀ a d : ℕ, a ≠ d → k a ≫ (degree d).τ₁ = 0
 
 /-- Exact coproducts supply the kernel direct sum and all degree projections.
-Source: Stacks Project, Tag 09MS, coherent-equation-ses and its direct sum; Tag 04CJ (1), the
-closed-immersion module quotient. -/
+Source: Stacks Project, Tag 09MS, the ideal short exact sequence and its direct sum;
+Tag 04CJ (1), the closed-immersion module quotient. -/
 theorem tensorGradedDegreeData_exists {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) (A : TensorGradedAlgebraData j L) :
     Nonempty (TensorGradedDegreeData j L A) := by

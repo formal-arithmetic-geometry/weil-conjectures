@@ -782,35 +782,7 @@ set_option backward.isDefEq.respectTransparency false in
 projection, identity, composition, finite-clopen, and all finite-presentation normalizations.
 
 Source: Hemo--Richarz--Scholbach, construction preceding (4.1), pp. 8--9 and Corollary 4.4(2);
-Bhatt--Scholze, Lemma 2.2.8 and its more precise statement.
-
-Proof for stage 3.
-1. Use the geometric description of the relative lift
- to identify its points with pairs
-   over the connected-component quotient, and its structure maps as stalkwise
-   isomorphisms. The continuous map (y,(q,s)) to (f(y),s) lifts uniquely to a scheme
-   map by `new-lem-zl-stalk-isomorphism-lifting`. The fibre-product property
- gives a map from the Y-lift to the scheme pullback.
-2. Conversely the two projections of that scheme pullback give the continuous map
-   z to (y,(kappa_Y(y),s)) into the Y-lift. Lift uniquely along its stalkwise
-   isomorphism to Y. This is the forward comparison, preserving Y and E coordinates.
-3. Both composites preserve these coordinates. Uniqueness of continuous lifting and
-   the scheme pullback property make them identities. The same argument shows that
-   any map into a lift is determined by its base map and profinite coordinate.
-4. Apply this uniqueness to every map E to E', giving naturality without finite-stage
-   factorization. Apply it to the identity and to g followed by f, giving precisely
-   the slice identity and associativity equations displayed below.
-5. At a finite clopen stage, the actual restricted opens form the coproduct from
-   `lem-zl-component-relative-profinite-site`. Pulling them back uses
-   `lem-weil-pbc-open-fibre-product`; base change preserves their finite coproduct by
-   `lem-sc-etale-fibre-product-base-change-coproduct`. Their labels determine the
-   comparison, including repeated and empty blocks: the image of block a is the part of the
-   pulled-back open of Y whose finite coordinate is a (several blocks may share one open).
-   Finally naturality applied to every leg of every cofiltered finite-stage presentation
-   gives the cone equations.
-   The pulled-back profinite cone is limiting, as compatible pairs (q,s_i) correspond
-   uniquely and continuously to (q,s). The relative-lift characterization gives the
-   limiting cone on the right; the comparison transports it to the left. -/
+Bhatt--Scholze, Lemma 2.2.8 and its more precise statement. -/
 theorem component_lift_base_change :
     ∃ c : ∀ {X Y : Scheme.{u}} [IsAffine X] [IsAffine Y] (f : Y ⟶ X),
         relativeComponentLift X ⋙ Over.pullback f ≅

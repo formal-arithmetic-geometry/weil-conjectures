@@ -62,8 +62,8 @@ attribute [irreducible] tensorCoefficientSheafIso tensorCoefficientKernelMap
 /-- The first homogeneous action square, as an equality of sheaf morphisms.
 There is no cohomology or cohomology action in this statement.
 
-Source: Stacks Project, Tag 09MS, coherent-equation-ses and the graded direct sum; Tag 0B8S,
-cohomology-lemma-boundary-derivation-over-cup-product, first proof paragraph. -/
+Source: Stacks Project, Tag 09MS, the ideal short exact sequence and the graded direct sum;
+Tag 0B8S. -/
 theorem tensorGradedCoefficient_sheaf_action {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)
     (n : ℕ) (T : TensorGradedPresentation j L) (D : TensorBoundaryComparisonData j L n)

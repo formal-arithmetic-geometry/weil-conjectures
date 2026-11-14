@@ -36,7 +36,7 @@ attribute [local irreducible] Scheme.Modules.tensorPullback Scheme.Modules.tenso
 
 /-- Once the ordered scheme and affine twist comparisons are supplied, normalization
 of a tautological quotient identifies its line and coordinate quotients with the pullback
-of the standard twist. No scheme isomorphism is constructed by this statement.
+of the standard twist.
 
 Source: Stacks Project, Constructions, Tags 01OE, 01OB, and 01MS. -/
 theorem exists_ordered_twist_comparison (S : Scheme.{u}) (E : S.Modules)

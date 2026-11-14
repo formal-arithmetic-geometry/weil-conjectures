@@ -27,9 +27,7 @@ attribute [local irreducible] lineModule
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- Section adjunction detects equality of ordinary arrows.
-
-Transpose, test maps of sheaves sectionwise, and cancel the evaluation comparison. -/
+/-- Section adjunction detects equality of ordinary arrows. -/
 theorem sectionAdjoint_ext
     {b : SpTowerShriek.Base l E} {X Y : Scheme.{u}} {f : X ⟶ Y}
     (g : SpTowerShriek.Geometry l E b f)

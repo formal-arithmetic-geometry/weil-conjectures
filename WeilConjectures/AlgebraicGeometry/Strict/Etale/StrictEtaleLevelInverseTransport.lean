@@ -26,8 +26,7 @@ attribute [local instance 5000] strictEtaleSystemDerived strictEtaleLevelDerived
 
 /-- A finite inverse-image/scalar square, normalized by insertion of the tensor unit
 and by its universal derived computation arrow. No exactness of scalar extension is
-assumed. The ordinary square and the computation equation fix the derived square on
-flat-term K-flat representatives, hence on every object by naturality.
+assumed.
 Source: Zheng, Construction 5.15 and Proposition 2.29(2). -/
 structure StrictEtaleLevelInverseTransport
     {O O' : Type (u + 1)} [CommRing O] [CommRing O'] {ell : O} {mu : O'}

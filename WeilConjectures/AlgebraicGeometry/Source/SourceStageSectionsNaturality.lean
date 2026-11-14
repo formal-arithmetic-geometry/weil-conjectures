@@ -13,11 +13,13 @@ import WeilConjectures.AlgebraicGeometry.ObjectSectionsNaturality
 /-! # Restriction of the underived stage sections comparison
 
 Source: Stacks Project, Tags 03Q9 and 03S2, restriction of an injective complex.
--/
 
-/- This original-model counterpart follows the proved calculation in
-WeilConjectures.AlgebraicGeometry.SourceStageSectionsNaturality.
-The spectrum and structure morphism are those of the small coordinate-ring colimit. -/
+## Implementation details
+
+This is the small-model counterpart of the module
+`WeilConjectures.AlgebraicGeometry.SourceStageSectionsNaturality`;
+the spectrum and structure morphism are those of the small coordinate-ring colimit.
+-/
 
 @[expose] public section
 

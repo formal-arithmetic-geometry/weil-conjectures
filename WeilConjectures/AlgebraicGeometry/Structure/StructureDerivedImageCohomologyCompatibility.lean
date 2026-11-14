@@ -12,14 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.Module.ModuleCohomologyExtHMap
 
 /-! The module-to-abelian comparison for structure modules.
 
-Source: Stacks Project, Tags 03FD and 01F7.
-
-Proof: Use the fixed injective-resolution comparison between module cohomology and
-Ext of the underlying additive sheaf. Its h-map square is the coefficient
-factorization theorem, and the explicit Zariski h-map formula is exactly the
-inverse-image Ext construction defining `structureSheafCohomologyPullback`.
-The resulting additive equivalences are chosen independently for each scheme and
-the square holds for every morphism and every module h-map. -/
+Source: Stacks Project, Tags 03FD and 01F7. -/
 
 @[expose] public section
 set_option autoImplicit false

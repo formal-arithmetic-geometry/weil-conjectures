@@ -81,8 +81,7 @@ def DerivedExtension.targetNormalization
         (shiftFunctorAdd (DerivedCategory C) (1 : ℤ) 1).inv.app
           ((DerivedCategory.singleFunctor C 0).obj s.X₁)
 
-/-- Realize an extension as its ordinary derived morphism, sharing the abstract
-category instances before specialization to a tower topos. -/
+/-- Realize an extension as its ordinary derived morphism. -/
 def extensionArrow {C : Type u₁} [Category.{v₁} C] [Abelian C]
     [HasDerivedCategory.{w₁} C] [HasExt.{w₂} C]
     {X Y : C} {n : ℕ} (e : Ext.{w₂} X Y n) :
@@ -139,9 +138,7 @@ def mapSingleArrow {C : Type u₁} [Category.{v₁} C] [Abelian C]
       ((DerivedCategory.singleFunctor C 0).obj Y) ≫
     ((F.mapDerivedCategorySingleFunctor 0).hom.app Y)⟦n⟧'
 
-/-- Transport an Ext class to an ordinary derived arrow with specified endpoints.
-The Ext realization is made before changing sites; no new Ext-size instance is
-chosen in the target. -/
+/-- Transport an Ext class to an ordinary derived arrow with specified endpoints. -/
 def mapExtensionEndpoints {C : Type u₁} [Category.{v₁} C] [Abelian C]
     {D : Type u₂} [Category.{v₂} D] [Abelian D]
     [HasDerivedCategory.{w₁} C] [HasDerivedCategory.{w₂} D] [HasExt.{w₃} C]
@@ -154,7 +151,7 @@ def mapExtensionEndpoints {C : Type u₁} [Category.{v₁} C] [Abelian C]
     mapSingleArrow F (1 : ℤ) e.hom ≫
     ((DerivedCategory.singleFunctor D 0).map b)⟦(1 : ℤ)⟧'
 
-/-- Share exactness of the recorded change of site before forming extension classes. -/
+/-- Exactness of the recorded change of site. -/
 instance comparisonColimits (T : Scheme.{u}) :
     PreservesFiniteColimits (comparisonUpperStar AddCommGrpCat.{u + 1} T) :=
   inferInstance

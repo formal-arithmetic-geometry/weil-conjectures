@@ -114,8 +114,7 @@ abbrev levelAdjunction {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :=
   (proEtaleConstantRingAdjunction (R l E n) f).mapDerivedCategoryRightDerivedAdjunction
 
 /-- The finite proper projection map: the finite counit transpose of the canonical
-finite pullback/tensor comparison. Evaluation comparisons only change coordinates;
-the arrow is constructed by the finite adjunction, independently of properMap. -/
+finite pullback/tensor comparison. -/
 def finiteProperMap (b : Base l E) {X Y : Scheme.{u}} {f : X ⟶ Y}
     (g : Geometry l E b f) (n : ℕ) (N : D l E X) (B : D l E Y) :=
   ((levelAdjunction l E f n).homEquiv _ _)
@@ -130,7 +129,7 @@ def finiteProperMap (b : Base l E) {X Y : Scheme.{u}} {f : X ⟶ Y}
         (𝟙 _)))
 
 /-- The finite exact open adjunction, obtained by termwise localization of the
-specified finite ordinary adjunction. No adjunction is chosen independently. -/
+specified finite ordinary adjunction. -/
 def levelOpenAdjunction (b : Base l E) {U T : Scheme.{u}} (j : U ⟶ T)
     [IsOpenImmersion j] (n : ℕ) :
     sfIntrinsicDerivedOpen (R l E n) j ⊣

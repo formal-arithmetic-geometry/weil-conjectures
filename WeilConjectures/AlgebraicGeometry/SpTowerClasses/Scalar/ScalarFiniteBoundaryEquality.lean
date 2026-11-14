@@ -22,7 +22,6 @@ universe u
 open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 open WeilConjectures
 namespace AlgebraicGeometry.ProEtale.SpTowerClasses
-/-! Endpoint-witness reduction for the finite-boundary calculation.
- -/
+/-! Endpoint-witness reduction for the finite-boundary calculation. -/
 end AlgebraicGeometry.ProEtale.SpTowerClasses
 attribute [instance high] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall

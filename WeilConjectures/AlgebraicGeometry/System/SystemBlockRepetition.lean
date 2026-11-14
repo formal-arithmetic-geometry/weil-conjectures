@@ -499,13 +499,8 @@ private theorem blockOpenRepeat_restrictions
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 attribute [local irreducible] evaluation systemRing ringPresheaf rings blockOpenRepeat in
-/-- Exact extension by zero commutes with repetition. Both open presentations have
-level restriction identifications that are the identity on sections; with their unit
-and counit equations this fixes their extension evaluations `e_n j_! = j_! e_n`, so
-no levelwise automorphism twists them. The normalization says that under these
-actual level realizations the comparison is the identity on every component section.
-Consequently it is the strict identity for the direct-sum and sheafification
-realizations of the dependency, and commutes with reindexing.
+/-- Exact extension by zero commutes with repetition, by a comparison that is the identity on
+every component section under the level realizations `e_n j_! = j_! e_n`.
 Source: Zheng 4.1, ordinary levelwise operations, open-localization consequence. -/
 theorem blockRepeat_extensionByZero
     (R : SystemBlockRepetition J B₀ τ₀ t) :

@@ -25,8 +25,7 @@ import WeilConjectures.AlgebraicGeometry.Open.OpenComparisonUnitNormalization
 /-!
 # Normalized finite coefficient and etale-origin transport
 
-Source: Stacks Project, Tags 0F7B, 0F7C, 0F7D, 0F7F, 07A7 and 09AE, and the explicit strict-tower
-refinement in the blueprint.
+Source: Stacks Project, Tags 0F7B, 0F7C, 0F7D, 0F7F, 07A7 and 09AE.
 
 The index `n : ℕ` denotes positive level `n+1`. All derived categories below localize
 complexes of strict towers, rather than forming towers in separate derived categories.
@@ -114,9 +113,8 @@ noncomputable instance finiteRestriction_finiteColimits (X : Scheme.{u}) (Λ : T
     [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ) :
     PreservesFiniteColimits (finiteRestriction B X Λ φ) := (finiteRestriction_exact B X Λ φ).2.2
 
-/-- A level may have its own finite coefficient ring and its own lower bound. The
-etale witness is exactly the recorded dependency's witness, followed by actual
-restriction of scalars. -/
+/-- A scalar etale origin of `K`: a finite coefficient ring `Λ` over `B` and a complex with an
+etale origin over `Λ` whose restriction of scalars is identified with `K`. -/
 structure ScalarEtaleOrigin (X : Scheme.{u}) (K : DerivedCategory (Modules B X)) where
   Λ : Type (u + 1)
   [ring : CommRing Λ]

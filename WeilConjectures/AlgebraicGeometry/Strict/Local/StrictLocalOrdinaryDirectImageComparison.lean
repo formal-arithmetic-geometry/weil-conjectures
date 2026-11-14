@@ -15,7 +15,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSi
 
 /-! # Ordinary strict-local direct-image comparison
 
-Source: Stacks Project, Tag 03Q9 in degree zero.
+Source: Stacks Project, Tag 03Q9, degree zero.
 -/
 
 @[expose] public section
@@ -127,7 +127,7 @@ private theorem ordinaryExchangeArrowIso
     hδ K
   let e₂ := @Arrow.isoOfFac _ _ _ _ H _ _ _ _ _
     (δ.app (DerivedCategory.Plus.Qh.obj K)) m a b c hfac ha' hb' hc'
-  -- step 3: in degree `0`, the map of complexes is the underived base-change map
+  -- in degree `0`, the map of complexes is the underived base-change map
   have e3eq : (DerivedCategory.Plus.homologyFunctor _ 0).map (DerivedCategory.Plus.Qh.map
       ((NatTrans.mapHomotopyCategoryPlus τ).app K)) =
       (DerivedCategory.homologyFunctor _ 0).map (DerivedCategory.Qh.map

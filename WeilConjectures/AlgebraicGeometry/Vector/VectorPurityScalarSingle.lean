@@ -129,8 +129,7 @@ def purityAdjunctionSingleMap
     (c : j ⋙ V ≅ R ⋙ i) (M : C) : Q.obj (i.obj M) ⟶ j.obj (S.obj M) :=
   (b.homEquiv _ _).symm (i.map (a.unit.app M) ≫ c.inv.app (S.obj M))
 
-/-- Transport a scalar-unit arrow along the specified single/unit identifications.
-The generic endpoints keep kernel checking from expanding the derived monoidal data. -/
+/-- Transport a scalar-unit arrow along the specified single/unit identifications. -/
 def purityTransportUnitMap {C : Type v₁} {D : Type v₂}
     [Category.{w₁} C] [Category.{w₂} D] (Q : C ⥤ D)
     {U U' : C} {V V' : D} (e : U ≅ U') (f : V ≅ V')

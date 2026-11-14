@@ -21,10 +21,10 @@ public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Biproducts
 
 Source: Stacks Tags 09AA, 03EK, 014E and 08TC.
 
-The presentation structures below only package the assertions of this node. Cone
+The presentation structures below package the strict completion comparison data. Cone
 objects, coordinates, tower arrows, Roos functor, augmentations and localized units
 are all fixed by equations. No comparison or completion is selected from existence.
-Positive exponent n+1 is indexed by n : ℕ, as in the recorded completion interface.
+Positive exponent n+1 is indexed by n : ℕ.
 -/
 
 @[expose] public noncomputable section
@@ -50,8 +50,8 @@ attribute [-instance] AlgebraicGeometry.Scheme.proEtaleRingModules_hasDerivedCat
   AlgebraicGeometry.Scheme.ProjectionRestriction.derivedOverModules
 
 
-/-- The existing small-site local-equivalence instance with its unused larger
-coefficient universe fixed to zero, so inference keeps the prescribed universe.
+/-- The small-site local-equivalence instance, with its unused larger coefficient universe
+fixed to zero.
 Source: Stacks 00W1, 03DA. -/
 instance smallSiteLocalEquivalences (X : Scheme.{u}) :
     (Scheme.ProEt.topology X).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
@@ -188,7 +188,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- Agreement with the specified internal completion, including every K-flat
-realization of its canonical map. The strict tower is the dependency's actual tower. -/
+realization of its canonical map. The strict tower is the completion-triangle tower. -/
 def IsIntegral (X : Scheme.{u})
     (S : Presentation.{u + 2, u + 1, u + 1} (AdicCompletion.Modules l E X)) : Prop :=
   ∃ data : PrincipalReduction.PrincipalReductionConeData l E X,
@@ -226,8 +226,7 @@ instance sectionFiniteBiproducts (X : Scheme.{u}) :
   HasFiniteBiproducts.of_hasFiniteProducts
 
 /-- Section-module local models use the actual ringed inverse image and cokernels
-of finite matrices whose entries are scalars on the point. Neither local object
-is obtained by applying the section equivalence to an internal local-model isomorphism.
+of finite matrices whose entries are scalars on the point.
 Source: Stacks 03D7, 03EK. -/
 def HasSectionFiniteConstantLocalModel (X : Scheme.{u})
     (M : ModuleObjectRingedComparison.Modules (DerivedNakayama.integerRing l E) X) : Prop :=
@@ -261,8 +260,7 @@ attribute [local irreducible] SheafOfModules.KFlatRoos.tensorUnit
 /-- The section reductions are derived extension to the specified quotient, followed
 by restriction. Their tensor identifications are fixed on K-flat representatives:
 resolving the quotient in the second slot gives the section TensorComparison model.
-The singleton total comparison is fixed on every local pure tensor, so the unit
-and transition equations cannot be changed by a scalar twist.
+The singleton total comparison is fixed on every local pure tensor.
 Source: Stacks 03EK, 06YS, 08TC. -/
 structure SectionReductionModelsFor
     (X : Scheme.{u})
@@ -354,8 +352,7 @@ structure SectionReductionModelsFor
           (𝟙 _, DerivedCategory.Q.map q))
 
 /-- The normalized section reduction models at the integral coefficient ring.
-Source: Stacks 03EK, 06YS, 08TC.
-This is the generic interface specialized to the fixed coefficient ring. -/
+Source: Stacks 03EK, 06YS, 08TC. -/
 abbrev SectionReductionModels (X : Scheme.{u})
     (T : Presentation.{u + 2, u + 1, u + 1} (Modules (DerivedNakayama.integerRing l E) X))
     (H : CoefficientClosedStructure (hom (DerivedNakayama.integerRing l E) X))
@@ -365,12 +362,9 @@ abbrev SectionReductionModels (X : Scheme.{u})
     (ι : (Functor.const ℕᵒᵖ).obj (ring (DerivedNakayama.integerRing l E) X) ⟶ B) :=
   SectionReductionModelsFor X (ring (DerivedNakayama.integerRing l E) X) T H HM B ι
 
-/-- Integral completion on the section-ring side, fixed independently of transport
-of a Presentation by an equivalence. The scalar is the pulled-back uniformizer;
-the coefficient tower, its structure maps and steps are the actual section rings
-and quotient homomorphisms. The reduction models use the existing section derived
-tensor comparison, normalized on K-flats. Completion and its unit are the actual
-augmented tensor Roos construction on every section K-flat representative.
+/-- Integral completion on the section-ring side: the scalar is the pulled-back uniformizer,
+the coefficient tower consists of the section rings and quotient maps, and completion with its
+unit is the augmented tensor Roos construction on every section K-flat representative.
 Source: Stacks 03EK, 06YS, 08TC. -/
 def IsSectionIntegral (X : Scheme.{u})
     (T : Presentation.{u + 2, u + 1, u + 1} (Modules (DerivedNakayama.integerRing l E) X)) :

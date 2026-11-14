@@ -537,7 +537,6 @@ theorem orderedRelativeComparison_hom_π {S : Scheme.{u}} {E : S.Modules}
 
 /-- On every affine chart, the ordered relative comparison `orderedRelativeComparison b` is
 compatible with the affine polynomial and degree-one twist models.
-This assertion does not involve a global tautological quotient or standard projective space.
 
 Source: Stacks Project, Constructions, Tags 01OE, 01OB, and 01MS. -/
 theorem orderedRelativeComparison_affineFreeComparison {S : Scheme.{u}} {E : S.Modules}

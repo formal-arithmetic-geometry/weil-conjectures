@@ -82,7 +82,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- Finite free-rank-one pullback maps commute with the actual quotient transitions.
 
-Source: Stacks 03D2, 03EL, and the unit construction in clause (2). -/
+Source: Stacks 03D2, 03EL. -/
 theorem exists_unitLevelCoordinates {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃ b : SpTowerShriek.Base l E, ∃ g : SpTowerShriek.Geometry l E b f,
       (∀ (n : ℕ)

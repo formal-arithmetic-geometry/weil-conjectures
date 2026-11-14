@@ -42,11 +42,10 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteCompari
 /-!
 # Functorial pullback of constant support quotients
 
-Source: Stacks Project, Tag 03Q1, especially (1) and (3), and the ordinary comparison in the final
-paragraph of blueprint.proof.md`.
+Source: Stacks Project, Tag 03Q1, especially (1) and (3).
 
 The quotients and quotient maps are exactly those of `SupportQuotientFlat`. The
-fixed-scalar presentation is the same presentation used by that dependency: its canonical
+fixed-scalar presentation is the same presentation used there: its canonical
 realization identifies it with ordinary modules over the constant ring sheaf. The helper
 structures only bundle the schemes, closed immersions and factorization hypotheses.
 -/
@@ -62,7 +61,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 /-- The input closed pair, including precisely the quasi-compact-complement hypothesis.
-Source: support-quotient refinement of Tag 03Q1. -/
+Source: Stacks Project, Tag 03Q1. -/
 structure SupportQuotientPair where
   T : Scheme.{u}
   C : Scheme.{u}
@@ -73,20 +72,20 @@ structure SupportQuotientPair where
 attribute [instance] SupportQuotientPair.closed SupportQuotientPair.qc
 
 /-- A scheme morphism carrying the source closed subscheme into the target, with its
-scheme-theoretic factorization, rather than merely an inclusion of underlying sets.
-Source: support-quotient refinement of Tag 03Q1. -/
+scheme-theoretic factorization.
+Source: Stacks Project, Tag 03Q1. -/
 structure SupportQuotientPairMap (P Q : SupportQuotientPair.{u}) where
   f : P.T ⟶ Q.T
   s : P.C ⟶ Q.C
   w : s ≫ Q.a = P.a ≫ f
 
 /-- Identity input pair map.
-Source: the identity clause of the support-quotient refinement of Tag 03Q1. -/
+Source: Stacks Project, Tag 03Q1. -/
 def SupportQuotientPairMap.id (P : SupportQuotientPair.{u}) : SupportQuotientPairMap P P :=
   ⟨𝟙 P.T, 𝟙 P.C, (Category.id_comp P.a).trans (Category.comp_id P.a).symm⟩
 
 /-- Composite input pair map, using the composite of the supplied factorizations.
-Source: the composition clause of the support-quotient refinement of Tag 03Q1. -/
+Source: Stacks Project, Tag 03Q1. -/
 def SupportQuotientPairMap.comp {P Q R : SupportQuotientPair.{u}}
     (g : SupportQuotientPairMap P Q) (f : SupportQuotientPairMap Q R) :
     SupportQuotientPairMap P R :=

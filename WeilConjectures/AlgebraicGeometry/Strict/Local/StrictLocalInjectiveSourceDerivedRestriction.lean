@@ -29,9 +29,7 @@ namespace AlgebraicGeometry.Etale
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency true in
 /-- The germ leg and derived mate agree with restriction of stage hypercohomology.
-This identity stops before replacing derived restriction by termwise restriction:
-that replacement is the separate theorem `smallModel_injectiveSections_strictLocal_comparison`.
-Source: Stacks Project, Tags 03Q8 and 03Q9, final injective-complex paragraph. -/
+Source: Stacks Project, Tags 03Q8 and 03Q9. -/
 theorem smallModel_strictLocalInjectiveSourceIso_derivedRestriction {X S : Scheme.{v}}
     (f : X ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)

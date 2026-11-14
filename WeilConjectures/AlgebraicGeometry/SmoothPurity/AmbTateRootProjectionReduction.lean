@@ -115,8 +115,8 @@ def ambTateReducedPure (T : Scheme.{u}) (U : T.ProEt)
     (WeilConjectures.integralCoefficientCommRingSheaf l E T n)
     (ambTateScalar l E n T) (ambTateConstantRootModule l T) U a x
 
-/-- The unique finite scalar map, constructed using the characteristic divisibility
-criterion; it requires no flatness. Source: Stacks Tag 03EK. -/
+/-- The unique finite scalar map, given by the characteristic divisibility criterion.
+Source: Stacks Tag 03EK. -/
 def ambTateFiniteScalar (T : Scheme.{u}) (r : AmbTateLevel l E n) :
     purTwistFiniteRing T l r.val ⟶
       WeilConjectures.integralCoefficientCommRingSheaf l E T n :=
@@ -174,9 +174,9 @@ def ambTateDirectSection {T T' : Scheme.{u}} (v : T' ⟶ T)
     (x : M.val.obj (op U)) : N.val.obj (op ((proEtaleBaseChange v).obj U)) :=
   f.val.app (op U) x
 
-/-- The conclusion, with every map fixed by its specified root or tensor formula.
-The fields c and b are the direct-image adjuncts of c_L and b_v. The square is
-therefore exactly the adjunct of the displayed inverse-image square in the node. -/
+/-- The root-projection reduction data, with every map fixed by its specified root or
+tensor formula. The fields c and b are the direct-image adjuncts of c_L and b_v, and the
+square is the adjunct of the inverse-image base-change square. -/
 structure AmbTateRootProjectionData where
   /-- Reassociation for the prescribed finite twist. -/
   j : ∀ T : AmbTateBase l, purTwistFiniteOne T.val l E n ≅ ambTateReduced l E n T.val

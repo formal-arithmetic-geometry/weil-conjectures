@@ -147,8 +147,7 @@ private theorem reduction_of_divisible_concentrated
     DerivedCategory.TStructure.t.isLE_of_iso e.symm (-1)⟩
 
 /-- Simultaneous reduction of shifted comparison units has cohomology only in
- degree minus two. This assertion specifies no roots identification, comparison
- isomorphism, or unit normalization. -/
+degree minus two. -/
 theorem strict_kummer_cohomology_concentration (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     (hW : IsUnit (ℓ : Γ(W, ⊤)))
     [HasDerivedCategory.{u + 1} (DiagonalAb W)]

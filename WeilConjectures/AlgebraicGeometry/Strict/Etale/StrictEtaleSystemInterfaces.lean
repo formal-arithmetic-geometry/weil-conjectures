@@ -14,8 +14,8 @@ public import WeilConjectures.Compactification.RefinementCategory
 
 Source: Zheng, Construction 4.1, Constructions 5.14--5.15 and Lemma 5.16.
 
-These declarations are relocated, with their original names and data, from the
-adjoint theorem module. No existence theorem is needed to import these notions.
+These are the data records and interfaces for strict étale coefficient systems; they do not
+depend on any existence theorem.
 -/
 
 @[expose] public noncomputable section
@@ -32,7 +32,6 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor Opposite SheafO
 namespace AlgebraicGeometry
 open SheafOfModules
 /-- Reuse the existing ring-sheafification witness once at the concrete etale-site size.
-This instance only caches an existing proof, so the constant sheaf construction is unchanged.
 Source: Stacks Tag 00W1; Zheng, Construction 4.1. -/
 instance (priority := 2000) strictEtaleCommRingSheafify (T : Scheme.{u}) :
     HasWeakSheafify T.smallEtaleTopology CommRingCat.{u + 1} := inferInstance
@@ -87,8 +86,7 @@ instance (priority := 100) strictEtaleLevelDerived (T : Scheme.{u}) (O : Type (u
     [CommRing O] (ell : O) (n : ℕ) :
     HasDerivedCategory.{u + 2} (strictEtaleLevel T O ell n) :=
   HasDerivedCategory.standard _
-/-- Specialize the existing levelwise additive witness before elaborating projections
-of the evaluation package. No additive structure is changed.
+/-- Levelwise coefficient evaluation is additive, at the ordinary etale-site sizes.
 Source: Zheng, Construction 4.1. -/
 instance (priority := 3000) strictEtaleEvaluationAdditive
     (T : Scheme.{u}) (O : Type (u + 1)) [CommRing O] (ell : O) :
@@ -106,7 +104,7 @@ abbrev strictEtaleSetAdjunction {T S : Scheme.{u}} (g : T ⟶ S) :=
   Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
     (MorphismProperty.Over.pullback @Etale ⊤ g) (Type (u + 1))
     (S.smallGrothendieckTopology @Etale) (T.smallGrothendieckTopology @Etale)
-/-- The canonical geometric lift already specified by the system-comparison node.
+/-- The canonical geometric lift of the system comparison.
 Source: Zheng, Constructions 4.1 and 5.15. -/
 abbrev StrictEtaleOrdinaryImage (O : Type (u + 1)) [CommRing O] (ell : O)
     {T S : Scheme.{u}} (g : T ⟶ S) :=
@@ -116,8 +114,8 @@ abbrev StrictEtaleOrdinaryImage (O : Type (u + 1)) [CommRing O] (ell : O)
       (Type (u + 1)) (S.smallGrothendieckTopology @Etale) (T.smallGrothendieckTopology @Etale))
     (strictEtaleSetAdjunction g)
 
-/-- Multiplication by a coefficient on strict and derived systems. Its normalization
-is the actual constant-ring sheafification unit and its localization on complexes.
+/-- Coherence of a multiplication by coefficients on strict and derived systems: it is
+normalized by the constant-ring sheafification unit and its localization on complexes.
 Together with additivity, preservation of this action means `O`-linearity on all Homs.
 Source: Zheng, the Brown adjoint after Lemma 5.16. -/
 def StrictEtaleScalarActionCoherence (T : Scheme.{u}) (O : Type (u + 1))
@@ -136,8 +134,8 @@ def StrictEtaleScalarActionCoherence (T : Scheme.{u}) (O : Type (u + 1))
         DerivedCategory.Q.map
           (((ordinary r).mapHomologicalComplex (.up ℤ)).app K))
 
-/-- The coherence predicate for `StrictEtaleScalarAction`, separated from its data to share
-its type during kernel checking. It is exactly the displayed canonical diagram equations.
+/-- Coefficient multiplications on strict and derived systems satisfying
+`StrictEtaleScalarActionCoherence`.
 Source: Zheng, Construction 4.1, Construction 5.15 and Proposition 2.29(2). -/
 def StrictEtaleScalarAction (T : Scheme.{u}) (O : Type (u + 1))
     [CommRing O] (ell : O) :=
@@ -202,7 +200,7 @@ structure StrictEtaleCompactSupportData where
 attribute [instance] StrictEtaleCompactSupportData.openAdditive
   StrictEtaleCompactSupportData.levelOpenAdditive
 
-/-- The specified data and canonical coherence of `StrictEtaleCompactSupport`.
+/-- The canonical coherence conditions on `StrictEtaleCompactSupportData`.
 Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2). -/
 def StrictEtaleCompactSupportCoherence
     (record : StrictEtaleCompactSupportData O ell c) : Prop :=
@@ -241,7 +239,7 @@ def StrictEtaleCompactSupportCoherence
         DerivedCategory.Q.map
           ((NatIso.mapHomologicalComplex (record.openEvaluation n) (.up ℤ)).hom.app K))
 
-/-- The specified data and canonical coherence of `StrictEtaleCompactSupport`.
+/-- Strict étale compact-support data satisfying its canonical coherence conditions.
 Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2). -/
 def StrictEtaleCompactSupport :=
   { record : StrictEtaleCompactSupportData O ell c //
@@ -250,65 +248,53 @@ def StrictEtaleCompactSupport :=
 section
 variable {O ell c}
 
-/-- The specified data and canonical coherence of `StrictEtaleCompactSupport`.
-Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2). -/
+/-- The `PX` component of a `StrictEtaleCompactSupport` record. -/
 abbrev StrictEtaleCompactSupport.PX (record : StrictEtaleCompactSupport O ell c) :=
   record.val.PX
 
-/-- The specified data and canonical coherence of `StrictEtaleCompactSupport`.
-Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2). -/
+/-- The `PY` component of a `StrictEtaleCompactSupport` record. -/
 abbrev StrictEtaleCompactSupport.PY (record : StrictEtaleCompactSupport O ell c) :=
   record.val.PY
 
-/-- The specified data and canonical coherence of `StrictEtaleCompactSupport`.
-Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2). -/
+/-- The `PZ` component of a `StrictEtaleCompactSupport` record. -/
 abbrev StrictEtaleCompactSupport.PZ (record : StrictEtaleCompactSupport O ell c) :=
   record.val.PZ
 
-/-- The specified data and canonical coherence of `StrictEtaleCompactSupport`.
-Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2). -/
+/-- The `openImage` component of a `StrictEtaleCompactSupport` record. -/
 abbrev StrictEtaleCompactSupport.openImage (record : StrictEtaleCompactSupport O ell c) :=
   record.val.openImage
 
-/-- The specified data and canonical coherence of `StrictEtaleCompactSupport`.
-Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2). -/
+/-- The `properImage` component of a `StrictEtaleCompactSupport` record. -/
 abbrev StrictEtaleCompactSupport.properImage (record : StrictEtaleCompactSupport O ell c) :=
   record.val.properImage
 
-/-- The specified data and canonical coherence of `StrictEtaleCompactSupport`.
-Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2). -/
+/-- The `properDerived` component of a `StrictEtaleCompactSupport` record. -/
 abbrev StrictEtaleCompactSupport.properDerived (record : StrictEtaleCompactSupport O ell c) :=
   record.val.properDerived
 
-/-- The specified data and canonical coherence of `StrictEtaleCompactSupport`.
-Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2). -/
+/-- The `derivedOpen` component of a `StrictEtaleCompactSupport` record. -/
 abbrev StrictEtaleCompactSupport.derivedOpen (record : StrictEtaleCompactSupport O ell c) :=
   record.val.derivedOpen
 
-/-- The specified data and canonical coherence of `StrictEtaleCompactSupport`.
-Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2). -/
+/-- The `openDerived` component of a `StrictEtaleCompactSupport` record. -/
 abbrev StrictEtaleCompactSupport.openDerived (record : StrictEtaleCompactSupport O ell c) :=
   record.val.openDerived
 
-/-- The specified data and canonical coherence of `StrictEtaleCompactSupport`.
-Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2). -/
+/-- The `derivedOpenAdjunction` component of a `StrictEtaleCompactSupport` record. -/
 abbrev StrictEtaleCompactSupport.derivedOpenAdjunction
     (record : StrictEtaleCompactSupport O ell c) :=
   record.val.derivedOpenAdjunction
 
-/-- The specified data and canonical coherence of `StrictEtaleCompactSupport`.
-Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2). -/
+/-- The `levelDerivedOpen` component of a `StrictEtaleCompactSupport` record. -/
 abbrev StrictEtaleCompactSupport.levelDerivedOpen (record : StrictEtaleCompactSupport O ell c) :=
   record.val.levelDerivedOpen
 
-/-- The specified data and canonical coherence of `StrictEtaleCompactSupport`.
-Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2). -/
+/-- The `levelDerivedOpenAdjunction` component of a `StrictEtaleCompactSupport` record. -/
 abbrev StrictEtaleCompactSupport.levelDerivedOpenAdjunction
     (record : StrictEtaleCompactSupport O ell c) :=
   record.val.levelDerivedOpenAdjunction
 
-/-- The specified data and canonical coherence of `StrictEtaleCompactSupport`.
-Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2). -/
+/-- The `openDerivedEvaluation` component of a `StrictEtaleCompactSupport` record. -/
 abbrev StrictEtaleCompactSupport.openDerivedEvaluation
     (record : StrictEtaleCompactSupport O ell c) :=
   record.val.openDerivedEvaluation
@@ -325,7 +311,7 @@ Source: Zheng, Construction 5.15. -/
 def StrictEtaleCompactSupport.levelFunctor (S : StrictEtaleCompactSupport O ell c) (n : ℕ) :=
   S.levelDerivedOpen n ⋙ (S.properDerived.level n).direct
 /-- The canonical evaluated compact-support comparison, constructed from the open and
-proper comparisons, rather than selected as an unspecified isomorphism.
+proper comparisons.
 Source: Zheng, Lemma 5.16. -/
 def StrictEtaleCompactSupport.evaluation (S : StrictEtaleCompactSupport O ell c) (n : ℕ) :
     S.functor ⋙ S.PY.evaluation n ≅ S.PX.evaluation n ⋙ S.levelFunctor n :=

@@ -71,11 +71,9 @@ namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option maxRecDepth 4000 in
-/-- Pointwise form of the composition formula. The Ext construction of pullback
-is functorial under composition of exact inverse-image functors; evaluating that
-functoriality on a class gives the displayed equality. This is the pointwise
-calculation underlying the additive-homomorphism composition law.
-Source: Stacks Project, Cohomology of Sheaves, Section 01F7, equation-functorial.
+/-- Pointwise form of the composition formula: pulling back a class along `f ≫ g` is pulling
+it back along `g` and then along `f`.
+Source: Stacks Project, Cohomology of Sheaves, Section 01F7.
 -/
 theorem structureSheafCohomologyPullback_comp_apply {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z) (n : ℕ)

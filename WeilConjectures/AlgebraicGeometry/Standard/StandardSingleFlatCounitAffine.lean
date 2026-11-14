@@ -131,7 +131,7 @@ private theorem affine_single_unit_iso
     (DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (.up ℤ)).map r)) _
 
 set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
-/-- The single complex of the actual affine direct image realizes the pinned comparison.
+/-- The single complex of the affine direct image realizes the pinned comparison.
 Source: Stacks Project, Tag 0A1D, affine tensor calculation; Tag 08HY, base-change mate; Tag 0DJ9,
 initial affine case. -/
 private theorem affine_single_counit_comparison

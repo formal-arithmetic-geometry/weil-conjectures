@@ -16,10 +16,7 @@ import WeilConjectures.AlgebraicGeometry.Relative.RelativeTorsorForgetNormalizat
 /-!
 # Relative torsor representatives and boundary signs
 
-Source: Stacks Project, Tag 03AJ, and the relative refinement
-in/sk-prop-an/lem-pur-divisor-class.proof.md, clause (a).
-
--- Q32 revalidation delivery of the reviewed statement.
+Source: Stacks Project, Tag 03AJ, in a relative refinement.
 -/
 
 @[expose] public noncomputable section
@@ -116,7 +113,7 @@ def torsorOpenShortComplex (T : Scheme.{u}) (U : T.Etale)
 
 /-- The representative and sign assertions for a simultaneous relative classification.
 The extension presentation and resolution maps are arbitrary models, not chosen maps.
-Source: Stacks Tag 03AJ and clause (a). -/
+Source: Stacks Tag 03AJ. -/
 structure DivisorTorsorBoundarySigns
     (e : ∀ (T : Scheme.{u}) (W : T.Opens)
       (G : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) (I : InjectiveResolution G),
@@ -1500,10 +1497,7 @@ representatives and the two boundary signs, simultaneously in all resolution mod
 The classification uses the raw lifting cocycle. Its negative forgetful image is
 the Ext-normalized torsor class; the final conjunct specifies the representatives.
 The normalized classification in `relative_torsor_cohomology` is the negative of this one.
-Source: Stacks Tag 03AJ.
-
-STATEMENT-DISPUTED: the original positive forgetful clause conflicts with the raw
-representatives and the proved Ext comparison. The statement below corrects that clause. -/
+Source: Stacks Tag 03AJ. -/
 theorem divisor_torsor_boundary_signs :
     ∃ e : ∀ (T : Scheme.{u}) (W : T.Opens)
       (G : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) (I : InjectiveResolution G),

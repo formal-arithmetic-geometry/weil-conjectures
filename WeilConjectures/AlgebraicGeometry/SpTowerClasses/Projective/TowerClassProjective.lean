@@ -81,8 +81,7 @@ def Twisting.cancelNegative {T : Scheme.{u}} {c : Chern l E T} (t : Twisting l E
     Functor.mapDerivedCategoryIdIso (Systems T (Arings l E T))
 
 /-- The second summand is obtained by untwisting the actual adjoint Chern class.
-The inverse tensor/Hom adjunction and shift cancellation specify its orientation;
-it is not a free morphism whose finite components alone are prescribed. -/
+The inverse tensor/Hom adjunction and shift cancellation specify its orientation. -/
 def Projective.second {b : SpTowerShriek.Base l E} {S : Scheme.{u}}
     {cS : Chern l E S} {cP : Chern l E (ProjectiveLine S)}
     {tS : Twisting l E cS} {tP : Twisting l E cP}

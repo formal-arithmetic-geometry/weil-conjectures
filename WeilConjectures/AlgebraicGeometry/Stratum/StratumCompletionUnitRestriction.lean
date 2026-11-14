@@ -396,9 +396,8 @@ attribute [local irreducible] completedAdicChangeData completedReductionCoeffici
   CategoryTheory.Functor.mapDerivedCategoryFactors CategoryTheory.Functor.mapDerivedCategoryFactorsh
   CategoryTheory.Functor.mapDerivedCategoryNatIso
 
-/-- The representative equation for the comparison of entire derived strict towers.
-It uses actual universal counits and the ordinary strict comparison, so evaluations
-alone do not specify a morphism in the derived category of towers.
+/-- The representative equation for the comparison of entire derived strict towers, in
+terms of the universal reduction counits and the ordinary strict comparison.
 Source: Stacks Tags 06YY, 03EL. -/
 def StratumReductionFormula
     (e : completedReductionTower X d ⋙ d.towerPull f ≅

@@ -157,8 +157,7 @@ private theorem sourceLeg_eq_sectionRestriction {S : Scheme.{v}}
 
 set_option backward.isDefEq.respectTransparency true in
 /-- Localizing Hom into a K-injective representative and then restricting its sections
-computes the canonical cohomology germ leg. This is a statement only about a complex on
-S; it has no direct-image functor, pullback square, mate, or fibre cohomology.
+computes the canonical cohomology germ leg.
 
 Source: Stacks Project, Tag 03Q8, cohomology via injective complexes, and Tag 03Q9, construction of
 restriction to the strict henselization. -/

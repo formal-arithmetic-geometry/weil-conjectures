@@ -38,12 +38,12 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Res
 /-!
 # Comparison of ordinary supported sections between the two sites
 
-Source: Stacks Project, Tags 099W, 099V, 09B1 and 09XP, with the supported refinement of blueprint.
+Source: Stacks Project, Tags 099W, 099V, 09B1 and 09XP.
 
 ## Main definitions and statements
 
 * `ProEtale.supportComparison`: the natural bounded-below comparison map.
-* `ProEtale.supportComparison_isIso`: invertibility under the node's hypotheses.
+* `ProEtale.supportComparison_isIso`: invertibility under the stated hypotheses.
 * `ProEtale.supportComparison_forget`, `ProEtale.fullSupportForget_isIso`, and
   `ProEtale.supportComparison_open`: forgetting, full-support normalization, and restriction.
 * `ProEtale.supportExteriorCoefficientIso`: the specified tensor/pullback comparison theta.

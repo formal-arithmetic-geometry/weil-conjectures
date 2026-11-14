@@ -11,8 +11,7 @@ import WeilConjectures.AlgebraicGeometry.Projection.ProjectionCompactification
 /-!
 # Exact open extension on strict constant-coefficient towers
 
-Source: Stacks Project, Tags 0F7B, 0F7C, 0F7D, 0F7F, 07A7 and 09AE, and the explicit strict-tower
-refinement in the blueprint.
+Source: Stacks Project, Tags 0F7B, 0F7C, 0F7D, 0F7F, 07A7 and 09AE.
 
 The index `n : ℕ` denotes positive level `n+1`. All derived categories below localize
 complexes of strict towers, rather than forming towers in separate derived categories.
@@ -85,8 +84,7 @@ noncomputable instance moduleJ_finiteColimits {U X : Scheme.{u}} (j : U ⟶ X)
 noncomputable abbrev towerJ {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :=
   (Functor.whiskeringRight ℕᵒᵖ (Modules B U) (Modules B X)).obj (moduleJ B j)
 
-/-- Exactness persists on strict towers. Source: Stacks, Tag 03DJ and the diagram-site realization.
--/
+/-- Exactness persists on strict towers. Source: Stacks, Tag 03DJ. -/
 theorem towerJ_exact {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     PreservesFiniteLimits (towerJ B j) ∧ PreservesFiniteColimits (towerJ B j) := by
   constructor

@@ -10,15 +10,14 @@ public import WeilConjectures.AlgebraicGeometry.Open.OpenImmersionSquare
 public import WeilConjectures.CategoryTheory.RingedSiteModules
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 -- Vertical uses singleAlpha_restriction_normalized; horizontal uses singleAlpha_restriction.
--- Both restriction identities must coexist when these dependency branches are imported.
+-- Both restriction identities must coexist when these modules are imported.
 import all WeilConjectures.AlgebraicGeometry.StrictTower.ProperOpenAlphaVerticalModules
 import all WeilConjectures.AlgebraicGeometry.StrictTower.ProperOpenAlphaHorizontalModules
 import all WeilConjectures.AlgebraicGeometry.StrictTower.ProperOpenAlphaBaseChangeModules
 
 /-! # Intrinsic clopen alpha commutes with pasting and pullback before derivation
 
-Source: Stacks Project, Tags 0F7C, 0F7D, 0F7F, 09AH and 09BN, with the arbitrary-ring underived
-strict-tower refinement in the blueprint.
+Source: Stacks Project, Tags 0F7C, 0F7D, 0F7F, 09AH and 09BN.
 
 Each law includes equality on module sheaves, on strict towers, on their unbounded
 complexes, and on their ordinary unbounded derived categories. The two ordinary paths
@@ -150,7 +149,7 @@ def alphaCubeChanged {V W S T V₁ W₁ S₁ T₁ : Scheme.{u}}
 attribute [local irreducible] G J
 
 /-- Intrinsic alpha obeys vert pasting at the four specified levels.
-Source: Stacks, Tag 0F7C, and the underived strict-tower refinement, proof steps 1--7. -/
+Source: Stacks, Tag 0F7C. -/
 theorem alpha_vertical_beforeDerivation {A C E B₀ D F : Scheme.{u}}
     (k : A ⟶ B₀) (i : C ⟶ D) (j : E ⟶ F)
     (r₁ : A ⟶ C) (r₂ : C ⟶ E) (p₁ : B₀ ⟶ D) (p₂ : D ⟶ F)
@@ -194,7 +193,7 @@ theorem alpha_vertical_beforeDerivation {A C E B₀ D F : Scheme.{u}}
   all_goals rw [hm]
 
 /-- Intrinsic alpha obeys horiz pasting at the four specified levels.
-Source: Stacks, Tag 0F7D, and the underived strict-tower refinement, proof steps 1--7. -/
+Source: Stacks, Tag 0F7D. -/
 theorem alpha_horizontal_beforeDerivation {A C E B₀ D F : Scheme.{u}}
     (k : A ⟶ B₀) (l : B₀ ⟶ E) (i : C ⟶ D) (j : D ⟶ F)
     (r : A ⟶ C) (p : B₀ ⟶ D) (q : E ⟶ F)
@@ -238,7 +237,7 @@ theorem alpha_horizontal_beforeDerivation {A C E B₀ D F : Scheme.{u}}
   all_goals rw [hm]
 
 /-- Intrinsic alpha obeys cube pasting at the four specified levels.
-Source: Stacks, Tag 0F7F, and the underived strict-tower refinement, proof steps 1--7. -/
+Source: Stacks, Tag 0F7F. -/
 theorem alpha_baseChange_beforeDerivation {V W S T V₁ W₁ S₁ T₁ : Scheme.{u}}
     (k : V ⟶ W) (i : S ⟶ T) (r : V ⟶ S) (p : W ⟶ T)
     (k₁ : V₁ ⟶ W₁) (i₁ : S₁ ⟶ T₁) (r₁ : V₁ ⟶ S₁) (p₁ : W₁ ⟶ T₁)

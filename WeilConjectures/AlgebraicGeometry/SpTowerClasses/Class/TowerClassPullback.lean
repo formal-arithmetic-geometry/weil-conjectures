@@ -35,7 +35,7 @@ abbrev chart {X Y : Scheme.{u}} (f : X ⟶ Y) (U : Y.ProEtᵒᵖ) :=
   (MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).op.obj U
 
 /-- Restriction of roots along the actual global-sections ring map on a pulled-back
-chart. This defines the canonical map, including on the empty chart. -/
+chart. -/
 def restrictRoot {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) (U : Y.ProEtᵒᵖ)
     (z : (Scheme.proEtaleRootsOfUnitySheaf Y (l ^ (n + 1))).obj.obj U) :
     (Scheme.proEtaleRootsOfUnitySheaf X (l ^ (n + 1))).obj.obj (chart f U) :=
@@ -62,8 +62,7 @@ def evaluatedAdjoint {b : SpTowerShriek.Base l E} {X Y : Scheme.{u}}
     (g.ordinaryPushEvaluation n).hom.app N
 
 -- The two canonical finite sheaf realizations share their section carrier.
-/-- The canonical ordinary adjoint evaluated on one finite chart. The dependency's
-pushforward realization retains exactly these section carriers. -/
+/-- The canonical ordinary adjoint evaluated on one finite chart. -/
 def adjointSection {b : SpTowerShriek.Base l E} {X Y : Scheme.{u}}
     {f : X ⟶ Y} (g : SpTowerShriek.Geometry l E b f)
     {M : Systems Y (Arings l E Y)} {N : Systems X (Arings l E X)}

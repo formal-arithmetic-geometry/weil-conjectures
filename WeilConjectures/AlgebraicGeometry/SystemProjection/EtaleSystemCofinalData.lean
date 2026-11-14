@@ -265,7 +265,6 @@ abbrev cofinalSheafRings (W : Scheme.{u}) {l : ℕ} (B : Coefficients.{u} l) :
   B.rings ⋙ constantSheaf W.smallEtaleTopology CommRingCat.{u + 1}
 
 /-- Identity-on-sections equivalence between the two recorded strict-system encodings.
-This is presentation data for the same category, not a replacement notion of system.
 Source: Zheng 4.1. -/
 structure CofinalEncoding (W : Scheme.{u}) {l : ℕ} (B : Coefficients.{u} l) where
   equivalence : Modules W B.rings ≌
@@ -369,9 +368,8 @@ def cofinalLevelNormalization {W : Scheme.{u}} {l : ℕ} {B : Coefficients.{u} l
         eb.cofinalFactor.hom.app ((model.ordinary.mapHomologicalComplex (.up ℤ)).obj P) ≫
         DerivedCategory.Q.map (cofinalLevelComplex model.ordinary m eb er (ordinaryLevel m) P).hom
 
-/-- A selected left extension on the sequence-site encoding. Its ordinary functor
-is identified with the recorded selected extension, so all transitions and tensor
-associators, including repeated least indices, are retained before derivation.
+/-- A selected left extension on the sequence-site encoding, whose ordinary
+functor is identified with the given selected extension.
 Source: Zheng 4.1. -/
 structure CofinalExtension (W : Scheme.{u}) {l : ℕ} (B : Coefficients.{u} l)
     (r : ℕ ↪o ℕ) where
@@ -441,7 +439,7 @@ theorem cofinalCoefficient_naturality {l : ℕ} (B : Coefficients.{u} l) (r : �
   rw [← B.rings.map_comp, ← B.rings.map_comp]
   congr 1
 
-/-- The actual map D→C, not an unspecified coefficient morphism.
+/-- The coefficient map D→C induced by restriction along `r`.
 Source: Zheng 4.1. -/
 def cofinalCoefficient {l : ℕ} (B : Coefficients.{u} l) (r : ℕ ↪o ℕ) :
     (cofinalRepeated B r).rings ⟶ B.rings where
@@ -449,7 +447,6 @@ def cofinalCoefficient {l : ℕ} (B : Coefficients.{u} l) (r : ℕ ↪o ℕ) :
   naturality := fun _ _ f ↦ cofinalCoefficient_naturality B r f
 
 /-- Repetition at t(m), specified on module sections, all restrictions and maps.
-These data specify the actual block functor of the recorded block-repetition lemma.
 Source: Zheng 4.1. -/
 structure CofinalRepeat (W : Scheme.{u}) {l : ℕ} (B : Coefficients.{u} l)
     (r : ℕ ↪o ℕ) where
@@ -472,7 +469,6 @@ structure CofinalRepeat (W : Scheme.{u}) {l : ℕ} (B : Coefficients.{u} l)
 attribute [instance] CofinalRepeat.additive CofinalRepeat.limits CofinalRepeat.colimits
 
 /-- Normalized geometric repetition on the fixed compactification, before localization.
-The derived comparison is built by the universal derived functor construction below.
 Source: Zheng 4.1, paragraph before 4.10. -/
 structure CofinalRepeatSupport {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactification f}
     {l : ℕ} (T : Theory c l) (B : Coefficients.{u} l) (r : ℕ ↪o ℕ) where

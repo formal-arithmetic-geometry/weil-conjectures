@@ -66,8 +66,7 @@ private theorem affineFraction_smul {R B : Type u} [CommRing R] [CommRing B]
   rw [Proj.coe_twist_smul_apply, affineFraction_val, affineFraction_val, hc]
   simp [Algebra.smul_def, Localization.mk_mul]
 
-/-- The section m maps to iota(m)/1 is linear over the affine base ring. This assertion
-is entirely on the absolute affine Proj chart and constructs no descended sheaf.
+/-- The section m maps to iota(m)/1 is linear over the affine base ring.
 
 Source: Stacks, Tag 01OB, and Tag 01NR, its affine homogeneous-section map. -/
 theorem exists_affine_generator_linear

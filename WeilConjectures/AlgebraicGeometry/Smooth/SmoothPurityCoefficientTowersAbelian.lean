@@ -881,9 +881,9 @@ section
 attribute [local irreducible] DerivedCategory CategoryTheory.Functor.mapDerivedCategory
   SheafOfModules.systemRingHasDerived spCoefficientCommRings
 
-/-- The three clauses of the coefficient-tower lemma, with the actual tower category
-and all identifications fixed on sections. The scalar and tensor fields are the
-existing canonical derived-change models, not arbitrary maps or isomorphisms.
+/-- The structure of the coefficient-tower category: its identification with strict
+semilinear systems, Grothendieck abelianness with levelwise limits and colimits, and the
+derived reduction maps along coefficient transitions with their unit and composition laws.
 Source: Bhatt--Scholze, Definition 3.5.3. -/
 structure SpCoefficientTowersAbelian where
   /-- Uncurrying into the existing varying-coefficient strict systems. -/

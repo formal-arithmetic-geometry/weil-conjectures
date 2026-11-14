@@ -45,7 +45,7 @@ def fixedTensorModel (T : Scheme.{u}) (P Q : CochainComplex (FixedSheaves l E n 
   DerivedCategory.QObjTensorQObjIsoOfKFlatLeft P Q hP
 
 /-- Derived tensor realization fixed on every K-flat representative, including total
-summands and exact localization factors. The data cannot be an arbitrary endpoint iso. -/
+summands and exact localization factors. -/
 structure TensorCoordinates (b : SpTowerShriek.Base l E) (T : Scheme.{u})
     extends TensorChainCoordinates l E n T where
   derived : Functor.uncurry.obj

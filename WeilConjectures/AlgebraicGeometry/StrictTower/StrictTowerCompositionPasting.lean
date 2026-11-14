@@ -14,6 +14,9 @@ import all WeilConjectures.AlgebraicGeometry.StrictTower.TowerOpenBetaNormalizat
 # Composition pasting for strict constant-coefficient towers
 
 Source: Stacks Project, Tags 0F7J, 0F7C, 0F7D and 0F7F.
+
+## Implementation details
+
 The shared constructions live in `StrictTowerCompositionMaps`, so refinement
 independence can be used here without an import cycle.
 -/
@@ -916,39 +919,10 @@ private theorem compositionFactor_isIso {A C D E F H : Type*}
 
 /-- Composition pasting is invertible on the stated finite-origin inputs, commutes with
 all compatible proper refinements, and satisfies vertical interchange under arbitrary
-base change. The latter two clauses are equalities of natural transformations on the
-whole derived strict-tower categories; no evaluation-faithfulness premise is made.
+base change. The latter two are equalities of natural transformations on the whole derived
+strict-tower categories.
 
-Source: Stacks, Tags 0F7J, 0F7C, 0F7D and 0F7F, adapted to strict towers.
-
-Proof plan, following the node's ten steps:
-1. Evaluation commutes with J_c. A scalar etale origin L_n evaluates J_c M as the
-   scalar realization of c_! L_n, by finite constant coefficient transport and
-   proposition-comparison-immersions--1. Exactness of etale c_!
- retains its individual lower bound.
-2. Apply gamma_isIso to Q at J_c M, and whisker with R_q. The jComp and rComp
-   identifications give exactly compositionD, naturally in M.
-3. For a refinement let A be its c-square, H its i-square, and T its b-square.
-   Horizontal pasting in normalizedProperOpenCalculus gives
-   gamma_a = (gamma_T J_c1)(J_b2 gamma_A). T need not be cartesian.
-4. Apply vertical pasting to T above Q2 and Q1 above H; their outer squares agree.
-   Thus (R_p2 gamma_T)(gamma_Q2 R_w) = (R_u gamma_Q1)(gamma_H R_r1).
-5. Naturality of gamma_Q2 at gamma_A moves gamma_A past gamma_Q2.
-6. Expand C_hf D2 using step 3, then steps 5 and 4. Normalize R_q2 R_u to R_q1.
-   The result is D1 (C_h F_f1)(F_h2 C_f), with the displayed associators.
-7. For base change, mate-pasting identifies E_qp with (R_q' E_p)(E_q R_p).
-   Open composition identifies beta_a with (J_b' beta_c)(beta_b J_c).
-8. The base-change clause of normalizedProperOpenCalculus gives
-   (R_p' beta_b)(E_p J_b)(G_t gamma_Q)
-     = (gamma_Q' G_d)(J_i' E_r)(beta_i R_r).
-9. In e_hf(G_g D), naturality of E_q moves gamma_Q inside R_q'. Apply step 8.
-   Naturality of gamma_Q' at beta_c leaves precisely
-   (D' G_x)(F_h' e_f)(e_h F_f), proving vertical interchange before evaluation.
-10. The same calculus cube on refinement squares transports both boundaries;
-    common-refinement and independence are recorded below. No common bound or
-    finite coefficient ring for all levels, and no properness of the base change,
-    is used anywhere.
--/
+Source: Stacks, Tags 0F7J, 0F7C, 0F7D and 0F7F. -/
 theorem compositionPastingCoherence :
     (∀ {X Y Z : Scheme.{u}} (f : X ⟶ Y) (h : Y ⟶ Z)
       [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
@@ -1042,7 +1016,7 @@ theorem compositionRefinement_isIso {X Y Z : Scheme.{u}} (f : X ⟶ Y) (h : Y �
   exact ⟨hc, IsIso.of_isIso_comp_right _ ((compositionD B T₁).app M)⟩
 
 /-- The horizontal and hf comparisons from a common refining compatible tower, on a
-finite-origin input. In the node's right-to-left convention they are H₂⁻¹H₁ and C₂⁻¹C₁.
+finite-origin input, in right-to-left notation H₂⁻¹H₁ and C₂⁻¹C₁.
 Source: Stacks, Tag 0F7J, common refinements. -/
 noncomputable def compositionCommonComparison
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (h : Y ⟶ Z)

@@ -24,7 +24,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale.SystemProjection
 
-/-- Evaluation of the system coefficient mate is the published proper/open map.
+/-- Evaluation of the system coefficient mate is the proper/open projection map.
 Source: Zheng Lemma 5.16; Stacks Tag 0GL6. -/
 theorem etaleSystemProjection_evaluation
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) (l : ℕ) (t : Theory c l) :

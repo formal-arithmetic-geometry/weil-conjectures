@@ -81,8 +81,7 @@ private theorem preservesSheafification_forget_modules
 whenever r is prime and is not a unit in Lambda.
 
 Source: Stacks Project, Tag 03FD, module/abelian cohomology comparison; Tag 0F08, proof's
-coefficient reduction, extended to arbitrary Lambda by the following retract argument. This argument
-takes place in abelian sheaves, so no Lambda-linear decomposition of a Lambda-module is asserted. -/
+coefficient reduction. -/
 theorem isZero_prime_cyclic_higherDirectImage_of_quotient
     (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (h : Y ⟶ X)
     (q : ℤ) (r : ℕ) (hr : r.Prime) (hunit : ¬ IsUnit (r : Λ))

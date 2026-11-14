@@ -392,7 +392,7 @@ end Ordinary
 attribute [local irreducible] Rrings
 
 /-- The underlying abelian tower comparison supplied by an ordinary inverse system.
-Source: classes proof (2), integral reduction, and Zheng Construction 4.1.
+Source: Zheng Construction 4.1.
 -/
 theorem integralInverseSystem_abelian_comparison (l : ℕ) [Fact l.Prime]
     {X Y : Scheme.{u}} (f : X ⟶ Y)

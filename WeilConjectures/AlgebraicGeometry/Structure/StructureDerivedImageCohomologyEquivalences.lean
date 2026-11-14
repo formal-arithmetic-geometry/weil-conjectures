@@ -20,16 +20,7 @@ public import WeilConjectures.AlgebraicGeometry.LerayDegenerateSections
 
 /-! The affine Leray comparison before passing from modules to abelian sheaves.
 
-Source: Stacks Project, Tags 01XK, 01FB and 03FD.
-
-Proof: Apply the affine Leray edge isomorphisms to the degree-one cohomology of
-the two proper direct images. The cocycle square for the derived adjunction unit,
-the canonical single pullback transpose, and naturality of direct-image composition
-identify the resulting map with `moduleCohomologyFMap` for the structure h-map.
-The identity-base truncated edge is invertible by its local-class formula and
-sheafification of local cohomology. The total/classical comparison is the canonical
-single comparison. This argument is uniform in the finite family and supplies the
-two additive equivalences and their displayed square. -/
+Source: Stacks Project, Tags 01XK, 01FB and 03FD. -/
 
 @[expose] public section
 set_option autoImplicit false

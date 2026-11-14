@@ -25,8 +25,15 @@ import WeilConjectures.CategoryTheory.Derived.DerivedExactCube
 
 Source: Stacks Project, Tag 03S6, with the normalized comparison of Tag 09AF and pullback coherence
 of Tag 099R. The theorem below states the ordinary derived comparison equation for every
-bounded-below etale complex and arbitrary bottom map `g`. The proof lifts the ordinary sheaf
-equation through exact-functor localization.
+bounded-below etale complex and arbitrary bottom map `g`.
+
+## Implementation details
+
+The derived comparisons are rebuilt here degreewise, as in the upstream
+`mapDerivedCategoryOpenImmersionLowerShriekComparisonUpperStarIso` and
+`mapDerivedCategoryComparisonUpperStarCompUpperStarIso`, because those modules cannot be
+imported together with this file's other imports. The derived equation is obtained by
+lifting the ordinary sheaf equation through exact-functor localization.
 -/
 
 @[expose] public noncomputable section
@@ -42,11 +49,9 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.ProEtale
 
 /-- The derived site comparison for extension by zero, `c_j : N_X j_!^et ≅ j_!^proet N_U`,
-the degreewise extension of the sheaf comparison of
-proposition-comparison-immersions--1. It is the same construction as the upstream
-`mapDerivedCategoryOpenImmersionLowerShriekComparisonUpperStarIso`, whose module cannot be
-imported together with this item's side imports.
-Source: Stacks Tag 09AF, blueprint. -/
+the degreewise extension of the sheaf comparison
+`openImmersionLowerShriekComparisonUpperStarIso`.
+Source: Stacks Tag 09AF. -/
 noncomputable def fixSiteOpenComparison (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j).mapDerivedCategory ⋙
@@ -60,9 +65,7 @@ noncomputable def fixSiteOpenComparison (Λ : Type (u + 1)) [CommRing Λ] [Finit
 
 /-- The inverse-image comparison, oriented as `rho_u : u_proet⁻¹ N_V ≅
 N_T u_et⁻¹`: degreewise `comparisonUpperStarCompUpperStarIso`, the inverse of the canonical
-comparison of proposition-comparison-etale-derived-category--5. It is the same construction as the
-upstream `mapDerivedCategoryComparisonUpperStarCompUpperStarIso`, whose module cannot be
-imported together with this item's side imports.
+site-comparison/inverse-image comparison.
 Source: Stacks Tag 099R. -/
 noncomputable def fixSitePullbackComparison (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Y : Scheme.{u}} (u : X ⟶ Y) :
@@ -126,10 +129,7 @@ Source: Stacks Tag 03S6, Tags 09AF and 099R.
 For each bounded-below `K`, the left side is `g⁻¹(c_j)`, then the actual pro-etale
 base-change isomorphism `e_j^proet`, then `j'_!(rho_h)`. The right side is `rho_g`,
 then `N_X'` of the actual etale base-change isomorphism `e_j^et`, then `c_{j'}`. The
-cartesian square is the chosen one of `sq`, read as an `IsPullback` witness. The
-inverse-unit normalization of `c_j` asserted by the node is the published statement
-`openComparison_unit_normalization` about
-the same sheaf comparison `openImmersionLowerShriekComparisonUpperStarIso`. -/
+cartesian square is the chosen one of `sq`, read as an `IsPullback` witness. -/
 theorem fixSiteOpenExchange (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {U' U X' X : Scheme.{u}} {gU : U' ⟶ U} {j' : U' ⟶ X'}
     {j : U ⟶ X} {g : X' ⟶ X} [IsOpenImmersion j] [IsOpenImmersion j']

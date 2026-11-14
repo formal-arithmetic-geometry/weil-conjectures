@@ -15,7 +15,7 @@ import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinaryRestrictionPullbackSqu
 
 /-! Normalization data for the scalar/open exchange argument. -/
 
--- After pruning, this module only keeps private declarations.
+-- This module only keeps private declarations.
 set_option linter.privateModule false
 
 

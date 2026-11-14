@@ -23,7 +23,7 @@ import Mathlib.Algebra.Homology.HomotopyCategory.MappingCocone
 /-!
 # Naturality of the supported Hom identification under base change
 
-Source: literature/stacks-project/etale-cohomology.tex, Tag 0A45.
+Source: Stacks Project, Tag 0A45.
 -/
 
 @[expose] public section
@@ -238,7 +238,7 @@ noncomputable abbrev SupportedHomConeModelCore.transport
     d.H.obj K ⟶ d'.H.obj K' :=
   (M.modelIso K).hom ≫ Q₀.map f ≫ (M'.modelIso K').inv
 
-/-- Build the resolution and section diagram before specifying a concrete sheaf category.
+/-- The resolution and section diagram on a general abelian category.
 Source: Stacks, Tags 070K, 0A45. -/
 noncomputable def supportedHomDiagramFactory
     {C : Type u'} [Category.{v'} C] [Abelian C] [IsGrothendieckAbelian.{w} C]

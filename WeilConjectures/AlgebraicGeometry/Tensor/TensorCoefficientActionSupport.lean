@@ -123,7 +123,7 @@ private theorem homogeneous_action_support {X Z : Scheme.{u}} (j : Z ⟶ X)
   rw [haction, hπ]
 
 /-- A homogeneous quotient section of degree n carries the d-th ideal summand
-into the (n+d)-th ideal summand. No coefficient transport or projection is asserted.
+into the (n+d)-th ideal summand.
 Source: Stacks Project, Tag 09MS, graded ideal sequence; Tag 0B8S, quotient action. -/
 theorem tensorGradedCoefficient_action_support {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)

@@ -52,8 +52,7 @@ theorem supportedHasWeakSheafify
 
 attribute [local instance] supportedHasSheafify supportedHasWeakSheafify
 
-/-- Use the existing preadditive tensor structure without reopening sheafification
-instance search under each tensor-complex binder. -/
+/-- The existing preadditive tensor structure on sheaves of modules. -/
 noncomputable instance supportedSheaf_monoidalPreadditive (A : Type (u + 1)) [CommRing A]
     (X : Scheme.{u}) : MonoidalPreadditive (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) :=
   Sheaf.monoidalPreadditive

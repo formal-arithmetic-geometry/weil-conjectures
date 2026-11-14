@@ -1471,48 +1471,7 @@ both topologies. On the etale site the comparison to the shifted restriction con
 inclusion of the evaluated support kernel in the shifted source summand.
 
 Source: Milne, Lectures on Etale Cohomology, Section 9, Example 9.5 and the Ext proof of Theorem
-9.4, pp. 66--67.
-
-Proof, following the ten recorded DAG steps:
-1. Use small representatives in the coefficient universe. Ordinary ModuleCat-valued
-   sheaves are Grothendieck abelian and have enough injectives by the existing sheaf
-   instances. Derive in module sheaves, without assuming that forgetting scalar
-   action preserves injectives.
-2. Evaluation g ↦ g(1) identifies Hom(A_X,M) with M(X). Its inverse sends a section m
-   to the map b ↦ b m|_V on each site object V. Semilinearity proves restriction
-   compatibility and both inverse identities. The same construction applies over U.
-3. The open adjunction identifies the adjunct of g composed with its counit with the
-   restriction of g. Evaluation therefore gives precisely restriction of g(1), with
-   no scalar factor or sign, as expressed by SupportedHomOpenEvaluation.
-4. Use lem-weil-pbc-open-closed-short-exact and the canonical constant pullback on
-   the etale site, or lem-pur-proetale-supported-constant-presentation on the pro-etale
-   site. The actual constant restriction rho is the cokernel of the open counit.
-   Each supported section thus gives a unique factorization f through rho.
-   Uniqueness proves additivity and naturality, and fixes theta by evaluation.
-5. Apply theta inverse termwise. Naturality for each differential makes this an
-   isomorphism of complexes. Supported cocycles go to Hom cocycles; supported
-   boundaries go to Hom boundaries.
-6. Derive theta inverse using lem-weil-pbc-right-derived-plus-injective and its
-   universal property. The inverse derives in the same way; uniqueness makes their
-   composites identities. Naturality of the derived units identifies the comparison
-   on any specified resolution with the actual unit followed by inverse R(Qe).
-7. A bounded-below complex of injectives is K-injective. Apply
-   lem-sc-p1-rhom-hom-derived-roof with M=i_*A_Z to obtain exactly the localized
-   cocycle map followed by inverse shifted Qe. No sign enters its sole component.
-8. Naturality of both comparisons gives naturality of chi. The construction is on
-   cohomology before a resolution is chosen; the formula holds for every e and every
-   cocycle. Changing a cocycle by a boundary therefore gives the same value, and the
-   canonical derived-unit transports compare any two resolutions, also in negative degrees.
-9. Restriction of an injective module sheaf along a monomorphism of site objects is
-   epic. Sheafification is exact, so its right adjoint preserves injectives. Extend
-   a map from the free module presheaf on the smaller representable to the larger
-   one and evaluate at the identity. This proves degreewise short exactness of the
-   support kernel, total sections and open sections. Forgetting coefficients is exact.
-10. Apply closedConeLift_quasiIso from lemma-cycle-class-cartier-divisor to this short exact
-   sequence. The canonical support inclusion into the shifted restriction cone is
-   a quasi-isomorphism, as is its composite with the termwise evaluation isomorphism.
-   This proves exactly ConeAgreement. No quasi-compactness, constructibility,
-   finite-Tor or purity hypothesis is used. -/
+9.4, pp. 66--67. -/
 theorem supportedHom_cocycle_normalization (P : WeilConjectures.PurityFiniteSetting.{u})
     {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] :
     ∃ e : Etale.supportedHomNormalization P i,

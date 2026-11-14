@@ -11,7 +11,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
 
 /-! # Projection restriction formulas for the strict-local mate
 
-Source: Stacks Project, Tag 03Q9, final injective-complex paragraph.
+Source: Stacks Project, Tag 03Q9.
 -/
 
 /- This original-model counterpart follows the proved calculation in
@@ -31,8 +31,7 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Derived neighbourhood sections identify with stage hypercohomology, compatibly
 with transition pullbacks and with projection restriction for the derived mate.
-This does not assert that the canonical source cocone is colimiting.
-Source: Stacks, Tag 03Q9, final injective-complex paragraph; Tag 03Q8. -/
+Source: Stacks, Tags 03Q9 and 03Q8. -/
 theorem smallModel_nonempty_strictLocalMateProjectionData {X S : Scheme.{v}}
     (f : X ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)

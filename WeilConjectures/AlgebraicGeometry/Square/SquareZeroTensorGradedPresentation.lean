@@ -31,9 +31,8 @@ attribute [local irreducible] RingedSpace.moduleCohomology
   boundaryCoefficientCohomologyIso canonicalTensorBoundaryComparisons
 noncomputable section
 
-/-- A graded algebra presentation, before taking cohomology. All its data are supplied
-explicitly; this structure does not select an object from an existence theorem.
-The kernel cofan expresses its graded direct sum, and the degree maps are projections.
+/-- A graded algebra presentation, before taking cohomology. The kernel cofan expresses its
+graded direct sum, and the degree maps are projections.
 Source: Stacks Project, Tag 09MS, the direct-sum ideal sequence. -/
 structure TensorGradedPresentation {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) where

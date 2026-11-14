@@ -21,7 +21,7 @@ import all Mathlib.Algebra.Homology.Localization
 # The clopen section projector of a proper/open square
 
 Source: Stacks Project, more-etale.tex, Tag 0F7B; morphisms.tex, Tag 01W6(2); sites-modules.tex, Tag
-03DI; derived.tex, Tag 015F, and the strict-tower refinement.
+03DI; derived.tex, Tag 015F.
 
 All coefficient rings are arbitrary commutative rings. The categories and normalized
 operations are the recorded constant-ring module and strict-tower constructions.
@@ -163,8 +163,7 @@ theorem clopenModuleToDirect_isIso {U X : Scheme.{u}} (s : U ⟶ X)
     infer_instance
   exact NatIso.isIso_of_isIso_app _
 
-/-- The ordinary intrinsic projector. Its section characterization is stated below;
-no arbitrary splitting or map is chosen.
+/-- The ordinary intrinsic projector.
 Source: Stacks 03DI. -/
 def clopenModulePi {U X : Scheme.{u}} (s : U ⟶ X)
     [IsOpenImmersion s] [IsClosedImmersion s] :
@@ -343,7 +342,6 @@ theorem clopenTower_section_projector {U X C : Scheme.{u}}
     exact ⟨hz, hz.eq_zero_of_tgt _⟩
 
 /-- Mathlib's abelian structure on strict towers, with the coefficient universe fixed.
-This is the existing functor-category instance over the existing module-sheaf instance.
 Source: Stacks 02MZ and 03DA. -/
 abbrev clopenTowerAbelian (X : Scheme.{u}) : Abelian (Towers B X) :=
   @Abelian.functorCategoryAbelian ℕᵒᵖ inferInstance (Modules B X) inferInstance
@@ -354,8 +352,8 @@ abbrev clopenTowerAbelian (X : Scheme.{u}) : Abelian (Towers B X) :=
       (SheafOfModules.wEqualsLocallyBijective_coefficientUniverse.{u + 1, u, u + 1}))
 
 /-- Compatibility of an exact natural transformation with localization on complexes.
-This predicate records the representative equation using the existing exact-functor
-factorizations; it introduces no new derived functor or map.
+This predicate records the representative equation using the exact-functor
+factorizations.
 Source: Stacks 015F and localization's universal property. -/
 def ClopenProjectorDescent
     {A : Type uC} [Category.{vC} A] [aA : Abelian A] [HasDerivedCategory.{wC} A]
@@ -744,7 +742,7 @@ private theorem iso_projector_counit {U X : Scheme.{u}}
 /-- Alpha is beta followed by the descended section projection and the specified
 open and inverse-image compositors. Cartesian squares recover beta; an identity
 left vertical map makes the lift the indicated clopen section.
-Source: Stacks 0F7B, with the arbitrary-ring strict-tower refinement. -/
+Source: Stacks 0F7B. -/
 theorem properOpen_clopen_projector {V W S T : Scheme.{u}}
     (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
     [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]

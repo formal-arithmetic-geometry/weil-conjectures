@@ -35,9 +35,9 @@ variable (b : SpTowerShriek.Base l E) (o : SpTowerShriek.Operations l E b)
   {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
-/-- The specified b followed by finite compact support of the input reduction.
-The b in this definition is literally the proper counit mate followed by the open
-scalar comparison, as fixed by reductionDirectImageComparison. -/
+/-- The specified b followed by finite compact support of the input reduction, where b is
+the proper counit mate followed by the open scalar comparison of
+`reductionDirectImageComparison`. -/
 def word {m n : ℕ} (h : m ≤ n) (C : SpTowerShriek.D l E X) :
     (scalarExtensionFunctor (quotientMap l E h) Y).obj
         ((SpTowerShriek.finiteF l E b c n).obj ((SpTowerShriek.Ev l E X n).obj C)) ⟶

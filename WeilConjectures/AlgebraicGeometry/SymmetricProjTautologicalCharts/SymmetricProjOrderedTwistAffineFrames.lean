@@ -346,8 +346,7 @@ private theorem quotient_chart_section (S : Scheme.{u}) (E : S.Modules)
   exact unit_section_res (Proj.unitToTwist (symmetricGenerator E V m).property) _
 
 /-- On one affine base open the ordered quotient sections have the standard free
-frames and homogeneous coordinate ratios. This is a local calculation and does
-not assert a global comparison of line modules.
+frames and homogeneous coordinate ratios.
 
 Source: Stacks Project, Constructions, Tags 01OE, 01OB, 01MS and 01NR.
 -/

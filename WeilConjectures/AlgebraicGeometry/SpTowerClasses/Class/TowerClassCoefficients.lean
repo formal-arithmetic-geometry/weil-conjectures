@@ -46,7 +46,7 @@ def Rtransition (T : Scheme.{u}) (n : ℕ) : Rlevel l T (n + 1) ⟶ Rlevel l T n
 /-- The coefficient ring tower R. -/
 def Rrings (T : Scheme.{u}) := Functor.ofOpSequence (Rtransition l T)
 
-/-- The coefficient ring tower A is the published one. -/
+/-- The coefficient ring tower A, given by `spCoefficientCommRings`. -/
 abbrev Arings (T : Scheme.{u}) := spCoefficientCommRings l E T
 
 /-- The quotient kills the required positive ell power. -/

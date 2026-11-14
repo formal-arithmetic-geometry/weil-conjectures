@@ -23,8 +23,7 @@ import all WeilConjectures.AlgebraicGeometry.ProperBaseChange.WitnessCompatibili
 /-!
 # Bounded acyclic flat models for the proper coefficient map
 
-Source: Stacks Project, `literature/stacks-project/more-etale.tex`, Tag 0GL6,
-remark-Rf-lower-shriek-change-of-rings.
+Source: Stacks Project, Tag 0GL6.
 
 The scalar extension, its pullback comparison, and the coefficient mate are the
 canonical constructions already provided by the étale six-functor interface.
@@ -103,8 +102,8 @@ def properSheafCoefficientMap
     (upperStarLowerStarAdjunction (ModuleCat.{u + 1} B) r)
     (TwoSquare.mk _ _ _ _ (scalarSheafPullbackIso φ r).hom))
 
-/-- The termwise projection chain map pi_C. Mapping the ordinary natural transformation
-on complexes guarantees that its components commute with the differentials.
+/-- The termwise projection chain map pi_C, obtained by mapping the ordinary projection
+natural transformation on complexes.
 Source: Stacks 0GL6, 015E. -/
 def properCoefficientComplexMap
     {A B : Type (u + 1)} [CommRing A] [CommRing B]

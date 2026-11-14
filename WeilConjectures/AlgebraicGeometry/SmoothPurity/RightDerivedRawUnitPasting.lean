@@ -39,20 +39,9 @@ private lemma expand_raw_unit
     Category.assoc, Iso.hom_inv_id_app_assoc] using hh
 
 /-- Raw homotopy units paste across a mixed exchange when the first input is right derived
-and the second is exact. This is a categorical calculation, with no scheme, graph or chosen
-compactification.
+and the second is exact.
 
-Source: Stacks Project, Tags 0F7B, 0F7J and 0D6E.
-
-Proof in words: evaluate at a homotopy object and expand the exact-right composition unit.
-Naturality moves the first unit and the first comparison through the second comparison.
-Substitute the two normalization hypotheses. The exact functor's homotopy factor and its
-inverse cancel. Move the ordinary first input map through the second map by naturality.
-Apply the mixed-exchange unit equation at the image under J. The right-derived composition
-unit identity then combines the P and S units. The exact triangle for H=J O removes the
-remaining open-composition factors. On a representative complex, degreewise naturality
-identifies the ordinary remaining map with t. All operations preserve zero maps, and the
-identity exchange gives the ordinary composition-unit identity. No exactness of F is used. -/
+Source: Stacks Project, Tags 0F7B, 0F7J and 0D6E. -/
 theorem rightDerived_raw_unit_pasting
     {C U Y X Z B : Type*}
     [Category C] [Category U] [Category Y] [Category X] [Category Z] [Category B]

@@ -18,8 +18,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.ProEtale
 
-/-- The explicit inverse candidate: apply the inverse f and g Hom bijections to the
-identity at f!g!L, precompose with alpha inverse, then transpose through gf. -/
+/-- The explicit candidate inverse `f^! g^! L ⟶ (gf)^! L` to `standingExceptionalComposition`,
+obtained by transposing the inverse compact-support compositor. -/
 def standingExceptionalCompositionInverse (P : WeilConjectures.PurityFiniteSetting.{u})
     {X Y S : Scheme.{u}}
     [X.Over (Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))]

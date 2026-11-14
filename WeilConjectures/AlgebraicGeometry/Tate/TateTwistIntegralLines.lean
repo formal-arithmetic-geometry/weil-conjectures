@@ -41,7 +41,7 @@ with the integral and rational local calculations used by `tateTwist_locallyFree
 
 * `tateIntegralTwist` and `tateRationalTwist` are the integral and rational twist functors.
 * `TateRationalSignedLine` and `TateQbarSignedLine` express the signed-line clauses in the
-  recorded integral-representative categories, with the canonical restriction functors.
+  integral-representative categories, with the canonical restriction functors.
 -/
 
 @[expose] public noncomputable section
@@ -60,7 +60,7 @@ attribute [-instance] CategoryTheory.flatConstantModulesAbelian
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The canonical bounded integral twist uses the recorded intrinsic coefficient line. -/
+/-- The canonical bounded integral twist uses the intrinsic coefficient line. -/
 def tateIntegralTwist (D : FiniteFieldDatum.{d}) (ℓ : ℕ) [Fact ℓ.Prime]
     (hD : ℓ ≠ D.p) (E : Type u) [Field E] [Algebra (Padic ℓ) E]
     [FiniteDimensional (Padic ℓ) E] (X : Scheme.{u})
@@ -77,17 +77,16 @@ def tateRationalTwist (D : FiniteFieldDatum.{d}) (ℓ : ℕ) [Fact ℓ.Prime]
     ((sfRationalConstructibleLocalization ℓ E X).obj
       (intrinsicIntegralCoefficientTwist D ℓ hD E X m))
 
-/-- Transport invertibility along the actual residue-field homomorphism. -/
+/-- Transport invertibility along the residue-field homomorphism. -/
 @[instance_reducible] def tatePullbackInvertible (ℓ : ℕ) {Y X : Scheme.{u}} (f : Y ⟶ X)
     [∀ x : X, Invertible (ℓ : X.residueField x)] :
     ∀ y : Y, Invertible (ℓ : Y.residueField y) :=
   fun y ↦ (map_natCast (f.residueFieldMap y).hom ℓ) ▸
     Invertible.map (f.residueFieldMap y).hom (ℓ : X.residueField (f y))
 
-/-- The rational signed lines, interpreted in the recorded rational category:
+/-- The rational signed lines, interpreted in the rational category:
 every signed degree-zero line restricts to the coefficient unit on this cover,
-and the positive/negative tensor product is the coefficient unit globally.
-The integral representative of the coefficient unit is the published zero twist. -/
+and the positive/negative tensor product is the coefficient unit globally. -/
 def TateRationalSignedLine (D : FiniteFieldDatum.{d}) (ℓ : ℕ) [Fact ℓ.Prime]
     (hD : ℓ ≠ D.p) (E : Type u) [Field E] [Algebra (Padic ℓ) E]
     [FiniteDimensional (Padic ℓ) E] (X : Scheme.{u})
@@ -108,9 +107,8 @@ def TateRationalSignedLine (D : FiniteFieldDatum.{d}) (ℓ : ℕ) [Fact ℓ.Prim
     (sfRationalConstructibleLocalization ℓ E X).obj
       (intrinsicIntegralCoefficientTwist D ℓ hD E X 0))
 
-/-- The same signed local-line and tensor-inverse clauses in the recorded literal
-common-stage category. Both restriction and tensor are the canonical published functors;
-the coefficient unit is the least-stage zero twist, not an arbitrarily chosen object. -/
+/-- The same signed local-line and tensor-inverse clauses in the literal
+common-stage category, whose coefficient unit is the least-stage zero twist. -/
 def TateQbarSignedLine (D : FiniteFieldDatum.{d}) (ℓ : ℕ) [Fact ℓ.Prime]
     (hD : ℓ ≠ D.p) (X : Scheme.{u})
     [∀ x : X, Invertible (ℓ : X.residueField x)]

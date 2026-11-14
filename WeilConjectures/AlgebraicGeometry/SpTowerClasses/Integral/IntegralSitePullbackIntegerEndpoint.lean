@@ -53,8 +53,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 
 /-- Integer endpoint square for the etale-to-pro-etale pullback.
 
-Source: Stacks Project, Tag 00WX, and the integer endpoint part of the change-of-site construction
-in the classes proof.
+Source: Stacks Project, Tag 00WX.
 -/
 theorem integral_site_pullback_integer_endpoint {X Y : Scheme.{u}} (f : X ⟶ Y) :
     let κ := comparisonUpperStarCompUpperStarIso AddCommGrpCat.{u + 1} f

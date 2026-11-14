@@ -386,8 +386,7 @@ def comparisonFiniteF (b : Base l E) (a : StrictFiniteCoordinates l E b)
     Functor.isoWhiskerRight (comparisonFiniteOpen l E b c.i n) _
 
 /-- The finite exchange is the recorded ambient exchange, and on every specified
-etale witness it is the transported etale exchange. Coordinates in this square
-are fixed by ordinary sections and adjunction units, not chosen for this arrow. -/
+etale witness it is the transported etale exchange. -/
 def StrictFiniteExchangeComparisons (b : Base l E) (o : Operations l E b)
     (levels : ComparisonLevels l E b o) (a : StrictFiniteCoordinates l E b) : Prop :=
   (∀ {X' X Y' Y : Scheme.{u}} {h : X' ⟶ X} {f' : X' ⟶ Y'}

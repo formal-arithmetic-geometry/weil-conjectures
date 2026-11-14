@@ -20,12 +20,7 @@ namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 
 /-- Form the finite boundary predicate before specializing the abelian category.
 The quotient is placed in degree zero and the root map in degree zero shifted by two.
-The two supplied arrows retain exactly the endpoint transports of `finiteBoundaryEquality`.
-
-Construction: apply the degree-zero single functor to the quotient and the root map,
-shift the latter by two, and use these actual morphisms in `finiteBoundaryEquality`.
-No choice of arrow or endpoint transport is added; unfolding gives the original predicate,
-including its heterogeneous equalities and final ordinary equality. -/
+The two supplied arrows retain exactly the endpoint transports of `finiteBoundaryEquality`. -/
 def singleBoundaryEquality {C : Type u} [Category.{v} C] [Abelian C]
     [HasDerivedCategory.{w} C] {X X' Y Y' : C} (q : X ⟶ X') (r : Y ⟶ Y')
     {A B : Type w} (a : A) (beta : B) : Prop :=

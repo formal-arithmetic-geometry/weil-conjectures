@@ -125,7 +125,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option maxHeartbeats 1000000 in
 -- The cocycle calculation elaborates the underlying modules and product projections.
 /-- The connecting map obeys Leibniz for any sheaf action agreeing with multiplication
-by local lifts. The action is input; no action, cohomology action, or boundary is chosen.
+by local lifts.
 Source: Stacks Project, Cohomology, Lemma 0B8S, local-lift computation. -/
 theorem square_zero_horseshoe_boundary_leibniz (X : Scheme.{u})
     (B C : X.CommAlgebraSheaf) (p : B ⟶ C)

@@ -264,8 +264,7 @@ private theorem integer_transpose
     (integer_comparison f) (unit_comparison l E d)
 
 /-- Integral reduction commutes with an exact inverse image of the quotient module
-towers. Only the Z-to-R stage occurs; no scalar extension to A, Tate tensor line,
-or coefficient/line comparison at A occurs in the conclusion. -/
+towers. -/
 theorem tower_chernReduction_pullback
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (_hX : IsUnit (l : Γ(X, ⊤))) (_hY : IsUnit (l : Γ(Y, ⊤)))

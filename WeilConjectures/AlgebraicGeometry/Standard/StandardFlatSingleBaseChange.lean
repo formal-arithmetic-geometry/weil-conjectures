@@ -16,9 +16,8 @@ import WeilConjectures.AlgebraicGeometry.Standard.StandardFlatSingleBaseChangeEp
 
 Source: Stacks Project, Tag 0A1D.
 
-The standard-localization degree-zero flat comparison is the intermediate result
-needed by the localized cartesian comparison. Its proof follows the stalkwise
-K-flat comparison and qcqs single-complex induction described in the DAG node.
+The standard-localization degree-zero flat comparison, an intermediate result
+needed by the localized cartesian comparison.
 -/
 
 @[expose] public section

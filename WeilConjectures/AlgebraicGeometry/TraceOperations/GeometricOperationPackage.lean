@@ -19,8 +19,8 @@ public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategoryB
 # Geometric operation packages with specified exceptional adjunction domains
 
 The operations are supplied inputs. Exceptional adjunctions have explicitly supplied
-full subcategory domains; no ambient right-adjoint existence is asserted. All tensor,
-Hom, evaluation and biduality constructions use the recorded relative derived structure.
+full subcategory domains. Tensor, Hom, evaluation and biduality use the relative derived
+structure.
 -/
 
 @[expose] public noncomputable section
@@ -40,12 +40,11 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 abbrev D (X : Scheme.{u}) := DerivedCategory
   (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
 
-/-- The recorded derived pullback; it is an input to the operation package, not a new
-pullback construction. -/
+/-- The derived pullback. -/
 abbrev star {X Y : Scheme.{u}} (f : X ⟶ Y) : D Λ Y ⥤ D Λ X :=
   (CondensedRing.upperStar Λ f).leftDerivedFunctor
 
-/-- The recorded derived ordinary pushforward. -/
+/-- The derived ordinary pushforward. -/
 abbrev push {X Y : Scheme.{u}} (f : X ⟶ Y) : D Λ X ⥤ D Λ Y :=
   (CondensedRing.lowerStar Λ f).rightDerivedFunctor
 
@@ -69,7 +68,7 @@ structure ExceptionalDomain {X Y : Scheme.{u}} (F : D Λ X ⥤ D Λ Y) where
 
 /-- Given compact-support operations and their given exceptional adjunction domains.
 The type `exceptional f` indexes the supplied domains, and may be empty when no exceptional
-adjunction is supplied. No existence statement is part of this input record. -/
+adjunction is supplied. -/
 structure Given (s : Scheme.{u}) where
   shriek : ∀ {X Y : Over s} (f : X ⟶ Y) [HasCompactification f.left],
     D Λ X.left ⥤ D Λ Y.left
@@ -123,7 +122,7 @@ local instance overCompProper {s : Scheme.{u}} {X Y Z : Over s}
     (f : X ⟶ Y) (g : Y ⟶ Z) [IsProper f.left] [IsProper g.left] :
     IsProper (f ≫ g).left := inferInstanceAs (IsProper (f.left ≫ g.left))
 
-/-- The product over the specified base, with the actual chosen scheme pullback. -/
+/-- The product over the specified base, with the chosen scheme pullback. -/
 abbrev product {s : Scheme.{u}} (X Y : Over s) : Over s :=
   Over.mk (pullback.fst X.hom Y.hom ≫ X.hom)
 
@@ -149,7 +148,7 @@ def biduality {X : Scheme.{u}} (ω K : D Λ X) : K ⟶ dual ω (dual ω K) :=
   (ihom.adjunction (dual ω K)).homEquiv K ω
     ((β_ (dual ω K) K).hom ≫ (β_ K (dual ω K)).hom ≫ evaluation ω K)
 
-/-- External product using actual product projections and the relative derived tensor. -/
+/-- External product using the product projections and the relative derived tensor. -/
 def externalProduct {s : Scheme.{u}} {X Y : Over s}
     (M : D Λ X.left) (N : D Λ Y.left) : D Λ (product X Y).left :=
   (star Λ (first X Y).left).obj M ⊗ (star Λ (second X Y).left).obj N
@@ -162,9 +161,7 @@ def ExceptionalDomain.counit {X Y : Scheme.{u}} {F : D Λ X ⥤ D Λ Y}
 
 variable {s : Scheme.{u}} (O : Given Λ s)
 
-/-- The five specified kinds of package data, on the supplied operation domains.
-Here `omega` is ambient, not assumed constructible; tensor and internal Hom are the
-existing derived ones, not freely chosen operations. -/
+/-- The five specified kinds of package data, on the supplied operation domains. -/
 structure Comparisons where
   omega : ∀ X : Over s, D Λ X.left
   normalization : omega (base s) ≅ 𝟙_ (D Λ s)
@@ -220,8 +217,8 @@ def trace (X Y Z : Over s) (px : Z ⟶ X) (py : Z ⟶ Y)
     (star Λ X.hom).map ((O.domain (structureMap Y) eY).counit ⟨_, hY⟩) ≫
     (P.monoidal (structureMap X)).εIso.inv
 
-/-- The exceptional adjunct `alpha_M`. Its two domain proofs are supplied, rather
-than deduced from a general-base constructibility-preservation assertion. -/
+/-- The exceptional adjunct `alpha_M`, given proofs that its objects lie in the
+supplied exceptional domains. -/
 def alpha (X Y Z : Over s) (px : Z ⟶ X) (py : Z ⟶ Y)
     [HasCompactification Y.hom] [HasCompactification px.left]
     (sq : ChosenCartesianSquare py.left px.left Y.hom X.hom)
@@ -239,8 +236,7 @@ def alpha (X Y Z : Over s) (px : Z ⟶ X) (py : Z ⟶ Y)
     (P.projection px ((star Λ py.left).obj (P.omega Y)) M).inv ≫
     (P.trace O X Y Z px py sq eY hY ⊗ₘ 𝟙 M) ≫ (λ_ M).hom)
 
-/-- The specified Künneth--Verdier arrow, constructed from the supplied comparisons.
-It is not an arbitrary morphism or a bare existence of an isomorphism. -/
+/-- The specified Künneth--Verdier arrow, constructed from the supplied comparisons. -/
 def kunnethVerdier (X Y Z : Over s) (px : Z ⟶ X) (py : Z ⟶ Y)
     [HasCompactification Y.hom] [HasCompactification px.left]
     (sq : ChosenCartesianSquare py.left px.left Y.hom X.hom)
@@ -271,9 +267,8 @@ def dualizingTrace {X Y : Over s} (f : X ⟶ Y) [HasCompactification f.left]
     (O.shriek f).obj (P.omega X) ⟶ P.omega Y :=
   ((O.domain f e).homEquiv ⟨_, hX⟩ ⟨_, hY⟩).symm (P.dualizingComp f e hY).inv
 
-/-- Componentwise identity, normalization, composition, and vertical-pasting equations.
-The dualizing composition equation is stated after the given adjunction bijections;
-it therefore uses exactly the adjoint composition comparison. -/
+/-- Componentwise identity, normalization, composition, and vertical-pasting equations;
+the dualizing composition equation is stated after the given adjunction bijections. -/
 structure Coherence : Prop where
   leftUnit : ∀ {X Y : Over s} (f : X ⟶ Y) [HasCompactification f.left]
     (K : D Λ X.left),
@@ -350,15 +345,13 @@ structure Coherence : Prop where
 
 end Comparisons
 
-/-- A geometric operation package on the actual ordinary derived categories.
+/-- A geometric operation package on the ordinary derived categories.
 The specified comparisons satisfy the component equations, biduality is required for
 all bounded constructible finite-Tor inputs, and the canonical Künneth--Verdier arrow is
 invertible over a field for quasi-compact compactifiable schemes, in the supplied
 adjunction domains. The Künneth--Verdier arrow is required on the fibre product
 `product X Y = X ×_s Y` with its projections `first`, `second`, whose source is
-`externalProduct M (dual ω_Y N)`; the square datum `sq` for this product is unique,
-since its identification with the pullback is fixed by the two projection equations.
-No preservation or right-adjoint existence theorem is asserted. -/
+`externalProduct M (dual ω_Y N)`. -/
 structure GeometricOperations where
   comparisons : Comparisons O
   coherence : comparisons.Coherence O
@@ -381,9 +374,8 @@ structure GeometricOperations where
     IsIso (comparisons.kunnethVerdier O X Y (product X Y) (first X Y) (second X Y) sq
       eY hY eP M.obj N.obj hM hJ)
 
-/-- The finite commutative primary-coefficient specialization, with no restriction on
-base scheme, coefficient characteristic, or finite ring beyond those in the source.
-The discrete topology is unique and the resulting coefficient is exactly C(-,A). -/
+/-- The finite commutative primary-coefficient specialization, with coefficient C(-,A) for
+a finite ring A with the discrete topology. -/
 def finiteGeometricOperationPackage (ell : ℕ) [Fact ell.Prime]
     (A : Type u) [CommRing A] [Finite A]
     (_hA : ∃ n : ℕ, ∀ a : A, (ell ^ n) • a = 0) (s : Scheme.{u})

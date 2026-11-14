@@ -525,8 +525,7 @@ end EvaluationHelpers
 namespace AlgebraicGeometry.Scheme
 
 /-- Evaluation respects an already specified presheaf map whose generators satisfy
-normalization. This is a preservation statement: it constructs neither a reduction map
-nor normalization universal arrows, and assumes no finite, perfect, or lisse objects.
+normalization.
 
 Source: Stacks Project, Tags 09BV and 0F63, with the canonical coefficient mate of Tags 03DA and
 098K. -/

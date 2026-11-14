@@ -56,8 +56,7 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 /-!
 # Site-comparison compatibility of the support boundary
 
-Source: Stacks Project, `etale-cohomology.tex`, Tag 09XP, label `section-cohomology-support`, with
-the etale/pro-etale refinement in the blueprint.
+Source: Stacks Project, `etale-cohomology.tex`, Tag 09XP.
 
 The statement records the two support long exact sequences and their canonical
 adjunction-unit comparison ladder. The boundary maps are normalized by the
@@ -136,7 +135,7 @@ namespace AlgebraicGeometry
 
 /-- A support boundary is the snake boundary on each injective section complex,
 transported through the canonical right-derived comparison maps.
-Source: Stacks Project Tag 09XP and. -/
+Source: Stacks Project Tag 09XP. -/
 def supportBoundaryNormalization {C : Type (u + 1)} [Category.{u} C]
     (J : GrothendieckTopology C) (A : Type (u + 1)) [CommRing A]
     {V W : C} (j : W ⟶ V)

@@ -24,7 +24,7 @@ import WeilConjectures.CategoryTheory.ScalarLocalization.SemilinearScalarLocaliz
 
 /-! # Tate twists are well defined and locally free of rank one
 
-The helpers specialize the recorded constant sheaf, root module, scalar extension,
+The helpers specialize the constant sheaf, root module, scalar extension,
 signed line and tensor functors. All positive root levels are indexed by `n + 1`.
 The theorem includes one common cover, normalized generators, canonical Kummer
 independence, signed invertible lines and equivalences with the negative twists.

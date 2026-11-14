@@ -23,8 +23,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- The canonical base-change map followed by direct image of the single-complex
-pullback counit. This is a construction for every module and every base morphism;
-it asserts neither monicity nor epicity.
+pullback counit, for every module and every base morphism.
 Source: Stacks Project, Tag 08HY and Tag 0A1D. -/
 noncomputable def standardSingleBaseChangeMap
     {Y B A : Scheme.{u}} (p : Y ⟶ B) (M : Y.Modules) (g : A ⟶ B) :

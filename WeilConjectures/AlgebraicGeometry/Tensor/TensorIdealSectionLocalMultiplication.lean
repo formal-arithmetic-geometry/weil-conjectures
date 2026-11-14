@@ -58,8 +58,8 @@ private theorem ideal_tensor_assoc {X : Scheme.{u}} (J M N P : X.Modules)
 lift of the quotient section. This is a statement about tensor modules alone;
 it contains no graded algebra presentation or quotient action.
 
-Source: Stacks Project, Tag 09MS, coherent-equation-ses, multiplication on the ideal coefficient;
-Tag 08KS, the closed-immersion quotient unit. -/
+Source: Stacks Project, Tag 09MS, the ideal short exact sequence, multiplication on the ideal
+coefficient; Tag 08KS, the closed-immersion quotient unit. -/
 theorem tensorIdealSection_local_multiplication {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)
     (a d t : ℕ) (h : d + a = t)

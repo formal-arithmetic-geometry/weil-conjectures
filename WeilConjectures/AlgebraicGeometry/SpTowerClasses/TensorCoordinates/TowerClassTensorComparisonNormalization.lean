@@ -48,7 +48,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The constructed comparison has the ordinary finite adjunction's pure-tensor formula.
 
-Source: Stacks 03EL, Zheng Construction 4.1, and clause (2). -/
+Source: Stacks 03EL, Zheng Construction 4.1. -/
 theorem comparison_normalization {b : SpTowerShriek.Base l E}
     {X Y : Scheme.{u}} {f : X ⟶ Y} (g : SpTowerShriek.Geometry l E b f)
     (T : SemilinearSections.GeometryOrdinaryTensor

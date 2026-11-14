@@ -480,7 +480,6 @@ def ExchangeDerivedPushNormalized
       exchangeDerivedUnit R' ((H.mapHomologicalComplex (.up ℤ)).obj K)
 
 /-- Normalization of the direct-image comparison by the universal right-derived units.
-It records the identity on the full diagram before deriving, rather than evaluations alone.
 Source: Stacks 0D6E. -/
 def ExchangeResPushNormalized {U V : Scheme.{t}} (f : U ⟶ V)
     (e : d.towerPush f ⋙ exchangeTowerRes d V ≅
@@ -669,8 +668,7 @@ def exchangeCornerD {X' X Y' : Scheme.{t}} (g' : X' ⟶ X) (f' : X' ⟶ Y') :
 
 /-- The explicit strict H: inverse pullback/reduction identification followed by h.
 Its source is R(M), its target is B, and its projection factor is the adjunct
-of the ambient counit tensored with the whole quotient diagram. The preceding
-inverse chi identifies R(M) with L_g R_Y(Rf_*K), so h is H after chi.
+of the ambient counit tensored with the whole quotient diagram.
 Source: Stacks 0B56. -/
 def exchangeRealizationH (K : d.derived X) :
     (completedReductionTower Y' d).obj ((d.pull g).obj ((d.push f).obj K)) ≅
@@ -680,7 +678,6 @@ def exchangeRealizationH (K : d.derived X) :
 
 /-- The explicit strict H prime, from R(N) to D: the diagram projection formula
 for E followed by direct image of the inverse reduction/pullback identification.
-Both H and H prime are isomorphisms before any evaluation is taken.
 Source: Stacks 0B56. -/
 def exchangeRealizationHPrime (K : d.derived X) :
     (completedReductionTower Y' d).obj ((d.push f').obj ((d.pull g').obj K)) ≅
@@ -708,8 +705,7 @@ theorem exchangeStrict_naturality (sq : ChosenCartesianSquare g' f' f g)
     Functor.isoWhiskerRight (d.reductionTowerPullbackIso g').symm (d.towerPush f')
   exact (H.inv ≫ v ≫ H'.hom).naturality a
 
-/-- The specified finite exchange is a natural transformation on strict derived towers.
-Its naturality is inherited from the already specified projection-formula tower maps. -/
+/-- The specified finite exchange is a natural transformation on strict derived towers. -/
 def exchangeStrictNatTrans (sq : ChosenCartesianSquare g' f' f g) :
     (completedReductionTower X d ⋙ d.towerPush f) ⋙ d.towerPull g ⟶
       (completedReductionTower X d ⋙ d.towerPull g') ⋙ d.towerPush f' where

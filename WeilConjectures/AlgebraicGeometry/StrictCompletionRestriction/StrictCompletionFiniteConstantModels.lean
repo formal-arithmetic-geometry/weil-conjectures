@@ -297,8 +297,7 @@ private theorem pointMatrixModels (X : Scheme.{u})
 
 /-- The section-action equivalence identifies finite constant local models with the
 specified finite scalar-matrix cokernel models on the actual pro-etale cover.
-
-Source: blueprint Locality paragraph and Stacks Tags 03D7 and 03EK. -/
+Source: Stacks Tags 03D7 and 03EK. -/
 theorem strictCompletionFiniteConstantModels (X : Scheme.{u}) (M : AdicCompletion.Modules l E X) :
     HasFiniteConstantLocalModel (DerivedNakayama.integerRing l E) X M ↔
       HasSectionFiniteConstantLocalModel l E X

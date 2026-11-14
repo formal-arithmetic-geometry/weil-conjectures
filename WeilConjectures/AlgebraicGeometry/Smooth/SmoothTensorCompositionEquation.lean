@@ -28,9 +28,10 @@ import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormulaCoherence
 /-!
 # Canonical tensor composition at the coefficient unit
 
-The comparison coordinates are the original constructed compactification and
-adjunction comparisons. The theorem isolates the equality in clause 4 of
-cohomological smoothness, independently of invertibility, base change and Dctf.
+For composable morphisms, the canonical tensor morphism of the composite agrees with the
+composite of the tensor morphisms at the coefficient unit, under the compact-support and
+exceptional composition comparisons. This equality is proved independently of
+invertibility, base change and Dctf.
 -/
 
 @[expose] public section
@@ -42,9 +43,8 @@ open AlgebraicGeometry
 namespace AlgebraicGeometry.ProEtale
 
 /-- The compact-support composition comparison, constructed from the compatible
-compactifications and the common-refinement comparisons, rather than chosen from a
-Nonempty assertion. The compatible compactification is the closure of X in the product
-of the chosen compactifications of g and fg. -/
+compactifications and the common-refinement comparisons. The compatible compactification
+is the closure of X in the product of the chosen compactifications of g and fg. -/
 noncomputable def smoothCompactSupportCompIso
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
@@ -62,7 +62,7 @@ noncomputable def smoothCompactSupportCompIso
 
 /-- The adjunction-compatible exceptional composition comparison. Its counit is
 ε_g followed in adjunction order by g_! ε_f, through the displayed compact-support
-comparison, since this is rightAdjointUniq for precisely that composite adjunction. -/
+comparison. -/
 noncomputable def smoothExceptionalCompIso
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
@@ -77,9 +77,7 @@ noncomputable def smoothExceptionalCompIso
     ((Etale.rightDerivedUpperShriekAdjunction Λ f).comp
       (Etale.rightDerivedUpperShriekAdjunction Λ g))
 
-/-- The specified dualizing comparison q = θ_(f,ω_g) followed by c_Λ⁻¹.
-Its invertibility is asserted below; its data use only the existing tensor mate
-and the adjunction-induced composition comparison. -/
+/-- The dualizing comparison q = θ_(f,ω_g) followed by c_Λ⁻¹. -/
 noncomputable def smoothDualizingCompMap
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)

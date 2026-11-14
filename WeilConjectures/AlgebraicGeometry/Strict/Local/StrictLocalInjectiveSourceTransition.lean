@@ -12,7 +12,7 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-! # Computing source derived sections on an injective representative
 
-Source: Stacks Project, Tags 03Q8 and 03Q9, final injective-complex paragraph.
+Source: Stacks Project, Tags 03Q8 and 03Q9.
 -/
 
 /- This original-model counterpart follows the proved calculation in

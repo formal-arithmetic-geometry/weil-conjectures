@@ -42,8 +42,8 @@ set_option linter.privateModule false
 We retain the identity-open compactification in the notation. Its ordinary adjunction is
 identified with the closed direct-image adjunction by the canonical identity-open
 normalization, and the inverse compact-support comparison is the direct-image mate delta.
-Thus the formula below is (*) with these canonical identifications displayed by the
-compactification interface, rather than a separately chosen Hom equivalence.
+The closed-immersion counit formula is stated with these canonical identifications displayed
+by the compactification interface, rather than a separately chosen Hom equivalence.
 -/
 
 @[expose] public section

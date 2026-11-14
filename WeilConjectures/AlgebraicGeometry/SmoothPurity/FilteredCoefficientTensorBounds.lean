@@ -126,10 +126,8 @@ theorem filteredCoefficientTensorComplex_laws (R : Sheaf (ProEt.topology Y) Comm
       (SheafOfModules.siteSheafTensorRight_preservesZeroMorphisms
         ((adicLisseConstantModules Y B).obj U)).map_zero _ _
 
-/-- The actual B_Y-complex P tensor_R U_Y, formed by ordinary sheaf tensors.
-Its associative presentation first extends P to B_Y and then tensors with U_Y.
-The balanced mutually inverse formulas in the module documentation identify
-this with the direct R-tensor, and commute with d_P tensor 1.
+/-- The B_Y-complex P tensor_R U_Y, formed by ordinary sheaf tensors as
+`(B_Y ⊗_R P) ⊗_{B_Y} U_Y`.
 Source: Stacks Project, Modules on Sites, Tag 03EK. -/
 def filteredCoefficientTensorComplex (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
     (ρ : R ⟶ adicLisseConstantRing Y B) (P : CochainComplex (pbcModules Y R) ℤ)

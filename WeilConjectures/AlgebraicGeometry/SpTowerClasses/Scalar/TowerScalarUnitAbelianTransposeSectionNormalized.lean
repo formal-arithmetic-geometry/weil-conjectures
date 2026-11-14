@@ -138,12 +138,7 @@ noncomputable def canonicalScalarUnit {T : Scheme.{u}} (c : Chern l E T) :
 
 /--
 The sectionwise transpose identity in the normalized case, where the two scalar
-maps are the canonical adjuncts of `scalarGenerator`. This is the ordinary
-coefficient-unit calculation: use adjunction naturality and the normalization
-fields to identify the two maps on constant integer sections. Cancel the integer
-generator using integral-forgetful full faithfulness: maps from the regular module
-are determined by their values on one, by `SheafOfModules.unitHomEquiv`.
-Empty charts and zero rings are included.
+maps are the canonical adjuncts of `scalarGenerator`.
 
 Source: Stacks 03EL.
 -/

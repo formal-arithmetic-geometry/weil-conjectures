@@ -101,7 +101,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The published signed Koszul fiber computes the prescribed strict derived limit,
 including the canonical degree-zero unit, after the explicit ringed-site equivalence.
 
-Source: Stacks Project, Tag 0A0E, proof of; Tags 0A0A and 0941; Bhatt--Scholze, Proposition 3.1.9.
+Source: Stacks Project, Tag 0A0E; Tags 0A0A and 0941; Bhatt--Scholze, Proposition 3.1.9.
 -/
 theorem completed_fiber_strict_limit_comparison
     (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)

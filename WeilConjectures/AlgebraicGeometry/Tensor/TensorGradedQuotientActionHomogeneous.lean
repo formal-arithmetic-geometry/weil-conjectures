@@ -28,8 +28,7 @@ noncomputable section
 whose degree is increased by the degree of that section. This assertion uses no
 canonical coefficient comparison and no output projection.
 
-Source: Stacks Project, Tag 09MS, coherent-equation-ses and its direct sum; Tag 0B8S,
-cohomology-lemma-boundary-derivation-over-cup-product, first proof paragraph. -/
+Source: Stacks Project, Tag 09MS, the ideal short exact sequence and its direct sum; Tag 0B8S. -/
 theorem tensorGradedQuotientAction_homogeneous {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible]
     (T : TensorGradedPresentation j L) (a d : ℕ)

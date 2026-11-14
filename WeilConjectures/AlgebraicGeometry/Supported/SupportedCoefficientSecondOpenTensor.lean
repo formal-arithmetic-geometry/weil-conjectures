@@ -18,7 +18,7 @@ import WeilConjectures.SixFunctors.OpenClosed.SupportedSections
 /-!
 # Open pullback in the second coefficient
 
-Source: Stacks Project, Tags 09XP and 0F1E, the coefficient calculation in, steps 5 and 11.
+Source: Stacks Project, Tags 09XP and 0F1E.
 -/
 
 @[expose] public section
@@ -150,7 +150,8 @@ variable {C D : Type*} [Category.{w} C] [Category.{w} D] [Abelian C] [Abelian D]
     F.mapDerivedCategory.obj (K ⊗ L) ⟶
       F.mapDerivedCategory.obj K ⊗ F.mapDerivedCategory.obj L)
 
-/-- Keep the cochain normalization folded when specializing its coefficient category. -/
+/-- Compatibility of the derived tensor comparison `κ` with the cochain-level comparison of `F`
+on the complexes `P` and `Q`. -/
 @[irreducible]
 private noncomputable def tensorFactorCondition (P Q : CochainComplex C ℤ) : Prop :=
   κ (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj Q) ≫

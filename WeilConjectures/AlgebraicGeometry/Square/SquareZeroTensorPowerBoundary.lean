@@ -71,9 +71,9 @@ private theorem tensor_boundary_recurrence_formula {Z : Scheme.{u}} (F N : Z.Mod
     rw [hc, ih, map_nsmul, hcomp, ← succ_nsmul]
 
 /-- The boundary of a section power is the corresponding multiple of its acted-on
-first obstruction. This is a formula for the canonical connecting map, with no lifting
-assertion. The additive comparison `b` transports the coefficient module on the closed
-subscheme back to the kernel of the degree `n * (e + 1)` unit sequence.
+first obstruction, for the canonical connecting map. The additive comparison `b`
+transports the coefficient module on the closed subscheme back to
+the kernel of the degree `n * (e + 1)` unit sequence.
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 09MS, equation (30.17.5.1), and Cohomology,
 Lemma 0B8S. -/

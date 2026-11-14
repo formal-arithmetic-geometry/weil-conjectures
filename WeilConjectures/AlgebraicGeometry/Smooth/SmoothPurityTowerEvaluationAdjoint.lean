@@ -48,8 +48,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 
 Index n means the positive level n+1, as in the recorded tower category. The
 right adjoints are specified on strict systems and transported back by the
-recorded sectionwise normalized equivalence. All their object, transition and
-morphism data are fixed below; no functor is selected from a bare existence claim.
+recorded sectionwise normalized equivalence.
 -/
 
 @[expose] public noncomputable section

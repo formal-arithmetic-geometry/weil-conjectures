@@ -43,7 +43,6 @@ theorem rCompEq_existsUnique {X Y Z : Scheme.{u}}
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- Direct-image composition with a supplied equation for the composite.
-The determining theorem fixes its data by equality to the canonical conjugate.
 Source: Stacks, Tags 0D6D and 07A7. -/
 def rCompEq {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (h : X ⟶ Z)
     (w : f ≫ g = h) : R B f ⋙ R B g ≅ R B h :=

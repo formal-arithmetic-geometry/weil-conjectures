@@ -46,8 +46,7 @@ def graphTransitions (n : ℕ) : graphRings l E (n + 1) ⟶ graphRings l E n :=
 
 /-- Section-preserving ordinary presentations and direct-image comparisons for the
 existing graph model. Units and counits are pinned as functions on sections.
-The push square agrees levelwise with the given ordinaryPushEvaluation isomorphism,
-allowing arbitrary carrier presentations without an independent scalar twist. -/
+The push square agrees levelwise with the given `ordinaryPushEvaluation` isomorphism. -/
 structure GraphCoordinates (b : SpTowerShriek.Base l E)
     (o : SpTowerShriek.Operations l E b) where
   presentation : ∀ T : Scheme.{u}, SpTowerShriek.S l E T ≌
@@ -73,8 +72,7 @@ structure GraphCoordinates (b : SpTowerShriek.Base l E)
   push : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y),
     (presentation X).inverse ⋙ (o.geometry f).push ⋙ (presentation Y).functor ≅
       SemilinearProperOpen.push (graphRings l E) (graphTransitions l E) f
-  /-- Compatibility with the supplied ordinary evaluation iso, on all component sections.
-  Both sides are functions; no equality with the input section's carrier is required. -/
+  /-- Compatibility with the supplied ordinary evaluation iso, on all component sections. -/
   push_evaluation : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y)
     (M : SemilinearProperOpen.Modules (graphRings l E) (graphTransitions l E) X)
     (n : ℕ) (V : Y.ProEtᵒᵖ),
@@ -223,7 +221,7 @@ private noncomputable def ordinaryModel
 -- Cancellation compares horizontal morphisms on large module-sheaf categories.
 -- Assemble the level isomorphisms and check their naturality on every section.
 /-- Derived proper/open transport uses the ordinary section square and the canonical
-right-derived composition maps. No arbitrary derived comparison is selected. -/
+right-derived composition maps. -/
 def graphSupportCoordinates (b : SpTowerShriek.Base l E)
     (o : SpTowerShriek.Operations l E b) (g : GraphCoordinates l E b o)
     {U T : Scheme.{u}} {e : U ⟶ T} (c : Compactification e) :

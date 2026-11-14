@@ -163,7 +163,7 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingRestricti
 /-!
 # Canonical comparisons for strict-tower realization
 
-Source: /sk-prop-sf-cbc, Definition 1939 and the proof of; Stacks 03DI, 09BP, 0A07.
+Source: Stacks 03DI, 09BP, 0A07.
 
 All comparisons below are adjunction mates or their exact derived transports.
 The strict composite is constructed before applying either Rlim or evaluation.
@@ -214,7 +214,6 @@ def cbcRealizationConst {T S : Scheme.{t}}
       (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The canonical limit comparison, defined by the constant-diagram mate.
-This definition fixes its value on resolutions and on strict augmentations.
 Source: Stacks 09BP, 0A07. -/
 def cbcRealizationLimitMap {T S : Scheme.{t}}
     {R : Sheaf (ProEt.topology T) CommRingCat.{t + 1}}
@@ -228,8 +227,7 @@ def cbcRealizationLimitMap {T S : Scheme.{t}}
 
 section LimitMateNormalization
 
--- Unit-normalized Roos comparison, following the existing endpoint proof
--- (Stacks 09BP, 0941; lem-cbc-completed-open-endpoint-limit-transport).
+-- Unit-normalized Roos comparison (Stacks 09BP, 0941).
 private def cbcRealizationCochainUnit (T : Scheme.{t})
     (R : Sheaf (ProEt.topology T) CommRingCat.{t + 1}) :=
   derivedCochainRightUnit (completedTowerLimit T R) (completedRlim T R)
@@ -442,7 +440,7 @@ private theorem cbcRealizationLimit_mate_eq
   simpa only [exactDerivedMate, Functor.mapDerivedCategorySquareIso] using hh
 
 /-- The specified mate is invertible for an exact product-preserving functor.
-Source: Stacks 09BP and the normalized strict-limit lemma. -/
+Source: Stacks 09BP. -/
 theorem cbcRealizationLimitMap_isIso {T S : Scheme.{t}}
     {R : Sheaf (ProEt.topology T) CommRingCat.{t + 1}}
     {R' : Sheaf (ProEt.topology S) CommRingCat.{t + 1}}
@@ -504,7 +502,6 @@ def cbcRealizationTowerAdj {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j] 
     (d.towerModulePull j).rightDerivedFunctorIsoMapDerivedCategory
 
 /-- The inverse tensor/open comparison is the transpose of the reduced open unit.
-It is one strict-tower map, not a family of maps in separate derived categories.
 Source: Stacks 03DI, 0E8I. -/
 def cbcRealizationReductionInv {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j]
     (K : d.derived U) :
@@ -827,7 +824,7 @@ def cbcRealizationPushLimit {U T : Scheme.{t}} (f : U ⟶ T) :
     ((cbcRealizationLimitAdj T (exchangeConstantRing T A)).comp (ProEtale.StrictTower.adj A f))
     (cbcRealizationConst (ProEtale.StrictTower.modulePullback A f)).symm
 
-/-- The single-object direct-image/scalar comparison, with its published universal units.
+/-- The single-object direct-image/scalar comparison, with its universal units.
 Source: Stacks 0D6E. -/
 def cbcRealizationResPush {U T : Scheme.{t}} (f : U ⟶ T) :
     d.push f ⋙ (cbcRealizationRes d T).mapDerivedCategory ≅
@@ -840,7 +837,7 @@ def cbcRealizationResPush {U T : Scheme.{t}} (f : U ⟶ T) :
     (exchangeConstantIso f A) (d.integralRingIso f) (exchangeScalar_comm d f)
 
 /-- Canonical constant-tower presentation of completed pullback.
-Source: Stacks 099M and finite reduction comparison. -/
+Source: Stacks 099M. -/
 def cbcRealizationPullLimit {U T : Scheme.{t}} (f : U ⟶ T) (K : d.derived T) :
     (cbcRealizationRes d U).mapDerivedCategory.obj ((d.completedPull f).obj K) ≅
       (completedRlim U (exchangeConstantRing U A)).obj
@@ -855,7 +852,7 @@ variable {X' X Y' Y : Scheme.{t}} {f : X ⟶ Y} {f' : X' ⟶ Y'}
   {g : Y' ⟶ Y} {g' : X' ⟶ X}
 
 /-- The actual strict-tower proper/open composite, defined before evaluation.
-The proper mate is the normalization dependency's mate on constant A towers. -/
+The proper part is the exchange mate on constant `A` towers. -/
 def cbcRealizationStrict (c : Compactification f) (c' : Compactification f')
     (gbar : c'.Z ⟶ c.Z) (sp : ChosenCartesianSquare gbar c'.g c.g g)
     (sj : OpenImmersionSquare g' c'.i c.i gbar)
@@ -928,8 +925,8 @@ attribute [local irreducible] cbcRealizationResLimit cbcRealizationPushLimit
   cbcRealizationOpenLimit cbcRealizationDerivedScalarOpen cbcRealizationSource
   cbcRealizationTarget
 
-/-- The published completed open factor, with its derived quasi-compactness instance.
-Source: blueprint Definition 1939. -/
+/-- The completed open factor of the base-change exchange, with its derived quasi-compactness
+instance. -/
 abbrev cbcRealizationOpenFactor [QuasiCompact f]
     (c : Compactification f) (c' : Compactification f') (gbar : c'.Z ⟶ c.Z)
     (sj : OpenImmersionSquare g' c'.i c.i gbar)

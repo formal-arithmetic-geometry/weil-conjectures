@@ -168,7 +168,7 @@ def AmbRootTransition : Prop :=
 
 attribute [local irreducible] AmbRootTransition
 
-/-- The specified finite-root semilinearity proposition, kept abstract during record generation.
+/-- The specified finite-root semilinearity proposition.
 Source: Stacks Tag 03CY. -/
 def AmbRootFiniteSemilinear : Prop :=
 ∀ {T T' : Scheme.{u}}

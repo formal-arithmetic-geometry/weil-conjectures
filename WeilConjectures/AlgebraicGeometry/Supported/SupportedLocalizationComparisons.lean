@@ -31,30 +31,26 @@ variable (E : Type v) [Category.{u + 1} E] [Abelian E]
   [IsGrothendieckAbelian.{u + 1} E] [MonoidalCategory E] [MonoidalPreadditive E]
   [SymmetricCategory E] [MonoidalClosed E] [Abelian.HasFunctorialFlatResolution E]
 
-/-- Cache the upstream graded-tensor property at a variable scheme, so that later
-specializations reuse its proof without reopening the monoidal sheaf construction. -/
+/-- The upstream graded-tensor property at a variable scheme. -/
 noncomputable instance supportGradedTensorFour (T : Scheme.{u}) :
     ∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ (Sheaf T.smallEtaleTopology E)),
       GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄ :=
   inferInstance
 
-/-- Cache the upstream graded-tensor property at a variable scheme, so that later
-specializations reuse its proof without reopening the monoidal sheaf construction. -/
+/-- The upstream graded-tensor property at a variable scheme. -/
 noncomputable instance supportGradedTensorLeft (T : Scheme.{u}) :
     ∀ (X₁ X₂ X₃ : GradedObject ℤ (Sheaf T.smallEtaleTopology E)),
       GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃ :=
   inferInstance
 
-/-- Cache the upstream graded-tensor property at a variable scheme, so that later
-specializations reuse its proof without reopening the monoidal sheaf construction. -/
+/-- The upstream graded-tensor property at a variable scheme. -/
 noncomputable instance supportGradedTensorRight (T : Scheme.{u}) :
     ∀ (X₁ X₂ X₃ : GradedObject ℤ (Sheaf T.smallEtaleTopology E)),
       GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃ :=
   inferInstance
 
 /-- The existing external product is the displayed tensor of projection pullbacks.
-The equality keeps the upstream construction opaque to downstream kernel reduction.
-Source: Tag 0F1E and upstream Kunneth.Defs. -/
+Source: Tag 0F1E. -/
 theorem supportedExternalProduct_eq {S X Y : Scheme.{u}}
     (f : X ⟶ S) (g : Y ⟶ S)
     (K : DerivedCategory (Sheaf X.smallEtaleTopology E))
@@ -79,8 +75,7 @@ noncomputable def supportedExternalProductIso {S X Y : Scheme.{u}}
 
 end
 
-/-- Compose a functorial equality comparison with the tensor-square comparison,
-keeping the categorical composition generic before specializing the scheme arguments.
+/-- Compose a functorial equality comparison with the tensor-square comparison.
 Source: Tag 0F1E. -/
 noncomputable def supportIsoTransport
     {C : Type w₁} {D : Type w₂} [Category.{w₃} C] [Category.{w₄} D]
@@ -149,8 +144,6 @@ noncomputable def supportTensorFirstSquareIso
       (supportPullbackProjectionIso E h q q' hq L)
 
 /-- Canonical exterior-product transport for a projection square with variable schemes.
-Its construction composes the canonical tensor and pullback comparisons before any
-open subscheme is substituted for the variable ambient scheme.
 Source: Tag 0F1E. -/
 noncomputable def supportExternalFirstSquareIso
     {S X X' Y : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S)
@@ -171,7 +164,6 @@ noncomputable def supportExternalFirstSquareIso
 end
 
 /-- Canonical supported restriction followed by a specified coefficient comparison.
-The construction is shared before specializing to product schemes.
 Source: Tags 09XP and 0F1E. -/
 noncomputable def supportedRestrictionWithComparison (A : Type (u + 1)) [CommRing A]
     {T S B D : Scheme.{u}} (h : S ⟶ T) [IsOpenImmersion h]

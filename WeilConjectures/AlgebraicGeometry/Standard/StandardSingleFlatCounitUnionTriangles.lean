@@ -157,9 +157,7 @@ private theorem unionTriangles_transport
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The relative Mayer--Vietoris diagram for a relatively flat module has invertible
-middle and overlap components. This supplies only the triangle diagram; it does
-not assert invertibility of the union comparison or a factorization at a chosen
-flat complex.
+middle and overlap components.
 
 Source: Stacks Project, Tag 0DJ9, induction diagram; Tags 08BV and 08FE. -/
 theorem standardSingleFlatCounitUnionTriangles

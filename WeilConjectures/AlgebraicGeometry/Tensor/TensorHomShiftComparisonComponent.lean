@@ -178,8 +178,8 @@ attribute [local irreducible] _root_.DerivedCategory.monoidalClosed
   _root_.DerivedCategory.instMonoidalCategory
   _root_.DerivedCategory.commShift₂CurriedTensor
 
-/-- `EtaleHomShiftNormalization` in the form used by the abstract chase. Stated once for both
-coefficient categories, so the kernel unfolds the normalization only here. -/
+/-- `EtaleHomShiftNormalization` in the form used by the abstract chase,
+stated for both coefficient categories. -/
 private theorem etaleHomShiftNormalization_apply
     (C : Type*) [Category.{u + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C] [MonoidalPreadditive C]

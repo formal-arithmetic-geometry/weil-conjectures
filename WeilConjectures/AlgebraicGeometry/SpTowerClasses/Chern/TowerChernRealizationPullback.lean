@@ -83,10 +83,9 @@ private theorem scalar_comparison_paste
     _ = Q.map (S.map a) ≫ (Q.map v ≫ w) := by rw [hs]
     _ = _ := by simp only [Functor.map_comp, Category.assoc]
 
-/-- Geometric inverse image commutes with the successive coefficient realization. The
-comparison is natural on all integral derived objects, has the coefficient-unit source,
-and carries the full-units target map to the specified root-tensor comparison. This
-assertion involves no line bundle or Chern class. -/
+/-- Geometric inverse image commutes with the successive coefficient realization,
+naturally on integral derived objects and compatibly with the coefficient-unit source and the
+full-units target maps. -/
 theorem tower_chernRealization_pullback
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (_hX : IsUnit (l : Γ(X, ⊤))) (_hY : IsUnit (l : Γ(Y, ⊤)))

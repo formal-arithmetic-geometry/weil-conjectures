@@ -271,7 +271,7 @@ set_option backward.isDefEq.respectTransparency.types true in
 /-- The finite exterior Koszul tower agrees with the ordered tensor-dual tower.
 
 Source: Stacks Project, more-algebra.tex Tag 0664, Lemma 15.29.12 (tensor decomposition), and
-algebraization.tex Tag 0A0E, proof of (finite-free duality identification). -/
+algebraization.tex Tag 0A0E (finite-free duality identification). -/
 theorem completedKoszulFiniteComparison
     (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A)

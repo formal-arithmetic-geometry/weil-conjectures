@@ -152,7 +152,7 @@ All tower derived categories localize strict diagrams before evaluation.
 
 ## Main statements
 
-* `constantTowerDirectImageNormalization`: the four requested normalizations.
+* `constantTowerDirectImageNormalization`: the four normalizations.
 -/
 
 @[expose] public noncomputable section
@@ -1358,7 +1358,7 @@ Source: Stacks 06YY. -/
 def reduction (X : Scheme.{u}) : DerivedCategory (Modules A X) ⥤ Derived A X :=
   (reductionModel I X).functor
 
-/-- The universal reduction counit, retained rather than forgotten.
+/-- The universal reduction counit.
 Source: Stacks 06YY. -/
 def reductionCounit (X : Scheme.{u}) :
     DerivedCategory.Qh ⋙ reduction I X ⟶ reductionHomotopy I X :=
@@ -1496,7 +1496,7 @@ private theorem levelPull_step {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
   rw [quotientStep_direct_comm]
 
 /-- Ordinary tensor/pullback comparison on the entire strict quotient tower.
-Its formula is imposed on all inverse-image generators, not only constant sections.
+Its formula is imposed on all inverse-image generators.
 Source: Stacks 07A4, 03EL. -/
 theorem ordinaryReductionPull_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃! σ : reductionModule I Y ⋙ towerPullback A f ≅
@@ -1600,7 +1600,7 @@ def reductionPull {X Y : Scheme.{u}} (f : X ⟶ Y) :=
 
 /-- The projection map h, defined by its counit-tensor adjunction mate. The comparison
 being transposed is the canonical tensor balancing map on the full quotient diagram.
-Its source therefore includes precisely the diagonal identification chi.
+Its source includes the diagonal identification chi.
 Source: Stacks 0B56. -/
 def projection {X Y : Scheme.{u}} (f : X ⟶ Y) :
     push A f ⋙ reduction I Y ⟶ reduction I X ⋙ R A f :=

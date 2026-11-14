@@ -20,7 +20,7 @@ attribute [local implicit_reducible] spCoefficientCommRings
 
 /-- Scalar extension followed by restriction is the integral arrow followed by
 its ordinary scalar unit, with the prescribed normalized source.
-Source: classes proof (2), Stacks 06YY and 07A6. -/
+Source: Stacks 06YY and 07A6. -/
 theorem scalarArrowTranspose (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {T : Scheme.{u}} (c : Chern l E T)

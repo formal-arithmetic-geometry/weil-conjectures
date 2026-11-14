@@ -43,7 +43,7 @@ private theorem squareG_eq {V W S T : Scheme.{u}}
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- The inverse-image comparisons of successive commutative squares paste.
-Source: Stacks, Tag 07A7, and pullback-composition coherence. -/
+Source: Stacks, Tag 07A7. -/
 theorem squareG_pasting_inv {U U₁ U₂ X X₁ X₂ : Scheme.{u}}
     (j : U ⟶ X) (j₁ : U₁ ⟶ X₁) (j₂ : U₂ ⟶ X₂)
     (g : X₁ ⟶ X) (h : X₂ ⟶ X₁) (a : U₁ ⟶ U) (b : U₂ ⟶ U₁)

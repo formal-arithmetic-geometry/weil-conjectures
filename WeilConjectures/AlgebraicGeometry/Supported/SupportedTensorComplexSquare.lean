@@ -17,8 +17,7 @@ universe w
 open CategoryTheory CategoryTheory.Limits MonoidalCategory HomologicalComplex
 namespace AlgebraicGeometry.Etale
 
-/-- The square of signed total coefficient comparisons, packaged before specialization
-so its repeated tensor-complex structures remain shared.
+/-- The square of signed total coefficient comparisons.
 Source: Tag 0F1E. -/
 @[irreducible]
 noncomputable def supportedTensorComplexSquareCondition
@@ -51,7 +50,7 @@ noncomputable def supportedTensorComplexSquareCondition
         (curriedTensor E) (.up ℤ)
 
 /-- An ordinary coefficient tensor square induces the same square on signed total complexes.
-Source: Tag 0F1E, the signed totalization step of supported product localization. -/
+Source: Tag 0F1E. -/
 theorem supportedTensorComplex_square
     {C D E : Type*} [Category.{w} C] [Category.{w} D] [Category.{w} E]
     [Preadditive C] [Preadditive D] [Preadditive E]

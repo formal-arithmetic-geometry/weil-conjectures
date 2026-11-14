@@ -21,8 +21,9 @@ import all WeilConjectures.AlgebraicGeometry.SpTowerClasses.TowerForgetEvaluatio
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 /-! # Normalizing the integral coefficient-unit comparison
 
-Source: classes proof (2), integral reduction, and Stacks 03CY.
 The additive comparison of constant residue towers lifts uniquely to modules.
+
+Source: Stacks 03CY.
 -/
 
 @[expose] public noncomputable section

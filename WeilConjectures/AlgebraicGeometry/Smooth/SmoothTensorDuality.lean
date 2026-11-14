@@ -28,6 +28,11 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
 /-! # Smooth tensor duality for ordinary etale coefficients
 
 The tensor morphism is the specified adjunction mate, with no chosen orientation.
+
+## Implementation details
+
+The upstream projection map uses the opposite order of tensor factors; the two canonical
+Koszul symmetries put it in the order used by the tensor morphism.
 -/
 
 @[expose] public section
@@ -40,8 +45,7 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
 
 /-- The canonical derived braiding, obtained from the Koszul braiding of the homotopy
-category by the derived tensor universal property. This uses the actual derived
-braiding construction, not a choice of an unspecified isomorphism. -/
+category by the derived tensor universal property. -/
 @[instance_reducible]
 noncomputable def smoothTensorCanonicalDerivedBraiding
     (C : Type u') [Category.{u + 1} C] [Abelian C] [IsGrothendieckAbelian.{u + 1} C]
@@ -51,12 +55,9 @@ noncomputable def smoothTensorCanonicalDerivedBraiding
   DerivedMonoidal.braidedCategory' (_root_.DerivedCategory.Qh (C := C))
     (HomotopyCategory.quasiIso C (.up ℤ))
 
-/-- The canonical tensor morphism for the ordinary exceptional adjoint.
-
-Transpose the inverse compact-support projection formula followed by tensoring the
-counit at the coefficient unit and the right unit constraint. The upstream projection
-map uses the opposite order of tensor factors; the two canonical Koszul symmetries
-put it in the displayed order. Its inverse is determined by that map. -/
+/-- The canonical tensor morphism for the ordinary exceptional adjoint: the transpose of
+the inverse compact-support projection formula followed by tensoring the counit at the
+coefficient unit and the right unit constraint. -/
 noncomputable def smoothTensorDualityMap
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X S : Scheme.{u}} (f : X ⟶ S) [HasCompactification f]

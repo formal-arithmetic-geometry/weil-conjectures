@@ -57,8 +57,8 @@ instance localAbelianPresheaves_hasDerivedCategory (X : RingedSpace.{u}) :
     HasDerivedCategory ((Opens X)ᵒᵖ ⥤ AddCommGrpCat.{u}) :=
   HasDerivedCategory.standard _
 
-/-- The published K-injective replacement supplies the arbitrary-quasi-isomorphism
-resolution hypothesis of the recorded total right-derived functor.
+/-- K-injective replacement supplies the resolution hypothesis of the total right-derived
+functor.
 Source: Stacks, Tag 079P. -/
 abbrev localSectionsEnoughKInjectives (X : RingedSpace.{u}) :
     ∀ K : CochainComplex (ringedSiteModules.{u} (moduleRings X)) ℤ,
@@ -93,8 +93,8 @@ variable {X}
 variable {Y : RingedSpace.{u}}
   [HasDerivedCategory.{wY} (ringedSiteModules.{u} (moduleRings Y))]
 
-/-- Rf_* using the recorded universal-pair construction on K-injective representatives.
-The ordinary direct image is the published moduleDirectImage, including f-sharp.
+/-- Rf_* via the universal-pair construction on K-injective representatives of the ordinary
+direct image `moduleDirectImage`.
 Source: Stacks, Tag 079V. -/
 abbrev sectionDerivedDirectImage (f : X ⟶ Y) :
     DerivedCategory (ringedSiteModules.{u} (moduleRings X)) ⥤
@@ -102,8 +102,8 @@ abbrev sectionDerivedDirectImage (f : X ⟶ Y) :
   (moduleDirectImage f).rightDerivedFunctorOfQuasiIsoResolutions
     (localSectionsEnoughKInjectives X)
 
-/-- The presheaf V maps to H^q(f^-1 V,E): right derive the actual inverse-image section
-functor, whose underlying abelian groups and restrictions are literally F(f^-1 V).
+/-- The presheaf V maps to H^q(f^-1 V,E): the right derived functor of the
+inverse-image section functor F ↦ F(f^-1 V).
 Source: Stacks, Tag 0D5X. -/
 abbrev inverseOpenHypercohomologyPresheaf (f : X ⟶ Y) (q : ℤ) :
     DerivedCategory (ringedSiteModules.{u} (moduleRings X)) ⥤
@@ -132,8 +132,8 @@ def localLerayCompositeUnit (f : X ⟶ Y) :
         (localSectionsEnoughKInjectives X)) (derivedLocalAbelianSections Y) ≫
     (Functor.associator _ _ _).hom
 
-/-- The unique canonical Leray comparison obtained from the universal bijection of the
-recorded total right-derived functor. The choice is uniquely determined by its unit.
+/-- The canonical Leray comparison obtained from the universal bijection of the
+total right-derived functor.
 Source: Stacks, Tag 0D5W. -/
 def localLerayComparison (f : X ⟶ Y) :
     (moduleDirectImage f ⋙ localAbelianSections Y).rightDerivedFunctorOfQuasiIsoResolutions
@@ -193,9 +193,7 @@ def localHypercohomologySheafificationModel (q : ℤ)
     (SheafOfModules.toSheaf (moduleRings Y)).mapIso
       ((DerivedCategory.homologyFunctorFactors _ q).app I).symm
 
-/-- The same normalized sheafification comparison at any derived object. A chosen complex
-representative and its published K-injective replacement merely compute the canonical map;
-the natural isomorphism below is required to agree with these components.
+/-- The same normalized sheafification comparison at any derived object.
 Source: Stacks, Tag 0BKJ. -/
 def localHypercohomologySheafificationAt (q : ℤ)
     (M : DerivedCategory (ringedSiteModules.{u} (moduleRings Y))) :

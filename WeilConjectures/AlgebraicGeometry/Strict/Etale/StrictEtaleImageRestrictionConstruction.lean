@@ -33,6 +33,7 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 /-! # Derived geometric images with their restriction representative equations
 
 Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks 09T5 and 0FND.
+
 The assembly retains the representative equation already proved while constructing
 its coefficient restriction square.
 -/

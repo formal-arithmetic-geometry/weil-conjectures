@@ -244,8 +244,7 @@ attribute [local irreducible] finiteUnitIso
 
 /-- The actual finite constant-ring adjunction preserves its regular module,
 with its transpose fixed on every section.
-Source: Stacks 03D2 and 03D7; Mathlib's pullback-unit argument in
-`SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal`. -/
+Source: Stacks 03D2 and 03D7. -/
 theorem exists_finiteUnitIso {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     ∃ d : (Scheme.proEtaleConstantRingPullback (SpTowerShriek.R l E n) f).obj
         ((SpTowerShriek.ev l E Y n).obj (coefficient Y (Arings l E Y))) ≅

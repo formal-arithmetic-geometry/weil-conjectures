@@ -11,7 +11,8 @@ import WeilConjectures.SixFunctors.Etale.Derived.BaseChangeCube
 import WeilConjectures.AlgebraicGeometry.Affine.Linear.AffineLinearExchangeCoherence
 
 /-! # Pasting a Cartesian affine prefix with a base-change square
-.
+
+We show that a Cartesian affine prefix, after base change, is the prefix of the pasted square.
 -/
 
 @[expose] public noncomputable section

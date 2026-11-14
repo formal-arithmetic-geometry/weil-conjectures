@@ -20,7 +20,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- Pullback on structure-sheaf cohomology reverses composition.
-Source: Stacks Project, Cohomology of Sheaves, Section 01F7, equation-functorial and Remark 01FB. -/
+Source: Stacks Project, Cohomology of Sheaves, Section 01F7 and Remark 01FB. -/
 theorem structureSheafCohomologyPullback_comp {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z) (n : ℕ) :
     structureSheafCohomologyPullback (f ≫ g) n =

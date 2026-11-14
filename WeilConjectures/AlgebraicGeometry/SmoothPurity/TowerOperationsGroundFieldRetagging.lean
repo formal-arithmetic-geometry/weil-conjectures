@@ -76,9 +76,8 @@ abbrev SpEllTwistComparisons (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     (spEllTwistLine l E T (n + 1) m) ≅ spEllTwistLine l E T n m
 
 /-- The quotient comparisons are fixed at exponent one on ordinary local pure tensors;
-all other signed powers use the published tensor/dual normalization. In particular the
-negative formula precomposes with the inverse positive comparison, rather than dualizing
-in the wrong direction. -/
+all other signed powers use the published tensor/dual normalization, negative powers
+precomposing with the inverse positive comparison. -/
 def SpEllTwistComparisonsNormalized (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{u}) (n : ℕ)
     (B : SpEllTwistComparisons l E T n) : Prop :=

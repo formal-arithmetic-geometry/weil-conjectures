@@ -29,7 +29,7 @@ import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionReduction
 
 The ordinary coefficient map is uniquely specified by restriction and multiplication of
 constants. Its derived comparison uses the actual localization tensor comparison. The cup
-product acts on the supported-Hom representatives from lemma-sections-support-closed-subscheme--1.
+product acts on the supported-Hom representatives of supported cohomology.
 Its target is a Hom group in the unbounded derived category, including when tensoring two
 bounded-below inputs produces an unbounded complex.
 
@@ -47,7 +47,7 @@ bounded-below inputs produces an unbounded complex.
 ## Main statements
 
 - `cupCoefficientMap_existsUnique`, `cupCoefficientMap_isIso`, `cupCoefficient_flat`:
-  the quotient and idempotent coefficient calculation attached to the node.
+  the quotient and idempotent coefficient calculation.
 - `cupDerivedCoefficientMap_isIso`: degree-zero flatness identifies the derived coefficients.
 -/
 
@@ -62,8 +62,7 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory Opposite
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- A named reference to the existing canonical localization structure, shared by all
-occurrences below. This is the upstream instance, not a new localization. -/
+/-- A named reference to the existing canonical localization structure. -/
 @[reducible]
 noncomputable def cupHasDerivedCategory (P : WeilConjectures.PurityFiniteSetting.{u})
     (X : Scheme.{u}) : HasDerivedCategory.{u + 1}
@@ -96,9 +95,8 @@ noncomputable def cupSingle (P : WeilConjectures.PurityFiniteSetting.{u}) (X : S
     Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} P.Coefficient) ⥤ CupDerivedCategory P X :=
   @DerivedCategory.singleFunctor _ _ _ (cupHasDerivedCategory P X) 0
 
-/-- Compare the specified finite coefficient sheaf with the constant pro-etale sheaf. Both functors
-are left adjoint to evaluation at the terminal pro-etale object; uniqueness of left adjoints gives
-the comparison preserving constant sections. -/
+/-- The comparison of the specified finite coefficient sheaf with the constant pro-etale sheaf,
+preserving constant sections. -/
 noncomputable def cupConstantIso (P : WeilConjectures.PurityFiniteSetting.{u})
     (X : Scheme.{u}) :
     P.constant X ≅ (constantSheaf (Scheme.ProEt.topology X)
@@ -107,9 +105,8 @@ noncomputable def cupConstantIso (P : WeilConjectures.PurityFiniteSetting.{u})
     (ModuleCat.of P.Coefficient P.Coefficient)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Restriction of the actual finite coefficient unit to a closed support. The map is
-adjoint to the constant-presheaf sheafification unit at the base change of the terminal
-object, so on local constants it restricts the same scalar. -/
+/-- Restriction of the actual finite coefficient unit to a closed support; on local constants
+it restricts the same scalar. -/
 noncomputable def cupCoefficientRestriction (P : WeilConjectures.PurityFiniteSetting.{u})
     {D X : Scheme.{u}} (c : D ⟶ X) :
     P.constant X ⟶ (lowerStar (ModuleCat.{u + 1} P.Coefficient) c).obj (P.constant D) :=
@@ -343,8 +340,7 @@ theorem cupCoefficientMap_existsUnique (P : WeilConjectures.PurityFiniteSetting.
   exact ⟨μ, hμ, fun ν hν ↦ (cancel_epi
     (cupCoefficientRestriction P i ⊗ₘ cupCoefficientRestriction P j)).mp (hν.trans hμ.symm)⟩
 
-/-- The specified underived map mu: restrict both factors to the intersection and multiply.
-The unique characterization uses the quotient maps, so this selects no arbitrary map. -/
+/-- The specified underived map mu: restrict both factors to the intersection and multiply. -/
 noncomputable def cupCoefficientMap (P : WeilConjectures.PurityFiniteSetting.{u})
     {Z W X : Scheme.{u}} (i : Z ⟶ X) (j : W ⟶ X)
     [IsClosedImmersion i] [IsClosedImmersion j] :
@@ -591,7 +587,7 @@ theorem cupCoefficient_flat (P : WeilConjectures.PurityFiniteSetting.{u})
     exact ObjectProperty.prop_of_iso ObjectProperty.flat e
       (flat_comparisonUpperStar_obj hf)
 
-/-- The canonical degree-zero comparison, constructed before specializing the category. -/
+/-- The canonical degree-zero tensor comparison. -/
 noncomputable def cupSingleTensorMap {C : Type c} [Category.{v} C] [Abelian C]
     [hD : HasDerivedCategory.{w} C]
     [HasColimitsOfSize.{0, 0} C] [MonoidalCategory C] [MonoidalPreadditive C]
@@ -612,8 +608,7 @@ noncomputable def cupSingleTensorMap {C : Type c} [Category.{v} C] [Abelian C]
         ((HomologicalComplex.singleMapHomologicalComplex (tensorLeft L) (.up ℤ) 0).app M)).hom) ≫
     ((DerivedCategory.singleFunctorIsoCompQ _ 0).app (L ⊗ M)).inv
 
-/-- Apply a sheaf coefficient map after the canonical degree-zero tensor comparison.
-The construction is made in a general category to keep the localization structure shared. -/
+/-- Apply a sheaf coefficient map after the canonical degree-zero tensor comparison. -/
 @[irreducible]
 noncomputable def cupDerivedCoefficientMap {C : Type c} [Category.{v} C] [Abelian C]
     [hD : HasDerivedCategory.{w} C]
@@ -721,9 +716,8 @@ noncomputable def cupTensorShiftIso {C : Type c} [Category.{v} C]
       ((((curriedTensor C).flip.obj G).commShiftIso a).app F) ≪≫
     (shiftFunctorAdd C a b).symm.app _
 
-/-- Supported groups for an arbitrary unbounded target, by the node's Hom convention.
-For bounded-below targets supported_cohomology_hom identifies this with derived supported
-sections. -/
+/-- Supported groups for an arbitrary unbounded target, defined as Hom groups out of the
+supported coefficients. -/
 abbrev cupSupportedHom (P : WeilConjectures.PurityFiniteSetting.{u})
     {Z X : Scheme.{u}} (i : Z ⟶ X) (K : CupDerivedCategory P X) (r : ℤ) :=
   (cupSingle P X).obj

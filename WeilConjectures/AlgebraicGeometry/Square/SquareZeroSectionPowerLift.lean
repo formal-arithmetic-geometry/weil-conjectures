@@ -31,8 +31,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 universe u
 
 /-- Some positive tensor power of the given section lifts, after the tensor-power
-and pullback identifications. The conclusion is equality of section morphisms;
-it makes no assertion about nonvanishing loci or affineness upstairs.
+and pullback identifications, as an equality of section morphisms.
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 09MS, equation (30.17.5.1) and the following
 boundary calculation. -/

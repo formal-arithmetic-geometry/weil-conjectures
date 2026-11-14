@@ -26,9 +26,7 @@ attribute [local irreducible] RingedSpace.moduleCohomology
 noncomputable section
 
 /-- Identify the degree kernel with the pushforward of its coefficient module.
-Source: Stacks Project, Tags 09MS and 08KS.
-The ideal-kernel isomorphism is characterized by its inclusion equation. The unit is
-invertible by square-zero annihilation. All maps here are explicit composites. -/
+Source: Stacks Project, Tags 09MS and 08KS. -/
 def tensorBoundaryKernelPushforwardIso {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)
     (n e : ℕ) :

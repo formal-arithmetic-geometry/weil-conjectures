@@ -71,8 +71,7 @@ def fixedTensorSection (T : Scheme.{u}) (M N : FixedSheaves l E n T) (U : T.ProE
     (ModuleCat.{u + 1} (ULift.{u + 1} (SpTowerShriek.R l E n)))) M N).app U)
       (x ⊗ₜ[ULift.{u + 1} (SpTowerShriek.R l E n)] y)
 
-/-- Realization tensor coordinates with every map fixed before localization.
-The final square is imposed on all K-flat representatives, not just on cohomology. -/
+/-- Realization tensor coordinates with every map fixed before localization. -/
 structure TensorOrdinaryCoordinates (T : Scheme.{u}) where
   ordinary : ∀ M N : FixedSheaves l E n T,
     (realization l E n T).obj (M ⊗ N) ≅

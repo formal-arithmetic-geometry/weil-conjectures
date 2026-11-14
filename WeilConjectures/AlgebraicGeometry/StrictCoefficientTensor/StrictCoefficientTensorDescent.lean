@@ -146,7 +146,7 @@ import Mathlib.CategoryTheory.Localization.Predicate
 
 Source: Stacks Project, sites-cohomology.tex, Tags 0G7D, 06YS, 06YY.
 
-Index zero denotes the paper's coefficient indexed by one. The target is the
+Index zero denotes the coefficient indexed by one. The target is the
 ordinary derived category of module sheaves on the existing ringed sequence site.
 -/
 
@@ -183,7 +183,7 @@ abbrev Scalar {T : Sheaf J CommRingCat.{r}} (b : R ⟶ T) :=
 
 /-- A pure scalar-extension section, in the actual ordinary extension functor.
 The target coefficient acts on the first tensor factor; symmetry gives the
-paper's notation x tensor c.
+notation x tensor c.
 Source: Stacks 03EK, 06YY. -/
 def pure {T : Sheaf J CommRingCat.{r}} (b : R ⟶ T)
     (d : Scalar J R b)
@@ -196,11 +196,10 @@ set_option genSizeOf false in
 set_option genSizeOfSpec false in
 set_option genInjectivity false in
 set_option genCtorIdx false in
-/-- The full normalized descent datum, including strict transitions before localization.
-All ordinary extensions are fixed by the dependency's sheafified-tensor formulas.
-The universal comparison and its uniqueness fix descent, rather than selecting
-unrelated level objects or a functor by a mere existence assertion.
-Source: Stacks 0G7D, 06YS, 06YY and the blueprint reduction construction. -/
+/-- The full normalized descent datum, including strict transitions before localization: the
+ordinary extensions are the sheafified tensor products, and descent is fixed by a universal
+comparison together with its uniqueness.
+Source: Stacks 0G7D, 06YS, 06YY. -/
 structure Descent where
   /-- Each level uses the recorded ordinary and derived change of rings. -/
   scalar : ∀ n : ℕ, Scalar J R (a n)

@@ -288,7 +288,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 
 These are formulas in the ordinary etale derived categories. The diagonal is the
 positive supported Cartier Kummer boundary; the trace is the second projection
-of the inverse unit/Chern splitting. No adjunction unit is selected instead.
+of the inverse unit/Chern splitting.
 -/
 
 @[expose] public noncomputable section

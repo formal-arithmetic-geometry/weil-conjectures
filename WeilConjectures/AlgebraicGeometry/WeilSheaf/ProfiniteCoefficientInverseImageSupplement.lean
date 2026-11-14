@@ -39,6 +39,11 @@ public import WeilConjectures.AlgebraicGeometry.ProfiniteCoefficientInverseImage
 # Inverse image of profinite coefficient rings
 
 Source: Stacks Project, Tags 098T (2), 097N, 04D3 and 01YW.
+
+## Implementation details
+
+The value universe is `u+1`, as required by sheafification on the small site; finite rings
+in universe `u` are included by their canonical `ULift`.
 -/
 
 @[expose] public section
@@ -235,30 +240,8 @@ private theorem proEtaleConstantComparison_comp {X Y Z : Scheme.{u}}
     (proEtaleConstantDirectImageMap f CommRingCat.{u + 1} A)
 
 /-- Compatible canonical inverse image of a countable tower of finite commutative rings.
-The value universe is `u+1`, as required by sheafification on the small site; finite rings
-in universe `u` are included by their canonical `ULift`. No surjectivity of transitions is
-required. Source: Stacks, Tags 098T (2), 097N, 04D3 and 01YW.
-
-Proof plan, following the node's eight steps:
-1. Use fpqc descent of morphisms to show the small pro-etale site is subcanonical.
-2. Represent the finite constant sheaf by the finite disjoint union of copies of the base,
-   labelled by ring elements; clopen partitions identify this with sheafified constants.
-3. The finite transition maps are affine. Form their scheme limit; over Spec B it is
-   Spec of the filtered colimit of B^Q_n. This is ind-etale, hence weakly etale, and small.
-4. The representing limit sheaf is the sectionwise inverse limit of the constant rings;
-   all ring operations and projections are determined coordinatewise.
-5. By the inverse-image adjunction and Yoneda, inverse image of a representable sheaf
-   is represented by base change; the adjunct sends each map to its base change.
-6. Base change preserves these representing limits and their finite labelled objects.
-   Thus the specific canonical limit comparison, rather than arbitrary limits, is invertible.
-7. Finite-product preservation transports the ring operations; naturality with respect
-   to these operations proves the comparisons are ring isomorphisms with the stated adjunct.
-8. Projections determine the limit map uniquely. Label maps give transition and tower
-   naturality. Identity base change preserves labels, and iterated base change agrees with
-   composite base change; projectionwise uniqueness proves the coherence at the limit.
-Dependencies: fpqc-representable-descent, scheme-coproduct-family, limit-affine-transition,
-ind-etale-stability, sheaf-algebraic-structures-objects, coyoneda-iso-of-natural-hom-bijection,
-presheaf-pullback-sets-left-exact and sheafification-sets-exact, all as listed in the DAG. -/
+No surjectivity of transitions is required.
+Source: Stacks, Tags 098T (2), 097N, 04D3 and 01YW. -/
 theorem proEtale_profinite_coefficient_inverse_image
     (Q : ℕᵒᵖ ⥤ CommRingCat.{u + 1}) [∀ n : ℕᵒᵖ, Finite (Q.obj n)] :
     (∀ (X Y : Scheme.{u}) (f : X ⟶ Y) (n : ℕᵒᵖ),

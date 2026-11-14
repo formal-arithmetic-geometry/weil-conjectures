@@ -197,9 +197,8 @@ private theorem coefficients_for_definitions {S : Scheme.{u}} (E : S.Modules)
 set_option linter.unusedVariables false in
 /-- The matching local frame for the normalized second quotient map.
 
-The open, the first frame, and its coefficient map are fixed as input. The
-conclusion is only the existence of the second frame and its formula, hence is
-strictly smaller than the common-coefficient theorem.
+Given the open, the first frame, and its coefficient map, the second frame and its
+formula exist.
 
 Source: Stacks Project, Constructions, Tags 01N2, 01NQ, 01NR and 01OB.
 -/

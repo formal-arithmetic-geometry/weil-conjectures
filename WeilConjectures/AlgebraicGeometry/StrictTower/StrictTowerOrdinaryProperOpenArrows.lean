@@ -16,10 +16,10 @@ import all WeilConjectures.AlgebraicGeometry.StrictTower.StrictTowerProperOpenAr
 
 /-! # Ordinary clopen arrows for constant-coefficient strict towers
 
-Source: Stacks Project, Tags 09BN, 0F7B, and the underived refinement of the blueprint.
+Source: Stacks Project, Tags 09BN, 0F7B.
 
-These are the ordinary constructions underlying the recorded derived arrows. All
-functors and adjunctions are the already specified constant-ring module operations.
+These are the ordinary constructions underlying the derived arrows, built from the
+constant-ring module operations.
 The open unit, its direct-image transpose, and the clopen projector are imported
 from ProperOpenClopenProjector. Cartesian beta and the open-extension compositor
 are imported from TowerOpenBetaNormalization.
@@ -49,7 +49,7 @@ def singleJCongr {U X : Scheme.{u}} {f g : U ⟶ X}
     (eqToIso (congrArg (modulePullback B) h))).leftAdjointUniq (moduleJAdj B g)
 
 /-- The intrinsic ordinary alpha: cartesian beta, clopen projection, and compositors.
-Source: Stacks, Tag 0F7B and the blueprint's underived refinement. -/
+Source: Stacks, Tag 0F7B. -/
 def singleAlpha {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]

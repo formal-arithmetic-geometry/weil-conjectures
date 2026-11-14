@@ -343,7 +343,7 @@ abbrev compare (X : Scheme.{u}) :=
 Source: Stacks 03S6, 095L; Milne, Section 9. -/
 abbrev compareUnit (X : Scheme.{u}) := ProEtale.comparisonUpperStarUnitIso A X
 
-/-- The recorded coherent comparison, with exactly the orientation in the node.
+/-- The recorded coherent comparison of the two composite pullbacks.
 Source: Stacks 03S6, 095L; Milne, Section 9. -/
 def comparePullback {X' X : Scheme.{u}} (h : X' ⟶ X) :
     pull A false h ⋙ compare A X' ≅ compare A X ⋙ pull A true h :=

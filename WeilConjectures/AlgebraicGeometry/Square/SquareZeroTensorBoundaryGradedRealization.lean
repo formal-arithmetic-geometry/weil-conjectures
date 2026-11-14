@@ -52,12 +52,11 @@ private theorem graded_section_projection {X Z : Scheme.{u}} {j : Z ⟶ X}
 end GradedProjectionHelpers
 
 /-- Realize the three homogeneous boundary/action terms in a single square-zero algebra
-extension. This is a comparison theorem: it asserts no derivation identity, either for
-that algebra extension or for tensor boundaries. The comparison holds for every compatible
-resolution presentation and every action satisfying the displayed local formulas.
+extension, for every compatible resolution presentation and every action satisfying the
+displayed local formulas.
 
-Source: Stacks Project, Tag 09MS, coherent-equation-ses and the graded direct-sum sequence following
-it; Tag 0B8S, first paragraph of the proof (quotient action on the kernel). -/
+Source: Stacks Project, Tag 09MS, the graded direct-sum sequence; Tag 0B8S, the quotient action
+on the kernel. -/
 theorem tensorBoundary_graded_realization
     {X Z : Scheme.{u}} (j : Z ⟶ X) [IsClosedImmersion j]
     [HasDerivedCategory.{wC} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

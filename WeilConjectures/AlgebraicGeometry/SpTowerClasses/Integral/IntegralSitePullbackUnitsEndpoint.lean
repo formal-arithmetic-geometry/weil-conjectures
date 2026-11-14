@@ -52,8 +52,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 
 /-- Units endpoint square for the etale-to-pro-etale pullback.
 
-Source: Stacks Project, Tag 00WX, and the units endpoint part of the change-of-site construction in
-the classes proof.
+Source: Stacks Project, Tag 00WX.
 -/
 theorem integral_site_pullback_units_endpoint {X Y : Scheme.{u}} (f : X ⟶ Y)
     (a : (upperStar AddCommGrpCat.{u + 1} f).obj (Scheme.proEtaleUnitsSheaf Y) ⟶

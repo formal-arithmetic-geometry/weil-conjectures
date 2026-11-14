@@ -56,12 +56,9 @@ namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 
 /-- The two endpoint squares in the canonical etale-to-pro-etale pullback square.
-The first equality concerns only constant integer sheaves; the second concerns only
-units sheaves. There is no line bundle, cohomology class or derived-category map in
-this statement.
+The first equality concerns constant integer sheaves, the second units sheaves.
 
-Source: Stacks Project, Tag 00WX, the change-of-site construction in/sk-prop-sp-tower-geometric,
-classes proof (2).
+Source: Stacks Project, Tag 00WX.
 -/
 theorem integral_site_pullback_endpoints {X Y : Scheme.{u}} (f : X ⟶ Y)
     (a : (upperStar AddCommGrpCat.{u + 1} f).obj (Scheme.proEtaleUnitsSheaf Y) ⟶

@@ -25,10 +25,8 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 /-- A bounded flat sheaf-complex presentation of the canonical comparison before taking stalks.
-Source: Stacks Project, Tags 0A1D and 0DJ9, affine calculation and relative Mayer--Vietoris. This
-predicate records the base direct-image identification as well as the ordinary pullback
-identification, so restriction arrows can be transported between presentations. It constructs no
-data by choice. -/
+Source: Stacks Project, Tags 0A1D and 0DJ9, affine calculation and relative Mayer--Vietoris.
+It records both the base direct-image and the pullback identification. -/
 def StandardSingleFlatCounitPresentation
     {Y B A : Scheme.{u}} (p : Y ⟶ B) (M : Y.Modules) (g : A ⟶ B) : Prop :=
   letI := fun X : Scheme.{u} ↦ HasDerivedCategory.standard
@@ -53,9 +51,7 @@ def StandardSingleFlatCounitPresentation
             ((HomotopyCategory.quotient _ (.up ℤ)).obj K) ≫ t.hom
 
 /-- The presentation property for every relatively flat quasi-coherent module on an open.
-Source: Stacks Project, Tag 0DJ9, property of source opens used in the induction.
-No quasi-compactness of the open is built into this predicate; the induction only
-asks for it on quasi-compact opens. -/
+Source: Stacks Project, Tag 0DJ9, property of source opens used in the induction. -/
 def StandardSingleFlatCounitOnOpen
     {Y B A : Scheme.{u}} (p : Y ⟶ B) (g : A ⟶ B) (U : Y.Opens) : Prop :=
   ∀ (N : U.toScheme.Modules) [N.IsQuasicoherent],

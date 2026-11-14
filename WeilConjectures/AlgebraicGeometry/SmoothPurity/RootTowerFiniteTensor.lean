@@ -34,8 +34,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleReplete
 /-! # Root tower projections and normalized finite tensor reduction
 
 Source: Stacks Project, proetale.tex Tag 0990, etale-cohomology.tex Tag 03PL, and sites-modules.tex
-Section 03EK and Tag 03CY. Kernel division and the normalized inverse are the agent arguments in the
-node.
+Section 03EK and Tag 03CY.
 
 The natural-number level `r` denotes the positive exponent `r + 1`.
 All tensors are ordinary sheafified tensors. No flatness or finiteness of B is assumed.
@@ -66,7 +65,7 @@ def rootTowerTensorScalar (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (CommRingCat.ofHom ((algebraMap ℤ_[l] B).comp ULift.ringEquiv.toRingHom))
 
 /-- The unique residue-ring scalar homomorphism, using only annihilation.
-Source: node proof step 3, Stacks 03EK. -/
+Source: Stacks 03EK. -/
 def rootTowerResidueScalar (l : ℕ) (r : ℕ) (B : Type (u + 1)) [CommRing B]
     (hB : ((l ^ (r + 1) : ℕ) : B) = 0) : ZMod (l ^ (r + 1)) →+* B :=
   ZMod.castHom ((CharP.cast_eq_zero_iff B (ringChar B) (l ^ (r + 1))).mp hB) B
@@ -82,7 +81,7 @@ def rootTowerTensor (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
         (purTwistZlCompletionMap T l))).obj (purTwistZlModule T l))
 
 /-- A pure tensor x tensor b in H, with the scalar written first by change of rings.
-Source: Stacks 03EK and node proof step 3. -/
+Source: Stacks 03EK. -/
 def rootTowerTensorPure (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (B : Type (u + 1)) [CommRing B] [Algebra ℤ_[l] B] (U : T.ProEt)
     (b : (tateFiniteCoefficient T B).obj.obj (op U))

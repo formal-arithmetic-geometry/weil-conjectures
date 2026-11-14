@@ -34,9 +34,8 @@ namespace AlgebraicGeometry.SymmetricAlgebraSheaf
 
 open scoped TensorProduct
 
-/-- The canonical symmetric grading on an affine section algebra. The decomposition is the
-unique inverse of the summation map, using the internality recorded by the symmetric-grading
-node; it chooses no algebra or grading.
+/-- The canonical symmetric grading on an affine section algebra, whose decomposition is the
+inverse of the summation map.
 Source: Stacks Project, Algebra, Section 00DM; Constructions, Tag 01OB. -/
 noncomputable instance sectionGradedAlgebra {X : Scheme.{u}} (E : X.Modules)
     (U : X.affineOpens) :

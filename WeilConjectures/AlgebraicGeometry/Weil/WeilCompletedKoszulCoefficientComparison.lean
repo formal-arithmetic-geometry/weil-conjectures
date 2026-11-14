@@ -26,7 +26,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The finite exterior coefficient tower is the dual positive tensor tower.
 
-Source: Stacks Project, More on Algebra, Tag 0664, and algebraization.tex, Tag 0A0E, proof of. -/
+Source: Stacks Project, More on Algebra, Tag 0664, and algebraization.tex, Tag 0A0E. -/
 theorem completedKoszulCoefficientComparison
     (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A) :

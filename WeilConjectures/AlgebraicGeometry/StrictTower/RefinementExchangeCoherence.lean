@@ -20,9 +20,9 @@ import WeilConjectures.AlgebraicGeometry.StrictTower.StrictTowerProperOpenCalcul
 
 Source: Stacks Project, Tags 0F7B, 0F7C and 0F7F.
 
-`compositionF`, `compositionC` and `compositionE` are the already published canonical
-compactification candidate, refinement comparison and proper/open exchange. The wrappers
-below only supply quasi-compactness and invertibility, not a new choice of any operation.
+`compositionF`, `compositionC` and `compositionE` are the canonical compactification
+candidate, refinement comparison and proper/open exchange. The wrappers below supply
+quasi-compactness and invertibility.
 -/
 
 -- After pruning, this module only keeps private declarations.
@@ -42,7 +42,7 @@ namespace AlgebraicGeometry.ProEtale.StrictTower
 variable (B : Type (u + 1)) [CommRing B]
 
 /-- The proper-adjunction mate determines the proper/open comparison uniquely.
-Source: equality elimination and Stacks, Tag 07A7. -/
+Source: Stacks, Tag 07A7. -/
 private theorem refinementGamma_existsUnique {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]

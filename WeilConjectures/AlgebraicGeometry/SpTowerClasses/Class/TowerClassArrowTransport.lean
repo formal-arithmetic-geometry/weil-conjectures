@@ -21,9 +21,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 
-/-- Forget an integral arrow and use the canonical integer and root endpoints.
-This is the actual composite of the integer generator, exact forgetting and
-rootForget. Its explicit endpoints share the abelian-tower category witnesses. -/
+/-- Forget an integral arrow to abelian towers, using the canonical integer and root
+endpoints: the composite of the integer generator, exact forgetting and `rootForget`. -/
 def underlyingChernArrow (l : ℕ) [Fact l.Prime]
     {T : Scheme.{u}}
     {R A : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1}}

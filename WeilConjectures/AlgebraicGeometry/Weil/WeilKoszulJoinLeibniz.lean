@@ -299,11 +299,7 @@ private theorem koszul_sign_smul (r : ℕ) (p q : ℤ) (n : ℕ) (hp : -(n : ℤ
 
 /-- The nonpositive-degree part of the local Leibniz equation.
 
-Source: Stacks Project, Tags 0622 and 0664.
-
-The proof identifies the extended terms with exterior powers and applies the
-graded contraction Leibniz rule; the main theorem handles the zero extensions
-in positive degrees. -/
+Source: Stacks Project, Tags 0622 and 0664. -/
 theorem koszulJoinSummand_leibniz_nonpositive
     {A : Type (u + 1)} [CommRing A] (r : ℕ) (a : Fin (r + 1) → A)
     (m : ℕ) (p q : ℤ) (hp : p ≤ 0) (hq : q ≤ 0) :

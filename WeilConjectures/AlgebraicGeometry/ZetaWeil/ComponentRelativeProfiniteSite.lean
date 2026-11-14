@@ -612,31 +612,8 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The relative profinite test functor, its presentation characterization, and the
 factorization of the condensed-point morphism.
 
-Source: Hemo--Richarz--Scholbach, paragraph before (4.1) and factorization after it; Bhatt--Scholze,
-Lemma 2.2.8 and its more precise statement.
-
-Proof for stage 3.
-1. The affine component-site projection supplies the functor, stalkwise isomorphisms,
-   the pullback homeomorphisms, finite limits, coverings, and the geometric morphism.
-2. The inverse-image adjunction makes each continuous lift over T into a unique
-   scheme morphism, since the structure morphism is an isomorphism on stalks.
-3. At a finite stage, each restricted clopen subscheme maps to its corresponding
-   finite-coordinate fibre. These are disjoint open immersions covering the test
-   scheme, so their cofan is a coproduct, including empty and repeated blocks.
-4. Compatible finite clopen partitions give a small cofiltered relative presentation;
-   its limiting property follows from Mathlib's canonical finite-quotient limit.
-5. Apply the universal mapping property to the limiting cone in topological spaces
-   over the component space. This proves preservation of every small relative limit.
-6. For finite coproducts, images of the component injections are disjoint open
-   immersions covering the target. Their cofan is again a scheme coproduct.
-7. The absolute functor and the relative functor applied to S times a profinite test
-   agree on finite tests: continuity gives finite coproducts and finite limits give
-   the terminal test. Both preserve the canonical finite-quotient limits. The finite
-   comparison extends naturally through these limits.
-8. Mathlib's slice adjunction gives the geometric morphism with inverse image
-   overPullback. Restriction along the natural comparison identifies the composite
-   direct image with the condensed-point direct image. Its adjoint mate gives the
-   stated isomorphism of inverse images. -/
+Source: Hemo--Richarz--Scholbach, paragraph before (4.1) and factorization after it;
+Bhatt--Scholze, Lemma 2.2.8 and its more precise statement. -/
 theorem component_relative_profinite_site (T : Scheme.{u}) [IsAffine T] :
     ∃ F : Over (affineComponentSpace T) ⥤ T.ProEt,
       (∀ E : Over (affineComponentSpace T), IsAffine (F.obj E).left) ∧

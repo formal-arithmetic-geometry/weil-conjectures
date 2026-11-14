@@ -26,7 +26,7 @@ universe u
 noncomputable section
 
 /-- Multiply an ideal tensor by a section of a pulled-back tensor power.
-All maps are explicit; the equality h merely identifies the output degree.
+The equality h identifies the output degree.
 Source: Stacks Project, Tag 09MS, multiplication in the graded ideal sequence. -/
 def tensorIdealSectionMultiply {X Z : Scheme.{u}} (j : Z ⟶ X) (L : X.Modules)
     (a d t : ℕ) (h : d + a = t)

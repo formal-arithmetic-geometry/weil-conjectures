@@ -41,9 +41,7 @@ theorem Kummer.shortComplex_exact (q : Kummer l T) : q.shortComplex.ShortExact :
   exact q.exact
 
 /-- The positive Kummer boundary with its literal tower endpoints.
-
-This is the standard derived boundary of the recorded short exact sequence.
-Sharing its type keeps endpoint projection conversions out of larger equations. -/
+This is the derived boundary of the recorded short exact sequence. -/
 def Kummer.boundary (q : Kummer l T) :
     (DerivedCategory.singleFunctor (Ab T) 0).obj (units T) ⟶
       ((DerivedCategory.singleFunctor (Ab T) 0).obj (roots l T))⟦(1 : ℤ)⟧ :=

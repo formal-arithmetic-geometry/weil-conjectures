@@ -12,7 +12,7 @@ import WeilConjectures.SixFunctors.BaseChange.GlobalSections
 /-!
 # Normalization of the ordinary supported coefficient restriction mate
 
-Source: Stacks Project, Tags 09XP and 0F1E, the coefficient calculation in, step 11.
+Source: Stacks Project, Tags 09XP and 0F1E.
 -/
 
 @[expose] public section

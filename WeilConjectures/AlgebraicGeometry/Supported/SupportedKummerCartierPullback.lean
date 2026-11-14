@@ -12,7 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.PicardTensorDualComparisonIso
 /-!
 # Cartier line bundle and canonical section under Cartier-preserving pullback
 
-Source: Stacks Project, Tag 0C4U, lemma-pullback-effective-Cartier-divisors.
+Source: Stacks Project, Tag 0C4U.
 -/
 
 -- After pruning, this module only keeps private declarations.

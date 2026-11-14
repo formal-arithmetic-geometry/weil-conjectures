@@ -14,7 +14,7 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.M
 
 /-! # Intrinsic alpha baseChange identity on module sheaves
 
-Source: Stacks Project, Tag 0F7F, with the arbitrary-ring underived refinement.
+Source: Stacks Project, Tag 0F7F.
 -/
 
 @[expose] public noncomputable section
@@ -217,7 +217,7 @@ private theorem constantSquareCube
   exact H'.symm
 
 /-- Intrinsic alpha obeys cube pasting on module sheaves.
-Source: Stacks, Tag 0F7F, and the parent restriction argument, steps 1--3 and 6. -/
+Source: Stacks, Tag 0F7F. -/
 theorem singleAlpha_baseChange {V W S T V₁ W₁ S₁ T₁ : Scheme.{u}}
     (k : V ⟶ W) (i : S ⟶ T) (r : V ⟶ S) (p : W ⟶ T)
     (k₁ : V₁ ⟶ W₁) (i₁ : S₁ ⟶ T₁) (r₁ : V₁ ⟶ S₁) (p₁ : W₁ ⟶ T₁)

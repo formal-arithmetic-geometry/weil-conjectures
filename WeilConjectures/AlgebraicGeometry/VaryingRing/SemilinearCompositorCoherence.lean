@@ -18,7 +18,7 @@ import all WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingProperOpenPa
 
 Source: Stacks Project, Tags 0D6D and 0D6E.
 
-The inverse-image functor denoted `P` in the node is `VaryingRing.G`; its direct-image
+The inverse-image functor denoted `P` in the source is `VaryingRing.G`; its direct-image
 functor `S` is `VaryingRing.P`. The forward inverse-image compositor is `gComp.inv`.
 All functors, compositors and identity comparisons are those of the specified adjunctions.
 The associativity clauses allow independently named intermediate and total composites.

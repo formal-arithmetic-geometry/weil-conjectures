@@ -374,7 +374,7 @@ private theorem abelian_kummer_pullback {X Y : Scheme.{u}} (f : X ⟶ Y)
 ordinary or derived extension to the coefficient ring A. The middle Kummer map
 is the pullback of full units, as is the last map required by the data record.
 
-Source: Stacks `sites-cohomology`, lemma-pullback-K-flat, and `sites-modules`. -/
+Source: Stacks Project, chapters "Cohomology on Sites" and "Modules on Sites". -/
 theorem integralCoefficientPullback_exists
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (hX : IsUnit (l : Γ(X, ⊤))) (hY : IsUnit (l : Γ(Y, ⊤)))

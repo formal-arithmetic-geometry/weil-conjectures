@@ -25,7 +25,7 @@ All positive root levels are indexed by `n + 1`.
 
 ## Main definitions
 
-* `tateFiniteLine` is the recorded roots module tensored with a finite coefficient ring.
+* `tateFiniteLine` is the roots module tensored with a finite coefficient ring.
 * `TateSignedLine` states rank one, same-cover triviality and the tensor inverse.
 * `TateInverseTwists` fixes the actual functor and negative inverse of an equivalence.
 
@@ -47,7 +47,7 @@ open AlgebraicGeometry AlgebraicGeometry.Scheme WeilConjectures
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The constant commutative coefficient sheaf in clause (2). -/
+/-- The constant commutative coefficient sheaf `A_X`. -/
 abbrev tateFiniteCoefficient (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A] :=
   (constantSheaf (ProEt.topology X) CommRingCat.{u + 1}).obj (CommRingCat.of A)
 
@@ -58,7 +58,7 @@ def tateFiniteScalar (X : Scheme.{u}) (ℓ : ℕ) (A : Type (u + 1)) [CommRing A
   (constantSheaf (ProEt.topology X) CommRingCat.{u + 1}).map
     (CommRingCat.ofHom (a.comp ULift.ringEquiv.toRingHom))
 
-/-- The finite A-line is exactly the recorded roots module tensored with A_X. -/
+/-- The finite A-line is the roots module tensored with A_X. -/
 def tateFiniteLine (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     (A : Type (u + 1)) [CommRing A] (n : ℕ) (a : ZMod (ℓ ^ (n + 1)) →+* A) :=
   SheafOfModules.changeOfRingsOfUniverses.{u, u + 1, u + 1, u + 1}
@@ -74,7 +74,7 @@ def tateFiniteTensor (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     (tateFiniteScalar X ℓ A n a) (purTwistRootsModule X ℓ n) V b x
 
 /-- Signed line clauses on a specified cover: rank one, the same-cover trivializations,
-and the positive/negative tensor pairing. All powers and duals are the recorded ones. -/
+and the positive/negative tensor pairing. -/
 def TateSignedLine (X : Scheme.{u})
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
     (L : SheafOfModules.{u + 1} (purTwistRing X R))
@@ -87,7 +87,7 @@ def TateSignedLine (X : Scheme.{u})
       (coefficientTwistLine X L (-(n : ℤ)))).obj (coefficientTwistLine X L n) ≅
         SheafOfModules.unit (purTwistRing X R))
 
-/-- The recorded exact tensor model of K(m), now also for an arbitrary finite A-line. -/
+/-- The exact tensor model of K(m) for an arbitrary finite A-line. -/
 def tateComplexTwist (X : Scheme.{u})
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
     (L : SheafOfModules.{u + 1} (purTwistRing X R))
@@ -100,7 +100,7 @@ def tateComplexTwist (X : Scheme.{u})
   letI := (coefficientTwistLine_exact X L m).2.2
   (SheafOfModules.siteSheafTensorRight (A := R) (coefficientTwistLine X L m)).mapDerivedCategory
 
-/-- Fixing the right input of a published tensor bifunctor retains its full arrow action. -/
+/-- Fixing the right input of a tensor bifunctor retains its full arrow action. -/
 def tateTensorRight {C : Type c} [Category.{h} C] (T : C × C ⥤ C) (L : C) : C ⥤ C :=
   (𝟭 C).prod' ((Functor.const C).obj L) ⋙ T
 

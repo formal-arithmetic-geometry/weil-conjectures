@@ -62,18 +62,10 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 /-!
 # Relative condensed derived tensor and its geometric Frobenius
 
-The current blueprint uses `wfCondensedTensor`, the native relative derived tensor
-on modules over the pulled-back condensed ring. Its first argument is computed by
-a K-flat representative. `wfCondensedTensorFrobenius` composes the normalized tensor
+`wfCondensedTensor` is the native relative derived tensor on modules over the pulled-back
+condensed ring; its first argument is computed by a K-flat representative.
+`wfCondensedTensorFrobenius` composes the normalized tensor
 comparison of exact pullback with the tensor of the given Weil isomorphisms.
-
-The completed adic and rationalized constructions below are retained as presentation
-interfaces for existing consumers. They do not define the current condensed tensor.
-No preservation of constructibility or exactness on Weil pairs is assumed here.
-
-The finite coefficient stages use `pbcStageDatum` and `pbcStageUniformizer`:
-these are the valuation-ring data transported along `Shrink.algEquiv`, with the
-actual field inclusions conjugated by that canonical equivalence.
 
 ## Main definitions
 
@@ -84,6 +76,16 @@ actual field inclusions conjugated by that canonical equivalence.
 - `wfIntegralTensor`, `wfRationalTensor`: completed integral and rational tensor.
 - `wfRationalTensorPullback`: the normalized Frobenius/tensor comparison.
 - `WeilConjectures.wfTensorFrobenius`: tensor of the given Weil structures.
+
+## Implementation details
+
+The completed adic and rationalized constructions below are retained as presentation
+interfaces for existing consumers. They do not define the condensed tensor.
+No preservation of constructibility or exactness on Weil pairs is assumed here.
+
+The finite coefficient stages use `pbcStageDatum` and `pbcStageUniformizer`:
+these are the valuation-ring data transported along `Shrink.algEquiv`, with the
+actual field inclusions conjugated by that canonical equivalence.
 -/
 
 @[expose] public noncomputable section
@@ -1263,7 +1265,7 @@ abbrev wfAmbientFrobenius := wfAmbientRationalPullback (D.geometricFiber X₀).l
   (pbcStageDatum.{u} c.l c.Qbar E) 1 (fun _ : Fin 1 ↦ pbcStageUniformizer.{u} c.l c.Qbar E)
   (wfUniformizer_generates D c E) (D.geometricFrobenius X₀) (pbcStageUniformizer.{u} c.l c.Qbar E)
 
-/-- Inclusion of the node's Weil-complex carriers into the stipulated ambient category. -/
+/-- Inclusion of the carriers of Weil complexes into the stipulated ambient category. -/
 abbrev wfWeilCarrier (K : WeilD D c X₀ E) : WfAmbient D c X₀ E :=
   (wfConstructibleInclusion (D.geometricFiber X₀).left
     (pbcStageDatum.{u} c.l c.Qbar E) 1 (fun _ : Fin 1 ↦ pbcStageUniformizer.{u} c.l c.Qbar E)

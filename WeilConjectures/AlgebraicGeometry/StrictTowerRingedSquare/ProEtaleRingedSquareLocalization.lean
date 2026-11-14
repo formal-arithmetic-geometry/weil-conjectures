@@ -70,7 +70,7 @@ private theorem localization_transport
   apply Iso.ext
   exact Functor.mapDerivedCategoryNatIso_refl
 
-/-- The published ambient pullback square is the exact descent of the ordinary square.
+/-- The ambient pullback square is the exact descent of the ordinary square.
 Source: Stacks Project, Tag 0D6D. -/
 theorem StrictTowerRingedSquare.ambientSquare_localization
     {X' X Y' Y : Scheme.{t}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}

@@ -16,7 +16,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-/-- Completion from the actual localized sheaf presentation data.
+/-- Completion from the localized sheaf presentation data.
 Source: Stacks Project, Tags 0DJ9, 06YB and 0D5S. -/
 theorem standardSingleFlatCounit_localization_completion
     (h_affine : ∀ {Y₀ B₀ A₀ : Scheme.{u}} (p₀ : Y₀ ⟶ B₀)

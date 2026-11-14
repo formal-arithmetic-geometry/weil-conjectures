@@ -32,7 +32,6 @@ import WeilConjectures.Compactification.NagataCompactification
 All operations below are the ordinary bounded below operations. The canonical
 coefficient realization identifies fixed-scalar module sheaves with the prescribed
 continuous-function coefficient modules. No local compact-support extension is used.
-This interface was revalidated by N4 against the released 2026-10-18 repair note.
 -/
 
 @[expose] public noncomputable section

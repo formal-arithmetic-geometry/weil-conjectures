@@ -26,7 +26,7 @@ Source: Stacks Project, Tag 0F12, relative fixed-exponent extension; and the doc
 `torAmplitudeIn_rightDerivedLowerStar_of_isNoetherianRing` in
 `WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImage`.
 
-The map is the existing counit mate, a natural transformation of bifunctors. Its target
+The constant-module projection map is invertible for bounded torsion objects. Its target
 is identified with `Rf_*(E ⊗ᴸ M_X[0])` by the canonical constant inverse-image isomorphism.
 The statement concerns the uncompleted tensor in the ordinary unbounded derived category.
 -/
@@ -44,14 +44,9 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
 
 /-- The constant-module projection map is invertible for a bounded torsion object of finite
-Tor amplitude over Noetherian coefficients. There is no finiteness or flatness condition
-on the module and no constructibility condition on the object. Naturality in both variables
-is that of `rightDerivedLowerStarProjectionMap`, restricted along the constant-sheaf functor
-and the degree-zero embedding. The canonical constant inverse-image comparison identifies
-its target with `Rf_*(E ⊗ᴸ M_X[0])`, naturally in `M`.
+Tor amplitude over Noetherian coefficients, with no finiteness or flatness condition on the module.
 
-Source: Stacks Project, Tag 0F12, direct-sum/triangle/unit argument adapted to relative direct image
-and a fixed-exponent torsion object.
+Source: Stacks Project, Tag 0F12.
 -/
 theorem isIso_rightDerivedLowerStarProjectionMap_constant_of_torsion_object
     (Λ : Type (u + 1)) [CommRing Λ] [IsNoetherianRing Λ]

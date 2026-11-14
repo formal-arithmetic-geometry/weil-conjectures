@@ -22,8 +22,7 @@ open CategoryTheory Opposite
 namespace AlgebraicGeometry.SymmetricAlgebraSheaf
 
 /-- The tilde comparison is bijective on every stalk of the affine chart.
-Source: Stacks Project, Modules, Lemmas 01CG and 01CH; Schemes, Lemma 01I8; Algebra, Lemma 0C6F.
-This is step 6 of the affine symmetric algebra comparison. -/
+Source: Stacks Project, Modules, Lemmas 01CG and 01CH; Schemes, Lemma 01I8; Algebra, Lemma 0C6F. -/
 theorem affineComparison_stalk_bijective {X : Scheme.{u}}
     (F : X.Modules) [F.IsQuasicoherent] {W : X.Opens} (hW : IsAffineOpen W)
     (x : Spec Γ(X, W)) :

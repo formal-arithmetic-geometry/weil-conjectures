@@ -78,7 +78,7 @@ attribute [local irreducible] HasDerivedCategory.standard SheafOfModules.monoida
 attribute [local irreducible] pbcComplexCounit pbcExtensionCounit
 
 /-- Exact scalar restriction inherits the existing termwise derived shift comparison.
-Source: Stacks Tag 03DA, blueprint order 1429. -/
+Source: Stacks Tag 03DA. -/
 instance pbcLevelwiseRestrictionCommShift
     {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (φ : R ⟶ S) :
     (pbcDerivedRestrict φ).CommShift ℤ :=
@@ -86,7 +86,7 @@ instance pbcLevelwiseRestrictionCommShift
 
 /-- The scalar-extension shift comparison is the canonical mate of exact restriction's
 specified shift comparison under the tensor-unit normalized adjunction.
-Source: Stacks Tag 06YY, blueprint order 1429. -/
+Source: Stacks Tag 06YY. -/
 instance pbcLevelwiseScalarCommShift
     {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (φ : R ⟶ S) :
     (pbcDerivedExtend φ).CommShift ℤ :=
@@ -632,8 +632,8 @@ theorem pbc_reduction_adic_tower_laws (K : PbcCompletedDerived T d) :
       (pbcAdicProjection_comp T d c a (hab.trans hbc))
       (pbcAdicProjection_comp T d b a hab) K
 
-/-- The actual reduction tower of K: all data come from the recorded K-flat universal
-construction and balancing maps; only the two named proof fields are postponed. -/
+/-- The reduction tower of K, built from the recorded K-flat universal construction and
+balancing maps. -/
 def pbcReductionAdicTower (K : PbcCompletedDerived T d) : AdicTower T d where
   tower := (completedReductionTower T d).obj K
   level n := (pbcCompletedReduction T d n).obj K

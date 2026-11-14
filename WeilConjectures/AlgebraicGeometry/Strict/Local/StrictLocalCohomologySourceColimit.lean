@@ -28,7 +28,7 @@ open AlgebraicGeometry
 namespace AlgebraicGeometry.Etale
 
 /-- The canonical strict-local source cocone is colimiting.
-Source: Stacks, Tags 03Q8 and 03Q9, first proof paragraph. -/
+Source: Stacks, Tags 03Q8 and 03Q9. -/
 theorem smallModel_isColimit_strictLocalCohomologySourceLegs {S : Scheme.{v}}
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     (L : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}))

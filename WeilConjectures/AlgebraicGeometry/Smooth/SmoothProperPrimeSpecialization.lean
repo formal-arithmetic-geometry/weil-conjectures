@@ -60,7 +60,7 @@ noncomputable def strictLocalSpecialization
 
 /-- Prime-to-characteristic specialization invariance, with no finite-stalk or
 relative-dimension condition. Higher direct images here are formed after forgetting
-scalars to abelian sheaves, as allowed in the node.
+scalars to abelian sheaves.
 Source: Stacks Project, Tag 0GKD, degree-q consequence. -/
 theorem isIso_strictLocalSpecialization_smooth_proper_prime
     {X S : Scheme.{u}} (f : X ⟶ S) [Smooth f] [IsProper f]

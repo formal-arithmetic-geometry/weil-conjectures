@@ -11,7 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.Strict.Henselization.StrictHense
 /-! # Canonical neighbourhood geometry on the small colimit model
 
 Transport upstream's geometry along the canonical spectrum-colimit isomorphism.
-Source: Stacks Project, Tag 03Q9, first proof paragraph.
+Source: Stacks Project, Tag 03Q9.
 -/
 
 @[expose] public section

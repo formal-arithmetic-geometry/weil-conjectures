@@ -30,8 +30,7 @@ variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
 /-- A square transports the canonical section unit to the identity on the upstairs
-section complex. This concerns only the target injective representative: it has no
-source coefficient, coefficient morphism, numerator, denominator or replacement complex.
+section complex, on the target injective representative.
 Source: Stacks Project, Tags 0D5T and 0D5X. -/
 theorem squareSectionUnit_cancellation {X S Z T : Scheme.{u}}
     (f : X ⟶ S) (k : Z ⟶ T) (g : T ⟶ S) (v : Z ⟶ X) (h : v ≫ f = k ≫ g)

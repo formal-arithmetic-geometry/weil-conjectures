@@ -31,10 +31,11 @@ set_option linter.privateModule false
 
 /-! Finite-level comparison and conservativity for compact-support projection.
 
-The proof evaluates the two transposes at each finite coefficient quotient,
-uses the bounded constructible finite-Tor projection theorem and the open
-unit/counit triangles, then applies joint conservativity of the tower
-calculus. The final mate is the recorded `projection` arrow.
+## Implementation details
+
+The two transposes are compared at each finite coefficient quotient, using the bounded
+constructible finite-Tor projection theorem, and then compared on towers by joint
+conservativity of the tower calculus.
 -/
 
 @[expose] public noncomputable section

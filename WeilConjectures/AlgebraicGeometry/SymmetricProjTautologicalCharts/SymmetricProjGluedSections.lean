@@ -100,7 +100,7 @@ private theorem twist_chart_read_bijective {S : Scheme.{u}} (A : S.GradedAlgebra
     ((chart U).hom.app (A.twistChartOpen U))).comp hu
 
 /-- The degree-one affine twists glue, together with the sheaf map sending a module
-section to its homogeneous fraction. No invertibility or surjectivity is asserted here.
+section to its homogeneous fraction.
 Source: Stacks, Tag 01NR, specialized to degree one of the symmetric algebra as in Tag 01OB. -/
 theorem exists_symmetric_twist_sections
     (S : Scheme.{u}) (E : S.Modules) [E.IsQuasicoherent] :

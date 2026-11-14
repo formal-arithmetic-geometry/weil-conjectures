@@ -100,8 +100,6 @@ def cycleClass (I : CochainComplex.Plus (Sheaf S.topology (ModuleCat.{u + 1} A))
     (DerivedCategory.Plus.Q.obj I) (Iso.refl _) a).hom ((S.complex I).homologyπ a x)
 
 /-- Derived morphisms from the supported single object, with the original integer shift.
-This names the existing Hom type, so checking its users does not repeatedly compute
-that type's universe through the chosen derived-category localization.
 Source: Milne, Theorem 9.4. -/
 abbrev derivedHom
     (K : DerivedCategory.Plus (Sheaf S.topology (ModuleCat.{u + 1} A))) (a : ℤ) :
@@ -119,9 +117,8 @@ def cocycleMorphism
   supportedHomLocalizedCocycle I.obj a f hf ≫
     ((DerivedCategory.Plus.QCompιIso _).inv.app I)⟦a⟧'
 
-/-- The normalized supported-Hom identification. The cocycle clause fixes its value by
-`f ↦ (f ρ)(1)` on every injective representative, so no arbitrary natural isomorphism
-can satisfy this interface. Its source is the actual derived support group.
+/-- The normalized supported-Hom identification, from the actual derived support group,
+given by `f ↦ (f ρ)(1)` on every injective representative.
 Source: Milne, Theorem 9.4, Example 9.5 and Ext proof. -/
 structure Identification where
   chi : SupportedHomChi S.topology A S.restriction S.supported
@@ -165,10 +162,8 @@ variable (L : Sheaf S.topology (ModuleCat.{u + 1} A) ⥤
   Sheaf T.topology (ModuleCat.{u + 1} A))
 variable (adj : L ⊣ B.sheafPushforwardContinuous (ModuleCat.{u + 1} A) S.topology T.topology)
 
-/-- The three canonical comparisons used in the statement, in one interface.
-`constantIso` is fixed by its adjoint constant sections, `closedIso` by the epic
-constant restriction, and `supportUnit` by its kernel inclusion. The terminal and open
-arrows are actual site arrows, so the last formula is the unit-induced section map.
+/-- The three canonical comparisons `constantIso`, `closedIso` and `supportUnit` of a
+transport, normalized by constant sections, constant restriction and kernel inclusion.
 Source: Milne, Theorem 9.4, Ext proof and kernel construction. -/
 structure Transport where
   terminalMap : T.terminal ⟶ B.obj S.terminal
@@ -242,7 +237,7 @@ abbrev etaleSupportHomPair (P : WeilConjectures.PurityFiniteSetting.{u})
       (MorphismProperty.Over.pullback @Etale ⊤ i)
 
 /-- The identical kernel construction in the pro-etale topology, with its ordinary
-constant module. Source: Milne, Section 9 and the pro-etale supported-Hom node. -/
+constant module. Source: Milne, Section 9. -/
 abbrev proEtaleSupportHomPair (P : WeilConjectures.PurityFiniteSetting.{u})
     {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] :
     SupportHomPair P.Coefficient where
@@ -1286,11 +1281,10 @@ private theorem supportHomSquare
 
 /-- The canonical supported-Hom identifications commute with arbitrary pullback of a
 closed pair in the etale topology and, for etale-origin coefficients, in the pro-etale
- topology. They also commute with comparison on both schemes, and the comparison
+topology. They also commute with comparison on both schemes, and the comparison
 squares for supported groups and closed constants commute. Each identification is
 normalized on every supported cocycle; each transport is fixed by the inverse-image
-unit and the epic constant restriction. Thus the existential data introduce the
-canonical maps, rather than allowing any choice of maps or identifications.
+unit and the epic constant restriction.
 
 Source: Milne, Lectures on Etale Cohomology, Section 9, Theorem 9.4 and Example 9.5, pp. 66--67, Ext
 proof. -/

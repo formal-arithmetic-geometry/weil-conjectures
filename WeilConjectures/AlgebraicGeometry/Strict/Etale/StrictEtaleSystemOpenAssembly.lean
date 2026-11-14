@@ -314,10 +314,8 @@ private theorem openSystemTransition {m n : ℕ} (h : n ≤ m)
 /-- The system-level assembly data for ordinary strict étale extension.
 Source: Zheng, Construction 4.1 and Stacks 03S2, 03DI and 03DJ.
 
-This record supplies only the system functor, its exact adjunction, evaluation mate,
-and transition law. The levelwise functors and their restriction mates are supplied
-by `L`; hence this is a proper assembly step rather than a restatement of the full
-ordinary-open theorem. -/
+The record contains the system functor, its exact adjunction, evaluation mate and
+transition law; the levelwise functors and their restriction mates come from `L`. -/
 structure StrictEtaleSystemOpenAssembly where
   extension : strictEtaleCoefficientSystem X O t ⥤ strictEtaleCoefficientSystem Z O t
   [additive : extension.Additive]

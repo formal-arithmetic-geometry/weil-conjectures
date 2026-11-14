@@ -29,10 +29,9 @@ noncomputable section
 
 set_option linter.unusedVariables false in
 /-- The homogeneous quotient actions commute with the coefficient projections.
-This statement concerns only actions: it has no connecting map or resolution presentation.
 
-Source: Stacks Project, Tag 09MS, the graded ideal sequence; Tag 0B8S, first paragraph of the proof
-(the quotient action); Tag 01XC, functoriality of the affine cohomology edge. -/
+Source: Stacks Project, Tag 09MS, the graded ideal sequence; Tag 0B8S, the quotient action;
+Tag 01XC, functoriality of the affine cohomology edge. -/
 theorem tensorGradedAction_projection {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)
     (n : ℕ) (T : TensorGradedPresentation j L) (D : TensorBoundaryComparisonData j L n)

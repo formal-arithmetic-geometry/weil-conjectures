@@ -13,7 +13,7 @@ import WeilConjectures.AlgebraicGeometry.Strict.Local.StrictLocalSectionsUnitLer
 
 /-! # Derived exchange and Leray before taking homology
 
-Source: Stacks Project, Tag 03Q9, final injective-complex paragraph.
+Source: Stacks Project, Tag 03Q9.
 -/
 
 /- This original-model counterpart follows the proved calculation in
@@ -32,7 +32,7 @@ namespace AlgebraicGeometry.Etale
 /-- The derived exchange computation on the global sections of the pulled-back
 underived direct-image complex. No neighbourhood section restriction occurs.
 
-Source: Stacks Project, Tag 03Q9, final injective-complex paragraph, and the adjunction
+Source: Stacks Project, Tag 03Q9, and the adjunction
 factorization in `Adjunction.derivedPlus_mateEquiv_app_fac`. -/
 theorem smallModel_strictLocalDerivedExchange_leray {X S : Scheme.{v}} (f : X ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)

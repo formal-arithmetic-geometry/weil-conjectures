@@ -14,7 +14,7 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.L
 
 /-! # Intrinsic alpha vertical identity on module sheaves
 
-Source: Stacks Project, Tag 0F7C, with the arbitrary-ring underived refinement.
+Source: Stacks Project, Tag 0F7C.
 -/
 
 @[expose] public noncomputable section
@@ -61,7 +61,7 @@ private theorem open_target_detection {U X : Scheme.{u}} (k : U ⟶ X)
   simp only [R, Functor.map_comp]
 
 /-- Intrinsic alpha obeys vertical pasting on module sheaves.
-Source: Stacks, Tag 0F7C, and the parent restriction argument, steps 1--3 and 4. -/
+Source: Stacks, Tag 0F7C. -/
 theorem singleAlpha_vertical {A C E B₀ D F : Scheme.{u}}
     (k : A ⟶ B₀) (i : C ⟶ D) (j : E ⟶ F)
     (r₁ : A ⟶ C) (r₂ : C ⟶ E) (p₁ : B₀ ⟶ D) (p₂ : D ⟶ F)

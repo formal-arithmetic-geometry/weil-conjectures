@@ -64,10 +64,8 @@ private theorem scalar_shift_endpoint
       simp only [Functor.map_comp, Category.assoc]
       rw [Q.commShiftIso_hom_naturality_assoc]
 
-/-- Construct the intermediate R inverse image and the R-to-A scalar comparison.
-The endpoint equations start on R-modules, not on integral complexes. In particular
-they contain no integral reduction functor, unitIso of Chern data, or rootIso of
-Chern data. They can be used with any reduction model after its separate comparison. -/
+/-- Construct the intermediate R inverse image and the R-to-A scalar comparison,
+with their compatibilities on the coefficient unit and root modules. -/
 theorem tower_chernScalar_pullback
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (_hX : IsUnit (l : Γ(X, ⊤))) (_hY : IsUnit (l : Γ(Y, ⊤)))

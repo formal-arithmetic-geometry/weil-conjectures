@@ -28,9 +28,7 @@ namespace AlgebraicGeometry.ProEtale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-/-- Additivity needed to apply the supported kernel termwise. Proof: compose the kernel map of a sum
-with the monic kernel inclusion. Naturality makes this the sum of the two composites. Cancel the
-inclusion; the same argument handles zero. -/
+/-- The supported kernel functor is additive. -/
 theorem supportKernelAdditive {X U : Scheme.{u}} (j : U ⟶ X) :
     (finiteSupportedSections Λ j).Additive := by
   constructor

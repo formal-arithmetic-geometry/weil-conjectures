@@ -129,10 +129,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 /-!
 # Canonical composition maps for strict constant-coefficient towers
 
-Source: Stacks Project, Tags 0F7J, 0F7C, 0F7D and 0F7F, and the strict-tower adaptation in the
-blueprint.
+Source: Stacks Project, Tags 0F7J, 0F7C, 0F7D and 0F7F.
 
-`Compactification.Triangle` names the node's maps as follows: `cf.i = c`, `cf.g = p_Y`,
+In the notation used below, the maps of a `Compactification.Triangle` are `cf.i = c`, `cf.g = p_Y`,
 `cg.i = i`, `cg.g = q`, `cfg.i = a`, `q = b`, and `p = p`.
 All maps below are constructed in the derived category of strict towers, before evaluation.
 -/
@@ -218,7 +217,7 @@ noncomputable def compositionH {X Y Z : Scheme.{u}} {f : X ⟶ Y} {h : Y ⟶ Z}
     Functor.whiskerLeft (compositionF B T₁.cf) (compositionC B r.rh)
 
 /-- The cartesian faces of a base change of a supplied compatible tower. All arrows
-are supplied projections; this does not choose a compactification or an arbitrary comparison.
+are supplied projections.
 Source: Stacks, Tags 0F7J and 0F7F. -/
 structure CompositionBaseChange {X Y Z X' Y' Z' : Scheme.{u}}
     {f : X ⟶ Y} {h : Y ⟶ Z} {f' : X' ⟶ Y'} {h' : Y' ⟶ Z'}

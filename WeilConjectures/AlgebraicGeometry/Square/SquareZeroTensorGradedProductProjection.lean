@@ -36,7 +36,6 @@ def tensorGradedSection {X Z : Scheme.{u}} {j : Z ⟶ X} [IsClosedImmersion j]
   (T.c (n * (e + 1))).app ⊤ ((x ≫ (D.a e).inv).app ⊤ (1 : Γ(Z, ⊤)))
 
 /-- Take cohomology of a degree projection and then the inverse coefficient comparison.
-This is an explicit composite, with no object selected from an unproved theorem.
 Source: Stacks Project, Tag 09MS, the graded ideal sequence. -/
 def tensorGradedCoefficientProjection {X Z : Scheme.{u}} {j : Z ⟶ X}
     [IsClosedImmersion j] {L : X.Modules} {n : ℕ}
@@ -130,7 +129,7 @@ theorem tensorGradedSection_projection_of_raw {X Z : Scheme.{u}} (j : Z ⟶ X)
       (1 : Γ(Z, ⊤)))) (T.c_projection (n * ((e + 1) + 1)))
 
 /-- Projecting a product of the two homogeneous sections gives the transported tensor
-product section. No cohomology boundary, action, or derivation identity occurs here.
+product section.
 
 Source: Stacks Project, Tag 09MS, multiplication in the direct-sum algebra. -/
 theorem tensorGradedSection_product {X Z : Scheme.{u}} (j : Z ⟶ X)

@@ -46,8 +46,7 @@ def diagonalPic (S : Scheme.{u}) : (diagonalSurface S).Pic :=
   @Scheme.Pic.ofIsInvertible _ (diagonalLine S) (diagonalLine_invertible S)
 
 /-- The standard negative-projection Cartier boundary with values in all pro-etale
-units. The dependency's positive projection class is negated before the canonical
-units comparison and the exact constant-tower functor are applied. -/
+units, transported along the units comparison and the exact constant-tower functor. -/
 def diagonalBoundary (S : Scheme.{u}) :
     (DerivedCategory.singleFunctor (Ab (diagonalSurface S)) 0).obj
       ((constant (diagonalSurface S)).obj (diagonalIntegralSource S)) ⟶
@@ -62,8 +61,8 @@ def diagonalBoundary (S : Scheme.{u}) :
 def hyperplanePic (S : Scheme.{u}) : (ProjectiveLine S).Pic :=
   Scheme.Pic.mk (ProjectiveSpace.twist (ULift.{u} (Fin 2)) S 1)
 
-/-- Canonical pullback of the coefficient unit: after taking the ordinary
-adjoint and evaluating, its sections are the actual constant-ring restriction. -/
+/-- Canonical pullback of the coefficient unit, whose ordinary adjoint evaluates to the
+constant-ring restriction on sections. -/
 structure CoefficientPullback (b : SpTowerShriek.Base l E) {X Y : Scheme.{u}}
     (f : X ⟶ Y) (g : SpTowerShriek.Geometry l E b f) where
   iso : g.pull.obj (coefficient Y (Arings l E Y)) ≅ coefficient X (Arings l E X)
@@ -119,8 +118,7 @@ def diagonalExtendedUnit {S : Scheme.{u}} (c : Chern l E (diagonalSurface S)) :
       ((DerivedCategory.singleFunctor (Ab (diagonalSurface S)) 0).map
         ((constant (diagonalSurface S)).map (supportedIntegralUnit S))))
 
-/-- The diagonal arrow is the specified coefficient extension of beta_Delta.
-Its supported source is fixed by a quotient-unit-preserving isomorphism below. -/
+/-- The diagonal arrow is the specified coefficient extension of beta_Delta. -/
 def diagonalArrow {S : Scheme.{u}} (c : Chern l E (diagonalSurface S))
     {b : SpTowerShriek.Base l E}
     {g : SpTowerShriek.Geometry l E b (diagonalImmersion S)}
@@ -138,8 +136,7 @@ def diagonalArrow {S : Scheme.{u}} (c : Chern l E (diagonalSurface S))
     (lineComparison l E c)⟦(2 : ℤ)⟧'
 
 /-- The canonical diagonal construction, with the supported source fixed by its
-quotient unit and the forget-support map equal to c1 of the actual divisor line.
-All sources and targets are the recorded module derived categories and geometry. -/
+quotient unit and the forget-support map equal to c1 of the diagonal divisor line. -/
 structure Diagonal (b : SpTowerShriek.Base l E) (S : Scheme.{u})
     (c : Chern l E (diagonalSurface S)) where
   geometry : SpTowerShriek.Geometry l E b (diagonalImmersion S)
@@ -160,7 +157,7 @@ def finiteScalar (n : ℕ) : ZMod (l ^ (n + 1)) →+* FiniteRing l E n :=
   ULift.ringEquiv.symm.toRingHom.comp
     (ZMod.castHom (ringChar.dvd (coefficient_annihilates l E n)) (SpTowerShriek.R l E n))
 
-/-- The recorded finite Tate line, with no independently chosen line object. -/
+/-- The finite Tate line at level `n`. -/
 abbrev finiteLine (T : Scheme.{u}) (n : ℕ) :=
   Scheme.tateFiniteLine T l (FiniteRing l E n) n (finiteScalar l E n)
 

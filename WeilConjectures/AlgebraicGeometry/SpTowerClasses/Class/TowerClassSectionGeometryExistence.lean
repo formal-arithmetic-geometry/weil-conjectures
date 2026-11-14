@@ -277,7 +277,7 @@ private theorem unitModel_transport
   simpa only [eqToIso_refl, Functor.isoWhiskerLeft_refl, Iso.trans_refl] using hu
 
 -- The geometry records require many dependent category and instance checks.
-/-- Choose geometry before constructing any coefficient-unit comparison.
+/-- There is a geometry whose level direct images have the actual section coordinates.
 Source: Stacks 03D2, 03D7; Zheng Construction 4.1 and Lemma 4.10. -/
 theorem exists_sectionGeometry {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃ b : SpTowerShriek.Base l E, ∃ g : SpTowerShriek.Geometry l E b f,

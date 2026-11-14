@@ -83,8 +83,7 @@ Source: Stacks Tag 03Q2. -/
 abbrev siteMap {X Y : Scheme.{u}} (g : X ⟶ Y) :=
   (𝟭 ℕ).prod (MorphismProperty.Over.pullback @Etale ⊤ g)
 
-/-- A normalized structural ring map on the actual sequence sites. Its normalization
-on constant generators determines the map uniquely, by sheafification.
+/-- A normalized structural ring map on the actual sequence sites.
 Source: Zheng Construction 4.1; Stacks 00W1, 03D7. -/
 structure DirectImage {X Y : Scheme.{u}} (g : X ⟶ Y)
     (B : ℕᵒᵖ ⥤ CommRingCat.{u + 1}) where
@@ -280,13 +279,13 @@ def RestrictionSupport.iso {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactificatio
     Functor.associator _ _ _
 
 /-- A scalar model uses the actual cochain change of rings, with the insertion unit
-and its derived transpose fixed by the recorded universal localization comparison.
+and its derived transpose fixed by the universal localization comparison.
 Source: Stacks 03D7, 06YY. -/
 abbrev Scalar (W : Scheme.{u}) {B C : ℕᵒᵖ ⥤ CommRingCat.{u + 1}} (a : B ⟶ C) :=
   SheafOfModules.SystemScalarModel.{u + 1, u, u + 1} (ringMap W a)
 
 /-- The coefficient projection is the unique scalar adjunct of the inverse
-restriction comparison. This is an actual natural transformation on derived systems.
+restriction comparison.
 Source: Stacks 0GL6. -/
 def projection {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactification f}
     {B C : ℕᵒᵖ ⥤ CommRingCat.{u + 1}} {a : B ⟶ C}
@@ -455,7 +454,7 @@ def SupportEvaluation.iso {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactification
     Functor.associator _ _ _
 
 /-- Evaluation of the scalar adjunction: restriction is identity on sections, and the
-scalar comparison is its adjoint mate, rather than a freely chosen isomorphism.
+scalar comparison is its adjoint mate.
 Source: Stacks 03D7, 06YY; Zheng 4.1. -/
 structure ScalarEvaluation (W : Scheme.{u}) {B C : ℕᵒᵖ ⥤ CommRingCat.{u + 1}}
     (a : B ⟶ C) (s : Scalar W a) (n : ℕ)
@@ -489,8 +488,7 @@ structure Coefficients (l : ℕ) where
   finite : ∀ n : ℕ, Finite (rings.obj (op n))
   torsion : ∀ n : ℕ, ∃ m : ℕ, (l ^ m : rings.obj (op n)) = 0
 
-/-- The actual coefficient ring-sheaf functor. Functor laws follow on each section
-from the constant-sheaf functor laws and uniqueness of the ring-system map.
+/-- The coefficient ring-sheaf functor.
 Source: Zheng 4.1. -/
 def coefficientFunctor (W : Scheme.{u}) :
     (ℕᵒᵖ ⥤ CommRingCat.{u + 1}) ⥤
@@ -543,10 +541,8 @@ def unit (W : Scheme.{u}) (B : ℕᵒᵖ ⥤ CommRingCat.{u + 1})
     (x : Scalar W (𝟙 B)) : x.model.T ≅ 𝟭 (Derived W B) :=
   SheafOfModules.systemScalarModelDerivedUnit ((coefficientFunctor W).map_id B) x
 
-/-- Normalized ordinary étale system operations for a fixed compactification.
-All categories, scalar models and evaluation functors are the actual constructions
-above; the comparison fields are fixed by ordinary section maps and adjunction mates.
-No projection invertibility or coherence law is assumed here.
+/-- Normalized ordinary étale system operations for a fixed compactification,
+with comparison fields given by ordinary section maps and adjunction mates.
 Source: Zheng 4.1, 5.14--5.16; Stacks 0GL6. -/
 structure Theory {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) (l : ℕ) where
   support : ∀ B : Coefficients.{u} l, Support c B.rings
@@ -585,7 +581,7 @@ def singleRestriction {A B : CommRingCat.{u + 1}} (a : A ⟶ B)
     Functor.whiskerRight (derivedRestrictScalarsCompOpenImmersionLowerShriekIso
       a.hom c.i).inv (lowerStar (ModuleCat.{u + 1} A) c.g).rightDerivedFunctor
 
-/-- The single-ring composition word under the published balanced scalar associators.
+/-- The single-ring composition word under the balanced scalar associators.
 Source: Stacks 0GL6. -/
 def singlePath {A B D : CommRingCat.{u + 1}} (a : A ⟶ B) (b : B ⟶ D)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :

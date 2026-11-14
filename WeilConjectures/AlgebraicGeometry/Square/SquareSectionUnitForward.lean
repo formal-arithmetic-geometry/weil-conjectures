@@ -759,8 +759,7 @@ private theorem squareSectionUnit_forward_aux {X S Z T : Scheme.{u}}
 end Helpers
 
 /-- The normalized square comparison reaches the raw target endpoint before its
-inverse is applied. This is the forward equation needed for cancellation in the
-section-unit identity.
+inverse is applied.
 Source: Stacks Project, Tags 0D5T and 0D5X.
 -/
 theorem squareSectionUnit_forward {X S Z T : Scheme.{u}}

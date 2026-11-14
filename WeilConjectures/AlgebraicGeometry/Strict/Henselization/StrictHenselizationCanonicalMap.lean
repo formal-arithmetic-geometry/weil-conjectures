@@ -34,6 +34,7 @@ import WeilConjectures.AlgebraicGeometry.Strict.Henselization.StrictHenselizatio
 /-! # The canonical pointed strict-local morphism
 
 Source: Stacks Project, Tags 04HX, 03PS and 04GU.
+
 The existing residue-field formulation is retained; this interface packages its uniquely
 characterized map without requiring the caller to supply residue identifications.
 -/

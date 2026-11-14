@@ -22,7 +22,7 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Sc
 namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 
 /-- The ordinary inverse-system construction has its underlying abelian and unit comparisons.
-Source: classes proof (2), integral reduction, and Zheng Construction 4.1. -/
+Source: Zheng Construction 4.1. -/
 theorem integralInverseSystem_normalization (l : ℕ) [Fact l.Prime]
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (I : ∀ n : ℕ, SheafOfModules.AlgebraicInverseImage

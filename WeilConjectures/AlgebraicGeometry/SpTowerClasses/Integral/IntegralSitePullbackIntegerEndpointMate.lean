@@ -35,7 +35,7 @@ public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 
-/-! The mate calculation used by the integer endpoint square. -/
+/-! The mate calculation for the integer endpoint square. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false

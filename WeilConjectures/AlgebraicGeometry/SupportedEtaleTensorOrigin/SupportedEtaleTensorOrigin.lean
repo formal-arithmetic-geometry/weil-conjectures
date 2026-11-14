@@ -57,8 +57,7 @@ namespace SupportedEtaleTensorOrigin
 
 attribute [-instance] instIsMonoidalFunctorOppositeWOfHasSheafComposeForgetOfHasEnoughPoints
 
-/-- A reduction boundary for the published exact square descent. Its data is exactly
-that descent; the boundary prevents repeated unfolding of derived localizations.
+/-- The published exact square descent.
 Source: Stacks 010N. -/
 @[irreducible] def exactSquare
     {C₁ : Type c₁} {C₂ : Type c₂} {C₃ : Type c₃} {C₄ : Type c₄}
@@ -109,8 +108,8 @@ identity on scalar-unit sections. Source: Stacks 00YV and 03DA. -/
   exactSquare (sfRealizationRestriction T f)
 
 /-- The scalar presentation is the left-adjoint uniqueness comparison determined by
-restrictionPresentation, hence by identity on the scalar-unit sections. No arbitrary
-isomorphism of scalar functors is chosen. Source: Stacks 00YV and 06YY. -/
+restrictionPresentation, hence by identity on the scalar-unit sections.
+Source: Stacks 00YV and 06YY. -/
 @[irreducible] def scalarPresentation {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (f : A →+* B) (T : Scheme.{u}) :
     (sfIntrinsicDerivedEquivalence T A).functor ⋙ scalarExtensionFunctor f T ≅

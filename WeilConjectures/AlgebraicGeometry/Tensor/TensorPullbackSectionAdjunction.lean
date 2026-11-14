@@ -15,7 +15,7 @@ Source: Stacks Project, Sheaves, Tags 0095, 0096 and 0097.
 
 ## Main declarations
 
-* `tensorPullbackSection`: the actual section `1 ⊗ m`.
+* `tensorPullbackSection`: the section `1 ⊗ m`.
 * `existsUnique_tensorPullbackSectionAdjunction`: its uniquely normalized adjunction.
 * `tensorPullbackSectionComp` and `tensorPullbackSectionId`: the induced comparisons.
 -/
@@ -28,7 +28,7 @@ open CategoryTheory Opposite TopologicalSpace
 open scoped ChangeOfRings
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- The actual section `1 ⊗ m`, using inverse image and module sheafification.
+/-- The section `1 ⊗ m`, using inverse image and module sheafification.
 Source: Stacks, Tags 0095, 008X. -/
 noncomputable def tensorPullbackSection {X Y : Scheme.{u}} (g : X ⟶ Y)
     (M : Y.Modules) (U : Y.Opens) (m : Γ(M, U)) :
@@ -65,8 +65,7 @@ theorem existsUnique_tensorPullbackSectionAdjunction {X Y : Scheme.{u}} (g : X �
   ext m
   exact (hother M V.unop m).trans (hnormalized M V.unop m).symm
 
-/-- Choose the uniquely section-normalized adjunction; only its universal-property proof
-is postponed, while the pullback functor retains the upstream tensor construction.
+/-- A choice of the uniquely section-normalized tensor-pullback adjunction.
 Source: Stacks, Tag 0096. -/
 noncomputable def tensorPullbackSectionAdjunction {X Y : Scheme.{u}} (g : X ⟶ Y) :
     tensorPullback g ⊣ pushforward g :=

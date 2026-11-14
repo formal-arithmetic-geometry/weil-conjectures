@@ -33,10 +33,8 @@ universe u
 
 /-- An affine nonvanishing open downstairs is the inverse image of the nonvanishing
 locus of a section of a positive multiple of the original tensor degree upstairs.
-This asserts neither ampleness nor affineness of the open upstairs.
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 09MS, equation (30.17.5.1) and the next
-paragraph, ending with the lift of a power of the section. -/
+Source: Stacks Project, Cohomology of Schemes, Lemma 09MS, equation (30.17.5.1). -/
 theorem exists_section_power_locus_of_square_zero
     {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] [IsLocallyNoetherian X] [CompactSpace X]

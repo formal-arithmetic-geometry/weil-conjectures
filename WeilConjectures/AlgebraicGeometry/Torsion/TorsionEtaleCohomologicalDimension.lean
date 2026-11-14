@@ -36,7 +36,7 @@ noncomputable def Scheme.torsionEtaleCohomologicalDimension (T : Scheme.{u})
 /-- The torsion étale cohomological dimension of a quasi-compact quasi-separated morphism:
 the least nonnegative bound for all higher direct images of torsion abelian étale sheaves,
 or infinity if there is no bound. Higher direct images are the cohomology
-sheaves of the recorded bounded below derived direct image, applied to a sheaf in degree zero. -/
+sheaves of the bounded below derived direct image, applied to a sheaf in degree zero. -/
 noncomputable def Scheme.Hom.torsionEtaleCohomologicalDimension
     {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f] : ℕ∞ :=
   sInf {d | ∃ n : ℕ, d = (n : ℕ∞) ∧

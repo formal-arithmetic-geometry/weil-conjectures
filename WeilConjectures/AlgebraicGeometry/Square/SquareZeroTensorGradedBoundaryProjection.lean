@@ -35,9 +35,7 @@ attribute [local instance] boundary_enoughInjectives
 noncomputable section
 
 /-- Cohomology of a degree projection carries the canonical section boundary to the
-boundary of its quotient projection. This statement concerns one short-complex morphism,
-not products, actions, or the realization existential. Compatible resolutions only
-present the single boundary whose degree projection is computed.
+boundary of its quotient projection.
 
 Source: Stacks Project, Tag 01DZ, naturality of the cohomology boundary; Tag 09MS, projections of
 the graded direct-sum short exact sequence. -/

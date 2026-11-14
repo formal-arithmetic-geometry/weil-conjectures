@@ -153,7 +153,7 @@ private theorem restrictionCofanIsColimit {X Z : Scheme.{u}} (j : Z ⟶ X)
     exact congrArg (fun t ↦ a.unit.app (D d) ≫ t) (hm d)
 
 /-- The tensor powers and their restrictions form a graded algebra quotient.
-Source: Stacks Project, Tag 09MS, the direct-sum sequence after coherent-equation-ses. -/
+Source: Stacks Project, Tag 09MS, the direct-sum sequence after the ideal short exact sequence. -/
 theorem tensorGradedAlgebraData_exists {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] :
     Nonempty (TensorGradedAlgebraData j L) := by

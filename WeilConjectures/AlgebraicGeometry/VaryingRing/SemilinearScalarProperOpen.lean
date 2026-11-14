@@ -1105,8 +1105,7 @@ private theorem scalarAlpha_factorTail (C : OrdinaryScalarRestriction R φ B ψ)
       ((scalarOrdinaryPi B (scalarClopen B) s).app Q))
     (normalizedMapTriple _ _ _ _) hc hn₁ hn₂ hd hn₃.symm hπ hn₄.symm hn₅.symm
 
-/-- Combine tail compatibility with a compatible first factor. Composite functor
-objects are retained in the input types to match the defining component equations. -/
+/-- Combine tail compatibility with a compatible first factor. -/
 private theorem scalarAlpha_factorWord (C : OrdinaryScalarRestriction R φ B ψ)
     (G : OrdinaryScalarAdjunctions R φ B ψ C)
     {V X W S : Scheme.{u}} (s : V ⟶ X) (b : X ⟶ W) (q : X ⟶ S)

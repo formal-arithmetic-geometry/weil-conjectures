@@ -16,8 +16,8 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triang
 
 Source: Stacks 0941.
 
-The five completed-tower constructions are moved verbatim from
-SmoothPurityNormalizedEquivalence. Evaluation proves exactness of scalar forgetting.
+This file defines the completed-coefficient tower functors (scalar forgetting, reduction,
+total derived inverse limit and its projections) and shows that scalar forgetting is exact.
 -/
 
 @[expose] public noncomputable section
