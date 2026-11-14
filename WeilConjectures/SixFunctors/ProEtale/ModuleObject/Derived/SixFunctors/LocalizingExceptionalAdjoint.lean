@@ -176,10 +176,6 @@ noncomputable instance localizingLowerShriekCommShift (c : Compactification f)
     (fun K ↦ h K.obj K.property)).CommShift ℤ)
 
 set_option linter.unusedVariables false in
-set_option synthInstance.maxHeartbeats 100000 in
--- Instance search through the bundled Brown structures is expensive.
-set_option maxHeartbeats 800000 in
--- The proof assembles both bundled Brown structures and their small-model equivalences.
 /-- The compactification lower shriek on localizing closures has an exact right adjoint,
 unique up to the unique counit-compatible isomorphism, and that adjoint preserves all small
 coproducts. The existential triangulated structures are proofs that the recorded object
@@ -265,6 +261,13 @@ theorem exists_localizingExceptionalAdjoint
   obtain ⟨hsmallY, hY, hrepY, hSY, hisoSY, hretY, hessY, hidY, hsumY, hgenY⟩ := hBY
   let := hX
   let := hY
+  -- Fix the shift before instance search, and reuse the resulting families below.
+  have : ∀ n : ℤ,
+      (shiftFunctor (localizingClosureProEtale Λ X).FullSubcategory n).Additive :=
+    fun n ↦ inferInstance
+  have : ∀ n : ℤ,
+      (shiftFunctor (localizingClosureProEtale Λ Y).FullSubcategory n).Additive :=
+    fun n ↦ inferInstance
   let := hsmallX
   let := hsmallY
   let := hrepX
@@ -316,23 +319,9 @@ theorem exists_localizingExceptionalAdjoint
         ((localizingClosureProEtale Λ Y).liftCompιIso _ _).symm
     exact preservesColimitsOfShape_of_reflects_of_preserves F
       (localizingClosureProEtale Λ Y).ι
-  let : ObjectProperty.EssentiallySmall.{u + 1} SX := hessX
-  have hSXL : SX ≤ localizingClosureProEtale Λ X := by
-    intro K hK P hP hSP
-    exact hSP K hK
-  let : LocallySmall.{u + 1} SX.FullSubcategory :=
-    locallySmall_of_faithful (ObjectProperty.ιOfLE hSXL)
-  obtain ⟨QX, hQX, hQSX, hSXQ⟩ := ObjectProperty.EssentiallySmall.exists_small_le SX
-  let := hQX
-  let : LocallySmall.{u + 1} QX.FullSubcategory :=
-    locallySmall_of_faithful (ObjectProperty.ιOfLE hQSX)
-  let : (ObjectProperty.ιOfLE hQSX).IsEquivalence :=
-    (ObjectProperty.isEquivalence_ιOfLE_iff hQSX).mpr hSXQ
-  let : EssentiallySmall.{u + 1} SX.FullSubcategory :=
-    (essentiallySmall_congr (ObjectProperty.ιOfLE hQSX).asEquivalence).mp
-      (essentiallySmall_of_small_of_locallySmall _)
-  let IX := SmallModel.{u + 1} SX.FullSubcategory
-  let e := (equivSmallModel.{u + 1} SX.FullSubcategory).symm
+  obtain ⟨IX, hIX, ⟨eX⟩⟩ := (ObjectProperty.exists_equivalence_iff SX).mpr hessX
+  let := hIX
+  let e := eX.symm
   have hLX : ∀ i : IX, localizingClosureProEtale Λ X (e.functor.obj i).obj := by
     intro i P hP hSP
     exact hSP _ (e.functor.obj i).property
@@ -364,23 +353,12 @@ theorem exists_localizingExceptionalAdjoint
     exact compact_of_iso q (hcompactX i)
   let SY := constantModelBoundedConstructible Λ Y ⊓ fun K ↦
     DerivedCategory.finiteTorAmplitude _ K
-  let : ObjectProperty.EssentiallySmall.{u + 1} SY := hessY
+  obtain ⟨IY, hIY, ⟨eY'⟩⟩ := (ObjectProperty.exists_equivalence_iff SY).mpr hessY
+  let := hIY
+  let eY := eY'.symm
   have hSYL : SY ≤ localizingClosureProEtale Λ Y := by
     intro K hK P hP hSP
     exact hSP K hK
-  let : LocallySmall.{u + 1} SY.FullSubcategory :=
-    locallySmall_of_faithful (ObjectProperty.ιOfLE hSYL)
-  obtain ⟨QY, hQY, hQSY, hSYQ⟩ := ObjectProperty.EssentiallySmall.exists_small_le SY
-  let := hQY
-  let : LocallySmall.{u + 1} QY.FullSubcategory :=
-    locallySmall_of_faithful (ObjectProperty.ιOfLE hQSY)
-  let : (ObjectProperty.ιOfLE hQSY).IsEquivalence :=
-    (ObjectProperty.isEquivalence_ιOfLE_iff hQSY).mpr hSYQ
-  let : EssentiallySmall.{u + 1} SY.FullSubcategory :=
-    (essentiallySmall_congr (ObjectProperty.ιOfLE hQSY).asEquivalence).mp
-      (essentiallySmall_of_small_of_locallySmall _)
-  let IY := SmallModel.{u + 1} SY.FullSubcategory
-  let eY := (equivSmallModel.{u + 1} SY.FullSubcategory).symm
   have hLY : ∀ i : IY, localizingClosureProEtale Λ Y (eY.functor.obj i).obj :=
     fun i ↦ hSYL _ (eY.functor.obj i).property
   obtain ⟨hcompactY, _⟩ := hgenY IY eY hLY

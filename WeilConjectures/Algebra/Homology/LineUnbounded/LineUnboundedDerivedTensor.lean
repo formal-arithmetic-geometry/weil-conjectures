@@ -366,8 +366,6 @@ def normalization (P : Modules.{t, a} X R)
         (single.{t, a} X R P) hK hP hKf hPf).symm ≪≫
           DerivedCategory.Q.mapIso ((collapse.{t, a} X R P).app K)
 
-set_option maxHeartbeats 300000 in
--- The concrete sheaf instance conversions in this assembly exceed the default budget.
 /-- Tensoring an arbitrary unbounded complex with a locally free line is termwise,
 with its inverse given by the internal dual and the specified evaluation. Global-section
 linearity is equivalent to the universal B-linearity clause: every sheaf B-algebra
@@ -465,60 +463,53 @@ theorem line_unbounded_derived_tensor (P : Modules.{t, a} X R)
   obtain ⟨hKD, hKDf, _, _, hcollapseD, _, _, _, sD, htriD, chiD, hchiD, hnD,
     etaD, hetaD, heD, _⟩ :=
     FlatSingleDerivedNormalization.flat_single_derived_normalization.{t + 1, t,
-      max a (t + 1), w} R (dual X R P) hD
-  have hcomp : comparisonData (scalars X R)
-      (tensor X R P) (tensor X R (dual X R P))
-      (cancellation X R P (dual X R P) e)
-      (cancellation X R (dual X R P) P ((β_ (dual X R P) P) ≪≫ e))
-      (derived X R P) (derived X R (dual X R P))
-      (normalization X R P hK hKf (derived X R P) rfl)
-      (normalization X R (dual X R P) hKD hKDf (derived X R (dual X R P)) rfl) := by
-    let := sP
-    let := sD
-    have := hPl
-    have := hPc
-    have := hDl
-    have := hDc
-    have := hPT
-    have := hDT
-    have := hchiP
-    have := hchiD
-    have := hcollapseP
-    have := hcollapseD
-    let cP := chiP ≪≫ Functor.isoWhiskerRight
-      (FlatSingleDerivedNormalization.collapse R P) DerivedCategory.Q
-    let cD := chiD ≪≫ Functor.isoWhiskerRight
-      (FlatSingleDerivedNormalization.collapse R (dual X R P)) DerivedCategory.Q
-    have hcP : NatTrans.CommShift cP.hom ℤ := by
-      change NatTrans.CommShift (chiP.hom ≫
-        Functor.whiskerRight (FlatSingleDerivedNormalization.collapse R P).hom
-          DerivedCategory.Q) ℤ
-      infer_instance
-    have hcD : NatTrans.CommShift cD.hom ℤ := by
-      change NatTrans.CommShift (chiD.hom ≫
-        Functor.whiskerRight (FlatSingleDerivedNormalization.collapse R (dual X R P)).hom
-          DerivedCategory.Q) ℤ
-      infer_instance
-    have hLP := Functor.linear_of_iso (scalars X R) etaP.symm
-    have hLD := Functor.linear_of_iso (scalars X R) etaD.symm
-    have := htriP
-    have := htriD
-    apply comparison_of_localized_pair (scalars X R) _ _ _ _ _ _ _ _ cP cD
-      (aP := a) (aD := b) (haP := ha.trans (cancellation_eq X R _ _ e).symm)
-      (haD := hb.trans (cancellation_eq X R _ _ ((β_ (dual X R P) P) ≪≫ e)).symm)
-    · intro K hK' hKf'
-      dsimp only [normalization, cP, NatIso.trans_app]
-      simp only [eqToIso_refl, Iso.refl_trans]
-      exact whiskered_normalization _ _ _ _ _ (hnP K hK' hKf')
-    · intro K hK' hKf'
-      dsimp only [normalization, cD, NatIso.trans_app]
-      simp only [eqToIso_refl, Iso.refl_trans]
-      exact whiskered_normalization _ _ _ _ _ (hnD K hK' hKf')
-    · exact ht
-    · intro i
-      exact ⟨(hcohP i).choose⟩
-  exact ⟨hP, hD, hK, hKD, hKf, hKDf, hPl, hPc, hDl, hDc, e, he,
-    (fun U p phi h ↦ (hei U p phi h).2.1), derived X R P,
-    derived X R (dual X R P), rfl, rfl, hcomp⟩
+      max a (t + 1), w} R (dual.{t, a} X R P) hD
+  refine ⟨hP, hD, hK, hKD, hKf, hKDf, hPl, hPc, hDl, hDc, e, he,
+    (fun U p phi h ↦ (hei U p phi h).2.1), derived.{t, a} X R P,
+    derived.{t, a} X R (dual.{t, a} X R P), rfl, rfl, ?_⟩
+  let := sP
+  let := sD
+  have := hPl
+  have := hPc
+  have := hDl
+  have := hDc
+  have := hPT
+  have := hDT
+  have := hchiP
+  have := hchiD
+  have := hcollapseP
+  have := hcollapseD
+  let cP := chiP ≪≫ Functor.isoWhiskerRight
+    (FlatSingleDerivedNormalization.collapse R P) DerivedCategory.Q
+  let cD := chiD ≪≫ Functor.isoWhiskerRight
+    (FlatSingleDerivedNormalization.collapse R (dual.{t, a} X R P)) DerivedCategory.Q
+  have hcP : NatTrans.CommShift cP.hom ℤ := by
+    change NatTrans.CommShift (chiP.hom ≫
+      Functor.whiskerRight (FlatSingleDerivedNormalization.collapse R P).hom
+        DerivedCategory.Q) ℤ
+    infer_instance
+  have hcD : NatTrans.CommShift cD.hom ℤ := by
+    change NatTrans.CommShift (chiD.hom ≫
+      Functor.whiskerRight (FlatSingleDerivedNormalization.collapse R (dual.{t, a} X R P)).hom
+        DerivedCategory.Q) ℤ
+    infer_instance
+  have hLP := Functor.linear_of_iso (scalars.{t, a} X R) etaP.symm
+  have hLD := Functor.linear_of_iso (scalars.{t, a} X R) etaD.symm
+  have := htriP
+  have := htriD
+  apply comparison_of_localized_pair (scalars.{t, a} X R) _ _ _ _ _ _ _ _ cP cD
+    (aP := a) (aD := b) (haP := ha.trans (cancellation_eq X R _ _ e).symm)
+    (haD := hb.trans (cancellation_eq X R _ _ ((β_ (dual.{t, a} X R P) P) ≪≫ e)).symm)
+  · intro K hK' hKf'
+    dsimp only [normalization, cP, NatIso.trans_app]
+    simp only [eqToIso_refl, Iso.refl_trans]
+    exact whiskered_normalization _ _ _ _ _ (hnP K hK' hKf')
+  · intro K hK' hKf'
+    dsimp only [normalization, cD, NatIso.trans_app]
+    simp only [eqToIso_refl, Iso.refl_trans]
+    exact whiskered_normalization _ _ _ _ _ (hnD K hK' hKf')
+  · exact ht
+  · intro i
+    exact ⟨(hcohP i).choose⟩
 
 end SheafOfModules.LineUnbounded
