@@ -117,8 +117,8 @@ proper `g`. -/
 noncomputable def boundedConstructibleUpperShriekOfCompactificationAdjunction :
     boundedConstructibleLowerShriekOfCompactification ℓ c ⊣
       boundedConstructibleUpperShriekOfCompactification ℓ c :=
-  -- on the general `Rg_*` (as `boundedConstructibleUpperShriekOfCompactification`): from the expected
-  -- type the implicit functors would be the proper-only ones, which costs every user
+  -- on the general `Rg_*` (as `boundedConstructibleUpperShriekOfCompactification`): from the
+  -- expected type the implicit functors would be the proper-only ones, which costs every user
   ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
     (Profinite.padicAlgClRingObj ℓ) ℓ c.overI).comp
     (Adjunction.ofIsLeftAdjoint (boundedConstructibleLowerStar ℓ c.overG)) :
@@ -174,8 +174,8 @@ compactification `c = (X ⟶[i] Z ⟶[g] Y)` of `f` (`E`-coefficient): the compo
 noncomputable def boundedConstructibleUpperShriekOfCompactificationAdjunction :
     boundedConstructibleLowerShriekOfCompactification ℓ E c ⊣
       boundedConstructibleUpperShriekOfCompactification ℓ E c :=
-  -- on the general `Rg_*` (as `boundedConstructibleUpperShriekOfCompactification`): from the expected
-  -- type the implicit functors would be the proper-only ones, which costs every user
+  -- on the general `Rg_*` (as `boundedConstructibleUpperShriekOfCompactification`): from the
+  -- expected type the implicit functors would be the proper-only ones, which costs every user
   ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
     (Profinite.continuousMapRingObj E) ℓ
     c.overI).comp
@@ -236,8 +236,8 @@ compactification `c = (X ⟶[i] Z ⟶[g] Y)` of `f` (`𝒪_E`-coefficient): the 
 noncomputable def boundedConstructibleUpperShriekOfCompactificationAdjunction :
     boundedConstructibleLowerShriekOfCompactification ℓ E c ⊣
       boundedConstructibleUpperShriekOfCompactification ℓ E c :=
-  -- on the general `Rg_*` (as `boundedConstructibleUpperShriekOfCompactification`): from the expected
-  -- type the implicit functors would be the proper-only ones, which costs every user
+  -- on the general `Rg_*` (as `boundedConstructibleUpperShriekOfCompactification`): from the
+  -- expected type the implicit functors would be the proper-only ones, which costs every user
   ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
     (Profinite.padicIntegersRingObj ℓ E) ℓ
     c.overI).comp
