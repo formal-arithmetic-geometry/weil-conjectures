@@ -13,10 +13,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Supported.Diagonal
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Supported.DiagonalSupportedFlat
 
 /-! # Scalar compatibility of the normalized diagonal source
-
-Source: diagonal tower coefficient changes, paragraph (1), and the supported-source
-normalization in the diagonal tower trace construction.
-(blueprint: lem-diagonal-supported-scalar-source).
 -/
 
 @[expose] public noncomputable section
@@ -509,16 +505,7 @@ Source: blueprint latest, sec-six-functors-basics/sk-prop-diagonal-tower/
 sk-prop-diagonal-tower-coefficients.proof.md, paragraph (1), and
 sk-prop-diagonal-tower-trace.proof.md, supported-source identification;
 Stacks Tags 09AD, 09AA and 09AH.
-(blueprint: lem-diagonal-supported-scalar-source).
 
-Proof: On the diagonal the supported regular module is the regular module, and on
-its open complement it is zero. Closed/open restriction is jointly conservative and
-commutes with tensor, so this module is flat. The ordinary closed projection formula
-identifies its scalar extension with the supported regular module for the new ring.
-The extension unit followed by this comparison is precisely supportMap: closed
-restriction gives the coefficient unit and open restriction gives the zero map.
-Compute on the flat single complex. The scalar adjunction transpose is therefore an
-isomorphism and gives e with its required normalization.
 
 For the target normalized source, compose ordinary closed direct image with f_*,
 use Delta f = id from r.over_eq, and use the identity direct-image comparison.

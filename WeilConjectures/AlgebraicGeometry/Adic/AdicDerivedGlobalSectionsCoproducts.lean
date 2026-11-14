@@ -33,7 +33,6 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 /-! # Bounded-below sums and integral derived global sections
 
 Source: Bhatt--Scholze, Lemma 6.3.14(1); Stacks Project, Tags 09A2 and 09A3.
-(blueprint: lem-weil-pbc-adic-derived-sections-bounded-below-coproducts).
 -/
 
 @[expose] public noncomputable section
@@ -44,18 +43,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Derived sections with any specified scalar action preserve every
 uniformly bounded-below coproduct. No rational algebra structure is required.
-Source: Bhatt--Scholze, Lemma 6.3.14(1); Stacks Project, Tags 09A2 and 09A3.
-(blueprint: lem-weil-pbc-adic-derived-sections-bounded-below-coproducts).
-
-Proof: the affine weakly contractible hypercover calculation shows that every
-classical derived evaluation functor on a qcqs object preserves sums. Exact scalar
-restriction gives the same assertion with the A action. Choose injective complex
-representatives with the common termwise lower bound. Their sum still has that
-bound and consists of sections-acyclic objects: higher derived sections of each
-term are sums of zero objects. The bounded-below acyclic comparison identifies
-its derived sections with termwise sections. Naturality and the termwise coproduct
-property then show that derived sections preserve the coproduct of the chosen
-representatives. Transport by their isomorphisms to the original family. -/
+Source: Bhatt--Scholze, Lemma 6.3.14(1); Stacks Project, Tags 09A2 and 09A3. -/
 theorem proEtale_derivedGlobalSections_boundedBelow_preservesColimit
     (T : Scheme.{u}) [CompactSpace T] [QuasiSeparatedSpace T]
     (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1})

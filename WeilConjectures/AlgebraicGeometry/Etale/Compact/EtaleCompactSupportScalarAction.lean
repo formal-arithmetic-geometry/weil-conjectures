@@ -343,24 +343,7 @@ private theorem exact_preserves_scalar
 
 /-- The canonical coefficient action on source and target derived systems is preserved
 by ordinary étale compact support.
-Source: Zheng, Construction 4.1; Stacks 09MK, 070I and 015F
-(blueprint: lem-pur-etale-compact-support-scalar-action).
-
-Proof: on an ordinary system multiply each section at level n by the image of r in
-O/(t^(n+1)) under the constant-ring sheafification unit. Naturality of that unit and
-semilinearity of the transition maps make these maps a system endomorphism, natural
-in the system. Apply this natural endomorphism termwise to complexes and descend
-through the quasi-isomorphism localization. This gives the derived natural
-endomorphism, with exactly the representative equation in StrictEtaleScalarAction.
-Extension by zero preserves it on sections, since it uses the same section maps and
-zero outside the open. Ordinary direct image preserves it by its normalized constant
-coefficient comparison. The open derived factorization therefore preserves the
-derived action by the universal property of localization. For proper direct image,
-compute on K-injective resolutions: the ordinary scalar endomorphism of a resolution
-represents the derived scalar endomorphism, and the normalized direct-derived unit
-is natural in it. The universal property of the right derived functor extends this
-identity from the resolution models to every object. Composing the two identities
-and the normalized factorization isomorphisms gives the displayed equation for S. -/
+Source: Zheng, Construction 4.1; Stacks 09MK, 070I and 015F. -/
 theorem etaleCompactSupport_scalarAction
     {O : Type (u + 1)} [CommRing O] {t : O}
     {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactification f}

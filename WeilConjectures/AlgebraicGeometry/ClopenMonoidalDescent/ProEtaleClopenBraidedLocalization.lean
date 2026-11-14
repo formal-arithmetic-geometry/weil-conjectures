@@ -37,7 +37,6 @@ import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
 /-! # Braided localization of degreewise clopen restriction
 
 Source: Stacks Project, Tags 06YS, 0G7D, 06YU and 0FPT.
-(blueprint: lem-pur-clopen-braided-localization).
 -/
 
 @[expose] public noncomputable section
@@ -104,17 +103,7 @@ namespace AlgebraicGeometry.Scheme.ProEt.ClopenMonoidalDescent
 /-- Any braided structure on degreewise restriction descends to the specified exact
 restriction, with monoidal canonical localization comparison.
 
-Source: Stacks Project, Tags 06YS, 0G7D, 06YU and 0FPT.
-(blueprint: lem-pur-clopen-braided-localization).
-
-Proof: The acyclic-tensor criterion is equivalent to categorical K-flatness, using the
-homotopy quotient and symmetry for the other tensor order. Functorial flat resolutions
-supply the K-flat left derivability structure. Every derived object has a cochain preimage;
-its independent-coefficient K-flat resolution gives an isomorphic localized K-flat model.
-The hypothesis hk preserves these models. The native localization functors are lax braided,
-with invertible units and tensorators on K-flat inputs. Apply normalizedBraidedLocalization
-to these functors and the canonical exact-restriction factorization. This gives the claimed
-braided structure and the monoidal factorization. No nonempty or nonzero assumption is used. -/
+Source: Stacks Project, Tags 06YS, 0G7D, 06YU and 0FPT. -/
 theorem clopen_braided_localization
     {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)})

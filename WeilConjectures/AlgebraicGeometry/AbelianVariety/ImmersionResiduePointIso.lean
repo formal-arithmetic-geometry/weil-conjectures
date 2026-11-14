@@ -9,8 +9,6 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Mathlib.AlgebraicGeometry.ResidueField
 
 /-! Residue-point isomorphisms induced by immersions.
-
-(blueprint: new-immersion-residue-point-iso)
 -/
 
 @[expose] public section
@@ -20,14 +18,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- An immersion identifies the residue points, with the actual projection equation.
-Source: Stacks Project, Tag 01IO; Mathlib's surjectivity of immersion stalk maps.
-(blueprint: new-immersion-residue-point-iso)
-
-Proof: After substituting the image point, lift a residue-field element to the target
-stalk and then through the surjective stalk map of the immersion. This proves that the
-induced field homomorphism is surjective; every field homomorphism is injective.
-Apply Spec to this ring isomorphism. Naturality of the canonical residue-point map
-is exactly the required projection equation. -/
+Source: Stacks Project, Tag 01IO; Mathlib's surjectivity of immersion stalk maps. -/
 theorem immersion_residuePointIso
     {S W : Scheme.{v}} (k : W ⟶ S) [IsImmersion k]
     (w : W) (s : S) (hw : k w = s) :

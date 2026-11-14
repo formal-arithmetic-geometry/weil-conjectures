@@ -10,9 +10,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.Coefficient.Finite
 import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.Scalar.FiniteScalarClassRouteEquation
 
 /-! # Scalar transport of an arbitrary finite ordinary arrow
-
-Source: diagonal-tower trace (1), finite Kummer classes and exact comparison.
-(blueprint: lem-sfb-finite-coefficient-scalar-transport).
 -/
 
 @[expose] public noncomputable section
@@ -51,14 +48,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- Forgetting an arbitrary ordinary arrow in the normalized coefficient coordinates
-is exact comparison of its integral scalar class, with the specified line endpoint.
-Source: diagonal-tower trace (1), exact coefficient forgetting
-(blueprint: lem-sfb-finite-coefficient-scalar-transport).
-
-Proof: exact coordinate conjugation identifies the normalized module and
-additive routes. Realization of the ordinary scalar class identifies the
-additive route with the normalized scalar-class route. Compose these proved
-equalities, all in the same actual finite boundary Hom type. -/
+is exact comparison of its integral scalar class, with the specified line endpoint. -/
 theorem finiteOrdinaryCoordinateArrow_scalar (n : ℕ) [Finite (SpTowerShriek.R l E n)]
     (T : Scheme.{u}) {hT : IsUnit ((l ^ (n + 1) : ℕ) : Γ(T, ⊤))}
     (c : SpTowerP1.CoefficientCoordinates l E n T hT)

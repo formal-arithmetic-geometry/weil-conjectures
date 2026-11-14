@@ -44,7 +44,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 Source: Stacks Project, Tag 0GKX, `lemma-constant-shriek-rel-dim-1`, specialized to
 finite commutative coefficients and affine bases of finite type over the integers.
-(blueprint: lem-weil-pbc-etale-constant-shriek-rel-dim-1)
 -/
 
 @[expose] public section
@@ -551,14 +550,7 @@ an affine base of finite type over the integers, on which the additive orders of
 coefficients are invertible, has constructible cohomology in every degree.
 
 Source: Stacks Project, Tag 0GKX, `lemma-constant-shriek-rel-dim-1`.
-(blueprint: lem-weil-pbc-etale-constant-shriek-rel-dim-1)
 
-Proof: The base is Noetherian. Induct on closed subsets, allowing every closed subscheme
-structure, and use open-closed gluing of constructible sheaves. Compact-support base change,
-exact inverse image and constant pullback reduce the induction step to the base-changed
-smooth affine curve over the closed base. Choose a generic point of an irreducible component
-and a good-curves diagram. Surjective-pullback descent reduces constructibility on a nonempty
-open of the base to the finite cover in that diagram.
 
 The original curve's boundary is quasi-finite: its fibre is a closed complement of a dense
 open in a Noetherian space of dimension at most one, hence zero-dimensional and discrete.

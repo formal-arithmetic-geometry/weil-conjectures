@@ -28,8 +28,7 @@ attribute [local instance] finitePerfectModelsAbLocallyBijective
 /-- A specified etale diagram descends the actual quotient tower only when its
 realization and its consecutive arrows compare with that tower. Stalkwise agreement
 with the algebraic model alone does not express this requirement.
-Source: Stacks Tags 09AL, 09C6 and 06YY.
-(blueprint: lem-weil-pbc-finite-perfect-adic-actual-level-descent). -/
+Source: Stacks Tags 09AL, 09C6 and 06YY. -/
 structure FinitePerfectAdicActualLevelDescent
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (M : DerivedCategory (CompletedAdicModules X d)) (V : X.Etale)
@@ -55,28 +54,7 @@ structure FinitePerfectAdicActualLevelDescent
 /-- The actual finite quotient tower admits an etale descent with the explicit
 realization comparison, compatibly with its consecutive quotient arrows.
 
-Source: Stacks Project, Tags 09AL, 09B1, 09C6 and 06YY.
-(blueprint: lem-weil-pbc-finite-perfect-adic-actual-level-descent).
-
-Proof: on the supplied chart identify each actual finite quotient with a complex over
-fixed finite scalars via the constant-scalar equivalence. The separate markings by
-T.level n show bounded finite locally constant cohomology at that level. The bounded
-classical derived comparison descends this actual object to an etale complex K_n;
-exact faithful inverse image reflects the bounds and finite local constancy. Its
-local marking torsor has an inhabited stalk at every geometric point. This gives
-boundedK, lisseK and stalk, separately for each n. Full faithfulness of that same
-comparison descends the actual consecutive quotient arrows, using the coefficient
-restriction compositor. Tensor balancing identifies their adjoint transposes as
-isomorphisms. Etale pullback commutes with this balancing by the canonical tensor
-pullback comparison, so the descended arrows satisfy universalK with its coherence.
-Together these fields give L. Pullback to U followed by restriction to W transports
-the descent isomorphisms to the explicit scalar realization and gives actual. The
-ordinary scalar compositor is the identity on the underlying abelian sheaf, hence
-is the uniquely normalized compositor already fixed in finitePerfectAdicScalarCoherence.
-The equation defining each descended consecutive arrow therefore localizes to exactly
-actual_normalized, including the strict tower representative comparisons. No conclusion
-about an arbitrary, unrelated etale complex L is asserted. Empty charts and zero rings
-are included by the same equivalences and exact functors. -/
+Source: Stacks Project, Tags 09AL, 09B1, 09C6 and 06YY. -/
 theorem finitePerfectAdic_actual_level_descent
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶

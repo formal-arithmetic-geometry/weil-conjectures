@@ -24,7 +24,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.FiniteCompactScalar
 
 /-- The scalar transpose of the specified compact-support restriction comparison.
-Source: Stacks 0GL6 (blueprint: lem-sf-finite-compact-scalar-constructible). -/
+Source: Stacks 0GL6. -/
 def intrinsicCompactScalar
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
@@ -99,17 +99,7 @@ private theorem bounded_interval
 constructible and its scalar extension has bounded cohomology.
 
 Source: Stacks 0GL6 and 09AL; `proposition-six-operations-change-coefficients`, compact-support
-paragraph. (blueprint: lem-sf-finite-compact-scalar-constructible).
-
-Proof: the finite-ring essential-image criterion gives a bounded constructible
-etale antecedent G. The normalized site/scalar isomorphism identifies the intrinsic
-realization of the etale scalar extension of G with the scalar extension of K.
-Reflect its cohomological interval through the faithful exact site comparison;
-this makes the etale scalar extension bounded below. Regard G and that extension
-as objects of D+. The proved intrinsicCompactScalarIsoOfOrigin_hom identifies the
-specified transpose at the realization of G with an isomorphism. Naturality at
-the antecedent isomorphism transports invertibility to K. Finite cohomological
-support includes the zero complex; no flatness of the coefficient map is used. -/
+paragraph. -/
 theorem intrinsicCompactScalar_isIso_of_constructible
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)

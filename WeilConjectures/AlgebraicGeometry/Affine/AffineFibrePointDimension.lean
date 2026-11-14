@@ -20,7 +20,7 @@ set_option linter.privateModule false
 /-! # Affine fibre charts and dimension at their marked points
 
 Source: Stacks Project, Schemes, Tags 01JQ, 01JR and 01J9; Algebra, Tags 05G3 and
-00OT; Topology, Tag 0055 (blueprint: lem-trf-affine-fibre-point-dimension).
+00OT; Topology, Tag 0055.
 -/
 
 @[expose] public section

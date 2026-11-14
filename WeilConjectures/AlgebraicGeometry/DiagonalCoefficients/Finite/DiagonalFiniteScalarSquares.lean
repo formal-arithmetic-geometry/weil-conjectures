@@ -18,9 +18,6 @@ import WeilConjectures.CategoryTheory.RingObjects.Condensed.BaseCoefficientConde
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.LocalizedDirectImageComparison
 
 /-! # Finite coefficient scalar comparisons for direct image
-
-Source: diagonal tower coefficient changes, paragraphs (1)--(2).
-(blueprint: lem-diagonal-finite-scalar-squares).
 -/
 
 @[expose] public noncomputable section
@@ -392,20 +389,7 @@ private theorem integralScalarComparison_isIso (l : ℕ) [Fact l.Prime]
 /-- The finite-free and localization direct-image comparisons are invertible on
 the shifted root lines. No class, trace or integration identity is included.
 
-Source: blueprint latest, sec-six-functors-basics/sk-prop-diagonal-tower/
-sk-prop-diagonal-tower-coefficients.proof.md, paragraphs (1)--(2).
-(blueprint: lem-diagonal-finite-scalar-squares).
 
-Proof: For integral extension choose a finite Z_l basis of O_E. The corresponding
-ordinary scalar functors are exact finite-biproduct functors. Exact restriction
-commutes with ordinary direct image through comapLowerStarIso. Restriction
-preserves K-injectives because its left adjoint is exact. Derive this ordinary
-square with its full universal unit; uniqueness of right derivation transports
-it to any of the given right-derived models R. This gives the required
-RestrictionSquare with exactly its normalization equation on all complexes.
-Under scalar restriction its mate is the finite-biproduct direct-image
-comparison. Additivity of right-derived direct image makes it invertible.
-Restriction reflects isomorphisms, so the displayed integral mate is invertible.
 
 For rationalization scalar extension is exact localization at ell, as given by
 the regular coefficient telescope. Restriction again preserves K-injectives,

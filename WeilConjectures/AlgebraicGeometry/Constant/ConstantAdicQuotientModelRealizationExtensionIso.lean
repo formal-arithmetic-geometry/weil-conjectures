@@ -25,14 +25,7 @@ inverse image and identifies the lower realization with derived scalar extension
 the upper model.
 
 Source: Stacks Project, proetale.tex, Tag 09C6, consecutive quotient balancing;
-Tags 0D6D and 03Q3.
-(blueprint: lem-weil-pbc-constant-adic-quotient-model-realization-extension-iso).
-
-Proof: apply the normalization of the supplied adic tower at the consecutive
-indices, pull it back to the pointed etale chart, and paste the tensor-pullback
-comparison with the canonical constant quotient scalar comparison.  The two supplied
-model isomorphisms then identify the resulting endpoints.  Completion evaluation
-commutes with the quotient projections by the canonical factor maps. -/
+Tags 0D6D and 03Q3. -/
 theorem constantAdicQuotient_model_realization_extension_iso
     (X Y : Scheme.{u}) (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)

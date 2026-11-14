@@ -19,12 +19,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 
 /-- The specified finite-to-integral restriction, with the ring structure supplied
-by the commutative coefficient ring, as in `FiniteRealization`.
-
-Source: coefficient changes (1), restriction along the positive residue projection.
-(blueprint: def-canonical-finite-padic-restriction).
-The functor is the original restriction itself. Naming this view shares the same
-coefficient-category and localization instances in successive derived functors. -/
+by the commutative coefficient ring, as in `FiniteRealization`. -/
 abbrev canonicalFinitePadicRestriction
     (l n : ℕ) [Fact l.Prime] (X : Scheme.{u}) :
     Sheaf (Scheme.ProEt.topology X)

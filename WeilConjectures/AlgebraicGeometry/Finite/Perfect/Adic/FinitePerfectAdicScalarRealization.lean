@@ -37,8 +37,7 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
 /-- Constant sections of the actual finite coefficient ring on a slice.
-Source: Stacks Tags 03CY and 094T.
-(blueprint: def-weil-pbc-finite-perfect-adic-scalar-realization). -/
+Source: Stacks Tags 03CY and 094T. -/
 def finitePerfectAdicSliceScalar (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A) (W : X.ProEt) (n : ℕ) :
     (Functor.const (Over W)ᵒᵖ).obj
@@ -48,8 +47,7 @@ def finitePerfectAdicSliceScalar (X : Scheme.{t}) {A : Type t} [CommRing A]
     (ProEtale.finiteCoefficientScalarMap X (completedAdicQuotient d n))
 
 /-- The constant finite-scalar presentation is locally injective on the slice.
-Source: Stacks Tag 03CY.
-(blueprint: def-weil-pbc-finite-perfect-adic-scalar-realization). -/
+Source: Stacks Tag 03CY. -/
 theorem finitePerfectAdicSliceScalar_injective (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A) (W : X.ProEt) (n : ℕ) :
     Presheaf.IsLocallyInjective ((ProEt.topology X).over W)
@@ -59,8 +57,7 @@ theorem finitePerfectAdicSliceScalar_injective (X : Scheme.{t}) {A : Type t} [Co
     (ProEtale.finiteCoefficientScalarMap X (completedAdicQuotient d n))
 
 /-- The constant finite-scalar presentation is locally surjective on the slice.
-Source: Stacks Tag 03CY.
-(blueprint: def-weil-pbc-finite-perfect-adic-scalar-realization). -/
+Source: Stacks Tag 03CY. -/
 theorem finitePerfectAdicSliceScalar_surjective (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A) (W : X.ProEt) (n : ℕ) :
     Presheaf.IsLocallySurjective ((ProEt.topology X).over W)
@@ -70,8 +67,7 @@ theorem finitePerfectAdicSliceScalar_surjective (X : Scheme.{t}) {A : Type t} [C
     (ProEtale.finiteCoefficientScalarMap X (completedAdicQuotient d n))
 
 /-- Associated module sheaf for fixed finite coefficients on the slice.
-Source: Stacks Tag 03CY.
-(blueprint: def-weil-pbc-finite-perfect-adic-scalar-realization). -/
+Source: Stacks Tag 03CY. -/
 def finitePerfectAdicSliceModules (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A) (W : X.ProEt) (n : ℕ) :
     Sheaf ((ProEt.topology X).over W)
@@ -84,8 +80,7 @@ def finitePerfectAdicSliceModules (X : Scheme.{t}) {A : Type t} [CommRing A]
       PresheafOfModules.sheafification (finitePerfectAdicSliceScalar X d W n)
 
 /-- Fixed finite coefficients and the actual finite ring sheaf give equivalent module
-categories on the slice. Source: Stacks Tag 03CY.
-(blueprint: def-weil-pbc-finite-perfect-adic-scalar-realization). -/
+categories on the slice. Source: Stacks Tag 03CY. -/
 instance finitePerfectAdicSliceModules_isEquivalence
     (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A) (W : X.ProEt) (n : ℕ) :
@@ -97,8 +92,7 @@ instance finitePerfectAdicSliceModules_isEquivalence
     (finitePerfectAdicSliceScalar X d W n)
 
 /-- Arrows over X between weakly etale chart objects are weakly etale.
-Source: Stacks Tags 094T and 00XZ.
-(blueprint: def-weil-pbc-finite-perfect-adic-scalar-realization). -/
+Source: Stacks Tags 094T and 00XZ. -/
 theorem finitePerfectAdicChartArrow_weaklyEtale {X : Scheme.{t}} (V : X.Etale)
     (U : V.left.ProEt) (W : X.ProEt) (f : W ⟶ finitePerfectAdicChartObject V U) :
     WeaklyEtale f.left := by
@@ -110,8 +104,7 @@ theorem finitePerfectAdicChartArrow_weaklyEtale {X : Scheme.{t}} (V : X.Etale)
 
 /-- Restrict from the chart to W, transport to its slice, realize finite coefficients,
 and forget the finite action along the specified completed-ring projection.
-Source: Stacks Tags 094T, 0951, 03CY and 06YY.
-(blueprint: def-weil-pbc-finite-perfect-adic-scalar-realization). -/
+Source: Stacks Tags 094T, 0951, 03CY and 06YY. -/
 def finitePerfectAdicScalarModules (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A) (V : X.Etale) (U : V.left.ProEt) (W : X.ProEt)
     (f : W ⟶ finitePerfectAdicChartObject V U) (n : ℕ) :
@@ -131,8 +124,7 @@ def finitePerfectAdicScalarModules (X : Scheme.{t}) {A : Type t} [CommRing A]
         (completedAdicProjection X d n))
 
 /-- Restriction to W and restriction of the completed action are exact; the two
-intermediate transports are equivalences. Source: Stacks Tags 03CY and 06YY.
-(blueprint: def-weil-pbc-finite-perfect-adic-scalar-realization). -/
+intermediate transports are equivalences. Source: Stacks Tags 03CY and 06YY. -/
 theorem finitePerfectAdicScalarModules_exact (X : Scheme.{t})
     {A : Type t} [CommRing A] (d : AdicCoefficientDatum A) (V : X.Etale)
     (U : V.left.ProEt) (W : X.ProEt)
@@ -175,8 +167,7 @@ theorem finitePerfectAdicScalarModules_exact (X : Scheme.{t})
   exact ⟨inferInstance, inferInstance, inferInstance⟩
 
 /-- Termwise localization of the explicit exact realization, without choosing a
-functor or module object from an existence theorem. Source: Stacks Tag 05RU.
-(blueprint: def-weil-pbc-finite-perfect-adic-scalar-realization). -/
+functor or module object from an existence theorem. Source: Stacks Tag 05RU. -/
 def finitePerfectAdicScalarRealization (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A) (V : X.Etale) (U : V.left.ProEt) (W : X.ProEt)
     (f : W ⟶ finitePerfectAdicChartObject V U) (n : ℕ) :

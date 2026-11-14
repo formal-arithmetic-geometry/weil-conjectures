@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalTowerLimitInter
 
 These definitions spell out the existing specification with shared endpoint and
 normalization functions. No coefficient object or boundary is changed.
-(blueprint: def-sfb-diagonal-limit-finite-objects).
 -/
 
 @[expose] public noncomputable section

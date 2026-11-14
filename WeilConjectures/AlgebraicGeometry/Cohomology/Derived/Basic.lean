@@ -51,17 +51,13 @@ variable {X Y : Scheme.{u}}
 /-- `X.Modules` is a Grothendieck abelian category. As a consequence it has K-injective
 resolutions and a derived category `D(𝒪_X) = DerivedCategory X.Modules`, whose objects are the
 cochain complexes of `𝒪_X`-modules and whose morphisms are obtained by inverting the
-quasi-isomorphisms (`HasDerivedCategory.ofIsGrothendieckAbelian`).
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves`) -/
+quasi-isomorphisms (`HasDerivedCategory.ofIsGrothendieckAbelian`). -/
 instance (X : Scheme.{u}) : IsGrothendieckAbelian.{u} X.Modules :=
   SheafOfModules.isGrothendieckAbelian X.ringCatSheaf
 
 /-- The **derived direct image** `Rf_* : D(𝒪_X) ⥤ D(𝒪_S)` along a morphism of schemes
 `f : X ⟶ S`: the total right derived functor of the pushforward
-`AlgebraicGeometry.Scheme.Modules.pushforward f`, computed on K-injective resolutions.
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves`) -/
+`AlgebraicGeometry.Scheme.Modules.pushforward f`, computed on K-injective resolutions. -/
 noncomputable def derivedPushforward (f : X ⟶ Y) :
     DerivedCategory X.Modules ⥤ DerivedCategory Y.Modules :=
   (pushforward f).rightDerivedFunctor
@@ -90,9 +86,7 @@ open cover of `X`, isomorphic to a bounded complex of finite projective modules:
 has an affine open neighbourhood `U` such that the restriction `E|_U` is isomorphic in `D(𝒪_U)` to
 the image of a complex `P` of `𝒪_U`-modules concentrated in some interval `[a, b]` whose terms
 are finite projective (`AlgebraicGeometry.Scheme.Modules.IsFiniteProjective`). The perfect
-objects form the subcategory `D_perf(𝒪_X)`.
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves--1`) -/
+objects form the subcategory `D_perf(𝒪_X)`. -/
 def IsPerfectComplex (E : DerivedCategory X.Modules) : Prop :=
   ∀ x : X, ∃ U : X.Opens, IsAffineOpen U ∧ x ∈ U ∧
     ∃ (P : CochainComplex U.toScheme.Modules ℤ) (a b : ℤ), P.IsStrictlyGE a ∧ P.IsStrictlyLE b ∧
@@ -122,9 +116,7 @@ lemma IsInvertible.exists_isAffineOpen_restrict_iso (M : X.Modules) [M.IsInverti
 
 /-- **An invertible module is perfect.** An invertible `𝒪_X`-module `ℒ`, placed in degree `0`, is
 a perfect object of `D(𝒪_X)`: on an affine open `U` on which `ℒ|_U ≅ 𝒪_U`, it is the complex
-`𝒪_U[0]`, whose only term is free of rank one.
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves--1`) -/
+`𝒪_U[0]`, whose only term is free of rank one. -/
 theorem isPerfectComplex_singleFunctor_obj_of_isInvertible (M : X.Modules) [M.IsInvertible] :
     IsPerfectComplex ((DerivedCategory.singleFunctor X.Modules 0).obj M) := by
   intro x

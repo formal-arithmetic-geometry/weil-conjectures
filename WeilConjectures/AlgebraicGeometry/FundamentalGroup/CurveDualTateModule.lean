@@ -78,12 +78,11 @@ lemma coe_picTorsionByPowEquiv_symm_apply (n : ℕ)
 
 variable [GeometricallyIntegral (X ↘ Spec (.of k))] [Nonempty X]
 
-/-- Blueprint `proposition-kummer-duality-integral-tate-module--2`: Untwisted integral classes form
+/-- Untwisted integral classes form
 the dual Tate module, the finite-level isomorphism (4.3) with `J[ℓⁿ] = Pic(X)[ℓⁿ]`.
 
 The group isomorphism `H¹(X, ℤ/ℓⁿ) ≃+ Hom(Pic(X)[ℓⁿ], ℤ/ℓⁿ)` adjoint to the perfect cup-trace
-pairing `H¹(X, ℤ/ℓⁿ) × H¹(X, μ_{ℓⁿ}) → ℤ/ℓⁿ` (blueprint
-`proposition-kummer-duality-integral-tate-module--2`), composed with the Kummer identification
+pairing `H¹(X, ℤ/ℓⁿ) × H¹(X, μ_{ℓⁿ}) → ℤ/ℓⁿ`, composed with the Kummer identification
 `H¹(X, μ_{ℓⁿ}) ≃+ Pic(X)[ℓⁿ]`. The class of a torsor `t` is sent to its character
 `AlgebraicGeometry.Scheme.EtaleTorsor.picPairing`
 (`AlgebraicGeometry.Scheme.EtaleTorsor.sheafHPicTorsionDualAddEquiv_classH1`). -/
@@ -148,7 +147,7 @@ lemma exists_zsmul_eq_of_pow_zsmul_eq_zero (hl : (l : k) ≠ 0) [Nonempty X] (n 
   AddCommGroup.exists_zsmul_eq_of_natCard_torsionBy
     (Fact.out : l.Prime).ne_zero (natCard_picTorsionBy hl) n y hy
 
-/-- Blueprint `proposition-kummer-duality-integral-tate-module--2`: Untwisted integral classes form
+/-- Untwisted integral classes form
 the dual Tate module, the compatible system of finite-level isomorphisms.
 
 The isomorphisms `H¹(X, ℤ/ℓⁿ) ≃+ Hom(Pic(X)[ℓⁿ], ℤ/ℓⁿ)` identify the inverse limit along the
@@ -175,7 +174,7 @@ noncomputable def sheafHOneLimitAddEquivTorsionDualLimit :
   right_inv ψ := Subtype.ext (funext fun n ↦ AddEquiv.apply_symm_apply _ _)
   map_add' x y := Subtype.ext (funext fun n ↦ map_add _ _ _)
 
-/-- Blueprint `proposition-kummer-duality-integral-tate-module--2`: Untwisted integral classes form
+/-- Untwisted integral classes form
 the dual Tate module.
 
 Let `X` be a smooth proper connected curve over an algebraically closed field `k` (e.g. the
@@ -303,7 +302,7 @@ namespace JacobianTorsionDatum
 variable {C : Scheme.{u}} {p : C ⟶ Spec (.of K)} [IsCurve p] [Smooth p] [IsProper p]
   [GeometricallyIntegral p] {l : ℕ} [Fact l.Prime]
 
-/-- Blueprint `proposition-kummer-duality-integral-tate-module`: Jacobian torsion data and Kummer
+/-- Jacobian torsion data and Kummer
 coefficients.
 
 The comparison isomorphisms `J₀(K̄)[ℓⁿ] ≃ Pic(C)[ℓⁿ]` of a Jacobian torsion datum identify the
@@ -342,7 +341,7 @@ variable {C : Scheme.{u}} (p : C ⟶ Spec (.of K)) [IsCurve p] [Smooth p]
   [SmoothOfRelativeDimension 1 p] [IsProper p] [GeometricallyIntegral p] (l : ℕ) [Fact l.Prime]
   [Fact (ringChar K ≠ l)] [ConnectedSpace p.geometricFiber]
 
-/-- Blueprint `proposition-kummer-duality-integral-tate-module--2`: Untwisted integral classes form
+/-- Untwisted integral classes form
 the dual Tate module.
 
 Let `C₀` be a proper smooth geometrically integral curve over a finite field `K`, `C` its
@@ -371,7 +370,7 @@ noncomputable def sheafHOneLimitAddEquivDualJacobianTateModule
   (sheafHOneLimitAddEquivDualTateModule s G (natCast_algebraicClosure_ne_zero l)).trans
     d.tateModuleLinearEquiv.dualMap.toAddEquiv
 
-/-- Blueprint `proposition-kummer-duality-integral-tate-module--2`: Untwisted integral classes form
+/-- Untwisted integral classes form
 the dual Tate module, the Galois equivariance.
 
 If the compatible family `y` is the transport of `x` along the action `𝟙 × Spec σ` of

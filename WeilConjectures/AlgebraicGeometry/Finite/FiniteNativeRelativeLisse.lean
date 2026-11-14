@@ -25,17 +25,7 @@ namespace AlgebraicGeometry.Scheme
 /-- Finite native models detect relative finite lissity, for any coefficient isomorphism.
 
 Source: Stacks Project, Modules on Sites, Tags 03CY and 093U; finite constant coefficient
-transport in Cohomology on Sites, Tag 094I.
-(blueprint: lem-weil-pbc-finite-native-relative-lisse)
-
-Proof: scalar extension along the supplied coefficient isomorphism is naturally
-isomorphic to restriction along its inverse, by uniqueness of left adjoints. Its
-underlying sheaf of sets therefore agrees with the underlying sheaf of the canonical
-fixed-scalar encoding of the inverse image. Forget the native local module models to
-finite set models. Finite coefficient rigidity refines these models so that addition
-and the finitely many scalar operations are constant, hence gives finite constant
-module models. The proved relative/fixed comparison transfers them to relative
-constant models. The argument allows empty covering members and the zero ring. -/
+transport in Cohomology on Sites, Tag 094I. -/
 theorem finite_native_models_relative_lisse {X Y : Scheme.{u}} (g : Y ⟶ X)
     (B : Type (u + 1)) [CommRing B] [Finite B]
     (F : pbcModules X (adicLisseConstantRing X B))

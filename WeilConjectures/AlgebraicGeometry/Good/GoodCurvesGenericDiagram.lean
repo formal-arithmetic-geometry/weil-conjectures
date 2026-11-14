@@ -25,7 +25,7 @@ import WeilConjectures.AlgebraicGeometry.Good.GoodCurvesFibreDensity
 # Good curve diagrams near a generic point
 
 Source: Stacks Project, More on Morphisms, Tag 0GK7, lemma-make-good-curves,
-assertions (1)-(8) (blueprint: lem-weil-pbc-good-curves-generic-diagram).
+assertions (1)-(8).
 -/
 
 @[expose] public section
@@ -37,7 +37,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
-/-- (blueprint: lem-weil-pbc-good-curves-generic-diagram)
+/--
 Stacks Project, Tag 0GK7: a separated finitely presented family with generic fibre of
 dimension at most one admits a good curve diagram after a finite radicial base cover.
 
@@ -46,7 +46,6 @@ locus, invokes spreading of the supplied marked diagram, and proves the two fibr
 clauses. The DAG node records this revised dependency route. The original ten-step plan is
 retained below as the source argument.
 
-Proof plan:
 
 1. Choose an affine neighbourhood of $\eta$ and replace it by its reduction
 $\operatorname{Spec}A$. Its map to the original neighbourhood is a surjective closed immersion,
@@ -76,7 +75,7 @@ the tower is empty. At a stage with reduced affine base $\operatorname{Spec}B$ a
 residue field $l$, first shrink to make $p=0$ in $B$, since $p=0$ in $B_{\mathfrak q}=l$. For the
 next generator $\beta$ with $\beta^p=a\in l$, shrink again to represent $a$ in $B$, and put
 $C=B[t]/(t^p-a)$. This is finite free on $1,t,\ldots,t^{p-1}$. Every field-valued point lifts
-after adjoining a root of $t^p-a$, and two roots in any field are equal because $(u-v)^p=0$. Thus
+after adjoining a root of $t^p-a$, and two roots in any field are equal because $^p=0$. Thus
 $\operatorname{Spec}C\to\operatorname{Spec}B$ is surjective and universally injective by the
 field-point criterion. At $\mathfrak q$, $C\otimes_B l=l(\beta)$, a field, so the unique point
 above $\mathfrak q$ has that local ring. Reducing $C$ preserves this local field and gives

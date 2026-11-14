@@ -11,7 +11,6 @@ import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicLi
 /-! # Transpose of the lifted finite perfect transition
 
 Source: Stacks Project, Tags 06YY and 09C6.
-(blueprint: lem-weil-pbc-finite-perfect-adic-lifted-transition-transpose).
 -/
 
 @[expose] public noncomputable section
@@ -25,7 +24,6 @@ attribute [local instance] finitePerfectAdicAlgebraDerived
 /-- The lifted transition has invertible transpose for the derived restriction adjunction.
 
 Source: Stacks Project, Tags 06YY and 09C6.
-(blueprint: lem-weil-pbc-finite-perfect-adic-lifted-transition-transpose).
 
 The transpose is computed by transporting the normalized transpose of the supplied tower
 transition through the coefficient-universe lift and its scalar-restriction comparison.

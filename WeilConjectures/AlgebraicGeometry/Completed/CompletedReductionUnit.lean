@@ -56,7 +56,6 @@ import Mathlib.RingTheory.Flat.CategoryTheory
 
 The module-level quotient units descend through the universal left-derived counit.
 These constructions precede pullback and the comparison with Koszul completion.
-Source: blueprint order 1261 (blueprint: def-weil-pbc-reduction-augmentation).
 -/
 
 @[expose] public noncomputable section
@@ -68,11 +67,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 variable {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 
-/-- The strict quotient-unit map is fixed on sections by x ↦ 1 tensor x.
-Source: blueprint order 1261 (blueprint: def-weil-pbc-reduction-augmentation).
-Proof: this formula is linear over the completed coefficient ring, commutes with
-restriction, and is natural in the module. Each quotient transition takes 1 tensor x
-to 1 tensor x, so the maps form a strict tower map. The sectionwise formula gives uniqueness. -/
+/-- The strict quotient-unit map is fixed on sections by x ↦ 1 tensor x. -/
 theorem completedReductionModuleUnit_exists (T : Scheme.{u}) :
     ∃! τ : completedTowerConstant d T ⟶ completedReductionModuleTowerFunctor T d,
       ∀ (M : pbcModules T (pbcAdicCompletion T d)) (n : ℕ)
@@ -119,20 +114,17 @@ theorem completedReductionModuleUnit_exists (T : Scheme.{u}) :
   ext U x
   exact (hτ' M n.unop U x).trans (hu M n.unop U x).symm
 
-/-- The actual module-to-strict-tower quotient unit.
-Source: blueprint order 1261 (blueprint: def-weil-pbc-reduction-augmentation). -/
+/-- The actual module-to-strict-tower quotient unit. -/
 def completedReductionModuleUnit (T : Scheme.{u}) :
     completedTowerConstant d T ⟶ completedReductionModuleTowerFunctor T d :=
   (completedReductionModuleUnit_exists d T).exists.choose
 
-/-- The reduction tower's fixed universal counit.
-Source: blueprint order 1261 (blueprint: def-weil-pbc-reduction-augmentation). -/
+/-- The reduction tower's fixed universal counit. -/
 def completedReductionTowerCounit (T : Scheme.{u}) :
     DerivedCategory.Qh ⋙ completedReductionTower T d ⟶ completedReductionHomotopyFunctor T d :=
   (completedReductionTower_exists T d).choose_spec.choose
 
-/-- The representative normalization fixing the canonical comparison uniquely.
-Source: blueprint order 1261 (blueprint: def-weil-pbc-reduction-augmentation). -/
+/-- The representative normalization fixing the canonical comparison uniquely. -/
 def HasCompletedReductionTowerUnitNormalization (T : Scheme.{u})
     (τ : completedDerivedConstant d T ⟶ completedReductionTower T d) : Prop :=
   letI := completedReductionModuleTowerFunctor_additive T d
@@ -228,12 +220,7 @@ private theorem independentKFlatRepresentatives
   have := hp
   exact ⟨P, hP, ⟨asIso (DerivedCategory.Q.map p) ≪≫ e⟩⟩
 
-/-- The quotient unit descends uniquely from its strict K-flat construction.
-Source: blueprint order 1261 (blueprint: def-weil-pbc-reduction-augmentation).
-Proof: for a K-flat representative use its strict quotient-unit map, transported by
-the invertible reduction counit. K-flat resolutions compare any two representatives;
-naturality on this resolving class descends to the derived category. Every object has
-such a representative, so the specified normalization determines the unit uniquely. -/
+/-- The quotient unit descends uniquely from its strict K-flat construction. -/
 theorem completedReductionTowerUnit_exists (T : Scheme.{u}) :
     ∃! τ : completedDerivedConstant d T ⟶ completedReductionTower T d,
       HasCompletedReductionTowerUnitNormalization d T τ := by
@@ -271,8 +258,7 @@ theorem completedReductionTowerUnit_exists (T : Scheme.{u}) :
       CategoryTheory.Functor.map_id, Category.comp_id] at h
     exact h
 
-/-- The canonical strict derived reduction unit ΔK → K_bullet.
-Source: blueprint order 1261 (blueprint: def-weil-pbc-reduction-augmentation). -/
+/-- The canonical strict derived reduction unit ΔK → K_bullet. -/
 def completedReductionTowerUnit (T : Scheme.{u}) :
     completedDerivedConstant d T ⟶ completedReductionTower T d :=
   (completedReductionTowerUnit_exists d T).exists.choose

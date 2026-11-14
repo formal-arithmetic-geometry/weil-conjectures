@@ -457,7 +457,7 @@ theorem exists_addEquiv_sheafH_rootsOfUnitySheaf_one_jacobian (f : C ⟶ Spec (.
 
 
 open MonoidalCategory MonObj in
-/-- Blueprint `proposition-smooth-proper-curves-torsion-prime`: smooth proper curves with invertible
+/-- Smooth proper curves with invertible
 torsion.
 
 Let `C` be a smooth, proper and connected curve of genus `g` over an algebraically closed field
@@ -482,11 +482,10 @@ these identifications commute with extension of algebraically closed fields. Pre
    extension `k ⊆ k'` of algebraically closed fields the pullback maps are bijective and are the
    inclusion `μₙ(k) ⟶ μₙ(k')`, the base change of line bundles and the identity of `ℤ/n`.
 
-These are statements about the small étale site; the comparison with the pro-étale site
-(blueprint `theorem-bounded-below-cohomology-comparison`) identifies them with the pro-étale
+These are statements about the small étale site; the comparison with the pro-étale site identifies
+them with the pro-étale
 cohomology of `ν^* μₙ`. (In the split chapter of the sketch blueprint this statement is labelled
-`proposition-smooth-proper-curves-torsion-prime`, blueprint
-`sk-the-final-theorem-the-curve-estimate--remark-2`.) -/
+`proposition-smooth-proper-curves-torsion-prime`, .) -/
 theorem sheafH_rootsOfUnitySheaf_canonical_of_isProper (f : C ⟶ Spec (.of k))
     [IsConnectedCurve f] [Smooth f] [IsProper f] (n : ℕ) (hn : (n : k) ≠ 0) :
     ((Function.Injective (Sheaf.H.map (C.rootsOfUnitySheafι n) 0) ∧

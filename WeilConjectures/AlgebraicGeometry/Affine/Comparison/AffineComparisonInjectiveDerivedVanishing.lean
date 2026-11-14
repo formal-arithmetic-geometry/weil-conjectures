@@ -34,7 +34,6 @@ import WeilConjectures.AlgebraicGeometry.Affine.Comparison.AffineComparisonInjec
 # Affine comparison vanishing for Grothendieck abelian coefficients
 
 The categorical form of the finite Čech argument in Stacks Project, Tag 099U.
-(blueprint: stage3-affine-comparison-injective-derived-vanishing)
 -/
 
 @[expose] public section
@@ -53,17 +52,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A]
 /-- On an affine scheme, the comparison pullback of an injective étale sheaf has zero
 positive derived global sections, with Grothendieck abelian coefficients.
 Source: Stacks Project, Tag 099U, finite Čech proof with exact filtered colimits.
-(blueprint: stage3-affine-comparison-injective-derived-vanishing)
 
-Proof: use affine ind-étale objects over X as a basis. Every cover has a finite refinement
-in this basis, and the basis is closed under fibre products. To check positive Čech
-vanishing for a finite basis cover, present each member as a directed limit of affine
-étale schemes over the covered object. The product of the finitely many directed index
-sets is directed, and each stage family covers, since points lift through the original
-cover. Fibre products commute with these limits. The comparison section formula and
-continuity of étale sections identify each term, compatibly with every face map, with
-the filtered colimit of its stage terms. Finite products and homology commute with this
-colimit because A is Grothendieck abelian.
 
 It remains to check finite affine étale covers of a basis object U. Present U as a directed
 limit of affine étale X-schemes. Finite presentation descends the finite cover to one

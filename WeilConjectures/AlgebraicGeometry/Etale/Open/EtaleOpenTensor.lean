@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.Etale.Constant.EtaleConstantModuleFlat
 
 /-! # Canonical étale open tensor and coefficient comparisons
 
-Source: Stacks Tags 0GL1, 0E8I, 06YY, 03EL, 03DI and 0E8J
-(blueprint: lem-coef-etale-open-tensor).
+Source: Stacks Tags 0GL1, 0E8I, 06YY, 03EL, 03DI and 0E8J.
 -/
 
 @[expose] public noncomputable section
@@ -243,8 +242,7 @@ private theorem scalar_restricts
 
 /-- The full open tensor/coefficient assertion. Every comparison in these laws is
 fixed above, or is a published canonical scalar tensor/composition comparison.
-Source: Stacks 0GL1, 0E8I, 06YY, 03EL, 03DI, 0E8J
-(blueprint: lem-coef-etale-open-tensor). -/
+Source: Stacks 0GL1, 0E8I, 06YY, 03EL, 03DI, 0E8J. -/
 structure EtaleOpenTensorComparisons
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] : Prop where
@@ -325,41 +323,7 @@ structure EtaleOpenTensorComparisons
 
 /-- The canonical open comparisons obey the projection, K-flat normalization,
 open counit, associativity, scalar-tower and mixed tensor/scalar laws.
-Source: Stacks 0GL1, 0E8I, 06YY, 03EL, 03DI, 0E8J
-(blueprint: lem-coef-etale-open-tensor).
-
-Proof: (1) Localize the small étale site at the open object. The ordinary
-adjunction has sectionwise identity unit on U and the specified counit summand
-formula. (2) Transpose the unit tensored with restriction. This gives `γ⁰`,
-whose restriction is the identity; both sides have open support, so it is an
-isomorphism. (3) Tensoring a short exact sequence, restricting, and applying
-exact extension by zero proves preservation of flat sheaves. Applying the same
-isomorphism to every bidegree of direct-sum total tensor proves preservation of
-K-flat complexes. Restriction also preserves K-flatness: test with an acyclic
-complex on U, extend by zero, and restrict back using the invertible unit.
-(4) The exact open adjunction descends degreewise; its units and counits are
-those of the published derived adjunction. A K-flat resolution computes the
-published `canonicalGamma`, proving invertibility without boundedness.
-(5) Specialize inverse ordinary projection to the coefficient sheaf B; its
-pure-tensor formula is j_!p tensor b maps to j_!(p tensor b). The scalar
-adjunction shows it is precisely `openScalarExtensionZero`. Restriction of
-ordinary balancing is `openScalarRestrictionZero`. Apply both degreewise to
-K-flat models. The exact localization factors and published scalar counits give
-the two normalization equations. Every derived object has a K-flat resolution;
-naturality on that resolution determines each component, proving uniqueness.
-(6) On the same models the restriction identity and counit equation send every
-extension-presheaf tensor generator to the same section. Sheafification and
-localization give the displayed equalities. (7) Rebracket triple total tensors:
-the differential signs on both sides are 1, (-1)^p and (-1)^(p+q). Both paths
-of `tensor_associative` send the same local tensor generator to the same tensor.
-(8) In a tower A to B to C the canonical composition comparison multiplies
-coefficients, ((p tensor b) tensor c) maps to p tensor bc. Applying q directly
-or successively gives the same result. (9) The mixed square uses the published
-uniquely normalized strong scalar tensor comparison, sending
-(p tensor b₁) tensor (t tensor b₂) to (p tensor t) tensor b₁b₂.
-Either path commutes with the open projection on these generators. Descend all
-three equalities using the K-flat model comparisons. The argument applies to
-arbitrary coefficient maps and unbounded complexes. -/
+Source: Stacks 0GL1, 0E8I, 06YY, 03EL, 03DI, 0E8J. -/
 theorem etaleOpenTensorComparisons
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :

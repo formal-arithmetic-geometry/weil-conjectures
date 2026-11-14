@@ -287,16 +287,7 @@ private theorem exactAt_of_degreewise_colimit
     (fun i ↦ (c.ι.app i).comm (q + 1) (q + 2))
 
 /-- Positive Čech exactness descends along the simultaneous étale presentation.
-Source: Stacks Project, Tag 099U, both finite-limit reductions.
-(blueprint: stage3-affine-comparison-categorical-cech-system).
-
-Proof: Apply comparison-section continuity to each nerve cone of the simultaneous
-presentation. In each degree the indexing set is finite, so exact filtered colimits
-commute with the product of these section cocones. Their natural maps commute with
-each coface, hence with the alternating differential, and form a cocone of complexes.
-The three consecutive degree cocones identify the associated short complex with the
-filtered colimit of the stage short complexes. Exactness of filtered colimits then
-transports stage exactness in degree q+1 to the original complex. -/
+Source: Stacks Project, Tag 099U, both finite-limit reductions. -/
 theorem categoricalOriginalExactAt [IsCofiltered I]
     (hS : ∀ k y, Nonempty (IsLimit
       ((Scheme.ProEt.forget Y ⋙ Over.forget Y).mapCone (S.nerveCone k y))))

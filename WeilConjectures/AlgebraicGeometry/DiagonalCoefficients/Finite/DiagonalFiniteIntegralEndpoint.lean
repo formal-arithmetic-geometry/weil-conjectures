@@ -33,9 +33,6 @@ import WeilConjectures.CategoryTheory.ModuleObjects.FinitelyPresentedComap
 import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsUnit
 
 /-! # The normalized finite integral Tate-line endpoint
-
-Source: diagonal tower coefficient changes, paragraph (1).
-(blueprint: lem-diagonal-finite-integral-endpoint).
 -/
 
 @[expose] public noncomputable section
@@ -213,27 +210,7 @@ private def transportEndpoint
         q.hom).symm
 
 /-- Finite integral scalar extension identifies the prescribed root-limit lines,
-with the adjoint fixed by the actual root transition.
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-diagonal-tower/
-sk-prop-diagonal-tower-coefficients.proof.md, paragraph (1).
-(blueprint: lem-diagonal-finite-integral-endpoint).
-
-Proof: Choose an integral basis of O_E over Z_l. Tensoring with this basis
-identifies scalar extension with a finite biproduct. It is exact and commutes
-with the inverse limit defining the root line. At each positive ell-power
-level, the scalar comparison is the balanced-tensor associativity map and its
-composite with the scalar unit is the specified coefficient-root transition.
-The compatible projections identify their inverse limit with spIntegralTwist.
-For the bottom field the continuous Z_l coefficient and O_Q_l are identified
-by the inclusion used in zlLine; the same identification on each finite
-quotient makes the resulting map precisely integralLineMap. Exact scalar
-extension computes its own left derived functor on the single complex.
-The derived adjunction unit is the localized ordinary scalar unit, so the
-comparison just constructed satisfies Endpoint.normalization. The ordinary
-transition is semilinear by its root projections. These give all fields of
-Endpoint. The argument also applies to the bottom field itself and to an
-empty scheme, where the same universal projection equations hold. -/
+with the adjoint fixed by the actual root transition. -/
 theorem diagonalFinite_integralEndpoint
     (l : ℕ) [Fact l.Prime] (E : PadicAlgCl.FiniteIntermediateField l)
     (X : Scheme.{u}) (hX : IsUnit (l : Γ(X, ⊤))) :

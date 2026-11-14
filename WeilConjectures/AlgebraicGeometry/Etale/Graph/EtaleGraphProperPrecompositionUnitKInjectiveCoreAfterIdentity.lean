@@ -15,7 +15,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlg
 /-! # Component of proper-first graph normalization
 
 This is the K-injective component calculation in the proof of
-`graph_proper_precomposition_unit` (blueprint: lem-pur-graph-proper-precomposition-unit).
+`graph_proper_precomposition_unit`.
 It isolates the objectwise geometric calculation; natural-transformation extensionality is
 handled in the parent module.
 -/
@@ -44,14 +44,6 @@ private lemma comp_homotopy_inv
 
 /-- The representative graph equation after postcomposition by the codomain identity.
 Source: Stacks Project, Tags 0F7B, 0F7I and 0F7J; representative-complex normalization.
-
-Proof in words: transpose both maps under the exact étale extension/pullback adjunction
-and compose with proper base change for c.g. The compositor transpose is the clopen graph
-transfer. The normalized sheaf map transpose is the same transfer preceded by the q-unit.
-Naturality of adjunction transposition identifies the two expressions. Proper base change
-is invertible, so cancellation and injectivity of the adjunction equivalence recover the
-original equality. Finally cancel the exact functor's homotopy factor isomorphism.
-(blueprint: lem-pur-graph-proper-precomposition-unit-component-core-after-identity).
 -/
 theorem graph_proper_precomposition_unit_component_on_complex_after_identity
     (A : Type (u + 1)) [CommRing A] [Finite A]

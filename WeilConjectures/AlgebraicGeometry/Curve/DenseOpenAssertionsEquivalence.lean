@@ -63,15 +63,7 @@ private noncomputable def integralUnderlyingIso {X : Scheme.{u}}
 closed and `(C, F)` a curve coefficient pair over `k` with `F` constructible. Then the eight
 assertions `C(C, F)` hold, for `F` viewed as a sheaf of `ULift ℤ`-modules.
 
-Source: Stacks Project, Theorem 03SC (blueprint: `app:curve-package`).
-
-Proof: `C` is quasi-compact, so `F` is killed by some `n ≥ 1`
-(`AlgebraicGeometry.CurveCoefficientPair.exists_annihilator_of_constructible`), and it is the
-underlying abelian sheaf of a sheaf `M` of `ℤ/n`-modules, constructible as a module sheaf
-(`AlgebraicGeometry.Scheme.constructible_torsion_modules_agree`). The curve package
-`AlgebraicGeometry.IsCurve.Assertions.of_finite_coefficients` gives `C(C, M)`, and the eight
-assertions only depend on the underlying abelian sheaf
-(`AlgebraicGeometry.IsCurve.assertions_of_underlying_abelian_iso`). -/
+Source: Stacks Project, Theorem 03SC (blueprint: `app:curve-package`). -/
 theorem CurveCoefficientPair.assertions_of_constructible {k : Type u} [Field k] [IsAlgClosed k]
     (P : CurveCoefficientPair k) (hP : Scheme.IsConstructibleEtaleSheafOfSets
       ((sheafCompose P.C.smallEtaleTopology (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj
@@ -144,12 +136,7 @@ coefficient pair over `k` with `F` constructible and `j : U ⟶ C` an open immer
 torsion of `F` is needed; and the statement holds for every open `U`, in particular for every
 dense open.
 
-Source: Stacks Project, Lemma 0GJA (blueprint: `lemma-removing-finitely-many-points`).
-
-Proof: both sides hold by
-`AlgebraicGeometry.CurveCoefficientPair.assertions_of_constructible`; for `j_! j^* F`, which is
-torsion and constructible as the subsheaf in the open–closed exact sequence
-`0 → j_! j^* F → F → i_* i^* F → 0`, applied to the curve coefficient pair `(C, j_! j^* F)`. -/
+Source: Stacks Project, Lemma 0GJA. -/
 theorem IsCurve.assertions_iff_dense_open {k : Type u} [Field k] [IsAlgClosed k]
     (P : CurveCoefficientPair k) (hP : Scheme.IsConstructibleEtaleSheafOfSets
       ((sheafCompose P.C.smallEtaleTopology (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj

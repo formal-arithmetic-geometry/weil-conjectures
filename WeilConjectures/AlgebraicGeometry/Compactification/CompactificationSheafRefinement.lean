@@ -13,7 +13,6 @@ import WeilConjectures.SixFunctors.Etale.Derived.RefinementLowerShriekBaseChange
 # The sheaf map along a cartesian compactification refinement
 
 Source: Stacks Project, Tags 0F7B and 0F7I.
-(blueprint: lem-sfb-compactification-sheaf-refinement).
 -/
 
 @[expose] public section
@@ -31,8 +30,7 @@ variable (A : Type (u + 1)) [CommRing A]
   (r : c.Refinement d) (hcart : IsPullback c.i (𝟙 X) r.hom d.i)
 
 /-- The adjunct of inverse open base change, followed by direct-image composition.
-Source: Stacks Project, Tags 0F7B and 0F7I.
-(blueprint: lem-sfb-compactification-sheaf-refinement). -/
+Source: Stacks Project, Tags 0F7B and 0F7I. -/
 noncomputable def compactificationSheafRefinement :
     openImmersionLowerShriek (ModuleCat.{u + 1} A) d.i ⋙
         lowerStar (ModuleCat.{u + 1} A) d.g ⟶
@@ -166,17 +164,7 @@ private lemma compactification_inclusion_mono
 
 /-- The sheaf refinement preserves the inclusion into ordinary pushforward, whose
 components are monomorphisms.
-Source: Stacks Project, Tag 0F7I, and the sheaf comparison in Tag 0F7B.
-(blueprint: lem-sfb-compactification-sheaf-refinement).
-
-Proof: transpose the refinement map under inverse image/direct image. The mate identity
-for open base change identifies its composite with the finer open inclusion, followed by
-composition of direct images, with the coarser open inclusion. Associativity of direct-image
-composition then gives the displayed equation after the proper pushforward to Y. To see
-monicity, restrict the open inclusion j!M to j, where it is an isomorphism. On the closed
-complement its source is zero. Exactness of both restrictions and their joint conservativity
-show that its kernel is zero. Proper direct image preserves monomorphisms, and the final
-composition comparison is invertible, proving monicity for the compactification inclusion. -/
+Source: Stacks Project, Tag 0F7I, and the sheaf comparison in Tag 0F7B. -/
 theorem compactificationSheafRefinement_properties :
     compactificationSheafRefinement A r hcart ≫ compactificationSheafToDirectImage A c =
       compactificationSheafToDirectImage A d ∧

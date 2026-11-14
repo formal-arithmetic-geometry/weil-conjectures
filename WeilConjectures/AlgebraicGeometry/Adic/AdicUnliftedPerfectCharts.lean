@@ -35,25 +35,7 @@ namespace AlgebraicGeometry.Scheme
 of finitely many strata, using its actual unlifted coefficient datum. This assertion
 has no elementary-divisor decomposition and no assertion about consecutive-quotient Tor.
 
-Source: Bhatt--Scholze, Proposition 6.6.11 and Lemma 6.5.8.
-(blueprint: lem-weil-pbc-adic-unlifted-perfect-charts).
-
-Proof: choose a basis of the finite extension E over Q_l and use its coordinate image
-in a finite power of Q_l to obtain an algebraically isomorphic field in the smaller
-universe. Uniqueness of the extended absolute value identifies the two valuation rings.
-Their uniformizers generate the corresponding maximal ideals, so the ring equivalence
-identifies every power of those ideals, independently of the chosen uniformizers.
-Consequently it identifies the quotient diagrams and their completed ring sheaves.
-Restriction of scalars along these isomorphisms is an exact equivalence, compatible
-with derived reduction, the intrinsic completion unit and the retained etale origins.
-Apply the integral stratified-perfect characterization to this transported complex.
-Choose a covering family generating each covering sieve. Localization at its weakly
-etale objects identifies slice module sheaves with module sheaves on the covering
-schemes. Compose inverse images along the cover map and stratum immersion. Transport
-back the finite-projective complexes and the local isomorphisms along the coefficient
-ring equivalence. Finite projectivity and both bounds are invariant under this exact
-scalar equivalence. This produces the displayed perfect values and their isomorphisms.
-The empty scheme and zero complexes require no nonempty chart or positive rank. -/
+Source: Bhatt--Scholze, Proposition 6.6.11 and Lemma 6.5.8. -/
 theorem pbc_adic_unlifted_perfect_charts
     (T : Scheme.{u}) [IsNoetherian T]
     (hdim : ∃ n : ℕ, topologicalKrullDim T ≤ n)

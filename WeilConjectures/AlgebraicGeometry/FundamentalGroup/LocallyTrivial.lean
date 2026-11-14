@@ -14,8 +14,8 @@ public import WeilConjectures.Mathlib.RingTheory.TotallySplit
 
 Let `P ⟶ Y` be finite étale. Every point `y` of `Y` lies in the image of an étale morphism
 `U ⟶ Y` over which `P` becomes a trivial cover: `P ×_Y U ≅ ∐_{Fin n} U`
-(`AlgebraicGeometry.Scheme.FiniteEtale.exists_etale_isPullback_sigma`, blueprint
-`lem-fet-locally-trivial`). Over an affine open `Spec R ∋ y` the finite étale `R`-algebra
+(`AlgebraicGeometry.Scheme.FiniteEtale.exists_etale_isPullback_sigma`). Over an affine open `Spec R
+∋ y` the finite étale `R`-algebra
 `A = Γ(P_R)` has constant rank `n` near `y`, so it splits after a faithfully flat finite étale
 base change `R_f → T` (`Algebra.IsFiniteSplit.exists_tensorProduct_of_etale`), and `U = Spec T`.
 
@@ -35,8 +35,7 @@ variable {Y : Scheme.{u}}
 
 /-- **Finite étale covers are étale-locally trivial.** For a finite étale `P ⟶ Y` and a point
 `y : Y` there are an étale `g : U ⟶ Y` with `y` in its image and a finite set `S` such that the
-trivial cover `∐_{s ∈ S} U ⟶ U` is the base change of `P` along `g`.
-(blueprint: `lem-fet-locally-trivial`) -/
+trivial cover `∐_{s ∈ S} U ⟶ U` is the base change of `P` along `g`. -/
 theorem exists_etale_isPullback_sigma (P : Y.FiniteEtale) (y : Y) :
     ∃ (U : Scheme.{u}) (g : U ⟶ Y) (_ : Etale g) (S : Type u) (_ : Finite S)
       (fst : (∐ fun _ : S ↦ U) ⟶ P.obj.left),

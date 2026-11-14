@@ -77,11 +77,7 @@ private theorem pullbackSingle_key
 
 /-- The composition comparison for derived inverse image acts on single objects by
 ordinary inverse-image composition, including arbitrary compatible coefficient maps.
-Source: Stacks Tag 07A6 and derived pullback composition
-(blueprint: lem-pur-etale-constant-pullback-native).
-Proof: expand the derived composition and its comparison on single objects.
-Naturality moves the first coefficient map through the second single comparison.
-Functoriality then identifies the composite with the given ordinary composition. -/
+Source: Stacks Tag 07A6 and derived pullback composition. -/
 theorem etaleConstantPullback_single_native
     (C : Type (u + 1)) [CommRing C] {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f)

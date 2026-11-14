@@ -81,23 +81,7 @@ private theorem transport_baseChange_naturality
     eqToHom_app, Functor.comp_obj, Functor.id_obj, Category.assoc] using hn
 
 /-- Horizontal transport of the base-change mate, with arbitrary coefficient maps.
-Source: Stacks Project, Tags 08HY and 0D5T.
-(blueprint: lem-pc-derived-base-change-source-transport)
-
-Proof: Eliminate hs to make s' = k ≫ s. Put c = C(k,r), transport by hr,
-then C(r',j).inv, and q0 = c.inv.app K followed by Lk(q). Transpose the inner
-square mate under the k adjunction. Naturality of c and the j triangle identity
-prove Lr(unit_j) followed by that mate and Rk(q0) equals q followed by unit_k.
-This elementary mate-unit calculation is proved separately in this file.
-The coefficient hypothesis, after precomposition by c.inv, gives
-q0 followed by d = Lr'(a) followed by q'. Apply coefficient naturality to the
-outer p square and unit_j. The horizontal mate-pasting theorem identifies the
-result with base change for j ≫ p followed by the inverse image composition
-comparison for k,s. Naturality of that image comparison moves q0 through it;
-the inverse and forward comparison cancel. Substitute the coefficient equation,
-then apply coefficient naturality once more to a. Functoriality and associativity
-now give exactly the displayed equation. No invertibility or cartesianness is
-used, so identity morphisms, empty schemes and zero objects are included. -/
+Source: Stacks Project, Tags 08HY and 0D5T. -/
 theorem derivedBaseChange_source_transport
     [∀ X : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

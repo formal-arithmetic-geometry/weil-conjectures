@@ -24,7 +24,6 @@ This is the bad-locus and Noetherian-fibre stabilization part of the affine limi
 argument. It is split from the final existence theorem so that the top-level implication remains
 fully checked while this long construction can be proved independently.
 Source: Stacks Project, Limits, Tag 05M5, `lemma-limit-dimension`.
-(blueprint: lem-weil-pbc-affine-limit-fibre-dimension-bound-core).
 -/
 
 @[expose] public section
@@ -368,7 +367,6 @@ This is the bad-locus contradiction in Tag 05M5: the bad local-dimension loci ar
 their reduced closed subschemes have a nonempty affine inverse limit, and Noetherian stabilization
 of a fixed limiting fibre produces a point contradicting the assumed bound.
 Source: Stacks Project, Limits, Tag 05M5, `lemma-limit-dimension`, affine specialization.
-(blueprint: lem-weil-pbc-affine-limit-fibre-dimension-bound-core).
 -/
 theorem fibre_dimension_contradiction_of_all_stages_bad
     {I : Type u} [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)]

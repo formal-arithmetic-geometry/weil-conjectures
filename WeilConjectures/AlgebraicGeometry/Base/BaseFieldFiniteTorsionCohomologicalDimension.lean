@@ -16,8 +16,6 @@ import WeilConjectures.RepresentationTheory.DiscreteModule.Torsion
 /-!
 # Torsion cohomological dimension of a finite base field
 
-Source: the finite-field clause of `lemma-cohomological-dimension-base-field` (blueprint:
-`det-base-field-cd-finite-torsion-bound`).
 
 The proof follows the absolute Galois group computation for a finite field: every
 geometric stalk is a torsion discrete module for the profinite completion of the
@@ -35,7 +33,7 @@ namespace AlgebraicGeometry.Scheme
 /-- A finite base field has torsion étale cohomological dimension at most one.
 
 Source: Stacks Project, Tags 03QQ and 010T, and the finite-field part of
-`lemma-cohomological-dimension-base-field` (blueprint: det-base-field-cd-finite-torsion-bound).
+`lemma-cohomological-dimension-base-field`.
 
 The proof identifies the small étale topos of `Spec K` with discrete modules for
 its absolute Galois group. For finite `K`, the absolute Galois group is the profinite

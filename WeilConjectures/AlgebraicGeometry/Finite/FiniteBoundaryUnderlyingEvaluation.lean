@@ -113,7 +113,7 @@ variable {C : Type c} [Category.{v} C] [EssentiallySmall.{r} C]
   (J : GrothendieckTopology C)
 
 /-- Scalar restriction retains the underlying additive sheaf.
-Source: Stacks 03CZ (blueprint: def-sfb-finite-underlying-evaluation). -/
+Source: Stacks 03CZ. -/
 def restrictionToSheafIso {R R' : Sheaf J CommRingCat.{r}} (φ : R ⟶ R') :
     res.{c, v, r} φ ⋙ SheafOfModules.toSheaf (ring J R) ≅
       SheafOfModules.toSheaf (ring J R') := by
@@ -127,7 +127,7 @@ def restrictionToSheafIso {R R' : Sheaf J CommRingCat.{r}} (φ : R ⟶ R') :
     rfl
 
 /-- Module evaluation retains the additive pushforward along the vertical inclusion.
-Source: Zheng 4.1 (blueprint: def-sfb-finite-underlying-evaluation). -/
+Source: Zheng 4.1. -/
 def evaluationToSheafIso (B : ℕ → Sheaf J CommRingCat.{r})
     (τ : ∀ n : ℕ, B (n + 1) ⟶ B n) (n : ℕ) :
     evaluation.{c, v, r} J B τ n ⋙ SheafOfModules.toSheaf (ring J (B n)) ≅

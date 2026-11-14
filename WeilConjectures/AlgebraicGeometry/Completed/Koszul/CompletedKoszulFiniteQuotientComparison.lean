@@ -54,7 +54,6 @@ quotient sheaves, apply the ordinary scalar-extension quotient theorem, and then
 complexes concentrated in degree zero.
 
 Source: Stacks Project, Tags 093M and 099M.
-(blueprint: new-s3-completed-koszul-finite-quotient-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -590,8 +589,7 @@ private lemma quotientUnit_normalization {C : Type*} [Category* C] [MonoidalCate
     unitors_equal, rightUnitor_naturality_assoc, Iso.inv_hom_id_assoc]
 
 /-- A finite quotient comparison, isolated from exactness of the coefficient functor.
-Source: Stacks Project, Tags 099M, 0921 and 093M.
-(blueprint: new-s3-completed-koszul-finite-quotient-comparison). -/
+Source: Stacks Project, Tags 099M, 0921 and 093M. -/
 theorem completedKoszulFiniteQuotientComparison
     (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) :

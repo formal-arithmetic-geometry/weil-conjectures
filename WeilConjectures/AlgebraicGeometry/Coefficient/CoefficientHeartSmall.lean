@@ -52,9 +52,6 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.C
 /-!
 # Essential smallness of the constructible coefficient heart
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-coefficient-heart,
-`sk-lem-coefficient-heart-small.md` and its proof
-(blueprint: lemma-constructible-sheaves--6).
 
 The coefficient is the actual condensed ring pulled back from the point. The full
 constructible category uses finite constant scalar models. This reopened stage-2
@@ -280,14 +277,7 @@ private theorem stratifiedModelsSmall
 
 /-- The constructible heart for a finite subextension E of Qbar_l, or for Qbar_l itself,
 has a set of isomorphism classes in the fixed larger universe.
-Source: blueprint lemma-constructible-sheaves--6 and its proof, with the nine-step
-DAG refinement (blueprint: lemma-constructible-sheaves--6).
 
-Proof:
-Finite presentations over the coefficient on the point form an essentially small
-property: encode a presentation by two natural numbers and a morphism between the
-corresponding finite free modules, and take its cokernel. Functorial images of this
-property remain essentially small.
 
 For a fixed cover, choose small representatives of the local models. Adjunction
 transposes their restriction isomorphisms into a map to the product of their direct

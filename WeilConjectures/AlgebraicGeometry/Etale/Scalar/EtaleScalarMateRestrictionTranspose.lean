@@ -17,19 +17,7 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
 
 /-- The geometric scalar mate is conjugate to exact restriction/direct image.
-Source: Stacks 07A4, 0G7E and 0D6J; Zheng, Lemma 5.16.
-(blueprint: lem-pur-scalar-mate-restriction-transpose).
-Proof: take the inverse scalar-adjunction mate of the exact
-restriction/pullback square. Its representative is the reverse ordinary scalar
-pullback comparison: apply the scalar-unit equations to cochain complexes and
-the exact geometric factorization. Flat K-flat representatives and localization
-identify its inverse with scalarPullbackIso. The iterated-mate identity then
-identifies the scalar transpose of scalarMate with the conjugate of the inverse
-restriction/pullback comparison. The opposite iterated mate is
-scalarRestrictionDirectImageMap, by its defining geometric mate equation.
-Conjugation of an isomorphism preserves inverses, giving the two equations.
-The resulting delta is unique because its inverse is prescribed. The argument
-works for every ring map, including identity maps and the zero ring. -/
+Source: Stacks 07A4, 0G7E and 0D6J; Zheng, Lemma 5.16. -/
 theorem scalarMate_restrictionTranspose
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {V W : Scheme.{u}} (g : V ⟶ W) :

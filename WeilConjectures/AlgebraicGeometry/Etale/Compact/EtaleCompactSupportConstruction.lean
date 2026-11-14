@@ -86,27 +86,7 @@ set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- Construct the ordinary and derived compact-support system, including the coefficient
 restriction comparison for its open part.
-Source: Stacks 03S2, 03DI and 03DJ; Zheng, Constructions 4.1 and 5.15
-(blueprint: lem-pur-etale-compact-support-construction).
-
-Proof: apply the coefficient-evaluation derived-left-adjoint theorem on X, Z and Y,
-and the ordinary-image and unbounded-image comparison theorems to j and g. Identify
-modules over the constant quotient ring sheaves with sheaves of modules over the
-quotient rings. On the small étale site, extension by zero along j is exact and left
-adjoint to inverse image. Its presheaf formula commutes with coefficient restriction:
-the sections and restriction maps are unchanged and only the scalar action is restricted.
-Transport these level functors to the ringed-site presentation. Their adjunction
-transposes commute with semilinear transitions, so they define an exact functor on
-strict systems with the asserted evaluation isomorphisms. Derive these exact functors
-termwise. The ordinary Hom transpose equations descend through localization, giving
-all the transpose and representative equations in StrictEtaleCompactSupport. The same
-identity on underlying section maps gives the displayed restriction isomorphism.
-Use coefficientRestrictionOpenMap_isIso for the normalized level comparison before
-transport. Its mate is the inverse-image restriction comparison because both
-transposes are the restricted open-adjunction unit. Finally apply the ordinary transition equation
-termwise and descend through localization. The representative equations identify the
-result with the chosen derived evaluations; thus the last equation holds on all
-objects of the unbounded derived category, not only on bounded complexes. -/
+Source: Stacks 03S2, 03DI and 03DJ; Zheng, Constructions 4.1 and 5.15. -/
 theorem etaleCompactSupport_construction
     (O : Type (u + 1)) [CommRing O] (t : O)
     (hregular : ∀ x : O, t * x = 0 → x = 0)

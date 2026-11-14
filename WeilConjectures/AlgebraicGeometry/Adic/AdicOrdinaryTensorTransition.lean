@@ -10,7 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.Adic.AdicOrdinaryTensorDiagram
 /-! # The consecutive square for ordinary algebraic quotient tensors
 
 Source: Stacks Project, More on Algebra, Tag 09AW; More on Algebra, Tag 06Y6.
-(blueprint: lem-weil-pbc-adic-ordinary-tensor-transition).
 -/
 
 @[expose] public noncomputable section
@@ -140,29 +139,7 @@ attribute [local irreducible] adicOrdinaryTensorLevelMap
 canonical quotient transition and the ordinary quotient homomorphism.
 
 Source: Stacks Project, Tags 09AW and 0BYK, quotient scalar transitions; Tag 06Y6, the unit
-normalization of the scalar-extension representative comparison.
-(blueprint: lem-weil-pbc-adic-ordinary-tensor-transition).
-
-Proof: write q_n for A→A/I^(n+1), U_n for its exact restriction, and η_n for the
-ordinary cochain scalar-insertion unit. The level comparison is U_n applied to
-the transpose of Q(η_n), followed by the exact restriction factorization and the
-tensor symmetry. Consequently composing its restricted derived transpose with
-the derived unit gives Q(η_n); the two restriction factorization maps cancel.
-Transport the displayed square through these exact restriction and symmetry
-isomorphisms. Its source is the restriction of L_(n+1)(Q(P)), and its target is
-the restriction of the ordinary nth scalar-extension complex. Undo the canonical
-isomorphism U_n≅U_(n+1)∘Res(A/I^(n+2)→A/I^(n+1)), and use injectivity of the
-(n+1)st adjunction Hom bijection. The transpose of the canonical transition is
-its defining lower unit. The other transpose is the localized ordinary quotient
-transition composed with scalar insertion. In each cochain degree the latter
-sends x to the image of 1 tensor x, namely 1 tensor x, since the quotient ring
-homomorphism preserves 1. This is η_n. The equality commutes with differentials
-by naturality of insertion. Exact restriction composition and its localization
-factorization carry that equality to the required transpose equality, proving
-the square. This argument permits arbitrary ideals, zero rings and unbounded
-complexes. All level maps have already been constructed without this assertion;
-this assertion only identifies their consecutive square. No K-flatness or
-invertibility assertion is needed here. -/
+normalization of the scalar-extension representative comparison. -/
 theorem adicOrdinaryTensorLevelMap_transition
     {A : Type t} [CommRing A] (I : Ideal A)
     (L : ∀ n : ℕ, DerivedCategory (ModuleCat.{t} A) ⥤
@@ -291,11 +268,7 @@ theorem adicOrdinaryTensorLevelMap_transition
   rw [← reassoc_of% hn, ← Functor.map_comp_assoc, ← hr, Functor.map_comp_assoc, hw]
 
 /-- Consecutive compatibility and K-flat invertibility assemble the entire quotient diagram.
-Source: Stacks Project, Tags 09AW and 06Y6
-(blueprint: lem-weil-pbc-adic-ordinary-tensor-transition).
-Proof: construct a natural transformation by the inverse-sequence constructor.
-Each component is the explicit level map, invertible on K-flat inputs. A natural
-transformation with invertible components is a natural isomorphism. -/
+Source: Stacks Project, Tags 09AW and 06Y6. -/
 theorem adicOrdinaryTensorComplexDiagram_comparison
     {A : Type t} [CommRing A] (I : Ideal A)
     (L : ∀ n : ℕ, DerivedCategory (ModuleCat.{t} A) ⥤

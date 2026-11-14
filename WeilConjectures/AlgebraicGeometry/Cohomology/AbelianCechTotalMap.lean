@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.AbelianCechComparison
 /-! # The injective Čech total complex is functorial
 
 Source: Stacks Project, Tags 01EQ and 01FD.
-(blueprint: def-pc-abelian-cech-total-map)
 -/
 
 @[expose] public section
@@ -22,8 +21,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] cohomologyHasSheafify cohomologyHasExt
 
 /-- Apply the Čech functor degreewise, flip, and totalize a resolution map.
-Source: Stacks Project, Tags 01EQ and 01FD, augmented comparison diagram.
-(blueprint: def-pc-abelian-cech-total-map) -/
+Source: Stacks Project, Tags 01EQ and 01FD, augmented comparison diagram. -/
 noncomputable def abelianCechTotalMap
     {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens)
     {F G : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}}

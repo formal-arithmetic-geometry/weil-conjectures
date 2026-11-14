@@ -131,8 +131,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 
 Source: blueprint main-20261015, chap-The-pro-etale-site,
 `sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md`,
-Cones paragraph and shifts sentence; Stacks Tag 05RU
-(blueprint: lem-pe-completion-triangle-comparison).
+Cones paragraph and shifts sentence; Stacks Tag 05RU.
 
 ## Main definitions and statement
 
@@ -644,9 +643,7 @@ open AlgebraicGeometry.ProEtale.PrincipalReduction
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u})
 
-/-- Degreewise assembly of the existing strict reduction tower into a complex of towers.
-Source: blueprint first-reduction proof, strict towers in the Cones paragraph
-(blueprint: lem-pe-completion-triangle-comparison). -/
+/-- Degreewise assembly of the existing strict reduction tower into a complex of towers. -/
 def tower (data : PrincipalReductionConeData l E X) : CochainComplex (Modules l E X) ℤ ⥤
     CochainComplex (ℕᵒᵖ ⥤ Modules l E X) ℤ where
   obj M :=
@@ -675,9 +672,7 @@ def tower (data : PrincipalReductionConeData l E X) : CochainComplex (Modules l 
     NatTrans.ext (funext (fun (n : ℕᵒᵖ) ↦
       congrArg (fun h ↦ h.f q) ((data.D n.unop).map_comp f g)))))
 
-/-- The actual composite of the principal tower and the published strict Roos functor.
-Source: blueprint first-reduction proof, Cones paragraph
-(blueprint: lem-pe-completion-triangle-comparison). -/
+/-- The actual composite of the principal tower and the published strict Roos functor. -/
 abbrev complexCompletion (data : PrincipalReductionConeData l E X) :
     CochainComplex (Modules l E X) ℤ ⥤ CochainComplex (Modules l E X) ℤ :=
   tower l E X data ⋙ roosF
@@ -1464,7 +1459,7 @@ private def roosTriangleIso
 and morphism of distinguished triangles.
 
 Source: blueprint main-20261015, first-reduction proof, Cones paragraph and shifts
-sentence; Stacks Tag 05RU (blueprint: lem-pe-completion-triangle-comparison).
+sentence; Stacks Tag 05RU.
 
 Proof, following the nine steps of the updated DAG node:
 1. Assemble the additive principal-reduction tower and apply the Roos functor.

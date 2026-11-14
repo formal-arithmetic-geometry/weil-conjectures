@@ -83,22 +83,7 @@ private theorem scalarRestriction_comm {Y : Scheme.{u}} (N : Y.Modules)
 This is a naturality assertion and does not assert invertibility of any component.
 
 Source: Stacks Project, Tag 02KH, separated-case Cech argument, and the
-coordinate differential formula in WeilConjectures.Topology.Sheaves.CechComparison.
-(blueprint: lem-pc-flat-cech-base-change-differential)
-
-Proof: Test the equality on pure tensors b tensor x, which span scalar extension.
-Then test each target tuple coordinate; product projections and restriction along
-an isomorphism of opens are jointly injective. In the coordinate differential
-formula, each summand is the restriction of a face coordinate with sign (-1)^i.
-Apply the assumed coordinate equation to each face. Naturality of the module
-adjunction unit moves restriction across the pulled-back section. Naturality of
-the structure-sheaf map moves the image of b across the same restriction. Inverse
-image preserves the finite intersections; all maps between these opens agree
-because the category of opens is thin. Linearity distributes b over the finite
-alternating sum. The two sides therefore have equal coordinates. Tensor induction
-and product extensionality finish. The empty index type gives no coordinates and
-zero terms; empty opens have zero sections. There is no affine or flat hypothesis:
-only naturality of the unit and the assumed pure-tensor formula are used. -/
+coordinate differential formula in WeilConjectures.Topology.Sheaves.CechComparison. -/
 theorem cechBaseChange_components_comm (f : X ⟶ Spec (.of R))
     (U : ι → X.Opens) (M : X.Modules)
     (hI : ∀ (k : ℕ) (y : Fin (k + 1) → ι),

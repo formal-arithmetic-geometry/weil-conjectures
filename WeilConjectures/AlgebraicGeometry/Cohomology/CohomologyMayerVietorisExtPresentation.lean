@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.MayerVietorisOpenExtComparis
 /-! # Geometric Ext presentations for the Mayer--Vietoris comparison
 
 Source: Stacks Project, Tags 01EB, 01F7 and 02KH.
-(blueprint: lem-pc-cohomology-mayer-vietoris-ext-presentation)
 -/
 
 @[expose] public section
@@ -30,8 +29,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- A scalar-compatible presentation of three graded groups by Ext from the
 three objects of a short complex. It specifies no horizontal cohomology maps.
 Source: the coefficient-functor naturality in Stacks Project, Tag 01EB,
-and Ext cohomology in Section 01F7.
-(blueprint: lem-pc-cohomology-mayer-vietoris-ext-presentation) -/
+and Ext cohomology in Section 01F7. -/
 structure H.ExtRowPresentation
     (R : Type u) [CommRing R]
     {C : Type v} [Category.{w} C] [Abelian C] [HasExt.{u} C]
@@ -114,19 +112,7 @@ asserted here.
 
 Source: Stacks Project, Tag 01EB (the free-sheaf Mayer--Vietoris sequence),
 Section 01F7 (pullback of cohomology), and Tag 02KH (the two-open argument).
-(blueprint: lem-pc-cohomology-mayer-vietoris-ext-presentation)
 
-Proof: Let F be the underlying abelian sheaf of M. For an open W of X, the
-free abelian sheaf represented by W represents sections on W. The adjunction for
-restriction and extension by zero, which are exact for an open immersion, gives
-Ext from this free sheaf to F as the Ext cohomology of the restriction of M to W.
-These identifications are additive and natural in F. The free sheaves on U, V,
-U intersect V and X form the short exact sequence with injection (inclusion,
-minus inclusion) and surjection the sum of inclusions; stalkwise, this is the
-usual exact sequence of free abelian groups for a two-open cover. Choose it as K.
-The direct-sum Ext identification gives the product term. Scalar multiplication
-on cohomology is postcomposition with multiplication on F; naturality of the
-adjunction identifications gives all three upper scalar equations.
 
 Apply exact inverse image G along the cartesian projection X_S to X to K.
 Inverse image of the free sheaf represented by W is the free sheaf represented

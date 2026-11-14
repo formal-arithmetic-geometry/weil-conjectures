@@ -44,15 +44,7 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext
   SpTowerClasses.lineModule Coefficients.unitMap
   completedSupportedUnit
 
-/-- The given finite normalization in the shared diagonal module coordinates.
-Source: diagonal trace proof (2), finite source projection; diagonal-system proof (4).
-(blueprint: lem-sfb-diagonal-trace-finite-cartier-normalized-coordinates).
-
-Proof: unfold the finite normalization at n and take its source and target
-coordinates. Retain the source generator and root equations. Unfold the named
-normalized Ext expression and typed Cartier class: they are precisely the finite
-cycle equation already supplied by the normalization. The cached diagonal Ext
-witness changes only the spelling of definitionally equal categorical structures. -/
+/-- The given finite normalization in the shared diagonal module coordinates. -/
 theorem finiteCartierNormalization_coordinates
     (l : ℕ) [Fact l.Prime]
     (Y : Scheme.{u}) [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)]

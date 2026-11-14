@@ -33,10 +33,6 @@ import WeilConjectures.Algebra.Homology.BoundedAboveFlatSheafKFlat
 import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.DirectImageConeTowerStrictness
 
 /-! # Finite levels of the direct-image reduction mate
-
-Source: literature/blueprint/latest/blueprint/sec-proper-base-change/
-sk-prop-pbc-complete/prop-weil-pbc-direct-image-limits.proof.md, proof (2).
-(blueprint: lem-weil-pbc-direct-image-completion-compatibility-levelwise-iso)
 -/
 
 @[expose] public noncomputable section
@@ -72,9 +68,8 @@ computed by `f_*I ⊗ B_n`. The strict cone-tower comparison
 lem-weil-pbc-direct-image-cone-tower-strictness identifies `f_*I ⊗ B_n` with `f_*(I ⊗ f^*B_n)`
 degreewise (additivity of `f_*` on the two summands of the cone), and its K-injective normalization
 says that this strict isomorphism descends, through the unit/counit description of `β n` and of
-`pullReduction` (lemma-weil-pbc-completed-pullback-reduction), to the level-`n` component of the
-mate of `pullReduction`. Hence that component is an isomorphism.
-(blueprint: lem-weil-pbc-direct-image-completion-compatibility-levelwise-iso) -/
+`pullReduction`, to the level-`n` component of the
+mate of `pullReduction`. Hence that component is an isomorphism. -/
 theorem directImage_pushReductionMap_levelwiseIso :
     ∀ K : DerivedCategory (AdicCompletion.Modules l E X), ∀ n : ℕ,
       IsIso ((CompleteDerivedCompletion.dev l E Y n).map

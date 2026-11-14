@@ -206,9 +206,6 @@ end Coherence
 
 /-- An equivariant cover isomorphism transports the actual character-projector image,
 including every induced pullback-of-functions map and its root evaluation.
-Source: latest blueprint, lem-wft-as-unit-trivialization.proof.md, final paragraph;
-lem-wft-as-comparison.proof.md, quotient-cover and evaluation comparison.
-(blueprint: lem-wft-condensed-projector-cover-iso).
 
 Proof in words. On a cover Y, take the coefficient module pushed forward along Y→X.
 The regular-lift formula for condensedPull is the pullback of coefficient functions.

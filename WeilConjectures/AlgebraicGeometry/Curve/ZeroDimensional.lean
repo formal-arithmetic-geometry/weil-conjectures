@@ -103,8 +103,7 @@ lemma Scheme.finite_and_isClosed_singleton_of_topologicalKrullDim_le_zero {X : S
 cohomology in dimension zero.** Let `k` be algebraically closed and `X` a scheme of finite type over
 `k` of dimension at most zero. Then `Hᵠ(X, F) = 0` for every abelian étale sheaf `F` and `q > 0`:
 `X` is a finite set of closed points with algebraically closed residue fields, so `F` is the
-direct sum of the pushforwards of its restrictions to these points, which are acyclic.
-(blueprint: `lemma-sheaves-finite-support-finite-morphisms--1`) -/
+direct sum of the pushforwards of its restrictions to these points, which are acyclic. -/
 theorem subsingleton_sheafH_of_topologicalKrullDim_le_zero {X : Scheme.{u}}
     (g : X ⟶ Spec (.of k)) [LocallyOfFiniteType g] [QuasiCompact g]
     (hX : topologicalKrullDim X ≤ 0) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
@@ -127,8 +126,7 @@ unit maps assemble to an isomorphism `F ≅ ⨁ₓ iₓ_* iₓ^* F` along `iₓ 
 `H⁰(X, iₓ_* iₓ^* F) = H⁰(Spec κ(x), iₓ^* F)` is the stalk of `iₓ^* F` at the tautological
 geometric point (`AlgebraicGeometry.Scheme.bijective_toPresheafFiber_etalePoint`), which is
 the stalk of `F` at `x̄`. The vanishing in positive degrees is
-`AlgebraicGeometry.subsingleton_sheafH_of_topologicalKrullDim_le_zero`.
-(blueprint: `lemma-sheaves-finite-support-finite-morphisms--1`) -/
+`AlgebraicGeometry.subsingleton_sheafH_of_topologicalKrullDim_le_zero`. -/
 theorem nonempty_addEquiv_sheafH_zero_pi_sheafFiber {X : Scheme.{u}}
     (g : X ⟶ Spec (.of k)) [LocallyOfFiniteType g] [QuasiCompact g]
     (hX : topologicalKrullDim X ≤ 0) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :

@@ -15,7 +15,6 @@ import all WeilConjectures.AlgebraicGeometry.Etale.ProEtale.EtaleProEtaleScalarM
 
 Source: Stacks Project, sites-modules.tex, Tags 03EL and 0E8J;
 sites-cohomology.tex, Tags 06YY and 07A4.
-(blueprint: lem-coef-etale-open-scalar-restriction-tensor).
 -/
 
 @[expose] public section
@@ -222,14 +221,6 @@ private theorem restriction_comparison_eq
 Source: the restriction/tensor portion of the proof of
 `lem-coef-etale-open-mixed-tensor-scalar`; Stacks Tags 03EL, 0E8J, 06YY and 07A4.
 
-Proof: ordinary restriction of coefficients commutes sectionwise with the direct
-image from the open slice site. The identity comparison is monoidal for the lax
-coefficient and direct-image tensorators: both composites act on local tensors
-by the same balancing map. Conjugating under scalar and geometric adjunctions
-therefore makes the ordinary scalar/restriction comparison monoidal for the
-canonical oplax structures. The inverse of this comparison is r-zero of the
-fixed open comparison data, since both are the left-adjoint comparison for the
-same sectionwise identity.
 
 Apply this ordinary equation to each bidegree of two flat K-flat resolutions.
 Restriction is exact and preserves flat objects and integer-indexed colimits,
@@ -246,8 +237,7 @@ This yields the displayed equation on resolving representatives. Naturality
 in each argument and the existence of such representatives yield it for all
 unbounded K and M. Each map preserves bidegrees, so the signed totalization
 introduces no extra sign. Nothing requires a flat coefficient map, a nonempty
-open, or a nonzero coefficient ring.
-(blueprint: lem-coef-etale-open-scalar-restriction-tensor). -/
+open, or a nonzero coefficient ring. -/
 theorem etaleOpenScalarRestrictionTensor
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]

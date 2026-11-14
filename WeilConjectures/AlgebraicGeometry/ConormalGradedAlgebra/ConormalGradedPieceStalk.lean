@@ -18,7 +18,6 @@ import Mathlib.LinearAlgebra.Quotient.Basic
 /-! # Homogeneous conormal module stalks
 
 Source: Stacks Project, Divisors, Tag 0633; Modules, Tags 01AG and 08KS.
-(blueprint: lem-pur-conormal-graded-piece-stalk).
 -/
 
 @[expose] public section
@@ -41,18 +40,7 @@ private theorem stalk_map_germ {Y : Scheme.{u}} (y : Y) {M N : Y.Modules}
 
 /-- Each homogeneous conormal stalk is the successive-power quotient of the actual
 structure-stalk kernel, with its representative-germ formula.
-Source: Stacks Project, Divisors, Tag 0633; Modules, Tags 01AG and 08KS.
-(blueprint: lem-pur-conormal-graded-piece-stalk).
-
-Proof: Apply exact stalks to the normalized closed-immersion unit quotient of I^n.
-The range of the ideal stalk inclusion is the actual structure-map kernel K, and
-induction on powers identifies the stalk of I^n with K^n. The inclusion is monic,
-so it is an isomorphism onto this range. Transporting the product submodule
-K times the stalk of I^n gives K^(n+1) inside K^n. The induced quotient equivalence
-identifies the stalk of I^n/I I^n with K^n/K^(n+1). Finally the closed-embedding
-pushforward stalk comparison identifies this with the stalk on Z. Every comparison
-commutes with the quotient map and germs; their composite has the stated formula.
-For n=0 the power inclusion is the identity and its range is the whole local ring. -/
+Source: Stacks Project, Divisors, Tag 0633; Modules, Tags 01AG and 08KS. -/
 theorem graded_piece_stalk (n : ℕ) (z : Z) :
     ∃ e : ((RingedSpace.moduleStalkFunctor Z.toRingedSpace z).obj (piece i n)) ≃+
         Ideal.associatedGradedPiece (RingHom.ker (i.stalkMap z).hom) n,

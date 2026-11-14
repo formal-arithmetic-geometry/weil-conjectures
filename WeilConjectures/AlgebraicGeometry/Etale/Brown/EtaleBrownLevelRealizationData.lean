@@ -168,7 +168,6 @@ restriction maps; their derived maps are obtained by localization. Scalar extens
 is the mate of these restriction maps under the supplied scalar adjunctions. This
 statement deliberately omits all coherence equations, which are the subject of the
 next theorem.
-(blueprint: lem-pur-etale-brown-level-realization-data).
 -/
 theorem etaleBrownLevelRealizationData_exists
     (O : Type (u + 1)) [CommRing O] (t : O) (W : Scheme.{u})

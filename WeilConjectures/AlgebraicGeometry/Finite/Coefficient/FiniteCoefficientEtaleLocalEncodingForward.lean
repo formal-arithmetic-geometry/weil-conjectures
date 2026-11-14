@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.Finite.Coefficient.FiniteCoefficientEta
 /-! # Forward transport from etale finite models to fixed-scalar pro-etale models
 
 Source: Stacks Project, proetale.tex, Tag 099Y; sites-modules.tex, Tag 04IX.
-(blueprint: lem-weil-pbc-finite-coefficient-etale-local-encoding-forward).
 
 This is the forward direction of the local-model comparison. It is split from
 `finiteCoefficient_etaleLocal_encoding` so that the etale-to-pro-etale covering
@@ -31,13 +30,7 @@ attribute [local instance] finitePerfectModelsAbLocallyBijective
 
 /-- Etale finite local models give fixed-scalar pro-etale finite local models.
 
-Source: Stacks Project, proetale.tex, Tag 099Y, and sites-modules.tex, Tag 04IX.
-(blueprint: lem-weil-pbc-finite-coefficient-etale-local-encoding-forward).
-
-Proof: Use the identity etale chart, regard an etale covering as a pro-etale
-covering, and pull it back along each pro-etale object. Transport the displayed
-models through scalar restriction, localization, and normalized constant-module
-comparisons. -/
+Source: Stacks Project, proetale.tex, Tag 099Y, and sites-modules.tex, Tag 04IX. -/
 theorem finiteCoefficient_etaleLocal_encoding_forward
     (X : Scheme.{t}) (B : Type t) [CommRing B] [Finite B]
     [(koszulConstantFunctor X B).PreservesZeroMorphisms]

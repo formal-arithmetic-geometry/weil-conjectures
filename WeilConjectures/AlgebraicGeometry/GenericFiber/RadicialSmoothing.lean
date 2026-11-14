@@ -25,12 +25,11 @@ reduction of `X_{S'}` has a dense open `V` which is smooth over `S'`, and on whi
 constructible sheaf on `X` becomes finite locally constant. In characteristic zero no base
 change is needed (generic smoothness); in characteristic `p` one passes to a finite purely
 inseparable extension of the function field of `S`. This is the third step of Deligne's
-generic constructibility theorem (`theorem-generic-constructibility-base-change-rj`).
+generic constructibility theorem.
 
 ## Main statements
 
-- `AlgebraicGeometry.exists_isFinite_universallyInjective_smooth_dense`
-  (`lemma-generic-smooth-open--1`).
+- `AlgebraicGeometry.exists_isFinite_universallyInjective_smooth_dense`.
 -/
 
 @[expose] public section
@@ -84,7 +83,7 @@ lemma dense_of_forall_exists_specializes {X : Type*} [TopologicalSpace X] {s : S
   obtain ⟨y, hy, hyx⟩ := h x
   exact closure_mono (Set.singleton_subset_iff.mpr hy) (specializes_iff_mem_closure.mp hyx)
 
-/-- Blueprint `lemma-generic-smooth-open--1`: A smooth dense open after a finite radicial
+/-- A smooth dense open after a finite radicial
 base change.
 
 Let `S` be integral of finite type over a field `k` and let `f : X ⟶ S` be of finite type with

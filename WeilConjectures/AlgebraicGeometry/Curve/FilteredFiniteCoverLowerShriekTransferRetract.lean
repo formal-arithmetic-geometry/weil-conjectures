@@ -79,8 +79,7 @@ open-restriction maps for `G` are retracts of the corresponding maps for `H`, so
 their bijectivity or surjectivity descends as well.  Applying these closure facts
 to the eight conjuncts of `hH` proves the conclusion.  This is exactly the final
 retract step of 03SD; no additional property of the degree or connectedness of
-`v` is required once `hH`, `ρ`, and `hρ` are supplied.
-(blueprint: k1-filtered-finite-cover-lower-shriek-transfer-retract) -/
+`v` is required once `hH`, `ρ`, and `hρ` are supplied. -/
 theorem filteredFiniteCoverLowerShriekTransfer_retract {k : Type u} [Field k] [IsAlgClosed k]
     {X U V : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X]
     (j : U ⟶ X) [IsOpenImmersion j] (r : ℕ) [Fact r.Prime]

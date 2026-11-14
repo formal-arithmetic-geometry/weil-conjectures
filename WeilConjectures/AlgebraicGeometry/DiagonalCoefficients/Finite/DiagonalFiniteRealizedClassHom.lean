@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Cyclic.Diag
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Finite.DiagonalFiniteRealizedClassCore
 
 /-! # The derived representative of a finite realization
-
-Source: diagonal tower coefficient changes (1), scalar compatibility and Ext realization.
-(blueprint: lem-diagonal-finite-realized-class-hom).
 -/
 
 @[expose] public noncomputable section

@@ -15,9 +15,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Uniformizer.Diagon
 
 This repair restores the quarantined module and re-applies the completed finite-free
 rank-one comparison proof against the current sheaf-dag dependency snapshot.
-
-Source: diagonal tower coefficient changes, paragraph (1), cofinal uniformizer quotients.
-(blueprint: lem-diagonal-uniformizer-scalar-squares).
 -/
 
 @[expose] public noncomputable section
@@ -40,8 +37,7 @@ attribute [local irreducible] DerivedCategory HasDerivedCategory.ofIsGrothendiec
 
 /-- A scalar/direct-image square with invertible mate on every complex.
 Keeping the coefficient rings as parameters shares the derived-category instances
-in the concrete uniformizer theorem. Source: coefficient changes paragraph (1).
-(blueprint: lem-diagonal-uniformizer-scalar-squares). -/
+in the concrete uniformizer theorem. Source: coefficient changes paragraph (1). -/
 structure ScalarSquareIsomorphisms
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
@@ -73,15 +69,7 @@ scalar mate is invertible on every complex.
 Source: blueprint latest, sec-six-functors-basics/sk-prop-diagonal-tower/
 sk-prop-diagonal-tower-coefficients.proof.md, paragraph (1), and the finite free
 coefficient argument; Stacks Tags 070G, 070Y and 0D6E.
-(blueprint: lem-diagonal-uniformizer-scalar-squares).
 
-Proof: The quotient O_E/(pi^(n+1)) has the two-term free O_E-resolution with differential
-pi^(n+1). The integer ring is a domain and the specified uniformizer is nonzero, so this
-map is injective. Continuous functions on a profinite set preserve this short exact
-sequence: finite residue classes have locally constant lifts on a finite clopen
-partition, and the inverse of multiplication by pi^(n+1) on its image is continuous.
-Pull back from the profinite point to either scheme by the exact monoidal inverse
-image. This gives the same two-term free resolution of the pulled-back quotient ring.
 
 Exact restriction of coefficients commutes with ordinary direct image. Compute derived
 direct image using resolutions acyclic for the underlying ringed-topos direct image;

@@ -78,8 +78,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.FiniteFreeDirectImage
 
 /-- The ordinary balancing conjugates the identity-on-sections restriction square.
-Source: Stacks Project, Tag 03EL.
-(blueprint: lem-sp-finite-free-direct-image-balancing-computed). -/
+Source: Stacks Project, Tag 03EL. -/
 def ordinaryBalancing {Z W : Scheme.{u}} {q : Z ⟶ W}
     (sW : ScalarModel W) (sZ : ScalarModel Z)
     {R S : Coefficients q} (a : CoefficientMap R S) :
@@ -97,8 +96,7 @@ def ordinaryBalancing {Z W : Scheme.{u}} {q : Z ⟶ W}
 
 /-- A comparison is computed by ordinary balancing when it intertwines both
 universal derived counits with the termwise ordinary comparison.
-Source: Stacks Project, Tags 06YY and 07A6.
-(blueprint: lem-sp-finite-free-direct-image-balancing-computed). -/
+Source: Stacks Project, Tags 06YY and 07A6. -/
 def BalancingComputed {Z W : Scheme.{u}} {q : Z ⟶ W}
     (sW : ScalarModel W) (sZ : ScalarModel Z)
     {R S : Coefficients q} (a : CoefficientMap R S)
@@ -477,25 +475,7 @@ private theorem derived_restriction_pullback_eq {Z W : Scheme.{u}} {q : Z ⟶ W}
 
 /-- The normalized termwise balancing agrees with the conjugate of the actual
 restriction/direct-image comparison.
-Source: Stacks Project, Tags 03EL, 0D6D, 06YY and 07A6.
-(blueprint: lem-sp-finite-free-direct-image-balancing-computed).
-
-Proof: use the tensor-unit normalization to identify the scalar derived
-adjunction with the adjunction obtained from the ordinary tensor adjunction.
-The identification is checked on flat-term K-flat resolutions, using the recorded
-formula for the scalar unit, and extended by the localization universal property.
-Invert the displayed counit equation for beta and take its mate under the two
-scalar adjunctions. By the normalized scalar unit and counit equations this mate
-is computed on homotopy representatives by the ordinary scalar mate, which by
-the iterated-mates identity is the inverse-image/restriction comparison of the
-ordinary balancing's conjugate square. All four functors of that square are
-exact, so its localization satisfies the same factorization equation; cancelling
-the exact factorization isomorphisms and using localization extensionality,
-the scalar mate of beta inverse is the derived restriction/pullback comparison.
-The derived geometric adjunction compatibility shows that the scalar mate of the
-inverse canonical balancing is the same comparison. The mate assignment is a
-bijection, so beta and balancing have equal inverses and are equal. The
-invertibility hypothesis on the source scalar counits is not used. -/
+Source: Stacks Project, Tags 03EL, 0D6D, 06YY and 07A6. -/
 theorem finiteFreeDirectImage_balancingComputed {Z W : Scheme.{u}} {q : Z ⟶ W}
     (sW : ScalarModel W) (sZ : ScalarModel Z)
     {R S : Coefficients q} (a : CoefficientMap R S)

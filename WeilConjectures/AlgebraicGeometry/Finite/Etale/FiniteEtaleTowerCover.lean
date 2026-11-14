@@ -20,7 +20,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible
 
 /-! # Covers mapping to finite etale towers
 Source: Stacks Project, Tags 01YW and 0990; finite-stalk adaptation of Tag 09BV.
-(blueprint: lem-weil-pbc-finite-etale-tower-cover).
 -/
 
 @[expose] public section
@@ -31,16 +30,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- A finite etale tower with finite nonempty geometric fibers has a compatible
 cone whose legs to the base form an affine weakly contractible pro-etale cover.
-Source: Stacks Project, Tags 01YW and 0990; finite-stalk adaptation of Tag 09BV.
-(blueprint: lem-weil-pbc-finite-etale-tower-cover).
-Proof: Pull the tower back to each affine open of X. Its affine inverse limit is
-Spec of the direct limit of the rings, and is weakly etale because the rings are
-ind-etale. At a geometric point, finite inverse-system compactness gives compatible
-points of all stages, hence a point of the affine limit by its limit property.
-Thus the limit is surjective over the affine open and its singleton covers.
-Refine the limit by affine weakly contractible singleton covers using faithfully
-flat ind-etale contractible extensions, and compose with the affine open cover.
-The limit projections restrict to the required compatible maps. -/
+Source: Stacks Project, Tags 01YW and 0990; finite-stalk adaptation of Tag 09BV. -/
 theorem finite_etale_tower_cover
     (X : Scheme.{u}) (P : ℕ → X.Etale) (p : ∀ n : ℕ, P (n + 1) ⟶ P n)
     (hfin : ∀ n : ℕ, IsFinite (P n).hom)

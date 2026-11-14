@@ -32,8 +32,7 @@ import Mathlib.RingTheory.Noetherian.Basic
 /-!
 # The conormal graded algebra of a closed immersion
 
-Source: Stacks Project, Divisors, Tags 0630, 0631, 0632, 0633; coherence, Tag 01XZ
-(blueprint: lem-pur-conormal-graded-algebra).
+Source: Stacks Project, Divisors, Tags 0630, 0631, 0632, 0633; coherence, Tag 01XZ.
 
 The homogeneous modules are actual tensor pullbacks of the ideal powers. The algebra is
 specified by a coproduct universal property and the product of representatives, which
@@ -59,8 +58,7 @@ variable {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
 /-- A universal presentation of the actual conormal algebra. Its underlying module is the
 sheaf coproduct of `i^*(I^n)`; products and constants have their representative formulas.
 The affine and stalk charts preserve those classes, and hence specify graded charts.
-Source: Stacks Tags 0630--0633, 01XZ
-(blueprint: lem-pur-conormal-graded-algebra). -/
+Source: Stacks Tags 0630--0633, 01XZ. -/
 structure Presentation where
   algebra : Z.CommAlgebraSheaf
   inclusion : ∀ n, piece i n ⟶ algebra.toModule
@@ -597,8 +595,7 @@ private theorem presentation_comparison (A B : Presentation i) :
 /-- The conormal algebra exists, with its unique homogeneous-inclusion-preserving comparison
 to any other presentation. This is a universal property, not a mere existence of an
 unconstrained algebra or normal-cone datum.
-Source: Stacks Divisors Tags 0630--0633; coherent sheaves Tag 01XZ
-(blueprint: lem-pur-conormal-graded-algebra).
+Source: Stacks Divisors Tags 0630--0633; coherent sheaves Tag 01XZ.
 
 Proof (the ten steps of `lem-pur-conormal-graded-algebra`):
 1. Form the sheaf cokernels B_n = I^n/I^(n+1) on X. Quasi-coherent cokernels and the
@@ -680,16 +677,16 @@ theorem exists_conormalGradedAlgebra :
 
 /-- The conormal algebra chosen from its universal property. Any two such choices have the
 unique isomorphism fixing every homogeneous inclusion, the equality used downstream.
-Source: Stacks Tags 0630--0633 (blueprint: lem-pur-conormal-graded-algebra). -/
+Source: Stacks Tags 0630--0633. -/
 def presentation : Presentation i := (exists_conormalGradedAlgebra i).choose
 
 /-- The canonical graded algebra map from the symmetric algebra of the conormal module.
-Source: Stacks Tag 0632 (blueprint: lem-pur-conormal-graded-algebra). -/
+Source: Stacks Tag 0632. -/
 def symmetricComparison : SymmetricAlgebraSheaf.algebra (piece i 1) ⟶
     (presentation i).algebra := (presentation i).symmetricComparison.exists.choose
 
 /-- Projection to degree zero, with its uniquely specified homogeneous representative formula.
-Source: Stacks Tags 0630, 0636 (blueprint: lem-pur-conormal-graded-algebra). -/
+Source: Stacks Tags 0630, 0636. -/
 def augmentation : (presentation i).algebra ⟶ Under.mk (𝟙 Z.sheaf) :=
   (presentation i).augmentation.exists.choose
 

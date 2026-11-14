@@ -26,8 +26,7 @@ import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 
 Source: blueprint main-20261015, sec-proetale-coefficients/sk-def-sf-operations,
 lem-weil-pbc-clopen-section-direct-image.proof.md, disjoint-open-cover description
-and displayed section formula; Stacks Project, `proetale.tex`, Tags 098K and 09AE
-(blueprint: lem-sp-clopen-section-component).
+and displayed section formula; Stacks Project, `proetale.tex`, Tags 098K and 09AE.
 -/
 
 @[expose] public section

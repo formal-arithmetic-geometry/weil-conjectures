@@ -15,8 +15,7 @@ import WeilConjectures.ConstructibleSheaf.Refinement
 /-!
 # Constructible cohomology of finite-coefficient derived tensors
 
-Source: Stacks Project, Pro-etale Cohomology, Tag 09BQ, lemma-tensor-c
-(blueprint: lem-pur-finite-tensor-constructible-cohomology).
+Source: Stacks Project, Pro-etale Cohomology, Tag 09BQ, lemma-tensor-c.
 -/
 
 @[expose] public section
@@ -100,27 +99,7 @@ private theorem common_stratification {I : Type*} (s : Finset I)
 finite-torsion inputs is constructible. The tensor is computed on arbitrary
 representatives by the recorded K-flat resolution; no lower bound is asserted.
 
-Source: Stacks Project, Pro-etale Cohomology, Tag 09BQ, lemma-tensor-c
-(blueprint: lem-pur-finite-tensor-constructible-cohomology).
-
-Proof:
-1. Use the proved finite coefficient-ring instance. A finite ring is Noetherian,
-and finitely generated modules over it are finite.
-2. The nonzero input cohomology sheaves form finite lists. Inductively intersect
-chosen constructible stratifications. Their domains are actual fiber products;
-pullback along the two projections transports the given finite local constancy.
-The proved canonical composition comparison identifies the iterated restrictions;
-local constancy and finite module stalks are transported along its isomorphism.
-Retain the single whole-scheme stratum for the empty list, even on the empty scheme.
-3. Finite cohomological support supplies upper bounds. The canonical inverse-image
-map of coefficient rings is invertible, by uniqueness of the constant-sheaf
-adjunction with global sections. Restriction is therefore exact, preserving the
-upper bounds and commuting with cohomology.
-4. The restricted finite-local-constancy tensor lemma applies on every stratum.
-It combines exact restriction, derived tensor comparison, and Tag 094H over the
-finite Noetherian coefficient ring; it asserts no lower bound on the output.
-5. This partition and its finite locally constant restricted output cohomology
-are precisely a witness for constructibility in each degree.
+Source: Stacks Project, Pro-etale Cohomology, Tag 09BQ, lemma-tensor-c.
 -/
 theorem finiteTensor_constructible_cohomology
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]

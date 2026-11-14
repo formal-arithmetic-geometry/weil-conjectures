@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.DerivedScalarMate.ScalarMateRestriction
 /-! # The scalar mate in ordinary tensor coordinates
 
 Source: Stacks Project, Tags 03EK, 06YY, 07A4 and 07A6.
-(blueprint: lem-sfb-scalar-mate-ordinary-tensor-route).
 -/
 
 @[expose] public noncomputable section
@@ -116,23 +115,7 @@ private theorem ordinaryScalarIso_unit {Z T : Scheme.{u}} (f : Z ⟶ T)
 /-- The scalar mate computes the ordinary scalar/tensor route on a K-flat complex.
 This assertion involves no derived tensor presentation or geometric tensor comparison.
 
-Source: Stacks 03EK, 06YY, 07A6, the balanced scalar route before tensor descent
-(blueprint: lem-sfb-scalar-mate-ordinary-tensor-route).
-
-Proof: take the ordinary inverse scalar-adjunction mate of the restriction
-square. The derived scalar-adjunction unit normalization identifies its
-localization with scalarPullback.inv after the universal counits. Restriction
-of this equality is the exact restriction square on complexes. The ordinary
-extension/tensor identification sends b tensor p to p tensor b. Under inverse
-image its composite with the ordinary mate sends every local pure tensor to
-pullback(p) tensor pullback(b). The ordinary tensor pullback followed by the
-unit-normalized coefficient map has the same formula, for arbitrary local b.
-The inverse-image adjunction and the balanced tensor universal property give
-equality of sheaf maps. Apply the equality in each degree and sum the total
-complex, using the standard bifunctor comparison with a single coefficient.
-Localize and apply naturality of the exact restriction factors. This yields
-the displayed scalar-counit equation. No
-flatness of B or boundedness of P is used. -/
+Source: Stacks 03EK, 06YY, 07A6, the balanced scalar route before tensor descent. -/
 theorem scalarMate_ordinary_tensor_route
     {Z T : Scheme.{u}} (f : Z ⟶ T)
     {A B : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : A ⟶ B)

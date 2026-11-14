@@ -189,8 +189,8 @@ private theorem exists_geometricFiber_iso_of_quotient_equiv
   rw [he, Category.assoc, geometricFiberMap_comp_geometricGaloisFrobenius_pow,
     geometricFiberExtensionMap_comp_geometricGaloisFrobenius_pow_finrank_assoc]
 
-/-- **Finite-field models of closed subschemes of a geometric fiber** (blueprint:
-`corollary-curve-preserving-geometric-irreducibility--1`, "the curve and inclusion descend to a
+/-- **Finite-field models of closed subschemes of a geometric fiber** ("the curve and inclusion
+descend to a
 finite constant extension"). Let `f : X₀ ⟶ Spec k₀` be an affine scheme of finite type over a finite
 field, with geometric fiber `X`, and let `i : C ⟶ X` be a closed immersion of a smooth connected
 curve over `k̄₀` with a `k̄₀`-point `c₀`. For every `M > 0` there are a finite extension `L` of `k₀`

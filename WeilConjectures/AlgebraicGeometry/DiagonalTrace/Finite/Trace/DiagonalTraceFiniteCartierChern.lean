@@ -32,21 +32,7 @@ attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
 Chern arrow of the actual divisor line. The assertion precedes direct image
 along a projection and the geometric adjunction.
 
-Source: diagonal tower limit clause (3), positive finite Cartier reductions;
-`sk-prop-sp-tower-geometric-classes.proof.md` (2)--(3), the finite Kummer class;
-`lem-amb-cartier-kummer-map.proof.md`, forgetting support of the Cartier class.
-(blueprint: lem-sfb-diagonal-trace-finite-cartier-chern).
 
-Proof: unpack the normalized limit data. Write c for its strict supported Ext
-class, s for its source cone and t for its root cone. Postcompose the whole-system
-limit equation with projection n. Naturality of that projection and the exact
-single and shift comparisons identify the projected arrow with c evaluated at n,
-preceded by the source cone component. The source-cone generator equation and
-DiagonalSourceNormalization identify this source component with the canonical
-completed-to-finite supported coefficient quotient. The root-limit equation and
-the normalized root comparison identify the target with the finite root line.
-Precomposing completedSupportedUnit forgets support, because its underlying map
-is the direct-image coefficient map and it sends one to the supported section one.
 
 The finite-cycle normalization identifies the projected class with the positive
 Cartier reduction at exponent n+1. Cartier reduction existence and uniqueness

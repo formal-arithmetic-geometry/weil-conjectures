@@ -117,9 +117,6 @@ tensor, every ordered Tor interval, finite local models, bounded constructible f
 objects, triangulated and coproduct structure, localizing closures, and the two composites
 for each fixed compactification.
 
-Source: blueprint main-20261015, chap-Construction-of-f,
-theorem-f-shriek-finite-coefficients, coefficient-identification step
-(blueprint: lem-sf-module-object-ordinary-coefficient-equivalence).
 
 Proof following the twelve DAG steps:
 1. The finite-discrete condensed-ring constant comparison and its scheme inverse-image
@@ -129,7 +126,7 @@ followed by constantSchemeIso and upperStarFromPoint. Zero rings and empty schem
 ringIso. The maps and underlying abelian sheaves are identical. Both functors are additive
 and inverse equivalences preserve kernels and cokernels, hence are exact.
 3. Restrict to constant scalars to identify the intrinsic module category with fixed scalar
-module sheaves (lem-cbc-constant-ring-module-sheaves). Conversely local scalar sections act
+module sheaves. Conversely local scalar sections act
 by gluing constant actions. The unit and counit are identity on underlying sections.
 4. Apply situation-conventions to the two additive equivalences and
 inverses. Units and counits extend termwise and descend through quasi-isomorphisms. Homology,

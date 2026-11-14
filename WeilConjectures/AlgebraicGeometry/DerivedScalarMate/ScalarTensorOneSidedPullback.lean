@@ -42,7 +42,6 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 /-! # One-sided tensor coordinates and geometric pullback
 
 Source: Stacks Project, Tags 03EK, 06YY, 07A4 and 07A6.
-(blueprint: lem-sfb-scalar-tensor-one-sided-pullback).
 -/
 
 @[expose] public noncomputable section
@@ -93,19 +92,7 @@ private theorem coordinates_normalization {W : Scheme.{u}}
 /-- Pullback of the one-sided tensor coordinates is the localized ordinary tensor map.
 This assertion contains no scalar/pullback mate.
 
-Source: Stacks 06YY, 07A4, 07A6, the resolving calculation for the tensor route
-(blueprint: lem-sfb-scalar-tensor-one-sided-pullback).
-
-Proof: resolve the coefficient complex by q:Q→B[0] with Q flat-term K-flat.
-Pullback preserves both resolving conditions. Apply IsDerivedTensor at P,Q and
-at their pullbacks, using pullback(q) followed by the coefficient complex
-identification as the latter augmentation. Insert the representative square
-of the canonical tensor pullback. Naturality moves q through that square;
-naturality of the ordinary total comparison moves its cochain map. The two
-IsDerivedTensor equations cancel the ordinary scalar identifications. Cancel
-the localized resolution q and the representative isomorphisms. This works
-for nonflat B, since only P needs to be K-flat for the one-sided coordinates.
-The coefficient complex is concentrated in degree zero, so no new sign occurs. -/
+Source: Stacks 06YY, 07A4, 07A6, the resolving calculation for the tensor route. -/
 theorem tensorScalar_oneSided_pullback
     {Z T : Scheme.{u}} (f : Z ⟶ T)
     {A B : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : A ⟶ B)

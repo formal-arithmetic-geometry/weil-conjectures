@@ -16,8 +16,7 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Comp
 /-!
 # Étale extension by zero for locally closed immersions
 
-Source: literature/stacks-project/etale-cohomology.tex, Tag 0GJ1
-(blueprint: lem-sfb-etale-locally-closed-extension-comparison).
+Source: literature/stacks-project/etale-cohomology.tex, Tag 0GJ1.
 
 The finite-open comparison is stated for the canonical pullback square.  The
 closure-defined extension uses the scheme-theoretic image and its canonical
@@ -38,8 +37,7 @@ namespace AlgebraicGeometry
 
 /-- The closure-defined étale extension associated to a quasi-compact immersion.
 
-Source: Stacks Project, Morphisms, Tags 01R6--01R8
-(blueprint: lem-sfb-etale-locally-closed-extension-comparison). It is the composite of
+Source: Stacks Project, Morphisms, Tags 01R6--01R8. It is the composite of
 extension by zero along `a.toImage` and direct image along `a.imageι`.
 -/
 noncomputable def etaleLocallyClosedExtension
@@ -55,8 +53,7 @@ noncomputable def etaleLocallyClosedExtension
 /-- The canonical restriction normalization for the closure-defined extension.
 
 Source: literature/stacks-project/etale-cohomology.tex, Tags 0F70 and 04CA;
-Morphisms, Tags 01R6--01R8
-(blueprint: lem-sfb-etale-locally-closed-extension-comparison).
+Morphisms, Tags 01R6--01R8.
 
 This is the inverse of the open-extension unit, followed by the closed
 pushforward counit, with the pullback composition comparison for
@@ -89,8 +86,7 @@ noncomputable def etaleLocallyClosedExtensionRestrictionIso
 
 /-- The canonical restriction normalization for a closed-then-open factorization.
 
-Source: literature/stacks-project/etale-cohomology.tex, Tags 0F70, 04CA and 0GJ1
-(blueprint: lem-sfb-etale-locally-closed-extension-comparison).
+Source: literature/stacks-project/etale-cohomology.tex, Tags 0F70, 04CA and 0GJ1.
 
 The two adjunction units/counits and the pullback composition comparison specify
 the restriction to the identity on the locally closed source. -/
@@ -125,8 +121,7 @@ noncomputable def etaleFactorizationRestrictionIso
 /-- The canonical restriction normalization after a further closed immersion.
 
 Source: literature/stacks-project/etale-cohomology.tex, Tags 0F70 and 04CA;
-Morphisms, Tags 01R6--01R8
-(blueprint: lem-sfb-etale-locally-closed-extension-comparison).
+Morphisms, Tags 01R6--01R8.
 It uses pullback composition, the closed counit for `i`, and the closure normalization
 for `b`. -/
 noncomputable def etaleClosedCompositionRestrictionIso
@@ -277,8 +272,7 @@ private theorem closure_closed_composition_iso
 /-- Étale closed/open interchange and closure-defined extension by zero.
 
 Source: literature/stacks-project/etale-cohomology.tex, Tag 0GJ1,
-lemma-compatible-shriek-push-finite, together with Morphisms, Tags 01R6--01R8
-(blueprint: lem-sfb-etale-locally-closed-extension-comparison).
+lemma-compatible-shriek-push-finite, together with Morphisms, Tags 01R6--01R8.
 
 Proof route. (1) Closed immersions are finite, so
 `Etale.isIso_finiteOpenComparison` applied to

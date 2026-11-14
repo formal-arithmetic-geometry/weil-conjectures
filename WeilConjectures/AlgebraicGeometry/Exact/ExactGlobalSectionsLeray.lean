@@ -21,8 +21,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 /-- Exact global sections commute with homology; derived composition then gives Leray.
-Source: Stacks Project, Tags 03Q9 and 03QO
-(blueprint: def-weil-pbc-exact-global-sections-leray). -/
+Source: Stacks Project, Tags 03Q9 and 03QO. -/
 noncomputable def exactGlobalSectionsLerayHomologyIso {Y T : Scheme.{v}}
     (h : PreservesFiniteColimits (Sheaf.Γ T.smallEtaleTopology AddCommGrpCat.{v + 1}))
     (t : Y ⟶ T) (q : ℤ)

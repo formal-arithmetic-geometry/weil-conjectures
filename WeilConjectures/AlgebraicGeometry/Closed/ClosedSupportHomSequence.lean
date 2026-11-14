@@ -31,28 +31,28 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 /-- The standard sheafification property, named before constructing the support maps.
-Source: Stacks, Tag 00W1 (blueprint: new-lem-amb-closed-support-hom-sequence). -/
+Source: Stacks, Tag 00W1. -/
 theorem closedSupportEtaleHasSheafify (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) :
     HasSheafify T.smallEtaleTopology (ModuleCat.{u + 1} A) := inferInstance
 
 attribute [local instance 200000] closedSupportEtaleHasSheafify
 
 /-- The same weak sheafification instance, with its proof fixed once on the site.
-Source: Stacks, Tag 00W1 (blueprint: new-lem-amb-closed-support-hom-sequence). -/
+Source: Stacks, Tag 00W1. -/
 theorem closedSupportEtaleHasWeakSheafify (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) :
     HasWeakSheafify T.smallEtaleTopology (ModuleCat.{u + 1} A) := inferInstance
 
 attribute [local instance 200000] closedSupportEtaleHasWeakSheafify
 
 /-- Existence of the standard global-section adjunction, named once on the site.
-Source: Stacks, Tag 009F (blueprint: new-lem-amb-closed-support-hom-sequence). -/
+Source: Stacks, Tag 009F. -/
 theorem closedSupportEtaleHasGlobalSections (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) :
     HasGlobalSectionsFunctor T.smallEtaleTopology (ModuleCat.{u + 1} A) := inferInstance
 
 attribute [local instance 200000] closedSupportEtaleHasGlobalSections
 
 /-- The canonical abelian structure, with pointwise addition on sheaf morphisms exposed.
-Source: Stacks, Tag 03DA (blueprint: new-lem-amb-closed-support-hom-sequence). -/
+Source: Stacks, Tag 03DA. -/
 @[instance_reducible]
 noncomputable def closedSupportEtaleAbelian (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) :
     Abelian (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) :=
@@ -64,7 +64,7 @@ noncomputable def closedSupportEtaleAbelian (A : Type (u + 1)) [CommRing A] (T :
 attribute [local instance 200000] closedSupportEtaleAbelian
 
 /-- The existing linear structure on module sheaves, named for use in Hom functors.
-Source: Stacks, Tag 03DA (blueprint: new-lem-amb-closed-support-hom-sequence). -/
+Source: Stacks, Tag 03DA. -/
 @[instance_reducible]
 noncomputable def closedSupportEtaleLinear (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) :
     Linear A (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) := inferInstance
@@ -79,7 +79,7 @@ attribute [local instance 200000] AlgebraicGeometry.Etale.closedSupportEtaleLine
 
 namespace CategoryTheory
 /-- Canonical closed-support Hom and section normalization.
-Source: Stacks, Tags 0A45, 095L (blueprint: new-lem-amb-closed-support-hom-sequence). -/
+Source: Stacks, Tags 0A45, 095L. -/
 noncomputable def adjunctionHomLinearEquiv
     (R : Type*) [Ring R] {C D : Type*} [Category C] [Category D]
     [Preadditive C] [Preadditive D] [Linear R C] [Linear R D]
@@ -94,7 +94,7 @@ end CategoryTheory
 
 namespace AlgebraicGeometry.Etale
 /-- Canonical closed-support Hom and section normalization.
-Source: Stacks, Tags 0A45, 095L (blueprint: new-lem-amb-closed-support-hom-sequence). -/
+Source: Stacks, Tags 0A45, 095L. -/
 noncomputable def rankOneSectionsEquiv (A : Type (u + 1)) [CommRing A]
     (T : Scheme.{u}) (J : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) :
     (((constantSheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)).obj
@@ -114,7 +114,7 @@ noncomputable def rankOneSectionsEquiv (A : Type (u + 1)) [CommRing A]
         terminalIsTerminal).app J).symm.toLinearEquiv
 
 /-- Canonical closed-support Hom and section normalization.
-Source: Stacks, Tags 0A45, 095L (blueprint: new-lem-amb-closed-support-hom-sequence). -/
+Source: Stacks, Tags 0A45, 095L. -/
 lemma rankOneSectionsEquiv_naturality (A : Type (u + 1)) [CommRing A]
     (T : Scheme.{u}) {J J' : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)}
     (k : J ⟶ J') (f : ((constantSheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)).obj
@@ -173,7 +173,7 @@ end CategoryTheory
 
 namespace AlgebraicGeometry.Etale
 /-- The closed constant sheaf from which supported Hom is taken.
-Source: Stacks, Tag 095L (blueprint: new-lem-amb-closed-support-hom-sequence). -/
+Source: Stacks, Tag 095L. -/
 noncomputable def closedSupportHomSource (A : Type (u + 1)) [CommRing A]
     {D T : Scheme.{u}} (i : D ⟶ T) :
     Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A) :=
@@ -181,7 +181,7 @@ noncomputable def closedSupportHomSource (A : Type (u + 1)) [CommRing A]
     ((constantSheaf D.smallEtaleTopology (ModuleCat.{u + 1} A)).obj (ModuleCat.of A A))
 
 /-- The ordinary Hom functor used by the canonical closed-support sequence.
-Source: Stacks, Tag 0A45 (blueprint: new-lem-amb-closed-support-hom-sequence). -/
+Source: Stacks, Tag 0A45. -/
 noncomputable def closedSupportHomFunctor (A : Type (u + 1)) [CommRing A]
     {D T : Scheme.{u}} (i : D ⟶ T) :
     Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A) ⥤ ModuleCat.{u + 1} A :=
@@ -189,15 +189,14 @@ noncomputable def closedSupportHomFunctor (A : Type (u + 1)) [CommRing A]
     (op (closedSupportHomSource A i))
 
 /-- The closed-support Hom functor is additive.
-Source: Stacks, Tag 0A45 (blueprint: new-lem-amb-closed-support-hom-sequence). -/
+Source: Stacks, Tag 0A45. -/
 instance closedSupportHomFunctor_additive (A : Type (u + 1)) [CommRing A]
     {D T : Scheme.{u}} (i : D ⟶ T) : (closedSupportHomFunctor A i).Additive := by
   dsimp only [closedSupportHomFunctor]
   infer_instance
 
 /-- The canonical left map of the closed-support Hom sequence.
-Source: Stacks, Tags 095L, 0A45
-(blueprint: new-lem-amb-closed-support-hom-sequence). -/
+Source: Stacks, Tags 095L, 0A45. -/
 noncomputable def closedSupportHomToSections (A : Type (u + 1)) [CommRing A]
     {D T : Scheme.{u}} (i : D ⟶ T) :
     closedSupportHomFunctor A i ⟶ Sheaf.Γ T.smallEtaleTopology (ModuleCat.{u + 1} A) := by

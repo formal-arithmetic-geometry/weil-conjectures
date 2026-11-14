@@ -10,8 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Tensor.ProEtaleTensorPu
 import WeilConjectures.CategoryTheory.Exact.ExactRestrictionCompositionSupplement
 
 /-! # Normalization of exact derived coefficient pullback
-
-(blueprint: lem-pbc-coefficient-pullback-factorization)
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -203,14 +201,7 @@ attribute [local irreducible] CoefficientTensorChain.complexPullback pullback
 ordinary comparison on every complex.
 
 Source: exact derived functor identity, composition and natural-isomorphism
-factorizations; Stacks Tag 07A6.
-(blueprint: lem-pbc-coefficient-pullback-factorization)
-
-Proof: the identity derived comparison agrees with the identity exact-functor
-factorization. Apply mapDerivedCategoryCompIso_fac to both sides of the ordinary
-restriction mate, and mapDerivedCategoryNatIso_fac to that mate. Cancel the two
-composition comparisons. Removing the identity restriction leaves precisely the
-termwise ordinary comparison complexPullback. -/
+factorizations; Stacks Tag 07A6. -/
 theorem pullback_factors {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
     (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
@@ -257,8 +248,7 @@ theorem pullback_factors {X Y : Scheme.{u}} (f : X ⟶ Y)
   exact exactPullback_factors L U M e P
 
 /-- Product of the two canonical coefficient pullback factorization squares.
-Source: exact-derived factorization, Stacks Tag 07A6.
-(blueprint: lem-pbc-coefficient-pullback-factorization) -/
+Source: exact-derived factorization, Stacks Tag 07A6. -/
 theorem pullback_pair_factors {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
     (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})

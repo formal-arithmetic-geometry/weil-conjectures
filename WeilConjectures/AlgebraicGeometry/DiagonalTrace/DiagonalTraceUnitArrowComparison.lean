@@ -14,10 +14,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantModul
 import WeilConjectures.SixFunctors.ProEtale.Comparison.ConstantSheaf
 
 /-! # Comparison of the normalized coefficient unit arrows
-
-Source: blueprint latest, diagonal-tower trace proof, paragraph (1), the
-identification of the coefficient-unit component before applying (G2).
-(blueprint: lem-sfb-diagonal-trace-unit-arrow-comparison)
 -/
 
 @[expose] public noncomputable section
@@ -267,15 +263,7 @@ private def evaluatedUnitArrowIso
 /-- Evaluation and coefficient realization identify the actual coefficient unit
 with the image of the ordinary etale coefficient unit, as an arrow.
 
-Source: `sk-prop-diagonal-tower-trace.proof.md` (1), identification with the
-finite coefficient map, before applying projective-line cohomology (G2).
-(blueprint: lem-sfb-diagonal-trace-unit-arrow-comparison).
 
-Proof: the etale/pro-etale direct-image comparison is defined as the mate of
-its inverse-image comparison. Expanding this mate identifies the compared etale
-unit with the pro-etale adjunction unit followed by pushforward of the specified
-constant-object pullback isomorphism. In particular this argument does not need
-the direct-image comparison to be invertible.
 
 For the realization step, the intrinsic tensor direct image and the realized
 fixed-scalar direct image have the same coefficient map. Uniqueness of their

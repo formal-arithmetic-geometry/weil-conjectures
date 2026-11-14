@@ -89,14 +89,7 @@ private theorem openCoefficientTensorPullback_normalization
 
 /-- Scalar restriction of the open balancing isomorphism is the inverse open
 projection, with the canonical coefficient pullback.
-Source: Stacks Tag 0GL6 and the unit normalization of extension by zero
-(blueprint: lem-pur-etale-open-restricted-tensor-projection).
-
-Proof: transpose the inverse map under the open adjunction. The unit equations
-for scalar open change and open restriction, together with the scalar/tensor
-pullback square, identify this transpose with the tensor of the open unit
-followed by the inverse pullback/tensor comparison. This is the defining
-transpose of the open projection map. Invert the resulting equality. -/
+Source: Stacks Tag 0GL6 and the unit normalization of extension by zero. -/
 theorem etaleOpenRestrictedTensorProjection
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {U Z : Scheme.{u}} (j : U ⟶ Z) [IsOpenImmersion j]

@@ -41,8 +41,7 @@ import WeilConjectures.CategoryTheory.Sites.RGammaDerivedLimit
 import Mathlib.LinearAlgebra.Finsupp.LinearCombination
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 
-/-! Universe transport for finite-module injective acyclicity.
-(blueprint: lem-sfb-finite-injective-sections-acyclic). -/
+/-! Universe transport for finite-module injective acyclicity. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false

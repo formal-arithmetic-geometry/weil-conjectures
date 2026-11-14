@@ -22,7 +22,6 @@ import Mathlib.CategoryTheory.Triangulated.Adjunction
 
 Source: Stacks Project, Cohomology on Sites, Tags 0B56 and 07A4;
 Derived Categories, Tag 0A8D.
-(blueprint: lem-sfb-proetale-projection-first-variable-exact).
 -/
 
 @[expose] public noncomputable section
@@ -263,18 +262,8 @@ private theorem nativeComparisonShift
 
 /-- The native projection arrow is a transformation of exact functors of its
 first input. Source: Stacks 0B56, 07A4, 0A8D; the first-variable calculation of
-`ringedProjectionFirstShift`, for the original pro-etale site universes
-(blueprint: lem-sfb-proetale-projection-first-variable-exact).
+`ringedProjectionFirstShift`, for the original pro-etale site universes.
 
-Proof: resolve tensor inputs by flat-term K-flat complexes. Tensoring with a fixed
-such complex preserves acyclic complexes and sends the standard cone triangle to
-the cone triangle of its total tensor map: the unshifted summands have identity
-comparison and the shifted summands have the total-complex sign. Localization
-therefore makes tensoring in the first variable exact. The normalization hypotheses
-identify its shift with this cone-compatible shift on representatives, and resolving
-descent identifies it on every derived object. Exact pullback has its termwise shift;
-the compatible right adjoint shift makes direct image exact by the triangulated
-adjunction theorem. Composition proves exactness of the two displayed functors.
 
 Curry the canonical pullback/tensor comparison and fix the second argument P.
 Its first-variable shift square is checked on flat K-flat representatives: the

@@ -21,10 +21,6 @@ import WeilConjectures.AlgebraicGeometry.ZariskiEtaleCore
 
 /-!
 # From affine to global torsion cohomological dimension
-
-Source: literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/
-`lemma-uniform-bounds-pro-etale-affines`, Leray comparison step (blueprint:
-lemma-uniform-bounds-pro-etale-affines).
 -/
 
 @[expose] public section
@@ -192,18 +188,7 @@ set_option linter.unusedVariables false in
 /-- The comparison and Leray step turns the affine bound into the bound for a
 finite-type scheme.
 
-Source: the comparison-site proof of `lemma-uniform-bounds-pro-etale-affines` in the
-blueprint subsection `sec-smooth-purity/sk-prop-sf-cbc`.
 
-Proof: X is Noetherian: it is locally Noetherian by local finite type over a
-field and quasi-compact by quasi-compactness of its structure morphism. Let
-ε be the morphism from the small etale site to the Zariski site, whose direct
-image evaluates F on open subschemes. Its inverse image is exact, so its right
-adjoint preserves injectives. Abelian sheaves on either site form Grothendieck
-abelian categories (equivalently modules over the constant integer sheaf), and
-Zariski sections are left exact. The Grothendieck spectral sequence therefore
-has E₂^{p,r} = H^p(X_Zar, R^r ε_*F). Evaluation at the terminal open identifies
-Γ_Zar ε_* with Γ_et, so its abutment is H^{p+r}(X_et,F).
 
 For each point x the stalk of R^r ε_*F is the filtered colimit over open
 neighbourhoods V of H^r(V_et,F|V). Indeed apply ε_* to an injective resolution;
@@ -224,7 +209,6 @@ gives a finite filtration of H^q with zero graded pieces, and therefore H^q = 0.
 The same argument covers the empty scheme and d = 0; no separatedness of X is
 used. The field cohomological-dimension hypothesis is unnecessary here: it is
 used only to supply hAffine in the parent theorem.
-(blueprint: new-thm-sc-finite-type-torsion-cd-affine-reduction)
 -/
 theorem subsingleton_H_of_two_mul_add_lt_of_affine_bound
     {K : Type u} [Field K] (c d : ℕ)

@@ -76,9 +76,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
 import Mathlib.CategoryTheory.Monoidal.Tor
 
 /-! # Finite-reduction control for completed coefficient operations
-
-Source: blueprint proper base change, constructible-preservation proof, steps 1, 3--5.
-The conclusion records cohomology, before local models and etale witnesses are assembled.
 -/
 
 -- After pruning, this module only keeps private declarations.

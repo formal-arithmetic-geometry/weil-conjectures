@@ -185,8 +185,7 @@ private lemma peval_endpoint (a : Γ(S, ⊤)) (p : Poly σ S) :
  ring using the affine-space spectrum isomorphism. Apply polynomial rescaling.
  Evaluate its coordinate polynomials on the total space; the inverse coordinate
  polynomials give the inverse morphism. Polynomial extensionality shows that
- substitution commutes with evaluation and with the two parameter sections.
- (blueprint: lem-pur-polynomial-family-realization). -/
+ substitution commutes with evaluation and with the two parameter sections. -/
 theorem polynomial_deformation [IsAffine S] [Fintype σ] [DecidableEq σ]
     (e : AffineSpace σ S ≅ AffineSpace σ S)
     (he : e.hom ≫ AffineSpace σ S ↘ S = AffineSpace σ S ↘ S) :

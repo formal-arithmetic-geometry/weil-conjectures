@@ -64,7 +64,7 @@ variable [∀ X : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
 
 /-- Direct image preserves kernels because it is the right adjoint of module pullback.
-Source: Stacks, Tag 0096 (blueprint: def-weil-pbc-resolution-local-class-edge). -/
+Source: Stacks, Tag 0096. -/
 instance localClassEdge_preservesFiniteLimits {T S : Scheme.{u}} (g : T ⟶ S) :
     PreservesFiniteLimits (RingedSpace.moduleDirectImage g.toLRSHom.toShHom) := by
   change PreservesFiniteLimits (Scheme.Modules.pushforward g)
@@ -73,7 +73,7 @@ instance localClassEdge_preservesFiniteLimits {T S : Scheme.{u}} (g : T ⟶ S) :
   infer_instance
 
 /-- Identify derived homology with the homology of the fixed representative.
-Source: Stacks, Tag 079W (blueprint: def-weil-pbc-resolution-local-class-edge). -/
+Source: Stacks, Tag 079W. -/
 def localClassResolutionHomologyIso (X : Scheme.{u}) (q : ℤ)
     (K : schemeDerivedCategory X) :
     (DerivedCategory.homologyFunctor _ q).obj K ≅
@@ -83,7 +83,7 @@ def localClassResolutionHomologyIso (X : Scheme.{u}) (q : ℤ)
     (DerivedCategory.homologyFunctorFactors _ q).app _
 
 /-- Identify derived direct-image homology with the homology of the direct-image complex.
-Source: Stacks, Tag 079W (blueprint: def-weil-pbc-resolution-local-class-edge). -/
+Source: Stacks, Tag 079W. -/
 def localClassDirectImageHomologyIso {T S : Scheme.{u}} (g : T ⟶ S)
     (q : ℤ) (K : schemeDerivedCategory T) :
     (DerivedCategory.homologyFunctor.{w, u, u + 1}
@@ -99,8 +99,7 @@ def localClassDirectImageHomologyIso {T S : Scheme.{u}} (g : T ⟶ S)
 
 /-- The actual module edge: preserve the kernel of the outgoing differential and
 then descend its map to cohomology classes through the incoming boundaries.
-Source: Stacks, Tags 0BKJ and 079W
-(blueprint: def-weil-pbc-resolution-local-class-edge). -/
+Source: Stacks, Tags 0BKJ and 079W. -/
 def resolutionLocalClassEdge {T S : Scheme.{u}} (g : T ⟶ S) (q : ℤ)
     (K : schemeDerivedCategory T) :
     (DerivedCategory.homologyFunctor.{w, u, u + 1}
@@ -173,8 +172,7 @@ private theorem directImage_homology_square {T S : Scheme.{u}} (g : T ⟶ S) (q 
     HomologicalComplex.homologyFunctor_map] using hh
 
 /-- The constructed edge is natural in every derived morphism.
-Source: Stacks, Tags 0BKJ and 079W
-(blueprint: def-weil-pbc-resolution-local-class-edge). -/
+Source: Stacks, Tags 0BKJ and 079W. -/
 theorem resolutionLocalClassEdge_naturality {T S : Scheme.{u}} (g : T ⟶ S) (q : ℤ)
     {K L : schemeDerivedCategory T} (k : K ⟶ L) :
     (DerivedCategory.homologyFunctor.{w, u, u + 1}

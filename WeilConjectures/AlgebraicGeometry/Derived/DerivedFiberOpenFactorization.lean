@@ -13,7 +13,6 @@ import all WeilConjectures.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
 /-! # Factoring derived fibre cohomology through an open neighbourhood
 
 Source: Stacks Project, Tag 08DW.
-(blueprint: new-derived-fiber-open-factorization)
 -/
 
 @[expose] public section
@@ -78,16 +77,7 @@ theorem localDerivedFiberCohomologyFunctor_eq (W : Scheme.{v}) (w : W)
 attribute [irreducible] localDerivedFiberCohomologyFunctor
 
 /-- Restriction to a neighbourhood computes fibre cohomology naturally on derived arrows.
-Source: Stacks Project, Tag 08DW, compatibility with restriction to opens.
-(blueprint: new-derived-fiber-open-factorization)
-
-Proof: Factor the residue morphism through U using the inverse of the residue-field
-map of the open immersion. Derived pullback along U's inclusion is naturally exact
-restriction to the localized module site followed by its canonical equivalence
-with modules on U.toScheme. Compose this comparison with the natural composition
-isomorphism for derived pullback and the factorization equation. Take homology
-and field-valued global sections. Every comparison is a natural isomorphism,
-so this works for all derived objects and arrows, without perfectness or affinity. -/
+Source: Stacks Project, Tag 08DW, compatibility with restriction to opens. -/
 theorem derived_fiber_open_factorization (W : Scheme.{v}) (w : W)
     (U : W.Opens) (hwU : w ∈ U) (i : ℤ) :
     Nonempty ((SheafOfModules.overFunctor.{v}

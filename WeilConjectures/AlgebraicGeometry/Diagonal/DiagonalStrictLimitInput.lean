@@ -17,11 +17,7 @@ open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 open Lean Meta Elab Tactic
 namespace AlgebraicGeometry.ProEtale
 
-/-- Recover the strict witnesses and their finite heterogeneous equations.
-Source: normalizedBoundarySystem_iff_target
-(blueprint: lem-sfb-diagonal-strict-limit-input).
-Proof: apply the existing equivalence; the named finite input predicate is its
-finite endpoint and class equation, by definitional equality. -/
+/-- Recover the strict witnesses and their finite heterogeneous equations. -/
 theorem diagonal_strict_limit_input (ℓ : ℕ) [Fact ℓ.Prime]
     (Y : Scheme.{u}) (hY : IsUnit (ℓ : Γ(Y, ⊤)))
     [HasDerivedCategory.{u + 1} (DiagonalAb (diagonalSurface Y))]

@@ -62,7 +62,7 @@ namespace Ideal
 
 variable {R S : Type*} [CommRing R] [CommRing S] (I : Ideal R) (φ : R →+* S)
 
-/-- Blueprint `lemma-functoriality-deformation`: for `J = I S`, the extended Rees algebra
+/-- For `J = I S`, the extended Rees algebra
 `S[t, J t⁻¹]` is generated as a ring by `S` and the image of `R[t, I t⁻¹]`; i.e. the natural map
 `S ⊗_R R[t, I t⁻¹] ⟶ S[t, (I S) t⁻¹]` is surjective. -/
 theorem mem_closure_extendedReesAlgebraMap {J : Ideal S} (hJ : I.map φ = J)
@@ -116,7 +116,7 @@ theorem mem_closure_extendedReesAlgebraMap {J : Ideal S} (hJ : I.map φ = J)
   | add x y _ _ ihx ihy => exact M.add_mem ihx ihy
   | mul x y _ _ ihx ihy => exact M.mul_mem ihx ihy
 
-/-- Blueprint `lemma-functoriality-deformation` (c), affine-locally: along a flat `φ : R ⟶ S`, the
+/-- Along a flat `φ : R ⟶ S`, the
 extended Rees algebra of any ideal `J = I S` is the base change of the one of `I`. -/
 lemma isPushout_extendedReesAlgebraMap_of_flat_of_eq {R S : Type u} [CommRing R] [CommRing S]
     (φ : R →+* S) (hφ : φ.Flat) (I : Ideal R) (J : Ideal S) (hJ : I.map φ = J) :
@@ -270,8 +270,7 @@ lemma map_siteIdeal_le_comap ⦃U' : X'.AffineZariskiSite⦄ ⦃U : X.AffineZari
     (I.siteIdeal U).map (h.appLE U.1 U'.1 hU).hom ≤ (I.comap h).siteIdeal U' :=
   (ideal_comap_appLE I h ⟨U.1, U.2⟩ ⟨U'.1, U'.2⟩ hU).ge
 
-/-- The morphism `D_J X' ⟶ X' ×_X D_I X` induced by `D_J X' ⟶ D_I X` and `D_J X' ⟶ X'`
-(blueprint `lemma-functoriality-deformation`). -/
+/-- The morphism `D_J X' ⟶ X' ×_X D_I X` induced by `D_J X' ⟶ D_I X` and `D_J X' ⟶ X'`. -/
 noncomputable def deformationSpaceToPullback :
     J.deformationSpace ⟶ pullback I.deformationSpaceProj h :=
   (extendedReesPullbackData h I J hJ).toPullback _ _
@@ -286,7 +285,7 @@ lemma deformationSpaceToPullback_snd :
     deformationSpaceToPullback h I J hJ ≫ pullback.snd _ _ = J.deformationSpaceProj :=
   PullbackData.toPullback_snd _ _ _
 
-/-- Blueprint `lemma-functoriality-deformation` (a): if `J = h⁻¹ I` is the ideal sheaf of the
+/-- If `J = h⁻¹ I` is the ideal sheaf of the
 scheme-theoretic preimage, then `D_J X' ⟶ X' ×_X D_I X` is a closed immersion. -/
 theorem isClosedImmersion_deformationSpaceToPullback (hJI : J = I.comap h) :
     IsClosedImmersion (deformationSpaceToPullback h I J hJ) := by
@@ -296,7 +295,7 @@ theorem isClosedImmersion_deformationSpaceToPullback (hJI : J = I.comap h) :
   exact ⟨U', U, hU, hx, Ideal.mem_closure_extendedReesAlgebraMap _ _
     (ideal_comap_appLE I h ⟨U.1, U.2⟩ ⟨U'.1, U'.2⟩ hU).symm⟩
 
-/-- Blueprint `lemma-functoriality-deformation` (b): if `h` is proper and `J = h⁻¹ I`, then
+/-- If `h` is proper and `J = h⁻¹ I`, then
 `D_J X' ⟶ D_I X` is proper. -/
 theorem isProper_deformationSpaceMap [IsProper h] (hJI : J = I.comap h) :
     IsProper (deformationSpaceMap h I J hJ) := by
@@ -306,7 +305,7 @@ theorem isProper_deformationSpaceMap [IsProper h] (hJI : J = I.comap h) :
   rw [← deformationSpaceToPullback_fst]
   infer_instance
 
-/-- Blueprint `lemma-functoriality-deformation` (b): if `h` is a closed immersion and `J = h⁻¹ I`,
+/-- If `h` is a closed immersion and `J = h⁻¹ I`,
 then `D_J X' ⟶ D_I X` is a closed immersion. -/
 theorem isClosedImmersion_deformationSpaceMap [IsClosedImmersion h] (hJI : J = I.comap h) :
     IsClosedImmersion (deformationSpaceMap h I J hJ) := by
@@ -316,7 +315,7 @@ theorem isClosedImmersion_deformationSpaceMap [IsClosedImmersion h] (hJI : J = I
   rw [← deformationSpaceToPullback_fst]
   infer_instance
 
-/-- Blueprint `lemma-functoriality-deformation` (b): if `h` is finite and `J = h⁻¹ I`, then
+/-- If `h` is finite and `J = h⁻¹ I`, then
 `D_J X' ⟶ D_I X` is finite. -/
 theorem isFinite_deformationSpaceMap [IsFinite h] (hJI : J = I.comap h) :
     IsFinite (deformationSpaceMap h I J hJ) := by
@@ -326,7 +325,7 @@ theorem isFinite_deformationSpaceMap [IsFinite h] (hJI : J = I.comap h) :
   rw [← deformationSpaceToPullback_fst]
   infer_instance
 
-/-- Blueprint `lemma-functoriality-deformation` (c): if `h` is flat and `J = h⁻¹ I`, then
+/-- If `h` is flat and `J = h⁻¹ I`, then
 `D_J X' = X' ×_X D_I X`. -/
 theorem isPullback_deformationSpaceMap_of_flat [Flat h] (hJI : J = I.comap h) :
     IsPullback (deformationSpaceMap h I J hJ) J.deformationSpaceProj I.deformationSpaceProj h := by
@@ -337,7 +336,7 @@ theorem isPullback_deformationSpaceMap_of_flat [Flat h] (hJI : J = I.comap h) :
     (HasRingHomProperty.appLE @Flat h ‹_› ⟨U.1, U.2⟩ ⟨U'.1, U'.2⟩ hU) _ _
     (ideal_comap_appLE I h ⟨U.1, U.2⟩ ⟨U'.1, U'.2⟩ hU).symm⟩
 
-/-- Blueprint `lemma-functoriality-deformation` (c): if `h` is flat (e.g. an open immersion) and
+/-- If `h` is flat (e.g. an open immersion) and
 `J = h⁻¹ I`, then `D_J X' ⟶ X' ×_X D_I X` is an isomorphism. -/
 theorem isIso_deformationSpaceToPullback_of_flat [Flat h] (hJI : J = I.comap h) :
     IsIso (deformationSpaceToPullback h I J hJ) := by

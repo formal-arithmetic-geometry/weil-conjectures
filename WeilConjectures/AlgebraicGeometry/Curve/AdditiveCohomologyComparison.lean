@@ -111,36 +111,7 @@ private theorem map_smulHom_field
 structure-sheaf cohomology, including its canonical scalar maps.
 Source: Stacks Project, Tags 03P2 and 03FD; the coefficient-universe argument
 is the separated-case finite affine open cover argument of Tag 03P2,
-applied in each coefficient universe.
-(blueprint: lem-sc-additive-cohomology-scalar-comparison)
-
-Proof: Identify G sectionwise with the universe lift of the associated etale
-sheaf of the unit O_C-module. The unit tensor-pullback identifications turn a
-into this sheaf isomorphism; ha is precisely its naturality. Apply the natural
-Ext/derived comparison to the sheaf in degree zero. C is quasi-compact and
-separated: IsCurve f supplies quasi-compactness and separatedness over Spec k,
-and the latter is separated over the terminal scheme. Choose a finite affine
-open cover of C. All finite intersections are affine. Both the associated
-etale sheaf and its coefficient lift are acyclic on these intersections by
-affine quasi-coherent acyclicity in their respective coefficient universes.
-Thus the Cech-to-cohomology spectral sequence has only its degree-zero row
-and identifies each degree-one group with the Cech complex's first homology.
-In every degree the cover tuples form a finite set. Lowering the finitely
-many lifted components identifies the two cochain groups and commutes with
-restrictions and alternating sums. It identifies kernels and images, hence
-induces an additive equivalence of first cohomology. These comparisons are
-natural in module endomorphisms: their maps act componentwise on this same
-cover and commute with the differentials. No preservation of injective
-objects by ULift is used. Compose with the natural etale/Zariski comparison
-and the natural module/underlying-abelian comparison. Reindex Ext universes
-through their Hom-in-the-derived-category descriptions, naturally in both
-arguments. The result is e with codomain the source library's ordinary H^1.
-For each c, the section formula identifies mu uniquely with multiplication
-by the global section f^*(c). Pullback of the unit module identifies this
-map on an etale object with multiplication by its pulled-back section.
-The comparisons above therefore intertwine these maps. By the definition
-of moduleH and moduleHOfField, the map on ordinary H^1 is precisely c-smul.
-This gives the stated identity, without properness, smoothness or finiteness. -/
+applied in each coefficient universe. -/
 theorem exists_addEquiv_etaleCohomology_one_structureSheaf
     {k : Type u} [Field k] {C : Scheme.{u}}
     (f : C ⟶ Spec (.of k)) [IsCurve f]

@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.Curve.PrimeCoefficientCurveAssertions
 # Algebraically closed extension for reduced proper curves
 
 Source: Stacks Project, Theorem 03SC, item (7), and Lemmas 03SD, 0A3Q, 03SG.
-(blueprint: e1-algebraically-closed-cohomology-invariant)
 -/
 
 @[expose] public section
@@ -28,8 +27,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.IsCurve
 
 /-- Field extension invariance for reduced proper curves with constructible prime coefficients.
-Source: Stacks Project, 03SC (theorem-vanishing-affine-curves), item (7).
-(blueprint: e1-algebraically-closed-cohomology-invariant)
+Source: Stacks Project, 03SC, item (7).
 
 1. Apply `primeCoefficientCurveAssertions` to `f` and `F`. Its hypotheses are the existing
 algebraically closed base field, reduced curve, prime `r`, and constructible sheaf; properness

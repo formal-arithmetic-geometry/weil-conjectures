@@ -30,8 +30,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 /-! # The proper site-comparison factor
 
 Source: Stacks Project, Tags 09A6, 09AF and 099R; the factor calculation in
-lem-amb-compact-support-site-comparison-open
-(blueprint: lem-amb-compact-support-proper-factor).
+lem-amb-compact-support-site-comparison-open.
 -/
 
 @[expose] public noncomputable section
@@ -219,16 +218,7 @@ private theorem etale_mate_eq (A : Type (u + 1)) [CommRing A]
 
 /-- The proper factor of the compact-support site-comparison square.
 Source: Stacks Project, Tags 099R and 0B65; step 4 of
-lem-amb-compact-support-site-comparison-open
-(blueprint: lem-amb-compact-support-proper-factor).
-
-Proof: the two direct-image comparisons are the counit-normalized mates. Expand
-both proper exchanges as mates of the pullback square. Transpose the two paths
-under the target pullback/direct-image adjunction. Naturality moves the source
-comparison through the counit. The defining counit identity of the comparison
-mate cancels it. Composition coherence of the inverse-image comparison identifies
-the remaining two pullback paths. Injectivity of transposition proves the equation.
-No exchange is cancelled, and invertibility of either exchange is not required. -/
+lem-amb-compact-support-site-comparison-open. -/
 theorem compactSupportProperFactor (A : Type (u + 1)) [CommRing A] [Finite A]
     {Z' Z S' S : Scheme.{u}} {h : Z' ⟶ Z} {p' : Z' ⟶ S'}
     {p : Z ⟶ S} {a : S' ⟶ S} [QuasiCompact p] [QuasiSeparated p]

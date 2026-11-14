@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
 
 Source: Stacks Project, Tag 09MS, the graded direct-sum ideal sequence;
 Tag 0B8S, the quotient action on a square-zero ideal.
-(blueprint: lem-sc-square-zero-tensor-graded-action-projection-first).
 -/
 
 @[expose] public section
@@ -145,23 +144,7 @@ on the degree-n(e+1) coefficient.
 
 Source: Stacks Project, Tag 09MS, the graded direct-sum ideal sequence;
 Tag 0B8S, quotient multiplication on the square-zero ideal;
-Tag 01XC, naturality of the affine cohomology comparison.
-(blueprint: lem-sc-square-zero-tensor-graded-action-projection-first).
-Proof: The inclusion i is mono by short exactness, so hlocal uniquely determines the
-quotient action. Lift the homogeneous quotient section locally through the degreewise
-unit. On each kernel summand k_d, use k_inclusion and b_multiply to compute multiplication
-by this lift. Project to degree n(e+2); k_projection gives the diagonal term and
-k_orthogonal kills every other input degree. The surviving input degree is
-n(e+1). If n=0 this is a diagonal calculation in degree zero; no distinct-degree
-assumption is needed. The colimit cofan k determines the map from these summands.
-Changing a lift by a kernel section changes no product, since the ideal is square zero.
-Restriction compatibility glues these local identities, and hglobal identifies the
-resulting global action with mu. Apply H^1 and use haction. Transport the resulting
-square through the canonical ideal-kernel, annihilated-module unit, affine cohomology,
-and tensor-degree comparisons fixed by hD. Naturality identifies the transported map
-with mulTensorPowSection f F e 1;
-evaluating gives the stated equation.
-The identity holds for every class, including the zero class and zero section. -/
+Tag 01XC, naturality of the affine cohomology comparison. -/
 theorem tensorGradedAction_projection_first {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)
     (n : ℕ) (T : TensorGradedPresentation j L) (D : TensorBoundaryComparisonData j L n)

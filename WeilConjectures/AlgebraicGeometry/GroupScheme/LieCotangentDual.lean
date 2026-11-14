@@ -15,9 +15,6 @@ public import WeilConjectures.AlgebraicGeometry.GroupScheme.LieIdentityTangentEq
 
 /-!
 # The Lie algebra and the cotangent dual at the identity
-
-Source: blueprint `proposition-cartier-s-theorem`, third paragraph, and the dimension paragraph of
-`lemma-connected-components-images-homomorphisms--3`.
 -/
 
 @[expose] public section

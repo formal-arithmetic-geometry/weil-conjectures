@@ -16,7 +16,7 @@ public import Mathlib.RingTheory.Finiteness.ModuleFinitePresentation
 # The Hilbert functor of points of an affine space
 
 For an affine scheme `S` and a type `n`, the Hilbert functor `Hilb^d` of the affine space
-`𝔸(n; S) ⟶ S` is representable (blueprint `theorem-hilbert-schemes-points-smooth-curve--1`, Step 4).
+`𝔸(n; S) ⟶ S` is representable (Step 4).
 For a family `w` of `d` polynomials with coefficients in `R = Γ(S, ⊤)`, the subfunctor `F_w` of
 those `Z` for which the images of the `w l` form a basis of `𝒪_Z` is represented by the spectrum of
 the universal ring `MvPolynomial.QuotientBasisRing w`; these subfunctors are open, and they cover
@@ -358,8 +358,8 @@ private lemma range_subset_compl_zeroLocus_iff {T W : Scheme.{u}} [IsAffine W] (
     ← Scheme.preimage_basicOpen_top]
   rfl
 
-/-- **The Hilbert functor of an affine space over an affine base** (blueprint
-`theorem-hilbert-schemes-points-smooth-curve--1`, Step 4). For an affine scheme `S` and any set `n`
+/-- **The Hilbert functor of an affine space over an affine base** (Step 4). For an affine scheme
+`S` and any set `n`
 of variables, `Hilb^d` of the affine space `𝔸(n; S) ⟶ S` is representable. It is glued from the
 affine schemes representing the subfunctors `F_W`, for `W` a set of `d` polynomials, of those `Z`
 for which the images of the elements of `W` form a basis of `𝒪_Z`; these subfunctors are open and

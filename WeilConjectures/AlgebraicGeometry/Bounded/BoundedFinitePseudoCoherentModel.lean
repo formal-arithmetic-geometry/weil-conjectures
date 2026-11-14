@@ -12,7 +12,6 @@ import Mathlib.Algebra.Category.ModuleCat.EpiMono
 /-! # Bounded finite representatives of pseudo-coherent complexes
 
 Source: Stacks Project, More on Algebra, Tag 066E.
-(blueprint: lem-weil-pbc-bounded-finite-pseudocoherent-model).
 -/
 
 @[expose] public noncomputable section
@@ -27,16 +26,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- A cohomologically bounded pseudo-coherent object over a Noetherian ring has
 finite terms in precisely the prescribed interval.
-Source: Stacks, More on Algebra, Tag 066E, and truncation of complexes.
-(blueprint: lem-weil-pbc-bounded-finite-pseudocoherent-model).
-
-Proof: take a bounded-above finite-free representative from pseudo-coherence.
-Truncate above b, replacing degree b by its cycles, a finite submodule over the
-Noetherian ring. The upper cohomology bound makes this a quasi-isomorphism.
-Truncate below a, replacing degree a by the cokernel of the incoming differential,
-which is finite. The lower bound makes the second truncation a quasi-isomorphism.
-Compose the two localization isomorphisms. Both strict term bounds hold even when
-a>b, since then the derived object is zero. -/
+Source: Stacks, More on Algebra, Tag 066E, and truncation of complexes. -/
 theorem exists_boundedFinite_model {R : Type u} [CommRing R] [IsNoetherianRing R]
     [HasDerivedCategory.{v} (ModuleCat.{u} R)]
     (C : DerivedCategory (ModuleCat.{u} R)) (a b : ℤ) (hC : DerivedCategory.IsPseudoCoherent C)

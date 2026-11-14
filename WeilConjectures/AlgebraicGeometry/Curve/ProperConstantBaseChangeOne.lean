@@ -28,10 +28,6 @@ variable [CommRing Λ]
 variable {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}
   (f : C ⟶ Spec (.of k))
 /-- Proper constant-sheaf base change in the one degree.
-(blueprint: lemma-weil-pbc-smooth-curve-proper-base-change-one)
-Proof: for r invertible in k, use prime-injective comparison and transport the standard
-pullback square. In characteristic r, identify the comparison through Artin--Schreier
-and apply finite-dimensional Frobenius fixed-point invariance coordinatewise.
 -/
 theorem proper_constant_base_change_one [IsCurve f] [Smooth f] [ConnectedSpace C]
     [IsProper f] (r : ℕ) [Fact r.Prime] (k' : Type u) [Field k']

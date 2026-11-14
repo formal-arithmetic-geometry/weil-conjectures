@@ -100,8 +100,7 @@ theorem exists_differential_kerι_eq {x : Lie G} (hx : differential f x = 0) :
   exact Subtype.ext (GrpObj.kerLift_kerι _ _ _)
 
 /-- **The Lie algebra of a kernel.** The tangent vectors of `G` tangent to the kernel of a
-homomorphism `f` are those killed by `df`: `Lie(ker f) = ker(df)`.
-(blueprint: `lemma-stable-subspaces-center`) -/
+homomorphism `f` are those killed by `df`: `Lie(ker f) = ker(df)`. -/
 theorem mem_range_differential_kerι_iff (x : Lie G) :
     x ∈ (differential (GrpObj.kerι f)).range ↔ differential f x = 0 := by
   refine ⟨?_, fun hx ↦ (LieHom.mem_range _ _).2 (exists_differential_kerι_eq f hx)⟩
@@ -114,7 +113,7 @@ theorem range_differential_kerι :
     LieHom.mem_ker.symm
 
 /-- The Lie algebra of the kernel of `f` is the kernel of `df`, through the injective
-differential of the inclusion `ker f ⟶ G`. (blueprint: `lemma-stable-subspaces-center`) -/
+differential of the inclusion `ker f ⟶ G`. -/
 noncomputable def lieEquivKer : Lie (GrpObj.ker f) ≃ₗ⁅k⁆ (differential f).ker :=
   (LieEquiv.ofInjective _ (differential_injective (GrpObj.kerι f))).trans
     (LieEquiv.ofEq _ _ (congrArg (fun L : LieSubalgebra k (Lie G) ↦ (L : Set (Lie G)))
@@ -161,8 +160,7 @@ theorem exists_differential_eqLocusι_eq {x : Lie G} (hx : differential f x = di
   exact Subtype.ext (GrpObj.eqLocusLift_eqLocusι f g p.1 hp)
 
 /-- **The Lie algebra of an equalizer.** The tangent vectors of `G` tangent to the equalizer of
-two homomorphisms `f` and `g` are those on which `df` and `dg` agree.
-(blueprint: `lemma-stable-subspaces-center`) -/
+two homomorphisms `f` and `g` are those on which `df` and `dg` agree. -/
 theorem mem_range_differential_eqLocusι_iff (x : Lie G) :
     x ∈ (differential (GrpObj.eqLocusι f g)).range ↔ differential f x = differential g x := by
   refine ⟨?_, fun hx ↦ (LieHom.mem_range _ _).2 (exists_differential_eqLocusι_eq f g hx)⟩
@@ -192,7 +190,7 @@ variable (g : 𝟙_ (Over (Spec (.of k))) ⟶ G)
 
 /-- The centralizer `C_G(g)` of a rational point `g` of a group scheme `G` over `k`: the
 equalizer of the conjugation `c_g : x ↦ g x g⁻¹` and the identity of `G`, a closed subgroup
-scheme. (blueprint: `lemma-stable-subspaces-center`) -/
+scheme. -/
 noncomputable abbrev centralizer : Over (Spec (.of k)) :=
   GrpObj.eqLocus (conjBy G g) (𝟙 G)
 
@@ -212,8 +210,7 @@ theorem exists_comp_centralizerι_iff {X : Over (Spec (.of k))} (x : X ⟶ G) :
     mul_inv_eq_iff_eq_mul]
 
 /-- **The Lie algebra of a centralizer.** The Lie algebra of the centralizer `C_G(g)` of a
-rational point `g` is the subspace of `Lie(G)` fixed by the adjoint action `d(c_g)` of `g`.
-(blueprint: `lemma-stable-subspaces-center`) -/
+rational point `g` is the subspace of `Lie(G)` fixed by the adjoint action `d(c_g)` of `g`. -/
 theorem mem_range_differential_centralizerι_iff (x : Lie G) :
     x ∈ (differential (centralizerι g)).range ↔ differential (conjBy G g) x = x := by
   rw [mem_range_differential_eqLocusι_iff, differential_id, LieHom.id_apply]

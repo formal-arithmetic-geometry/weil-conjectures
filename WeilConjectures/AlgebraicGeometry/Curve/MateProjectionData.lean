@@ -30,8 +30,7 @@ open AlgebraicGeometry
 namespace AlgebraicGeometry.Etale
 
 /-- Exact strict-local sections and Leray identify the target with limit cohomology.
-Source: Stacks, Tags 03Q9 and 03QO
-(blueprint: def-weil-pbc-small-model-mate-projection-data). -/
+Source: Stacks, Tags 03Q9 and 03QO. -/
 noncomputable def smallModel_strictLocalBaseChangeTargetIso
     {X S : Scheme.{v}} (f : X ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
@@ -56,8 +55,7 @@ noncomputable def smallModel_strictLocalBaseChangeTargetIso
 
 /-- Hypercohomology identifications, their transitions, and their compatibility with
 projection restriction. There is no source colimit assertion in this data.
-Source: Stacks, Tag 03Q9, final proof paragraph
-(blueprint: def-weil-pbc-small-model-mate-projection-data). -/
+Source: Stacks, Tag 03Q9, final proof paragraph. -/
 structure SmallModelStrictLocalMateProjectionData
     {X S : Scheme.{v}} (f : X ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)

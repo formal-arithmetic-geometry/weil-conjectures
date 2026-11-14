@@ -16,8 +16,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 # Continuous coefficient sheaves and immersion restriction
 
 Source: Bhatt--Scholze, Lemmas 4.2.12 and 6.5.8(1), Definition 6.8.1,
-Lemma 6.8.2 and the paragraph preceding Definition 6.8.6
-(blueprint: lem-weil-pbc-continuous-coefficients-immersion-restriction).
+Lemma 6.8.2 and the paragraph preceding Definition 6.8.6.
 -/
 
 @[expose] public section
@@ -34,22 +33,17 @@ functions pointwise. The localization comparison is fixed on all integral numera
 The immersion comparisons have the continuous-function pullback adjuncts. The last two
 clauses are equalities of sheaf maps expressing coefficient and composition compatibility.
 Source: Bhatt--Scholze, Lemmas 4.2.12, 6.5.8(1), Definition 6.8.1, Lemma 6.8.2(1),(2)
-and paragraph before Definition 6.8.6
-(blueprint: lem-weil-pbc-continuous-coefficients-immersion-restriction).
+and paragraph before Definition 6.8.6.
 
 Proof, following the node's six steps:
-1. Continuous abelian functions satisfy fpqc descent
-(`lem-cbc-continuous-functions-fpqc-sheaf`). Pro-etale coverings are fpqc coverings;
-pointwise operations and the underlying-set criterion
-(`situation-conventions`) give ring sheaves.
+1. Continuous abelian functions satisfy fpqc descent. Pro-etale coverings are fpqc coverings;
+pointwise operations and the underlying-set criterion give ring sheaves.
 2. For each discrete quotient, glue constants on the open fibres of a continuous function.
-Open immersions and their composites are weakly etale
-(`lem-weil-proetale-weakly-etale-localization`), and affine quasi-compactness verifies
-these fibre covers are site coverings. This gives the constant-sheaf universal property
-(`def-weil-pbc-constant-sheaf`, `def-weil-pbc-sheafification`), preserving constants.
-3. Compute limits sectionwise (`def-pur-sheaf-inverse-limit`). Compatible residues lift
-pointwise to a unique element of the complete valuation ring
-(`lem-weil-l-adic-extension-complete`, `lem-weil-l-adic-extension-integers-dvr`).
+Open immersions and their composites are weakly etale, and affine quasi-compactness verifies
+these fibre covers are site coverings. This gives the constant-sheaf universal property, preserving
+constants.
+3. Compute limits sectionwise. Compatible residues lift
+pointwise to a unique element of the complete valuation ring.
 The congruence cosets form an open neighbourhood basis, so the lift is continuous.
 Reduction and lifting are inverse ring maps and commute with restriction.
 4. The fraction map is injective pointwise. A continuous rational function is integral
@@ -62,7 +56,7 @@ power of the uniformizer identifies this localization with that of Lemma 6.8.2(2
 `prop-weil-pbc-proetale-constant-ring-map` to each finite discrete quotient (finite by
 `lem-weil-valued-dvr-finite-quotients`). The resulting limit map is precomposition after
 every residue projection and hence is precisely the normalized integral comparison.
-6. Ring-sheaf inverse image (`def-weil-proetale-inverse-image`) commutes with localization
+6. Ring-sheaf inverse image commutes with localization
 by its adjunction and the localization universal property. This gives rational restriction.
 Integral inclusion and fractions commute with precomposition, proving the coefficient
 square. Successive precomposition equals composite precomposition; after the canonical

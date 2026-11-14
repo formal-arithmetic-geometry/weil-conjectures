@@ -311,16 +311,7 @@ private theorem open_tensor_transition {m n : ℕ} (h : n ≤ m)
     tX tZ (fun H ↦ inverse_tensor_transition (S := S) h H) K
 
 /-- The canonical compact-support evaluation respects actual derived transitions.
-Source: Zheng, Construction 5.15 and Lemma 5.16, printed pp. 34--35
-(blueprint: lem-pur-etale-brown-support-transition).
-
-Proof: transpose the strict transition square of the open and proper image
-comparisons through their recorded scalar adjunctions. The open and proper mate
-identities identify the resulting squares with the inverse-image tensor transition
-and direct-image transition. Paste the two squares using projection_def and
-naturality of properProjection, then expand S.evaluation and cancel the comparison
-isomorphisms. This gives the displayed equation for every unbounded derived input.
-The argument uses no flatness or boundedness assumption. -/
+Source: Zheng, Construction 5.15 and Lemma 5.16, printed pp. 34--35. -/
 theorem etaleBrownSupportTransition {m n : ℕ} (h : n ≤ m)
     (K : DerivedCategory (strictEtaleCoefficientSystem X O t)) :
     (S.levelFunctor n).map

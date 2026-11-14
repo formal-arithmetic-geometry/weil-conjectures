@@ -15,8 +15,7 @@ import Mathlib.Algebra.FiveLemma
 /-! # Mayer--Vietoris gluing of the canonical flat base-change comparison
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 30.5.2 (Tag 02KH),
-the Mayer--Vietoris alternative in the quasi-separated paragraph
-(blueprint: lem-pc-flat-cohomology-gluing).
+the Mayer--Vietoris alternative in the quasi-separated paragraph.
 -/
 
 @[expose] public section
@@ -31,21 +30,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 on the two opens and their intersection are bijective in every degree.
 
 Source: Stacks Project, Lemma 30.5.2 (Tag 02KH), Mayer--Vietoris alternative.
-(blueprint: lem-pc-flat-cohomology-gluing)
 
-Proof: The inverse images of U and V cover X_S; inverse image preserves their
-intersection. Form the Mayer--Vietoris sequences for M on X and its pullback on
-X_S. Tensor the former sequence with S; flatness preserves exactness, and tensor
-commutes with the binary direct sums. The canonical comparisons H.baseChange give
-a map between the two exact sequences. Compatibility with restrictions follows
-from functoriality of pullback and its adjunction unit. Compatibility with the
-connecting maps follows by applying the exact inverse-image functor to the Ext
-classes defining the boundaries, or by a common injective Cech resolution.
-The canonical iterated-pullback isomorphisms identify the three outside comparisons
-with those in the hypotheses. In positive degree apply the five lemma to the
-five terms ending and starting at the adjacent intersection cohomology groups.
-In degree zero use the initial left-exact segment starting with zero. Thus the
-comparison on X is bijective in all degrees.
 
 No affineness of U intersect V is asserted. In the eventual qcqs induction that
 intersection is only compact and separated, and is handled by the separated-case

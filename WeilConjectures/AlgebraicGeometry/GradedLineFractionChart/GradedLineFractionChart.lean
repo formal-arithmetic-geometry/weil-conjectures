@@ -10,8 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator
 
 /-! # Spectrum charts of a graded line map
 
-Source: Stacks Project, Constructions, Tags 01NK and 01O9
-(blueprint: def-trf-graded-line-fraction-chart).
+Source: Stacks Project, Constructions, Tags 01NK and 01O9.
 -/
 
 @[expose] public section
@@ -25,7 +24,7 @@ open CategoryTheory Opposite MonoidalCategory
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- An affine base chart, an affine framed source chart, and a positive-degree denominator.
-Source: Stacks, Tags 01NK and 01O9 (blueprint: def-trf-graded-line-fraction-chart). -/
+Source: Stacks, Tags 01NK and 01O9. -/
 structure GradedLineFractionChart {S T : Scheme.{u}} (h : T ⟶ S)
     (A : S.GradedAlgebraData) (L : T.Modules) where
   U : S.affineOpens
@@ -38,7 +37,7 @@ structure GradedLineFractionChart {S T : Scheme.{u}} (h : T ⟶ S)
   e : A.grading U d
 
 /-- A family of frame coefficients; its defining equations are imposed separately.
-Source: Stacks, Tags 01NK and 01O9 (blueprint: def-trf-graded-line-fraction-chart). -/
+Source: Stacks, Tags 01NK and 01O9. -/
 abbrev GradedLineFractionCoefficients {S T : Scheme.{u}} (h : T ⟶ S)
     (A : S.GradedAlgebraData) (L : T.Modules) :=
   ∀ (U : S.affineOpens) (W : T.affineOpens),
@@ -50,17 +49,17 @@ variable {S T : Scheme.{u}} {h : T ⟶ S} {A : S.GradedAlgebraData} {L : T.Modul
   (c : GradedLineFractionCoefficients h A L)
 
 /-- The coefficient at the chosen denominator.
-Source: Stacks, Tag 01NK (blueprint: def-trf-graded-line-fraction-chart). -/
+Source: Stacks, Tag 01NK. -/
 abbrev coefficient (i : GradedLineFractionChart h A L) : Γ(T, i.W.1) :=
   c i.U i.W i.hWU i.l i.d i.e
 
 /-- The affine spectrum of the ordinary localization at the denominator coefficient.
-Source: Stacks, Tag 01NK (blueprint: def-trf-graded-line-fraction-chart). -/
+Source: Stacks, Tag 01NK. -/
 noncomputable abbrev domain (i : GradedLineFractionChart h A L) : Scheme.{u} :=
   Spec (.of (Localization.Away (coefficient c i)))
 
 /-- Its canonical open immersion into the source scheme.
-Source: Stacks, Tag 01NK (blueprint: def-trf-graded-line-fraction-chart). -/
+Source: Stacks, Tag 01NK. -/
 noncomputable def source (i : GradedLineFractionChart h A L) : domain c i ⟶ T :=
   Spec.map (CommRingCat.ofHom
     (algebraMap Γ(T, i.W.1) (Localization.Away (coefficient c i)))) ≫
@@ -71,7 +70,7 @@ instance (i : GradedLineFractionChart h A L) : IsOpenImmersion (source c i) := b
   infer_instance
 
 /-- The candidate map from a fraction chart to relative Proj.
-Source: Stacks, Tags 01NK and 01O9 (blueprint: def-trf-graded-line-fraction-chart). -/
+Source: Stacks, Tags 01NK and 01O9. -/
 noncomputable def target
     (ρ : ∀ i : GradedLineFractionChart h A L,
       HomogeneousLocalization.Away (A.grading i.U) i.e.val →+*
@@ -81,7 +80,7 @@ noncomputable def target
     Proj.awayι (A.grading i.U) i.e.val i.e.property i.hd ≫ A.relProjι i.U
 
 /-- The fraction equation, including exponent zero and nilpotent denominators.
-Source: Stacks, Tag 01NK (blueprint: def-trf-graded-line-fraction-chart). -/
+Source: Stacks, Tag 01NK. -/
 def FractionFormula
     (ρ : ∀ i : GradedLineFractionChart h A L,
       HomogeneousLocalization.Away (A.grading i.U) i.e.val →+*

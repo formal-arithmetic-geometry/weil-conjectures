@@ -24,17 +24,7 @@ variable {R S : Type u} [CommRing R] [CommRing S] [Algebra R S] {X : Scheme.{u}}
 /-- Derived open-extension adjunction transports the two Ext presentations.
 Source: Stacks Project, Tags 00A7 (open-extension adjunction), 01AK (exactness),
 04J0 (localization of morphisms of ringed sites), and Section 01F7.
-(blueprint: lem-pc-open-free-ext-transport)
 
-Proof: Write j for the open immersion W.ι and p for the base-change projection.
-Extension by zero j_! on abelian sheaves is exact and left adjoint to exact
-restriction j^*. The free abelian sheaf on W is j_! of the constant integer
-sheaf on W; the free sheaf on the top open of W is that constant integer sheaf.
-The resulting derived adjunction, in the reverse direction, gives t. The
-restriction of the abelian sheaf of M identifies canonically with the abelian
-sheaf of the module pullback j^*M. Naturality of this adjunction in coefficients
-identifies postcomposition by the restricted scalar with postcomposition by the
-ambient scalar, proving the first equation.
 
 The square obtained by base changing j along p is cartesian, and its upper
 left scheme is the base change of W over Spec R. Base change of extension by

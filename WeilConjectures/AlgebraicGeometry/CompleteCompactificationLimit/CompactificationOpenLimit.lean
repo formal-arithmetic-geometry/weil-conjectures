@@ -13,7 +13,6 @@ import all WeilConjectures.AlgebraicGeometry.StrictTower.ConstantNormalization.C
 
 /-! # Open extension and fixed-coefficient strict limits
 Source: blueprint direct-image proof, paragraph (2); Stacks 09BP.
-(blueprint: lem-sp-compactification-open-limit).
 -/
 
 @[expose] public noncomputable section

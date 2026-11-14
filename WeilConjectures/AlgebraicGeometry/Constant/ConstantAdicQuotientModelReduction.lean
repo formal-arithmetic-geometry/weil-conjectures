@@ -25,27 +25,7 @@ chart admit an algebraic universal reduction arrow. No lissity, etale descent, o
 covering construction is part of this assertion.
 
 Source: Stacks Project, proetale.tex, Tag 09C6, the consecutive balancing isomorphism;
-Tags 0D6D and 03Q3 for scalar transitivity and constant geometric stalks.
-(blueprint: lem-weil-pbc-constant-adic-quotient-model-reduction).
-
-Proof: the normalization field of M identifies derived extension of M_(n+1) along
-the consecutive actual coefficient projection with M_n. Exact inverse image along
-W.hom followed by g retains this identification, by the tensor-pullback comparison.
-Substitute the two supplied constant models. The canonical completion quotient maps
-commute with the consecutive quotient projection: this follows on elements from
-Ideal.Quotient.factor_mk and the algebra map. Thus constant-realization scalar
-comparison identifies extension of the first model with the constant realization
-of the algebraic derived extension of E'. The resulting isomorphism identifies that
-constant realization with the realization of E. On the nonempty scheme W, pass to
-a geometric stalk at an algebraic closure of the residue field of w. The exact stalk
-of a constant complex is the complex, and derived tensor commutes with this inverse
-image. Consequently algebraic derived extension of E' is isomorphic to E. Transpose
-that isomorphism under derived extension/restriction adjunction to obtain t. For each
-N, composition with the isomorphism followed by the adjunction Hom equivalence is
-bijective, and its formula is k maps to t followed by restriction(k). No perfectness,
-cohomological bound or finite local model is used. Nonemptiness is indispensable:
-on an empty scheme the two supplied model isomorphisms impose no algebraic relation.
-The zero ring and zero objects satisfy the same adjunction formula. -/
+Tags 0D6D and 03Q3 for scalar transitivity and constant geometric stalks. -/
 theorem constantAdicQuotient_model_reduction
     (X Y : Scheme.{u}) (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)

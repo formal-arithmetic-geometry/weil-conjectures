@@ -10,8 +10,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Completed.Diagonal
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.ChernCoefficientDiagram.DiagonalCoefficientAdjunctAssembly
 
 /-! # Transport of the canonical completed Chern adjunct
-
-Source: diagonal tower coefficient changes proof (1), reduction of the section class.
 -/
 
 @[expose] public noncomputable section
@@ -101,19 +99,7 @@ private theorem uniformizerAssembly
 
 /-- The prescribed comparisons transport the model adjunct to the local coefficient image.
 
-Source: latest blueprint, diagonal tower coefficient changes proof (1), applying
-coefficient functors to the section-class construction; trace proof (1), adjunction.
-(blueprint: lem-diagonal-uniformizer-adjunct-transport).
 
-Proof: completed_adjunct_square supplies the first realization square for p.c and
-p.z, with its specified unit and shifted-line endpoints. For a scalar change,
-scalar_unit_push identifies the coefficient-unit arrow under the defining mate.
-Naturality of that mate then transports any local derived arrow, inserting and
-cancelling the specified unit isomorphism on P. Apply this calculation to integral
-extension and to the nonflat quotient. No positive-line endpoint normalization is
-needed in this naturality argument. finite_unit_push supplies the analogous unit
-square for finite realization, using the full canonical-derived-unit equation;
-naturality again supplies its arbitrary-arrow version.
 
 Compose the four arrow squares by functoriality. Naturality of q_canonical
 identifies the last vertical composite with presentation.comparison. Expanding

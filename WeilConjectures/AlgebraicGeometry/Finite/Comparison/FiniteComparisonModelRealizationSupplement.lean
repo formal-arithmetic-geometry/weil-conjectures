@@ -193,8 +193,7 @@ public import WeilConjectures.AlgebraicGeometry.FiniteComparisonModelRealization
 /-! # Ordinary realization of coefficient-sized constant module sheaves
 
 Source: Stacks Project, Tags 03CY and 09AL; coefficient transport in the opening
-paragraph of the finite comparison proof
-(blueprint: lem-ctf-finite-comparison-model-realization).
+paragraph of the finite comparison proof.
 -/
 
 -- After pruning, this module only keeps private declarations.

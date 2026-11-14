@@ -51,8 +51,7 @@ abbrev target_endpoint_statement
 /-- Assemble the finite boundary square once the source coefficient-one and
 root endpoint equations have been supplied.  The assembly is the exact
 single-arrow naturality square followed by the two endpoint substitutions; its
-proof is independent of the coefficient and root calculations.
-(blueprint: lem-diagonal-local-finite-boundary-assembly) -/
+proof is independent of the coefficient and root calculations. -/
 theorem finiteBoundary_transport_assembly
     (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) [DiagonalTraceLocalizations l T]
     (c : Chern l (ULift.{u} (Padic l)) T)

@@ -19,9 +19,6 @@ import Mathlib.LinearAlgebra.Basis.Defs
 import Mathlib.CategoryTheory.Limits.Shapes.BinaryBiproducts
 
 /-! # Torsion normal form and its consecutive-quotient obstruction
-
-Source: the DVR elementary-divisor calculation in steps 3--5 of
-`lem-weil-pbc-adic-tor-implies-flat-cohomology`.
 -/
 
 -- After pruning, this module only keeps private declarations.

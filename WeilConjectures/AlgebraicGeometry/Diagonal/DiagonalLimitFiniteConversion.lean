@@ -11,7 +11,6 @@ import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalCompletedDataAssembly
 /-! # Homogeneous finite normalization equations
 
 The predicate is the finite part of the given normalized strict system.
-(blueprint: lem-sfb-diagonal-limit-finite-conversion).
 -/
 
 @[expose] public noncomputable section
@@ -26,12 +25,7 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext
   diagonalLimitFiniteSource diagonalLimitFiniteTarget diagonalLimitFiniteClass
   diagonalLimitFiniteSourceNorm diagonalLimitFiniteTargetNorm diagonalLimitRoots
 
-/-- Convert the supplied heterogeneous finite equations to the finite normalization.
-Source: the finite normalization definitions
-(blueprint: lem-sfb-diagonal-limit-finite-conversion).
-Proof: retain every pair of endpoint isomorphisms and the two normalizations, then
-use eq_of_heq for the homogeneous class equation. The named input predicate and
-normalization use exactly the same endpoint and class functions. -/
+/-- Convert the supplied heterogeneous finite equations to the finite normalization. -/
 theorem diagonalLimitFiniteNormalization_of_input (ℓ : ℕ) [Fact ℓ.Prime]
     (Y : Scheme.{u}) (hY : IsUnit (ℓ : Γ(Y, ⊤)))
     [HasDerivedCategory.{u + 1} (DiagonalAb (diagonalSurface Y))]

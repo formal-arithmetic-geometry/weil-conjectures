@@ -13,7 +13,7 @@ import all WeilConjectures.AlgebraicGeometry.Continuous.ContinuousCoefficientPul
 /-! # Continuous coefficient pullback for arbitrary scheme morphisms
 
 Source: Bhatt--Scholze, Lemma 4.2.12 and Lemma 6.8.2.
-(blueprint: lem-weil-pbc-continuous-coefficient-general-pullback-isIso)
+(Iso)
 -/
 
 @[expose] public section
@@ -30,7 +30,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Evaluation detects equality of rational coefficient sections.
 Source: Bhatt--Scholze, Definition 6.8.1.
-(blueprint: lem-weil-pbc-continuous-coefficient-general-pullback-isIso) -/
+(Iso) -/
 theorem rationalCoefficientValue_ext (l : ℕ) [Fact l.Prime] (E : Type u)
     [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (X : Scheme.{u}) (V : X.ProEtᵒᵖ)
@@ -44,7 +44,7 @@ theorem rationalCoefficientValue_ext (l : ℕ) [Fact l.Prime] (E : Type u)
 
 /-- Continuous precomposition for the spectral norm, with the original field structure.
 Source: Bhatt--Scholze, Definition 6.8.1.
-(blueprint: lem-weil-pbc-continuous-coefficient-general-pullback-isIso) -/
+(Iso) -/
 noncomputable def rationalContinuousPullback
     (l : ℕ) [Fact l.Prime] (E : Type u)
     [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -56,7 +56,7 @@ noncomputable def rationalContinuousPullback
 
 /-- The spectral precomposition map has its specified adjunct.
 Source: Bhatt--Scholze, Definition 6.8.1.
-(blueprint: lem-weil-pbc-continuous-coefficient-general-pullback-isIso) -/
+(Iso) -/
 theorem rationalContinuousPullback_normalized
     (l : ℕ) [Fact l.Prime] (E : Type u)
     [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -68,7 +68,7 @@ theorem rationalContinuousPullback_normalized
 /-- The normalized integral and rational continuous coefficient pullbacks are
 isomorphisms along every scheme morphism.
 Source: Bhatt--Scholze, Lemma 4.2.12 and Lemma 6.8.2.
-(blueprint: lem-weil-pbc-continuous-coefficient-general-pullback-isIso)
+(Iso)
 
 Proof. The finite constant quotient tower is preserved by inverse image, and
 its limit is the continuous integral coefficient sheaf. Projectionwise reduction
@@ -191,8 +191,7 @@ theorem continuousCoefficientPullback_isIso_of_finiteExtension
 
 /-- The spectral rational coefficient pullback is invertible.
 Source: Bhatt--Scholze, Lemmas 4.2.12 and 6.8.2.
-(blueprint: lem-weil-pbc-continuous-coefficient-general-pullback-isIso)
-Proof: apply the preceding finite-extension pullback theorem to the spectral norm. -/
+(Iso) -/
 instance rationalContinuousPullback_isIso
     (l : ℕ) [Fact l.Prime] (E : Type u)
     [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

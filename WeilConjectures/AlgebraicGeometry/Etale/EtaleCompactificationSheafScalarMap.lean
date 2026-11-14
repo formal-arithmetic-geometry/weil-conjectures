@@ -150,8 +150,7 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.QuasiFiniteFactorization
 /-! # The ordinary compactified étale coefficient mate on sheet generators
 
 Source: Stacks Project, more-etale.tex, Tags 0GKF and 0GL6;
-etale-cohomology.tex, Tags 03S5 and 0F4L; sites-modules.tex, Tag 03EL
-(blueprint: lem-sp-etale-compactification-sheaf-scalar-map).
+etale-cohomology.tex, Tags 03S5 and 0F4L; sites-modules.tex, Tag 03EL.
 -/
 
 @[expose] public noncomputable section
@@ -166,8 +165,7 @@ namespace AlgebraicGeometry.Etale
 /-- The ordinary coefficient/direct-image map, with the specified geometric counit.
 It is the B-geometric adjunct of scalar/pullback reassociation followed by scalar
 extension of the A-geometric counit, rather than an unspecified comparison.
-Source: Stacks, Tags 03EL and 0GL6
-(blueprint: lem-sp-etale-compactification-sheaf-scalar-map). -/
+Source: Stacks, Tags 03EL and 0GL6. -/
 def compactificationOrdinaryScalarMate
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {W V : Scheme.{u}} (r : W ⟶ V) :

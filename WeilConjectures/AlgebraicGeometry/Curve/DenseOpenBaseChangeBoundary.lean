@@ -14,7 +14,6 @@ import WeilConjectures.Mathlib.Topology.KrullDimension
 /-! # The boundary of a dense open after field extension
 
 Source: Stacks Project, Tag 0GJA, proof and remark (c).
-(blueprint: lemma-removing-finitely-many-points--1)
 -/
 
 @[expose] public section
@@ -81,16 +80,7 @@ private theorem dense_open_boundary
 /-- The inverse image of a dense open in a curve over an algebraically closed field has
 finite complement consisting of closed points with separably closed residue fields.
 Source: Stacks Project, Tag 0GJA, proof, first sentence and remark (c).
-(blueprint: lemma-removing-finitely-many-points--1)
 
-Proof: The curve is Noetherian and has finitely many irreducible components. For each
-component Z, take the open O avoiding all the other components. Its generic point belongs
-to O, so density gives a point of U intersect O, necessarily in Z. Thus U restricts to a
-nonempty open of each irreducible component. In a Noetherian irreducible sober space of
-dimension at most one, the complement of a nonempty open is finite and its points are
-closed. Apply this to each Z and take the finite union of the images of the complements.
-Closedness of Z transports closed singletons to X. This proves finiteness and closedness
-of the boundary in X, without irreducibility or reducedness assumptions on X.
 
 For a boundary point x, its residue field is k by the Nullstellensatz, so the composite
 Spec κ(x) to X to Spec k is an isomorphism. Paste the square defining the fiber of ι' at x

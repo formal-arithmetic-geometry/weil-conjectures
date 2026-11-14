@@ -34,17 +34,7 @@ comparison isomorphisms.
 
 Source: Stacks Project, Tag 09C6, the arrows L_(n+1) -> L_n, using full faithfulness
 in Tag 09AL and derived tensor balancing in Tag 06YY.
-(blueprint: lem-weil-pbc-finite-perfect-adic-coordinate-transitions).
 
-Proof: in the fixed scalar coordinates of the actual quotients, form the consecutive
-quotient maps on one flat-term K-flat representative of M. Their scalar-extension
-transposes are isomorphisms by tensor balancing. The compatibility of phi with both
-quotient maps and the completed scalar map identifies these with the canonical
-fixed-scalar coefficient maps. Conjugate each such map by the two supplied comparison
-isomorphisms. The coefficient interchange for etale/pro-etale inverse image turns it
-into a map from the comparison of K_(n+1) to the comparison of the scalar restriction
-of K_n. That target is bounded below, since coefficient restriction is exact. Full
-faithfulness of derived comparison therefore gives its unique preimage dK_n.
 
 For each etale source pull the square through the canonical tensor-pullback mate.
 The mate's unit identity identifies the adjoint transpose of the pulled dK_n with

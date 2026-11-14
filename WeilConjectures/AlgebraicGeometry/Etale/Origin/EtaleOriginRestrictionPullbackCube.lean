@@ -429,23 +429,7 @@ private theorem origin_restriction_inv_app
 
 /-- The restriction/realization comparison commutes with geometric pullback.
 Source: Stacks 03EL, 0D6D and 07A6; restriction part of the coefficient comparison
-in Tag 0E48 (blueprint: lem-fix-etale-origin-restriction-pullback-cube).
-
-Proof: compare the ordinary right-adjoint squares on sections: the coefficient
-comparison, the restriction square, and the pushforwardCongr maps are all the
-identity on sections. Their right-derived squares are characterized by the
-all-complex derived-unit normalization. Naturality of that normalization identifies
-the canonical restriction mate with sfDerivedImageRestriction.inv after conjugation
-by properOriginPushIso; restriction need not preserve K-injectives.
-Invert realizationRestriction_directImage_cube and insert this identification.
-Compatibility of mates with pasting gives the intrinsic realization/pullback cube.
-The same compatibility expands originPullback as the fixed-site comparison followed
-by the intrinsic realization mate, transported by intrinsicSiteFunctorIso. Paste
-this cube with derived_restriction_cube for the etale/pro-etale site comparison,
-using supportComparison_eq to identify its specified site map. Naturality cancels
-the intermediate realization isomorphisms and gives the inverse-endpoint formula.
-This uses no tensor comparison or extension of scalars, and no bound on N.
-The argument applies unchanged to zero rings, zero complexes and empty schemes. -/
+in Tag 0E48. -/
 theorem etaleOriginRestrictionPullbackCube
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {Z Y : Scheme.{u}} (p : Z ⟶ Y)

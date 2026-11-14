@@ -15,7 +15,7 @@ import WeilConjectures.AlgebraicGeometry.Base.BaseFieldFiniteTorsionCohomologica
 # Cohomological dimension of the base field
 
 Source: blueprint `sec-six-functors-basics/sk-lem-base-field-cd`, order 1507;
-Stacks Project, Tags 03QQ and 010T (blueprint: lemma-cohomological-dimension-base-field).
+Stacks Project, Tags 03QQ and 010T.
 The dimension and its local prime-power torsion convention are those of
 `definition-cohomological-dimension`.
 -/
@@ -34,7 +34,7 @@ open CategoryTheory
 that of a finite field is at most one. There is no restriction on the characteristic.
 
 Source: blueprint `sec-six-functors-basics/sk-lem-base-field-cd`, order 1507;
-Stacks Project, Tags 03QQ and 010T (blueprint: lemma-cohomological-dimension-base-field).
+Stacks Project, Tags 03QQ and 010T.
 
 Proof (the eight steps of the DAG node):
 1. Choose a separable closure inside an algebraic closure of `K`. The additive

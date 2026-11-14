@@ -177,9 +177,6 @@ import WeilConjectures.CategoryTheory.DerivedSingleUnit
 import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
 
 /-! # The finite ordinary Kummer boundary from the scalar class
-
-Source: diagonal-tower trace (1), the finite positive Kummer class and its site comparison.
-(blueprint: lem-sfb-finite-p1-ordinary-kummer-boundary-core).
 -/
 
 @[expose] public noncomputable section
@@ -209,7 +206,6 @@ section equations identify the integral and root endpoint maps with
 `finiteQuotient` and `finiteRootMap`; naturality of the single and shifted
 connecting morphisms then gives the boundary equation.  No tower Chern arrow or
 normalization hypothesis occurs in the conclusion.
-(blueprint: lem-sfb-finite-p1-ordinary-kummer-boundary-core).
 -/
 theorem finiteP1_ordinary_kummer_boundary_of_class
     {X S : Scheme.{u}} [IsNoetherian X] [IsNoetherian S]

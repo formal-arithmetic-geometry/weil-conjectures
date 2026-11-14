@@ -22,8 +22,7 @@ Source: Stacks Project, Tags 08JC and 08J9; blueprint
 
 The proof constructs K-injective and flat-term K-flat models, transports the signed
 source reindexing through evaluation, and applies the cone calculation for internal Hom.
-This is the shift and functor-exactness part of the parent comparison theorem.
-(blueprint: lem-coef-etale-hom-transpose-exact-shift-data) -/
+This is the shift and functor-exactness part of the parent comparison theorem. -/
 theorem etaleHomComparison_reversedExact_shiftData
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (X : Scheme.{u}) (φ : A →+* B) (M : DerivedCategoryModule A X) :

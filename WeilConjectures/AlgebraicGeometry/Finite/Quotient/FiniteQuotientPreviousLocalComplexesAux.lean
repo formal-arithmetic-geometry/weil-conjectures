@@ -11,7 +11,6 @@ import WeilConjectures.AlgebraicGeometry.Finite.Quotient.FiniteQuotientPreviousL
 
 /-! # Single-chart conversion for the previous quotient model
 Source: Stacks Project, Tags 0942, 094H and 094I.
-(blueprint: lem-weil-pbc-finite-quotient-previous-local-complexes-chart).
 -/
 
 @[expose] public noncomputable section

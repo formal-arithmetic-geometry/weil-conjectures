@@ -17,8 +17,7 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Etale
 /-- The ordered scalar square after postcomposition by the signed symmetry.
-Source: Stacks 0E8I, 0GL6 and 07A4
-(blueprint: lem-pur-etale-ordered-open-projection-scalar-postcomp).
+Source: Stacks 0E8I, 0GL6 and 07A4.
 
 The mixed scalar/open equation is transported through the normalized open and tensor
 comparisons, then conjugated by the signed tensor symmetries.  Both routes agree on

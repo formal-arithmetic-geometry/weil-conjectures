@@ -35,13 +35,7 @@ private lemma restrictedIso_forget
 
 /-- After forgetting scalars, the scalar compositor is its finite associated-sheaf map.
 
-Source: Stacks Project, Tags 03CY and 06YY.
-(blueprint: new-s3-finite-perfect-adic-scalar-component-underlying)
-
-Proof: expand the scalar component into restriction of the finite associated-sheaf
-comparison followed by the restriction compositor. Forgetting scalars removes the
-first restriction, and the restriction compositor becomes the identity abelian
-sheaf map. Functoriality and composition with the identity give the formula. -/
+Source: Stacks Project, Tags 03CY and 06YY. -/
 theorem finitePerfectAdicScalarComponent_forget
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (V : X.Etale) (U : V.left.ProEt) (W : X.ProEt)

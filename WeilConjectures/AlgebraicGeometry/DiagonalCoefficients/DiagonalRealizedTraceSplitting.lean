@@ -11,8 +11,6 @@ import all WeilConjectures.AlgebraicGeometry.RationalP1.DiagonalCompletedChernSp
 import WeilConjectures.AlgebraicGeometry.RationalP1.RationalP1CompletedChernDegree
 
 /-! # The realized trace as the second projection of its Chern splitting
-
-Source: diagonal-tower coefficient changes, paragraph (3), the split trace projection.
 -/
 
 @[expose] public noncomputable section
@@ -41,19 +39,7 @@ attribute [local irreducible] Functor.mapDerivedCategory
 
 -- The endpoint conversions compare the independently normalized realization functors.
 /-- A realized completed trace kills the complementary shifted line and takes its
-normalized Chern component to the identity.
-
-Source: diagonal-tower trace proof (1) and coefficient changes (3).
-(blueprint: lem-diagonal-realized-trace-splitting).
-
-Proof: realize the completed unit/Chern splitting by the prescribed exact functor,
-conjugating by its unit and shifted-line isomorphisms and the normalized push square.
-The complementary component has source concentrated in degree minus two, so its
-composite into the degree-zero unit vanishes by the standard t-structure. The Chern
-component has degree one under the completed trace. Functoriality preserves that
-identity, and cancellation of the realization and push-square isomorphisms gives
-the asserted identity. This includes empty schemes and does not test derived maps
-by finite evaluations. -/
+normalized Chern component to the identity. -/
 theorem realizedTrace_splitting (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} [IsNoetherian X] [IsNoetherian S]
     [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]

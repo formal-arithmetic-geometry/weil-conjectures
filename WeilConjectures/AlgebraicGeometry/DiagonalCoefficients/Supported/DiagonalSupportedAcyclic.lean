@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafClosedLo
 
 Source: Stacks, proetale.tex, lemma-closed-immersion-complement-retrocompact-exact,
 and the supported-source computation in the diagonal tower trace.
-(blueprint: lem-sfb-diagonal-supported-acyclic).
 -/
 
 @[expose] public noncomputable section
@@ -86,19 +85,7 @@ end Retract
 /-- The supported regular module is acyclic for every retraction of the diagonal.
 
 Source: Stacks, proetale.tex, lemma-closed-immersion-complement-retrocompact-exact;
-diagonal tower trace, supported-source identification.
-(blueprint: lem-sfb-diagonal-supported-acyclic).
-
-Proof: The Noetherian surface has quasi-compact open complement of its closed diagonal.
-Closed localization makes diagonal direct image exact. Its inverse image is exact,
-so diagonal direct image preserves K-injective complexes. Resolve the regular module
-on the diagonal by a K-injective resolution and push that resolution forward. It
-remains a resolution because diagonal direct image is exact. Applying the retraction
-pushforward gives the original resolution, through the ordinary direct-image
-composition isomorphism and Delta f = id. The full derived unit is invertible on the
-pushed resolution by K-injective computation, hence also on the original single
-supported module by naturality and the two quasi-isomorphisms. No condition on the
-coefficient ring beyond commutativity is used, including for the zero ring or empty Y. -/
+diagonal tower trace, supported-source identification. -/
 theorem diagonal_supported_acyclic
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (Y : Scheme.{u})

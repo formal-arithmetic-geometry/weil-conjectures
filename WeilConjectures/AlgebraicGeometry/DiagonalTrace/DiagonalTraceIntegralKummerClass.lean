@@ -28,9 +28,7 @@ attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
 
 /-- Evaluate the Yoneda composite of the line-bundle class and the actual tower
 Kummer extension, then insert the finite root map. Every arrow is specified by
-an existing construction; no lift or comparison equation is chosen.
-Source: geometric tower classes proof (2), positive Kummer boundary.
-(blueprint: def-sfb-diagonal-trace-integral-kummer-class). -/
+an existing construction; no lift or comparison equation is chosen. -/
 def evaluatedIntegralKummerClass (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
     (A : Type (u + 1)) [CommRing A] (n : ℕ) (hA : ((l ^ (n + 1) : ℕ) : A) = 0)
     (k : Kummer l T) (hN : IsUnit ((l ^ (n + 1) : ℕ) : Γ(T, ⊤))) (P : T.Pic) :

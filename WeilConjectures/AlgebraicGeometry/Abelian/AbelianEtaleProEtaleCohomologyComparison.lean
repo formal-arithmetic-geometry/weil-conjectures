@@ -23,8 +23,7 @@ import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 /-!
 # Abelian etale–pro-etale cohomology comparison
 
-Source: Stacks Project, proetale.tex, Tag 099W, part (1)
-(blueprint: lem-cbc-abelian-etale-proetale-cohomology-comparison).
+Source: Stacks Project, proetale.tex, Tag 099W, part (1).
 -/
 
 @[expose] public section
@@ -77,8 +76,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- Specialize the existing constant-sheaf pullback isomorphism and transport it to
 the constructed comparison inverse image using the canonical adjunction isomorphism.
-Source: Stacks Project, Tags 099R and 00YV
-(blueprint: lem-cbc-abelian-etale-proetale-cohomology-comparison). -/
+Source: Stacks Project, Tags 099R and 00YV. -/
 noncomputable def comparisonConstantSheafIso (T : Scheme.{u}) :
     constantSheaf T.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙
       comparisonUpperStar AddCommGrpCat.{u + 1} T ≅
@@ -93,8 +91,7 @@ noncomputable def comparisonConstantSheafIso (T : Scheme.{u}) :
 
 /-- The canonical cohomology pullback: apply exact comparison inverse image to an
 Ext class and precompose with the canonical constant-sheaf comparison.
-Source: Stacks Project, Tag 099W and Cohomology on Sites, Remark 08J6
-(blueprint: lem-cbc-abelian-etale-proetale-cohomology-comparison). -/
+Source: Stacks Project, Tag 099W and Cohomology on Sites, Remark 08J6. -/
 noncomputable def comparisonCohomologyMap (T : Scheme.{u})
     (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) (i : ℕ) :
     Sheaf.H F i →+
@@ -104,20 +101,7 @@ noncomputable def comparisonCohomologyMap (T : Scheme.{u})
 
 /-- For every abelian etale sheaf, canonical pullback is an isomorphism in every
 nonnegative degree, without coefficient restrictions.
-Source: Stacks Project, Tag 099W, part (1)
-(blueprint: lem-cbc-abelian-etale-proetale-cohomology-comparison).
-
-Proof: the comparison unit is an isomorphism on sections over every etale object
-by lem-cbc-comparison-pullback-sections, hence naturally an isomorphism of abelian
-sheaves. Pull an injective resolution of F back by the exact inverse image.
-Its terms are comparison-direct-image acyclic by
-lem-cbc-abelian-comparison-injective-acyclicity. The acyclic-resolution criterion
-lemma-weil-pbc-leray-acyclicity computes the higher direct images by the original
-resolution, using the unit, so they vanish in positive degrees. The Leray edge
-isomorphism of lem-weil-pbc-site-leray-degenerate, composed with cohomology of the
-unit, is an isomorphism. Naturality of cohomology pullback and the adjunction
-triangle identity identify this composite with comparisonCohomologyMap. In degree
-zero this is the unit on global sections. -/
+Source: Stacks Project, Tag 099W, part (1). -/
 theorem comparisonCohomologyMap_bijective (T : Scheme.{u})
     (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) (i : ℕ) :
     Function.Bijective (comparisonCohomologyMap T F i) := by

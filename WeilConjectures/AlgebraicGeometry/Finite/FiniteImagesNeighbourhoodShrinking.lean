@@ -23,13 +23,6 @@ namespace AlgebraicGeometry
 an affine neighbourhood of that point has inverse images contained in all those opens.
 
 Source: Stacks Project, Tag 0GK7, final shrinking paragraphs.
-(blueprint: lem-weil-pbc-finite-images-neighbourhood-shrinking)
-
-Proof: For each finite map, the image of the closed complement is closed and avoids η.
-The union of these finitely many images is closed and avoids η. Choose an affine
-neighbourhood inside its open complement. Membership in an inverse image outside a
-prescribed open would put its image in that closed union, a contradiction. For n=0
-the union is empty, so any affine neighbourhood works. No Noetherian assumption is used.
 -/
 theorem exists_affine_neighbourhood_below_finite_maps
     (V : Scheme.{u}) (η : V) (n : ℕ) (T : Fin n → Scheme.{u})

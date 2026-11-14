@@ -23,17 +23,7 @@ namespace AlgebraicGeometry.IsCurve
 
 /-- A sheaf killed by a noninvertible prime and having invertible-order torsion has
 zero cohomology, as does its inverse image along any scheme morphism.
-Source: Stacks Project, Tag 0GJA, proof (remark (c), positive-characteristic case).
-(blueprint: lemma-removing-finitely-many-points--1)
-
-Proof: For each geometric stalk element x the invertible-order condition gives n > 0
-with n invertible on Spec k and n*x = 0. The identity-annihilation hypothesis gives
-r*x = 0 after applying sheafFiber_map_smul. If r divided n, the factorization of the
-unit n would force r to be a unit, contradicting noninvertibility. Since r is prime,
-gcd(r,n)=1, and nsmul_eq_zero_iff_of_coprime gives x = 0. Every stalk is zero, so geometric
-stalks detect that F is zero. The coefficient-forgetting functor and inverse image
-preserve zero objects. Ext into a zero object is zero in every degree, so the two
-cohomology groups are subsingletons. This includes the zero ring and empty X or Y. -/
+Source: Stacks Project, Tag 0GJA, proof (remark (c), positive-characteristic case). -/
 theorem prime_torsion_nonunit_cohomology (Λ : Type (u + 1)) [CommRing Λ]
     {k : Type u} [Field k] {X Y : Scheme.{u}} (a : Y ⟶ X)
     (r : ℕ) [Fact r.Prime] (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))

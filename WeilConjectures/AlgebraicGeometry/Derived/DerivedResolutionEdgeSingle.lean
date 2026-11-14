@@ -255,18 +255,7 @@ private theorem resolutionEdge_unit {T S : Scheme.{u}} (g : T ⟶ S) (q : ℤ)
     (RingedSpace.moduleDirectImage g.toLRSHom.toShHom) q J I r b hb
 
 /-- The constructed edge on a single complex is normalized by the derived unit.
-Source: Stacks, Tags 0BKJ and 079W
-(blueprint: lem-weil-pbc-resolution-local-class-edge-single).
-
-Proof: Lift the inverse fixed-resolution isomorphism to a map from the single complex
-into its K-injective representative. Naturality of the right-derived unit cancels the
-unit on that representative. The naturality of the kernel/cokernel homology edge then
-moves the resolution map through the edge; the homology factorization cancels its
-inverse. On the single complex both differentials vanish, so the remaining edge is
-identified with the identity on the sole coefficient by the kernel and cokernel
-universal properties. The standard single/homology isomorphisms give the equation.
-The calculation uses no lower bound on the chosen K-injective representative and works
-for every integer degree, including negative degrees and the zero coefficient. -/
+Source: Stacks, Tags 0BKJ and 079W. -/
 theorem resolutionLocalClassEdge_single {T S : Scheme.{u}} (g : T ⟶ S) (q : ℤ)
     (M : SheafOfModules.{u} (moduleRings T.toRingedSpace)) :
     (DerivedCategory.homologyFunctor.{w, u, u + 1}

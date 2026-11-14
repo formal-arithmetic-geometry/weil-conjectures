@@ -7,9 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.CoefficientSheafificationSquare.CoefficientSheafificationForget
 
-/-! # The forgetful formula after a module-presheaf map
-
-(blueprint: lem-weil-pbc-coefficient-sheafification-map-forget).
+/-! # The forgetful formula after a module-presheaf map.
 -/
 
 @[expose] public noncomputable section

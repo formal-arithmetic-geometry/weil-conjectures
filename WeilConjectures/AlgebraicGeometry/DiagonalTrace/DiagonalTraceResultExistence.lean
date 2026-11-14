@@ -10,7 +10,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalTracePresentation
 import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # Assembling a completed trace from its presentation
-Source: diagonal trace proof paragraph (1), steps 3--8.
 -/
 
 @[expose] public noncomputable section
@@ -26,16 +25,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 
 /-- Construct the completed trace, its strict splitting and its finite projection
-identities from the normalized presentation.
-Source: diagonal trace proof paragraph (1), steps 3--8
-(blueprint: lem-sfb-diagonal-trace-result-existence).
-Proof: exact scalar restriction preserves the biproduct, so the restricted splitting
-is the image of the varying splitting composed with the inverse biproduct comparison
-and the varying direct-image comparison. It is therefore invertible. Surjectivity of
-completed restriction on the specified Hom set lifts sourceMap followed by Rlim of the
-system trace and the inverse unitMap. Cancel unitMap to obtain IsTrace. Naturality of
-each derived-limit projection gives the finite reduction equations. The finite unit
-and Chern equations were supplied by the normalized presentation. -/
+identities from the normalized presentation. -/
 theorem exists_diagonalTraceResult
     (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}
     [IsNoetherian X] [IsNoetherian S]

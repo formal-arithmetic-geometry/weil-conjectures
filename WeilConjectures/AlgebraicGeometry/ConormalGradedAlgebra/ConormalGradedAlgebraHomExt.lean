@@ -10,7 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.ConormalGradedAlgebra.ConormalGr
 /-! # Degree-one uniqueness for maps from the conormal algebra
 
 Source: Stacks 0630, 0632, generation of the associated graded algebra by degree one.
-(blueprint: lem-pur-conormal-graded-algebra-hom-ext).
 -/
 
 @[expose] public section
@@ -73,17 +72,7 @@ private theorem graded_hom_ext {R : Type u} [CommRing R] (I : Ideal R)
 
 /-- An algebra morphism out of the conormal algebra is determined by its values on the
 classes of ideal sections in degree one, on all ambient affine charts.
-Source: Stacks 0630, 0632, the degree-one generation of the associated graded algebra.
-(blueprint: lem-pur-conormal-graded-algebra-hom-ext).
-
-Proof: On an ambient affine chart, identify the source with gr_I(R). Its homogeneous
-classes are represented by ideal-power sections, by powerIdentification and the affine
-ideal-section theorem. Degree zero is fixed by the structure-algebra condition. Induct
-on n, using I^(n+1)=I^n I and induction on ideal-product membership, to get equality on
-every degree from equality in degree one. Additive direct-sum induction gives equality
-on the chart. The inverse images of ambient affine opens form a basis on the closed
-subscheme, so the sheaf-morphism basis criterion gives global equality. The induction
-uses no finiteness or regularity, and includes zero and unit ideals and empty schemes. -/
+Source: Stacks 0630, 0632, the degree-one generation of the associated graded algebra. -/
 theorem hom_ext_degree_one {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
     {B : Z.CommAlgebraSheaf} (f g : (presentation i).algebra ⟶ B)
     (h : ∀ (U : X.affineOpens) (a : (power i 1).val.obj (op U.1)),

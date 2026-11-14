@@ -259,15 +259,7 @@ variable [∀ X : Scheme.{u},
 /-- The kernel/cokernel resolution edge has the fixed local-class description.
 Source: Stacks Project, cohomology.tex, Tags 0BKJ and 0D5X, the cycle-class
 construction and local Leray comparison; Tag 079W, normalization by the derived unit.
-(blueprint: lem-weil-pbc-resolution-local-class-edge-local).
 
-Proof: Write I for the fixed K-injective representative of K and B for g_*I.
-The direct-image homology identification in resolutionLocalClassEdge transports
-H^q(Rg_*K) to H^q(B). The corresponding local comparison transports local derived
-sections to H^q of the section complex of B: this follows from the universal-unit
-equation defining localLerayComparison, after evaluating both derived direct-image
-comparisons on I. The specified hom of unboundedDirectImage_sectionPresheaf identifies
-its chosen isomorphism with this comparison; thus there is no choice of local Leray map.
 
 On an arbitrary complex B the sheafification unit followed by
 localSectionComplexSheafificationIso sends a section cocycle to its class in the

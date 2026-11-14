@@ -110,11 +110,6 @@ open SpTowerClasses
 
 /-- Epimorphic strict towers have invertible ordinary-to-derived limit comparison.
 
-Source: the Milnor passage to the limit in the diagonal trace proof, paragraph (1).
-(blueprint: new-sfb-diagonal-trace-ordinary-rlim-epi).
-
-Proof: this is the endpoint helper `ordinaryRlim_isIso_of_epi` (Milnor difference-map
-epimorphism and exact countable products), specialised to the chosen localizations.
 -/
 theorem diagonalOrdinaryRlim_isIso_of_epi (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
     [DiagonalTraceLocalizations l T] (L : DiagonalRlim (DiagonalMod l T))

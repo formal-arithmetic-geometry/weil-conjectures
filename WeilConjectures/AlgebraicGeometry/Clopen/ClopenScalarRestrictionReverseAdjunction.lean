@@ -27,7 +27,6 @@ import WeilConjectures.Algebra.Homology.ClopenComparisonTensorSquare.ClopenRever
 
 The interface retains literal module restriction and hides the instance-heavy
 ordinary/system normalization package used by the proof.
-(blueprint: lem-cbc-clopen-scalar-restriction-reverse-adjunction).
 -/
 
 @[expose] public noncomputable section
@@ -41,14 +40,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- On a clopen immersion, scalar-identified restriction is also left adjoint to
-any of its left adjoints. Source: Stacks 04TS, disjoint two-open module gluing.
-(blueprint: lem-cbc-clopen-scalar-restriction-reverse-adjunction).
-Proof: literal restriction is projection under disjoint clopen gluing, and extension
-by zero is insertion of a zero component, hence is both its left and right adjoint.
-The coefficient identification induces an equivalence by restriction of scalars.
-Compose the two adjunctions with this equivalence. Uniqueness of left adjoints
-identifies the composite extension with L; transport the reverse adjunction across
-that isomorphism. This works also for an empty clopen piece. -/
+any of its left adjoints. Source: Stacks 04TS, disjoint two-open module gluing. -/
 theorem clopenScalarRestrictionReverseAdjunction {U T : Scheme.{t}} (j : U ⟶ T)
     [IsOpenImmersion j] [IsClosedImmersion j]
     [(proEtaleOpenComposition j).IsContinuous (ProEt.topology U) (ProEt.topology T)]

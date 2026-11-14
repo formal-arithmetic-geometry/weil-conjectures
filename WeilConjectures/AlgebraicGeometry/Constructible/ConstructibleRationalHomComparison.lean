@@ -15,8 +15,7 @@ import Mathlib.RingTheory.Localization.BaseChange
 /-!
 # Constructible rational Hom comparison
 
-Source: Bhatt--Scholze, Lemma 6.8.12 and Proposition 6.8.14(2), pp. 61--62
-(blueprint: lem-per-constructible-rational-hom-comparison).
+Source: Bhatt--Scholze, Lemma 6.8.12 and Proposition 6.8.14(2), pp. 61--62.
 
 The completed integral category and the realization, including its normalized coefficient
 maps, are the published ones. The general scalar-localization comparison predicate includes
@@ -46,8 +45,7 @@ variable (X : Scheme.{u}) [IsNoetherian X]
 and the actual derived scalar extension of a rational module realization. The existential
 shift structure expresses commutation with shifts for this derived functor; the predicate
 records the shift comparison explicitly in its fraction and compatibility formulas.
-Source: Bhatt--Scholze, Lemma 6.8.12 and Proposition 6.8.14(2)
-(blueprint: lem-per-constructible-rational-hom-comparison). -/
+Source: Bhatt--Scholze, Lemma 6.8.12 and Proposition 6.8.14(2). -/
 def ConstructibleRationalHomComparison (R : RationalModuleRealization l E X) : Prop :=
   (fun [_localizedLinear : Linear (Localization.Away (pbcUniformizer l E))
       (DerivedCategory (pbcModules X (rationalCoefficientSheaf l X E)))] ↦
@@ -245,24 +243,7 @@ shifted Hom with its rational ambient Hom, naturally and compatibly with identit
 composition and shifts. The specified realization of the raw rationalization is full
 and faithful into the actual ambient derived category.
 
-Source: Bhatt--Scholze, Lemma 6.8.12 and Proposition 6.8.14(2), pp. 61--62
-(blueprint: lem-per-constructible-rational-hom-comparison).
-
-Proof:
-1. Choose a rational realization and apply completedContinuousHomHypotheses. Its
-comparison field gives the first conjunct. Reindex its direct-sum comparison along
-ULift ℕ ≃ ℕ to obtain sequential bounded-below Hom continuity. Its boundedness field
-provides a lower cohomological bound for each integral object.
-2. Apply rationalRealizationHomTransport to the specified realization and restrict
-its general source and target predicates using step 1. Retain all five fraction
-and coherence equations, giving ConstructibleRationalHomComparison.
-3. At degree zero, the zero-shift isomorphism and the localized-module base-change
-isomorphism identify the comparison with a linear equivalence on tensor Homs.
-Conjugate by R.objects. Every localized tensor Hom has a fraction presentation.
-The canonical coefficient equivalence sends inverse uniformizer powers to the
-corresponding inverse powers in E. Therefore R.fractions identifies R.J.map with
-this linear equivalence on every arrow. Its surjectivity and injectivity give
-fullness and faithfulness. -/
+Source: Bhatt--Scholze, Lemma 6.8.12 and Proposition 6.8.14(2), pp. 61--62. -/
 theorem constructibleRationalHomComparison :
     (∀ (K : PbcBoundedConstructibleComplete X (pbcIntegralDatum l E))
       (I : Type (u + 1)) [Countable I]

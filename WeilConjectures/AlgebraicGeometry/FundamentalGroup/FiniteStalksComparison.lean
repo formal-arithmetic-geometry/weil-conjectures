@@ -15,7 +15,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Category
 # Comparing the two geometric finiteness predicates
 
 Source: Stacks Project, Tag 04FN.
-(blueprint: lem-galois-finite-stalks-comparison)
 -/
 
 @[expose] public section
@@ -73,24 +72,7 @@ private theorem bijective_geometric_lifts {Y : Scheme.{v}}
 
 /-- Finiteness at algebraically closed geometric points implies the source library's
 finiteness predicate, which tests all separably closed geometric points.
-Source: Stacks Project, Tag 04FN (invariance under extension of geometric points).
-(blueprint: lem-galois-finite-stalks-comparison)
-
-Proof: Given a separably closed field Ω and a geometric point s, extend s along
-Spec of an algebraic closure of Ω. Every étale neighbourhood has exactly the
-same lifts of the two geometric points. Indeed, on its pullback to Spec Ω the
-point picked out by a lift has a section, since Ω is separably closed. That
-section is an open immersion, and the extended lift factors through it because
-Spec of a field is a singleton. This gives surjectivity on lifts. Injectivity
-follows from the open diagonal of the étale morphism and surjectivity of the
-field-extension morphism. These bijections commute with morphisms of
-neighbourhoods and identify their categories of pointed neighbourhoods. Taking
-the colimit of the values of E
-therefore identifies the two stalks. The extended point has a finite stalk by the
-hypothesis. Transfer finiteness across this identification; in Type, finite is
-equivalent to ConcreteCategory.IsFinitelyGenerated. This gives every field of
-IsFiniteSheaf. The argument also applies to empty stalks; on an empty scheme there
-are no geometric points and both assertions are vacuous. -/
+Source: Stacks Project, Tag 04FN (invariance under extension of geometric points). -/
 theorem isFiniteSheaf_of_finite_algClosed_stalks {Y : Scheme.{v}}
     (E : Sheaf Y.smallEtaleTopology (Type (v + 1)))
     (h : ∀ (Ω : Type v) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y),

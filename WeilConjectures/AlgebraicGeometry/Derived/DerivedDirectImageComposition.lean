@@ -12,7 +12,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 # Composition isomorphisms of derived direct images
 
 Source: Stacks Project, `sites-cohomology.tex`, Lemma 0D6E and its proof;
-`categories.tex`, Lemma 0DV0 (blueprint: def-weil-pbc-derived-direct-image-composition).
+`categories.tex`, Lemma 0DV0.
 
 The comparisons are conjugates of the derived inverse-image comparisons, using the
 composite and identity adjunctions.
@@ -28,8 +28,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- The composition isomorphism `R(u ∘ v)_* ≅ Ru_* ∘ Rv_*` on bounded below derived
 categories of abelian etale sheaves. Source: Stacks Project, Lemma 0D6E and its proof,
-with the composite adjunction of Lemma 0DV0
-(blueprint: def-weil-pbc-derived-direct-image-composition).
+with the composite adjunction of Lemma 0DV0.
 
 Conjugate `cᴰ : v⁻¹u⁻¹ ≅ (u ∘ v)⁻¹`, the inverse of `upperStarCompDerivedPlus`,
 with respect to the derived adjunction for the composite morphism and the composite

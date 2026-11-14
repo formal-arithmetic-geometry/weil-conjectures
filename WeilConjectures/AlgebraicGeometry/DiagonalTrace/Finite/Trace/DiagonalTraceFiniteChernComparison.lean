@@ -12,10 +12,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.P1.FiniteP1KummerC
 import WeilConjectures.AlgebraicGeometry.SpTowerShriek.TowerGeometryAdjunctionEvaluation
 
 /-! # Finite realization of the positive Chern component
-
-Source: blueprint latest, diagonal-tower trace proof (1), identification of the
-level map with the unit and section-class map of (G2). This comparison of arrows
-uses Kummer normalization, not invertibility or cohomology of (G2).
 -/
 
 @[expose] public noncomputable section
@@ -73,16 +69,7 @@ private theorem realization_adjunct
 
 /-- Realization of the positive Chern adjunct, before any untwisting.
 
-Source: `sk-prop-diagonal-tower-trace.proof.md` (1), identification of the
-level map with (G2); `lemma-cohomology-projective-line-trace`, the Chern component of the
-positively twisted decomposition.
-(blueprint: lem-sfb-diagonal-trace-finite-chern-comparison).
 
-Proof: finiteP1_coefficient_adjunction_coordinates supplies normalized
-coefficient coordinates and the finite pull/push comparisons p,q, together
-with their unit equation and coefficient-pullback equation. The scalar theorem
-finiteP1_kummer_chern_realization identifies the evaluated Chern arrow on X
-before direct image, giving the positive-line isomorphism t.
 
 The generic helper evaluation_adjunct derives evaluation of any adjunct from
 the unit equation of geometry_adjunction_evaluation and naturality of the

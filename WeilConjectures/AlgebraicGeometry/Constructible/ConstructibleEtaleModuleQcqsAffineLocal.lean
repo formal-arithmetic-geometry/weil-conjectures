@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleStratificationLocalGluingCore
 /-!
 # Affine locality of constructible etale module sheaves on qcqs schemes
 
-Source: Stacks Project, Tags 095E and 03RW(3)
-(blueprint: lem-weil-pbc-constructible-qcqs-affine-local).
+Source: Stacks Project, Tags 095E and 03RW(3).
 -/
 
 @[expose] public section
@@ -79,31 +78,7 @@ private theorem finiteLocallyConstant_comp
 /-- For finite module coefficients, affine-local constructibility, its validity on an
 open cover, and a global constructible immersed partition are equivalent.
 Reduced immersed representatives encode the reduced induced structure on local strata.
-Source: Stacks Project, Tags 095E and 03RW(3)
-(blueprint: lem-weil-pbc-constructible-qcqs-affine-local).
-
-Proof:
-1. For (1) implies (2), take the cover consisting of the whole scheme. Transport the
-   witnessing stratification across the isomorphism from an open in that member to
-   its image in the original scheme. The domains stay the same, so reducedness stays.
-2. Pullback preserves finite local constancy by `IsFiniteLocallyConstantSheaf.upperStar`.
-   Its compatibility with composite morphisms follows from `Etale.upperStarComp` and
-   `IsFiniteLocallyConstantSheaf.of_iso`, all directly in the category of modules.
-3. Under (2), choose an affine neighbourhood in a covering member for each point.
-   Transport its stratification to the corresponding affine open in the base, keeping
-   the same domains and the same composite immersions. Compactness gives a finite
-   subcover, which may be empty when the base is empty.
-4. Apply `exists_global_stratification_factoring_local`. Pull back the finite local
-   systems along its actual factorization maps and use step 2. On each global stratum,
-   `finite_locally_constant_module_values_iff` gives the finite-value trivialization
-   required by `IsConstructibleEtaleModuleSheaf`.
-5. Under (3), base change the stratification to the given affine open using
-   `Stratification.pullback`; constructibility of the preimages is already a field.
-   Replace each domain by its explicit nilradical subscheme. These schemes are reduced
-   and the reduction maps have full image, so the strata and their partition stay the
-   same. Pull back the original finite local systems along the first projection and
-   then along the reduction map; the pullback square and step 2 give (1).
-6. Apply `List.tfae_of_cycle` to these three implications. -/
+Source: Stacks Project, Tags 095E and 03RW(3). -/
 theorem constructible_etale_module_qcqs_affine_local
     {T : Scheme.{u}} [CompactSpace T] [QuasiSeparatedSpace T]
     {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]

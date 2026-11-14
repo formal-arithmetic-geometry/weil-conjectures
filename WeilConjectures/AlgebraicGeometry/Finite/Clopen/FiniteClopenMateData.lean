@@ -16,8 +16,7 @@ public import Mathlib.CategoryTheory.Adjunction.Mates
 /-!
 # Canonical clopen alpha and its proper mate on the pro-etale site
 
-Source: Stacks Project, Tags 09AF, 0F7B and 0B65
-(blueprint: def-cbc-proetale-clopen-mate-data).
+Source: Stacks Project, Tags 09AF, 0F7B and 0B65.
 
 These constructions are independent of their transport property. They are moved
 verbatim from FiniteClopenMateSiteTransport so that the alpha comparison can be
@@ -38,7 +37,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.ProEtale
 
 /-- Equality transport for the canonical open extension functors.
-Source: Stacks 09AF (blueprint: lem-cbc-finite-clopen-mate-site-transport). -/
+Source: Stacks 09AF. -/
 def cbcOpenCongr (Λ : Type (u + 1)) [CommRing Λ]
     {U X : Scheme.{u}} {j k : U ⟶ X} [IsOpenImmersion j] [IsOpenImmersion k]
     (h : j = k) : openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j ≅
@@ -46,7 +45,7 @@ def cbcOpenCongr (Λ : Type (u + 1)) [CommRing Λ]
   h ▸ Iso.refl _
 
 /-- Equality transport for inverse image, with its fixed canonical construction.
-Source: Stacks 099R (blueprint: lem-cbc-finite-clopen-mate-site-transport). -/
+Source: Stacks 099R. -/
 def cbcPullCongr (Λ : Type (u + 1)) [CommRing Λ]
     {U X : Scheme.{u}} {j k : U ⟶ X} (h : j = k) :
     upperStar (ModuleCat.{u + 1} Λ) j ≅ upperStar (ModuleCat.{u + 1} Λ) k :=
@@ -54,8 +53,7 @@ def cbcPullCongr (Λ : Type (u + 1)) [CommRing Λ]
 
 /-- The identity/zero projection onto a clopen subscheme, on module sheaves.
 It is the direct-image unit followed by the inverse of the canonical map
-from extension by zero to direct image. Source: Stacks Tags 09AE and 0F7B
-(blueprint: lem-cbc-finite-clopen-mate-site-transport). -/
+from extension by zero to direct image. Source: Stacks Tags 09AE and 0F7B. -/
 def cbcClopenProjection (Λ : Type (u + 1)) [CommRing Λ]
     {U X : Scheme.{u}} (s : U ⟶ X) [IsOpenImmersion s] [IsClosedImmersion s] :
     𝟭 (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) ⟶
@@ -69,8 +67,7 @@ def cbcClopenProjection (Λ : Type (u + 1)) [CommRing Λ]
 
 /-- The canonical sheaf alpha: inverse open-unit base change, projection onto the
 clopen lift, and the canonical open and inverse-image compositors.
-Source: Stacks Tags 09AF and 0F7B
-(blueprint: lem-cbc-finite-clopen-mate-site-transport). -/
+Source: Stacks Tags 09AF and 0F7B. -/
 def cbcClopenAlphaSheaf (Λ : Type (u + 1)) [CommRing Λ]
     {V W S T : Scheme.{u}} (k : V ⟶ W) (i : S ⟶ T) (r : V ⟶ S) (p : W ⟶ T)
     [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]
@@ -104,8 +101,7 @@ def cbcClopenAlphaSheaf (Λ : Type (u + 1)) [CommRing Λ]
 
 /-- The same prescribed alpha on bounded-below derived categories. Exactness of all
 four sheaf functors identifies the right-derived base-change map with termwise alpha.
-Source: Stacks Tags 015F, 09AF and 0F7B
-(blueprint: lem-cbc-finite-clopen-mate-site-transport). -/
+Source: Stacks Tags 015F, 09AF and 0F7B. -/
 def cbcClopenAlphaPlus (Λ : Type (u + 1)) [CommRing Λ]
     {V W S T : Scheme.{u}} (k : V ⟶ W) (i : S ⟶ T) (r : V ⟶ S) (p : W ⟶ T)
     [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]
@@ -123,8 +119,7 @@ def cbcClopenAlphaPlus (Λ : Type (u + 1)) [CommRing Λ]
       (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) k)).hom
 
 /-- The proper-adjunction mate of the specified clopen alpha on this site.
-Source: Stacks Tags 0B65 and 0F7B
-(blueprint: lem-cbc-finite-clopen-mate-site-transport). -/
+Source: Stacks Tags 0B65 and 0F7B. -/
 def cbcClopenMatePlus (Λ : Type (u + 1)) [CommRing Λ]
     {V W S T : Scheme.{u}} (k : V ⟶ W) (i : S ⟶ T) (r : V ⟶ S) (p : W ⟶ T)
     [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]

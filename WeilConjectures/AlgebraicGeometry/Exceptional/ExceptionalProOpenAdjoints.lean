@@ -74,19 +74,7 @@ variable (O : Type (u + 1)) [CommRing O] (ell : O)
 /-- Open restriction on strict pro-etale coefficient systems and on each level has
 an extension-by-zero left adjoint.
 
-Source: Stacks 03DI; Zheng Construction 4.1.
-(blueprint: lem-sf-pro-open-restriction-right-adjoints).
-
-Proof: weakly etale restriction preserves all small limits on sheaves of sets.
-The normalized moduleUnderlying comparison and the conservative limit-preserving
-underlying-sheaf functor imply all-limit preservation for every level inverse image.
-Evaluation has a left adjoint, so it preserves all small limits. Evaluations jointly
-reflect isomorphisms and hence existing limits; inverseEvaluation therefore implies
-all-limit preservation for the system inverse image. The coefficient-system category
-is equivalent to the Grothendieck abelian category of strict ring systems, and each
-level module category is Grothendieck abelian. Apply the special adjoint functor
-theorem to their small coseparators. Empty opens and the zero quotient ring obey the
-same argument. No finiteness of the rings or boundedness of complexes is needed. -/
+Source: Stacks 03DI; Zheng Construction 4.1. -/
 theorem exceptionalProOpen_rightAdjoints :
     I.inverse.IsRightAdjoint ∧ ∀ n : ℕ, (I.lift n).modules.IsRightAdjoint := by
   classical

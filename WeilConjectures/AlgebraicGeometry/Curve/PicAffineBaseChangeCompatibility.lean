@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.Curve.PicBoundaryBaseChangeTransport
 
 /-! # Compatibility of the affine Picard quotient with field extension
 
-Source: `literature/stacks-project/etale-cohomology.tex`, Tags 03RQ and 01JF
-(blueprint: lem-sc-pic-affine-base-change-compatibility).
+Source: `literature/stacks-project/etale-cohomology.tex`, Tags 03RQ and 01JF.
 -/
 
 @[expose] public section
@@ -32,8 +31,7 @@ fields.  The proof uses base change of the compactification, the boundary restri
 and the Jacobian base-change compatibility.
 
 Source: Stacks Tags 03RQ and 01JF, and the affine case of
-`proposition-cohomology-smooth-affine-curve` (blueprint:
-lem-sc-pic-affine-base-change-compatibility).
+`proposition-cohomology-smooth-affine-curve`.
 -/
 theorem pic_affine_base_change_compatibility
     {k k' : Type u} [Field k] [Field k'] [Algebra k k'] [IsAlgClosed k] [IsAlgClosed k']

@@ -18,7 +18,6 @@ The map `∐_{a ∈ 𝔽_p} Y ⟶ Y ×_S Y`, `(a, y) ↦ (y + a, y)`, is an isom
 Artin–Schreier cover `Y ⟶ S`: the difference `d = T₁ - T₂` of the two coordinates on
 `Y ×_S Y` satisfies `d ^ p = d`, and the Lagrange idempotents at `d` split `Y ×_S Y` into the
 loci `d = a`, each of which is the image of the summand indexed by `a`.
-Source: blueprint, lemma-artin-schreier-character-sheaf, steps (4)-(5).
 -/
 
 @[expose] public section

@@ -24,8 +24,7 @@ effective (Stacks 0CCJ).
   locally free morphism, descent data are effective as soon as every finite set of points of `V`
   lying over one point of `Y` lies in an affine open (Stacks 0CCI).
 - `CategoryTheory.Over.DescentDatum.isEffective_of_isHProjective`: along a surjective finite
-  locally free morphism, descent data on H-projective schemes over `X` are effective (blueprint
-  `proposition-jacobian-over-ground-field--1`).
+  locally free morphism, descent data on H-projective schemes over `X` are effective.
 
 ## Proof
 
@@ -82,7 +81,7 @@ surjective finite locally free morphism and let `V` be a scheme over `X` in whic
 of points lying over one point of `Y` lies in an affine open. Then every descent datum on `V`
 relative to `p` is effective.
 
-(blueprint: `proposition-jacobian-over-ground-field--1`, a step of the proof) -/
+(a step of the proof) -/
 theorem isEffective_of_isFinite_of_fibre [IsFinite p] [Flat p] [LocallyOfFinitePresentation p]
     [Surjective p] {V : Over X}
     (hV : ∀ (y : Y) (s : Set V.left), s.Finite → (∀ x ∈ s, (V.hom ≫ p) x = y) →
@@ -100,9 +99,7 @@ it factors as a closed immersion `V ⟶ ℙ(n; X)`, with `n` finite, followed by
 
 This is Stacks 0CCJ: finitely many points of `V` over one point of `Y` lie in an affine open
 (`AlgebraicGeometry.IsHProjective.exists_isAffineOpen_superset`), which is the criterion
-`isEffective_of_isFinite_of_fibre` (Stacks 0CCI).
-
-(blueprint: `proposition-jacobian-over-ground-field--1`) -/
+`isEffective_of_isFinite_of_fibre` (Stacks 0CCI). -/
 theorem isEffective_of_isHProjective [IsFinite p] [Flat p] [LocallyOfFinitePresentation p]
     [Surjective p] {V : Over X} [IsHProjective V.hom] (D : Over.DescentDatum p V) :
     D.IsEffective := by

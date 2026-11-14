@@ -31,20 +31,7 @@ attribute [local irreducible] diagonalCompletedRestriction
 
 /-- A root-normalized ordinary limit comparison has the same finite projections
 as the coefficient root cone, after the specified strict root-system transport.
-No supported class, Cartier boundary, or Chern arrow occurs in this assertion.
-
-Source: diagonal-limit clause (3), normalization of the root-limit comparison;
-diagonal trace proof (1), root cone and exact single/shift comparisons.
-(blueprint: lem-sfb-diagonal-trace-root-projection).
-
-Proof: hcone identifies the ordinary limit-cone components after transport by e.
-Insert the exact single comparisons and apply the normalized derived-limit
-projection to the single complex of H. Naturality moves b and the strict system
-transport across this projection. The canonical single and shift comparisons
-cancel in rootSystemTransport. The comparison of the two right-derived limit
-models is fixed by their common derived unit, so its normalized finite projection
-is the same map. This gives the displayed equation for each n separately; no
-claim that finite evaluations detect arbitrary derived arrows is used. -/
+No supported class, Cartier boundary, or Chern arrow occurs in this assertion. -/
 theorem diagonalTrace_rootProjection (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
     [DiagonalTraceLocalizations l T]
     (c : SpTowerClasses.Chern l (ULift.{u} (Padic l)) T)

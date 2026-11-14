@@ -711,7 +711,6 @@ import WeilConjectures.CategoryTheory.RingedSiteCompleteElementsLocal
 /-! # Finite reduction of the completion unit over either coefficient ring
 
 Source: Stacks Tags 099M and 091N.
-(blueprint: lem-weil-pbc-completed-coefficient-finite-unit).
 -/
 
 @[expose] public noncomputable section
@@ -812,12 +811,7 @@ private def scalarAdjunction {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) :
   exact (adj.mapHomologicalComplex (.up ℤ)).derived W W' α β
 
 /-- Finite scalar extension inverts the quotient-completion unit, for constant or
-completed coefficients. Source: Stacks Tags 099M and 091N.
-(blueprint: lem-weil-pbc-completed-coefficient-finite-unit).
-Proof: ideal generators act nilpotently in each finite quotient, so its restricted
-objects are derived complete. The reflector gives bijective precomposition into
-these objects. Scalar adjunction transports these bijections to finite coefficients;
-coyoneda detects that finite scalar extension of the unit is invertible. -/
+completed coefficients. Source: Stacks Tags 099M and 091N. -/
 theorem finite_completionUnit_isIso (b : Bool)
     (N : D (coefficients J A I b)) (n : ℕ) :
     IsIso ((extend (finiteMap J A I b n)).map ((completionUnit J A I b).app N)) := by

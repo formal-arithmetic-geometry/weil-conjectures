@@ -92,24 +92,7 @@ private theorem tensorModule_retract
 coefficient complex and its compatible finite-free summands.
 
 Source: Stacks Project, Tag 09C6, the displayed finite-projective quotient calculation;
-Modules on Sites, Tags 093J--093M; More on Algebra, Tag 09AW.
-(blueprint: lem-weil-pbc-finite-perfect-adic-canonical-comparison).
-
-Proof: form the ordinary completed constant complex and tensor it termwise with the
-actual coefficient diagram. Map the coefficient cone under tensor and extend it
-along the inverse right unitor; tensor-projection naturality proves that its maps
-commute with every differential. Split each finite-projective term P^j from A^r
-using Module.Finite.exists_comp_eq_id_of_projective. The finite-free tensor-cone
-comparison identifies the image of A^r with the finite power of the coefficient
-diagram and its unit cone. Compose the images of the splitting maps with that
-diagram isomorphism and its inverse, and do the same at the cone point. Functoriality
-proves the two splittings. Naturality of the tensor projections and the finite-free
-cone comparison prove the inclusion equation; the inverse comparison proves the
-projection equation. Finally each projective term is flat, so the bounded-flat
-tensor comparison supplies the derived diagram and cone-point isomorphisms. This
-last comparison is a separate named obligation; the explicit construction and all
-finite-projective retract equations are proved here. Zero terms, rank zero, and
-the zero coefficient ring are included. No limit or Roos assertion is used -/
+Modules on Sites, Tags 093J--093M; More on Algebra, Tag 09AW. -/
 theorem finitePerfectAdicCanonical_comparison
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (L : ∀ n : ℕ, DerivedCategory (ModuleCat.{t} A) ⥤

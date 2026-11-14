@@ -17,9 +17,6 @@ import WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientHeartTriangulate
 /-!
 # Finite cone generation of the bounded constructible coefficient category
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-cor-coefficient-heart-ii/
-sk-cor-coefficient-heart-ii-generation.md and its proof
-(blueprint: corollary-coefficient-heart-b--2).
 
 The witness below is a nonempty finite sequence ending at the specified object. Its
 entries are shifted lisse extensions or shifted cones between strictly earlier entries.
@@ -137,8 +134,6 @@ construction from shifted locally closed extensions of lisse coefficient modules
 triangle with third vertex `(F r)[n]` says that `F r` is a cone up to integer shift and
 isomorphism, since distinguished triangles are closed under isomorphism.
 
-Source: blueprint corollary-coefficient-heart-b--2 and its proof
-(blueprint: corollary-coefficient-heart-b--2).
 
 Proof plan (the five steps of the DAG node):
 1. Let T be the class admitting such finite witnesses. Zero is a generator: take the
@@ -167,10 +162,10 @@ rotation gives A_k[-1] -> F_{k-1} -> F_k -> A_k with the negative shifted connec
 map. Starting from zero, append this generator and cone at each stage. Shift this finite
 witness to construct every F[n]. The zero sheaf requires only the rank-zero generator.
 5. For a bounded constructible complex choose a representative C with cohomology in
-[a,b]. By proposition-open-direct-image-preserves-finite, the image of tau_le(a-1) C is zero in the
+[a,b]. By proposition-open-direct-image-preserves-finite, the image of tau_le C is zero in the
 derived category and tau_le b C is isomorphic to K. For q from a to b,
 theorem-pbc-injective-acyclicity and inverse rotation exhibit tau_le q C as the cone of
-H^q(C)[-q-1] -> tau_le(q-1) C, with the signed connecting map. Steps 3--4 give a witness
+H^q(C)[-q-1] -> tau_le C, with the signed connecting map. Steps 3--4 give a witness
 for the first term. Concatenate witnesses and append each cone, then use isomorphism
 closure to end at K. Vanishing intermediate cohomology and an acyclic C use the same
 zero case. Together with step 2 this proves the equivalence. -/

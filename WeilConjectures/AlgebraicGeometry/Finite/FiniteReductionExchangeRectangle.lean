@@ -10,8 +10,7 @@ import all WeilConjectures.AlgebraicGeometry.Finite.FiniteReductionPullbackSquar
 import all WeilConjectures.CategoryTheory.ProperBaseChange.ExchangeMateCube
 
 /-! The finite projection/exchange rectangle in the intrinsic quotient-ring coordinates.
-Source: Stacks Project, Tag 0E48.
-(blueprint: lem-weil-pbc-intrinsic-finite-exchange-rectangle) -/
+Source: Stacks Project, Tag 0E48. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false

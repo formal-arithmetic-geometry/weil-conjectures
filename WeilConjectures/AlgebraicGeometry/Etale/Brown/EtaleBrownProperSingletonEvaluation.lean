@@ -227,22 +227,7 @@ variable (O : Type (u + 1)) [CommRing O] (t : O)
 
 /-- The evaluated proper singleton mate is the coefficient projection inverse.
 Source: Zheng, Lemma 5.13, printed pp. 34--35, using the normalized transpose
-of Construction 4.1
-(blueprint: lem-pur-etale-brown-proper-singleton-evaluation).
-
-Proof: transpose the asserted equality under the level-m proper inverse/direct
-adjunction and then under the scalar extension/restriction adjunction. The equation
-fixing q as the mate of derivedTensor rewrites the scalar part. The compatibility
-of directEvaluation with geometric counits rewrites the geometric part. The
-singleton below-level comparison is the scalar transpose of the derived transition:
-verify this on flat-term K-flat representatives using derivedBelow_rep and the
-ordinary singleton hom_formula, and descend by localization. The directTransition
-identity now identifies the two resulting maps. Finally the defining conjugate
-identity for insertion and the two triangle identities give the same singleton
-adjunct on both sides. Injectivity of the two Hom transposes proves the equality.
-No invertibility assertion for the singleton mate is used. In particular m=n is
-covered by the normalized identity scalar extension, and zero coefficients require
-no exceptional case. -/
+of Construction 4.1. -/
 theorem etaleBrownProperSingletonEvaluation
     (S : StrictEtaleCompactSupport O t c) {m n : ℕ} (h : m ≤ n)
     (q : (S.PZ.scalar h).derived ⋙ (S.properDerived.level m).direct ≅

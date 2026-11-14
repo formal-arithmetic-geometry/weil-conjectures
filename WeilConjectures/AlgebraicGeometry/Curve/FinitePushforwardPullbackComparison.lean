@@ -19,8 +19,7 @@ import Mathlib.CategoryTheory.Whiskering
 
 /-! # Finite pushforward comparison for curve assertions
 
-Source: Stacks Project, Lemma 0A5D (lemma-finite-pushforward-statements).
-(blueprint: g1-finite-pushforward-pullback-comparison)
+Source: Stacks Project, Lemma 0A5D.
 -/
 
 @[expose] public section
@@ -98,15 +97,7 @@ private theorem finite_pullback_properties
   apply comparison_properties _ _ _ _ hl hr
   exact congrArg DFunLike.coe (Etale.cohomology_edgeMap_baseChange sq F q)
 
-/-- Source: Stacks Project, Lemma 0A5D, base-change and restriction steps
-(blueprint: g1-finite-pushforward-pullback-comparison).
-Proof: the finite edge maps for f and its base change are bijective. Finite exchange is
-an isomorphism, hence induces a bijection on cohomology. The edge-map base-change identity
-identifies the two pullback maps through these bijections. Conjugation by bijections
-preserves bijectivity and surjectivity. The equivalence of coefficient categories induces
-isomorphisms of underlying abelian sheaves and commutes with pullback, so it gives the
-same identity for the converted coefficient sheaves. No curve condition on the scheme
-pulled back to is needed, so this applies to opens as well as field extensions. -/
+/-- Source: Stacks Project, Lemma 0A5D, base-change and restriction steps. -/
 theorem IsCurve.finite_pushforward_pullback_comparison {k : Type u} [Field k] [IsAlgClosed k]
     (P : CurveCoefficientPair k) {Y : Scheme.{u}}
     (g : Y ⟶ Spec (.of k)) [IsCurve g] (f : P.C ⟶ Y) [IsFinite f]

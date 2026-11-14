@@ -12,7 +12,6 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictSc
 /-! # Evaluation commutes with restriction of derived Hom coefficients
 
 Source: Stacks Project, Tags 03DA, 098K and 0F63.
-(blueprint: lem-weil-pbc-derived-hom-restriction-evaluation).
 -/
 
 @[expose] public section
@@ -332,18 +331,7 @@ private theorem comparisonHom_restrict
 
 /-- Evaluation of local derived morphisms commutes with coefficient restriction.
 Source: Stacks Project, Tags 03DA and 098K (restriction of coefficients and localization),
-and 0F63 (the inverse sheafification unit on weakly contractible affines).
-(blueprint: lem-weil-pbc-derived-hom-restriction-evaluation).
-
-Proof: Conjugate restriction of scalars on each localized derived category by
-sliceRestrictScalarsIso. These conjugations form the specified Hom presheaf map.
-The comparison inverse image commutes with them: on etale generators this is the
-pasting identity for the coefficient-restriction mate and the comparison localization
-isomorphism. Transpose this identity along sheafification and comparison adjunctions.
-On the pro-etale site, naturality of the sheafification unit intertwines the same
-conjugations. At U this unit is bijective, so cancel it. Expanding the resulting
-conjugation and composing with its target coefficient isomorphism gives the square
-below. This uses no finiteness, no perfectness, and no universal normalization arrow. -/
+and 0F63 (the inverse sheafification unit on weakly contractible affines). -/
 theorem derivedHomEvaluation_restrictScalars
     (X : Scheme.{u}) {R S : Type (u + 1)} [CommRing R] [CommRing S] (q : R →+* S)
     (A D : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} S)))

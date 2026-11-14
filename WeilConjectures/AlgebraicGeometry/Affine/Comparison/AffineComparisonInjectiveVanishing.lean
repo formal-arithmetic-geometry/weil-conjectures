@@ -19,8 +19,7 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 /-!
 # Affine vanishing for comparison pullbacks of injective abelian sheaves
 
-Source: Stacks Project, Pro-etale Cohomology, Tag 099U, `lemma-affine-vanishing`
-(blueprint: lem-cbc-abelian-affine-comparison-vanishing).
+Source: Stacks Project, Pro-etale Cohomology, Tag 099U, `lemma-affine-vanishing`.
 -/
 
 @[expose] public section

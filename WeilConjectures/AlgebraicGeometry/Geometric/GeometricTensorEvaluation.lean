@@ -64,7 +64,6 @@ import all WeilConjectures.AlgebraicGeometry.System.SystemTensorReductionFormula
 /-! # Evaluation compatibility of representative-normalized tensor comparisons
 
 Source: Zheng Construction 4.1; Stacks 06YU and 07A4.
-(blueprint: lem-coef-semilinear-geometric-tensor-evaluation)
 -/
 
 @[expose] public noncomputable section
@@ -420,22 +419,7 @@ variable (A : Data.{c, v, r} J B τ)
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- The ordinary evaluation square implies the derived evaluation square.
-Source: Zheng Construction 4.1; Stacks 06YU and 07A4.
-(blueprint: lem-coef-semilinear-geometric-tensor-evaluation).
-
-Proof: each comparison model preserves flat modules, by applying its K-flat
-preservation to a single flat module and using the converse single-complex criterion.
-Restrict both natural transformations to pairs of flat-term K-flat system complexes.
-The summand formulas for the four tensor models identify the two chain
-maps: on the (p,q) summand this is precisely the given ordinary evaluation square,
-with the inverse comparisons. Additivity preserves the sign on the second
-differential. Apply localization and substitute the four representative equations.
-Naturality of the exact-functor factorization isomorphisms identifies the remaining
-factors with geometryPullEvaluation, which was defined by deriving the ordinary
-comparison. Cancel the tensor-model and exact-factorization isomorphisms. Finally,
-restriction to pairs of resolving representatives is faithful, by cochain tensor
-model rigidity, so equality holds for arbitrary derived inputs. No derived evaluation
-functor is assumed to be faithful. -/
+Source: Zheng Construction 4.1; Stacks 06YU and 07A4. -/
 theorem geometricTensorEvaluation [PreservesFiniteLimits uInv]
     (tensorPullback : A.closed.tensor ⋙ O.pull.mapDerivedCategory ≅
     (O.pull.mapDerivedCategory.prod O.pull.mapDerivedCategory) ⋙ target.closed.tensor)

@@ -25,30 +25,7 @@ open scoped TensorProduct
 namespace AlgebraicGeometry.IsCurve
 
 /-- The tensor-linear extension of canonical additive pullback is surjective.
-Source: Stacks Project, Tags 02KH (finite affine cover proof) and 03P2.
-(blueprint: lem-pbc-additive-cohomology-tensor-surjective)
-
-Proof: IsCurve makes C quasi-compact and separated. Choose a finite affine open
-cover and its inverse-image cover on C'. Finite intersections and their base
-changes are affine. The natural coordinates identify G and G' with the lifted
-associated structure sheaves. Their scalar endomorphisms are uniquely fixed by
-the section formulas, so the scalar-natural coefficient and etale/Zariski
-comparisons identify the specified cohomology actions with structural scalars.
-Compute both cohomology groups using the chosen covers. Affine section base change
-identifies the latter Cech complex with k' tensor the former; the section formula
-hq identifies the map on cochains with x mapping to 1 tensor x. Naturality of the
-Cech-to-cohomology comparison identifies the induced map with H(q) after the
-canonical Ext cohomology pullback. Pure tensors generate, so hβ identifies β
-with the induced scalar-extension map.
-For surjectivity, represent a target class by a cocycle of the pulled-back
-complex. In the tensor complex it is a cycle. Exactness of tensoring over k
-identifies its cycle module with k' tensor the original cycle module. Express it
-as a finite sum of pure tensors of original cycles. Their original cohomology
-classes give z in k' tensor H¹(G), and the cochain formula gives β z equal to the
-prescribed target class. This proves surjectivity.
-The displayed pullback is transported to the categorical pullback by its unique
-isomorphism. Empty and affine schemes have zero first cohomology, so the argument
-also covers those cases. No properness or finite-dimensionality is used. -/
+Source: Stacks Project, Tags 02KH (finite affine cover proof) and 03P2. -/
 theorem additive_cohomology_tensor_surjective
     {k k' : Type u}
     [Field k] [Field k'] [Algebra k k']

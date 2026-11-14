@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.Injective.InjectiveExchangeTargetTransp
 /-! # Injective representative computation of the derived exchange
 
 Source: Stacks Project, Tag 03Q9, final injective-complex paragraph.
-(blueprint: lem-weil-pbc-injective-exchange-representative).
 -/
 
 /- This original-model counterpart follows the proved calculation in
@@ -70,20 +69,7 @@ private lemma map_comp_naturality {A B C D : Type*}
 /-- Compute the derived mate on the chosen injective representative, before sections.
 
 Source: Stacks Project, Tag 03Q9, final injective-complex paragraph, with the
-factorization `Adjunction.derivedPlus_mateEquiv_app_fac`.
-(blueprint: lem-weil-pbc-injective-exchange-representative).
-
-Proof: regard the injective complex as an object of the bounded-below homotopy
-category. Lift q to its localization using the fully faithful inclusion of D⁺
-into D. Apply the derived mate factorization and naturality in this lift of q.
-The source direct-image unit is invertible on the injective complex; cancel it.
-The definition of smallModel_sourceInjectiveDirectImageIso identifies its inverse with this
-cancelled unit, followed by localization comparisons. The exact pullback
-factorization identifies the underived exchange with Q of its termwise map.
-Finally the defining unit compatibility of rightDerivedFunctorPlusCompatibility
-changes the target bounded-below unit into the unbounded unit. Naturality moves
-q.inv to the last factor. No target unit is inverted, so neither injectivity of
-the pulled-back complex nor any acyclicity of it is required. -/
+factorization `Adjunction.derivedPlus_mateEquiv_app_fac`. -/
 theorem smallModel_injectiveExchange_representative {X S : Scheme.{v}} (f : X ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1}))

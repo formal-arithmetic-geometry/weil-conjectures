@@ -13,7 +13,6 @@ import Mathlib.Algebra.Homology.ShortComplex.ConcreteCategory
 /-! # Section homology detects equality of Ext cocycles
 
 Source: Stacks Project, Tags 01EQ and 01FD.
-(blueprint: lem-pc-ext-section-injective)
 -/
 
 @[expose] public section
@@ -26,18 +25,7 @@ attribute [local instance] cohomologyHasSheafify cohomologyHasExt
 /-- Equality of section homology classes implies equality of the corresponding
 Ext classes. Source: Stacks Project, Tag 01EQ, computation of cohomology on an
 injective resolution; Mathlib `extMk_eq_zero_iff` and the constant-sheaf
-adjunction. (blueprint: lem-pc-ext-section-injective)
-
-Proof: Subtract the two cocycles and their section cycles. In positive degree,
-equality of section homology classes makes the difference a section boundary.
-Choose a section preimage of this boundary. The constant-sheaf adjunction,
-evaluated on the generator of the lifted integers, turns that section into a
-morphism to the preceding resolution term. Naturality of the adjunction and
-the cycle inclusions identify its differential with a minus b. Apply
-extMk_eq_zero_iff and sub_extMk to conclude equality of Ext classes. In degree
-zero there are no incoming boundaries, so the cycle inclusion is injective
-and equality of homology gives equality of sections; the adjunction then
-gives a = b. This also covers the zero sheaf and the empty space. -/
+adjunction. -/
 theorem abelianCech_ext_section_injective
     {X : Scheme.{u}} {F : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}}
     (I : InjectiveResolution F) (q : ℕ)

@@ -100,14 +100,7 @@ private theorem native_right_eq
 
 /-- Pullback of a constant complex concentrated in degree zero respects the
 proper/open composition of a compactification.
-Source: Stacks Tag 07A6; Zheng Construction 2.26
-(blueprint: lem-pur-etale-constant-pullback-composition).
-
-Proof: conjugate by the exact constant-sheaf/single comparison. On single
-objects the derived composition comparison is the single of ordinary pullback
-composition. Naturality of the single comparison moves the proper constant
-identification through open pullback. The ordinary constant comparisons compose
-by uniqueness of left adjoints, giving the claimed equality. -/
+Source: Stacks Tag 07A6; Zheng Construction 2.26. -/
 private theorem native_composition_complete
     (C : Type (u + 1)) [CommRing C] {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f) (M : ModuleCat.{u + 1} C) :
@@ -127,14 +120,7 @@ private theorem native_composition_complete
 
 /-- Pullback of a constant complex concentrated in degree zero respects the
 proper/open composition of a compactification.
-Source: Stacks Tag 07A6; Zheng Construction 2.26
-(blueprint: lem-pur-etale-constant-pullback-composition).
-
-Proof: conjugate by the exact constant-sheaf/single comparison. On single
-objects the derived composition comparison is the single of ordinary pullback
-composition. Naturality of the single comparison moves the proper constant
-identification through open pullback. The ordinary constant comparisons compose
-by uniqueness of left adjoints, giving the claimed equality. -/
+Source: Stacks Tag 07A6; Zheng Construction 2.26. -/
 theorem etaleConstantPullback_comp_single
     (C : Type (u + 1)) [CommRing C] {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f) (M : ModuleCat.{u + 1} C) :

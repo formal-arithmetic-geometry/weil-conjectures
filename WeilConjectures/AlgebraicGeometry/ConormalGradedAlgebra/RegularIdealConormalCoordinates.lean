@@ -20,7 +20,6 @@ import WeilConjectures.RingTheory.Regular.RegularSequenceHigherRelations
 # Conormal coordinates for an affine regular ideal
 
 Source: Stacks Tags 00LN, 0631--0633 and 01R3.
-(blueprint: lem-sc-regular-ideal-conormal-coordinates).
 -/
 
 @[expose] public noncomputable section
@@ -150,23 +149,7 @@ attribute [local instance] RingHomInvPair.of_ringEquiv RingHomInvPair.of_ringEqu
 set_option backward.isDefEq.respectTransparency false in
 /-- Regular affine generators give a conormal frame and the polynomial multiplication
 comparison. Its monomials are represented by the actual coordinate products.
-Source: Stacks Tags 00LN, 0631--0633 and 01R3.
-(blueprint: lem-sc-regular-ideal-conormal-coordinates).
-
-Proof: The regular-sequence graded-polynomial theorem identifies the associated
-graded ring with the polynomial ring over the section quotient. Its degree-one
-part gives the basis of I/I² consisting of the generator classes. The canonical
-affine conormal comparison transports this basis to sections of the conormal
-piece, preserving the classes of the actual ideal sections. Sheafify the basis
-on the affine inverse image to get the free structure-module frame. On this
-affine open the symmetric-algebra sheaf agrees with the symmetric algebra of
-sections. The basis identifies this symmetric algebra with the polynomial ring.
-The canonical symmetric comparison and the regular-sequence polynomial map
-agree on scalars and each variable, hence on every polynomial; both affine
-comparisons are isomorphisms, so its section map is bijective. The product law
-of the conormal presentation gives the asserted representative of each monomial
-by induction on its exponent vector. This includes degree zero, d = 0 and empty
-inverse image; no nonzero hypothesis on the quotient is used separately. -/
+Source: Stacks Tags 00LN, 0631--0633 and 01R3. -/
 theorem regular_ideal_conormal_coordinates {V S : Scheme.{u}}
     (s : S ⟶ V) [IsClosedImmersion s] (U : V.affineOpens) (d : ℕ)
     (x : Fin d → Γ(V, U.1))

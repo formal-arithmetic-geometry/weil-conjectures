@@ -29,8 +29,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- The coefficient part of the open projection formula, with all maps fixed by
 adjunction and by their K-flat model normalizations.
-Source: Stacks 0E8I, 03EL, 06YY, 0E8J
-(blueprint: lem-coef-etale-open-scalar-coherence). -/
+Source: Stacks 0E8I, 03EL, 06YY, 0E8J. -/
 structure EtaleOpenScalarComparisons
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] : Prop where
@@ -495,34 +494,7 @@ private theorem restriction_unique
 /-- Scalar change commutes canonically with open extension and restriction,
 with the prescribed K-flat normalizations and coefficient and tensor composition laws.
 Source: Stacks, Modules on Sites, Tags 0E8I and 03EL; Cohomology on Sites,
-Tags 06YY and 0E8J (blueprint: lem-coef-etale-open-scalar-coherence).
-
-Proof: Apply the ordinary open/scalar adjunctions to the balancing map on tensor
-products. Uniqueness of the left adjoint identifies this map with q-zero; the
-same argument for inverse image identifies it with r-zero. Apply these maps
-in every degree of a complex. Transpose by the scalar adjunctions. The defining
-scalar representative transposes to the localized ordinary scalar unit, and the
-exact open adjunction units localize the ordinary units. Naturality of the exact
-localization factors and their composition coherence therefore give the two
-representative equations, in particular for every K-flat complex. Equivalently,
-one can first check flat K-flat models and then resolve an arbitrary K-flat
-complex by such a model; ordinary scalar extension preserves quasi-isomorphisms
-between K-flat complexes, so naturality transports the same equation. On K-flat
-complexes the scalar representative maps are invertible. Every derived object
-has a flat K-flat resolution, transported through the constant-module
-equivalence. Naturality on such a resolution and cancellation of the invertible
-representative maps determine each component of q and r, hence prove the two
-uniqueness assertions. In a tower A to B to C, both scalar paths act on a local
-generator by ((p tensor b) tensor c) mapped to p tensor bc. The chosen scalar
-composition isomorphism is the conjugate of the same restriction identity and
-therefore has this formula. For the mixed square, use flat K-flat resolutions
-of P and T and the uniquely normalized scalar tensor comparison. Both paths
-send (p tensor b1) tensor (t tensor b2) to (p tensor t) tensor (b1*b2), followed
-by extension by zero. These maps are balanced and natural; sheafification and
-the direct-sum totalization preserve the equalities and their Koszul signs.
-Local tensor generators generate the sheafified tensor, so the equalities
-hold on the models and descend to the unbounded derived categories. No
-flatness of B over A or quasi-compactness of the open immersion is used. -/
+Tags 06YY and 0E8J. -/
 theorem etaleOpenScalarComparisons
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :

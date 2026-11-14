@@ -14,8 +14,6 @@ import WeilConjectures.AlgebraicGeometry.Pur.PurTwistSheafLocallyFree
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 
 /-! # Lifting the Chern adjunct to completed coefficients
-
-Source: blueprint latest, diagonal-tower trace proof, paragraph (1).
 -/
 
 @[expose] public noncomputable section
@@ -93,9 +91,7 @@ private def rightDerivedComparison
   exact Functor.rightDerivedUnique _ _ R.η η
     (HomologicalComplex.quasiIso A (ComplexShape.up ℤ))
 
-/-- The Chern adjunct in strict constant-coefficient systems, before taking a limit.
-Source: diagonal tower trace proof (1), restriction of the section class.
-(blueprint: lem-diagonal-completed-chern-lift). -/
+/-- The Chern adjunct in strict constant-coefficient systems, before taking a limit. -/
 @[irreducible]
 def Presentation.systemChern (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} [DiagonalTraceLocalizations l X]
@@ -109,16 +105,7 @@ def Presentation.systemChern (l : ℕ) [Fact l.Prime]
       (p.model.chernAdjoint l (ULift.{u} (Padic l))) ≫ p.varying.hom.app _
 
 /-- Lift the system Chern adjunct using the full subcategory of complete objects.
-Source: diagonal tower trace proof (1), and Stacks 099I and 099L.
-(blueprint: lem-diagonal-completed-chern-lift).
-
-Proof: the completed unit and the pushforward of the shifted completed Tate line
-are derived complete. This is the same completeness argument as for the trace,
-with the source and target interchanged. Fullness of completed scalar restriction
-lifts the unit-limit comparison followed by Rlim of the system Chern adjunct and
-the inverse pushforward/limit comparison. The latter is invertible by line_limit.
-Cancel this comparison to obtain the stated normalization. The argument includes
-the empty scheme. No trace equation or choice of an arbitrary finite lift is used. -/
+Source: diagonal tower trace proof (1), and Stacks 099I and 099L. -/
 theorem diagonalTrace_completedChern_lift
     (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}
     [IsNoetherian X] [IsNoetherian S]

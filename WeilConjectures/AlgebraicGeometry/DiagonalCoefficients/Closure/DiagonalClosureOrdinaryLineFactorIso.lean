@@ -139,12 +139,6 @@ equations show equality after the coefficient inclusion, hence equality on one,
 and regular-module hom extensionality finishes. Both bases are isomorphisms,
 so f is an isomorphism on each slice. The cover detects isomorphisms of sheaves,
 and the forgetful functor reflects isomorphisms of internal modules.
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-diagonal-tower/
-sk-prop-diagonal-tower-coefficients.proof.md, paragraph (2), normalized
-colimit comparison.  This lemma supplies only the invertibility step; the
-factorization itself is the preceding lemma.
-(blueprint: lem-diagonal-closure-ordinary-line-factor-iso).
 -/
 theorem diagonalClosure_ordinaryLine_factor_isIso
     (l : ℕ) [Fact l.Prime] (E : PadicAlgCl.FiniteIntermediateField l)

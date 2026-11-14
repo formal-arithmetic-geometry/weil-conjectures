@@ -9,10 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.P1.FiniteP1
 import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Finite projective-line adjunction transport
-
-Source: blueprint latest, diagonal-tower trace proof (1), identification of
-finite coefficient units and direct images before the Chern-class calculation.
-(blueprint: lem-sfb-finite-p1-adjunction-transport).
 -/
 
 @[expose] public noncomputable section
@@ -27,7 +23,7 @@ open SpTowerClasses
 
 /-- Realize the ordinary intrinsic pullback by uniqueness of its left adjoint.
 Source: Stacks Tags 00YV and 03D3, and the private nativePullRealization proof in
-DiagonalTraceUnitArrowComparison (blueprint: lem-sfb-finite-p1-adjunction-transport). -/
+DiagonalTraceUnitArrowComparison. -/
 def finiteNativePullCoordinate (A : Type u) [CommRing A] [Finite A]
     {X S : Scheme.{u}} (f : X ⟶ S) :
     (Scheme.sfIntrinsicModuleEquivalence S A).functor.mapDerivedCategory ⋙
@@ -52,9 +48,7 @@ def finiteNativePullCoordinate (A : Type u) [CommRing A] [Finite A]
     Functor.mapDerivedCategoryNatIso (e.funInvIdAssoc (H ⋙ K)) ≪≫
     (Functor.mapDerivedCategoryCompIso H K).symm
 
-/-- Compose realization with pullback along the specified isomorphism over the base.
-Source: diagonal-tower trace (1), and linePullRealization in
-DiagonalTraceUnitArrowComparison (blueprint: lem-sfb-finite-p1-adjunction-transport). -/
+/-- Compose realization with pullback along the specified isomorphism over the base. -/
 def finiteProjectionPullCoordinate (A : Type u) [CommRing A] [Finite A]
     {X S : Scheme.{u}} {f : X ⟶ S} (e : X ≅ ProjectiveLine S)
     (he : e.hom ≫ (ProjectiveLine S ↘ S) = f) :
@@ -81,11 +75,7 @@ def finiteProjectionPullCoordinate (A : Type u) [CommRing A] [Finite A]
         (leftDerivedUpperStarIsoMapDerivedCategory C e.hom).symm K)
 
 /-- Transport an inverse-image comparison across equivalences and take its mate.
-Source: Mathlib unit_mateEquiv and the equivalence-mate theorem
-(blueprint: lem-sfb-finite-p1-adjunction-transport).
-Proof: the mate is invertible because both vertical functors are equivalences.
-Its inverse is the direct-image coordinate. Postcompose the mate unit identity
-with that inverse and cancel the resulting inverse/hom pair. -/
+Source: Mathlib unit_mateEquiv and the equivalence-mate theorem. -/
 theorem finiteAdjunctionCoordinates
     {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
     {L : C ⥤ D} {R : D ⥤ C} {L' : C' ⥤ D'} {R' : D' ⥤ C'}

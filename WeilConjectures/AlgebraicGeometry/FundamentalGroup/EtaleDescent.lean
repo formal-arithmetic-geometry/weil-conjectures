@@ -29,8 +29,7 @@ equivalence between finite étale `Y`-schemes and finite étale `Y'`-schemes wit
   finite étale schemes along a surjective étale morphism.
 - `CategoryTheory.Over.DescentDatum.existsUnique_hom_of_isPullback_of_etale`: compatible
   morphisms descend uniquely along a surjective étale morphism.
-- `AlgebraicGeometry.Scheme.FiniteEtale.galois_descent`: the two statements together
-  (blueprint `lem-galois-descent`).
+- `AlgebraicGeometry.Scheme.FiniteEtale.galois_descent`: the two statements together.
 
 ## Proof
 
@@ -677,8 +676,7 @@ namespace AlgebraicGeometry.Scheme.FiniteEtale
 
 The descent data are in the transport form `CategoryTheory.Over.DescentDatum`, which by the
 Yoneda lemma is the same as an isomorphism `φ : p₁^* V ≅ p₂^* V` over `Y' ×_Y Y'` satisfying
-the cocycle condition over `Y' ×_Y Y' ×_Y Y'`.
-(blueprint: `lem-galois-descent`) -/
+the cocycle condition over `Y' ×_Y Y' ×_Y Y'`. -/
 theorem galois_descent {Y Y' : Scheme.{u}} (p : Y' ⟶ Y) [AlgebraicGeometry.Etale p]
     [Surjective p] :
     (∀ (V : Over Y') [IsFinite V.hom] [AlgebraicGeometry.Etale V.hom]

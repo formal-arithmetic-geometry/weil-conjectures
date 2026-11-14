@@ -26,9 +26,7 @@ attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
 
 /-- Transport a shifted strict root system to the restricted coefficient Tate line.
 This uses the specified root-system isomorphism, the exact single comparison,
-and the exact restriction functor's shift comparison, in that order.
-Source: diagonal tower trace proof (1), identification of the finite root systems.
-(blueprint: def-sfb-diagonal-trace-root-system-transport). -/
+and the exact restriction functor's shift comparison, in that order. -/
 @[irreducible]
 def rootSystemTransport
     {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B]
@@ -48,9 +46,7 @@ def rootSystemTransport
 
 /-- The exact root transport with the published coefficient Tate-line endpoint.
 Its endpoint is the existing line object, so later statements share that object
-without repeatedly identifying its unfolded single-complex presentation.
-Source: diagonal trace proof (1), strict root-system identification.
-(blueprint: def-sfb-diagonal-trace-coefficient-root-transport). -/
+without repeatedly identifying its unfolded single-complex presentation. -/
 @[irreducible]
 def coefficientRootTransport (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
     [DiagonalTraceLocalizations l T]

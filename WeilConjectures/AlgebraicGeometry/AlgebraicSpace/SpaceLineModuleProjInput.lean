@@ -14,7 +14,7 @@ import WeilConjectures.AlgebraicGeometry.AlgebraicSpace.SpaceLinePresentationDef
 # Scheme-test presentations for a line module and its graded sections
 
 Source: Stacks Project, Properties of Spaces, Tag 03G7; Divisors on Spaces, Tag 0D2Z;
-and Constructions, Tag 01O9 (blueprint: def-trf-space-line-module-proj-input).
+and Constructions, Tag 01O9.
 
 A cartesian family specifies the actual tensor pullbacks to schemes. Its identification
 on the small etale site identifies the family with the given line module, rather than
@@ -47,8 +47,7 @@ variable {S : Scheme.{u}}
 /-- A graded algebra map to tensor powers of the line module, written on homogeneous
 sections of affine base charts. The linearity and naturality equations are the adjoint
 form of a map from tensor pullback of the graded algebra sheaf.
-Source: Stacks, Tags 0D2Z and 01O9
-(blueprint: def-trf-space-line-module-proj-input). -/
+Source: Stacks, Tags 0D2Z and 01O9. -/
 structure GradedLineMap {F : (Over S)ᵒᵖ ⥤ Type u} {T : Over S}
     (f : F ⟶ yoneda.obj T) (A : T.left.GradedAlgebraData) (L : TestLineFamily F) where
   component (W : SchemeTests F) (V : T.left.affineOpens)
@@ -82,7 +81,7 @@ structure GradedLineMap {F : (Over S)ᵒᵖ ⥤ Type u} {T : Over S}
       component W V' h' n a
 
 /-- Tensor powers of a chosen trivialization, including the prescribed degree-zero unit.
-Source: Stacks, Tag 01O9 (blueprint: def-trf-space-line-module-proj-input). -/
+Source: Stacks, Tag 01O9. -/
 noncomputable def trivializedPower {W : Scheme.{u}} {L : W.Modules}
     (e : L ≅ SheafOfModules.unit W.ringCatSheaf) :
     (n : ℕ) → L.tensorPow n ≅ SheafOfModules.unit W.ringCatSheaf
@@ -90,16 +89,14 @@ noncomputable def trivializedPower {W : Scheme.{u}} {L : W.Modules}
   | n + 1 => (e ⊗ᵢ trivializedPower e n) ≪≫ λ_ _
 
 /-- The relative Proj as an object over `S`, using its actual structural map.
-Source: Stacks, Tags 01LH and 0D2Z
-(blueprint: def-trf-space-line-module-proj-input). -/
+Source: Stacks, Tags 01LH and 0D2Z. -/
 noncomputable def projOver (T : Over S) (A : T.left.GradedAlgebraData) : Over S :=
   Over.mk (A.relProjHom ≫ T.hom)
 
 /-- The canonical Proj map is characterized on all trivializing scheme charts by the
 usual homogeneous-fraction construction. The ring homomorphism is required to agree
 on every homogeneous section; consequently it is completely specified by `ψ` and `e`.
-Source: Stacks, Tags 0D2Z(2) and 01O9
-(blueprint: def-trf-space-line-module-proj-input). -/
+Source: Stacks, Tags 0D2Z(2) and 01O9. -/
 def GradedLineMap.IsCanonicalMap {F : (Over S)ᵒᵖ ⥤ Type u} {T : Over S}
     {f : F ⟶ yoneda.obj T} {A : T.left.GradedAlgebraData} {L : TestLineFamily F}
     (ψ : GradedLineMap f A L) (U : Subfunctor F)

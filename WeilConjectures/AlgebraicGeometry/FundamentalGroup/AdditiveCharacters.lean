@@ -118,7 +118,7 @@ lemma map_constantZModPowReduction_eq_iff (n : ℕ) (y : Sheaf.H (constantZModPo
       (pow_dvd_pow l (Nat.le_add_right n 1)) (ZMod (l ^ n))).toAddMonoidHom.uliftMap y g)).trans
         (h g)
 
-/-- Blueprint `lemma-invariant-additive-characters`: Continuous `ℤ_ℓ`-characters are compatible
+/-- Continuous `ℤ_ℓ`-characters are compatible
 finite-level classes.
 
 For a connected scheme `Y` with geometric point `s`, `G = π₁(Y, s)` and a prime `ℓ`, the
@@ -170,7 +170,7 @@ lemma continuousMonoidHomPadicEquiv_mul (b b' : G →ₜ* Multiplicative ℤ_[l]
   rw [ContinuousMonoidHom.mul_apply, toAdd_mul, map_add]
   exact hadd.symm
 
-/-- Blueprint `lemma-invariant-additive-characters`: Continuous `ℤ_ℓ`-characters are compatible
+/-- Continuous `ℤ_ℓ`-characters are compatible
 finite-level classes.
 
 The group isomorphism `Hom_cont(π₁(Y, s), ℤ_ℓ) ≃+ lim_n H¹(Y_ét, ℤ/ℓⁿ)` underlying the
@@ -206,7 +206,7 @@ lemma mapIsoH1_classH1 {M : Type (u + 1)} [AddCommGroup M] [Finite M] (e : Y ≅
   rw [mapIsoH1, ← classH1Equiv_apply, Equiv.symm_apply_apply]
   rfl
 
-/-- Blueprint `lemma-invariant-additive-characters`: Continuous `ℤ_ℓ`-characters are compatible
+/-- Continuous `ℤ_ℓ`-characters are compatible
 finite-level classes, the Frobenius equivariance.
 
 Let `e` be an automorphism of `Y`, `τ : F_s ∘ e_* ≅ F_s` a transport of the fibre functor and

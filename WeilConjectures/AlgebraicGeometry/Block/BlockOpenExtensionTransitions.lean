@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.OpenUnitSections.OpenSystemUnitSections
 /-! # Horizontal compatibility of open extension under block reindexing
 
 Source: Zheng Construction 4.1, ordinary levelwise operations; Stacks 03DI--03DJ.
-(blueprint: lem-pur-block-open-extension-transitions)
 -/
 
 @[expose] public noncomputable section
@@ -45,8 +44,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   (OD : OpenSystems.{c, v, r} J (blockCoefficients B t) (blockTransitions J B τ t) U)
 
 /-- The component comparison is the composite of the given ordinary evaluations.
-Source: Zheng Construction 4.1; Stacks 03DJ.
-(blueprint: lem-pur-block-open-extension-transitions) -/
+Source: Zheng Construction 4.1; Stacks 03DJ. -/
 @[irreducible] def blockOpenExtensionComponent
     (P : Systems (J.over U) (openRings.{c, v, r} J B U)
       (openTransitions.{c, v, r} J B τ U)) (m : ℕ) :
@@ -239,9 +237,7 @@ private theorem comparison_evaluation
     Functor.associator_hom_app, Functor.associator_inv_app, Functor.mapIso_hom,
     Iso.app_hom, Iso.app_inv, Category.id_comp, Category.comp_id]
 
-/-- The explicit component comparisons are natural in the open system.
-Source: naturality of the four factors defining the component comparison.
-(blueprint: lem-pur-block-open-extension-transitions) -/
+/-- The explicit component comparisons are natural in the open system. -/
 @[irreducible] def blockOpenExtensionEvaluationIso (m : ℕ) :
     (Q ⋙ OD.extension) ⋙
         evaluation J (blockCoefficients B t) (blockTransitions J B τ t) m ≅
@@ -257,9 +253,7 @@ Source: naturality of the four factors defining the component comparison.
     Functor.isoWhiskerLeft O.extension (R.evaluation m).symm ≪≫
     (Functor.associator O.extension R.repetition _).symm
 
-/-- Evaluation of the natural comparison is the explicit four-factor component.
-Source: the component formulas for whiskering and functor associators.
-(blueprint: lem-pur-block-open-extension-transitions) -/
+/-- Evaluation of the natural comparison is the explicit four-factor component. -/
 theorem blockOpenExtensionEvaluationIso_hom (m : ℕ) (P) :
     (blockOpenExtensionEvaluationIso J B τ t U R Q qev O OD m).hom.app P =
       (blockOpenExtensionComponent J B τ t U R Q qev O OD P m).hom := by
@@ -268,26 +262,7 @@ theorem blockOpenExtensionEvaluationIso_hom (m : ℕ) (P) :
     (OD.extensionEvaluation m) (qev m) (O.extensionEvaluation (t.index m)) (R.evaluation m) P
 
 /-- The normalized component comparisons commute with horizontal system transitions.
-Source: Zheng Construction 4.1, ordinary levelwise operations, and Stacks 03DI--03DJ.
-(blueprint: lem-pur-block-open-extension-transitions).
-
-Proof: write [φ,x] for the summand generator associated to a section x of
-P at (t(m),V→U). The unit evaluation identities for O and OD say that their
-extension evaluations carry the system-adjunction unit to precisely this
-summand generator. Since their restriction evaluations and qev are identities
-on sections, d_m sends [φ,x] to the identical generator under repetition.
-The ordinary system units are morphisms of systems. Their horizontal
-naturality therefore sends [φ,x] along m→n to [φ,P_(t(m)→t(n))(x)], both
-before and after d. The hypothesis hQ supplies this exact transition for QP.
-Thus both proposed composites agree on every summand generator. The open
-adjunction, or equivalently the direct-sum presentation followed by
-sheafification, says that maps out of the extension are determined by these
-generators. Undo the extension evaluation isomorphism at m to obtain the
-claimed equality. The scalar action uses the same composite coefficient map
-from t(m) to t(n), by functoriality of rings. Inside a block this is the
-identity transition; at a boundary it is the original coefficient transition.
-This also treats singleton blocks, identity repetition and zero coefficients;
-no flatness of coefficient maps is needed. -/
+Source: Zheng Construction 4.1, ordinary levelwise operations, and Stacks 03DI--03DJ. -/
 theorem blockOpenExtensionComponent_transition
     (hQ : ∀ (M : Systems (J.over U) (openRings.{c, v, r} J B U)
         (openTransitions.{c, v, r} J B τ U))

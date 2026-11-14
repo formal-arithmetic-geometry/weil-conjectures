@@ -19,18 +19,7 @@ import Mathlib.Algebra.Group.TypeTags.Hom
 universe u
 open CategoryTheory
 namespace AlgebraicGeometry
-/-- The prime-to-characteristic Picard cokernel for a proper smooth curve.
-Source: blueprint `corollary-torsion-jacobian-field-extension`, final cokernel calculation.
-(blueprint: lem-sc-pic-proper-ntorsion-coker)
-
-Proof: the Picard decomposition gives a subgroup P0 with underlying set `f.picZero`
-and an equivalence `Pic(C) ≃ ℤ × P0`. Degree-zero divisibility makes the nth-power
-map on P0 surjective. Compose the first coordinate with the integer cast into ZMod n.
-This homomorphism is surjective since integer cast is surjective. Its kernel is the
-nth-power image: an nth power maps to zero modulo n; conversely, if the integer
-coordinate is n times z, choose an nth root of the P0 coordinate, and apply the inverse
-decomposition to the pair (z, root). The resulting class has nth power equal to the
-original class. The first isomorphism theorem now gives the required cokernel. -/
+/-- The prime-to-characteristic Picard cokernel for a proper smooth curve. -/
 theorem Scheme.Hom.pic_proper_ntorsion_coker
     {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}
     (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsProper f]

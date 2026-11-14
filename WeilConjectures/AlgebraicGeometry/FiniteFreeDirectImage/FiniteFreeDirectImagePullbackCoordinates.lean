@@ -198,26 +198,7 @@ end CoordinateColumns
 /-- The finite-basis tensor coordinates commute with termwise scalar pullback.
 This concerns inverse image and the computed comparison, before the comparison
 is identified with the conjugate of the derived direct-image square.
-Source: Stacks Project, Tags 03EL, 06YY and 0944.
-(blueprint: lem-sp-finite-free-direct-image-pullback-coordinates).
-
-Proof: choose the given basis of S_W over R_W. Pull it back by the exact module
-inverse image, identify the pulled-back regular module with the regular module
-of S_Z, and use the restriction/pullback comparison to obtain a basis of S_Z
-of the same rank. The maps from tuples to sums of basis tensors and from tensors
-to their coordinate tuples are inverse by the tensor relations. They are natural
-in the module. In these coordinates scalar extension is a finite power, hence
-is exact, including in rank zero. Its universal derived counit is therefore
-invertible on every complex. Apply the coordinates degreewise and descend through
-localization, obtaining the two displayed families of isomorphisms and their
-naturality. Apply ordinary balancing degreewise and conjugate by the two
-invertible universal scalar counits to obtain beta and its computed equation.
-For the last equation first project to each basis coordinate. The ordinary
-restriction/pullback map identifies the coefficient actions, and ordinary
-balancing sends each pulled-back basis tensor to the same tensor with its
-pulled-back coefficient. Thus the coordinate projections agree on all pure
-tensors; tensor extensionality proves the ordinary square. Passing to complexes
-and localization proves the stated equation. -/
+Source: Stacks Project, Tags 03EL, 06YY and 0944. -/
 theorem finiteFreeDirectImage_pullbackCoordinates {Z W : Scheme.{u}} (q : Z ⟶ W)
     (sW : ScalarModel W) (sZ : ScalarModel Z)
     (R S : Coefficients q) (a : CoefficientMap R S) (d : ℕ)

@@ -196,25 +196,7 @@ private theorem realized_arrow_transport
   exact h
 
 -- Assemble the independent tower, completed, and condensed comparison diagrams.
-/-- Whole-system pullback is preserved by the specified completed realizations.
-
-Source: diagonal coefficient changes (3), naturality of the whole Kummer system.
-(blueprint: lem-diagonal-local-chern-horizontal-realization).
-
-Proof: use naturality of the Picard-to-H1 extension and of the Kummer boundary
-before taking any finite projection. The coefficient and root comparisons
-identify the pulled tower class with the tower class of the pulled Picard line.
-Restrict this equality to the constant coefficient system and take its derived
-limit. Both completed unit and shifted completed line are complete; full
-faithfulness of scalar restriction and the invertible line-limit comparison
-identify the resulting completed arrows. The underlying-sheaf normalizations of
-the exact realizations identify the realized comparison with the actual
-condensed inverse image. The unit endpoint is uniquely fixed by its ordinary
-adjunct; composition of these unit endpoints agrees with the derived pullback
-composition comparison. The root-normalized line endpoint similarly identifies
-the shifted target comparison. Compose these identifications around the square;
-this gives the displayed equality of local arrows, without taking any right
-adjunct or decomposing the pulled Picard class. -/
+/-- Whole-system pullback is preserved by the specified completed realizations. -/
 theorem diagonalLocalChern_horizontal_realization (l : ℕ) [Fact l.Prime]
     {X S X' S' : Scheme.{u}}
     [IsNoetherian X] [IsNoetherian S] [IsNoetherian X'] [IsNoetherian S']

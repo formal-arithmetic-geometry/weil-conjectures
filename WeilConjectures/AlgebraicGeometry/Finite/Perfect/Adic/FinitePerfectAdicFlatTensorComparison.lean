@@ -55,27 +55,7 @@ private theorem completedExactComparison
 realization and its entire canonical derived quotient diagram.
 
 Source: Stacks Project, Tag 09C6, the finite-projective quotient calculation;
-Modules on Sites, Tags 093J--093M; More on Algebra, Tag 09AW.
-(blueprint: lem-weil-pbc-finite-perfect-adic-flat-tensor-comparison).
-
-Proof: ordinary completed scalar extension E is exact, and its quotient tensor
-comparison gives a natural isomorphism H(M) tensor_(A_T) (A/I^(n+1))_T ≅
-H(M tensor_A A/I^(n+1)), including all coefficient transitions, where H is exact
-constant realization followed by E. Apply this natural isomorphism degreewise
-to P, and transpose complexes of diagrams to diagrams of complexes. Exactness
-of H lets localization commute with the resulting diagram.
-A bounded-above complex of flat A-modules is K-flat. At each quotient, transpose
-the localized ordinary insertion unit under the supplied adjunction. The K-flat
-representative criterion makes this transpose invertible; exact restriction and
-tensor symmetry give the algebraic level comparison. The consecutive transition
-square for these explicit maps, and the constructor for natural transformations
-of inverse sequences, assemble the whole algebraic quotient-diagram isomorphism.
-Finally, because E is exact, its exact derived functor is a left derived functor.
-Uniqueness of left derived functors identifies it with the selected completed
-derived scalar extension. The exact derived composition isomorphism for H gives
-both the diagram's final realization and the asserted cone-point isomorphism.
-The proof uses only the upper bound, while keeping both bounds in the statement.
-No finite-projective splitting or inverse-limit assertion enters. -/
+Modules on Sites, Tags 093J--093M; More on Algebra, Tag 09AW. -/
 theorem finitePerfectAdicFlatTensor_comparison
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (L : ∀ n : ℕ, DerivedCategory (ModuleCat.{t} A) ⥤

@@ -44,7 +44,7 @@ variable (n : Type u) [Fintype n] [DecidableEq n] (k : Type u) [CommRing k]
 
 /-- The general linear group scheme `𝔾𝕃(n; k)` over a commutative ring `k`: the affine group
 scheme `Spec k[x_ij, det⁻¹]` over `Spec k`, the spectrum of the Hopf algebra
-`Matrix.GeneralLinearGroup.CoordinateRing n k`. (blueprint: `det-d-geometry`) -/
+`Matrix.GeneralLinearGroup.CoordinateRing n k`. -/
 noncomputable def GeneralLinearGroup : Over (Spec (.of k)) :=
   (Spec (.of (CoordinateRing n k))).asOver (Spec (.of k))
 
@@ -64,7 +64,7 @@ instance : LocallyOfFiniteType (𝔾𝕃(n; k)).hom :=
   locallyOfFiniteType_specOverSpec
 
 /-- The `R`-points of the group scheme `𝔾𝕃(n; k)` are the invertible `n × n` matrices over `R`,
-as groups. (blueprint: `det-d-geometry`) -/
+as groups. -/
 noncomputable def homMulEquiv (R : Type u) [CommRing R] [Algebra k R] :
     ((Spec (.of R)).asOver (Spec (.of k)) ⟶ 𝔾𝕃(n; k)) ≃* GL n R :=
   Spec.mapMulEquiv.symm.trans (algHomMulEquiv n k R)

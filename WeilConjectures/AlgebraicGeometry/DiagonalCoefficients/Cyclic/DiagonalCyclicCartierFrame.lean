@@ -8,10 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Finite.DiagonalFiniteArrowEquations
 
 /-! # Normalized cyclic coefficient reduction of an arrow
-
-Source: diagonal tower coefficient changes, paragraph (1), reduction first modulo
-an ell power and then along the finite coefficient algebra.
-(blueprint: def-diagonal-cyclic-cartier-frame).
 -/
 
 @[expose] public noncomputable section
@@ -24,14 +20,12 @@ open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 
-/-- Cyclic coefficients at a positive prime-power exponent are finite.
-Source: coefficient changes (1) (blueprint: def-diagonal-cyclic-cartier-frame). -/
+/-- Cyclic coefficients at a positive prime-power exponent are finite. -/
 instance cyclicResidueFinite (l : ℕ) [Fact l.Prime] (n : ℕ) :
     Finite (diagonalResidue.{u} l n) :=
   cartierResidue_finite l (Fact.out : l.Prime) (n + 1)
 
-/-- The actual continuous reduction, at exponent n+1, as a condensed ring-object map.
-Source: coefficient changes (1) (blueprint: def-diagonal-cyclic-cartier-frame). -/
+/-- The actual continuous reduction, at exponent n+1, as a condensed ring-object map. -/
 def cyclicMap (l : ℕ) [Fact l.Prime] (n : ℕ) :
     Profinite.continuousMapRingObj.{u} ℤ_[l] ⟶
       Profinite.continuousMapRingObj.{u} (ZMod (l ^ (n + 1))) :=
@@ -43,14 +37,12 @@ instance cyclicMap_isMonHom (l : ℕ) [Fact l.Prime] (n : ℕ) :
   dsimp only [cyclicMap]
   infer_instance
 
-/-- The ordinary tensor quotient of the base integral Tate line.
-Source: coefficient changes (1) (blueprint: def-diagonal-cyclic-cartier-frame). -/
+/-- The ordinary tensor quotient of the base integral Tate line. -/
 def cyclicLine (l : ℕ) [Fact l.Prime] (n : ℕ) (X : Scheme.{u}) :
     Modules (Profinite.continuousMapRingObj.{u} (ZMod (l ^ (n + 1)))) X :=
   (Mod.extendScalars (coefficientMap (cyclicMap l n) X)).obj (zlLine l X)
 
-/-- Its tensor unit, which fixes the semilinear endpoint.
-Source: coefficient changes (1) (blueprint: def-diagonal-cyclic-cartier-frame). -/
+/-- Its tensor unit, which fixes the semilinear endpoint. -/
 def cyclicLineMap (l : ℕ) [Fact l.Prime] (n : ℕ) (X : Scheme.{u}) :
     (zlLine l X).X ⟶ (cyclicLine l n X).X :=
   Mod.extendUnitHom (coefficientMap (cyclicMap l n) X) (zlLine l X)
@@ -58,9 +50,7 @@ def cyclicLineMap (l : ℕ) [Fact l.Prime] (n : ℕ) (X : Scheme.{u}) :
 attribute [local irreducible] cyclicMap cyclicLine cyclicLineMap derivedScalars
 
 /-- An ordinary finite realization of a supplied arrow, as its Ext representative.
-All endpoint maps are supplied; this definition chooses no data.
-Source: finite reduction of the diagonal (1)
-(blueprint: def-diagonal-cyclic-cartier-frame). -/
+All endpoint maps are supplied; this definition chooses no data. -/
 def finiteRealizedClass
     {R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj R] [IsCommMonObj R] {A : Type (u + 1)} [CommRing A]
@@ -86,8 +76,7 @@ attribute [local irreducible] finiteRealizedClass
 
 /-- Only the coefficient objects and normalized endpoint maps for reduction modulo
 ell^(n+1). There is no class equation and no choice of a diagonal or trace here.
-In particular a frame can be used to reduce any arrow with these endpoints.
-Source: coefficient changes (1) (blueprint: def-diagonal-cyclic-cartier-frame). -/
+In particular a frame can be used to reduce any arrow with these endpoints. -/
 structure CyclicCartierFrame (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (n : ℕ) where
   eP : FiniteRealization
     (Profinite.continuousMapRingObj.{u} (ZMod (l ^ (n + 1))))
@@ -121,8 +110,7 @@ structure CyclicCartierFrame (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (n : ℕ)
 
 /-- Apply the specified derived scalar functor and its normalized endpoints,
 then take the ordinary finite realization. This is an explicit construction,
-independent of every completed class, trace, or geometric normalization theorem.
-Source: coefficient changes (1) (blueprint: def-diagonal-cyclic-cartier-frame). -/
+independent of every completed class, trace, or geometric normalization theorem. -/
 def CyclicCartierFrame.reduce (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (n : ℕ)
     (p : CyclicCartierFrame l Y n)
     (α : (DerivedCategory.singleFunctor

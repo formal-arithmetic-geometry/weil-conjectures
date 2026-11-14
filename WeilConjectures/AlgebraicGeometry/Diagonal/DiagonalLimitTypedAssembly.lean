@@ -23,13 +23,7 @@ namespace AlgebraicGeometry.ProEtale
 attribute [local irreducible] CategoryTheory.Abelian.Ext
   DiagonalLimitDataSpec diagonalCompleteDataAssertion
 
-/-- Assemble the strict and completed data using their shared named normalizations.
-Source: diagonal tower limit, clauses (1) and (3)
-(blueprint: lem-sfb-diagonal-limit-typed-assembly).
-Proof: recover the normalized strict-system witnesses, retain the same endpoint
-identifications, and attach the completed compatibility supplied by the endpoint,
-finite-reduction and scalar-restriction argument. The generic assembly theorem
-retains these witnesses without any additional choice. -/
+/-- Assemble the strict and completed data using their shared named normalizations. -/
 theorem diagonal_limit_typed_data (ℓ : ℕ) [Fact ℓ.Prime]
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpℓ : p ≠ ℓ)
     (Y : Scheme.{u}) [Y.Over (Spec (.of k))]

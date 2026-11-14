@@ -10,9 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Cyclic.Diag
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Finite.DiagonalFiniteRealizedEvaluation
 
 /-! # Representative after finite realization and restriction
-
-Source: diagonal tower coefficient changes (1), and limit (3).
-(blueprint: lem-diagonal-cyclic-finite-evaluation-hom).
 -/
 
 @[expose] public noncomputable section
@@ -38,9 +35,7 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext Ext.homEquiv
   diagonalFiniteToPadic cyclicLine cyclicLineMap derivedScalars
   geoCartierConstant geoCartierLine
 
-/-- The finite representative calculation after realization and restriction.
-Source: coefficient changes (1) (blueprint: lem-diagonal-cyclic-finite-evaluation-hom).
-Proof: compose the Ext-map representative formula with the arrow calculation. -/
+/-- The finite representative calculation after realization and restriction. -/
 theorem cyclicFiniteEvaluation_hom
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [DiagonalTraceLocalizations l (diagonalSurface Y)]

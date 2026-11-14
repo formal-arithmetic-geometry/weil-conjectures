@@ -38,8 +38,7 @@ import Mathlib.RingTheory.Flat.Basic
 /-! # Flatness and Hilbert polynomial from a locally free graded tail
 
 Source: Stacks Project, Constructions, Tags 01M7, 01O3 and 07ZK;
-Varieties, Tag 08AE; Coherent, Tag 0AG7
-(blueprint: lem-sfb-flat-graded-tail-proj).
+Varieties, Tag 08AE; Coherent, Tag 0AG7.
 
 The quotient is presented by a surjective morphism from the existing polynomial
 algebra sheaf. Its kernel is the homogeneous ideal of equations. In particular,
@@ -62,7 +61,7 @@ noncomputable section
 namespace AlgebraicGeometry.FlatGradedTail
 
 /-- The quotient map on polynomial sections, with the existing ordered coordinates.
-Source: Stacks, Tag 07ZK (blueprint: lem-sfb-flat-graded-tail-proj). -/
+Source: Stacks, Tag 07ZK. -/
 def polynomialMap {U : Scheme.{u}} {n : ℕ} {B : RelativeProjAlgebra U}
     (q : (RelativeProjectiveSpace.algebra U n).affineData ⟶ B.affineData)
     (V : U.affineOpens) : MvPolynomial (Fin (n + 1)) Γ(U, V.1) →+* B.sections V :=
@@ -70,7 +69,7 @@ def polynomialMap {U : Scheme.{u}} {n : ℕ} {B : RelativeProjAlgebra U}
 
 /-- The homogeneous equations on an affine base open are the kernel of the quotient.
 This uses an ordinary ideal and imposes no saturation condition.
-Source: Stacks, Tags 07ZK and 0AG7 (blueprint: lem-sfb-flat-graded-tail-proj). -/
+Source: Stacks, Tags 07ZK and 0AG7. -/
 def equations {U : Scheme.{u}} {n : ℕ} {B : RelativeProjAlgebra U}
     (q : (RelativeProjectiveSpace.algebra U n).affineData ⟶ B.affineData)
     (V : U.affineOpens) : Ideal (MvPolynomial (Fin (n + 1)) Γ(U, V.1)) :=

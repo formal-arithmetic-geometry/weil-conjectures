@@ -13,7 +13,6 @@ public import WeilConjectures.Topology.Sheaves.CechCohomology
 
 Source: Stacks Project, Tags 01EQ and 01FD. A system records the comparison as a
 morphism of cohomological functors, including its normalization and connecting maps.
-(blueprint: def-pc-cech-comparison-system)
 -/
 
 @[expose] public section
@@ -29,8 +28,7 @@ attribute [local instance] cohomologyHasSheafify cohomologyHasExt
 
 /-- A normalized morphism from Čech cohomology to sheaf cohomology.
 Source: Stacks Project, Tag 01EQ, the augmented double-complex comparison;
-Tag 01FD, functoriality. This is data with laws, with no postponed data.
-(blueprint: def-pc-cech-comparison-system) -/
+Tag 01FD, functoriality. This is data with laws, with no postponed data. -/
 structure CechComparisonSystem {X : Scheme.{u}} {ι : Type u}
     (U : ι → X.Opens) (hcover : iSup U = ⊤) where
   comparison : ∀ q, TopCat.Sheaf.cechCohomologyFunctor U q ⟶
@@ -46,9 +44,7 @@ structure CechComparisonSystem {X : Scheme.{u}} {ι : Type u}
     TopCat.Sheaf.cechδ U hT hg q ≫ (comparison (q + 1)).app T.X₁ =
       (comparison q).app T.X₃ ≫ Sheaf.functorHδ.{u} hT q
 
-/-- The underlying abelian presheaf does not change on restricting scalars.
-Source: the explicit sectionwise definition of scalar restriction.
-(blueprint: def-pc-cech-comparison-system) -/
+/-- The underlying abelian presheaf does not change on restricting scalars. -/
 noncomputable def presheafOverForgetIso
     {R : Type u} [CommRing R] {X : Scheme.{u}}
     (f : X ⟶ Spec (.of R)) (M : X.Modules) :
@@ -56,9 +52,7 @@ noncomputable def presheafOverForgetIso
       ((SheafOfModules.toSheaf X.ringCatSheaf).obj M).obj :=
   NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun _ ↦ rfl)
 
-/-- Transport of scalar-restricted Čech homology to abelian Čech cohomology.
-Source: the source library's `cechComplexFunctorHomologyIso`.
-(blueprint: def-pc-cech-comparison-system) -/
+/-- Transport of scalar-restricted Čech homology to abelian Čech cohomology. -/
 noncomputable def cechOverHomologyAddEquiv
     {R : Type u} [CommRing R] {X : Scheme.{u}} {ι : Type u}
     (f : X ⟶ Spec (.of R)) (U : ι → X.Opens) (M : X.Modules) (q : ℕ) :
@@ -70,8 +64,7 @@ noncomputable def cechOverHomologyAddEquiv
       (presheafOverForgetIso f M)) q).addCommGroupIsoToAddEquiv
 
 /-- The additive comparison induced by a fixed normalized system.
-Source: Stacks Project, Tag 01EQ. No existence theorem is used to choose this map.
-(blueprint: def-pc-cech-comparison-system) -/
+Source: Stacks Project, Tag 01EQ. No existence theorem is used to choose this map. -/
 noncomputable def CechComparisonSystem.overMap
     {R : Type u} [CommRing R] {X : Scheme.{u}} {ι : Type u}
     {U : ι → X.Opens} {hcover : iSup U = ⊤} (c : CechComparisonSystem U hcover)

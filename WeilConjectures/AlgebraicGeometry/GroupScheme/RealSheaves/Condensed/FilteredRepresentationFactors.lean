@@ -26,8 +26,6 @@ universe u v w z
 series with the prescribed series by Jordan–Hölder. The refinement indices are pairs consisting
 of a graded-piece index and a factor index, so multiplicities are retained, including empty
 series for zero pieces.
-Source: `lemma-tensor-exterior-powers-filtered-representations--3`, proof paragraph 3,
-filtration-refinement step (blueprint: lem-mg-filtered-representation-factors).
 -/
 theorem filteredRepresentationFactors
     {k : Type u} [Field k] {W : Type w} [Group W]

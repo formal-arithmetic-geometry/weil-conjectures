@@ -128,24 +128,7 @@ attribute [local irreducible] tensorIso complexPullback proEtaleTensorPullbackTo
 pullback, as an equality of chain maps before localization.
 
 Source: Stacks, Modules on Sites, Tag 03EL, its universal bilinear-map proof;
-Cohomology on Sites, Tag 07A4, signed direct-sum totalization.
-(blueprint: lem-pbc-coefficient-restriction-tensor-chain-square)
-
-Proof: the supplied ring-isomorphism transport is normalized on pure tensors by
-its pure_hom field and on each totalization summand by its total_summand field.
-Precompose both sides in each total degree with each bidegree coproduct injection.
-Use total_summand for the restriction map and the signed-total definition of each
-geometric tensor pullback comparison. It remains to compare module sheaf maps.
-Precompose with the sheafification unit and use the adjunction-unit normalization
-of the geometric tensor pullbacks and ordinaryPullback. Both maps send a generalized
-pure tensor to the same pair of inverse-image sections with scalar action changed
-by c. TensorProduct.ext proves equality on presheaf tensors; the sheafification
-adjunction then gives equality on sheaf tensors. Scalar restriction along c is an
-equivalence and preserves these coproducts. Their universal property proves equality
-of the degree maps, and extensionality gives the equality of chain maps. No derived
-tensor model, localization or flatness assumption enters this calculation. The proof
-also applies to zero coefficients, zero complexes, empty sites, and c equal to the
-identity: it uses only tensor and coproduct universal properties. -/
+Cohomology on Sites, Tag 07A4, signed direct-sum totalization. -/
 theorem restriction_tensor_chain_square (o : SheafOfModules.RingIsoTensorTransport
     (J := ProEt.topology X)
     (R := (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R) (S := S) c) :
@@ -190,8 +173,7 @@ theorem restriction_tensor_chain_square (o : SheafOfModules.RingIsoTensorTranspo
     (ordinary_bifunctor_square f R S c o) P Q
 
 /-- Localization of the normalized chain square.
-Source: functoriality of localization, Stacks Tag 07A4.
-(blueprint: lem-pbc-coefficient-restriction-tensor-chain-square) -/
+Source: functoriality of localization, Stacks Tag 07A4. -/
 theorem restriction_tensor_localized_square
     (o : SheafOfModules.RingIsoTensorTransport (J := ProEt.topology X)
       (R := (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R) (S := S) c)

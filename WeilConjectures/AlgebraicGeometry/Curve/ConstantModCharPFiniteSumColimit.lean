@@ -36,23 +36,7 @@ namespace AlgebraicGeometry.Etale
  `sec-proper-base-change/sk-thm-p1/lem-sc-c3`. The construction uses Mathlib
  `Module.Basis.ofVectorSpace`, `ModuleCat.finsuppCoconeIsColimit`,
  `CoproductsFromFiniteFiltered.isColimitFiniteSubproductsCocone`, and
- `CategoryTheory.constantCommuteCompose`.
- (blueprint: proposition-p-torsion-smooth-proper-curve--4).
-
- Proof: Put M = Λ/(p). Its additive group is killed by p, so it has the canonical
- ZMod p module structure. Restrict scalars along the ring equivalence from ULift (ZMod p)
- to ZMod p, keeping coefficients in Type (u + 1). Choose a basis B of M over this lifted
- field. The basis representation identifies M with finitely supported functions B →₀ R,
- which are the coproduct of copies of R in ModuleCat R. The coproduct is the filtered
- colimit of its finite subcoproducts, indexed by Finset (Discrete B). Apply coefficient
- forgetting followed by the constant abelian sheaf functor; both preserve these colimits.
- The constant-sheaf/forgetting comparison identifies the point with the underlying
- abelian sheaf of constantModSheaf Λ C p. Transport the mapped cocone along this point
- isomorphism. Each finite stage is a coproduct of copies of the constant prime-field
- sheaf. Identify the finite coproduct with its biproduct and reindex its finite set by
- Fin n. The zero quotient has an empty basis, whose finite-subset category has one
- object and whose finite stage is the empty biproduct. The argument also allows arbitrary
- infinite bases and schemes without any geometric hypothesis. -/
+ `CategoryTheory.constantCommuteCompose`. -/
 theorem exists_constantModSheaf_finite_sum_colimit
     (Λ : Type (u + 1)) [CommRing Λ] (C : Scheme.{u}) (p : ℕ) [Fact p.Prime] :
     ∃ (I : Type (u + 1)) (_ : SmallCategory I) (_ : IsFiltered I)

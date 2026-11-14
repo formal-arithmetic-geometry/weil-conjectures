@@ -106,8 +106,7 @@ attribute [local instance] finitePerfectAdicAlgebraDerived
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
 /-- Fixed finite-scalar coordinates of the actual quotient on the chart.
-Source: Stacks Tags 03CY, 099R and 09AL.
-(blueprint: lem-weil-pbc-finite-perfect-adic-marked-origin). -/
+Source: Stacks Tags 03CY, 099R and 09AL. -/
 def finitePerfectAdicQuotientCoordinates
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶
@@ -197,22 +196,7 @@ private theorem chartAlgebraLift_exact (B : Type t) [CommRing B] :
 /-- A marked finite quotient descends with its actual comparison retained.
 No consecutive arrow or completed-scalar realization is asserted.
 
-Source: Stacks Project, Tags 09AL and 09B1, applied as in Tag 09C6.
-(blueprint: lem-weil-pbc-finite-perfect-adic-marked-origin).
-
-Proof: encode the quotient in fixed finite scalars on the chart. The marking cover
-identifies its cohomology with constants on the finite homology modules of the
-perfect model, and bounds it in the model's cohomological interval. Descent of finite
-locally constant sheaves gives etale origins of these cohomology sheaves. Bounded
-truncation induction then gives an etale origin and a retained isomorphism. Exact
-faithful comparison reflects the bounds. Its full faithfulness on sheaves identifies
-the homology of the etale origin with the finite locally constant origins already
-constructed. Pull the retained comparison to a member of the marking cover and lift
-its local isomorphism through the bounded-below comparison adjunction. Compatibility
-of constant sheaves with pullback gives a section of the derived Isom presheaf.
-Every separably closed geometric point lifts to this etale cover; sheafification and
-the corresponding presheaf-fiber map give the asserted inhabited Isom stalk.
-Empty charts and zero coefficient rings obey the same argument. -/
+Source: Stacks Project, Tags 09AL and 09B1, applied as in Tag 09C6. -/
 theorem finitePerfectAdic_marked_origin
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶

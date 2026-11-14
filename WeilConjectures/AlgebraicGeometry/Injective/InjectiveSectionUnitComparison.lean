@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.Square.SquareResolutionRoofModel
 /-! # The injective endpoint comparison preserves the section unit
 
 Source: Stacks Project, Cohomology, Tags 079V and 0D5X.
-(blueprint: lem-weil-pbc-injective-section-unit-comparison).
 -/
 
 @[expose] public section
@@ -43,21 +42,7 @@ variable [∀ Y : Scheme.{u},
 
 /-- The raw injective comparison followed by the augmentation is the cochain section unit.
 There is one direct image and one injective resolution, and no coefficient map or square.
-Source: Stacks Project, Tags 079V and 0D5X
-(blueprint: lem-weil-pbc-injective-section-unit-comparison).
-
-Proof: Extend I by zero; its lower bound and termwise injectivity make it
-K-injective. Put r = asIso(Q(I.ι')), R = inverse-open hypercohomology and
-T = local hypercohomology after Rf_*. The unique unit-preserving natural comparison
-l : R ⟶ T has component the inverse of topEdgeLocalLeray. Let z be homology of the
-inverse-open model comparison on the extended I followed by homologyFunctorFactors.
-The cochain inverse-open unit at I is the inverse model comparison. Unfolding
-squareInjectiveLocalComparison gives the exact evaluation/homology comparison,
-then evaluation of z inverse, R(r inverse), and l at F[0]. Postcompose by T(r).
-Naturality of l at r inverse cancels T(r inverse) followed by T(r). What remains
-is exactly directImageSectionUnitAt on I. The degree-zero single-complex comparison
-is reflexive, so its identity transport cancels as well. These equations also
-apply to zero resolutions, degree zero and empty opens. -/
+Source: Stacks Project, Tags 079V and 0D5X. -/
 theorem injectiveSectionUnit_comparison {X S : Scheme.{u}} (f : X ⟶ S)
     (F : X.Modules) (q : ℕ) (V : S.Opens) (I : InjectiveResolution F) :
     (squareInjectiveLocalComparison f F q V I (f ⁻¹ᵁ V) rfl).hom ≫

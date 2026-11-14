@@ -301,16 +301,6 @@ private lemma encoded_regular_scalar (T : Scheme.{u}) (n : ℕ)
 specified normalized coordinates.
 
 Source: blueprint latest, integral ctf-equals-bc, Local models; Stacks 03EK, 093M.
-(blueprint: lem-sfb-finite-model-ordinary-scalar).
-
-Proof: the scalar regular module is the internal regular module on the lifted ring.
-The constant-sheaf and inverse-image monoidal functors preserve regular modules.
-Apply regularExtensionIso first to scalarToContinuous and then to the actual quotient.
-The resulting object is the quotient regular module. The normalized ring isomorphism
-in e identifies its section action with the ordinary constant ring action; restriction
-to constant scalars gives the constant regular module. Naturality of regularExtensionIso
-identifies multiplication by x with multiplication by its actual quotient. Normalization
-identifies that residue with the same constant scalar section, proving the equation.
 -/
 theorem ordinary_scalar (T : Scheme.{u}) (n : ℕ) (e : Encoding l E n T) :
     letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField

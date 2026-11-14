@@ -15,7 +15,6 @@ public import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
 /-! # Augmentation normalization for additive étale Čech coordinates
 
 Source: Stacks Project, Tags 03P2 and 01FD, the augmented double-complex diagram.
-(blueprint: def-pbc-etale-additive-cech-normalization)
 -/
 
 @[expose] public section
@@ -28,30 +27,26 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- The actual inclusion of open subschemes in the small étale site.
-Source: Stacks Project, Tag 03P2, the affine open covering.
-(blueprint: def-pbc-etale-additive-cech-normalization) -/
+Source: Stacks Project, Tag 03P2, the affine open covering. -/
 noncomputable def additiveCechOpenInclusion (X : Scheme.{u}) : X.Opens ⥤ X.Etale :=
   MorphismProperty.Comma.lift X.restrictFunctor
     (fun W ↦ (inferInstance : Etale W.ι)) (fun _ ↦ trivial) (fun _ ↦ trivial)
 
 /-- The global-sections complex of an injective resolution.
-Source: Stacks Project, Tag 01FD, the left augmentation.
-(blueprint: def-pbc-etale-additive-cech-normalization) -/
+Source: Stacks Project, Tag 01FD, the left augmentation. -/
 noncomputable abbrev additiveCechGlobal {X : Scheme.{u}}
     (I : InjectiveResolution X.etaleAdditiveSheaf) :=
   ((Etale.etaleSectionFunctor (Scheme.Etale.mk (𝟙 X))).mapHomologicalComplex
     (.up ℕ)).obj I.cocomplex
 
 /-- The total complex used for normalization, with Čech degree first.
-Source: Stacks Project, Tags 03P2 and 01FD.
-(blueprint: def-pbc-etale-additive-cech-normalization) -/
+Source: Stacks Project, Tags 03P2 and 01FD. -/
 noncomputable abbrev additiveCechTotal {X : Scheme.{u}} {ι : Type u}
     (U : ι → X.Opens) (I : InjectiveResolution X.etaleAdditiveSheaf) :=
   (etaleOpenCechResolutionDoubleComplex X (additiveCechOpenInclusion X) U I).total (.up ℕ)
 
 /-- The degree-n global-section augmentation, obtained by restriction to each open.
-Source: Stacks Project, Tag 01FD, augmentation alpha.
-(blueprint: def-pbc-etale-additive-cech-normalization) -/
+Source: Stacks Project, Tag 01FD, augmentation alpha. -/
 noncomputable def additiveCechAlpha {X : Scheme.{u}} {ι : Type u}
     (U : ι → X.Opens) (I : InjectiveResolution X.etaleAdditiveSheaf) (n : ℕ) :
     (additiveCechGlobal I).X n ⟶ (additiveCechTotal U I).X n :=
@@ -65,8 +60,7 @@ noncomputable def additiveCechAlpha {X : Scheme.{u}} {ι : Type u}
 
 /-- The coefficient augmentation on a cochain: lower module coordinates are
 lifted, identified with functions on the open subscheme, and mapped into I⁰.
-Source: Stacks Project, Tag 03P2 and Tag 01FD, augmentation beta.
-(blueprint: def-pbc-etale-additive-cech-normalization) -/
+Source: Stacks Project, Tag 03P2 and Tag 01FD, augmentation beta. -/
 noncomputable def additiveCechBeta {X : Scheme.{u}} {ι : Type u}
     (U : ι → X.Opens) (I : InjectiveResolution X.etaleAdditiveSheaf) (n : ℕ) :
     (cechOver X.toSpecΓ U (SheafOfModules.unit X.ringCatSheaf)).X n →
@@ -96,8 +90,7 @@ noncomputable def additiveCechBeta {X : Scheme.{u}} {ι : Type u}
 /-- An edge equivalence has the alpha/beta normalization on every resolution.
 This predicate uses actual augmentation components and normalized Ext cocycles;
 it has no scalar or inverse-image compatibility built into it.
-Source: Stacks Project, Tag 01FD, commuting augmented double-complex diagram.
-(blueprint: def-pbc-etale-additive-cech-normalization) -/
+Source: Stacks Project, Tag 01FD, commuting augmented double-complex diagram. -/
 def IsEtaleAdditiveCechNormalized {X : Scheme.{u}} {ι : Type u}
     (U : ι → X.Opens) (n : ℕ)
     (a : Sheaf.H X.etaleAdditiveSheaf n ≃+

@@ -16,7 +16,6 @@ import Mathlib.LinearAlgebra.Quotient.Basic
 /-! # The conormal module at a closed-subscheme point
 
 Source: Stacks Project, Divisors, Tag 0633; Modules, Tags 01AG and 08KS.
-(blueprint: lem-pur-conormal-piece-stalk).
 -/
 
 @[expose] public section
@@ -39,19 +38,7 @@ private theorem stalk_map_germ {Y : Scheme.{u}} (y : Y) {M N : Y.Modules}
 
 /-- The stalk of `i^*I` is the cotangent module of the actual closed-immersion stalk
 kernel, compatibly with the quotient local ring and with germs of representatives.
-Source: Stacks Project, Divisors, Tag 0633; Modules, Tags 01AG and 08KS.
-(blueprint: lem-pur-conormal-piece-stalk).
-
-Proof: The ideal-module-product stalk theorem identifies the stalk of `I/I²` with
-`I_x/(I_x I_x)`. The ideal-inclusion range theorem identifies `I_x` with the kernel
-of the actual structure-stalk map. Its injectivity and the quotient equivalence
-therefore identify this quotient with that kernel's cotangent module. The normalized
-closed-immersion unit quotient identifies `i_* i^*I` with `I/I²`; the pushforward
-stalk map is bijective on the closed image. Compose these identifications. All maps
-are linear over the ambient local ring, while pushforward stalks use the actual
-structure-stalk map; its quotient first-isomorphism equivalence gives the stated
-semilinearity. The unit quotient and stalk quotient formulas give the representative
-formula. This argument also applies to the zero ring and the empty closed subscheme. -/
+Source: Stacks Project, Divisors, Tag 0633; Modules, Tags 01AG and 08KS. -/
 theorem conormal_stalk (z : Z) :
     ∃ e : ((RingedSpace.moduleStalkFunctor Z.toRingedSpace z).obj (piece i 1)) ≃+
         (RingHom.ker (i.stalkMap z).hom).Cotangent,

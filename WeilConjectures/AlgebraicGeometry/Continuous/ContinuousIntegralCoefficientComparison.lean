@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.Continuous.ContinuousCoefficientComplet
 # Normalized continuous integral coefficient comparison
 
 Source: Bhatt--Scholze, Lemmas 4.2.12 and 6.8.2(1), and Section 6.5.
-(blueprint: lem-weil-pbc-continuous-integral-coefficient-comparison)
 -/
 
 @[expose] public noncomputable section
@@ -187,18 +186,7 @@ private theorem normalizedCoefficientIso_exists (X : Scheme.{u}) (l : ℕ) [Fact
 
 /-- The continuous integral coefficient ring agrees with the completed quotient
 presentation, compatibly with its actual constant scalar map.
-Source: Bhatt--Scholze, Lemmas 4.2.12 and 6.8.2(1), completed coefficients of Section 6.5.
-(blueprint: lem-weil-pbc-continuous-integral-coefficient-comparison).
-
-Proof: restrict WithAbs.equiv to the integer subrings. Its isometry gives an isomorphism
-of continuous-function sheaves, exchanging the two ULift conventions. The uniquely
-normalized quotient equivalences identify the constant residue diagrams; take their
-limit and compose with the continuous coefficient completion isomorphism. For the
-constant scalar square, compare its composites with each finite projection, followed by
-the finite continuous-functions isomorphism. Constant-sheaf adjunction naturality reduces
-the left side to a constant residue and the right side to the residue of a constant
-function. The two residue-normalization formulas identify these. Limit and constant-sheaf
-universal properties then give the stated equality. -/
+Source: Bhatt--Scholze, Lemmas 4.2.12 and 6.8.2(1), completed coefficients of Section 6.5. -/
 theorem continuousIntegralCoefficientComparison
     (X : Scheme.{u}) (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :

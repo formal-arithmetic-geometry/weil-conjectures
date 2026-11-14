@@ -21,8 +21,7 @@ import WeilConjectures.AlgebraicGeometry.Curve.DenseOpenRestrictionComparison
 /-!
 # The eight curve assertions on a dense open
 
-Source: Stacks Project, Etale Cohomology, Lemma 0GJA, Situation 0A52
-(blueprint: lemma-removing-finitely-many-points).
+Source: Stacks Project, Etale Cohomology, Lemma 0GJA, Situation 0A52.
 
 The unconditional equivalence, without a condition on the torsion of the sheaf, is
 `AlgebraicGeometry.IsCurve.assertions_iff_dense_open`, a corollary of the curve package.
@@ -40,7 +39,7 @@ namespace AlgebraicGeometry
  the original constructible torsion sheaf. The converse holds for primary or prime-to-the-
  characteristic torsion, and hence for a sheaf killed by a prime.
  Source: Stacks Project, Lemma 0GJA and Situation 0A52, with the converse torsion condition
- recorded in the node (blueprint: lemma-removing-finitely-many-points). The equivalence without the
+ recorded in the node. The equivalence without the
  torsion condition is `AlgebraicGeometry.IsCurve.assertions_iff_dense_open`: both sides hold by
  the curve package, whose proof goes through the prime-torsion comparison
  `AlgebraicGeometry.IsCurve.assertions_iff_dense_open_prime`.
@@ -206,8 +205,6 @@ C_4(X,F)$. For $(\mathcal C_5)$: $F$ is constructible and $X$ proper, so $H^q(X,
 $\mathcal C_5(X,F)$. In both cases: $H^0(X,F')$ is a subgroup of the finite $H^0(X,F)$ by 7(ii);
 $H^1(X,F')$ is an extension of a subgroup of $H^1(X,F)$ by a quotient of the finite group $H^0(X,G)$
 (step 4) by 7(ii), hence finite; and $H^q(X,F')\cong H^q(X,F)$ is finite for $q\ge2$ by 7(i).
-Dependencies: theorem-cohomology-curves--4, theorem-cohomology-curves--5,
-def-weil-pbc-constructible-torsion.
 
 11. Part 2, assertions $(\mathcal C_6)$, $(\mathcal C_7)$ (Stacks remark (c)). Let $k'/k$ be
 algebraically closed and either $F'$ prime to $p$ (for $\mathcal C_6$

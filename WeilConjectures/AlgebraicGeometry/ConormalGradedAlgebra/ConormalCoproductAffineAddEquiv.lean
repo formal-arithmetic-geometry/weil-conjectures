@@ -20,7 +20,6 @@ import Mathlib.LinearAlgebra.Isomorphisms
 /-! # Additive affine sections of the coproduct of conormal pieces
 
 Source: Stacks Project, Divisors, Lemma 0633, part (2).
-(blueprint: lem-pur-conormal-coproduct-affine-add-equiv).
 -/
 
 @[expose] public section
@@ -226,22 +225,7 @@ private theorem piece_equiv {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion 
 
 /-- Affine sections of a module coproduct of conormal pieces are the additive
 sum of the ideal-power quotients. No ring structure on the coproduct is assumed.
-Source: Stacks Project, Divisors, Lemma 0633, part (2).
-(blueprint: lem-pur-conormal-coproduct-affine-add-equiv).
-
-Proof: The power inclusion identifies the affine sections of `I^n` with `J^n`.
-The affine quotient projection is surjective with kernel `J` times these sections,
-which the inclusion identifies with `J^(n+1)`. The normalized closed-immersion
-quotient isomorphism identifies this quotient sheaf with `i_* i^* I^n` and its
-projection with the specified adjunction unit. Thus it gives the degreewise
-quotient equivalence, sending the adjunction-unit representative to its class.
-These pieces are quasi-coherent. On the affine inverse
-image of the ambient affine open, the tilde/global-sections equivalence identifies
-their sheaf coproduct with the tilde of their module direct sum; restriction to
-this open preserves coproducts. Taking sections and composing the degreewise
-quotient identifications gives the additive equivalence and its normalization.
-The proof uses neither multiplication on the coproduct nor its unit, and applies
-also to `n = 0`, the unit ideal, the zero ideal and the empty inverse image. -/
+Source: Stacks Project, Divisors, Lemma 0633, part (2). -/
 theorem exists_conormalCoproduct_affine_addEquiv {X Z : Scheme.{u}} (i : Z ⟶ X)
     [IsClosedImmersion i] (M : Z.Modules) (j : ∀ n, piece i n ⟶ M)
     (hc : IsColimit (Cofan.mk M j)) (U : X.affineOpens) :

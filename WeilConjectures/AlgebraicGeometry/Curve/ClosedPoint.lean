@@ -156,7 +156,7 @@ field the local ring at a closed point `Q` is regular of dimension `1`, a discre
 ring; a uniformizer generates the reduced ideal of `Q` near `Q` and is a non-zerodivisor there,
 and away from `Q` the ideal is the unit ideal.
 
-(blueprint: `theorem-hilbert-schemes-points-smooth-curve--1`, Step 0, the divisor `[Q]`) -/
+(Step 0, the divisor `[Q]`) -/
 lemma isInvertible_vanishingIdeal_of_smoothOfRelativeDimension_one
     [SmoothOfRelativeDimension 1 f] {Q : X}
     (hQ : IsClosed ({Q} : Set X)) :
@@ -197,9 +197,7 @@ lemma isInvertible_vanishingIdeal_of_smoothOfRelativeDimension_one
 point `x : Spec k ⟶ X` of a scheme smooth of relative dimension one over `k`, which is a section
 of the structure morphism, is invertible: `x` is a closed immersion, so `ker x` is the reduced
 ideal sheaf of the closed point `x`, which is invertible by
-`AlgebraicGeometry.isInvertible_vanishingIdeal_of_smoothOfRelativeDimension_one`.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality`) -/
+`AlgebraicGeometry.isInvertible_vanishingIdeal_of_smoothOfRelativeDimension_one`. -/
 lemma Scheme.Hom.isInvertible_ker_of_smoothOfRelativeDimension_one
     [SmoothOfRelativeDimension 1 f] (x : Spec (.of k) ⟶ X) (hx : x ≫ f = 𝟙 _) :
     x.ker.IsInvertible := by

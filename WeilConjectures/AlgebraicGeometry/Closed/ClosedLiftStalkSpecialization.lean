@@ -135,8 +135,7 @@ private theorem germ_transport
 
 /-- At the distinguished closed lift the specialization is the original germ,
 with only the transport of its geometric point.
-Source: Stacks Project, Tag 0GJ2 and Tag 04HX.
-(blueprint: lem-weil-pbc-closed-lift-stalk-specialization). -/
+Source: Stacks Project, Tag 0GJ2 and Tag 04HX. -/
 theorem Etale.etaleStalkSpecialization_closed
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S)
@@ -194,8 +193,7 @@ private theorem exactDerived_transport
   simp [Functor.rightDerivedFunctorPlusNatTrans, NatTrans.mapHomotopyCategoryPlus_id]
 
 /-- Derived specialization to the distinguished closed lift is the canonical transport.
-Source: Stacks Project, Tag 0GJ2 and Tag 04HX.
-(blueprint: lem-weil-pbc-closed-lift-stalk-specialization). -/
+Source: Stacks Project, Tag 0GJ2 and Tag 04HX. -/
 theorem Etale.derivedEtaleStalkSpecialization_closed
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S)

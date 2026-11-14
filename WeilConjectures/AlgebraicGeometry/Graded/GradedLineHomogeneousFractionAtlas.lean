@@ -17,8 +17,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 /-!
 # Homogeneous-fraction charts for affine-basis graded line maps
 
-Source: Stacks Project, Constructions, Tag 01O9
-(blueprint: lem-trf-graded-line-homogeneous-fraction-atlas).
+Source: Stacks Project, Constructions, Tag 01O9.
 -/
 
 @[expose] public section
@@ -211,31 +210,7 @@ The frame powers and coefficients are supplied explicitly, with their defining e
 no sheaf-level graded decomposition or choice of such a decomposition is required.
 
 Source: Stacks Project, Constructions, Tag 01O9, characterizations (2) and (3), and
-Tag 01NK for the affine homogeneous-localization construction
-(blueprint: lem-trf-graded-line-homogeneous-fraction-atlas).
-
-Proof: Over an affine base U, trivialize L on affine source opens W. The unit and product
-laws for the graded line map, together with the recursive frame-power equations, make
-the coefficients a graded algebra homomorphism to O(W)[t]. On the open D(b), where b is
-the coefficient of a positive-degree homogeneous element e, send a/e^n to c(a)/b^n.
-The ordinary localization relation proves well-definedness even when b is a zero divisor:
-multiply an equality of fractions by a further power of e, apply the graded map, and
-cancel the now invertible image of b. Addition, multiplication and the degree-zero law
-prove that this is a unital ring map over O(U). The affine adjunction gives a morphism
-from Spec O(W)[1/b] to the standard chart D_+(e). On double generator opens, both maps
-send a/(ee')^n to the same quotient of coefficients, so they agree by the affine
-adjunction. The restriction law of the graded line map gives the same equality under
-affine source and base refinements. Cover intersections by common affine refinements;
-no separatedness hypothesis is needed. The generating hypothesis says these generator
-opens cover T: in a local frame, a section outside the maximal-ideal multiple has unit
-coefficient. Glue the chart maps. Their scalar formulas show that the glued morphism
-lies over S. Rescaling a frame multiplies numerator and denominator by the same power
-of a unit, so the construction satisfies the displayed formula for every frame.
-Finally, on any open immersion with a trivialization and a prescribed homogeneous-section
-ring map, the same affine adjunction and localization formulas identify its restriction
-with Proj.fromOfGlobalSections. Equality on the generator-open cover proves precisely
-IsCanonicalMap. Empty opens, nilpotent denominators and degree-zero numerators are
-covered by the same localization identities. -/
+Tag 01NK for the affine homogeneous-localization construction. -/
 theorem graded_line_homogeneous_fraction_atlas {S T : Scheme.{u}} (h : T ⟶ S)
     (A : S.GradedAlgebraData) (L : T.Modules) [L.IsInvertible]
     (ψ : RelativeGradedLineMap h A L) (hgen : ψ.GeneratesEverywhere)

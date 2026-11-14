@@ -28,17 +28,7 @@ attribute [local instance 20000] strictEtaleSystemDerived strictEtaleLevelDerive
 variable {O : Type (u + 1)} [CommRing O] {ell : O}
 
 /-- The canonical geometric pullback square on systems and its finite levels.
-Source: Zheng Construction 4.1; Stacks 099R and 0B65.
-(blueprint: lem-sf-exceptional-system-pullback-square-construction).
-
-Proof: Obtain the canonical ordinary system and finite-level pullback comparisons
-with their underlying and evaluation equations. Full faithfulness of precomposition
-with the localization of complexes produces a derived comparison from each ordinary
-comparison, with its representative formula. Apply the localization cube lemma to
-these two comparison faces and the four prescribed inverse-evaluation faces. Their
-six representative equations identify the resulting derived cube with the ordinary
-evaluation cube. This gives derived evaluation coherence. The constructed data and
-the four remaining equations form the normalized pullback-square record. -/
+Source: Zheng Construction 4.1; Stacks 099R and 0B65. -/
 theorem exceptionalSystemPullbackSquare_exists
     [∀ n : ℕ, Finite (O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1))]
     {T U : Scheme.{u}} (g : T ⟶ U)

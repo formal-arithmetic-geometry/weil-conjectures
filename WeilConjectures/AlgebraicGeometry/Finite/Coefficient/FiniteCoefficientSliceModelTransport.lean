@@ -30,8 +30,7 @@ import WeilConjectures.SixFunctors.ProEtale.Comparison.ConstantSheaf
 
 /-! # Transport of supplied constant complexes on a slice
 
-Source: Stacks Project, proetale.tex, Tags 099R, 099Y and 09AL
-(blueprint: lem-weil-pbc-finite-coefficient-slice-model-transport).
+Source: Stacks Project, proetale.tex, Tags 099R, 099Y and 09AL.
 -/
 
 @[expose] public noncomputable section
@@ -448,27 +447,7 @@ end SliceModelTransportProof
 origin. No finiteness, cohomological bounds or local constancy of K is required.
 
 Source: Stacks Project, proetale.tex, localization (099R), comparison (099Y, 09AL),
-and modules.tex, scalar restriction and extension (03CY).
-(blueprint: lem-weil-pbc-finite-coefficient-slice-model-transport).
-
-Proof: identify the ringed slice at each W with the pro-etale site of W.left,
-transport coefficients along phi, and restrict to constant scalars. Each is an
-exact equivalence on the slice. Their composite identifies actual derived slice
-restriction with the fixed-coefficient functor finiteCoefficientSliceRestriction.
-The origin marking, pulled back along g, and comparison/pullback coherence give
-the fixed-coefficient restriction of K on W. Apply comparison to the supplied
-etale constant-complex isomorphism. Comparison sends the constant sheaf functor
-to the pro-etale constant sheaf functor; both are left adjoint to sections at
-the terminal object, so this comparison is natural in every module and thus
-in every differential of P. The scalar-extension/restriction adjunction along
-the isomorphism phi identifies this last complex with the fixed-coefficient
-restriction of completedAdicDerivedChange applied to finiteModelConstantComplex.
-Its left-derived comparison agrees with termwise scalar extension because
-extension along an isomorphism is exact. Compose these isomorphisms and reflect
-through the exact equivalence on the W slice. This yields the actual ringed
-slice isomorphism in the conclusion. All comparisons are natural before
-localization, so they apply to arbitrary, even unbounded, supplied P. The empty
-chart and zero coefficient ring give zero objects on both sides. -/
+and modules.tex, scalar restriction and extension (03CY). -/
 theorem finiteCoefficient_slice_model_transport
     (X : Scheme.{t})
     (B : Type t) [CommRing B] [Finite B]

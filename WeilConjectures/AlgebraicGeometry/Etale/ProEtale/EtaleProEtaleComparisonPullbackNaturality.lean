@@ -21,8 +21,7 @@ set_option linter.privateModule false
 
 Source: Stacks Project, Cohomology on Sites, Tags 0D6E and 08J6, Section 072X;
 Pro-etale Cohomology, Tag 099W; latest blueprint, prose-09-07,
-base-change compatibility of the Kummer class
-(blueprint: lem-sfb-etale-proetale-comparison-pullback-naturality).
+base-change compatibility of the Kummer class.
 
 ## Main definitions
 

@@ -27,9 +27,7 @@ attribute [local irreducible] Functor.leftAdjoint Functor.rightAdjoint
   derivedTensor upperStar lowerStar
 
 /-- The derived constant inverse-image comparison on a single complex.
-Source: Stacks Tag 07A6 (blueprint: lem-pur-etale-constant-pullback-single).
-Proof: expand exact derivation, move its comparison through the constant single
-isomorphism by naturality, apply derived single comparison, and cancel inverses. -/
+Source: Stacks Tag 07A6. -/
 theorem etaleConstantPullback_single
     (C : Type (u + 1)) [CommRing C] {X Y : Scheme.{u}} (f : X ⟶ Y)
     (M : ModuleCat.{u + 1} C) :

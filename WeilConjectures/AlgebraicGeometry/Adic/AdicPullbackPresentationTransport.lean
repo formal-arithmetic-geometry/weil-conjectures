@@ -105,7 +105,6 @@ set_option linter.privateModule false
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-sf-cbc,
 lem-cbc-completed-extension-zero-comparison.proof.md; Stacks Tags 05S7 and 03DI.
-(blueprint: lem-cbc-adic-pullback-presentation-transport).
 
 The coefficient uniqueness statement first identifies both presentations with the published
 coefficient map. The subsequent statements use these identifications to write both universal

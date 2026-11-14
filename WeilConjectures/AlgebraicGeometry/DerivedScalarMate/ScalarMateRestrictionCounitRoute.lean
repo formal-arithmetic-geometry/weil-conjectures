@@ -15,7 +15,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 /-! # The restricted derived scalar mate on representatives
 
 Source: Stacks Project, Tags 03EK, 06YY, 07A4 and 07A6.
-(blueprint: lem-sfb-scalar-mate-restriction-counit-route).
 -/
 
 @[expose] public noncomputable section
@@ -262,16 +261,7 @@ private theorem scalarMate_counit {Z T : Scheme.{u}} (f : Z ⟶ T)
   simpa only [Category.assoc, proEtaleRingDerivedPullbackFactors] using h.symm
 
 /-- A unit-normalized ordinary scalar comparison computes the restricted derived mate.
-Source: Stacks Tags 06YY and 07A6
-(blueprint: lem-sfb-scalar-mate-restriction-counit-route).
-
-Proof: transpose the representative comparison through the derived scalar
-adjunction. On the K-flat complexes P and its exact inverse image, the specified
-derived units followed by the universal scalar counits are the localized ordinary
-units. Naturality of the exact restriction square and the ordinary unit equation
-identify the two transposes. Restrict the equality and use naturality of the
-restriction localization factors. Expanding tensorScalarCounit gives precisely
-the displayed equation. No ordinary tensor-coordinate identification is used. -/
+Source: Stacks Tags 06YY and 07A6. -/
 theorem scalarMate_restriction_counit_route {Z T : Scheme.{u}} (f : Z ⟶ T)
     {A B : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : A ⟶ B)
     (χ : proEtaleRingExtension a ⋙

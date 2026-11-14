@@ -90,7 +90,7 @@ open FiniteEtale
 
 variable {K : Type u} [Field K] [Finite K]
 
-/-- Blueprint `proposition-no-fixed-class-degree-one--1`: the Frobenius acts on the boundary module
+/-- The Frobenius acts on the boundary module
 `ℤ / N (-1)` at a boundary point `z` through `Q = q ^ m`, for a power `Φ ^ m` fixing `z`.
 
 Let `U₀ ⊆ C₀` be a smooth curve over `K = 𝔽_q` in a compactification `c` by a smooth curve,

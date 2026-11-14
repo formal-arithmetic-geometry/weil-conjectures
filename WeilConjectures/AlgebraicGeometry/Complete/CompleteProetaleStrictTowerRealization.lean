@@ -14,7 +14,6 @@ import all WeilConjectures.AlgebraicGeometry.Strict.Tower.StrictTowerExchangeMat
 
 Source: blueprint sec-six-functors-basics/sk-prop-sf-cbc, Definition 1939;
 Stacks 03DI, 09BP, 0A07.
-(blueprint: lem-cbc-complete-proetale-strict-tower-realization).
 -/
 
 @[expose] public noncomputable section

@@ -276,8 +276,7 @@ private lemma transpose_baseChange_normal
 
 /-- Exact-derived transposition and mixed base change commute with the homotopy unit.
 The proof transports the exact adjunction unit, then applies naturality and the
-mixed base-change unit identity. Source: Stacks Project Tags 0D6E and 0F7B.
-(blueprint: lem-pur-proper-sheaf-transpose-unit-calculus). -/
+mixed base-change unit identity. Source: Stacks Project Tags 0D6E and 0F7B. -/
 theorem exactDerivedTranspose_baseChange_normal
     {C D E Z S : Type*} [Category C] [Category D] [Category E]
     [Category Z] [Category S]

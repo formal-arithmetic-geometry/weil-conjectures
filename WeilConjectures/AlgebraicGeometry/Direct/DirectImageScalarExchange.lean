@@ -56,7 +56,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantScala
 # Scalar extension and direct-image geometric exchange
 
 Source: literature/stacks-project/sites-cohomology.tex, Tag 0E47,
-`remark-compose-base-change-horizontal` (blueprint: lem-fix-direct-image-scalar-exchange).
+`remark-compose-base-change-horizontal`.
 
 All functors and comparisons below specialize existing canonical constructions to
 constant coefficients. No functor, adjunction, tensor comparison or square comparison

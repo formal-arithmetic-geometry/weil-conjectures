@@ -27,9 +27,6 @@ import all WeilConjectures.EtaleCohomology.TateTwist.RootsOfUnityPullback
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Quotient.DiagonalQuotientRootProjectionIso
 
 /-! # A single quotient root endpoint
-
-Source: diagonal tower coefficient changes, paragraph (1), the finite Tate-line reduction.
-(blueprint: lem-diagonal-quotient-root-endpoint).
 -/
 
 @[expose] public noncomputable section
@@ -345,7 +342,6 @@ Source: blueprint latest, sec-six-functors-basics/sk-prop-diagonal-tower/
 sk-prop-diagonal-tower-coefficients.proof.md, paragraph (1), expected reductions;
 Stacks Tags 0990, 090K, 03EK and 03EL, as expanded in
 lem-amb-tate-root-projection-reduction.
-(blueprint: lem-diagonal-quotient-root-endpoint).
 
 Proof in words. Construct the integral root map with its projection equations.
 Annihilation of the quotient by l^(n+1) factors its coefficient map through the

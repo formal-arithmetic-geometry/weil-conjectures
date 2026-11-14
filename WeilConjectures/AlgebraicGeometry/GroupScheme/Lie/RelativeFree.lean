@@ -586,7 +586,7 @@ variable {I : Type u} [Fintype I] (b : Module.Basis I k (Lie G))
 
 /-- **The infinitesimal points with values in a scheme form a free module.** For a basis `(b_i)`
 of `Lie(G)` and a scheme `X` over `k`, every infinitesimal point with values in `X` is uniquely a
-product `∏ᵢ (b_i)_X(rᵢ ε)` with `rᵢ ∈ Γ(X, 𝒪_X)`. (blueprint: `lemma-stable-subspaces-center`) -/
+product `∏ᵢ (b_i)_X(rᵢ ε)` with `rᵢ ∈ Γ(X, 𝒪_X)`. -/
 theorem existsUnique_prod_eq (X : Over (Spec (.of k))) (v : infPointsAt G X) :
     ∃! r : I → Γ(X.left, ⊤), ∏ i, infPointsAtScale X (r i) (lieAt X (b i)) = v := by
   classical

@@ -16,7 +16,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.IsIso
 /-! # Affine charts of the canonical section-ring morphism
 
 Source: Stacks Project, Properties, Tags 01PZ and 01Q1, with the chart formula of
-Constructions Tag 01N8 (blueprint: lem-sc-ample-proj-local-chart).
+Constructions Tag 01N8.
 -/
 
 @[expose] public section
@@ -29,8 +29,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- The canonical section-ring morphism identifies any affine nonvanishing chart when `L`
 is ample. Here `X_s` is `nonvanishingLocus (L.tensorPow d) (s.val d)`.
-Source: Stacks Project, Properties, Tags 01PZ and 01Q1
-(blueprint: lem-sc-ample-proj-local-chart).
+Source: Stacks Project, Properties, Tags 01PZ and 01Q1.
 
 Step 1: `lem-sc-ample-proj-canonical-map` supplies the morphism from the assumed cover,
 its inverse-image identity, and its localized sections formula (that statement writes

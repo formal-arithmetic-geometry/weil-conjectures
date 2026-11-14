@@ -25,16 +25,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
 
 /-- Normalized geometric operations on semilinear systems.
 Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 06YY, 07A4, 07A6.
-(blueprint: lem-coef-semilinear-geometric-operations).
 
-Proof: Apply $u^{-1}$ and $u_*$ termwise on the underlying sequence topoi. Their adjunction
-follows by applying the original adjunction at every index: the naturality equations for a family
-of maps correspond under transposition. The inverse image preserves finite limits and colimits, so
-is exact on module systems, with coefficient ring $C_\bullet=u^{-1}B_\bullet$. This is a morphism
-of the two ringed sequence topoi. Apply [lem-weil-pbc-ringed-projection-mate-exact] and
-[prop-pur-kinjective-resolutions-exist] there. They give $V\dashv G=Ru_{*,\bullet}$, with $G$
-computed by a K-injective system resolution and $V$ termwise exact. The unit and counit here are
-maps in the ordinary derived categories of systems.
 
 Write $L_n^B,L_n^C$ for the finite left extensions on the two sites. On a flat-term K-flat
 representative $P$, inverse image and coefficient tensor give $VE_n^BP\cong E_n^Cu^{-1}P$, with

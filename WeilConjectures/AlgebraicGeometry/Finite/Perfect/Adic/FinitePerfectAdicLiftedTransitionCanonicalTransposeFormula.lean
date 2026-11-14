@@ -24,7 +24,6 @@ import WeilConjectures.Algebra.Homology.Coefficient.CoefficientLiftKFlatResoluti
 /-! # Formula for the canonical transpose of the lifted transition
 
 Source: Stacks Project, Tags 06YY and 09C6.
-(blueprint: lem-weil-pbc-finite-perfect-adic-lifted-transition-canonical-transpose-formula).
 -/
 
 @[expose] public noncomputable section
@@ -232,8 +231,7 @@ attribute [local semireducible] ConstantScalarRealization.moduleDerivedExtension
 The canonical unit mate is invertible by its representative square and a resolution that
 remains K-flat after coefficient lift. Compose it with the lift of `leftAdjointUniq` for the
 supplied step adjunction. Naturality of `finitePerfectAdicAlgebraLiftRestrict` and the unit
-identity for `leftAdjointUniq` then give the displayed transpose formula.
-(blueprint: lem-weil-pbc-finite-perfect-adic-lifted-transition-canonical-transpose-formula). -/
+identity for `leftAdjointUniq` then give the displayed transpose formula. -/
 theorem finitePerfectAdicLiftedTransition_canonical_transpose_formula
     {A : Type t} [CommRing A] {d : AdicCoefficientDatum A}
     (T : FinitePerfectAdicAlgebraTower d) (n : ℕ) :

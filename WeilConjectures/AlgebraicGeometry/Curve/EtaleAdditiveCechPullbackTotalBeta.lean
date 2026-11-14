@@ -24,23 +24,7 @@ private theorem restrict_pullback {X Y : Scheme.{u}} (g : Y ⟶ X) (P : X.Opens)
     congr 1
 
 /-- Tuplewise structural pullback coordinates force the beta square for a total map.
-Source: Stacks Project, Tags 01FD and 03P2, augmented double-complex diagram.
-(blueprint: lem-pbc-etale-additive-cech-pullback-total-beta)
-Proof: Unfold beta and apply ht in bidegree (n,0). It suffices to compare
-the products before their total inclusion. Project to a tuple y, so the left
-side is the resolution augmentation at the source tuple open, followed by
-evaluation of alpha and restriction along additiveCechTuplePullback. Evaluate
-hα at that source open and use naturality of J.ι along the tuple pullback map.
-The result is J.ι at the target tuple open applied to the structural pullback
-of its function section. By naturality of restrictFunctorΓ.inv, its transport
-from functions on the open subscheme to sections on the open agrees with
-restriction along hinter and unitToPushforwardObjUnit. The coordinate equality
-in the hypothesis identifies this function with the tuple coordinate of x'.
-Lift through ULift and apply J.ι. Product projection extensionality gives the
-required equality, hence so does the total inclusion. Empty families give
-zero products; degree zero and empty opens satisfy the same functorial
-identities. The hypothesis ht is essential: an arbitrary total map need not
-preserve the augmentation. -/
+Source: Stacks Project, Tags 01FD and 03P2, augmented double-complex diagram. -/
 theorem additiveCech_pullback_total_beta
     {X Y : Scheme.{u}} (g : Y ⟶ X)
     {ι : Type u} [Finite ι] (U : ι → X.Opens) (V : ι → Y.Opens)

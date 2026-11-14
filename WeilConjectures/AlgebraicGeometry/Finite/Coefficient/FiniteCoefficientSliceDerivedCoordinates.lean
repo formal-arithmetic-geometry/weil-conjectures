@@ -27,7 +27,6 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 /-! # Derived coordinates on a constant-coefficient ringed slice
 
 Source: Stacks Project, Tags 03CY, 093J and 099R.
-(blueprint: lem-weil-pbc-finite-coefficient-slice-derived-coordinates).
 -/
 
 @[expose] public noncomputable section
@@ -180,29 +179,7 @@ isomorphism classes of derived objects, and identifies constant realizations.
 There is no finiteness, boundedness, covering or etale-origin assertion here.
 
 Source: Stacks Project, modules on sites, change of rings (03CY), module
-sheafification (093J), and localization of the pro-etale site (099R).
-(blueprint: lem-weil-pbc-finite-coefficient-slice-derived-coordinates).
-
-Proof: on the slice at W restrict the action along the restriction of psi. Its
-inverse is restriction along psi inverse, so this is an exact equivalence.
-Restrict next along the locally bijective map from the constant B presheaf to
-the constant ring sheaf. Module sheafification is its inverse: the unit and
-counit are invertible because the underlying additive presheaves are sheaves.
-Finally use the equivalence between the pro-etale slice at W and the pro-etale
-site of W.left. Their composite E is an additive exact equivalence and
-E composed with slice restriction is finiteCoefficientSliceRestriction.
-Pass this natural identification and the equivalence to derived categories;
-use the factors isomorphism to identify representative-based restriction.
-This proves the first assertion. For the second assertion, extension along
-psi cancels the first scalar restriction. The sheafification adjunction identifies
-the restriction of a constant module realization with the constant module-valued
-sheaf. Localization takes a constant sheaf to the constant sheaf. These
-identifications are natural in every module, hence commute with all complex
-differentials, and descend through quasi-isomorphisms. Exactness of extension
-along an isomorphism identifies its left derived functor with termwise extension.
-The resulting comparison is the second assertion, for arbitrary unbounded F.
-Empty sites and zero rings are included since these equivalences and their
-units and counits impose no nonemptiness assumption. -/
+sheafification (093J), and localization of the pro-etale site (099R). -/
 theorem finiteCoefficient_slice_derived_coordinates
     (X : Scheme.{t}) (B : Type t) [CommRing B]
     (R : Sheaf (ProEt.topology X) CommRingCat.{t + 1})

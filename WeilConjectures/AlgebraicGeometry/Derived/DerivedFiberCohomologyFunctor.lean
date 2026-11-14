@@ -10,7 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.DerivedFiberBetti
 /-! # Functorial derived residue-field cohomology
 
 Source: Stacks Project, Tags 06YJ and 0BDI.
-(blueprint: new-derived-fiber-cohomology-functor)
 -/
 
 @[expose] public section
@@ -21,8 +20,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Derived residue pullback, homology, sections and the canonical residue-field action.
 This is the functor whose object value is `derivedFiberCohomology`.
-Source: Stacks Project, Tags 06YJ and 0BDI.
-(blueprint: new-derived-fiber-cohomology-functor) -/
+Source: Stacks Project, Tags 06YJ and 0BDI. -/
 noncomputable def derivedFiberCohomologyFunctor (W : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings W.toRingedSpace))]
     (w : W) (i : ℤ)

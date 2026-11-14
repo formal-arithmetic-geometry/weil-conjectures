@@ -282,22 +282,7 @@ private theorem coextension_mate_isIso (n : ℕ) :
 /-- Level extension by zero is exact, and the mate of ordinary restriction
 with evaluation is invertible for the canonical open left adjoints.
 
-Source: Stacks 03DJ, 0941; Zheng Construction 4.1 and Lemma 4.10.
-(blueprint: lem-sf-pro-open-evaluation-mate).
-
-Proof: use the direct-sum and sheafification construction of extension by zero
-on the localized pro-etale site. It is exact, since its stalks are the original
-stalk on the open and zero off the open. The same conclusion follows from the
-exact localized module extension functor. On the vertical sequence site this
-construction commutes with evaluation: both evaluate to the direct sum indexed
-by the same lifts of a section into the open, with the same coefficient action.
-The comparison is the mate of I.inverseEvaluation: the open unit sends a section
-to its corresponding summand, and this description is unchanged by evaluation.
-The universal property of left adjoints transports this calculation to the
-canonical choices used in the statement. Restriction of scalars changes only
-the scalar action, so the comparison respects successor transitions. Thus the
-mate is invertible as a natural transformation, including for the empty open
-and zero ring. -/
+Source: Stacks 03DJ, 0941; Zheng Construction 4.1 and Lemma 4.10. -/
 theorem exceptionalProOpen_evaluation
     [I.inverse.IsRightAdjoint]
     [∀ n : ℕ, (I.lift n).modules.IsRightAdjoint] :

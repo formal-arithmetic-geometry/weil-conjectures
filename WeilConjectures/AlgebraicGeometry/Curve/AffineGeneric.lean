@@ -16,7 +16,7 @@ public import WeilConjectures.ConstructibleSheaf.Defs
 
 Let `C` be a smooth affine connected curve over an algebraically closed field `k`, with generic
 point `η : Spec k(C) ⟶ C`. We show `H²(C, η_* M) = 0` for every torsion étale sheaf `M` on
-`Spec k(C)` (blueprint `theorem-cohomology-curves--2`).
+`Spec k(C)`.
 
 For a sheaf `N` split by a finite Galois extension `L` of `k(C)` whose Galois group is an
 `ℓ`-group, with finite `ℓ`-primary sections over `Spec L`, `N` is filtered by constant sheaves
@@ -544,8 +544,7 @@ The sheaf `M` is the filtered union of its subsheaves split by a finite Galois e
 filtered union of their pushforwards, and cohomology commutes with filtered colimits on the
 quasi-compact quasi-separated scheme `C`. For each of them
 `AlgebraicGeometry.IsConnectedCurve.subsingleton_sheafH_two_lowerStar_of_isSplitBy_of_finite`
-applies.
-(blueprint: `theorem-cohomology-curves--2`) -/
+applies. -/
 theorem subsingleton_sheafH_two_lowerStar (f : C ⟶ Spec (.of k)) [IsConnectedCurve f]
     [Smooth f] [IsAffine C] [IsIntegral C]
     (M : Sheaf (Spec C.functionField).smallEtaleTopology AddCommGrpCat.{u + 1})

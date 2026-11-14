@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.Good.GoodCurvesPreimageBoundary
 
 Source: Stacks Project, Tag 0GKX, `lemma-constant-shriek-rel-dim-1`, proof after
 replacing the dense open by its inverse image under the finite good-curves cover.
-(blueprint: lem-weil-pbc-good-curves-preimage-constructible)
 -/
 
 @[expose] public section
@@ -208,12 +207,7 @@ of a fibrewise dense open in a finite good-curves diagram.
 
 Source: Stacks Project, Tag 0GKX, `lemma-constant-shriek-rel-dim-1`, proof from
 "Let Z' be the complement" through the finite sum of the proper smooth families.
-(blueprint: lem-weil-pbc-good-curves-preimage-constructible)
 
-Proof: The geometric preimage-boundary theorem gives an open immersion of the
-pullback P into the proper Noetherian coproduct C, over V, whose closed
-complement Z is quasi-finite over V. The finite constant complex on Z has
-constructible cohomology, so quasi-finite shriek preserves its constructibility.
 
 Assemble constructibility on C by induction on the finite component family. The
 empty coproduct has no points; every sheaf and the resulting compact-support object

@@ -25,24 +25,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Sheafified localization of integral functions is the rational function sheaf.
 
-Source: Bhatt--Scholze, Lemma 6.8.2(2), and paragraph before Definition 6.8.6
-(blueprint: lem-weil-pbc-continuous-coefficient-localization).
-
-Proof: Include integral functions into field-valued functions pointwise. The constant
-uniformizer is invertible in the latter ring, with its continuous constant inverse.
-The localization universal property extends this map to fractions on each object;
-uniqueness gives naturality, so sheafification extends it to a ring-sheaf map.
-This map is injective before sheafification: a fraction mapping to zero has numerator
-zero pointwise, since the uniformizer is nonzero in the field. For a rational section g,
-the opens where g lies in the inverse nth uniformizer multiple of the integer ring
-cover the test object, by the DVR decomposition of a nonzero field element as a unit
-times an integral power of the uniformizer. These sets are open, because the integer
-ring and all its nonzero scalar multiples are open in the valuation topology. Each is
-a pro-etale object; affine quasi-compactness shows that the open cover is a covering
-in the site's topology. On the nth open the section is the fraction with numerator
-uniformizer^n times g. These fractions agree on overlaps by injectivity. Gluing and
-the sheafification universal property give the inverse ring-sheaf map. On integral
-numerators the original map is precisely the pointwise inclusion, as normalized here. -/
+Source: Bhatt--Scholze, Lemma 6.8.2(2), and paragraph before Definition 6.8.6. -/
 theorem continuousCoefficientLocalization (l : ℕ) [Fact l.Prime] (E : Type u)
     [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (X : Scheme.{u}) :

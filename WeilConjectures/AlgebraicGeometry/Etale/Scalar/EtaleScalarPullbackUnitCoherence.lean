@@ -37,14 +37,7 @@ private theorem tensor_naturality_left
   exact h
 
 /-- Unit compatibility follows from tensor compatibility and the two left-unit laws.
-Source: Stacks 07A4 and 0G7E
-(blueprint: lem-pur-etale-scalar-pullback-unit-coherence).
-Proof: the composite tensor comparisons on Q followed by pullback and on pullback
-followed by Q both satisfy left unitality by pasting the constituent left-unit
-laws. The scalar/pullback tensor square identifies these two tensor comparisons.
-An invertible tensor-compatible natural transformation between these unital
-functors preserves the unit, by tensorIso_preserves_unit. Its unit equation is
-exactly the displayed formula. -/
+Source: Stacks 07A4 and 0G7E. -/
 theorem etaleScalarPullback_unit
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {X Y : Scheme.{u}} (f : X ⟶ Y) :

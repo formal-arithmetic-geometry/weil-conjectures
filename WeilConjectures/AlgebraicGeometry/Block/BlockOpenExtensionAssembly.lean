@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.Block.BlockOpenExtensionTransitions
 
 /-! # Assembly and normalization of the block open-extension comparison
 Source: Zheng Construction 4.1; Stacks 03DI--03DJ.
-(blueprint: lem-pur-block-open-extension-assembly)
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -180,8 +179,7 @@ private theorem component_normalization
 
 attribute [local irreducible] evaluation systemRing ringPresheaf rings in
 /-- Compatible explicit components assemble naturally and uniquely, with their full
-heterogeneous evaluation normalization. Source: Zheng Construction 4.1; Stacks 03DI--03DJ.
-(blueprint: lem-pur-block-open-extension-assembly) -/
+heterogeneous evaluation normalization. Source: Zheng Construction 4.1; Stacks 03DI--03DJ. -/
 theorem blockOpenExtensionComparison
     (R : SystemBlockRepetition J B₀ τ₀ t)
     (Q : Systems (J.over U) (openRings.{c, v, r} J B₀ U)

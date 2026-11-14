@@ -37,7 +37,7 @@ namespace AlgebraicGeometry
 The blueprint obtains `V` by removing points from the smooth proper completion of `C`; it is
 enough to take any nonempty affine open: `C` is irreducible (connected and regular), so every
 nonempty open is dense, and its complement is finite since `C` is a noetherian space of
-dimension one. (blueprint: `theorem-weight-bound-curve--1`) -/
+dimension one. -/
 theorem IsCurve.exists_isAffineOpen_dense_finite_compl {k₀ : Type u} [Field k₀]
     {C : Scheme.{u}} (p : C ⟶ Spec (.of k₀)) [IsCurve p] [SmoothOfRelativeDimension 1 p]
     [GeometricallyConnected p] :

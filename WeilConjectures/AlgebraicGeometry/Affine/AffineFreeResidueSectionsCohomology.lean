@@ -20,7 +20,6 @@ import Mathlib.CategoryTheory.Monoidal.Closed.Braided
 /-! # Residue cohomology of an affine bounded free representative
 
 Source: Stacks Project, Tags 0BCD, 064K, 06YB and 0098.
-(blueprint: lem-sc-affine-free-residue-sections-cohomology)
 -/
 
 @[expose] public section
@@ -33,25 +32,7 @@ namespace AlgebraicGeometry.Scheme
 cohomology by a linear equivalence.
 Source: Stacks Project, Tags 0BCD (minimal free models), 064K (bounded free
 K-flatness), 06YB (stalkwise K-flatness), 06YI and 06YJ (derived pullback),
-and 0098 (stalks of pullback).
-(blueprint: lem-sc-affine-free-residue-sections-cohomology)
-
-Proof: The localized-site equivalence transports K to a bounded finite free
-complex on U. On an affine scheme, finite free sheaves are the sheaves associated
-to their finite free section modules. Evaluation of the given term isomorphisms
-therefore gives section modules of ranks r j. Tensor these free modules along
-W.evaluation U w hwU; their residue extensions are finite dimensional of the
-same ranks, including rank zero. The bounded free complex is K-flat, so its
-termwise pullback to the residue-field point represents the derived pullback
-of Q(K). The residue point factors through U. Compatibility of derived pullback
-with this factorization and exact open restriction identifies this derived
-object with the derived fibre of E, using he. On the one-point residue spectrum,
-sections are exact, and GammaSpecIso transports scalars to W.residueField w.
-The affine module/sheaf tensor comparison identifies these sections termwise
-with the explicitly displayed scalar extension of the section complex, and
-naturality makes this a chain comparison. Homology thus has a linear equivalence
-with derivedFiberCohomology W E j w, as asserted.
-No vanishing of any differential or choice of a section frame is used. -/
+and 0098 (stalks of pullback). -/
 theorem affineFree_residueSections_cohomologyLinearEquiv
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

@@ -32,21 +32,7 @@ attribute [local instance] Over.ConstructProducts.over_finiteProducts_of_finiteW
 compatible affine étale covering approximations. This is purely geometric; it does
 not involve sections, coefficients, cochain complexes, or cocycles.
 Source: Stacks Project, Tag 099U, the two finite Čech limit reductions, using
-Tags 01ZM, 01ZN and 07RP for affine étale finite-presentation descent.
-(blueprint: lem-cbc-affine-etale-cech-presentation).
-
-Proof: The one-factor nerve is isomorphic to the corresponding member U_i.
-Transport pro-affine-étaleness through this isomorphism. Apply the finite-family
-presentation theorem, whose proof factors the finite disjoint union through one
-surjection, presents that surjection, and descends its finite affine open cover.
-This provides a common small cofiltered index, affine étale covering families,
-and scheme limit cones for the base and every original member.
-Construct repeated intersections and their structure maps using the wide-pullback
-universal property. The base and member limit properties identify each repeated
-intersection as the scheme limit of its stages. Projection equations prove the
-transition, cone and face identities. Each stage intersection is affine because
-it is a finite limit of affine schemes. No nonemptiness assumption is introduced;
-the empty family, repetitions, and empty schemes use the same construction. -/
+Tags 01ZM, 01ZN and 07RP for affine étale finite-presentation descent. -/
 theorem exists_affine_etale_cech_system
     (Y : Scheme.{u}) [IsAffine Y]
     (V : Y.ProEt) (hV : proAffineEtale V.hom)

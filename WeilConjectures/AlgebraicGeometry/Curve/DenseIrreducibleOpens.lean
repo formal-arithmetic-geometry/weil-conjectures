@@ -21,25 +21,7 @@ open CategoryTheory TopologicalSpace Set
 namespace AlgebraicGeometry.IsCurve
 
 /-- A dense open of a curve can be shrunk to a finite disjoint union of irreducible opens.
-Source: Stacks Project, Theorem 03SC, proof, third paragraph
-(blueprint: lemma-removing-finitely-many-points--1).
-
-Proof: A finite-type scheme over a field is Noetherian and has finitely many irreducible
-components C_a, each with a generic point. A dense open V contains every generic point:
-its intersection with the open part of C_a outside all other components is nonempty,
-and an open containing a specialization of the generic point contains that generic point.
-Remove from V the union of the intersections of distinct components. These intersections
-are closed, contain no generic point, and have dimension at most zero, since every component
-has dimension at most one. The remainder W is open and contains every generic point, hence
-is dense. Its intersections U_a with the components are nonempty irreducible opens, pairwise
-disjoint, and cover W. Each is closed in W as well, since its complement is a finite union
-of the other opens. Thus the connected component in W of a point of U_a is exactly U_a:
-irreducibility implies connectedness, and a connected set cannot cross a clopen partition.
-The complement of W is closed and contains no generic point. Every point in it is closed,
-since a non-generic point of a component of dimension at most one has zero-dimensional
-irreducible closure. Noetherianity makes this complement a finite set of closed points,
-so its topological Krull dimension is at most zero. If X is empty, take n = 0; all density
-and component conditions are vacuous and the empty complement has dimension bottom. -/
+Source: Stacks Project, Theorem 03SC, proof, third paragraph. -/
 theorem exists_dense_irreducible_opens {k : Type u} [Field k] {X : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [IsCurve f] (V : X.Opens) (hV : Dense (V : Set X)) :
     ∃ (n : ℕ) (U : Fin n → X.Opens),

@@ -23,8 +23,7 @@ Source: Stacks Project, Tags 08JC and 08J9; blueprint
 
 Transpose the shift square through the tensor--Hom adjunction. On K-flat models both
 sides are scalar balancing after the signed source reindexing, so the canonical
-comparison identifies them. Localization extends the identity to all objects.
-(blueprint: lem-coef-etale-hom-transpose-exact-comm-shift) -/
+comparison identifies them. Localization extends the identity to all objects. -/
 theorem etaleHomComparison_reversedExact_commShift
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (X : Scheme.{u}) (φ : A →+* B) (M : DerivedCategoryModule A X)

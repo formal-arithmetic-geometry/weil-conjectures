@@ -12,8 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Finite.Diag
 
 The two predicates name the separate arrow equalities in `FiniteDiagonalComparison`.
 Generic coefficient parameters keep their types small.
-Source: diagonal tower coefficient changes, paragraph (1).
-(blueprint: def-diagonal-finite-arrow-equations).
 -/
 
 @[expose] public noncomputable section
@@ -28,8 +26,7 @@ namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 variable (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj R] [IsCommMonObj R] (A : Type (u + 1)) [CommRing A]
 
-/-- The Cartier-arrow equality with its source and line isomorphisms supplied.
-Source: coefficient changes (blueprint: def-diagonal-finite-arrow-equations). -/
+/-- The Cartier-arrow equality with its source and line isomorphisms supplied. -/
 @[irreducible]
 def FiniteCartierArrowEquation [Finite A] (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
     (Y : Scheme.{u}) [IsNoetherian Y]
@@ -48,8 +45,7 @@ def FiniteCartierArrowEquation [Finite A] (N : ℕ) (hN : 0 < N) (hA : (N : A) =
         (Sheaf (Scheme.ProEt.topology (diagonalSurface Y)) (ModuleCat.{u + 1} A)) 0).map
           lineW.hom)⟦(2 : ℤ)⟧' = finiteCartierArrow A N hN hA Y hW
 
-/-- The projective-line trace equality with its full-unit square and splitting supplied.
-Source: coefficient changes (blueprint: def-diagonal-finite-arrow-equations). -/
+/-- The projective-line trace equality with its full-unit square and splitting supplied. -/
 @[irreducible]
 def FiniteProjectiveTraceEquation (N : ℕ) (hA : (N : A) = 0) (Y : Scheme.{u})
     (L : ∀ X : Scheme.{u}, Modules R X) (d : Diagram R Y L)
@@ -66,8 +62,7 @@ def FiniteProjectiveTraceEquation (N : ℕ) (hA : (N : A) = 0) (Y : Scheme.{u})
       Rq.R.map (eP.shiftedLine N hA (L (ProjectiveLine Y)) lineP) ≫
         (eqToIso q_canonical).hom.app _ ≫ geoP1Trace A N hA Y splitting
 
-/-- Supplied finite right-derived model, normalized square and positive splitting.
-Source: coefficient changes (blueprint: def-diagonal-finite-arrow-equations). -/
+/-- Supplied finite right-derived model, normalized square and positive splitting. -/
 structure FiniteTracePresentation [Finite A] (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
     (Y : Scheme.{u}) [IsNoetherian Y] (hY : IsUnit (N : Γ(Y, ⊤)))
     (L : ∀ X : Scheme.{u}, Modules R X) (d : Diagram R Y L)
@@ -82,8 +77,7 @@ structure FiniteTracePresentation [Finite A] (N : ℕ) (hN : 0 < N) (hA : (N : A
         (geoP1Twist A N hA (ProjectiveLine Y) 1 2)
   hsplitting : splitting.hom = geoP1TwistedMap A N hN hA Y hY
 
-/-- The same trace equality, with projections kept at generic coefficients.
-Source: coefficient changes (blueprint: def-diagonal-finite-arrow-equations). -/
+/-- The same trace equality, with projections kept at generic coefficients. -/
 @[irreducible]
 def FinitePresentedTraceEquation [Finite A] (N : ℕ) (hN : 0 < N)
     (hA : (N : A) = 0) (Y : Scheme.{u}) [IsNoetherian Y]
@@ -95,10 +89,7 @@ def FinitePresentedTraceEquation [Finite A] (N : ℕ) (hN : 0 < N)
   FiniteProjectiveTraceEquation R A N hA Y L d eY eP lineP
     p.Rq p.q_canonical p.q_square p.splitting
 
-/-- Assemble the separate normalized class and trace equations into the existing predicate.
-Source: coefficient changes (blueprint: lem-diagonal-finite-comparison-assembly).
-Proof: unfold the two equation predicates and insert their witnesses and equalities
-into the definition of FiniteDiagonalComparison. No comparison data are chosen. -/
+/-- Assemble the separate normalized class and trace equations into the existing predicate. -/
 theorem finiteDiagonalComparison_of_equations [Finite A]
     (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0) (Y : Scheme.{u}) [IsNoetherian Y]
     (hY : IsUnit (N : Γ(Y, ⊤))) (hW : IsUnit (N : Γ(diagonalSurface Y, ⊤)))

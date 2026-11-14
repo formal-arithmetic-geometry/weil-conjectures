@@ -26,26 +26,7 @@ set_option backward.isDefEq.respectTransparency.types false
 /-- Matched cycles have inverse-image classes for any normalized edge equivalences.
 The cycles and both equivalences are supplied: no existence or scalar law is asserted.
 Source: Stacks Project, Tag 01FD, Lemma 20.15.1, coefficient/refinement diagram,
-applied to the small étale sites; Tag 03P2 identifies the coefficient sections.
-(blueprint: lem-pbc-etale-additive-cech-normalized-inverse-image)
-
-Proof: Choose resolutions of the source additive sheaf, its exact inverse image,
-and the target additive sheaf. Resolve the direct image as in the pentagon of
-01FD and lift the adjunction unit. Lift the adjoint coefficient map into the
-target resolution as well, preserving its augmentation. On intersections, the
-adjunction unit equation and structural-function restrictions identify the
-coefficient face with unitToPushforwardObjUnit followed by restriction along
-hinter. Thus hcoords identifies the target cycle with the image of the source
-cycle: transport to explicit abelian Čech cochains and use monicity of the cycle
-inclusion. Both augmentation faces commute. Pass to total homology and invert
-the global-section augmentations. Apply the normalization laws ha and ha' to
-the source and target diagrams. The global-resolution transfer is
-Etale.cohomologyMap by resolutionSection_canonical_transfer, and composing the
-coefficient lift acts as Sheaf.H.map of the displayed adjoint, by the extMk
-formula. This proves the asserted equality of classes. The argument is valid
-in degree zero, where the diagrams are restriction and gluing of sections.
-Empty intersections and empty schemes give zero groups. The map g need not be
-flat or affine. No ordinary Ext inverse-image comparison is used. -/
+applied to the small étale sites; Tag 03P2 identifies the coefficient sections. -/
 theorem etaleAdditiveCech_normalized_inverseImage
     {X Y : Scheme.{u}} (g : Y ⟶ X)
     [CompactSpace X] [CompactSpace Y] [X.IsSeparated] [Y.IsSeparated]

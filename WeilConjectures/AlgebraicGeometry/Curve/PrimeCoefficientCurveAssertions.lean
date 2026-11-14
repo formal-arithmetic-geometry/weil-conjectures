@@ -16,9 +16,8 @@ import Mathlib.Algebra.Category.ModuleCat.Algebra
 
 /-! # Eight assertions for constructible prime coefficients on reduced curves
 
-Source: Stacks Project, 03SC (theorem-vanishing-affine-curves),
-03SD (lemma-vanishing-easier), 0A3Q (lemma-somewhat-easier), 03SG (lemma-even-easier).
-(blueprint: e1-prime-coefficient-curve-assertions)
+Source: Stacks Project, 03SC,
+03SD, 0A3Q, 03SG.
 -/
 
 @[expose] public section
@@ -31,9 +30,8 @@ namespace AlgebraicGeometry.IsCurve
 
 /-- All eight assertions for a constructible prime-field sheaf on a reduced curve.
 
-Source: Stacks Project, 03SC (theorem-vanishing-affine-curves), constructible prime-field
-case; 03SD (lemma-vanishing-easier), 0A3Q (lemma-somewhat-easier), 03SG (lemma-even-easier).
-(blueprint: e1-prime-coefficient-curve-assertions)
+Source: Stacks Project, 03SC, constructible prime-field
+case; 03SD, 0A3Q, 03SG.
 
 Proof, matching the nine steps of the node. The auxiliary claims in steps 1--8 concern
 all separated finite-type reduced curves, so they can also be applied to the nonproper
@@ -50,8 +48,6 @@ $H^2(U,G|_U)=0$ and the restriction in (C8) is surjective. (C6) and (C7) are
 [lemma-sheaves-finite-support-finite-morphisms--2]. Hence $\mathcal C(Z,G)$ holds
 [theorem-cohomology-curves].
 
-Dependency nodes: lemma-sheaves-finite-support-finite-morphisms--1,
-lemma-sheaves-finite-support-finite-morphisms--2, theorem-cohomology-curves.
 
 2. Smooth constant coefficients and extension by zero (Stacks 03SG, lemma-even-easier, and 0A5B,
 lemma-constant-smooth-statements). Let X be smooth, separated and of finite type over the
@@ -76,13 +72,6 @@ identifies j_! of the constant sheaf with the finite direct sum of these pushfor
 exact sequences and [lemma-weil-pbc-eight-curve-devissage] assemble the sum. Zero-dimensional pieces
 also follow from step 1.
 
-Dependency nodes: lemma-weil-pbc-smooth-curve-kummer-localization,
-lemma-weil-pbc-smooth-curve-artin-schreier, proposition-p-torsion-smooth-proper-curve--1,
-def-sc-constant-sheaves, def-weil-pbc-constructible-torsion,
-proposition-extension-zero-restriction-closed-subscheme--7,
-lem-weil-pbc-curve-assertions-dense-open, lemma-weil-pbc-eight-curve-devissage,
-lem-weil-pbc-noetherian-finitely-many-components, lemma-proper-smooth-model--1,
-lem-weil-pbc-finite-type-over-noetherian, lem-weil-pbc-closed-immersion-finite.
 
 3. Reduced case for $j_!\mathbf F_\ell$ (Stacks Lemma 0A3Q). Claim: if $X$ is a reduced separated
 finite-type $k$-scheme with $\dim X\le1$, $j:U\hookrightarrow X$ an open immersion and $\ell$ a
@@ -109,10 +98,6 @@ C(X,\nu_*j^\nu_!\underline{\mathbf Z/\ell})$ gives $\mathcal
 C(X,j'_!j'^{-1}\nu_*j^\nu_!\underline{\mathbf Z/\ell})=\mathcal C(X,j'_!j'^{-1}j_!\underline{\mathbf
 Z/\ell})$, which gives $\mathcal C(X,j_!\underline{\mathbf Z/\ell})$.
 
-Dependency nodes: lem-weil-pbc-reduced-curve-normalization, def-weil-pbc-direct-image,
-proposition-extension-zero-restriction-closed-subscheme--7, def-weil-pbc-constructible-torsion,
-lemma-detection-proper-direct-image--1,
-lem-weil-pbc-curve-assertions-dense-open.
 
 4. Locally constant coefficients on an irreducible open, trace reduction (Stacks Lemma 03SD, first
 paragraph). Let $X$ be a reduced separated finite-type $k$-scheme with $\dim X\le1$,
@@ -133,9 +118,6 @@ zero is constructible on $X$ (the strata of $U$ together with the closed complem
 U$, on which it is $0$) [def-weil-pbc-constructible-torsion]. By
 [lem-weil-pbc-curve-assertions-retract] it suffices to prove $\mathcal C(X,j_!v_*v^{-1}G)$.
 
-Dependency nodes: lemma-weil-pbc-curve-locally-constant-reduction, def-weil-pbc-primary-torsion,
-lemma-detection-proper-direct-image--1, def-weil-pbc-constructible-torsion,
-lem-weil-pbc-curve-assertions-retract.
 
 5. Compactifying $V$ over $X$ (Stacks Lemma 03SD, Zariski's main theorem). The composite $j\circ
 v:V\to X$ is quasi-finite (finite etale followed by an open immersion), separated (finite
@@ -160,12 +142,6 @@ an open immersion after this replacement. Finiteness of V -> inverse-image(U) us
 dense, its image is the whole inverse image. A surjective open immersion is an isomorphism,
 proving the cartesian assertion without identifying schemes merely by their underlying sets.
 
-Dependency nodes: thm-pqf-zmt-factorization, etale-proposition-etale-reduced,
-lemma-schematic-closure-uniqueness--1, def-weil-pbc-scheme-reduction,
-lem-weil-pbc-closed-immersion-finite, lem-weil-pbc-finite-composition,
-lem-weil-pbc-finite-over-separated-finite-type, lem-weil-pbc-integral-incomparability,
-lem-weil-pbc-finite-permanence-over-separated, lem-weil-pbc-finite-closed-map-finite-fibres,
-lem-weil-pbc-finite-type-over-noetherian, lem-weil-pbc-qc-open-immersion-finite-type.
 
 6. Exchange of $j_!$ and finite direct image (Stacks Lemma 0GJ1, as used in 03SD). For the
 cartesian square of step 5 (open immersions $j'$, $j$; $\bar f$ finite; $v$ its base change),
@@ -175,8 +151,6 @@ every abelian sheaf $E$ on $V_{\Et}$. With $E=v^{-1}G$ this gives $j_!v_*v^{-1}G
 f_*j'_!v^{-1}G$. By the finite-pushforward case of the curve assertions for the finite
 $\bar f:Y\to X$, it suffices to prove $\mathcal C(Y,j'_!v^{-1}G)$.
 
-Dependency nodes: lemma-weil-pbc-finite-pushforward-extension-zero,
-lemma-normalization-constant-sheaf--1.
 
 7. Filtration and reduction to the constant sheaf (Stacks Lemma 03SD, end). Let $0=E_0\subset
 E_1\subset\cdots\subset E_m=v^{-1}G$ be the filtration of step 4, with
@@ -189,8 +163,6 @@ C(Y,j'_!\underline{\mathbf Z/\ell})$, and induction on $i$ with
 [lemma-weil-pbc-eight-curve-devissage] gives $\mathcal C(Y,j'_!E_i)$ for all $i$, in particular
 $\mathcal C(Y,j'_!v^{-1}G)$. By steps 6 and 4, $\mathcal C(X,j_!G)$ holds.
 
-Dependency nodes: proposition-extension-zero-restriction-closed-subscheme--7,
-lemma-weil-pbc-eight-curve-devissage.
 
 8. Constructible $\mathbf F_\ell$-coefficients on a reduced curve (Stacks Theorem 03SC, proof,
 third and fourth paragraphs). Let $X$ be a reduced separated finite-type $k$-scheme with $\dim
@@ -204,7 +176,6 @@ finite locally constant sheaf of $\mathbf F_\ell$-vector spaces on the irreducib
 $X$ is proper over $k$, its seventh conjunct $\mathcal C_7(X,G)$
 [theorem-cohomology-curves] holds.
 
-Dependency nodes: theorem-cohomology-curves, theorem-cohomology-curves.
 
 9. Coefficient bookkeeping. Put R = ULift(F_r). In every R-module stalk multiplication by r is
 zero because r = 0 in R, so the underlying abelian sheaf is torsion. The finite coefficient field
@@ -217,10 +188,6 @@ the original stalk or zero. Hence the eight assertions in step 8 are exactly IsC
 f F, whose cohomology and all comparison maps are defined on the underlying abelian sheaf
 [theorem-cohomology-curves]. This proves the assertion package without selecting only
 C7.
-
-Dependency nodes: lem-weil-pbc-constructible-torsion-modules-agree,
-theorem-cohomology-curves, def-weil-pbc-etale-constructible-sheaf,
-proposition-extension-zero-restriction-closed-subscheme--7, def-weil-pbc-direct-image.
 -/
 theorem primeCoefficientCurveAssertions {k : Type u} [Field k] [IsAlgClosed k]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f] [IsReduced C]

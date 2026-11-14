@@ -73,7 +73,7 @@ end Whisker
 
 variable {K : Type u} [Field K] {G H : Over (Spec (.of K))} [GrpObj G] [GrpObj H]
 
-/-- Blueprint `lemma-connected-components-images-homomorphisms--2`: The image of a homomorphism is a
+/-- The image of a homomorphism is a
 closed subgroup scheme.
 
 Let `f : G ⟶ H` be a homomorphism of group schemes over a field `K`, with `G` proper and `H`
@@ -133,7 +133,7 @@ theorem exists_isMonHom_imageι (f : G ⟶ H) [IsMonHom f] [IsProper G.hom] [IsS
   exact ⟨GrpObj.ofMono j hone hmul hinv, GrpObj.isMonHom_ofMono j hone hmul hinv⟩
 
 
-/-- Blueprint `lemma-connected-components-images-homomorphisms--2`: The image of a homomorphism is a
+/-- The image of a homomorphism is a
 closed subgroup scheme.
 
 Let `f : G ⟶ H` be a homomorphism of group schemes over a field `K`, with `G` proper and `H`

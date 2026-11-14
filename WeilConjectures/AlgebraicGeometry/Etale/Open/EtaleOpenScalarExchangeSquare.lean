@@ -117,12 +117,7 @@ private theorem open_exchange_unit
       (ModuleCat.{u + 1} A) sq.toCommSq K) M
 
 /-- Open coefficient balancing commutes with every cartesian open square.
-Source: Stacks 03S6, 07A4 (blueprint: lem-pur-open-scalar-exchange-square).
-Proof: transpose the equality under the target open adjunction. The prescribed
-unit equations for scalar balancing and open base change compute both transposes.
-The scalar pullback cube, obtained by localization and mates of the ordinary
-restriction-of-scalars cube, identifies them. This argument imposes no boundedness
-or finiteness on the input or coefficients. -/
+Source: Stacks 03S6, 07A4. -/
 theorem properOpenCoefficientOpenInverse_baseChange
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {U' U T' T : Scheme.{u}} {h : U' ⟶ U} {j' : U' ⟶ T'}

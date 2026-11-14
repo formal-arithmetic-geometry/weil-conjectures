@@ -34,14 +34,7 @@ variable {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}} (f : C ⟶ Spec
 Source: blueprint `sec-proper-base-change/sk-thm-p1/lem-sc-c3`, via
 `sec-curve-estimates/lem-sc-arbitrary-curve-cd/lem-sc-artin-schreier-dimension` and the
 filtered-colimit extension of constant coefficients (Stacks Project, Tags 0A3N, 03Q5 and 0739).
-(blueprint: lem-sc-c3-degree-two)
 
-Proof: The curve is quasi-compact and quasi-separated, since it is separated and of
-finite type over a field. First suppose its dimension is zero. Smoothness makes its
-finite coordinate algebras reduced, so a connected zero-dimensional such scheme over
-an algebraically closed field is `Spec k`. Choose its geometric point over k and apply
-`zero_dimensional_etale_cohomology_rest` in degree two to the underlying abelian sheaf.
-The comparison `nonempty_sheafH_extDerivedIso` transfers this to Ext cohomology.
 
 In dimension one the hypotheses give `IsConnectedCurve f`. Apply
 `isZero_etaleCohomology_constantZMod_of_one_lt_of_charP` with q = 2. Its proof uses

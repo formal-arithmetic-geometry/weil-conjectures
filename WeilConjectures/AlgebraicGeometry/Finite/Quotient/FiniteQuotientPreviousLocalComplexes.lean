@@ -11,7 +11,6 @@ import WeilConjectures.AlgebraicGeometry.Finite.Quotient.FiniteQuotientPreviousL
 
 /-! # Local algebraic complexes for a coefficient-filtration outer term
 Source: Stacks Project, Tags 0942, 094H and 094I.
-(blueprint: lem-weil-pbc-finite-quotient-previous-local-complexes).
 -/
 
 @[expose] public noncomputable section
@@ -24,21 +23,7 @@ attribute [local instance] finitePerfectModelsAbLocallyBijective
 
 /-- The previous perfect complex gives finite local complexes over the successor ring.
 
-Source: Stacks Project, sites-cohomology.tex, Tags 0942, 094H and 094I.
-(blueprint: lem-weil-pbc-finite-quotient-previous-local-complexes).
-
-Proof: Let E=A/I^(n+1) and B=A/I^(n+2). On a chart of the supplied previous
-model, regard its finite-projective E-complex as a B-complex by the quotient
-B -> E. Its terms remain finite over B because the quotient is surjective, and
-its support remains [a,b]. The compatibility square for φ identifies restriction
-of its constant E-realization with its constant B-realization. Restriction of
-scalars, slice restriction, and realization along the coefficient isomorphisms
-are exact, so the localization comparison identifies the homology of the actual
-previous object with constant realization of the algebraic B-complex homology.
-The comparison for the canonical representative follows from the localization
-unit isomorphism. Pull back the model cover along every W -> V. No residue model,
-coefficient-layer tensor calculation, or cohomology of the successor is used;
-empty charts and the zero ring are included. -/
+Source: Stacks Project, sites-cohomology.tex, Tags 0942, 094H and 094I. -/
 theorem finiteQuotient_previous_local_complexes
     (X : Scheme.{t}) [IsLocallyNoetherian X] [CompactSpace X]
     {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)

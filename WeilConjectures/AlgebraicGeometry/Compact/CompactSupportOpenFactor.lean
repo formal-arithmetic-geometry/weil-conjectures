@@ -33,8 +33,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 /-! # The open site-comparison factor
 
 Source: Stacks Project, Tags 09A6, 09AF and 099R; the factor calculation in
-lem-amb-compact-support-site-comparison-open
-(blueprint: lem-amb-compact-support-open-factor).
+lem-amb-compact-support-site-comparison-open.
 -/
 
 @[expose] public noncomputable section

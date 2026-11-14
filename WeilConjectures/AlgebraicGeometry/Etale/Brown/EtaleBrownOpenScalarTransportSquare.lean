@@ -47,7 +47,6 @@ private theorem iso_transport_square
 
 /-- The normalized open scalar mate satisfies the transport square.
 Source: Zheng, Constructions 5.14--5.15 and Lemma 5.16; Stacks 03S6, 07A4.
-(blueprint: lem-pur-etale-brown-open-scalar-transport-square).
 
 The proof transposes both paths through the open adjunction, applies the
 normalization of the supplied comparison `jo` and of the supplied mate `op`,

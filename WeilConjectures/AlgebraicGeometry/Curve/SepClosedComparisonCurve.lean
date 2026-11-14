@@ -18,15 +18,7 @@ namespace AlgebraicGeometry.IsCurve
 
 /-- A base change of a proper curve whose projection is a universal homeomorphism
 is a proper curve.
-Source: Stacks Project, Tag 0A5E, the algebraic-closure base change in its proof.
-(blueprint: lemma-weil-pbc-curve-separably-closed-passage-curve)
-
-Proof: The given pullback square preserves properness, separatedness, local finite
-type, and quasi-compactness by base-change stability. The projection p induces a
-homeomorphism of underlying spaces, so D and C have equal topological Krull
-dimension. Transfer the bound at most one from C to D and combine it with the
-three morphism properties to obtain IsCurve b. This applies to the empty case
-(dimension bottom) and the dimension-zero case without nonemptiness assumptions. -/
+Source: Stacks Project, Tag 0A5E, the algebraic-closure base change in its proof. -/
 theorem isCurve_isProper_of_sepClosed_comparison_core
     {k K : Type u} [Field k] [Field K] {C D : Scheme.{u}}
     (f : C ⟶ Spec (.of k)) [IsCurve f] [IsProper f]

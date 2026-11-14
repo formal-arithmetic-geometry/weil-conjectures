@@ -79,9 +79,7 @@ private theorem splitProjection_eq
   simp only [ProEtale.CondensedRing.upperStarCongr_self,
     Iso.refl_hom, NatTrans.id_app, Category.id_comp]
 
-/-- The monoidal unit comparison, with its objects stated as regular modules.
-Source: blueprint lemma-artin-schreier-character-sheaf, Step 2
-(blueprint: lem-fd-as-split-regular-product). -/
+/-- The monoidal unit comparison, with its objects stated as regular modules. -/
 @[irreducible]
 def regularUnitIso
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -91,9 +89,7 @@ def regularUnitIso
   Functor.Monoidal.εIso (ProEtale.CondensedRing.upperStar Λ f)
 
 /-- Restriction of coefficient functions to one sheet, followed by the canonical
-identification of the pulled-back regular module.
-Source: blueprint lemma-artin-schreier-character-sheaf, Step 2
-(blueprint: lem-fd-as-split-regular-product). -/
+identification of the pulled-back regular module. -/
 def sheetProjection
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y T : Scheme.{u}}
@@ -134,15 +130,7 @@ private theorem sheetProjection_product_fin_isIso
       (fun j ↦ (regularUnitIso Λ (t j)).symm) ha)
 
 /-- The sheet projections identify a split finite direct image of regular coefficient
-modules with the product of the regular modules on the base of the split chart.
-Source: blueprint lemma-artin-schreier-character-sheaf, Step 2, and the existing module product
-comparison (blueprint: lem-fd-as-split-regular-product).
-
-Proof: reindex the given finite sheets by Fin n and apply
-splitProEtaleModuleProductMap_isIso. Each target is the inverse image of a regular
-module; the monoidal unit isomorphism identifies it with the regular module on T.
-The product of these isomorphisms and the reindexing isomorphism give the displayed
-map, as is checked after every product projection. -/
+modules with the product of the regular modules on the base of the split chart. -/
 theorem sheetProjection_product_isIso
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y T : Scheme.{u}}

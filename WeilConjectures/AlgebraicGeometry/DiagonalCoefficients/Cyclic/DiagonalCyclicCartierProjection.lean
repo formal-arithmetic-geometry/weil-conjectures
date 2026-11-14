@@ -20,10 +20,6 @@ import all WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Finite.Diagona
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Cyclic.DiagonalCyclicClassRestriction
 
 /-! # The cyclic projection of the completed diagonal class
-
-Source: diagonal tower coefficient changes, paragraph (1), and the finite class
-normalization in the diagonal limit theorem.
-(blueprint: lem-diagonal-cyclic-cartier-projection).
 -/
 
 @[expose] public noncomputable section
@@ -114,30 +110,7 @@ private theorem residueClass_eq_canonical
     geoCartierCanonicalClass_comparison _ _ _ _ _ _ _⟩).symm
 
 /-- Projection to the cyclic coefficient ring only, before any finite extension
-of Q_l or any choice of uniformizer. The frame has no class equation in its data.
-
-Source: latest blueprint, sec-six-functors-basics/sk-prop-diagonal-tower/
-sk-prop-diagonal-tower-coefficients.proof.md (1), and diagonal-limit clause (3).
-(blueprint: lem-diagonal-cyclic-cartier-projection).
-
-Proof: construct the finite constant-ring realizations and their direct-image
-comparison. The regular scalar unit, flat supported source and flat integral
-Tate line give the frame's derived scalar Endpoints. The projection-normalized
-integral and finite roots and the cyclic root endpoint give its LineEndpoint.
-Unpack IsDiagonalLimit to obtain the strict class c, its normalized ordinary
-source/root cones and the whole-limit equation for delta. Apply the generic
-normalized finite-evaluation transport at n. It uses ArrowCompatibility and
-the source/root cone normalizations to identify the cyclic scalar reduction after
-restriction to discrete integral coefficients. The finite-cycle equation identifies
-this image with the image
-of cartierResidueReducedPro. The proved cyclic restriction-detection theorem
-cancels restriction using the full supported integral-generator Ext bijection.
-Finally relative-boundary uniqueness and the canonical comparison equation
-identify cartierResidueReducedPro with the positive geoCartierCanonicalClass.
-Reference.delta identifies the realized completed arrow with family.zl.delta.
-The statement concerns only one cyclic quotient. It neither constructs nor
-compares any uniformizer quotient, ramified coefficient extension, or trace.
-At n=0 the exponent is one; the empty base has zero source and target. -/
+of Q_l or any choice of uniformizer. The frame has no class equation in its data. -/
 theorem diagonalCompleted_cyclicCartier
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)] [IsNoetherian (diagonalSurface Y)]

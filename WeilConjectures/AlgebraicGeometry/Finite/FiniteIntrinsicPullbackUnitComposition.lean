@@ -11,8 +11,7 @@ import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
 
 /-! # Unit sections of composite intrinsic finite pullback
 
-Source: Stacks 00YV, composite adjunctions and inverse image on module sheaves
-(blueprint: lem-pur-finite-intrinsic-pullback-unit-composition).
+Source: Stacks 00YV, composite adjunctions and inverse image on module sheaves.
 -/
 
 @[expose] public noncomputable section
@@ -302,18 +301,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The intrinsic pullback compositor sends one adjunction-unit section to the
 successive unit sections, with the canonical fibre-product identification.
-Source: Stacks 00YV, composite adjunctions and inverse images on module sheaves
-(blueprint: lem-pur-finite-intrinsic-pullback-unit-composition).
-
-Proof: conjugation of the pullback compositor is the direct-image comparison.
-Transport the ordinary adjunction Hom bijections through the specified module
-realization equivalences. Their composite Hom bijection shows that this conjugate
-acts on sections by the base-change fibre-product comparison: the realization
-unit and counit cancel, and the fixed-scalar conjugate is ordinary precomposition.
-The section realization is bijective, so this computation identifies the actual
-intrinsic direct-image map. Apply the composite-unit/conjugate identity to a
-section and substitute that formula. The composite adjunction unit is the first
-unit followed by the second, giving the asserted equation. -/
+Source: Stacks 00YV, composite adjunctions and inverse images on module sheaves. -/
 theorem finiteIntrinsicPullback_unit_comp
     (A : Type u) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (h : Z ⟶ X)

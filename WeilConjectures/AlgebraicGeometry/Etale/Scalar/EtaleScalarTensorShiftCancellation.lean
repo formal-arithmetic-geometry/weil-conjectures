@@ -89,12 +89,10 @@ The cochain unit formula and `Adjunction.leftDerivedCochainCounit` identify the
 fixed scalar representative map with the total-derived counit of E transported
 along uniqueness of left adjoints. The comparison satisfies the flat-model
 normalization by its defining property. Apply
-`Functor.rightExactTensorComparison_shiftCancellation` (blueprint:
-lem-derived-right-exact-tensor-shift-cancellation): the adjoint-mate scalar
+`Functor.rightExactTensorComparison_shiftCancellation`: the adjoint-mate scalar
 shift and the tensor-shift cancellation are definitionally the displayed ones.
 This argument involves no internal Hom or evaluation map, and requires no
-flatness of B over A.
-(blueprint: lem-coef-etale-scalar-tensor-shift-cancellation) -/
+flatness of B over A. -/
 theorem etaleHomTensorComparison_shiftCancellation
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (X : Scheme.{u}) (φ : A →+* B) (K L : DerivedCategoryModule A X) (n : ℤ) :

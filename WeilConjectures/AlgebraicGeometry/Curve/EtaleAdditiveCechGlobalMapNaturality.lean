@@ -22,17 +22,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- The canonical cocycle comparison is natural for a coefficient endomorphism.
-Source: Stacks Project, Tag 01EQ, and the injective-resolution Ext construction.
-(blueprint: new-q4-additive-cech-global-map-naturality)
-
-Proof: Represent the cycle by the constant-free-sheaf morphism corresponding
-under constantSheafAdj and uliftZMultiplesAddEquiv. Its differential is zero
-because iCycles maps into the kernel. The resolution comparison sends this
-morphism to its composite with desc(f).f n, by naturality of that adjunction.
-Apply global_cocycle to both representing cycles. The identity extMk_comp_mk₀
-for the augmentation-preserving resolution morphism identifies their Ext
-classes; the latter composite with Ext.mk₀ f is exactly Sheaf.H.map f n.
-This holds in degree zero as well, with the same cocycle formula. -/
+Source: Stacks Project, Tag 01EQ, and the injective-resolution Ext construction. -/
 theorem additiveCech_global_map_naturality
     (X : Scheme.{u}) (I : InjectiveResolution X.etaleAdditiveSheaf)
     (c : Etale.ResolutionSectionCanonicalComparison X.etaleAdditiveSheaf I)

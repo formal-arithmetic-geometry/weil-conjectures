@@ -133,18 +133,7 @@ private lemma transfer_beta {X : Scheme.{u}} {ι : Type u}
 
 /-- Augmentation-preserving transfer between two resolutions commutes with both
 Čech augmentations and with every supplied canonical global Ext comparison.
-Source: Stacks Project, Tag 01FD, identity-morphism case of Lemma 20.15.1.
-(blueprint: lem-pbc-etale-additive-cech-resolution-transfer)
-
-Proof: Lift the identity on the additive sheaf to a map I -> J of injective
-resolutions. Evaluation gives the global chain map. Apply the Čech functor
-termwise, flip the indices, and totalize to obtain the total chain map. Naturality
-of the lifted sheaf morphism gives the alpha square on each tuple; the equation
-I.ι followed by the lift = J.ι gives the beta square on each tuple. The canonical
-comparison sends a global cocycle to extMk. Postcomposition with the identity
-lift preserves this Ext class, so surjectivity of the homology quotient gives
-the last equation for every class. No affine or covering assumption is needed:
-this is functoriality of the complexes, also for empty covers and degree zero. -/
+Source: Stacks Project, Tag 01FD, identity-morphism case of Lemma 20.15.1. -/
 theorem exists_additiveCech_resolution_transfer
     {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens)
     (I J : InjectiveResolution X.etaleAdditiveSheaf)

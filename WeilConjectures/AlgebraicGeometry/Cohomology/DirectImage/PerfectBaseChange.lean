@@ -77,9 +77,7 @@ over an affine scheme `S` with Noetherian ring of global sections
 `(p, 𝒢)` is Mumford's complex
 `exists_isFiniteFreeComplex_derivedPushforward_of_isNoetherianRing`;
 base changes of `f` over `V` are base changes of `p`. The per-degree form is
-`AlgebraicGeometry.Scheme.Modules.exists_isFiniteFreeComplex_higherDirectImage`.
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves`) -/
+`AlgebraicGeometry.Scheme.Modules.exists_isFiniteFreeComplex_higherDirectImage`. -/
 theorem exists_isFiniteFreeComplex_derivedPushforward [IsProper f] [LocallyOfFinitePresentation f]
     [ℱ.IsFinitePresentation] (hℱ : ℱ.IsFlatOver f) (t : T) :
     ∃ (U : T.Opens) (P : CochainComplex U.toScheme.Modules ℤ) (d : ℕ), t ∈ U ∧
@@ -177,9 +175,7 @@ presentation with `S = Spec A` affine, and `ℱ` an `𝒪_X`-module of finite pr
 
 Perfectness in `D(A)` over a non-noetherian base is the classical input of the first item; it is
 not deduced here from it, as the comparison of the two representatives of `Rf_* ℱ` would need
-the finite free complexes to be quasi-isomorphic to the Čech complex.
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves`) -/
+the finite free complexes to be quasi-isomorphic to the Čech complex. -/
 theorem perfect_and_baseChange_cechModuleComplex_of_isProper [IsProper f]
     [LocallyOfFinitePresentation f] [HasInjectiveResolutions X.Modules] [Fintype ι]
     [ℱ.IsFinitePresentation] (hℱ : ℱ.IsFlatOver f) :

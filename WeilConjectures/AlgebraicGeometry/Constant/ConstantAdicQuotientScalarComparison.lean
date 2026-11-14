@@ -17,7 +17,6 @@ import all WeilConjectures.CategoryTheory.Exact.ExactScalarMatePasting
 /-! # Constants and algebraic quotient restriction
 
 Source: Stacks Tags 093J, 031C and 06YY.
-(blueprint: lem-weil-pbc-constant-adic-quotient-scalar-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -27,8 +26,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 /-- The actual map from a finite quotient to the corresponding completion quotient.
-Source: Stacks Tag 031C
-(blueprint: lem-weil-pbc-constant-adic-quotient-scalar-comparison). -/
+Source: Stacks Tag 031C. -/
 def constantAdicQuotientMap {A : Type (u + 1)} [CommRing A]
     (I : Ideal A) (n : ℕ) :
     A ⧸ I ^ (n + 1) →+*
@@ -41,8 +39,7 @@ def constantAdicQuotientMap {A : Type (u + 1)} [CommRing A]
       exact Ideal.mem_map_of_mem _ hx)
 
 /-- Constant modules over a completion quotient, with their original finite-ring action.
-Source: Stacks Tags 093J and 031C
-(blueprint: lem-weil-pbc-constant-adic-quotient-scalar-comparison). -/
+Source: Stacks Tags 093J and 031C. -/
 def constantAdicQuotientModules (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) :=
   ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} (constantAdicQuotientMap d.ideal n) ⋙
@@ -71,16 +68,14 @@ instance constantAdicQuotientModules_colimits (X : Scheme.{u})
   infer_instance
 
 /-- Exact constants with precisely the inverse-image finite coefficient ring.
-Source: Stacks Tags 093J and 03DA
-(blueprint: lem-weil-pbc-constant-adic-quotient-scalar-comparison). -/
+Source: Stacks Tags 093J and 03DA. -/
 def constantAdicQuotientRealization {X Y : Scheme.{u}} (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) :=
   (constantAdicQuotientModules X d n).mapDerivedCategory ⋙
     adicTowerPullback g ((pbcAdicRings X d).obj (op n))
 
 /-- Constant sections in the concrete constant-module sheafification.
-Source: Stacks Tag 093J
-(blueprint: lem-weil-pbc-constant-adic-quotient-scalar-comparison). -/
+Source: Stacks Tag 093J. -/
 def constantAdicModuleSection (X : Scheme.{u}) (B : Type (u + 1)) [CommRing B]
     (N : ModuleCat.{u + 1} B) (V : X.ProEtᵒᵖ) (x : N) :
     ((adicLisseConstantModules X B).obj N).val.obj V :=
@@ -92,8 +87,7 @@ def constantAdicModuleSection (X : Scheme.{u}) (B : Type (u + 1)) [CommRing B]
 
 /-- Localize and pull back an ordinary restriction comparison. This construction
 uses only exact-functor composition and the canonical inverse-image coefficient square.
-Source: Stacks Tags 03DA and 06YY
-(blueprint: lem-weil-pbc-constant-adic-quotient-scalar-comparison). -/
+Source: Stacks Tags 03DA and 06YY. -/
 def constantAdicQuotientPullComparison {X Y : Scheme.{u}} (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ)
     (k : ModuleCat.restrictScalars.{u + 1, u + 1, u + 1}
@@ -582,22 +576,7 @@ private theorem pullComparison_mate_isIso {X Y : AlgebraicGeometry.Scheme.{u}} (
 left mate for arbitrary algebraic derived objects and arbitrary scalar left adjoints.
 There is no tower, local-system, or boundedness assumption in this assertion.
 
-Source: Stacks Tags 093J, 031C, 03DA and 06YY.
-(blueprint: lem-weil-pbc-constant-adic-quotient-scalar-comparison).
-
-Proof: completion evaluation and the power-kernel formula identify the actual
-quotient map as an isomorphism. Paste module restriction composition, the proved
-constant-realization restriction comparison, and finite-coefficient transport.
-These maps preserve constant sections, which determine morphisms from constant
-modules, proving uniqueness. The inverse scalar mates of the first and last
-squares are invertible because their transverse functors are equivalences; the
-middle square uses the general unbounded constant-realization scalar theorem.
-Exact localization respects this pasting. For the inverse-image square, the
-ring-sheaf-change adjunct identity identifies its other mate with the invertible
-direct-image comparison. Iterated mates then give invertibility of its scalar
-mate. Paste once more and use the mate unit equation to obtain the displayed
-component for the arbitrary supplied adjunction. No nontriviality or geometric
-finiteness hypothesis is used. -/
+Source: Stacks Tags 093J, 031C, 03DA and 06YY. -/
 theorem constantAdicQuotientScalarComparison (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) :
     let C := AdicCompletion d.ideal A
@@ -638,15 +617,13 @@ theorem constantAdicQuotientScalarComparison (X : Scheme.{u})
 
 /-- The section-normalized ordinary comparison, determined uniquely by the preceding
 theorem; no choice of an unspecified object is involved.
-Source: Stacks Tag 093J
-(blueprint: lem-weil-pbc-constant-adic-quotient-scalar-comparison). -/
+Source: Stacks Tag 093J. -/
 def constantAdicQuotientComparison (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) :=
   (constantAdicQuotientScalarComparison X d n).exists.choose
 
 /-- The canonical derived right square for constants and finite restriction.
-Source: Stacks Tag 06YY
-(blueprint: lem-weil-pbc-constant-adic-quotient-scalar-comparison). -/
+Source: Stacks Tag 06YY. -/
 def constantAdicQuotientRightIso {X Y : Scheme.{u}} (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) :=
   constantAdicQuotientPullComparison g d n (constantAdicQuotientComparison X d n)

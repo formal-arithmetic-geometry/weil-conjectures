@@ -31,19 +31,7 @@ variable {R S : Type u} [CommRing R] [CommRing S] [Algebra R S]
 variable {X : Scheme.{u}}
 
 /-- Base change of sections on one affine open, with its canonical pure-tensor formula.
-Source: Stacks Project, Tag 02KG, used in the separated-case proof of Tag 02KH.
-(blueprint: lem-pc-flat-affine-base-change-sections)
-
-Proof: The inverse image of W is the fibre product of W with Spec S over Spec R,
-hence affine. Its ring of sections is S tensor_R Gamma(W, O_X), by the affine
-cartesian ring formula. Apply exists_tensorPullback_affine_sections to W and its
-inverse image. Uniqueness of left adjoints identifies tensorPullback with pullback;
-the conjugate-isomorphism unit equation preserves the pure-tensor formula.
-Tensor associativity then identifies the sections with S tensor_R Gamma(W, M).
-Transport through W' = g inverse W and restrict the unit along h. The resulting
-S-linear equivalence sends b tensor s to the restricted scalar b times the
-restricted adjunction unit of s. This works for the empty affine open as well:
-both section modules are zero and the same canonical formula holds. -/
+Source: Stacks Project, Tag 02KG, used in the separated-case proof of Tag 02KH. -/
 theorem exists_baseChange_affine_section_equiv (f : X ⟶ Spec (.of R))
     (W : X.Opens) (hW : IsAffineOpen W) (M : X.Modules) [M.IsQuasicoherent]
     (W' : (baseChangedScheme (S := S) f).Opens)

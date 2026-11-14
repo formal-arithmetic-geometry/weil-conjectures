@@ -11,7 +11,6 @@ import WeilConjectures.AlgebraicGeometry.Geometric.GeometricSpecializationStrict
 /-! # Specialization invariance of the bijectivity locus of a section map
 
 Source: Stacks Project, Tags 0GJ2, 0GJ5, 0GJ6 and 0GKC.
-(blueprint: lem-weil-pbc-etale-section-germ-specialization).
 -/
 
 @[expose] public section
@@ -276,23 +275,7 @@ private theorem germ_bijective_normalize
 geometric stalk above a comparable point of the same etale neighbourhood.
 
 Source: Stacks Project, Tag 0GKC, bijectivity-locus paragraph, with Tags 0GJ2, 0GJ5 and
-0GJ6 (blueprint: lem-weil-pbc-etale-section-germ-specialization).
-
-Proof: Transport the spectrum cone along the Gamma-Spec isomorphism and the
-double-opposite equivalence. Affine initiality extends it to a limiting cone over all
-pointed etale neighbourhoods. Its projections give a morphism of point fibre functors;
-the induced stalk map satisfies the defining affine germ formula, hence equals the
-specified specialization by uniqueness. Base change of pointed neighbourhoods along
-U to S gives a cone with vertex the strict localization of U at b. The limit property
-provides its map to the strict localization of S at b followed by U to S. The diagonal
-U to U times_S U shows that its projection to the pointed neighbourhood (U,b) is the
-structural map of the strict localization of U. Lift the prescribed geometric point a
-to that strict localization using the geometric-specialization lift theorem. Composing
-with the comparison map gives a specialization on S that carries the germ at b of every
-section over U to its germ at a. This specialization is bijective by hypothesis, so a
-section map is bijective at one germ precisely when it is bijective at the other.
-The argument also works when the underlying points agree and uses neither finiteness
-nor Noetherian hypotheses. -/
+0GJ6. -/
 theorem etale_section_germ_bijective_specializes_iff
     {S : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ]
     (G : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))

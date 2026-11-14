@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.Curve.ReducedConstantLowerShriekReducti
 
 /-! # Constant prime coefficients extended by zero on reduced curves
 
-Source: Stacks Project, Lemmas 03SG (lemma-even-easier) and 0A3Q
-(lemma-somewhat-easier).
+Source: Stacks Project, Lemmas 03SG and 0A3Q.
 -/
 
 @[expose] public section
@@ -111,18 +110,9 @@ private theorem assertions_of_iso {Λ : Type (u + 1)} [CommRing Λ]
 
 /-- Constant prime coefficients extended by zero on a reduced curve.
 
-Source: Stacks Project, 03SG (lemma-even-easier), 0A3Q (lemma-somewhat-easier),
-0A5B (lemma-constant-smooth-statements), 0GJA (lemma-restrict-to-open).
-(blueprint: k1-reduced-constant-lower-shriek-assertions)
+Source: Stacks Project, 03SG, 0A3Q,
+0A5B, 0GJA.
 
-Proof:
-1. On a smooth curve, split into its finitely many disjoint irreducible components.
-Smooth local rings are domains, so distinct components cannot intersect; Noetherianity
-makes the components open as well as closed. On each component an open is either empty
-or dense. The empty case has zero extension by zero. In the dense case apply the
-Kummer calculations if r is invertible in k and the Artin--Schreier calculations
-otherwise (0A5B), followed by dense-open localization (0GJA). Finite pushforward from
-components and short-exact devissage reassemble their finite direct sum (03SG).
 Points are included: their positive cohomology vanishes and degree zero is the stalk.
 2. For a reduced curve choose the finite smooth modification nu : Xn -> X,
 isomorphic over a dense open D, supplied by reduced-curve normalization. Pull j back

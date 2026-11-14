@@ -15,9 +15,7 @@ import WeilConjectures.Algebra.Homology.OpenDerivedMatePresentation
 import Mathlib.CategoryTheory.Adjunction.Evaluation
 import Mathlib.CategoryTheory.Functor.KanExtension.Preserves
 
-/-! # Finite reduction of the normalized total limit
-
-(blueprint: lem-sfb-diagonal-adic-evaluation-comparison).
+/-! # Finite reduction of the normalized total limit.
 -/
 
 @[expose] public noncomputable section
@@ -63,19 +61,7 @@ private theorem module_regular_resolutions (ℓ : ℕ) [Fact ℓ.Prime] (W : Sch
 the comparison is the adjoint of the actual limit projection.
 
 Source: Stacks 099M; blueprint diagonal tower limit proof, paragraph (3), and
-`lemma-weil-pbc-adic-completion-reduction`.
-(blueprint: lem-sfb-diagonal-adic-evaluation-comparison).
-Proof: identify D's ordinary cokernel tower with the strict scalar quotient tower.
-Uniqueness of its pointwise left derived functor identifies D.T with the K-flat
-quotient model; uniqueness of total right derived limits identifies L.R and its
-projections with the normalized adic completion model. The finite quotient is
-perfect, with the two-term resolution by multiplication by ell^(n+1). The adic
-completion reduction theorem makes the adjoint of each projection an isomorphism.
-Uniqueness of the pointwise left derived quotient identifies any normalized N with
-this same finite reduction. Transport the evaluation-adjoint comparison through
-these identifications. Its adjunction unit formula gives the displayed equation,
-and functoriality on K-flat representatives descends to a natural isomorphism on
-the entire integral derived category. -/
+`lemma-weil-pbc-adic-completion-reduction`. -/
 theorem diagonal_adic_evaluation_comparison (ℓ : ℕ) [Fact ℓ.Prime]
     (W : Scheme.{u})
     [HasDerivedCategory.{u + 1} (DiagonalAb W)]

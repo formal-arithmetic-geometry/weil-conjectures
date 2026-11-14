@@ -123,13 +123,7 @@ This is a compatibility statement for existing systems, not an existence asserti
 
 Source: Stacks Project, Tag 01FD, Lemma 20.15.1, and the normalized comparison
 construction of Tag 01EQ, Lemma 20.11.2.
-(blueprint: lem-pc-cech-comparison-inverse-image-compatibility)
 
-Proof: Pass from scalar-restricted Čech cycles to the explicit abelian complex
-using cechComplexFunctorIso, presheafOverForgetIso, and mapCyclesIso for the exact
-forgetful functor. The cycle inclusion is coordinatewise cechCoordinate, and the
-homology projection agrees with cechOverHomologyAddEquiv by the canonical
-mapCyclesIso/mapHomologyIso square and naturality of homologyπ.
 
 Write F and G for the underlying abelian sheaves of M and N. Construct the Čech
 chain map A associated to the underlying coefficient map a : F → g_*G. The

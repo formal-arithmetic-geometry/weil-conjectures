@@ -10,8 +10,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalTraceModelTraceCo
 import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.Trace.DiagonalTraceFinitePretraceComponents
 
 /-! # A single finite projection of a completed diagonal integral
-
-Source: diagonal tower trace proof paragraph (2), finite integration identity.
 -/
 
 @[expose] public noncomputable section
@@ -27,18 +25,6 @@ attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
 
 /-- The completed diagonal integral induces the identity after one coefficient projection.
 
-Source: diagonal tower trace proof paragraph (2), and steps 9--10 of its expanded proof;
-finite projective-line diagonal integration, clause (3)
-(blueprint: lem-sfb-diagonal-trace-finite-integral-projection).
-Proof: put P = ProjectiveLine Y and W = diagonalSurface Y, and use exponent n+1.
-Write j for the exact restriction/single comparison and π_n for the specified
-ordinary coefficient projection. Unpack `hδ`: its class c has normalized evaluation
-c_n equal to the positive finite supported Cartier class, its completed arrow obeys
-the whole-system limit equation, and its source and root cones are the actual
-coefficient and root projections. The equation for the integral generator fixes the
-source cone; the equation for the root-limit comparison fixes the target cone.
-Composing the limit equation with the n-th projection therefore gives the reduction
-of δ as c_n under these fixed identifications.
 
 The source a is normalized by the ordinary composition comparison along the diagonal
 and f, using diagonal ≫ f = identity. Its acyclicity identifies its single comparison

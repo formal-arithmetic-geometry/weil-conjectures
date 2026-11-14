@@ -196,21 +196,7 @@ private theorem single_kappa {T S : Scheme.{u}} (g : T ⟶ S) (q : ℤ)
 
 /-- On a single complex the truncated counit is normalized by the derived unit.
 Source: Stacks Project, cohomology.tex, Tag 079W (normalized adjunction);
-derived.tex, Tags 08J5 and 06XS (truncation and the shifted heart).
-(blueprint: lem-weil-pbc-single-truncated-counit-normalization).
-
-Proof: Put P = tau_{<=q} Rg_*(M[-q]). The target of the truncated counit is a
-single complex in degree q. Since Lg*P is at most q, the homology Hom-bijection identifies
-its derived counit with the single of its degree-q map after the top projection.
-Transpose this equality using the normalization of exists_schemeDerivedAdjunction at
-the single complex in degree q. The termwise single adjunction sends the tensor-pullback
-comparison followed by a module map to the single ordinary transpose followed by the
-right-derived unit. The definition of kappa uses this same pinned left-derived counit.
-Thus applying degree-q homology and cancelling the invertible homology of P's inclusion
-gives precisely the displayed equation. The ordinary adjunction is the tensor adjunction
-selected by exists_tensorPullbackAdjunction. All comparisons use the same q, so there is
-no independently chosen shift sign. Zero modules and empty schemes obey the same unit
-and kernel identities. -/
+derived.tex, Tags 08J5 and 06XS (truncation and the shifted heart). -/
 theorem topEdgeSingleDirectImageMap_counit {T S : Scheme.{u}} (g : T ⟶ S)
     (q : ℤ) (M : SheafOfModules.{u} (moduleRings T.toRingedSpace)) :
     let HS := DerivedCategory.homologyFunctor.{w, u, u + 1}

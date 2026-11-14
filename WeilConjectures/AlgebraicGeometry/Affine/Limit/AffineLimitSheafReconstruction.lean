@@ -17,8 +17,6 @@ import Mathlib.Algebra.Category.Grp.FilteredColimits
 
 /-!
 # Reconstruction of abelian étale sheaves at an affine inverse limit
-
-Source: blueprint sec-smooth-purity/sk-prop-sf-cbc/lem-sc-cd-affine-limit.md, proof step 1.
 -/
 
 @[expose] public section
@@ -30,20 +28,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- Every abelian étale sheaf on an affine inverse limit is the filtered colimit of
-pullbacks of its direct images to the stages.
-
-Source: blueprint sec-smooth-purity/sk-prop-sf-cbc/lem-sc-cd-affine-limit.md, proof step 1.
-(blueprint: lem-sc-affine-limit-sheaf-reconstruction)
-
-Proof: The counits define a comparison from the constructed filtered colimit to F.
-The epimorphism theorem checks its cancellation property by adjunction and descent of
-affine étale basis objects. For monomorphy, test at geometric points. Stalk functors
-preserve filtered colimits, so every germ in the source comes from one stage.
-If its comparison image is zero, finite-data descent and the inverse-image unit
-make this germ zero at a later stage. Its colimit class is therefore zero.
-The comparison is both mono and epi in the abelian category of sheaves, hence
-an isomorphism. Transport the colimit universal property across this isomorphism.
-No torsion or cohomology hypothesis is needed. -/
+pullbacks of its direct images to the stages. -/
 theorem nonempty_isColimit_affineLimitSheafApproximation
     {I : Type u} [SmallCategory I] [IsCofiltered I] (D : I ⥤ Scheme.{u})
     [∀ i : I, CompactSpace (D.obj i)] [∀ i : I, QuasiSeparatedSpace (D.obj i)]

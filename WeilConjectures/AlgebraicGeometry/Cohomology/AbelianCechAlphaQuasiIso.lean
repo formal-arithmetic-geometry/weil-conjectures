@@ -12,7 +12,6 @@ import WeilConjectures.Algebra.Homology.FirstQuadrantAugmentation
 /-! # The section augmentation is a quasi-isomorphism
 
 Source: Stacks Project, Tag 01EQ, using Tags 01EP and 0133.
-(blueprint: lem-pc-abelian-cech-alpha-quasi-iso)
 -/
 
 @[expose] public section
@@ -23,16 +22,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] cohomologyHasSheafify cohomologyHasExt
 
 /-- The explicit restriction augmentation induces isomorphisms on homology.
-Source: Stacks 01EQ, row augmentation argument.
-(blueprint: lem-pc-abelian-cech-alpha-quasi-iso)
-
-Proof: In each resolution degree use the restriction augmentation from global
-sections concentrated at Čech degree zero. Its positive-degree exactness is
-injective Čech acyclicity; in degree zero its map on homology is the gluing
-isomorphism. Restrictions commute with the resolution differential, and the
-Čech differential of a restriction family is zero. Apply the first-quadrant
-column augmentation criterion to the double complex with Čech degree first.
-Its finite-diagonal argument works for arbitrary covering index sets. -/
+Source: Stacks 01EQ, row augmentation argument. -/
 theorem abelianCechAlpha_quasiIso
     {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens) (hcover : iSup U = ⊤)
     {F : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}}

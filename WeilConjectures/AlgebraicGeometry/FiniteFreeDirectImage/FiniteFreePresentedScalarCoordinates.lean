@@ -49,8 +49,7 @@ private def basisPowerIso (X : Scheme.{u})
 set_option maxHeartbeats 500000 in
 -- Elaborating the presentation transport and tensor coordinates requires extra heartbeats.
 /-- The tensor coordinates transported through the specified ordinary presentation.
-Source: Stacks Project, Tag 03EK
-(blueprint: lem-sp-finite-free-presented-scalar-coordinates). -/
+Source: Stacks Project, Tag 03EK. -/
 @[irreducible] private def presentedFiniteFreeCoordinates (X : Scheme.{u})
     (s : ScalarModel X) {R S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
     (a : R ⟶ S) (d : ℕ)
@@ -85,17 +84,7 @@ Source: Stacks Project, Tag 03EK
 
 /-- Finite-basis coordinates make presented scalar extension exact and its universal
 counit invertible on every homotopy complex.
-Source: Stacks Project, Tags 03EK and 06YY.
-(blueprint: lem-sp-finite-free-presented-scalar-coordinates).
-
-Proof: identify the free module with the finite product of regular modules, including
-rank zero. Apply the finite-basis tensor coordinate isomorphism and transport its
-components along the presentation's object equations. Its naturality follows from
-the presentation's map equations. Finite powers are exact. Restriction of scalars is
-exact and reflects isomorphisms, so exactness of its composite with scalar extension
-implies exactness of scalar extension. The exact extension's homotopy functor followed
-by localization inverts quasi-isomorphisms. The universal left-derived counit is
-therefore an isomorphism, by uniqueness of localization factorizations. -/
+Source: Stacks Project, Tags 03EK and 06YY. -/
 theorem finiteFreeDirectImage_presentedScalarCoordinates (X : Scheme.{u})
     (s : ScalarModel X) {R S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
     (a : R ⟶ S) (d : ℕ)

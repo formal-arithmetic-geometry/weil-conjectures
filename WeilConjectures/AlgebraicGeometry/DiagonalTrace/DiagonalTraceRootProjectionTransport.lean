@@ -33,16 +33,6 @@ and the component equations of that cone.  The coefficient objects and their
 line maps are absent; those are supplied by the specialization in
 `diagonalTrace_rootProjection`.
 
-Source: diagonal-limit clause (3), normalization of the root-limit comparison;
-diagonal trace proof (1), root cone and exact single/shift comparisons.
-(blueprint: lem-sfb-diagonal-trace-root-projection).
-
-Proof: apply the normalized ordinary-limit projection to the single complex,
-transport it along the system isomorphism, and use the cone component equation.
-Naturality of the shift comparison moves the transported arrow through the
-finite projection.  The remaining single and shift comparisons cancel in
-`rootSystemTransport`, while the common derived-unit normalization identifies
-the two right-derived-limit models.
 -/
 theorem diagonalTrace_shiftedRootProjection_transport
     {A : Type*} {B : Type*} {C : Type*}

@@ -14,7 +14,7 @@ public import WeilConjectures.CategoryTheory.Limits.CoequalizerOfMonoidQuotient
 
 Let `Y` be a scheme. The category `FÉt(Y)` of finite étale `Y`-schemes has finite limits and
 finite colimits, and for every morphism `f : Y' ⟶ Y` the base change functor
-`FÉt(Y) ⥤ FÉt(Y')` preserves them (blueprint `lem-fet-finite-limits`).
+`FÉt(Y) ⥤ FÉt(Y')` preserves them.
 
 Finite limits, finite coproducts and quotients by finite monoids are constructed in
 `WeilConjectures.AlgebraicGeometry.FundamentalGroup.GaloisCategory`. A coequalizer of
@@ -221,8 +221,7 @@ instance preservesFiniteLimits_pullback : PreservesFiniteLimits (pullback f) whe
 /-- **Finite limits and finite colimits of finite étale schemes.** Let `Y` be a scheme. The
 category `FÉt(Y)` of finite étale `Y`-schemes has finite limits and finite colimits, and for
 every morphism `f : Y' ⟶ Y` the base change functor `FÉt(Y) ⥤ FÉt(Y')` is exact, i.e. preserves
-finite limits and finite colimits.
-(blueprint: `lem-fet-finite-limits`) -/
+finite limits and finite colimits. -/
 theorem finite_limits_colimits (Y : Scheme.{u}) :
     HasFiniteLimits Y.FiniteEtale ∧ HasFiniteColimits Y.FiniteEtale ∧
       ∀ {Y' : Scheme.{u}} (f : Y' ⟶ Y),

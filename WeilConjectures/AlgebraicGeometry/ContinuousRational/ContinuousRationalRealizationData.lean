@@ -57,8 +57,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFr
 /-! # Continuous rational derived realization data
 
 Source: Bhatt--Scholze, Proposition 6.8.14(2), Lemma 6.8.2(1), Proposition 6.8.11(3),
-Definition 6.8.8 and Remark 6.8.15
-(blueprint: lem-per-continuous-rational-derived-realization).
+Definition 6.8.8 and Remark 6.8.15.
 
 ## Main definitions and statement
 
@@ -79,7 +78,7 @@ open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme.ContinuousRational
 
 /-- The geometric hypotheses of BS 6.8.14, including the empty scheme.
-Source: Bhatt--Scholze 6.8.14 (blueprint: lem-per-continuous-rational-derived-realization). -/
+Source: Bhatt--Scholze 6.8.14. -/
 structure Base (l : ℕ) where
   scheme : Scheme.{u}
   [noetherian : IsNoetherian scheme]
@@ -88,21 +87,18 @@ structure Base (l : ℕ) where
 
 attribute [instance] Base.noetherian
 
-/-- The recorded dimension bound as a typeclass argument.
-Source: BS 6.8.14 (blueprint: lem-per-continuous-rational-derived-realization). -/
+/-- The recorded dimension bound as a typeclass argument. -/
 instance baseDimension {l : ℕ} (X : Base.{u} l) :
     Fact (∃ n : ℕ, topologicalKrullDim X.scheme ≤ n) := ⟨X.dimension⟩
 
-/-- The recorded scheme-level invertibility hypothesis.
-Source: BS 6.8.14 (blueprint: lem-per-continuous-rational-derived-realization). -/
+/-- The recorded scheme-level invertibility hypothesis. -/
 instance basePrimeUnit {l : ℕ} (X : Base.{u} l) :
     Fact (∀ x : X.scheme, IsUnit (l : X.scheme.presheaf.stalk x)) := ⟨X.prime_unit⟩
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Constant continuous functions supply the field action on rational modules.
-Source: BS 6.8.1 (blueprint: lem-per-continuous-rational-derived-realization). -/
+/-- Constant continuous functions supply the field action on rational modules. -/
 def scalarSections (X : Scheme.{u}) :
     E →+* RingCat.sectionsSubring
       ((rationalCoefficientSheaf l X E).obj ⋙ forget₂ CommRingCat RingCat) := by
@@ -114,8 +110,7 @@ def scalarSections (X : Scheme.{u}) :
       map_zero' := rfl
       map_add' := fun _ _ ↦ rfl }
 
-/-- The field action induced by those constant sections.
-Source: BS 6.8.1 (blueprint: lem-per-continuous-rational-derived-realization). -/
+/-- The field action induced by those constant sections. -/
 instance moduleLinear (X : Scheme.{u}) :
     Linear E (pbcModules X (rationalCoefficientSheaf l X E)) :=
   letI : Linear (RingCat.sectionsSubring
@@ -129,16 +124,13 @@ instance moduleLinear (X : Scheme.{u}) :
     comp_smul := fun M N P f a g ↦
       Linear.comp_smul M N P f (scalarSections l E X a) g }
 
-/-- The inherited field action on the ambient derived category.
-Source: BS 6.8.14 (blueprint: lem-per-continuous-rational-derived-realization). -/
+/-- The inherited field action on the ambient derived category. -/
 instance derivedLinear (X : Scheme.{u}) :
     Linear E (DerivedCategory (pbcModules X (rationalCoefficientSheaf l X E))) :=
   inferInstance
 
 /-- Reuse the recorded constructible continuous-module predicate via its coefficient
-encoding. Over the field E its finitely presented local models are exactly finite free models.
-Source: BS 6.8.6 and 6.8.10
-(blueprint: lem-per-continuous-rational-derived-realization). -/
+encoding. Over the field E its finitely presented local models are exactly finite free models. -/
 abbrev IsConstructible (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]
     (e : AlgebraicGeometry.ProEtale.latticeCoefficientSheaf X
       (WithAbs (Padic.coefficientExtensionAbsoluteValue l E)) ≅ rationalCoefficientSheaf l X E)
@@ -146,8 +138,7 @@ abbrev IsConstructible (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]
   AlgebraicGeometry.ProEtale.IsContinuousConstructible X
     (WithAbs (Padic.coefficientExtensionAbsoluteValue l E)) ((pbcRestrict e.hom).obj F)
 
-/-- The full ambient bounded constructible subcategory, using the recorded sheaf predicate.
-Source: BS 6.8.8 (blueprint: lem-per-continuous-rational-derived-realization). -/
+/-- The full ambient bounded constructible subcategory, using the recorded sheaf predicate. -/
 def IsDerivedConstructible (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]
     (e : AlgebraicGeometry.ProEtale.latticeCoefficientSheaf X
       (WithAbs (Padic.coefficientExtensionAbsoluteValue l E)) ≅ rationalCoefficientSheaf l X E) :
@@ -156,22 +147,18 @@ def IsDerivedConstructible (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]
     ∀ r : ℤ, IsConstructible l E X e ((DerivedCategory.homologyFunctor _ r).obj K)
 
 /-- The localized standard t-structure supplied by the recorded dependency.
-Its two classes are uniquely specified as the strictly full images of integral bounds.
-Source: BS 6.8.11 and 6.8.14
-(blueprint: lem-per-continuous-rational-derived-realization). -/
+Its two classes are uniquely specified as the strictly full images of integral bounds. -/
 def localizedT (X : Base.{u} l) :=
   (pbc_localized_tstructure X.scheme l E).choose
 
-/-- Cohomology placed in degree zero, using the actual localized truncations and shift.
-Source: BS 6.8.11 (blueprint: lem-per-continuous-rational-derived-realization). -/
+/-- Cohomology placed in degree zero, using the actual localized truncations and shift. -/
 def localizedCohomology (X : Base.{u} l) (r : ℤ) :=
   (localizedT l E X).truncLE r ⋙ (localizedT l E X).truncGE r ⋙
     shiftFunctor (PbcRationalCategory X.scheme (pbcIntegralDatum l E) (pbcUniformizer l E)) r
 
 /-- A normalized realization at one scheme. Bijectivity on Homs and the exact essential-image
 condition express an equivalence onto the full ambient subcategory. The natural integral
-comparison and fraction equation fix this functor on representatives and all arrows.
-Source: BS 6.8.2, 6.8.11, 6.8.14 (blueprint: lem-per-continuous-rational-derived-realization). -/
+comparison and fraction equation fix this functor on representatives and all arrows. -/
 structure At (X : Base.{u} l) where
   [topNoetherian : TopologicalSpace.NoetherianSpace X.scheme]
   encoding : AlgebraicGeometry.ProEtale.latticeCoefficientSheaf X.scheme
@@ -244,8 +231,7 @@ structure At (X : Base.{u} l) where
 
 attribute [instance] At.additive At.linear At.shift
 
-/-- Ordinary ringed module inverse image for an arbitrary coefficient structure map.
-Source: BS 6.8.15 (blueprint: lem-per-continuous-rational-derived-realization). -/
+/-- Ordinary ringed module inverse image for an arbitrary coefficient structure map. -/
 def modulePull {X Y : Scheme.{u}} (g : X ⟶ Y)
     {R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}}
     {S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
@@ -255,8 +241,7 @@ def modulePull {X Y : Scheme.{u}} (g : X ⟶ Y)
 attribute [-instance] coefficientProEtaleModelBaseChange_isContinuous
   coefficientProEtaleModelUp_isContinuous in
 /-- The actual tensor unit over a base-changed site object, for arbitrary coefficients.
-Source: BS 6.8.15; Stacks 03EL
-(blueprint: lem-per-continuous-rational-derived-realization). -/
+Source: BS 6.8.15; Stacks 03EL. -/
 def moduleUnit {X Y : Scheme.{u}} (g : X ⟶ Y)
     {R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}}
     {S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
@@ -269,8 +254,7 @@ def moduleUnit {X Y : Scheme.{u}} (g : X ⟶ Y)
       ((proEtaleModuleToModel ((adicLisseForget Y).obj R)).obj M)).val.app
         (op (AsSmall.up.obj U)) m)
 
-/-- Actual derived module inverse image: exact ring inverse image followed by derived tensor.
-Source: BS 6.8.15 (blueprint: lem-per-continuous-rational-derived-realization). -/
+/-- Actual derived module inverse image: exact ring inverse image followed by derived tensor. -/
 def derivedPull {X Y : Scheme.{u}} (g : X ⟶ Y)
     {R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}}
     {S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
@@ -281,8 +265,7 @@ def derivedPull {X Y : Scheme.{u}} (g : X ⟶ Y)
 API inserts scalar extension along the identity ring map. The first two comparisons
 remove precisely that identity tensor factor. Their section equation is multiplication,
 and the final equation fixes the derived counit on every complex.
-Source: BS 6.8.15; Stacks 03EL, 03EK
-(blueprint: lem-per-continuous-rational-derived-realization). -/
+Source: BS 6.8.15; Stacks 03EL, 03EK. -/
 def IsNormalizedPullCounit {X Y : Scheme.{u}} (g : X ⟶ Y)
     {R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}}
     {S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
@@ -317,8 +300,7 @@ def IsNormalizedPullCounit {X Y : Scheme.{u}} (g : X ⟶ Y)
             (Iso.refl _)).mapHomologicalComplex (.up ℤ)).obj P) ≫
         DerivedCategory.Q.map (eC.hom.app P)
 
-/-- The literal restriction of actual completed pullback, with its preservation certificate.
-Source: BS 6.8.15 (blueprint: lem-per-continuous-rational-derived-realization). -/
+/-- The literal restriction of actual completed pullback, with its preservation certificate. -/
 abbrev integralPull {X Y : Base.{u} l} (g : X.scheme ⟶ Y.scheme)
     (h : ∀ K : PbcBoundedConstructibleComplete Y.scheme (pbcIntegralDatum l E),
       PbcIsBoundedConstructibleComplete X.scheme (pbcIntegralDatum l E)
@@ -326,8 +308,7 @@ abbrev integralPull {X Y : Base.{u} l} (g : X.scheme ⟶ Y.scheme)
   pbcConditionalIntegral (pbcIntegralDatum l E)
     (pbcActualCompletedPull g (pbcIntegralDatum l E)) h
 
-/-- Raw rational pullback is tensor extension on the existing Hom modules.
-Source: BS 6.8.15 (blueprint: lem-per-continuous-rational-derived-realization). -/
+/-- Raw rational pullback is tensor extension on the existing Hom modules. -/
 abbrev rawPull {X Y : Base.{u} l} (g : X.scheme ⟶ Y.scheme)
     (h : ∀ K : PbcBoundedConstructibleComplete Y.scheme (pbcIntegralDatum l E),
       PbcIsBoundedConstructibleComplete X.scheme (pbcIntegralDatum l E)
@@ -337,8 +318,7 @@ abbrev rawPull {X Y : Base.{u} l} (g : X.scheme ⟶ Y.scheme)
 
 /-- Pullback comparison, normalized before completion by the ordinary balanced tensor map.
 The coefficient map has its continuous-function adjunct. Its square with the integral
-coefficient structure map ensures that it is also induced by all finite quotient maps.
-Source: BS 6.8.2 and 6.8.15 (blueprint: lem-per-continuous-rational-derived-realization). -/
+coefficient structure map ensures that it is also induced by all finite quotient maps. -/
 structure Along {X Y : Base.{u} l} (g : X.scheme ⟶ Y.scheme)
     (aX : At l E X) (aY : At l E Y) where
   coefficient : (adicTowerInverseImage g).obj (rationalCoefficientSheaf l Y.scheme E) ⟶
@@ -416,8 +396,7 @@ structure Along {X Y : Base.{u} l} (g : X.scheme ⟶ Y.scheme)
 
 attribute [instance] Along.ordinaryAdditive
 
-/-- The published raw pullback with its preservation certificate.
-Source: BS 6.8.15 (blueprint: lem-per-continuous-rational-derived-realization). -/
+/-- The published raw pullback with its preservation certificate. -/
 def Along.raw {X Y : Base.{u} l} {g : X.scheme ⟶ Y.scheme}
     {aX : At l E X} {aY : At l E Y} (a : Along l E g aX aY) :=
   rawPull l E g a.integral_mem
@@ -425,8 +404,7 @@ def Along.raw {X Y : Base.{u} l} {g : X.scheme ⟶ Y.scheme}
 /-- Canonical ambient composition, fixed by the insertion of tensor units and the
 universal derived counits. The last equation states compatibility of J with precisely
 this ambient comparison, rather than a new choice of triangulated composition.
-Source: BS 6.8.15; Stacks 0D6D
-(blueprint: lem-per-continuous-rational-derived-realization). -/
+Source: BS 6.8.15; Stacks 0D6D. -/
 structure Composition {X Y Z : Base.{u} l} (g : X.scheme ⟶ Y.scheme)
     (h : Z.scheme ⟶ X.scheme) (aX : At l E X) (aY : At l E Y) (aZ : At l E Z)
     (ag : Along l E g aX aY) (ah : Along l E h aZ aX)
@@ -469,8 +447,7 @@ structure Composition {X Y Z : Base.{u} l} (g : X.scheme ⟶ Y.scheme)
         ah.comparison.hom.app ((ag.raw l E).obj K) ≫
         (derivedPull h ah.coefficient).map (ag.comparison.hom.app K)
 
-/-- Identity pullback comparison, normalized by the identity fibre product and tensor unit.
-Source: BS 6.8.15 (blueprint: lem-per-continuous-rational-derived-realization). -/
+/-- Identity pullback comparison, normalized by the identity fibre product and tensor unit. -/
 structure Identity (X : Base.{u} l) (a : At l E X)
     (ai : Along l E (𝟙 X.scheme) a a) where
   site : proEtaleBaseChange (𝟙 X.scheme) ≅ 𝟭 X.scheme.ProEt
@@ -498,8 +475,7 @@ variable (F G : Type u) [Field F] [Field G] [Algebra ℚ_[l] F] [Algebra ℚ_[l]
   [FiniteDimensional ℚ_[l] F] [FiniteDimensional ℚ_[l] G]
 
 /-- Finite coefficient extension, with its sectionwise field map, finite-integral square,
-and comparison normalized by the existing derived balancing maps on integral models.
-Source: BS 6.8.14 and 6.8.15 (blueprint: lem-per-continuous-rational-derived-realization). -/
+and comparison normalized by the existing derived balancing maps on integral models. -/
 structure FieldChange (i : E →ₐ[ℚ_[l]] F) (X : Base.{u} l)
     (aE : At l E X) (aF : At l F X) where
   coefficient : rationalCoefficientSheaf l X.scheme E ⟶ rationalCoefficientSheaf l X.scheme F
@@ -524,8 +500,7 @@ structure FieldChange (i : E →ₐ[ℚ_[l]] F) (X : Base.{u} l)
           (aE.integralIso.hom ≫ aE.inclusion ≫ coefficient) square K.obj).hom
 
 /-- The coefficient associator is the prescribed raw associator and the ambient balanced
-tensor associator. This includes repeated fields and identity field embeddings.
-Source: BS 6.8.14--6.8.15 (blueprint: lem-per-continuous-rational-derived-realization). -/
+tensor associator. This includes repeated fields and identity field embeddings. -/
 structure FieldComposition (i : E →ₐ[ℚ_[l]] F) (j : F →ₐ[ℚ_[l]] G) (X : Base.{u} l)
     (aE : At l E X) (aF : At l F X) (aG : At l G X)
     (bEF : FieldChange l E F i X aE aF) (bFG : FieldChange l F G j X aF aG)
@@ -541,8 +516,7 @@ structure FieldComposition (i : E →ₐ[ℚ_[l]] F) (j : F →ₐ[ℚ_[l]] G) (
           coefficient (aE.J.obj K)).hom
 
 /-- The mixed coefficient/pullback square, using the actual raw scalar/completed-pull
-comparison and the ordinary balanced tensor map. Source: BS 6.8.14--6.8.15
-(blueprint: lem-per-continuous-rational-derived-realization). -/
+comparison and the ordinary balanced tensor map. Source: BS 6.8.14--6.8.15. -/
 structure Mixed (i : E →ₐ[ℚ_[l]] F) {X Y : Base.{u} l} (g : X.scheme ⟶ Y.scheme)
     (aXE : At l E X) (aYE : At l E Y) (aXF : At l F X) (aYF : At l F Y)
     (agE : Along l E g aXE aYE) (agF : Along l F g aXF aYF)
@@ -604,22 +578,19 @@ structure Mixed (i : E →ₐ[ℚ_[l]] F) {X Y : Base.{u} l} (g : X.scheme ⟶ Y
         ambient.hom.app (aYE.J.obj K)
 
 /-- The site inclusion attached to a weakly étale object, with no finiteness hypothesis
-on its source. Source: BS 6.8.14; Stacks 03EL
-(blueprint: lem-per-continuous-rational-derived-realization). -/
+on its source. Source: BS 6.8.14; Stacks 03EL. -/
 def siteInclude {X : Scheme.{u}} (U : X.ProEt) : U.left.ProEt ⥤ X.ProEt :=
   MorphismProperty.Over.map ⊤ U.prop
 
 /-- Projection from the base-changed object, viewed in the original small site.
-Source: BS 6.8.15; Stacks 03EL
-(blueprint: lem-per-continuous-rational-derived-realization). -/
+Source: BS 6.8.15; Stacks 03EL. -/
 def siteCounit {X : Scheme.{u}} (U : X.ProEt) (V : X.ProEt) :
     (siteInclude U).obj ((proEtaleBaseChange U.hom).obj V) ⟶ V :=
   MorphismProperty.Over.homMk (pullback.fst V.hom U.hom) pullback.condition
 
 /-- Restriction to an arbitrary object of the site. The slice equivalence and ring map
 are fixed by the actual inclusion and evaluation of continuous functions. The last
-comparison identifies ordinary module inverse image with literal site restriction.
-Source: BS 6.8.14 and 6.8.15 (blueprint: lem-per-continuous-rational-derived-realization). -/
+comparison identifies ordinary module inverse image with literal site restriction. -/
 structure SiteRestriction (X : Scheme.{u}) (U : X.ProEt) where
   slice : U.left.ProEt ≌ Over U
   slice_normalization : slice.functor ⋙ Over.forget U = siteInclude U
@@ -659,8 +630,7 @@ structure SiteRestriction (X : Scheme.{u}) (U : X.ProEt) where
 
 /-- A compatible family of realizations. All fields, embeddings, schemes and morphisms
 are quantified, so the identity, composition and mixed comparison clauses refer to
-one family rather than unrelated existence witnesses.
-Source: BS 6.8.14--6.8.15 (blueprint: lem-per-continuous-rational-derived-realization). -/
+one family rather than unrelated existence witnesses. -/
 structure Family (l : ℕ) [Fact l.Prime] where
   realization : ∀ (A : Type u) [Field A] [Algebra ℚ_[l] A] [FiniteDimensional ℚ_[l] A]
     (X : Base.{u} l), At l A X

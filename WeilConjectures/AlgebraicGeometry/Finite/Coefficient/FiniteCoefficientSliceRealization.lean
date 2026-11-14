@@ -40,11 +40,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- Sheafifying fixed-scalar module presheaves along a locally bijective constant-scalar unit
 is an equivalence onto sheaves of modules.
-Source: Stacks Project, Tag 00YV (auxiliary; not a blueprint node).
-
-Proof: the fixed-scalar module presheaf functor is fully faithful, and the sheafification
-unit is invertible on sheaves; restriction of scalars along the unit gives essential
-surjectivity, with the sheafification counit as comparison. -/
+Source: Stacks Project, Tag 00YV (auxiliary; not a blueprint node). -/
 theorem finiteCoefficientModulePresheaf_sheafification_isEquivalence
     {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
     (Λ : Type (u + 1)) [Ring Λ] (R : Sheaf J RingCat.{u + 1})
@@ -107,11 +103,7 @@ theorem finiteCoefficientModulePresheaf_sheafification_isEquivalence
 
 /-- Sheafifying fixed-scalar module presheaves inverts the sheafification unit of a
 presheaf of modules.
-Source: Stacks Project, Tags 00YV and 03CY (auxiliary; not a blueprint node).
-
-Proof: the underlying morphism of abelian presheaves is the whiskered sheafification unit,
-which is inverted by abelian sheafification since forgetting the module structure preserves
-sheafification. -/
+Source: Stacks Project, Tags 00YV and 03CY (auxiliary; not a blueprint node). -/
 theorem isIso_sheafification_map_toSheafify
     {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
     (Λ : Type (u + 1)) [CommRing Λ] (R : Sheaf J RingCat.{u + 1})
@@ -234,14 +226,7 @@ private instance constModuleMonoidal (C : Type*) [Category C] (Λ : Type (t + 1)
       forget₂ CommRingCat RingCat)))
 
 /-- The slice realization commutes with the sheafified tensor products.
-Source: Stacks Project, Tags 03EK and 0GMW (auxiliary; not a blueprint node).
-
-Proof: the tensor product of sheaves is the sheafification of the sectionwise tensor
-product. Transport along the slice equivalence commutes with sheafification and with
-sectionwise tensors, and so does the fixed-scalar module presheaf functor. Sheafification
-along the constant-scalar unit inverts the sheafification unit and identifies the
-sheafified sectionwise tensor product with the tensor product of the associated sheaves of
-modules (Tag 0GMW). -/
+Source: Stacks Project, Tags 03EK and 0GMW (auxiliary; not a blueprint node). -/
 theorem proEtaleSliceRealization_tensor :
     letI := SheafOfModules.monoidalCategory ((adicConstantRing X B).over U)
     Nonempty (tensor _ ⋙ proEtaleSliceRealization X B U ≅
@@ -292,12 +277,7 @@ variable (R : Sheaf (ProEt.topology X) CommRingCat.{t + 1}) (φ : adicConstantRi
 
 /-- Realizing the fixed-scalar chart coordinates of a module recovers its restriction of
 scalars to the constant ring, restricted to the slice at the chart.
-Source: Stacks Project, Tags 00YV, 03CY and 099R (auxiliary; not a blueprint node).
-
-Proof: the chart coordinates are the slice equivalence applied to the constant-scalar
-restriction of the slice module, with identical sections. Undo the slice equivalence by its
-unit and the constant-scalar restriction by the counit of module sheafification, which is
-invertible for the locally bijective constant-scalar unit. -/
+Source: Stacks Project, Tags 00YV, 03CY and 099R (auxiliary; not a blueprint node). -/
 def finiteCoefficientSliceRestrictionRealizationIso :
     finiteCoefficientSliceRestriction X B R φ V ⋙
         proEtaleSliceRealization X B ((toProEt X).obj V) ≅
@@ -358,12 +338,7 @@ theorem ProEt.sheafModule_kFlat_of_acyclicTensorTest (T : Scheme.{t})
 /-- The fixed-scalar chart coordinates of a complex which is K-flat over the constant ring pass
 the acyclic tensor test for K-flatness on the chart.
 Source: Stacks Project, Cohomology on Sites, Tags 06YN and 0E8K
-(auxiliary; not a blueprint node).
-
-Proof: restriction to the slice preserves K-flatness of complexes of modules
-(`SheafOfModules.ringedSite_restriction_exact_kflat`, Tag 0E8K). The slice realization is an
-additive equivalence compatible with tensor products, so it preserves and reflects the
-acyclic tensor test, and it carries the chart coordinates to the restricted complex. -/
+(auxiliary; not a blueprint node). -/
 theorem finiteCoefficientSliceRestriction_acyclicTensorTest
     (K : CochainComplex (SheafOfModules.{t + 1}
       ((sheafCompose (ProEt.topology X) (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj R)) ℤ)

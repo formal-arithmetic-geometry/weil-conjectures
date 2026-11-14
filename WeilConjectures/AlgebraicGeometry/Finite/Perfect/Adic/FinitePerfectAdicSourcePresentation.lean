@@ -132,11 +132,7 @@ private abbrev SourceRestrictionFormula
 
 /-- The scalar-restriction compositor acts identically on the underlying abelian sheaf.
 
-Source: Stacks Project, Tag 06YY.
-(blueprint: new-s3-finite-perfect-adic-source-presentation)
-
-Proof: evaluate on an object and a section. The restriction compositor is the
-identity linear map on the underlying group, so its image is the identity sheaf map. -/
+Source: Stacks Project, Tag 06YY. -/
 theorem finitePerfectAdicRestriction_forget_compositor
     {C : Type (t + 1)} [Category.{t} C] {J : GrothendieckTopology C}
     {R S T : Sheaf J RingCat.{t + 1}}

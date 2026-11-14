@@ -20,8 +20,7 @@ Source: Stacks Project, Tags 03DI and 03DJ.
 The extension by zero is constructed by sheafifying the left Kan extension along the open
 embedding. Sectionwise, the construction is a direct sum over maps into the image; direct sums
 preserve monomorphisms, and sheafification in abelian groups preserves them. The resulting
-functor is left adjoint to pullback by the open embedding.
-(blueprint: new-open-embedding-sheaf-pullback-adjunction) -/
+functor is left adjoint to pullback by the open embedding. -/
 theorem Topology.isOpenEmbedding_sheafPullback_adjunction
     {X Y : TopCat.{u}} (f : X ⟶ Y) (hf : Topology.IsOpenEmbedding f) :
     ∃ L : X.Sheaf AddCommGrpCat.{u} ⥤ Y.Sheaf AddCommGrpCat.{u},

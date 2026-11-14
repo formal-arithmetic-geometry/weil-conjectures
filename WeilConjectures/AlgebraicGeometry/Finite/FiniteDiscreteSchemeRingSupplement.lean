@@ -158,8 +158,7 @@ open scoped CategoryTheory.Obj
 variable (B : Type) [CommRing B] [TopologicalSpace B] [IsTopologicalRing B]
 
 /-- The monoidal constant-ring identification on a profinite point pulls to every scheme.
-Source: Bhatt--Scholze, Section 5.3; formal uniqueness of monoidal left adjoints
-(blueprint: lem-weil-pbc-finite-discrete-scheme-ring-constant).
+Source: Bhatt--Scholze, Section 5.3; formal uniqueness of monoidal left adjoints.
 
 Proof. The constant-sheaf functor is left adjoint to sections at a terminal object.
 Pushforward preserves these sections, since base change sends the terminal pro-etale

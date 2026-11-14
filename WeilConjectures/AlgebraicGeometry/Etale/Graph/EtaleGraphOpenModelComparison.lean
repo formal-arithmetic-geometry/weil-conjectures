@@ -122,19 +122,7 @@ private lemma open_derived_identity_algebra
 
 /-- The graph comparison for an open immersion in its identity-proper compactification
 is precisely removal of the identity direct image.
-Source: Stacks Project, etale-cohomology.tex Tag 0F4L; SGA 4 XVII 6.2.11.
-(blueprint: lem-pur-etale-graph-open-model-comparison).
-
-Proof: postcompose the sheaf graph map with the monic compactification inclusion in
-ordinary direct image. Graph normalization identifies that composite with the usual
-open-extension inclusion. The right identity law and naturality for direct image give
-the same composite for the inverse identity comparison, so monicity identifies the
-sheaf maps. Evaluate the derived comparison on a homotopy representative. Move its
-exact factorization through the right-derived identity comparison by naturality; its
-right-derived unit cancels against the exact identity factorization. The degreewise
-sheaf identity then cancels the remaining factors. Localization extends this equation
-to every derived object, and cancellation of the invertible graph map gives the stated
-inverse comparison. The argument includes the identity and empty open immersions. -/
+Source: Stacks Project, etale-cohomology.tex Tag 0F4L; SGA 4 XVII 6.2.11. -/
 theorem etaleGraphOpenModelComparison
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] [QuasiCompact j] :

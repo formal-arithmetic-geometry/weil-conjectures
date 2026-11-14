@@ -72,7 +72,7 @@ public import Mathlib.Algebra.Homology.Functor
 /-! # Global derived Hom with completed adic coefficients
 
 Source: Bhatt--Scholze, The pro-etale topology for schemes, Lemma 6.8.12;
-Stacks Project, Tag 08JA (blueprint: def-weil-pbc-adic-global-derived-hom).
+Stacks Project, Tag 08JA.
 
 ## Main definitions
 
@@ -93,7 +93,7 @@ namespace AlgebraicGeometry.Scheme
 variable (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 
 /-- The constant residue section of the finite coefficient sheaf. Source: Bhatt--Scholze,
-6.8.2(1) (blueprint: def-weil-pbc-adic-global-derived-hom). -/
+6.8.2(1). -/
 def adicFiniteConstant (n : ℕ) (U : T.ProEtᵒᵖ) :
     A →+* ((pbcAdicRings T d).obj (op n)).obj.obj U :=
   letI := d.quotientFinite n
@@ -124,13 +124,7 @@ private theorem adicFiniteConstant_compat (U : T.ProEtᵒᵖ) (n : ℕ) :
   rfl
 
 /-- The canonical scalar homomorphism is uniquely specified by all its finite residues.
-Source: Bhatt--Scholze, 6.8.2(1)
-(blueprint: def-weil-pbc-adic-global-derived-hom).
-Proof: the constant residue homomorphisms commute with each quotient map, since
-both routes send a to its constant residue class. They form a cone on the evaluated
-inverse system. Limits of ring sheaves are evaluated sectionwise, so the limit
-universal property supplies the homomorphism. The projections are jointly injective,
-which proves uniqueness. This argument includes the empty scheme and zero rings. -/
+Source: Bhatt--Scholze, 6.8.2(1). -/
 theorem adicScalar_exists (U : T.ProEtᵒᵖ) :
     ∃! ρ : A →+* (pbcAdicCompletion T d).obj.obj U,
       ∀ n : ℕ, ((pbcAdicProjection T d n).hom.app U).hom.comp ρ =
@@ -157,27 +151,24 @@ theorem adicScalar_exists (U : T.ProEtᵒᵖ) :
     exact congrArg CommRingCat.Hom.hom h
 
 /-- The scalar map into completed sections, determined by its actual finite residues.
-Source: Bhatt--Scholze, 6.8.2(1)
-(blueprint: def-weil-pbc-adic-global-derived-hom). -/
+Source: Bhatt--Scholze, 6.8.2(1). -/
 def adicScalar (U : T.ProEtᵒᵖ) : A →+* (pbcAdicCompletion T d).obj.obj U :=
   (adicScalar_exists T d U).exists.choose
 
 /-- Global sections as A-modules: evaluation at the final pro-etale object followed
 by restriction along the constant completed scalar map. Source: Stacks Project,
-Tag 08JA (blueprint: def-weil-pbc-adic-global-derived-hom). -/
+Tag 08JA. -/
 def adicGlobalSections : pbcModules T (pbcAdicCompletion T d) ⥤ ModuleCat.{u + 1} A :=
   SheafOfModules.evaluation _ (op (⊤_ T.ProEt)) ⋙
     ModuleCat.restrictScalars (adicScalar T d (op (⊤_ T.ProEt)))
 
-/-- Evaluation and scalar restriction are additive. Source: Stacks Project, Tag 08JA
-(blueprint: def-weil-pbc-adic-global-derived-hom). -/
+/-- Evaluation and scalar restriction are additive. Source: Stacks Project, Tag 08JA. -/
 instance adicGlobalSections_additive : (adicGlobalSections T d).Additive := by
   dsimp [adicGlobalSections, SheafOfModules.evaluation]
   infer_instance
 
 /-- The unbounded right derived functor of global sections, with its A-module action.
-Source: Stacks Project, Tag 08JA
-(blueprint: def-weil-pbc-adic-global-derived-hom). -/
+Source: Stacks Project, Tag 08JA. -/
 def adicDerivedGlobalSections :
     DerivedCategory (pbcModules T (pbcAdicCompletion T d)) ⥤
       DerivedCategory (ModuleCat.{u + 1} A) :=
@@ -188,8 +179,7 @@ def adicDerivedGlobalSections :
 
 /-- Global derived Hom is RΓ of internal derived Hom, in the derived category of
 A-modules, without replacing the completed coefficient sheaf by a constant sheaf.
-Source: Bhatt--Scholze, Lemma 6.8.12; Stacks Project, Tag 08JA
-(blueprint: def-weil-pbc-adic-global-derived-hom). -/
+Source: Bhatt--Scholze, Lemma 6.8.12; Stacks Project, Tag 08JA. -/
 def adicGlobalDerivedHom :
     (DerivedCategory (pbcModules T (pbcAdicCompletion T d)))ᵒᵖ ×
       DerivedCategory (pbcModules T (pbcAdicCompletion T d)) ⥤
@@ -198,7 +188,7 @@ def adicGlobalDerivedHom :
     adicDerivedGlobalSections T d
 
 /-- Fix the contravariant argument of global derived Hom. Source: Bhatt--Scholze,
-Lemma 6.8.12 (blueprint: def-weil-pbc-adic-global-derived-hom). -/
+Lemma 6.8.12. -/
 def adicGlobalRHom (K : DerivedCategory (pbcModules T (pbcAdicCompletion T d))) :
     DerivedCategory (pbcModules T (pbcAdicCompletion T d)) ⥤
       DerivedCategory (ModuleCat.{u + 1} A) :=

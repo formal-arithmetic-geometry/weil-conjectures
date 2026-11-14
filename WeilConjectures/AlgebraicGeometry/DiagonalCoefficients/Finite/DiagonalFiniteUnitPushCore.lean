@@ -13,9 +13,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Finite.DiagonalFin
 import WeilConjectures.CategoryTheory.SixFunctors.CompIsoApp
 
 /-! # Normalized finite coefficient-unit square
-
-Source: diagonal tower coefficient changes (1), normalized finite push square.
-(blueprint: lem-diagonal-finite-unit-push)
 -/
 
 @[expose] public noncomputable section
@@ -216,13 +213,7 @@ of the finite realization unit isomorphism. This is the single-object instance o
 normalization and the canonical derived-unit equation. The ordinary square is
 first evaluated on the regular module, then the single-complex comparisons are
 cancelled; the result is the displayed equation. No line, trace, or positivity
-hypothesis enters this coefficient-unit step.
-(blueprint: lem-diagonal-finite-unit-push-square)
-
-Proof: evaluate the supplied finite push-square normalization at the regular module,
-use the ordinary unit normalization to identify the coefficient map, cancel the
-single-complex comparison isomorphisms, and apply the canonical derived-unit
-equation and the finite adjunction hom-equivalence. -/
+hypothesis enters this coefficient-unit step. -/
 theorem finite_unit_push_square
     {R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj R] [IsCommMonObj R]
     {A : Type (u + 1)} [CommRing A] (Y : Scheme.{u})

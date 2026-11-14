@@ -32,7 +32,6 @@ isomorphic to the presheaf formed using slice sites. This supplies canonical eva
 on affine weakly contractible pro-etale objects, with no local-existence hypothesis.
 
 Source: Stacks Project, Tags 09BV and 0F63; localization of the etale and pro-etale sites.
-(blueprint: def-weil-pbc-source-derived-isomorphism-evaluation).
 -/
 
 @[expose] public section
@@ -429,8 +428,7 @@ theorem etaleSliceToSourceIso_natural
 set_option backward.isDefEq.respectTransparency false in
 /-- The slice and source versions of the local Isom presheaf are naturally isomorphic.
 The restriction compatibility follows from the localization composition isomorphisms.
-Source: Stacks Tag 09BV
-(blueprint: def-weil-pbc-source-derived-isomorphism-evaluation). -/
+Source: Stacks Tag 09BV. -/
 noncomputable def etaleIsomorphismPresheafIso
     (A D : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B))) :
     derivedLocalIsoPresheaf X.smallEtaleTopology B A D ≅
@@ -456,8 +454,7 @@ noncomputable def etaleIsomorphismPresheafIso
     exact etaleSliceToSourceIso_natural X B A D f.unop e
 
 /-- Sheafification of the canonical slice-to-source Isom-presheaf isomorphism.
-Source: Stacks Tag 09BV
-(blueprint: def-weil-pbc-source-derived-isomorphism-evaluation). -/
+Source: Stacks Tag 09BV. -/
 noncomputable def etaleIsomorphismSheafIso
     (A D : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B))) :
     derivedLocalIsoSheaf X.smallEtaleTopology B A D ≅
@@ -468,8 +465,7 @@ noncomputable def etaleIsomorphismSheafIso
 set_option backward.isDefEq.respectTransparency false in
 /-- Evaluate source-site Isom-sheaf sections using slice localization and the unique
 inverse of the pro-etale sheafification unit on a weakly contractible affine.
-Source: Stacks Tags 09BV and 0F63
-(blueprint: def-weil-pbc-source-derived-isomorphism-evaluation). -/
+Source: Stacks Tags 09BV and 0F63. -/
 noncomputable def sourceDerivedIsoEvaluation
     (A D : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)))
     (U : X.ProEt) (ha : IsAffine U.left)

@@ -18,8 +18,7 @@ import all WeilConjectures.AlgebraicGeometry.Adic.AdicCoefficientDatumSupplement
 
 /-! # Integral quotient models for a rational sheaf filtration
 
-Source: Bhatt--Scholze, Lemma 6.8.13 and Proposition 6.8.14(2)
-(blueprint: lem-per-rational-continuous-filtration-models).
+Source: Bhatt--Scholze, Lemma 6.8.13 and Proposition 6.8.14(2).
 -/
 
 @[expose] public noncomputable section
@@ -228,24 +227,7 @@ private theorem modelScalarComparison (X : Base.{u} l)
 
 /-- Retain the finite stratum filtration as degree-zero completed integral quotient models
 for the specified raw rational realization.
-Source: Bhatt--Scholze, Lemma 6.8.13 and the proof of Proposition 6.8.14(2)
-(blueprint: lem-per-rational-continuous-filtration-models).
-
-Proof: identify the published continuous coefficient presentation with the WithAbs
-presentation by the pointwise field equivalence. The finite free criterion makes F
-continuous constructible. Apply the stratum integral-model theorem, which gives a finite
-filtration, integral stratum lattices, constructible extensions of these lattices, and
-normalized rational quotient isomorphisms. Transport the filtration back along the
-coefficient equivalence, an exact equivalence, so cokernels and monomorphisms are preserved.
-For each integral piece N the completed-model certificate identifies single(N) with an
-object of the completed constructible category by restriction along the normalized
-completed coefficient isomorphism. Give this object to the Filtration.model field.
-The realization's object equality and exact scalar-extension cohomology comparison
-identify its realization with single of the rationalization of N. Compose with the
-specified rationalization/extension comparison and the cokernel identification from
-the stratum theorem. All arrows in Filtration are the transported original filtration
-arrows; exactness preserves its zero start and final isomorphism. This constructs the
-required data without choosing a derived object from a mere essential-image assertion. -/
+Source: Bhatt--Scholze, Lemma 6.8.13 and the proof of Proposition 6.8.14(2). -/
 theorem rationalContinuousFiltrationModels (X : Base.{u} l)
     (s : RationalModuleRealization l E X.scheme)
     (F : pbcModules X.scheme (rationalCoefficientSheaf l X.scheme E))

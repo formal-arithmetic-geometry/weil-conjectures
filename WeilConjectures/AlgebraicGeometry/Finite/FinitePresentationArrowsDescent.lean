@@ -28,12 +28,6 @@ Different arrows may have different sources and targets. The equations retain th
 limit arrows, rather than only their isomorphism classes.
 
 Source: Stacks Project, Limits, Tag 01ZM, clause (2), with common refinement.
-(blueprint: lem-weil-pbc-finite-presentation-arrows-descent)
-
-Proof: Descend each arrow by 01ZM(2). Choose a common lower bound of their finitely many
-stages. Pullback maps from this common stage to each arrow's stage precompose the descended
-arrows. Their equations over the base and compatibility at the limit follow by pullback
-projection identities and cone naturality. Empty arrow families are permitted.
 -/
 theorem exists_finitePresentation_arrows_stage
     {I : Type u} [SmallCategory I] [IsCofiltered I]

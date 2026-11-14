@@ -74,28 +74,7 @@ presentations by affine étale covering families. Only the base and the members 
 presented here; the repeated intersections are constructed separately by universal
 properties in `presentedNerveIsLimit`.
 Source: Stacks Project, Tag 099U, the two geometric finite-cover reductions;
-Tags 01ZM, 01ZN and 07RP, finite presentation and covering descent.
-(blueprint: lem-cbc-affine-etale-cover-presentation).
-
-Proof: Write the finite disjoint union of the members as Spec of the product of
-their rings of global sections. It is affine ind-étale over the base, and the
-covering hypothesis makes its map to the base surjective. The original members
-are a finite affine open cover of this disjoint union. Simultaneously present this
-single surjection and its target by affine étale Y-schemes, refining the index to
-ensure surjectivity at every stage; this is the single-surjection relative-limit
-presentation in AffineProEt.singleton_inf_le_relativelyPresentable.
-Descend the finite affine open cover of the source to one stage, using finite
-Zariski-cover descent along the source presentation. Restrict the common index
-to the over-category of that stage. Pulling the descended opens back gives
-presentations of the original members with compatible arrows to the target
-presentation. Their composites cover the target at every stage: the opens cover
-the source stage and its map to the target stage is surjective. Affineness is
-preserved under the pullbacks. The original pullback squares and cofiltered
-base-change limits identify each member's limit, while the target presentation
-remains a limit by initiality of the over-category projection. This construction
-keeps the given finite indexing, including repetitions. The same construction handles an
-empty covering: its disjoint union is empty, and the descended covering family
-is empty at every stage. -/
+Tags 01ZM, 01ZN and 07RP, finite presentation and covering descent. -/
 theorem exists_affine_etale_cover_presentation
     (Y : Scheme.{u}) [IsAffine Y]
     (V : Y.ProEt) (hV : proAffineEtale V.hom)

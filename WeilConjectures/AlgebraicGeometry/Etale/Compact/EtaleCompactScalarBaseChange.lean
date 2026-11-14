@@ -111,15 +111,7 @@ private theorem chosen_exchange_app
 
 /-- Scalar extension respects compactly supported exchange when the source input
 and its scalar extension are bounded below.
-Source: Stacks 0F7L, 0GL6, 03S6 and 07A7
-(blueprint: lem-pur-compact-scalar-base-change).
-Proof: on a compactification expand exchange as proper exchange followed by inverse
-open exchange. The proper scalar square and the open scalar square paste by
-naturality, giving the square for the base-changed compactification. Exact inverse
-image preserves the two bounded-below inputs. The scalar/pullback comparison supplies
-the scalar bound after inverse image. Coefficient refinement coherence then transfers
-the result from the base-changed compactification to the chosen compactification.
-The normalization of exact compact-support exchange supplies the asserted maps. -/
+Source: Stacks 0F7L, 0GL6, 03S6 and 07A7. -/
 theorem compactScalarChosenMap_baseChange
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {X X' Y Y' : Scheme.{u}}

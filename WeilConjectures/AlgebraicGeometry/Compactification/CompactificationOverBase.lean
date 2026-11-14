@@ -10,10 +10,6 @@ import WeilConjectures.Compactification.Dense
 
 /-!
 # Compactifications over a quasi-compact quasi-separated base
-
-Source: literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
-`sk-def-sfb-dc-setting/lem-sfb-compactification-over-base.md`, node order 1775
-(blueprint: remark-compactifications--1).
 -/
 
 @[expose] public section
@@ -30,15 +26,12 @@ namespace AlgebraicGeometry
 with separated finite-type source and separated quasi-compact target over that base,
 has a compactification with quasi-compact open immersion.
 
-Source: literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
-`sk-def-sfb-dc-setting/lem-sfb-compactification-over-base.md`, node order 1775
-(blueprint: remark-compactifications--1).
 
 Proof, following the source proof:
 1. Write the structure morphisms `X ↘ S` and `Y ↘ S`; `f.IsOver S` identifies
-their composite with `f` (`def-weil-scheme-over-base`). Finite type means locally
-of finite type and quasi-compact (`def-weil-finite-type-morphism`). Separatedness
-of `Y ↘ S` implies quasi-separatedness (`lem-pc-separated-quasi-separated`).
+their composite with `f`. Finite type means locally
+of finite type and quasi-compact. Separatedness
+of `Y ↘ S` implies quasi-separatedness.
 Clause (2) of `lem-weil-pbc-qcqs-morphism-permanence` gives quasi-compactness of
 both `X` and `Y` from quasi-compactness of their structure maps and of `S`, and
 quasi-separatedness of `Y` from that of its structure map and of `S`.
@@ -49,7 +42,7 @@ gives local finite type of `f` from that of `X ↘ S`. Clause (1) of
 `X` is quasi-compact and `Y` is quasi-separated. Thus `f` is of finite type.
 3. Apply `theorem-nagata-s-compactification-theorem--1` to `f` over the qcqs base `Y` to get
 a dense compactification. Its open immersion is quasi-compact, its structure
-map is proper, and their composite is `f` (`definition-compactification-refinement`). Forget
+map is proper, and their composite is `f`. Forget
 density to obtain an object of `BoundaryCompactification f`.
 The argument uses the statement dependencies `definition-compactification-refinement`,
 `def-weil-scheme-over-base`, `def-weil-finite-type-morphism`,

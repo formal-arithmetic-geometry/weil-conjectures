@@ -101,7 +101,6 @@ import Mathlib.CategoryTheory.Sites.DenseSubsite.SheafEquiv
 /-! # K-flatness under completed-coefficient open extension
 
 Source: Stacks Tags 00XZ, 0E8I and 06YN.
-(blueprint: lem-cbc-completed-open-kflat).
 -/
 
 @[expose] public noncomputable section
@@ -299,18 +298,7 @@ private theorem cbcModuleToSlice_kFlat
   exact reindex_kFlat f c P hP hf
 
 /-- Completed-coefficient open extension preserves K-flat flat-term representatives.
-Source: Stacks Tags 00XZ, 0E8I and 06YN
-(blueprint: lem-cbc-completed-open-kflat).
-
-Proof: the projection-normalized completed slice map is an isomorphism. The
-concrete equivalence of the open pro-etale site with the ambient slice, with
-this ring identification, preserves tensor products, exact sequences and direct
-sums. It therefore takes a K-flat flat-term complex to such a complex over the
-restricted ambient ring. Apply ringedOpen_preserves_flat_resolution: its total
-projection formula identifies tensor against the extension with extension of
-tensor against exact restriction. Restriction preserves acyclicity, K-flatness
-kills this tensor, and exact extension preserves the resulting acyclicity.
-The same formula on short exact sequences preserves flatness of each term. -/
+Source: Stacks Tags 00XZ, 0E8I and 06YN. -/
 theorem cbcOpenShriek_kFlat_of_flatTerms
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     {U X : Scheme.{u}} (j : U ⟶ X) (hj : IsOpenImmersion j)

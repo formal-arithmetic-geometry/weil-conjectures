@@ -72,7 +72,6 @@ import Mathlib.CategoryTheory.Sites.LocallyBijective
 
 /-! # Representative short exact sequence for the finite coefficient layer
 Source: Stacks Project, sites-cohomology.tex, Tag 0942.
-(blueprint: lem-weil-pbc-finite-quotient-coefficient-layer-triangle-core).
 -/
 
 @[expose] public noncomputable section
@@ -338,7 +337,6 @@ actual kernel-unit-quotient sequence, and records the resulting degreewise short
 The later triangle theorem only applies `triangleOfSES` and identifies the three representatives.
 
 Source: Stacks Project, sites-cohomology.tex, Tag 0942, lemma-bounded, proof (1).
-(blueprint: lem-weil-pbc-finite-quotient-coefficient-layer-triangle-core).
 -/
 theorem finiteQuotient_coefficient_layer_core
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)

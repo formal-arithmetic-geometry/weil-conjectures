@@ -12,8 +12,6 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Line.TowerLineBundleClas
 import Mathlib.CategoryTheory.Adjunction.Additive
 
 /-! # The two components of the diagonal divisor Chern adjunct
-
-Source: diagonal Chern components, the Picard tensor law, and Chern pullback.
 -/
 
 @[expose] public noncomputable section
@@ -47,22 +45,7 @@ private theorem firstChern_mul (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     Preadditive.add_comp, Preadditive.comp_add]
 
 /-- Before any finite projection or completed limit, the Chern adjunct of the diagonal
-line has a base component and the specified relative hyperplane component.
-
-Source: lem-amb-p1-diagonal-chern-components, the divisor-line calculation and
-additivity of Kummer; lem-sp-tower-chern-pullback.
-(blueprint: lem-sfb-diagonal-trace-divisor-chern-adjoint).
-
-Proof: factor the diagonal Picard class as a pullback of a base line times the
-relative hyperplane line of p.model. The first Chern construction is additive:
-the Picard-to-H1 map is additive, and every exact comparison, coefficient
-extension and endpoint composition preserves the sum. Apply Chern pullback to
-the base line with p.model's normalized coefficient and root comparisons.
-It identifies that summand with pullback of its base Chern arrow followed by
-the shifted line-pullback comparison. Take adjuncts. Naturality of the adjunction
-unit makes this base summand the base Chern arrow followed by twistedUnit.
-The relative summand is chernAdjoint by its definition. No inverse splitting,
-trace, or completed diagonal arrow enters this argument. -/
+line has a base component and the specified relative hyperplane component. -/
 theorem diagonalTrace_divisorChernAdjoint_components
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

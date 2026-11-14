@@ -185,9 +185,6 @@ import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 
 /-!
 # Lisse restriction to common refinements
-
-Source: blueprint common-stratification clause (2).
-(blueprint: new-det-lem-coefficient-heart-common-stratification-lisse).
 -/
 
 @[expose] public noncomputable section
@@ -322,13 +319,7 @@ private theorem lisse_on_refined_stratum
 structure. Source: blueprint lemma-constructible-sheaves, steps (5)--(6),
 and the finite-presentation pullback and immersion-range arguments of
 `CondensedConstructibleSerre.lean` and `ProEtaleModuleLfpImmersionTransport.lean`.
-(blueprint: new-det-lem-coefficient-heart-common-stratification-lisse).
 
-Proof: base change a trivializing cover to prove that lisse modules stay lisse under any
-scheme pullback. A finite constant local model is locally finitely presented: inverse
-image from the point preserves regular modules, finite direct sums and cokernels, so it
-preserves a finite presentation. Transport the presentation across the model isomorphism
-and the normalized coefficient-pullback comparison.
 
 For a refined stratum T with image contained in an adapted stratum S, undo the
 normalized coefficient comparison to get local finite presentation over the raw

@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleSectionsTriangleNaturality
 /-! # Termwise sections and derived pullback cohomology
 
 Source: Stacks Project, Tag 03Q9, final injective-complex restriction paragraph.
-(blueprint: lem-weil-pbc-injective-sections-pullback-comparison).
 -/
 
 @[expose] public section
@@ -27,21 +26,7 @@ namespace AlgebraicGeometry.Etale
 /-- The comparison from termwise sections to stage hypercohomology is invertible,
 and intertwines both neighbourhood and cone restrictions. This theorem concerns
 only the derived-sections unit and its naturality, not derived Hom or the mate.
-Source: Stacks, Tag 03Q9, final injective-complex paragraph
-(blueprint: lem-weil-pbc-injective-sections-pullback-comparison).
-
-Proof: each stage projection to X is etale. Restriction on its small etale site
-preserves injectives, since it has an exact extension-by-zero left adjoint. Hence
-the restricted bounded-below complex is K-injective and the right-derived sections
-unit there is invertible. This proves the first assertion. Apply naturality of
-that unit to termwise sections restriction along each neighbourhood map and each
-cone leg. Deriving the sections restriction transformation gives the derived
-adjunction unit followed by Leray. Exact inverse-image localization transports
-the complex composition comparison to upperStarComp in the derived category.
-Naturality with q then gives each displayed square. At the limit use only the
-comparison unit, without assuming the pullback of J remains injective. This proves
-both squares even for nonetale cone legs. All constructions are valid in negative
-degrees and for zero complexes and empty schemes. -/
+Source: Stacks, Tag 03Q9, final injective-complex paragraph. -/
 theorem smallModel_injectiveSections_strictLocal_comparison {X S : Scheme.{v}}
     (f : X ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)

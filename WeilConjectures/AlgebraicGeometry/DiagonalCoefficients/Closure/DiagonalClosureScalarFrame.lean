@@ -11,9 +11,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Closure.DiagonalCl
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Supported.DiagonalSupportedScalarSource
 
 /-! # The scalar frame for one finite field to the algebraic closure
-
-Source: diagonal coefficient changes, paragraph (2).
-(blueprint: lem-diagonal-closure-scalar-frame).
 -/
 
 @[expose] public noncomputable section
@@ -87,20 +84,7 @@ attribute [local irreducible] spRationalTwist spQbarTwist closureLineMap
 for one finite-field inclusion into the closure. No class, trace, integration
 identity, family or compatibility between finite fields is asserted.
 
-Source: blueprint latest, sec-six-functors-basics/sk-prop-diagonal-tower/
-sk-prop-diagonal-tower-coefficients.proof.md, paragraph (2), bounded filtered colimit.
-(blueprint: lem-diagonal-closure-scalar-frame).
 
-Proof: The finite subextensions containing E form a filtered cofinal subposet.
-Their coefficient colimit is the prescribed condensed algebraic closure, and
-their root-line colimit is spQbarTwist, with exactly closureLineMap as each leg.
-Finite field extension of the rational root line is scalar extension: use finite
-freeness on each integral root level and then localization. Taking the filtered
-colimit gives the ordinary scalar-extension isomorphism from E to the closure.
-The rational root line is locally free of rank one and hence flat. The K-flat
-single-complex comparison turns the ordinary unit and line comparisons into
-Endpoint records normalized by their derived scalar/restriction adjoints.
-The regular-module endpoint is normalized scalar multiplication, at every scheme.
 
 Restriction of coefficients commutes with direct image; derive this square with
 its full universal unit, transporting the input model by its canonical functor

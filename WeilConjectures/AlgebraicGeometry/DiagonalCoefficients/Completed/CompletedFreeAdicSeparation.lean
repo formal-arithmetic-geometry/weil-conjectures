@@ -12,9 +12,6 @@ public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Completed.CompletedAffineFreeLocalDual
 
 /-! # Adic separation of sheafified free representables
-
-Source: the separation step of the completed local generator argument.
-(blueprint: lem-sfb-completed-free-adic-separation).
 -/
 
 @[expose] public noncomputable section
@@ -91,17 +88,7 @@ private theorem localDual_zero (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
 /-- A locally infinitely ell-divisible section of the free completed-coefficient
 sheaf on a pro-affine etale representable vanishes.
 
-Source: the separation step of lem-sfb-diagonal-completed-free-generator, corrected
-by restricting to the covering basis of pro-affine etale representables.
-(blueprint: lem-sfb-completed-free-adic-separation).
 
-Proof: every local linear functional into the completed ring sends the section to
-a locally infinitely divisible coefficient. Its projection to Z/l^(n+1) is zero,
-since this coefficient sheaf is killed by l^(n+1). Separatedness descends the local
-vanishing, and the projections of the defining limit jointly detect zero. Thus all
-local linear tests vanish. The local-dual detection lemma for pro-affine etale
-representables now gives the result. No countable intersection of covering sieves
-is used. The argument includes zero sections and empty test objects.
 
 The earlier version for arbitrary pro-etale representables was false: gluing two
 copies of a Boolean convergent-sequence spectrum along its isolated points gives

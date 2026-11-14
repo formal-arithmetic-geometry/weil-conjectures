@@ -27,26 +27,7 @@ attribute [local instance] finitePerfectModelsAbLocallyBijective
 /-- Uniform finite perfect local models admit compatible algebraic stalk trivializations.
 
 Source: Stacks Project, Tag 09C6, the choice of the algebraic stalk system and of
-compatible local markings, using Tags 09B1 and 09BV.
-(blueprint: lem-weil-pbc-finite-perfect-adic-tower-extraction).
-
-Proof: refine the given etale covering by connected Noetherian affine neighborhoods.
-At each finite level descend the given complex by finite-ring derived comparison.
-Its cohomology is finite locally constant and lies in the fixed interval. Full
-faithfulness descends the actual consecutive quotient maps, and their adjoint
-transposes are isomorphisms by associativity of derived tensor. Take the exact
-geometric stalk of this normalized diagram at a point of each nonempty neighborhood;
-its residue term is perfect by the prescribed perfect local model. Derived extension
-and exact restriction are adjoint, both for the base ring and consecutive quotients.
-The finite-ring local-constancy theorem identifies each descended complex locally
-with this stalk model. The finite locally constant Isom sheaves have nonempty stalks;
-the compatible finite-derived-trivialization theorem gives one pro-etale covering
-and commuting markings on it. Forgetting the quotient scalars and applying the
-normalized finite-coefficient comparisons yields an isomorphism of the entire
-restricted strict diagram with the completed constant realization of the algebraic
-system. Transitivity assembles the refinements; empty neighborhoods contribute the
-empty covering. This construction does not take a limit or choose a perfect
-representative over the base ring. -/
+compatible local markings, using Tags 09B1 and 09BV. -/
 theorem finitePerfectAdicTower_extraction
     (X : Scheme.{t}) [IsLocallyNoetherian X] [CompactSpace X]
     {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)

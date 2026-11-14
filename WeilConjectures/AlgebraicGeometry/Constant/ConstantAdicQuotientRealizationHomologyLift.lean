@@ -22,11 +22,6 @@ morphism whose cohomology maps are all isomorphisms.
 
 Source: Stacks Project, sites-modules.tex, Tags 093J and 03DH; proetale.tex,
 Tag 03Q3.
-(blueprint: lem-weil-pbc-constant-adic-quotient-realization-homology-lift).
-
-Proof: apply the point-stalk extraction theorem to obtain an algebraic
-isomorphism.  The unbounded derived isomorphism criterion identifies an
-isomorphism in the derived category with isomorphisms on every homology object.
 -/
 theorem constantAdicQuotientRealization_homology_lift
     (X Y : Scheme.{u}) (g : Y ⟶ X)

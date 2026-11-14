@@ -21,23 +21,7 @@ attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
 
 /-- The supported-source identification is the coefficient unit followed by
 direct image of the constant-to-support map. This is an ordinary module-sheaf
-identity; it involves neither a derived class nor a finite projection.
-
-Source: diagonal tower trace proof (2), composition along the diagonal and the
-coefficient-unit normalization; geometric classes proof (3), forgetting support.
-(blueprint: lem-sfb-diagonal-trace-supported-unit-normalization).
-
-Proof: apply the faithful forgetful functor to additive sheaves and postcompose
-with the inverse of a.iso. The normalization field of a identifies that inverse
-with lowerStarComp, lowerStarCongr(a.over_eq), and lowerStarId. The two coefficient
-unit maps on the left send a local section x to its pullback, first along f and
-then along the diagonal. Composition of inverse images identifies their composite
-with pullback along diagonal followed by f. Since this is the identity, the
-ordinary direct-image composition and identity comparisons send that section
-back to x. Hence the composite with a.iso.inv is the identity. Cancel the
-invertible map a.iso.inv and use faithfulness. This argument is sectionwise,
-works for every section rather than only a generator, and includes the empty
-scheme. -/
+identity; it involves neither a derived class nor a finite projection. -/
 theorem diagonalTrace_supportedUnit_normalization
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [DiagonalTraceLocalizations l (ProjectiveLine Y)]

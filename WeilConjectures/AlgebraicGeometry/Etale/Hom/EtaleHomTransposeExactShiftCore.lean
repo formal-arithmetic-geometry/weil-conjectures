@@ -64,8 +64,7 @@ The native signed exact Hom theorem and its mate evaluation identity supply
 both normalized Hom shifts. Triangulated adjunction gives exactness of scalar
 extension; the composite and opposite shift formulas give the right component
 equation and both composite triangulated structures. The omitted left component
-equation is the definitional composition formula proved in the parent module.
-(blueprint: lem-coef-etale-hom-transpose-exact-shift-core) -/
+equation is the definitional composition formula proved in the parent module. -/
 theorem etaleHomComparison_reversedExact_shiftCore
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (X : Scheme.{u}) (φ : A →+* B) (M : DerivedCategoryModule A X) :

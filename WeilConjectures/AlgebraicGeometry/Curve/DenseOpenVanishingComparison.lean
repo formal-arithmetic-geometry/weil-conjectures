@@ -23,7 +23,6 @@ import Mathlib.Data.Int.GCD
 # DenseOpenVanishingComparison
 
 Source: Stacks Project, Lemma 0GJA.
-(blueprint: lem-pbc-j2-dense-open-vanishing-comparison).
 -/
 
 @[expose] public section
@@ -155,13 +154,7 @@ private noncomputable def cohomologyIsoEquiv {X : Scheme.{u}}
   map_add' := map_add _
 
 /-- Source: Stacks Project, Lemma 0GJA, proof, with Lemma 095L.
-(blueprint: lem-pbc-j2-dense-open-vanishing-comparison).
 
-Proof: The coefficient functor E is an equivalence, so it preserves colimits and
-sheafification. Commuting E with the left Kan extensions defining inverse image and
-extension by zero identifies G with the module-valued extension by zero of F. Apply
-`dense_open_high_cohomology` to F, and compose its additive equivalences with the
-cohomology equivalences induced by this identification. This proves the first clause.
 
 The open-closed short exact sequence for the abelian sheaf P.F makes its dense-open
 counit monic. Applying the left exact coefficient functor gives a monomorphism G -> F.

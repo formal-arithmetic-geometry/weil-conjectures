@@ -12,8 +12,7 @@ import Mathlib.Algebra.Category.Grp.Biproducts
 
 /-! # Componentwise curve assertions for finite biproducts
 
-Source: Stacks Project, Theorem 03SC, proof; Lemma 0A5C
-(blueprint: theorem-cohomology-curves). -/
+Source: Stacks Project, Theorem 03SC, proof; Lemma 0A5C. -/
 
 @[expose] public section
 
@@ -134,15 +133,7 @@ namespace AlgebraicGeometry.IsCurve
 
 /-- Componentwise equivalence for the unconditional assertions of a finite sum.
 Source: Stacks Project, Theorem 03SC, proof, fourth paragraph; Lemma 0A5C.
-(blueprint: theorem-cohomology-curves).
 
-Proof: The underlying abelian-sheaf functor is additive by definition, as are
-`Sheaf.functorH` and inverse image. Apply `Functor.mapBiproduct` followed by
-`AddCommGrpCat.biproductIsoPi` to identify the cohomology of H with the finite
-product of the cohomology of G i. Its coordinates are the maps induced by
-`e.hom ≫ biproduct.π G i`. A product is subsingleton iff every factor is, and
-finite iff every factor is: evaluation is surjective since the factors contain
-zero, and a finite product of finite types is finite.
 
 Naturality `Etale.cohomologyMap_map` makes pullback a natural transformation
 between the additive cohomology functors. Surjectivity is tested in product

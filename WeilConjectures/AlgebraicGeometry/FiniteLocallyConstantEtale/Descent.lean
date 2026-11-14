@@ -23,7 +23,7 @@ Suppose that the restriction of `E` to étale `X`-schemes is represented by a fi
 (`AlgebraicGeometry.Scheme.IsUniversalSection.exists_isUniversalSection_of_isAffine`).
 
 This is the descent step in the proof that finite locally constant sheaves are represented by
-finite étale schemes (blueprint `lemma-weil-pbc-finite-locally-constant-etale-equivalence`): the
+finite étale schemes: the
 two pullbacks of `ξ` to `V ×_S X` give, by universality, the descent isomorphism
 `γ : V ×_S X ⟶ V` (the transport of the first projection to the second), which satisfies the
 counit and cocycle identities because both sides pull `ξ` back to the same section. Affine flat
@@ -171,7 +171,7 @@ sheaf of sets on the small étale site of `T`, `s : S ⟶ T` étale with `S` aff
 surjective étale with `X` affine, and `ξ` a universal section of `E` relative to `p ≫ s` along
 a finite étale `v : V ⟶ X`. Then the restriction of `E` to étale `S`-schemes is represented by a
 finite étale `S`-scheme `n : N ⟶ S`, with a universal section `ξ₀` whose pullback to
-`V = N ×_S X` is `ξ`. (blueprint: `lemma-weil-pbc-finite-locally-constant-etale-equivalence`) -/
+`V = N ×_S X` is `ξ`. -/
 theorem exists_isUniversalSection_of_isAffine [IsAffine X] [IsAffine S]
     [AlgebraicGeometry.Surjective p] [IsFinite v] (hE : Presheaf.IsSheaf T.smallEtaleTopology E) :
     ∃ (N : Scheme.{u}) (n : N ⟶ S) (_ : AlgebraicGeometry.Etale n) (_ : IsFinite n)

@@ -18,8 +18,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # Data for finite perfect quotient models
 
-Source: Stacks Tags 09C2 and 094I
-(blueprint: def-weil-pbc-finite-perfect-quotient-model-data).
+Source: Stacks Tags 09C2 and 094I.
 
 This interface records finite-level models without asserting a completed realization.
 All coefficient identifications are normalized on constant sections.
@@ -34,9 +33,7 @@ open AlgebraicGeometry.ProEtale
 namespace AlgebraicGeometry.Scheme
 
 /-- The locally bijective characterization at the actual coefficient universe.
-Source: Stacks Tag 03DA
-(blueprint: lem-weil-pbc-residue-perfect-finite-quotient-models).
-Proof: the small pro-etale site is essentially small in universe t+1. -/
+Source: Stacks Tag 03DA. -/
 theorem finitePerfectModelsAbLocallyBijective (X : Scheme.{t}) :
     (ProEt.topology X).WEqualsLocallyBijective AddCommGrpCat.{t + 1} := by
   let : EssentiallySmall.{t + 1} X.ProEt := essentiallySmallSelf.{0, t, t + 1} _
@@ -45,27 +42,23 @@ theorem finitePerfectModelsAbLocallyBijective (X : Scheme.{t}) :
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
 /-- Standard algebraic derived localization.
-Source: Stacks Tag 05RU
-(blueprint: lem-weil-pbc-residue-perfect-finite-quotient-models). -/
+Source: Stacks Tag 05RU. -/
 instance finitePerfectModelsAlgebraHasDerived (A : Type t) [CommRing A] :
     HasDerivedCategory (ModuleCat.{t} A) := HasDerivedCategory.standard _
 /-- Standard derived localization for the actual coefficient sheaves.
-Source: Stacks Tag 05RU
-(blueprint: lem-weil-pbc-residue-perfect-finite-quotient-models). -/
+Source: Stacks Tag 05RU. -/
 instance finitePerfectModelsRingHasDerived (X : Scheme.{t})
     (R : Sheaf (ProEt.topology X) RingCat.{t + 1}) :
     HasDerivedCategory (SheafOfModules.{t + 1} R) := HasDerivedCategory.standard _
 /-- Standard derived localization on each slice.
-Source: Stacks Tag 05RU
-(blueprint: lem-weil-pbc-residue-perfect-finite-quotient-models). -/
+Source: Stacks Tag 05RU. -/
 instance finitePerfectModelsSliceHasDerived (X : Scheme.{t})
     (R : Sheaf (ProEt.topology X) RingCat.{t + 1}) (U : X.ProEt) :
     HasDerivedCategory (SheafOfModules.{t + 1} (R.over U)) :=
   HasDerivedCategory.standard _
 
 /-- Apply the actual constant module functor termwise, with its universe lift.
-Source: Stacks Tags 03CY and 05RU
-(blueprint: lem-weil-pbc-residue-perfect-finite-quotient-models). -/
+Source: Stacks Tags 03CY and 05RU. -/
 def finiteModelConstantComplex (X : Scheme.{t}) (B : Type t) [CommRing B]
     [(koszulConstantFunctor X B).PreservesZeroMorphisms]
     (P : CochainComplex (ModuleCat.{t} B) ℤ) :=
@@ -75,8 +68,7 @@ def finiteModelConstantComplex (X : Scheme.{t}) (B : Type t) [CommRing B]
     koszulConstantFunctor X B).mapHomologicalComplex (.up ℤ)).obj P
 
 /-- A finite quotient admits perfect constant models in a specified interval on a chart.
-Source: Stacks Tags 094I and 09C2
-(blueprint: lem-weil-pbc-residue-perfect-finite-quotient-models). -/
+Source: Stacks Tags 094I and 09C2. -/
 def FinitePerfectModelsOn (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A)
     [∀ n : ℕ, (koszulConstantFunctor X (A ⧸ d.ideal ^ (n + 1))).PreservesZeroMorphisms]
@@ -100,8 +92,7 @@ def FinitePerfectModelsOn (X : Scheme.{t}) {A : Type t} [CommRing A]
 /-- Etale local finite-projective quotient models with one interval on each chart.
 The covering and the model at a finite level may depend on that level. This property
 asserts no compatible choice of trivializations and no completed realization.
-Source: Stacks Tags 09C2 and 094I
-(blueprint: lem-weil-pbc-residue-perfect-finite-quotient-models). -/
+Source: Stacks Tags 09C2 and 094I. -/
 def HasUniformFinitePerfectModels (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A)
     [∀ n : ℕ, (koszulConstantFunctor X (A ⧸ d.ideal ^ (n + 1))).PreservesZeroMorphisms]
@@ -116,8 +107,7 @@ def HasUniformFinitePerfectModels (X : Scheme.{t}) {A : Type t} [CommRing A]
 /-- Normalization of the finite coefficient identifications on constant sections.
 This fixes their compatibility with the quotient homomorphisms, rather than permitting
 independent identifications at different levels.
-Source: Stacks Tags 093M and 09C2
-(blueprint: lem-weil-pbc-residue-perfect-finite-quotient-models). -/
+Source: Stacks Tags 093M and 09C2. -/
 def FinitePerfectModelsNormalized (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A)
     (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶
@@ -128,8 +118,7 @@ def FinitePerfectModelsNormalized (X : Scheme.{t}) {A : Type t} [CommRing A]
         (completedAdicQuotient d n)).app U a
 
 /-- The finite comparisons preserve both quotient transitions and the scalar map.
-Source: Stacks Tags 093M and 09C6
-(blueprint: lem-weil-pbc-residue-perfect-finite-quotient-models). -/
+Source: Stacks Tags 093M and 09C6. -/
 def FinitePerfectModelsCompatible (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A)
     (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶

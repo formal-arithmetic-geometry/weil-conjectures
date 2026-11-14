@@ -32,7 +32,6 @@ constant quotient scalar comparison at the two levels with the derived
 constant realization scalar extension comparison; the quotient maps are
 identified by completion evaluation.  This statement is the coefficient-only
 part of the realization reduction and does not use an adic tower.
-(blueprint: lem-weil-pbc-constant-adic-quotient-realization-scalar-reduction).
 -/
 theorem constantAdicQuotient_realization_scalar_reduction
     (X Y : Scheme.{u}) (g : Y ⟶ X)

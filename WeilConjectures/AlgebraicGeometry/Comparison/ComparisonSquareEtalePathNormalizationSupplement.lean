@@ -22,9 +22,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategorySquarePa
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # Normalization of the etale comparison-square path under exact derivation
-
-Source: blueprint comparison-square transport, expanded proof step 4.
-(blueprint: stage3-proetale-comparison-square-etale-path-normalization)
 -/
 
 @[expose] public section
@@ -420,19 +417,7 @@ The heterogeneous equality retains the two endpoint presentations; these endpoin
 are definitionally equal. It avoids unfolding the derived functor constructions
 when joining the two normalization identities.
 Source: blueprint `stage3-proetale-comparison-square`, proof step 4; Stacks, Tag 0B65.
-(blueprint: stage3-proetale-comparison-square-etale-path-normalization)
 
-Proof: write C(F,G) for mapDerivedCategoryCompIso F G and J(f) for
-leftDerivedUpperStarIsoMapDerivedCategory at f. First expand the ordinary path as
-(se whiskered by nu_X') followed by the comparisons at g' and f. Derivation preserves
-this composite by mapDerivedCategoryNatIso_trans. Apply
-mapDerivedCategoryNatIso_isoWhiskerRight to its first and last factors and
-mapDerivedCategoryNatIso_isoWhiskerLeft to its middle factor. The equation
-mapDerivedCategoryCompIso_assoc collects the outer C factors into
-comparisonSquareSourceIso and the exact-composition part of comparisonSquareTargetIso;
-the intermediate C factors cancel with their inverses. The remaining three maps are
-D(nu_X') applied to the derived etale square, the derived edge comparison at g', and
-D(g'_proet) applied to the derived edge comparison at f.
 
 For the first map, expand se using etaleComparisonSquare and the derived square using
 Etale.pullbackSquareComparison and Etale.upperStarPlusComp. The ordinary composition

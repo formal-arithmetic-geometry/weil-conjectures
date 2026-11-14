@@ -26,19 +26,7 @@ namespace AlgebraicGeometry.Scheme
 
 
 /-- Forgetting constant-ring module structures preserves a module-sheaf colimit cocone.
-Source: Stacks Project, Tags 03CO and 03CY.
-(blueprint: lem-pbc-u2-module-sheaf-underlying-colimit)
-
-Proof: Form the colimit of the underlying module presheaves sectionwise. The forgetful
-functor from modules to abelian groups preserves these colimits: each compatible family
-of additive maps extends uniquely, and its extension commutes with scalar multiplication
-when the family is linear. Sheafify this presheaf colimit. Module sheafification and
-abelian sheafification have identical underlying abelian sheaves, since their local
-relations and gluing are the same. Therefore the sheafified underlying abelian cocone
-has the colimit universal property. Any other module colimit cocone is uniquely
-isomorphic to this one compatibly with every leg. Forget this isomorphism to transfer
-the abelian colimit property to the given cocone. This works for empty diagrams as
-well as filtered diagrams, and for the zero ring and the zero sheaf. -/
+Source: Stacks Project, Tags 03CO and 03CY. -/
 theorem moduleSheaf_underlying_isColimit
     {X : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ]
     {A : Type (u + 1)} [SmallCategory A]

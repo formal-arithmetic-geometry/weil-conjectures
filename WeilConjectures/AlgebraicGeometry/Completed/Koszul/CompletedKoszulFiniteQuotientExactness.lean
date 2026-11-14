@@ -331,12 +331,7 @@ private theorem completionComparisonIso_scalar (T : Scheme.{t})
   simpa only [quotientCommIso, Functor.preimageIso_hom, Functor.map_preimage] using h
 
 /-- Exactness of the concrete completed coefficient realization.
-Source: Stacks Project, Tags 093J--093M.
-(blueprint: new-s3-completed-koszul-finite-quotient-exactness).
-Proof: identify the lifted quotient diagram with the concrete finite-function diagram.
-The limit isomorphism preserves the prescribed scalar map, as checked on every residue.
-Noetherian completed constant coefficients are flat, so scalar extension is exact.
-Compose with exact constant module sheafification. -/
+Source: Stacks Project, Tags 093J--093M. -/
 theorem completedKoszulFiniteQuotientExactness
     (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A) :
     let E := koszulConstantFunctor T A ⋙ completedAdicScalarExtension T d

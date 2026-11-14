@@ -17,8 +17,7 @@ import WeilConjectures.AlgebraicGeometry.Finite.Clopen.FiniteClopenTailSiteTrans
 # Site comparison for the clopen alpha
 
 Source: Stacks Project, Tags 099R, 09AF and 0F7B; steps 2--4 of
-lem-cbc-finite-clopen-mate-site-transport
-(blueprint: lem-cbc-finite-clopen-alpha-site-transport).
+lem-cbc-finite-clopen-mate-site-transport.
 -/
 
 @[expose] public noncomputable section
@@ -333,14 +332,8 @@ private theorem sheaf_alpha_transport
 
 /-- Exact etale/pro-etale comparison respects the prescribed clopen alpha.
 Source: Stacks Project, proetale.tex Tags 099R and 09AF, and more-etale.tex
-Tag 0F7B (blueprint: lem-cbc-finite-clopen-alpha-site-transport).
+Tag 0F7B.
 
-Proof: write b and q for the projections of W ×_T S, and s for the clopen lift
-of (k,r). First compare the inverse cartesian open base-change maps by transposing
-under extension by zero along b. Both transposes are pullbacks of the open unit
-along q followed by the cartesian inverse-image compositor. The canonical open
-comparison carries this unit to the pro-etale unit, and pullback comparison respects
-the compositor. Injectivity of transpose identifies these specific maps.
 
 Next, on the disjoint opens s(V) and its complement in W ×_T S, the projection is
 identity and zero respectively. The sheaf axiom for this two-member disjoint open

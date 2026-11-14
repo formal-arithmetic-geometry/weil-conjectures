@@ -167,7 +167,6 @@ import WeilConjectures.AlgebraicGeometry.Finite.FiniteCohomologicalDimensionDire
 Source: Stacks Project, etale-cohomology.tex, Tag 0F11(1), extended to objects
 annihilated by a fixed positive integer over arbitrary constant coefficients;
 sites-cohomology.tex, Tag 0D6J(3), comparison after forgetting coefficients.
-(blueprint: lem-sf-fixed-exponent-derived-coproducts).
 -/
 
 @[expose] public section
@@ -368,33 +367,7 @@ by one fixed positive integer. The coefficient ring is arbitrary. The comparison
 corresponding coprojection (`Limits.ι_comp_sigmaComparison`). Empty families are allowed.
 
 Source: Stacks Project, Tags 0F11(1), 0D6J(3), and the divisibility argument in
-Tag 0DD7. The fixed-annihilator extension uses the dual kernel construction below.
-(blueprint: lem-sf-fixed-exponent-derived-coproducts).
-
-Proof:
-1. Ordinary coefficient forgetting preserves coproducts. Its exact derived functor
-therefore preserves them too. The unbounded abelian comparison, applied to the square
-with identity vertical maps, identifies forgotten module direct image with abelian
-direct image and makes derived forgetting conservative.
-2. For an abelian derived object A killed by n, choose a representative I with
-injective terms. Apply coinduction Hom(Z/n,-) termwise, obtaining a Z/n complex L.
-The counit U(L) -> I identifies its terms with the kernels of n on I. Injective
-abelian sheaves are divisible, so 0 -> U(L) -> I --n--> I -> 0 is short exact.
-3. In its derived triangle the second map is zero, since QI is isomorphic to A.
-Exactness of the representable functor lifts the identity of QI through the first
-map. Thus A is a retract of the underlying abelian object of QL. This is the dual
-of the split quotient-cone argument and needs no K-flat resolution or coefficient
-ring-sheaf equivalence.
-4. Apply 0F11(1) to the family QL_i. The natural coefficient comparisons and Step 1
-identify its invertible coproduct comparison with the abelian comparison on U QL_i.
-5. Naturality of the coproduct comparison in the inclusion and retraction maps makes
-its value on A_i a retract of that invertible comparison. The explicit inverse is
-Rf_*(sum j_i), followed by the inverse comparison, followed by sum Rf_*(r_i).
-The two inverse identities use the two naturality squares and j_i followed by r_i
-being the identity.
-6. Step 1 for the original coefficient ring reflects this abelian coproduct property
-back to the stated module comparison. All coprojections are preserved throughout.
-The construction includes empty families and n=1, without any boundedness assumption. -/
+Tag 0DD7. The fixed-annihilator extension uses the dual kernel construction below. -/
 theorem isIso_sigmaComparison_rightDerivedLowerStar_of_fixedExponent
     (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)
     [QuasiCompact f] [QuasiSeparated f]

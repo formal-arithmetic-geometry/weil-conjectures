@@ -129,16 +129,7 @@ private lemma derived_square_mate_units
     ((R.mapHomotopyCategory (.up ℤ)).obj N) _
 
 /-- Right derivation computes the mate of inverse sum exchange from its sheaf mate.
-Source: Stacks Project, Tag 0F7F; the derived-adjunction factorization equations
-(blueprint: lem-pur-cartesian-sum-mate-units).
-
-Proof: conjugate the sheaf base-change isomorphism through the composite
-adjunctions. The leftAdjointUniq unit equation and iterated-mates identity identify
-its inverse with inverse sum exchange. Exact localization preserves that inverse
-mate. The factorization theorem for exact derived squares then computes its
-forward mate using the ordinary sheaf mate and the two right-derived units.
-Cancel only the exact-functor localization isomorphisms. This needs no properness,
-Noetherianity, compactification, boundedness or finiteness of coefficients. -/
+Source: Stacks Project, Tag 0F7F; the derived-adjunction factorization equations. -/
 theorem cartesian_sum_mate_units
     (A : Type (u + 1)) [CommRing A]
     {W Y' Z Y : Scheme.{u}}

@@ -13,7 +13,6 @@ import WeilConjectures.FromJoel.Algebra.Homology.Embedding.ExtendMap
 
 Source: Stacks Project, Tag 01EQ, resolution computation of global cohomology,
 and Mathlib's InjectiveResolution.extEquivCohomologyClass.
-(blueprint: lem-pc-abelian-cech-ext-section-iso)
 -/
 
 @[expose] public section
@@ -76,24 +75,7 @@ private noncomputable def extendedSectionIso {X : Scheme.{u}}
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Ext cohomology is the homology of the section complex, with compatible representatives.
-Source: Stacks 01EQ, resolution computation; Mathlib InjectiveResolution.Ext.
-(blueprint: lem-pc-abelian-cech-ext-section-iso)
-
-Proof: Apply extAddEquivCohomologyClass to the constant integral sheaf and I.
-In every degree the constant-sheaf adjunction followed by evaluation at 1
-identifies morphisms from this sheaf with sections over the terminal open.
-The inverse sends a section s to the additive map n ↦ n • s and then applies
-the inverse adjunction. Naturality of the adjunction shows these mutually
-inverse additive maps commute with the resolution differentials. Thus they
-identify cycles and boundaries, inducing an additive isomorphism on homology.
-Compose it with the Ext equivalence and convert the additive equivalence to
-an AddCommGrpCat isomorphism. For t choose a cocycle using extMk_surjective;
-the corresponding section is a cycle by differential compatibility. Its
-cycle lift z exists by the kernel universal property. The formula for extMk
-under extEquivCohomologyClass gives e(t) = homologyπ(z). This also proves that
-the representative condition determines e on every class, independently of
-choices. In degree zero boundaries vanish; zero sheaves and empty spaces give
-zero groups. No open cover or finiteness assumption occurs in this assertion. -/
+Source: Stacks 01EQ, resolution computation; Mathlib InjectiveResolution.Ext. -/
 theorem abelianCechExtSectionIso_exists
     {X : Scheme.{u}}
     {F : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}}

@@ -35,17 +35,7 @@ variable (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
 /-- The integral image of a scalar-reduced arrow is its actual finite root projection.
 This concerns every completed arrow, without any Chern or Kummer hypothesis.
 
-Source: blueprint latest, diagonal tower coefficient changes proof (1), integral and
-uniformizer reduction; diagonal tower trace proof (1), the normalized section endpoints.
-(blueprint: lem-diagonal-local-chern-integral-projection).
 
-Proof: compose the completed-realization equivalence, the integral scalar adjunction,
-the quotient scalar adjunction and the finite-realization equivalence. Transpose the
-realized target endpoint through these actual adjunctions. The Endpoint.normalization
-fields identify each scalar transpose with its specified ordinary semilinear insertion;
-the equivalence triangle identifies the last transpose with the ordinary finite root
-insertion. Exact-single composition coherence and the adjunction-induced shifts give
-the corresponding formula in degree two.
 
 Forget these ordinary insertions to abelian sheaves. CompletedRealization.line_normalization
 identifies the first map with the bottom integral root map. The integral-root transition

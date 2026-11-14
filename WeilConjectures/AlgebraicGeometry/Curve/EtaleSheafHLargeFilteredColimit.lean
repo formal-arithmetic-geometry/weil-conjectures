@@ -28,7 +28,7 @@ namespace AlgebraicGeometry.Scheme
 /-- Large-universe filtered-colimit continuity for the derived etale cohomology functor.
 Source: Stacks Project, Tags 03Q5 and 0739; the same finite-cover and injective-resolution
 argument as the small-index theorem, with the index category in `Type (u + 1)`.
-(blueprint: lem-pbc-u2-sheafH-large-filtered-colimit-derived)
+(H-large-filtered-colimit-derived)
 
 The proof repeats the filtered-colimit continuity argument while tracking the larger
 indexing universe. This intermediate result is isolated so the Ext comparison can be
@@ -50,7 +50,7 @@ theorem etaleCohomology_isColimit_large_filtered
   obtain ⟨hH⟩ := etaleCohomology_isColimit_of_isDirected X hF q
   exact ⟨Functor.Final.isColimitWhiskerEquiv F _ hH⟩
 
-/-- (blueprint: lem-pbc-u2-sheafH-large-filtered-colimit) -/
+/-- (H-large-filtered-colimit) -/
 theorem sheafH_isColimit_large_filtered
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
     {A : Type (u + 1)} [SmallCategory A] [IsFiltered A]

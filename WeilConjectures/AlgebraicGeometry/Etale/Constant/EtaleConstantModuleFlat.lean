@@ -34,23 +34,7 @@ attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimi
 
 /-- Flatness is unchanged by extending constant scalars and the canonical ring transport.
 Source: Stacks Project, Modules on Sites, Sections 03EK and 03ER, together with the
-constant-scalar equivalence in Sections 093I and 03CV
-(blueprint: lem-pur-etale-constant-module-flat).
-
-Proof: for module-valued sheaves F and G, the sectionwise balanced map into the tensor
-of their realizations sends x tensor y to x tensor y. Locally a section of the constant
-ring sheaf is represented by a constant scalar. Consequently balancing by its sections
-imposes exactly the locally constant scalar relations already satisfied by the
-sheafification of the tensor over A. Sheafification's universal property gives inverse
-maps between these tensors. Both composites are identities on pure tensors, and hence
-on the sheafifications. These maps are natural in G. Canonical ring-isomorphism
-transport also preserves this tensor comparison, by the same balanced universal
-property. The realization is an equivalence, so it preserves and reflects finite limits
-and finite colimits. Thus its tensor comparison identifies exactness of right tensor by
-F with exactness of siteSheafTensorRight by its realization. Symmetry of the tensor
-identifies left and right tensor exactness, so this is precisely ObjectProperty.flat F.
-This works for the zero ring and the empty scheme: the same universal properties and
-sheafification, including empty covering sieves, still apply. -/
+constant-scalar equivalence in Sections 093I and 03CV. -/
 theorem etaleConstantModule_flat_iff (T : Scheme.{u}) (A : Type (u + 1)) [CommRing A]
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) :
     ObjectProperty.flat F ↔

@@ -17,9 +17,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Scalar.DiagonalSca
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Scalar.DiagonalScalarRationalStage
 
 /-! # Propagation of diagonal pullback through scalar extensions
-
-Source: diagonal coefficient changes, paragraphs (1)--(3).
-(blueprint: lem-diagonal-scalar-pullback-compatibility).
 -/
 
 @[expose] public noncomputable section

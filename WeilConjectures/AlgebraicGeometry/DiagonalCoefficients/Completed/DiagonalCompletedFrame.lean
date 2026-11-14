@@ -14,9 +14,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Completed.Complete
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Integral.DiagonalIntegralRootMap
 
 /-! # Normalized coefficient equivalences before transporting a diagonal class
-
-Source: diagonal tower coefficient changes, paragraph (1).
-(blueprint: lem-diagonal-completed-frame).
 -/
 
 @[expose] public noncomputable section
@@ -32,17 +29,14 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 
 /-- The fixed canonical right-derived condensed Z_l direct image.
-Source: Stacks Tag 070G and the coefficient comparison.
-(blueprint: lem-diagonal-completed-frame). -/
+Source: Stacks Tag 070G and the coefficient comparison. -/
 abbrev condensedDiagonalRightDerived (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} (f : X ⟶ S) :=
   canonicalDiagonalRightDerived
     (CondensedRing.lowerStar (Profinite.continuousMapRingObj.{u} ℤ_[l]) f)
 
 /-- Coefficient equivalences, canonical direct-image squares, and supported-source
-comparisons. This data contains no class, trace, or integration assertion.
-Source: blueprint coefficient changes, paragraph (1).
-(blueprint: lem-diagonal-completed-frame). -/
+comparisons. This data contains no class, trace, or integration assertion. -/
 structure CompletedFrame (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [DiagonalTraceLocalizations l Y]
     [DiagonalTraceLocalizations l (ProjectiveLine Y)]
@@ -120,27 +114,7 @@ structure CompletedFrame (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
               sourceIso.hom) = eP.singleUnit l (ProjectiveLine Y) ≫ support₂.hom
 
 /-- Construct the normalized coefficient equivalences and their direct-image
-squares, independently of any diagonal class or integration identity.
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-diagonal-tower/
-sk-prop-diagonal-tower-coefficients.proof.md, paragraph (1), initial coefficient
-identification. (blueprint: lem-diagonal-completed-frame).
-
-Proof: Identify the completed ring with the limit of finite constant rings and
-then with the pulled-back condensed Z_l ring, using its specified projections.
-The equivalence between internal module objects and sectionwise module sheaves
-and transport along that ring isomorphism give eY, eP, eW. Their underlying
-sheaves are unchanged. The regular and line comparisons are normalized by the
-coefficient and root projections. Choose the canonical right derived functors
-with their universal units. The ordinary direct-image squares are identity on
-underlying sheaves; exact equivalences transport K-injective computations and
-uniquely determine the derived squares on their full universal units. The
-supported source is the direct image of the regular module along the diagonal.
-Composition of direct images and the equation p_i Delta = id give its normalized
-ordinary source isomorphism. This source is acyclic because the closed immersion
-is exact and its composite with p_i is the identity. Naturality of the universal
-unit on the single supported source gives source₁ and source₂. No class or trace
-is chosen in this construction; they will be transported through this frame. -/
+squares, independently of any diagonal class or integration identity. -/
 theorem diagonalCompleted_frame
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)] [IsNoetherian (diagonalSurface Y)]

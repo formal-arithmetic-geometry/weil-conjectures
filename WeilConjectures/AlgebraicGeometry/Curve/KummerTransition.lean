@@ -39,8 +39,7 @@ variable (X) in
 /-- The `d`-th power map `μ_{m'} ⟶ μ_m`, `z ↦ z ^ d`, of étale sheaves of roots of unity, for
 `m' = m d`: the restriction of the `d`-th power map `d • 𝟙` of `𝔾ₘ`. For a prime `l` the maps
 `μ_{lⁿ⁺¹} ⟶ μ_{lⁿ}` (`AlgebraicGeometry.Scheme.rootsOfUnityPowMap l (pow_succ l n).symm`) are the
-transition maps of the system `(μ_{lⁿ}, z ↦ z ^ l)` defining `ℤ_l(1)`
-(blueprint: `proposition-kummer-duality-integral-tate-module`). -/
+transition maps of the system `(μ_{lⁿ}, z ↦ z ^ l)` defining `ℤ_l(1)`. -/
 noncomputable def rootsOfUnityPowMap {m m' : ℕ} (d : ℕ) (h : m * d = m') :
     X.rootsOfUnitySheaf m' ⟶ X.rootsOfUnitySheaf m :=
   kernel.lift _ (kernel.ι (m' • 𝟙 X.gmSheaf) ≫ (d • 𝟙 X.gmSheaf)) (by

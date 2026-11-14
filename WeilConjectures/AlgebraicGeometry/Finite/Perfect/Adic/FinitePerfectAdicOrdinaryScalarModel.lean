@@ -26,13 +26,6 @@ consecutive coefficient restriction. This is an assertion in abelian categories 
 
 Source: Stacks Project, Modules on Sites, Tags 093J and 093M; Tag 03CY for associated
 module sheafification and Cohomology on Sites, Tag 06YY for scalar composition.
-(blueprint: lem-weil-pbc-finite-perfect-adic-ordinary-scalar-model).
-
-Proof: first use the rank-one quotient comparison and its consecutive compatibility,
-then extend the square to arbitrary quotient modules by exactness, coproducts and a
-finite free presentation.  No derived category, algebraic tower, or perfectness
-assumption is used.  Zero rings, zero modules and empty charts are covered by the
-same exact functor argument.
 -/
 theorem finitePerfectAdicOrdinaryScalar_model
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)

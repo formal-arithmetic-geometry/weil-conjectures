@@ -102,9 +102,7 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y)
   (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
   (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ S)
 
-/-- Naturality of the given normalized total comparison.
-Source: RingIsoTensorTransport.total_naturality
-(blueprint: lem-pbc-coefficient-restriction-tensor-iso-naturality). -/
+/-- Naturality of the given normalized total comparison. -/
 theorem tensorIso_naturality (o : SheafOfModules.RingIsoTensorTransport
     (J := ProEt.topology X)
     (R := (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R) (S := S) c)

@@ -70,9 +70,7 @@ cokernels of monomorphisms. A short exact sequence `0 ⟶ M₁ ⟶ M₂ ⟶ M₃
 class is surjective on the sections over the affine opens `f ⁻¹ᵁ V`, `V` affine in `T`, so `f_*`
 keeps it short exact; hence `ℱ` is `f_*`-acyclic by dimension shifting
 (`CategoryTheory.Functor.rightAcyclic_of_epi_map_g`). This is the vanishing of
-`H^q(f⁻¹ V, ℱ)` for the affine schemes `f⁻¹ V` of the blueprint proof, in Čech form.
-
-(blueprint: `lem-pc-affine-morphism-hi`) -/
+`H^q(f⁻¹ V, ℱ)` for the affine schemes `f⁻¹ V` of the blueprint proof, in Čech form. -/
 theorem isZero_higherDirectImage_of_isAffineHom (f : X ⟶ T) [IsAffineHom f]
     [HasInjectiveResolutions X.Modules] (ℱ : X.Modules)
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] {q : ℕ} (hq : 0 < q) :
@@ -93,9 +91,7 @@ theorem isZero_higherDirectImage_of_isAffineHom (f : X ⟶ T) [IsAffineHom f]
 `ℱ` quasi-coherent, `f_* ℱ` is quasi-coherent: for an affine open `V` of `T` and `g ∈ Γ(T, V)`,
 the preimage `f ⁻¹ᵁ V` is affine with `f ⁻¹ᵁ D(g) = D(f^♯ g)`, so `Γ(D(g), f_* ℱ)` is the
 localization of `Γ(V, f_* ℱ) = Γ(f ⁻¹ᵁ V, ℱ)` at `g`
-(`AlgebraicGeometry.Scheme.Modules.isQuasicoherent_of_forall_isAffineOpen`).
-
-(blueprint: `lem-pc-affine-morphism-hi`) -/
+(`AlgebraicGeometry.Scheme.Modules.isQuasicoherent_of_forall_isAffineOpen`). -/
 theorem isQuasicoherent_pushforward_of_isAffineHom (f : X ⟶ T) [IsAffineHom f] (ℱ : X.Modules)
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] :
     ((pushforward f).obj ℱ).IsQuasicoherent := by

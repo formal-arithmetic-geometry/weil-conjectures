@@ -22,18 +22,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- The horizontal part of the total differential kills the coefficient augmentation.
-Source: Stacks Project, Tag 01EQ, Lemma 20.11.2, augmentation beta.
-(blueprint: lem-pbc-etale-additive-cech-beta-closed)
-
-Proof: Test the horizontal differential on each tuple projection. Its alternating
-sum restricts each face coordinate. Naturality of restrictFunctorΓ.inv identifies
-restriction of a structural section with the section on the smaller open subscheme.
-Naturality of I.ι.f 0 moves that restriction past the resolution augmentation.
-Additivity distributes the augmentation and universe lift across the finite
-alternating sum. Thus the horizontal differential equals the coefficient map
-applied to the differential of the included cycle, which is zero by iCycles_d.
-The total inclusion preserves zero. No covering condition is used; empty products
-and repeated or empty intersections obey the same naturality calculation. -/
+Source: Stacks Project, Tag 01EQ, Lemma 20.11.2, augmentation beta. -/
 private theorem etaleAdditiveCech_beta_horizontal
     {X : Scheme.{u}} {ι : Type u} [Finite ι] (U : ι → X.Opens)
     (I : InjectiveResolution X.etaleAdditiveSheaf) (n : ℕ)
@@ -163,17 +152,7 @@ private theorem etaleAdditiveCech_beta_horizontal
 
 
 /-- The vertical part of the total differential kills the coefficient augmentation.
-Source: Stacks Project, Tag 01EQ, Lemma 20.11.2, augmentation beta.
-(blueprint: lem-pbc-etale-additive-cech-beta-closed)
-
-Proof: Use ι_D₂ and d₂_eq to express the composite with the vertical total
-differential as the signed inclusion of the resolution differential. Test the
-Čech product on tuple projections. Its coordinate is the structural section,
-lifted by ULift, mapped first by I.ι.f 0 and then by I.cocomplex.d 0 1.
-The composite is zero by I.ι_f_zero_comp_complex_d, evaluated at the open
-subscheme. Every projection is zero, so product extensionality gives zero.
-The signed total inclusion sends zero to zero. This holds for arbitrary cochains,
-including degree zero, empty index families, and empty or repeated intersections. -/
+Source: Stacks Project, Tag 01EQ, Lemma 20.11.2, augmentation beta. -/
 private theorem etaleAdditiveCech_beta_vertical
     {X : Scheme.{u}} {ι : Type u} [Finite ι] (U : ι → X.Opens)
     (I : InjectiveResolution X.etaleAdditiveSheaf) (n : ℕ)
@@ -234,18 +213,7 @@ private theorem etaleAdditiveCech_beta_vertical
 
 
 /-- The coefficient augmentation sends cycles to elements killed by the total differential.
-Source: Stacks Project, Tag 01EQ, Lemma 20.11.2, augmentation beta.
-(blueprint: lem-pbc-etale-additive-cech-beta-closed)
-
-Proof: Identify the unit module on each finite open intersection with its additive
-structural sections using restrictFunctorGamma and lift by ULift. Naturality of
-this identification and of the resolution augmentation identifies the horizontal
-differential of beta(z) with beta of the coefficient differential of z, hence zero.
-The vertical differential is zero because the resolution augmentation is killed
-by its first differential. The total differential is the sum of these two
-components, with the standard sign on the vertical component, so it vanishes.
-The argument applies in degree zero and to empty or repeated intersections; it
-does not require a covering or an affine acyclicity hypothesis. -/
+Source: Stacks Project, Tag 01EQ, Lemma 20.11.2, augmentation beta. -/
 theorem etaleAdditiveCech_beta_closed
     {X : Scheme.{u}} {ι : Type u} [Finite ι] (U : ι → X.Opens)
     (I : InjectiveResolution X.etaleAdditiveSheaf) (n : ℕ)

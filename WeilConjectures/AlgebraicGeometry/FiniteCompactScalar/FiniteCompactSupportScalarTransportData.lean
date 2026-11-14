@@ -21,7 +21,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
 
 Source: Stacks Tags 0GL6 and 09AL; the scalar-mate compatibility of the etale and
 pro-etale comparisons, followed by the normalized intrinsic realization.
-(blueprint: lem-finite-compact-support-scalar-transport).
 -/
 
 @[expose] public noncomputable section

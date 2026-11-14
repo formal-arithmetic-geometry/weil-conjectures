@@ -15,8 +15,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 /-!
 # Identity normalization of an exact compact-support unit
 
-Source: Stacks Project, Tags 0F7I, 0F7K and 015F
-(blueprint: lem-sfb-exact-compactification-unit-identity).
+Source: Stacks Project, Tags 0F7I, 0F7K and 015F.
 -/
 
 @[expose] public section
@@ -29,22 +28,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The normalized exact derived unit at the proper identity compactification has the
 canonical identity normalization.
-Source: Stacks Project, Tags 0F7I, 0F7K and 015F
-(blueprint: lem-sfb-exact-compactification-unit-identity).
-
-Proof: every compactification of the identity has a clopen source open, so its sheaf
-inclusion into ordinary direct image is invertible. Normalize the given exact functor
-against each such inclusion and descend its compactification unit. The finite proper
-identity compactification gives an invertible unit, and refinement compatibility transfers
-invertibility to every compactification. Their inverse comparisons therefore form a
-compatible family, agreeing with the supplied comparison at the proper identity.
-Apply the composition theorem to the identity twice, with the sheaf multiplication
-F(F(M)) -> F(M) obtained from the given isomorphism F -> id. Exact-derived composition
-naturality identifies its derived multiplication with whiskering by D(F) of the derived
-isomorphism D(F) -> id. The existing left unit law for unbounded compact support and
-naturality of this latter isomorphism identify the two identity comparisons after applying
-the faithful functor R(id)!. Cancel its invertible comparison to conclude equality.
-Refinement compatibility transports back to the proper identity compactification. -/
+Source: Stacks Project, Tags 0F7I, 0F7K and 015F. -/
 theorem exactCompactificationUnit_identity
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (X : Scheme.{u}) [IsNoetherian X]

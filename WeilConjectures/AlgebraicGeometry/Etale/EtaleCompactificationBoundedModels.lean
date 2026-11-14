@@ -42,7 +42,7 @@ set_option linter.privateModule false
 /-! # Bounded models for an etale compactification
 
 Source: Stacks Project, Tag 0GL6, bounded-model preparation using the prescribed
-etale compact-support normalization (blueprint: lem-sp-etale-compactification-bounded-models).
+etale compact-support normalization.
 -/
 
 @[expose] public section

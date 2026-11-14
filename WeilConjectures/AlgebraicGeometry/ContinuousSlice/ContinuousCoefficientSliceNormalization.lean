@@ -145,8 +145,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-! # Normalized continuous coefficient restriction to a pro-etale slice
 
 Source: Bhatt--Scholze, Definition 6.8.1, Lemma 6.8.2, paragraph before Definition
-6.8.6 and Remark 6.8.15; Stacks, Tags 00VC, 00XZ, 03EL, 06YY and 0G7E
-(blueprint: lem-per-continuous-coefficient-slice-normalization).
+6.8.6 and Remark 6.8.15; Stacks, Tags 00VC, 00XZ, 03EL, 06YY and 0G7E.
 -/
 
 @[expose] public noncomputable section
@@ -165,8 +164,7 @@ namespace AlgebraicGeometry.Scheme.ContinuousSlice
 
 /-- Literal module restriction along composition with a site object. The scalar ring
 is the literal restriction of R; both sections and morphisms are precomposed.
-Source: Stacks 00XZ and 03EL
-(blueprint: lem-per-continuous-coefficient-slice-normalization). -/
+Source: Stacks 00XZ and 03EL. -/
 def modules {X : Scheme.{u}} (U : X.ProEt)
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :
     pbcModules X R ⥤ pbcModules U.left
@@ -204,13 +202,7 @@ private theorem exact_moduleRestriction
   rfl
 
 /-- Exactness of literal restriction, including nonnoetherian U.
-Source: Stacks 00XZ, 03EL and 03CZ
-(blueprint: lem-per-continuous-coefficient-slice-normalization).
-Proof: the forgetful functor to module presheaves reflects finite limits, and
-presheaf restriction preserves them. Composition with U is cocontinuous and left
-adjoint to base change, giving the left-adjoint property of module restriction
-and preservation of colimits. Additivity is checked on sections. No coefficient
-flatness, boundedness or noetherian hypothesis on U is used. -/
+Source: Stacks 00XZ, 03EL and 03CZ. -/
 theorem modules_exact {X : Scheme.{u}} (U : X.ProEt)
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :
     (modules U R).Additive ∧ PreservesFiniteLimits (modules U R) ∧
@@ -224,33 +216,28 @@ theorem modules_exact {X : Scheme.{u}} (U : X.ProEt)
     (MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ U.hom U.prop trivial).isLeftAdjoint
   exact exact_moduleRestriction (F := G) (𝟙 _)
 
-/-- The additive structure supplied by exact restriction. Source: Stacks 03EL
-(blueprint: lem-per-continuous-coefficient-slice-normalization). -/
+/-- The additive structure supplied by exact restriction. Source: Stacks 03EL. -/
 instance modules_additive {X : Scheme.{u}} (U : X.ProEt)
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) : (modules U R).Additive :=
   (modules_exact U R).1
 
-/-- Finite limits preserved by restriction. Source: Stacks 03EL
-(blueprint: lem-per-continuous-coefficient-slice-normalization). -/
+/-- Finite limits preserved by restriction. Source: Stacks 03EL. -/
 instance modules_limits {X : Scheme.{u}} (U : X.ProEt)
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :
     PreservesFiniteLimits (modules U R) := (modules_exact U R).2.1
 
-/-- Finite colimits preserved by restriction. Source: Stacks 03EL
-(blueprint: lem-per-continuous-coefficient-slice-normalization). -/
+/-- Finite colimits preserved by restriction. Source: Stacks 03EL. -/
 instance modules_colimits {X : Scheme.{u}} (U : X.ProEt)
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :
     PreservesFiniteColimits (modules U R) := (modules_exact U R).2.2
 
-/-- Unbounded derived restriction is exact termwise restriction. Source: Stacks 03EL
-(blueprint: lem-per-continuous-coefficient-slice-normalization). -/
+/-- Unbounded derived restriction is exact termwise restriction. Source: Stacks 03EL. -/
 def derived {X : Scheme.{u}} (U : X.ProEt)
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :=
   (modules U R).mapDerivedCategory
 
 /-- The coefficient identification is the identity on continuous functions on V.
-Source: Bhatt--Scholze 6.8.1; Stacks 00XZ
-(blueprint: lem-per-continuous-coefficient-slice-normalization). -/
+Source: Bhatt--Scholze 6.8.1; Stacks 00XZ. -/
 def ring {X : Scheme.{u}} (U : X.ProEt) (T : Type (u + 1))
     [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] :
     (AlgebraicGeometry.ProEtale.localizationRestriction CommRingCat.{u + 1}
@@ -261,8 +248,7 @@ def ring {X : Scheme.{u}} (U : X.ProEt) (T : Type (u + 1))
 
 /-- Actual inverse image is normalized by its Kan coprojections and sheafification
 unit, and its coefficient structural map becomes the identity on the same V.
-Source: Bhatt--Scholze 6.8.1; Stacks 00VC and 00XZ
-(blueprint: lem-per-continuous-coefficient-slice-normalization). -/
+Source: Bhatt--Scholze 6.8.1; Stacks 00VC and 00XZ. -/
 structure Coefficients {X : Scheme.{u}} (U : X.ProEt) where
   sets : ProEtaleObjectRestrictionComparison U (Type (u + 1))
   groups : ProEtaleObjectRestrictionComparison U AddCommGrpCat.{u + 1}
@@ -334,8 +320,7 @@ private theorem coefficients_exists {X : Scheme.{u}} (U : X.ProEt) :
 
 /-- The residue projections to the actual finite constant sheaves, using the canonical
 constant-function comparison, not an arbitrary identification of the quotient.
-Source: Bhatt--Scholze 6.8.1--6.8.2
-(blueprint: lem-per-continuous-coefficient-slice-normalization). -/
+Source: Bhatt--Scholze 6.8.1--6.8.2. -/
 def residue (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u}) (n : ℕ) :
     integralCoefficientSheaf l X E ⟶ (finiteCoefficientTower l X E).obj (op n) :=
@@ -367,8 +352,7 @@ private theorem constantComparison_pullback (T : Type (u + 1))
   exact (congrArg (fun f ↦ f.app ((proEtaleBaseChange h).op.obj U)) hz).symm
 
 /-- The completed and localized coefficient identifications with their canonical projections.
-Source: Bhatt--Scholze 6.8.2
-(blueprint: lem-per-continuous-coefficient-slice-normalization). -/
+Source: Bhatt--Scholze 6.8.2. -/
 structure Completion (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u}) where
   integral : integralCoefficientSheaf l X E ≅ finiteCoefficientLimit l X E
@@ -448,8 +432,7 @@ private theorem exactExtensionDerived {Y : Scheme.{u}}
 
 /-- Restricting an ambient derived tensor pullback is scalar extension on the restricted
 inverse image. The counit equation specifies the comparison on K-flat representatives.
-Source: Stacks 03EL, 06YS, 0G7E and 06YY
-(blueprint: lem-per-continuous-coefficient-slice-normalization). -/
+Source: Stacks 03EL, 06YS, 0G7E and 06YY. -/
 structure Ambient {X Y : Scheme.{u}} (f : Y ⟶ X) (U : Y.ProEt)
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
     (S : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
@@ -496,8 +479,7 @@ structure Ambient {X Y : Scheme.{u}} (f : Y ⟶ X) (U : Y.ProEt)
 
 /-- The ambient formula after the actual geometric inverse image. This is obtained by
 whiskering the counit-normalized scalar comparison, so it is fixed on representatives.
-Source: Stacks 06YY and 03EL
-(blueprint: lem-per-continuous-coefficient-slice-normalization). -/
+Source: Stacks 06YY and 03EL. -/
 def Ambient.pullback {X Y : Scheme.{u}} {f : Y ⟶ X} {U : Y.ProEt}
     {R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
     {S : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}}

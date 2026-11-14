@@ -147,8 +147,6 @@ import WeilConjectures.CategoryTheory.ModuleObjects.ChangeOfScalarsSquare
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.OpenClosed
 
 /-! # Ordinary scalar extension and canonical locally closed extension
-
-Source: blueprint integral-models-generators proof (1), rationalization of the extensions.
 -/
 
 @[expose] public noncomputable section
@@ -249,7 +247,6 @@ No flatness or lisseness is needed for this comparison.
 
 Source: blueprint integral-models-generators proof (1), final scalar-extension identity;
 Stacks Project, Tags 03DI, 03DJ and 09BM.
-(blueprint: lem-sfb-condensed-locally-closed-scalar-extension).
 
 Proof. For an open immersion use the scalar/open-extension adjunction comparison
 `CondensedRing.openImmersionShriekIso`. For the closed factor, form the scalar/direct-image

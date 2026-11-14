@@ -9,10 +9,6 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.D
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Conservative
 
 /-! # Cover detection for condensed module isomorphisms
-
-Source: latest blueprint, sec-fourier-transform/sk-lem-as-properties,
-lemma-artin-schreier-character-sheaf, proof Step 5, sheaf descent
-(blueprint: lem-fd-as-trace-tensor-add-descent).
 -/
 
 @[expose] public noncomputable section
@@ -24,16 +20,7 @@ open AlgebraicGeometry.ProEtale
 namespace AlgebraicGeometry.ArtinSchreierTrace
 
 /-- A morphism of condensed module sheaves which becomes invertible on a pro-etale cover
-is an isomorphism.
-Source: the equalizer descent clause of the sheaf tensor structure, as used in
-blueprint lemma-artin-schreier-character-sheaf, proof Step 5 (blueprint:
-lem-fd-as-trace-tensor-add-descent).
-
-Proof: apply the local isomorphism criterion for sheaves of modules to the underlying
-abelian-sheaf morphism.  The cover maps are jointly conservative, so the local inverses
-and the two inverse identities descend through the equalizer diagrams.  The resulting
-inverse is a morphism of module objects because the module equalizer is created by the
-underlying sheaf. -/
+is an isomorphism. -/
 theorem condensedArtinSchreier_tensor_add_of_local_map
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]

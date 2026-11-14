@@ -23,8 +23,7 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Perfect
 # Bounded constructible derived comparison for arbitrary finite rings
 
 Source: Stacks Project, Tag 09AL, lemma-compare-constructible-derived, and its exact
-cohomology comparison, with the blueprint's global finite-stratification convention
-(blueprint: lem-weil-pbc-finite-ring-constructible-derived-origin).
+cohomology comparison, with the blueprint's global finite-stratification convention.
 
 The induced equivalence is stated by its equivalent full-faithfulness and essential-image
 criterion. The functor is the specified exact inverse image, in the canonical constant-ring
@@ -77,14 +76,8 @@ onto the pro-etale complexes with intrinsically constructible bounded cohomology
 preserves and reflects every cohomological interval. Fullness, faithfulness and the
 specified essential image are the standard criterion for this induced equivalence.
 The ring is any finite commutative ring, including the zero ring; no valuation ring is used.
-Source: Stacks Project, Tag 09AL, with the global finite partitions of the blueprint
-(blueprint: lem-weil-pbc-finite-ring-constructible-derived-origin).
+Source: Stacks Project, Tag 09AL, with the global finite partitions of the blueprint.
 
-Proof: factor the specified inverse image into fixed-coefficient inverse image and
-constant-ring realization. The latter is an exact equivalence; its sheafification counit
-identifies it with the inverse of restriction to constant scalars. The proved restriction
-comparison therefore identifies intrinsic constructibility with fixed-module constructibility,
-without changing the global finite-stratification convention.
 
 Full faithfulness on bounded below complexes restricts to the bounded constructible
 subcategory, and is unchanged by composition with the realization equivalence. For the

@@ -16,8 +16,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.FlatMono
 /-!
 # Refining a smooth projective base through a finite separable extension
 
-Source: Stacks Project, Tags 0G80, 0C4Q, 087S, 01W9 and 01WC
-(blueprint: lem-weil-pbc-finite-separable-base-refinement).
+Source: Stacks Project, Tags 0G80, 0C4Q, 087S, 01W9 and 01WC.
 -/
 
 @[expose] public section
@@ -30,30 +29,7 @@ namespace AlgebraicGeometry
 
 /-- A morphism to a finite separable extension is smooth, H-projective and proper if its
 composite to the original field is smooth and H-projective.
-Source: Stacks Project, Tags 0G80, 0C4Q, 087S, 01W9 and 01WC
-(blueprint: lem-weil-pbc-finite-separable-base-refinement).
-
-Proof:
-1. Set `a : Spec L ⟶ Spec k` to be induced by the algebra map and `f = q ≫ a`.
-   The map `a` is etale by lem-weil-pbc-finite-separable-extension-etale and separated by
-   lem-weil-pbc-affine-source-morphism-separated.
-2. Form `W = Z ×[Spec k] Spec L` (def-pc-fibre-product). Its projection `r` to `Z` is
-   etale by lem-weil-pbc-etale-scheme-base-change. The graph `(id, q)` is a section of `r`,
-   hence an open immersion by lem-weil-pbc-etale-section-clopen-immersion; only this
-   clause of the section lemma is needed.
-3. The projection `b : W ⟶ Spec L` is smooth by lem-pc-proper-base-change, clause (2).
-   Composing with the graph gives smoothness of `q` by
-   lem-pc-open-immersion-smooth-composition.
-4. Choose an embedding of `Z` into projective space over `Spec k` with a finite type of
-   homogeneous coordinates, witnessing def-kun-projective. By
-   lemma-nagata-projective-space-base-change-pullback, its graph with `q` maps into
-   projective space over `Spec L` with the same coordinate type.
-5. The projection from that space to projective space over `Spec k` is separated by
-   lem-weil-pbc-separated-base-change. Its composite with the graph is the original
-   closed immersion. By lem-weil-pbc-closed-immersion-cancellation the graph is a
-   closed immersion too, proving H-projectivity of `q` by def-kun-projective.
-6. Apply the already proved upstream instance `IsHProjective.isProper`
-   (lem-pc-projective-proper) to obtain properness of `q`. -/
+Source: Stacks Project, Tags 0G80, 0C4Q, 087S, 01W9 and 01WC. -/
 theorem smooth_hProjective_proper_of_finite_separable_base
     (k L : Type u) [Field k] [Field L] [Algebra k L]
     [FiniteDimensional k L] [Algebra.IsSeparable k L]

@@ -73,8 +73,7 @@ variable [∀ X : Scheme.{u},
 
 /-- The right-derived unit on a single complex in an arbitrary integer degree.
 This extends the existing degree-zero comparison by the same termwise construction.
-Source: Stacks Project, cohomology.tex, Tag 079W.
-(blueprint: lem-weil-pbc-integer-single-adjunction-transpose). -/
+Source: Stacks Project, cohomology.tex, Tag 079W. -/
 @[irreducible] def topEdgeSingleDirectImageMap {T S : Scheme.{u}} (g : T ⟶ S)
     (q : ℤ) (M : SheafOfModules.{u} (moduleRings T.toRingedSpace)) :
     (DerivedCategory.singleFunctor
@@ -90,15 +89,7 @@ Source: Stacks Project, cohomology.tex, Tag 079W.
 
 -- Comparing the pinned sheaf adjunction to its normalized construction needs extra heartbeats.
 /-- The pinned derived adjunction on a single complex in any integer degree.
-Source: Stacks Project, cohomology.tex, Tag 079W; sheaves.tex, Tag 0096.
-(blueprint: lem-weil-pbc-integer-single-adjunction-transpose).
-
-Proof: Apply the defining normalization of the selected derived adjunction to the
-homotopy-category map consisting of the single pullback comparison followed by the
-single of b. The termwise ordinary adjunction sends this composite to the single of
-the ordinary transpose followed by the inverse single/direct-image comparison.
-Pass this equality through homotopy localization and append the right-derived unit.
-This is exactly the displayed formula, including the fixed pullback counit. -/
+Source: Stacks Project, cohomology.tex, Tag 079W; sheaves.tex, Tag 0096. -/
 theorem topEdgeSingleAdjunctionTranspose {T S : Scheme.{u}} (g : T ⟶ S) (q : ℤ)
     (N : S.Modules) (M : T.Modules) (b : (Scheme.Modules.tensorPullback g).obj N ⟶ M) :
     let adj := @pinnedDerivedAdjunction.{u, w} _

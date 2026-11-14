@@ -10,7 +10,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator
 import WeilConjectures.AlgebraicGeometry.Modules.PushforwardHomAffine
 /-! # A ring-sheaf adjoint from local homogeneous formulas
 Source: Stacks Project, Divisors, Tag 0634.
-(blueprint: lem-pur-conormal-algebra-ring-adjoint).
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -50,16 +49,7 @@ attribute [local irreducible] sectionMap
 
 /-- A module map with the ambient homogeneous representative formula induces a
 ring-sheaf morphism compatible with structure-sheaf scalars.
-Source: Stacks Project, Divisors, Tag 0634.
-(blueprint: lem-pur-conormal-algebra-ring-adjoint).
-
-Proof: On compatible ambient affine charts the formula implies preservation of
-one and multiplication by homogeneous_preserves_ringOperations. Cover f⁻¹V by
-inverse images of compatible ambient affine pairs with i′⁻¹U′ contained in V;
-these exist because i′ is a closed embedding. Naturality and the sheaf axiom
-extend the ring laws from these charts to V. The additive section maps therefore
-define ring homomorphisms; naturality makes them a ring-sheaf morphism. Apply
-module linearity to r times one to check compatibility with structure sheaves. -/
+Source: Stacks Project, Divisors, Tag 0634. -/
 theorem exists_ringAdjoint_of_homogeneousFormula {X Z X' Z' : Scheme.{u}}
     (i : Z ⟶ X) (i' : Z' ⟶ X') [IsClosedImmersion i] [IsClosedImmersion i']
     (g : X ⟶ X') (f : Z ⟶ Z') (h : i ≫ g = f ≫ i')

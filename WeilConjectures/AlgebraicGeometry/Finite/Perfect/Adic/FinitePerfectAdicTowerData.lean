@@ -232,8 +232,7 @@ def finitePerfectAdicDerivedConstant (X : Scheme.{t}) (A : Type t) [CommRing A] 
   (finitePerfectAdicConstant X A).mapDerivedCategory
 
 /-- A normalized algebraic quotient system, including its actual adjunctions.
-Source: Stacks Tags 09AW and 09C6.
-(blueprint: def-weil-pbc-finite-perfect-adic-tower-data). -/
+Source: Stacks Tags 09AW and 09C6. -/
 structure FinitePerfectAdicAlgebraTower {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A) where
   level : ∀ n : ℕ, DerivedCategory (ModuleCat.{t} (A ⧸ d.ideal ^ (n + 1)))
@@ -251,8 +250,7 @@ structure FinitePerfectAdicAlgebraTower {A : Type t} [CommRing A]
   residuePerfect : DerivedCategory.IsPerfect (level 0)
 
 /-- Completed constant realization, followed by exact slice restriction.
-Source: Stacks Tag 09C6.
-(blueprint: def-weil-pbc-finite-perfect-adic-tower-data). -/
+Source: Stacks Tag 09C6. -/
 def finitePerfectAdicLocalRealization (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A) (U : X.ProEt) :
     DerivedCategory (ModuleCat.{t} A) ⥤
@@ -262,8 +260,7 @@ def finitePerfectAdicLocalRealization (X : Scheme.{t}) {A : Type t} [CommRing A]
       ringedDerivedRestrictionGeneral.{t + 1, t, t + 1, t + 1} (completedAdicRing X d) U
 
 /-- The levelwise derived diagram of the specified strict tower, restricted to a slice.
-Source: Stacks Tags 0940 and 0941.
-(blueprint: def-weil-pbc-finite-perfect-adic-tower-data). -/
+Source: Stacks Tags 0940 and 0941. -/
 def finitePerfectAdicRestrictedTower (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A) (U : X.ProEt)
     (Z : DerivedCategory (CompletedAdicTowers X d)) :
@@ -273,8 +270,7 @@ def finitePerfectAdicRestrictedTower (X : Scheme.{t}) {A : Type t} [CommRing A]
     ringedDerivedRestrictionGeneral.{t + 1, t, t + 1, t + 1} (completedAdicRing X d) U
 
 /-- A compatible trivialization of the entire diagram, rather than unrelated level isomorphisms.
-Source: Stacks Tag 09C6.
-(blueprint: def-weil-pbc-finite-perfect-adic-tower-data). -/
+Source: Stacks Tag 09C6. -/
 structure FinitePerfectAdicLocalTower (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A) (U : X.ProEt)
     (Z : DerivedCategory (CompletedAdicTowers X d)) extends FinitePerfectAdicAlgebraTower d where
@@ -285,7 +281,7 @@ structure FinitePerfectAdicLocalTower (X : Scheme.{t}) {A : Type t} [CommRing A]
       finitePerfectAdicLocalRealization X d U)
 
 /-- The diagram realized by a specified algebraic quotient tower.
-Source: Stacks Tag 09C6 (blueprint: def-weil-pbc-finite-perfect-adic-tower-data). -/
+Source: Stacks Tag 09C6. -/
 def finitePerfectAdicModelDiagram (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A) (U : X.ProEt) (T : FinitePerfectAdicAlgebraTower d) :=
   Functor.ofOpSequence (X := fun n ↦
@@ -294,8 +290,7 @@ def finitePerfectAdicModelDiagram (X : Scheme.{t}) {A : Type t} [CommRing A]
     finitePerfectAdicLocalRealization X d U
 
 /-- Regard a pro-etale object of an etale chart as an object over the original base.
-Source: Stacks Tags 094T and 0951
-(blueprint: def-weil-pbc-finite-perfect-adic-tower-data). -/
+Source: Stacks Tags 094T and 0951. -/
 def finitePerfectAdicChartObject {X : Scheme.{t}} (V : X.Etale) (U : V.left.ProEt) :
     X.ProEt := ProEt.mk (U.hom ≫ V.hom)
 

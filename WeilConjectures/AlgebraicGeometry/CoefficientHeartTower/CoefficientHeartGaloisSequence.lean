@@ -9,9 +9,6 @@ public import Mathlib.CategoryTheory.Galois.Decomposition
 public import Mathlib.CategoryTheory.Functor.OfSequence
 
 /-! # Nested pointed Galois representatives of a countable family
-
-Source: coefficient-heart proof (1), the connected finite etale trivializing tower.
-(blueprint: lem-sfb-coefficient-heart-galois-sequence)
 -/
 
 @[expose] public noncomputable section
@@ -22,11 +19,7 @@ namespace AlgebraicGeometry.ProEtale.CoefficientHeartTower
 variable {C : Type u} [Category.{v} C] [GaloisCategory C]
 variable (F : C ⥤ FintypeCat.{w}) [FiberFunctor F]
 
-/-- A single pointed Galois representative can represent two nonempty fibres at once.
-Source: coefficient-heart proof (1), intersections of finite monodromy kernels.
-(blueprint: lem-sfb-coefficient-heart-galois-sequence)
-Proof: represent the product. Fix a point in the other factor to obtain surjectivity
-of evaluation on each factor. Evaluation from a connected object is already injective. -/
+/-- A single pointed Galois representative can represent two nonempty fibres at once. -/
 theorem exists_pair_representative (P Q : C) (p : F.obj P) (q : F.obj Q) :
     ∃ (B : C) (b : F.obj B), IsGalois B ∧
       Function.Bijective (fun f : B ⟶ P ↦ F.map f b) ∧
@@ -46,11 +39,7 @@ theorem exists_pair_representative (P Q : C) (p : F.obj P) (q : F.obj Q) :
     simp only [Functor.map_comp, FintypeCat.comp_apply, hf,
       fiberBinaryProductEquiv_symm_snd_apply]
 
-/-- Evaluation on a represented product gives evaluation on either nonempty factor.
-Source: coefficient-heart proof (1), simultaneous finite trivializations.
-(blueprint: lem-sfb-coefficient-heart-galois-sequence)
-Proof: fix a point in the other factor and lift the pair. Evaluation from the connected
-source is injective. This applies to the already chosen stages of the tower. -/
+/-- Evaluation on a represented product gives evaluation on either nonempty factor. -/
 theorem evaluation_factors (B P Q : C) [IsConnected B]
     (b : F.obj B) (p : F.obj P) (q : F.obj Q)
     (h : Function.Bijective (fun f : B ⟶ P ⨯ Q ↦ F.map f b)) :
@@ -70,9 +59,7 @@ theorem evaluation_factors (B P Q : C) [IsConnected B]
     simp only [Functor.map_comp, FintypeCat.comp_apply, hf,
       fiberBinaryProductEquiv_symm_snd_apply]
 
-/-- A pointed Galois object representing all members through one finite level.
-Source: coefficient-heart proof (1), finite intersections of monodromy kernels.
-(blueprint: lem-sfb-coefficient-heart-galois-sequence). -/
+/-- A pointed Galois object representing all members through one finite level. -/
 structure GaloisStage (E : ℕ → C) (n : ℕ) where
   obj : C
   point : F.obj obj
@@ -80,23 +67,14 @@ structure GaloisStage (E : ℕ → C) (n : ℕ) where
   evaluation : ∀ (m : ℕ), m ≤ n →
     Function.Bijective (fun f : obj ⟶ E m ↦ F.map f point)
 
-/-- The pointed stages and their adjacent refinements, before forming a scheme limit.
-Source: coefficient-heart proof (1), nested pointed finite covers.
-(blueprint: lem-sfb-coefficient-heart-galois-sequence). -/
+/-- The pointed stages and their adjacent refinements, before forming a scheme limit. -/
 structure GaloisSequence (E : ℕ → C) where
   stage : ∀ n : ℕ, GaloisStage F E n
   arrow : ∀ n : ℕ, (stage (n + 1)).obj ⟶ (stage n).obj
   point_arrow : ∀ n : ℕ, F.map (arrow n) (stage (n + 1)).point = (stage n).point
 
 /-- A countable family with nonempty fibres admits a compatible sequence of pointed
-Galois representatives, each representing all preceding fibres.
-Source: coefficient-heart proof (1), choose nested finite monodromy kernels.
-(blueprint: lem-sfb-coefficient-heart-galois-sequence)
-Proof: represent E_0. Given a stage, represent its product with E_(n+1). Evaluation
-on the old stage supplies a transition carrying the new marked point to the old one.
-For any earlier E_m, precompose its representing maps with that transition to get
-surjectivity of evaluation; connectedness gives injectivity. Dependent recursion yields
-the sequence and its coherent marked points. This constructs only finite stages. -/
+Galois representatives, each representing all preceding fibres. -/
 theorem exists_galoisSequence (E : ℕ → C) (hE : ∀ n : ℕ, Nonempty (F.obj (E n))) :
     Nonempty (GaloisSequence F E) := by
   classical

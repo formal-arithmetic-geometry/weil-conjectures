@@ -46,8 +46,7 @@ closed fields, `C` a smooth connected curve over `k` and `n` prime to `char k`. 
 `C ⊆ C̄` is all of `C̄`, then `C` is proper
 (`AlgebraicGeometry.IsConnectedCurve.bijective_fieldExtensionCohomologyMap_of_isProper`);
 otherwise `C` is affine (`AlgebraicGeometry.IsConnectedCurve.isAffine_of_ne_top`,
-`AlgebraicGeometry.IsConnectedCurve.bijective_fieldExtensionCohomologyMap_of_isAffine`).
-(blueprint: `proposition-cohomology-smooth-affine-curve`) -/
+`AlgebraicGeometry.IsConnectedCurve.bijective_fieldExtensionCohomologyMap_of_isAffine`). -/
 theorem IsConnectedCurve.bijective_fieldExtensionCohomologyMap [IsAlgClosed k]
     [IsConnectedCurve f] [Smooth f] [IsAlgClosed k'] (n : ℕ) (hn : (n : k) ≠ 0) (q : ℕ) :
     Function.Bijective (f.fieldExtensionCohomologyMap k' (C.constantZMod n) q) := by
@@ -116,8 +115,7 @@ closed fields, `C` a connected smooth curve over `k` (possibly a point) and `n` 
 If `C` has dimension one, this is
 `AlgebraicGeometry.IsConnectedCurve.bijective_fieldExtensionCohomologyMap`; otherwise `C` and
 `C_{k'}` are the points `Spec k` and `Spec k'`, with cohomology `ℤ/n` in degree zero only
-(`AlgebraicGeometry.Scheme.subsingleton_H_of_isSepClosed`).
-(blueprint: `theorem-cohomology-curves--6`) -/
+(`AlgebraicGeometry.Scheme.subsingleton_H_of_isSepClosed`). -/
 theorem IsCurve.bijective_fieldExtensionCohomologyMap_of_connectedSpace [IsAlgClosed k]
     [IsCurve f] [Smooth f] [ConnectedSpace C] [IsAlgClosed k'] (n : ℕ) (hn : (n : k) ≠ 0)
     (q : ℕ) :
@@ -222,8 +220,7 @@ finitely many connected components `Cᵢ` of `C` are clopen, and so are their pr
 (`AlgebraicGeometry.IsCurve.finite_sheafH_constantZMod_of_connectedSpace`) and in bijection with
 `Hᵠ((Cᵢ)_{k'}, ℤ/n)`
 (`AlgebraicGeometry.IsCurve.bijective_fieldExtensionCohomologyMap_of_connectedSpace`),
-so both sides are finite of the same order.
-(blueprint: `theorem-cohomology-curves--6`) -/
+so both sides are finite of the same order. -/
 theorem IsCurve.bijective_fieldExtensionCohomologyMap [IsAlgClosed k] [IsCurve f] [Smooth f]
     [IsAlgClosed k'] (n : ℕ) (hn : (n : k) ≠ 0) (q : ℕ) :
     Function.Bijective (f.fieldExtensionCohomologyMap k' (C.constantZMod n) q) := by

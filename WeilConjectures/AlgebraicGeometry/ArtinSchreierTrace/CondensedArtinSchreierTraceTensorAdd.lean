@@ -12,9 +12,6 @@ import WeilConjectures.AlgebraicGeometry.ArtinSchreierTrace.CondensedArtinSchrei
 
 /-! # Tensor addition of condensed Artin–Schreier sheaves
 
-Source: latest blueprint, sec-fourier-transform/sk-lem-as-properties,
-lemma-artin-schreier-character-sheaf, proof Step 5, root addition (blueprint:
-lem-fd-as-trace-tensor-add).
 
 Stated for any condensed coefficient ring in which `q = #k` is a unit and any nontrivial
 character of `k`; the Qbar trace-character case is the tensor clause of
@@ -29,17 +26,7 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ArtinSchreierTrace
 
 /-- `L_{ψ,f} ⊗ L_{ψ,g} ≅ L_{ψ,f+g}` for condensed Artin–Schreier sheaves.
-Source: blueprint lemma-artin-schreier-character-sheaf, proof Step 5 (blueprint:
-lem-fd-as-trace-tensor-add).
-
-Proof: on the product of the finite etale root covers of `f` and `g`, root addition
-constructs eigenmaps from the tensor sheaf and the sum-function sheaf to the same regular
-direct image. Both have character `(a,b) ↦ ψ(a)ψ(b)` and invertible adjoints. Normalized
-averaging fixes each map. Evaluation on the character-projector image is monic by
-transitivity, and either invertible adjoint splits that evaluation, making it an
-isomorphism. Thus each map followed by the projector image factor is locally invertible.
-Cover conservativity gives two global isomorphisms to the same image; compose the first
-with the inverse of the second. The empty base and `p = 2` need no change. -/
+-/
 theorem condensedArtinSchreier_tensor_add_generic
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (k : Type u) [Field k] [Fintype k]

@@ -10,8 +10,7 @@ import all WeilConjectures.AlgebraicGeometry.Scalar.ScalarPullbackIsoExistence
 import all WeilConjectures.AlgebraicGeometry.Scalar.ScalarSheafTensorPullback
 import WeilConjectures.Algebra.Homology.HomotopyCategory.MapMonoidalComp
 /-! K-flat representative form of scalar/pullback tensor compatibility.
-Source: Stacks 07A4, 0G7E and 0GL6
-(blueprint: lem-pur-etale-scalar-pullback-tensor-kflat-representative).
+Source: Stacks 07A4, 0G7E and 0GL6.
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -517,15 +516,7 @@ attribute [local irreducible] HasDerivedCategory.standard
 
 /-- The normalized scalar/pullback tensor equation on flat-term K-flat representatives.
 This is the representative calculation underlying the unrestricted derived statement.
-Source: Stacks 07A4, 0G7E and 0GL6
-(blueprint: lem-pur-etale-scalar-pullback-tensor-kflat-representative).
-Proof: the ordinary scalar/pullback isomorphism is monoidal, hence its cochain
-comparison respects tensor. Compose the specified scalar and geometric tensor
-normalizations in both orders. The scalar/pullback normalization identifies the
-composite representatives, and makes them invertible on K-flat inputs. The tensor
-normalizations and the K-flat localization tensorator give an invertible comparison
-on the pair. Postcompose with it, use naturality and the three representative
-normalizations, apply the cochain square, and cancel. -/
+Source: Stacks 07A4, 0G7E and 0GL6. -/
 theorem etaleScalarPullback_tensor_kFlat
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {X Y : Scheme.{u}} (f : X ⟶ Y)

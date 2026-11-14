@@ -155,20 +155,7 @@ private theorem derivedUnit_normalization
     ordinaryUnitHomotopy]
 
 /-- Normalized scalar models exist on the actual pro-etale module categories.
-Source: Stacks Project, Tags 03EK, 06YY and 07A6.
-(blueprint: lem-sp-finite-free-scalar-models).
-
-Proof: take the universal presentations and their coherent normalization from
-successive_derived_quotient_normalization. The two localization factorizations
-identify its right adjoints with the actual exact scalar restrictions. Transport
-the adjunctions along these identifications; naturality gives the required unit
-normalization. For the identity ring map, restriction is the identity. The ordinary
-adjunction therefore gives multiplication as an isomorphism. Its triangle identity
-and tensor balancing show that r tensor x maps to r x. The induced homotopy
-isomorphism shows that the identity scalar functor inverts quasi-isomorphisms.
-Its universal derived counit is consequently invertible. Localize this counit
-followed by ordinary multiplication to obtain the derived multiplication; the
-localization factorization gives exactly the required formula. -/
+Source: Stacks Project, Tags 03EK, 06YY and 07A6. -/
 theorem finiteFreeDirectImageScalarModels (X : Scheme.{u}) : Nonempty (ScalarModel X) := by
   obtain ⟨p, ⟨n⟩⟩ :=
     SheafOfModules.SuccessiveDerivedQuotient.successive_derived_quotient_normalization

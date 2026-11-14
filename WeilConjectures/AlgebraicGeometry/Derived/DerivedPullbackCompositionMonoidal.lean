@@ -50,8 +50,6 @@ attribute [local instance high] SymmetricCategory.toBraidedCategory
 
 /-- Canonical derived étale inverse-image composition is monoidal.
 
-(blueprint: lem-kun-derived-pullback-composition-monoidal)
-
 Specialize the source library's tensor-composition and unit-composition coherence,
 rewrite its tensor comparisons and unit comparisons as the canonical isomorphisms,
 and use its left and right unitor equations. The final clause is the existing

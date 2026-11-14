@@ -12,7 +12,6 @@ import Mathlib.AlgebraicGeometry.Morphisms.Flat
 /-! # The section ring of a cartesian affine open
 
 Source: Stacks Project, Tags 01I4 and 02KG.
-(blueprint: lem-pc-flat-affine-section-ring-tensor)
 -/
 
 @[expose] public section
@@ -27,18 +26,7 @@ variable {X : Scheme.{u}}
 
 /-- The affine cartesian ring formula, with both coefficient maps fixed.
 Source: Stacks Project, Tag 01I4, Lemma 26.6.7, applied to the affine open;
-Tag 02KG, proof of Lemma 30.5.1.
-(blueprint: lem-pc-flat-affine-section-ring-tensor)
-
-Proof: Restrict the base-change square to W. Its upper left corner is the
-inverse-image open W', and it is still cartesian. Identify W with Spec A by
-its canonical affine-open isomorphism. Naturality identifies its structure
-map with Spec of the displayed R-algebra map. The affine pullback formula
-identifies W' with Spec (A tensor_R S), and its projection formulas identify
-the maps from A and S with the two tensor inclusions. Applying global
-sections and the canonical global-sections isomorphism of Spec gives the
-A-algebra equivalence. The S-projection formula gives its value on 1 tensor b.
-This also covers the empty open: A and its base-change ring are zero rings. -/
+Tag 02KG, proof of Lemma 30.5.1. -/
 theorem exists_baseChange_affine_sectionRing_tensor (f : X ⟶ Spec (.of R))
     (W : X.Opens) (hW : IsAffineOpen W)
     (W' : (baseChangedScheme (S := S) f).Opens)

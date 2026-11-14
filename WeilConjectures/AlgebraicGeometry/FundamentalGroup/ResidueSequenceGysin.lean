@@ -309,7 +309,7 @@ lemma toPic_boundaryDivisor (c : ↥(Set.range j.base)ᶜ → ℤ) :
 variable [IsAlgClosed k]
 
 variable (k) in
-/-- Blueprint `proposition-no-fixed-class-degree-one--1`: the **Gysin map**
+/-- The **Gysin map**
 `H⁰(D, ℤ / N (-1)) → H²(C, ℤ / N)` of the residue sequence (5.1). A family `(a_z)_{z ∈ D}` of
 homomorphisms `a_z : μ_N(k) → ℤ / N` indexed by the boundary `D = C ∖ U` is sent to
 `∑_z H²(a_z)(c₁(𝒪(z)))`, where `c₁ : Pic(C) → H²(C, μ_N)` is the Kummer map and `H²(a_z)` is
@@ -355,7 +355,7 @@ lemma picDegreeMod_toPic_boundaryDivisor (N : ℕ) [NeZero N]
   change ((picDegreeHom k C (Divisor.toPic k C _).toMul).toAdd : ZMod N) = _
   rw [picDegreeHom_toPic, toAdd_ofAdd, degree_boundaryDivisor, Int.cast_sum]
 
-/-- Blueprint `proposition-no-fixed-class-degree-one--1`: the kernel of the Gysin map consists of
+/-- The kernel of the Gysin map consists of
 the families `(a_z)_{z ∈ D}` whose values at a primitive `N`-th root of unity sum to zero. -/
 theorem gysinH2_eq_zero_iff (N : ℕ) [NeZero N] [NeZero (N : k)]
     (a : (z : ↥(Set.range j.base)ᶜ) → Additive (rootsOfUnity N k) →+ ZMod N) :
@@ -384,7 +384,7 @@ theorem gysinH2_eq_zero_iff (N : ℕ) [NeZero N] [NeZero (N : k)]
 
 variable [IsLocallyNoetherian C] [ConnectedSpace U]
 
-/-- Blueprint `proposition-no-fixed-class-degree-one--1`: exactness of the residue sequence (5.1)
+/-- Exactness of the residue sequence (5.1)
 
 `0 → H¹(C, ℤ / N) → H¹(U, ℤ / N) → H⁰(D, ℤ / N (-1)) → H²(C, ℤ / N)`
 
@@ -509,7 +509,7 @@ theorem range_residueH1_eq_ker_gysinH2 (N : ℕ) [NeZero N] [NeZero (N : k)] :
       boundaryDivisor_apply_boundaryClosedPoint]
     simp [c, ξ]
 
-/-- Blueprint `proposition-no-fixed-class-degree-one--1`: the **residue sequence** (5.1)
+/-- The **residue sequence** (5.1)
 
 `0 → H¹(C, ℤ / N) → H¹(U, ℤ / N) → H⁰(D, ℤ / N (-1)) → H²(C, ℤ / N)`
 

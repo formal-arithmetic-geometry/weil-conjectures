@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.Localized.LocalizedCartesianFlatSingleC
 
 /-! # Localized cartesian base change for a relatively flat single sheaf
 Source: Stacks Project, Tags 0A1D and 08FE.
-(blueprint: lem-pc-cartesian-flat-single-localized-base-change).
 -/
 
 @[expose] public section
@@ -25,22 +24,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Cartesian base change for the single sheaf, before choosing any representative.
-Source: Stacks Project, Tags 0A1D and 08FE.
-Proof: combine restriction to U and to V into restriction along V.ι followed by U.ι.
-Open base change identifies this restriction of Rf_*F[0] with direct image from the
-cartesian pullback source. The supplied sheaf isomorphism identifies its coefficient
-sheaf with q^*M. Apply relatively flat tensor base change to p with perfect factor
-O_Y[0] and relatively flat single factor M[0]. The tensor unit identifications remove
-the perfect factor. The given cartesian square identifies the canonical pullback
-source with the supplied one; conjugating direct image by this scheme isomorphism
-identifies the output with Lg^*Rp_*M[0]. Compute direct images with one K-injective
-resolution to compare the supplied localization models with standard ones. Canonical
-localization equivalences intertwine Qh, hence also Q and the single functors.
-Finally apply the inverse exact localized-site equivalence for V. This gives exactly
-the transported pullback in localizedMixedDerivedPullback. No complex P, Noetherian
-approximation, coherence of the direct image, or finite presentation is used. Zero
-sheaves and empty schemes satisfy all of these functorial comparisons unchanged.
-(blueprint: lem-pc-cartesian-flat-single-localized-base-change). -/
+Source: Stacks Project, Tags 0A1D and 08FE. -/
 theorem cartesian_flat_single_localized_baseChange
     {X S T Y : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f]
     [HasDerivedCategory.{wX}

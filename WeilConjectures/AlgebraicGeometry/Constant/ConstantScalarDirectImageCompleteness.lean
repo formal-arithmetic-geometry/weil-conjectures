@@ -335,24 +335,7 @@ private theorem complete_iff_globalTower
 /-- Direct image preserves vanishing for a scalar transported by the coefficient map.
 
 Source: Stacks Project, algebraization.tex, Tags 099J and 0997;
-sites-cohomology.tex, Tag 0A07
-(blueprint: lem-sp-constant-scalar-direct-image-completeness).
-
-Proof: the local Hom tower criterion identifies each slice test with invertibility
-of its Roos endomorphism. Exact slice restriction has an exact left adjoint, hence its
-derived functor preserves products. The slice restrictions jointly reflect module
-isomorphisms by evaluation at each slice terminal object, and their exact derived
-functors jointly reflect isomorphisms by cohomology. Product comparisons therefore
-identify all the local tests with invertibility of the single global scalar-tower
-endomorphism. The exact pullback derived-adjunction theorem and uniqueness of total
-right derived functors make RF a right adjoint, so RF preserves products. Ordinary
-pullback carries a constant scalar to its transported global section. Transposing this
-scalar square through the counit
-shows that G does too. Naturality of the derived comparison on a K-injective
-representative then proves the scalar square for RF. Apply RF to the invertible global
-Roos endomorphism and conjugate by its product comparison. Apply the global/local
-criterion again to obtain every target slice test. This allows zero scalars, the zero
-ring and empty sites and uses no ideal or finite-generation hypothesis. -/
+sites-cohomology.tex, Tag 0A07. -/
 theorem constantScalarDirectImage_complete
     {C E : Type u} [SmallCategory C] [SmallCategory E]
     (JC : GrothendieckTopology C) (JD : GrothendieckTopology E)

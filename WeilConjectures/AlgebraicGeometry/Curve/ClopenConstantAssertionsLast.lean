@@ -209,10 +209,6 @@ private theorem invertibleOrder_upperStar
   exact ⟨n, hn, hu, e.injective (by simpa only [map_nsmul, map_zero] using hx)⟩
 
 /-- The last four curve assertions transfer across a finite clopen partition.
-Source: the finite disjoint-union argument in the proof of the clopen constant
-assertions lemma. Properness, base-change bijectivity, and restriction
-surjectivity are all componentwise and hence pass to finite products.
-(blueprint: lem-pbc-k2-clopen-constant-assertions-last)
 -/
 theorem clopen_last_four (Λ : Type (u + 1)) [CommRing Λ]
     {k : Type u} [Field k] [IsAlgClosed k] {X : Scheme.{u}}

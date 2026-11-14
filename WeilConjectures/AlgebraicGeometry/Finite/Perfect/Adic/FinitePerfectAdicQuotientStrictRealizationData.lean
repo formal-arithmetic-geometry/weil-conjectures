@@ -26,11 +26,7 @@ attribute [local instance] finitePerfectModelsAbLocallyBijective
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Compatible finite comparisons send constant sections to the canonical constant sections.
-Source: Stacks Tags 093M and 09C6.
-
-Proof: every constant quotient section lifts to a constant section of the coefficient ring.
-The scalar square of the compatibility identifies its image with the image of the completed
-scalar map, whose projection is the canonical constant section. -/
+Source: Stacks Tags 093M and 09C6. -/
 theorem finitePerfectModelsCompatible_normalized (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A)
     (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶

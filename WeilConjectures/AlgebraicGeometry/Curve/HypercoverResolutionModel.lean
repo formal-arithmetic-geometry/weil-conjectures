@@ -14,7 +14,6 @@ import WeilConjectures.Algebra.Homology.FirstQuadrantAugmentation
 /-! # An explicit injective-resolution comparison for hypercover sections
 
 Source: Stacks Project, Hypercoverings, Tag 01H0, first proof.
-(blueprint: lem-sc-hypercover-resolution-comparison).
 
 The bicomplex is constructed by evaluating an actual resolution sheaf in every
 hypercover degree. Both augmentations are explicit chain maps. Inverting the

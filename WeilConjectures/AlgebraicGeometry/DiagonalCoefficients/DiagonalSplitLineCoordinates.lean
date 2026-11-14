@@ -37,17 +37,7 @@ private theorem coordinates
           (biprod.desc_eq (f := a) (g := b))
 
 /-- A split inclusion killed by a split projection has invertible complementary
-coordinate when split endomorphisms of that complementary line are invertible.
-
-Source: the unit entry in the unit/Chern splitting, diagonal coefficients (3)
-(blueprint: lem-diagonal-split-line-coordinate).
-
-Proof: expand the map into its two coordinates in the biproduct decomposition.
-Its second coordinate vanishes by the projection equation, so it factors through
-the first inclusion. Composing a retraction of the map with that inclusion gives
-a retraction of its first coordinate. Conjugate by the specified line isomorphism
-to obtain a split endomorphism; the assumed rank-one property makes it invertible.
-Cancel the line isomorphism to conclude. -/
+coordinate when split endomorphisms of that complementary line are invertible. -/
 theorem splitLineCoordinate_isIso
     {C : Type u} [Category.{v} C] [Preadditive C] [HasBinaryBiproducts C]
     {A A' B K : C} (a : A' ⟶ K) (b : B ⟶ K) [IsIso (biprod.desc a b)]

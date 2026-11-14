@@ -10,9 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassR
 import WeilConjectures.AlgebraicGeometry.SpTowerClasses.FiniteExactArrow.FiniteExactArrowCalculus
 
 /-! # Realization of the ordinary scalar class
-
-Source: diagonal-tower trace (1), finite Kummer classes and exact comparison.
-(blueprint: lem-sfb-finite-ordinary-scalar-class).
 -/
 
 @[expose] public noncomputable section
@@ -52,8 +49,7 @@ private theorem scalar_class_hom
   rfl
 
 /-- Realizing the ordinary scalar class is exact forgetting preceded by the
-integral generator. Source: Stacks 03FD and the definition of ordinaryFiniteClass
-(blueprint: lem-sfb-finite-ordinary-scalar-class). -/
+integral generator. Source: Stacks 03FD and the definition of ordinaryFiniteClass. -/
 theorem ordinaryFiniteClass_hom (A : Type (u + 1)) [CommRing A]
     (T : Scheme.{u}) (M : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))
     (a : Etale.ordinaryFiniteUnit A T ⟶

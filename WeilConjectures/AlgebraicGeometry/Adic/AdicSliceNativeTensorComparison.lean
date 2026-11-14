@@ -16,8 +16,7 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace AlgebraicGeometry.ProEtale
 
 /-- The native tensor comparison induced on the balanced coequalizer by pullback.
-Source: Stacks 03EL and the native module coequalizer
-(blueprint: lem-sf-adic-slice-native-tensor). -/
+Source: Stacks 03EL and the native module coequalizer. -/
 noncomputable def adicSliceNativeTensorIso {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
     (U : X.ProEt) (M N : AdicSheaf l X) :
     (Mod.tensorLeft ((adicUpperStar l U.hom).obj N)).obj ((adicUpperStar l U.hom).obj M) ≅
@@ -31,12 +30,7 @@ noncomputable def adicSliceNativeTensorIso {l : ℕ} [Fact l.Prime] {X : Scheme.
       (fun _ _ ↦ Functor.LaxBraided.braided _ _) N).app M).symm
 
 /-- The native balanced tensor comparison is normalized before taking the quotient.
-Source: Stacks 03EL and `Mod.map_tensorπ_comp_tensorLeftCompMapModComapIso_hom`
-(blueprint: lem-sf-adic-slice-native-tensor).
-
-Proof: apply the general coequalizer comparison formula. Compose by the invertible
-monoidal tensor map on the source and by the inverse module comparison on the
- target, then cancel the two isomorphism pairs. -/
+Source: Stacks 03EL and `Mod.map_tensorπ_comp_tensorLeftCompMapModComapIso_hom`. -/
 theorem adicSliceNativeTensorIso_quotient {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
     (U : X.ProEt) (M N : AdicSheaf l X) :
     Mod.tensorπ ((adicUpperStar l U.hom).obj M) ((adicUpperStar l U.hom).obj N) ≫

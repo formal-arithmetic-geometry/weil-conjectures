@@ -29,8 +29,7 @@ import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 
 /-! # Finite cohomology of the dense-open boundary
 
-Source: Stacks Project, Tags 0GJA and 095L.
-(blueprint: lem-pbc-h2-dense-open-integral-boundary-finiteness). -/
+Source: Stacks Project, Tags 0GJA and 095L. -/
 
 @[expose] public section
 
@@ -82,21 +81,7 @@ private theorem finite_constructible_stalk {X : Scheme.{u}}
 
 /-- The closed-boundary term of a constructible torsion sheaf on a curve has finite
 cohomology in every degree.
-Source: Stacks Project, Tag 0GJA, proof, and Tag 095L.
-(blueprint: lem-pbc-h2-dense-open-integral-boundary-finiteness).
-
-Proof: Density excludes every generic point from the closed complement Z. Since the
-curve is Noetherian of dimension at most one, the reduced scheme underlying Z is a
-finite disjoint union of closed points. Their residue fields are k, since k is
-algebraically closed and the curve is of finite type. Nilpotent thickening does not
-change the small etale topos. Finite direct image along Z -> X is exact; the Leray
-comparison identifies the cohomology of Q = i_*i^*F with the cohomology of i^*F on Z.
-The small etale topos of Spec k is the topos of sets, so its global sections functor
-is exact. Hence positive cohomology is zero. H^0(Q) is the product of the finitely
-many geometric stalks of F on Z. The coefficient encoding has the same underlying
-abelian stalks as P.F, and constructibility as a set sheaf makes these finite.
-Consequently H^0(Q) is finite, and the zero groups in positive degrees are finite.
-When Z is empty, its direct image is zero and the same conclusion holds. -/
+Source: Stacks Project, Tag 0GJA, proof, and Tag 095L. -/
 theorem dense_open_integral_boundary_finiteness {k : Type u} [Field k] [IsAlgClosed k]
     (P : CurveCoefficientPair k) (hP : (Scheme.IsConstructibleEtaleSheafOfSets
       ((sheafCompose P.C.smallEtaleTopology

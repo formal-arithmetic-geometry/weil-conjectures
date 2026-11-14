@@ -120,25 +120,7 @@ attribute [local instance] finitePerfectModelsAbLocallyBijective
 /-- Constant algebraic quotient complexes have the canonical realized model diagram,
 including its specified consecutive arrows.
 
-Source: Stacks Project, Tags 093J, 093M, 06YY and 09C6.
-(blueprint: lem-weil-pbc-finite-perfect-adic-scalar-model).
-
-Proof: represent each perfect level by a bounded complex of finite projective modules.
-Universe lift and exact constant realization preserve these representatives and their
-finite-projective splittings. Inverse image to U, restriction along W and transport to
-the slice commute with constants, by their constant-section units. The locally bijective
-finite coefficient unit identifies the resulting fixed-ring module sheaf with the
-actual quotient-ring module sheaf. After forgetting quotient scalars, flatness of the
-completed constant ring over the constant A-ring and its canonical finite reduction
-identify this with completed scalar extension of the A-restriction of the algebraic
-level. These natural identifications give model. On an algebraic quotient arrow all
-comparisons send a constant pure tensor to that same constant section. Associativity
-of scalar restriction and the equation between the two consecutive completed
-projections show that the two displayed composites agree on these generators.
-Sheafification, termwise total complexes and localization preserve this equality,
-giving the specified model_normalized equation. This does not select a marking or
-use an actual quotient of M. Zero rings, zero complexes and empty charts use the same
-canonical tensor and sheafification maps. -/
+Source: Stacks Project, Tags 093J, 093M, 06YY and 09C6. -/
 theorem finitePerfectAdicScalar_model
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (V : X.Etale) (T : FinitePerfectAdicAlgebraTower d)

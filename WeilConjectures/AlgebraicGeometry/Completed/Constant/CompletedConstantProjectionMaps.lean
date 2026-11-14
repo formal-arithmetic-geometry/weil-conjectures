@@ -85,13 +85,7 @@ private theorem transition_residueMul (X : Scheme.{u})
 end CompletedConstantProjection
 
 /-- The constructed projections commute with C-linear module maps.
-Source: Stacks Tags 03EK and 093J--093M
-(blueprint: def-weil-pbc-completed-constant-projection-maps).
-Proof: test on pure tensors of completed scalars and constant module elements. The source
-map keeps the scalar and applies f to the element. The residue map of f is linear over
-the quotient ring and sends the residue of x to the residue of f(x), so the two expressions
-coincide. Tensor generation and the local surjectivity of the constant-sheafification unit
-extend this identity to all sections. -/
+Source: Stacks Tags 03EK and 093J--093M. -/
 theorem completedConstantProjection_naturality (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A)
     (φ : adicLisseConstantRing X (AdicCompletion I A) ⟶ adicLisseCompletedRing X I)
@@ -136,11 +130,7 @@ theorem completedConstantProjection_naturality (X : Scheme.{u})
   rfl
 
 /-- The finite projections commute with successor quotient transitions.
-Source: Stacks Tags 03EK and 093J--093M
-(blueprint: def-weil-pbc-completed-constant-projection-maps).
-Proof: on a pure tensor the successor quotient sends the projected scalar to its preceding
-projection, and sends the residue of x to its preceding residue. The ring limit identity
-identifies the first factors. Local tensor generation gives equality of sheaf maps. -/
+Source: Stacks Tags 03EK and 093J--093M. -/
 theorem completedConstantProjection_step (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A)
     (φ : adicLisseConstantRing X (AdicCompletion I A) ⟶ adicLisseCompletedRing X I)
@@ -177,8 +167,7 @@ theorem completedConstantProjection_step (X : Scheme.{u})
         (completedConstantUnderlyingModule I N)).mkQ x)
 
 /-- The actual compatible residue cone for tensor realization.
-Source: Stacks Tags 03EK and 093J--093M
-(blueprint: def-weil-pbc-completed-constant-projection-maps). -/
+Source: Stacks Tags 03EK and 093J--093M. -/
 def completedConstantComparisonCone (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A)
     (φ : adicLisseConstantRing X (AdicCompletion I A) ⟶ adicLisseCompletedRing X I)
@@ -196,8 +185,7 @@ def completedConstantComparisonCone (X : Scheme.{u})
     exact (completedConstantProjection_step X I φ hφ N n).symm)
 
 /-- The canonical tensor-to-limit map, before asserting invertibility.
-Source: Stacks Tags 03EK and 093J--093M
-(blueprint: def-weil-pbc-completed-constant-projection-maps). -/
+Source: Stacks Tags 03EK and 093J--093M. -/
 def completedConstantComparisonMap (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A)
     (φ : adicLisseConstantRing X (AdicCompletion I A) ⟶ adicLisseCompletedRing X I)
@@ -210,9 +198,7 @@ def completedConstantComparisonMap (X : Scheme.{u})
         adicLisseCompletedModule X I (completedConstantUnderlyingModule I N) :=
   limit.lift _ (completedConstantComparisonCone X I φ hφ N)
 
-/-- Finite projections of the canonical limit map are the constructed residue maps.
-Source: the limit universal property
-(blueprint: def-weil-pbc-completed-constant-projection-maps). -/
+/-- Finite projections of the canonical limit map are the constructed residue maps. -/
 theorem completedConstantComparisonMap_π (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A)
     (φ : adicLisseConstantRing X (AdicCompletion I A) ⟶ adicLisseCompletedRing X I)

@@ -14,7 +14,6 @@ import WeilConjectures.FromJoel.Algebra.Homology.TotalComplex
 /-! # Horseshoe total boundary and augmentation naturality
 
 Source: Stacks Project, Tags 01EQ and 0117.
-(blueprint: lem-pc-abelian-cech-horseshoe-total-boundary)
 -/
 
 @[expose] public section
@@ -111,26 +110,7 @@ set_option backward.defeqAttrib.useBackward true in
 set_option maxHeartbeats 600000 in
 -- Comparing the two nested complex functors with finite-diagonal totalization is expensive.
 /-- A prescribed horseshoe gives a common total boundary for alpha and beta.
-Source: Stacks 01EQ (the two augmentations) and 0117 (boundary naturality).
-(blueprint: lem-pc-abelian-cech-horseshoe-total-boundary)
-
-Proof: Split each resolution row using injectivity of its first term. Apply
-sections on every tuple intersection to the splitting equations. Products of
-these equations over tuples give split short exact rows of Cech cochains.
-Take the direct sums along each finite first-quadrant diagonal: the sums of
-row retractions and sections again satisfy the splitting equations. The
-cochain maps induced by alpha and beta therefore form a short exact sequence
-of total complexes. Define delta to be its homology connecting morphism.
-The resolution augmentation equations hα and hβ make the three coefficient
-beta maps a morphism from the coefficient Cech short exact sequence to this
-total sequence. Tuple surjectivity supplies short exactness of the former.
-The three restriction alpha maps give a morphism from the section sequence
-specified by hS to the total sequence, since restriction commutes with each
-resolution map. Apply HomologySequence.δ_naturality to these two morphisms.
-Both use the total differential with Cech degree first, so the signs agree.
-Products need no finite index set; only total diagonals are finite. Empty
-tuple sets and empty intersections give zero factors and preserve the
-splitting equations. Degree zero uses the same connecting-map construction. -/
+Source: Stacks 01EQ (the two augmentations) and 0117 (boundary naturality). -/
 theorem abelianCechHorseshoe_total_boundary
     {X : Scheme.{u}}
     (T : ShortComplex (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}))

@@ -64,7 +64,6 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUn
 /-! # Tensor localization for a fixed ordinary geometric realization
 
 Source: Zheng Construction 4.1; Stacks 06YY and 07A4.
-(blueprint: lem-coef-semilinear-geometric-tensor-localization)
 -/
 
 @[expose] public noncomputable section
@@ -272,8 +271,7 @@ variable (A : Data.{c, v, r} J B τ)
 
 /-- The system and level tensor comparisons on the specified total-complex models.
 No direct image, derived adjunction, or scalar comparison is part of this interface.
-Source: Zheng Construction 4.1; Stacks 06YY and 07A4.
-(blueprint: lem-coef-semilinear-geometric-tensor-localization). -/
+Source: Zheng Construction 4.1; Stacks 06YY and 07A4. -/
 structure GeometryTensor where
   /-- The canonical tensor comparison for inverse image of systems. -/
   tensorPullback : A.closed.tensor ⋙ O.pull.mapDerivedCategory ≅
@@ -334,27 +332,7 @@ structure GeometryTensor where
         ((evaluation.{c, v, max c v r} J B τ n).obj N)).hom
 
 /-- Localization of the ordinary inverse-image pure-tensor comparison.
-Source: Zheng Construction 4.1; Stacks 06YY and 07A4.
-(blueprint: lem-coef-semilinear-geometric-tensor-localization).
-
-Proof: on ordinary module sheaves the inverse-image tensor comparison is fixed by
-sending the inverse image of a pure tensor to the tensor of the inverse images of
-its factors. The universal balanced bilinear map constructs it and the inverse;
-the inverse equations follow on pure tensors and then by module sheafification.
-Apply the same construction on the sequence site, using the actual horizontal
-transitions of O. Ordinary evaluation is faithful on systems. Its identity on
-component carriers and the pure-tensor normalization of ordinaryEvaluationTensor
-therefore give the displayed ordinary evaluation square. In degree k of the signed
-total tensor take the sum of these ordinary comparisons over p+q=k. Naturality
-makes the maps commute with the first differential and with the signed second
-differential. Their ordinary inverses induce the inverse cochain maps.
-Inverse image preserves flat-term K-flat complexes. Restrict the construction to
-such representatives of the given source tensor models. The fixed source and
-target model comparisons now descend these chain isomorphisms along localization.
-The defining descent square supplies TensorComparisonModel. The system and level
-comparisons have the displayed derived evaluation square because the corresponding
-ordinary square holds on every total summand; localization uniqueness proves the
-whole square. Equality is established before evaluating derived maps. -/
+Source: Zheng Construction 4.1; Stacks 06YY and 07A4. -/
 theorem semilinearGeometryTensor [PreservesFiniteLimits uInv] :
     Nonempty (GeometryTensor.{c, v, r} J B τ J' uInv uPush adjSet A O target) := by
   classical

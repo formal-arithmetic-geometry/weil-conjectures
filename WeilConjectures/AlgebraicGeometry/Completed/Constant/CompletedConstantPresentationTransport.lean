@@ -46,7 +46,6 @@ import all Mathlib.CategoryTheory.Limits.HasLimits
 /-! # Transport of completed quotient and Koszul presentations
 
 Source: Stacks Tags 03CR, 05RR, 06YY and 0941.
-(blueprint: lem-weil-pbc-completed-constant-presentation-transport).
 -/
 
 @[expose] public noncomputable section
@@ -358,8 +357,7 @@ private theorem comparisonOrdinaryCompletionUnit (T : Scheme.{t})
 set_option genSizeOf false in
 set_option genInjectivity false in
 /-- A common coefficient presentation of both completed objects and their fixed units.
-Source: Stacks Tags 03CR, 05RR, 06YY, 099M and 0941.
-(blueprint: def-weil-pbc-completed-constant-presentation-data). -/
+Source: Stacks Tags 03CR, 05RR, 06YY, 099M and 0941. -/
 structure CompletedConstantPresentationData
     (T : Scheme.{t}) {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A) where
   equivalence : d.derived T ≌ ConstantCompletion.D
@@ -394,19 +392,7 @@ set_option linter.style.haveILetI false in
 /-- The coefficient equivalence preserves the two completion objects and their specified units.
 The Koszul clause uses an actual list generating the adic ideal.
 
-Source: Stacks Tags 03CR, 05RR, 06YY, 099M and 0941.
-(blueprint: lem-weil-pbc-completed-constant-presentation-transport).
-
-Proof: use the scalar-preserving coefficient equivalence and its strict quotient-tower
-comparison. Uniqueness of the left-derived reduction tower and the right-derived
-inverse limit supplies compatible derived squares. On a K-flat representative the
-actual augmentation and the quotient-completion unit have their specified normalized
-formulas. The ordinary strict-limit units agree because all their finite projections
-agree. The two derived squares then identify the normalized units. The actual reduction
-counit is invertible on this representative, so cancellation gives the required unit
-identity. Transport along a K-flat realization extends it to every derived object.
-The Koszul clause is the scalar-preserving Koszul-to-constant-completion transport,
-using the same derived equivalence through its localization factorization. -/
+Source: Stacks Tags 03CR, 05RR, 06YY, 099M and 0941. -/
 theorem completed_constant_presentation_transport
     (T : Scheme.{t}) {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A) :
     Nonempty (CompletedConstantPresentationData T d) := by

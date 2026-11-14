@@ -23,8 +23,7 @@ attribute [local instance 2000] CategoryTheory.instAdditiveSheafConstantSheaf
 
 /-- The canonical scalar coefficient is identified with the derived constant
 single complex by scalar restriction and the exact constant/single comparison.
-Source: Mathlib `constantCommuteCompose` and `mapDerivedCategorySingleFunctor`.
-(blueprint: def-pur-etale-scalar-constant-coefficient-iso) -/
+Source: Mathlib `constantCommuteCompose` and `mapDerivedCategorySingleFunctor`. -/
 def etaleScalarConstantCoefficientIso
     {C D : Type (u + 1)} [CommRing C] [CommRing D] (a : C →+* D)
     (W : Scheme.{u}) : scalarCoefficient a W ≅
@@ -57,12 +56,7 @@ attribute [local irreducible] Functor.leftAdjoint Functor.rightAdjoint
   exceptionalConstantPullbackIso scalarCoefficientPullbackIso
 
 /-- The specified scalar coefficient identification commutes with inverse image.
-Source: Stacks Tags 03EK and 07A6; Zheng Construction 2.26.
-(blueprint: lem-pur-etale-scalar-constant-coefficient-iso-pullback)
-
-Proof: expand the canonical coefficient identification and apply the scalar
-constant pullback square, which was proved by the ordinary unit calculation
-and the exact derivation/single comparison. -/
+Source: Stacks Tags 03EK and 07A6; Zheng Construction 2.26. -/
 theorem etaleScalarConstantCoefficientIso_pullback
     {C D : Type (u + 1)} [CommRing C] [CommRing D] (a : C →+* D)
     {X Y : Scheme.{u}} (f : X ⟶ Y) :

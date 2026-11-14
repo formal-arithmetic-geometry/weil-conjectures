@@ -189,8 +189,7 @@ theorem topologicalKrullDim_le_finrank_lie (G : Over (Spec (.of k))) [GrpObj G]
 /-- Cartier's theorem, Lie algebra form: over a field of characteristic zero, the Lie algebra of a
 group scheme `G` of finite type has dimension the dimension of `G`. The lower bound is
 `AlgebraicGeometry.GrpObj.finrank_lie_le_topologicalKrullDim`, the upper bound
-`AlgebraicGeometry.GrpObj.topologicalKrullDim_le_finrank_lie`.
-(blueprint: `proposition-cartier-s-theorem`) -/
+`AlgebraicGeometry.GrpObj.topologicalKrullDim_le_finrank_lie`. -/
 theorem finrank_lie_eq_topologicalKrullDim (G : Over (Spec (.of k))) [GrpObj G]
     [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [CharZero k] :
     (Module.finrank k (Lie G) : WithBot ℕ∞) = topologicalKrullDim G.left :=
@@ -201,7 +200,7 @@ scheme `K` of a connected group scheme `G` of finite type with the same Lie alge
 differential of the inclusion is bijective) is all of `G`. By Cartier's theorem
 `dim K = dim Lie(K) = dim Lie(G) = dim G`, and `K` and `G` are reduced, so
 `AlgebraicGeometry.isIso_left_of_topologicalKrullDim_eq` applies.
-(blueprint: `lemma-connected-components-images-homomorphisms--3`, clause (1)) -/
+(clause (1)) -/
 theorem isIso_left_of_differential_bijective [CharZero k] {K G : Over (Spec (.of k))} [GrpObj K]
     [GrpObj G] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [ConnectedSpace G.left]
     (f : K ⟶ G) [IsMonHom f] [IsClosedImmersion f.left]

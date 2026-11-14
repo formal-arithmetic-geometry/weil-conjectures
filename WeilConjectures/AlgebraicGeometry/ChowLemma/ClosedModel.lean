@@ -92,7 +92,7 @@ Indeed, `V` immerses into some `ℙ(n; S)` over `S` by
 `AlgebraicGeometry.exists_isImmersion_projectiveSpace`, and this immersion is quasi-compact
 since `V` is quasi-compact and `ℙ(n; S)` is quasi-compact and quasi-separated, being proper
 over `S`; so its scheme-theoretic image does the job. This is the form of step 3 used in the
-non-Noetherian variant of Chow's lemma (blueprint `rem-chow-lemma-non-noetherian`). -/
+non-Noetherian variant of Chow's lemma. -/
 @[stacks 01RG "combined with 0203"]
 theorem nonempty_properClosedModel_of_quasiSeparatedSpace {V S : Scheme.{u}} [IsAffine V]
     [CompactSpace S] [QuasiSeparatedSpace S] (g : V ⟶ S) [LocallyOfFiniteType g] :

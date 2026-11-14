@@ -8,9 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalTowerSystemInterface
 import all WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalDerivedReductionExists
 
-/-! # Resolving complexes for an arbitrary simultaneous reduction
-Source: diagonal tower system proof, steps (2) and (3).
-(blueprint: lem-sfb-diagonal-reduction-resolution). -/
+/-! # Resolving complexes for an arbitrary simultaneous reduction -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -23,16 +21,7 @@ namespace AlgebraicGeometry.ProEtale
 attribute [local irreducible] diagonalScalarExtension diagonalForget diagonalScalarAdjunction
 
 /-- Every object has a common torsion-free representative on which the counit of the
-supplied universal derived reduction is invertible.
-Source: diagonal tower system proof, steps (2) and (3).
-(blueprint: lem-sfb-diagonal-reduction-resolution).
-Proof: use flat-term resolutions to resolve every complex by complexes on which all
-positive prime-power maps are monomorphisms. Exact scalar extension preserves these
-monomorphisms. The quotient short exact sequences imply that ordinary simultaneous
-reduction preserves quasi-isomorphisms between these representatives. Derive on this
-resolving class, and compare its counit with the supplied counit by uniqueness of left
-derived functors. The counit-compatible comparison is invertible, so invertibility on
-the resolving class transfers to the supplied reduction. -/
+supplied universal derived reduction is invertible. -/
 theorem diagonal_reduction_resolution (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     [HasDerivedCategory.{u + 1} (DiagonalAb W)]
     [HasDerivedCategory.{u + 1} (DiagonalSystems ℓ W)]

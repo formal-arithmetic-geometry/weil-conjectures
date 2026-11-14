@@ -13,8 +13,7 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSuppleme
 /-!
 # Scalar extension of a localized inverse-image constant model
 
-Source: Stacks Project, Tags 03EL, 0GMW and 093V
-(blueprint: lem-sf-finite-field-local-tensor-model).
+Source: Stacks Project, Tags 03EL, 0GMW and 093V.
 -/
 
 @[expose] public noncomputable section
@@ -505,28 +504,7 @@ private noncomputable def inverseImageExtensionIso
 
 /-- Scalar extension carries any given localized inverse-image constant model to the
 constant tensor model, over the actual inverse-image target ring.
-Source: Stacks Project, Tags 03EL, 0GMW and 093V
-(blueprint: lem-sf-finite-field-local-tensor-model).
-
-Proof: extension of scalars is left adjoint to restriction. Naturality of the
-ring inverse-image adjunction unit identifies the two composites of restriction
-and module direct image. Conjugating this identity gives the scalar-extension /
-inverse-image comparison, over the actual inverse-image coefficient sheaves.
-On the slice at V, restriction of scalars similarly commutes with direct image
-along Over.star V: the scalar equation is naturality along the product projection.
-Conjugate this identity using the slice restriction/direct-image adjunction and
-the tensor adjunction. Apply the resulting slice scalar-extension functor to the
-given local isomorphism. Finally, the constant-module functor is left adjoint to
-constant-scalar sections at the terminal site object. Naturality of the constant
-ring sheafification unit identifies restriction followed by these sections with
-these sections followed by ordinary scalar restriction. Uniqueness of left
-adjoints gives extension of a constant module as the constant tensor module.
-Compose these comparisons before and after the supplied local isomorphism.
-The tensor adjunction used on the slice is constructed sectionwise from the
-ordinary tensor/restriction Hom equivalence and module sheafification. Thus all
-comparisons are linear for the full target ring sheaf, with the target action on
-the scalar factor. No finiteness, cover, immersion or inhabited-object assumption
-is used; zero modules and empty schemes or localizing objects are included. -/
+Source: Stacks Project, Tags 03EL, 0GMW and 093V. -/
 theorem finiteFieldScalarExtension_localModel
     (Y : Scheme.{u}) {k k' : Type u} [Field k] [Field k'] (f : k →+* k') :
     ∀ (X : Scheme.{u}) (g : X ⟶ Y)

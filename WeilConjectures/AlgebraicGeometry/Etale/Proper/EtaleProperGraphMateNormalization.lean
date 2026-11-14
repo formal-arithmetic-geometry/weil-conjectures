@@ -27,7 +27,7 @@ attribute [local irreducible] lowerStar upperStar etaleLowerShriek openImmersion
 /-- The ordinary open-extension graph map induces the derived graph adjunct.
 The exact factors are retained explicitly, so this equality uses no support
 normalization hypothesis. Source: Stacks Project Tag 0F7B and the ordinary graph
-unit identity. (blueprint: lem-pur-proper-graph-mate-normalization). -/
+unit identity. -/
 theorem properGraph_mate_normal
     (A : Type (u + 1)) [CommRing A]
     {W V Y : Scheme.{u}} (q : W ⟶ V) [IsProper q]

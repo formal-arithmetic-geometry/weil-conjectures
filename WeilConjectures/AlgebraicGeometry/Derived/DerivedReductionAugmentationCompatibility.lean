@@ -39,13 +39,7 @@ attribute [local irreducible] completedReductionModuleTowerFunctor
   completedReductionTowerComplexCounit reductionComplexCounit coherenceReductionTowerCounit
 
 /-- Ordinary augmentation compatibility descends through computing reduction counits.
-Source: Stacks Tags 03EL, 06YY
-(blueprint: lem-weil-pbc-derived-reduction-augmentation-of-counits).
-Proof: on resolving complexes, postcompose with the invertible target counit and
-apply the representative comparison equation. The two unit normalizations reduce
-the equation to the ordinary augmented square and the exact derived localization
-factors. Fully faithful restriction to resolving complexes gives the equation for
-every derived object. -/
+Source: Stacks Tags 03EL, 06YY. -/
 theorem derivedReduction_augmentationOfCounits
     {B C D E : Type*} [Category B] [Category C] [Category D] [Category E]
     [Abelian B] [Abelian C] [Abelian D] [Abelian E]

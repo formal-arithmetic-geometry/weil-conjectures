@@ -13,7 +13,6 @@ import Mathlib.CategoryTheory.Abelian.Injective.Resolution
 /-! # Existence of an augmentation quotient in one degree
 
 Source: Stacks Project, Tag 01EQ, proof of Lemma 20.11.2.
-(blueprint: new-abelian-cech-comparison-core)
 -/
 
 @[expose] public section
@@ -87,12 +86,7 @@ set_option backward.isDefEq.respectTransparency false in
 
 Source: Stacks Project, Tag 01EQ, proof of Lemma 20.11.2, the quotient of beta by
 alpha; resolution independence expands the functoriality verification there.
-(blueprint: new-abelian-cech-comparison-core)
 
-Proof: Fix an injective resolution I. The section-homology identification
-exists_abelianResolutionSectionsIso gives an isomorphism e from its section
-homology to Ext, with the specified cocycle formula. Define c by H(beta),
-inverse H(alpha), and e, in that order; hα I makes the middle map invertible.
 
 For any resolution J, use InjectiveResolution.homotopyEquiv J I to lift the
 identity of F to a chain map J -> I. Applying sections to this homotopy

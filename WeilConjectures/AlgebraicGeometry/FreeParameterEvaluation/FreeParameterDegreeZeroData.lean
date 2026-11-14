@@ -11,7 +11,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategoryB
 import WeilConjectures.CategoryTheory.RingObjects.Condensed.CondensedAction.CondensedActionInjectiveRestriction
 
 /-! # Canonical free-parameter evaluation data and coherence.
-Source: Stacks 08J7, 07A6, 07A7 (blueprint: def-sfb-free-parameter-degree-zero-data). -/
+Source: Stacks 08J7, 07A6, 07A7. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false

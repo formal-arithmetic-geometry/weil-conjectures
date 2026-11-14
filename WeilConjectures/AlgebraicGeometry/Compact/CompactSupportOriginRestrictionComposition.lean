@@ -16,8 +16,7 @@ import all WeilConjectures.AlgebraicGeometry.Canonical.CanonicalOriginCompactSup
 
 /-! # Scalar restriction and the compositor on etale-origin complexes
 
-Source: Stacks Project, Tags 09AF, 099R, 0F7J and 0GL6
-(blueprint: lem-sf-origin-compact-restriction-composition).
+Source: Stacks Project, Tags 09AF, 099R, 0F7J and 0GL6.
 -/
 
 -- After pruning, this module only keeps private declarations.

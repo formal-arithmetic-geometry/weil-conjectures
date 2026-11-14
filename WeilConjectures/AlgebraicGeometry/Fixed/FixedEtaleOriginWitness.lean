@@ -12,7 +12,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Com
 # Retained etale-origin witnesses in fixed-module coordinates
 
 Source: blueprint proposition-proper-direct-image-constructible-complexes--5, displayed pair
-(L,alpha), Stacks Tag 099R (blueprint: proposition-proper-direct-image-constructible-complexes--5).
+(L,alpha), Stacks Tag 099R.
 
 The ringed witness remains imported. This is the same pair in the ordinary fixed-scalar
 presentation used by the closed-support and comparison-class adjunctions.
@@ -29,8 +29,7 @@ namespace AlgebraicGeometry.Scheme
 /-- A specified bounded-below etale antecedent and the specified comparison isomorphism.
 The target is already in D+; no constructibility or chosen preimage is imposed.
 Source: blueprint proposition-proper-direct-image-constructible-complexes--5, displayed pair
-(L,alpha), Stacks Tag 099R (blueprint:
-proposition-proper-direct-image-constructible-complexes--5). -/
+(L,alpha), Stacks Tag 099R. -/
 structure FixedEtaleOriginWitness (T : Scheme.{u}) (A : Type (u + 1))
     [Ring A]
     (K : DerivedCategory.Plus (Sheaf (ProEt.topology T) (ModuleCat.{u + 1} A))) where

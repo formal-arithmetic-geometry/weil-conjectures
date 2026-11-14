@@ -26,26 +26,7 @@ namespace AlgebraicGeometry
 
 /-- The degree-zero component of a fixed chain representative is invertible at the
 chosen stalk when its derived residue arrow is invertible on degree-zero homology.
-Source: Stacks Project, Tag 0E62, residue-field argument, and Tag 0BCD.
-(blueprint: lem-sc-rank-one-residue-stalk-component).
-
-Proof: Identify the localized site with the open subscheme. The source is the
-structure sheaf in degree zero. The target P is bounded with finite-projective
-terms, so the termwise flat-complex comparison computes its residue pullback.
-Exact restriction and the composition comparison for derived pullback identify
-the residue of Q.map alpha with the residue of a, conjugated by c and e. Both
-conjugating arrows are isomorphisms, so the residue homology map of alpha is
-invertible. Negative terms of P vanish, hence its residue H^0 is the kernel of
-the outgoing degree-zero differential without an incoming quotient. Consequently
-the image of the residue source generator under alpha^0 is nonzero: it represents
-the nonzero image of the source generator in residue homology. The source and
-P^0 stalks are free of rank one over the local ring at s. In these bases alpha^0
-is multiplication by a scalar whose residue is nonzero. That scalar is a unit
-in the local ring, and multiplication by its inverse gives the two-sided inverse
-of the stalk component. Forgetting the scalar action gives the asserted additive
-isomorphism. No conclusion about the original homology stalk map is used here.
-An empty U cannot contain s. Rank zero is excluded by the fixed rank-one hypothesis;
-higher differentials and all other fibres are unrestricted. -/
+Source: Stacks Project, Tag 0E62, residue-field argument, and Tag 0BCD. -/
 theorem isIso_localized_stalk_component_of_residue_homology (S : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
     [∀ U : S.Opens,

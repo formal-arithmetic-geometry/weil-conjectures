@@ -14,8 +14,7 @@ import Mathlib.RingTheory.Noetherian.Basic
 
 /-! # Weak Serre closure for finite etale-local module models
 
-Source: Stacks Project, Modules on Sites, Tag 093U; proetale.tex, Tag 099Y
-(blueprint: lem-weil-pbc-finite-coefficient-etale-local-weak-serre).
+Source: Stacks Project, Modules on Sites, Tag 093U; proetale.tex, Tag 099Y.
 -/
 
 @[expose] public noncomputable section
@@ -31,25 +30,7 @@ attribute [local instance] finitePerfectModelsAbLocallyBijective
 /-- Over a finite coefficient sheaf, etale-locally constant finite modules are
 closed under kernels, cokernels and extensions, in the ambient pro-etale module category.
 
-Source: Stacks Project, Modules on Sites, Tag 093U (3), and proetale.tex, Tag 09AL.
-(blueprint: lem-weil-pbc-finite-coefficient-etale-local-weak-serre).
-
-Proof: restrict to the pro-etale slice over V and change coefficients through φ.
-The localization equivalence identifies it with the pro-etale site of V.left,
-and the normalized constant-module comparisons identify the given local models.
-Since B is finite it is Noetherian, and finite type is equivalent to finite
-presentation. Etale-local models are in particular pro-etale-local finite models.
-Apply weak Serre closure for finitely presented locally constant pro-etale modules:
-exact slice restriction and the exact coefficient equivalence preserve kernels,
-cokernels and short exact sequences. The resulting sheaves therefore have finite
-pro-etale-local constant models. Apply the finitely presented local-system etale
-cover theorem (099Y) to obtain etale constant charts for these sheaves. This theorem
-uses the locally constant sheaf of isomorphisms from a constant model and descent
-of its sections to etale covers. Finitely presented modules over finite B are finite;
-remove the universe lift by the module equivalence. Do this after pullback to each
-W over V and compose the resulting covers. Thus each kernel, cokernel and extension
-has precisely the displayed etale-local finite-module models. Empty charts and the
-zero ring have zero modules, so no nonemptiness assumption is needed. -/
+Source: Stacks Project, Modules on Sites, Tag 093U (3), and proetale.tex, Tag 09AL. -/
 theorem finiteCoefficient_etaleLocal_weakSerre
     (X : Scheme.{t}) (B : Type t) [CommRing B] [Finite B]
     [(koszulConstantFunctor X B).PreservesZeroMorphisms]

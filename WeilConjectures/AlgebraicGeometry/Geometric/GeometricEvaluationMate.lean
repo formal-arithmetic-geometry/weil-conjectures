@@ -18,7 +18,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 /-! # Derived geometric evaluation from the ordinary singleton mate
 
 Source: Zheng Construction 4.1; Stacks 06YT and 07A6.
-(blueprint: lem-coef-geometric-evaluation-mate-invertible)
 -/
 
 @[expose] public noncomputable section
@@ -95,14 +94,7 @@ variable (O : GeometryOrdinary.{c, v, r} J B τ J' uInv uPush adjSet)
 -- Compare the singleton adjunctions in four independently derived module categories.
 /-- Invertibility of the canonical right mate of exact geometric evaluation.
 Source: Zheng Construction 4.1 and the paragraph before Lemma 4.10; Stacks 03EL,
-06YT and 07A6 (blueprint: lem-coef-geometric-evaluation-mate-invertible).
-
-Proof: transport ordinary singleton extension across strictSystemSequenceEquivalence
-and derive its normalized adjunction on flat-term K-flat complexes. The ordinary
-singleton mate is invertible. Inverse image preserves this resolving class, so the
-normalized extension comparison identifies its derived mate on representatives and
-makes it invertible. The iterated-mates identity expresses the right geometric mate
-as the conjugate of this invertible singleton mate. Conjugation preserves inverses. -/
+06YT and 07A6. -/
 theorem geometricEvaluationMate_isIso [PreservesFiniteLimits uInv] (n : ℕ) :
     IsIso (mateEquiv O.ordinaryAdjunction.mapDerivedCategoryRightDerivedAdjunction
       (O.levelAdjunction n).mapDerivedCategoryRightDerivedAdjunction

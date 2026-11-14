@@ -116,7 +116,6 @@ import WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquare
 /-! # Tensor calculation on finite-free completion resolutions
 
 Source: Stacks Tags 06YN, 06YT, 06YU and 093M.
-(blueprint: lem-weil-pbc-completed-constant-resolution-tensor-calculation).
 -/
 
 -- After pruning, this module only keeps private declarations.

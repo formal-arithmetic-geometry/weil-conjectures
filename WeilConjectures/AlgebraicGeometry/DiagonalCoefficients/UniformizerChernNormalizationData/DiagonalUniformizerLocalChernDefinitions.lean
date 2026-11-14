@@ -215,9 +215,6 @@ public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteFibreHomologyCompa
 public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1FibreHomologyCard
 
 /-! # Finite comparison definitions for a local completed Chern class
-
-Source: diagonal tower coefficient changes proof (1), reduction of the section class.
-(blueprint: def-diagonal-uniformizer-local-chern-local-finite-arrow).
 -/
 
 @[expose] public noncomputable section
@@ -246,8 +243,6 @@ variable (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
 namespace UniformizerChernNormalizationData
 
 /-- The completed arrow after the four local coefficient endpoints.
-Source: coefficient changes (1), reduction of the section class.
-(blueprint: def-diagonal-uniformizer-local-chern-local-composite).
 
 This declaration is kept with the finite comparison interfaces so the transport
 module remains self-contained when the endpoint-only archive is absent. -/
@@ -261,8 +256,6 @@ def LocalComposite (s : UniformizerChernNormalizationData l Y)
   (s.localUnitInv l Y ≫ (s.localFunctor l Y).map z) ≫ s.localLine l Y
 
 /-- The specified positive finite Chern image.
-Source: coefficient changes (1), the finite endpoint of the section class.
-(blueprint: def-diagonal-uniformizer-local-endpoints).
 
 This is the existing `geoP1EtaleChern` construction, named here so finite
 transport keeps working when endpoint modules are archived from the route. -/
@@ -276,9 +269,7 @@ def localFiniteChernImage (s : UniformizerChernNormalizationData l Y) :
       (geoP1EtaleChern (ULift.{u + 1} (completedResidue l s.E s.π s.n))
         (l ^ (s.n + 1)) (pow_pos (Fact.out : l.Prime).pos _) s.hA Y s.hYpow)
 
-/-- The finite coefficient arrow space.
-Source: coefficient changes (1), finite Kummer normalization.
-(blueprint: def-diagonal-uniformizer-local-chern-local-finite-arrow). -/
+/-- The finite coefficient arrow space. -/
 @[irreducible]
 def LocalFiniteArrow (s : UniformizerChernNormalizationData l Y) :=
   Etale.ordinaryFiniteUnit (ULift.{u + 1} (completedResidue l s.E s.π s.n))
@@ -287,8 +278,6 @@ def LocalFiniteArrow (s : UniformizerChernNormalizationData l Y) :=
       (l ^ (s.n + 1)) s.hA (ProjectiveLine Y) 1 2
 
 /-- View the protected finite arrow as its underlying ordinary etale morphism.
-Source: coefficient changes (1), the finite comparison factor.
-(blueprint: def-diagonal-uniformizer-local-chern-local-finite-arrow).
 
 This is the identity under the defining equality of LocalFiniteArrow. The checked
 term reuses k without reverting its dependent context or copying the morphism type. -/
@@ -305,9 +294,7 @@ def LocalFiniteArrow.toHom (s : UniformizerChernNormalizationData l Y)
       let some kd := (← getLCtx).findFromUserName? `k | throwError "Missing finite arrow"
       Meta.withTransparency .all <| closeMainGoal `finite_arrow_hom kd.toExpr
 
-/-- The pro-etale image of a finite ordinary arrow.
-Source: coefficient changes (1), finite Kummer normalization.
-(blueprint: def-diagonal-uniformizer-local-chern-finite-comparison). -/
+/-- The pro-etale image of a finite ordinary arrow. -/
 @[irreducible]
 def FiniteComparison (s : UniformizerChernNormalizationData l Y)
     (k : LocalFiniteArrow l Y s) :
@@ -319,9 +306,7 @@ def FiniteComparison (s : UniformizerChernNormalizationData l Y)
 
 end UniformizerChernNormalizationData
 
-/-- The ordinary finite Kummer specification, kept behind a small local interface.
-Source: coefficient changes (1), finite Kummer normalization.
-(blueprint: def-diagonal-uniformizer-local-chern-finite-spec). -/
+/-- The ordinary finite Kummer specification, kept behind a small local interface. -/
 @[irreducible]
 def LocalFiniteChernSpec
     (A : Type (u + 1)) [CommRing A] [Finite A]
@@ -333,9 +318,7 @@ def LocalFiniteChernSpec
 
 namespace UniformizerChernNormalizationData
 
-/-- Specialize the finite specification to the prescribed uniformizer quotient.
-Source: coefficient changes (1), finite Kummer normalization.
-(blueprint: def-diagonal-uniformizer-local-chern-finite-spec). -/
+/-- Specialize the finite specification to the prescribed uniformizer quotient. -/
 abbrev LocalFiniteChernSpecCanonical
     (s : UniformizerChernNormalizationData l Y)
     (k : LocalFiniteArrow l Y s) : Prop :=

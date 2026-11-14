@@ -11,8 +11,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.CompMono
 set_option linter.privateModule false
 
 /-! # Coefficient-normalized ordinary component square coherence
-
-Source: Hemo--Richarz--Scholbach, construction (4.1), pp. 8--9.
 -/
 
 @[expose] public noncomputable section

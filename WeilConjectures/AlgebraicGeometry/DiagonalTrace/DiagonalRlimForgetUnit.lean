@@ -137,8 +137,7 @@ left Kan extensions and sheafification. The two canonical comparisons give
 an isomorphism commuting with the inverse-image units: expand the units,
 use the sheafification unit equation, naturality, and the left Kan extension
 unit equation. Under the abelian adjunction its inverse is precisely the
-adjunct asserted here, which is therefore invertible.
-(blueprint: new-sfb-diagonal-rlim-forget-unit). -/
+adjunct asserted here, which is therefore invertible. -/
 theorem diagonalRlimForgetUnit (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} (f : X ⟶ S) (M : DiagonalMod l S) :
     IsIso (((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).homEquiv

@@ -36,18 +36,7 @@ variable (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
 /-- The integral finite projection of a normalized completed Chern arrow is the
 positive Kummer composite. No scalar-extension functor or supplied finite factor occurs.
 
-Source: blueprint latest, diagonal tower trace proof (1), finite levels of the section
-class; geometric tower classes proof (2), finite Kummer normalization.
-(blueprint: lem-diagonal-local-chern-normalized-boundary).
 
-Proof: postcompose hz with the n-th projection of tq.LX. Naturality of that projection
-moves firstChern outside the derived limit. Normalize the coefficient cone by
-exactConeComparison_projection. For the shifted root cone use tq.LX.unitShift and its
-normalization on the shifted single complex: this identifies the shifted projection
-with the single of coefficientsX.lineProjection at n, including both exact shift
-comparisons. Thus the projected equation is the evaluated strict-system Chern arrow,
-preceded by the actual coefficient cone component, and followed by the actual root
-cone component.
 
 Forget to abelian sheaves. Restriction.underlying identifies strict-system restriction
 followed by evaluation and forgetting with intrinsic finite evaluation and forgetting.

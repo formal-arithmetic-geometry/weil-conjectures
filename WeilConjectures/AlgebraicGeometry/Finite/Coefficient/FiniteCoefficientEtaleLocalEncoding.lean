@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.Finite.Coefficient.FiniteCoefficientEta
 
 Source: Stacks Project, proetale.tex, Tag 099Y, lemma-compare-locally-constant;
 sites-modules.tex, localization of ringed sites, Tag 04IX.
-(blueprint: lem-weil-pbc-finite-coefficient-etale-local-encoding).
 -/
 
 @[expose] public noncomputable section
@@ -38,19 +37,7 @@ This compares local models; it asserts no exactness or closure property.
 Source: Stacks Project, proetale.tex, Tag 099Y, lemma-compare-locally-constant;
 sites-modules.tex, Tag 04IX, localization of ringed sites; Tags 03CY and 093J,
 constant modules and change of coefficients.
-(blueprint: lem-weil-pbc-finite-coefficient-etale-local-encoding).
 
-Proof: use the already constructed finiteCoefficientSliceRestriction. Its scalar
-restriction along phi retains the underlying additive sheaf, and its localization
-is the sectionwise restriction to the scheme of the chart. The concrete slice
-localization equivalence and the normalized constant-module sheafification
-comparisons therefore identify the two forms of constant local models.
-For the forward implication, the etale-model condition at W = V and id supplies
-an etale covering of V. It is also a pro-etale covering. The sheafification
-universal property, with the identity on constant sections, identifies each
-displayed model with the fixed-coefficient constant sheaf of the lifted N.
-Pull back this covering to every pro-etale object to obtain the fixed-scalar
-finite local-model condition.
 
 For the reverse implication, restrict to any etale W -> V. Local constant models
 restrict to local constant models on its scheme. The lifted ring B is Noetherian,

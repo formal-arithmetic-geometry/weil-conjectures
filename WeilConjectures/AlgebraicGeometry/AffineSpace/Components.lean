@@ -14,7 +14,7 @@ For a scheme `B` and the projection `π : 𝔸(n; B) ⟶ B`, `n` nonempty, the c
 of `𝔸(n; B)` are the inverse images of the connected components of `B`, and likewise for the
 complement `G` of the zero section (`G = 𝔾_{m, B}` for `n` a singleton). In particular every
 connected component of `𝔸(n; B)` meets `G`, and every connected component of either meets the
-image of the unit section `t = 1` (blueprint `lemma-section-normal-bundle--1`).
+image of the unit section `t = 1`.
 
 The argument is the one of the blueprint: `π` is open and surjective, hence a quotient map, and
 its fibres are irreducible, hence connected; the same holds for `π ∘ j` with `j : G ⟶ 𝔸(n; B)`
@@ -114,7 +114,7 @@ lemma exists_mem_connectedComponent_range_of_preimage {T : Scheme.{u}} (p : T �
     rw [← hp, Set.mem_preimage, h]
     exact mem_connectedComponent, p x, rfl⟩
 
-/-- Blueprint `lemma-section-normal-bundle--1`: The connected components of the affine line over a
+/-- The connected components of the affine line over a
 base.
 
 (2), first half: every connected component of `𝔸(n; B)` meets the image of the unit section. -/
@@ -123,7 +123,7 @@ theorem exists_mem_connectedComponent_range_oneSection (x : 𝔸(n; B)) :
   exists_mem_connectedComponent_range_of_preimage _ _ (oneSection_comp_over n B)
     preimage_connectedComponent_over x
 
-/-- Blueprint `lemma-section-normal-bundle--1`: The connected components of the affine line over a
+/-- The connected components of the affine line over a
 base.
 
 (2), second half: every connected component of `𝔸(n; B)` meets the complement `G` of the zero
@@ -135,7 +135,7 @@ theorem exists_mem_connectedComponent_range_of_range_eq [Nonempty n] {G : Scheme
   obtain ⟨_, hx, y, rfl⟩ := exists_mem_connectedComponent_range_oneSection x
   exact ⟨_, hx, oneSection_mem_range_of_range_eq hj y⟩
 
-/-- Blueprint `lemma-section-normal-bundle--1`: The connected components of the affine line over a
+/-- The connected components of the affine line over a
 base.
 
 (3): every connected component of the complement `G` of the zero section meets the image of

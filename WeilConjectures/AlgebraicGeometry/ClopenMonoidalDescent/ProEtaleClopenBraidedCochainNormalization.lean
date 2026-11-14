@@ -11,7 +11,6 @@ import WeilConjectures.Algebra.Homology.HomotopyCategory.BraidedCochainNormaliza
 /-! # Braided cochain restriction with normalized tensor and unit
 
 Source: Stacks Project, Tags 06YS, 0G7D, 06YU and 0FPT.
-(blueprint: lem-pur-clopen-braided-cochain-normalization).
 -/
 
 @[expose] public noncomputable section
@@ -58,17 +57,7 @@ private theorem restrictionCoproducts
 /-- Ordinary braided restriction lifts to a braided cochain restriction with the given
 summand-normalized inverse tensorator and the ordinary unit in degree zero.
 
-Source: Stacks Project, Tags 06YS, 0G7D, 06YU and 0FPT.
-(blueprint: lem-pur-clopen-braided-cochain-normalization).
-
-Proof: Transport the given coproduct preservation to the total-degree index types using
-ULift. The canonical mapCochainComplexMonoidal construction gives the strong cochain
-structure. Apply coproduct extensionality to the two braiding composites: the signed
-summand formulas give the same Koszul sign, and the ordinary braided equation identifies
-the remaining tensorators. Coproduct extensionality and hsum then identify the inverse
-cochain tensorator with b on every degree. The canonical unit of the cochain construction
-is the single-complex comparison followed by the single of the ordinary inverse unit.
-These computations also hold for the zero ring and empty site. -/
+Source: Stacks Project, Tags 06YS, 0G7D, 06YU and 0FPT. -/
 theorem clopen_braided_cochain_normalization
     {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)})

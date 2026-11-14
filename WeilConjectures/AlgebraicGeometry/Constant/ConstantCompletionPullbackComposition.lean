@@ -232,8 +232,7 @@ public import WeilConjectures.AlgebraicGeometry.Constant.ConstantCompletionFinit
 Composition coherence of the pullback comparison (`pullback_composition`).
 
 Part of the split of `WeilConjectures.SixFunctors.Supporting.ConstantCompletionEquivalence`.
-Source: Stacks Project, Tags 093M, 099I, 099L, 099M, 0A0E, 06YY and 0940
-(blueprint: lem-weil-pbc-constant-completion-equivalence).
+Source: Stacks Project, Tags 093M, 099I, 099L, 099M, 0A0E, 06YY and 0940.
 -/
 
 @[expose] public noncomputable section

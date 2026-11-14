@@ -14,7 +14,6 @@ import all WeilConjectures.AlgebraicGeometry.Local.LocalHypercohomologyClassUnit
 
 Source: Stacks Project, Cohomology, Tag 01E4, lemma-describe-higher-direct-images,
 and Tags 0BKJ and 0D5X.
-(blueprint: lem-weil-pbc-direct-image-complex-unit).
 -/
 
 @[expose] public section
@@ -132,13 +131,6 @@ private theorem leray_complex_unit
 /-- The local Leray comparison factors the direct-image derived unit through the
 section derived unit on the direct-image complex.
 Source: Stacks Project, Tags 0BKJ and 0D5X.
-(blueprint: lem-weil-pbc-direct-image-complex-unit).
-
-Proof: Evaluate the universal factorization defining the Leray transformation at the
-homotopy class of I. On a K-injective complex the direct-image derived unit is
-invertible. The recorded resolution comparison for the identity is its inverse.
-Cancel these two maps. The quotient-composition comparisons are identity maps,
-so the remaining factor is precisely the section derived unit.
 -/
 theorem directImage_complex_unit
     {X Y : RingedSpace.{u}}

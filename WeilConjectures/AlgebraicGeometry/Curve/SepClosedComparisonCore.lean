@@ -21,21 +21,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.IsCurve
 
 /-- The geometric data underlying the separably closed comparison square.
-Source: Stacks Project, Tag 0A5E, compatible algebraic closures.
-(blueprint: lemma-weil-pbc-curve-separably-closed-passage-core)
-Proof: Recover the field embedding k -> k' from the given spectrum morphism using
-full faithfulness of Spec. Choose an algebraic closure K' of k' and let K be the
-subfield of elements of K' algebraic over k. A root in K' of a polynomial over K
-is algebraic over K and hence over k, so belongs to K; thus K is algebraically
-closed. These inclusions commute. Since k and k' are separably closed, their
-algebraic closures are purely inseparable. The induced spectrum maps are universal
-homeomorphisms. Define D as the pullback of f along t : Spec K -> Spec k, and D'
-as the pullback of f' along Spec K' -> Spec k'. This supplies IsPullback p b f t.
-The pullback projections p and p' are universal homeomorphisms by base-change
-stability. Pullback pasting and the original square identify D' with D times
-Spec K' over Spec K. Its projection a gives IsPullback a b' b j; the universal
-property gives p' followed by iota' = a followed by p. No dimension or properness
-assertion is included here. The same pullback construction covers empty schemes. -/
+Source: Stacks Project, Tag 0A5E, compatible algebraic closures. -/
 theorem exists_sepClosed_comparison_core
     {k k' : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k']
     {C C' : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f] [IsProper f]

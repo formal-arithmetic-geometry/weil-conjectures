@@ -30,8 +30,7 @@ public import WeilConjectures.AlgebraicGeometry.EtaleCompactSupportGraphDerivedI
 /-!
 # Invertibility of the graph comparison on unbounded complexes
 
-Source: SGA 4 XVII 5.2.2 and 6.2.11; Stacks Project Tags 03S6 and 0F0C
-(blueprint: lem-asd-compact-support-graph-derived-isomorphism).
+Source: SGA 4 XVII 5.2.2 and 6.2.11; Stacks Project Tags 03S6 and 0F0C.
 -/
 
 @[expose] public section
@@ -46,8 +45,7 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
 
 /-- Core data from the specified graph map, with its forced inverse and termwise descent.
-Source: SGA 4 XVII 6.2.11
-(blueprint: lem-asd-compact-support-graph-derived-isomorphism). -/
+Source: SGA 4 XVII 6.2.11. -/
 noncomputable def canonicalEtaleCompactSupportCore
     (A : Type (u + 1)) [CommRing A] [Finite A] : EtaleCompactSupportCore A where
   comparison := fun f _ _ _ _ _ _ c ↦ canonicalEtaleCompactSupportComparison A f c

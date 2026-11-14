@@ -10,8 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveCechNormaliza
 import WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveCechPullbackTotalBeta
 
 /-! # Augmentation-preserving pullback maps of the additive Čech complexes
-Source: Stacks Project, Tags 01FD, 01FB and 03P2.
-(blueprint: lem-pbc-etale-additive-cech-pullback-total-transfer) -/
+Source: Stacks Project, Tags 01FD, 01FB and 03P2. -/
 
 @[expose] public section
 
@@ -23,22 +22,7 @@ set_option backward.isDefEq.respectTransparency.types false
 
 /-- A supplied augmented coefficient comparison induces a map of the Cech totals.
 Source: Stacks Project, Tag 01FD, explicit tuple restriction maps in the proof.
-(blueprint: lem-pbc-etale-additive-cech-pullback-total-transfer)
 
-Proof: For a p-tuple y write A_y for the product of its source opens and
-B_y for the product of its target opens, identified with their intersections.
-The inclusion hinter gives B_y -> g^{-1}(A_y). Compose its open-subscheme map
-with openSectionPullback g A_y to get k_y:B_y -> g.Etale(A_y).
-In bidegree (p,q), define the map by its y-coordinate: project to the A_y
-section of I^q, apply (α.f q).hom.app (op A_y), then apply
-(J.cocomplex.X q).obj.map k_y.op. Products assemble these coordinates.
-For deletion of a tuple entry the square between the two k_y commutes:
-both maps have the same projections to A_y and Y in the defining pullback.
-Thus resolutionSectionTransfer_naturality identifies the two restricted
-coordinates. Taking the alternating sum gives the horizontal cochain equation.
-The equation α.comm and naturality of the J differential give the vertical
-one. Flip and totalize; the bidegree is preserved, so the total signs agree.
-This constructs t, and total summand inclusion naturality computes its components.
 
 In Cech degree zero, the square of k_y with the maps to the terminal objects
 commutes by the same pullback projection calculation. Section transfer naturality

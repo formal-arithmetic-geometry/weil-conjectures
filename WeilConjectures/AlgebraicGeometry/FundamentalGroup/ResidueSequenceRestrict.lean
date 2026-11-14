@@ -71,7 +71,7 @@ lemma galoisCharacter_pullback (T : EtaleTorsor (ULift.{u + 1} (ZMod N)) U) :
 variable [IsLocallyNoetherian C] {k : Type u} [Field k] (p : C ⟶ Spec (.of k)) [NeZero (N : k)]
   [HasEnoughRootsOfUnity k N]
 
-/-- Blueprint `proposition-no-fixed-class-degree-one--1`: the residues of a torsor on `U` are those
+/-- The residues of a torsor on `U` are those
 of its restriction to a smaller nonempty open `U'`. -/
 lemma residue_pullback (T : EtaleTorsor (ULift.{u + 1} (ZMod N)) U) (z : C) :
     (T.pullback ι).residue (ι ≫ j) p z = T.residue j p z := by
@@ -104,7 +104,7 @@ variable {k : Type u} [Field k] [IsAlgClosed k] {C U : Scheme.{u}} {p : C ⟶ Sp
 local notation "Ω" => SeparableClosure (Scheme.functionField C)
 
 omit [ConnectedSpace U] in
-/-- Blueprint `proposition-no-fixed-class-degree-one--1`: a torsor on `U` has vanishing residue at
+/-- A torsor on `U` has vanishing residue at
 every closed point `y` of `U`, since it extends over `y`: compare with the restriction of the torsor
 to `U ∖ {y}`. -/
 theorem residue_eq_zero_of_mem_range {N : ℕ} [NeZero N] [NeZero (N : k)]
@@ -161,7 +161,7 @@ theorem residue_eq_zero_of_mem_range {N : ℕ} [NeZero N] [NeZero (N : k)]
   have := fixingSubgroup_le_comp s _ G j.isoOpensRange.inv hg
   rwa [hl] at this
 
-/-- Blueprint `proposition-no-fixed-class-degree-one--1`: extension over finitely many points.
+/-- Extension over finitely many points.
 
 Let `U' ⊆ U` be nonempty opens of a smooth connected curve `C` over an algebraically closed
 field. A `ℤ / N`-torsor on `U'` whose residues vanish at the points of `U ∖ U'` is the

@@ -17,7 +17,6 @@ import Mathlib.CategoryTheory.Adjunction.Additive
 /-! # Residue cohomology of a K-flat sheaf representative
 
 Source: Stacks Project, Cohomology, Tags 06YI and 06YJ; Sheaves, Tag 0098.
-(blueprint: lem-sc-kflat-stalk-residue-cohomology).
 -/
 
 @[expose] public section
@@ -32,25 +31,7 @@ set_option backward.isDefEq.respectTransparency.types false
 namespace AlgebraicGeometry.Scheme
 
 /-- A K-flat sheaf complex computes residue-fibre cohomology by its stalk tensor.
-Source: Stacks Project, Cohomology, Tags 06YI and 06YJ; Sheaves, Tag 0098.
-(blueprint: lem-sc-kflat-stalk-residue-cohomology).
-
-Proof: The counit in `exists_derivedPullback` is invertible on P since P is K-flat.
-It identifies the derived residue pullback of Q(P) with Q of the termwise tensor
-pullback of P. Apply derived pullback to eP to replace Q(P) with E. On the spectrum
-of the residue field the only opens are the empty open and the whole space.
-The sheaf axiom makes sections on the empty open zero, so evaluation on the whole
-space preserves kernels and cokernels, hence homology. Its scalar transport along
-GammaSpecIso identifies the resulting complex with termwise extension of the stalk
-of P along the residue map. To construct this identification, restrict scalar and
-module germs to the residue point, send a pure tensor a tensor m to a times the
-restricted germ, and use the balanced tensor universal property. The inverse is
-provided by the stalk tensor pullback isomorphism of Tag 0098 and the equality of
-sections with the stalk on a one-point space. Those maps commute with every module
-map, hence with differentials. Apply degree-i homology and compose the resulting
-linear equivalences. No boundedness, finite rank or flatness of the residue map is
-used. The zero representative gives the zero equivalence, and negative degrees
-are handled by the same homology functor. -/
+Source: Stacks Project, Cohomology, Tags 06YI and 06YJ; Sheaves, Tag 0098. -/
 theorem nonempty_kFlat_stalk_residueCohomology_linearEquiv
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

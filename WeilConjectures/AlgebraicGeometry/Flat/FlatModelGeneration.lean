@@ -153,9 +153,6 @@ import WeilConjectures.SixFunctors.OpenClosed.Vanishing
 /-!
 # Ordered strata, sheaf filtrations, and thick generation over finite rings
 
-Source: literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
-sk-lem-sf-flat-model/det-sf-flat-model-generation.md
-(blueprint: lemma-flat-models-generators--2).
 
 The six statements give the three clauses separately on the etale and pro-etale sites.
 `Dctf` is expanded using constructible cohomology, finite cohomological bounds, and the
@@ -176,9 +173,7 @@ open AlgebraicGeometry AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry
 
-/-- Closed tails and relative openness for an ordered finite stratification.
-Source: blueprint lemma-flat-models-generators--2, clause (1)
-(blueprint: lemma-flat-models-generators--2). -/
+/-- Closed tails and relative openness for an ordered finite stratification. -/
 def FlatModelOrderedStratification {X : Scheme.{u}} (str : Stratification X) :
     Prop :=
   ∀ k : Fin str.n,
@@ -187,9 +182,7 @@ def FlatModelOrderedStratification {X : Scheme.{u}} (str : Stratification X) :
       (x : X) ∈ str.stratum k}
 
 /-- A finite extension filtration has zero first term, final term isomorphic to F,
-and exactly one specified quotient per stratum, in the prescribed order.
-Source: blueprint lemma-flat-models-generators--2, clause (2)
-(blueprint: lemma-flat-models-generators--2). -/
+and exactly one specified quotient per stratum, in the prescribed order. -/
 def FlatModelExtensionFiltration {C : Type v} [Category.{w} C] [Abelian C]
     {m : ℕ} (G : Fin m → C) (F : C) : Prop :=
   ∃ M : Fin (m + 1) → C,
@@ -198,9 +191,7 @@ def FlatModelExtensionFiltration {C : Type v} [Category.{w} C] [Abelian C]
       ∃ (f : M k.castSucc ⟶ M k.succ) (g : M k.succ ⟶ G k)
         (h : f ≫ g = 0), (ShortComplex.mk f g h).ShortExact
 
-/-- Local constancy and finite projective geometric stalks on the small etale site.
-Source: blueprint lemma-flat-models-generators--2, clauses (1) and (3)
-(blueprint: lemma-flat-models-generators--2). -/
+/-- Local constancy and finite projective geometric stalks on the small etale site. -/
 def FlatModelEtaleLisseProjective {S : Scheme.{u}} (A : Type (u + 1)) [CommRing A]
     (L : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} A)) : Prop :=
   IsLocallyConstantSheaf L ∧
@@ -209,9 +200,7 @@ def FlatModelEtaleLisseProjective {S : Scheme.{u}} (A : Type (u + 1)) [CommRing 
       Module.Projective A (((pointSmallEtale x).sheafFiber (A := ModuleCat.{u + 1} A)).obj L)
 
 /-- The ordinary locally closed extension a_! = g_* j_!, with j = a.toImage and
-closed g = a.imageι. Its quasi-compactness follows from the embedding into Noetherian X.
-Source: blueprint lemma-flat-models-generators--2, conventions and clause (2)
-(blueprint: lemma-flat-models-generators--2). -/
+closed g = a.imageι. Its quasi-compactness follows from the embedding into Noetherian X. -/
 def flatModelEtaleExtension {S X : Scheme.{u}} [IsNoetherian X]
     (A : Type (u + 1)) [CommRing A] (a : S ⟶ X) (ha : IsImmersion a) :
     Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} A) ⥤
@@ -580,31 +569,7 @@ private theorem flatModel_filtration_mem
   exact P.prop_of_iso ((_root_.DerivedCategory.singleFunctor C 0).mapIso e) (h (Fin.last m))
 
 /-- Clause (1) on the etale site: an ordered finite stratification with projective stalks.
-Source: blueprint lemma-flat-models-generators--2
-(blueprint: lemma-flat-models-generators--2).
 
-Proof:
-By the two constructibility definitions choose a finite locally closed partition adapted to F.
-Refine it, rather than merely reorder its old strata, as follows. For each old stratum T include
-the two closed sets \overline T and \overline T\setminus T, and let \mathcal Z consist of X, the
-empty set and all intersections of this finite family. Set S_Z=Z\setminus\bigcup_{Z'\in\mathcal
-Z,\ Z'\subsetneq Z}Z'. Each point belongs to the cell of the smallest member of \mathcal Z
-containing it, so these cells partition X; their membership in every old \overline T and its
-boundary shows that each cell lies in one old T. Order the nonempty cells by any linear order
-extending reverse inclusion of their Z. Among the Z with nonempty cells, the unprocessed ones
-form a downward closed family. If x lies in such a Z, the smallest member Z_x containing x is a
-subset of Z and has the nonempty cell containing x, so its cell is also unprocessed. Thus the
-union of the unprocessed cells equals the finite union of their Z, hence is closed; this also
-handles Z whose own cell was empty. Thus every tail is closed and its first cell is open in it.
-Give each cell the open subscheme structure inside the reduced induced closed subscheme on Z,
-supplied by [lemma-flat-models-generators--2]. It maps to its old stratum T:
-locally where T is closed, its defining ideal is contained in the radical ideal of the reduced
-cell, since every cell point belongs to T. The affine quotient description therefore factors the
-cell immersion through T, and these local factorizations agree because immersions are
-monomorphisms. Pulling the old trivializing covers and constant models back along these actual
-maps gives finite locally constant restrictions. Each cell is constructible because it is a
-difference of closed sets in the Noetherian space, by [lemma-flat-models-generators--2]. This
-writes out the finite closed-set refinement argument. If X is empty use the empty partition.
 
 For either site the geometric-stalk adjunction is a morphism of topoi by
 [lemma-flat-models-generators--2]. Apply the ringed-topos flat-pullback theorem to this
@@ -653,22 +618,7 @@ abbrev flatModelStratumExtension {X : Scheme.{u}} [IsNoetherian X] (A : Type (u 
 
 /-- Clause (2) on the etale site: the specified finite sheaf-extension filtration
 and flat constructible degree-zero factors of finite Tor amplitude.
-Source: blueprint lemma-flat-models-generators--2
-(blueprint: lemma-flat-models-generators--2).
 
-Proof:
-The Noetherian hypothesis implies that the underlying space has the descending chain condition
-on closed subsets. Thus every open subset is quasi-compact: a cover with no finite subcover
-would give a strictly increasing chain of finite unions of its members, hence a strictly
-decreasing chain of their closed complements. The same argument on every affine open makes every
-open immersion below quasi-compact. For a closed immersion into X, its inverse image over an
-affine chart Spec(B) is Spec(B/I) by the affine-quotient clause of the closed-immersion
-definition. An ideal of B/I is the image of its inverse-image ideal in B, so generators of the
-latter give generators of the former. Hence B/I is Noetherian, and the closed subscheme is
-locally Noetherian; its closed underlying subspace is quasi-compact by the same finite-subcover
-argument. Apply the locally Noetherian quasi-separatedness lemma to X and to these closed
-subschemes: they are all qcqs. These facts verify the quasi-compact-complement hypotheses of the
-pro-etale localization results used below.
 
 We first record the sheaf calculation needed for clause (2), on both sites. For a complementary
 open/closed pair j,i, restriction is exact and commutes with ordinary tensor: on the etale site
@@ -793,27 +743,7 @@ theorem etale_flatConstructible_extensionFiltration
 
 /-- Clause (3) on the etale site: equality with the smallest replete full
 subcategory closed under shifts, cones and direct summands.
-Source: blueprint lemma-flat-models-generators--2
-(blueprint: lemma-flat-models-generators--2).
 
-Proof:
-For a locally constant L with finite projective geometric stalks, each constant model on a
-nonempty trivializing object is isomorphic to a geometric stalk: choose a geometric point of
-that object and apply [lem-fix-geometric-stalk-topos-point]. Thus its models are finite
-projective (empty objects can be discarded). Such L is flat: on a trivializing covering, a
-displayed splitting M\oplus N=A^r gives L\oplus\underline N=A_S^r, so tensoring any short exact
-sequence with L is a retract of its r-fold direct sum, which is short exact. Exactness can be
-checked on the covering: kernels and cokernels restrict to zero, hence vanish by the sheaf axiom
-and local lifting of sections. Factor a:S\hookrightarrow X as an open
-j:S\hookrightarrow\overline S followed by a closed g:\overline S\hookrightarrow X, and put
-a_!=g_*j_!. Step 4 makes a_!L flat. Its restrictions are L on S and zero on \overline S\setminus
-S and X\setminus\overline S, by the same restriction identities. These three pieces are locally
-closed and hence constructible in the Noetherian space by [def-weil-constructible-subset], so
-a_!L is constructible on either site by the constructibility definitions. Finally a_!L[0] is a
-bounded-above complex of flat sheaves, hence K-flat by
-[lem-weil-pbc-independent-bounded-flat-kflat]. Its derived tensor with every module sheaf N[0]
-is the degree-zero ordinary tensor a_!L\otimes_A N. It therefore has Tor amplitude [0,0] and
-belongs to \Dctf. This proves the assertion about all generators, not only the strata of one F.
 
 The category \Dctf is thick. On the etale site, bounded constructible complexes are triangulated
 by [corollary-ambient-ind-derived--1]. They are also closed under retracts: if e is the

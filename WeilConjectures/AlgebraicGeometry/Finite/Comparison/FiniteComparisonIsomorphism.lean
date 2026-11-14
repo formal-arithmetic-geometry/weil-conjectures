@@ -13,7 +13,6 @@ set_option linter.privateModule false
 
 Source: Stacks Project, Tags 03D2, 03D6 and 00WX; step 3 of
 `lem-weil-point-automorphism-derived-transport-inverse`.
-(blueprint: lem-weil-finite-comparison-complex-isomorphism)
 -/
 
 @[expose] public noncomputable section

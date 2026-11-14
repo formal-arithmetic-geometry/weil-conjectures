@@ -11,8 +11,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalTraceIntegrationS
 import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalTraceSingleFaithful
 
 /-! # The completed projective-line trace
-Source: blueprint main-20261015, sk-prop-diagonal-tower-trace, proof steps 1--8
-(blueprint: proposition-ell-adic-cycle-class-diagonal).
 
 ## Main declarations
 - `diagonalTraceFirstModel` and `diagonalTraceSecondModel` specify both product projections.
@@ -38,11 +36,7 @@ set_option linter.unusedVariables false in
 /-- The strict unit/section splitting defines the completed projective-line trace;
 its finite reductions are the torsion traces and the two diagonal integrals are one.
 
-Source: blueprint main-20261015, chap-Construction-of-f,
-sk-prop-diagonal-tower-trace.md, clauses 1--2
-(blueprint: proposition-ell-adic-cycle-class-diagonal).
 
-Proof plan from the DAG:
 
 1. Put $P=\mathbf P^1_Y$. The first-Chern-class construction of [proposition-sp-tower-geometric](2),
 specialized to $E=\mathbf Q_\ell$ and $L=\mathcal O_P(1)$, supplies a single morphism of

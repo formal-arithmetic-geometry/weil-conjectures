@@ -63,7 +63,6 @@ import all WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperations
 
 Source: Stacks Project, Tags 098K, 03D2, 03DI and 00VC; Step 11 of
 lem-sf-constant-semilinear-generator-comparison.
-(blueprint: lem-sf-constant-open-restriction-model-comparison).
 -/
 
 -- After pruning, this module only keeps private declarations.
