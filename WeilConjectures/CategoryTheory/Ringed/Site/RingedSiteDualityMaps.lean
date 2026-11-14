@@ -1312,8 +1312,6 @@ private theorem ringedSiteTensorCoherence
     ringedSiteTensorAssociatorModel J R M t ht, ringedSiteTensorLeftUnitorModel J R M t ht,
     ringedSiteTensorRightUnitorModel J R M t ht⟩, rfl⟩
 
-set_option maxHeartbeats 800000 in
--- The fixed derived Hom comparisons have dependent instance arguments.
 /-- Biduality is the signed ordinary map under the two specified Hom comparisons.
 Source: Stacks 0A97, 08JJ (blueprint: lem-sfb-ringed-site-duality-maps).
 Proof: the closed transposition is pinned by models.uncurry_model. The normalized
@@ -1360,8 +1358,14 @@ theorem ringedSiteBidual_normalization (M : RingedSiteDualityModel.{c, v, r, w} 
     change _ = ringedSiteOrdinaryHomComparison.{c, v, r, w} J R _ _
     rw [ringedSiteOrdinaryHomComparison, ringedSiteAugmentationMap_eq]
     exact hd
-  rw [he', hd', ← hβeq] at hn
-  exact hn
+  -- Transport the morphisms separately, without rewriting the dependent comparison data.
+  have hemap := congrArg (fun f ↦
+    (derivedInternalHomOfUniverses.{c, v, r, w} J R).map
+      (Prod.mkHom f.op (𝟙 (ringedSiteDualityUnit.{c, v, r, w} J R)))) he'
+  exact (congrArg
+    (ringedSiteBidual M.closed M.symmetric (ringedSiteDualityUnit.{c, v, r, w} J R)
+      (DerivedCategory.Q.obj E) ≫ ·) hemap).symm.trans
+    (hn.trans (congrArg₂ (· ≫ ·) (congrArg DerivedCategory.Q.map hβeq.symm) hd'))
 
 /-- Evaluation is the unsigned ordinary map under the specified tensor and Hom comparisons.
 Source: Stacks 08JE, 08JJ (blueprint: lem-sfb-ringed-site-duality-maps).

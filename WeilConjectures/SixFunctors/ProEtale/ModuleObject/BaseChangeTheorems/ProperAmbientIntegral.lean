@@ -33,6 +33,34 @@ open CategoryTheory Limits
 
 open scoped CategoryTheory.Obj
 
+/-- Transfer invertibility from a restricted exchange map to its ambient component. -/
+private lemma isIso_exchangeRight_of_restrictFullyFaithful_app
+    {B A B' A' : Type*} [Category* B] [Category* A] [Category* B'] [Category* A']
+    {PB : ObjectProperty B} {PA : ObjectProperty A} {PB' : ObjectProperty B'}
+    {PA' : ObjectProperty A'}
+    {lf : B ⥤ A} {rf : A ⥤ B} {lf' : B' ⥤ A'} {rf' : A' ⥤ B'}
+    {g : B ⥤ B'} {g' : A ⥤ A'}
+    (ad : lf ⊣ rf) (ad' : lf' ⊣ rf') (t : g ⋙ lf' ≅ lf ⋙ g')
+    (hlf : ∀ K : PB.FullSubcategory, PA ((PB.ι ⋙ lf).obj K))
+    (hrf : ∀ K : PA.FullSubcategory, PB ((PA.ι ⋙ rf).obj K))
+    (hlf' : ∀ K : PB'.FullSubcategory, PA' ((PB'.ι ⋙ lf').obj K))
+    (hrf' : ∀ K : PA'.FullSubcategory, PB' ((PA'.ι ⋙ rf').obj K))
+    (hg : ∀ K : PB.FullSubcategory, PB' ((PB.ι ⋙ g).obj K))
+    (hg' : ∀ K : PA.FullSubcategory, PA' ((PA.ι ⋙ g').obj K))
+    (θ : PB'.lift (PB.ι ⋙ g) hg ⋙ PA'.lift (PB'.ι ⋙ lf') hlf' ≅
+      PA.lift (PB.ι ⋙ lf) hlf ⋙ PA'.lift (PA.ι ⋙ g') hg')
+    (hθ : ∀ K, (θ.hom.app K).hom = t.hom.app K.obj) (K : PA.FullSubcategory)
+    (hK : IsIso ((Adjunction.exchangeRight
+      (ad.restrictFullyFaithful PB.fullyFaithfulι PA.fullyFaithfulι
+        (PA.liftCompιIso (PB.ι ⋙ lf) hlf).symm (PB.liftCompιIso (PA.ι ⋙ rf) hrf).symm)
+      (ad'.restrictFullyFaithful PB'.fullyFaithfulι PA'.fullyFaithfulι
+        (PA'.liftCompιIso (PB'.ι ⋙ lf') hlf').symm (PB'.liftCompιIso (PA'.ι ⋙ rf') hrf').symm)
+      θ).app K)) :
+    IsIso ((Adjunction.exchangeRight ad ad' t).app K.obj) := by
+  rw [← Adjunction.exchangeRight_restrictFullyFaithful_app_hom
+    ad ad' t hlf hrf hlf' hrf' hg hg' θ hθ K, ObjectProperty.isIso_hom_iff]
+  exact hK
+
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
@@ -47,8 +75,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
   [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
 
-set_option maxHeartbeats 1000000 in
--- the bounded constructible and the ambient exchange morphisms are unified
 /-- The base change map of the ambient derived categories of module objects over `𝒪̲_E` at a
 bounded constructible `K` is an isomorphism as soon as the base-change morphism of the bounded
 constructible derived categories is an isomorphism at `K`: the latter is the restriction of the
@@ -64,17 +90,11 @@ lemma isIso_baseChangeMap_app_of_isIso_boundedConstructibleExchangeRight_padicIn
     IsIso ((baseChangeMap (Profinite.padicIntegersRingObj ℓ E) sq').app K.obj) := by
   unfold baseChangeMap
   rw [pullbackSquareComparison_eq_leftDerivedFunctorSquareIso]
-  have hθ (K : Dᵇc(Y.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) :
-      ((boundedConstructiblePullbackSquareComparison (Profinite.padicIntegersRingObj ℓ E) ℓ
-        sq).hom.app K).hom = (Adjunction.leftDerivedFunctorSquareIso (upperStarSquareComparison
-          (Profinite.padicIntegersRingObj ℓ E) sq')).hom.app K.obj := by
-    rw [boundedConstructiblePullbackSquareComparison_hom_app_hom_eq_pullbackSquareComparison,
-      pullbackSquareComparison_eq_leftDerivedFunctorSquareIso]
-  have key := Adjunction.exchangeRight_restrictFullyFaithful_app_hom
+  -- Infer the square isomorphism from the goal to reuse its derived-functor instances.
+  refine isIso_exchangeRight_of_restrictFullyFaithful_app
     (derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E) f.left)
     (derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E) f'.left)
-    (Adjunction.leftDerivedFunctorSquareIso (upperStarSquareComparison
-          (Profinite.padicIntegersRingObj ℓ E) sq'))
+    _
     (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj
       (Profinite.padicIntegersRingObj ℓ E) ℓ f K)
     (fun K ↦ PadicIntegersRingObj.boundedConstructible_rightDerivedLowerStar_obj ℓ E f K)
@@ -86,10 +106,12 @@ lemma isIso_baseChangeMap_app_of_isIso_boundedConstructibleExchangeRight_padicIn
     (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj
       (Profinite.padicIntegersRingObj ℓ E) ℓ g' K)
     (boundedConstructiblePullbackSquareComparison (Profinite.padicIntegersRingObj ℓ E) ℓ sq)
-    hθ K
-  rw [← key, ObjectProperty.isIso_hom_iff]
-  convert hres using 3
-  all_goals rfl
+    ?_ K ?_
+  · intro N
+    rw [boundedConstructiblePullbackSquareComparison_hom_app_hom_eq_pullbackSquareComparison,
+      pullbackSquareComparison_eq_leftDerivedFunctorSquareIso]
+  · convert hres using 3
+    all_goals rfl
 
 /-- **Proper base change on the ambient derived categories** (blueprint
 `proposition-proper-direct-image-constructible-complexes` (3), for `𝒪_E`-coefficients): for a

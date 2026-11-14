@@ -33,7 +33,6 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 2048
 
-set_option maxHeartbeats 600000 in
 -- Transporting the monoidal model unfolds the exact-functor localization data.
 /-- The objectwise tensor comparisons can be chosen bifunctorially.
 (Stacks, Tags 079U and 08DX) -/
@@ -65,6 +64,7 @@ theorem exists_derivedRestriction_tensor_natural
   have : PreservesFiniteColimits R := by
     dsimp [R]
     infer_instance
+  have : R.Additive := inferInstance
   let η : Modules.tensorPullback U.ι ≅ Modules.restrictFunctor U.ι :=
     (Modules.nonempty_tensorPullbackAdjunction U.ι).some.leftAdjointUniq
       (Modules.pullbackPushforwardAdjunction U.ι) ≪≫
@@ -75,6 +75,7 @@ theorem exists_derivedRestriction_tensor_natural
     Modules.tensorPullback U.ι
   have : PreservesFiniteLimits P := preservesFiniteLimits_of_natIso θ.symm
   have : PreservesFiniteColimits P := preservesFiniteColimits_of_natIso θ.symm
+  have : P.Additive := inferInstance
   obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
     F, hF, hFmap, hFadd, ε, hL, htri, hK⟩ :=
     (derivedPullback_spec.{uX, wD} U.ι)
@@ -89,7 +90,8 @@ theorem exists_derivedRestriction_tensor_natural
   let i : derivedPullback.{uX, wD} U.ι ≅ R.mapDerivedCategory.{wD, wD} :=
     Functor.leftDerivedUnique P.mapDerivedCategory.{wD, wD} (derivedPullback.{uX, wD} U.ι)
       ε P.mapDerivedCategoryFactorsh.{wD, wD}.hom W ≪≫ Functor.mapDerivedCategoryNatIso θ
-  obtain ⟨m, _⟩ := exists_derivedPullbackMonoidalModel.{uX, wD} U.ι
+  -- Only the monoidal structure is needed; avoid eliminating its large model certificate.
+  let m := Classical.choose (exists_derivedPullbackMonoidalModel.{uX, wD} U.ι)
   let := m.toMonoidal
   let : R.mapDerivedCategory.{wD, wD}.Monoidal := Functor.Monoidal.transport i
   refine ⟨fun K L ↦ (Functor.Monoidal.μIso R.mapDerivedCategory.{wD, wD} K L).symm, ?_⟩

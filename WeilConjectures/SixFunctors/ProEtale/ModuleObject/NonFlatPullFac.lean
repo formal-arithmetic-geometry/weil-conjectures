@@ -48,6 +48,11 @@ lemma comp_eq_of_counit_chain {𝒟 : Type*} [Category* 𝒟]
   rw [h₇, h₆, h₅, reassoc_of% h₄, reassoc_of% h₃, reassoc_of% h₃', ← h,
     ← reassoc_of% h₁]
 
+private lemma Functor.map_comp_comp_of_eq {C D : Type*} [Category* C] [Category* D]
+    (F : C ⥤ D) {W X Y Z : C} {f : W ⟶ X} {g : X ⟶ Y} {h : Y ⟶ Z} {k : W ⟶ Z}
+    (w : f ≫ g ≫ h = k) : F.map f ≫ F.map g ≫ F.map h = F.map k := by
+  rw [← F.map_comp, ← F.map_comp, w]
+
 end CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
@@ -57,8 +62,6 @@ open Scheme
 variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ] [IsCommMonObj Λ]
   [MonObj Λ'] [IsCommMonObj Λ'] (a : Λ ⟶ Λ') [IsMonHom a] {X Y : Scheme.{u}} (f : X ⟶ Y)
 
-set_option maxHeartbeats 1000000 in
--- unifying the objects of the homotopy categories of module objects is slow
 /-- The composition isomorphism `Mod.extendScalarsComp` of extensions of scalars, followed by
 the underived (Pull) isomorphism rewritten with the composite `α_f ≫ a_X`, is the underived
 (Pull) isomorphism, on the homotopy categories. -/
@@ -81,10 +84,9 @@ lemma mapHomotopyCategory_extendScalarsComp_inv_app_comp_mapModUpperStarExtendSc
     mapModUpperStarExtendScalarsIso, Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
     Functor.whiskerLeft_app, Iso.symm_hom, Functor.associator_inv_app, Iso.refl_inv,
     NatTrans.id_app]
-  exact Iso.inv_hom_id_app_assoc _ _ _
+  exact Iso.inv_hom_id_app_assoc
+    (Mod.extendScalarsComp (condensedPullbackHom Λ f) (coefficientMap a X)) _ _
 
-set_option maxHeartbeats 1000000 in
--- the instances of the general lemmas are found for each of the categories of module objects
 /-- The first constituent of `derivedUpperStarExtendScalarsIso a f` through the counits:
 `L(Ext_{a_X})` applied to `Lf^*_Λ ≅ D(mapMod(f^*)) ⋙ L(Ext_{α_f})` and the counits of
 `L(Ext_{α_f})` is `L(Ext_{a_X})` applied to the counit of `Lf^*_Λ`. -/
@@ -101,8 +103,10 @@ lemma map_leftDerivedUpperStarIso_hom_app_comp_counit
           ((((f)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ Y)).mapHomotopyCategory (.up ℤ)).obj
             K)) =
     L(Mod.extendScalars (coefficientMap a X)).map (((f)^*⟦Λ⟧).leftDerivedFunctorCounit.app K) := by
-  rw [Functor.comp_map, ← Functor.map_comp, ← Functor.map_comp]
-  exact congrArg _ (Functor.leftDerivedFunctorCompMapDerivedCategoryIso_hom_app_Qh _ _ K)
+  have h := Functor.leftDerivedFunctorCompMapDerivedCategoryIso_hom_app_Qh
+    ((f)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ Y))
+    (Mod.extendScalars (condensedPullbackHom Λ f)) K
+  exact Functor.map_comp_comp_of_eq _ h
 
 -- the instances of the general lemmas are found for each of the categories of module objects
 /-- **The derived (Pull) isomorphism through the counits**: for every coefficient change `a` and

@@ -259,7 +259,6 @@ private theorem tensorStalkIso_one
       (Classical.choose_spec (exists_tensorMap f f' g g' sq z)).1
       ((RingedSpace.moduleStalkFunctor X.toRingedSpace (g' z)).obj (P.X k)) x)
 
-set_option maxHeartbeats 600000 in
 -- The extension-restriction unit is lifted through several complex functor isomorphisms.
 private theorem canonicalSpectrumStalkComplexIso_one
     (X : Scheme.{u}) [IsAffine X] (x : X) (y : Spec Γ(X, ⊤))
@@ -278,8 +277,9 @@ private theorem canonicalSpectrumStalkComplexIso_one
     simp only [canonicalSpectrumStalkEquiv, eqToIso_refl, Iso.refl_trans,
       RingEquiv.toRingHom_eq_coe, Iso.commRingCatIsoToRingEquiv_toRingHom, asIso_hom]
   unfold canonicalSpectrumStalkComplexIso
-  rw [eq_mpr_eq_cast]
-  rw [restrictScalarsIso_cast_apply _ _ hr]
+  -- Apply the cast identity directly, avoiding a rewrite motive for the whole complex.
+  refine (restrictScalarsIso_cast_apply _ _ hr _ _
+    (isoPullbackModuleStalkComplexIso X.isoSpec.inv y P) _ k t).trans ?_
   dsimp [isoPullbackModuleStalkComplexIso]
   rfl
 

@@ -712,21 +712,17 @@ private theorem unitProducts
   intro K
   apply SheafOfModules.hasLimitsOfShape
 
-set_option maxHeartbeats 700000 in
--- The statement and its normalization compare several chosen Hom-complex constructions.
-/-- The coefficient-Hom bifunctor has a unit at the coefficient ring, normalized by
-restriction and evaluation at one (Stacks, Tag 099I). -/
-theorem exists_coefficientHom_unit
+-- The complex unit depends only on the degree-zero normalization of the ring map.
+-- Construct it with an abstract map and a shared sheaf-composition instance.
+private theorem coefficientHom_unit_of_degreeZero
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
+    [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
     {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) :
     let r := SheafOfModules.restrictScalars.{u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)
     let rc := r.mapHomologicalComplex (.up ℤ)
-    let σ : ringedSiteRingComplex R ⟶ rc.obj (ringedSiteRingComplex B) :=
-      (HomologicalComplex.single _ (.up ℤ) 0).map
-          (SheafOfModules.LocalizationCech.unitMap φ) ≫
-        (HomologicalComplex.singleMapHomologicalComplex r (.up ℤ) 0).inv.app
-          (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B))
+    ∀ (σ : ringedSiteRingComplex R ⟶ rc.obj (ringedSiteRingComplex B)),
+      σ.f 0 = SheafOfModules.LocalizationCech.unitMap φ →
     ∃ F : (ringedSiteComplex B)ᵒᵖ ⥤ ringedSiteComplex R ⥤ ringedSiteComplex B,
       ∃ c : Functor.uncurry.obj F ⋙ rc ≅
           rc.op.prod (𝟭 _) ⋙ Functor.uncurry.obj (homComplexFunctor (R := R)),
@@ -738,28 +734,15 @@ theorem exists_coefficientHom_unit
                 change rc.obj M ⟶ ((homComplexFunctor (R := R)).obj
                   (op (ringedSiteRingComplex R))).obj (rc.obj M)
                 exact (ringedHomUnitEvaluationIso R (rc.obj M)).inv) := by
-  intro r rc σ
+  intro r rc σ hσ0
   let : HasProducts.{0} (SheafOfModules.{u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B)) :=
     unitProducts ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B)
   let L := ringedSiteRingComplex B
-  let sR := HomologicalComplex.singleObjXSelf (.up ℤ) 0
-    (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R))
-  let sB := HomologicalComplex.singleObjXSelf (.up ℤ) 0
-    (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj B))
-  have hσ : sR.inv ≫ σ.f 0 ≫ r.map sB.hom =
-      SheafOfModules.LocalizationCech.unitMap φ := by
-    exact SheafOfModules.singleCoefficientMap r _ _
-      (SheafOfModules.LocalizationCech.unitMap φ)
   let δ : SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R) ⟶
       r.obj (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B)) :=
     σ.f 0
-  have hσ0 : δ = SheafOfModules.LocalizationCech.unitMap φ := by
-    have h : (𝟙 _) ≫ δ ≫ r.map (𝟙 _) =
-        SheafOfModules.LocalizationCech.unitMap φ := hσ
-    simpa only [Functor.map_id, Category.id_comp, Category.comp_id] using h
-  clear hσ
-  clear_value σ
+  change δ = SheafOfModules.LocalizationCech.unitMap φ at hσ0
   obtain ⟨H, i, haction, haddRight, haddLeft⟩ :=
     SheafOfModules.exists_restrictedCoefficientHomFunctor φ
   obtain ⟨η, hη⟩ := SheafOfModules.exists_unitBase φ H i haction
@@ -819,5 +802,43 @@ theorem exists_coefficientHom_unit
     rw [hσ0]
     simpa only [Category.assoc] using hv
   exact SheafOfModules.normalizedComposite hb hf ha ht
+
+/-- The coefficient-Hom bifunctor has a unit at the coefficient ring, normalized by
+restriction and evaluation at one (Stacks, Tag 099I). -/
+theorem exists_coefficientHom_unit
+    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
+    {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) :
+    let r := SheafOfModules.restrictScalars.{u}
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)
+    let rc := r.mapHomologicalComplex (.up ℤ)
+    let σ : ringedSiteRingComplex R ⟶ rc.obj (ringedSiteRingComplex B) :=
+      (HomologicalComplex.single _ (.up ℤ) 0).map
+          (SheafOfModules.LocalizationCech.unitMap φ) ≫
+        (HomologicalComplex.singleMapHomologicalComplex r (.up ℤ) 0).inv.app
+          (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B))
+    ∃ F : (ringedSiteComplex B)ᵒᵖ ⥤ ringedSiteComplex R ⥤ ringedSiteComplex B,
+      ∃ c : Functor.uncurry.obj F ⋙ rc ≅
+          rc.op.prod (𝟭 _) ⋙ Functor.uncurry.obj (homComplexFunctor (R := R)),
+        ∃ α : 𝟭 (ringedSiteComplex B) ⟶ rc ⋙ F.obj (op (ringedSiteRingComplex B)),
+          ∀ M : ringedSiteComplex B,
+            rc.map (α.app M) ≫ c.hom.app (op (ringedSiteRingComplex B), rc.obj M) ≫
+                ((homComplexFunctor (R := R)).map σ.op).app (rc.obj M) =
+              (by
+                change rc.obj M ⟶ ((homComplexFunctor (R := R)).obj
+                  (op (ringedSiteRingComplex R))).obj (rc.obj M)
+                exact (ringedHomUnitEvaluationIso R (rc.obj M)).inv) := by
+  have : J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u}) :=
+    ringedCompletionHasSheafCompose J
+  intro r rc σ
+  have hσ := SheafOfModules.singleCoefficientMap r _ _
+    (SheafOfModules.LocalizationCech.unitMap φ)
+  let δ : SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R) ⟶
+      r.obj (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B)) :=
+    σ.f 0
+  have hσ0 : δ = SheafOfModules.LocalizationCech.unitMap φ := by
+    have h : (𝟙 _) ≫ δ ≫ r.map (𝟙 _) =
+        SheafOfModules.LocalizationCech.unitMap φ := hσ
+    simpa only [Functor.map_id, Category.id_comp, Category.comp_id] using h
+  exact coefficientHom_unit_of_degreeZero φ σ hσ0
 
 end CategoryTheory
