@@ -271,7 +271,8 @@ theorem leftDerivedUpperStar_lineInfinityι_map_diagonalIntegral
   have hD := homEquiv_projectiveLineHyperplaneClass_comp_projectiveLineTrace Λ
     (ProjectiveSpace.lineInfinity S)
   rw [Adjunction.homEquiv_unit, Category.assoc] at hD
-  rw [Functor.map_comp, projectiveLineTrace_baseChange Λ (ProjectiveSpace.lineInfinityι S), Adjunction.homEquiv_unit, reassoc_of% hC,
+  rw [Functor.map_comp, projectiveLineTrace_baseChange Λ (ProjectiveSpace.lineInfinityι S),
+    Adjunction.homEquiv_unit, reassoc_of% hC,
     reassoc_of% hD, Iso.hom_inv_id]
 
 /-- Blueprint `lemma-class-diagonal-projective-line` (`lemma-class-diagonal-projective-line--1`
