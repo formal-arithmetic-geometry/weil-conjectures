@@ -101,19 +101,17 @@ theorem constantModelBoundedConstructible_rational_open_direct_image
     inferInstanceAs (QuasiCompact (X ↘ Spec (.of k)))
   let : IsSeparated (X.asOver (Spec (.of k))).hom :=
     inferInstanceAs (IsSeparated (X ↘ Spec (.of k)))
-  have hU := (finiteCoefficientDescentTwoColimit k (ringChar k) ℓ
-    (Fact.out : (ringChar k).Prime).pos (Fact.out : ringChar k ≠ ℓ) U).2.2.2
-  have hX := (finiteCoefficientDescentTwoColimit k (ringChar k) ℓ
-    (Fact.out : (ringChar k).Prime).pos (Fact.out : ringChar k ≠ ℓ) X).2.2.2
   constructor
   · intro K hK
-    rw [(hU.1 E).1] at hK
-    rw [(hX.1 E).1]
+    rw [constantModelBoundedConstructible_eq_boundedConstructible_subfield_of_finiteType k ℓ E U]
+      at hK
+    rw [constantModelBoundedConstructible_eq_boundedConstructible_subfield_of_finiteType k ℓ E X]
     exact CondensedRing.ContinuousMapRingObj.boundedConstructible_rightDerivedLowerStar_obj
       ℓ (k := k) E f ⟨K, hK⟩
   · intro K hK
-    rw [hU.2.1.1] at hK
-    rw [hX.2.1.1]
+    rw [constantModelBoundedConstructible_eq_boundedConstructible_padicAlgCl_of_finiteType k ℓ U]
+      at hK
+    rw [constantModelBoundedConstructible_eq_boundedConstructible_padicAlgCl_of_finiteType k ℓ X]
     exact CondensedRing.boundedConstructible_rightDerivedLowerStar_obj ℓ (k := k) f ⟨K, hK⟩
 
 end AlgebraicGeometry.ProEtale

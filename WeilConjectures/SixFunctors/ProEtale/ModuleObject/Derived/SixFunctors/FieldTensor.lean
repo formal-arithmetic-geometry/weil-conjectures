@@ -191,8 +191,7 @@ Proof:
 -/
 theorem constantModelBoundedConstructible_derivedTensor
     (ℓ : ℕ) [Fact ℓ.Prime]
-    {k : Type u} [Field k] (p : ℕ) [CharP k p]
-    (hp : 0 < p) (hpl : p ≠ ℓ)
+    {k : Type u} [Field k] (p : ℕ) [CharP k p] (hpl : p ≠ ℓ)
     {X : Scheme.{u}} (aX : X ⟶ Spec (.of k))
     [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX]
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -227,7 +226,6 @@ theorem constantModelBoundedConstructible_derivedTensor
   let : LocallyOfFiniteType XOver.hom := inferInstanceAs (LocallyOfFiniteType aX)
   let : QuasiCompact XOver.hom := inferInstanceAs (QuasiCompact aX)
   let : IsSeparated XOver.hom := inferInstanceAs (IsSeparated aX)
-  have hEq := (finiteCoefficientDescentTwoColimit k p ℓ hp hpl X).2.2.2
   have hcanonicalE (E : PadicAlgCl.FiniteIntermediateField ℓ)
       (heq : constantModelBoundedConstructible (Profinite.continuousMapRingObj E) X =
         boundedConstructible (condensedRingObj (Profinite.continuousMapRingObj E) X)) :
@@ -258,13 +256,17 @@ theorem constantModelBoundedConstructible_derivedTensor
       have : IsIso φ := inferInstanceAs (IsIso e.inv.hom)
       exact constantModel_tensor_transport
         (Λ := Profinite.continuousMapRingObj E) (Λ' := Λ) φ X
-        (hcanonicalE E (hEq.1 E).1)
+        (hcanonicalE E
+          (constantModelBoundedConstructible_eq_boundedConstructible_subfield_of_finiteType k ℓ E
+            X))
     · obtain ⟨e⟩ := hΛ
       let φ := e.inv.hom
       have : IsIso φ := inferInstanceAs (IsIso e.inv.hom)
       exact constantModel_tensor_transport
         (Λ := Profinite.padicAlgClRingObj ℓ) (Λ' := Λ) φ X
-        (hcanonical hEq.2.1.1)
+        (hcanonical
+          (constantModelBoundedConstructible_eq_boundedConstructible_padicAlgCl_of_finiteType k ℓ
+            X))
   refine ⟨hbc, ?_⟩
   let : BraidedCategory (DerivedCategory (Mod
       (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) :=

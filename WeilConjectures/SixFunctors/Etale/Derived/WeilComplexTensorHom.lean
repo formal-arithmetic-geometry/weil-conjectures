@@ -155,7 +155,7 @@ instance isTriangulated_derivedHom_obj
   (derivedTensorHomAdjunction _ K.unop).isTriangulated_rightAdjoint
 
 variable {k : Type u} [Field k] {X} (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX]
-  [QuasiCompact aX] [HasInvertibleExponent Λ X] [IsAlgClosed k]
+  [QuasiCompact aX] [HasInvertibleExponent Λ X]
 
 /-- Blueprint `prose-10-20`: the derived internal hom `RHom(-, -)` of `Dctf(X, Λ)`, for
 `X` of finite type over an algebraically closed field on which the exponent of `Λ` is

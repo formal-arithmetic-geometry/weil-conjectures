@@ -63,7 +63,7 @@ theorem constructibleFiniteTor_unit :
       (_root_.DerivedCategory.torAmplitudeIn_singleFunctor_obj_of_flat
         (ObjectProperty.flat_of_isDualizable isDualizable_unit))⟩
 
-variable {k : Type u} [Field k] [IsAlgClosed k] (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX]
+variable {k : Type u} [Field k] (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX]
   [QuasiCompact aX] [HasInvertibleExponent Λ X]
 
 include aX in
