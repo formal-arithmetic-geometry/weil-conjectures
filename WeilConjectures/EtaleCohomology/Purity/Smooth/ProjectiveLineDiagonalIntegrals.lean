@@ -368,8 +368,8 @@ lemma homEquiv_projectiveLineHyperplaneClass_comp_projectiveLineTrace :
           projectiveLineHyperplaneClass Λ S) ≫
       projectiveLineTrace Λ S = 𝟙 _ := by
   have := homEquiv_projectiveLineHyperplaneClassAux_comp_projectiveLineTraceAux Λ S
-  simp only [projectiveLineHyperplaneClass, projectiveLineTrace_eq_neg, comp_neg,
-    Adjunction.homEquiv_unit, Functor.map_neg, neg_comp, neg_neg] at this ⊢
+  simp only [projectiveLineHyperplaneClass, projectiveLineTrace_eq_neg, Preadditive.comp_neg,
+    Adjunction.homEquiv_unit, Functor.map_neg, Preadditive.neg_comp, neg_neg] at this ⊢
   exact this
 
 /-- Blueprint `lemma-class-diagonal-projective-line`: *the first diagonal integral*, with the cycle
@@ -387,8 +387,8 @@ theorem projectiveLineTrace_diagonal
           cartierKummerCycleClass Λ _ hP) ≫
       projectiveLineTrace Λ ℙ(Option (ULift.{u} (Fin 1)); S) = 𝟙 _ := by
   have := projectiveLineTraceAux_diagonal Λ S hP
-  simp only [cartierKummerCycleClass, projectiveLineTrace_eq_neg, Functor.map_neg, comp_neg,
-    neg_comp, neg_neg] at this ⊢
+  simp only [cartierKummerCycleClass, projectiveLineTrace_eq_neg, Functor.map_neg, Preadditive.comp_neg,
+    Preadditive.neg_comp, neg_neg] at this ⊢
   exact this
 
 /-- Blueprint `lemma-class-diagonal-projective-line`: *the second diagonal integral* (the swapped
@@ -411,8 +411,8 @@ theorem projectiveLineTrace_diagonal_swap
             (ProjectiveSpace.diagonalSwap (Option (ULift.{u} (Fin 1))) S)).hom) ≫
       projectiveLineTrace Λ ℙ(Option (ULift.{u} (Fin 1)); S) = 𝟙 _ := by
   have := projectiveLineTraceAux_diagonal_swap Λ S hP
-  simp only [cartierKummerCycleClass, projectiveLineTrace_eq_neg, Functor.map_neg, comp_neg,
-    neg_comp, neg_neg] at this ⊢
+  simp only [cartierKummerCycleClass, projectiveLineTrace_eq_neg, Functor.map_neg, Preadditive.comp_neg,
+    Preadditive.neg_comp, neg_neg] at this ⊢
   exact this
 
 end Diagonal

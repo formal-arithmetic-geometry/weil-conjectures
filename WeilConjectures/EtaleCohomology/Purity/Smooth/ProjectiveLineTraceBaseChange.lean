@@ -232,7 +232,7 @@ theorem projectiveLineHyperplaneClass_baseChange :
         (ProjectiveSpace.map (Option (ULift.{u} (Fin 1))) g)).hom =
     projectiveLineHyperplaneClass Λ S' := by
   have := projectiveLineHyperplaneClassAux_baseChange Λ g
-  simp only [projectiveLineHyperplaneClass, Functor.map_neg, comp_neg, neg_comp, neg_inj] at this ⊢
+  simp only [projectiveLineHyperplaneClass, Functor.map_neg, Preadditive.comp_neg, Preadditive.neg_comp, neg_inj] at this ⊢
   exact this
 
 /-- **Base change of the decomposition map** (blueprint `lemma-cohomology-projective-line-trace`
@@ -342,7 +342,7 @@ theorem projectiveLineTrace_baseChange [HasKummerClass.IsNormalized Λ] :
         projectiveLineTrace Λ S' ≫ (leftDerivedUpperStarConstantComplexIso Λ g).inv := by
   rw [projectiveLineTrace_eq_neg, projectiveLineTrace_eq_neg, Functor.map_neg,
     projectiveLineTraceAux_baseChange]
-  simp only [comp_neg, neg_comp]
+  simp only [Preadditive.comp_neg, Preadditive.neg_comp]
 /-- **Base change of the trace on the compactly supported direct image.** The trace of
 `ℙ¹_S` read on `Rq_! ≅ Rq_*`
 (`AlgebraicGeometry.Etale.rightDerivedLowerShriekIsoRightDerivedLowerStar`)
