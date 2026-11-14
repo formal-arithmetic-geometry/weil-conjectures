@@ -387,7 +387,8 @@ theorem projectiveLineTrace_diagonal
           cartierKummerCycleClass Λ _ hP) ≫
       projectiveLineTrace Λ ℙ(Option (ULift.{u} (Fin 1)); S) = 𝟙 _ := by
   have := projectiveLineTraceAux_diagonal Λ S hP
-  simp only [cartierKummerCycleClass, projectiveLineTrace_eq_neg, Functor.map_neg, Preadditive.comp_neg,
+  simp only [cartierKummerCycleClass, projectiveLineTrace_eq_neg, Functor.map_neg,
+    Preadditive.comp_neg,
     Preadditive.neg_comp, neg_neg] at this ⊢
   exact this
 
@@ -411,7 +412,8 @@ theorem projectiveLineTrace_diagonal_swap
             (ProjectiveSpace.diagonalSwap (Option (ULift.{u} (Fin 1))) S)).hom) ≫
       projectiveLineTrace Λ ℙ(Option (ULift.{u} (Fin 1)); S) = 𝟙 _ := by
   have := projectiveLineTraceAux_diagonal_swap Λ S hP
-  simp only [cartierKummerCycleClass, projectiveLineTrace_eq_neg, Functor.map_neg, Preadditive.comp_neg,
+  simp only [cartierKummerCycleClass, projectiveLineTrace_eq_neg, Functor.map_neg,
+    Preadditive.comp_neg,
     Preadditive.neg_comp, neg_neg] at this ⊢
   exact this
 

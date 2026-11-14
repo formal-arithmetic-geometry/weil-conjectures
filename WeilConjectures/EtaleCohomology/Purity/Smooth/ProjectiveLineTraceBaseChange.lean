@@ -232,7 +232,8 @@ theorem projectiveLineHyperplaneClass_baseChange :
         (ProjectiveSpace.map (Option (ULift.{u} (Fin 1))) g)).hom =
     projectiveLineHyperplaneClass Λ S' := by
   have := projectiveLineHyperplaneClassAux_baseChange Λ g
-  simp only [projectiveLineHyperplaneClass, Functor.map_neg, Preadditive.comp_neg, Preadditive.neg_comp, neg_inj] at this ⊢
+  simp only [projectiveLineHyperplaneClass, Functor.map_neg, Preadditive.comp_neg,
+    Preadditive.neg_comp, neg_inj] at this ⊢
   exact this
 
 /-- **Base change of the decomposition map** (blueprint `lemma-cohomology-projective-line-trace`
