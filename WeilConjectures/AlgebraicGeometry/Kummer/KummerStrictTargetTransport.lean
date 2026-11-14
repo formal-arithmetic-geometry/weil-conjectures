@@ -113,8 +113,8 @@ structure KummerTargetData
   /-- Full residue-linear transport before restriction. -/
   transport : ∀ n, KummerArrowTransport ℓ L U ad D (F n) (V n) n (P n) M (κ n) H b (t n)
 
-/-- The strict Kummer data type for the actual pro-etale coefficient categories.
-It specializes the abstract structure and chooses no data from an existence proof. -/
+/-- The strict Kummer data type `KummerTargetData` specialized to the pro-étale diagonal
+coefficient categories over `W`. -/
 def KummerStrictTarget (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     (hW : IsUnit (ℓ : Γ(W, ⊤)))
     [HasDerivedCategory.{u + 1} (DiagonalAb W)]

@@ -37,6 +37,14 @@ import all WeilConjectures.CategoryTheory.InverseMateEquivalence
 import all WeilConjectures.AlgebraicGeometry.ProEtale.Replete
 import all WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Products
 
+/-!
+# The affine closed-site counit at specializing objects
+
+## References
+
+* Stacks Project, Tag 09AC, with the fully faithful adjunction of Tag 09BK
+-/
+
 @[expose] public section
 
 universe u
@@ -45,21 +53,7 @@ namespace AlgebraicGeometry.Scheme.AffineProEt
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The affine closed-site counit is invertible at a weakly contractible object
-whose points specialize into the closed fibre.
-
-Source: Stacks Project, Tag 09AC, with the fully faithful adjunction of Tag 09BK.
-
-Proof. Full faithfulness makes the base change of the counit invertible. Hence
-its image contains the closed fibre. Its underlying morphism is weakly etale,
-therefore flat; lifting generalizations shows that its image contains every point
-by the specialization hypothesis. This surjective affine morphism is a cover.
-Subcanonical Yoneda takes it to an epimorphism of set sheaves: separatedness
-cancels maps agreeing after that cover. Weak contractibility lifts the identity
-to a section. Base change takes that section to the inverse of the base-changed
-counit. The adjunction Hom bijection then identifies the other composite with
-the identity. Thus the section is a two-sided inverse. Empty schemes and the
-zero ring require no exception: surjectivity is vacuous and the same Yoneda
-argument applies. -/
+whose points specialize into the closed fibre. -/
 theorem isIso_closedSiteCounit_of_specialization
     (A : Type u) [CommRing A] (I : Ideal A)
     (adj : closedSiteLift A I ⊣ closedSiteBaseChange A I)

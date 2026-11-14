@@ -28,9 +28,9 @@ attribute [local irreducible] DerivedCategory.singleFunctors
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
-/-- The actual normalized-boundary proposition over a fixed scheme.
-Its body is precisely normalizedBoundaryTarget with the actual coefficient
-functors and roots normalization. No data is chosen and no proof is postponed. -/
+/-- The normalized-boundary proposition over a fixed scheme `W`: `normalizedBoundaryTarget`
+for the diagonal coefficient functors, the roots-of-unity tower and the Kummer roots
+normalization. -/
 def sheafKummerConclusion (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     (hW : IsUnit (ℓ : Γ(W, ⊤)))
     [HasDerivedCategory.{u + 1} (DiagonalAb W)]

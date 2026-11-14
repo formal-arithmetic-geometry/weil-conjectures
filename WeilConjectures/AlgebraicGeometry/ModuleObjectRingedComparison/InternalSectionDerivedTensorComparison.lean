@@ -125,14 +125,17 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 * `TensorComparison`: the canonical tensor comparison, normalized on K-flat models.
 * `totalComparison`: the fixed comparison of the concrete sum-total complexes.
 
+## Implementation details
+
+The normalization predicate `tensorComparisonNormalized` is a separate definition so that
+structure projections do not expand the concrete localization and total-complex
+implementations. K-flatness is tested on the images under the exact equivalence between internal
+and sectionwise modules; since this equivalence preserves and reflects K-flatness, this agrees
+with the internal K-flat test.
+
 ## References
 
-* Stacks Project, Tags 08J9, 08JA and 08JB
-* Stacks 03EK, 06YL
-* Stacks 06YL
-* Stacks 08J9
-* Stacks 06YS
-* Stacks 06YS, 08J9
+* Stacks Project, Tags 03EK, 06YL, 06YS, 08J9, 08JA and 08JB
 -/
 
 @[expose] public noncomputable section
@@ -185,9 +188,8 @@ def GlobalTensorComparisonIsoType (S : GlobalClosedStructureType Λ X) :=
   Functor.uncurry.obj (CondensedRing.derivedTensor Λ X) ⋙ forward Λ X ≅
     ((forward Λ X).prod (forward Λ X)) ⋙ S.tensor
 
-/-- The representative-normalization predicate for a derived tensor comparison.
-Separating this predicate keeps structure projections from expanding the concrete
-localization and total-complex implementations. -/
+/-- The representative-normalization predicate for a derived tensor comparison: on K-flat
+representatives it agrees with the total-complex comparison. -/
 def tensorComparisonNormalized
     (S : GlobalClosedStructureType Λ X)
     (T : GlobalTensorModelsType Λ X S)
@@ -203,11 +205,7 @@ def tensorComparisonNormalized
     (CoefficientTensorModels.iso.{u, u + 1, u, u + 1}
       (Scheme.ProEt.topology X) (ring Λ X) S T) iso
 
-/-- Tensor comparison with the fixed K-flat localization normalization.
-The complex comparison is the dependency's canonical comparison, not extra data.
-K-flatness is tested on the images under the exact equivalence; preservation and
-reflection in lem-pe-internal-section-tensor-comparison identify this with the
-internal K-flat test, so it restricts only representatives and not derived inputs. -/
+/-- A comparison `iso` satisfying the normalization `condition`. -/
 structure NormalizedGlobalTensorComparisonData {I : Type u₀} (condition : I → Prop) where
   iso : I
   normalization : condition iso

@@ -12,9 +12,12 @@ import all WeilConjectures.AlgebraicGeometry.SixFunctors.InverseImagePullbackCom
 
 /-! # Left finite scalar quotient formula
 
-This is the left half of the finite quotient construction.  It is separated from
-its right counterpart because the two maps use different adjunction units and are
-checked independently on pure tensors.
+This is the left half of the finite quotient construction.
+
+## Implementation details
+
+The left half is separated from its right counterpart because the two maps use different
+adjunction units and are checked independently on pure tensors.
 
 ## References
 
@@ -36,14 +39,8 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (ι : E →ₐ[ℚ_[l]] L) {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]
 
-/-- The left completed-to-finite quotient map and its pure-tensor formula.
-
-The map is obtained by inserting the unit for the completed scalar extension,
-then applying the finite projection.  The remaining work is the concrete
-transport from the canonical scalar-extension presentation to the selected
-`finiteChangeData`; this is exactly the left component of the quotient-chain
-calculation and is intentionally isolated here.
--/
+/-- For a normalized completed comparison `b`, there are left completed-to-finite quotient
+maps at every level satisfying the pure-tensor formula `LeftQuotientFormula`. -/
 theorem left_quotient_formula_exists
     (b : (integralOperationsGoodComplex l E Y).ι ⋙ leftComplex l E L ι g ≅
       (integralOperationsGoodComplex l E Y).ι ⋙ rightComplex l E L ι g)

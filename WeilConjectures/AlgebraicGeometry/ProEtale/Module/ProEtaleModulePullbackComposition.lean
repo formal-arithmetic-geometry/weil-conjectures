@@ -137,9 +137,7 @@ private noncomputable def directComp {T Y X : Scheme.{u}} (a : Y ⟶ T) (b : X �
 /--
 For composable morphisms of schemes and any commutative constant coefficient ring, the
 module inverse image for the composite is canonically isomorphic to the successive inverse
-images. The canonical comparison is the conjugate of the fibre-product direct-image
-identification, with the normalized module adjunctions and the prescribed constant-section
-actions.
+images, compatibly with the identification of direct images and the module adjunctions.
 -/
 theorem proEtaleConstantRingModulePullbackComposition
     {X Y Z : Scheme.{u}} (g : Z ⟶ X) (f : X ⟶ Y)

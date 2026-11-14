@@ -10,6 +10,13 @@ public import Mathlib.AlgebraicGeometry.Limits
 public import Mathlib.RingTheory.AdjoinRoot
 public import Mathlib.Algebra.Algebra.Pi
 
+/-! # Transporting a root splitting through an affine chart
+
+## References
+
+* Stacks Project, Tag 0EYG, off-divisor case
+-/
+
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits
@@ -119,10 +126,9 @@ private theorem root_split_degree_one_chart
   ext x
   exact E.commutes x
 
-/-- Transport a specified root splitting through an affine chart over the base.
-
-Source: Stacks Project, Tag 0EYG, off-divisor branch, and affine localization.
--/
+/-- Transport a specified root splitting through an affine chart over the base: if the pullback
+of the punctured root cover along `p` splits as `d` copies of it, then the pullback of `p` along
+an affine chart `Spec S ≅ D(g)` is the punctured cover of `d` degree-one root algebras over `S`. -/
 theorem root_split_away_transport_chart
     (R : CommRingCat.{u}) (g : R) (n : ℕ) {Y : Scheme.{u}}
     (p : Y ⟶ Spec R) (d : ℕ) (S : CommRingCat.{u}) (φ : R →+* S)

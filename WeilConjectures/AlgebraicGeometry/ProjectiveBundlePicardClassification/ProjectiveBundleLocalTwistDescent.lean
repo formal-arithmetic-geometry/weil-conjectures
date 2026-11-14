@@ -20,10 +20,7 @@ import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
 ## References
 
 * EGA II, Remark 4.2.7
-* Stacks, Tags 00AL, 00AM, 04TN and 01XS
-* Stacks, Tags 00AL, 00AM and 04TN
-* Tag 01XS
-* Tag 0BXJ
+* Stacks Project, Tags 00AL, 00AM, 01XS, 04TN, 0BXJ
 -/
 
 @[expose] public section
@@ -107,9 +104,8 @@ private theorem decomposition_local_integer {S P : Scheme.{u}} (p : P ⟶ S)
   exact ⟨U, ⟨rfl, hsV⟩, ⟨(tensorPullback j).mapIso e ≪≫ tensor _ _ ≪≫
     (tw ⊗ᵢ coeff) ≪≫ ρ_ _⟩⟩
 
-/-- Local integer twists descend to a unique locally constant degree and coefficient
-line. The hypothesis gives local normal forms; this theorem only performs descent
-and proves uniqueness, without asserting that every line has such normal forms. -/
+/-- An invertible module that is locally on the base an integer twist of the tautological line
+is a locally constant twist tensored with a pullback line, with unique degree and coefficient. -/
 theorem projective_bundle_local_twist_descent (S : Scheme.{u}) (E : S.Modules)
     [E.IsQuasicoherent] (r : ℕ)
     [SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u} E r] (hr : 2 ≤ r)

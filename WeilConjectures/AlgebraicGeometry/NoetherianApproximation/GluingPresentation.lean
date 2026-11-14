@@ -71,14 +71,11 @@ noncomputable def localizationSubring {U : S.Opens} (A : Subring Γ(S, U)) (s : 
     ((S.resLE (hW.trans (S.basicOpen_le s))).hom '' A))
 
 variable (S) in
-/-- Selected finite affine gluing
-presentation.
-
-A finite affine open cover `S = ⋃ₐ Uₐ` together with, for every pair `(a, b)` of charts, finitely
-many sections `f a b r ∈ Γ(S, Uₐ)` and `g a b r ∈ Γ(S, U_b)` with equal basic opens
-`D(f a b r) = D(g a b r)`, whose basic opens cover `Uₐ ⊓ U_b`. Each such basic open is thus a
-basic open both of `Uₐ` and of `U_b`; the overlap maps are the identifications
-`Γ(S, Uₐ)_{f a b r} ≅ Γ(S, D(f a b r)) ≅ Γ(S, U_b)_{g a b r}`. -/
+/-- A finite affine gluing presentation of `S`: a finite affine open cover `S = ⋃ₐ Uₐ` together
+with, for every pair `(a, b)` of charts, finitely many sections `f a b r ∈ Γ(S, Uₐ)` and
+`g a b r ∈ Γ(S, U_b)` with equal basic opens `D(f a b r) = D(g a b r)`, whose basic opens cover
+`Uₐ ⊓ U_b`. Each such basic open is thus a basic open both of `Uₐ` and of `U_b`; the overlap
+maps are the identifications `Γ(S, Uₐ)_{f a b r} ≅ Γ(S, D(f a b r)) ≅ Γ(S, U_b)_{g a b r}`. -/
 structure FiniteAffineGluingPresentation where
   /-- The index type of the charts. -/
   ι : Type u
@@ -113,11 +110,9 @@ noncomputable def openCover : S.OpenCover :=
 instance (a : G.ι) : IsAffine (G.openCover.X a) :=
   (G.U a).2
 
-/-- A *valid finite
-coefficient refinement* of the presentation `G`.
-
-A family of finitely generated subrings `Aₐ ⊆ Γ(S, Uₐ)` containing all basic-open elements, such
-that the finitely many gluing equations hold at this stage:
+/-- A *valid finite coefficient refinement* of the presentation `G`: a family of finitely
+generated subrings `Aₐ ⊆ Γ(S, Uₐ)` containing all basic-open elements, such that the finitely
+many gluing equations hold at this stage:
 - `unit_self`: the `f a a r` generate the unit ideal of `Aₐ` (so the overlap of a chart with
   itself is everything);
 - `localization_eq`: `Aₐ[1/f a b r] = A_b[1/g a b r]` inside `Γ(S, D(f a b r))` (the overlap
@@ -316,15 +311,13 @@ lemma basicOpen_g_le_inf (a b : G.ι) (r : G.κ a b) :
 lemma isCompact_U (a : G.ι) : IsCompact (G.U a : Set S) :=
   (G.U a).2.isCompact
 
-/-- The overlaps of the
-charts are quasi-compact. -/
+/-- The overlaps of the charts are quasi-compact. -/
 lemma isCompact_inf (a b : G.ι) : IsCompact (((G.U a : S.Opens) ⊓ G.U b : S.Opens) : Set S) := by
   rw [← G.iSup_basicOpen_f, TopologicalSpace.Opens.coe_iSup]
   exact isCompact_iUnion fun r ↦ ((G.U a).2.basicOpen _).isCompact
 
 include G in
-/-- A scheme with a finite
-affine gluing presentation is quasi-compact. -/
+/-- A scheme with a finite affine gluing presentation is quasi-compact. -/
 theorem compactSpace : CompactSpace S := by
   refine ⟨?_⟩
   have := congrArg (fun V : S.Opens ↦ (V : Set S)) G.iSup_U
@@ -333,8 +326,7 @@ theorem compactSpace : CompactSpace S := by
   exact isCompact_iUnion G.isCompact_U
 
 include G in
-/-- A scheme with a finite
-affine gluing presentation is quasi-separated. -/
+/-- A scheme with a finite affine gluing presentation is quasi-separated. -/
 theorem quasiSeparatedSpace : QuasiSeparatedSpace S :=
   Scheme.quasiSeparatedSpace_of_isOpenCover (fun a ↦ (G.U a : S.Opens)) G.iSup_U
     (fun a ↦ (G.U a).2) fun a b ↦ G.isCompact_inf a b
@@ -505,8 +497,8 @@ instance : PartialOrder G.Stage := PartialOrder.lift _ (Stage.A_injective G)
 
 lemma Stage.le_iff {l₁ l₂ : G.Stage} : l₁ ≤ l₂ ↔ ∀ a, l₁.A a ≤ l₂.A a := Iff.rfl
 
-/-- The stages form a
-join-semilattice under inclusion, the join being the componentwise supremum. -/
+/-- The stages form a join-semilattice under inclusion, the join being the componentwise supremum.
+-/
 instance : SemilatticeSup G.Stage :=
   { (inferInstance : PartialOrder G.Stage) with
     sup := Stage.sup G

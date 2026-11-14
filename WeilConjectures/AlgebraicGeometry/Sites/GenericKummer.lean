@@ -27,20 +27,6 @@ on `X`. Then the valuations at the closed points give an isomorphism
 of étale sheaves on `X`, where `μₙ` is the sheaf of `n`-th roots of unity on `Spec k(X)` and
 `i_x : Spec κ(x) ⟶ X` is the inclusion of a closed point.
 
-## Proof
-
-We argue on sheaves rather than on stalks. The Kummer sequence `0 ⟶ μₙ ⟶ 𝔾ₘ ⟶ 𝔾ₘ ⟶ 0` on
-`Spec k(X)` and `R¹η_* 𝔾ₘ = 0` (Hilbert 90, see
-`AlgebraicGeometry.Scheme.epi_lowerStar_map_cokernelπ_upperStar_gmSheaf`) identify `R¹η_* μₙ`
-with the cokernel of multiplication by `n` on `η_* 𝔾ₘ`, the quotient map being the Kummer
-coboundary. The divisor sequence
-`0 ⟶ 𝔾ₘ ⟶ η_* 𝔾ₘ ⟶ ⨁_x i_{x*} ℤ ⟶ 0` (`AlgebraicGeometry.Scheme.shortExact_divisorSequence`),
-on whose first term multiplication by `n` is an epimorphism by the Kummer sequence on `X`,
-identifies this cokernel with the cokernel of `n` on `⨁_x i_{x*} ℤ`, which is
-`⨁_x i_{x*} ℤ/n` since each `i_{x*}` is exact (`i_x` is a closed immersion). The resulting
-isomorphism sends the Kummer class of a rational function `f` to `∑_x (ord_x f mod n) [x]`
-(`AlgebraicGeometry.Scheme.genericKummerResidueIso_spec`).
-
 ## Main definitions
 
 - `AlgebraicGeometry.Scheme.pointConstantZMod`: the sheaf `i_{x*} ℤ/n` of a point `x`.
@@ -53,6 +39,20 @@ isomorphism sends the Kummer class of a rational function `f` to `∑_x (ord_x f
   `R¹η_* 𝔾ₘ = 0`.
 - `AlgebraicGeometry.Scheme.genericKummerResidueIso_spec`: the isomorphism is given by the
   valuations.
+
+## Implementation details
+
+We argue on sheaves rather than on stalks. The Kummer sequence `0 ⟶ μₙ ⟶ 𝔾ₘ ⟶ 𝔾ₘ ⟶ 0` on
+`Spec k(X)` and `R¹η_* 𝔾ₘ = 0` (Hilbert 90, see
+`AlgebraicGeometry.Scheme.epi_lowerStar_map_cokernelπ_upperStar_gmSheaf`) identify `R¹η_* μₙ`
+with the cokernel of multiplication by `n` on `η_* 𝔾ₘ`, the quotient map being the Kummer
+coboundary. The divisor sequence
+`0 ⟶ 𝔾ₘ ⟶ η_* 𝔾ₘ ⟶ ⨁_x i_{x*} ℤ ⟶ 0` (`AlgebraicGeometry.Scheme.shortExact_divisorSequence`),
+on whose first term multiplication by `n` is an epimorphism by the Kummer sequence on `X`,
+identifies this cokernel with the cokernel of `n` on `⨁_x i_{x*} ℤ`, which is
+`⨁_x i_{x*} ℤ/n` since each `i_{x*}` is exact (`i_x` is a closed immersion). The resulting
+isomorphism sends the Kummer class of a rational function `f` to `∑_x (ord_x f mod n) [x]`
+(`AlgebraicGeometry.Scheme.genericKummerResidueIso_spec`).
 -/
 
 @[expose] public section
@@ -122,7 +122,7 @@ lemma nsmul_id_comp_pointConstantIntToZMod (x : X) :
     AddCommGrpCat.nsmul_id_comp_uliftIntToZMod, Functor.map_zero, Functor.map_zero]
 
 /-- At a closed point `x`, the reduction map `i_{x*} ℤ ⟶ i_{x*} ℤ/n` is a cokernel of
-multiplication by `n`: the pushforward along the closed immersion `i_x` is exact. -/
+multiplication by `n`. -/
 def isColimitPointConstantIntToZMod {x : X} (hx : IsClosed ({x} : Set X)) :
     IsColimit (CokernelCofork.ofπ _ (X.nsmul_id_comp_pointConstantIntToZMod n x)) :=
   have : IsClosedImmersion (X.fromSpecResidueField x) :=
@@ -239,8 +239,7 @@ lemma nsmul_id_comp_genericKummerδ (hn : IsUnit (n : Γ(X, ⊤))) :
   rwa [lowerStar_map_kummerSequence_g] at this
 
 /-- **`R¹η_* μₙ` is the cokernel of `n` on `η_* 𝔾ₘ`**, the quotient map being the Kummer
-coboundary: this is the long exact sequence of `R η_*` on the Kummer sequence of `Spec k(X)`,
-together with `R¹η_* 𝔾ₘ = 0`. -/
+coboundary. -/
 def isColimitGenericKummerδ (hn : IsUnit (n : Γ(X, ⊤))) :
     IsColimit (CokernelCofork.ofπ _ (nsmul_id_comp_genericKummerδ hn)) :=
   CokernelCofork.isColimitOfEq (lowerStar_map_kummerSequence_g n)
@@ -301,8 +300,7 @@ variable {n}
 
 /-- The divisor map followed by reduction modulo `n`,
 `η_* 𝔾ₘ ⟶ ⨁_{x ∈ X⁽¹⁾} i_{x*} ℤ ⟶ ⨁_{x closed} i_{x*} ℤ/n`, is a cokernel of multiplication by
-`n` on `η_* 𝔾ₘ`: by the divisor sequence, since `n` is an epimorphism on `𝔾ₘ` of `X` by the
-Kummer sequence. -/
+`n` on `η_* 𝔾ₘ`. -/
 def isColimitDivisorSequenceMapComp (hn : IsUnit (n : Γ(X, ⊤))) (hc : IsColimit c) :
     IsColimit (CokernelCofork.ofπ (f := n • 𝟙 X.genericGm)
       (X.divisorSequenceMap cD hcD ≫ divisorsModNMap n hX cD hcD c) (by
@@ -357,12 +355,7 @@ sheaves, `μₙ` is the sheaf of `n`-th roots of unity of `Spec k(X)`, `i_x : Sp
 the inclusion of a closed point and the direct sum is the vertex of any colimit cofan `c`.
 
 The isomorphism is given by the valuations at the closed points: it sends the Kummer class of a
-rational function `f` to `∑_x (ord_x f mod n) [x]`
-(`AlgebraicGeometry.Scheme.genericKummerResidueIso_spec`). Both sides are cokernels of
-multiplication by `n` on `η_* 𝔾ₘ`: the left hand side by the Kummer sequence on `Spec k(X)` and
-`R¹η_* 𝔾ₘ = 0` (`AlgebraicGeometry.Scheme.isColimitGenericKummerδ`), the right hand side by
-the divisor sequence and the Kummer sequence on `X`
-(`AlgebraicGeometry.Scheme.isColimitDivisorSequenceMapComp`). -/
+rational function `f` to `∑_x (ord_x f mod n) [x]`. -/
 def genericKummerResidueIso :
     ((Etale.lowerStar AddCommGrpCat.{u + 1} X.fromSpecFunctionField).rightDerived 1).obj
       ((Spec X.functionField).rootsOfUnitySheaf n) ≅ c.pt :=

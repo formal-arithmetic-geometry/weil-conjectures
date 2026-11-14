@@ -25,12 +25,7 @@ namespace AlgebraicGeometry.Scheme.GradedAlgebraData
 variable {S : Scheme.{u}} (A : S.GradedAlgebraData)
 
 /-- A compatible descended chart family has additive transitions compatible with readings
-and fractions.
-
-The two compatibility conjuncts are supplied by the named read and fraction lemmas.  The
-transition itself is the section-normalized pullback unit followed by the given scalar
-comparison, transported along the equality of chart opens.
--/
+and fractions. -/
 theorem exists_twist_chart_descent_transition
     (L : A.relProj.Modules)
     (chart : ∀ U : S.affineOpens,

@@ -1628,8 +1628,7 @@ private theorem moduleSetsIdentification_naturality {X Y : Scheme.{u}} (f : X ‚ü
       ((proEtaleBaseChange f).op.obj U) z) hM.symm))
 
 /-- The specified module inverse image transports the ring and module operations along
-set inverse image.
-Adapted from the proof attached to lem-sp-proetale-algebraic-inverse-image. -/
+set inverse image. -/
 private noncomputable def algebraicLift {X Y : Scheme.{u}} (f : X ‚ü∂ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) :
     SheafOfModules.AlgebraicInverseImage

@@ -28,8 +28,9 @@ namespace AlgebraicGeometry.Scheme
 noncomputable section
 
 set_option backward.isDefEq.respectTransparency false in
-/-- A section `s` of `M~` over an open `U ⊆ Spec R` is given by a linear map `φ : J →ₗ[R] M` on
-an ideal `J` not contained in any prime of `U`: `φ(a)|_U = a • s` for all `a ∈ J`. -/
+/-- For a section `s` of `M^~` over an open `U` of `Spec R` with `R` Noetherian, there are an
+ideal `J` of `R` not contained in any prime of `U` and a linear map `φ : J →ₗ[R] M` such that
+`φ a` restricts to `a • s` on `U` for all `a ∈ J` (Stacks, Tag 01YB). -/
 private theorem affine_section_ideal_presentation
     (R : Type u) [CommRing R] [IsNoetherianRing R]
     (M : ModuleCat.{u} R) (U : (Spec (.of R)).Opens)

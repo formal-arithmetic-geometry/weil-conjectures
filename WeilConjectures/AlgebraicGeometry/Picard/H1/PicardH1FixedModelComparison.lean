@@ -84,8 +84,7 @@ private theorem joint_free_coordinates
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 -- The tensor and quotient comparison contains several dependent module instances.
-/-- The residue square yields joint finite free coordinates.
-The argument uses only the supplied square, source minimality and target retracts. -/
+/-- The residue square yields joint finite free coordinates. -/
 private theorem residue_joint_coordinates
     (W : Scheme.{v}) (U : W.Opens) (p : Ideal Γ(W, U)) [p.IsPrime]
     {n : ℕ} (m : ℕ)

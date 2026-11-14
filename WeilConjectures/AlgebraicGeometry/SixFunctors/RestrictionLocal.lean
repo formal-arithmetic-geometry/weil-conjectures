@@ -36,10 +36,16 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek
 /-!
 # Local factorization of the exceptional inverse image
 
-The right adjoints below are the localizing exceptional right adjoints supplied by
-`theorem-existence-exceptional-inverse-image`; the pullbacks are the canonical derived pullback
-lifts.  Thus the statement does not introduce a second exceptional inverse image or a second
-pullback.
+On affine charts, the exceptional inverse image `f^!` factors through the exceptional inverse
+images of a projection and a closed immersion, and preserves bounded constructibility
+(`AlgebraicGeometry.ProEtale.restrictionLocal`).
+
+## Implementation details
+
+The exceptional inverse images are arbitrary right adjoints of the corresponding
+`localizingLowerShriek` (for arbitrary boundary compactifications), taken as arguments, so the
+factorization holds for every choice; the pullbacks are the canonical derived pullback lifts.
+No second exceptional inverse image or pullback is introduced.
 -/
 
 @[expose] public section
@@ -570,13 +576,8 @@ set_option backward.isDefEq.respectTransparency.types false
 set_option linter.unusedVariables false in
 -- Composite adjunctions and full-subcategory comparisons require explicit elaboration.
 /-- Local factorization of `f^!` on affine charts, together with bounded constructibility.
-
-The exceptional inverse images are the right adjoints of
-`theorem-existence-exceptional-inverse-image`: for `f`, the projection `p` and the closed immersion
-`i`, an arbitrary boundary compactification, its localizing-closure preservation proof and an
-arbitrary right adjoint (`Ff`, `Fp`, `Fi`) of the corresponding `localizingLowerShriek` are taken as
-arguments, so the factorization holds for every choice.  The pullbacks are the canonical
-derived pullback lifts `huStar`, `hvStar`. -/
+Here `Ff`, `Fp`, `Fi` are right adjoints of `localizingLowerShriek` for `f`, the projection `p`
+and the closed immersion `i`, and `huStar`, `hvStar` are the derived pullback lifts. -/
 theorem restrictionLocal
     (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
     [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]

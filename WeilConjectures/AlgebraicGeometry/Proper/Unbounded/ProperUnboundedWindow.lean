@@ -19,11 +19,11 @@ import WeilConjectures.AlgebraicGeometry.Proper.Unbounded.ProperUnboundedWindowI
 /-!
 # Proper direct image of unbounded ind-constructible complexes
 
-The schemes have the standing setting of sk-def-sfb-dc-setting, inherited through
-lemma-uniform-bound-proper-direct-image. All filtered diagrams are small in the coefficient
-universe. The window assertion records the actual two cohomology arrows of the truncation zigzag.
-Their composite, the inverse of the first followed by the second, is the required
-isomorphism in the full subcategory IndCons.
+The schemes have the standing setting of the uniform bound for proper direct images. All
+filtered diagrams are small in the coefficient universe. The window assertion records the two
+cohomology arrows of the truncation zigzag. Their composite, the inverse of the first followed
+by the second, is the required isomorphism in the full subcategory of ind-constructible
+modules.
 -/
 
 @[expose] public noncomputable section
@@ -58,13 +58,9 @@ private lemma dimensionBound_of_nat_tests (δ : WithBot ℕ∞) (d : ℤ)
     have := hδ 0 hzero
     omega
 
-/-- Preservation of Dic, its upper and lower bounds, and the canonical finite window.
-Dic is expanded as membership of every cohomology sheaf in the ambient filtered-colimit
-closure of constructible sheaves. The two window maps are the images of truncLEι and
-truncGEπ, not an arbitrary isomorphism between the endpoint sheaves. The first endpoint
-is ind-constructible by the first clause; the last endpoint is included explicitly.
-Invertibility of the two arrows puts the middle sheaf in IndCons too, and fullness makes
-their inverses and their composite morphisms of IndCons. -/
+/-- Derived pushforward along `p` preserves complexes with ind-constructible cohomology, has
+amplitude `[0, 2d + 1]`, and in degree `q` its cohomology is computed on the window
+`τ^{≥ q - 2d - 1} τ^{≤ q} K`: the images of `truncLEι` and `truncGEπ` are isomorphisms. -/
 def ProperUnboundedWindowAssertions
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     {X Y : Scheme.{u}} (p : X ⟶ Y) (d : ℤ) : Prop :=
@@ -121,9 +117,7 @@ theorem properUnboundedWindow
   · intro q
     exact (proper_unbounded_window_iso ℓ E k p₀ hp₀ hpℓ X Y p d hd K hK q).2.2
 
-/-- The same unbounded proper-window theorem for the condensed algebraic closure.
-Its sections take values in a finite subextension, as in
-lemma-proper-direct-image-unbounded-complexes. -/
+/-- The same unbounded proper-window theorem for the condensed algebraic closure. -/
 theorem properUnboundedWindow_padicAlgCl
     (ℓ : ℕ) [Fact ℓ.Prime]
     (k : Type u) [Field k] (p₀ : ℕ) [CharP k p₀] (hp₀ : 0 < p₀) (hpℓ : p₀ ≠ ℓ)

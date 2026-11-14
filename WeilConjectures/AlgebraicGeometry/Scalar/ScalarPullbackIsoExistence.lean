@@ -11,11 +11,11 @@ import WeilConjectures.Algebra.Category.ModuleCat.DerivedBaseChange
 import WeilConjectures.CategoryTheory.Sites.ReductionFlat
 import WeilConjectures.CategoryTheory.DerivedCategory.KFlatAcyclic
 
-/-! Existence of the normalized derived scalar/pullback comparison.
+/-! # Existence of the normalized derived scalar/pullback comparison
 
 ## References
 
-* Stacks 07A4, 0G7E and 07A7
+* Stacks Project, Tags 07A4, 0G7E and 07A7
 -/
 
 @[expose] public noncomputable section
@@ -349,9 +349,7 @@ attribute [local irreducible] ProEtale.pbcFixedScalarExtension
   scalarExtensionRepresentative scalarGeometricRepresentative
   Functor.leftAdjoint Functor.rightAdjoint Functor.mapDerivedCategory upperStar lowerStar
 
-/-- The normalized comparison exists.  It is separated from uniqueness so the
-representative descent argument can be proved independently.
--/
+/-- The normalized derived scalar/pullback comparison exists. -/
 theorem scalarPullbackIso_exists
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {Z W : Scheme.{u}} (f : Z ⟶ W) :

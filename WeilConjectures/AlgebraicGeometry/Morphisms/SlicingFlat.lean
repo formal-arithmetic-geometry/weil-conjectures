@@ -58,7 +58,13 @@ contains a point over `x`.
 ## References
 
 - Stacks Project, Tag `0EY5`, <https://stacks.math.columbia.edu/tag/0EY5>
-- Stacks Project, Tags `055W`, `057I`
+- Stacks Project, Tags `055W`, `057I`, `04KV`, `055P`
+
+## Implementation details
+
+In `AlgebraicGeometry.exists_etaleCover_factorization` the schemes `U i` are only quasi-compact,
+not affine. For a smooth morphism the first leg can moreover be taken to be a smooth morphism of
+affine schemes (Stacks `0EY4`, `AlgebraicGeometry.Smooth.exists_etaleCover_factorization`).
 -/
 
 @[expose] public section
@@ -70,8 +76,7 @@ open CategoryTheory Limits Topology TensorProduct
 namespace AlgebraicGeometry
 
 /-- A morphism `q : U ⟶ V`, locally of finite type, with a section and with topologically
-connected fibres, has geometrically connected fibres: each fibre is a connected scheme over the
-residue field with a rational point, hence geometrically connected (Stacks `04KV`). -/
+connected fibres, has geometrically connected fibres. -/
 theorem GeometricallyConnected.of_isPreconnected_preimage_singleton {U V : Scheme.{u}}
     (q : U ⟶ V) [LocallyOfFiniteType q] (s : V ⟶ U) (hs : s ≫ q = 𝟙 V)
     (h : ∀ v : V, _root_.IsPreconnected (q ⁻¹' {v})) : GeometricallyConnected q := by
@@ -91,10 +96,7 @@ theorem GeometricallyConnected.of_isPreconnected_preimage_singleton {U V : Schem
 
 /-- Over a field `K`, the smooth locus of a morphism `f : X ⟶ Spec K`, locally of finite
 presentation, with geometrically reduced fibres is dense, given a perfect purely inseparable
-extension `L / K`. The base change `X_L` is reduced, so its smooth locus over the perfect field
-`L` is dense (`AlgebraicGeometry.Scheme.Hom.dense_smoothLocus_of_perfectField`). As `X_L ⟶ X`
-is a homeomorphism, the image of this smooth locus is a dense open of `X` whose base change to
-`L` is smooth, hence it is smooth over `K` by flat descent. -/
+extension `L / K`. -/
 theorem GeometricallyReduced.dense_smoothLocus_of_isPurelyInseparable {K : Type u} [Field K]
     (L : Type u) [Field L] [Algebra K L] [PerfectField L] [IsPurelyInseparable K L]
     {X : Scheme.{u}} (f : X ⟶ Spec (.of K)) [LocallyOfFinitePresentation f]
@@ -126,9 +128,7 @@ theorem GeometricallyReduced.dense_smoothLocus_of_isPurelyInseparable {K : Type 
   rwa [← Scheme.Hom.preimage_smoothLocus_eq] at this
 
 /-- **Smooth points are dense over a field**: the smooth locus of a morphism `X ⟶ Spec K`,
-locally of finite presentation, with geometrically reduced fibres is dense. We apply
-`AlgebraicGeometry.GeometricallyReduced.dense_smoothLocus_of_isPurelyInseparable` to the perfect
-closure of `K` in an algebraic closure. -/
+locally of finite presentation, with geometrically reduced fibres is dense. -/
 theorem GeometricallyReduced.dense_smoothLocus {K : Type u} [Field K] {X : Scheme.{u}}
     (f : X ⟶ Spec (.of K)) [LocallyOfFinitePresentation f] [GeometricallyReduced f] :
     Dense (f.smoothLocus : Set X) :=
@@ -147,7 +147,7 @@ theorem exists_mem_smoothLocus_of_geometricallyReduced {X S : Scheme.{u}} (f : X
     f.fiberι_mem_smoothLocus hw⟩
 
 /-- The connected component of a point `x` in the fibre of a morphism `f` locally of finite type
-is open in that fibre: it is cut out on the fibre by an open subset of `X`. -/
+is cut out on that fibre by an open subset of `X`. -/
 theorem Scheme.Hom.exists_opens_inter_preimage_eq_connectedComponentIn {X Y : Scheme.{u}}
     (f : X ⟶ Y) [LocallyOfFiniteType f] (y : Y) (x : X) :
     ∃ U : X.Opens, (U : Set X) ∩ f ⁻¹' {y} = connectedComponentIn (f ⁻¹' {y}) x := by
@@ -161,10 +161,7 @@ theorem Scheme.Hom.exists_opens_inter_preimage_eq_connectedComponentIn {X Y : Sc
   · exact ⟨⊥, by simp [connectedComponentIn_eq_empty hx]⟩
 
 /-- Let `q : U ⟶ Y` be a morphism whose fibre over `g y'` is connected and has a rational point
-`s`. Then the fibre over `y'` of the base change of `q` along `g : Y' ⟶ Y` is connected: the
-fibre of `q` is a connected scheme over `κ(g y')` with a rational point, hence geometrically
-connected (Stacks `04KV`), and the fibre over `y'` of the base change is its base change to
-`κ(y')`. -/
+`s`. Then the fibre over `y'` of the base change of `q` along `g : Y' ⟶ Y` is connected. -/
 theorem isConnected_preimage_singleton_of_isPullback {P U Y Y' : Scheme.{u}} {fst : P ⟶ U}
     {snd : P ⟶ Y'} {q : U ⟶ Y} {g : Y' ⟶ Y} (h : IsPullback fst snd q g) (y' : Y')
     (s : Spec (Y.residueField (g y')) ⟶ U) (hs : s ≫ q = Y.fromSpecResidueField (g y'))
@@ -184,12 +181,7 @@ theorem isConnected_preimage_singleton_of_isPullback {P U Y Y' : Scheme.{u}} {fs
 /-- **The relative connected component commutes with base change** (Stacks `055M`). Let
 `f : X ⟶ Y` be locally of finite type with a section `σ`, and let `g : Y' ⟶ Y`. A point `x'` of
 `X ×_Y Y'` lies in the connected component of the base-changed section in its fibre if and only
-if its image in `X` lies in the connected component of `σ` in its fibre.
-
-Write `y'` for the image of `x'` in `Y'` and `y = g y'`. The image in `X` of the component of the
-section in the fibre over `y'` is connected, so lies in the component `C` of `σ y`. Conversely,
-`C` is cut out on the fibre over `y` by an open `U ⊆ X`, and the fibre over `y'` of the base
-change of `U ⟶ Y` is connected by `isConnected_preimage_singleton_of_isPullback`. -/
+if its image in `X` lies in the connected component of `σ` in its fibre. -/
 @[stacks 055M]
 theorem preimage_setOf_mem_connectedComponentIn_preimage_singleton {X Y Y' : Scheme.{u}}
     (f : X ⟶ Y) [LocallyOfFiniteType f] (σ : Y ⟶ X) (hσ : σ ≫ f = 𝟙 Y) (g : Y' ⟶ Y) :
@@ -274,11 +266,7 @@ theorem setOf_mem_connectedComponentIn_preimage_singleton_eq_preimage {X Y X' Y'
 `055Q`). Let `f : X ⟶ Y` be a flat morphism of finite presentation between affine schemes, with
 geometrically reduced fibres, and let `σ` be a section of `f`. The points `x` lying in the
 connected component of `σ (f x)` in their fibre form a subset of `X` stable under
-generalization.
-
-Writing `f = Spec (A → B)` and `σ = Spec s`, this set is the relative component
-`PrimeSpectrum.relativeComponent s`, and we conclude by
-`PrimeSpectrum.stableUnderGeneralization_relativeComponent`. -/
+generalization. -/
 @[stacks 055Q]
 theorem stableUnderGeneralization_setOf_mem_connectedComponentIn_preimage_singleton
     {X Y : Scheme.{u}} (f : X ⟶ Y) [Flat f] [LocallyOfFinitePresentation f]
@@ -322,12 +310,7 @@ theorem stableUnderGeneralization_setOf_mem_connectedComponentIn_preimage_single
 /-- **The relative connected component of a section is open** (Stacks `055R`). Let `f : X ⟶ Y`
 be a flat morphism of finite presentation between affine schemes, with geometrically reduced
 fibres, and let `σ` be a section of `f`. The points `x` lying in the connected component of
-`σ (f x)` in their fibre form an open subset of `X`.
-
-Writing `f = Spec (A → B)` and `σ = Spec s`, this set is the relative component
-`PrimeSpectrum.relativeComponent s`, which is constructible (Stacks `055P`,
-`PrimeSpectrum.isConstructible_relativeComponent_of_finitePresentation`). It is stable under
-generalization (Stacks `055Q`), hence open. -/
+`σ (f x)` in their fibre form an open subset of `X`. -/
 @[stacks 055R]
 theorem isOpen_setOf_mem_connectedComponentIn_preimage_singleton {X Y : Scheme.{u}}
     (f : X ⟶ Y) [Flat f] [LocallyOfFinitePresentation f] [GeometricallyReduced f] [IsAffine X]
@@ -359,12 +342,7 @@ theorem isOpen_setOf_mem_connectedComponentIn_preimage_singleton {X Y : Scheme.{
 /-- **The relative connected component of a section is quasi-compact.** Let `f : X ⟶ Y` be
 locally of finite presentation and quasi-compact between quasi-compact, quasi-separated schemes,
 and let `σ` be a section of `f`. The points `x` lying in the connected component of `σ (f x)` in
-their fibre form a quasi-compact subset of `X`.
-
-It is the intersection of the constructible sets `(f ⁻¹' (G ∩ σ ⁻¹' U₁) ∩ U₁ᶜ)ᶜ`, for `U₁, U₂`
-quasi-compact opens of `X` and `G` the set of `y` over which `U₁` and `U₂` split the fibre into
-two disjoint pieces, which is constructible by Chevalley's theorem. Indeed the connected
-components of the fibres are open in the fibres, and so are cut out by such pairs. -/
+their fibre form a quasi-compact subset of `X`. -/
 theorem isCompact_setOf_mem_connectedComponentIn_preimage_singleton {X Y : Scheme.{u}}
     (f : X ⟶ Y) [LocallyOfFinitePresentation f] [QuasiCompact f] [CompactSpace X]
     [QuasiSeparatedSpace X] [CompactSpace Y] [QuasiSeparatedSpace Y] (σ : Y ⟶ X)
@@ -587,8 +565,7 @@ covering `p i : U i ⟶ X` of `X`, that is, a family of étale morphisms whose i
 such that each composite `p i ≫ f` factors as `q i ≫ r i` with `r i : V i ⟶ S` étale and
 `q i : U i ⟶ V i` flat of finite presentation (locally of finite presentation, quasi-compact and
 quasi-separated), with geometrically connected and geometrically reduced fibres and a section,
-over an affine scheme `V i` (the "Moreover" part of blueprint `sk-prop-normal-form`, except
-that `U i` is only quasi-compact, not affine):
+over an affine scheme `V i`:
 
 ```
 U i --q i--> V i
@@ -597,10 +574,7 @@ p i          r i
  v            v
  X ----f----> S
 ```
-
-For a smooth morphism the first leg can moreover be taken to be a smooth morphism of affine
-schemes; that is Stacks `0EY4`,
-`AlgebraicGeometry.Smooth.exists_etaleCover_factorization`. -/
+-/
 @[stacks 0EY5]
 theorem exists_etaleCover_factorization {X S : Scheme.{u}} (f : X ⟶ S) [Flat f]
     [LocallyOfFinitePresentation f] [GeometricallyReduced f] :

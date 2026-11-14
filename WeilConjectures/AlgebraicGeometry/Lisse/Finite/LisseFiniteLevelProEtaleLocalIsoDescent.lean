@@ -19,6 +19,13 @@ import WeilConjectures.ConstructibleSheaf.InternalHom
 
 /-! # Geometric descent of a local fixed-realization isomorphism
 
+## Implementation details
+
+The boundedness and finite local constancy hypotheses on `D` in
+`exists_proetale_local_iso_section_of_fixed_realization_local_model` are essential: independent
+quadratic local systems in infinitely many degrees over `Spec ℚ` become constant on a pro-étale
+cover but have no common étale trivializing neighbourhood.
+
 ## References
 
 * Stacks Project, Tags 099Y, 099Z, 09B1 and 09BV
@@ -256,13 +263,8 @@ theorem exists_etale_local_iso_of_fixed_realization_local_model
   exact ⟨V, Over.homMk v hv, ⟨eV⟩⟩
 
 /-- A local fixed-realization isomorphism on a pro-etale covering sieve gives a local
-section of the derived Isom presheaf through every geometric point.
-
-Statement repair: the former signature omitted boundedness and finite local constancy
-of D. These are essential and were already hypotheses of its caller. For example,
-independent quadratic local systems in infinitely many degrees over Spec Q become
-constant on a pro-etale cover but have no common etale trivializing neighbourhood.
--/
+section of the derived Isom presheaf through every geometric point, provided `D` is bounded
+with finite locally constant cohomology sheaves. -/
 theorem exists_proetale_local_iso_section_of_fixed_realization_local_model
     (X Y : Scheme.{u}) (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)

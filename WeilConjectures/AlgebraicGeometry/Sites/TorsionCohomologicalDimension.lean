@@ -18,10 +18,10 @@ A scheme `X` has torsion étale cohomological dimension at most `c`
 every torsion abelian étale sheaf `F` on `X` and every `q > c`. For a field `K` this is the
 condition `cd_tor(K) ≤ c` on `Spec K`.
 
-The torsion étale cohomological dimension `cd(X) ∈ ℕ∞` of blueprint
-`definition-cohomological-dimension` is `AlgebraicGeometry.Scheme.torsionCohomologicalDimension`,
-the least such `c` (or `⊤`); its relative version for a morphism `f`, defined by the vanishing of
-the higher direct images `Rᵠf_* F` of torsion sheaves, is
+The torsion étale cohomological dimension `cd(X) ∈ ℕ∞` is
+`AlgebraicGeometry.Scheme.torsionCohomologicalDimension`, the least such `c` (or `⊤`); its
+relative version for a morphism `f`, defined by the vanishing of the higher direct images
+`Rᵠf_* F` of torsion sheaves, is
 `AlgebraicGeometry.Scheme.Hom.torsionCohomologicalDimension`.
 -/
 
@@ -50,8 +50,7 @@ lemma HasTorsionCohomologicalDimensionLE.mono {X : Scheme.{u}} {c d : ℕ}
 
 The torsion étale cohomological dimension `cd(X) ∈ ℕ∞` of a scheme `X`: the least `d` with
 `Hᵠ(X_ét, F) = 0` for every torsion abelian étale sheaf `F` and every `q > d`, and `⊤` if no such
-`d` exists. The blueprint restricts to quasi-compact quasi-separated `X`; the definition makes
-sense in general. -/
+`d` exists. -/
 noncomputable def torsionCohomologicalDimension (X : Scheme.{u}) : ℕ∞ :=
   ⨅ (d : ℕ) (_ : X.HasTorsionCohomologicalDimensionLE d), (d : ℕ∞)
 
@@ -65,20 +64,15 @@ lemma torsionCohomologicalDimension_le_iff {X : Scheme.{u}} {c : ℕ} :
     exact WithTop.coe_le_coe.2 (Nat.succ_le_of_lt (lt_of_not_ge fun hdc ↦ hc (hd.mono hdc)))
   exact absurd h (not_le.2 this)
 
-/-- Blueprint `definition-cohomological-dimension`, relative version: the bound `cd(f) ≤ d` for a
-morphism `f : X ⟶ Y`.
-
-It holds if the higher direct images `Rᵠf_* F` vanish for every torsion abelian étale sheaf `F`
-on `X` and every `q > d`. -/
+/-- The bound `cd(f) ≤ d` for a morphism `f : X ⟶ Y`: the higher direct images `Rᵠf_* F`
+vanish for every torsion abelian étale sheaf `F` on `X` and every `q > d`. -/
 def Hom.HasTorsionCohomologicalDimensionLE {X Y : Scheme.{u}} (f : X ⟶ Y) (d : ℕ) : Prop :=
   ∀ F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}, F.IsTorsion →
     ∀ q : ℕ, d < q → IsZero (((Etale.lowerStar AddCommGrpCat.{u + 1} f).rightDerived q).obj F)
 
-/-- Blueprint `definition-cohomological-dimension`, relative version: the torsion étale
-cohomological dimension `cd(f) ∈ ℕ∞` of a morphism `f : X ⟶ Y`, the least `d` such that
-`Rᵠf_* F = 0` for every torsion abelian étale sheaf `F` on `X` and every `q > d` (and `⊤` if there
-is none). The blueprint restricts to quasi-compact quasi-separated `f`; the definition makes sense
-in general. -/
+/-- The torsion étale cohomological dimension `cd(f) ∈ ℕ∞` of a morphism `f : X ⟶ Y`, the least
+`d` such that `Rᵠf_* F = 0` for every torsion abelian étale sheaf `F` on `X` and every `q > d`
+(and `⊤` if there is none). -/
 noncomputable def Hom.torsionCohomologicalDimension {X Y : Scheme.{u}} (f : X ⟶ Y) : ℕ∞ :=
   ⨅ (d : ℕ) (_ : f.HasTorsionCohomologicalDimensionLE d), (d : ℕ∞)
 

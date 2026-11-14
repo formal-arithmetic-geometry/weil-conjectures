@@ -143,9 +143,8 @@ private theorem projective_square
     (ambient_eq Λ (square Y)) (section_eq Λ Y (firstProjection Y) h₁)
     (section_eq Λ Y (secondProjection Y) h₂) K
 
-/--
-Source: Second identity, first factor before the Tate twist.
--/
+/-- On the diagonal, the pulled-back ambient comparison is the second-projection pull-section
+isomorphism followed by the inverse of the first-projection one. -/
 theorem second_pull_section_core_conjugate
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

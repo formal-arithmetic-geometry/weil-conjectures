@@ -27,7 +27,7 @@ namespace AlgebraicGeometry.Scheme
 variable [∀ Y : Scheme.{v},
   HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]
 
-/-- Evaluation of the unit morphism gives exactly the previously fixed section map. -/
+/-- Evaluating the unit morphism at the unit section `1` gives `picardDirectImageSectionMap`. -/
 theorem picardDirectImageUnitMorphism_evaluation
     {X S : Scheme.{v}} (f : X ⟶ S) (L : X.Modules) (W : Scheme.{v}) (k : W ⟶ S)
     {T : Scheme.{v}} (t : T ⟶ W)

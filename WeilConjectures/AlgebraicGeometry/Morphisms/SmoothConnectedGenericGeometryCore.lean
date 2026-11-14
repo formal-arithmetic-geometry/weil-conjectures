@@ -12,6 +12,13 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import WeilConjectures.AlgebraicGeometry.Regular
 import WeilConjectures.RingTheory.SmoothNormalRing
 
+/-! # Smooth geometrically connected families over a normal integral base
+
+## References
+
+* Stacks Project, Tags 034F, 056T and 01UA
+-/
+
 @[expose] public section
 
 universe u
@@ -19,9 +26,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- A nonempty smooth geometrically connected family over a normal integral base
-has normal integral total space and generic fibre.
-
-Source: Stacks Project, Tags 034F, 056T and 01UA. -/
+has normal integral total space and generic fibre. -/
 theorem smooth_connected_generic_geometry_core {S C : Scheme.{u}} [IsIntegral S]
     [Nonempty C] (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))
     (c : C ⟶ S) [Smooth c] [GeometricallyConnected c]

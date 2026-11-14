@@ -25,10 +25,9 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- Every projective morphism in the blueprint's finite projective-space embedding convention
-is proper. The other conjuncts record the three properness facts in the parenthetical clause:
-projective-space projections are proper, closed immersions are proper, and proper morphisms
-are closed under composition. -/
+/-- Every (H-)projective morphism is proper. The other conjuncts record that projective-space
+projections are proper, closed immersions are proper, and proper morphisms are closed under
+composition. -/
 theorem hProjective_properness :
     (∀ {X Y : Scheme.{u}} (f : X ⟶ Y), IsHProjective f → IsProper f) ∧
     (∀ (N : ℕ) (Y : Scheme.{u}),

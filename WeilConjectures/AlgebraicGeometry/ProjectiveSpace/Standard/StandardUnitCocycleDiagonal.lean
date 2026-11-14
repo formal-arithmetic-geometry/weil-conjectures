@@ -7,6 +7,13 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
 
+/-! # Diagonal equations for standard unit cocycles
+
+## References
+
+* Stacks Project, Tag 0BXJ
+-/
+
 @[expose] public section
 
 set_option autoImplicit false
@@ -18,10 +25,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.ProjectiveSpace
 
-/-- The diagonal equations left after the off-diagonal normalization.
-
-Source: Stacks Project, Tag 0BXJ.
--/
+/-- If units `a i` relate a unit cocycle `t` on the standard cover of `ℙ^{r-1}_k` to the
+standard transition units of degree `d` off the diagonal, then they also do so on the diagonal. -/
 theorem standardUnitCocycle_diagonal_normalization (k : Type u) [Field k]
     (r : ℕ) (hr : 3 ≤ r)
     (t : ∀ i j : ULift.{u} (Fin r),

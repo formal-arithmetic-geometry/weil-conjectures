@@ -34,9 +34,9 @@ Morphisms between truncated hypercovers descend as well
 
 The main inputs are the descent of quasi-compact quasi-separated étale schemes, of morphisms, of
 equalities of morphisms and of surjectivity to a finite stage
-(`AlgebraicGeometry.etale_finite_data_descent_of_isLimit`), and the fact that matching objects are finite limits,
-so that their formation commutes with base change and preserves quasi-compactness and
-quasi-separatedness.
+(`AlgebraicGeometry.etale_finite_data_descent_of_isLimit`), and the fact that matching objects are
+finite limits, so that their formation commutes with base change and preserves quasi-compactness
+and quasi-separatedness.
 -/
 
 @[expose] public section

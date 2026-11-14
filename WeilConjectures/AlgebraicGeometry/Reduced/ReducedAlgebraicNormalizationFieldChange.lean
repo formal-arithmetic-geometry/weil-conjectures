@@ -26,10 +26,16 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.NormalizationDominantLift
 ## References
 
 * Stacks Project, Varieties, Tags 0BXR and 0C3N
-* Morphisms, Tags 035Q, 035K, 0CDV
-* Stacks Project, Tag 035S
-* Stacks Project, Tag 035Q
-* Stacks Project, Tag 035Q, applied componentwise
+* Stacks Project, Morphisms, Tags 035Q, 035K, 035S and 0CDV
+
+## Implementation details
+
+The isomorphism locus of the normalization is identified with the normal locus by spreading
+out a section of the normalization over an integral neighborhood of a normal point.
+Compatibility with restriction and with field change is obtained by comparing finite normal
+schemes on a dense open, via `Scheme.finite_normal_iso_of_dense_open`; separable scalar
+extension preserves normality of the stalks, and flat base change preserves schematic
+dominance, so reducedness descends.
 -/
 
 @[expose] public section
@@ -685,66 +691,11 @@ end Algebra
 
 namespace AlgebraicGeometry
 
-/-- Componentwise normalization is finite, surjective, an isomorphism over the dense open
-normal locus, compatible with restriction to opens, and compatible with separable field change.
-The comparison is characterized over the base by its projection equations.
-
-Source proof (the original affine route):
-1. Finite type over a field makes X Noetherian
-, hence its components are finite in number
-. Normalize their reduced structures
-using `lemma-proper-smooth-model--1`. Each resulting map is finite and surjective, as is
-its finite disjoint union. On affine charts the coordinate ring is the finite product of
-the integral closures of the component domains. This includes the empty coproduct.
-2. By `lem-weil-pbc-reduced-noetherian-total-ring-fractions` the total fraction ring is the
-product of the component fields. Projection of monic equations and multiplication of
-finitely many lifted monic equations identify the preceding product with the integral
-closure in this total fraction ring. Localization compatibility is
-`lem-weil-pbc-integral-closure-commutes-localization`.
-3. The integral closure is normal by `lem-sbc-integral-closure-finite-normal-product`.
-Clear the denominators of its finite module generators by a common nonzerodivisor s.
-Then A_s = B_s. By `lem-weil-pbc-reduced-zerodivisors-union-minimal-primes`, D(s) contains
-all generic points and is dense.
-4. Localization compatibility and `lem-weil-pbc-primes-of-localization` show that A_p is a
-normal domain exactly when (B/A)_p = 0. The support of the finite module B/A is closed:
-the product of elements killing its finitely many generators kills the whole module.
-The complementary open is therefore precisely the normal locus, contains D(s), and the
-normalization restricts to an isomorphism there.
-5. On principal opens, localization gives the normalization of the restricted scheme;
-use `lem-weil-pbc-affine-open-section-vanishing-prime` for the affine charts. These
-identifications preserve fractions on further restrictions and hence glue over every W.
-They are canonical because two maps over W agree on the dense isomorphism locus and
-the target is separated over W.
-6. For separable K/k, `lem-weil-pbc-normal-algebra-separable-scalar-extension` makes B_K
-normal. Flatness
-preserves A → B and multiplication by s as injections. Thus A_K is reduced, B_K is
-finite over A_K, and s B_K lies in A_K. Both rings are Noetherian.
-7. These inclusions identify their total fraction rings: a fraction b/t in Q(B_K) is
-(sb)/(st) in Q(A_K). Apply `lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions`
-and `lem-weil-pbc-noetherian-finitely-many-minimal-primes` to B_K. Its normality and
-`lem-weil-pbc-finite-algebra-is-integral` identify B_K with the integral closure of A_K.
-The comparison sends b tensor c to c times the image of b in Q(A_K). This formula
-commutes with localization, so glues over X_K. Uniqueness over X_K follows on the dense
-isomorphism locus, since the target is separated over X_K and the source is reduced.
-8. For algebraically closed k, `lem-weil-pbc-algclosed-fg-field-separating-basis` makes
-every finitely generated intermediate extension separably generated, exactly
-`Algebra.IsSeparableExtension k K`. Apply the preceding comparison, without algebraicity
-or finiteness assumptions on K/k.
-
-Lean route: We prove finiteness and surjectivity componentwise. At a normal point,
-choose an integral neighborhood using a germ-injective affine chart. Its unique
-ambient component receives the spectrum of the stalk dominantly; lift this map to
-its normalization and spread the lift out. The resulting section of the finite
-normalization is closed and dense in the inverse image of a smaller neighborhood,
-hence an isomorphism because that inverse image is reduced. The maximal isomorphism
-open is therefore the normal locus; generic stalks are fields, so it is dense.
-For restriction and field change, compare finite normal schemes on this dense open
-using `Scheme.finite_normal_iso_of_dense_open`. Separable scalar extension gives
-normal stalks on the pulled-back normalization. Flat base change preserves schematic
-dominance, so reducedness descends to the base-changed scheme. Open maps preserve the
-density needed by the comparison. Separatedness gives uniqueness; pullback extensionality
-gives both projection equations. Perfectness of an algebraically closed field gives
-the last clause. -/
+/-- For a reduced scheme `X` of finite type over a field `k`, componentwise normalization is
+finite, surjective, an isomorphism over the dense open normal locus, compatible with restriction
+to opens, and compatible with separable field change (with any field change when `k` is
+algebraically closed). Each comparison isomorphism is unique subject to its projection
+equations. -/
 theorem reduced_algebraic_normalization_field_change
     {k : Type u} [Field k] (X : Scheme.{u}) (q : X ⟶ Spec (.of k))
     [IsReduced X] [LocallyOfFiniteType q] [QuasiCompact q] :

@@ -26,12 +26,7 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Every quasi-compact
-quasi-separated scheme admits a finite affine gluing presentation.
-
-Quasi-compactness gives a finite affine open cover `S = ⋃ₐ Uₐ`; quasi-separatedness makes each
-`Uₐ ⊓ U_b` quasi-compact, so it is covered by finitely many opens that are basic opens both in
-`Uₐ` and in `U_b`. -/
+/-- Every quasi-compact quasi-separated scheme admits a finite affine gluing presentation. -/
 theorem nonempty_finiteAffineGluingPresentation (S : Scheme.{u}) [CompactSpace S]
     [QuasiSeparatedSpace S] : Nonempty S.FiniteAffineGluingPresentation := by
   classical
@@ -73,8 +68,8 @@ theorem nonempty_finiteAffineGluingPresentation (S : Scheme.{u}) [CompactSpace S
       · obtain ⟨p, hp, hxp⟩ := Set.mem_iUnion₂.mp (hs a b hx)
         exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨p, hp⟩, hxp⟩ }⟩
 
-/-- The selected finite affine
-gluing presentation `G_S` of a quasi-compact quasi-separated scheme `S`. -/
+/-- The selected finite affine gluing presentation `G_S` of a quasi-compact quasi-separated scheme
+`S`. -/
 noncomputable def finiteAffineGluingPresentation (S : Scheme.{u}) [CompactSpace S]
     [QuasiSeparatedSpace S] : S.FiniteAffineGluingPresentation :=
   Classical.choice S.nonempty_finiteAffineGluingPresentation
@@ -88,14 +83,10 @@ variable {S : Scheme.{u}} (G : S.FiniteAffineGluingPresentation)
 noncomputable def gluedIso : G.openCover.gluedCover.glued ≅ S :=
   asIso G.openCover.fromGlued
 
-/-- Properties of the selected
-finite affine presentation.
-
-Every overlap `Uₐ ⊓ U_b` of a finite affine gluing presentation is quasi-compact and is the union
-of the finitely many basic opens `D(f a b r)`, there are finitely many charts and overlap basic
-opens (so all gluing identities form finite lists), and gluing the charts along their overlaps
-recovers `S`: the canonical map from the glued scheme to `S` is an isomorphism. In particular `S`
-is quasi-compact and quasi-separated (`compactSpace`, `quasiSeparatedSpace`). -/
+/-- For a finite affine gluing presentation, every overlap `Uₐ ⊓ U_b` is quasi-compact and is the
+union of the finitely many basic opens `D(f a b r)`, there are finitely many charts and overlap
+basic opens, and the canonical map from the scheme glued from the charts to `S` is an
+isomorphism. -/
 theorem isCompact_inf_and_isIso_fromGlued :
     (∀ a b, IsCompact (((G.U a : S.Opens) ⊓ G.U b : S.Opens) : Set S)) ∧
       (∀ a b, ⨆ r, S.basicOpen (G.f a b r) = (G.U a : S.Opens) ⊓ G.U b) ∧

@@ -29,6 +29,12 @@ immersion, since the coordinates generate `Γ(Uᵢ)`.
 - `AlgebraicGeometry.Scheme.CoordinateCover.exists_isImmersion`: a scheme locally of finite type
   over an affine scheme with a finite coordinate cover by affine charts admits an immersion into
   projective space.
+
+## Implementation details
+
+In `exists_isAffineOpen_preimage_of_isImmersion`, the morphism `ψ` is given by sections of
+`j^* 𝒪(N)` whose non-vanishing loci are the preimages of basic opens `D(r) ⊆ D₊(Tᵢ)` contained in
+the open in which `j(X)` is closed; they exist by the extension lemma.
 -/
 
 @[expose] public section
@@ -172,11 +178,7 @@ attribute [local instance] MvPolynomial.gradedAlgebra
 the standard opens.** Let `j : X ⟶ ℙ(α; S)` be a quasi-compact immersion over an affine scheme
 `S`, with `X` quasi-compact and quasi-separated. Then there is a morphism `ψ : X ⟶ ℙ(β; S)` over
 `S`, with `β` finite, such that the preimage of every standard open `D₊(T_b)` is affine; i.e. the
-pullback of `𝒪(1)` along `j` is ample (EGA II, 4.5.2).
-
-The morphism is given by sections `σ` of `j^* 𝒪(N)` whose non-vanishing loci are the preimages
-of basic opens `D(r) ⊆ D₊(Tᵢ)` contained in the open in which `j(X)` is closed; such sections
-exist by the extension lemma `AlgebraicGeometry.Scheme.CoordinateCover.exists_section`. -/
+pullback of `𝒪(1)` along `j` is ample (EGA II, 4.5.2). -/
 theorem exists_isAffineOpen_preimage_of_isImmersion {X S : Scheme.{u}} [IsAffine S]
     {α : Type u} [Finite α] (j : X ⟶ ℙ(α; S)) [IsImmersion j] [QuasiCompact j] [CompactSpace X]
     [QuasiSeparatedSpace X] :

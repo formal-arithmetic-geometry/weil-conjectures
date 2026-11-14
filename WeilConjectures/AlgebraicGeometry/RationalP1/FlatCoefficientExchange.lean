@@ -183,7 +183,7 @@ private meta def coefficientCongrGoal : TacticM Unit := do
     return []
 
 open Lean Elab Tactic in
-/-- Prove structural instance equalities without unfolding sheafification data. -/
+/-- Close structural instance equalities without unfolding sheafification data. -/
 scoped elab "coefficient_congr" : tactic => coefficientCongrGoal
 
 open Lean Meta Elab Tactic in

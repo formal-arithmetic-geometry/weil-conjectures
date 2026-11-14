@@ -25,7 +25,6 @@ import Mathlib.FieldTheory.Tower
 ## References
 
 * Stacks Project, More on Morphisms, Tag 0E0M
-* Stacks Project, Tag 0E0M
 -/
 
 @[expose] public section
@@ -47,13 +46,8 @@ private theorem finite_left_of_comp {K L M : Type u} [Field K] [Field L] [Field 
   exact Module.Finite.left K L M
 
 /-- The affine Stein factor of a proper morphism has finite point fibres and finite
-residue-field extensions, without a Noetherian assumption on the base ring.
-
-Here `f.steinFactorizationBase` is the canonical map from `Spec Γ(X, ⊤)` to `Spec A`.
-For a point `b` over `s`, its residue-field map has source `κ(f.steinFactorizationBase b)`,
-which is `κ(s)`. Ring-hom finiteness is module finiteness for that very map, hence finite
-vector-space dimension, since these rings are fields.
--/
+residue-field extensions, without a Noetherian assumption on the base ring. Here
+`f.steinFactorizationBase` is the canonical map from `Spec Γ(X, ⊤)` to `Spec A`. -/
 theorem Scheme.Hom.steinFactorizationBase_finite_fibres_residueFields
     {A : Type u} [CommRing A] {X : Scheme.{u}}
     (f : X ⟶ Spec (CommRingCat.of A)) [IsProper f]

@@ -14,12 +14,20 @@ public import WeilConjectures.RingTheory.Depth
 public import Mathlib.RingTheory.KrullDimension.Basic
 import WeilConjectures.AlgebraicGeometry.Morphisms.StalkNormalizationBoundaryDimensionTwoCore
 import WeilConjectures.AlgebraicGeometry.Morphisms.StalkNormalizationBoundaryDimTwoTransfer
+
+/-!
+# Boundary stalks of the localized normalization have dimension at least two
+
+## References
+
+* Stacks Project, Tags 0EYJ, 0337, 00LK, 033C and 00H8
+-/
+
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
-/-- Boundary stalks of the finite localized normalization have dimension at least two.
-Source: Stacks Project, Tags 0EYJ, 0337, 00LK, 033C and 00H8 -/
+/-- Boundary stalks of the finite localized normalization have dimension at least two. -/
 theorem stalk_normalization_boundary_dimension_two {S C : Scheme.{u}}
     [IsNoetherian S] [QuasiSeparatedSpace S] [IsIntegral S]
     (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))

@@ -42,6 +42,11 @@ import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Proper.Prop
 All functors act on ordinary unbounded derived categories of internal modules. The
 input belongs to the bounded constructible finite-Tor full subcategory. The conclusion
 is vanishing of the target object in the ambient derived category on the boundary.
+
+## Implementation details
+
+`IsFiniteSubextensionLocalizingAdmissibleCoefficient` is a specialization of
+`IsLocalizingAdmissibleCoefficient` that omits its all-continuous-map algebraic-closure case.
 -/
 
 @[expose] public section
@@ -58,11 +63,7 @@ namespace AlgebraicGeometry.ProEtale
 /-- The finite discrete ell-primary rings, ell-adic integers, finite ell-adic fields,
 their integer rings, and the finite-subextension condensed algebraic closure, up to
 isomorphism of ring objects. The separate rational and integral ground-field clauses
-include Q_ell and Z_ell explicitly.
-
-This item-owned specialization
-is not the dependency's interface: it omits the all-continuous-map algebraic-closure case
-of `IsLocalizingAdmissibleCoefficient`, as the item statement requires. -/
+include Q_ell and Z_ell explicitly. -/
 def IsFiniteSubextensionLocalizingAdmissibleCoefficient (ℓ : ℕ) [Fact ℓ.Prime]
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] : Prop :=
   (∃ (A : Type) (_ : CommRing A) (_ : TopologicalSpace A)
@@ -260,7 +261,7 @@ private theorem finiteBoundaryCoefficientIso
   have : IsMonHom iAb.hom := by dsimp [iAb, i]; infer_instance
   exact ⟨(Mon.mkIso' e).symm ≪≫ (Mon.mkIso' iAb).symm⟩
 
-/-- Keep the inverse isomorphism abstract while checking the concrete coefficient exchange. -/
+/-- The source of an isomorphism onto a zero object is zero. -/
 private theorem isZero_source_of_isIso
     {C : Type*} [Category C] {X Y : C} (f : X ⟶ Y) (hf : IsIso f)
     (hY : IsZero Y) : IsZero X :=

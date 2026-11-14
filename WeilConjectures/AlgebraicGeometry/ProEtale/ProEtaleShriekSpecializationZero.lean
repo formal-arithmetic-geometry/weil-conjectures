@@ -225,9 +225,8 @@ private theorem shriek_presheaf_subsingleton_of_specializes_closed
     (((Functor.Final.isColimitWhiskerEquiv s (E.coconeAt (op W))).symm hE).isZero_pt hzero)
 
 /-- Shriek sections vanish on an affine object all of whose points specialize to the
-closed fibre disjoint from the source. Here the opposite localization functor's left
-Kan extension is the abelian direct-sum presheaf indexed by lifts to `U`; sheafifying
-it is precisely the `j_!` of Stacks, Tag 09AG, lemma-jshriek-zero. -/
+closed fibre disjoint from the source, where `j_!` is the sheafified left Kan extension along
+the localization functor (the direct-sum presheaf indexed by lifts to `U`). -/
 theorem shriek_sections_subsingleton_of_specializes_closed
     {X Z : Scheme.{u}} (U : X.ProEt) (i : Z ⟶ X) [IsClosedImmersion i]
     (hdisjoint : IsEmpty ↥(pullback U.hom i))

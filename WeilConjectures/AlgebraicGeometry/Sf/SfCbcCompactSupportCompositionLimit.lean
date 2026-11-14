@@ -44,15 +44,12 @@ are computed from those maps. Words are indexed composable chains.
 
 ## References
 
-* Stacks 00VC, 099M
-* Stacks 00VC, 099N
-* Stacks 00VC
-* Stacks 00VC, 09A5
-* Stacks 00YV, 03D2, 099N
-* Stacks 099N
-* Stacks 0941, 099N
-* Stacks 099M
-* Stacks 0B56
+* Stacks Project, Tags 00VC, 00YV, 03D2, 0941, 099M, 099N, 09A5 and 0B56
+
+## Implementation details
+
+`SfCbcReducedUnitsInvertible` is a conclusion of the reconstruction theorem, never an
+assumption of it.
 -/
 
 @[expose] public noncomputable section
@@ -191,8 +188,8 @@ def sfCbcModelReducedUnit (T : Scheme.{t}) :
   whiskerRight ((sfCbcSite T).unit _ (sfCbcModelIdeal d))
     ((sfCbcSite T).reduction _ (sfCbcModelIdeal d))
 
-/-- The proof needed to take the unique inverse of the specified reduced unit.
-It is a conclusion of the reconstruction theorem, never an assumption of that theorem. -/
+/-- The specified reduced unit `sfCbcModelReducedUnit d T` is an isomorphism for every
+scheme `T`. -/
 def SfCbcReducedUnitsInvertible : Prop := ∀ T : Scheme.{t}, IsIso (sfCbcModelReducedUnit d T)
 
 /-- The counit-tensor projection map as one natural transformation of strict towers.

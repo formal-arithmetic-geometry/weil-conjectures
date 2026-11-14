@@ -310,8 +310,7 @@ variable {k : Type u} [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))]
 Schemes `P`, `P'` representing `Pic^d_{X/k}` and `Pic^{d'}_{X/k}` are isomorphic through an
 isomorphism whose functor of points is tensoring with `pr_X^* M`: the point of `P` classifying a
 class `ℒ` is sent to the point of `P'` classifying `ℒ ⊗ pr_X^* M`
-(`AlgebraicGeometry.picardSubfunctorDegreeMulMapFst`). The inverse is tensoring with
-`pr_X^* M⁻¹`, by the same statement applied to `M⁻¹`. -/
+(`AlgebraicGeometry.picardSubfunctorDegreeMulMapFst`). -/
 theorem exists_iso_representableBy_picardFunctorDegree {d d' e : ℤ} (M : X.Pic)
     (hM : picDegreeHom k X M = .ofAdd e) (h : d' = d + e) (P P' : Over (Spec (.of k)))
     (hP : (picardFunctorDegree (X ↘ Spec (.of k)) d).obj.RepresentableBy P)
@@ -380,8 +379,7 @@ omit [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.
 `Pic_{X/k}` through `hP` and let `M ∈ Pic X`. The translation `τ_M: P ≅ P` is the automorphism
 of `P` whose functor of points is the sheafification of `ℒ ↦ ℒ ⊗ pr_X^* M`: a `T`-point `x` of
 `P` is sent to the point `hP.homEquiv.symm (x · (a_M)_T)` (`picardTranslation_homEquiv`,
-`picardTranslation_hom_eq_mul`), where `a_M` is the `k`-point `[M]`. For `M = 𝒪_X(dx)` this is
-the translation `τ_d` of the blueprint. -/
+`picardTranslation_hom_eq_mul`), where `a_M` is the `k`-point `[M]`. -/
 noncomputable def picardTranslation {P : Over (Spec (.of k))}
     (hP : (picardFunctor (X ↘ Spec (.of k))).obj.RepresentableBy P) (M : X.Pic) : P ≅ P :=
   hP.uniqueUpToIso (hP.ofIso ((sheafToPresheaf (fppfTopology.over (Spec (.of k))) _).mapIso

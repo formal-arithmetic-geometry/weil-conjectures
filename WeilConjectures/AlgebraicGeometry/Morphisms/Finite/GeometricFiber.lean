@@ -19,12 +19,6 @@ points `x : Spec Ω ⟶ X` lifting `y` (`AlgebraicGeometry.Scheme.Hom.GeometricF
 finite, and every point of the scheme-theoretic fibre `f ⁻¹ {y}` is the image of a geometric
 point over `y`.
 
-Both statements are proved in an affine chart: for an affine open `Y₀ ∋ y` with preimage
-`X₀ = f ⁻¹ᵁ Y₀`, the geometric points of `X` over `y` are the points of the finite
-`Γ(Y₀)`-algebra `Γ(X₀)` over the point `Γ(Y₀) →+* Ω` given by `y`
-(`AlgebraicGeometry.Scheme.Hom.geometricFiberEquivPointsOver`), and the ring-theoretic
-results of `WeilConjectures.Mathlib.RingTheory.Etale.GeometricPoint` apply.
-
 ## Main definitions
 
 - `AlgebraicGeometry.Scheme.Hom.GeometricFiber`: the geometric points of `X` over `y`.
@@ -41,6 +35,13 @@ results of `WeilConjectures.Mathlib.RingTheory.Etale.GeometricPoint` apply.
 - `AlgebraicGeometry.Scheme.Hom.GeometricFiber.finite_of_isPullback`: the geometric fibre of a
   base change of a finite morphism is finite.
 
+## Implementation details
+
+Both statements are proved in an affine chart: for an affine open `Y₀ ∋ y` with preimage
+`X₀ = f ⁻¹ᵁ Y₀`, the geometric points of `X` over `y` are the points of the finite
+`Γ(Y₀)`-algebra `Γ(X₀)` over the point `Γ(Y₀) →+* Ω` given by `y`
+(`AlgebraicGeometry.Scheme.Hom.geometricFiberEquivPointsOver`), and the ring-theoretic
+results of `WeilConjectures.Mathlib.RingTheory.Etale.GeometricPoint` apply.
 -/
 
 @[expose] public section
@@ -286,8 +287,7 @@ lemma finite_of_isPullback [IsFinite f] (h : IsPullback g' f' f g) (y' : Spec (.
 variable (f g)
 
 /-- The geometric fibre of the second projection of `Limits.pullback f g` over `y'` is the
-geometric fibre of `f` over `y' ≫ g`. This is `baseChangeEquiv` for the square given by
-`Limits.pullback f g`. -/
+geometric fibre of `f` over `y' ≫ g`. -/
 noncomputable def pullbackEquiv (y' : Spec (.of Ω) ⟶ Y') :
     (pullback.snd f g).GeometricFiber y' ≃ f.GeometricFiber (y' ≫ g) :=
   baseChangeEquiv (IsPullback.of_hasPullback f g) y'

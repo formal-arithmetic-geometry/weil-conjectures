@@ -87,8 +87,7 @@ lemma IsInvertible.nonempty_iso_unit [Subsingleton X] (x : X) (M : X.Modules)
     (pullbackComp _ _).symm.app M ≪≫ (Scheme.Modules.pullback X.topIso.inv).mapIso e ≪≫
     pullbackObjUnitIso _⟩
 
-/-- The structure sheaf of a nonempty scheme is not zero: `1 ≠ 0` in its ring of global
-sections, as the germ of `1` at a point is `1` in a local ring. -/
+/-- The structure sheaf of a nonempty scheme is not zero. -/
 lemma not_isZero_unit (X : Scheme.{u}) [Nonempty X] :
     ¬ IsZero (SheafOfModules.unit X.ringCatSheaf) := by
   intro h

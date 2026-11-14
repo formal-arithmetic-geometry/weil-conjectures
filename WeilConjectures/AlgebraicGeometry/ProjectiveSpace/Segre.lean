@@ -67,11 +67,6 @@ closed immersion because closed immersions are stable under base change.
   base change of the Segre morphism of the integral models.
 - `AlgebraicGeometry.ProjectiveSpace.isClosedImmersion_segre` — the relative Segre morphism is
   a closed immersion.
-
-## Blueprint
-
-This is `def:chow-segre` and `lem:chow-segre` in the binary case, first for the integral models
-and then over an arbitrary base scheme. The `m`-fold product is built from it elsewhere.
 -/
 
 @[expose] public section
@@ -418,13 +413,7 @@ lemma opensRange_segreCover_f_eq_preimage (k : n) (l : m) :
         (MvPolynomial.X (k, l)) := by
   rw [segre_preimage_basicOpen, opensRange_segreCover_f]
 
-/-- **The Segre morphism is a closed immersion.**
-
-Being a closed immersion is Zariski-local on the target, so it suffices to check this over the
-standard opens `D₊(W_{k,l})` of `ℙ^(n×m)_ℤ`. The preimage of `D₊(W_{k,l})` is the chart
-`D₊(Xₖ) ×_ℤ D₊(Yₗ)`, which is the spectrum of `ℤ[Xᵣ/Xₖ] ⊗_ℤ ℤ[Yₛ/Yₗ]`, and on it the Segre
-morphism is the spectrum of the ring map sending `W_{r,s} / W_{k,l}` to
-`(Xᵣ / Xₖ) ⊗ (Yₛ / Yₗ)`, which is surjective. -/
+/-- **The Segre morphism is a closed immersion.** -/
 instance isClosedImmersion_segre : IsClosedImmersion (segre n m) := by
   refine IsZariskiLocalAtTarget.of_iSup_eq_top (P := @IsClosedImmersion)
     (fun kl : n × m ↦ basicOpen (homogeneousSubmodule (n × m) (ULift.{u} ℤ))

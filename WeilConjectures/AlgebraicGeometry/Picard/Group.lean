@@ -239,9 +239,7 @@ lemma picardPresheafGrp_comp_forget (f : X ⟶ S) :
 /-- A representation `e` of the relative Picard functor `Pic_{X/S}` by a group scheme `A`
 *respects the group laws* if, for every `S`-scheme `T`, the map `Pic (X_T) ⟶ (T ⟶ A)` sending a
 class `ℒ` to the point of `A` classifying its image in `Pic_{X/S}(T)` is a group homomorphism:
-the group law of `A` is the tensor product of invertible modules. Equivalently, `e` is an
-isomorphism of group-valued functors between `Pic_{X/S}`, with the group law induced by that of
-the Picard presheaf, and the functor of points of `A`. -/
+the group law of `A` is the tensor product of invertible modules. -/
 def IsPicardMul (f : X ⟶ S) {A : Over S} [GrpObj A]
     (e : (picardFunctor f).obj.RepresentableBy A) : Prop :=
   ∀ {T : Over S} (L M : (pullback f T.hom).Pic),
@@ -252,8 +250,7 @@ def IsPicardMul (f : X ⟶ S) {A : Over S} [GrpObj A]
 /-- **A scheme representing the Picard functor is a commutative group scheme.** Let `A` represent
 the relative Picard functor `Pic_{X/S}`. Then `A` carries a commutative group scheme structure
 for which the representation respects the group laws: its group law is induced by the tensor
-product of invertible modules, through the group law that the fppf sheafification `Pic_{X/S}`
-inherits from the Picard presheaf (`CategoryTheory.sheafifyGrp`). -/
+product of invertible modules. -/
 theorem exists_commGrpObj_isPicardMul (f : X ⟶ S) {A : Over S}
     (e : (picardFunctor f).obj.RepresentableBy A) : ∃ _ : CommGrpObj A, IsPicardMul f e := by
   let G := picardPresheafGrp f
@@ -267,10 +264,8 @@ theorem exists_commGrpObj_isPicardMul (f : X ⟶ S) {A : Over S}
 section `σ`, the `σ`-normalized classes form the kernel of the group homomorphism
 `σ_T^*: Pic (X_T) ⟶ Pic T`, and pulling back along `X_{T'} ⟶ X_T` is a group homomorphism.
 The underlying presheaf of sets is `AlgebraicGeometry.picardFunctorNormalized`
-(`AlgebraicGeometry.picardFunctorNormalizedGrp_comp_forget`).
-
-The group law is the tensor product of invertible modules; it is what gives the scheme
-representing the Picard functor its group scheme structure. -/
+(`AlgebraicGeometry.picardFunctorNormalizedGrp_comp_forget`). The group law is the tensor
+product of invertible modules. -/
 noncomputable def picardFunctorNormalizedGrp (f : X ⟶ S) (σ : S ⟶ X) (hσ : σ ≫ f = 𝟙 S) :
     (Over S)ᵒᵖ ⥤ GrpCat.{u + 1} where
   obj T := GrpCat.of (Pic.mapHom (sectionBaseChange f σ hσ T.unop)).ker

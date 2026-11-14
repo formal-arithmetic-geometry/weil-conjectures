@@ -21,12 +21,16 @@ The overlap map `⋃_r D(f a b r) ⟶ Spec A_b` is characterised by being compat
 maps `Uₐ ⊓ U_b ⟶ Spec Aₐ` and `Uₐ ⊓ U_b ⟶ Spec A_b` induced by the inclusions `Aₐ ⊆ Γ(S, Uₐ)`
 and `A_b ⊆ Γ(S, U_b)`. It exists because `Aₐ[1/f a b r] = A_b[1/g a b r]` inside
 `Γ(S, D(f a b r))`, and it is unique because `Aₐ[1/f] ⟶ Γ(S, D(f))` is injective (localization
-is exact). The gluing conditions then follow from the unit conditions of the stage and from this
-uniqueness.
+is exact).
 
 For `l ≤ l'` the inclusions of the coefficient subrings induce affine transition morphisms
 `S_{l'} ⟶ S_l`, giving a diagram indexed by the opposite of the directed set of stages
 (`AlgebraicGeometry.Scheme.FiniteAffineGluingPresentation.stageDiagram`).
+
+## Implementation details
+
+The gluing conditions follow from the unit conditions of the stage and from the uniqueness of
+the overlap maps.
 -/
 
 @[expose] public section
@@ -259,13 +263,10 @@ noncomputable def glueData : Scheme.OpensGlueData.{u} where
   t_mem := l.trans_mem
   cocycle a b c := l.cocycle a b c _
 
-/-- Finite-type Noetherian stage.
-
-For a valid stage `l` of the finite affine gluing presentation `G` (with coefficient subrings
-`Aₐ ⊆ Γ(S, Uₐ)`), the scheme `S_l` obtained by gluing the charts `Spec Aₐ` along the overlaps
+/-- The finite-type scheme `S_l` of a valid stage `l` (with coefficient subrings
+`Aₐ ⊆ Γ(S, Uₐ)`), obtained by gluing the charts `Spec Aₐ` along the overlaps
 `⋃_r D(f a b r) ⊆ Spec Aₐ`, the overlap maps being induced by the equalities
-`Aₐ[1/f a b r] = A_b[1/g a b r]` inside `Γ(S, D(f a b r))`. The stage `S_{λ_glue}` of the
-blueprint is `G.glueStage.scheme`. -/
+`Aₐ[1/f a b r] = A_b[1/g a b r]` inside `Γ(S, D(f a b r))`. -/
 noncomputable def scheme : Scheme.{u} := l.glueData.glued
 
 /-- The open immersion of the chart `Spec Aₐ` into the glued scheme. -/
@@ -373,8 +374,7 @@ lemma transition_preimage_opensRange_ι (a : G.ι) :
   rw [← Scheme.Hom.comp_preimage, ι_transition, Scheme.Hom.comp_preimage, preimage_opensRange_ι,
     SpecMap_incl_preimage_overlap, preimage_opensRange_ι]
 
-/-- The transition morphisms are
-affine. -/
+/-- The transition morphisms are affine. -/
 instance isAffineHom_transition : IsAffineHom (transition hll) := by
   refine isAffineHom_of_forall_exists_isAffineOpen _ fun x ↦ ?_
   have hx : x ∈ (⊤ : l.scheme.Opens) := trivial
@@ -384,14 +384,12 @@ instance isAffineHom_transition : IsAffineHom (transition hll) := by
   rw [transition_preimage_opensRange_ι]
   exact isAffineOpen_opensRange _
 
-/-- The transition morphisms
-satisfy the identity law. -/
+/-- The transition morphisms satisfy the identity law. -/
 lemma transition_refl : transition (le_refl l) = 𝟙 _ :=
   l.hom_ext fun a ↦ by
     rw [ι_transition, Category.comp_id, incl_refl, Spec.map_id, Category.id_comp]
 
-/-- The transition morphisms
-satisfy the composition law. -/
+/-- The transition morphisms satisfy the composition law. -/
 lemma transition_trans {l'' : G.Stage} (hll' : l' ≤ l'') :
     transition (hll.trans hll') = transition hll' ≫ transition hll :=
   l''.hom_ext fun a ↦ by
@@ -416,12 +414,8 @@ lemma stageDiagram_obj (l : (G.Stage)ᵒᵖ) : G.stageDiagram.obj l = l.unop.sch
 lemma stageDiagram_map {l l' : (G.Stage)ᵒᵖ} (f : l ⟶ l') :
     G.stageDiagram.map f = Stage.transition (leOfHom f.unop) := rfl
 
-/-- Properties of the finite-type stages.
-
-Every glued stage `S_l` is of finite type over `ℤ` (it is quasi-compact and locally of finite type
-over `ℤ`, being covered by the finitely many spectra `Spec Aₐ` of finitely generated rings), and
-every transition morphism `S_{l'} ⟶ S_l` is affine (the preimage of the chart `Spec Aₐ` of `S_l`
-is the chart `Spec A'ₐ` of `S_{l'}`). -/
+/-- Every glued stage `S_l` is quasi-compact and locally of finite type over `ℤ`, and every
+transition morphism `S_{l'} ⟶ S_l` is affine. -/
 theorem stage_finiteType_isAffineHom (l : G.Stage) :
     LocallyOfFiniteType (specULiftZIsTerminal.from l.scheme) ∧ CompactSpace l.scheme ∧
       ∀ (l' : G.Stage) (h : l ≤ l'), IsAffineHom (Stage.transition h) :=

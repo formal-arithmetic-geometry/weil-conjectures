@@ -52,20 +52,7 @@ import WeilConjectures.AlgebraicGeometry.Etale.EtaleStalkTensorScalar
 ## References
 
 * Deligne, Weil II, (0.1), (1.1.1) b)-d), pp. 144, 146-147
-* Weil II coefficient convention
-* Weil II (1.1.1), coefficient sheaves
-* Weil II (1.1.1) b)
-* Weil II (1.1.1) c)
-* Weil II (1.1.1) b), SGA 5 VI (1.2.5)
-* Weil II (1.1.1) c), SGA 5 VI (1.2.5)
-* Weil II (1.1.1) b), SGA 5 VI
-* Weil II (1.1.1) c), SGA 5 VI
-* Weil II (1.1.1) d), SGA 5 VI
-* Weil II (1.1.1) d)
-* Weil II (1.1.1) d), local-field scalar extension, SGA 5 VI
-* Weil II (1.1.1) d), scalar extension on cofinal systems
-* the ceiling formula in coefficient scalar extension, SGA 5 VI
-* Weil II (1.1.1) c)-d)
+* SGA 5 VI (1.2.5)
 -/
 
 @[expose] public section
@@ -299,9 +286,7 @@ abbrev AdicIntegralDiagram :=
 
 /-- A lisse integral system: each level is finite locally constant, killed by
 `I^(n+1)` for `I = (ϖ_E)`, and on every geometric stalk the transition is surjective with
-kernel `I^(n+1)` times the source, in the adic-limit form of lem-pod-adic-limit-finite-modules.
-The last condition is tested on all geometric stalks, which form a conservative
-family of exact functors. It is the reduction-isomorphism clause of Weil II (1.1.1) b). -/
+kernel `I^(n+1)` times the source. -/
 def IsLisseIntegralDiagram (F : AdicIntegralDiagram l E Y) : Prop :=
   let R := Padic.coefficientExtensionIntegers l E
   let I := Ideal.span ({Padic.coefficientExtensionUniformizer l E} : Set R)

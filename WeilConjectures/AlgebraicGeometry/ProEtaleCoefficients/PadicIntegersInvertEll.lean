@@ -35,9 +35,7 @@ import WeilConjectures.ConstructibleSheaf.FreeLifting
 /-!
 # Inverting the prime in the integral pro-étale coefficient ring
 
-The coefficient rings and inclusion are the published constructions. The helpers only
-specialize the regular module, restriction of scalars, and sequential-diagram constructors.
-The theorem exhibits the specified fraction cocone on E_X as a colimit and identifies any
+The main theorem exhibits the specified fraction cocone on E_X as a colimit and identifies any
 colimit equipped with its localization ring structure with E_X as a ring object.
 -/
 
@@ -114,16 +112,9 @@ private theorem padicIntegers_cocone (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prim
   exact ⟨(c.extend e.hom).ι, ⟨hc.ofIsoColimit (Cocone.ext e)⟩, he⟩
 
 /-- E_X is the localization of the integral coefficient sheaf at ℓ, with fraction maps
-ℓ⁻ᵐφ, and is flat over that integral sheaf.
-
-The witness j is φ with its integral-module linearity. The witness t is the inverse of
-multiplication by ℓ on E_X, so j ≫ t^m is exactly ℓ⁻ᵐφ. The natural transformation α,
-with these specified components and vertex E_X, is a colimit cocone. For any colimit c
-carrying its localization ring structure (in particular its zeroth leg is a ring map),
-the comparison is a ring isomorphism with the prescribed value on every term. This states
-the comparison independently of any choice of colimit representative. Finally, exactness
-of extension of scalars expresses flatness: this functor is already a left adjoint, so
-finite-limit preservation supplies the remaining half of exactness. -/
+ℓ⁻ᵐφ, and is flat over that integral sheaf: the cocone `j ≫ t^m` (with `t` inverse to
+multiplication by ℓ) is a colimit, any colimit carrying its localization ring structure is
+isomorphic to E_X as a ring object, and extension of scalars to E_X is exact. -/
 theorem padicIntegers_invertEll (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ) :
     ∃ j : padicIntegersRegularModule X ℓ E ⟶ padicSubfieldIntegralModule X ℓ E,

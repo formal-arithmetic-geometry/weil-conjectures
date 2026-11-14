@@ -84,8 +84,7 @@ theorem exists_isAffineOpen_superset_of_isImmersion {K : Type u} [Field K] {X : 
   exact exists_isAffineOpen_superset_of_isImmersion_of_isAffine i s hs
 
 /-- **Finite sets in quasi-projective schemes lie in affine opens** (Stacks 01ZY, 09NN). Every
-finite set of points of a quasi-projective scheme over a field lies in an affine open. This is
-used in the proof of blueprint `proposition-jacobian-over-ground-field--1`. -/
+finite set of points of a quasi-projective scheme over a field lies in an affine open. -/
 @[stacks 09NN]
 theorem IsQuasiProjective.exists_isAffineOpen_superset {K : Type u} [Field K] {X : Scheme.{u}}
     {f : X ⟶ Spec (.of K)} (hf : IsQuasiProjective f) (s : Set X) (hs : s.Finite) :

@@ -21,7 +21,6 @@ import WeilConjectures.AlgebraicGeometry.Picard.Direct.PicardDirectImageSectionM
 
 ## References
 
-* Stacks Project, Tags 0B91 and 08HY
 * Stacks Project, Tags 0B91, 08HY and 0D5S
 -/
 
@@ -32,8 +31,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- The additive section comparison for a direct image is natural for arbitrary successive
-base changes. This is the cohomological part of the argument; it asserts no property
-of the image of a scheme morphism and uses no residue point or open neighbourhood. -/
+base changes. -/
 theorem picard_direct_image_section_naturality
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]

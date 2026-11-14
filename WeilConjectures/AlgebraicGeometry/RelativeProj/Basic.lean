@@ -17,8 +17,9 @@ relative `Proj` by relative gluing (`Scheme.Cover.RelativeGluingData`) of the sc
 `Proj (A(V))` over the locally directed cover of `X` by all of its affine opens, exactly as for
 the blow-up in `WeilConjectures.Blowup.Gluing`. Since the index category is a thin preorder, no
 cocycle conditions appear: the overlap isomorphisms and their cocycle identities of the
-blueprint are replaced by the functoriality of `Proj.map` and by the fact that the transition
-maps are base changes (`AlgebraicGeometry.Proj.isPullback_map_of_isGradedBaseChangeAlong`).
+usual gluing construction are replaced by the functoriality of `Proj.map` and by the fact that
+the transition maps are base changes
+(`AlgebraicGeometry.Proj.isPullback_map_of_isGradedBaseChangeAlong`).
 
 ## Main definitions
 

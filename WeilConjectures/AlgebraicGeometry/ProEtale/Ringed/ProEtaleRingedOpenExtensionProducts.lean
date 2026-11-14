@@ -111,6 +111,12 @@ import WeilConjectures.CategoryTheory.SheavesAlgebraicStructuresAbelian
 * Stacks Project, Pro-etale Cohomology, with arbitrary ring-sheaf coefficients via ringed
   recollement
 * Stacks Project, Tag 09BP, using Tags 09AA, 09AG, 09AH and 09BN
+
+## Implementation details
+
+The open site is presented as the slice at `U`, as in `ProEt.weaklyEtale_localization`, with
+coefficient sheaf `(proEtaleModuleCoefficients R).over U`; `proEtaleRingedExtensionByZero U R`
+is the extension presheaf followed by module sheafification.
 -/
 
 @[expose] public section
@@ -142,14 +148,7 @@ private theorem jointly_detect_iso
   exact isIso_of_mono_of_epi c
 
 /-- For a quasi-compact open immersion, the canonical product comparison for extension
-by zero of module sheaves is invertible and natural in maps of families.
-
-The open site is presented as the slice at `U`, as in `ProEt.weaklyEtale_localization`.
-The coefficient sheaf is `(proEtaleModuleCoefficients R).over U`; the functor
-`proEtaleRingedExtensionByZero U R` is the recorded extension presheaf followed by
-module sheafification. `piComparison` has components the images of the projections.
-Products are Mathlib's sectionwise module-sheaf limits. The index type may be empty.
-No quasi-compactness or quasi-separatedness condition is imposed on `X`. -/
+by zero of module sheaves is invertible and natural in maps of families. -/
 theorem proEtaleRingedExtensionByZero_products {X : Scheme.{u}} (U : X.ProEt)
     [IsOpenImmersion U.hom] [QuasiCompact U.hom]
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) (S : Type (u + 1))

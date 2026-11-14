@@ -38,13 +38,6 @@ For the determinant `ρ ↦ det ρ` this is the determinant morphism of arithmet
   component is Zariski dense in the corresponding degree component.
 - `RepresentedDegreeDatum.extensionMap_mem_center`: `Φ_Q` maps central elements to central
   elements.
-
-## Blueprint
-
-`RepresentedDegreeDatum.extensionMap` and its properties implement
-`proposition-central-element-arithmetic-monodromy-group--2`; `RepresentedDegreeDatum.det` implements
-`definition-determinant-weight--1`, and `RepresentedDegreeDatum.detExtensionMap` with its properties
-implements `proposition-central-element-arithmetic-monodromy-group--2`.
 -/
 
 @[expose] public section

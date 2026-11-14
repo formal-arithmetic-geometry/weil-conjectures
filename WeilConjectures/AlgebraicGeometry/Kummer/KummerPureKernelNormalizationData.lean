@@ -114,8 +114,7 @@ theorem kummer_normalization_of_triangles
   simpa only [diagonalPureEvaluationIso, F₂, Iso.trans_hom, Iso.app_hom,
     Functor.mapIso_hom, Functor.comp_map, Category.assoc] using h
 
-/-- Shared coefficient parameters for normalization. Every field is actual data;
-no existence theorem or proof is used to choose any of it. -/
+/-- Shared coefficient parameters for the Kummer normalization. -/
 structure KummerNormalizationCoefficients
     {A B : Type*} [Category A] [Abelian A] [hA : HasExt.{w} A]
     [Category B] (U : B ⥤ A) (C : ℕ → Type uC) where

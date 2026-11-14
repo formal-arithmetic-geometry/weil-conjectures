@@ -33,10 +33,8 @@ namespace AlgebraicGeometry.Scheme.ProEt
 
 /-! Symmetry completion for the clopen structural comparison. -/
 
-/-- The signed Koszul symmetry clause follows from the normalized prefix comparison.
-
-The proof compares the two total-tensor routes on each summand; braided coherence gives the
-Koszul sign and the prefix equations identify both routes with the chosen comparison. -/
+/-- Given the normalized prefix comparison, the total tensor comparison satisfies the signed
+Koszul symmetry clause on each summand. -/
 theorem clopen_structural_comparison_symmetry
     (X : Scheme.{t}) (I : Type w) [Finite I] (Y : I → Scheme.{t})
     (j : ∀ i, Y i ⟶ X) [∀ i, IsOpenImmersion (j i)] [∀ i, IsClosedImmersion (j i)]

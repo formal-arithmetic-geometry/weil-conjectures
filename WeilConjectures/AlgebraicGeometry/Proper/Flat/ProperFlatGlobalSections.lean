@@ -22,7 +22,6 @@ import WeilConjectures.AlgebraicGeometry.Proper.Flat.ProperFlatGlobalSectionsCri
 ## References
 
 * Stacks Project, Derived Categories of Schemes, Tag 0E0L
-* Stacks Project, Tag 0E0L
 -/
 
 @[expose] public section
@@ -35,12 +34,8 @@ namespace AlgebraicGeometry
 
 /-- A proper flat morphism of finite presentation whose residue-field fibres are geometrically
 reduced and geometrically connected has canonical map `𝒪_S → f_* 𝒪_X` an isomorphism,
-universally. The canonical map `𝒪_T → p_* 𝒪_{X_T}` (for `p = pullback.snd f g`) is rendered as
-the unit at `𝒪_T` of the module pullback/pushforward adjunction
-`Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction p)`, i.e.
-`𝒪_T → p_* p^* 𝒪_T` with `p^* 𝒪_T ≅ 𝒪_{X_T}`; this is the form of the hypothesis `hO` of
-`lem-sc-picard-diagonal-locally-closed`. Locally of finite presentation together with
-properness (quasi-compact, quasi-separated) is finite presentation. -/
+universally. Here the canonical map `𝒪_T → p_* 𝒪_{X_T}` (for `p = pullback.snd f g`) is the
+unit `𝒪_T → p_* p^* 𝒪_T` at `𝒪_T` of the pullback/pushforward adjunction. -/
 theorem isIso_structureSheafMap_of_proper_flat_geometricallyReduced_connected_fibers
     {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f] [Flat f]
     [LocallyOfFinitePresentation f]

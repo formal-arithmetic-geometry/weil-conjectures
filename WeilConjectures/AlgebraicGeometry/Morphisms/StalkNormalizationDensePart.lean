@@ -15,14 +15,20 @@ public import Mathlib.AlgebraicGeometry.Normalization
 import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Flat
 
+/-!
+# Density of the localized source in the relative normalization
+
+## References
+
+* Stacks Project, Tags 035I and 081I (flat base change of schematic images)
+-/
+
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- Density of the localized source in the relative normalization.
-
-Source: Stacks Project, Tags 035I and 081I (flat base change of schematic images). -/
+/-- Density of the localized source in the relative normalization. -/
 theorem stalk_normalization_dense_part {S C : Scheme.{u}}
     [IsNoetherian S] [QuasiSeparatedSpace S] [IsIntegral S]
     (_hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))

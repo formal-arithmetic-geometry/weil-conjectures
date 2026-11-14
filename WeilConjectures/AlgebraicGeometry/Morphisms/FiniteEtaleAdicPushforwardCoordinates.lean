@@ -40,8 +40,7 @@ def coverToBase (n : ℕ) : cover f V P n ⟶ Limits.pullback V.ι (baseMap f n)
     (by simp only [Category.assoc, coverMap]; exact pullback.condition)
 
 /-- The canonical comparison from the pulled-back finite algebra to the thickened cover's
-structure sheaf. It is the adjoint of restriction of functions along `coverMap`, transported
-through the commuting pushforwards. No inverse or existence witness enters its construction. -/
+structure sheaf, adjoint to restriction of functions along `coverMap`. -/
 def pushforwardComparison (n : ℕ) :
     (Modules.pullback (pullback.fst V.ι (baseMap f n))).obj
         ((Modules.pushforward P.obj.hom).obj (Modules.unit P.obj.left)) ⟶
@@ -61,8 +60,8 @@ def liftSection (n : ℕ) (a : Γ(cover f V P n, ⊤)) :
       ((Modules.pushforward P.obj.hom).obj (Modules.unit P.obj.left)), ⊤) :=
   Function.invFun ((pushforwardComparison f V P n).app ⊤) a
 
-/-- Coordinates of a lifted section, for a specified finite free embedding of the direct image.
-This construction works for any morphism into finite free, without an injectivity hypothesis. -/
+/-- Coordinates of a lifted section with respect to a morphism `α` from the direct image to a
+finite free module. -/
 def coordinates {r : ℕ}
     (α : (Modules.pushforward P.obj.hom).obj (Modules.unit P.obj.left) ⟶
       free (R := V.toScheme.ringCatSheaf) (ULift.{u} (Fin r)))
@@ -74,9 +73,8 @@ def coordinates {r : ℕ}
         (ULift.{u} (Fin r))).hom).app ⊤ (liftSection f V P n a)) (ULift.up i)
 
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Bundled-function form of the transition identity.
-(Source: Stacks Project, Tag 02KG.)
--/
+/-- The coordinates of a lifted section are compatible with the transition maps between
+successive thickenings (as an equality of functions). -/
 theorem pushforward_coordinates_transition_fun :
     ∀ (r : ℕ)
       (α : (Modules.pushforward P.obj.hom).obj (Modules.unit P.obj.left) ⟶

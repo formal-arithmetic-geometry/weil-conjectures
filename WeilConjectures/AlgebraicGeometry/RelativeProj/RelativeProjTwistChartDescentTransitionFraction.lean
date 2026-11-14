@@ -7,6 +7,13 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.RelativeProj.RelativeProjTwistChartDescentCompatibility
 
+/-! # Fractions across relative Proj twist charts
+
+## References
+
+* Stacks Project, Constructions, Tag 01NR
+-/
+
 @[expose] public section
 set_option autoImplicit false
 universe u
@@ -41,13 +48,7 @@ variable {S : Scheme.{u}} (A : S.GradedAlgebraData)
 attribute [local irreducible] Scheme.Modules.tensorPullback Scheme.Modules.tensorPullbackObj
   Scheme.Modules.tensorPullbackSection relProj relProjHom relProjι
 
-/-- The normalized transition sends a degree-one homogeneous fraction to its restriction.
-
-Source: Stacks Project, Constructions, Tag 01NR.
-The proof applies the scalar-extension comparison to the denominator-one fraction and
-uses `val_unitToTwist_app_apply`; transport across the equality of chart preimages gives
-the displayed section equality.
--/
+/-- The normalized transition sends a degree-one homogeneous fraction to its restriction. -/
 theorem twist_chart_transition_fraction
     (L : A.relProj.Modules)
     (chart : ∀ U : S.affineOpens,

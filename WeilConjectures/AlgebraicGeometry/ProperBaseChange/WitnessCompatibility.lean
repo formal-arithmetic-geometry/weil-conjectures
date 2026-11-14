@@ -27,19 +27,19 @@ import WeilConjectures.SixFunctors.ProEtale.Comparison.Flat
 # Compatibility of normalized towers with retained étale origins
 
 All finite coefficient categories use their canonical fixed-ring presentation. The
-coefficient realization in definition-small-pro-etale-site--1 identifies them with modules
-over the continuous-function coefficient sheaf. All outputs are ambient derived objects.
+coefficient realization identifies them with modules over the continuous-function coefficient
+sheaf on the small pro-étale site. All outputs are ambient derived objects.
+
+## Implementation details
+
+In `PbcWitnessedTower` only adjacent normalization maps are independent data: longer
+reductions and their maps are the composites of these, read through the canonical
+scalar-extension composition comparisons, so the identity and quotient cocycles are built into
+the encoding.
 
 ## References
 
-* Stacks Tags 09C9, 09C2, 06YY and 07A4
-* Stacks 099L
-* Stacks 06YY and 06XN
-* Stacks 06YY
-* Stacks 03D2
-* Stacks 03D2 and 06YY
-* Stacks 07A4
-* Stacks 07A4 and 0G7E
+* Stacks Project, Tags 03D2, 06XN, 06YY, 07A4, 099L, 09C2, 09C9, 0G7E
 -/
 
 @[expose] public section
@@ -1071,14 +1071,12 @@ noncomputable def pbcFixedOriginAlpha (T : Scheme.{u}) (Λ : Type (u + 1))
       (finiteCoefficientRealization T Λ)).app W.L.obj ≪≫
         DerivedCategory.Plus.ι.mapIso W.alpha)
 
-/-- A normalized tower with compatible retained origins. Only adjacent normalization
-maps are independent data: longer reductions and their maps are the composites of
-these, read through the canonical scalar-extension composition comparisons. Thus the
-identity and quotient cocycles are built into the encoding. -/
+/-- A normalized tower with compatible retained origins: ambient pro-étale levels with
+étale origins and compatible normalization isomorphisms between adjacent levels. -/
 structure PbcWitnessedTower (T : Scheme.{u}) (d : Scheme.AdicCoefficientDatum A) where
   /-- The ambient pro-étale levels. -/
   K : ∀ n : ℕ, PbcWitnessAmbient T d n
-  /-- Bounded-below membership is proof data, with no chosen numerical bound. -/
+  /-- Each level is bounded below. -/
   boundedBelow : ∀ n : ℕ, DerivedCategory.TStructure.t.plus
     ((finiteCoefficientRealization T (PbcQuotient d n)).mapDerivedCategory.obj (K n))
   /-- The retained pairs are those of the supplied étale-origin interface. -/

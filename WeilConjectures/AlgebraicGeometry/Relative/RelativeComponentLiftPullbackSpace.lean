@@ -13,15 +13,15 @@ import WeilConjectures.Topology.InverseImageStalk
 /-!
 # The relative component lift as a locally ringed topological pullback
 
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 2.2.8 and its proof, printed p. 10
+
+## Implementation details
+
 The two functors are the witnesses of the recorded construction theorems. Their
 universal and geometric characterizations determine them up to unique isomorphism
 preserving both coordinates. The sheaf clause uses the actual structure-map adjunct.
-
-## References
-
-* Bhatt--Scholze, The pro-etale topology for schemes, Lemma 2.2.8, its more precise statement and
-  finite-stage proof
-* Bhatt--Scholze, Lemma 2.2.8, its more precise statement and proof, printed p. 10
 -/
 
 @[expose] public section
@@ -100,29 +100,7 @@ set_option backward.isDefEq.respectTransparency false in
 -- The two chosen construction witnesses have large specifications; keep them folded.
 /-- The inverse limit of finite clopen stages is naturally the component-site scheme.
 Its topological space is the subspace pullback, its structure sheaf is the inverse
-image under the first projection, and its components are the second coordinate.
-
-Proof for stage 3.
-1. The affine component-site construction gives the topological pullback with inverse-image
-   structure sheaf. The inverse-image stalk theorem identifies the unit on germs, so its
-   structural stalk maps are isomorphisms. The stalk-isomorphism lifting theorem then gives
-   a unique scheme map above any specified continuous map over T, even from nonaffine W.
-2. At each relative finite clopen stage, the disjoint union of restricted clopen subschemes
-   has this same space and sheaf. Lift the comparison homeomorphism in both directions;
-   uniqueness makes the resulting scheme isomorphisms inverse and compatible with transitions.
-3. Profinite limits are topological limits, including for maps from arbitrary spaces W.
-   Compatible second coordinates therefore give a unique coordinate in the profinite limit.
-   Lifting it by step 1 proves the scheme limit universal property for the component-site model.
-4. The defining relative lift is the other limit of those finite clopen schemes. Uniqueness
-   of limits gives the comparison isomorphism; equality of target-stage projections gives
-   naturality and preservation of the second coordinate, independently of presentation.
-5. Transport the pullback topology, inverse-image sheaf and stalk maps through this comparison.
-   For a map a over the component quotient, the resulting map is (x,s) to (x,a(s)).
-   The second projection is surjective and has connected fibres, precisely the components
-   of T over the image of s. Since E is totally disconnected these fibres are all the
-   connected components. The induced continuous bijection from the compact component
-   quotient to Hausdorff E is a homeomorphism. Empty E gives empty schemes; empty T
-   forces E empty. No nonemptiness assumption is required. -/
+image under the first projection, and its components are the second coordinate. -/
 theorem relative_component_lift_pullback_space (T : Scheme.{u}) [IsAffine T] :
     ∃ θ : ((component_relative_profinite_site T).choose ⋙ Scheme.ProEt.forget T) ≅
         ((Scheme.ProEt.affine_component_site_projection T).choose ⋙ Scheme.ProEt.forget T),

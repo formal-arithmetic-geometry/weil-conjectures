@@ -16,9 +16,15 @@ This isolates the unit middle coefficient case from the general pure-tensor
 formula.  It is the normalized reassociation step in the finite coefficient
 calculation.
 
+## Implementation details
+
+The finite comparison is constructed independently of the completed comparison: it is the
+(invertible) adjunction mate of the finite coefficient square, composed with scalar-extension
+reassociation and lifted termwise to complexes.
+
 ## References
 
-* Stacks Project, Tags 03EK and 03EL, Step 4
+* Stacks Project, Tags 03EK and 03EL
 -/
 
 @[expose] public noncomputable section
@@ -340,14 +346,8 @@ private def finiteChainComparison (n : ℕ) :
     (finiteChangeData l E L ι X n).additive
   exact NatIso.mapHomologicalComplex (finiteModuleComparison l E L ι g n) (.up ℤ)
 
-/-- The finite comparison is constructed independently of the completed comparison.
-Identify the concrete ordinary extension functors with sheafified scalar extension.
-The finite coefficient square transports scalar restriction through inverse image;
-its adjunction mate is invertible because inverse image is an equivalence.
-Compose this mate with scalar-extension reassociation, lift termwise to complexes,
-and restrict to good complexes. The normalized extension units give the double
-pure-tensor rule, whose middle coefficient is then specialized to `1`.
--/
+/-- A normalized completed comparison `b` admits finite balanced comparisons at every level
+satisfying the unit pure-tensor formula `FiniteFormulaUnit`. -/
 theorem finite_formula_unit_exists
     (b : (integralOperationsGoodComplex l E Y).ι ⋙ leftComplex l E L ι g ≅
       (integralOperationsGoodComplex l E Y).ι ⋙ rightComplex l E L ι g)

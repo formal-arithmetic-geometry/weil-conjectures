@@ -18,23 +18,6 @@ public import WeilConjectures.RingTheory.TensorProduct.Hilbert90
 
 For a field `K` the cohomological Picard group `H¹(Spec K_ét, 𝔾ₘ)` vanishes.
 
-The blueprint deduces this from the comparison `Pic(X) ≃ H¹(X_ét, 𝔾ₘ)` for every scheme `X`,
-which rests on the classification of torsors by `H¹` and on fpqc descent for invertible
-modules. For `X = Spec K` we only need the vanishing direction of both, which is elementary:
-
-1. `H¹(𝔾ₘ) = Ext¹(ℤ, 𝔾ₘ)` vanishes as soon as for every short exact sequence
-   `0 → 𝔾ₘ → E → Q → 0` the global sections of `Q` lift to `E`
-   (`CategoryTheory.Sheaf.subsingleton_H_one_of_surjective`).
-2. A global section `q` of `Q` lifts locally, hence to a section `e` of `E` over `Spec L` for a
-   finite separable extension `L` of `K`
-   (`AlgebraicGeometry.Scheme.exists_etaleSpec_field_mem_of_mem_smallEtaleTopology`).
-3. The difference `p₁^* e - p₂^* e` of the two pullbacks of `e` to
-   `Spec L ×_{Spec K} Spec L = Spec (L ⊗_K L)` is a Čech `1`-cocycle with values in
-   `(L ⊗_K L)ˣ`. It is a coboundary by Hilbert 90 for the Amitsur complex
-   (`Algebra.TensorProduct.exists_eq_of_cocycle`), so `e` can be corrected by a unit of `L`
-   to a section that descends to `Spec K`
-   (`AlgebraicGeometry.Scheme.exists_app_eq_of_app_etaleSpec_eq`).
-
 ## Main definitions
 
 - `AlgebraicGeometry.Scheme.etaleSpec`: `Spec A` as an object of the small étale site of
@@ -51,11 +34,22 @@ modules. For `X = Spec K` we only need the vanishing direction of both, which is
 - `AlgebraicGeometry.Scheme.subsingleton_cohomologicalPicardGroup_of_field`: Hilbert 90,
   `H¹(Spec K_ét, 𝔾ₘ) = 0`.
 
-## Blueprint references
+## Implementation details
 
-The labels quoted below are labels of the *sketch* blueprint, which lives in the separate
-repository `formal-arithmetic-geometry/weil-conjectures-blueprint`; they belong to the
-subsection `lemma-cohomology-multiplicative-group`.
+Rather than deducing the vanishing from `Pic(X) ≃ H¹(X_ét, 𝔾ₘ)`, we prove it directly:
+
+1. `H¹(𝔾ₘ) = Ext¹(ℤ, 𝔾ₘ)` vanishes as soon as for every short exact sequence
+   `0 → 𝔾ₘ → E → Q → 0` the global sections of `Q` lift to `E`
+   (`CategoryTheory.Sheaf.subsingleton_H_one_of_surjective`).
+2. A global section `q` of `Q` lifts locally, hence to a section `e` of `E` over `Spec L` for a
+   finite separable extension `L` of `K`
+   (`AlgebraicGeometry.Scheme.exists_etaleSpec_field_mem_of_mem_smallEtaleTopology`).
+3. The difference `p₁^* e - p₂^* e` of the two pullbacks of `e` to
+   `Spec L ×_{Spec K} Spec L = Spec (L ⊗_K L)` is a Čech `1`-cocycle with values in
+   `(L ⊗_K L)ˣ`. It is a coboundary by Hilbert 90 for the Amitsur complex
+   (`Algebra.TensorProduct.exists_eq_of_cocycle`), so `e` can be corrected by a unit of `L`
+   to a section that descends to `Spec K`
+   (`AlgebraicGeometry.Scheme.exists_app_eq_of_app_etaleSpec_eq`).
 -/
 
 @[expose] public section
@@ -232,11 +226,7 @@ theorem exists_app_eq_of_compatible (L : Type u) [Field L] [Algebra K L] [Algebr
 open Algebra.TensorProduct in
 /-- **Descent of a lift along `Spec L → Spec K`.** Let `0 → 𝔾ₘ → E → Q` be exact on sections
 over every étale `K`-scheme. If a global section `q` of `Q` lifts to a section `e` of `E` over
-`Spec L`, for `L` a field étale over `K`, then `q` lifts to a global section of `E`.
-
-The obstruction to descending `e` is the class of the Čech `1`-cocycle
-`p₁^* e - p₂^* e` of `𝔾ₘ` on `Spec (L ⊗_K L)`; it vanishes by Hilbert 90 for the Amitsur
-complex (`Algebra.TensorProduct.exists_eq_of_cocycle`). -/
+`Spec L`, for `L` a field étale over `K`, then `q` lifts to a global section of `E`. -/
 theorem exists_app_eq_of_app_etaleSpec_eq (hιπ : ι ≫ π = 0)
     (hι : ∀ U, Function.Injective (ι.hom.app U))
     (hexact : ∀ U (x : E.obj.obj U), π.hom.app U x = 0 → ∃ g, ι.hom.app U g = x)
@@ -323,11 +313,7 @@ theorem exists_app_eq_of_app_etaleSpec_eq (hιπ : ι ≫ π = 0)
 
 /-- **Every `𝔾ₘ`-torsor on `Spec K` is trivial.** For a short exact sequence
 `0 → 𝔾ₘ → E → Q → 0` of abelian sheaves on the small étale site of the spectrum of a field `K`,
-every global section of `Q` lifts to `E`.
-
-The fibre of `E → Q` over a global section is a `𝔾ₘ`-torsor. It is trivialized over `Spec L`
-for a finite separable extension `L` of `K`, and descends to a trivial torsor by
-`AlgebraicGeometry.Scheme.exists_app_eq_of_app_etaleSpec_eq`. -/
+every global section of `Q` lifts to `E`. -/
 theorem surjective_app_of_shortExact_gmSheaf (w : ι ≫ π = 0)
     (hS : (ShortComplex.mk ι π w).ShortExact) : Function.Surjective (π.hom.app (op 𝟙ₑ)) := by
   have := hS.mono_f
@@ -351,15 +337,7 @@ theorem surjective_app_of_shortExact_gmSheaf (w : ι ≫ π = 0)
 end Descent
 
 /-- **Hilbert 90** for a field: the cohomological Picard group `H¹(Spec K_ét, 𝔾ₘ)` of the
-spectrum of a field vanishes.
-
-The blueprint deduces this from the comparison
-`{invertible 𝒪_X-modules}/≅ ≃ H¹(X_Zar, 𝒪_Xˣ) ≃ H¹(X_ét, 𝔾ₘ)` for `X = Spec K` and the
-triviality of invertible modules over a field. Here the two steps are done at once and only in
-the direction needed: a class in `H¹ = Ext¹(ℤ, 𝔾ₘ)` vanishes when the global sections of every
-quotient `E/𝔾ₘ` lift (`CategoryTheory.Sheaf.subsingleton_H_one_of_surjective`), and they lift
-because every `𝔾ₘ`-torsor on `Spec K` is trivial
-(`AlgebraicGeometry.Scheme.surjective_app_of_shortExact_gmSheaf`). -/
+spectrum of a field vanishes. -/
 instance subsingleton_cohomologicalPicardGroup_of_field (K : Type u) [Field K] :
     Subsingleton (Spec (.of K)).CohomologicalPicardGroup :=
   Sheaf.subsingleton_H_one_of_surjective _

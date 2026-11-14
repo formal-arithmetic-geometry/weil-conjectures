@@ -83,60 +83,13 @@ the monodromy groups and read on `k`-points.
   central pair transported along a polynomial homomorphism `GL n k →* GL m k`, such as the
   exterior power (`Matrix.GeneralLinearGroup.exists_algHom_comp_eq_evalAlgHom_exteriorPower`).
 
-## Blueprint
+## Implementation details
 
-`DegreeDatum`, `RepresentedDegreeDatum` and the attached definitions, among them
-`RepresentedDegreeDatum.arithmeticMonodromy` and `RepresentedDegreeDatum.geometricMonodromy`,
-implement `definition-monodromy-groups`; `RepresentedDegreeDatum.geometricMonodromy` also implements
-`definition-monodromy-groups--1`;
-`RepresentedDegreeDatum.IsPositiveCentralPair` implements
-`proposition-central-element-arithmetic-monodromy-group--1`;
-`RepresentedDegreeDatum.arithmeticMonodromy_le_geometricMonodromy`,
-`RepresentedDegreeDatum.zeroLocus_geometricMonodromy_le_zeroLocus_arithmeticMonodromy`,
-`RepresentedDegreeDatum.normal_zeroLocus_geometricMonodromy`,
-`RepresentedDegreeDatum.commutator_zeroLocus_le_zeroLocus_geometricMonodromy`, the instance
-`containsCommutators_subgroupSchemeHom_arithmeticMonodromy_le_geometricMonodromy`,
-`RepresentedDegreeDatum.lie_mem_lieAlgebra_geometricMonodromy`,
-`RepresentedDegreeDatum.lie_mem_lieAlgebra_identityComponent_geometricMonodromy` and
-`RepresentedDegreeDatum.isSemisimpleRepresentation_standardRepresentation_identityComponent`
-implement `lemma-restriction-normal-subgroup`, the normality, commutator and Lie statements also
-`lemma-normality-geometric-monodromy`;
-`RepresentedDegreeDatum.isSemisimpleRepresentation_degreeZero` implements
-`lemma-restriction-normal-subgroup--1`;
-`RepresentedDegreeDatum.isSemisimpleRepresentation_arithmeticMonodromy` implements
-the `G` part of `lemma-identity-component`;
-`RepresentedDegreeDatum.surjective_mul_center_geometricMonodromy` and
-`RepresentedDegreeDatum.exists_mem_center_mul_mem_geometricMonodromy_eq` implement
-`lemma-identity-component`; `RepresentedDegreeDatum.exists_isPositiveCentralPair` implements
-`proposition-central-element-arithmetic-monodromy-group--1` and
-`proposition-central-element-arithmetic-monodromy-group--1`,
-`RepresentedDegreeDatum.exists_pos_mem_center_mem_degreeComponent` implements
-`proposition-central-element-arithmetic-monodromy-group--1`; `RepresentedDegreeDatum.frobeniusConj`,
-`RepresentedDegreeDatum.frobeniusAction`, `RepresentedDegreeDatum.ArithmeticMonodromyExtension` and
-`RepresentedDegreeDatum.arithmeticMonodromyExtensionHom` implement, on `k`-points,
-`definition-monodromy-groups--2`; that it is a group whose degree map is surjective with kernel
-`H × {0}` is Mathlib's
-`SemidirectProduct` group structure with `SemidirectProduct.rightHom_surjective` and
-`SemidirectProduct.range_inl_eq_ker_rightHom`. The tuple `(ρ, H, G_arith(ρ), G^[m])` of a
-represented degree datum is its monodromy data. `DegreeDatum.lift`,
-`DegreeDatum.lift_apply_of_mem_ker`, `DegreeDatum.lift_degreeOneElement` and
-`DegreeDatum.continuous_lift` implement `situation-weil`;
-`RepresentedDegreeDatum.IsGeometricallySemisimple` implements `lemma-restriction-normal-subgroup`;
-`RepresentedDegreeDatum.frobeniusConjIso` and its companions implement
-`lemma-normality-geometric-monodromy--1` (`RepresentedDegreeDatum.frobeniusConj` is its action on
-`k`-points); `RepresentedDegreeDatum.degreeComponent` implements
-`proposition-central-element-arithmetic-monodromy-group--1`;
-`RepresentedDegreeDatum.image_degreeComponent_eq_closure` implements
-`proposition-central-element-arithmetic-monodromy-group--1`;
-`RepresentedDegreeDatum.degreeComponent_mul_degreeComponent` and
-`RepresentedDegreeDatum.inv_degreeComponent` implement
-`proposition-central-element-arithmetic-monodromy-group--1`. The closure `G` of a subgroup is a
-closed subgroup by
-`Matrix.GeneralLinearGroup.instIsHopfIdealVanishingIdeal`. The pointer remarks
-`proposition-central-element-arithmetic-monodromy-group--1` and
-`proposition-central-element-arithmetic-monodromy-group--1` refer to the statements above of
-`proposition-central-element-arithmetic-monodromy-group--1` and
-`proposition-central-element-arithmetic-monodromy-group--1`.
+The group structure on the arithmetic monodromy extension `H(k) ⋊ ℤ`, with surjective degree map
+and kernel `H × {0}`, is Mathlib's `SemidirectProduct` group structure
+(`SemidirectProduct.rightHom_surjective`, `SemidirectProduct.range_inl_eq_ker_rightHom`). The
+closure `G` of a subgroup is a closed subgroup by
+`Matrix.GeneralLinearGroup.instIsHopfIdealVanishingIdeal`.
 -/
 
 @[expose] public section
@@ -261,9 +214,7 @@ subgroup `P = ker deg`, together with an element `T: M` satisfying
 `T f(u) T⁻¹ = f(γ u γ⁻¹)`, extends to the homomorphism `W → M`, `u γⁿ ↦ f(u) Tⁿ`; every `w` is
 uniquely `u γⁿ`, with `n = deg w`. For the Weil group `W(X₀)` with a lift `s` of the Frobenius
 (`AlgebraicGeometry.Monodromy.DegreeDatum.ofWeilGroup`), `P = π₁(X)`, `f = ρ_geom` and
-`T = T_s`, this is the Weil fundamental representation `ρ(γ sⁿ) = ρ_geom(γ) T_sⁿ`; it restricts
-to `f` (`lift_apply_of_mem_ker`), sends `γ` to `T` (`lift_degreeOneElement`) and is continuous
-when `f` is and `P` is open (`continuous_lift`). -/
+`T = T_s`, this is the Weil fundamental representation `ρ(γ sⁿ) = ρ_geom(γ) T_sⁿ`. -/
 def lift : W →* M where
   toFun w := f ⟨_, D.mul_inv_zpow_mem_ker w⟩ * T ^ (D.deg w).toAdd
   map_one' := by
@@ -880,11 +831,8 @@ theorem isSemisimpleRepresentation_zeroLocus_identityComponent (hD : D.IsSemisim
   (isSemisimpleRepresentation_standardRepresentation_iff _).1
     (D.isSemisimpleRepresentation_standardRepresentation_identityComponent hD)
 
-/-- The central–geometric product on `k`-points, in the form used to construct admissible choices:
-every matrix of `G°(k)` is a product `c h` with `c ∈ Z(G°)°(k)` and `h ∈ H°(k)`. This is
-`AlgebraicGeometry.GeneralLinearGroup.exists_mul_eq_of_commutator_mem` for the pair `H ⊆ G`,
-whose commutators lie in `H` (`commutator_zeroLocus_le_zeroLocus_geometricMonodromy`); it
-supplies the factorization `Fᵐ = c h` of `exists_isPositiveCentralPair`. -/
+/-- The central–geometric product on `k`-points: every matrix of `G°(k)` is a product `c h` with
+`c ∈ Z(G°)°(k)` and `h ∈ H°(k)`. -/
 theorem exists_mem_center_mul_mem_geometricMonodromy_eq (hD : D.IsSemisimple) {g : GL n k}
     (hg : g ∈ zeroLocus (identityComponent D.arithmeticMonodromy) k) :
     ∃ c ∈ zeroLocus (identityComponent (center (identityComponent D.arithmeticMonodromy))) k,
@@ -897,9 +845,7 @@ theorem exists_mem_center_mul_mem_geometricMonodromy_eq (hD : D.IsSemisimple) {g
 /-- The group theory behind `exists_isPositiveCentralPair`: let `H` be a subgroup of `Γ` containing
 the commutators and `G₀` a subgroup of finite index such that every element of `G₀` is a product
 `c h` with `c ∈ G₀` central in `G₀` and `h ∈ H`. Then for every `F` there are `N > 0` and a central
-`z ∈ Γ` with `z ∈ H Fᴺ`. Pass to the normal core `K` of `G₀`, of index `e`: then `Fᵉ = c h`, and
-`d = cᵉ` lies in the centre of `K`; the product `z` of the conjugates of `d` by representatives of
-`Γ ⧸ K` is central, and it is congruent to `F^(e³)` modulo the commutators and `H`. -/
+`z ∈ Γ` with `z ∈ H Fᴺ`. -/
 private theorem exists_pos_mem_center_mul_inv_mem {Γ : Type*} [Group Γ] (H G₀ : Subgroup Γ)
     (hH : commutator Γ ≤ H) [G₀.FiniteIndex] (F : Γ)
     (hfac : ∀ x ∈ G₀, ∃ c ∈ G₀, (∀ y ∈ G₀, c * y = y * c) ∧ ∃ h ∈ H, c * h = x) :
@@ -1003,10 +949,7 @@ theorem exists_isPositiveCentralPair (hD : D.IsSemisimple) :
 instance the direct sum of the Weil representations of several semisimple lisse Weil sheaves on
 the same curve) there are `m > 0` and an algebraic-monodromy element `z` of degree `m` central in
 the arithmetic monodromy extension `G_arith(ρ)(k) = H(k) ⋊ ℤ`; its matrix `z_mat = h Fᵐ` is a
-positive central pair (`exists_isPositiveCentralPair`).
-
-With `z = (h, m)`: the matrix `z_mat` commutes with `H(k)` and with `F`, so `h` commutes with `F`,
-and `z (x, n) = (h Fᵐ x F⁻ᵐ, m + n) = (x h, m + n) = (x Fⁿ h F⁻ⁿ, n + m) = (x, n) z`. -/
+positive central pair (`exists_isPositiveCentralPair`). -/
 theorem exists_pos_mem_center_mem_degreeComponent (hD : D.IsSemisimple) :
     ∃ m : ℕ, 0 < m ∧ ∃ z ∈ Subgroup.center D.ArithmeticMonodromyExtension,
       z ∈ D.degreeComponent m ∧

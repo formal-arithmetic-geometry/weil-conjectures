@@ -18,18 +18,18 @@ import all WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedLocalizingPullba
 /-!
 # Pullback of constructible modules with finite constant scalar models
 
-The pro-etale topology for schemes, proof of Lemma 6.3.8.
-
-The assertion retains each given scalar module and the whole given covering family.
-The pulled-back stratification and covers are the existing canonical constructions.
+Inverse image along a morphism of schemes preserves constructible modules together with their
+specified finite constant scalar models.
 
 ## References
 
 * Stacks Project, Tag 054I
-* Bhatt--Scholze
-* "Constructible complexes", and Stacks 054I
-* Stacks 054I
-* Bhatt--Scholze, proof of Lemma 6.3.8
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 6.3.8
+
+## Implementation details
+
+The statement retains each given scalar module and the whole given covering family; the
+pulled-back stratification and covers are the existing canonical constructions.
 -/
 
 @[expose] public noncomputable section
@@ -213,9 +213,8 @@ private theorem constantModelPullback
     exact coverModel_pullback Λ (S.immersion a) g (U a) i M (P a i) (hP a i) (eP a i)
 
 /-- Inverse image preserves constructible modules and their specified constant models, for
-every commutative condensed coefficient ring (in particular for all the admissible
-coefficients of the node: finite discrete rings, the ℓ-adic integers and numbers, their
-finite extensions, and the condensed algebraic closure). -/
+every commutative condensed coefficient ring (in particular finite discrete rings, the ℓ-adic
+integers and numbers, their finite extensions, and the condensed algebraic closure). -/
 theorem pullback_constantModelConstructible
     (L : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})
     [IsCommMonObj ((sheafCompose (coherentTopology Profinite.{u})

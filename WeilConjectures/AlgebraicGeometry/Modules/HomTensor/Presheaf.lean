@@ -96,8 +96,7 @@ lemma dualTensorHom_app_bijective {U : C} (p₀ : P.obj (op U))
 variable {M P} in
 /-- **`Hom(M, R) ⊗ P ≅ Hom(M, P)` for `M` free of finite rank.** If `M|_U` is a finite direct sum
 of copies of `R|_U`, with inclusions `s i` and projections `c i`, then `Hom(M, R) ⊗ P ⟶ Hom(M, P)`
-is bijective on sections over `U`: both sides are `⨁ᵢ P(U)`, through `ψ ↦ (ψ(s i 1))ᵢ` and
-`∑ᵢ c i ⊗ pᵢ ↤ (pᵢ)ᵢ`. -/
+is bijective on sections over `U`. -/
 lemma dualTensorHom_app_bijective_of_free {U : C} {ι : Type*} [Fintype ι] [DecidableEq ι]
     (s : ι → ((restrictOver R U).obj (unit _) ⟶ (restrictOver R U).obj M))
     (c : ι → ((restrictOver R U).obj M ⟶ (restrictOver R U).obj (unit _)))

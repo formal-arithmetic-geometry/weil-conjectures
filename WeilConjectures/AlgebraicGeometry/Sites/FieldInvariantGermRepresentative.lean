@@ -33,11 +33,9 @@ namespace AlgebraicGeometry.Scheme
 
 attribute [local instance] Algebra.Etale.of_finite_of_isSeparable
 
-/--
-
-An invariant germ has a section representative at the specified finite separable field.
-The action is supplied as an argument and characterized on germs; this theorem neither
-constructs an action nor asserts injectivity, naturality, or independence of embeddings. -/
+/-- A germ in the geometric fibre of `F` invariant under the fixing subgroup of a finite
+separable extension `L / K`, for a given Galois action on the fibre, is represented by a section
+of `F` over `Spec L`. -/
 theorem exists_fieldSection_of_invariant_germ
     (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]
     [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]

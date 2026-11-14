@@ -30,8 +30,8 @@ import Mathlib.Algebra.Category.Grp.FilteredColimits
 /-!
 # Module gluing on a finite clopen pro-etale partition
 
-The restriction helpers below are the existing continuous pushforward constructions.
-The gluing theorem specifies its inverse on sections, morphisms and restriction maps.
+The restriction functors are continuous pushforwards. The gluing theorem specifies its inverse
+on sections, morphisms and restriction maps.
 
 ## References
 
@@ -77,7 +77,7 @@ def clopenTestInclusion {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
       (clopenTestPiece j U) ⟶ U :=
   MorphismProperty.Over.homMk (pullback.fst U.hom j) pullback.condition
 
-/-- Additivity of restriction, used to form the component short complexes. -/
+/-- Restriction of sheaves of modules along an open immersion is additive. -/
 theorem clopenModuleRestriction_additive {X Y : Scheme.{t}} (j : Y ⟶ X)
     [IsOpenImmersion j] (R : Sheaf (topology X) RingCat.{u}) :
     (clopenModuleRestriction.{t, u, v} j R).Additive := by

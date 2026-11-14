@@ -23,6 +23,13 @@ Coefficients are arbitrary condensed rings, including noncommutative rings. The
 module category is Mathlib's category of internal left modules over the actual
 pulled-back ring object. Index sets live in `Type (u + 1)`; the larger universe
 of the type of all module objects does not enlarge the required coproduct existence.
+
+## Implementation details
+
+`localizingClosure` is the intersection of all localizing subcategories containing `S`. Its
+localizing predicate asks for closure under all existing coproducts in the object universe;
+this agrees with closure under `Type (u + 1)`-indexed coproducts, since the Hom types live in
+that universe and an existing larger coproduct has only that many nonzero summands.
 -/
 
 @[expose] public section
@@ -108,18 +115,11 @@ private theorem derivedCoproductCocone
   · exact fun n ↦ ⟨colimit.isColimit _⟩
   · exact DerivedCategory.isColimit_mapCocone_grothendieckSum A I K
 
-/-- The three assertions of the localizing-closure existence lemma.
-
-The termwise cocone assertion specifies both degreewise coproducts and the
-coprojections after localization. A sum of triangles is specified by a cocone
-whose three vertex cocones are coproducts; its maps therefore are the induced
-sums, including the connecting map into the shifted first vertex.
-
-`localizingClosure` is the landed intersection construction. Its localizing
-predicate asks for closure under all existing coproducts in the object universe.
-Here this agrees with closure under `Type (u + 1)`-indexed coproducts, since the
-Hom types live in that universe: an existing larger coproduct has only that
-many nonzero summands. The generating class `S` need not be small. -/
+/-- The derived category of condensed-coefficient modules has `Type (u + 1)`-indexed
+coproducts, computed termwise on complexes, and coproducts of distinguished triangles are
+distinguished; moreover `localizingClosure S` is the smallest localizing subcategory
+containing `S` (for an arbitrary, not necessarily small, class `S`), it is closed under
+retracts, and it does not change when `S` is enlarged inside it. -/
 theorem localizingClosure_exists
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ]
     (X : Scheme.{u})

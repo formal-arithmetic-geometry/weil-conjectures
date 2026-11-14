@@ -22,10 +22,19 @@ import Mathlib.Order.CompletePartialOrder
 /-!
 # Extensions of ind-constructible module sheaves
 
-The two coefficient cases use the existing finite constant-model constructibility predicate.
-IndCons is `ObjectProperty.ind.{u + 1}` in the internal-module category itself, with small
-filtered presentations and closure under isomorphisms. No abstract ind-category replaces
-this ambient category.
+Extensions of ind-constructible sheaves of modules are ind-constructible, for finite field
+coefficients (`AlgebraicGeometry.ProEtale.indConstructible_of_shortExact`) and for condensed
+algebraic-closure coefficients
+(`AlgebraicGeometry.ProEtale.indConstructible_of_shortExact_padicAlgCl`).
+
+## Implementation details
+
+Both coefficient cases use the finite constant-model constructibility predicate. IndCons is
+`ObjectProperty.ind.{u + 1}` in the internal-module category itself, with small filtered
+presentations and closure under isomorphisms, rather than an abstract ind-category. Closure
+under extensions is proved by presenting the quotient as a filtered colimit, pulling back the
+short exact sequence, descending each pullback extension to a finitely presentable stage by
+continuity of `Ext¹`, and reassembling with exact filtered colimits.
 
 ## References
 
@@ -108,11 +117,8 @@ private theorem ind_pushout_extension
     pushout_short_exact_sequence T' hT' (pres.diag.map j.hom)
   exact P.prop_X₂_of_shortExact hE (hp j.right) hC
 
-/-- Filtered-colimit closures of finitely presentable extension-closed objects are extension closed.
-The proof uses the stated degree-one Ext descent hypothesis. It presents the quotient
-and pulls back the short exact sequence; degree-one Ext
-continuity descends each pullback extension to a finitely presentable stage, and exact
-filtered colimits reassemble the original extension. -/
+/-- The filtered-colimit closure of an extension-closed property of finitely presentable objects
+is closed under extensions, provided classes in `Ext¹` descend to finite stages. -/
 private theorem ind_extension_of_finitelyPresentable
     {A : Type w} [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] (P : ObjectProperty A)

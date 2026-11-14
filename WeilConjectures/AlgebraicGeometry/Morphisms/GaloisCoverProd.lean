@@ -15,6 +15,9 @@ For finite étale Galois covers `P₁ ⟶ Y₁` and `P₂ ⟶ Y₂` with groups 
 `a₁ : Y₁ ⟶ S`, `a₂ : Y₂ ⟶ S`, the fibre product `P₁ ×_S P₂ ⟶ Y₁ ×_S Y₂` is a finite étale
 Galois cover with group `G₁ × G₂` (`AlgebraicGeometry.Scheme.GaloisCover.prod`).
 
+This is used to show that the termwise monodromy of an external tensor product `N' ⊠ Q'`
+factors through the finite `ℓ`-group `P₁ × P₂`.
+
 -/
 
 @[expose] public section

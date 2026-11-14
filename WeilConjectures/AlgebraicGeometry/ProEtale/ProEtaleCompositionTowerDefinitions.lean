@@ -98,8 +98,8 @@ def towerLambda {H T V S : Scheme.{u}} (b : H ⟶ T) (i : V ⟶ S)
   towerExchange Λ b i r p w ((towerJ Λ b).obj N) ≫
     (towerP Λ r).map ((towerOpenUnit Λ b).inv.app N)
 
-/-- Gamma is defined by the Hom bijection from inverse lambda, not by site transport.
-The IsIso argument is proof data furnished in the theorem, not an extra hypothesis there. -/
+/-- The map `J_i (P_r N) ⟶ P_p (J_b N)` corresponding, under the Hom bijection, to the
+inverse of the invertible map `towerLambda`. -/
 def towerGamma {H T V S : Scheme.{u}} (b : H ⟶ T) (i : V ⟶ S)
     (r : H ⟶ V) (p : T ⟶ S) [IsOpenImmersion b] [IsOpenImmersion i]
     (w : b ≫ p = r ≫ i)

@@ -16,6 +16,13 @@ import WeilConjectures.AlgebraicGeometry.Etale.EtaleInverseImageCompositionModul
 
 * Stacks Project, Modules on Sites, Tags 03D8 and 03D7
 * Stacks Project, Tags 03D8 and 03D7
+
+## Implementation details
+
+In `etaleInverseImageCompositionModuleLinear`, the gamma maps are characterized by constant
+sections, and the inverse images, comparison maps and adjunctions are the data of
+`etaleInverseImageModulesExact`; the hom-equivalence equations say that these are the module
+adjunctions with the underlying abelian adjunctions.
 -/
 
 @[expose] public section
@@ -52,13 +59,7 @@ private theorem exists_comparison_with_unique_unit
 
 set_option backward.defeqAttrib.useBackward true in
 /-- The abelian composition comparisons lift to module isomorphisms, uniquely for inverse
-image with the specified unit equation.
-
-The lambda-bound ring sheaves, forgetful functors and module direct images below are
-immediately applied to their actual definitions. The gamma maps are characterized by
-constant sections. The inverse images, comparison maps and adjunctions are the data of
-`etaleInverseImageModulesExact`; the hom-equivalence equations specify that these are
-precisely the module adjunctions with the underlying abelian adjunctions. -/
+image with the specified unit equation. -/
 theorem etaleInverseImageCompositionModuleLinear
     (X Y Z : Scheme.{u}) (uMap : Y ⟶ X) (vMap : Z ⟶ Y) (R : CommRingCat.{u + 1}) :
     (fun (RX : Sheaf (X.smallGrothendieckTopology @Etale) CommRingCat.{u + 1})

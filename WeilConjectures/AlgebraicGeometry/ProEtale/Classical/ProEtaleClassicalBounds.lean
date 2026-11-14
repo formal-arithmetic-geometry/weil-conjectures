@@ -49,12 +49,10 @@ open AlgebraicGeometry
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- The three uniform bounds in `lemma-uniform-bounds-pro-etale-affines` for a morphism `f` and an
-étale sheaf `F` on its source; `hasClassicalUniformBounds` proves them for torsion `F` and
-finite-type schemes over a finite or algebraically closed field. The dimensions are the
-topological Krull dimensions, with the empty scheme assigned dimension zero, and the bound
-is `2 * d + 1`.
--/
+/-- Uniform cohomological bounds for a morphism `f : S ⟶ R` and an étale sheaf `F` on `S`:
+with `d` the topological Krull dimension of `S` (zero if `S` is empty), the pro-étale
+cohomology of `F` on pro-affine-étale objects over `S` and over `R` (after base change), and
+the derived étale pushforward `R f_* F`, vanish in degrees above `2 * d + 1`. -/
 def HasClassicalUniformBounds {S R : Scheme.{u}} (f : S ⟶ R)
     (F : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}) : Prop :=
   let dS : ℕ := (topologicalKrullDim S).unbotD 0 |>.toNat
@@ -248,10 +246,8 @@ private theorem uniform_bounds_of_field_cd {k : Type u} [Field k]
   · exact Etale.isZero_higherDirectImage_of_affineEtale_cd g c (fun w ↦ stages w) G hG
 
 /-- Uniform vanishing for torsion étale sheaves over finite-type schemes over a finite or
-algebraically closed field.  This is the three-part statement of
-`lemma-uniform-bounds-pro-etale-affines`; the final conjunct repeats it with source `Y` and an
-arbitrary finite-type map from `Y` to a finite-type `k`-scheme.
--/
+algebraically closed field: `HasClassicalUniformBounds g G` holds, and likewise for every
+torsion sheaf on `Y` and every finite-type map from `Y` to a finite-type `k`-scheme. -/
 theorem hasClassicalUniformBounds {k : Type u} [Field k]
     (hk : Finite k ∨ IsAlgClosed k)
     {X Y : Scheme.{u}}

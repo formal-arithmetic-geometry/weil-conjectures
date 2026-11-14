@@ -54,15 +54,13 @@ with `AlgebraicGeometry.Scheme.Hom.etaleEquivalence` the bundled form.
 
 ## Implementation notes
 
-The comparison of the topologies is proved here, following the last paragraph of the
-blueprint proof of `lemma-weil-pbc-universal-homeomorphism-coverings` ("the omission in Tag
-03SI"): a sieve is a covering for the small étale topology exactly when its arrows are
-jointly surjective (`AlgebraicGeometry.Scheme.mem_smallEtaleTopology_iff`), and for every
-étale `V ⟶ Y` the projection `V ×_Y X ⟶ V` is a base change of `f`, hence bijective on
-points; so ranges of arrows correspond to ranges of their base changes under these
-bijections. This uses nothing about `f.Etale` being an equivalence, and nothing about
-integrality either: it is stated for a morphism that is merely universally injective and
-surjective.
+The comparison of the topologies is proved here (filling the omission in [Stacks 03SI]): a
+sieve is a covering for the small étale topology exactly when its arrows are jointly surjective
+(`AlgebraicGeometry.Scheme.mem_smallEtaleTopology_iff`), and for every étale `V ⟶ Y` the
+projection `V ×_Y X ⟶ V` is a base change of `f`, hence bijective on points; so ranges of
+arrows correspond to ranges of their base changes under these bijections. This uses
+nothing about `f.Etale` being an equivalence, nor integrality: it is stated for a morphism that
+is merely universally injective and surjective.
 
 The equivalence itself, `Hom.isEquivalence_etale`, is the mathematical content of [Stacks
 04DZ]. It is proved in the files of the directory `EtaleTopologicalInvariance/`, following
@@ -89,6 +87,7 @@ The equivalence `Hom.isEquivalence_etale` and the dense-subsite statement
 ## References
 
 * [Stacks 04DZ], Étale Cohomology, Theorem 59.45.2.
+* [Stacks 03SI]
 -/
 
 @[expose] public section
@@ -107,8 +106,7 @@ variable [UniversallyInjective f] [Surjective f]
 
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The image of the base change of `g : V ⟶ U` along `f` is the preimage of the image of
-`g` under the projection `U ×_Y X ⟶ U`, which is a base change of `f` and hence bijective
-on points:
+`g` under the projection `U ×_Y X ⟶ U`:
 
 ```
    V ×_Y X ──(f.Etale.map g).left──→ U ×_Y X
@@ -130,12 +128,7 @@ lemma range_etale_map_left {U V : Y.Etale} (g : V ⟶ U) :
 
 /-- **Covering compatibility for universal homeomorphisms**: a sieve on an étale `Y`-scheme
 `U` is a covering for the small étale topology of `Y` if and only if its base change along
-`f` is a covering for the small étale topology of `X`.
-
-Equivalently, a family of étale morphisms to `U` is jointly surjective if and only if its
-base change along `f` is: the projection `U ×_Y X ⟶ U` is a base change of `f`, hence
-bijective on points, and it matches the images of the arrows of the sieve with the images of
-their base changes. -/
+`f` is a covering for the small étale topology of `X`. -/
 @[stacks 04DZ]
 lemma functorPushforward_mem_smallEtaleTopology_iff {U : Y.Etale} (S : Sieve U) :
     S.functorPushforward f.Etale ∈ X.smallEtaleTopology (f.Etale.obj U) ↔
@@ -168,18 +161,13 @@ instance isEquivalence_etale : f.Etale.IsEquivalence where
 
 /-- **Topological invariance of the small étale site**, [Stacks 04DZ]: for a universal
 homeomorphism `f: X ⟶ Y`, the functor `V ↦ V ×_Y X` is an equivalence of categories
-between schemes étale over `Y` and schemes étale over `X`.
-
-This bundled form is what `CategoryTheory.Equivalence.sheafCongr` consumes, see
-`AlgebraicGeometry.Etale.sheafEquivalence`. -/
+between schemes étale over `Y` and schemes étale over `X`. -/
 @[stacks 04DZ]
 noncomputable def etaleEquivalence : Y.Etale ≌ X.Etale :=
   f.Etale.asEquivalence
 
 /-- Base change along a universal homeomorphism exhibits the small étale site of `Y` as a
-dense subsite of the small étale site of `X`: it is an equivalence of the underlying
-categories by `AlgebraicGeometry.Scheme.Hom.isEquivalence_etale`, and it reflects coverings
-by `AlgebraicGeometry.Scheme.Hom.functorPushforward_mem_smallEtaleTopology_iff`. -/
+dense subsite of the small étale site of `X`. -/
 instance isDenseSubsite_etale :
     f.Etale.IsDenseSubsite Y.smallEtaleTopology X.smallEtaleTopology where
   functorPushforward_mem_iff := functorPushforward_mem_smallEtaleTopology_iff f _

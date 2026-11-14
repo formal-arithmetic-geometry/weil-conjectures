@@ -20,7 +20,13 @@ import WeilConjectures.AlgebraicGeometry.RationalP1.ShiftedLineSquare
 import WeilConjectures.AlgebraicGeometry.RationalP1.Scalar.ScalarTraceEquation
 import WeilConjectures.AlgebraicGeometry.RationalP1.Scalar.ScalarComponentFromTrace
 
-/-! The unit component of the scalar exchange mate. -/
+/-! # The unit component of the scalar exchange mate
+
+## Implementation details
+
+The completed Chern data is omitted from the unit component, as it does not enter the
+component equation.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -36,11 +42,7 @@ open DiagonalCoefficients CondensedRing
 
 attribute [local instance 30000] CategoryTheory.sheafIsAbelian
 
-/-- The scalar exchange carries the twisted unit to the twisted unit.
-
-This is the categorical unit component, with the completed Chern data removed;
-the latter is unused by the component equation. The proof expands the exchange
-mate and uses the root-normalized line comparison. -/
+/-- The scalar exchange carries the twisted unit to the twisted unit. -/
 theorem scalar_p1_unit_mate_component
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

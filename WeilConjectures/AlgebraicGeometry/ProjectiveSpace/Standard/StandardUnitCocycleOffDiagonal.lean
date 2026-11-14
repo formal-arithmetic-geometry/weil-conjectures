@@ -9,6 +9,13 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.SixFunctors.PairwiseLaurentUnitExpansion
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.SixFunctors.PairwiseCocycleNormalization
 
+/-! # Off-diagonal normalization of standard unit cocycles
+
+## References
+
+* Stacks Project, Tag 0BXJ
+-/
+
 @[expose] public section
 
 set_option autoImplicit false
@@ -20,10 +27,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.ProjectiveSpace
 
-/-- The off-diagonal part of the standard-cover unit-cocycle normalization.
-
-Source: Stacks Project, Tag 0BXJ.
--/
+/-- A unit cocycle `t` on the standard cover of `ℙ^{r-1}_k`, `r ≥ 3`, is, off the diagonal,
+cohomologous to the standard transition units of some degree `d`, via units `a i` on the charts. -/
 theorem exists_standardUnitCocycle_normalization_offDiagonal (k : Type u) [Field k]
     (r : ℕ) (hr : 3 ≤ r)
     (t : ∀ i j : ULift.{u} (Fin r),

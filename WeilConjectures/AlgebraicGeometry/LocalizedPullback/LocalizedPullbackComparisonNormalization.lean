@@ -22,12 +22,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Unique
 ## References
 
 * Stacks Project, Tags 03CE, 03CF and 04J0
-* Stacks, Tag 04J0, localized inverse-image square
-* Stacks, Tags 03CF and 04J0
-* Stacks, Tag 03CE, explicit localization adjunction
-* Stacks, Tags 03CE and 04J0
-* Stacks, Tags 03CE, 03CF and 04J0
-* Stacks, Tags 03CE, 03CF
 -/
 
 @[expose] public noncomputable section
@@ -304,13 +298,10 @@ private theorem coefficient_comparison [TopologicalSpace A] [DiscreteTopology A]
     exact inverse_horizontal_paste (supportSiteComparisonCoefficientPullbackIso D e) β
   exact ⟨j, rfl, htransport⟩
 
-/-- The geometric comparison has the uniquely normalized restriction presentation,
-its mate is identity on sections, and this remains the specified comparison under
-constant-section-preserving coefficient transport, including phi = id.
-The last existential supplies the canonical scalar pullback comparison j as the
-inverse mate of cDirect. The equality with inv(hPullbackInv) is the transport-back
-identity: composing that inverse with j gives c, and conjugating by the two rhos
-therefore gives precisely chi, as the final equality records. -/
+/-- The étale and pro-étale localization comparisons are normalized, the geometric comparison
+`beta` is the identity on sections, is the mate of `chi` and is compatible with the comparison
+units, and the canonical scalar pullback comparison `j` (the inverse mate of `cDirect`)
+satisfies the transport-back identities relating `hPullbackInv`, `j` and `chi`. -/
 theorem normalization [TopologicalSpace A] [DiscreteTopology A] :
     EtaleNormalized A e
       (Etale.upperStarIsoLocalizationRestriction (ModuleCat.{u + 1} A) e inferInstance) ∧

@@ -21,9 +21,15 @@ explicit Noetherian approximation of `S`
 of `AlgebraicGeometry.Scheme.nonempty_noetherianApproximation` except for the cofinality of the
 stages.
 
+## Implementation details
+
 The limit property is checked chart by chart: over the chart `Spec Aₐ` of a stage, the system
 restricts to the spectra `Spec A'ₐ` of the coefficient subrings of the larger stages, whose limit
-is `Spec Γ(S, Uₐ) = Uₐ` since `Γ(S, Uₐ)` is the directed union of the `A'ₐ`.
+is `Spec Γ(S, Uₐ) = Uₐ` since `Γ(S, Uₐ)` is the directed union of the `A'ₐ`. The cofinality of
+the stages (`exists_stage_superset`) is used to show that `Γ(S, Uₐ)` is this union.
+
+Instead of forming the limit `lim S_l` and the comparison map `κ_S : S ⟶ lim S_l` explicitly, we
+show that the cone `stageCone` is a limit cone, which says precisely that `κ_S` is an isomorphism.
 -/
 
 @[expose] public section
@@ -94,13 +100,8 @@ lemma fromS_preimage_opensRange_ι (a : G.ι) : l.fromS ⁻¹ᵁ (l.ι a).opensR
 
 end Stage
 
-/-- Comparison from the original scheme to
-the inverse limit.
-
-The compatible morphisms `S ⟶ S_l` (`Stage.fromS`) induced by the inclusions of the coefficient
-subrings `Aₐ ⊆ Γ(S, Uₐ)`, as a cone over the diagram of the glued stages. Instead of forming the
-limit `lim S_l` and the comparison map `κ_S: S ⟶ lim S_l` explicitly, we show that this cone is
-a limit cone (`isLimitStageCone`), which says precisely that `κ_S` is an isomorphism. -/
+/-- The cone over the diagram of glued stages formed by the compatible morphisms `S ⟶ S_l`
+(`Stage.fromS`) induced by the inclusions of the coefficient subrings `Aₐ ⊆ Γ(S, Uₐ)`. -/
 noncomputable def stageCone (G : S.FiniteAffineGluingPresentation) : Cone G.stageDiagram where
   pt := S
   π :=
@@ -222,15 +223,11 @@ noncomputable def isLimitStageCone (G : S.FiniteAffineGluingPresentation) :
     (fun a ↦ G.chartOpen (op G.glueStage) a) G.glueStage.iSup_opensRange_ι
     fun a ↦ G.isLimitOpensConeChart (op G.glueStage) a
 
-/-- The Noetherian
-approximation of a scheme `S` with a finite affine gluing presentation `G`, given by the glued
-finite-type stages `S_l` (`Stage.scheme`), indexed by the opposite of the directed set of valid
-stages, with the affine transition morphisms `S_{l'} ⟶ S_l` (`Stage.transition`) and the
-comparison cone `S ⟶ S_l` (`stageCone`), which is a limit cone (`isLimitStageCone`).
-
-The only input from `AlgebraicGeometry.Scheme.nonempty_noetherianApproximation` is the cofinality
-of the stages (`exists_stage_superset`), used to show that `Γ(S, Uₐ)` is the union of the
-coefficient subrings. -/
+/-- The Noetherian approximation of a scheme `S` with a finite affine gluing presentation `G`,
+given by the glued finite-type stages `S_l` (`Stage.scheme`), indexed by the opposite of the
+directed set of valid stages, with the affine transition morphisms `S_{l'} ⟶ S_l`
+(`Stage.transition`) and the comparison cone `S ⟶ S_l` (`stageCone`), which is a limit cone
+(`isLimitStageCone`). -/
 noncomputable def noetherianApproximation (G : S.FiniteAffineGluingPresentation) :
     S.NoetherianApproximation where
   I := (G.Stage)ᵒᵖ

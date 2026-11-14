@@ -15,10 +15,9 @@ import all WeilConjectures.AlgebraicGeometry.Scalar.ScalarDataExistence
 
 ## References
 
-* Zheng Construction 4.1 and Lemma 4.10
-* Stacks 06YS, 07A4 and 08J9
-* Zheng Construction 4.1, printed p.21, and Proposition 4.17(a), printed pp.25-26
-* Stacks 07A4 and 08J9
+* Zheng, Construction 4.1 (printed p. 21), Lemma 4.10 and Proposition 4.17(a)
+  (printed pp. 25--26)
+* Stacks Project, Tags 06YS, 07A4 and 08J9
 -/
 
 @[expose] public noncomputable section
@@ -94,10 +93,8 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   (B : ℕ → Sheaf J CommRingCat.{max c v r}) (τ : ∀ n : ℕ, B (n + 1) ⟶ B n)
 
 /-- Below its source vertex the singleton projection is tensor with the actual
-reduction, after scalar/tensor reassociation. This is an equality of morphisms for
-an arbitrary system; no cartesianness or invertibility of its reduction is assumed.
-This is the below-level computation in step 2 of
-lem-coef-semilinear-cartesian-projection. -/
+reduction, after scalar/tensor reassociation, for an arbitrary system (no cartesianness or
+invertibility of its reduction is assumed). -/
 theorem semilinearProjectionBelowFactorization
     (closed : Closed.{c, v, r} (coefficientSequenceTopology J)
       (systemRing.{c, v, max c v r} J B τ))

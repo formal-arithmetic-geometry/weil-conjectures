@@ -278,11 +278,10 @@ end Points
 
 section GeometricFiber
 
-/-- the geometric fibre of a finite étale cover.
-
-Let `f: P ⟶ Y` be finite étale and `y: Spec k ⟶ Y` a point with `k` separably closed. Then
-the fibre `P ×_Y Spec k` is, as a scheme over `Spec k`, a finite disjoint union of copies of
-`Spec k`, the number of copies being the `k`-dimension of its ring of global sections. -/
+/-- **The geometric fibre of a finite étale cover.** Let `f: P ⟶ Y` be finite étale and
+`y: Spec k ⟶ Y` a point with `k` separably closed. Then the fibre `P ×_Y Spec k` is, as a
+scheme over `Spec k`, a finite disjoint union of copies of `Spec k`, the number of copies being the
+`k`-dimension of its ring of global sections. -/
 theorem Scheme.Hom.exists_overIso_sigma_of_isSepClosed {P Y : Scheme.{u}} (f : P ⟶ Y)
     [IsFinite f] [Etale f] {k : Type u} [Field k] [IsSepClosed k] (y : Spec (.of k) ⟶ Y) :
     ∃ (ι : Type u) (_ : Finite ι), Nat.card ι = (pullback.snd f y).finrankΓ ∧
@@ -690,14 +689,10 @@ lemma Scheme.Hom.apply_genericPoint_of_isDominant [IrreducibleSpace X] [Irreduci
   have := (genericPoint_spec X).image f.continuous
   rwa [Set.image_univ, f.denseRange.closure_range] at this
 
-/-- Finite morphisms with constant fibre length
-are flat (degree part).
-
-If a finite morphism `f: X ⟶ Y` from an integral scheme has all fibres of degree `n`, then
+/-- If a finite morphism `f: X ⟶ Y` from an integral scheme has all fibres of degree `n`, then
 the degree `[κ(η): κ(f η)]` of the residue field extension at the generic point `η` of `X` is
-`n`. When `Y` is integral and `f` is dominant, `f η` is the generic point of `Y`
-(`AlgebraicGeometry.Scheme.Hom.apply_genericPoint_of_isDominant`), so this is the degree
-`[k(X): k(Y)]` of the extension of function fields: `deg f = [k(X): k(Y)] = n`. -/
+`n`; for `f` dominant and `Y` integral this is the degree `[k(X): k(Y)]` of the
+extension of function fields. -/
 theorem Scheme.Hom.finrank_residueField_genericPoint_of_fiberDegree_eq [IsFinite f] {n : ℕ}
     (h : ∀ y, f.fiberDegree y = n) :
     letI := (f.residueFieldMap (genericPoint X)).hom.toAlgebra
@@ -752,10 +747,7 @@ private lemma Scheme.Hom.flat_and_finrank_of_fiberDegree_eq_of_affine {R : CommR
 
 variable (f : X ⟶ Y) [IsFinite f] [LocallyOfFinitePresentation f] [IsReduced Y] {n : ℕ}
 
-/-- Finite morphisms with constant fibre length
-are flat.
-
-A finite morphism `f: X ⟶ Y` of finite presentation to a reduced scheme, all of whose fibres
+/-- A finite morphism `f: X ⟶ Y` of finite presentation to a reduced scheme, all of whose fibres
 have the same degree `n`, is flat. -/
 theorem Scheme.Hom.flat_of_fiberDegree_eq (h : ∀ y, f.fiberDegree y = n) : Flat f := by
   rw [IsZariskiLocalAtTarget.iff_of_openCover (P := @Flat) Y.affineCover]
@@ -767,10 +759,7 @@ theorem Scheme.Hom.flat_of_fiberDegree_eq (h : ∀ y, f.fiberDegree y = n) : Fla
   exact (flat_and_finrank_of_fiberDegree_eq_of_affine (pullback.snd f (Y.affineCover.f i))
     fun y ↦ (Scheme.Hom.fiberDegree_of_isPullback f (.of_hasPullback _ _) y).trans (h _)).1
 
-/-- Finite morphisms with constant fibre length
-are flat.
-
-A finite morphism `f: X ⟶ Y` of finite presentation to a reduced scheme, all of whose fibres
+/-- A finite morphism `f: X ⟶ Y` of finite presentation to a reduced scheme, all of whose fibres
 have the same degree `n`, is finite flat of rank `n`: `f_* 𝒪_X` is locally free of rank `n`. -/
 theorem Scheme.Hom.finrank_eq_of_fiberDegree_eq (h : ∀ y, f.fiberDegree y = n) (y : Y) :
     f.finrank y = n := by
@@ -829,10 +818,7 @@ variable [JacobsonSpace Y] {n : ℕ}
 
 /-- Let `f` be a finite morphism to a Jacobson scheme (for example a scheme locally of finite
 type over a field). If the fibres of `f` over all closed points have degree `n`, then all fibres
-of `f` have degree `n`. By `AlgebraicGeometry.Scheme.Hom.eventually_fiberDegree_le`, the fibre
-degree at a point `y` is at most the fibre degree at any closed specialisation of `y`, and at
-least the fibre degree at the closed points of `closure {y}` near `y`, which exist since `Y` is
-Jacobson. -/
+of `f` have degree `n`. -/
 theorem Scheme.Hom.fiberDegree_eq_of_forall_isClosed
     (h : ∀ y : Y, IsClosed {y} → f.fiberDegree y = n) (y : Y) : f.fiberDegree y = n := by
   apply le_antisymm
@@ -849,20 +835,14 @@ theorem Scheme.Hom.fiberDegree_eq_of_forall_isClosed
 
 variable [LocallyOfFinitePresentation f] [IsReduced Y]
 
-/-- Finite morphisms with constant fibre length
-are flat.
-
-A finite morphism `f: X ⟶ Y` of finite presentation to a reduced Jacobson scheme (for example
+/-- A finite morphism `f: X ⟶ Y` of finite presentation to a reduced Jacobson scheme (for example
 a reduced scheme of finite type over a field), whose fibres over all closed points of `Y` have
 the same degree `n`, is flat. -/
 theorem Scheme.Hom.flat_of_fiberDegree_eq_of_isClosed
     (h : ∀ y : Y, IsClosed {y} → f.fiberDegree y = n) : Flat f :=
   f.flat_of_fiberDegree_eq (f.fiberDegree_eq_of_forall_isClosed h)
 
-/-- Finite morphisms with constant fibre length
-are flat.
-
-A finite morphism `f: X ⟶ Y` of finite presentation to a reduced Jacobson scheme, whose fibres
+/-- A finite morphism `f: X ⟶ Y` of finite presentation to a reduced Jacobson scheme, whose fibres
 over all closed points of `Y` have the same degree `n`, is finite flat of rank `n`: `f_* 𝒪_X` is
 locally free of rank `n`. -/
 theorem Scheme.Hom.finrank_eq_of_fiberDegree_eq_of_isClosed
@@ -870,10 +850,7 @@ theorem Scheme.Hom.finrank_eq_of_fiberDegree_eq_of_isClosed
   f.finrank_eq_of_fiberDegree_eq (f.fiberDegree_eq_of_forall_isClosed h) y
 
 omit [LocallyOfFinitePresentation f] [IsReduced Y] in
-/-- Finite morphisms with constant fibre length
-are flat (degree part).
-
-If a finite morphism `f: X ⟶ Y` from an integral scheme to a Jacobson scheme has all fibres
+/-- If a finite morphism `f: X ⟶ Y` from an integral scheme to a Jacobson scheme has all fibres
 over closed points of degree `n`, then the degree `[κ(η): κ(f η)]` of the residue field
 extension at the generic point `η` of `X` is `n`; for `f` dominant and `Y` integral this is the
 degree `[k(X): k(Y)]` of the extension of function fields. -/

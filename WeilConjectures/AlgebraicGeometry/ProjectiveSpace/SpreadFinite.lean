@@ -15,7 +15,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 Let `A` be a Noetherian domain with fraction field `K` and `T ⟶ Spec A` projective. A finite
 morphism `Y₀ ⟶ T_K` to the generic fibre, i.e. a finite coherent `𝒪_{T_K}`-algebra, is the
 generic fibre of a finite morphism `Y ⟶ T_U` over a nonempty open `U` of `Spec A`; finitely many
-of them (the factors of a finite product decomposition) can be spread out simultaneously
+of them (the factors of a finite product decomposition) can be spread out simultaneously.
 
 ## Main statements
 
@@ -39,10 +39,8 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry.ProjectiveSpace
 
-/-- Spreading a finite algebra from
-the generic fibre.
-
-Let `A` be a Noetherian domain with fraction field `K`, `η: Spec K ⟶ Spec A` the generic point,
+/-- **Spreading a finite algebra from the generic fibre.** Let `A` be a Noetherian domain with
+fraction field `K`, `η: Spec K ⟶ Spec A` the generic point,
 and `f: T ⟶ Spec A` projective (`f = π ∘ i` for a closed immersion `i: T ⟶ ℙ(n; Spec A)`).
 Let `gₐ: Y₀ₐ ⟶ T_K = T ×_{Spec A} Spec K`, for `a` in a finite type `ι`, be finite morphisms
 (the factors of a finite product decomposition of a finite coherent `𝒪_{T_K}`-algebra). There is

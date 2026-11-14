@@ -19,6 +19,12 @@ The `k`-algebra structure on `Γ(X, ⊤)` is the structure map
 `AlgebraicGeometry.Scheme.globalSectionsRingHom`, and the field structure is the one given by
 `IsField` on the ring `Γ(X, ⊤)`, so both agree with the scheme's own ring structure.
 
+## Implementation details
+
+`A = Γ(X, ⊤)` is finite-dimensional over `k`. For an algebraic closure `k̄` of `k`, flat base
+change identifies `A ⊗_k k̄` with `Γ(X_k̄, 𝒪)`, which is reduced since `X_k̄` is reduced; a
+finite field extension whose tensor product with `k̄` is reduced is separable.
+
 ## References
 
 * Stacks Project, Varieties, Lemma 0BUG (clause (4))
@@ -33,16 +39,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- If `X` is proper and geometrically reduced over a field `k`, and the structure map makes
-`A = Γ(X, ⊤)` a field extension of `k`, then `A/k` is separable.
-
-By `theorem-riemann-roch-coherent-serre-duality--1` (with `F = 𝒪_X`, `i = 0`) `A` is
-finite-dimensional over `k`, so `A/k` is a finite field extension. For an algebraic closure
-`k̄` of `k`, `Spec k̄ → Spec k` is flat and `X` is quasi-compact and quasi-separated, so flat
-base change identifies `A ⊗_k k̄` with `Γ(X_k̄, 𝒪)`. Geometric reducedness makes `X_k̄`
-reduced, hence its global sections, hence `A ⊗_k k̄`, are reduced. The criterion
-`lem-pc-finite-extension-tensor-algebraic-closure-reduced-separable` then gives that `A/k`
-is separable.
--/
+`A = Γ(X, ⊤)` a field extension of `k`, then `A/k` is separable. -/
 theorem proper_geometricallyReduced_globalSections_isSeparable
     (k : Type u) [Field k] (X : Scheme.{u}) [X.Over (Spec (.of k))]
     [IsProper (X ↘ Spec (.of k))] [GeometricallyReduced (X ↘ Spec (.of k))]

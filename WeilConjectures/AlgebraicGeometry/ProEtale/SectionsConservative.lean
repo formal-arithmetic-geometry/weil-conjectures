@@ -95,11 +95,7 @@ private theorem exact_sections_iff
     exact (Presheaf.imageSieve _ s).downward_closed (h _ ha hw _) a
 
 /-- Evaluation on affine weakly contractible objects detects exact sequences, acyclic
-complexes, isomorphisms, and quasi-isomorphisms of modules on the small pro-etale site.
-
-Clause 1 is Proposition 0947(1); clauses 2--3 are its degreewise and cone
-consequences, as expanded in the blueprint proof.
--/
+complexes, isomorphisms, and quasi-isomorphisms of modules on the small pro-etale site. -/
 theorem sections_conservative
     (X : Scheme.{t})
     (R : Sheaf (topology X) RingCat.{u}) :

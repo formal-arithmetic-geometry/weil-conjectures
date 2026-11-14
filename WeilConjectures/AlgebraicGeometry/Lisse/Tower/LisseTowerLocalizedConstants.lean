@@ -33,12 +33,8 @@ attribute [local irreducible] HasDerivedCategory.standard pbcDerivedRestrict
   constantAdicQuotientRightIso constantAdicFiniteProjection
   localProEtaleNormalization normalizationConstantArrow lisseTowerAlgebraArrow
 
-/-- Constant models and their semilinear normalization square for the specified scalar
-comparison. No actual tower, descended level, descent equation or choice of local
-markings is involved.
-
-This is step 3 and the constant-complex part of step 1
-of lem-weil-pbc-lisse-tower-localized-realization. -/
+/-- Constant models and their semilinear normalization square exist for the specified scalar
+comparison. -/
 theorem lisseTower_localized_constants
     {X Z T S : Scheme.{u}} (g : Z ⟶ X) (a : T ⟶ S) (b : Z ⟶ T)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) :

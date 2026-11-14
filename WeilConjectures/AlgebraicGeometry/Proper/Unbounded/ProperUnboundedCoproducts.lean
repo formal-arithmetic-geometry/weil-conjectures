@@ -17,14 +17,17 @@ import WeilConjectures.CategoryTheory.DerivedCategory.HomologyCoproducts
 /-!
 # Proper direct image preserves arbitrary small direct sums
 
-The standing setting of sk-def-sfb-dc-setting is inherited through the proper window
-and heart-bound lemmas: separated finite-type schemes over k, with positive characteristic
-different from ell, and morphisms over k.
+The standing setting is that of the proper window and heart-bound lemmas: separated
+finite-type schemes over k, with positive characteristic different from ell, and morphisms
+over k.
+
+## Implementation details
 
 Coproducts are given by colimit cofans, including their existence. The comparison is
-induced by the images of the source coprojections. Membership of both coproducts in
-Dic makes this precisely the comparison in that full subcategory. No choice of an
-ambient coproduct or additional coproduct-existence hypothesis is imposed on callers.
+induced by the images of the source coprojections. Membership of both coproducts in the
+full subcategory of complexes with ind-constructible cohomology makes this precisely the
+comparison in that subcategory. No choice of an ambient coproduct or additional
+coproduct-existence hypothesis is imposed on callers.
 -/
 
 @[expose] public noncomputable section
@@ -41,12 +44,9 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- The two conclusions of the node: total module pushforward preserves Dic, and its
-canonical coproduct comparison is invertible in Dic. IndCons is the small filtered-colimit
-closure of the recorded finite constant-model constructible modules. The cofans specify
-ambient coproducts; their cohomology conditions put them in the full subcategories Dic.
-The last arrow has component `Rp_*(c.inj i)` on the i-th summand, by `IsColimit.fac`.
-Any other coproducts yield the same assertion by their unique compatible isomorphisms. -/
+/-- Total derived pushforward along `p` preserves complexes with ind-constructible cohomology
+(ind-objects of constant-model constructible modules), and the canonical comparison map from
+the coproduct of the pushforwards to the pushforward of a coproduct is invertible. -/
 def ProperUnboundedCoproductAssertions
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     {X Y : Scheme.{u}} (p : X ⟶ Y) : Prop :=

@@ -11,9 +11,14 @@ public import WeilConjectures.AlgebraicGeometry.Proper.Open.ProperOpenInterchang
 
 ## References
 
-* Stacks Tags 0F7B, 0F7C, 0F7D, 0F7F
-* Stacks Tags 0F7B--0F7F
-* Stacks Tag 0F7B
+* Stacks Project, Tags 0F7B, 0F7C, 0F7D, 0F7F
+
+## Implementation details
+
+The families are bundled to retain their relation to the coherence proof without repeatedly
+expanding dependent existential selection terms. The support inclusion determines the ordinary
+comparison and the derived-unit normalization determines the derived comparison, so no
+arbitrary data is selected.
 -/
 
 @[expose] public noncomputable section
@@ -34,11 +39,8 @@ structure ProperOpenInterchangeData (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ
   /-- Section, unit and pasting normalizations. -/
   conditions : properOpenInterchangeConditions Λ underived derived
 
-/-- The normalized comparison families, with the same unique normalizations as the
-coherence theorem. Bundling retains the relation between the selected families and
-its proof without repeatedly expanding dependent existential selection terms.
-The support inclusion determines the ordinary comparison, and the derived-unit
-normalization determines the derived comparison, so no arbitrary data is selected. -/
+/-- The normalized proper/open comparison families provided by
+`properOpenInterchangeCoherence`. -/
 @[no_expose, irreducible]
 def properOpenInterchangeData (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] :
     ProperOpenInterchangeData Λ where
@@ -46,16 +48,14 @@ def properOpenInterchangeData (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] :
   derived := (properOpenInterchangeCoherence Λ).choose_spec.choose
   conditions := (properOpenInterchangeCoherence Λ).choose_spec.choose_spec
 
-/-- The stored derived family is the original second coherence witness.
-Unfold the explicit bundle constructor and project its second field. -/
+/-- The stored derived family is the second witness of `properOpenInterchangeCoherence`. -/
 theorem properOpenInterchangeData_derived (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] :
     ((properOpenInterchangeData Λ).derived : ProperOpenDerivedFamily Λ) =
       ((properOpenInterchangeCoherence Λ).choose_spec.choose : ProperOpenDerivedFamily Λ) := by
   unfold properOpenInterchangeData
   rfl
 
-/-- The section-preserving inclusion normalization of the stored ordinary family.
-Extract the first conjunct of the coherence condition. -/
+/-- The section-preserving inclusion normalization of the stored ordinary family. -/
 theorem ProperOpenInterchangeData.inclusionNormalization
     {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
     (d : ProperOpenInterchangeData Λ) :
@@ -70,8 +70,7 @@ theorem ProperOpenInterchangeData.inclusionNormalization
           (lowerStarComp (ModuleCat.{u + 1} Λ) r i (k ≫ p) h).hom.app F :=
   @And.left _ _ d.conditions
 
-/-- The derived-unit normalization of the stored families.
-Extract the second conjunct of the coherence condition. -/
+/-- The derived-unit normalization of the stored families. -/
 theorem ProperOpenInterchangeData.unitNormalization
     {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
     (d : ProperOpenInterchangeData Λ) :

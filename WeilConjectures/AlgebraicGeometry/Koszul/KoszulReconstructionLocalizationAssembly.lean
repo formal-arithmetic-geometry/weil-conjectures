@@ -11,7 +11,6 @@ public import Mathlib.CategoryTheory.Localization.Predicate
 
 ## References
 
-* Stacks Tag 099M, localization step
 * Stacks Tag 099M
 -/
 
@@ -19,7 +18,8 @@ public import Mathlib.CategoryTheory.Localization.Predicate
 set_option autoImplicit false
 open CategoryTheory
 
-/-- Localization descent interface used to assemble the Koszul comparison. -/
+/-- If `P.ι ⋙ L` is a localization, a natural transformation `η : F ⟶ G` of functors out of
+`D` that is an isomorphism on the objects `L.obj X` is a natural isomorphism. -/
 theorem AlgebraicGeometry.Scheme.localizationNatTransIso
     {C D E : Type*} [Category C] [Category D] [Category E]
     (P : ObjectProperty C) (L : C ⥤ D) (W : MorphismProperty C)
@@ -37,7 +37,8 @@ theorem AlgebraicGeometry.Scheme.localizationNatTransIso
   have : IsIso η := isIso_of_fully_faithful R η
   exact ⟨asIso η, rfl⟩
 
-/-- Unit normalization on a right-fraction-dense localization. -/
+/-- If `P.ι ⋙ L` is a localization, the unit equation `uF ≫ e.hom = uG` holds at every object
+once it holds at the objects `L.obj X`. -/
 theorem AlgebraicGeometry.Scheme.localizationUnitEq
     {C D E : Type*} [Category C] [Category D] [Category E]
     (P : ObjectProperty C) (L : C ⥤ D) (W : MorphismProperty C)

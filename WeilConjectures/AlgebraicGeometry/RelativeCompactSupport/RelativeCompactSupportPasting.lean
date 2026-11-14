@@ -27,8 +27,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Canonical.ProEtaleCanonicalAdj
 
 ## References
 
-* Stacks Project, Tag 0E47, and the compactification-relative strict-tower argument in the DAG
-* Stacks, Tags 0E47 and 09AE
+* Stacks Project, Tags 0E47 and 09AE
 -/
 
 @[expose] public section
@@ -71,12 +70,9 @@ noncomputable def sourceSquare {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S
   (sourceGComp B r i).symm ≪≫
     eqToIso (congrArg (ordinaryG B) h.symm) ≪≫ sourceGComp B k p
 
-/-- Item-owned finite constant-ring instance of the recorded supplied-data construction.
-This helper constructs an ambient map; agreement with def-exchange-projection is asserted
-below only on that definition's specified A_(E,n) domain.
-The proper factor is the adjunction mate of the canonical derived pullback square.
-The open factor is the existing unit-normalized singleBeta. These are precisely
-Ex_(star,p)(j_! K), followed by Rp'_*(beta_K), in that order. -/
+/-- The compactification exchange map for a finite constant coefficient ring: the mate
+`Ex_(*,p)(j_! K)` of the derived pullback square for the proper factor, followed by
+`Rp'_*(β_K)` for the open factor (`singleBeta`). -/
 noncomputable def finiteChosenExchange [Finite B]
     {X X' Y Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}
     (c : Compactification f) (c' : Compactification f')

@@ -862,31 +862,9 @@ private theorem affine_closed_square {X Z : Scheme.{t}}
   · simp
   · simp
 
-/-- Once the affine lift's counit at the identity object is invertible,
-projective evaluation gives the actual inverse-image unit isomorphism on V.
-No specialization assumption is made in this comparison lemma.
-
-Proof. First transfer projective evaluation from B to r(B). A locally surjective
-map admits a lift over a single affine surjective cover of r(B). The lift functor
-v sends this cover to a covering of v(r(B)), which is isomorphic to B by the
-counit. Projectivity and subcanonical Yoneda split this cover. Full faithfulness
-of v brings the section back, giving the required lift at r(B).
-
-Precomposition by v, followed by sheafification, is left adjoint to restriction
-along r. Its unit at B is restriction along the counit followed by the
-sheafification unit at r(B). The set-valued sheafification lemmas make the latter
-bijective; sheafification commutes with forgetting abelian groups, so it is an
-isomorphism of abelian groups. The affine-basis restriction equivalences and the
-inverse-mate unit identity identify this with the actual quotient-immersion unit.
-
-For a general affine V, the first isomorphism theorem constructs the canonical
-quotient-coordinate isomorphism for its closed base change. Restriction along
-weakly etale localization commutes with this cartesian base-change square. On
-the sites the rotated comparison is a composite of pullback-composition
-isomorphisms. Applying a sheaf and conjugating adjunctions makes the inverse
-mate invertible. The mate unit identity transfers the quotient unit to V, and
-pointwise invertibility gives the claimed natural isomorphism. No nonemptiness
-assumption is used; the same arguments apply to the empty scheme. -/
+/-- For affine `V`, if evaluation at the identity object is projective and the counit of the
+affine closed-site lift adjunction is invertible there, then the inverse-image unit is an
+isomorphism on sections over `V`. -/
 private theorem isIso_proEtaleUnit_sections_of_closedSiteCounit
     {X Z : Scheme.{t}} (i : Z ⟶ X) [IsClosedImmersion i]
     (V : X.ProEt) [IsAffine V.left]

@@ -38,10 +38,7 @@ import WeilConjectures.AlgebraicGeometry.Etale.ProEtale.EtaleProEtaleScalarMate
 ## References
 
 * Stacks Project, Tags 0F7B and 0GL6
-* Stacks 0F7B
-* Stacks 0F7B, exact extension and K-injective direct image
-* Stacks 0GL6 and 0F7B
-* Stacks 0F7B and 0GL6
+* Stacks Project, Tag 0F7B (exact extension and K-injective direct image)
 -/
 
 @[expose] public noncomputable section
@@ -1034,9 +1031,8 @@ def properOpenCoefficientComposite
     D((i)_!open[ModuleCat.{u + 1} B]).map (finiteCoefficientDirectImageMap φ r E) ≫
     (properOpenCoefficientInterchange B sq).hom.app ((scalarExtension φ U).obj E)
 
-/-- The transpose identity for the coefficient square.  This is the counit calculation
-that remains after applying the proper direct-image adjunction; it is strictly weaker than
-the coefficient-square equality and is the mate-pasting step of the blueprint. -/
+/-- The transpose identity for the coefficient square: the two composites agree after
+transposing along the derived pullback/direct-image adjunction for `p`. -/
 theorem properOpen_coefficient_mate_transposed
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) (sq : IsPullback k r p i) (E : DerivedCategoryModule A U)

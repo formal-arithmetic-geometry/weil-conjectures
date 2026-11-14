@@ -37,9 +37,13 @@ import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Coproducts
 ## References
 
 * Bhatt--Scholze, *Pro-étale topology*, Section 6.4, Example 6.4.1, Lemmas 6.4.4 and 6.4.6, and the
-  last paragraph of Proposition 6.4.8, printed pp. 48--49
-* Bhatt--Scholze, *Pro-étale topology*, Section 6.4, Example 6.4.1, Lemmas 6.4.4 and 6.4.6, and the
   last paragraph of the proof of Proposition 6.4.8, printed pp. 48--49
+
+## Implementation details
+
+Compactness is proved in adjoint form: `Hom_X(g_* j_! L, K) ≅ H^0 RΓ(V, RHom_C(L, j^* Rg^! K))`,
+and each of `j^* Rg^!`, `RHom_C(L, -)` (via a local retract of `C^n`) and `RΓ(V, -)` commutes
+with coproducts.
 -/
 
 @[expose] public section
@@ -157,51 +161,7 @@ set_option linter.unusedVariables false in
 -- The statement retains the paper's coefficient hypotheses, although finite torsion suffices.
 /-- A finite locally constant flat module sheaf, extended by zero from a locally closed
 stratum and then pushed forward to the ambient finite-type scheme, is compact in the
-unbounded ordinary étale derived category. No separatedness of `X` is assumed.
-
-Proof, following the node (adjoint form of Bhatt--Scholze, Section 6.4):
-1. Put `W = X \ g(Z)` with open inclusion `q: W ⟶ X`. A finite affine cover of `X` by
-   finite-type `k`-algebras restricts to one of `Z`, so `Z` is finite type over `k`
-. By `lem-weil-pbc-finite-type-over-noetherian` and
-   `lem-weil-pbc-noetherian-open-subscheme-noetherian`, `X, Z, V, W` are Noetherian, hence
-   quasi-separated.
-   `lem-weil-pbc-qcqs-morphism-permanence` makes `j, q` quasi-compact, hence finite type
-, and the structure map `a: V ⟶ Spec k`
-   qcqs. No separatedness is used.
-2. Module sheaves form Grothendieck abelian categories
-, so derived coproducts are termwise
-   and exact. Exact inverse image is a left
-   adjoint (`situation-conventions`), so `g^*, j^*, q^*` and étale slice
-   restrictions preserve derived coproducts.
-3. `C` is torsion and `k` separably closed: `lem-etale-finite-type-sep-closed-derived-dimension`
-   applied separately to `q` and `a`, with `lem-etale-qcqs-finite-dimension-derived-coproducts`,
-   gives that `Rq_*` and `Ra_*` preserve coproducts. Sections on `(Spec k)_ét` are exact and
-   preserve sums, so
-   `RΓ(V, -)` preserves coproducts.
-4. `g_*` is exact, so `Rg_* = g_*`
-and the closed counit
- gives `g^* g_* ≅ id`. Compare the
-   closed-support triangles `g_* Rg^! K → K → Rq_* q^* K`
- for `K_i`
-   and for `⨁ K_i`; steps 2 and 3 make the last two comparisons isomorphisms, so the first is too,
-   and applying `g^*` shows that `Rg^!`, hence `B = j^* Rg^!`, commutes with coproducts.
-5. On each nonempty member of a trivializing étale cover, `L` is constant with value a finite
-   `C`-module `P`, flat as a geometric stalk. `P` is finitely presented (finite kernel of
-   `C^n → P`), hence projective,
-   hence a retract of `C^n`; the constant sheaf is a retract of `C_V^n` there.
-6. Put `H_L(N) = RHom_C(L, N)`. The comparison
-   `⨁ H_L(N_i) → H_L(⨁ N_i)` may be tested after trivializing restrictions
-   (`lem-weil-pbc-ringed-internal-hom-exact-restriction`, step 2). There
-   `RHom_C(C^n, N) ≅ N^n` gives an isomorphism, and the retract `v u = id_L` gives the
-   inverse `S(u) α_{C^n}⁻¹ T(v)` of `α_L`. Exact stalks
- and conservativity
- on cohomology sheaves conclude.
-7. For `j: V ⟶ Z`, the adjunctions `g_* ⊣ Rg^!`, `j_! ⊣ j^*` and
-   `lem-pur-rhom-global-sections` give, naturally in `K`,
-   `Hom_X(g_* j_! L, K) ≅ Hom_V(L, j^* Rg^! K) ≅ H^0 RΓ(V, H_L(B K))`. `B`, `H_L` and
-   `RΓ(V, -)` preserve coproducts by steps 4, 6 and 3, and `H^0` commutes with direct sums
-   of complexes of `C`-modules. Hence the
-   comparison of `def-pc-compact-object` is bijective, including for an empty family. -/
+unbounded ordinary étale derived category. No separatedness of `X` is assumed. -/
 theorem isCompactObject_lowerStar_openImmersionLowerShriek_of_isFiniteLocallyConstantSheaf
     {k : Type u} [Field k] [IsAlgClosed k]
     (ell : ℕ) (hell : Nat.Prime ell) (hellk : IsUnit (ell : k))

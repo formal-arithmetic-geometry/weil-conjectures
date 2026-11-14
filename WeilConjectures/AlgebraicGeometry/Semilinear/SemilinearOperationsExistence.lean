@@ -24,7 +24,7 @@ import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 ## References
 
 * Zheng, Construction 4.1 and Lemma 4.10
-* Stacks 079P, 06YS, 06YY, 07A4 and 08J7--08JB
+* Stacks Project, Tags 079P, 06YS, 06YY, 07A4 and 08J7--08JB
 -/
 
 @[expose] public noncomputable section
@@ -41,7 +41,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   (τ : ∀ n : ℕ, B (n + 1) ⟶ B n)
 
 /-- The geometric, coefficient-extension, and open-localization operations,
-for a previously constructed ordinary system calculus. -/
+over a given ordinary system calculus. -/
 structure SemilinearOperationsData (systems : Data.{c, v, r} J B τ) where
   geometric : ∀ {C' : Type c} [Category.{v} C'] [EssentiallySmall.{max c v r} C']
     (J' : GrothendieckTopology C')

@@ -33,17 +33,14 @@ public import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 
 /-!
-Shared definitions for the normalized inverse-image comparison.
+# Definitions for the inverse-image tensor-hom comparison
 
-These are the five original conventions of
-`lem-pur-isomorphism-inverse-image-tensor-hom`, relocated without changing their bodies.
+Shared definitions for the normalized comparison of inverse image with tensor products and
+internal homs.
 
 ## References
 
-* Stacks Project, Tags 03EK, 03CY and 03D2
-* Tag 09A5
-* Stacks Tag 03EK
-* Stacks Tags 03D2 and 09A5
+* Stacks Project, Tags 03EK, 03CY, 03D2 and 09A5
 -/
 
 @[expose] public section

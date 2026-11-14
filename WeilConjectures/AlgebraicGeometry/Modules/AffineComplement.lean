@@ -17,6 +17,8 @@ with finitely many global sections `x j` whose non-vanishing loci `X_{x j}` are 
 non-vanishing locus `X_s` of every global section `s` of `ℒ` is affine
 (`AlgebraicGeometry.Scheme.Modules.isAffineOpen_compl_support_zeroLocus`).
 
+## Implementation details
+
 On `X_{x j}` write `s = a j • x j`, so that `X_s ∩ X_{x j} = D(a j)`; on `X_s` write
 `x j = g j • s`. Then `a j * g j = 1` on `X_s ∩ X_{x j}` and `D(g j) ⊆ X_{x j}`, and
 `AlgebraicGeometry.IsAffineOpen.of_universallyClosed` applies.
@@ -63,10 +65,7 @@ lemma compl_support_zeroLocus_tensorPowSection (L : X.Modules) [L.IsInvertible]
 /-- **The non-vanishing locus of a section is affine.** Let `f : X ⟶ S` be universally closed
 with `S` affine, and let `ℒ` be an invertible `𝒪_X`-module with finitely many global sections
 `x j` whose non-vanishing loci `X_{x j}` are affine and cover `X`. Then the non-vanishing locus
-`X_s`, the complement of the zero scheme of `s`, of every global section `s` of `ℒ` is affine.
-
-This applies to the pullback `ℒ = i^* 𝒪(1)` along a closed immersion `i` of a proper scheme into
-projective space, with the pullbacks of the coordinate sections `x j`. -/
+`X_s`, the complement of the zero scheme of `s`, of every global section `s` of `ℒ` is affine. -/
 theorem isAffineOpen_compl_support_zeroLocus {S : Scheme.{u}} (f : X ⟶ S) [UniversallyClosed f]
     [IsAffine S] (L : X.Modules) [SheafOfModules.IsInvertible.{u, u, u} L] {ι : Type*}
     [Finite ι] (x : ι → (𝟙_ X.Modules ⟶ L))

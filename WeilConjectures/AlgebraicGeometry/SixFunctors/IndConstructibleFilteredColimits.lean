@@ -23,11 +23,14 @@ import Mathlib.RingTheory.DedekindDomain.Dvr
 /-!
 # Filtered colimits and sums of ind-constructible module sheaves
 
-The standing geometric hypotheses are those of `sk-def-sfb-dc-setting`.
-`ObjectProperty.ind.{u + 1}` of `IsConstantModelConstructible` is precisely IndCons:
-small filtered presentations in the actual internal-module category, closed under isomorphism.
-The two statements cover respectively a finite coefficient subextension and the condensed
-algebraic closure. Coproducts are stated using arbitrary colimit cofans, including the empty one.
+Let `X` be a separated scheme of finite type over a field `k` of characteristic `p > 0`, and
+`ℓ ≠ p` a prime. Ind-constructible sheaves of modules on the pro-étale site of `X` (IndCons,
+`ObjectProperty.ind.{u + 1}` of `IsConstantModelConstructible`) are closed under filtered
+colimits and arbitrary sums, for coefficients a finite extension `E/ℚ_ℓ`
+(`AlgebraicGeometry.ProEtale.indConstructible_filteredColimits_and_sums`) and for the condensed
+algebraic closure
+(`AlgebraicGeometry.ProEtale.indConstructible_filteredColimits_and_sums_padicAlgCl`).
+Sums are stated using arbitrary colimit cofans, including the empty one.
 -/
 
 @[expose] public section

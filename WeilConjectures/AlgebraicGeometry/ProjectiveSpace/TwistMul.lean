@@ -12,13 +12,13 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TwistTensor
 # Multiplication of Laurent monomial sections of the twisting sheaves
 
 Let `Uᵢ = D₊(xᵢ)` be the standard opens of `ℙ(n; S)` and, for a set `s` of coordinates,
-`U_s = ⋂_{i ∈ s} Uᵢ`. Through the canonical isomorphism `𝒪(a) ⊗ 𝒪(b) ≅ 𝒪(a + b)` of
-`theorem-riemann-roch-coherent-serre-duality` (`AlgebraicGeometry.ProjectiveSpace.twistTensorIso`),
-the product of the Laurent monomial sections `xᵉ` of `𝒪(a)` and `xᵉ'` of `𝒪(b)` over `U_s` is the
-Laurent monomial section `x^{e + e'}` of `𝒪(a + b)`
+`U_s = ⋂_{i ∈ s} Uᵢ`. Through the canonical isomorphism `𝒪(a) ⊗ 𝒪(b) ≅ 𝒪(a + b)`
+(`AlgebraicGeometry.ProjectiveSpace.twistTensorIso`), the product of the Laurent monomial
+sections `xᵉ` of `𝒪(a)` and `xᵉ'` of `𝒪(b)` over `U_s` is the Laurent monomial section
+`x^{e + e'}` of `𝒪(a + b)`
 (`AlgebraicGeometry.ProjectiveSpace.twistTensorIso_hom_app_twistMonomialSection`). This is the
-computation behind the Serre pairing of `theorem-riemann-roch-coherent-serre-duality--2`: the
-product of sections corresponds to the product of Laurent polynomials.
+computation behind the Serre pairing: the product of sections corresponds to the product of
+Laurent polynomials.
 
 We also define the multiplication `𝒪(b) ⟶ 𝒪(a + b)` by a global section of `𝒪(a)`
 (`AlgebraicGeometry.ProjectiveSpace.twistMulHom`).
@@ -141,7 +141,7 @@ omit [Fintype n] in
 variable {S} in
 /-- **Multiplication by a global section** `t` of `𝒪(a)`: the morphism `𝒪(b) ⟶ 𝒪(c)`, for
 `a + b = c`, given by `x ↦ t x`, i.e. `𝒪(b) ≅ 𝒪 ⊗ 𝒪(b) ⟶ 𝒪(a) ⊗ 𝒪(b) ≅ 𝒪(a + b)` through the
-canonical isomorphism `twistTensorIso` of `theorem-riemann-roch-coherent-serre-duality`. -/
+canonical isomorphism `twistTensorIso`. -/
 def twistMulHom {a b c : ℤ} (h : a + b = c) (t : Γ(twist n S a, ⊤)) :
     twist n S b ⟶ twist n S c :=
   (λ_ (twist n S b)).inv ≫ (homOfGlobalSection _ t ▷ twist n S b) ≫

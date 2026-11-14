@@ -17,6 +17,12 @@ import WeilConjectures.AlgebraicGeometry.FiniteGaloisTensorDecomposition
 ## References
 
 * Stacks Project, Etale Cohomology, Tag 04JM, finite Galois descent argument
+
+## Implementation details
+
+`Spec E ⟶ Spec L` is an étale cover, and the Galois tensor decomposition identifies the two
+restrictions to its self-intersection with the constant family and the family of Galois
+pullbacks; the sheaf condition then identifies sections with invariant sections.
 -/
 
 @[expose] public section
@@ -29,15 +35,9 @@ namespace AlgebraicGeometry.Scheme
 
 attribute [local instance] Algebra.Etale.of_finite_of_isSeparable
 
-/-- Stacks Project, Tag 04JM.
-For a finite Galois extension `E/L`, pullback from `Spec L` to `Spec E` identifies
+/-- For a finite Galois extension `E/L`, pullback from `Spec L` to `Spec E` identifies
 the sections of any sheaf of sets on the small etale site of `Spec L` with the
-sections fixed by every `L`-automorphism of `E`.
-
-The finite separable extension gives an etale cover `Spec E -> Spec L`.
-The Galois tensor decomposition identifies the two restrictions to its self-intersection
-with the constant family and the family of Galois pullbacks. The sheaf equalizer condition
-then identifies sections downstairs with precisely the invariant sections upstairs. -/
+sections fixed by every `L`-automorphism of `E`. -/
 theorem finiteGaloisSectionsDescent
     (L E : Type u) [Field L] [Field E] [Algebra L E]
     [FiniteDimensional L E] [IsGalois L E]

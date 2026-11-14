@@ -43,6 +43,13 @@ projection of the twisting sheaf `Proj.twist` of the integral model.
 - Identify `ℙ(n; Spec A)` with `Proj.projectiveSpaceOverAffine n A`, and under this
   identification `twist n (Spec A) m` with `Proj.twist (homogeneousSubmodule n A) m`. This is
   what is needed to compute the cohomology of `𝒪(m)` over a field.
+
+## Implementation details
+
+`toProjInt` is the top arrow of the defining base-change square of `ℙ(n; S)` over `Spec ℤ`, and
+it commutes with `map n f` for any `f : S ⟶ T`, so `𝒪(m)` commutes with base change. On the
+standard opens `Uᵢ = D₊(xᵢ)`, `𝒪(m)` is free of rank one and glued along the transition units
+`ProjectiveSpace.transitionUnit`.
 -/
 
 @[expose] public section
@@ -85,28 +92,7 @@ namespace ProjectiveSpace
 variable (S : Scheme.{u})
 
 /-- **The twisting sheaf `𝒪(m)` on `ℙ(n; S)`**: the pullback along the projection
-`toProjInt: ℙ(n; S) ⟶ Proj ℤ[Tᵢ]` of the twisting sheaf `𝒪(m)` of the integral model, i.e.
-along the top arrow of the defining base-change square of `ℙ(n; S)`:
-
-```
-             toProjInt
-  ℙ(n; S) ─────────────▶ Proj ℤ[Tᵢ]
-     │                       │
-     │ ↘                     │
-     ▼                       ▼
-     S ─────────────────▶ Spec ℤ
-```
-
-Since `toProjInt` commutes with `map n f` for any `f: S ⟶ T`, `𝒪(m)` commutes with base
-change (`pullbackMapTwistIso`). On the standard opens `Uᵢ = D₊(xᵢ)` it is free of rank one,
-and it is glued along the transition units `ProjectiveSpace.transitionUnit`.
-
-The cocycle rule for these units on triple intersections is
-`ProjectiveSpace.transitionUnit_mul_transitionUnit`, the section
-`xᵢ` of `𝒪(1)` is `ProjectiveSpace.coordinateSection`, and the identifications
-`𝒪(d) ⊗ 𝒪(e) ≅ 𝒪(d + e)`, `𝒪(0) ≅ 𝒪` are `ProjectiveSpace.nonempty_tensorObj_twist_iso`; for a
-module `ℱ`, `ℱ(d)` stands for
-`ℱ ⊗ 𝒪(d)`. -/
+`toProjInt: ℙ(n; S) ⟶ Proj ℤ[Tᵢ]` of the twisting sheaf `𝒪(m)` of the integral model. -/
 def twist (m : ℤ) : (ℙ(n; S)).Modules :=
   (Scheme.Modules.pullback (toProjInt n S)).obj
     (Proj.twist (MvPolynomial.homogeneousSubmodule n (ULift.{u} ℤ)) m)

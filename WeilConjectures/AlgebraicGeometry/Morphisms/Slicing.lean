@@ -44,7 +44,7 @@ schemes affine.
 ## References
 
 - Stacks Project, Tag `0EY4`, <https://stacks.math.columbia.edu/tag/0EY4>
-- Stacks Project, Tags `056U`, `057G`, `055R`
+- Stacks Project, Tags `056U`, `057G`, `055R`, `04KV`
 -/
 
 @[expose] public section
@@ -100,9 +100,7 @@ lemma Scheme.Hom.etale_residueFieldMap_fiberι {X S : Scheme.{u}} (f : X ⟶ S) 
 
 /-- **Density of separable points** (Stacks `056U`). Let `f : X ⟶ S` be smooth. Every open
 `U` of `X` meeting the fibre through `x` contains a point `x'` of that fibre whose residue field
-is finite separable over `κ(f x)`, that is, `κ(f x) ⟶ κ(x')` is étale. This is
-`AlgebraicGeometry.Scheme.Hom.dense_setOf_isClosed_finite_isSeparable` applied to the fibre,
-which is smooth over `κ(f x)`. -/
+is finite separable over `κ(f x)`, that is, `κ(f x) ⟶ κ(x')` is étale. -/
 @[stacks 056U]
 theorem Smooth.exists_mem_etale_residueFieldMap {X S : Scheme.{u}} (f : X ⟶ S) [Smooth f]
     (U : X.Opens) {x : X} (hx : x ∈ U) :
@@ -167,14 +165,7 @@ theorem AffineSpace.exists_etale_comp_of_etale_residueFieldMap {n : Type u} [Fin
 /-- **Étale slices** (Stacks `057G`). Let `f: X ⟶ S` be smooth and let `x: X` have finite
 separable residue field over `κ(f x)`, so that `x` is a closed point of its fibre. Then there is
 an affine scheme `Z`, a point `z: Z` and a morphism `ι: Z ⟶ X` through `x` such that `ι ≫ f`
-is étale.
-
-By the normal form `AlgebraicGeometry.Scheme.Hom.exists_etale_to_affineSpace_of_mem_smoothLocus`,
-`X` is near `x` étale over an affine space `𝔸ⁿ_U`, and the image of `x` there still has finite
-separable residue field over `U`. For affine space the slice is
-`AlgebraicGeometry.AffineSpace.exists_etale_comp_of_etale_residueFieldMap`, and it pulls back to
-`X`.
--/
+is étale. -/
 @[stacks 057G]
 theorem Smooth.exists_etale_comp_of_etale_residueFieldMap {X S : Scheme.{u}} (f : X ⟶ S)
     [Smooth f] {x : X} (hx : (f.residueFieldMap x).hom.Etale) :
@@ -206,13 +197,10 @@ theorem Smooth.exists_etale_comp_of_etale_residueFieldMap {X S : Scheme.{u}} (f 
   rw [Category.assoc, this]
   infer_instance
 
-/-- **The relative connected component of a section** (Stacks `055R`). Let `g: P ⟶ T` be smooth,
-quasi-compact and quasi-separated, hence of finite presentation, with a section `σ`. The points
-`p` lying in the connected component of `σ (g p)` in their fibre form an open `P⁰` of `P`, here
-an open `U` containing them. Its fibres over `T` are the connected components through the
-rational points `σ t` of the smooth fibres, hence geometrically connected (Stacks `04KV`) and,
-being smooth, geometrically irreducible.
--/
+/-- **The relative connected component of a section** (Stacks `055R`). Let `g : P ⟶ T` be
+smooth, quasi-compact and quasi-separated, with a section `σ`. Then there is an open `U` of `P`
+containing the image of `σ` and every point `p` lying in the connected component of `σ (g p)` in
+its fibre, such that `U ⟶ T` has geometrically irreducible fibres. -/
 @[stacks 055R]
 theorem Smooth.exists_geometricallyIrreducible_of_section {P T : Scheme.{u}} (g : P ⟶ T)
     [Smooth g] [QuasiCompact g] [QuasiSeparated g] (σ : T ⟶ P) (hσ : σ ≫ g = 𝟙 T) :
@@ -358,16 +346,7 @@ private theorem exists_etale_factorization_of_mem_aux {X S : Scheme.{u}} (f : X 
 /-- **Slicing a smooth morphism at a point.** Let `f : X ⟶ S` be smooth and `x : X`. Then there
 are an étale `p : U ⟶ X` with `x` in its image and a factorisation `p ≫ f = q ≫ r` with
 `r : V ⟶ S` étale and `q : U ⟶ V` a smooth morphism of affine schemes with geometrically connected
-fibres and a section.
-
-After shrinking `X` and `S` to affine opens, so that `f` is quasi-compact and quasi-separated,
-the proof follows Stacks `0EY4`. Choose `x'` in the connected component of `x` in its fibre with
-`κ(x')` finite separable over `κ(f x)`, and an étale slice `ι : Z ⟶ X` through `x'`. The base
-change `X ×_S Z ⟶ Z` has the section `(ι, 𝟙)`, whose relative connected component `P₀` is open
-with geometrically irreducible fibres, and contains a point over `x` because the projection maps
-connected components of fibres onto connected components. Finally an affine open `A` of `P₀`
-around that point is smooth with geometrically irreducible fibres over its open image `T`, and a
-second étale slice `ι' : Z' ⟶ A` provides the section of `A ×_T Z' ⟶ Z'`. -/
+fibres and a section. -/
 theorem Smooth.exists_etale_factorization_of_mem {X S : Scheme.{u}} (f : X ⟶ S) [Smooth f]
     (x : X) :
     ∃ (U : Scheme.{u}) (p : U ⟶ X) (V : Scheme.{u}) (q : U ⟶ V) (r : V ⟶ S),
@@ -396,9 +375,6 @@ p i          r i
  v            v
  X ----f----> S
 ```
-
-This is Stacks `0EY4`, assembled pointwise from
-`AlgebraicGeometry.Smooth.exists_etale_factorization_of_mem`.
 -/
 @[stacks 0EY4]
 theorem Smooth.exists_etaleCover_factorization {X S : Scheme.{u}} (f : X ⟶ S) [Smooth f] :

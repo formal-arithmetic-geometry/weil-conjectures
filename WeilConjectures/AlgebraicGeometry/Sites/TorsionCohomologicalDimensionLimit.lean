@@ -19,8 +19,7 @@ public import WeilConjectures.SixFunctors.BaseChange.Sections
 
 A uniform bound `cd_tor(Xᵢ) ≤ c` on a cofiltered system of quasi-compact quasi-separated schemes
 with affine transition maps passes to the limit `X = lim Xᵢ`
-(`AlgebraicGeometry.Scheme.HasTorsionCohomologicalDimensionLE.of_isLimit`, blueprint
-`lemma-uniform-bounds-pro-etale-affines`).
+(`AlgebraicGeometry.Scheme.HasTorsionCohomologicalDimensionLE.of_isLimit`).
 
 ## Main definitions and statements
 
@@ -30,8 +29,8 @@ with affine transition maps passes to the limit `X = lim Xᵢ`
   projections `pᵢ : X ⟶ Dᵢ` of a limit, the diagram `i ↦ pᵢ^* pᵢ_* F` and its cocone of counits.
 - `AlgebraicGeometry.Etale.isColimitPushPullCocone`: every abelian étale sheaf `F` on
   `X = lim Dᵢ` is the colimit of the `pᵢ^* pᵢ_* F`.
-- `AlgebraicGeometry.Scheme.HasTorsionCohomologicalDimensionLE.of_isLimit`: blueprint
-  `lemma-uniform-bounds-pro-etale-affines`.
+- `AlgebraicGeometry.Scheme.HasTorsionCohomologicalDimensionLE.of_isLimit`: a uniform bound
+  `cd_tor(Xᵢ) ≤ c` passes to the limit.
 
 ## Implementation notes
 
@@ -41,8 +40,11 @@ affine étale `X`-scheme `V` lying over an affine open of `X`, a section over
 section `φ^* g` of `pᵢ^* pᵢ_* F` vanishing in `F` vanishes in `pⱼ^* pⱼ_* F` as soon as the
 morphism `φ` descends to the stage `Dⱼ` (`AlgebraicGeometry.Etale.exists_hasStageModel`).
 The cohomology of `pᵢ^* pᵢ_* F` is computed by the continuity of étale cohomology
-(`AlgebraicGeometry.Etale.isZero_rightDerived_sectionsFunctor_upperStar_of_isLimit_addCommGrpCat`,
-blueprint `corollary-cohomology-pro-etale-affine`).
+(`AlgebraicGeometry.Etale.isZero_rightDerived_sectionsFunctor_upperStar_of_isLimit_addCommGrpCat`).
+For the bound on the limit, a torsion sheaf `F` killed by `n` is the filtered colimit of the
+`pᵢ^* pᵢ_* F`, whose cohomology is the colimit of the cohomology of the `pⱼᵢ^* pᵢ_* F` on the
+`Xⱼ` (`AlgebraicGeometry.Scheme.subsingleton_H_pushPullDiagram_obj`); cohomology commutes with
+filtered colimits, and a general torsion sheaf is the union of its `n`-torsion subsheaves.
 -/
 
 @[expose] public section
@@ -576,17 +578,9 @@ end
 
 
 
-/-- Passing a uniform torsion bound to an affine
-limit.
-
-Let `X = lim Xᵢ` be the limit of a cofiltered system `D` of quasi-compact quasi-separated
-schemes with affine transition maps. If `cd_tor(Xᵢ) ≤ c` for every `i`, then `cd_tor(X) ≤ c`.
-
-A torsion sheaf `F` on `X` killed by `n` is the filtered colimit of the pullbacks `pᵢ^* pᵢ_* F`
-(`AlgebraicGeometry.Etale.isColimitPushPullCocone`), whose cohomology is the colimit of the
-cohomology of the `pⱼᵢ^* pᵢ_* F` on the `Xⱼ`, `j ⟶ i`
-(`AlgebraicGeometry.Scheme.subsingleton_H_pushPullDiagram_obj`); cohomology commutes with
-filtered colimits, and a general torsion sheaf is the union of its `n`-torsion subsheaves. -/
+/-- **Passing a uniform torsion bound to an affine limit.** Let `X = lim Xᵢ` be the limit of a
+cofiltered system `D` of quasi-compact quasi-separated schemes with affine transition maps. If
+`cd_tor(Xᵢ) ≤ n` for every `i`, then `cd_tor(X) ≤ n`. -/
 theorem HasTorsionCohomologicalDimensionLE.of_isLimit {I : Type u} [SmallCategory I]
     [IsCofiltered I] (D : I ⥤ Scheme.{u}) [∀ i, CompactSpace (D.obj i)]
     [∀ i, QuasiSeparatedSpace (D.obj i)] [∀ {i j : I} (g : i ⟶ j), IsAffineHom (D.map g)]

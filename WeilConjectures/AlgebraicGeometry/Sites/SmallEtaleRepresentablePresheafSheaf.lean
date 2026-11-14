@@ -17,7 +17,6 @@ public import Mathlib.CategoryTheory.Sites.SubcanonicalOver
 
 ## References
 
-* Tags 03O3 and 03O4
 * Stacks Project, Tags 03O3 and 03O4
 -/
 

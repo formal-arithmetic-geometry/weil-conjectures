@@ -27,9 +27,22 @@ import WeilConjectures.AlgebraicGeometry.Condensed.CondensedLocallyClosedScalarE
 /-!
 # Integral lattice subquotients of a lisse extension by zero
 
-The assertion uses the actual condensed continuous coefficient rings, pulled back from
-Profinite, and their internal module objects. Its lattices rationalize along their own
-inclusions. Filtration terms are subobjects of the specified locally closed extension.
+A lisse sheaf `L` with coefficients in a finite extension `E/ℚ_ℓ` on a locally closed
+subscheme `S` of `X` has a stratification of `S` and integral lattices on the strata whose
+rationalized extensions are the successive quotients of a filtration of the extension by zero
+`a_! L` (`AlgebraicGeometry.ProEtale.exists_latticeSubquotientFiltration`).
+
+## Implementation details
+
+The assertion uses the condensed continuous coefficient rings, pulled back from Profinite, and
+their internal module objects. Its lattices rationalize along their own inclusions. Filtration
+terms are subobjects of the specified locally closed extension, which is `i_* u_!` through the
+scheme-theoretic closure, for both integral and field coefficients.
+
+The filtration is built from ordered integral lattice inclusions
+(`exists_orderedSpectralLattices`) by pushing forward the open-prefix filtration; on each
+stratum the invertible lattice adjoint identifies the rational restriction with the scalar
+extension of the integral lattice, and this is carried through extension by zero.
 -/
 
 @[expose] public noncomputable section
@@ -46,8 +59,10 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- The subobject and lattice clauses over specified pulled-back coefficient rings.
-This predicate records exactly the conclusion, without introducing any new sheaf notion. -/
+/-- For a map of coefficient rings `c : A ⟶ B` and an immersion `a : S ⟶ X`: every lisse
+`B`-module `L` on `S` has a stratification with lisse `A`-lattices on the strata whose
+rationalizations are the successive quotients of a filtration of the extension of `L` along
+`a`. -/
 def LatticeSubquotientFiltrationData
     (A B : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj A] [IsCommMonObj A] [MonObj B] [IsCommMonObj B]
@@ -78,11 +93,8 @@ def LatticeSubquotientFiltrationData
                   ((coefficientHeartLocallyClosedExtension A (R.immersion b ≫ a)
                     inferInstance).obj (M b)))
 
-/-- The complete lattice and ordered subquotient assertion, with coefficients in the
-canonical spectral norm topology. The lets install only the recorded coefficient
-constructions and their structures, not extra hypotheses. The Noetherian structure is
-constructed from finite type over the field. Locally closed extension is the existing
-`i_* u_!` through the scheme-theoretic closure, for both integral and field coefficients. -/
+/-- The lattice and ordered subquotient assertion for `a : S ⟶ X` over `k`, with coefficients
+in `E` carrying the canonical spectral norm topology and its ring of integers. -/
 def LatticeSubquotientFiltration (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
     (k : Type u) [Field k] {S X : Scheme.{u}}
@@ -190,17 +202,7 @@ private theorem lattice_filtration_from_lattices
 
 /-- A lisse field-coefficient sheaf has stratified integral lattices whose rationalized
 extensions are the successive quotients of its extension by zero. Ranks may vary and
-filtration inclusions need not be strict, including for empty strata or zero sheaves.
-
-Proof. Choose ordered integral lattice inclusions by `exists_orderedSpectralLattices`.
-The general ordered filtration theorem constructs actual subobjects of a_! L by pushing
-forward the open-prefix filtration. For each stratum the invertible lattice adjoint
-identifies its rational restriction with the scalar extension of its integral lattice.
-Map this isomorphism through extension by zero and compose with the ordinary
-scalar/locally-closed-extension comparison. The resulting cokernel is exactly the
-rationalization of the integral extension along the composite stratum immersion.
-Finite type over k supplies Noetherian S and X. Empty sources, empty strata and rank zero
-allow repeated terms and zero quotients, as the non-strict inequalities require. -/
+filtration inclusions need not be strict. -/
 theorem exists_latticeSubquotientFiltration (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
     (p : ℕ) [Fact p.Prime] (k : Type u) [Field k] [CharP k p] (_hpℓ : p ≠ ℓ)

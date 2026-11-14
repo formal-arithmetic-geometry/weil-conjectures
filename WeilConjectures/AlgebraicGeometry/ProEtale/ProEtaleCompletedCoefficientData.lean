@@ -21,8 +21,14 @@ public import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 The integral comparison is stated as a limit universal property, with its reductions
 normalized on constant sections. Rationalization is stated as the sequential module
-colimit together with the ring-localization universal property. These formulations
-specify the canonical comparisons without choosing new models for the coefficients.
+colimit together with the ring-localization universal property.
+
+## Implementation details
+
+These formulations specify the canonical comparisons without choosing new models for the
+coefficients. The pullback equations in `SfbCompletedCoefficientComparison` use the bundled
+ring comparison (identity followed by `condensedPullbackHom`), which avoids expensive instance
+conversion.
 -/
 
 @[expose] public section
@@ -101,14 +107,10 @@ noncomputable def sfbRationalizationSequence (ℓ : ℕ) (R : Type) [CommRing R]
   Functor.ofSequence (fun _ : ℕ ↦ ℓ •
     𝟙 (Mod.regular (condensedRingObj (Profinite.continuousMapRingObj R) X)))
 
-/-- Expanded first and second comparisons, including their canonical maps and pullback
-compatibility. The reductions are normalized by the actual quotient maps on constants.
-`IsLimit` and `IsColimit` give the displayed comparison isomorphisms by uniqueness of
-limits and colimits. The last clause is the universal property of localization as rings;
-thus the ring structure on the sequential module colimit is the localization structure.
-The pullback equations use the underlying bundled ring comparison. Its underlying map
-is identity followed by `condensedPullbackHom`, so this is precisely the same canonical
-naturality condition; retaining the bundle avoids expensive instance conversion. -/
+/-- The completed coefficient comparisons: the integral coefficient ring is the limit of its
+reductions modulo powers of `I` (normalized by the quotient maps on constants), the rational
+coefficient ring is the sequential colimit of multiplication by `ℓ` and has the universal
+property of the localization as rings, and these comparisons are compatible with pullback. -/
 def SfbCompletedCoefficientComparison (ℓ : ℕ) (R K : Type) [CommRing R]
     [TopologicalSpace R] [IsTopologicalRing R] [CommRing K] [TopologicalSpace K]
     [IsTopologicalRing K] (I : Ideal R)

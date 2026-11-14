@@ -202,7 +202,7 @@ lemma isCompact_openDatum_V (a b : R.J) :
       Set ↥(pullback (M.p a) (D.map (M.openStage hc).left.hom))) :=
   M.isCompact_stageTransport_V _ (M.isCompact_rawDatum_V hc) a b
 
-/-- (Implementation) The selected stage past `M.openStage` at which all gluing axioms hold. -/
+/-- The selected stage past `M.openStage` at which all gluing axioms hold. -/
 noncomputable def validStage : Over (M.openStage hc).left :=
   (M.exists_isValid hc (M.openDatum hc) (M.isCompatible_openDatum hc)
     (M.isOpenValid_openDatum hc) (M.isCompact_openDatum_V hc)).choose
@@ -219,10 +219,10 @@ noncomputable def relStageToRawStage : M.relStage hc ⟶ M.rawStage hc :=
 noncomputable def validDatum : RelativeGluingDatum M.p (D.map (M.relStage hc).hom) :=
   M.stageTransport (M.validStage hc).hom (M.openDatum hc)
 
-/-- The relative gluing axioms hold
-at the selected stage. In `R_{X,λ_rel}` the overlap opens match, the overlap maps are inverse
-(`AlgebraicGeometry.RelativeGluingDatum.toOpensGlueData`) and all triple-overlap cocycle
-identities hold. -/
+/-- The relative gluing axioms hold at the selected stage: in `R_{X,λ_rel}` the
+overlap opens match, the overlap maps are inverse
+(`AlgebraicGeometry.RelativeGluingDatum.toOpensGlueData`) and all triple-overlap cocycle identities
+hold. -/
 theorem isValid_validDatum : (M.validDatum hc).IsValid :=
   (M.exists_isValid hc (M.openDatum hc) (M.isCompatible_openDatum hc)
     (M.isOpenValid_openDatum hc) (M.isCompact_openDatum_V hc)).choose_spec _ (𝟙 _)

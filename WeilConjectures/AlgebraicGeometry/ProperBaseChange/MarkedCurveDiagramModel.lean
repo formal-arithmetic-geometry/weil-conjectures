@@ -25,9 +25,14 @@ import WeilConjectures.AlgebraicGeometry.Finite.FiniteClosedImmersionLocus
 
 ## References
 
-* Stacks Project, Tag 0GK7, diagram descent and marked-open paragraphs
-* Stacks Project, Tag 0GK7, the paragraphs from reduction of the base through descent of the marked
-  closed immersion
+* Stacks Project, Tag 0GK7, the paragraphs from reduction of the base through descent of the
+  marked closed immersion
+
+## Implementation details
+
+In `exists_marked_curve_diagram_model` the fibre conditions are only required at points above
+the generic point `η`; the global fibre conditions and surjectivity of the marked opens are left
+to a subsequent shrinking.
 -/
 
 @[expose] public section
@@ -36,10 +41,9 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-/-- Descend the supplied marked diagram, with the required fibre conditions only at
-points above the specified component generic point. The global fibre conditions and
-surjectivity of the marked opens are deliberately left to a subsequent shrinking.
--/
+/-- A marked finite curve diagram over the purely inseparable extension `K` of the residue field
+at a generic point `η` of `S` descends to a finite surjective universally injective `V ⟶ U`
+over an open neighbourhood `U` of `η`, with the fibre conditions holding above `η`. -/
 theorem exists_marked_curve_diagram_model
     {X S : Scheme.{u}} (f : X ⟶ S) [IsSeparated f]
     [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f]

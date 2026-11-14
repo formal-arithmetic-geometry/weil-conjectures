@@ -79,11 +79,13 @@ coproduct does exist, but synthesising `Limits.HasCoproduct` for a family indexe
 in the universe of the points of `X` does not terminate in a usable time here; it should be
 replaced by `∐ …` once that is fixed.
 
-## Blueprint references
+## Implementation details
 
-The labels quoted below are labels of the *sketch* blueprint, which lives in the separate
-repository `formal-arithmetic-geometry/weil-conjectures-blueprint`, not of `blueprint/src` in
-this repository.
+The comparison `i^* 𝔾ₘ ≅ 𝔾ₘ` along the (non-étale) generic point is checked on stalks via
+`AlgebraicGeometry.Etale.stalkComparison`. Exactness of the divisor sequence is checked on
+geometric stalks, where both `i_* 𝔾ₘ` and `⨁_x i_{x*} ℤ` map to the sheaf `V ↦ (V → ℤ)` of
+functions on points. The vanishing `R¹i_* 𝔾ₘ = 0` is proved on sections, by Hilbert 90 over
+the generic fibre of affine étale `X`-schemes, rather than via `Pic` of strict henselisations.
 -/
 
 @[expose] public section
@@ -97,10 +99,7 @@ namespace AlgebraicGeometry.Scheme
 variable (X : Scheme.{u}) [IsIntegral X]
 
 /-- The étale sheaf `i_* i^* 𝔾ₘ` on `X`, the pushforward along the generic point
-`i : Spec k(X) ⟶ X` of the pullback of `𝔾ₘ`. It is written this way, rather than as the
-pushforward of the sheaf `𝔾ₘ` of `Spec k(X)`, so that the unit
-`AlgebraicGeometry.Scheme.toGenericGm` of the adjunction lands in it by construction; the
-comparison of the two is `AlgebraicGeometry.Scheme.genericGmIso`. -/
+`i : Spec k(X) ⟶ X` of the pullback of `𝔾ₘ`. -/
 noncomputable def genericGm : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} :=
   (Etale.lowerStar AddCommGrpCat.{u + 1} X.fromSpecFunctionField).obj
     ((Etale.upperStar AddCommGrpCat.{u + 1} X.fromSpecFunctionField).obj X.gmSheaf)
@@ -113,14 +112,7 @@ noncomputable def toGenericGm : X.gmSheaf ⟶ X.genericGm :=
     X.gmSheaf
 
 /-- The comparison map `i^* 𝔾ₘ ⟶ 𝔾ₘ` along the generic point `i : Spec k(X) ⟶ X` is an
-isomorphism. The morphism `i` is not étale, but both sheaves have stalk `(k(X)ˢᵉᵖ)ˣ` at a
-separable closure of `k(X)`: the strict henselisation of the local ring `𝒪_{X,η} = k(X)` is
-`k(X)ˢᵉᵖ`. On the stalk at a geometric point of `Spec k(X)` the map is
-`AlgebraicGeometry.Etale.stalkComparison`, which is injective, a local ring of an étale
-`X`-scheme over the generic point being a field
-(`AlgebraicGeometry.Etale.injective_stalkComparison_gmSheafToLowerStarGmSheaf`), and surjective,
-an étale neighbourhood of the generic point being cut out by equations defined over a nonempty
-open of `X` (`AlgebraicGeometry.Etale.surjective_stalkComparison_gmSheafToLowerStarGmSheaf`). -/
+isomorphism. -/
 theorem isIso_upperStarGmSheafToGmSheaf_fromSpecFunctionField :
     IsIso (upperStarGmSheafToGmSheaf X.fromSpecFunctionField) := by
   refine isIso_of_isIso_sheafFiber_map _ fun t ↦ ?_
@@ -138,9 +130,7 @@ theorem isIso_upperStarGmSheafToGmSheaf_fromSpecFunctionField :
   rw [← h] at this
   exact @IsIso.of_isIso_comp_left _ _ _ _ _ _ _ inferInstance this
 
-/-- The sheaf `i_* i^* 𝔾ₘ` is the pushforward of the sheaf `𝔾ₘ` of `Spec k(X)`, because the
-pullback of `𝔾ₘ` along the generic point is `𝔾ₘ`
-(`AlgebraicGeometry.Scheme.isIso_upperStarGmSheafToGmSheaf_fromSpecFunctionField`). -/
+/-- The isomorphism of `i_* i^* 𝔾ₘ` with the pushforward of the sheaf `𝔾ₘ` of `Spec k(X)`. -/
 noncomputable def genericGmIso : X.genericGm ≅
     (Etale.lowerStar AddCommGrpCat.{u + 1} X.fromSpecFunctionField).obj
       (Spec X.functionField).gmSheaf :=
@@ -155,12 +145,7 @@ noncomputable def pointConstantInt (x : X) : Sheaf X.smallEtaleTopology AddCommG
     ((constantSheaf _ AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of (ULift.{u + 1} ℤ)))
 
 /-- The first map of the divisor sequence is injective: `𝔾ₘ ⟶ i_* 𝔾ₘ` along the generic point
-`i : Spec k(X) ⟶ X` is a monomorphism. On an étale `X`-scheme `U` it is the map on units
-`Γ(U, 𝒪)ˣ ⟶ Γ(U ×_X Spec k(X), 𝒪)ˣ` induced by restriction to the generic fibre, which is
-injective because `U` is flat over the integral scheme `X`
-(`AlgebraicGeometry.Scheme.injective_Γ_map_pullback_fst_fromSpecFunctionField`).
-This is the injectivity `A^× ⟶ (S⁻¹A)^×` in the proof of `lemma-cohomology-multiplicative-group--8`,
-proved on sections rather than on stalks. -/
+`i : Spec k(X) ⟶ X` is a monomorphism. -/
 theorem mono_gmSheafToLowerStarGmSheaf_fromSpecFunctionField :
     Mono (gmSheafToLowerStarGmSheaf X.fromSpecFunctionField) := by
   refine Sheaf.Hom.mono_of_presheaf_mono _ _ _ (h := ?_)
@@ -173,9 +158,7 @@ theorem mono_gmSheafToLowerStarGmSheaf_fromSpecFunctionField :
   exact ULift.ext (Units.ext (hinj (congrArg (fun x ↦ (Additive.toMul x.down).val) h)))
 
 /-- **The unit `𝔾ₘ ⟶ i_* i^* 𝔾ₘ` is a monomorphism**, the left exactness of the divisor
-sequence. Composed with `i_*` of the comparison map `i^* 𝔾ₘ ⟶ 𝔾ₘ` it is the restriction map
-`𝔾ₘ ⟶ i_* 𝔾ₘ` to the generic fibre, which is a monomorphism by
-`AlgebraicGeometry.Scheme.mono_gmSheafToLowerStarGmSheaf_fromSpecFunctionField`. -/
+sequence. -/
 theorem mono_toGenericGm : Mono X.toGenericGm := by
   have h := X.mono_gmSheafToLowerStarGmSheaf_fromSpecFunctionField
   have e : X.toGenericGm ≫ (Etale.lowerStar _ _).map
@@ -186,9 +169,8 @@ theorem mono_toGenericGm : Mono X.toGenericGm := by
   exact mono_of_mono _ ((Etale.lowerStar _ _).map (upperStarGmSheafToGmSheaf _))
 
 /-- The map `i_{x*} ℤ ⟶ (V ↦ (V → ℤ))` from the sheaf of a point `x` to the sheaf of functions on
-points: a section of `ℤ` over `V ×_X Spec κ(x)` is a function on the points of `V` over `x`
-(`AlgebraicGeometry.Scheme.constantSheafToPointFunctionSheaf`), which is extended by zero to all
-of `V`. -/
+points, viewing a section of `ℤ` over `V ×_X Spec κ(x)` as a function on the points of `V`
+over `x` and extending it by zero to all of `V`. -/
 noncomputable def pointConstantIntToPointFunctionSheaf (x : X) :
     X.pointConstantInt x ⟶ X.pointFunctionSheaf (AddCommGrpCat.of (ULift.{u + 1} ℤ)) :=
   (Etale.lowerStar AddCommGrpCat.{u + 1} (X.fromSpecResidueField x)).map
@@ -258,9 +240,7 @@ lemma extendByZero_fromSpecResidueField_fst (M : AddCommGrpCat.{u + 1}) (V : X.E
     rw [range_fromSpecResidueField]
     exact h
 
-/-- The divisor map vanishes on units: the composite `𝔾ₘ ⟶ i_* 𝔾ₘ ⟶ (V ↦ (V → ℤ))` is zero,
-since a unit on `V` has order `0` at every point (`AlgebraicGeometry.Scheme.Etale.ord_fst_appTop`).
--/
+/-- The divisor map vanishes on units: the composite `𝔾ₘ ⟶ i_* 𝔾ₘ ⟶ (V ↦ (V → ℤ))` is zero. -/
 lemma gmSheafToLowerStarGmSheaf_comp_divisorMap [IsLocallyNoetherian X] [IsRegular X] :
     gmSheafToLowerStarGmSheaf X.fromSpecFunctionField ≫ X.divisorMap = 0 := by
   ext V u
@@ -271,11 +251,7 @@ lemma gmSheafToLowerStarGmSheaf_comp_divisorMap [IsLocallyNoetherian X] [IsRegul
 locally noetherian scheme, `V` an étale `X`-scheme and `f` a unit on the generic fibre of `V`
 whose order vanishes at every point of `V`. Then near every point `y` of `V` the function `f`
 is a unit of `𝒪_V`: there is an open neighbourhood `U` of `y` and `u ∈ Γ(U, 𝒪)ˣ` restricting
-to `f` on the generic fibre of `U`. The local rings of `V` are regular, hence unique
-factorisation domains, and a rational function of order zero along every height one prime of
-a unique factorisation domain is a unit
-(`AlgebraicGeometry.Scheme.Etale.exists_toLocalGenericRing_eq_of_ord_eq_zero`); such a unit of
-the local ring spreads out (`AlgebraicGeometry.Scheme.Etale.exists_eq_of_toLocalGenericRing_eq`). -/
+to `f` on the generic fibre of `U`. -/
 lemma Etale.exists_eq_of_ord_eq_zero [IsLocallyNoetherian X] [IsRegular X] (V : X.Etale)
     (y : V.left) (f : Γ(pullback V.hom X.fromSpecFunctionField, ⊤)ˣ)
     (hf : ∀ y', Etale.ord V y' f = 0) :
@@ -288,8 +264,7 @@ lemma Etale.exists_eq_of_ord_eq_zero [IsLocallyNoetherian X] [IsRegular X] (V : 
 
 /-- **Local finiteness of divisors.** Let `X` be an integral regular locally noetherian scheme,
 `V` an étale `X`-scheme and `f` a unit on the generic fibre of `V`. Near every point of `V`, the
-points at which `f` has nonzero order lie over finitely many points of `X`: they are
-finitely many (`AlgebraicGeometry.Scheme.Etale.exists_opens_finite_ord_ne_zero`). -/
+points at which `f` has nonzero order lie over finitely many points of `X`. -/
 lemma Etale.exists_finset_of_ord_ne_zero [IsLocallyNoetherian X] [IsRegular X] (V : X.Etale)
     (y : V.left) (f : Γ(pullback V.hom X.fromSpecFunctionField, ⊤)ˣ) :
     ∃ (U : V.left.Opens) (_ : y ∈ U) (T : Finset X),
@@ -303,9 +278,7 @@ lemma Etale.exists_finset_of_ord_ne_zero [IsLocallyNoetherian X] [IsRegular X] (
 regular locally noetherian scheme, `x` a point of `X` of codimension one, `V` an étale
 `X`-scheme and `c` an integer-valued function on the points of `V` over `x`. Near every point
 `y` of `V` there is a unit on the generic fibre whose order is `c` at the points over `x` and `0`
-elsewhere. The local rings of `V` are regular, hence unique factorisation domains, so the height
-one primes of `𝒪_{V,y}` are principal
-(`AlgebraicGeometry.Scheme.Etale.exists_ord_eq_of_forall_ne`). -/
+elsewhere. -/
 lemma Etale.exists_ord_eq_extendByZero [IsLocallyNoetherian X] [IsRegular X] (V : X.Etale)
     (y : V.left) {x : X} (hx : coheight x = 1)
     (c : ↥(pullback V.hom (X.fromSpecResidueField x)) → ULift.{u + 1} ℤ) :
@@ -324,9 +297,7 @@ lemma Etale.exists_ord_eq_extendByZero [IsLocallyNoetherian X] [IsRegular X] (V 
 
 omit [IsIntegral X] in
 /-- On geometric stalks, extension by zero `⨁_{i} i_{e(i)*} ℤ ⟶ (V ↦ (V → ℤ))` is injective, for
-an injective family `e` of points of `X`: its components have the retractions
-`AlgebraicGeometry.Scheme.pointFunctionSheafToPointConstantInt`, which kill the other
-components. -/
+an injective family `e` of points of `X`. -/
 lemma injective_sheafFiber_map_desc_pointConstantIntToPointFunctionSheaf {ι : Type u}
     {e : ι → X} (he : Function.Injective e) (c : Cofan fun i ↦ X.pointConstantInt (e i))
     (hc : IsColimit c) (s : X) :
@@ -453,8 +424,7 @@ lemma exists_sheafFiber_eq_desc {B : Sheaf X.smallEtaleTopology AddCommGrpCat.{u
   exact ⟨b, hb⟩
 
 /-- On geometric stalks, every germ of a function on points coming from `i_{x*} ℤ` for a point
-`x` of codimension one is the germ of a divisor, by the local principality of divisors
-(`AlgebraicGeometry.Scheme.Etale.exists_ord_eq_extendByZero`). -/
+`x` of codimension one is the germ of a divisor. -/
 lemma exists_sheafFiber_divisorMap_eq_pointConstantIntToPointFunctionSheaf
     [IsLocallyNoetherian X] [IsRegular X] (s : X) {x : X} (hx : coheight x = 1)
     (a : ((X.uliftPointSmallEtale s).sheafFiber (A := AddCommGrpCat.{u + 1})).obj
@@ -466,8 +436,7 @@ lemma exists_sheafFiber_divisorMap_eq_pointConstantIntToPointFunctionSheaf
   exact ⟨U, hyU, ULift.up (Additive.ofMul f), funext hf⟩
 
 /-- On geometric stalks, a germ of a unit on the generic fibre whose divisor vanishes is the
-germ of a unit, by local algebraic Hartogs
-(`AlgebraicGeometry.Scheme.Etale.exists_eq_of_ord_eq_zero`). -/
+germ of a unit. -/
 lemma exists_sheafFiber_gmSheafToLowerStarGmSheaf_eq [IsLocallyNoetherian X] [IsRegular X]
     (s : X) (b : ((X.uliftPointSmallEtale s).sheafFiber (A := AddCommGrpCat.{u + 1})).obj
       ((Etale.lowerStar AddCommGrpCat.{u + 1} X.fromSpecFunctionField).obj
@@ -482,9 +451,7 @@ lemma exists_sheafFiber_gmSheafToLowerStarGmSheaf_eq [IsLocallyNoetherian X] [Is
     ULift.ext (congrArg Additive.ofMul (Units.ext hu))⟩
 
 /-- On geometric stalks, the image of the divisor map is contained in that of
-`⨁_x i_{x*} ℤ ⟶ (V ↦ (V → ℤ))`: near a point, a divisor is supported over finitely many
-codimension one points of `X` (`AlgebraicGeometry.Scheme.Etale.exists_finset_of_ord_ne_zero`),
-so it is a finite sum of its restrictions to the fibres over these points. -/
+`⨁_x i_{x*} ℤ ⟶ (V ↦ (V → ℤ))`. -/
 lemma exists_sheafFiber_desc_eq_divisorMap [IsLocallyNoetherian X] [IsRegular X]
     (c : Cofan fun x : {x : X // coheight x = 1} ↦ X.pointConstantInt x.1) (hc : IsColimit c)
     (s : X) (b : ((X.uliftPointSmallEtale s).sheafFiber (A := AddCommGrpCat.{u + 1})).obj
@@ -598,15 +565,7 @@ cokernel of the unit `𝔾ₘ ⟶ i_* i^* 𝔾ₘ` is isomorphic to `⨁_{x ∈ 
 of any colimit cocone `c` on the family `x ↦ i_{x*} ℤ`, by an isomorphism induced by the
 divisor map `f ↦ ∑_x ord_x(f) [x]`: composed with extension by zero
 `AlgebraicGeometry.Scheme.divisorsToPointFunctionSheaf`, it is the divisor map
-`AlgebraicGeometry.Scheme.divisorMap` into the sheaf of functions on points. This is exactness
-in the middle and on the right of the divisor sequence.
-
-Both `i_* i^* 𝔾ₘ = i_* 𝔾ₘ` and `⨁_x i_{x*} ℤ` map to the sheaf `V ↦ (V → ℤ)` of functions on
-points, by the divisor map and by extension by zero. On geometric stalks the second map is
-injective, the two maps have the same image (local finiteness and local principality of
-divisors) and the kernel of the first is the image of `𝔾ₘ` (local algebraic Hartogs), so the
-cokernel is identified by `AlgebraicGeometry.Scheme.exists_cokernel_iso_hom_comp_eq_of_sheafFiber`.
--/
+`AlgebraicGeometry.Scheme.divisorMap` into the sheaf of functions on points. -/
 theorem exists_cokernel_toGenericGm_iso_hom_comp_eq :
     ∃ (w : X.toGenericGm ≫ X.genericGmIso.hom ≫ X.divisorMap = 0)
       (e : cokernel X.toGenericGm ≅ c.pt),
@@ -632,11 +591,8 @@ theorem exists_cokernel_toGenericGm_iso_hom_comp_eq :
 /-- **The divisor map** `div : i_* i^* 𝔾ₘ ⟶ ⨁_{x ∈ X⁽¹⁾} i_{x*} ℤ` of an integral regular
 locally noetherian scheme `X`, where the target is the vertex of a colimit cocone `c` on the
 family `x ↦ i_{x*} ℤ`. It sends a rational function `f` to its divisor
-`∑_{x ∈ X⁽¹⁾} ord_x(f) [x]`: it is the unique map whose composite with extension by zero
-`AlgebraicGeometry.Scheme.divisorsToPointFunctionSheaf` is the divisor map
-`AlgebraicGeometry.Scheme.divisorMap` into the sheaf of `ℤ`-valued functions on points, which
-is built from the valuations `AlgebraicGeometry.Scheme.ord`
-(`AlgebraicGeometry.Scheme.divisorSequenceMap_comp`). -/
+`∑_{x ∈ X⁽¹⁾} ord_x(f) [x]`, i.e. it lifts `AlgebraicGeometry.Scheme.divisorMap` along
+extension by zero `AlgebraicGeometry.Scheme.divisorsToPointFunctionSheaf`. -/
 noncomputable def divisorSequenceMap : X.genericGm ⟶ c.pt :=
   Abelian.monoLift (X.divisorsToPointFunctionSheaf c hc) (X.genericGmIso.hom ≫ X.divisorMap) (by
     obtain ⟨w, e, he⟩ := X.exists_cokernel_toGenericGm_iso_hom_comp_eq c hc
@@ -667,9 +623,7 @@ generic point `i: Spec k(X) ⟶ X`, and let `X⁽¹⁾` be its set of coheight-o
 is a short exact sequence of étale sheaves on `X`, where the third term is the vertex of any
 colimit cocone `c` on the family `x ↦ i_{x*} ℤ`, the first map is the unit
 `AlgebraicGeometry.Scheme.toGenericGm` and `div` is the divisor map
-`AlgebraicGeometry.Scheme.divisorSequenceMap`, `f ↦ ∑_x ord_x(f) [x]`. The unit is a
-monomorphism by `AlgebraicGeometry.Scheme.mono_toGenericGm`, and `div` identifies its cokernel
-with `c.pt` by `AlgebraicGeometry.Scheme.exists_cokernel_toGenericGm_iso_hom_comp_eq`. -/
+`AlgebraicGeometry.Scheme.divisorSequenceMap`, `f ↦ ∑_x ord_x(f) [x]`. -/
 theorem shortExact_divisorSequence :
     (ShortComplex.mk X.toGenericGm (X.divisorSequenceMap c hc)
       (X.toGenericGm_comp_divisorSequenceMap c hc)).ShortExact := by
@@ -703,10 +657,7 @@ theorem exists_shortExact_divisorSequence :
 end DivisorSequence
 
 omit [IsIntegral X] in
-/-- **`H¹` of a point sheaf vanishes.** For a point `x` of `X`, `H¹(X, i_{x*} ℤ) = 0`: the edge
-map of the Leray spectral sequence of `i_x : Spec κ(x) ⟶ X` embeds `H¹(X, i_{x*} ℤ)` into
-`H¹(Spec κ(x), ℤ) = Hom_cont(Gal(κ(x)ˢᵉᵖ/κ(x)), ℤ) = 0`. This is Step 2 of the proof of
-`lemma-cohomology-multiplicative-group--8`. -/
+/-- **`H¹` of a point sheaf vanishes.** For a point `x` of `X`, `H¹(X, i_{x*} ℤ) = 0`. -/
 theorem subsingleton_H_one_pointConstantInt (x : X) :
     Subsingleton (Sheaf.H (X.pointConstantInt x) 1) := by
   have h := Etale.injective_edgeMap_one (X.fromSpecResidueField x)
@@ -719,17 +670,7 @@ scheme with generic point `i : Spec k(X) ⟶ X`. Then the first higher direct im
 `R¹i_*(i^* 𝔾ₘ)` vanishes; here this is phrased as: for every monomorphism `ι : i^* 𝔾ₘ ⟶ I` into
 an injective sheaf, `i_*` maps the cokernel map of `ι` to an epimorphism (so that
 `0 ⟶ i_* i^* 𝔾ₘ ⟶ i_* I ⟶ i_* (I / i^* 𝔾ₘ) ⟶ 0` is exact and `R¹i_*(i^* 𝔾ₘ)`, its obstruction,
-is zero).
-
-The blueprint computes the stalk of `R¹i_* 𝔾_{m,η}` at a geometric point as `Pic(S⁻¹A)` for a
-strict henselisation `A` and shows that it vanishes since `S⁻¹A` is a UFD. We argue on sections
-instead: a section of `i_* (I / 𝔾ₘ)` over an affine étale `X`-scheme `V` is a section of
-`I / 𝔾ₘ` over the generic fibre `V ×_X Spec k(X)`, which is an étale `k(X)`-scheme with
-quasi-compact underlying space, and it lifts to `I` by Hilbert 90 over such schemes
-(`AlgebraicGeometry.Scheme.surjective_app_of_shortExact_gmSheaf_of_compactSpace`). As the affine
-opens cover every étale `X`-scheme, `i_*` of the cokernel map is locally surjective. Only the
-quasi-separatedness of `X` is used.
-This is Step 3 of the proof of `lemma-cohomology-multiplicative-group--8`. -/
+is zero). -/
 theorem epi_lowerStar_map_cokernelπ_upperStar_gmSheaf [IsNoetherian X] [IsRegular X]
     {I : Sheaf (Spec X.functionField).smallEtaleTopology AddCommGrpCat.{u + 1}}
     (ι : (Etale.upperStar AddCommGrpCat.{u + 1} X.fromSpecFunctionField).obj X.gmSheaf ⟶ I)
@@ -782,16 +723,7 @@ noetherian scheme with function field `k(X)`. Then the pullback along the generi
                                        H²(Spec k(X)_ét, i^* 𝔾ₘ)
 ```
 
-is injective, that is, `Br(X) = H²(X, 𝔾ₘ) ↪ H²(Spec k(X), 𝔾ₘ) = Br(k(X))`; the target is
-identified with the cohomological Brauer group of `k(X)` by
-`AlgebraicGeometry.Scheme.isIso_upperStarGmSheafToGmSheaf_fromSpecFunctionField`. In particular
-this holds for a smooth curve.
-
-The map factors as `H²(X, 𝔾ₘ) ⟶ H²(X, i_* i^* 𝔾ₘ) ⟶ H²(Spec k(X), i^* 𝔾ₘ)`, the unit of
-`i^* ⊣ i_*` followed by the edge map of the Leray spectral sequence of `i`. The first map is
-injective by the long exact cohomology sequence of the divisor sequence, since
-`H¹(X, ⨁_x i_{x*} ℤ) = 0`; the second is injective since `R¹i_*(i^* 𝔾ₘ) = 0`.
--/
+is injective, that is, `Br(X) = H²(X, 𝔾ₘ) ↪ H²(Spec k(X), 𝔾ₘ) = Br(k(X))`. -/
 theorem injective_cohomologyMap_gmSheaf_two [IsNoetherian X] [IsRegular X] :
     Function.Injective (Etale.cohomologyMap X.fromSpecFunctionField X.gmSheaf 2) := by
   have : HasColimitsOfSize.{u + 1, u + 1} (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :=
@@ -801,7 +733,7 @@ theorem injective_cohomologyMap_gmSheaf_two [IsNoetherian X] [IsRegular X] :
   let P := fun x : {x : X // coheight x = 1} ↦ X.pointConstantInt x.1
   have hS := X.shortExact_divisorSequence (colimit.cocone (Discrete.functor P))
     (colimit.isColimit _)
-  -- Step 2: the unit `𝔾ₘ ⟶ i_* i^* 𝔾ₘ` is injective on `H²`, as `H¹(X, ⨁_x i_{x*} ℤ) = 0`
+  -- the unit `𝔾ₘ ⟶ i_* i^* 𝔾ₘ` is injective on `H²`, as `H¹(X, ⨁_x i_{x*} ℤ) = 0`
   have h₃ : Subsingleton (Sheaf.H (colimit.cocone (Discrete.functor P)).pt 1) :=
     subsingleton_H_one_of_isColimit_cofan X (colimit.isColimit _)
       fun x ↦ X.subsingleton_H_one_pointConstantInt x.1
@@ -811,7 +743,7 @@ theorem injective_cohomologyMap_gmSheaf_two [IsNoetherian X] [IsRegular X] :
     rw [Sheaf.H.map_apply] at ha
     obtain ⟨b, rfl⟩ := Abelian.Ext.covariant_sequence_exact₁ _ hS a ha (n₀ := 1) rfl
     rw [Subsingleton.elim b 0, Abelian.Ext.zero_comp]
-  -- Step 3: the edge map `H²(X, i_* i^* 𝔾ₘ) ⟶ H²(Spec k(X), i^* 𝔾ₘ)` is injective
+  -- the edge map `H²(X, i_* i^* 𝔾ₘ) ⟶ H²(Spec k(X), i^* 𝔾ₘ)` is injective
   let ι := Injective.ι ((Etale.upperStar AddCommGrpCat.{u + 1} X.fromSpecFunctionField).obj
     X.gmSheaf)
   have hβ := Etale.injective_edgeMap_two X.fromSpecFunctionField ι

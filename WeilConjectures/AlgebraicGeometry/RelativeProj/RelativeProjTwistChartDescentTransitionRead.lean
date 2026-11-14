@@ -94,13 +94,7 @@ end AlgebraicGeometry.Scheme.Modules
 namespace AlgebraicGeometry.Scheme.GradedAlgebraData
 variable {S : Scheme.{u}} (A : S.GradedAlgebraData)
 
-/-- The normalized transition induced by a compatible chart square intertwines reading maps.
-
-The proof expands the section-normalized pullback adjunction, uses naturality of its unit,
-and evaluates the displayed chart square on a section.  The first map in the square is
-transported across the equality of the two chart preimages, and the remaining composition
-is exactly the normalized transition map.
--/
+/-- The normalized transition induced by a compatible chart square intertwines reading maps. -/
 theorem twist_chart_transition_read
     (L : A.relProj.Modules)
     (chart : ∀ U : S.affineOpens,

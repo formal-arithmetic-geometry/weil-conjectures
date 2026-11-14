@@ -12,6 +12,11 @@ import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-! # Closed subschemes of affine-transition limits
 
+## Implementation details
+
+The inverse system is built from the scheme-theoretic images of the closed subscheme in the
+stages; this argument is written directly rather than following the proof of Tag 0A0P.
+
 ## References
 
 * Stacks Project, Limits, Tag 0A0P (approximation argument), and Morphisms, Tag 01R8 (quasi-compact
@@ -28,11 +33,9 @@ namespace AlgebraicGeometry
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
-/-- The scheme-theoretic images of a closed subscheme in the stages form an
-inverse system with affine transitions and with the original closed subscheme as limit.
-The closed-image
-implementation below is an argument written here, rather than the proof of 0A0P.
--/
+/-- A closed subscheme `X` of the limit `Y` of a cofiltered diagram of qcqs schemes with affine
+transitions is the limit of a compatible system of closed subschemes of the stages, with
+affine transitions. -/
 theorem exists_closedImmersion_system_of_isLimit
     {J : Type u} [SmallCategory J] [IsCofiltered J]
     (D : J ⥤ Scheme.{u})

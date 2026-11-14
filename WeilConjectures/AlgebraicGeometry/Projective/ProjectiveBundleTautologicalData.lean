@@ -25,20 +25,16 @@ public import WeilConjectures.AlgebraicGeometry.ProperBaseChange.QuasiCoherentSy
 /-! # Data for finite locally free projective bundles
 
 The symmetric-algebra realization, its normalized twist, frame charts, and base-change
-comparisons. These definitions are factored out so their construction lemmas can be
-proved separately without an import cycle.
+comparisons.
+
+## Implementation details
+
+These definitions are factored out so their construction lemmas can be proved separately
+without an import cycle.
 
 ## References
 
-* Stacks Project, Tags 01OB, 01O3, 01OE
-* Stacks, Tags 0095, 0096
-* Stacks, Tag 01OB
-* Stacks, Tag 01NR
-* Stacks, Tags 01NR, 01MN
-* Stacks, Tags 01OB, 01NR
-* Stacks, Tags 01OB, 01OE
-* Stacks, Tag 01O3
-* Stacks, Tag 01C5
+* Stacks Project, Tags 0095, 0096, 01C5, 01MN, 01NR, 01O3, 01OB, 01OE
 -/
 
 @[expose] public section
@@ -54,9 +50,8 @@ namespace AlgebraicGeometry
 
 attribute [local irreducible] Scheme.Modules.tensorPullback
 
-/-- The unit-normalized comparison from the stipulated tensor pullback to Mathlib's
-adjoint implementation. Uniqueness of left adjoints determines this comparison; thus all
-pullback equations below also specify equations for tensor pullback, without choosing maps. -/
+/-- The unit-normalized comparison from the tensor pullback to Mathlib's pullback of modules,
+given by uniqueness of left adjoints. -/
 noncomputable def projectiveBundleTensorPullbackIso {X Y : Scheme.{u}} (g : X ⟶ Y) :
     Scheme.Modules.tensorPullback g ≅ Scheme.Modules.pullback g :=
   (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)).leftAdjointUniq

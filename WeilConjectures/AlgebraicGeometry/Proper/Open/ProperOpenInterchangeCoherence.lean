@@ -135,8 +135,13 @@ import WeilConjectures.AlgebraicGeometry.Proper.Open.ProperOpenInterchangeGeomet
 ## References
 
 * Stacks Project, More on Étale Cohomology, Tags 0F7B, 0F7C, 0F7D, 0F7F
-* Stacks Project, Tag 0F7B
-* Stacks Project, Tags 0F7B, 0F7C, 0F7D, 0F7F
+
+## Implementation details
+
+In `properOpenInterchangeCoherence`, the ordinary isomorphism `δ` is fixed by equality in the
+common ordinary direct image. The unit equation is the resolution-independent form of the
+K-injective normalization: on an injective representative the left unit is invertible; the
+right unit is represented by applying `p_*` to a K-injective replacement of `k_!J`.
 -/
 
 @[expose] public section
@@ -994,10 +999,6 @@ def properOpenInterchangeConditions (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ
 set_option linter.unusedVariables false in
 /-- The canonical proper/open interchange isomorphism, normalized by the derived units,
 with refinement normalization, vertical and horizontal composition, identities and base change.
-The ordinary isomorphism `δ` is fixed by equality in the common ordinary direct image.
-The unit equation is the resolution-independent form of the K-injective normalization:
-on an injective representative the left unit is invertible; the right unit is represented
-by applying `p_*` to a K-injective replacement of `k_!J`.
 -/
 theorem properOpenInterchangeCoherence (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] :
     ∃ δ γ, properOpenInterchangeConditions Λ δ γ := by

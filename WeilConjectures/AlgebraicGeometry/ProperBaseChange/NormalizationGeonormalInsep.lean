@@ -253,13 +253,8 @@ private theorem finite_component_normalization_presentation (T : Scheme.{u})
     simp [Scheme.fromReducedNormalization, C, a]
 
 /-- The componentwise normalization becomes geometrically normal after a finite purely
-inseparable extension.
-
-The integral closed subschemes `C i` enumerate the reduced irreducible components of
-`X` after extension, without repetitions. Their normalization coproduct has its structure
-map given by `Sigma.desc` followed by the field-base-change projection. Thus no integrality
-or reducedness assumption is imposed on `X`.
--/
+inseparable extension `k'/k`: here the integral closed subschemes `C i` enumerate the reduced
+irreducible components of `X_{k'}` without repetitions. -/
 theorem exists_finite_purelyInseparable_geometricallyNormal_normalization
     (k : Type u) [Field k] (X : Scheme.{u})
     [X.Over (Spec (CommRingCat.of k))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k))]

@@ -174,13 +174,10 @@ private theorem precomposition_unit_surjective {S T : Scheme.{u}}
   exact (G.obj.map_comp_apply (sigmaCoverπ U f).op σ.op s).symm.trans
     ((congrArg (fun a ↦ G.obj.map a.op s) hσ).trans (G.obj.map_id_apply _ s))
 
-/-- Restricting the ordinary closed inverse image to the affine ind-etale basis is
-naturally isomorphic to sheafification of evaluation along the canonical lift.
-At a weakly contractible basis object, the sheafification unit is bijective.
-Composing its inverse with the first natural isomorphism gives the asserted
-inverse-image evaluation isomorphism, natural in sheaves and in such basis objects.
-Weak contractibility is written as surjectivity of evaluation on all epimorphisms;
-`Epi` means right cancellability, including for the empty basis object. -/
+/-- Restricting the closed inverse image along `Spec (A ⧸ I) ⟶ Spec A` to the affine
+ind-etale basis is naturally isomorphic to sheafified evaluation along the canonical lift,
+and on weakly contractible basis objects (evaluation surjective on all epimorphisms) the
+sheafification unit is bijective, giving an evaluation isomorphism natural in both variables. -/
 theorem affine_closed_inverseImage_evaluation (A : Type u) [CommRing A] (I : Ideal A) :
     Nonempty
       (proEtaleSheafInverseImage (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))

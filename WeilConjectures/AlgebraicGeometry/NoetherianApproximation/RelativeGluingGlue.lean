@@ -33,6 +33,16 @@ a morphism `X ⟶ X_λ` which exhibits `X` as the base change `X_λ ×_{D_λ} S`
 - `AlgebraicGeometry.finitePresentationDescent`, `AlgebraicGeometry.finitePresentationDescentHom`,
   `AlgebraicGeometry.finitePresentationDescentIso`: the construction for the selected
   presentation and chart models, with `AlgebraicGeometry.isPullback_finitePresentationDescent`.
+
+## Implementation details
+
+`AlgebraicGeometry.isPullback_finitePresentationDescent` is an explicit construction for
+Stacks 01ZM; the existence statement is
+`AlgebraicGeometry.Scheme.exists_isPullback_of_finitePresentation`.
+
+## References
+
+* Stacks Project, Tag 01ZM
 -/
 
 @[expose] public section
@@ -110,8 +120,7 @@ variable {I : Type u} [Category.{u} I] {D : I ⥤ Scheme.{u}} {c : Cone D} (hc :
   {X : Scheme.{u}} {g : X ⟶ c.pt} {R : RelativeAffinePresentation c g} (M : R.ChartModels)
   [QuasiSeparatedSpace X]
 
-/-- The scheme `X^desc_{λ_rel}`
-obtained by gluing the valid relative datum `R_{X,λ_rel}`. -/
+/-- The scheme `X^desc_{λ_rel}` obtained by gluing the valid relative datum `R_{X,λ_rel}`. -/
 noncomputable def descended : Scheme.{u} :=
   RelativeGluingDatum.glued (M.isValid_validDatum hc)
 
@@ -297,13 +306,9 @@ noncomputable abbrev finitePresentationDescentIso :
       ≅ X :=
   (finitePresentationDescentModels hc g).descendedIso hc
 
-/-- The constructed
-`X^desc_{λ_rel} ⟶ D_{λ_rel}` is of finite presentation (locally of finite presentation,
-quasi-compact and quasi-separated), and `ε_X` is an isomorphism over `lim Dⱼ`: the square formed
-by `X ⟶ X^desc_{λ_rel}`, `g` and the projections is cartesian.
-
-This is an explicit construction for Stacks 01ZM; the existence statement is
-`AlgebraicGeometry.Scheme.exists_isPullback_of_finitePresentation`. -/
+/-- The constructed `X^desc_{λ_rel} ⟶ D_{λ_rel}` is of finite presentation (locally of finite
+presentation, quasi-compact and quasi-separated), and the square formed by `X ⟶ X^desc_{λ_rel}`,
+`g` and the projections is cartesian. -/
 theorem isPullback_finitePresentationDescent :
     LocallyOfFinitePresentation (finitePresentationDescentHom hc g) ∧
       QuasiCompact (finitePresentationDescentHom hc g) ∧

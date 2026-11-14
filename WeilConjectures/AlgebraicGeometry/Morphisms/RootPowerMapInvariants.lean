@@ -27,12 +27,9 @@ set_option autoImplicit false
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The intermediate power map is injective and its image is precisely the
-fixed elements. The homomorphisms are supplied as data: this theorem neither
-chooses a map nor constructs an isomorphism from an existence assertion.
-
-The argument below is the
-monic-basis extension of that calculation to general commutative rings. -/
+/-- Let `K` be a subgroup of the `n`-th roots of unity, acting on `H[X] ⧸ (X ^ n - h)` via `ρ`.
+The intermediate power map `φ : H[X] ⧸ (X ^ [μ_n : K] - h) → H[X] ⧸ (X ^ n - h)` sending the
+root to the `#K`-th power of the root is injective, with image the `K`-invariant elements. -/
 theorem root_power_map_invariants
     (H : Type u) [CommRing H] (h : H) (n : ℕ) (hn : 0 < n)
     [Finite (rootsOfUnity n H)] [IsCyclic (rootsOfUnity n H)]

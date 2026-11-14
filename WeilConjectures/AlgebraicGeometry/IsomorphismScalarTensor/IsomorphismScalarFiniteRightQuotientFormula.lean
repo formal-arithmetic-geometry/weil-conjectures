@@ -11,9 +11,14 @@ import all WeilConjectures.AlgebraicGeometry.SixFunctors.InverseImagePullbackCom
 
 /-! # Right finite scalar quotient formula
 
-This is the right half of the finite quotient construction.  It is separated
-from the left map because its unit insertion is formed before inverse image and
-therefore has an independent pure-tensor calculation.
+This is the right half of the finite quotient construction.
+
+## Implementation details
+
+The right half is separated from the left map because its unit insertion is formed before
+inverse image and therefore has an independent pure-tensor calculation. The quotient maps are
+the completed scalar quotient maps followed by completed inverse image; they do not depend on
+the completed comparison.
 
 ## References
 
@@ -63,16 +68,8 @@ private def rightComplexQuotient (n : ℕ) :
     ext i : 1
     exact (rightModuleQuotient l E L ι g n).naturality (f.f i)
 
-/-- The right completed-to-finite quotient map and its pure-tensor formula.
-
-Use the existing completed scalar quotient map, whose tensor formula already
-includes the transport to the selected finite scalar-extension presentation.
-Apply completed inverse image, then the identity-on-sections comparison between
-inverse image followed by restriction and restriction followed by inverse image.
-The coefficient projection square proves that comparison linear. Naturality
-makes the degreewise maps chain maps, and their tensor formula is unchanged.
-The construction is independent of the completed comparison b and its formula.
--/
+/-- For a normalized completed comparison `b`, there are right completed-to-finite quotient
+maps at every level satisfying the pure-tensor formula `RightQuotientFormula`. -/
 theorem right_quotient_formula_exists
     (b : (integralOperationsGoodComplex l E Y).ι ⋙ leftComplex l E L ι g ≅
       (integralOperationsGoodComplex l E Y).ι ⋙ rightComplex l E L ι g)

@@ -60,8 +60,8 @@ private theorem epi_of_surjective_affine {T : Scheme.{u}}
     exact ⟨x, hx⟩
   exact Sheaf.epi_of_isLocallySurjective (H.map f)
 
-/-- The proper/open counit is epic; this is the surjectivity part of the
-finite-principal-open and specialization-localization argument. -/
+/-- For `p` proper and `i` an open immersion, the counit of the extension-by-zero adjunction
+for `i` at `p_* i'_! M` is an epimorphism, where `i'` is the base change of `i`. -/
 theorem sfProperOpenCounit_epi {V W T : Scheme.{u}} (p : V ⟶ T) [IsProper p]
     (i : W ⟶ T) [IsOpenImmersion i] (M :
       proEtaleRingModules (pullback p i)

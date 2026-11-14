@@ -35,6 +35,12 @@ import WeilConjectures.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparis
 
 * Stacks Project, Tag 0GKV, the Noetherian case
 * Stacks Project, Tag 0GKV, for a prime invertible on the base, the case Tag 0GL0 uses
+
+## Implementation details
+
+`GeometricallyConnected f` includes nonemptiness of the fibres. Dimension is measured on
+residue-field fibres, which is the geometric fibre condition since field extension preserves
+dimension. The coefficients `ULift (ZMod ell)` place the prime field in the coefficient universe.
 -/
 
 @[expose] public section
@@ -108,11 +114,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 /-- In a proper smooth family with nonempty geometrically connected one-dimensional
 fibres over a Noetherian base on which the prime `ell` is invertible, every nonnegative
-higher direct image of the constant prime-field module sheaf is constructible.
-`GeometricallyConnected f` includes nonemptiness. Dimension is measured on residue-field
-fibres; field extension preserves their dimension, so this is the geometric fibre condition.
-The lift of `ZMod ell` places the same finite prime field in the coefficient universe.
--/
+higher direct image of the constant prime-field module sheaf is constructible. -/
 theorem properSmoothCurves_prime_higherDirectImage_constructible
     {C S : Scheme.{u}} [IsLocallyNoetherian S] [CompactSpace S]
     (f : C ⟶ S) [IsProper f] [Smooth f] [GeometricallyConnected f]

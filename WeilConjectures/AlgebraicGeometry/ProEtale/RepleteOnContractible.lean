@@ -12,6 +12,11 @@ import Mathlib.CategoryTheory.Limits.Types.Limits
 
 /-!
 # Sequential limits on weakly contractible pro-étale objects
+
+## Implementation details
+
+Sheaves take values in `Type (max (u + 1) w)`, allowing arbitrarily large sets without equating
+the object and morphism universes of the site.
 -/
 
 @[expose] public section
@@ -25,13 +30,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 /-- Every transition and every limit projection of an epimorphic inverse sequence is
-surjective on sections over a weakly contractible object.
-
-The hypothesis `hW` uses the existing weak-contractibility definition, equivalently
-condition 3 of `lemma-w-contractible-affines-projective--2`: epimorphisms of sheaves induce
-surjections on sections at `W`. Values lie in `Type (max (u + 1) w)`, allowing arbitrary
-larger sets without equating the object and morphism universes of the site.
--/
+surjective on sections over a weakly contractible object `W` (one at which epimorphisms of
+sheaves induce surjections on sections). -/
 theorem proetale_surjective_sections_of_epi_tower
     (X : Scheme.{u}) (F : ℕᵒᵖ ⥤ Sheaf (ProEt.topology X) (Type (max (u + 1) w)))
     (hF : ∀ n : ℕ, Epi (F.map (homOfLE (Nat.le_succ n)).op))

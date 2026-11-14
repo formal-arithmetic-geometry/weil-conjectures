@@ -19,7 +19,13 @@ coequifibered presheaf of rings on `S.AffineZariskiSite` under `𝒪_S`) which i
 spectra of finite quasi-coherent subalgebras of `F`, which are finite over `S`. Applied to the
 relative normalization this shows that an integral morphism `X ⟶ S` is a cofiltered limit of
 finite `S`-schemes (compare Stacks Project Tag 09YZ, which also asks for the stages to be of
-finite presentation; this is not claimed here).
+finite presentation; this is not shown here).
+
+The key point is that every section of `F` over an affine open lies in a finite quasi-coherent
+subalgebra (Stacks Project Tag 01PG). We deduce this from the corresponding statement for ideal
+sheaves (`AlgebraicGeometry.Scheme.IdealSheafData.exists_finiteType_le_of_mem`), applied to the
+relative spectrum `D` of `𝒪_S + ε F ⊆ F[ε]`: quasi-coherent ideals of `𝒪_D` contained in `ε F` are
+the quasi-coherent `𝒪_S`-submodules of `F`.
 
 ## Main definitions and results
 
@@ -32,13 +38,10 @@ finite presentation; this is not claimed here).
 - `AlgebraicGeometry.Scheme.Hom.nonempty_finiteApproximation_of_isIntegralHom`: an integral
   morphism to a quasi-compact quasi-separated scheme is a cofiltered limit of finite morphisms.
 
-## Implementation details
+## References
 
-The key point is that every section of `F` over an affine open lies in a finite quasi-coherent
-subalgebra (Stacks Project Tag 01PG). We deduce this from the corresponding statement for ideal
-sheaves (`AlgebraicGeometry.Scheme.IdealSheafData.exists_finiteType_le_of_mem`), applied to the
-relative spectrum `D` of `𝒪_S + ε F ⊆ F[ε]`: quasi-coherent ideals of `𝒪_D` contained in `ε F` are
-the quasi-coherent `𝒪_S`-submodules of `F`.
+* [Stacks Project, Tag 09YZ](https://stacks.math.columbia.edu/tag/09YZ)
+* [Stacks Project, Tag 01PG](https://stacks.math.columbia.edu/tag/01PG)
 -/
 
 @[expose] public section
@@ -1034,7 +1037,8 @@ open Scheme.AffineZariskiSite
 
 /-- A **finite approximation** of a morphism `f : X ⟶ S` is a cofiltered system `D` of
 schemes finite over `S` together with a limit cone with point `X` whose projections are
-compatible with `f`: it presents `X` as a cofiltered limit of finite `S`-schemes. -/
+compatible with `f`: it presents `X` as a cofiltered limit of finite `S`-schemes. The transition
+morphisms are then affine (`Scheme.Hom.FiniteApproximation.isAffineHom_map`). -/
 structure Scheme.Hom.FiniteApproximation {X S : Scheme.{u}} (f : X ⟶ S) where
   /-- The index category of the inverse system. -/
   I : Type u

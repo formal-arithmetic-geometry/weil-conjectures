@@ -9,6 +9,13 @@ public import WeilConjectures.AlgebraicGeometry.Standard.StandardSingleFlatCouni
 import WeilConjectures.AlgebraicGeometry.Standard.StandardSingleUnionSESPresentation
 import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
+/-! # Bounded-above models for direct images from a union of two opens
+
+## References
+
+* Stacks Project, Tags 08BV and 0DJ9 (relative Mayer–Vietoris)
+-/
+
 @[expose] public section
 set_option autoImplicit false
 universe u
@@ -99,8 +106,7 @@ private theorem unionBounded_minus_biprod
   exact P.ext_of_isTriangulatedClosed₂ _
     (Pretriangulated.binaryBiproductTriangle_distinguished E F) hE hF
 
-/-- The union direct image admits a bounded-above complex representative.
-Source: Stacks Project, Tags 08BV and 0DJ9, relative Mayer--Vietoris. -/
+/-- The union direct image admits a bounded-above complex representative. -/
 theorem exists_boundedAbove_union_model
     {Y B A : Scheme.{u}} (p : Y ⟶ B) [QuasiCompact p] [QuasiSeparated p]
     [IsAffine B] [IsAffine A] (g : A ⟶ B) (U V : Y.Opens)

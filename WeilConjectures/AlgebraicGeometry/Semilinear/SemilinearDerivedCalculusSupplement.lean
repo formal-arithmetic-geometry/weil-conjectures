@@ -138,11 +138,7 @@ and equations; there are no free proposition-valued parameters.
 
 * Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1, Lemma 4.10 and Proposition 4.17
 * Stacks Project, Tags 0941, 079P, 06YS, 06YY, 07A4, 07A6 and 08J7--08JB
-* Zheng 4.1
-* Stacks 08J9
-* Stacks 03DJ
-* Stacks 03DI--03DJ
-* Stacks 03DJ, 0941
+* Stacks Project, Tags 03DI and 03DJ
 -/
 
 @[expose] public noncomputable section
@@ -577,7 +573,7 @@ namespace Data
 
 variable (A : Data.{c, v, r} J B τ)
 
-/-- The inverse cartesian reduction, with its required invertibility proof supplied explicitly. -/
+/-- The reduction of a normalized system, as an isomorphism between levels. -/
 def cartesianReduction (M : DS.{c, v, max c v r} J B τ)
     (hM : Normalized.{c, v, max c v r} J B τ A.scalar M) {m n : ℕ} (h : n ≤ m) :
     (A.scalar h).T.obj ((e.{c, v, max c v r} J B τ m).obj M) ≅

@@ -21,6 +21,13 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.RootNormalizationGenericStalk
 import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteFlatTargetLocus
 import WeilConjectures.AlgebraicGeometry.Morphisms.FormallyUnramifiedStalkNeighbourhood
 
+/-! # Abhyankar's lemma at a point of the generic root-divisor fibre
+
+## References
+
+* Stacks Project, Tags 09EB, 0BRM and 0EYG
+-/
+
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits
@@ -56,11 +63,9 @@ private theorem etale_neighbourhood_of_fibre_flat_stalks
   have : FormallyUnramified (E.ι ≫ f) := hunramE
   exact ⟨E, ⟨hxB, by change f x ∈ F; rwa [hxy]⟩, Etale.of_formallyUnramified_of_flat (E.ι ≫ f)⟩
 
-/-- The local pointwise Abhyankar calculation underlying generic source etaleness.
-Source: Stacks Project, Tags 09EB, 0BRM and 0EYG.
-The proof analyzes the DVR extension at the fixed normalization point; the universal
-statement is obtained by applying this lemma separately to each point.
--/
+/-- **Abhyankar's lemma at a point.** For the normalization of the root cover in the given
+chart, every point lying over the generic point `η` of the regular divisor `D` has an open
+neighbourhood that is étale over `N`. -/
 theorem root_normalization_generic_source_etale_point
     {L U : Scheme.{u}} (i : U ⟶ L)
     (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)

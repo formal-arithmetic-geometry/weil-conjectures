@@ -14,20 +14,16 @@ public import Mathlib.AlgebraicGeometry.Properties
 
 The small Zariski site `X_Zar` of a scheme `X` is the category `X.Opens` of open subsets of `X`
 with jointly surjective families of open immersions as coverings
-(`AlgebraicGeometry.Scheme.smallZariskiTopology`, blueprint
-`lemma-uniform-bounds-pro-etale-affines`); its sheaves are the sheaves on the underlying topological
-space. The cohomology `Hᵠ(X_Zar, F)` of an abelian sheaf `F` is `AlgebraicGeometry.Scheme.zariskiH`,
-Mathlib's `CategoryTheory.Sheaf.H`, the `Ext`
+(`AlgebraicGeometry.Scheme.smallZariskiTopology`); its sheaves are the sheaves on the underlying
+topological space. The cohomology `Hᵠ(X_Zar, F)` of an abelian sheaf `F` is
+`AlgebraicGeometry.Scheme.zariskiH`, Mathlib's `CategoryTheory.Sheaf.H`, the `Ext`
 group `Extᵠ(ℤ, F)`, i.e. the `q`-th right derived functor of `F ↦ F(X)`.
 
-* Blueprint `lemma-uniform-bounds-pro-etale-affines` (flasque sheaves) is Mathlib's
-`TopCat.Sheaf.IsFlasque`.
-* Blueprint `lemma-uniform-bounds-pro-etale-affines` (flasque sheaves are acyclic) is
-  `TopCat.Sheaf.IsFlasque.subsingleton_H`.
-* Blueprint `lemma-uniform-bounds-pro-etale-affines` (cohomology commutes with filtered colimits on
-  a noetherian space) is `TopCat.Sheaf.preservesColimitsOfShape_functorH`.
-* Blueprint `lemma-uniform-bounds-pro-etale-affines` (Grothendieck vanishing) is
-  `TopCat.Sheaf.subsingleton_H_of_topologicalKrullDim_lt`, and
+* Flasque sheaves are Mathlib's `TopCat.Sheaf.IsFlasque`.
+* Flasque sheaves are acyclic: `TopCat.Sheaf.IsFlasque.subsingleton_H`.
+* Cohomology commutes with filtered colimits on a noetherian space:
+  `TopCat.Sheaf.preservesColimitsOfShape_functorH`.
+* Grothendieck vanishing: `TopCat.Sheaf.subsingleton_H_of_topologicalKrullDim_lt`, and
   `AlgebraicGeometry.Scheme.subsingleton_zariskiH_of_topologicalKrullDim_lt` for schemes.
 -/
 

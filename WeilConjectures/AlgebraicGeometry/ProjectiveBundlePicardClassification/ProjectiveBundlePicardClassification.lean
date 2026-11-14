@@ -18,14 +18,8 @@ import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
 
 ## References
 
-* EGA II, Remark 4.2.7, printed p.75
-* arbitrary-base extension by Stacks, Tag 0B8W, with the field normalization of Tag 0BXJ
-* EGA II, Remark 4.2.7
-* Stacks, Tag 0B8W
-* Stacks, Tags 0B8W and 0BXJ
-* EGA II, Remarks 4.2.7 and 4.2.10
-* Stacks, Tag 0096
-* Stacks, Tags 0B8W, 0BXJ and 07VK
+* EGA II, Remarks 4.2.7 (p. 75) and 4.2.10
+* Stacks Project, Tags 0096, 07VK, 0B8W, 0BXJ
 -/
 
 @[expose] public section
@@ -94,8 +88,7 @@ structure HasPicardClassification {S P : Scheme.{u}} (p : P ⟶ S)
       (L : P.Modules) (hL : L.IsInvertible) :
     ∃! m : ℤ, Nonempty (L ≅ integerLinePower A hA m)
 
-/-- The explicit tensor pullback preserves local triviality, by uniqueness of left
-adjoints and the ordinary module pullback. -/
+/-- The tensor pullback of an invertible module is invertible. -/
 private theorem invertible_tensorPullback {X Y : Scheme.{u}} (f : X ⟶ Y)
     (M : Y.Modules) (hM : M.IsInvertible) : ((tensorPullback f).obj M).IsInvertible := by
   have : M.IsInvertible := hM
@@ -105,8 +98,7 @@ private theorem invertible_tensorPullback {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 /-- Invertible modules on a projective bundle of constant rank at least two have the
 unique degree/coefficient decomposition, its local form, tensor law and arbitrary
-base-change compatibility. The existential quasi-coherence proof is a consequence
-of finite local freeness, so it adds no hypothesis. -/
+base-change compatibility. -/
 theorem projective_bundle_picard_classification (S : Scheme.{u}) (E : S.Modules)
     (r : ℕ) [SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u} E r] (hr : 2 ≤ r) :
     ∃ hE : E.IsQuasicoherent,

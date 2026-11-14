@@ -14,7 +14,7 @@ import WeilConjectures.AlgebraicGeometry.RationalP1.RationalP1TensorShiftNatural
 import WeilConjectures.AlgebraicGeometry.RationalP1.RationalP1ShiftedTateSelfBraiding
 import WeilConjectures.AlgebraicGeometry.RationalP1.RationalP1StrengthProjectionAction
 
-/-! Explicit fixed projection-tail cancellation after removing the dead let bindings. -/
+/-! # Cancellation of the fixed projection tail -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -129,8 +129,7 @@ local elab "structural_rfl" : tactic => do
   let _ ← (structuralRefl (← getMainGoal) 100).run {}
   replaceMainGoal []
 
-/-- The fixed extraction composite agrees with the native generic construction.
-The proof shares congruences between repeated native instance expressions. -/
+/-- The fixed extraction composite agrees with the native generic construction. -/
 private theorem second_extract_native
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

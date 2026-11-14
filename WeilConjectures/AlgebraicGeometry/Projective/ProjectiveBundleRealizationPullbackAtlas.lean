@@ -58,8 +58,8 @@ structure ProjectiveBundleRealizationPullbackAtlas
           (Scheme.Modules.tensorPullback D'.A.data.relProjHom).map e.inv ≫ D'.quotient).app V m =
           c • D'.L.presheaf.map (homOfLE hi).op (t i)
 
-/-- The affine-fraction calculation and normalized quotient equations produce a common frame
-atlas for arbitrary normalized realizations.  This is the local geometric part of the proof. -/
+/-- If the base-change map `b` is compatible with the degree-one sections via `e` (hypothesis
+`hb`), then the two realization pullback quotients admit a common frame atlas. -/
 theorem exists_projectiveBundleRealizationPullbackAtlas
     {B B' : Scheme.{u}} {F : B.Modules} {F' : B'.Modules}
     (D : ProjectiveBundleRealization B F) (D' : ProjectiveBundleRealization B' F')

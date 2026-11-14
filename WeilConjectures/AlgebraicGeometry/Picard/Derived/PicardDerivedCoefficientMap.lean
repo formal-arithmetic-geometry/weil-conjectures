@@ -10,11 +10,16 @@ public import WeilConjectures.AlgebraicGeometry.Picard.CanonicalSinglePullbackCo
 
 /-! # The actual coefficient arrow for a Picard direct-image comparison
 
+## Implementation details
+
+`picardDerivedCoefficientMap` is built from the canonical derived-single pullback map along the
+base change `j : X'_W ⟶ X_W` of `u`, the identification `j^*(L_W) ≅ (u^*L)_W`, the derived
+adjunction unit along `j` and direct-image composition. It needs no properness, flatness or
+invertibility hypotheses.
+
 ## References
 
 * Stacks Project, Tags 01F7, 08HY and 0B91
-* Stacks Project, Tag 01F7
-* Stacks Project, Tags 01F7 and 08HY
 -/
 
 @[expose] public section
@@ -45,16 +50,8 @@ variable
   [∀ Y : Scheme.{v},
     HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]
 
-/-- Construct the coefficient-induced arrow between base-changed direct images.
-
-Construction: Let j:X'_W -> X_W be the pullback of u. The two projection
-identities identify j^*(L_W) with (u^*L)_W by ordinary pullback composition and
-the canonical isomorphisms from tensor pullback to ordinary pullback. Compose
-the canonical derived-single pullback map with that coefficient isomorphism.
-Apply the derived adjunction unit along j and direct-image composition, then
-transport j followed by f_W to f'_W using its projection equation. This gives
-the displayed arrow without any cohomology or affine-model comparison. There
-is no properness, flatness or invertibility hypothesis on this construction. -/
+/-- The coefficient-induced morphism `R(f_W)_* (L_W) ⟶ R(f'_W)_* ((u^* L)_W)` between the
+base-changed derived direct images, for `u : X' ⟶ X` over `S` and `W ⟶ S`. -/
 noncomputable def picardDerivedCoefficientMap
     {X X' S : Scheme.{v}} (f : X ⟶ S) (f' : X' ⟶ S)
     (u : X' ⟶ X) (hu : u ≫ f = f') (L : X.Modules)

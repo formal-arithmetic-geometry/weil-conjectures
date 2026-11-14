@@ -45,15 +45,15 @@ section of `Pic_{X/S}` over `T`.
   the fibrewise degree of any local representative, is compatible with base change, and is
   locally constant.
 
-## Implementation notes
+## Implementation details
 
 The fibrewise degree is defined through the fibre Euler characteristics
 `AlgebraicGeometry.Scheme.Modules.eulerCharFiber` of `ℒ` and of `𝒪_{X_T}` along the projection
 `X_T ⟶ T`, so that the semicontinuity package of
 `WeilConjectures/AlgebraicGeometry/Cohomology/DirectImage.lean` applies directly.
 
-The blueprint packages the degree as a morphism `Pic_{X/S} ⟶ ℤ` to the constant sheaf.  Here it is
-spelled out as a function `AlgebraicGeometry.picardDegree` on sections, together with its
+Instead of a morphism `Pic_{X/S} ⟶ ℤ` to the constant sheaf, the degree is spelled out as a
+function `AlgebraicGeometry.picardDegree` on sections, together with its
 naturality `AlgebraicGeometry.picardDegree_map` and its local constancy; the sheaf property of
 the target is not needed.  The tensor product on `Pic (X_T)` is the group law of
 `WeilConjectures/AlgebraicGeometry/Picard/Group.lean`. For a smooth proper curve, the
@@ -139,8 +139,7 @@ theorem picardPresheafDegree_pic_map_of_isPullback [IsProper f] [LocallyOfFinite
   rfl
 
 /-- **The fibrewise degree is locally constant** when `f` is proper, flat and locally of finite
-presentation: the fibre Euler characteristics of `ℒ` and of `𝒪_{X_T}` are locally constant on `T`
-since both modules are invertible, hence of finite presentation and flat over `T`. -/
+presentation. -/
 theorem isLocallyConstant_picardPresheafDegree [IsProper f] [LocallyOfFinitePresentation f]
     [Flat f] {T : Over S} (L : (picardPresheaf f).obj (.op T)) :
     IsLocallyConstant (picardPresheafDegree f L) := by
@@ -179,8 +178,7 @@ lemma Scheme.Modules.eulerCharFiber_eq_of_pic_map_fiberι_eq {Y T : Scheme.{u}} 
 
 /-- **Twisting by a class from the base does not change the fibrewise degree.** For
 `ℒ ∈ Pic (X_T)` and an invertible module `𝒩` on `T`, the fibrewise degree of `ℒ ⊗ f_T^* 𝒩` is
-that of `ℒ`, where `f_T: X_T ⟶ T` is the projection: on the fibre over `t` the module `f_T^* 𝒩`
-is pulled back from `Spec κ(t)`, hence trivial. -/
+that of `ℒ`, where `f_T: X_T ⟶ T` is the projection. -/
 theorem picardPresheafDegree_mul_map_snd {T : Over S} (L : (pullback f T.hom).Pic)
     (N : T.left.Pic) :
     picardPresheafDegree f (T := T) (L * Pic.map (pullback.snd f T.hom) N) =
@@ -223,9 +221,7 @@ lemma exists_picardPresheafDegree_eq {T : Over S} (x : (picardFunctor f).obj.obj
 
 /-- The **degree** of a section `x` of the relative Picard functor `Pic_{X/S}` over `T`: the
 function `T → ℤ` whose value at `t` is the fibrewise degree `deg ℒ_z` of any local
-representative `ℒ ∈ Pic (X_Z)` of `x` along `g: Z ⟶ T`, at any point `z` over `t`.  It is well
-defined by `AlgebraicGeometry.picardDegree_eq`, locally constant when `f` is flat, and natural in
-`T`, so that it is the degree morphism `Pic_{X/S} ⟶ ℤ` to the constant sheaf. -/
+representative `ℒ ∈ Pic (X_Z)` of `x` along `g: Z ⟶ T`, at any point `z` over `t`. -/
 noncomputable def picardDegree {T : Over S} (x : (picardFunctor f).obj.obj (.op T))
     (t : T.left) : ℤ :=
   (exists_picardPresheafDegree_eq f x t).choose
@@ -310,10 +306,8 @@ section BaseChange
 /-- **The degree is invariant under base change along a cartesian square.** Let `C` be a proper
 scheme over a field `K`, let `C'` over a field `K'` sit in a cartesian square over
 `g: Spec K' ⟶ Spec K`, and let `ℒ` be an invertible module on `C`. Then the degree of the pullback
-of `ℒ` to `C'` is the degree of `ℒ`: both are fibre Euler characteristics over the unique points,
-which are invariant under base change
-(`AlgebraicGeometry.Scheme.Modules.eulerCharFiber_pullback_of_isPullback`). The square need not
-be the canonical one, and `g` need not be a `K`-algebra map. -/
+of `ℒ` to `C'` is the degree of `ℒ`. The square need not be the canonical one, and `g` need not
+be a `K`-algebra map. -/
 theorem Scheme.Modules.degree_pullback_of_isPullback {C C' : Scheme.{u}} {K K' : Type u} [Field K]
     [Field K'] [C.Over (Spec (.of K))] [C'.Over (Spec (.of K'))] [IsProper (C ↘ Spec (.of K))]
     (g : Spec (.of K') ⟶ Spec (.of K)) (g' : C' ⟶ C)

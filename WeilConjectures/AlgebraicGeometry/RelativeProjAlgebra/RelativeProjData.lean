@@ -28,9 +28,7 @@ restriction identification. No existence of the output is asserted here.
 
 ## References
 
-* Nagata compactification, sketch data, Relative Proj
 * Stacks Project, Constructions, Tag 01LH
-* Stacks, Tag 01LH
 -/
 
 @[expose] public section
@@ -349,14 +347,10 @@ def localTransition {V W : X.affineOpens} (h : W ≤ V) :
 
 end RelativeProjAlgebra
 
-/-- Relative Proj construction datum over the chosen cover of all affine opens.
-`gluing` includes the functor identity and composition laws and the equifibered squares:
-these identify the overlaps with inverse-image open subschemes and encode the identity,
-inverse and triple-overlap cocycle laws on affine refinements. `localIso`, `local_over`
-and `local_transition` specify the local models, their degree-zero structural maps and
-the restriction-induced overlap maps. The glued scheme and morphism are `gluing.glued`
-and `gluing.toBase`. `restrictionIso` and its equations are the universal affine
-restriction identifications and their compatibility. No existence is assumed or asserted. -/
+/-- Relative Proj construction datum over the cover by all affine opens: relative gluing data
+(`gluing`, with glued scheme `gluing.glued` over `gluing.toBase`), local Proj models with
+their structure maps and overlap transitions, and the affine restriction identifications
+`restrictionIso` with their compatibilities. -/
 structure RelativeProjData {X : Scheme.{u}} (A : RelativeProjAlgebra X) where
   gluing : Scheme.Cover.RelativeGluingData X.directedAffineCover
   localIso : ∀ V : X.affineOpens, gluing.functor.obj V ≅ A.localProj V

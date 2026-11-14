@@ -16,8 +16,6 @@ We show that an integral morphism `f : X ⟶ S` to a quasi-compact quasi-separat
 (`AlgebraicGeometry.Scheme.Hom.exists_finiteApproximation_of_isIntegralHom`, Stacks Project
 Tag 09YZ).
 
-## Implementation details
-
 Start from a presentation `X = lim Tᵢ` with `Tᵢ` finite over `S`
 (`AlgebraicGeometry.Scheme.Hom.nonempty_finiteApproximation_of_isIntegralHom`). Every finite
 `S`-scheme `Tᵢ` is a closed subscheme of a finite `S`-scheme `Yᵢ` of finite presentation
@@ -27,6 +25,18 @@ subschemes `V(K) ⊆ Yᵢ` cut out by the subideal sheaves `K` of finite type of
 category has objects the pairs `(i, K)` and morphisms the `S`-morphisms `V(K) ⟶ V(K')` under `X`.
 It is cofiltered because morphisms from a limit to a scheme of finite presentation factor through
 a stage, uniquely up to passing to a further stage (Stacks Project Tag 01ZC).
+
+## References
+
+* [Stacks Project, Tag 09YZ](https://stacks.math.columbia.edu/tag/09YZ)
+* [Stacks Project, Tag 09ZP](https://stacks.math.columbia.edu/tag/09ZP)
+* [Stacks Project, Tag 09ZQ](https://stacks.math.columbia.edu/tag/09ZQ)
+* [Stacks Project, Tag 01ZC](https://stacks.math.columbia.edu/tag/01ZC)
+
+## Implementation details
+
+The declarations in the namespace `AlgebraicGeometry.Scheme.Hom.FiniteApproximation` (`FPIndex`,
+`fpObj`, `fpDiagram`, `isLimitFpCone`, ...) are auxiliary to this construction.
 -/
 
 @[expose] public section
@@ -80,23 +90,23 @@ open Scheme.IdealSheafData
 variable {X S : Scheme.{u}} {f : X ⟶ S} (F : f.FiniteApproximation)
   (E : ∀ i, (F.p i).ClosedFPEmbedding)
 
-/-- (Implementation) The index type of the finitely presented approximation: pairs of an index
-`i` of `F` and a subideal sheaf of finite type of the ideal sheaf of `F.D.obj i` in its finitely
-presented ambient. -/
+/-- The index type of the finitely presented approximation: pairs of an index `i` of `F` and a
+subideal sheaf of finite type of the ideal sheaf of `F.D.obj i` in its finitely presented
+ambient. -/
 abbrev FPIndex : Type u := Σ i : F.I, ((E i).e.ker.FGSub)
 
 variable {F E}
 
-/-- (Implementation) The stage `V(K)` attached to an index. -/
+/-- The stage `V(K)` attached to an index. -/
 noncomputable abbrev fpObj (c : FPIndex F E) : Scheme.{u} := c.2.1.subscheme
 
-/-- (Implementation) The structure morphism of a stage. -/
+/-- The structure morphism of a stage. -/
 noncomputable abbrev fpP (c : FPIndex F E) : fpObj c ⟶ S := c.2.1.subschemeι ≫ (E c.1).q
 
 lemma ker_le_ker (c : FPIndex F E) : c.2.1.subschemeι.ker ≤ (E c.1).e.ker := by
   rw [ker_subschemeι]; exact c.2.2.1
 
-/-- (Implementation) The closed immersion of `F.D.obj i` into a stage. -/
+/-- The closed immersion of `F.D.obj i` into a stage. -/
 noncomputable abbrev fpT (c : FPIndex F E) : F.D.obj c.1 ⟶ fpObj c :=
   IsClosedImmersion.lift c.2.1.subschemeι (E c.1).e (ker_le_ker c)
 
@@ -108,13 +118,13 @@ lemma fpT_ι (c : FPIndex F E) : fpT c ≫ c.2.1.subschemeι = (E c.1).e :=
 lemma fpT_fpP (c : FPIndex F E) : fpT c ≫ fpP c = F.p c.1 := by
   simp [fpP, (E c.1).e_q]
 
-/-- (Implementation) The morphism from `X` to a stage. -/
+/-- The morphism from `X` to a stage. -/
 noncomputable abbrev fpH (c : FPIndex F E) : X ⟶ fpObj c := F.π.app c.1 ≫ fpT c
 
 lemma π_app_map {i j : F.I} (g : i ⟶ j) : F.π.app i ≫ F.D.map g = F.π.app j := by
   simpa using (F.π.naturality g).symm
 
-/-- (Implementation) The morphisms of the index category: `S`-morphisms under `X`. -/
+/-- The morphisms of the index category: `S`-morphisms under `X`. -/
 def FPHom (c d : FPIndex F E) : Type u :=
   {g : fpObj c ⟶ fpObj d // fpH c ≫ g = fpH d ∧ g ≫ fpP d = fpP c}
 
@@ -133,7 +143,7 @@ lemma fpHom_comp_val {c d e : FPIndex F E} (g : c ⟶ d) (g' : d ⟶ e) :
 lemma fpHom_id_val (c : FPIndex F E) : (𝟙 c : c ⟶ c).1 = 𝟙 _ := rfl
 
 
-/-- (Implementation) The morphism `V(K') ⟶ V(K)` for `K ≤ K'`. -/
+/-- The morphism `V(K') ⟶ V(K)` for `K ≤ K'`. -/
 noncomputable def fpIncl (i : F.I) {K K' : (E i).e.ker.FGSub} (h : K ≤ K') :
     (⟨i, K'⟩ : FPIndex F E) ⟶ ⟨i, K⟩ :=
   ⟨inclusion h, by
@@ -147,14 +157,14 @@ section Stage
 
 variable (F E) [CompactSpace S] [QuasiSeparatedSpace S] (i : F.I)
 
-/-- (Implementation) The structure morphisms of the closed subschemes of the ambient of
+/-- The structure morphisms of the closed subschemes of the ambient of
 `F.D.obj i` cut out by the subideal sheaves of finite type. -/
 @[simps]
 noncomputable def fgSubP : (E i).e.ker.fgSubDiagram ⟶ (Functor.const _).obj S where
   app K := K.unop.1.subschemeι ≫ (E i).q
   naturality K K' g := by simp
 
-/-- (Implementation) `F.D.obj i` is the closed subscheme cut out by its ideal sheaf. -/
+/-- `F.D.obj i` is the closed subscheme cut out by its ideal sheaf. -/
 noncomputable abbrev fpφ : F.D.obj i ⟶ (E i).e.ker.subscheme :=
   IsClosedImmersion.lift (E i).e.ker.subschemeι (E i).e (by rw [ker_subschemeι])
 
@@ -205,13 +215,13 @@ lemma exists_inclusion_comp_eq (K : (E i).e.ker.FGSub) {d : FPIndex F E}
 end Stage
 
 variable (F) in
-/-- (Implementation) The structure morphisms of `F` as a natural transformation. -/
+/-- The structure morphisms of `F` as a natural transformation. -/
 @[simps]
 def pNatTrans : F.D ⟶ (Functor.const F.I).obj S where
   app := F.p
   naturality i j g := by simp [F.map_p]
 
-/-- (Implementation) The morphism of the index category given by a factorization. -/
+/-- The morphism of the index category given by a factorization. -/
 def fpHomMk {j : F.I} {K : (E j).e.ker.FGSub} {c : FPIndex F E} (g : fpObj ⟨j, K⟩ ⟶ fpObj c)
     {i : F.I} (w : j ⟶ i) (hc : c.1 = i) (hg : fpT ⟨j, K⟩ ≫ g = F.D.map w ≫ (hc ▸ fpT c))
     (hq : g ≫ fpP c = fpP ⟨j, K⟩) : (⟨j, K⟩ : FPIndex F E) ⟶ c := by
@@ -261,13 +271,13 @@ instance : IsCofiltered (FPIndex F E) where
 
 variable (F E)
 
-/-- (Implementation) The diagram of the finite, finitely presented stages. -/
+/-- The diagram of the finite, finitely presented stages. -/
 @[simps]
 noncomputable def fpDiagram : FPIndex F E ⥤ Scheme.{u} where
   obj := fpObj
   map g := g.1
 
-/-- (Implementation) The cone with point `X` over the finitely presented stages. -/
+/-- The cone with point `X` over the finitely presented stages. -/
 @[simps]
 noncomputable def fpπ : (Functor.const (FPIndex F E)).obj X ⟶ fpDiagram F E where
   app := fpH
@@ -275,7 +285,7 @@ noncomputable def fpπ : (Functor.const (FPIndex F E)).obj X ⟶ fpDiagram F E w
 
 variable {F E}
 
-/-- (Implementation) The cone over the closed subschemes of the ambient of `F.D.obj j` induced by
+/-- The cone over the closed subschemes of the ambient of `F.D.obj j` induced by
 a cone over the finitely presented stages. -/
 @[simps]
 noncomputable def fgSubConeOfCone (s : Cone (fpDiagram F E)) (j : F.I) :
@@ -286,7 +296,7 @@ noncomputable def fgSubConeOfCone (s : Cone (fpDiagram F E)) (j : F.I) :
     naturality K K' g := by
       exact (Category.id_comp _).trans (s.w (fpIncl j (leOfHom g.unop))).symm }
 
-/-- (Implementation) The morphism to `F.D.obj j` induced by a cone over the finitely presented
+/-- The morphism to `F.D.obj j` induced by a cone over the finitely presented
 stages. -/
 noncomputable def fpLiftApp (s : Cone (fpDiagram F E)) (j : F.I) : s.pt ⟶ F.D.obj j :=
   (E j).e.ker.isLimitFgSubCone.lift (fgSubConeOfCone s j) ≫ inv (fpφ F E j)
@@ -312,7 +322,7 @@ lemma fpLiftApp_map (s : Cone (fpDiagram F E)) {j j' : F.I} (g : j ⟶ j') :
   rw [Category.assoc, h₁, ← Category.assoc, ← Category.assoc, fpLiftApp_fpT, ← s.w m]
   rfl
 
-/-- (Implementation) The finitely presented stages have limit `X`. -/
+/-- The finitely presented stages have limit `X`. -/
 noncomputable def isLimitFpCone : IsLimit (Cone.mk X (fpπ F E)) where
   lift s := F.isLimit.lift (Cone.mk s.pt
     { app := fpLiftApp s

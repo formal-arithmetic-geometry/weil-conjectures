@@ -524,9 +524,8 @@ set_option allowUnsafeReducibility true in
 attribute [local reducible] coefficient
 
 -- Transport the concrete coefficient categories without unfolding their derived models.
-/-- The native coefficient exchange transports to the two shifted root-line maps.
-This is the line-only substep of the rational P1 closure naturality proof; it has
-no Chern adjunct, unit endpoint, or right-derived model comparison. -/
+/-- The native coefficient exchange transports to the two shifted root-line maps, giving the
+line exchange square for the rational projective line. -/
 theorem rational_p1_line_exchange_assembly
     (l : ℕ) [Fact l.Prime] (E : PadicAlgCl.FiniteIntermediateField l)
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

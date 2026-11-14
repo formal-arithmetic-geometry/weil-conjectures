@@ -17,8 +17,8 @@ for affine opens `U' ⊆ X'` and `U ⊆ X` with `g(U') ⊆ U` it provides graded
 base change `Γ(X', U') ⊗_{Γ(X, U)} A(U)ₙ`.
 
 Given such data we construct the comparison morphism `Proj_{X'}(A') ⟶ Proj_X(A)` and show that
-it exhibits `Proj_{X'}(A')` as the fibre product `X' ×_X Proj_X(A)`. As the blueprint remarks,
-flatness of `g` is not needed.
+it exhibits `Proj_{X'}(A')` as the fibre product `X' ×_X Proj_X(A)`. Flatness of `g`
+is not needed.
 
 ## Main results
 

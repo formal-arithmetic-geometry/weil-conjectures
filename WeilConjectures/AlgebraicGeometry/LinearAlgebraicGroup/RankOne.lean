@@ -17,8 +17,8 @@ Let `(W, deg, γ)` be a degree datum with degree-zero subgroup `P`, and let `χ 
 character with values in a commutative group, such as the unit group `Eˣ` of a field. Put
 `z = χ γ`. The *finite part* `χ_fin : w ↦ χ w * z ^ (-deg w)` of `χ` is again a character, it is
 trivial on `γ`, its image is exactly `χ (P)`, and `χ = χ_fin * χ_z` with `χ_z : w ↦ z ^ deg w`.
-This is the factorization of `corollary-rank-one-weights`, read on the degree datum itself rather
-than on its presentation `P ⋊ ℤ` as a split cyclic extension (`SemidirectProduct.finitePart`).
+This factorization is read on the degree datum itself rather than on its presentation `P ⋊ ℤ` as
+a split cyclic extension (`SemidirectProduct.finitePart`).
 
 Applied to the Weil group `W(X₀) = π₁(X₀) ×_{Gal(k / k₀)} ℤ` (`MonoidHom.weilGroup`) with a lift
 `s` of the geometric Frobenius, it says that a rank-one character with finite geometric image is
@@ -43,22 +43,14 @@ product `A × ℤ`, and the map to matrices is `(a, m) ↦ a cᵐ` with `c = χ(
   arithmetic monodromy extension `A × ℤ` of a rank-one representation with finite geometric
   image `A`.
 
-## Blueprint
+## Implementation details
 
-`DegreeDatum.semidirectProductMulEquiv`, `DegreeDatum.existsUnique_mul_zpow` and
-`DegreeDatum.ofSemidirectProduct` implement the split cyclic extension of
-`corollary-rank-one-weights`, whose characters `χ_z` and `χ_fin` are `DegreeDatum.degreeCharacter`
-and `DegreeDatum.finitePart`. `AlgebraicGeometry.Monodromy.DegreeDatum.finitePart_ofWeilGroup`
-implements `corollary-rank-one-weights`;
-`RepresentedDegreeDatum.arithmeticMonodromyExtensionEquivProd`, with the formula `j(a, m) = a cᵐ`
-in `arithmeticMonodromyExtensionHom_arithmeticMonodromyExtensionEquivProd_symm`, implements
-`corollary-rank-one-weights`.
-
-The factorization of `corollary-rank-one-weights` itself is
-`SemidirectProduct.eq_finitePart_mul_degreeCharacter` and its companions, stated on the presentation
-`P ⋊ ℤ`. The `DegreeDatum` versions in this file are the same statements for an abstract degree
-datum, which is the form needed for the Weil group; they are proved directly, since `DegreeDatum` is
-not available in the `Mathlib` mirror file where the `SemidirectProduct` versions live.
+The characters `χ_z` and `χ_fin` are `DegreeDatum.degreeCharacter` and `DegreeDatum.finitePart`.
+The factorization on the presentation `P ⋊ ℤ` is
+`SemidirectProduct.eq_finitePart_mul_degreeCharacter` and its companions. The `DegreeDatum`
+versions in this file are the same statements for an abstract degree datum, which is the form
+needed for the Weil group; they are proved directly, since `DegreeDatum` is not available in the
+`Mathlib` mirror file where the `SemidirectProduct` versions live.
 
 `MonoidHom.weilGroup` is the concrete fibre product `G ×_Γ ℤ`. It is not related here to the
 abstract Weil group `AlgebraicGeometry.WeilGroup` of

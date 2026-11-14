@@ -40,7 +40,7 @@ def orderedAffineRight (A : Type (u + 1)) [CommRing A] (N : ℕ)
           (Scheme.finiteEtaleTateSheaf A N (affineTraceTower S (d + 1)) hA
             ((d + 1 : ℕ) : ℤ))) ⋙ shiftFunctor _ (2 * ((d + 1 : ℕ) : ℤ))
 
-/-- The ordered normal form used to construct the affine-space trace. -/
+/-- The isomorphism between `affineTraceRight` and its ordered normal form `orderedAffineRight`. -/
 @[irreducible]
 def orderedAffineRightIso (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)

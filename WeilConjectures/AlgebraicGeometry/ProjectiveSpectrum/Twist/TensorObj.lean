@@ -15,6 +15,16 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
 
 Free generators of the twisting sheaves over basic opens, and `𝒪(m) ⊗ 𝒪(n) ≅ 𝒪(m + n)`
 (`AlgebraicGeometry.Proj.nonempty_tensorObj_twist_iso`).
+
+## Implementation details
+
+On `D₊(f)` both `𝒪(a) ⊗ 𝒪(b)` and `𝒪(a + b)` are free, with free generators `fᵃ ⊗ fᵇ` and
+`fᵃ⁺ᵇ` having the same transition functions, so the two modules are isomorphic by
+`Scheme.Modules.nonempty_iso_of_isFreeGenerator`.
+
+## TODO
+
+- Construct the canonical isomorphism sending `e^{(a)} ⊗ e^{(b)}` to `e^{(a+b)}`.
 -/
 
 @[expose] public section
@@ -173,12 +183,7 @@ lemma twistPowSection_map_eq_mul_smul (hg : g ∈ 𝒜 1) {a b : ℤ} {W : (Proj
 
 variable (𝒜) in
 /-- **Twists and tensor products**: when the basic open sets `D₊(f)` of the homogeneous elements
-`f` of degree `1` cover `Proj 𝒜`, `𝒪(a) ⊗ 𝒪(b) ≅ 𝒪(a + b)`. On `D₊(f)` both sides are free, with
-free generators `fᵃ ⊗ fᵇ` and `fᵃ⁺ᵇ`, and the transition functions agree: if `fᵃ = c • gᵃ` and
-`fᵇ = d • gᵇ` on `D₊(f) ∩ D₊(g)`, then `fᵃ ⊗ fᵇ = (c d) • gᵃ ⊗ gᵇ` and `fᵃ⁺ᵇ = (c d) • gᵃ⁺ᵇ`.
-The two modules are then isomorphic by `Scheme.Modules.nonempty_iso_of_isFreeGenerator`.
-
-TODO: construct the canonical isomorphism sending `e^{(a)} ⊗ e^{(b)}` to `e^{(a+b)}`. -/
+`f` of degree `1` cover `Proj 𝒜`, `𝒪(a) ⊗ 𝒪(b) ≅ 𝒪(a + b)`. -/
 theorem nonempty_tensorObj_twist_iso (h : ∀ x : Proj 𝒜, ∃ f ∈ 𝒜 1, x ∈ Proj.basicOpen 𝒜 f)
     (a b : ℤ) : Nonempty (twist 𝒜 a ⊗ twist 𝒜 b ≅ twist 𝒜 (a + b)) := by
   let U (i : {f : A // f ∈ 𝒜 1}) : (Proj 𝒜).Opens := Proj.basicOpen 𝒜 i.1

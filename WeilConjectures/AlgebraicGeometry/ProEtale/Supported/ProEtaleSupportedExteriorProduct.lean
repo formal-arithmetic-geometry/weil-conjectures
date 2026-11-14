@@ -120,9 +120,8 @@ noncomputable def supportedModuleSectionsToSections
     dsimp [supportSections, Sheaf.supportedSectionsFunctor]
     simp
 
-/-- Inclusion of the existing pro-etale support kernel into all sections, through
-Mathlib's canonical terminal-evaluation identification. The support functor itself
-is the declaration of definition-local-cohomology, not a second kernel construction. -/
+/-- The inclusion of sections supported on `Z` into all global sections, via the
+identification of global sections with evaluation at the terminal object. -/
 noncomputable def supportedModuleSectionsι
     (A : Type (u + 1)) [CommRing A] {Z X : Scheme.{u}}
     (i : Z ⟶ X) [IsClosedImmersion i] :

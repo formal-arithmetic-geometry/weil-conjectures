@@ -148,12 +148,8 @@ noncomputable def sfProperOpenSheafComparison {U V W T : Scheme.{u}}
     whiskerLeft (sfIntrinsicExtensionByZero k A ⋙ proEtaleConstantModuleDirectImage p A)
       (sfIntrinsicExtensionByZeroAdjunction i A).counit
 
-/-- The proper-support input for the open counit appearing in the comparison.
-The proof is the affine specialization-localization argument in Steps 2--11 of the
-blueprint proof of `lem-exc-proetale-proper-open-sheaf-comparison`: after a base
-change to an affine pro-etale object, quasi-compact representatives reduce to a
-finite principal open and the specialization-zero lemma kills the complement.
-This statement is strictly the componentwise counit assertion needed below. -/
+/-- For `p` proper and `i` an open immersion, the counit of the extension-by-zero adjunction
+for `i` at `p_* i'_! M` is an isomorphism, where `i'` is the base change of `i`. -/
 theorem sfProperOpenCounit_isIso {V W T : Scheme.{u}} (p : V ⟶ T) [IsProper p]
     (i : W ⟶ T) [IsOpenImmersion i] (M :
       proEtaleRingModules (pullback p i)

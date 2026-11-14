@@ -17,12 +17,6 @@ filtration models are assumptions throughout the essential-surjectivity construc
 
 * Bhatt--Scholze, Proposition 6.8.14(2), pp. 61--62, expanded using Lemma 6.8.13 and Stacks Tags
   0145, 014A, 0152, 08J5
-* BS 6.8.14(2)
-* the finite-filtration and truncation expansion of BS 6.8.14(2)
-* BS 6.8.13 and 6.8.14(2)
-* Stacks 0145, 014A
-* Stacks 0152
-* Stacks 08J5
 -/
 
 @[expose] public noncomputable section
@@ -56,7 +50,7 @@ abbrev realize (s : RationalModuleRealization l E X) :=
 instance realizationShift (s : RationalModuleRealization l E X) : s.J.CommShift ℤ := s.shift
 
 /-- A finite integral construction. Every entry is zero, a supplied generator up to shift
-and isomorphism, or a shifted distinguished cone between strictly earlier entries. -/
+and isomorphism, or a shifted distinguished cone between strictly preceding entries. -/
 def FiniteConstruction (G : Integral l E X → Prop) (K : Integral l E X) : Prop :=
   ∃ (n : ℕ) (W : Fin (n + 1) → Integral l E X), W (Fin.last n) = K ∧
     ∀ r : Fin (n + 1), IsZero (W r).obj ∨

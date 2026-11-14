@@ -18,8 +18,7 @@ quasi-compact. A finite covering of `Z_W` by affine ind-étale `V_a = Spec C̄_a
 pro-étale covering of `W`: its members over the closed fibre are the lifts
 `v_W(V_a) = Spec H_B(C̄_a)` of `Algebra.ClosedLift`, which reduce to `V_a`, and its other members
 are basic opens `D(f_b)`, `f_b ∈ J`, of `W ∖ Z_W`, which reduce to the empty scheme
-(`AlgebraicGeometry.exists_ofArrows_closedLiftCover_mem_proetalePrecoverage`, blueprint
-`proposition-extension-zero-restriction-closed-subscheme`).
+(`AlgebraicGeometry.exists_ofArrows_closedLiftCover_mem_proetalePrecoverage`).
 -/
 
 @[expose] public section
@@ -33,8 +32,7 @@ namespace AlgebraicGeometry
 variable {B : Type u} [CommRing B] (J : Ideal B) {ι κ : Type u}
   (C : ι → Type u) [∀ a, CommRing (C a)] [∀ a, Algebra B (C a)] (f : κ → B)
 
-/-- The members of the extended covering of `Spec B` of blueprint
-`proposition-extension-zero-restriction-closed-subscheme`: the lifts `Spec H_B(C̄_a)` of the members
+/-- The members of the extended covering of `Spec B`: the lifts `Spec H_B(C̄_a)` of the members
 `Spec C̄_a` of a covering of the closed fibre, and the basic opens `Spec B_{f_b}`. -/
 noncomputable def closedLiftCoverObj : ι ⊕ κ → Scheme.{u} :=
   Sum.elim (fun a ↦ Spec (.of (Algebra.ClosedLift B (C a))))
@@ -48,17 +46,12 @@ noncomputable def closedLiftCoverHom :
 
 variable [∀ a, Algebra (B ⧸ J) (C a)] [∀ a, IsScalarTower B (B ⧸ J) (C a)]
 
-/-- let `W = Spec B` be affine
-and `Z_W = V(J)` closed with quasi-compact complement. A finite covering of `Z_W` by affine
-ind-étale `Spec C̄_a` extends to a finite pro-étale covering of `W` whose members over the closed
-fibre are the lifts `v_W(Spec C̄_a) = Spec H_B(C̄_a)` (`Algebra.ClosedLift`), and whose other
-members are basic opens `D(f_b)`, `f_b ∈ J`, covering `W ∖ Z_W`. Their reductions to `Z_W` are
-respectively `Spec C̄_a` (`Algebra.ClosedLift.bijective_reduction`) and empty.
-
-Quasi-compactness of the complement selects finitely many `f_b ∈ J` with
-`W ∖ Z_W = ⋃_b D(f_b)`. The images of the lifts cover `Z_W`, since `Spec C̄_a ⟶ Spec B` factors
-through `Spec H_B(C̄_a)`. All members are affine and weakly étale over `W`, `H_B(C̄_a)` being
-ind-étale, and the family is finite and jointly surjective, hence a pro-étale covering. -/
+/-- Let `W = Spec B` be affine and `Z_W = V(J)` closed with quasi-compact complement. A finite
+covering of `Z_W` by affine ind-étale `Spec C̄_a` extends to a finite pro-étale covering of `W`
+whose members over the closed fibre are the lifts `v_W(Spec C̄_a) = Spec H_B(C̄_a)`
+(`Algebra.ClosedLift`), and whose other members are basic opens `D(f_b)`, `f_b ∈ J`, covering
+`W ∖ Z_W`. Their reductions to `Z_W` are respectively `Spec C̄_a`
+(`Algebra.ClosedLift.bijective_reduction`) and empty. -/
 theorem exists_ofArrows_closedLiftCover_mem_proetalePrecoverage
     (hJ : IsCompact (PrimeSpectrum.zeroLocus (J : Set B))ᶜ) [Finite ι]
     [∀ a, Algebra.IndEtale (B ⧸ J) (C a)]

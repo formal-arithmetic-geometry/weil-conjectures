@@ -26,14 +26,6 @@ We show that this is a Galois point in the sense of
 an equivalence between abelian étale sheaves on `Spec K` and discrete `G`-modules, and
 `Hⁿ(Spec K_ét, F) ≃ Hⁿ(G, F_Ω)`.
 
-The proof goes through the étale `K`-schemes `Spec E` for finite subextensions `E` of `Ω/K`
-with their canonical geometric point `x_E` (`AlgebraicGeometry.Scheme.galoisPointFiberSpec`):
-
-* the fibre at `Spec E` is a single `G`-orbit, as every `K`-embedding `E → Ω` extends to an
-  automorphism of `Ω`, and the stabiliser of `x_E` is the open subgroup `Gal(Ω/E)`;
-* every element of the fibre of an étale `K`-scheme `X` comes from some `(Spec E, x_E)`, as the
-  residue fields of `X` are finite over `K`.
-
 ## Main definitions and statements
 
 - `AlgebraicGeometry.Scheme.galoisPoint`: the geometric point of `Spec K` given by `Ω`.
@@ -42,6 +34,20 @@ with their canonical geometric point `x_E` (`AlgebraicGeometry.Scheme.galoisPoin
 - `AlgebraicGeometry.Scheme.etaleSheafEquivDiscreteModule`: the equivalence of categories
   between abelian étale sheaves on `Spec K` and discrete `Gal(Ω/K)`-modules.
 - `AlgebraicGeometry.Scheme.sheafHAddEquivGaloisH`: `Hⁿ(Spec K_ét, F) ≃ Hⁿ(Gal(Ω/K), F_Ω)`.
+
+## Implementation details
+
+The proof goes through the étale `K`-schemes `Spec E` for finite subextensions `E` of `Ω/K`
+with their canonical geometric point `x_E` (`AlgebraicGeometry.Scheme.galoisPointFiberSpec`):
+
+* the fibre at `Spec E` is a single `G`-orbit, as every `K`-embedding `E → Ω` extends to an
+  automorphism of `Ω`, and the stabiliser of `x_E` is the open subgroup `Gal(Ω/E)`;
+* every element of the fibre of an étale `K`-scheme `X` comes from some `(Spec E, x_E)`, as the
+  residue fields of `X` are finite over `K`.
+
+We use `ℤ`-coefficients: an étale sheaf of modules over a finite ring `A` is in particular an
+abelian étale sheaf, and the statements needed about such sheaves concern their underlying
+abelian groups.
 -/
 
 @[expose] public section
@@ -376,12 +382,7 @@ section main
 /-- **Étale sheaves on a field and discrete Galois modules.** Let `K` be a field with separable
 closure `Ω` and absolute Galois group `G = Gal(Ω/K)`. The geometric fibre functor at
 `Spec Ω ⟶ Spec K`, with the action of `G` by transport of structure, is an equivalence between
-abelian étale sheaves on `Spec K` and discrete `G`-modules. It is exact, being an equivalence
-of abelian categories; global sections correspond to invariants
-(`AlgebraicGeometry.Scheme.sheafHZeroAddEquivInvariants`) and cohomology to continuous
-cohomology (`AlgebraicGeometry.Scheme.sheafHAddEquivGaloisH`). We use `ℤ`-coefficients: an
-étale sheaf of modules over a finite ring `A` is in particular an abelian étale sheaf, and the
-statements needed about such sheaves concern their underlying abelian groups. -/
+abelian étale sheaves on `Spec K` and discrete `G`-modules. -/
 noncomputable def etaleSheafEquivDiscreteModule :
     Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1} ≌
       DiscreteModule.{u + 1} Gal(Ω/K) :=

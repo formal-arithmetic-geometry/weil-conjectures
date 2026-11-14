@@ -24,12 +24,11 @@ import Mathlib.AlgebraicGeometry.Noetherian
 /-!
 # Bounded-below proper direct image of ind-constructible complexes
 
-IndCons is the replete small filtered-colimit closure `ObjectProperty.ind` of the
-finite constant-model constructibility predicate in the actual module-object category.
-The condition on every cohomology object is precisely membership in Dic. The two
+Ind-constructibility is the replete small filtered-colimit closure `ObjectProperty.ind` of the
+finite constant-model constructibility predicate in the module-object category, imposed on
+every cohomology object. The two
 statements use the canonical condensed finite subextension and algebraic-closure rings.
-The standing scheme setting is that of sk-def-sfb-dc-setting, as specified by the
-proper-heart theorem used in the source.
+The standing scheme setting is that of the proper-heart theorem used in the proof.
 -/
 
 @[expose] public section

@@ -24,10 +24,7 @@ import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 ## References
 
 * Bhatt--Scholze, Definition 6.8.1 and Lemma 4.2.12
-* Bhatt--Scholze, Definition 6.8.1
-* Stacks 03P5
-* Stacks 03EK
-* Stacks Project, Tag 03EK
+* Stacks Project, Tags 03EK and 03P5
 -/
 
 @[expose] public section
@@ -71,8 +68,7 @@ private noncomputable def coefficientContinuousSheaf (X : Scheme.{t})
   ⟨ProEtale.lisseContinuousCommRingPresheafUniverses X T,
     coefficientContinuousPresheaf_isSheaf X T⟩
 
-/-- The coefficient valuation ring is the finite integral closure of the base DVR.
-This is the arithmetic finite-basis step in the proof below. -/
+/-- The coefficient valuation ring is finite free over `ℤ_[l]`. -/
 private theorem integral_basis (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :
     ∃ k : ℕ, Nonempty (@Module.Basis (Fin k) ℤ_[l]
@@ -273,9 +269,8 @@ private noncomputable def continuousCoefficientConstants (S : Scheme.{t})
 open CategoryTheory.Limits in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-/-- Sheafified constants are discrete-valued continuous functions. Open fibres give
-local surjectivity; an empty object supplies local equality of distinct constants.
-This is the pro-etale ring version of the constant-sheaf argument in Stacks 03P5. -/
+/-- The constant pro-étale ring sheaf on a discrete ring is the sheaf of continuous
+(locally constant) coefficient functions, compatibly with the constants. -/
 private theorem discreteCoefficientComparisonOfUniverses (S : Scheme.{t})
     (R : Type (max u (t + 1))) [CommRing R] [TopologicalSpace R] [IsTopologicalRing R]
     [DiscreteTopology R] :
@@ -976,10 +971,8 @@ end CompletionScalarTransport
 open CategoryTheory.Limits in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-/-- Finite freeness gives the tensor/completion bijection. To identify the map,
-approximate a completed scalar simultaneously at a target level and at the finite
-level through which its specified scalar map factors. The scalar square then proves
-the pure-tensor formula after every target projection. -/
+/-- For a finite free `A`-algebra `B`, a ring map `B ⊗[A] R →+* T` compatible with the
+given models `R` of the `I`-adic completion of `A` and `T` of that of `B` is bijective. -/
 private theorem tensor_completion_comparison
     {A B R T : Type v} [CommRing A] [CommRing B] [CommRing R] [CommRing T]
     [Algebra A B] [Algebra A R] [Module.Free A B] [Module.Finite A B]

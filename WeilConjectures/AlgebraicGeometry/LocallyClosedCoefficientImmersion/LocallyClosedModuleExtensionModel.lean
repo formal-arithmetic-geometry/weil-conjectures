@@ -12,8 +12,12 @@ import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 /-!
 # A fixed closed-then-open model for locally closed extension
 
-The functors here are composites of actual closed direct image and open extension.
-All choices below use proved existence results, never an unfinished existence claim.
+The functors here are composites of closed direct image and open extension.
+
+## Implementation details
+
+`ModelPresentation` records the closed-then-open functor together with an equality fixing its
+data; its nominal type keeps kernel reduction of module objects small.
 
 ## References
 
@@ -36,7 +40,8 @@ namespace AlgebraicGeometry.Scheme
 
 namespace LocallyClosedCoefficientImmersion
 
-/-- A closed-then-open factorization retaining its actual coefficient identification. -/
+/-- A closed-then-open factorization of a coefficient immersion, with its coefficient
+identification. -/
 structure ExtensionFactorization {S X : LocallyClosedCoefficients.{u}}
     (a : LocallyClosedCoefficientImmersion S X) where
   middle : LocallyClosedCoefficients.{u}
@@ -92,12 +97,13 @@ theorem factorization_nonempty {S X : LocallyClosedCoefficients.{u}}
   congr 1
   simp
 
-/-- Choose a geometric factorization using the proved immersion factorization theorem. -/
+/-- A chosen closed-then-open factorization of a coefficient immersion. -/
 def extensionFactorization {S X : LocallyClosedCoefficients.{u}}
     (a : LocallyClosedCoefficientImmersion S X) : ExtensionFactorization a :=
   Classical.choice (factorization_nonempty a)
 
-/-- Existence of the exact open extension, with its actual invertible adjunction unit. -/
+/-- An open coefficient immersion admits an exact left adjoint open extension with invertible
+adjunction unit. -/
 theorem open_extension_exists {S X : LocallyClosedCoefficients.{u}}
     (v : LocallyClosedCoefficientImmersion S X) (hv : IsOpenImmersion v.hom) :
     ∃ F : proEtaleRingModules S.scheme S.ring ⥤ proEtaleRingModules X.scheme X.ring,
@@ -121,12 +127,12 @@ theorem open_extension_exists {S X : LocallyClosedCoefficients.{u}}
       (Iso.refl _) v.coefficient
   exact ⟨F, ha, hl, hc, adj, hu⟩
 
-/-- The open factor chosen from the proved open-extension construction. -/
+/-- The chosen open extension functor along an open coefficient immersion. -/
 def modelOpenExtension {S X : LocallyClosedCoefficients.{u}}
     (v : LocallyClosedCoefficientImmersion S X) (hv : IsOpenImmersion v.hom) :=
   (open_extension_exists v hv).choose
 
-/-- The actual adjunction used to construct the open factor. -/
+/-- The adjunction between the chosen open extension and pullback. -/
 def modelOpenAdjunction {S X : LocallyClosedCoefficients.{u}}
     (v : LocallyClosedCoefficientImmersion S X) (hv : IsOpenImmersion v.hom) :
     modelOpenExtension v hv ⊣ v.pull :=
@@ -159,8 +165,8 @@ instance modelClosed_counit_isIso {S X : LocallyClosedCoefficients.{u}}
     IsIso (proEtaleRingModuleAdjunction c.hom X.ring S.ring c.coefficient).counit :=
   (closed_properties c hc).2.2
 
-/-- A presentation of the actual closed-then-open functor. The equality field fixes
-its data exactly, while its nominal type keeps kernel reduction of module objects small. -/
+/-- A presentation of the closed-then-open functor: a functor together with an equality to
+the closed direct image followed by the open extension. -/
 structure ModelPresentation {S X : LocallyClosedCoefficients.{u}}
     (a : LocallyClosedCoefficientImmersion S X) where
   functor : proEtaleRingModules S.scheme S.ring ⥤ proEtaleRingModules X.scheme X.ring
@@ -177,14 +183,14 @@ theorem modelPresentation_nonempty {S X : LocallyClosedCoefficients.{u}}
     (a : LocallyClosedCoefficientImmersion S X) : ModelPresentation a :=
   Classical.choice (modelPresentation_nonempty a)
 
-/-- Closed direct image followed by the constructed open extension, with its
-specified presentation. No unfinished existence theorem supplies this data. -/
+/-- The model locally closed extension: closed direct image followed by the constructed open
+extension. -/
 @[irreducible] def modelExtension {S X : LocallyClosedCoefficients.{u}}
     (a : LocallyClosedCoefficientImmersion S X) :
     proEtaleRingModules S.scheme S.ring ⥤ proEtaleRingModules X.scheme X.ring :=
   a.modelPresentation.functor
 
-/-- The model is equal to the actual composite, including its object and map data. -/
+/-- The model extension equals the closed direct image followed by the open extension. -/
 theorem modelExtension_eq {S X : LocallyClosedCoefficients.{u}}
     (a : LocallyClosedCoefficientImmersion S X) :
     a.modelExtension = a.extensionFactorization.closed.push ⋙

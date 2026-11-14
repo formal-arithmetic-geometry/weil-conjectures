@@ -55,6 +55,12 @@ geometric point is exact.
 - `AlgebraicGeometry.Scheme.preservesFiniteLimits_geometricStalkFunctor`,
   `AlgebraicGeometry.Scheme.preservesFiniteColimits_geometricStalkFunctor`: geometric stalks of
   abelian étale sheaves are exact.
+
+## Implementation details
+
+No quasi-compactness or quasi-separatedness of `f` is needed in
+`AlgebraicGeometry.Scheme.isLimitStrictLocalizationConePullback`: base change
+`Over S ⥤ Over X` is a right adjoint and `Over X ⥤ Scheme` creates connected limits.
 -/
 
 @[expose] public section
@@ -272,11 +278,7 @@ noncomputable def isLimitStrictLocalizationConeOver : IsLimit (strictLocalizatio
 /-- **Base change commutes with the neighbourhood limit**: for any morphism `f: X ⟶ S`, the
 fibre product `S_(s) ×_S X` is the limit of the fibre products `V ×_S X` over the affine pointed
 étale neighbourhoods `(V, v)` of `s`. The cone is the image of `strictLocalizationConeOver s`
-under base change along `f`, whose point is `pullback (strictLocalizationToBase s) f`.
-
-The blueprint assumes `f` quasi-compact and quasi-separated; this is not needed, since base
-change `Over S ⥤ Over X` is a right adjoint and the forgetful functor `Over X ⥤ Scheme` creates
-connected limits. -/
+under base change along `f`, whose point is `pullback (strictLocalizationToBase s) f`. -/
 noncomputable def isLimitStrictLocalizationConePullback {X : Scheme.{u}} (f : X ⟶ S) :
     IsLimit ((CategoryTheory.Over.forget X).mapCone
       ((CategoryTheory.Over.pullback f).mapCone (strictLocalizationConeOver s))) :=

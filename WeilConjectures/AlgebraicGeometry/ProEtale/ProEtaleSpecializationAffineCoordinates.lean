@@ -9,6 +9,18 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.ClosedSiteLift
 
 import WeilConjectures.AlgebraicGeometry.ProEtale.Replete
 
+/-!
+# Affine coordinates for pro-étale specialization
+
+Weak contractibility and the closed-fibre specialization condition at an affine pro-étale
+object transfer to its affine coordinate ring.
+
+## References
+
+* Stacks Project, Tag 09AC (first reduction)
+* Stacks Project, Tag 01IH (closed immersions into affine schemes)
+-/
+
 @[expose] public section
 
 universe u
@@ -89,28 +101,8 @@ private theorem quotient_specialization {T Y : Scheme.{u}} [IsAffine Y]
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Affine coordinates transport projectivity of evaluation and the closed-fibre
-specialization condition. The ideal is the actual kernel of the global-sections
-map of the closed base change, rather than an ideal selected from existence.
-
-Source: Stacks Project, Tag 09AC, first reduction, and Tag 01IH for closed
-immersions into affine schemes. The single-cover lifting criterion is
-`AffineProEt.isLocallySurjective_iff_of_isSheaf` in the source library.
-
-Proof. An epimorphism of sheaves on the affine basis lifts any given section
-along a single surjective affine cover. Compose that cover with the affine
-coordinate isomorphism and the structure map to X. Subcanonical Yoneda sends
-this cover to an epimorphism of set sheaves on X.ProEt: maps agreeing after
-the cover agree by separatedness. The hypothesis at V lifts the identity
-section to a section of the cover. Transport it to affine coordinates and
-restrict the local lift along it. Naturality and the section equation give
-a preimage of the original section.
-The closed base change has a surjective global-sections map. Its quotient by
-the displayed kernel maps to the coordinate ring by the first isomorphism
-theorem. Composing its spectrum map with the canonical toSpecΓ map gives a
-map from the closed fibre to the quotient spectrum, commuting with the
-projection by naturality. Push the assumed specialization forward along
-V.left.isoSpec.hom and lift its closed endpoint to the pullback along the
-identity. All constructions include empty schemes and the zero ring. -/
+specialization condition, where the ideal `I` is the kernel of the global-sections map of the
+closed base change. -/
 theorem specialization_affine_coordinates
     {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
     (V : X.ProEt) [IsAffine V.left]

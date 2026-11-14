@@ -35,9 +35,7 @@ runs on.  The *readout* says that a positive central pair `(N, z)` computes the 
 weight of a subquotient on which `z` acts by a scalar `c_Q`: `dw_λ(Q) = λ(c_Q) / N`.  The
 *tensor* and *exterior* propositions say that the determinant weights of the simple constituents
 of `V ⊗ E` and of `⋀^s V` are, respectively, sums `dw_λ(V_i) + dw_λ(E_j)` and `s`-fold subsums of
-the rank-counted weight list of `V`.  None of the three needs `V` or `E` to be semisimple: the
-exterior statement is first proved for a semisimple `V` and then transferred along a composition
-series to the semisimplification, whose exterior powers have the same constituents.
+the rank-counted weight list of `V`.  None of the three needs `V` or `E` to be semisimple.
 
 Subrepresentations are Mathlib's `Subrepresentation`, so a subquotient is
 `Subrepresentation.subquotient S U` for `U < S`, and semisimplicity is the class
@@ -48,13 +46,6 @@ rational representation `r` of the arithmetic monodromy group `G` is meant to re
 case, because `r(G)` is again a matrix group, hence the defining representation of another
 represented degree datum; that reduction needs a transport of the positive central pair `(N, z)`
 along `r`, which is not stated here.
-
-The readout is proved by taking determinants in `z = h Fᴺ`, with `h` in the geometric monodromy
-group `H`.  The determinant of the action on `Q` is a polynomial function on the stabilizer of
-`U ≤ S` (`Matrix.GeneralLinearGroup.exists_evalAlgHom_eq_det_of_mk_eq`), so its finitely many
-values on `ρ(P)` are also its values on the closure `H`
-(`Matrix.GeneralLinearGroup.evalAlgHom_mem_of_mem_zeroLocus_vanishingIdeal`).  The character
-then kills the finite-order factor contributed by `h`.
 
 The last section reads the weight of a rank-one character off a single element of positive
 degree.
@@ -99,26 +90,17 @@ degree.
   `RepresentedDegreeDatum.exists_detWeight_eq_of_isPositiveCentralPair_of_surjective`: the readout
   for an irreducible quotient of such a representation.
 
-## Blueprint
+## Implementation details
 
-`Representation.RealCharacter`, `Representation.HasFiniteGeometricDet`,
-`Representation.detWeight` and `Representation.detWeight_mul_of_mem_ker` implement
-`definition-determinant-weight--1`; `RepresentedDegreeDatum.detWeight_eq_of_isPositiveCentralPair`
-implements `lemma-determinant-weight-from-central-scalar--1`, and together with
-`RepresentedDegreeDatum.detWeight_eq_of_isPositiveCentralPair_of_basis` and
-`RepresentedDegreeDatum.exists_detWeight_eq_of_isPositiveCentralPair_of_isIrreducible` the
-degree-datum form of `lemma-determinant-weight-from-central-scalar`;
-`DegreeDatum.norm_apply_eq_zpow` implements `corollary-rank-one-weights`, and
-`DegreeDatum.forall_norm_eq_rpow_iff_exists` and `DegreeDatum.forall_norm_eq_rpow_iff_forall`
-implement `corollary-rank-one-weights` for a character along a family of Frobenius elements;
-`Representation.exists_detWeight_eq_add_of_subquotient_tprod` implements `sk-p-tensor`, and together
-with its converse `Representation.exists_isIrreducible_subquotient_tprod_detWeight_eq_add` the node
-`proposition-determinant-weights-tensor-operations--1`;
-`Representation.exists_multiset_le_and_detWeight_eq_sum_of_exteriorPower` implements
-`sk-p-exterior`; `Representation.CompositionSeries.exteriorPower_detWeight` implements
-`proposition-determinant-weights-tensor-operations--2`, for a non-semisimple `V` and with the
-converse. `Representation.CompositionSeries.weightMultiset` is the list of constituent weights of
-`definition-determinant-weight--1`.
+The exterior statement is first proved for a semisimple `V` and then transferred along a
+composition series to the semisimplification, whose exterior powers have the same constituents.
+
+The readout is proved by taking determinants in `z = h Fᴺ`, with `h` in the geometric monodromy
+group `H`.  The determinant of the action on `Q` is a polynomial function on the stabilizer of
+`U ≤ S` (`Matrix.GeneralLinearGroup.exists_evalAlgHom_eq_det_of_mk_eq`), so its finitely many
+values on `ρ(P)` are also its values on the closure `H`
+(`Matrix.GeneralLinearGroup.evalAlgHom_mem_of_mem_zeroLocus_vanishingIdeal`).  The character
+then kills the finite-order factor contributed by `h`.
 -/
 
 @[expose] public section
@@ -144,9 +126,8 @@ def HasFiniteGeometricDet (deg : W →* Multiplicative ℤ) (ρ : Representation
 /-- The *determinant weight* of a representation with respect to a real character `χ` and
 a degree-one element `γ` is `dw_χ(ρ) = χ(δ(γ)) / dim V`.
 
-The blueprint only defines it for `V ≠ 0`. For `V = 0` the division by `dim V = 0` makes it the
-junk value `0`; the same happens when `V` is infinite-dimensional, as `Module.finrank` is then
-`0`. Statements about `detWeight` assume `V` nonzero and finite-dimensional where it matters. -/
+For `V = 0` the division by `dim V = 0` makes it the junk value `0`; the same happens when `V`
+is infinite-dimensional, as `Module.finrank` is then `0`. -/
 noncomputable def detWeight (χ : RealCharacter k) (γ : W) (ρ : Representation k W V) : ℝ :=
   Multiplicative.toAdd (χ (ρ.detCharacter γ)) / Module.finrank k V
 
@@ -475,10 +456,9 @@ open Module Matrix.GeneralLinearGroup Representation
 universe u
 
 /-- The exterior-power weight theorem for a degree datum `D₀`, that is, for a surjective degree
-map and a chosen element of degree one.  Following the blueprint: a positive central pair `(N, z)`
-for the datum of `V` acts on each simple summand `Vs j` by a scalar `c_j` with
-`dw(Vs j) = χ(c_j) / N`; on `⋀^s V` it is diagonal with entries `∏_{i ∈ I} c_i`, and on the
-simple constituent `Q` by one of these, so the readout gives `dw(Q) = ∑_{i ∈ I} χ(c_i) / N`. -/
+map and a chosen element of degree one: for `V = ⊕ Vs j` with simple summands, every simple
+subquotient `Q` of `⋀^s V` has weight `dw(Q) = T.sum` for a sub-multiset `T` of size `s` of the
+rank-counted weight multiset of `V`. -/
 theorem DegreeDatum.exists_multiset_le_and_detWeight_eq_sum_of_exteriorPower
     {k : Type u} [Field k] [IsAlgClosed k] [CharZero k] {W : Type*} [Group W] (D₀ : DegreeDatum W)
     (χ : RealCharacter k)
@@ -616,10 +596,7 @@ theorem DegreeDatum.exists_multiset_le_and_detWeight_eq_sum_of_exteriorPower
 /-- The converse of `DegreeDatum.exists_multiset_le_and_detWeight_eq_sum_of_exteriorPower`: if all
 simple constituents of `⋀^s V` have finite geometric determinant, every sub-multiset `T` of size
 `s` of the rank-counted weight multiset is the weight `dw(Q) = T.sum` of some simple constituent
-`Q` of `⋀^s V`.  Following the blueprint: `T` is the list of weights of an `s`-element set `I` of
-basis vectors adapted to the decomposition, the central element acts on the wedge `e_I` by
-`∏_{i ∈ I} c_i`, and a simple constituent of the corresponding eigenspace has the weight
-`∑_{i ∈ I} χ(c_i) / N`. -/
+`Q` of `⋀^s V`. -/
 theorem DegreeDatum.exists_detWeight_eq_sum_of_exteriorPower
     {k : Type u} [Field k] [IsAlgClosed k] [CharZero k] {W : Type*} [Group W] (D₀ : DegreeDatum W)
     (χ : RealCharacter k)
@@ -753,12 +730,7 @@ theorem DegreeDatum.exists_detWeight_eq_sum_of_exteriorPower
   simp only [c, map_prod, toAdd_prod, Finset.sum_div, f, hdw]
 
 /-- The tensor-product weight theorem for a degree datum `D₀` and irreducible `V` and `E`: every
-subquotient `Q` of `V ⊗ E` with finite geometric determinant has `dw(Q) = dw(V) + dw(E)`.
-Following the blueprint: a positive central pair `(N, z)` for the semisimple datum of `V ⊕ E`
-acts on `V` by a scalar `c` and on `E` by a scalar `d` (Schur's lemma), with `dw(V) = χ(c) / N`
-and `dw(E) = χ(d) / N`.  Transported along the polynomial Kronecker square, it acts on the
-quotient `V ⊗ E` of `(V ⊕ E) ⊗ (V ⊕ E)` by `c d`, hence on the preimage of `Q`, and the readout
-gives `dw(Q) = χ(c d) / N`. -/
+subquotient `Q` of `V ⊗ E` with finite geometric determinant has `dw(Q) = dw(V) + dw(E)`. -/
 theorem DegreeDatum.detWeight_subquotient_tprod_eq_add
     {k : Type u} [Field k] [IsAlgClosed k] [CharZero k] {W : Type*} [Group W] (D₀ : DegreeDatum W)
     (χ : RealCharacter k)
@@ -870,10 +842,7 @@ simple constituent `Q = S / U` of `⋀^s V` all have finite geometric determinan
 the sum of a sub-multiset of the weight multiset of size `s`, that is, `a_{i₁} + ⋯ + a_{i_s}` for
 indices `i₁ < ⋯ < i_s` in the rank-counted weight list.
 
-The degree map need not be surjective and `γ` need not have degree one: the degrees are the
-multiples of some `a`, dividing by `a` gives a degree datum, and every weight at `γ` is the same
-multiple of the corresponding weight at a degree-one element.  If all degrees vanish, all the
-weights vanish. -/
+The degree map need not be surjective and `γ` need not have degree one. -/
 theorem exists_multiset_le_and_detWeight_eq_sum_of_exteriorPower [IsAlgClosed k] [CharZero k]
     (χ : RealCharacter k) (deg : W →* Multiplicative ℤ) (γ : W)
     {V : Type*} [AddCommGroup V] [Module k V] [FiniteDimensional k V] [Nontrivial V]
@@ -1009,8 +978,7 @@ theorem exists_detWeight_eq_sum_of_exteriorPower [IsAlgClosed k] [CharZero k]
 and `E` of a degree datum, over an algebraically closed field of characteristic zero: if `V`, `E`
 and a subquotient `Q = S / U` of `V ⊗ E` have finite geometric determinant, then
 `dw_χ(Q) = dw_χ(V) + dw_χ(E)`.  The degree map need not be surjective and `γ` need not have degree
-one, as in `exists_multiset_le_and_detWeight_eq_sum_of_exteriorPower`; the proof is
-`DegreeDatum.detWeight_subquotient_tprod_eq_add`. -/
+one. -/
 theorem detWeight_subquotient_tprod_eq_add [IsAlgClosed k] [CharZero k]
     (χ : RealCharacter k) (deg : W →* Multiplicative ℤ) (γ : W)
     {V E : Type*} [AddCommGroup V] [Module k V] [FiniteDimensional k V]
@@ -1040,13 +1008,7 @@ algebraically closed field of characteristic zero, and let `Q` be a simple const
 presented as a subquotient `S / U` for subrepresentations `U < S` of `V ⊗ E`.  If `Q` and all
 simple constituents of `V` and of `E` have finite geometric determinant, then
 `dw_χ(Q) = dw_χ(V_i) + dw_χ(E_j)` for a simple constituent `V_i = SV / UV` of `V` and a simple
-constituent `E_j = SE / UE` of `E`.  Neither `V`, nor `E`, nor `V ⊗ E` is assumed semisimple.
-
-The proof follows the blueprint: `Q` is a subquotient of some `V_i ⊗ E_j`
-(`Subrepresentation.exists_subquotient_tprod_equiv`), on which a positive central pair for the
-semisimple representation `V_i ⊕ E_j` acts by the product of its scalars on `V_i` and on `E_j`
-(`detWeight_subquotient_tprod_eq_add`).  The converse is
-`exists_isIrreducible_subquotient_tprod_detWeight_eq_add`. -/
+constituent `E_j = SE / UE` of `E`.  Neither `V`, nor `E`, nor `V ⊗ E` is assumed semisimple. -/
 theorem exists_detWeight_eq_add_of_subquotient_tprod [IsAlgClosed k] [CharZero k]
     (χ : RealCharacter k) (deg : W →* Multiplicative ℤ) (γ : W)
     {V E : Type*} [AddCommGroup V] [Module k V] [FiniteDimensional k V]
@@ -1307,11 +1269,7 @@ map `deg` and an element `γ` at which the weights are taken, and let `s` be a c
   size `r` of the rank-counted constituent weights (in which `dw(A_i)` occurs `dim A_i` times);
 * conversely, every such sum `T.sum` is the determinant weight of some simple constituent.
 
-Grouping equal weights, a sub-multiset `T` of size `r` is a tuple `(n_γ)` indexed by the distinct
-weights `γ`, with `0 ≤ n_γ ≤ r(γ)` and `∑ n_γ = r`, of weight `∑ n_γ γ`: this is the formulation of
-the blueprint. Neither `V` nor `⋀^r V` is assumed semisimple: both directions are reduced to the
-semisimplification `V^ss = ⨁ A_i`, whose exterior powers have the same constituents
-(`constituentsLE_exteriorPower_semisimplification`). -/
+Neither `V` nor `⋀^r V` is assumed semisimple. -/
 theorem exteriorPower_detWeight [IsAlgClosed k] [CharZero k] [FiniteDimensional k V]
     [Nontrivial V] (χ : RealCharacter k) (deg : W →* Multiplicative ℤ) (γ : W)
     (s : ρ.CompositionSeries) (r : ℕ) (hdetA : ∀ i, (s.factor i).HasFiniteGeometricDet deg)

@@ -20,10 +20,17 @@ public import Mathlib.RingTheory.DedekindDomain.Dvr
 /-!
 # Canonical presentations of ind-constructible sheaves
 
+For the two canonical condensed coefficient rings, every ind-constructible sheaf `B` is the
+filtered colimit of all constructible modules mapping to it, and every small filtered
+constructible presentation of `B` is final in this category
+(`AlgebraicGeometry.ProEtale.indHeart_canonicalPresentation`).
+
+## Implementation details
+
 `CostructuredArrow` is exactly the category of constructible modules mapping to B.
 `Functor.isDenseAt` asserts the colimit property for its tautological cocone, whose
 leg at (C,c) is c. Small diagrams and essential smallness use universe u+1, as in
-`IndHeartFullFaithfulnessAssertions` and prose-01-10. The universal property
+`IndHeartFullFaithfulnessAssertions`. The universal property
 over the full essentially small category is equivalent to the one over a small skeleton.
 -/
 
@@ -38,13 +45,10 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- The canonical-presentation assertions for the coefficient ring object Λ on X.
-Here IndCons is the replete filtered-colimit closure `ObjectProperty.ind`, as in
-`proposition-ind-constructible-sheaves`. The category J(B) is the existing costructured-arrow
-category of the constructible inclusion. Density at B means precisely that the cocone
-with legs c at (C,c) is a colimit, rather than just that some colimit object is isomorphic
-to B. The final clause applies to every small filtered constructible colimit presentation,
-with the functor to J(B) induced by its specified cocone legs. -/
+/-- The canonical-presentation assertions for the coefficient ring object Λ on X: for every
+ind-constructible `B`, the category J(B) of constructible modules mapping to `B` is essentially
+small and filtered, its tautological cocone (with leg `c` at `(C, c)`) is a colimit, and every
+small filtered constructible colimit presentation of `B` induces a final functor to J(B). -/
 def IndHeartCanonicalPresentationAssertions
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     (X : Scheme.{u}) : Prop :=
@@ -61,7 +65,8 @@ def IndHeartCanonicalPresentationAssertions
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-/-- The cofinality argument for a filtered presentation by finitely presentable objects. -/
+/-- A filtered presentation of `B` by finitely presentable objects of `P` is final in the
+category of objects of `P` over `B`. -/
 private theorem final_constructiblePresentation
     {C : Type*} [Category.{u + 1} C] (P : ObjectProperty C)
     (hP : ∀ A : P.FullSubcategory, IsFinitelyPresentable.{u + 1} A.obj)

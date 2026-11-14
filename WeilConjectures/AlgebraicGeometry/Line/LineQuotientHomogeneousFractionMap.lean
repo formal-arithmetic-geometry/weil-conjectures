@@ -39,12 +39,7 @@ import WeilConjectures.AlgebraicGeometry.Graded.GradedLineHomogeneousFractionAtl
 
 ## References
 
-* Stacks Project, Constructions, Tags 01OA and 01O9
-* Stacks, Constructions, Tag 01OA
-* Stacks, Constructions, Tags 01OA and 01O9
-* Stacks, Constructions, Tags 01O9 and 01OA
-* Stacks, Constructions, Tags 01NA and 01O9
-* Stacks, Constructions, Tags 01NA, 01O9 and 01OA
+* Stacks Project, Constructions, Tags 01NA, 01O9 and 01OA
 -/
 
 @[expose] public section
@@ -84,7 +79,8 @@ noncomputable def quotientGeneratorCoefficient {S T : Scheme.{u}} (h : T ⟶ S)
     (q.app W.1 (((tensorPullback h).obj E).val.map (homOfLE hWU).op
       (tensorPullbackSection h E U.1 m)))
 
-/-- The generator inclusion, with its degree-one membership proof. -/
+/-- The symmetric-algebra generator `ι m` of a section `m`, as an element of the degree-one
+grading piece. -/
 noncomputable def quotientSymmetricGenerator {S : Scheme.{u}} (E : S.Modules)
     [E.IsQuasicoherent] (U : S.affineOpens) (m : Γ(E, U.1)) :
     (SymmetricAlgebraSheaf.gradedAlgebraData E).grading U 1 :=

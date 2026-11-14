@@ -14,8 +14,8 @@ import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearScalarTensor
 
 ## References
 
-* Zheng Construction 4.1 and Stacks 06YY, 07A4
-* Zheng Construction 4.1
+* Zheng, Construction 4.1
+* Stacks Project, Tags 06YY and 07A4
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -52,12 +52,8 @@ structure SystemTensorComparisons (A : SystemTensorBase.{c, v, r} J B τ) where
       (coefficientMap.{c, v, max c v r} J B τ h) (S.scalar h)
       (A.levelClosed m) (A.levelClosed n)
       (A.levelTensorModels m) (A.levelTensorModels n) (scalarTensor h)
-/-- Proof: apply `semilinearTensorEvaluation` at every level to the given
-system and level models, retaining its ordinary normalization. Apply
-`semilinearScalarTensor` to each composite coefficient map and its given scalar
-data, using the same level models. Choose these comparisons together with their
-dependent models and assemble the five fields.
-(blueprint: lem-coef-semilinear-tensor-comparisons) -/
+/-- The comparisons between the base tensor models and their evaluations and scalar extensions
+exist. -/
 theorem systemTensorComparisons_nonempty (A : SystemTensorBase.{c, v, r} J B τ) :
     Nonempty (SystemTensorComparisons.{c, v, r} J B τ S A) := by
   classical

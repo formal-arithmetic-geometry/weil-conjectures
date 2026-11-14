@@ -84,6 +84,12 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible
 
 * Tag 03D1
 * Stacks Project, Tags 079P and 09A2
+
+## Implementation details
+
+`ringHypercohomology` transports to the small site model by sectionwise precomposition. On
+bounded-below complexes it agrees with evaluating a bounded-below injective resolution, since
+both compute the right derived evaluation functor.
 -/
 
 @[expose] public section
@@ -96,8 +102,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme.ProEt
 
-/-- The published sectionwise transport preserves zero maps, as needed to apply it
-termwise to complexes. -/
+/-- The sectionwise transport to the small site model preserves zero morphisms. -/
 theorem ringHypercohomology_transport_preservesZeroMorphisms (X : Scheme.{u})
     (R : Sheaf (topology X) RingCat.{u + 1}) :
     (proEtaleModuleToModel R).PreservesZeroMorphisms := by
@@ -108,13 +113,9 @@ theorem ringHypercohomology_transport_preservesZeroMorphisms (X : Scheme.{u})
 
 attribute [instance] ringHypercohomology_transport_preservesZeroMorphisms
 
-/-- Hypercohomology at an object of the small pro-etale site, with arbitrary ring-sheaf
-coefficients. Transport to the published small site model is sectionwise precomposition;
-then take the published functorial K-injective resolution, evaluate its underlying abelian
-section complex, and take its integer-degree homology. On bounded-below complexes this is
-canonically the evaluation of a bounded-below injective resolution: both compute the right
-derived evaluation functor, and comparison with a K-injective resolution is unique up to
-homotopy. This construction retains all original site objects and the original coefficients. -/
+/-- Hypercohomology in degree `q` at an object of the small pro-etale site, with arbitrary
+ring-sheaf coefficients: the homology of the sections of a functorial K-injective resolution,
+computed on the small site model. -/
 noncomputable def ringHypercohomology (X : Scheme.{u})
     (R : Sheaf (topology X) RingCat.{u + 1}) (U : X.ProEt) (q : ℤ) :
     CochainComplex (ringedSiteModules.{u + 1} R) ℤ ⥤ AddCommGrpCat.{u + 1} :=

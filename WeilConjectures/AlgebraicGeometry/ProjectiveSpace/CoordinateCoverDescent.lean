@@ -189,12 +189,7 @@ attribute [local instance] MvPolynomial.gradedAlgebra
 include H in
 /-- **Ample coordinate covers descend along a finite field extension.** Let `X` be a
 quasi-compact `k`-scheme and `ψ : X_{k'} ⟶ ℙ(β; k')` a morphism such that the preimages of the
-standard opens are affine. Then `X` has a finite coordinate cover by affine charts.
-
-For every point `x` of `X`, graded prime avoidance gives a form `G` over `ℤ` not vanishing on the
-finite fibre `ψ(π⁻¹ x)`; the preimages under `ψ` of the loci `D₊(G)` are affine, and finitely many
-such forms, raised to a common degree, give a coordinate cover of `X_{k'}` satisfying the fibre
-condition of `AlgebraicGeometry.Scheme.CoordinateCover.exists_descent`. -/
+standard opens are affine. Then `X` has a finite coordinate cover by affine charts. -/
 theorem exists_coordinateCover_of_isPullback [CompactSpace X] {β : Type u}
     (ψ : Y ⟶ ℙ(β; Spec (.of k')))
     (hψ : ∀ b, IsAffineOpen (ψ ⁻¹ᵁ ProjectiveSpace.standardOpen β (Spec (.of k')) b)) :

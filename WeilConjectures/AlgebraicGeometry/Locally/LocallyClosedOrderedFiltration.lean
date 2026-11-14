@@ -13,6 +13,13 @@ import WeilConjectures.AlgebraicGeometry.Locally.LocallyClosedCoefficientExtensi
 import WeilConjectures.ConstructibleSheaf.Devissage
 
 /-! # Filtration of a locally closed extension along prescribed ordered strata
+
+## Implementation details
+
+The filtration of `L` comes from the open prefixes `U_b` of the stratification: the images of
+`U_b! U_b* L → L` have successive quotients `t_b! t_b* L` by open-closed recollement. The exact
+extension `a_!` carries this filtration to `a_! L`, and transitivity of locally closed extension
+identifies `a_! t_b!` with `(t_b ≫ a)_!`. No constructibility of the coefficients is needed.
 -/
 
 @[expose] public noncomputable section
@@ -56,19 +63,7 @@ private theorem exact_filtration_transport
 attribute [local irreducible] coefficientHeartLocallyClosedExtension
 
 /-- Extension by zero sends the ordered stratum filtration to a filtration of its
-specified extension, with quotients extended along the composite immersions.
-No lattice, coefficient inclusion, or lisseness hypothesis is involved.
-
-Proof in words. Form the open prefix U_b from the given union of strata. The images
-of U_b! U_b* L -> L give subobjects G_b. Open-closed recollement identifies their
-successive quotients with t_b! t_b* L. The empty and full prefixes give bottom and top.
-Apply the exact locally closed extension a_! to each monic representative G_b -> L,
-and take its represented subobject in a_! L. Exactness preserves monomorphisms, zero
-objects, and the cokernels of the inclusion maps. Transitivity of locally closed
-extension identifies a_! t_b! with (t_b >> a)_!, giving the stated quotients.
-This works for every commutative condensed ring: the open-prefix filtration requires
-no constructibility. For an empty source the empty filtration has identical zero
-endpoints. Empty strata and zero restrictions yield repeated terms. -/
+specified extension, with quotients extended along the composite immersions. -/
 theorem exists_locallyClosedOrderedFiltration
     (B : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj B] [IsCommMonObj B] {S X : Scheme.{u}}

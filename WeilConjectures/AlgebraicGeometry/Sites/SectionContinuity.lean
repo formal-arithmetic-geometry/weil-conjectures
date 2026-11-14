@@ -40,9 +40,9 @@ limit `V ×_{Dⱼ} X`, the open already contains the image of some `V ×_{Dⱼ} 
 covering `W ×_R X`, the pullback `φₐ^* gₐ` of sections of `G`. Each `Vₐ` descends to an affine
 étale scheme over some stage
 (`AlgebraicGeometry.Scheme.exists_isPullback_of_etale_of_isAffineOpen`), together with `φₐ` and
-the map to `W` (`AlgebraicGeometry.Scheme.exists_isPullbackLift_comp_eq`). The pulled back sections at a
-common stage agree on the overlaps after passing to a later stage, by injectivity, the descended
-pieces cover `W ×_R Dⱼ` at a later stage, and they glue to the required section.
+the map to `W` (`AlgebraicGeometry.Scheme.exists_isPullbackLift_comp_eq`). The pulled back sections
+at a common stage agree on the overlaps after passing to a later stage, by injectivity, the
+descended pieces cover `W ×_R Dⱼ` at a later stage, and they glue to the required section.
 -/
 
 @[expose] public section

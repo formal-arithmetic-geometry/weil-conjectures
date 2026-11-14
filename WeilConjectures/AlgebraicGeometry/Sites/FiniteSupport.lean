@@ -43,8 +43,7 @@ namespace AlgebraicGeometry
 /-- **Cohomology of a geometric point.**
 
 Over a separably closed field `k` every abelian étale sheaf on `Spec k` has no cohomology in
-positive degrees, the constant sheaf `ℤ` being projective
-(`AlgebraicGeometry.Scheme.projective_constantSheaf_of_isSepClosed`). -/
+positive degrees. -/
 theorem Scheme.subsingleton_H_of_isSepClosed (k : Type u) [Field k] [IsSepClosed k]
     (H : Sheaf (Spec (.of k)).smallEtaleTopology AddCommGrpCat.{u + 1}) (n : ℕ) :
     Subsingleton (Sheaf.H H (n + 1)) :=
@@ -59,12 +58,7 @@ variable {X : Scheme.{u}}
 /-- **Sheaves supported on finitely many closed points are acyclic.** Let `U` be an open subset
 of a scheme `X` whose complement is a finite set of closed points with separably closed residue
 fields, and `G` an abelian étale sheaf on `X` whose restriction to `U` vanishes. Then
-`Hⁿ(X, G) = 0` for `n ≥ 1`.
-
-Writing `iₓ : Spec κ(x) ⟶ X` for the closed points `x ∉ U`, the unit maps assemble to an
-isomorphism `G ≅ ⨁ₓ iₓ_* iₓ^* G`, as can be checked after restricting to `U` and to every
-point `x`; and `Hⁿ(X, iₓ_* iₓ^* G) = Hⁿ(Spec κ(x), iₓ^* G)` vanishes as `κ(x)` is separably
-closed. -/
+`Hⁿ(X, G) = 0` for `n ≥ 1`. -/
 theorem subsingleton_H_of_isZero_upperStar (U : X.Opens) (hfin : (U : Set X)ᶜ.Finite)
     (hcl : ∀ x ∉ U, IsClosed ({x} : Set X))
     (hsep : ∀ x ∉ U, IsSepClosed (X.residueField x))
@@ -153,8 +147,7 @@ theorem subsingleton_H_of_isZero_upperStar (U : X.Opens) (hfin : (U : Set X)ᶜ.
 /-- **Isomorphisms away from finitely many closed points.** Let `U` be an open subset of a
 scheme `X` whose complement is a finite set of closed points with separably closed residue
 fields, and `φ : F ⟶ G` a morphism of abelian étale sheaves on `X` which is an isomorphism over
-`U`. Then `Hⁿ(X, F) → Hⁿ(X, G)` is bijective for `n ≥ 2`: the kernel and the cokernel of `φ`
-vanish over `U`, hence have no cohomology in positive degrees. -/
+`U`. Then `Hⁿ(X, F) → Hⁿ(X, G)` is bijective for `n ≥ 2`. -/
 theorem bijective_H_map_of_isIso_upperStar_map (U : X.Opens) (hfin : (U : Set X)ᶜ.Finite)
     (hcl : ∀ x ∉ U, IsClosed ({x} : Set X))
     (hsep : ∀ x ∉ U, IsSepClosed (X.residueField x))
@@ -169,9 +162,7 @@ theorem bijective_H_map_of_isIso_upperStar_map (U : X.Opens) (hfin : (U : Set X)
     exact (isZero_cokernel_of_epi (P.map φ)).of_iso (PreservesCokernel.iso P φ)
 
 /-- Let `ν : Y ⟶ X` be finite and `U` an open subset of `X` over which `ν` is a universal
-homeomorphism. Then the unit `F ⟶ ν_* ν^* F` is an isomorphism over `U`: by finite base change
-its restriction to `U` is the unit of the restriction `ν⁻¹ U ⟶ U` of `ν`, whose pullback is an
-equivalence by topological invariance of the étale site. -/
+homeomorphism. Then the unit `F ⟶ ν_* ν^* F` is an isomorphism over `U`. -/
 theorem isIso_upperStar_map_unit_of_isUniversalHomeomorphism {Y : Scheme.{u}} (ν : Y ⟶ X)
     [IsFinite ν] (U : X.Opens) [IsUniversalHomeomorphism (ν ∣_ U)]
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :

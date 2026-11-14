@@ -91,21 +91,24 @@ import WeilConjectures.CategoryTheory.DerivedCategory.SixFunctors.NativeInternal
 * `CategoryTheory.DualityPairingCompatibility`: the naturality, shift and triangle clauses.
 * `AlgebraicGeometry.Etale.AmbientDualityPairing` and
   `AlgebraicGeometry.ProEtale.AmbientDualityPairing`: the canonical evaluation and transpose,
-  specified by the existing adjunction and the descended Koszul symmetry.
-* `AlgebraicGeometry.Etale.ambient_duality_pairing`: the two site assertions of the node.
+  specified by the tensor-Hom adjunction and the descended Koszul symmetry.
+* `AlgebraicGeometry.Etale.ambient_duality_pairing`: the evaluation pairing exists on the étale
+  site (with the dualizing complex) and on the pro-étale site.
 
 The tensor-Hom adjunction has left tensor as its left adjoint. Evaluation in the order
 DK tensor K therefore includes the Koszul symmetry. Its adjunct, with left tensor DK,
 is the double-dual morphism. All derived categories here are unbounded.
 
+## Implementation details
+
+The Koszul symmetry condition is named (`AlgebraicGeometry.Etale.IsEtaleKoszulSymmetry`) to keep
+the large derived-monoidal instance out of the implicit predicate argument of
+`Classical.choose`. The double-dual morphisms `bidualityMap` extract uniquely determined data:
+the symmetry is fixed, evaluation is the adjunct of the identity and the arrow is its transpose.
+
 ## References
 
 * Stacks Project, Tags 08J9, 08JA and 08JC
-* Stacks Project, Tag 08J9
-* Stacks Project, Tags 08J9 and 08JC
-* Stacks Tags 08J9 and 08JC
-* Stacks Project, Tags 08J9 and 08JA
-* Stacks 08J9 and 08JA
 -/
 
 @[expose] public section
@@ -376,7 +379,7 @@ namespace Etale
 /-- Evaluation and its adjoint double-dual arrow with their canonical normalizations.
 The tensor symmetry is the descended Koszul symmetry. After interchanging its factors,
 evaluation corresponds to the identity under tensor-Hom adjunction. The arrow δ is its
-transpose, rather than an arbitrary natural map with the same endpoints. -/
+transpose. -/
 def AmbientDualityPairing
     (W : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) : Prop :=
   ∃ b : derivedTensor A X ≅ (derivedTensor A X).flip,
@@ -406,7 +409,7 @@ namespace ProEtale
 /-- Evaluation and its adjoint double-dual arrow with their canonical normalizations.
 The tensor symmetry is the descended Koszul symmetry. After interchanging its factors,
 evaluation corresponds to the identity under tensor-Hom adjunction. The arrow δ is its
-transpose, rather than an arbitrary natural map with the same endpoints. -/
+transpose. -/
 def AmbientDualityPairing
     (W : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) : Prop :=
   let T : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) ⥤
@@ -443,8 +446,7 @@ namespace Etale
 
 /-- Evaluation and its transpose are natural and compatible with shifts and distinguished
 triangles, on the entire ambient derived category. The dualizing object is the ordinary
-ambient exceptional inverse image of A, not a constructible exceptional functor.
--/
+ambient exceptional inverse image of A. -/
 theorem ambient_duality_pairing
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {k : Type u} [Field k] [HasInvertibleExponent Λ (Spec (.of k))]
@@ -454,8 +456,7 @@ theorem ambient_duality_pairing
       (dualizingComplex Λ aY) ∧
     ∀ W : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ)),
       ProEtale.AmbientDualityPairing (ModuleCat.{u + 1} Λ) Y W := by
-  -- The formal proof uses the native adjunction and its unit. The ringed-site model
-  -- sketched above is replaced by the route recorded in the updated DAG node.
+  -- The proof uses the native adjunction and its unit.
   constructor
   · change NormalizedDualityPairing
       (derivedTensor (ModuleCat.{u + 1} Λ) Y) (derivedHom (ModuleCat.{u + 1} Λ) Y)
@@ -546,10 +547,7 @@ variable (A : Type a) [Category.{u + 1} A] [Abelian A]
   [SymmetricCategory A] [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A]
   (X : Scheme.{u})
 
-/-- The double-dual morphism specified by the etale evaluation-pairing theorem.
-Its value is uniquely determined: the symmetry is fixed to the descended Koszul
-symmetry, evaluation is the adjunct of the identity, and this arrow is its transpose.
-Thus this extracts determined data, rather than choosing an arbitrary pairing. -/
+/-- The double-dual morphism `K ⟶ D(D(K))` specified by an étale evaluation pairing. -/
 noncomputable def Etale.AmbientDualityPairing.bidualityMap
     {W : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
     (h : Etale.AmbientDualityPairing A X W)
@@ -557,8 +555,7 @@ noncomputable def Etale.AmbientDualityPairing.bidualityMap
     K ⟶ (dualityDoubleFunctor (Etale.derivedHom A X) W).obj K :=
   h.choose_spec.2.choose_spec.2.choose K
 
-/-- The double-dual morphism specified by the pro-etale evaluation-pairing theorem.
-The normalization fixes its value uniquely, just as in the etale presentation. -/
+/-- The double-dual morphism `K ⟶ D(D(K))` specified by a pro-étale evaluation pairing. -/
 noncomputable def ProEtale.AmbientDualityPairing.bidualityMap
     {W : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
     (h : ProEtale.AmbientDualityPairing A X W)
@@ -570,9 +567,8 @@ end AlgebraicGeometry
 
 namespace AlgebraicGeometry.Etale
 
-/-- A componentwise characterization of the actual descended Koszul symmetry.
-Naming this predicate keeps the large derived-monoidal instance out of the implicit
-predicate argument to Classical.choose; it imposes exactly the original HEq clause. -/
+/-- The isomorphism `b : M ⊗ N ≅ N ⊗ M` agrees componentwise with the descended Koszul
+symmetry. -/
 def IsEtaleKoszulSymmetry (A : Type (u + 1)) [CommRing A] (X : Scheme.{u})
     (b : ∀ M N : DerivedCategoryModule A X,
       ((derivedTensor (ModuleCat.{u + 1} A) X).obj M).obj N ≅

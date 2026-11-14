@@ -18,6 +18,12 @@ import Mathlib.RingTheory.Unramified.Finite
 ## References
 
 * Stacks Project, Tag 00GI (integral ring maps) and the localization description of affine stalks
+* B. Iversen, I.2.7
+
+## Implementation details
+
+The proof uses Mathlib's `Algebra.FormallyUnramified.flat_of_restrictScalars`
+(Iversen, I.2.7).
 -/
 
 @[expose] public section
@@ -26,11 +32,8 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
-/-- A finite map factors at any domain source stalk through an integral domain
-algebra over the target stalk, followed by a flat map.
-
-The shorter image-algebra argument uses Mathlib's
-`Algebra.FormallyUnramified.flat_of_restrictScalars` (Iversen, I.2.7). -/
+/-- For a finite morphism `f` and a point `x` with `𝒪_{X,x}` a domain, the stalk map
+`𝒪_{Y,f x} ⟶ 𝒪_{X,x}` factors as an integral map to an integral domain followed by a flat map. -/
 theorem finite_stalk_integral_domain_factorization {X Y : Scheme.{u}}
     (f : X ⟶ Y) [IsFinite f] (x : X) (hX : IsDomain (X.presheaf.stalk x)) :
     ∃ (B : CommRingCat.{u}) (a : Y.presheaf.stalk (f x) →+* B)

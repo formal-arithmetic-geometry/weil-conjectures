@@ -22,6 +22,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Small
 ## References
 
 * Stacks Project, Tag 04JM, direct proof of Lemma 59.56.5
+* Stacks Project, Tag 04JM, invariance and finite Galois descent
 -/
 
 @[expose] public section
@@ -34,7 +35,8 @@ namespace AlgebraicGeometry.Scheme
 
 attribute [local instance] Algebra.Etale.of_finite_of_isSeparable
 
-/-- Source: Stacks Project, Tag 04JM, invariance and finite Galois descent. -/
+/-- A germ represented, injectively, by a section `z` over a finite Galois extension `E ⊇ L`
+and invariant under the fixing subgroup of `L` is the germ of a section over `Spec L`. -/
 theorem exists_fieldSection_of_finiteGalois_invariant_representative
     (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]
     [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]

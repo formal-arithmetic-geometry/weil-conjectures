@@ -24,7 +24,7 @@ set_option linter.privateModule false
 Lisse sheaves of `Λ`-modules are the sheaves satisfying the source predicate
 `Scheme.IsFiniteLocallyConstantSheaf` at `A = ModuleCat Λ`. Geometric points have
 algebraically closed fields. Stalks are the fibres of the lifted point
-`(pointSmallEtale y).ulift`, as in lem-pod-etale-stalk-tensor-scalar.
+`(pointSmallEtale y).ulift`.
 
 ## References
 

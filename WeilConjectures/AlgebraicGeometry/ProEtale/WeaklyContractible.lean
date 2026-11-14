@@ -142,11 +142,7 @@ lemma exists_disjoint_cover_of_comp_sigmaDesc_eq_id {W : T.ProEt} {κ : Type u}
 /-- Let `W ≅ Spec R` be an object of the small pro-étale site, where every faithfully flat
 ind-étale `R`-algebra has a retraction, and `S` a covering sieve of `W`. Then there is a morphism
 `∐ V j ⟶ W.left` with a section, such that every morphism to `W` factoring through some `V j`
-lies in `S`.
-
-`S` contains a quasi-compact weakly étale cover, which is refined by finitely many affine
-schemes `V j`; then `∐ V j ⟶ Spec R` is weakly étale and surjective between affine schemes,
-so it has a section by `exists_comp_eq_id_of_forall_exists_retraction`. -/
+lies in `S`. -/
 lemma exists_comp_sigmaDesc_eq_id_of_forall_exists_retraction {W : T.ProEt}
     {R : CommRingCat.{u}}
     (hR : ∀ (T : Type u) [CommRing T] [Algebra R T] [Algebra.IndEtale R T]
@@ -208,12 +204,7 @@ lemma exists_disjoint_opens_of_forall_exists_retraction {W : T.ProEt} {R : CommR
 
 /-- **Stacks 0990**, variant: an object of the small pro-étale site whose underlying scheme is
 `Spec R`, where every faithfully flat ind-étale `R`-algebra has a retraction, is weakly
-contractible.
-
-Every covering sieve `S` of `W ≅ Spec R` contains a quasi-compact weakly étale cover, which
-is refined by finitely many affine schemes `V j`. Then `∐ V j ⟶ Spec R` is weakly étale and
-surjective between affine schemes, so it has a section, and the preimages of the `V j` under
-this section form a finite disjoint open cover of `W` whose members lie in `S`. -/
+contractible. -/
 @[stacks 0990]
 theorem isWeaklyContractible_of_forall_exists_retraction {W : T.ProEt} {R : CommRingCat.{u}}
     (hR : ∀ (T : Type u) [CommRing T] [Algebra R T] [Algebra.IndEtale R T]
@@ -277,9 +268,9 @@ namespace ProEtale
 
 variable {T : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ]
 
-/-- **Detection of vanishing**, blueprint `corollary-evaluation-weakly-contractible-objects--6` (i)
-(Stacks 0990, 090M): a sheaf of `Λ`-modules on the small pro-étale site vanishes if and only if
-its sections over all affine weakly contractible objects vanish. -/
+/-- **Detection of vanishing** (Stacks 0990, 090M): a sheaf of `Λ`-modules on the small
+pro-étale site vanishes if and only if its sections over all affine weakly contractible objects
+vanish. -/
 @[stacks 0990]
 theorem isZero_iff_forall_isWeaklyContractible
     (F : Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} Λ)) :
@@ -292,11 +283,9 @@ theorem isZero_iff_forall_isWeaklyContractible
     (fun V ↦ Scheme.ProEt.exists_isWeaklyContractible_cover V)]
   exact ⟨fun h W hW hW' ↦ h W ⟨hW, hW'⟩, fun h W hW ↦ h W hW.1 hW.2⟩
 
-/-- **Detection of acyclicity**, blueprint `corollary-evaluation-weakly-contractible-objects--6`
-(ii) (Stacks 0947 (1), 0990): a complex of sheaves of `Λ`-modules on the small pro-étale site is
-acyclic if and only if its sections over every affine weakly contractible object form an
-acyclic complex of `Λ`-modules. Epimorphisms of sheaves are locally surjective, hence
-surjective on sections over weakly contractible objects, and these cover the site. -/
+/-- **Detection of acyclicity** (Stacks 0947 (1), 0990): a complex of sheaves of `Λ`-modules on
+the small pro-étale site is acyclic if and only if its sections over every affine weakly
+contractible object form an acyclic complex of `Λ`-modules. -/
 @[stacks 0947]
 theorem acyclic_iff_forall_isWeaklyContractible
     (K : CochainComplex (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} Λ)) ℤ) :

@@ -15,16 +15,24 @@ public import Mathlib.Algebra.Regular.SMul
 import WeilConjectures.AlgebraicGeometry.Morphisms.RootSplitCoverIndEtaleCharts
 import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedRootChartsIndEtaleDescent
 
+/-! # Cyclic root charts near the regular divisor
+
+## References
+
+* Stacks Project, Tag 0EYG, strict henselization and intermediate-root paragraphs
+* Stacks Project, Tags 02LA, 02VN and 05N9 (descent)
+-/
+
 @[expose] public section
 
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- Cyclic root charts near a point on the regular divisor.
-
-Source: Stacks Project, Tag 0EYG, strict henselization and intermediate-root paragraphs;
-Tags 02LA, 02VN and 05N9 for descent. -/
+/-- Cyclic root charts near a point on the regular divisor: if the pullback of the punctured
+root cover along `p` splits, then a point `y ∈ V(g)` has an étale neighbourhood `Spec S` over
+which the pullback of `p` is the punctured spectrum of a finite product of root algebras of
+degrees invertible in `S`. -/
 theorem root_split_cover_on_divisor_charts
     (R : CommRingCat.{u}) (g : R) (n : ℕ) (hn : 0 < n ∧ IsUnit (n : R))
     [IsRegularRing R] (hg : IsSMulRegular R g)

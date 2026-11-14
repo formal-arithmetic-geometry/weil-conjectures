@@ -14,8 +14,10 @@ import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 /-! # The shifted rational Tate-line square
 
-The proof lifts the
-prescribed underived composition equation through degree zero and the canonical shift.
+## Implementation details
+
+The square is obtained by lifting the prescribed underived composition equation through
+degree zero and the canonical shift.
 -/
 
 @[expose] public noncomputable section
@@ -191,14 +193,14 @@ private meta structure CoefficientCongrState where
   proofs : Array (Expr × Expr × Expr) := #[]
   congrs : Array (Expr × Nat × CongrTheorem) := #[]
 
-/-- Equality of the types identifies choice values by proof irrelevance. -/
+/-- Choice values in equal nonempty types are heterogeneously equal. -/
 private theorem choice_value_heq {α β : Sort u} (h : α = β)
     (ha : Nonempty α) (hb : Nonempty β) :
     HEq (Classical.choice ha) (Classical.choice hb) := by
   cases h
   rfl
 
-/-- Compare dependent functions at a shared argument before transporting the family. -/
+/-- Dependent functions that are pointwise heterogeneously equal are heterogeneously equal. -/
 private theorem pointwise_heq {α : Sort u} {P Q : α → Sort v}
     {f : ∀ x, P x} {g : ∀ x, Q x} (h : ∀ x, HEq (f x) (g x)) : HEq f g := by
   have hPQ : P = Q := funext (fun x ↦ type_eq_of_heq (h x))

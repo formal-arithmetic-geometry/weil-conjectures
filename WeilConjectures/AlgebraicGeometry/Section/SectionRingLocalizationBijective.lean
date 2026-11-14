@@ -16,9 +16,13 @@ import WeilConjectures.AlgebraicGeometry.NonvanishingSectionTrivializes
 
 ## References
 
-* Stacks Project, Properties, Lemma 01PW, and Cohomology of Schemes, Lemma 09MR in degree zero
-* Stacks Project, Properties, Lemma 01PW(2), used in Lemma 01Q1
-* Cohomology of Schemes, Lemma 09MR, degree zero
+* Stacks Project, Properties, Lemmas 01PW and 01Q1
+* Stacks Project, Cohomology of Schemes, Lemma 09MR (in degree zero)
+
+## Implementation details
+
+Bijectivity is obtained by transporting the additive equivalence of `invertS_cohomology` in
+degree zero (for the invertible module `L.tensorPow d`) to the homogeneous localization.
 -/
 
 @[expose] public section
@@ -84,24 +88,7 @@ private theorem veroneseIso_power {X : Scheme.{u}} (L : X.Modules) [L.IsInvertib
   exact h _ (by simp [Nat.mul_comm])
 
 /-- A ring map satisfying the restriction-and-division formula on a nonvanishing open
-is bijective. No affineness or ampleness hypothesis is needed.
-
-Apply `invertS_cohomology` with the invertible module `L.tensorPow d`, the structure
-module, and cohomological degree zero. Identify degree-zero module cohomology with
-sections, remove the structure-module tensor factor by the left unitor, and use the
-canonical tensor-power associativity isomorphisms to identify the degree `n` numerator
-with sections of `L.tensorPow (n • d)`. The fraction relations identify this additive
-fraction presentation with `HomogeneousLocalization.Away (sectionRingGrade L) s.val`:
-both identify a numerator divided by `s^n` with its product by `s^b` divided by
-`s^(n+b)`, and equality of fractions means equality after a further power of `s`.
-The nonvanishing opens supplied by 09MR and by `hU` are equal by extensionality.
-Transport the additive equivalence of 09MR along these identifications. Its formula
-says its image of each fraction, multiplied by the restriction of `s^n`, is the
-restricted numerator. The section `s` freely generates `L.tensorPow d` on `U`, so
-multiplication by its tensor powers is injective, even on an empty open. Thus `hφ`
-identifies `φ` with this additive equivalence on every fraction. Every element of the
-homogeneous localization has such a fraction representative, so `φ` is bijective.
--/
+is bijective. No affineness or ampleness hypothesis is needed. -/
 theorem sectionRing_localization_bijective
     (X : Scheme.{u}) (L : X.Modules) [L.IsInvertible]
     [CompactSpace X] [QuasiSeparatedSpace X]

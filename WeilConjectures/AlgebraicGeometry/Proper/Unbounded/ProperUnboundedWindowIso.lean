@@ -32,11 +32,12 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triang
 # The window isomorphisms for proper direct image
 
 The schemes and morphism have the standing separated finite-type setting over a
-positive-characteristic field of sk-def-sfb-dc-setting, as in the amplitude theorem.
+positive-characteristic field, as in the amplitude theorem.
 
 The two canonical arrows are asserted to be isomorphisms in the ambient module category.
-All three objects are also asserted to be ind-constructible. Since IndCons is full, this
-is exactly the assertion that these arrows are isomorphisms in IndCons.
+All three objects are also asserted to be ind-constructible. Since the subcategory of
+ind-constructible modules is full, this is exactly the assertion that these arrows are
+isomorphisms there.
 
 The dimension bound uses all nonnegative integers below the extended Krull dimension.
 It expresses dim <= d for an integer d, including negative d and empty geometric fibres,

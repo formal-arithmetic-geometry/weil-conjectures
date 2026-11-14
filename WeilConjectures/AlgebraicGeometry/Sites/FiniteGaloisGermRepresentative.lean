@@ -24,6 +24,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
 * Stacks 04JM, finite separable neighbourhood step
 * Stacks 04JM and 02G8(1), together with the residue-field factorization of field points (Stacks
   01J5)
+* Stacks Project, Tag 04JM, the finite Galois neighbourhood step
 -/
 
 @[expose] public section
@@ -37,7 +38,7 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] Algebra.Etale.of_finite_of_isSeparable
 
 /-- A separable embedding into the algebraic closure factors through the given separable
-closure. The preimages are unique since the inclusion into Ω is injective. -/
+closure. -/
 private theorem factor_separable_embedding
     (K Ks Ω P : Type u) [Field K] [Field Ks] [Field Ω] [Field P]
     [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]
@@ -64,7 +65,7 @@ private theorem factor_separable_embedding
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The residue field of the image of a geometric lift gives a finite separable pointed
-neighbourhood. No identification of its singleton with an open component is needed. -/
+neighbourhood. -/
 private theorem pointed_field_neighbourhood
     (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]
     [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]
@@ -140,7 +141,8 @@ private theorem pointed_field_neighbourhood
   rw [← Category.assoc, ← Spec.map_comp, hc]
   exact ha
 
-/-- Source: Stacks Project, Tag 04JM, the finite Galois neighbourhood step. -/
+/-- Every germ `m` in the geometric fibre of `F` is represented by a section of `F` over
+`Spec E` for a finite Galois extension `E` of `K` containing a given finite extension `L`. -/
 theorem exists_finiteGalois_germ_representative
     (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]
     [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]

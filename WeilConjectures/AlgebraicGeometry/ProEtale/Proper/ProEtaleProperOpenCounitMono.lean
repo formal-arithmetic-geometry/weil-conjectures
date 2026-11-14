@@ -29,8 +29,8 @@ namespace AlgebraicGeometry.Scheme
 
 variable (A : Type u) [CommRing A] [Finite A]
 
-/-- The proper/open counit is monic; this is the injectivity part of the
-sectionwise zero-extension and exact-sheafification argument. -/
+/-- For `p` proper and `i` an open immersion, the counit of the extension-by-zero adjunction
+for `i` at `p_* i'_! M` is a monomorphism, where `i'` is the base change of `i`. -/
 theorem sfProperOpenCounit_mono {V W T : Scheme.{u}} (p : V ⟶ T) [IsProper p]
     (i : W ⟶ T) [IsOpenImmersion i] (M :
       proEtaleRingModules (pullback p i)

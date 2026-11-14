@@ -163,7 +163,7 @@ noncomputable def sfIntrinsicDerivedOpenId (Y : Scheme.{u}) :
     sfIntrinsicDerivedOpen A (𝟙 Y) ≅ 𝟭 _ :=
   mapDerivedCategoryNatIso (sfIntrinsicOpenId A Y) ≪≫ mapDerivedCategoryIdIso _
 
-/-- The derived pullback identification used to restrict the exchange to the open. -/
+/-- The derived pullback identification `j^* ⋙ gU^* ≅ g^* ⋙ j'^*` for a commutative square. -/
 noncomputable def sfIntrinsicDerivedSquarePullback {U' U Y' Y : Scheme.{u}}
     (gU : U' ⟶ U) (j' : U' ⟶ Y') (j : U ⟶ Y) (g : Y' ⟶ Y)
     (w : gU ≫ j = j' ≫ g) :

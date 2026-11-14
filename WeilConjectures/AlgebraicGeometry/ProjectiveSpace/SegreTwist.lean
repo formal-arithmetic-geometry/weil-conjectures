@@ -27,6 +27,10 @@ free generators there, with the same transition functions, because the Segre mor
   transition functions.
 - `AlgebraicGeometry.ProjectiveSpace.nonempty_twistRestrict_segre_iso`:
   `segre^* 𝒪(1) ≅ pr₁^* 𝒪(1) ⊗ pr₂^* 𝒪(1)`.
+
+## References
+
+* Stacks Project, Tag 01WD
 -/
 
 @[expose] public section
@@ -100,18 +104,9 @@ lemma segre_comp_toProjInt_appLE (k k' : n) (l l' : m)
     Proj.segre_appLE_awayToSection_awayXRatio, map_mul]
   rfl
 
-/-- The Segre embedding is a closed immersion (the
-consequence `𝒪(1) ⊠ 𝒪(1)` recorded in its detailed form).
-
-**The pullback of `𝒪(1)` along the relative Segre morphism is `𝒪(1) ⊠ 𝒪(1)`**, the tensor
-product of the pullbacks of `𝒪(1)` along the two projections of `ℙ(n; S) ×_S ℙ(m; S)`: the
-coordinate `W_{k,l}` pulls back to the product `Xₖ ⊗ Yₗ` of the coordinates (Stacks 01WD).
-
-Both modules are free on the charts `D₊(Xₖ) ×_S D₊(Yₗ)`, with free generators the pullback of
-`W_{k,l}` and the tensor product of the pullbacks of `Xₖ` and `Yₗ`. Their transition functions
-agree, since the Segre morphism pulls `W_{k,l} / W_{k',l'}` back to `(Xₖ / Xₖ') · (Yₗ / Yₗ')`
-(`AlgebraicGeometry.Proj.segre_appLE_awayToSection_awayXRatio`), so the two modules are
-isomorphic (`AlgebraicGeometry.Scheme.Modules.nonempty_iso_of_isFreeGenerator`). -/
+/-- **The pullback of `𝒪(1)` along the relative Segre morphism is `𝒪(1) ⊠ 𝒪(1)`**, the tensor
+product of the pullbacks of `𝒪(1)` along the two projections of `ℙ(n; S) ×_S ℙ(m; S)`
+(Stacks 01WD). -/
 theorem nonempty_twistRestrict_segre_iso :
     Nonempty (twistRestrict (segre n m S) 1 ≅
       twistRestrict (pullback.fst (ℙ(n; S) ↘ S) (ℙ(m; S) ↘ S)) 1 ⊗

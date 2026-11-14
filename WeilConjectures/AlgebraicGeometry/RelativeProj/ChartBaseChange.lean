@@ -22,9 +22,7 @@ A graded ring homomorphism `φ: 𝒜 →+*ᵍ ℬ` which is `R`-linear is a *coe
 
 We show that in this situation the induced map on degree-zero homogeneous localizations
 `Away 𝒜 s → Away ℬ (φ s)` is again a base change along `R → S`, i.e.
-`S ⊗[R] (A_{(s)})₀ ≅ (B_{(φ s)})₀`. Following the blueprint, the proof identifies
-`(A_{(s)})₀` with the filtered colimit of the `𝒜 (k • d)` along multiplication by `s`, and uses
-that tensor products commute with this colimit; we carry this out by hand.
+`S ⊗[R] (A_{(s)})₀ ≅ (B_{(φ s)})₀`.
 
 ## Main definitions and results
 
@@ -33,6 +31,12 @@ that tensor products commute with this colimit; we carry this out by hand.
 - `GradedRingHom.IsGradedBaseChange.irrelevant_le` — the irrelevant ideal condition needed for
   `Proj.map`.
 - `GradedRingHom.IsGradedBaseChange.isBaseChange_awayMap` — the chart rings form a base change.
+
+## Implementation details
+
+The proof identifies `(A_{(s)})₀` with the filtered colimit of the `𝒜 (k • d)` along
+multiplication by `s` and uses that tensor products commute with this colimit; this is carried
+out by hand.
 -/
 
 @[expose] public section

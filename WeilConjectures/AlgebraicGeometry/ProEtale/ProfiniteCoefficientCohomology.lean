@@ -284,14 +284,7 @@ lemma shortExact_continuousSheafShortComplex (U : ℕ → OpenAddSubgroup A)
 /-- **Pro-étale cohomology with profinite coefficients in high degrees.** Let `S` be a scheme of
 finite type and of dimension at most `d` over a separably closed field, and `A` a compact abelian
 group with a decreasing sequence of open subgroups `Uₘ` with trivial intersection (e.g. `𝒪_E`
-with `Uₘ = ℓᵐ 𝒪_E`). Then `Hᵠ(S_proét, C(-, A)) = 0` for `q > 2d`.
-
-The sheaf `C(-, A)` is the limit of the tower of the sheaves `C(-, A / Uₘ)` with finite
-discrete coefficients, which have no cohomology above `2d`
-(`AlgebraicGeometry.ProEtale.subsingleton_H_continuousSheaf_of_two_mul_lt`). The transition maps
-are epimorphisms with kernels `C(-, Uₘ / Uₘ₊₁)`, so the transition maps on `H^{2d}` are
-surjective, and the pro-étale topos is replete; the Milnor sequence then gives the vanishing
-(`CategoryTheory.Abelian.Ext.subsingleton_of_isLimit_tower`). -/
+with `Uₘ = ℓᵐ 𝒪_E`). Then `Hᵠ(S_proét, C(-, A)) = 0` for `q > 2d`. -/
 theorem subsingleton_H_continuousSheaf_of_profinite {K : Type u} [Field K] [IsSepClosed K]
     {S : Scheme.{u}} (a : S ⟶ Spec (.of K)) [LocallyOfFiniteType a] [QuasiCompact a] (d : ℕ)
     (hS : topologicalKrullDim S ≤ (d : WithBot ℕ∞)) (U : ℕ → OpenAddSubgroup A)

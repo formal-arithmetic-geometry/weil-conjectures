@@ -28,6 +28,13 @@ public import WeilConjectures.AlgebraicGeometry.RationalP1.Tate.RationalTatePull
 public import WeilConjectures.AlgebraicGeometry.RationalP1.Ambient.RationalP1AmbientComposites
 
 /-! # Triangle identities for the rational projective line
+
+## Implementation details
+
+The trace family is the realization of the whole-system diagonal limit and the three
+unit/Chern traces, as specified by `Reference`, not an arbitrary `Family`. The completion,
+cycle-system and limit hypotheses of `rationalP1_triangle` are exactly the input of
+`diagonalTower_coefficients`.
 -/
 
 @[expose] public noncomputable section
@@ -180,13 +187,8 @@ private theorem brownComparison
 
 -- Normalize ambient components before assembling the adjunction.
 /-- Both kernel computations and integration identities, the prescribed adjunction, and
-comparison with every Brown exceptional adjoint for a chosen compactification.
-The family is the realization of the whole-system diagonal limit and the three
-unit/Chern traces, as specified by `Reference`; it is not an arbitrary `Family`.
-The completion, cycle-system and limit hypotheses are exactly the input of
-`diagonalTower_coefficients`. Its base-change theorem identifies the traces
-for q and its two pullbacks used in the kernel calculations below.
--/
+comparison with every Brown exceptional adjoint for a chosen compactification, for the trace
+family specified by `Reference`. -/
 theorem rationalP1_triangle
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

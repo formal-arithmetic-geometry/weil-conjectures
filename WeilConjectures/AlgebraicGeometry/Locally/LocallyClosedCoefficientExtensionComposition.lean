@@ -10,6 +10,14 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.LocallyClosedGeneratorTensorIntersection
 
 /-! # Transitivity for the specified internal coefficient extension
+
+## Implementation details
+
+Each locally closed extension is identified, via its open-then-closed factorization through the
+scheme-theoretic closure, with an open extension followed by a closed direct image; the
+normalized composition isomorphism for module extensions is then transported through these
+factorizations and the equivalence between internal and sectionwise modules. Noetherianity
+makes the opens in these factorizations quasi-compact.
 -/
 
 @[expose] public noncomputable section
@@ -19,19 +27,8 @@ open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
-/-- Transitivity of open-then-closed extension with the actual internal module coefficients.
-
-Proof in words. Identify internal modules with sectionwise modules over their pulled
-coefficient ring sheaves, using the canonical module equivalence. Its inverse-image
-comparison gives the coefficient identifications along a, b, and their composite.
-Apply normalized locally closed module-extension coherence to these coefficient
-immersions. For each arrow, the open-then-closed factorization comparison identifies
-that extension with open extension into its scheme-theoretic closure followed by closed
-direct image. Transport the normalized composition isomorphism through these three
-factorization comparisons and the module equivalences. The resulting component has
-exactly the two displayed closure-extension objects. All source schemes are Noetherian,
-so the opens in these factorizations are quasi-compact. Empty sources and zero modules
-are included because the comparisons restrict to the identity on zero objects. -/
+/-- Locally closed extension of internal coefficient modules is transitive: extending along `b`
+and then along `a` is isomorphic to extending along `b ≫ a`. -/
 theorem locallyClosedCoefficientExtension_composition
     (B : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj B] [IsCommMonObj B] {T S X : Scheme.{u}}

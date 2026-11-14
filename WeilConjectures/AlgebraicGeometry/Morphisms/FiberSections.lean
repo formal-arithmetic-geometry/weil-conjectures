@@ -85,8 +85,7 @@ open TensorProduct in
 /-- **Global sections of the fibres of an affine morphism.** For an affine morphism `f: X ⟶ Y`
 (e.g. `f` finite locally free), an affine open `V ⊆ Y` and `y ∈ V`, the canonical map
 `κ(y) ⊗_{Γ(Y, V)} Γ(X, f⁻¹ V) → Γ(X_y, 𝒪_{X_y})`, `a ⊗ b ↦ a · b|_{X_y}`, is a ring
-isomorphism. As `κ(y) ⊗_{Γ(Y, V)} Γ(X, f⁻¹ V) = κ(y) ⊗_{𝒪_{Y,y}} (f_* 𝒪_X)_y`, this is the
-statement that `(f_* 𝒪_X)_y ⊗_{𝒪_{Y,y}} κ(y) → Γ(X_y, 𝒪_{X_y})` is an isomorphism. -/
+isomorphism. -/
 theorem Scheme.Hom.exists_ringEquiv_tensorProduct_fiber (f : X ⟶ Y) [IsAffineHom f]
     {V : Y.Opens} (hV : IsAffineOpen V) (y : Y) (hy : y ∈ V) :
     letI := (f.app V).hom.toAlgebra
@@ -178,10 +177,7 @@ open TensorProduct in
 /-- **Fibres of an affine morphism via stalks.** For an affine morphism `f: X ⟶ Y` (e.g. `f`
 finite locally free) and `y ∈ Y`, the canonical map
 `(f_* 𝒪_X)_y ⊗_{𝒪_{Y,y}} κ(y) → Γ(X_y, 𝒪_{X_y})` is a ring isomorphism. On an affine open
-`V ∋ y` it sends `germ_y(b) ⊗ a` to `b|_{X_y} · a`; it is obtained from
-`AlgebraicGeometry.Scheme.Hom.exists_ringEquiv_tensorProduct_fiber`, since
-`(f_* 𝒪_X)_y = 𝒪_{Y,y} ⊗_{Γ(Y, V)} Γ(X, f⁻¹ V)`
-(`AlgebraicGeometry.Scheme.Hom.isLocalization_stalk_pushforward`). -/
+`V ∋ y` it sends `germ_y(b) ⊗ a` to `b|_{X_y} · a`. -/
 theorem Scheme.Hom.exists_ringEquiv_stalk_pushforward_tensorProduct_fiber (f : X ⟶ Y)
     [IsAffineHom f] {V : Y.Opens} (hV : IsAffineOpen V) (y : Y) (hy : y ∈ V) :
     letI : Algebra (Y.presheaf.stalk y) ((f.base _* X.presheaf).stalk y) :=

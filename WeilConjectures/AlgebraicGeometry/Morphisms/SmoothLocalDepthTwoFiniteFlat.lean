@@ -31,7 +31,10 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
-/-- Formal completion proves flatness of the supplied finite extension. -/
+/-- Let `L` be smooth over a Noetherian local ring `A` of depth at least two and let `U ⊆ L` be
+an open containing all points off the closed fibre and dense in the closed fibre. A finite
+morphism `E ⟶ L` that is étale over `U` and has depth at least two at the points over the
+complement of `U` is flat. -/
 theorem flat_of_smooth_local_depth_two_finite_extension
     (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]
     {L : Scheme.{u}} (q : L ⟶ Spec (.of A)) [Smooth q]

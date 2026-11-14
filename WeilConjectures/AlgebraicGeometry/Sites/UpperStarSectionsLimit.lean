@@ -24,6 +24,8 @@ of the inverse images of `G` over the base changes `Y ×_{Dₖ} Dⱼ`:
 - `AlgebraicGeometry.Etale.exists_restrictAlong_eq_of_isLimit`: every section over `V` comes
   from a section over `Y ×_{Dₖ} Dⱼ` for `j` large.
 
+## Implementation details
+
 The second statement is proved by representing sections étale locally by sections of `G`
 (`AlgebraicGeometry.Etale.exists_pullSection_eq`), descending the finitely many local data to a
 stage (`AlgebraicGeometry.exists_etale_refinement_of_isLimit`,

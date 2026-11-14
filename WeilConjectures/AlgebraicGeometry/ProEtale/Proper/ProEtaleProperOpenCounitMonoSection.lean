@@ -18,11 +18,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 variable (A : Type u) [CommRing A] [Finite A]
 
-/-- After forgetting the ring action, the proper/open counit remains monic.
-This is the sectionwise injectivity part of the affine proper/open support argument:
-for every pro-etale object of the target, the zero-extension map is injective on
-sections; exact sheafification and proper base change identify those maps with the
-underlying presheaf map of the displayed counit. -/
+/-- After forgetting the ring action, the proper/open counit (the counit of the
+extension-by-zero adjunction for `i` at `p_* i'_! M`) is a monomorphism. -/
 theorem sfProperOpenCounit_forget_mono {V W T : Scheme.{u}} (p : V ⟶ T) [IsProper p]
     (i : W ⟶ T) [IsOpenImmersion i] (M :
       proEtaleRingModules (pullback p i)

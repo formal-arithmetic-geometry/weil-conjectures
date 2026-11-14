@@ -23,8 +23,7 @@ If `J₀` represents `Pic^d_{C₀/k}`, then `J = J₀ ×_k k̄` represents `Pic^
 change, and an endomorphism `s` of `J` over `Spec σ` and over `J₀`, such as `𝟙 × Spec σ`, induces
 `σ_C^*` on the represented functor (`AlgebraicGeometry.homEquiv_galoisTwistHom`). By Yoneda, the
 endomorphism of `J` over `Spec σ` inducing `σ_C^*` is unique
-(`AlgebraicGeometry.eq_of_homEquiv_galoisTwistHom`, blueprint
-`proposition-jacobian-over-ground-field`).
+(`AlgebraicGeometry.eq_of_homEquiv_galoisTwistHom`).
 -/
 
 @[expose] public section
@@ -81,9 +80,8 @@ variable {C₀ C : Scheme.{u}} [C₀.Over (Spec (.of k))] [C.Over (Spec (.of (Al
   (q : C ⟶ C₀) (h : IsPullback q (C ↘ Spec (.of (AlgebraicClosure k))) (C₀ ↘ Spec (.of k))
     (Spec.map (CommRingCat.ofHom (algebraMap k (AlgebraicClosure k))))) (d : ℤ)
 
-/-- the action
-`σ_C^*: Pic^d_{C/k̄}(T) ⟶ Pic^d_{C/k̄}(T^σ)` of a `k`-endomorphism `σ` of `k̄` on the degree-`d`
-Picard functor of the base change `C = C₀ ×_k k̄`, obtained by transport through
+/-- The action `σ_C^*: Pic^d_{C/k̄}(T) ⟶ Pic^d_{C/k̄}(T^σ)` of a `k`-endomorphism `σ` of `k̄`
+on the degree-`d` Picard functor of the base change `C = C₀ ×_k k̄`, obtained by transport through
 `Pic^d_{C₀/k}`, on which `T` and `T^σ` have the same sections
 (`AlgebraicGeometry.galoisTwistIso`). -/
 noncomputable def picardFunctorDegreeGaloisMap (σ : AlgebraicClosure k →ₐ[k] AlgebraicClosure k)
@@ -117,11 +115,10 @@ lemma homEquiv_mapPullbackAdj_homEquiv
       (picardFunctorDegreeIsoOfIsPullback q h d).hom.app (.op T) (r.homEquiv z) := by
   rw [← Equiv.eq_symm_apply, hrK, Equiv.symm_apply_apply]
 
-/-- let `J₀` represent `Pic^d_{C₀/k}` by
-`r` and let `J = J₀ ×_k k̄` represent `Pic^d_{C/k̄}` by the base change `rK` of `r`. An
-endomorphism `s` of `J` over `J₀` and over `Spec σ` (e.g. `𝟙 × Spec σ`) induces the Galois action
-`σ_C^*` on the represented functor: the section attached to the twisted point `x ≫ s` is
-`σ_C^*` of the section attached to `x`. -/
+/-- Let `J₀` represent `Pic^d_{C₀/k}` by `r` and let `J = J₀ ×_k k̄` represent `Pic^d_{C/k̄}` by
+the base change `rK` of `r`. An endomorphism `s` of `J` over `J₀` and over `Spec σ`
+(e.g. `𝟙 × Spec σ`) induces the Galois action `σ_C^*` on the represented functor: the
+section attached to the twisted point `x ≫ s` is `σ_C^*` of the section attached to `x`. -/
 theorem homEquiv_galoisTwistHom
     (hrK : ∀ (T : Over (Spec (.of (AlgebraicClosure k))))
       (y : (picardFunctorDegree (C₀ ↘ Spec (.of k)) d).obj.obj
@@ -156,10 +153,8 @@ theorem homEquiv_galoisTwistHom
   congr 2
   simp
 
-/-- Blueprint `proposition-jacobian-over-ground-field`, in the form used for
-`proposition-jacobian-over-ground-field--5`: an endomorphism `f` of the representing object `J`
-lying over `Spec σ` is determined by the map it induces on the represented functor, by
-Yoneda. -/
+/-- An endomorphism `f` of the representing object `J` lying over `Spec σ` is determined by the
+map it induces on the represented functor. -/
 theorem eq_of_homEquiv_galoisTwistHom {σ : AlgebraicClosure k →ₐ[k] AlgebraicClosure k}
     {J : Over (Spec (.of (AlgebraicClosure k)))}
     {F : (Over (Spec (.of (AlgebraicClosure k))))ᵒᵖ ⥤ Type (u + 1)} (e : F.RepresentableBy J)
@@ -191,7 +186,7 @@ noncomputable def geometricFiberPicardIso :
   haveI : LocallyOfFinitePresentation (C₀ ↘ Spec (.of k)) := ‹LocallyOfFinitePresentation p›
   picardFunctorDegreeIsoOfIsPullback p.geometricFiberProj (IsPullback.of_hasPullback _ _) d
 
-/-- the action
+/-- The action
 `σ_C^*: Pic^d_{C/k̄}(T) ⟶ Pic^d_{C/k̄}(T^σ)` of `σ ∈ Gal(k̄/k)` on the degree-`d` Picard functor
 of the geometric fiber `C = C₀ ×_k k̄` (`AlgebraicGeometry.picardFunctorDegreeGaloisMap`). -/
 noncomputable def geometricFiberPicardGaloisMap
@@ -211,7 +206,7 @@ variable {p d} {J₀ : Over (Spec (.of k))}
   {rK : (picardFunctorDegree p.geometricFiberToAlgebraicClosure d).obj.RepresentableBy
     (Over.mk J₀.hom.geometricFiberToAlgebraicClosure)}
 
-/-- let `J₀` represent `Pic^d_{C₀/k}` by `r`
+/-- Let `J₀` represent `Pic^d_{C₀/k}` by `r`
 and let `J = J₀ ×_k k̄` represent `Pic^d_{C/k̄}` by the base change `rK` of `r`. The automorphism
 `σ_J = 𝟙 × Spec σ` of `J` induces the Galois action `σ_C^*` on the represented functor. -/
 theorem homEquiv_galoisTwistHom_geometricFiberGaloisMap
@@ -237,7 +232,7 @@ theorem homEquiv_galoisTwistHom_geometricFiberGaloisMap
     (J₀.hom.geometricFiberGaloisMap_comp_geometricFiberToAlgebraicClosure σ) x
 
 
-/-- in the situation of
+/-- In the situation of
 `AlgebraicGeometry.Scheme.Hom.homEquiv_galoisTwistHom_geometricFiberGaloisMap`, the automorphism
 `σ_J = 𝟙 × Spec σ` is the unique endomorphism of `J` lying over `Spec σ` which induces the Galois
 action `σ_C^*` on the represented functor. -/

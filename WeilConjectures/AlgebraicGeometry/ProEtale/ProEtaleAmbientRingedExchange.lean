@@ -144,6 +144,13 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 
 * Stacks Project, Lemma 0D6D
 * Stacks Tags 07A7 and 0D6D
+
+## Implementation details
+
+`proEtaleCanonicalDerivedPullbackComparison` is chosen from the derived pullback composition
+theorem together with its K-flat normalization; K-flat resolutions determine it on every
+derived object. `proEtaleAmbientRingedExchange` is the construction of Stacks, Remark 07A7,
+before any completeness or constructibility conditions.
 -/
 
 @[expose] public section
@@ -156,14 +163,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Canonical derived pullback comparison extracted from the composition interface.
-The recorded composition theorem supplies this comparison together with its K-flat
-normalization; this definition retains that characterization when selecting the comparison.
-The adjunctions are fixed by their tensor units, the ordinary direct-image comparison
-by its section formula, its pullback conjugate by the adjunctions, and the complex
-comparison degreewise. The final witness retains the K-flat representative equation;
-K-flat resolutions determine the comparison on every derived object.
--/
+/-- The canonical derived pullback comparison `L(h ≫ k)^* ≅ Lk^* ⋙ Lh^*` for ringed pro-etale
+sites, normalized on K-flat representatives. -/
 noncomputable def proEtaleCanonicalDerivedPullbackComparison
     {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V)
     (R_V : Sheaf (ProEt.topology V) CommRingCat.{u + 1})
@@ -279,19 +280,10 @@ noncomputable def proEtaleAmbientRingedPullbackComparison
     theta_left ≪≫ eqToIso hfun
   exact theta_left' ≪≫ theta_right
 
-/-- The ambient exchange map for a cartesian square of ringed pro-etale sites.
-
-The four coefficient isomorphisms give the identified coefficient sheaves on the
-corners, and `hcoeff` records that the two composite identifications agree.  The
-canonical comparison is selected from the derived pullback composition interface,
-then transported across the square commutativity and coefficient compatibility.
-The resulting exchange is the mate of that comparison under the two derived
-pullback/direct image adjunctions.  Explicitly, its transpose is the comparison
-followed by `Lg'^*` of the counit of `Lf^* ⊣ Rf_*`; the mate construction inserts
-the unit of `Lf'^* ⊣ Rf'_*`.  This is the construction in Stacks, Remark 07A7, before completeness
-or
-constructibility conditions.
--/
+/-- The ambient exchange map `Lg^* ∘ Rf_* ⟶ Rf'_* ∘ Lg'^*` for a cartesian square of ringed
+pro-etale sites, with `hcoeff` recording that the two composite coefficient identifications
+agree: the mate of the canonical derived pullback comparison under the derived
+pullback/direct image adjunctions. -/
 noncomputable def proEtaleAmbientRingedExchange
     {X' X Y' Y : Scheme.{u}}
     {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}

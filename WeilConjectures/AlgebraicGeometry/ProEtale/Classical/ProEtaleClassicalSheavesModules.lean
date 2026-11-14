@@ -45,15 +45,16 @@ import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 /-!
 # Classical pro-étale sheaves of modules
 
-We use the fixed-coefficient `ModuleCat` encoding explicitly allowed by
-`def-weil-pbc-etale-sheaves`. The constant-ring action is the unique extension of
-its discrete scalar actions through sheafification; comparison carries those scalar
-actions along the same inclusion of sites. Classicality is the existing predicate
-on the underlying sheaf of sets, as in clause 3 of the continuity-map node.
-
 ## References
 
 * Stacks Project, Tags 099T, 04JC and 03DA
+
+## Implementation details
+
+Sheaves of modules use the fixed-coefficient `ModuleCat` encoding. The constant-ring action is
+the unique extension of its discrete scalar actions through sheafification; comparison carries
+those scalar actions along the same inclusion of sites. Classicality is the existing predicate
+on the underlying sheaf of sets.
 -/
 
 @[expose] public noncomputable section

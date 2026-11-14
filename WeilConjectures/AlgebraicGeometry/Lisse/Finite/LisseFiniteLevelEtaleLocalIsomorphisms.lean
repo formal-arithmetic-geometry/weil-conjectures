@@ -34,9 +34,7 @@ attribute [local irreducible] HasDerivedCategory.standard
   lisseTowerAlgebraArrow lisseTowerFixedRealization
 
 /-- The comparison and local model hypotheses produce an étale representative of an
-isomorphism at every geometric point.  This is the local comparison part of the
-finite-level descent argument; no sheafification or stalk evaluation is included.
--/
+isomorphism at every geometric point. -/
 theorem lisse_finite_level_etale_local_isomorphisms
     (X Y : Scheme.{u}) (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)

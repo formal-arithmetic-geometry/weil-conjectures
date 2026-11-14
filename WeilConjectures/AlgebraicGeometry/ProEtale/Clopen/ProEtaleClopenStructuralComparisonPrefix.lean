@@ -89,13 +89,9 @@ def clopenStructuralPrefix
                 ((ClopenData.clopenTensorComplexRestriction.{t, u} (j i) R).obj Q)
                 p (q + 1) (n + 1) hq))))
 
-/-- The normalized pure-tensor, summand, and differential clauses for one component.
-
-Use the ordinary normalized braided restriction and coproduct preservation from clopen
-gluing. Uncurrying the canonical totalization comparison constructs the total isomorphism;
-its summand equation is the standard bifunctor comparison formula. The chain-map equation
-moves the differential across this comparison, and the total tensor differential formula
-then proves the signed clause. -/
+/-- For each component of a finite clopen partition, restriction is braided and commutes with
+the total tensor product of complexes via an isomorphism satisfying the normalized pure-tensor,
+summand and differential clauses of `clopenStructuralPrefix`. -/
 theorem clopen_structural_comparison_prefix
     (X : Scheme.{t}) (I : Type w) [Finite I] (Y : I → Scheme.{t})
     (j : ∀ i, Y i ⟶ X) [∀ i, IsOpenImmersion (j i)] [∀ i, IsClosedImmersion (j i)]

@@ -107,8 +107,8 @@ abbrev clopenTensorComplexRestriction {X Y : Scheme.{t}} (j : Y ⟶ X)
     [IsOpenImmersion j] (R : Sheaf (topology X) CommRingCat.{max u (t + 1)}) :=
   ClopenData.clopenTensorComplexRestriction j R
 
-/-- The comparison in the direction displayed in the node is the inverse tensorator.
-Its input structure contains the associativity, symmetry and both unit diagrams. -/
+/-- The tensor comparison `j^*(F ⊗ H) ≅ j^*F ⊗ j^*H` of a braided clopen restriction functor,
+given by the inverse tensorator. -/
 def clopenTensorComparison {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)})
     (h : (clopenTensorRestriction.{t, u} j R).Braided) (F H : clopenTensorModules.{t, u} R) :

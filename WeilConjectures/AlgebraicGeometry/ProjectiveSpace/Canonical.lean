@@ -29,6 +29,11 @@ sheaf `ω_ℙ = ⋀ᵈ Ω¹_{ℙ/A}` is invertible, with free generator
 - `AlgebraicGeometry.ProjectiveSpace.map_canonicalGenerator_eq_transitionUnit_smul`: the
   transition rule `ηᵢ = (xᵢ / xⱼ)^{-(d+1)} ηⱼ` on `Uᵢ ∩ Uⱼ`.
 - `AlgebraicGeometry.ProjectiveSpace.canonicalModuleIsoTwist`: `ω_ℙ ≅ 𝒪(-d-1)`, `ηᵢ ↦ eᵢ^{(-d-1)}`.
+
+## Implementation details
+
+The generators `ηᵢ` and `eᵢ^{(-d-1)}` have the same transition units `(xᵢ / xⱼ)^{-d-1}`, so the
+local isomorphisms glue via `Scheme.Modules.isoOfIsFreeGenerator`.
 -/
 
 @[expose] public section
@@ -47,9 +52,7 @@ variable (n : Type u) (A : Type u) [CommRing A]
 
 /-- **The differentials on a basic open of a standard chart.** On a basic open `W = D(f)` of the
 standard open `Uᵢ = D₊(xᵢ)` of `ℙ(n; Spec A)`, the sections of `Ω¹_{ℙ/A}` are free with basis
-the differentials `d(x_k / xᵢ)`, `k ≠ i`: indeed `Γ(W)` is a localization of the polynomial ring
-`Γ(Uᵢ) = A[x_k / xᵢ]` (`chartRingEquiv`), whose Kähler differentials are free on the
-differentials of the variables. -/
+the differentials `d(x_k / xᵢ)`, `k ≠ i`. -/
 theorem exists_basis_relativeDifferentials_basicOpen (i : n)
     (f : Γ(ℙ(n; Spec (.of A)), standardOpen n _ i)) :
     ∃ b : Basis {k : n // k ≠ i} Γ(ℙ(n; Spec (.of A)), ℙ(n; Spec (.of A)).basicOpen f)
@@ -219,9 +222,7 @@ lemma isFreeGenerator_canonicalGenerator (i : n) :
 
 /-- **The transition rule for the local generators of `ω_ℙ`**: on the overlap `Uᵢ ∩ Uⱼ` of two
 distinct standard opens of `ℙ(n; Spec A)`, `ηᵢ = (xᵢ / xⱼ)^{-(d+1)} • ηⱼ`, where
-`(xᵢ / xⱼ)^{-(d+1)} = transitionUnit n _ (-d-1) i j`. This is the change of coordinates formula
-for top forms `exteriorPower.ιMulti_chart_transition`, applied to the universal derivation and
-the coordinates `x_k / xᵢ`, `x_k / xⱼ`. -/
+`(xᵢ / xⱼ)^{-(d+1)} = transitionUnit n _ (-d-1) i j`. -/
 theorem map_canonicalGenerator_eq_transitionUnit_smul {i j : n} (hij : i ≠ j) :
     (canonicalModule n (Spec (.of A)) d).presheaf.map (homOfLE (inf_le_left :
         standardOpen n _ i ⊓ standardOpen n _ j ≤ _)).op
@@ -299,13 +300,9 @@ lemma _root_.AlgebraicGeometry.Scheme.Modules.transition_of_eq_smul {X : Scheme.
     rw [key (hcf i j hij), smul_smul, hb]
 
 /-- **The canonical module of projective space is a twisting sheaf**: `ω_ℙ ≅ 𝒪(-d-1)` on
-`ℙ = ℙ(n; Spec A)`, `Nat.card n = d + 1`. It is the isomorphism sending the local generator
+`ℙ = ℙ(n; Spec A)`, `Nat.card n = d + 1`, sending the local generator
 `ηᵢ = (-1)ⁱ ⋀_{k ≠ i} d(x_k / xᵢ)` of `ω_ℙ` to the generator `eᵢ^{(-d-1)}` of `𝒪(-d-1)` on each
-standard open `Uᵢ` (`canonicalModuleIsoTwist_hom_app`): both families have the transition units
-`(xᵢ / xⱼ)^{-d-1}` (`map_canonicalGenerator_eq_transitionUnit_smul`,
-`map_twistGenerator_eq_transitionUnit_smul`), so the local isomorphisms glue
-(`Scheme.Modules.isoOfIsFreeGenerator`). The signs `(-1)ⁱ` refer to the order on `n` given by
-`e: n ≃ Fin (d + 1)`. -/
+standard open `Uᵢ`. The signs `(-1)ⁱ` refer to the order on `n` given by `e: n ≃ Fin (d + 1)`. -/
 def canonicalModuleIsoTwist :
     canonicalModule n (Spec (.of A)) d ≅ twist n (Spec (.of A)) (-(d : ℤ) - 1) :=
   isoOfIsFreeGenerator (iSup_standardOpen n _) (isFreeGenerator_canonicalGenerator A e)

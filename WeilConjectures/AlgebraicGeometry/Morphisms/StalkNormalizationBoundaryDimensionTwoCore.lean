@@ -13,13 +13,21 @@ public import Mathlib.RingTheory.KrullDimension.Basic
 import WeilConjectures.RingTheory.FlatLocalDepthFormula
 import WeilConjectures.RingTheory.DepthLeSupportDimension
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Flat
+
+/-!
+# Boundary stalks of a smooth pullback have dimension at least two
+
+## References
+
+* Stacks Project, Tags 0EYJ, 0337, 00LK, 033C and 00H8
+-/
+
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- Boundary points of the smooth pullback have stalk dimension at least two.
-Source: Stacks Project, Tags 0EYJ, 0337, 00LK, 033C and 00H8 -/
+/-- Boundary points of the smooth pullback have stalk dimension at least two. -/
 theorem stalk_normalization_boundary_dimension_two_target {S C : Scheme.{u}}
     [IsNoetherian S] [QuasiSeparatedSpace S] [IsIntegral S]
     (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [Smooth c]

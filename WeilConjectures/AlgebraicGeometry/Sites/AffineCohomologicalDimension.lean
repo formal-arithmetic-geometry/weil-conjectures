@@ -14,7 +14,9 @@ Let `K` be a separably closed field and `X` an affine `K`-scheme of finite type 
 most `d`. Then `H^q(X_ét, F) = 0` for every torsion abelian sheaf `F` on `X_ét` and every `q > d`
 (`AlgebraicGeometry.Scheme.subsingleton_H_of_lt_of_isAffine_of_isSepClosed`). This is the case
 `c = 0` of Artin's affine vanishing theorem
-`AlgebraicGeometry.Scheme.hasTorsionCohomologicalDimensionLE_of_isAffine`.
+`AlgebraicGeometry.Scheme.hasTorsionCohomologicalDimensionLE_of_isAffine`, which applies since
+`cd_tor(Spec K) = 0`
+(`AlgebraicGeometry.Scheme.hasTorsionCohomologicalDimensionLE_zero_of_isSepClosed`).
 -/
 
 @[expose] public section
@@ -27,11 +29,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The affine torsion cohomological dimension bound over a separably closed field: for an
 affine finite-type `K`-scheme `X` of dimension at most `d`, `H^q(X_ét, F) = 0` for every torsion
-abelian étale sheaf `F` and every `q > d`. This is
-`AlgebraicGeometry.Scheme.hasTorsionCohomologicalDimensionLE_of_isAffine`
- with `c = 0`, which is allowed since `cd_tor(Spec K) = 0`
-(`AlgebraicGeometry.Scheme.hasTorsionCohomologicalDimensionLE_zero_of_isSepClosed`,
-`lemma-cohomological-dimension-base-field--1`). -/
+abelian étale sheaf `F` and every `q > d`. -/
 theorem subsingleton_H_of_lt_of_isAffine_of_isSepClosed {K : Type u} [Field K] [IsSepClosed K]
     (d : ℕ) {X : Scheme.{u}} [IsAffine X] (a : X ⟶ Spec (.of K)) [LocallyOfFiniteType a]
     (hX : topologicalKrullDim X ≤ (d : WithBot ℕ∞))

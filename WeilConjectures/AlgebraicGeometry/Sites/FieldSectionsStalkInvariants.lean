@@ -21,6 +21,12 @@ import WeilConjectures.AlgebraicGeometry.Sites.FieldInvariantGermRepresentative
 ## References
 
 * Stacks Project, Etale Cohomology, Tags 04JM and 03QW
+
+## Implementation details
+
+In `fieldSections_stalkInvariants`, sections over a finite separable `L` are identified with
+invariant germs by enlarging a germ representative to a finite Galois extension `E / L` and
+applying finite Galois descent for sections; naturality comes from the lift-change action.
 -/
 
 @[expose] public section
@@ -211,36 +217,11 @@ private theorem fieldGerm_injective
     exact ((isSheaf_iff_isSheaf_of_type _ _).mp F.property) _ hcov
   exact (Presieve.isSeparatedFor_singleton.mp hsheaf.isSeparatedFor) hf
 
-/-- Stacks Project, Tags 04JM and 03QW.
-The action on the geometric stalk is characterized by changing lifts through automorphisms
-of the algebraic closure. At every finite separable intermediate field, the canonical germ
-map identifies sections with the elements fixed by its Galois subgroup. These maps commute
-with sheaf morphisms and field embeddings, independently of the extending automorphism.
-
-Proof (Stacks 04JM, direct proof; 03QW for the action and naturality):
-1. Restrict the sheaf to the small etale site of each intermediate field by etale
-composition. For a finite Galois extension
-`E/L`, apply `lem-exc-finite-galois-sections-descent` to identify sections over `L` with
-invariant sections over `E`.
-2. Use the stalk colimit, shrink a pointed neighbourhood
-to its connected component, and apply `lem-weil-pbc-etale-fibre-discrete-separable-points`
-to represent a germ over a finite separable field. Enlarge it to a finite Galois extension
-of `L` using `lem-weil-pbc-finite-galois-receiving-separable-extensions`. The germ map
-there is injective: use `definition-torsion-sheaves--3` and observe
-that every pointed neighbourhood mapping to this one-point spectrum is nonempty and
-etale, hence surjective. Its restriction map is injective by the sheaf equalizer condition
-(`situation-conventions`). Lift each automorphism of `E/L` to the subgroup
-fixing `L`; invariance of the germ and this injectivity give invariance of its representative.
-Finite Galois descent now gives a unique section over `L`. Conversely, germs of sections
-over `L` are fixed by its fixing subgroup.
-3. Naturality in representing objects and the
-lift-change action (`def-weil-pbc-geometric-stalks`, Stacks 03QW) identify pullback along
-an embedding with the extending automorphism acting on the germ. Since `g(L)` lies in
-`L'`, conjugating the subgroup fixing `L'` by `g` inverse gives a subgroup fixing `L`.
-Thus `g` carries invariants into invariants; the action law gives composition compatibility.
-4. Two extensions `g`, `g'` differ by an element of the subgroup fixing `L`, so agree on
-its invariants. Naturality in sheaf morphisms follows from the Yoneda naturality
- and stalk functoriality -/
+/-- There is a Galois action on geometric stalks, characterized by changing lifts through
+automorphisms of the algebraic closure. At every finite separable intermediate field, the
+canonical germ map identifies sections with the elements fixed by its Galois subgroup. These
+maps commute with sheaf morphisms and field embeddings, independently of the extending
+automorphism. -/
 theorem fieldSections_stalkInvariants
     (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]
     [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]

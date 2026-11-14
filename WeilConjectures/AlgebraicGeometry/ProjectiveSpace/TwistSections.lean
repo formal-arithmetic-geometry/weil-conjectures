@@ -23,8 +23,8 @@ degree-`m` part of `k[xᵢ, xⱼ⁻¹ : j ∈ s]`: every section is uniquely a f
 combination of Laurent monomials `xᵉ` with `∑ eᵢ = m` and `eᵢ ≥ 0` for `i ∉ s`, and the
 restriction maps are the inclusions. Hence the Čech complex of `𝒪(m)` on the standard covering
 is the monomial Čech complex `ProjectiveSpace.monomialCechComplex n k m`
-(`ProjectiveSpace.cechComplexTwistIso`); this is the first step of the blueprint proof of
-`lem-pc-projective-space-twist-cohomology`.
+(`ProjectiveSpace.cechComplexTwistIso`); this is the first step in computing the cohomology of
+`𝒪(m)`.
 
 The computation goes through the integral model `Proj ℤ[Tᵢ]`, of which `ℙ(n; Spec k)` is the
 base change and `𝒪(m)` the pullback of the twisting sheaf:

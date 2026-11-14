@@ -107,13 +107,11 @@ theorem isZero_rightDerived_sectionsFunctor_upperStar_of_isLimit {S : Scheme.{u}
     exact (hstage j).eq_of_src _ _
   exact hlimit.of_iso e.symm
 
-/-- Étale cohomology continuity, in the form of an elementwise colimit statement for the
-pullback maps. Let `(Dᵢ)` be a cofiltered system of quasi-compact quasi-separated schemes over `S` with affine
-transition maps, with limit `X = c.pt`, and let `F` be an abelian étale sheaf on `S`. Then
-`Hᵠ(X, F|_X) = colimᵢ Hᵠ(Dᵢ, F|_{Dᵢ})` along the pullback maps
-`AlgebraicGeometry.Etale.cohomologyMap`: every class on `X` comes from some `Dᵢ` (up to the
-canonical identification `F|_X ≅ (F|_{Dᵢ})|_X` of `AlgebraicGeometry.Etale.upperStarComp`), and a
-class on `Dᵢ` which vanishes on `X` already vanishes on some `Dⱼ`, `j ⟶ i`. -/
+/-- Étale cohomology continuity, elementwise form: for a cofiltered system `(Dᵢ)` of
+quasi-compact quasi-separated schemes over `S` with affine transition maps and limit `X = c.pt`,
+and an abelian étale sheaf `F` on `S`, `Hᵠ(X, F|_X) = colimᵢ Hᵠ(Dᵢ, F|_{Dᵢ})` along
+`AlgebraicGeometry.Etale.cohomologyMap`: every class on `X` comes from some `Dᵢ` (via
+`F|_X ≅ (F|_{Dᵢ})|_X`), and a class on `Dᵢ` vanishing on `X` vanishes on some `Dⱼ`, `j ⟶ i`. -/
 theorem cohomologyMap_isColimit_of_isLimit {S : Scheme.{u}}
     (F : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}) {I : Type u} [SmallCategory I]
     [IsCofiltered I] (D : I ⥤ Over S) [∀ i, CompactSpace (D.obj i).left]

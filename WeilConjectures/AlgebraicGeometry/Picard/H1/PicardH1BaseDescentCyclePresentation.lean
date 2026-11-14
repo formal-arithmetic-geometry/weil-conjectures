@@ -33,11 +33,9 @@ universe v
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- The local perfect-complex argument supplies a scalar degree-zero term, its
-outgoing differential vector `d`, and a joint degree-one map `b` with injective residue map,
-annihilating `d`. Degree-zero cycles on every smaller open give sections compatibly
-with restriction to the marked fibre. The assertion stops before localizing `b`,
-proving `d = 0`, or lifting scalars. -/
+/-- Near `w` there are a vector `d` and a linear map `b` over `Γ(W, U)` with `b d = 0` and
+injective residue map at `w`, such that every section `a` on an open `w ∈ V ≤ U` annihilating
+`d` gives a section of the pullback of `L` restricting to `a(w)` on the fibre over `w`. -/
 theorem picard_h1_base_descent_cycle_presentation {X S : Scheme.{v}} (f : X ⟶ S) {n : ℕ}
     (Xi : Fin n → Scheme.{v}) (fi : ∀ i, Xi i ⟶ S)
     [Flat f] [IsProper f] [LocallyOfFinitePresentation f]

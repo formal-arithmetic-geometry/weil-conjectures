@@ -17,17 +17,8 @@ import Mathlib.CategoryTheory.Abelian.Injective.Resolution
 
 ## References
 
-* Stacks Project, Tag 03AJ, relative injective-resolution refinement, step 2
-* Stacks Project, Tag 03AJ, relative refinement, step 2
-* Stacks Project, Tag 03AJ, relative refinement, steps 3 and 5
-* Stacks Project, Tag 03AJ, relative refinement, steps 2 and 3
-* Stacks Project, Tag 0G71, first arrow of the relative triangle
-* Stacks Project, Tag 03AJ, relative refinement, step 6
-* Stacks Project, Tag 03AJ, relative refinement, steps 2 through 4
-* Stacks Project, Tag 03AJ, relative refinement, steps 2 through 5
-* Stacks Project, Tag 03AJ, relative refinement, step 5
-* Stacks Project, Tag 03AJ, relative refinement, steps 2 and 9
-* Stacks Project, Tag 03AJ, relative refinement, steps 7 and 8
+* Stacks Project, Tag 03AJ (relative injective-resolution refinement)
+* Stacks Project, Tag 0G71
 -/
 
 @[expose] public section
@@ -748,7 +739,8 @@ private lemma relativeMap_snd :
 
 end Maps
 
-/-- An explicit global difference of lifting maps proves naturality of their classes. -/
+/-- If a global section `x` witnesses the difference between `z'` and the transport of `z`,
+then the induced map on relative cohomology sends the class of `z` to the class of `z'`. -/
 theorem relativeFrameClass_map_eq
     {T' : Scheme.{u}} (U' : T'.Etale)
     {G' : Sheaf T'.smallEtaleTopology AddCommGrpCat.{u + 1}} (R' : InjectiveResolution G')

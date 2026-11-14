@@ -9,7 +9,13 @@ public import WeilConjectures.AlgebraicGeometry.Lisse.Tower.LisseTowerLocalizati
 
 /-! # Normalized transitions for localized actual realizations
 
-This is the transition-equation part of the actual localized realization argument.
+This is the transition-equation part of the actual localized realization.
+
+## Implementation details
+
+An arbitrary family of level isomorphisms need not commute with transitions, so
+`lisseTower_localized_actual_normalized` is stated for the composites of `cmp.level`, the
+inverse images of `e`, and `cmp.base`.
 
 ## References
 
@@ -58,13 +64,7 @@ private theorem transfer_normalized_square
         congrArg (fun r ↦ b ≫ T.map e' ≫ r) htarget
 
 /-- The localized comparisons constructed from one coherent functor comparison satisfy
-normalized transition compatibility.
-
-STATEMENT-DISPUTED (original statement): an arbitrary family of level isomorphisms
-need not commute with transitions. The corrected statement uses the composites of
-`cmp.level`, the inverse images of `e`, and `cmp.base`. The parent's existential
-statement is unchanged.
--/
+normalized transition compatibility. -/
 theorem lisseTower_localized_actual_normalized
     (X Y : Scheme.{u}) (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (M : AdicTower X d)

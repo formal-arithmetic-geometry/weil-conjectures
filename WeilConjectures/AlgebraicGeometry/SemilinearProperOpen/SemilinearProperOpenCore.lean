@@ -124,40 +124,15 @@ import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 
 /-! # Core constructions for intrinsic proper/open mates of semilinear systems
 
-The existing ordinary and derived system operations, their canonical compositors,
-and the intrinsic beta, clopen projector, alpha and gamma are constructed here.
-The original module re-exports these declarations and proves their coherence laws.
-The adjunct normalization is retained with its proof.
+This file constructs the ordinary and derived system operations, their canonical compositors,
+and the intrinsic beta, clopen projector, alpha and gamma, together with the adjunct
+normalization. Their coherence laws are proved in a separate module.
 
 ## References
 
-* Stacks Project, Tags 0F7B, 0F7C, 0F7D and 0F7F, open cases
-* Stacks 0F7B, coefficient-system extension
-* Zheng 4.1
-* Stacks 05RU
-* Stacks 09A5 and 0F7B
-* Stacks 09A5 and Zheng 4.1
-* Stacks 03D7 and 0F7B
-* Stacks 03D7
-* Zheng 4.10
-* Stacks 03EK
-* Stacks 079P
-* Stacks 07A4
-* Stacks 03D8, 0D6D
-* Stacks 07A7
-* Stacks 03DI, 03DJ
-* Stacks 03DI
-* Stacks 03DJ
-* Stacks 0F7D
-* Stacks, Tag 07A7
-* Stacks, Tags 09AE and 07A7
-* Stacks, Tag 09AE
-* Stacks, Tags 03DI and 09AE
-* Stacks, Tag 0F7B
-* Stacks, Tags 0F7B and 07A7
-* Stacks 0F7B
-* Stacks 0F7B and 03DI, via the inverse open unit
-* Stacks 0F7B, open case
+* Stacks Project, Tags 0F7B, 0F7C, 0F7D and 0F7F (open cases)
+* Stacks Project, Tags 03D7, 03D8, 03DI, 03DJ, 03EK, 05RU, 079P, 07A4, 07A7, 09A5, 09AE and 0D6D
+* Zheng, Construction 4.1 and Lemma 4.10
 -/
 
 @[expose] public noncomputable section
@@ -986,7 +961,7 @@ def jComp {U V X : Scheme.{u}} (j : U ⟶ V) (k : V ⟶ X)
   Adjunction.leftAdjointCompIso (jAdj C τ j) (jAdj C τ k) (jAdj C τ (j ≫ k))
     (pComp C τ j k).symm
 
-/-- Equality transport respects proof-irrelevant open-immersion instances. -/
+/-- Equal open immersions have equal open-extension functors `J`. -/
 theorem J_congr {U X : Scheme.{u}} {f g : U ⟶ X}
     [IsOpenImmersion f] [IsOpenImmersion g] (h : f = g) : J C τ f = J C τ g := by
   subst g

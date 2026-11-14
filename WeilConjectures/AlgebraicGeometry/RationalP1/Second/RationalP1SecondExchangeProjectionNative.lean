@@ -396,8 +396,7 @@ local elab "structural_rfl" : tactic => do
   let _ ← (structuralRefl (← getMainGoal) 100).run {}
   replaceMainGoal []
 
-/-- The original extraction composite agrees with the generic construction.
-The proof shares congruences between repeated native instance expressions. -/
+/-- The extraction composite agrees with the native generic construction. -/
 private theorem second_extract_identification
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

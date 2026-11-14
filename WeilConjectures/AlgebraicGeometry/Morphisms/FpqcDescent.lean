@@ -14,7 +14,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Fpqc
 # Descent of properties of morphisms along fpqc coverings
 
 We record the descent of properties of morphisms of schemes along fpqc coverings
-(Stacks, Section 02KM), following the blueprint of the proper base change theorem.
+(Stacks, Section 02KM).
 
 ## Main results
 
@@ -23,6 +23,11 @@ We record the descent of properties of morphisms of schemes along fpqc coverings
   along faithfully flat morphisms of affine schemes descends along fpqc coverings (Stacks 02KP).
 - `AlgebraicGeometry.Scheme.fpqcCover_of_smallEtaleCover`: a covering family of the small étale
   site is an fpqc covering.
+
+## References
+
+* [Stacks: Section 02KM](https://stacks.math.columbia.edu/tag/02KM)
+* [Stacks: Tag 02KP](https://stacks.math.columbia.edu/tag/02KP)
 -/
 
 @[expose] public section

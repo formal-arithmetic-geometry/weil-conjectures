@@ -14,9 +14,9 @@ public import WeilConjectures.AlgebraicGeometry.Picard.ZeroScheme
 
 Let `k` be a separably closed field, `X` a smooth proper geometrically integral curve of genus
 `g` over `k` with a rational point `σ`, and let `D ⊆ X_T` be a point of `Hilb^g_{X/k}(T)`, e.g.
-the universal divisor over `T = H = Hilb^g_{X/k}`. This file collects the parts of the blueprint
-lemma `proposition-divisors-degree-g-open-chart--1` that are not already the per-`T` statement
-`AlgebraicGeometry.zeroLocus_directImageCounit_eq_of_iso`:
+the universal divisor over `T = H = Hilb^g_{X/k}`. This file complements the per-`T` statement
+`AlgebraicGeometry.zeroLocus_directImageCounit_eq_of_iso` on the open chart of divisors of
+degree `g`:
 
 * `AlgebraicGeometry.isQuasicoherent_pushforward_dual_toModules`: the direct image
   `𝒩 = f_{T,*} 𝒪(D)` is a quasi-coherent `𝒪_T`-module;
@@ -51,11 +51,7 @@ lemma Scheme.Pic.map_ofIsInvertible {X Y : Scheme.{u}} (g : X ⟶ Y) (M : Y.Modu
 with `ℒ ≅ 𝒪(D) ⊗ π^* ℳ` for an invertible `𝒪_T`-module `ℳ`, and assume `π_* 𝒪(D)` is
 invertible. Then `π_* ℒ ≅ π_* 𝒪(D) ⊗ ℳ` (projection formula) and
 
-  `ℒ ⊗ π^* (π_* ℒ)^{-1} ≅ 𝒪(D) ⊗ π^* (π_* 𝒪(D))^{-1}`.
-
-For `ℳ = σ_H^* 𝒪(D_univ)^{-1}` this is the canonical isomorphism
-`ℒ_H ⊗ f_H^* 𝒩_H^{-1} ≅ 𝒪(D_univ) ⊗ f_H^* (f_{H,*} 𝒪(D_univ))^{-1}` of the blueprint, over the
-open `W ⊆ H` where `f_{H,*} 𝒪(D_univ)` is invertible. -/
+  `ℒ ⊗ π^* (π_* ℒ)^{-1} ≅ 𝒪(D) ⊗ π^* (π_* 𝒪(D))^{-1}`. -/
 theorem Scheme.Modules.nonempty_tensorObj_dual_pullback_pushforward_iso {Y T : Scheme.{u}}
     (π : Y ⟶ T) (L OD : Y.Modules) [L.IsInvertible] [OD.IsInvertible] (M : T.Modules)
     [M.IsInvertible] [((pushforward π).obj OD).IsInvertible]
@@ -78,9 +74,7 @@ variable {k : Type u} [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))]
 /-- **`𝒩 = f_{T,*} 𝒪(D)` is quasi-coherent.** For a proper `k`-scheme `X`, a `k`-scheme `T` and
 an effective Cartier divisor `D ⊆ X_T` (e.g. a point of `Hilb^g_{X/k}(T)`, such as the universal
 divisor over `T = H`), the direct image `f_{T,*} 𝒪(D)` along `f_T: X_T ⟶ T` is a
-quasi-coherent `𝒪_T`-module: `𝒪(D)` is invertible, hence quasi-coherent, and `f_T` is proper,
-hence quasi-compact and quasi-separated
-(`AlgebraicGeometry.Scheme.Modules.isQuasicoherent_pushforward`). -/
+quasi-coherent `𝒪_T`-module. -/
 theorem isQuasicoherent_pushforward_dual_toModules [IsProper (X ↘ Spec (.of k))]
     (T : Over (Spec (.of k))) {D : (Limits.pullback (X ↘ Spec (.of k)) T.hom).IdealSheafData}
     (hD : D.IsInvertible) :
@@ -101,15 +95,7 @@ normalized universal module `ℒ_H` over the open `W ⊆ H` where it lies in `F`
 Let `𝒩` be an invertible `𝒪_T`-module with `i: 𝒩 ≅ f_{T,*} ℒ`, i.e. `Rf_{T,*} ℒ ≅ 𝒩[0]`, and let
 `s ∈ H⁰(X_T, ℒ ⊗ f_T^* 𝒩^{-1})` be the section adjoint to the adjunction map `f_T^* 𝒩 ⟶ ℒ`
 (`AlgebraicGeometry.Scheme.Modules.Hom.adjointSection`, transported along an identification
-`ε: (f_T^* 𝒩)^∨ ≅ f_T^* (𝒩^∨)`). Then `Z(s) = D`.
-
-This is the per-`T` form of the statement that the canonical section `1` of
-`𝒪(D_univ) ⊗ f_H^* 𝒩_H^{-1} ≅ ℒ_H ⊗ f_H^* 𝒩_H^{-1}`
-(`AlgebraicGeometry.Scheme.Modules.nonempty_tensorObj_dual_pullback_pushforward_iso`) has zero
-scheme `D_univ` and is the adjoint section of `ℒ_H` for `𝒩_H` on `W`: `Z(s)` is the zero scheme
-of the adjunction morphism
-(`AlgebraicGeometry.Scheme.Modules.Hom.zeroLocus_adjointSection_comp_whiskerLeft`),
-which is `D` by `AlgebraicGeometry.zeroLocus_directImageCounit_eq_of_iso`. -/
+`ε: (f_T^* 𝒩)^∨ ≅ f_T^* (𝒩^∨)`). Then `Z(s) = D`. -/
 theorem zeroLocus_adjointSection_eq_of_iso
     (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 (Spec (.of k)))
     [∀ T : Over (Spec (.of k)),

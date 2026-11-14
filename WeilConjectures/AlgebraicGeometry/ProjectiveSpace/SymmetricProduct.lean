@@ -44,6 +44,12 @@ line.
   finite nonempty index type `n` there are `k` and a finite surjective morphism
   `(ℙ¹_S)ᵏ ⟶ ℙ(n; S)` over `S`.
 
+## Implementation details
+
+`σₖ₊₁` is the composite of `ℙ¹_{σₖ}` with the multiplication morphism
+`((x: y), ∑ⱼ Gⱼ tʲ) ↦ (x t + y) · ∑ⱼ Gⱼ tʲ`, so finiteness and surjectivity follow by induction
+from those of the multiplication morphism, with no Noetherian hypothesis on `S`.
+
 ## References
 
 - Stacks Project, proof of Lemma 59.91.10, <https://stacks.math.columbia.edu/tag/0A4F>
@@ -74,13 +80,7 @@ noncomputable def projectiveLinePowProj : (n : ℕ) → (S : Scheme.{u}) → pro
 /-- **The symmetric product morphism** `σₖ: (ℙ¹_S)ᵏ ⟶ ℙ(ι; S)` for an index type `ι` with
 `k + 1` elements (numbered by `e: ι ≃ Fin (k + 1)`): a point `((xᵢ: yᵢ))ᵢ` is sent to
 `[F₀: ⋯: Fₖ]`, where `∏ᵢ (xᵢ t + yᵢ) = ∑ⱼ Fⱼ tʲ`, the coordinate `F_{e c}` being the
-homogeneous coordinate `c`.
-
-It is defined by recursion on `k`: `σ₀` is the inverse of the isomorphism `ℙ(ι; S) ⟶ S` for a
-one-element index type, and `σₖ₊₁` is the composite of `ℙ¹_{σₖ}: ℙ¹_{(ℙ¹_S)ᵏ} ⟶ ℙ¹_{ℙᵏ_S}`
-with the multiplication morphism `ℙ¹_{ℙᵏ_S} ⟶ ℙᵏ⁺¹_S`,
-`((x: y), ∑ⱼ Gⱼ tʲ) ↦ (x t + y) · ∑ⱼ Gⱼ tʲ`
-(`AlgebraicGeometry.ProjectiveSpace.projectiveLineMul`). -/
+homogeneous coordinate `c`. -/
 noncomputable def symmetricProduct (S : Scheme.{u}) :
     (k : ℕ) → {ι : Type u} → (ι ≃ Fin (k + 1)) → (projectiveLinePow k S ⟶ ℙ(ι; S))
   | 0, ι, e =>
@@ -105,9 +105,7 @@ theorem symmetricProduct_over (S : Scheme.{u}) (k : ℕ) {ι : Type u} (e : ι �
     rw [symmetricProduct, Category.assoc, projectiveLineMul_over, map_over_assoc, ih]
     rfl
 
-/-- **The symmetric product morphism is finite**, as a composite of base changes of the finite
-multiplication morphisms. (On the chart where all `yᵢ` are nonzero, each `zᵢ = xᵢ / yᵢ` is a
-root of the monic polynomial `Tᵏ - e₁ Tᵏ⁻¹ + ⋯ ± eₖ` over the elementary symmetric functions.) -/
+/-- **The symmetric product morphism is finite.** -/
 theorem isFinite_symmetricProduct (S : Scheme.{u}) (k : ℕ) {ι : Type u}
     (e : ι ≃ Fin (k + 1)) : IsFinite (symmetricProduct S k e) := by
   induction k generalizing ι with
@@ -123,8 +121,7 @@ theorem isFinite_symmetricProduct (S : Scheme.{u}) (k : ℕ) {ι : Type u}
     rw [symmetricProduct]
     infer_instance
 
-/-- **The symmetric product morphism is surjective**: over an algebraically closed field every
-binary form of degree `k` is a product of `k` linear forms, including factors at infinity. -/
+/-- **The symmetric product morphism is surjective.** -/
 theorem surjective_symmetricProduct (S : Scheme.{u}) (k : ℕ) {ι : Type u}
     (e : ι ≃ Fin (k + 1)) : Surjective (symmetricProduct S k e) := by
   induction k generalizing ι with
@@ -143,10 +140,7 @@ theorem surjective_symmetricProduct (S : Scheme.{u}) (k : ℕ) {ι : Type u}
 /-- **The symmetric product morphism is finite and surjective.** For a finite nonempty index
 type `n` with `k + 1` elements there is a finite surjective morphism `σ: (ℙ¹_S)ᵏ ⟶ ℙ(n; S)` over
 `S`: the symmetric product morphism `((xᵢ: yᵢ))ᵢ ↦ [F₀: ⋯: Fₖ]` with
-`∏ᵢ (xᵢ t + yᵢ) = ∑ⱼ Fⱼ tʲ` (`AlgebraicGeometry.ProjectiveSpace.symmetricProduct`). It is finite
-because each `zᵢ = xᵢ / yᵢ` is a root of the monic polynomial `Tᵏ - e₁ Tᵏ⁻¹ + ⋯ ± eₖ` over the
-elementary symmetric functions (and likewise on the other charts), and surjective because a
-binary form of degree `k` over an algebraically closed field is a product of `k` linear forms. -/
+`∏ᵢ (xᵢ t + yᵢ) = ∑ⱼ Fⱼ tʲ` (`AlgebraicGeometry.ProjectiveSpace.symmetricProduct`). -/
 theorem exists_isFinite_surjective_projectiveLinePow (n : Type u) [Finite n] [Nonempty n]
     (S : Scheme.{u}) :
     ∃ (k : ℕ) (σ : projectiveLinePow k S ⟶ ℙ(n; S)), IsFinite σ ∧ Surjective σ ∧
@@ -157,14 +151,9 @@ theorem exists_isFinite_surjective_projectiveLinePow (n : Type u) [Finite n] [No
   exact ⟨k, symmetricProduct S k e, isFinite_symmetricProduct S k e,
     surjective_symmetricProduct S k e, symmetricProduct_over S k e⟩
 
-/-- A finite symmetric-product cover over a
-Noetherian base.
-
-For a scheme `S` and `n = k + 1 ≥ 1`, with `ι` a type with `n + 1` elements indexing the
+/-- For a scheme `S` and `n = k + 1 ≥ 1`, with `ι` a type with `n + 1` elements indexing the
 homogeneous coordinates of `ℙⁿ_S`, the symmetric product morphism `σₙ: (ℙ¹_S)ⁿ ⟶ ℙⁿ_S` is
-finite and surjective. The blueprint assumes `S` Noetherian; this is not needed here, since
-finiteness is proved by induction from the finite multiplication morphisms rather than from
-the finiteness of the fibres. -/
+finite and surjective. -/
 theorem isFinite_and_surjective_symmetricProduct (S : Scheme.{u}) (k : ℕ) {ι : Type u}
     (e : ι ≃ Fin (k + 1 + 1)) :
     IsFinite (symmetricProduct S (k + 1) e) ∧ Surjective (symmetricProduct S (k + 1) e) :=

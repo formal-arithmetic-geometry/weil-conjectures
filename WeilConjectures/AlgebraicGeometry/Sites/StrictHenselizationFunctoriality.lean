@@ -32,8 +32,10 @@ over the closed point.
 
 ## Main results
 
-- `AlgebraicGeometry.Scheme.existsUnique_strictHenselizationMap`: clause 3 of the blueprint.
-- `AlgebraicGeometry.Scheme.strictLocalizationCone_π_app_comp_eq`: clause 4 of the blueprint.
+- `AlgebraicGeometry.Scheme.existsUnique_strictHenselizationMap`: the strict henselization map
+  is the unique local homomorphism compatible with the structure morphisms and the points.
+- `AlgebraicGeometry.Scheme.strictLocalizationCone_π_app_comp_eq`: compatibility of the strict
+  henselization map with pointed étale neighbourhoods.
 
 ## References
 
@@ -63,11 +65,7 @@ lemma spec_map_apply_eq_closedPoint {R : CommRingCat.{u}} [IsLocalRing R] {K : T
 /-- **Sections of étale morphisms over a strictly henselian local ring.** Let `R` be a strictly
 henselian local ring, `e: R ⟶ K` a ring map to a field with kernel the maximal ideal,
 `p: X ⟶ Spec R` an étale morphism and `μ: Spec K ⟶ X` a lift of `Spec e` along `p`. Then `p`
-has exactly one section `σ` with `Spec e ≫ σ = μ`.
-
-This is the geometric form of `IsStrictlyHenselianLocalRing.existsUnique_algHom_comp_eq`, applied on
-an affine open of `X`
-around the image of `μ`: every section through that point factors through the affine open. -/
+has exactly one section `σ` with `Spec e ≫ σ = μ`. -/
 theorem existsUnique_section_of_etale {R : CommRingCat.{u}} [IsStrictlyHenselianLocalRing R]
     {K : Type u} [Field K] (e : R ⟶ CommRingCat.of K)
     (he : RingHom.ker e.hom = maximalIdeal R) {X : Scheme.{u}} (p : X ⟶ Spec R) [Etale p]
@@ -283,7 +281,7 @@ lemma eq_strictHenselizationMap (h : strictHenselization (t ≫ g) ⟶ strictHen
   · rw [← Category.assoc, ← Spec.map_comp, h₂,
       spec_map_strictHenselizationEval_comp_strictLocalizationCone_π_app]
 
-/-- **Functoriality of the strict henselization** (clause 3): the strict henselization map is the
+/-- **Functoriality of the strict henselization**: the strict henselization map is the
 unique (local) ring homomorphism `h: 𝒪^{sh}_{S,t ≫ g} ⟶ 𝒪^{sh}_{T,t}` with
 `j_S ∘ Spec h = g ∘ j_T` inducing the inclusion of residue fields inside `Ω`. -/
 theorem existsUnique_strictHenselizationMap :
@@ -296,7 +294,7 @@ theorem existsUnique_strictHenselizationMap :
     strictHenselizationMap_comp_strictHenselizationEval g t⟩,
     fun h ⟨_, h₁, h₂⟩ ↦ eq_strictHenselizationMap g t h h₁ h₂⟩
 
-/-- **Compatibility of the strict henselization map with neighbourhoods** (clause 4): if `(V, v)`
+/-- **Compatibility of the strict henselization map with neighbourhoods**: if `(V, v)`
 is an affine pointed étale neighbourhood of `t ≫ g`, `(W, w)` one of `t` and `w: W ⟶ V` is
 compatible with the structure morphisms and the points, then `T_(t) ⟶ W ⟶ V` equals
 `T_(t) ⟶ S_(t ≫ g) ⟶ V`. -/

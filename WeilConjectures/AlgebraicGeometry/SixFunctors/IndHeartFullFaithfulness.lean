@@ -24,8 +24,7 @@ The coefficient ring objects carry their canonical ring-object structures: the o
 `Profinite.continuousMapRingObj E` resp. `Profinite.padicAlgClRingObj ℓ`, and on
 `Λ_X = condensedRingObj Λ X` the one transported along `upperStarFromPoint X` (the scoped
 instance `Functor.monObjObj` of `CategoryTheory.Obj`). Small diagrams are indexed by categories
-in `Type (u + 1)`, the hom universe of the module category, as in `CategoryTheory.Ind`
-(size convention prose-01-10).
+in `Type (u + 1)`, the hom universe of the module category, as in `CategoryTheory.Ind`.
 -/
 
 @[expose] public noncomputable section
@@ -87,8 +86,9 @@ private theorem constructible_finitelyPresentable
   exact constructible_sheaf_ext_continuity ℓ E R hR X C hC M
     (colimit.cocone M) (colimit.isColimit M) 0
 
-/-- The two assertions of proposition-ind-constructible-sheaves for a condensed coefficient ring
-object `Λ` and a scheme `X`, in `Mod_{Λ_X}` (internal modules over `Λ_X = p_X^* Λ`):
+/-- Finite presentation and full faithfulness of the ind-heart realization for a condensed
+coefficient ring object `Λ` and a scheme `X`, in `Mod_{Λ_X}` (internal modules over
+`Λ_X = p_X^* Λ`):
 1. every constructible module is finitely presentable, i.e.
 `Hom(C, -)` preserves all small filtered colimits;
 2. there is a functor `Φ: Ind(Cons(X, Λ)) ⥤ Mod_{Λ_X}` which is the realization: its

@@ -59,9 +59,8 @@ noncomputable def isTerminalEtaleTerminal : IsTerminal (etaleTerminal R) :=
 
 variable {R}
 
-/-- Blueprint `sbc-lem-strict-henselian-constant-cohomology` (the key step): over a strictly
-henselian local ring `R`, an étale morphism `f : U ⟶ Spec R` whose image contains the closed
-point has a section. -/
+/-- Over a strictly henselian local ring `R`, an étale morphism `f : U ⟶ Spec R` whose image
+contains the closed point has a section. -/
 theorem exists_section_of_etale_of_isStrictlyHenselianLocalRing {U : Scheme.{u}}
     (f : U ⟶ Spec (.of R)) [AlgebraicGeometry.Etale f] (y : U)
     (hy : f y = IsLocalRing.closedPoint R) :
@@ -159,9 +158,8 @@ instance projective_constantSheaf_of_isStrictlyHenselianLocalRing :
     (preservesEpimorphisms_sheafSections_of_isStrictlyHenselianLocalRing R) _
     AddCommGrpCat.projective_of_uliftInt
 
-/-- Blueprint `sbc-lem-strict-henselian-constant-cohomology`, positive degrees: over a strictly
-henselian local ring `R`, every abelian étale sheaf on `Spec R` has no cohomology in positive
-degrees. In particular this holds for a finite constant sheaf. -/
+/-- Over a strictly henselian local ring `R`, every abelian étale sheaf on `Spec R` has no
+cohomology in positive degrees. -/
 theorem subsingleton_H_of_isStrictlyHenselianLocalRing
     (F : Sheaf (Spec (.of R)).smallEtaleTopology AddCommGrpCat.{u + 1}) (n : ℕ) :
     Subsingleton (Sheaf.H F (n + 1)) :=
@@ -182,11 +180,8 @@ lemma bijective_toSheafify_app_of_isStrictlyHenselianLocalRing
         (toSheafify (Spec (.of R)).smallEtaleTopology P) s)
     exact ⟨t, ht.trans (by simp)⟩
 
-/-- Blueprint `sbc-lem-strict-henselian-constant-cohomology`, degree zero: over a strictly
-henselian local ring `R`, the cohomology in degree `0` of the constant étale sheaf on `Spec R`
-with value `A` is `A`: the global sections of the constant sheaf, computed through the
-identification `H⁰ = Γ` (`CategoryTheory.Sheaf.H.equiv₀`), are the sections of the constant
-presheaf, since sheafification does not change sections over `Spec R`. -/
+/-- Over a strictly henselian local ring `R`, the cohomology in degree `0` of the constant
+étale sheaf on `Spec R` with value `A` is `A`. -/
 noncomputable def hZeroConstantSheafAddEquiv
     (A : AddCommGrpCat.{u + 1}) :
     Sheaf.H ((constantSheaf (Spec (.of R)).smallEtaleTopology

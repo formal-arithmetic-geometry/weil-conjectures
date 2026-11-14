@@ -31,11 +31,7 @@ namespace AlgebraicGeometry.Scheme.ProEt
 
 /-- Every object of the small pro-etale site has a covering by spectra of w-contractible
 rings. For every such affine object, epimorphisms onto its represented sheaf split,
-and that represented sheaf is projective. The splitting clause is the representable
-form of `GrothendieckTopology.IsWeaklyContractible` on this subcanonical site.
-
-Stacks Project, Tag 098F.
--/
+and that represented sheaf is projective. -/
 theorem weaklyContractible_basis (X : Scheme.{u}) :
     (∀ U : X.ProEt,
       ∃ (I : Type u) (W : I → X.ProEt) (f : ∀ i : I, W i ⟶ U),

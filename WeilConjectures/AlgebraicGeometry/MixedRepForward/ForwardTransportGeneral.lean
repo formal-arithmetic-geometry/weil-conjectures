@@ -17,8 +17,12 @@ import WeilConjectures.CategoryTheory.FiniteOpenMixedTensorRepresentativeCounitT
 # The forward cochain tensor counit square for general coefficients
 
 This is the coefficient-generic form of
-`AlgebraicGeometry.ProEtale.MixedRepForward.forward_transport`; stating it for an
-abstract coefficient category keeps elaboration and kernel checking cheap.
+`AlgebraicGeometry.ProEtale.MixedRepForward.forward_transport`.
+
+## Implementation details
+
+Stating the result for an abstract coefficient category keeps elaboration and kernel checking
+cheap. The proof follows the same route as `forward_transport`.
 
 ## References
 
@@ -80,15 +84,8 @@ local notation "ShX" => Sheaf (Scheme.ProEt.topology X) A
 local notation "ShU" => Sheaf (Scheme.ProEt.topology U) A
 local notation "pull" => (j)^*[A]
 
-/-- The published comparison satisfies its forward counit square on arbitrary complexes,
-for an arbitrary coefficient category.
-
-Proof. Apply `leftDerivedUpperStarTensorComparison_app_app_fac` to the homotopy
-quotients of `P` and `Q`. Expand the two counits and combine their whiskered components
-into a tensor of morphisms. The cochain tensorators equal the homotopy tensorators by
-`cochainLocalization_tensorator_eq`; the homotopy oplax comparison is the quotient of
-the signed-total cochain comparison. Finally `leftDerivedFactors_eq_counit` identifies
-each pullback counit with its exact-derived factors. No tensorator is inverted. -/
+/-- The derived pullback tensor comparison satisfies its forward counit square on arbitrary
+complexes `P` and `Q`, for an arbitrary coefficient category. -/
 theorem forward_transport_general
     (P Q : CochainComplex ShX ℤ) :
     ((AlgebraicGeometry.ProEtale.leftDerivedUpperStarTensorNatIso

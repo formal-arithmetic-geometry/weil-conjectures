@@ -11,8 +11,6 @@ import WeilConjectures.AlgebraicGeometry.Proj.ProjScalarExtensionTwistChartSurje
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor
 /-! # The scalar-extension twist map on a complete standard chart
 
-This is the complete-chart subproblem extracted from the arbitrary-open statement.
-
 ## References
 
 * Stacks Project, Tags 01MY and 01N2
@@ -32,11 +30,7 @@ open AlgebraicGeometry.Scheme.Modules
 
 namespace AlgebraicGeometry.Proj
 
-/-- The prescribed scalar-extension twist map is bijective on the whole standard chart.
-
-This is the chart-level part of the proof of
-`scalarExtension_twistMap_basicOpen_bijective`; arbitrary subopens require the
-sheaf restriction argument in the parent theorem. -/
+/-- The prescribed scalar-extension twist map is bijective on the whole standard chart. -/
 theorem scalarExtension_twistMap_chart_bijective
     {R S A B : Type u} [CommRing R] [CommRing S] [CommRing A] [CommRing B]
     [Algebra R S] [Algebra R A] [Algebra S B]

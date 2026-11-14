@@ -183,13 +183,9 @@ private theorem restrictionWithTensor_exists {C : Type (u + 1)} [Category.{u} C]
     L a b sa sb r.ordinaryTensor hn hp
   exact ⟨r, b, sb, t, ht⟩
 
-/-- The base restriction/tensor package exists.
-
-Restrict the coefficient map to the two localized sites.  The localized module
-adjunction and exactness give the operation and its derived adjunction.  Apply
-the normalized tensor descent construction on each localized site and to the
-restriction functors; the pure-tensor formulas determine the ordinary and
-derived comparisons and their signed shift equations. -/
+/-- For every object `V` of the pro-etale site of `Y`, the base restriction and tensor data
+`LocalBaseData g V` (localized coefficient restriction, its derived adjunction and the tensor
+comparisons) exists. -/
 theorem localBaseData_exists {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R_Y : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
     (R_X : Sheaf (ProEt.topology X) CommRingCat.{u + 1})

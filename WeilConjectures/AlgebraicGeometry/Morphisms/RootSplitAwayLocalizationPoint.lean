@@ -12,15 +12,21 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.RootSplitAwayLocalizationChar
 import WeilConjectures.AlgebraicGeometry.Morphisms.RootSplitAwayCoverEtale
 import WeilConjectures.AlgebraicGeometry.Morphisms.RootSplitAwayCoverPoint
 
+/-! # Étale affine charts of the punctured root cover
+
+## References
+
+* Stacks Project, Tag 0EYG, off-divisor case
+-/
+
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- The punctured root cover has an affine etale chart containing a lift of y.
-
-Source: Stacks Project, Tag 0EYG, off-divisor branch; standard basic-open localization.
--/
+/-- For `y ∉ V(g)`, the punctured root cover `D(g) ⊆ Spec R[X] ⧸ (X ^ n - g)` is isomorphic to an
+affine scheme `Spec S`, étale over `Spec R` and with `g` a unit in `S`, containing a lift of
+`y`. -/
 theorem root_split_away_localization_point
     (R : CommRingCat.{u}) (g : R) (n : ℕ) (hn : 0 < n ∧ IsUnit (n : R))
     (y : Spec R) (hy : g ∉ y.asIdeal) :

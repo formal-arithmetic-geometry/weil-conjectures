@@ -31,11 +31,8 @@ attribute [local irreducible] HasDerivedCategory.standard pbcDerivedRestrict
   constantAdicQuotientRightIso constantAdicFiniteProjection
   localProEtaleNormalization normalizationConstantArrow lisseTowerAlgebraArrow
 
-/-- Transport the supplied actual comparisons and descent equations to one further
-pro-etale localization, using the constructed scalar comparison.
-
-These are the actual-level parts of steps 1 and 2 of
-lem-weil-pbc-lisse-tower-localized-realization. -/
+/-- The supplied actual comparisons and descent equations transport to one further
+pro-étale localization, using the constructed scalar comparison. -/
 theorem lisseTower_localized_actual
     (X Y : Scheme.{u}) (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (M : AdicTower X d)

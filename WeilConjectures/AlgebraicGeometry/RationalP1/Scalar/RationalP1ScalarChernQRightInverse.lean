@@ -117,10 +117,7 @@ private theorem isIso_biprod_desc_of_homology
       apply biprod.hom_ext <;> apply biprod.hom_ext' <;>
         first | exact hzU.eq_of_src _ _ | exact hzV.eq_of_src _ _
 
-/-- The explicit scalar Q biproduct map has a right inverse.
-
-This is the corresponding one-sided inverse component of the scalar transport
-argument; the two sides are kept as separate intermediate obligations. -/
+/-- The explicit scalar Q biproduct map has a right inverse. -/
 theorem scalar_q_chern_right_inverse
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

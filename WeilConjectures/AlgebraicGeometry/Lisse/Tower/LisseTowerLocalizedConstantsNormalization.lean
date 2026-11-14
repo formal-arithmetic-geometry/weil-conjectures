@@ -9,20 +9,14 @@ public import WeilConjectures.AlgebraicGeometry.Lisse.Tower.LisseTowerPulledScal
 
 /-! # Normalized transition equation for localized constant models
 
-This is the normalized-arrow part of
-`lem-weil-pbc-lisse-tower-localized-constants`.
+This is the normalized-arrow part of the localized constant realization.
 
 ## References
 
 * Stacks Project, Modules on Sites, Tags 03CY and 03DA
-* Sites, Tag 0H7J
-* Cohomology on Sites, Tag 06YY
-* Stacks Tags 03CY and 0H7J
-* functor associativity, Stacks Categories, Section 4.2
-* Stacks Tags 03DA and 06YY
-* Stacks Tag 06YY
-* Stacks Categories, Section 4.27
-* Tags 03DA and 06YY (coefficient restriction)
+* Stacks Project, Sites, Tag 0H7J
+* Stacks Project, Cohomology on Sites, Tag 06YY
+* Stacks Project, Categories, Sections 4.2 and 4.27
 -/
 
 @[expose] public noncomputable section

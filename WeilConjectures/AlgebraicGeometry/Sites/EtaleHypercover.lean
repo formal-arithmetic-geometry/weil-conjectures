@@ -21,22 +21,23 @@ public import WeilConjectures.CategoryTheory.Sites.SemiSimplicialHypercover.Map
 
 Let `X` be a quasi-compact quasi-separated scheme. A *qcqs hypercover* of `X` is a
 semi-simplicial hypercover `U` of the small étale site of `X` all of whose terms `U_n` are
-quasi-compact and quasi-separated (`AlgebraicGeometry.Scheme.IsQcqsHypercover`). These are the
-finite hypercovers of blueprint `corollary-cohomology-pro-etale-affine`, except that we work with
-semi-simplicial hypercovers (face maps only), which is all the computation of cohomology uses.
+quasi-compact and quasi-separated (`AlgebraicGeometry.Scheme.IsQcqsHypercover`).
 
 Local lifting requirements can be met after refinement within qcqs hypercovers
-(`AlgebraicGeometry.Scheme.IsQcqsHypercover.exists_refinement_lift`, blueprint
-`corollary-cohomology-pro-etale-affine`): a section of a quotient sheaf over `U_p` lifts after
-replacing `U_p` by a finite disjoint union of affine étale schemes on which it lifts, and the
-higher terms by the relative coskeleta `M_k(V) ×_{M_k(U)} U_k`. Hence the étale cohomology of `X`
-with coefficients in sheaves of `Λ`-modules is computed by qcqs hypercovers
+(`AlgebraicGeometry.Scheme.IsQcqsHypercover.exists_refinement_lift`). Hence the étale
+cohomology of `X` with coefficients in sheaves of `Λ`-modules is computed by qcqs hypercovers
 (`AlgebraicGeometry.Scheme.exists_cohomologyClass_eq_of_isQcqsHypercover`,
-`AlgebraicGeometry.Scheme.exists_isCoboundary_of_isQcqsHypercover`, blueprint
-`corollary-cohomology-pro-etale-affine`).
+`AlgebraicGeometry.Scheme.exists_isCoboundary_of_isQcqsHypercover`).
 
 We also record the behaviour of hypercovers and of their cohomology classes under base change
 along a morphism `g : Y ⟶ X`.
+
+## Implementation details
+
+We work with semi-simplicial hypercovers (face maps only), which is all the computation of
+cohomology uses. In the refinement, a section of a quotient sheaf over `U_p` lifts after
+replacing `U_p` by a finite disjoint union of affine étale schemes on which it lifts, and the
+higher terms by the relative coskeleta `M_k(V) ×_{M_k(U)} U_k`.
 -/
 
 @[expose] public section

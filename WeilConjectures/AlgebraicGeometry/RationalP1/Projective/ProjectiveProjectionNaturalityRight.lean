@@ -150,7 +150,7 @@ private theorem normalized_projection_naturality_right
   exact replace_square (eq_of_heq (ha g K N')) (eq_of_heq (ha g K N))
     (trace_projection_naturality_right Λ g K n)
 
-/-- Naturality in the supported coefficient argument of the fixed projection map. -/
+/-- The fixed projection map is natural in the coefficient `N`. -/
 theorem projectionMap_naturality_right
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X S : Scheme.{u}} (g : X ⟶ S)

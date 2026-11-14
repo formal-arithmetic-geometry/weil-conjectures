@@ -10,8 +10,11 @@ import WeilConjectures.AlgebraicGeometry.IsomorphismScalarTensor.IsomorphismScal
 
 /-! # Finite scalar comparison formula
 
-This is the finite comparison component of the finite scalar model.  It is
-split from the full construction so that the balanced finite comparison can be
+This is the finite comparison component of the finite scalar model.
+
+## Implementation details
+
+The balanced finite comparison is split from the full construction so that it can be
 proved independently of the quotient and transition maps.
 
 ## References
@@ -34,11 +37,8 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (ι : E →ₐ[ℚ_[l]] L) {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]
 
-/--
-The finite balanced comparison exists for a normalized completed comparison.
-It is the reassociation-and-transport part of the finite coefficient argument;
-the quotient and transition formulas are separate obligations.
--/
+/-- A normalized completed comparison `b` admits finite balanced comparisons at every level
+satisfying `FiniteFormula`. -/
 theorem finite_formula_exists
     (b : (integralOperationsGoodComplex l E Y).ι ⋙ leftComplex l E L ι g ≅
       (integralOperationsGoodComplex l E Y).ι ⋙ rightComplex l E L ι g)

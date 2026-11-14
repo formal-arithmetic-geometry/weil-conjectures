@@ -12,9 +12,8 @@ public import WeilConjectures.CategoryTheory.Ringed.Site.RingedSiteDualityMaps
 
 ## References
 
-* Zheng Construction 4.1 and Stacks 06YS, 07A4
-* Stacks 06YN, 08JD and 0A97
-* Zheng Construction 4.1
+* Zheng, Construction 4.1
+* Stacks Project, Tags 06YS, 06YN, 07A4, 08JD and 0A97
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -44,8 +43,7 @@ structure SystemTensorBase where
       M.closed = closed }
   levelClosed : ∀ n : ℕ, Closed.{c, v, r} J (B n)
   levelTensorModels : ∀ n : ℕ, Models.{c, v, r} J (B n) (levelClosed n)
-/-- Proof: choose the closed structure and K-flat model from the ringed-site
-derived tensor construction. -/
+/-- Closed structures and K-flat tensor models for semilinear systems exist. -/
 theorem systemTensorBase_nonempty :
     Nonempty (SystemTensorBase.{c, v, r} J B τ) := by
   classical

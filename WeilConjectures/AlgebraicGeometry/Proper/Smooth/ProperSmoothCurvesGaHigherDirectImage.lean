@@ -27,18 +27,26 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCo
 For a proper smooth family `f : C ⟶ S` of curves with geometrically connected fibres over a
 Noetherian base of characteristic `p`, the étale higher direct images `Rᵠf_* 𝔾ₐ` are the étale
 sheaves of the finite locally free modules `Rᵠf_* 𝒪_C`, and the Artin--Schreier map induces
-`F - 1` for a Frobenius-linear `F`.
+`F - 1` for a Frobenius-linear `F`. Concretely `E = Rᵠf_* 𝒪_C` with `F` induced by the absolute
+Frobenius of `C`: `E = 𝒪_S` with `F` the Frobenius for `q = 0` (as `f_* 𝒪_C = 𝒪_S`
+universally), `E` is locally free of rank the genus for `q = 1`, and `E = 0` otherwise.
 
 This is an input from coherent cohomology (cohomology and base change for the structure sheaf
 of a family of curves, and the comparison of étale and Zariski cohomology of quasi-coherent
 modules); it is used in case (b) of Stacks Project, Tag 0GKV.
 
+## Implementation details
+
+The degree-one case `properSmoothCurves_higherDirectImage_ga_frobeniusLinear_one` is stated
+without proof: there is not yet a cohomology and base change theorem for `R¹f_* 𝒪_C` of a
+family of curves, nor the comparison of its étale sheaf with `R¹f_* 𝔾ₐ` compatibly with
+Frobenius.
+
 ## References
 
-* Stacks Project, Tag 0GKV, case (b)
-* Stacks Project, Tag 0GKV, case (b): "`R¹f_*𝒪_X` is finite locally free and its formation commutes
-  with base change"
-* this uses cohomology and base change (Tags 0BDJ, 0E0L), flat base change (Tag 02KH) and the
+* Stacks Project, Tag 0GKV, case (b): "`R¹f_*𝒪_X` is finite locally free and its formation
+  commutes with base change"
+* Cohomology and base change (Stacks, Tags 0BDJ, 0E0L), flat base change (Tag 02KH) and the
   comparison of étale and Zariski cohomology of quasi-coherent modules (Tag 03DW)
 -/
 
@@ -84,11 +92,7 @@ theorem properSmoothCurves_higherDirectImage_ga_frobeniusLinear_zero
 With the hypotheses of `properSmoothCurves_higherDirectImage_ga_frobeniusLinear`, the étale
 sheaf `R¹f_* 𝔾ₐ` is the universe lift of the étale sheaf of a finite locally free
 quasi-coherent `𝒪_S`-module `E = R¹f_* 𝒪_C`, with the map induced by `℘ = Frob - 1`
-corresponding to `F - 1` for a Frobenius-linear `F` induced by the absolute Frobenius of `C`.
-
-This is stated without proof: the project has no cohomology and base change theorem for
-`R¹f_* 𝒪_C` of a family of curves, nor the comparison of its étale sheaf with `R¹f_* 𝔾ₐ`
-compatibly with Frobenius. -/
+corresponding to `F - 1` for a Frobenius-linear `F` induced by the absolute Frobenius of `C`. -/
 theorem properSmoothCurves_higherDirectImage_ga_frobeniusLinear_one
     {C S : Scheme.{u}} [IsNoetherian S]
     (f : C ⟶ S) [IsProper f] [Smooth f] [GeometricallyConnected f]
@@ -121,12 +125,7 @@ Noetherian base `S` on which the prime `p` vanishes. For every degree `q` there 
 locally free quasi-coherent `𝒪_S`-module `E` and a Frobenius-linear endomorphism `F` of its
 étale sheaf (`F (a e) = aᵖ F e`) such that the degree-`q` étale higher direct image of `𝔾ₐ` is
 the universe lift of the étale sheaf of `E`, with the map induced by the Artin--Schreier map
-`℘ = Frob - 1` corresponding to `F - 1`.
-
-Concretely `E = Rᵠf_* 𝒪_C` with `F` induced by the absolute Frobenius of `C`: `E = 𝒪_S` with
-`F` the Frobenius for `q = 0` (as `f_* 𝒪_C = 𝒪_S` universally), `E` is locally free of rank the
-genus for `q = 1`, and `E = 0` otherwise.
--/
+`℘ = Frob - 1` corresponding to `F - 1`. -/
 theorem properSmoothCurves_higherDirectImage_ga_frobeniusLinear
     {C S : Scheme.{u}} [IsNoetherian S]
     (f : C ⟶ S) [IsProper f] [Smooth f] [GeometricallyConnected f]
