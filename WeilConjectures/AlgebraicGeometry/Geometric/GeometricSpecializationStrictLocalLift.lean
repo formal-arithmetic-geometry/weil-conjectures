@@ -39,7 +39,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 /-!
 # Lifting geometric specializations to strict local schemes
 
-Source: Stacks Project, Tag 0GJ5, remark-can-lift.
+## References
+
+* Stacks Project, Tag 0GJ5
 -/
 
 @[expose] public section
@@ -53,8 +55,7 @@ namespace AlgebraicGeometry.Scheme
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- A prescribed geometric generization lifts through the structural map of the strict
-henselization at the specialized geometric point.
-Source: Stacks Project, Tag 0GJ5, remark-can-lift. -/
+henselization at the specialized geometric point. -/
 theorem exists_geometricPoint_strictHenselization_lift
     {S : Scheme.{u}} (t s : S) (hts : t ⤳ s)
     {Ωt Ωs : Type u} [Field Ωt] [IsAlgClosed Ωt] [Field Ωs] [IsAlgClosed Ωs]

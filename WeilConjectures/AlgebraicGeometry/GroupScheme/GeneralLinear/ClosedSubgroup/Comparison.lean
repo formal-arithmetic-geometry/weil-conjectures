@@ -31,11 +31,6 @@ rational representation `r` is read on tangent points the same way
   `AlgebraicGeometry.GeneralLinearGroup.range_lieAlgebraMap_identityComponent_center`: the Lie
   algebra of the centre of a connected `V(I)`, and of its identity component, is the centre of the
   Lie algebra of `V(I)`.
-
-## Blueprint
-
-- `lemma-stable-subspaces-center`: the group–Lie comparison.
-- `lemma-stable-subspaces-center--2`: the centre.
 -/
 
 @[expose] public section

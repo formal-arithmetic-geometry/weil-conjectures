@@ -12,8 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.GroupScheme.Defs
 /-!
 # Multiplicative, additive, roots-of-unity and Frobenius-kernel group schemes
 
-Blueprint `def-sc-gm-ga`; Stacks Project, Tags 022U, 022V, 040M and 0CC9.
-
 The underlying affine schemes and all coordinate maps are explicit. Group structures
 are chosen from unique-existence theorems fixing all three structure maps
 (`additiveGroup_existsUnique`, `rootsGroup_existsUnique`, `alphaGroup_existsUnique`), so they
@@ -32,6 +30,10 @@ are determined by the displayed coordinate maps.
 The two inclusion theorems assert the closed subgroup properties;
 `GroupScheme.alpha_isFrobeniusKernel` identifies the latter subgroup
 with the scheme-theoretic kernel, respecting its inclusion.
+
+## References
+
+* Stacks Project, Tags 022U, 022V, 040M, 0CC9
 -/
 
 @[expose] public section

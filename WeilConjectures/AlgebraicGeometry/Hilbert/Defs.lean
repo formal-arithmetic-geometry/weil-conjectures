@@ -82,14 +82,7 @@ def IsHilbertSubscheme (f : X ⟶ S) (d : ℕ) (T : Over S)
         ∀ t, (I.subschemeι ≫ Limits.pullback.snd f T.hom).finrank t = d
 
 /-- The defining condition of the Hilbert functor is stable under base change along a morphism
-`φ : T' ⟶ T` of `S`-schemes.
-
-Finiteness, flatness and local finite presentation are stable under base change, and so is the
-rank `AlgebraicGeometry.Scheme.Hom.finrank`, since the closed subscheme cut out by the pullback
-ideal sheaf is the base change of the one cut out by `I`. This makes `T ↦ Hilb^d_{X/S}(T)` a
-contravariant functor by base change of closed subschemes, `AlgebraicGeometry.hilbertPresheaf`.
-
-(blueprint: `prose-C-08`, `prose-C-08`) -/
+`φ : T' ⟶ T` of `S`-schemes. -/
 theorem IsHilbertSubscheme.comap {f : X ⟶ S} {d : ℕ} {T T' : Over S} (φ : T' ⟶ T)
     {I : (Limits.pullback f T.hom).IdealSheafData} (hI : IsHilbertSubscheme f d T I) :
     IsHilbertSubscheme f d T' (I.comap (baseChangeMap f φ)) := by
@@ -148,9 +141,7 @@ of degree `d`, the last condition meaning that its rank function `Scheme.Hom.fin
 constantly `d`.
 
 An `S`-morphism `φ : T' ⟶ T` acts by pulling back the ideal sheaf along the base-change map
-`X_{T'} ⟶ X_T`.
-
-(`prose-C-08`) -/
+`X_{T'} ⟶ X_T`. -/
 noncomputable def hilbertPresheaf (f : X ⟶ S) (d : ℕ) : (Over S)ᵒᵖ ⥤ Type u where
   obj T := { I : (Limits.pullback f T.unop.hom).IdealSheafData // IsHilbertSubscheme f d T.unop I }
   map φ := TypeCat.ofHom fun I ↦ ⟨I.1.comap (baseChangeMap f φ.unop),
@@ -163,13 +154,8 @@ noncomputable def hilbertPresheaf (f : X ⟶ S) (d : ℕ) : (Over S)ᵒᵖ ⥤ T
 
 /-- **The Hilbert functor is an fppf sheaf.** `Hilb^d_{X/S}` is a sheaf for the fppf topology on
 `S`-schemes, that is for `AlgebraicGeometry.Scheme.fppfTopology` localized to `Over S` (the big
-fppf site of `S`), hence in particular for the
-coarser Zariski topology (`AlgebraicGeometry.isSheaf_zariskiTopology_hilbertPresheaf`).
-
-A covering sieve of `T` is in particular an fpqc covering of `T.left`, the base changes of `X_T`
-along its members are the `X_{T'}`, and a compatible family of points of `Hilb^d_{X/S}` is a
-descent datum of closed subschemes; it glues uniquely by
-`AlgebraicGeometry.isSheaf_fpqc_finiteLocallyFreeSubscheme` (part (D2)). -/
+fppf site of `S`), hence in particular for the coarser Zariski topology
+(`AlgebraicGeometry.isSheaf_zariskiTopology_hilbertPresheaf`). -/
 theorem isSheaf_hilbertPresheaf (f : X ⟶ S) (d : ℕ) :
     Presheaf.IsSheaf (Scheme.fppfTopology.over S) (hilbertPresheaf f d) := by
   rw [isSheaf_iff_isSheaf_of_type]

@@ -63,7 +63,10 @@ import all WeilConjectures.AlgebraicGeometry.System.SystemTensorReductionFormula
 
 /-! # Evaluation compatibility of representative-normalized tensor comparisons
 
-Source: Zheng Construction 4.1; Stacks 06YU and 07A4.
+## References
+
+* Zheng, Construction 4.1
+* Stacks Project, Tags 06YU, 07A4
 -/
 
 @[expose] public noncomputable section
@@ -418,8 +421,7 @@ variable (A : Data.{c, v, r} J B τ)
   (target : Data.{c, v, r} J' O.coefficients O.coefficientTransition)
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-/-- The ordinary evaluation square implies the derived evaluation square.
-Source: Zheng Construction 4.1; Stacks 06YU and 07A4. -/
+/-- The ordinary evaluation square implies the derived evaluation square. -/
 theorem geometricTensorEvaluation [PreservesFiniteLimits uInv]
     (tensorPullback : A.closed.tensor ⋙ O.pull.mapDerivedCategory ≅
     (O.pull.mapDerivedCategory.prod O.pull.mapDerivedCategory) ⋙ target.closed.tensor)

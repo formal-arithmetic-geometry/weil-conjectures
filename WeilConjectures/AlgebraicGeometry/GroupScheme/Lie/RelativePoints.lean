@@ -32,11 +32,6 @@ Over a field `k`, a tangent vector `y ∈ Lie(G)` gives the infinitesimal point
 - `AlgebraicGeometry.GrpObj.infPointsAtMap`, `AlgebraicGeometry.GrpObj.infPointsAtScale`,
   `AlgebraicGeometry.GrpObj.infPointsAtConj`: base change, rescaling and conjugation.
 - `AlgebraicGeometry.GrpObj.lieAt`: the infinitesimal point `y_X` of a tangent vector `y`.
-
-## Blueprint
-
-- `lemma-stable-subspaces-center`: the adjoint representation, through its action on infinitesimal
-points.
 -/
 
 @[expose] public section

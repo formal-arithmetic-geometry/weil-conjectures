@@ -11,7 +11,10 @@ import Mathlib.Algebra.DirectSum.Algebra
 
 /-! # Total algebra of a graded sheaf algebra
 
-Source: Stacks Project, Modules, Section 01CF; Modules on Sites, Tag 03DB.
+## References
+
+* Stacks Project, Modules, Section 01CF
+* Stacks Project, Modules on Sites, Tag 03DB
 -/
 
 @[expose] public section
@@ -337,8 +340,7 @@ private noncomputable def coproduct [Input P] :
 end
 
 /-- A graded sheaf algebra has a total commutative algebra sheaf whose underlying
-module is the coproduct of its pieces. The inclusions respect multiplication and scalars.
-Source: Stacks Project, Modules, Section 01CF; Modules on Sites, Tag 03DB. -/
+module is the coproduct of its pieces. The inclusions respect multiplication and scalars. -/
 theorem exists_total {X : Scheme.{u}} (P : ℕ → X.Modules)
     (G : GradedSheafAlgebra P) :
     ∃ (B : X.CommAlgebraSheaf) (i : ∀ n, P n ⟶ B.toModule),

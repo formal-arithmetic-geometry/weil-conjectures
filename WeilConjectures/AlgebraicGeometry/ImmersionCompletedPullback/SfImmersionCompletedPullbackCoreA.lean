@@ -108,12 +108,13 @@ import all WeilConjectures.AlgebraicGeometry.Adic.AdicCoefficientDatumSupplement
 /-!
 # Ordinary immersion pullback and strict completed pullback
 
-Source: smooth-purity localization, returned proof Step 6; Stacks proetale.tex,
-Tags 09AA, 099M and 099N (2),(5).
-
 The coefficient identifications below only transport the two published presentations
 of the same quotient system. All comparisons are normalized by their quotient maps,
 universal derived counits, or the two coordinates of a strict Roos complex.
+
+## References
+
+* Stacks Project, Tags 09AA, 099M, 099N (2),(5), 03EK, 06YY
 -/
 
 @[expose] public noncomputable section
@@ -208,8 +209,7 @@ private theorem moduleFunctor_eq :
       proEtaleRingModulePullback f _ _ ((pbcIntegralDatum l E).integralRingIso f) := by
   exact completedModulePullback_eq_exact f (pbcIntegralDatum l E)
 
-/-- Equality of the two specified ordinary tensor-pullback objects.
-Source: localization Step 6, Step 1; Stacks 03EK. -/
+/-- Equality of the two specified ordinary tensor-pullback objects. -/
 theorem moduleObj_eq (M : pbcModules X (pbcAdicCompletion X (pbcIntegralDatum l E))) :
     (pbcActualModulePull f (pbcIntegralDatum l E)).obj M =
       (proEtaleRingModulePullback f _ _ ((pbcIntegralDatum l E).integralRingIso f)).obj M := by
@@ -231,8 +231,7 @@ def moduleIso : pbcActualModulePull f (pbcIntegralDatum l E) ≅
   NatIso.ofComponents (fun M ↦ eqToIso (moduleObj_eq l E f M))
     (fun a ↦ moduleObj_eq_naturality l E f a)
 
-/-- Exact descent is the ordinary left derived pullback with its original counit.
-Source: localization Step 6, Step 1; Stacks 06YY. -/
+/-- Exact descent is the ordinary left derived pullback with its original counit. -/
 theorem derivedIso_exists :
     ∃! e : pbcActualDerivedPull f (pbcIntegralDatum l E) ≅
         (pbcIntegralDatum.{u} l E).pull.{u} f,

@@ -22,8 +22,10 @@ import WeilConjectures.AlgebraicGeometry.Good.GoodCurvesBoundaryQuasiFinite
 /-!
 # Geometric compactification of the inverse image of a good-curves open
 
-Source: Stacks Project, Tag 0GKX, `lemma-constant-shriek-rel-dim-1`, proof after
-replacing the dense open by its inverse image under the finite good-curves cover.
+## References
+
+* Stacks Project, Tag 0GKX, proof after replacing the dense open by its inverse image under
+  the finite good-curves cover
 -/
 
 @[expose] public section
@@ -72,10 +74,7 @@ private theorem proper_sigma_desc
     infer_instance
 
 /-- The inverse image of a fibrewise dense open has a quasi-finite boundary in the
-finite disjoint union of proper good-curve models.
-
-Source: Stacks Project, Tag 0GKX, `lemma-constant-shriek-rel-dim-1`, the second
-boundary Zprime. -/
+finite disjoint union of proper good-curve models. -/
 theorem goodCurvesPreimage_boundary
     {X V : Scheme.{u}} [IsNoetherian X] [IsNoetherian V]
     (f : X ⟶ V) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]

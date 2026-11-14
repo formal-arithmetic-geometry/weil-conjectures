@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.Graded.GradedLineFractionBaseRefinement
 
 /-! # Agreement of graded line fraction charts
 
-Source: Stacks Project, Constructions, Tags 01NK and 01O9.
+## References
+
+* Stacks Project, Constructions, Tags 01NK, 01O9
 -/
 
 @[expose] public section
@@ -28,10 +30,7 @@ attribute [local irreducible] Scheme.GradedAlgebraData.relProj
 attribute [local irreducible] Scheme.GradedAlgebraData.relProjι
 
 /-- The spectrum maps of any two framed homogeneous fractions agree over their overlap.
-No generation hypothesis is required.
-
-Source: Stacks Project, Constructions, Tag 01NK, lemma-invertible-map-into-proj,
-and Tag 01O9, lemma-invertible-map-into-relative-proj, affine gluing. -/
+No generation hypothesis is required. -/
 theorem gradedLineFraction_overlap
     {S T : Scheme.{u}} {h : T ⟶ S} {A : S.GradedAlgebraData} {L : T.Modules}
     (ψ : RelativeGradedLineMap h A L)

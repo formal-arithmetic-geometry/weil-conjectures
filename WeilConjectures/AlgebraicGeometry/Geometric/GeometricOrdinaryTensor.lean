@@ -51,7 +51,14 @@ import Mathlib.CategoryTheory.Functor.ReflectsIso.Jointly
 
 /-! # Ordinary tensor preservation for the termwise geometric realization
 
-Source: Zheng Construction 4.1; Stacks 03EL and 0G7E.
+## Implementation details
+
+* `GeometryOrdinaryTensor` contains no derived tensor functors or localized comparisons.
+
+## References
+
+* Zheng, Construction 4.1
+* Stacks Project, Tags 03EL, 0G7E
 -/
 
 @[expose] public noncomputable section
@@ -75,9 +82,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   (adjSet : uInv ⊣ uPush)
   (O : GeometryOrdinary.{c, v, r} J B τ J' uInv uPush adjSet)
 
-/-- Ordinary tensor comparisons and preservation of the resolving class.
-There are no derived tensor functors or localized comparisons in this record.
-Source: Zheng Construction 4.1; Stacks 03EL and 0G7E. -/
+/-- Ordinary tensor comparisons and preservation of the resolving class. -/
 structure GeometryOrdinaryTensor where
   /-- The level comparison on ordinary module sheaves. -/
   level : ∀ (n : ℕ) (M N : Mod.{c, v, max c v r} J (B n)),
@@ -245,8 +250,7 @@ private theorem component_square (n : ℕ) (M N : Systems.{c, v, max c v r} J B 
 
 end ComponentNaturality
 
-/-- The ordinary pure-tensor construction and its K-flat preservation property.
-Source: Zheng Construction 4.1; Stacks 03EL and 0G7E. -/
+/-- The ordinary pure-tensor construction and its K-flat preservation property. -/
 theorem geometricOrdinaryTensor_exists [PreservesFiniteLimits uInv] :
     Nonempty (GeometryOrdinaryTensor.{c, v, r} J B τ J' uInv uPush adjSet O) := by
   classical

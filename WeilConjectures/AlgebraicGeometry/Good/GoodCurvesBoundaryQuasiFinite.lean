@@ -26,8 +26,10 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Finite
 /-!
 # The boundary of fibrewise nonempty opens in good curves
 
-Source: Stacks Project, More on Etale Cohomology, Tag 0GKX,
-lemma-constant-shriek-rel-dim-1, the second boundary Zprime, using Tag 0GK7.
+## References
+
+* Stacks Project, More on Étale Cohomology, Tag 0GKX (the second boundary `Z'`)
+* Stacks Project, Tags 0GK7, 01J3, 01J4
 -/
 
 @[expose] public section
@@ -41,8 +43,7 @@ namespace AlgebraicGeometry
 /-- The canonical map to the base from the reduced closed complement of the open union
 of the `O i` in the coproduct of the `C i`. The open union is the supremum of the open
 images of `u i` followed by the coprojections. Its complement carries the reduced
-induced closed structure given by the existing vanishing-ideal construction.
-Source: Stacks Project, Tag 0GKX, second boundary Zprime; Tags 01J3 and 01J4. -/
+induced closed structure given by the existing vanishing-ideal construction. -/
 noncomputable def goodCurvesBoundaryMap
     {I : Type u} (B : Scheme.{u}) (T C O : I → Scheme.{u})
     (t : ∀ i, T i ⟶ B) (b : ∀ i, C i ⟶ T i) (u : ∀ i, O i ⟶ C i)
@@ -89,8 +90,8 @@ private theorem proper_sigmaMap
     (hpb i).isoPullback.hom, (hpb i).isoPullback_hom_snd]
   infer_instance
 
-/-- Source: Stacks Project, Tag 0GKX, the assertion that the second boundary Zprime
-is quasi-finite, with the good-curves hypotheses of Tag 0GK7 made explicit. -/
+/-- The second boundary `Z'` of a good curve diagram is quasi-finite over the base, with the
+good-curves hypotheses made explicit. -/
 theorem good_curves_boundary_quasiFinite
     {I : Type u} [Finite I] (B : Scheme.{u}) [IsLocallyNoetherian B] [CompactSpace B]
     (T C O : I → Scheme.{u})

@@ -11,7 +11,18 @@ public import WeilConjectures.AlgebraicGeometry.IndEtaleMapping.IndEtaleDerivedI
 
 The isomorphisms retain the evaluation normalization of restriction. There is no
 continuity assertion and no choice of mapping-complex representatives here.
-Source: Bhatt--Scholze 6.3.16, adjunction step.
+
+## Implementation details
+
+* `homIso_naturality_of_counit` takes all functors and the coefficient variance `γ` of the
+  target global Hom as variables, so that `γ` matches the goal syntactically when the lemma is
+  applied and the kernel never unfolds the derived functors to compare `NatTrans.app` of two
+  definitionally equal but distinct transformations.
+
+## References
+
+* Bhatt–Scholze, The pro-étale topology for schemes, proof of Lemma 6.3.16
+* Stacks Project, Tag 08JA
 -/
 
 @[expose] public noncomputable section
@@ -28,14 +39,9 @@ namespace AlgebraicGeometry.Etale.IndEtaleMapping
 variable (A : Type (u + 1)) [CommRing A]
 variable {X : Scheme.{u}} (K M : DerivedCategoryModule A X)
 
-/-- Naturality of a conjugate global-Hom comparison, in abstract form. All functors are
-variables, so that the coherence computation happens with opaque functors.
-The hypotheses are the counit normalizations of the comparisons, naturality of the
-target counits, and compatibility of the left-adjoint comparisons with composition.
-The coefficient variance `γ` of the target global Hom is a variable: when the lemma is
-applied, `γ` matches the goal syntactically, so the kernel never compares `NatTrans.app` of
-two definitionally equal but distinct transformations, which it does by unfolding the
-derived functors. -/
+/-- Naturality of a conjugate global-Hom comparison, in abstract form, from the counit
+normalizations of the comparisons, naturality of the target counits, and compatibility of the
+left-adjoint comparisons with composition. -/
 private theorem homIso_naturality_of_counit
     {B DX DS DT : Type*} [Category* B] [Category* DX] [Category* DS] [Category* DT]
     [MonoidalCategory DX] [MonoidalCategory DS] [MonoidalCategory DT]
@@ -112,8 +118,6 @@ private theorem homIso_naturality_of_counit
 
 /-- The global-Hom isomorphisms of derived adjunction are compatible with the
 specified pullback-of-evaluation transition maps.
-
-Source: Bhatt--Scholze 6.3.16, proof, adjunction; Stacks 08JA.
 -/
 theorem imageHomIso_naturality {T S : Over X} (f : T ⟶ S) :
     ((ExternalRHom.globalHom A X).obj (op K)).map (imagePullback A M f) ≫

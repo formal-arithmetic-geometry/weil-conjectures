@@ -24,10 +24,6 @@ group object in `Over (Spec k)`. Its points with values in a `k`-algebra `R` are
   of finite type over `k`.
 - `AlgebraicGeometry.GeneralLinearGroup.homMulEquiv`: the `R`-points of the group scheme
   `𝔾𝕃(n; k)` are the group `GL n R`.
-
-## Blueprint
-
-- `det-d-geometry`: the ambient group `GL(V)` of the algebraic groups block, as a group scheme.
 -/
 
 @[expose] public section

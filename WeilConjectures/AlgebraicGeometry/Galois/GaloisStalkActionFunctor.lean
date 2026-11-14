@@ -15,7 +15,9 @@ import Mathlib.Topology.Algebra.OpenSubgroup
 /-!
 # The canonical Galois action functor on geometric stalks
 
-Source: Stacks Project, Tag 03QW.
+## References
+
+* Stacks Project, Tag 03QW
 -/
 
 @[expose] public section

@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.GroupScheme.DiagonalDerivationCoefficie
 /-!
 # Addition of tangent maps on the dual-number diagonal
 
-Source: Stacks Project, Tag 0B2B, proof of Lemma 33.16.2, the square-zero
-pushout calculation; blueprint `def-wf-lie-algebra-derivation`, the dual-number description.
+## References
+
+* Stacks Project, Tag 0B2B, proof of Lemma 33.16.2 (the square-zero pushout calculation)
 -/
 
 @[expose] public section
@@ -68,8 +69,7 @@ private theorem omegaHom_transport {S : Scheme.{u}} (X : Over S)
     Category.id_comp, omegaHom_eq_homOfDerivation]
 
 /-- The tangent map of a map from two dual-number thickenings, restricted to the
-diagonal, is the sum of its tangent maps on the axes.
-Source: Stacks Project, Tag 0B2B, proof of Lemma 33.16.2. -/
+diagonal, is the sum of its tangent maps on the axes. -/
 theorem omegaHom_diagonal_add {S : Scheme.{u}} (X : Over S)
     (f : Scheme.dualNumbersOver S ⊗ Scheme.dualNumbersOver S ⟶ X)
     (g : S ⟶ X.left)

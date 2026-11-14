@@ -246,13 +246,20 @@ import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteClassComparison
 /-!
 # The ordinary pro-etale projective-line decomposition and trace
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-geo-p1-cohomology,
-(G2), (G3) and proof steps 1--9; Stacks Project, Tag 0GL5.
-
 The coefficient object and signed twists are comparison pullbacks of the existing
 ordinary etale objects. This is the ordinary small pro-etale derived category.
 The comparison map is the counit mate, and the two decomposition maps use the
 same Kummer-normalized Chern class. All helpers spell out these canonical arrows.
+
+## Implementation details
+
+* In `geoP1Cohomology`, the homs of the existential isomorphisms are fixed to
+  `geoP1TwistedMap`, so their inverses, hence the traces, are uniquely determined; the
+  untwisted map is fixed separately to the unit and the same Kummer Chern class.
+
+## References
+
+* Stacks Project, Tag 0GL5
 -/
 
 @[expose] public noncomputable section
@@ -972,13 +979,8 @@ private theorem trace_square_of_decomposition
         (F.map b.hom ≫ k) ≫ b'.inv ≫ biprod.snd := by rw [Category.assoc]
     _ = _ := by rw [h, Category.assoc, b'.hom_inv_id_assoc, biprod.lift_snd]
 
-/-- The canonical decomposition (G2) and the trace (G3), with every Noetherian
-base change. The existential isomorphisms have their homs fixed to `geoP1TwistedMap`;
-their inverses, hence the traces, are uniquely determined. The untwisted map is
-fixed separately to the unit and the same Kummer Chern class.
-
-Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-geo-p1-cohomology,
-(G2), (G3), proof steps 1--9; Stacks Project, Tag 0GL5. -/
+/-- The canonical decomposition (G2) of the cohomology of the projective line and the trace
+(G3), with every Noetherian base change. -/
 theorem geoP1Cohomology (ℓ : ℕ) (hℓ : ℓ.Prime) (r : ℕ) (_hr : 0 < r)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : ((ℓ ^ r : ℕ) : A) = 0) :
     ∃ b : ∀ (S : Scheme.{u}) [IsNoetherian S]

@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.Regular
 /-!
 # Fibrewise density in a good curve diagram
 
-Source: Stacks Project, Tag 0GK7, last paragraph.
+## References
+
+* Stacks Project, Tag 0GK7, last paragraph
 -/
 
 @[expose] public section
@@ -91,10 +93,7 @@ private theorem dense_fibres_of_cover
 
 set_option backward.isDefEq.respectTransparency false in
 /-- In a good curve diagram, surjectivity of each marked open onto its constant-field
-base implies both required fibrewise densities.
-
-Source: Stacks Project, Tag 0GK7, final paragraph.
--/
+base implies both required fibrewise densities. -/
 theorem good_curves_fibre_density
     {X V : Scheme.{u}} (f : X ⟶ V) (n : ℕ)
     (T Y B : Fin n → Scheme.{u}) (t : ∀ i, T i ⟶ V)

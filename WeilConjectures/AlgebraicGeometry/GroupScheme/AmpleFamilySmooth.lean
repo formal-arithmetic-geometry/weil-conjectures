@@ -319,9 +319,7 @@ omit [GrpObj G] in
 algebraically closed field `k` with factorial local rings, let `V = D(r) ⊆ 𝔸^d_k` and let `E` be
 an effective Cartier divisor on `G × V` whose fibres `E_v` over the rational points `v` of `V`
 have affine complements, every closed point of `G` lying outside some `E_v`. Then `G` has an
-ample family: by rigidity (Stacks 0BEH) the line bundles `𝒪_G(E_v)` are all isomorphic to a single
-`L`, and the canonical sections of the `𝒪_G(E_v)` give sections of `L` with non-vanishing loci
-`G \ E_v`. -/
+ample family. -/
 theorem hasAmpleFamily_of_forall_isAffineOpen [LocallyOfFiniteType G.hom]
     [QuasiCompact G.hom] [IsIntegral G.left]
     (hG : ∀ x : G.left, UniqueFactorizationMonoid (G.left.presheaf.stalk x)) {d : ℕ}

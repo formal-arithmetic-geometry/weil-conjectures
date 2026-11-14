@@ -35,10 +35,6 @@ the universal point `𝟙 G`.
 
 - `AlgebraicGeometry.GrpObj.homGLEquiv_comp_adjoint`: `Ad(x)` is the matrix of `v ↦ x v x⁻¹`.
 - `AlgebraicGeometry.GrpObj.isMonHom_adjoint`: `Ad` is a homomorphism of group schemes.
-
-## Blueprint
-
-- `lemma-stable-subspaces-center`: the adjoint representation `Ad : G → GL(Lie G)`.
 -/
 
 @[expose] public section

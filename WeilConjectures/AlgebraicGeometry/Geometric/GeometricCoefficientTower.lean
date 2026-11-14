@@ -16,7 +16,10 @@ import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 
 /-! # Explicit transport of a coefficient tower by inverse image
 
-Source: Zheng Construction 4.1; Stacks 03D2.
+## References
+
+* Zheng, Construction 4.1
+* Stacks Project, Tag 03D2
 -/
 
 @[expose] public noncomputable section
@@ -33,8 +36,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
 attribute [local irreducible] SheafOfModules.CochainCompositeConstruction.ringImage
   SheafOfModules.CochainCompositeConstruction.algebraicImage
 
-/-- A coefficient tower and its algebraic inverse images are transported explicitly.
-Source: Zheng Construction 4.1; Stacks 03D2. -/
+/-- A coefficient tower and its algebraic inverse images are transported explicitly. -/
 theorem geometricCoefficientTower
     {C' : Type c} [Category.{v} C'] [EssentiallySmall.{max c v r} C']
     (J' : GrothendieckTopology C')

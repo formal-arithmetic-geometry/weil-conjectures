@@ -10,7 +10,10 @@ public import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # The ordinary singleton mate of geometric evaluation
 
-Source: Zheng Construction 4.1; Stacks 03D2 and 03EL.
+## References
+
+* Zheng, Construction 4.1 and the paragraph before Lemma 4.10
+* Stacks Project, Tags 03D2, 03EL
 -/
 
 @[expose] public noncomputable section
@@ -35,9 +38,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
 
 variable (O : GeometryOrdinary.{c, v, r} J B τ J' uInv uPush adjSet)
 
-/-- The ordinary singleton mate of geometric evaluation is invertible.
-Source: Zheng, Construction 4.1, printed p. 21, and the paragraph before Lemma 4.10,
-printed p. 23; Stacks 03D2 and 03EL. -/
+/-- The ordinary singleton mate of geometric evaluation is invertible. -/
 theorem geometricOrdinaryEvaluationMate_isIso [PreservesFiniteLimits uInv] (n : ℕ)
     (L : Mod.{c, v, max c v r} J (B n) ⥤ Systems.{c, v, max c v r} J B τ)
     (L' : Mod.{c, v, max c v r} J' (O.coefficients n) ⥤

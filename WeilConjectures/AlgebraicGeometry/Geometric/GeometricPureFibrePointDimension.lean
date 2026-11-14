@@ -17,8 +17,11 @@ set_option linter.privateModule false
 
 /-! # Pointwise dimension from pure geometric fibres
 
-Source: Stacks Project, Algebra, Tag 00P4; Morphisms, Tag 02FY (1);
-Varieties, Tag 0A21 (3), (5).
+## References
+
+* Stacks Project, Algebra, Tag 00P4
+* Stacks Project, Morphisms, Tag 02FY (1)
+* Stacks Project, Varieties, Tag 0A21 (3), (5)
 -/
 
 @[expose] public section

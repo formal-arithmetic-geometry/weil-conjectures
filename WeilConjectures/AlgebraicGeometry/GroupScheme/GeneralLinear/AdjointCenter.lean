@@ -31,11 +31,6 @@ is an open immersion.
 - `AlgebraicGeometry.GrpObj.mem_range_differential_centerι_iff`: `Lie(Z(G)) = 𝔷(Lie G)`.
 - `AlgebraicGeometry.GrpObj.mem_range_differential_identityComponent_center_iff`:
   `Lie(Z(G)°) = 𝔷(Lie G)`.
-
-## Blueprint
-
-- `lemma-stable-subspaces-center`, `lemma-stable-subspaces-center--2`: `Lie(Z(G)°) = 𝔷(Lie G)` for a
-connected algebraic group.
 -/
 
 @[expose] public section

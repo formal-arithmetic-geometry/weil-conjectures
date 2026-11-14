@@ -103,7 +103,10 @@ import WeilConjectures.Algebra.Homology.System.SystemScalarCoherence
 
 /-! # The normalized geometric coefficient pullback mate
 
-Source: Zheng Construction 4.1; Stacks 03EL, 0G7E and 07A6.
+## References
+
+* Zheng, Construction 4.1 and the paragraph preceding Lemma 4.10
+* Stacks Project, Tags 03EL, 0G7E, 06YY, 07A6
 -/
 
 @[expose] public noncomputable section
@@ -245,9 +248,7 @@ private theorem inverseImage_good [PreservesFiniteLimits uInv] (n : ℕ)
       ((HomologicalComplex.eval _ (.up ℤ) k).mapIso ic) (ht.2 k)⟩
 
 -- The representative comparison elaborates several independent coefficient universes.
-/-- The inverse mate of coefficient restriction and geometric pullback is invertible.
-Source: Zheng, Construction 4.1 and the paragraph preceding Lemma 4.10;
-Stacks 03EL, 0G7E, 06YY and 07A6. -/
+/-- The inverse mate of coefficient restriction and geometric pullback is invertible. -/
 theorem geometricCoefficientPullbackMate_isIso [PreservesFiniteLimits uInv]
     {m n : ℕ} (h : n ≤ m) :
     IsIso ((mateEquiv (A.scalar h).adjunction (target.scalar h).adjunction).symm

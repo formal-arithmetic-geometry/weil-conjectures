@@ -12,6 +12,10 @@ import WeilConjectures.AlgebraicGeometry.GroupScheme.IdentityTangentAddition
 
 /-!
 # Compatibility of identity tangent transport with the vector-space operations
+
+## References
+
+* Stacks Project, Tag 0B2B
 -/
 
 @[expose] public section
@@ -46,10 +50,7 @@ namespace GrpObj
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Any map with the prescribed underlying morphism carries infinitesimal multiplication
-and scaling to the specified tangent addition and scalar multiplication.
-Source: blueprint `def-wf-lie-algebra-derivation`;
-`lemma-connected-components-images-homomorphisms--3`, Multiplication paragraph; Stacks Project, Tag
-0B2B, the construction of the vector-space operations. -/
+and scaling to the specified tangent addition and scalar multiplication. -/
 theorem identity_tangent_transport_operations
     {k : Type u} [Field k] (G : Over (Spec (.of k))) [GrpObj G] :
     let x := unitSection G (IsLocalRing.closedPoint k)

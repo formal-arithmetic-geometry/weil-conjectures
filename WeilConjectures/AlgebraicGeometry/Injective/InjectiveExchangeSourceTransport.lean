@@ -10,7 +10,9 @@ public import Mathlib.Algebra.Homology.Localization
 
 /-! # Source transport on an injective representative
 
-Source: Stacks Project, Tags 03Q8 and 03Q9, injective-complex computation.
+## References
+
+* Stacks Project, Tags 03Q8, 03Q9
 -/
 
 /- This original-model counterpart follows the proved calculation in
@@ -26,10 +28,8 @@ open AlgebraicGeometry
 
 namespace AlgebraicGeometry.Etale
 
-/-- Expand the inverse of the fixed injective direct-image comparison.
-
-Source: Stacks Project, Tags 03Q8 and 03Q9, injective-complex computation;
-`smallModel_sourceInjectiveDirectImageIso` in StrictLocalInjectiveSourceComparison. -/
+/-- Expand the inverse of the fixed injective direct-image comparison
+`smallModel_sourceInjectiveDirectImageIso`. -/
 theorem smallModel_injectiveExchange_source_transport {X S : Scheme.{v}} (f : X ⟶ S)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1}))
     (J : CochainComplex.Plus (InjectiveObject

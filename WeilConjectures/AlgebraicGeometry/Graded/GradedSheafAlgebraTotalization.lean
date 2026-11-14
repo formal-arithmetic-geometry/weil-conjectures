@@ -12,7 +12,10 @@ import WeilConjectures.AlgebraicGeometry.GradedSheafAlgebra.GradedSheafAlgebraTo
 
 /-! # Totalizing a homogeneous sheaf algebra
 
-Source: Stacks Project, Divisors, Section 0630; Cohomology of Schemes, Lemma 087Z.
+## References
+
+* Stacks Project, Divisors, Section 0630
+* Stacks Project, Cohomology of Schemes, Lemma 087Z
 -/
 
 @[expose] public section
@@ -22,8 +25,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- A homogeneous sheaf algebra has a total algebra whose underlying module is
-its sheaf coproduct. Its products and structure map agree with the given operations.
-Source: Stacks Project, Divisors, Section 0630; Cohomology of Schemes, Lemma 087Z. -/
+its sheaf coproduct. Its products and structure map agree with the given operations. -/
 theorem exists_gradedSheafAlgebra_totalization {Z : Scheme.{u}}
     (C : ℕ → Z.Modules) (D : GradedSheafAlgebra C) :
     ∃ (A : Z.CommAlgebraSheaf) (j : ∀ n, C n ⟶ A.toModule),

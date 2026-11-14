@@ -18,8 +18,9 @@ import WeilConjectures.AlgebraicGeometry.ProperBaseChange.SepClosedFieldComponen
 /-!
 # Geometric component counts and base change
 
-Source: Stacks Project, More on Morphisms, Tag 055F,
-`lemma-base-change-fibres-nr-geometrically-connected-components`.
+## References
+
+* Stacks Project, More on Morphisms, Tag 055F
 -/
 
 @[expose] public section
@@ -94,9 +95,7 @@ private theorem componentCount_commonExtension {k : Type u} [Field k]
 /-- Geometric connected-component counts are independent of the algebraically closed
 extension of the residue field and commute with arbitrary base change. The count is
 `ENat.card` of `ConnectedComponents`: zero for an empty fibre and infinity for infinitely
-many components.
-
-Source: Stacks Project, More on Morphisms, Tag 055F. -/
+many components. -/
 theorem geometricComponentCount_baseChange {X S : Scheme.{u}} (f : X ⟶ S) :
     (∀ (s : S) (K L : Type u) [Field K] [Field L] [IsAlgClosed K] [IsAlgClosed L]
       (i : S.residueField s ⟶ CommRingCat.of K)

@@ -49,9 +49,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- The hom-equivalence calculation for a square of adjoint functors.
-This is the formal naturality and injectivity calculation in Steps 1, 3 and 4
-of the item's existing proof. -/
+/-- The hom-equivalence calculation for a square of adjoint functors. -/
 private theorem exchange_unit_of_transposes {C₁ C₂ C₃ C₄ : Type (u + 2)}
     [Category.{u + 1} C₁] [Category.{u + 1} C₂]
     [Category.{u + 1} C₃] [Category.{u + 1} C₄]

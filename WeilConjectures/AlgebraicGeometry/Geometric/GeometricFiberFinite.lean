@@ -25,14 +25,15 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDer
 /-!
 # Finite-coefficient geometric-fibre formula
 
-Source: Stacks Project, Tag 0DDF; SGA 4, Expose XII, Corollaire 5.2(iii);
-blueprint `sec-proper-base-change/sk-thm-properbasechange/`
-`cor-weil-pbc-geometric-fiber-finite.md`.
-
 The cohomological formula includes the two endpoint identifications explicitly:
 global sections of the source are the geometric stalk, and global sections of the
 target are the cohomology of the geometric fibre. The map between these presentations
 is the degree-q base-change map, not an unspecified isomorphism between groups.
+
+## References
+
+* Stacks Project, Tag 0DDF
+* SGA 4, Exposé XII, Corollaire 5.2(iii)
 -/
 
 @[expose] public section
@@ -99,8 +100,7 @@ private noncomputable def module_identityGermIso
   exact Sheaf.ΓNatIsoSheafSections _ _
     (MorphismProperty.Over.mkIdTerminal (@AlgebraicGeometry.Etale) _) ≪≫ asIso τ
 
-/-- The geometric-stalk formula, with its endpoint comparisons and its base-change map.
-Source: Stacks Tag 0DDF(1); SGA 4 XII, Corollaire 5.2(iii). -/
+/-- The geometric-stalk formula, with its endpoint comparisons and its base-change map. -/
 theorem geometricFiber_finite_stalk_formula
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]

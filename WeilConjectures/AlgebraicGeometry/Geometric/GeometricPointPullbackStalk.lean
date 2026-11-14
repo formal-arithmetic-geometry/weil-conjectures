@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.Sites.PointConstantSheaf
 /-!
 # Global sections at a geometric point and pullback stalks
 
-Source: literature/stacks-project/etale-cohomology.tex, Tags 04JQ, 04JN and 03Q1 (3).
+## References
+
+* Stacks Project, Tags 04JQ, 04JN, 03Q1 (3)
 -/
 
 @[expose] public section
@@ -76,8 +78,6 @@ private theorem identity_stalk_isIso
  equivalence for abelian sheaves and for sheaves of modules over any coefficient ring.
  For a geometric point of any scheme, global sections of its inverse image are naturally
  isomorphic to its stalk.
-
- Source: Stacks Project, Tags 04JQ, 04JN and 03Q1 (3).
 -/
 theorem geometricPoint_pullback_stalk (Ω : Type u) [Field Ω] [IsAlgClosed Ω] :
     ((sheafSections (Spec (.of Ω)).smallEtaleTopology AddCommGrpCat.{u + 1}).obj

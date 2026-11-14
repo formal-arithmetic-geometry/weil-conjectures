@@ -17,9 +17,13 @@ space `k^m` with a homomorphism of group schemes `r : G ⟶ GL_m`, a rational re
 `r`; this is the representation `RationalHom.representation`, and the stable subspaces, the
 simple and the semisimple algebraic-group modules are those of this representation.
 
-Simple and semisimple modules are only defined for `k` algebraically closed of characteristic `0`,
-the setting of the blueprint. There `G(k)` is schematically dense in an algebraic group `G`, so
-stability under `G(k)` is stability under `G`; over a general field it is not.
+Simple and semisimple modules are only defined for `k` algebraically closed of characteristic `0`.
+There `G(k)` is schematically dense in an algebraic group `G`, so stability under `G(k)` is
+stability under `G`; over a general field it is not.
+
+The general constructions on representations are Mathlib's `Representation`,
+`Subrepresentation`, `Representation.IsIrreducible`, `Representation.IsSemisimpleRepresentation`,
+`Representation.tprod` and `Representation.exteriorPower`.
 
 ## Main definitions
 
@@ -35,16 +39,6 @@ stability under `G(k)` is stability under `G`; over a general field it is not.
   if it is nonzero and has no nonzero proper stable subspace.
 - `AlgebraicGeometry.GeneralLinearGroup.RationalHom.isSemisimple_iff`: a module is semisimple if
   and only if it is a direct sum of simple modules.
-
-## Blueprint
-
-- `det-d-linear`: coefficients and representations; the constructions on representations it
-  lists are Mathlib's `Representation`, `Subrepresentation`, `Representation.IsIrreducible`,
-  `Representation.IsSemisimpleRepresentation`, `Representation.tprod` and
-  `Representation.exteriorPower`.
-- `def-wf-algebraic-representations`: `RationalHom` and `RationalHom.representation`.
-- `def-wf-simple-module`: `RationalHom.IsSimple`.
-- `def-wf-semisimple-module`: `RationalHom.IsSemisimple`.
 -/
 
 @[expose] public section
@@ -82,12 +76,8 @@ variable {k : Type u} [Field k] {G : Over (Spec (.of k))} [GrpObj G]
 /-- A *simple* algebraic-group module: `k^m` is nonzero and has no nonzero proper subspace stable
 under `G` (`RationalHom.isSimple_iff`).
 
-Stability is tested on the `k`-points `G(k)` only. This is the scheme-theoretic notion (a
-subcomodule, i.e. stable under `G(R)` for every `k`-algebra `R`) because `G` is an algebraic
-group, i.e. locally of finite type over `k`, and `k` is algebraically closed of characteristic
-`0`, the standing hypotheses of `det-d-linear`: then `G` is reduced (Cartier) and `G(k)` is
-schematically dense in `G`. Without these hypotheses the two notions differ, which is why
-`[LocallyOfFiniteType G.hom] [IsAlgClosed k] [CharZero k]` are imposed. -/
+Stability is tested on the `k`-points `G(k)` only; under the standing hypotheses
+`[LocallyOfFiniteType G.hom] [IsAlgClosed k] [CharZero k]` this agrees with stability under `G`. -/
 abbrev IsSimple [LocallyOfFiniteType G.hom] [IsAlgClosed k] [CharZero k] : Prop :=
   r.representation.IsIrreducible
 

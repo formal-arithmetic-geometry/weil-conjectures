@@ -181,15 +181,16 @@ public import WeilConjectures.AlgebraicGeometry.GeoCartierCycleClassDefs
 /-!
 # The cycle class of an effective Cartier divisor
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-geo-cartier,
-statement and proof paragraphs 1--6; Stacks Project, Tag 03PL.
-
 We use the fixed-scalar sheaf presentation of ordinary pro-etale modules, canonically
-realized by `finiteCoefficientRealization` over the coefficient ring sheaf of
-`definition-small-pro-etale-site--1`. `Ext.homEquiv` identifies every degree-two Ext class
+realized by `finiteCoefficientRealization` over the coefficient ring sheaf of the small
+pro-étale site. `Ext.homEquiv` identifies every degree-two Ext class
 below with the displayed morphism from the degree-zero supported constant object to
 its finite Tate line shifted by two. No condensed or completed coefficient category occurs.
 The auxiliary definitions only spell out this class and its normalization diagrams.
+
+## References
+
+* Stacks Project, Tags 03PL, 07A6
 -/
 
 @[expose] public noncomputable section
@@ -270,8 +271,7 @@ def GeoCartierChernEquation (A : Type (u + 1)) [CommRing A] (N : ℕ)
 
 /-- Derived extension at a specified sheaf map is characterized by its Hom universal
 property against every unbounded complex. This is a property of the given coefficient
-unit, not a choice of a replacement scalar-extension functor.
-Source: Stacks 07A6; blueprint lemma-cycle-class-cartier-divisor, coefficient clause. -/
+unit, not a choice of a replacement scalar-extension functor. -/
 @[irreducible]
 def GeoCartierScalarUnit {R S : Type (u + 1)} [CommRing R] [CommRing S]
     (φ : R →+* S) (Z : Scheme.{u})

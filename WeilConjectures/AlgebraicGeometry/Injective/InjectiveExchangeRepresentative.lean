@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Injective.InjectiveExchangeTargetTransp
 
 /-! # Injective representative computation of the derived exchange
 
-Source: Stacks Project, Tag 03Q9, final injective-complex paragraph.
+## References
+
+* Stacks Project, Tag 03Q9
 -/
 
 /- This original-model counterpart follows the proved calculation in
@@ -66,10 +68,7 @@ private lemma map_comp_naturality {A B C D : Type*}
     congrArg (fun z ↦ U.map u ≫ z) (θ.naturality t)
 
 -- Remote elaboration reached 200000 heartbeats in 21s after extracting generic proof steps.
-/-- Compute the derived mate on the chosen injective representative, before sections.
-
-Source: Stacks Project, Tag 03Q9, final injective-complex paragraph, with the
-factorization `Adjunction.derivedPlus_mateEquiv_app_fac`. -/
+/-- Compute the derived mate on the chosen injective representative, before sections. -/
 theorem smallModel_injectiveExchange_representative {X S : Scheme.{v}} (f : X ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1}))

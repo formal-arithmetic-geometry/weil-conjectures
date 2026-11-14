@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism.Algebr
 
 /-! # Connected geometric inverse images of purely inseparable singleton fibres
 
-Source: Stacks Project, More on Morphisms, Tag 0BUI, Stein splitting paragraph.
+## References
+
+* Stacks Project, More on Morphisms, Tag 0BUI
 -/
 
 @[expose] public section
@@ -68,12 +70,7 @@ private theorem subsingleton_pullback_of_unique_fibre
     rw [Subsingleton.elim x' y']⟩
 
 /-- Pulling one purely inseparable singleton fibre back along a geometrically connected
-map gives a connected nonempty geometric fibre. No properness, etaleness, or finite
-partition is assumed here.
-
-Source: Stacks Project, More on Morphisms, Tag 0BUI, sentence "Then the schemes
-X_{s_i'} are geometrically connected over κ(s)".
--/
+map gives a connected nonempty geometric fibre. -/
 theorem Scheme.Hom.isConnected_geometricFibre_preimage
     {X T U : Scheme.{u}} (q : X ⟶ T) [GeometricallyConnected q]
     (r : T ⟶ U) (p : X ⟶ U) (h : q ≫ r = p) (u : U) (V : T.Opens)

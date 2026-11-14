@@ -37,11 +37,6 @@ of `A` at the identity, which is the dimension of `Lie(G)`.
 - `AlgebraicGeometry.GrpObj.isIso_left_of_differential_bijective`: in characteristic zero, a
   closed subgroup scheme of a connected group scheme of finite type with the same Lie algebra is
   everything.
-
-## Blueprint
-
-- `proposition-cartier-s-theorem`: the Lie algebra clauses of Cartier's theorem.
-- `lemma-connected-components-images-homomorphisms--3`: the Lie criterion for closed subgroups.
 -/
 
 @[expose] public section
@@ -197,10 +192,7 @@ theorem finrank_lie_eq_topologicalKrullDim (G : Over (Spec (.of k))) [GrpObj G]
 
 /-- The Lie criterion for closed subgroups: over a field of characteristic zero, a closed subgroup
 scheme `K` of a connected group scheme `G` of finite type with the same Lie algebra (the
-differential of the inclusion is bijective) is all of `G`. By Cartier's theorem
-`dim K = dim Lie(K) = dim Lie(G) = dim G`, and `K` and `G` are reduced, so
-`AlgebraicGeometry.isIso_left_of_topologicalKrullDim_eq` applies.
-(clause (1)) -/
+differential of the inclusion is bijective) is all of `G`. -/
 theorem isIso_left_of_differential_bijective [CharZero k] {K G : Over (Spec (.of k))} [GrpObj K]
     [GrpObj G] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [ConnectedSpace G.left]
     (f : K ⟶ G) [IsMonHom f] [IsClosedImmersion f.left]

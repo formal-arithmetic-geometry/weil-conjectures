@@ -15,7 +15,11 @@ import WeilConjectures.ConstructibleSheaf.UpperStarConstantSheafComp
 The counit normalizations of `imageHomIso`, of restriction and of the coefficient variances of
 global Hom, and the compatibility of the constant-pullback comparison with composition.
 These are the inputs of `imageHomIso_naturality`.
-Source: Bhatt--Scholze 6.3.16, adjunction step; Stacks 08JA.
+
+## References
+
+* Bhatt–Scholze, The pro-étale topology for schemes, proof of Lemma 6.3.16
+* Stacks Project, Tags 08JA, 0G7E
 -/
 
 @[expose] public noncomputable section
@@ -62,7 +66,6 @@ private theorem conjugateIsoEquiv_app_hom_heq
 
 /-- The comparison is the mate of the specified left-adjoint comparison.
 This records its counit normalization without any continuity hypothesis.
-Source: Stacks 08JA.
 -/
 theorem imageHomIso_counit (T : Over X) :
     (ExternalRHom.constant A T.left ⋙
@@ -111,7 +114,6 @@ theorem pulledEvaluation_left
   rw [F.map_id, Category.id_comp]
 
 /-- Restriction transposes to pullback of the global tensor-Hom counit.
-Source: Bhatt--Scholze 6.3.16, adjunction; Stacks 08JA.
 -/
 theorem imageRestriction_counit (T : Over X) :
     (ExternalRHom.constant A T.left ⋙ tensorLeft ((ExternalRHom.pull A T.hom).obj K)).map
@@ -182,7 +184,6 @@ private theorem hom_counit_naturality_of_eq
   exact hom_counit_naturality a f g
 
 /-- Both coefficient variances of global Hom respect its left-tensor counit.
-Source: Stacks 08JA.
 -/
 theorem imageGlobalHom_counit_naturality
     {E E' N N' : DerivedCategoryModule A X} (f : E' ⟶ E) (g : N ⟶ N') :
@@ -237,7 +238,6 @@ private theorem leftDerivedComp_assoc
   rfl
 
 /-- The canonical derived constant comparison respects inverse-image composition.
-Source: Stacks 0G7E; Bhatt--Scholze 6.3.16, adjunction.
 -/
 theorem imageConstantPullback_comp
     (Z : DerivedCategory (ModuleCat.{u + 1} A)) :

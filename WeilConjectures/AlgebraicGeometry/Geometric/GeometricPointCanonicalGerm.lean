@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.StrictlyHenselianSectionsStalk
 /-!
 # The canonical germ at the identity geometric point
 
-Source: Stacks Project, Tags 04JQ, 04JN and 03Q1 (3).
+## References
+
+* Stacks Project, Tags 04JQ, 04JN, 03Q1 (3)
 -/
 
 @[expose] public section
@@ -23,8 +25,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The canonical global germ on the spectrum of an algebraically closed field is invertible.
-Source: Stacks Project, Tags 04JQ, 04JN and 03Q1 (3). -/
+/-- The canonical global germ on the spectrum of an algebraically closed field is invertible. -/
 theorem isIso_globalGerm_identity (Ω : Type u) [Field Ω] [IsAlgClosed Ω] :
     IsIso (globalGerm (𝟙 (Spec (.of Ω)))) := by
   let : IsSepClosed (IsLocalRing.ResidueField Ω) :=

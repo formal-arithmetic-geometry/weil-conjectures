@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.Square.SquareResolutionRoofModel
 
 /-! # The injective endpoint comparison preserves the section unit
 
-Source: Stacks Project, Cohomology, Tags 079V and 0D5X.
+## References
+
+* Stacks Project, Tags 079V, 0D5X
 -/
 
 @[expose] public section
@@ -40,9 +42,7 @@ attribute [local implicit_reducible] Scheme.Modules Scheme.Modules.Hom
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
-/-- The raw injective comparison followed by the augmentation is the cochain section unit.
-There is one direct image and one injective resolution, and no coefficient map or square.
-Source: Stacks Project, Tags 079V and 0D5X. -/
+/-- The raw injective comparison followed by the augmentation is the cochain section unit. -/
 theorem injectiveSectionUnit_comparison {X S : Scheme.{u}} (f : X ⟶ S)
     (F : X.Modules) (q : ℕ) (V : S.Opens) (I : InjectiveResolution F) :
     (squareInjectiveLocalComparison f F q V I (f ⁻¹ᵁ V) rfl).hom ≫

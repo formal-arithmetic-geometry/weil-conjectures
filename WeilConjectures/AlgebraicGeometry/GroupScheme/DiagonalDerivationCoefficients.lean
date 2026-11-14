@@ -11,8 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.InfPoints
 /-!
 # Derivation coefficients on the dual-number diagonal
 
-Source: Stacks Project, Tag 0B2B, proof of Lemma 33.16.2, the square-zero
-pushout calculation; blueprint `def-wf-lie-algebra-derivation`, the dual-number description.
+## References
+
+* Stacks Project, Tag 0B2B, proof of Lemma 33.16.2 (the square-zero pushout calculation)
 -/
 
 @[expose] public section
@@ -117,8 +118,7 @@ private theorem transported_d_heq {S : Scheme.{u}} (X : Over S)
 
 
 /-- On the dual-number diagonal the first-order coefficient is the sum of the
-first-order coefficients on the two axes, after identifying the common reduction.
-Source: Stacks Project, Tag 0B2B, proof of Lemma 33.16.2, applied sectionwise. -/
+first-order coefficients on the two axes, after identifying the common reduction. -/
 theorem infDerivation_diagonal_coefficients {S : Scheme.{u}} (X : Over S)
     (f : Scheme.dualNumbersOver S ⊗ Scheme.dualNumbersOver S ⟶ X)
     (g : S ⟶ X.left)

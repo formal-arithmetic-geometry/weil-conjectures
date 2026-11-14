@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 /-!
 # Homogeneous-fraction charts for affine-basis graded line maps
 
-Source: Stacks Project, Constructions, Tag 01O9.
+## References
+
+* Stacks Project, Constructions, Tags 01O9, 01NK
 -/
 
 @[expose] public section
@@ -207,10 +209,7 @@ end Coefficients
 
 /-- The relative-Proj construction for a graded line map specified on affine base opens.
 The frame powers and coefficients are supplied explicitly, with their defining equations;
-no sheaf-level graded decomposition or choice of such a decomposition is required.
-
-Source: Stacks Project, Constructions, Tag 01O9, characterizations (2) and (3), and
-Tag 01NK for the affine homogeneous-localization construction. -/
+no sheaf-level graded decomposition or choice of such a decomposition is required. -/
 theorem graded_line_homogeneous_fraction_atlas {S T : Scheme.{u}} (h : T ⟶ S)
     (A : S.GradedAlgebraData) (L : T.Modules) [L.IsInvertible]
     (ψ : RelativeGradedLineMap h A L) (hgen : ψ.GeneratesEverywhere)

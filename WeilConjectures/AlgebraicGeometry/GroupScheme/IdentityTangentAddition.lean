@@ -12,6 +12,10 @@ import WeilConjectures.AlgebraicGeometry.GroupScheme.LieCotangentDualResidue
 
 /-!
 # Compatibility of identity tangent transport with the vector-space operations
+
+## References
+
+* Stacks Project, Tag 0B2B
 -/
 
 @[expose] public section
@@ -22,10 +26,7 @@ open scoped MonObj
 namespace AlgebraicGeometry.GrpObj
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The prescribed identity tangent transport sends infinitesimal multiplication to addition.
-Source: blueprint `def-wf-lie-algebra-derivation`;
-`lemma-connected-components-images-homomorphisms--3`, Multiplication paragraph; Stacks Project, Tag
-0B2B, construction of tangent addition. -/
+/-- The prescribed identity tangent transport sends infinitesimal multiplication to addition. -/
 theorem identity_tangent_transport_addition
     {k : Type u} [Field k] (G : Over (Spec (.of k))) [GrpObj G] :
     let x := unitSection G (IsLocalRing.closedPoint k)

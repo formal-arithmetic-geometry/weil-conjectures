@@ -33,12 +33,6 @@ of `(ker e)/(ker e)²` dual to `(b_i)`, since `Lie(G)` is the dual of this cotan
   `X` commute.
 - `AlgebraicGeometry.GrpObj.existsUnique_prod_eq`: they form a free `Γ(X, 𝒪_X)`-module with basis
   the base changes `(b_i)_X` of a basis of `Lie(G)`.
-
-## Blueprint
-
-- `lemma-stable-subspaces-center`: `Lie(G) ⊗ A` as the infinitesimal points of `G` with values in
-`A`, on which
-  `G(A)` acts by the adjoint action.
 -/
 
 @[expose] public section

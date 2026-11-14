@@ -200,9 +200,12 @@ import all WeilConjectures.AlgebraicGeometry.ExactProductFunctorRoosCompatibilit
 
 /-! # Ordinary immersion pullback and strict completed pullback
 
-Source: localization Step 6; Stacks Tags 09AA, 099M and 099N (2),(5).
 The canonical coefficient constructions are reexported from CoreA; strict tower
 and Roos constructions remain in this module.
+
+## References
+
+* Stacks Project, Tags 09AA, 099M, 099N (2),(5), 08TC, 07KC
 -/
 
 @[expose] public noncomputable section
@@ -350,8 +353,7 @@ private theorem modulePull_preservesProducts [IsImmersion f] :
     preservesSmallestLimits_of_preservesLimits _
   infer_instance
 
-/-- The coordinatewise Roos comparison, uniquely normalized by the product map.
-Source: localization Step 6, Step 4; Stacks 08TC. -/
+/-- The coordinatewise Roos comparison, uniquely normalized by the product map. -/
 theorem roosIso_exists [IsImmersion f]
     (M : CochainComplex (pbcTowers X (pbcAdicCompletion X (pbcIntegralDatum l E))) ℤ) :
     ∃! e : (complexPull l E f).obj (strictRoosComplex M) ≅
@@ -373,8 +375,7 @@ def roosIso [IsImmersion f]
     (M : CochainComplex (pbcTowers X (pbcAdicCompletion X (pbcIntegralDatum l E))) ℤ) :=
   (roosIso_exists l E f M).exists.choose
 
-/-- A map of strict towers gives the uniquely coordinate-normalized Roos map.
-Source: localization Step 6, Step 4; Stacks 08TC. -/
+/-- A map of strict towers gives the uniquely coordinate-normalized Roos map. -/
 theorem roosMap_exists (T : Scheme.{u})
     {M N : CochainComplex (pbcTowers T (pbcAdicCompletion T (pbcIntegralDatum l E))) ℤ}
     (a : M ⟶ N) :
@@ -394,8 +395,7 @@ def roosMap (T : Scheme.{u})
     {M N : CochainComplex (pbcTowers T (pbcAdicCompletion T (pbcIntegralDatum l E))) ℤ}
     (a : M ⟶ N) := (roosMap_exists l E T a).exists.choose
 
-/-- The limit embeds into Roos by its zero and compatible-sequence coordinates.
-Source: localization Step 6, Step 4; Stacks 07KC. -/
+/-- The limit embeds into Roos by its zero and compatible-sequence coordinates. -/
 theorem roosInclusion_exists (T : Scheme.{u})
     (I : CochainComplex (pbcTowers T (pbcAdicCompletion T (pbcIntegralDatum l E))) ℤ) :
     ∃! a : limit I.asFunctor ⟶ strictRoosComplex I,

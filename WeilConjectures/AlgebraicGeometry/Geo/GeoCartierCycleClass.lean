@@ -12,7 +12,18 @@ import WeilConjectures.AlgebraicGeometry.Cartier.CartierReductionScalar
 import WeilConjectures.AlgebraicGeometry.Cartier.CartierReductionPullback
 import WeilConjectures.AlgebraicGeometry.Cartier.CartierReductionModulus
 
-/-! # Canonical supported Cartier cycle classes -/
+/-! # Canonical supported Cartier cycle classes
+
+## Implementation details
+
+* In `exists_geoCartierCycleClass`, the auxiliary étale class fixes the canonical construction
+  by its relative torsor boundary, and `geoCartierSourceComparison` is the specified comparison
+  mate, so no arbitrary source isomorphism occurs.
+
+## References
+
+* Stacks Project, Tag 03PL
+-/
 
 @[expose] public noncomputable section
 
@@ -23,15 +34,9 @@ universe u
 open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale
 
-/-- The canonical Cartier classes in the ordinary pro-etale module derived category,
+/-- The canonical Cartier classes in the ordinary pro-étale module derived category,
 with the Kummer Chern equation, arbitrary finite-coefficient extension, exponent
-independence, and every Cartier-preserving base change. The auxiliary etale class fixes
-the canonical construction by its relative torsor boundary; `geoCartierSourceComparison`
-is the specified comparison mate, so no arbitrary source isomorphism occurs.
-
-Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-geo-cartier, statement
-and proof paragraphs 1--6; Stacks Project, Tag 03PL.
--/
+independence, and every Cartier-preserving base change. -/
 theorem exists_geoCartierCycleClass (ℓ : ℕ) (hℓ : ℓ.Prime) :
     ∃ c : GeoCartierClassFamily.{u} ℓ,
       (∀ (r : ℕ) (hr : 0 < r) (A : Type (u + 1)) [CommRing A] [Finite A]

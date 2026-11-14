@@ -9,7 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.GradedLineFractionChart.GradedLi
 
 /-! # Local restriction of one fraction chart to an affine base open
 
-Source: Stacks Project, Constructions, Tags 01NK and 01O9.
+## References
+
+* Stacks Project, Constructions, Tags 01NK, 01O9
 -/
 
 @[expose] public section
@@ -101,10 +103,7 @@ private theorem fractionCoefficient_restrict
 
 /-- Restrict one framed fraction chart to a smaller affine base, locally at a point.
 The comparison chart uses the restricted original frame and denominator, without a
-change of degree. This compares a chart only with its own affine-base restriction.
-
-Source: Stacks Project, Constructions, Tag 01O9, characterization (3) and its proof,
-using the localization construction of Tag 01NK. -/
+change of degree. This compares a chart only with its own affine-base restriction. -/
 theorem gradedLineFraction_baseRefinement
     {S T : Scheme.{u}} {h : T ⟶ S} {A : S.GradedAlgebraData} {L : T.Modules}
     (ψ : RelativeGradedLineMap h A L)

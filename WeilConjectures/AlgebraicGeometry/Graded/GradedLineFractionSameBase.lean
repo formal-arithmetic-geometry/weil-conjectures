@@ -11,7 +11,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 
 /-! # Overlap comparison over a fixed affine base
 
-Source: Stacks Project, Constructions, Tags 01NK and 01O9.
+## References
+
+* Stacks Project, Constructions, Tags 01NK, 01O9
 -/
 
 @[expose] public section
@@ -387,10 +389,7 @@ private theorem fractionBase_chart
     using congrArg (fun g ↦ g ≫ A.relProjι i.U) hfactor
 
 /-- Fraction charts over one fixed affine base agree on their source pullback.
-The source frames, their affine opens, and the positive degrees may differ.
-
-Source: Stacks Project, Constructions, Tag 01NK, proof of
-lemma-invertible-map-into-proj (uniqueness and the affine construction). -/
+The source frames, their affine opens, and the positive degrees may differ. -/
 theorem gradedLineFraction_sameBase
     {S T : Scheme.{u}} {h : T ⟶ S} {A : S.GradedAlgebraData} {L : T.Modules}
     (ψ : RelativeGradedLineMap h A L)

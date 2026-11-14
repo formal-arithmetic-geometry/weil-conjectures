@@ -63,7 +63,14 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUn
 
 /-! # Tensor localization for a fixed ordinary geometric realization
 
-Source: Zheng Construction 4.1; Stacks 06YY and 07A4.
+## Implementation details
+
+* `GeometryTensor` contains no direct image, derived adjunction or scalar comparison.
+
+## References
+
+* Zheng, Construction 4.1
+* Stacks Project, Tags 06YY, 07A4
 -/
 
 @[expose] public noncomputable section
@@ -269,9 +276,7 @@ variable (A : Data.{c, v, r} J B τ)
   (O : GeometryOrdinary.{c, v, r} J B τ J' uInv uPush adjSet)
   (target : Data.{c, v, r} J' O.coefficients O.coefficientTransition)
 
-/-- The system and level tensor comparisons on the specified total-complex models.
-No direct image, derived adjunction, or scalar comparison is part of this interface.
-Source: Zheng Construction 4.1; Stacks 06YY and 07A4. -/
+/-- The system and level tensor comparisons on the specified total-complex models. -/
 structure GeometryTensor where
   /-- The canonical tensor comparison for inverse image of systems. -/
   tensorPullback : A.closed.tensor ⋙ O.pull.mapDerivedCategory ≅
@@ -331,8 +336,7 @@ structure GeometryTensor where
       ((levelTensorModel n).ordinary ((evaluation.{c, v, max c v r} J B τ n).obj M)
         ((evaluation.{c, v, max c v r} J B τ n).obj N)).hom
 
-/-- Localization of the ordinary inverse-image pure-tensor comparison.
-Source: Zheng Construction 4.1; Stacks 06YY and 07A4. -/
+/-- Localization of the ordinary inverse-image pure-tensor comparison. -/
 theorem semilinearGeometryTensor [PreservesFiniteLimits uInv] :
     Nonempty (GeometryTensor.{c, v, r} J B τ J' uInv uPush adjSet A O target) := by
   classical

@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.Graded.GradedLineFractionTestLocal
 
 /-! # Comparison of graded line fraction charts with a trivialized Proj map
 
-Source: Stacks Project, Constructions, Tags 01NK and 01O9.
+## References
+
+* Stacks Project, Constructions, Tags 01NK, 01O9
 -/
 
 @[expose] public section
@@ -26,10 +28,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- A morphism with all prescribed fraction restrictions has the usual formula on any
 trivialized open test with unit irrelevant ideal. This is a comparison lemma for an
-already supplied morphism, not an existence assertion or a statement that it is over S.
-
-Source: Stacks Project, Constructions, Tag 01NK, lemma-invertible-map-into-proj,
-and Tag 01O9, lemma-invertible-map-into-relative-proj, characterizations (2) and (3). -/
+already supplied morphism, not an existence assertion or a statement that it is over S. -/
 theorem gradedLineFraction_test
     {S T : Scheme.{u}} {h : T ⟶ S} {A : S.GradedAlgebraData} {L : T.Modules}
     (ψ : RelativeGradedLineMap h A L)

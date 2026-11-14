@@ -38,11 +38,6 @@ adjoint action `Ad(g) = d(c_g)` of `g`.
 - `AlgebraicGeometry.GrpObj.isClosedImmersion_eqLocusι`: the equalizer is a closed subscheme.
 - `AlgebraicGeometry.GrpObj.mem_range_differential_centralizerι_iff`: the Lie algebra of
   `C_G(g)` is the subspace fixed by `d(c_g)`.
-
-## Blueprint
-
-- `lemma-stable-subspaces-center`: the kernel of `Ad` and the centralizers of points, with their Lie
-algebras.
 -/
 
 @[expose] public section

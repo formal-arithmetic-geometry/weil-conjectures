@@ -13,7 +13,9 @@ import all Mathlib.Algebra.Homology.Localization
 
 /-! # Target localization and derived-unit transport
 
-Source: Stacks Project, Tag 03Q9, final injective-complex paragraph.
+## References
+
+* Stacks Project, Tag 03Q9
 -/
 
 /- This original-model counterpart follows the proved calculation in
@@ -45,9 +47,7 @@ private lemma assemble_transport {A B : Type*} [Category A] [Category B]
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-/-- Localization of the exchange prefix on a bounded-below complex.
-Source: Stacks Project, Tag 03Q9, final injective-complex paragraph, and the
-exact localization comparisons. -/
+/-- Localization of the exchange prefix on a bounded-below complex. -/
 private theorem exchange_localization_prefix
     {C : Type*} {B : Type*} {D : Type*} {E : Type*}
     [Category C] [Category B] [Category D] [Category E]
@@ -97,9 +97,7 @@ private theorem exchange_localization_prefix
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-/-- Transport of a target derived unit and an exact representative map.
-Source: Stacks Project, Tag 03Q9, final injective-complex paragraph, and
-Functor.rightDerivedFunctorPlusCompatibility. -/
+/-- Transport of a target derived unit and an exact representative map. -/
 private theorem target_unit_representative_transport
     {C : Type*} {D : Type*} {E : Type*}
     [Category C] [Category D] [Category E]
@@ -204,11 +202,7 @@ private theorem target_unit_representative_transport
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-/-- Transport the localized underived exchange and target unit to unbounded categories.
-
-Source: Stacks Project, Tag 03Q9, final injective-complex paragraph; the exact
-localization comparisons and defining unit compatibility of
-`Functor.rightDerivedFunctorPlusCompatibility`. -/
+/-- Transport the localized underived exchange and target unit to unbounded categories. -/
 theorem smallModel_injectiveExchange_target_transport {X S : Scheme.{v}} (f : X ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1}))

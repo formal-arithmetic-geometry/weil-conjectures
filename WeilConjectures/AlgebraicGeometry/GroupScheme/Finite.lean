@@ -20,7 +20,7 @@ public import WeilConjectures.RingTheory.HopfAlgebra.Etale
 A finite group scheme over a field `K` is an object `G` of `Over (Spec (.of K))` equipped with
 `CategoryTheory.GrpObj G` whose structure morphism `G.hom` is finite; its *order* is
 `G.hom.finrankΓ = dim_K Γ(G, 𝒪_G)`. This file records the basic structural facts about such
-group schemes that the abelian-variety block of the blueprint uses: the order of a connected
+group schemes used for abelian varieties: the order of a connected
 one is a power of the characteristic, one whose order is prime to the characteristic is étale,
 and a finite étale group scheme over an algebraically closed field has exactly `|G|` rational
 points, insensitive to enlarging the base field.
@@ -75,11 +75,7 @@ theorem exists_hopfAlgebra_iso (G : Over (Spec (.of K))) [GrpObj G] [IsFinite G.
 /-- Connected finite group schemes have `p`-power order
 
 Let `G` be a finite group scheme over a field `K` of characteristic `p > 0`. If `G` is
-connected, then its order `|G| = dim_K Γ(G, 𝒪_G)` is a power of `p`.
-
-`G` is the spectrum of a finite-dimensional commutative Hopf algebra `H`, which is local since
-`Spec H` is connected; conclude by `Bialgebra.exists_finrank_eq_pow`. This also proves blueprint
-`proposition-multiplication-n--2`. -/
+connected, then its order `|G| = dim_K Γ(G, 𝒪_G)` is a power of `p`. -/
 theorem exists_finrankΓ_eq_pow (p : ℕ) [Fact p.Prime] [CharP K p]
     (G : Over (Spec (.of K))) [GrpObj G] [IsFinite G.hom] [ConnectedSpace G.left] :
     ∃ r : ℕ, G.hom.finrankΓ = p ^ r := by
@@ -99,11 +95,7 @@ theorem exists_finrankΓ_eq_pow (p : ℕ) [Fact p.Prime] [CharP K p]
 /-- Group schemes of order prime to `p` are étale
 
 Let `G` be a finite group scheme over a field `K` of characteristic `p`, of order `m`. If
-`p ∤ m` — which for `p = 0` just says `m ≠ 0` — then `G` is étale over `K`. This also proves
-blueprint `proposition-multiplication-n--2`.
-
-`G` is the spectrum of a finite-dimensional commutative Hopf algebra `H` of dimension `m`, which
-is étale by `HopfAlgebra.etale_of_not_dvd_finrank`. -/
+`p ∤ m` — which for `p = 0` just says `m ≠ 0` — then `G` is étale over `K`. -/
 theorem etale_of_not_dvd_finrankΓ (p : ℕ) [CharP K p] (G : Over (Spec (.of K))) [GrpObj G]
     [IsFinite G.hom] (hp : ¬ p ∣ G.hom.finrankΓ) :
     Etale G.hom := by
@@ -133,11 +125,7 @@ noncomputable def pointsEquivAlgHom (G : Over (Spec (.of K))) [IsAffine G.left] 
 /-- Points of finite étale group schemes
 
 A finite étale group scheme `G` of order `m` over an algebraically closed field `K` has exactly
-`m` points with values in `K`. This is the first half of blueprint
-`proposition-integral-tate-module`.
-
-The proof identifies the points with `K`-algebra homomorphisms `Γ(G, ⊤) →ₐ[K] K`; as `Γ(G, ⊤)`
-is an étale `K`-algebra it is a product of `m` copies of `K`, so there are `m` of them. -/
+`m` points with values in `K`. -/
 theorem card_points_eq_finrankΓ [IsAlgClosed K] (G : Over (Spec (.of K))) [GrpObj G]
     [IsFinite G.hom] [Etale G.hom] :
     Nat.card (𝟙_ (Over (Spec (.of K))) ⟶ G) = G.hom.finrankΓ := by
@@ -151,11 +139,7 @@ theorem card_points_eq_finrankΓ [IsAlgClosed K] (G : Over (Spec (.of K))) [GrpO
 
 Let `G` be a finite étale group scheme over an algebraically closed field `K` and let `K'` be an
 algebraically closed extension of `K`. Then base change along `K ⊆ K'`, that is precomposition
-with the structure morphism of `Spec K'` over `K`, is a bijection `G(K) ≃ G(K')`. This is the
-second half of blueprint `proposition-integral-tate-module`.
-
-Under the identification of points with `K`-algebra homomorphisms out of `Γ(G, ⊤)`, the map is
-composition with `K → K'`: it is injective, and both sides have `|G|` elements. -/
+with the structure morphism of `Spec K'` over `K`, is a bijection `G(K) ≃ G(K')`. -/
 theorem bijective_toUnit_comp [IsAlgClosed K] {K' : Type u} [Field K'] [Algebra K K']
     [IsAlgClosed K'] (G : Over (Spec (.of K))) [GrpObj G] [IsFinite G.hom] [Etale G.hom] :
     Function.Bijective (fun s : 𝟙_ (Over (Spec (.of K))) ⟶ G ↦

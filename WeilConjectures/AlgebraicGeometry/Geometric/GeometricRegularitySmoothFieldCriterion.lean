@@ -25,8 +25,9 @@ import WeilConjectures.RingTheory.SmoothAtPrimeFieldExtensionDescent
 /-!
 # Geometric regularity and smoothness over a field
 
-Source: Stacks Project, Varieties, Tags 038X
-and 038T.
+## References
+
+* Stacks Project, Varieties, Tags 038X, 038T
 -/
 
 @[expose] public section
@@ -155,8 +156,7 @@ private theorem smooth_affine_chart_of_regular_baseChange
 
 /-- A morphism locally of finite type over a field is smooth precisely when every
 finitely generated field base change has regular local rings at all points.
-Finite generation is as a field, expressed by `IntermediateField.FG` for the top field.
-Source: Stacks Project, Varieties, Tags 038X and 038T. -/
+Finite generation is as a field, expressed by `IntermediateField.FG` for the top field. -/
 theorem smooth_iff_regularLocalRing_finitelyGenerated_field_baseChange
     (k : Type u) [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k))
     [LocallyOfFiniteType f] :

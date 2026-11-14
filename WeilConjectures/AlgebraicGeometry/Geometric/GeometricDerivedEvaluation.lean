@@ -12,7 +12,15 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # Derived evaluation and coefficient comparison for a fixed ordinary realization
 
-Source: Zheng Construction 4.1, the paragraph preceding Lemma 4.10 and Lemma 4.10.
+## Implementation details
+
+* In `GeometryEvaluation`, the left evaluation and both derived adjunctions are fixed
+  canonical localizations.
+
+## References
+
+* Zheng, Construction 4.1, the paragraph preceding Lemma 4.10 and Lemma 4.10
+* Stacks Project, Tags 03EL, 07A6
 -/
 
 @[expose] public noncomputable section
@@ -40,9 +48,7 @@ variable (A : Data.{c, v, r} J B τ)
   [Abelian.HasKInjectiveResolutions
     (Systems.{c, v, max c v r} J' O.coefficients O.coefficientTransition)]
 
-/-- The derived right-evaluation and scalar comparisons of a fixed ordinary realization.
-The left evaluation and both derived adjunctions are fixed canonical localizations.
-Source: Zheng Construction 4.1 and Lemma 4.10. -/
+/-- The derived right-evaluation and scalar comparisons of a fixed ordinary realization. -/
 structure GeometryEvaluation where
   /-- Derived direct-image evaluation; no K-injective evaluation assumption is made. -/
   pushEvaluation : ∀ n : ℕ,
@@ -91,9 +97,7 @@ structure GeometryEvaluation where
         Functor.mapDerivedCategoryNatIso (O.restrictionPullback h) ≪≫
           (Functor.mapDerivedCategoryCompIso _ _).symm).hom.app ((A.scalar h).T.obj P))
 
-/-- Derived direct-image evaluation is obtained by conjugating singleton extension.
-Source: Zheng Construction 4.1 and the paragraph preceding Lemma 4.10, printed pp. 21, 23;
-Stacks 03EL and 07A6. -/
+/-- Derived direct-image evaluation is obtained by conjugating singleton extension. -/
 theorem semilinearGeometryEvaluation [PreservesFiniteLimits uInv] :
     Nonempty (GeometryEvaluation.{c, v, r} J B τ J' uInv uPush adjSet A O target) := by
   classical

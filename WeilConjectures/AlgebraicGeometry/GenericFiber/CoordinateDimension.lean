@@ -28,11 +28,9 @@ dimension `⊥` and `⊥ + 1 = ⊥`.
 
 ## Proof
 
-Every point `x` of the fibre of `t` over the generic point `η'` of `𝔸¹_S` lies in the generic
-fibre `X_K` of `f`, which is a Jacobson space; the closure of `x` in `X_K` contains a closed point
-`y` of `X_K`. Closed points of `X_K` map to closed points of the fibre `𝔸¹_K` of `𝔸¹_S`, while
-`η'` is not closed there, so `y` does not lie over `η'`. Hence every chain of irreducible closed
-subsets of the fibre of `t` extends, inside `X_K`, by one more step at its bottom.
+Every point of the fibre of `t` over the generic point of `𝔸¹_S` specializes, inside the
+Jacobson space `X_K`, to a closed point not lying over that generic point, so every chain of
+irreducible closed subsets of the fibre extends by one more step inside `X_K`.
 -/
 
 @[expose] public section
@@ -127,12 +125,10 @@ lemma AffineSpace.over_genericPoint (S : Scheme.{u}) [IrreducibleSpace S] :
   exact iff_of_true (((genericPoint_spec _).specializes (Set.mem_univ w)).map
     (𝔸(PUnit; S) ↘ S).continuous) trivial
 
-/-- Coordinate projections lower generic
-dimension.
+/-- Coordinate projections lower generic dimension.
 
-Let `S` be integral with function field `K`, let `f : X ⟶ S` be locally of finite type (in the
-blueprint `X` is open in a closed subscheme of `𝔸ᵐ_S`) and let `t : X ⟶ 𝔸¹_S` be a morphism over
-`S` (in the blueprint, a coordinate `t_r`). If `dim X_K ≤ n`, then the fibre of `t` over the
+Let `S` be integral with function field `K`, let `f : X ⟶ S` be locally of finite type and let
+`t : X ⟶ 𝔸¹_S` be a morphism over `S`. If `dim X_K ≤ n`, then the fibre of `t` over the
 generic point of `𝔸¹_S` has dimension at most `n - 1`, an empty fibre having dimension `⊥`. -/
 theorem topologicalKrullDim_fiber_genericPoint_add_one_le {S X : Scheme.{u}} [IsIntegral S]
     (f : X ⟶ S) [LocallyOfFiniteType f] (t : X ⟶ 𝔸(PUnit; S))
