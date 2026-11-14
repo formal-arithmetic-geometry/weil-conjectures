@@ -114,7 +114,29 @@ noncomputable def boundedConstructibleUpperShriekOfCompactificationToPadicAlgCl 
     (boundedConstructibleUpperShriekOfCompactificationAdjunction ℓ c)
     (boundedConstructibleLowerShriekOfCompactificationToPadicAlgClIso ℓ E c).inv
 
--- `mateEquiv_hcomp` is matched against the unfolded adjunction `Rf_!(c) ⊣ Rf^!(c)`.
+/-- `CategoryTheory.mateEquiv_hcomp` for composite adjunctions, functors and a square given by
+name, each identified with the composite one by its own equality: the identifications are checked
+one at a time, so that none of them unfolds an adjunction. -/
+private lemma mateEquiv_heq_hComp_of_heq
+    {A₁ A₂ A₃ B₁ B₂ B₃ : Type*} [Category A₁] [Category A₂] [Category A₃] [Category B₁]
+    [Category B₂] [Category B₃] {G : A₁ ⥤ B₁} {H : A₂ ⥤ B₂} {K : A₃ ⥤ B₃}
+    {L₁ : A₁ ⥤ A₂} {R₁ : A₂ ⥤ A₁} {L₂ : B₁ ⥤ B₂} {R₂ : B₂ ⥤ B₁}
+    {L₃ : A₂ ⥤ A₃} {R₃ : A₃ ⥤ A₂} {L₄ : B₂ ⥤ B₃} {R₄ : B₃ ⥤ B₂}
+    (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (adj₃ : L₃ ⊣ R₃) (adj₄ : L₄ ⊣ R₄)
+    (α : TwoSquare G L₁ L₂ H) (β : TwoSquare H L₃ L₄ K)
+    {L₁₃ : A₁ ⥤ A₃} {R₃₁ : A₃ ⥤ A₁} {L₂₄ : B₁ ⥤ B₃} {R₄₂ : B₃ ⥤ B₁}
+    (adj₁₃ : L₁₃ ⊣ R₃₁) (adj₂₄ : L₂₄ ⊣ R₄₂) (γ : TwoSquare G L₁₃ L₂₄ K)
+    (hL₁₃ : L₁₃ = L₁ ⋙ L₃) (hR₃₁ : R₃₁ = R₃ ⋙ R₁) (hL₂₄ : L₂₄ = L₂ ⋙ L₄)
+    (hR₄₂ : R₄₂ = R₄ ⋙ R₂) (hadj₁₃ : HEq adj₁₃ (adj₁.comp adj₃))
+    (hadj₂₄ : HEq adj₂₄ (adj₂.comp adj₄)) (hγ : HEq γ (TwoSquare.vComp α β)) :
+    HEq (mateEquiv adj₁₃ adj₂₄ γ)
+      (TwoSquare.hComp (mateEquiv adj₃ adj₄ β) (mateEquiv adj₁ adj₂ α)) := by
+  subst hL₁₃ hR₃₁ hL₂₄ hR₄₂
+  obtain rfl := eq_of_heq hadj₁₃
+  obtain rfl := eq_of_heq hadj₂₄
+  obtain rfl := eq_of_heq hγ
+  exact heq_of_eq (mateEquiv_hcomp adj₁ adj₂ adj₃ adj₄ α β)
+
 /-- The exchange for `f^!` along a compactification `c = (X ⟶[i] Z ⟶[g] Y)` is the horizontal
 composite of the exchange for the proper part `g` and of the exchange for the open immersion `i`:
 the mates of a vertical composite of squares are the horizontal composite of the mates
@@ -124,57 +146,28 @@ lemma boundedConstructibleUpperShriekOfCompactificationToPadicAlgCl_eq :
       TwoSquare.hComp (boundedConstructibleProperUpperShriekToPadicAlgCl ℓ E c)
         (boundedConstructibleOpenImmersionUpperStarToPadicAlgCl ℓ E c.overI) := by
   -- The shriek functor is built on the proper-only `Rg_*` while the exchange formalism is stated on
-  -- the general one (the same functor by `rfl`); every identification is spelled out before
-  -- `mateEquiv_hcomp` is applied with all its functors given, so that no unification has to unfold
-  -- the adjunctions.
-  have e₁ : ContinuousMapRingObj.boundedConstructibleUpperShriekOfCompactificationAdjunction ℓ E c =
-      (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
-        (Profinite.continuousMapRingObj E) ℓ c.overI).comp
-        (Adjunction.ofIsLeftAdjoint
-          (ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E c.overG)) :=
-    rfl
-  have e₂ : boundedConstructibleUpperShriekOfCompactificationAdjunction ℓ c =
-      (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
-        (Profinite.padicAlgClRingObj ℓ) ℓ c.overI).comp
-        (Adjunction.ofIsLeftAdjoint (boundedConstructibleLowerStar ℓ c.overG)) :=
-    rfl
+  -- the general one (the same functor by `rfl`); each identification (functors, adjunctions,
+  -- square) is checked separately, so that `mateEquiv_hcomp` is applied without unification.
   have h : (boundedConstructibleLowerShriekOfCompactificationToPadicAlgClIso ℓ E c).inv =
-      (TwoSquare.vComp
+      TwoSquare.vComp
         (boundedConstructibleOpenImmersionLowerShriekToPadicAlgClIso ℓ E c.overI).inv
-        (boundedConstructibleLowerStarToPadicAlgClIso ℓ E c.overG).inv :
-        boundedConstructibleToPadicAlgCl X.left ℓ E ⋙
-            (boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
-              c.overI ⋙ boundedConstructibleLowerStar ℓ c.overG) ⟶
-          (boundedConstructibleOpenImmersionLowerShriek (Profinite.continuousMapRingObj E) ℓ
-              c.overI ⋙ ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E c.overG) ⋙
-            boundedConstructibleToPadicAlgCl Y.left ℓ E) := by
+        (boundedConstructibleLowerStarToPadicAlgClIso ℓ E c.overG).inv := by
     ext K
     simp [boundedConstructibleLowerShriekOfCompactificationToPadicAlgClIso, TwoSquare.vComp]
   unfold boundedConstructibleUpperShriekOfCompactificationToPadicAlgCl
-  rewrite [h, e₁, e₂]
-  exact mateEquiv_hcomp
-    (G := boundedConstructibleToPadicAlgCl X.left ℓ E)
-    (H := boundedConstructibleToPadicAlgCl c.overObj.left ℓ E)
-    (K := boundedConstructibleToPadicAlgCl Y.left ℓ E)
-    (L₁ := boundedConstructibleOpenImmersionLowerShriek (Profinite.continuousMapRingObj E) ℓ
-      c.overI)
-    (R₁ := boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ c.overI)
-    (L₂ := boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ c.overI)
-    (R₂ := boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c.overI)
-    (L₃ := ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E c.overG)
-    (R₃ := (ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E c.overG).rightAdjoint)
-    (L₄ := boundedConstructibleLowerStar ℓ c.overG)
-    (R₄ := (boundedConstructibleLowerStar ℓ c.overG).rightAdjoint)
+  exact eq_of_heq (mateEquiv_heq_hComp_of_heq
     (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
       (Profinite.continuousMapRingObj E) ℓ c.overI)
     (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
       (Profinite.padicAlgClRingObj ℓ) ℓ c.overI)
-    (Adjunction.ofIsLeftAdjoint
-      (ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E c.overG))
-    (Adjunction.ofIsLeftAdjoint
-      (boundedConstructibleLowerStar ℓ c.overG))
+    (Adjunction.ofIsLeftAdjoint (ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E c.overG))
+    (Adjunction.ofIsLeftAdjoint (boundedConstructibleLowerStar ℓ c.overG))
     (boundedConstructibleOpenImmersionLowerShriekToPadicAlgClIso ℓ E c.overI).inv
     (boundedConstructibleLowerStarToPadicAlgClIso ℓ E c.overG).inv
+    (ContinuousMapRingObj.boundedConstructibleUpperShriekOfCompactificationAdjunction ℓ E c)
+    (boundedConstructibleUpperShriekOfCompactificationAdjunction ℓ c)
+    (boundedConstructibleLowerShriekOfCompactificationToPadicAlgClIso ℓ E c).inv
+    rfl rfl rfl rfl (HEq.refl _) (HEq.refl _) (heq_of_eq h))
 
 /-- The exchange for `f^!` along a compactification `c` is an isomorphism as soon as the exchange
 for its proper part is one, the exchange for the open immersion being an isomorphism. -/
