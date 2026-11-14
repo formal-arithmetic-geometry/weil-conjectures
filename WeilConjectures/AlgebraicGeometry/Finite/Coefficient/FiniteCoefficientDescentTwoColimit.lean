@@ -526,11 +526,12 @@ theorem finiteCoefficientDescentTwoColimit
   let : Fact p.Prime := ⟨(CharP.char_is_prime_or_zero k p).resolve_right (Nat.ne_of_gt hp)⟩
   have hE : ∀ E : PadicAlgCl.FiniteIntermediateField ℓ,
       constantModelBoundedConstructible (Profinite.continuousMapRingObj E) X =
-        boundedConstructible (padicSubfieldRingObj X ℓ E) := fun E ↦
-    constantModelBoundedConstructible_eq_boundedConstructible_subfield ℓ E X
+        boundedConstructible (padicSubfieldRingObj X ℓ E) := by
+    intro E
+    exact constantModel_eq_of_localFree _ (finite_lf ℓ E) X
   have hΩ : constantModelBoundedConstructible (Profinite.padicAlgClRingObj ℓ) X =
-      boundedConstructible (padicAlgClRingObj X ℓ) :=
-    constantModelBoundedConstructible_eq_boundedConstructible_padicAlgCl ℓ X
+      boundedConstructible (padicAlgClRingObj X ℓ) := by
+    exact constantModel_eq_of_localFree _ (algcl_lf ℓ) X
   refine ⟨(coefficient_finite_descent_lisse X ℓ).1, ?_,
     (coefficient_finite_descent_objects k p ℓ hp hpℓ X).1, ?_⟩
   · intro E C D r
