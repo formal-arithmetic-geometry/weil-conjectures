@@ -107,6 +107,7 @@ noncomputable def boundedConstructibleLowerStarOfIsProperCompatibility :
 
 /-- The proper-only functor is the general one restricted to proper morphisms: both are the lift
 of `R((p)_*⟦ℚ̲̄_ℓ⟧)` to `Dᵇc`, by proof irrelevance (`ℚ̄_ℓ`-coefficient). -/
+@[simp]
 lemma boundedConstructibleLowerStarOfIsProper_eq :
     boundedConstructibleLowerStarOfIsProper ℓ p = boundedConstructibleLowerStar ℓ p :=
   rfl
@@ -197,6 +198,7 @@ noncomputable def boundedConstructibleLowerStarOfIsProperCompatibility :
   ObjectProperty.liftCompιIso _ _ _
 
 /-- The proper-only functor is the general one restricted to proper morphisms (`E`-coefficient). -/
+@[simp]
 lemma boundedConstructibleLowerStarOfIsProper_eq :
     boundedConstructibleLowerStarOfIsProper ℓ E p = boundedConstructibleLowerStar ℓ E p :=
   rfl
@@ -282,6 +284,7 @@ noncomputable def boundedConstructibleLowerStarOfIsProperCompatibility :
 
 /-- The proper-only functor is the general one restricted to proper morphisms
 (`𝒪_E`-coefficient). -/
+@[simp]
 lemma boundedConstructibleLowerStarOfIsProper_eq :
     boundedConstructibleLowerStarOfIsProper ℓ E p = boundedConstructibleLowerStar ℓ E p :=
   rfl
