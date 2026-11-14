@@ -191,8 +191,7 @@ noncomputable def boundedConstructibleLowerShriekComp_padicIntegers :
     Functor.isoWhiskerRight
       (boundedConstructibleOpenImmersionLowerShriekComp _ ℓ c.overI d.overI) _ ≪≫
     Functor.isoWhiskerLeft _
-      (PadicIntegersRingObj.boundedConstructibleLowerStarOfIsProperComp ℓ E d.overG
-        c'.overG).symm ≪≫
+      (PadicIntegersRingObj.boundedConstructibleLowerStarComp ℓ E d.overG c'.overG).symm ≪≫
     Functor.associator _ _ _ ≪≫
     Functor.isoWhiskerLeft _ ((Functor.associator _ _ _).symm ≪≫
       Functor.isoWhiskerRight (asIso

@@ -219,7 +219,7 @@ lemma compShriekTriangle_compIso_symm
     Functor.isoWhiskerRight
         (boundedConstructibleOpenImmersionLowerShriekComp _ ℓ c.overI d.overI) _ ≪≫
       Functor.isoWhiskerLeft _
-        (boundedConstructibleLowerStarOfIsProperComp ℓ d.overG c'.overG).symm ≪≫
+        (boundedConstructibleLowerStarComp ℓ d.overG c'.overG).symm ≪≫
       Functor.associator _ _ _ ≪≫
       Functor.isoWhiskerLeft _ ((Functor.associator _ _ _).symm ≪≫
         Functor.isoWhiskerRight
