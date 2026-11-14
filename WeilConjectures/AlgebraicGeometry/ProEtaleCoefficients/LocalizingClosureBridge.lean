@@ -28,7 +28,8 @@ quasi-separated scheme the two agree (blueprint `proposition-ctf-equals-bc`):
 * the two generic closures are the same
   (`CategoryTheory.localizingClosure_eq_objectProperty`).
 
-This is the bridge lemma `AlgebraicGeometry.ProEtale.localizingClosureProEtale_eq_localizingBoundedConstructible`
+This is the bridge lemma
+`AlgebraicGeometry.ProEtale.localizingClosureProEtale_eq_localizingBoundedConstructible`
 (Blueprint bot, Zulip #3561 1(a) and #3571).
 -/
 
@@ -44,9 +45,10 @@ namespace AlgebraicGeometry.ProEtale
 `proposition-ctf-equals-bc`): for an `ℓ`-adic coefficient ring `Λ` and a compact, locally noetherian,
 quasi-separated scheme `X`, the localizing closure of `Dctf(X, Λ)` of the notes
 (`AlgebraicGeometry.ProEtale.localizingClosureProEtale`) is the localizing closure of `Dᵇc(X)⟦Λ⟧`
-used by the six operations (`AlgebraicGeometry.ProEtale.CondensedRing.localizingBoundedConstructible`).
-The hypothesis `hΛ` is the form of the `ℓ`-adic ring used by the constructibility comparison, `hΛ'` the
-form used by `localizingClosure_ctf_equals_bc`. -/
+used by the six operations
+(`AlgebraicGeometry.ProEtale.CondensedRing.localizingBoundedConstructible`). The hypothesis `hΛ`
+is the form of the `ℓ`-adic ring used by the constructibility comparison, `hΛ'` the form used by
+`localizingClosure_ctf_equals_bc`. -/
 theorem localizingClosureProEtale_eq_localizingBoundedConstructible
     (ℓ : ℕ) [Fact ℓ.Prime]
     (X : Scheme.{u}) [CompactSpace X] [IsLocallyNoetherian X] [QuasiSeparatedSpace X]
