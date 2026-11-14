@@ -34,8 +34,6 @@ open scoped TensorProduct
 
 namespace Algebra
 
-set_option maxHeartbeats 1000000 in
--- The dependent conormal types and both tensor equivalences need extra elaboration steps.
 /-- Source: Stacks Project, proof of Lemma 07CE, lines 357–414, with projective `I/I²`
 (blueprint: lem-weil-pbc-symmetric-projective-presentation-conormal).
 
@@ -162,11 +160,11 @@ theorem symmetric_projective_presentation_conormal
     ext j
     rw [MvPolynomial.aeval_X]
     exact hαX j
-  obtain ⟨⟨hsurj, hker, lam₀, hlam₀, hsurjlam, hdlam, hrange⟩, ediff⟩ :=
-    AlgebraicGeometry.cotangentComplex_symmetricAlgebra (LinearMap.ker q) q hqsurj rfl
   have hα : Function.Surjective α := by
     rw [hαeq]
-    exact hsurj
+    -- Extract only surjectivity, without introducing the unused dependent conormal data.
+    exact (AlgebraicGeometry.cotangentComplex_symmetricAlgebra
+      (LinearMap.ker q) q hqsurj rfl).1.choose
   have hφeq : φ = α.toRingHom.comp (MvPolynomial.map (Ideal.Quotient.mk I)) := by
     apply MvPolynomial.ringHom_ext
     · intro x
@@ -180,14 +178,14 @@ theorem symmetric_projective_presentation_conormal
   have hφ : Function.Surjective φ := by
     rw [hφeq]
     exact hα.comp (MvPolynomial.map_surjective _ Ideal.Quotient.mk_surjective)
-  obtain ⟨lam, hlam⟩ :=
-    projective_symmetric_presentation_conormal_equiv A M m q hqsurj α hαX hα
+  refine (projective_symmetric_presentation_conormal_equiv A M m q hqsurj α hαX hα).elim
+    fun lam hlam ↦ ?_
   obtain ⟨i, r, hi_formula, hr_formula, hi, hir, hr⟩ :=
     projective_symmetric_conormal_reduction_exact P I m q hqsurj α hαX φ hφeq hφ hα
   let p := lam.symm.toLinearMap.comp r
   have hip : Function.Exact i p := lam.symm.postcomp_exact_iff_exact.mpr hir
   have hp : Function.Surjective p := lam.symm.surjective.comp hr
-  obtain ⟨s, hs⟩ := Module.projective_lifting_property q LinearMap.id hqsurj
+  refine (Module.projective_lifting_property q LinearMap.id hqsurj).elim fun s hs ↦ ?_
   let e₀ := ((LinearMap.exact_subtype_ker_map q).splitSurjectiveEquiv
     (Submodule.injective_subtype _) ⟨s, hs⟩).1
   let e : (M × LinearMap.ker q) ≃ₗ[A] (Fin m → A) :=
@@ -199,7 +197,7 @@ theorem symmetric_projective_presentation_conormal
     simp [retraction, inclusion]
   let : Module.Projective A (LinearMap.ker q) :=
     Module.Projective.of_split inclusion retraction hsplit
-  obtain ⟨t, ht⟩ := Module.projective_lifting_property p LinearMap.id hp
+  refine (Module.projective_lifting_property p LinearMap.id hp).elim fun t ht ↦ ?_
   let eJ := (hip.splitSurjectiveEquiv hi ⟨t, ht⟩).1
   let eprod := TensorProduct.prodRight A C C M (LinearMap.ker q)
   let eFree := (LinearEquiv.baseChange A C _ _ e).trans

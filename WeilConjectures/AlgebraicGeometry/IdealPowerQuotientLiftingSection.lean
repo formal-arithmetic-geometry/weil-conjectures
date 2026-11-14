@@ -32,8 +32,17 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-set_option maxHeartbeats 700000 in
--- Elaborating restricted module maps and their components needs a larger heartbeat budget.
+private theorem over_comp_over_app {X : Scheme.{u}} {M N P Q : X.Modules}
+    (f : M ⟶ N) {V : X.Opens} (g : N.over V ⟶ P.over V) (h : P ⟶ Q)
+    (W : X.Opens) (hWV : W ≤ V) :
+    (f.over V ≫ g ≫ h.over V).val.app (op (Over.mk (homOfLE hWV))) =
+      f.val.app (op W) ≫ g.val.app (op (Over.mk (homOfLE hWV))) ≫
+        h.val.app (op W) := rfl
+
+private theorem over_app_eq {X : Scheme.{u}} {M N : X.Modules}
+    (f : M ⟶ N) {V : X.Opens} (W : X.Opens) (hWV : W ≤ V) :
+    (f.over V).val.app (op (Over.mk (homOfLE hWV))) = f.val.app (op W) := rfl
+
 set_option backward.isDefEq.respectTransparency false in
 /-- Every section on the ideal complement lifts into an ideal-power annihilator quotient.
 
@@ -138,6 +147,8 @@ theorem ideal_power_quotient_local_lifting_section
       (α V).val.app (op (Over.mk (homOfLE hWV)))
           (((idealSheafPower ι n).1).presheaf.map (homOfLE hWU).op (one n)) =
         (cokernel.π (a n)).app W (F.presheaf.map (homOfLE hWU).op s) := by
+    dsimp only [α]
+    rw [over_comp_over_app]
     change (q (k V) n (hkn V)).val.app (op W)
       ((φ V).val.app (op (Over.mk (homOfLE hWV)))
         ((r (k V) n (hkn V)).val.app (op W) _)) = _
@@ -164,19 +175,13 @@ theorem ideal_power_quotient_local_lifting_section
       (show l V V' ≤ Finset.univ.sup (fun p : S × S ↦ l p.1 p.2) from
         Finset.le_sup (f := fun p : S × S ↦ l p.1 p.2)
           (Finset.mem_univ (V, V'))).trans (le_max_right _ _)
-    have he := congrArg (fun f ↦ f.val.app (op W))
-      (rcomp n (l V V') m (hnl V V') hlm)
-    change (r n m hnm).val.app (op W) ≫
-        (α V).val.app (op (Over.mk (homOfLE hWV))) ≫ (q n m hnm).val.app (op W) =
-      (r n m hnm).val.app (op W) ≫
-        (α V').val.app (op (Over.mk (homOfLE hWV'))) ≫ (q n m hnm).val.app (op W)
+    have he : (r (l V V') m hlm).val.app (op W) ≫
+        (r n (l V V') (hnl V V')).val.app (op W) = (r n m hnm).val.app (op W) :=
+      congrArg (fun f ↦ f.val.app (op W)) (rcomp n (l V V') m (hnl V V') hlm)
+    dsimp only [β]
+    rw [over_comp_over_app (r n m hnm) (α V) (q n m hnm) W hWV,
+      over_comp_over_app (r n m hnm) (α V') (q n m hnm) W hWV']
     rw [← he]
-    change ((r (l V V') m hlm).val.app (op W) ≫
-        (r n (l V V') (hnl V V')).val.app (op W)) ≫
-        (α V).val.app (op (Over.mk (homOfLE hWV))) ≫ (q n m hnm).val.app (op W) =
-      ((r (l V V') m hlm).val.app (op W) ≫
-        (r n (l V V') (hnl V V')).val.app (op W)) ≫
-        (α V').val.app (op (Over.mk (homOfLE hWV'))) ≫ (q n m hnm).val.app (op W)
     rw [Category.assoc, Category.assoc]
     rw [← Category.assoc ((r n (l V V') (hnl V V')).val.app (op W)),
       hl V V' W hWV hWV', Category.assoc]
@@ -199,13 +204,14 @@ theorem ideal_power_quotient_local_lifting_section
   apply Eq.trans _ hs
   have he := congrArg (fun f ↦ f.val.app
     (op (Over.mk (homOfLE (inf_le_right : U ⊓ V.1.1 ≤ V.1.1))))) (hψ V)
+  rw [over_app_eq] at he
   change (cokernel.π (a m)).app (U ⊓ V.1.1)
       (F.presheaf.map (homOfLE inf_le_left).op s) =
     ψ.val.app (op (U ⊓ V.1.1))
       (((idealSheafPower ι m).1).presheaf.map (homOfLE inf_le_left).op (one m))
-  change _ = (ψ.over V.1.1).val.app (op (Over.mk
-    (homOfLE (inf_le_right : U ⊓ V.1.1 ≤ V.1.1)))) _
   rw [he]
+  dsimp only [β]
+  rw [over_comp_over_app]
   change _ = (q n m hnm).val.app (op (U ⊓ V.1.1))
     ((α V).val.app (op (Over.mk (homOfLE inf_le_right)))
       ((r n m hnm).val.app (op (U ⊓ V.1.1)) _))

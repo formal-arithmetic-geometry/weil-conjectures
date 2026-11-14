@@ -89,8 +89,69 @@ theorem pairRepresentative_eq_of_stage_transport
   rw [hv]
   exact (StageSystem.PairCategory.mkHom_tr h u).symm
 
-set_option maxHeartbeats 400000 in
--- The categorical component calculation checks several equivalent coefficient-category instances.
+/-- Prescribed pullback and tensor endpoints transport the mixed-square representative. -/
+private theorem mixedTensorRepresentative_transport
+    {I : Type*} [Preorder I]
+    {C : I → Type*} [∀ i, Category* (C i)]
+    {D : I → Type*} [∀ i, Category* (D i)]
+    (SX : StageSystem C) (SY : StageSystem D)
+    (R : ∀ i, C i ⥤ D i) (TX : ∀ i, C i × C i ⥤ C i)
+    (TY : ∀ i, D i × D i ⥤ D i)
+    (p : ∀ {i j : I} (h : i ≤ j), R i ⋙ SY.T h ≅ SX.T h ⋙ R j)
+    (coh : StageSystem.pairFunctorCoherent SX SY R p)
+    (tX : ∀ {i j : I} (h : i ≤ j), TX i ⋙ SX.T h ≅
+      (SX.T h).prod (SX.T h) ⋙ TX j)
+    (tY : ∀ {i j : I} (h : i ≤ j), TY i ⋙ SY.T h ≅
+      (SY.T h).prod (SY.T h) ⋙ TY j)
+    (mu : ∀ i, TX i ⋙ R i ≅ (R i).prod (R i) ⋙ TY i)
+    (square : ∀ {i j : I} (h : i ≤ j) (M N : C i),
+      (SY.T h).map ((mu i).hom.app (M, N)) ≫
+          (tY h).hom.app ((R i).obj M, (R i).obj N) ≫
+          (TY j).map (Prod.mkHom ((p h).hom.app M) ((p h).hom.app N)) =
+        (p h).hom.app ((TX i).obj (M, N)) ≫
+          (R j).map ((tX h).hom.app (M, N)) ≫
+          (mu j).hom.app ((SX.T h).obj M, (SX.T h).obj N))
+    (q : ∀ (P : SX.PairCategory) (K : I) (k : P.stage ≤ K),
+      (SY.T k).obj ((R P.stage).obj P.obj) ≅ (R K).obj (P.toStage k))
+    (hq : ∀ P K k, q P K k = (p k).app P.obj)
+    (A B : SX.PairCategory) (H : I) (hA : A.stage ≤ H) (hB : B.stage ≤ H)
+    (qX : ∀ (K : I) (k : H ≤ K),
+      (SX.T k).obj ((TX H).obj (A.toStage hA, B.toStage hB)) ≅
+        (TX K).obj (A.toStage (hA.trans k), B.toStage (hB.trans k)))
+    (qY : ∀ (K : I) (k : H ≤ K),
+      (SY.T k).obj ((TY H).obj
+        ((SY.T hA).obj ((R A.stage).obj A.obj),
+          (SY.T hB).obj ((R B.stage).obj B.obj))) ≅
+        (TY K).obj ((SY.T (hA.trans k)).obj ((R A.stage).obj A.obj),
+          (SY.T (hB.trans k)).obj ((R B.stage).obj B.obj)))
+    (hqX : ∀ K k, qX K k =
+      (tX k).app (A.toStage hA, B.toStage hB) ≪≫
+        (TX K).mapIso (Iso.prod ((SX.assoc hA k).app A.obj)
+          ((SX.assoc hB k).app B.obj)))
+    (hqY : ∀ K k, qY K k =
+      (tY k).app ((SY.T hA).obj ((R A.stage).obj A.obj),
+        (SY.T hB).obj ((R B.stage).obj B.obj)) ≪≫
+        (TY K).mapIso (Iso.prod ((SY.assoc hA k).app ((R A.stage).obj A.obj))
+          ((SY.assoc hB k).app ((R B.stage).obj B.obj))))
+    (L : I) (h : H ≤ L) :
+    let c := fun (K : I) (k : H ≤ K) ↦
+      (q ⟨H, (TX H).obj (A.toStage hA, B.toStage hB)⟩ K k ≪≫
+        (R K).mapIso (qX K k)).hom ≫
+        (mu K).hom.app (A.toStage (hA.trans k), B.toStage (hB.trans k)) ≫
+        (qY K k ≪≫ (TY K).mapIso
+          (Iso.prod (q A K (hA.trans k)) (q B K (hB.trans k)))).inv
+    c L h = SY.tr h (c H le_rfl) := by
+  intro c
+  let d := (mu H).hom.app (A.toStage hA, B.toStage hB) ≫
+    (TY H).map (Prod.mkHom (q A H hA).inv (q B H hB).inv)
+  have hc (K : I) (k : H ≤ K) : c K k = (SY.T k).map d := by
+    dsimp only [c]
+    rw [hq _ K k, hqX K k, hqY K k]
+    exact mixedTensorStageComponent SX SY R TX TY p coh tX tY mu square A B
+      (q A) (q B) (hq A) (hq B) H K hA hB k
+  exact (hc L h).trans ((SY.tr_map h d).symm.trans
+    (congrArg (SY.tr h) (hc H le_rfl).symm))
+
 /--
 At the level of the finite coefficient stage, the mixed scalar square and the
 naturality of the tensor comparison identify the representative at an extension
@@ -153,54 +214,25 @@ theorem restrictionTensorRepresentativeStageTransport
                 A.stage B.stage).2.trans hK)) ≫ (z A B K hK).inv
         c L h = (stageSystem l Ω Y).tr h (c H le_rfl) := by
   intro R T b theta S U a z mu mixed A B L h H c
-  let SX := stageSystem l Ω X
-  let SY := stageSystem l Ω Y
-  let p := fun {E K : Index l Ω} (h : E ≤ K) ↦
-    rationalPullbackStageComparison l Ω f h
-  let t := fun (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)]
-    {E K : Index l Ω} (h : E ≤ K) ↦ rationalTensorStageComparison l Ω W h
-  let hA := ((Padic.finiteCoefficientFields_properties l Ω).1 A.stage B.stage).1
-  let hB := ((Padic.finiteCoefficientFields_properties l Ω).1 A.stage B.stage).2
-  let PA := commonStagePullbackObject l Ω f A
-  let PB := commonStagePullbackObject l Ω f B
-  let d := (mu H).hom.app (A.toStage hA, B.toStage hB) ≫
-    (T Y H).map (Prod.mkHom
-      (commonStagePullbackComparison l Ω f A H hA).inv
-      (commonStagePullbackComparison l Ω f B H hB).inv)
-  have square (E K : Index l Ω) (k : E ≤ K) :=
-    restrictionTensorNormalizedSquare l Ω f mu mixed E K k
-  have hc (K : Index l Ω) (k : H ≤ K) : c K k = (SY.T k).map d := by
-    have hm := mixedTensorStageComponent SX SY R (T X) (T Y) p
-      (rationalPullbackStageComparison_coherent l Ω f) (t X) (t Y) mu
-      (fun {_ _} k ↦ square _ _ k) A B
-      (fun K k ↦ commonStagePullbackComparison l Ω f A K k)
-      (fun K k ↦ commonStagePullbackComparison l Ω f B K k)
-      (fun K k ↦ (commonStagePullback_endpoint l Ω f A K k).symm)
-      (fun K k ↦ (commonStagePullback_endpoint l Ω f B K k).symm)
-      H K hA hB k
-    let aK := (p k).app ((T X H).obj (A.toStage hA, B.toStage hB)) ≪≫
-      (R K).mapIso ((t X k).app (A.toStage hA, B.toStage hB) ≪≫
-        (T X K).mapIso (Iso.prod ((SX.assoc hA k).app A.obj)
-          ((SX.assoc hB k).app B.obj)))
-    let zK := ((t Y k).app (PA.toStage hA, PB.toStage hB) ≪≫
-      (T Y K).mapIso (Iso.prod ((SY.assoc hA k).app PA.obj)
-        ((SY.assoc hB k).app PB.obj))) ≪≫
-      (T Y K).mapIso (Iso.prod
-        (commonStagePullbackComparison l Ω f A K (hA.trans k))
-        (commonStagePullbackComparison l Ω f B K (hB.trans k)))
-    have ha : a A B K k = aK :=
-      congrArg₂ (fun i j ↦ i ≪≫ (R K).mapIso j)
-        (commonStagePullback_endpoint l Ω f (commonStageTensorObject l Ω X A B) K k).symm
-        (commonStageTensor_endpoint l Ω X A B K k).symm
-    have hz : z A B K k = zK :=
-      congrArg (fun i ↦ i ≪≫ (T Y K).mapIso (Iso.prod
-        (commonStagePullbackComparison l Ω f A K (hA.trans k))
-        (commonStagePullbackComparison l Ω f B K (hB.trans k))))
-        (commonStageTensor_endpoint l Ω Y PA PB K k).symm
-    exact (congrArg₂ (fun (i : _ ≅ _) (j : _ ≅ _) ↦ i.hom ≫
-      (mu K).hom.app (A.toStage (hA.trans k), B.toStage (hB.trans k)) ≫ j.inv)
-        ha hz).trans hm
-  exact (hc L h).trans ((SY.tr_map h d).symm.trans
-    (congrArg (SY.tr h) (hc H le_rfl).symm))
+  exact mixedTensorRepresentative_transport
+    (C := Stage l Ω X) (D := Stage l Ω Y)
+    (stageSystem l Ω X) (stageSystem l Ω Y) R (T X) (T Y)
+    (fun {_ _} k ↦ rationalPullbackStageComparison l Ω f k)
+    (rationalPullbackStageComparison_coherent l Ω f)
+    (fun {_ _} k ↦ rationalTensorStageComparison l Ω X k)
+    (fun {_ _} k ↦ rationalTensorStageComparison l Ω Y k) mu
+    (fun {E K} k ↦ restrictionTensorNormalizedSquare l Ω f mu mixed E K k)
+    (fun P K k ↦ commonStagePullbackComparison l Ω f P K k)
+    (fun P K k ↦ (commonStagePullback_endpoint l Ω f P K k).symm)
+    A B H
+    ((Padic.finiteCoefficientFields_properties l Ω).1 A.stage B.stage).1
+    ((Padic.finiteCoefficientFields_properties l Ω).1 A.stage B.stage).2
+    (fun K k ↦ commonStageTensorComparison l Ω X A B K k)
+    (fun K k ↦ commonStageTensorComparison l Ω Y
+      (commonStagePullbackObject l Ω f A) (commonStagePullbackObject l Ω f B) K k)
+    (fun K k ↦ (commonStageTensor_endpoint l Ω X A B K k).symm)
+    (fun K k ↦ (commonStageTensor_endpoint l Ω Y
+      (commonStagePullbackObject l Ω f A) (commonStagePullbackObject l Ω f B) K k).symm)
+    L h
 
 end WeilConjectures

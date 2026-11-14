@@ -32,9 +32,32 @@ private theorem scalar_commute {S : Type*} [Ring S] {C : Type*}
     (r • 𝟙 V) ≫ f = f ≫ (r • 𝟙 W) := by
   simp
 
+private theorem scalar_map_of_factorization
+    {A B : Type*} [Ring A] [Ring B]
+    {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
+    [Preadditive C] [Preadditive D] [Preadditive C'] [Preadditive D']
+    [Linear A C] [Linear A D] [Linear B C'] [Linear B D']
+    (Q : C ⥤ D) (Q' : C' ⥤ D') [Q.Linear A] [Q'.Linear B]
+    (T : C ⥤ C') (F : D ⥤ D') (c : Q ⋙ F ≅ T ⋙ Q')
+    (a : A) (b : B) (K : C) (h : T.map (a • 𝟙 K) = b • 𝟙 (T.obj K)) :
+    F.map (a • 𝟙 (Q.obj K)) = b • 𝟙 (F.obj (Q.obj K)) := by
+  apply (cancel_mono (c.hom.app K)).mp
+  have hc := c.hom.naturality (a • 𝟙 K)
+  dsimp only [Functor.comp_map] at hc
+  rw [Q.map_smul, Q.map_id, h, Q'.map_smul, Q'.map_id] at hc
+  exact hc.trans (scalar_commute b (c.hom.app K)).symm
+
+private theorem scalar_map_of_iso
+    {A B : Type*} [Ring A] [Ring B]
+    {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
+    [Linear A C] [Linear B D] (F : C ⥤ D) (a : A) (b : B)
+    {V W : C} (d : V ≅ W) (h : F.map (a • 𝟙 V) = b • 𝟙 (F.obj V)) :
+    F.map (a • 𝟙 W) = b • 𝟙 (F.obj W) := by
+  rw [scalar_iso_conjugate a d, F.map_comp, F.map_comp, h]
+  exact (scalar_iso_conjugate b (F.mapIso d)).symm
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-set_option maxHeartbeats 1600000 in
 -- The scalar action is transported through the derived localization.
 private theorem restriction_scalar (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
@@ -79,27 +102,14 @@ private theorem restriction_scalar (X : Scheme.{u})
       (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :
       R.map (a • 𝟙 (DerivedCategory.Q.obj L)) =
         b • 𝟙 (R.obj (DerivedCategory.Q.obj L)) := by
-    let c := T.mapDerivedCategoryFactors.app L
-    apply (cancel_mono c.hom).mp
-    have hc := T.mapDerivedCategoryFactors.hom.naturality (a • 𝟙 L)
-    change R.map (DerivedCategory.Q.map (a • 𝟙 L)) ≫ c.hom =
-      c.hom ≫ DerivedCategory.Q.map ((T.mapHomologicalComplex (.up ℤ)).map (a • 𝟙 L))
-      at hc
-    rw [DerivedCategory.Q.map_smul a (𝟙 L), CategoryTheory.Functor.map_id,
-      hcomplex L, DerivedCategory.Q.map_smul b (𝟙 _),
-      CategoryTheory.Functor.map_id] at hc
-    exact hc.trans (scalar_commute b c.hom).symm
-  let L := DerivedCategory.Q.objPreimage E
-  let d := DerivedCategory.Q.objObjPreimageIso E
-  have hd : a • 𝟙 E = d.inv ≫ (a • 𝟙 (DerivedCategory.Q.obj L)) ≫ d.hom :=
-    scalar_iso_conjugate a d
+    exact scalar_map_of_factorization DerivedCategory.Q DerivedCategory.Q
+      (T.mapHomologicalComplex (.up ℤ)) R T.mapDerivedCategoryFactors a b L (hcomplex L)
   change R.map (a • 𝟙 E) = _
-  rw [hd, CategoryTheory.Functor.map_comp, CategoryTheory.Functor.map_comp, hQ L]
-  exact (scalar_iso_conjugate b (R.mapIso d)).symm
+  exact scalar_map_of_iso R a b (DerivedCategory.Q.objObjPreimageIso E)
+    (hQ (DerivedCategory.Q.objPreimage E))
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-set_option maxHeartbeats 900000 in
 -- Sectionwise scalar actions require unfolding transported module structures.
 /-- Scalar identities commute with every affine realization comparison isomorphism.
 This requires neither perfectness nor a cohomology support condition.
@@ -164,16 +174,9 @@ theorem affine_open_realization_scalar
   obtain ⟨c⟩ := hF
   have hFscalar : F.map ((show A from a.val (op U)) • 𝟙 (DerivedCategory.Q.obj K)) =
       b • 𝟙 (F.obj (DerivedCategory.Q.obj K)) := by
-    apply (cancel_mono (c.hom.app K)).mp
-    have hc := c.hom.naturality ((show A from a.val (op U)) • 𝟙 K)
-    change F.map (DerivedCategory.Q.map ((show A from a.val (op U)) • 𝟙 K)) ≫
-        c.hom.app K =
-      c.hom.app K ≫ DerivedCategory.Q.map ((S.mapHomologicalComplex (.up ℤ)).map
-        ((show A from a.val (op U)) • 𝟙 K)) at hc
-    rw [DerivedCategory.Q.map_smul (show A from a.val (op U)) (𝟙 K),
-      CategoryTheory.Functor.map_id, hS,
-      DerivedCategory.Q.map_smul b (𝟙 _), CategoryTheory.Functor.map_id] at hc
-    exact hc.trans (scalar_commute b (c.hom.app K)).symm
+    refine scalar_map_of_factorization (DerivedCategory.Q (C := ModuleCat.{u} A)) DerivedCategory.Q
+      (S.mapHomologicalComplex (.up ℤ)) F c (show A from a.val (op U)) b K ?_
+    exact hS
   rw [hFscalar, hR]
   exact he
 

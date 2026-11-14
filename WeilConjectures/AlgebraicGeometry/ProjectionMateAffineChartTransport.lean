@@ -29,7 +29,6 @@ open CategoryTheory MonoidalCategory
 
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 600000 in
 -- The two comparisons elaborate several independently chosen derived localizations.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -104,12 +103,20 @@ theorem projectionMate_affineChart_transport
     (SheafOfModules.{u} (moduleRings Z.toRingedSpace))
   let := HasDerivedCategory.standard
     (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))
-  obtain ⟨pV, tV, MV, LV, ⟨a⟩⟩ :=
-    exists_derivedProjectionMate_openRestriction_comparison f p t M L V
-      (f ⁻¹ᵁ V).toScheme (f ∣_ V) rfl HEq.rfl
-  obtain ⟨e, q, s, N, E, ⟨b⟩⟩ :=
-    projectionMate_schemeIso_transport (f ⁻¹ᵁ V).toScheme V.toScheme Z (Spec (.of A))
-      (f ∣_ V) g eZ eV hcomm pV tV MV LV
+  -- Explicit eliminators avoid reconstructing the dependent comparison types.
+  refine (exists_derivedProjectionMate_openRestriction_comparison f p t M L V
+    (f ⁻¹ᵁ V).toScheme (f ∣_ V) rfl HEq.rfl).elim fun pV hV ↦ ?_
+  refine hV.elim fun tV hV ↦ ?_
+  refine hV.elim fun MV hV ↦ ?_
+  refine hV.elim fun LV ha ↦ ?_
+  let a := Classical.choice ha
+  refine (projectionMate_schemeIso_transport (f ⁻¹ᵁ V).toScheme V.toScheme Z (Spec (.of A))
+    (f ∣_ V) g eZ eV hcomm pV tV MV LV).elim fun e he ↦ ?_
+  refine he.elim fun q he ↦ ?_
+  refine he.elim fun s he ↦ ?_
+  refine he.elim fun N he ↦ ?_
+  refine he.elim fun E hb ↦ ?_
+  let b := Classical.choice hb
   refine ⟨q, s, N, E, ?_⟩
   intro hmate n
   have := hmate
